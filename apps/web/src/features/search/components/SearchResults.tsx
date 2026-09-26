@@ -5,6 +5,8 @@ import { BarChart3, FileText } from "lucide-react";
 
 import { SurfaceLinkCard } from "@/components/surface";
 
+import { trackSearchResultClick } from "@/lib/analytics/events";
+
 import type { ContentType, SearchResult } from "../types";
 
 interface SearchResultsProps {
@@ -56,12 +58,20 @@ export function SearchResults({ results, query }: SearchResultsProps) {
             </p>
 
             <div className="space-y-3">
-                {results.map((result) =>
-                    result.type === "ranking" ? (
-                        <RankingResultCard key={result.id} result={result} />
-                    ) : (
-                        <BlogResultCard key={result.id} result={result} />
-                    )
+                {results.map((result, index) => (
+                    <div
+                        key={result.id}
+                        onClickCapture={() =>
+                            trackSearchResultClick({ resultType: result.type, resultPosition: index + 1 })
+                        }
+                    >
+                        {result.type === "ranking" ? (
+                            <RankingResultCard result={result} />
+                        ) : (
+                            <BlogResultCard result={result} />
+                        )}
+                    </div>
+                )
                 )}
             </div>
         </div>

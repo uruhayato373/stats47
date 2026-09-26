@@ -29,7 +29,8 @@ custom dimensionの登録待ちは `.claude/rules/analytics-event-standards.md`�
 | affiliate GA4 集計 | Data API + Actions | 現状維持 | `affiliate-ga4-weekly.yml` |
 | GA4 property / stream 監査 | Playwright | Admin APIへ移行 | property IDとstats47.jpを照合 |
 | GA4 custom dimensions 監査 | Playwright | Admin APIへ移行 | 台帳との突合は既存pure関数を再利用 |
-| GA4 custom dimension 作成 | Playwright | Admin API + 承認付き手動Workflow | `analytics.edit`、1 run 1件 |
+| GA4 custom dimension / key event 作成 | Playwright | Admin API + 承認付き手動Workflow | `analytics.edit`、1承認 最大10件 |
+| GA4 プロパティ設定監査 (key events / custom metrics / 保持期間 / Google signals / 拡張計測 / BigQuery link / audiences) | なし | Admin API read-only | `audit-api` の `settings`。拡張計測の履歴変更 page_view が ON なら二重計測として警告 |
 | GA4 AdSense link 監査 | Playwright | Admin APIへ移行 | 作成は現在必要性がないためallowlist外 |
 | GA4 Search Console link 作成 | Playwright | ローカルPlaywright維持 | 公式APIなし |
 | GA4 Library collection 公開 | Playwright | ローカルPlaywright維持 | 公式APIなし |
@@ -132,23 +133,27 @@ mutation前に次をすべてAPIで確認する。
 1. `properties/{GA4_PROPERTY_ID}`が1件取得できる。
 2. web data streamのdefault URIのhostが`stats47.jp`。
 3. GSCに`sc-domain:stats47.jp`が存在する。
-4. AdSenseは`accounts.list`がちょうど1件で
-   `GOOGLE_ADSENSE_ACCOUNT_ID`と完全一致する。
-5. live inventoryから再計算したplan tokenが承認値と一致する。
+4. live inventoryから再計算したplan tokenが承認値と一致する。
+
+AdSenseは2026-09-20に恒久停止したため、`accounts.list`をidentityに含めない（2026-09-26変更）。
+AdSenseの監査は参考表示として残すが、失敗してもGA4のmutationを止めない。
 
 未取得、複数、別account、権限不足、API version driftはすべてfail closedとする。
 
 ### allowlist
 
-移行後の自動mutation allowlistは当面、次の1操作だけとする。
+自動mutation allowlistは次の2操作だけとする。
 
 | action | 条件 |
 |---|---|
-| `create-ga4-custom-dimension` | 台帳が`⏳要登録`、authored定義あり、同じparameterなし、EVENT scope、空き枠あり |
+| `create-ga4-custom-dimension` | 台帳が`⏳要登録`、authored定義 (`AUTHORED_DIMENSIONS`) あり、同じparameterなし、EVENTまたはUSER scope、scopeごとの空き枠あり |
+| `create-ga4-key-event` | authored定義 (`AUTHORED_KEY_EVENTS`) あり、同じeventNameなし |
 
 display name、parameter、scopeを台帳の文章から推測しない。
 コード側に明示したauthored定義だけをplan対象にする。
-1 runにつき1件だけ計画・作成する。
+1回の承認で最大10件 (`MAX_ITEMS_PER_APPROVAL`、2026-09-26オーナー判断) を計画し、10件全体に1つのtokenを出す。
+applyは1件ずつ作成・verifyし、`applied`/`no-op`以外が出たら残りを作らずに止める（再試行しない）。
+計画対象外のparameterのblocker（authored定義なし等）は表示するが、候補の作成は止めない。
 
 ローカルPlaywrightのallowlistは次の2操作だけ残す。
 
@@ -260,7 +265,7 @@ consumerを更新した後に曖昧なaliasを削除する。
 4. 同じ`parameterName`があればno-opにする。
 5. 同名のscopeがEVENT以外ならblockerにする。
 6. event-scoped上限までの空きを確認する。
-7. 候補を安定順で並べ、先頭1件だけをplanにする。
+7. 候補を安定順で並べ、custom dimension → key event の順に合計最大10件をplanにする。
 8. site、property ID、action、request bodyから
    `plannedActionToken()`を決定的に生成する。
 9. sanitized planとtokenをStep Summary / artifactへ出す。
@@ -346,7 +351,7 @@ workflow契約:
 1. `mode=plan`を実行し、planとtokenを確認する。
 2. `mode=apply`へ同じtokenを入力する。
 3. Environment reviewerが承認する。
-4. applyがlive planを再計算し、一致時だけ1件変更する。
+4. applyがlive planを再計算し、一致時だけ計画の件数 (最大10件) を1件ずつ変更・verifyする。
 
 workflow追加時は
 `docs/01_技術設計/06_自動化インベントリ.md`と

@@ -42,10 +42,39 @@ export const AUTHORED_DIMENSIONS = Object.freeze([
   { parameterName: "card_variant", displayName: "Card variant", scope: "EVENT", description: "stats47: ホーム注目カードのバリアント (home_featured_*)" },
   { parameterName: "slot", displayName: "Slot", scope: "EVENT", description: "stats47: ホーム注目カードのスロット (home_featured_*)" },
   { parameterName: "experiment_variant", displayName: "Experiment variant", scope: "EVENT", description: "stats47: ホーム注目カードの実験バリアント (home_featured_*)" },
+  { parameterName: "download_purpose", displayName: "CSV download purpose", scope: "EVENT", description: "stats47: CSV ダウンロード後の任意アンケートの用途 (csv_download_purpose)" },
+  { parameterName: "pv_trigger", displayName: "Page view trigger", scope: "EVENT", description: "stats47: page_view の送信理由 landing / navigation / query_change (page_view)" },
+  { parameterName: "theme_slug", displayName: "Theme slug", scope: "EVENT", description: "stats47: テーマのキー (page_view / ui_interaction / read_progress)" },
+  { parameterName: "area_code", displayName: "Area code", scope: "EVENT", description: "stats47: 都道府県・市区町村コード (page_view / geo_* / ui_interaction)" },
+  { parameterName: "ui_action", displayName: "UI action", scope: "EVENT", description: "stats47: 画面内の操作の種類 (ui_interaction)" },
+  { parameterName: "ui_target", displayName: "UI target", scope: "EVENT", description: "stats47: 画面内の操作の対象 (ui_interaction)" },
+  { parameterName: "progress", displayName: "Read progress", scope: "EVENT", description: "stats47: 読了の段階 25/50/75/100 (read_progress)" },
+  { parameterName: "result_type", displayName: "Search result type", scope: "EVENT", description: "stats47: 検索結果の種類 (search_result_click)" },
+  { parameterName: "result_position", displayName: "Search result position", scope: "EVENT", description: "stats47: 検索結果の表示順位 (search_result_click)" },
+  { parameterName: "analysis_slug", displayName: "Geo analysis slug", scope: "EVENT", description: "stats47: 地域分析のキー (geo_*)" },
+  { parameterName: "geography", displayName: "Geo geography", scope: "EVENT", description: "stats47: 地域分析の地理単位 prefecture / municipality / mesh (geo_*)" },
+  { parameterName: "interaction_type", displayName: "Geo interaction type", scope: "EVENT", description: "stats47: 地域分析の地図操作の種類 (geo_map_interaction)" },
+  { parameterName: "declared_purpose", displayName: "Declared purpose", scope: "USER", description: "stats47: CSV 後アンケートで申告した用途 (user property)" },
 ]);
 
-/** event-scoped custom dimension の無料枠上限 (README「集計反映」)。 */
+/** event-scoped / user-scoped custom dimension の無料枠上限 (https://support.google.com/analytics/answer/10075209)。 */
 export const EVENT_SCOPED_DIMENSION_CAP = 50;
+export const USER_SCOPED_DIMENSION_CAP = 25;
+
+/** 1 回の承認で作成してよい件数の上限 (2026-09-26 オーナー判断。README「Phase 2 apply」)。 */
+export const MAX_ITEMS_PER_APPROVAL = 10;
+
+/**
+ * 承認付き API で作成してよい GA4 key event の **authored 定義**。
+ * 収益化戦略の成果 (広告クリック・商品/深掘り CTA・CSV 取得・問い合わせ) に対応する。
+ * countingMethod は API の enum。
+ */
+export const AUTHORED_KEY_EVENTS = Object.freeze([
+  { eventName: "affiliate_click", countingMethod: "ONCE_PER_EVENT" },
+  { eventName: "cta_click", countingMethod: "ONCE_PER_EVENT" },
+  { eventName: "file_download", countingMethod: "ONCE_PER_EVENT" },
+  { eventName: "contact_click", countingMethod: "ONCE_PER_EVENT" },
+]);
 
 const AUTHORED_BY_PARAM = new Map(AUTHORED_DIMENSIONS.map((d) => [d.parameterName, d]));
 
@@ -101,83 +130,119 @@ export function decideScActions(inv) {
 }
 
 /**
- * GA4 custom dimension の作成計画を決める (pure・決定的・1 run 1 件)。
+ * GA4 custom dimension の作成計画を決める (pure・決定的・1 承認あたり最大 maxItems 件)。
  *
  * README「Phase 2 plan」: 台帳の ⏳要登録 だけを候補にし、authored 定義があり、GA4 に同じ
- * parameterName が無く、EVENT scope で、空き枠があるものを安定順で 1 件だけ plan にする。
+ * parameterName が無く、scope ごとの空き枠があるものを安定順 (parameterName 昇順) で並べる。
+ * 対象外 parameter の blocker (authored 定義なし等) は返すが、候補の作成を止める理由にはしない
+ * (止めるのは identity と、候補自身の blocker だけ — CLI 側で判定)。
  *
  * @param {{
- *   needsRegistrationParams: string[],   // 台帳 ⏳要登録 の required parameter (安定順)
- *   existingParams?: string[],           // GA4 に既にある parameterName
- *   existingScopeByParam?: Record<string,string>, // GA4 の param -> scope
- *   eventScopedCount?: number|null,      // 現在の EVENT-scoped custom dimension 件数 (null=不明)
+ *   needsRegistrationParams: string[],
+ *   existingParams?: string[],
+ *   existingScopeByParam?: Record<string,string>,
+ *   eventScopedCount?: number|null,
+ *   userScopedCount?: number|null,
  *   cap?: number,
+ *   userCap?: number,
+ *   maxItems?: number,
  * }} args
- * @returns {{plan: object|null, noops: Array<object>, blockers: Array<object>}}
+ * @returns {{plans: object[], plan: object|null, noops: Array<object>, blockers: Array<object>}}
  */
 export function planCustomDimension({
   needsRegistrationParams,
   existingParams = [],
   existingScopeByParam = {},
   eventScopedCount = null,
+  userScopedCount = 0,
   cap = EVENT_SCOPED_DIMENSION_CAP,
+  userCap = USER_SCOPED_DIMENSION_CAP,
+  maxItems = MAX_ITEMS_PER_APPROVAL,
 }) {
   const noops = [];
   const blockers = [];
   const existing = new Set(existingParams ?? []);
-  // 安定順 (parameterName の昇順) で候補を並べる。入力順に依存させない。
   const candidates = [...new Set(needsRegistrationParams ?? [])].sort();
 
   const eligible = [];
   for (const param of candidates) {
+    const authored = AUTHORED_BY_PARAM.get(param);
     if (existing.has(param)) {
-      // 既存: 作成しない。ただし EVENT 以外の scope なら台帳と食い違うので blocker (直さない・止める)
       const scope = existingScopeByParam[param];
-      if (scope && scope !== "EVENT") {
-        blockers.push({ code: "scope-mismatch", detail: `${param} は GA4 で ${scope} scope で存在 — EVENT でないため作成も修正もしない (人間確認)` });
+      const want = authored?.scope ?? "EVENT";
+      if (scope && scope !== want) {
+        blockers.push({ code: "scope-mismatch", parameterName: param, detail: `${param} は GA4 で ${scope} scope で存在 — ${want} でないため作成も修正もしない (人間確認)` });
       } else {
         noops.push({ action: "create-ga4-custom-dimension", parameterName: param, reason: "GA4 に既に存在 (作成しない)" });
       }
       continue;
     }
-    const authored = AUTHORED_BY_PARAM.get(param);
     if (!authored) {
-      blockers.push({ code: "authored-definition-missing", detail: `${param} は台帳が ⏳要登録 だが authored 定義が無い — 推測で作らない` });
+      blockers.push({ code: "authored-definition-missing", parameterName: param, detail: `${param} は台帳が ⏳要登録 だが authored 定義が無い — 推測で作らない` });
       continue;
     }
-    if (authored.scope !== "EVENT") {
-      blockers.push({ code: "authored-scope-not-event", detail: `${param} の authored scope が EVENT でない (${authored.scope})` });
+    if (authored.scope !== "EVENT" && authored.scope !== "USER") {
+      blockers.push({ code: "authored-scope-unsupported", parameterName: param, detail: `${param} の authored scope が EVENT/USER でない (${authored.scope})` });
       continue;
     }
     eligible.push(authored);
   }
 
-  if (eligible.length === 0) {
-    return { plan: null, noops, blockers };
-  }
+  if (eligible.length === 0) return { plans: [], plan: null, noops, blockers };
 
   // 空き枠の確認 (件数が取れないときは fail closed で作らない)
-  if (eventScopedCount == null || !Number.isFinite(eventScopedCount)) {
-    blockers.push({ code: "capacity-unknown", detail: "EVENT-scoped custom dimension の件数を取得できない — 空き枠不明のため作成しない" });
-    return { plan: null, noops, blockers };
+  if (eventScopedCount == null || !Number.isFinite(eventScopedCount) || userScopedCount == null || !Number.isFinite(userScopedCount)) {
+    blockers.push({ code: "capacity-unknown", detail: "custom dimension の件数を取得できない — 空き枠不明のため作成しない" });
+    return { plans: [], plan: null, noops, blockers };
   }
-  if (eventScopedCount >= cap) {
-    blockers.push({ code: "no-capacity", detail: `EVENT-scoped custom dimension が上限 ${cap} 件に達している (現在 ${eventScopedCount})` });
-    return { plan: null, noops, blockers };
+  const room = { EVENT: cap - eventScopedCount, USER: userCap - userScopedCount };
+  const plans = [];
+  for (const target of eligible) {
+    if (plans.length >= maxItems) {
+      noops.push({ action: "create-ga4-custom-dimension", parameterName: target.parameterName, reason: `次回の承認へ繰り越す (1 承認 ${maxItems} 件まで)` });
+      continue;
+    }
+    if (room[target.scope] <= 0) {
+      blockers.push({ code: "no-capacity", parameterName: target.parameterName, detail: `${target.scope} scope の custom dimension が上限に達している` });
+      continue;
+    }
+    room[target.scope] -= 1;
+    plans.push({
+      action: "create-ga4-custom-dimension",
+      displayName: target.displayName,
+      parameterName: target.parameterName,
+      scope: target.scope,
+      description: target.description,
+    });
   }
+  return { plans, plan: plans[0] ?? null, noops, blockers };
+}
 
-  const target = eligible[0];
-  const plan = {
-    action: "create-ga4-custom-dimension",
-    displayName: target.displayName,
-    parameterName: target.parameterName,
-    scope: "EVENT",
-    description: target.description,
-  };
-  for (const rest of eligible.slice(1)) {
-    noops.push({ action: "create-ga4-custom-dimension", parameterName: rest.parameterName, reason: "次回 run へ繰り越す (1 run 1 件)" });
+/**
+ * GA4 key event の作成計画 (pure)。AUTHORED_KEY_EVENTS にあり GA4 に無いものだけを安定順で返す。
+ * @param {{existingEventNames?: string[]|null, maxItems?: number}} args
+ */
+export function planKeyEvents({ existingEventNames, maxItems = MAX_ITEMS_PER_APPROVAL }) {
+  const noops = [];
+  const blockers = [];
+  if (!Array.isArray(existingEventNames)) {
+    blockers.push({ code: "key-events-unreadable", detail: "key events を取得できない — 重複の有無が不明のため作成しない" });
+    return { plans: [], noops, blockers };
   }
-  return { plan, noops, blockers };
+  const existing = new Set(existingEventNames);
+  const plans = [];
+  for (const k of [...AUTHORED_KEY_EVENTS].sort((a, b) => (a.eventName < b.eventName ? -1 : 1))) {
+    if (existing.has(k.eventName)) {
+      noops.push({ action: "create-ga4-key-event", eventName: k.eventName, reason: "GA4 に既に存在 (作成しない)" });
+      continue;
+    }
+    if (plans.length >= maxItems) {
+      noops.push({ action: "create-ga4-key-event", eventName: k.eventName, reason: `次回の承認へ繰り越す (1 承認 ${maxItems} 件まで)` });
+      continue;
+    }
+    plans.push({ action: "create-ga4-key-event", eventName: k.eventName, countingMethod: k.countingMethod });
+  }
+  return { plans, noops, blockers };
 }
 
 // ── 承認ゲート ────────────────────────────────────────────────────────────────
@@ -190,9 +255,9 @@ export function planCustomDimension({
  * (README「Phase 2 plan」step 8)。
  */
 export function plannedActionToken({ site, propertyId, plan }) {
-  const body = plan
-    ? JSON.stringify(Object.entries(plan).sort(([a], [b]) => (a < b ? -1 : 1)))
-    : "";
+  const canon = (p) => JSON.stringify(Object.entries(p).sort(([a], [b]) => (a < b ? -1 : 1)));
+  // 複数件の計画 (1 承認 最大 10 件) は配列ごと 1 つの token にする。1 件でも変われば token が変わる。
+  const body = !plan ? "" : Array.isArray(plan) ? JSON.stringify(plan.map(canon)) : canon(plan);
   const canonical = JSON.stringify({
     site: site ?? "",
     propertyId: String(propertyId ?? ""),

@@ -102,15 +102,22 @@ npm run google-admin:audit-api
 > 増え、CTR は下がる)。2026-08-04 より前の窓と比較しないこと。効果判定は是正後 2 週間の
 > 実測が揃ってから行う (`.claude/rules/evidence-based-judgment.md`)。
 | `cta_click` | `trackCtaClick` | `link_position` | ✅登録済 (2026-07-31 API確認) | buzz-map §7.3 / ファネル |
-| `cta_click` | `trackCtaClick` | `cta_id` / `content_id` / `target_type` / `target_key` | ⏳要登録 (2026-07-31 API確認) | buzz-map §7.3 / ファネル |
+| `cta_click` | `trackCtaClick` | `cta_id` / `target_type`（content_id・target_key はどの呼び出し元も送っていないので登録しない。2026-09-26 確認） | ⏳要登録 (2026-07-31 API確認) | buzz-map §7.3 / ファネル |
 | `home_featured_impression` / `home_featured_click` | `trackHomeFeatured*` | `experiment_id` | ✅登録済 (2026-07-31 API確認) | `apps/web/src/features/ranking/components/FeaturedRankings/README.md` |
 | `home_featured_impression` / `home_featured_click` | `trackHomeFeatured*` | `card_variant` / `slot` / `experiment_variant` | ⏳要登録 (2026-07-31 API確認) | `apps/web/src/features/ranking/components/FeaturedRankings/README.md` |
 | `ranking_view` | `trackRankingView` | `ranking_key` / `category_key` / `area_type` / `year_code` | ✅登録済 (2026-07-31 API確認) | ranking |
 | `file_download` | `trackCsvDownload` | `ranking_key` / `year_code`（`file_name`/`file_extension` は GA4 標準） | ✅登録済 (2026-07-31 API確認) | ranking |
-| `geo_analysis_view` | `trackGeoAnalysisView` | `analysis_id` / `analysis_slug` / `geography` / `data_version` | ⏳要登録 (2026-08-29 コード実装、GA4未登録) | geo M1 |
-| `geo_map_interaction` | `trackGeoMapInteraction` | 上記共通4項目 / `interaction_type` / `area_code` | ⏳要登録 (2026-08-29 コード実装、GA4未登録) | geo M1 |
-| `geo_region_select` | `trackGeoRegionSelect` | 上記共通4項目 / `area_code` | ⏳要登録 (2026-08-29 コード実装、GA4未登録) | geo M1 |
-| `geo_compare_add` | `trackGeoCompareAdd` | 上記共通4項目 / `area_code` / `comparison_size` | ⏳要登録 (2026-08-29 コード実装、GA4未登録) | geo M1 |
+| `csv_download_purpose` | `trackCsvDownloadPurpose` | `download_purpose`（値は work・study・media・personal・other の固定語彙。`ranking_key` は登録済み） | ⏳要登録 (2026-09-26 コード実装、GA4未登録) | ranking / 行政資料 (`CSV-DL-INTENT-SURVEY-01`) |
+| `page_view` | `pageview` (`pageview.ts`) | `pv_trigger` / `theme_slug` / `area_code`（`content_group` は GA4 標準、`ranking_key`・`category_key` は登録済み） | ⏳要登録 (2026-09-26 コード実装、GA4未登録) | 全ページ (`GA4-FULL-MEASUREMENT-01`) |
+| `ui_interaction` | `trackUiInteraction` | `ui_action` / `ui_target`（値は `UI_ACTIONS`・`UI_TARGETS` の固定語彙） | ⏳要登録 (2026-09-26 コード実装、GA4未登録) | 全ページ |
+| `read_progress` | `trackReadProgress` | `progress`（25・50・75・100） | ⏳要登録 (2026-09-26 コード実装、GA4未登録) | 全ページ |
+| `search_result_click` | `trackSearchResultClick` | `result_type` / `result_position` | ⏳要登録 (2026-09-26 コード実装、GA4未登録) | 検索 |
+| `contact_click` | `trackContactClick` | `link_position` は登録済み（key event 候補） | 要否× | 行政資料 |
+| ユーザー単位 `declared_purpose` | `setDeclaredPurpose` | `declared_purpose`（USER scope。値は CSV 後アンケートの固定語彙） | ⏳要登録 (2026-09-26 コード実装、GA4未登録) | 行政資料 |
+| `geo_analysis_view` | `trackGeoAnalysisView` | `analysis_slug` / `geography`（`analysis_id` は slug と重複、`data_version` は分析価値が低いので登録しない） | ⏳要登録 (2026-08-29 コード実装、GA4未登録) | geo M1 |
+| `geo_map_interaction` | `trackGeoMapInteraction` | `analysis_slug` / `geography` / `interaction_type` / `area_code` | ⏳要登録 (2026-08-29 コード実装、GA4未登録) | geo M1 |
+| `geo_region_select` | `trackGeoRegionSelect` | `analysis_slug` / `geography` / `area_code` | ⏳要登録 (2026-08-29 コード実装、GA4未登録) | geo M1 |
+| `geo_compare_add` | `trackGeoCompareAdd` | 登録しない（送信元の `GeoPopulationExplorer` がどのページにも置かれていない。2026-09-26 確認） | 要否× | geo M1 |
 
 `geo_map_interaction.interaction_type`は県地図の`select-prefecture` / `clear-prefecture`に加え、
 Geo証拠階段の`stage-population` / `stage-overlap` / `stage-audit`、公共施設分析専用の`stage-facilities`を許可する。自由入力値は送らない。

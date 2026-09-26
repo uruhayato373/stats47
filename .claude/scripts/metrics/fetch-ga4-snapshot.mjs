@@ -162,7 +162,8 @@ async function main() {
   // overview-clean: Japan-only, calendar week (GA4-PIPELINE-02 後方互換系列)
   try {
     const { startDate: weekStart, endDate: weekEnd } = isoWeekToDateRange(week);
-    const metrics = ["activeUsers", "sessions", "engagedSessions", "screenPageViews", "averageSessionDuration", "bounceRate", "engagementRate"];
+    // newUsers は update-history-csv.mjs が history.csv の new_users に使う (欠けると 0 が記録される)
+    const metrics = ["activeUsers", "newUsers", "sessions", "engagedSessions", "screenPageViews", "averageSessionDuration", "bounceRate", "engagementRate"];
     const raw = await runReport(analyticsdata, property, {
       dateRanges: [{ startDate: weekStart, endDate: weekEnd }],
       metrics: metrics.map((n) => ({ name: n })),

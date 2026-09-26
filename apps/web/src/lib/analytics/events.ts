@@ -2,6 +2,8 @@
  * GA4 カスタムイベントトラッキング
  */
 
+import { currentPageContext } from './page-context';
+
 function sendEvent(name: string, params: Record<string, unknown>): void {
   if (typeof window === 'undefined' || !window.gtag) return;
   window.gtag('event', name, params);
@@ -90,6 +92,91 @@ export function trackCsvDownload(params: {
     file_extension: 'csv',
     ranking_key: params.rankingKey,
     year_code: params.yearCode,
+  });
+}
+
+export const CSV_DOWNLOAD_PURPOSES = ['work', 'study', 'media', 'personal', 'other'] as const;
+export type CsvDownloadPurpose = (typeof CSV_DOWNLOAD_PURPOSES)[number];
+
+/**
+ * CSV ダウンロード後の任意アンケート (用途 1 問) の回答を GA4 に送信する。
+ * 個人情報は送らない。行政実務の利用者を見つける入口 (CSV-DL-INTENT-SURVEY-01)。
+ */
+export function trackCsvDownloadPurpose(params: {
+  rankingKey: string;
+  purpose: CsvDownloadPurpose;
+}): void {
+  sendEvent('csv_download_purpose', {
+    ranking_key: params.rankingKey,
+    download_purpose: params.purpose,
+  });
+}
+
+/** 利用者の用途 (CSV 後アンケートの回答) をユーザー単位で保存する。以後の全イベントを用途別に分けられる。 */
+export function setDeclaredPurpose(purpose: CsvDownloadPurpose): void {
+  if (typeof window === 'undefined' || !window.gtag) return;
+  window.gtag('set', 'user_properties', { declared_purpose: purpose });
+}
+
+/** お問い合わせフォームへの遷移 (key event)。行政資料レーンの聞き取り相手を見つける入口。 */
+export function trackContactClick(params: { source: string }): void {
+  sendEvent('contact_click', { link_position: params.source, ...currentPageContext() });
+}
+
+// ─── 画面内の操作 (固定語彙) ─────────────────────────────────
+
+export const UI_ACTIONS = [
+  'tab_switch',
+  'year_change',
+  'basis_change',
+  'area_type_change',
+  'region_select',
+  'expand',
+  'filter',
+] as const;
+export type UiAction = (typeof UI_ACTIONS)[number];
+
+export const UI_TARGETS = [
+  'map',
+  'table',
+  'chart',
+  'metric',
+  'faq',
+  'ai_insight',
+  'search',
+] as const;
+export type UiTarget = (typeof UI_TARGETS)[number];
+
+/**
+ * 画面内の操作 (タブ・年度・基準・地域選択・開閉・絞り込み) を固定語彙で送る。
+ * 値の語彙を増やすときは UI_ACTIONS / UI_TARGETS と台帳を同時に更新する (自由入力を送らない)。
+ */
+export function trackUiInteraction(params: {
+  action: UiAction;
+  target: UiTarget;
+  areaCode?: string;
+}): void {
+  sendEvent('ui_interaction', {
+    ui_action: params.action,
+    ui_target: params.target,
+    ...(params.areaCode ? { area_code: params.areaCode } : {}),
+    ...currentPageContext(),
+  });
+}
+
+export const READ_PROGRESS_STEPS = [25, 50, 75, 100] as const;
+export type ReadProgressStep = (typeof READ_PROGRESS_STEPS)[number];
+
+/** 本文をどこまで読んだか (1 ページにつき各段階 1 回)。 */
+export function trackReadProgress(progress: ReadProgressStep): void {
+  sendEvent('read_progress', { progress, ...currentPageContext() });
+}
+
+/** 検索結果のクリック。result_position は 1 始まりの表示順位。 */
+export function trackSearchResultClick(params: { resultType: string; resultPosition: number }): void {
+  sendEvent('search_result_click', {
+    result_type: params.resultType,
+    result_position: params.resultPosition,
   });
 }
 

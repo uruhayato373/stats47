@@ -954,6 +954,27 @@ updated: 2026-09-21
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [CSV-DL-INTENT-SURVEY-01] CSV ダウンロード後に用途 1 問と任意の連絡口を置き、実務利用者を見つける
+
+タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-09-26] [レーン:行政資料]
+
+- **オーナー判断 (2026-09-26 壁打ち)**: CSV のサブスク化・登録制はしない。DL は無料・登録なしのまま、「誰が何に使っているか」を知る導線だけを置く。
+- **根拠**: ランキング CSV の DL は 28 日で 193 件・120 ページ (`ADMIN-STAT-PILOT-01` の GA4 実測)。支払意思の証拠は 0 件で、聞き取り記録 `.claude/state/products/admin-stat-interviews.json` は目標 3 件に対して 0 件。
+- **やること**: ①DL 直後に任意の 1 問 (用途: 業務資料 / 学習・研究 / 報道・執筆 / 個人の関心 / その他) を出し、回答を GA4 イベントで送る (analytics-event-standards の台帳に先に登録)。②「業務でお使いの方は話を聞かせてください」の任意の連絡口を置く。
+- **禁止**: DL の必須登録、メールアドレス等の個人情報の保存 (DB レス方針・プライバシーポリシーの改訂が先)。回答を購入意思の代用にしない。
+- **完了条件**: localhost で DL 後に 1 問が出て、回答が GA4 DebugView で観測でき、未回答でも DL が妨げられない。4 週後に用途別件数を `ADMIN-STAT-PILOT-01` へ転記する。
+- **進捗 (2026-09-26)**: 実装済み・未デプロイ。`DataUsageCard.tsx` に DL 後の用途 1 問 (業務の資料 / 学習・研究 / 報道・執筆 / 個人の関心 / その他 / 答えない) と、「業務の資料」回答者にだけ既存のお問い合わせフォームへの案内を出す。イベントは `csv_download_purpose` (`trackCsvDownloadPurpose`)。**残り**: ①GA4 で `download_purpose` をカスタムディメンション登録 (オーナー、台帳 ⏳要登録) ②次回まとめデプロイ ③デプロイ後 DebugView で観測 ④4 週後に件数を転記。
+
+### [AFF-OFFER-ROTATION-01] 高単価案件と無料登録型案件を、1 枠ずつ順番に試して確定収益で比べる
+
+タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-09-26] [レーン:収益導線]
+
+- **オーナー判断 (2026-09-26 壁打ち)**: 広告の数は増やさないが、出す案件の種類は色々試す。対象は (a) 高単価案件 (b) 無料登録・資料請求だけで成果になるハードルの低い案件。
+- **制約 (実測)**: 2026-08-10〜09-06 の 28 日でクリック 13 件。同時に複数案件を入れ替えると、どれが効いたか分離できない (収益化戦略 §7)。
+- **やり方**: CTR が出ている面 (article-end 0.195%・home-left-rail 0.654%) の 1 枠だけで、案件を 2 週間ずつ入れ替える。候補は `.claude/state/ads/a8-catalog.json` の `epcYen × confirmRatePct` と、成果条件が「無料登録」の案件から、各面の主題に合うものを選ぶ。評価は確定収益 / 1,000 viewable impression (クリック数ではない)。
+- **前提**: A8・もしもの再ログインで確定成果の計測が戻っていること (現在 `auth_required`)。計測できない期間の入れ替えは結果が残らないので始めない。`AFF-INTENT-FALLBACK-STOP-01` / `AFF-SLOT-REDUCTION-01` のデプロイと同じ週に重ねない。
+- **完了条件**: 3 案件以上を各 2 週間回し、案件ごとの imp・click・確定収益を表にして、残す案件と外す案件を決める。
+
 ### [YEAR-COV-20260926] 年カバレッジ: 最新 1 年だけに絞っている e-Stat 指標 10 件の years を広げる
 
 タグ: [コンテンツ品質] [種類:改善] [実行:sweep] [検証:npx tsx .claude/scripts/data/assert-year-coverage-batch.ts .claude/state/data/estat-year-coverage/backlog-batches/YEAR-COV-20260926.txt] [起票:2026-09-26] [レーン:データ品質]
@@ -1154,16 +1175,23 @@ updated: 2026-09-21
 - **注意**: note・商品販売レーンは「維持」。新作や新チャネルは足さず、既存商品の説明の是正だけを行う。
 - **完了条件**: 各商品に固有の内容紹介と収録内容・見本があり、定型文だけのカードが 0 件。
 
-### [GA4-DIMENSION-PRIORITY-01] GA4 カスタムディメンションは発火量の多い `home_featured_*` から登録する
-タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [起票:2026-09-25] [レーン:計測]
+### [GA4-FULL-MEASUREMENT-01] GA4 を全ページで使い切る (計測の是正 → 文脈・操作・成果 → API 登録 → 週次集計・BigQuery)
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-09-26] [レーン:計測]
 
-- **根拠 (2026-W38 の計測サイクル `.claude/state/metrics/measurement-cycle/LATEST.md`)**: 未登録 14 パラメータのうち、
-  登録すれば内訳を読めるのは `home_featured_impression` / `home_featured_click` (28 日 2,028 件) の `card_variant` / `slot` /
-  `experiment_variant` だけ。`cta_click` (`cta_id` / `content_id` / `target_type` / `target_key`) は 28 日 3 件で、登録しても
-  標本不足のまま (`FUNNEL-CTA-01` が insufficient-sample と記録済み)。
-- **次**: オーナーが GA4 管理画面で `card_variant` / `slot` / `experiment_variant` をイベントスコープで登録する。
-  登録は遡及しないので早いほど得。`cta_*` の 4 項目は `NAV-CLICK-COVERAGE-01` で CTA の発火が増えてから登録を再判断する。
-- **完了条件**: `GA4_PROPERTY_ID=463218070 npm run google-admin:audit-api` で 3 項目が confirmed-registered になる。
+- **オーナー判断 (2026-09-26)**: API 登録は 1 承認で最大 10 件 / クエリだけの変更も page_view として数え続け、`pv_trigger` で区別する / BigQuery (daily・無料枠) を今回含める。
+  設計の全文は計画 `~/.claude/plans/stats47-ga4-sparkling-blum.md` (セッション計画。恒久判断は下記 SSOT へ反映済みまたは反映予定)。
+- **Phase 0 (オーナー)**: ①設定変更用 SA を作り GA4 プロパティの編集者にする (GCP ロールは付けない) → `gh secret set GOOGLE_ADMIN_SERVICE_ACCOUNT_KEY_JSON --env google-admin-production` → 手元の鍵を削除 ②GA4 →「BigQuery のリンク」で daily のみ有効 (ストリーミングは有料なので付けない) ③読み取り SA に BigQuery ジョブユーザー (プロジェクト) + データ閲覧者 (`analytics_463218070`) を付ける。登録も BigQuery も遡及しないので早いほど得。
+- **Phase 1 (済・2026-09-26、未コミット)**: identity から AdSense を除外 / 対象外 blocker で止めない / 1 承認 最大 10 件 / key event 作成 action (`AUTHORED_KEY_EVENTS`) / 監査に key events・custom metrics・保持期間・Google signals・拡張計測・BigQuery link・audiences を追加し、週次 `measurement-cycle` の `ga4Settings` に要約。google-admin テスト 43 件 pass。
+  **実測 (2026-09-26 audit-api)**: CD 16 件 (EVENT) / key events は `purchase` のみ / 保持 14 か月 / Google signals 有効 / audiences 2 / BigQuery link 0 / **拡張計測の履歴変更 page_view が ON** (アプリの手動 page_view と二重計測の疑い。Phase 2 で送信を実測して確定する)。
+- **Phase 2 実測 (2026-09-26、本番 stats47.jp)**: サイト内リンクで 1 回移動すると page_view が **2 回**送られる (1 回目 = アプリの手動送信で参照元が空、2 回目 = 拡張計測の履歴変更で参照元が正しい)。着地の 1 回目は 1 件。→ アプリ側は参照元を直前のサイト内 URL にし `pv_trigger` を付けた (未デプロイ)。**残り: オーナーが GA4 管理画面 → データストリーム → 拡張計測 →「ブラウザの履歴イベントに基づくページの変更」を OFF にする** (OFF にするまで二重計測が続く。OFF の日を計測の不連続点として release 記録に残す)。
+- **Phase 2・3 の進捗 (2026-09-26、未コミット・未デプロイ)**: 済 = 参照元の引き継ぎ・`pv_trigger`・gtag 未ロード時の再試行・`history.csv` new_users=0 の是正・search-growth の GA4 欠損誤判定の是正 (回帰テストは修正前コードで落ちることを確認)・`content_group` とページ文脈・`ui_interaction` (ランキングの地図/表タブ・年度・基準・地域区分、テーマの指標/表示タブ)・`read_progress`・`search_result_click`・`contact_click`・`declared_purpose`・台帳と `AUTHORED_DIMENSIONS` の更新 (EVENT 17 件 + USER 1 件、`content_id`/`target_key`/`analysis_id`/`data_version`/`comparison_size` は登録しない)。検証 = `npm run type-check` exit 0、vitest 73 files / 552 tests、localhost で ui_interaction・read_progress・search_result_click を観測。**見送り**: Geo の pathname 書き換え (2026-09-05 に意図して入れた共有 URL 形式のため)、survey / affiliate 集計への Japan フィルタ追加 (実験の観測期間中で比較基準がずれるため)、NSM snapshot の旧定義の改名。
+- **Phase 2 (当初計画)**: 計測の是正 — referrer の引き継ぎ、`pv_trigger`、Geo の pathname 書き換え、gtag 未ロード時の再試行、events.ts 外からの送信の集約、拡張計測の二重 page_view の実測と対処。取得側 — `history.csv` new_users=0、search-growth の `ga4:sessions` 欠測、`ga4_organic_quality` の organic 絞り込み、survey / affiliate の Japan フィルタ、NSM snapshot の旧定義。
+- **Phase 3**: `content_group` と page 文脈 (`ranking_key`/`category_key`/`theme_slug`/`area_code`)、`ui_interaction` (`ui_action`/`ui_target`)、`read_progress`、`search_result_click`、`contact_click`、user property `declared_purpose`。台帳と `AUTHORED_DIMENSIONS` を同時に更新。Phase 2+3 は 1 回でデプロイする (要承認)。
+- **Phase 4**: デプロイ直後に `google-admin-settings.yml` plan → apply (承認 2〜3 回)。対象: `card_variant`/`slot`/`experiment_variant`/`download_purpose`/`theme_slug`/`area_code`/`ui_action`/`ui_target`/`pv_trigger`/`progress`/`result_type`/`result_position`/`analysis_slug`/`interaction_type`/`geography`/`cta_id`/`target_type` + USER `declared_purpose` + key events 4 件。
+- **Phase 5**: 週次 snapshot に content-group / key-events / interactions / read-progress / download-purpose、効果判定エンジンに GA4 adapter。
+- **Phase 6**: `fetch-ga4-bigquery.mjs` で週次集計 (journeys / search-terms / unregistered-params / session-depth)。課金の有無を確認し、クエリに `maximumBytesBilled`。
+- **旧カード統合**: `GA4-DIMENSION-PRIORITY-01` (home_featured 3 項目の登録) は Phase 4 に吸収した。
+- **完了条件**: `npm run google-admin:audit-api` で Phase 4 の全件が confirmed-registered、key events 4 件、BigQuery link 1 件、拡張計測の二重 page_view 警告なし。次の日曜 snapshot に Phase 5・6 の新ファイルが出る。
 
 ### [EFFECT-TARGET-MARKERS-01] 効果判定エンジンが GSC 施策 10 件を 1 件も判定できない状態を解消する
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-09-25] [レーン:計測]

@@ -18,11 +18,13 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { auditGa4Api, applyCreateCustomDimension, resolveApiPropertyId, adminEditClient, LEDGER_PATH } from "./audit-ga4-api.mjs";
+import { auditGa4Api, applyCreateCustomDimension, applyCreateKeyEvent, resolveApiPropertyId, adminEditClient, LEDGER_PATH } from "./audit-ga4-api.mjs";
 import { auditGscProperty, GSC_PROPERTY } from "./audit-gsc.mjs";
 import {
   planCustomDimension,
+  planKeyEvents,
   plannedActionToken,
+  MAX_ITEMS_PER_APPROVAL,
   requireCommit,
   decideScActions,
 } from "./apply-allowlisted-settings.mjs";
@@ -56,35 +58,48 @@ function ledgerNeedsRegistrationParams() {
   return [...new Set(params)].sort();
 }
 
-/** mutation 前の identity 契約 (README「不変の安全契約 identity」)。 */
+/**
+ * mutation 前の identity 契約 (README「不変の安全契約 identity」)。
+ * AdSense は 2026-09-20 に恒久停止したため identity に含めない (property / stream / GSC で本人確認する)。
+ */
 function identityBlockers(audit) {
   const b = [];
   if (audit.property?.status !== "ok") b.push({ code: "property-assert", detail: audit.property?.status ?? "missing" });
   if (audit.webStreams?.status !== "ok") b.push({ code: "stream-host", detail: audit.webStreams?.status ?? "missing" });
   if (audit.gsc?.present !== true) b.push({ code: "gsc-property", detail: `present=${String(audit.gsc?.present)}` });
-  if (audit.adsense?.account?.status !== "ok") b.push({ code: "adsense-account", detail: audit.adsense?.account?.status ?? "missing" });
   if (audit.customDimensions?.status !== "ok") b.push({ code: "custom-dimensions-unreadable", detail: audit.customDimensions?.status ?? "missing" });
   return b;
 }
 
-/** audit inventory から GA4 dimension の plan と token を導出する (identity 未達なら token を出さない)。 */
+/**
+ * audit inventory から作成計画 (custom dimension + key event、合計最大 MAX_ITEMS_PER_APPROVAL 件) と
+ * token を導出する。identity 未達なら token を出さない。対象外 parameter の blocker は表示するが止めない。
+ */
 function derivePlan(audit) {
   const cd = audit.customDimensions;
-  const needsReg = ledgerNeedsRegistrationParams();
-  const planResult = planCustomDimension({
-    needsRegistrationParams: needsReg,
-    existingParams: cd?.status === "ok" ? cd.params : [],
-    existingScopeByParam: cd?.status === "ok" ? cd.scopeByParam : {},
-    eventScopedCount: cd?.status === "ok" ? cd.eventScopedCount : null,
+  const ok = cd?.status === "ok";
+  const dims = planCustomDimension({
+    needsRegistrationParams: ledgerNeedsRegistrationParams(),
+    existingParams: ok ? cd.params : [],
+    existingScopeByParam: ok ? cd.scopeByParam : {},
+    eventScopedCount: ok ? cd.eventScopedCount : null,
+    userScopedCount: ok ? (cd.userScopedCount ?? 0) : null,
   });
+  const ke = audit.settings?.keyEvents;
+  const keys = planKeyEvents({
+    existingEventNames: ke?.status === "ok" ? ke.eventNames : null,
+    maxItems: Math.max(0, MAX_ITEMS_PER_APPROVAL - dims.plans.length),
+  });
+  const plans = [...dims.plans, ...keys.plans];
   const idBlockers = identityBlockers(audit);
-  const blockers = [...idBlockers, ...planResult.blockers];
-  // identity 未達では作成できないので token を出さない (承認の対象を作らない)
-  const token = idBlockers.length === 0 && planResult.plan
-    ? plannedActionToken({ site: CONFIRM_SITE, propertyId: audit.propertyId, plan: planResult.plan })
+  const blockers = [...dims.blockers, ...keys.blockers];
+  const token = idBlockers.length === 0 && plans.length
+    ? plannedActionToken({ site: CONFIRM_SITE, propertyId: audit.propertyId, plan: plans })
     : null;
-  return { plan: planResult.plan, noops: planResult.noops, blockers, token, idBlockers };
+  return { plans, noops: [...dims.noops, ...keys.noops], blockers, token, idBlockers };
 }
+
+const planLabel = (p) => p.action === "create-ga4-key-event" ? `key event ${p.eventName}` : `dimension ${p.parameterName} (${p.scope})`;
 
 function printApiAudit(audit) {
   const s = (v) => (v === true ? "✓" : v === false ? "✗" : "?");
@@ -94,12 +109,22 @@ function printApiAudit(audit) {
   console.log(`custom dimensions: ${audit.customDimensions?.status ?? "-"} count=${audit.customDimensions?.count ?? "?"} eventScoped=${audit.customDimensions?.eventScopedCount ?? "?"}`);
   console.log(`AdSense link (GA4): ${audit.adsenseLinks?.status ?? "-"} linked=${s(audit.adsenseLinks?.linked)}`);
   console.log(`GSC property (API): present=${s(audit.gsc?.present)} permission=${audit.gsc?.permissionLevel ?? "-"} (${audit.gsc?.status})`);
-  console.log(`AdSense account assert: ${audit.adsense?.account?.status ?? "-"}${audit.adsense?.account?.detail ? ` (${audit.adsense.account.detail})` : ""}`);
+  console.log(`AdSense account (参考・identity 外): ${audit.adsense?.account?.status ?? "-"}${audit.adsense?.account?.detail ? ` (${audit.adsense.account.detail})` : ""}`);
   console.log(`AdSense ad units: ${audit.adsense?.adUnits?.units?.length ?? 0} 件 (${audit.adsense?.adUnits?.status ?? "-"})`);
   // 一部の ad client だけ失敗したときは status=ok のまま件数が欠ける。黙って緑にしない。
   for (const skipped of audit.adsense?.adUnits?.skippedClients ?? []) {
     console.log(`  ! ad client を読めなかった: ${skipped}`);
   }
+  const st = audit.settings ?? {};
+  const line = (label, sec, fmt) => console.log(`${label}: ${sec?.status === "ok" ? fmt(sec) : sec?.status ?? "-"}${sec?.detail ? ` (${sec.detail})` : ""}`);
+  line("key events", st.keyEvents, (x) => x.eventNames.join(", ") || "(なし)");
+  line("custom metrics", st.customMetrics, (x) => `${x.count} 件`);
+  line("data retention", st.dataRetention, (x) => x.eventDataRetention);
+  line("Google signals", st.googleSignals, (x) => x.state);
+  line("enhanced measurement", st.enhancedMeasurement, (x) => JSON.stringify(x));
+  line("BigQuery link", st.bigQueryLinks, (x) => `${x.linkCount} 件 ${JSON.stringify(x.links)}`);
+  line("audiences", st.audiences, (x) => `${x.count} 件`);
+  for (const w of st.enhancedMeasurement?.warnings ?? []) console.log(`  ! 拡張計測: ${w}`);
   const rec = audit.dimensionReconcile;
   if (rec?.skipped) {
     console.log(`custom dimension 突合: 判定不能 (${rec.skipped})`);
@@ -128,10 +153,10 @@ async function runAuditApi() {
 async function runPlan() {
   const audit = await auditGa4Api();
   printApiAudit(audit);
-  const { plan, noops, blockers, token, idBlockers } = derivePlan(audit);
-  console.log("\n# plan (GA4 custom dimension)");
-  if (plan) {
-    console.log(`  CANDIDATE  ${JSON.stringify(plan)}`);
+  const { plans, noops, blockers, token, idBlockers } = derivePlan(audit);
+  console.log(`\n# plan (GA4 custom dimension / key event、1 承認 最大 ${MAX_ITEMS_PER_APPROVAL} 件)`);
+  if (plans.length) {
+    for (const p of plans) console.log(`  CANDIDATE  ${planLabel(p)}  ${JSON.stringify(p)}`);
     if (token) {
       console.log(`  TOKEN      ${token}`);
       console.log(`  apply する場合: mode=apply --confirm-site ${CONFIRM_SITE} --commit --approve ${token} (protected Environment 承認が別途必要)`);
@@ -139,50 +164,64 @@ async function runPlan() {
       console.log("  TOKEN      (identity 未達のため未発行 — 下の blocker を解消するまで apply しない)");
     }
   } else {
-    console.log("  CANDIDATE  なし (⏳要登録 かつ authored 定義があり未登録の dimension が無い)");
+    console.log("  CANDIDATE  なし");
   }
-  for (const n of noops) console.log(`  NO-OP      ${n.parameterName ?? n.action}: ${n.reason}`);
-  for (const b of blockers) console.log(`  BLOCKER    ${b.code}: ${b.detail}`);
-  saveState("plan-latest.json", { kind: "plan", propertyId: audit.propertyId, plan, token, noops, blockers, idBlockers, audit });
-  if (blockers.length && !plan) process.exitCode = 1;
-  return { audit, plan, token };
+  for (const n of noops) console.log(`  NO-OP      ${n.parameterName ?? n.eventName ?? n.action}: ${n.reason}`);
+  for (const b of idBlockers) console.log(`  IDENTITY   ${b.code}: ${b.detail}`);
+  for (const b of blockers) console.log(`  SKIPPED    ${b.code}: ${b.detail}`);
+  saveState("plan-latest.json", { kind: "plan", propertyId: audit.propertyId, plans, token, noops, blockers, idBlockers, audit });
+  if (idBlockers.length) process.exitCode = 1;
+  return { audit, plans, token };
 }
 
 async function runApply(argv) {
   const audit = await auditGa4Api();
   printApiAudit(audit);
-  const { plan, blockers, token } = derivePlan(audit);
-  console.log("\n# apply (GA4 custom dimension)");
-  if (!plan || !token || blockers.length) {
-    for (const b of blockers) console.log(`  BLOCKER  ${b.code}: ${b.detail}`);
+  const { plans, blockers, token, idBlockers } = derivePlan(audit);
+  console.log("\n# apply (GA4 custom dimension / key event)");
+  for (const b of blockers) console.log(`  SKIPPED  ${b.code}: ${b.detail}`);
+  if (!plans.length || !token || idBlockers.length) {
+    for (const b of idBlockers) console.log(`  IDENTITY ${b.code}: ${b.detail}`);
     console.log("  → 計画なし / identity 未達のため mutation を実行しない (fail closed)");
-    saveState("apply-latest.json", { kind: "apply", propertyId: audit.propertyId, plan, token, blockers, applied: null, audit });
+    saveState("apply-latest.json", { kind: "apply", propertyId: audit.propertyId, plans, token, blockers, idBlockers, applied: [], audit });
     process.exitCode = 1;
     return;
   }
   const gate = requireCommit({ argv, site: getArg("--confirm-site"), expectedSite: CONFIRM_SITE, expectedToken: token });
   if (!gate.allowed) {
     console.log(`  BLOCKED  承認ゲート: ${gate.reason}`);
-    console.log(`  CANDIDATE ${JSON.stringify(plan)} TOKEN ${token}`);
-    saveState("apply-latest.json", { kind: "apply", propertyId: audit.propertyId, plan, token, gate, applied: null, audit });
+    for (const p of plans) console.log(`  CANDIDATE ${planLabel(p)}`);
+    console.log(`  TOKEN ${token}`);
+    saveState("apply-latest.json", { kind: "apply", propertyId: audit.propertyId, plans, token, gate, applied: [], audit });
     process.exitCode = 1;
     return;
   }
   if (!adminEditClient()) {
     console.log("  BLOCKED  GOOGLE_ADMIN_SERVICE_ACCOUNT_KEY_JSON が無い (Environment secret・人間工程)");
-    saveState("apply-latest.json", { kind: "apply", propertyId: audit.propertyId, plan, token, applied: { status: "admin-credential-missing" }, audit });
+    saveState("apply-latest.json", { kind: "apply", propertyId: audit.propertyId, plans, token, applied: [{ status: "admin-credential-missing" }], audit });
     process.exitCode = 1;
     return;
   }
   // /tmp に planned JSON を残す (repo へは追加しない)
   const tmpDir = `/tmp/stats47-google-admin-${Date.now().toString(36)}-${process.pid}`;
   fs.mkdirSync(tmpDir, { recursive: true });
-  fs.writeFileSync(path.join(tmpDir, "planned-action.json"), JSON.stringify({ site: CONFIRM_SITE, propertyId: audit.propertyId, plan, token }, null, 2));
-  console.log(`  → create ${plan.parameterName} (EVENT) ...`);
-  const applied = await applyCreateCustomDimension(plan, { propertyId: audit.propertyId });
-  console.log(`  → ${applied.status}${applied.reason ? `: ${applied.reason}` : ""}${applied.resourceName ? ` (${applied.resourceName})` : ""}`);
-  saveState("apply-latest.json", { kind: "apply", propertyId: audit.propertyId, plan, token, applied, audit });
-  if (applied.status !== "applied") process.exitCode = 1;
+  fs.writeFileSync(path.join(tmpDir, "planned-action.json"), JSON.stringify({ site: CONFIRM_SITE, propertyId: audit.propertyId, plans, token }, null, 2));
+  // 1 件ずつ作成・verify。applied / no-op 以外が出たら残りを作らずに止める (再試行しない)。
+  const applied = [];
+  for (const p of plans) {
+    console.log(`  → create ${planLabel(p)} ...`);
+    const r = p.action === "create-ga4-key-event"
+      ? await applyCreateKeyEvent(p, { propertyId: audit.propertyId })
+      : await applyCreateCustomDimension(p, { propertyId: audit.propertyId });
+    console.log(`  → ${r.status}${r.reason ? `: ${r.reason}` : ""}${r.resourceName ? ` (${r.resourceName})` : ""}`);
+    applied.push({ plan: p, ...r });
+    if (r.status !== "applied" && r.status !== "no-op") {
+      console.log("  → 残りの作成を中止した (fail closed)");
+      process.exitCode = 1;
+      break;
+    }
+  }
+  saveState("apply-latest.json", { kind: "apply", propertyId: audit.propertyId, plans, token, applied, audit });
 }
 
 /** Playwright residual (GSC link / Library) の read-only 監査。 */

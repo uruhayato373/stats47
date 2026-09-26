@@ -17,6 +17,8 @@ import {
     RankingMapChartClient,
 } from "@/features/ranking";
 
+import { trackUiInteraction } from "@/lib/analytics/events";
+
 import type { RankingItem, RankingValue } from "@stats47/ranking";
 
 /**
@@ -51,7 +53,11 @@ export function RankingVisualizationSection({
         // (旧実装は lg:hidden と hidden lg:block の 2 ブロックに分かれており、
         //  CSS で隠しているだけで DOM には両方存在した。地図を初期タブにすると
         //  デスクトップで Leaflet が 2 インスタンスマウントされてしまう)
-        <Tabs defaultValue="map" className="w-full">
+        <Tabs
+            defaultValue="map"
+            className="w-full"
+            onValueChange={(value) => trackUiInteraction({ action: "tab_switch", target: value === "table" ? "table" : "map" })}
+        >
             <TabsList className="w-full grid grid-cols-2 lg:hidden">
                 <TabsTrigger value="map" className="flex items-center gap-1.5">
                     <MapIcon className="w-4 h-4" />

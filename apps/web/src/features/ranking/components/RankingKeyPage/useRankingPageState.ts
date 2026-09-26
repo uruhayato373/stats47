@@ -8,7 +8,7 @@ import { isOk } from "@stats47/types";
 
 import type { AreaType } from "@/features/area";
 
-import { trackAreaTypeChange, trackRankingView, trackYearChange } from "@/lib/analytics/events";
+import { trackAreaTypeChange, trackRankingView, trackUiInteraction, trackYearChange } from "@/lib/analytics/events";
 
 import { fetchNationalAverageSeriesAction } from "../../actions/fetch-national-average-series";
 import { fetchRankingValuesAction } from "../../actions/fetch-ranking-values";
@@ -105,6 +105,7 @@ export function useRankingPageState({
 
     const handleYearChange = (newYear: string) => {
         trackYearChange({ rankingKey, fromYear: currentYear, toYear: newYear });
+        trackUiInteraction({ action: "year_change", target: "chart" });
         setCurrentYear(newYear);
         window.history.replaceState(null, "", buildUrl(newYear, currentAreaType, normalizationType));
         startTransition(async () => {
@@ -117,6 +118,7 @@ export function useRankingPageState({
 
     const handleAreaTypeChange = (newAreaType: AreaType) => {
         trackAreaTypeChange({ rankingKey, areaType: newAreaType });
+        trackUiInteraction({ action: "area_type_change", target: "chart" });
         setCurrentAreaType(newAreaType);
 
         const targetItem = newAreaType === "city" && cityRankingItem
@@ -175,6 +177,7 @@ export function useRankingPageState({
     }, []);
 
     const handleNormalizationChange = (value: string) => {
+        trackUiInteraction({ action: "basis_change", target: "chart" });
         const nextType = value === "original" ? undefined : value;
         setNormalizationType(nextType);
 

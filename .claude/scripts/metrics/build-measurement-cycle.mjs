@@ -30,6 +30,22 @@ const HISTORY_COLUMNS = [
   "workContextPages", "absentParams", "breakdownReadyEvents", "overdueImprovements", "gscJudgeable", "gscActive",
 ];
 
+/** GA4 プロパティ設定の監査結果を週次 state 用の 1 行に要約する (key events・拡張計測の警告・BigQuery link)。 */
+function summarizeGa4Settings(settings) {
+  if (!settings) return { status: "missing", detail: "audit に settings が無い" };
+  const ke = settings.keyEvents;
+  const em = settings.enhancedMeasurement;
+  const bq = settings.bigQueryLinks;
+  const warnings = [...(em?.warnings ?? [])];
+  if (bq?.status === "ok" && bq.linkCount === 0) warnings.push("bigquery-not-linked");
+  const parts = [
+    `keyEvents=${ke?.status === "ok" ? ke.eventNames.join("|") || "none" : ke?.status ?? "-"}`,
+    `bigQueryLinks=${bq?.status === "ok" ? bq.linkCount : bq?.status ?? "-"}`,
+    `warnings=${warnings.join("|") || "none"}`,
+  ];
+  return { status: warnings.length ? "warning" : "ok", detail: parts.join(" "), warnings };
+}
+
 function arg(name) {
   const i = process.argv.indexOf(name);
   return i >= 0 ? process.argv[i + 1] : undefined;
@@ -92,10 +108,13 @@ function main() {
   const auditPath = arg("--admin-audit");
   let registeredParams = null;
   let adminStatus = { status: "not-run", detail: "--admin-audit 未指定" };
+  let settingsStatus = { status: "not-run", detail: "--admin-audit 未指定" };
   if (auditPath) {
     if (!existsSync(auditPath)) adminStatus = { status: "missing", detail: auditPath };
     else {
-      const cd = JSON.parse(readFileSync(auditPath, "utf8")).audit?.customDimensions;
+      const audit = JSON.parse(readFileSync(auditPath, "utf8")).audit;
+      settingsStatus = summarizeGa4Settings(audit?.settings);
+      const cd = audit?.customDimensions;
       if (cd?.status === "ok" && Array.isArray(cd.params)) {
         registeredParams = cd.params;
         adminStatus = { status: "ok", detail: `登録済み ${cd.count} 件` };
@@ -123,6 +142,7 @@ function main() {
         detail: `transitions=${transitions.status} landing=${landing.status} events=${events.status} pages-clean=${pagesClean ? "ok" : "missing"}`,
       },
       customDimensions: adminStatus,
+      ga4Settings: settingsStatus,
       improvements: { status: "ok", detail: `active ${pending.length} 件` },
       effectVerdicts: verdicts ? { status: "ok", detail: `verdicts-${week}.json` } : { status: "missing", detail: `verdicts-${week}.json` },
     },

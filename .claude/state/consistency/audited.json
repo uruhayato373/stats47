@@ -1,24 +1,18 @@
 {
-  "hash": "890e63a3563b2ef7986786996809175a5cfedcd471f2348414fc6bdc52552a2a",
-  "audited_at": "2026-09-25T23:08:15",
+  "hash": "445555555e4a2aed85c48a7c790a6834a0df7754d82d53a7554cadc8e16c85c1",
+  "audited_at": "2026-09-26T05:35:10",
   "files": [
-    ".agents/skills/management/weekly-plan/SKILL.md",
-    ".agents/skills/management/weekly-review/SKILL.md",
-    ".claude/agents/adsense-analyst.md",
     ".claude/rules/analytics-event-standards.md",
-    ".claude/scripts/data/__tests__/year-coverage-backlog.test.mjs",
-    ".claude/scripts/data/assert-year-coverage-batch.ts",
-    ".claude/scripts/data/lib/year-coverage-backlog.mjs",
-    ".claude/scripts/data/sync-year-coverage-backlog.mjs",
-    ".claude/scripts/metrics/__tests__/cycle-health.test.mjs",
-    ".claude/scripts/metrics/__tests__/measurement-cycle.test.mjs",
+    ".claude/scripts/google-admin/README.md",
+    ".claude/scripts/google-admin/__tests__/google-admin.test.mjs",
+    ".claude/scripts/google-admin/apply-allowlisted-settings.mjs",
+    ".claude/scripts/google-admin/audit-ga4-api.mjs",
+    ".claude/scripts/google-admin/cli.mjs",
+    ".claude/scripts/measurement/__tests__/refresh-session.test.mjs",
+    ".claude/scripts/measurement/refresh-session.mjs",
     ".claude/scripts/metrics/build-measurement-cycle.mjs",
     ".claude/scripts/metrics/fetch-ga4-snapshot.mjs",
-    ".claude/scripts/metrics/generate-weekly-metrics-issue.mjs",
-    ".claude/scripts/metrics/lib/cycle-health.mjs",
-    ".claude/scripts/metrics/lib/measurement-cycle.mjs",
-    ".claude/skills/analytics/gsc-improvement/reference/improvement-log.md",
-    ".claude/skills/management/weekly-plan/SKILL.md",
-    ".claude/skills/management/weekly-review/SKILL.md"
+    ".claude/scripts/search-growth/__tests__/candidate.test.mjs",
+    ".claude/scripts/search-growth/lib/scoring.mjs"
   ]
 }
