@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  A8 / もしも計測ログインの維持 (毎日 17:30 JST + ログイン時)。ローカル Mac 限定。
+  前提: キーチェーンに stats47-measurement-a8 / stats47-measurement-moshimo を登録済み。
+  インストール:
+    cp scripts/scheduled/com.stats47.measurement-session-refresh.plist ~/Library/LaunchAgents/
+    launchctl load ~/Library/LaunchAgents/com.stats47.measurement-session-refresh.plist
+  アンインストール:
+    launchctl unload ~/Library/LaunchAgents/com.stats47.measurement-session-refresh.plist
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.stats47.measurement-session-refresh</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <string>/Users/minamidaisuke/stats47/scripts/scheduled/measurement-session-refresh.sh</string>
+    </array>
+    <key>StartCalendarInterval</key>
+    <dict>
+        <key>Hour</key>
+        <integer>17</integer>
+        <key>Minute</key>
+        <integer>30</integer>
+    </dict>
+    <key>WorkingDirectory</key>
+    <string>/Users/minamidaisuke/stats47</string>
+    <key>StandardOutPath</key>
+    <string>/Users/minamidaisuke/Library/Logs/stats47/measurement-session-refresh.launchd.out</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/minamidaisuke/Library/Logs/stats47/measurement-session-refresh.launchd.err</string>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>ProcessType</key>
+    <string>Background</string>
+</dict>
+</plist>
