@@ -197,7 +197,7 @@ async function runApply(argv) {
     return;
   }
   if (!adminEditClient()) {
-    console.log("  BLOCKED  GOOGLE_ADMIN_SERVICE_ACCOUNT_KEY_JSON が無い (Environment secret・人間工程)");
+    console.log("  BLOCKED  GA4 を編集できる鍵が無い (GOOGLE_ADMIN_SERVICE_ACCOUNT_KEY_JSON / GOOGLE_SERVICE_ACCOUNT_KEY_JSON / ローカル鍵)");
     saveState("apply-latest.json", { kind: "apply", propertyId: audit.propertyId, plans, token, applied: [{ status: "admin-credential-missing" }], audit });
     process.exitCode = 1;
     return;

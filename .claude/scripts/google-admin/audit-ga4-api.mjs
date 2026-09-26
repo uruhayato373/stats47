@@ -50,17 +50,30 @@ function ga4ReadClients() {
   };
 }
 
-/** apply 用 admin credential (analytics.edit)。専用鍵の env が無ければ null。 */
+/**
+ * apply 用 admin client (analytics.edit)。専用鍵 GOOGLE_ADMIN_SERVICE_ACCOUNT_KEY_JSON があればそれを使い、
+ * 無ければ通常の鍵 (GOOGLE_SERVICE_ACCOUNT_KEY_JSON / ローカル stats47-*.json) を使う。
+ * 2026-09-26 オーナー判断: どの workflow・PC からでも GA4 設定を変えられるよう、通常の SA にも GA4 編集者を付ける。
+ * 誤操作の歯止めは plan token + --confirm-site + --commit + --approve (requireCommit) が担う。
+ * 鍵が GA4 編集者でなければ create が権限エラーで失敗する (fail closed)。
+ */
 export function adminEditClient() {
   const json = process.env.GOOGLE_ADMIN_SERVICE_ACCOUNT_KEY_JSON;
-  if (!json) return null;
-  let credentials;
+  if (json) {
+    try {
+      const auth = new google.auth.GoogleAuth({ credentials: JSON.parse(json), scopes: [GA4_EDIT_SCOPE] });
+      return google.analyticsadmin({ version: "v1beta", auth });
+    } catch {
+      return null;
+    }
+  }
+  let keyFile;
   try {
-    credentials = JSON.parse(json);
+    keyFile = resolveServiceAccountKeyFile();
   } catch {
     return null;
   }
-  const auth = new google.auth.GoogleAuth({ credentials, scopes: [GA4_EDIT_SCOPE] });
+  const auth = new google.auth.GoogleAuth({ keyFile, scopes: [GA4_EDIT_SCOPE] });
   return google.analyticsadmin({ version: "v1beta", auth });
 }
 
@@ -351,7 +364,7 @@ export async function applyCreateCustomDimension(plan, { propertyId }) {
   }
   const admin = adminEditClient();
   if (!admin) {
-    return { status: "admin-credential-missing", reason: "GOOGLE_ADMIN_SERVICE_ACCOUNT_KEY_JSON が無い (Environment secret・人間工程)" };
+    return { status: "admin-credential-missing", reason: "GA4 を編集できる鍵が無い (GOOGLE_ADMIN_SERVICE_ACCOUNT_KEY_JSON / GOOGLE_SERVICE_ACCOUNT_KEY_JSON / ローカル鍵)" };
   }
   const parent = `properties/${propertyId}`;
 
@@ -415,7 +428,7 @@ export async function applyCreateKeyEvent(plan, { propertyId }) {
   if (!propertyId) return { status: "blocked", reason: "propertyId 未確定" };
   const admin = adminEditClient();
   if (!admin) {
-    return { status: "admin-credential-missing", reason: "GOOGLE_ADMIN_SERVICE_ACCOUNT_KEY_JSON が無い (Environment secret・人間工程)" };
+    return { status: "admin-credential-missing", reason: "GA4 を編集できる鍵が無い (GOOGLE_ADMIN_SERVICE_ACCOUNT_KEY_JSON / GOOGLE_SERVICE_ACCOUNT_KEY_JSON / ローカル鍵)" };
   }
   const parent = `properties/${propertyId}`;
   const listKeyEvents = () => listAllPages((p) => admin.properties.keyEvents.list(p), { parent, pageSize: 200 }, "keyEvents");

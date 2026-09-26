@@ -115,6 +115,10 @@ GA4の設定変更専用サービスアカウント鍵を
 - repository secretのread用サービスアカウントを安易にEditorへ昇格しない。
 - workflowのapply jobだけがEnvironment secretを参照する。
 - サービスアカウントの作成、鍵発行、GA4 role付与は人間工程とする。
+- **2026-09-26 オーナー判断で上記を緩和**: どの workflow・PC からでも GA4 設定を変えられるよう、通常の読み取り用 SA
+  (`ststs47-mac` / `stats47-windows`) にも GA4 プロパティの編集者を付ける。`adminEditClient()` は専用鍵が無ければ
+  通常の鍵を使う。誤作成の歯止めは plan token + `--confirm-site` + `--commit` + `--approve` で、protected Environment
+  の承認は workflow 経由のときだけの追加の関門になる。
 
 `GOOGLE_OAUTH_CLIENT_ID` / `CLIENT_SECRET` / `REFRESH_TOKEN` はactiveコードからの
 参照が見つからないcleanup候補である。実装セッションでは削除せず、GitHub Secretsと
