@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const femaleScheduledEarnings: MetricConfig = {
   "key": "female-scheduled-earnings",
   "title": "女性所定内給与額",
+  "subtitle": "月額",
   "unit": "千円",
   "category": "laborwage",
   "source": {

@@ -159,7 +159,7 @@ export default async function GeoArticleDataPage({ params }: PageProps) {
         eyebrow="県別の地図・検算"
         title={`${detail.areaName}｜${config.shortTitle}`}
         description="地図上の判定と集計の根拠を確認できます。地点・メッシュの全件データと、使用した一次資料の情報も取得できます。"
-        stats={`coverage ${manifest.quality.detailAreas}/47 ・ 保存則 ${manifest.quality.conservationChecks}/47`}
+        stats={`詳細地域 ${manifest.quality.detailAreas}/47 ・ 合計一致の検算 ${manifest.quality.conservationChecks}/47`}
       />
 
       <GeoSpatialEvidenceExplorer
@@ -265,7 +265,7 @@ export default async function GeoArticleDataPage({ params }: PageProps) {
                 geoAnalysisManifestKey(analysisSlug)
               )}
             >
-              入力SHA・空間演算・保存則manifest
+              入力データの指紋・空間演算・合計一致の検算記録
             </ExternalAnchor>
           </li>
           {manifest.stages

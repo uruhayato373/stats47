@@ -345,7 +345,7 @@ export const AGING_SOCIETY_CATALOG: ThemeCatalog = {
     {
       "componentKey": "theme-age-composition",
       "componentType": "composition-chart",
-      "title": "年齢3区分人口構成の推移",
+      "title": "年齢3区分人口構成",
       "componentProps": {
         "seriesRefs": [
           {
