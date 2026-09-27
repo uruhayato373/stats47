@@ -3,8 +3,8 @@
   "_comment": "A8 レポート CSV（fetch-a8-ui-csv.mjs）の正規化 SSOT。A8 は確定処理で過去分が遡及変化するため upsert 運用（最新 fetch が正）。手で編集しない。",
   "_siteScopeNote": "siteSummary のみ対象サイトに完全分離された実績（真実源）。monthly / daily / programPeriod は **口座横断**（doboku-note 込み）で、programPeriod は programIdMap の allowlist で対象サイト分だけを抽出したもの。crossCheck が siteSummary との突合結果。",
   "site": "統計で見る都道府県",
-  "updatedAt": "2026-09-27T08:23:42.807Z",
-  "lastRun": "2026-09-27T08-17-47Z",
+  "updatedAt": "2026-09-27T10:27:17.575Z",
+  "lastRun": "2026-09-27T10-26-56Z",
   "period": {
     "raw": "202609-202609",
     "start": "2026-09",
@@ -30,8 +30,8 @@
     },
     {
       "site": "統計で見る都道府県",
-      "impressions": 121357,
-      "clicks": 141,
+      "impressions": 126744,
+      "clicks": 155,
       "conversions": 0,
       "grossRevenueYen": 0,
       "approved": 0,
@@ -40,7 +40,7 @@
       "cancelledYen": 0,
       "pendingCount": 0,
       "pendingRevenueYen": 0,
-      "fetchedAt": "2026-09-26T13:47:10.921Z",
+      "fetchedAt": "2026-09-27T10:26:56.701Z",
       "period": "202609-202609"
     }
   ],
@@ -3307,13 +3307,13 @@
     },
     "deltas": {
       "clicks": {
-        "site": 141,
+        "site": 155,
         "picked": 189,
         "exclusive": 157,
         "shared": 32,
         "lowerBound": 157,
         "upperBound": 189,
-        "delta": 48
+        "delta": 34
       },
       "conversions": {
         "site": 0,

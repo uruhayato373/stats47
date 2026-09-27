@@ -1382,6 +1382,6 @@
     }
   ],
   "schemaVersion": 2,
-  "updatedAt": "2026-09-27T08:23:42.807Z",
+  "updatedAt": "2026-09-27T10:27:17.575Z",
   "source": "fetch-a8-ui-csv.mjs → normalize-a8-csv.mjs（自動取込。手入力は不要）"
 }
