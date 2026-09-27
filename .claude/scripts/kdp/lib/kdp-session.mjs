@@ -281,8 +281,11 @@ export async function assertAccount(page, { tag = "[account]" } = {}) {
   const acct = readAccount();
   const email = (acct.accountEmail || "").trim();
   const name = (acct.accountName || "").trim();
-  if (!email && !name) {
-    console.log(`${tag} accountEmail/accountName 未設定のため「ログイン済み」のみ確認 (kdp-account.json に記入すると厳格 assert)`);
+  const knownAsin = (acct.knownAsin || "").trim();
+  // メール・名前が未設定でも knownAsin があれば ASIN で照合する。以前はメール・名前だけを見て素通しにしており、
+  // .local に knownAsin があるのに口座照合が一度も行われていなかった (2026-09-27 の refresh-session kdp で発覚)
+  if (!email && !name && !knownAsin) {
+    console.log(`${tag} accountEmail/accountName/knownAsin 未設定のため「ログイン済み」のみ確認 (kdp-account.json か .local/kdp-account.local.json に記入すると厳格 assert)`);
     return { ok: true };
   }
   await gotoResilient(page, BOOKSHELF_URL);
@@ -291,7 +294,7 @@ export async function assertAccount(page, { tag = "[account]" } = {}) {
   } catch {}
   // アカウントメニューを開いてメール/名前を露出させる (KDP の DOM は変わりやすいので複数手段)。
   let found = false;
-  for (let i = 0; i < 4 && !found; i++) {
+  for (let i = 0; i < 4 && !found && (email || name); i++) {
     found = await page.evaluate(
       (exp) => {
         const t = (document.body?.innerText || "") + " " + Array.from(document.querySelectorAll('[title],[aria-label]')).map((e) => (e.getAttribute("title") || "") + (e.getAttribute("aria-label") || "")).join(" ");
@@ -311,7 +314,6 @@ export async function assertAccount(page, { tag = "[account]" } = {}) {
   //   `/ap/mfa` へ飛んで **2FA を再要求される** ので、エージェントは辿れない (人間工程)。
   //   そこで「この口座にしか無い本」で照合する。knownAsin は .local/kdp-account.local.json に
   //   置く (public リポジトリに ASIN を晒さないため)。**照合を諦めて素通しにはしない**。
-  const knownAsin = (acct.knownAsin || "").trim();
   if (knownAsin) {
     let onShelf = await page.evaluate((a) => document.body?.innerText?.includes(a) ?? false, knownAsin);
     if (!onShelf) {
