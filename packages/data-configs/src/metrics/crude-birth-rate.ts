@@ -20,7 +20,7 @@ export const crudeBirthRate: MetricConfig = {
     "from": 1980,
     "to": 2023,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     "colorScheme": "interpolateBlues",
     "colorSchemeType": "sequential",

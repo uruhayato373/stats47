@@ -20,7 +20,7 @@ export const youngPopulationIndex: MetricConfig = {
     "from": 1983,
     "to": 2022
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     "colorScheme": "interpolateBlues",
     "colorSchemeType": "sequential",

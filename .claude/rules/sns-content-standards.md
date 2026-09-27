@@ -216,7 +216,7 @@ X 投稿の「型」は下表を単一ソースとする。各投稿は `templat
 | 曜日 | カルーセル | 生成 |
 |---|---|---|
 | 月・木 | 予想クイズ (§2-3b) | quiz props を人が書く (ヒント・選択肢) |
-| 火・土 | 地域 (県の全国 1 位・47 位) | `build-ig-area-props.ts` がデータから選ぶ。「強み・弱み」とは書かない |
+| 火・土 | 地域 (県の全国 1 位・47 位) | `build-ig-area-props.ts` が R2 `databook.json` を読み、Web と同じ `selectAreaHighlights` で選ぶ (area-databook-standards §2.1)。「強み・弱み」とは書かない |
 | 水 | 相関 (2 指標の散布図) | `build-ig-correlation-props.ts`。人口の影響を除いた r も出し、因果は書かない |
 | 金 | 県どうしの比較 | `CompareInstagram-Carousel` |
 | 日 | 地図カード / テーマ (交互) | buzz-map / テーマ |

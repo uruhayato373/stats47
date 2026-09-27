@@ -107,7 +107,9 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
           columns: 4,
           metrics: [
             {
-              rankingKey: "japanese-population",
+              // 総人口 (外国人を含む)。日本人人口だと東京都が 1,346 万人になり、人口動態ページの
+              // 1,418 万人と食い違って見えた (2026-09-27)
+              rankingKey: "total-population",
               shortLabel: "人口",
               selection: {
                 proposedBy: BOOK,
@@ -117,7 +119,7 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
             },
             {
               rankingKey: "population-density-per-km2-total-area",
-              shortLabel: "人口密度",
+              shortLabel: "人口密度(1km²当たり)",
             },
             {
               rankingKey: "future-population-change-rate-2050",
@@ -255,6 +257,12 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
               rankingKey: "penal-code-offenses-recognized-per-1000",
               shortLabel: "犯罪認知件数(千人比)",
             },
+            { rankingKey: "sewage-treatment-coverage-rate", shortLabel: "汚水処理人口普及率" },
+            { rankingKey: "barber-beauty-salon-count-per-100k", shortLabel: "理容・美容所数(10万人当たり)" },
+            { rankingKey: "cleaning-shop-count-per-100k", shortLabel: "クリーニング所数(10万人当たり)" },
+            { rankingKey: "post-office-count-per-100km2", shortLabel: "郵便局数(100km²当たり)" },
+            { rankingKey: "gas-station-count-per-100km", shortLabel: "給油所数(道路100km当たり)" },
+            { rankingKey: "water-supply-population-ratio-2012on", shortLabel: "上水道給水人口比率" },
           ],
         },
       ],
@@ -287,6 +295,8 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
               compareNationalAvg: true,
             },
             { rankingKey: "unemployment-rate", shortLabel: "失業率" },
+            { rankingKey: "self-financing-ratio", shortLabel: "自主財源の割合" },
+            { rankingKey: "taxpayer-ratio-per-pref-resident", shortLabel: "納税義務者割合" },
           ],
         },
         {
@@ -345,6 +355,8 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
               rankingKey: "manufacturing-shipment-amount",
               shortLabel: "製造品出荷額",
             },
+            { rankingKey: "final-energy-consumption-per-capita", shortLabel: "1人当たり最終エネルギー消費量" },
+            { rankingKey: "employee-ratio-10-29-employee-establishments-private", shortLabel: "10〜29人事業所の従業者割合" },
           ],
         },
       ],
@@ -519,6 +531,7 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
               rankingKey: "certified-childcare-center-count-per-100k-0-5",
               shortLabel: "認定こども園数(0-5歳10万人比)",
             },
+            { rankingKey: "kindergarten-count-per-100k-3-5", shortLabel: "幼稚園数(3〜5歳10万人当たり)" },
           ],
         },
       ],
@@ -581,6 +594,16 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
       title: "安全・くらし",
       sortOrder: 40,
       blocks: [
+        {
+          // 2026-09-27 AREA-HIGHLIGHTS-SSOT-01: 県の「特徴」候補の分野 (安全) を広げる
+          blockType: "ranked-kpi-grid",
+          blockKey: "safety-kpi",
+          metrics: [
+            { rankingKey: "criminal-arrest-rate", shortLabel: "刑法犯検挙率" },
+            { rankingKey: "police-officer-count-per-population", shortLabel: "警察官数(人口当たり)" },
+            { rankingKey: "disaster-damage-amount-per-person", shortLabel: "1人当たり災害被害額" },
+          ],
+        },
         {
           blockType: "chart",
           chart: {

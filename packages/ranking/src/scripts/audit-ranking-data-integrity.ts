@@ -358,6 +358,11 @@ interface AuditReport {
   itemMissing: string[];
   valuesMissing: string[];
   yearMismatch: Array<{ key: string; itemYear: string | undefined; valuesYears: string[] }>;
+  /**
+   * 配信 (values.json) に実在する年の一覧 (昇順)。DATA-QUALITY-LOOP-01 のデータ品質キュー
+   * (build-data-quality-queue.ts) が `years: "all"` を含む全指標の「最新年と今日の差」を判定する入力。
+   */
+  deliveredYears: Record<string, string[]>;
   countChecks: {
     home: { count: number; expected: number; ok: boolean };
     survey: { count: number; expectedFloor: number; ok: boolean; driftOk: boolean };
@@ -549,6 +554,7 @@ async function main() {
   const itemMissing: string[] = [];
   const valuesMissing: string[] = [];
   const yearMismatch: Array<{ key: string; itemYear: string | undefined; valuesYears: string[] }> = [];
+  const deliveredYears: Record<string, string[]> = {};
 
   // (i) 正典 app/stats の集計器
   const stats: StatsChecks = {
@@ -724,6 +730,7 @@ async function main() {
     const valuesYears = [
       ...new Set((valuesRes.body.partitions ?? []).map((p) => p.yearCode).filter((y): y is string => Boolean(y))),
     ];
+    if (valuesYears.length > 0) deliveredYears[key] = [...valuesYears].sort();
     if (itemYear && valuesYears.length > 0 && !valuesYears.includes(itemYear)) {
       yearMismatch.push({ key, itemYear, valuesYears });
     }
@@ -900,6 +907,7 @@ async function main() {
     itemMissing: itemMissing.sort(),
     valuesMissing: valuesMissing.sort(),
     yearMismatch: yearMismatch.sort((a, b) => a.key.localeCompare(b.key)),
+    deliveredYears: Object.fromEntries(Object.entries(deliveredYears).sort(([a], [b]) => a.localeCompare(b))),
     countChecks: {
       home: { count: homeCount, expected: homeExpected, ok: homeOk },
       survey: { count: surveyCount, expectedFloor: surveyFloor, ok: surveyAbsOk, driftOk: surveyDriftOk },

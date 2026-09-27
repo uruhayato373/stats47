@@ -62,11 +62,19 @@ function rankBand(rank: number, count: number): string {
   return "下位帯";
 }
 
-function compareWithAverage(value: number, average: number): string {
+/**
+ * 比較基準のラベル。公表の全国値 (率・1 人あたり) があれば「全国値」、
+ * 無ければ「47都道府県の単純平均」。build-input.ts が resolveNationalFigure で決める。
+ */
+function averageLabelOf(input: RankingContentInput): string {
+  return input.averageLabel ?? `${input.totalCount}都道府県の単純平均`;
+}
+
+function compareWithAverage(value: number, average: number, label: string): string {
   const tolerance = Math.max(Math.abs(average) * 0.005, Number.EPSILON);
-  if (value > average + tolerance) return "全国平均を上回る水準です";
-  if (value < average - tolerance) return "全国平均を下回る水準です";
-  return "全国平均に近い水準です";
+  if (value > average + tolerance) return `${label}を上回る水準です`;
+  if (value < average - tolerance) return `${label}を下回る水準です`;
+  return `${label}に近い水準です`;
 }
 
 function describeLocalPosition(position: number, count: number): string {
@@ -146,15 +154,16 @@ function buildPrefectureCommentaries(input: RankingContentInput): PrefectureComm
     const regionalRows = rowsByRegion.get(regionName) ?? [];
     const localPosition = regionalRows.findIndex((candidate) => candidate.areaName === row.areaName) + 1;
     const band = rankBand(row.rank, input.totalCount);
-    const averageText = compareWithAverage(row.value, input.average);
+    const averageLabel = averageLabelOf(input);
+    const averageText = compareWithAverage(row.value, input.average, averageLabel);
     const localText = describeLocalPosition(localPosition, regionalRows.length);
     const gapText = describeNeighborGap(input.allPrefectures, index);
     const averageDistance = Math.abs(row.value - input.average) / Math.max(Math.abs(input.average), 1);
     const distanceText = averageDistance <= 0.05
-      ? "全国平均との差はごく小さい位置です"
+      ? `${averageLabel}との差はごく小さい位置です`
       : averageDistance <= 0.2
-        ? "全国平均との差は比較的小さい位置です"
-        : "全国平均との差が明確な位置です";
+        ? `${averageLabel}との差は比較的小さい位置です`
+        : `${averageLabel}との差が明確な位置です`;
     const sameRankCount = input.allPrefectures.filter((candidate) => candidate.rank === row.rank).length;
     const tieText = sameRankCount > 1
       ? `同じ全国順位に${sameRankCount}県が並びます`
@@ -206,10 +215,10 @@ function buildRegionalAnalysis(input: RankingContentInput): string {
         ? "全国順位には一定の幅があり、地方内でも上位側と下位側に分かれています"
         : "全国順位の幅が大きく、地方を一つの傾向だけで捉えにくい分布です";
     const averagePattern = above > 0 && below > 0
-      ? "全国平均の上側と下側に県が分かれます"
+      ? `${averageLabelOf(input)}の上側と下側に県が分かれます`
       : above > 0
-        ? "地方内の全県が全国平均以上です"
-        : "地方内の全県が全国平均以下です";
+        ? `地方内の全県が${averageLabelOf(input)}以上です`
+        : `地方内の全県が${averageLabelOf(input)}以下です`;
     return `## ${region.regionName}\n地方内では${first.areaName}が全国${first.rank}位の${formatValue(first.value, input.unit)}で先頭です。${averagePattern}。${last.areaName}までの並びを見ると、${spreadText}。地方内にも差があり、全国分布の中で一様ではないことが読み取れます。`;
   }).join("\n\n");
 }
@@ -231,7 +240,7 @@ function buildInsights(input: RankingContentInput): string {
     ? `上位5県の値の合計は${formatValue(topFive, input.unit)}で、全体の約${formatNumber((topFive / total) * 100)}％です。`
     : `上位5県の値の合計は${formatValue(topFive, input.unit)}です。値にゼロ以下を含む場合、構成比だけでは集中度を適切に表せません。`;
 
-  return `## 値の広がり\n1位の${top.areaName}は${formatValue(top.value, input.unit)}、最下位の${bottom.areaName}は${formatValue(bottom.value, input.unit)}です。最大値と最小値の差は${formatValue(difference, input.unit)}で、${ratioText}順位だけでなく値幅も確認すると、分布の広がりを捉えやすくなります。\n\n## 平均との関係\n全国平均は${formatValue(input.average, input.unit)}です。平均を上回る県は${above}県、下回る県は${below}県で、平均付近に全県が均等に並ぶわけではありません。平均から上下に分かれる県数を比べると、分布の偏りを順位表とは別の角度から確認できます。\n\n## 中位帯の厚み\n観測行の中央にある${middle.areaName}は全国${middle.rank}位で${formatValue(middle.value, input.unit)}です。中位の値と平均の距離や、周辺に同順位の県が集まるかを併せて見ると、上位と下位だけでは分からない分布の中心と密集度が明確になります。\n\n## 上位層の集中\n${shareText}上位層の合計と全体の関係を確認すると、少数県への集中が強い指標か、幅広い県に値が分散する指標かを読み分けられます。地域別の並びとは異なる、全国横断の集計として見ることが重要です。`;
+  return `## 値の広がり\n1位の${top.areaName}は${formatValue(top.value, input.unit)}、最下位の${bottom.areaName}は${formatValue(bottom.value, input.unit)}です。最大値と最小値の差は${formatValue(difference, input.unit)}で、${ratioText}順位だけでなく値幅も確認すると、分布の広がりを捉えやすくなります。\n\n## 平均との関係\n${averageLabelOf(input)}は${formatValue(input.average, input.unit)}です。平均を上回る県は${above}県、下回る県は${below}県で、平均付近に全県が均等に並ぶわけではありません。平均から上下に分かれる県数を比べると、分布の偏りを順位表とは別の角度から確認できます。\n\n## 中位帯の厚み\n観測行の中央にある${middle.areaName}は全国${middle.rank}位で${formatValue(middle.value, input.unit)}です。中位の値と平均の距離や、周辺に同順位の県が集まるかを併せて見ると、上位と下位だけでは分からない分布の中心と密集度が明確になります。\n\n## 上位層の集中\n${shareText}上位層の合計と全体の関係を確認すると、少数県への集中が強い指標か、幅広い県に値が分散する指標かを読み分けられます。地域別の並びとは異なる、全国横断の集計として見ることが重要です。`;
 }
 
 function buildFaq(input: RankingContentInput): DeterministicRankingContent["faq"] {
@@ -277,8 +286,10 @@ function buildFaq(input: RankingContentInput): DeterministicRankingContent["faq"
         type: "bottom_ranking",
       },
       {
-        question: `${input.rankingName}の全国平均はいくつですか？`,
-        answer: `全国平均は${formatValue(input.average, input.unit)}です。平均を上回る県は${above}県、下回る県は${below}県です。`,
+        question: input.averageLabel === "全国値"
+          ? `${input.rankingName}の全国値はいくつですか？`
+          : `${input.rankingName}の都道府県の平均はいくつですか？`,
+        answer: `${averageLabelOf(input)}は${formatValue(input.average, input.unit)}です。平均を上回る県は${above}県、下回る県は${below}県です。`,
         type: "average",
       },
       {

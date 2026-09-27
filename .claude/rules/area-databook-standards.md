@@ -71,6 +71,24 @@ area-databook-snapshot.ts ── R2 values.json (rank 済) ──▶ R2 app/area
 - ライブチャートは **≤ 12 目安** (初回 ISR 遅延を避ける)。順位不要な時系列・構成のみ B に置く。
 - `capitalCityValue: true` の指標 (家計調査系) は UI が「※県庁所在市の値」注記を自動付与する。
 
+### 2.1 県の「特徴」(AREA-HIGHLIGHTS-SSOT-01・2026-09-27)
+
+県ページの「特徴」カード・`<title>`/description・構造化データ・関連ブログ記事・OGP データ・市区町村ページ・
+SNS 地域カルーセルは、**同じ選定関数 `selectAreaHighlights` / `selectCityHighlights`
+(`packages/area-profile/src/highlights/`) と databook.json の焼き込み値だけ**を使う。件数は引数で渡す。
+
+- **候補**: テンプレの ranked-kpi-grid と gender-paired-kpi の指標だけ (`collectHighlightCandidateKeys`)。
+  全指標プール (県の profile.json) には戻さない。総数指標の人口当たりへの置換はこの変更では行っていない。
+- **焼き込み** (exporter → `metrics[key].highlight`): 表示ラベル (readerLabel + subtitle)・分野・出典・家計調査判定・
+  決定力・掲載価値 (`AREA_HIGHLIGHT_PROMINENCE`)・極性 (`METRIC_POLARITY`)・公開状態・順位の向き。`schemaVersion: 2`。
+- **並べ順**: 順位の極端さ → 掲載価値 → 新しさ → 決定力。上位 10 位以内 / 下位 10 位以内・2019 年以降・47 県そろい・公開中だけ。
+- **重複**: 表示ラベルと家族キーはカード全体で 1 件、**分野 (category) は上位・下位の片側ごとに 1 件** (オーナー判断)、家計調査は片側 2 件まで。
+- **色**: `RankBadge` の tone は極性が確定した指標だけ positive/negative、未確定は neutral。
+- **生成時検査**: exporter は R2 に書く前に 47 県で選定を実行し、件数不足 (上位 4・下位 4)・古い年・片側の分野重複・
+  非公開指標があれば止まる。R2 を書かずに確かめるのは `npm run check:highlights --workspace=@stats47/area-profile`。
+  テンプレから指標を外すときもこのコマンドで 47 県が埋まることを確認する。
+- 県の profile.json は当面生成を続けるが Web の読み手は 0 (廃止は別判断)。
+
 ---
 
 ## 3. ブロック文法 (何をどのブロックで見せるか)
@@ -155,6 +173,14 @@ Claude Code の codex MCP (`.claude/rules/codex-mcp.md`) とは別経路。文�
 | **error (editorial)** | areaCode 不正 / specialties 5〜9 件逸脱 / description 60〜160 字逸脱 / sourceUrl 非 http(s) / accessedAt 非 ISO / slug 非 kebab・重複 / municipality 空 |
 | **error (鮮度)** | `generate:area-databook --check` — 生成物と SSOT の diff (手編集・生成忘れ両方向) |
 | **warn** (`--strict` で error) | ranked-kpi 指標の selection 未記入 / editorial 未登録県 (47 未満の残数) |
+
+**表示の意味の検査** (`npm run validate:display-semantics`・CI の Area Databook Gate): ラベル・節の説明と指標定義の
+食い違いを、テンプレート・ThemeCatalog・page-components の定義単位で見る (判定 `packages/data-configs/src/display-semantics/`)。
+指標の性質は宣言 (unit を単位の正典で解釈・title/subtitle/description・SSDS の基礎データ表か指標表か) だけから決め、
+指標キーの名前からは推定しない。宣言から言えない指標は「不明」として判定に使わない。
+error = 総数の指標に「10万人比」等のラベル / 「人口当たり」の節に総数の指標 / 年間と月額の食い違い (指標が期間を宣言している場合) /
+数値カードの部品が年を出さない。warning = 期間を指標が宣言していない・「推移」と題したチャートが時系列の型でない。
+2026-09-25 の実例 4 件は `src/__tests__/display-semantics.test.ts` の回帰テスト。
 
 ---
 

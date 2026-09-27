@@ -10,7 +10,7 @@ import { readVault, writeVault } from './vault.mjs';
 import { collectAfbOutcomes } from './afb-outcomes.mjs';
 import { kdpMonthlyVaultKey } from './kdp-monthly-reports.mjs';
 import { authenticationPause, rejectedAuthentication } from './auth-recovery.mjs';
-import { noteInventoryAvailable } from './note-inventory.mjs';
+import { acceptedNoteGap, noteInventoryAvailable } from './note-inventory.mjs';
 
 const run = promisify(execFile);
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
@@ -121,7 +121,9 @@ try {
       missingRows: snapshot.coverage?.missingFromDashboard?.length ?? null, totalsMatched: snapshot.coverage?.totalsMatched === true,
       paginationComplete: snapshot.coverage?.paginationComplete === true };
     result.inventoryAvailable = noteInventoryAvailable(snapshot, cover);
-    if (snapshot.status !== 'pass' || cover.status !== 'pass') {
+    const gap = acceptedNoteGap(snapshot, cover);
+    if (gap) result.knownIncomplete = gap;
+    else if (snapshot.status !== 'pass' || cover.status !== 'pass') {
       const messages = JSON.stringify(snapshot.issues);
       const code = failureCode(messages);
       throw new Error(code === 'collection_failed' ? 'collection_incomplete' : code);

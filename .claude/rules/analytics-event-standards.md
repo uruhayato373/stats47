@@ -304,6 +304,9 @@ Geo証拠階段の`stage-population` / `stage-overlap` / `stage-audit`、公共�
 > 2026-08-23〜09-19 の実測でサイト内移動 11,319 件に対し記録は約 2 割)。デプロイ前後の件数を単純比較しない。
 > 増え方がサイト内移動 (`internal-transitions.csv`) を大きく超えたら二重送信を疑う。
 >
+> **nav_surface の値追加 (2026-09-27・県の「特徴」)**: 県ページと市区町村ページの「特徴」一覧 (`AreaHighlightList`) の
+> リンクに `area_highlights` を追加 (`AREA-HIGHLIGHTS-SSOT-01`)。登録済み `nav_surface` の**値追加**で新しい custom dimension は無い。
+>
 > **nav_surface の値追加 (2026-09-01・市区町村可視化)**: 市区町村ランキングの県内コロプレス
 > 地図で自治体をクリックして市区町村ページへ遷移する導線に `municipalities_map`、
 > 市区町村テーマ一覧 (`/municipalities/themes/*`) のカードクリックに `municipalities_theme` を

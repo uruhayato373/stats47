@@ -266,3 +266,32 @@ describe("generateRankingTopPageStructuredData", () => {
         expect(result.itemListElement as JsonLd[]).toHaveLength(0);
     });
 });
+
+describe("FAQ の全国の基準値 (2026-09-27 オーナー判断)", () => {
+    const national = { rank: 0, areaCode: "00000", areaName: "全国", yearCode: "2021100000", value: 7000 };
+
+    const faqText = (values: Partial<RankingValue>[]) =>
+        JSON.stringify(
+            generateRankingFAQStructuredData({
+                rankingItem: mockItem as RankingItem,
+                rankingValues: values as RankingValue[],
+                selectedYear: "2021",
+            }),
+        );
+
+    it("公表の全国値があれば「全国値」として答え、単純平均を出さない", () => {
+        const text = faqText([national, ...mockValues]);
+        expect(text).toContain("商業年間商品販売額の全国値はいくつですか");
+        expect(text).toContain("全国値は約7000万円");
+        expect(text).not.toContain("全国平均");
+        expect(text).not.toContain("単純平均");
+    });
+
+    it("mutation: 00000 行を除くと「4都道府県の単純平均」に反転する", () => {
+        const text = faqText(mockValues);
+        // (11829.8+8500+7200+6800)/4 = 8582.45
+        expect(text).toContain("4都道府県の単純平均は約8582.5万円");
+        expect(text).not.toContain("全国値");
+        expect(text).not.toContain("全国平均");
+    });
+});

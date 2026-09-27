@@ -36,7 +36,7 @@ GSC のインデックスカバレッジ問題 (404 / soft404 / 5xx / crawled-no
        404 & sitemap 未掲載 / クエリ付きで canonical が別 URL → build が resolved-by-design (自動)
        5xx                 → build が間隔を空けて 2 回再測定。続けば fix-5xx
        sitemap-gap / content-check / fix-5xx / verify-intent 等 → sync-coverage-backlog.mjs が GSC-COV-* カードを起票
-                             → backlog-loop-daily (CI の Claude) が直して --mark-* → --assert-handled を gate に行を消す
+                             → 対話セッションで選んで直し --mark-* → --assert-handled を gate に行を消す
        ↓
 [5] 記録      日次CIが --sync-inspection で「URL Inspection で登録済み」になった URL を自動で done
        │         (resolved_by: url-inspection。再び未登録と観測されたら pending に戻る)
@@ -117,7 +117,7 @@ node .claude/scripts/gsc/build-coverage-queue.mjs       # actionable URL を実�
 ### Phase 4 — 是正 (action 別)
 
 判断が要る action は `sync-coverage-backlog.mjs` が **action ごとに 1 枚ずつ** `GSC-COV-<種類>-<日付>` カード
-(10 URL まで・`[実行:sweep]`) を `.claude/todo/backlog.md` へ起票し、`backlog-loop-daily` (CI の Claude) が処理する。
+(10 URL まで・`[実行:sweep]`) を `.claude/todo/backlog.md` へ起票し、対話セッションで優先順位を見て選んだときに処理する (2026-09-27 に日次の自動処理を停止)。
 対象 URL は `.claude/state/gsc/backlog-batches/<ID>.txt`、completion gate は
 `build-coverage-queue.mjs --assert-handled <batch>` (全 URL が pending でなく、done 以外は理由 note 付き)。
 CI の Claude は curl / WebFetch を使えないので、本番ページは `build-coverage-queue.mjs --probe <url>` で読む。
@@ -184,7 +184,7 @@ TASK: 以下の soft404→現在200 の URL 群が「薄い/空」か判定。R2
 **自動 (CI)**: `fetch-metrics-weekly.yml` (日曜 20:00 JST) が **Phase 2 のキュー再構築を毎週回す**
 (`build-coverage-queue.mjs` → `--sync-inspection` → `.claude/state/gsc/` を develop へ commit-back)。
 **判断が要る是正も CI で回す (2026-09-24〜)**: 日次 `gsc-url-inspection-daily.yml` と週次の最後に
-`sync-coverage-backlog.mjs` が `GSC-COV-*` カードを起票し、`backlog-loop-daily.yml` (JST 01:30・1 日 2 件・他のカードと共有) が
+`sync-coverage-backlog.mjs` が `GSC-COV-*` カードを起票し、対話セッション (2026-09-27 まで `backlog-loop-daily.yml` の日次実行) が
 直して develop へ push する。本番反映は develop→main の人の PR のまま。ループは `.claude/state/gsc` も commit する
 (是正キューへの `--mark-*` が成果物のため)。
 入力週が 1 週以内なら本番 HTTP を再実測する。新しい export がなく入力週が 2 週以上古い場合は、

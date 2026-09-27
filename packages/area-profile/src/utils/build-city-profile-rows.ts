@@ -1,3 +1,4 @@
+import { CITY_TOP_BAND } from "../highlights/select-area-highlights";
 import { extractStrengthsAndWeaknesses } from "./extract-strengths-and-weaknesses";
 
 /** バッチ集約時の市区町村データ */
@@ -53,7 +54,7 @@ export function buildCityProfileRows(
 
   // 強みのみ抽出 (top 5 in prefecture)、weakness は無効化
   const { strengths } = extractStrengthsAndWeaknesses(dataWithRank, {
-    strengthMax: 5,
+    strengthMax: CITY_TOP_BAND,
     weaknessMin: 9999,
     maxRank: 9999,
   });

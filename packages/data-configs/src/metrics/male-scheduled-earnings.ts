@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const maleScheduledEarnings: MetricConfig = {
   "key": "male-scheduled-earnings",
   "title": "男性所定内給与額",
+  "subtitle": "月額",
   "unit": "千円",
   "category": "laborwage",
   "source": {

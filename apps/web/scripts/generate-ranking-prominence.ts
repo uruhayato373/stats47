@@ -28,7 +28,12 @@
 import fs from "node:fs";
 import path from "node:path";
 
-import { listAllMetrics, listCategories } from "@stats47/data-configs";
+import {
+  AREA_DATABOOK_TEMPLATE,
+  collectTemplateMetricKeys,
+  listAllMetrics,
+  listCategories,
+} from "@stats47/data-configs";
 import { KNOWN_RANKING_KEYS } from "@stats47/ranking/config";
 import {
   auditDerivedHooks,
@@ -244,6 +249,16 @@ function build(): string {
     category.representatives.map((representative) => representative.rankingKey),
   );
 
+  // 県の「特徴」(packages/area-profile/src/highlights) が同順位のタイブレークに使う掲載価値スコア。
+  // 候補は AREA_DATABOOK_TEMPLATE の指標だけなので、その分だけを出す (全件を出すと Header の bundle が太る)。
+  const templateKeys = new Set(collectTemplateMetricKeys(AREA_DATABOOK_TEMPLATE));
+  const areaHighlightProminence = Object.fromEntries(
+    results
+      .filter((result) => templateKeys.has(result.rankingKey))
+      .map((result) => [result.rankingKey, Math.round(result.score * 10000) / 10000] as const)
+      .sort(([a], [b]) => a.localeCompare(b)),
+  );
+
   const json = (value: unknown) => JSON.stringify(value, null, 2);
 
   return `/**
@@ -299,6 +314,15 @@ export const HOME_FEATURED_PROMINENCE: ReadonlyArray<HomeFeaturedProminence> =
  */
 export const REPRESENTATIVE_RANKING_KEYS: ReadonlyArray<string> =
   ${json(representativeKeys)};
+
+/**
+ * 県データブック (AREA_DATABOOK_TEMPLATE) の指標だけの掲載価値スコア (0〜1)。
+ *
+ * 県の「特徴」の選定 (packages/area-profile/src/highlights) が、順位の極端さが同じ候補の
+ * タイブレークに使う。databook.json の exporter が焼き込み、Web と SNS は焼き込み値を読む。
+ */
+export const AREA_HIGHLIGHT_PROMINENCE: Readonly<Record<string, number>> =
+  ${json(areaHighlightProminence)};
 `;
 }
 

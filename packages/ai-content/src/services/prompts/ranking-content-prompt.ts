@@ -11,7 +11,13 @@ export interface RankingContentInput {
   top10: { rank: number; areaName: string; value: number }[];
   bottom10: { rank: number; areaName: string; value: number }[];
   allPrefectures: { rank: number; areaName: string; value: number }[];
+  /** 比較の基準値。公表の全国値 (率・1 人あたり) があればそれ、無ければ都道府県の単純平均 */
   average: number;
+  /**
+   * average の呼び名 (「全国値」または「47都道府県の単純平均」)。
+   * 省略時は単純平均扱い。総数指標の全国計は平均として比べないので average に入れない。
+   */
+  averageLabel?: string;
   min: number;
   max: number;
   totalCount: number;
@@ -79,6 +85,8 @@ export function buildRankingContentPrompt(
     .map((r) => `${r.rank}位 ${r.areaName}: ${r.value.toLocaleString()}${input.unit}`)
     .join("\n");
 
+  // 比較基準の呼び名。公表の全国値が無い指標で「全国平均」と書くと単純平均を全国値と誤読させる (2026-09-27 オーナー判断)
+  const averageLabel = input.averageLabel ?? `${input.totalCount}都道府県の単純平均`;
   const regionMapText = buildRegionMapText();
   // FAQ の「平均を上回る県数」をモデルに数えさせない (batch2 で 2 件が誤集計・critic MAJOR)。機械計算して渡す
   const aboveAverage = input.allPrefectures.filter((r) => r.value > input.average).length;
@@ -114,7 +122,7 @@ ${options.extraContext}
 5. **括弧の中に数値を書かない**: 全セクション共通。決定的ゲートが機械検出して公開を止める最頻の違反。
    - NG:「愛知県（746.0万人）が4位」「石川県（2.5人、31位）」
    - NG:「受療率（人口10万対）」「支出額（2人以上の世帯）」← 単位・対象の注記でも括弧に数字が入れば同じく違反
-   - OK:「愛知県は4位」「石川県は31位で全国平均をやや下回る」「人口10万人あたりの受療率」「2人以上の世帯の支出額」
+   - OK:「愛知県は4位」「石川県は31位で${averageLabel}をやや下回る」「人口10万人あたりの受療率」「2人以上の世帯の支出額」
    - 許容されるのは「（2020年度）」のような年度表記と「（出典…）」のみ。詳細は末尾の文体ルール参照${extraContextSection}
 
 ## ランキングデータ（全${input.totalCount}都道府県）
@@ -122,7 +130,7 @@ ${options.extraContext}
 - 指標: ${input.rankingName}
 - 単位: ${input.unit}
 - 年: ${input.yearName}
-- 平均値: ${input.average.toLocaleString()}${input.unit}
+- ${averageLabel}: ${input.average.toLocaleString()}${input.unit}（この値を「全国平均」と呼ばない。必ず「${averageLabel}」と書く）
 - 最大値: ${input.max.toLocaleString()}${input.unit}
 - 最小値: ${input.min.toLocaleString()}${input.unit}
 - 平均を上回る県: ${aboveAverage} 県 / 平均を下回る県: ${belowAverage} 県（平均と同値の県は含めない。FAQ ではこの数をそのまま使い、自分で数え直さない）
@@ -151,7 +159,7 @@ ${regionMapText}${regionRankSection}
         "type": "bottom_ranking"
       },
       {
-        "question": "<全国平均はいくつ？という趣旨の質問文>",
+        "question": "<${averageLabel}はいくつ？という趣旨の質問文>",
         "answer": "<平均値と、上の「平均を上回る県 / 下回る県」の県数をそのまま使った回答。自分で数え直さない>",
         "type": "average"
       },
@@ -176,7 +184,7 @@ ${regionMapText}${regionRankSection}
         "areaName": "<都道府県名>",
         "rank": 1,
         "value": 12345,
-        "commentary": "<60〜120字。順位の位置づけ、属する地方区分内での傾向、全国平均との比較を述べる>"
+        "commentary": "<60〜120字。順位の位置づけ、属する地方区分内での傾向、${averageLabel}との比較を述べる>"
       }
     ]
   }
@@ -188,7 +196,7 @@ ${regionMapText}${regionRankSection}
 - 7地方区分ごとに \`## 北海道・東北\`, \`## 関東\`, \`## 中部\`, \`## 近畿\`, \`## 中国\`, \`## 四国\`, \`## 九州・沖縄\` の見出しで始める
 - **個別の都道府県名・数値・順位を網羅的に列挙しない**。数値はチャートやテーブルで確認できるため、テキストでは地方ごとの「傾向」「パターン」「特徴」を述べる
 - 具体的な数値を引用するのは、傾向を裏付ける代表例として1地方あたり最大1県に留める。2県以上の数値を並べない
-- 地方内での上位・下位の偏り、全国平均との乖離、隣接地方との対比など「分析的な視点」を提供する
+- 地方内での上位・下位の偏り、${averageLabel}との乖離、隣接地方との対比など「分析的な視点」を提供する
 - 都道府県を列挙する箇条書き風の文体にしない。地方全体の傾向→代表例1県という流れで書く
 - 各地方100〜150字。全体で700〜1000字程度
 
@@ -216,19 +224,19 @@ ${regionMapText}${regionRankSection}
 
 - 提供されたランキングリストに含まれる全 ${input.totalCount} 都道府県について、1 件ずつ commentary を作成する
 - 各 commentary は **60〜120 字**。短すぎても長すぎてもいけない。59 字以下は不合格。
-  「順位帯の位置づけ」と「地方内での相対位置または全国平均との比較」の 2 文で組むと 60 字を下回らない
+  「順位帯の位置づけ」と「地方内での相対位置または${averageLabel}との比較」の 2 文で組むと 60 字を下回らない
 - 47 件で同じ文型を繰り返さない。書き出し（「全国◯位の水準で」等）と述部を県ごとに変え、
   同順位帯の県でも着眼点（地方内の位置 / 平均との距離 / 隣接県との対比）を入れ替える
 - 内容: 「順位帯（上位 / 中位 / 下位）」は必ず入れる。それに加えて次の視点から **県ごとに 1〜2 つを選び、
   47 件で組み合わせを入れ替える**（全県に同じ 3 要素を同じ順で書くと定型の穴埋めになり不合格）:
   - 属する地方区分（北海道・東北 / 関東 / 中部 / 近畿 / 中国 / 四国 / 九州・沖縄）の中での相対位置
-  - 全国平均（${input.average.toLocaleString()}${input.unit}）との距離感（大きく上回る / わずかに下回る 等）
+  - ${averageLabel}（${input.average.toLocaleString()}${input.unit}）との距離感（大きく上回る / わずかに下回る 等）
   - 同地方または隣接する 1 県との対比（引用は 1 県まで）
   - その順位帯の密集度（僅差で並ぶ帯にいるのか、前後と差が開いているのか）
 - 文型の例（これらを混ぜ、同じ書き出しを連続させない）:
   - 「○○地方の中では最上位に近く、全国でも上位帯に入ります。平均との差は小さくありません。」
   - 「順位は中位ですが、前後の県と僅差で並ぶ帯にあります。地方内では△△県に次ぐ位置です。」
-  - 「全国平均を下回る下位帯です。同じ地方の□□県とは対照的な位置にあります。」
+  - 「${averageLabel}を下回る下位帯です。同じ地方の□□県とは対照的な位置にあります。」
 - **書き出しの回し方**: 「○○地方の中では」で始める解説は ${input.totalCount} 件中 12 件以下にする。残りは順位帯・
   平均との距離・隣接県との対比・順位帯の密集度のどれかから書き始める。読者は自県の 1 件しか読まないが、
   レビューは ${input.totalCount} 件を並べて読む
@@ -250,7 +258,7 @@ ${regionMapText}${regionRankSection}
 - **括弧による数値挿入を全面禁止**: 都道府県名の直後に括弧で値・順位を入れてはならない。
   - NG:「愛知県（746.0万人）が4位」「石川県（2.5人、31位）」「鹿児島県（2.6人）が25位」
   - NG:「福井県（73.9万人）や山梨県（79.1万人）は〜」← 括弧付き都道府県を連続させるのも禁止
-  - OK:「愛知県は4位で、中部地方の中核を担っている」「石川県は31位で全国平均をやや下回る」
+  - OK:「愛知県は4位で、中部地方の中核を担っている」「石川県は31位で${averageLabel}をやや下回る」
   - OK:「中部地方では愛知県が4位と突出しているが、県ごとの差が大きい」
 - **1文に複数の都道府県を数値付きで並べない**: 個別県のデータ紹介が続くと箇条書きと変わらなくなる。代わりに地方単位やグループ単位の傾向を述べ、代表例として1県だけ引用する
 - 数値を引用する場合は、傾向を裏付ける代表例として最小限（1地方あたり1県）に留め、文章の流れの中に自然に組み込む

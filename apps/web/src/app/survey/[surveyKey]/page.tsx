@@ -265,7 +265,9 @@ export default async function SurveyPage({ params }: PageProps) {
   const statsText = [
     `全 ${rankingItems.length} ランキング`,
     featuredItems.length > 0 ? `代表 ${featuredItems.length} 件` : null,
-    latestYear ? `最新 ${latestYear} 年` : null,
+    // 調査そのものの最新回ではなく、紐づく指標の最新年 (社会・人口統計体系の指標は複数の原典に属し、
+    // 国勢調査のページにも 2023 年の道路統計などが並ぶ)。「最新 2024 年」だと国勢調査の最新回に読めた (2026-09-27)
+    latestYear ? `掲載データの最新 ${latestYear} 年` : null,
     '47 都道府県',
   ]
     .filter(Boolean)

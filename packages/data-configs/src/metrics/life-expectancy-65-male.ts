@@ -30,7 +30,7 @@ export const lifeExpectancy65Male: MetricConfig = {
       2020,
     ],
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     "colorScheme": "interpolateBlues",
     "colorSchemeType": "sequential",

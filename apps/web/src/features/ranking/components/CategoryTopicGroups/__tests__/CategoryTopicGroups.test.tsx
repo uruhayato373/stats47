@@ -46,6 +46,30 @@ function linkCount(html: string, key: string): number {
 }
 
 describe("CategoryTopicGroups", () => {
+  it("単独の行は subtitle (分母・内訳) を見出しに含め、単位は表示用に整える", () => {
+    // 2026-09-27: 「道路実延長 埼玉県 12.46km」が総面積1km²当たりの値なのに実数に見えていた
+    const html = markup([
+      item("road", "道路実延長", "other", "総面積1km²当たり", { areaName: "埼玉県", value: "12.46" }),
+    ]);
+    expect(html).toContain("道路実延長（総面積1km²当たり）");
+    expect(html).toContain("12.46%");
+  });
+
+  it("同名の行は総数の値を出し、総数が無ければどの内訳の値かを添える", () => {
+    const withTotal = markup([
+      item("cn", "外国人人口", "other", "中国籍（人口10万人当たり）", { areaName: "東京都", value: "1,393.4" }),
+      item("all", "外国人人口", "other", null, { areaName: "東京都", value: "663,000" }),
+    ]);
+    expect(withTotal).toContain("663,000");
+    expect(withTotal).not.toContain("1,393.4");
+
+    const noTotal = markup([
+      item("cn", "外国人人口", "other", "中国籍（人口10万人当たり）", { areaName: "東京都", value: "1,393.4" }),
+      item("kr", "外国人人口", "other", "韓国・朝鮮籍（人口10万人当たり）", { areaName: "大阪府", value: "1,200" }),
+    ]);
+    expect(noTotal).toMatch(/1,393\.4%.*（中国籍（人口10万人当たり））/s);
+  });
+
   it("マニフェスト順にカードを並べる", () => {
     const html = markup([
       item("a", "デザイナーの平均年収", "income"),

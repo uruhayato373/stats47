@@ -30,15 +30,35 @@ const makeFullYear = (yearCode: string, value: number): RankingValue[] =>
   );
 
 describe("buildNationalAverageSeries", () => {
-  it("全国行 (00000) を平均から除外する", () => {
+  it("全国行 (00000) があれば単純平均ではなく公表の全国値を系列に使う", () => {
     const series = buildNationalAverageSeries([
       makeValue("00000", "2020", 1000),
       makeValue("13000", "2020", 100),
       makeValue("14000", "2020", 200),
     ]);
     expect(series).toHaveLength(1);
+    expect(series[0].value).toBe(1000);
+    expect(series[0].kind).toBe("national-value");
+  });
+
+  it("mutation: 00000 行を除くと同じ年が単純平均の点に戻る", () => {
+    const series = buildNationalAverageSeries([
+      makeValue("13000", "2020", 100),
+      makeValue("14000", "2020", 200),
+    ]);
     expect(series[0].value).toBe(150);
     expect(series[0].count).toBe(2);
+    expect(series[0].kind).toBe("simple-mean");
+  });
+
+  it("公表値の年と単純平均の年を 1 本の線につながない (公表値の年だけ残す)", () => {
+    const series = buildNationalAverageSeries([
+      ...makeFullYear("2019", 10),
+      makeValue("00000", "2020", 12),
+      ...makeFullYear("2020", 11),
+    ]);
+    expect(series.map((p) => p.year)).toEqual([2020]);
+    expect(series[0].value).toBe(12);
   });
 
   it("value が null の行を平均にも母数にも含めない", () => {

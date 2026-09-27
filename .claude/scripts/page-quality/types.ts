@@ -81,7 +81,14 @@ export type MetricKey =
   | "chart_text_issues"
   | "blog_svg_text_issues"
   | "a11y_violations"
-  | "responsive_layout_issues";
+  | "responsive_layout_issues"
+  | "internal_jargon_terms"
+  | "unit_symbol_mixing"
+  | "abnormal_value_strings"
+  | "same_shop_ad_duplicates"
+  | "title_changed"
+  | "small_text_count"
+  | "mobile_page_height";
 
 export type Comparison = "absolute" | "delta_pct";
 export type Operator = "<=" | ">=" | "<" | ">";
@@ -126,6 +133,8 @@ export interface PageAuditResult {
   jsonld_errors: string[];
   /** UI 検査の指摘 (壊れた画像 URL・切れた要素・axe の規則 ID 等)。違反の場所を特定するため。 */
   ui_findings?: string[];
+  /** `<title>` の文字列。翌週の title_changed の比較元。 */
+  page_title?: string | null;
   /** 画像切れ検査の入力。検査後に削除し、スナップショットには残さない。 */
   image_urls?: string[];
   /** 代表URLのスクショ (スマホ・PC)。週次の --browser-representative のときだけ入る。 */

@@ -55,7 +55,7 @@ export const deathsMalignantNeoplasmsPer100k: MetricConfig = {
       2023
     ]
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     "colorScheme": "interpolateBlues",
     "colorSchemeType": "sequential",

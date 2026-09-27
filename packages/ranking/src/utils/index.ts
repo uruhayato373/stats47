@@ -8,6 +8,7 @@ export * from "./compute-top-rankings";
 export * from "./extract-ranking-stats";
 export * from "./filter-out-national-area";
 export * from "./filter-to-national";
+export * from "./resolve-national-figure";
 export * from "./filter-to-prefectures";
 export * from "./get-max-decimal-places-from-rankings";
 export * from "./get-ranking-title";

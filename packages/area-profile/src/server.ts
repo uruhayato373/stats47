@@ -21,6 +21,8 @@ export { extractStrengthsAndWeaknesses } from "./utils";
 export { readAreaProfileFromR2 } from "./repositories/read-area-profile-snapshot";
 export { exportAreaProfileSnapshot } from "./exporters/area-profile-snapshot";
 export { exportCityProfileSnapshot } from "./exporters/city-profile-snapshot";
+export { readCityProfileFromR2 } from "./repositories/read-city-profile-snapshot";
+export { cityProfileKeyPath, type CityProfileData } from "./types/city-profile";
 
 // 県データブック (Phase 2): template 参照指標の値+全国順位を焼き込む snapshot。
 export { readAreaDatabookFromR2 } from "./repositories/read-area-databook-snapshot";
@@ -30,6 +32,12 @@ export {
 } from "./exporters/area-databook-snapshot";
 export type {
   AreaDatabookSnapshot,
+  DatabookHighlightMeta,
   DatabookMetricValue,
   DatabookAgriItem,
 } from "./types/databook-snapshot";
+export { AREA_DATABOOK_SCHEMA_VERSION } from "./types/databook-snapshot";
+export {
+  assertAreaHighlightsHealthy,
+  checkAreaHighlights,
+} from "./highlights/check-area-highlights";

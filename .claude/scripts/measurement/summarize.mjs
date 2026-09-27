@@ -38,6 +38,7 @@ const sources = Object.entries(SOURCES).map(([source, config]) => {
       ? { state: 'awaiting_reauthentication', blockedSince: value.recovery.blockedSince } : null,
     evidence: value.evidence ?? null,
     quality: value.quality ?? null,
+    knownIncomplete: value.status === 'pass' ? value.knownIncomplete ?? null : null,
     remaining: source === 'kdp' ? 'payout_and_net_profit_not_collected' : source === 'afb' ? 'net_payout_and_partnership_status_not_collected' : null,
   };
 });
@@ -47,7 +48,7 @@ mkdirSync(dirname(output), { recursive: true });
 writeFileSync(output, JSON.stringify(state, null, 2) + '\n');
 const lines = ['認証付き計測の最新試行。生データと認証状態は暗号化したprivate R2に保存。', '',
   '| 対象 | 収集範囲 | 状態 | 次の操作 |', '|---|---|---|---|',
-  ...sources.map(s => `| ${s.source} | ${s.capability} | ${s.status} | ${s.source === 'afb' && ['api_key_missing', 'api_auth_required'].includes(s.code) ? 'AFB_API_KEY Secretを公式API設定と照合（Cookie再ログインは不要）' : s.code === 'auth_required' || s.code === 'session_missing' ? `認証プロファイル手順書で${s.source}の認証を復旧し bootstrap-session.mjs ${s.source}${s.source === 'gsc' ? ' --from-profile' : s.source === 'kdp' ? ' --login --reports' : ''} --publish` : s.code ?? s.remaining ?? 'なし'} |`),
+  ...sources.map(s => `| ${s.source} | ${s.capability} | ${s.status} | ${s.source === 'afb' && ['api_key_missing', 'api_auth_required'].includes(s.code) ? 'AFB_API_KEY Secretを公式API設定と照合（Cookie再ログインは不要）' : s.code === 'auth_required' || s.code === 'session_missing' ? `認証プロファイル手順書で${s.source}の認証を復旧し bootstrap-session.mjs ${s.source}${s.source === 'gsc' ? ' --from-profile' : s.source === 'kdp' ? ' --login --reports' : ''} --publish` : s.code ?? (s.knownIncomplete ? `既知の欠け (${s.knownIncomplete.code}・${s.knownIncomplete.missingRows} 件・値は null のまま)` : null) ?? s.remaining ?? 'なし'} |`),
   ...(sources.some(s => s.source === 'kdp' && s.code === 'auth_required')
     ? ['', 'KDP: 本棚とReportsの両方を本人が認証する。本人認証後のCI成功に続く再実行で再び認証を要求された場合、再ログインを反復せず停止し、private証跡の確定画面と実行環境を調査する。古いstateの再exportは認証復旧ではない。'] : []),
   ...(sources.some(s => s.recovery) ? ['', '再認証待ちの対象はブラウザへ再接続せず失敗状態を記録し、他の取得元は継続する。新しい本人認証を公開後、次回CIで再開する。待機チェックの時刻は計測値を取得した時刻ではない。'] : []),

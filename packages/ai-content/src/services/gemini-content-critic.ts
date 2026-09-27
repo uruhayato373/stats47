@@ -75,7 +75,7 @@ function buildCandidateConsistencyTable(candidate: unknown): string {
   }
   const maxNormalizedTemplateCount = Math.max(0, ...normalizedTemplateCounts.values());
   const summary =
-    `- 候補JSON内の値から算出した全国平均=${average}; 平均より上=${above}県; 平均より下=${below}県\n` +
+    `- 候補JSON内の値から算出した都道府県の単純平均=${average}; 平均より上=${above}県; 平均より下=${below}県\n` +
     `- rank順の先頭5件合計=${topFiveSum}; 全値合計=${total}; 構成比=${topFiveShare ?? "算出対象外"}％\n` +
     `- 県名と数値を正規化した県別解説の同一文型最大出現数=${maxNormalizedTemplateCount}/${rows.length}件`;
   const detail = rows
@@ -107,8 +107,8 @@ export function buildGeminiCriticPrompt(rankingKey: string, candidate: unknown):
 
 ## 生成者の制約（審査の前提）
 
-- 生成者は数値・順位を提供データ（各県の順位・値・7地方区分・全国平均）だけから書き、施設名・政策名・制度名・企業名の使用を禁止されている。太平洋側 / 日本海側・都市部 / 地方部・内陸といった一般的な地理の言及は許されている（ただし地理として誤っていれば MAJOR。例: 静岡県や長野県を日本海側と書く）
-- したがって県別解説に「県固有の背景説明」を要求しない。固有性は、順位帯・地方内の位置・全国平均との距離・隣接県との対比・順位帯の密集度の**組み合わせ**が県ごとに変わっているかで判断する
+- 生成者は数値・順位を提供データ（各県の順位・値・7地方区分・比較基準値（公表の全国値、無ければ47都道府県の単純平均））だけから書き、施設名・政策名・制度名・企業名の使用を禁止されている。太平洋側 / 日本海側・都市部 / 地方部・内陸といった一般的な地理の言及は許されている（ただし地理として誤っていれば MAJOR。例: 静岡県や長野県を日本海側と書く）
+- したがって県別解説に「県固有の背景説明」を要求しない。固有性は、順位帯・地方内の位置・比較基準値との距離・隣接県との対比・順位帯の密集度の**組み合わせ**が県ごとに変わっているかで判断する
 - regionalAnalysis は地方ごとに代表例 1 県までしか数値を挙げない規定なので、ある県が regionalAnalysis に登場しないことは矛盾でも誤りでもない
 
 ## 判定規則

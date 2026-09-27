@@ -6,11 +6,12 @@
 
 import { getRequiredBaseUrl } from '@/lib/env';
 
-import { selectDistinctProfileItems } from './select-distinct-profile-items';
+import type { AreaHighlights } from '@stats47/area-profile';
 
-import type { AreaProfileData } from '@stats47/area-profile';
-
-const STRUCTURED_DATA_ITEMS_PER_DIRECTION = 6;
+interface AreaIdentity {
+  areaCode: string;
+  areaName: string;
+}
 
 /**
  * 地域プロファイルページのパンくずリスト構造化データ（BreadcrumbList）を生成
@@ -21,7 +22,7 @@ const STRUCTURED_DATA_ITEMS_PER_DIRECTION = 6;
 export function generateAreaProfileBreadcrumbStructuredData({
   profile,
 }: {
-  profile: AreaProfileData;
+  profile: AreaIdentity;
 }): object {
   const baseUrl = getRequiredBaseUrl();
 
@@ -53,25 +54,21 @@ export function generateAreaProfileBreadcrumbStructuredData({
 /**
  * 地域プロファイルページの AdministrativeArea 構造化データを生成
  *
- * 都道府県を AdministrativeArea として記述し、strengths/weaknesses の統計データを
- * PropertyValue として含める。
+ * 都道府県を AdministrativeArea として記述し、県の「特徴」(selectAreaHighlights の結果) を
+ * PropertyValue として含める。件数は選定時に決まっている。
  */
 export function generateAreaProfileStructuredData({
   profile,
+  highlights,
 }: {
-  profile: AreaProfileData;
+  profile: AreaIdentity;
+  highlights: AreaHighlights;
 }): object {
   const baseUrl = getRequiredBaseUrl();
 
-  // 検索結果で代表性を持つ上位・下位だけを含める。全件を埋め込むと県によって
-  // 数百件の PropertyValue が HTML と RSC payload の双方へ複製される。
-  const representativeItems = [
-    ...selectDistinctProfileItems(profile.strengths, STRUCTURED_DATA_ITEMS_PER_DIRECTION),
-    ...selectDistinctProfileItems(profile.weaknesses, STRUCTURED_DATA_ITEMS_PER_DIRECTION),
-  ];
-  const additionalProperty = representativeItems.map((item) => ({
+  const additionalProperty = [...highlights.top, ...highlights.bottom].map((item) => ({
     '@type': 'PropertyValue' as const,
-    name: item.indicator,
+    name: item.label,
     value: item.value,
     unitText: item.unit,
   }));

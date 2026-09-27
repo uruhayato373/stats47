@@ -23,6 +23,7 @@ import "dotenv/config";
  * 関連: .claude/agents/ranking-content-author.md / .claude/scripts/ai-content/audit-ai-content.mjs
  */
 
+import { isNationalAreaCode, resolveNationalFigure, simpleMeanLabel } from "@stats47/ranking";
 import {
   readRankingItemFromR2,
   listRankingValues,
@@ -76,7 +77,11 @@ export async function buildRankingContentInput(
   if (!yearCode) return null;
 
   const valuesResult = await listRankingValues(rankingKey, areaType, yearCode);
-  const values = isOk(valuesResult) ? valuesResult.data : [];
+  const allRows = isOk(valuesResult) ? valuesResult.data : [];
+  // 比較の基準: 公表の全国値 (率・1 人あたり) があればそれを「全国値」と呼ぶ。
+  // 総数の全国計や全国値が無い場合は 47 都道府県の単純平均と明記する (2026-09-27 オーナー判断)
+  const national = resolveNationalFigure(allRows);
+  const values = allRows.filter((v) => !isNationalAreaCode(v.areaCode));
   if (values.length === 0) return null;
 
   const sorted = [...values].sort(
@@ -104,7 +109,11 @@ export async function buildRankingContentInput(
     top10: sorted.slice(0, 10).map(toRow),
     bottom10: sorted.slice(-10).map(toRow),
     allPrefectures: sorted.map(toRow),
-    average: Math.round(avg * 100) / 100,
+    average: Math.round(
+      (national?.kind === "national-value" ? national.value : avg) * 100,
+    ) / 100,
+    averageLabel:
+      national?.kind === "national-value" ? national.label : simpleMeanLabel(sorted.length),
     min: Math.min(...nums),
     max: Math.max(...nums),
     totalCount: sorted.length,

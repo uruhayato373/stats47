@@ -23,7 +23,7 @@ export const ratioNeverMarried15Plus: MetricConfig = {
     "from": 2020,
     "to": 2020,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     "colorScheme": "interpolateBlues",
     "colorSchemeType": "sequential",

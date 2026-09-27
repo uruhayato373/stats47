@@ -1,6 +1,6 @@
 name: 🗂️ Backlog Loop Daily (バックログ処理 + 行削除)
 
-# .claude/todo のバックログを日次で消化するループ。
+# .claude/todo のバックログを消化するループ (手動起動のみ。2026-09-27 に日次 cron を廃止)。
 #
 #   1. 05 / 01 / 06 をパースしてキューを再構築し、上位 N 件を選ぶ
 #   2. Claude Code Base Action (OAuth / sonnet) が分類して処理し、gate を実行して台帳へ記録する
@@ -29,8 +29,8 @@ name: 🗂️ Backlog Loop Daily (バックログ処理 + 行削除)
 #   繰り返しても罰されず、attempts が増える分だけキューの後ろへ下がる。
 
 on:
-  schedule:
-    - cron: "30 16 * * *" # JST 01:30
+  # 2026-09-27 オーナー判断で日次の自動実行を止めた。何を処理するかは対話セッションで
+  # 優先順位を見て決める。手動で回すときだけ workflow_dispatch / request ファイルを使う。
   # push トリガー (cloud 用): cloud セッションは actions:write が無く dispatch できない (403)。
   # data/backlog-loop-requests.json を develop へ commit すると実行し、request を消費する。
   #   { "limit": 2 }

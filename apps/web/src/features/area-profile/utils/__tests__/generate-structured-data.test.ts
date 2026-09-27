@@ -9,39 +9,30 @@ import {
   generateAreaProfileStructuredData,
 } from '../generate-structured-data';
 
-import type { AreaProfileData } from '@stats47/area-profile';
+import type { AreaHighlight, AreaHighlights } from '@stats47/area-profile';
 
-const mockProfile: AreaProfileData = {
-  areaCode: '13000',
-  areaName: '東京都',
-  strengths: [
-    {
-      indicator: '総人口',
-      value: 14000000,
-      unit: '人',
-      rank: 1,
-      rankingKey: 'total-population',
-      year: '2023',
-    },
-    {
-      indicator: '県内総生産',
-      value: 1000000,
-      unit: '億円',
-      rank: 1,
-      rankingKey: 'gdp',
-      year: '2022',
-    },
-  ],
-  weaknesses: [
-    {
-      indicator: '森林面積割合',
-      value: 36,
-      unit: '%',
-      rank: 45,
-      rankingKey: 'forest-area-ratio',
-      year: '2023',
-    },
-  ],
+const mockProfile = { areaCode: '13000', areaName: '東京都' };
+
+function highlight(label: string, rank: number, direction: 'top' | 'bottom'): AreaHighlight {
+  return {
+    rankingKey: `key-${label}`,
+    label,
+    value: rank,
+    unit: '件',
+    rank,
+    year: '2023年',
+    yearNumber: 2023,
+    category: `cat-${label}`,
+    source: '社会・人口統計体系',
+    isKakei: false,
+    direction,
+    tone: 'neutral',
+  };
+}
+
+const highlights: AreaHighlights = {
+  top: [highlight('人口', 1, 'top'), highlight('県内総生産', 1, 'top')],
+  bottom: [highlight('森林面積割合', 45, 'bottom')],
 };
 
 describe('generateAreaProfileBreadcrumbStructuredData', () => {
@@ -68,75 +59,27 @@ describe('generateAreaProfileBreadcrumbStructuredData', () => {
 
 describe('generateAreaProfileStructuredData', () => {
   it('AdministrativeArea 形式の構造化データを生成する', () => {
-    const result = generateAreaProfileStructuredData({
-      profile: mockProfile,
-    }) as Record<string, unknown>;
+    const result = generateAreaProfileStructuredData({ profile: mockProfile, highlights }) as Record<string, unknown>;
 
     expect(result['@type']).toBe('AdministrativeArea');
     expect(result.name).toBe('東京都');
     expect(result.url).toBe('https://stats47.jp/areas/13000');
-    expect(result).toHaveProperty('additionalProperty');
   });
 
-  it('additionalProperty に strengths と weaknesses を含む', () => {
-    const result = generateAreaProfileStructuredData({
-      profile: mockProfile,
-    }) as Record<string, unknown>;
+  it('additionalProperty は選定結果 (上位 → 下位) をそのまま使い、切り出さない', () => {
+    const result = generateAreaProfileStructuredData({ profile: mockProfile, highlights }) as Record<string, unknown>;
     const props = result.additionalProperty as Array<Record<string, unknown>>;
 
-    expect(props).toHaveLength(3);
-    expect(props[0]).toMatchObject({
-      '@type': 'PropertyValue',
-      name: '総人口',
-    });
-    expect(props[2]).toMatchObject({
-      '@type': 'PropertyValue',
-      name: '森林面積割合',
-    });
+    expect(props.map((p) => p.name)).toEqual(['人口', '県内総生産', '森林面積割合']);
+    expect(props[0]).toMatchObject({ '@type': 'PropertyValue', value: 1, unitText: '件' });
   });
 
-  it('strengths と weaknesses が空の場合に additionalProperty を含まない', () => {
-    const emptyProfile = { ...mockProfile, strengths: [], weaknesses: [] };
+  it('選定結果が空の場合に additionalProperty を含まない', () => {
     const result = generateAreaProfileStructuredData({
-      profile: emptyProfile,
+      profile: mockProfile,
+      highlights: { top: [], bottom: [] },
     }) as Record<string, unknown>;
 
     expect(result).not.toHaveProperty('additionalProperty');
-  });
-
-  it('大量の指標があっても上位・下位を各6件に制限する', () => {
-    const makeItems = (prefix: string, count: number) =>
-      Array.from({ length: count }, (_, index) => ({
-        indicator: `${prefix}${index}`,
-        value: index,
-        unit: '件',
-        rank: index + 1,
-        rankingKey: `${prefix}-${index}`,
-        year: '2025',
-      }));
-    const result = generateAreaProfileStructuredData({
-      profile: {
-        ...mockProfile,
-        strengths: makeItems('上位', 20),
-        weaknesses: makeItems('下位', 20),
-      },
-    }) as Record<string, unknown>;
-
-    const props = result.additionalProperty as Array<Record<string, unknown>>;
-    expect(props).toHaveLength(12);
-    expect(props.map((property) => property.name)).toEqual([
-      '上位0',
-      '上位1',
-      '上位2',
-      '上位3',
-      '上位4',
-      '上位5',
-      '下位0',
-      '下位1',
-      '下位2',
-      '下位3',
-      '下位4',
-      '下位5',
-    ]);
   });
 });

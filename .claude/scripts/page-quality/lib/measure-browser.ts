@@ -1,7 +1,7 @@
 import { chromium } from "playwright";
 
 import type { MetricValue } from "../types";
-import { probeUi } from "./ui-probe";
+import { evaluateTypography, probeUi, type TypographyMetrics } from "./ui-probe";
 
 export interface BrowserMeasurement {
   lcp_ms: MetricValue;
@@ -18,6 +18,10 @@ export interface BrowserMeasurement {
   overlapping_tap_targets: MetricValue;
   chart_text_issues: MetricValue;
   a11y_violations: MetricValue;
+  /** 412px で 11px 未満の文字の数 (SVG チャート内を除く)。 */
+  small_text_count: MetricValue;
+  /** 412px でのページ全体の高さ (px)。 */
+  mobile_page_height: MetricValue;
   ui_findings: string[];
 }
 
@@ -92,8 +96,14 @@ function launchFailure(reason: string): BrowserMeasurement {
     overlapping_tap_targets: unmeasured(reason),
     chart_text_issues: unmeasured(reason),
     a11y_violations: unmeasured(reason),
+    small_text_count: unmeasured(reason),
+    mobile_page_height: unmeasured(reason),
     ui_findings: [],
   };
+}
+
+function typographyFindings(t: TypographyMetrics | null): string[] {
+  return (t?.samples ?? []).map((s) => `small_text: ${s}`);
 }
 
 async function measureWithBrowser(
@@ -122,6 +132,7 @@ async function measureWithBrowser(
     let horizontalScroll = false;
     let smallTapTargets = 0;
     let ui: Awaited<ReturnType<typeof probeUi>> | null = null;
+    let typography: TypographyMetrics | null = null;
 
     for (let i = 0; i < runs; i++) {
       const page = await context.newPage();
@@ -180,6 +191,7 @@ async function measureWithBrowser(
           horizontalScroll = layout.scroll;
           smallTapTargets = layout.small;
           ui = await probeUi(page);
+          typography = await evaluateTypography(page);
         }
       } catch (e) {
         navigationFailed = (e as Error).message;
@@ -205,7 +217,9 @@ async function measureWithBrowser(
         overlapping_tap_targets: ui?.overlapping_tap_targets ?? unmeasured(reason),
         chart_text_issues: ui?.chart_text_issues ?? unmeasured(reason),
         a11y_violations: ui?.a11y_violations ?? unmeasured(reason),
-        ui_findings: ui?.ui_findings ?? [],
+        small_text_count: typography?.small_text_count ?? unmeasured(reason),
+        mobile_page_height: typography?.page_height ?? unmeasured(reason),
+        ui_findings: [...(ui?.ui_findings ?? []), ...typographyFindings(typography)],
       };
     }
 
@@ -229,7 +243,9 @@ async function measureWithBrowser(
       overlapping_tap_targets: ui?.overlapping_tap_targets ?? unmeasured("first navigation failed before UI probe"),
       chart_text_issues: ui?.chart_text_issues ?? unmeasured("first navigation failed before UI probe"),
       a11y_violations: ui?.a11y_violations ?? unmeasured("first navigation failed before UI probe"),
-      ui_findings: ui?.ui_findings ?? [],
+      small_text_count: typography?.small_text_count ?? unmeasured("first navigation failed before UI probe"),
+      mobile_page_height: typography?.page_height ?? unmeasured("first navigation failed before UI probe"),
+      ui_findings: [...(ui?.ui_findings ?? []), ...typographyFindings(typography)],
     };
   } finally {
     await context.close();

@@ -403,7 +403,9 @@ export type NavSurface =
   | 'footer'
   | 'breadcrumb'
   | 'tag'
-  | 'blog_body';
+  | 'blog_body'
+  // 県・市区町村の「特徴」一覧 (AreaHighlightList。2026-09-27 値追加・AREA-HIGHLIGHTS-SSOT-01。登録済み dimension の値追加)
+  | 'area_highlights';
 
 /** 直近に部品側で送った nav_click。共通のクリック監視が同じクリックを二重に送らないための記録 */
 let lastManualNavClick: { href: string; at: number } | null = null;

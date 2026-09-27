@@ -25,7 +25,7 @@ import { join } from "node:path";
 import { checkImages } from "./lib/check-images";
 import { checkSvgText } from "./lib/check-svg-text";
 import { createScreenshotSession, responsiveFindings, SCREENSHOT_PREFIX } from "./lib/screenshots";
-import { buildReviewInput, newUiViolations } from "./lib/ui-report";
+import { applyTitleChanges, buildReviewInput, newUiViolations } from "./lib/ui-report";
 import { browserPages, reviewPageKeys, type BrowserPage } from "./templates";
 import { createBrowserMeasurementSession } from "./lib/measure-browser";
 import { currentCommitSha } from "./lib/git-diff";
@@ -184,6 +184,8 @@ async function main() {
 
   // 前回の週次結果は R2 にある (git には置かない)。前回比の判定と新規 UI 違反の比較に使う。
   const previousRun = await pullFullState();
+  const titleChanges = applyTitleChanges(results, previousRun);
+  console.log(`[page-quality] <title> の前回からの変化: ${titleChanges} 件${previousRun ? "" : " (前回結果なし)"}`);
   const budgets = loadBudgets();
   const date = generatedAt.slice(0, 10);
   const stageHistory = join(R2_STAGE_DIR, "history.csv");

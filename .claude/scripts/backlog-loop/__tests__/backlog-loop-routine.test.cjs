@@ -156,6 +156,12 @@ test('件数が job timeout に収まる (1 次式 × 安全率 1.25)', () => {
 //   2026-08-21 に ai-content / blog の日次生成ループを削除したので、現在この条件を満たす
 //   workflow は backlog-loop だけ。**対象をファイル名で列挙せず base-action の利用で拾う**ので、
 //   将来 Claude workflow を足したら自動で検査対象に入る。
+test('★backlog-loop は日次で自動実行しない (2026-09-27 オーナー判断: 何を処理するかはセッションで決める)', () => {
+  const source = fs.readFileSync(path.join(ROOT, WORKFLOW), 'utf8');
+  assert.ok(!/^\s*schedule:/m.test(source), 'backlog-loop に schedule が戻っている');
+  assert.ok(/workflow_dispatch:/.test(source), '手動起動の経路が無い');
+});
+
 test('★Claude を使う workflow どうしが実時間で重ならない (利用枠の共有)', () => {
   const dir = path.join(ROOT, '.github/workflows');
   const claudeWorkflows = fs
@@ -165,10 +171,11 @@ test('★Claude を使う workflow どうしが実時間で重ならない (利�
     .filter(({ source }) => source.includes('claude-code-base-action'))
     .filter(({ source }) => /- cron: "/.test(source));
 
-  // 列挙が空 = 何も検査していない、を防ぐ (backlog-loop 自身は必ず入る)
+  // 列挙が空 = 何も検査していない、を防ぐ (2026-09-27 に backlog-loop の cron を止めたので、
+  // 週次で cron を持つ improvement-cycle を錨にする)
   assert.ok(
-    claudeWorkflows.some(({ file }) => file === path.basename(WORKFLOW)),
-    'backlog-loop が Claude workflow として拾えていない = 列挙が壊れている',
+    claudeWorkflows.some(({ file }) => file === 'improvement-cycle-weekly.yml'),
+    'improvement-cycle が Claude workflow として拾えていない = 列挙が壊れている',
   );
 
   const crons = (source) => [...source.matchAll(/- cron: "([^"]+)"/g)].map((m) => m[1]);
