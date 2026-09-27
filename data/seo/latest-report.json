@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "date": "2026-09-26",
+  "date": "2026-09-27",
   "period": {
-    "periodStart": "2026-09-17",
-    "periodEnd": "2026-09-23",
+    "periodStart": "2026-09-18",
+    "periodEnd": "2026-09-24",
     "windowDays": 7
   },
-  "inputHash": "dd5827a2551c6d55b51be5fb4db8b048840322a2c2da63e848b88ce00cdaa594",
+  "inputHash": "95a582e632fb615f29ef8b93b54e677f17ed0f07c126dfd6ad7c5ec3388bcf80",
   "movements": [
     {
       "keyword": "日本人口ランキング",
@@ -27,6 +27,33 @@
       "change": 42
     },
     {
+      "keyword": "医薬品 卸 ランキング 県 別",
+      "targetPath": "/ranking/pharmaceutical-sales-count",
+      "before": 41,
+      "after": 1,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": 40
+    },
+    {
+      "keyword": "高校 の 先生 給料",
+      "targetPath": "/ranking/high-school-teacher-annual-income",
+      "before": 65,
+      "after": 25,
+      "beforeImpressions": 1,
+      "impressions": 2,
+      "change": 40
+    },
+    {
+      "keyword": "高校教師年収",
+      "targetPath": "/ranking/high-school-teacher-annual-income",
+      "before": 65,
+      "after": 26,
+      "beforeImpressions": 1,
+      "impressions": 2,
+      "change": 39
+    },
+    {
       "keyword": "日照時間ランキング",
       "targetPath": "/blog/annual-sunshine-duration-prefecture-gap",
       "before": 39,
@@ -45,6 +72,15 @@
       "change": -38
     },
     {
+      "keyword": "site:stats47.jp",
+      "targetPath": "/areas/15000",
+      "before": 47.95890410958904,
+      "after": 10,
+      "beforeImpressions": 73,
+      "impressions": 14,
+      "change": 37.95890410958904
+    },
+    {
       "keyword": "小松 市 人口",
       "targetPath": "/areas/17000/cities/17203/population",
       "before": 11,
@@ -54,49 +90,13 @@
       "change": -37
     },
     {
-      "keyword": "旭川 人口",
-      "targetPath": "/areas/01000/cities/01204/population",
-      "before": 42,
-      "after": 8.8,
-      "beforeImpressions": 1,
-      "impressions": 5,
-      "change": 33.2
-    },
-    {
       "keyword": "site:stats47.jp",
       "targetPath": "/ranking/railway-passengers",
-      "before": 9,
-      "after": 41.91358024691358,
-      "beforeImpressions": 1,
-      "impressions": 81,
-      "change": -32.91358024691358
-    },
-    {
-      "keyword": "site:stats47.jp",
-      "targetPath": "/areas/15000",
-      "before": 10,
-      "after": 42.22093023255814,
-      "beforeImpressions": 1,
-      "impressions": 86,
-      "change": -32.22093023255814
-    },
-    {
-      "keyword": "高校 教師 年収",
-      "targetPath": "/ranking/high-school-teacher-annual-income",
-      "before": 62.666666666666664,
-      "after": 31,
-      "beforeImpressions": 6,
-      "impressions": 2,
-      "change": 31.666666666666664
-    },
-    {
-      "keyword": "ふるさと納税 募集費用",
-      "targetPath": "/ranking/furusato-fundraising-cost-prefecture",
-      "before": 42,
-      "after": 73,
-      "beforeImpressions": 3,
-      "impressions": 1,
-      "change": -31
+      "before": 47.791044776119406,
+      "after": 13.466666666666667,
+      "beforeImpressions": 67,
+      "impressions": 15,
+      "change": 34.32437810945274
     }
   ],
   "verdicts": [
@@ -107,14 +107,14 @@
     }
   ],
   "selected": {
-    "keyword": "道の駅多い県",
-    "targetPath": "/blog/roadside-station-count-prefecture-gap",
-    "rank": 8.320819112627987,
-    "impressions": 586,
-    "clicks": 1,
+    "keyword": "全国の公衆電話の数",
+    "targetPath": "/ranking/public-phone-count",
+    "rank": 6.562087582483503,
+    "impressions": 1667,
+    "clicks": 2,
     "group": 5,
     "previousMethod": null,
-    "editableFile": null
+    "editableFile": "packages/data-configs/src/metrics/public-phone-count.ts"
   },
   "observing": [
     {
