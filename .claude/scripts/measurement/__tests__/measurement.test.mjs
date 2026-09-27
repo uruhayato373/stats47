@@ -355,3 +355,18 @@ test('independent health and alert run even if an earlier artifact download fail
   }
   assert.match(alert.run, /if \[ -f \/tmp\/authenticated-health.txt \]/);
 });
+
+// 定期実行は Mac が起動した収集の補助 (2026-09-27)。意図: 同じ日の成功を、遅れて動く定期実行の auth_required で上書きしない。
+// 省略するのは schedule だけ。手動・catch-up・push は必ず収集し、Mac が止まっていた日は定期実行が収集する。
+test('scheduled collection is skipped only when today (JST) was already collected', () => {
+  const workflow = yaml.load(readFileSync('.github/workflows/authenticated-measurement.yml', 'utf8'));
+  assert.equal(workflow.jobs.collect.needs, 'gate');
+  assert.equal(workflow.jobs.collect.if, "needs.gate.outputs.skip != 'true'");
+  const check = workflow.jobs.gate.steps.find((s) => s.id === 'check');
+  assert.match(check.run, /\[ "\$EVENT" = 'schedule' \]/);
+  assert.match(check.run, /9 \* 3600000/);
+  assert.equal(workflow.jobs.gate.permissions, undefined);
+  const wrapper = readFileSync('scripts/scheduled/measurement-session-refresh.sh', 'utf8');
+  assert.match(wrapper, /refresh-session\.mjs a8 moshimo kdp --publish \|\| REFRESH_RC=/);
+  assert.match(wrapper, /gh workflow run authenticated-measurement\.yml --ref develop/);
+});
