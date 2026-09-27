@@ -3,7 +3,7 @@ import type { MetricConfig } from "../types";
 export const averageLifeExpectancyMale: MetricConfig = {
   "key": "average-life-expectancy-male",
   "title": "平均余命",
-  "subtitle": "男性",
+  "subtitle": "男性 20歳時点",
   "unit": "年",
   "category": "socialsecurity",
   "source": {
@@ -20,7 +20,7 @@ export const averageLifeExpectancyMale: MetricConfig = {
     "from": 2020,
     "to": 2020,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     "colorScheme": "interpolateBlues",
     "colorSchemeType": "sequential",

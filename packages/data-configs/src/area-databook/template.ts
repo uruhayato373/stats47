@@ -107,7 +107,9 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
           columns: 4,
           metrics: [
             {
-              rankingKey: "japanese-population",
+              // 総人口 (外国人を含む)。日本人人口だと東京都が 1,346 万人になり、人口動態ページの
+              // 1,418 万人と食い違って見えた (2026-09-27)
+              rankingKey: "total-population",
               shortLabel: "人口",
               selection: {
                 proposedBy: BOOK,
@@ -117,7 +119,7 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
             },
             {
               rankingKey: "population-density-per-km2-total-area",
-              shortLabel: "人口密度",
+              shortLabel: "人口密度(1km²当たり)",
             },
             {
               rankingKey: "future-population-change-rate-2050",

@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import { formatUnitForDisplay } from "@stats47/data-configs/unit";
+
 import { SurfaceCard } from "@/components/surface";
 
 import type { CategoryTopicListItem } from "./types";
@@ -43,9 +45,13 @@ function collapseByTitle(items: CategoryTopicListItem[]): CollapsedRow[] {
 }
 
 function TopicRow({ row }: { row: CollapsedRow }) {
-  const [primary] = row.variants;
+  // 値を出す行は総数 (subtitle なし) を優先する。内訳の値を黙って出すと総数に見える
+  // (2026-09-27: 「外国人人口 東京都 1,393.4人」が中国籍の人口10万人当たりだった)
+  const primary = row.variants.find((v) => !v.subtitle) ?? row.variants[0];
   const hasVariants = row.variants.length > 1;
-  const readerLabel = primary.readerLabel ?? row.title;
+  // 分母・内訳は subtitle が持つ (unit-semantics-standards §4)。落とすと「道路実延長 12.46km」のように実数に見える
+  const readerLabel =
+    primary.readerLabel ?? (!hasVariants && primary.subtitle ? `${row.title}（${primary.subtitle}）` : row.title);
 
   return (
     <li className="border-b border-border last:border-b-0">
@@ -69,8 +75,9 @@ function TopicRow({ row }: { row: CollapsedRow }) {
                   {" "}
                   <span className="font-bold text-foreground">
                     {primary.top1.value}
-                    {primary.unit}
+                    {formatUnitForDisplay(primary.unit)}
                   </span>
+                  {hasVariants && primary.subtitle ? <>（{primary.subtitle}）</> : null}
                 </>
               ) : null}
             </span>

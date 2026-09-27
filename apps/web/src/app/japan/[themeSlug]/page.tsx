@@ -76,7 +76,9 @@ async function loadMetricSeries(
     }));
     views.push({
       metricKey,
-      title: config.title,
+      // 分母は subtitle が持つ (unit-semantics-standards §4)。落とすと人口100万人当たりの 27 が
+      // 「図書館数 27館」と全国の総数に見える (2026-09-27)
+      title: config.subtitle && !config.title.includes(config.subtitle) ? `${config.title}（${config.subtitle}）` : config.title,
       description:
         config.description ??
         `${config.title}の公式全国値を時系列で示します。線の傾きから長期的な増減を確認できます。`,
