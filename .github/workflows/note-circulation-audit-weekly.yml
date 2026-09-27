@@ -164,6 +164,7 @@ jobs:
           NODE
             fi
             if [ -f /tmp/note-card-visibility.json ]; then
+              # shellcheck disable=SC2016 # 単一引用符内のバッククォートは JavaScript の Markdown 出力で、シェル展開させない
               node -e 'const r=require("/tmp/note-card-visibility.json"); console.log("- Card visibility: `"+JSON.stringify(r.summary)+"`"); for(const a of r.articles.filter(x=>x.issues.length).slice(0,20)) console.log("- "+a.noteUrl+": "+a.issues.map(x=>x.code).join(", "));'
             fi
           } > /tmp/note-circulation-issue.md
