@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { createHash } from 'node:crypto';
 import { buildCoverMetricsReport } from '../../note/lib/dashboard-metrics.mjs';
-import { noteInventoryAvailable, validateNoteInventory } from '../note-inventory.mjs';
+import { acceptedNoteGap, noteInventoryAvailable, validateNoteInventory } from '../note-inventory.mjs';
 import { validateAttempt, validateEvidence, validateInventoryAttempt } from '../consumer-paths.mjs';
 import { SOURCES } from '../sources.mjs';
 import { measurementHealth } from '../health.mjs';
@@ -76,4 +76,20 @@ test('latest failed or stale attempt cannot fall back to an old successful inven
     { ...evidence, source: 'gsc' }, { ...evidence, files: { other: 'old' } }]) {
     assert.throws(() => validateEvidence(tied, value, 'note'), /evidence_attempt_mismatch/);
   }
+});
+
+test('note: オーナーが許容した「1 記事だけ一覧に出ない」欠けは既知の欠けとして通し、それ以外は通さない', () => {
+  const snapshot = { status: 'incomplete', issues: [{ code: 'catalog_article_missing', noteId: 'na2' }],
+    coverage: { paginationComplete: true, totalsMatched: true, missingFromDashboard: ['na2'] } };
+  const cover = { status: 'incomplete', issues: ['metrics_incomplete'] };
+  assert.deepEqual(acceptedNoteGap(snapshot, cover), { code: 'note_dashboard_row_hidden', missingRows: 1, acceptedBy: 'owner-2026-09-27' });
+  // 2 件欠けたら許容しない
+  assert.equal(acceptedNoteGap({ ...snapshot, coverage: { ...snapshot.coverage, missingFromDashboard: ['na2', 'na3'] } }, cover), null);
+  // 合計が合わない・ページを読み切れていないなら許容しない
+  assert.equal(acceptedNoteGap({ ...snapshot, coverage: { ...snapshot.coverage, totalsMatched: false } }, cover), null);
+  assert.equal(acceptedNoteGap({ ...snapshot, coverage: { ...snapshot.coverage, paginationComplete: false } }, cover), null);
+  // 記事の欠け以外の問題が混ざったら許容しない
+  assert.equal(acceptedNoteGap({ ...snapshot, issues: [...snapshot.issues, { code: 'login_required' }] }, cover), null);
+  // カバー側の別の失敗も許容しない
+  assert.equal(acceptedNoteGap(snapshot, { status: 'failed', issues: ['cover_missing'] }), null);
 });

@@ -48,3 +48,24 @@ export function validateNoteInventory(snapshot, cover, now = Date.now()) {
 export function noteInventoryAvailable(snapshot, cover, now = Date.now()) {
   try { validateNoteInventory(snapshot, cover, now); return true; } catch { return false; }
 }
+
+/**
+ * note のダッシュボードが短い集計期間だけ公開記事を一覧に出さない件 (2026-09-21 に 285/286 件で観測) を、
+ * 2026-09-27 のオーナー判断で「原因不明の既知の欠け」として許容する。問い合わせはしない。
+ * 許容するのは、欠けが記事の欠落だけで・件数が上限以内で・全ページを読み切り・合計が一致する場合に限る。
+ * 欠けた記事の値は 0 にせず null のまま残す (既存の棚卸し契約どおり)。
+ */
+export const NOTE_ACCEPTED_MISSING_ROWS = 1;
+
+export function acceptedNoteGap(snapshot, cover) {
+  const coverage = snapshot?.coverage ?? {};
+  const missing = coverage.missingFromDashboard?.length ?? Number.POSITIVE_INFINITY;
+  const onlyMissingArticles = Array.isArray(snapshot?.issues) && snapshot.issues.length > 0
+    && snapshot.issues.every(issue => issue.code === 'catalog_article_missing');
+  const coverOk = cover?.status === 'pass'
+    || (cover?.status === 'incomplete' && JSON.stringify(cover.issues) === JSON.stringify(['metrics_incomplete']));
+  if (snapshot?.status !== 'incomplete' || !onlyMissingArticles || !coverOk) return null;
+  if (missing < 1 || missing > NOTE_ACCEPTED_MISSING_ROWS) return null;
+  if (coverage.paginationComplete !== true || coverage.totalsMatched !== true) return null;
+  return { code: 'note_dashboard_row_hidden', missingRows: missing, acceptedBy: 'owner-2026-09-27' };
+}
