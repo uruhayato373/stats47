@@ -17,7 +17,8 @@ name: 📊 Fetch Affiliate GA4 Metrics & Operations State
 #   - 生 snapshot ga4-affiliate-<date>.json は git に足さず R2 `state/ads/ga4-affiliate/` へ push する
 #     (公開 URL。ローカルは `npm run state:pull -- ads/ga4-affiliate` で live/ に取得。lifecycle 400 日)。
 #   - git には週次集約 `.claude/state/ads/ga4-affiliate-history.csv` と
-#     `.claude/state/ads/affiliate-experiment-history.csv` だけを commit-back する。
+#     `.claude/state/ads/affiliate-experiment-history.csv`、および認証付き収集の保管庫から取り出した
+#     ASP 成果 (`.claude/state/metrics/affiliate/{a8-results,a8-report-log,a8-ui-last-run,moshimo-results}.json`) を commit-back する。
 #     前者は vertical × position、後者は experiment × variant の非重複週次累積に使う。
 #   - artifact は従来どおり 30 日 (デバッグ用)。
 
@@ -219,8 +220,14 @@ jobs:
         env:
           MEASUREMENT_VAULT_KEY: ${{ secrets.MEASUREMENT_VAULT_KEY }}
         run: |
-          node .claude/scripts/measurement/restore.mjs moshimo --if-activated
-          node .claude/scripts/measurement/restore.mjs a8 --if-activated
+          # ASP ごとに独立して取り出す。1 つの認証切れで他の ASP と週次集計全体を止めない
+          # (2026-09-21 は A8、2026-09-26 以降はもしもの認証切れで operations が丸ごと落ちる形だった)。
+          # 認証切れの通知は authenticated-measurement.yml の Issue が担う。取り出せなかった ASP は git の前回値のまま残り、
+          # portfolio / 週次 NSM は観測日から鮮度を判定する。
+          for SOURCE in moshimo a8; do
+            node .claude/scripts/measurement/restore.mjs "$SOURCE" --if-activated \
+              || echo "::warning::${SOURCE} の成果を保管庫から取り出せなかった (認証切れ等)。前回値のまま進める"
+          done
           npx -y tsx .claude/scripts/ads/build-affiliate-portfolio-state.ts | tee /tmp/affiliate-portfolio.md
           npx -y tsx .claude/scripts/ads/build-affiliate-portfolio-state.ts --check
           npx -y tsx .claude/scripts/ads/build-affiliate-operations-state.ts | tee /tmp/affiliate-operations.md
@@ -285,6 +292,38 @@ jobs:
             process.exit(1);
           }
           NODE
+
+      # 保管庫から取り出した ASP 成果 (restore の許可リストにある集計値だけ) を develop へ書き戻す。
+      # 管理画面 /affiliate と週次メトリクス Issue の NSM 節は git 上のこのファイルを読む。
+      # 書き戻しが無かった間 (〜2026-09-27) は、毎日の収集が成功していても git の a8-results.json が 08-28 のまま止まっていた。
+      - name: 💾 Commit back restored ASP outcomes
+        id: outcomes
+        if: always() && steps.operations.outcome == 'success'
+        run: |
+          set -euo pipefail
+          FILES=(
+            .claude/state/metrics/affiliate/a8-results.json
+            .claude/state/metrics/affiliate/a8-report-log.json
+            .claude/state/metrics/affiliate/a8-ui-last-run.json
+            .claude/state/metrics/affiliate/moshimo-results.json
+          )
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- "${FILES[@]}"
+          if git diff --cached --quiet; then
+            echo "ASP 成果に変更なし"
+            exit 0
+          fi
+          git commit -m "chore(ads): restore ASP outcomes from authenticated measurement [skip ci]"
+          PUSHED=false
+          for ATTEMPT in 1 2 3; do
+            if git pull --rebase --autostash origin develop && git push origin HEAD:develop; then
+              PUSHED=true
+              break
+            fi
+            sleep $((ATTEMPT * 5))
+          done
+          [ "$PUSHED" = "true" ] || { echo "::error::ASP 成果の commit-back に失敗"; exit 1; }
 
       - name: 📤 Upload read-only portfolio state
         if: always()
