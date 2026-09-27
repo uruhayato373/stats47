@@ -23,6 +23,130 @@ export interface StaticMeasurement {
   duplicate_data_source_sections: number;
   external_links_same_tab: number;
   image_urls: string[];
+  internal_jargon_terms: number;
+  unit_symbol_mixing: number;
+  abnormal_value_strings: number;
+  same_shop_ad_duplicates: number;
+  /** `<title>` の文字列。週次で前回と比べる (title_changed)。 */
+  page_title: string | null;
+  /** 違反の場所を特定するための指摘 (語・店・文字列)。 */
+  semantic_findings: string[];
+}
+
+/**
+ * 読者に見せてはいけない内部用語の辞書 (SITE-DISPLAY-SEMANTICS-AUDIT-01)。
+ * 開発・運用の文書にしか出ない語だけを置く。一般語 (「正典」「整合」等) は記事本文で正当に使うので入れない。
+ * 語を足したら `__tests__/semantic-static.test.mjs` の誤検知テストも足す。
+ */
+export const INTERNAL_JARGON_TERMS: readonly string[] = [
+  "保存則",
+  "SSOT",
+  "rankingKey",
+  "isActive",
+  "canonical着地",
+  "lineage",
+  "TODO",
+  "FIXME",
+  "TBD",
+  "Lorem ipsum",
+  "placeholder",
+];
+
+/** 値の描画に失敗したときに出る文字列。英単語の一部 (「undefinedness」等) は数えない。 */
+const ABNORMAL_VALUE_PATTERN = /(?<![A-Za-z])(NaN|undefined|Infinity|\[object Object\])(?![A-Za-z])/g;
+const PERCENT_HALF = /\d\s*%/g;
+const PERCENT_FULL = /\d\s*％/g;
+
+/** 画面に見える文字だけ (script / style / RSC payload を除く)。 */
+function visibleText($: cheerio.CheerioAPI): string {
+  const body = $("body").clone();
+  // code / pre は記事が説明のために示すコード (「NaN を返さず throw」等)。2026-09-27 の全 URL 実測で
+  // abnormal_value の該当 7 件がすべてこれだった
+  body.find("script, style, noscript, template, svg title, code, pre").remove();
+  // 要素の境目で文字がつながると語の境界判定が崩れる (「[object Object]Nanaimo」) ので空白を挟む
+  body.find("*").append(" ");
+  return body.text().replace(/\s+/g, " ");
+}
+
+/**
+ * 広告リンクの「店」(ASP の案件)。同じ店の広告が別のクリエイティブ (バナーとテキスト) で並ぶのを数える。
+ * 案件 ID の取り出し方は `.claude/scripts/ads/lib/affiliate-offer-core.mjs` の programRef と同じ
+ * (A8 = a8mat の 2 番目の token / もしも = p_id / afb = a / バリューコマース = pid)。楽天は遷移先の店。
+ */
+export function adShopKey(href: string): string | null {
+  let u: URL;
+  try {
+    u = new URL(href);
+  } catch {
+    return null;
+  }
+  const a8 = href.match(/a8mat=[^+&]+[+]([^+&]+)/i)?.[1];
+  if (a8) return `a8:${a8}`;
+  if (u.hostname === "af.moshimo.com") return u.searchParams.get("p_id") ? `moshimo:${u.searchParams.get("p_id")}` : null;
+  if (/afi-b\.com$/.test(u.hostname)) return u.searchParams.get("a") ? `afb:${u.searchParams.get("a")}` : null;
+  if (/valuecommerce/.test(u.hostname)) return u.searchParams.get("pid") ? `valuecommerce:${u.searchParams.get("pid")}` : null;
+  if (/rakuten\.co\.jp$/.test(u.hostname)) {
+    const target = u.searchParams.get("pc");
+    if (!target) return null;
+    try {
+      const t = new URL(target);
+      const shop = t.hostname === "item.rakuten.co.jp" ? t.pathname.split("/")[1] : t.hostname;
+      return `rakuten:${shop}`;
+    } catch {
+      return null;
+    }
+  }
+  return null;
+}
+
+/** 表示の意味の静的検査 (内部用語・単位記号の揺れ・異常文字列・同じ店の広告の重複)。 */
+export function analyzeSemantics($: cheerio.CheerioAPI, sponsoredHrefs: string[]) {
+  const text = visibleText($);
+  const findings: string[] = [];
+
+  let jargon = 0;
+  for (const term of INTERNAL_JARGON_TERMS) {
+    const re = new RegExp(`(?<![A-Za-z])${term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}(?![A-Za-z])`, "g");
+    const hits = text.match(re)?.length ?? 0;
+    if (hits > 0) findings.push(`internal_jargon: ${term} ×${hits}`);
+    jargon += hits;
+  }
+
+  const half = text.match(PERCENT_HALF)?.length ?? 0;
+  const full = text.match(PERCENT_FULL)?.length ?? 0;
+  // 両方が出るときだけ揺れ。件数は少ない方 (直す箇所の数) を数える
+  const mixing = half > 0 && full > 0 ? Math.min(half, full) : 0;
+  if (mixing > 0) findings.push(`unit_symbol_mixing: % ×${half} / ％ ×${full}`);
+
+  const abnormal = [...text.matchAll(ABNORMAL_VALUE_PATTERN)];
+  for (const m of abnormal.slice(0, 5)) {
+    const at = m.index ?? 0;
+    findings.push(`abnormal_value: …${text.slice(Math.max(0, at - 20), at + m[0].length + 20).trim()}…`);
+  }
+
+  const byShop = new Map<string, Set<string>>();
+  for (const href of sponsoredHrefs) {
+    const shop = adShopKey(href);
+    if (!shop) continue;
+    byShop.set(shop, (byShop.get(shop) ?? new Set()).add(href));
+  }
+  // 同じ href の重複は ad_duplicate_count が数える。ここは「同じ店・別リンク」だけ
+  let sameShop = 0;
+  for (const [shop, hrefs] of byShop) {
+    if (hrefs.size > 1) {
+      sameShop += hrefs.size - 1;
+      findings.push(`same_shop_ads: ${shop} ×${hrefs.size}`);
+    }
+  }
+
+  return {
+    internal_jargon_terms: jargon,
+    unit_symbol_mixing: mixing,
+    abnormal_value_strings: abnormal.length,
+    same_shop_ad_duplicates: sameShop,
+    page_title: $("head > title").first().text().trim() || null,
+    semantic_findings: findings,
+  };
 }
 
 const unmeasured = (reason: string): MetricValue => ({ value: null, reason });
@@ -211,6 +335,7 @@ export function analyzeHtml(html: string, baseUrl: string): StaticMeasurement {
     duplicate_data_source_sections: duplicateDataSourceSections,
     external_links_same_tab: externalLinksSameTab,
     image_urls: [...imageUrls],
+    ...analyzeSemantics($, sponsoredHrefs),
   };
 }
 
@@ -246,4 +371,8 @@ export const STATIC_METRIC_KEYS: MetricKey[] = [
   "empty_headings",
   "duplicate_data_source_sections",
   "external_links_same_tab",
+  "internal_jargon_terms",
+  "unit_symbol_mixing",
+  "abnormal_value_strings",
+  "same_shop_ad_duplicates",
 ];

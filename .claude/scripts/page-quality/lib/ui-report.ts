@@ -15,7 +15,36 @@ export const UI_METRIC_KEYS: MetricKey[] = [
   "blog_svg_text_issues",
   "a11y_violations",
   "responsive_layout_issues",
+  "internal_jargon_terms",
+  "unit_symbol_mixing",
+  "abnormal_value_strings",
+  "same_shop_ad_duplicates",
+  "title_changed",
+  "small_text_count",
+  "mobile_page_height",
 ];
+
+/**
+ * `<title>` の週次変化 (title_changed = 1/0)。前回の週次結果に同じ URL の title があるときだけ測る。
+ * title は検索結果の見出しなので、選定入力が変わらないのに毎週変わるのは表示の選び方が不安定な証拠
+ * (2026-09-25 県ページの title が R2 の読み出し順で決まっていた。AREA-HIGHLIGHTS-SSOT-01)。
+ */
+export function applyTitleChanges(results: PageAuditResult[], previous: AuditRun | null): number {
+  if (!previous) return 0;
+  const before = new Map(previous.results.map((r) => [r.url, r.page_title]));
+  let changed = 0;
+  for (const r of results) {
+    const prev = before.get(r.url);
+    if (typeof prev !== "string" || typeof r.page_title !== "string") continue;
+    const isChanged = prev !== r.page_title;
+    r.metrics.title_changed = isChanged ? 1 : 0;
+    if (isChanged) {
+      changed += 1;
+      r.ui_findings = [...(r.ui_findings ?? []), `title_changed: 「${prev}」→「${r.page_title}」`];
+    }
+  }
+  return changed;
+}
 
 /** 前回の週次結果に無かった UI 違反。前回が無ければ全件を新規として返す。 */
 export function newUiViolations(current: AuditRun, previous: AuditRun | null): { violations: Violation[]; firstRun: boolean } {

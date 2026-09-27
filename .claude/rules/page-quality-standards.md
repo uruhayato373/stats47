@@ -116,6 +116,21 @@ variants を key 順に 4 つへ分けたうちの 1 組 (ISO 週番号で決め
   (`regenerate-blog-svgs.yml` の slug 指定) を出力する。**R2 への反映はオーナー承認が要る**ので、ループは
   `[実行:ユーザー]` カードを起票して `--mark-owner` で紐付ける (勝手に dispatch しない)。
 
+## 表示の意味の検査 (SITE-DISPLAY-SEMANTICS-AUDIT-01・2026-09-27)
+
+レイアウトの崩れとは別に、ラベル・数値・用語の「意味」を 3 層で見る。違反は `UI_METRIC_KEYS` 経由で上の UI 指摘キューに入り、
+カード本文に `semanticFixGuide` (定義単位で直す) が載る。
+
+1. **定義 (コミット前・CI)**: `npm run validate:display-semantics -w @stats47/data-configs`。規約は `area-databook-standards.md` §7。
+2. **全URL (静的・週次)**: `internal_jargon_terms` (内部用語の辞書 `INTERNAL_JARGON_TERMS`)・`unit_symbol_mixing` (同じページの `%` と `％`)・
+   `abnormal_value_strings` (`NaN`/`undefined`/`Infinity`/`[object Object]`)・`same_shop_ad_duplicates` (同じ ASP 案件の別リンク。
+   同じ href は従来の `ad_duplicate_count`)・`title_changed` (前回の週次 `latest.json` の `page_title` と比較。前回に無い URL は測らない)。
+   画面に見える文字だけを見る (script・RSC payload は除く)。場所は `ui_findings` に出る。
+3. **代表URL・variants (ブラウザ・412px)**: `small_text_count` (11px 未満の見える文字。SVG チャート内は `chart_text_issues` の担当なので除く)・
+   `mobile_page_height` (ページ全体の高さ)。予算はテンプレート別。
+
+**重さ**: 全コーパスで該当率を測ってから決めた (初回の実測は `page-quality-budgets.json` の各 note)。誤検知の出る規則は blocker にしない。
+
 ## UI 検査の判定 (誤検知を出さないための除外)
 
 実装は `lib/measure-static.ts` (静的) / `lib/check-images.ts` (画像) / `lib/ui-probe.ts` (ブラウザ)。

@@ -217,6 +217,53 @@ export function evaluateLayoutIssues(page: Page): Promise<LayoutIssues> {
   ) as Promise<LayoutIssues>;
 }
 
+/** これ未満の文字を「小さすぎる文字」と数える (SITE-DISPLAY-SEMANTICS-AUDIT-01 の実測基準 11px)。 */
+export const SMALL_TEXT_PX = 11;
+
+export interface TypographyMetrics {
+  /** 画面に見える文字を持つ要素のうち、文字の大きさが SMALL_TEXT_PX 未満の数。 */
+  small_text_count: number;
+  /** ページ全体の高さ (px)。 */
+  page_height: number;
+  /** 小さい文字の例 (最大 10 件)。 */
+  samples: string[];
+}
+
+/**
+ * ブラウザ内で評価する。チャートの SVG 内の文字は UI-CHART-TEXT-LOOP-01 (chart_text_issues) の担当なので除く。
+ * 見えない要素 (display:none・大きさ 0・sr-only のような 1px の枠) と、文字を直接持たない要素は数えない。
+ */
+export function collectTypographyMetrics(): TypographyMetrics {
+  const limit = 11;
+  const samples: string[] = [];
+  let count = 0;
+  const elements = Array.from(document.body.querySelectorAll("*"));
+  for (const el of elements) {
+    if (el.closest("svg, script, style, noscript, template")) continue;
+    const ownText = Array.from(el.childNodes)
+      .filter((n) => n.nodeType === Node.TEXT_NODE)
+      .map((n) => n.textContent ?? "")
+      .join("")
+      .trim();
+    if (ownText === "") continue;
+    const style = getComputedStyle(el);
+    if (style.display === "none" || style.visibility === "hidden" || Number(style.opacity) === 0) continue;
+    const rect = el.getBoundingClientRect();
+    if (rect.width <= 1 || rect.height <= 1) continue;
+    const size = parseFloat(style.fontSize);
+    if (!(size < limit)) continue;
+    count += 1;
+    if (samples.length < 10) samples.push(`${size}px「${ownText.slice(0, 20)}」`);
+  }
+  return { small_text_count: count, page_height: document.documentElement.scrollHeight, samples };
+}
+
+export function evaluateTypography(page: Page): Promise<TypographyMetrics> {
+  return page.evaluate(
+    `(() => { const __name = (fn) => fn; return (${collectTypographyMetrics.toString()})(); })()`
+  ) as Promise<TypographyMetrics>;
+}
+
 export interface UiProbeResult {
   clipped_text: MetricValue;
   overlapping_tap_targets: MetricValue;

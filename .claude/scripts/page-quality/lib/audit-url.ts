@@ -38,6 +38,7 @@ export async function auditUrl(
   let jsonldErrors: string[] = [];
   let imageUrls: string[] | undefined;
   let uiFindings: string[] = [];
+  let pageTitle: string | null | undefined;
 
   try {
     const { status, html, bytes } = await fetchHtml(url);
@@ -59,6 +60,12 @@ export async function auditUrl(
       metrics.empty_headings = analysis.empty_headings;
       metrics.duplicate_data_source_sections = analysis.duplicate_data_source_sections;
       metrics.external_links_same_tab = analysis.external_links_same_tab;
+      metrics.internal_jargon_terms = analysis.internal_jargon_terms;
+      metrics.unit_symbol_mixing = analysis.unit_symbol_mixing;
+      metrics.abnormal_value_strings = analysis.abnormal_value_strings;
+      metrics.same_shop_ad_duplicates = analysis.same_shop_ad_duplicates;
+      pageTitle = analysis.page_title;
+      uiFindings = [...uiFindings, ...analysis.semantic_findings];
       imageUrls = analysis.image_urls;
       jsonldTypeCounts = analysis.jsonld_type_counts;
       jsonldErrors = analysis.jsonld_errors;
@@ -89,7 +96,9 @@ export async function auditUrl(
     metrics.overlapping_tap_targets = browserMetrics.overlapping_tap_targets;
     metrics.chart_text_issues = browserMetrics.chart_text_issues;
     metrics.a11y_violations = browserMetrics.a11y_violations;
-    uiFindings = browserMetrics.ui_findings;
+    metrics.small_text_count = browserMetrics.small_text_count;
+    metrics.mobile_page_height = browserMetrics.mobile_page_height;
+    uiFindings = [...uiFindings, ...browserMetrics.ui_findings];
   }
 
   return {
@@ -105,5 +114,6 @@ export async function auditUrl(
     jsonld_errors: jsonldErrors,
     ...(uiFindings.length > 0 ? { ui_findings: uiFindings } : {}),
     ...(imageUrls ? { image_urls: imageUrls } : {}),
+    ...(pageTitle !== undefined ? { page_title: pageTitle } : {}),
   };
 }
