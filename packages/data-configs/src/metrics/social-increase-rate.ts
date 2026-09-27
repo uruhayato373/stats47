@@ -21,7 +21,7 @@ export const socialIncreaseRate: MetricConfig = {
     "from": 2018,
     "to": 2019,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     "colorScheme": "interpolateRdBu",
     "colorSchemeType": "diverging",

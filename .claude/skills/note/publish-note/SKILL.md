@@ -327,6 +327,10 @@ node .claude/scripts/note/sync-note-r2.mjs  # または develop push でCIに委
 
 ## トラブルシューティング
 
+公開済み記事の空白リンクカードは `npm run note:cards:audit -- --browser-verify --output .claude/state/metrics/note/card-visibility-latest.json` で全量監査する。ブラウザ確認に失敗した記事があれば同じ出力を入力に `--retry-unknown-from .claude/state/metrics/note/card-visibility-latest.json` で失敗分だけ再検証する。`unknownCards` が残る場合は修復対象にしない。
+
+Mac の `stats47` 専用プロファイルを `npm run note:session:check` で確認し、`npm run note:cards:repair-batch -- --max-articles 1 --max-cards 2` で対象を表示、`--commit` を付けて小分けに更新する。各カードの公開後検証に失敗したら journal (`.local/note-card-repair-journal.json`) を確認し、記事の下書きを回復するまで再実行しない。カード前の空段落はカードを公開した後に `npm run note:cards:compact-spacing -- --note-key n... --commit` で記事単位に詰め、再監査で `emptyCards=0` と `spacingIssues=0` を確認する。
+
 要素検索ヘルパー（`find_idx` / `find_idx_retry`）、実証済みの要素パターン、state 最小化ガイドライン、エラーハンドリングの詳細は **[references/troubleshooting.md](references/troubleshooting.md)** を参照。
 
 ## 参照

@@ -36,7 +36,8 @@ export const KINDLE_FIGURE_CORRECTIONS: Readonly<Record<string, readonly Editori
   "future-burden-ratio-extreme-gap/future-burden-ratio-tile-grid": [{ ...NENDO("2022", ">2022年<"), reason: "[K-S1-06 F-003-16] 年度" }],
   // ── K-S1-08 エネルギー (F-05-13: 9 指標すべて yearFormat=fiscal) ──
   "energy-consumption-structure-shift/energy-map": [{ ...NENDO("2022", ">2022年<"), reason: "[K-S1-08 F-05-13] 年度" }],
-  "renewable-energy-regional-gap/solar-power-housing-map": [{ ...NENDO("2023", ">2023年<"), reason: "[K-S1-08 F-05-13] 年度" }],
+  // solar-power-housing-map は外した (2026-09-27): 原典の住宅・土地統計調査は 10 月 1 日時点で公式表記も「令和5年住宅・土地統計調査」。
+  // config を yearFormat: calendar に直したので、図の「2023年」が正しく、年度へ書き換えると誤りになる。
   "electricity-demand-gap/electricity-demand-ranking": [{ ...NENDO("2023", ">　2023年<"), reason: "[K-S1-08 F-05-13] 年度" }],
   "energy-infrastructure-gas-electricity/gas-ratio-map": [{ ...NENDO("2016", ">2016年<"), reason: "[K-S1-08 F-05-13] 年度" }],
   "gasoline-car-society-map/gasoline-map": [{ ...NENDO("2023", ">2023年<"), reason: "[K-S1-08 F-05-13] 年度" }],

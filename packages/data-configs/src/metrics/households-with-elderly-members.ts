@@ -16,7 +16,7 @@ export const householdsWithElderlyMembers: MetricConfig = {
     "prefecture",
   ],
   "years": "all",
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     "colorScheme": "interpolateBlues",
     "colorSchemeType": "sequential",

@@ -6,6 +6,7 @@
  * 欠けた入力は 0 に丸めず status で区別する (evidence-based-judgment)。
  */
 import { reconcileDimensions } from "../../google-admin/dimension-ledger.mjs";
+import { isoWeekOf, isoWeekRange } from "./periods.mjs";
 
 /** 登録すれば値別の内訳を読める最低発火量 (28 日)。これ未満は登録しても判定の標本にならない。 */
 export const MIN_EVENTS_FOR_BREAKDOWN = 100;
@@ -97,12 +98,12 @@ export function summarizeWorkContext(landingRows) {
   const sessions = sum(rows, (r) => r.sessions);
   const weighted = (key) => (sessions > 0 ? Number((sum(rows, (r) => r[key] * r.sessions) / sessions).toFixed(3)) : null);
   const baseline = { sessions, desktopShare: weighted("desktopShare"), workdayHoursShare: weighted("workdayHoursShare") };
-  const top = rows
+  const qualifying = rows
     .filter((r) => r.sessions >= WORK_CONTEXT_MIN_SESSIONS
       && r.desktopShare > baseline.desktopShare && r.workdayHoursShare > baseline.workdayHoursShare)
-    .sort((a, b) => b.sessions * b.desktopShare * b.workdayHoursShare - a.sessions * a.desktopShare * a.workdayHoursShare)
-    .slice(0, WORK_CONTEXT_TOP);
-  return { baseline, top };
+    .sort((a, b) => b.sessions * b.desktopShare * b.workdayHoursShare - a.sessions * a.desktopShare * a.workdayHoursShare);
+  // qualifyingSessions は KPI work-context-sessions の値 (上位 N 件に切らない全件の合計)
+  return { baseline, qualifyingSessions: sum(qualifying, (r) => r.sessions), top: qualifying.slice(0, WORK_CONTEXT_TOP) };
 }
 
 /** 台帳上「登録が要るのに GA4 に無い」パラメータを、イベントの発火量つきでまとめる。 */
@@ -259,6 +260,224 @@ export function countOpsImprovements(entries) {
 
 const pct = (v) => (v == null ? "—" : `${(v * 100).toFixed(1)}%`);
 
+/**
+ * rolling28d の値を比べる相手。隣の週は 21 日が重複するので WoW と呼べない。4 週前なら窓が重ならない
+ * (収益化戦略 §1・search-growth weekly-cycle-contract)。
+ */
+export const KPI_COMPARE_WEEKS_BACK = 4;
+
+/** YYYY-Www を n 週ずらす (週の月曜を日付でずらし、ISO 週へ戻す)。 */
+export function shiftIsoWeek(week, n) {
+  return isoWeekOf(addDaysIso(isoWeekRange(week).monday, n * 7));
+}
+
+/** 整合性監査の中で「指標単位の不合格」を表す一覧 (いずれかに入った指標を不合格と数える)。 */
+const INTEGRITY_FAILURE_LISTS = [
+  ["itemMissing"], ["valuesMissing"], ["yearMismatch"],
+  ["stats", "missing"], ["stats", "empty"], ["stats", "drift"],
+  ["normalized", "missing"], ["normalized", "stale"],
+  ["shape", "violations"],
+  ["recipe", "unbaked"], ["recipe", "drift"], ["recipe", "configMissing"],
+  ["valueVerification", "profileViolated"],
+  ["calculated", "staleYears"], ["calculated", "depsMissing"],
+];
+
+const keyOf = (v) => (typeof v === "string" ? v : v?.key ?? v?.rankingKey ?? v?.metric ?? null);
+
+/**
+ * データ品質ゲート通過率 = 週次のランキング整合性監査で、どの検査にも引っかからなかった公開指標の割合。
+ * 検査の定義は ranking-integrity-audit (週次 CI) が持ち、ここは一覧を数えるだけ。
+ * @param {object|null} audit .claude/state/ranking/integrity-audit.json
+ */
+export function summarizeDataQuality(audit) {
+  const active = Number(audit?.totals?.activeKeys);
+  if (!audit || !Number.isFinite(active) || active <= 0) return null;
+  const failing = new Map();
+  for (const path of INTEGRITY_FAILURE_LISTS) {
+    const list = path.reduce((v, k) => v?.[k], audit);
+    if (!Array.isArray(list)) continue;
+    for (const item of list) {
+      const key = keyOf(item);
+      if (key) failing.set(key, [...(failing.get(key) ?? []), path.join(".")]);
+    }
+  }
+  return {
+    generatedAt: audit.generatedAt ?? null,
+    active,
+    failing: failing.size,
+    passRate: ratio(active - failing.size, active),
+    byCheck: Object.fromEntries(
+      INTEGRITY_FAILURE_LISTS.map((path) => [path.join("."), path.reduce((v, k) => v?.[k], audit)])
+        .filter(([, list]) => Array.isArray(list) && list.length > 0)
+        .map(([name, list]) => [name, list.length]),
+    ),
+  };
+}
+
+/**
+ * 有料購入 = 販売台帳で期間末が今週の実売記録。台帳は手で証拠付きの記録を足す方式で、KDP・ココナラ・note の
+ * 売上を自動で取り込む経路が無い。よって記録 0 件でも販売中の商品があれば 0 件と書かず判定不能にする
+ * (週次 Issue の productRevenueLine と同じ扱い)。
+ */
+export function summarizePaidPurchases({ ledger, liveProductCount, weekStart, weekEnd }) {
+  const observations = Array.isArray(ledger?.observations) ? ledger.observations : null;
+  if (observations == null) return { status: "missing", value: null, note: "sales-ledger.json が無い" };
+  const inWeek = observations.filter((o) => typeof o?.periodEnd === "string" && o.periodEnd >= weekStart && o.periodEnd <= weekEnd);
+  if (inWeek.length > 0) {
+    const total = inWeek.reduce((sum, o) => sum + (Number(o.netRevenueYen) || 0), 0);
+    return { status: "ok", value: `${inWeek.length} 件・¥${total.toLocaleString("ja-JP")}` };
+  }
+  if (liveProductCount === 0) return { status: "ok", value: "0 件", note: "販売中の商品なし" };
+  return {
+    status: "unmeasurable",
+    value: null,
+    note: `今週の実売記録 0 件${liveProductCount == null ? "" : `・販売中は少なくとも ${liveProductCount} 点`}。売上を台帳へ自動で入れる経路が無いので 0 件とは限らない`,
+  };
+}
+
+/**
+ * KPI ツリー (事業計画 catalog → kpi-tree.json) の各ノードに、今週の値・非重複の比較値・ぶら下がる施策を付ける。
+ * 値を出せないノードは 0 にせず status で理由を示す (not-connected = 計測サイクルに未接続、stale / missing = 入力の欠落)。
+ *
+ * @param {object} input
+ * @param {Array<{id,label,tier,measurementStatus,unit}>|null} input.nodes kpi-tree.json の nodes
+ * @param {string} input.week
+ * @param {string} input.asOf
+ * @param {Array<object>|null} input.gscHistory .claude/state/metrics/gsc/history.csv
+ * @param {Array<object>|null} input.cycleHistory measurement-cycle/history.csv (今週の行を除く過去分)
+ * @param {object|null} input.journey summarizeJourney の結果
+ * @param {object|null} input.workContext summarizeWorkContext の結果
+ * @param {Array<object>|null} input.affiliateRows .claude/state/ads/ga4-affiliate-history.csv
+ * @param {object|null} input.operations buildOperations の結果
+ * @param {object|null} input.authenticated .claude/state/metrics/authenticated/latest.json (ASP・note・KDP 等の認証付き収集)
+ * @param {Array<{id:string, kpis:string[]|null}>} input.improvementRows strategy-lanes.parseImprovementRows
+ * @param {string[]} input.focusKpis 今月の重点レーンの KPI id
+ * @param {number} input.maxActive active 施策の上限
+ */
+export function summarizeKpiTree({ nodes, week, asOf, gscHistory, cycleHistory, journey, workContext, affiliateRows, operations, authenticated = null, dataQuality = null, paidPurchases = null, improvementRows, focusKpis, maxActive }) {
+  if (!nodes) return null;
+  const prevWeek = shiftIsoWeek(week, -KPI_COMPARE_WEEKS_BACK);
+  const gscNow = gscHistory?.find((r) => r.week === week) ?? null;
+  const gscPrev = gscHistory?.find((r) => r.week === prevWeek) ?? null;
+  const cyclePrev = cycleHistory?.find((r) => r.week === prevWeek) ?? null;
+  const num = (v) => (v === "" || v == null || Number.isNaN(Number(v)) ? null : Number(v));
+  const aff = (affiliateRows ?? [])
+    .filter((r) => r.affiliate_vertical === "_all" && r.link_position === "_all" && r.date <= asOf)
+    .sort((a, b) => a.date.localeCompare(b.date) || Number(a.days) - Number(b.days))
+    .at(-1) ?? null;
+  const affStale = aff ? aff.date < addDaysIso(asOf, -OPS_WINDOW_DAYS) : true;
+  const psi = operations?.psi ?? null;
+  const cf = operations?.cloudflare ?? null;
+  const sns = operations?.sns ?? null;
+  const freshnessChecks = [
+    { name: "gsc", ok: Boolean(gscNow) },
+    { name: "ga4", ok: Boolean(journey) && Boolean(workContext) },
+    { name: "affiliate", ok: Boolean(aff) && !affStale },
+    { name: "psi", ok: psi?.status === "ok" },
+    { name: "cloudflare", ok: cf?.status === "ok" },
+    { name: "sns", ok: sns?.status === "ok" },
+    // 認証付き収集 (ASP 成果・販売実績)。認証切れは cron が緑のまま観測だけ止まる経路なので個別に数える
+    ...(authenticated?.sources ?? []).map((src) => ({ name: `${src.source}${src.code ? `(${src.code})` : ""}`, ok: src.status === "pass" })),
+  ];
+
+  /** @returns {{status:string, value:string|null, previous:string|null, note?:string}} */
+  const valueOf = (id) => {
+    switch (id) {
+      case "weekly-revenue":
+        return { status: "see-nsm", value: null, previous: null, note: "内訳と判定不能の理由は週次 Issue の「週次収益 (NSM)」節" };
+      case "search-clicks":
+        return gscNow
+          ? { status: "ok", value: `${num(gscNow.clicks_rolling28d)}`, previous: gscPrev ? `${num(gscPrev.clicks_rolling28d)}` : null }
+          : { status: "missing", value: null, previous: null, note: `gsc/history.csv に ${week} の行が無い` };
+      case "site-circulation-rate":
+        return journey
+          ? { status: "ok", value: pct(journey.blogToRanking.rate), previous: num(cyclePrev?.blogToRankingRate) == null ? null : pct(num(cyclePrev.blogToRankingRate)) }
+          : { status: "missing", value: null, previous: null, note: "GA4 internal-transitions / pages-clean が無い" };
+      case "work-context-sessions":
+        return workContext
+          ? { status: "ok", value: `${workContext.qualifyingSessions}`, previous: num(cyclePrev?.workContextSessions) == null ? null : `${num(cyclePrev.workContextSessions)}` }
+          : { status: "missing", value: null, previous: null, note: "GA4 landing-context が無い" };
+      case "affiliate-yield":
+        if (!aff) return { status: "missing", value: null, previous: null, note: "ga4-affiliate-history.csv に全体行が無い" };
+        return {
+          status: affStale ? "stale" : "partial",
+          value: `GA4 ${aff.days}日 imp ${num(aff.impressions)}・click ${num(aff.clicks)}`,
+          previous: null,
+          note: `最終観測 ${aff.date}。収益効率 (確定収益/1,000 imp) は ASP 成果と合わせて NSM 節で判定する`,
+        };
+      case "data-quality-pass-rate": {
+        if (!dataQuality) return { status: "missing", value: null, previous: null, note: "ranking/integrity-audit.json が無い" };
+        const stale = dataQuality.generatedAt && dataQuality.generatedAt.slice(0, 10) < addDaysIso(asOf, -OPS_WINDOW_DAYS);
+        const detail = Object.entries(dataQuality.byCheck).map(([k, n]) => `${k} ${n}`).join("・");
+        return {
+          status: stale ? "stale" : "ok",
+          value: `${pct(dataQuality.passRate)} (${dataQuality.active - dataQuality.failing}/${dataQuality.active})`,
+          previous: num(cyclePrev?.dataQualityPassRate) == null ? null : pct(num(cyclePrev.dataQualityPassRate)),
+          note: `監査 ${dataQuality.generatedAt?.slice(0, 10) ?? "?"}${detail ? `・不合格 ${detail}` : ""}`,
+        };
+      }
+      case "paid-purchases":
+        return paidPurchases
+          ? { status: paidPurchases.status, value: paidPurchases.value, previous: null, note: paidPurchases.note }
+          : { status: "missing", value: null, previous: null };
+      case "site-health":
+        return psi || cf
+          ? { status: psi?.status === "ok" && cf?.status === "ok" ? "ok" : "partial", value: `PSI モバイル中央値 ${psi?.mobileMedianScore ?? "—"}・Workers error ${pct(cf?.workersErrorRate)}`, previous: null }
+          : { status: "missing", value: null, previous: null };
+      case "operating-cost": {
+        if (!cf) return { status: "missing", value: null, previous: null };
+        const v = Object.values(cf.violationsBySeverity).reduce((a, b) => a + b, 0);
+        return { status: cf.status, value: `閾値違反 ${v} 件・R2 保存 ${cf.r2StorageGb ?? "—"} GB`, previous: null };
+      }
+      case "measurement-freshness": {
+        const ok = freshnessChecks.filter((c) => c.ok).length;
+        const bad = freshnessChecks.filter((c) => !c.ok).map((c) => c.name);
+        return { status: bad.length ? "degraded" : "ok", value: `${ok}/${freshnessChecks.length}`, previous: null, note: bad.length ? `欠測・古い・認証切れ: ${bad.join(", ")}` : undefined };
+      }
+      default:
+        return { status: "not-connected", value: null, previous: null, note: "値の取得元が計測サイクルに未接続。接続するまで判定しない" };
+    }
+  };
+
+  const linked = new Map(nodes.map((n) => [n.id, []]));
+  const unlinked = [];
+  for (const row of improvementRows) {
+    const ids = (row.kpis ?? []).filter((id) => linked.has(id));
+    if (ids.length === 0) unlinked.push(row.id);
+    for (const id of ids) linked.get(id).push(row.id);
+  }
+  const focus = new Set(focusKpis ?? []);
+  return {
+    compareWeek: prevWeek,
+    nodes: nodes.map((n) => ({ ...n, focus: focus.has(n.id), ...valueOf(n.id), improvements: linked.get(n.id) })),
+    improvements: { active: improvementRows.length, maxActive, unlinked, noTarget: improvementRows.filter((r) => !r.hasTarget).map((r) => r.id) },
+    focusWithoutImprovements: nodes.filter((n) => focus.has(n.id) && linked.get(n.id).length === 0).map((n) => n.id),
+  };
+}
+
+const TIER_LABEL = { nsm: "NSM", driver: "駆動", guardrail: "守り" };
+
+function renderKpiTree(k) {
+  const lines = [];
+  lines.push(`**KPI ツリー**（正典: 事業計画 catalog → \`.claude/state/business-plan/kpi-tree.json\`。比較は ${KPI_COMPARE_WEEKS_BACK} 週前 ${k.compareWeek} = 窓が重ならない値。★ = 今月の重点レーンの KPI）`);
+  lines.push("");
+  lines.push("| 階層 | KPI | 今週 | 比較 | 状態 | 施策 |");
+  lines.push("|---|---|---|---|---|---|");
+  for (const n of k.nodes) {
+    const imp = n.improvements.length ? n.improvements.map((id) => `\`${id}\``).join(", ") : "—";
+    lines.push(`| ${TIER_LABEL[n.tier] ?? n.tier} | ${n.focus ? "★ " : ""}${n.label} | ${n.value ?? "—"} | ${n.previous ?? "—"} | ${n.status}${n.note ? `（${n.note}）` : ""} | ${imp} |`);
+  }
+  lines.push("");
+  const i = k.improvements;
+  lines.push(`**施策の配線**: active ${i.active} 件（上限 ${i.maxActive} 件${i.active > i.maxActive ? "。超過中は新しい施策を足さず月次で削る" : ""}）・KPI 未接続 ${i.unlinked.length} 件・\`[target:]\` なし ${i.noTarget.length} 件`);
+  if (k.focusWithoutImprovements.length) {
+    lines.push("");
+    lines.push(`重点レーンの KPI なのに施策が 0 件: ${k.focusWithoutImprovements.map((id) => `\`${id}\``).join(", ")}（今月の重点を動かす施策が台帳に無い）`);
+  }
+  lines.push("");
+  return lines;
+}
+
 export function renderCycleMarkdown(state) {
   const lines = [];
   const src = state.sources;
@@ -268,6 +487,7 @@ export function renderCycleMarkdown(state) {
   lines.push("|---|---|");
   for (const [name, s] of Object.entries(src)) lines.push(`| ${name} | ${s.status}${s.detail ? `（${s.detail}）` : ""} |`);
   lines.push("");
+  if (state.kpiTree) lines.push(...renderKpiTree(state.kpiTree));
   if (state.journey) {
     const j = state.journey;
     lines.push("**回遊（referrer 集計）**");

@@ -21,7 +21,7 @@ export const deathCount: MetricConfig = {
     "from": 1980,
     "to": 2023,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     "colorScheme": "interpolateReds",
     "colorSchemeType": "sequential",

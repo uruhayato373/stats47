@@ -328,6 +328,18 @@ export async function readBookshelfState(page, draftId, { asin = "", title = "" 
   } catch {}
   await sleep(8000);
   const direct = page.locator(`a[href*="/title-setup/kindle/${draftId}/"]`);
+  // ★1 ページ目に無ければページを順にめくって探す (2026-09-27)。本棚は約 10 冊ずつのページ送り (#2, #3, ...) で、
+  //   本棚の検索は結果に title-setup のリンクを出さない (実測 0 件)。検索だけに頼っていたため、第 2 版を出し直して
+  //   ASIN 未記録の S1 7 冊が 2 ページ目以降にあると「本棚に見つからず」になり、計測の出版状態が不完全になっていた。
+  if ((await direct.count().catch(() => 0)) === 0) {
+    const pages = await page.locator('a[href^="#"]').evaluateAll((els) =>
+      els.map((e) => e.getAttribute("href")).filter((h) => /^#\d+$/.test(h)).map((h) => Number(h.slice(1))));
+    for (const n of [...new Set(pages)].sort((a, b) => a - b).filter((n) => n > 1)) {
+      await page.locator(`a[href="#${n}"]`).first().click({ timeout: 10000 }).catch(() => {});
+      await sleep(4000);
+      if ((await direct.count().catch(() => 0)) > 0) break;
+    }
+  }
   if ((await direct.count().catch(() => 0)) === 0 && (asin || title)) {
     const query = asin || title;
     const box = page.locator('input[type="search"], input[placeholder*="検索"], #podbookshelf-search-input').first();

@@ -80,7 +80,7 @@ export async function generateMetadata(): Promise<Metadata> {
           url: `${baseUrl}/og-image.jpg`,
           width: 1200,
           height: 630,
-          alt: '統計で見る都道府県 - 47都道府県ランキング',
+          alt: 'stats47 - 日本の地域データを探す・比べる・分析する',
         },
       ],
       locale: 'ja_JP',
@@ -150,6 +150,7 @@ export default async function HomePage() {
     <div className="w-full">
       <PageShell leftRail={leftRail} className="py-5 lg:py-6">
         <PageHeader
+          eyebrow="地域のデータアトラス"
           title="日本の地域データを探す"
           description="47都道府県のランキング、人口・年収・暮らしの統計を検索できます。"
           className="mb-4"

@@ -18,17 +18,37 @@ import { evaluateRules, flatten } from "../cloudflare/threshold-check.mjs";
 import { PROJECT_ROOT, isoWeekToDateRange, toCsv } from "./lib/auth.mjs";
 import {
   countOpsImprovements, parseCsv, renderCycleMarkdown, summarizeCloudflare, summarizeDimensionGaps, summarizeEngine,
-  summarizeJourney, summarizeNavCoverage, summarizeOverdue, summarizePsi, summarizeSns, summarizeWorkContext,
+  summarizeDataQuality, summarizeJourney, summarizeKpiTree, summarizePaidPurchases, summarizeNavCoverage, summarizeOverdue, summarizePsi, summarizeSns, summarizeWorkContext,
 } from "./lib/measurement-cycle.mjs";
 import { judgeability } from "./lib/gsc-improvements-adapter.mjs";
 import { parseDimensionLedger } from "../google-admin/dimension-ledger.mjs";
 import { parseBacklog } from "../lib/scan-pending-improvements.mjs";
 
+const strategyLanes = createRequire(import.meta.url)("../lib/strategy-lanes.cjs");
+
+const AUTHENTICATED_LATEST = ".claude/state/metrics/authenticated/latest.json";
 const ACTIVE_STATUSES = new Set(["pending", "in-progress", "effect/pending"]);
 const HISTORY_COLUMNS = [
   "week", "periodStart", "periodEnd", "blogToRankingRate", "themesToRankingRate",
   "workContextPages", "absentParams", "breakdownReadyEvents", "overdueImprovements", "gscJudgeable", "gscActive",
+  "searchClicks28d", "workContextSessions", "activeImprovements", "kpiUnlinked", "measurementFreshOk", "dataQualityPassRate",
 ];
+
+/**
+ * KPI ツリー (事業計画 catalog の写し) と、施策・今月の重点レーンの配線を読む。
+ * 施策の [kpi:] と重点レーンの KPI 列の解釈は strategy-lanes.cjs (docs:check DG079/DG080) と共有する。
+ */
+function readKpiInputs() {
+  const read = (rel) => (existsSync(join(PROJECT_ROOT, rel)) ? readFileSync(join(PROJECT_ROOT, rel), "utf8") : "");
+  const { lanes } = strategyLanes.parseLanes(read(strategyLanes.STRATEGY_DOC));
+  const focusLanes = new Set(strategyLanes.parseFocusLanes(read(".claude/todo/monthly.md")) ?? []);
+  return {
+    nodes: strategyLanes.readKpiNodes(PROJECT_ROOT),
+    improvementRows: strategyLanes.parseImprovementRows(read(".claude/todo/improvements.md")),
+    focusKpis: [...new Set(lanes.filter((l) => focusLanes.has(l.name)).flatMap((l) => l.kpis))],
+    maxActive: strategyLanes.MAX_ACTIVE_IMPROVEMENTS,
+  };
+}
 
 /** GA4 プロパティ設定の監査結果を週次 state 用の 1 行に要約する (key events・拡張計測の警告・BigQuery link)。 */
 function summarizeGa4Settings(settings) {
@@ -61,6 +81,10 @@ function readSlice(dir, name) {
 }
 
 const readCsvIfExists = (path) => (existsSync(path) ? parseCsv(readFileSync(path, "utf8")) : null);
+const readJsonIfExists = (rel) => (existsSync(join(PROJECT_ROOT, rel)) ? JSON.parse(readFileSync(join(PROJECT_ROOT, rel), "utf8")) : null);
+/** 販売中と分かっている商品数 (KDP の S1 + 試行分。全体ではなく下限)。週次 Issue の NSM 節と同じ読み方 */
+const liveProductCountOf = (kdp) =>
+  Number.isInteger(kdp?.portfolio?.s1Live) && Number.isInteger(kdp?.portfolio?.pilotLive) ? kdp.portfolio.s1Live + kdp.portfolio.pilotLive : null;
 
 /**
  * 運用系 (PSI / Cloudflare / SNS)。判定ロジックは各 source の既存実装を使い、ここで閾値を持たない:
@@ -129,6 +153,31 @@ function main() {
   const verdicts = existsSync(verdictsPath) ? JSON.parse(readFileSync(verdictsPath, "utf8")) : null;
   const gscRows = pending.filter((e) => /gsc/i.test(e.target_metric ?? "")).map(judgeability);
 
+  const historyPath = join(outDir, "history.csv");
+  const history = existsSync(historyPath) ? parseCsv(readFileSync(historyPath, "utf8")).filter((r) => r.week !== week) : [];
+  const journey = transitions.rows && pagesClean ? summarizeJourney({ transitions: transitions.rows, pagesClean }) : null;
+  const workContext = landing.rows ? summarizeWorkContext(landing.rows) : null;
+  const operations = buildOperations(week, asOf, pending);
+  const kpiTree = summarizeKpiTree({
+    ...readKpiInputs(),
+    week,
+    asOf,
+    gscHistory: readCsvIfExists(join(PROJECT_ROOT, ".claude/state/metrics/gsc/history.csv")),
+    cycleHistory: history,
+    journey,
+    workContext,
+    affiliateRows: readCsvIfExists(join(PROJECT_ROOT, ".claude/state/ads/ga4-affiliate-history.csv")),
+    operations,
+    authenticated: readJsonIfExists(AUTHENTICATED_LATEST),
+    dataQuality: summarizeDataQuality(readJsonIfExists(".claude/state/ranking/integrity-audit.json")),
+    paidPurchases: summarizePaidPurchases({
+      ledger: readJsonIfExists(".claude/state/products/sales-ledger.json"),
+      liveProductCount: liveProductCountOf(readJsonIfExists(".claude/state/products/kdp-weekly-publication.json")),
+      weekStart: isoWeekToDateRange(week).startDate,
+      weekEnd: asOf,
+    }),
+  });
+
   const state = {
     schemaVersion: 1,
     week,
@@ -146,11 +195,12 @@ function main() {
       improvements: { status: "ok", detail: `active ${pending.length} 件` },
       effectVerdicts: verdicts ? { status: "ok", detail: `verdicts-${week}.json` } : { status: "missing", detail: `verdicts-${week}.json` },
     },
+    kpiTree,
     engine: summarizeEngine({ verdicts, gscRows }),
-    operations: buildOperations(week, asOf, pending),
-    journey: transitions.rows && pagesClean ? summarizeJourney({ transitions: transitions.rows, pagesClean }) : null,
+    operations,
+    journey,
     navCoverage: transitions.rows && navClicks ? summarizeNavCoverage({ transitions: transitions.rows, navClicks }) : null,
-    workContext: landing.rows ? summarizeWorkContext(landing.rows) : null,
+    workContext,
     dimensionGaps: registeredParams && events.rows
       ? summarizeDimensionGaps({ ledgerEntries, registeredParams, eventVolume: events.rows })
       : null,
@@ -161,8 +211,7 @@ function main() {
   writeFileSync(join(outDir, "latest.json"), JSON.stringify(state, null, 2) + "\n");
   writeFileSync(join(outDir, "LATEST.md"), `# 計測→記録→改善サイクル — ${week}\n\n${renderCycleMarkdown(state)}\n`);
 
-  const historyPath = join(outDir, "history.csv");
-  const history = existsSync(historyPath) ? parseCsv(readFileSync(historyPath, "utf8")).filter((r) => r.week !== week) : [];
+  const kpiValue = (id) => kpiTree?.nodes.find((n) => n.id === id) ?? null;
   history.push({
     week,
     periodStart: state.sources.ga4.periodStart ?? "",
@@ -175,6 +224,12 @@ function main() {
     overdueImprovements: state.improvements.overdue.length,
     gscJudgeable: state.engine.gsc.judgeable,
     gscActive: state.engine.gsc.active,
+    searchClicks28d: kpiValue("search-clicks")?.status === "ok" ? kpiValue("search-clicks").value : "",
+    workContextSessions: workContext?.qualifyingSessions ?? "",
+    activeImprovements: kpiTree?.improvements.active ?? "",
+    kpiUnlinked: kpiTree?.improvements.unlinked.length ?? "",
+    measurementFreshOk: kpiValue("measurement-freshness")?.value ?? "",
+    dataQualityPassRate: summarizeDataQuality(readJsonIfExists(".claude/state/ranking/integrity-audit.json"))?.passRate ?? "",
   });
   history.sort((a, b) => a.week.localeCompare(b.week));
   writeFileSync(historyPath, toCsv(history, HISTORY_COLUMNS));

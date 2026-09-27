@@ -303,10 +303,10 @@ export const STOREFRONT_PRODUCTS = [
     "slug": "kindle-k-s1-01",
     "channel": "kindle",
     "channelLabel": "Kindle電子書籍",
-    "title": "実質手取りの地図 — 住む県で変わる、暮らしのお金",
-    "description": "販売中の旧版です。新版は現在準備・審査中のため、リンク先の書名・版をご確認ください。",
+    "title": "年収が高い県は、暮らしも豊かなのか",
+    "description": "県民所得、家計調査の所得・支出、貯蓄と地域財政を別の対象として読み、対象世帯・年次・分母の一致を確認します。地域の平均を個人の手取りや県民性へ置き換えず、比較の限界と確認手順を整理します。",
     "priceYen": 800,
-    "externalUrl": "https://www.amazon.co.jp/dp/B0HF17SQ9N",
+    "externalUrl": "https://www.amazon.co.jp/dp/B0HKFB434W",
     "included": [
       "Kindle電子書籍",
       "固定時点の公的統計",
@@ -315,17 +315,27 @@ export const STOREFRONT_PRODUCTS = [
     "audience": [
       "地域差を読み物として知りたい方"
     ],
-    "sourceBlogSlugs": []
+    "sourceBlogSlugs": [
+      "real-disposable-income-reversal",
+      "heating-cost-vs-disposable-income",
+      "per-capita-income-gap",
+      "savings-balance-gap",
+      "engel-coefficient-prefecture-ranking",
+      "household-spending-prefecture-gap",
+      "communication-cost-burden",
+      "expenditure-structure-comparison",
+      "black-tea-income-gap"
+    ]
   },
   {
     "id": "K-S1-02",
     "slug": "kindle-k-s1-02",
     "channel": "kindle",
     "channelLabel": "Kindle電子書籍",
-    "title": "消費量日本一の食卓 — 家計調査で読む47都道府県の食",
-    "description": "販売中の旧版です。新版は現在準備・審査中のため、リンク先の書名・版をご確認ください。",
+    "title": "食卓の支出と購入数量 — 家計調査の地域差を読む",
+    "description": "家計調査の品目別支出と購入数量を区別し、調査対象世帯・地域・年を確かめながら食卓の違いを読みます。生産地や県民全体の消費を直接測る統計ではないことも整理します。",
     "priceYen": 800,
-    "externalUrl": "https://www.amazon.co.jp/dp/B0HF1N51T8",
+    "externalUrl": "https://www.amazon.co.jp/dp/B0HKF4NLDV",
     "included": [
       "Kindle電子書籍",
       "固定時点の公的統計",
@@ -334,7 +344,13 @@ export const STOREFRONT_PRODUCTS = [
     "audience": [
       "地域差を読み物として知りたい方"
     ],
-    "sourceBlogSlugs": []
+    "sourceBlogSlugs": [
+      "noodle-consumption-prefecture-character",
+      "miso-consumption-quantity-prefecture-gap",
+      "sugar-consumption-prefecture-gap",
+      "crab-expenditure-ranking",
+      "mackerel-expenditure-ranking"
+    ]
   },
   {
     "id": "K-S1-03",
@@ -391,10 +407,10 @@ export const STOREFRONT_PRODUCTS = [
     "slug": "kindle-k-s1-05",
     "channel": "kindle",
     "channelLabel": "Kindle電子書籍",
-    "title": "教育と子育ての地図 — 教育費・進学率・待機児童",
-    "description": "販売中の旧版です。新版は現在準備・審査中のため、リンク先の書名・版をご確認ください。",
+    "title": "教育と子育ての地図 — 教育費・進学率・子育て指標",
+    "description": "公費と家計の教育費、授業料、大学進学に関する指標、子育て関連の統計を比較します。支出額と教育成果、入学者数と定員、保育所等の利用率と入所希望の充足を区別して読みます。",
     "priceYen": 800,
-    "externalUrl": "https://www.amazon.co.jp/dp/B0HF356WR9",
+    "externalUrl": "https://www.amazon.co.jp/dp/B0HKF5MMF9",
     "included": [
       "Kindle電子書籍",
       "固定時点の公的統計",
@@ -403,7 +419,13 @@ export const STOREFRONT_PRODUCTS = [
     "audience": [
       "地域差を読み物として知りたい方"
     ],
-    "sourceBlogSlugs": []
+    "sourceBlogSlugs": [
+      "education-cost-per-child",
+      "education-expenses-gap",
+      "tuition-expenditure-ranking",
+      "university-advancement-capacity",
+      "childcare-friendly-prefecture-ranking"
+    ]
   },
   {
     "id": "K-S1-06",
@@ -436,9 +458,9 @@ export const STOREFRONT_PRODUCTS = [
     "channel": "kindle",
     "channelLabel": "Kindle電子書籍",
     "title": "観光とインバウンドの地図 — 宿泊・国籍・回復",
-    "description": "販売中の旧版です。新版は現在準備・審査中のため、リンク先の書名・版をご確認ください。",
+    "description": "延べ宿泊者数、国籍別の宿泊記録、対象施設の範囲、採用年の違いを確かめながら観光統計を読みます。宿泊人泊と旅行者の実人数、観測された宿泊先と個人の嗜好を区別します。",
     "priceYen": 800,
-    "externalUrl": "https://www.amazon.co.jp/dp/B0HDYG6DLX",
+    "externalUrl": "https://www.amazon.co.jp/dp/B0HKFB2359",
     "included": [
       "Kindle電子書籍",
       "固定時点の公的統計",
@@ -447,17 +469,23 @@ export const STOREFRONT_PRODUCTS = [
     "audience": [
       "地域差を読み物として知りたい方"
     ],
-    "sourceBlogSlugs": []
+    "sourceBlogSlugs": [
+      "inbound-overnight-regional-gap",
+      "inbound-by-nationality-regional-preference",
+      "inbound-overnight-stay-concentration",
+      "overnight-guests-inbound-recovery",
+      "overseas-travel-gap"
+    ]
   },
   {
     "id": "K-S1-08",
     "slug": "kindle-k-s1-08",
     "channel": "kindle",
     "channelLabel": "Kindle電子書籍",
-    "title": "エネルギーとインフラの地図 — 電力・再エネ・水道",
-    "description": "販売中の旧版です。新版は現在準備・審査中のため、リンク先の書名・版をご確認ください。",
+    "title": "エネルギーとインフラの地図 — 電力・再エネ・ガス",
+    "description": "エネルギー消費、再エネ設備、電力需要、ガス・電気、給油所の指標を読みます。設備容量・契約件数・供給区域・道路当たり密度を区別し、実際の送電経路や住民の移動距離を示す値とは扱いません。",
     "priceYen": 800,
-    "externalUrl": "https://www.amazon.co.jp/dp/B0HDYLY7WM",
+    "externalUrl": "https://www.amazon.co.jp/dp/B0HKDVYP8M",
     "included": [
       "Kindle電子書籍",
       "固定時点の公的統計",
@@ -466,17 +494,23 @@ export const STOREFRONT_PRODUCTS = [
     "audience": [
       "地域差を読み物として知りたい方"
     ],
-    "sourceBlogSlugs": []
+    "sourceBlogSlugs": [
+      "energy-consumption-structure-shift",
+      "renewable-energy-regional-gap",
+      "electricity-demand-gap",
+      "energy-infrastructure-gas-electricity",
+      "gasoline-car-society-map"
+    ]
   },
   {
     "id": "K-S1-09",
     "slug": "kindle-k-s1-09",
     "channel": "kindle",
     "channelLabel": "Kindle電子書籍",
-    "title": "産業と地域経済の地図 — 製造・中小・農林",
-    "description": "販売中の旧版です。新版は現在準備・審査中のため、リンク先の書名・版をご確認ください。",
+    "title": "産業と地域経済の地図 — 製造・中小・地価",
+    "description": "製造業の集計、事業所規模、工業用水、商業地地価を比較します。出荷額と付加価値、従業者当たりと事業所当たり、企業と事業所、地価の金額と変動率を分けて読みます。",
     "priceYen": 800,
-    "externalUrl": "https://www.amazon.co.jp/dp/B0HDYB4CBV",
+    "externalUrl": "https://www.amazon.co.jp/dp/B0HKDXP4NM",
     "included": [
       "Kindle電子書籍",
       "固定時点の公的統計",
@@ -485,7 +519,13 @@ export const STOREFRONT_PRODUCTS = [
     "audience": [
       "地域差を読み物として知りたい方"
     ],
-    "sourceBlogSlugs": []
+    "sourceBlogSlugs": [
+      "manufacturing-aichi-dominance",
+      "manufacturing-productivity",
+      "small-business-dominance-map",
+      "industrial-water-manufacturing-nexus",
+      "commercial-land-price-trend"
+    ]
   },
   {
     "id": "K-S1-10",
@@ -493,9 +533,9 @@ export const STOREFRONT_PRODUCTS = [
     "channel": "kindle",
     "channelLabel": "Kindle電子書籍",
     "title": "安全と環境の地図 — 犯罪・労災・公害・防災",
-    "description": "販売中の旧版です。新版は現在準備・審査中のため、リンク先の書名・版をご確認ください。",
+    "description": "犯罪の認知・検挙、労働災害、公害苦情、廃棄物、火災・地震保険料支出を、各指標の対象と分母に沿って読みます。集計値から個人の被害確率や地域の安全性全般を断定しません。",
     "priceYen": 500,
-    "externalUrl": "https://www.amazon.co.jp/dp/B0HDZ45H6C",
+    "externalUrl": "https://www.amazon.co.jp/dp/B0HKDV78TG",
     "included": [
       "Kindle電子書籍",
       "固定時点の公的統計",
@@ -504,7 +544,13 @@ export const STOREFRONT_PRODUCTS = [
     "audience": [
       "地域差を読み物として知りたい方"
     ],
-    "sourceBlogSlugs": []
+    "sourceBlogSlugs": [
+      "crime-rate-regional-gap",
+      "workplace-accident-regional-map",
+      "pollution-complaints-regional-map",
+      "waste-management-recycling-gap",
+      "earthquake-insurance-prefecture-gap"
+    ]
   },
   {
     "id": "K-S1-11",
@@ -512,9 +558,9 @@ export const STOREFRONT_PRODUCTS = [
     "channel": "kindle",
     "channelLabel": "Kindle電子書籍",
     "title": "文化・スポーツ・余暇の地図",
-    "description": "販売中の旧版です。新版は現在準備・審査中のため、リンク先の書名・版をご確認ください。",
+    "description": "図書館・博物館・スポーツ施設、スポーツの行動者率、映画・演劇等への支出を比較します。施設数と利用、参加と頻度、市の家計と県全体を区別して読みます。",
     "priceYen": 500,
-    "externalUrl": "https://www.amazon.co.jp/dp/B0HH88J9YH",
+    "externalUrl": "https://www.amazon.co.jp/dp/B0HKFGQB8Q",
     "included": [
       "Kindle電子書籍",
       "固定時点の公的統計",
@@ -523,7 +569,13 @@ export const STOREFRONT_PRODUCTS = [
     "audience": [
       "地域差を読み物として知りたい方"
     ],
-    "sourceBlogSlugs": []
+    "sourceBlogSlugs": [
+      "library-museum-cultural-capital",
+      "sports-facility-regional-divide",
+      "sports-participation-map",
+      "sports-urban-paradox",
+      "movie-theater-expenditure-ranking"
+    ]
   },
   {
     "id": "K-S1-12",
@@ -531,9 +583,9 @@ export const STOREFRONT_PRODUCTS = [
     "channel": "kindle",
     "channelLabel": "Kindle電子書籍",
     "title": "デジタル生活の地図 — 通信・PC・テレワーク",
-    "description": "販売中の旧版です。新版は現在準備・審査中のため、リンク先の書名・版をご確認ください。",
+    "description": "テレビ・ラジオ・新聞・雑誌の利用時間、携帯契約件数、パソコン支出、テレワーク、コンビニ密度を比較します。契約件数と利用者数、支出額と保有率、有業者と雇用者の範囲を区別して読みます。",
     "priceYen": 500,
-    "externalUrl": "https://www.amazon.co.jp/dp/B0HG55D649",
+    "externalUrl": "https://www.amazon.co.jp/dp/B0HKF7C6JQ",
     "included": [
       "Kindle電子書籍",
       "固定時点の公的統計",
@@ -542,7 +594,13 @@ export const STOREFRONT_PRODUCTS = [
     "audience": [
       "地域差を読み物として知りたい方"
     ],
-    "sourceBlogSlugs": []
+    "sourceBlogSlugs": [
+      "ict-media-consumption-gender-gap",
+      "mobile-contracts-over-population",
+      "personal-computer-expenditure-ranking",
+      "telework-gap-tokyo-6x",
+      "convenience-store-density-map"
+    ]
   },
   {
     "id": "GEO-SERVICE-01",

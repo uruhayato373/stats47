@@ -14,7 +14,6 @@ import {
 } from '@stats47/components/atoms/ui/dropdown-menu';
 import { Input } from '@stats47/components/atoms/ui/input';
 import {
-  BarChart3,
   ChevronDown,
   ChevronRight,
   Menu,
@@ -22,6 +21,8 @@ import {
   Search,
   Sun,
 } from 'lucide-react';
+
+import { ThemeAwareImage } from '@/components/atoms/ThemeAwareImage';
 
 import { trackNavClick, trackSearch } from '@/lib/analytics/events';
 
@@ -179,9 +180,13 @@ export function HeaderClient({ themes, categories }: HeaderClientProps) {
             className="group flex shrink-0 items-center gap-2"
             aria-label="stats47 ホーム"
           >
-            <BarChart3
-              aria-hidden="true"
-              className="size-5 shrink-0 text-primary transition-transform group-hover:-translate-y-0.5 lg:size-6"
+            <ThemeAwareImage
+              lightSrc="/brand/atlas-v1/mark.svg"
+              darkSrc="/brand/atlas-v1/mark-inverse.svg"
+              alt=""
+              width={24}
+              height={24}
+              className="size-5 shrink-0 transition-transform group-hover:-translate-y-0.5 lg:size-6"
             />
             <span className="whitespace-nowrap text-lg font-bold leading-none tracking-tight text-foreground lg:text-xl">
               stats<span className="text-primary">47</span>

@@ -54,6 +54,7 @@ FAIL項目はレビュー本文の`Blockers`へ転記する。レビュー作成
 | 認証付き計測 | `npm run measurement:status` + `.claude/state/metrics/authenticated/latest.json`。48時間超・取得失敗・status-only・成果未取得をBlockersへ分離する。生データはprivate R2、現在の収集状態を過去週の実測にしない |
 | 計測→記録→改善サイクル | `.claude/state/metrics/measurement-cycle/{LATEST.md,triage-latest.json}`（週次メトリクス Issue の「🔁」節と同じ。GA4 回遊・GSC 判定目印・PSI / Cloudflare / SNS の週次要約を含む）。state の週が当週と違う・ゲート fail・無人記録の未実行は Blockers、未登録 custom dimension の登録と再ログインはオーナー作業として申し送る。個別の再照会は `node .claude/scripts/metrics/ga4-query.mjs` |
 | 計画差分 | `.claude/todo/weekly.md` |
+| noteカード表示 | `npm run note:cards:audit -- --browser-verify --previous .claude/state/metrics/note/card-visibility-latest.json --output .claude/state/metrics/note/card-visibility-latest.json` の `summary`。公開HTMLで空の候補はブラウザ描画で確定し、カード前の余分な空段落も検出。ブラウザ検証失敗があれば `--retry-unknown-from <直前report> --output <同report>` で失敗記事だけ再確認。取得・検証失敗は0件扱いしない。スクショは異常時だけ `--screenshots /tmp/note-card-screenshots --max-screenshots 3` で一時取得 |
 | 事業計画 | `.claude/state/business-plan/latest.json` + `packages/data-configs/src/business-plan/` |
 | Kindle | `.claude/config/kdp-listings.json` + `.claude/state/products/{sales-ledger,kdp-weekly-publication}.json` |
 
@@ -89,11 +90,15 @@ npm run kdp:weekly -- --week [YYYY-Www] --write
 2. Must / Should / Couldごとに完了・未完了・計画外を分ける。
 3. KPI変化は同じ定義・同じ期間のsnapshotだけで比較する。
 4. effect判定が必要な施策は`.claude/rules/evidence-based-judgment.md`に従う。
-5. 未完了は削除せず、次週へ渡す理由とownerを記録する。Mustの達成数は「Must N/M」の形で書く（週次メトリクスIssueの連続未達計測がこの形を読む）。2週連続で残ったMustは、申し送りに分割案か降格を書く。申し送りの各項目にはbacklog / improvementsのIDを付ける。
+5. 未完了は削除せず、次週へ渡す理由とownerを記録する。Mustの達成数は「Must N/M」の形で書く（週次メトリクスIssueの連続未達計測がこの形を読む）。Mustの結果表は1行1件で「| Must N | <タスク> `<主ID>` | <S/M/L> | **未達** / 完了 | <証拠> |」の形にする（DG082が未達行の主IDを読み、次週計画の再掲を止める）。2週連続で残ったMustは、申し送りに分割案か降格を書く。申し送りの各項目にはbacklog / improvementsのIDを付ける。
 6. search-growth候補は最大3件（technical/blocker、acquisition/content、measurementを原則各1件）だけ審査する。
 7. CTR候補はpage×query、現行title/content、past effectを確認する。大量title書換えを提案しない。
-8. 候補は人間承認前に改善バックログへ追加しない。active施策のWIPは5以下を守る。
+8. 候補は人間承認前に改善バックログへ追加しない。search-growth候補のWIP（approved / in-progress）は5以下を守る（`triage.mjs` の `WIP_LIMIT`。improvements.md全体の上限10件とは別）。
 9. gsc/coverage/inspectionがfreshで候補がある週は、最大3件を審査し、最低1件を`search-growth:approve`または`search-growth:dismiss`で記録する。採用を強制せず、採用しない場合もdismiss理由を残す。
+10. KPIツリーを判定する（`LATEST.md` の「KPI ツリー」節、正典は収益化戦略 §1.1）。今月の重点レーンのKPI（★）は、今週の値・4週前（窓が重ならない週）との比較・ぶら下がる施策を書き、動いた/動かなかったを1文で判定する。値が `not-connected` / `missing` / `stale` / `degraded` のKPIは0と読まず、理由を書いてBlockersに入れる。ガードレールが悪化した週は、重点に関係なく是正を次週Mustの候補にする。
+11. 施策の配線を確認する。「重点レーンのKPIなのに施策が0件」「KPI未接続」「active上限超過」が出ていれば、申し送りに対処（施策の起票・降格・判定）とIDを書く。
+12. 🔴 の着手順を確認する。週次メトリクス Issue の「サイクルの健全性」節 (DG083 の行) で、🔴 の上位 3 枚 (オーナー作業を除く) がこの週の Must に入り、どこまで進んだかを 1 枚 1 行で書く。
+    上位が 2 週続けて進まなければ、申し送りに「分割する・順番を入れ替える・🟡 へ下げる」のどれかを理由付きで書く (並び替え自体は月次計画か、オーナーの判断)。
 
 ## Phase 3: 記録
 
@@ -103,6 +108,8 @@ npm run kdp:weekly -- --week [YYYY-Www] --write
 - 成果ハイライト
 - 開発・コンテンツ実績
 - NSM（週次収益）/ GA4 / GSC / SNS
+- KPIツリー（重点KPIの今週値・非重複比較・判定、ガードレールの悪化、判定不能のKPIと理由、施策の配線状況）
+- 🔴 の着手順（上位 3 枚の今週の進み具合と、止まっている理由）
 - 計測→記録→改善サイクル（回遊率・業務文脈の着地・無人記録で閉じた/更新した施策・オーナー作業）
 - search-growth候補（期間・証拠・制約・承認待ちを明記）
 - 課題、繰り返しパターン、学び
@@ -110,6 +117,7 @@ npm run kdp:weekly -- --week [YYYY-Www] --write
 - 参照したsnapshot / backlog ID / file
 - 事業計画のready/in-progress、開始ゲート、計測欠損、Go/Pivot/Stop判断
 - KDP公開ゲート（S1 live数、4週販売/KENP計測、需要シグナル、当週候補、停止理由）
+- noteカード表示（検査記事数・ブラウザで確定した空白カード数・余分な空段落数・未確認カード数・影響記事数・取得/ブラウザ検証失敗数・新規/継続/解消。検証失敗があれば解消数は判定不能として扱う。詳細は `.claude/state/metrics/note/card-visibility-latest.json`）
 
 恒久的な失敗知見だけを`/knowledge`へ渡す。改善施策statusの更新は`improvement-triage`へ渡す。
 `.claude/todo/weekly.md`はレビュー中に書き換えない。
@@ -131,6 +139,7 @@ FAILが残る場合はレビューを「完了」と報告せず、出力され�
 
 - review fileのweek、snapshot期間、参照pathが一致する。
 - KPIはfinalized7d、候補はrolling28dという用途が明記されている。
+- 重点レーンのKPIすべてに判定か判定不能の理由があり、rolling28dを隣接週と比べていない。
 - 実測の無い数値・効果・完了を記録していない。
 - search-growth候補は最大3件で、未承認候補を`.claude/todo/improvements.md`へ自動追加していない。
 - current-weekの未完了項目を申し送りへ反映している。

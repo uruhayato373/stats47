@@ -22,8 +22,40 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  collect:
+  # 定期実行は Mac が起動した収集の補助。Mac の refresh-session (毎日 17:30 JST) がログインし直した直後に
+  # 収集を起動するので、その日すでに収集済みなら定期実行は何もしない。もしものセッションは数時間で切れ、
+  # 定期実行は予定より 4〜5 時間遅れて動くため、遅い定期実行が同日の成功を auth_required で上書きしていた
+  # (2026-09-26 は 17:31 に渡したセッションで 22:47 に失敗、2026-09-27 は 42 分後の手動収集で成功)。
+  # Mac が止まっていた日は latest.json が前日のままなので、これまでどおり定期実行が収集する。
+  gate:
     if: github.repository == 'uruhayato373/stats47' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/develop')
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    outputs:
+      skip: ${{ steps.check.outputs.skip }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: develop
+          persist-credentials: false
+          sparse-checkout: .claude/state/metrics/authenticated
+      - id: check
+        env:
+          EVENT: ${{ github.event_name }}
+        run: |
+          SKIP=false
+          if [ "$EVENT" = 'schedule' ] && [ -f .claude/state/metrics/authenticated/latest.json ]; then
+            SKIP=$(node -e '
+              const s = require("./.claude/state/metrics/authenticated/latest.json");
+              const jst = (t) => new Date(Date.parse(t) + 9 * 3600000).toISOString().slice(0, 10);
+              process.stdout.write(String(Boolean(s.generatedAt) && jst(s.generatedAt) === jst(new Date().toISOString())));
+            ')
+          fi
+          echo "skip=$SKIP" >> "$GITHUB_OUTPUT"
+          if [ "$SKIP" = 'true' ]; then echo "今日 (JST) は収集済みのため定期実行を省略する" >> "$GITHUB_STEP_SUMMARY"; fi
+  collect:
+    needs: gate
+    if: needs.gate.outputs.skip != 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 25
     strategy:

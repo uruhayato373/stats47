@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import {
   countOpsImprovements, MIN_EVENTS_FOR_BREAKDOWN, parseCsv, renderCycleMarkdown, summarizeCloudflare,
   summarizeDimensionGaps, summarizeEngine, summarizeJourney, summarizeNavCoverage, summarizeOverdue, summarizePsi, summarizeSns,
-  summarizeWorkContext,
+  summarizeWorkContext, summarizeKpiTree, shiftIsoWeek, summarizeDataQuality, summarizePaidPurchases,
 } from '../lib/measurement-cycle.mjs';
 import { buildQuery, parseFilterExpr } from '../lib/ga4-query.mjs';
 
@@ -174,4 +174,91 @@ test('nav coverage divides labeled nav clicks by internal transitions and ranks 
   assert.equal(nav.coverage, 0.2);
   assert.equal(nav.unlabeledShare, 0.5);
   assert.deepEqual(nav.topUnlabeled.map((r) => r.label), ['ranking', 'areas']);
+});
+
+// ── KPI ツリー。意図: 舵取りの値は「重ならない窓」と比べ、取れない値は 0 ではなく理由付きで出す。
+
+test('KPI comparison week is 4 ISO weeks back so rolling28d windows do not overlap, across year ends', () => {
+  assert.equal(shiftIsoWeek('2026-W38', -4), '2026-W34');
+  assert.equal(shiftIsoWeek('2027-W01', -4), '2026-W50');
+});
+
+const NODES = [
+  { id: 'weekly-revenue', label: '週次収益', tier: 'nsm' },
+  { id: 'search-clicks', label: '検索', tier: 'driver' },
+  { id: 'paid-purchases', label: '購入', tier: 'driver' },
+  { id: 'measurement-freshness', label: '鮮度', tier: 'guardrail' },
+];
+const kpi = (over = {}) => summarizeKpiTree({
+  nodes: NODES,
+  week: '2026-W38',
+  asOf: '2026-09-20',
+  gscHistory: [{ week: '2026-W34', clicks_rolling28d: '4360' }, { week: '2026-W37', clicks_rolling28d: '7503' }, { week: '2026-W38', clicks_rolling28d: '8810' }],
+  cycleHistory: [],
+  journey: { blogToRanking: { rate: 0.076 } },
+  workContext: { qualifyingSessions: 3200 },
+  affiliateRows: [],
+  operations: { psi: { status: 'ok' }, cloudflare: { status: 'ok', violationsBySeverity: {} }, sns: { status: 'ok' } },
+  authenticated: { sources: [{ source: 'a8', status: 'pass' }, { source: 'kdp', status: 'failed', code: 'auth_required' }] },
+  improvementRows: [{ id: 'SEO-01', kpis: ['search-clicks'], hasTarget: true }, { id: 'OLD-01', kpis: null, hasTarget: false }],
+  focusKpis: ['paid-purchases'],
+  maxActive: 10,
+  ...over,
+});
+
+test('search clicks compare with the non-overlapping week, not the adjacent one', () => {
+  const node = kpi().nodes.find((n) => n.id === 'search-clicks');
+  assert.equal(node.value, '8810');
+  assert.equal(node.previous, '4360');
+  assert.deepEqual(node.improvements, ['SEO-01']);
+});
+
+test('unmeasurable nodes carry a reason instead of zero', () => {
+  const t = kpi({ gscHistory: [] });
+  assert.equal(t.nodes.find((n) => n.id === 'search-clicks').status, 'missing');
+  // 有料購入は 2026-09-27 に接続済み。入力 (販売台帳) が無ければ欠測。取得元を持たない KPI は not-connected
+  assert.equal(t.nodes.find((n) => n.id === 'paid-purchases').status, 'missing');
+  const unknown = kpi({ nodes: [...NODES, { id: 'future-kpi', label: '未来', tier: 'driver' }] });
+  assert.equal(unknown.nodes.find((n) => n.id === 'future-kpi').status, 'not-connected');
+  assert.equal(t.nodes.find((n) => n.id === 'weekly-revenue').value, null);
+});
+
+test('an expired login degrades measurement freshness even when every cron is green', () => {
+  // 2026-08-28 からアフィリエイト観測が cron 緑のまま止まった経路。認証切れを鮮度に数える
+  const node = kpi().nodes.find((n) => n.id === 'measurement-freshness');
+  assert.equal(node.status, 'degraded');
+  assert.match(node.note, /kdp\(auth_required\)/);
+  const fine = kpi({ authenticated: { sources: [{ source: 'a8', status: 'pass' }] }, affiliateRows: [{ date: '2026-09-19', days: '7', affiliate_vertical: '_all', link_position: '_all', impressions: '1', clicks: '0' }] });
+  assert.equal(fine.nodes.find((n) => n.id === 'measurement-freshness').status, 'ok');
+});
+
+test('improvement wiring reports unlinked rows and focus KPIs nobody is working on', () => {
+  const t = kpi();
+  assert.deepEqual(t.improvements.unlinked, ['OLD-01']);
+  assert.deepEqual(t.improvements.noTarget, ['OLD-01']);
+  assert.deepEqual(t.focusWithoutImprovements, ['paid-purchases']);
+  assert.match(renderCycleMarkdown({ sources: { ga4: { status: 'ok' } }, week: '2026-W38', kpiTree: t }), /重点レーンの KPI なのに施策が 0 件: `paid-purchases`/);
+});
+
+test('data quality pass rate counts each metric once even when it fails several checks', () => {
+  // 1 つの指標が item と values の両方で欠けても不合格は 1 件。別の検査の不合格も合算する
+  const q = summarizeDataQuality({
+    generatedAt: '2026-09-26T22:10:43Z',
+    totals: { activeKeys: 100 },
+    itemMissing: ['a'], valuesMissing: ['a'], stats: { missing: ['a'], drift: [{ key: 'b' }] }, recipe: { unbaked: [] },
+  });
+  assert.equal(q.failing, 2);
+  assert.equal(q.passRate, 0.98);
+  assert.deepEqual(q.byCheck, { itemMissing: 1, valuesMissing: 1, 'stats.missing': 1, 'stats.drift': 1 });
+  assert.equal(summarizeDataQuality(null), null);
+});
+
+test('paid purchases are unmeasurable, not zero, while products are live and no sales flow into the ledger', () => {
+  const week = { weekStart: '2026-09-14', weekEnd: '2026-09-20' };
+  assert.equal(summarizePaidPurchases({ ledger: { observations: [] }, liveProductCount: 3, ...week }).status, 'unmeasurable');
+  assert.equal(summarizePaidPurchases({ ledger: { observations: [] }, liveProductCount: 0, ...week }).value, '0 件');
+  const sold = summarizePaidPurchases({ ledger: { observations: [{ periodEnd: '2026-09-18', netRevenueYen: 1200 }, { periodEnd: '2026-09-01', netRevenueYen: 99 }] }, liveProductCount: 3, ...week });
+  assert.equal(sold.status, 'ok');
+  assert.match(sold.value, /^1 件・¥1,200$/);
+  assert.equal(summarizePaidPurchases({ ledger: null, liveProductCount: 3, ...week }).status, 'missing');
 });

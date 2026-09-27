@@ -415,6 +415,7 @@ export const BUSINESS_PLAN_METRICS: readonly BusinessPlanMetric[] = [
     id: 'weekly-revenue',
     label: '週次収益',
     role: 'north-star',
+    kpiTier: 'nsm',
     cadence: 'weekly',
     source: '.claude/state/metrics/',
     measurementStatus: 'partially-measured',
@@ -464,6 +465,7 @@ export const BUSINESS_PLAN_METRICS: readonly BusinessPlanMetric[] = [
     id: 'paid-purchases',
     label: '有料購入',
     role: 'input',
+    kpiTier: 'driver',
     cadence: 'weekly',
     source: 'note / product ledger',
     measurementStatus: 'partially-measured',
@@ -509,13 +511,110 @@ export const BUSINESS_PLAN_METRICS: readonly BusinessPlanMetric[] = [
     id: 'data-quality-pass-rate',
     label: 'データ品質ゲート通過率',
     role: 'guardrail',
+    kpiTier: 'guardrail',
     cadence: 'weekly',
-    source: 'CI / audit state',
+    source: '.claude/state/ranking/integrity-audit.json',
     measurementStatus: 'partially-measured',
     unit: '%',
-    note: 'provenance・単位・分布・GISライセンスを含む。',
+    note: '週次のランキング整合性監査で、どの検査 (項目・値の欠落、年のずれ、形状、計算式、値の検証など) にも引っかからなかった公開指標の割合。年表記・単位・定義の「意味の誤り」(DATA-VALUE-ERRORS-01) はこの監査に含まれないので、通過率が高くても誤りが無いとは言えない。provenance・分布・GISライセンスの監査も未接続。',
+  },
+  // ── KPI ツリーの駆動 KPI / ガードレール (2026-09-27)。値は build-measurement-cycle.mjs が週次に集計する。
+  // 目標値は根拠 (過去事例か計算式) が揃うまで書かない (evidence-based-judgment 状況4)。
+  {
+    id: 'search-clicks',
+    label: '検索クリック (GSC rolling28d)',
+    role: 'input',
+    kpiTier: 'driver',
+    cadence: 'weekly',
+    source: '.claude/state/metrics/gsc/history.csv',
+    measurementStatus: 'measured',
+    unit: 'クリック/28日',
+    note: '集客の駆動KPI。rolling28d の隣接週差は重複期間なので WoW と呼ばず、4週前 (非重複) と比べる。',
+  },
+  {
+    id: 'site-circulation-rate',
+    label: 'サイト内回遊率 (代表値: ブログ→ランキング)',
+    role: 'input',
+    kpiTier: 'driver',
+    cadence: 'weekly',
+    source: 'GA4 internal-transitions.csv (referrer 集計)',
+    measurementStatus: 'measured',
+    unit: '%',
+    note: '流入を広告・商品のある面へ運ぶ率。週次の代表値は分母=ブログPV、分子=blog→ranking の page_view (referrer 集計)。ranking 末尾 CTA 等の他の導線施策もこの KPI にぶら下げる。',
+  },
+  {
+    id: 'affiliate-yield',
+    label: 'アフィリエイト収益効率',
+    role: 'input',
+    kpiTier: 'driver',
+    cadence: 'weekly',
+    source: 'GA4 ga4-affiliate-history.csv + ASP 確定成果',
+    measurementStatus: 'partially-measured',
+    unit: '円/1,000 viewable imp',
+    note: '確定収益 ÷ 1,000 viewable impression (収益化戦略 §3)。ASP 成果が認証切れの間は GA4 の表示・クリックだけを出し、収益効率は判定不能とする。',
+  },
+  {
+    id: 'work-context-sessions',
+    label: '業務文脈の着地セッション',
+    role: 'input',
+    kpiTier: 'driver',
+    cadence: 'weekly',
+    source: 'GA4 landing-context.csv',
+    measurementStatus: 'measured',
+    unit: 'セッション/28日',
+    note: 'PC比率と平日9–18時比率がともにサイト平均を超え、25セッション以上の着地ページのセッション合計。行政実務者である証明ではなく、行政資料レーンの先行指標。',
+  },
+  {
+    id: 'site-health',
+    label: 'サイト健全性',
+    role: 'guardrail',
+    kpiTier: 'guardrail',
+    cadence: 'weekly',
+    source: '.claude/state/metrics/{psi,cloudflare}/history.csv',
+    measurementStatus: 'measured',
+    unit: 'PSIモバイル中央値 / Workersエラー率',
+    note: '性能・可用性・依存の脆弱性。閾値は既存の PSI budgets と Cloudflare threshold-check を使い、ここで持たない。',
+  },
+  {
+    id: 'operating-cost',
+    label: '運用コスト',
+    role: 'guardrail',
+    kpiTier: 'guardrail',
+    cadence: 'weekly',
+    source: '.claude/state/metrics/cloudflare/ + claude-usage/history.csv',
+    measurementStatus: 'partially-measured',
+    unit: '閾値違反数 / R2保存GB',
+    note: 'Cloudflare・R2・API課金。閾値は budgets-daily.json が正典。',
+  },
+  {
+    id: 'measurement-freshness',
+    label: '計測の鮮度',
+    role: 'guardrail',
+    kpiTier: 'guardrail',
+    cadence: 'weekly',
+    source: '.claude/state/metrics/measurement-cycle/latest.json',
+    measurementStatus: 'measured',
+    unit: '鮮度okの計測源 / 全計測源',
+    note: '計測源ごとの最終観測日。欠測を0と読まない前提を守るための守りの指標 (アフィリエイト観測が cron 緑のまま3週間止まった 2026-08-28 の再発防止)。',
   },
 ];
+
+/** KPI ツリーに載る metric (NSM → 駆動KPI → ガードレールの順)。施策とレーンが参照してよい id の集合。 */
+export function buildKpiTree(metrics: readonly BusinessPlanMetric[]) {
+  const order = { nsm: 0, driver: 1, guardrail: 2 } as const;
+  return metrics
+    .filter((metric) => metric.kpiTier)
+    .map((metric) => ({
+      id: metric.id,
+      label: metric.label,
+      tier: metric.kpiTier!,
+      cadence: metric.cadence,
+      measurementStatus: metric.measurementStatus,
+      unit: metric.unit,
+      source: metric.source,
+    }))
+    .sort((a, b) => order[a.tier] - order[b.tier]);
+}
 
 export const BUSINESS_PLAN_EVENTS: readonly BusinessPlanEvent[] = [
   {

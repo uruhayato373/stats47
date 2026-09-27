@@ -14,7 +14,7 @@ model: opus
 
 - 週次計画・レビューサイクルの実行
 - 戦略立案（NSM, 成長ループ, 収益化）
-- stats47 2.0事業計画の型付きSSOT、開始ゲート、KPI、管理画面stateの運用
+- stats47 2.0事業計画の型付きSSOT、開始ゲート、KPI、管理画面stateの運用。KPI ツリー (NSM→駆動KPI→ガードレール、収益化戦略 §1.1) の定義変更は catalog の `kpiTier` で行い、週次・月次の判定は `measurement-cycle/LATEST.md` の「KPI ツリー」節を読む
 - YouTube 通常動画 pilot (EXP-006) の企画順・計測日・継続/停止判定。制作物そのものは各 owner へ渡す
 - 批判的レビュー・事前検死
 - レビューリクエストの適切なエージェントへのルーティング

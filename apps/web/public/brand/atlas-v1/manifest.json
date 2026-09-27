@@ -1,0 +1,165 @@
+{
+  "version": "atlas-v1",
+  "status": "site-integrated",
+  "direction": "地域のデータアトラス",
+  "colors": {
+    "ink": "#18283C",
+    "primary": "#304BC6",
+    "sky": "#9CC8ED",
+    "pale": "#DCEBFA",
+    "paper": "#FFFFFF",
+    "sand": "#D8C8AB"
+  },
+  "generatedBackgrounds": [
+    "source-regional-landscape.jpg",
+    "source-regional-portrait.jpg",
+    "source-regional-landscape-dark.jpg"
+  ],
+  "usage": {
+    "mark.svg": "site header/logo source",
+    "favicon.svg": "small browser icon",
+    "avatar-1024.png": "note/X/Instagram profile image",
+    "site-hero-1536x1024.webp": "decorative site hero background",
+    "ogp-default-1200x630.jpg": "default Open Graph card",
+    "note-cover-default-1280x670.jpg": "brand/default note cover",
+    "x-post-default-960x404.png": "generic X image",
+    "x-header-1500x500.jpg": "X profile header",
+    "instagram-cover-default-1080x1350.jpg": "generic Instagram cover",
+    "site-hero-dark-1536x1024.webp": "decorative site hero background for dark mode",
+    "logo-horizontal-980x200.png": "raster horizontal wordmark",
+    "logo-horizontal-dark-980x200.png": "raster horizontal wordmark on dark surfaces",
+    "/logo.png": "transparent mark raster for site and SNS reuse",
+    "/apple-touch-icon.png": "Apple touch icon used by the site",
+    "/icon-192.png": "PWA icon used by the site",
+    "/icon-512.png": "PWA icon used by the site",
+    "/icon-maskable-192.png": "maskable PWA icon used by the site",
+    "/icon-maskable-512.png": "maskable PWA icon used by the site"
+  },
+  "note": "Fixed brand assets and generic templates. Article-specific titles, data, maps, charts, units, citations must be composed from verified sources by site/SNS renderers.",
+  "files": [
+    {
+      "file": "avatar-1024.png",
+      "sha256": "9f1984289ce5f0fb0b44474b13d259e3e9591ad0b866c7fe93220967a2b7959e"
+    },
+    {
+      "file": "avatar.svg",
+      "sha256": "05c4a9a7bf10280a3839aa14480f6dce3f5cfa7b7c304b2fa82742e565bcd75c"
+    },
+    {
+      "file": "favicon-16.png",
+      "sha256": "61ad2596a96f4457af6fa11a5c8f97310ee0e0ff59a4d8f9818503ae756517e1"
+    },
+    {
+      "file": "favicon-32.png",
+      "sha256": "e774bd6eba91e28291cac85f8f215f4f269634a8015b1289ec478585c77dc916"
+    },
+    {
+      "file": "favicon-48.png",
+      "sha256": "2865fb50ecebe3b16d0bf5499ef9df96737c110f3da5b6d1657e389753eb3a57"
+    },
+    {
+      "file": "favicon.ico",
+      "sha256": "578a92b5af4426885473323c26eedfffa8681c77026c3702c229ef8d9ba3dbad"
+    },
+    {
+      "file": "favicon.svg",
+      "sha256": "758287ef174e17270419cf4ce7099caea765ba1ffc0b3219799206bf6cdaf74c"
+    },
+    {
+      "file": "icon-maskable.svg",
+      "sha256": "9ac2648977b2ddf81552e9c34a08f175d82bfac07ff0f52f0642b2e3901e3ca3"
+    },
+    {
+      "file": "instagram-background-1080x1350.webp",
+      "sha256": "520e1ce3d8b81a97f5657af203d7db83ba8097174dc02d3802c0e071e4264be8"
+    },
+    {
+      "file": "instagram-cover-default-1080x1350-overlay.svg",
+      "sha256": "dd4df45500f5179d7626d6130e4eed84244d36bad233afa6a0d0a192c3cc1d6b"
+    },
+    {
+      "file": "instagram-cover-default-1080x1350.jpg",
+      "sha256": "875799d94a4191eb3c9fa9f8d21d3f1b400449ebd3d90899c6f3a05eba47a686"
+    },
+    {
+      "file": "logo-horizontal-980x200.png",
+      "sha256": "b5bd012e4400b27565e188163f5329f298f0dd18bd7ee966cc0ed4be56f57ba3"
+    },
+    {
+      "file": "logo-horizontal-dark-980x200.png",
+      "sha256": "fe6f6fec984ff683e24056e945a2f4fdd5d9509004ac4311469cae5f0957546a"
+    },
+    {
+      "file": "logo-horizontal-dark.svg",
+      "sha256": "91fb80814d2c1f731d5cad0ec2d15a3f080aab5dbc0cd86fecec623c474595fe"
+    },
+    {
+      "file": "logo-horizontal.svg",
+      "sha256": "c2114f11fc44a0ed5afe58bc8f9a34825f4361e37eec6239551b8a3943513998"
+    },
+    {
+      "file": "mark-inverse.svg",
+      "sha256": "ca7a6e9f647b1e7ece7dd52cd6d4243d5c1e172ef6702762ba73de5484da1a86"
+    },
+    {
+      "file": "mark.svg",
+      "sha256": "1f0dea1a10a35cecd375214f23a70692e8254c41f277261a609aaee03862d6c5"
+    },
+    {
+      "file": "note-cover-default-1280x670-overlay.svg",
+      "sha256": "8ec9f684ce782c85fb03cde7a914760595815cfc30b7453ac59fff6edaf1da88"
+    },
+    {
+      "file": "note-cover-default-1280x670.jpg",
+      "sha256": "738bf62d495185dbe66cb95288aa51e1e1a8fbd6d72f774abecd37fdee39c4f8"
+    },
+    {
+      "file": "ogp-background-1200x630.webp",
+      "sha256": "19f97a22787e108bcdb6b1b456e986e4ea002791b1931622e414a2053f5f21da"
+    },
+    {
+      "file": "ogp-default-1200x630-overlay.svg",
+      "sha256": "110a3bef1903acc3eae895beda07dcda2f4f13ebcf76905da86659c982235ca5"
+    },
+    {
+      "file": "ogp-default-1200x630.jpg",
+      "sha256": "0d5af3253c69f6763198931cefb408eded94009b587521505ba4ca763668b738"
+    },
+    {
+      "file": "site-hero-1536x1024.webp",
+      "sha256": "1ff4d7823e16954778fd10b88f5e69e70da127a7c088f623916ac6eb31ee9907"
+    },
+    {
+      "file": "site-hero-dark-1536x1024.webp",
+      "sha256": "8f1958f658dbd378ccda9687326e364acddb2e02bd0447d7885e074f0a8283d3"
+    },
+    {
+      "file": "source-regional-landscape-dark.jpg",
+      "sha256": "72bdb2c7d6f5913f920f060cd0e2e3a4bb642e678027a7348925a2a04ad2f845"
+    },
+    {
+      "file": "source-regional-landscape.jpg",
+      "sha256": "46ab72d40e131cf1174914f70c4b8e942a99dfac4c9b6a5d14d8d1f7638056eb"
+    },
+    {
+      "file": "source-regional-portrait.jpg",
+      "sha256": "5b8d4f71854928b3064037238292f47bdcfe0c04b840adaddbd03a73c9e722bb"
+    },
+    {
+      "file": "x-header-1500x500-overlay.svg",
+      "sha256": "febafaa4603eeb836f67bca58e5a201453ac371481ced369034294365c01f55c"
+    },
+    {
+      "file": "x-header-1500x500.jpg",
+      "sha256": "d56279879d45acdbafada0cc5fdae7da53b5b552261d551b6d6b6f17b79b7b75"
+    },
+    {
+      "file": "x-post-default-960x404-overlay.svg",
+      "sha256": "0728521c7b7ccc2a8871264317ea01183752f78b5589c853968f8ca5528d9049"
+    },
+    {
+      "file": "x-post-default-960x404.png",
+      "sha256": "04644308d30904dd12982c5c82abe7997f500923960107e6d88662f4271c0673"
+    }
+  ]
+}

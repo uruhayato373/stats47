@@ -1,6 +1,6 @@
 # データ出典・再現性 (provenance) 棚卸し (LATEST)
 
-棚卸し日時: 2026-09-19T21:12:19.763Z
+棚卸し日時: 2026-09-26T21:44:08.912Z
 正典: `.claude/rules/data-provenance-standards.md`
 
 ## metric 再現性クラス分布

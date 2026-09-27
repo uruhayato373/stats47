@@ -20,7 +20,7 @@ export const earthquakeRetrofitHousing: MetricConfig = {
     "from": 2008,
     "to": 2008,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     "colorScheme": "interpolateBlues",
     "colorSchemeType": "sequential",

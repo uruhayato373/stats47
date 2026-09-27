@@ -1,10 +1,10 @@
 {
-  "lastRun": "2026-08-28T03-35-52Z",
-  "collectedAt": "2026-08-28T03:35:52.936Z",
+  "lastRun": "2026-09-26T13-47-10Z",
+  "collectedAt": "2026-09-26T13:47:10.921Z",
   "site": "統計で見る都道府県",
   "mediaId": "a25050375786",
-  "downloadedUnits": 4,
-  "totalUnits": 4,
+  "downloadedUnits": 1,
+  "totalUnits": 1,
   "status": "ok",
   "note": "A8 レポート CSV 取得の最新実行マーカー（成果の生データは含めない）。"
 }

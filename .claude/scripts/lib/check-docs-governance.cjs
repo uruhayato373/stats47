@@ -740,9 +740,9 @@ function inspectRepository({
     }
   }
 
-  // 戦略レーン (収益化戦略の優先順位表) → 月次 focus_lanes → 週次 Must → backlog [レーン:] の配線。
+  // 戦略レーン (収益化戦略の優先順位表) → 月次 focus_lanes → 週次 Must → backlog [レーン:] の配線と、計画の規律 (DG081/082)。
   // 判定規則は strategy-lanes.cjs、レーンの語彙は収益化戦略の表だけが持つ。
-  for (const issue of strategyLanes.laneBoard(root).issues) {
+  for (const issue of strategyLanes.laneBoard(root, now).issues) {
     add(issue.level, issue.code, issue.file, issue.message);
   }
 

@@ -26,7 +26,7 @@ export const dayTimePopulationRatio: MetricConfig = {
       2020,
     ],
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     "colorScheme": "interpolateRdBu",
     "colorSchemeType": "diverging",

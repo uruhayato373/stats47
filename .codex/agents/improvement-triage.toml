@@ -57,6 +57,21 @@ read 側: `.claude/scripts/search-growth/lib/scoring.mjs` (confidence ×0.6 / ×
 key を解決できなかった行は writer が `unmapped` として報告するので、対象 URL または
 candidate key (`<rule>::<key>`) をバックログ行に明記して解決する (黙って捨てない)。
 
+### 施策は KPI ツリーに配線して登録する (2026-09-27)
+
+行を追加するときは、タイトルに次の 2 つを必ず書く。書けない施策は測れないので improvements.md に入れず、
+`.claude/todo/backlog.md` のカードにする。
+
+- `[kpi: <id>]` — その施策が動かす KPI。id は `.claude/state/business-plan/kpi-tree.json` の nodes
+  (正典は `packages/data-configs/src/business-plan/catalog.ts` の `kpiTier` 付き metric) から選ぶ。複数ならカンマ区切り
+- `[target: ±N 単位]` — 成功とみなす変化量。根拠 (過去事例か計算式) を行か詳細ログに書けるときだけ
+
+active 施策が上限 (`strategy-lanes.cjs` の `MAX_ACTIVE_IMPROVEMENTS`) を超えている間は新しい行を足さない。
+先に判定済みの行を詳細ログへ移して削除するか、backlog へ降格する。既存行の `[kpi:]` は消さない。
+検査は `npm run docs:check` の DG079 (error: 目印なし・未知の id) / DG080 (warning: 上限超過・`[target:]` なし) と、
+無人 run のゲート (`improvement-cycle-gate.mjs`: 新規行の `[kpi:]`・`[target:]` 欠落と上限超過中の追加を拒否) が行う。
+KPI ごとの今週の値とぶら下がる施策は `.claude/state/metrics/measurement-cycle/LATEST.md` の「KPI ツリー」節に出る。
+
 ### effect ラベルの確定は閾値エンジンが行う
 
 `node .claude/scripts/lib/effect-verdict/cli.mjs` (週次 cron) が

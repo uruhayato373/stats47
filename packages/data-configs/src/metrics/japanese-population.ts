@@ -20,7 +20,7 @@ export const japanesePopulation: MetricConfig = {
     "from": 1980,
     "to": 2024,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     "colorScheme": "interpolateBlues",
     "colorSchemeType": "sequential",
