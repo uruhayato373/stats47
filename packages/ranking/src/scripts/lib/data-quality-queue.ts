@@ -169,3 +169,22 @@ export function sortQueue(entries: QueueEntry[]): QueueEntry[] {
     return a.key.localeCompare(b.key);
   });
 }
+
+export type CdcatEntry = { kind?: string; formula?: string; sources?: string[] };
+
+/**
+ * 指標 (#コード) の原典一覧は分母 (人口など) しか載っていないことがある。式に出てくる基礎項目の原典も
+ * 合わせ、どれか 1 つでも原典不明 (空) なら全体を不明 (null) にする。分子の原典を見ずに
+ * 「人口推計・国勢調査だけだから暦年」と判定すると、預金残高 (C360111) 1 人当たりなどを誤って誤りに数える (2026-09-27)。
+ */
+export function resolveSources(cdcat: Record<string, CdcatEntry>, cd: string): string[] | null {
+  const entry = cdcat[cd] ?? cdcat[`#${cd.replace(/^#/, "")}`];
+  if (!entry?.sources) return null;
+  const all = new Set(entry.sources);
+  for (const token of entry.formula?.match(/[A-Z]\d{3,}/g) ?? []) {
+    const base = cdcat[token];
+    if (!base?.sources || base.sources.length === 0) return null;
+    for (const src of base.sources) all.add(src);
+  }
+  return all.size > 0 ? [...all] : null;
+}

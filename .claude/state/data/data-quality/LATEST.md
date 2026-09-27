@@ -1,34 +1,19 @@
 # データ品質キュー (LATEST)
 
-- 生成: 2026-09-27T11:40:25.062Z (基準日 2026-09-27)
-- 対象: active metric 2449 件 (配信年あり 2413 件)
-- 入力: ranking-integrity 2026-09-26T22:10:43.940Z / estat-year-coverage あり / 需要 search-growth/candidates.json (2026-09-20T16:25:08.386Z) GSC impressions
+- 生成: 2026-09-27T11:58:53.837Z (基準日 2026-09-27)
+- 対象: active metric 2449 件 (配信年あり 2408 件)
+- 入力: ranking-integrity 2026-09-27T11:58:49.471Z / estat-year-coverage あり / 需要 search-growth/candidates.json (2026-09-20T16:25:08.386Z) GSC impressions
 - 判定: 1=確認済み時点統計の yearFormat 誤り / 2・3=配信年から推定した周期遅れ (公式最新公表は未照会) / 4=観測1〜2年かつ需要未観測または≤10
 
 ## サマリ
 
-- 1 誤り: 130 / 2 更新: 1016 / 3 調査終了候補: 123 / 4 noindex候補: 186 / 処置なし: 994
-- 年表記: 誤り 130 / 正しい 64 / 判定不能 (公式表記未確認の調査) 2255
+- 1 誤り: 0 / 2 更新: 1072 / 3 調査終了候補: 126 / 4 noindex候補: 189 / 処置なし: 1062
+- 年表記: 誤り 0 / 正しい 192 / 判定不能 (公式表記未確認の調査) 2257
 
-## 1. 誤り (130 件・需要順 上位 15)
+## 1. 誤り (0 件・需要順 上位 15)
 
-- `dual-income-household-ratio` — GSC表示 1136 / 時点統計 (国勢調査報告) なのに yearFormat: fiscal
-- `crude-birth-rate` — GSC表示 183 / 時点統計 (人口動態統計・人口推計・国勢調査報告) なのに yearFormat: fiscal
-- `accidental-deaths-per-100k` — GSC表示 未観測 / 時点統計 (人口動態統計・人口推計・国勢調査報告) なのに yearFormat: fiscal
-- `age-specific-death-rate-0-4-per-1000` — GSC表示 未観測 / 時点統計 (人口動態統計・人口推計・国勢調査報告) なのに yearFormat: fiscal
-- `aging-index` — GSC表示 未観測 / 時点統計 (人口推計・国勢調査報告) なのに yearFormat: fiscal
-- `apartment-ratio` — GSC表示 未観測 / 時点統計 (住宅・土地統計調査報告) なのに yearFormat: fiscal
-- `average-broadcast-media-consumption-time-employed-man` — GSC表示 未観測 / 時点統計 (社会生活基本調査報告) なのに yearFormat: fiscal
-- `average-broadcast-media-consumption-time-employed-woman` — GSC表示 未観測 / 時点統計 (社会生活基本調査報告) なのに yearFormat: fiscal
-- `average-persons-per-general-household` — GSC表示 未観測 / 時点統計 (国勢調査報告) なのに yearFormat: fiscal
-- `bank-deposit-balance-per-person` — GSC表示 未観測 / 時点統計 (人口推計・国勢調査報告) なのに yearFormat: fiscal
-- `bathroom-housing-ratio` — GSC表示 未観測 / 時点統計 (住宅・土地統計調査報告) なのに yearFormat: fiscal
-- `commuter-ratio-from-other-municipalities` — GSC表示 未観測 / 時点統計 (国勢調査報告) なのに yearFormat: fiscal
-- `commuter-ratio-to-other-municipalities` — GSC表示 未観測 / 時点統計 (国勢調査報告) なのに yearFormat: fiscal
-- `crude-death-rate` — GSC表示 未観測 / 時点統計 (人口動態統計・人口推計・国勢調査報告) なのに yearFormat: fiscal
-- `deaths-cerebrovascular-disease-per-100k` — GSC表示 未観測 / 時点統計 (人口動態統計・人口推計・国勢調査報告) なのに yearFormat: fiscal
 
-## 2. 更新 (1016 件・需要順 上位 15)
+## 2. 更新 (1072 件・需要順 上位 15)
 
 - `avg-height-high-school-2nd-male` — GSC表示 6607 / e-Stat に config より多くの年が実在 (estat-year-coverage)
 - `annual-sunshine-duration` — GSC表示 1200 / e-Stat に config より多くの年が実在 (estat-year-coverage)
@@ -46,7 +31,7 @@
 - `library-books` — GSC表示 564 / 最新 2021 年・推定周期 3 年に対し 1 周期遅れ (推定)
 - `stillbirths-after-22-weeks` — GSC表示 556 / 最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)
 
-## 3. 調査終了候補 (123 件・需要順 上位 15)
+## 3. 調査終了候補 (126 件・需要順 上位 15)
 
 - `flood-affected-rivers` — GSC表示 490 / 最新 2014 年で 10 周期遅れ。調査終了か要確認 (推定)
 - `national-pension-full-exemption-rate` — GSC表示 172 / 最新 2006 年で 18 周期遅れ。調査終了か要確認 (推定)
@@ -64,7 +49,7 @@
 - `deposit-balance` — GSC表示 未観測 / 最新 2004 年で 20 周期遅れ。調査終了か要確認 (推定)
 - `deposit-balance-per-person` — GSC表示 未観測 / 最新 2004 年で 20 周期遅れ。調査終了か要確認 (推定)
 
-## 4. noindex候補 (186 件・需要順 上位 15)
+## 4. noindex候補 (189 件・需要順 上位 15)
 
 - `academic-achievement-test-average-rate` — GSC表示 未観測 / 観測 1 年・GSC 表示 未観測
 - `ambulance-hospital-arrival-time` — GSC表示 未観測 / 観測 1 年・GSC 表示 未観測

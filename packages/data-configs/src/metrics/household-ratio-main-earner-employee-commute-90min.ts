@@ -20,7 +20,7 @@ export const householdRatioMainEarnerEmployeeCommute90min: MetricConfig = {
     "from": 2018,
     "to": 2018,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     "colorScheme": "interpolateBlues",
     "colorSchemeType": "sequential",

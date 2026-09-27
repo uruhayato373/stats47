@@ -9,6 +9,7 @@ import {
   classifyQueueEntry,
   classifyYearLabel,
   sortQueue,
+  resolveSources,
 } from "../lib/data-quality-queue";
 
 /**
@@ -93,5 +94,23 @@ describe("実 config の回帰: 公式表記確認済みの時点統計に fisca
   });
   it("同じ config を fiscal に戻すと誤りとして検出される (mutation)", () => {
     expect(classifyYearLabel({ yearFormat: "fiscal", sources })).toBe("error");
+  });
+});
+
+describe("resolveSources (指標の式に出る基礎項目の原典も見る)", () => {
+  const cdcat = {
+    "#C04605": { kind: "indicator", formula: "C360111/A1101", sources: ["人口推計", "国勢調査報告"] },
+    "#A05201": { kind: "indicator", formula: "A4101/A1101", sources: ["人口動態統計", "人口推計", "国勢調査報告"] },
+    C360111: { kind: "base", sources: [] },
+    A4101: { kind: "base", sources: ["人口動態統計"] },
+    A1101: { kind: "base", sources: ["人口推計", "国勢調査報告"] },
+  };
+
+  it("分子の原典が不明なら全体を不明にする (預金残高 1 人当たりを暦年の誤りと数えない)", () => {
+    expect(resolveSources(cdcat, "#C04605")).toBeNull();
+  });
+
+  it("基礎項目の原典がすべて分かれば和集合を返す", () => {
+    expect(resolveSources(cdcat, "#A05201")?.sort()).toEqual(["人口動態統計", "人口推計", "国勢調査報告"].sort());
   });
 });

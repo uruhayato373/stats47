@@ -23,7 +23,7 @@ import { fileURLToPath } from "node:url";
 import { METRICS_REGISTRY } from "@stats47/data-configs/registry";
 import type { MetricConfig } from "@stats47/data-configs";
 
-import { classifyQueueEntry, sortQueue, type QueueEntry } from "./lib/data-quality-queue";
+import { classifyQueueEntry, resolveSources, sortQueue, type CdcatEntry, type QueueEntry } from "./lib/data-quality-queue";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..", "..", "..", "..");
@@ -32,7 +32,7 @@ const YEAR_COVERAGE = path.join(ROOT, ".claude/state/data/estat-year-coverage/qu
 const CDCAT01 = path.join(ROOT, "packages/data-configs/src/ssds/cdcat01-sources.generated.json");
 const SEARCH_GROWTH = path.join(ROOT, ".claude/state/search-growth/candidates.json");
 const OUT_DIR = path.join(ROOT, ".claude/state/data/data-quality");
-const R2_BASE = process.env.R2_PUBLIC_BASE ?? "https://storage.stats47.jp";
+const R2_BASE = process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp";
 
 const args = process.argv.slice(2);
 const FETCH_MISSING = args.includes("--fetch-missing");
@@ -62,7 +62,7 @@ async function main() {
   const integrity = readJson<{ generatedAt?: string; deliveredYears?: Record<string, string[]> }>(INTEGRITY);
   const deliveredYears: Record<string, string[]> = { ...(integrity?.deliveredYears ?? {}) };
   const coverage = readJson<{ results?: Record<string, { verdict?: string }> }>(YEAR_COVERAGE);
-  const cdcat = readJson<Record<string, { sources?: string[] }>>(CDCAT01) ?? {};
+  const cdcat = readJson<Record<string, CdcatEntry>>(CDCAT01) ?? {};
   const growth = readJson<{
     generatedAt?: string;
     candidates?: Array<{ url: string; evidence?: Array<{ source: string; metric: string; value: number }> }>;
@@ -101,7 +101,7 @@ async function main() {
   const entries: QueueEntry[] = active.map(([key, config]) => {
     const src = config.source as { kind?: string; cdCat01?: string };
     const cd = src?.kind === "estat" ? src.cdCat01 : undefined;
-    const sources = cd ? (cdcat[cd]?.sources ?? cdcat[`#${cd}`]?.sources ?? null) : null;
+    const sources = cd ? resolveSources(cdcat, cd) : null;
     const years = (deliveredYears[key] ?? []).map((y) => Number(y.slice(0, 4))).filter(Number.isFinite);
     return classifyQueueEntry({
       key,

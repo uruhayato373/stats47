@@ -19,7 +19,7 @@ export const agingIndex: MetricConfig = {
     "from": 2022,
     "to": 2022
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     "colorScheme": "interpolateBlues",
     "colorSchemeType": "sequential",

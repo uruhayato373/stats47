@@ -1,2170 +1,28 @@
 {
-  "generatedAt": "2026-09-27T11:40:25.062Z",
+  "generatedAt": "2026-09-27T11:58:53.837Z",
   "today": "2026-09-27",
   "inputs": {
-    "integrityAudit": "2026-09-26T22:10:43.940Z",
-    "integrityHasDeliveredYears": false,
-    "fetchedFromR2": 2413,
+    "integrityAudit": "2026-09-27T11:58:49.471Z",
+    "integrityHasDeliveredYears": true,
+    "fetchedFromR2": 0,
     "estatYearCoverage": true,
     "demandSource": "search-growth/candidates.json (2026-09-20T16:25:08.386Z) GSC impressions"
   },
   "basis": "1=確認済み時点統計の yearFormat 誤り / 2・3=配信年から推定した周期遅れ (公式最新公表は未照会) / 4=観測1〜2年かつ需要未観測または≤10",
   "summary": {
     "activeMetrics": 2449,
-    "withDeliveredYears": 2413,
-    "treatment1": 130,
-    "treatment2": 1016,
-    "treatment3": 123,
-    "treatment4": 186,
-    "noAction": 994,
-    "yearLabelError": 130,
-    "yearLabelOk": 64,
-    "yearLabelUnknown": 2255,
-    "freshnessUnknown": 36
+    "withDeliveredYears": 2408,
+    "treatment1": 0,
+    "treatment2": 1072,
+    "treatment3": 126,
+    "treatment4": 189,
+    "noAction": 1062,
+    "yearLabelError": 0,
+    "yearLabelOk": 192,
+    "yearLabelUnknown": 2257,
+    "freshnessUnknown": 41
   },
   "entries": [
-    {
-      "key": "dual-income-household-ratio",
-      "treatment": 1,
-      "reason": "時点統計 (国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "国勢調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2020,
-      "observedYears": 4,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": 1136
-    },
-    {
-      "key": "crude-birth-rate",
-      "treatment": 1,
-      "reason": "時点統計 (人口動態統計・人口推計・国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口動態統計",
-        "人口推計",
-        "国勢調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 44,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": 183
-    },
-    {
-      "key": "accidental-deaths-per-100k",
-      "treatment": 1,
-      "reason": "時点統計 (人口動態統計・人口推計・国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口動態統計",
-        "人口推計",
-        "国勢調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 49,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "age-specific-death-rate-0-4-per-1000",
-      "treatment": 1,
-      "reason": "時点統計 (人口動態統計・人口推計・国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口動態統計",
-        "人口推計",
-        "国勢調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": true,
-      "demand": null
-    },
-    {
-      "key": "aging-index",
-      "treatment": 1,
-      "reason": "時点統計 (人口推計・国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口推計",
-        "国勢調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2022,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": true,
-      "demand": null
-    },
-    {
-      "key": "apartment-ratio",
-      "treatment": 1,
-      "reason": "時点統計 (住宅・土地統計調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "住宅・土地統計調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": true,
-      "demand": null
-    },
-    {
-      "key": "average-broadcast-media-consumption-time-employed-man",
-      "treatment": 1,
-      "reason": "時点統計 (社会生活基本調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "社会生活基本調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2021,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": true,
-      "demand": null
-    },
-    {
-      "key": "average-broadcast-media-consumption-time-employed-woman",
-      "treatment": 1,
-      "reason": "時点統計 (社会生活基本調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "社会生活基本調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2021,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": true,
-      "demand": null
-    },
-    {
-      "key": "average-persons-per-general-household",
-      "treatment": 1,
-      "reason": "時点統計 (国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "国勢調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2020,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": true,
-      "demand": null
-    },
-    {
-      "key": "bank-deposit-balance-per-person",
-      "treatment": 1,
-      "reason": "時点統計 (人口推計・国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口推計",
-        "国勢調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2024,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": true,
-      "demand": null
-    },
-    {
-      "key": "bathroom-housing-ratio",
-      "treatment": 1,
-      "reason": "時点統計 (住宅・土地統計調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "住宅・土地統計調査報告"
-      ],
-      "freshness": "ended-candidate",
-      "latestYear": 2008,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": true,
-      "demand": null
-    },
-    {
-      "key": "commuter-ratio-from-other-municipalities",
-      "treatment": 1,
-      "reason": "時点統計 (国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "国勢調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2020,
-      "observedYears": 10,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "commuter-ratio-to-other-municipalities",
-      "treatment": 1,
-      "reason": "時点統計 (国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "国勢調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2020,
-      "observedYears": 10,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "crude-death-rate",
-      "treatment": 1,
-      "reason": "時点統計 (人口動態統計・人口推計・国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口動態統計",
-        "人口推計",
-        "国勢調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 49,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "deaths-cerebrovascular-disease-per-100k",
-      "treatment": 1,
-      "reason": "時点統計 (人口動態統計・人口推計・国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口動態統計",
-        "人口推計",
-        "国勢調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 34,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "deaths-diabetes-per-100k",
-      "treatment": 1,
-      "reason": "時点統計 (人口動態統計・人口推計・国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口動態統計",
-        "人口推計",
-        "国勢調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 23,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "deaths-heart-disease-excl-hypertensive-per-100k",
-      "treatment": 1,
-      "reason": "時点統計 (人口動態統計・人口推計・国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口動態統計",
-        "人口推計",
-        "国勢調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 34,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "deaths-hypertensive-diseases-per-100k",
-      "treatment": 1,
-      "reason": "時点統計 (人口動態統計・人口推計・国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口動態統計",
-        "人口推計",
-        "国勢調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 13,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "deaths-lifestyle-diseases-per-100k",
-      "treatment": 1,
-      "reason": "時点統計 (人口動態統計・人口推計・国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口動態統計",
-        "人口推計",
-        "国勢調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 23,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "deaths-malignant-neoplasms-per-100k",
-      "treatment": 1,
-      "reason": "時点統計 (人口動態統計・人口推計・国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口動態統計",
-        "人口推計",
-        "国勢調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 35,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "densely-inhabited-district-population-density",
-      "treatment": 1,
-      "reason": "時点統計 (国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "国勢調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2020,
-      "observedYears": 5,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "densely-inhabited-district-population-ratio",
-      "treatment": 1,
-      "reason": "時点統計 (人口推計・国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口推計",
-        "国勢調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2020,
-      "observedYears": 10,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "densely-populated-area-change-rate",
-      "treatment": 1,
-      "reason": "時点統計 (国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "国勢調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2020,
-      "observedYears": 3,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "dependent-population-index",
-      "treatment": 1,
-      "reason": "時点統計 (人口推計・国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口推計",
-        "国勢調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2022,
-      "observedYears": 39,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "detached-house-ratio",
-      "treatment": 1,
-      "reason": "時点統計 (住宅・土地統計調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "住宅・土地統計調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": true,
-      "demand": null
-    },
-    {
-      "key": "divorces-per-total-population",
-      "treatment": 1,
-      "reason": "時点統計 (人口動態統計・人口推計・国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口動態統計",
-        "人口推計",
-        "国勢調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2022,
-      "observedYears": 48,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "elderly-couple-only-household-ratio",
-      "treatment": 1,
-      "reason": "時点統計 (国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "国勢調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2020,
-      "observedYears": 7,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "elderly-workers-ratio",
-      "treatment": 1,
-      "reason": "時点統計 (人口推計・国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口推計",
-        "国勢調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2020,
-      "observedYears": 5,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "employed-people-ratio",
-      "treatment": 1,
-      "reason": "時点統計 (国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "国勢調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2020,
-      "observedYears": 5,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "employed-people-ratio-primary",
-      "treatment": 1,
-      "reason": "時点統計 (国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "国勢調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2020,
-      "observedYears": 10,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "employed-people-ratio-secondary",
-      "treatment": 1,
-      "reason": "時点統計 (国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "国勢調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2020,
-      "observedYears": 10,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "employed-people-ratio-tertiary",
-      "treatment": 1,
-      "reason": "時点統計 (国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "国勢調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2020,
-      "observedYears": 10,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "employee-ratio",
-      "treatment": 1,
-      "reason": "時点統計 (国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "国勢調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2020,
-      "observedYears": 10,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "final-education-elementary-junior-high-ratio",
-      "treatment": 1,
-      "reason": "時点統計 (国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "国勢調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2020,
-      "observedYears": 5,
-      "cadence": 10,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "final-education-highschool-old-junior-high-ratio",
-      "treatment": 1,
-      "reason": "時点統計 (国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "国勢調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2020,
-      "observedYears": 5,
-      "cadence": 10,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "final-education-junior-college-technical-college-ratio",
-      "treatment": 1,
-      "reason": "時点統計 (国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "国勢調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2020,
-      "observedYears": 5,
-      "cadence": 10,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "final-education-university-graduate-school-ratio",
-      "treatment": 1,
-      "reason": "時点統計 (国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "国勢調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2020,
-      "observedYears": 4,
-      "cadence": 10,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "floor-area-per-dwelling-owner",
-      "treatment": 1,
-      "reason": "時点統計 (住宅・土地統計調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "住宅・土地統計調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2023,
-      "observedYears": 2,
-      "cadence": 10,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "floor-area-per-dwelling-rented",
-      "treatment": 1,
-      "reason": "時点統計 (住宅・土地統計調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "住宅・土地統計調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2023,
-      "observedYears": 10,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "flush-toilet-housing-ratio",
-      "treatment": 1,
-      "reason": "時点統計 (住宅・土地統計調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "住宅・土地統計調査報告"
-      ],
-      "freshness": "ended-candidate",
-      "latestYear": 2008,
-      "observedYears": 7,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "foreign-population-per-100k",
-      "treatment": 1,
-      "reason": "時点統計 (人口推計・国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口推計",
-        "国勢調査報告"
-      ],
-      "freshness": "unknown",
-      "latestYear": null,
-      "observedYears": 0,
-      "cadence": null,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "foreign-resident-count-china-per-100k",
-      "treatment": 1,
-      "reason": "時点統計 (人口推計・国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口推計",
-        "国勢調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2020,
-      "observedYears": 9,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "foreign-resident-count-korea-per-100k",
-      "treatment": 1,
-      "reason": "時点統計 (人口推計・国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口推計",
-        "国勢調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2020,
-      "observedYears": 9,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "foreign-resident-count-per-100k",
-      "treatment": 1,
-      "reason": "時点統計 (人口推計・国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口推計",
-        "国勢調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2020,
-      "observedYears": 9,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "foreign-resident-count-usa-per-100k",
-      "treatment": 1,
-      "reason": "時点統計 (人口推計・国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口推計",
-        "国勢調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2020,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "general-households",
-      "treatment": 1,
-      "reason": "時点統計 (国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "国勢調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2020,
-      "observedYears": 9,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "hobby-leisure-avg-time-employed-female",
-      "treatment": 1,
-      "reason": "時点統計 (社会生活基本調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "社会生活基本調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2021,
-      "observedYears": 9,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "hobby-leisure-avg-time-employed-male",
-      "treatment": 1,
-      "reason": "時点統計 (社会生活基本調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "社会生活基本調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2021,
-      "observedYears": 9,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "hobby-leisure-avg-time-unemployed-female",
-      "treatment": 1,
-      "reason": "時点統計 (社会生活基本調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "社会生活基本調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2021,
-      "observedYears": 9,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "hobby-leisure-avg-time-unemployed-male",
-      "treatment": 1,
-      "reason": "時点統計 (社会生活基本調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "社会生活基本調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2021,
-      "observedYears": 5,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "household-ratio-above-minimum-housing-area",
-      "treatment": 1,
-      "reason": "時点統計 (住宅・土地統計調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "住宅・土地統計調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2023,
-      "observedYears": 4,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "household-ratio-main-earner-employee-commute-90min",
-      "treatment": 1,
-      "reason": "時点統計 (住宅・土地統計調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "住宅・土地統計調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2018,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "household-ratio-with-65plus",
-      "treatment": 1,
-      "reason": "時点統計 (国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "国勢調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2020,
-      "observedYears": 9,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "in-prefecture-employed-people-ratio",
-      "treatment": 1,
-      "reason": "時点統計 (国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "国勢調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2020,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "infant-mortality-rate-per-1000-births",
-      "treatment": 1,
-      "reason": "時点統計 (人口動態統計) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口動態統計"
-      ],
-      "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 12,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "inflow-population-ratio",
-      "treatment": 1,
-      "reason": "時点統計 (人口推計・国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口推計",
-        "国勢調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2020,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "labor-force-population-ratio-man",
-      "treatment": 1,
-      "reason": "時点統計 (人口推計・国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口推計",
-        "国勢調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2020,
-      "observedYears": 9,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "labor-force-population-ratio-woman",
-      "treatment": 1,
-      "reason": "時点統計 (人口推計・国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口推計",
-        "国勢調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2020,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "low-birthweight-rate-per-1000-births",
-      "treatment": 1,
-      "reason": "時点統計 (人口動態統計) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口動態統計"
-      ],
-      "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 23,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "main-household-ratio-main-earner-employee-commute-90min",
-      "treatment": 1,
-      "reason": "時点統計 (住宅・土地統計調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "住宅・土地統計調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "marriages-per-total-population",
-      "treatment": 1,
-      "reason": "時点統計 (人口動態統計・人口推計・国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口動態統計",
-        "人口推計",
-        "国勢調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2022,
-      "observedYears": 48,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "maternal-mortality-rate-per-100k-births",
-      "treatment": 1,
-      "reason": "時点統計 (人口動態統計) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口動態統計"
-      ],
-      "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 34,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "media-avg-time-unemployed-female",
-      "treatment": 1,
-      "reason": "時点統計 (社会生活基本調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "社会生活基本調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2021,
-      "observedYears": 7,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "media-avg-time-unemployed-male",
-      "treatment": 1,
-      "reason": "時点統計 (社会生活基本調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "社会生活基本調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2021,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "neonatal-mortality-rate-per-1000-births",
-      "treatment": 1,
-      "reason": "時点統計 (人口動態統計) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口動態統計"
-      ],
-      "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 12,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "nuclear-family-households-ratio",
-      "treatment": 1,
-      "reason": "時点統計 (国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "国勢調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2020,
-      "observedYears": 8,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "old-population-index",
-      "treatment": 1,
-      "reason": "時点統計 (人口推計・国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口推計",
-        "国勢調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2022,
-      "observedYears": 44,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "outflow-population-ratio",
-      "treatment": 1,
-      "reason": "時点統計 (人口推計・国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口推計",
-        "国勢調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2020,
-      "observedYears": 3,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "overseas-travel-annual-participation-rate-10plus",
-      "treatment": 1,
-      "reason": "時点統計 (社会生活基本調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "社会生活基本調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2021,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "overseas-travel-annual-participation-rate-15plus",
-      "treatment": 1,
-      "reason": "時点統計 (社会生活基本調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "社会生活基本調査報告"
-      ],
-      "freshness": "ended-candidate",
-      "latestYear": 2001,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "owner-occupied-housing-ratio",
-      "treatment": 1,
-      "reason": "時点統計 (住宅・土地統計調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "住宅・土地統計調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2023,
-      "observedYears": 9,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "perinatal-mortality-rate-per-1000-births",
-      "treatment": 1,
-      "reason": "時点統計 (人口動態統計) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口動態統計"
-      ],
-      "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "postal-savings-balance-per-capita",
-      "treatment": 1,
-      "reason": "時点統計 (人口推計・国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口推計",
-        "国勢調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2024,
-      "observedYears": 45,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "primary-activity-avg-time-female",
-      "treatment": 1,
-      "reason": "時点統計 (社会生活基本調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "社会生活基本調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2021,
-      "observedYears": 10,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "primary-activity-avg-time-male",
-      "treatment": 1,
-      "reason": "時点統計 (社会生活基本調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "社会生活基本調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2021,
-      "observedYears": 3,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "private-rented-housing-ratio",
-      "treatment": 1,
-      "reason": "時点統計 (住宅・土地統計調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "住宅・土地統計調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "production-age-population-ratio",
-      "treatment": 1,
-      "reason": "時点統計 (人口推計・国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口推計",
-        "国勢調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2024,
-      "observedYears": 2,
-      "cadence": 4,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "ratio-65-plus",
-      "treatment": 1,
-      "reason": "時点統計 (人口推計・国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口推計",
-        "国勢調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2024,
-      "observedYears": 20,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "ratio-never-married-15-plus",
-      "treatment": 1,
-      "reason": "時点統計 (国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "国勢調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2020,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "ratio-of-general-households-to-national",
-      "treatment": 1,
-      "reason": "時点統計 (国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "国勢調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2020,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "ratio-of-total-population",
-      "treatment": 1,
-      "reason": "時点統計 (人口推計・国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口推計",
-        "国勢調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "rented-housing-ratio",
-      "treatment": 1,
-      "reason": "時点統計 (住宅・土地統計調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "住宅・土地統計調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2023,
-      "observedYears": 4,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "rooms-per-dwelling",
-      "treatment": 1,
-      "reason": "時点統計 (住宅・土地統計調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "住宅・土地統計調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2023,
-      "observedYears": 10,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "rooms-per-dwelling-owner",
-      "treatment": 1,
-      "reason": "時点統計 (住宅・土地統計調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "住宅・土地統計調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2023,
-      "observedYears": 10,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "rooms-per-dwelling-rented",
-      "treatment": 1,
-      "reason": "時点統計 (住宅・土地統計調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "住宅・土地統計調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2023,
-      "observedYears": 10,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "row-house-ratio",
-      "treatment": 1,
-      "reason": "時点統計 (住宅・土地統計調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "住宅・土地統計調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2023,
-      "observedYears": 10,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "secondary-activity-avg-time-employed-female",
-      "treatment": 1,
-      "reason": "時点統計 (社会生活基本調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "社会生活基本調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2021,
-      "observedYears": 10,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "secondary-activity-avg-time-employed-male",
-      "treatment": 1,
-      "reason": "時点統計 (社会生活基本調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "社会生活基本調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2021,
-      "observedYears": 10,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "secondary-activity-avg-time-unemployed-female",
-      "treatment": 1,
-      "reason": "時点統計 (社会生活基本調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "社会生活基本調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2021,
-      "observedYears": 10,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "secondary-activity-avg-time-unemployed-male",
-      "treatment": 1,
-      "reason": "時点統計 (社会生活基本調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "社会生活基本調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2021,
-      "observedYears": 6,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "secondary-employed-people-ratio-tertiary",
-      "treatment": 1,
-      "reason": "時点統計 (国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "国勢調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2020,
-      "observedYears": 2,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "sex-old-population-ratio",
-      "treatment": 1,
-      "reason": "時点統計 (人口推計・国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口推計",
-        "国勢調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "sex-production-age-population-ratio",
-      "treatment": 1,
-      "reason": "時点統計 (人口推計・国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口推計",
-        "国勢調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "sex-young-population-ratio",
-      "treatment": 1,
-      "reason": "時点統計 (人口推計・国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口推計",
-        "国勢調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "single-person-household-old-population-ratio",
-      "treatment": 1,
-      "reason": "時点統計 (国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "国勢調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2020,
-      "observedYears": 9,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "single-person-household-ratio",
-      "treatment": 1,
-      "reason": "時点統計 (国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "国勢調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2020,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "site-area-per-dwelling",
-      "treatment": 1,
-      "reason": "時点統計 (住宅・土地統計調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "住宅・土地統計調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "sports-annual-participation-rate-10plus",
-      "treatment": 1,
-      "reason": "時点統計 (社会生活基本調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "社会生活基本調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2021,
-      "observedYears": 4,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "stillbirth-rate",
-      "treatment": 1,
-      "reason": "時点統計 (人口動態統計) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口動態統計"
-      ],
-      "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 34,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "suicides-per-100k",
-      "treatment": 1,
-      "reason": "時点統計 (人口動態統計・人口推計・国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口動態統計",
-        "人口推計",
-        "国勢調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 49,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "tatami-per-dwelling-owner",
-      "treatment": 1,
-      "reason": "時点統計 (住宅・土地統計調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "住宅・土地統計調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2023,
-      "observedYears": 10,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "tatami-per-dwelling-rented",
-      "treatment": 1,
-      "reason": "時点統計 (住宅・土地統計調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "住宅・土地統計調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2023,
-      "observedYears": 6,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "tatami-per-person-owner",
-      "treatment": 1,
-      "reason": "時点統計 (住宅・土地統計調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "住宅・土地統計調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "tatami-per-person-rented",
-      "treatment": 1,
-      "reason": "時点統計 (住宅・土地統計調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "住宅・土地統計調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "tertiary-activity-avg-time-employed-female",
-      "treatment": 1,
-      "reason": "時点統計 (社会生活基本調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "社会生活基本調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2021,
-      "observedYears": 8,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "tertiary-activity-avg-time-employed-male",
-      "treatment": 1,
-      "reason": "時点統計 (社会生活基本調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "社会生活基本調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2021,
-      "observedYears": 3,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "tertiary-activity-avg-time-unemployed-female",
-      "treatment": 1,
-      "reason": "時点統計 (社会生活基本調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "社会生活基本調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2021,
-      "observedYears": 10,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "tertiary-activity-avg-time-unemployed-male",
-      "treatment": 1,
-      "reason": "時点統計 (社会生活基本調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "社会生活基本調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2021,
-      "observedYears": 10,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "travel-leisure-annual-participation-rate-10plus",
-      "treatment": 1,
-      "reason": "時点統計 (社会生活基本調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "社会生活基本調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2021,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "travel-leisure-annual-participation-rate-15plus",
-      "treatment": 1,
-      "reason": "時点統計 (社会生活基本調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "社会生活基本調査報告"
-      ],
-      "freshness": "ended-candidate",
-      "latestYear": 2001,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "unemployment-rate",
-      "treatment": 1,
-      "reason": "時点統計 (国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "国勢調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2020,
-      "observedYears": 5,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "unmarried-ratio-female-25-29",
-      "treatment": 1,
-      "reason": "時点統計 (人口推計・国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口推計",
-        "国勢調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2020,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "unmarried-ratio-female-30-34",
-      "treatment": 1,
-      "reason": "時点統計 (人口推計・国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口推計",
-        "国勢調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2020,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "unmarried-ratio-female-35-39",
-      "treatment": 1,
-      "reason": "時点統計 (人口推計・国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口推計",
-        "国勢調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2020,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "unmarried-ratio-female-40-44",
-      "treatment": 1,
-      "reason": "時点統計 (人口推計・国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口推計",
-        "国勢調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2020,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "unmarried-ratio-female-45-49",
-      "treatment": 1,
-      "reason": "時点統計 (人口推計・国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口推計",
-        "国勢調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2020,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "unmarried-ratio-male-25-29",
-      "treatment": 1,
-      "reason": "時点統計 (人口推計・国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口推計",
-        "国勢調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2020,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "unmarried-ratio-male-30-34",
-      "treatment": 1,
-      "reason": "時点統計 (人口推計・国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口推計",
-        "国勢調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2020,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "unmarried-ratio-male-35-39",
-      "treatment": 1,
-      "reason": "時点統計 (人口推計・国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口推計",
-        "国勢調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2020,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "unmarried-ratio-male-40-44",
-      "treatment": 1,
-      "reason": "時点統計 (人口推計・国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口推計",
-        "国勢調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2020,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "unmarried-ratio-male-45-49",
-      "treatment": 1,
-      "reason": "時点統計 (人口推計・国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口推計",
-        "国勢調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2020,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "vacant-housing-ratio",
-      "treatment": 1,
-      "reason": "時点統計 (住宅・土地統計調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "住宅・土地統計調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2023,
-      "observedYears": 7,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "volunteer-activity-annual-participation-rate-10plus",
-      "treatment": 1,
-      "reason": "時点統計 (社会生活基本調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "社会生活基本調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2021,
-      "observedYears": 5,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "volunteer-activity-annual-participation-rate-15plus",
-      "treatment": 1,
-      "reason": "時点統計 (社会生活基本調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "社会生活基本調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2021,
-      "observedYears": 6,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "widowed-ratio-female-60plus",
-      "treatment": 1,
-      "reason": "時点統計 (人口推計・国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口推計",
-        "国勢調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2020,
-      "observedYears": 10,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "widowed-ratio-male-60plus",
-      "treatment": 1,
-      "reason": "時点統計 (人口推計・国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口推計",
-        "国勢調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2020,
-      "observedYears": 7,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "work-avg-time-employed-female",
-      "treatment": 1,
-      "reason": "時点統計 (社会生活基本調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "社会生活基本調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2021,
-      "observedYears": 8,
-      "cadence": 5,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "work-avg-time-employed-male",
-      "treatment": 1,
-      "reason": "時点統計 (社会生活基本調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "社会生活基本調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2021,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "young-population-index",
-      "treatment": 1,
-      "reason": "時点統計 (人口推計・国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口推計",
-        "国勢調査報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2022,
-      "observedYears": 40,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "young-population-ratio",
-      "treatment": 1,
-      "reason": "時点統計 (人口推計・国勢調査報告) なのに yearFormat: fiscal",
-      "yearLabel": "error",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口推計",
-        "国勢調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2024,
-      "observedYears": 18,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
     {
       "key": "avg-height-high-school-2nd-male",
       "treatment": 2,
@@ -2846,6 +704,24 @@
       "cadence": 1,
       "estatExtendCandidate": false,
       "demand": 187
+    },
+    {
+      "key": "crude-birth-rate",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "人口動態統計",
+        "人口推計",
+        "国勢調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 44,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": 183
     },
     {
       "key": "fishery-species-catch-tuna",
@@ -3995,6 +1871,24 @@
       "demand": null
     },
     {
+      "key": "accidental-deaths-per-100k",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "人口動態統計",
+        "人口推計",
+        "国勢調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 49,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
       "key": "accountant-annual-income",
       "treatment": 2,
       "reason": "最新 2022 年・推定周期 1 年に対し 2 周期遅れ (推定)",
@@ -4084,6 +1978,41 @@
       ],
       "freshness": "stale",
       "latestYear": 2020,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": true,
+      "demand": null
+    },
+    {
+      "key": "age-specific-death-rate-0-4-per-1000",
+      "treatment": 2,
+      "reason": "e-Stat に config より多くの年が実在 (estat-year-coverage)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "人口動態統計",
+        "人口推計",
+        "国勢調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": true,
+      "demand": null
+    },
+    {
+      "key": "aging-index",
+      "treatment": 2,
+      "reason": "e-Stat に config より多くの年が実在 (estat-year-coverage)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "人口推計",
+        "国勢調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2022,
       "observedYears": 1,
       "cadence": 1,
       "estatExtendCandidate": true,
@@ -4511,6 +2440,22 @@
       "demand": null
     },
     {
+      "key": "apartment-ratio",
+      "treatment": 2,
+      "reason": "e-Stat に config より多くの年が実在 (estat-year-coverage)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "住宅・土地統計調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": true,
+      "demand": null
+    },
+    {
       "key": "apparel-retail-store-count-per-1000",
       "treatment": 2,
       "reason": "e-Stat に config より多くの年が実在 (estat-year-coverage)",
@@ -4719,6 +2664,38 @@
       "demand": null
     },
     {
+      "key": "average-broadcast-media-consumption-time-employed-man",
+      "treatment": 2,
+      "reason": "e-Stat に config より多くの年が実在 (estat-year-coverage)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "社会生活基本調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2021,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": true,
+      "demand": null
+    },
+    {
+      "key": "average-broadcast-media-consumption-time-employed-woman",
+      "treatment": 2,
+      "reason": "e-Stat に config より多くの年が実在 (estat-year-coverage)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "社会生活基本調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2021,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": true,
+      "demand": null
+    },
+    {
       "key": "average-height-high-school-second-grade-female",
       "treatment": 2,
       "reason": "e-Stat に config より多くの年が実在 (estat-year-coverage)",
@@ -4787,7 +2764,7 @@
       "treatment": 2,
       "reason": "e-Stat に config より多くの年が実在 (estat-year-coverage)",
       "yearLabel": "unknown",
-      "yearFormat": "fiscal",
+      "yearFormat": "calendar",
       "sources": [
         "完全生命表",
         "都道府県別生命表"
@@ -4804,7 +2781,7 @@
       "treatment": 2,
       "reason": "e-Stat に config より多くの年が実在 (estat-year-coverage)",
       "yearLabel": "unknown",
-      "yearFormat": "fiscal",
+      "yearFormat": "calendar",
       "sources": [
         "完全生命表",
         "都道府県別生命表"
@@ -4821,7 +2798,7 @@
       "treatment": 2,
       "reason": "e-Stat に config より多くの年が実在 (estat-year-coverage)",
       "yearLabel": "unknown",
-      "yearFormat": "fiscal",
+      "yearFormat": "calendar",
       "sources": [
         "完全生命表",
         "都道府県別生命表"
@@ -4844,6 +2821,22 @@
       ],
       "freshness": "stale",
       "latestYear": 2023,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": true,
+      "demand": null
+    },
+    {
+      "key": "average-persons-per-general-household",
+      "treatment": 2,
+      "reason": "e-Stat に config より多くの年が実在 (estat-year-coverage)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "国勢調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2020,
       "observedYears": 1,
       "cadence": 1,
       "estatExtendCandidate": true,
@@ -5114,12 +3107,26 @@
       "demand": null
     },
     {
+      "key": "bank-deposit-balance-per-person",
+      "treatment": 2,
+      "reason": "e-Stat に config より多くの年が実在 (estat-year-coverage)",
+      "yearLabel": "unknown",
+      "yearFormat": "fiscal",
+      "sources": null,
+      "freshness": "fresh",
+      "latestYear": 2024,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": true,
+      "demand": null
+    },
+    {
       "key": "bank-loan-balance",
       "treatment": 2,
       "reason": "e-Stat に config より多くの年が実在 (estat-year-coverage)",
       "yearLabel": "unknown",
       "yearFormat": "fiscal",
-      "sources": [],
+      "sources": null,
       "freshness": "fresh",
       "latestYear": 2024,
       "observedYears": 1,
@@ -5133,7 +3140,7 @@
       "reason": "e-Stat に config より多くの年が実在 (estat-year-coverage)",
       "yearLabel": "unknown",
       "yearFormat": "fiscal",
-      "sources": [],
+      "sources": null,
       "freshness": "fresh",
       "latestYear": 2024,
       "observedYears": 1,
@@ -5215,6 +3222,22 @@
       "observedYears": 6,
       "cadence": 3,
       "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
+      "key": "bathroom-housing-ratio",
+      "treatment": 2,
+      "reason": "e-Stat に config より多くの年が実在 (estat-year-coverage)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "住宅・土地統計調査報告"
+      ],
+      "freshness": "ended-candidate",
+      "latestYear": 2008,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": true,
       "demand": null
     },
     {
@@ -6050,7 +4073,7 @@
       ],
       "freshness": "stale",
       "latestYear": 2023,
-      "observedYears": 34,
+      "observedYears": 33,
       "cadence": 1,
       "estatExtendCandidate": false,
       "demand": null
@@ -6616,6 +4639,24 @@
       "demand": null
     },
     {
+      "key": "crude-death-rate",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "人口動態統計",
+        "人口推計",
+        "国勢調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 49,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
       "key": "current-balance-ratio",
       "treatment": 2,
       "reason": "最新 2022 年・推定周期 1 年に対し 2 周期遅れ (推定)",
@@ -6628,20 +4669,6 @@
       "freshness": "stale",
       "latestYear": 2022,
       "observedYears": 35,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "current-balance-ratio-city",
-      "treatment": 2,
-      "reason": "最新 2021 年・推定周期 1 年に対し 3 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": null,
-      "freshness": "stale",
-      "latestYear": 2021,
-      "observedYears": 22,
       "cadence": 1,
       "estatExtendCandidate": false,
       "demand": null
@@ -6775,6 +4802,24 @@
       "demand": null
     },
     {
+      "key": "deaths-cerebrovascular-disease-per-100k",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "人口動態統計",
+        "人口推計",
+        "国勢調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 34,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
       "key": "deaths-diabetes",
       "treatment": 2,
       "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
@@ -6786,6 +4831,42 @@
       "freshness": "stale",
       "latestYear": 2023,
       "observedYears": 49,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
+      "key": "deaths-diabetes-per-100k",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "人口動態統計",
+        "人口推計",
+        "国勢調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 23,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
+      "key": "deaths-heart-disease-excl-hypertensive-per-100k",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "人口動態統計",
+        "人口推計",
+        "国勢調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 34,
       "cadence": 1,
       "estatExtendCandidate": false,
       "demand": null
@@ -6807,6 +4888,24 @@
       "demand": null
     },
     {
+      "key": "deaths-hypertensive-diseases-per-100k",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "人口動態統計",
+        "人口推計",
+        "国勢調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 13,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
       "key": "deaths-lifestyle-diseases",
       "treatment": 2,
       "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
@@ -6818,6 +4917,42 @@
       "freshness": "stale",
       "latestYear": 2023,
       "observedYears": 49,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
+      "key": "deaths-lifestyle-diseases-per-100k",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "人口動態統計",
+        "人口推計",
+        "国勢調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 23,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
+      "key": "deaths-malignant-neoplasms-per-100k",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "人口動態統計",
+        "人口推計",
+        "国勢調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 35,
       "cadence": 1,
       "estatExtendCandidate": false,
       "demand": null
@@ -7161,6 +5296,23 @@
       "demand": null
     },
     {
+      "key": "dependent-population-index",
+      "treatment": 2,
+      "reason": "最新 2022 年・推定周期 1 年に対し 2 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "人口推計",
+        "国勢調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2022,
+      "observedYears": 39,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
       "key": "designated-museum-visitors",
       "treatment": 2,
       "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
@@ -7186,6 +5338,22 @@
       "observedYears": 1,
       "cadence": 1,
       "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
+      "key": "detached-house-ratio",
+      "treatment": 2,
+      "reason": "e-Stat に config より多くの年が実在 (estat-year-coverage)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "住宅・土地統計調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": true,
       "demand": null
     },
     {
@@ -7349,6 +5517,24 @@
       "freshness": "stale",
       "latestYear": 2023,
       "observedYears": 49,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
+      "key": "divorces-per-total-population",
+      "treatment": 2,
+      "reason": "最新 2022 年・推定周期 1 年に対し 2 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "人口動態統計",
+        "人口推計",
+        "国勢調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2022,
+      "observedYears": 48,
       "cadence": 1,
       "estatExtendCandidate": false,
       "demand": null
@@ -7588,7 +5774,7 @@
       ],
       "freshness": "stale",
       "latestYear": 2020,
-      "observedYears": 18,
+      "observedYears": 17,
       "cadence": 1,
       "estatExtendCandidate": false,
       "demand": null
@@ -8613,20 +6799,6 @@
       "demand": null
     },
     {
-      "key": "fiscal-strength-index",
-      "treatment": 2,
-      "reason": "最新 2021 年・推定周期 1 年に対し 3 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": null,
-      "freshness": "stale",
-      "latestYear": 2021,
-      "observedYears": 42,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
       "key": "fiscal-strength-index-prefecture",
       "treatment": 2,
       "reason": "最新 2022 年・推定周期 1 年に対し 2 周期遅れ (推定)",
@@ -8864,6 +7036,23 @@
       "demand": null
     },
     {
+      "key": "foreign-resident-count-usa-per-100k",
+      "treatment": 2,
+      "reason": "最新 2020 年・推定周期 1 年に対し 4 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "人口推計",
+        "国勢調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2020,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
       "key": "forest-area",
       "treatment": 2,
       "reason": "最新 2019 年・推定周期 1 年に対し 5 周期遅れ (推定)",
@@ -8995,20 +7184,6 @@
       "demand": null
     },
     {
-      "key": "future-burden-ratio-city",
-      "treatment": 2,
-      "reason": "最新 2021 年・推定周期 1 年に対し 3 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": null,
-      "freshness": "stale",
-      "latestYear": 2021,
-      "observedYears": 11,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
       "key": "garbage-collection-population",
       "treatment": 2,
       "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
@@ -9046,9 +7221,7 @@
       "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
       "yearLabel": "unknown",
       "yearFormat": "fiscal",
-      "sources": [
-        "道路施設現況調査（道路統計年報）"
-      ],
+      "sources": null,
       "freshness": "stale",
       "latestYear": 2023,
       "observedYears": 12,
@@ -9168,7 +7341,7 @@
       ],
       "freshness": "stale",
       "latestYear": 2023,
-      "observedYears": 34,
+      "observedYears": 33,
       "cadence": 1,
       "estatExtendCandidate": false,
       "demand": null
@@ -10115,6 +8288,22 @@
       "demand": null
     },
     {
+      "key": "household-ratio-main-earner-employee-commute-90min",
+      "treatment": 2,
+      "reason": "最新 2018 年・推定周期 1 年に対し 6 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "住宅・土地統計調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2018,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
       "key": "household-types-by-area",
       "treatment": 2,
       "reason": "最新 2018 年・推定周期 1 年に対し 6 周期遅れ (推定)",
@@ -10223,6 +8412,22 @@
       "demand": null
     },
     {
+      "key": "in-prefecture-employed-people-ratio",
+      "treatment": 2,
+      "reason": "最新 2020 年・推定周期 1 年に対し 4 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "国勢調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2020,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
       "key": "independent-revenue-prefecture",
       "treatment": 2,
       "reason": "最新 2022 年・推定周期 1 年に対し 2 周期遅れ (推定)",
@@ -10250,7 +8455,7 @@
       ],
       "freshness": "stale",
       "latestYear": 2023,
-      "observedYears": 34,
+      "observedYears": 33,
       "cadence": 1,
       "estatExtendCandidate": false,
       "demand": null
@@ -10266,7 +8471,7 @@
       ],
       "freshness": "stale",
       "latestYear": 2023,
-      "observedYears": 48,
+      "observedYears": 47,
       "cadence": 1,
       "estatExtendCandidate": false,
       "demand": null
@@ -10300,6 +8505,39 @@
       "freshness": "stale",
       "latestYear": 2023,
       "observedYears": 34,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
+      "key": "infant-mortality-rate-per-1000-births",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "人口動態統計"
+      ],
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 12,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
+      "key": "inflow-population-ratio",
+      "treatment": 2,
+      "reason": "最新 2020 年・推定周期 1 年に対し 4 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "人口推計",
+        "国勢調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2020,
+      "observedYears": 1,
       "cadence": 1,
       "estatExtendCandidate": false,
       "demand": null
@@ -10939,6 +9177,23 @@
       "demand": null
     },
     {
+      "key": "labor-force-population-ratio-woman",
+      "treatment": 2,
+      "reason": "最新 2020 年・推定周期 1 年に対し 4 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "人口推計",
+        "国勢調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2020,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
       "key": "land-productivity-per-ha",
       "treatment": 2,
       "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
@@ -11277,6 +9532,38 @@
       "demand": null
     },
     {
+      "key": "low-birthweight-rate-per-1000-births",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "人口動態統計"
+      ],
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 23,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
+      "key": "main-household-ratio-main-earner-employee-commute-90min",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "住宅・土地統計調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
       "key": "main-road-length-per-km2",
       "treatment": 2,
       "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
@@ -11486,6 +9773,24 @@
       "demand": null
     },
     {
+      "key": "marriages-per-total-population",
+      "treatment": 2,
+      "reason": "最新 2022 年・推定周期 1 年に対し 2 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "人口動態統計",
+        "人口推計",
+        "国勢調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2022,
+      "observedYears": 48,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
       "key": "maternal-child-health-guidance",
       "treatment": 2,
       "reason": "最新 2020 年・推定周期 1 年に対し 4 周期遅れ (推定)",
@@ -11512,6 +9817,38 @@
       "freshness": "stale",
       "latestYear": 2023,
       "observedYears": 23,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
+      "key": "maternal-mortality-rate-per-100k-births",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "人口動態統計"
+      ],
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 34,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
+      "key": "media-avg-time-unemployed-male",
+      "treatment": 2,
+      "reason": "最新 2021 年・推定周期 1 年に対し 3 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "社会生活基本調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2021,
+      "observedYears": 1,
       "cadence": 1,
       "estatExtendCandidate": false,
       "demand": null
@@ -12056,6 +10393,22 @@
       "freshness": "stale",
       "latestYear": 2023,
       "observedYears": 23,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
+      "key": "neonatal-mortality-rate-per-1000-births",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "人口動態統計"
+      ],
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 12,
       "cadence": 1,
       "estatExtendCandidate": false,
       "demand": null
@@ -12837,6 +11190,23 @@
       "demand": null
     },
     {
+      "key": "old-population-index",
+      "treatment": 2,
+      "reason": "最新 2022 年・推定周期 1 年に対し 2 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "人口推計",
+        "国勢調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2022,
+      "observedYears": 44,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
       "key": "ordinary-construction-expenditure-ratio-pref-finance",
       "treatment": 2,
       "reason": "最新 2022 年・推定周期 1 年に対し 2 周期遅れ (推定)",
@@ -12879,6 +11249,22 @@
       ],
       "freshness": "stale",
       "latestYear": 2023,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
+      "key": "overseas-travel-annual-participation-rate-10plus",
+      "treatment": 2,
+      "reason": "最新 2021 年・推定周期 1 年に対し 3 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "社会生活基本調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2021,
       "observedYears": 1,
       "cadence": 1,
       "estatExtendCandidate": false,
@@ -13418,6 +11804,22 @@
       "freshness": "stale",
       "latestYear": 2022,
       "observedYears": 23,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
+      "key": "perinatal-mortality-rate-per-1000-births",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "人口動態統計"
+      ],
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 1,
       "cadence": 1,
       "estatExtendCandidate": false,
       "demand": null
@@ -14079,6 +12481,22 @@
       "demand": null
     },
     {
+      "key": "private-rented-housing-ratio",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "住宅・土地統計調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
       "key": "private-sports-facility",
       "treatment": 2,
       "reason": "最新 2021 年・推定周期 3 年に対し 1 周期遅れ (推定)",
@@ -14706,6 +13124,55 @@
       "demand": null
     },
     {
+      "key": "ratio-never-married-15-plus",
+      "treatment": 2,
+      "reason": "最新 2020 年・推定周期 1 年に対し 4 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "国勢調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2020,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
+      "key": "ratio-of-general-households-to-national",
+      "treatment": 2,
+      "reason": "最新 2020 年・推定周期 1 年に対し 4 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "国勢調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2020,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
+      "key": "ratio-of-total-population",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "人口推計",
+        "国勢調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
       "key": "real-balance-ratio",
       "treatment": 2,
       "reason": "最新 2022 年・推定周期 1 年に対し 2 周期遅れ (推定)",
@@ -14723,20 +13190,6 @@
       "demand": null
     },
     {
-      "key": "real-balance-ratio-city",
-      "treatment": 2,
-      "reason": "最新 2021 年・推定周期 1 年に対し 3 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": null,
-      "freshness": "stale",
-      "latestYear": 2021,
-      "observedYears": 42,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
       "key": "real-public-debt-service-ratio",
       "treatment": 2,
       "reason": "最新 2022 年・推定周期 1 年に対し 2 周期遅れ (推定)",
@@ -14749,20 +13202,6 @@
       "freshness": "stale",
       "latestYear": 2022,
       "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "real-public-debt-service-ratio-city",
-      "treatment": 2,
-      "reason": "最新 2021 年・推定周期 1 年に対し 3 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": null,
-      "freshness": "stale",
-      "latestYear": 2021,
-      "observedYears": 14,
       "cadence": 1,
       "estatExtendCandidate": false,
       "demand": null
@@ -15041,7 +13480,7 @@
       ],
       "freshness": "stale",
       "latestYear": 2023,
-      "observedYears": 34,
+      "observedYears": 33,
       "cadence": 1,
       "estatExtendCandidate": false,
       "demand": null
@@ -15057,7 +13496,7 @@
       ],
       "freshness": "stale",
       "latestYear": 2023,
-      "observedYears": 34,
+      "observedYears": 33,
       "cadence": 1,
       "estatExtendCandidate": false,
       "demand": null
@@ -15523,6 +13962,57 @@
       "demand": null
     },
     {
+      "key": "sex-old-population-ratio",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "人口推計",
+        "国勢調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
+      "key": "sex-production-age-population-ratio",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "人口推計",
+        "国勢調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
+      "key": "sex-young-population-ratio",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "人口推計",
+        "国勢調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
       "key": "shared-burden-fees-prefecture",
       "treatment": 2,
       "reason": "最新 2022 年・推定周期 1 年に対し 2 周期遅れ (推定)",
@@ -15701,6 +14191,38 @@
       "yearFormat": "fiscal",
       "sources": [
         "被保護者調査"
+      ],
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
+      "key": "single-person-household-ratio",
+      "treatment": 2,
+      "reason": "最新 2020 年・推定周期 1 年に対し 4 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "国勢調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2020,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
+      "key": "site-area-per-dwelling",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "住宅・土地統計調査報告"
       ],
       "freshness": "stale",
       "latestYear": 2023,
@@ -16360,6 +14882,22 @@
       "demand": null
     },
     {
+      "key": "stillbirth-rate",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "人口動態統計"
+      ],
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 34,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
       "key": "stillbirths",
       "treatment": 2,
       "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
@@ -16580,6 +15118,24 @@
       "demand": null
     },
     {
+      "key": "suicides-per-100k",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "人口動態統計",
+        "人口推計",
+        "国勢調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 49,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
       "key": "system-consultant-annual-income",
       "treatment": 2,
       "reason": "最新 2022 年・推定周期 1 年に対し 2 周期遅れ (推定)",
@@ -16588,6 +15144,38 @@
       "sources": null,
       "freshness": "stale",
       "latestYear": 2022,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
+      "key": "tatami-per-person-owner",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "住宅・土地統計調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
+      "key": "tatami-per-person-rented",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "住宅・土地統計調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2023,
       "observedYears": 1,
       "cadence": 1,
       "estatExtendCandidate": false,
@@ -16993,6 +15581,22 @@
       "latestYear": 2021,
       "observedYears": 9,
       "cadence": 3,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
+      "key": "travel-leisure-annual-participation-rate-10plus",
+      "treatment": 2,
+      "reason": "最新 2021 年・推定周期 1 年に対し 3 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "社会生活基本調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2021,
+      "observedYears": 1,
+      "cadence": 1,
       "estatExtendCandidate": false,
       "demand": null
     },
@@ -17470,6 +16074,176 @@
       "demand": null
     },
     {
+      "key": "unmarried-ratio-female-25-29",
+      "treatment": 2,
+      "reason": "最新 2020 年・推定周期 1 年に対し 4 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "人口推計",
+        "国勢調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2020,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
+      "key": "unmarried-ratio-female-30-34",
+      "treatment": 2,
+      "reason": "最新 2020 年・推定周期 1 年に対し 4 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "人口推計",
+        "国勢調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2020,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
+      "key": "unmarried-ratio-female-35-39",
+      "treatment": 2,
+      "reason": "最新 2020 年・推定周期 1 年に対し 4 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "人口推計",
+        "国勢調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2020,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
+      "key": "unmarried-ratio-female-40-44",
+      "treatment": 2,
+      "reason": "最新 2020 年・推定周期 1 年に対し 4 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "人口推計",
+        "国勢調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2020,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
+      "key": "unmarried-ratio-female-45-49",
+      "treatment": 2,
+      "reason": "最新 2020 年・推定周期 1 年に対し 4 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "人口推計",
+        "国勢調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2020,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
+      "key": "unmarried-ratio-male-25-29",
+      "treatment": 2,
+      "reason": "最新 2020 年・推定周期 1 年に対し 4 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "人口推計",
+        "国勢調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2020,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
+      "key": "unmarried-ratio-male-30-34",
+      "treatment": 2,
+      "reason": "最新 2020 年・推定周期 1 年に対し 4 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "人口推計",
+        "国勢調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2020,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
+      "key": "unmarried-ratio-male-35-39",
+      "treatment": 2,
+      "reason": "最新 2020 年・推定周期 1 年に対し 4 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "人口推計",
+        "国勢調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2020,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
+      "key": "unmarried-ratio-male-40-44",
+      "treatment": 2,
+      "reason": "最新 2020 年・推定周期 1 年に対し 4 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "人口推計",
+        "国勢調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2020,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
+      "key": "unmarried-ratio-male-45-49",
+      "treatment": 2,
+      "reason": "最新 2020 年・推定周期 1 年に対し 4 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "人口推計",
+        "国勢調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2020,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
       "key": "urban-park-area-per-person",
       "treatment": 2,
       "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
@@ -17482,7 +16256,7 @@
       ],
       "freshness": "stale",
       "latestYear": 2023,
-      "observedYears": 44,
+      "observedYears": 42,
       "cadence": 1,
       "estatExtendCandidate": false,
       "demand": null
@@ -17516,7 +16290,7 @@
       ],
       "freshness": "stale",
       "latestYear": 2023,
-      "observedYears": 34,
+      "observedYears": 32,
       "cadence": 1,
       "estatExtendCandidate": false,
       "demand": null
@@ -18132,6 +16906,22 @@
       "demand": null
     },
     {
+      "key": "work-avg-time-employed-male",
+      "treatment": 2,
+      "reason": "最新 2021 年・推定周期 1 年に対し 3 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "社会生活基本調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2021,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
       "key": "workers-agriculture-forestry-fishery",
       "treatment": 2,
       "reason": "最新 2014 年・推定周期 5 年に対し 2 周期遅れ (推定)",
@@ -18159,6 +16949,23 @@
       "freshness": "stale",
       "latestYear": 2023,
       "observedYears": 39,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
+      "key": "young-population-index",
+      "treatment": 2,
+      "reason": "最新 2022 年・推定周期 1 年に対し 2 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "人口推計",
+        "国勢調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2022,
+      "observedYears": 40,
       "cadence": 1,
       "estatExtendCandidate": false,
       "demand": null
@@ -18665,6 +17472,22 @@
       "latestYear": 2014,
       "observedYears": 1,
       "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
+      "key": "flush-toilet-housing-ratio",
+      "treatment": 3,
+      "reason": "最新 2008 年で 3 周期遅れ。調査終了か要確認 (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "住宅・土地統計調査報告"
+      ],
+      "freshness": "ended-candidate",
+      "latestYear": 2008,
+      "observedYears": 7,
+      "cadence": 5,
       "estatExtendCandidate": false,
       "demand": null
     },
@@ -19231,7 +18054,7 @@
       "reason": "最新 2006 年で 18 周期遅れ。調査終了か要確認 (推定)",
       "yearLabel": "unknown",
       "yearFormat": "fiscal",
-      "sources": [],
+      "sources": null,
       "freshness": "ended-candidate",
       "latestYear": 2006,
       "observedYears": 12,
@@ -19430,6 +18253,22 @@
       "freshness": "ended-candidate",
       "latestYear": 2003,
       "observedYears": 13,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
+      "key": "overseas-travel-annual-participation-rate-15plus",
+      "treatment": 3,
+      "reason": "最新 2001 年で 23 周期遅れ。調査終了か要確認 (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "社会生活基本調査報告"
+      ],
+      "freshness": "ended-candidate",
+      "latestYear": 2001,
+      "observedYears": 1,
       "cadence": 1,
       "estatExtendCandidate": false,
       "demand": null
@@ -20116,6 +18955,22 @@
       "demand": null
     },
     {
+      "key": "travel-leisure-annual-participation-rate-15plus",
+      "treatment": 3,
+      "reason": "最新 2001 年で 23 周期遅れ。調査終了か要確認 (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "社会生活基本調査報告"
+      ],
+      "freshness": "ended-candidate",
+      "latestYear": 2001,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
       "key": "vehicle-kilometers-traveled",
       "treatment": 3,
       "reason": "最新 2005 年で 19 周期遅れ。調査終了か要確認 (推定)",
@@ -20682,6 +19537,22 @@
       "latestYear": 2026,
       "observedYears": 1,
       "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
+      "key": "floor-area-per-dwelling-owner",
+      "treatment": 4,
+      "reason": "観測 2 年・GSC 表示 未観測",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "住宅・土地統計調査報告"
+      ],
+      "freshness": "fresh",
+      "latestYear": 2023,
+      "observedYears": 2,
+      "cadence": 10,
       "estatExtendCandidate": false,
       "demand": null
     },
@@ -22147,6 +21018,23 @@
       "demand": null
     },
     {
+      "key": "production-age-population-ratio",
+      "treatment": 4,
+      "reason": "観測 2 年・GSC 表示 未観測",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "人口推計",
+        "国勢調査報告"
+      ],
+      "freshness": "fresh",
+      "latestYear": 2024,
+      "observedYears": 2,
+      "cadence": 4,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
       "key": "public-school-closures-cumulative",
       "treatment": 4,
       "reason": "観測 1 年・GSC 表示 未観測",
@@ -22702,6 +21590,22 @@
       "latestYear": 2024,
       "observedYears": 2,
       "cadence": 6,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
+      "key": "secondary-employed-people-ratio-tertiary",
+      "treatment": 4,
+      "reason": "観測 2 年・GSC 表示 未観測",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "国勢調査報告"
+      ],
+      "freshness": "fresh",
+      "latestYear": 2020,
+      "observedYears": 2,
+      "cadence": 5,
       "estatExtendCandidate": false,
       "demand": null
     },

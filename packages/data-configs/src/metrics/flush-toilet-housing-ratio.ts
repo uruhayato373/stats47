@@ -26,7 +26,7 @@ export const flushToiletHousingRatio: MetricConfig = {
       2008,
     ],
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     "colorScheme": "interpolateBlues",
     "colorSchemeType": "sequential",

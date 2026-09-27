@@ -30,7 +30,7 @@ export const secondaryActivityAvgTimeEmployedFemale: MetricConfig = {
       2021,
     ],
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     "colorScheme": "interpolateBlues",
     "colorSchemeType": "sequential",

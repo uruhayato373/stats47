@@ -21,7 +21,7 @@ export const travelLeisureAnnualParticipationRate15plus: MetricConfig = {
     "from": 2001,
     "to": 2001,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     "colorScheme": "interpolateBlues",
     "colorSchemeType": "sequential",

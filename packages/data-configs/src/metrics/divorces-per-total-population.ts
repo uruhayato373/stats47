@@ -20,7 +20,7 @@ export const divorcesPerTotalPopulation: MetricConfig = {
     "from": 1975,
     "to": 2024
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     "colorScheme": "interpolateBlues",
     "colorSchemeType": "sequential",

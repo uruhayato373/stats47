@@ -21,7 +21,7 @@ export const overseasTravelAnnualParticipationRate10plus: MetricConfig = {
     "from": 2021,
     "to": 2021,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     "colorScheme": "interpolateBlues",
     "colorSchemeType": "sequential",
