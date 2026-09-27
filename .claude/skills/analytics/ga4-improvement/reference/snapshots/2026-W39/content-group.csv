@@ -1,0 +1,66 @@
+contentGroup,sessionDefaultChannelGroup,deviceCategory,screenPageViews,engagedSessions,keyEvents
+(not set),Organic Search,desktop,22852,5954,6
+(not set),Organic Search,mobile,13514,4755,1
+(not set),Direct,desktop,1479,306,0
+(not set),Referral,mobile,1223,245,1
+(not set),Referral,desktop,1109,178,0
+(not set),Organic Search,tablet,949,261,0
+(not set),Direct,mobile,360,132,1
+(not set),AI Assistant,desktop,338,79,0
+(not set),Organic Social,mobile,120,19,0
+ranking,Organic Search,mobile,117,49,0
+(not set),AI Assistant,mobile,85,27,0
+blog,Organic Search,mobile,78,54,0
+ranking,Organic Search,desktop,71,27,0
+(not set),AI Assistant,tablet,70,3,0
+(not set),Unassigned,desktop,60,13,0
+(not set),Direct,tablet,47,13,0
+(not set),Referral,tablet,38,13,0
+blog,Organic Search,desktop,37,27,0
+(not set),Unassigned,mobile,35,12,0
+category,Organic Search,mobile,16,3,0
+home,Organic Search,desktop,10,3,0
+search,Organic Search,desktop,9,1,0
+municipality_ranking,Organic Search,mobile,8,2,0
+ranking,Referral,mobile,8,4,0
+category,Organic Search,desktop,6,3,0
+ranking,Organic Search,tablet,6,2,0
+ranking,Unassigned,desktop,6,2,0
+survey,Organic Search,desktop,6,3,0
+area,Organic Search,mobile,5,2,0
+(not set),Organic Social,desktop,4,1,0
+area_theme,Organic Search,mobile,4,2,0
+blog,Direct,mobile,4,3,0
+ranking,Direct,mobile,4,2,0
+ranking_index,Organic Search,desktop,4,3,0
+theme,Organic Search,mobile,4,2,0
+area_theme,Organic Search,desktop,3,3,0
+blog,Organic Search,tablet,3,3,0
+home,Organic Search,mobile,3,2,0
+other,Organic Search,desktop,3,2,0
+search,Referral,mobile,3,1,0
+area,Referral,mobile,2,1,0
+area,Unassigned,desktop,2,1,0
+blog,Referral,mobile,2,2,0
+blog,Unassigned,desktop,2,1,0
+city,Organic Search,desktop,2,1,0
+home,Unassigned,desktop,2,1,0
+municipality_ranking,Organic Search,desktop,2,1,0
+theme,Organic Search,desktop,2,1,0
+theme,Unassigned,desktop,2,1,0
+theme_index,Organic Search,mobile,2,1,0
+(not set),Organic Social,tablet,1,1,0
+area_index,Referral,mobile,1,1,0
+area_index,Unassigned,desktop,1,1,0
+area_theme,Referral,mobile,1,1,0
+blog,AI Assistant,desktop,1,0,0
+blog,AI Assistant,mobile,1,0,0
+category,Direct,mobile,1,1,0
+category,Referral,mobile,1,1,0
+geo,Direct,desktop,1,1,0
+geo,Organic Search,mobile,1,1,0
+home,Referral,mobile,1,1,0
+survey,Organic Search,mobile,1,0,0
+theme,Organic Search,tablet,1,0,0
+theme_index,Organic Search,desktop,1,1,0
+theme_index,Unassigned,desktop,1,1,0
