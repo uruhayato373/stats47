@@ -125,3 +125,4 @@
 - [project_page_quality_ui_review.md](project_page_quality_ui_review.md) — 週次ページ品質=全URL静的+代表7幅スクショ+Claude確認。生データはR2 state/page-quality/(git禁止)。SNS予約画像はMac launchd週次
 - [feedback_ga4_double_pageview.md](feedback_ga4_double_pageview.md) — SPA の手動 page_view と GA4 拡張計測の履歴変更 page_view が二重計測 (2026-09-26 是正)。変更時は本番 /g/collect を実測
 - [feedback_permission_grant_owner_only.md](feedback_permission_grant_owner_only.md) — GA4/GCP の権限付与は Claude 実行不可 (安全チェック)。準備まで Claude、最後はオーナー。GA4 アクセス管理 UI が止まる時は APIs Explorer
+- [feedback_backlog_card_move_fence_aware.md](feedback_backlog_card_move_fence_aware.md) — backlog カード移動は正規表現の「\n## 」で切るとフェンス内見出しで途中切断。フェンス対応の分割+本文一致検証
