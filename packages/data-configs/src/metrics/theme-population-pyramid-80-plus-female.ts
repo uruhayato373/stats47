@@ -18,7 +18,7 @@ export const themePopulationPyramid80PlusFemale: MetricConfig = {
     "prefecture"
   ],
   "years": "all",
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     "colorScheme": "interpolateBlues",
     "colorSchemeType": "sequential",

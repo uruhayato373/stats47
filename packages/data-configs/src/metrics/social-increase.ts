@@ -19,7 +19,7 @@ export const socialIncrease: MetricConfig = {
     "from": 2021,
     "to": 2024,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     "colorScheme": "interpolateRdBu",
     "colorSchemeType": "diverging",

@@ -17,7 +17,7 @@ export const outflowCommuterStudentPopulation: MetricConfig = {
     "city"
   ],
   "years": "all",
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     "colorScheme": "interpolateBlues",
     "colorSchemeType": "sequential",
