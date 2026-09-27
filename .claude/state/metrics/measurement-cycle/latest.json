@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "week": "2026-W39",
   "asOf": "2026-09-27",
-  "generatedAt": "2026-09-27T15:37:45.810Z",
+  "generatedAt": "2026-09-27T23:45:51.051Z",
   "sources": {
     "ga4": {
       "status": "ok",
@@ -170,7 +170,7 @@
         "source": ".claude/state/metrics/{psi,cloudflare}/history.csv",
         "focus": false,
         "status": "ok",
-        "value": "PSI モバイル中央値 73・Workers error 0.1%",
+        "value": "PSI モバイル中央値 77・Workers error 0.1%",
         "previous": null,
         "improvements": [
           "PERF-WORKER-P99-01",
@@ -188,7 +188,7 @@
         "source": ".claude/state/metrics/cloudflare/ + claude-usage/history.csv",
         "focus": false,
         "status": "ok",
-        "value": "閾値違反 15 件・R2 保存 33.079 GB",
+        "value": "閾値違反 18 件・R2 保存 33.368 GB",
         "previous": null,
         "improvements": [
           "R2-STORAGE-01",
@@ -312,43 +312,43 @@
   "operations": {
     "psi": {
       "status": "ok",
-      "latestDate": "2026-09-26",
-      "daysInWindow": 5,
-      "mobileMedianScore": 73,
-      "urlsWithErrors": 25,
+      "latestDate": "2026-09-27",
+      "daysInWindow": 6,
+      "mobileMedianScore": 77,
+      "urlsWithErrors": 26,
       "urlsMeasured": 38,
       "measurementFailures": 0,
       "worstMobile": [
         {
-          "url": "https://stats47.jp/themes/local-economy",
+          "url": "https://stats47.jp/ranking/annual-sunshine-duration",
+          "score": 45,
+          "lcpMs": 8026
+        },
+        {
+          "url": "https://stats47.jp/themes/population-dynamics",
           "score": 48,
-          "lcpMs": 9951
+          "lcpMs": 3901
         },
         {
-          "url": "https://stats47.jp/ranking/future-population-change-rate-2050",
+          "url": "https://stats47.jp/areas/27000",
           "score": 56,
-          "lcpMs": 9751
-        },
-        {
-          "url": "https://stats47.jp/ranking/agricultural-output",
-          "score": 59,
-          "lcpMs": 10547
+          "lcpMs": 5903
         }
       ]
     },
     "cloudflare": {
       "status": "ok",
-      "latestDate": "2026-09-25",
-      "daysInWindow": 5,
-      "workersRequests": 526186,
-      "workersErrorRate": 0.0009,
-      "r2ClassAOps": 53649,
-      "r2ClassBOps": 2124343,
-      "r2EgressMb": 416593,
-      "r2StorageGb": 33.079,
+      "latestDate": "2026-09-26",
+      "daysInWindow": 6,
+      "workersRequests": 623833,
+      "workersErrorRate": 0.0011,
+      "r2ClassAOps": 64940,
+      "r2ClassBOps": 2567141,
+      "r2EgressMb": 502826,
+      "r2StorageGb": 33.368,
       "violationsBySeverity": {
-        "warning": 10,
-        "info": 5
+        "warning": 12,
+        "info": 6
       },
       "violationTitles": [
         "R2 account storage > 18GB",
@@ -358,7 +358,7 @@
     },
     "sns": {
       "status": "ok",
-      "latestDate": "2026-09-23",
+      "latestDate": "2026-09-27",
       "platforms": {
         "x": {
           "posts": 115,
@@ -366,9 +366,22 @@
           "reach": 0,
           "views": 0,
           "engagements": 92
+        },
+        "instagram": {
+          "posts": 212,
+          "impressions": 0,
+          "reach": 22469,
+          "views": 26125,
+          "engagements": 82
         }
       },
       "topPosts": [
+        {
+          "platform": "instagram",
+          "contentKey": "18127929700542935",
+          "engagements": 6,
+          "impressions": 0
+        },
         {
           "platform": "x",
           "contentKey": "geo-001-x-02",
@@ -376,16 +389,10 @@
           "impressions": 194
         },
         {
-          "platform": "x",
-          "contentKey": "geo-001-x-05",
-          "engagements": 4,
-          "impressions": 142
-        },
-        {
-          "platform": "x",
-          "contentKey": "elderly-couple-only-household-ratio",
-          "engagements": 4,
-          "impressions": 92
+          "platform": "instagram",
+          "contentKey": "18345342865217202",
+          "engagements": 5,
+          "impressions": 0
         }
       ]
     },

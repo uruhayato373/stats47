@@ -21,8 +21,8 @@
 | 駆動 | アフィリエイト収益効率 | GA4 7日 imp 3391・click 2 | — | partial（最終観測 2026-09-26。収益効率 (確定収益/1,000 imp) は ASP 成果と合わせて NSM 節で判定する） | `AFF-RESOLUTION-EFFECT-01`, `AFF-RANKING-RAKUTEN-NATIVE-01`, `AFF-IMPRESSION-ROUTING-01`, `AFF-BLOG-TEXTLINK-01`, `AFF-A8-REGISTER-01`, `AFF-SCOUT-PIPE-01` |
 | 駆動 | 業務文脈の着地セッション | 3350 | — | ok | — |
 | 守り | ★ データ品質ゲート通過率 | 99.5% (2408/2420) | — | ok（監査 2026-09-27・不合格 itemMissing 12・valuesMissing 12・stats.missing 12） | `DATA-ESTAT-FETCH-01`, `DATA-MANUAL-RESTORE-01` |
-| 守り | サイト健全性 | PSI モバイル中央値 73・Workers error 0.1% | — | ok | `PERF-WORKER-P99-01`, `ASSET-POLICY-BURNDOWN-01`, `DEPS-RENOVATE-01` |
-| 守り | 運用コスト | 閾値違反 15 件・R2 保存 33.079 GB | — | ok | `R2-STORAGE-01`, `TOKEN-AICONTENT-01` |
+| 守り | サイト健全性 | PSI モバイル中央値 77・Workers error 0.1% | — | ok | `PERF-WORKER-P99-01`, `ASSET-POLICY-BURNDOWN-01`, `DEPS-RENOVATE-01` |
+| 守り | 運用コスト | 閾値違反 18 件・R2 保存 33.368 GB | — | ok | `R2-STORAGE-01`, `TOKEN-AICONTENT-01` |
 | 守り | ★ 計測の鮮度 | 12/13 | — | degraded（欠測・古い・認証切れ: note(report_incomplete)） | — |
 
 **施策の配線**: active 26 件（上限 10 件。超過中は新しい施策を足さず月次で削る）・KPI 未接続 0 件・`[target:]` なし 22 件
@@ -78,9 +78,9 @@ GSC 施策 6 件中、機械判定できるのは 0 件。残りは目印が欠�
 
 | 計測 | 状態 | 要約 | 閾値違反 | active 施策 |
 |---|---|---|---|---|
-| PSI | ok（最新 2026-09-26） | モバイル中央値 73 点・最低 /themes/local-economy 48 / /ranking/future-population-change-rate-2050 56 / /ranking/agricultural-output 59 | 最新日 25/38 計測で error | `PERF-WORKER-P99-01`, `ASSET-POLICY-BURNDOWN-01` |
-| Cloudflare | ok（最新 2026-09-25） | Workers 526186 req・error 0.1%・R2 A 53649 / B 2124343・保存 33.079 GB | warning 10・info 5（R2 account storage > 18GB、stats47 bucket storage > 12.5GB、R2 egress > 5GB/日） | `R2-STORAGE-01` |
-| SNS | ok（最新 2026-09-23） | x 115 投稿・impressions 9572・eng 92 | —（閾値なし） | なし |
+| PSI | ok（最新 2026-09-27） | モバイル中央値 77 点・最低 /ranking/annual-sunshine-duration 45 / /themes/population-dynamics 48 / /areas/27000 56 | 最新日 26/38 計測で error | `PERF-WORKER-P99-01`, `ASSET-POLICY-BURNDOWN-01` |
+| Cloudflare | ok（最新 2026-09-26） | Workers 623833 req・error 0.1%・R2 A 64940 / B 2567141・保存 33.368 GB | warning 12・info 6（R2 account storage > 18GB、stats47 bucket storage > 12.5GB、R2 egress > 5GB/日） | `R2-STORAGE-01` |
+| SNS | ok（最新 2026-09-27） | x 115 投稿・impressions 9572・eng 92 / instagram 212 投稿・reach 22469・views 26125・eng 82 | —（閾値なし） | なし |
 
 **期日超過の判定待ち**: active 26 件中 10 件
 
