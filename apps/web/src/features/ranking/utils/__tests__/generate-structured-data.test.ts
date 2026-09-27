@@ -2,6 +2,7 @@ import { describe, expect, it, vi } from "vitest";
 
 import {
     generateRankingBreadcrumbStructuredData,
+    generateRankingFAQStructuredData,
     generateRankingPageStructuredData,
     generateRankingTopPageStructuredData,
 } from "../generate-structured-data";
@@ -159,6 +160,42 @@ describe("generateRankingPageStructuredData", () => {
         }) as JsonLd;
 
         expect(result.keywords as string[]).toContain("economy");
+    });
+});
+
+describe("年ラベル (暦年の指標を「年度」と書かない)", () => {
+    // 2026-09-27: 出生数・総人口など暦年の指標でも JSON-LD が一律「○年度」と書いていた
+    const calendarItem = {
+        ...mockItem,
+        latestYear: { yearCode: "2021", yearName: "2021年" },
+        availableYears: [{ yearCode: "2021", yearName: "2021年" }],
+    } as RankingItem;
+
+    it("Dataset の name・説明文と FAQ が item の yearName をそのまま使うこと", () => {
+        const page = generateRankingPageStructuredData({
+            rankingItem: calendarItem,
+            rankingValues: mockValues as RankingValue[],
+            selectedYear: "2021",
+        }) as JsonLd;
+        const faq = generateRankingFAQStructuredData({
+            rankingItem: calendarItem,
+            rankingValues: mockValues as RankingValue[],
+            selectedYear: "2021",
+        });
+
+        expect(page.name).toBe("商業年間商品販売額 2021年");
+        expect(page.description).toContain("商業年間商品販売額の2021年の都道府県別ランキング");
+        expect(JSON.stringify(faq)).toContain("2021年の商業年間商品販売額ランキング1位は東京都");
+        expect(JSON.stringify([page, faq])).not.toContain("年度");
+    });
+
+    it("yearName が無い年は従来どおり「年度」で書くこと", () => {
+        const page = generateRankingPageStructuredData({
+            rankingItem: { ...calendarItem, availableYears: [] } as RankingItem,
+            rankingValues: mockValues as RankingValue[],
+            selectedYear: "2021",
+        }) as JsonLd;
+        expect(page.name).toBe("商業年間商品販売額 2021年度");
     });
 });
 
