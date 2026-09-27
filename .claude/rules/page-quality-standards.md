@@ -77,7 +77,7 @@ variants を key 順に 4 つへ分けたうちの 1 組 (ISO 週番号で決め
    1 件にまとめる。key は `agent|<template>`。表現が週ごとに変わるので文面では同一性を取らない) を取り込む。
 2. **起票**: pending をページの種類ごとに 1 枚の `UI-FIX-<種類>-<日付>` カード (`[実行:sweep]`・10 件まで) にする。
    その種類のカードが開いている間は次を出さない。対象は `.claude/state/page-quality/backlog-batches/<ID>.txt`。
-3. **修正**: `backlog-loop-daily` (CI の Claude) が直し、`--mark-fixed` / `--mark-by-design` / `--mark-owner` で印を付ける。
+3. **修正**: 対話セッションで優先順位を見て選んだときに直し (2026-09-27 に日次の自動処理を停止)、`--mark-fixed` / `--mark-by-design` / `--mark-owner` で印を付ける。
    completion gate は `ui-findings.ts --assert-handled <batch>` (全件が pending でなく、done 以外は理由 note 付き)。
    オーナー判断が要るもの (デザイン方針・画像制作・外部契約) は `[実行:対話]` のカードを起票し `--card` で紐付ける。
 4. **本番確認**: 次の週次で消えていれば done。`fixed` は **origin/main へのマージが修正より後で、監査の 30 分以上前**

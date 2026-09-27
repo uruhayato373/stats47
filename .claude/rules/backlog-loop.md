@@ -114,16 +114,21 @@ class×model の成功率を出し、`guards` を通ったときだけ policy �
 
 ---
 
-## 4.5 CI 日次ループ (`backlog-loop-daily.yml`)
+## 4.5 CI ループ (`backlog-loop-daily.yml`・手動起動のみ)
 
-無人で回る本体。`.claude/prompts/ci/backlog-loop-routine.md` を sonnet に渡し、
+**2026-09-27 オーナー判断で日次の自動実行 (JST 01:30) を止めた。** 何を処理するかは対話セッションで
+`.claude/todo/backlog.md` の優先順位を見て一緒に決める。この workflow は手動で回すときだけ使う
+(GitHub 側でも無効化済み。使う前に `gh workflow enable backlog-loop-daily.yml` が要る)。
+自動起票される `GSC-COV-*` / `UI-FIX-*` / `YEAR-COV-*` カードも、セッションで選んだときに処理する。
+
+無人で回す場合の本体。`.claude/prompts/ci/backlog-loop-routine.md` を sonnet に渡し、
 **verify → リポジトリゲート → push** の順で進む。どこかで落ちたら push しない
 (作業は次回へ繰り越す)。契約は `__tests__/backlog-loop-routine.test.cjs` が静的に固定し、
 各 assertion が自分の変異で発火することを実測してある。
 
 | 項目 | 値 | 理由 |
 |---|---|---|
-| 枠 | `30 16 * * *` (JST 01:30) | blog (14:00 UTC) と ai-content (18:00 UTC) は同じ Max 枠を共有するので実時間で重ねない |
+| 枠 | なし (手動起動のみ。2026-09-27 まで `30 16 * * *`) | 手動で回すときも blog / ai-content と同じ Max 枠を共有するので実時間で重ねない |
 | 件数 | 2 (timeout 60 分) | 予算式 `(固定 15 + 件数 × 15) × 1.25 ≤ timeout`。**件数より枠で増やす** (ai-content が limit 10 で timeout に当たり 0 件になった実測がある) |
 | run 本体のモデル | sonnet 固定 | base-action の `--model` は run 全体に効く。難物だけ Agent tool で `model: fable` へ委譲する |
 | draft-pr class | この run では着手しない | `impl-large` / `indicator-expansion` は `skipped` で記録 (quarantine を増やさない) |
