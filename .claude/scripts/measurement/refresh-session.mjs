@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * refresh-session.mjs — A8 / もしも の専用プロファイルのログインを Mac 上で保ち、CI へ渡す。
+ * refresh-session.mjs — A8 / もしも / KDP の専用プロファイルのログインを Mac 上で保ち、CI へ渡す。
  *
  * 流れ: 専用プロファイルで管理画面を開く → 切れていれば macOS キーチェーンの ID/PW で 1 回だけ
  * ログインする → state を保存 → `bootstrap-session.mjs SOURCE --publish` で CI の Secret を更新する。
@@ -18,6 +18,12 @@
  * キーチェーン登録 (オーナーが 1 回だけ。-w を値なしで付けるとパスワードを対話入力できる):
  *   security add-generic-password -s stats47-measurement-a8 -a <ログインID> -w
  *   security add-generic-password -s stats47-measurement-moshimo -a <ログインID> -w
+ *   security add-generic-password -s stats47-measurement-kdp -a <Amazon のメールアドレス> -w
+ *
+ * KDP (2026-09-27 オーナー承認で追加): Amazon は「メール → 次へ → パスワード」の 2 段階画面で、本棚と
+ * Reports (kdpreports.amazon.co.jp) の認証が別。本棚 → 既知 ASIN で口座照合 → Reports の順に通し、
+ * どこかで 2FA (/ap/mfa)・追加確認 (/ap/cvf)・CAPTCHA が出たら human_required で止める。
+ * 「ログインしたままにする」を付けて 2FA の再要求を減らす。2FA が毎回出る口座では自動化できない。
  *
  * Usage: refresh-session.mjs SOURCE... [--publish] [--headed] [--wait-human]
  *   --wait-human: キーチェーンを使わず、開いたブラウザで人がログインするのを最大 10 分待つ
@@ -45,12 +51,24 @@ export const LOGIN = {
     submit: '#login-form input[name=login]',
     loggedIn: (url) => /af\.moshimo\.com\/af\/shop\//.test(url) && !/\/login|signin/i.test(url),
   },
+  kdp: {
+    loginUrl: 'https://kdp.amazon.co.jp/ja_JP/bookshelf',
+    checkUrl: 'https://kdp.amazon.co.jp/ja_JP/bookshelf',
+    user: 'input[name=email]',
+    next: 'input#continue',
+    password: 'input[name=password]',
+    remember: 'input[name=rememberMe]',
+    submit: 'input#signInSubmit',
+    headed: true, // Amazon は headless を bot とみなして CAPTCHA を出しやすい
+    loggedIn: (url) => /kdp\.amazon\.co\.jp\//.test(url) && !/\/ap\/(signin|mfa|cvf)/.test(url),
+    challengeUrl: /\/ap\/(mfa|cvf)|\/errors\/validateCaptcha/,
+  },
 };
 
 /** ログイン試行後の画面を分類する。ok / human_required / login_failed の 3 値。 */
 export function classifyLoginOutcome(source, { url, hasPassword, hasChallenge }) {
   if (LOGIN[source].loggedIn(url) && !hasPassword) return 'ok';
-  if (hasChallenge) return 'human_required';
+  if (hasChallenge || LOGIN[source].challengeUrl?.test(url)) return 'human_required';
   return 'login_failed';
 }
 
@@ -81,9 +99,55 @@ async function pageSignals(page) {
     const hasPassword = [...document.querySelectorAll('input[type=password]')].some(visible);
     const text = document.body?.innerText ?? '';
     const hasChallenge = !!document.querySelector('iframe[src*="recaptcha"], iframe[src*="hcaptcha"], iframe[src*="turnstile"]')
-      || /認証コード|ワンタイム|確認コード|私はロボットではありません|画像認証/.test(text);
+      || /認証コード|ワンタイム|確認コード|私はロボットではありません|画像認証|2段階認証|文字を入力してください/.test(text);
     return { hasPassword, hasChallenge };
   }).catch(() => ({ hasPassword: true, hasChallenge: false }));
+}
+
+/**
+ * ID/PW を入れて送信する。1 画面 (A8・もしも) と、メール → 次へ → パスワードの 2 段階 (Amazon) の両方に対応する。
+ * 入力欄が見えないときは入れない (Reports 側で「パスワードだけ」を求められる場合がある)。
+ */
+async function submitCredential(page, conf, cred) {
+  const visible = (sel) => page.locator(sel).first().isVisible().catch(() => false);
+  if (await visible(conf.user)) {
+    await page.fill(conf.user, cred.user);
+    if (conf.next && await visible(conf.next)) {
+      await page.click(conf.next);
+      await page.waitForSelector(conf.password, { state: 'visible', timeout: 30000 }).catch(() => {});
+    }
+  }
+  if (!(await visible(conf.password))) return;
+  await page.fill(conf.password, cred.password);
+  if (conf.remember && await visible(conf.remember)) await page.check(conf.remember).catch(() => {});
+  await page.click(conf.submit);
+  await page.waitForLoadState('domcontentloaded', { timeout: 60000 }).catch(() => {});
+  await page.waitForTimeout(5000);
+}
+
+/**
+ * KDP だけの後段: 既知 ASIN で口座を照合し (別口座のセッションを CI へ渡さない)、Reports の認証も通す。
+ * Reports で再ログインを求められたら同じ資格情報で 1 回だけ送信し、それでも通らなければ止める。
+ */
+async function afterKdpLogin(page, cred) {
+  const { assertAccount } = await import('../kdp/lib/kdp-session.mjs');
+  const account = await assertAccount(page, { tag: '[refresh-session kdp]' });
+  if (!account.ok) return { status: 'account_mismatch', reason: account.reason };
+  const { openKdpReports } = await import('./kdp-reports.mjs');
+  try {
+    await openKdpReports(page);
+    return { status: 'ok' };
+  } catch (error) {
+    if (!/auth_required/.test(String(error.message)) || !cred) return { status: 'reports_auth_required', reason: 'Reports の認証が必要 (キーチェーン未登録か --wait-human で人が通す)' };
+  }
+  await submitCredential(page, LOGIN.kdp, cred);
+  if (LOGIN.kdp.challengeUrl.test(page.url()) || (await pageSignals(page)).hasChallenge) return { status: 'human_required', reason: 'Reports で 2FA/CAPTCHA 等の人の確認が必要' };
+  try {
+    await openKdpReports(page);
+    return { status: 'ok' };
+  } catch {
+    return { status: 'login_failed', reason: 'Reports の再ログインが通らなかった' };
+  }
 }
 
 async function refresh(source, { root, publish, headed, waitHuman }) {
@@ -95,7 +159,7 @@ async function refresh(source, { root, publish, headed, waitHuman }) {
   if (existsSync(failMark)) return { source, status: 'blocked', reason: `前回の自動ログインが失敗したため停止中。確認後に ${failMark} を削除する` };
 
   const context = await chromium.launchPersistentContext(join(root, '.local', `playwright-${source}-profile`), {
-    channel: 'chrome', headless: !(headed || waitHuman), locale: 'ja-JP', timezoneId: 'Asia/Tokyo',
+    channel: 'chrome', headless: !(headed || waitHuman || conf.headed), locale: 'ja-JP', timezoneId: 'Asia/Tokyo',
   });
   let loggedInBy = 'session';
   try {
@@ -126,16 +190,21 @@ async function refresh(source, { root, publish, headed, waitHuman }) {
       if (cred) {
       loggedInBy = 'keychain';
       await page.goto(conf.loginUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
-      await page.fill(conf.user, cred.user);
-      await page.fill(conf.password, cred.password);
-      await page.click(conf.submit);
-      await page.waitForLoadState('domcontentloaded', { timeout: 60000 }).catch(() => {});
-      await page.waitForTimeout(5000);
+      await submitCredential(page, conf, cred);
       const status = classifyLoginOutcome(source, { url: page.url(), ...(await pageSignals(page)) });
       if (status !== 'ok') {
         writeFileSync(failMark, `${new Date().toISOString()} ${status}\n`, { mode: 0o600 });
         return { source, status, reason: status === 'human_required' ? '2FA/CAPTCHA 等の人の確認が必要' : 'ID/PW が通らなかった (キーチェーンの値を確認)' };
       }
+      }
+    }
+    if (source === 'kdp') {
+      const page = context.pages()[0];
+      const after = await afterKdpLogin(page, waitHuman ? null : keychainCredential(source));
+      if (after.status !== 'ok') {
+        // 口座不一致・2FA・再ログイン失敗は自動で繰り返さない (アカウントロックと別口座の混入を避ける)
+        if (after.status !== 'reports_auth_required') writeFileSync(failMark, `${new Date().toISOString()} ${after.status}\n`, { mode: 0o600 });
+        return { source, ...after };
       }
     }
     writeFileSync(statePath, JSON.stringify(scopedState(source, await context.storageState({ indexedDB: true }))), { mode: 0o600 });
@@ -153,7 +222,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const args = process.argv.slice(2);
   const sources = args.filter((a) => !a.startsWith('--'));
   if (!sources.length || args.includes('--help')) {
-    console.log('Usage: refresh-session.mjs SOURCE... [--publish] [--headed] [--wait-human]  (SOURCE: a8 | moshimo)');
+    console.log('Usage: refresh-session.mjs SOURCE... [--publish] [--headed] [--wait-human]  (SOURCE: a8 | moshimo | kdp)');
     process.exit(0);
   }
   const root = fileURLToPath(new URL('../../../', import.meta.url));

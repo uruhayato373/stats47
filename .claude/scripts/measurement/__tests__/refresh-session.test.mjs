@@ -25,3 +25,16 @@ test('キーチェーン属性からアカウント名だけを取り出す', ()
   assert.equal(parseKeychainAccount(out), 'user123');
   assert.equal(parseKeychainAccount('no attrs'), null);
 });
+
+// KDP (2026-09-27 追加)。意図: 2FA・追加確認・CAPTCHA の画面を「ログイン失敗」と取り違えず、人の確認として止める。
+test('KDP: bookshelf without a password field is ok; Amazon MFA / CVF / CAPTCHA pages are human_required', () => {
+  const none = { hasPassword: false, hasChallenge: false };
+  assert.equal(classifyLoginOutcome('kdp', { url: 'https://kdp.amazon.co.jp/ja_JP/bookshelf', ...none }), 'ok');
+  assert.equal(classifyLoginOutcome('kdp', { url: 'https://www.amazon.co.jp/ap/mfa?arb=x', ...none }), 'human_required');
+  assert.equal(classifyLoginOutcome('kdp', { url: 'https://www.amazon.co.jp/ap/cvf/request', ...none }), 'human_required');
+  assert.equal(classifyLoginOutcome('kdp', { url: 'https://www.amazon.co.jp/errors/validateCaptcha', ...none }), 'human_required');
+  // パスワード欄が残ったままのサインイン画面は ID/PW 不一致として 1 回で止める
+  assert.equal(classifyLoginOutcome('kdp', { url: 'https://www.amazon.co.jp/ap/signin', hasPassword: true, hasChallenge: false }), 'login_failed');
+  // KDP の URL でもサインイン画面の途中なら ok にしない
+  assert.equal(classifyLoginOutcome('kdp', { url: 'https://kdp.amazon.co.jp/ap/signin', ...none }), 'login_failed');
+});
