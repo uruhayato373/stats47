@@ -21,6 +21,21 @@ updated: 2026-09-21
 
 ## 🔴 高 — 今月中に着手したい
 
+### [NOTE-CARD-REPAIR-01] note公開記事の空白リンクカードを段階的に是正する
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npm run note:cards:audit -- --browser-verify] [起票:2026-09-27]
+
+- **現在地 (2026-09-27)**: 一括修正前の全286記事監査は空白785枚・未確認0枚・カード前の空段落29箇所。修復記録では71枚・17記事が`verified`（今回65枚）。**785枚は現在の残数ではない**。一括修正後の全量再監査は未実施。記事単位の公開後監査は各修復時に実施済み。
+- **正確な再開位置**: 同じMacの`.local/note-card-repair-journal.json`がカード単位の進捗記録。`attempts`を`slug + key`で最後の試行に絞り、`verified`を再処理しない。`.claude/state/metrics/note/card-visibility-latest.json`は修復前の全量スナップショットで、再監査までは現在の残数とみなさない。ローカルjournalが無い環境では推測で修復せず、全量監査を作り直す。
+- **再開手順**:
+  1. `npm run agent:session -- --status`で作業共有を確認し、note編集の同時実行を避ける。`npm run note:session:check`でstats47のログインを確認する。
+  2. `npm run note:cards:audit -- --browser-verify --output .claude/state/metrics/note/card-visibility-latest.json`で286記事を再監査する。空白が残ればexit 1でもレポートを読む。`unknownCards`または`browserVerifyFailedArticles`があれば、`npm run note:cards:audit -- --browser-verify --retry-unknown-from .claude/state/metrics/note/card-visibility-latest.json --output .claude/state/metrics/note/card-visibility-latest.json`で再検証し、未確認0を確認する。
+  3. `npm run note:cards:repair-batch -- --max-articles 5 --max-cards 10 --commit --skip-blocked`を小分けで繰り返す。各バッチで公開後の表示を確認する。失敗時はjournal・公開記事の`has_draft`・対象カードのキーを確認してから再開する。監査から24時間経過したら手順2へ戻る。
+  4. カード修復後の空段落は`note:cards:compact-spacing`で記事ごとに別工程で詰め、記事単体監査で確認する。
+- **未解決の1枚**: `recovered-n023501038bd5`（`https://note.com/stats47/n/n023501038bd5`）内のmagazineカード`https://note.com/stats47/m/me574f67ac47f`、旧キー`embf4bf74e742aa`。修復処理がタイムアウトし、再監査では空白のまま、公開記事に下書きなし。`--skip-blocked`で他のカードを進めつつ、個別に原因を調べて最終的に再処理する。スキップを完了扱いにしない。
+- **週次運用**: `.github/workflows/note-circulation-audit-weekly.yml`と`.claude/skills/management/weekly-review/SKILL.md`に全量監査を組み込み済み。CIの初回結果は未確認。スクリーンショットはCI artifactに14日保持し、R2とローカルには蓄積しない。
+- **停止条件**: 対象カードのURL・位置・記事本文・価格・タグのいずれかが変わる、または更新後のブラウザ表示が確認できない場合は次のカードへ進まない。
+- **完了条件**: 全記事監査で空白0件・未確認0件を確認し、週次監査が継続実行される。
+
 ### [DATA-VALUE-ERRORS-01] 公開中の誤った値・誤った表記を全指標で洗い出し、早急に直す
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-09-25] [レーン:データ品質]
 

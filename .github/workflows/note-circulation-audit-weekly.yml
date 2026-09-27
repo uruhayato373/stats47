@@ -10,6 +10,7 @@ on:
 
 permissions:
   contents: read
+  actions: read
   issues: write
 
 concurrency:
@@ -35,6 +36,15 @@ jobs:
       - name: 📦 Install dependencies
         run: npm ci
 
+      - name: 📥 Previous card audit for weekly change
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          PREVIOUS_RUN=$(gh run list --workflow note-circulation-audit-weekly.yml --limit 5 --json databaseId --jq ".[] | select(.databaseId != ${GITHUB_RUN_ID}) | .databaseId" 2>/dev/null | head -1 || true)
+          if [ -n "$PREVIOUS_RUN" ]; then
+            gh run download "$PREVIOUS_RUN" --name note-circulation-audit --dir /tmp/note-card-previous 2>/dev/null || true
+          fi
+
       - name: 🔍 Catalog・unit・live audit
         id: audit
         run: |
@@ -50,6 +60,17 @@ jobs:
           [ "${PIPESTATUS[0]}" -eq 0 ] || STATUS=1
           npm run note:circulation:audit 2>&1 | tee /tmp/note-circulation.log
           [ "${PIPESTATUS[0]}" -eq 0 ] || STATUS=1
+          PREVIOUS=$(find /tmp/note-card-previous -name note-card-visibility.json -type f -print -quit 2>/dev/null)
+          CARD_ARGS=(--output /tmp/note-card-visibility.json --browser-verify --screenshots /tmp/note-card-screenshots --max-screenshots 3)
+          if [ -n "$PREVIOUS" ]; then CARD_ARGS+=(--previous "$PREVIOUS"); fi
+          npm run note:cards:audit -- "${CARD_ARGS[@]}" 2>&1 | tee /tmp/note-card-visibility.log
+          if node -e 'const r=require("/tmp/note-card-visibility.json"); process.exit(r.summary.browserVerifyFailedArticles ? 0 : 1)' 2>/dev/null; then
+            RETRY_ARGS=(--output /tmp/note-card-visibility.json --browser-verify --retry-unknown-from /tmp/note-card-visibility.json)
+            if [ -n "$PREVIOUS" ]; then RETRY_ARGS+=(--previous "$PREVIOUS"); fi
+            npm run note:cards:audit -- "${RETRY_ARGS[@]}" 2>&1 | tee -a /tmp/note-card-visibility.log
+          fi
+          node -e 'const r=require("/tmp/note-card-visibility.json"); process.exit(r.summary.fetchFailed || r.summary.browserVerifyFailedArticles || r.summary.affectedArticles ? 1 : 0)'
+          [ "$?" -eq 0 ] || STATUS=1
           npm run note:navigation:products:check 2>&1 | tee /tmp/note-product-navigation.log
           [ "${PIPESTATUS[0]}" -eq 0 ] || STATUS=1
 
@@ -101,6 +122,9 @@ jobs:
             /tmp/note-cover-tests.log
             /tmp/note-covers.log
             /tmp/note-circulation.log
+            /tmp/note-card-visibility.json
+            /tmp/note-card-visibility.log
+            /tmp/note-card-screenshots/
             /tmp/note-product-navigation.log
           if-no-files-found: warn
           retention-days: 14
@@ -139,6 +163,9 @@ jobs:
             }
           }
           NODE
+            fi
+            if [ -f /tmp/note-card-visibility.json ]; then
+              node -e 'const r=require("/tmp/note-card-visibility.json"); console.log("- Card visibility: `"+JSON.stringify(r.summary)+"`"); for(const a of r.articles.filter(x=>x.issues.length).slice(0,20)) console.log("- "+a.noteUrl+": "+a.issues.map(x=>x.code).join(", "));'
             fi
           } > /tmp/note-circulation-issue.md
 

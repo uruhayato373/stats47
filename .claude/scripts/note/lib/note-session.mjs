@@ -9,7 +9,7 @@
 import { chromium } from "playwright";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { readFileSync } from "node:fs";
+import { readFileSync, rmSync } from "node:fs";
 
 export const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "..", "..");
 export const PROFILE = join(ROOT, ".local/playwright-note-profile");
@@ -55,4 +55,11 @@ export async function assertAccount(ctx) {
   if (!name) throw new Error("[note-session] 未ログイン (current_user 取得不可)。login-note-profile.mjs で再ログインしてください");
   if (name !== expected) throw new Error(`[note-session] 別アカウント: ${name} (期待 ${expected})。取り違え防止のため中断`);
   return name;
+}
+
+/** Call only after closing the persistent context; cookies and local storage remain intact. */
+export function pruneProfileCaches() {
+  for (const directory of ["Default/Cache", "Default/Code Cache", "Default/GPUCache", "GraphiteDawnCache"]) {
+    rmSync(join(PROFILE, directory), { recursive: true, force: true });
+  }
 }
