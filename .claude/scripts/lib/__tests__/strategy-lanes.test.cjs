@@ -261,10 +261,31 @@ test('連続未達が 1 週なら、レビューより前の週の計画なら D
 test('🔴 は上限超過と起票から一定日数を過ぎた未着手を DG081 warning、上限ちょうど・着手中は出さない', () => {
   const card = (i, filed = '2026-09-20', wip = false) => ({ id: `H-${i}`, tier: 'high', filed, wip });
   const at = Array.from({ length: MAX_HIGH_TIER_CARDS }, (_, i) => card(i));
-  const codesOf = (cards) => discipline({ cards, reviews: [] }).issues.map((i) => i.message);
+  const codesOf = (cards) => discipline({ cards, reviews: [] }).issues.filter((i) => i.code === 'DG081').map((i) => i.message);
   assert.deepStrictEqual(codesOf(at), []);
   assert.match(codesOf([...at, card('x')]).join(), /上限 \d+ 枚を超えている/);
   const old = new Date(Date.parse('2026-09-27T00:00:00Z') - (HIGH_TIER_MAX_AGE_DAYS + 1) * 86400000).toISOString().slice(0, 10);
   assert.match(codesOf([card('old', old)]).join(), /H-old/);
   assert.deepStrictEqual(codesOf([card('wip', old, true)]), []);
+});
+
+// ── 週次 Must と 🔴 の着手順 (DG083)。意図: 月次で 🔴 を並べ替えても、週の Must が別作業で埋まれば進まない。
+test('Must が 🔴 上位 (オーナー作業を除く) をどれも参照しないと DG083、1 枚でも入っていれば出さない', () => {
+  const high = (id, executor = '対話', kind = '改善') => ({ id, tier: 'high', executor, kind, filed: '2026-09-20' });
+  const cards = [high('OWN-01', 'ユーザー'), high('TOP-01'), high('TOP-02'), high('TOP-03'), high('FOURTH-01'), { id: 'BUG-01', tier: 'mid', kind: '不具合' }];
+  const audit = (must) => auditPlanDiscipline({
+    cards,
+    weeklyText: planFor('2026-W40', must),
+    reviews: [],
+    today: '2026-09-27',
+    files: { backlog: 'b', weekly: 'w' },
+  });
+  const other = audit(['- [ ] **別作業** — `FOURTH-01`']);
+  assert.match(other.issues.map((i) => `${i.code}:${i.message}`).join(), /DG083:.*TOP-01, TOP-02, TOP-03/);
+  // オーナー作業は上位に数えない (Must ではなくオーナー作業として出す)
+  assert.deepStrictEqual(other.topHigh, ['TOP-01', 'TOP-02', 'TOP-03']);
+  assert.deepStrictEqual(other.ownerHigh, ['OWN-01']);
+  assert.deepStrictEqual(audit(['- [ ] **上位の 3 番目** — `TOP-03`']).issues.filter((i) => i.code === 'DG083'), []);
+  // 損失の出ている不具合を Must に入れた週は、重点外でも許す
+  assert.deepStrictEqual(audit(['- [ ] **不具合** — `BUG-01`']).issues.filter((i) => i.code === 'DG083'), []);
 });

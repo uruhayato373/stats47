@@ -94,9 +94,11 @@ npm run kdp:weekly -- --week [YYYY-Www] --write
 6. search-growth候補は最大3件（technical/blocker、acquisition/content、measurementを原則各1件）だけ審査する。
 7. CTR候補はpage×query、現行title/content、past effectを確認する。大量title書換えを提案しない。
 8. 候補は人間承認前に改善バックログへ追加しない。search-growth候補のWIP（approved / in-progress）は5以下を守る（`triage.mjs` の `WIP_LIMIT`。improvements.md全体の上限10件とは別）。
+9. gsc/coverage/inspectionがfreshで候補がある週は、最大3件を審査し、最低1件を`search-growth:approve`または`search-growth:dismiss`で記録する。採用を強制せず、採用しない場合もdismiss理由を残す。
 10. KPIツリーを判定する（`LATEST.md` の「KPI ツリー」節、正典は収益化戦略 §1.1）。今月の重点レーンのKPI（★）は、今週の値・4週前（窓が重ならない週）との比較・ぶら下がる施策を書き、動いた/動かなかったを1文で判定する。値が `not-connected` / `missing` / `stale` / `degraded` のKPIは0と読まず、理由を書いてBlockersに入れる。ガードレールが悪化した週は、重点に関係なく是正を次週Mustの候補にする。
 11. 施策の配線を確認する。「重点レーンのKPIなのに施策が0件」「KPI未接続」「active上限超過」が出ていれば、申し送りに対処（施策の起票・降格・判定）とIDを書く。
-9. gsc/coverage/inspectionがfreshで候補がある週は、最大3件を審査し、最低1件を`search-growth:approve`または`search-growth:dismiss`で記録する。採用を強制せず、採用しない場合もdismiss理由を残す。
+12. 🔴 の着手順を確認する。週次メトリクス Issue の「サイクルの健全性」節 (DG083 の行) で、🔴 の上位 3 枚 (オーナー作業を除く) がこの週の Must に入り、どこまで進んだかを 1 枚 1 行で書く。
+    上位が 2 週続けて進まなければ、申し送りに「分割する・順番を入れ替える・🟡 へ下げる」のどれかを理由付きで書く (並び替え自体は月次計画か、オーナーの判断)。
 
 ## Phase 3: 記録
 
@@ -107,6 +109,7 @@ npm run kdp:weekly -- --week [YYYY-Www] --write
 - 開発・コンテンツ実績
 - NSM（週次収益）/ GA4 / GSC / SNS
 - KPIツリー（重点KPIの今週値・非重複比較・判定、ガードレールの悪化、判定不能のKPIと理由、施策の配線状況）
+- 🔴 の着手順（上位 3 枚の今週の進み具合と、止まっている理由）
 - 計測→記録→改善サイクル（回遊率・業務文脈の着地・無人記録で閉じた/更新した施策・オーナー作業）
 - search-growth候補（期間・証拠・制約・承認待ちを明記）
 - 課題、繰り返しパターン、学び

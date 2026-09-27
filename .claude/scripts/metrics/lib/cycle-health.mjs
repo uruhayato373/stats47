@@ -100,7 +100,14 @@ export function readCycleHealth(root, today) {
     stalePlanIds: findStalePlanIds(readText(root, ".claude/todo/weekly.md") ?? "", completedIds, new Set(cards.map((c) => c.id))),
     review: { latestWeek: reviews[0]?.week ?? null, expectedWeek: previousIsoWeek(today) },
     discipline: board.discipline
-      ? { highCount: board.discipline.highCount, staleHigh: board.discipline.staleHigh, repeated: board.discipline.repeated }
+      ? {
+          highCount: board.discipline.highCount,
+          staleHigh: board.discipline.staleHigh,
+          repeated: board.discipline.repeated,
+          topHigh: board.discipline.topHigh,
+          coveredTop: board.discipline.coveredTop,
+          ownerHigh: board.discipline.ownerHigh,
+        }
       : null,
   };
 }
@@ -119,6 +126,11 @@ export function formatCycleHealth(h) {
       `・${strategyLanes.HIGH_TIER_MAX_AGE_DAYS} 日超の未着手 ${discipline.staleHigh.length} 枚${discipline.staleHigh.length ? `: ${list(discipline.staleHigh)}` : ""}`
     : "未計測";
   const repeatLine = discipline ? (discipline.repeated.length ? `⚠️ ${discipline.repeated.join(" / ")}` : "なし") : "未計測";
+  const topLine = discipline
+    ? `上位 ${discipline.topHigh.map((id) => `${discipline.coveredTop.includes(id) ? "✅" : "⬜"} \`${id}\``).join(" ")}` +
+      (discipline.coveredTop.length === 0 && discipline.topHigh.length ? " ⚠️ 今週の Must に入っていない" : "") +
+      (discipline.ownerHigh.length ? ` / オーナー作業 ${list(discipline.ownerHigh)}` : "")
+    : "未計測";
   const detectorLine = detectors
     .map((d) => (d.measured ? `${d.name} 残 ${d.pending} 件・カード${d.open ? "あり" : "なし"}${d.stalled ? " ⚠️ 起票が止まっている" : ""}` : `${d.name} state なし`))
     .join(" / ");
@@ -132,6 +144,7 @@ export function formatCycleHealth(h) {
     `| 検出 → 起票 | 残件があるのにカードが開いていない検出器 (自動起票が既定) | ${detectorLine} |`,
     `| 起票 → 分類 | レーンか種類の無いカード | ${cards.unclassified.length} / ${cards.total} 件${cards.unclassified.length ? `: ${list(cards.unclassified)}` : ""} |`,
     `| 計画 | バックログ 🔴 の枚数と鮮度 (DG081) | ${highLine} |`,
+    `| 計画 → 実行 | 🔴 の着手順 (上から) が今週の Must に入っているか (DG083) | ${topLine} |`,
     `| 計画 → 実行 | 週次 Must の達成 | ${mustLine} |`,
     `| 計画 → 実行 | 連続未達の Must を同じ形で再掲 (DG082) | ${repeatLine} |`,
     `| 実行 → 完了 | 期日超過のカード | ${cards.overdue.length} 件${cards.overdue.length ? `: ${list(cards.overdue)}` : ""} |`,

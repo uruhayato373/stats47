@@ -10,9 +10,9 @@
  * KPI: レーン表の KPI 列と improvements.md の `[kpi: id]` は、事業計画 catalog の KPI ツリー
  *      (`.claude/state/business-plan/kpi-tree.json`、`npm run business-plan:build-state` が生成) の id だけを参照できる。
  *
- * 計画の規律: 🔴 の上限と鮮度 (DG081)、連続未達 Must の再掲禁止 (DG082)。
+ * 計画の規律: 🔴 の上限と鮮度 (DG081)、連続未達 Must の再掲禁止 (DG082)、週次 Must と 🔴 上位の接続 (DG083)。
  *
- * 利用者: check-docs-governance.cjs (DG073〜DG082)・週次メトリクス Issue (cycle-health.mjs)・管理画面 /strategy/lanes。
+ * 利用者: check-docs-governance.cjs (DG073〜DG083)・週次メトリクス Issue (cycle-health.mjs)・管理画面 /strategy/lanes。
  * カードのパースは backlog-lib.cjs を使い、ここでは別実装を持たない。
  */
 
@@ -42,6 +42,13 @@ const MAX_HIGH_TIER_CARDS = 10;
 const HIGH_TIER_MAX_AGE_DAYS = 30;
 /** 連続未達がこの週数以上なら、未達 Must を同じ形で次週 Must に再掲させない (DG082)。cycle-health と共有 */
 const MUST_MISS_STREAK_LIMIT = 2;
+/**
+ * 週次 Must が参照すべき 🔴 の上位枚数。🔴 は並び順が着手順 (2026-09-27 オーナー判断) で、月次に付け替えても
+ * 週の Must が別作業で埋まれば進まない (W37〜38 は Must 0〜1/3・計画外 226 コミット)。DG083 と週次 Issue が共有する
+ */
+const HIGH_TIER_TOP_N = 3;
+/** オーナー作業のカードは Must ではなく「オーナー作業」として出すので、上位の数え方から外す */
+const OWNER_EXECUTOR = 'ユーザー';
 /** 分割して 1 週で届く大きさにした持ち越し Must に付ける目印 */
 const SPLIT_MARKER = '[分割]';
 const REVIEWS_DIR = '.claude/skills/management/weekly-review/reference/reviews';
@@ -157,6 +164,8 @@ const daysSince = (date, today) => Math.floor((Date.parse(`${today}T00:00:00Z`) 
  * 計画の規律 (純関数)。
  * DG081 (warning): 🔴 が上限超過 / 起票から HIGH_TIER_MAX_AGE_DAYS 日を過ぎた未着手の 🔴。月次計画で 🟡 へ下げるか分割する。
  * DG082 (error): 連続未達が MUST_MISS_STREAK_LIMIT 週以上なのに、前週の未達 Must を [分割] なしで今週の Must に再掲した。
+ * DG083 (warning): 今週の Must が 🔴 の上位 HIGH_TIER_TOP_N 枚 (オーナー作業を除く) をどれも参照していない。
+ *   損失の出ている不具合カードを Must に入れた週は、重点外でも許す (DG077 と同じ例外)。
  */
 function auditPlanDiscipline({ cards, weeklyText, reviews, today, files }) {
   const issues = [];
@@ -184,7 +193,18 @@ function auditPlanDiscipline({ cards, weeklyText, reviews, today, files }) {
   for (const r of repeated) {
     issues.push({ level: 'error', code: 'DG082', file: files.weekly, message: `Must が ${review.missStreak} 週連続未達なのに、${review.latestWeek} の未達 Must を同じ形で再掲している (${r})。1 週で届く完了条件に分割して見出しに ${SPLIT_MARKER} を付けるか、Should へ降格する` });
   }
-  return { issues, highCount: high.length, staleHigh, review, repeated };
+  // 🔴 の上位 (ファイル上の並び順 = 着手順)。オーナー作業は Must ではなく別枠で出す
+  const topHigh = high.filter((c) => c.id && c.executor !== OWNER_EXECUTOR).slice(0, HIGH_TIER_TOP_N).map((c) => c.id);
+  const ownerHigh = high.filter((c) => c.id && c.executor === OWNER_EXECUTOR).map((c) => c.id);
+  const mustItems = weeklyText ? parseWeeklyItems(weeklyText).filter((i) => i.section === 'Must') : [];
+  const mustIds = new Set(mustItems.flatMap((i) => i.ids));
+  const kindById = new Map(cards.filter((c) => c.id).map((c) => [c.id, c.kind]));
+  const coveredTop = topHigh.filter((id) => mustIds.has(id));
+  const hasDefectMust = [...mustIds].some((id) => kindById.get(id) === backlogLib.DEFECT_KIND);
+  if (mustItems.length > 0 && topHigh.length > 0 && coveredTop.length === 0 && !hasDefectMust) {
+    issues.push({ level: 'warning', code: 'DG083', file: files.weekly, message: `今週の Must が 🔴 の上位 ${topHigh.length} 枚 (${topHigh.join(', ')}) をどれも参照していない。🔴 は並び順が着手順なので、上から Must に入れる` });
+  }
+  return { issues, highCount: high.length, staleHigh, review, repeated, topHigh, coveredTop, ownerHigh };
 }
 
 /** improvements.md のタイトルにある `[kpi: a, b]` の id 列。目印が無ければ null。 */
@@ -457,6 +477,7 @@ module.exports = {
   MAX_HIGH_TIER_CARDS,
   HIGH_TIER_MAX_AGE_DAYS,
   MUST_MISS_STREAK_LIMIT,
+  HIGH_TIER_TOP_N,
   SPLIT_MARKER,
   parseMustRatio,
   parseUnmetMustIds,
