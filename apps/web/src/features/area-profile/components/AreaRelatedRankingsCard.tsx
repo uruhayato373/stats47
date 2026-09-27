@@ -1,130 +1,78 @@
 import Link from 'next/link';
 
-import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { ArrowRight, TrendingDown, TrendingUp } from 'lucide-react';
 
-import { RankBadge } from '@/components/atoms/RankBadge';
 import { SectionCard } from '@/components/surface';
 
-import { selectDistinctProfileItems } from '../utils';
+import { AreaHighlightList, type AreaHighlightListItem } from './AreaHighlightList';
 
-import type { AreaProfileData } from '../types';
+import type { AreaHighlight, AreaHighlights } from '@stats47/area-profile';
 
 interface AreaRelatedRankingsCardProps {
-  profile: AreaProfileData;
-  /** strengths / weaknesses 各々で表示する件数 (default: 6) */
-  limit?: number;
+  areaName: string;
+  /** selectAreaHighlights の結果 (件数は呼び出し側が選定時に渡す) */
+  highlights: AreaHighlights;
+}
+
+/** 家計調査は県庁所在市 (東京都は区部) の値なので注記する (SNS の中立規約と同じ)。 */
+export function toHighlightListItem(item: AreaHighlight): AreaHighlightListItem {
+  return {
+    rankingKey: item.rankingKey,
+    label: item.label,
+    rank: item.rank,
+    value: item.value,
+    unit: item.unit,
+    year: item.year,
+    tone: item.tone,
+    ...(item.isKakei ? { note: '県庁所在市の値' } : {}),
+  };
 }
 
 /**
- * area top ページ用「この県のトップ/ボトムランキング」カード
+ * 県ページの「特徴」カード。選び方は packages/area-profile の selectAreaHighlights だけが決め、
+ * ここは受け取った結果を描くだけ (切り出し・並べ替えをしない)。
  *
- * 効果:
- * - area top (47 SSG、PR 高い) から ranking 詳細への内部リンク密度↑
- * - 47 × 12 = 564 internal links 追加 (GSC indexation 改善)
- * - ユーザーには「この県の特徴」を一目で示せる SEO 補強コンテンツ
+ * 表現は中立 (「強み/弱み」とは書かない)。良否の色は METRIC_POLARITY で極性が確定した指標の順位チップにだけ付き、
+ * グループ見出しの矢印は向きだけを示すので色を付けない。
  */
-export function AreaRelatedRankingsCard({
-  profile,
-  limit = 6,
-}: AreaRelatedRankingsCardProps) {
-  const strengths = selectDistinctProfileItems(profile.strengths, limit);
-  const weaknesses = selectDistinctProfileItems(profile.weaknesses, limit);
+export function AreaRelatedRankingsCard({ areaName, highlights }: AreaRelatedRankingsCardProps) {
+  if (highlights.top.length === 0 && highlights.bottom.length === 0) return null;
 
-  if (strengths.length === 0 && weaknesses.length === 0) return null;
+  const groups = [
+    { key: 'top', title: `${areaName}が全国上位`, icon: TrendingUp, items: highlights.top },
+    { key: 'bottom', title: `${areaName}が全国下位`, icon: TrendingDown, items: highlights.bottom },
+  ] as const;
 
   return (
     <section aria-labelledby="area-highlights-title">
       <div className="mb-4">
-        <h2
-          id="area-highlights-title"
-          className="text-xl font-bold text-foreground"
-        >
-          {profile.areaName}の特徴
+        <h2 id="area-highlights-title" className="text-xl font-bold text-foreground">
+          {areaName}の特徴
         </h2>
         <p className="mt-1 text-sm text-muted-foreground">
-          全国順位が高い指標と低い指標を、代表値から確認できます。
+          県データブックの指標のうち、全国順位が上位・下位の指標です。順位の色は、値が高いほど良い・悪いが定まった指標にだけ付けています。
         </p>
       </div>
       <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
-        {/* TOP - 強み */}
-        {strengths.length > 0 && (
-          <SectionCard
-            title={`${profile.areaName}が上位`}
-            icon={<TrendingUp className="h-4 w-4 text-positive" />}
-            headerAction={
-              <Link
-                href="/themes"
-                className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline"
-              >
-                テーマ一覧
-                <ArrowRight className="h-3 w-3" />
-              </Link>
-            }
-          >
-            <ol className="space-y-1.5">
-              {strengths.map((item, idx) => (
-                <li
-                  key={`${item.rankingKey}-${idx}`}
-                  className="flex items-baseline gap-2"
+        {groups.map(({ key, title, icon: Icon, items }) =>
+          items.length > 0 ? (
+            <SectionCard
+              key={key}
+              title={title}
+              icon={<Icon className="h-4 w-4 text-muted-foreground" />}
+              headerAction={
+                <Link
+                  href="/themes"
+                  className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline"
                 >
-                  <RankBadge rank={item.rank} tone="positive" />
-                  <div className="min-w-0 flex-1">
-                    <Link
-                      href={`/ranking/${item.rankingKey}`}
-                      className="line-clamp-1 text-sm font-medium leading-snug text-foreground hover:text-primary hover:underline"
-                    >
-                      {item.indicator}
-                    </Link>
-                    <p className="mt-0.5 text-xs tabular-nums text-muted-foreground">
-                      {item.value.toLocaleString('ja-JP')}
-                      {formatUnitForDisplay(item.unit)}（{item.year}）
-                    </p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </SectionCard>
-        )}
-
-        {/* BOTTOM - 弱み */}
-        {weaknesses.length > 0 && (
-          <SectionCard
-            title={`${profile.areaName}が下位`}
-            icon={<TrendingDown className="h-4 w-4 text-negative" />}
-            headerAction={
-              <Link
-                href="/themes"
-                className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline"
-              >
-                テーマ一覧
-                <ArrowRight className="h-3 w-3" />
-              </Link>
-            }
-          >
-            <ol className="space-y-1.5">
-              {weaknesses.map((item, idx) => (
-                <li
-                  key={`${item.rankingKey}-${idx}`}
-                  className="flex items-baseline gap-2"
-                >
-                  <RankBadge rank={item.rank} tone="negative" />
-                  <div className="min-w-0 flex-1">
-                    <Link
-                      href={`/ranking/${item.rankingKey}`}
-                      className="line-clamp-1 text-sm font-medium leading-snug text-foreground hover:text-primary hover:underline"
-                    >
-                      {item.indicator}
-                    </Link>
-                    <p className="mt-0.5 text-xs tabular-nums text-muted-foreground">
-                      {item.value.toLocaleString('ja-JP')}
-                      {formatUnitForDisplay(item.unit)}（{item.year}）
-                    </p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </SectionCard>
+                  テーマ一覧
+                  <ArrowRight className="h-3 w-3" />
+                </Link>
+              }
+            >
+              <AreaHighlightList items={items.map(toHighlightListItem)} rankScope="全国順位" />
+            </SectionCard>
+          ) : null,
         )}
       </div>
     </section>

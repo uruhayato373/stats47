@@ -1,6 +1,9 @@
 import "server-only";
 
+import { cache } from "react";
+
 import {
+  AREA_DATABOOK_SCHEMA_VERSION,
   readAreaDatabookFromR2,
   buildAreaDatabookSnapshots,
   type AreaDatabookSnapshot,
@@ -26,20 +29,24 @@ export interface AreaDatabookViewData {
  *
  * - databook (値+全国順位) は R2 `app/areas/<code>/databook.json` を 1 read。
  * - editorial (特産品・県シンボル) は git TS を直接参照 (R2 経由しない)。
- * - development のみ: R2 に databook.json が無ければ在庫から in-memory 補完し、
+ * - development のみ: R2 に databook.json が無い・旧版 (県の「特徴」のメタ無し) なら在庫から in-memory 補完し、
  *   R2 push 前でも localhost で UI を QA できる (home-featured と同じ dev 補完方針)。
  * - 本番で databook 欠損時は null を返し、呼び出し側 (AreaDatabookSection) が
  *   従来チャート表示にフォールバックする。
+ *
+ * 県ページのカード・title・関連記事・データブック本体が同じ databook を読むため、cache() で
+ * リクエスト内の読み込みを 1 回にする。
  */
-export async function getAreaDatabook(
+export const getAreaDatabook = cache(async function getAreaDatabook(
   areaCode: string,
 ): Promise<AreaDatabookViewData> {
   let databook = await readAreaDatabookFromR2(areaCode);
 
-  if (!databook && process.env.NODE_ENV === "development") {
+  const isOutdated = (databook?.schemaVersion ?? 1) < AREA_DATABOOK_SCHEMA_VERSION;
+  if ((!databook || isOutdated) && process.env.NODE_ENV === "development") {
     try {
       const { snapshots } = await buildAreaDatabookSnapshots({ areaCodes: [areaCode] });
-      databook = snapshots[0] ?? null;
+      databook = snapshots[0] ?? databook;
     } catch (error) {
       logger.warn(
         { areaCode, error: error instanceof Error ? error.message : String(error) },
@@ -53,4 +60,4 @@ export async function getAreaDatabook(
     databook,
     editorial: AREA_EDITORIALS[areaCode] ?? null,
   };
-}
+});

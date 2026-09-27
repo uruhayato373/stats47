@@ -1,15 +1,31 @@
 import "server-only";
 
-import { collectTemplateMetricKeys, AREA_DATABOOK_TEMPLATE } from "@stats47/data-configs";
+import {
+  collectTemplateMetricKeys,
+  AREA_DATABOOK_TEMPLATE,
+  METRIC_POLARITY,
+} from "@stats47/data-configs";
+import { AREA_HIGHLIGHT_PROMINENCE } from "@stats47/data-configs/ranking-prominence";
+import { KNOWN_RANKING_KEYS } from "@stats47/ranking/config";
 import { readRankingItemFromR2, listRankingValues } from "@stats47/ranking/server";
 import { logger } from "@stats47/logger/server";
 import { saveToR2 } from "@stats47/r2-storage/server";
 
+import { assertAreaHighlightsHealthy } from "../highlights/check-area-highlights";
+import {
+  buildQualifiedLabel,
+  buildSubtitleQualifier,
+  collectHighlightCandidateKeys,
+  computeMargin,
+  detectRankDirection,
+} from "../highlights/select-area-highlights";
 import type {
   AreaDatabookSnapshot,
+  DatabookHighlightMeta,
   DatabookMetricValue,
 } from "../types/databook-snapshot";
-import { areaDatabookKeyPath } from "../types/databook-snapshot";
+import { AREA_DATABOOK_SCHEMA_VERSION, areaDatabookKeyPath } from "../types/databook-snapshot";
+import type { RankingItem } from "@stats47/ranking";
 
 const AREA_TYPE = "prefecture";
 
@@ -36,6 +52,7 @@ export async function buildAreaDatabookSnapshots(
   opts: BuildAreaDatabookOptions = {},
 ): Promise<{ snapshots: AreaDatabookSnapshot[]; metricsResolved: number; metricsMissing: string[] }> {
   const templateKeys = collectTemplateMetricKeys(AREA_DATABOOK_TEMPLATE);
+  const highlightKeys = new Set(collectHighlightCandidateKeys(AREA_DATABOOK_TEMPLATE));
   const areaFilter = opts.areaCodes ? new Set(opts.areaCodes) : null;
 
   const byArea = new Map<string, { areaName: string; metrics: Record<string, DatabookMetricValue> }>();
@@ -64,6 +81,11 @@ export async function buildAreaDatabookSnapshots(
     const nationalAvg =
       nums.length > 0 ? nums.reduce((sum, v) => sum + v, 0) / nums.length : 0;
 
+    const ranked = valuesResult.data
+      .filter((rv) => rv.value !== null && rv.rank >= 1)
+      .map((rv) => ({ rank: rv.rank, value: rv.value as number }));
+    const highlightBase = highlightKeys.has(key) ? buildHighlightBase(key, item, ranked) : null;
+
     for (const rv of valuesResult.data) {
       if (rv.value === null) continue;
       if (areaFilter && !areaFilter.has(rv.areaCode)) continue;
@@ -74,6 +96,9 @@ export async function buildAreaDatabookSnapshots(
         year: item.latestYear!.yearName,
         unit: item.unit,
         nationalAvg,
+        ...(highlightBase
+          ? { highlight: { ...highlightBase, margin: computeMargin(ranked, rv.rank) } }
+          : {}),
       };
       byArea.set(rv.areaCode, entry);
     }
@@ -83,6 +108,7 @@ export async function buildAreaDatabookSnapshots(
   const now = new Date().toISOString();
   const snapshots: AreaDatabookSnapshot[] = [...byArea.entries()].map(
     ([areaCode, entry]) => ({
+      schemaVersion: AREA_DATABOOK_SCHEMA_VERSION,
       areaCode,
       areaName: entry.areaName,
       metrics: entry.metrics,
@@ -91,6 +117,34 @@ export async function buildAreaDatabookSnapshots(
     }),
   );
   return { snapshots, metricsResolved, metricsMissing };
+}
+
+/** item.json から県の「特徴」の候補メタ (県に依存しない部分) を作る。margin は県ごとに足す。 */
+function buildHighlightBase(
+  key: string,
+  item: RankingItem,
+  ranked: { rank: number; value: number }[],
+): Omit<DatabookHighlightMeta, "margin"> {
+  const isKakei = item.sourceConfig?.recipe?.kind === "kakei-chousa";
+  const baseLabel = item.readerLabel || item.title || item.rankingName || key;
+  const subtitle = item.subtitle || undefined;
+  const source =
+    item.source?.name ||
+    item.attribution?.compilation?.name ||
+    item.attribution?.originalSurveys?.[0]?.name ||
+    "";
+  return {
+    label: buildQualifiedLabel(baseLabel, buildSubtitleQualifier(subtitle, isKakei)),
+    ...(subtitle ? { subtitle } : {}),
+    category: item.categoryKey ?? "",
+    source,
+    isKakei,
+    prominence: AREA_HIGHLIGHT_PROMINENCE[key] ?? 0,
+    polarity: METRIC_POLARITY[key]?.polarity ?? null,
+    published: KNOWN_RANKING_KEYS.has(key),
+    rankedCount: ranked.length,
+    rankDirection: detectRankDirection(ranked),
+  };
 }
 
 /**
@@ -102,6 +156,8 @@ export async function buildAreaDatabookSnapshots(
 export async function exportAreaDatabookSnapshot(): Promise<ExportAreaDatabookSnapshotResult> {
   const startedAt = Date.now();
   const { snapshots, metricsResolved, metricsMissing } = await buildAreaDatabookSnapshots();
+  // 生成直後に 47 県の「特徴」を検査し、違反があれば R2 へ 1 件も書かずに止める。
+  assertAreaHighlightsHealthy(snapshots, { publishedKeys: KNOWN_RANKING_KEYS });
 
   let totalSizeBytes = 0;
   let files = 0;

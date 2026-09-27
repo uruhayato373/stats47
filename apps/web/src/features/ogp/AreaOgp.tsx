@@ -1,13 +1,26 @@
 import { BRAND, FONT, OGP_MAP, OGP_SHADOW } from './brand';
 import { JapanMapSvg } from './JapanMapSvg';
 
+import type { AreaHighlights } from '@stats47/area-profile';
+
+/**
+ * 県 OGP のデータ。「特徴」は selectAreaHighlights の結果をそのまま渡す (件数は呼び出し側が選定時に指定し、
+ * ここで切り出さない)。2026-07 以降の県 OGP 画像はシルエットカード (scripts/lib/pref-silhouette-render.ts) で、
+ * この部品は現在どの生成経路からも使われていない。再利用時も県の profile.json は読まない (AREA-HIGHLIGHTS-SSOT-01)。
+ */
 export interface AreaOgpData {
   prefCode: number;
   areaName: string;
   reading?: string | null;
-  strengths?: Array<{ rank: number; indicator: string }>;
-  weaknesses?: Array<{ rank: number; indicator: string }>;
+  highlights?: AreaHighlights;
 }
+
+/** 良否の色は極性が確定した指標だけ (tone は選定関数が METRIC_POLARITY から決める)。 */
+const TONE_COLOR = {
+  positive: BRAND.success,
+  negative: BRAND.vermilion,
+  neutral: BRAND.ink,
+} as const;
 
 interface Props {
   data: AreaOgpData;
@@ -15,8 +28,8 @@ interface Props {
 
 // AreaMapHighlight A案: 薄い地図(当該県ハイライト) + 強弱グリッド
 export function AreaOgp({ data }: Props) {
-  const strengths = (data.strengths ?? []).slice(0, 2);
-  const weaknesses = (data.weaknesses ?? []).slice(0, 2);
+  const topItems = data.highlights?.top ?? [];
+  const bottomItems = data.highlights?.bottom ?? [];
 
   return (
     <div
@@ -112,7 +125,7 @@ export function AreaOgp({ data }: Props) {
         </div>
 
         {/* 強弱グリッド */}
-        {(strengths.length > 0 || weaknesses.length > 0) && (
+        {(topItems.length > 0 || bottomItems.length > 0) && (
           <div
             style={{
               width: '100%',
@@ -129,16 +142,16 @@ export function AreaOgp({ data }: Props) {
                   fontFamily: FONT.mono,
                   fontSize: 10,
                   letterSpacing: 2,
-                  color: BRAND.success,
+                  color: BRAND.muted,
                   fontWeight: 700,
                   marginBottom: 6,
                 }}
               >
-                ▲ STRENGTHS
+                ▲ 全国上位
               </div>
-              {strengths.map((s) => (
+              {topItems.map((s) => (
                 <div
-                  key={s.indicator}
+                  key={s.rankingKey}
                   style={{
                     display: 'flex',
                     alignItems: 'baseline',
@@ -152,7 +165,7 @@ export function AreaOgp({ data }: Props) {
                   <span
                     style={{
                       fontFamily: FONT.mono,
-                      color: BRAND.success,
+                      color: TONE_COLOR[s.tone],
                       fontWeight: 700,
                       marginRight: 6,
                       fontSize: 11,
@@ -160,7 +173,7 @@ export function AreaOgp({ data }: Props) {
                   >
                     {`#${s.rank}`}
                   </span>
-                  {s.indicator}
+                  {s.label}
                 </div>
               ))}
             </div>
@@ -170,16 +183,16 @@ export function AreaOgp({ data }: Props) {
                   fontFamily: FONT.mono,
                   fontSize: 10,
                   letterSpacing: 2,
-                  color: BRAND.vermilion,
+                  color: BRAND.muted,
                   fontWeight: 700,
                   marginBottom: 6,
                 }}
               >
-                ▼ WEAKNESSES
+                ▼ 全国下位
               </div>
-              {weaknesses.map((s) => (
+              {bottomItems.map((s) => (
                 <div
-                  key={s.indicator}
+                  key={s.rankingKey}
                   style={{
                     display: 'flex',
                     alignItems: 'baseline',
@@ -193,7 +206,7 @@ export function AreaOgp({ data }: Props) {
                   <span
                     style={{
                       fontFamily: FONT.mono,
-                      color: BRAND.vermilion,
+                      color: TONE_COLOR[s.tone],
                       fontWeight: 700,
                       marginRight: 6,
                       fontSize: 11,
@@ -201,7 +214,7 @@ export function AreaOgp({ data }: Props) {
                   >
                     {`#${s.rank}`}
                   </span>
-                  {s.indicator}
+                  {s.label}
                 </div>
               ))}
             </div>

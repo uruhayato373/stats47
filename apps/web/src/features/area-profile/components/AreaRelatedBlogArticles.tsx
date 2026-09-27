@@ -6,20 +6,16 @@ import { SurfaceLinkCard } from "@/components/surface";
 
 import { getRelatedArticleSummaries } from "@/features/blog/server";
 
-import type { AreaProfileData } from "../types";
+import type { AreaHighlights } from "@stats47/area-profile";
 
 interface Props {
-    profile: Pick<AreaProfileData, "strengths" | "weaknesses">;
+    /** 県の「特徴」と同じ選定結果 (selectAreaHighlights)。ここで切り出さない */
+    highlights: AreaHighlights;
     limit?: number;
 }
 
-export async function AreaRelatedBlogArticles({ profile, limit = 5 }: Props) {
-    const topKeys = [
-        ...profile.strengths.slice(0, 4),
-        ...profile.weaknesses.slice(0, 2),
-    ]
-        .map((s) => s.rankingKey)
-        .filter(Boolean);
+export async function AreaRelatedBlogArticles({ highlights, limit = 5 }: Props) {
+    const topKeys = [...highlights.top, ...highlights.bottom].map((s) => s.rankingKey);
 
     if (topKeys.length === 0) return null;
 

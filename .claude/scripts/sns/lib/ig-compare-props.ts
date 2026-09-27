@@ -10,7 +10,6 @@
  */
 
 import {
-  type Candidate as AreaCandidate,
   type DatabookTemplateLike,
   MAX_ITEMS_PER_CATEGORY,
   MAX_ITEMS_PER_SOURCE,

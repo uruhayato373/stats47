@@ -4,10 +4,8 @@ import { ArrowLeftRight } from "lucide-react";
 
 import { PageHeader } from "@/components/layout";
 
-import type { AreaProfileData } from "../types";
-
 interface Props {
-    profile: AreaProfileData;
+    profile: { areaCode: string; areaName: string };
 }
 
 /**

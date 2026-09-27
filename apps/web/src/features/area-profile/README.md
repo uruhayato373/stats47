@@ -51,8 +51,9 @@
 
 ## 地域プロファイル
 
-- `actions/get-area-profile.ts`が`@stats47/area-profile/server`経由でR2 snapshotを読む。
-- `AreaProfilePageClient`と各sectionが全国順位、強み・弱み、チャート、市区町村、関連記事を表示する。
+- 県ページは県名を地域マスタ (`lookupArea`)、「特徴」を R2 `databook.json` + `selectAreaHighlights` (`@stats47/area-profile`) から作る。県の `profile.json` は読まない (AREA-HIGHLIGHTS-SSOT-01、正典 `.claude/rules/area-databook-standards.md` §2.1)。
+- 「順位 + 指標 + 値」の一覧は `AreaHighlightList` だけで描き、県カード (`AreaRelatedRankingsCard`) と市区町村ページで共用する。
+- 市区町村ページは `readCityProfile` (`readCityProfileFromR2` の request cache) + `selectCityHighlights` を使う。
 - routeのServer Componentでデータを読み、serializableなpropsだけをClient Componentへ渡す。
 
 ## Public API

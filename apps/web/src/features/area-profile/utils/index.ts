@@ -13,4 +13,3 @@ export {
   type AreaRegionGroup,
 } from "./build-area-directory-data";
 export { matchPrefectures, prefectureShortName } from "./match-prefectures";
-export { selectDistinctProfileItems } from "./select-distinct-profile-items";

@@ -3,6 +3,8 @@ import { Suspense } from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
+import { lookupArea } from '@stats47/area';
+import { selectAreaHighlights } from '@stats47/area-profile';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -25,6 +27,7 @@ import {
 } from '@/features/ads';
 import { FurusatoNozeiCard } from '@/features/ads/server';
 import { AreaDatabookSection } from '@/features/area-databook';
+import { getAreaDatabook } from '@/features/area-databook/server';
 import {
   AreaProfilePageClient,
   AreaRelatedRankingsCard,
@@ -34,9 +37,7 @@ import {
   generateAreaMetadata,
   generateAreaProfileBreadcrumbStructuredData,
   generateAreaProfileStructuredData,
-  selectDistinctProfileItems,
 } from '@/features/area-profile';
-import { getAreaProfileAction } from '@/features/area-profile/server';
 import { AreaGeoInsightsSection } from '@/features/geo-analysis';
 import { AREA_THEMES } from '@/features/theme-dashboard/listing.server';
 
@@ -70,11 +71,30 @@ interface PageProps {
   params: Promise<{ areaCode: string }>;
 }
 
+/** 「特徴」カードの上位・下位それぞれの件数 (関連ブログ記事・構造化データも同じ選定結果を使う)。 */
+const CARD_HIGHLIGHTS_PER_GROUP = 4;
+/** title / description に使う上位の件数。 */
+const METADATA_HIGHLIGHTS = 3;
+
+/**
+ * 県名は地域マスタ、「特徴」は databook.json から選定関数で作る。
+ * 県の profile.json は読まない (AREA-HIGHLIGHTS-SSOT-01)。
+ */
+async function loadArea(areaCode: string) {
+  const area = lookupArea(areaCode);
+  if (!area || area.areaType !== 'prefecture') return null;
+  // databook の読み込み失敗でページ全体を落とさない (特徴カードと title の強調が消えるだけにする)。
+  const databook = await getAreaDatabook(areaCode)
+    .then((data) => data.databook)
+    .catch(() => null);
+  return { areaCode, areaName: area.areaName, databook };
+}
+
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { areaCode } = await params;
-  const profile = await getAreaProfileAction(areaCode);
+  const profile = await loadArea(areaCode);
 
   if (!profile) {
     return {
@@ -84,20 +104,15 @@ export async function generateMetadata({
     };
   }
 
-  // title / description 差別化（#77 Phase 4）
-  // 47 都道府県全てで同一テンプレートだった title を「県の top 強み指標」で差別化。
-  // 例: "東京都の統計データ" → "東京都の統計データ｜卸売業年間商品販売額 全国1位 | 47都道府県比較"
-  // rank=0 はデータ欠損 (未ランク) のため除外。R2 snapshot に rank=0 が含まれている場合の defense in depth。
-  const validStrengths = selectDistinctProfileItems(
-    profile.strengths.filter((s) => s.rank >= 1 && s.rank <= 47),
-    3
-  );
-  const topStrength = validStrengths[0];
+  // title / description 差別化（#77 Phase 4）。「特徴」カードと同じ選定関数の上位だけを使うので、
+  // title は databook.json (選定入力) が変わるときにしか変わらない。
+  const { top } = selectAreaHighlights(profile.databook, { perGroup: METADATA_HIGHLIGHTS });
+  const topStrength = top[0];
   const title = topStrength
-    ? `${profile.areaName}の統計データ｜${topStrength.indicator} 全国${topStrength.rank}位｜47都道府県比較`
+    ? `${profile.areaName}の統計データ｜${topStrength.label} 全国${topStrength.rank}位｜47都道府県比較`
     : `${profile.areaName}の統計データ｜47都道府県比較`;
-  const descriptionHighlights = validStrengths
-    .map((s) => `${s.indicator} 全国${s.rank}位`)
+  const descriptionHighlights = top
+    .map((s) => `${s.label} 全国${s.rank}位`)
     .join('、');
   const description = descriptionHighlights
     ? `${profile.areaName}の統計プロファイル。${descriptionHighlights}。人口・経済・教育など17カテゴリのデータを全国ランキングで比較。`
@@ -108,16 +123,17 @@ export async function generateMetadata({
 
 export default async function AreaProfilePage({ params }: PageProps) {
   const { areaCode } = await params;
-  const profile = await getAreaProfileAction(areaCode);
+  const profile = await loadArea(areaCode);
 
   if (!profile) {
     notFound();
   }
 
-  const [structuredData, breadcrumbStructuredData] = await Promise.all([
-    Promise.resolve(generateAreaProfileStructuredData({ profile })),
-    Promise.resolve(generateAreaProfileBreadcrumbStructuredData({ profile })),
-  ]);
+  const highlights = selectAreaHighlights(profile.databook, {
+    perGroup: CARD_HIGHLIGHTS_PER_GROUP,
+  });
+  const structuredData = generateAreaProfileStructuredData({ profile, highlights });
+  const breadcrumbStructuredData = generateAreaProfileBreadcrumbStructuredData({ profile });
 
   return (
     <>
@@ -194,7 +210,7 @@ export default async function AreaProfilePage({ params }: PageProps) {
         <AreaProfilePageClient profile={profile} />
 
         <main className="min-w-0 space-y-8">
-          <AreaRelatedRankingsCard profile={profile} limit={4} />
+          <AreaRelatedRankingsCard areaName={profile.areaName} highlights={highlights} />
 
           {/* 県データブック (値+全国順位 + 特産品 + 推移チャート)。
                         databook 未生成の県は従来チャート表示にフォールバックする。 */}
@@ -232,7 +248,7 @@ export default async function AreaProfilePage({ params }: PageProps) {
 
           {/* 関連ブログ記事 (P0-AREAS-01 内部リンク強化) */}
           <Suspense fallback={null}>
-            <AreaRelatedBlogArticles profile={profile} limit={5} />
+            <AreaRelatedBlogArticles highlights={highlights} limit={5} />
           </Suspense>
 
           <CitiesNavCard areaCode={areaCode} areaName={profile.areaName} />

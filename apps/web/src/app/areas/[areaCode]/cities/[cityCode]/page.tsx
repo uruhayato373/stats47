@@ -1,10 +1,13 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { selectCityHighlights } from "@stats47/area-profile";
+
 import { PageHeader, PageShell } from "@/components/layout";
 import { SurfaceSection } from "@/components/surface";
 
 import {
+  AreaHighlightList,
   CityBreadcrumbs,
   CityPageFooter,
   getCityRouteContext,
@@ -20,6 +23,10 @@ interface PageProps {
   params: Promise<{ areaCode: string; cityCode: string }>;
 }
 
+/** 「特徴」一覧の件数。title / description は先頭 METADATA_HIGHLIGHTS 件。 */
+const CITY_HIGHLIGHTS_LIMIT = 12;
+const METADATA_HIGHLIGHTS = 3;
+
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { areaCode, cityCode } = await params;
   const context = getCityRouteContext(areaCode, cityCode);
@@ -28,7 +35,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   }
 
   const profile = await readCityProfile(areaCode, cityCode);
-  const validStrengths = profile?.strengths.filter((s) => s.rank >= 1 && s.rank <= 5) ?? [];
+  const validStrengths = selectCityHighlights(profile?.strengths, { limit: METADATA_HIGHLIGHTS });
   const topStrength = validStrengths[0];
 
   const title = topStrength
@@ -36,7 +43,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     : `${context.city.areaName}の統計データ｜${context.pref.areaName}`;
 
   const descriptionHighlights = validStrengths
-    .slice(0, 3)
     .map((s) => `${s.indicator} 県内${s.rank}位`)
     .join("、");
   const description = descriptionHighlights
@@ -81,7 +87,7 @@ export default async function CityPage({ params }: PageProps) {
   }
 
   const profile = await readCityProfile(areaCode, cityCode);
-  const validStrengths = profile?.strengths.filter((s) => s.rank >= 1 && s.rank <= 5) ?? [];
+  const validStrengths = selectCityHighlights(profile?.strengths, { limit: CITY_HIGHLIGHTS_LIMIT });
 
   return (
     <PageShell>
@@ -107,29 +113,26 @@ export default async function CityPage({ params }: PageProps) {
         {validStrengths.length > 0 ? (
           <SurfaceSection className="p-6">
             <h2 className="text-lg font-bold text-foreground">
-              {context.city.areaName}の強み (県内ランキング上位)
+              {context.city.areaName}の特徴 (県内ランキング上位)
             </h2>
             <p className="mt-1 text-xs text-muted-foreground">
-              {context.pref.areaName}内で {context.city.areaName} が上位 5 位以内に入る指標
+              {context.pref.areaName}内で {context.city.areaName} の順位が上位の指標
             </p>
-            <ul className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
-              {validStrengths.map((strength) => (
-                <li
-                  key={strength.rankingKey}
-                  className="flex items-baseline justify-between gap-3 rounded border border-border bg-background p-3"
-                >
-                  <Link
-                    href={`/ranking/${strength.rankingKey}`}
-                    className="text-sm font-medium hover:text-primary hover:underline"
-                  >
-                    {strength.indicator}
-                  </Link>
-                  <span className="shrink-0 text-xs font-mono text-muted-foreground">
-                    県内 {strength.rank} 位 ({strength.value.toLocaleString("ja-JP")} {strength.unit})
-                  </span>
-                </li>
-              ))}
-            </ul>
+            <div className="mt-4">
+              {/* 市区町村の指標は極性を焼き込んでいないので色を付けない (neutral) */}
+              <AreaHighlightList
+                rankScope="県内順位"
+                items={validStrengths.map((s) => ({
+                  rankingKey: s.rankingKey,
+                  label: s.indicator,
+                  rank: s.rank,
+                  value: s.value,
+                  unit: s.unit,
+                  year: s.year,
+                  tone: "neutral",
+                }))}
+              />
+            </div>
           </SurfaceSection>
         ) : null}
 

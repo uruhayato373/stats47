@@ -8,6 +8,7 @@ import type { SingleEntityRow } from "@stats47/stats-r2/types";
 
 import { buildCityProfileRows, type CityRankingData } from "../utils/build-city-profile-rows";
 import type { AreaProfileData, StrengthWeaknessItem } from "../types";
+import { cityProfileKeyPath } from "../types/city-profile";
 
 export interface ExportCityProfileSnapshotResult {
   files: number;
@@ -16,14 +17,8 @@ export interface ExportCityProfileSnapshotResult {
   durationMs: number;
 }
 
-/**
- * 市区町村プロファイル R2 キー: app/areas/{prefCode}/cities/{cityCode}/profile.json
- *
- * city pages の URL 構造 (/areas/{prefCode}/cities/{cityCode}) と整合。
- */
-export function cityProfileKeyPath(prefectureCode: string, cityCode: string): string {
-  return `app/areas/${prefectureCode}/cities/${cityCode}/profile.json`;
-}
+// R2 キーは types/city-profile.ts の cityProfileKeyPath (Web の reader と共有)。
+export { cityProfileKeyPath } from "../types/city-profile";
 
 const CHUNK = 100;
 
