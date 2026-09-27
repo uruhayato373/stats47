@@ -28,7 +28,11 @@ const A8_RESULTS = JSON.stringify({
 });
 
 const REPORT_LOG = JSON.stringify({
-  siteSummary: [{ clicks: 294, conversions: 1, approved: 1, revenueYen: 1500, pendingRevenueYen: 300, fetchedAt: "2026-08-28T03:35:52.936Z" }],
+  // 期間ごとに upsert され、先頭が古い月のことがある (2026-09-27 に 8 月を表示していた不具合の再発防止)
+  siteSummary: [
+    { period: "202608-202608", clicks: 294, conversions: 0, approved: 0, revenueYen: 0, pendingRevenueYen: 0, fetchedAt: "2026-08-28T03:35:52.936Z" },
+    { period: "202609-202609", clicks: 141, conversions: 1, approved: 1, revenueYen: 1500, pendingRevenueYen: 300, fetchedAt: "2026-09-26T13:47:10.921Z" },
+  ],
   unmapped: [{ programId: "s9" }],
   notAttributable: [{ programId: "s8" }, { programId: "s7" }],
 });
@@ -73,6 +77,8 @@ describe("affiliateResults", () => {
     expect(r.a8.month).toBe("2026-08");
     expect(r.a8.programs.map((p: any) => p.name)).toEqual(["案件X", "af_y"]);
     expect(r.a8.site?.revenueYen).toBe(1500);
+    expect(r.a8.site?.clicks).toBe(141);
+    expect(r.a8.sitePeriod).toBe("2026-09");
     expect(r.a8.unmapped).toBe(1);
     expect(r.a8.notAttributable).toBe(2);
   });

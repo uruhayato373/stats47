@@ -58,6 +58,8 @@ export interface AffiliateResults {
     /** A8 のサイト別集計 (口座共用の中で stats47 に完全分離された実績) */
     site: { clicks: number; conversions: number; approved: number; revenueYen: number; pendingRevenueYen: number } | null;
     siteFetchedAt: string | null;
+    /** サイト別集計の期間 (例 2026-09)。案件別の月 (month) と一致しないことがある */
+    sitePeriod: string | null;
     unmapped: number;
     notAttributable: number;
   };
@@ -146,7 +148,9 @@ function readResults(): AffiliateResults {
   const log = fileExists(`${METRICS}/a8-report-log.json`)
     ? readJson<Record<string, any>>(`${METRICS}/a8-report-log.json`)
     : null;
-  const site = log?.siteSummary?.[0] ?? null;
+  // siteSummary は期間ごとに upsert される。先頭ではなく最新の期間を使う (先頭は古い月のことがある)
+  const siteRows: Array<Record<string, any>> = Array.isArray(log?.siteSummary) ? log.siteSummary : [];
+  const site = [...siteRows].sort((a, b) => String(a.period ?? "").localeCompare(String(b.period ?? ""))).at(-1) ?? null;
 
   const moshimoRaw = fileExists(`${METRICS}/moshimo-results.json`)
     ? readJson<Record<string, any>>(`${METRICS}/moshimo-results.json`)
@@ -174,6 +178,7 @@ function readResults(): AffiliateResults {
           }
         : null,
       siteFetchedAt: site?.fetchedAt ?? null,
+      sitePeriod: site?.period ? String(site.period).slice(0, 6).replace(/^(\d{4})(\d{2})$/, "$1-$2") : null,
       unmapped: Array.isArray(log?.unmapped) ? log.unmapped.length : 0,
       notAttributable: Array.isArray(log?.notAttributable) ? log.notAttributable.length : 0,
     },

@@ -45,12 +45,12 @@ export default function AffiliateResultsPage() {
           <Section title="成果">
             <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
               <Stat
-                label={`A8 発生 ${r.a8.month ?? ""}`}
+                label={`A8 発生 ${r.a8.sitePeriod ?? ""}`}
                 value={r.a8.site ? r.a8.site.conversions.toLocaleString() : "—"}
-                sub={r.a8.siteFetchedAt ? `サイト別集計・取得 ${r.a8.siteFetchedAt.slice(0, 10)}` : "未取得"}
+                sub={r.a8.siteFetchedAt ? `サイト別集計・取得 ${r.a8.siteFetchedAt.slice(0, 10)}・クリック ${r.a8.site?.clicks ?? "—"}` : "未取得"}
               />
               <Stat
-                label={`A8 確定額 ${r.a8.month ?? ""}`}
+                label={`A8 確定額 ${r.a8.sitePeriod ?? ""}`}
                 value={r.a8.site ? yen(r.a8.site.revenueYen) : "—"}
                 sub={r.a8.site ? `未確定 ${yen(r.a8.site.pendingRevenueYen)}` : "未取得"}
               />
@@ -106,7 +106,7 @@ export default function AffiliateResultsPage() {
               )}
             </Section>
 
-            <Section title={`A8 案件 ${r.a8.month ?? ""}`} count={r.a8.programs.length}>
+            <Section title={`A8 案件 ${r.a8.month ?? ""}${r.a8.month && r.a8.sitePeriod && r.a8.month !== r.a8.sitePeriod ? "（案件別明細は毎日の収集対象外のため古い）" : ""}`} count={r.a8.programs.length}>
               {r.a8.programs.length === 0 ? (
                 <p className="text-sm text-console-muted">未取得 (/a8-report)</p>
               ) : (
