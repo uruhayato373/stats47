@@ -94,47 +94,6 @@ updated: 2026-09-21
 - **停止条件**: 共用案件の振り分けを推測で決めない。根拠 (両サイトの広告定義) が無い ID は unmapped のまま残す。
 - **完了条件**: 検証コマンドが `a8-cross-check-exceeded` を出さず、原因 (時刻ずれか共用漏れか) が本カードの削除コミットに書かれている。
 
-### [AREA-HIGHLIGHTS-SSOT-01] 県の「特徴」の候補・値・選び方・表示を 1 系統にまとめ、Web と SNS で共用する
-
-タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-09-25] [レーン:データ品質]
-
-- **背景 (2026-09-25 実測)**: 県の特徴データが 3 系統ある。A `app/areas/<code>/profile.json` (公開中の全約 2,000 指標から
-  5位以内/43位以下を抽出、`packages/area-profile/src/exporters/area-profile-snapshot.ts`) を Web のカード
-  (`AreaRelatedRankingsCard`)・`<title>`/description・OGP 画像 (`AreaOgp`)・関連ブログ記事 (`AreaRelatedBlogArticles`) が
-  それぞれ先頭から切り出す。東京都は上位 893 件 (1位 588 件) で、表示は R2 の読み出し順で決まり、title もこれで決まる。
-  古い値 (上位 85 件・下位 20 件が 2014 年以前、「耕地放棄面積 2014年度」を表示中)、規模効果 (下位表示 4 件が農業の総数)、
-  「下位=赤の下向き矢印」による良否の誤解 (耕作放棄地 47 位 = 最少) を含む。B `databook.json` (人手選定の
-  `AREA_DATABOOK_TEMPLATE` の値・全国順位・年・単位・全国平均) と、C SNS `.claude/scripts/sns/lib/ig-area-props.ts`
-  (同じテンプレートの値・順位を values.json から自前で再計算) が並存する。SNS は 2026-09-23 に A を「品質が悪い」として捨て、
-  中立表現 (強み/弱みと書かない)・サブタイトル込みラベル・家計調査の県庁所在市注記を実装済み。しきい値 5/43/47 は
-  抽出関数・県ページ・市区町村ページに直書き。市区町村は Web が型 (`CityProfileData`) と R2 パスを独自定義
-  (パッケージに `cityProfileKeyPath` がある)。A の `percentile` は未使用。A の生成は sync-snapshots の約 15 分。
-  生成物の検査・週次監視は無い (しきい値関数の単体テストのみ)。
-- **次 (実行順)**:
-  1. 候補を `AREA_DATABOOK_TEMPLATE` の指標に限定し、値・順位に加えて表示ラベル (readerLabel + subtitle)・分野・
-     家計調査判定・決定力 (隣接順位との差) を `databook.json` に焼き込む。SNS の再計算は廃止して `databook.json` を読む。
-  2. SNS の選定純粋関数を `packages/area-profile` へ移し、既存の掲載価値スコア (`packages/data-configs/src/prominence/`、
-     GSC 需要を含み週次再生成) と新しさを加える。Web の 5 か所 (カード・title/description・OGP・関連ブログ記事・
-     市区町村ページ) と SNS が共用し、件数は引数で渡す。1 カード内の分野重複は禁止。
-  3. 「順位 + 指標 + 値」の一覧表示部品を 1 つにし、県カードと市区町村ページで共用する。表現は SNS の中立規約に合わせ、
-     良否の色は `METRIC_POLARITY` で確定した指標だけに付ける。**順位チップは既存の `RankBadge`
-     (`apps/web/src/components/atoms/RankBadge.tsx`、2026-09-25 `52e582d98`) を使い、新しい部品を作らない。** 現在
-     `AreaRelatedRankingsCard` は上位=`tone="positive"`・下位=`tone="negative"` 固定なので、`tone` を極性から決める形に変える
-     (高いほど良い→上位 positive / 下位 negative、高いほど悪い→逆、未確定→`neutral`)。見出しの上向き・下向き矢印の色も同じ規則にする。
-  4. 市区町村の型・R2 パスをパッケージに一本化し、しきい値は選定関数の中だけに置く。
-  5. 契約テストで固定する: 選定関数以外での `strengths` / `weaknesses` / databook 指標の直接切り出し 0・しきい値の直書き 0・
-     同じ値の二重計算 0。生成直後に 47 県を検査し (古い年・分野偏り・非公開指標)、違反で R2 反映を止める。
-     カードのクリックは `NAV-CLICK-COVERAGE-01` の導線名で計測する。
-- **決めること**: 県の `profile.json` を廃止するか (移行後は利用者 0) / 総数指標を人口当たり指標に置き換えるか /
-  掲載価値スコアと順位の極端さの組み合わせ方。
-- **停止条件**: OGP 画像の再生成と R2 反映はオーナー承認まで行わない。候補を絞った結果カードが埋まらない県が出たら、
-  テンプレートの拡充 (`area-databook-designer`) を先に行い、全指標プールへは戻さない。
-- **完了条件**: Web と SNS が同じ選定関数と `databook.json` を使う。47 県すべてでカードが埋まる候補数がある (実測)。
-  古い年 0・分野重複 0・良否の誤表示 0。契約テストと生成時検査が違反の注入で落ちる。title は選定入力が変わるとき以外に変わらない。
-- **全面点検の指摘 (UI 全面点検 (2026-09-25・本番 44 URL × 7 幅 = 308 枚を撮影、250 枚を目視。`UI-FULL-SWEEP-01`))**: 県の「特徴」カードで、2003・2007・2014 年度の古い値が新しい値と同じ見た目で並ぶ / 北海道で大人用サンダルの
-  支出額と消費量という重複した指標が下位に 2 つ並ぶ / 老年化指数・年平均気温など良し悪しの向きの無い指標が赤い「下位」扱い / 失業率・交通事故件数の
-  1 位が青い強調バッジで良い順位に見える / 順位バッジの見た目が 3 種類混在。選び方と表示を 1 系統にまとめる際にこれらを基準に入れる。
-
 ### [GSC-COVERAGE-DEPLOY-01] カバレッジ是正と入力鮮度ガードを本番反映する
 
 タグ: [インフラ・計測] [種類:不具合] [実行:ユーザー] [検証:node .claude/scripts/gsc/build-coverage-queue.mjs --no-probe] [起票:2026-09-07] [期日:2026-09-28] [進行中] [レーン:SEO・ブログ]
@@ -190,6 +149,14 @@ updated: 2026-09-21
 - **完了条件**: `ranking/total-population,mobile` の LCP が 3 週連続でベースライン 9,347ms を下回る。悪化要因が topology fetch でなかった場合は、実測で特定した真因と対策を本カードへ記録してから閉じる。
 
 ## 🟡 中 — 2〜3ヶ月以内
+
+### [AREA-PROFILE-JSON-RETIRE-01] 県の profile.json の生成をやめる (読み手 0 になったため)
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-09-28] [レーン:データ品質]
+
+- **経緯**: `AREA-HIGHLIGHTS-SSOT-01` (2026-09-28 完了・本番で東京都の「特徴」と総人口 14,178,000 を確認) で Web と SNS は `databook.json` (schemaVersion 2) と共通の選定関数へ移った。
+  `app/areas/<code>/profile.json` はオーナー判断で「読み手移行後に廃止」とした。あわせて市区町村の「特徴」一覧は極性情報が無く色がすべて中立。
+- **次**: `git grep -n "profile.json\|areaProfileKeyPath"` で読み手 0 を確認してから生成 (`packages/area-profile/src/exporters/area-profile-snapshot.ts`) と sync-snapshots の task を外す。
+- **完了条件**: profile.json の生成と読み手が 0 件、sync-snapshots の area-profile task が短くなる。
 
 ### [KDP-K-S1-08-REUPLOAD-01] Kindle K-S1-08 を年表記の是正版で KDP に再アップロードする
 タグ: [収益化] [種類:制作] [実行:ユーザー] [起票:2026-09-28] [レーン:note・商品販売]
