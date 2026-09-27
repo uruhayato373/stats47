@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-09-26T01:07:23.191Z",
+  "generatedAt": "2026-09-27T01:04:04.510Z",
   "gscWeek": "2026-W38",
-  "auditGeneratedAt": "2026-09-26T01:07:23.158Z",
+  "auditGeneratedAt": "2026-09-27T01:04:04.479Z",
   "scoring": "combined = 0.6*norm(GSC expectedLift) + 0.4*norm(blockers*3+warnings); lane: must-fix > opportunity",
   "reviewTier": "GSC impressions 上位 30 件 = opus critic (tier2), 他 = sonnet (tier1)",
   "summary": {
@@ -653,7 +653,7 @@
           "warning: paren-number: 都道府県名の直後に値・順位を括弧で併記 9 件 — 括弧内の数値は factual-check の照合対象外になり検証不能になる。「愛知県は746.0万人で4位」のように散文へ開くこと (blog-quality-standards.md「数値の書き方」)。例: L2滋賀県（12,827g） / L2沖縄県（4,378g） / L15長野県（4位）"
         ]
       },
-      "wave_id": "2026-06-21-critic3",
+      "wave_id": null,
       "remediated_at": null,
       "in_progress_at": null,
       "last_brushup": null,
