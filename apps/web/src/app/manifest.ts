@@ -8,7 +8,7 @@
  * - アプリケーション名と説明
  * - スタートURL（/）
  * - 表示モード（standalone: アプリとして表示）
- * - テーマカラー（ブランドブルー #2563EB）
+ * - テーマカラー（地域のデータアトラス #304BC6）
  * - アイコン（favicon.svg/ico, PWA standard/maskable）
  * - カテゴリ（statistics, data, visualization）
  *
@@ -33,7 +33,7 @@ export default function manifest(): MetadataRoute.Manifest {
     start_url: "/",
     display: "standalone",
     background_color: "#ffffff",
-    theme_color: "#2563EB",
+    theme_color: "#304BC6",
     icons: [
       {
         src: "/favicon.svg",

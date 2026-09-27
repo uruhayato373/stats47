@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="500" viewBox="0 0 1500 500">
+  <rect x="310" y="0" width="800" height="500" fill="#FFFFFF" opacity="0.23"/>
+  <g transform="translate(340 100) scale(1.09375)"><path d="M7 11 L22 17 L22 53 L7 47 Z" fill="#9CC8ED"/><path d="M26 17 L40 10 L40 28 L26 35 Z" fill="#DCEBFA"/><path d="M26 40 L40 33 L40 54 L26 57 Z" fill="#18283C"/><path d="M44 10 L58 16 L58 52 L44 47 Z" fill="#304BC6"/></g><text x="423" y="153.2" font-family="Hiragino Sans, Hiragino Kaku Gothic ProN, Arial, sans-serif" font-size="44.800000000000004" font-weight="800" fill="#18283C">stats<tspan fill="#304BC6">47</tspan></text>
+  <text x="340" y="279" font-family="Hiragino Sans, Hiragino Kaku Gothic ProN, Arial, sans-serif" font-size="56" font-weight="800" fill="#18283C">日本の地域データを、</text><text x="340" y="350.68" font-family="Hiragino Sans, Hiragino Kaku Gothic ProN, Arial, sans-serif" font-size="56" font-weight="800" fill="#18283C">探す・比べる・分析する。</text>
+  <text x="344" y="446" font-family="Hiragino Sans, Hiragino Kaku Gothic ProN, Arial, sans-serif" font-size="26" font-weight="600" fill="#18283C">stats47.jp</text></svg>

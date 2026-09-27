@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350">
+  <g transform="translate(82 80) scale(1.0625)"><path d="M7 11 L22 17 L22 53 L7 47 Z" fill="#9CC8ED"/><path d="M26 17 L40 10 L40 28 L26 35 Z" fill="#DCEBFA"/><path d="M26 40 L40 33 L40 54 L26 57 Z" fill="#18283C"/><path d="M44 10 L58 16 L58 52 L44 47 Z" fill="#304BC6"/></g><text x="163" y="131.68" font-family="Hiragino Sans, Hiragino Kaku Gothic ProN, Arial, sans-serif" font-size="43.52" font-weight="800" fill="#18283C">stats<tspan fill="#304BC6">47</tspan></text>
+  <text x="86" y="300" font-family="Hiragino Sans, Hiragino Kaku Gothic ProN, Arial, sans-serif" font-size="29" font-weight="700" fill="#304BC6">地域のデータアトラス</text>
+  <text x="82" y="415" font-family="Hiragino Sans, Hiragino Kaku Gothic ProN, Arial, sans-serif" font-size="77" font-weight="800" fill="#18283C">地域の違いを、</text><text x="82" y="513.56" font-family="Hiragino Sans, Hiragino Kaku Gothic ProN, Arial, sans-serif" font-size="77" font-weight="800" fill="#18283C">データで見る。</text>
+  <rect x="0" y="1235" width="1080" height="115" fill="#18283C" opacity="0.83"/>
+  <text x="84" y="1305" font-family="Hiragino Sans, Hiragino Kaku Gothic ProN, Arial, sans-serif" font-size="29" font-weight="600" fill="#FFFFFF">統計で見る都道府県  ·  stats47.jp</text></svg>

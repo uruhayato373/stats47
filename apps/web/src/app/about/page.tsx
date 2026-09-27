@@ -22,6 +22,7 @@ import { Button } from "@stats47/components/atoms/ui/button";
 import { Separator } from "@stats47/components/atoms/ui/separator";
 import { ExternalLink, Instagram, MapPin, Youtube, Briefcase, Target } from "lucide-react";
 
+import { ThemeAwareImage } from "@/components/atoms/ThemeAwareImage";
 import { Breadcrumbs, PageShell, PageHeader } from "@/components/layout";
 import { SurfaceCard } from "@/components/surface";
 
@@ -125,6 +126,16 @@ export default function AboutPage() {
       <PageHeader
         title="このサイトについて"
         description="統計で見る都道府県（stats47）は、47 都道府県の公的統計データを「誰でも使える形」にリデザインする個人運営サイトです。県庁職員を約 20 年務めたのち、在職中に独学で AI を学び、IT・データ業界へ転職・独立した運営者が、e-Stat などの一次データを可視化し、独自の分析と解説を添えてお届けします。"
+      />
+
+      <ThemeAwareImage
+        lightSrc="/brand/atlas-v1/site-hero-1536x1024.webp"
+        darkSrc="/brand/atlas-v1/site-hero-dark-1536x1024.webp"
+        alt=""
+        width={1536}
+        height={1024}
+        sizes="(max-width: 768px) 100vw, 1100px"
+        className="mb-6 h-32 w-full rounded-card object-cover object-center sm:h-40"
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6">
