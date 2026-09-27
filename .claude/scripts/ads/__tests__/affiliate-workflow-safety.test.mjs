@@ -19,9 +19,10 @@ test(`${files[0]}は観測artifactだけで外部変更しない`, () => {
   assert.doesNotMatch(source, FORBIDDEN_AD_MUTATIONS);
 });
 
-// GA4週次は生snapshotをR2 state/へ置き、git書き戻しを週次集約CSVだけに限定する。
+// GA4週次は生snapshotをR2 state/へ置き、git書き戻しを週次集約CSVと、認証付き収集の保管庫から
+// restore した ASP 成果 (restore の許可リストにある集計値 4 ファイル) だけに限定する (2026-09-27 に成果を追加)。
 // Issue mutationは運用異常のalert/recoveryだけに使い、広告配信自体は変更しない。
-test(`${files[1]}はgit書き戻しを週次集約CSVに限定し、広告配信を変更しない`, () => {
+test(`${files[1]}はgit書き戻しを週次集約CSVとASP成果に限定し、広告配信を変更しない`, () => {
   const source = readFileSync(files[1], "utf8");
   assert.match(source, /permissions:\s*\n\s*contents: write/);
   assert.match(source, /^\s*issues: write/m);
@@ -29,7 +30,18 @@ test(`${files[1]}はgit書き戻しを週次集約CSVに限定し、広告配信
   const staged = [...source.matchAll(/^\s*git add (.+)$/gm)].map((m) => m[1].trim());
   assert.deepEqual(staged, [
     ".claude/state/ads/ga4-affiliate-history.csv .claude/state/ads/affiliate-experiment-history.csv",
+    '-- "${FILES[@]}"',
   ]);
+  const outcomeBlock = source.match(/FILES=\(\n([\s\S]*?)\n\s*\)/);
+  assert.ok(outcomeBlock, "ASP 成果の書き戻し対象 FILES=( … ) が無い");
+  assert.deepEqual(outcomeBlock[1].split("\n").map((l) => l.trim()).filter(Boolean), [
+    ".claude/state/metrics/affiliate/a8-results.json",
+    ".claude/state/metrics/affiliate/a8-report-log.json",
+    ".claude/state/metrics/affiliate/a8-ui-last-run.json",
+    ".claude/state/metrics/affiliate/moshimo-results.json",
+  ]);
+  // 書き戻す成果は restore (consumer-paths の許可リスト) が書くものに限る。生 snapshot は含めない
+  assert.doesNotMatch(outcomeBlock[1], /ga4-affiliate-\d|\.local\//);
   assert.match(source, /diff-push-r2\.ts --prefix "state\/ads\/ga4-affiliate\/"/);
   assert.doesNotMatch(source, /git push origin main/);
   assert.doesNotMatch(source, FORBIDDEN_AD_MUTATIONS);
