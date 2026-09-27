@@ -18846,9 +18846,9 @@
     },
     {
       "id": 981,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:17.951Z",
-      "updated_at": "2026-09-23T08:56:35.244Z",
+      "updated_at": "2026-09-27T18:42:38.401Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "ranking",
@@ -18858,13 +18858,15 @@
       "utm_url": "https://stats47.jp/ranking/room-utilization-rate?utm_source=threads&utm_medium=social&utm_campaign=room-utilization-rate&utm_content=question",
       "template": "question",
       "metric_keys": "room-utilization-rate",
-      "scheduled_at": "2026-09-27T01:40:00.000Z"
+      "scheduled_at": "2026-09-27T01:40:00.000Z",
+      "post_url": "https://www.threads.com/@stats47jp/post/Ddxc53MDqN6",
+      "posted_at": "2026-09-27T01:40:29.000Z"
     },
     {
       "id": 982,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:17.957Z",
-      "updated_at": "2026-09-23T08:56:46.926Z",
+      "updated_at": "2026-09-27T18:42:38.413Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "area",
@@ -18874,7 +18876,9 @@
       "utm_url": "https://stats47.jp/areas/04000?utm_source=threads&utm_medium=social&utm_campaign=area-04000&utm_content=area-profile",
       "template": "area-profile",
       "metric_keys": null,
-      "scheduled_at": "2026-09-27T08:20:00.000Z"
+      "scheduled_at": "2026-09-27T08:20:00.000Z",
+      "post_url": "https://www.threads.com/@stats47jp/post/DdyKtCaET_x",
+      "posted_at": "2026-09-27T08:20:41.000Z"
     },
     {
       "id": 983,

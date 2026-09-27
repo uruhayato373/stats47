@@ -3,10 +3,13 @@
 投稿済み全件。`posted_at` 降順。
 スクリプトで自動生成 — 手編集しない (`sns-posts-store.cjs` が `insert()`/`updateById()` のたびに再生成)。
 
-**570 件** (最終更新: 2026-09-26)
+**573 件** (最終更新: 2026-09-27)
 
 | 日付 | 媒体 | コンテンツ | キャプション | URL |
 |---|---|---|---|---|
+| 2026-09-27 | 📸 Instagram | map-carousel/miso-consumption-quantity |  | [🔗](https://www.instagram.com/p/Ddy5JqmIE_t/) |
+| 2026-09-27 | 🧵 Threads | area/area-04000-profile | 宮城を数字と地域文化の両方から見る。 県鳥ガン、特産サンマ、全国順位をまとめた県別ページです。 続きは👇 https:… | [🔗](https://www.threads.com/@stats47jp/post/DdyKtCaET_x) |
+| 2026-09-27 | 🧵 Threads | ranking/room-utilization-rate | ホテルの客室が最も埋まっている県は？  1位東京80.4％、2位大阪77.9％、3位福岡75％。 最も低いのは長野の57… | [🔗](https://www.threads.com/@stats47jp/post/Ddxc53MDqN6) |
 | 2026-09-26 | 📸 Instagram | area-carousel/01000 |  | [🔗](https://www.instagram.com/p/DdwPSPbm50A/) |
 | 2026-09-26 | 🧵 Threads | area/area-03000-profile | あなたの知る岩手は、データでも同じ姿ですか？ ナンブアカマツやワラビから、人口・経済・暮らしまで横断できます。 続きは�… | [🔗](https://www.threads.com/@stats47jp/post/DdvouO7AEJz) |
 | 2026-09-26 | 🧵 Threads | ranking/detached-house-ratio | 一戸建てに住む割合、秋田と東京で3倍差。  秋田 79.4％ 東京 26.3％  2位山形76.1％、3位青森75.3％… | [🔗](https://www.threads.com/@stats47jp/post/Ddu6WmlEXh7) |
