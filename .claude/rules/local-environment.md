@@ -552,7 +552,7 @@ cd apps/remotion && npx tsc --noEmit
 # 10 画面:
 #   制作・投稿 : /sns (動画再生→投稿/予約/caption/メトリクス) ・ /buzz-map (企画キューと素材生成)
 #   資産       : /assets (OGP/カード/note/動画・欠落チェック/再生成) ・ /svg (ブログSVGカタログ)
-#   収益       : /revenue (AdSense 週次・内訳。他チャネルは未計測と明示) ・ /ads (アフィリ運用ゲート/在庫/GA4/compliance)
+#   収益       : /revenue (AdSense 週次・内訳。他チャネルは未計測と明示) ・ /affiliate (成果: ASP 別成果・掲載位置別クリック・ゲート/実験) ・ /affiliate/placements (掲載先: 自動配置・直貼り・在庫・規約検査) ・ /affiliate/programs (提携・案件: ASP ごとの状態・報酬・掲載終了日)。doboku-note と同じ 3 画面。旧 /ads は転送
 #   品質・運用 : /dashboard (メトリクス・進捗キュー・STP戦略) ・ /quality (8監査の残欠陥と鮮度)
 #                /ops (workflow健全性・R2鮮度・Claude利用量・agents/skills/memory台帳) ・ /todo (.claude/todo 台帳)
 # 書き込みは /sns の投稿予約と /buzz-map の素材生成だけで、他はすべて読み取り専用。

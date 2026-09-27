@@ -34,7 +34,15 @@ const NAV_GROUPS: readonly NavGroup[] = [
       { href: "/strategy", label: "方針・事業計画" },
       { href: "/research", label: "調査カタログ" },
       { href: "/revenue", label: "収益 (AdSense)" },
-      { href: "/ads", label: "アフィリエイト運用" },
+    ],
+  },
+  {
+    // doboku-note の「アフィリエイト」領域と同じ 3 画面 (成果 = results / 掲載先 = inventory / 提携・案件 = actions)
+    title: "アフィリエイト",
+    items: [
+      { href: "/affiliate", label: "成果" },
+      { href: "/affiliate/placements", label: "掲載先" },
+      { href: "/affiliate/programs", label: "提携・案件" },
     ],
   },
   {

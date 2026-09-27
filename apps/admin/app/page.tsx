@@ -42,9 +42,9 @@ const SECTIONS = [
     desc: "週次収益・RPM・内訳。実測は AdSense のみで他チャネルは未計測と明示する",
   },
   {
-    href: "/ads",
-    title: "アフィリエイト運用",
-    desc: "計測/公開ゲート・在庫 260・GA4 実測・compliance・提携カタログ",
+    href: "/affiliate",
+    title: "アフィリエイト",
+    desc: "成果 (ASP 別の発生・確定・掲載位置別クリック)・掲載先 (どこに何が出ているか)・提携・案件 (ASP ごとの状態・報酬・掲載終了日)",
   },
   {
     href: "/dashboard",
