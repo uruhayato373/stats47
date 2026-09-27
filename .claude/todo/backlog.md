@@ -21,20 +21,7 @@ updated: 2026-09-21
 
 ## 🔴 高 — 今月中に着手したい
 
-### [NOTE-CARD-REPAIR-01] note公開記事の空白リンクカードを段階的に是正する
-タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npm run note:cards:audit -- --browser-verify] [起票:2026-09-27]
-
-- **現在地 (2026-09-27)**: 一括修正前の全286記事監査は空白785枚・未確認0枚・カード前の空段落29箇所。修復記録では71枚・17記事が`verified`（今回65枚）。**785枚は現在の残数ではない**。一括修正後の全量再監査は未実施。記事単位の公開後監査は各修復時に実施済み。
-- **正確な再開位置**: 同じMacの`.local/note-card-repair-journal.json`がカード単位の進捗記録。`attempts`を`slug + key`で最後の試行に絞り、`verified`を再処理しない。`.claude/state/metrics/note/card-visibility-latest.json`は修復前の全量スナップショットで、再監査までは現在の残数とみなさない。ローカルjournalが無い環境では推測で修復せず、全量監査を作り直す。
-- **再開手順**:
-  1. `npm run agent:session -- --status`で作業共有を確認し、note編集の同時実行を避ける。`npm run note:session:check`でstats47のログインを確認する。
-  2. `npm run note:cards:audit -- --browser-verify --output .claude/state/metrics/note/card-visibility-latest.json`で286記事を再監査する。空白が残ればexit 1でもレポートを読む。`unknownCards`または`browserVerifyFailedArticles`があれば、`npm run note:cards:audit -- --browser-verify --retry-unknown-from .claude/state/metrics/note/card-visibility-latest.json --output .claude/state/metrics/note/card-visibility-latest.json`で再検証し、未確認0を確認する。
-  3. `npm run note:cards:repair-batch -- --max-articles 5 --max-cards 10 --commit --skip-blocked`を小分けで繰り返す。各バッチで公開後の表示を確認する。失敗時はjournal・公開記事の`has_draft`・対象カードのキーを確認してから再開する。監査から24時間経過したら手順2へ戻る。
-  4. カード修復後の空段落は`note:cards:compact-spacing`で記事ごとに別工程で詰め、記事単体監査で確認する。
-- **未解決の1枚**: `recovered-n023501038bd5`（`https://note.com/stats47/n/n023501038bd5`）内のmagazineカード`https://note.com/stats47/m/me574f67ac47f`、旧キー`embf4bf74e742aa`。修復処理がタイムアウトし、再監査では空白のまま、公開記事に下書きなし。`--skip-blocked`で他のカードを進めつつ、個別に原因を調べて最終的に再処理する。スキップを完了扱いにしない。
-- **週次運用**: `.github/workflows/note-circulation-audit-weekly.yml`と`.claude/skills/management/weekly-review/SKILL.md`に全量監査を組み込み済み。CIの初回結果は未確認。スクリーンショットはCI artifactに14日保持し、R2とローカルには蓄積しない。
-- **停止条件**: 対象カードのURL・位置・記事本文・価格・タグのいずれかが変わる、または更新後のブラウザ表示が確認できない場合は次のカードへ進まない。
-- **完了条件**: 全記事監査で空白0件・未確認0件を確認し、週次監査が継続実行される。
+並び順が着手順 (2026-09-27 オーナー判断: 計測・記録・改善とデータ品質を優先する)。上限 10 枚 (DG081)。
 
 ### [DATA-VALUE-ERRORS-01] 公開中の誤った値・誤った表記を全指標で洗い出し、早急に直す
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-09-25] [レーン:データ品質]
@@ -48,6 +35,11 @@ updated: 2026-09-21
   47 都道府県の欠け / 順位の不整合。「古いだけ」は誤りではなく `DATA-QUALITY-LOOP-01` の基準 2〜4 で扱う。
 - **次**: ① `DATA-QUALITY-LOOP-01` の年表記チェックで対象を列挙する。② 需要 (GSC 表示) の多い順に config を直し、
   values を再生成して R2 へ反映する (R2 反映は承認後)。③ 代表 URL で表示を確認する。
+- **実行順 (2026-09-27・1 週で終わる単位。上から着手し、終わった段は消す)**:
+  1. 年表記: 時点統計 (国勢調査・人口推計など 10 月 1 日時点) なのに `yearFormat: "fiscal"` の metric を機械列挙し、config を直して values を再生成する。代表 `elderly-single-person-households`・総人口・人口推移の横軸。
+  2. 単位: 全面点検で見つけた 5 件 (人口密度「人」・合計特殊出生率「(人)」・外国人 10 万人比「人」・道路実延長 1km² 当たり「km」・人口当たり指標の分母表示なし) を直す。
+  3. 値の食い違い・定義: 東京都人口の県ページと人口動態ページの不一致、平均余命の年齢、市区町村ランキングの説明文、`/survey/census` の最新年。
+  4. 「全国平均」が 47 都道府県の単純平均である件は表示方針の判断が要るので、オーナーに確認してから直す。
 - **完了条件**: 機械チェックが検出した誤りが 0 件になり、直した metric の本番ページで値・単位・年表記が一次資料と一致する。
 - **全面点検で見つかった表示上の誤り (UI 全面点検 (2026-09-25・本番 44 URL × 7 幅 = 308 枚を撮影、250 枚を目視。`UI-FULL-SWEEP-01`))**:
   - 単位の誤り: 県データブックの人口密度が「人」/ 合計特殊出生率に「(人)」/ 「外国人 (10万人比)」の単位が「人」、`/category/population` で「東京都 1,393.4人」/
@@ -57,44 +49,28 @@ updated: 2026-09-21
   - 定義の不足: 「平均余命 25.44 年」が何歳時点か書かれていない (沖縄県ページ)。市区町村ランキングの説明が「都道府県内に所在する中学校の総数」。
   - 「全国平均」が 47 都道府県の単純平均 (ランキング全般)。`/survey/census` の「最新 2024 年」(国勢調査の最新回は 2020 年)。
 
-### [CYCLE-HEALTH-01] 「検出 → 起票 → 計画 → 実行 → 完了 → 振り返り」のサイクルを各段の停滞信号つきで確実に回す
-タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-09-25] [レーン:計測]
+### [DATA-QUALITY-LOOP-01] 全指標のデータ品質を機械チェックし、「誤り・古さ・終了・薄さ」の 4 基準で継続的に直すループを作る
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-09-25] [レーン:データ品質]
 
-- **オーナー指示 (2026-09-25)**: バックログの改善・週次レビューで新しいカードが増え、配線し、改善を繰り返す。このサイクルを確実に回す。
-- **現状 (2026-09-25 実測)**: 部品はある (週次監査・`/weekly-review`・`/weekly-plan`・`/monthly-plan`・日曜計測→月曜無人 triage→週次メトリクス Issue・
-  戦略レーン検査 DG073〜078)。起票も活発 (backlog.md の変更コミットは直近 1 か月で 251 件)。止まっているのは段と段のつなぎ目:
-  1. **検出 → 起票が切れている検出器がある**: 年カバレッジ監査の要拡張候補 87 件はカードにならないまま残る。
-     一方、週次 UI 検査は起票まで自動で回っている (2026-09-24 の指摘 6 件は同日に `UI-FIX-*` 3 枚として自動起票され、
-     9/24〜25 に全件 fixed。`.claude/state/page-quality/ui-findings-queue.json`)。検出器ごとに差がある。
-  2. **計画 → 実行が切れている**: 週次 Must は 5 週連続未達 (W38 は 0/3)。W35 は計画 2 本に対して 85 本公開。
-  3. **完了の判定が閉じない**: `improvements.md` の Due 超過 15 件 (docs:check DG054)、効果判定エンジンは GSC 施策 10 件中 0 件しか判定できない。
-  4. **カードが現実とずれる**: 実装済みなのに「未コミット」のカード、前提が解消済みの `DATA-ESTAT-FETCH-01` / `DATA-MANUAL-RESTORE-01`、
-     完了済み ID (`AFF-MEASURE-RECOVER-01`) を参照し続ける週次計画。backlog の Due 超過 5 件・起票 60 日超 11 件。
-- **設計 (各段に「止まったら見える信号」を 1 つ置き、新しい仕組みは作らず既存の週次メトリクス Issue と管理画面 `/strategy/lanes` に出す)**:
-  | 段 | 信号 (機械で数える) | 既存の置き場 |
-  |---|---|---|
-  | 検出 → 起票 | 検出から 7 日たってもカードに結ばれていない指摘の件数 (年カバレッジ・GSC coverage・効果判定。UI 確認は自動起票済みの基準例) | 自動起票は `coverage-backlog.mjs` / `ui-findings.ts` の形にそろえる |
-  | 起票 → 分類 | レーン・tier・種類が無いカード (DG058/059/075) | docs:check |
-  | 分類 → 計画 | 重点レーン外の Must・凍結レーンの作業 (DG076〜078) | docs:check・`/strategy/lanes` |
-  | 計画 → 実行 | 週次 Must の達成率と連続未達週数。2 週連続未達のタスクは分割か降格を必須にする | `/weekly-review` |
-  | 実行 → 完了 | Due 超過 (DG054)・判定できない効果測定・完了済み ID を参照する計画 | docs:check・効果判定エンジン |
-  | 振り返り → 起票 | 週次レビューの「次週への申し送り」がカード ID に結ばれているか | `/weekly-review` |
-- **関連カード (個別の段の実例。ここで重複実装しない)**: `UI-REVIEW-LOOP-VERIFY-01` (UI 確認→起票)、`DATA-QUALITY-LOOP-01` (データ監査→起票)、
-  `EFFECT-TARGET-MARKERS-01` (完了の判定)、`STRATEGY-FOCUS-2026-10-01` (計画の枠)。
-- **①③ 済 (2026-09-26・未コミット)**: `.claude/scripts/metrics/lib/cycle-health.mjs` が分類漏れ・期日超過・Must の連続未達・完了済み ID を参照する計画を数え、
-  週次メトリクス Issue の「🩺 サイクルの健全性」表に出す (テスト `cycle-health.test.mjs`)。検出 → 起票と振り返り → 起票は「未計測」と明示。
-  `/weekly-plan` に「連続未達 2 週以上は分割か降格・完了済み ID を残さない」、`/weekly-review` に「Must N/M の書式・申し送りに ID」を追記。
-  初回実測 (W39): 分類漏れ 1/118、期日超過 5、W38 まで連続未達 2 週、完了済み参照 0 (`AFF-MEASURE-RECOVER-01` は ledger に完了記録が無いため数えない)。
-- **② 済 (2026-09-26・未コミット・オーナー判断「自動起票を既定」)**: 年カバレッジ監査の要拡張候補を GSC カバレッジと同じ形で自動起票する
-  (`.claude/scripts/data/sync-year-coverage-backlog.mjs`。1 枚 10 件・開いているカードは 1 枚・gate `assert-year-coverage-batch.ts`・
-  週次 workflow `estat-year-coverage-audit-weekly.yml` に配線)。初回カード `YEAR-COV-20260926` を起票済み。
-  健全性表の「検出 → 起票」行は検出器ごとの残件とカードの有無を出す (残件ありでカードなし = 起票が止まっている)。
-- **次 (残り)**: 「振り返り → 起票」の行を実数にする (週次レビューの申し送りに ID が付いているかを数える)。
-  他の検出器 (ranking-integrity・provenance・`/audit-units`) の自動起票は `DATA-QUALITY-LOOP-01` ①② で同じ形に寄せる。
-- **旧・次**: ① 週次メトリクス Issue (`generate-weekly-metrics-issue.mjs`) に「サイクルの健全性」節を足し、上表の 6 信号を毎週出す。
-  ② 検出器ごとに「指摘 → カード」の結び方を決める (自動起票か、週次レビューでの手動起票か)。③ `/weekly-review` と `/weekly-plan` に
-  「2 週連続未達は分割か降格」「完了済み ID を計画に残さない」を入れる。
-- **完了条件**: 週次メトリクス Issue に 6 信号が 4 週続けて出て、検出 → 起票の未結び件数と Due 超過が減り、Must の連続未達が 2 週以内に解消されている。
+- **経緯 (2026-09-25 実測)**: `improvements.md` の `DATA-ESTAT-FETCH-01` (25) / `DATA-MANUAL-RESTORE-01` (12) の 37 metric は、
+  今日時点で全件 R2 に 47 都道府県分の値があり欠損 0・本番 200 (R2 は 2026-09-05 再生成)。「取得失敗で空ページ」という前提は解消済み。
+  残る問題は古さと表記の誤りで、例: `national-pension-full-exemption-rate` は最新 2006 年 (2 年分) なのに GSC 28 日 172 表示 / 17 クリック、
+  `elderly-single-person-households` は最新 2005 年。→ improvement-triage が上記 2 行を理由付きで終了し、このカードへ引き継ぐ。
+- **判断基準 (上から最初に当てはまる処置)**:
+  1. 値・単位・年表記が誤っている → すぐ直す (`DATA-VALUE-ERRORS-01`)
+  2. 公式にもっと新しい年が公表されている → 更新する。GSC 表示の多い順
+  3. 調査が終了し新しい年が無い → 公開を続け、ページに「○年で調査終了」を明示する。後継統計があれば差し替える
+  4. 観測 1〜2 年かつ需要ほぼ 0 → noindex 候補 (`RANK-THIN-01` と同じ基準で判断)
+  - 「古い」の目安は「最新年が公式の最新公表から公表周期 1 回分以上遅れている」。需要は順番を決めるためだけに使う (4 を除く)。
+- **既存の仕組みと穴**: 週次の `ranking-integrity-audit-weekly` / `provenance-audit-weekly` / `estat-year-coverage-audit-weekly` と
+  `/audit-units` がある。穴は 3 つ。(a) 年カバレッジ監査は**単年設定の 582 件だけ**が対象で、`years: "all"` なのに元の統計が
+  古い年で止まっている metric を見ない。(b) 年・年度の表記の誤りを見る検査が無い。(c) 年カバレッジ監査の要拡張候補
+  (2026-09-19 時点 87 件、`.claude/state/data/estat-year-coverage/queue.json`) を処理するカードが無く、見つけても直されていない。
+- **次**: ① 既存の週次監査に「最新年と今日の差」「時点統計の年度表記」を足す (新しい監査を作らず既存に統合する)。
+  ② 検出結果を 1 つのキューにまとめ、基準 1〜4 の処置を付ける。③ 週 5 指標ずつ、需要の多い順に処置する (`STRATEGY-FOCUS-2026-10-01` の
+  「週次 Must は各レーン 1 件」の枠で回す)。④ 年カバレッジ監査の要拡張候補 87 件は 2026-09-26 から `YEAR-COV-*` カードとして 10 件ずつ自動起票される (`CYCLE-HEALTH-01` ②)。
+- **完了条件**: 週次の監査が全指標の古さ・表記を検出してキューへ積み、キューの処置状況が管理画面か週次レビューで見え、
+  4 週続けて「新規検出 ≤ 処置件数」で残件が減っている。
 
 ### [AUTHENTICATED-MEASUREMENT-ACTIVATION-01] 認証付きCIの日次継続運用を実証する
 
@@ -113,162 +89,24 @@ updated: 2026-09-21
 - **完了条件**: 全collectorの実データ取得・private R2 read-back・git記録の整合・認証付き計測Issueの復旧closeが成立し、本人の再認証を挟まない別日付のmain scheduleで連続2回以上確認する（恒久的な無人保証とはしない）。noteの欠落は不完全のまま原因を区別し、カタログ削除/0埋めで通さない。サイト全体の放置運用判定は、このカードだけでなく横断監視Issue #763の別系統異常の解消も必要。
 - **停止条件**: 2FA/CAPTCHA/規約同意を自動化しない。Cookie/APIキーをgit/ログ/artifactへ出さない。KDPの速報売上/KENPを確定ロイヤリティや週次純収益へ代入しない。afbの発生日/確定日系列を合算せず、API報酬を純収益・入金へ代入しない。出版/提携状態の成功を全計測完了と言わない。自動投稿/申請/振込/商品変更は範囲外。
 
-### [SITEWIDE-DUPLICATE-LINK-RATIO-01] サイト横断でリンク重複率が閾値超過 (本番全6,237URL実測)
+### [A8-CROSSCHECK-EXCEED-01] A8 の 9 月検算で専用案件のクリックがサイト別合計を超える原因を確定する
+タグ: [収益化] [種類:不具合] [実行:対話] [検証:node .claude/scripts/ads/check-a8-outcome-gate.mjs] [起票:2026-09-27] [期日:2026-09-29] [レーン:計測]
 
-タグ: [UI・UX] [種類:不具合] [実行:対話] [検証:npm run page-quality:audit-weekly -- --base-url https://stats47.jp] [起票:2026-09-15] [レーン:UI・回遊]
+- **事象**: 2026-09-27 に 9 月の A8 案件別明細を取り込んだ後、成果ゲートが `a8-cross-check-exceeded` で blocked。stats47 専用案件のクリック 157 がサイト別集計 141 を超える (`.claude/state/metrics/affiliate/a8-report-log.json` の crossCheck)。週次 `affiliate-ga4-weekly.yml` の計測ゲートもこれで落ちる。
+- **[仮説]** 取得時刻のずれ。サイト別は 09-26 22:47 JST (CI)、明細は 09-27 17:17 JST (ローカル) で約 18.5 時間ずれている。ただし 9 月平均は 1 日約 5 クリックで、差 16 を全部は説明しきれない。対抗仮説は、doboku-note 側の対応表も手同期で古く、両サイトが配信する案件を共用として登録できていないこと (a8mat の案件コード照合では未検出)。
+- **次**: 09-27 18:20 JST 以降の CI 収集でサイト別が明細より新しくなる。09-28 に `check-a8-outcome-gate.mjs` を実行し、超過が消えていれば時刻ずれで確定しカードを削除する。残れば doboku-note の programIdMap も広告定義から再生成 (本リポジトリの `build-a8-program-id-map.ts` と同じ方式) して共用案件を洗い出す。
+- **関連**: ローカルでサイト別集計を `--month 2026-09` で取ると download-failed になる (CI では成功)。debug artifact は `.local/playwright-a8-debug/2026-09-27T08-24-42Z`。
+- **停止条件**: 共用案件の振り分けを推測で決めない。根拠 (両サイトの広告定義) が無い ID は unmapped のまま残す。
+- **完了条件**: 検証コマンドが `a8-cross-check-exceeded` を出さず、原因 (時刻ずれか共用漏れか) が本カードの削除コミットに書かれている。
 
-- **owner**: ranking-ui-manager (ranking) / theme-ui-manager (theme) / site-ux-manager (共通部品・横断)
-- **実測 (2026-09-18)**: develop→main PR #977 の `page-quality` (representative) が同じ違反で赤 (merge blocker)。
-  `/themes/population-dynamics` 0.5081 / `/blog` 0.3235 / `/ranking/total-population` 0.3151 (閾値 0.3)。
-  rail/surface 統一 (1006e1e21) 後の値。CI 側では 2026-09-18 に PR 必須 gate から外し、週次監査だけが検出する。
-  2026-09-18 に page-quality を PR 必須から外したので PR は止まらなくなったが、違反自体は未解消。
-  検知は週次 `page-quality-audit-weekly.yml` の alert Issue と、リリース前の `check:release-local` に移った。
-- 2026-09-15、`page-quality:audit-weekly` を本番全 6,237 URL に実行 (初の全件試行)。
-  error 2,698 / warning 5,106。**duplicate_link_ratio がほぼ全テンプレートの支配的違反**で、
-  個別ページの内容問題ではなく共通コンポーネント由来の疑いが強い:
+### [KPI-TREE-CONNECT-01] KPI ツリーの未接続 KPI (有料購入・データ品質ゲート通過率) を計測サイクルに接続する
 
-  | テンプレート | 対象URL数 | error | warning | duplicate_link_ratio 内訳 |
-  |---|---:|---:|---:|---|
-  | prefecture-detail (`/areas/[code]`) | 2,491 | 1,691 | 1,612 | error 1,691 + warning 752 = 対象の 98% |
-  | blog (`/blog/[slug]`) | 606 | 606 | 112 | error 605 = 対象の **99.8%** |
-  | ranking (`/ranking/[key]`) | 2,170 | 227 | 3,197 | error 227 + warning 1,941 (ad_duplicate_count warning も1,256件) |
-  | geo-analysis | 71 | 55 | 10 | error 55 = 対象の 77% |
-  | theme | 56 | 38 | 34 | error 38 = 対象の 68% |
-  | survey | 148 | 64 | 83 | error 56 + warning 83 |
-  | category | 17 | 11 | 8 | error 11 |
-  | municipality | 360 | 0 | 0 | **異常なし** (比較対象として健全) |
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-09-27] [レーン:計測]
 
-- **注意 (実証ベース)**: prefecture-detail は並行 Codex セッション (`area-density-optimization` /
-  `area-all-optimization`、2026-09-15実施)が「ranking リンク重複排除」を含む最適化を
-  ローカル dev server で検証済みだが**本番未デプロイ**。本監査は現行本番 (デプロイ前) を
-  見ているため、そのセッションの変更が本番反映されれば prefecture-detail 分は改善している
-  可能性が高い。**デプロイ後に再実測してから母数を再評価すること** (未検証のまま「直った」
-  と判断しない)。
-- **次 (実行順)**: ①上記デプロイ待ちの分を除いた ranking/blog/theme/survey/category の
-  duplicate_link_ratio 原因(共通ナビ・関連記事ウィジェット・広告リンクの重複生成箇所)を
-  各 owner が最小1テンプレートで特定 ②修正 ③`page-quality:check`(代表URL)で個別確認
-  ④全件は次回週次 `page-quality-audit-weekly.yml` で確認 (毎回全件を手動実行しない)。
-- **完了条件**: 週次監査の error 件数が縮小傾向 (ラチェット化は別途検討)。
-- 生データ: `.claude/state/metrics/page-quality/{latest.json,LATEST.md,snapshots/2026-09-15.json}`、
-  管理画面 `/quality/page-audit`。
-
-### [PERF-RANKING-LCP-03] ランキングページの LCP がベースラインより悪化したまま
-
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:node .claude/scripts/psi/... の history.csv で ranking/total-population,mobile の LCP < 9,347ms] [起票:2026-09-07] [期日:2026-10-05] [レーン:基盤]
-
-- **owner**: Claude Code (調査・実装) / オーナー (デプロイ承認)
-- **症状 (実測)**: `.claude/state/metrics/psi/history.csv` の `ranking/total-population,mobile` 直近 3 週 (2026-08-23〜09-06) の LCP は 10,936〜13,841ms (平均約 12,300ms) で、ベースライン 9,347ms (2026-08-04) より約 32% 悪化している。
-- **デプロイ後の実測 (2026-09-18 時点)**: PR #940 (`4ee6b5641` を含む) は 09-07 に main へ。以降の LCP は 09-07 9,230 / 09-10 9,735 / 09-11 8,548 / 09-12 5,738 / 09-15 7,709 / 09-16 7,964 / 09-17 7,538ms。
-  09-10 の 1 日を除きベースライン未満だが、完了条件の「3 週連続」には 09-28 まで観測が要る。期日をそこへ動かした (判定は週次レビューで)。
-- **一次診断**: 最新 batch (2026-09-06) の `lcp_element` 実測で LCP 要素は依然 Leaflet タイル。topology をクライアント `useEffect` fetch へ変更したことがハイドレーション後の直列処理を増やした疑い。
-- **なぜカードが要るか**: 旧 `PERF-RANKING-LCP-02` は 2026-09-07 の improvement-triage (`b27c62cab`) で「完了条件未達」として改善バックログから削除されたが、後継の追跡先が作られず**どの台帳にも存在しない状態**になっていた。`monthly.md` の言及は計画ビューであり TODO の実体ではない。
-- **比較の断絶 (2026-09-25)**: LCP 要素である背景タイルを CARTO (同一 origin の /tiles プロキシ・30 日エッジキャッシュ) から地理院タイル (cyberjapandata.gsi.go.jp を直接取得) へ切り替えた (commit 871096e46、main 95a9971)。9/25 以降の PSI はタイル配信元が別物なので、ベースライン 9,347ms との比較は 9/25 以降の 3 週で改めて判定し、それ以前の推移とつなげない。
-- **次**: タイル描画を TopoJSON 取得から分離する修正は `4ee6b5641` に実装済み。PR #940 の本番反映後に LCP 要素を再確認し、PSI の 3 週以上の推移で効果を判定する。調査・実装を最初から繰り返さない。
-- **停止条件**: 単発の PSI 値で改善と判定しない (日次計測はばらつくため 3 週以上の推移で見る)。デプロイはオーナーの明示承認まで行わない。ベースライン 9,347ms は 2026-08-04 の実測値で、これを更新して達成扱いにしない。
-- **完了条件**: `ranking/total-population,mobile` の LCP が 3 週連続でベースライン 9,347ms を下回る。悪化要因が topology fetch でなかった場合は、実測で特定した真因と対策を本カードへ記録してから閉じる。
-
-### [GSC-COVERAGE-AUTOMATION-VERIFY-01] 是正キューの自動観測と登録済み件数の記録が本番 CI で動くことを確認する
-
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:node -e "const q=require('./.claude/state/gsc/coverage-remediation-queue.json');process.exit(q.queue.some(e=>e.inspection)?0:1)"] [起票:2026-09-24] [期日:2026-10-05] [レーン:SEO・ブログ]
-
-- **背景 (2026-09-23 実測)**: CI の URL Inspection (`--limit 500`) は検索実績上位 500 件だけで枠が埋まり、是正キュー
-  pending 1,133 件を 7 日間 1 件も検査していなかった。キューは毎週 export から作り直すため登録された URL は記録なく消え、
-  `done` は 0 件。登録済み件数は export の概要グラフにしか無いのに ingest が読まず、`coverage-totals-history.csv` の
-  `indexed-submitted` 列は 4 週とも空。search-growth は最新ファイルを mtime で選び、CI checkout で 09-15 の古い CSV を掴んで
-  月曜の GSC 運用サイクル監査を FAIL にしていた。4 点を修正した (枠の割合配分・`--sync-inspection`・概要グラフ取込・名前順選択)。
-- **次**: ① workflow 変更は main 反映後の schedule から効く。反映後の日次 CSV で是正キュー URL が約 250 件/日含まれること。
-  ② 次の週次 (日曜) 後に `coverage-totals-history.csv` の `indexed-submitted` が埋まること。空なら ingest の警告
-  「概要グラフに登録済み件数が無い」をログで確認し、実 export の概要 ZIP の列名を `INDEXED_HEADERS` に足す。
-  ③ 月曜の `gsc-operations-cycle-weekly` で `search-growth-sources` が PASS になること。
-  ④ 判断が要る pending が `GSC-COV-*` カードとして自動起票され、`backlog-loop-daily` が gate
-  (`build-coverage-queue.mjs --assert-handled`) を通して閉じ、是正キューの該当 URL が pending でなくなること。
-  main 反映前はワークフローの変更が効かないので、このカードはループに拾わせない (`[実行:対話]`)。
-- **停止条件**: 検査枠を増やすために API quota (2,000/日) の 75% を超えない。Indexing API は使わない。
-- **完了条件**: 上の検証コマンドが exit 0、`indexed-submitted` が 1 週以上記録され、運用サイクル監査の `search-growth-sources` が PASS。
-
-### [UI-REVIEW-LOOP-VERIFY-01] 週次 UI 検査のループが修正と本番確認まで CI で一巡することを確かめる
-
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:node -e "const q=require('./.claude/state/page-quality/ui-findings-queue.json');process.exit(q.findings.some(f=>f.status==='fixed'||f.resolved_by==='weekly-audit')?0:1)"] [起票:2026-09-24] [期日:2026-10-12] [レーン:UI・回遊]
-
-- **背景**: 2026-09-24 に検査 → 起票 → 修正 → 本番確認のループを入れた (`.claude/rules/page-quality-standards.md`「UI 指摘のループ」)。
-  同日の週次 (run 35966300757) で `UI-FIX-THEME` / `UI-FIX-PREFECTURE-DETAIL` / `UI-FIX-OTHER` の 3 枚が起票され、
-  キューと backlog が develop に commit された (`03a02d016`)。起票までは CI で確認済み。
-- **次**: ① `backlog-loop-daily` が UI-FIX カードを処理し、`ui-findings-queue.json` への `--mark-*` が develop に commit
-  されること (1 run 2 件・先行する sweep カードがあるため数日かかる)。② 直した指摘がリリース後の週次で done
-  (`resolved_by: weekly-audit`) になるか、残れば pending に戻って再起票されること。
-- **停止条件**: 本番 deploy はオーナー承認まで行わない。
-- **注意 (2026-09-24)**: 対話セッションで `CAROUSEL-ARROW-OVERLAP-01` / `THEME-MAP-ATTRIBUTION-CLIP-01` / `A11Y-SERIOUS-01` 担当の machine 指摘を `--mark-fixed` にした。検証コマンドの `status==='fixed'` はこれでも真になるので、2026-09-24 分の `UI-FIX-*` 3 枚も、ループが 9/23・9/24 の 2 晩とも verify で落ちて処理できなかったため対話で直して閉じた (原因は verify が過去の completed を見て「削除し忘れ」と誤判定していたこと。2026-09-25 に最新 attempt だけを見るよう修正)。ループの実証は次の週次 UI 検査が起票する `UI-FIX-*` で行う。
-- **完了条件**: 検証コマンドが exit 0 (fixed か週次で確認済みの指摘が 1 件以上)、かつループの commit に `.claude/state/page-quality` が含まれている。
-- **2026-09-27 の週次から対象を拡大 (2026-09-25)**: ブラウザ検査・撮影が代表URL 12 件 + データの型の違い 32 件の 44 ページになり、
-  Claude の目視は約 20 ページ (variants は 4 週で 1 巡)。初回 run で確認すること: ① 44 ページ × 7 幅の撮影が制限時間 (120 分) 内に終わる
-  ② review step が 30 分・200 ターン内で終わり、`ui-review-latest.json` に `reviewedPages` が入る ③ variants の指摘が
-  `UI-FIX-<種類>-<違い>-<日付>` で起票される。
-
-
-### [CF-CPU-SURGE-01] 2026-09-11 以降の Workers CPU 時間の増加原因を特定し、差分 purge とブログ広告変更の効果を測る
-
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-09-24] [期日:2026-10-16] [レーン:基盤]
-
-- **背景 (2026-09-24 実測)**: 請求書 6 通 (`cloudflare-cost-improvement/reference/weekly-snapshots/2026-W20〜W38.json`) で、
-  5 月以降の従量課金は毎月 Workers CPU ms の 1 行だけ (9/15 請求は超過 267M ms で $5.36)。9/15〜の請求期間は予算アラート
-  $3.06 に 5 日目で到達 (前 2 期間は 24〜26 日目)。日次 snapshot の CPU p50 は約 8→15〜22ms、p99 は約 1.4→2.8 秒で、
-  9/11〜12 のデプロイ後から増えている。候補は ① purge が HTML キャッシュへ実際に効くようになった (`f3a04de2b`)
-  ② テーマ拡充で 1 ページが重くなった ③ アクセス増。デプロイのたびに HTML キャッシュが消えることも実測した (30 日で 84 回)。
-- **済**: 楽天同期の全体 purge を差分 purge に変更 (`c15ea5708` / `db8c6acf8`、PR #1021 で本番反映済み)。
-  ブログの A8 バナー抑止 (`c9e2b6a93`) は develop のみで未リリース。
-- **次**: ① 9/25 JST 04:00 の `sync-rakuten-catalog` で purge が `--urls` (約 1,900 件) になり `--all` でないことをログで確かめる。
-  ② Cloudflare Observability で route 別の CPU 時間を見て主因を絞る (MCP 認証かダッシュボードのログインが要る)。
-     2026-09-25 のセッションでも `cloudflare-observability` / `cloudflare-graphql` MCP は未認証だった。
-     再認証は対話セッションの `/mcp` でユーザーが行う。
-  ③ 日次 snapshot の cpu_p50/p99 と 10/15 の請求書の CPU 行で効果を見る (請求書は invoice モードで記録)。
-- **停止条件**: 本番 deploy はオーナー承認まで行わない。原因を実測で絞らないまま対策を足さない。
-- **完了条件**: CPU 増加の主因を route か仕組みで特定して対策を決め、10/15 の請求書の CPU 行を記録している。
-- **観測の追記 (UI 全面点検 (2026-09-25・本番 44 URL × 7 幅 = 308 枚を撮影、250 枚を目視。`UI-FULL-SWEEP-01`))**: 本番の撮影 308 回のうち 3 回で一時的な HTTP 503 (`/areas/29000/cities/29363` の 390・640px、`/category/landweather` の 390px)。
-  同じ URL は直後の再取得で 3 回とも 200。
-  GSC 是正キューでも `/blog/gasoline-consumption-quantity-vs-densely-inhabited-district` (9/7・9/20) と
-  `/blog/white-bread-consumption-quantity-prefecture-gap` (9/20) が 503 と記録された。9/25 はキャッシュ迂回を含む 5 回すべて 200
-  (1 回目の描画は 2〜3 秒)。`GSC-COV-5XX-20260925` はこのカードへ原因調査を寄せて閉じた。
-- **関連する変更 (2026-09-25 夜・未リリース)**: `THEME-CHART-LOAD-LATENCY-01` で、テーマページの時系列取得を 1 回のサーバーアクションに
-  束ね、同じ指標の「選択県」と「全国」を R2 の 1 回の読み込みから作るようにした (リクエスト 48 → 2、R2 読み込みは指標数分)。
-  [仮説] テーマページ 1 表示あたりの Workers CPU 時間が減る。検証: リリース後の日次 snapshot の cpu_p50 / p99 を前週と比べる。
-
-### [GSC-COVERAGE-DEPLOY-01] カバレッジ是正と入力鮮度ガードを本番反映する
-
-タグ: [インフラ・計測] [種類:不具合] [実行:ユーザー] [検証:node .claude/scripts/gsc/build-coverage-queue.mjs --no-probe] [起票:2026-09-07] [期日:2026-09-28] [進行中] [レーン:SEO・ブログ]
-
-- **owner**: オーナー（GSC UI export）／Claude Code（取込・効果判定）
-- **現状**: 2026-09-07にPR #939（main `5d05cd6e1`）で本番反映済み。PR CI、Cloudflare deploy、post-deploy smoke、R2 ISR GC、CDN全体パージはすべて成功した。Googlebot UA実測で旧市区町村カテゴリsoft404 5件は全件301、親プロフィール200、未知カテゴリ410 + noindex。sitemapは旧カテゴリ0件 / 市区町村プロフィール360件、自治体Datasetは`description` / `license` / `distribution.contentUrl`を本番HTMLで確認した。
-- **①は確認済 (2026-09-18)**: `fetch-metrics-weekly.yml` は 2026-09-13 run が success、`coverage-alert` Issue は 0 件。
-- **残り (オーナー)**: ②デプロイ (09-07) 後の GSC UI export がまだ無い (最新の coverage-drilldown は `2026-W36`、export 日 2026-09-04・soft-404 450)。次回 export で市区町村カテゴリ soft404 5→0 と全体件数差を測定し、`COVERAGE-LOOP-01` へ効果観測を引き渡す。
-- **停止条件**: 古いW32入力を当週データとして再生成しない。通常ページへGoogle Indexing APIを送らない。デプロイ前のURLを同一観測窓へ混ぜず、Google再クロール前の件数不変だけでeffect/noneにしない。
-- **完了条件**: develop→mainのCIがgreenで、上記の本番HTTP・構造化データ・sitemap検証がすべて合格する。失敗時の`coverage-alert`起票と、回復時の自動closeを少なくとも一方はGitHub Actionsで実測し、デプロイ後exportで市区町村カテゴリsoft404が0になる。
-
-### [AFF-STOCKTAKE-RECONCILE-01] 提携棚卸しの不明案件と既存在庫の不一致を再照合する
-
-タグ: [収益化] [種類:不具合] [実行:対話] [起票:2026-09-08] [期日:2026-09-15] [レーン:収益導線]
-
-- **owner**: affiliate-operator（状態照合）/ affiliate-manager（在庫判断・ローカル修正）/ オーナー（手動ログイン）
-- **証拠・対象の正典**: `.claude/state/ads/affiliate-stocktake-latest.json`。詳細な件数・状態・素材一覧は本カードへ複製しない。
-- **次（実行順）**: ①帰属ガードを確認してからA8 `26822001`、afb `15671`・`14033`・`16511`・`15831` の不明状態を再照合する。②楽天は正しい広告リンク作成用IDかをオーナーに確認し、stats47の登録と既存リンクの口座一致を確認する。登録変更は別承認とする。未提携が確定した3案件は `affiliate-delivery-policy.ts` の共通停止へ反映済み、重複はprogramRef/クリック先で除外済み。これらの公開前確認は `AFF-PLACEMENT-RELEASE-01` へ分離する。
-- **停止条件**: サイト・口座帰属を確定できなければ停止し、不在を未提携や終了と推測しない。新規・重複申請、認証回避、成果リンクへの確認クリック、本番変更・deploy・R2 pushは禁止。既存在庫を未確認のまま削除しない。
-- **完了条件**: 各対象の状態・在庫判断を実機証拠へ結び付け、必要なローカル修正と対象の検証が完了する。不明が残る間はカードを維持し、人間作業またはガード復旧による再開条件を明記する。
-
-### [BLOG-SVG-LINEAGE-RESTORE-01] ブログSVG系譜キューの継続消化
-
-タグ: [進行中] [起票:2026-07-22] [レーン:データ品質]
-
-- **owner**: Claude Code
-- **現況**: 全`article.md`参照から期待asset集合を作る公開契約監査へ拡張済み。公開434記事・本文参照
-  1,091 assetで `pork-consumption-expenditure/data/pork-expenditure-ranking.svg` だけが404。SVGは既存JSON/sourceから
-  ローカル再生成済みで、公開gateもdata refresh / blog publish / 週次へ配線済み。R2全量pullのdry-runは
-  `app/blog` 8,913 files（local差分8,526）を確認したが、read-only取得の承認前なので実pullしていない。
-- **2026-08-27 生成物監査**: R2 `app/blog` 8,944 filesをローカルへ同期し、432記事・2,443 SVGを同一lintで
-  再走査した。構造error 98記事、dark mode非対応135記事を機械stateへ記録した。旧stateの98記事・141 SVG・error 0は母集団が
-  生成物全量を覆っておらず、完了証拠には使えない。公開参照asset契約とSVG内容品質は別gateとして維持する。
-- **次**: 構造error 98記事を優先し、小バッチで処理する。R2由来、算式、年、metric keyを復元できない図は
-  推測で再生成しない。公開参照asset契約と内容品質gateを各バッチ後に再実行する。
-- **完了条件**: 全公開記事の参照assetが200、must-fix 0、公開gate greenとなり、source lineage不明の図は削除または明示的に保留される。
-- **正典**: `.claude/rules/blog-data-schema.md`
+- **背景**: 2026-09-27 に KPI ツリー (NSM → 駆動KPI → ガードレール、収益化戦略 §1.1) を計測サイクルへ配線した。`paid-purchases` (駆動) と `data-quality-pass-rate` (ガードレール・今月の重点「データ品質」の KPI) は取得元が計測サイクルに無く、`.claude/state/metrics/measurement-cycle/LATEST.md` の「KPI ツリー」節で `not-connected` と出る。重点レーンの KPI を週次で判定できない状態。
+- **次**: `paid-purchases` は販売台帳 (note / KDP / ココナラの認証付き収集 `.claude/state/metrics/authenticated/latest.json` と products state) から週次の件数を、`data-quality-pass-rate` は既存の品質監査 state (provenance・単位・分布の監査結果) から通過率を、`.claude/scripts/metrics/lib/measurement-cycle.mjs` の `summarizeKpiTree` の `valueOf` に足す。値の定義を決めたら catalog の `measurementStatus` も更新し `npm run business-plan:build-state` で再生成する。認証切れ・欠測は 0 にせず status で出す。
+- **停止条件**: 取得元の定義 (どの監査の何を通過とみなすか) が既存 state から一意に決まらないときは推測で決めず、オーナーに確認する。
+- **完了条件**: `node .claude/scripts/metrics/build-measurement-cycle.mjs --week <週>` の KPI ツリー節で 2 つの KPI が `not-connected` 以外になり、`node --test .claude/scripts/metrics/__tests__/measurement-cycle.test.mjs` に値の取得を固定するテストがある。
 
 ### [SITE-DISPLAY-SEMANTICS-AUDIT-01] 表示の「意味」(ラベルと指標・年・単位・用語) を定義・全 URL・代表 URL の 3 層で検査し、週次の UI 指摘キューにつなぐ
 
@@ -337,6 +175,100 @@ updated: 2026-09-21
   支出額と消費量という重複した指標が下位に 2 つ並ぶ / 老年化指数・年平均気温など良し悪しの向きの無い指標が赤い「下位」扱い / 失業率・交通事故件数の
   1 位が青い強調バッジで良い順位に見える / 順位バッジの見た目が 3 種類混在。選び方と表示を 1 系統にまとめる際にこれらを基準に入れる。
 
+### [GSC-COVERAGE-DEPLOY-01] カバレッジ是正と入力鮮度ガードを本番反映する
+
+タグ: [インフラ・計測] [種類:不具合] [実行:ユーザー] [検証:node .claude/scripts/gsc/build-coverage-queue.mjs --no-probe] [起票:2026-09-07] [期日:2026-09-28] [進行中] [レーン:SEO・ブログ]
+
+- **owner**: オーナー（GSC UI export）／Claude Code（取込・効果判定）
+- **現状**: 2026-09-07にPR #939（main `5d05cd6e1`）で本番反映済み。PR CI、Cloudflare deploy、post-deploy smoke、R2 ISR GC、CDN全体パージはすべて成功した。Googlebot UA実測で旧市区町村カテゴリsoft404 5件は全件301、親プロフィール200、未知カテゴリ410 + noindex。sitemapは旧カテゴリ0件 / 市区町村プロフィール360件、自治体Datasetは`description` / `license` / `distribution.contentUrl`を本番HTMLで確認した。
+- **①は確認済 (2026-09-18)**: `fetch-metrics-weekly.yml` は 2026-09-13 run が success、`coverage-alert` Issue は 0 件。
+- **残り (オーナー)**: ②デプロイ (09-07) 後の GSC UI export がまだ無い (最新の coverage-drilldown は `2026-W36`、export 日 2026-09-04・soft-404 450)。次回 export で市区町村カテゴリ soft404 5→0 と全体件数差を測定し、`COVERAGE-LOOP-01` へ効果観測を引き渡す。
+- **停止条件**: 古いW32入力を当週データとして再生成しない。通常ページへGoogle Indexing APIを送らない。デプロイ前のURLを同一観測窓へ混ぜず、Google再クロール前の件数不変だけでeffect/noneにしない。
+- **完了条件**: develop→mainのCIがgreenで、上記の本番HTTP・構造化データ・sitemap検証がすべて合格する。失敗時の`coverage-alert`起票と、回復時の自動closeを少なくとも一方はGitHub Actionsで実測し、デプロイ後exportで市区町村カテゴリsoft404が0になる。
+
+### [CF-CPU-SURGE-01] 2026-09-11 以降の Workers CPU 時間の増加原因を特定し、差分 purge とブログ広告変更の効果を測る
+
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-09-24] [期日:2026-10-16] [レーン:基盤]
+
+- **背景 (2026-09-24 実測)**: 請求書 6 通 (`cloudflare-cost-improvement/reference/weekly-snapshots/2026-W20〜W38.json`) で、
+  5 月以降の従量課金は毎月 Workers CPU ms の 1 行だけ (9/15 請求は超過 267M ms で $5.36)。9/15〜の請求期間は予算アラート
+  $3.06 に 5 日目で到達 (前 2 期間は 24〜26 日目)。日次 snapshot の CPU p50 は約 8→15〜22ms、p99 は約 1.4→2.8 秒で、
+  9/11〜12 のデプロイ後から増えている。候補は ① purge が HTML キャッシュへ実際に効くようになった (`f3a04de2b`)
+  ② テーマ拡充で 1 ページが重くなった ③ アクセス増。デプロイのたびに HTML キャッシュが消えることも実測した (30 日で 84 回)。
+- **済**: 楽天同期の全体 purge を差分 purge に変更 (`c15ea5708` / `db8c6acf8`、PR #1021 で本番反映済み)。
+  ブログの A8 バナー抑止 (`c9e2b6a93`) は develop のみで未リリース。
+- **次**: ① 9/25 JST 04:00 の `sync-rakuten-catalog` で purge が `--urls` (約 1,900 件) になり `--all` でないことをログで確かめる。
+  ② Cloudflare Observability で route 別の CPU 時間を見て主因を絞る (MCP 認証かダッシュボードのログインが要る)。
+     2026-09-25 のセッションでも `cloudflare-observability` / `cloudflare-graphql` MCP は未認証だった。
+     再認証は対話セッションの `/mcp` でユーザーが行う。
+  ③ 日次 snapshot の cpu_p50/p99 と 10/15 の請求書の CPU 行で効果を見る (請求書は invoice モードで記録)。
+- **停止条件**: 本番 deploy はオーナー承認まで行わない。原因を実測で絞らないまま対策を足さない。
+- **完了条件**: CPU 増加の主因を route か仕組みで特定して対策を決め、10/15 の請求書の CPU 行を記録している。
+- **観測の追記 (UI 全面点検 (2026-09-25・本番 44 URL × 7 幅 = 308 枚を撮影、250 枚を目視。`UI-FULL-SWEEP-01`))**: 本番の撮影 308 回のうち 3 回で一時的な HTTP 503 (`/areas/29000/cities/29363` の 390・640px、`/category/landweather` の 390px)。
+  同じ URL は直後の再取得で 3 回とも 200。
+  GSC 是正キューでも `/blog/gasoline-consumption-quantity-vs-densely-inhabited-district` (9/7・9/20) と
+  `/blog/white-bread-consumption-quantity-prefecture-gap` (9/20) が 503 と記録された。9/25 はキャッシュ迂回を含む 5 回すべて 200
+  (1 回目の描画は 2〜3 秒)。`GSC-COV-5XX-20260925` はこのカードへ原因調査を寄せて閉じた。
+- **関連する変更 (2026-09-25 夜・未リリース)**: `THEME-CHART-LOAD-LATENCY-01` で、テーマページの時系列取得を 1 回のサーバーアクションに
+  束ね、同じ指標の「選択県」と「全国」を R2 の 1 回の読み込みから作るようにした (リクエスト 48 → 2、R2 読み込みは指標数分)。
+  [仮説] テーマページ 1 表示あたりの Workers CPU 時間が減る。検証: リリース後の日次 snapshot の cpu_p50 / p99 を前週と比べる。
+
+### [PERF-RANKING-LCP-03] ランキングページの LCP がベースラインより悪化したまま
+
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:node .claude/scripts/psi/... の history.csv で ranking/total-population,mobile の LCP < 9,347ms] [起票:2026-09-07] [期日:2026-10-05] [レーン:基盤]
+
+- **owner**: Claude Code (調査・実装) / オーナー (デプロイ承認)
+- **症状 (実測)**: `.claude/state/metrics/psi/history.csv` の `ranking/total-population,mobile` 直近 3 週 (2026-08-23〜09-06) の LCP は 10,936〜13,841ms (平均約 12,300ms) で、ベースライン 9,347ms (2026-08-04) より約 32% 悪化している。
+- **デプロイ後の実測 (2026-09-18 時点)**: PR #940 (`4ee6b5641` を含む) は 09-07 に main へ。以降の LCP は 09-07 9,230 / 09-10 9,735 / 09-11 8,548 / 09-12 5,738 / 09-15 7,709 / 09-16 7,964 / 09-17 7,538ms。
+  09-10 の 1 日を除きベースライン未満だが、完了条件の「3 週連続」には 09-28 まで観測が要る。期日をそこへ動かした (判定は週次レビューで)。
+- **一次診断**: 最新 batch (2026-09-06) の `lcp_element` 実測で LCP 要素は依然 Leaflet タイル。topology をクライアント `useEffect` fetch へ変更したことがハイドレーション後の直列処理を増やした疑い。
+- **なぜカードが要るか**: 旧 `PERF-RANKING-LCP-02` は 2026-09-07 の improvement-triage (`b27c62cab`) で「完了条件未達」として改善バックログから削除されたが、後継の追跡先が作られず**どの台帳にも存在しない状態**になっていた。`monthly.md` の言及は計画ビューであり TODO の実体ではない。
+- **比較の断絶 (2026-09-25)**: LCP 要素である背景タイルを CARTO (同一 origin の /tiles プロキシ・30 日エッジキャッシュ) から地理院タイル (cyberjapandata.gsi.go.jp を直接取得) へ切り替えた (commit 871096e46、main 95a9971)。9/25 以降の PSI はタイル配信元が別物なので、ベースライン 9,347ms との比較は 9/25 以降の 3 週で改めて判定し、それ以前の推移とつなげない。
+- **次**: タイル描画を TopoJSON 取得から分離する修正は `4ee6b5641` に実装済み。PR #940 の本番反映後に LCP 要素を再確認し、PSI の 3 週以上の推移で効果を判定する。調査・実装を最初から繰り返さない。
+- **停止条件**: 単発の PSI 値で改善と判定しない (日次計測はばらつくため 3 週以上の推移で見る)。デプロイはオーナーの明示承認まで行わない。ベースライン 9,347ms は 2026-08-04 の実測値で、これを更新して達成扱いにしない。
+- **完了条件**: `ranking/total-population,mobile` の LCP が 3 週連続でベースライン 9,347ms を下回る。悪化要因が topology fetch でなかった場合は、実測で特定した真因と対策を本カードへ記録してから閉じる。
+
+## 🟡 中 — 2〜3ヶ月以内
+
+### [CYCLE-HEALTH-01] 「検出 → 起票 → 計画 → 実行 → 完了 → 振り返り」のサイクルを各段の停滞信号つきで確実に回す
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-09-25] [レーン:計測]
+
+- **オーナー指示 (2026-09-25)**: バックログの改善・週次レビューで新しいカードが増え、配線し、改善を繰り返す。このサイクルを確実に回す。
+- **現状 (2026-09-25 実測)**: 部品はある (週次監査・`/weekly-review`・`/weekly-plan`・`/monthly-plan`・日曜計測→月曜無人 triage→週次メトリクス Issue・
+  戦略レーン検査 DG073〜078)。起票も活発 (backlog.md の変更コミットは直近 1 か月で 251 件)。止まっているのは段と段のつなぎ目:
+  1. **検出 → 起票が切れている検出器がある**: 年カバレッジ監査の要拡張候補 87 件はカードにならないまま残る。
+     一方、週次 UI 検査は起票まで自動で回っている (2026-09-24 の指摘 6 件は同日に `UI-FIX-*` 3 枚として自動起票され、
+     9/24〜25 に全件 fixed。`.claude/state/page-quality/ui-findings-queue.json`)。検出器ごとに差がある。
+  2. **計画 → 実行が切れている**: 週次 Must は 5 週連続未達 (W38 は 0/3)。W35 は計画 2 本に対して 85 本公開。
+  3. **完了の判定が閉じない**: `improvements.md` の Due 超過 15 件 (docs:check DG054)、効果判定エンジンは GSC 施策 10 件中 0 件しか判定できない。
+  4. **カードが現実とずれる**: 実装済みなのに「未コミット」のカード、前提が解消済みの `DATA-ESTAT-FETCH-01` / `DATA-MANUAL-RESTORE-01`、
+     完了済み ID (`AFF-MEASURE-RECOVER-01`) を参照し続ける週次計画。backlog の Due 超過 5 件・起票 60 日超 11 件。
+- **設計 (各段に「止まったら見える信号」を 1 つ置き、新しい仕組みは作らず既存の週次メトリクス Issue と管理画面 `/strategy/lanes` に出す)**:
+  | 段 | 信号 (機械で数える) | 既存の置き場 |
+  |---|---|---|
+  | 検出 → 起票 | 検出から 7 日たってもカードに結ばれていない指摘の件数 (年カバレッジ・GSC coverage・効果判定。UI 確認は自動起票済みの基準例) | 自動起票は `coverage-backlog.mjs` / `ui-findings.ts` の形にそろえる |
+  | 起票 → 分類 | レーン・tier・種類が無いカード (DG058/059/075) | docs:check |
+  | 分類 → 計画 | 重点レーン外の Must・凍結レーンの作業 (DG076〜078) | docs:check・`/strategy/lanes` |
+  | 計画 → 実行 | 週次 Must の達成率と連続未達週数。2 週連続未達のタスクは分割か降格を必須にする | `/weekly-review` |
+  | 実行 → 完了 | Due 超過 (DG054)・判定できない効果測定・完了済み ID を参照する計画 | docs:check・効果判定エンジン |
+  | 振り返り → 起票 | 週次レビューの「次週への申し送り」がカード ID に結ばれているか | `/weekly-review` |
+- **関連カード (個別の段の実例。ここで重複実装しない)**: `UI-REVIEW-LOOP-VERIFY-01` (UI 確認→起票)、`DATA-QUALITY-LOOP-01` (データ監査→起票)、
+  `EFFECT-TARGET-MARKERS-01` (完了の判定)、`STRATEGY-FOCUS-2026-10-01` (計画の枠)。
+- **①③ 済 (2026-09-26・未コミット)**: `.claude/scripts/metrics/lib/cycle-health.mjs` が分類漏れ・期日超過・Must の連続未達・完了済み ID を参照する計画を数え、
+  週次メトリクス Issue の「🩺 サイクルの健全性」表に出す (テスト `cycle-health.test.mjs`)。検出 → 起票と振り返り → 起票は「未計測」と明示。
+  `/weekly-plan` に「連続未達 2 週以上は分割か降格・完了済み ID を残さない」、`/weekly-review` に「Must N/M の書式・申し送りに ID」を追記。
+  初回実測 (W39): 分類漏れ 1/118、期日超過 5、W38 まで連続未達 2 週、完了済み参照 0 (`AFF-MEASURE-RECOVER-01` は ledger に完了記録が無いため数えない)。
+- **② 済 (2026-09-26・未コミット・オーナー判断「自動起票を既定」)**: 年カバレッジ監査の要拡張候補を GSC カバレッジと同じ形で自動起票する
+  (`.claude/scripts/data/sync-year-coverage-backlog.mjs`。1 枚 10 件・開いているカードは 1 枚・gate `assert-year-coverage-batch.ts`・
+  週次 workflow `estat-year-coverage-audit-weekly.yml` に配線)。初回カード `YEAR-COV-20260926` を起票済み。
+  健全性表の「検出 → 起票」行は検出器ごとの残件とカードの有無を出す (残件ありでカードなし = 起票が止まっている)。
+- **次 (残り)**: 「振り返り → 起票」の行を実数にする (週次レビューの申し送りに ID が付いているかを数える)。
+  他の検出器 (ranking-integrity・provenance・`/audit-units`) の自動起票は `DATA-QUALITY-LOOP-01` ①② で同じ形に寄せる。
+- **旧・次**: ① 週次メトリクス Issue (`generate-weekly-metrics-issue.mjs`) に「サイクルの健全性」節を足し、上表の 6 信号を毎週出す。
+  ② 検出器ごとに「指摘 → カード」の結び方を決める (自動起票か、週次レビューでの手動起票か)。③ `/weekly-review` と `/weekly-plan` に
+  「2 週連続未達は分割か降格」「完了済み ID を計画に残さない」を入れる。
+- **完了条件**: 週次メトリクス Issue に 6 信号が 4 週続けて出て、検出 → 起票の未結び件数と Due 超過が減り、Must の連続未達が 2 週以内に解消されている。
+
 ### [NAV-CLICK-COVERAGE-01] サイト内リンクのクリックを既定で全件計測し、名前の無い導線を週次で減らす
 
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-09-25] [期日:2026-10-23] [レーン:計測]
@@ -391,68 +323,124 @@ updated: 2026-09-21
 - **次**: デプロイ後の週次で被覆率を読み、導線名なし上位から名前を付ける。P3 (page-quality の静的解析に名前の無いリンク数) は `UI-CHART-TEXT-LOOP-01` と
   同じファイル群を触るので、あちらの取り込み後。
 
-## 🟡 中 — 2〜3ヶ月以内
+### [NOTE-CARD-REPAIR-01] note公開記事の空白リンクカードを段階的に是正する
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npm run note:cards:audit -- --browser-verify] [起票:2026-09-27]
 
-### [A8-CROSSCHECK-EXCEED-01] A8 の 9 月検算で専用案件のクリックがサイト別合計を超える原因を確定する
-タグ: [収益化] [種類:不具合] [実行:対話] [検証:node .claude/scripts/ads/check-a8-outcome-gate.mjs] [起票:2026-09-27] [期日:2026-09-29] [レーン:計測]
+- **現在地 (2026-09-27)**: 一括修正前の全286記事監査は空白785枚・未確認0枚・カード前の空段落29箇所。修復記録では71枚・17記事が`verified`（今回65枚）。**785枚は現在の残数ではない**。一括修正後の全量再監査は未実施。記事単位の公開後監査は各修復時に実施済み。
+- **正確な再開位置**: 同じMacの`.local/note-card-repair-journal.json`がカード単位の進捗記録。`attempts`を`slug + key`で最後の試行に絞り、`verified`を再処理しない。`.claude/state/metrics/note/card-visibility-latest.json`は修復前の全量スナップショットで、再監査までは現在の残数とみなさない。ローカルjournalが無い環境では推測で修復せず、全量監査を作り直す。
+- **再開手順**:
+  1. `npm run agent:session -- --status`で作業共有を確認し、note編集の同時実行を避ける。`npm run note:session:check`でstats47のログインを確認する。
+  2. `npm run note:cards:audit -- --browser-verify --output .claude/state/metrics/note/card-visibility-latest.json`で286記事を再監査する。空白が残ればexit 1でもレポートを読む。`unknownCards`または`browserVerifyFailedArticles`があれば、`npm run note:cards:audit -- --browser-verify --retry-unknown-from .claude/state/metrics/note/card-visibility-latest.json --output .claude/state/metrics/note/card-visibility-latest.json`で再検証し、未確認0を確認する。
+  3. `npm run note:cards:repair-batch -- --max-articles 5 --max-cards 10 --commit --skip-blocked`を小分けで繰り返す。各バッチで公開後の表示を確認する。失敗時はjournal・公開記事の`has_draft`・対象カードのキーを確認してから再開する。監査から24時間経過したら手順2へ戻る。
+  4. カード修復後の空段落は`note:cards:compact-spacing`で記事ごとに別工程で詰め、記事単体監査で確認する。
+- **未解決の1枚**: `recovered-n023501038bd5`（`https://note.com/stats47/n/n023501038bd5`）内のmagazineカード`https://note.com/stats47/m/me574f67ac47f`、旧キー`embf4bf74e742aa`。修復処理がタイムアウトし、再監査では空白のまま、公開記事に下書きなし。`--skip-blocked`で他のカードを進めつつ、個別に原因を調べて最終的に再処理する。スキップを完了扱いにしない。
+- **週次運用**: `.github/workflows/note-circulation-audit-weekly.yml`と`.claude/skills/management/weekly-review/SKILL.md`に全量監査を組み込み済み。CIの初回結果は未確認。スクリーンショットはCI artifactに14日保持し、R2とローカルには蓄積しない。
+- **停止条件**: 対象カードのURL・位置・記事本文・価格・タグのいずれかが変わる、または更新後のブラウザ表示が確認できない場合は次のカードへ進まない。
+- **完了条件**: 全記事監査で空白0件・未確認0件を確認し、週次監査が継続実行される。
 
-- **事象**: 2026-09-27 に 9 月の A8 案件別明細を取り込んだ後、成果ゲートが `a8-cross-check-exceeded` で blocked。stats47 専用案件のクリック 157 がサイト別集計 141 を超える (`.claude/state/metrics/affiliate/a8-report-log.json` の crossCheck)。週次 `affiliate-ga4-weekly.yml` の計測ゲートもこれで落ちる。
-- **[仮説]** 取得時刻のずれ。サイト別は 09-26 22:47 JST (CI)、明細は 09-27 17:17 JST (ローカル) で約 18.5 時間ずれている。ただし 9 月平均は 1 日約 5 クリックで、差 16 を全部は説明しきれない。対抗仮説は、doboku-note 側の対応表も手同期で古く、両サイトが配信する案件を共用として登録できていないこと (a8mat の案件コード照合では未検出)。
-- **次**: 09-27 18:20 JST 以降の CI 収集でサイト別が明細より新しくなる。09-28 に `check-a8-outcome-gate.mjs` を実行し、超過が消えていれば時刻ずれで確定しカードを削除する。残れば doboku-note の programIdMap も広告定義から再生成 (本リポジトリの `build-a8-program-id-map.ts` と同じ方式) して共用案件を洗い出す。
-- **関連**: ローカルでサイト別集計を `--month 2026-09` で取ると download-failed になる (CI では成功)。debug artifact は `.local/playwright-a8-debug/2026-09-27T08-24-42Z`。
-- **停止条件**: 共用案件の振り分けを推測で決めない。根拠 (両サイトの広告定義) が無い ID は unmapped のまま残す。
-- **完了条件**: 検証コマンドが `a8-cross-check-exceeded` を出さず、原因 (時刻ずれか共用漏れか) が本カードの削除コミットに書かれている。
+### [SITEWIDE-DUPLICATE-LINK-RATIO-01] サイト横断でリンク重複率が閾値超過 (本番全6,237URL実測)
 
-### [DOMAIN-CONFIG-01] 領域の正本 domains.json と整合検査を土木ノートと同じ形で作る
-タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run check-domains] [起票:2026-09-27] [レーン:基盤]
+タグ: [UI・UX] [種類:不具合] [実行:対話] [検証:npm run page-quality:audit-weekly -- --base-url https://stats47.jp] [起票:2026-09-15] [レーン:UI・回遊]
 
-- **方向性**: 戦略以外の管理の枠組みを土木ノートの領域モデル (doboku-note リポジトリの戦略文書「14_領域モデル」と、機械可読の正本 domains.json)に揃える。まず stats47 の領域一覧を機械可読の正本として作る。後続の `DOMAIN-LANES-MIGRATE-01` (レーン → 領域)・`DOMAIN-ADMIN-NAV-01` (サイドメニュー)・`DOMAIN-AGENT-01` (エージェント・文書) はすべてこのファイルを読む。
-- **揃えるもの / 揃えないもの**: 揃えるのは 5 役割の並び (決める → 売る → 集める → つくる → 支える)・ファイルの形 (`domains` / `documents` / `navKinds` / `navRules`)・画面の種類 5 つ (品揃え・一覧 inventory / 成果・計測 results / 要対応・状態 actions / 方針 policy / 素材 assets)・検査の内容。揃えないのは各領域の中身と、戦略 (構え・KPI・重点)。構えと KPI は収益化戦略のレーン表 (移行後は領域表) に残し、domains.json に持たせない。
-- **stats47 の領域 (案、着手時にオーナー確認)**:
+- **owner**: ranking-ui-manager (ranking) / theme-ui-manager (theme) / site-ux-manager (共通部品・横断)
+- **実測 (2026-09-18)**: develop→main PR #977 の `page-quality` (representative) が同じ違反で赤 (merge blocker)。
+  `/themes/population-dynamics` 0.5081 / `/blog` 0.3235 / `/ranking/total-population` 0.3151 (閾値 0.3)。
+  rail/surface 統一 (1006e1e21) 後の値。CI 側では 2026-09-18 に PR 必須 gate から外し、週次監査だけが検出する。
+  2026-09-18 に page-quality を PR 必須から外したので PR は止まらなくなったが、違反自体は未解消。
+  検知は週次 `page-quality-audit-weekly.yml` の alert Issue と、リリース前の `check:release-local` に移った。
+- 2026-09-15、`page-quality:audit-weekly` を本番全 6,237 URL に実行 (初の全件試行)。
+  error 2,698 / warning 5,106。**duplicate_link_ratio がほぼ全テンプレートの支配的違反**で、
+  個別ページの内容問題ではなく共通コンポーネント由来の疑いが強い:
 
-  | 役割 | 領域 id / 名前 | 管理するもの | 今のレーン |
-  |---|---|---|---|
-  | 決める | strategy / 戦略 | 方針と KPI ツリー・週次/月次の判断・競合・事業計画 | — |
-  | 決める | plan / 計画 | 月間・週間・バックログ・効果測定中の施策 | — |
-  | 売る | product / 商品 | 行政資料・note・Kindle・ココナラ・売上・商品品質 | 行政資料、note・商品販売 |
-  | 売る | affiliate / アフィリエイト | 掲載先・成果・提携と案件 | 収益導線 |
-  | 集める | site / サイト | 記事・SEO・サイト内の動線・計測 (GSC・GA4・PSI)・OGP | SEO・ブログ、UI・回遊 |
-  | 集める | sns / SNS | 投稿・各 SNS・動画・バズ地図 | SNS |
-  | つくる | data / データ | ランキング・テーマ・Geo・データ品質・出典と参考文献 | ランキング、テーマ・Geo、データ品質 |
-  | 支える | ops / 管理 | 文書・品質検査・エージェントとスキル・自動化・CI・計測の仕組み | 基盤、計測 |
+  | テンプレート | 対象URL数 | error | warning | duplicate_link_ratio 内訳 |
+  |---|---:|---:|---:|---|
+  | prefecture-detail (`/areas/[code]`) | 2,491 | 1,691 | 1,612 | error 1,691 + warning 752 = 対象の 98% |
+  | blog (`/blog/[slug]`) | 606 | 606 | 112 | error 605 = 対象の **99.8%** |
+  | ranking (`/ranking/[key]`) | 2,170 | 227 | 3,197 | error 227 + warning 1,941 (ad_duplicate_count warning も1,256件) |
+  | geo-analysis | 71 | 55 | 10 | error 55 = 対象の 77% |
+  | theme | 56 | 38 | 34 | error 38 = 対象の 68% |
+  | survey | 148 | 64 | 83 | error 56 + warning 83 |
+  | category | 17 | 11 | 8 | error 11 |
+  | municipality | 360 | 0 | 0 | **異常なし** (比較対象として健全) |
 
-- **手順**:
-  1. `.claude/config/domains.json` を上の表で作る。`nav` はこの段階では空配列でよい (`DOMAIN-ADMIN-NAV-01` で埋める)。`navKinds`・`navRules` は土木ノートの文言を stats47 の実情 (チャネル = X・Instagram・note・Kindle・ココナラ) に合わせて写す。
-  2. `.claude/scripts/lib/check-domains.cjs` を作り、`package.json` に `check-domains` を足す。検査: id/label の重複なし・role が 5 語のどれか・`nav` の kind が navKinds にある・`nav` の URL の page.tsx が `apps/admin/app` に実在。検査した件数を出し、0 件は検査不成立として exit 2 にする (全 PASS が何も見ていない状態と区別する)。
-  3. 発火する側・しない側を固定するテストを `.claude/scripts/lib/__tests__/check-domains.test.cjs` に置き、`docs:check` か PR の品質チェックから呼ぶ。
-  4. `docs/01_技術設計/06_自動化インベントリ.md` に検査を登録する。
-- **停止条件**: 領域の数・名前がオーナーの意図と違う場合は表だけ直す。バックログのタグ・レーン表・サイドメニューはこのカードで変えない。
-- **完了条件**: `npm run check-domains` が exit 0 で 8 領域を検査したと出力し、テストが通る。
+- **注意 (実証ベース)**: prefecture-detail は並行 Codex セッション (`area-density-optimization` /
+  `area-all-optimization`、2026-09-15実施)が「ranking リンク重複排除」を含む最適化を
+  ローカル dev server で検証済みだが**本番未デプロイ**。本監査は現行本番 (デプロイ前) を
+  見ているため、そのセッションの変更が本番反映されれば prefecture-detail 分は改善している
+  可能性が高い。**デプロイ後に再実測してから母数を再評価すること** (未検証のまま「直った」
+  と判断しない)。
+- **次 (実行順)**: ①上記デプロイ待ちの分を除いた ranking/blog/theme/survey/category の
+  duplicate_link_ratio 原因(共通ナビ・関連記事ウィジェット・広告リンクの重複生成箇所)を
+  各 owner が最小1テンプレートで特定 ②修正 ③`page-quality:check`(代表URL)で個別確認
+  ④全件は次回週次 `page-quality-audit-weekly.yml` で確認 (毎回全件を手動実行しない)。
+- **完了条件**: 週次監査の error 件数が縮小傾向 (ラチェット化は別途検討)。
+- 生データ: `.claude/state/metrics/page-quality/{latest.json,LATEST.md,snapshots/2026-09-15.json}`、
+  管理画面 `/quality/page-audit`。
 
-### [DOMAIN-LANES-MIGRATE-01] 戦略レーンを領域へ組み替え、構え・KPI・バックログのタグ・月次重点を領域単位にする
-タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:node --test .claude/scripts/lib/__tests__/strategy-lanes.test.cjs && npm run docs:check] [起票:2026-09-27] [期日:2026-10-01] [レーン:基盤]
+### [GSC-COVERAGE-AUTOMATION-VERIFY-01] 是正キューの自動観測と登録済み件数の記録が本番 CI で動くことを確認する
 
-- **前提**: `DOMAIN-CONFIG-01` が完了していること。
-- **方向性**: レーン・役割・カテゴリタグの 3 軸を並べず、土木ノートと同じく「領域」1 軸で優先順位と持ち主を決める。構え (攻める・維持・凍結)・今の狙い・構えを変える条件・KPI 列は領域の単位に移す。バックログ先頭のカテゴリタグ (`[収益化]` 等) は作業の種類として残す。
-- **計測レーンの扱い**: 土木ノートの規則「計測・記録・改善は独立した領域にしない (持ち主が曖昧になる)」に従い、計測の数字は各領域の KPI で見て、計測の仕組み (収集・認証・鮮度監視) は「管理」が持つ。2026-09-27 時点で計測レーンの KPI にぶら下がる施策は 0 件だった (`.claude/state/metrics/measurement-cycle/LATEST.md`)。計測は今月の重点なので、切り替えは月の境目 (10/1 の `/monthly-plan`) で行い、月途中で重点を崩さない。
-- **手順**:
-  1. `docs/00_プロジェクト管理/02_収益化戦略.md` §5 のレーン表を領域表 (`順 | 領域 | 構え | 今の狙い | 構えを変える条件 | 改善Metric | KPI`) に書き換える。領域名は domains.json の label と一致させ、構えは統合したレーンのうち強い方を引き継ぐ (例: データ = データ品質の「攻める」)。変えた理由を表の前に 1 文で書く。
-  2. `.claude/scripts/lib/strategy-lanes.cjs` を領域表と domains.json の一致まで検査するよう改め、DG073〜080 の文言を領域に直す。
-  3. バックログの `[レーン:X]` 129 件を `[領域:X]` へ機械置換する (対応は DOMAIN-CONFIG-01 の表の「今のレーン」列)。`backlog-lib.cjs` の `TAG_KEYS`・`todo-standards.md` §3 の語彙表・自動起票する生成元 (`.claude/scripts/gsc/lib/coverage-backlog.mjs`・`.claude/scripts/data/lib/year-coverage-backlog.mjs`・`.claude/scripts/page-quality/lib/ui-findings.ts`) を同じ差分で直す。土木ノートのタグ名 `[領域:]` に合わせる。
-  4. `monthly.md` の `focus_lanes` を `focus_domains` にし、`/monthly-plan`・`/weekly-plan`・`todo-curator`・`docs-vs-issues.md` の記述を直す。`node .claude/scripts/lib/sync-codex-mirror.cjs` でミラーを同期する。
-  5. 管理画面 `/strategy/lanes` の表示を領域に直す (URL は変えない)。
-  6. `node .claude/scripts/metrics/build-measurement-cycle.mjs --week <週>` で KPI ツリー節の★ (重点の KPI) が領域から引けることを確認する。
-- **停止条件**: 自動起票の生成元が他にも見つかり置換漏れが出る場合は、`[レーン:]` を読む互換を一時的に残して別カードにする。月の境目を過ぎても着手できない場合は、計測の重点を崩さないよう翌月の境目まで延ばす。
-- **完了条件**: バックログに `[レーン:` が 0 件で、検証コマンドが exit 0。月次計画の重点が領域で書かれている。
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:node -e "const q=require('./.claude/state/gsc/coverage-remediation-queue.json');process.exit(q.queue.some(e=>e.inspection)?0:1)"] [起票:2026-09-24] [期日:2026-10-05] [レーン:SEO・ブログ]
 
-### [KPI-TREE-CONNECT-01] KPI ツリーの未接続 KPI (有料購入・データ品質ゲート通過率) を計測サイクルに接続する
+- **背景 (2026-09-23 実測)**: CI の URL Inspection (`--limit 500`) は検索実績上位 500 件だけで枠が埋まり、是正キュー
+  pending 1,133 件を 7 日間 1 件も検査していなかった。キューは毎週 export から作り直すため登録された URL は記録なく消え、
+  `done` は 0 件。登録済み件数は export の概要グラフにしか無いのに ingest が読まず、`coverage-totals-history.csv` の
+  `indexed-submitted` 列は 4 週とも空。search-growth は最新ファイルを mtime で選び、CI checkout で 09-15 の古い CSV を掴んで
+  月曜の GSC 運用サイクル監査を FAIL にしていた。4 点を修正した (枠の割合配分・`--sync-inspection`・概要グラフ取込・名前順選択)。
+- **次**: ① workflow 変更は main 反映後の schedule から効く。反映後の日次 CSV で是正キュー URL が約 250 件/日含まれること。
+  ② 次の週次 (日曜) 後に `coverage-totals-history.csv` の `indexed-submitted` が埋まること。空なら ingest の警告
+  「概要グラフに登録済み件数が無い」をログで確認し、実 export の概要 ZIP の列名を `INDEXED_HEADERS` に足す。
+  ③ 月曜の `gsc-operations-cycle-weekly` で `search-growth-sources` が PASS になること。
+  ④ 判断が要る pending が `GSC-COV-*` カードとして自動起票され、`backlog-loop-daily` が gate
+  (`build-coverage-queue.mjs --assert-handled`) を通して閉じ、是正キューの該当 URL が pending でなくなること。
+  main 反映前はワークフローの変更が効かないので、このカードはループに拾わせない (`[実行:対話]`)。
+- **停止条件**: 検査枠を増やすために API quota (2,000/日) の 75% を超えない。Indexing API は使わない。
+- **完了条件**: 上の検証コマンドが exit 0、`indexed-submitted` が 1 週以上記録され、運用サイクル監査の `search-growth-sources` が PASS。
 
-タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-09-27] [レーン:計測]
+### [UI-REVIEW-LOOP-VERIFY-01] 週次 UI 検査のループが修正と本番確認まで CI で一巡することを確かめる
 
-- **背景**: 2026-09-27 に KPI ツリー (NSM → 駆動KPI → ガードレール、収益化戦略 §1.1) を計測サイクルへ配線した。`paid-purchases` (駆動) と `data-quality-pass-rate` (ガードレール・今月の重点「データ品質」の KPI) は取得元が計測サイクルに無く、`.claude/state/metrics/measurement-cycle/LATEST.md` の「KPI ツリー」節で `not-connected` と出る。重点レーンの KPI を週次で判定できない状態。
-- **次**: `paid-purchases` は販売台帳 (note / KDP / ココナラの認証付き収集 `.claude/state/metrics/authenticated/latest.json` と products state) から週次の件数を、`data-quality-pass-rate` は既存の品質監査 state (provenance・単位・分布の監査結果) から通過率を、`.claude/scripts/metrics/lib/measurement-cycle.mjs` の `summarizeKpiTree` の `valueOf` に足す。値の定義を決めたら catalog の `measurementStatus` も更新し `npm run business-plan:build-state` で再生成する。認証切れ・欠測は 0 にせず status で出す。
-- **停止条件**: 取得元の定義 (どの監査の何を通過とみなすか) が既存 state から一意に決まらないときは推測で決めず、オーナーに確認する。
-- **完了条件**: `node .claude/scripts/metrics/build-measurement-cycle.mjs --week <週>` の KPI ツリー節で 2 つの KPI が `not-connected` 以外になり、`node --test .claude/scripts/metrics/__tests__/measurement-cycle.test.mjs` に値の取得を固定するテストがある。
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:node -e "const q=require('./.claude/state/page-quality/ui-findings-queue.json');process.exit(q.findings.some(f=>f.status==='fixed'||f.resolved_by==='weekly-audit')?0:1)"] [起票:2026-09-24] [期日:2026-10-12] [レーン:UI・回遊]
+
+- **背景**: 2026-09-24 に検査 → 起票 → 修正 → 本番確認のループを入れた (`.claude/rules/page-quality-standards.md`「UI 指摘のループ」)。
+  同日の週次 (run 35966300757) で `UI-FIX-THEME` / `UI-FIX-PREFECTURE-DETAIL` / `UI-FIX-OTHER` の 3 枚が起票され、
+  キューと backlog が develop に commit された (`03a02d016`)。起票までは CI で確認済み。
+- **次**: ① `backlog-loop-daily` が UI-FIX カードを処理し、`ui-findings-queue.json` への `--mark-*` が develop に commit
+  されること (1 run 2 件・先行する sweep カードがあるため数日かかる)。② 直した指摘がリリース後の週次で done
+  (`resolved_by: weekly-audit`) になるか、残れば pending に戻って再起票されること。
+- **停止条件**: 本番 deploy はオーナー承認まで行わない。
+- **注意 (2026-09-24)**: 対話セッションで `CAROUSEL-ARROW-OVERLAP-01` / `THEME-MAP-ATTRIBUTION-CLIP-01` / `A11Y-SERIOUS-01` 担当の machine 指摘を `--mark-fixed` にした。検証コマンドの `status==='fixed'` はこれでも真になるので、2026-09-24 分の `UI-FIX-*` 3 枚も、ループが 9/23・9/24 の 2 晩とも verify で落ちて処理できなかったため対話で直して閉じた (原因は verify が過去の completed を見て「削除し忘れ」と誤判定していたこと。2026-09-25 に最新 attempt だけを見るよう修正)。ループの実証は次の週次 UI 検査が起票する `UI-FIX-*` で行う。
+- **完了条件**: 検証コマンドが exit 0 (fixed か週次で確認済みの指摘が 1 件以上)、かつループの commit に `.claude/state/page-quality` が含まれている。
+- **2026-09-27 の週次から対象を拡大 (2026-09-25)**: ブラウザ検査・撮影が代表URL 12 件 + データの型の違い 32 件の 44 ページになり、
+  Claude の目視は約 20 ページ (variants は 4 週で 1 巡)。初回 run で確認すること: ① 44 ページ × 7 幅の撮影が制限時間 (120 分) 内に終わる
+  ② review step が 30 分・200 ターン内で終わり、`ui-review-latest.json` に `reviewedPages` が入る ③ variants の指摘が
+  `UI-FIX-<種類>-<違い>-<日付>` で起票される。
+
+
+### [AFF-STOCKTAKE-RECONCILE-01] 提携棚卸しの不明案件と既存在庫の不一致を再照合する
+
+タグ: [収益化] [種類:不具合] [実行:対話] [起票:2026-09-08] [期日:2026-09-15] [レーン:収益導線]
+
+- **owner**: affiliate-operator（状態照合）/ affiliate-manager（在庫判断・ローカル修正）/ オーナー（手動ログイン）
+- **証拠・対象の正典**: `.claude/state/ads/affiliate-stocktake-latest.json`。詳細な件数・状態・素材一覧は本カードへ複製しない。
+- **次（実行順）**: ①帰属ガードを確認してからA8 `26822001`、afb `15671`・`14033`・`16511`・`15831` の不明状態を再照合する。②楽天は正しい広告リンク作成用IDかをオーナーに確認し、stats47の登録と既存リンクの口座一致を確認する。登録変更は別承認とする。未提携が確定した3案件は `affiliate-delivery-policy.ts` の共通停止へ反映済み、重複はprogramRef/クリック先で除外済み。これらの公開前確認は `AFF-PLACEMENT-RELEASE-01` へ分離する。
+- **停止条件**: サイト・口座帰属を確定できなければ停止し、不在を未提携や終了と推測しない。新規・重複申請、認証回避、成果リンクへの確認クリック、本番変更・deploy・R2 pushは禁止。既存在庫を未確認のまま削除しない。
+- **完了条件**: 各対象の状態・在庫判断を実機証拠へ結び付け、必要なローカル修正と対象の検証が完了する。不明が残る間はカードを維持し、人間作業またはガード復旧による再開条件を明記する。
+
+### [BLOG-SVG-LINEAGE-RESTORE-01] ブログSVG系譜キューの継続消化
+
+タグ: [進行中] [起票:2026-07-22] [レーン:データ品質]
+
+- **owner**: Claude Code
+- **現況**: 全`article.md`参照から期待asset集合を作る公開契約監査へ拡張済み。公開434記事・本文参照
+  1,091 assetで `pork-consumption-expenditure/data/pork-expenditure-ranking.svg` だけが404。SVGは既存JSON/sourceから
+  ローカル再生成済みで、公開gateもdata refresh / blog publish / 週次へ配線済み。R2全量pullのdry-runは
+  `app/blog` 8,913 files（local差分8,526）を確認したが、read-only取得の承認前なので実pullしていない。
+- **2026-08-27 生成物監査**: R2 `app/blog` 8,944 filesをローカルへ同期し、432記事・2,443 SVGを同一lintで
+  再走査した。構造error 98記事、dark mode非対応135記事を機械stateへ記録した。旧stateの98記事・141 SVG・error 0は母集団が
+  生成物全量を覆っておらず、完了証拠には使えない。公開参照asset契約とSVG内容品質は別gateとして維持する。
+- **次**: 構造error 98記事を優先し、小バッチで処理する。R2由来、算式、年、metric keyを復元できない図は
+  推測で再生成しない。公開参照asset契約と内容品質gateを各バッチ後に再実行する。
+- **完了条件**: 全公開記事の参照assetが200、must-fix 0、公開gate greenとなり、source lineage不明の図は削除または明示的に保留される。
+- **正典**: `.claude/rules/blog-data-schema.md`
 
 ### [THREADS-TOPUP-01] Threads の予約を 10/31 分まで補充する (同時 25 件の上限)
 
@@ -1161,29 +1149,6 @@ updated: 2026-09-21
   (修正前の本番実測は POST 48 件・重なり 0 件・約 19 秒)。
   **県データブックはデプロイ後に `sync-snapshots` を回して `app/areas/<code>/databook.json` を作り直す**。
   差し替えた 2 指標 (医師数・一般病院数の人口 10 万人当たり) は作り直すまで値が無く、カードごと表示されない。
-
-### [DATA-QUALITY-LOOP-01] 全指標のデータ品質を機械チェックし、「誤り・古さ・終了・薄さ」の 4 基準で継続的に直すループを作る
-タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-09-25] [レーン:データ品質]
-
-- **経緯 (2026-09-25 実測)**: `improvements.md` の `DATA-ESTAT-FETCH-01` (25) / `DATA-MANUAL-RESTORE-01` (12) の 37 metric は、
-  今日時点で全件 R2 に 47 都道府県分の値があり欠損 0・本番 200 (R2 は 2026-09-05 再生成)。「取得失敗で空ページ」という前提は解消済み。
-  残る問題は古さと表記の誤りで、例: `national-pension-full-exemption-rate` は最新 2006 年 (2 年分) なのに GSC 28 日 172 表示 / 17 クリック、
-  `elderly-single-person-households` は最新 2005 年。→ improvement-triage が上記 2 行を理由付きで終了し、このカードへ引き継ぐ。
-- **判断基準 (上から最初に当てはまる処置)**:
-  1. 値・単位・年表記が誤っている → すぐ直す (`DATA-VALUE-ERRORS-01`)
-  2. 公式にもっと新しい年が公表されている → 更新する。GSC 表示の多い順
-  3. 調査が終了し新しい年が無い → 公開を続け、ページに「○年で調査終了」を明示する。後継統計があれば差し替える
-  4. 観測 1〜2 年かつ需要ほぼ 0 → noindex 候補 (`RANK-THIN-01` と同じ基準で判断)
-  - 「古い」の目安は「最新年が公式の最新公表から公表周期 1 回分以上遅れている」。需要は順番を決めるためだけに使う (4 を除く)。
-- **既存の仕組みと穴**: 週次の `ranking-integrity-audit-weekly` / `provenance-audit-weekly` / `estat-year-coverage-audit-weekly` と
-  `/audit-units` がある。穴は 3 つ。(a) 年カバレッジ監査は**単年設定の 582 件だけ**が対象で、`years: "all"` なのに元の統計が
-  古い年で止まっている metric を見ない。(b) 年・年度の表記の誤りを見る検査が無い。(c) 年カバレッジ監査の要拡張候補
-  (2026-09-19 時点 87 件、`.claude/state/data/estat-year-coverage/queue.json`) を処理するカードが無く、見つけても直されていない。
-- **次**: ① 既存の週次監査に「最新年と今日の差」「時点統計の年度表記」を足す (新しい監査を作らず既存に統合する)。
-  ② 検出結果を 1 つのキューにまとめ、基準 1〜4 の処置を付ける。③ 週 5 指標ずつ、需要の多い順に処置する (`STRATEGY-FOCUS-2026-10-01` の
-  「週次 Must は各レーン 1 件」の枠で回す)。④ 年カバレッジ監査の要拡張候補 87 件は 2026-09-26 から `YEAR-COV-*` カードとして 10 件ずつ自動起票される (`CYCLE-HEALTH-01` ②)。
-- **完了条件**: 週次の監査が全指標の古さ・表記を検出してキューへ積み、キューの処置状況が管理画面か週次レビューで見え、
-  4 週続けて「新規検出 ≤ 処置件数」で残件が減っている。
 
 ### [GEO-UI-READABILITY-01] 地域分析 (Geo) のページで表・数値・用語が読者に読めない箇所を直す
 タグ: [UI・UX] [種類:不具合] [実行:対話] [起票:2026-09-25] [レーン:UI・回遊]
@@ -2456,6 +2421,49 @@ API で取れる指標と画面でしか見られない指標を分け、自動�
 doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-09-25 の手書きメモ・vault dairy/2026-09-25）
 
 ## 🟢 低 — 時期未定・条件付き (trigger は本文に)
+
+### [DOMAIN-CONFIG-01] 領域の正本 domains.json と整合検査を土木ノートと同じ形で作る
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run check-domains] [起票:2026-09-27] [レーン:基盤]
+
+- **trigger (2026-09-27)**: 計測とデータ品質を優先するため、計測レーンが「維持」に移ってから着手する。
+- **方向性**: 戦略以外の管理の枠組みを土木ノートの領域モデル (doboku-note リポジトリの戦略文書「14_領域モデル」と、機械可読の正本 domains.json)に揃える。まず stats47 の領域一覧を機械可読の正本として作る。後続の `DOMAIN-LANES-MIGRATE-01` (レーン → 領域)・`DOMAIN-ADMIN-NAV-01` (サイドメニュー)・`DOMAIN-AGENT-01` (エージェント・文書) はすべてこのファイルを読む。
+- **揃えるもの / 揃えないもの**: 揃えるのは 5 役割の並び (決める → 売る → 集める → つくる → 支える)・ファイルの形 (`domains` / `documents` / `navKinds` / `navRules`)・画面の種類 5 つ (品揃え・一覧 inventory / 成果・計測 results / 要対応・状態 actions / 方針 policy / 素材 assets)・検査の内容。揃えないのは各領域の中身と、戦略 (構え・KPI・重点)。構えと KPI は収益化戦略のレーン表 (移行後は領域表) に残し、domains.json に持たせない。
+- **stats47 の領域 (案、着手時にオーナー確認)**:
+
+  | 役割 | 領域 id / 名前 | 管理するもの | 今のレーン |
+  |---|---|---|---|
+  | 決める | strategy / 戦略 | 方針と KPI ツリー・週次/月次の判断・競合・事業計画 | — |
+  | 決める | plan / 計画 | 月間・週間・バックログ・効果測定中の施策 | — |
+  | 売る | product / 商品 | 行政資料・note・Kindle・ココナラ・売上・商品品質 | 行政資料、note・商品販売 |
+  | 売る | affiliate / アフィリエイト | 掲載先・成果・提携と案件 | 収益導線 |
+  | 集める | site / サイト | 記事・SEO・サイト内の動線・計測 (GSC・GA4・PSI)・OGP | SEO・ブログ、UI・回遊 |
+  | 集める | sns / SNS | 投稿・各 SNS・動画・バズ地図 | SNS |
+  | つくる | data / データ | ランキング・テーマ・Geo・データ品質・出典と参考文献 | ランキング、テーマ・Geo、データ品質 |
+  | 支える | ops / 管理 | 文書・品質検査・エージェントとスキル・自動化・CI・計測の仕組み | 基盤、計測 |
+
+- **手順**:
+  1. `.claude/config/domains.json` を上の表で作る。`nav` はこの段階では空配列でよい (`DOMAIN-ADMIN-NAV-01` で埋める)。`navKinds`・`navRules` は土木ノートの文言を stats47 の実情 (チャネル = X・Instagram・note・Kindle・ココナラ) に合わせて写す。
+  2. `.claude/scripts/lib/check-domains.cjs` を作り、`package.json` に `check-domains` を足す。検査: id/label の重複なし・role が 5 語のどれか・`nav` の kind が navKinds にある・`nav` の URL の page.tsx が `apps/admin/app` に実在。検査した件数を出し、0 件は検査不成立として exit 2 にする (全 PASS が何も見ていない状態と区別する)。
+  3. 発火する側・しない側を固定するテストを `.claude/scripts/lib/__tests__/check-domains.test.cjs` に置き、`docs:check` か PR の品質チェックから呼ぶ。
+  4. `docs/01_技術設計/06_自動化インベントリ.md` に検査を登録する。
+- **停止条件**: 領域の数・名前がオーナーの意図と違う場合は表だけ直す。バックログのタグ・レーン表・サイドメニューはこのカードで変えない。
+- **完了条件**: `npm run check-domains` が exit 0 で 8 領域を検査したと出力し、テストが通る。
+
+### [DOMAIN-LANES-MIGRATE-01] 戦略レーンを領域へ組み替え、構え・KPI・バックログのタグ・月次重点を領域単位にする
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:node --test .claude/scripts/lib/__tests__/strategy-lanes.test.cjs && npm run docs:check] [起票:2026-09-27] [レーン:基盤]
+
+- **前提 / trigger (2026-09-27 改訂)**: `DOMAIN-CONFIG-01` が完了していること。計測とデータ品質を優先するため、着手は計測レーンが終了条件 (週次収益の内訳が 4 週続けて取得できる) を満たして「維持」に移った後の月の境目とする。
+- **方向性**: レーン・役割・カテゴリタグの 3 軸を並べず、土木ノートと同じく「領域」1 軸で優先順位と持ち主を決める。構え (攻める・維持・凍結)・今の狙い・構えを変える条件・KPI 列は領域の単位に移す。バックログ先頭のカテゴリタグ (`[収益化]` 等) は作業の種類として残す。
+- **計測レーンの扱い**: 土木ノートの規則「計測・記録・改善は独立した領域にしない (持ち主が曖昧になる)」に従い、計測の数字は各領域の KPI で見て、計測の仕組み (収集・認証・鮮度監視) は「管理」が持つ。2026-09-27 時点で計測レーンの KPI にぶら下がる施策は 0 件だった (`.claude/state/metrics/measurement-cycle/LATEST.md`)。計測は今月の重点なので、切り替えは月の境目 (10/1 の `/monthly-plan`) で行い、月途中で重点を崩さない。
+- **手順**:
+  1. `docs/00_プロジェクト管理/02_収益化戦略.md` §5 のレーン表を領域表 (`順 | 領域 | 構え | 今の狙い | 構えを変える条件 | 改善Metric | KPI`) に書き換える。領域名は domains.json の label と一致させ、構えは統合したレーンのうち強い方を引き継ぐ (例: データ = データ品質の「攻める」)。変えた理由を表の前に 1 文で書く。
+  2. `.claude/scripts/lib/strategy-lanes.cjs` を領域表と domains.json の一致まで検査するよう改め、DG073〜080 の文言を領域に直す。
+  3. バックログの `[レーン:X]` 129 件を `[領域:X]` へ機械置換する (対応は DOMAIN-CONFIG-01 の表の「今のレーン」列)。`backlog-lib.cjs` の `TAG_KEYS`・`todo-standards.md` §3 の語彙表・自動起票する生成元 (`.claude/scripts/gsc/lib/coverage-backlog.mjs`・`.claude/scripts/data/lib/year-coverage-backlog.mjs`・`.claude/scripts/page-quality/lib/ui-findings.ts`) を同じ差分で直す。土木ノートのタグ名 `[領域:]` に合わせる。
+  4. `monthly.md` の `focus_lanes` を `focus_domains` にし、`/monthly-plan`・`/weekly-plan`・`todo-curator`・`docs-vs-issues.md` の記述を直す。`node .claude/scripts/lib/sync-codex-mirror.cjs` でミラーを同期する。
+  5. 管理画面 `/strategy/lanes` の表示を領域に直す (URL は変えない)。
+  6. `node .claude/scripts/metrics/build-measurement-cycle.mjs --week <週>` で KPI ツリー節の★ (重点の KPI) が領域から引けることを確認する。
+- **停止条件**: 自動起票の生成元が他にも見つかり置換漏れが出る場合は、`[レーン:]` を読む互換を一時的に残して別カードにする。月の境目を過ぎても着手できない場合は、計測の重点を崩さないよう翌月の境目まで延ばす。
+- **完了条件**: バックログに `[レーン:` が 0 件で、検証コマンドが exit 0。月次計画の重点が領域で書かれている。
 
 ### [DOMAIN-ADMIN-NAV-01] 管理画面のサイドメニューを領域ごとに domains.json から描き、画面の種類の規則を入れる
 タグ: [UI・UX] [種類:改善] [実行:対話] [検証:npm run check-domains && npm run type-check --workspace admin] [起票:2026-09-27] [レーン:基盤]
