@@ -77,6 +77,10 @@ updated: 2026-09-21
 
 タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [検証:npm run measurement:status -- --check] [起票:2026-09-21] [レーン:計測]
 
+- **2026-09-27 進捗 (もしも・KDP は自動化で解消)**: 手動収集 run `36312413051` で A8・もしも・KDP・afb・GSC・ココナラの 6 取得元が pass、残りは note (`report_incomplete`) だけ。
+  もしもはセッションが数時間で切れ、定期実行が 4〜5 時間遅れて動くのが原因だった → Mac の `measurement-session-refresh.sh` がログイン直後に収集を起動し、定期実行はその日収集済みなら gate で省略する。
+  KDP はキーチェーン自動ログイン (オーナー承認) を追加し、本棚の検索が 1 ページ目以外を見つけられない不具合 (publication_status_incomplete) をページ送りで直した。**残り: note の取得不完全**と、定期実行の gate が main 反映後に効くことの確認。
+
 - **owner**: オーナー（初期/期限切れ認証）/ devops-runner（CI検証・release・鮮度監視）
 - **配信後検証**: 独立post-deploy smoke `35602527517`（main `f199eb2e0`）もhealth / Playwright / cache warmingを含め成功。本番 `/`・`/geo`・`/ranking`・`/themes/population-dynamics` のHTTP 200を別途確認。これは配信の検証であり、下記の認証付き収集・定期起動の未完了を解消しない。
 - **保護機構の本番反映（2026-09-21）**: PR #1005は24 checks PASSで21:45 JSTにmain `f199eb2e0`へmerge。Deploy `35601436791`は本番配信・route smoke・sitemap検査まで成功し、main→developを同期済み。手動のhealth `35601845511`では認証待ち3sourceとnote欠測を正しく表示し、Issue #763を更新。補完判定は6時間猶予前のため`dispatch:false / schedule_not_overdue`（実POSTは未検証）。実scheduleは引き続き0件で、手動healthやpushの成功を定期起動実績に数えない。別系統のcron異常5件（Gemini HTTP402、backlog削除ledger gate、OGP原稿404/metadata、出典URL timeout、note回遊不整合）は横断監視Issue #763に残存し、監視自身を含む6件の異常を無視して全体正常とはしない。
