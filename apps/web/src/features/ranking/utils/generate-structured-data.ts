@@ -15,6 +15,20 @@ import { buildPublisherOrganization } from "@/lib/structured-data/scripts";
 import { buildRankingSummary } from "./build-ranking-summary";
 
 /**
+ * 本文に書く年ラベル (「2023年」/「2023年度」)。item.json の availableYears の yearName は metric の
+ * yearFormat を反映しているのでそれを使う。見つからないときは従来の「年度」表記に戻す
+ * (2026-09-27 まで暦年の指標でも「○年度」と書いていた)。
+ */
+function resolveYearLabel(
+  rankingItem: Pick<RankingItem, "availableYears">,
+  selectedYear: string,
+): string {
+  const year = selectedYear.slice(0, 4);
+  const name = rankingItem.availableYears?.find((y) => y.yearCode?.slice(0, 4) === year)?.yearName?.trim();
+  return name === `${year}年` || name === `${year}年度` ? name : `${selectedYear}年度`;
+}
+
+/**
  * ランキングページのdescriptionを生成（JSON-LD 用）
  */
 function buildDescription({
@@ -22,24 +36,26 @@ function buildDescription({
   sourceName,
   rankingValues,
   selectedYear,
+  yearLabel,
   unit,
 }: {
   itemName: string;
   sourceName: string;
   rankingValues: RankingValue[];
   selectedYear: string | undefined;
+  yearLabel: string;
   unit: string;
 }): string {
-  const fallback = `日本の都道府県別${itemName}のランキングデータ。${sourceName}から取得した政府統計データを基に、47都道府県の${itemName}をランキング形式で表示しています。${selectedYear ? `${selectedYear}年度のデータを使用しています。` : ""}`;
+  const fallback = `日本の都道府県別${itemName}のランキングデータ。${sourceName}から取得した政府統計データを基に、47都道府県の${itemName}をランキング形式で表示しています。${selectedYear ? `${yearLabel}のデータを使用しています。` : ""}`;
 
   const summary = buildRankingSummary(rankingValues, unit);
   if (!summary) return fallback;
 
   if (selectedYear) {
-    return `${itemName}の${selectedYear}年度の都道府県別ランキング。1位は${summary.top1Name}${summary.top1ValueText ? `（${summary.top1ValueText}）` : ""}。${summary.top3Names ? `上位3位は${summary.top3Names}です。` : ""}${sourceName}から取得した政府統計データを基に、全国データを除いた47都道府県の${itemName}をランキング形式で表示しています。`;
+    return `${itemName}の${yearLabel}の都道府県別ランキング。1位は${summary.top1Name}${summary.top1ValueText ? `（${summary.top1ValueText}）` : ""}。${summary.top3Names ? `上位3位は${summary.top3Names}です。` : ""}${sourceName}から取得した政府統計データを基に、全国データを除いた47都道府県の${itemName}をランキング形式で表示しています。`;
   }
 
-  return `${itemName}の都道府県別ランキング。${summary.top1Name}が1位${summary.top1ValueText ? `（${summary.top1ValueText}）` : ""}。${sourceName}から取得した政府統計データを基に、47都道府県の${itemName}を比較できます。年度別の推移も確認できます。`;
+  return `${itemName}の都道府県別ランキング。${summary.top1Name}が1位${summary.top1ValueText ? `（${summary.top1ValueText}）` : ""}。${sourceName}から取得した政府統計データを基に、47都道府県の${itemName}を比較できます。年ごとの推移も確認できます。`;
 }
 
 /**
@@ -161,7 +177,8 @@ export function generateRankingFAQStructuredData({
 
   const itemName = getRankingTitle(rankingItem);
   const unit = rankingItem.unit || "";
-  const yearSuffix = selectedYear ? `（${selectedYear}年度）` : "";
+  const yearLabel = selectedYear ? resolveYearLabel(rankingItem, selectedYear) : "";
+  const yearSuffix = selectedYear ? `（${yearLabel}）` : "";
 
   const sorted = [...prefValues].sort((a, b) => (a.rank ?? 99) - (b.rank ?? 99));
   const top = sorted[0];
@@ -179,7 +196,7 @@ export function generateRankingFAQStructuredData({
   const faqs: { q: string; a: string }[] = [
     {
       q: `都道府県別${itemName}ランキングで1位はどこですか？`,
-      a: `${yearSuffix ? selectedYear + "年度の" : ""}${itemName}ランキング1位は${top.areaName}です。${top.value != null ? `値は${top.value}${unit}` : ""}${yearSuffix}。`,
+      a: `${yearSuffix ? yearLabel + "の" : ""}${itemName}ランキング1位は${top.areaName}です。${top.value != null ? `値は${top.value}${unit}` : ""}${yearSuffix}。`,
     },
     {
       q: `${itemName}が最も低い（少ない）都道府県はどこですか？`,
@@ -187,7 +204,7 @@ export function generateRankingFAQStructuredData({
     },
     {
       q: `${itemName}の全国平均はいくつですか？`,
-      a: `${yearSuffix ? selectedYear + "年度の" : ""}全国平均は約${avgText}です。最多は${top.areaName}（${top.value}${unit}）、最少は${bottom.areaName}（${bottom.value}${unit}）です。`,
+      a: `${yearSuffix ? yearLabel + "の" : ""}全国平均は約${avgText}です。最多は${top.areaName}（${top.value}${unit}）、最少は${bottom.areaName}（${bottom.value}${unit}）です。`,
     },
     {
       q: `${itemName}の都道府県格差はどのくらいですか？`,
@@ -272,11 +289,13 @@ export function generateRankingPageStructuredData({
   const url = `${baseUrl}/ranking/${rankingItem.rankingKey}`;
 
   // descriptionを50文字以上に改善し、ランキングデータの具体的な情報を含める
+  const yearLabel = selectedYear ? resolveYearLabel(rankingItem, selectedYear) : "";
   const description = buildDescription({
     itemName,
     sourceName,
     rankingValues,
     selectedYear,
+    yearLabel,
     unit,
   });
 
@@ -288,7 +307,7 @@ export function generateRankingPageStructuredData({
   return {
     "@context": "https://schema.org",
     "@type": "Dataset",
-    name: selectedYear ? `${itemName} ${selectedYear}年度` : itemName,
+    name: selectedYear ? `${itemName} ${yearLabel}` : itemName,
     description,
     url,
     keywords: [

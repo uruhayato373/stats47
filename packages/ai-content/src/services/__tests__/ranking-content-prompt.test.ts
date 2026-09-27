@@ -36,6 +36,7 @@ const input: RankingContentInput = {
   rankingName: "パン消費支出額",
   unit: "円",
   yearCode: "2024",
+  yearName: "2024年",
   top10: rows.slice(0, 2),
   bottom10: rows.slice(2),
   allPrefectures: rows,
