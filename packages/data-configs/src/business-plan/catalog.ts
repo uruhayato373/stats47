@@ -513,10 +513,10 @@ export const BUSINESS_PLAN_METRICS: readonly BusinessPlanMetric[] = [
     role: 'guardrail',
     kpiTier: 'guardrail',
     cadence: 'weekly',
-    source: 'CI / audit state',
+    source: '.claude/state/ranking/integrity-audit.json',
     measurementStatus: 'partially-measured',
     unit: '%',
-    note: 'provenance・単位・分布・GISライセンスを含む。',
+    note: '週次のランキング整合性監査で、どの検査 (項目・値の欠落、年のずれ、形状、計算式、値の検証など) にも引っかからなかった公開指標の割合。年表記・単位・定義の「意味の誤り」(DATA-VALUE-ERRORS-01) はこの監査に含まれないので、通過率が高くても誤りが無いとは言えない。provenance・分布・GISライセンスの監査も未接続。',
   },
   // ── KPI ツリーの駆動 KPI / ガードレール (2026-09-27)。値は build-measurement-cycle.mjs が週次に集計する。
   // 目標値は根拠 (過去事例か計算式) が揃うまで書かない (evidence-based-judgment 状況4)。

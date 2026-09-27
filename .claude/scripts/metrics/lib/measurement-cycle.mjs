@@ -271,6 +271,70 @@ export function shiftIsoWeek(week, n) {
   return isoWeekOf(addDaysIso(isoWeekRange(week).monday, n * 7));
 }
 
+/** 整合性監査の中で「指標単位の不合格」を表す一覧 (いずれかに入った指標を不合格と数える)。 */
+const INTEGRITY_FAILURE_LISTS = [
+  ["itemMissing"], ["valuesMissing"], ["yearMismatch"],
+  ["stats", "missing"], ["stats", "empty"], ["stats", "drift"],
+  ["normalized", "missing"], ["normalized", "stale"],
+  ["shape", "violations"],
+  ["recipe", "unbaked"], ["recipe", "drift"], ["recipe", "configMissing"],
+  ["valueVerification", "profileViolated"],
+  ["calculated", "staleYears"], ["calculated", "depsMissing"],
+];
+
+const keyOf = (v) => (typeof v === "string" ? v : v?.key ?? v?.rankingKey ?? v?.metric ?? null);
+
+/**
+ * データ品質ゲート通過率 = 週次のランキング整合性監査で、どの検査にも引っかからなかった公開指標の割合。
+ * 検査の定義は ranking-integrity-audit (週次 CI) が持ち、ここは一覧を数えるだけ。
+ * @param {object|null} audit .claude/state/ranking/integrity-audit.json
+ */
+export function summarizeDataQuality(audit) {
+  const active = Number(audit?.totals?.activeKeys);
+  if (!audit || !Number.isFinite(active) || active <= 0) return null;
+  const failing = new Map();
+  for (const path of INTEGRITY_FAILURE_LISTS) {
+    const list = path.reduce((v, k) => v?.[k], audit);
+    if (!Array.isArray(list)) continue;
+    for (const item of list) {
+      const key = keyOf(item);
+      if (key) failing.set(key, [...(failing.get(key) ?? []), path.join(".")]);
+    }
+  }
+  return {
+    generatedAt: audit.generatedAt ?? null,
+    active,
+    failing: failing.size,
+    passRate: ratio(active - failing.size, active),
+    byCheck: Object.fromEntries(
+      INTEGRITY_FAILURE_LISTS.map((path) => [path.join("."), path.reduce((v, k) => v?.[k], audit)])
+        .filter(([, list]) => Array.isArray(list) && list.length > 0)
+        .map(([name, list]) => [name, list.length]),
+    ),
+  };
+}
+
+/**
+ * 有料購入 = 販売台帳で期間末が今週の実売記録。台帳は手で証拠付きの記録を足す方式で、KDP・ココナラ・note の
+ * 売上を自動で取り込む経路が無い。よって記録 0 件でも販売中の商品があれば 0 件と書かず判定不能にする
+ * (週次 Issue の productRevenueLine と同じ扱い)。
+ */
+export function summarizePaidPurchases({ ledger, liveProductCount, weekStart, weekEnd }) {
+  const observations = Array.isArray(ledger?.observations) ? ledger.observations : null;
+  if (observations == null) return { status: "missing", value: null, note: "sales-ledger.json が無い" };
+  const inWeek = observations.filter((o) => typeof o?.periodEnd === "string" && o.periodEnd >= weekStart && o.periodEnd <= weekEnd);
+  if (inWeek.length > 0) {
+    const total = inWeek.reduce((sum, o) => sum + (Number(o.netRevenueYen) || 0), 0);
+    return { status: "ok", value: `${inWeek.length} 件・¥${total.toLocaleString("ja-JP")}` };
+  }
+  if (liveProductCount === 0) return { status: "ok", value: "0 件", note: "販売中の商品なし" };
+  return {
+    status: "unmeasurable",
+    value: null,
+    note: `今週の実売記録 0 件${liveProductCount == null ? "" : `・販売中は少なくとも ${liveProductCount} 点`}。売上を台帳へ自動で入れる経路が無いので 0 件とは限らない`,
+  };
+}
+
 /**
  * KPI ツリー (事業計画 catalog → kpi-tree.json) の各ノードに、今週の値・非重複の比較値・ぶら下がる施策を付ける。
  * 値を出せないノードは 0 にせず status で理由を示す (not-connected = 計測サイクルに未接続、stale / missing = 入力の欠落)。
@@ -290,7 +354,7 @@ export function shiftIsoWeek(week, n) {
  * @param {string[]} input.focusKpis 今月の重点レーンの KPI id
  * @param {number} input.maxActive active 施策の上限
  */
-export function summarizeKpiTree({ nodes, week, asOf, gscHistory, cycleHistory, journey, workContext, affiliateRows, operations, authenticated = null, improvementRows, focusKpis, maxActive }) {
+export function summarizeKpiTree({ nodes, week, asOf, gscHistory, cycleHistory, journey, workContext, affiliateRows, operations, authenticated = null, dataQuality = null, paidPurchases = null, improvementRows, focusKpis, maxActive }) {
   if (!nodes) return null;
   const prevWeek = shiftIsoWeek(week, -KPI_COMPARE_WEEKS_BACK);
   const gscNow = gscHistory?.find((r) => r.week === week) ?? null;
@@ -341,6 +405,21 @@ export function summarizeKpiTree({ nodes, week, asOf, gscHistory, cycleHistory, 
           previous: null,
           note: `最終観測 ${aff.date}。収益効率 (確定収益/1,000 imp) は ASP 成果と合わせて NSM 節で判定する`,
         };
+      case "data-quality-pass-rate": {
+        if (!dataQuality) return { status: "missing", value: null, previous: null, note: "ranking/integrity-audit.json が無い" };
+        const stale = dataQuality.generatedAt && dataQuality.generatedAt.slice(0, 10) < addDaysIso(asOf, -OPS_WINDOW_DAYS);
+        const detail = Object.entries(dataQuality.byCheck).map(([k, n]) => `${k} ${n}`).join("・");
+        return {
+          status: stale ? "stale" : "ok",
+          value: `${pct(dataQuality.passRate)} (${dataQuality.active - dataQuality.failing}/${dataQuality.active})`,
+          previous: num(cyclePrev?.dataQualityPassRate) == null ? null : pct(num(cyclePrev.dataQualityPassRate)),
+          note: `監査 ${dataQuality.generatedAt?.slice(0, 10) ?? "?"}${detail ? `・不合格 ${detail}` : ""}`,
+        };
+      }
+      case "paid-purchases":
+        return paidPurchases
+          ? { status: paidPurchases.status, value: paidPurchases.value, previous: null, note: paidPurchases.note }
+          : { status: "missing", value: null, previous: null };
       case "site-health":
         return psi || cf
           ? { status: psi?.status === "ok" && cf?.status === "ok" ? "ok" : "partial", value: `PSI モバイル中央値 ${psi?.mobileMedianScore ?? "—"}・Workers error ${pct(cf?.workersErrorRate)}`, previous: null }

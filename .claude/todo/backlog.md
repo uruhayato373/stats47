@@ -100,15 +100,6 @@ updated: 2026-09-21
 - **停止条件**: 共用案件の振り分けを推測で決めない。根拠 (両サイトの広告定義) が無い ID は unmapped のまま残す。
 - **完了条件**: 検証コマンドが `a8-cross-check-exceeded` を出さず、原因 (時刻ずれか共用漏れか) が本カードの削除コミットに書かれている。
 
-### [KPI-TREE-CONNECT-01] KPI ツリーの未接続 KPI (有料購入・データ品質ゲート通過率) を計測サイクルに接続する
-
-タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-09-27] [レーン:計測]
-
-- **背景**: 2026-09-27 に KPI ツリー (NSM → 駆動KPI → ガードレール、収益化戦略 §1.1) を計測サイクルへ配線した。`paid-purchases` (駆動) と `data-quality-pass-rate` (ガードレール・今月の重点「データ品質」の KPI) は取得元が計測サイクルに無く、`.claude/state/metrics/measurement-cycle/LATEST.md` の「KPI ツリー」節で `not-connected` と出る。重点レーンの KPI を週次で判定できない状態。
-- **次**: `paid-purchases` は販売台帳 (note / KDP / ココナラの認証付き収集 `.claude/state/metrics/authenticated/latest.json` と products state) から週次の件数を、`data-quality-pass-rate` は既存の品質監査 state (provenance・単位・分布の監査結果) から通過率を、`.claude/scripts/metrics/lib/measurement-cycle.mjs` の `summarizeKpiTree` の `valueOf` に足す。値の定義を決めたら catalog の `measurementStatus` も更新し `npm run business-plan:build-state` で再生成する。認証切れ・欠測は 0 にせず status で出す。
-- **停止条件**: 取得元の定義 (どの監査の何を通過とみなすか) が既存 state から一意に決まらないときは推測で決めず、オーナーに確認する。
-- **完了条件**: `node .claude/scripts/metrics/build-measurement-cycle.mjs --week <週>` の KPI ツリー節で 2 つの KPI が `not-connected` 以外になり、`node --test .claude/scripts/metrics/__tests__/measurement-cycle.test.mjs` に値の取得を固定するテストがある。
-
 ### [SITE-DISPLAY-SEMANTICS-AUDIT-01] 表示の「意味」(ラベルと指標・年・単位・用語) を定義・全 URL・代表 URL の 3 層で検査し、週次の UI 指摘キューにつなぐ
 
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-09-25] [レーン:データ品質]

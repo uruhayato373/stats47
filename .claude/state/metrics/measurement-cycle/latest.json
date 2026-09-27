@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "week": "2026-W38",
   "asOf": "2026-09-20",
-  "generatedAt": "2026-09-27T06:42:46.034Z",
+  "generatedAt": "2026-09-27T08:59:52.724Z",
   "sources": {
     "ga4": {
       "status": "ok",
@@ -54,10 +54,10 @@
         "unit": "件/累計",
         "source": "note / product ledger",
         "focus": false,
-        "status": "not-connected",
+        "status": "unmeasurable",
         "value": null,
         "previous": null,
-        "note": "値の取得元が計測サイクルに未接続。接続するまで判定しない",
+        "note": "今週の実売記録 0 件・販売中は少なくとも 3 点。売上を台帳へ自動で入れる経路が無いので 0 件とは限らない",
         "improvements": [
           "NOTE-KAKEI-REDESIGN-EFFECT-01",
           "NOTE-CIRCULATION-PILOT-01"
@@ -148,12 +148,12 @@
         "cadence": "weekly",
         "measurementStatus": "partially-measured",
         "unit": "%",
-        "source": "CI / audit state",
+        "source": ".claude/state/ranking/integrity-audit.json",
         "focus": true,
-        "status": "not-connected",
-        "value": null,
+        "status": "ok",
+        "value": "99.5% (2408/2420)",
         "previous": null,
-        "note": "値の取得元が計測サイクルに未接続。接続するまで判定しない",
+        "note": "監査 2026-09-26・不合格 itemMissing 12・valuesMissing 12・stats.missing 12",
         "improvements": [
           "DATA-ESTAT-FETCH-01",
           "DATA-MANUAL-RESTORE-01"

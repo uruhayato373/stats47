@@ -18,7 +18,7 @@ import { evaluateRules, flatten } from "../cloudflare/threshold-check.mjs";
 import { PROJECT_ROOT, isoWeekToDateRange, toCsv } from "./lib/auth.mjs";
 import {
   countOpsImprovements, parseCsv, renderCycleMarkdown, summarizeCloudflare, summarizeDimensionGaps, summarizeEngine,
-  summarizeJourney, summarizeKpiTree, summarizeNavCoverage, summarizeOverdue, summarizePsi, summarizeSns, summarizeWorkContext,
+  summarizeDataQuality, summarizeJourney, summarizeKpiTree, summarizePaidPurchases, summarizeNavCoverage, summarizeOverdue, summarizePsi, summarizeSns, summarizeWorkContext,
 } from "./lib/measurement-cycle.mjs";
 import { judgeability } from "./lib/gsc-improvements-adapter.mjs";
 import { parseDimensionLedger } from "../google-admin/dimension-ledger.mjs";
@@ -31,7 +31,7 @@ const ACTIVE_STATUSES = new Set(["pending", "in-progress", "effect/pending"]);
 const HISTORY_COLUMNS = [
   "week", "periodStart", "periodEnd", "blogToRankingRate", "themesToRankingRate",
   "workContextPages", "absentParams", "breakdownReadyEvents", "overdueImprovements", "gscJudgeable", "gscActive",
-  "searchClicks28d", "workContextSessions", "activeImprovements", "kpiUnlinked", "measurementFreshOk",
+  "searchClicks28d", "workContextSessions", "activeImprovements", "kpiUnlinked", "measurementFreshOk", "dataQualityPassRate",
 ];
 
 /**
@@ -81,6 +81,10 @@ function readSlice(dir, name) {
 }
 
 const readCsvIfExists = (path) => (existsSync(path) ? parseCsv(readFileSync(path, "utf8")) : null);
+const readJsonIfExists = (rel) => (existsSync(join(PROJECT_ROOT, rel)) ? JSON.parse(readFileSync(join(PROJECT_ROOT, rel), "utf8")) : null);
+/** 販売中と分かっている商品数 (KDP の S1 + 試行分。全体ではなく下限)。週次 Issue の NSM 節と同じ読み方 */
+const liveProductCountOf = (kdp) =>
+  Number.isInteger(kdp?.portfolio?.s1Live) && Number.isInteger(kdp?.portfolio?.pilotLive) ? kdp.portfolio.s1Live + kdp.portfolio.pilotLive : null;
 
 /**
  * 運用系 (PSI / Cloudflare / SNS)。判定ロジックは各 source の既存実装を使い、ここで閾値を持たない:
@@ -164,7 +168,14 @@ function main() {
     workContext,
     affiliateRows: readCsvIfExists(join(PROJECT_ROOT, ".claude/state/ads/ga4-affiliate-history.csv")),
     operations,
-    authenticated: existsSync(join(PROJECT_ROOT, AUTHENTICATED_LATEST)) ? JSON.parse(readFileSync(join(PROJECT_ROOT, AUTHENTICATED_LATEST), "utf8")) : null,
+    authenticated: readJsonIfExists(AUTHENTICATED_LATEST),
+    dataQuality: summarizeDataQuality(readJsonIfExists(".claude/state/ranking/integrity-audit.json")),
+    paidPurchases: summarizePaidPurchases({
+      ledger: readJsonIfExists(".claude/state/products/sales-ledger.json"),
+      liveProductCount: liveProductCountOf(readJsonIfExists(".claude/state/products/kdp-weekly-publication.json")),
+      weekStart: isoWeekToDateRange(week).startDate,
+      weekEnd: asOf,
+    }),
   });
 
   const state = {
@@ -218,6 +229,7 @@ function main() {
     activeImprovements: kpiTree?.improvements.active ?? "",
     kpiUnlinked: kpiTree?.improvements.unlinked.length ?? "",
     measurementFreshOk: kpiValue("measurement-freshness")?.value ?? "",
+    dataQualityPassRate: summarizeDataQuality(readJsonIfExists(".claude/state/ranking/integrity-audit.json"))?.passRate ?? "",
   });
   history.sort((a, b) => a.week.localeCompare(b.week));
   writeFileSync(historyPath, toCsv(history, HISTORY_COLUMNS));

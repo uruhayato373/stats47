@@ -15,12 +15,12 @@
 | 階層 | KPI | 今週 | 比較 | 状態 | 施策 |
 |---|---|---|---|---|---|
 | NSM | 週次収益 | — | — | see-nsm（内訳と判定不能の理由は週次 Issue の「週次収益 (NSM)」節） | — |
-| 駆動 | 有料購入 | — | — | not-connected（値の取得元が計測サイクルに未接続。接続するまで判定しない） | `NOTE-KAKEI-REDESIGN-EFFECT-01`, `NOTE-CIRCULATION-PILOT-01` |
+| 駆動 | 有料購入 | — | — | unmeasurable（今週の実売記録 0 件・販売中は少なくとも 3 点。売上を台帳へ自動で入れる経路が無いので 0 件とは限らない） | `NOTE-KAKEI-REDESIGN-EFFECT-01`, `NOTE-CIRCULATION-PILOT-01` |
 | 駆動 | 検索クリック (GSC rolling28d) | 8810 | 4360 | ok | `RANKING-REINDEX-01`, `BLOG-SEO-TYPES-01`, `BLOG-SEO-QUEUE-01`, `SURVEY-LINKAGE-02`, `BLOG-LINKROT-01`, `STP-MESSAGE-ROLLOUT-01`, `THEME-EXPANSION-EFFECT-01`, `RANK-THIN-01`, `STP-AI-WATCH-01` |
 | 駆動 | サイト内回遊率 (代表値: ブログ→ランキング) | 7.6% | — | ok | `FUNNEL-CTA-01`, `BLOG-SRCLINK-01`, `BLOG-LINKROT-01` |
 | 駆動 | アフィリエイト収益効率 | GA4 7日 imp 4862・click 8 | — | partial（最終観測 2026-09-19。収益効率 (確定収益/1,000 imp) は ASP 成果と合わせて NSM 節で判定する） | `AFF-RESOLUTION-EFFECT-01`, `AFF-RANKING-RAKUTEN-NATIVE-01`, `AFF-IMPRESSION-ROUTING-01`, `AFF-BLOG-TEXTLINK-01`, `AFF-A8-REGISTER-01`, `AFF-SCOUT-PIPE-01` |
 | 駆動 | 業務文脈の着地セッション | 3200 | — | ok | — |
-| 守り | ★ データ品質ゲート通過率 | — | — | not-connected（値の取得元が計測サイクルに未接続。接続するまで判定しない） | `DATA-ESTAT-FETCH-01`, `DATA-MANUAL-RESTORE-01` |
+| 守り | ★ データ品質ゲート通過率 | 99.5% (2408/2420) | — | ok（監査 2026-09-26・不合格 itemMissing 12・valuesMissing 12・stats.missing 12） | `DATA-ESTAT-FETCH-01`, `DATA-MANUAL-RESTORE-01` |
 | 守り | サイト健全性 | PSI モバイル中央値 71・Workers error 0.7% | — | ok | `PERF-WORKER-P99-01`, `ASSET-POLICY-BURNDOWN-01`, `DEPS-RENOVATE-01` |
 | 守り | 運用コスト | 閾値違反 24 件・R2 保存 32.952 GB | — | ok | `R2-STORAGE-01`, `TOKEN-AICONTENT-01` |
 | 守り | ★ 計測の鮮度 | 10/13 | — | degraded（欠測・古い・認証切れ: moshimo(auth_required), note(report_incomplete), kdp(auth_required)） | — |
