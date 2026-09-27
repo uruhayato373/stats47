@@ -3,14 +3,14 @@
   "_comment": "A8 レポート CSV（fetch-a8-ui-csv.mjs）の正規化 SSOT。A8 は確定処理で過去分が遡及変化するため upsert 運用（最新 fetch が正）。手で編集しない。",
   "_siteScopeNote": "siteSummary のみ対象サイトに完全分離された実績（真実源）。monthly / daily / programPeriod は **口座横断**（doboku-note 込み）で、programPeriod は programIdMap の allowlist で対象サイト分だけを抽出したもの。crossCheck が siteSummary との突合結果。",
   "site": "統計で見る都道府県",
-  "updatedAt": "2026-08-28T06:38:11.482Z",
-  "lastRun": "2026-08-28T03-35-52Z",
+  "updatedAt": "2026-09-26T13:47:26.427Z",
+  "lastRun": "2026-09-26T13-47-10Z",
   "period": {
-    "raw": "202608-202608",
-    "start": "2026-08",
-    "end": "2026-08",
+    "raw": "202609-202609",
+    "start": "2026-09",
+    "end": "2026-09",
     "granularity": "month",
-    "singleMonth": "2026-08"
+    "singleMonth": "2026-09"
   },
   "siteSummary": [
     {
@@ -27,6 +27,21 @@
       "pendingRevenueYen": 0,
       "fetchedAt": "2026-08-28T03:35:52.936Z",
       "period": "202608-202608"
+    },
+    {
+      "site": "統計で見る都道府県",
+      "impressions": 121357,
+      "clicks": 141,
+      "conversions": 0,
+      "grossRevenueYen": 0,
+      "approved": 0,
+      "revenueYen": 0,
+      "cancelledCount": 0,
+      "cancelledYen": 0,
+      "pendingCount": 0,
+      "pendingRevenueYen": 0,
+      "fetchedAt": "2026-09-26T13:47:10.921Z",
+      "period": "202609-202609"
     }
   ],
   "monthly": [
@@ -1862,21 +1877,21 @@
   "crossCheck": {
     "comparable": true,
     "exceeded": false,
-    "hasShortfall": false,
-    "withinBounds": true,
+    "hasShortfall": true,
+    "withinBounds": false,
     "shortfall": {
-      "clicks": 0,
+      "clicks": 141,
       "revenueYen": 0
     },
     "deltas": {
       "clicks": {
-        "site": 294,
-        "picked": 326,
-        "exclusive": 275,
-        "shared": 51,
-        "lowerBound": 275,
-        "upperBound": 326,
-        "delta": 32
+        "site": 141,
+        "picked": 0,
+        "exclusive": 0,
+        "shared": 0,
+        "lowerBound": 0,
+        "upperBound": 0,
+        "delta": -141
       },
       "conversions": {
         "site": 0,
@@ -1915,32 +1930,10 @@
         "delta": 0
       }
     },
-    "period": "202608-202608"
+    "period": "202609-202609"
   },
   "unmapped": [],
-  "notAttributable": [
-    {
-      "program": "af_gks_a8_001",
-      "programId": "s00000022176005",
-      "programRaw": "建設業界特化！未経験から施工管理職へ。手厚いサポートで資格取得も支援【GKSキャリア】",
-      "period": "202608-202608",
-      "reason": "両サイト共用プログラムのためstats47単独成果へ配賦できない"
-    },
-    {
-      "program": "af_jobs_a8_001",
-      "programId": "s00000023057002",
-      "programRaw": "日本最大級 施工管理・建設業界の転職サイト「建設JOBs」",
-      "period": "202608-202608",
-      "reason": "両サイト共用プログラムのためstats47単独成果へ配賦できない"
-    },
-    {
-      "program": "af_buildjob_construction_001",
-      "programId": "s00000024757004",
-      "programRaw": "ビルドジョブ｜建設業界特化の転職エージェントの無料キャリア面談",
-      "period": "202608-202608",
-      "reason": "両サイト共用プログラムのためstats47単独成果へ配賦できない"
-    }
-  ],
+  "notAttributable": [],
   "missingProgramCandidates": [],
-  "unmappedCount": 14
+  "unmappedCount": 0
 }
