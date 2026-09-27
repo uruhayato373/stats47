@@ -116,7 +116,7 @@ jobs:
       - name: 🧾 Record measurements with Claude Code (improvement-triage)
         id: claude
         if: ${{ env.DRY_RUN != 'true' }}
-        uses: anthropics/claude-code-base-action@09641f2ee92b8a382a1c63c69b915d7a4540d6b6 # Claude Code v2.1.220 (base-action main 2026-08-02)
+        uses: anthropics/claude-code-base-action@7456abb892dcd39cd63025550e1726fe65b7c5d2 # Claude Code v2.1.220 (base-action main 2026-08-02)
         env:
           NODE_VERSION: "20.x"
           GOOGLE_SERVICE_ACCOUNT_KEY_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY_JSON }}

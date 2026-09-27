@@ -140,7 +140,7 @@ jobs:
         id: review
         if: always() && steps.review_plan.outputs.run == 'true'
         timeout-minutes: 20
-        uses: anthropics/claude-code-base-action@09641f2ee92b8a382a1c63c69b915d7a4540d6b6 # v2.1.220
+        uses: anthropics/claude-code-base-action@7456abb892dcd39cd63025550e1726fe65b7c5d2 # v2.1.220
         env:
           NODE_VERSION: '20.x'
         with:
