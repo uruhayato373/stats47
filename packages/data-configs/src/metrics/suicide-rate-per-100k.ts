@@ -19,7 +19,7 @@ export const suicideRatePer100k: MetricConfig = {
     "from": 2009,
     "to": 2023,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     "colorScheme": "interpolateBlues",
     "colorSchemeType": "sequential",

@@ -20,7 +20,7 @@ export const averageAgeOfFirstMarriageWife: MetricConfig = {
     "from": 2023,
     "to": 2023,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     "colorScheme": "interpolateBlues",
     "colorSchemeType": "sequential",

@@ -19,7 +19,7 @@ export const naturalStillbirths: MetricConfig = {
     "from": 1985,
     "to": 2007,
   },
-  "yearFormat": "fiscal",
+  "yearFormat": "calendar",
   "visualization": {
     "colorScheme": "interpolateBlues",
     "colorSchemeType": "sequential",
