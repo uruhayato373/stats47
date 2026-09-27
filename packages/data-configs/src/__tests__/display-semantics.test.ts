@@ -44,12 +44,22 @@ describe("display-semantics: 2026-09-25 の実例 4 件を検知する", () => {
     expect(findings[0].severity).toBe("error");
   });
 
-  it("② 指標側に期間の宣言が無いときは断定せず warning (補記を促す) に留める", () => {
+  it("② 実在の消費支出 (2026-09-27 に subtitle へ「1か月平均」を補記) を年間と説明すると error にする", () => {
     const findings = checkLabelAgainstMetric({
       where: "x",
       label: "消費支出",
       sectionDescription: "県庁所在市の 1 世帯当たり年間支出",
       metric: lookup("consumption-expenditure-multi-person-households-per-month")!,
+    });
+    expect(findings.map((f) => [f.rule, f.severity])).toEqual([["period-mismatch", "error"]]);
+  });
+
+  it("② 指標側に期間の宣言が無いときは断定せず warning (補記を促す) に留める", () => {
+    const findings = checkLabelAgainstMetric({
+      where: "x",
+      label: "消費支出",
+      sectionDescription: "県庁所在市の 1 世帯当たり年間支出",
+      metric: { key: "undeclared-fixture", title: "消費支出", subtitle: null, unit: "円" },
     });
     expect(findings.map((f) => [f.rule, f.severity])).toEqual([["period-undeclared", "warning"]]);
   });
