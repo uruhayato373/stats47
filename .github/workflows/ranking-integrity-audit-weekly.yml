@@ -125,6 +125,20 @@ jobs:
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
 
+      # DATA-QUALITY-LOOP-01: 上の監査の deliveredYears (全 active metric の配信年) と
+      # estat-year-coverage の queue.json を 1 つのデータ品質キューへまとめる (read-only・判定のみ)。
+      # 処置 1 誤り (時点統計の年度表記) / 2 更新 / 3 調査終了候補 / 4 noindex 候補。
+      - name: 🗂️ Build data quality queue
+        continue-on-error: true
+        run: |
+          npx tsx packages/ranking/src/scripts/build-data-quality-queue.ts 2>&1 | tee /tmp/data-quality-queue.log
+          {
+            echo "### データ品質キュー (DATA-QUALITY-LOOP-01)"
+            echo '```'
+            sed -n '/## サマリ/,/## 2\./p' .claude/state/data/data-quality/LATEST.md
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
       - name: 📤 Commit audit result to develop
         run: |
           git config user.name "github-actions[bot]"
