@@ -59,7 +59,7 @@ describe("display-semantics: 2026-09-25 の実例 4 件を検知する", () => {
       where: "x",
       label: "消費支出",
       sectionDescription: "県庁所在市の 1 世帯当たり年間支出",
-      metric: { key: "undeclared-fixture", title: "消費支出", subtitle: null, unit: "円" },
+      metric: { key: "undeclared-fixture", title: "消費支出", unit: "円" },
     });
     expect(findings.map((f) => [f.rule, f.severity])).toEqual([["period-undeclared", "warning"]]);
   });
