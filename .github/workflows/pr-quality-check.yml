@@ -741,6 +741,8 @@ jobs:
           # 手編集・生成忘れを両方向で検知する。
           # 規約: .claude/rules/area-databook-standards.md
           npm run validate:area-databook --workspace=@stats47/data-configs
+          # 表示ラベルと指標定義の意味の食い違い (総数に「10万人比」等)。SITE-DISPLAY-SEMANTICS-AUDIT-01
+          npm run validate:display-semantics --workspace=@stats47/data-configs
           npm run generate:area-databook --workspace=@stats47/data-configs -- --check
           npm run generate:editorial-index --workspace=@stats47/data-configs -- --check
         continue-on-error: false

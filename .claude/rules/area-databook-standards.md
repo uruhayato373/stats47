@@ -156,6 +156,14 @@ Claude Code の codex MCP (`.claude/rules/codex-mcp.md`) とは別経路。文�
 | **error (鮮度)** | `generate:area-databook --check` — 生成物と SSOT の diff (手編集・生成忘れ両方向) |
 | **warn** (`--strict` で error) | ranked-kpi 指標の selection 未記入 / editorial 未登録県 (47 未満の残数) |
 
+**表示の意味の検査** (`npm run validate:display-semantics`・CI の Area Databook Gate): ラベル・節の説明と指標定義の
+食い違いを、テンプレート・ThemeCatalog・page-components の定義単位で見る (判定 `packages/data-configs/src/display-semantics/`)。
+指標の性質は宣言 (unit を単位の正典で解釈・title/subtitle/description・SSDS の基礎データ表か指標表か) だけから決め、
+指標キーの名前からは推定しない。宣言から言えない指標は「不明」として判定に使わない。
+error = 総数の指標に「10万人比」等のラベル / 「人口当たり」の節に総数の指標 / 年間と月額の食い違い (指標が期間を宣言している場合) /
+数値カードの部品が年を出さない。warning = 期間を指標が宣言していない・「推移」と題したチャートが時系列の型でない。
+2026-09-25 の実例 4 件は `src/__tests__/display-semantics.test.ts` の回帰テスト。
+
 ---
 
 ## 8. 禁止事項
