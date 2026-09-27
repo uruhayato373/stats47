@@ -69,8 +69,7 @@ jobs:
             if [ -n "$PREVIOUS" ]; then RETRY_ARGS+=(--previous "$PREVIOUS"); fi
             npm run note:cards:audit -- "${RETRY_ARGS[@]}" 2>&1 | tee -a /tmp/note-card-visibility.log
           fi
-          node -e 'const r=require("/tmp/note-card-visibility.json"); process.exit(r.summary.fetchFailed || r.summary.browserVerifyFailedArticles || r.summary.affectedArticles ? 1 : 0)'
-          [ "$?" -eq 0 ] || STATUS=1
+          node -e 'const r=require("/tmp/note-card-visibility.json"); process.exit(r.summary.fetchFailed || r.summary.browserVerifyFailedArticles || r.summary.affectedArticles ? 1 : 0)' || STATUS=1
           npm run note:navigation:products:check 2>&1 | tee /tmp/note-product-navigation.log
           [ "${PIPESTATUS[0]}" -eq 0 ] || STATUS=1
 
