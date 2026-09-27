@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "week": "2026-W38",
   "asOf": "2026-09-20",
-  "generatedAt": "2026-09-25T22:38:11.537Z",
+  "generatedAt": "2026-09-27T06:42:46.034Z",
   "sources": {
     "ga4": {
       "status": "ok",
@@ -14,14 +14,234 @@
       "status": "not-run",
       "detail": "--admin-audit 未指定"
     },
+    "ga4Settings": {
+      "status": "not-run",
+      "detail": "--admin-audit 未指定"
+    },
     "improvements": {
       "status": "ok",
-      "detail": "active 29 件"
+      "detail": "active 26 件"
     },
     "effectVerdicts": {
       "status": "ok",
       "detail": "verdicts-2026-W38.json"
     }
+  },
+  "kpiTree": {
+    "compareWeek": "2026-W34",
+    "nodes": [
+      {
+        "id": "weekly-revenue",
+        "label": "週次収益",
+        "tier": "nsm",
+        "cadence": "weekly",
+        "measurementStatus": "partially-measured",
+        "unit": "円/月換算",
+        "source": ".claude/state/metrics/",
+        "focus": false,
+        "status": "see-nsm",
+        "value": null,
+        "previous": null,
+        "note": "内訳と判定不能の理由は週次 Issue の「週次収益 (NSM)」節",
+        "improvements": []
+      },
+      {
+        "id": "paid-purchases",
+        "label": "有料購入",
+        "tier": "driver",
+        "cadence": "weekly",
+        "measurementStatus": "partially-measured",
+        "unit": "件/累計",
+        "source": "note / product ledger",
+        "focus": false,
+        "status": "not-connected",
+        "value": null,
+        "previous": null,
+        "note": "値の取得元が計測サイクルに未接続。接続するまで判定しない",
+        "improvements": [
+          "NOTE-KAKEI-REDESIGN-EFFECT-01",
+          "NOTE-CIRCULATION-PILOT-01"
+        ]
+      },
+      {
+        "id": "search-clicks",
+        "label": "検索クリック (GSC rolling28d)",
+        "tier": "driver",
+        "cadence": "weekly",
+        "measurementStatus": "measured",
+        "unit": "クリック/28日",
+        "source": ".claude/state/metrics/gsc/history.csv",
+        "focus": false,
+        "status": "ok",
+        "value": "8810",
+        "previous": "4360",
+        "improvements": [
+          "RANKING-REINDEX-01",
+          "BLOG-SEO-TYPES-01",
+          "BLOG-SEO-QUEUE-01",
+          "SURVEY-LINKAGE-02",
+          "BLOG-LINKROT-01",
+          "STP-MESSAGE-ROLLOUT-01",
+          "THEME-EXPANSION-EFFECT-01",
+          "RANK-THIN-01",
+          "STP-AI-WATCH-01"
+        ]
+      },
+      {
+        "id": "site-circulation-rate",
+        "label": "サイト内回遊率 (代表値: ブログ→ランキング)",
+        "tier": "driver",
+        "cadence": "weekly",
+        "measurementStatus": "measured",
+        "unit": "%",
+        "source": "GA4 internal-transitions.csv (referrer 集計)",
+        "focus": false,
+        "status": "ok",
+        "value": "7.6%",
+        "previous": null,
+        "improvements": [
+          "FUNNEL-CTA-01",
+          "BLOG-SRCLINK-01",
+          "BLOG-LINKROT-01"
+        ]
+      },
+      {
+        "id": "affiliate-yield",
+        "label": "アフィリエイト収益効率",
+        "tier": "driver",
+        "cadence": "weekly",
+        "measurementStatus": "partially-measured",
+        "unit": "円/1,000 viewable imp",
+        "source": "GA4 ga4-affiliate-history.csv + ASP 確定成果",
+        "focus": false,
+        "status": "partial",
+        "value": "GA4 7日 imp 4862・click 8",
+        "previous": null,
+        "note": "最終観測 2026-09-19。収益効率 (確定収益/1,000 imp) は ASP 成果と合わせて NSM 節で判定する",
+        "improvements": [
+          "AFF-RESOLUTION-EFFECT-01",
+          "AFF-RANKING-RAKUTEN-NATIVE-01",
+          "AFF-IMPRESSION-ROUTING-01",
+          "AFF-BLOG-TEXTLINK-01",
+          "AFF-A8-REGISTER-01",
+          "AFF-SCOUT-PIPE-01"
+        ]
+      },
+      {
+        "id": "work-context-sessions",
+        "label": "業務文脈の着地セッション",
+        "tier": "driver",
+        "cadence": "weekly",
+        "measurementStatus": "measured",
+        "unit": "セッション/28日",
+        "source": "GA4 landing-context.csv",
+        "focus": false,
+        "status": "ok",
+        "value": "3200",
+        "previous": null,
+        "improvements": []
+      },
+      {
+        "id": "data-quality-pass-rate",
+        "label": "データ品質ゲート通過率",
+        "tier": "guardrail",
+        "cadence": "weekly",
+        "measurementStatus": "partially-measured",
+        "unit": "%",
+        "source": "CI / audit state",
+        "focus": true,
+        "status": "not-connected",
+        "value": null,
+        "previous": null,
+        "note": "値の取得元が計測サイクルに未接続。接続するまで判定しない",
+        "improvements": [
+          "DATA-ESTAT-FETCH-01",
+          "DATA-MANUAL-RESTORE-01"
+        ]
+      },
+      {
+        "id": "site-health",
+        "label": "サイト健全性",
+        "tier": "guardrail",
+        "cadence": "weekly",
+        "measurementStatus": "measured",
+        "unit": "PSIモバイル中央値 / Workersエラー率",
+        "source": ".claude/state/metrics/{psi,cloudflare}/history.csv",
+        "focus": false,
+        "status": "ok",
+        "value": "PSI モバイル中央値 71・Workers error 0.7%",
+        "previous": null,
+        "improvements": [
+          "PERF-WORKER-P99-01",
+          "ASSET-POLICY-BURNDOWN-01",
+          "DEPS-RENOVATE-01"
+        ]
+      },
+      {
+        "id": "operating-cost",
+        "label": "運用コスト",
+        "tier": "guardrail",
+        "cadence": "weekly",
+        "measurementStatus": "partially-measured",
+        "unit": "閾値違反数 / R2保存GB",
+        "source": ".claude/state/metrics/cloudflare/ + claude-usage/history.csv",
+        "focus": false,
+        "status": "ok",
+        "value": "閾値違反 24 件・R2 保存 32.952 GB",
+        "previous": null,
+        "improvements": [
+          "R2-STORAGE-01",
+          "TOKEN-AICONTENT-01"
+        ]
+      },
+      {
+        "id": "measurement-freshness",
+        "label": "計測の鮮度",
+        "tier": "guardrail",
+        "cadence": "weekly",
+        "measurementStatus": "measured",
+        "unit": "鮮度okの計測源 / 全計測源",
+        "source": ".claude/state/metrics/measurement-cycle/latest.json",
+        "focus": true,
+        "status": "degraded",
+        "value": "10/13",
+        "previous": null,
+        "note": "欠測・古い・認証切れ: moshimo(auth_required), note(report_incomplete), kdp(auth_required)",
+        "improvements": []
+      }
+    ],
+    "improvements": {
+      "active": 26,
+      "maxActive": 10,
+      "unlinked": [],
+      "noTarget": [
+        "PERF-WORKER-P99-01",
+        "R2-STORAGE-01",
+        "DATA-ESTAT-FETCH-01",
+        "DATA-MANUAL-RESTORE-01",
+        "AFF-IMPRESSION-ROUTING-01",
+        "RANKING-REINDEX-01",
+        "BLOG-SEO-TYPES-01",
+        "BLOG-SEO-QUEUE-01",
+        "SURVEY-LINKAGE-02",
+        "FUNNEL-CTA-01",
+        "AFF-BLOG-TEXTLINK-01",
+        "AFF-A8-REGISTER-01",
+        "AFF-SCOUT-PIPE-01",
+        "BLOG-SRCLINK-01",
+        "BLOG-LINKROT-01",
+        "STP-MESSAGE-ROLLOUT-01",
+        "THEME-EXPANSION-EFFECT-01",
+        "NOTE-CIRCULATION-PILOT-01",
+        "ASSET-POLICY-BURNDOWN-01",
+        "RANK-THIN-01",
+        "STP-AI-WATCH-01",
+        "DEPS-RENOVATE-01"
+      ]
+    },
+    "focusWithoutImprovements": [
+      "measurement-freshness"
+    ]
   },
   "engine": {
     "verdictsWeek": "2026-W38",
@@ -34,17 +254,9 @@
       }
     },
     "gsc": {
-      "active": 9,
+      "active": 6,
       "judgeable": 0,
       "missing": [
-        {
-          "id": "SEARCH-GROWTH-CYCLE-01",
-          "missing": [
-            "[gsc-page: /path]",
-            "デプロイ済 YYYY-MM-DD",
-            "[target: +N clicks]"
-          ]
-        },
         {
           "id": "RANKING-REINDEX-01",
           "missing": [
@@ -70,23 +282,7 @@
           ]
         },
         {
-          "id": "BLOG-SEO-PACE-01",
-          "missing": [
-            "[gsc-page: /path]",
-            "デプロイ済 YYYY-MM-DD",
-            "[target: +N clicks]"
-          ]
-        },
-        {
           "id": "BLOG-LINKROT-01",
-          "missing": [
-            "[gsc-page: /path]",
-            "デプロイ済 YYYY-MM-DD",
-            "[target: +N clicks]"
-          ]
-        },
-        {
-          "id": "SITE-LINKROT-01",
           "missing": [
             "[gsc-page: /path]",
             "デプロイ済 YYYY-MM-DD",
@@ -270,6 +466,7 @@
       "desktopShare": 0.496,
       "workdayHoursShare": 0.447
     },
+    "qualifyingSessions": 3200,
     "top": [
       {
         "landingPage": "/",
@@ -331,7 +528,7 @@
   },
   "dimensionGaps": null,
   "improvements": {
-    "active": 29,
+    "active": 26,
     "overdue": []
   }
 }

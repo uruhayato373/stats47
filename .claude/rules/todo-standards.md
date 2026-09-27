@@ -29,7 +29,7 @@ doboku-note = `scripts/lib/backlog-lib.mjs` (admin・CI・検査はすべてこ�
 | 週間 | `weekly.md` | 今週実行する分 (backlog からの pull コピー = 行き先) | 両方 |
 | 月間 | `monthly.md` | 今月の重点とゴール (月初に backlog から pull) | 両方 |
 | 年間 | `annual.md` | 年間スケジュール (試験カレンダー等の季節構造) | doboku のみ |
-| 改善 | `improvements.md` | **stats47 固有層**。effect 判定つき施策の 6 列テーブル (ID/タイトル/Status/Due/Owner/Metric)。カード構文の対象外で、improvement-triage の排他 write + effect-verdict エンジンが判定を書く | stats47 のみ |
+| 改善 | `improvements.md` | **stats47 固有層**。effect 判定つき施策の 6 列テーブル (ID/タイトル/Status/Due/Owner/Metric)。カード構文の対象外で、improvement-triage の排他 write + effect-verdict エンジンが判定を書く。各行のタイトルに KPI ツリーの `[kpi: id]` 必須 (DG079)、`[target:]` 無しと active 上限超過は DG080 | stats47 のみ |
 
 フローは `backlog → 月初 pull → monthly → weekly`。週次・月次計画はカードの ID を参照し、
 本文・status を複製しない。**完了 = カード (行) の削除** — 記録は git 履歴が持つ。
@@ -57,7 +57,7 @@ doboku-note = `scripts/lib/backlog-lib.mjs` (admin・CI・検査はすべてこ�
 
 | 軸 | 語彙 | 意味 |
 |---|---|---|
-| **tier** (見出し) | 🔴 高 / 🟡 中 / 🟢 低 / 🟣 判断待ち | 緊急度のみ。**🟣 は「やるかどうかの意思決定が未了」であって、ユーザー作業待ちの置き場ではない** (待ち先は `[実行:]` が表す) |
+| **tier** (見出し) | 🔴 高 / 🟡 中 / 🟢 低 / 🟣 判断待ち | 緊急度のみ。(stats47) 🔴 は今月の重点で今月着手するものと損失の出ている不具合に限り上限 10 枚、起票 30 日超の未着手 🔴 は月次計画で 🟡 へ下げる (DG081)。**🟣 は「やるかどうかの意思決定が未了」であって、ユーザー作業待ちの置き場ではない** (待ち先は `[実行:]` が表す) |
 | **カテゴリ** (先頭の裸 token) | コンテンツ品質 / UI・UX / 収益化 / エージェント・SSOT / SNS・マーケ / インフラ・計測 | ドメイン |
 | **`[種類:X]`** | 不具合 / 改善 / 意思決定 / 制作 / 定期 | tier・カテゴリと直交する軸。決定規則は §4 |
 | **`[実行:X]`** | sweep / 機械 / 対話 / ユーザー / windows / 別環境 | 誰が完了まで持てるか。自動処理が単独で回せるのは `sweep`・`機械` のみ |

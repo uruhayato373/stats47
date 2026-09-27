@@ -13,6 +13,7 @@
  * 終了コード: 違反は 1 (commit しない)。判定ロジックは lib/improvement-cycle-{proposal,gate}.mjs。
  */
 import { execFileSync } from "node:child_process";
+import { createRequire } from "node:module";
 import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { summarizeClaudeExecution } from "../lib/summarize-claude-execution.mjs";
@@ -20,6 +21,7 @@ import { PROJECT_ROOT } from "./lib/auth.mjs";
 import { evaluateRun } from "./lib/improvement-cycle-gate.mjs";
 import { applyProposal } from "./lib/improvement-cycle-proposal.mjs";
 
+const strategyLanes = createRequire(import.meta.url)("../lib/strategy-lanes.cjs");
 const IMPROVEMENTS = ".claude/todo/improvements.md";
 const BACKLOG = ".claude/todo/backlog.md";
 const SKILLS = ".claude/skills/analytics";
@@ -87,6 +89,8 @@ function main() {
     afterBacklog: read(BACKLOG),
     diffText: `${git("diff", base)}\n${untrackedAsDiff}`,
     denials: readDenials(arg("--execution-file")),
+    kpiIds: strategyLanes.readKpiNodes(PROJECT_ROOT)?.map((n) => n.id) ?? null,
+    maxActive: strategyLanes.MAX_ACTIVE_IMPROVEMENTS,
   });
   const problems = [...applied.problems, ...result.problems];
   const state = {

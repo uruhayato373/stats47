@@ -7,7 +7,12 @@
  *       `<!-- strategy-lanes:start -->` 〜 `end` の表。レーンの名前・構え・順番はそこだけに書く。
  *       ここにレーン名の写しを持たない (手で二重管理すると必ずずれる)。
  *
- * 利用者: check-docs-governance.cjs (DG073〜DG078) と管理画面 /strategy/lanes。
+ * KPI: レーン表の KPI 列と improvements.md の `[kpi: id]` は、事業計画 catalog の KPI ツリー
+ *      (`.claude/state/business-plan/kpi-tree.json`、`npm run business-plan:build-state` が生成) の id だけを参照できる。
+ *
+ * 計画の規律: 🔴 の上限と鮮度 (DG081)、連続未達 Must の再掲禁止 (DG082)。
+ *
+ * 利用者: check-docs-governance.cjs (DG073〜DG082)・週次メトリクス Issue (cycle-health.mjs)・管理画面 /strategy/lanes。
  * カードのパースは backlog-lib.cjs を使い、ここでは別実装を持たない。
  */
 
@@ -21,7 +26,27 @@ const ATTACK = '攻める';
 const FROZEN = '凍結';
 const START = '<!-- strategy-lanes:start -->';
 const END = '<!-- strategy-lanes:end -->';
-const COLUMNS = ['順', 'レーン', '構え', '今の狙い', '構えを変える条件', '改善Metric'];
+const COLUMNS = ['順', 'レーン', '構え', '今の狙い', '構えを変える条件', '改善Metric', 'KPI'];
+const KPI_TREE = '.claude/state/business-plan/kpi-tree.json';
+/**
+ * 同時に判定まで回す active 施策の上限。超えている間は新しい施策を足さず、月次計画で削る。
+ * 2026-09-27 に active 29 件・判定済み 5 件 (improvements.md) だった実測から、一人運用で週次に判定を回せる量として置いた運用方針値。
+ */
+const MAX_ACTIVE_IMPROVEMENTS = 10;
+/**
+ * バックログ 🔴 (今月中に着手したい) の上限と鮮度。🔴 は起票時に付いたまま下がらず、2026-09-27 に 31 枚
+ * (うち 29 枚が 9 月起票) まで膨らみ、週次 Must 3 件も未達だった。🔴 は「今月の重点で今月着手するもの」に限る。
+ * 上限は週次 Must 3 件 × 月 4 週を下回る運用方針値。値はここだけに置く (DG081 と週次 Issue が共有)。
+ */
+const MAX_HIGH_TIER_CARDS = 10;
+const HIGH_TIER_MAX_AGE_DAYS = 30;
+/** 連続未達がこの週数以上なら、未達 Must を同じ形で次週 Must に再掲させない (DG082)。cycle-health と共有 */
+const MUST_MISS_STREAK_LIMIT = 2;
+/** 分割して 1 週で届く大きさにした持ち越し Must に付ける目印 */
+const SPLIT_MARKER = '[分割]';
+const REVIEWS_DIR = '.claude/skills/management/weekly-review/reference/reviews';
+const KPI_MARKER = /\[kpi:\s*([^\]]+)\]/;
+const TARGET_MARKER = /\[target:\s*[^\]]+\]/;
 const PLAN_SECTIONS = ['Must', 'Should', 'Could'];
 
 function cellsOf(line) {
@@ -55,7 +80,7 @@ function parseLanes(text) {
       errors.push(`レーン表の行の列数が違う: ${row.trim()}`);
       continue;
     }
-    const [order, name, stance, aim, gate, metrics] = cells;
+    const [order, name, stance, aim, gate, metrics, kpis] = cells;
     if (!/^\d+$/.test(order)) errors.push(`${name} の順が整数でない: ${order}`);
     if (!name) errors.push('レーン名が空の行がある');
     if (!STANCES.includes(stance)) errors.push(`${name} の構えが語彙外: ${stance} (${STANCES.join(' / ')})`);
@@ -67,6 +92,7 @@ function parseLanes(text) {
       aim,
       gate,
       improvementMetrics: metrics === '—' || metrics === '' ? [] : metrics.split(',').map((m) => m.trim()),
+      kpis: kpis === '—' || kpis === '' ? [] : kpis.split(',').map((m) => m.trim()),
     });
   }
   const orders = lanes.map((l) => l.order);
@@ -92,7 +118,82 @@ function resolveImprovementLane(metric, lanes) {
   return null;
 }
 
-/** improvements.md の 6 列表から ID と Metric だけを取る。 */
+/** 週次レビュー本文から「Must N/M」を取る。書式は「Must **0/3**」と「Must 1/3」の両方がある */
+function parseMustRatio(reviewText) {
+  const m = String(reviewText ?? '').match(/Must\s*\*{0,2}(\d+)\/(\d+)\*{0,2}/);
+  return m ? { done: Number(m[1]), planned: Number(m[2]) } : null;
+}
+
+/** 週次レビューの結果表で「| Must … | **未達** |」の行に出てくる ID。 */
+function parseUnmetMustIds(reviewText) {
+  const ids = new Set();
+  for (const ln of String(reviewText ?? '').replace(/\r\n/g, '\n').split('\n')) {
+    if (!/^\|\s*Must\b/.test(ln) || !/未達/.test(ln)) continue;
+    for (const m of ln.matchAll(/`([A-Z0-9]+(?:-[A-Z0-9]+)+)`/g)) ids.add(m[1]);
+  }
+  return [...ids];
+}
+
+/** 新しい週から並べたレビュー [{week, text}] の、最新週・連続未達週数・最新週の未達 Must ID。 */
+function summarizeReviews(reviews) {
+  let missStreak = 0;
+  for (const r of reviews) {
+    const ratio = parseMustRatio(r.text);
+    if (!ratio || ratio.done >= ratio.planned) break;
+    missStreak += 1;
+  }
+  const latest = reviews[0] ?? null;
+  return {
+    latestWeek: latest?.week ?? null,
+    latestRatio: latest ? parseMustRatio(latest.text) : null,
+    missStreak,
+    unmetIds: latest ? parseUnmetMustIds(latest.text) : [],
+  };
+}
+
+const daysSince = (date, today) => Math.floor((Date.parse(`${today}T00:00:00Z`) - Date.parse(`${date}T00:00:00Z`)) / 86_400_000);
+
+/**
+ * 計画の規律 (純関数)。
+ * DG081 (warning): 🔴 が上限超過 / 起票から HIGH_TIER_MAX_AGE_DAYS 日を過ぎた未着手の 🔴。月次計画で 🟡 へ下げるか分割する。
+ * DG082 (error): 連続未達が MUST_MISS_STREAK_LIMIT 週以上なのに、前週の未達 Must を [分割] なしで今週の Must に再掲した。
+ */
+function auditPlanDiscipline({ cards, weeklyText, reviews, today, files }) {
+  const issues = [];
+  const high = cards.filter((c) => c.tier === 'high');
+  if (high.length > MAX_HIGH_TIER_CARDS) {
+    issues.push({ level: 'warning', code: 'DG081', file: files.backlog, message: `🔴 が ${high.length} 枚で上限 ${MAX_HIGH_TIER_CARDS} 枚を超えている。月次計画で今月の重点・不具合以外を 🟡 へ下げる` });
+  }
+  const staleHigh = today ? high.filter((c) => c.filed && !c.wip && daysSince(c.filed, today) > HIGH_TIER_MAX_AGE_DAYS).map((c) => c.id ?? c.title) : [];
+  if (staleHigh.length) {
+    issues.push({ level: 'warning', code: 'DG081', file: files.backlog, message: `起票から ${HIGH_TIER_MAX_AGE_DAYS} 日を過ぎた未着手の 🔴 ${staleHigh.length} 枚: ${staleHigh.join(', ')}。🟡 へ下げるか 1 か月で終わる大きさに分割する` });
+  }
+  const review = summarizeReviews(reviews);
+  const planWeek = (String(weeklyText ?? '').match(/^week:\s*(\S+)/m) ?? [])[1] ?? null;
+  const repeated = [];
+  if (review.missStreak >= MUST_MISS_STREAK_LIMIT && planWeek && review.latestWeek && planWeek > review.latestWeek) {
+    const unmet = new Set(review.unmetIds);
+    for (const item of parseWeeklyItems(weeklyText)) {
+      if (item.section !== 'Must' || item.text.includes(SPLIT_MARKER)) continue;
+      // 主 ID (項目で最初に書いた ID) だけで見る。本文で他の施策に触れただけの項目を再掲と数えない
+      // (2026-W39 の Must 1 は AFF-MEASURE-RECOVER-01 の作業で、前週未達の AFF-IMPRESSION-ROUTING-01 に言及していた)
+      const primary = item.ids[0];
+      if (primary && unmet.has(primary)) repeated.push(`L${item.line} ${primary}`);
+    }
+  }
+  for (const r of repeated) {
+    issues.push({ level: 'error', code: 'DG082', file: files.weekly, message: `Must が ${review.missStreak} 週連続未達なのに、${review.latestWeek} の未達 Must を同じ形で再掲している (${r})。1 週で届く完了条件に分割して見出しに ${SPLIT_MARKER} を付けるか、Should へ降格する` });
+  }
+  return { issues, highCount: high.length, staleHigh, review, repeated };
+}
+
+/** improvements.md のタイトルにある `[kpi: a, b]` の id 列。目印が無ければ null。 */
+function parseKpiMarker(title) {
+  const m = String(title ?? '').match(KPI_MARKER);
+  return m ? m[1].split(',').map((id) => id.trim()).filter(Boolean) : null;
+}
+
+/** improvements.md の 6 列表から ID・タイトル・Status・Metric を取る。 */
 function parseImprovementRows(text) {
   const out = [];
   let inTier = false;
@@ -101,7 +202,15 @@ function parseImprovementRows(text) {
     if (!inTier || !ln.startsWith('|')) return;
     const cells = cellsOf(ln);
     if (cells.length !== 6 || cells[0] === 'ID' || /^[-:\s]+$/.test(cells[0])) return;
-    out.push({ id: cells[0], metric: cells[5], line: i + 1 });
+    out.push({
+      id: cells[0],
+      title: cells[1],
+      status: cells[2],
+      metric: cells[5],
+      kpis: parseKpiMarker(cells[1]),
+      hasTarget: TARGET_MARKER.test(cells[1]),
+      line: i + 1,
+    });
   });
   return out;
 }
@@ -160,12 +269,51 @@ function parseWeeklyItems(weeklyText) {
  *
  * @returns {{lanes, focusLanes, cardLanes: Map, weekly, issues: Array<{level, code, file, message}>}}
  */
-function auditLaneAlignment({ strategyText, backlogText, improvementsText, monthlyText, weeklyText, files = {} }) {
+/**
+ * 施策 → KPI の配線 (純関数)。kpiNodes が null (KPI ツリー未生成) なら検査しない。
+ * DG079 (error): レーン表の KPI 列・施策の `[kpi:]` が KPI ツリーに無い id / 施策に `[kpi:]` が無い。
+ * DG080 (warning): active 施策が上限超過 / `[target:]` の無い施策 (効果判定エンジンが insufficient-target で止まる)。
+ */
+function auditKpiLinkage({ lanes, improvementRows, kpiNodes, files }) {
+  const issues = [];
+  if (!kpiNodes) {
+    issues.push({ level: 'warning', code: 'DG079', file: KPI_TREE, message: 'KPI ツリーが無い。`npm run business-plan:build-state` で生成する' });
+    return { issues, byKpi: new Map() };
+  }
+  const known = new Set(kpiNodes.map((n) => n.id));
+  for (const lane of lanes) {
+    for (const id of lane.kpis) {
+      if (!known.has(id)) issues.push({ level: 'error', code: 'DG079', file: files.strategy, message: `レーン ${lane.name} の KPI が KPI ツリーに無い: ${id}` });
+    }
+  }
+  const byKpi = new Map(kpiNodes.map((n) => [n.id, []]));
+  for (const row of improvementRows) {
+    if (!row.kpis || row.kpis.length === 0) {
+      issues.push({ level: 'error', code: 'DG079', file: files.improvements, message: `${row.id} に [kpi: <id>] が無い。どの KPI を動かす施策かを KPI ツリーの id で書く` });
+      continue;
+    }
+    for (const id of row.kpis) {
+      if (!known.has(id)) issues.push({ level: 'error', code: 'DG079', file: files.improvements, message: `${row.id} の [kpi: ${id}] が KPI ツリーに無い (${[...known].join(', ')})` });
+      else byKpi.get(id).push(row.id);
+    }
+  }
+  if (improvementRows.length > MAX_ACTIVE_IMPROVEMENTS) {
+    issues.push({ level: 'warning', code: 'DG080', file: files.improvements, message: `active 施策 ${improvementRows.length} 件が上限 ${MAX_ACTIVE_IMPROVEMENTS} 件を超えている。新しい施策を足さず、月次計画で判定・backlog 降格して削る` });
+  }
+  const noTarget = improvementRows.filter((r) => !r.hasTarget).map((r) => r.id);
+  if (noTarget.length) {
+    issues.push({ level: 'warning', code: 'DG080', file: files.improvements, message: `[target:] の無い施策 ${noTarget.length} 件 (効果を機械判定できない): ${noTarget.join(', ')}` });
+  }
+  return { issues, byKpi };
+}
+
+function auditLaneAlignment({ strategyText, backlogText, improvementsText, monthlyText, weeklyText, kpiNodes = null, reviews = [], today = null, files = {} }) {
   const f = {
     strategy: STRATEGY_DOC,
     backlog: '.claude/todo/backlog.md',
     monthly: '.claude/todo/monthly.md',
     weekly: '.claude/todo/weekly.md',
+    improvements: '.claude/todo/improvements.md',
     ...files,
   };
   const issues = [];
@@ -190,7 +338,12 @@ function auditLaneAlignment({ strategyText, backlogText, improvementsText, month
   if (noLane > 0) {
     add('warning', 'DG075', f.backlog, `レーン未設定 ${noLane} 件 / 全 ${cards.length} カード — todo-curator が漸次付与する`);
   }
-  for (const row of parseImprovementRows(improvementsText)) {
+  const improvementRows = parseImprovementRows(improvementsText);
+  const kpi = auditKpiLinkage({ lanes, improvementRows, kpiNodes, files: f });
+  issues.push(...kpi.issues);
+  const discipline = auditPlanDiscipline({ cards, weeklyText, reviews, today, files: f });
+  issues.push(...discipline.issues);
+  for (const row of improvementRows) {
     if (!idIndex.has(row.id)) {
       idIndex.set(row.id, { lane: resolveImprovementLane(row.metric, lanes), kind: null, source: 'improvements', title: row.id });
     }
@@ -243,7 +396,31 @@ function auditLaneAlignment({ strategyText, backlogText, improvementsText, month
   const cardLanes = new Map(lanes.map((l) => [l.name, []]));
   for (const card of cards) if (card.lane && cardLanes.has(card.lane)) cardLanes.get(card.lane).push(card);
 
-  return { lanes, focusLanes, cards, cardLanes, idIndex, weekly, issues };
+  return { lanes, focusLanes, cards, cardLanes, idIndex, weekly, kpiNodes, kpiLinks: kpi.byKpi, discipline, issues };
+}
+
+/** 週次レビューを新しい週から [{week, text}] で読む。 */
+function readReviews(root) {
+  const dir = path.join(root, REVIEWS_DIR);
+  if (!fs.existsSync(dir)) return [];
+  return fs
+    .readdirSync(dir)
+    .filter((f) => /^\d{4}-W\d{2}\.md$/.test(f))
+    .sort()
+    .reverse()
+    .map((f) => ({ week: f.replace(/\.md$/, ''), text: fs.readFileSync(path.join(dir, f), 'utf8') }));
+}
+
+/** KPI ツリーの nodes。無い・壊れているときは null (検査側が DG079 warning にする)。 */
+function readKpiNodes(root) {
+  const abs = path.join(root, KPI_TREE);
+  if (!fs.existsSync(abs)) return null;
+  try {
+    const nodes = JSON.parse(fs.readFileSync(abs, 'utf8')).nodes;
+    return Array.isArray(nodes) ? nodes : null;
+  } catch {
+    return null;
+  }
 }
 
 /**
@@ -251,9 +428,9 @@ function auditLaneAlignment({ strategyText, backlogText, improvementsText, month
  * 収益化戦略そのものが無い root (governance テストの fixture) では検査しない。
  * 実リポジトリでの存在は 00_プロジェクト管理 の固定構成検査が保証する。
  */
-function laneBoard(root) {
+function laneBoard(root, today = new Date().toISOString().slice(0, 10)) {
   if (!fs.existsSync(path.join(root, STRATEGY_DOC))) {
-    return { lanes: [], focusLanes: null, cards: [], cardLanes: new Map(), idIndex: new Map(), weekly: [], issues: [], skipped: true };
+    return { lanes: [], focusLanes: null, cards: [], cardLanes: new Map(), idIndex: new Map(), weekly: [], kpiNodes: null, kpiLinks: new Map(), discipline: null, issues: [], skipped: true };
   }
   const read = (rel) => {
     const abs = path.join(root, rel);
@@ -265,6 +442,9 @@ function laneBoard(root) {
     improvementsText: read('.claude/todo/improvements.md'),
     monthlyText: read('.claude/todo/monthly.md'),
     weeklyText: read('.claude/todo/weekly.md'),
+    kpiNodes: readKpiNodes(root),
+    reviews: readReviews(root),
+    today,
   });
 }
 
@@ -272,7 +452,21 @@ module.exports = {
   STRATEGY_DOC,
   STANCES,
   COLUMNS,
+  KPI_TREE,
+  MAX_ACTIVE_IMPROVEMENTS,
+  MAX_HIGH_TIER_CARDS,
+  HIGH_TIER_MAX_AGE_DAYS,
+  MUST_MISS_STREAK_LIMIT,
+  SPLIT_MARKER,
+  parseMustRatio,
+  parseUnmetMustIds,
+  summarizeReviews,
+  auditPlanDiscipline,
+  readReviews,
   parseLanes,
+  parseKpiMarker,
+  auditKpiLinkage,
+  readKpiNodes,
   resolveImprovementLane,
   parseImprovementRows,
   parseFocusLanes,

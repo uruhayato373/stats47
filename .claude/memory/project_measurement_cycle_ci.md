@@ -43,4 +43,16 @@ GA4 実測で止まっていた判定待ちを処理した手順 (計測→impro
   (日次生成ループは歩留まりで 2026-08-21 に削除された前例がある)。
 - 自動化できないオーナー作業: custom dimension 登録 (今は home_featured の card_variant/slot/experiment_variant だけが発火量十分)、ASP/KDP 再ログイン、本番デプロイ承認。
 
+**KPI ツリー配線 (2026-09-27)**: KPI の正典は事業計画 catalog の `kpiTier` (nsm / driver / guardrail) で、
+`business-plan:build-state` が `.claude/state/business-plan/kpi-tree.json` を書き `business-plan:check` がずれを拒否する
+(.mjs/.cjs は TS を import できないためこの写しを読む)。施策は `[kpi: id]` 必須 (docs:check DG079 error)、
+`[target:]` なし・active 上限 10 超過は DG080 warning、無人 run のゲートは新規行の目印欠落と上限超過中の追加を拒否する。
+計測サイクルは KPI ごとに今週値・4週前 (rolling28d の非重複窓) 比較・ぶら下がる施策を出し、認証付き収集の認証切れも
+「計測の鮮度」ガードレールに数える (cron 緑のまま観測が止まる経路)。上限値と目印の解釈は strategy-lanes.cjs が単一ソース。
+
+**計画の規律 (2026-09-27)**: バックログの優先度は起票時のまま下がらず 🔴 31 枚・Must 2 週連続未達だった。
+`strategy-lanes.cjs` に 🔴 上限 10 / 起票 30 日超の未着手 🔴 (DG081 warning) と、連続未達時に前週未達 Must の主 ID を
+`[分割]` なしで再掲する計画を拒否する DG082 (error) を置き、週次 Issue の「サイクルの健全性」節も同じ関数を読む。
+主 ID = 項目で最初の ID (本文で他施策に触れただけの項目を誤検知しないため)。付け替え自体は /monthly-plan + todo-curator の毎月手順。
+
 関連: [[feedback-ga4-journey-referrer-over-navclick]] [[project_monetization_contract]]

@@ -5,7 +5,9 @@ import { fileURLToPath } from 'node:url';
 import {
   BUSINESS_PLAN_2026,
   BUSINESS_PLAN_DECISION_STATUSES,
+  BUSINESS_PLAN_KPI_TIERS,
   BUSINESS_PLAN_MEASUREMENT_STATUSES,
+  buildKpiTree,
   BUSINESS_PLAN_WORK_STATUSES,
   buildM1XCanonicalUrl,
 } from '../src/business-plan';
@@ -177,6 +179,26 @@ for (const doc of BUSINESS_PLAN_2026.documents) {
 for (const metric of BUSINESS_PLAN_2026.metrics) {
   if (!BUSINESS_PLAN_MEASUREMENT_STATUSES.includes(metric.measurementStatus)) {
     errors.push(`metric:${metric.id}: measurementStatus が不正です`);
+  }
+  if (metric.kpiTier && !BUSINESS_PLAN_KPI_TIERS.includes(metric.kpiTier)) {
+    errors.push(`metric:${metric.id}: kpiTier が不正です`);
+  }
+}
+{
+  const kpiTree = buildKpiTree(BUSINESS_PLAN_2026.metrics);
+  if (kpiTree.filter((node) => node.tier === 'nsm').length !== 1) {
+    errors.push('KPI ツリー: kpiTier=nsm の metric はちょうど1つにする');
+  }
+  // 施策・レーン表・計測サイクルはこの写しを読む。catalog だけ直して再生成を忘れると参照検査が古い id 集合で走る
+  const kpiTreePath = path.join(repoRoot, '.claude/state/business-plan/kpi-tree.json');
+  const expected = JSON.stringify(kpiTree);
+  const actual = fs.existsSync(kpiTreePath)
+    ? JSON.stringify(JSON.parse(fs.readFileSync(kpiTreePath, 'utf8')).nodes)
+    : null;
+  if (actual !== expected) {
+    errors.push(
+      'KPI ツリー: .claude/state/business-plan/kpi-tree.json が catalog とずれている。`npm run business-plan:build-state` で再生成する'
+    );
   }
 }
 for (const event of BUSINESS_PLAN_2026.events) {

@@ -60,10 +60,21 @@ export interface BusinessPlanDocument {
   readonly owner: string;
 }
 
+/**
+ * 計測→記録→改善サイクルで舵取りに使う KPI ツリーの階層。
+ * nsm は月次で見る最終成果、driver は週次で動かす駆動 KPI、guardrail は悪化させてはいけない守りの指標。
+ * 施策 (.claude/todo/improvements.md の `[kpi: id]`) と戦略レーン表の KPI 列は kpiTier を持つ metric だけを参照できる。
+ */
+export const BUSINESS_PLAN_KPI_TIERS = ['nsm', 'driver', 'guardrail'] as const;
+
+export type BusinessPlanKpiTier = (typeof BUSINESS_PLAN_KPI_TIERS)[number];
+
 export interface BusinessPlanMetric {
   readonly id: string;
   readonly label: string;
   readonly role: 'north-star' | 'input' | 'guardrail' | 'hypothesis';
+  /** KPI ツリーに載せる metric だけが持つ。無いものは事業計画上の仮説・参考指標 */
+  readonly kpiTier?: BusinessPlanKpiTier;
   readonly cadence: 'daily' | 'weekly' | 'monthly' | 'quarterly';
   readonly source: string;
   readonly measurementStatus: BusinessPlanMeasurementStatus;

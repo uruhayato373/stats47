@@ -3,20 +3,21 @@
  * 週次メトリクス Issue の「サイクルの健全性」節が読む。新しい台帳は作らず、既存の
  * .claude/todo・週次レビュー・backlog-loop ledger を数えるだけ。まだ機械で数えられない段は「未計測」と出す。
  */
-import { existsSync, readdirSync, readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import { join } from "node:path";
 
 const require = createRequire(import.meta.url);
 const { parseBacklog } = require("../../lib/backlog-lib.cjs");
+// Must の読み取り・連続未達の閾値・🔴 の上限は docs:check (DG081/082) と同じ実装を使う
+const strategyLanes = require("../../lib/strategy-lanes.cjs");
 
 import { CARD_ACTIONS as GSC_CARD_ACTIONS, CARD_PREFIX as GSC_PREFIX } from "../../gsc/lib/coverage-backlog.mjs";
 import { BY_DESIGN_PATH as YEAR_BY_DESIGN, CARD_PREFIX as YEAR_PREFIX } from "../../data/lib/year-coverage-backlog.mjs";
 
 const TODO_FILES = [".claude/todo/backlog.md", ".claude/todo/improvements.md"];
-const REVIEWS_DIR = ".claude/skills/management/weekly-review/reference/reviews";
-/** 連続未達がこの週数に達したら、次週計画で分割か降格を必須にする */
-export const MUST_MISS_STREAK_LIMIT = 2;
+/** 連続未達がこの週数に達したら、次週計画で分割か降格を必須にする (DG082 が再掲を error にする) */
+export const MUST_MISS_STREAK_LIMIT = strategyLanes.MUST_MISS_STREAK_LIMIT;
 
 /** 起票 → 分類 / 実行 → 完了: レーン・種類の無いカードと期日超過のカード */
 export function summarizeCards(cards, today) {
@@ -25,10 +26,15 @@ export function summarizeCards(cards, today) {
   return { total: cards.length, unclassified, overdue };
 }
 
-/** 週次レビュー本文から「Must N/M」を取る。書式は「Must **0/3**」と「Must 1/3」の両方がある */
-export function parseMustRatio(reviewText) {
-  const m = String(reviewText).match(/Must\s*\*{0,2}(\d+)\/(\d+)\*{0,2}/);
-  return m ? { done: Number(m[1]), planned: Number(m[2]) } : null;
+export const parseMustRatio = strategyLanes.parseMustRatio;
+
+/** 前週の ISO 週 (レビューは週が終わってから書くので、今日の前週のレビューがあれば最新)。 */
+function previousIsoWeek(today) {
+  const d = new Date(Date.parse(`${today}T00:00:00Z`) - 7 * 86_400_000);
+  const day = d.getUTCDay() || 7;
+  d.setUTCDate(d.getUTCDate() + 4 - day);
+  const yearStart = Date.UTC(d.getUTCFullYear(), 0, 1);
+  return `${d.getUTCFullYear()}-W${String(Math.ceil(((d - yearStart) / 86_400_000 + 1) / 7)).padStart(2, "0")}`;
 }
 
 /** 計画 → 実行: 週の新しい順に並べた Must 比から、直近の達成率と連続未達週数を出す */
@@ -70,14 +76,9 @@ function readText(root, rel) {
 
 export function readCycleHealth(root, today) {
   const cards = TODO_FILES.flatMap((rel) => parseBacklog(readText(root, rel) ?? "")).filter((c) => c.id);
-  const reviewDir = join(root, REVIEWS_DIR);
-  const weeks = existsSync(reviewDir)
-    ? readdirSync(reviewDir)
-        .filter((f) => /^\d{4}-W\d{2}\.md$/.test(f))
-        .sort()
-        .reverse()
-        .map((f) => ({ week: f.replace(/\.md$/, ""), ratio: parseMustRatio(readFileSync(join(reviewDir, f), "utf-8")) }))
-    : [];
+  const reviews = strategyLanes.readReviews(root);
+  const weeks = reviews.map((r) => ({ week: r.week, ratio: parseMustRatio(r.text) }));
+  const board = strategyLanes.laneBoard(root, today);
   let completedIds = new Set();
   const ledgerText = readText(root, ".claude/state/backlog-loop/ledger.json");
   if (ledgerText) {
@@ -97,13 +98,27 @@ export function readCycleHealth(root, today) {
     cards: summarizeCards(cards, today),
     must: summarizeMust(weeks),
     stalePlanIds: findStalePlanIds(readText(root, ".claude/todo/weekly.md") ?? "", completedIds, new Set(cards.map((c) => c.id))),
+    review: { latestWeek: reviews[0]?.week ?? null, expectedWeek: previousIsoWeek(today) },
+    discipline: board.discipline
+      ? { highCount: board.discipline.highCount, staleHigh: board.discipline.staleHigh, repeated: board.discipline.repeated }
+      : null,
   };
 }
 
 const list = (ids, max = 8) => ids.slice(0, max).map((id) => `\`${id}\``).join(", ") + (ids.length > max ? ` ほか ${ids.length - max} 件` : "");
 
 export function formatCycleHealth(h) {
-  const { cards, must, stalePlanIds, detectors } = h;
+  const { cards, must, stalePlanIds, detectors, review, discipline } = h;
+  const reviewLine = review
+    ? review.latestWeek && review.latestWeek >= review.expectedWeek
+      ? `${review.latestWeek} まで記録済み`
+      : `⚠️ ${review.expectedWeek} のレビューが無い (最新 ${review.latestWeek ?? "なし"})。\`/weekly-review\` を実行する`
+    : "未計測";
+  const highLine = discipline
+    ? `${discipline.highCount} / 上限 ${strategyLanes.MAX_HIGH_TIER_CARDS} 枚${discipline.highCount > strategyLanes.MAX_HIGH_TIER_CARDS ? " ⚠️ 月次計画で 🟡 へ下げる" : ""}` +
+      `・${strategyLanes.HIGH_TIER_MAX_AGE_DAYS} 日超の未着手 ${discipline.staleHigh.length} 枚${discipline.staleHigh.length ? `: ${list(discipline.staleHigh)}` : ""}`
+    : "未計測";
+  const repeatLine = discipline ? (discipline.repeated.length ? `⚠️ ${discipline.repeated.join(" / ")}` : "なし") : "未計測";
   const detectorLine = detectors
     .map((d) => (d.measured ? `${d.name} 残 ${d.pending} 件・カード${d.open ? "あり" : "なし"}${d.stalled ? " ⚠️ 起票が止まっている" : ""}` : `${d.name} state なし`))
     .join(" / ");
@@ -116,9 +131,12 @@ export function formatCycleHealth(h) {
     "|---|---|---|",
     `| 検出 → 起票 | 残件があるのにカードが開いていない検出器 (自動起票が既定) | ${detectorLine} |`,
     `| 起票 → 分類 | レーンか種類の無いカード | ${cards.unclassified.length} / ${cards.total} 件${cards.unclassified.length ? `: ${list(cards.unclassified)}` : ""} |`,
+    `| 計画 | バックログ 🔴 の枚数と鮮度 (DG081) | ${highLine} |`,
     `| 計画 → 実行 | 週次 Must の達成 | ${mustLine} |`,
+    `| 計画 → 実行 | 連続未達の Must を同じ形で再掲 (DG082) | ${repeatLine} |`,
     `| 実行 → 完了 | 期日超過のカード | ${cards.overdue.length} 件${cards.overdue.length ? `: ${list(cards.overdue)}` : ""} |`,
     `| 実行 → 完了 | 完了済みなのに週次計画が参照する ID | ${stalePlanIds.length} 件${stalePlanIds.length ? `: ${list(stalePlanIds)}` : ""} |`,
+    `| 振り返り | 前週の週次レビュー | ${reviewLine} |`,
     "| 振り返り → 起票 | 申し送りがカード ID に結ばれているか | 未計測 |",
     "",
   ].join("\n");

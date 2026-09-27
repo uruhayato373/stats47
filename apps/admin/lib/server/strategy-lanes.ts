@@ -21,6 +21,8 @@ interface LibLane {
   aim: string;
   gate: string;
   improvementMetrics: string[];
+  /** レーンの構えを変える判断に使う KPI ツリーの id (収益化戦略 §1.1) */
+  kpis: string[];
 }
 interface LibCard {
   id: string | null;

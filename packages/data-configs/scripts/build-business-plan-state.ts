@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { BUSINESS_PLAN_2026 } from '../src/business-plan';
+import { BUSINESS_PLAN_2026, buildKpiTree } from '../src/business-plan';
 
 const repoRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -13,6 +13,7 @@ const outputPath = path.join(
   '.claude/state/business-plan/latest.json'
 );
 const snapshot = process.argv.includes('--snapshot');
+const KPI_TREE_PATH = '.claude/state/business-plan/kpi-tree.json';
 
 function newestMtime(rel: string): string | null {
   const full = path.join(repoRoot, rel);
@@ -92,6 +93,14 @@ const state = {
 
 fs.mkdirSync(path.dirname(outputPath), { recursive: true });
 fs.writeFileSync(outputPath, `${JSON.stringify(state, null, 2)}\n`, 'utf8');
+// KPI ツリーは .mjs / .cjs (計測サイクル・CI ゲート・docs:check) が TS を import せずに読むための写し。
+// 時刻を含めない決定的出力にし、catalog とのずれは validate-business-plan.ts が検出する。
+const kpiTreePath = path.join(repoRoot, KPI_TREE_PATH);
+fs.writeFileSync(
+  kpiTreePath,
+  `${JSON.stringify({ schemaVersion: 1, source: 'packages/data-configs/src/business-plan/catalog.ts', nodes: buildKpiTree(BUSINESS_PLAN_2026.metrics) }, null, 2)}\n`,
+  'utf8'
+);
 if (snapshot) {
   const day = state.generatedAt.slice(0, 10);
   const snapshotPath = path.join(

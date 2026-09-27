@@ -70,7 +70,7 @@ export default function StrategyLanesPage() {
         <p className="max-w-4xl text-sm text-console-muted">
           施策を収益までの流れの上のレーンに分け、どこに投資を増やすか（攻める）・現状維持か・止めるかを示す。
           月次の重点は「攻める」レーンから選び、週次の Must は重点レーンのタスクか不具合から選ぶ。
-          構えを変えるときは収益化戦略の表を編集する。判定は <code>npm run docs:check</code>（DG073〜078）と同じ。
+          構えを変えるときは収益化戦略の表を編集する。判定は <code>npm run docs:check</code>（DG073〜080）と同じ。KPI 列はレーンの構えを変える判断に使う KPI ツリーの id。
         </p>
       </PageHeading>
 
@@ -98,13 +98,13 @@ export default function StrategyLanesPage() {
         <Stat
           label="配線の検査"
           value={`error ${errors.length} / warning ${warnings.length}`}
-          sub="DG073〜078"
+          sub="DG073〜080"
           tone={errors.length ? "bad" : warnings.length ? "warn" : "good"}
         />
       </div>
 
       <Section title="レーンと構え" count={board.lanes.length}>
-        <Table columns={["順", "レーン", "構え", "今の狙い", "構えを変える条件", "backlog", "改善", "今週"]}>
+        <Table columns={["順", "レーン", "構え", "今の狙い", "構えを変える条件", "KPI", "backlog", "改善", "今週"]}>
           {board.lanes.map((lane) => (
             <Tr key={lane.name}>
               <Td nowrap muted>{lane.order}</Td>
@@ -128,6 +128,9 @@ export default function StrategyLanesPage() {
                 <div className="min-w-56">
                   <InlineText text={lane.gate} />
                 </div>
+              </Td>
+              <Td nowrap muted>
+                {lane.kpis.length ? lane.kpis.map((id) => <code key={id} className="mr-1 text-[11px]">{id}</code>) : "—"}
               </Td>
               <Td nowrap>
                 {lane.cards.length}

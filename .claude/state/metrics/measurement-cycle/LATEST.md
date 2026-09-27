@@ -6,8 +6,28 @@
 |---|---|
 | ga4 | ok（transitions=ok landing=ok events=ok pages-clean=ok） |
 | customDimensions | not-run（--admin-audit 未指定） |
-| improvements | ok（active 29 件） |
+| ga4Settings | not-run（--admin-audit 未指定） |
+| improvements | ok（active 26 件） |
 | effectVerdicts | ok（verdicts-2026-W38.json） |
+
+**KPI ツリー**（正典: 事業計画 catalog → `.claude/state/business-plan/kpi-tree.json`。比較は 4 週前 2026-W34 = 窓が重ならない値。★ = 今月の重点レーンの KPI）
+
+| 階層 | KPI | 今週 | 比較 | 状態 | 施策 |
+|---|---|---|---|---|---|
+| NSM | 週次収益 | — | — | see-nsm（内訳と判定不能の理由は週次 Issue の「週次収益 (NSM)」節） | — |
+| 駆動 | 有料購入 | — | — | not-connected（値の取得元が計測サイクルに未接続。接続するまで判定しない） | `NOTE-KAKEI-REDESIGN-EFFECT-01`, `NOTE-CIRCULATION-PILOT-01` |
+| 駆動 | 検索クリック (GSC rolling28d) | 8810 | 4360 | ok | `RANKING-REINDEX-01`, `BLOG-SEO-TYPES-01`, `BLOG-SEO-QUEUE-01`, `SURVEY-LINKAGE-02`, `BLOG-LINKROT-01`, `STP-MESSAGE-ROLLOUT-01`, `THEME-EXPANSION-EFFECT-01`, `RANK-THIN-01`, `STP-AI-WATCH-01` |
+| 駆動 | サイト内回遊率 (代表値: ブログ→ランキング) | 7.6% | — | ok | `FUNNEL-CTA-01`, `BLOG-SRCLINK-01`, `BLOG-LINKROT-01` |
+| 駆動 | アフィリエイト収益効率 | GA4 7日 imp 4862・click 8 | — | partial（最終観測 2026-09-19。収益効率 (確定収益/1,000 imp) は ASP 成果と合わせて NSM 節で判定する） | `AFF-RESOLUTION-EFFECT-01`, `AFF-RANKING-RAKUTEN-NATIVE-01`, `AFF-IMPRESSION-ROUTING-01`, `AFF-BLOG-TEXTLINK-01`, `AFF-A8-REGISTER-01`, `AFF-SCOUT-PIPE-01` |
+| 駆動 | 業務文脈の着地セッション | 3200 | — | ok | — |
+| 守り | ★ データ品質ゲート通過率 | — | — | not-connected（値の取得元が計測サイクルに未接続。接続するまで判定しない） | `DATA-ESTAT-FETCH-01`, `DATA-MANUAL-RESTORE-01` |
+| 守り | サイト健全性 | PSI モバイル中央値 71・Workers error 0.7% | — | ok | `PERF-WORKER-P99-01`, `ASSET-POLICY-BURNDOWN-01`, `DEPS-RENOVATE-01` |
+| 守り | 運用コスト | 閾値違反 24 件・R2 保存 32.952 GB | — | ok | `R2-STORAGE-01`, `TOKEN-AICONTENT-01` |
+| 守り | ★ 計測の鮮度 | 10/13 | — | degraded（欠測・古い・認証切れ: moshimo(auth_required), note(report_incomplete), kdp(auth_required)） | — |
+
+**施策の配線**: active 26 件（上限 10 件。超過中は新しい施策を足さず月次で削る）・KPI 未接続 0 件・`[target:]` なし 22 件
+
+重点レーンの KPI なのに施策が 0 件: `measurement-freshness`（今月の重点を動かす施策が台帳に無い）
 
 **回遊（referrer 集計）**
 
@@ -30,15 +50,12 @@
 
 **効果判定エンジン**（2026-W38）: gsc-blog-wave 7 件 {"effect/pending":7}
 
-GSC 施策 9 件中、機械判定できるのは 0 件。残りは目印が欠けている（目標値は根拠があるときだけ書く）:
+GSC 施策 6 件中、機械判定できるのは 0 件。残りは目印が欠けている（目標値は根拠があるときだけ書く）:
 
-- `SEARCH-GROWTH-CYCLE-01`: [gsc-page: /path]・デプロイ済 YYYY-MM-DD・[target: +N clicks]
 - `RANKING-REINDEX-01`: [gsc-page: /path]・デプロイ済 YYYY-MM-DD・[target: +N clicks]
 - `BLOG-SEO-TYPES-01`: [gsc-page: /path]・デプロイ済 YYYY-MM-DD・[target: +N clicks]
 - `BLOG-SEO-QUEUE-01`: [gsc-page: /path]・デプロイ済 YYYY-MM-DD・[target: +N clicks]
-- `BLOG-SEO-PACE-01`: [gsc-page: /path]・デプロイ済 YYYY-MM-DD・[target: +N clicks]
 - `BLOG-LINKROT-01`: [gsc-page: /path]・デプロイ済 YYYY-MM-DD・[target: +N clicks]
-- `SITE-LINKROT-01`: [gsc-page: /path]・デプロイ済 YYYY-MM-DD・[target: +N clicks]
 - `THEME-EXPANSION-EFFECT-01`: [gsc-page: /path]・デプロイ済 YYYY-MM-DD・[target: +N clicks]
 - `STP-AI-WATCH-01`: [gsc-page: /path]・デプロイ済 YYYY-MM-DD・[target: +N clicks]
 
@@ -50,6 +67,6 @@ GSC 施策 9 件中、機械判定できるのは 0 件。残りは目印が欠�
 | Cloudflare | ok（最新 2026-09-20） | Workers 745661 req・error 0.7%・R2 A 66104 / B 2472549・保存 32.952 GB | warning 17・info 7（Workers error rate > 1%、R2 account storage > 18GB、stats47 bucket storage > 12.5GB、R2 egress > 5GB/日） | `R2-STORAGE-01` |
 | SNS | ok（最新 2026-09-20） | instagram 208 投稿・reach 22427・views 26030・eng 82 | —（閾値なし） | なし |
 
-**期日超過の判定待ち**: active 29 件中 0 件
+**期日超過の判定待ち**: active 26 件中 0 件
 
 
