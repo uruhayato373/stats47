@@ -6,6 +6,8 @@ export interface RankingContentInput {
   rankingName: string;
   unit: string;
   yearCode: string;
+  /** 表示用の年ラベル (例: "2023年" / "2023年度")。metric の yearFormat を反映した R2 item の latestYear.yearName */
+  yearName: string;
   top10: { rank: number; areaName: string; value: number }[];
   bottom10: { rank: number; areaName: string; value: number }[];
   allPrefectures: { rank: number; areaName: string; value: number }[];
@@ -101,7 +103,7 @@ ${options.extraContext}
     : "";
 
   return `あなたは日本の公的統計データを正確に読み解く統計アナリストです。
-以下の「${input.rankingName}」の都道府県別ランキングデータ（${input.yearCode}年度）を分析し、Webページに掲載するコンテンツを生成してください。
+以下の「${input.rankingName}」の都道府県別ランキングデータ（${input.yearName}）を分析し、Webページに掲載するコンテンツを生成してください。
 
 ## 絶対ルール（違反は不可）
 
@@ -119,7 +121,7 @@ ${options.extraContext}
 
 - 指標: ${input.rankingName}
 - 単位: ${input.unit}
-- 年度: ${input.yearCode}年度
+- 年: ${input.yearName}
 - 平均値: ${input.average.toLocaleString()}${input.unit}
 - 最大値: ${input.max.toLocaleString()}${input.unit}
 - 最小値: ${input.min.toLocaleString()}${input.unit}
@@ -252,6 +254,6 @@ ${regionMapText}${regionRankSection}
   - OK:「中部地方では愛知県が4位と突出しているが、県ごとの差が大きい」
 - **1文に複数の都道府県を数値付きで並べない**: 個別県のデータ紹介が続くと箇条書きと変わらなくなる。代わりに地方単位やグループ単位の傾向を述べ、代表例として1県だけ引用する
 - 数値を引用する場合は、傾向を裏付ける代表例として最小限（1地方あたり1県）に留め、文章の流れの中に自然に組み込む
-- 年度を参照する場合は「${input.yearCode}年度」と表記する
+- 年を参照する場合は「${input.yearName}」と表記する (「年」と「年度」を入れ替えない)
 - 「ワースト」「ベスト」「激減」「急増」は使わない。「上位」「下位」「最も多い」「最も少ない」を使う`;
 }

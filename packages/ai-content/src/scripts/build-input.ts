@@ -52,6 +52,15 @@ function normalizeYear(raw: string | null | undefined): string {
 }
 
 /**
+ * 本文に書く年ラベル。R2 item の yearName は metric の yearFormat (暦年/年度) を反映しているのでそれを使う。
+ * 無い・形が崩れているときは従来の「年度」表記に戻す (2026-09-27 まで全 metric に「年度」を書かせていた)。
+ */
+function yearLabel(raw: string | null | undefined, yearCode: string): string {
+  const name = String(raw ?? "").trim();
+  return name === `${yearCode}年` || name === `${yearCode}年度` ? name : `${yearCode}年度`;
+}
+
+/**
  * ランキング 1 件分の生成入力を R2 から組み立てる。
  * 対象が存在しない / 観測値が空 のときは null を返す (呼び元でスキップ)。
  */
@@ -91,6 +100,7 @@ export async function buildRankingContentInput(
     rankingName,
     unit,
     yearCode,
+    yearName: yearLabel(item.latestYear?.yearName, yearCode),
     top10: sorted.slice(0, 10).map(toRow),
     bottom10: sorted.slice(-10).map(toRow),
     allPrefectures: sorted.map(toRow),

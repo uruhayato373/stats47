@@ -63,6 +63,20 @@ describe("buildRankingContentInput canonical observations", () => {
     expect(result?.input).toMatchObject({ average: 2305.3, min: 0, max: 6815.9, totalCount: 3 });
   });
 
+  it("passes the metric's own year label so calendar-year metrics are not written as 年度", async () => {
+    // 2026-09-27: プロンプトが全 metric に「○年度」と書かせ、暦年の metric (出生数など) の FAQ が「2023年度」になっていた
+    const row = { areaCode: "01000", areaName: "北海道", yearCode: "2023", yearName: "2023年", value: 1, unit: "人", rank: 1 };
+    vi.mocked(readStatsValues).mockResolvedValue({
+      metricKey: "births", entityKind: "prefecture", rows: [row],
+      meta: { rowCount: 1, yearRange: ["2023", "2023"], areaCount: 1, generatedAt: "2026-09-27T00:00:00.000Z" },
+    });
+    readItem.mockResolvedValue({ success: true, data: { title: "出生数", unit: "人", latestYear: { yearCode: "2023", yearName: "2023年" } } });
+    expect((await buildRankingContentInput("births"))?.input.yearName).toBe("2023年");
+
+    readItem.mockResolvedValue({ success: true, data: { title: "出生数", unit: "人", latestYear: { yearCode: "2023", yearName: "2023年度" } } });
+    expect((await buildRankingContentInput("births"))?.input.yearName).toBe("2023年度");
+  });
+
   it("does not fabricate input when canonical observations are unavailable", async () => {
     vi.mocked(readStatsValues).mockResolvedValue(null);
 

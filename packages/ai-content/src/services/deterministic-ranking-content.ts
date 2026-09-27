@@ -265,8 +265,8 @@ function buildFaq(input: RankingContentInput): DeterministicRankingContent["faq"
       {
         question: `${input.rankingName}で1位の都道府県はどこですか？`,
         answer: topRows.length === 1
-          ? `${input.yearCode}年度の1位は${top.areaName}で、値は${formatValue(top.value, input.unit)}です。`
-          : `${input.yearCode}年度の1位は${topRows.map((row) => row.areaName).join("・")}で、値はいずれも${formatValue(topRows[0].value, input.unit)}です。`,
+          ? `${input.yearName}の1位は${top.areaName}で、値は${formatValue(top.value, input.unit)}です。`
+          : `${input.yearName}の1位は${topRows.map((row) => row.areaName).join("・")}で、値はいずれも${formatValue(topRows[0].value, input.unit)}です。`,
         type: "top_ranking",
       },
       {
