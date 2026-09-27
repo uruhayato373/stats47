@@ -343,3 +343,9 @@ agent 用詳細ログ。施策一覧 (簡易表) は `.claude/todo/improvements.
   停止措置の因果効果を確定するには反映前に実際に配信されていたことを示す別の実測 (当時の
   inventory snapshot や impression ログ) が要るが、それは本施策の完了条件の範囲外。ブランド不適合の
   禁止事項 (`精力` / `マカ` blocklist 化) は収益化戦略 §8 に恒久化済み。
+
+### [AFF-SCOUT-PIPE-01] 週次cron運用は稼働中 — 未解決vertical・cron失敗の再発なし (2026-09-27)
+
+- 判定: A8 scoutの週次cron運用で、未解決vertical・重複・cron失敗の再発は観測されなかった。行を削除する
+- 根拠データ: `.claude/state/ads/a8-catalog.json` (2026-09-27時点) は256プログラムを保持し、`status: pending-vertical` は0件だった。`status: error` は14件あるが、確認した全件が2026-07-19の初期ブートストラップ時のapply失敗で、いずれも同日中に `reconcile-detail-2026-07-20` ノート付きで approved→applied へ復旧済みだった(例: programId `s00000023687001` のhistory)。2026-09-25T13:46〜14:20Z にcandidate→applied遷移が複数件記録されており、直近の週次cron (`scripts/scheduled/scout-asp-weekly.sh`) が正常に稼働していることを確認した
+- 再現コマンド: `grep -c '"status": "pending-vertical"' .claude/state/ads/a8-catalog.json` (0件を確認) / `grep -n '"status": "error"' .claude/state/ads/a8-catalog.json` で該当行の直前history `at` を確認し全件2026-07-19付けであることを確認
