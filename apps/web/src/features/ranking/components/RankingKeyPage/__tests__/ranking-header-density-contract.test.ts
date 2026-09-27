@@ -62,13 +62,16 @@ describe('ranking header density contract', () => {
     expect(detailsIndex).toBeGreaterThan(visualizationIndex);
   });
 
-  it('全国平均の値と推移は共通ヘッダーカードだけで一度表示する', () => {
+  it('全国の基準値 (全国値 / 単純平均) と推移は共通ヘッダーカードだけで一度表示する', () => {
     expect(PAGE_CLIENT.match(/<RankingHeaderStats\b/g)).toHaveLength(1);
     expect(PAGE_CLIENT).not.toContain('NationalTrendCard');
     expect(PAGE_MODEL).not.toContain('readNationalTrendFromR2');
 
     const trendRenderers = findRankingComponentFiles(RANKING_COMPONENT_ROOT)
-      .filter((file) => readFileSync(file, 'utf8').includes('seriesName="全国平均"'))
+      .filter((file) => {
+        const src = readFileSync(file, 'utf8');
+        return src.includes('<MiniLineChart') && src.includes('NationalFigure');
+      })
       .map((file) => path.relative(RANKING_COMPONENT_ROOT, file));
 
     expect(trendRenderers).toEqual([

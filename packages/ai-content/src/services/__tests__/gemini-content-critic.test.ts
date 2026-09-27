@@ -41,7 +41,7 @@ describe("Gemini content critic", () => {
       },
     });
     expect(prompt).toContain("北海道・東北: 北海道、青森県");
-    expect(prompt).toContain("候補JSON内の値から算出した全国平均=15");
+    expect(prompt).toContain("候補JSON内の値から算出した都道府県の単純平均=15");
     expect(prompt).toContain("外部ソースに対する正確性を保証しない");
   });
 });

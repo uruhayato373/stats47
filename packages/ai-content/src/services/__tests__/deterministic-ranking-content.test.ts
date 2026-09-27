@@ -75,4 +75,45 @@ describe("buildDeterministicRankingContent", () => {
     expect(prose).not.toContain("（全国=100）");
     expect(prose).not.toMatch(/\d(?:100|千|万ＭＪ|万通)/);
   });
+
+  describe("比較基準の呼び名 (2026-09-27 オーナー判断: 単純平均を「全国平均」と呼ばない)", () => {
+    const build = (averageLabel?: string) => {
+      const allPrefectures = fetchPrefectures().map((prefecture, index) => ({
+        rank: index + 1,
+        areaName: prefecture.prefName,
+        value: 100 - index,
+      }));
+      return buildDeterministicRankingContent({
+        rankingName: "テスト率",
+        unit: "%",
+        yearCode: "2025",
+        yearName: "2025年",
+        top10: allPrefectures.slice(0, 10),
+        bottom10: allPrefectures.slice(-10),
+        allPrefectures,
+        average: 70,
+        ...(averageLabel ? { averageLabel } : {}),
+        min: 54,
+        max: 100,
+        totalCount: allPrefectures.length,
+      });
+    };
+    const text = (content: ReturnType<typeof build>) => JSON.stringify(content);
+
+    it("公表の全国値が渡されたら「全国値」で書く", () => {
+      const content = build("全国値");
+      expect(content.faq.items.find((item) => item.type === "average")?.question).toBe(
+        "テスト率の全国値はいくつですか？",
+      );
+      expect(text(content)).not.toContain("全国平均");
+      expect(text(content)).not.toContain("単純平均");
+    });
+
+    it("全国値が無ければ「47都道府県の単純平均」で書き、全国平均とは書かない", () => {
+      const content = build();
+      expect(text(content)).toContain("47都道府県の単純平均");
+      expect(text(content)).not.toContain("全国平均");
+      expect(text(content)).not.toContain("全国値");
+    });
+  });
 });

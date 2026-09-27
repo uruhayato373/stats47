@@ -1,4 +1,4 @@
-import { computeTopRankings, filterOutNationalArea, type RankingValue } from "@stats47/ranking";
+import { computeTopRankings, resolveNationalFigure, type RankingValue } from "@stats47/ranking";
 
 /**
  * ランキングデータの要約情報（meta description / JSON-LD description 共通）
@@ -10,7 +10,7 @@ interface RankingSummary {
   top1ValueText: string;
   /** 上位3位の地域名（カンマ区切り） */
   top3Names: string;
-  /** 全国平均（テキスト、例: "全国平均123.4人"） */
+  /** 全国の基準値（例: "全国値123.4人" / "47都道府県の単純平均123.4人"） */
   avgText: string;
 }
 
@@ -34,12 +34,10 @@ export function buildRankingSummary(
     .map((d) => d.areaName)
     .join("、");
 
-  const prefectureValues = filterOutNationalArea(rankingValues);
-  const avg =
-    prefectureValues.length > 0
-      ? prefectureValues.reduce((sum, d) => sum + (d.value || 0), 0) / prefectureValues.length
-      : null;
-  const avgText = avg != null ? `全国平均${Math.round(avg * 10) / 10}${unit}` : "";
+  const national = resolveNationalFigure(rankingValues);
+  const avgText = national
+    ? `${national.label}${Math.round(national.value * 10) / 10}${unit}`
+    : "";
 
   return { top1Name: top1.areaName, top1ValueText, top3Names, avgText };
 }

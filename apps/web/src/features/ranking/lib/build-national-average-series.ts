@@ -1,68 +1,64 @@
-import type { RankingValue } from "@stats47/ranking";
+import {
+  PREFECTURE_COUNT,
+  resolveNationalFigure,
+  type NationalFigureKind,
+  type RankingValue,
+} from "@stats47/ranking";
 
-/** 全国平均系列の 1 点 (1 年分) */
+/** 全国の基準値系列の 1 点 (1 年分) */
 export interface NationalAveragePoint {
   /** 4 桁年 (MiniLineChart の ChartPoint が number を要求するため) */
   year: number;
   yearCode: string;
   yearName: string;
-  /** その年の都道府県平均 */
+  /** その年の全国の基準値 (公表の全国値、無ければ都道府県の単純平均) */
   value: number;
-  /** 平均の母数になった都道府県数 (47 未満の年は変化率の算出から外す) */
+  /** 単純平均の母数。公表値の年は 47 とみなす (変化率の算出から外さない) */
   count: number;
+  /** 公表値 (全国計 / 全国値) か単純平均か */
+  kind: NationalFigureKind;
 }
 
-/** 都道府県の総数 (変化率を出してよいか判定する母数) */
-const PREFECTURE_COUNT = 47;
-
-/** 全国行。R2 の ranking values には無いはずだが防御的に除外する */
-const NATIONAL_AREA_CODE = "00000";
-
 /**
- * 全年の ranking values から「全国平均」の時系列を組み立てる。
+ * 全年の ranking values から全国の基準値の時系列を組み立てる。
  *
- * R2 の ranking values (`app/ranking/<key>/values.json`) には全国行 (00000) が
- * 無いため、各年の都道府県平均を全国系列として使う。
- * theme-dashboard の buildNationalSeries と同じ根拠だが、こちらは変化率の
- * 判定に使う count と、ラベル表示に使う yearCode / yearName を保持する。
+ * 各年を resolveNationalFigure に通し、公表の全国値 (00000) があればそれ、
+ * 無ければ都道府県の単純平均を使う。公表値の年が 1 つでもあれば公表値の年だけを
+ * 残す — 単純平均と全国値は別の量なので、1 本の線につなぐと偽の段差が出る。
  */
 export function buildNationalAverageSeries(
   allYears: RankingValue[],
 ): NationalAveragePoint[] {
   const byYear = new Map<
     number,
-    { yearCode: string; yearName: string; sum: number; count: number }
+    { yearCode: string; yearName: string; rows: RankingValue[] }
   >();
 
   for (const row of allYears) {
-    if (row.areaCode === NATIONAL_AREA_CODE) continue;
-    if (typeof row.value !== "number" || !Number.isFinite(row.value)) continue;
-
     const year = Number(String(row.yearCode).slice(0, 4));
     if (!Number.isFinite(year)) continue;
-
     const bucket = byYear.get(year);
-    if (bucket) {
-      bucket.sum += row.value;
-      bucket.count += 1;
-    } else {
-      byYear.set(year, {
-        yearCode: row.yearCode,
-        yearName: row.yearName,
-        sum: row.value,
-        count: 1,
-      });
-    }
+    if (bucket) bucket.rows.push(row);
+    else byYear.set(year, { yearCode: row.yearCode, yearName: row.yearName, rows: [row] });
   }
 
-  return [...byYear.entries()]
-    .map(([year, b]) => ({
+  const points: NationalAveragePoint[] = [];
+  for (const [year, b] of byYear) {
+    const figure = resolveNationalFigure(b.rows);
+    if (!figure) continue;
+    points.push({
       year,
       yearCode: b.yearCode,
       yearName: b.yearName,
-      value: b.sum / b.count,
-      count: b.count,
-    }))
+      value: figure.value,
+      count: figure.prefectureCount ?? PREFECTURE_COUNT,
+      kind: figure.kind,
+    });
+  }
+
+  const hasOfficial = points.some((p) => p.kind !== "simple-mean");
+  return points
+    .filter((p) => !hasOfficial || p.kind !== "simple-mean")
     .sort((a, b) => a.year - b.year);
 }
 

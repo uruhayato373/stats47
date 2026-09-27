@@ -3,6 +3,7 @@
 import { useMemo } from "react";
 
 import { cn } from "@stats47/components";
+import { resolveNationalFigure, type RankingValue } from "@stats47/ranking";
 
 import type { AreaType } from "@/features/area";
 
@@ -15,7 +16,6 @@ import { RankingNationalAverageStat } from "./RankingNationalAverageStat";
 import { RankingTopThreeList } from "./RankingTopThreeList";
 
 import type { NationalAveragePoint } from "../../lib/build-national-average-series";
-import type { RankingValue } from "@stats47/ranking";
 
 interface RankingHeaderStatsProps {
   rankingValues: RankingValue[];
@@ -55,9 +55,14 @@ export function RankingHeaderStats({
     [rankingValues],
   );
 
+  const nationalFigure = useMemo(
+    () => resolveNationalFigure(rankingValues),
+    [rankingValues],
+  );
+
   if (stats.count === 0) return null;
 
-  // 市区町村モードでは「全国平均」を出さない。1,700 超の市区町村の単純平均は
+  // 市区町村モードでは全国の基準値を出さない。1,700 超の市区町村の単純平均は
   // 都道府県平均とも全国値とも別の量で、同じラベルで見せると誤読になる。
   const showNationalAverage = areaType === "prefecture";
 
@@ -72,7 +77,7 @@ export function RankingHeaderStats({
         <RankingTopThreeList stats={stats} unit={unit} precision={precision} />
         {showNationalAverage && (
           <RankingNationalAverageStat
-            average={stats.average}
+            figure={nationalFigure}
             unit={unit}
             series={nationalAverageSeries}
             yearName={yearName}

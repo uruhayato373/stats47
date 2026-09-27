@@ -12,11 +12,13 @@ import {
 } from "../../lib/build-national-average-series";
 import { formatRankingValue } from "../../utils/compute-ranking-header-stats";
 
+import type { NationalFigure } from "@stats47/ranking";
+
 interface RankingNationalAverageStatProps {
-  /** 選択年の全国平均 (client 側で rankingValues から算出済み) */
-  average: number | null;
+  /** 選択年の全国の基準値 (resolveNationalFigure で解決済み) */
+  figure: NationalFigure | null;
   unit: string;
-  /** 選択中の計算方法に対応した全国平均の推移 */
+  /** 選択中の計算方法に対応した全国の基準値の推移 */
   series: NationalAveragePoint[];
   /** 大きい数値がどの年のものか */
   yearName?: string | null;
@@ -30,20 +32,21 @@ interface RankingNationalAverageStatProps {
 const CHART_HEIGHT = 84;
 
 /**
- * 全国平均と、その推移。
+ * 全国の基準値と、その推移。
  *
  * 大きい数値は「選択年」、線は「全期間」で意味が違うため、両方にラベルを付けて
- * 取り違えを防ぐ。R2 の ranking values に全国行 (00000) が無いため、全国平均は
- * 47 都道府県の単純平均である旨を明記する。
+ * 取り違えを防ぐ。公表の全国値 (00000) があれば「全国値」(総数なら「全国計」)、
+ * 無ければ「47都道府県の単純平均」と明記する (lib/resolve-national-figure.ts)。
  */
 export function RankingNationalAverageStat({
-  average,
+  figure,
   unit,
   series,
   yearName,
   precision,
 }: RankingNationalAverageStatProps) {
-  if (average === null) return null;
+  if (figure === null) return null;
+  const label = figure.label;
 
   const hasTrend = series.length >= 2;
   const periodChange = computeNationalAveragePeriodChange(series, unit);
@@ -53,10 +56,10 @@ export function RankingNationalAverageStat({
       <div className="@sm:grid @sm:grid-cols-[minmax(0,1fr)_260px] @sm:grid-rows-[auto_1fr] @sm:gap-x-4 @md:block">
         <div className="flex items-baseline justify-between gap-2 @sm:col-start-1 @sm:row-start-1">
           <span className="text-sm font-medium text-muted-foreground">
-            {yearName ? `全国平均 ${yearName}` : "全国平均"}
+            {yearName ? `${label} ${yearName}` : label}
           </span>
           <span className="text-xl font-bold text-foreground">
-            {formatRankingValue(average, precision)}
+            {formatRankingValue(figure.value, precision)}
             {formatUnitForDisplay(unit)}
           </span>
         </div>
@@ -65,7 +68,7 @@ export function RankingNationalAverageStat({
           {hasTrend ? (
             <MiniLineChart
               points={series.map((p) => ({ year: p.year, value: p.value }))}
-              seriesName="全国平均"
+              seriesName={label}
               unit={unit}
               height={CHART_HEIGHT}
             />
@@ -77,7 +80,7 @@ export function RankingNationalAverageStat({
         <div className="mt-0.5 flex items-center justify-end gap-1 text-[10px] text-muted-foreground @sm:col-start-1 @sm:row-start-2 @sm:mt-0 @sm:self-end @sm:justify-start @md:mt-0.5 @md:justify-end">
           {hasTrend ? (
             <span>
-              47都道府県の単純平均
+              {label}
               {periodChange && (
                 <>
                   {" ・ "}
@@ -86,7 +89,7 @@ export function RankingNationalAverageStat({
               )}
             </span>
           ) : (
-            <span>47都道府県の単純平均</span>
+            <span>{label}</span>
           )}
         </div>
       </div>

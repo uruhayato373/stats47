@@ -49,12 +49,23 @@ describe("buildRankingSummary", () => {
     expect(result!.top1ValueText).toBe("14000万人");
   });
 
-  it("全国平均を都道府県データのみから算出する", () => {
+  it("公表の全国値 (00000) があれば単純平均ではなく「全国値」を出す", () => {
     const result = buildRankingSummary(sampleData, "万人");
 
     expect(result).not.toBeNull();
-    // 全国(00000)を除いた4県の平均: (14000+9200+8800+7500)/4 = 9875
-    expect(result!.avgText).toBe("全国平均9875万人");
+    // 4 県の合計 39,500 と一致しないので総数ではなく全国値として扱う
+    expect(result!.avgText).toBe("全国値125000万人");
+  });
+
+  it("全国値が無ければ県だけの単純平均を母数付きで出す (「全国平均」と呼ばない)", () => {
+    const result = buildRankingSummary(
+      sampleData.filter((v) => v.areaCode !== "00000"),
+      "万人",
+    );
+
+    // (14000+9200+8800+7500)/4 = 9875
+    expect(result!.avgText).toBe("4都道府県の単純平均9875万人");
+    expect(result!.avgText).not.toContain("全国平均");
   });
 
   it("空配列の場合は null を返す", () => {
