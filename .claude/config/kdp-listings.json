@@ -137,13 +137,23 @@
           "unpublishAfterReplacementLive": true
         }
       ],
-      "asin": null,
+      "asin": "B0HKFB434W",
       "publishedAt": "2026-09-20",
-      "kdpStatus": "in_review",
-      "kdpStatusLabel": "レビュー中",
-      "kdpStatusCheckedAt": "2026-09-20T00:08:59.191Z",
+      "kdpStatus": "live",
+      "kdpStatusLabel": "販売中",
+      "kdpStatusCheckedAt": "2026-09-27T10:20:45.930Z",
       "draftId": "A2F38IFN8TM1T8",
-      "lastSubmittedAt": "2026-09-20"
+      "lastSubmittedAt": "2026-09-20",
+      "salesStartedAt": "2026-09-27",
+      "publicationStage": "live",
+      "publicationStageUpdatedAt": "2026-09-27T10:20:45.930Z",
+      "publicationStageEvidence": {
+        "live": {
+          "at": "2026-09-27T10:20:45.930Z",
+          "statusLabel": "販売中",
+          "asin": "B0HKFB434W"
+        }
+      }
     },
     "K-S1-02": {
       "id": "K-S1-02",
@@ -279,13 +289,23 @@
           "unpublishAfterReplacementLive": true
         }
       ],
-      "asin": null,
+      "asin": "B0HKF4NLDV",
       "publishedAt": "2026-09-20",
-      "kdpStatus": "in_review",
-      "kdpStatusLabel": "レビュー中",
-      "kdpStatusCheckedAt": "2026-09-20T00:25:21.963Z",
+      "kdpStatus": "live",
+      "kdpStatusLabel": "販売中",
+      "kdpStatusCheckedAt": "2026-09-27T10:21:07.325Z",
       "draftId": "A1EF8ZRCLEYWBG",
-      "lastSubmittedAt": "2026-09-20"
+      "lastSubmittedAt": "2026-09-20",
+      "salesStartedAt": "2026-09-27",
+      "publicationStage": "live",
+      "publicationStageUpdatedAt": "2026-09-27T10:21:07.325Z",
+      "publicationStageEvidence": {
+        "live": {
+          "at": "2026-09-27T10:21:07.325Z",
+          "statusLabel": "販売中",
+          "asin": "B0HKF4NLDV"
+        }
+      }
     },
     "K-S1-03": {
       "id": "K-S1-03",
@@ -559,13 +579,23 @@
           "unpublishAfterReplacementLive": true
         }
       ],
-      "asin": null,
+      "asin": "B0HKF5MMF9",
       "publishedAt": "2026-09-20",
-      "kdpStatus": "in_review",
-      "kdpStatusLabel": "レビュー中",
-      "kdpStatusCheckedAt": "2026-09-20T00:36:19.818Z",
+      "kdpStatus": "live",
+      "kdpStatusLabel": "販売中",
+      "kdpStatusCheckedAt": "2026-09-27T10:21:28.328Z",
       "draftId": "ABTY3P3T9JVF8",
-      "lastSubmittedAt": "2026-09-20"
+      "lastSubmittedAt": "2026-09-20",
+      "salesStartedAt": "2026-09-27",
+      "publicationStage": "live",
+      "publicationStageUpdatedAt": "2026-09-27T10:21:28.328Z",
+      "publicationStageEvidence": {
+        "live": {
+          "at": "2026-09-27T10:21:28.328Z",
+          "statusLabel": "販売中",
+          "asin": "B0HKF5MMF9"
+        }
+      }
     },
     "K-S1-06": {
       "id": "K-S1-06",
@@ -770,13 +800,23 @@
           "unpublishAfterReplacementLive": true
         }
       ],
-      "asin": null,
+      "asin": "B0HKFB2359",
       "publishedAt": "2026-09-20",
-      "kdpStatus": "in_review",
-      "kdpStatusLabel": "レビュー中",
-      "kdpStatusCheckedAt": "2026-09-20T00:53:57.897Z",
+      "kdpStatus": "live",
+      "kdpStatusLabel": "販売中",
+      "kdpStatusCheckedAt": "2026-09-27T10:21:49.139Z",
       "draftId": "A3HT6UMNDH08OC",
-      "lastSubmittedAt": "2026-09-20"
+      "lastSubmittedAt": "2026-09-20",
+      "salesStartedAt": "2026-09-27",
+      "publicationStage": "live",
+      "publicationStageUpdatedAt": "2026-09-27T10:21:49.139Z",
+      "publicationStageEvidence": {
+        "live": {
+          "at": "2026-09-27T10:21:49.139Z",
+          "statusLabel": "販売中",
+          "asin": "B0HKFB2359"
+        }
+      }
     },
     "K-S1-08": {
       "id": "K-S1-08",
@@ -912,13 +952,23 @@
           "unpublishAfterReplacementLive": true
         }
       ],
-      "asin": null,
+      "asin": "B0HKDVYP8M",
       "publishedAt": "2026-09-20",
-      "kdpStatus": "in_review",
-      "kdpStatusLabel": "レビュー中",
-      "kdpStatusCheckedAt": "2026-09-20T01:02:53.093Z",
+      "kdpStatus": "live",
+      "kdpStatusLabel": "販売中",
+      "kdpStatusCheckedAt": "2026-09-27T10:22:09.834Z",
       "draftId": "AYBKBS2W0CEIH",
-      "lastSubmittedAt": "2026-09-20"
+      "lastSubmittedAt": "2026-09-20",
+      "salesStartedAt": "2026-09-27",
+      "publicationStage": "live",
+      "publicationStageUpdatedAt": "2026-09-27T10:22:09.834Z",
+      "publicationStageEvidence": {
+        "live": {
+          "at": "2026-09-27T10:22:09.834Z",
+          "statusLabel": "販売中",
+          "asin": "B0HKDVYP8M"
+        }
+      }
     },
     "K-S1-09": {
       "id": "K-S1-09",
@@ -1054,13 +1104,23 @@
           "unpublishAfterReplacementLive": true
         }
       ],
-      "asin": null,
+      "asin": "B0HKDXP4NM",
       "publishedAt": "2026-09-20",
-      "kdpStatus": "in_review",
-      "kdpStatusLabel": "レビュー中",
-      "kdpStatusCheckedAt": "2026-09-20T01:12:19.408Z",
+      "kdpStatus": "live",
+      "kdpStatusLabel": "販売中",
+      "kdpStatusCheckedAt": "2026-09-27T10:22:30.277Z",
       "draftId": "A1CY4CGC4RA9EJ",
-      "lastSubmittedAt": "2026-09-20"
+      "lastSubmittedAt": "2026-09-20",
+      "salesStartedAt": "2026-09-27",
+      "publicationStage": "live",
+      "publicationStageUpdatedAt": "2026-09-27T10:22:30.277Z",
+      "publicationStageEvidence": {
+        "live": {
+          "at": "2026-09-27T10:22:30.277Z",
+          "statusLabel": "販売中",
+          "asin": "B0HKDXP4NM"
+        }
+      }
     },
     "K-S1-10": {
       "id": "K-S1-10",
@@ -1196,13 +1256,23 @@
           "unpublishAfterReplacementLive": true
         }
       ],
-      "asin": null,
+      "asin": "B0HKDV78TG",
       "publishedAt": "2026-09-20",
-      "kdpStatus": "in_review",
-      "kdpStatusLabel": "レビュー中",
-      "kdpStatusCheckedAt": "2026-09-20T01:21:17.439Z",
+      "kdpStatus": "live",
+      "kdpStatusLabel": "販売中",
+      "kdpStatusCheckedAt": "2026-09-27T10:22:51.852Z",
       "draftId": "A1GNQCILOBWHIY",
-      "lastSubmittedAt": "2026-09-20"
+      "lastSubmittedAt": "2026-09-20",
+      "salesStartedAt": "2026-09-27",
+      "publicationStage": "live",
+      "publicationStageUpdatedAt": "2026-09-27T10:22:51.852Z",
+      "publicationStageEvidence": {
+        "live": {
+          "at": "2026-09-27T10:22:51.852Z",
+          "statusLabel": "販売中",
+          "asin": "B0HKDV78TG"
+        }
+      }
     },
     "K-S1-11": {
       "id": "K-S1-11",
@@ -1338,13 +1408,23 @@
           "unpublishAfterReplacementLive": true
         }
       ],
-      "asin": null,
+      "asin": "B0HKFGQB8Q",
       "publishedAt": "2026-09-20",
-      "kdpStatus": "in_review",
-      "kdpStatusLabel": "レビュー中",
-      "kdpStatusCheckedAt": "2026-09-20T01:32:35.531Z",
+      "kdpStatus": "live",
+      "kdpStatusLabel": "販売中",
+      "kdpStatusCheckedAt": "2026-09-27T10:23:12.790Z",
       "draftId": "AZ47QB1EPQ5SA",
-      "lastSubmittedAt": "2026-09-20"
+      "lastSubmittedAt": "2026-09-20",
+      "salesStartedAt": "2026-09-27",
+      "publicationStage": "live",
+      "publicationStageUpdatedAt": "2026-09-27T10:23:12.790Z",
+      "publicationStageEvidence": {
+        "live": {
+          "at": "2026-09-27T10:23:12.790Z",
+          "statusLabel": "販売中",
+          "asin": "B0HKFGQB8Q"
+        }
+      }
     },
     "K-S1-12": {
       "id": "K-S1-12",
@@ -1480,13 +1560,23 @@
           "unpublishAfterReplacementLive": true
         }
       ],
-      "asin": null,
+      "asin": "B0HKF7C6JQ",
       "publishedAt": "2026-09-20",
-      "kdpStatus": "in_review",
-      "kdpStatusLabel": "レビュー中",
-      "kdpStatusCheckedAt": "2026-09-20T01:41:47.650Z",
+      "kdpStatus": "live",
+      "kdpStatusLabel": "販売中",
+      "kdpStatusCheckedAt": "2026-09-27T10:23:33.405Z",
       "draftId": "A23MSYRRHKWKGB",
-      "lastSubmittedAt": "2026-09-20"
+      "lastSubmittedAt": "2026-09-20",
+      "salesStartedAt": "2026-09-27",
+      "publicationStage": "live",
+      "publicationStageUpdatedAt": "2026-09-27T10:23:33.405Z",
+      "publicationStageEvidence": {
+        "live": {
+          "at": "2026-09-27T10:23:33.405Z",
+          "statusLabel": "販売中",
+          "asin": "B0HKF7C6JQ"
+        }
+      }
     },
     "K-S2-01": {
       "id": "K-S2-01",
