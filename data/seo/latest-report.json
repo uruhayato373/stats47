@@ -6,7 +6,7 @@
     "periodEnd": "2026-09-24",
     "windowDays": 7
   },
-  "inputHash": "95a582e632fb615f29ef8b93b54e677f17ed0f07c126dfd6ad7c5ec3388bcf80",
+  "inputHash": "9b0df6b4eecbd4864186b9c5f54137c9c41da9540f807136939bc48bfbd135a0",
   "movements": [
     {
       "keyword": "日本人口ランキング",
@@ -106,16 +106,7 @@
       "reason": "query-page-not-reported"
     }
   ],
-  "selected": {
-    "keyword": "全国の公衆電話の数",
-    "targetPath": "/ranking/public-phone-count",
-    "rank": 6.562087582483503,
-    "impressions": 1667,
-    "clicks": 2,
-    "group": 5,
-    "previousMethod": null,
-    "editableFile": "packages/data-configs/src/metrics/public-phone-count.ts"
-  },
+  "selected": null,
   "observing": [
     {
       "keyword": "40代 未婚 割合 日本 国勢調査",
@@ -142,6 +133,11 @@
       "keyword": "高校教師 年収",
       "targetPath": "/blog/high-school-teacher-salary-prefecture-gap",
       "proposalId": "35963238547-1"
+    },
+    {
+      "keyword": "全国の公衆電話の数",
+      "targetPath": "/ranking/public-phone-count",
+      "proposalId": "36300590263-1"
     }
   ]
 }
