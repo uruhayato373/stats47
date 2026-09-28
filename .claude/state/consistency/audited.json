@@ -1,7 +1,5 @@
 {
-  "hash": "578496d7677c16176218609eb04ededbb322bca8496852550606310fec73ab4f",
-  "audited_at": "2026-09-28T00:36:32",
-  "files": [
-    ".claude/scripts/note/audit-note-card-visibility.mjs"
-  ]
+  "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "audited_at": "2026-09-28T01:04:57",
+  "files": []
 }
