@@ -148,7 +148,7 @@ KPI は W39 snapshot の `finalized7d` と重複しない `previous7d` だけで
 
 - **`AUTHENTICATED-MEASUREMENT-ACTIVATION-01`**: note ダッシュボードの取得が report_incomplete。再ログインか取得範囲の判断をしてほしい。
 - **`GSC-COVERAGE-DEPLOY-01`**: カバレッジ是正と入力鮮度ガードの本番反映の承認。
-- **`CF-CPU-SURGE-01`**: 次の手順（route 別 CPU 時間の確認）に Cloudflare の MCP 認証が要る。対話型の `claude` ターミナルで `/mcp` から `cloudflare-observability` と `cloudflare-graphql` を認証してほしい。
+- **`CF-CPU-SURGE-01`**: 次の手順として、route 別 CPU 時間を Cloudflare Dashboard の Workers Observability で確認してほしい。
 - **`EXP-006`**: YouTube Studio のチャンネル所有確認と、動画の手動公開の可否。
 - **target 欠落7件（BLOG-WAVE）**: 「終了」か「事前 target を定義して新規計測」かを選んでほしい。推測では補わない。
 - **SNS 予約**: 10-31 まで補充された予約と、9 月計画の「再予約しない」のどちらを 10 月計画で採るか。

@@ -272,7 +272,7 @@ stats47 のフルセットを自治体で再現する必要はありません。
 }
 ```
 
-stats47 では上記 4 つに加え、Cloudflare の MCP サーバー (`cloudflare-graphql` / `cloudflare-observability`) や、国土交通データプラットフォーム (`mlit-dpf-mcp`) も併用しています。
+stats47 では上記 4 つに加え、国土交通データプラットフォーム (`mlit-dpf-mcp`) も併用しています。
 
 自治体での 1st step は **sqlite だけで十分** です。慣れてから git・github を追加するのが現実的です。
 

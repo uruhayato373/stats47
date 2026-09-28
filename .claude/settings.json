@@ -26,8 +26,6 @@
     ]
   },
   "enabledMcpjsonServers": [
-    "cloudflare-observability",
-    "cloudflare-graphql",
     "chrome-devtools",
     "seo-observability",
     "codex"

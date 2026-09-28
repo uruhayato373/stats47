@@ -47,10 +47,9 @@ $ARGUMENTS — [mode]
 
 Cloudflare メトリクス取得の優先順:
 
-1. **Cloudflare Observability MCP** (`cloudflare-observability`) — Workers logs / analytics
-2. **Cloudflare GraphQL MCP** (`cloudflare-graphql`) — 柔軟な分析クエリ
-3. **Cloudflare Dashboard（ユーザー手動共有）** — MCP 未接続時
-4. **月次請求書 PDF** — `~/Downloads/*.pdf` 内、`invoice` モードで処理
+1. **日次 snapshot** — `.claude/state/metrics/cloudflare/snapshots/YYYY-MM-DD.json`（CI が `.claude/scripts/cloudflare/fetch-usage.mjs` で GraphQL Analytics API から取得。Workers の requests・CPU / wall p50・p99、R2 操作・容量、D1）
+2. **Cloudflare Dashboard（ユーザー手動共有）** — route 別の CPU 時間・Workers のエラーログなど snapshot に無い内訳
+3. **月次請求書 PDF** — `~/Downloads/*.pdf` 内、`invoice` モードで処理
 
 ### Step 2: mode 別の処理
 
@@ -73,8 +72,8 @@ Cloudflare メトリクス取得の優先順:
 
 ```
 1. データ取得:
-   a. cloudflare-graphql MCP で月次メトリクス（D1 rows read/written、CPU ms、storage、requests）
-   b. MCP 未接続ならユーザーに Dashboard スクショ or CSV を依頼
+   a. 日次 snapshot を週・月で集計（D1 rows read/written、CPU ms、storage、requests）
+   b. snapshot に無い内訳が要るときはユーザーに Dashboard スクショ or CSV を依頼
    c. 請求書が手元にあるなら invoice モードへ誘導
 
 2. reference/weekly-snapshots/YYYY-Www.json として JSON 保存:
@@ -191,18 +190,7 @@ cat .claude/skills/analytics/cloudflare-cost-improvement/reference/improvement-l
 gh issue list --label cloudflare-alert --state open
 ```
 
-## MCP の使い方
-
-### observability MCP（Workers logs / analytics）
-- 「過去 24h の Workers errors」→ `mcp__cloudflare-observability__workers_logs_search` 等
-- 「route 別 CPU time」→ analytics クエリ
-
-### graphql MCP（GraphQL Analytics API）
-- 月次 d1AnalyticsAdaptive 集計
-- workersInvocationsAdaptive by scriptName
-- D1 query-level の rows read 分析
-
-初回利用時は Cloudflare の OAuth 認可画面が開く（ブラウザで Allow）。
+snapshot に無い集計が繰り返し必要になったら、`fetch-usage.mjs` にクエリを足す。
 
 ## 実証チェックリスト（効果判定を確定してTODO行を削除する前に必須）
 
@@ -230,7 +218,5 @@ gh issue list --label cloudflare-alert --state open
 
 ## 前提
 
-- `.mcp.json` に `cloudflare-observability` と `cloudflare-graphql` 登録済
-- Cloudflare アカウントへのブラウザログイン済（OAuth 認可用）
 - `.claude/todo/improvements.md` が存在すること（施策 ID は `CF-*` 等）
 - `reference/budgets.json` / `reference/weekly-snapshots/` 初期化済

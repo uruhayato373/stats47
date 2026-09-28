@@ -1,5 +1,15 @@
 {
-  "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-  "audited_at": "2026-09-28T01:48:22",
-  "files": []
+  "hash": "ac955149b88d761014ed361898d8ace3031146a7af21fa53503b35460fd08665",
+  "audited_at": "2026-09-28T08:25:16",
+  "files": [
+    ".agents/skills/analytics/cloudflare-cost-improvement/SKILL.md",
+    ".agents/skills/analytics/performance-improvement/SKILL.md",
+    ".agents/skills/sns/sns-weekly-report/reference/reports/2026-W38.md",
+    ".claude/settings.json",
+    ".claude/skills/analytics/cloudflare-cost-improvement/SKILL.md",
+    ".claude/skills/analytics/performance-improvement/SKILL.md",
+    ".claude/skills/analytics/performance-improvement/reference/improvement-log.md",
+    ".claude/skills/management/weekly-review/reference/reviews/2026-W37.md",
+    ".mcp.json"
+  ]
 }
