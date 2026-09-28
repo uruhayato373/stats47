@@ -1,4 +1,5 @@
 import { ContentAuditPanel, FilterLink, StageBadge } from "@/components/content/content-ui";
+import Link from "next/link";
 import { ErrorNote, PageHeading, Section, Table, Td, Tr } from "@/components/ops/primitives";
 import { contentOperations } from "@/lib/server/content-operations";
 import { hasError } from "@/lib/server/state-io";
@@ -48,6 +49,7 @@ export default async function NoteContentPage({ searchParams }: { searchParams: 
         <p className="text-xs text-console-muted">
           原稿本文を複製せず、git TSの編集メタとR2本文の所在、note.com公開状態をまとめて確認します。
         </p>
+        <Link href="/content/note/covers" className="text-xs text-console-accent hover:underline">カバー画像を分類別に確認する →</Link>
       </PageHeading>
 
       <div className="space-y-2">

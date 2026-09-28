@@ -39,16 +39,16 @@ browser-use CLI（Chrome プロファイル経由）で note.com エディタを
 
 本文更新の`--update`とは別に、`.claude/scripts/note/update-note-covers.mjs`を使う。
 制作判断は`catalog/cover-designs.ts`、制作は`generate-cover-refresh.ts`と共有Satori rendererに置く。
-今回の全件改修入力は`.local/note-cover-refresh/2026-09-12/`の公開前スナップショットとproduction manifest。
+今回の全件改修入力は`.local/note-cover-refresh/2026-09-28/`の公開前スナップショットとproduction manifest。
 制作・保存の契約は[カタログREADME](../../../scripts/note/catalog/README.md#公開カバーの制作と差し替え)を参照する。
 
 ```bash
 node --import tsx .claude/scripts/note/generate-cover-refresh.ts
 # 全画像を目視し、manifestのvisualReviewをpassにしてからローカル検査
-node .claude/scripts/note/update-note-covers.mjs --manifest .local/note-cover-refresh/2026-09-12/production-manifest.json
+node .claude/scripts/note/update-note-covers.mjs --manifest .local/note-cover-refresh/2026-09-28/production-manifest.json
 # ユーザーが依頼した公開カバー変更を反映（--keys / --limit で限定可能）
-node .claude/scripts/note/update-note-covers.mjs --manifest .local/note-cover-refresh/2026-09-12/production-manifest.json --commit
-node .claude/scripts/note/verify-cover-refresh.mjs --manifest .local/note-cover-refresh/2026-09-12/production-manifest.json
+node .claude/scripts/note/update-note-covers.mjs --manifest .local/note-cover-refresh/2026-09-28/production-manifest.json --commit
+node .claude/scripts/note/verify-cover-refresh.mjs --manifest .local/note-cover-refresh/2026-09-28/production-manifest.json
 ```
 
 **画像の保存だけで公開カバーに即時反映される**（2026-09-12 UI実測）。「更新する」を押す必要はない。
