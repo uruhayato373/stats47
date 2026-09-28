@@ -49,6 +49,15 @@ updated: 2026-09-21
   再生成後の誤りは 0。残りは ③ 週 5 指標ずつの処置 (2 更新 1,072 / 3 調査終了候補 126 / 4 noindex 候補 189。2〜4 は配信年からの推定なので
   処置前に公式の最新公表を確認する) と、4 週連続の減少の観測。年表記「判定不能」2,257 件は公式表記を確認した調査を
   `CALENDAR_CONFIRMED_SOURCES` に足すたびに減る。
+- **2026-09-28 ③ 第1週 (W40 Must 1・需要上位 5 指標)**: 公式の範囲は統計局の SSDS 掲載年次一覧
+  (`https://www.stat.go.jp/data/ssds/zuhyou/kiso_ken.xlsx` / `shihyou_ken.xlsx`、2026-02 更新分) で確認。
+  - `avg-height-high-school-2nd-male` / `annual-sunshine-duration` / `local-allocation-tax-prefecture`: 最新年は公式と一致、
+    過去の年が欠けていた (それぞれ 2023 のみ / 2024 のみ / 2016〜2021 欠落)。years を広げた (`401f4c0ab`)。
+    data-refresh の dryRun (run 36363769924) は ok=4・empty=0。**R2 反映 (dryRun なし) はオーナー承認待ち**。
+  - `voluntary-car-insurance-rate-vehicle`: 配信 1975〜2023 = SSDS の収録上限。「1 周期遅れ」は推定の誤検出で処置なし。
+  - `school-teacher-annual-income`: 表 `0003445758` は「令和２年以降」の複数年 DB (e-Stat カタログ) なのに、同じ表を使う 40 指標が
+    すべて 2022 年だけを配信。原因未確定 ([仮説] `cdTab` 08/12 の組み合わせが年で変わる)。dryRun は年別の件数を出さないため、
+    CI で年別の non-null を観測する必要がある (e-Stat の取得は CI 専用)。
 - **完了条件**: 週次の監査が全指標の古さ・表記を検出してキューへ積み、キューの処置状況が管理画面か週次レビューで見え、
   4 週続けて「新規検出 ≤ 処置件数」で残件が減っている。
 
