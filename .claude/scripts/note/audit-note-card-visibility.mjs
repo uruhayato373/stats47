@@ -17,7 +17,8 @@ if (previousPath) {
 const screenshotDir = args.includes("--screenshots") ? resolve(args[args.indexOf("--screenshots") + 1]) : null;
 const browserVerify = args.includes("--browser-verify");
 const maxScreenshots = Math.min(10, Math.max(0, Number(args.includes("--max-screenshots") ? args[args.indexOf("--max-screenshots") + 1] : 3)));
-const catalog = JSON.parse(execFileSync("npx", ["tsx", ".claude/scripts/note/catalog/dump-circulation-json.ts"], { cwd: ROOT, encoding: "utf8", maxBuffer: 32 * 1024 * 1024 }));
+// npx は Windows で spawn できない (ENOENT) ため、node 直起動で tsx を読み込む (fetch-note-metrics.mjs と同じ形)
+const catalog = JSON.parse(execFileSync(process.execPath, ["--import", "tsx", resolve(ROOT, ".claude/scripts/note/catalog/dump-circulation-json.ts")], { cwd: ROOT, encoding: "utf8", maxBuffer: 32 * 1024 * 1024 }));
 const slug = args.includes("--slug") ? args[args.indexOf("--slug") + 1] : null;
 const retryUnknownPath = args.includes("--retry-unknown-from") ? resolve(args[args.indexOf("--retry-unknown-from") + 1]) : null;
 const retryBaseline = retryUnknownPath ? JSON.parse(readFileSync(retryUnknownPath, "utf8")) : null;

@@ -1,180 +1,195 @@
 ---
 title: 今週の計画
 type: weekly-plan
-week: 2026-W39
-date: 2026-09-21
-updated: 2026-09-20
+week: 2026-W40
+date: 2026-09-28
+updated: 2026-09-28
 status: active
 tags: []
 ---
 
-# 2026-W39 今週の計画
+# 2026-W40 今週の計画
 
-期間: 2026-09-21（月）〜 2026-09-27（日）。9月計画（W37〜W40）の3週目。
-W38でMust 0/3となったため、新規施策を増やさず、計測・入力鮮度・既存品質の3束だけをMustにする。
+期間: 2026-09-28（月）〜 2026-10-04（日）。9月計画（W37〜W40）の最終週で、月次の配分は「集約」。
+W39 まで Must は3週連続で未達だった。今週はバックログ 🔴 の上から2枚だけを Must に入れる。前週に残った Must は分割するか Should へ降格する。
 
 ## 週
 
-- **ISO Week**: 2026-W39
-- **期間**: 2026-09-21 〜 2026-09-27
-- **Sprint**: 2026-09月次計画（W37〜W40）の Week 3/4
+- **ISO Week**: 2026-W40
+- **期間**: 2026-09-28 〜 2026-10-04
+- **Sprint**: 2026-09月次計画（W37〜W40）の Week 4/4。10-01 以降は 10 月計画を作る
 
 ## 前週の申し送り
 
-| W38申し送り | W39での扱い |
+W39 レビュー（`.claude/skills/management/weekly-review/reference/reviews/2026-W39.md`）の「来週への申し送り」から。
+
+| W39申し送り | W40での扱い |
 |---|---|
-| `AFF-MEASURE-RECOVER-01` のR2・history・measurementGate実走確認 | **Must 1**。コード到達とデータ到達を分け、3点が揃うまで完了にしない |
-| `AFF-IMPRESSION-ROUTING-01` のT14d | **Must 1**。09-27の確定7日を取得し、重複しない窓で比較する |
-| GSC coverage UI exportの鮮度回復 | **完了**。09-20 export→ingest→3,235 URL本番probe→search-growth再生成まで実施。W39は **Must 2** でfirst waveを分類する |
-| `DATA-ESTAT-FETCH-01` | Mustから外し、data-ingesterへowner移管。一次メタが揃うまで公開しない |
-| BLOG-WAVE 7件のtarget欠落 | **Should 2**。推測で補わず、終了または新規計測を決める |
-| search-growth approved 1件 | **Should 1**。content実測後に補強/noindex/dismissを終端する |
-| X期限超過scheduled 27件 | **Should 3**。新規予約せず、post URLと本文一致で分類する |
-| KDP S1 12冊のlive read-back | **Could 1**。公開候補は増やさず、置換状態と4週計測開始条件だけ確認する |
-| EXP-006 owner action | **Could 2**。Studio所有確認が無ければ制作・measureを進めない |
+| 1. 計測ゲートの failure（A8 突合超過） | **Must 2**（`A8-CROSSCHECK-EXCEED-01`、🔴 2番目） |
+| 2. `AFF-IMPRESSION-ROUTING-01` の T14d 比較 | **Should 1 [分割]**。比較の記録だけに絞る（収益導線レーンで重点外のため Must にしない） |
+| 3. `COVERAGE-LOOP-01` first wave | **Should 4 [分割]**。20件を5件へ縮め、Must から外す |
+| 4. ブログ是正キュー | **Should 3**。月次計画どおり1本だけ |
+| 5. search-growth approved 1件 | **Could 2** |
+| 6. CTR 低下の page×query 分解 | **Could 1** |
+| 7. 重点レーン「計測の鮮度」に施策が0件 | **Should 2** |
+| 8. note カード監査の Windows 起動失敗 | **起動は修正済み**（09-28、node 直起動へ）。この Windows PC では記事の取得が 286/286 件失敗し（プロキシ経由でも同じ）、全量再監査は Mac か CI で行う（`NOTE-CARD-REPAIR-01`） |
+| 9. KDP の販売数/KENP 記録 | **Could 3** |
+| 10. `EXP-006` | オーナー作業のまま |
+| 11. SNS 予約補充と「再予約しない」の整合 | オーナー作業（10 月計画で決める） |
 
 ## 今月の重点（月次計画より）
 
-- **重点テーマ**: 計測を再開する / 公開しているものが正しいか確定する
+- **重点テーマ**: 溜まった未デプロイを本番へ届けて止まっている実測を再開する / 公開しているものが正しいかを確定させる（→ `monthly.md`）
+- **重点レーン**: 計測 / データ品質
 - **今週この重点で進めること**:
-  - アフィリエイトGA4の確定7日をR2・git履歴・運用gateまで到達させる
-  - fresh化したGSC coverageからfirst wave 20件を分類し、観測契約へ接続する
-  - 公開済み記事のmust-fix上位3本を意味レビュー込みで是正する
-- **今週やらないこと**: 新規広告枠、KDP新規パイロット、SNS再予約、新規NSM実験、タイトル一括変更
+  - 計測: アフィリエイト計測ゲートを塞ぐ A8 突合超過の原因を特定する（Must 2）。T14d 窓の比較を記録する（Should 1、重点外）
+  - データ品質: データ品質キューの処置を週5指標で回し始める（Must 1）
 
-## 前週の振り返り（W38）
+## 前週の振り返り（W39）
 
 | タスク | 分類 | 状態 | メモ |
 |---|---|---|---|
-| GA4アフィリエイト実測を読める状態にする | Must | 未達 | レビュー時点は09-20 22:00の初回run前。R2 indexと履歴の実走証拠なし |
-| `AFF-IMPRESSION-ROUTING-01` T48h | Must | 未達 | 代表3ページ計装と重複カウントを記録できず |
-| `DATA-ESTAT-FETCH-01` 5 metric | Must | 未達 | 0/5。縮小しても未着手のためowner移管 |
-| before/after境界と期限 | Should | 一部 | affiliateとAdSenseは確定。他3件は期限超過 |
-| effect-verdict 7件終端 | Should | 未達 | 全件insufficient-target |
-| ブログ是正done減少の原因 | Should | 完了 | 再劣化ではなく母集団入替と確定 |
-| search-growth承認済み1件 | Could | 未達 | approvedのまま、content実測なし |
-| X予約14件の発火分類 | Could | 未達 | 期限超過scheduledが27件へ増加 |
+| アフィリエイト計測経路を本番実走で閉じる | Must | 未達 | 取得・R2・履歴は success。計測ゲートが `a8-cross-check-exceeded` で failure（Issue #1007） |
+| GSC coverage first wave 20件の分類 | Must | 未達 | 分類記録 1 件のみ。pending 1,106 → 1,251 |
+| ブログ品質是正3本 | Must | 未達 | 3本とも pending、W39 の是正 0 件 |
+| 承認済み search-growth 1件の終端 | Should | 未達 | approved のまま |
+| target 欠落7件の終了・再計測 | Should | 未達 | 7件とも `effect/pending` |
+| X 期限超過 scheduled の分類 | Should | 一部 | 毎晩照合の仕組みを追加。27 → 14 件 |
+| KDP S1 置換の read-back | Could | 完了 | S1 12/12 live |
+| 住民基本台帳データの適合性調査 | Could | 未達 | 着手なし |
 
-**実行パターン**: 計画外の作業量は大きい一方、Mustは5週連続で残った。W39はMustごとに完了証拠と停止条件を固定し、別作業をMust完了へ読み替えない。
+**パターン分析**: 計画外の commit は 431 件あったが、Must は3週連続で0件。🔴 上位と Must が重ならず、
+Must 1 の完了を塞いでいた `A8-CROSSCHECK-EXCEED-01` が Must に入っていなかった。今週は 🔴 の上から取る。
 
 ## 現状サマリー
 
-| 指標 | W38確定値 | 比較・目標 |
+| 指標 | W39確定値 | 比較・目標 |
 |---|---:|---|
-| GA4 engagedSessions（Japan-only確定7日） | 3,347 | 前週3,067、+9.1% |
-| GSC clicks（確定7日） | 2,958 | 前週2,381、+24.2% |
-| GSC impressions（確定7日） | 77,443 | 前週73,763、+5.0% |
-| GSC CTR | 3.82% | 前週3.23%、+0.59pp |
-| R2公開ブログ | 616 | 新規公開0 |
-| ブログ是正 | done 20 / pending 319 | must-fix 32 |
-| SNS W38投稿 | X 0 / Instagram 0 / YouTube 0 | 新規予約しない |
-| GSC運用サイクル | **WARN（FAIL 0）** | 既知のtarget欠落7件以外をPASSで維持 |
-| KDP公開ゲート | **hold** | S1現行版 live 3 / in_review 9、販売・KENP not-measured |
+| GA4 engagedSessions（Japan-only確定7日） | 2,931 | 前週 3,347、-12.4% |
+| GSC clicks（確定7日） | 2,610 | 前週 2,958、-11.8% |
+| GSC impressions（確定7日） | 85,159 | 前週 77,443、+10.0% |
+| GSC CTR | 3.06% | 前週 3.82%、-0.76pp |
+| 週次収益（NSM） | ASP 発生・確定 0 件 | 商品売上は判定不能 |
+| ブログ是正 | done 18 / pending 358 | must-fix 50 |
+| データ品質ゲート通過率 | 99.5%（2,408/2,420） | 処置待ち: 更新 1,072 / 調査終了候補 126 / noindex 候補 189 |
+| 計測の鮮度 | 12/13 | note が report_incomplete |
+| SNS W39 投稿 | X 7 / Instagram 4 / Threads 8 | — |
+| GSC運用サイクル | **WARN（FAIL 0）** | 既知の target 欠落7件のみ |
+| KDP公開ゲート | **measure** | S1 live 12/12、販売数/KENP 未記録 |
 
-KPIはW38 snapshotの `finalized7d` と重複しない `previous7d` のみで比較する。rolling 28日は候補発見専用とし、WoWとは呼ばない。
-
-## 読者課題・事業方針
-
-- **読者の課題**: 地域・仕事・家計・行政の統計を、定義・年次・分母を誤らず意思決定に使いたい。
-- **HARM**: Money / Ambition。家計・就業・行政実務の判断を助けるが、テーマ分類だけで購入意図を断定しない。
-- **提供価値・支払う理由**: 無料Webは発見と比較、有料商品は用途別に編集した固定版・図表・確認手順を一括提供する。
-- **需要証拠**: 検索需要はGSC clicks +24.2%、NSM +9.1%。有料需要はaffiliate・KDP・CTAが未計測で未検証。
-- **次の検証**: affiliate確定7日、KDP全12冊live後4週sales/KENP、CTAカスタムdimension登録後の行動計測。
+KPI は W39 snapshot の `finalized7d` と重複しない `previous7d` だけで比べる。rolling 28日は候補発見専用。
 
 ## トレンド機会
 
-| トレンド | 一次ソース | stats47との接続 | W39アクション |
+| トレンド | ソース | stats47 データ | アクション |
 |---|---|---|---|
-| 2026年住民基本台帳の都道府県別人口・人口動態 | e-Stat（2026年次） | 人口・将来人口Geo pilotと接続可能 | **保留**。provenanceと既存metric重複だけCouldで確認 |
-| 家計調査2026年7月分 | 総務省統計局（09-04公表） | 家計・支出ランキングと接続可能 | **保留**。月次重点外の新規記事は作らない |
-| 9月上旬の気象観測値ランキング | 気象庁 | 地域差コンテンツ候補 | **不採用**。速報性より計測復旧を優先 |
+| はてなブックマーク Hot Entry（09-28 取得） | はてな | 都道府県・統計・地域の話題なし | なし |
+| Google News「都道府県 統計」 | Google News RSS | 取得 0 件 | なし。必要なら `/discover-trends --source all` |
+
+月次計画は新規記事の大量公開を止めているので、今週はトレンド連動の記事を作らない。
 
 ## 前週からの持ち越し
 
-- [ ] `AFF-MEASURE-RECOVER-01` — 元W38 Must
-- [ ] `AFF-IMPRESSION-ROUTING-01` T14d — 元W38 Must
-- [ ] GSC coverage first wave 20件の分類 — fresh化済みキューからW39で着手
-- [ ] search-growth `soft-404-risk::/ranking/barber-beautician-annual-income` 終端 — 元W38 Could
-- [ ] X期限超過scheduled 27件の分類 — 元W38 Could
-- [ ] KDP S1置換版のlive read-back — W38申し送り
+- [ ] **`AFF-MEASURE-RECOVER-01` の計測ゲート** — 元 W39 Must 1。Must 2 の完了で閉じる
+- [ ] **`AFF-IMPRESSION-ROUTING-01` T14d** — 元 W39 Must 1 の一部。Should 1 [分割]
+- [ ] **GSC coverage first wave の分類** — 元 W39 Must 2。Should 4 [分割]
+- [ ] **ブログ是正** — 元 W39 Must 3。Should 3（1本）
+- [ ] **search-growth `soft-404-risk::/ranking/barber-beautician-annual-income` の終端** — 元 W39 Should 1。Could 2
+- [ ] **target 欠落7件** — 元 W39 Should 2。オーナー判断待ち（下記）
+- [ ] **X 期限超過 scheduled 14件** — 元 W39 Should 3。毎晩照合の結果を待つ（今週は計画に入れない）
 
 ## 改善ログ pending（今週着手対象）
 
 | Tier | Metric | ID | Status | Due | Owner |
 |---|---|---|---|---|---|
-| 1 | affiliate | AFF-MEASURE-RECOVER-01 | pending | 2026-09-21 | affiliate-manager |
-| 1 | gsc | COVERAGE-LOOP-01 | effect/pending | 2026-09-14超過 | gsc-analyst + owner export |
-| 1 | affiliate | AFF-IMPRESSION-ROUTING-01 | in-progress | 2026-09-27 | affiliate-manager |
-| 1 | gsc | SEARCH-GROWTH-CYCLE-01 | pending | 2026-09-21 | gsc-analyst |
-| 2 | blog | remediation must-fix 3件 | pending | 2026-09-27 | blog-editor / article-writer |
+| 1 | affiliate | AFF-IMPRESSION-ROUTING-01 | in-progress | 2026-09-27 | claude |
+| 1 | data-quality | DATA-ESTAT-FETCH-01 | pending | 2026-10-05 | claude（`DATA-QUALITY-LOOP-01` へ引き継ぎ） |
+| 1 | data-quality | DATA-MANUAL-RESTORE-01 | pending | 2026-10-05 | claude（同上） |
+| 2 | gsc | SEARCH-GROWTH-CYCLE-01 | pending | 2026-09-21超過 | gsc-analyst |
 
 ## 今週のタスク
 
-### Must（絶対達成、3件）
+### Must（絶対達成、2件）
 
-- [ ] **アフィリエイト計測経路を本番実走で閉じる** [M] — `AFF-MEASURE-RECOVER-01`。09-20日曜runと09-21月曜retryについて、R2の日別・`latest.json`・indexが公開read pathで一致し、developの履歴に `periodEnd,7,_all,_all` 行があり、measurementGateがsuccessであることを確認する。失敗時は固定Issueがupsertされ、復旧runでcloseされることも確認する。09-27には`AFF-IMPRESSION-ROUTING-01`のT14d確定7日を同じ契約で取得する。どれか1点でも欠ければ未完了。使用: `/affiliate-improvement`
-- [ ] **GSC coverage first wave 20件を分類し観測へ接続する** [M] — 09-20にfresh化したキューの上位20件について、sitemap掲載・内部リンク・canonical・現在HTTPを確認し、`observe-after-fix`のまま観測するURLと実装修正が必要なURLを理由付きで記録する。20/20の状態更新、URL Inspection対象への接続、`audit-operations-cycle --stage plan --week 2026-W38 --strict` のFAIL 0維持で完了。インデックス登録はInspection証拠が出るまで完了扱いしない。使用: `/gsc-coverage-remediation`、`/search-growth`
-- [ ] **ブログ品質是正3本を完了する** [L] — `natto-consumption-east-west-divide`、`train-commuters-prefecture-gap`、`low-birthweight-rate-prefecture-gap`をキュー順に是正し、各記事で決定的audit・factual check・blog-critic PASS・公開read-backを満たしてdone化する。3本未満なら未完了。使用: `/brushup-blog --target queue --next 3`
+- [ ] **データ品質キューの処置を5指標回す** [M] — `DATA-QUALITY-LOOP-01`（🔴 1番目・データ品質レーン・KPI `data-quality-gate`）。
+  `.claude/state/data/data-quality/LATEST.md` の「2 更新」から GSC 表示の多い順に5指標を取り、各指標で公式の最新公表を一次資料で確かめてから、
+  判断基準 1〜4 のどれかに決める（2〜4 は配信年からの推定なので、確認前に処置しない）。5指標すべてに処置と根拠が記録され、
+  更新するものは config 変更まで済んでいれば完了。R2 反映はオーナー承認で別に行う。使用: `/inspect-estat-meta`、data-ingester
+- [ ] **A8 突合超過の原因を特定する** [S] — `A8-CROSSCHECK-EXCEED-01`（🔴 2番目・計測レーン・不具合）。
+  A8 の「サイト別 × プログラム別」明細で stats47 サイト行の案件別クリックを取り、専用 157 のうちサイト別 155 に入っていない案件を特定する。
+  検証コマンドが `a8-cross-check-exceeded` を出さなくなるか、差 2 クリック（1.3%）の原因が取れない理由を記録して許容差の判断をオーナーへ渡した時点で完了。
+  共用案件の振り分けは推測で決めない。これで Issue #1007 と `AFF-MEASURE-RECOVER-01` の計測ゲートが閉じられる状態になる。使用: `/affiliate-improvement`
 
-### Should（できればやる、3件）
+### Should（できればやる、4件）
 
-- [ ] **承認済みsearch-growth 1件を終端する** [S] — `barber-beautician-annual-income`のR2観測年数・データ点数・描画を実測し、補強/noindex/dismissのいずれかを理由付きで機械記録する。titleだけの変更はしない。使用: `/search-growth`
-- [ ] **target欠落7件を終了または再計測へ分ける** [S] — 後付けtargetを推測せず、各BLOG-WAVEを終了するか、事前target付きの新規計測へ移す。`effect/pending`を効果ありに変換しない。使用: `/triage-improvement-log`
-- [ ] **X期限超過scheduled 27件を分類する** [M] — 投稿URLと本文一致でposted/未発火を確定し、未発火分は新規予約せず台帳状態だけ直す。使用: `/update-sns-metrics`
+- [ ] **[分割] T14d 窓の比較を記録する** [S] — `AFF-IMPRESSION-ROUTING-01`（収益導線レーン・KPI `affiliate-yield`。今月の重点レーン外のため Should）。
+  W39 の Must から分割して降格し、比較の記録だけに絞る。09-13 14:02 JST のデプロイ境界に対し、重複しない確定7日（before / after）を
+  期間・cohort・placement を明示して並べ、imp/PV・CTR を記録する。条件（標本・交絡）が揃わなければ保留理由と次の判定日を書いて完了とする。
+  効果ありとは書かない（`evidence-based-judgment.md`）。使用: `/affiliate-improvement`
+- [ ] **重点レーン「計測の鮮度」の施策を起票する** [S] — `AUTHENTICATED-MEASUREMENT-ACTIVATION-01` の残り1源（note の report_incomplete）を
+  直す施策を、`[kpi: measurement-freshness]` と根拠のある `[target:]` 付きで improvement-triage に起票させる。active 施策は 25 件で上限 10 件を超えているため（DG080）、期日超過の施策を1件以上判定・backlog 降格して純増させない。
+  重点レーンの KPI に施策が 0 件の状態が解消されれば完了。根拠のある target が書けなければ、書けない理由を記録する。
+- [ ] **ブログ是正1本** [M] — 是正キューの次の1本 `konbu-consumption-prefecture-gap`（must-fix、GSC 1,101 imp / 99 click、
+  blocker 2 件: 内部リンク不足・である調の文末）。月次計画どおり1本だけ。決定的 audit・factual check・blog-critic PASS・公開 read-back で done。
+  使用: `/brushup-blog --target queue --next 1`
+- [ ] **[分割] GSC coverage first wave を5件分類する** [S] — `COVERAGE-LOOP-01`。W39 の20件を5件に縮める。
+  sitemap 掲載・内部リンク・canonical・現在の HTTP を確かめ、観測を続ける URL と実装修正が要る URL を理由付きで記録する。使用: `/gsc-coverage-remediation`
 
-### Could（余力があれば、2件）
+### Could（余力があれば、3件）
 
-- [ ] **KDP S1置換状態をread-backする** [S] — 12冊の現行版liveを確認し、旧版停止と4週sales/KENP計測の開始条件だけ更新する。新規パイロットは公開しない。使用: `/kdp-publish`
-- [ ] **2026年住民基本台帳データの適合性を調べる** [S] — 人口×将来人口Geo pilotとの重複、都道府県粒度、年次、provenanceを確認する。今週は記事化・R2投入をしない。使用: `/inspect-estat-meta`
+- [ ] **CTR 低下を page×query で分解する** [S] — `SEARCH-GROWTH-CYCLE-01`。確定7日で表示 +10.0%・クリック -11.8% だった。
+  前週と重ならない確定7日の page×query を比べ、表示が増えて CTR が低い上位を特定する。title の一括変更はしない。owner は gsc-analyst。
+- [ ] **承認済み search-growth 1件を終端する** [S] — `soft-404-risk::/ranking/barber-beautician-annual-income`。3週続けて approved のまま。
+  R2 観測年数・データ点数・描画を実測し、補強 / noindex / dismiss を記録するか、WIP から外す。使用: `/search-growth`
+- [ ] **KDP S1 の販売数/KENP を記録する** [S] — `.claude/state/products/kdp-weekly-publication.json` の nextAction。
+  認証付き計測の kdp は pass なので、KDP レポートを `products:sales` へ証拠付きで記録し、4週窓の開始日を置く。新規パイロットは公開しない。使用: `/kdp-publish`
 
-## search-growth候補
+## オーナー作業
 
-| 区分 | 候補 | W39判断 |
-|---|---|---|
-| technical | `server-risk::/blog/white-bread-consumption-quantity-prefecture-gap` | 3/3回200・canonical一致でdismiss済み。再発が無ければ再起票しない |
-| content | `ctr-opportunity::/survey/census` | query intentとhub責務が不一致。未承認のまま、title一括変更しない |
-| measurement | `measurement-gap::/` | GA4/CrUX欠損を0扱いしない。coverage回復を先行 |
-| approved carryover | `soft-404-risk::/ranking/barber-beautician-annual-income` | Should 1で1件だけ終端 |
-
-新しい候補をimprovementsへ自動追加しない。全active WIPは5以下、採用は週1〜2件を上限とする。
-
-## NSM実験
-
-- activeは `EXP-006` 1件。28日経過したが動画0本、Studio baselineなし、pending owner action 2件のためmeasureしない。
-- 候補評価:
-  - `train-commuters-prefecture-gap`内部リンク是正は高表示・低工数だが、既存remediationの品質修正としてMust 3へ含め、別実験を増やさない。
-  - `/survey/census` CTR候補は1,511 impressionsだが、個別統計queryとsurvey hubの責務がずれており確実性不足。
-- **新規実験は開始しない**。計測復旧とEXP-006 owner actionのどちらかが閉じるまでactiveを増やさない。
+- **`AUTHENTICATED-MEASUREMENT-ACTIVATION-01`**: note ダッシュボードの取得が report_incomplete。再ログインか取得範囲の判断をしてほしい。
+- **`GSC-COVERAGE-DEPLOY-01`**: カバレッジ是正と入力鮮度ガードの本番反映の承認。
+- **`CF-CPU-SURGE-01`**: 次の手順（route 別 CPU 時間の確認）に Cloudflare の MCP 認証が要る。対話型の `claude` ターミナルで `/mcp` から `cloudflare-observability` と `cloudflare-graphql` を認証してほしい。
+- **`EXP-006`**: YouTube Studio のチャンネル所有確認と、動画の手動公開の可否。
+- **target 欠落7件（BLOG-WAVE）**: 「終了」か「事前 target を定義して新規計測」かを選んでほしい。推測では補わない。
+- **SNS 予約**: 10-31 まで補充された予約と、9 月計画の「再予約しない」のどちらを 10 月計画で採るか。
 
 ## KDP公開ゲート
 
-- **判定**: `hold`
-- **portfolio**: S1現行版 live 3 / in_review 9、パイロット live 0
+- **判定**: `measure`（`.claude/state/products/kdp-weekly-publication.json`、2026-W39 で再生成）
 - **候補**: なし
-- **需要証拠**: sales ledger observations 0。販売数/KENPは`not-measured`であり0需要ではない
-- **停止条件**: S1全12冊のlive read-back、旧版停止、4週sales/KENP計測
-- **承認境界**: 本計画は公開承認ではない。候補が`ready-for-owner-approval`になり、対象IDの明示承認と`--commit`が揃うまで公開しない
+- **需要証拠**: 販売数/KENP は未記録（K-S1-01〜12）。0 需要ではない
+- **停止条件**: 販売数/KENP が `products:sales` に記録され、4週窓が閉じるまで新規公開しない
+- **承認境界**: この計画への記載は公開承認ではない。対象 ID の明示承認と `--commit` が別途必要
+
+## NSM実験
+
+- active は `EXP-006` 1件。動画 0 本・owner action 2件のため measure しない。
+- 新規実験は提案・開始しない。計測ゲートが閉じ、EXP-006 の owner action が決まるまで active を増やさない。
 
 ## 批判的レビュー
 
-> **技術的に楽しいだけでは？** Must 1と2は新規機能ではなく、収益・検索運用の観測を回復する作業。Must 3も新規記事ではなく公開済み品質の是正に限定した。
+> **技術的に楽しいだけでは？** Must 2件は、データ品質の処置と計測ゲートの原因特定で、新しい機能は作らない。
+> どちらも重点レーン（データ品質・計測）の KPI にぶら下がる。重点外の T14d 記録は Should に置いた。
 
-> **先週と同じ失敗を繰り返していないか？** W38のMust 0/3を受け、データ品質25件を再び縮小して積まずowner移管した。各Mustは成果物ではなくread-backとgateで完了判定する。
+> **先週と同じ失敗を繰り返していないか？** W39 の Must 3件は同じ形で再掲しない。T14d は比較の記録だけに分割して Should へ降格し、
+> coverage とブログ是正は Should へ降格して件数を縮めた。🔴 上位を Must に入れ、Must 1 の完了を塞いでいた A8 突合超過を直接扱う。
 
-> **今週でなければ意味がないことは？** affiliateは09-21の自動retryと09-27のT14dが固定期限。GSC coverageは09-20にfresh化したため、再び件数だけ追う前にfirst waveを分類し、観測可能な状態へ進める。
+> **今週でなければ意味がないことは？** A8 突合超過は `A8-CROSSCHECK-EXCEED-01` の期日が 10-05。T14d 窓は 09-27 で閉じたので、
+> 記録が遅れるほど比較期間が別施策と重なる。9 月の最終週なので、10 月計画の入力もこの週に作る。
 
 ## 関連ドキュメント・施策
 
-- 前週レビュー: `.claude/skills/management/weekly-review/reference/reviews/2026-W38.md`
-- 週次snapshot: `.claude/skills/management/nsm-experiment/reference/weekly-snapshots/2026-W38.json`
+- 前週レビュー: `.claude/skills/management/weekly-review/reference/reviews/2026-W39.md`
+- 週次snapshot: `.claude/skills/management/nsm-experiment/reference/weekly-snapshots/2026-W39.json`
 - 月次計画: `.claude/todo/monthly.md`
-- 関連改善施策: `AFF-MEASURE-RECOVER-01` / `AFF-IMPRESSION-ROUTING-01` / `COVERAGE-LOOP-01` / `SEARCH-GROWTH-CYCLE-01`
-- search-growth state: `.claude/state/search-growth/candidates.json`
-- KDP state: `.claude/state/products/kdp-weekly-publication.json`（W38レビュー時read-back）
+- backlog: `DATA-QUALITY-LOOP-01` / `A8-CROSSCHECK-EXCEED-01` / `CF-CPU-SURGE-01` / `AUTHENTICATED-MEASUREMENT-ACTIVATION-01` / `GSC-COVERAGE-DEPLOY-01`
+- 改善施策: `AFF-IMPRESSION-ROUTING-01` / `AFF-MEASURE-RECOVER-01` / `SEARCH-GROWTH-CYCLE-01`
+- データ品質キュー: `.claude/state/data/data-quality/LATEST.md`
+- KDP state: `.claude/state/products/kdp-weekly-publication.json`
 
 ## 次週への申し送り候補
 
-- affiliateの09-27確定7日をT14dとして判定し、期間・cohort・placementが一致しなければ保留する
-- GSC coverageの総件数差は次回exportとの比較までeffect判定しない
-- Must 3束のうち未達があれば、W40へ同じ大きさで移さずowner・依存・停止条件を見直す
-- KDPは全12冊live後にだけ4週計測開始日を置く
+- A8 突合超過が許容差の判断に回った場合、オーナーの判断結果で計測ゲートの閾値を決める
+- データ品質の処置で「更新」と決めた指標の R2 反映をまとめて1回で承認してもらう
+- 10 月計画で、Must を 🔴 の上から取る運用が1週で機能したかを確かめる
+- 10-01 以降の `/monthly-plan` の入力として、9 月の重点ゴール（`monthly.md` 重点1・2）の達成・未達を証拠付きで並べる
