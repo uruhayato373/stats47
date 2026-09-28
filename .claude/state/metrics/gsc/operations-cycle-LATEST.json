@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-28T00:35:18.218Z",
-  "stage": "plan",
+  "generatedAt": "2026-09-28T18:40:36.980Z",
+  "stage": "monitor",
   "status": "warn",
   "measurementWeek": "2026-W39",
   "expectedCompletedWeek": "2026-W39",
   "expectedPlanWeek": "2026-W40",
   "currentMonth": "2026-09",
   "summary": {
-    "pass": 10,
+    "pass": 12,
     "warn": 1,
     "fail": 0
   },
@@ -46,7 +46,7 @@
     {
       "code": "search-growth-freshness",
       "level": "pass",
-      "detail": "week=2026-W39, age=1d",
+      "detail": "week=2026-W39, age=2d",
       "action": null
     },
     {
@@ -64,7 +64,7 @@
     {
       "code": "url-inspection-freshness",
       "level": "pass",
-      "detail": "latest=2026-09-27, age=1d",
+      "detail": "latest=2026-09-28, age=1d",
       "action": null
     },
     {
@@ -77,6 +77,18 @@
       "code": "weekly-plan",
       "level": "pass",
       "detail": "plan=2026-W40, expected=2026-W40",
+      "action": null
+    },
+    {
+      "code": "monthly-plan",
+      "level": "pass",
+      "detail": "month=2026-09, GSC運用サイクル節=あり",
+      "action": null
+    },
+    {
+      "code": "monthly-review-coverage",
+      "level": "pass",
+      "detail": "直近4週レビュー 4/4（必要 3以上）",
       "action": null
     }
   ]
