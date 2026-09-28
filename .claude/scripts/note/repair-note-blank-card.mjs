@@ -12,7 +12,7 @@ const url = value("--url");
 const expectedKey = value("--expected-key");
 const commit = args.includes("--commit");
 if (!slug || !url) throw new Error("--slug と --url を指定してください");
-const catalog = JSON.parse(execFileSync("npx", ["tsx", ".claude/scripts/note/catalog/dump-circulation-json.ts"], { encoding: "utf8", maxBuffer: 32 * 1024 * 1024 }));
+const catalog = JSON.parse(execFileSync(process.execPath, ["--import", "tsx", ".claude/scripts/note/catalog/dump-circulation-json.ts"], { encoding: "utf8", maxBuffer: 32 * 1024 * 1024 }));
 const article = catalog.articles.find((entry) => entry.key === slug);
 if (!article?.noteUrl || !article.noteUrl.startsWith("https://note.com/stats47/n/")) throw new Error("catalog に記事がありません");
 const noteKey = article.noteUrl.match(/\/n\/(n[0-9a-f]+)$/)?.[1];

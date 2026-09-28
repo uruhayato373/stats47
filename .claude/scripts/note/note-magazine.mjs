@@ -32,7 +32,7 @@ const keyArg = (() => { const i = args.indexOf("--key"); return i >= 0 ? args[i 
 const COMMIT = args.includes("--commit");
 
 function getCatalog() {
-  const json = execFileSync("npx", ["tsx", join(ROOT, ".claude/scripts/note/catalog/dump-magazines-json.ts")], {
+  const json = execFileSync(process.execPath, ["--import", "tsx", join(ROOT, ".claude/scripts/note/catalog/dump-magazines-json.ts")], {
     cwd: ROOT, encoding: "utf8", stdio: ["ignore", "pipe", "inherit"],
   });
   return JSON.parse(json);

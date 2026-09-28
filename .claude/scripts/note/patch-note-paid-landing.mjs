@@ -50,7 +50,7 @@ function parseArgs(argv) {
 }
 
 function catalog() {
-  const raw = execFileSync("npx", ["tsx", join(ROOT, ".claude/scripts/note/catalog/dump-circulation-json.ts")], {
+  const raw = execFileSync(process.execPath, ["--import", "tsx", join(ROOT, ".claude/scripts/note/catalog/dump-circulation-json.ts")], {
     cwd: ROOT, encoding: "utf8", stdio: ["ignore", "pipe", "inherit"],
   });
   return JSON.parse(raw);

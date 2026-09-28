@@ -48,7 +48,7 @@ const LIVE = args.includes("--live");
  * tsx 経由で実行して JSON 化する (catalog/index.ts が全 vertical を束ねた結果を返す)。
  */
 function loadCatalog() {
-  const raw = execFileSync("npx", ["tsx", DUMP_CIRCULATION_TS], {
+  const raw = execFileSync(process.execPath, ["--import", "tsx", DUMP_CIRCULATION_TS], {
     cwd: ROOT,
     encoding: "utf8",
     maxBuffer: 32 * 1024 * 1024,
