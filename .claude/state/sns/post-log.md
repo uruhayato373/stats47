@@ -3,10 +3,13 @@
 投稿済み全件。`posted_at` 降順。
 スクリプトで自動生成 — 手編集しない (`sns-posts-store.cjs` が `insert()`/`updateById()` のたびに再生成)。
 
-**573 件** (最終更新: 2026-09-27)
+**576 件** (最終更新: 2026-09-28)
 
 | 日付 | 媒体 | コンテンツ | キャプション | URL |
 |---|---|---|---|---|
+| 2026-09-28 | 📸 Instagram | ranking-quiz/side-job-rate |  | [🔗](https://www.instagram.com/p/Dd1yg5lmEk3/) |
+| 2026-09-28 | 🧵 Threads | area/area-05000-profile | 旅先では見えにくい秋田の輪郭。 県木秋田杉と特産とんぶり、暮らしの統計を同じページで確認できます。 続きは👇 http… | [🔗](https://www.threads.com/@stats47jp/post/Dd0xuCIDknQ) |
+| 2026-09-28 | 🧵 Threads | ranking/daytime-population-ratio | 昼になると人が増える県、減る県。  昼夜間人口比率の1位は東京116.1％。 最下位の埼玉は89.6％で、昼の人口が約1… | [🔗](https://www.threads.com/@stats47jp/post/Dd0C45nkllM) |
 | 2026-09-27 | 📸 Instagram | map-carousel/miso-consumption-quantity |  | [🔗](https://www.instagram.com/p/Ddy5JqmIE_t/) |
 | 2026-09-27 | 🧵 Threads | area/area-04000-profile | 宮城を数字と地域文化の両方から見る。 県鳥ガン、特産サンマ、全国順位をまとめた県別ページです。 続きは👇 https:… | [🔗](https://www.threads.com/@stats47jp/post/DdyKtCaET_x) |
 | 2026-09-27 | 🧵 Threads | ranking/room-utilization-rate | ホテルの客室が最も埋まっている県は？  1位東京80.4％、2位大阪77.9％、3位福岡75％。 最も低いのは長野の57… | [🔗](https://www.threads.com/@stats47jp/post/Ddxc53MDqN6) |
