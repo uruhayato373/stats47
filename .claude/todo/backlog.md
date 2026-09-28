@@ -53,7 +53,8 @@ updated: 2026-09-21
   (`https://www.stat.go.jp/data/ssds/zuhyou/kiso_ken.xlsx` / `shihyou_ken.xlsx`、2026-02 更新分) で確認。
   - `avg-height-high-school-2nd-male` / `annual-sunshine-duration` / `local-allocation-tax-prefecture`: 最新年は公式と一致、
     過去の年が欠けていた (それぞれ 2023 のみ / 2024 のみ / 2016〜2021 欠落)。years を広げた (`401f4c0ab`)。
-    data-refresh の dryRun (run 36363769924) は ok=4・empty=0。**R2 反映 (dryRun なし) はオーナー承認待ち**。
+    data-refresh の dryRun (run 36363769924) は ok=4・empty=0。オーナー承認のうえ run 36364277938 で R2 反映済み (公開 URL で 47 年 / 50 年 / 48 年・全年 47 県を確認)。
+    教員の年収は `DATA-WAGE-TABLE-YEARS-01` へ切り出した。
   - `voluntary-car-insurance-rate-vehicle`: 配信 1975〜2023 = SSDS の収録上限。「1 周期遅れ」は推定の誤検出で処置なし。
   - `school-teacher-annual-income`: 表 `0003445758` は「令和２年以降」の複数年 DB (e-Stat カタログ) なのに、同じ表を使う 40 指標が
     すべて 2022 年だけを配信。原因未確定 ([仮説] `cdTab` 08/12 の組み合わせが年で変わる)。dryRun は年別の件数を出さないため、
