@@ -1,56 +1,56 @@
 {
   "schemaVersion": 1,
-  "id": "36300590263-1",
-  "status": "implementation-needed",
-  "keyword": "全国の公衆電話の数",
-  "targetPath": "/ranking/public-phone-count",
-  "needs": "「全国の公衆電話の数」の検索者は、日本全体で公衆電話が今何台あるか、減少が続いているかという単一の全国合計・推移の数字を知りたい(スマホ普及による減少を報じるニュースを見た後の確認検索)。都道府県別の比較は主目的ではない。",
-  "gap": "対象ページ本文(h2見出し7地方ブロック分析・上位/下位格差)には「全国平均」との比較は多数あるが、全国合計の実数(絶対数)がどこにも明記されていない。上位表示のYahoo!ニュース記事は2025年3月末時点で全国96,126台・前年比12.9%減という具体的な合計と推移を明示し、NTT東日本公式ページは2026年3月31日現在の都道府県別実数を開示しており、いずれも当ページより新しい/具体的な全国規模の答えを提示している。",
-  "done": "未実施。全国合計値は本リポジトリのgit/ローカルに存在せず(完全DBレス、R2のみ保有)、本タスクの読み取り権限では算出できないため実装が必要。",
-  "method": "description",
+  "id": "36388745519-1",
+  "status": "no-change",
+  "keyword": "道の駅 多い県",
+  "targetPath": "/blog/roadside-station-count-prefecture-gap",
+  "needs": "「道の駅 多い県」で検索する人は、道の駅の登録数が多い都道府県はどこか(まず1位は北海道か)、上位・下位の順位や数値を知りたい。旅行の候補地域を絞るための実用ニーズが中心で、原因分析より数値そのものへの関心が強い。",
+  "gap": "対象ページはH1直下の2段落と続く段落で、北海道128・岐阜55・長野54・新潟42・岩手39の上位5県、東京1・神奈川6・大阪10・沖縄10・佐賀11の下位5県を数値付きで明示し、上位/下位比較SVGチャート・全国分布地図・47都道府県フルランキングへの内部リンクも備える。データは国交省2026年9月4日時点で、WebFetchで確認した上位競合uub.jp(2024年8月時点)・nlab.itmedia(2023年5月公開)より新しい。title/meta descriptionも冒頭で「北海道128か所」を明示し、クエリの答えと一致している。FAQは対象・競合ともに無く差ではない。競合との比較で情報の不足は見当たらない。掲載順位8.69・impressions621・clicks0という状態は本文の情報不足ではなく表示順位/CTR側の要因の可能性があるが、これは仮説であり、ランキング変動を自分の改善の効果と断定しない方針と「順位のために文章を増やさない」方針の対象。",
+  "done": "本文・タイトル・メタディスクリプションの変更は行わない。上位5県・下位5県の数値、データ年月(2026年9月4日時点・国交省)、上位競合2件との比較を確認し、検索ニーズに対する情報不足が無いと判断した。selected.editableFileもnullで置換対象のファイルが存在しない。",
+  "method": "content",
   "competitors": [
     {
-      "url": "https://news.yahoo.co.jp/expert/articles/abe51f5f22ff4cb0e33434bfcf036ea17521b6b8",
-      "findings": "「2025年7月情報通信白書」を出典に、2025年3月末時点の全国公衆電話総数を約9万6,126台(前年同期11万333台から12.9%減)と明記し、減少が続いている旨と特殊(災害時用)公衆電話の増加も述べる。都道府県別の内訳はなくNTT東西の管轄別のみ。検索意図の核心(全国合計+最新の増減)に直接答える形式。"
+      "url": "https://uub.jp/pdr/t/r.html",
+      "findings": "都道府県別道の駅ランキング表(降順)、面積・人口あたり駅数を含む詳細表、棒グラフ、解説文。北海道128・岐阜56・長野54(2024年8月7日時点)。専門的なFAQは無い。対象ページより表形式は充実するがデータは2024年時点でやや古い。"
     },
     {
-      "url": "https://www.ntt-east.co.jp/univs/univ-sub2.html",
-      "findings": "NTT東日本公式のユニバーサルサービス開示ページ。2026年3月31日現在という当ページ(2024年度)より新しい時点の第一種公衆電話機の都道府県別設置台数・必要台数・メッシュ数・達成率を表形式で開示し、合計34,811台(東日本管内のみ)を明記。一次資料として最新かつ検証可能な数値を提供している。"
+      "url": "https://nlab.itmedia.co.jp/research/articles/1469594/",
+      "findings": "北海道127・岐阜56を軸に、各県の代表的な道の駅施設(温泉・ミュージアム等)を紹介する読み物記事。全6ページのページネーション形式で、ランキング数値より旅行先としての施設紹介を優先。2023年5月公開でデータは対象ページより古い。FAQ・データ出典の明記は無い。"
     }
   ],
   "patches": [],
   "research": {
     "targetPage": {
-      "url": "https://stats47.jp/ranking/public-phone-count",
+      "url": "https://stats47.jp/blog/roadside-station-count-prefecture-gap",
       "status": 200,
-      "fetchedAt": "2026-09-27T06:37:42.255Z",
-      "inputHash": "95a582e632fb615f29ef8b93b54e677f17ed0f07c126dfd6ad7c5ec3388bcf80",
+      "fetchedAt": "2026-09-28T06:55:01.689Z",
+      "inputHash": "cb529ceeda735b94f771d55db60dbf0f993fe3bdfc25657d40de9e6a38ad96de",
       "htmlFile": ".local/seo-rank-watch/target-page.html",
-      "htmlSha256": "84327c3c0017ffc872531826710d0f693e7085de3b204af24efb9b4306341454",
+      "htmlSha256": "3c69798486cd1935630e3257852587a670bdf2ca84e14689ee032291f87a4c1e",
       "textFile": ".local/seo-rank-watch/target-page.txt",
-      "textSha256": "b3b407f84c24cc176344b321a93b7d5e06b74701885d5c88b2a3f82a4cd46872"
+      "textSha256": "eb97a3a22d7b4c0b4be26a691dce6cad0c024350c2fe0168f0a1c986c6ce0b3d"
     },
     "toolCalls": [
       {
         "name": "WebSearch",
-        "target": "全国の公衆電話の数"
+        "target": "道の駅 多い県"
       },
       {
         "name": "WebFetch",
-        "target": "https://news.yahoo.co.jp/expert/articles/abe51f5f22ff4cb0e33434bfcf036ea17521b6b8"
+        "target": "https://uub.jp/pdr/t/r.html"
       },
       {
         "name": "WebFetch",
-        "target": "https://stats47.jp/ranking/public-phone-count"
+        "target": "https://nlab.itmedia.co.jp/research/articles/1469594/"
       },
       {
         "name": "WebFetch",
-        "target": "https://www.ntt-east.co.jp/univs/univ-sub2.html"
+        "target": "https://stats47.jp/blog/roadside-station-count-prefecture-gap"
       }
     ]
   },
-  "selectedAt": "2026-09-27",
-  "inputHash": "95a582e632fb615f29ef8b93b54e677f17ed0f07c126dfd6ad7c5ec3388bcf80",
+  "selectedAt": "2026-09-28",
+  "inputHash": "cb529ceeda735b94f771d55db60dbf0f993fe3bdfc25657d40de9e6a38ad96de",
   "methods": [],
   "files": []
 }
