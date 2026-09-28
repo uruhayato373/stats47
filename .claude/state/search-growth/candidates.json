@@ -17179,7 +17179,7 @@
       "id": "measurement-gap::/",
       "url": "/",
       "type": "measurement-gap",
-      "status": "pending",
+      "status": "dismissed",
       "score": 0.036,
       "scoreBreakdown": {
         "impact": 0.3,
@@ -17209,7 +17209,9 @@
       ],
       "expectedMetric": "不足データ: crux:lcp_p75",
       "suggestedVerification": "該当 collector を live 実行 or GA4 custom dimension を登録して再取得",
-      "externalActionFlag": false
+      "externalActionFlag": false,
+      "dismissedAt": "2026-09-28T00:14:19.260Z",
+      "dismissReason": "W39審査: 不足はcrux:lcp_p75のみ(GA4は解消)。cruxソース自体が全URLでmissing(search-growth:status)で、個別URLではなくcollector側の欠損。トップはpsi-urls.txt 13行目でPSI日次計測済み(PSIソースfresh 228件)。crux collectorの復旧は候補ではなく基盤の課題として扱う"
     },
     {
       "id": "measurement-gap::/areas/01000/fishery-marine",
