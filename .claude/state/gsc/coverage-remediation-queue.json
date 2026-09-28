@@ -22,7 +22,7 @@
   },
   "summary": {
     "tracked_urls": 3417,
-    "pending_actionable": 1251,
+    "pending_actionable": 1211,
     "by_action": {
       "observe-after-fix": 1274,
       "enrich": 12,
@@ -30,14 +30,14 @@
       "content-check": 4
     },
     "by_status": {
-      "pending": 1251,
-      "in-progress": 17,
+      "done": 63,
       "resolved-by-design": 2127,
-      "done": 22
+      "pending": 1211,
+      "in-progress": 16
     },
-    "indexed_by_inspection": 22,
+    "indexed_by_inspection": 63,
     "pending_by_action": {
-      "observe-after-fix": 1251
+      "observe-after-fix": 1211
     },
     "by_verdict": {
       "live-misflagged": 1274,
@@ -70,12 +70,17 @@
       "canonical_url": "https://stats47.jp/areas/27000/health-checkups",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-09-28",
-      "resolved_at": null,
-      "resolved_by": null,
-      "inspection": null,
+      "resolved_at": "2026-09-28",
+      "resolved_by": "url-inspection",
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-09-22T19:28:18Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -92,12 +97,17 @@
       "canonical_url": "https://stats47.jp/areas/17000/single-parent-households",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-09-28",
-      "resolved_at": null,
-      "resolved_by": null,
-      "inspection": null,
+      "resolved_at": "2026-09-28",
+      "resolved_by": "url-inspection",
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-09-22T14:44:15Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -114,12 +124,17 @@
       "canonical_url": "https://stats47.jp/areas/10000/communication-access",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-09-28",
-      "resolved_at": null,
-      "resolved_by": null,
-      "inspection": null,
+      "resolved_at": "2026-09-28",
+      "resolved_by": "url-inspection",
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-09-22T14:32:59Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -136,12 +151,17 @@
       "canonical_url": "https://stats47.jp/areas/15000/community-participation",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-09-28",
-      "resolved_at": null,
-      "resolved_by": null,
-      "inspection": null,
+      "resolved_at": "2026-09-28",
+      "resolved_by": "url-inspection",
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-09-22T14:21:43Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -158,12 +178,17 @@
       "canonical_url": "https://stats47.jp/areas/17000/labor-wages",
       "verdict": "cc:enrich",
       "action": "enrich",
-      "status": "in-progress",
+      "status": "done",
       "first_seen": "2026-06-16",
       "last_checked": "2026-09-28",
-      "resolved_at": null,
-      "resolved_by": null,
-      "inspection": null,
+      "resolved_at": "2026-09-28",
+      "resolved_by": "url-inspection",
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-09-22T13:59:06Z"
+      },
       "wave_id": null,
       "content_verdict": "enrich",
       "content_signal": "dup-national-template(県名のみ差)",
@@ -180,12 +205,17 @@
       "canonical_url": "https://stats47.jp/areas/15000/cultural-participation",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-09-28",
-      "resolved_at": null,
-      "resolved_by": null,
-      "inspection": null,
+      "resolved_at": "2026-09-28",
+      "resolved_by": "url-inspection",
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-09-22T13:47:50Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -202,12 +232,17 @@
       "canonical_url": "https://stats47.jp/areas/19000/agriculture-production",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-09-28",
-      "resolved_at": null,
-      "resolved_by": null,
-      "inspection": null,
+      "resolved_at": "2026-09-28",
+      "resolved_by": "url-inspection",
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-09-22T13:36:31Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -224,12 +259,17 @@
       "canonical_url": "https://stats47.jp/areas/47000/earthquake-exposure",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-09-28",
-      "resolved_at": null,
-      "resolved_by": null,
-      "inspection": null,
+      "resolved_at": "2026-09-28",
+      "resolved_by": "url-inspection",
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-09-22T13:07:37Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -246,12 +286,17 @@
       "canonical_url": "https://stats47.jp/areas/11000/landslide-exposure",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-09-28",
-      "resolved_at": null,
-      "resolved_by": null,
-      "inspection": null,
+      "resolved_at": "2026-09-28",
+      "resolved_by": "url-inspection",
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-09-22T12:53:10Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -268,12 +313,17 @@
       "canonical_url": "https://stats47.jp/areas/17000/water-services",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-09-28",
-      "resolved_at": null,
-      "resolved_by": null,
-      "inspection": null,
+      "resolved_at": "2026-09-28",
+      "resolved_by": "url-inspection",
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-09-22T12:24:17Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -290,12 +340,17 @@
       "canonical_url": "https://stats47.jp/areas/04000/cities/04321",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-09-28",
-      "resolved_at": null,
-      "resolved_by": null,
-      "inspection": null,
+      "resolved_at": "2026-09-28",
+      "resolved_by": "url-inspection",
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-09-22T12:21:37Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -312,12 +367,17 @@
       "canonical_url": "https://stats47.jp/areas/03000/water-services",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-09-28",
-      "resolved_at": null,
-      "resolved_by": null,
-      "inspection": null,
+      "resolved_at": "2026-09-28",
+      "resolved_by": "url-inspection",
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-09-22T11:40:21Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -334,12 +394,17 @@
       "canonical_url": "https://stats47.jp/areas/08000/regional-energy",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-09-28",
-      "resolved_at": null,
-      "resolved_by": null,
-      "inspection": null,
+      "resolved_at": "2026-09-28",
+      "resolved_by": "url-inspection",
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-09-22T10:44:08Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -378,12 +443,17 @@
       "canonical_url": "https://stats47.jp/areas/40000/tsunami-exposure",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-09-28",
-      "resolved_at": null,
-      "resolved_by": null,
-      "inspection": null,
+      "resolved_at": "2026-09-28",
+      "resolved_by": "url-inspection",
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-09-22T09:16:20Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -444,12 +514,17 @@
       "canonical_url": "https://stats47.jp/areas/41000/communication-access",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-09-28",
-      "resolved_at": null,
-      "resolved_by": null,
-      "inspection": null,
+      "resolved_at": "2026-09-28",
+      "resolved_by": "url-inspection",
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-09-25T23:17:11Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -466,12 +541,17 @@
       "canonical_url": "https://stats47.jp/areas/04000/local-government-digital",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-09-28",
-      "resolved_at": null,
-      "resolved_by": null,
-      "inspection": null,
+      "resolved_at": "2026-09-28",
+      "resolved_by": "url-inspection",
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-09-27T05:37:00Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -488,12 +568,17 @@
       "canonical_url": "https://stats47.jp/areas/09000/single-parent-households",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-09-28",
-      "resolved_at": null,
-      "resolved_by": null,
-      "inspection": null,
+      "resolved_at": "2026-09-28",
+      "resolved_by": "url-inspection",
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-09-22T07:00:39Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -510,12 +595,17 @@
       "canonical_url": "https://stats47.jp/areas/24000/gender-participation",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-09-28",
-      "resolved_at": null,
-      "resolved_by": null,
-      "inspection": null,
+      "resolved_at": "2026-09-28",
+      "resolved_by": "url-inspection",
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-09-22T06:09:09Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -532,12 +622,17 @@
       "canonical_url": "https://stats47.jp/areas/31000/landslide-exposure",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-09-28",
-      "resolved_at": null,
-      "resolved_by": null,
-      "inspection": null,
+      "resolved_at": "2026-09-28",
+      "resolved_by": "url-inspection",
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-09-22T05:56:03Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -554,12 +649,17 @@
       "canonical_url": "https://stats47.jp/ranking/hobby-participation-rate-flower-arrangement",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-09-28",
-      "resolved_at": null,
-      "resolved_by": null,
-      "inspection": null,
+      "resolved_at": "2026-09-28",
+      "resolved_by": "url-inspection",
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-09-22T05:44:33Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -576,12 +676,17 @@
       "canonical_url": "https://stats47.jp/areas/34000/community-participation",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-09-28",
-      "resolved_at": null,
-      "resolved_by": null,
-      "inspection": null,
+      "resolved_at": "2026-09-28",
+      "resolved_by": "url-inspection",
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-09-27T05:28:00Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -642,12 +747,17 @@
       "canonical_url": "https://stats47.jp/areas/02000/landslide-exposure",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-09-28",
-      "resolved_at": null,
-      "resolved_by": null,
-      "inspection": null,
+      "resolved_at": "2026-09-28",
+      "resolved_by": "url-inspection",
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-09-27T23:45:47Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -823,7 +933,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-27T00:48:48Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -908,7 +1023,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-26T22:45:47Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -1040,7 +1160,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-21T16:46:54Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -1103,7 +1228,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-26T18:10:54Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -1345,7 +1475,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-24T08:34:07Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -1408,7 +1543,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-27T14:52:35Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -1425,12 +1565,17 @@
       "canonical_url": "https://stats47.jp/areas/40000/landslide-exposure",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-09-28",
-      "resolved_at": null,
-      "resolved_by": null,
-      "inspection": null,
+      "resolved_at": "2026-09-28",
+      "resolved_by": "url-inspection",
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-09-25T23:31:29Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -1513,12 +1658,17 @@
       "canonical_url": "https://stats47.jp/ranking/k6-known-score-estimated-persons-12plus",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-20",
       "last_checked": "2026-09-28",
-      "resolved_at": null,
-      "resolved_by": null,
-      "inspection": null,
+      "resolved_at": "2026-09-28",
+      "resolved_by": "url-inspection",
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-09-25T03:17:56Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -1642,12 +1792,17 @@
       "canonical_url": "https://stats47.jp/areas/13000/community-participation",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-09-28",
-      "resolved_at": null,
-      "resolved_by": null,
-      "inspection": null,
+      "resolved_at": "2026-09-28",
+      "resolved_by": "url-inspection",
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-09-27T15:05:56Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -1812,12 +1967,17 @@
       "canonical_url": "https://stats47.jp/ranking/employment-location-quotient-health-welfare",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-20",
       "last_checked": "2026-09-28",
-      "resolved_at": null,
-      "resolved_by": null,
-      "inspection": null,
+      "resolved_at": "2026-09-28",
+      "resolved_by": "url-inspection",
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-09-25T12:54:57Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -1834,12 +1994,17 @@
       "canonical_url": "https://stats47.jp/areas/22000/sports-participation",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-09-28",
-      "resolved_at": null,
-      "resolved_by": null,
-      "inspection": null,
+      "resolved_at": "2026-09-28",
+      "resolved_by": "url-inspection",
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-09-25T13:48:59Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -1902,7 +2067,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-25T22:41:40Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -1919,12 +2089,17 @@
       "canonical_url": "https://stats47.jp/products/data-p-04",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-20",
       "last_checked": "2026-09-28",
-      "resolved_at": null,
-      "resolved_by": null,
-      "inspection": null,
+      "resolved_at": "2026-09-28",
+      "resolved_by": "url-inspection",
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-09-25T23:34:50Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -2051,12 +2226,17 @@
       "canonical_url": "https://stats47.jp/ranking/employment-location-quotient-information-communication",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-20",
       "last_checked": "2026-09-28",
-      "resolved_at": null,
-      "resolved_by": null,
-      "inspection": null,
+      "resolved_at": "2026-09-28",
+      "resolved_by": "url-inspection",
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-09-24T22:19:39Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -2079,10 +2259,10 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-27",
+        "observed_at": "2026-09-28",
         "verdict": "NEUTRAL",
         "coverage_state": "クロール済み - インデックス未登録",
-        "last_crawl": "2026-09-25T04:35:31Z"
+        "last_crawl": "2026-09-27T05:55:51Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -2163,12 +2343,17 @@
       "canonical_url": "https://stats47.jp/areas/40000/sports-participation",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-09-28",
-      "resolved_at": null,
-      "resolved_by": null,
-      "inspection": null,
+      "resolved_at": "2026-09-28",
+      "resolved_by": "url-inspection",
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-09-25T02:07:05Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -2185,12 +2370,17 @@
       "canonical_url": "https://stats47.jp/areas/40000/regional-energy",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-09-28",
-      "resolved_at": null,
-      "resolved_by": null,
-      "inspection": null,
+      "resolved_at": "2026-09-28",
+      "resolved_by": "url-inspection",
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-09-24T23:01:44Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -2283,7 +2473,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-27T20:47:16Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -2327,7 +2522,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-25T23:44:52Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -2349,7 +2549,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-20T17:32:30Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -2481,7 +2686,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-25T23:44:48Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -2592,10 +2802,10 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-27",
+        "observed_at": "2026-09-28",
         "verdict": "NEUTRAL",
         "coverage_state": "クロール済み - インデックス未登録",
-        "last_crawl": "2026-09-25T08:26:03Z"
+        "last_crawl": "2026-09-27T11:55:29Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -2657,12 +2867,17 @@
       "canonical_url": "https://stats47.jp/ranking/information-private-establishments",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-20",
       "last_checked": "2026-09-28",
-      "resolved_at": null,
-      "resolved_by": null,
-      "inspection": null,
+      "resolved_at": "2026-09-28",
+      "resolved_by": "url-inspection",
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-09-27T14:26:21Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -2729,10 +2944,10 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-27",
+        "observed_at": "2026-09-28",
         "verdict": "NEUTRAL",
         "coverage_state": "クロール済み - インデックス未登録",
-        "last_crawl": "2026-09-25T10:44:13Z"
+        "last_crawl": "2026-09-27T20:47:18Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -2796,7 +3011,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-27T06:29:03Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -2840,7 +3060,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-25T12:00:30Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -3079,7 +3304,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-27T00:01:45Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -3167,7 +3397,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-19T22:02:26Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -3184,12 +3419,17 @@
       "canonical_url": "https://stats47.jp/areas/36000/childcare-services",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-20",
       "last_checked": "2026-09-28",
-      "resolved_at": null,
-      "resolved_by": null,
-      "inspection": null,
+      "resolved_at": "2026-09-28",
+      "resolved_by": "url-inspection",
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-09-26T13:46:29Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -3326,7 +3566,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-26T02:39:20Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -3400,12 +3645,17 @@
       "canonical_url": "https://stats47.jp/survey/public-facilities-status-survey",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-20",
       "last_checked": "2026-09-28",
-      "resolved_at": null,
-      "resolved_by": null,
-      "inspection": null,
+      "resolved_at": "2026-09-28",
+      "resolved_by": "url-inspection",
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-09-24T22:59:37Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -3537,7 +3787,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-19T07:40:13Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -3559,7 +3814,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-22T23:24:40Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -3603,7 +3863,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-27T12:54:43Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -3688,7 +3953,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-19T03:24:59Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -3817,7 +4087,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T16:10:56Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -3834,12 +4109,17 @@
       "canonical_url": "https://stats47.jp/areas/21000/construction-industry",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-09-28",
-      "resolved_at": null,
-      "resolved_by": null,
-      "inspection": null,
+      "resolved_at": "2026-09-28",
+      "resolved_by": "url-inspection",
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-09-24T10:48:50Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -3875,12 +4155,17 @@
       "canonical_url": "https://stats47.jp/areas/32000/sports-participation",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-09-28",
-      "resolved_at": null,
-      "resolved_by": null,
-      "inspection": null,
+      "resolved_at": "2026-09-28",
+      "resolved_by": "url-inspection",
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-09-23T08:44:02Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -3924,7 +4209,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T13:12:39Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -4100,7 +4390,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T07:23:37Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -4122,7 +4417,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T07:23:17Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -4139,12 +4439,17 @@
       "canonical_url": "https://stats47.jp/areas/09000/environmental-quality",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-09-28",
-      "resolved_at": null,
-      "resolved_by": null,
-      "inspection": null,
+      "resolved_at": "2026-09-28",
+      "resolved_by": "url-inspection",
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-09-23T14:14:50Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -4166,7 +4471,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T07:21:33Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -4188,7 +4498,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T07:21:12Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -4210,7 +4525,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T07:20:09Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -4232,7 +4552,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T07:19:47Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -4254,7 +4579,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T07:18:53Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -4276,7 +4606,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T07:17:29Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -4298,7 +4633,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T07:17:27Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -4320,7 +4660,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T07:15:36Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -4342,7 +4687,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T07:14:10Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -4364,7 +4714,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T07:13:34Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -4386,7 +4741,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T07:11:01Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -4408,7 +4768,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T07:10:31Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -4430,7 +4795,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T07:10:16Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -4452,7 +4822,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T07:07:54Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -4474,7 +4849,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T07:07:15Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -4496,7 +4876,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T07:07:01Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -4518,7 +4903,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T07:05:39Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -4540,7 +4930,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T07:05:10Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -4562,7 +4957,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T07:05:05Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -4584,7 +4984,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T07:04:58Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -4606,7 +5011,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T07:04:50Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -4628,7 +5038,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T07:04:38Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -4650,7 +5065,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T07:04:05Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -4672,7 +5092,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T07:03:58Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -4694,7 +5119,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T07:03:49Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -4716,7 +5146,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T07:03:41Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -4738,7 +5173,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T07:03:28Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -4760,7 +5200,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T07:03:15Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -4782,7 +5227,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T07:03:13Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -4804,7 +5254,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T07:02:40Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -4826,7 +5281,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T07:00:31Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -4848,7 +5308,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "サーバーエラー（5xx）",
+        "last_crawl": "2026-09-18T06:24:05Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -4870,7 +5335,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T06:56:32Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -4892,7 +5362,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-15T10:42:49Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -4914,7 +5389,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T06:52:44Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -4936,7 +5416,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T06:50:26Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -4958,7 +5443,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T06:49:16Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -4980,7 +5470,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T06:46:20Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -5002,7 +5497,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T06:43:29Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -5024,7 +5524,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T06:42:13Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -5046,7 +5551,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T06:40:40Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -5068,7 +5578,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T06:36:23Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -5090,7 +5605,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T06:36:06Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -5112,7 +5632,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T06:35:15Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -5134,7 +5659,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T06:32:59Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -5156,7 +5686,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T06:30:26Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -5222,7 +5757,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T06:26:59Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -5244,7 +5784,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "リダイレクト エラー",
+        "last_crawl": "2026-08-05T20:38:16Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -5266,7 +5811,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T06:18:45Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -5288,7 +5838,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T06:17:59Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -5310,7 +5865,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T06:16:31Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -5332,7 +5892,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T06:16:04Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -5354,7 +5919,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T06:15:17Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -5376,7 +5946,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T06:13:49Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -5398,7 +5973,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T06:08:11Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -5420,7 +6000,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T06:07:02Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -5469,7 +6054,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T06:04:34Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -5486,12 +6076,17 @@
       "canonical_url": "https://stats47.jp/ranking/single-father-employment-rate",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-09-28",
-      "resolved_at": null,
-      "resolved_by": null,
-      "inspection": null,
+      "resolved_at": "2026-09-28",
+      "resolved_by": "url-inspection",
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-09-25T03:16:40Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -5508,12 +6103,17 @@
       "canonical_url": "https://stats47.jp/ranking/child-rearing-allowance-recipients",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-09-28",
-      "resolved_at": null,
-      "resolved_by": null,
-      "inspection": null,
+      "resolved_at": "2026-09-28",
+      "resolved_by": "url-inspection",
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-09-25T03:17:16Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -5535,7 +6135,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T05:53:54Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -5557,7 +6162,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T05:51:28Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -5574,12 +6184,17 @@
       "canonical_url": "https://stats47.jp/areas/21000/daily-time-use",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-09-28",
-      "resolved_at": null,
-      "resolved_by": null,
-      "inspection": null,
+      "resolved_at": "2026-09-28",
+      "resolved_by": "url-inspection",
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-09-26T04:56:49Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -5601,7 +6216,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T05:46:45Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -5623,7 +6243,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "リダイレクト エラー",
+        "last_crawl": "2026-08-23T01:29:22Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -5645,7 +6270,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T05:41:55Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -5667,7 +6297,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T05:40:10Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -5689,7 +6324,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T05:39:56Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -5711,7 +6351,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T05:38:26Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -5733,7 +6378,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T05:35:47Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -5777,7 +6427,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T05:30:24Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -5799,7 +6454,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T05:30:13Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -5821,7 +6481,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T05:29:18Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -5843,7 +6508,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T05:25:36Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -5865,7 +6535,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T05:23:19Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -5887,7 +6562,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T05:22:33Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -5909,7 +6589,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T05:21:00Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -5931,7 +6616,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T05:19:34Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -5975,7 +6665,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T05:12:25Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -5997,7 +6692,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T05:05:48Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -6019,7 +6719,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T05:05:40Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -6041,7 +6746,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T05:05:32Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -6151,7 +6861,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-18T00:05:15Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -6677,7 +7392,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-27",
+        "observed_at": "2026-09-28",
         "verdict": "NEUTRAL",
         "coverage_state": "クロール済み - インデックス未登録",
         "last_crawl": "2026-09-17T06:49:05Z"
@@ -6892,7 +7607,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-16T13:19:46Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -6914,7 +7634,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-16T10:51:50Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -6956,7 +7681,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-27",
+        "observed_at": "2026-09-28",
         "verdict": "NEUTRAL",
         "coverage_state": "クロール済み - インデックス未登録",
         "last_crawl": "2026-09-16T04:54:20Z"
@@ -7152,7 +7877,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-15T16:44:12Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -7237,7 +7967,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-15T04:11:57Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -7429,7 +8164,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-14T10:12:40Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -7492,7 +8232,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-14T08:59:58Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -7558,7 +8303,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-09-13T18:54:20Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -7630,7 +8380,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-27",
+        "observed_at": "2026-09-28",
         "verdict": "NEUTRAL",
         "coverage_state": "クロール済み - インデックス未登録",
         "last_crawl": "2026-09-13T11:13:50Z"
@@ -7657,7 +8407,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-27",
+        "observed_at": "2026-09-28",
         "verdict": "NEUTRAL",
         "coverage_state": "クロール済み - インデックス未登録",
         "last_crawl": "2026-09-13T10:41:13Z"
@@ -7755,7 +8505,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-27",
+        "observed_at": "2026-09-28",
         "verdict": "NEUTRAL",
         "coverage_state": "クロール済み - インデックス未登録",
         "last_crawl": "2026-09-13T02:16:10Z"
@@ -7782,7 +8532,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-27",
+        "observed_at": "2026-09-28",
         "verdict": "NEUTRAL",
         "coverage_state": "クロール済み - インデックス未登録",
         "last_crawl": "2026-09-12T15:54:26Z"
@@ -7809,7 +8559,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-27",
+        "observed_at": "2026-09-28",
         "verdict": "NEUTRAL",
         "coverage_state": "クロール済み - インデックス未登録",
         "last_crawl": "2026-09-12T15:20:19Z"
@@ -7836,7 +8586,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-27",
+        "observed_at": "2026-09-28",
         "verdict": "NEUTRAL",
         "coverage_state": "クロール済み - インデックス未登録",
         "last_crawl": "2026-09-12T14:41:00Z"
@@ -7890,7 +8640,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-27",
+        "observed_at": "2026-09-28",
         "verdict": "NEUTRAL",
         "coverage_state": "クロール済み - インデックス未登録",
         "last_crawl": "2026-09-12T13:33:27Z"
@@ -7917,7 +8667,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-27",
+        "observed_at": "2026-09-28",
         "verdict": "NEUTRAL",
         "coverage_state": "クロール済み - インデックス未登録",
         "last_crawl": "2026-09-12T13:07:18Z"
@@ -7993,7 +8743,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-27",
+        "observed_at": "2026-09-28",
         "verdict": "NEUTRAL",
         "coverage_state": "クロール済み - インデックス未登録",
         "last_crawl": "2026-09-12T07:46:10Z"
@@ -8093,7 +8843,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-27",
+        "observed_at": "2026-09-28",
         "verdict": "NEUTRAL",
         "coverage_state": "クロール済み - インデックス未登録",
         "last_crawl": "2026-09-12T00:08:30Z"
@@ -8120,7 +8870,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-27",
+        "observed_at": "2026-09-28",
         "verdict": "NEUTRAL",
         "coverage_state": "クロール済み - インデックス未登録",
         "last_crawl": "2026-09-11T22:50:41Z"
@@ -8147,7 +8897,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-27",
+        "observed_at": "2026-09-28",
         "verdict": "NEUTRAL",
         "coverage_state": "クロール済み - インデックス未登録",
         "last_crawl": "2026-09-11T22:35:32Z"
@@ -8174,7 +8924,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-27",
+        "observed_at": "2026-09-28",
         "verdict": "NEUTRAL",
         "coverage_state": "クロール済み - インデックス未登録",
         "last_crawl": "2026-09-11T22:33:30Z"
@@ -8201,10 +8951,10 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-27",
+        "observed_at": "2026-09-28",
         "verdict": "NEUTRAL",
         "coverage_state": "クロール済み - インデックス未登録",
-        "last_crawl": "2026-09-25T21:21:27Z"
+        "last_crawl": "2026-09-27T21:36:42Z"
       },
       "wave_id": null,
       "content_verdict": null,
@@ -8255,7 +9005,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-27",
+        "observed_at": "2026-09-28",
         "verdict": "NEUTRAL",
         "coverage_state": "クロール済み - インデックス未登録",
         "last_crawl": "2026-09-11T21:49:06Z"
@@ -8336,7 +9086,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-27",
+        "observed_at": "2026-09-28",
         "verdict": "NEUTRAL",
         "coverage_state": "クロール済み - インデックス未登録",
         "last_crawl": "2026-09-11T20:53:12Z"
@@ -8363,7 +9113,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-27",
+        "observed_at": "2026-09-28",
         "verdict": "NEUTRAL",
         "coverage_state": "クロール済み - インデックス未登録",
         "last_crawl": "2026-09-11T20:25:52Z"
@@ -8463,7 +9213,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-27",
+        "observed_at": "2026-09-28",
         "verdict": "NEUTRAL",
         "coverage_state": "クロール済み - インデックス未登録",
         "last_crawl": "2026-09-11T19:46:47Z"
@@ -8490,7 +9240,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-27",
+        "observed_at": "2026-09-28",
         "verdict": "NEUTRAL",
         "coverage_state": "クロール済み - インデックス未登録",
         "last_crawl": "2026-09-11T19:39:18Z"
@@ -8517,7 +9267,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-27",
+        "observed_at": "2026-09-28",
         "verdict": "NEUTRAL",
         "coverage_state": "クロール済み - インデックス未登録",
         "last_crawl": "2026-09-11T19:37:55Z"
@@ -8571,7 +9321,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-27",
+        "observed_at": "2026-09-28",
         "verdict": "NEUTRAL",
         "coverage_state": "クロール済み - インデックス未登録",
         "last_crawl": "2026-09-11T19:28:16Z"
@@ -8598,7 +9348,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-27",
+        "observed_at": "2026-09-28",
         "verdict": "NEUTRAL",
         "coverage_state": "クロール済み - インデックス未登録",
         "last_crawl": "2026-09-11T19:19:56Z"
@@ -8625,7 +9375,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-27",
+        "observed_at": "2026-09-28",
         "verdict": "NEUTRAL",
         "coverage_state": "クロール済み - インデックス未登録",
         "last_crawl": "2026-09-11T19:11:34Z"
@@ -8652,7 +9402,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-27",
+        "observed_at": "2026-09-28",
         "verdict": "NEUTRAL",
         "coverage_state": "クロール済み - インデックス未登録",
         "last_crawl": "2026-09-11T19:01:14Z"
@@ -8733,7 +9483,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-27",
+        "observed_at": "2026-09-28",
         "verdict": "NEUTRAL",
         "coverage_state": "クロール済み - インデックス未登録",
         "last_crawl": "2026-09-11T18:16:24Z"
@@ -8760,7 +9510,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-27",
+        "observed_at": "2026-09-28",
         "verdict": "NEUTRAL",
         "coverage_state": "クロール済み - インデックス未登録",
         "last_crawl": "2026-09-11T17:54:37Z"
@@ -8954,7 +9704,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-27",
+        "observed_at": "2026-09-28",
         "verdict": "NEUTRAL",
         "coverage_state": "クロール済み - インデックス未登録",
         "last_crawl": "2026-09-10T18:09:11Z"
@@ -8981,7 +9731,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-27",
+        "observed_at": "2026-09-28",
         "verdict": "NEUTRAL",
         "coverage_state": "クロール済み - インデックス未登録",
         "last_crawl": "2026-09-10T13:14:56Z"
@@ -9008,7 +9758,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-27",
+        "observed_at": "2026-09-28",
         "verdict": "NEUTRAL",
         "coverage_state": "クロール済み - インデックス未登録",
         "last_crawl": "2026-09-10T13:14:54Z"
@@ -9035,7 +9785,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-27",
+        "observed_at": "2026-09-28",
         "verdict": "NEUTRAL",
         "coverage_state": "クロール済み - インデックス未登録",
         "last_crawl": "2026-09-10T10:02:22Z"
@@ -9217,7 +9967,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-24",
+        "observed_at": "2026-09-28",
         "verdict": "NEUTRAL",
         "coverage_state": "クロール済み - インデックス未登録",
         "last_crawl": "2026-08-27T04:05:36Z"
@@ -9265,7 +10015,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-08-26T14:01:31Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -9386,7 +10141,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-27",
+        "observed_at": "2026-09-28",
         "verdict": "NEUTRAL",
         "coverage_state": "クロール済み - インデックス未登録",
         "last_crawl": "2026-08-09T05:12:44Z"
@@ -9431,7 +10186,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "クロール済み - インデックス未登録",
+        "last_crawl": "2026-08-08T19:26:24Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -9473,7 +10233,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-27",
+        "observed_at": "2026-09-28",
         "verdict": "NEUTRAL",
         "coverage_state": "クロール済み - インデックス未登録",
         "last_crawl": "2026-08-06T15:10:40Z"
@@ -9500,7 +10260,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-27",
+        "observed_at": "2026-09-28",
         "verdict": "NEUTRAL",
         "coverage_state": "クロール済み - インデックス未登録",
         "last_crawl": "2026-08-06T14:51:16Z"
@@ -9527,7 +10287,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-27",
+        "observed_at": "2026-09-28",
         "verdict": "NEUTRAL",
         "coverage_state": "クロール済み - インデックス未登録",
         "last_crawl": "2026-08-06T06:57:31Z"
@@ -9668,7 +10428,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-27",
+        "observed_at": "2026-09-28",
         "verdict": "NEUTRAL",
         "coverage_state": "クロール済み - インデックス未登録",
         "last_crawl": "2026-07-30T07:19:24Z"
@@ -9695,7 +10455,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-27",
+        "observed_at": "2026-09-28",
         "verdict": "NEUTRAL",
         "coverage_state": "クロール済み - インデックス未登録",
         "last_crawl": "2026-07-30T03:30:13Z"
@@ -9722,7 +10482,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-27",
+        "observed_at": "2026-09-28",
         "verdict": "NEUTRAL",
         "coverage_state": "クロール済み - インデックス未登録",
         "last_crawl": "2026-07-28T22:08:07Z"
@@ -9858,7 +10618,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-27",
+        "observed_at": "2026-09-28",
         "verdict": "NEUTRAL",
         "coverage_state": "クロール済み - インデックス未登録",
         "last_crawl": "2026-07-21T11:00:56Z"
@@ -9907,7 +10667,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-27",
+        "observed_at": "2026-09-28",
         "verdict": "NEUTRAL",
         "coverage_state": "クロール済み - インデックス未登録",
         "last_crawl": "2026-07-15T00:13:00Z"
@@ -9934,7 +10694,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-27",
+        "observed_at": "2026-09-28",
         "verdict": "NEUTRAL",
         "coverage_state": "クロール済み - インデックス未登録",
         "last_crawl": "2026-07-14T10:40:47Z"
@@ -9980,7 +10740,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-27",
+        "observed_at": "2026-09-28",
         "verdict": "NEUTRAL",
         "coverage_state": "クロール済み - インデックス未登録",
         "last_crawl": "2026-07-12T07:19:05Z"
@@ -10007,7 +10767,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-27",
+        "observed_at": "2026-09-28",
         "verdict": "NEUTRAL",
         "coverage_state": "クロール済み - インデックス未登録",
         "last_crawl": "2026-07-11T18:52:00Z"
@@ -10034,7 +10794,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-27",
+        "observed_at": "2026-09-28",
         "verdict": "NEUTRAL",
         "coverage_state": "クロール済み - インデックス未登録",
         "last_crawl": "2026-07-11T16:21:08Z"
@@ -10080,7 +10840,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-27",
+        "observed_at": "2026-09-28",
         "verdict": "NEUTRAL",
         "coverage_state": "クロール済み - インデックス未登録",
         "last_crawl": "2026-07-10T16:06:31Z"
@@ -17176,7 +17936,7 @@
       "resolved_at": "2026-09-25",
       "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-09-27",
+        "observed_at": "2026-09-28",
         "verdict": "PASS",
         "coverage_state": "送信して登録されました",
         "last_crawl": "2026-09-25T12:58:32Z"
@@ -43650,7 +44410,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -43672,7 +44437,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "URL が Google に認識されていません",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -43694,7 +44464,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "URL が Google に認識されていません",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -43716,7 +44491,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -43738,7 +44518,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -43760,7 +44545,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -43782,7 +44572,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -43804,7 +44599,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -43826,7 +44626,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -43848,7 +44653,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -43870,7 +44680,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -43892,7 +44707,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -43914,7 +44734,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -43937,7 +44762,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-27",
+        "observed_at": "2026-09-28",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -43963,7 +44788,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -43985,7 +44815,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -44007,7 +44842,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -57956,7 +58796,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "見つかりませんでした（404）",
+        "last_crawl": "2026-08-24T19:05:40Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -63032,7 +63877,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "サーバーエラー（5xx）",
+        "last_crawl": "2026-09-18T06:44:15Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -63054,7 +63904,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "サーバーエラー（5xx）",
+        "last_crawl": "2026-09-18T06:31:57Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -63076,7 +63931,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "サーバーエラー（5xx）",
+        "last_crawl": "2026-09-18T06:29:26Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -63098,7 +63958,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "サーバーエラー（5xx）",
+        "last_crawl": "2026-09-18T06:09:47Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -63120,7 +63985,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "サーバーエラー（5xx）",
+        "last_crawl": "2026-09-18T05:22:03Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -63137,12 +64007,17 @@
       "canonical_url": "https://stats47.jp/ranking/housing-land-debt-per-household",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-20",
       "last_checked": "2026-09-28",
-      "resolved_at": null,
-      "resolved_by": null,
-      "inspection": null,
+      "resolved_at": "2026-09-28",
+      "resolved_by": "url-inspection",
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-09-27T11:21:18Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -63221,7 +64096,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "サーバーエラー（5xx）",
+        "last_crawl": "2026-05-07T23:55:25Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -63243,7 +64123,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "サーバーエラー（5xx）",
+        "last_crawl": "2026-05-07T05:37:42Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -63265,7 +64150,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "サーバーエラー（5xx）",
+        "last_crawl": "2026-05-07T05:24:16Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -63287,7 +64177,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "サーバーエラー（5xx）",
+        "last_crawl": "2026-05-07T05:10:09Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -63309,7 +64204,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "サーバーエラー（5xx）",
+        "last_crawl": "2026-05-07T05:01:08Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -63331,7 +64231,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "サーバーエラー（5xx）",
+        "last_crawl": "2026-05-07T04:52:44Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -63353,7 +64258,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "サーバーエラー（5xx）",
+        "last_crawl": "2026-05-07T04:48:43Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -63375,7 +64285,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "サーバーエラー（5xx）",
+        "last_crawl": "2026-05-07T04:40:39Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -63397,7 +64312,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "サーバーエラー（5xx）",
+        "last_crawl": "2026-05-07T00:04:44Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -63951,7 +64871,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "ソフト 404",
+        "last_crawl": "2026-07-28T08:40:23Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -63992,7 +64917,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "ソフト 404",
+        "last_crawl": "2026-07-28T07:28:48Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -65154,7 +66084,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "ソフト 404",
+        "last_crawl": "2026-06-20T01:08:08Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -65176,7 +66111,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "ソフト 404",
+        "last_crawl": "2026-06-19T22:44:19Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -65650,7 +66590,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "ソフト 404",
+        "last_crawl": "2026-06-05T19:02:55Z"
+      },
       "wave_id": null,
       "content_verdict": "enrich",
       "content_signal": "dup-national-template(県名のみ差)",
@@ -65672,7 +66617,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "ソフト 404",
+        "last_crawl": "2026-06-05T16:36:27Z"
+      },
       "wave_id": null,
       "content_verdict": "enrich",
       "content_signal": "dup-national-template(県名のみ差)",
@@ -65694,7 +66644,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "ソフト 404",
+        "last_crawl": "2026-06-05T16:23:14Z"
+      },
       "wave_id": null,
       "content_verdict": "enrich",
       "content_signal": "dup-national-template(県名のみ差)",
@@ -65716,7 +66671,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "ソフト 404",
+        "last_crawl": "2026-06-05T15:56:12Z"
+      },
       "wave_id": null,
       "content_verdict": "enrich",
       "content_signal": "dup-national-template(県名のみ差)",
@@ -65738,7 +66698,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "ソフト 404",
+        "last_crawl": "2026-06-05T15:52:02Z"
+      },
       "wave_id": null,
       "content_verdict": "enrich",
       "content_signal": "dup-national-template(県名のみ差)",
@@ -65760,7 +66725,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "ソフト 404",
+        "last_crawl": "2026-06-05T15:23:31Z"
+      },
       "wave_id": null,
       "content_verdict": "enrich",
       "content_signal": "dup-national-template(県名のみ差)",
@@ -65782,7 +66752,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "ソフト 404",
+        "last_crawl": "2026-06-05T14:26:28Z"
+      },
       "wave_id": null,
       "content_verdict": "enrich",
       "content_signal": "dup-national-template(県名のみ差)",
@@ -65804,7 +66779,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "ソフト 404",
+        "last_crawl": "2026-06-05T13:32:55Z"
+      },
       "wave_id": null,
       "content_verdict": "enrich",
       "content_signal": "dup-national-template(県名のみ差)",
@@ -65826,7 +66806,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "ソフト 404",
+        "last_crawl": "2026-06-05T12:14:22Z"
+      },
       "wave_id": null,
       "content_verdict": "enrich",
       "content_signal": "dup-national-template(県名のみ差)",
@@ -65848,7 +66833,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "ソフト 404",
+        "last_crawl": "2026-06-05T11:45:07Z"
+      },
       "wave_id": null,
       "content_verdict": "enrich",
       "content_signal": "dup-national-template(県名のみ差)",
@@ -65870,7 +66860,12 @@
       "last_checked": "2026-09-28",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-09-28",
+        "verdict": "NEUTRAL",
+        "coverage_state": "ソフト 404",
+        "last_crawl": "2026-06-05T10:59:14Z"
+      },
       "wave_id": null,
       "content_verdict": "enrich",
       "content_signal": "dup-national-template(県名のみ差)",
