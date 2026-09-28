@@ -1,13 +1,22 @@
 {
   "schemaVersion": 1,
-  "date": "2026-09-27",
+  "date": "2026-09-28",
   "period": {
-    "periodStart": "2026-09-18",
-    "periodEnd": "2026-09-24",
+    "periodStart": "2026-09-19",
+    "periodEnd": "2026-09-25",
     "windowDays": 7
   },
-  "inputHash": "878376d5b4a792f35a9d38db4bfcd47689882e3a5e30c2ae8851620827a5a08c",
+  "inputHash": "cb529ceeda735b94f771d55db60dbf0f993fe3bdfc25657d40de9e6a38ad96de",
   "movements": [
+    {
+      "keyword": "都道府県",
+      "targetPath": "/",
+      "before": 3,
+      "after": 79,
+      "beforeImpressions": 2,
+      "impressions": 1,
+      "change": -76
+    },
     {
       "keyword": "日本人口ランキング",
       "targetPath": "/municipalities/ranking/japanese-population",
@@ -16,33 +25,6 @@
       "beforeImpressions": 2,
       "impressions": 1,
       "change": -47
-    },
-    {
-      "keyword": "出生率が高い都道府県",
-      "targetPath": "/blog/fertility-rate-prefecture-gap",
-      "before": 43,
-      "after": 1,
-      "beforeImpressions": 1,
-      "impressions": 3,
-      "change": 42
-    },
-    {
-      "keyword": "医薬品 卸 ランキング 県 別",
-      "targetPath": "/ranking/pharmaceutical-sales-count",
-      "before": 41,
-      "after": 1,
-      "beforeImpressions": 1,
-      "impressions": 1,
-      "change": 40
-    },
-    {
-      "keyword": "高校 の 先生 給料",
-      "targetPath": "/ranking/high-school-teacher-annual-income",
-      "before": 65,
-      "after": 25,
-      "beforeImpressions": 1,
-      "impressions": 2,
-      "change": 40
     },
     {
       "keyword": "高校教師年収",
@@ -54,6 +36,15 @@
       "change": 39
     },
     {
+      "keyword": "site:stats47.jp",
+      "targetPath": "/areas/15000",
+      "before": 47.486486486486484,
+      "after": 9.307692307692308,
+      "beforeImpressions": 74,
+      "impressions": 13,
+      "change": 38.17879417879418
+    },
+    {
       "keyword": "日照時間ランキング",
       "targetPath": "/blog/annual-sunshine-duration-prefecture-gap",
       "before": 39,
@@ -61,24 +52,6 @@
       "beforeImpressions": 1,
       "impressions": 1,
       "change": 38
-    },
-    {
-      "keyword": "都道府県",
-      "targetPath": "/",
-      "before": 3,
-      "after": 41,
-      "beforeImpressions": 1,
-      "impressions": 2,
-      "change": -38
-    },
-    {
-      "keyword": "site:stats47.jp",
-      "targetPath": "/areas/15000",
-      "before": 47.95890410958904,
-      "after": 10,
-      "beforeImpressions": 73,
-      "impressions": 14,
-      "change": 37.95890410958904
     },
     {
       "keyword": "小松 市 人口",
@@ -90,13 +63,40 @@
       "change": -37
     },
     {
+      "keyword": "高校教師 年収",
+      "targetPath": "/ranking/high-school-teacher-annual-income",
+      "before": 58,
+      "after": 22.666666666666668,
+      "beforeImpressions": 1,
+      "impressions": 3,
+      "change": 35.33333333333333
+    },
+    {
+      "keyword": "高校 教員 年収",
+      "targetPath": "/blog/high-school-teacher-salary-prefecture-gap",
+      "before": 10.88888888888889,
+      "after": 46.2,
+      "beforeImpressions": 9,
+      "impressions": 5,
+      "change": -35.31111111111112
+    },
+    {
       "keyword": "site:stats47.jp",
       "targetPath": "/ranking/railway-passengers",
-      "before": 47.791044776119406,
-      "after": 13.466666666666667,
-      "beforeImpressions": 67,
-      "impressions": 15,
-      "change": 34.32437810945274
+      "before": 47.39705882352941,
+      "after": 12.785714285714286,
+      "beforeImpressions": 68,
+      "impressions": 14,
+      "change": 34.61134453781513
+    },
+    {
+      "keyword": "高校教諭 年収",
+      "targetPath": "/blog/high-school-teacher-salary-prefecture-gap",
+      "before": 7.833333333333333,
+      "after": 42,
+      "beforeImpressions": 6,
+      "impressions": 1,
+      "change": -34.166666666666664
     }
   ],
   "verdicts": [
@@ -106,7 +106,16 @@
       "reason": "query-page-not-reported"
     }
   ],
-  "selected": null,
+  "selected": {
+    "keyword": "道の駅 多い県",
+    "targetPath": "/blog/roadside-station-count-prefecture-gap",
+    "rank": 8.69243156199678,
+    "impressions": 621,
+    "clicks": 0,
+    "group": 5,
+    "previousMethod": null,
+    "editableFile": null
+  },
   "observing": [
     {
       "keyword": "40代 未婚 割合 日本 国勢調査",
