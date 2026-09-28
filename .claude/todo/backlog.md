@@ -159,6 +159,25 @@ updated: 2026-09-21
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [DATA-WAGE-TABLE-YEARS-01] 賃金構造基本統計の表を使う 40 指標が 2022 年しか配信していない原因を CI で確かめて直す
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [レーン:データ品質] [起票:2026-09-28]
+
+- **事象 (2026-09-28 実測)**: `statsDataId: "0003445758"` を使う metric は 40 件。代表の `school-teacher-annual-income` /
+  `nurse-annual-income` / `nursery-teacher-annual-income` / `doctor-annual-income` は R2 `app/stats/<key>/values.json` が
+  すべて `2022` の 47 行だけ。config の years は `{from: 2010, to: 2023}`。e-Stat カタログでは表名が
+  「令和２年以降 一般_都道府県別_職種（特掲）DB」で、複数年を持つ表のはず。データ品質キューでは `school-teacher-annual-income` が
+  「最新 2022 年・2 周期遅れ (推定)」、GSC 表示 916 で需要順 4 位 (`DATA-QUALITY-LOOP-01` の第1週で切り出し)。
+- **[仮説]** ① `cdTab` 08×12 + 12 の組み合わせが 2022 年だけに存在し、他の年は別の表章項目コード (memory
+  `reference_estat_wage_survey` は tab 40 / 44 と記録) ② 表が年ごとに更新され、取り込み時点で 2022 年分しか無かった
+  ③ config の years (〜2023) より新しい 2024・2025 年が表にあり、範囲外で落ちている。
+- **次**: e-Stat の取得は CI 専用 (ローカルに API キーが無い)。CI で `0003445758` の `getMetaInfo` の time / tab と、
+  `cdCat01=01, cdCat02=1192` で年ごとの non-null 県数を出す (data-refresh の dryRun は年別の件数を出さないので、
+  出力を足すか調査用の workflow_dispatch を使う)。原因に合わせて 40 件の config を直し、data-refresh で再取り込みする。
+- **停止条件**: 年によって表章項目の定義 (所定内給与か、きまって支給する給与か) が違う場合は、同じ系列として並べない。
+  R2 反映はオーナー承認。40 件を推測で一括変更しない (代表 1 件で年別の値を確かめてから広げる)。
+- **完了条件**: 40 件が e-Stat に実在する全年を配信し、`school-teacher-annual-income` の最新年が公表済みの最新年と一致している。
+  年ごとに定義が違って並べられない場合は、その理由と採った年の範囲が本カードの削除コミットに書かれている。
+
 ### [AREA-PROFILE-JSON-RETIRE-01] 県の profile.json の生成をやめる (読み手 0 になったため)
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-09-28] [レーン:データ品質]
 
