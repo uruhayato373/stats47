@@ -2,20 +2,21 @@
 /**
  * refresh-session.mjs — A8 / もしも / KDP の専用プロファイルのログインを Mac 上で保ち、CI へ渡す。
  *
- * 流れ: 専用プロファイルで管理画面を開く → 切れていれば macOS キーチェーンの ID/PW で 1 回だけ
- * ログインする → state を保存 → `bootstrap-session.mjs SOURCE --publish` で CI の Secret を更新する。
+ * 流れ: 専用プロファイルで管理画面を開く → 切れていれば OS の資格情報ストア (Mac = キーチェーン、Windows = 資格情報
+ * マネージャー。`credential-store.mjs`) の ID/PW で 1 回だけログインする → state を保存 → `bootstrap-session.mjs SOURCE --publish` で CI の Secret を更新する。
  * 新しい世代の Secret は auth-recovery.mjs の停止 (拒否済み世代) を解除する。
  *
  * state は stats47 と doboku-note で共用する。`.local/playwright-{a8,moshimo}-state.json` は
  * `~/.local/share/asp-sessions/` への symlink (docs/01_技術設計/07_Playwright認証プロファイル.md)。
  *
  * 守ること:
- *   - ID/PW はキーチェーンからだけ読む。ログ・引数・ファイルへ出さない
- *   - 2FA / CAPTCHA / 追加確認は突破しない。human_required で止めて通知する
+ *   - ID/PW は `credential-store.mjs` からだけ読む。ログ・引数・ファイルへ出さない
+ *   - CAPTCHA / 追加確認は突破しない。human_required で止めて通知する。2FA は認証アプリ方式 (TOTP) の秘密鍵が
+ *     `stats47-measurement-<source>-totp` に登録されている場合だけ、コードを計算して入力する (本人口座の正規の 2FA)
  *   - ログイン失敗は 1 回で止め、失敗印を残して以後の自動試行をしない (アカウントロック回避)。
  *     人が確認して失敗印を消すまで再試行しない
  *
- * キーチェーン登録 (オーナーが 1 回だけ。-w を値なしで付けるとパスワードを対話入力できる):
+ * 登録 (オーナーが各マシンで 1 回だけ。Windows の cmdkey と TOTP の登録は `credential-store.mjs` の冒頭):
  *   security add-generic-password -s stats47-measurement-a8 -a <ログインID> -w
  *   security add-generic-password -s stats47-measurement-moshimo -a <ログインID> -w
  *   security add-generic-password -s stats47-measurement-kdp -a <Amazon のメールアドレス> -w
@@ -26,13 +27,14 @@
  * 「ログインしたままにする」を付けて 2FA の再要求を減らす。2FA が毎回出る口座では自動化できない。
  *
  * Usage: refresh-session.mjs SOURCE... [--publish] [--headed] [--wait-human]
- *   --wait-human: キーチェーンを使わず、開いたブラウザで人がログインするのを最大 10 分待つ
+ *   --wait-human: 資格情報ストアを使わず、開いたブラウザで人がログインするのを最大 10 分待つ
  */
 import { existsSync, readFileSync, writeFileSync, rmSync, mkdirSync } from 'node:fs';
 import { join } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
 import { scopedState } from './sources.mjs';
+import { readCredential, totpCode } from './credential-store.mjs';
 
 export const LOGIN = {
   a8: {
@@ -62,6 +64,8 @@ export const LOGIN = {
     headed: true, // Amazon は headless を bot とみなして CAPTCHA を出しやすい
     loggedIn: (url) => /kdp\.amazon\.co\.jp\//.test(url) && !/\/ap\/(signin|mfa|cvf)/.test(url),
     challengeUrl: /\/ap\/(mfa|cvf)|\/errors\/validateCaptcha/,
+    // 認証アプリ方式の 2FA 画面。セレクタは Amazon の一般的な MFA フォーム (実機では未確認。外れたら human_required で止まる)
+    otp: { url: /\/ap\/mfa/, input: 'input[name=otpCode]', remember: 'input[name=rememberDevice]', submit: 'input#auth-signin-button' },
   },
 };
 
@@ -72,24 +76,8 @@ export function classifyLoginOutcome(source, { url, hasPassword, hasChallenge })
   return 'login_failed';
 }
 
-/** `security find-generic-password` の属性出力からアカウント名を取り出す。 */
-export function parseKeychainAccount(text) {
-  const m = /"acct"<blob>="([^"]*)"/.exec(text);
-  return m ? m[1] : null;
-}
-
-function keychainCredential(source) {
-  const service = `stats47-measurement-${source}`;
-  const run = (extra) => execFileSync('security', ['find-generic-password', '-s', service, ...extra],
-    { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] });
-  try {
-    const user = parseKeychainAccount(run([]));
-    const password = run(['-w']).replace(/\n$/, '');
-    return user && password ? { user, password } : null;
-  } catch { return null; }
-}
-
 function notify(message) {
+  if (process.platform !== 'darwin') { console.error(`[stats47 計測ログイン] ${message}`); return; }
   try { execFileSync('osascript', ['-e', `display notification ${JSON.stringify(message)} with title "stats47 計測ログイン"`]); } catch { /* 通知は補助 */ }
 }
 
@@ -125,6 +113,19 @@ async function submitCredential(page, conf, cred) {
   await page.waitForTimeout(5000);
 }
 
+/** 画面が認証アプリの 2FA のときだけ、TOTP を計算して 1 回入力する。入力できなければ何もしない (呼び側が human_required で止める)。 */
+export async function passTotpIfOffered(page, conf, cred) {
+  if (!conf.otp || !cred?.totpSecret || !conf.otp.url.test(page.url())) return false;
+  const input = page.locator(conf.otp.input).first();
+  if (!(await input.isVisible().catch(() => false))) return false;
+  await input.fill(totpCode(cred.totpSecret));
+  if (conf.otp.remember) await page.locator(conf.otp.remember).first().check().catch(() => {});
+  await page.click(conf.otp.submit).catch(() => {});
+  await page.waitForLoadState('domcontentloaded', { timeout: 60000 }).catch(() => {});
+  await page.waitForTimeout(5000);
+  return true;
+}
+
 /**
  * KDP だけの後段: 既知 ASIN で口座を照合し (別口座のセッションを CI へ渡さない)、Reports の認証も通す。
  * Reports で再ログインを求められたら同じ資格情報で 1 回だけ送信し、それでも通らなければ止める。
@@ -138,9 +139,10 @@ async function afterKdpLogin(page, cred) {
     await openKdpReports(page);
     return { status: 'ok' };
   } catch (error) {
-    if (!/auth_required/.test(String(error.message)) || !cred) return { status: 'reports_auth_required', reason: 'Reports の認証が必要 (キーチェーン未登録か --wait-human で人が通す)' };
+    if (!/auth_required/.test(String(error.message)) || !cred) return { status: 'reports_auth_required', reason: 'Reports の認証が必要 (資格情報ストア未登録か --wait-human で人が通す)' };
   }
   await submitCredential(page, LOGIN.kdp, cred);
+  await passTotpIfOffered(page, LOGIN.kdp, cred);
   if (LOGIN.kdp.challengeUrl.test(page.url()) || (await pageSignals(page)).hasChallenge) return { status: 'human_required', reason: 'Reports で 2FA/CAPTCHA 等の人の確認が必要' };
   try {
     await openKdpReports(page);
@@ -173,7 +175,7 @@ async function refresh(source, { root, publish, headed, waitHuman }) {
     await page.waitForTimeout(3000);
     const before = await pageSignals(page);
     if (!(conf.loggedIn(page.url()) && !before.hasPassword)) {
-      const cred = waitHuman ? null : keychainCredential(source);
+      const cred = waitHuman ? null : readCredential(source);
       if (!cred && waitHuman) {
         // 人がこのブラウザでログインするのを待つ (自動入力しない)。
         loggedInBy = 'human';
@@ -186,21 +188,22 @@ async function refresh(source, { root, publish, headed, waitHuman }) {
         }
         if (!ok) return { source, status: 'human_timeout', reason: '10 分以内にログインを検知できなかった' };
       }
-      if (!cred && !waitHuman) return { source, status: 'no_credential', reason: `キーチェーンに stats47-measurement-${source} がない` };
+      if (!cred && !waitHuman) return { source, status: 'no_credential', reason: `資格情報ストアに stats47-measurement-${source} がない` };
       if (cred) {
-      loggedInBy = 'keychain';
+      loggedInBy = 'credential-store';
       await page.goto(conf.loginUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
       await submitCredential(page, conf, cred);
+      await passTotpIfOffered(page, conf, cred);
       const status = classifyLoginOutcome(source, { url: page.url(), ...(await pageSignals(page)) });
       if (status !== 'ok') {
         writeFileSync(failMark, `${new Date().toISOString()} ${status}\n`, { mode: 0o600 });
-        return { source, status, reason: status === 'human_required' ? '2FA/CAPTCHA 等の人の確認が必要' : 'ID/PW が通らなかった (キーチェーンの値を確認)' };
+        return { source, status, reason: status === 'human_required' ? '2FA/CAPTCHA 等の人の確認が必要' : 'ID/PW が通らなかった (資格情報ストアの値を確認)' };
       }
       }
     }
     if (source === 'kdp') {
       const page = context.pages()[0];
-      const after = await afterKdpLogin(page, waitHuman ? null : keychainCredential(source));
+      const after = await afterKdpLogin(page, waitHuman ? null : readCredential(source));
       if (after.status !== 'ok') {
         // 口座不一致・2FA・再ログイン失敗は自動で繰り返さない (アカウントロックと別口座の混入を避ける)
         if (after.status !== 'reports_auth_required') writeFileSync(failMark, `${new Date().toISOString()} ${after.status}\n`, { mode: 0o600 });

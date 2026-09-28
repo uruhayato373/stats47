@@ -16,6 +16,9 @@ Playwright を使う運用スクリプトのログイン状態、アカウント
 - 投稿、申請、公開、購入に関わる操作は実行前に対象アカウントを照合する。
 - 認証失敗を自動再登録や別アカウントで回避しない。人が headed browser で復旧する。
 - 例外: A8 / もしも / KDP の計測ログインだけは、オーナー承認 (A8・もしも 2026-09-26、KDP 2026-09-27) により Mac 上で macOS キーチェーンの ID/PW による再ログインを 1 回だけ許す (`.claude/scripts/measurement/refresh-session.mjs`)。失敗・2FA・CAPTCHA は突破せず失敗印を残して停止し、人が確認して印を消すまで再試行しない。ID/PW を CI・git・ログへ置かない。KDP は本棚 → 既知 ASIN の口座照合 → Reports の順に通し、Amazon の 2FA (`/ap/mfa`)・追加確認 (`/ap/cvf`)・CAPTCHA が出たら同じく停止する。「ログインしたままにする」を付けて 2FA の再要求を減らすが、毎回 2FA を求められる口座では自動化できない。
+  - **資格情報の読み口 (2026-09-28)**: `.claude/scripts/measurement/credential-store.mjs` が唯一の入口。Mac はキーチェーン、Windows は資格情報マネージャー (`cmdkey /generic:stats47-measurement-<source> /user:<ID> /pass` で登録。Win32 `CredRead` を PowerShell 5.1 から読むので追加モジュール不要)、それ以外 (CI) は読まない。サービス名は両 OS で同じ。直接読む書き方は `credential-store-contract.test.mjs` が止める。Bitwarden 等の外部サービスは使わない (オーナー判断)。
+  - **2FA は認証アプリ方式 (TOTP) だけ自動化する**: `stats47-measurement-<source>-totp` に秘密鍵 (base32) を登録した口座だけ、`/ap/mfa` の画面でコードを計算して 1 回入力する (RFC 6238 の試験値でテスト済み)。SMS / メールのコード、追加確認 (`/ap/cvf`)、CAPTCHA は従来どおり停止する。Amazon の MFA 画面のセレクタは実機未確認で、外れた場合も停止する。
+  - **同時に 2 台でログインしない**: 下の state 共用の理由と同じく、定期的な自動ログインは 1 台 (現状 Mac の launchd) だけにする。Windows で `refresh-session.mjs` を使うのは、Mac の定期実行を止めているときか、手動で 1 回だけ回すときに限る。
 - A8 / もしもの state (`playwright-{a8,moshimo}-state.json`) は stats47 と doboku-note で共用する (2026-09-26)。実体は `~/.local/share/asp-sessions/{a8,moshimo}-state.json` (mode 600) で、両リポジトリの `.local/` にはそこへの symlink を置く。ログインするのは stats47 の launchd (`refresh-session.mjs`) だけで、doboku-note は読むだけにする (同じ口座へ別々にログインすると互いのセッションを切る恐れがある)。新しいマシンでは symlink を張り直す。state を rename で置き換える書き方は symlink を壊すので使わない。
 - 2FA、CAPTCHA、税務・銀行情報、規約同意は人の操作として残す。
 - 実行後は `.claude/rules/browser-use-cleanup.md` に従い browser / daemon / tab を閉じる。
