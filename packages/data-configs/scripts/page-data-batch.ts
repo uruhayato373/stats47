@@ -1354,6 +1354,8 @@ async function main() {
       switch (result.status) {
         case "ok":
           ok++;
+          // dry-run は書き込まないので、何が取れたか (行数・補完年) をここでしか確かめられない
+          if (args.dryRun) console.log(`  [ok] ${result.key}: ${result.message}`);
           if (ok % 20 === 0) console.log(`  ok=${ok} fail=${fail} skip=${skip} empty=${empty} shape=${shape} remaining=${queue.length}`);
           break;
         case "empty-allowed":
