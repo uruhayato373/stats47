@@ -5,6 +5,7 @@ export const ratio65Plus: MetricConfig = {
   "title": "65歳以上人口割合",
   "subtitle": "65歳以上割合",
   "description": "65歳以上人口を総人口で除して100を掛けた割合です。",
+  "note": "2025年は令和7年国勢調査の原数値（年齢「不詳」を除いて算出）で、2020年以前の国勢調査年と同じ定義です。報道で使われる不詳補完値とは小数点以下が異なります。",
   "unit": "％",
   "category": "population",
   "source": {
@@ -45,8 +46,25 @@ export const ratio65Plus: MetricConfig = {
       2022,
       2023,
       2024,
+      2025,
     ],
   },
+  "supplementalSources": [
+    {
+      "years": [2025],
+      "source": {
+        "kind": "estat",
+        "statsDataId": "0004065933",
+        "cdTab": "2025_42",
+        "cdCat01": "0",
+        "cdCat02": "0",
+        "cdCat03": "3",
+        "displayName": "国勢調査",
+        "url": "https://www.e-stat.go.jp/dbview?sid=0004065933",
+      },
+      "reason": "社会・人口統計体系に令和7年国勢調査（2026-09-29公表）が未反映のため、国勢調査の原数値の表から直接取る",
+    },
+  ],
   "yearFormat": "calendar",
   "visualization": {
     "colorScheme": "interpolateBlues",

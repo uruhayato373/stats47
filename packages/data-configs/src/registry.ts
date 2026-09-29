@@ -244,6 +244,7 @@ import { carrotConsumptionExpenditure } from "./metrics/carrot-consumption-expen
 import { carrotConsumptionQuantity } from "./metrics/carrot-consumption-quantity";
 import { carryoverIncomePrefecture } from "./metrics/carryover-income-prefecture";
 import { castellaConsumptionExpenditure } from "./metrics/castella-consumption-expenditure";
+import { censusPopulationChangeRate5y } from "./metrics/census-population-change-rate-5y";
 import { certifiedChildcareCenterCountPer100k05 } from "./metrics/certified-childcare-center-count-per-100k-0-5";
 import { certifiedChildcareCenterEducationCostPerStudent } from "./metrics/certified-childcare-center-education-cost-per-student";
 import { charcoalProduction } from "./metrics/charcoal-production";
@@ -2851,6 +2852,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "carrot-consumption-quantity": carrotConsumptionQuantity,
   "carryover-income-prefecture": carryoverIncomePrefecture,
   "castella-consumption-expenditure": castellaConsumptionExpenditure,
+  "census-population-change-rate-5y": censusPopulationChangeRate5y,
   "certified-childcare-center-count-per-100k-0-5": certifiedChildcareCenterCountPer100k05,
   "certified-childcare-center-education-cost-per-student": certifiedChildcareCenterEducationCostPerStudent,
   "charcoal-production": charcoalProduction,
