@@ -6,7 +6,7 @@
 import satori from "satori";
 import sharp from "sharp";
 import { notoSansJpBytes } from "../../generators/jp-font";
-import type { BookSeries } from "./types";
+import type { BookSeries, KindleCoverDesign, KindleCoverPalette } from "./types";
 
 /**
  * シリーズ別のカバー色。
@@ -22,6 +22,43 @@ const SERIES_COLOR: Record<BookSeries, { bg: string; paper: string; ink: string;
   "S4-ranking-compendium": { bg: "#2a1230", paper: "#f7f1f8", ink: "#321d38", accent: "#763798", meta: "#735f78" },
 };
 
+const PALETTE_COLOR: Record<KindleCoverPalette, { bg: string; paper: string; ink: string; accent: string; accent2: string; titleMarker: string; meta: string }> = {
+  "navy-yellow": { bg: "#071426", paper: "#fff9e8", ink: "#071426", accent: "#ffd21f", accent2: "#1a63d8", titleMarker: "#ffd21f", meta: "#536173" },
+  "coral-cream": { bg: "#451818", paper: "#fff7ee", ink: "#371817", accent: "#ff6b57", accent2: "#ffc928", titleMarker: "#ffc928", meta: "#765d56" },
+  "teal-red": { bg: "#073c3d", paper: "#f2fbf8", ink: "#0b3536", accent: "#00a69b", accent2: "#ef4056", titleMarker: "#ef4056", meta: "#53706f" },
+  "blue-orange": { bg: "#102c63", paper: "#f5f8ff", ink: "#10254f", accent: "#2166db", accent2: "#ff8a22", titleMarker: "#ff8a22", meta: "#596985" },
+  "green-gold": { bg: "#123822", paper: "#f6faef", ink: "#173723", accent: "#2d8a4e", accent2: "#e7b51e", titleMarker: "#e7b51e", meta: "#5b705f" },
+  "sky-coral": { bg: "#174d72", paper: "#f4fbff", ink: "#163c57", accent: "#27aee4", accent2: "#ff6f61", titleMarker: "#ff6f61", meta: "#587386" },
+  "orange-navy": { bg: "#10233e", paper: "#fff7eb", ink: "#14263d", accent: "#f47b20", accent2: "#174f91", titleMarker: "#f47b20", meta: "#6f665d" },
+  "purple-gold": { bg: "#28143a", paper: "#fbf6ff", ink: "#321942", accent: "#7b3fb1", accent2: "#e7b51e", titleMarker: "#e7b51e", meta: "#735f79" },
+};
+
+const SERIES_BADGE: Record<BookSeries, string> = {
+  "S1-issues": "数字で答える 都道府県の論点",
+  "S2-theme-databook": "47都道府県 テーマ別データ",
+  "S3-region": "地域別 県データブック",
+  "S4-ranking-compendium": "47都道府県 ランキング大全",
+};
+
+const THEME_BADGE: Record<KindleCoverDesign["visualTheme"], string> = {
+  "household-money": "家計",
+  "food-consumption": "食卓・消費",
+  "population-households": "人口・世帯",
+  "health-care": "医療・介護",
+  "education-childcare": "教育・子育て",
+  "public-finance": "財政",
+  tourism: "観光",
+  "energy-infrastructure": "インフラ",
+  "industry-economy": "産業・経済",
+  "safety-environment": "安全・防災",
+  "culture-leisure": "文化・余暇",
+  "digital-life": "デジタル生活",
+  "migration-living": "移住・生活",
+  "retail-market": "商圏",
+  "regional-profile": "地域",
+  "ranking-discovery": "ランキング",
+};
+
 const W = 1600;
 const H = 2560;
 
@@ -30,6 +67,8 @@ interface CoverInput {
   readonly subtitle?: string;
   readonly series: BookSeries;
   readonly author: string;
+  /** 商品別の配色と「この1冊でわかる」表示。 */
+  readonly coverDesign?: KindleCoverDesign;
   /**
    * 全面に敷く背景画像 (1600×2560 の JPEG バイト列)。
    * 家ルール (`.claude/rules/ogp-image-standards.md` §5) に従い、生成 AI が作るのは
@@ -85,8 +124,231 @@ export function mainTitleSize(main: string): number {
   return Math.max(96, Math.min(220, ideal));
 }
 
+/** 添付の基準案に合わせた、極太見出し・マーカー強調・データ枠・黄色フッターのポップ表紙。 */
+async function buildPopCoverPng(
+  input: CoverInput & { readonly coverDesign: KindleCoverDesign },
+): Promise<Buffer> {
+  const c = PALETTE_COLOR[input.coverDesign.palette];
+  const { main, rest } = splitTitle(input.title);
+  const primary = c.accent2;
+  const secondary = c.accent;
+  const chipColors = ["#ffd21f", "#ff6b57", "#35b96f", "#29a8df", "#7a55d9", "#ff982e"];
+  const rays = [-48, -32, -16, 16, 32, 48].map((deg) =>
+    node("div", {
+      position: "absolute",
+      width: "92px",
+      height: "1050px",
+      left: "754px",
+      top: "-120px",
+      backgroundColor: primary,
+      opacity: 0.07,
+      transform: `rotate(${deg}deg)`,
+      transformOrigin: "46px 1050px",
+    }),
+  );
+  const dots = Array.from({ length: 28 }, (_, index) =>
+    node("div", {
+      position: "absolute",
+      left: `${10 + (index % 7) * 38}px`,
+      top: `${8 + Math.floor(index / 7) * 38}px`,
+      width: `${10 + Math.floor(index / 7) * 5}px`,
+      height: `${10 + Math.floor(index / 7) * 5}px`,
+      borderRadius: "50%",
+      backgroundColor: primary,
+      opacity: 0.15,
+    }),
+  );
+  const element = node(
+    "div",
+    {
+      display: "flex",
+      position: "relative",
+      width: `${W}px`,
+      height: `${H}px`,
+      overflow: "hidden",
+      backgroundColor: c.bg,
+      ...(input.backgroundJpeg
+        ? {
+            backgroundImage: `url(data:image/jpeg;base64,${input.backgroundJpeg.toString("base64")})`,
+            backgroundSize: `${W}px ${H}px`,
+          }
+        : {}),
+      color: c.ink,
+      fontFamily: "NotoSansJP",
+    },
+    [
+      node("div", { position: "absolute", inset: "0 0 auto 0", width: "100%", height: "1120px", backgroundColor: c.paper }),
+      // 楕円を重ね、文字面から画像面へ大きな弧で切り替える。
+      node("div", {
+        position: "absolute",
+        left: "-260px",
+        top: "-900px",
+        width: "2120px",
+        height: "2240px",
+        borderRadius: "50%",
+        backgroundColor: c.paper,
+        borderBottom: `16px solid ${secondary}`,
+      }),
+      ...rays,
+      ...dots,
+      node(
+        "div",
+        { display: "flex", flexDirection: "column", position: "absolute", left: "48px", top: "54px", width: "1504px", height: "1080px" },
+        [
+          node(
+            "div",
+            {
+              display: "flex",
+              alignSelf: "flex-start",
+              backgroundColor: primary,
+              color: "#ffffff",
+              border: `5px solid ${c.ink}`,
+              borderRadius: "22px",
+              padding: "16px 30px 20px",
+              fontSize: "47px",
+              fontWeight: 700,
+              letterSpacing: "0.02em",
+              marginBottom: "42px",
+            },
+            `47都道府県 × ${input.coverDesign.dataLabels.length}つの${THEME_BADGE[input.coverDesign.visualTheme]}データ`,
+          ),
+          node(
+            "div",
+            { fontSize: `${Math.min(166, mainTitleSize(main))}px`, fontWeight: 700, lineHeight: 1.04, letterSpacing: "-0.035em", color: c.ink },
+            main,
+          ),
+          ...(rest
+            ? [
+                node(
+                  "div",
+                  {
+                    display: "flex",
+                    position: "relative",
+                    alignSelf: "flex-start",
+                    padding: "8px 20px 18px 10px",
+                    marginTop: "6px",
+                  },
+                  [
+                    node("div", {
+                      position: "absolute",
+                      left: "0",
+                      right: "0",
+                      bottom: "8px",
+                      height: "28px",
+                      borderRadius: "8px",
+                      backgroundColor: c.titleMarker,
+                      opacity: 0.32,
+                      transform: "skewX(-5deg)",
+                    }),
+                    node(
+                      "div",
+                      {
+                        position: "relative",
+                        color: c.ink,
+                        fontSize: `${Math.min(142, mainTitleSize(rest))}px`,
+                        fontWeight: 700,
+                        lineHeight: 1.04,
+                        letterSpacing: "-0.035em",
+                      },
+                      rest,
+                    ),
+                  ],
+                ),
+              ]
+            : []),
+          ...(input.subtitle
+            ? [
+                node(
+                  "div",
+                  { fontSize: "50px", fontWeight: 700, color: c.ink, marginTop: "26px", lineHeight: 1.3 },
+                  input.subtitle,
+                ),
+              ]
+            : []),
+          node(
+            "div",
+            {
+              display: "flex",
+              flexDirection: "column",
+              alignSelf: "flex-start",
+              backgroundColor: c.ink,
+              border: `5px solid ${primary}`,
+              borderRadius: "22px",
+              padding: "22px 24px 12px",
+              marginTop: "28px",
+              width: "840px",
+              boxShadow: "12px 14px 0 rgba(7,20,38,0.18)",
+            },
+            [
+              node("div", { fontSize: "38px", fontWeight: 700, color: secondary, marginBottom: "12px" }, "この1冊でわかるデータ"),
+              node(
+                "div",
+                { display: "flex", flexWrap: "wrap", width: "100%" },
+                input.coverDesign.dataLabels.map((label, index) =>
+                  node(
+                    "div",
+                    {
+                      backgroundColor: chipColors[index % chipColors.length],
+                      color: index === 0 ? c.ink : "#ffffff",
+                      borderRadius: "999px",
+                      padding: "11px 20px 14px",
+                      marginRight: "12px",
+                      marginBottom: "12px",
+                      fontSize: "38px",
+                      fontWeight: 700,
+                      lineHeight: 1.05,
+                    },
+                    label,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+      node(
+        "div",
+        {
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          position: "absolute",
+          left: "0",
+          bottom: "0",
+          width: "100%",
+          height: "150px",
+          padding: "0 52px",
+          backgroundColor: secondary,
+          borderTop: `6px solid ${c.ink}`,
+          color: c.ink,
+        },
+        [
+          node("div", { fontSize: "52px", fontWeight: 700 }, input.author),
+          node("div", { fontSize: "42px", fontWeight: 700 }, "統計で見る都道府県"),
+        ],
+      ),
+    ],
+  );
+
+  const svg = await satori(element as never, {
+    width: W,
+    height: H,
+    fonts: [
+      { name: "NotoSansJP", data: Buffer.from(notoSansJpBytes()), weight: 400, style: "normal" },
+      { name: "NotoSansJP", data: Buffer.from(notoSansJpBytes()), weight: 700, style: "normal" },
+    ],
+  });
+  return sharp(Buffer.from(svg)).png().toBuffer();
+}
+
 export async function buildCoverPng(input: CoverInput): Promise<Buffer> {
-  const c = SERIES_COLOR[input.series];
+  if (input.coverDesign) {
+    return buildPopCoverPng(input as CoverInput & { readonly coverDesign: KindleCoverDesign });
+  }
+  const c = {
+    ...SERIES_COLOR[input.series],
+    accent2: SERIES_COLOR[input.series].accent,
+  };
   const { main, rest } = splitTitle(input.title);
   const element = node(
     "div",
@@ -119,9 +381,26 @@ export async function buildCoverPng(input: CoverInput): Promise<Buffer> {
           width: "100%",
           height: "1480px",
           backgroundColor: c.paper,
-          padding: "126px 110px 92px",
+          borderTop: `28px solid ${c.accent}`,
+          padding: "78px 110px 72px",
         },
         [
+          node(
+            "div",
+            {
+              display: "flex",
+              alignSelf: "flex-start",
+              backgroundColor: c.accent,
+              color: "#ffffff",
+              borderRadius: "999px",
+              padding: "14px 30px 16px",
+              fontSize: "34px",
+              fontWeight: 700,
+              letterSpacing: "0.04em",
+              marginBottom: "36px",
+            },
+            SERIES_BADGE[input.series],
+          ),
           node(
             "div",
             {
@@ -137,7 +416,7 @@ export async function buildCoverPng(input: CoverInput): Promise<Buffer> {
             ? [
                 node(
                   "div",
-                  { fontSize: "82px", fontWeight: 700, lineHeight: 1.3, marginTop: "44px", color: c.accent },
+                  { fontSize: "82px", fontWeight: 700, lineHeight: 1.3, marginTop: "34px", color: c.accent2 },
                   rest,
                 ),
               ]
@@ -146,18 +425,18 @@ export async function buildCoverPng(input: CoverInput): Promise<Buffer> {
             ? [
                 node(
                   "div",
-                  { fontSize: "72px", fontWeight: 700, color: c.ink, marginTop: "52px", lineHeight: 1.35 },
+                  { fontSize: "66px", fontWeight: 700, color: c.ink, marginTop: "36px", lineHeight: 1.35 },
                   input.subtitle,
                 ),
               ]
             : []),
-          // 著者は KDP 必須情報。装飾線を使わず文字面の下端にまとめる。
+          // 著者は KDP 必須情報。文字面の下端にまとめる。
           node(
             "div",
-            { display: "flex", flexDirection: "column", marginTop: "auto" },
+            { display: "flex", flexDirection: "row", alignItems: "flex-end", justifyContent: "space-between", marginTop: "auto" },
             [
               node("div", { fontSize: "52px", fontWeight: 700, color: c.ink }, input.author),
-              node("div", { fontSize: "32px", color: c.meta, marginTop: "12px" }, "統計で見る都道府県"),
+              node("div", { fontSize: "32px", color: c.meta }, "統計で見る都道府県"),
             ],
           ),
         ],

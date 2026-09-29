@@ -10,10 +10,19 @@ describe("kindle cover route", () => {
     delete process.env.STATS47_PROJECT_ROOT;
   });
 
-  async function setup() {
+  async function setup(withDraft = false) {
     root = makeFixtureRoot({
       stateFiles: {
-        ".local/kindle-books/K-S1-01/v1/cover.jpg": "cover-bytes",
+        ".claude/config/kdp-listings.json": JSON.stringify({
+          listings: {
+            "K-S1-01": {
+              coverPath: ".local/kindle-books/K-S1-01/v4-current/cover.jpg",
+            },
+          },
+        }),
+        ".local/kindle-books/K-S1-01/v1/cover.jpg": "old-cover",
+        ".local/kindle-books/K-S1-01/v4-current/cover.jpg": "cover-bytes",
+        ...(withDraft ? { ".local/kindle-cover-drafts/K-S1-01/cover.jpg": "draft-cover" } : {}),
       },
     });
     process.env.STATS47_PROJECT_ROOT = root;
@@ -40,6 +49,23 @@ describe("kindle cover route", () => {
     expect(res.headers.get("cache-control")).toBe("no-store");
     expect(res.headers.get("x-content-type-options")).toBe("nosniff");
     expect(await res.text()).toBe("cover-bytes");
+  });
+
+  it("固定v1ではなくKDP台帳が指す最新版を返す", async () => {
+    const mod = await setup();
+    const res = await call(mod, "K-S1-01");
+    const body = await res.text();
+
+    expect(body).not.toBe("old-cover");
+    expect(body).toBe("cover-bytes");
+  });
+
+  it("未承認ドラフトがあれば既刊版を上書きせず優先表示する", async () => {
+    const mod = await setup(true);
+    const res = await call(mod, "K-S1-01");
+
+    expect(res.status).toBe(200);
+    expect(await res.text()).toBe("draft-cover");
   });
 
   it("不正な書籍 ID を 404 にする", async () => {

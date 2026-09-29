@@ -22,6 +22,66 @@ export type BookSeries =
   | "S3-region" // 47 県を 8 地方ブロックで 1 冊
   | "S4-ranking-compendium"; // ランキング大全 (競合最強ゾーン・最後発)
 
+/** 表紙の情報設計。シリーズはレイアウト、visualTheme は題材、商品ごとに具体物を変える。 */
+export type KindleCoverTemplate =
+  | "issue-pop"
+  | "theme-databook-pop"
+  | "region-pop"
+  | "ranking-pop";
+
+export type KindleCoverVisualTheme =
+  | "household-money"
+  | "food-consumption"
+  | "population-households"
+  | "health-care"
+  | "education-childcare"
+  | "public-finance"
+  | "tourism"
+  | "energy-infrastructure"
+  | "industry-economy"
+  | "safety-environment"
+  | "culture-leisure"
+  | "digital-life"
+  | "migration-living"
+  | "retail-market"
+  | "regional-profile"
+  | "ranking-discovery";
+
+export type KindleCoverPalette =
+  | "navy-yellow"
+  | "coral-cream"
+  | "teal-red"
+  | "blue-orange"
+  | "green-gold"
+  | "sky-coral"
+  | "orange-navy"
+  | "purple-gold";
+
+export type KindleCoverReviewStatus = "needs-redesign" | "draft" | "approved";
+
+/** Gitへ画像本体を置かず、R2上の不変オブジェクトを参照する表紙背景。 */
+export interface KindleCoverBackgroundAsset {
+  readonly status: "staged-unpublished" | "published";
+  readonly r2Key: string;
+  readonly sha256: string;
+  readonly bytes: number;
+  readonly width: 1600;
+  readonly height: 2560;
+}
+
+export interface KindleCoverDesign {
+  readonly template: KindleCoverTemplate;
+  readonly visualTheme: KindleCoverVisualTheme;
+  readonly palette: KindleCoverPalette;
+  /** 表紙の「この1冊でわかる」欄へ出す短い実テキスト。 */
+  readonly dataLabels: readonly string[];
+  /** 文字なし背景に描く具体物。画像生成プロンプトの主題になる。 */
+  readonly backgroundConcept: string;
+  readonly reviewStatus: KindleCoverReviewStatus;
+  /** 目視承認後にだけ設定する、R2上の文字なし背景。 */
+  readonly backgroundAsset?: KindleCoverBackgroundAsset;
+}
+
 /** 書籍のライフサイクル状態。idea から published まで一方向に進む。 */
 export type BookStatus =
   | "idea" // 企画のみ (章立て未確定)
@@ -116,6 +176,8 @@ export interface KindleBook {
   readonly subtitle?: string;
   /** 1-2 文の企画意図 (データ側の説明)。読者側の設計は design に書く。 */
   readonly concept: string;
+  /** 商品別の表紙テーマ・収録データ表示・制作状態。 */
+  readonly coverDesign: KindleCoverDesign;
   /** 編集設計 (読者の悩み・HARM・支払う理由・需要の証拠・タイトルの型・本文の型)。generate の前提。 */
   readonly design?: EditorialDesign;
   /** 著者表示名。 */

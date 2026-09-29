@@ -1,7 +1,7 @@
 /**
  * 商品ページ (/products/<slug>) OGP レンダラー。
  *
- * kindle 商品は product-factory の表紙背景 (read-only) を、それ以外はブランド背景を使う。
+ * kindle 商品はR2の承認済み表紙背景を、それ以外はブランド背景を使う。
  * 全面背景 (object-fit: cover) + 左60%可読性スクリーンにチャンネルラベル・タイトル (≤2行)・
  * 価格・ブランドマークを Satori で合成する (既存 blog OGP と同じ「全面画像 + 左スクリーン」構図)。
  *
@@ -9,18 +9,21 @@
  */
 
 import { createHash } from 'node:crypto';
-import { existsSync, readFileSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 import { createElement as h } from 'react';
 
 import { ProductOgp, type ProductOgpData } from '../../src/features/ogp/ProductOgp';
+import {
+  KINDLE_COVER_BACKGROUND_BY_ID,
+  KINDLE_COVER_DESIGN_BY_ID,
+} from '../../../../packages/product-factory/src/channels/kindle/cover-design';
 
 export type ProductOgpChannel = 'kindle' | 'coconala';
 
 const BRAND_BACKGROUND_RELATIVE_PATH = 'apps/web/scripts/lib/assets/ogp-bg-brand-light.jpg';
-const KINDLE_COVER_BACKGROUNDS_RELATIVE_DIR =
-  'packages/product-factory/src/channels/kindle/assets/cover-backgrounds';
+const DEFAULT_R2_BASE = 'https://storage.stats47.jp';
 
 export interface ResolveProductBackgroundInput {
   projectRoot: string;
@@ -29,20 +32,27 @@ export interface ResolveProductBackgroundInput {
   productId: string;
 }
 
-/** channel から背景 JPEG の絶対パスを決定する (read-only、product-factory の資産を書き換えない)。 */
-export function resolveProductBackgroundPath(input: ResolveProductBackgroundInput): string {
+export interface ResolvedProductBackground {
+  /** Satoriへ渡すdata URIまたはR2 URL。 */
+  image: string;
+  /** 入力fingerprint用。R2 assetはGit台帳の承認済みSHAを使う。 */
+  sha256: string;
+}
+
+/** channelから背景とfingerprintを決定する。画像バイナリをGitへ戻さない。 */
+export function resolveProductBackground(input: ResolveProductBackgroundInput): ResolvedProductBackground {
   if (input.channel === 'kindle') {
-    const path = join(
-      input.projectRoot,
-      KINDLE_COVER_BACKGROUNDS_RELATIVE_DIR,
-      `${input.productId}.jpg`
-    );
-    if (!existsSync(path)) {
-      throw new Error(`kindle cover background が見つかりません: ${path}`);
+    if (!KINDLE_COVER_DESIGN_BY_ID[input.productId]) {
+      throw new Error(`未知のkindle商品IDです: ${input.productId}`);
     }
-    return path;
+    const asset = KINDLE_COVER_BACKGROUND_BY_ID[input.productId];
+    if (asset?.status === 'published') {
+      const base = (process.env.R2_PUBLIC_FETCH_URL ?? DEFAULT_R2_BASE).replace(/\/$/, '');
+      return { image: `${base}/${asset.r2Key}`, sha256: asset.sha256 };
+    }
   }
-  return join(input.projectRoot, BRAND_BACKGROUND_RELATIVE_PATH);
+  const path = join(input.projectRoot, BRAND_BACKGROUND_RELATIVE_PATH);
+  return { image: readImageDataUri(path), sha256: sha256File(path) };
 }
 
 /** 背景ファイルの内容 SHA-256。背景差し替えだけで再生成させる入力指紋として使う。 */
@@ -107,8 +117,7 @@ export interface BuildProductOgpElementInput {
 }
 
 export function buildProductOgpElement(input: BuildProductOgpElementInput) {
-  const backgroundPath = resolveProductBackgroundPath(input);
-  const backgroundImage = readImageDataUri(backgroundPath);
+  const backgroundImage = resolveProductBackground(input).image;
   const { lines, fontSize } = resolveProductTitleLayout(input.title);
   const data: ProductOgpData = {
     channelLabel: input.channelLabel,

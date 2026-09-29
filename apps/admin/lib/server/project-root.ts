@@ -52,6 +52,11 @@ export function localKindleBooksDir(): string {
   return path.join(projectRoot(), ".local/kindle-books");
 }
 
+/** Kindle 表紙の未承認プレビュー。既刊版を上書きせず管理画面で確認する。 */
+export function localKindleCoverDraftsDir(): string {
+  return path.join(projectRoot(), ".local/kindle-cover-drafts");
+}
+
 /** .claude/state ディレクトリ (旧 STATE_DIR)。 */
 export function stateDir(): string {
   return path.join(projectRoot(), ".claude/state");

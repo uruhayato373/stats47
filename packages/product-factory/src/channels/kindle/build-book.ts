@@ -10,6 +10,7 @@ import type { KindleBook, BookChapter } from "./types";
 import { fetchBlogArticle, fetchPublishedSlugSet, type FetchedImage } from "./fetch-content";
 import { mdToXhtml } from "./md-to-xhtml";
 import { buildCoverPng } from "./cover";
+import { loadCoverBackground } from "./cover-background";
 import { buildRankingSections, type RankingSource } from "./ranking-databook";
 import { buildEpub, type EpubChapterDoc, type EpubImage } from "../../generators/epub";
 import sharp from "sharp";
@@ -408,14 +409,15 @@ export async function buildBook(book: KindleBook, opts: BuildBookOptions = {}): 
   let coverPng: Buffer | undefined;
   if (!opts.skipCover) {
     try {
-      // 書籍ごとのカバー背景 (git 管理・文字なし 1600×2560 JPEG)。無ければシリーズ基調色の無地。
-      const bgPath = join(PF_ROOT, "src/channels/kindle/assets/cover-backgrounds", `${book.id}.jpg`);
+      // 承認済みの文字なし背景はR2をSSOTとし、SHA検証済みローカルcacheを再利用する。
+      const backgroundJpeg = await loadCoverBackground(book);
       coverPng = await buildCoverPng({
         title: book.title,
         subtitle: book.subtitle,
         series: book.series,
         author: book.author,
-        backgroundJpeg: existsSync(bgPath) ? readFileSync(bgPath) : undefined,
+        coverDesign: book.coverDesign,
+        backgroundJpeg,
       });
       writeFileSync(join(outDir, "cover.png"), coverPng);
       // ★KDP の表紙アップロードは **JPEG / TIFF しか受け付けない** (`accept=".tiff,.tif,.jpeg,.jpg"`)。

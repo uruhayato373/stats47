@@ -66,8 +66,7 @@ import {
 import { isSafeNoteSlug } from './lib/image-entity-policy';
 import {
   buildProductOgpElement,
-  resolveProductBackgroundPath,
-  sha256File,
+  resolveProductBackground,
 } from './lib/product-ogp-render';
 import {
   buildImageGenerationManifest,
@@ -647,7 +646,7 @@ async function main() {
       const found = STOREFRONT_PRODUCTS.find((candidate) => candidate.slug === id);
       if (!found) return null;
       product = found;
-      const backgroundPath = resolveProductBackgroundPath({
+      const background = resolveProductBackground({
         projectRoot: PROJECT_ROOT,
         channel: found.channel,
         productId: found.id,
@@ -659,7 +658,7 @@ async function main() {
         title: found.title,
         priceYen: found.priceYen,
         // 背景差し替え (kindle表紙の再アップロード等) だけで再生成させる入力指紋。
-        backgroundSha256: sha256File(backgroundPath),
+        backgroundSha256: background.sha256,
       };
     } else {
       const entry = noteEntries.find((candidate) => candidate.slug === id);

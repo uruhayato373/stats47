@@ -2,7 +2,7 @@
 title: バックログ (タスクマスタ)
 type: backlog
 status: active
-updated: 2026-09-21
+updated: 2026-09-29
 ---
 
 # バックログ (タスクマスタ)
@@ -245,13 +245,13 @@ updated: 2026-09-21
 - **次**: `git grep -n "profile.json\|areaProfileKeyPath"` で読み手 0 を確認してから生成 (`packages/area-profile/src/exporters/area-profile-snapshot.ts`) と sync-snapshots の task を外す。
 - **完了条件**: profile.json の生成と読み手が 0 件、sync-snapshots の area-profile task が短くなる。
 
-### [KDP-K-S1-08-REUPLOAD-01] Kindle K-S1-08 を年表記の是正版で KDP に再アップロードする
+### [KDP-K-S1-08-REUPLOAD-01] 公開中のKindle S1全12冊へ承認済みポップ表紙を反映する
 タグ: [収益化] [種類:制作] [実行:ユーザー] [起票:2026-09-28] [レーン:note・商品販売]
 
-- **経緯**: 2026-09-27 に住宅・土地統計調査などを暦年 (`yearFormat: calendar`) に直し、K-S1-08 の図校訂 (`solar-power-housing-map` の 年→年度) を外した。
-  販売中の版は「年度」表記のまま。
-- **次**: EPUB を再生成し (`packages/product-factory` の kindle チャネル)、オーナーが KDP で差し替える。
-- **完了条件**: KDP の販売中の版の該当図が「年」表記。
+- **経緯**: 2026-09-29 にK-S1-01〜K-S1-12の新しいポップ表紙を1冊ずつ目視承認し、背景・完成JPEG・完成PNG・manifestをR2 `media/kindle-cover-assets/<id>/<revision>/`へ保存して再取得SHA一致を確認した。KDPで販売中の版には未反映。K-S1-08は2026-09-27に住宅・土地統計調査などを暦年 (`yearFormat: calendar`) に直し、図校訂 (`solar-power-housing-map` の 年→年度) を外したため、同じ更新で販売中版の「年度」表記も是正する。
+- **次（実行順）**: ①K-S1-01〜K-S1-12を承認済みR2背景でそれぞれ新しいversionとして再生成する ②旧確定版との章テキスト差分0、`verify-epub`、review receipt、`verify-publishable --content-only` blocker 0を冊ごとに確認する ③入稿提案を新versionへ更新し、暗号化R2 archiveをpush・deep audit・recordする ④オーナーがKindle Previewerで各EPUBと表紙を確認する ⑤`kdp-publish --update --id K-S1-NN`をdraft確認し、対象12冊と版SHAを提示してオーナーの明示承認後にだけ`--commit`する ⑥KDP本棚のread-backと商品ページで新表紙を確認する。
+- **停止条件**: KDPへの`--commit`を事前承認なしで実行しない。出版停止済みのS2/S3/S4を対象に含めない。既存versionを上書きしない。本文差分、検証blocker、archive不一致、Previewer未確認が1冊でもあれば、その冊の反映を止める。
+- **完了条件**: K-S1-01〜K-S1-12の販売中版が承認済み表紙へ更新され、KDP本棚read-backと商品ページで12冊すべて確認できる。各冊の入稿版SHA・R2 archive・review receiptが一致し、K-S1-08の該当図が「年」表記になっている。
 
 ### [AI-CONTENT-NATIONAL-AVERAGE-WORDING-01] 公開済みの AI 解説の「全国平均」を「47都道府県の単純平均」に直す
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-09-28] [レーン:データ品質]
@@ -730,9 +730,9 @@ updated: 2026-09-21
 タグ: [収益化] [種類:制作] [実行:ユーザー] [検証:node --import tsx packages/product-factory/scripts/verify-publishable.mts --version <版> --book <id> --content-only] [起票:2026-09-19] [期日:2026-10-17] [レーン:note・商品販売]
 
 - **owner**: オーナー (画像生成) / kindle-publisher (取り込み・再生成・検証)
-- **現状**: 2026-09-19 に `codex exec` + `$imagegen` で 12 枚を生成し、`assets/cover-backgrounds/K-S1-NN.jpg` (git 管理) に取り込み済み。最終版 (01 r9 / 02 r10 / 03 r11 / 04 r8 / 05 r11 / 06 r10 / 07 r9 / 08 r12 / 09 r10 / 10 r8 / 11 r8 / 12 r7) はこの帯絵で生成されている。オーナーは Codex アプリ (standalone) で自分の目で選んだ絵に差し替えたい。
+- **現状**: 2026-09-29 に画像バイナリをGit管理から外し、承認済みassetをR2 `media/kindle-cover-assets/<id>/<revision>/`、Gitをkey/SHA台帳だけにする方式へ変更した。KDP台帳で現在公開中なのはK-S1-01〜K-S1-12の12冊で、S2/S3/S4は出版停止済みのため表紙更新対象外。K-S1-01〜K-S1-12は新しいポップ表紙を1冊ずつ目視承認済みでR2へ公開し、各4ファイルの再取得SHA一致と公開URL 200を確認済み。画像制作・承認・R2保全は12冊すべて完了し、残工程は各冊を新versionで再生成して本文差分0・検証・入稿提案更新を確認する工程。
 - **作り方 (Codex アプリ)**: 貼るプロンプトは `.local/kindle-cover-imagegen/CODEX-APP-PROMPT.md` (12 冊を 1 メッセージで。1 冊だけなら表を 1 行に)。1 冊ずつの英文は同 dir の `prompt-K-S1-NN.txt` (12 本。型は同 dir の `build-prompts.mjs`: 紺地 #0f2540 + 琥珀のペーパーカット風・大きなモチーフ 2〜3 個・**横長 1536×1024**・文字/数字/通貨記号/ロゴ/地図/顔なし)。帯絵は表紙の**下 42% だけ**に出る (上は文字面) ので、縦長で描かない。生成した PNG を `.local/kindle-cover-imagegen/K-S1-NN.png` に置く。
-- **次 (差し替え手順・kindle-publisher が実行)**: ①`npx tsx packages/product-factory/scripts/ingest-cover-background.mts --book K-S1-NN --input <png> --band` ②`products:kindle:generate -- --id K-S1-NN --version <次の版>` ③章テキストの差分 0 を確認 (`.local/kindle-audit/extract-one.mjs` で展開して前版と diff) ④`verify-epub.mts --report` → `write-review-receipt.mts` → `verify-publishable --content-only` blocker 0 ⑤入稿提案を作り直す (`export-kdp-listings.ts --version <版> --id K-S1-NN`) ⑥表紙 12 枚を 150px 幅に縮めて並べ、文字なし・主題が読めることを目視。
+- **次 (差し替え手順・kindle-publisher が実行)**: ①1冊だけ生成して目視承認 ②`ingest-cover-background.mts --book K-S1-NN --input <png> --pop-band`でR2 staging ③完成PNG/JPEGとmanifestを同revisionへ置き、exact keyをR2 push ④`cover-design.ts`へkey/SHA/byte/寸法を登録 ⑤`products:kindle:generate -- --id K-S1-NN --version <次の版>` ⑥章テキスト差分0、`verify-epub`、review receipt、`verify-publishable --content-only` blocker 0を確認 ⑦入稿提案を最新版へ更新。
 - **禁止**: 画像に文字・数字を焼き込まない (書名・著者は satori が実テキストで重ねる)。生成 AI の描く日本列島を使わない (2026-08-12 の指摘)。差し替え版は必ず新しい version で作り、既存版を上書きしない。KDP への表紙アップロードは `kdp-publish --update` の工程で行い、ここでは触らない。
 - **完了条件**: 12 冊ぶんの帯絵がオーナー選定の絵に置き換わり、各冊の最終版が本文差分 0・`verify-publishable --content-only` blocker 0 で、入稿提案が最新版を指している。差し替えない冊は現行の帯絵のままでよい (その旨をこのカードから消して閉じる)。
 

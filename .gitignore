@@ -139,6 +139,9 @@ apps/remotion/build/
 # Local development data
 .local/
 
+# Kindle表紙の画像バイナリはR2をSSOTとし、Gitにはキー/SHAだけを置く。
+packages/product-factory/src/channels/kindle/assets/cover-backgrounds/
+
 # ローカルビルド DB (SQLite) — R2 database/stats47.sqlite から db:pull で取得 (git 管理外)
 packages/database/.data/
 

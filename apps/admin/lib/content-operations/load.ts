@@ -9,6 +9,12 @@ import {
 import { JAPAN_ZUE_MANUAL_OVERRIDES } from '../../../../packages/data-configs/src/evidence-inventory/japan-zue/policy';
 import { REFERENCE_SOURCE_POLICIES } from '../../../../packages/data-configs/src/evidence-inventory/reference-sources';
 import { KINDLE_BOOKS } from '../../../../packages/product-factory/src/channels/kindle/book-catalog';
+import {
+  KINDLE_COVER_BACKGROUND_BY_ID,
+  KINDLE_COVER_TEMPLATE_LABELS,
+  KINDLE_COVER_THEME_LABELS,
+  KINDLE_SERIES_LABELS,
+} from '../../../../packages/product-factory/src/channels/kindle/cover-design';
 import { KDP_PORTFOLIO_POLICY } from '../../../../packages/product-factory/src/channels/kindle/kdp-publishing-policy';
 import surveysMaster from '../../../../packages/ranking/src/data/surveys.json';
 
@@ -422,12 +428,35 @@ export function loadContentOperations(
       };
     }),
   });
+  const kindleBookById = new Map(KINDLE_BOOKS.map((book) => [book.id, book]));
 
   return buildContentOperations({
     generatedAt,
     socialPosts: social.posts,
     kindleListings: Object.values(kdp.listings).map((listing) => ({
       ...listing,
+      ...(() => {
+        const book = kindleBookById.get(listing.id);
+        if (!book) return {};
+        const backgroundAsset = KINDLE_COVER_BACKGROUND_BY_ID[book.id];
+        const draftCoverPath = `.local/kindle-cover-drafts/${book.id}/cover.jpg`;
+        return {
+          series: book.series,
+          seriesLabel: KINDLE_SERIES_LABELS[book.series],
+          coverTemplate: book.coverDesign.template,
+          coverTemplateLabel: KINDLE_COVER_TEMPLATE_LABELS[book.coverDesign.template],
+          coverTheme: book.coverDesign.visualTheme,
+          coverThemeLabel: KINDLE_COVER_THEME_LABELS[book.coverDesign.visualTheme],
+          coverPalette: book.coverDesign.palette,
+          coverDataLabels: book.coverDesign.dataLabels,
+          coverBackgroundConcept: book.coverDesign.backgroundConcept,
+          coverReviewStatus: book.coverDesign.reviewStatus,
+          coverBackgroundPath: backgroundAsset?.r2Key,
+          hasCoverBackground: Boolean(backgroundAsset),
+          draftCoverPath,
+          hasDraftCover: fs.existsSync(path.join(root, draftCoverPath)),
+        };
+      })(),
       ...(() => {
         const archive = kindleArchives?.books[listing.id];
         const revision = archive?.revisions.find(

@@ -4,6 +4,7 @@ import { join } from "node:path";
 import { tmpdir } from "node:os";
 import { authoredBookSha256, semanticReviewErrors, xhtmlChapterEvidence, chapterEvidence } from "../src/channels/kindle/revision-evidence";
 import type { KindleBook } from "../src/channels/kindle/types";
+import { coverDesignForBook } from "../src/channels/kindle/cover-design";
 
 const roots: string[] = [];
 afterEach(() => { for (const root of roots.splice(0)) rmSync(root, { recursive: true, force: true }); });
@@ -28,7 +29,7 @@ describe("edition-bound independent reviews", () => {
   });
   it("invalidates an authored fingerprint after manuscript or catalog changes", () => {
     const root = mkdtempSync(join(tmpdir(), "kindle-input-proof-")); roots.push(root);
-    const book: KindleBook = { id: "K-S2-01", series: "S2-theme-databook", title: "人口", concept: "定義を読む", author: "stats47",
+    const book: KindleBook = { id: "K-S2-01", series: "S2-theme-databook", title: "人口", concept: "定義を読む", coverDesign: coverDesignForBook("K-S2-01"), author: "stats47",
       priceYen: 500, keywords: ["統計"], newContentNote: "書き下ろし", status: "manuscript", chapters: [{ source: "fresh", title: "導入", freshFile: "intro.md" }] };
     writeFileSync(join(root, "intro.md"), "旧本文");
     const old = authoredBookSha256(book, root);

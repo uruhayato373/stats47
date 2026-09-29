@@ -59,8 +59,10 @@ npm run products:kindle:report    --workspace=@stats47/product-factory          
    `npx tsx packages/product-factory/scripts/write-review-receipt.mts --book <id> --version <VERSION> --reviewer /agents/blog-critic`
    が review.md の PASS を実 EPUB の章 SHA・authoredSha256 に結び付けた `review.json` を書く (PASS でない版・再生成が要る版には書けない)。
    `node --import tsx packages/product-factory/scripts/verify-publishable.mts --version <VERSION> --book <id> --content-only` で本文側の blocker 0 を確認する。
-   表紙背景 (`assets/cover-backgrounds/<id>.jpg`) は `codex exec` + `$imagegen` で横長 1536×1024 の文字なし帯絵を作り、
-   `ingest-cover-background.mts --band` で下 42% に置く (プロンプトの型は `.local/kindle-cover-imagegen/build-prompts.mjs`)。
+   表紙背景は `codex exec` + `$imagegen` で文字なし画像を作り、`ingest-cover-background.mts --band` で
+   `.local/r2/media/kindle-cover-assets/<id>/<revision>/background.jpg`へ正規化する。1冊ずつ目視承認後、完成PNG/JPEGと
+   manifestを同revisionへstageし、`push-exact-r2-assets.ts`で明示キーだけをR2へ反映する。Gitには
+   `cover-design.ts`のR2 key/SHA/byte/寸法だけを残す (プロンプトの型は `.local/kindle-cover-imagegen/build-prompts.mjs`)。
 5. **版保全**: `npm run kindle:archive --workspace=@stats47/r2-storage -- --push --id <id> --version <VERSION>` → `--audit --id <id> --version <VERSION> --deep --record`。EPUB・表紙2種・metadata・READINESS（review.md/review.jsonがあれば同梱）をR2へ暗号化保全し、Git台帳とSHAを一致させる。pushだけでは検証済みにしない。
 6. **オーナーへ受け渡し**: `READINESS.md` に沿って人間が Kindle Previewer で表示確認 → `/kdp-publish`。別PCは`--restore --id <id>`で復元する。
 

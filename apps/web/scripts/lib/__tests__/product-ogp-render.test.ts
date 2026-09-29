@@ -6,9 +6,8 @@ import { describe, expect, it } from 'vitest';
 
 import {
   buildProductOgpElement,
-  resolveProductBackgroundPath,
+  resolveProductBackground,
   resolveProductTitleLayout,
-  sha256File,
   splitProductTitle,
 } from '../product-ogp-render';
 import { loadFonts, renderToPng } from '../satori-image-render';
@@ -55,38 +54,45 @@ describe('resolveProductTitleLayout', () => {
   });
 });
 
-describe('resolveProductBackgroundPath', () => {
-  it('kindle商品はproduct-factoryの表紙背景を指す', () => {
-    const path = resolveProductBackgroundPath({
+describe('resolveProductBackground', () => {
+  it('R2 push前のkindle商品はGitの共通ブランド背景へdegradeする', () => {
+    const background = resolveProductBackground({
+      projectRoot: PROJECT_ROOT,
+      channel: 'kindle',
+      productId: 'K-S1-01',
+    });
+    expect(background.image).toMatch(/^data:image\/jpeg;base64,/);
+    expect(background.sha256).toMatch(/^[a-f0-9]{64}$/);
+  });
+
+  it('背景未承認のkindle商品はGitの共通ブランド背景へdegradeする', () => {
+    const background = resolveProductBackground({
       projectRoot: PROJECT_ROOT,
       channel: 'kindle',
       productId: 'K-S1-02',
     });
-    expect(path).toContain(
-      'packages/product-factory/src/channels/kindle/assets/cover-backgrounds/K-S1-02.jpg'
-    );
-    // 実在確認 (read-only)。
-    expect(() => sha256File(path)).not.toThrow();
+    expect(background.image).toMatch(/^data:image\/jpeg;base64,/);
+    expect(background.sha256).toMatch(/^[a-f0-9]{64}$/);
   });
 
   it('未知のkindle商品IDはfail-closedでエラーにする', () => {
     expect(() =>
-      resolveProductBackgroundPath({
+      resolveProductBackground({
         projectRoot: PROJECT_ROOT,
         channel: 'kindle',
         productId: 'NOT-A-REAL-ID',
       })
-    ).toThrow('kindle cover background が見つかりません');
+    ).toThrow('未知のkindle商品IDです');
   });
 
   it('coconala商品は共通ブランド背景を指す', () => {
-    const path = resolveProductBackgroundPath({
+    const background = resolveProductBackground({
       projectRoot: PROJECT_ROOT,
       channel: 'coconala',
       productId: 'P-01',
     });
-    expect(path).toContain('apps/web/scripts/lib/assets/ogp-bg-brand-light.jpg');
-    expect(() => sha256File(path)).not.toThrow();
+    expect(background.image).toMatch(/^data:image\/jpeg;base64,/);
+    expect(background.sha256).toMatch(/^[a-f0-9]{64}$/);
   });
 });
 

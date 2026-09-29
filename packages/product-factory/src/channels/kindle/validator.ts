@@ -2,7 +2,7 @@
  * Kindle 書籍カタログの決定的 validator (オフライン)。
  * R2 実在チェックはネットワーク依存のため generate 時に行う (ここでは構造整合のみ)。
  */
-import type { KindleBook, BookStatus, EditorialDesign, TitleType } from "./types";
+import type { KindleBook, BookStatus, EditorialDesign, TitleType, KindleCoverTemplate } from "./types";
 import { KINDLE_BOOKS, EXPECTED_SERIES } from "./book-catalog";
 
 export interface KindleIssue {
@@ -30,6 +30,12 @@ const SERIES_PREFIX: Record<string, string> = {
   "S2-theme-databook": "K-S2-",
   "S3-region": "K-S3-",
   "S4-ranking-compendium": "K-S4-",
+};
+const SERIES_COVER_TEMPLATE: Readonly<Record<KindleBook["series"], KindleCoverTemplate>> = {
+  "S1-issues": "issue-pop",
+  "S2-theme-databook": "theme-databook-pop",
+  "S3-region": "region-pop",
+  "S4-ranking-compendium": "ranking-pop",
 };
 /** chapters・素材の実体が要求される status (manuscript 以降は EPUB 生成可能でなければならない)。 */
 const NEEDS_MATERIAL: ReadonlySet<BookStatus> = new Set<BookStatus>(["manuscript", "generated", "published"]);
@@ -93,6 +99,41 @@ export function validateKindleCatalog(books: readonly KindleBook[] = KINDLE_BOOK
     if (b.title.length > 60) warnings.push({ level: "warn", code: "title-long", ref, message: `title が 60 字超 (${b.title.length}字)・KDP 表示で切れる恐れ` });
     if (!b.newContentNote.trim()) errors.push({ level: "error", code: "new-content-note", ref, message: `newContentNote が空 (KDP の Web 公開コンテンツ規定対応・書き下ろし宣言が必須)` });
     if (b.keywords.length === 0) errors.push({ level: "error", code: "keywords-empty", ref, message: `keywords が空` });
+
+    const cover = b.coverDesign;
+    if (cover.template !== SERIES_COVER_TEMPLATE[b.series]) {
+      errors.push({ level: "error", code: "cover-template-series", ref, message: `series=${b.series} の表紙 template は ${SERIES_COVER_TEMPLATE[b.series]} にする` });
+    }
+    if (cover.dataLabels.length < 3 || cover.dataLabels.length > 6) {
+      errors.push({ level: "error", code: "cover-data-labels", ref, message: `coverDesign.dataLabels はサムネイルで読める 3〜6 件にする (実際 ${cover.dataLabels.length} 件)` });
+    }
+    if (new Set(cover.dataLabels).size !== cover.dataLabels.length) {
+      errors.push({ level: "error", code: "cover-data-labels-duplicate", ref, message: `coverDesign.dataLabels に重複がある` });
+    }
+    if (cover.backgroundConcept.trim().length < 20) {
+      errors.push({ level: "error", code: "cover-background-concept", ref, message: `coverDesign.backgroundConcept は商品固有の具体物を 20 字以上で指定する` });
+    }
+    const backgroundAsset = cover.backgroundAsset;
+    if (cover.reviewStatus === "approved" && !backgroundAsset) {
+      errors.push({ level: "error", code: "cover-background-r2-missing", ref, message: `承認済み表紙はR2背景assetを必須とする` });
+    }
+    if (backgroundAsset) {
+      if (cover.reviewStatus !== "approved") {
+        errors.push({ level: "error", code: "cover-background-r2-unapproved", ref, message: `R2背景assetを登録できるのは目視承認済み表紙だけ` });
+      }
+      if (!new RegExp(`^media/kindle-cover-assets/${b.id}/[a-f0-9]{12}/background\\.jpg$`).test(backgroundAsset.r2Key)) {
+        errors.push({ level: "error", code: "cover-background-r2-key", ref, message: `R2背景keyは商品ID×12桁revisionの不変pathにする` });
+      }
+      if (!/^[a-f0-9]{64}$/.test(backgroundAsset.sha256) || backgroundAsset.bytes <= 0) {
+        errors.push({ level: "error", code: "cover-background-integrity", ref, message: `R2背景assetのSHA-256/byteが不正` });
+      }
+      if (backgroundAsset.status !== "staged-unpublished" && backgroundAsset.status !== "published") {
+        errors.push({ level: "error", code: "cover-background-status", ref, message: `R2背景assetの公開状態が不正` });
+      }
+      if (backgroundAsset.width !== 1600 || backgroundAsset.height !== 2560) {
+        errors.push({ level: "error", code: "cover-background-size", ref, message: `R2背景assetは1600×2560に固定する` });
+      }
+    }
 
     // 編集設計。manuscript 以降で無ければ警告 (generate は design 無しを拒否する)。
     const needsMaterial = NEEDS_MATERIAL.has(b.status);
