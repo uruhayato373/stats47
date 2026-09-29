@@ -433,9 +433,9 @@
       "is_paid": false,
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-agricultural-employment-population",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-agricultural-output": {
       "vertical": "stats47-note",
@@ -444,9 +444,9 @@
       "is_paid": false,
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-agricultural-output",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-average-temperature": {
       "vertical": "stats47-note",
@@ -455,9 +455,9 @@
       "is_paid": false,
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-average-temperature",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-avg-propensity-to-consume-worker-households": {
       "vertical": "stats47-note",
@@ -466,9 +466,9 @@
       "is_paid": false,
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-avg-propensity-to-consume-worker-households",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-consumption-expenditure-multi-person-households-per-month": {
       "vertical": "stats47-note",
@@ -477,9 +477,9 @@
       "is_paid": false,
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-consumption-expenditure-multi-person-households-per-month",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-convenience-store-sales": {
       "vertical": "stats47-note",
@@ -499,9 +499,9 @@
       "is_paid": false,
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-current-liabilities-balance-multi-person-households-per-household",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-day-time-population": {
       "vertical": "stats47-note",
@@ -510,9 +510,9 @@
       "is_paid": false,
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-day-time-population",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-electricity-demand": {
       "vertical": "stats47-note",
@@ -532,9 +532,9 @@
       "is_paid": false,
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-electricity-generation-capacity",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-final-energy-consumption-per-capita": {
       "vertical": "stats47-note",
@@ -554,9 +554,9 @@
       "is_paid": false,
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-general-households",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-kakei-aichi": {
       "vertical": "stats47-note",
@@ -576,9 +576,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-akita",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-kakei-aomori": {
       "vertical": "stats47-note",
@@ -598,9 +598,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-chiba",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-kakei-ehime": {
       "vertical": "stats47-note",
@@ -609,9 +609,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-ehime",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-kakei-fukui": {
       "vertical": "stats47-note",
@@ -620,9 +620,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-fukui",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-kakei-fukuoka": {
       "vertical": "stats47-note",
@@ -631,9 +631,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-fukuoka",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-kakei-fukushima": {
       "vertical": "stats47-note",
@@ -642,9 +642,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-fukushima",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-kakei-gifu": {
       "vertical": "stats47-note",
@@ -653,9 +653,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-gifu",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-kakei-gunma": {
       "vertical": "stats47-note",
@@ -664,9 +664,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-gunma",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-kakei-hiroshima": {
       "vertical": "stats47-note",
@@ -697,9 +697,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-hyogo",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-kakei-ibaraki": {
       "vertical": "stats47-note",
@@ -708,9 +708,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-ibaraki",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-kakei-ishikawa": {
       "vertical": "stats47-note",
@@ -719,9 +719,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-ishikawa",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-kakei-iwate": {
       "vertical": "stats47-note",
@@ -730,9 +730,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-iwate",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-kakei-kagawa": {
       "vertical": "stats47-note",
@@ -741,9 +741,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-kagawa",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-kakei-kagoshima": {
       "vertical": "stats47-note",
@@ -752,9 +752,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-kagoshima",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-kakei-kanagawa": {
       "vertical": "stats47-note",
@@ -763,9 +763,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-kanagawa",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-kakei-kochi": {
       "vertical": "stats47-note",
@@ -774,9 +774,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-kochi",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-kakei-kumamoto": {
       "vertical": "stats47-note",
@@ -785,9 +785,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-kumamoto",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-kakei-kyoto": {
       "vertical": "stats47-note",
@@ -796,9 +796,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-kyoto",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-kakei-mie": {
       "vertical": "stats47-note",
@@ -807,9 +807,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-mie",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-kakei-miyagi": {
       "vertical": "stats47-note",
@@ -818,9 +818,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-miyagi",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-kakei-miyazaki": {
       "vertical": "stats47-note",
@@ -829,9 +829,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-miyazaki",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-kakei-nagano": {
       "vertical": "stats47-note",
@@ -840,9 +840,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-nagano",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-kakei-nagasaki": {
       "vertical": "stats47-note",
@@ -851,9 +851,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-nagasaki",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-kakei-nara": {
       "vertical": "stats47-note",
@@ -862,9 +862,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-nara",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-kakei-niigata": {
       "vertical": "stats47-note",
@@ -873,9 +873,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-niigata",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-kakei-oita": {
       "vertical": "stats47-note",
@@ -884,9 +884,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-oita",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-kakei-okayama": {
       "vertical": "stats47-note",
@@ -895,9 +895,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-okayama",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-kakei-okinawa": {
       "vertical": "stats47-note",
@@ -906,9 +906,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-okinawa",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-kakei-osaka": {
       "vertical": "stats47-note",
@@ -917,9 +917,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-osaka",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-kakei-saga": {
       "vertical": "stats47-note",
@@ -928,9 +928,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-saga",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-kakei-saitama": {
       "vertical": "stats47-note",
@@ -939,9 +939,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-saitama",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-kakei-shiga": {
       "vertical": "stats47-note",
@@ -950,9 +950,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-shiga",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-kakei-shimane": {
       "vertical": "stats47-note",
@@ -961,9 +961,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-shimane",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-kakei-shizuoka": {
       "vertical": "stats47-note",
@@ -972,9 +972,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-shizuoka",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-kakei-tochigi": {
       "vertical": "stats47-note",
@@ -983,9 +983,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-tochigi",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-kakei-tokushima": {
       "vertical": "stats47-note",
@@ -994,9 +994,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-tokushima",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-kakei-tokyo": {
       "vertical": "stats47-note",
@@ -1005,9 +1005,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-tokyo",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-kakei-tottori": {
       "vertical": "stats47-note",
@@ -1016,9 +1016,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-tottori",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-kakei-toyama": {
       "vertical": "stats47-note",
@@ -1027,9 +1027,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-toyama",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-kakei-wakayama": {
       "vertical": "stats47-note",
@@ -1038,9 +1038,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-wakayama",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-kakei-yamagata": {
       "vertical": "stats47-note",
@@ -1049,9 +1049,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-yamagata",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-kakei-yamaguchi": {
       "vertical": "stats47-note",
@@ -1060,9 +1060,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-yamaguchi",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-kakei-yamanashi": {
       "vertical": "stats47-note",
@@ -1071,9 +1071,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-yamanashi",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-late-elderly-medical-expense-per-insured": {
       "vertical": "stats47-note",
@@ -1082,9 +1082,9 @@
       "is_paid": false,
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-late-elderly-medical-expense-per-insured",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-maximum-temperature": {
       "vertical": "stats47-note",
@@ -1104,9 +1104,9 @@
       "is_paid": false,
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-minimum-wage-by-region",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-number-of-establishments-manufacturing": {
       "vertical": "stats47-note",
@@ -1115,9 +1115,9 @@
       "is_paid": false,
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-number-of-establishments-manufacturing",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-private-rental-housing-rent-per-3-3m2": {
       "vertical": "stats47-note",
@@ -1159,9 +1159,9 @@
       "is_paid": false,
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-room-utilization-rate",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-total-fertility-rate": {
       "vertical": "stats47-note",
@@ -1170,9 +1170,9 @@
       "is_paid": false,
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-total-fertility-rate",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "a-total-overnight-guests": {
       "vertical": "stats47-note",
@@ -1203,9 +1203,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/b-kakei-academic-food",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "b-kakei-advancement-employment": {
       "vertical": "stats47-note",
@@ -1214,9 +1214,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/b-kakei-advancement-employment",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "b-kakei-beer-peak-month": {
       "vertical": "stats47-note",
@@ -1225,9 +1225,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/b-kakei-beer-peak-month",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "b-kakei-bread-giffen": {
       "vertical": "stats47-note",
@@ -1236,9 +1236,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/b-kakei-bread-giffen",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "b-kakei-gyoza-counting": {
       "vertical": "stats47-note",
@@ -1247,9 +1247,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/b-kakei-gyoza-counting",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "b-kakei-necktie-decline": {
       "vertical": "stats47-note",
@@ -1258,9 +1258,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/b-kakei-necktie-decline",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "b-kakei-quantity-price": {
       "vertical": "stats47-note",
@@ -1269,9 +1269,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/b-kakei-quantity-price",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "b-kakei-winter-bargain": {
       "vertical": "stats47-note",
@@ -1280,9 +1280,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/b-kakei-winter-bargain",
-      "r2_body": false,
+      "r2_body": true,
       "r2_access": "none",
-      "status": "note_only"
+      "status": "r2_ready"
     },
     "d-geo-flood-population-mesh": {
       "vertical": "stats47-note",
