@@ -76,6 +76,7 @@ export const METRIC_POLARITY: Readonly<Record<string, PolarityEntry>> = {
   "business-opening-base-establishments": { polarity: "neutral", evidence: "前年末の雇用保険適用事業所数は開廃業率の分母であり、事業の成長や存続の成果を測る値ではない。" },
   "business-opening-establishments": { polarity: "neutral", evidence: "雇用保険関係の新規成立件数は新設と適用範囲の変化を含む行政記録で、純雇用創出や創業成功数とは異なる。" },
   "business-opening-rate": { polarity: "neutral", evidence: "前年末適用数に対する保険関係新規成立率は参入動態で、存続・付加価値・雇用の質を併せなければ良否を決められない。" },
+  "census-population-change-rate-5y": { polarity: "neutral", evidence: "国勢調査の5年間の人口増減率は自然増減と転入転出の合計であり、人口の増減を住民の厚生や地域の優劣へ読み替えない。" },
   "child-abuse-consultation-cases": { polarity: "neutral", evidence: "児童相談所における児童虐待相談の対応件数は虐待の発生と相談窓口の周知・利用の双方で増減するため、件数の増加だけを悪化と結び付けない。" },
   "child-rearing-allowance-recipients": { polarity: "neutral", evidence: "児童扶養手当受給者数は支援需要と制度への到達をともに反映し、受給者の多寡を生活状態の優劣としない。" },
   "childcare-applicants": { polarity: "neutral", evidence: "保育利用申込者総数は子どもの人数と利用希望の規模であり、受入不足や待機児童数そのものではない。" },
