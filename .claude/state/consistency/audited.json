@@ -1,22 +1,8 @@
 {
-  "hash": "5aa5f487035d4ae09d0f318a01d28de24a9557a1dcd68fc3a87dfe162453b5ac",
-  "audited_at": "2026-09-29T13:20:01",
+  "hash": "68b1aaaad5dbbb768bb43cb7fd88f8d3e5d80a12c82bed3711b1940c74f0b805",
+  "audited_at": "2026-09-29T23:21:16",
   "files": [
-    ".agents/skills/management/weekly-review/SKILL.md",
-    ".agents/skills/note/post-note-ranking/SKILL.md",
-    ".agents/skills/note/publish-note/SKILL.md",
-    ".claude/rules/note-image-assets.md",
-    ".claude/scripts/lib/__tests__/check-asset-policy.test.cjs",
-    ".claude/scripts/lib/check-asset-policy.cjs",
-    ".claude/scripts/note/__tests__/image-assets-audit.test.mjs",
-    ".claude/scripts/note/audit-note-image-assets.mjs",
-    ".claude/scripts/note/lib/image-assets-audit.mjs",
-    ".claude/scripts/note/regen-derived-png.mjs",
-    ".claude/scripts/note/sync-note-r2.mjs",
-    ".claude/skills/management/weekly-review/SKILL.md",
-    ".claude/skills/note/post-note-ranking/SKILL.md",
-    ".claude/skills/note/post-note-ranking/scripts/generate-ranking-note.ts",
-    ".claude/skills/note/publish-note/SKILL.md",
-    "CLAUDE.md"
+    ".agents/skills/sns/react-to-news/SKILL.md",
+    ".claude/skills/sns/react-to-news/SKILL.md"
   ]
 }

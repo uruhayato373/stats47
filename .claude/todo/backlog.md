@@ -193,6 +193,16 @@ updated: 2026-09-29
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [CENSUS-2025-ROLLOUT-01] 2025年国勢調査の確定値を既存の人口系ランキングと市区町村別へ展開する
+
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run validate:config --workspace packages/data-configs] [起票:2026-09-30] [レーン:ランキング]
+
+- **背景**: 令和7年国勢調査の人口等基本集計が 2026-09-29 に e-Stat へ公開された (人口等基本集計 DB 671 表)。既存の総人口・人口増減率・65歳以上人口割合・15歳未満人口割合は社会・人口統計体系 (SSDS) 固定で、人口推計の 2024 年止まり。2026-09-30 に「5年間の人口増減率」(`census-population-change-rate-5y`、`0004065882` / cdTab `2025_35`) だけを都道府県別の新しい指標として追加した。
+- **未対応 1 (既存ランキングの 2025 年)**: metric config は出典を 1 つしか持てないため、SSDS 指標に国勢調査の 2025 年を足す経路が無い。65歳以上人口割合などを別指標として複製すると同じ意味のページが二重になる。SSDS 側の 2025 年反映を待つか、年ごとに出典を足す仕組みを作るかを決める。
+- **未対応 2 (市区町村別)**: `0004065882` は「2000年市区町村含む」表で、「（旧：家島町）」のような合併前の旧町村が 5 桁コードで 3,784 地域に混ざる。`page-data-batch.ts` の `isCityCode5` は形式しか見ないため、そのまま `city` を足すと旧町村が混入する。現行の市区町村マスタで絞る処理が要る。
+- **完了条件**: 上記 2 点の方針が決まり、採用した方の指標が本番で 200 を返す。
+- **停止条件**: 同じ意味の指標を複製して公開しない。旧町村コードを含んだ cities.json を配信しない。
+
 ### [ADMIN-MCP-STATUS-01] 管理画面で、この PC が使う MCP の一覧と接続状況を見られるようにする
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-09-28] [レーン:基盤]
 
@@ -752,7 +762,7 @@ updated: 2026-09-29
 
 - **owner**: オーナー (画像生成) / kindle-publisher (取り込み・再生成・検証)
 - **現状**: 2026-09-29 に画像バイナリをGit管理から外し、承認済みassetをR2 `media/kindle-cover-assets/<id>/<revision>/`、Gitをkey/SHA台帳だけにする方式へ変更した。KDP台帳で現在公開中なのはK-S1-01〜K-S1-12の12冊で、S2/S3/S4は出版停止済みのため表紙更新対象外。K-S1-01〜K-S1-12は新しいポップ表紙を1冊ずつ目視承認済みでR2へ公開し、各4ファイルの再取得SHA一致と公開URL 200を確認済み。画像制作・承認・R2保全は12冊すべて完了し、残工程は各冊を新versionで再生成して本文差分0・検証・入稿提案更新を確認する工程。
-- **作り方 (Codex アプリ)**: 貼るプロンプトは `.local/kindle-cover-imagegen/CODEX-APP-PROMPT.md` (12 冊を 1 メッセージで。1 冊だけなら表を 1 行に)。1 冊ずつの英文は同 dir の `prompt-K-S1-NN.txt` (12 本。型は同 dir の `build-prompts.mjs`: 紺地 #0f2540 + 琥珀のペーパーカット風・大きなモチーフ 2〜3 個・**横長 1536×1024**・文字/数字/通貨記号/ロゴ/地図/顔なし)。帯絵は表紙の**下 42% だけ**に出る (上は文字面) ので、縦長で描かない。生成した PNG を `.local/kindle-cover-imagegen/K-S1-NN.png` に置く。
+- **作り方 (Codex アプリ)**: 貼るプロンプトは Drive の `stats47/Kindle表紙/_imagegen-tooling/`の `CODEX-APP-PROMPT.md` (12 冊を 1 メッセージで。1 冊だけなら表を 1 行に)。1 冊ずつの英文は各書籍の Drive 候補フォルダ `Kindle表紙/K-S1-NN/candidates/` の `original-K-S1-NN.prompt.txt` (元画像は同フォルダの `original-K-S1-NN.png`、12 本。型は `_imagegen-tooling/build-prompts.mjs`: 紺地 #0f2540 + 琥珀のペーパーカット風・大きなモチーフ 2〜3 個・**横長 1536×1024**・文字/数字/通貨記号/ロゴ/地図/顔なし)。帯絵は表紙の**下 42% だけ**に出る (上は文字面) ので、縦長で描かない。生成した PNG を `.local/kindle-cover-imagegen/K-S1-NN.png` に置く。
 - **次 (差し替え手順・kindle-publisher が実行)**: ①1冊だけ生成して目視承認 ②`ingest-cover-background.mts --book K-S1-NN --input <png> --pop-band`でR2 staging ③完成PNG/JPEGとmanifestを同revisionへ置き、exact keyをR2 push ④`cover-design.ts`へkey/SHA/byte/寸法を登録 ⑤`products:kindle:generate -- --id K-S1-NN --version <次の版>` ⑥章テキスト差分0、`verify-epub`、review receipt、`verify-publishable --content-only` blocker 0を確認 ⑦入稿提案を最新版へ更新。
 - **禁止**: 画像に文字・数字を焼き込まない (書名・著者は satori が実テキストで重ねる)。生成 AI の描く日本列島を使わない (2026-08-12 の指摘)。差し替え版は必ず新しい version で作り、既存版を上書きしない。KDP への表紙アップロードは `kdp-publish --update` の工程で行い、ここでは触らない。
 - **完了条件**: 12 冊ぶんの帯絵がオーナー選定の絵に置き換わり、各冊の最終版が本文差分 0・`verify-publishable --content-only` blocker 0 で、入稿提案が最新版を指している。差し替えない冊は現行の帯絵のままでよい (その旨をこのカードから消して閉じる)。

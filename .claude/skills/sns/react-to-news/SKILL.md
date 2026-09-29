@@ -24,6 +24,25 @@ npx tsx .claude/scripts/sns/build-discovery-index.ts   # → .claude/state/sns/m
 
 ## フロー
 
+### Step 0. ニュースの数値の一次資料を Web で特定する
+
+既存指標を探す前に、ニュースが引く数値の**出典・公表日・集計名**を Web で特定する。e-Stat に限らず、
+省庁の報道資料・統計局・自治体・業界団体のサイトも探す (WebSearch / WebFetch)。
+
+- **公表直後の表は手元のカタログに無い**。R2 estat-catalog は月次更新なので、e-Stat の Web 画面
+  (`https://www.e-stat.go.jp/stat-search/files?tstat=<統計ID>` の「新着」、`/stat-search/database` の表一覧) で
+  新着の statsDataId を確認する。分類コードは `https://www.e-stat.go.jp/dbview?sid=<statsDataId>` の
+  `<option data-code=...>` から取れる (`data-matter_id` 側は表章項目 = `cdTab`)
+- **ニュースの数値と一次資料を突き合わせる**。e-Stat の公開ファイル
+  (`/stat-search/file-download?statInfId=<ID>&fileKind=0`) は API キー無しで取得できる
+- 既存指標の最新年より新しい公表なら、Step 1 の前に**指標拡充の候補**にする (e-Stat 表なら metric config を追加して
+  `/publish-ranking`、e-Stat 外なら `.claude/rules/data-provenance-standards.md` の provenance を付ける)。
+  既存ランキングの年が古いまま投稿すると、リンク先の数値がニュースと食い違う
+
+> 実例 (2026-09-30): 令和7年国勢調査 人口等基本集計は 2026-09-29 に公表されたが、9/16 生成の catalog には無く、
+> 既存の人口系ランキングは人口推計の 2024 年止まりだった。e-Stat の新着画面から `0004065882`
+> (5年間の人口増減率) を特定し、公開 xlsx で全国 -2.52%・秋田 -8.13% が新聞報道と一致することを確認した。
+
 ### Step 1. ネタ→指標を発見する
 
 ニュースのキーワード(自由文・複数語可)を渡す。**ニュース語彙と指標語彙のギャップ**は同義語辞書
