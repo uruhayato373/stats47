@@ -115,3 +115,15 @@ test("docs/31 の派生 PNG は、追跡された同名 SVG があれば CI に�
   const missing = JSON.parse(result.stdout).newFindings.filter((x) => x.code === "MISSING_REFERENCE").map((x) => x.message);
   assert.deepEqual(missing, ["images/b.png"]);
 });
+
+test("docs/31 のランキング記事は render-spec.json があれば、CI に無い images/*.png を欠落にしない", async (t) => {
+  const f = await fixture(); t.after(() => fs.rmSync(f.root, { recursive: true, force: true }));
+  const slugDir = path.join(f.root, "docs/31_note記事原稿/a-foo");
+  fs.mkdirSync(slugDir, { recursive: true });
+  fs.writeFileSync(path.join(slugDir, "render-spec.json"), "{}");
+  fs.writeFileSync(path.join(slugDir, "draft.md"), "![地図](images/cover-1280x670.png)\n");
+  const missing = (r) => JSON.parse(r.stdout).newFindings.filter((x) => x.code === "MISSING_REFERENCE");
+  assert.deepEqual(missing(run(f)), []);
+  fs.rmSync(path.join(slugDir, "render-spec.json"));
+  assert.equal(missing(run(f)).length, 1);
+});

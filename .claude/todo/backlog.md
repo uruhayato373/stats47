@@ -193,15 +193,6 @@ updated: 2026-09-29
 
 ## 🟡 中 — 2〜3ヶ月以内
 
-### [NOTE-R2-SYNC-VERIFY-01] develop push 後の sync-note-r2 で note 記事 65 本が R2 に載ったことを確かめる
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:node .claude/scripts/note/audit-note-image-assets.mjs --verify-r2] [起票:2026-09-29] [レーン:note・商品販売]
-
-- **背景**: 2026-09-29 に、カタログが `r2Body` 既定 (true) のまま「R2 に本体あり」と申告していた a-* 記事 65 本 (ランキング 14 + その他 51 (家計 47 を含む)) が R2 に無いと分かった (契約 6・`.claude/rules/note-image-assets.md`)。カタログを `r2Body: false` に直し `note-published-urls.json` を再生成済み。
-- **次**: develop へ push すると `sync-note-r2.yml` が自動で走り、65 本を R2 へ載せて `docs/31` から `git rm` し commit-back する (この push は承認を得てから)。走った後に `--verify-r2` が通ることと、`restore-from-r2.sh <slug>` で 1 本復元して `render-ranking-images.mjs` / `note:images:regen` が動くことを確かめる。
-- **注意**: 画像 (PNG) は git に無いので R2 にも載らない。復元後に作り直す。ランキング記事は `chart-data.json` と `render-spec.json` が R2 に載るので作り直せる。
-- **完了条件**: `--verify-r2` が通り、復元した 1 本で画像が作り直せる。
-- **禁止**: sync 結果の確認前に `docs/31` の a-* を手で削除しない。
-
 ### [ADMIN-MCP-STATUS-01] 管理画面で、この PC が使う MCP の一覧と接続状況を見られるようにする
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-09-28] [レーン:基盤]
 
