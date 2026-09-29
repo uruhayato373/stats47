@@ -3,10 +3,13 @@
 投稿済み全件。`posted_at` 降順。
 スクリプトで自動生成 — 手編集しない (`sns-posts-store.cjs` が `insert()`/`updateById()` のたびに再生成)。
 
-**576 件** (最終更新: 2026-09-28)
+**579 件** (最終更新: 2026-09-29)
 
 | 日付 | 媒体 | コンテンツ | キャプション | URL |
 |---|---|---|---|---|
+| 2026-09-29 | 📸 Instagram | area-carousel/47000 |  | [🔗](https://www.instagram.com/p/Dd4MHf-Fe7i/) |
+| 2026-09-29 | 🧵 Threads | area/area-06000-profile | 山形のデータブックを公開中。 オシドリと小野川豆もやし、ウコギを入口に、人口・産業・消費の数字を県別に深掘り。 続きは�… | [🔗](https://www.threads.com/@stats47jp/post/Dd3TIFHkasu) |
+| 2026-09-29 | 🧵 Threads | ranking/wooden-housing-ratio | なぜ秋田県の木造住宅率は88.8%とこれほど高いのか?  2位青森県88.1%、3位山形県83.3%と東北勢が上位を占め… | [🔗](https://www.threads.com/@stats47jp/post/Dd2lVBxkiLb) |
 | 2026-09-28 | 📸 Instagram | ranking-quiz/side-job-rate |  | [🔗](https://www.instagram.com/p/Dd1yg5lmEk3/) |
 | 2026-09-28 | 🧵 Threads | area/area-05000-profile | 旅先では見えにくい秋田の輪郭。 県木秋田杉と特産とんぶり、暮らしの統計を同じページで確認できます。 続きは👇 http… | [🔗](https://www.threads.com/@stats47jp/post/Dd0xuCIDknQ) |
 | 2026-09-28 | 🧵 Threads | ranking/daytime-population-ratio | 昼になると人が増える県、減る県。  昼夜間人口比率の1位は東京116.1％。 最下位の埼玉は89.6％で、昼の人口が約1… | [🔗](https://www.threads.com/@stats47jp/post/Dd0C45nkllM) |
