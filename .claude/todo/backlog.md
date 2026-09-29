@@ -193,15 +193,6 @@ updated: 2026-09-29
 
 ## 🟡 中 — 2〜3ヶ月以内
 
-### [NOTE-R2-BODY-MISSING-14-01] catalog が R2 に本文ありとする a-* 記事 14 本が R2 に無い状態を解消する
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:npm run note:images:audit -- --verify-r2] [起票:2026-09-29] [レーン:note・商品販売]
-
-- **事実 (2026-09-29 実測)**: `.claude/state/note-published-urls.json` で `r2_body:true`・`status:r2_ready` の記事 156 本のうち、a-* 14 本 (例 `a-average-temperature`) の `https://storage.stats47.jp/<r2_path>/draft.md` が HTTP 404。koumuin 系など残り 142 本は 200。14 本は `docs/31` に原稿と画像が残っており、git が唯一の実体。
-- **原因の候補 (未確定)**: (1) 公開時に catalog を `r2Body:true` で作り、`sync-note-r2` が `r2_body:false` だけを対象にするため一度も同期されなかった。(2) 同期後に R2 から消えた。切り分けは `.claude/scripts/note/catalog/` の a-* の `r2Body` 初期値と `sync-note-r2.yml` の実行履歴で行う。
-- **次**: 原因を確定し、catalog を `r2Body:false` に戻して `sync-note-r2.yml` (CI) で R2 へ載せるか、載せないなら catalog の申告を直す。R2 への書込と develop への push は承認を得てから。完了後に `budget` の `r2BodyMissingKnown` を空にする。
-- **完了条件**: `npm run note:images:audit -- --verify-r2` が `r2BodyMissingKnown` 空で通る。
-- **禁止**: 確定前に `docs/31` の a-* を削除しない。
-
 ### [NOTE-R2-SYNC-VERIFY-01] develop push 後の sync-note-r2 で note 記事 65 本が R2 に載ったことを確かめる
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:node .claude/scripts/note/audit-note-image-assets.mjs --verify-r2] [起票:2026-09-29] [レーン:note・商品販売]
 
