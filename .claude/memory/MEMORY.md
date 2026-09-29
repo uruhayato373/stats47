@@ -1,5 +1,7 @@
 # Memory Index
 
+- [project_note_image_assets_contract.md](project_note_image_assets_contract.md) — note原稿(docs/31)の画像契約。派生PNGはgit非追跡・ランキング記事はchart-data.jsonでデータ復元・catalogのr2_bodyは実在確認要(a-*14本がR2に無い)
+
 - [feedback_gsc_export_false_positive.md](feedback_gsc_export_false_positive.md) — GSC理由行の非表示クリック失敗は概要ZIPの偽成功を生む。概要+5詳細の内容・件数・帰属とcapabilityを照合
 - [feedback_native_chrome_session_export.md](feedback_native_chrome_session_export.md) — Google認証exportはOS keychain互換を保った専用profileの一時コピーで行い、元profileをテスト既定値で開かない
 - [project_monetization_contract.md](project_monetization_contract.md) — 収益化の恒久判断。AdSenseは恒久停止(RPM ¥37で月¥1,400上限)、NSMは週次収益でPVではない、アフィ評価は確定収益/1,000 viewable imp、affiliate_verticalは広告自身のverticalを送る(契約テストで強制)、本線は行政実務向け商品

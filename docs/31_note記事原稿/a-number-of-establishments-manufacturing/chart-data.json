@@ -10,6 +10,7 @@
     "readerLabel": "事業所数",
     "hook": "事業所数が最も多い県は？"
   },
+  "unit": "所",
   "summary": {
     "mean": 10365.77,
     "stddev": 10594.42,

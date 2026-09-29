@@ -10,6 +10,7 @@
     "readerLabel": "合計特殊出生率",
     "hook": "合計特殊出生率が最も高い県は？"
   },
+  "unit": "人",
   "summary": {
     "mean": 1.29,
     "stddev": 0.13,

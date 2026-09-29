@@ -10,6 +10,7 @@
     "readerLabel": "一般世帯数",
     "hook": "一般世帯数が最も多い県は？"
   },
+  "unit": "万世帯",
   "summary": {
     "mean": 118.55,
     "stddev": 133.99,

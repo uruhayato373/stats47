@@ -10,6 +10,7 @@
     "readerLabel": "地域別最低賃金",
     "hook": "地域別最低賃金が最も高い県は？"
   },
+  "unit": "円",
   "summary": {
     "mean": 998.36,
     "stddev": 52.69,

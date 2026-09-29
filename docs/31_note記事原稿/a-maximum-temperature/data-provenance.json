@@ -1,0 +1,17 @@
+{
+  "slug": "a-maximum-temperature",
+  "vertical": "stats47-note",
+  "kind": "ranking",
+  "rankingKey": "maximum-temperature",
+  "year": "2024",
+  "charts": [
+    "images/cover-1280x670.png",
+    "images/choropleth-map-1080x1080.png",
+    "images/chart-x-1200x630.png",
+    "images/boxplot-1200x630.png"
+  ],
+  "source": "r2:app/stats/maximum-temperature/values.json",
+  "restore": "curl -sf https://storage.stats47.jp/app/stats/maximum-temperature/values.json",
+  "generatedBy": "backfill-from-r2",
+  "note": "データ本体は stats47 R2 が SSOT。本ファイルは復元マニフェスト（コピーではない）。旧記事のため公開済み本文の数値と一致することを確認して後から作成"
+}

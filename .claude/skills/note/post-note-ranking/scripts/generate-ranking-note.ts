@@ -531,6 +531,8 @@ async function build(
       generatedAt,
     },
     copy: { canonicalTitle, readerLabel, hook },
+    // 画像の再描画に必要。chart-data.json だけで単位まで復元できるようにする (契約: note-image-assets.md)
+    unit: item.unit ?? '',
     summary: {
       mean: round(mean),
       stddev: round(stddev),

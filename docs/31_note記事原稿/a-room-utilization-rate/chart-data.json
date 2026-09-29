@@ -10,6 +10,7 @@
     "readerLabel": "客室稼働率",
     "hook": "客室稼働率が最も高い県は？"
   },
+  "unit": "％",
   "summary": {
     "mean": 65.22,
     "stddev": 5.17,

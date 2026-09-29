@@ -10,6 +10,7 @@
     "readerLabel": "平均消費性向",
     "hook": "平均消費性向が最も高い県は？"
   },
+  "unit": "％",
   "summary": {
     "mean": 63,
     "stddev": 3.99,

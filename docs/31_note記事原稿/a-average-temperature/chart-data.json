@@ -10,6 +10,7 @@
     "readerLabel": "年平均気温",
     "hook": "年平均気温が最も高い県は？"
   },
+  "unit": "℃",
   "summary": {
     "mean": 17.1,
     "stddev": 2.25,

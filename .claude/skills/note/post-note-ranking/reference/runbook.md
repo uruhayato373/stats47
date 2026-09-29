@@ -391,150 +391,18 @@ stats47
 
 ### Phase 3: 画像生成
 
-5. SNS データファイルの準備（`.local/r2/sns/ranking/<rankingKey>/` に data.json がない場合）:
+画像 4 枚は `chart-data.json` だけから作る。R2 や `.local` のデータは読まない。
 
 ```bash
-cd /Users/minamidaisuke/stats47 && node -e "
-const fs = require('fs');
-const R2 = process.env.R2_PUBLIC_FETCH_URL || 'https://storage.stats47.jp';
-
-const rankingKey = '<RANKING_KEY>';
-const YEAR = '<YEAR>';
-(async () => {
-// メタは R2 item.json（旧 D1 metrics は廃止。demographic_attr/normalization_basis は廃止列で undefined）
-const { item } = await (await fetch(R2 + '/app/ranking/' + rankingKey + '/item.json')).json();
-
-// 観測値は R2 公開 URL から (Phase 6 で D1 stats_* DROP)
-const res = await fetch(R2 + '/app/stats/' + rankingKey + '/values.json');
-if (!res.ok) { console.error('R2 missing (' + res.status + '): ' + rankingKey); process.exit(1); }
-const payload = await res.json();
-const rows = payload.rows
-  .filter(r => String(r.yearCode) === String(YEAR) && r.value != null)
-  .sort((a, b) => Number(b.value) - Number(a.value))
-  .map(r => ({ area_code: r.areaCode, area_name: r.areaName, year: r.yearCode, value: Number(r.value) }));
-
-const dir = '.local/r2/sns/ranking/' + rankingKey;
-fs.mkdirSync(dir + '/instagram', { recursive: true });
-fs.mkdirSync(dir + '/note/images', { recursive: true });
-
-// data.json
-const data = {
-  categoryName: item.readerLabel || item.title,
-  yearName: '<YEAR>年',
-  unit: item.unit,
-  data: rows.map((r, i) => ({
-    rank: i + 1,
-    areaCode: String(r.area_code).padStart(2, '0'),
-    areaName: r.area_name,
-    value: r.value,
-  })),
-};
-fs.writeFileSync(dir + '/data.json', JSON.stringify(data, null, 2));
-
-// ranking_items.json
-const itemMeta = {
-  title: item.title,
-  readerLabel: item.readerLabel || item.title,
-  hook: item.hook,
-  unit: item.unit,
-  demographicAttr: item.demographic_attr || undefined,
-  normalizationBasis: item.normalization_basis || undefined,
-};
-fs.writeFileSync(dir + '/ranking_items.json', JSON.stringify(itemMeta, null, 2));
-
-// caption.json (R2 item.json の読者向けコピーを全媒体で共有)
-fs.writeFileSync(dir + '/instagram/caption.json', JSON.stringify({
-  hookText: item.hook,
-  displayTitle: item.readerLabel || item.title,
-}));
-
-console.log('Data files generated for:', rankingKey);
-})();
-"
+node .claude/scripts/note/render-ranking-images.mjs <RANKING_KEY>   # 約 15 秒。images/*.png と render-spec.json を書く
 ```
 
-6. Remotion で画像を生成:
-
-```bash
-cd apps/remotion
-
-# Props JSON を生成（OS に応じた一時ディレクトリに保存）
-node -e "
-const fs = require('fs');
-const os = require('os');
-const path = require('path');
-const data = JSON.parse(fs.readFileSync('../../.local/r2/sns/ranking/<RANKING_KEY>/data.json', 'utf8'));
-let itemMeta = {};
-try { itemMeta = JSON.parse(fs.readFileSync('../../.local/r2/sns/ranking/<RANKING_KEY>/ranking_items.json', 'utf8')); } catch(e) {}
-
-const props = {
-  theme: 'light',
-  hookText: itemMeta.hook || '',
-  displayTitle: itemMeta.readerLabel || itemMeta.title || data.categoryName,
-  meta: {
-    title: itemMeta.title || data.categoryName,
-    unit: itemMeta.unit || data.unit,
-    yearName: data.yearName,
-    demographicAttr: itemMeta.demographicAttr || undefined,
-    normalizationBasis: itemMeta.normalizationBasis || undefined,
-  },
-  allEntries: data.data.map(d => ({ rank: d.rank, areaCode: d.areaCode, areaName: d.areaName, value: d.value })),
-};
-const tmpPath = path.join(os.tmpdir(), 'sns-props-note.json');
-fs.writeFileSync(tmpPath, JSON.stringify(props));
-console.log('Props generated at:', tmpPath);
-"
-
-# Chrome パスを判定（プロキシ環境では Chrome Headless Shell のダウンロードが
-# ブロックされるため、ローカルの Chrome を --browser-executable で指定する）
-PROPS="$(node -e "const os=require('os'),path=require('path');console.log(path.join(os.tmpdir(),'sns-props-note.json'))")"
-CHROME_OPT=""
-if [ -f "/c/Program Files/Google/Chrome/Application/chrome.exe" ]; then
-  CHROME_OPT='--browser-executable "C:/Program Files/Google/Chrome/Application/chrome.exe"'
-elif [ -f "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" ]; then
-  CHROME_OPT=""  # macOS: Remotion が自動で Chrome Headless Shell をダウンロード
-fi
-
-# Git Bash (MSYS2) のパス変換を無効化（有効だと出力パスが
-# C:/Program Files/Git/ に化ける）
-export MSYS_NO_PATHCONV=1
-
-# 画像レンダリング（4枚）
-OUTDIR="../../.local/r2/sns/ranking/<RANKING_KEY>/note/images"
-eval npx remotion still src/index.ts RankingNote-Cover "$OUTDIR/cover-1280x670.png" --props "$PROPS" $CHROME_OPT
-eval npx remotion still src/index.ts RankingNote-ChoroplethMap "$OUTDIR/choropleth-map-1080x1080.png" --props "$PROPS" $CHROME_OPT
-eval npx remotion still src/index.ts RankingNote-Chart "$OUTDIR/chart-x-1200x630.png" --props "$PROPS" $CHROME_OPT
-eval npx remotion still src/index.ts RankingNote-Boxplot "$OUTDIR/boxplot-1200x630.png" --props "$PROPS" $CHROME_OPT
-```
-
-7. 画像を記事ディレクトリにコピー:
-
-```bash
-ARTICLE_DIR="docs/31_note記事原稿/a-<RANKING_KEY>/images"
-mkdir -p "$ARTICLE_DIR"
-cp .local/r2/sns/ranking/<RANKING_KEY>/note/images/*.png "$ARTICLE_DIR/"
-```
-
-7.5. **データ復元マニフェスト (data-provenance.json) を書く** ← リライト時に元データを辿るための系譜。
-     データ本体はコピーせず stats47 R2 の観測値 SSOT を指す (blog の source.json の note 版・
-     `.claude/scripts/note/catalog/README.md`)。記事ディレクトリに置けば既存 sync で R2 に載る。
-
-```bash
-cat > "docs/31_note記事原稿/a-<RANKING_KEY>/data-provenance.json" <<JSON
-{
-  "slug": "a-<RANKING_KEY>",
-  "vertical": "stats47-note",
-  "kind": "ranking",
-  "rankingKey": "<RANKING_KEY>",
-  "year": "<YEAR>",
-  "charts": ["images/choropleth-map-1080x1080.png", "images/chart-x-1200x630.png", "images/boxplot-1200x630.png"],
-  "source": "r2:app/ranking/<RANKING_KEY>/values.json",
-  "restore": "curl -sf https://storage.stats47.jp/app/ranking/<RANKING_KEY>/values.json",
-  "generatedBy": "post-note-ranking",
-  "note": "データ本体は stats47 R2 が SSOT。本ファイルは復元マニフェスト (コピーではない)。"
-}
-JSON
-```
+- 描画は `apps/remotion/src/features/ranking-note/` の note 専用テンプレート (cover / map / 47 県バー / 箱ひげ図)。
+  X・Instagram と共有する `ranking-x/` の部品は変えない。props 欠落時は別指標のモックに落ちず例外になる。
+- `render-spec.json` は `chart-data.json` の SHA・テンプレート版・色スケールを記録する。テンプレートを変えたら
+  `.claude/scripts/note/lib/note-render-spec.mjs` の `NOTE_RENDER_TEMPLATE_VERSION` を上げ、
+  `node .claude/scripts/note/render-ranking-images.mjs --stale` で全記事を作り直す (監査が古い spec を止める)。
+- PNG は git に載らない (`.gitignore`)。`data-provenance.json` は `generate-ranking-note.ts` が書く。契約は `.claude/rules/note-image-assets.md`。
 
 ### Phase 4: 確認
 

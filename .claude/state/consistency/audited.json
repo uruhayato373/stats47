@@ -1,7 +1,22 @@
 {
-  "hash": "36fe893d6a21865d1a00b6ee7bad8caa7da4fddea46cd8f3d5ee365fb67f4dad",
-  "audited_at": "2026-09-29T07:54:16",
+  "hash": "5aa5f487035d4ae09d0f318a01d28de24a9557a1dcd68fc3a87dfe162453b5ac",
+  "audited_at": "2026-09-29T13:20:01",
   "files": [
-    ".claude/skills/note/koumuin-estat-claude-code/INDEX.md"
+    ".agents/skills/management/weekly-review/SKILL.md",
+    ".agents/skills/note/post-note-ranking/SKILL.md",
+    ".agents/skills/note/publish-note/SKILL.md",
+    ".claude/rules/note-image-assets.md",
+    ".claude/scripts/lib/__tests__/check-asset-policy.test.cjs",
+    ".claude/scripts/lib/check-asset-policy.cjs",
+    ".claude/scripts/note/__tests__/image-assets-audit.test.mjs",
+    ".claude/scripts/note/audit-note-image-assets.mjs",
+    ".claude/scripts/note/lib/image-assets-audit.mjs",
+    ".claude/scripts/note/regen-derived-png.mjs",
+    ".claude/scripts/note/sync-note-r2.mjs",
+    ".claude/skills/management/weekly-review/SKILL.md",
+    ".claude/skills/note/post-note-ranking/SKILL.md",
+    ".claude/skills/note/post-note-ranking/scripts/generate-ranking-note.ts",
+    ".claude/skills/note/publish-note/SKILL.md",
+    "CLAUDE.md"
   ]
 }

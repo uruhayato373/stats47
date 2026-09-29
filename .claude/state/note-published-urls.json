@@ -1,7 +1,7 @@
 {
   "_meta": {
     "generated_by": "generate-note-catalog.ts",
-    "generated_at": "2026-09-06",
+    "generated_at": "2026-09-29",
     "source": "note-catalog git TS SSOT (.claude/scripts/note/catalog/)",
     "note": "このファイルは派生インデックス。真実源は note-catalog の data/*.ts。手編集しない。"
   },
@@ -433,9 +433,9 @@
       "is_paid": false,
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-agricultural-employment-population",
-      "r2_body": true,
-      "r2_access": "public",
-      "status": "r2_ready"
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
     },
     "a-agricultural-output": {
       "vertical": "stats47-note",
@@ -444,9 +444,9 @@
       "is_paid": false,
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-agricultural-output",
-      "r2_body": true,
-      "r2_access": "public",
-      "status": "r2_ready"
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
     },
     "a-average-temperature": {
       "vertical": "stats47-note",
@@ -455,9 +455,9 @@
       "is_paid": false,
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-average-temperature",
-      "r2_body": true,
-      "r2_access": "public",
-      "status": "r2_ready"
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
     },
     "a-avg-propensity-to-consume-worker-households": {
       "vertical": "stats47-note",
@@ -466,9 +466,9 @@
       "is_paid": false,
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-avg-propensity-to-consume-worker-households",
-      "r2_body": true,
-      "r2_access": "public",
-      "status": "r2_ready"
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
     },
     "a-consumption-expenditure-multi-person-households-per-month": {
       "vertical": "stats47-note",
@@ -477,9 +477,9 @@
       "is_paid": false,
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-consumption-expenditure-multi-person-households-per-month",
-      "r2_body": true,
-      "r2_access": "public",
-      "status": "r2_ready"
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
     },
     "a-convenience-store-sales": {
       "vertical": "stats47-note",
@@ -488,9 +488,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-convenience-store-sales",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-current-liabilities-balance-multi-person-households-per-household": {
       "vertical": "stats47-note",
@@ -499,9 +499,9 @@
       "is_paid": false,
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-current-liabilities-balance-multi-person-households-per-household",
-      "r2_body": true,
-      "r2_access": "public",
-      "status": "r2_ready"
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
     },
     "a-day-time-population": {
       "vertical": "stats47-note",
@@ -510,9 +510,9 @@
       "is_paid": false,
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-day-time-population",
-      "r2_body": true,
-      "r2_access": "public",
-      "status": "r2_ready"
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
     },
     "a-electricity-demand": {
       "vertical": "stats47-note",
@@ -521,9 +521,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-electricity-demand",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-electricity-generation-capacity": {
       "vertical": "stats47-note",
@@ -532,9 +532,9 @@
       "is_paid": false,
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-electricity-generation-capacity",
-      "r2_body": true,
-      "r2_access": "public",
-      "status": "r2_ready"
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
     },
     "a-final-energy-consumption-per-capita": {
       "vertical": "stats47-note",
@@ -543,9 +543,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-final-energy-consumption-per-capita",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-general-households": {
       "vertical": "stats47-note",
@@ -554,9 +554,9 @@
       "is_paid": false,
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-general-households",
-      "r2_body": true,
-      "r2_access": "public",
-      "status": "r2_ready"
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
     },
     "a-kakei-aichi": {
       "vertical": "stats47-note",
@@ -566,8 +566,19 @@
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-aichi",
       "r2_body": true,
-      "r2_access": "none",
+      "r2_access": "public",
       "status": "r2_ready"
+    },
+    "a-kakei-akita": {
+      "vertical": "stats47-note",
+      "title": "秋田県の家計は何にお金が偏っているか ── 灯油とストーブに出る雪国の暮らし、教育費は平均の4分の1",
+      "url": "https://note.com/stats47/n/n5e9502c6507c",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-kakei-akita",
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
     },
     "a-kakei-aomori": {
       "vertical": "stats47-note",
@@ -577,8 +588,85 @@
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-aomori",
       "r2_body": true,
-      "r2_access": "none",
+      "r2_access": "public",
       "status": "r2_ready"
+    },
+    "a-kakei-chiba": {
+      "vertical": "stats47-note",
+      "title": "千葉県の家計は何にお金が偏っているか ── 教育費2倍と通学定期代に見る東京近郊の暮らし",
+      "url": "https://note.com/stats47/n/n1d5481680c03",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-kakei-chiba",
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
+    },
+    "a-kakei-ehime": {
+      "vertical": "stats47-note",
+      "title": "愛媛県の家計は何にお金が偏っているか ── 教養娯楽費は少なく、被服賃借料が際立つ松山市の暮らし",
+      "url": "https://note.com/stats47/n/nb627534c8b66",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-kakei-ehime",
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
+    },
+    "a-kakei-fukui": {
+      "vertical": "stats47-note",
+      "title": "福井県の家計は何にお金が偏っているか ── 住居費とカーテンに見る福井市のマイホーム志向",
+      "url": "https://note.com/stats47/n/n18bb5a58060c",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-kakei-fukui",
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
+    },
+    "a-kakei-fukuoka": {
+      "vertical": "stats47-note",
+      "title": "福岡県の家計は何にお金が偏っているか ── たらことバス通勤に見る福岡市の暮らし",
+      "url": "https://note.com/stats47/n/nb7cfd81af156",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-kakei-fukuoka",
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
+    },
+    "a-kakei-fukushima": {
+      "vertical": "stats47-note",
+      "title": "福島県の家計は何にお金が偏っているか ── 住居費が全国平均の6割に届かない福島市の暮らし",
+      "url": "https://note.com/stats47/n/n4c363c356b63",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-kakei-fukushima",
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
+    },
+    "a-kakei-gifu": {
+      "vertical": "stats47-note",
+      "title": "岐阜県の家計は何にお金が偏っているか ── 住居費0.56倍という際立った低さ",
+      "url": "https://note.com/stats47/n/n6136c0f13156",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-kakei-gifu",
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
+    },
+    "a-kakei-gunma": {
+      "vertical": "stats47-note",
+      "title": "群馬県の家計は何にお金が偏っているか ── 住居費の低さと車社会が映る前橋市の暮らし",
+      "url": "https://note.com/stats47/n/n1b9bf465327d",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-kakei-gunma",
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
     },
     "a-kakei-hiroshima": {
       "vertical": "stats47-note",
@@ -588,7 +676,7 @@
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-hiroshima",
       "r2_body": true,
-      "r2_access": "none",
+      "r2_access": "public",
       "status": "r2_ready"
     },
     "a-kakei-hokkaido": {
@@ -599,8 +687,393 @@
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-kakei-hokkaido",
       "r2_body": true,
-      "r2_access": "none",
+      "r2_access": "public",
       "status": "r2_ready"
+    },
+    "a-kakei-hyogo": {
+      "vertical": "stats47-note",
+      "title": "兵庫県の家計は何にお金が偏っているか ── 交通・通信費は全国最下位水準なのに定期代が突出する神戸市の暮らし",
+      "url": "https://note.com/stats47/n/n6f5ab18ba6ff",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-kakei-hyogo",
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
+    },
+    "a-kakei-ibaraki": {
+      "vertical": "stats47-note",
+      "title": "茨城県の家計は何にお金が偏っているか ── メロンと車社会が映す水戸市の暮らし",
+      "url": "https://note.com/stats47/n/n65d95575f7a5",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-kakei-ibaraki",
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
+    },
+    "a-kakei-ishikawa": {
+      "vertical": "stats47-note",
+      "title": "石川県の家計は何にお金が偏っているか ── 交通・通信費1.28倍に見る金沢市のクルマ社会",
+      "url": "https://note.com/stats47/n/ndf2afaef16c0",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-kakei-ishikawa",
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
+    },
+    "a-kakei-iwate": {
+      "vertical": "stats47-note",
+      "title": "岩手県の家計は何にお金が偏っているか ── 住まいの修繕費に出る雪国の負担",
+      "url": "https://note.com/stats47/n/na3020a08cef7",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-kakei-iwate",
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
+    },
+    "a-kakei-kagawa": {
+      "vertical": "stats47-note",
+      "title": "香川県の家計は何にお金が偏っているか ── 住居費1.53倍とうどんに表れる高松市の暮らし",
+      "url": "https://note.com/stats47/n/ne69b740f702e",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-kakei-kagawa",
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
+    },
+    "a-kakei-kagoshima": {
+      "vertical": "stats47-note",
+      "title": "鹿児島県の家計は何にお金が偏っているか ── 祭具・墓石に支出が集中する鹿児島市の暮らし",
+      "url": "https://note.com/stats47/n/n555435ada7ed",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-kakei-kagoshima",
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
+    },
+    "a-kakei-kanagawa": {
+      "vertical": "stats47-note",
+      "title": "神奈川県の家計は何にお金が偏っているか ── 教育費と地代でみる横浜の暮らし",
+      "url": "https://note.com/stats47/n/nd0326279977a",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-kakei-kanagawa",
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
+    },
+    "a-kakei-kochi": {
+      "vertical": "stats47-note",
+      "title": "高知県の家計は何にお金が偏っているか ── 住居費とかつおに見える高知市の暮らし",
+      "url": "https://note.com/stats47/n/n29417de32c83",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-kakei-kochi",
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
+    },
+    "a-kakei-kumamoto": {
+      "vertical": "stats47-note",
+      "title": "熊本県の家計は何にお金が偏っているか ── 私立校と仕送りに表れる熊本市の教育熱",
+      "url": "https://note.com/stats47/n/n7e98a46bf791",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-kakei-kumamoto",
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
+    },
+    "a-kakei-kyoto": {
+      "vertical": "stats47-note",
+      "title": "京都府の家計は何にお金が偏っているか ── 教育費が全国平均の1.4倍に達する京都市の暮らし",
+      "url": "https://note.com/stats47/n/n2a18f8e7098c",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-kakei-kyoto",
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
+    },
+    "a-kakei-mie": {
+      "vertical": "stats47-note",
+      "title": "三重県の家計は何にお金が偏っているか ── 住居費と学習机代に表れる津市の家計",
+      "url": "https://note.com/stats47/n/n8113876eaeab",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-kakei-mie",
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
+    },
+    "a-kakei-miyagi": {
+      "vertical": "stats47-note",
+      "title": "宮城県の家計は何にお金が偏っているか ── 住居費1.67倍に表れる仙台一極集中",
+      "url": "https://note.com/stats47/n/nb479aff3cf05",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-kakei-miyagi",
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
+    },
+    "a-kakei-miyazaki": {
+      "vertical": "stats47-note",
+      "title": "宮崎県の家計は何にお金が偏っているか ── 焼酎と教育費に表れる宮崎市の家計事情",
+      "url": "https://note.com/stats47/n/n7f0be4fef37c",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-kakei-miyazaki",
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
+    },
+    "a-kakei-nagano": {
+      "vertical": "stats47-note",
+      "title": "長野県の家計は何にお金が偏っているか ── 予備校より学習机に出る長野市の教育費",
+      "url": "https://note.com/stats47/n/nb6061a164201",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-kakei-nagano",
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
+    },
+    "a-kakei-nagasaki": {
+      "vertical": "stats47-note",
+      "title": "長崎県の家計は何にお金が偏っているか ── バス代がかさむ坂の街、長崎市",
+      "url": "https://note.com/stats47/n/nd547ff50cbe6",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-kakei-nagasaki",
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
+    },
+    "a-kakei-nara": {
+      "vertical": "stats47-note",
+      "title": "奈良県の家計は何にお金が偏っているか ── 教育費1.74倍、私立小学校圏に透ける奈良市の暮らし",
+      "url": "https://note.com/stats47/n/n366d898d8107",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-kakei-nara",
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
+    },
+    "a-kakei-niigata": {
+      "vertical": "stats47-note",
+      "title": "新潟県の家計は何にお金が偏っているか ── 保健医療費は全国最少、雪国の備えに出費",
+      "url": "https://note.com/stats47/n/ndd0bb1c14aa4",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-kakei-niigata",
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
+    },
+    "a-kakei-oita": {
+      "vertical": "stats47-note",
+      "title": "大分県の家計は何にお金が偏っているか ── クルマ社会が映る大分市の交通・通信費",
+      "url": "https://note.com/stats47/n/n37ab621d01ad",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-kakei-oita",
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
+    },
+    "a-kakei-okayama": {
+      "vertical": "stats47-note",
+      "title": "岡山県の家計は何にお金が偏っているか ── 家具・家事用品が突出、暖房費は全国平均の4分の1",
+      "url": "https://note.com/stats47/n/ne788feae75bf",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-kakei-okayama",
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
+    },
+    "a-kakei-okinawa": {
+      "vertical": "stats47-note",
+      "title": "沖縄県の家計は何にお金が偏っているか ── 住居費1.33倍とコートいらずの那覇市の暮らし",
+      "url": "https://note.com/stats47/n/n757284230786",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-kakei-okinawa",
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
+    },
+    "a-kakei-osaka": {
+      "vertical": "stats47-note",
+      "title": "大阪府の家計は何にお金が偏っているか ── 交通・通信費が全国平均の0.66倍にとどまる大阪市の家計",
+      "url": "https://note.com/stats47/n/n7ac1079b6f20",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-kakei-osaka",
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
+    },
+    "a-kakei-saga": {
+      "vertical": "stats47-note",
+      "title": "佐賀県の家計は何にお金が偏っているか ── 住居費は平均の半分、自動車購入は2.25倍の佐賀市の暮らし",
+      "url": "https://note.com/stats47/n/n1972caf5203d",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-kakei-saga",
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
+    },
+    "a-kakei-saitama": {
+      "vertical": "stats47-note",
+      "title": "埼玉県の家計は何にお金が偏っているか ── 教育費と通勤定期代に見るさいたま市の暮らし",
+      "url": "https://note.com/stats47/n/ne760e2866251",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-kakei-saitama",
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
+    },
+    "a-kakei-shiga": {
+      "vertical": "stats47-note",
+      "title": "滋賀県の家計は何にお金が偏っているか ── 鉄道定期代と教育費に見る大津市のベッドタウン家計",
+      "url": "https://note.com/stats47/n/ne5569b417135",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-kakei-shiga",
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
+    },
+    "a-kakei-shimane": {
+      "vertical": "stats47-note",
+      "title": "島根県の家計は何にお金が偏っているか ── しじみと祭具に表れる松江市の暮らし、教育費は平均の半分以下",
+      "url": "https://note.com/stats47/n/n75d68c2bb7e9",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-kakei-shimane",
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
+    },
+    "a-kakei-shizuoka": {
+      "vertical": "stats47-note",
+      "title": "静岡県の家計は何にお金が偏っているか ── 住居費1.36倍と室内装飾品にみる静岡市の暮らし",
+      "url": "https://note.com/stats47/n/n35ce2a1b9248",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-kakei-shizuoka",
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
+    },
+    "a-kakei-tochigi": {
+      "vertical": "stats47-note",
+      "title": "栃木県の家計は何にお金が偏っているか ── 交通・通信費が際立つ宇都宮市の暮らし",
+      "url": "https://note.com/stats47/n/n0fd0305a6b8c",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-kakei-tochigi",
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
+    },
+    "a-kakei-tokushima": {
+      "vertical": "stats47-note",
+      "title": "徳島県の家計は何にお金が偏っているか ── 教育費1.47倍で際立つ徳島市の家計",
+      "url": "https://note.com/stats47/n/ne2abc0fc7530",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-kakei-tokushima",
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
+    },
+    "a-kakei-tokyo": {
+      "vertical": "stats47-note",
+      "title": "東京都の家計は何にお金が偏っているか ── 教育費2.09倍と家賃地代8倍に表れる都心の暮らし",
+      "url": "https://note.com/stats47/n/n9d384a674462",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-kakei-tokyo",
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
+    },
+    "a-kakei-tottori": {
+      "vertical": "stats47-note",
+      "title": "鳥取県の家計は何にお金が偏っているか ── 住居費がかさむ鳥取市と梨・カニの恵み",
+      "url": "https://note.com/stats47/n/n24d6b689079d",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-kakei-tottori",
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
+    },
+    "a-kakei-toyama": {
+      "vertical": "stats47-note",
+      "title": "富山県の家計は何にお金が偏っているか ── 光熱費は全国屈指、教育費は控えめな富山市の懐事情",
+      "url": "https://note.com/stats47/n/n13bca568c98a",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-kakei-toyama",
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
+    },
+    "a-kakei-wakayama": {
+      "vertical": "stats47-note",
+      "title": "和歌山県の家計は何にお金が偏っているか ── 教育費は十大費目で最低、しらす干しに2倍超の支出",
+      "url": "https://note.com/stats47/n/ncc56ff8990d0",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-kakei-wakayama",
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
+    },
+    "a-kakei-yamagata": {
+      "vertical": "stats47-note",
+      "title": "山形県の家計は何にお金が偏っているか ── 灯油とカーテンに表れる雪国の対策費",
+      "url": "https://note.com/stats47/n/na3d645a7d50c",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-kakei-yamagata",
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
+    },
+    "a-kakei-yamaguchi": {
+      "vertical": "stats47-note",
+      "title": "山口県の家計は何にお金が偏っているか ── 教育費は全国最低水準、婚礼費は10倍超の山口市",
+      "url": "https://note.com/stats47/n/n88dde65e0774",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-kakei-yamaguchi",
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
+    },
+    "a-kakei-yamanashi": {
+      "vertical": "stats47-note",
+      "title": "山梨県の家計は何にお金が偏っているか ── 通勤定期より自動車教習に出る甲府市の交通費",
+      "url": "https://note.com/stats47/n/n3416a225e0c6",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/a-kakei-yamanashi",
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
     },
     "a-late-elderly-medical-expense-per-insured": {
       "vertical": "stats47-note",
@@ -609,9 +1082,9 @@
       "is_paid": false,
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-late-elderly-medical-expense-per-insured",
-      "r2_body": true,
-      "r2_access": "public",
-      "status": "r2_ready"
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
     },
     "a-maximum-temperature": {
       "vertical": "stats47-note",
@@ -631,9 +1104,9 @@
       "is_paid": false,
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-minimum-wage-by-region",
-      "r2_body": true,
-      "r2_access": "public",
-      "status": "r2_ready"
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
     },
     "a-number-of-establishments-manufacturing": {
       "vertical": "stats47-note",
@@ -642,9 +1115,9 @@
       "is_paid": false,
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-number-of-establishments-manufacturing",
-      "r2_body": true,
-      "r2_access": "public",
-      "status": "r2_ready"
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
     },
     "a-private-rental-housing-rent-per-3-3m2": {
       "vertical": "stats47-note",
@@ -653,9 +1126,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-private-rental-housing-rent-per-3-3m2",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-railway-station-count": {
       "vertical": "stats47-note",
@@ -664,9 +1137,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-railway-station-count",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-road-total-length": {
       "vertical": "stats47-note",
@@ -675,9 +1148,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-road-total-length",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-room-utilization-rate": {
       "vertical": "stats47-note",
@@ -686,9 +1159,9 @@
       "is_paid": false,
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-room-utilization-rate",
-      "r2_body": true,
-      "r2_access": "public",
-      "status": "r2_ready"
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
     },
     "a-total-fertility-rate": {
       "vertical": "stats47-note",
@@ -697,9 +1170,9 @@
       "is_paid": false,
       "published_at": "2026-08-29",
       "r2_path": "note/stats47-note/a-total-fertility-rate",
-      "r2_body": true,
-      "r2_access": "public",
-      "status": "r2_ready"
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
     },
     "a-total-overnight-guests": {
       "vertical": "stats47-note",
@@ -708,9 +1181,9 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-total-overnight-guests",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
     },
     "a-vacant-housing-rate": {
       "vertical": "stats47-note",
@@ -719,9 +1192,97 @@
       "is_paid": false,
       "published_at": "2026-09-06",
       "r2_path": "note/stats47-note/a-vacant-housing-rate",
-      "r2_body": true,
+      "r2_body": false,
       "r2_access": "none",
-      "status": "r2_ready"
+      "status": "note_only"
+    },
+    "b-kakei-academic-food": {
+      "vertical": "stats47-note",
+      "title": "学力テスト上位の県は何を食べているのか ── 符合を相関で終わらせないために",
+      "url": "https://note.com/stats47/n/n78ffa2c7da3b",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/b-kakei-academic-food",
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
+    },
+    "b-kakei-advancement-employment": {
+      "vertical": "stats47-note",
+      "title": "進学率だけで教育水準は測れない ── 進学率と就職率を合算して見える県",
+      "url": "https://note.com/stats47/n/n2d53f8a5fbb8",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/b-kakei-advancement-employment",
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
+    },
+    "b-kakei-beer-peak-month": {
+      "vertical": "stats47-note",
+      "title": "ビールが最も売れる月は7月ではなくなった ── 家計調査20年の月次で見る",
+      "url": "https://note.com/stats47/n/n5b11edb996f3",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/b-kakei-beer-peak-month",
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
+    },
+    "b-kakei-bread-giffen": {
+      "vertical": "stats47-note",
+      "title": "食パンは値上がりすると売れる ── 家計調査で確かめるギッフェン財の条件",
+      "url": "https://note.com/stats47/n/nc3a7ebf40516",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/b-kakei-bread-giffen",
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
+    },
+    "b-kakei-gyoza-counting": {
+      "vertical": "stats47-note",
+      "title": "「ぎょうざ消費日本一」は何を数えていて、何を数えていないのか",
+      "url": "https://note.com/stats47/n/n2f50bb479647",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/b-kakei-gyoza-counting",
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
+    },
+    "b-kakei-necktie-decline": {
+      "vertical": "stats47-note",
+      "title": "ネクタイとストッキングはどれだけ売れなくなったか ── 家計調査で見る市場の縮小",
+      "url": "https://note.com/stats47/n/ncbfe818867f4",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/b-kakei-necktie-decline",
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
+    },
+    "b-kakei-quantity-price": {
+      "vertical": "stats47-note",
+      "title": "「たくさん買う県」と「高いものを買う県」── 家計調査の支出額を数量と価格に分解する",
+      "url": "https://note.com/stats47/n/n7ba6c516c1e9",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/b-kakei-quantity-price",
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
+    },
+    "b-kakei-winter-bargain": {
+      "vertical": "stats47-note",
+      "title": "冬物バーゲンが成功したかは家計調査でわかる ── 数量と単価のどちらが動いたか",
+      "url": "https://note.com/stats47/n/neb44a932f9f2",
+      "is_paid": false,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/b-kakei-winter-bargain",
+      "r2_body": false,
+      "r2_access": "none",
+      "status": "note_only"
     },
     "d-geo-flood-population-mesh": {
       "vertical": "stats47-note",
@@ -766,6 +1327,18 @@
       "is_paid": true,
       "published_at": "2026-09-01",
       "r2_path": "note/stats47-note/d-geo-station-access-analysis",
+      "r2_body": true,
+      "r2_access": "private",
+      "status": "r2_ready",
+      "price_jpy": 2980
+    },
+    "d-kakei-category-dataset": {
+      "vertical": "stats47-note",
+      "title": "教育費は8.7倍違う ── 47都道府県×十大費目の家計データセット（2007-2024・8,460行）",
+      "url": "https://note.com/stats47/n/na416c57e461c",
+      "is_paid": true,
+      "published_at": "2026-09-06",
+      "r2_path": "note/stats47-note/d-kakei-category-dataset",
       "r2_body": true,
       "r2_access": "private",
       "status": "r2_ready",

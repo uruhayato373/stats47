@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "slug": "a-total-fertility-rate",
+  "rankingKey": "total-fertility-rate",
+  "year": 2023,
+  "input": {
+    "chartData": "chart-data.json",
+    "sha256": "b7d73c59e6adbd294adf21697b057ecd2bf07f776c9b26f9edb7138334836961"
+  },
+  "renderer": {
+    "engine": "remotion",
+    "templateVersion": "2026-09-29.6",
+    "palette": "interpolateYlGnBu"
+  },
+  "images": [
+    {
+      "file": "images/cover-1280x670.png",
+      "composition": "RankingNote-Cover",
+      "width": 1280,
+      "height": 670
+    },
+    {
+      "file": "images/choropleth-map-1080x1080.png",
+      "composition": "RankingNote-ChoroplethMap",
+      "width": 1080,
+      "height": 1080
+    },
+    {
+      "file": "images/chart-x-1200x630.png",
+      "composition": "RankingNote-Chart",
+      "width": 1200,
+      "height": 630
+    },
+    {
+      "file": "images/boxplot-1200x630.png",
+      "composition": "RankingNote-Boxplot",
+      "width": 1200,
+      "height": 630
+    }
+  ]
+}

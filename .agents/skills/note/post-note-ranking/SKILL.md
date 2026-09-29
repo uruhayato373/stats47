@@ -62,7 +62,8 @@ npx tsx .claude/skills/note/post-note-ranking/scripts/generate-ranking-note.ts <
 
 ## Phase 2: 再生成可能な入力を保存する
 
-`chart-data.json`へrankingKey、year、取得時刻、計算済みsummary、全都道府県rowを保存する。
+`chart-data.json`へrankingKey、year、取得時刻、単位(`unit`)、計算済みsummary、全都道府県rowを保存する。
+記事のデータ契約は`.claude/rules/note-image-assets.md`で、`npm run note:images:audit`が47行・単位・出典の欠落を止める。
 同じ入力から表題を再現できるよう、`copy`へcanonicalTitle、readerLabel、hookも保存する。
 `data-provenance.json`へR2 source key、restore command、生成chart一覧を保存する。
 値をSVGや本文から逆算しない。
@@ -88,16 +89,15 @@ npx tsx .claude/skills/note/post-note-ranking/scripts/generate-ranking-note.ts <
 
 ## Phase 4: 画像を生成する
 
-`reference/runbook.md`の「Phase 3: 画像生成」にある既存Remotion compositionを使い、
 `chart-data.json`から4枚を生成する。新しいrendererや一時SSOTを作らない。
 画像生成を依頼されていない場合は省略できるが、chatで未生成と明示する。
 
 ```bash
-npm run pipeline:sns --workspace apps/remotion -- --stills-only --note-only --key <rankingKey>
-mkdir -p docs/31_note記事原稿/a-<rankingKey>/images
-cp .local/r2/sns/ranking/<rankingKey>/note/images/*.png docs/31_note記事原稿/a-<rankingKey>/images/
+node .claude/scripts/note/render-ranking-images.mjs <rankingKey>
 npx tsx .claude/skills/note/post-note-ranking/scripts/generate-ranking-note.ts <rankingKey> --check --require-images
 ```
+
+`images/*.png`はgitに載らず、`render-spec.json`（`chart-data.json`のSHA・テンプレート版）が作り直しの根拠になる。
 
 ## Gate
 

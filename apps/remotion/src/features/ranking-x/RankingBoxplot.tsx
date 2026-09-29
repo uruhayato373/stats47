@@ -16,7 +16,6 @@ const H = 630;
 const HEADER_H = 110; // HTML ヘッダーの推定高さ
 const SVG_H = H - HEADER_H;
 const MARGIN = { top: 20, right: 50, bottom: 60, left: 50 };
-const INNER_W = W - MARGIN.left - MARGIN.right;
 const INNER_H = SVG_H - MARGIN.top - MARGIN.bottom;
 const BOX_WIDTH_RATIO = 0.5;
 const JITTER_WIDTH_RATIO = 0.6;
@@ -55,6 +54,10 @@ interface RankingBoxplotProps {
   precision?: number;
   /** Y軸最小値の扱い: "zero"（0始まり）| "data-min"（データ最小値基準） */
   minValueType?: "zero" | "data-min";
+  /** 左余白 (px)。桁数の多い値の Y 軸ラベルが切れるときに広げる。省略時は既定 (X・Instagram の出力は変わらない) */
+  marginLeft?: number;
+  /** true なら Y 軸目盛りを軸の刻み幅 (きりのよい値) にする。省略時は範囲を 6 等分 (旧来の出力を維持) */
+  niceTicks?: boolean;
 }
 
 // ------------------------------------------------------------------
@@ -74,7 +77,11 @@ export const RankingBoxplot: React.FC<RankingBoxplotProps> = ({
   theme = "light",
   precision = 0,
   minValueType,
+  marginLeft,
+  niceTicks = false,
 }) => {
+  const marginL = marginLeft ?? MARGIN.left;
+  const innerW = W - marginL - MARGIN.right;
   const colors = COLOR_SCHEMES[theme];
   const isDark = theme === "dark";
   const textColor = isDark ? "#F1F5F9" : "#1e293b";
@@ -122,7 +129,7 @@ export const RankingBoxplot: React.FC<RankingBoxplotProps> = ({
 
   // X バンドスケール
   const bandPadding = 0.2;
-  const bandStep = INNER_W / grouped.length;
+  const bandStep = innerW / grouped.length;
   const bandWidth = bandStep * (1 - bandPadding);
   const xBand = (i: number) => bandStep * i + (bandStep - bandWidth) / 2;
   const boxW = bandWidth * BOX_WIDTH_RATIO;
@@ -131,10 +138,14 @@ export const RankingBoxplot: React.FC<RankingBoxplotProps> = ({
   // Y 軸目盛り
   const tickCount = 6;
   const yTicks: number[] = [];
-  for (let i = 0; i <= tickCount; i++) {
-    yTicks.push(
-      yDomainMin + ((yDomainMax - yDomainMin) * i) / tickCount
-    );
+  if (niceTicks && axisDomain.step > 0) {
+    for (let t = yDomainMin; t <= yDomainMax + axisDomain.step / 2; t += axisDomain.step) yTicks.push(t);
+  } else {
+    for (let i = 0; i <= tickCount; i++) {
+      yTicks.push(
+        yDomainMin + ((yDomainMax - yDomainMin) * i) / tickCount
+      );
+    }
   }
 
   // ジッター位置（シード固定）
@@ -211,13 +222,13 @@ export const RankingBoxplot: React.FC<RankingBoxplotProps> = ({
       {/* チャート（SVG） */}
       <svg viewBox={`0 0 ${W} ${SVG_H}`} width="100%" style={{ flex: 1 }}>
         {/* チャートエリア */}
-        <g transform={`translate(${MARGIN.left},${MARGIN.top})`}>
+        <g transform={`translate(${marginL},${MARGIN.top})`}>
           {/* グリッド線 */}
           {yTicks.map((tick) => (
             <line
               key={`grid-${tick}`}
               x1={0}
-              x2={INNER_W}
+              x2={innerW}
               y1={yScale(tick)}
               y2={yScale(tick)}
               stroke={gridColor}
@@ -252,7 +263,7 @@ export const RankingBoxplot: React.FC<RankingBoxplotProps> = ({
           <line
             x1={0}
             y1={INNER_H}
-            x2={INNER_W}
+            x2={innerW}
             y2={INNER_H}
             stroke={mutedColor}
             strokeWidth={1}

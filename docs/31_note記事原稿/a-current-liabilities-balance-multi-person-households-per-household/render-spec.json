@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "slug": "a-current-liabilities-balance-multi-person-households-per-household",
+  "rankingKey": "current-liabilities-balance-multi-person-households-per-household",
+  "year": 2019,
+  "input": {
+    "chartData": "chart-data.json",
+    "sha256": "e234da824f3c4d55a511184b7ca2e0a66c45e0f607dbb616f7a566b4064383ed"
+  },
+  "renderer": {
+    "engine": "remotion",
+    "templateVersion": "2026-09-29.6",
+    "palette": "interpolateYlGnBu"
+  },
+  "images": [
+    {
+      "file": "images/cover-1280x670.png",
+      "composition": "RankingNote-Cover",
+      "width": 1280,
+      "height": 670
+    },
+    {
+      "file": "images/choropleth-map-1080x1080.png",
+      "composition": "RankingNote-ChoroplethMap",
+      "width": 1080,
+      "height": 1080
+    },
+    {
+      "file": "images/chart-x-1200x630.png",
+      "composition": "RankingNote-Chart",
+      "width": 1200,
+      "height": 630
+    },
+    {
+      "file": "images/boxplot-1200x630.png",
+      "composition": "RankingNote-Boxplot",
+      "width": 1200,
+      "height": 630
+    }
+  ]
+}

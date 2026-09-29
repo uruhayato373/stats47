@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "slug": "a-general-households",
+  "rankingKey": "general-households",
+  "year": 2020,
+  "input": {
+    "chartData": "chart-data.json",
+    "sha256": "cb5868363721e9d20caa3114b2f4b3b5ae8565ac4d3d216d33745779d6a6d5a7"
+  },
+  "renderer": {
+    "engine": "remotion",
+    "templateVersion": "2026-09-29.6",
+    "palette": "interpolateYlGnBu"
+  },
+  "images": [
+    {
+      "file": "images/cover-1280x670.png",
+      "composition": "RankingNote-Cover",
+      "width": 1280,
+      "height": 670
+    },
+    {
+      "file": "images/choropleth-map-1080x1080.png",
+      "composition": "RankingNote-ChoroplethMap",
+      "width": 1080,
+      "height": 1080
+    },
+    {
+      "file": "images/chart-x-1200x630.png",
+      "composition": "RankingNote-Chart",
+      "width": 1200,
+      "height": 630
+    },
+    {
+      "file": "images/boxplot-1200x630.png",
+      "composition": "RankingNote-Boxplot",
+      "width": 1200,
+      "height": 630
+    }
+  ]
+}

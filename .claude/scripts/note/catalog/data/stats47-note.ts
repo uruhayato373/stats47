@@ -266,6 +266,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n66a286b5211b",
     publishedAt: "2026-08-29",
     r2Path: "note/stats47-note/a-agricultural-employment-population",
+    // 2026-08-29 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/agricultural-employment-population"],
   },
   {
@@ -279,6 +281,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/ne6c7d221803a",
     publishedAt: "2026-08-29",
     r2Path: "note/stats47-note/a-agricultural-output",
+    // 2026-08-29 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/agricultural-output"],
   },
   {
@@ -292,6 +296,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n97ddfadff36a",
     publishedAt: "2026-08-29",
     r2Path: "note/stats47-note/a-average-temperature",
+    // 2026-08-29 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/average-temperature"],
   },
   {
@@ -305,6 +311,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n76446d252957",
     publishedAt: "2026-08-29",
     r2Path: "note/stats47-note/a-avg-propensity-to-consume-worker-households",
+    // 2026-08-29 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/avg-propensity-to-consume-worker-households"],
   },
   {
@@ -318,6 +326,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n89f8035eb53d",
     publishedAt: "2026-08-29",
     r2Path: "note/stats47-note/a-consumption-expenditure-multi-person-households-per-month",
+    // 2026-08-29 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/consumption-expenditure-multi-person-households-per-month"],
   },
   {
@@ -331,6 +341,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nbdbde1672cc0",
     publishedAt: "2026-08-29",
     r2Path: "note/stats47-note/a-current-liabilities-balance-multi-person-households-per-household",
+    // 2026-08-29 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/current-liabilities-balance-multi-person-households-per-household"],
   },
   {
@@ -344,6 +356,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n7a494830e01d",
     publishedAt: "2026-08-29",
     r2Path: "note/stats47-note/a-day-time-population",
+    // 2026-08-29 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/day-time-population"],
   },
   {
@@ -357,6 +371,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n5b3dbb6c7cef",
     publishedAt: "2026-08-29",
     r2Path: "note/stats47-note/a-electricity-generation-capacity",
+    // 2026-08-29 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/electricity-generation-capacity"],
     publishedLinkRepairs: [
       {
@@ -380,6 +396,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nd93084c0cb0c",
     publishedAt: "2026-08-29",
     r2Path: "note/stats47-note/a-general-households",
+    // 2026-08-29 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/general-households"],
   },
   {
@@ -393,6 +411,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/ncd0aea7cd435",
     publishedAt: "2026-08-29",
     r2Path: "note/stats47-note/a-late-elderly-medical-expense-per-insured",
+    // 2026-08-29 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/late-elderly-medical-expense-per-insured"],
   },
   {
@@ -406,6 +426,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n2a465fecbdec",
     publishedAt: "2026-08-29",
     r2Path: "note/stats47-note/a-minimum-wage-by-region",
+    // 2026-08-29 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/minimum-wage-by-region"],
   },
   {
@@ -419,6 +441,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nf28da95897e0",
     publishedAt: "2026-08-29",
     r2Path: "note/stats47-note/a-number-of-establishments-manufacturing",
+    // 2026-08-29 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/number-of-establishments-manufacturing"],
   },
   {
@@ -432,6 +456,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/na895280512fc",
     publishedAt: "2026-08-29",
     r2Path: "note/stats47-note/a-room-utilization-rate",
+    // 2026-08-29 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/room-utilization-rate"],
   },
   {
@@ -445,6 +471,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nf4b16d26f6e8",
     publishedAt: "2026-08-29",
     r2Path: "note/stats47-note/a-total-fertility-rate",
+    // 2026-08-29 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/total-fertility-rate"],
   },
   {
@@ -3075,6 +3103,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n5e9502c6507c",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-akita",
+    // 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/education-expenditure-ratio-multi-person-households", "/ranking/private-university-student-ratio", "/ranking/high-school-advancement-rate"],
     nextBestArticle: "a-kakei-aomori",
   },
@@ -3089,6 +3119,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n1d5481680c03",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-chiba",
+    // 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/education-expenditure-ratio-multi-person-households", "/ranking/private-university-student-ratio", "/ranking/high-school-advancement-rate"],
     nextBestArticle: "a-kakei-tokyo",
   },
@@ -3103,6 +3135,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nb627534c8b66",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-ehime",
+    // 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/culture-recreation-expenditure-ratio-multi-person-households", "/ranking/travel-participation-rate-overnight", "/ranking/consumer-price-difference-index-culture-recreation"],
     nextBestArticle: "a-kakei-toyama",
   },
@@ -3117,6 +3151,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n18bb5a58060c",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-fukui",
+    // 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/housing-expenditure-ratio-multi-person-households", "/ranking/private-rental-housing-rent-per-3-3m2", "/ranking/owner-occupied-housing-ratio"],
     nextBestArticle: "a-kakei-shizuoka",
   },
@@ -3131,6 +3167,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nb7cfd81af156",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-fukuoka",
+    // 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/transport-communication-expenditure-ratio-multi-person-households", "/ranking/car-ownership-multi-person-households-per-1000", "/ranking/commute-by-car"],
     nextBestArticle: "a-kakei-hyogo",
   },
@@ -3145,6 +3183,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n4c363c356b63",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-fukushima",
+    // 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/housing-expenditure-ratio-multi-person-households", "/ranking/private-rental-housing-rent-per-3-3m2", "/ranking/owner-occupied-housing-ratio"],
     nextBestArticle: "a-kakei-gifu",
   },
@@ -3159,6 +3199,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n6136c0f13156",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-gifu",
+    // 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/housing-expenditure-ratio-multi-person-households", "/ranking/private-rental-housing-rent-per-3-3m2", "/ranking/owner-occupied-housing-ratio"],
     nextBestArticle: "a-kakei-fukushima",
   },
@@ -3173,6 +3215,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n1b9bf465327d",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-gunma",
+    // 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/housing-expenditure-ratio-multi-person-households", "/ranking/private-rental-housing-rent-per-3-3m2", "/ranking/owner-occupied-housing-ratio"],
     nextBestArticle: "a-kakei-fukushima",
   },
@@ -3187,6 +3231,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n6f5ab18ba6ff",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-hyogo",
+    // 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/transport-communication-expenditure-ratio-multi-person-households", "/ranking/car-ownership-multi-person-households-per-1000", "/ranking/commute-by-car"],
     nextBestArticle: "a-kakei-osaka",
   },
@@ -3201,6 +3247,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n65d95575f7a5",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-ibaraki",
+    // 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/transport-communication-expenditure-ratio-multi-person-households", "/ranking/car-ownership-multi-person-households-per-1000", "/ranking/commute-by-car"],
     nextBestArticle: "a-kakei-ishikawa",
   },
@@ -3215,6 +3263,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/ndf2afaef16c0",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-ishikawa",
+    // 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/transport-communication-expenditure-ratio-multi-person-households", "/ranking/car-ownership-multi-person-households-per-1000", "/ranking/commute-by-car"],
     nextBestArticle: "a-kakei-ibaraki",
   },
@@ -3229,6 +3279,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/na3020a08cef7",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-iwate",
+    // 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/housing-expenditure-ratio-multi-person-households", "/ranking/private-rental-housing-rent-per-3-3m2", "/ranking/owner-occupied-housing-ratio"],
     nextBestArticle: "a-kakei-tottori",
   },
@@ -3243,6 +3295,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/ne69b740f702e",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-kagawa",
+    // 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/housing-expenditure-ratio-multi-person-households", "/ranking/private-rental-housing-rent-per-3-3m2", "/ranking/owner-occupied-housing-ratio"],
     nextBestArticle: "a-kakei-iwate",
   },
@@ -3257,6 +3311,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n555435ada7ed",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-kagoshima",
+    // 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/furniture-household-goods-expenditure-ratio-multi-person-households", "/ranking/floor-area-per-dwelling-owner", "/ranking/consumer-price-difference-index-furniture-household"],
     nextBestArticle: "a-kakei-okayama",
   },
@@ -3271,6 +3327,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nd0326279977a",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-kanagawa",
+    // 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/education-expenditure-ratio-multi-person-households", "/ranking/private-university-student-ratio", "/ranking/high-school-advancement-rate"],
     nextBestArticle: "a-kakei-tokushima",
   },
@@ -3285,6 +3343,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n29417de32c83",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-kochi",
+    // 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/housing-expenditure-ratio-multi-person-households", "/ranking/private-rental-housing-rent-per-3-3m2", "/ranking/owner-occupied-housing-ratio"],
     nextBestArticle: "a-kakei-tottori",
   },
@@ -3299,6 +3359,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n7e98a46bf791",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-kumamoto",
+    // 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/education-expenditure-ratio-multi-person-households", "/ranking/private-university-student-ratio", "/ranking/high-school-advancement-rate"],
     nextBestArticle: "a-kakei-tokushima",
   },
@@ -3313,6 +3375,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n2a18f8e7098c",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-kyoto",
+    // 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/education-expenditure-ratio-multi-person-households", "/ranking/private-university-student-ratio", "/ranking/high-school-advancement-rate"],
     nextBestArticle: "a-kakei-kumamoto",
   },
@@ -3327,6 +3391,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n8113876eaeab",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-mie",
+    // 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/housing-expenditure-ratio-multi-person-households", "/ranking/private-rental-housing-rent-per-3-3m2", "/ranking/owner-occupied-housing-ratio"],
     nextBestArticle: "a-kakei-hokkaido",
   },
@@ -3341,6 +3407,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nb479aff3cf05",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-miyagi",
+    // 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/housing-expenditure-ratio-multi-person-households", "/ranking/private-rental-housing-rent-per-3-3m2", "/ranking/owner-occupied-housing-ratio"],
     nextBestArticle: "a-kakei-kagawa",
   },
@@ -3355,6 +3423,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n7f0be4fef37c",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-miyazaki",
+    // 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/education-expenditure-ratio-multi-person-households", "/ranking/private-university-student-ratio", "/ranking/high-school-advancement-rate"],
     nextBestArticle: "a-kakei-nagano",
   },
@@ -3369,6 +3439,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nb6061a164201",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-nagano",
+    // 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/education-expenditure-ratio-multi-person-households", "/ranking/private-university-student-ratio", "/ranking/high-school-advancement-rate"],
     nextBestArticle: "a-kakei-yamaguchi",
   },
@@ -3383,6 +3455,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nd547ff50cbe6",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-nagasaki",
+    // 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/education-expenditure-ratio-multi-person-households", "/ranking/private-university-student-ratio", "/ranking/high-school-advancement-rate"],
     nextBestArticle: "a-kakei-wakayama",
   },
@@ -3397,6 +3471,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n366d898d8107",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-nara",
+    // 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/education-expenditure-ratio-multi-person-households", "/ranking/private-university-student-ratio", "/ranking/high-school-advancement-rate"],
     nextBestArticle: "a-kakei-kanagawa",
   },
@@ -3411,6 +3487,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/ndd0bb1c14aa4",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-niigata",
+    // 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/healthcare-expenditure-ratio-multi-person-households", "/ranking/physicians-in-medical-facilities-per-100k", "/ranking/ratio-65-plus"],
     nextBestArticle: "a-kakei-fukuoka",
   },
@@ -3425,6 +3503,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n37ab621d01ad",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-oita",
+    // 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/transport-communication-expenditure-ratio-multi-person-households", "/ranking/car-ownership-multi-person-households-per-1000", "/ranking/commute-by-car"],
     nextBestArticle: "a-kakei-ibaraki",
   },
@@ -3439,6 +3519,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/ne788feae75bf",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-okayama",
+    // 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/furniture-household-goods-expenditure-ratio-multi-person-households", "/ranking/floor-area-per-dwelling-owner", "/ranking/consumer-price-difference-index-furniture-household"],
     nextBestArticle: "a-kakei-kagoshima",
   },
@@ -3453,6 +3535,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n757284230786",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-okinawa",
+    // 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/housing-expenditure-ratio-multi-person-households", "/ranking/private-rental-housing-rent-per-3-3m2", "/ranking/owner-occupied-housing-ratio"],
     nextBestArticle: "a-kakei-fukui",
   },
@@ -3467,6 +3551,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n7ac1079b6f20",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-osaka",
+    // 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/transport-communication-expenditure-ratio-multi-person-households", "/ranking/car-ownership-multi-person-households-per-1000", "/ranking/commute-by-car"],
     nextBestArticle: "a-kakei-hyogo",
   },
@@ -3481,6 +3567,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n1972caf5203d",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-saga",
+    // 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/housing-expenditure-ratio-multi-person-households", "/ranking/private-rental-housing-rent-per-3-3m2", "/ranking/owner-occupied-housing-ratio"],
     nextBestArticle: "a-kakei-gifu",
   },
@@ -3495,6 +3583,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/ne760e2866251",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-saitama",
+    // 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/education-expenditure-ratio-multi-person-households", "/ranking/private-university-student-ratio", "/ranking/high-school-advancement-rate"],
     nextBestArticle: "a-kakei-tokyo",
   },
@@ -3509,6 +3599,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/ne5569b417135",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-shiga",
+    // 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/education-expenditure-ratio-multi-person-households", "/ranking/private-university-student-ratio", "/ranking/high-school-advancement-rate"],
     nextBestArticle: "a-kakei-kyoto",
   },
@@ -3523,6 +3615,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n75d68c2bb7e9",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-shimane",
+    // 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/education-expenditure-ratio-multi-person-households", "/ranking/private-university-student-ratio", "/ranking/high-school-advancement-rate"],
     nextBestArticle: "a-kakei-nagasaki",
   },
@@ -3537,6 +3631,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n35ce2a1b9248",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-shizuoka",
+    // 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/housing-expenditure-ratio-multi-person-households", "/ranking/private-rental-housing-rent-per-3-3m2", "/ranking/owner-occupied-housing-ratio"],
     nextBestArticle: "a-kakei-fukui",
   },
@@ -3551,6 +3647,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n0fd0305a6b8c",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-tochigi",
+    // 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/transport-communication-expenditure-ratio-multi-person-households", "/ranking/car-ownership-multi-person-households-per-1000", "/ranking/commute-by-car"],
     nextBestArticle: "a-kakei-ishikawa",
   },
@@ -3565,6 +3663,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/ne2abc0fc7530",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-tokushima",
+    // 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/education-expenditure-ratio-multi-person-households", "/ranking/private-university-student-ratio", "/ranking/high-school-advancement-rate"],
     nextBestArticle: "a-kakei-kanagawa",
   },
@@ -3579,6 +3679,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n9d384a674462",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-tokyo",
+    // 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/education-expenditure-ratio-multi-person-households", "/ranking/private-university-student-ratio", "/ranking/high-school-advancement-rate"],
     nextBestArticle: "a-kakei-saitama",
   },
@@ -3593,6 +3695,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n24d6b689079d",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-tottori",
+    // 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/housing-expenditure-ratio-multi-person-households", "/ranking/private-rental-housing-rent-per-3-3m2", "/ranking/owner-occupied-housing-ratio"],
     nextBestArticle: "a-kakei-kochi",
   },
@@ -3607,6 +3711,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n13bca568c98a",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-toyama",
+    // 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/education-expenditure-ratio-multi-person-households", "/ranking/private-university-student-ratio", "/ranking/high-school-advancement-rate"],
     nextBestArticle: "a-kakei-hiroshima",
   },
@@ -3621,6 +3727,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/ncc56ff8990d0",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-wakayama",
+    // 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/education-expenditure-ratio-multi-person-households", "/ranking/private-university-student-ratio", "/ranking/high-school-advancement-rate"],
     nextBestArticle: "a-kakei-nagasaki",
   },
@@ -3635,6 +3743,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/na3d645a7d50c",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-yamagata",
+    // 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/utilities-expenditure-ratio-multi-person-households", "/ranking/average-temperature", "/ranking/maximum-snow-depth"],
     nextBestArticle: "a-kakei-shiga",
   },
@@ -3649,6 +3759,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n88dde65e0774",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-yamaguchi",
+    // 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/education-expenditure-ratio-multi-person-households", "/ranking/private-university-student-ratio", "/ranking/high-school-advancement-rate"],
     nextBestArticle: "a-kakei-nagano",
   },
@@ -3663,6 +3775,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n3416a225e0c6",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/a-kakei-yamanashi",
+    // 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/ranking/transport-communication-expenditure-ratio-multi-person-households", "/ranking/car-ownership-multi-person-households-per-1000", "/ranking/commute-by-car"],
     nextBestArticle: "a-kakei-oita",
   },
@@ -3677,6 +3791,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n78ffa2c7da3b",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/b-kakei-academic-food",
+    // 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/blog/spinach-consumption-ranking", "/ranking/academic-achievement-test-average-rate", "/ranking/spinach-consumption-quantity"],
   },
   {
@@ -3690,6 +3806,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n2d53f8a5fbb8",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/b-kakei-advancement-employment",
+    // 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/blog/advancement-plus-employment-rate-prefecture", "/ranking/high-school-advancement-rate", "/ranking/high-school-graduates-job-ratio"],
   },
   {
@@ -3703,6 +3821,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n5b11edb996f3",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/b-kakei-beer-peak-month",
+    // 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/blog/beer-peak-month-july-to-december", "/ranking/beer-consumption-expenditure", "/ranking/beer-consumption-quantity", "/ranking/happoshu-consumption-expenditure"],
   },
   {
@@ -3716,6 +3836,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/nc3a7ebf40516",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/b-kakei-bread-giffen",
+    // 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/blog/white-bread-price-up-quantity-up", "/ranking/rice-consumption-expenditure", "/ranking/white-bread-consumption-quantity"],
   },
   {
@@ -3729,6 +3851,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n2f50bb479647",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/b-kakei-gyoza-counting",
+    // 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/blog/frozen-gyoza-spending-prefecture-gap", "/ranking/gyoza-frozen-consumption-expenditure"],
   },
   {
@@ -3742,6 +3866,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/ncbfe818867f4",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/b-kakei-necktie-decline",
+    // 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/blog/necktie-stockings-market-shrink", "/ranking/hat-consumption-expenditure", "/ranking/necktie-consumption-expenditure", "/ranking/womens-stockings-consumption-expenditure"],
   },
   {
@@ -3755,6 +3881,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/n7ba6c516c1e9",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/b-kakei-quantity-price",
+    // 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/blog/hokkaido-food-culture", "/blog/kagawa-food-culture", "/ranking/scallop-consumption-quantity"],
   },
   {
@@ -3768,6 +3896,8 @@ export const stats47NoteArticles: NoteArticle[] = [
     noteUrl: "https://note.com/stats47/n/neb44a932f9f2",
     publishedAt: "2026-09-06",
     r2Path: "note/stats47-note/b-kakei-winter-bargain",
+    // 登録時に R2 へ同期されないまま r2Body 既定 (true) になっていた。CI の sync-note-r2 が docs/31 から載せる
+    r2Body: false,
     stats47Targets: ["/blog/winter-coat-bargain-purchase-price", "/ranking/womens-coat-consumption-expenditure", "/ranking/womens-coat-consumption-quantity"],
   },
   {

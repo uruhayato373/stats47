@@ -19,6 +19,11 @@ browser-use CLI（Chrome プロファイル経由）で note.com エディタを
 ### 未公開ドラフト
 `docs/31_note記事原稿/<vertical>/<slug>/` または `docs/31_note記事原稿/<slug>/` で管理。git が SSOT。
 
+### 画像 (PNG) の扱い
+SVG から作れる PNG は git に載せない (`docs/31` の家計・公務員シリーズ)。clone 直後や公開・更新の前に PNG が無ければ
+`npm run note:images:regen -- --slug <slug>` で復元する。ランキング記事 (a-<rankingKey>) の 4 枚は
+`node .claude/scripts/note/render-ranking-images.mjs <rankingKey>` で `chart-data.json` から作り直す。契約と機械検査は `.claude/rules/note-image-assets.md`。
+
 ### 公開済み記事
 **公開後は R2 (`note/<vertical>/<slug>/`) に同期し、docs/31 から削除する**（ローカル容量最適化）。
 
@@ -31,7 +36,7 @@ browser-use CLI（Chrome プロファイル経由）で note.com エディタを
   # 更新完了後は次の develop push で自動的に再同期・削除される
   ```
 
-**画像**: `--update` 時は restore 後に `.claude/scripts/note/regenerate-svg-png.sh` で PNG を再生成してからアップロードする。SVG ソースを持たない旧記事は PNG が唯一のソース。
+**画像**: `--update` 時は restore 後に `npm run note:images:regen -- --slug <slug>` (どの OS でも動く。mac 専用の `.claude/scripts/note/regenerate-svg-png.sh` は旧来の代替) で PNG を再生成してからアップロードする。SVG ソースを持たない旧記事は PNG が唯一のソース。
 
 ## 引数（バッチ対応）
 
@@ -99,6 +104,11 @@ node .claude/scripts/note/verify-cover-refresh.mjs --manifest .local/note-cover-
 ```bash
 # 1. ドラフトが docs/31 に無ければ R2 から復元
 bash .claude/scripts/note/restore-from-r2.sh <slug>
+
+# 1.5. SVG 由来の PNG は git に無い (契約 .claude/rules/note-image-assets.md)。無ければ SVG から作り直す
+npm run note:images:regen -- --slug <slug>
+#     ランキング記事 (a-<rankingKey>) の画像 4 枚は chart-data.json から作る (約 15 秒)
+# node .claude/scripts/note/render-ranking-images.mjs <rankingKey>
 
 # 2. カバーを生成 (images/cover-1280x670.{svg,png})
 #    ★ koumuin-claude-code / koumuin-estat-claude-code シリーズは専用ジェネレータを使う

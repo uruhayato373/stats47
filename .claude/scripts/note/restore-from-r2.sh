@@ -113,3 +113,10 @@ if [ "$STATUS" = "published" ]; then
 else
   echo "   更新後: develop push → CI が R2 再同期 + docs/31 自動削除"
 fi
+
+# 派生画像 (契約: .claude/rules/note-image-assets.md) は R2/git に無いので、復元した原稿から作り直す
+if [ -f "$DEST_DIR/render-spec.json" ]; then
+  echo "   画像 (ランキング記事): node .claude/scripts/note/render-ranking-images.mjs ${SLUG#a-}"
+else
+  echo "   画像 (SVG 由来): npm run note:images:regen -- --slug $SLUG"
+fi

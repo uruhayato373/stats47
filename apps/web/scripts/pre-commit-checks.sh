@@ -166,6 +166,10 @@ if [ -n "$STAGED_ANY" ]; then
     echo -e "${RED}❌ 画像資産ポリシー違反 (重複画像・寸法・容量など)。${NC}"
     ERROR_COUNT=$((ERROR_COUNT + 1))
   fi
+  if ! node "$GUARD_ROOT/.claude/scripts/note/audit-note-image-assets.mjs"; then
+    echo -e "${RED}❌ note 画像資産の契約違反 (派生 PNG の追跡・ランキング記事のデータ欠落)。.claude/rules/note-image-assets.md を参照。${NC}"
+    ERROR_COUNT=$((ERROR_COUNT + 1))
+  fi
   if ! node "$GUARD_ROOT/.claude/scripts/lib/check-maintenance-debt.cjs" --baseline; then
     # ★判定は行単位。legacy / deprecated と同じ行に削除条件を書く (別行だと素通りしない)
     echo -e "${RED}❌ 無根拠な TODO/legacy/deprecated。削除条件を legacy と同じ行に書いてください。${NC}"

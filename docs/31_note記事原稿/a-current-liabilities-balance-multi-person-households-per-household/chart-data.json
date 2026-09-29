@@ -10,6 +10,7 @@
     "readerLabel": "負債現在高",
     "hook": "負債現在高が最も多い県は？"
   },
+  "unit": "千円",
   "summary": {
     "mean": 5093.85,
     "stddev": 1282.69,
