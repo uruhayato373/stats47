@@ -170,6 +170,26 @@ updated: 2026-09-29
 - **停止条件**: 単発の PSI 値で改善と判定しない (日次計測はばらつくため 3 週以上の推移で見る)。デプロイはオーナーの明示承認まで行わない。ベースライン 9,347ms は 2026-08-04 の実測値で、これを更新して達成扱いにしない。
 - **完了条件**: `ranking/total-population,mobile` の LCP が 3 週連続でベースライン 9,347ms を下回る。悪化要因が topology fetch でなかった場合は、実測で特定した真因と対策を本カードへ記録してから閉じる。
 
+### [NOTE-FISCAL-PEER-PUBLISH-01] 財政指標の同規模比較 note 2 本 (#12 コード版 / #13 コードなし版) を Mac から公開する
+
+タグ: [収益化] [種類:制作] [実行:別環境] [起票:2026-09-29] [期日:2026-10-06] [レーン:note・商品販売]
+
+- **owner**: オーナー (Mac で `/publish-note` を実行・有料境界を目視承認) / note-manager (公開後の state 記録)
+- **対象**: `koumuin-estat-claude-code` の `12-fiscal-peer-comparison` (有料 ¥300・e-Stat API + Python) と `13-fiscal-peer-no-code` (有料 ¥300・Claude / ChatGPT にプロンプトを貼るだけ)。原稿は commit `328a498ee` で develop の `docs/31_note記事原稿/koumuin-estat-claude-code/<slug>/` に入っている。`note-draft-index.json` に `r2_path` を入れて登録したため `sync-note-r2.yml` の移送対象外となり、R2 には置かれていない (2026-09-29 の run で pending 0・R2 は 404 を確認)。note-critic は 2 本とも PASS。
+- **なぜ Mac か**: `publish-new-note.sh` が Mac のパスと osascript を前提にしており、Windows には browser-use も無い (2026-09-29 確認)。
+- **なぜ 2 本同時か**: 売れた note 3 本 (各 ¥300) はすべて AI × e-Stat の技術記事だった。コードを書く層と書かない層のどちらが買うかを、同時公開した 2 本の売上で比べる。
+- **手順** (Mac・`note.com/stats47` にログイン済みの Chrome Profile 5):
+  1. `git pull origin develop` で原稿を取得する。R2 には無いので `restore-from-r2.sh` は使わない。
+  2. PNG を作り直す (資産ポリシーで PNG は git に入れていない)。先に `.claude/scripts/note/regenerate-svg-png.sh docs/31_note記事原稿/koumuin-estat-claude-code/12-fiscal-peer-comparison` を実行し (13 も同様)、そのあと `node .claude/scripts/note/generate-koumuin-covers.cjs --slug <slug>` で表紙を背景入りに上書きする (順序を逆にすると表紙が背景なしになる)。
+  3. **#12 を先に公開する**: `/publish-note 12-fiscal-peer-comparison`。有料境界は「手順 2: 「－」を正しく処理する」の見出しの直前にあることを screenshot で目視してから確定する。マガジンはシリーズ「公務員のための e-Stat × Claude Code 実務ガイド」に入れ、note 上の既存マガジン「自治体財政」にも入れるかはその場で決める。
+  4. #13 の本文にあるシリーズ内リンク `../12-fiscal-peer-comparison/draft.md` と `../08-benchmark-table-5min/draft.md` を、それぞれの note の URL に置き換える (#12 の原稿にある `../06`・`../07`・`../08`・`../09`・`../10` のリンクも公開前に同じく置き換える。URL の対応表は `.claude/state/note-published-urls.json`)。
+  5. `/publish-note 13-fiscal-peer-no-code` で公開する。有料境界は「手順 2: AI に渡す前に知っておく 3 つの約束事」の直前。
+  6. 公開後、SKILL の「Phase 8 後」に従い、`migrate-note-frontmatter.mjs` → `build-note-published-index.mjs` で `note_url` を記録し、`.claude/state/note-draft-index.json` から 2 件を消す。
+  7. 図の位置を `node .claude/scripts/note/audit-note-figure-split.mjs` で確かめる。`ins_img` は見出し直前の段落をアンカーにすると画像が 1 ブロック後ろにずれる既知の不具合がある (`NOTE-INS-IMG-HEADING-PLACEMENT-01`)。
+- **禁止**: 有料境界を目視せずに確定しない (有料部分が無料で見える)。予約・即時の別はオーナーが決める。
+- **停止条件**: Phase 1 のアカウント照合で `stats47` と一致しなければ 1 本も投稿しない。
+- **完了条件**: 2 本が note で公開され、`note-published-urls.json` に 2 件の URL があり、無料部分と有料部分の境界が意図どおりであることを screenshot で確認済み。公開日から 4 週間後 (公開日 + 28 日) に 2 本の売上を note ダッシュボードで比べる予定を `improvements.md` 側へ引き渡す。
+
 ## 🟡 中 — 2〜3ヶ月以内
 
 ### [ADMIN-MCP-STATUS-01] 管理画面で、この PC が使う MCP の一覧と接続状況を見られるようにする
