@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "date": "2026-09-28",
+  "date": "2026-09-29",
   "period": {
-    "periodStart": "2026-09-19",
-    "periodEnd": "2026-09-25",
+    "periodStart": "2026-09-20",
+    "periodEnd": "2026-09-26",
     "windowDays": 7
   },
-  "inputHash": "cb529ceeda735b94f771d55db60dbf0f993fe3bdfc25657d40de9e6a38ad96de",
+  "inputHash": "5868e2c64a307cbf4b9c36b15fa8da7456829c0ad982a53961f9da68e9241fc2",
   "movements": [
     {
       "keyword": "都道府県",
@@ -27,13 +27,13 @@
       "change": -47
     },
     {
-      "keyword": "高校教師年収",
+      "keyword": "高校教師 年収",
       "targetPath": "/ranking/high-school-teacher-annual-income",
-      "before": 65,
-      "after": 26,
+      "before": 58,
+      "after": 19.5,
       "beforeImpressions": 1,
-      "impressions": 2,
-      "change": 39
+      "impressions": 4,
+      "change": 38.5
     },
     {
       "keyword": "site:stats47.jp",
@@ -63,24 +63,6 @@
       "change": -37
     },
     {
-      "keyword": "高校教師 年収",
-      "targetPath": "/ranking/high-school-teacher-annual-income",
-      "before": 58,
-      "after": 22.666666666666668,
-      "beforeImpressions": 1,
-      "impressions": 3,
-      "change": 35.33333333333333
-    },
-    {
-      "keyword": "高校 教員 年収",
-      "targetPath": "/blog/high-school-teacher-salary-prefecture-gap",
-      "before": 10.88888888888889,
-      "after": 46.2,
-      "beforeImpressions": 9,
-      "impressions": 5,
-      "change": -35.31111111111112
-    },
-    {
       "keyword": "site:stats47.jp",
       "targetPath": "/ranking/railway-passengers",
       "before": 47.39705882352941,
@@ -97,6 +79,24 @@
       "beforeImpressions": 6,
       "impressions": 1,
       "change": -34.166666666666664
+    },
+    {
+      "keyword": "高校 教師 年収",
+      "targetPath": "/blog/high-school-teacher-salary-prefecture-gap",
+      "before": 10.76923076923077,
+      "after": 44.333333333333336,
+      "beforeImpressions": 13,
+      "impressions": 3,
+      "change": -33.56410256410257
+    },
+    {
+      "keyword": "医薬品 卸 ランキング 県 別",
+      "targetPath": "/ranking/pharmaceutical-sales-count",
+      "before": 41,
+      "after": 8,
+      "beforeImpressions": 1,
+      "impressions": 2,
+      "change": 33
     }
   ],
   "verdicts": [
@@ -107,11 +107,11 @@
     }
   ],
   "selected": {
-    "keyword": "道の駅 多い県",
+    "keyword": "道の駅多い県",
     "targetPath": "/blog/roadside-station-count-prefecture-gap",
-    "rank": 8.69243156199678,
-    "impressions": 621,
-    "clicks": 0,
+    "rank": 8.414414414414415,
+    "impressions": 666,
+    "clicks": 1,
     "group": 5,
     "previousMethod": null,
     "editableFile": null
