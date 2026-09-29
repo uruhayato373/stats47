@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="680" viewBox="0 0 1280 680">
+  <style>text{font-family:'Hiragino Kaku Gothic ProN','Yu Gothic','Noto Sans JP',sans-serif;}</style>
+  <rect width="1280" height="680" fill="#ffffff"/>
+  <text x="640" y="60" text-anchor="middle" font-size="30" font-weight="800" fill="#0f172a">A 市の将来負担比率は 3 年で 35.7 ポイント低下、同規模との差は残る</text>
+
+  <!-- 描画域: y = 560 - 3 × 値(%) -->
+  <g stroke="#e2e8f0" stroke-width="1">
+    <line x1="200" y1="560" x2="1040" y2="560"/>
+    <line x1="200" y1="470" x2="1040" y2="470"/>
+    <line x1="200" y1="380" x2="1040" y2="380"/>
+    <line x1="200" y1="290" x2="1040" y2="290"/>
+    <line x1="200" y1="200" x2="1040" y2="200"/>
+  </g>
+  <g font-size="17" fill="#64748b" text-anchor="end">
+    <text x="185" y="566">0%</text>
+    <text x="185" y="476">30%</text>
+    <text x="185" y="386">60%</text>
+    <text x="185" y="296">90%</text>
+    <text x="185" y="206">120%</text>
+  </g>
+  <g font-size="19" fill="#334155" text-anchor="middle">
+    <text x="280" y="598">2019 年度</text>
+    <text x="500" y="598">2020 年度</text>
+    <text x="720" y="598">2021 年度</text>
+    <text x="940" y="598">2022 年度</text>
+  </g>
+
+  <!-- A 市: 130.2 / 119.8 / 100.5 / 94.5 -->
+  <polyline points="280,169.4 500,200.6 720,258.5 940,276.5" fill="none" stroke="#ef4444" stroke-width="5"/>
+  <g fill="#ef4444">
+    <circle cx="280" cy="169.4" r="8"/><circle cx="500" cy="200.6" r="8"/><circle cx="720" cy="258.5" r="8"/><circle cx="940" cy="276.5" r="8"/>
+  </g>
+  <g font-size="20" font-weight="700" fill="#b91c1c" text-anchor="middle">
+    <text x="280" y="152">130.2</text><text x="500" y="183">119.8</text><text x="720" y="241">100.5</text><text x="940" y="259">94.5</text>
+  </g>
+
+  <!-- 同規模中央値: 26.3 / 24.2 / 12.8 / 8.1 -->
+  <polyline points="280,481.1 500,487.4 720,521.6 940,535.7" fill="none" stroke="#2563eb" stroke-width="5"/>
+  <g fill="#2563eb">
+    <circle cx="280" cy="481.1" r="8"/><circle cx="500" cy="487.4" r="8"/><circle cx="720" cy="521.6" r="8"/><circle cx="940" cy="535.7" r="8"/>
+  </g>
+  <g font-size="20" font-weight="700" fill="#1d4ed8" text-anchor="middle">
+    <text x="280" y="464">26.3</text><text x="500" y="470">24.2</text><text x="720" y="504">12.8</text><text x="940" y="518">8.1</text>
+  </g>
+
+  <!-- 凡例 -->
+  <g font-size="20" font-weight="700">
+    <rect x="1060" y="270" width="22" height="6" fill="#ef4444"/><text x="1090" y="281" fill="#b91c1c">A 市</text>
+    <rect x="1060" y="530" width="22" height="6" fill="#2563eb"/><text x="1090" y="541" fill="#1d4ed8">同規模中央値</text>
+  </g>
+
+  <text x="640" y="640" text-anchor="middle" font-size="18" fill="#334155">A 市と中央値の差: 2019 年度 103.9 ポイント → 2022 年度 86.4 ポイント</text>
+  <text x="1240" y="668" text-anchor="end" font-size="14" fill="#94a3b8">同規模 = 2020 年の人口が ±20% の市（117 市）。「－」は 0% として集計。出典: e-Stat「社会・人口統計体系」</text>
+</svg>

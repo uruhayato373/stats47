@@ -40,6 +40,8 @@ stats47 (47 都道府県統計サイト) 開発で使い込んだ既存スキル
 | 09 | assembly-chart-generation | output | 有料 ¥300 | 9,000 | 3 | |
 | 10 | claude-skills-routinize | skills | 有料 ¥300 | 9,000 | 3 | |
 | 11 | mcp-sqlite-search | mcp | 有料 ¥300 | 9,500 | 3 | |
+| 12 | fiscal-peer-comparison | analysis (追加編) | 有料 ¥300 | 9,500 | 3 | |
+| 13 | fiscal-peer-no-code | output (追加編・コードなし) | 有料 ¥300 | 9,000 | 3 | |
 
 ## 課金モデル
 
