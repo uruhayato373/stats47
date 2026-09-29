@@ -53,6 +53,13 @@ note 記事の画像は、記事で使ったデータと設定から作り直せ
 8. **SVG は git に置く。** SVG は画像の正本で、テキスト・小さく (追跡分の合計は約 1.5MB)・差分が読める。koumuin シリーズの 268 枚は
    手作りの図版で作り直せない。PNG のように外すと正本を失うので外さない。
 
+9. **画像の生成口は 1 つ、公開前に必ず揃える。** ランキング記事の 4 枚は `render-ranking-images.mjs` だけが作る
+   (`apps/remotion` の `pipeline:sns` は note 画像を作らない。`--note-only` は廃止して呼ぶと止まる。二つの経路で作ると内容が食い違う)。
+   公開・更新の入口 (`publish-new-note.sh` / `editor-helpers.sh`) は `ensure-note-images.mjs` で PNG を作り直し、足りなければ止まる
+   (カバー無しのまま黙って公開しない)。
+10. **決定的であることを保つ。** 同じ入力から `render-ranking-images.mjs` は同じバイト列を作る (2026-09-30 に同一 SHA を実測)。
+    テンプレートに時刻・乱数・外部取得を入れない。入れるなら入力として spec に固定する。
+
 ## 機械検査 (`npm run note:images:audit`)
 
 | コード | 意味 |

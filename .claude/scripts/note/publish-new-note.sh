@@ -13,6 +13,8 @@ SLUG="$1"; VERT="$2"; PUBLISH="${3:-}"; MAGAZINE="${4:-}"
 J="/tmp/note-data-$SLUG.json"
 ADIR="$ROOT/docs/31_note記事原稿/$VERT/$SLUG"
 [ -d "$ADIR" ] || ADIR="$ROOT/docs/31_note記事原稿/$SLUG"
+# PNG は git に無い。無ければ作り直し、足りなければ公開前に止める (契約: .claude/rules/note-image-assets.md)
+node "$ROOT/.claude/scripts/note/ensure-note-images.mjs" "$ADIR" || { echo "FAIL: 画像が揃っていない"; exit 1; }
 BU(){ browser-use --headed --profile "Profile 5" "$@"; }
 
 LOCK_DIR="${TMPDIR:-/tmp}/stats47-note-profile5.lock"

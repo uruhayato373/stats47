@@ -10,14 +10,15 @@
  *   - data.json, ranking_items.json が各ディレクトリに存在すること
  *   - instagram/caption.json が存在すること（hookText 読み込み用）
  *
- * 出力先: .local/r2/sns/ranking/{rankingKey}/{sns}/stills/ or note/images/
+ * 出力先: .local/r2/sns/ranking/{rankingKey}/{sns}/stills/
  *
  * 実行: npm run pipeline:sns --workspace remotion
  *
  * オプション:
  *   --stills-only   静止画のみ生成（動画スキップ）
  *   --videos-only   動画のみ生成（静止画スキップ）
- *   --note-only     note用4枚だけ生成（動画は常にスキップ）
+ *   (note 記事の画像 4 枚はここでは作らない。chart-data.json から作る `node .claude/scripts/note/render-ranking-images.mjs <key>` が唯一の生成口。
+ *    契約: .claude/rules/note-image-assets.md)
  *   --key <key>     特定のランキングキーのみ処理
  */
 
@@ -49,7 +50,12 @@ const BROWSER_RESTART_INTERVAL = 50;
 const args = process.argv.slice(2);
 const stillsOnly = args.includes("--stills-only");
 const videosOnly = args.includes("--videos-only");
-const noteOnly = args.includes("--note-only");
+if (args.includes("--note-only")) {
+  // note 画像を二つの経路で作ると内容が食い違う (SSOT 違反)。過去の呼び出しを黙って別の動作にせず止める
+  console.error("--note-only は廃止: node .claude/scripts/note/render-ranking-images.mjs <rankingKey> を使う");
+  process.exit(2);
+}
+const noteOnly = false;
 const keyIdx = args.indexOf("--key");
 const targetKey = keyIdx !== -1 ? args[keyIdx + 1] : undefined;
 
@@ -291,44 +297,6 @@ function buildJobs(
         label: "x/choropleth.png",
         inputProps: props.light as unknown as Record<string, unknown>,
       },
-      // note images
-      {
-        type: "still",
-        compositionId: "RankingNote-Cover",
-        outputPath: path.join(rankingDir, "note/images/cover-1280x670.png"),
-        label: "note/cover.png",
-        inputProps: props.light as unknown as Record<string, unknown>,
-      },
-      {
-        type: "still",
-        compositionId: "RankingNote-ChoroplethMap",
-        outputPath: path.join(
-          rankingDir,
-          "note/images/choropleth-map-1080x1080.png"
-        ),
-        label: "note/choropleth.png",
-        inputProps: props.light as unknown as Record<string, unknown>,
-      },
-      {
-        type: "still",
-        compositionId: "RankingNote-Chart",
-        outputPath: path.join(
-          rankingDir,
-          "note/images/chart-x-1200x630.png"
-        ),
-        label: "note/chart.png",
-        inputProps: props.light as unknown as Record<string, unknown>,
-      },
-      {
-        type: "still",
-        compositionId: "RankingNote-Boxplot",
-        outputPath: path.join(
-          rankingDir,
-          "note/images/boxplot-1200x630.png"
-        ),
-        label: "note/boxplot.png",
-        inputProps: props.light as unknown as Record<string, unknown>,
-      }
     );
   }
 

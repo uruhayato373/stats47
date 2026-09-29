@@ -17,3 +17,6 @@ metadata:
 **罠2:** `git stash` は index の削除(`git rm --cached`)を pop で元に戻さない。stash pop 後に PNG 580枚が追跡に戻った。追跡解除中の作業では stash を使わない(使ったら audit で再確認)。
 
 関連 [[project_note_update_mode_learnings]]。
+
+**2026-09-30 追記:** 生成AI画像は「作り直せない入力」なので二層保管(Drive 候補 / R2 承認版 / git は SHA・モデル・指示文)。note は `ingest-note-background.mjs`、Kindle は `stash-cover-candidate.mts`。画像の生成口は1つ: note 4枚は `render-ranking-images.mjs` だけ(pipeline:sns の note 出力は廃止)。公開入口は `ensure-note-images.mjs` が PNG を揃え、カバー無し公開を止める。SVG は git に置く(正本・約1.5MB・koumuin 268枚は手作り)。Kindle 元画像12冊は Drive `Kindle表紙/<id>/candidates/` に移設済み。レンダーは bit 単位で決定的(同一 SHA を実測)。
+

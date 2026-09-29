@@ -229,7 +229,7 @@ jobs:
         # docs/31 の派生 PNG を追跡しない・ランキング記事が chart-data.json だけでデータを復元できる・
         # 追跡 PNG の総量が予算 (縮小専用) を超えない。契約: .claude/rules/note-image-assets.md
         run: |
-          node --test .claude/scripts/note/__tests__/image-assets-audit.test.mjs
+          node --test .claude/scripts/note/__tests__/image-assets-audit.test.mjs .claude/scripts/note/__tests__/image-assets-tools.test.mjs
           node .claude/scripts/note/audit-note-image-assets.mjs
         continue-on-error: false
 
