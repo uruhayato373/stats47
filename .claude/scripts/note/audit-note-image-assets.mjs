@@ -14,7 +14,7 @@ import { execFileSync } from "node:child_process";
 import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { DOCS31, auditImageAssets, auditR2BodyPresence } from "./lib/image-assets-audit.mjs";
+import { DOCS31, auditBackgroundPresence, auditImageAssets, auditR2BodyPresence } from "./lib/image-assets-audit.mjs";
 
 const ROOT = process.env.CLAUDE_PROJECT_DIR || resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
 const BUDGET_PATH = resolve(ROOT, ".claude/config/note-image-assets-budget.json");
@@ -76,6 +76,26 @@ if (args.has("--verify-r2")) {
   findings.push(...r2.findings);
   r2Unknown = r2.unknown;
   r2Checked = r2.checked;
+  // 生成 AI の背景 (作り直せない入力) が R2 に実在するか
+  const backgrounds = tracked
+    .filter((file) => file.endsWith("/render-spec.json"))
+    .map((file) => ({ slug: file.split("/")[2], background: readJson(file)?.background }))
+    .filter((entry) => entry.background?.r2Key)
+    .map((entry) => ({ slug: entry.slug, r2Key: entry.background.r2Key }));
+  const bgStatus = new Map();
+  await Promise.all(
+    backgrounds.map(async ({ r2Key }) => {
+      try {
+        bgStatus.set(r2Key, (await fetch(`${R2_BASE}/${r2Key}`, { method: "HEAD", signal: AbortSignal.timeout(20_000) })).status);
+      } catch {
+        bgStatus.set(r2Key, 0);
+      }
+    }),
+  );
+  const bg = auditBackgroundPresence(backgrounds, bgStatus);
+  findings.push(...bg.findings);
+  r2Unknown = [...r2Unknown, ...bg.unknown];
+  summary.backgroundsChecked = bg.checked;
   summary.r2BodyChecked = r2Checked;
   summary.r2BodyMissingKnown = (budget?.r2BodyMissingKnown ?? []).length;
   summary.r2BodyUnverified = r2Unknown.length;

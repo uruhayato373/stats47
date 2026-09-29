@@ -1,5 +1,5 @@
 import React from "react";
-import { AbsoluteFill } from "remotion";
+import { AbsoluteFill, Img } from "remotion";
 
 import { BRAND, FONT } from "@/shared/themes/brand";
 import { ChoroplethMapSvg } from "@/shared/components/maps/ChoroplethMapSvg";
@@ -29,6 +29,13 @@ export const NoteCover: React.FC<NoteImageProps> = (props) => {
 
   return (
     <AbsoluteFill style={{ backgroundColor: "#F8FAFC", fontFamily: FONT.family, color: "#0F172A", overflow: "hidden" }}>
+      {/* 生成 AI の背景 (任意)。文字は載せない前提の絵を、左の文字列が読めるよう白で覆う */}
+      {props.backgroundImage && (
+        <>
+          <Img src={props.backgroundImage} style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
+          <AbsoluteFill style={{ background: "linear-gradient(90deg, rgba(248,250,252,0.94) 0%, rgba(248,250,252,0.9) 42%, rgba(248,250,252,0.35) 100%)" }} />
+        </>
+      )}
       <div style={{ position: "absolute", left: 56, top: 40, fontSize: 28, fontWeight: FONT.weight.black, color: BRAND.primary }}>stats47</div>
 
       <div style={{ position: "absolute", left: 56, top: 96, width: 490 }}>
@@ -57,7 +64,7 @@ export const NoteCover: React.FC<NoteImageProps> = (props) => {
         <NoteLegend min={min} max={max} mean={mean} unit={meta.unit} precision={precision} palette={palette} width={500} fontSize={15} />
       </div>
 
-      <div style={{ position: "absolute", left: 560, top: 20, width: MAP_BOX.width, height: MAP_BOX.height, borderRadius: 24, backgroundColor: "#EEF2F7", border: "1px solid #E2E8F0" }}>
+      <div style={{ position: "absolute", left: 560, top: 20, width: MAP_BOX.width, height: MAP_BOX.height, borderRadius: 24, backgroundColor: props.backgroundImage ? "rgba(238,242,247,0.9)" : "#EEF2F7", border: "1px solid #E2E8F0" }}>
         {paths && <ChoroplethMapSvg paths={paths} width={MAP_BOX.width} height={MAP_BOX.height} strokeColor="#FFFFFF" strokeWidth={0.8} />}
       </div>
     </AbsoluteFill>

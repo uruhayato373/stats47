@@ -41,6 +41,18 @@ note 記事の画像は、記事で使ったデータと設定から作り直せ
    該当 65 記事は `r2Body: false` にして `sync-note-r2` (CI) の対象へ戻した。以後は週次の `--verify-r2` が新しい欠落を止める。
    `r2BodyMissingKnown` (予算ファイル) は、直せない既知の欠落を一時的に許す縮小専用の一覧 (現在は空)。
 
+7. **生成 AI (imagegen / Codex) の画像は「作り直せない入力」なので保管する。** 同じ指示でも毎回別の絵になり、時間も枠も使うため。
+   二層で持つ (Kindle の表紙背景と同じ考え方。`.claude/rules/coconala-product-standards.md`「カバー画像は二層」)。
+   - **Drive (非公開・人が見る)**: 候補・元画像 `stats47/note画像/<slug>/candidates/`。
+   - **R2 (承認した最終版だけ)**: `media/note-backgrounds/<slug>/<sha12>/background.jpg` (1280x670 JPEG)。
+   - **git (`render-spec.json` の `background`)**: `sha256` / `r2Key` / 寸法 / `model` / `prompt` / `status: "approved"` だけ。画像本体は置かない。
+   - 文字・数値・地図は生成画像に含めず、テンプレートが実テキスト/実データで重ねる (家ルール。`ogp-image-standards.md` §5)。
+   手順は `node .claude/scripts/note/ingest-note-background.mjs` の先頭コメントに従う (候補を Drive へ `--stash` → 採用を正規化して
+   `--write-spec` → R2 反映 → `render-ranking-images.mjs`)。`render-ranking-images.mjs` は背景を取得して SHA を検証し、合わなければ
+   画像を作らず止まる (別の背景で焼かない)。生成 AI は再実行しない。現状、背景を使うのはカバーだけ。
+8. **SVG は git に置く。** SVG は画像の正本で、テキスト・小さく (追跡分の合計は約 1.5MB)・差分が読める。koumuin シリーズの 268 枚は
+   手作りの図版で作り直せない。PNG のように外すと正本を失うので外さない。
+
 ## 機械検査 (`npm run note:images:audit`)
 
 | コード | 意味 |
@@ -50,6 +62,7 @@ note 記事の画像は、記事で使ったデータと設定から作り直せ
 | `RANKING_CHART_DATA_INVALID` / `RANKING_PROVENANCE_INVALID` | 契約 3 の欠落 |
 | `RENDER_SPEC_INVALID` | `render-spec.json` が無い・`chart-data.json` の SHA やテンプレート版が現行と不一致 (画像を作り直していない) |
 | `TRACKED_PNG_OVER_BUDGET` | 追跡 PNG が予算を超えた |
+| `NOTE_BACKGROUND_MISSING` | `render-spec.json` の背景が R2 に無い (`--verify-r2`・週次。作り直せない入力が失われている) |
 | `NOTE_R2_BODY_MISSING` | `r2_body:true` の記事が R2 に無い (`--verify-r2`・ネットワーク要・週次のみ。通信失敗は 0 件扱いにせず exit 2) |
 
 配線: pre-commit (`apps/web/scripts/pre-commit-checks.sh`)・PR (`pr-quality-check.yml`)・`.claude/config/quality-gates.json` の

@@ -27,6 +27,8 @@ export interface NoteImageProps {
   displayTitle?: string;
   hookText?: string;
   colorScheme?: string;
+  /** 生成 AI の背景 (data URI)。render-spec.json の background を SHA 検証した上で渡される。カバーだけが使う */
+  backgroundImage?: string;
   /** chart-data.json の summary.mean (記事本文の全国平均)。未指定なら 47 県の単純平均 */
   mean?: number;
 }

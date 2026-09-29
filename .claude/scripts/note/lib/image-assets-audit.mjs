@@ -21,6 +21,7 @@ export const CODES = {
   TRACKED_PNG_OVER_BUDGET: "TRACKED_PNG_OVER_BUDGET",
   RENDER_SPEC_INVALID: "RENDER_SPEC_INVALID",
   NOTE_R2_BODY_MISSING: "NOTE_R2_BODY_MISSING",
+  NOTE_BACKGROUND_MISSING: "NOTE_BACKGROUND_MISSING",
 };
 
 const isPng = (file) => /\.png$/i.test(file);
@@ -191,4 +192,22 @@ export function auditR2BodyPresence(articles, statusByPath, known = []) {
     if (!known.includes(slug)) findings.push({ code: CODES.NOTE_R2_BODY_MISSING, file: article.r2_path, message: `r2_body:true だが R2 の draft.md が HTTP ${status}。docs/31 (git) が唯一の実体の可能性` });
   }
   return { findings, unknown, checked };
+}
+
+/**
+ * render-spec.json の background (生成 AI の背景) が R2 に実在するかを突き合わせる (ネットワーク要・週次のみ)。
+ * 背景は作り直せない入力なので、R2 に無いと画像を作り直せず、その記事は永久に更新できなくなる。
+ * @param {Array<{slug: string, r2Key: string}>} backgrounds spec の background を持つ記事
+ * @param {Map<string, number>} statusByKey r2Key -> HTTP status (取得失敗は 0)
+ */
+export function auditBackgroundPresence(backgrounds, statusByKey) {
+  const findings = [];
+  const unknown = [];
+  for (const { slug, r2Key } of backgrounds) {
+    const status = statusByKey.get(r2Key);
+    if (status === 200) continue;
+    if (!status) unknown.push(slug);
+    else findings.push({ code: CODES.NOTE_BACKGROUND_MISSING, file: r2Key, message: `${slug} の生成 AI 背景が R2 に無い (HTTP ${status})。作り直せない入力なので、Drive の候補から ingest-note-background.mjs → R2 反映が要る` });
+  }
+  return { findings, unknown, checked: backgrounds.length };
 }

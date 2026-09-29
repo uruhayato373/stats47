@@ -11,6 +11,7 @@
  * 成功すると images/*.png と render-spec.json を書く。PNG は git に載らない (gitignore)。
  */
 import { execFileSync } from "node:child_process";
+import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSync, copyFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
@@ -59,15 +60,40 @@ function specErrors(slug) {
   return validateRenderSpec(slug, JSON.parse(readFileSync(specPath, "utf8")), chartText);
 }
 
-function render(slug) {
+const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
+
+/**
+ * 生成 AI の背景 (render-spec.json の background) を取得して SHA を検証し data URI にする。
+ * 取得順: ローカル cache (.local/note-backgrounds/<sha>.jpg) → R2。SHA が合わなければ画像を作らずに止める
+ * (別の背景で画像を焼いてしまうのを防ぐ)。生成 AI は再実行しない。
+ */
+async function loadBackground(background) {
+  const cache = join(ROOT, ".local/note-backgrounds", `${background.sha256}.jpg`);
+  let data = existsSync(cache) ? readFileSync(cache) : null;
+  if (!data) {
+    const res = await fetch(`${R2_BASE}/${background.r2Key}`);
+    if (!res.ok) throw new Error(`背景を取得できない (HTTP ${res.status}): ${background.r2Key}。R2 へ未反映なら ingest-note-background.mjs の手順 3 を先に行う`);
+    data = Buffer.from(await res.arrayBuffer());
+    mkdirSync(dirname(cache), { recursive: true });
+    writeFileSync(cache, data);
+  }
+  const actual = createHash("sha256").update(data).digest("hex");
+  if (actual !== background.sha256) throw new Error(`背景の SHA が spec と不一致: ${actual} (spec ${background.sha256})`);
+  return `data:image/jpeg;base64,${data.toString("base64")}`;
+}
+
+async function render(slug) {
   const dir = join(DOCS31, slug);
   const chartText = readFileSync(join(dir, "chart-data.json"), "utf8");
   const chartData = JSON.parse(chartText);
+  const specPath = join(dir, "render-spec.json");
+  const background = existsSync(specPath) ? JSON.parse(readFileSync(specPath, "utf8")).background : undefined;
+  const backgroundImage = background ? await loadBackground(background) : undefined;
   if (typeof chartData.unit !== "string") throw new Error(`${slug}: chart-data.json に unit が無い`);
   const work = mkdtempSync(join(tmpdir(), `note-render-${slug}-`));
   try {
     const propsPath = join(work, "props.json");
-    writeFileSync(propsPath, JSON.stringify(buildRenderProps(chartData)));
+    writeFileSync(propsPath, JSON.stringify(buildRenderProps(chartData, backgroundImage)));
     const chrome = CHROME_CANDIDATES.find((candidate) => existsSync(candidate));
     const outputs = [];
     for (const image of NOTE_RANKING_IMAGES) {
@@ -82,7 +108,7 @@ function render(slug) {
     // 4 枚すべて成功してから書く。途中で失敗しても、公開時の画像を半端に壊さない
     mkdirSync(join(dir, "images"), { recursive: true });
     for (const [out, file] of outputs) copyFileSync(out, join(dir, file));
-    writeFileSync(join(dir, "render-spec.json"), `${JSON.stringify(buildRenderSpec(slug, chartText), null, 2)}\n`);
+    writeFileSync(join(dir, "render-spec.json"), `${JSON.stringify(buildRenderSpec(slug, chartText, background), null, 2)}\n`);
   } finally {
     rmSync(work, { recursive: true, force: true });
   }
@@ -101,7 +127,7 @@ for (const slug of slugsToProcess()) {
   }
   if (flag("--stale") && errors.length === 0) continue;
   try {
-    render(slug);
+    await render(slug);
     done += 1;
     console.log(`✓ ${slug}`);
   } catch (error) {

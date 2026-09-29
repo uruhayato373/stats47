@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { CODES, DOCS31, auditImageAssets, validateRankingChartData } from "../lib/image-assets-audit.mjs";
-import { NOTE_RENDER_TEMPLATE_VERSION, buildRenderSpec } from "../lib/note-render-spec.mjs";
+import { CODES, DOCS31, auditBackgroundPresence, auditImageAssets, validateRankingChartData } from "../lib/image-assets-audit.mjs";
+import { NOTE_RENDER_TEMPLATE_VERSION, buildRenderProps, buildRenderSpec, noteBackgroundR2Key, validateBackground, validateRenderSpec } from "../lib/note-render-spec.mjs";
 
 const D = DOCS31;
 const rows = (year = 2024) =>
@@ -134,4 +134,42 @@ test("render-spec を持つランキング記事の PNG は追跡すると違反
   assert.ok(codes(run([`${D}a-foo/draft.md`, `${D}a-foo/chart-data.json`], { ignoredUntracked: [img] })).includes(CODES.IGNORED_PNG_WITHOUT_SVG));
   // 4 枚以外の PNG は spec では作れない
   assert.ok(codes(run(spec, { ignoredUntracked: [`${D}a-foo/images/other.png`] })).includes(CODES.IGNORED_PNG_WITHOUT_SVG));
+});
+
+const SHA = "a".repeat(64);
+const goodBackground = (slug = "a-foo") => ({ status: "approved", source: "imagegen", model: "m", prompt: "p", sha256: SHA, bytes: 1000, width: 1280, height: 670, r2Key: noteBackgroundR2Key(slug, SHA) });
+
+test("生成 AI の背景は SHA・R2 キー・寸法・モデル・指示文が揃わないと spec として無効", () => {
+  assert.deepEqual(validateBackground("a-foo", undefined), []);
+  assert.deepEqual(validateBackground("a-foo", goodBackground()), []);
+  const cases = {
+    "未承認": { ...goodBackground(), status: "draft" },
+    "SHA が不正": { ...goodBackground(), sha256: "zz" },
+    "R2 キーが SHA と不一致": { ...goodBackground(), r2Key: "media/note-backgrounds/a-foo/000000000000/background.jpg" },
+    "別記事のキー": { ...goodBackground(), r2Key: noteBackgroundR2Key("a-bar", SHA) },
+    "寸法違い": { ...goodBackground(), width: 1600 },
+    "モデル未記録": { ...goodBackground(), model: "" },
+    "指示文未記録": { ...goodBackground(), prompt: " " },
+  };
+  for (const [name, bg] of Object.entries(cases)) assert.ok(validateBackground("a-foo", bg).length > 0, `${name} を検出できない`);
+});
+
+test("背景を持つ spec は有効で、背景の不備は RENDER_SPEC_INVALID になる", () => {
+  const spec = buildRenderSpec("a-foo", chartText, goodBackground());
+  assert.deepEqual(validateRenderSpec("a-foo", spec, chartText), []);
+  assert.ok(validateRenderSpec("a-foo", { ...spec, background: { ...goodBackground(), model: "" } }, chartText).length > 0);
+  assert.equal("background" in buildRenderSpec("a-foo", chartText), false);
+});
+
+test("背景があるときだけ props に backgroundImage が入る", () => {
+  const data = chartData();
+  assert.equal("backgroundImage" in buildRenderProps(data), false);
+  assert.equal(buildRenderProps(data, "data:image/jpeg;base64,AAAA").backgroundImage, "data:image/jpeg;base64,AAAA");
+});
+
+test("spec の背景が R2 に無い記事を検出し、通信失敗は判定不能として分ける", () => {
+  const bgs = [{ slug: "a-ok", r2Key: "k1" }, { slug: "a-missing", r2Key: "k2" }, { slug: "a-flaky", r2Key: "k3" }];
+  const r = auditBackgroundPresence(bgs, new Map([["k1", 200], ["k2", 404], ["k3", 0]]));
+  assert.deepEqual(r.findings.map((f) => f.file), ["k2"]);
+  assert.deepEqual(r.unknown, ["a-flaky"]);
 });

@@ -99,6 +99,14 @@ npx tsx .claude/skills/note/post-note-ranking/scripts/generate-ranking-note.ts <
 
 `images/*.png`はgitに載らず、`render-spec.json`（`chart-data.json`のSHA・テンプレート版）が作り直しの根拠になる。
 
+生成AI（imagegen/Codex）の背景をカバーに使う場合は、作り直せない入力なので保管する（契約7・`.claude/rules/note-image-assets.md`）。
+
+```bash
+node .claude/scripts/note/ingest-note-background.mjs --slug a-<rankingKey> --input <画像> --stash          # 候補をDrive(非公開)へ
+node .claude/scripts/note/ingest-note-background.mjs --slug a-<rankingKey> --input drive:a-<rankingKey>/<file> --model "<モデル>" --prompt "<指示文>" --write-spec
+# R2へ反映(書込権限のある環境)してから: node .claude/scripts/note/render-ranking-images.mjs <rankingKey>
+```
+
 ## Gate
 
 - draftの全数値・順位が`chart-data.json`と一致する。
