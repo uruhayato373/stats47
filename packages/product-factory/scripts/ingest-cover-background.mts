@@ -8,6 +8,7 @@
  * Usage:
  *   npx tsx packages/product-factory/scripts/ingest-cover-background.mts \
  *     --book K-S1-01 --input /absolute/path/to/generated.png
+ *   Drive の候補から: --input drive:K-S1-01/2026-09-30-generated.png  (置き場は stash-cover-candidate.mts)
  */
 import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, writeFileSync } from "node:fs";
@@ -15,6 +16,7 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import sharp from "sharp";
 import { BOOK_BY_ID } from "../src/channels/kindle/book-catalog";
+import { resolveDriveInput } from "./cover-drive";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const PF_ROOT = resolve(HERE, "..");
@@ -33,7 +35,8 @@ async function main(): Promise<void> {
   if (!bookId || !input) throw new Error("--book と --input は必須");
   if (!BOOK_BY_ID.has(bookId)) throw new Error(`未知の bookId: ${bookId}`);
 
-  const inputPath = resolve(input);
+  // drive:<bookId>/<ファイル名> は Drive の候補フォルダ (非公開) から読む
+  const inputPath = input.startsWith("drive:") ? await resolveDriveInput(input) : resolve(input);
   if (!existsSync(inputPath)) throw new Error(`入力画像が無い: ${inputPath}`);
 
   // --band: 横長 (例 1536×1024) の画像を **表紙で見える下 42% (1600×1080)** にぴったり入れる。

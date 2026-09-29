@@ -44,6 +44,12 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
     "count": 40,
     "representatives": [
       {
+        "rankingKey": "annual-sunshine-duration",
+        "title": "年間日照時間",
+        "readerLabel": "日照時間",
+        "hook": "日照時間が最も長い県は？"
+      },
+      {
         "rankingKey": "road-length-per-km2",
         "title": "道路実延長",
         "readerLabel": "道路実延長",
@@ -54,12 +60,6 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
         "title": "国定公園面積",
         "readerLabel": "国定公園面積",
         "hook": "国定公園面積が最も広い県は？"
-      },
-      {
-        "rankingKey": "annual-sunshine-duration",
-        "title": "年間日照時間",
-        "readerLabel": "日照時間",
-        "hook": "日照時間が最も長い県は？"
       },
       {
         "rankingKey": "major-lake-area",
@@ -474,6 +474,12 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
     "count": 270,
     "representatives": [
       {
+        "rankingKey": "avg-height-high-school-2nd-male",
+        "title": "平均身長",
+        "readerLabel": "平均身長",
+        "hook": "平均身長が最も多い県は？"
+      },
+      {
         "rankingKey": "specialized-school-students",
         "title": "専修学校生徒数",
         "readerLabel": "専修学校生徒数",
@@ -484,12 +490,6 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
         "title": "小中学校教員の平均年収",
         "readerLabel": "小中学校教員の平均年収",
         "hook": "小中学校教員の平均年収が最も高い県は？"
-      },
-      {
-        "rankingKey": "avg-height-high-school-2nd-male",
-        "title": "平均身長",
-        "readerLabel": "平均身長",
-        "hook": "平均身長が最も多い県は？"
       },
       {
         "rankingKey": "swimming-pool-public",
@@ -744,12 +744,28 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
 export const HOME_FEATURED_PROMINENCE: ReadonlyArray<HomeFeaturedProminence> =
   [
   {
+    "rankingKey": "avg-height-high-school-2nd-male",
+    "title": "平均身長",
+    "readerLabel": "平均身長",
+    "hook": "平均身長が最も多い県は？",
+    "categoryKey": "educationsports",
+    "order": 1
+  },
+  {
     "rankingKey": "public-phone-count",
     "title": "公衆電話設置台数",
     "readerLabel": "公衆電話設置台数",
     "hook": "公衆電話設置台数が最も多い県は？",
     "categoryKey": "ict",
-    "order": 1
+    "order": 2
+  },
+  {
+    "rankingKey": "annual-sunshine-duration",
+    "title": "年間日照時間",
+    "readerLabel": "日照時間",
+    "hook": "日照時間が最も長い県は？",
+    "categoryKey": "landweather",
+    "order": 3
   },
   {
     "rankingKey": "local-allocation-tax-prefecture",
@@ -757,7 +773,7 @@ export const HOME_FEATURED_PROMINENCE: ReadonlyArray<HomeFeaturedProminence> =
     "readerLabel": "地方交付税",
     "hook": "地方交付税が最も多い県は？",
     "categoryKey": "administrativefinancial",
-    "order": 2
+    "order": 4
   },
   {
     "rankingKey": "beef-consumption-quantity",
@@ -765,7 +781,7 @@ export const HOME_FEATURED_PROMINENCE: ReadonlyArray<HomeFeaturedProminence> =
     "readerLabel": "牛肉消費量",
     "hook": "牛肉消費量が最も多い県は？",
     "categoryKey": "economy",
-    "order": 3
+    "order": 5
   },
   {
     "rankingKey": "fishery-workers",
@@ -773,7 +789,7 @@ export const HOME_FEATURED_PROMINENCE: ReadonlyArray<HomeFeaturedProminence> =
     "readerLabel": "漁業就業者数",
     "hook": "漁業就業者数が最も多い県は？",
     "categoryKey": "agriculture",
-    "order": 4
+    "order": 6
   },
   {
     "rankingKey": "manufacturing-shipment-amount",
@@ -781,7 +797,7 @@ export const HOME_FEATURED_PROMINENCE: ReadonlyArray<HomeFeaturedProminence> =
     "readerLabel": "製造品出荷額等",
     "hook": "製造品出荷額等が最も多い県は？",
     "categoryKey": "miningindustry",
-    "order": 5
+    "order": 7
   },
   {
     "rankingKey": "physical-disability-certificates-issued",
@@ -789,22 +805,6 @@ export const HOME_FEATURED_PROMINENCE: ReadonlyArray<HomeFeaturedProminence> =
     "readerLabel": "身体障害者手帳交付数",
     "hook": "身体障害者手帳交付数が最も多い県は？",
     "categoryKey": "socialsecurity",
-    "order": 6
-  },
-  {
-    "rankingKey": "specialized-school-students",
-    "title": "専修学校生徒数",
-    "readerLabel": "専修学校生徒数",
-    "hook": "専修学校生徒数が最も多い県は？",
-    "categoryKey": "educationsports",
-    "order": 7
-  },
-  {
-    "rankingKey": "births",
-    "title": "出生数",
-    "readerLabel": "出生数",
-    "hook": "出生数が最も多い県は？",
-    "categoryKey": "population",
     "order": 8
   }
 ];
@@ -818,9 +818,9 @@ export const HOME_FEATURED_PROMINENCE: ReadonlyArray<HomeFeaturedProminence> =
  */
 export const REPRESENTATIVE_RANKING_KEYS: ReadonlyArray<string> =
   [
+  "annual-sunshine-duration",
   "road-length-per-km2",
   "quasi-national-park-area",
-  "annual-sunshine-duration",
   "major-lake-area",
   "prefectural-natural-park-count",
   "prefectural-nature-park-area",
@@ -878,9 +878,9 @@ export const REPRESENTATIVE_RANKING_KEYS: ReadonlyArray<string> =
   "motorcycle-count",
   "domestic-travel-consumption-by-destination",
   "inbound-visitors-by-destination",
+  "avg-height-high-school-2nd-male",
   "specialized-school-students",
   "school-teacher-annual-income",
-  "avg-height-high-school-2nd-male",
   "swimming-pool-public",
   "elementary-school-children-count",
   "library-books",
@@ -928,7 +928,7 @@ export const AREA_HIGHLIGHT_PROMINENCE: Readonly<Record<string, number>> =
   "active-job-opening-ratio": 0.35,
   "agricultural-output": 0.775,
   "annual-precipitation": 0.35,
-  "annual-sunshine-duration": 0.7437,
+  "annual-sunshine-duration": 0.9437,
   "average-age-of-first-marriage-husband": 0.26,
   "average-age-of-first-marriage-wife": 0.4425,
   "average-height-high-school-second-grade-female": 0.4488,
@@ -936,7 +936,7 @@ export const AREA_HIGHLIGHT_PROMINENCE: Readonly<Record<string, number>> =
   "average-temperature": 0.35,
   "average-weight-high-school-second-grade-female": 0.3925,
   "average-weight-high-school-second-grade-male": 0.28,
-  "avg-height-high-school-2nd-male": 0.8,
+  "avg-height-high-school-2nd-male": 1,
   "barber-beauty-salon-count-per-100k": 0.28,
   "certified-childcare-center-count-per-100k-0-5": 0.35,
   "cleaning-shop-count-per-100k": 0.575,

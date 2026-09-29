@@ -59,7 +59,8 @@ npm run products:kindle:report    --workspace=@stats47/product-factory          
    `npx tsx packages/product-factory/scripts/write-review-receipt.mts --book <id> --version <VERSION> --reviewer /agents/blog-critic`
    が review.md の PASS を実 EPUB の章 SHA・authoredSha256 に結び付けた `review.json` を書く (PASS でない版・再生成が要る版には書けない)。
    `node --import tsx packages/product-factory/scripts/verify-publishable.mts --version <VERSION> --book <id> --content-only` で本文側の blocker 0 を確認する。
-   表紙背景は `codex exec` + `$imagegen` で文字なし画像を作り、`ingest-cover-background.mts --band` で
+   表紙背景は `codex exec` + `$imagegen` で文字なし画像を作り、まず `stash-cover-candidate.mts` で Drive の候補フォルダ (非公開) へ置き
+   (二層の規約は `.claude/rules/coconala-product-standards.md`「カバー画像は二層」)、採用するものを `ingest-cover-background.mts --input drive:<id>/<file> --band` で
    `.local/r2/media/kindle-cover-assets/<id>/<revision>/background.jpg`へ正規化する。1冊ずつ目視承認後、完成PNG/JPEGと
    manifestを同revisionへstageし、`push-exact-r2-assets.ts`で明示キーだけをR2へ反映する。Gitには
    `cover-design.ts`のR2 key/SHA/byte/寸法だけを残す (プロンプトの型は `.local/kindle-cover-imagegen/build-prompts.mjs`)。

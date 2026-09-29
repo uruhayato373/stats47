@@ -242,14 +242,19 @@ S1 各冊に「この記事 / 本記事」が 11〜38 件、S2/S3 で同一章�
 生成器側のユニットテスト (`src/generators/__tests__/epub.test.ts`) と同じ不変量を、
 こちらは**ビルド済み .epub に対して**見る (生成器を通さず手で置いた EPUB も検査できる)。
 
-- **カバー画像の SSOT**: 画像バイナリは R2 `media/kindle-cover-assets/<bookId>/<revision>/`（背景JPEG・完成PNG/JPEG・
-  manifest）。Gitには `cover-design.ts` のR2キー・SHA-256・byte・寸法だけを置き、画像本体を置かない。
-  目視確認中は `.local/kindle-cover-drafts/`、承認時は `.local/r2/media/kindle-cover-assets/` にexact stagingし、
-  `push-exact-r2-assets.ts` で明示キーだけを反映する。背景は1600×2560 JPEG・**文字を含まない**。
-  生成は **Codex MCP の built-in imagegen**（`.claude/rules/codex-mcp.md`）で、
-  タイトル・著者は satori が**実テキストとして重ねる**。生成 AI に日本語や数字を焼き込ませない家ルールは
-  ブログ OGP と同一（`.claude/rules/ogp-image-standards.md` §5）。生成時はR2取得物をSHA検証して`.local`へcacheし、
-  背景が未承認の書籍はシリーズ基調色の無地にdegradeする。Google Driveへ複製せず、参考資料vaultと混在させない。
+- **カバー画像は二層 (2026-09-30)**: 承認前の版を公開 R2 に出さず、CI が読める承認版だけを R2 に置く。
+  - **上層 = Google Drive (非公開・人が見る・耐久)**: imagegen の出力・採用前の候補・元画像。`stats47/Kindle表紙/<bookId>/candidates/`
+    (参考資料 vault と同じマウント解決。`参考文献/` とは混在させない)。置くのは
+    `npx tsx packages/product-factory/scripts/stash-cover-candidate.mts --book <id> --input <画像>`、採用は
+    `ingest-cover-background.mts --input drive:<bookId>/<ファイル名>`。Drive のマウントが無い PC では止まる (別の場所へ黙って落とさない)。
+  - **下層 = R2 `media/kindle-cover-assets/<bookId>/<revision>/` (承認した最終版だけ)**: 背景JPEG・完成PNG/JPEG・manifest。
+    Gitには `cover-design.ts` のR2キー・SHA-256・byte・寸法だけを置き、画像本体を置かない。
+    目視確認中は `.local/kindle-cover-drafts/` (admin の確認画面が読む作業 cache)、承認時は `.local/r2/media/kindle-cover-assets/` に
+    exact stagingし、`push-exact-r2-assets.ts` で明示キーだけを反映する。
+  - 背景は1600×2560 JPEG・**文字を含まない**。生成は **Codex MCP の built-in imagegen**（`.claude/rules/codex-mcp.md`）で、
+    タイトル・著者は satori が**実テキストとして重ねる**。生成 AI に日本語や数字を焼き込ませない家ルールは
+    ブログ OGP と同一（`.claude/rules/ogp-image-standards.md` §5）。生成時はR2取得物をSHA検証して`.local`へcacheし、
+    背景が未承認の書籍はシリーズ基調色の無地にdegradeする。
 - **著作権規律（`data-provenance-standards.md` / pdf-book-survey と同一）**: 参照書籍からは論点・見せ方の型のみ。文言・図案・写真・編集構成は複製しない。数値は e-Stat / R2 の自社データのみ。自ブログの再利用は自己著作物。**内部編集基準として、各書籍は再構成 + 30% 以上の書き下ろし（はじめに / おわりに / 章横断の合成分析）を必須**とし、validator が `newContentNote` 非空 + manuscript 以降の fresh 章 1 つ以上を強制する。KU（KDP Select 独占）登録は当面見送り（販売のみ・¥500-1,000）。
 
 内部比率はAmazonの許諾・審査合格基準ではない。著作権者自身のWeb公開素材と他者の素材を区別し、AI生成内容の申告を別途確認する（[KDPコンテンツガイドライン](https://kdp.amazon.com/en_US/help/topic/G200635600)）。
