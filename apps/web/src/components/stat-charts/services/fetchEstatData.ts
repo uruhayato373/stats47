@@ -34,7 +34,10 @@ const metricKeysByRecipe = (() => {
   const byRecipe = new Map<string, string[]>();
   for (const config of Object.values(METRICS_REGISTRY)) {
     const recipe = buildRecipe(config);
-    if (!recipe.estatParams || recipe.derived) continue;
+    // 年の補完 (ops.supplements) だけで derived になった metric は、主出典と同じ系列に年を足しただけなので
+    // 旧パラメータから解決してよい (R2 の正典を読むため、補完年も含めて返る)。それ以外の変換は解決しない。
+    const transformOps = Object.keys(recipe.ops ?? {}).filter((op) => op !== 'supplements');
+    if (!recipe.estatParams || (recipe.derived && transformOps.length > 0)) continue;
     const key = recipeKey(recipe.estatParams as LegacyStatParams);
     const keys = byRecipe.get(key) ?? [];
     keys.push(config.key);
