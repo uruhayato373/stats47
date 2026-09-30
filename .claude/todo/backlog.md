@@ -197,21 +197,6 @@ updated: 2026-09-29
 
 ## 🟡 中 — 2〜3ヶ月以内
 
-### [CENSUS-2025-ROLLOUT-01] 2025年国勢調査の確定値を既存の人口系ランキングと市区町村別へ展開する
-
-タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run validate:config --workspace packages/data-configs] [起票:2026-09-30] [レーン:ランキング]
-
-- **背景**: 令和7年国勢調査の人口等基本集計が 2026-09-29 に e-Stat へ公開された (人口等基本集計 DB 671 表)。既存の総人口・人口増減率・65歳以上人口割合・15歳未満人口割合は社会・人口統計体系 (SSDS) 固定で、人口推計の 2024 年止まり。2026-09-30 に「5年間の人口増減率」(`census-population-change-rate-5y`、`0004065882` / cdTab `2025_35`) だけを都道府県別の新しい指標として追加した。
-- **2026-09-30 の実測 (公開 xlsx、API キー不要)**:
-  - SSDS の国勢調査年は国勢調査の**原数値** (年齢不詳を除いて算出) と一致し、不詳補完値とは一致しない。65歳以上割合 2020 は秋田 SSDS 37.6 = 原数値 37.60 (不詳補完 37.49)、東京 22.8 = 22.82 (22.74)。15歳未満割合 東京 11.5 = 11.50 (11.17)。総人口 2020 も国勢調査と一致 (東京 14,047,594)。
-  - 2025 の原数値: 65歳以上割合は全国 29.54・秋田 40.11。報道の 29.4% は不詳補完値 (29.39)。
-  - 表 `0004065882` の API 地域コード: 市区町村 3,736 = 現行 1,913 (市区町村マスタと完全一致) + 旧町村 1,823 (マスタとの重複 0)。既存の cities.json 39 指標・816,460 行にマスタ外コードは 0 行。
-  - 試算 (現行市区町村 1,888、政令市の区を含む): 高齢化率 50% 以上は 114 (記事 `half-population-elderly-municipalities` の 2020 年は 60)。5 年で 10% 以上減は 485 (記事 `municipality-population-decline-tiers` の 2015→2020 は 246。区の扱いなど数え方の一致は未確認)。最大は珠洲市 -34.6%、高齢化率最大は南牧村 68.9% (報道と一致)。
-- **2026-09-30 ローカル実装済み (未 push)**: `page-data-batch.ts` の市区町村を現行マスタのコードに限定 (`isIngestableCityCode`)。`MetricConfig.supplementalSources` を追加し、指定年は補完表の値を採る (主出典に同じ年があれば捨てて `[supplement-overlap]` を警告。推計値で国勢調査を上書きしないため)。レシピ `ops.supplements` で derived になる。適用: 総人口 (`0004065881` cdTab 2025_01 cdCat01 0)、65歳以上・15歳未満・15〜64歳割合 (`0004065933` cdTab 2025_42 cdCat01 0 cdCat02 0 cdCat03 3/1/2)、`census-population-change-rate-5y` に city。cat01〜03 の軸番号は e-Stat の並び順からの推定で、CI の dry run で行数・重複を確認する。
-- **次 (実行順・外部変更は各段で承認)**: ① develop へ push ② `data-refresh` を dry_run で 5 指標 → 県 47 行・市区町村 1,913 行・重複 0 を確認 → 本実行 ③ 取り込み後に 4 指標の `seoTitle`/`seoDescription` を 2025 年値へ更新 (`audit-seo-meta-facts.ts` が R2 と照合するので取り込み前は変えない) ④ `/publish-ranking` ⑤ ブログ: 市区町村の 2 記事を 2025 年へ更新 (URL 維持)、5 年間の人口増減の新記事 1 本。
-- **完了条件**: 上記の指標が本番で 200 を返し、2025 年の値を配信している。
-- **停止条件**: 同じ意味の指標を複製して公開しない。旧町村コードを含んだ cities.json を配信しない。原数値と不詳補完値を同じ系列で混ぜない。
-
 ### [ADMIN-MCP-STATUS-01] 管理画面で、この PC が使う MCP の一覧と接続状況を見られるようにする
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-09-28] [レーン:基盤]
 
@@ -2533,74 +2518,26 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 
 ## 🟢 低 — 時期未定・条件付き (trigger は本文に)
 
-### [DOMAIN-CONFIG-01] 領域の正本 domains.json と整合検査を土木ノートと同じ形で作る
-タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run check-domains] [起票:2026-09-27] [レーン:基盤]
-
-- **trigger (2026-09-27)**: 計測とデータ品質を優先するため、計測レーンが「維持」に移ってから着手する。
-- **方向性**: 戦略以外の管理の枠組みを土木ノートの領域モデル (doboku-note リポジトリの戦略文書「14_領域モデル」と、機械可読の正本 domains.json)に揃える。まず stats47 の領域一覧を機械可読の正本として作る。後続の `DOMAIN-LANES-MIGRATE-01` (レーン → 領域)・`DOMAIN-ADMIN-NAV-01` (サイドメニュー)・`DOMAIN-AGENT-01` (エージェント・文書) はすべてこのファイルを読む。
-- **揃えるもの / 揃えないもの**: 揃えるのは 5 役割の並び (決める → 売る → 集める → つくる → 支える)・ファイルの形 (`domains` / `documents` / `navKinds` / `navRules`)・画面の種類 5 つ (品揃え・一覧 inventory / 成果・計測 results / 要対応・状態 actions / 方針 policy / 素材 assets)・検査の内容。揃えないのは各領域の中身と、戦略 (構え・KPI・重点)。構えと KPI は収益化戦略のレーン表 (移行後は領域表) に残し、domains.json に持たせない。
-- **stats47 の領域 (案、着手時にオーナー確認)**:
-
-  | 役割 | 領域 id / 名前 | 管理するもの | 今のレーン |
-  |---|---|---|---|
-  | 決める | strategy / 戦略 | 方針と KPI ツリー・週次/月次の判断・競合・事業計画 | — |
-  | 決める | plan / 計画 | 月間・週間・バックログ・効果測定中の施策 | — |
-  | 売る | product / 商品 | 行政資料・note・Kindle・ココナラ・売上・商品品質 | 行政資料、note・商品販売 |
-  | 売る | affiliate / アフィリエイト | 掲載先・成果・提携と案件 | 収益導線 |
-  | 集める | site / サイト | 記事・SEO・サイト内の動線・計測 (GSC・GA4・PSI)・OGP | SEO・ブログ、UI・回遊 |
-  | 集める | sns / SNS | 投稿・各 SNS・動画・バズ地図 | SNS |
-  | つくる | data / データ | ランキング・テーマ・Geo・データ品質・出典と参考文献 | ランキング、テーマ・Geo、データ品質 |
-  | 支える | ops / 管理 | 文書・品質検査・エージェントとスキル・自動化・CI・計測の仕組み | 基盤、計測 |
-
-- **手順**:
-  1. `.claude/config/domains.json` を上の表で作る。`nav` はこの段階では空配列でよい (`DOMAIN-ADMIN-NAV-01` で埋める)。`navKinds`・`navRules` は土木ノートの文言を stats47 の実情 (チャネル = X・Instagram・note・Kindle・ココナラ) に合わせて写す。
-  2. `.claude/scripts/lib/check-domains.cjs` を作り、`package.json` に `check-domains` を足す。検査: id/label の重複なし・role が 5 語のどれか・`nav` の kind が navKinds にある・`nav` の URL の page.tsx が `apps/admin/app` に実在。検査した件数を出し、0 件は検査不成立として exit 2 にする (全 PASS が何も見ていない状態と区別する)。
-  3. 発火する側・しない側を固定するテストを `.claude/scripts/lib/__tests__/check-domains.test.cjs` に置き、`docs:check` か PR の品質チェックから呼ぶ。
-  4. `docs/01_技術設計/06_自動化インベントリ.md` に検査を登録する。
-- **停止条件**: 領域の数・名前がオーナーの意図と違う場合は表だけ直す。バックログのタグ・レーン表・サイドメニューはこのカードで変えない。
-- **完了条件**: `npm run check-domains` が exit 0 で 8 領域を検査したと出力し、テストが通る。
-
 ### [DOMAIN-LANES-MIGRATE-01] 戦略レーンを領域へ組み替え、構え・KPI・バックログのタグ・月次重点を領域単位にする
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:node --test .claude/scripts/lib/__tests__/strategy-lanes.test.cjs && npm run docs:check] [起票:2026-09-27] [レーン:基盤]
 
-- **前提 / trigger (2026-09-27 改訂)**: `DOMAIN-CONFIG-01` が完了していること。計測とデータ品質を優先するため、着手は計測レーンが終了条件 (週次収益の内訳が 4 週続けて取得できる) を満たして「維持」に移った後の月の境目とする。
+- **前提 / trigger (2026-09-27 改訂)**: 領域の正本 `.claude/config/domains.json` と `npm run check-domains` は 2026-09-30 に作成済み (管理画面の左メニューもこのファイルから描画)。計測とデータ品質を優先するため、着手は計測レーンが終了条件 (週次収益の内訳が 4 週続けて取得できる) を満たして「維持」に移った後の月の境目とする。
 - **方向性**: レーン・役割・カテゴリタグの 3 軸を並べず、土木ノートと同じく「領域」1 軸で優先順位と持ち主を決める。構え (攻める・維持・凍結)・今の狙い・構えを変える条件・KPI 列は領域の単位に移す。バックログ先頭のカテゴリタグ (`[収益化]` 等) は作業の種類として残す。
 - **計測レーンの扱い**: 土木ノートの規則「計測・記録・改善は独立した領域にしない (持ち主が曖昧になる)」に従い、計測の数字は各領域の KPI で見て、計測の仕組み (収集・認証・鮮度監視) は「管理」が持つ。2026-09-27 時点で計測レーンの KPI にぶら下がる施策は 0 件だった (`.claude/state/metrics/measurement-cycle/LATEST.md`)。計測は今月の重点なので、切り替えは月の境目 (10/1 の `/monthly-plan`) で行い、月途中で重点を崩さない。
 - **手順**:
   1. `docs/00_プロジェクト管理/02_収益化戦略.md` §5 のレーン表を領域表 (`順 | 領域 | 構え | 今の狙い | 構えを変える条件 | 改善Metric | KPI`) に書き換える。領域名は domains.json の label と一致させ、構えは統合したレーンのうち強い方を引き継ぐ (例: データ = データ品質の「攻める」)。変えた理由を表の前に 1 文で書く。
   2. `.claude/scripts/lib/strategy-lanes.cjs` を領域表と domains.json の一致まで検査するよう改め、DG073〜080 の文言を領域に直す。
-  3. バックログの `[レーン:X]` 129 件を `[領域:X]` へ機械置換する (対応は DOMAIN-CONFIG-01 の表の「今のレーン」列)。`backlog-lib.cjs` の `TAG_KEYS`・`todo-standards.md` §3 の語彙表・自動起票する生成元 (`.claude/scripts/gsc/lib/coverage-backlog.mjs`・`.claude/scripts/data/lib/year-coverage-backlog.mjs`・`.claude/scripts/page-quality/lib/ui-findings.ts`) を同じ差分で直す。土木ノートのタグ名 `[領域:]` に合わせる。
+  3. バックログの `[レーン:X]` 129 件を `[領域:X]` へ機械置換する (対応: 行政資料・note・商品販売 → 商品 / 収益導線 → アフィリエイト / SEO・ブログ・UI・回遊 → サイト / SNS・X → SNS / ランキング・テーマ・Geo・データ品質 → データ / 基盤・計測 → 管理)。`backlog-lib.cjs` の `TAG_KEYS`・`todo-standards.md` §3 の語彙表・自動起票する生成元 (`.claude/scripts/gsc/lib/coverage-backlog.mjs`・`.claude/scripts/data/lib/year-coverage-backlog.mjs`・`.claude/scripts/page-quality/lib/ui-findings.ts`) を同じ差分で直す。土木ノートのタグ名 `[領域:]` に合わせる。
   4. `monthly.md` の `focus_lanes` を `focus_domains` にし、`/monthly-plan`・`/weekly-plan`・`todo-curator`・`docs-vs-issues.md` の記述を直す。`node .claude/scripts/lib/sync-codex-mirror.cjs` でミラーを同期する。
   5. 管理画面 `/strategy/lanes` の表示を領域に直す (URL は変えない)。
   6. `node .claude/scripts/metrics/build-measurement-cycle.mjs --week <週>` で KPI ツリー節の★ (重点の KPI) が領域から引けることを確認する。
 - **停止条件**: 自動起票の生成元が他にも見つかり置換漏れが出る場合は、`[レーン:]` を読む互換を一時的に残して別カードにする。月の境目を過ぎても着手できない場合は、計測の重点を崩さないよう翌月の境目まで延ばす。
 - **完了条件**: バックログに `[レーン:` が 0 件で、検証コマンドが exit 0。月次計画の重点が領域で書かれている。
 
-### [DOMAIN-ADMIN-NAV-01] 管理画面のサイドメニューを領域ごとに domains.json から描き、画面の種類の規則を入れる
-タグ: [UI・UX] [種類:改善] [実行:対話] [検証:npm run check-domains && npm run type-check --workspace admin] [起票:2026-09-27] [レーン:基盤]
-
-- **trigger**: `DOMAIN-CONFIG-01` と `DOMAIN-LANES-MIGRATE-01` が完了してから着手する。
-- **方向性**: サイドメニュー (`apps/admin/lib/nav-registry.ts` の `NAV_GROUPS` 直書き。2026-09-30 に純モジュールへ移し、表示は公式 Sidebar の `components/console-nav*.tsx`。項目のページ実在は `tests/unit/nav-registry.test.ts` が検査) を、domains.json の各領域の `nav` から描く形に変える。サイドメニューには「その領域で人が判断するときに開く画面」だけを置き、各項目に画面の種類 (inventory / results / actions / policy / assets) を 1 つ付ける。規則は土木ノートの領域モデル (doboku-note リポジトリの戦略文書「14_領域モデル」と、機械可読の正本 domains.json)と同じにする。
-- **先行実施済み (2026-09-27)**: アフィリエイト領域は土木ノートと同じ 3 画面 (`/affiliate` 成果・`/affiliate/placements` 掲載先・`/affiliate/programs` 提携・案件) に分け、サイドメニューに「アフィリエイト」グループを置いた。旧 `/ads` は転送。残りの領域はこの形に揃える。
-- **先行実施済み (2026-09-30)**: 「商品」(販売状態 `/product/status`・チャネル別・売上 `/revenue`) と「SNS」(投稿状況 `/sns`・チャネル別・バズ地図) のグループを置いた。**チャネルは最上位に並べず、折りたたみの「チャネル別」の枝に入れる (オーナー判断)**。枝の中身は `apps/admin/lib/channel-registry.ts` (note・ココナラ・Kindle / X・Instagram) から作る。domains.json へ移すときもこの枝を残し、チャネル一覧は registry を読む (domains.json に写さない)。
-- **今の画面で直すところ (2026-09-27 時点)**:
-  - 「制作・投稿」の下に X・Instagram・note・Kindle が直接並ぶ → チャネルは枝にせず、「SNS」領域の投稿状況・「商品」領域の販売状態の画面内タブにする。
-  - 「戦略・収益化」に戦略と恒久停止した「収益 (AdSense)」が残る → 戦略は「戦略」とし、AdSense は停止の記録を見る画面として「管理 > すべて」側へ寄せる。
-  - GSC・GA4・PSI の置き場が品質・運用と dashboard に分かれている → 集客の数字は「サイト」領域の成果・計測に置く。
-  - 「TODO」グループ (実行バックログ・今週・今月・効果測定・改善) → 「計画」領域にする。
-  - 画像資産・SVG カタログ → 素材 (assets) として、使う領域の画面からリンクするか「管理 > すべて」に置く。
-- **手順**:
-  1. 現行の全画面を列挙し、領域・画面の種類・サイドメニューに残すかを 1 行ずつ決めた表を作ってオーナーの合意を取る。
-  2. domains.json の `nav` を埋め、`console-nav.tsx` がそれを読んで描くようにする (直書きをやめる)。
-  3. チャネルを枝からタブへ移す。既存の URL は変えない (ブックマーク・手順書の参照を壊さない)。新しい画面が要るときは `/<領域 id>/…` に作る。
-  4. `npm run admin` で全項目が実在ページへ遷移し、サイドメニューの点灯が 1 項目だけになることを確認する。
-- **停止条件**: URL の変更・ページの削除が必要になったら止めて別カードにする。
-- **完了条件**: サイドメニューのグループが領域になり、検証コマンドが exit 0、全リンクが 200 で開く。
-
 ### [DOMAIN-AGENT-01] エージェント・スキル・文書に領域を付け、持ち主の空白と重複を検査する
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run check-domains] [起票:2026-09-27] [レーン:基盤]
 
-- **trigger**: `DOMAIN-CONFIG-01` が完了してから着手する (`DOMAIN-LANES-MIGRATE-01` とは並行可)。
+- **trigger**: 領域の正本 `.claude/config/domains.json` は 2026-09-30 に作成済み。着手可 (`DOMAIN-LANES-MIGRATE-01` とは並行可)。
 - **方向性**: 土木ノートと同じく、`.claude/agents/*.md` と `.claude/skills/**/SKILL.md` の frontmatter に `domain: <領域 id>` を 1 つ付け、`docs/**` は domains.json の `documents` (パス接頭辞) でちょうど 1 つの領域に解決させる。ファイルの置き場は動かさない。
 - **手順**:
   1. エージェント全件 (40 体超) に領域案を付けた一覧を作る。複数領域にまたがるものは主担当を 1 つ選ぶ。領域ごとの担当が 0 体の空白と、同じ責務の重複を一覧の末尾に書く。

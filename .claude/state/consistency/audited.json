@@ -1,8 +1,9 @@
 {
-  "hash": "68b1aaaad5dbbb768bb43cb7fd88f8d3e5d80a12c82bed3711b1940c74f0b805",
-  "audited_at": "2026-09-29T23:21:16",
+  "hash": "5bbd0dddebe9cfc245a607ee51e2977bc93c1873f2994dc7520326f22df700d7",
+  "audited_at": "2026-09-30T06:46:39",
   "files": [
-    ".agents/skills/sns/react-to-news/SKILL.md",
-    ".claude/skills/sns/react-to-news/SKILL.md"
+    ".agents/skills/management/admin-console/SKILL.md",
+    ".claude/scripts/lib/__tests__/check-domains.test.cjs",
+    ".claude/scripts/lib/check-domains.cjs"
   ]
 }

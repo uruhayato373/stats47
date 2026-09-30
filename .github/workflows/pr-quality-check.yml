@@ -119,6 +119,7 @@ jobs:
         # 新しいchecker自身のmutation testと、週次監査がIssue更新後に失敗を伝播する契約も固定する。
         run: |
           node --test \
+            .claude/scripts/lib/__tests__/check-domains.test.cjs \
             .claude/scripts/lib/__tests__/check-money-unit-audit.test.cjs \
             .claude/scripts/lib/__tests__/check-quality-exceptions.test.cjs \
             .claude/scripts/lib/__tests__/check-quality-warning-ratchet.test.cjs \

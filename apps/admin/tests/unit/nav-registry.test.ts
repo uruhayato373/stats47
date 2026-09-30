@@ -6,6 +6,8 @@ import { describe, expect, it } from "vitest";
 import { CHANNELS, channelsOf } from "@/lib/channel-registry";
 import { NAV_GROUPS, isBranch, isNavItemActive, navHrefs } from "@/lib/nav-registry";
 
+import domainsConfig from "../../../../.claude/config/domains.json";
+
 const APP_DIR = path.resolve(__dirname, "../../app");
 const params = (query = "") => new URLSearchParams(query);
 const hrefs = navHrefs(NAV_GROUPS);
@@ -17,6 +19,12 @@ describe("nav-registry (左メニューの SSOT)", () => {
       const page = path.join(APP_DIR, route === "/" ? "" : route, "page.tsx");
       expect(existsSync(page), `${href} → ${page}`).toBe(true);
     }
+  });
+
+  it("グループは領域の正本 domains.json の並び (決める → 売る → 集める → つくる → 支える) で、ホームだけが先頭に付く", () => {
+    expect(NAV_GROUPS.map((g) => g.title)).toEqual([null, ...domainsConfig.domains.map((d) => d.label)]);
+    expect(NAV_GROUPS[1]?.title).toBe("戦略");
+    expect(NAV_GROUPS.at(-1)?.title).toBe("管理");
   });
 
   it("href が重複しない (同じ画面が二重に出ない)", () => {
