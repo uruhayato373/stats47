@@ -81,6 +81,11 @@ export interface BusinessPlanMetric {
   readonly targetM3?: number;
   readonly targetM6?: number;
   readonly targetM12?: number;
+  /**
+   * 週次 KPI 表に出す目標。期日 (ISO 週) と根拠の計算式を必ず持つ (evidence-based-judgment 状況4)。
+   * 根拠が揃わない KPI は持たない。M3/M6/M12 は起点が定義されていないので KPI 表には使わない。
+   */
+  readonly kpiTarget?: { readonly value: number; readonly dueWeek: string; readonly basis: string };
   readonly unit: string;
   readonly note: string;
 }

@@ -367,6 +367,6 @@ test('scheduled collection is skipped only when today (JST) was already collecte
   assert.match(check.run, /9 \* 3600000/);
   assert.equal(workflow.jobs.gate.permissions, undefined);
   const wrapper = readFileSync('scripts/scheduled/measurement-session-refresh.sh', 'utf8');
-  assert.match(wrapper, /refresh-session\.mjs a8 moshimo kdp --publish \|\| REFRESH_RC=/);
+  assert.match(wrapper, /refresh-session\.mjs a8 moshimo kdp note --publish \|\| REFRESH_RC=/);
   assert.match(wrapper, /gh workflow run authenticated-measurement\.yml --ref develop/);
 });

@@ -1,6 +1,6 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { measurementContext, markMeasurementAuthenticated } from './browser-session.mjs';
-import { parseCoconalaAnalytics, validateCoconalaCoverage } from './report-parsers.mjs';
+import { parseCoconalaAnalytics, parseCoconalaRevenue, validateCoconalaCoverage } from './report-parsers.mjs';
 import { readBookshelfState } from '../kdp/lib/kdp-flow.mjs';
 import { assertAccount as assertCoconala } from '../coconala/lib/coconala-session.mjs';
 import { collectKdpReport, openKdpReports } from './kdp-reports.mjs';
@@ -16,6 +16,7 @@ try {
   let coverage = null;
   let sales = null;
   let monthlyRoyalties = null;
+  let revenue = null;
   if (source === 'kdp') {
     const account = JSON.parse(readFileSync('.local/kdp-account.local.json', 'utf8'));
     if (!/^B0[A-Z0-9]{8}$/.test(account.knownAsin ?? '')) throw new Error('account_mismatch: knownAsin missing');
@@ -58,7 +59,11 @@ try {
       records.push({ id, serviceId, sourceUrl, ...parseCoconalaAnalytics(await page.locator('body').innerText(), { service: true }) });
     }
     coverage = validateCoconalaCoverage(analytics, records);
+    await page.goto('https://coconala.com/mypage/revenue', { waitUntil: 'domcontentloaded', timeout: 45000 });
+    if (/login|auth/.test(page.url())) throw new Error('auth_required');
+    await page.getByText('売上実績', { exact: true }).waitFor({ timeout: 30000 });
+    revenue = { ...parseCoconalaRevenue(await page.locator('body').innerText()), observedDate: new Date().toLocaleDateString('sv-SE', { timeZone: 'Asia/Tokyo' }) };
   } else throw new Error('unknown_source');
   writeFileSync(output, JSON.stringify({ generatedAt: new Date().toISOString(), source, accountVerified: true, records,
-    analytics, coverage, monthlyRoyalties, sales: sales ?? (analytics ? { status: 'collected', scope: 'account-total' } : { status: 'not_collected' }) }, null, 2));
+    analytics, coverage, monthlyRoyalties, revenue, sales: sales ?? (analytics ? { status: 'collected', scope: 'account-total' } : { status: 'not_collected' }) }, null, 2));
 } finally { await context.close(); }

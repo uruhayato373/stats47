@@ -27,7 +27,12 @@
       "cadence": "weekly",
       "measurementStatus": "measured",
       "unit": "クリック/28日",
-      "source": ".claude/state/metrics/gsc/history.csv"
+      "source": ".claude/state/metrics/gsc/history.csv",
+      "target": {
+        "value": 20000,
+        "dueWeek": "2026-W52",
+        "basis": "gsc/history.csv の W31→W39 の増分 (3,424→9,947) ÷ 8 週 = 週 +815。W39 の 9,947 + 13 週 × 815 ≈ 20,500 を切り下げ (2026-09-30 設定)"
+      }
     },
     {
       "id": "site-circulation-rate",

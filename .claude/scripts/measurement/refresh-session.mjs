@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * refresh-session.mjs — A8 / もしも / KDP の専用プロファイルのログインを Mac 上で保ち、CI へ渡す。
+ * refresh-session.mjs — A8 / もしも / KDP / note の専用プロファイルのログインを Mac 上で保ち、CI へ渡す。
  *
  * 流れ: 専用プロファイルで管理画面を開く → 切れていれば OS の資格情報ストア (Mac = キーチェーン、Windows = 資格情報
  * マネージャー。`credential-store.mjs`) の ID/PW で 1 回だけログインする → state を保存 → `bootstrap-session.mjs SOURCE --publish` で CI の Secret を更新する。
@@ -20,6 +20,7 @@
  *   security add-generic-password -s stats47-measurement-a8 -a <ログインID> -w
  *   security add-generic-password -s stats47-measurement-moshimo -a <ログインID> -w
  *   security add-generic-password -s stats47-measurement-kdp -a <Amazon のメールアドレス> -w
+ *   security add-generic-password -s stats47-measurement-note -a <note のメールアドレス> -w
  *
  * KDP (2026-09-27 オーナー承認で追加): Amazon は「メール → 次へ → パスワード」の 2 段階画面で、本棚と
  * Reports (kdpreports.amazon.co.jp) の認証が別。本棚 → 既知 ASIN で口座照合 → Reports の順に通し、
@@ -52,6 +53,19 @@ export const LOGIN = {
     password: '#login-form input[name=password]',
     submit: '#login-form input[name=login]',
     loggedIn: (url) => /af\.moshimo\.com\/af\/shop\//.test(url) && !/\/login|signin/i.test(url),
+  },
+  // note (2026-09-30): ログイン自体は長期セッションで保たれる。売上 API はパスワードの再確認を通した
+  // セッションでだけ答え、再確認は約 30 分で切れるので、CI の収集を起動する直前に毎回ここで通す。
+  // 再確認画面はパスワード欄だけ (ID 欄が無い) なので user は存在しないセレクタにして入力を飛ばす。
+  // ログイン自体が切れていたら (パスワードとメールの両方を求められる) human_required で止まる。
+  note: {
+    loginUrl: 'https://note.com/dashboard/salesmanage',
+    checkUrl: 'https://note.com/dashboard/salesmanage',
+    user: 'input[name=__stats47_no_user_field__]',
+    password: 'input[type=password]',
+    submit: 'button:has-text("確認して続ける")',
+    loggedIn: (url) => /note\.com\/dashboard\/salesmanage/.test(url),
+    challengeUrl: /note\.com\/login/,
   },
   kdp: {
     loginUrl: 'https://kdp.amazon.co.jp/ja_JP/bookshelf',
@@ -225,7 +239,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const args = process.argv.slice(2);
   const sources = args.filter((a) => !a.startsWith('--'));
   if (!sources.length || args.includes('--help')) {
-    console.log('Usage: refresh-session.mjs SOURCE... [--publish] [--headed] [--wait-human]  (SOURCE: a8 | moshimo | kdp)');
+    console.log('Usage: refresh-session.mjs SOURCE... [--publish] [--headed] [--wait-human]  (SOURCE: a8 | moshimo | kdp | note)');
     process.exit(0);
   }
   const root = fileURLToPath(new URL('../../../', import.meta.url));

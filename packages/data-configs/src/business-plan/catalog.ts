@@ -529,6 +529,11 @@ export const BUSINESS_PLAN_METRICS: readonly BusinessPlanMetric[] = [
     source: '.claude/state/metrics/gsc/history.csv',
     measurementStatus: 'measured',
     unit: 'クリック/28日',
+    kpiTarget: {
+      value: 20000,
+      dueWeek: '2026-W52',
+      basis: 'gsc/history.csv の W31→W39 の増分 (3,424→9,947) ÷ 8 週 = 週 +815。W39 の 9,947 + 13 週 × 815 ≈ 20,500 を切り下げ (2026-09-30 設定)',
+    },
     note: '集客の駆動KPI。rolling28d の隣接週差は重複期間なので WoW と呼ばず、4週前 (非重複) と比べる。',
   },
   {
@@ -540,7 +545,7 @@ export const BUSINESS_PLAN_METRICS: readonly BusinessPlanMetric[] = [
     source: 'GA4 internal-transitions.csv (referrer 集計)',
     measurementStatus: 'measured',
     unit: '%',
-    note: '流入を広告・商品のある面へ運ぶ率。週次の代表値は分母=ブログPV、分子=blog→ranking の page_view (referrer 集計)。ranking 末尾 CTA 等の他の導線施策もこの KPI にぶら下げる。',
+    note: '目標値は未設定: 同じ定義の週次履歴が 2 週 (W38-W39) しかなく根拠にならない。8 週そろう 2026-W45 に置く。流入を広告・商品のある面へ運ぶ率。週次の代表値は分母=ブログPV、分子=blog→ranking の page_view (referrer 集計)。ranking 末尾 CTA 等の他の導線施策もこの KPI にぶら下げる。',
   },
   {
     id: 'affiliate-yield',
@@ -612,6 +617,7 @@ export function buildKpiTree(metrics: readonly BusinessPlanMetric[]) {
       measurementStatus: metric.measurementStatus,
       unit: metric.unit,
       source: metric.source,
+      ...(metric.kpiTarget ? { target: metric.kpiTarget } : {}),
     }))
     .sort((a, b) => order[a.tier] - order[b.tier]);
 }

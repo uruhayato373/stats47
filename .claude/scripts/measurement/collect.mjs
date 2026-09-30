@@ -121,6 +121,13 @@ try {
       missingRows: snapshot.coverage?.missingFromDashboard?.length ?? null, totalsMatched: snapshot.coverage?.totalsMatched === true,
       paginationComplete: snapshot.coverage?.paginationComplete === true };
     result.inventoryAvailable = noteInventoryAvailable(snapshot, cover);
+    // 売上は閲覧数と別の API。再確認切れで読めなくても閲覧数の収集は失敗にしない (値は作らない)。
+    try {
+      await command('.claude/scripts/measurement/note-sales.mjs', [join(work, 'sales.json')], 120000);
+      const sales = JSON.parse(readFileSync(join(work, 'sales.json'), 'utf8'));
+      result.quality.revenue = sales.status === 'pass' ? sales.revenue : null;
+      result.quality.revenueStatus = sales.status === 'pass' ? 'pass' : sales.code;
+    } catch { result.quality.revenueStatus = 'collection_failed'; }
     const gap = acceptedNoteGap(snapshot, cover);
     if (gap) result.knownIncomplete = gap;
     else if (snapshot.status !== 'pass' || cover.status !== 'pass') {
@@ -138,13 +145,25 @@ try {
   } else {
     await command('.claude/scripts/measurement/marketplace-status.mjs', [name, join(work, 'status.json')], 900000);
     capture(`.local/authenticated-measurement/${name}-${runId}/status.json`);
+    // 週次の実売 (revenue-history.json) の入力。summarize.mjs が quality.revenue を日次の履歴へ足す。
+    const status = JSON.parse(readFileSync(join(work, 'status.json'), 'utf8'));
+    if (name === 'coconala' && status.revenue) {
+      result.quality = { revenue: { date: status.revenue.observedDate, cumulativeYen: status.revenue.cumulativeYen, monthToDateYen: status.revenue.monthToDateYen } };
+    }
     if (name === 'kdp') {
       capture(`.local/authenticated-measurement/${name}-${runId}/status.xlsx`);
       const monthlyPath = `.local/authenticated-measurement/${name}-${runId}/status.monthly.xlsx`;
       capture(monthlyPath);
       const monthly = JSON.parse(readFileSync(join(work, 'status.json'), 'utf8')).monthlyRoyalties;
       if (monthly?.finality !== 'finalized-monthly-royalty' || !monthly.coverage?.complete) throw new Error('report_incomplete: monthly_missing');
-      result.quality = { monthlyPeriod: monthly.period.month, monthlyRows: monthly.coverage.includedRows, monthlyComplete: true };
+      const daily = status.sales;
+      const jpy = (daily?.records ?? []).filter(r => r.kind === 'estimated-ebook-royalty');
+      const dailyRevenue = daily?.coverage?.complete === true && daily.period?.start === daily.period?.end
+        && jpy.every(r => r.currency === 'JPY')
+        ? { date: daily.period.end, royaltyYen: jpy.reduce((sum, r) => sum + (r.amount ?? 0), 0),
+          paidOrders: daily.records.filter(r => r.kind === 'processed-orders').reduce((sum, r) => sum + (r.paid ?? 0), 0) }
+        : null;
+      result.quality = { monthlyPeriod: monthly.period.month, monthlyRows: monthly.coverage.includedRows, monthlyComplete: true, revenue: dailyRevenue };
       if (!local) await writeVault(kdpMonthlyVaultKey(monthly.period.month), {
         schemaVersion: 1, source: 'kdp', observedAt: now, report: monthly, workbook: files[monthlyPath],
       });
