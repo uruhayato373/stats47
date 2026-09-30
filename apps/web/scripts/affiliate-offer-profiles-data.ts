@@ -1200,9 +1200,9 @@ export const AFFILIATE_OFFER_PROFILES: AffiliateOfferProfile[] = [
   },
   {
     "programRef": "a8:s00000022743001",
-    "vertical": "housing",
+    "vertical": "labor",
     "allowedVerticals": [
-      "housing"
+      "labor"
     ],
     "lane": "unknown",
     "actionType": "unknown",
@@ -1336,9 +1336,9 @@ export const AFFILIATE_OFFER_PROFILES: AffiliateOfferProfile[] = [
   },
   {
     "programRef": "a8:s00000023383001",
-    "vertical": "housing",
+    "vertical": "labor",
     "allowedVerticals": [
-      "housing"
+      "labor"
     ],
     "lane": "unknown",
     "actionType": "unknown",
