@@ -3,10 +3,14 @@
 投稿済み全件。`posted_at` 降順。
 スクリプトで自動生成 — 手編集しない (`sns-posts-store.cjs` が `insert()`/`updateById()` のたびに再生成)。
 
-**579 件** (最終更新: 2026-09-29)
+**583 件** (最終更新: 2026-09-30)
 
 | 日付 | 媒体 | コンテンツ | キャプション | URL |
 |---|---|---|---|---|
+| 2026-09-30 | 📸 Instagram | correlation-carousel/dual-income-household-ratio--floor-area-per-dwelling-owner |  | [🔗](https://www.instagram.com/p/Dd6wPczFILm/) |
+| 2026-09-30 | 📸 Instagram | ranking-quiz-reel/squid-consumption-expenditure |  | [🔗](https://www.instagram.com/reel/Dd6AASLFICC/) |
+| 2026-09-30 | 🧵 Threads | area/area-07000-profile | 福島を1位・47位だけで語らない。 県木はケヤキ、県鳥はキビタキ。人口・産業・暮らしの県データブックへ。 続きは👇 h… | [🔗](https://www.threads.com/@stats47jp/post/Dd56QkxDD0i) |
+| 2026-09-30 | 🧵 Threads | ranking/taro-consumption-expenditure | 芋煮の季節。さといもにいちばんお金を使うのは山形です。  1世帯あたり2,104円で、最下位の北海道（252円）の8.3… | [🔗](https://www.threads.com/@stats47jp/post/Dd5L4-7CrCc) |
 | 2026-09-29 | 📸 Instagram | area-carousel/47000 |  | [🔗](https://www.instagram.com/p/Dd4MHf-Fe7i/) |
 | 2026-09-29 | 🧵 Threads | area/area-06000-profile | 山形のデータブックを公開中。 オシドリと小野川豆もやし、ウコギを入口に、人口・産業・消費の数字を県別に深掘り。 続きは�… | [🔗](https://www.threads.com/@stats47jp/post/Dd3TIFHkasu) |
 | 2026-09-29 | 🧵 Threads | ranking/wooden-housing-ratio | なぜ秋田県の木造住宅率は88.8%とこれほど高いのか?  2位青森県88.1%、3位山形県83.3%と東北勢が上位を占め… | [🔗](https://www.threads.com/@stats47jp/post/Dd2lVBxkiLb) |
