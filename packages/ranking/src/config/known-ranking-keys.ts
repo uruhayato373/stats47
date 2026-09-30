@@ -15,8 +15,8 @@
  * 更新タイミング: ranking item 追加/有効化 + CI generate-ranking-items 実行後。
  *                 必ず git commit してからデプロイ。
  *
- * 最終生成日: 2026-09-24
- * 件数: 2408
+ * 最終生成日: 2026-09-30
+ * 件数: 2411
  */
 export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "abandoned-cultivated-land-area",
@@ -246,6 +246,9 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "carrot-consumption-quantity",
   "carryover-income-prefecture",
   "castella-consumption-expenditure",
+  "census-household-change-rate-5y",
+  "census-population-change-5y",
+  "census-population-change-rate-5y",
   "certified-childcare-center-count-per-100k-0-5",
   "certified-childcare-center-education-cost-per-student",
   "charcoal-production",
