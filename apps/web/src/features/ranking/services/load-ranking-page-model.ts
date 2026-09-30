@@ -12,6 +12,7 @@ import { isOk } from "@stats47/types";
 import { getInitialMapTileUrls } from "@stats47/visualization/leaflet/constants";
 
 import { resolveContentVertical } from "@/features/ads/constants/affiliate-category";
+import { applyRankingAffiliatePolicy } from "@/features/ads/constants/ranking-affiliate-policy";
 import { resolveAffiliateBannersForContent } from "@/features/ads/server";
 import { findCategoryByKey } from "@/features/category/server";
 import {
@@ -123,11 +124,11 @@ export async function loadRankingPageModel(rankingKey: string) {
   //   食品品目 (ランキング流入の 38%) に金融広告が出ていた。出典調査 (item.json の surveyIds
   //   焼き込み) で家計調査 → furusato、学校保健統計 → 広告なし、のように主題単位で決める。
   //   サイドバー (AffiliateAdSlot) も同じ解決結果 `affiliateVertical` を使う。
-  const affiliateInput = {
+  const affiliateInput = applyRankingAffiliatePolicy(rankingKey, {
     surveyIds: rankingItem.surveyIds ?? (rankingItem.surveyId ? [rankingItem.surveyId] : []),
     tagKeys: (rankingItem.tags ?? []).map((tag) => tag.tagKey),
     categoryKey: rankingItem.categoryKey,
-  };
+  });
   const affiliateVertical = resolveContentVertical(affiliateInput).vertical;
   const nativeBannersPromise = (async () => {
     try {
