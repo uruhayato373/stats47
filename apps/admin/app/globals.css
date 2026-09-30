@@ -54,6 +54,16 @@
   --color-card-foreground: hsl(var(--card-foreground));
   --color-card-outline: var(--card-outline);
 
+  /* shadcn/ui 公式 Sidebar のトークン。管理画面のカード面 (console-card) をサイドバーの面にする */
+  --color-sidebar: rgb(var(--console-card));
+  --color-sidebar-foreground: rgb(var(--console-fg));
+  --color-sidebar-primary: hsl(var(--primary));
+  --color-sidebar-primary-foreground: hsl(var(--primary-foreground));
+  --color-sidebar-accent: rgb(var(--console-accent) / 0.15);
+  --color-sidebar-accent-foreground: rgb(var(--console-accent));
+  --color-sidebar-border: rgb(var(--console-border));
+  --color-sidebar-ring: hsl(var(--ring));
+
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);

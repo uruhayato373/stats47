@@ -1,6 +1,9 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
+import { Cell, DataTable, Row, StatusBadge, type Tone } from "@/components/admin-ui";
+import { Card as UiCard, CardContent } from "@/components/ui/card";
+
 import {
   todoBoard,
   type ImprovementRow,
@@ -116,15 +119,10 @@ function Facet({
   );
 }
 
+// このページの tone (accent / muted を含む) を StatusBadge の tone へ寄せる
+const BADGE_TONE: Record<"bad" | "warn" | "info" | "accent" | "muted", Tone> = { bad: "bad", warn: "warn", info: "info", accent: "info", muted: "neutral" };
 function Badge({ tone, children }: { tone: "bad" | "warn" | "info" | "accent" | "muted"; children: React.ReactNode }) {
-  const cls = {
-    bad: "border-console-bad/50 text-console-bad",
-    warn: "border-console-warn/50 text-console-warn",
-    info: "border-console-info/50 text-console-info",
-    accent: "border-console-accent/50 text-console-accent",
-    muted: "border-console-border text-console-muted",
-  }[tone];
-  return <span className={`rounded border px-1.5 py-0.5 text-[11px] ${cls}`}>{children}</span>;
+  return <StatusBadge tone={BADGE_TONE[tone]}>{children}</StatusBadge>;
 }
 
 function getExecutorStatus(executor: string | null) {
@@ -135,11 +133,12 @@ function getExecutorStatus(executor: string | null) {
   return null;
 }
 
-function Card({ c, today }: { c: TodoCard; today: string }) {
+function TodoCardItem({ c, today }: { c: TodoCard; today: string }) {
   const overdue = c.due !== null && c.due < today;
   const executorStatus = getExecutorStatus(c.executor);
   return (
-    <article className="rounded-md border border-console-border bg-console-card p-3">
+    <UiCard className="gap-0 py-3">
+      <CardContent className="px-3">
       <a
         href={editorHref(c.abs, c.line)}
         className="text-sm font-medium text-console-fg hover:text-console-accent hover:underline"
@@ -169,7 +168,8 @@ function Card({ c, today }: { c: TodoCard; today: string }) {
           </pre>
         </details>
       ) : null}
-    </article>
+      </CardContent>
+    </UiCard>
   );
 }
 
@@ -182,48 +182,31 @@ function ImprovementsTable({ rows, abs, today }: { rows: ImprovementRow[]; abs: 
           <h3 className="text-[13px] font-medium text-console-muted">
             {g} ({rows.filter((r) => r.tierLabel === g).length})
           </h3>
-          <div className="overflow-x-auto rounded-md border border-console-border bg-console-card">
-            <table className="w-full text-[13px]">
-              <thead className="border-b border-console-border text-left text-[11px] text-console-muted">
-                <tr>
-                  {["ID", "タイトル", "Status", "Due", "Owner", "Metric"].map((h) => (
-                    <th key={h} className="px-2 py-1.5 font-medium">
-                      {h}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {rows
-                  .filter((r) => r.tierLabel === g)
-                  .map((r) => (
-                    <tr key={r.id} className="border-b border-console-border/50 align-top">
-                      <td className="whitespace-nowrap px-2 py-1.5">
-                        <a
-                          href={editorHref(abs, r.line)}
-                          className="font-mono text-[11px] text-console-accent hover:underline"
-                        >
-                          {r.id}
-                        </a>
-                      </td>
-                      <td className="px-2 py-1.5 text-console-fg">{r.title}</td>
-                      <td className="whitespace-nowrap px-2 py-1.5">
-                        <Badge tone={r.status === "in-progress" ? "info" : "muted"}>{r.status}</Badge>
-                      </td>
-                      <td
-                        className={`whitespace-nowrap px-2 py-1.5 ${
-                          r.due && r.due < today ? "text-console-bad" : "text-console-muted"
-                        }`}
-                      >
-                        {r.due}
-                      </td>
-                      <td className="whitespace-nowrap px-2 py-1.5 text-console-muted">{r.owner}</td>
-                      <td className="whitespace-nowrap px-2 py-1.5 text-console-muted">{r.metric}</td>
-                    </tr>
-                  ))}
-              </tbody>
-            </table>
-          </div>
+          <DataTable columns={["ID", "タイトル", "Status", "Due", "Owner", "Metric"]}>
+            {rows
+              .filter((r) => r.tierLabel === g)
+              .map((r) => (
+                <Row key={r.id}>
+                  <Cell nowrap>
+                    <a
+                      href={editorHref(abs, r.line)}
+                      className="font-mono text-[11px] text-console-accent hover:underline"
+                    >
+                      {r.id}
+                    </a>
+                  </Cell>
+                  <Cell>{r.title}</Cell>
+                  <Cell nowrap>
+                    <Badge tone={r.status === "in-progress" ? "info" : "muted"}>{r.status}</Badge>
+                  </Cell>
+                  <Cell nowrap className={r.due && r.due < today ? "text-console-bad" : "text-muted-foreground"}>
+                    {r.due}
+                  </Cell>
+                  <Cell nowrap muted>{r.owner}</Cell>
+                  <Cell nowrap muted>{r.metric}</Cell>
+                </Row>
+              ))}
+          </DataTable>
         </div>
       ))}
     </div>
@@ -283,7 +266,7 @@ export default async function TodoPage({ searchParams }: { searchParams: Promise
       <header className="space-y-1">
         <h1 className="text-2xl font-bold text-console-fg">TODO ボード</h1>
         <p className="text-sm text-console-muted">
-          真実源: <code className="rounded bg-console-card px-1">.claude/todo/</code> (構文の正典:
+          真実源: <code className="rounded bg-muted px-1">.claude/todo/</code> (構文の正典:
           todo-standards.md・doboku-note と統一) — 読み取り専用。編集はタイトルのリンクからエディタで開く。
         </p>
       </header>
@@ -341,7 +324,7 @@ export default async function TodoPage({ searchParams }: { searchParams: Promise
                     {items
                       .filter((c) => tierKey(c) === g.key)
                       .map((c) => (
-                        <Card key={c.path + c.line} c={c} today={today} />
+                        <TodoCardItem key={c.path + c.line} c={c} today={today} />
                       ))}
                   </div>
                 </section>

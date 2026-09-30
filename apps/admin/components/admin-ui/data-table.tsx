@@ -32,7 +32,7 @@ export const Row = TableRow;
 export function Cell({ nowrap, muted, className, ...props }: ComponentProps<typeof TableCell> & { nowrap?: boolean; muted?: boolean }) {
   return (
     <TableCell
-      className={cn("align-top whitespace-normal", nowrap && "whitespace-nowrap", muted && "text-muted-foreground", className)}
+      className={cn("py-1.5 align-top whitespace-normal", nowrap && "whitespace-nowrap", muted && "text-muted-foreground", className)}
       {...props}
     />
   );

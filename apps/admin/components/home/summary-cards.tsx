@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { apiGet, ApiError } from "@/lib/client/api-client";
 import { EmptyState, ErrorState, Loading } from "@/components/async-state";
 
+import { Card, CardContent } from "@/components/ui/card";
 type SummaryResponse = {
   sns: { total: number; posted: number; scheduled: number; draft: number };
   blogArticles: number;
@@ -15,10 +16,10 @@ type SummaryResponse = {
 
 function StatCard({ value, label }: { value: number; label: string }) {
   return (
-    <div className="rounded-lg border border-console-border bg-console-card p-3.5">
+    <Card className="gap-0 py-3.5"><CardContent className="px-3.5">
       <div className="text-xl font-bold text-console-fg">{value}</div>
       <div className="mt-1 text-[11px] text-console-muted">{label}</div>
-    </div>
+    </CardContent></Card>
   );
 }
 

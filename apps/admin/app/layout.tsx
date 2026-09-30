@@ -1,4 +1,6 @@
+import { CloseSidebarOnNavigate } from "@/components/close-sidebar-on-navigate";
 import { ConsoleSidebar } from "@/components/console-nav";
+import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 
 import type { Metadata } from "next";
 import Script from "next/script";
@@ -35,12 +37,20 @@ export default function RootLayout({
         </Script>
       </head>
       <body>
-        <div className="flex min-h-screen">
+        <SidebarProvider>
+          <CloseSidebarOnNavigate />
           <ConsoleSidebar />
-          <main className="min-w-0 flex-1 overflow-x-hidden wrap-break-word px-3 py-5 sm:px-6 sm:py-8">
-            {children}
-          </main>
-        </div>
+          <SidebarInset className="min-w-0">
+            {/* md 未満はサイドメニューが Sheet になるので、開くボタンを上部バーに置く */}
+            <div className="flex items-center gap-2 border-b px-3 py-2 md:hidden">
+              <SidebarTrigger />
+              <span className="text-sm font-semibold">stats47 管理コンソール</span>
+            </div>
+            <div className="min-w-0 flex-1 overflow-x-hidden wrap-break-word px-3 py-5 sm:px-6 sm:py-8">
+              {children}
+            </div>
+          </SidebarInset>
+        </SidebarProvider>
       </body>
     </html>
   );

@@ -11,6 +11,7 @@ import { apiGet, ApiError } from "@/lib/client/api-client";
 import { EmptyState, ErrorState, Loading } from "@/components/async-state";
 import type { SvgCatalogResponse, SvgChartDTO } from "@/lib/contracts/types";
 
+import { Card, CardContent } from "@/components/ui/card";
 const MAX_RENDERED = 300;
 
 /**
@@ -79,7 +80,7 @@ export function SvgCatalogView() {
 
   return (
     <div className="space-y-4">
-      <div className="flex flex-wrap items-center gap-3 rounded-lg border border-console-border bg-console-card p-3 text-sm">
+      <Card className="gap-0 py-3"><CardContent className="flex flex-wrap items-center gap-3 px-3 text-sm">
         <Input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
@@ -116,7 +117,7 @@ export function SvgCatalogView() {
         <span className="ml-auto text-[11px] text-console-muted">
           ※ SVG は img 参照 (dark 対応は静的ギャラリー build-svg-gallery-tabbed で確認)
         </span>
-      </div>
+      </CardContent></Card>
 
       {!loaded && !loading ? (
         <EmptyState message="「読込」を押すと R2 から SVG を取得・分類します" />

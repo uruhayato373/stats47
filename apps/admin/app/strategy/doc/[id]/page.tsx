@@ -2,7 +2,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { MarkdownArticle } from "@/components/markdown-article";
-import { Badge, PageHeading } from "@/components/ops/primitives";
+import { StatusBadge } from "@/components/admin-ui";
+import { PageHeading } from "@/components/ops/primitives";
 import { businessPlanDocument } from "@/lib/server/business-plan";
 
 export const dynamic = "force-dynamic";
@@ -20,7 +21,7 @@ export default async function StrategyDocumentPage({
     <div className="space-y-6">
       <PageHeading title={document.title} source={document.path}>
         <div className="flex flex-wrap items-center gap-2 pt-1">
-          <Badge>{document.status ?? "status不明"}</Badge>
+          <StatusBadge>{document.status ?? "status不明"}</StatusBadge>
           <span className="text-[11px] text-console-muted">
             owner: {document.owner} · updated: {document.updated ?? "不明"}
           </span>

@@ -1,4 +1,4 @@
-// shadcn/ui 公式（new-york-v4）の separator.tsx をそのまま使う。変えたのは cn の import 先 (@/lib/cn) だけ。
+// shadcn/ui 公式（new-york-v4）の separator.tsx をそのまま使う。変えたのは import 先（cn → @/lib/cn・registry の別名 → admin の alias）だけ。
 // 公式との差は check-shadcn-parity が止める（参照: .claude/config/shadcn-reference/separator.tsx・例外: .claude/config/shadcn-parity-allow.json）。
 "use client"
 

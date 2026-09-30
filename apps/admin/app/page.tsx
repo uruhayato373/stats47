@@ -1,5 +1,6 @@
 import { SummaryCards } from "@/components/home/summary-cards";
 
+import { LinkCard } from "@/components/admin-ui";
 const SECTIONS = [
   {
     href: "/content",
@@ -82,16 +83,12 @@ export default function HomePage() {
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         {SECTIONS.map((section) => (
-          <a
-            key={section.href}
-            href={section.href}
-            className="rounded-lg border border-console-border bg-console-card p-5 transition-colors hover:border-console-accent/60"
-          >
+          <LinkCard key={section.href} href={section.href}>
             <div className="text-base font-semibold text-console-fg">
               {section.title}
             </div>
             <p className="mt-2 text-sm text-console-muted">{section.desc}</p>
-          </a>
+          </LinkCard>
         ))}
       </div>
 

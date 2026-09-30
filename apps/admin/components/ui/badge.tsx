@@ -18,6 +18,8 @@ const badgeVariants = cva(
         // 公式に無い状態用 variant (check-shadcn-parity の例外に理由を登録)。色は console-good/warn (light/dark で AA 実測済み)
         success: "bg-console-good/10 text-console-good [a&]:hover:bg-console-good/20",
         warning: "bg-console-warn/10 text-console-warn [a&]:hover:bg-console-warn/20",
+        info: "bg-console-info/10 text-console-info [a&]:hover:bg-console-info/20",
+        danger: "bg-console-bad/10 text-console-bad [a&]:hover:bg-console-bad/20",
         outline:
           "border-border text-foreground [a&]:hover:bg-accent [a&]:hover:text-accent-foreground",
         ghost: "[a&]:hover:bg-accent [a&]:hover:text-accent-foreground",

@@ -5,3 +5,4 @@ export { PanelCard } from "./panel-card";
 export { StatusBadge, type Tone } from "./status-badge";
 export { Cell, DataTable, Row } from "./data-table";
 export { StatCard, type StatTone } from "./stat-card";
+export { LinkCard } from "./link-card";

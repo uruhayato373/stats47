@@ -11,9 +11,9 @@ export type Tone = "good" | "warn" | "bad" | "neutral" | "info";
 const VARIANT = {
   good: "success",
   warn: "warning",
-  bad: "destructive",
+  bad: "danger",
   neutral: "outline",
-  info: "secondary",
+  info: "info",
 } as const;
 
 export function StatusBadge({ tone = "neutral", title, children }: { tone?: Tone; title?: string; children: ReactNode }) {

@@ -39,6 +39,24 @@ function collectPageErrors(page: Page) {
   return errors;
 }
 
+/**
+ * 左メニュー (shadcn 公式 Sidebar)。デスクトップは常時表示、md 未満は Sheet なので開いてから使う。
+ * 画面を移ると Sheet は閉じる (CloseSidebarOnNavigate) ので、遷移のたびにこれを呼ぶ。
+ */
+async function sidebarOf(page: import("@playwright/test").Page) {
+  const sidebar = page.locator('[data-slot="sidebar"]:visible').first();
+  const isMobile = (page.viewportSize()?.width ?? 1280) < 768;
+  if (isMobile) {
+    // hydration 前のクリックは効かないので、開くまで押し直す
+    await expect(async () => {
+      if ((await sidebar.count()) === 0) await page.locator('[data-sidebar="trigger"]').first().click({ timeout: 2000 });
+      await expect(sidebar).toBeVisible({ timeout: 1500 });
+    }).toPass({ timeout: 20_000 });
+  }
+  await expect(sidebar).toBeVisible();
+  return sidebar;
+}
+
 test.describe("smoke: 管理画面の疎通", () => {
   for (const { path } of PAGES) {
     test(`${path} は 200 で表示され console error が無い`, async ({ page }) => {
@@ -71,36 +89,36 @@ test.describe("smoke: 管理画面の疎通", () => {
     await page.goto("/");
     await expect(page.getByRole("heading", { name: "管理コンソール" })).toBeVisible();
 
-    const nav = page.getByRole("complementary").getByRole("navigation");
+    // 左メニューは shadcn 公式の Sidebar。旧 aside/nav ではない (2026-09-30)
 
-    await nav.getByRole("link", { name: "コンテンツ運用", exact: true }).click();
+    await (await sidebarOf(page)).getByRole("link", { name: "コンテンツ運用", exact: true }).click();
     await expect(page).toHaveURL(/\/content$/);
 
-    await nav.getByRole("link", { name: "Kindle", exact: true }).click();
+    await (await sidebarOf(page)).getByRole("link", { name: "Kindle", exact: true }).click();
     await expect(page).toHaveURL(/\/content\/kindle$/);
 
-    await nav.getByRole("link", { name: "SNS", exact: true }).click();
+    await (await sidebarOf(page)).getByRole("link", { name: "SNS", exact: true }).click();
     await expect(page).toHaveURL(/\/sns$/);
 
-    await nav.getByRole("link", { name: "画像資産", exact: true }).click();
+    await (await sidebarOf(page)).getByRole("link", { name: "画像資産", exact: true }).click();
     await expect(page).toHaveURL(/\/assets$/);
 
-    await nav.getByRole("link", { name: "SVG カタログ", exact: true }).click();
+    await (await sidebarOf(page)).getByRole("link", { name: "SVG カタログ", exact: true }).click();
     await expect(page).toHaveURL(/\/svg$/);
 
-    await nav.getByRole("link", { name: "調査カタログ", exact: true }).click();
+    await (await sidebarOf(page)).getByRole("link", { name: "調査カタログ", exact: true }).click();
     await expect(page).toHaveURL(/\/research$/);
 
-    await nav.getByRole("link", { name: "プロジェクト現況", exact: true }).click();
+    await (await sidebarOf(page)).getByRole("link", { name: "プロジェクト現況", exact: true }).click();
     await expect(page).toHaveURL(/\/dashboard$/);
 
-    await nav.getByRole("link", { name: "ホーム", exact: true }).click();
+    await (await sidebarOf(page)).getByRole("link", { name: "ホーム", exact: true }).click();
     await expect(page).toHaveURL(/\/$/);
   });
 
   test("TODO は独立グループとして各台帳へ遷移できる", async ({ page }) => {
     await page.goto("/");
-    const sidebar = page.getByRole("complementary");
+    let sidebar = await sidebarOf(page);
 
     await expect(sidebar.getByRole("button", { name: "TODO", exact: true })).toHaveCount(0);
     await expect(sidebar.getByText("TODO", { exact: true })).toBeVisible();
@@ -110,6 +128,7 @@ test.describe("smoke: 管理画面の疎通", () => {
     await sidebar.getByRole("link", { name: "今週の計画", exact: true }).click();
     await expect(page).toHaveURL(/\/todo\?f=weekly$/);
     await expect(page.getByRole("heading", { name: /計画 — 今週/ })).toBeVisible();
+    sidebar = await sidebarOf(page);
     await expect(sidebar.getByRole("link", { name: "今週の計画", exact: true })).toHaveAttribute(
       "aria-current",
       "page",

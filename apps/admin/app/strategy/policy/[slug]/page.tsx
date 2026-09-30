@@ -2,7 +2,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { MarkdownArticle } from "@/components/markdown-article";
-import { Badge, PageHeading } from "@/components/ops/primitives";
+import { StatusBadge } from "@/components/admin-ui";
+import { PageHeading } from "@/components/ops/primitives";
 import { sharedPolicyDocument } from "@/lib/server/shared-policy";
 
 export const dynamic = "force-dynamic";
@@ -27,7 +28,7 @@ export default async function SharedPolicyDocumentPage({
         source={`Obsidian vault ${document.sourcePath}（正本）`}
       >
         <div className="flex flex-wrap items-center gap-2 pt-1">
-          <Badge>v{document.version}</Badge>
+          <StatusBadge>v{document.version}</StatusBadge>
           <span className="text-[11px] text-console-muted">
             更新 {document.updated}
           </span>
@@ -42,7 +43,7 @@ export default async function SharedPolicyDocumentPage({
       <p className="text-sm text-console-muted">
         {document.summary}
         {" "}編集はObsidian vaultの正本だけで行い、
-        <code className="rounded bg-console-card px-1">npm run policy:sync</code>
+        <code className="rounded bg-muted px-1">npm run policy:sync</code>
         で配布する。stats47 固有の適用（対象読者・商品・KPI・章立て）はこのリポジトリ側が管理し、ここには書かない。
       </p>
       <MarkdownArticle>{document.body}</MarkdownArticle>

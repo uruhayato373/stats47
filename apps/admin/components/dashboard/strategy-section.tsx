@@ -1,3 +1,6 @@
+import { Cell, DataTable, Row } from "@/components/admin-ui";
+
+import { Card, CardContent } from "@/components/ui/card";
 type Wrapped<T> = T | { error: string };
 
 function hasError(v: unknown): v is { error: string } {
@@ -27,51 +30,29 @@ export function StrategySection({ strategy }: { strategy: Wrapped<StrategyData> 
       </div>
       <div className="mt-3 grid gap-3 sm:grid-cols-2">
         {/* min-w-0 + overflow-x-auto: grid item が nowrap セルで 390px を押し出さない */}
-        <div className="min-w-0 rounded-lg border border-console-border bg-console-card p-3.5">
+        <Card className="min-w-0 gap-0 py-3.5"><CardContent className="px-3.5">
           <h3 className="m-0 mb-2 text-[13px] font-semibold text-console-fg">ターゲティング判定 (STP §4)</h3>
-          <div className="overflow-x-auto">
-          <table className="w-full text-xs">
-            <thead>
-              <tr className="text-console-muted">
-                <th className="whitespace-nowrap text-left font-medium">セグメント</th>
-                <th className="whitespace-nowrap text-left font-medium">判定</th>
-                <th className="text-left font-medium">役割</th>
-              </tr>
-            </thead>
-            <tbody>
+          <DataTable columns={["セグメント", "判定", "役割"]}>
               {strategy.segments.map((x, i) => (
-                <tr key={i} className="border-t border-console-border/40">
-                  <td className="whitespace-nowrap py-1 pr-2">{x.seg}</td>
-                  <td className="whitespace-nowrap py-1 pr-2">{x.verdict}</td>
-                  <td className="py-1">{x.role}</td>
-                </tr>
+                <Row key={i}>
+                  <Cell nowrap>{x.seg}</Cell>
+                  <Cell nowrap>{x.verdict}</Cell>
+                  <Cell>{x.role}</Cell>
+                </Row>
               ))}
-            </tbody>
-          </table>
-          </div>
-        </div>
-        <div className="min-w-0 rounded-lg border border-console-border bg-console-card p-3.5">
+            </DataTable>
+        </CardContent></Card>
+        <Card className="min-w-0 gap-0 py-3.5"><CardContent className="px-3.5">
           <h3 className="m-0 mb-2 text-[13px] font-semibold text-console-fg">STP 提言の反映状況 (§6)</h3>
-          <div className="overflow-x-auto">
-          <table className="w-full text-xs">
-            <thead>
-              <tr className="text-console-muted">
-                <th className="text-left font-medium">#</th>
-                <th className="text-left font-medium">提言</th>
-                <th className="text-left font-medium">状況</th>
-              </tr>
-            </thead>
-            <tbody>
+          <DataTable columns={["#", "提言", "状況"]}>
               {strategy.teigen.map((x, i) => (
-                <tr key={i} className="border-t border-console-border/40">
-                  <td className="py-1 pr-2">{x.n}</td>
-                  <td className="py-1 pr-2">{x.title}</td>
-                  <td className="py-1">{x.state}</td>
-                </tr>
+                <Row key={i}>
+                  <Cell>{x.n}</Cell>
+                  <Cell>{x.title}</Cell>
+                  <Cell>{x.state}</Cell>
+                </Row>
               ))}
-            </tbody>
-          </table>
-          </div>
+            </DataTable>
           <div className="mt-2 text-[10px] text-console-muted">
             SSOT:{" "}
             {strategy.sources.map((s, i) => (
@@ -80,7 +61,7 @@ export function StrategySection({ strategy }: { strategy: Wrapped<StrategyData> 
               </code>
             ))}
           </div>
-        </div>
+        </CardContent></Card>
       </div>
     </div>
   );

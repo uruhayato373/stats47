@@ -2,10 +2,14 @@ import ReactMarkdown from "react-markdown";
 import remarkBreaks from "remark-breaks";
 import remarkGfm from "remark-gfm";
 
+import { Card, CardContent } from "@/components/ui/card";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+
 /** 文書ビューア共通のMarkdown表示 (strategy/doc と共通方針ページで共用)。 */
 export function MarkdownArticle({ children }: { children: string }) {
   return (
-    <article className="overflow-x-auto rounded-md border border-console-border bg-console-card p-5 text-[13px] leading-6 text-console-fg sm:p-7">
+    <Card className="gap-0 overflow-x-auto py-5 sm:py-7">
+      <CardContent className="px-5 text-[13px] leading-6 text-foreground sm:px-7">
       <ReactMarkdown
         remarkPlugins={[remarkGfm, remarkBreaks]}
         components={{
@@ -57,26 +61,19 @@ export function MarkdownArticle({ children }: { children: string }) {
               {children}
             </a>
           ),
-          table: ({ children }) => (
-            <table className="my-4 min-w-full border-collapse text-left text-[12px]">
-              {children}
-            </table>
-          ),
-          th: ({ children }) => (
-            <th className="border border-console-border bg-console-bg px-2 py-1.5 font-semibold">
-              {children}
-            </th>
-          ),
-          td: ({ children }) => (
-            <td className="border border-console-border px-2 py-1.5 align-top text-console-muted">
-              {children}
-            </td>
-          ),
+          // 表は shadcn の Table 部品で描く (生の table タグと手組みの罫線を使わない)
+          table: ({ children }) => <Table className="my-4 text-[12px]">{children}</Table>,
+          thead: ({ children }) => <TableHeader>{children}</TableHeader>,
+          tbody: ({ children }) => <TableBody>{children}</TableBody>,
+          tr: ({ children }) => <TableRow>{children}</TableRow>,
+          th: ({ children }) => <TableHead className="font-semibold">{children}</TableHead>,
+          td: ({ children }) => <TableCell className="align-top whitespace-normal text-muted-foreground">{children}</TableCell>,
           hr: () => <hr className="my-6 border-console-border" />,
         }}
       >
         {children}
       </ReactMarkdown>
-    </article>
+      </CardContent>
+    </Card>
   );
 }

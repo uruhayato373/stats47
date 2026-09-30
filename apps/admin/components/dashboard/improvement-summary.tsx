@@ -2,6 +2,7 @@ import Link from "next/link";
 
 import { isOverdue } from "./format";
 
+import { Card, CardContent } from "@/components/ui/card";
 export interface ImprovementRow {
   tier: string;
   id: string;
@@ -29,12 +30,12 @@ function hasError(v: unknown): v is { error: string } {
 
 function Stat({ label, value, alert = false }: { label: string; value: number; alert?: boolean }) {
   return (
-    <div className="rounded-md border border-console-border bg-console-card px-3 py-2.5">
+    <Card className="gap-0 py-2.5"><CardContent className="px-3">
       <div className="text-[11px] text-console-muted">{label}</div>
       <div className={`mt-1 text-xl font-semibold ${alert ? "text-console-bad" : "text-console-fg"}`}>
         {value}
       </div>
-    </div>
+    </CardContent></Card>
   );
 }
 

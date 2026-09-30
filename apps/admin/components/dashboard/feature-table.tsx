@@ -2,6 +2,9 @@
 
 import { useMemo, useState } from "react";
 
+import { Cell, DataTable, Row } from "@/components/admin-ui";
+import { NativeSelect } from "@/components/ui/native-select";
+
 export interface FeatureRow {
   section: string;
   id: string;
@@ -54,59 +57,35 @@ export function FeatureTable({ featureBacklog }: { featureBacklog: Wrapped<{ row
   return (
     <div>
       <div className="mb-2.5 flex flex-wrap items-center gap-2">
-        <select
-          value={section}
-          onChange={(e) => setSection(e.target.value)}
-          className="rounded-md border border-console-border bg-console-bg px-2 py-1 text-xs text-console-fg"
-        >
+        <NativeSelect value={section} onChange={(e) => setSection(e.target.value)} size="sm">
           <option value="">区分: 全て</option>
           {sections.map((s) => (
             <option key={s} value={s}>
               {s}
             </option>
           ))}
-        </select>
+        </NativeSelect>
         <span className="text-xs text-console-muted">
           {filtered.length} / {rows.length} 件
         </span>
       </div>
-      <div className="overflow-x-auto">
-        <table className="w-full text-xs">
-          <thead>
-            <tr className="text-console-muted">
-              <th className="whitespace-nowrap border-b border-console-border px-1.5 py-1 text-left font-medium">
-                区分
-              </th>
-              <th className="whitespace-nowrap border-b border-console-border px-1.5 py-1 text-left font-medium">
-                ID
-              </th>
-              <th className="border-b border-console-border px-1.5 py-1 text-left font-medium">タイトル</th>
-              <th className="border-b border-console-border px-1.5 py-1 text-left font-medium">種類</th>
-              <th className="border-b border-console-border px-1.5 py-1 text-left font-medium">実行</th>
-              <th className="whitespace-nowrap border-b border-console-border px-1.5 py-1 text-left font-medium">
-                created
-              </th>
-            </tr>
-          </thead>
-          <tbody>
+      <DataTable columns={["区分", "ID", "タイトル", "種類", "実行", "created"]}>
             {filtered.map((r, i) => (
               // 実データに id="" の行が複数あり空文字キーが重複するため index を合成する
-              <tr key={`${r.section}-${r.id}-${i}`} className="border-b border-console-border/40">
-                <td className="whitespace-nowrap px-1.5 py-1">{r.section}</td>
-                <td className="whitespace-nowrap px-1.5 py-1 font-semibold text-console-fg">{r.id}</td>
-                <td className="max-w-[320px] truncate px-1.5 py-1" title={r.title}>
+              <Row key={`${r.section}-${r.id}-${i}`}>
+                <Cell nowrap>{r.section}</Cell>
+                <Cell nowrap>{r.id}</Cell>
+                <Cell className="max-w-[320px] truncate" title={r.title}>
                   {r.title}
-                </td>
-                <td className="px-1.5 py-1">{r.tier}</td>
-                <td className="max-w-[240px] truncate px-1.5 py-1" title={r.status}>
+                </Cell>
+                <Cell>{r.tier}</Cell>
+                <Cell className="max-w-[240px] truncate" title={r.status}>
                   {r.status}
-                </td>
-                <td className="whitespace-nowrap px-1.5 py-1">{r.created}</td>
-              </tr>
+                </Cell>
+                <Cell nowrap>{r.created}</Cell>
+              </Row>
             ))}
-          </tbody>
-        </table>
-      </div>
+          </DataTable>
     </div>
   );
 }

@@ -13,7 +13,7 @@
  * ---------------------------------------------------------------------------
  */
 import { execFileSync } from 'node:child_process';
-import { mkdirSync, readdirSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -23,8 +23,10 @@ const OUT = join(ROOT, '.claude/config/shadcn-reference');
 const STYLE = 'new-york-v4';
 const TAG = '[sync-shadcn-reference]';
 
-const names = process.argv.slice(2).length
-  ? process.argv.slice(2)
+const INSTALL = process.argv.includes('--install');
+const args = process.argv.slice(2).filter((a) => a !== '--install');
+const names = args.length
+  ? args
   : readdirSync(UI_DIR).filter((f) => f.endsWith('.tsx')).map((f) => f.replace(/\.tsx$/, ''));
 mkdirSync(OUT, { recursive: true });
 
@@ -37,7 +39,19 @@ for (const name of names) {
     const item = JSON.parse(body);
     const file = item.files?.find((f) => f.path.endsWith(`/${name}.tsx`) || f.path === `${name}.tsx`);
     if (!file?.content) throw new Error('registry に ui/<name>.tsx が無い');
-    writeFileSync(join(OUT, `${name}.tsx`), file.content.replace(/\r\n/g, '\n'), 'utf8');
+    const content = file.content.replace(/\r\n/g, '\n');
+    writeFileSync(join(OUT, `${name}.tsx`), content, 'utf8');
+    if (INSTALL) {
+      // 公式の registry 内の別名を admin の alias へ直すだけ (クラスには触れない)。既存の部品は上書きしない
+      const target = join(UI_DIR, `${name}.tsx`);
+      if (existsSync(target)) throw new Error(`${name}.tsx は既にある (上書きしない。差分は check-shadcn-parity で見る)`);
+      const rewritten = content
+        .replace(/from "cn"/g, 'from "@/lib/cn"')
+        .replace(/@\/registry\/new-york-v4\/ui\//g, '@/components/ui/')
+        .replace(/@\/registry\/new-york-v4\/hooks\//g, '@/hooks/');
+      const header = `// shadcn/ui 公式（new-york-v4）の ${name}.tsx をそのまま使う。変えたのは import 先（cn → @/lib/cn・registry の別名 → admin の alias）だけ。\n// 公式との差は check-shadcn-parity が止める（参照: .claude/config/shadcn-reference/${name}.tsx・例外: .claude/config/shadcn-parity-allow.json）。\n`;
+      writeFileSync(target, header + rewritten, 'utf8');
+    }
     console.log(`${TAG} ${name} ← ${url}（${file.content.length} 字）`);
   } catch (e) {
     failed++;

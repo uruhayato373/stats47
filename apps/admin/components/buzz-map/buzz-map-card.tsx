@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { MediaPreview } from "@/components/media-preview";
 import type { BuzzMapEntryDTO } from "@/lib/contracts/types";
 
+import { Card } from "@/components/ui/card";
 const READINESS_BADGE: Record<string, string> = {
   live: "border-green-500/50 bg-green-500/10 text-console-good",
   ready: "border-green-500/50 bg-green-500/10 text-console-good",
@@ -56,7 +57,7 @@ export function BuzzMapCard({
     : null;
 
   return (
-    <div className="flex flex-col overflow-hidden rounded-lg border border-console-border bg-console-card">
+    <Card className="flex-col gap-0 overflow-hidden py-0">
       <div className="relative">
         <MediaPreview candidates={mediaCandidates} aspectClassName="aspect-16/10" />
         <Badge
@@ -175,6 +176,6 @@ export function BuzzMapCard({
           spec生成・render・R2反映・draft登録は担当agent/skillから実行します。
         </div>
       </div>
-    </div>
+    </Card>
   );
 }

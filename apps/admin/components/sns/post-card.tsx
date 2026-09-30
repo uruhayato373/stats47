@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { MediaPreview } from "@/components/media-preview";
 import type { PostDTO } from "@/lib/contracts/types";
 
+import { Card } from "@/components/ui/card";
 type ExtraItem = Record<string, unknown> & {
   id?: null;
   platform: string;
@@ -85,7 +86,7 @@ export function PostCard({ item }: { item: GalleryItem }) {
       : "-";
 
   return (
-    <article className="flex flex-col overflow-hidden rounded-lg border border-console-border bg-console-card">
+    <Card className="flex-col gap-0 overflow-hidden py-0">
       <div className="relative">
         <MediaPreview
           candidates={mediaCandidates}
@@ -184,6 +185,6 @@ export function PostCard({ item }: { item: GalleryItem }) {
           </p>
         ) : null}
       </div>
-    </article>
+    </Card>
   );
 }

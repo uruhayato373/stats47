@@ -2,7 +2,9 @@ import {
   ContentAuditPanel,
   StageBadge,
 } from "@/components/content/content-ui";
-import { ErrorNote, PageHeading, Section, Stat } from "@/components/ops/primitives";
+import { LinkCard, StatCard } from "@/components/admin-ui";
+import { Section } from "@/components/layout-primitives";
+import { ErrorNote, PageHeading } from "@/components/ops/primitives";
 import { contentOperations } from "@/lib/server/content-operations";
 import { hasError } from "@/lib/server/state-io";
 
@@ -34,11 +36,7 @@ export default function ContentPage() {
       <Section title="チャネル別の現在地">
         <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
           {data.channels.map((channel) => (
-            <a
-              key={channel.channel}
-              href={channel.href}
-              className="rounded-md border border-console-border bg-console-card p-4 transition-colors hover:border-console-accent/60"
-            >
+            <LinkCard key={channel.channel} href={channel.href}>
               <div className="flex items-baseline justify-between gap-2">
                 <h2 className="font-semibold text-console-fg">{channel.label}</h2>
                 <span className="font-mono text-xl font-bold text-console-fg">{channel.total}</span>
@@ -59,16 +57,14 @@ export default function ContentPage() {
                 <div>準備中 {channel.draft}</div>
               </dl>
               <p className="mt-3 break-all text-[10px] text-console-muted/80">{channel.source}</p>
-            </a>
+            </LinkCard>
           ))}
         </div>
       </Section>
 
       <Section title="参考文献からの展開">
-        <a
-          href="/content/references"
-          className="block rounded-md border border-console-border bg-console-card p-4 transition-colors hover:border-console-accent/60"
-        >
+        {/* Card の入れ子は禁止 (apps/web の design-system:check)。リンクカードは見出しだけ、数値タイルはその下に並べる */}
+        <LinkCard href="/content/references">
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div>
               <h2 className="font-semibold text-console-fg">参考文献 制作ポートフォリオ</h2>
@@ -80,14 +76,14 @@ export default function ContentPage() {
               {data.references.summary.productionUnits}単位
             </span>
           </div>
-          <div className="mt-4 grid gap-2 sm:grid-cols-5">
-            <Stat label="統合済み" value={data.references.summary.integratedSlots} tone="good" />
-            <Stat label="制作中" value={data.references.summary.draftSlots} tone="warn" />
-            <Stat label="制作可能" value={data.references.summary.readySlots} tone="info" />
-            <Stat label="制作停止" value={data.references.summary.blockedSlots} tone="bad" />
-            <Stat label="公開不可の根拠候補" value={data.references.summary.blockedEvidence} tone="warn" />
-          </div>
-        </a>
+        </LinkCard>
+        <div className="grid gap-2 sm:grid-cols-5">
+            <StatCard label="統合済み" value={data.references.summary.integratedSlots} tone="good" />
+            <StatCard label="制作中" value={data.references.summary.draftSlots} tone="warn" />
+            <StatCard label="制作可能" value={data.references.summary.readySlots} tone="info" />
+            <StatCard label="制作停止" value={data.references.summary.blockedSlots} tone="bad" />
+            <StatCard label="公開不可の根拠候補" value={data.references.summary.blockedEvidence} tone="warn" />
+        </div>
       </Section>
 
       <Section title="判断待ち" count={data.decisions.filter((x) => x.status === "pending").length}>
