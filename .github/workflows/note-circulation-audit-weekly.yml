@@ -58,8 +58,10 @@ jobs:
           [ "${PIPESTATUS[0]}" -eq 0 ] || STATUS=1
           npm run note:images:test 2>&1 | tee /tmp/note-image-assets-tests.log
           [ "${PIPESTATUS[0]}" -eq 0 ] || STATUS=1
-          node .claude/scripts/note/audit-note-image-assets.mjs --json --verify-r2 > /tmp/note-image-assets.json 2>/tmp/note-image-assets.err
-          [ "$?" -eq 0 ] || { STATUS=1; cat /tmp/note-image-assets.err; }
+          if ! node .claude/scripts/note/audit-note-image-assets.mjs --json --verify-r2 > /tmp/note-image-assets.json 2>/tmp/note-image-assets.err; then
+            STATUS=1
+            cat /tmp/note-image-assets.err
+          fi
           npm run note:covers:audit 2>&1 | tee /tmp/note-covers.log
           [ "${PIPESTATUS[0]}" -eq 0 ] || STATUS=1
           npm run note:circulation:audit 2>&1 | tee /tmp/note-circulation.log
