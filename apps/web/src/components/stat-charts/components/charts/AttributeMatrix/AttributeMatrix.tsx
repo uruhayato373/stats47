@@ -40,8 +40,13 @@ export const AttributeMatrixDashboard = async ({
       errorMessage = response.error;
     } else {
       // Build matrix from response data
+      // 分類コードごとに最新年の値を採る (年の並び順に依存しない)
       const dataByCode = new Map<string, number>();
+      const yearByCode = new Map<string, string>();
       for (const item of response.data) {
+        const year = item.yearCode ?? '';
+        if (year < (yearByCode.get(item.metricKey) ?? '')) continue;
+        yearByCode.set(item.metricKey, year);
         dataByCode.set(item.metricKey, item.value ?? 0);
       }
 

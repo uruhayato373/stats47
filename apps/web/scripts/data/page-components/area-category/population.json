@@ -263,8 +263,8 @@
     "title": "合計特殊出生率",
     "componentProps": {
       "estatParams": {
-        "statsDataId": "0000010201",
-        "cdCat01": "#A05203"
+        "statsDataId": "0000010101",
+        "cdCat01": "A4103"
       }
     },
     "sourceName": null,
@@ -326,16 +326,6 @@
           "code": "A1701",
           "label": "韓国・朝鮮",
           "color": "#3b82f6"
-        },
-        {
-          "code": "A1706",
-          "label": "フィリピン",
-          "color": "#8b5cf6"
-        },
-        {
-          "code": "A1707",
-          "label": "ブラジル",
-          "color": "#22c55e"
         },
         {
           "code": "A1703",
@@ -504,23 +494,7 @@
         },
         {
           "statsDataId": "0000010101",
-          "cdCat01": "A121701"
-        },
-        {
-          "statsDataId": "0000010101",
-          "cdCat01": "A121801"
-        },
-        {
-          "statsDataId": "0000010101",
-          "cdCat01": "A121901"
-        },
-        {
-          "statsDataId": "0000010101",
-          "cdCat01": "A122001"
-        },
-        {
-          "statsDataId": "0000010101",
-          "cdCat01": "A122101"
+          "cdCat01": "A141801"
         }
       ],
       "femaleParams": [
@@ -590,23 +564,7 @@
         },
         {
           "statsDataId": "0000010101",
-          "cdCat01": "A121702"
-        },
-        {
-          "statsDataId": "0000010101",
-          "cdCat01": "A121802"
-        },
-        {
-          "statsDataId": "0000010101",
-          "cdCat01": "A121902"
-        },
-        {
-          "statsDataId": "0000010101",
-          "cdCat01": "A122002"
-        },
-        {
-          "statsDataId": "0000010101",
-          "cdCat01": "A122102"
+          "cdCat01": "A141802"
         }
       ],
       "ageGroups": [
@@ -626,11 +584,7 @@
         "65～69歳",
         "70～74歳",
         "75～79歳",
-        "80～84歳",
-        "85～89歳",
-        "90～94歳",
-        "95～99歳",
-        "100歳以上"
+        "80歳以上"
       ]
     },
     "sourceName": null,

@@ -10,7 +10,7 @@ vi.mock('@stats47/stats-r2/readers', () => ({
   readStatsValues: (...args: unknown[]) => readStatsValues(...args),
 }));
 
-import { fetchEstatData, fetchEstatDataAllAreas } from '../fetchEstatData';
+import { fetchEstatData, fetchEstatDataAllAreas, fetchEstatDataWithCategories } from '../fetchEstatData';
 
 const params = { statsDataId: '0000010101', cdCat01: 'A1101' };
 
@@ -77,5 +77,12 @@ describe('legacy stat params — MetricConfigから正典R2へ解決', () => {
     });
     expect(result).toEqual({ error: 'データが見つかりません' });
     expect(readStatsValues).not.toHaveBeenCalled();
+  });
+});
+
+describe('fetchEstatDataWithCategories — 分類コードで突き合わせる部品向け', () => {
+  it('返す行の metricKey を要求した分類コードにする (attribute-matrix / sunburst / treemap が分類コードで引く)', async () => {
+    const result = await fetchEstatDataWithCategories('28000', '0000010101', ['A1101']);
+    expect('data' in result ? result.data.map((row) => row.metricKey) : []).toEqual(['A1101']);
   });
 });
