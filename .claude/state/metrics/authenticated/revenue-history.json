@@ -2,11 +2,18 @@
   "schemaVersion": 1,
   "entries": [
     {
+      "channel": "kdp",
+      "date": "2026-09-29",
+      "royaltyYen": 0,
+      "paidOrders": 0,
+      "observedAt": "2026-09-30T05:52:01.082Z"
+    },
+    {
       "channel": "coconala",
       "date": "2026-09-30",
       "cumulativeYen": 0,
       "monthToDateYen": 0,
-      "observedAt": "2026-09-30T05:32:13.204Z"
+      "observedAt": "2026-09-30T05:52:06.277Z"
     },
     {
       "channel": "note",
@@ -18,7 +25,7 @@
         "2026-06": 300,
         "2026-05": 300
       },
-      "observedAt": "2026-09-30T05:32:14.625Z"
+      "observedAt": "2026-09-30T05:52:00.330Z"
     }
   ]
 }
