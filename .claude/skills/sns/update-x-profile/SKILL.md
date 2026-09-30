@@ -1,5 +1,6 @@
 ---
 name: update-x-profile
+domain: sns
 description: X (Twitter) のプロフィール (bio・ヘッダー・名前) + 固定ポスト + ぶら下げリプライツリー (L1-L3) を一括更新する。Use when user says "Xプロフィール更新", "固定ポスト変更", "X bio 書き換え", "リプライツリー更新". 月次レビュー (`review`) も対応。
 disable-model-invocation: true
 argument-hint: "[review | bio | pin | replies | all] [--dry-run]"

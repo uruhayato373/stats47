@@ -1,5 +1,6 @@
 ---
 name: publish-ranking
+domain: data
 description: ランキングを isActive:true から本番で 200 を返す公開状態まで一気通貫で届ける。ranking-publisher agent を起動し、observations 投入→ranking-items→KNOWN/SITEMAP 同期→deploy→本番実測(Googlebot UA 200)を管理。Use when user says "ランキング公開", "publish-ranking", "metric を本番公開", "ranking を 200 にする"。
 primary_agent: ranking-publisher
 ---

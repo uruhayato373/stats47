@@ -1,5 +1,6 @@
 ---
 name: brushup-blog
+domain: site
 description: ブログ記事の品質是正スキル。--target queueで状態付き是正キュー(GSC×品質blocker統合スコア)のpending上位をarticle-writer→blog-critic PASS→publishで順次是正、--target article <slug>で1記事リライト、--target batchでユーザー指示時の一括リライト。Use when user says "ブログ品質を上げる", "記事を順次直す", "ブラッシュアップ", "一括リライト".
 argument-hint: --target queue [--next 5] | --target article <slug> [--focus CTR-reframe|エキスパート視点追加|最新データ更新|CTA強化] | --target batch [--count 5] [--dry-run] | --target priority (legacy)
 primary_agent: article-writer

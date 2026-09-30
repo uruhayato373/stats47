@@ -1,5 +1,6 @@
 ---
 name: create-skill
+domain: ops
 description: Claude Code スキルの作成・設計ガイド。新しいスキルを作成するとき、既存スキルを改善するときに自動参照する背景知識.
 user-invocable: false
 disable-model-invocation: true

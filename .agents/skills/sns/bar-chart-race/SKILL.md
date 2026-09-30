@@ -1,5 +1,6 @@
 ---
 name: bar-chart-race
+domain: sns
 description: Bar Chart Race (BCR) 動画を「データ生成 → レンダリング → キャプション」の一連で作る統合スキル。Use when user says "バーチャートレース", "bar chart race", "BCR作成", "BCR動画". Instagram リール / X 向けの動画フォーマット。--step で工程を指定。
 disable-model-invocation: true
 argument-hint: "<rankingKey> [--step generate|render|captions|all] [--platform instagram|x] [--dry-run]"

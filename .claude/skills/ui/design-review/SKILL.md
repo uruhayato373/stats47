@@ -1,5 +1,6 @@
 ---
 name: design-review
+domain: site
 description: melta-ui デザインシステム準拠レビューを実行する。Use when user says "デザインレビュー", "UI違反チェック", "デザインシステム確認". 7カテゴリ走査・重大度判定・修正提案.
 disable-model-invocation: true
 primary_agent: ui-reviewer

@@ -1,5 +1,6 @@
 ---
 name: blog-critic
+domain: site
 description: ブログ記事の expert / panel review 専任。記事は read-only、判定は review.md に書き出す。 修正は呼び元 agent (blog-editor / article-writer) が行う。
 model: sonnet
 ---

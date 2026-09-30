@@ -1,5 +1,6 @@
 ---
 name: generate-compare
+domain: sns
 description: 2 地域比較の data.json を生成し、キャプションまで作る (compare 統合スキル)。Use when user says "比較データ生成", "compare 生成", "2地域比較", "比較キャプション". --step data|captions|all。テーマプリセット対応.
 disable-model-invocation: true
 argument-hint: "<areaA> <areaB> [--step data|captions|all] [--theme fiscal|salary|spending|governor|debt]"

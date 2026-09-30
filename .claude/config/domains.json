@@ -1,0 +1,123 @@
+{
+  "version": 1,
+  "_doc": "backlog の DOMAIN-* カードで作成。形は土木ノート (doboku-note リポジトリ) の領域モデルに揃える",
+  "description": "事業の領域（ドメイン）の正本。管理画面のサイドメニューの並びはここから描く。文書は documents（パス接頭辞。長い一致が優先）で領域に解決する。構え・KPI・重点は持たない（収益化戦略の表が持つ）。",
+  "domains": [
+    {
+      "id": "strategy",
+      "label": "戦略",
+      "role": "決める",
+      "manages": "方針と KPI ツリー・週次/月次の判断・競合・事業計画",
+      "nav": [
+        { "label": "現況レビュー", "href": "/dashboard", "kind": "results" },
+        { "label": "領域と構え", "href": "/strategy/lanes", "kind": "actions" },
+        { "label": "方針・事業計画", "href": "/strategy", "kind": "policy" },
+        { "label": "共通方針", "href": "/strategy/policy", "kind": "policy" },
+        { "label": "調査カタログ", "href": "/research", "kind": "inventory" }
+      ]
+    },
+    {
+      "id": "plan",
+      "label": "計画",
+      "role": "決める",
+      "manages": "月間・週間・バックログ・効果測定中の施策",
+      "nav": [
+        { "label": "今月の計画", "href": "/todo?f=monthly", "kind": "actions" },
+        { "label": "今週の計画", "href": "/todo?f=weekly", "kind": "actions" },
+        { "label": "実行バックログ", "href": "/todo", "kind": "actions" },
+        { "label": "効果測定・改善", "href": "/todo?f=improvements", "kind": "results" }
+      ]
+    },
+    {
+      "id": "product",
+      "label": "商品",
+      "role": "売る",
+      "manages": "行政資料・note・Kindle・ココナラ・売上・商品品質",
+      "nav": [
+        { "label": "販売状態", "href": "/product/status", "kind": "actions" },
+        { "label": "チャネル別", "channels": "product", "kind": "actions" },
+        { "label": "売上", "href": "/revenue", "kind": "results" }
+      ]
+    },
+    {
+      "id": "affiliate",
+      "label": "アフィリエイト",
+      "role": "売る",
+      "manages": "掲載先・成果・提携と案件",
+      "nav": [
+        { "label": "掲載先", "href": "/affiliate/placements", "kind": "inventory" },
+        { "label": "成果", "href": "/affiliate", "kind": "results" },
+        { "label": "提携・案件", "href": "/affiliate/programs", "kind": "actions" }
+      ]
+    },
+    {
+      "id": "site",
+      "label": "サイト",
+      "role": "集める",
+      "manages": "記事・SEO・サイト内の動線・計測 (GSC・GA4・PSI)・OGP",
+      "nav": [
+        { "label": "ページ品質", "href": "/quality/page-audit", "kind": "results" }
+      ]
+    },
+    {
+      "id": "sns",
+      "label": "SNS",
+      "role": "集める",
+      "manages": "投稿・各 SNS・動画・バズ地図",
+      "nav": [
+        { "label": "投稿状況", "href": "/sns", "kind": "actions" },
+        { "label": "チャネル別", "channels": "sns", "kind": "actions" },
+        { "label": "バズ地図", "href": "/buzz-map", "kind": "inventory" }
+      ]
+    },
+    {
+      "id": "data",
+      "label": "データ",
+      "role": "つくる",
+      "manages": "ランキング・テーマ・Geo・データ品質・出典と参考文献",
+      "nav": [
+        { "label": "コンテンツ横断・監査", "href": "/content", "kind": "inventory" },
+        { "label": "参考文献管理", "href": "/content/references", "kind": "inventory" },
+        { "label": "カタログ監査", "href": "/quality/catalog-audit", "kind": "results" }
+      ]
+    },
+    {
+      "id": "ops",
+      "label": "管理",
+      "role": "支える",
+      "manages": "文書・品質検査・エージェントとスキル・自動化・CI・計測の仕組み",
+      "nav": [
+        { "label": "品質", "href": "/quality", "kind": "results" },
+        { "label": "CI・台帳", "href": "/ops", "kind": "actions" },
+        { "label": "画像資産", "href": "/assets", "kind": "assets" },
+        { "label": "SVG カタログ", "href": "/svg", "kind": "assets" }
+      ]
+    }
+  ],
+  "documents": {
+    "docs/00_プロジェクト管理/": "strategy",
+    "docs/01_技術設計/": "ops",
+    "docs/02_実装計画/": "ops",
+    "docs/10_SNS戦略/": "sns",
+    "docs/21_ブログ記事原稿/": "site",
+    "docs/30_note記事企画/": "product",
+    "docs/31_note記事原稿/": "product",
+    ".claude/todo/": "plan",
+    "docs/INDEX.md": "ops",
+    "docs/assets/": "ops"
+  },
+  "navKinds": {
+    "inventory": "品揃え・一覧（何があり何が足りないか）",
+    "results": "成果・計測（効いたか）",
+    "actions": "要対応・状態（人が手を打つもの）",
+    "policy": "方針（判断の基準）",
+    "assets": "素材（作業に使うもの）"
+  },
+  "navRules": [
+    "サイドメニューは各領域の判断に使う画面だけを置く（種類は navKinds）",
+    "並びは役割の順（決める → 売る → 集める → つくる → 支える）。domains の並びがそのままメニューの並びになる",
+    "チャネル（note・ココナラ・Kindle・X・Instagram）は最上位に並べず、商品・SNS の「チャネル別」の枝に入れる（中身は apps/admin/lib/channel-registry.ts から作る）",
+    "既存の URL は変えない。新しい画面は /<領域 id>/… に作る",
+    "横断する視点（計測・品質・動線）は独立した領域にせず、対象の領域に割り振る"
+  ]
+}

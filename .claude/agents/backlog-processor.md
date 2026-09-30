@@ -1,5 +1,6 @@
 ---
 name: backlog-processor
+domain: plan
 description: .claude/todo のバックログを分類して処理し、機械ゲートを通したものだけ行削除する agent。分類・軽作業を担い、重い実装は backlog-solver-hard へ委譲する。ledger への記録は CLI 経由に限る。
 model: sonnet
 ---

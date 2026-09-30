@@ -1,5 +1,6 @@
 ---
 name: expand-rankings
+domain: data
 description: |
   SSDS 由来のランキングを「計測ゲート付き需要ファースト」で継続拡充するループ。
   build-expansion-queue で候補をスコア → 次バッチ生成 (gen-ssds-configs) → 投入・公開を委譲 → GSC 計測 →

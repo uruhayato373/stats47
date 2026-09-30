@@ -1,5 +1,6 @@
 ---
 name: mark-sns-posted
+domain: sns
 description: 投稿済み SNS コンテンツを posts.json に記録しメディアファイルを削除する。Use when user says "投稿済みにする", "mark posted", "SNS投稿完了". テキスト/JSON はリモート R2 に保持.
 disable-model-invocation: true
 primary_agent: sns-metrics-sync

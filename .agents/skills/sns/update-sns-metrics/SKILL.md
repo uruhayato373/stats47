@@ -1,5 +1,6 @@
 ---
 name: update-sns-metrics
+domain: sns
 description: SNS メトリクスを `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv` に記録する。Use when user says "メトリクス更新", "SNS数値取得". Instagram は公式 API、X は browser-use CLI。YouTube pilot は Studio 手動値と GA4 UTM を記録する（API自動取得なし）。
 disable-model-invocation: true
 argument-hint: [--platform x|instagram|all]

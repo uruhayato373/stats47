@@ -1,5 +1,6 @@
 ---
 name: gis-curator
+domain: data
 description: >-
   KSJ GIS データセットのメタ SSOT (datasets.ts / registry.ts) 管理・dataset
   lifecycle・メタ整合専任。完全DBレスで git TS が SSOT、ローカル SQLite は使い捨て。

@@ -1,5 +1,6 @@
 ---
 name: image-prompt
+domain: site
 description: 外部 AI 画像生成（Midjourney 等）用のプロンプトを 43 種のテンプレートから生成する。Use when user says "OGP画像プロンプト", "note表紙プロンプト", "サムネプロンプト", "画像プロンプト". stats47 ブランド適合度フィルタ付き.
 disable-model-invocation: true
 primary_agent: image-prompt-curator

@@ -1,5 +1,6 @@
 ---
 name: page-data-batch
+domain: data
 description: TS-config (data-configs registry) を walk して e-Stat から data を fetch し R2 直行で書き込む。D1 を経由しない Phase 6 メインバッチ。Use when user says "page-data-batch", "metric データ更新", "R2 更新バッチ".
 argument-hint: "[--metric <key>] [--kind <entity>] [--since YYYY-MM] [--dry-run] [--concurrency N]"
 disable-model-invocation: true

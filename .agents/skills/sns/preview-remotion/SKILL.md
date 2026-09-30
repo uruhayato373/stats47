@@ -1,5 +1,6 @@
 ---
 name: preview-remotion
+domain: sns
 description: 実データで Remotion Studio のプレビュー用データファイルを上書きする。--type で対象を選ぶ（ranking / area-profile / bar-chart-race / comparison / correlation）。Use when user says "プレビュー", "Remotion プレビュー", "ランキングプレビュー", "BCR プレビュー", "比較プレビュー", "相関プレビュー", "地域プロファイルプレビュー". HMR で自動反映.
 disable-model-invocation: true
 primary_agent: sns-renderer

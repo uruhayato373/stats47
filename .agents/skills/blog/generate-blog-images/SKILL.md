@@ -1,5 +1,6 @@
 ---
 name: generate-blog-images
+domain: site
 description: >-
   stats47ブログの記事内容から1記事1枚の固有背景をCodex imagegenで生成し、OGPとサイト内サムネイルを用途別に決定的合成する。新規記事、一括移行、再生成、欠落修復で使う。
 metadata:

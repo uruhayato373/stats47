@@ -1,5 +1,6 @@
 ---
 name: a8-csv-auditor
+domain: affiliate
 description: A8 レポート収集物 (raw CSV / manifest.json / 正規化 JSON / rejects / SSOT 差分) のデータ品質だけを検査する Evaluator エージェント。行数・sha256・encoding・rejects・重複・前回 run 差分・サイト帰属 (doboku-note の数値が混入していないか)・programIdMap 未写像の取りこぼしを確認し PASS/WARN/FAIL を返す。外部サイトへアクセスせず、収集・正規化・EPC 判断・修正はしない (audit-only)。A8 CSV の品質確認をしたいときに使う。
 model: sonnet
 ---

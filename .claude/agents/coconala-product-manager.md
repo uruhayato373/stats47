@@ -1,5 +1,6 @@
 ---
 name: coconala-product-manager
+domain: product
 description: packages/product-factoryのココナラ商品カタログ、generator、catalog validation、READINESSを管理する。git TS/R2入力/.local生成物の境界を守り、商品設計・生成・出品前検査に使う。実出品はcoconala-operator、人間互換性検証はオーナーへ渡す。
 model: sonnet
 ---

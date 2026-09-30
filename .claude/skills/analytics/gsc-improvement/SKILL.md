@@ -1,5 +1,6 @@
 ---
 name: gsc-improvement
+domain: site
 description: Google Search Console の検索パフォーマンスとインデックス問題を .claude/todo/improvements.md で追跡し、週次 snapshot と施策の効果判定を記録する。Use when user says "GSC改善", "GSC記録", "インデックス改善", "SEO課題記録", or when analyzing gscエラー/ CSV files.
 primary_agent: gsc-analyst
 ---

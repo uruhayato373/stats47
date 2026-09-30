@@ -1,5 +1,6 @@
 ---
 name: prune-remotion-output
+domain: sns
 description: apps/remotion/out/ の「manifest 未記載 & 一定日数以上経過」のファイルを削除する。デフォルト dry-run + 7 日閾値。Use when user says "remotion out を掃除", "scratch を削除", "prune remotion".
 argument-hint: "[--age <days>] [--apply]"
 disable-model-invocation: true

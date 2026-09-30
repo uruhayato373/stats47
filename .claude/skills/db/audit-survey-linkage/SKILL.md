@@ -1,5 +1,6 @@
 ---
 name: audit-survey-linkage
+domain: data
 description: ranking ↔ 統計調査 (survey) 紐付けの決定的監査と是正。解決済/未分類/orphan survey/不正オーバーライドを実測し、辞書追記で未分類を回収する。Use when user says "調査紐付け監査", "survey 監査", "audit-survey-linkage", "調査の整理", "未分類ランキングの回収"。
 primary_agent: survey-curator
 ---

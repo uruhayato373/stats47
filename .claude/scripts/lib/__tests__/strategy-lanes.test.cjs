@@ -18,15 +18,15 @@ const {
 } = require('../strategy-lanes.cjs');
 
 /**
- * 戦略レーンの配線テスト。意図: 「攻める」レーンにだけ月次の重点を置け、週次 Must が重点から外れたら
- * 見える、凍結レーンの作業は計画に入らない。全 PASS が何も見ていないのと区別できるよう、
+ * 戦略領域の配線テスト。意図: 「攻める」領域にだけ月次の重点を置け、週次 Must が重点から外れたら
+ * 見える、凍結領域の作業は計画に入らない。全 PASS が何も見ていないのと区別できるよう、
  * 各規則について「発火する側」と「発火しない側」を両方固定する。
  */
 
 const STRATEGY = [
   '# 収益化戦略',
   '<!-- strategy-lanes:start -->',
-  '| 順 | レーン | 構え | 今の狙い | 構えを変える条件 | 改善Metric | KPI |',
+  '| 順 | 領域 | 構え | 今の狙い | 構えを変える条件 | 改善Metric | KPI |',
   '|---|---|---|---|---|---|---|',
   '| 1 | 計測 | 攻める | 計器を戻す | 4週取得 | ga4 | measurement-freshness |',
   '| 2 | 行政資料 | 攻める | pilot | Stop | — | — |',
@@ -39,18 +39,18 @@ const BACKLOG = [
   '## 🔴 高',
   '',
   '### [MEASURE-A-01] 計器を戻す',
-  'タグ: [インフラ・計測] [種類:改善] [実行:対話] [レーン:計測]',
+  'タグ: [インフラ・計測] [種類:改善] [実行:対話] [領域:計測]',
   '',
   '### [BLOG-B-01] ブログを足す',
-  'タグ: [コンテンツ品質] [種類:制作] [実行:対話] [レーン:SEO・ブログ]',
+  'タグ: [コンテンツ品質] [種類:制作] [実行:対話] [領域:SEO・ブログ]',
   '',
   '### [BLOG-FIX-01] ブログの壊れを直す',
-  'タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [レーン:SEO・ブログ]',
+  'タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [領域:SEO・ブログ]',
   '',
   '### [SNS-C-01] SNS を増やす',
-  'タグ: [SNS・マーケ] [種類:制作] [実行:対話] [レーン:SNS]',
+  'タグ: [SNS・マーケ] [種類:制作] [実行:対話] [領域:SNS]',
   '',
-  '### [NOLANE-01] レーン無し',
+  '### [NOLANE-01] 領域無し',
   'タグ: [UI・UX] [種類:改善] [実行:対話]',
 ].join('\n');
 
@@ -72,7 +72,7 @@ const KPI_NODES = [
 const monthly = (lanes) => ['---', 'title: 今月', lanes, '---', '', '# 本文'].join('\n');
 const weekly = (must, should = []) => ['## 今週のタスク', '', '### Must（3件）', '', ...must, '', '### Should', '', ...should, ''].join('\n');
 
-function run({ focus = 'focus_lanes: [計測]', must = ['- [ ] **計器** — `MEASURE-A-01`'], should = [], strategy = STRATEGY } = {}) {
+function run({ focus = 'focus_domains: [計測]', must = ['- [ ] **計器** — `MEASURE-A-01`'], should = [], strategy = STRATEGY } = {}) {
   return auditLaneAlignment({
     strategyText: strategy,
     backlogText: BACKLOG,
@@ -84,7 +84,7 @@ function run({ focus = 'focus_lanes: [計測]', must = ['- [ ] **計器** — `M
 }
 const codes = (r) => r.issues.map((i) => `${i.level}:${i.code}`);
 
-test('レーン表を順・構え・改善Metric込みで読む', () => {
+test('領域表を順・構え・改善Metric込みで読む', () => {
   const { lanes, errors } = parseLanes(STRATEGY);
   assert.deepStrictEqual(errors, []);
   assert.deepStrictEqual(lanes.map((l) => l.name), ['計測', '行政資料', 'SEO・ブログ', 'SNS']);
@@ -95,12 +95,12 @@ test('レーン表を順・構え・改善Metric込みで読む', () => {
 
 test('表の破損 (語彙外の構え・重複・マーカー欠落) は DG073', () => {
   assert.match(parseLanes(STRATEGY.replace('| 維持 |', '| 様子見 |')).errors[0], /構えが語彙外/);
-  assert.match(parseLanes(STRATEGY.replace('| SNS |', '| 計測 |')).errors.join(), /レーン名が重複/);
+  assert.match(parseLanes(STRATEGY.replace('| SNS |', '| 計測 |')).errors.join(), /領域名が重複/);
   assert.match(parseLanes('# 表なし').errors[0], /マーカー/);
   assert.ok(codes(run({ strategy: '# 表なし' })).includes('error:DG073'));
 });
 
-test('改善Metric は対応のある最後の語でレーンを引く', () => {
+test('改善Metric は対応のある最後の語で領域を引く', () => {
   const { lanes } = parseLanes(STRATEGY);
   assert.strictEqual(resolveImprovementLane('ga4', lanes), '計測');
   assert.strictEqual(resolveImprovementLane('ga4/note', lanes), 'SNS');
@@ -108,23 +108,23 @@ test('改善Metric は対応のある最後の語でレーンを引く', () => {
   assert.strictEqual(resolveImprovementLane('performance', lanes), null);
 });
 
-test('focus_lanes は inline と block の両形式を読み、無ければ null', () => {
-  assert.deepStrictEqual(parseFocusLanes(monthly('focus_lanes: [計測, 行政資料]')), ['計測', '行政資料']);
-  assert.deepStrictEqual(parseFocusLanes(monthly('focus_lanes:\n  - 計測\n  - "行政資料"')), ['計測', '行政資料']);
+test('focus_domains は inline と block の両形式を読み、無ければ null', () => {
+  assert.deepStrictEqual(parseFocusLanes(monthly('focus_domains: [計測, 行政資料]')), ['計測', '行政資料']);
+  assert.deepStrictEqual(parseFocusLanes(monthly('focus_domains:\n  - 計測\n  - "行政資料"')), ['計測', '行政資料']);
   assert.strictEqual(parseFocusLanes(monthly('focus_themes: [a]')), null);
 });
 
-test('整合している計画は DG074〜078 を出さない (DG075 のレーン未設定集計だけ)', () => {
+test('整合している計画は DG074〜078 を出さない (DG075 の領域未設定集計だけ)', () => {
   assert.deepStrictEqual(codes(run()), ['warning:DG075']);
 });
 
-test('重点に「維持」「凍結」や未知のレーンを置くと DG076 error', () => {
-  assert.ok(codes(run({ focus: 'focus_lanes: [SEO・ブログ]' })).includes('error:DG076'));
-  assert.ok(codes(run({ focus: 'focus_lanes: [存在しない]' })).includes('error:DG076'));
+test('重点に「維持」「凍結」や未知の領域を置くと DG076 error', () => {
+  assert.ok(codes(run({ focus: 'focus_domains: [SEO・ブログ]' })).includes('error:DG076'));
+  assert.ok(codes(run({ focus: 'focus_domains: [存在しない]' })).includes('error:DG076'));
   assert.ok(codes(run({ focus: 'focus_themes: [x]' })).includes('warning:DG076'));
 });
 
-test('Must が重点レーン外なら DG077、ただし不具合カードは例外', () => {
+test('Must が重点領域外なら DG077、ただし不具合カードは例外', () => {
   const off = run({ must: ['- [ ] **ブログ追加** — `BLOG-B-01`'] });
   assert.ok(codes(off).includes('warning:DG077'));
   assert.strictEqual(off.weekly.find((w) => w.section === 'Must').status, 'off-focus');
@@ -132,25 +132,25 @@ test('Must が重点レーン外なら DG077、ただし不具合カードは例
   assert.ok(!codes(defect).includes('warning:DG077'));
 });
 
-test('Must が ID を参照しないとレーンを引けず DG077、improvements の ID は Metric から引く', () => {
+test('Must が ID を参照しないと領域を引けず DG077、improvements の ID は Metric から引く', () => {
   assert.ok(codes(run({ must: ['- [ ] **ID なしの作業** [M]'] })).includes('warning:DG077'));
   const imp = run({ must: ['- [ ] **GA** — `GA-X-01`'] });
   assert.ok(!codes(imp).includes('warning:DG077'));
   assert.deepStrictEqual(imp.weekly[0].lanes, ['計測']);
 });
 
-test('凍結レーンの作業は Must 以外の節にあっても DG078 error', () => {
+test('凍結領域の作業は Must 以外の節にあっても DG078 error', () => {
   const r = run({ should: ['- [ ] **SNS** — `SNS-C-01`'] });
   assert.ok(codes(r).includes('error:DG078'));
   assert.strictEqual(r.weekly.find((w) => w.section === 'Should').status, 'frozen');
 });
 
-test('backlog の語彙外レーンは DG074 error', () => {
+test('backlog の語彙外領域は DG074 error', () => {
   const r = auditLaneAlignment({
     strategyText: STRATEGY,
-    backlogText: '## 🔴 高\n\n### [X-01] x\nタグ: [UI・UX] [種類:改善] [実行:対話] [レーン:存在しない]\n',
+    backlogText: '## 🔴 高\n\n### [X-01] x\nタグ: [UI・UX] [種類:改善] [実行:対話] [領域:存在しない]\n',
     improvementsText: '',
-    monthlyText: monthly('focus_lanes: [計測]'),
+    monthlyText: monthly('focus_domains: [計測]'),
     weeklyText: '',
   });
   assert.ok(codes(r).includes('error:DG074'));
@@ -167,7 +167,7 @@ test('週次の項目から節・ID・完了状態を取る', () => {
   });
 });
 
-test('実リポジトリの収益化戦略のレーン表は壊れていない', () => {
+test('実リポジトリの収益化戦略の領域表は壊れていない', () => {
   const root = path.resolve(__dirname, '..', '..', '..', '..');
   assert.ok(fs.existsSync(path.join(root, 'docs/00_プロジェクト管理/02_収益化戦略.md')));
   const board = laneBoard(root);
@@ -183,14 +183,14 @@ test('KPI 目印は複数 id をカンマで読み、無ければ null', () => {
   assert.strictEqual(parseKpiMarker('施策 [target: +1]'), null);
 });
 
-test('配線済みの台帳とレーン表は DG079 / DG080 を出さない', () => {
+test('配線済みの台帳と領域表は DG079 / DG080 を出さない', () => {
   const r = run();
   assert.deepStrictEqual(codes(r).filter((c) => /DG079|DG080/.test(c)), []);
   assert.deepStrictEqual(r.lanes[0].kpis, ['measurement-freshness']);
   assert.deepStrictEqual(r.kpiLinks.get('search-clicks'), ['NOTE-Y-01']);
 });
 
-test('[kpi:] の無い施策・ツリーに無い id・レーン表の未知 KPI は DG079 error', () => {
+test('[kpi:] の無い施策・ツリーに無い id・領域表の未知 KPI は DG079 error', () => {
   const lanes = parseLanes(STRATEGY.replace('| search-clicks |', '| pv |')).lanes;
   const rows = [
     { id: 'A-01', kpis: null, hasTarget: true },
@@ -200,7 +200,7 @@ test('[kpi:] の無い施策・ツリーに無い id・レーン表の未知 KPI
   const msgs = issues.filter((i) => i.code === 'DG079' && i.level === 'error').map((i) => i.message).join('\n');
   assert.match(msgs, /A-01 に \[kpi: <id>\] が無い/);
   assert.match(msgs, /B-01 の \[kpi: pv\] が KPI ツリーに無い/);
-  assert.match(msgs, /レーン SEO・ブログ の KPI が KPI ツリーに無い: pv/);
+  assert.match(msgs, /領域 SEO・ブログ の KPI が KPI ツリーに無い: pv/);
 });
 
 test('上限超過と [target:] 欠落は DG080 warning、上限ちょうどは出さない', () => {
@@ -217,7 +217,7 @@ test('KPI ツリーが未生成なら検査せず warning だけにする (fixtu
   assert.deepStrictEqual(issues.map((i) => `${i.level}:${i.code}`), ['warning:DG079']);
 });
 
-test('実リポジトリの台帳・レーン表は KPI ツリーに配線されている (DG079 error 0)', () => {
+test('実リポジトリの台帳・領域表は KPI ツリーに配線されている (DG079 error 0)', () => {
   const root = path.resolve(__dirname, '../../../..');
   const board = laneBoard(root);
   assert.ok(board.kpiNodes && board.kpiNodes.length > 0, 'kpi-tree.json が無い');
@@ -288,4 +288,15 @@ test('Must が 🔴 上位 (オーナー作業を除く) をどれも参照し�
   assert.deepStrictEqual(audit(['- [ ] **上位の 3 番目** — `TOP-03`']).issues.filter((i) => i.code === 'DG083'), []);
   // 損失の出ている不具合を Must に入れた週は、重点外でも許す
   assert.deepStrictEqual(audit(['- [ ] **不具合** — `BUG-01`']).issues.filter((i) => i.code === 'DG083'), []);
+});
+
+test('領域表の名前が domains.json の領域と食い違えば DG073、一致していれば出さない', () => {
+  const base = { strategyText: STRATEGY, backlogText: BACKLOG, improvementsText: IMPROVEMENTS, monthlyText: monthly('focus_domains: [計測]'), weeklyText: weekly(['- [ ] **計器** — `MEASURE-A-01`'], []), kpiNodes: KPI_NODES };
+  const names = parseLanes(STRATEGY).lanes.map((l) => l.name);
+  const same = auditLaneAlignment({ ...base, domainLabels: names });
+  assert.ok(!same.issues.some((i) => i.code === 'DG073'));
+  const drift = auditLaneAlignment({ ...base, domainLabels: [...names.slice(1), '存在しない領域'] });
+  const msgs = drift.issues.filter((i) => i.code === 'DG073').map((i) => i.message).join('\n');
+  assert.match(msgs, /domains\.json の領域が領域表に無い: 存在しない領域/);
+  assert.match(msgs, /領域表の領域が domains\.json に無い/);
 });

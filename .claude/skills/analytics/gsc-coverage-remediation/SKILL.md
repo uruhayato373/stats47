@@ -1,5 +1,6 @@
 ---
 name: gsc-coverage-remediation
+domain: site
 description: GSC「ページ」インデックスカバレッジ (見つからない404 / ソフト404 / 5xx / クロール済未登録) を計画的に是正する閉ループ。Use when user says "GSCのカバレッジ", "インデックス未登録", "404が多い", "ソフト404", "見つかりませんでした", "カバレッジ是正". GSC UI export を取り込み→本番HTTP実測でA/B分類→SSOTキュー化→live観測(observe-after-fix)/薄さ確認→経過観測を1サイクルで回す。
 primary_agent: gsc-analyst
 co_agents: [improvement-triage]

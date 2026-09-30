@@ -1,5 +1,6 @@
 ---
 name: audit-theme-components
+domain: data
 description: テーマダッシュボードの現状監査を実行する（コンポーネント共有状況・ギャップ・重複分析）。Use when user says "テーマ監査", "コンポーネント監査". page_components vs IndicatorSet ギャップ検出.
 disable-model-invocation: true
 argument-hint: "<theme-key> | --all"

@@ -1,5 +1,6 @@
 ---
 name: render-sns-stills
+domain: sns
 description: Remotion で SNS 用静止画・動画をレンダリングしローカルに保存する。Use when user says "SNSレンダリング", "画像生成", "動画レンダリング". Chrome 必須. キャプション生成後に実行.
 disable-model-invocation: true
 primary_agent: instagram-strategist

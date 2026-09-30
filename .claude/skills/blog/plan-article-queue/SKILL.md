@@ -1,5 +1,6 @@
 ---
 name: plan-article-queue
+domain: site
 description: 新規ブログ記事の「次に何を書くか」を状態付きキュー (topic-queue) から選定・レポートする。GSC クエリギャップ×季節性×相関 surprise×競合ギャップの統合スコアで候補を並べる。Use when user says "次に何を書く", "記事ネタ", "topic-queue", "ネタ選定", "記事キュー"。
 primary_agent: trend-scout
 ---

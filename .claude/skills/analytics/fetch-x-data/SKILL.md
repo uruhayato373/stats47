@@ -1,5 +1,6 @@
 ---
 name: fetch-x-data
+domain: sns
 description: X (Twitter) API v2 からツイートデータを取得する。Use when user says "Xデータ", "Twitter分析", "ツイート確認". インプレッション・いいね・RT分析対応.
 primary_agent: x-strategist
 ---

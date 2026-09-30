@@ -1,5 +1,6 @@
 ---
 name: adsense-improvement
+domain: affiliate
 description: 【凍結】AdSense は 2026-09-20 に恒久停止したため、この改善ループは運用しない。reference/ の過去ログは読み取り専用の記録として残す。
 primary_agent: adsense-analyst
 ---

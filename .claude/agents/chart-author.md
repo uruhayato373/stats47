@@ -1,5 +1,6 @@
 ---
 name: chart-author
+domain: site
 description: ブログ / note 記事用の SVG / Remotion チャート生成専任。 blog-editor + note-manager から chart 系を集約。
 model: sonnet
 ---

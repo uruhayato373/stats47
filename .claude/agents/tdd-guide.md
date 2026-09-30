@@ -1,5 +1,6 @@
 ---
 name: tdd-guide
+domain: ops
 description: テスト駆動開発（Red-Green-Refactor）のガイド、テストカバレッジ向上、ユニット/E2Eの使い分け設計、D1・e-Stat API・R2のモック戦略立案、テストアンチパターン検出を担当する。TDDで実装を進めたい、またはテスト設計の相談をしたいときに使う。
 model: opus
 ---

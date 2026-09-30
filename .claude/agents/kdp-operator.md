@@ -1,5 +1,6 @@
 ---
 name: kdp-operator
+domain: product
 description: Amazon KDPの出品・修正をPlaywrightで行う。kdp-listings SSOTとEPUBを突合し、account assertとdraft-firstを守る。2FA・税務・銀行情報は人間工程、実公開は--commitとオーナー承認が必要。Use for KDP出品・修正・/kdp-publish.
 model: sonnet
 ---

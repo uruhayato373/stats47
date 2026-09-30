@@ -1,5 +1,6 @@
 ---
 name: strategic-compact
+domain: ops
 description: 長時間セッションのコンテキスト管理ガイド。Use when user says "コンテキスト整理", "strategic-compact", "コンパクション". 自動コンパクションによる文脈喪失を防ぐ.
 primary_agent: devops-runner
 ---

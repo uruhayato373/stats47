@@ -1,5 +1,6 @@
 ---
 name: open-data-curator
+domain: data
 description: e-Stat外の政府・自治体オープンデータ源を発見し、サイト・データセット・取得方式・粒度・GIS・ライセンス・更新性・stats47適合性のgit TSカタログを管理する。実データ取得・R2投入は既存agentへ委譲。
 model: sonnet
 ---

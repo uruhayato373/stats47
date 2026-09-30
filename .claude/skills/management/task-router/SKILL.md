@@ -1,5 +1,6 @@
 ---
 name: task-router
+domain: plan
 description: ユーザーの自然言語指示から最適なエージェント・スキルを自動判定して実行する汎用ディスパッチャー
 user-invocable: false
 ---

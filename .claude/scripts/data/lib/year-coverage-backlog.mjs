@@ -35,7 +35,7 @@ function renderCard({ id, rows, today }) {
   return [
     `### [${id}] 年カバレッジ: 最新 1 年だけに絞っている e-Stat 指標 ${rows.length} 件の years を広げる`,
     "",
-    `タグ: [コンテンツ品質] [種類:改善] [実行:sweep] [検証:${GATE} ${file}] [起票:${today}] [レーン:データ品質]`,
+    `タグ: [コンテンツ品質] [種類:改善] [実行:sweep] [検証:${GATE} ${file}] [起票:${today}] [領域:データ]`,
     "",
     `- **自動起票**: \`sync-year-coverage-backlog.mjs\` が週次の年カバレッジ監査 (\`.claude/state/data/estat-year-coverage/queue.json\`) の要拡張候補から作った。対象 key の一覧は \`${file}\`。規約の正典は \`.claude/rules/metric-config-standards.md\`「\`years\` は最新年だけに絞らない」。`,
     "- **対象** (config の年数 → e-Stat に値がある年):",

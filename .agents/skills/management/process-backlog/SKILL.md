@@ -1,5 +1,6 @@
 ---
 name: process-backlog
+domain: plan
 description: .claude/todo のバックログを分類して処理し、機械ゲートを通したものだけ行削除する。ledger に証拠を残し verify で突合する。Use when user says "バックログを処理", "バックログを消化", "process-backlog".
 primary_agent: backlog-processor
 co_agents: [backlog-solver-hard]

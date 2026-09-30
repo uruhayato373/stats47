@@ -1,5 +1,6 @@
 ---
 name: adsense-analyst
+domain: affiliate
 description: 収益計測の分析担当。AdSense は 2026-09-20 に恒久停止したため、担当はアフィリエイト収益の計測協働と停止の維持確認。アフィリエイト在庫管理 (登録/サイズ規約/dashboard) は affiliate-manager、改善ログ更新は improvement-triage に委譲。
 model: sonnet
 ---

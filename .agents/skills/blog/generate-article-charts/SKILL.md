@@ -1,5 +1,6 @@
 ---
 name: generate-article-charts
+domain: site
 description: 記事用 JSON データから SVG チャートを生成し記事に埋め込む。Use when user says "チャート生成", "記事チャート", "グラフ生成". 折れ線・タイルマップ・散布図等に対応.
 primary_agent: chart-author
 co_agents: [article-writer, blog-editor]

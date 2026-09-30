@@ -1,5 +1,6 @@
 ---
 name: schedule-instagram-mbs
+domain: sns
 description: "[ARCHIVED 2026-07-04] MBS UI 予約投稿。GHA cron (post-instagram-scheduled.yml) と二重で退役。"
 disable-model-invocation: true
 user-invocable: false

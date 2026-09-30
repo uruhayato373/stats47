@@ -1,5 +1,6 @@
 ---
 name: image-prompt-curator
+domain: site
 description: OGP / note表紙 / SNS静止素材の画像仕様・プロンプトSSOTを管理し、ブログ背景はCodex MCP imagegenで生成・検証する専任。
 model: sonnet
 ---

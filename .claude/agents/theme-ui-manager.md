@@ -1,5 +1,6 @@
 ---
 name: theme-ui-manager
+domain: data
 description: テーマページ(/themes/*)のUI層とchart編集契約が全テーマで統一構成かを管理・監査・是正する専任。指標選定はtheme-designer、ThemeCatalog chartはtheme-component-builderに委譲。
 model: sonnet
 ---

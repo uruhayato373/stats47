@@ -1,5 +1,6 @@
 ---
 name: maintain-docs
+domain: ops
 description: stats47のドキュメントを作成・移動・統合・削除・棚卸しするときに、SSOT配置、TODO具体化、陳腐化、重複、INDEX、リンクを監査する。Use when user says「ドキュメントを作成」「docsを整理」「文書を統合」「不要な設計書を削除」「陳腐化を確認」「/maintain-docs」。
 primary_agent: knowledge-curator
 ---

@@ -1,5 +1,6 @@
 ---
 name: scout-asp
+domain: affiliate
 description: A8.net の高単価アフィリエイト案件を Playwright で自動 scout → 提携申請 → 広告コード取得 → SSOT 登録 → R2 公開まで回す。週次 cron (ローカル Mac 限定) の full モード + 手動サブモード (scout/apply/harvest/register/status)。Use when user says "A8 案件を探す", "アフィリエイト自動申請", "高単価案件 scout", "scout-asp".
 disable-model-invocation: true
 primary_agent: asp-scout

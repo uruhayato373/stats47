@@ -1,5 +1,6 @@
 ---
 name: check-broken-links
+domain: ops
 description: サイトマップの全URLをチェックし404・リンク切れを検出する。Use when user says "リンクチェック", "404チェック", "check-broken-links", or after deploy.
 primary_agent: performance-auditor
 ---

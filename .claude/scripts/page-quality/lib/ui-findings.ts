@@ -308,7 +308,7 @@ function renderCard(id: string, template: string, findings: UiFinding[], today: 
   return [
     `### [${id}] UI 是正: ${template} の週次 UI 検査の指摘 ${findings.length} 件を直す`,
     "",
-    `タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:${CLI} --assert-handled ${file}] [起票:${today}] [レーン:UI・回遊]`,
+    `タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:${CLI} --assert-handled ${file}] [起票:${today}] [領域:サイト]`,
     "",
     `- **自動起票**: 週次のページ品質監査 (\`page-quality-audit-weekly.yml\`) の結果から \`ui-findings.ts --sync\` が作った。対象の一覧は \`${file}\`、状態は \`.claude/state/page-quality/ui-findings-queue.json\`。正典は \`.claude/rules/page-quality-standards.md\`「UI 指摘のループ」。`,
     `- **スクショ (最新の週次)**: ${shots}。検査の詳細は \`.claude/state/metrics/page-quality/LATEST.md\`。`,

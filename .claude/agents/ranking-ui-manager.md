@@ -1,5 +1,6 @@
 ---
 name: ranking-ui-manager
+domain: data
 description: ランキングページ(/ranking/*)のUI層(page.tsx・features/rankingのレイアウト・見出し・パンくず・サイドバー・SEO/構造化データ・コピー整合)の統一・監査・是正専任。観測値投入はdata-ingester、R2 snapshot生成はsnapshot-exporter、公開パイプラインはranking-publisher、チャートはchart-component-builderに委譲。
 model: sonnet
 ---

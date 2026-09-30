@@ -1,5 +1,6 @@
 ---
 name: audit-ogp-images
+domain: site
 description: OGP / note カバー / サイト内リンクカード画像 (light/dark) を種別タブ付きの 1 枚 HTML で目視確認し、供給欠落を棚卸しする (read-only)。Use when user says "OGP画像を確認", "OGPギャラリー", "カバー画像監査", "リンクカード画像チェック", "画像の棚卸し".
 disable-model-invocation: true
 primary_agent: image-prompt-curator

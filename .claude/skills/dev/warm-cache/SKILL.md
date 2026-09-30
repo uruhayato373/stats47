@@ -1,5 +1,6 @@
 ---
 name: warm-cache
+domain: ops
 description: デプロイ後に Edge Cache をウォームして初回アクセスの遅延を解消する。Use when user says "キャッシュウォーム", "warm-cache", "デプロイ後のウォーム". --full で全ページ対応.
 argument-hint: [--full]
 disable-model-invocation: true

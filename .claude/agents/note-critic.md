@@ -1,5 +1,6 @@
 ---
 name: note-critic
+domain: product
 description: note 記事（A/B/C/D シリーズ）の意味レビュー専任。記事は read-only、判定は review.md に書き出す。修正は呼び元 agent (note-manager / write-note-section) が行う。Use when user says "note記事レビュー", "note校閲", "note品質チェック", "公開前確認".
 model: opus
 ---

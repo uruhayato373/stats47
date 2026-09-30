@@ -1,5 +1,6 @@
 ---
 name: post-x
+domain: sns
 description: X (Twitter) 投稿を 1 本だけ生成して posts.json に draft 登録する。Use when user says "X投稿1本", "ツイート1件作成". 量産は /post-x-batch を使う。
 disable-model-invocation: true
 primary_agent: x-strategist

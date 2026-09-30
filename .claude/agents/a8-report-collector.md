@@ -1,5 +1,6 @@
 ---
 name: a8-report-collector
+domain: affiliate
 description: A8.net メディア管理画面のレポート CSV を Playwright で収集する Generator エージェント。この A8 口座は stats47 と doboku-note を共用し、A8 には**サイト切替が存在しない**ため口座 (mediaId) を assert し、サイト分離はレポート単位 (siteScope) で行う。口座不一致・ログイン・CAPTCHA・UI 変更では 1 バイトも取り込まず停止して人間へ引き継ぐ (fail-closed)。正規化・EPC 分析・収益判断はしない (収集の実行と成否確認に限定)。A8 レポートを収集したいときに使う。
 model: sonnet
 ---

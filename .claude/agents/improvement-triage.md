@@ -1,5 +1,6 @@
 ---
 name: improvement-triage
+domain: plan
 description: .claude/todo/improvements.md の追加・更新・完了行削除を担う。analyst 系の計測結果を基に active な施策だけを維持する排他的 writer。
 model: sonnet
 ---

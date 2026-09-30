@@ -1,5 +1,6 @@
 ---
 name: business-plan-operate
+domain: strategy
 description: >
   stats47 2.0事業計画を型付きSSOT、管理画面、計測state、週次PDCAへ同期する。
   25章の採用判断、100コンテンツ候補、X案、note商品、KPI、開始ゲートの整合を検証し、

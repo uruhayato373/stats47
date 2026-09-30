@@ -1,5 +1,6 @@
 ---
 name: site-ux-manager
+domain: site
 description: サイト横断UI/IAを管理する。header/nav、home、一覧card、共通shell、right rail、UX event配線の監査・是正に使う。ranking/theme/area内部、GA4台帳、chart、design reviewは各ownerへ渡す。
 model: sonnet
 ---

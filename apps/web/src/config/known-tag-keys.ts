@@ -9,8 +9,8 @@
  * 更新方法: `cd apps/web && npx tsx scripts/generate-known-tag-keys.ts`
  * 更新タイミング: ブログ公開で R2 blog snapshot が変わった後。commit + デプロイで反映。
  *
- * 最終生成日: 2026-09-24
- * 件数: 907
+ * 最終生成日: 2026-09-30
+ * 件数: 912
  */
 export const KNOWN_TAG_KEYS: ReadonlySet<string> = new Set([
   "1000世帯あたり",
@@ -22,6 +22,7 @@ export const KNOWN_TAG_KEYS: ReadonlySet<string> = new Set([
   "2024年問題",
   "2050年",
   "2050年人口",
+  "65歳以上人口",
   "65歳以上人口割合",
   "6次産業化",
   "AI",
@@ -246,8 +247,10 @@ export const KNOWN_TAG_KEYS: ReadonlySet<string> = new Set([
   "不動産",
   "不登校",
   "世帯",
+  "世帯の小規模化",
   "世帯主収入",
   "世帯収入",
+  "世帯数",
   "世帯構造",
   "中国",
   "中学校",
@@ -272,6 +275,7 @@ export const KNOWN_TAG_KEYS: ReadonlySet<string> = new Set([
   "人口",
   "人口あたり",
   "人口動態",
+  "人口増減率",
   "人口密度",
   "人口当たり",
   "人口性比",
@@ -288,6 +292,7 @@ export const KNOWN_TAG_KEYS: ReadonlySet<string> = new Set([
   "介護福祉士",
   "介護職",
   "付加価値",
+  "令和7年国勢調査",
   "低出生体重児",
   "住みやすさ",
   "住宅",

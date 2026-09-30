@@ -1,8 +1,10 @@
 /**
  * 左サイドメニューの唯一の定義 (SSOT) と、現在地の判定。React に依存しない純モジュール
  * (Nav の表示部品と、ルート実在を確かめるテストの両方が import する。doboku-note admin-app の channel-registry と同じ考え方)。
- * 並びは見る目的でグループ化する。URL を変えたら tests/unit/nav-registry.test.ts が「ルートが実在するか」で止める。
+ * グループと並びは領域の正本 (.claude/config/domains.json) から作る。URL を変えたら tests/unit/nav-registry.test.ts が「ルートが実在するか」で止める。
  */
+
+import domainsConfig from "../../../.claude/config/domains.json";
 
 import { channelsOf, type ChannelGroup } from "./channel-registry";
 
@@ -21,77 +23,20 @@ function channelBranch(group: ChannelGroup): NavBranch {
   return { label: "チャネル別", children: channelsOf(group).map(({ href, label }) => ({ href, label })) };
 }
 
+type DomainNavEntry = { label: string; kind: string } & ({ href: string } | { channels: ChannelGroup });
+type Domain = { id: string; label: string; role: string; nav: readonly DomainNavEntry[] };
+
 /**
- * グループは事業の役割 (doboku-note の領域モデル): 売る = 商品・アフィリエイト / 集める = SNS / つくる = 制作・資産 / 決める・支える = 戦略・品質・TODO。
- * チャネルは最上位に並べず、各グループの「チャネル別」の枝に入れる。
+ * グループ = 領域。並び・見出し・項目は領域の正本 `.claude/config/domains.json` から作り、ここに直書きしない
+ * (役割の順: 決める → 売る → 集める → つくる → 支える。検査は `npm run check-domains`)。
+ * チャネルは最上位に並べず、商品・SNS の「チャネル別」の枝に入れる。
  */
 export const NAV_GROUPS: readonly NavGroup[] = [
   { title: null, items: [{ href: "/", label: "ホーム" }] },
-  {
-    title: "商品",
-    items: [
-      { href: "/product/status", label: "販売状態" },
-      channelBranch("product"),
-      { href: "/revenue", label: "売上" },
-    ],
-  },
-  {
-    title: "SNS",
-    items: [
-      { href: "/sns", label: "投稿状況" },
-      channelBranch("sns"),
-      { href: "/buzz-map", label: "バズ地図" },
-    ],
-  },
-  {
-    title: "制作",
-    items: [
-      { href: "/content", label: "コンテンツ横断・監査" },
-      { href: "/content/references", label: "参考文献管理" },
-    ],
-  },
-  {
-    title: "資産",
-    items: [
-      { href: "/assets", label: "画像資産" },
-      { href: "/svg", label: "SVG カタログ" },
-    ],
-  },
-  {
-    title: "戦略",
-    items: [
-      { href: "/strategy/lanes", label: "戦略レーン" },
-      { href: "/strategy/policy", label: "共通方針" },
-      { href: "/strategy", label: "方針・事業計画" },
-      { href: "/research", label: "調査カタログ" },
-    ],
-  },
-  {
-    // doboku-note の「アフィリエイト」領域と同じ 3 画面 (成果 = results / 掲載先 = inventory / 提携・案件 = actions)
-    title: "アフィリエイト",
-    items: [
-      { href: "/affiliate", label: "成果" },
-      { href: "/affiliate/placements", label: "掲載先" },
-      { href: "/affiliate/programs", label: "提携・案件" },
-    ],
-  },
-  {
-    title: "品質・運用",
-    items: [
-      { href: "/dashboard", label: "プロジェクト現況" },
-      { href: "/quality", label: "品質" },
-      { href: "/ops", label: "CI・台帳" },
-    ],
-  },
-  {
-    title: "TODO",
-    items: [
-      { href: "/todo", label: "実行バックログ" },
-      { href: "/todo?f=weekly", label: "今週の計画" },
-      { href: "/todo?f=monthly", label: "今月の計画" },
-      { href: "/todo?f=improvements", label: "効果測定・改善" },
-    ],
-  },
+  ...(domainsConfig.domains as readonly Domain[]).map((d) => ({
+    title: d.label,
+    items: d.nav.map((n): NavEntry => ("channels" in n ? channelBranch(n.channels) : { href: n.href, label: n.label })),
+  })),
 ];
 
 /** 枝の中まで含めた全項目の href (現在地の親子判定とテストが使う) */

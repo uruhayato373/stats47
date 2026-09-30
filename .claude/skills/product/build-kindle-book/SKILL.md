@@ -1,5 +1,6 @@
 ---
 name: build-kindle-book
+domain: product
 description: stats47 の統計データを Amazon KDP 向け電子書籍 (EPUB3) として、既存ブログ記事・ランキングデータから生成・検証する。Use when user says "Kindle 出版", "Kindle 本を作って", "電子書籍を作って", "EPUB を生成", "/build-kindle-book". 生成先は .local (git 管理外)、KDP アップロードは人間工程。
 disable-model-invocation: true
 primary_agent: kindle-publisher

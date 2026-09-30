@@ -1,5 +1,6 @@
 ---
 name: weekly-plan
+domain: plan
 description: 週次計画を生成する（決定的な並列収集→戦略分析→批判的レビュー→計画出力）。Use when user says "週次計画", "今週の計画", "来週の予定". KPIベースで優先順位を決定する。
 primary_agent: strategy-advisor
 ---
@@ -124,9 +125,9 @@ primary_agent: strategy-advisor
   cat .claude/todo/monthly.md 2>/dev/null || echo "月次計画なし → /monthly-plan の実行を Should で提案"
   ```
   → 今週の Must は**今月の重点テーマの構成タスクから優先的に選ぶ**。重点外のタスクを Must に入れる場合は理由を明記。月次計画が無い場合は `/monthly-plan` 実行を提案。
-  → **戦略レーンの配線**: Must の各項目は backlog / improvements の既存 ID をバッククォートで参照し、その ID のレーン
-    (backlog は `[レーン:]` タグ、improvements は Metric 列から `strategy-lanes.cjs` が引く) が `focus_lanes` に入るか、
-    `[種類:不具合]` のカードであること。凍結レーンの不具合以外は Should / Could にも入れない。
+  → **領域と構えの配線**: Must の各項目は backlog / improvements の既存 ID をバッククォートで参照し、その ID の領域
+    (backlog は `[領域:]` タグ、improvements は Metric 列から `strategy-lanes.cjs` が引く) が `focus_domains` に入るか、
+    `[種類:不具合]` のカードであること。凍結領域の不具合以外は Should / Could にも入れない。
     `npm run docs:check` の DG077 (warning) / DG078 (error) が検査し、管理画面 `/strategy/lanes` に同じ結果が出る。
     定常 Must (ブログ是正・新規記事) も対応する backlog / improvements の ID を付ける。
   → **連続未達の扱い (CYCLE-HEALTH-01)**: 週次メトリクス Issue の「サイクルの健全性」で連続未達が 2 週以上なら、
@@ -250,7 +251,7 @@ primary_agent: strategy-advisor
 5エージェントの結果を統合し、以下を分析する:
 
 1. **KPI との距離**: `.claude/state/metrics/measurement-cycle/LATEST.md` の「KPI ツリー」節（正典: 収益化戦略 §1.1）で、
-   今月の重点レーンの KPI（★）の今週値と 4 週前（窓が重ならない週）との差、ガードレールの悪化、判定不能の KPI を確認する。
+   今月の重点領域の KPI（★）の今週値と 4 週前（窓が重ならない週）との差、ガードレールの悪化、判定不能の KPI を確認する。
    PV・記事数そのものは KPI ではなく、どの駆動 KPI を動かすかで評価する
 2. **ギャップ**: 計画と実行の乖離。特に繰り返し未達のタスク
 3. **機会**: Track E のトレンド機会を評価。stats47 データとマッチするトレンドがあれば記事化・SNS投稿の優先度を上げる
@@ -279,9 +280,9 @@ continue 中の実験の measure 実行予定は Must 候補に加える。
   上位 3 枚のどれも Must に入らない週は `npm run docs:check` の DG083 が警告する。例外は損失の出ている `[種類:不具合]` を入れた週だけ。
   オーナー作業の 🔴 は Must ではなく計画末尾の「オーナー作業」節に並べ、何を決めて・何をしてほしいかを 1 行で書く
 - 未達の繰り返しタスク or 収益直結 or 期限付き
-- 各タスクに: 理由, 成功基準, 推定工数(S/M/L), 該当スキル, **動かす KPI の id**（参照する improvements 行の `[kpi:]`、backlog カードならレーン表の KPI 列）
+- 各タスクに: 理由, 成功基準, 推定工数(S/M/L), 該当スキル, **動かす KPI の id**（参照する improvements 行の `[kpi:]`、backlog カードなら領域表の KPI 列）
 - ガードレール KPI が悪化している週は、その是正を重点より先に Must に入れる
-- 「重点レーンの KPI なのに施策が 0 件」が出ている週は、その KPI を動かす施策の起票（`[kpi:]` と根拠のある `[target:]` 付き）を Must 候補にする
+- 「重点領域の KPI なのに施策が 0 件」が出ている週は、その KPI を動かす施策の起票（`[kpi:]` と根拠のある `[target:]` 付き）を Must 候補にする
 
 #### Should（できればやる: 2-3件）
 - 中期的に重要 or コンテンツ蓄積

@@ -1,5 +1,6 @@
 ---
 name: audit-consistency
+domain: ops
 description: エージェント/スキル/スクリプト/フックの整合性ドリフトを点検する。Use when 会話で .claude/{agents,skills,scripts,hooks} や SKILL.md を変更した後、または Stop hook の「整合性監査が未実施」差し戻しを受けたとき、または "整合性チェック" "修正漏れ" "consistency audit" と言われたとき。機械チェック(床)＋意味レビュー(統合バグ)の二層で確認しマーカーを記録する。
 primary_agent: knowledge-curator
 ---

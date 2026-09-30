@@ -1,13 +1,13 @@
 'use strict';
 
 /**
- * 戦略レーン (収益化戦略の優先順位表) の読み取りと、月次・週次・バックログとの整合検査。
+ * 戦略領域 (収益化戦略の優先順位表) の読み取りと、月次・週次・バックログとの整合検査。
  *
- * 正典: docs/00_プロジェクト管理/02_収益化戦略.md §5「戦略レーンと優先順位」の
- *       `<!-- strategy-lanes:start -->` 〜 `end` の表。レーンの名前・構え・順番はそこだけに書く。
- *       ここにレーン名の写しを持たない (手で二重管理すると必ずずれる)。
+ * 正典: docs/00_プロジェクト管理/02_収益化戦略.md §5「戦略領域と優先順位」の
+ *       `<!-- strategy-lanes:start -->` 〜 `end` の表。領域の名前・構え・順番はそこだけに書く。
+ *       ここに領域名の写しを持たない (手で二重管理すると必ずずれる)。
  *
- * KPI: レーン表の KPI 列と improvements.md の `[kpi: id]` は、事業計画 catalog の KPI ツリー
+ * KPI: 領域表の KPI 列と improvements.md の `[kpi: id]` は、事業計画 catalog の KPI ツリー
  *      (`.claude/state/business-plan/kpi-tree.json`、`npm run business-plan:build-state` が生成) の id だけを参照できる。
  *
  * 計画の規律: 🔴 の上限と鮮度 (DG081)、連続未達 Must の再掲禁止 (DG082)、週次 Must と 🔴 上位の接続 (DG083)。
@@ -26,8 +26,9 @@ const ATTACK = '攻める';
 const FROZEN = '凍結';
 const START = '<!-- strategy-lanes:start -->';
 const END = '<!-- strategy-lanes:end -->';
-const COLUMNS = ['順', 'レーン', '構え', '今の狙い', '構えを変える条件', '改善Metric', 'KPI'];
+const COLUMNS = ['順', '領域', '構え', '今の狙い', '構えを変える条件', '改善Metric', 'KPI'];
 const KPI_TREE = '.claude/state/business-plan/kpi-tree.json';
+const DOMAINS_JSON = '.claude/config/domains.json';
 /**
  * 同時に判定まで回す active 施策の上限。超えている間は新しい施策を足さず、月次計画で削る。
  * 2026-09-27 に active 29 件・判定済み 5 件 (improvements.md) だった実測から、一人運用で週次に判定を回せる量として置いた運用方針値。
@@ -60,23 +61,23 @@ function cellsOf(line) {
   return line.split('|').slice(1, -1).map((c) => c.trim());
 }
 
-/** 収益化戦略の本文からレーン表を読む。表の破損は errors に積み、例外にしない。 */
+/** 収益化戦略の本文から領域表を読む。表の破損は errors に積み、例外にしない。 */
 function parseLanes(text) {
   const src = String(text ?? '').replace(/\r\n/g, '\n');
   const errors = [];
   const s = src.indexOf(START);
   const e = src.indexOf(END);
   if (s < 0 || e < 0 || e < s) {
-    return { lanes: [], errors: [`レーン表のマーカー (${START} / ${END}) が見つからない`] };
+    return { lanes: [], errors: [`領域表のマーカー (${START} / ${END}) が見つからない`] };
   }
   const rows = src
     .slice(s + START.length, e)
     .split('\n')
     .filter((l) => l.trim().startsWith('|'));
-  if (rows.length === 0) return { lanes: [], errors: ['レーン表が空'] };
+  if (rows.length === 0) return { lanes: [], errors: ['領域表が空'] };
   const header = cellsOf(rows[0]);
   if (header.join('|') !== COLUMNS.join('|')) {
-    errors.push(`レーン表の列が契約と違う: ${header.join(' | ')} (期待: ${COLUMNS.join(' | ')})`);
+    errors.push(`領域表の列が契約と違う: ${header.join(' | ')} (期待: ${COLUMNS.join(' | ')})`);
     return { lanes: [], errors };
   }
   const lanes = [];
@@ -84,14 +85,14 @@ function parseLanes(text) {
     const cells = cellsOf(row);
     if (cells.every((c) => /^[-:\s]*$/.test(c))) continue;
     if (cells.length !== COLUMNS.length) {
-      errors.push(`レーン表の行の列数が違う: ${row.trim()}`);
+      errors.push(`領域表の行の列数が違う: ${row.trim()}`);
       continue;
     }
     const [order, name, stance, aim, gate, metrics, kpis] = cells;
     if (!/^\d+$/.test(order)) errors.push(`${name} の順が整数でない: ${order}`);
-    if (!name) errors.push('レーン名が空の行がある');
+    if (!name) errors.push('領域名が空の行がある');
     if (!STANCES.includes(stance)) errors.push(`${name} の構えが語彙外: ${stance} (${STANCES.join(' / ')})`);
-    if (lanes.some((l) => l.name === name)) errors.push(`レーン名が重複: ${name}`);
+    if (lanes.some((l) => l.name === name)) errors.push(`領域名が重複: ${name}`);
     lanes.push({
       order: Number(order),
       name,
@@ -115,7 +116,7 @@ function parseLanes(text) {
   return { lanes, errors };
 }
 
-/** improvements.md の Metric 値からレーンを引く。`ga4/note` は対応のある最後の語で決める。 */
+/** improvements.md の Metric 値から領域を引く。`ga4/note` は対応のある最後の語で決める。 */
 function resolveImprovementLane(metric, lanes) {
   const tokens = String(metric ?? '').split('/').map((t) => t.trim()).filter(Boolean);
   for (let i = tokens.length - 1; i >= 0; i -= 1) {
@@ -235,14 +236,14 @@ function parseImprovementRows(text) {
   return out;
 }
 
-/** monthly.md の frontmatter `focus_lanes`。無ければ null (未設定と空配列を区別する)。 */
+/** monthly.md の frontmatter `focus_domains`。無ければ null (未設定と空配列を区別する)。 */
 function parseFocusLanes(monthlyText) {
   const m = String(monthlyText ?? '').replace(/\r\n/g, '\n').match(/^---\n([\s\S]*?)\n---/);
   if (!m) return null;
   const lines = m[1].split('\n');
-  const idx = lines.findIndex((l) => /^focus_lanes:/.test(l));
+  const idx = lines.findIndex((l) => /^focus_domains:/.test(l));
   if (idx < 0) return null;
-  const inline = lines[idx].replace(/^focus_lanes:\s*/, '').trim();
+  const inline = lines[idx].replace(/^focus_domains:\s*/, '').trim();
   if (inline.startsWith('[')) {
     return inline.replace(/^\[|\]$/g, '').split(',').map((s) => s.trim().replace(/^["']|["']$/g, '')).filter(Boolean);
   }
@@ -291,7 +292,7 @@ function parseWeeklyItems(weeklyText) {
  */
 /**
  * 施策 → KPI の配線 (純関数)。kpiNodes が null (KPI ツリー未生成) なら検査しない。
- * DG079 (error): レーン表の KPI 列・施策の `[kpi:]` が KPI ツリーに無い id / 施策に `[kpi:]` が無い。
+ * DG079 (error): 領域表の KPI 列・施策の `[kpi:]` が KPI ツリーに無い id / 施策に `[kpi:]` が無い。
  * DG080 (warning): active 施策が上限超過 / `[target:]` の無い施策 (効果判定エンジンが insufficient-target で止まる)。
  */
 function auditKpiLinkage({ lanes, improvementRows, kpiNodes, files }) {
@@ -303,7 +304,7 @@ function auditKpiLinkage({ lanes, improvementRows, kpiNodes, files }) {
   const known = new Set(kpiNodes.map((n) => n.id));
   for (const lane of lanes) {
     for (const id of lane.kpis) {
-      if (!known.has(id)) issues.push({ level: 'error', code: 'DG079', file: files.strategy, message: `レーン ${lane.name} の KPI が KPI ツリーに無い: ${id}` });
+      if (!known.has(id)) issues.push({ level: 'error', code: 'DG079', file: files.strategy, message: `領域 ${lane.name} の KPI が KPI ツリーに無い: ${id}` });
     }
   }
   const byKpi = new Map(kpiNodes.map((n) => [n.id, []]));
@@ -327,7 +328,7 @@ function auditKpiLinkage({ lanes, improvementRows, kpiNodes, files }) {
   return { issues, byKpi };
 }
 
-function auditLaneAlignment({ strategyText, backlogText, improvementsText, monthlyText, weeklyText, kpiNodes = null, reviews = [], today = null, files = {} }) {
+function auditLaneAlignment({ strategyText, backlogText, improvementsText, monthlyText, weeklyText, kpiNodes = null, reviews = [], today = null, files = {}, domainLabels = null }) {
   const f = {
     strategy: STRATEGY_DOC,
     backlog: '.claude/todo/backlog.md',
@@ -341,22 +342,28 @@ function auditLaneAlignment({ strategyText, backlogText, improvementsText, month
 
   const { lanes, errors } = parseLanes(strategyText);
   for (const err of errors) add('error', 'DG073', f.strategy, err);
+  // 領域表の名前は領域の正本 domains.json の label と一致させる (サイドメニュー・タグ・月次重点が同じ語を使う)
+  if (domainLabels && lanes.length) {
+    const names = new Set(lanes.map((l) => l.name));
+    for (const label of domainLabels) if (!names.has(label)) add('error', 'DG073', f.strategy, `domains.json の領域が領域表に無い: ${label}`);
+    for (const name of names) if (!domainLabels.includes(name)) add('error', 'DG073', f.strategy, `領域表の領域が domains.json に無い: ${name}`);
+  }
   const byName = new Map(lanes.map((l) => [l.name, l]));
 
-  // backlog カードのレーン
+  // backlog カードの領域
   const cards = backlogLib.parseBacklog(backlogText);
   const idIndex = new Map();
   let noLane = 0;
   for (const card of cards) {
     const label = card.id ?? `L${card.line} ${card.title}`;
     if (card.lane && lanes.length && !byName.has(card.lane)) {
-      add('error', 'DG074', f.backlog, `${label}のレーンが収益化戦略のレーン表に無い: ${card.lane}`);
+      add('error', 'DG074', f.backlog, `${label}の領域が収益化戦略の領域表に無い: ${card.lane}`);
     }
     if (!card.lane) noLane += 1;
     if (card.id) idIndex.set(card.id, { lane: card.lane, kind: card.kind, source: 'backlog', title: card.title });
   }
   if (noLane > 0) {
-    add('warning', 'DG075', f.backlog, `レーン未設定 ${noLane} 件 / 全 ${cards.length} カード — todo-curator が漸次付与する`);
+    add('warning', 'DG075', f.backlog, `領域未設定 ${noLane} 件 / 全 ${cards.length} カード — todo-curator が漸次付与する`);
   }
   const improvementRows = parseImprovementRows(improvementsText);
   const kpi = auditKpiLinkage({ lanes, improvementRows, kpiNodes, files: f });
@@ -369,19 +376,19 @@ function auditLaneAlignment({ strategyText, backlogText, improvementsText, month
     }
   }
 
-  // 月次の重点レーン
+  // 月次の重点領域
   const focusLanes = parseFocusLanes(monthlyText);
   if (focusLanes === null) {
-    add('warning', 'DG076', f.monthly, 'frontmatter に focus_lanes が無い。収益化戦略の「攻める」レーンから1〜2個選ぶ');
+    add('warning', 'DG076', f.monthly, 'frontmatter に focus_domains が無い。収益化戦略の「攻める」領域から1〜2個選ぶ');
   } else {
     if (focusLanes.length === 0 || focusLanes.length > 2) {
-      add('warning', 'DG076', f.monthly, `focus_lanes は1〜2個にする (現在 ${focusLanes.length} 個)`);
+      add('warning', 'DG076', f.monthly, `focus_domains は1〜2個にする (現在 ${focusLanes.length} 個)`);
     }
     for (const name of focusLanes) {
       const lane = byName.get(name);
-      if (!lane) add('error', 'DG076', f.monthly, `focus_lanes のレーンが収益化戦略に無い: ${name}`);
+      if (!lane) add('error', 'DG076', f.monthly, `focus_domains の領域が収益化戦略に無い: ${name}`);
       else if (lane.stance !== ATTACK) {
-        add('error', 'DG076', f.monthly, `focus_lanes に「${lane.stance}」のレーンは置けない: ${name} (攻めるだけ)`);
+        add('error', 'DG076', f.monthly, `focus_domains に「${lane.stance}」の領域は置けない: ${name} (攻めるだけ)`);
       }
     }
   }
@@ -403,13 +410,13 @@ function auditLaneAlignment({ strategyText, backlogText, improvementsText, month
     const missing = item.refs.filter((r) => r.source === null).map((r) => r.id);
     const note = missing.length ? ` — 台帳に無い ID: ${missing.join(', ')}` : '';
     if (item.status === 'frozen') {
-      add('error', 'DG078', f.weekly, `${where} は凍結レーン (${item.lanes.join(', ')}) の不具合以外のタスク`);
+      add('error', 'DG078', f.weekly, `${where} は凍結領域 (${item.lanes.join(', ')}) の不具合以外のタスク`);
     }
     if (item.section !== 'Must') continue;
     if (item.status === 'unresolved') {
-      add('warning', 'DG077', f.weekly, `${where} のレーンを引けない (backlog / improvements にある ID を参照する)${note}`);
+      add('warning', 'DG077', f.weekly, `${where} の領域を引けない (backlog / improvements にある ID を参照する)${note}`);
     } else if (item.status === 'off-focus' && focusLanes !== null) {
-      add('warning', 'DG077', f.weekly, `${where} は今月の重点レーン外 (${item.lanes.join(', ')})${note}`);
+      add('warning', 'DG077', f.weekly, `${where} は今月の重点領域外 (${item.lanes.join(', ')})${note}`);
     }
   }
 
@@ -429,6 +436,13 @@ function readReviews(root) {
     .sort()
     .reverse()
     .map((f) => ({ week: f.replace(/\.md$/, ''), text: fs.readFileSync(path.join(dir, f), 'utf8') }));
+}
+
+/** 領域の正本 domains.json の label 一覧。無ければ null (照合しない)。 */
+function readDomainLabels(root) {
+  const abs = path.join(root, DOMAINS_JSON);
+  if (!fs.existsSync(abs)) return null;
+  return JSON.parse(fs.readFileSync(abs, 'utf8')).domains.map((d) => d.label);
 }
 
 /** KPI ツリーの nodes。無い・壊れているときは null (検査側が DG079 warning にする)。 */
@@ -465,6 +479,7 @@ function laneBoard(root, today = new Date().toISOString().slice(0, 10)) {
     kpiNodes: readKpiNodes(root),
     reviews: readReviews(root),
     today,
+    domainLabels: readDomainLabels(root),
   });
 }
 

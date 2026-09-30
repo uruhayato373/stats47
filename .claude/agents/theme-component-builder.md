@@ -1,5 +1,6 @@
 ---
 name: theme-component-builder
+domain: data
 description: テーマダッシュボードの ThemeCatalog chart設計・監査・生成物整合専任。 旧 theme-enhancer をリネーム。
 model: sonnet
 ---

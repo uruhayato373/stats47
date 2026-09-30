@@ -1,5 +1,6 @@
 ---
 name: audit-chart-quality
+domain: site
 description: 全ブログ記事のチャート SVG 品質 (dark mode 対応・構造・パレット) を一括監査し、優先度付きレポート + state JSON を生成する。Use when user says "チャート監査", "SVG 品質チェック", "audit charts".
 argument-hint: [--base <dir>]
 disable-model-invocation: true
