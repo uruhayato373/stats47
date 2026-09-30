@@ -2576,7 +2576,7 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 タグ: [UI・UX] [種類:改善] [実行:対話] [検証:npm run check-domains && npm run type-check --workspace admin] [起票:2026-09-27] [レーン:基盤]
 
 - **trigger**: `DOMAIN-CONFIG-01` と `DOMAIN-LANES-MIGRATE-01` が完了してから着手する。
-- **方向性**: サイドメニュー (`apps/admin/components/console-nav.tsx` の `NAV_GROUPS` 直書き) を、domains.json の各領域の `nav` から描く形に変える。サイドメニューには「その領域で人が判断するときに開く画面」だけを置き、各項目に画面の種類 (inventory / results / actions / policy / assets) を 1 つ付ける。規則は土木ノートの領域モデル (doboku-note リポジトリの戦略文書「14_領域モデル」と、機械可読の正本 domains.json)と同じにする。
+- **方向性**: サイドメニュー (`apps/admin/lib/nav-registry.ts` の `NAV_GROUPS` 直書き。2026-09-30 に純モジュールへ移し、表示は公式 Sidebar の `components/console-nav*.tsx`。項目のページ実在は `tests/unit/nav-registry.test.ts` が検査) を、domains.json の各領域の `nav` から描く形に変える。サイドメニューには「その領域で人が判断するときに開く画面」だけを置き、各項目に画面の種類 (inventory / results / actions / policy / assets) を 1 つ付ける。規則は土木ノートの領域モデル (doboku-note リポジトリの戦略文書「14_領域モデル」と、機械可読の正本 domains.json)と同じにする。
 - **先行実施済み (2026-09-27)**: アフィリエイト領域は土木ノートと同じ 3 画面 (`/affiliate` 成果・`/affiliate/placements` 掲載先・`/affiliate/programs` 提携・案件) に分け、サイドメニューに「アフィリエイト」グループを置いた。旧 `/ads` は転送。残りの領域はこの形に揃える。
 - **今の画面で直すところ (2026-09-27 時点)**:
   - 「制作・投稿」の下に X・Instagram・note・Kindle が直接並ぶ → チャネルは枝にせず、「SNS」領域の投稿状況・「商品」領域の販売状態の画面内タブにする。
