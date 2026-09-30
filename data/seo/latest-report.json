@@ -1,22 +1,13 @@
 {
   "schemaVersion": 1,
-  "date": "2026-09-29",
+  "date": "2026-09-30",
   "period": {
-    "periodStart": "2026-09-20",
-    "periodEnd": "2026-09-26",
+    "periodStart": "2026-09-21",
+    "periodEnd": "2026-09-27",
     "windowDays": 7
   },
-  "inputHash": "5868e2c64a307cbf4b9c36b15fa8da7456829c0ad982a53961f9da68e9241fc2",
+  "inputHash": "c6775c9af21ed3a91117d1b381e0dfe08e37178ac31beef706846d3f18e50620",
   "movements": [
-    {
-      "keyword": "都道府県",
-      "targetPath": "/",
-      "before": 3,
-      "after": 79,
-      "beforeImpressions": 2,
-      "impressions": 1,
-      "change": -76
-    },
     {
       "keyword": "日本人口ランキング",
       "targetPath": "/municipalities/ranking/japanese-population",
@@ -25,15 +16,6 @@
       "beforeImpressions": 2,
       "impressions": 1,
       "change": -47
-    },
-    {
-      "keyword": "高校教師 年収",
-      "targetPath": "/ranking/high-school-teacher-annual-income",
-      "before": 58,
-      "after": 19.5,
-      "beforeImpressions": 1,
-      "impressions": 4,
-      "change": 38.5
     },
     {
       "keyword": "site:stats47.jp",
@@ -45,15 +27,6 @@
       "change": 38.17879417879418
     },
     {
-      "keyword": "日照時間ランキング",
-      "targetPath": "/blog/annual-sunshine-duration-prefecture-gap",
-      "before": 39,
-      "after": 1,
-      "beforeImpressions": 1,
-      "impressions": 1,
-      "change": 38
-    },
-    {
       "keyword": "小松 市 人口",
       "targetPath": "/areas/17000/cities/17203/population",
       "before": 11,
@@ -61,6 +34,15 @@
       "beforeImpressions": 1,
       "impressions": 1,
       "change": -37
+    },
+    {
+      "keyword": "高校の先生 給料",
+      "targetPath": "/blog/high-school-teacher-salary-prefecture-gap",
+      "before": 47,
+      "after": 12,
+      "beforeImpressions": 1,
+      "impressions": 2,
+      "change": 35
     },
     {
       "keyword": "site:stats47.jp",
@@ -72,22 +54,13 @@
       "change": 34.61134453781513
     },
     {
-      "keyword": "高校教諭 年収",
-      "targetPath": "/blog/high-school-teacher-salary-prefecture-gap",
-      "before": 7.833333333333333,
-      "after": 42,
-      "beforeImpressions": 6,
-      "impressions": 1,
-      "change": -34.166666666666664
-    },
-    {
-      "keyword": "高校 教師 年収",
-      "targetPath": "/blog/high-school-teacher-salary-prefecture-gap",
-      "before": 10.76923076923077,
-      "after": 44.333333333333336,
-      "beforeImpressions": 13,
-      "impressions": 3,
-      "change": -33.56410256410257
+      "keyword": "任意保険 加入率",
+      "targetPath": "/ranking/voluntary-car-insurance-rate-bodily-injury",
+      "before": 79.83333333333333,
+      "after": 45.5,
+      "beforeImpressions": 12,
+      "impressions": 4,
+      "change": 34.33333333333333
     },
     {
       "keyword": "医薬品 卸 ランキング 県 別",
@@ -97,6 +70,33 @@
       "beforeImpressions": 1,
       "impressions": 2,
       "change": 33
+    },
+    {
+      "keyword": "都道府県",
+      "targetPath": "/",
+      "before": 28.333333333333332,
+      "after": 60,
+      "beforeImpressions": 3,
+      "impressions": 1,
+      "change": -31.666666666666668
+    },
+    {
+      "keyword": "高校 教師 年収",
+      "targetPath": "/blog/high-school-teacher-salary-prefecture-gap",
+      "before": 13.214285714285714,
+      "after": 44,
+      "beforeImpressions": 14,
+      "impressions": 2,
+      "change": -30.785714285714285
+    },
+    {
+      "keyword": "site:stats47.jp",
+      "targetPath": "/areas/42000/cities/42205",
+      "before": 63.47826086956522,
+      "after": 94,
+      "beforeImpressions": 23,
+      "impressions": 1,
+      "change": -30.52173913043478
     }
   ],
   "verdicts": [
@@ -107,11 +107,11 @@
     }
   ],
   "selected": {
-    "keyword": "道の駅多い県",
-    "targetPath": "/blog/roadside-station-count-prefecture-gap",
-    "rank": 8.414414414414415,
-    "impressions": 666,
-    "clicks": 1,
+    "keyword": "公衆電話の数 日本",
+    "targetPath": "/blog/public-phone-count",
+    "rank": 9.936739659367397,
+    "impressions": 411,
+    "clicks": 0,
     "group": 5,
     "previousMethod": null,
     "editableFile": null
@@ -147,6 +147,11 @@
       "keyword": "全国の公衆電話の数",
       "targetPath": "/ranking/public-phone-count",
       "proposalId": "36300590263-1"
+    },
+    {
+      "keyword": "道の駅多い県",
+      "targetPath": "/blog/roadside-station-count-prefecture-gap",
+      "proposalId": "36533510014-1"
     }
   ]
 }

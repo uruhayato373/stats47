@@ -90,6 +90,11 @@
       "date": "2026-09-29",
       "file": "data/seo/rank-history/2026-09-29.json",
       "sha256": "fc4a4244a587c6996b96cf834b4d6373dedb97514add33633ba6762e9d809a62"
+    },
+    {
+      "date": "2026-09-30",
+      "file": "data/seo/rank-history/2026-09-30.json",
+      "sha256": "10e6046f208fc6900b4589ff017b51191e7ba89830c4b374ef422ecc3fac1411"
     }
   ]
 }
