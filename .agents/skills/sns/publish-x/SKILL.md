@@ -9,6 +9,25 @@ primary_agent: x-strategist
 
 Playwright（永続プロファイル）で X のコンポーザを自動操作し、予約投稿を設定する。
 
+## 予約の取り消し (差し替え)
+
+予約済みの投稿を別の投稿と差し替えるときは、本文の先頭で照合して対象だけを取り消す。既定は照合の表示だけで、`--commit` で取り消す。
+一括削除は画面に出ている分しか消えないため、スクリプトが「選択 → 削除 → 読み直し」を対象 0 件まで繰り返し、対象外の件数が変わったら止める。
+
+```bash
+npx tsx .claude/skills/sns/publish-x/delete-x-scheduled.ts --match "<本文の先頭 8 文字以上>" [--match ...]            # 照合だけ
+npx tsx .claude/skills/sns/publish-x/delete-x-scheduled.ts --match "<本文の先頭 8 文字以上>" [--match ...] --commit   # 取り消す
+```
+
+取り消したら台帳 (`posts.json`) の該当行を `sns-posts-store.cjs` の `updateById(id, { status: "deleted" })` で更新する。
+直接指定 (`--media` / `--caption`・キー指定) の投稿は、同じキーの下書きがあればその 1 件を、無ければ新しい行を台帳に自動で記録する (予約・即時投稿とも。既に scheduled / posted の行は別の投稿なので上書きしない。判定は `.claude/scripts/sns/lib/x-direct-ledger.cjs`)。
+
+## ログインの維持
+
+専用プロファイル `.local/playwright-x-profile` のログインは、launchd (毎日 17:30 + ログイン時) の `refresh-session.mjs x` が確認し、
+切れていればキーチェーン `stats47-measurement-x` の ID/PW で 1 回だけ再ログインする。追加確認 (電話番号・ユーザー名・2FA) が出たら突破せず止め、
+`.local/authenticated-measurement/x.autologin-failed` を残す。人が確認してこのファイルを消すまで再試行しない。
+
 ## ⚠️ 重要: 初回 / セレクタ更新後は `--dry-run` で事前検証
 
 X の UI は頻繁に変わるため、セレクタが壊れていると **予約投稿のつもりが即時投稿になる** 事故が発生する（2026-04-18 実際に発生、Sprint 1 Day 2-5 が 4 件同時即時投稿）。対策として:

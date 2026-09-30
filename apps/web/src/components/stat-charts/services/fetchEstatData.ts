@@ -180,7 +180,14 @@ export async function fetchEstatDataWithCategories(
   if (results.some((result) => 'error' in result)) {
     return { error: 'データが見つかりません' };
   }
+  // 呼び出し側 (attribute-matrix / sunburst / treemap) は metricKey を分類コードとして突き合わせる。
+  // R2 の正典を読むようになってから metricKey は指標キー (例 unmarried-ratio-male-25-29) になったので、
+  // 要求した分類コードに付け直して、この関数の元の約束 (キー = 分類コード) を保つ。
   return {
-    data: results.flatMap((result) => ('data' in result ? result.data : [])),
+    data: results.flatMap((result, index) =>
+      'data' in result
+        ? result.data.map((row) => ({ ...row, metricKey: categoryCodes[index] }))
+        : []
+    ),
   };
 }

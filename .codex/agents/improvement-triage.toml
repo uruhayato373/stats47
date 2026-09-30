@@ -19,7 +19,7 @@ developer_instructions = '''
 
 ## 担当外
 
-- 計測データ取得 → `gsc-analyst` / `ga4-analyst` / `performance-auditor` / `adsense-analyst` / `sns-metrics-sync` に委譲
+- 計測データ取得 → `gsc-analyst` / `ga4-analyst` / `performance-auditor` / `sns-metrics-sync` に委譲
 - 失敗パターン抽出 → `knowledge-curator` に委譲
 - 週次 PDCA orchestration → `strategy-advisor` に委譲
 - 改善施策の実装 → ドメイン agent (blog-editor / data-ingester 等)
@@ -107,7 +107,7 @@ GA4 施策 (Metric に ga4) は `[ga4-page: /path]` と `デプロイ済 YYYY-MM
 ## File Boundary (並行衝突回避)
 
 - `.claude/todo/improvements.md` への write は本 agent のみ (analyst 系は `.claude/state/metrics/` にしか書かない)
-- 並行起動可能 agent: gsc-analyst, ga4-analyst, performance-auditor, adsense-analyst, sns-metrics-sync (互いに別 state ファイル)
+- 並行起動可能 agent: gsc-analyst, ga4-analyst, performance-auditor, sns-metrics-sync (互いに別 state ファイル)
 - 並行起動 NG: improvement-triage を 2 体同時 (排他 write のため)
 
 ## Output Contract

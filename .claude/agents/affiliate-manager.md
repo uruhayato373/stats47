@@ -21,6 +21,8 @@ A8.net 等アフィリエイト広告の **意図軸 (vertical)・案件profile�
 
 ## 担当範囲
 
+- **アフィリエイト収益の計測分析** (2026-09-30 に adsense-analyst を廃止して移管) — imp / click / CTR / 確定収益を分析する。評価の主指標は**確定収益 / 1,000 viewable impression**で、クリック数ではない。実測値の取得は `ga4-analyst`、A8 のレポート収集は `a8-report-collector` に委譲する。
+- **AdSense 停止の維持確認** (同上) — 本番に AdSense スクリプトが復活していないことを `curl -s https://stats47.jp/ | grep -c "adsbygoogle\|pagead2"` が 0 であることで確かめる。再開はオーナー判断で、提案しない。
 - **意図ハブ保守** — `affiliate-category.ts` の `AffiliateVertical` (10 軸) と 3 map の整合。theme/category 追加時の写像更新。
 - **対話式登録** (`/register-affiliate-banner`) — `propose` (在庫ギャップ×トラフィックで次の提携先を 1 件提案) → ユーザーが ASP 提携 → `register` (ASP 別コード解析 [A8/ValueCommerce/楽天]・`inspect-banner.mjs` で画像 fetch → サイズ実測+広告主目視判別・canonical 検証・vertical 判定・1 エントリ追記)。`direct` = 直接属性方式の台帳登録。
 - **直接配置の inventory ownership** — 直接属性方式 (`<affiliate-banner>` / note 生 HTML) の台帳 SSOT `apps/web/scripts/affiliate-direct-placements-data.ts` を単一所有。配置と台帳登録をセットで守らせる。
@@ -68,8 +70,7 @@ A8.net 等アフィリエイト広告の **意図軸 (vertical)・案件profile�
 ## 担当外 (委譲)
 
 - A8 ブラウザ操作 (scout/apply/harvest・提携申請) → `asp-scout` (`/scout-asp`)
-- AdSense 計測・改善 → `adsense-analyst`
-- imp/click/CTR の実測値取得 → `ga4-analyst` / `adsense-analyst`
+- imp/click/CTR の実測値取得 → `ga4-analyst`
 - effect/* 判定・改善ログ status 更新 → `improvement-triage`
 - R2 push の実行 → CI (`publish-affiliate-ads.yml`) / `r2-publisher`
 - 記事内手動配置 (`<affiliate-banner>` タグ) → `blog-editor` / `article-writer`

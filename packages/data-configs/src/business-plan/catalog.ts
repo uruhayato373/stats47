@@ -228,7 +228,7 @@ export const BUSINESS_PLAN_DECISIONS: readonly BusinessPlanDecision[] = [
     '移住・住宅・旅行・仕事を意思決定後の次行動として配置する。',
     '既存在庫SSOT・compliance・実験ゲートを通し、地図に広告を直接混在させない。',
     ['docs/00_プロジェクト管理/02_収益化戦略.md'],
-    ['affiliate-manager', 'adsense-analyst'],
+    ['affiliate-manager'],
     ['audit-affiliate-compliance', 'manage-affiliate-experiment'],
     ['weekly-revenue']
   ),
@@ -343,7 +343,7 @@ export const BUSINESS_PLAN_DECISIONS: readonly BusinessPlanDecision[] = [
     'M3/M6/M12値は予測ではなく投資・撤退判断用の仮説として扱う。',
     '既存売上を混ぜず、計測不能値を実績表示しない。',
     ['docs/00_プロジェクト管理/02_収益化戦略.md'],
-    ['strategy-advisor', 'adsense-analyst'],
+    ['strategy-advisor', 'affiliate-manager'],
     ['weekly-review', 'adsense-improvement'],
     ['weekly-revenue']
   ),
@@ -709,7 +709,7 @@ export const BUSINESS_PLAN_EVENTS: readonly BusinessPlanEvent[] = [
     label: '購入',
     canonicalEvent: null,
     status: 'manual',
-    owner: 'adsense-analyst',
+    owner: 'affiliate-manager',
     implementationPath: '.claude/state/metrics/',
     note: '外部販売サービス実績を週次で正規化する。',
   },

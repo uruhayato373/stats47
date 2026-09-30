@@ -2738,22 +2738,6 @@ warning のまま**理由付きで残す**のが正しい形で、これが本�
 
 ## 🟣 判断待ち — やるかどうかの意思決定が未了
 
-### [DOMAIN-AGENT-OVERLAP-01] 領域付与で見つかったエージェントの責務の重複と、データ領域への偏りを整理するか決める
-タグ: [エージェント・SSOT] [種類:意思決定] [実行:対話] [検証:npm run check-domains] [起票:2026-09-30] [領域:管理]
-
-- **背景 (2026-09-30)**: 全エージェント 61 体・スキル 164 件に主担当の領域を付けた (`npm run check-domains` が未設定・語彙外 0 を検査)。領域別のエージェント/スキルは strategy 1/9・plan 4/6・product 6/14・affiliate 6/10・site 13/35・sns 4/31・data 23/40・ops 4/19。
-- **決めること**: 次の重複を統合するか、責務の境界を書き分けるか。
-  - asp-scout と affiliate-operator (どちらも A8 管理画面で申請・走査・広告コード取得)
-  - adsense-analyst (AdSense 恒久停止後はアフィリエイト計測のみ) と affiliate-manager・a8-report-collector
-  - ui-reviewer・ui-consistency-reviewer・code-reviewer (いずれも UI をレビュー)
-  - theme-ui-manager と ranking-ui-manager (ページ別の同じ役割。横断は site-ux-manager)
-  - theme-researcher・theme-designer・theme-portfolio-manager (テーマ選定 1 つの判断を 3 段に分割)
-  - article-writer と blog-editor (どちらもリライト)
-  - data 領域が 23 体を持つ。ランキング・テーマ・GIS の 3 群に分けるか
-- **停止条件**: 領域を増やす提案はしない (領域は domains.json の 8 つに固定)。統合で agent を消すときは呼び出し元 skill を同時に直す。
-- **完了条件**: 各重複について統合・書き分け・現状維持のどれかを決め、決めた変更後も `npm run check-domains` と `check-agent-skill-consistency.cjs` が error 0。
-
-
 ### [DOMAIN-SHARED-POLICY-01] 管理の枠組み (5 役割・画面の種類・サイドメニューの規則) を共通事業方針に載せるか決める
 タグ: [エージェント・SSOT] [種類:意思決定] [実行:ユーザー] [起票:2026-09-27]
 

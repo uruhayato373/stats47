@@ -2,7 +2,7 @@
 name: fetch-adsense-data
 domain: affiliate
 description: 【停止中】AdSense は 2026-09-20 に恒久停止したため、このスキルは週次運用から外した。過去データの参照や、停止の確認で明示的に求められたときだけ使う。
-primary_agent: adsense-analyst
+primary_agent: affiliate-manager
 ---
 
 > **2026-09-20: AdSense は恒久停止した。** 正典は `docs/00_プロジェクト管理/02_収益化戦略.md` §3.1。

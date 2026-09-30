@@ -580,3 +580,31 @@ describe("parseRecipe — 壊れた ops を部分採用しない", () => {
     expect(parseOpsOf({ axisSum: { axis: "cat01" }, timeScope: "monthly", valueScale: 1 })).toBeUndefined();
   });
 });
+
+describe("buildRecipe / parseRecipe — supplementalSources (年の補完)", () => {
+  const withSupplement = metric(
+    { kind: "estat", statsDataId: "0000010201", cdCat01: "#A03503" },
+    {
+      supplementalSources: [
+        { years: [2025, 2020], source: { kind: "estat", statsDataId: "0004065933", cdTab: "2025_42", cdCat03: "3" }, reason: "SSDS 未反映" },
+        { years: [2030], source: { kind: "estat", statsDataId: "" }, reason: "statsDataId が無い補完はレシピに載せない" },
+      ],
+    },
+  );
+
+  it("補完は年を昇順にしてレシピに載せ、statsDataId の無い補完は落とす", () => {
+    expect(buildRecipe(withSupplement).ops?.supplements).toEqual([
+      { years: [2020, 2025], estatParams: { statsDataId: "0004065933", cdTab: "2025_42", cdCat03: "3" } },
+    ]);
+  });
+
+  it("R2 から読み戻すとき、年が数でない値や estatParams の無い補完を捨てる", () => {
+    const parsed = parseRecipe({
+      kind: "estat",
+      derived: true,
+      configHash: "x",
+      ops: { supplements: [{ years: [2025, "2026"], estatParams: { statsDataId: "0004065933" } }, { years: [2030] }, "bad"] },
+    });
+    expect(parsed?.ops?.supplements).toEqual([{ years: [2025], estatParams: { statsDataId: "0004065933" } }]);
+  });
+});

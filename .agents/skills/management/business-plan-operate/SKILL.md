@@ -51,7 +51,7 @@ primary_agent: strategy-advisor
 | 観測値・変換・品質 | data-ingester / gis-pipeline-runner |
 | X / note | x-strategist / note-manager |
 | Affiliate / 商品 | affiliate-manager / coconala-product-manager |
-| GA4・実測 | ga4-analyst / adsense-analyst |
+| GA4・実測 | ga4-analyst / affiliate-manager |
 | デプロイ | devops-runner（ユーザー明示承認が必要） |
 
 ## 書き込み境界
