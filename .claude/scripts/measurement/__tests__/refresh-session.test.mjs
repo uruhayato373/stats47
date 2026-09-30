@@ -87,3 +87,11 @@ test('TOTP 秘密鍵が無い・2FA 以外の画面・入力欄が見えない�
   // A8・もしもは 2FA の設定を持たないので入力しない
   assert.equal(await passTotpIfOffered(fakePage('https://www.a8.net/ap/mfa'), LOGIN.a8, cred), false);
 });
+
+test('X: ホームに着けば ok、ログイン画面や追加確認に残れば止める (突破しない)', () => {
+  assert.equal(classifyLoginOutcome('x', { url: 'https://x.com/home', hasPassword: false, hasChallenge: false }), 'ok');
+  assert.equal(classifyLoginOutcome('x', { url: 'https://x.com/i/flow/login', hasPassword: false, hasChallenge: true }), 'human_required');
+  assert.equal(classifyLoginOutcome('x', { url: 'https://x.com/account/access', hasPassword: false, hasChallenge: false }), 'human_required');
+  assert.equal(LOGIN.x.bundledChromium, true, 'publish-x と同じ Chromium で開く (Chrome 本体で開くとプロファイルが壊れうる)');
+  assert.equal(LOGIN.x.localOnly, true, 'X の state は CI へ渡さない');
+});

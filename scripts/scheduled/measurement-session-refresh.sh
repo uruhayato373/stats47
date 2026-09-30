@@ -1,5 +1,5 @@
 #!/bin/bash
-# measurement-session-refresh.sh — A8 / もしも / KDP / note の計測ログインを保ち、その直後に CI の収集を起動する
+# measurement-session-refresh.sh — A8 / もしも / KDP / note の計測ログインと X の予約投稿用ログインを保ち、その直後に CI の収集を起動する
 # (launchd 毎日 17:30 + ログイン時)。
 # 切れていればキーチェーンの ID/PW で 1 回だけ再ログインし、CI の Secret を更新する。
 # 2FA/CAPTCHA/失敗は突破せず停止して Mac に通知する。詳細: .claude/scripts/measurement/refresh-session.mjs
@@ -11,5 +11,7 @@
 source "$(dirname "$0")/_common.sh"
 REFRESH_RC=0
 log_run measurement-session-refresh node .claude/scripts/measurement/refresh-session.mjs a8 moshimo kdp note --publish || REFRESH_RC=$?
+# X は予約投稿 (publish-x) 用。Mac だけで使うので CI へは渡さない (--publish を付けない)
+log_run x-session-refresh node .claude/scripts/measurement/refresh-session.mjs x || REFRESH_RC=$?
 log_run measurement-collect-dispatch gh workflow run authenticated-measurement.yml --ref develop
 exit "$REFRESH_RC"

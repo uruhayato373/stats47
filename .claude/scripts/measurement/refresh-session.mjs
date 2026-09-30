@@ -21,6 +21,7 @@
  *   security add-generic-password -s stats47-measurement-moshimo -a <ログインID> -w
  *   security add-generic-password -s stats47-measurement-kdp -a <Amazon のメールアドレス> -w
  *   security add-generic-password -s stats47-measurement-note -a <note のメールアドレス> -w
+ *   security add-generic-password -s stats47-measurement-x -a <X のユーザー名 (stats47jp373)> -w
  *
  * KDP (2026-09-27 オーナー承認で追加): Amazon は「メール → 次へ → パスワード」の 2 段階画面で、本棚と
  * Reports (kdpreports.amazon.co.jp) の認証が別。本棚 → 既知 ASIN で口座照合 → Reports の順に通し、
@@ -66,6 +67,24 @@ export const LOGIN = {
     submit: 'button:has-text("確認して続ける")',
     loggedIn: (url) => /note\.com\/dashboard\/salesmanage/.test(url),
     challengeUrl: /note\.com\/login/,
+  },
+  // X (2026-09-30 オーナー判断で追加): 予約投稿 (publish-x) の専用プロファイルのログインを保つ。
+  // publish-x は Playwright 同梱の Chromium でこのプロファイルを開くので、ここも同じブラウザで開く
+  // (Chrome 本体で開くと Cookie の暗号化方式が変わりログインが壊れうる)。X の投稿は Mac だけなので state は CI へ渡さない。
+  // ユーザー名の後に「電話番号またはユーザー名」の追加確認が出たら突破せず human_required で止める。
+  x: {
+    loginUrl: 'https://x.com/i/flow/login',
+    checkUrl: 'https://x.com/home',
+    user: 'input[autocomplete="username"]',
+    next: 'button:has-text("次へ")',
+    password: 'input[name="password"]',
+    submit: '[data-testid="LoginForm_Login_Button"]',
+    headed: true, // X は headless を bot とみなしやすい
+    bundledChromium: true,
+    localOnly: true,
+    loggedIn: (url) => /^https:\/\/(x|twitter)\.com\/home/.test(url),
+    challengeUrl: /\/account\/access|\/i\/flow\/(login|two-factor)/,
+    challengeSelector: 'input[data-testid="ocfEnterTextTextInput"]',
   },
   kdp: {
     loginUrl: 'https://kdp.amazon.co.jp/ja_JP/bookshelf',
@@ -175,7 +194,10 @@ async function refresh(source, { root, publish, headed, waitHuman }) {
   if (existsSync(failMark)) return { source, status: 'blocked', reason: `前回の自動ログインが失敗したため停止中。確認後に ${failMark} を削除する` };
 
   const context = await chromium.launchPersistentContext(join(root, '.local', `playwright-${source}-profile`), {
-    channel: 'chrome', headless: !(headed || waitHuman || conf.headed), locale: 'ja-JP', timezoneId: 'Asia/Tokyo',
+    ...(conf.bundledChromium
+      ? { args: ['--disable-blink-features=AutomationControlled'], viewport: { width: 1280, height: 900 } }
+      : { channel: 'chrome' }),
+    headless: !(headed || waitHuman || conf.headed), locale: 'ja-JP', timezoneId: 'Asia/Tokyo',
   });
   let loggedInBy = 'session';
   try {
@@ -208,7 +230,9 @@ async function refresh(source, { root, publish, headed, waitHuman }) {
       await page.goto(conf.loginUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
       await submitCredential(page, conf, cred);
       await passTotpIfOffered(page, conf, cred);
-      const status = classifyLoginOutcome(source, { url: page.url(), ...(await pageSignals(page)) });
+      const signals = await pageSignals(page);
+      if (conf.challengeSelector && await page.locator(conf.challengeSelector).first().isVisible().catch(() => false)) signals.hasChallenge = true;
+      const status = classifyLoginOutcome(source, { url: page.url(), ...signals });
       if (status !== 'ok') {
         writeFileSync(failMark, `${new Date().toISOString()} ${status}\n`, { mode: 0o600 });
         return { source, status, reason: status === 'human_required' ? '2FA/CAPTCHA 等の人の確認が必要' : 'ID/PW が通らなかった (資格情報ストアの値を確認)' };
@@ -224,11 +248,12 @@ async function refresh(source, { root, publish, headed, waitHuman }) {
         return { source, ...after };
       }
     }
-    writeFileSync(statePath, JSON.stringify(scopedState(source, await context.storageState({ indexedDB: true }))), { mode: 0o600 });
+    // X のログインは専用プロファイルそのものに残る。CI へ渡す state は作らない
+    if (!conf.localOnly) writeFileSync(statePath, JSON.stringify(scopedState(source, await context.storageState({ indexedDB: true }))), { mode: 0o600 });
   } finally {
     await context.close();
   }
-  if (publish) {
+  if (publish && !conf.localOnly) {
     execFileSync(process.execPath, [join(root, '.claude/scripts/measurement/bootstrap-session.mjs'), source, '--root', root, '--publish'],
       { stdio: ['ignore', 'pipe', 'inherit'] });
   }
@@ -239,7 +264,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const args = process.argv.slice(2);
   const sources = args.filter((a) => !a.startsWith('--'));
   if (!sources.length || args.includes('--help')) {
-    console.log('Usage: refresh-session.mjs SOURCE... [--publish] [--headed] [--wait-human]  (SOURCE: a8 | moshimo | kdp | note)');
+    console.log('Usage: refresh-session.mjs SOURCE... [--publish] [--headed] [--wait-human]  (SOURCE: a8 | moshimo | kdp | note | x)');
     process.exit(0);
   }
   const root = fileURLToPath(new URL('../../../', import.meta.url));
