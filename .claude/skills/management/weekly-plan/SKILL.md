@@ -1,5 +1,6 @@
 ---
 name: weekly-plan
+domain: plan
 description: 週次計画を生成する（決定的な並列収集→戦略分析→批判的レビュー→計画出力）。Use when user says "週次計画", "今週の計画", "来週の予定". KPIベースで優先順位を決定する。
 primary_agent: strategy-advisor
 ---

@@ -1,5 +1,6 @@
 ---
 name: ranking-content-critic
+domain: data
 description: ランキングページ AI コンテンツ (考察 / 地域別の傾向 / FAQ / 県別解説) の意味レビュー専任。read-only でコンテンツを読み、機械ゲート (audit-ai-content.mjs) が捕まえられない意味的品質 (重複・読者価値・分析の質・中立トーン) を判定する。修正は ranking-content-author に委ねる。
 model: sonnet
 ---

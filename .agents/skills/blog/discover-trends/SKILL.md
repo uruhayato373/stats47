@@ -1,5 +1,6 @@
 ---
 name: discover-trends
+domain: site
 description: 指定ソース（Google Trends/GSC/はてブ/Google News/Yahoo/note.com）から急上昇トピックを取得し、stats47の統計データとマッチングしてブログ記事候補を提案する。--whitepaperでNotebookLM白書の切り口、--deepでe-Stat取得による補完ループも可。Use when user says "トレンド検索", "トレンド発見", "GSCトレンド", "白書トレンド" など複数視点で記事ネタを発見したいとき.
 disable-model-invocation: true
 primary_agent: trend-scout

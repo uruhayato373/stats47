@@ -1,5 +1,6 @@
 ---
 name: area-curator
+domain: data
 description: areaページの県別編集コンテンツ（特産品・県シンボル）を一次資料から整備し、editorial/<code>.tsを管理する。書籍からは事実だけを抽出し、解説・図案・写真を複製しない。県別内容の追加・是正に使う。
 model: sonnet
 ---

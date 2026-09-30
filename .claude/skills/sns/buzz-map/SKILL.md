@@ -1,5 +1,6 @@
 ---
 name: buzz-map
+domain: sns
 description: バズ地図カード（まちの計量舎系の日本地図×統計）の静止画PNG・動画MP4を「spec作成 → レンダ → 目視 → 改善」の反復で作る統合スキル。Use when user says "バズ地図", "buzz-map", "地図カード作成", "地図動画". 型・トークン・テーマカタログの正典は .claude/rules/buzz-map-standards.md。
 disable-model-invocation: true
 argument-hint: "<theme_id|specパス> [--ratio 45|11|169|916] [--video] [--preview] [--year N --summary]"

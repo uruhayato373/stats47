@@ -1,5 +1,6 @@
 ---
 name: investigate-note-data
+domain: product
 description: note 記事（B/C/D シリーズ）のデータ調査・分析を行う。Use when user says "noteデータ調査", "データ分析", "相関分析". 相関・地域パターン・チャート候補を定量化.
 disable-model-invocation: true
 primary_agent: note-manager

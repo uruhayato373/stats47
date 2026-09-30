@@ -1,5 +1,6 @@
 ---
 name: recompute-correlations
+domain: data
 description: >-
   R2 観測値 (app/stats/<metric>/values.json) を入力に、使い捨て memory SQLite で指標間の
   相関 (Pearson r / 偏相関 / effectiveR) を再計算し、R2 snapshot

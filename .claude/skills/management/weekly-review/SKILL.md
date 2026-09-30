@@ -1,5 +1,6 @@
 ---
 name: weekly-review
+domain: strategy
 description: 週次レビューを生成する。決定的な実績収集、計画差分、成果・課題・学びを記録する。Use when user says "週次レビュー", "今週の振り返り", "週次まとめ".
 primary_agent: strategy-advisor
 ---

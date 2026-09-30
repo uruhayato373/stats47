@@ -1,5 +1,6 @@
 ---
 name: ui-consistency-reviewer
+domain: site
 description: ページ横断 UI 一貫性 review 専任 + デザイン SSOT の drift ゲート。 code-reviewer --scope ui-consistency 分離。 read-only。
 model: opus
 ---

@@ -1,5 +1,6 @@
 ---
 name: backlog-solver-hard
+domain: plan
 description: backlog-loop の難物 (impl-large / indicator-expansion / sonnet が失敗した案件) を 1 件ずつ解く agent。run 本体より上のモデルで、1 回の起動で 1 エントリだけを扱う。
 model: fable
 ---

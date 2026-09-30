@@ -1,5 +1,6 @@
 ---
 name: inspect-url
+domain: site
 description: Google Search Console の URL Inspection API で URL のインデックス状態を取得する。Use when user says "URL Inspection", "インデックス状態", "inspect-url". 特定 URL が登録済みか・なぜ未登録かを API で確認.
 disable-model-invocation: true
 argument-hint: <url>

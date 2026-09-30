@@ -1,5 +1,6 @@
 ---
 name: sns-weekly-report
+domain: sns
 description: >-
   .claude/skills/analytics/sns-metrics-improvement/snapshots の週次 CSV
   スナップショットから SNS パフォーマンスレポートを Markdown で生成する。Use when user

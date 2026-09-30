@@ -1,5 +1,6 @@
 ---
 name: whitepaper-chart-inventory
+domain: data
 description: 11 種の白書 (NotebookLM ノートブック) から「実描画されているチャート」を逆引き抽出し、`.claude/skills/analytics/whitepaper-chart-inventory/reference/inventory/<wp-slug>.md` にチャート一覧を整理する。後段の e-Stat 紐付け・area/theme 配置決定の入力となる。Use when user says "白書チャート逆引き", "whitepaper chart inventory", "/whitepaper-chart-inventory".
 primary_agent: performance-auditor
 ---

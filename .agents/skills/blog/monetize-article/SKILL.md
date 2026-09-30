@@ -1,5 +1,6 @@
 ---
 name: monetize-article
+domain: site
 description: 既存ブログ記事に <affiliate-banner> を適切な位置に挿入する。<ad-slot> は 2026-09-20 の AdSense 恒久停止で無効になったため配置しない。Use when user says "/monetize-article", "広告挿入", "記事に広告を入れて". スラッグを引数として受け取る.
 primary_agent: article-writer
 ---

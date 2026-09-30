@@ -1,5 +1,6 @@
 ---
 name: monthly-plan
+domain: plan
 description: 月次計画を生成する（週次レビューと各バックログを集約 → 今月の重点1-2テーマに絞る → 予算配分）。Use when user says "月次計画", "今月の計画", "今月どこに張る". Pro 使用量を制約軸に重点を1-2テーマへ絞る。週次の重い収集は再実行せず集約する軽量設計.
 primary_agent: strategy-advisor
 ---

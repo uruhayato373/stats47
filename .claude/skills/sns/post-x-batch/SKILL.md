@@ -1,5 +1,6 @@
 ---
 name: post-x-batch
+domain: sns
 description: X (Twitter) ランキング定型投稿を N 本まとめて生成し posts.json に draft 登録する量産スキル。Use when user says "X量産", "X投稿まとめて", "X週次バッチ", "post-x-batch". 候補選定→画像→キャプション執筆→lint→draft登録の5フェーズ。投稿はしない (publish-x --from-queue が消化)。
 disable-model-invocation: true
 primary_agent: x-strategist

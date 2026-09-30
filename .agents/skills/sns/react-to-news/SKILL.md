@@ -1,5 +1,6 @@
 ---
 name: react-to-news
+domain: sns
 description: じじネタ・時事ニュースに即SNS反応する瞬発力パイプライン。トピック(自由文)→該当指標の発見→投稿用静止画(SVG/PNG 横+IG縦)+キャプション草稿の生成までを数分で通す。Use when user says "このニュースでSNS", "時事ネタ対応", "速報でSNS出したい", "react to news", "じじネタ投稿".
 primary_agent: x-strategist
 ---

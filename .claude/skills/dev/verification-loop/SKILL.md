@@ -1,5 +1,6 @@
 ---
 name: verification-loop
+domain: ops
 description: 6段階品質ゲートを順次実行する（ビルド→型→lint→テスト→セキュリティ→diff）。Use when user says "品質チェック", "verification-loop", "検証ループ". デプロイ前の最終チェック.
 primary_agent: devops-runner
 ---

@@ -1,5 +1,6 @@
 ---
 name: analyze-winning-patterns
+domain: site
 description: アクセス数(GSC CTR/順位)の多いブログ記事を「良い記事」と仮置きし、トップ記事の構造特徴を実測と突合して勝ち要因を抽出する、品質継続改善ループの「天井を上げる」側。analyze-winning-patterns.mjsでfeatureSignalsを算出し、confidence hi/midの信号のみblog-quality-standardsへ書き戻す。Use when user says "良い記事とは何か分析", "勝ちパターン", "ブログの質を底上げ", "何が刺さるか".
 argument-hint: [--min-imp 15]
 primary_agent: gsc-analyst

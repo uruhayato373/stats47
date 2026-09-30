@@ -1,5 +1,6 @@
 ---
 name: competitor-scan
+domain: sns
 description: SNS 競合アカウントをテーマ別の名乗り (統計/リスク/格差/ご当地 等) で巡回し、skill referenceへ差分レポートを生成する。Use when user says "競合スキャン", "SNS競合調査", "競合分析", "competitor scan".
 disable-model-invocation: true
 argument-hint: "[--platform x|instagram|all] [--deep]"

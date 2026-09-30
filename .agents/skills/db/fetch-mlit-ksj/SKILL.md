@@ -1,5 +1,6 @@
 ---
 name: fetch-mlit-ksj
+domain: data
 description: 国土数値情報（MLIT KSJ）のデータセットをダウンロードし TopoJSON に変換して R2 に保存する。Use when user says "国土数値情報", "KSJデータ", "fetch-mlit-ksj". GIS レイヤーオーバーレイ用.
 disable-model-invocation: true
 primary_agent: gis-pipeline-runner

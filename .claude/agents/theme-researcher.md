@@ -1,5 +1,6 @@
 ---
 name: theme-researcher
+domain: data
 description: テーマページ (/themes/*) の「指標 × チャート」と白書由来の論点レンズ候補を NotebookLM・公式ダッシュボード研究カタログ・Web・GSC から調査し、provenance 付きで提案する調査専任エージェント。カタログ設計 (theme-designer) の前段で使う。
 model: sonnet
 ---

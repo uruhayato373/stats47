@@ -1,5 +1,6 @@
 ---
 name: validate-note-idea
+domain: product
 description: note 記事（B/C/D シリーズ）のアイデアを需要・独自性・信頼性の 3 軸で検証する。Use when user says "noteアイデア検証", "記事アイデア検証", "書く前に検証". 読まれない企画を事前に弾く.
 primary_agent: note-manager
 ---

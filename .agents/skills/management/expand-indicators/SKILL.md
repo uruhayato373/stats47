@@ -1,5 +1,6 @@
 ---
 name: expand-indicators
+domain: data
 description: |
   .claude/todo/backlog.md の検証済み候補を、git TS config → e-Stat → R2 の
   完全DBレス経路で少数ずつ追加する。Use when user says "指標追加", "indicator 拡充",

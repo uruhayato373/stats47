@@ -1,5 +1,6 @@
 ---
 name: performance-report
+domain: site
 description: パフォーマンス総合レポートを生成する（トレンド・バジェット監査・ページ種別比較・改善提案）。Use when user says "パフォーマンスレポート", "速度レポート", "CWVまとめ". .claude/state/metrics/psi の history.csv / LATEST.md から分析.
 argument-hint: "[--period 7d|28d|3m] [--compare]"
 allowed-tools: Read, Bash, Grep

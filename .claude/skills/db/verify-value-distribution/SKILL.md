@@ -1,5 +1,6 @@
 ---
 name: verify-value-distribution
+domain: data
 description: 疑わしい値分布 (ゼロが多い・県数が少ない・負値がある) を持つ metric の中身を一次情報で確かめ、検証済みプロファイルに「予測」として記録する。ユーザーが「値がおかしい指標を調べたい」「未検証キューを消化したい」「ゼロだらけのランキングを確認して」等と言ったときに使う。週次監査 (l) が起票した未検証分の消化にも使う。
 primary_agent: data-ingester
 co_agents: [estat-researcher]

@@ -1,5 +1,6 @@
 ---
 name: build-geo-analysis
+domain: data
 description: >
   Geo分析を入力レイヤーから県別途中artifact、空間演算、保存則、lineage manifest、最終aggregateまで生成・監査する。
   Use when user says "Geo分析を作る", "GIS掛け合わせ", "途中地図", "メッシュ分析", "人口×駅".

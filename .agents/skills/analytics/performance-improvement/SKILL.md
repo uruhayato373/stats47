@@ -1,5 +1,6 @@
 ---
 name: performance-improvement
+domain: site
 description: PSI、Chrome DevTools MCP、Cloudflare の日次 snapshotでCore Web VitalsとWorkers性能を実測し、改善バックログ・実装・再計測を証拠ベースで進める。Use when user says "PSI改善", "LCP改善", "CLS改善", "パフォーマンス改善", "Core Web Vitals", "Cloudflare性能", or asks for a web performance audit.
 primary_agent: performance-auditor
 ---

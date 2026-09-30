@@ -1,5 +1,6 @@
 ---
 name: find-quote-rt
+domain: sns
 description: X の直近3日以内のバズツイートを全テーマ並列検索し、鮮度×エンゲージメントで最上位候補を提示する。Use when user says "引用RT", "バズツイート検索", "quote RT". 元スレッドが活発なうちに引用RTで到達を最大化.
 disable-model-invocation: true
 argument-hint: "[テーマ] [--post]"

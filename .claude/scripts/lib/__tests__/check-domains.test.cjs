@@ -3,7 +3,7 @@ const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
 
-const { checkDomains } = require("../check-domains.cjs");
+const { checkDomains, checkOwners, frontmatterDomain } = require("../check-domains.cjs");
 
 const ROOT = path.resolve(__dirname, "../../../..");
 const always = { pageExists: () => true, pathExists: () => true };
@@ -51,4 +51,43 @@ test("navKinds に無い画面の種類・href と channels の両持ち・id �
 test("documents が未知の領域を指したら error にする", () => {
   const cfg = { ...kinds, domains: [domain()], documents: { "docs/x/": "nope" } };
   assert.match(checkDomains(cfg, always).errors.join("\n"), /未知の領域 id/);
+});
+
+const md = (fm) => `---\nname: x\n${fm}description: y\n---\n\n# body\ndomain: site\n`;
+const IDS = ["plan", "site"];
+
+test("frontmatter の domain だけを読み、本文の domain: 行は数えない", () => {
+  assert.equal(frontmatterDomain(md("domain: plan\n")), "plan");
+  assert.equal(frontmatterDomain(md("")), null);
+  assert.equal(frontmatterDomain("# frontmatter なし\ndomain: plan\n"), null);
+});
+
+test("既知の領域を 1 つ持つエージェント・スキルは error 0 で領域別に数える (非発火側)", () => {
+  const r = checkOwners(
+    [
+      { kind: "agent", file: "a.md", text: md("domain: plan\n") },
+      { kind: "skill", file: "s/SKILL.md", text: md('domain: "site"\n') },
+    ],
+    IDS,
+  );
+  assert.deepEqual(r.errors, []);
+  assert.equal(r.missing + r.unknown, 0);
+  assert.deepEqual(r.byDomain, { plan: { agent: 1, skill: 0 }, site: { agent: 0, skill: 1 } });
+});
+
+test("domain の未設定・語彙外・複数指定を error にし、件数を分けて数える (発火側)", () => {
+  const r = checkOwners(
+    [
+      { kind: "agent", file: "none.md", text: md("") },
+      { kind: "agent", file: "bad.md", text: md("domain: marketing\n") },
+      { kind: "skill", file: "two/SKILL.md", text: md("domain: plan\ndomain: site\n") },
+    ],
+    IDS,
+  );
+  const text = r.errors.join("\n");
+  assert.match(text, /none\.md: frontmatter に domain が無い/);
+  assert.match(text, /bad\.md: domain が領域の正本に無い: marketing/);
+  assert.match(text, /two\/SKILL\.md: domain が複数ある/);
+  assert.equal(r.missing, 1);
+  assert.equal(r.unknown, 2);
 });

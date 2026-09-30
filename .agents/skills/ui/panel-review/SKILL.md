@@ -1,5 +1,6 @@
 ---
 name: ui-panel-review
+domain: site
 description: Web ページの UI/UX を10人の専門家パネルとして評価する。Use when user says "UIレビュー", "ページの使い勝手", "UXパネル". Playwright MCP 連携でスクリーンショット取得可能.
 disable-model-invocation: true
 primary_agent: blog-critic

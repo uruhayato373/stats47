@@ -1,5 +1,6 @@
 ---
 name: write-prepared-article
+domain: site
 description: 週次計画が割り当てた本数のブログ記事を、接地・データ健全性ゲート・SVG・prompt の準備から書き上げ、決定的ゲート → critic → 公開待ちまで確定する。Use when user says "今週のブログを書く", "準備済み記事を書く", "write-prepared-article".
 disable-model-invocation: true
 primary_agent: article-writer

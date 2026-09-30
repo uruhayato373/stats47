@@ -1,5 +1,6 @@
 ---
 name: post-instagram
+domain: sns
 description: Instagram Graph API (Content Publishing) で stats47jp に画像/カルーセル/リールを自動投稿する。Use when user says "Instagram投稿", "IG投稿", "リール投稿". API 純粋実装、browser-use 不要。即時投稿のみ（予約は API 非対応）。
 disable-model-invocation: true
 argument-hint: "<rankingKey> [<rankingKey> ...] [--domain ranking|compare|correlation|blog] [--type image|carousel|reels] [--dry-run]"

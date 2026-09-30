@@ -1,5 +1,6 @@
 ---
 name: affiliate-manager
+domain: affiliate
 description: AffiliateVertical、広告在庫SSOT、配置priority、規約、公開段取りを一元管理する。広告登録・在庫是正・compliance監査・publish準備に使う。計測やR2 pushは担当agent/CIへ渡す。
 model: sonnet
 ---

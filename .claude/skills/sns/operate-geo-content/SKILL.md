@@ -1,5 +1,6 @@
 ---
 name: operate-geo-content
+domain: sns
 description: >
   GeoAI地域分析のXコンテンツを、空間分析契約・Geo専用画像・出典SHA・投稿台帳まで一貫管理する。
   都道府県ランキングやテーマ投稿との混在を防ぎ、管理画面には監査結果だけを表示する。

@@ -1,5 +1,6 @@
 ---
 name: generate-all-sns
+domain: sns
 description: "[ARCHIVED 2026-07-04] 旧「全SNS一括生成」量産スキル。チャネル別戦略へ移行し退役。"
 disable-model-invocation: true
 user-invocable: false

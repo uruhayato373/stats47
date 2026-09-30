@@ -20,47 +20,47 @@
 
 ## Tier 1: Strategy / Planning (7 体)
 
-| agent | role | 派生元 |
-|---|---|---|
-| `strategy-advisor` | 週次 PDCA・NSM・事業計画SSOT/Go-Pivot-Stop・批判的 review (knowledge / triage は分離)。skill `/business-plan-operate` | 既存拡張 |
-| `backlog-processor` 🆕 | `.claude/todo/{05,06,01}` を分類して処理し、**機械ゲートを通ったものだけ**行削除する消化ループの主体。証拠は `.claude/state/backlog-loop/ledger.json` に残り、gate 無しの削除は verify が exit 1 で止める。04 は触らない (improvement-triage の排他 write)。正典 `.claude/rules/backlog-loop.md`、skill `/process-backlog` | 2026-08-17 新設 |
-| `backlog-solver-hard` 🆕 | backlog-loop の難物 (impl-large / indicator-expansion / sonnet が失敗した案件) を **1 起動 1 件**で解く。CI の run 本体は sonnet 固定なので、上位モデル (fable) は本 agent への委譲でのみ使う | 2026-08-17 新設 |
-| `todo-curator` 🆕 | `.claude/todo` の台帳を**整える** (消化ではない)。01 受信箱の triage、期限超過・鮮度切れの棚卸し提案、`todo-standards.md` の整合維持、台帳外に散った TODO の回収。**行削除はしない** (gate 証拠付きの backlog-loop CI が専権)、04 も触らない | 2026-08-18 新設 |
-| `knowledge-curator` 🆕 | 失敗・学びの記録 + auto memory 整理 | strategy-advisor 分離 |
-| `improvement-triage` 🆕 | 改善バックログ整理 + status 更新 (`.claude/todo/improvements.md` 排他 append) | strategy-advisor 分離 |
-| `blog-seo-strategist` 🆕 | ブログSEO拡充戦略の戦略ハブ (施策 done/todo 台帳 + 型配分 + 四半期再学習)。真実源 `.claude/state/blog/seo-strategy.json`。実行は trend-scout(記事)/ranking-expander(ランキング)/gsc-analyst(KPI)/improvement-triage(effect) に委譲。戦略全文は本 agent §戦略コンテキスト (旧 docs/02 doc 15 を統合し SSOT を .claude に一本化) | 2026-07-12 新設 |
-| `theme-portfolio-manager` 🆕 | テーマ群 (22) のポートフォリオ管理ハブ (blog-seo-strategist のテーマ版)。テーマ別 GSC/GA4/データ品質を評価し keep/improve/merge/split/rename/retire を実測根拠つきで判定、実験 baseline/効果測定を台帳管理。真実源 `.claude/state/themes/{portfolio,experiments}.json` (validator: `.claude/scripts/themes/validate-theme-state.mjs`)。実行は theme-researcher(調査)/theme-designer(カタログ設計)/improvement-triage(effect ラベル・排他 writer) に委譲。判定基準の正典 = `.claude/skills/theme/manage-theme-portfolio/reference/theme-taxonomy-reorganization.md`、運用設計 = `.claude/skills/theme/manage-theme-portfolio/reference/テーマポートフォリオ運用.md` | 2026-07-13 新設 |
+| agent | 領域 | role | 派生元 |
+|---|---|---|---|
+| `strategy-advisor` | strategy | 週次 PDCA・NSM・事業計画SSOT/Go-Pivot-Stop・批判的 review (knowledge / triage は分離)。skill `/business-plan-operate` | 既存拡張 |
+| `backlog-processor` 🆕 | plan | `.claude/todo/{05,06,01}` を分類して処理し、**機械ゲートを通ったものだけ**行削除する消化ループの主体。証拠は `.claude/state/backlog-loop/ledger.json` に残り、gate 無しの削除は verify が exit 1 で止める。04 は触らない (improvement-triage の排他 write)。正典 `.claude/rules/backlog-loop.md`、skill `/process-backlog` | 2026-08-17 新設 |
+| `backlog-solver-hard` 🆕 | plan | backlog-loop の難物 (impl-large / indicator-expansion / sonnet が失敗した案件) を **1 起動 1 件**で解く。CI の run 本体は sonnet 固定なので、上位モデル (fable) は本 agent への委譲でのみ使う | 2026-08-17 新設 |
+| `todo-curator` 🆕 | plan | `.claude/todo` の台帳を**整える** (消化ではない)。01 受信箱の triage、期限超過・鮮度切れの棚卸し提案、`todo-standards.md` の整合維持、台帳外に散った TODO の回収。**行削除はしない** (gate 証拠付きの backlog-loop CI が専権)、04 も触らない | 2026-08-18 新設 |
+| `knowledge-curator` 🆕 | ops | 失敗・学びの記録 + auto memory 整理 | strategy-advisor 分離 |
+| `improvement-triage` 🆕 | plan | 改善バックログ整理 + status 更新 (`.claude/todo/improvements.md` 排他 append) | strategy-advisor 分離 |
+| `blog-seo-strategist` 🆕 | site | ブログSEO拡充戦略の戦略ハブ (施策 done/todo 台帳 + 型配分 + 四半期再学習)。真実源 `.claude/state/blog/seo-strategy.json`。実行は trend-scout(記事)/ranking-expander(ランキング)/gsc-analyst(KPI)/improvement-triage(effect) に委譲。戦略全文は本 agent §戦略コンテキスト (旧 docs/02 doc 15 を統合し SSOT を .claude に一本化) | 2026-07-12 新設 |
+| `theme-portfolio-manager` 🆕 | data | テーマ群 (22) のポートフォリオ管理ハブ (blog-seo-strategist のテーマ版)。テーマ別 GSC/GA4/データ品質を評価し keep/improve/merge/split/rename/retire を実測根拠つきで判定、実験 baseline/効果測定を台帳管理。真実源 `.claude/state/themes/{portfolio,experiments}.json` (validator: `.claude/scripts/themes/validate-theme-state.mjs`)。実行は theme-researcher(調査)/theme-designer(カタログ設計)/improvement-triage(effect ラベル・排他 writer) に委譲。判定基準の正典 = `.claude/skills/theme/manage-theme-portfolio/reference/theme-taxonomy-reorganization.md`、運用設計 = `.claude/skills/theme/manage-theme-portfolio/reference/テーマポートフォリオ運用.md` | 2026-07-13 新設 |
 
 ## Tier 2: Data / Infra
 
-| agent | role | 派生元 |
-|---|---|---|
-| `estat-researcher` 🆕 | e-Stat / MLIT DPF 探索・メタ確認 (DB には触らない) | data-pipeline 分割 |
-| `open-data-curator` 🆕 | e-Stat外の政府・自治体データ源をsource/dataset単位で棚卸しし、取得方式・粒度・GIS・ライセンス・更新性・stats47適合性のgit TSカタログを排他管理。**+ provenance 監査オーナー** (全 metric の出典・再現性を `/audit-provenance` で棚卸し、クラス B/C/D を是正。正典 data-provenance-standards.md)。実取得・投入は既存ownerへ委譲。**+ 参考文献の段階処理オーナー** (PDF→ページ画像→Markdown文字起こし→図クロップ→台帳を `/process-reference-source` で不変 revision に積む。正典 reference-source-standards.md §3) | 2026-07-18 新設・2026-07-19 provenance 監査追加・2026-09-05 参考文献段階処理追加 |
-| `data-ingester` 🆕 | metrics 登録 + stats_* 投入 + 47県カバレッジ検証 (GIS は gis-* に委譲)。**非 e-Stat 投入時は provenance 9点セット必須** (data-provenance-standards.md) | data-pipeline + db-manager 分割 |
-| `db-schema-manager` 🆕 | スキーマ・migration・reset 専任 | db-manager 分割 |
-| `snapshot-exporter` 🆕 | git TS / R2 source → snapshot / Remotion 派生 JSON 生成 | db-manager 分割 |
-| `r2-publisher` 🆕 | R2 push / pull / du 専任 | db-manager 分割 |
-| `ranking-publisher` 🆕 | ranking 公開多段 (generate-ranking-items / KNOWN・SITEMAP・INDEXABLE 再生成 / deploy / purge / 本番実測) のオーケストレーション。観測値=data-ingester、push=r2-publisher、deploy=devops-runner に委譲 | 2026-06-21 新設 |
-| `ranking-expander` 🆕 | SSDS ランキング拡充ループ (計測ゲート付き需要ファースト): 候補キュレーション + config 生成 (gen-ssds-configs) + キュー状態管理 (build-expansion-queue)。投入=data-ingester、公開=ranking-publisher、計測=gsc-analyst に委譲。skill `/expand-rankings`。旧 expand-indicators 再構築 | 2026-07-12 新設 |
-| `gis-curator` 🆕 | KSJ GIS メタ SSOT (datasets.ts / registry.ts) 管理・dataset lifecycle・メタ整合。完全DBレス (git TS=SSOT)。pipeline は gis-pipeline-runner、push は r2-publisher に委譲 | 2026-06-21 新設 (GIS DBレス化) |
-| `gis-pipeline-runner` 🆕 | KSJ GIS取得 (download → TopoJSON+provenance → 実R2監査)。全県/全1次メッシュ対応。SSOT編集はgis-curator、pushはr2-publisherへ委譲 | 2026-06-21 新設 (GIS DBレス化) |
-| `geo-analysis-curator` 🆕 | Geo分析の入力/補助レイヤー境界、空間演算stage、lineage manifest、保存則、canonical着地を一元管理。skill `/build-geo-analysis`。原典メタ=gis-curator、取得=gis-pipeline-runner、push=r2-publisherへ委譲 | 2026-08-30 新設 |
-| `survey-curator` 🆕 | ranking↔統計調査の紐付けメタ SSOT (surveys.json / provenance 辞書 / config.surveyId) 管理・監査 (/audit-survey-linkage)・未分類回収 + survey 編集情報 (survey-editorial.ts) + **survey ポートフォリオ管理** (75 survey の需要/在庫/編集品質評価・編集ハブ化の優先順位・実験台帳。真実源 `.claude/state/surveys/{portfolio,experiments}.json`、validator `.claude/scripts/surveys/validate-survey-portfolio.ts`、skill `/manage-survey-portfolio`)。正典 survey-linkage-standards.md + survey-content-standards.md + surveyポートフォリオ運用.md。投入=data-ingester、push=r2-publisher、公開=ranking-publisher、計測=gsc/ga4-analyst、effect=improvement-triage に委譲 | 2026-07-06 新設 → 2026-07-13 ポートフォリオ管理へ拡張 |
+| agent | 領域 | role | 派生元 |
+|---|---|---|---|
+| `estat-researcher` 🆕 | data | e-Stat / MLIT DPF 探索・メタ確認 (DB には触らない) | data-pipeline 分割 |
+| `open-data-curator` 🆕 | data | e-Stat外の政府・自治体データ源をsource/dataset単位で棚卸しし、取得方式・粒度・GIS・ライセンス・更新性・stats47適合性のgit TSカタログを排他管理。**+ provenance 監査オーナー** (全 metric の出典・再現性を `/audit-provenance` で棚卸し、クラス B/C/D を是正。正典 data-provenance-standards.md)。実取得・投入は既存ownerへ委譲。**+ 参考文献の段階処理オーナー** (PDF→ページ画像→Markdown文字起こし→図クロップ→台帳を `/process-reference-source` で不変 revision に積む。正典 reference-source-standards.md §3) | 2026-07-18 新設・2026-07-19 provenance 監査追加・2026-09-05 参考文献段階処理追加 |
+| `data-ingester` 🆕 | data | metrics 登録 + stats_* 投入 + 47県カバレッジ検証 (GIS は gis-* に委譲)。**非 e-Stat 投入時は provenance 9点セット必須** (data-provenance-standards.md) | data-pipeline + db-manager 分割 |
+| `db-schema-manager` 🆕 | data | スキーマ・migration・reset 専任 | db-manager 分割 |
+| `snapshot-exporter` 🆕 | data | git TS / R2 source → snapshot / Remotion 派生 JSON 生成 | db-manager 分割 |
+| `r2-publisher` 🆕 | data | R2 push / pull / du 専任 | db-manager 分割 |
+| `ranking-publisher` 🆕 | data | ranking 公開多段 (generate-ranking-items / KNOWN・SITEMAP・INDEXABLE 再生成 / deploy / purge / 本番実測) のオーケストレーション。観測値=data-ingester、push=r2-publisher、deploy=devops-runner に委譲 | 2026-06-21 新設 |
+| `ranking-expander` 🆕 | data | SSDS ランキング拡充ループ (計測ゲート付き需要ファースト): 候補キュレーション + config 生成 (gen-ssds-configs) + キュー状態管理 (build-expansion-queue)。投入=data-ingester、公開=ranking-publisher、計測=gsc-analyst に委譲。skill `/expand-rankings`。旧 expand-indicators 再構築 | 2026-07-12 新設 |
+| `gis-curator` 🆕 | data | KSJ GIS メタ SSOT (datasets.ts / registry.ts) 管理・dataset lifecycle・メタ整合。完全DBレス (git TS=SSOT)。pipeline は gis-pipeline-runner、push は r2-publisher に委譲 | 2026-06-21 新設 (GIS DBレス化) |
+| `gis-pipeline-runner` 🆕 | data | KSJ GIS取得 (download → TopoJSON+provenance → 実R2監査)。全県/全1次メッシュ対応。SSOT編集はgis-curator、pushはr2-publisherへ委譲 | 2026-06-21 新設 (GIS DBレス化) |
+| `geo-analysis-curator` 🆕 | data | Geo分析の入力/補助レイヤー境界、空間演算stage、lineage manifest、保存則、canonical着地を一元管理。skill `/build-geo-analysis`。原典メタ=gis-curator、取得=gis-pipeline-runner、push=r2-publisherへ委譲 | 2026-08-30 新設 |
+| `survey-curator` 🆕 | data | ranking↔統計調査の紐付けメタ SSOT (surveys.json / provenance 辞書 / config.surveyId) 管理・監査 (/audit-survey-linkage)・未分類回収 + survey 編集情報 (survey-editorial.ts) + **survey ポートフォリオ管理** (75 survey の需要/在庫/編集品質評価・編集ハブ化の優先順位・実験台帳。真実源 `.claude/state/surveys/{portfolio,experiments}.json`、validator `.claude/scripts/surveys/validate-survey-portfolio.ts`、skill `/manage-survey-portfolio`)。正典 survey-linkage-standards.md + survey-content-standards.md + surveyポートフォリオ運用.md。投入=data-ingester、push=r2-publisher、公開=ranking-publisher、計測=gsc/ga4-analyst、effect=improvement-triage に委譲 | 2026-07-06 新設 → 2026-07-13 ポートフォリオ管理へ拡張 |
 
 ## Tier 3: Content - Blog / Note / Ranking (9 体)
 
-| agent | role | 派生元 |
-|---|---|---|
-| `trend-scout` 🆕 | トレンド発見 (GSC / NotebookLM / 外部ソース) | blog-editor 分割 |
-| `blog-editor` | 公開 / 一括公開 / brushup (企画と review は分離) | 既存縮退 |
-| `article-writer` | 1 metric → 1 記事 (並列起動量産単位) | 既存 |
-| `chart-author` 🆕 | SVG / Remotion チャート生成 (blog / note 共通) | blog-editor + note-manager 分離 |
-| `blog-critic` 🆕 | expert review / panel review | blog-editor 分割 |
-| `note-manager` | note.com 公開LC / 公開URLトラッキング (本文SSOT=R2、editorialメタ/URL=git TS note-catalog、派生indexは手編集禁止。`/content/note`で運用確認。chartはchart-authorへ委譲) | 既存縮退 |
-| `note-critic` 🆕 | note 記事 (A/B/C/D シリーズ) の意味レビュー専任。read-only、verdict を review.md に書き出す。blog-critic の note 版 | 2026-06-22 新設 |
-| `ranking-content-author` 🆕 | ranking ページの ai-content (考察/地域傾向/FAQ/県別解説) 生成・是正 + 決定的ゲート (audit-ai-content.mjs)。生成は image-prompt-curator/data-ingester から移管 | 2026-06-21 新設 |
-| `ranking-content-critic` 🆕 | ranking ai-content の意味レビュー (重複/読者価値/トーン)。read-only、修正は author に委譲。blog-critic の ranking 版 | 2026-06-21 新設 |
+| agent | 領域 | role | 派生元 |
+|---|---|---|---|
+| `trend-scout` 🆕 | site | トレンド発見 (GSC / NotebookLM / 外部ソース) | blog-editor 分割 |
+| `blog-editor` | site | 公開 / 一括公開 / brushup (企画と review は分離) | 既存縮退 |
+| `article-writer` | site | 1 metric → 1 記事 (並列起動量産単位) | 既存 |
+| `chart-author` 🆕 | site | SVG / Remotion チャート生成 (blog / note 共通) | blog-editor + note-manager 分離 |
+| `blog-critic` 🆕 | site | expert review / panel review | blog-editor 分割 |
+| `note-manager` | product | note.com 公開LC / 公開URLトラッキング (本文SSOT=R2、editorialメタ/URL=git TS note-catalog、派生indexは手編集禁止。`/content/note`で運用確認。chartはchart-authorへ委譲) | 既存縮退 |
+| `note-critic` 🆕 | product | note 記事 (A/B/C/D シリーズ) の意味レビュー専任。read-only、verdict を review.md に書き出す。blog-critic の note 版 | 2026-06-22 新設 |
+| `ranking-content-author` 🆕 | data | ranking ページの ai-content (考察/地域傾向/FAQ/県別解説) 生成・是正 + 決定的ゲート (audit-ai-content.mjs)。生成は image-prompt-curator/data-ingester から移管 | 2026-06-21 新設 |
+| `ranking-content-critic` 🆕 | data | ranking ai-content の意味レビュー (重複/読者価値/トーン)。read-only、修正は author に委譲。blog-critic の ranking 版 | 2026-06-21 新設 |
 
 ## Tier 4: SNS (primary 4 体 + trend-scout / strategy-advisor が SNS 責務を兼務)
 
@@ -69,55 +69,55 @@
 > YouTube pilot は専任 agent を復活させない。`strategy-advisor` が実験を所有し、`article-writer` が構成・台本、
 > `chart-author` が図表素材、`sns-metrics-sync` が計測を担当する。最終編集・確認・YouTube Studio 投稿は人間工程。
 
-| agent | role | 派生元 |
-|---|---|---|
-| `x-strategist` | X 投稿・キャプション・引用RT・分析。ランキング=`/post-x-batch`、theme/area=`/operate-site-x-drafts`、Geo=`/operate-geo-content`で分離 | 既存拡張 |
-| `instagram-strategist` | IG 投稿・カルーセル・リール (主力。`/generate-instagram-schedule` `/post-ig-6angles` `/post-instagram`) | 既存 |
-| `sns-renderer` | Remotion入口。一般静止画/BCR/バズ地図に加え、Geo=`/operate-geo-content`の専用composition+SHA監査 | 既存縮退 |
-| `sns-metrics-sync` | メトリクス同期・posted 印付け・週次レポート (caption 生成は各 strategist に返上) | sns-renderer + 各 strategist 分離 |
-| `trend-scout` | SNS 競合の定点観測 (`/competitor-scan`) + X バズ投稿の型・画像リサーチ (`/x-viral-research`) も担当 | 既存拡張 |
-| `strategy-advisor` | SNS 週次運用ルーチン (`/sns-weekly-plan`) の orchestrator | 既存拡張 |
+| agent | 領域 | role | 派生元 |
+|---|---|---|---|
+| `x-strategist` | sns | X 投稿・キャプション・引用RT・分析。ランキング=`/post-x-batch`、theme/area=`/operate-site-x-drafts`、Geo=`/operate-geo-content`で分離 | 既存拡張 |
+| `instagram-strategist` | sns | IG 投稿・カルーセル・リール (主力。`/generate-instagram-schedule` `/post-ig-6angles` `/post-instagram`) | 既存 |
+| `sns-renderer` | sns | Remotion入口。一般静止画/BCR/バズ地図に加え、Geo=`/operate-geo-content`の専用composition+SHA監査 | 既存縮退 |
+| `sns-metrics-sync` | sns | メトリクス同期・posted 印付け・週次レポート (caption 生成は各 strategist に返上) | sns-renderer + 各 strategist 分離 |
+| `trend-scout` | site | SNS 競合の定点観測 (`/competitor-scan`) + X バズ投稿の型・画像リサーチ (`/x-viral-research`) も担当 | 既存拡張 |
+| `strategy-advisor` | strategy | SNS 週次運用ルーチン (`/sns-weekly-plan`) の orchestrator | 既存拡張 |
 
 ## Tier 5: SEO / Analytics / Monetization
 
-| agent | role | 派生元 |
-|---|---|---|
-| `gsc-analyst` 🆕 | GSC 専任 (fetch + inspect + improvement + indexing) | seo-auditor 分割 |
-| `ga4-analyst` 🆕 | GA4 専任 | seo-auditor 分割 |
-| `performance-auditor` 🆕 | PSI / Lighthouse / Cloudflare cost | seo-auditor 分割 |
-| `adsense-analyst` 🆕 | AdSense 収益計測 + アフィ収益の計測協働 (在庫管理は affiliate-manager に移管) | seo-auditor 分割 + new |
-| `affiliate-manager` 🆕 | アフィリエイト一元管理 (SSOT=`affiliate-{ads,direct-placements}-data.ts` 在庫 CRUD / サイズ・プログラム規約 / priority 整合 / compliance 監査 `/audit-affiliate-compliance` / 実験 `/manage-affiliate-experiment` / 集約 state `affiliate-operations-latest.json` / publish 段取り / A8 自動 scout の register 段=SSOT 排他 writer)。計測は adsense/ga4、effect は improvement-triage、A8 ブラウザ操作は asp-scout に委譲。必読 `.claude/rules/affiliate-ads-standards.md` | 2026-06-30 新設 (adsense-analyst 分離)・2026-07-15 運用 SSOT 移行で拡張 |
-| `asp-scout` 🆕 | A8.net ブラウザ操作専任 (Playwright: scout/apply/check-approval/harvest)。高単価案件を scoreAndRank→自動申請 (週次上限機械強制)→承認再走査→広告コード取得→parse。判定は決定的コード、意味判断は pending-vertical 解決と UI 変化診断のみ。SSOT 追記・commit/push は affiliate-manager に委譲。skill `/scout-asp`・cron `scout-asp-weekly` (ローカル限定・Mac/Windows 両対応、launchd cron は Mac のみ)。必読 `.claude/rules/affiliate-ads-standards.md` §10 | 2026-07-19 新設 |
-| `a8-report-collector` 🆕 | A8 の**成果レポート CSV 収集** (`fetch-a8-ui-csv` → `normalize-a8-csv` → 成果 SSOT `.claude/state/metrics/affiliate/`)。A8 にサイト切替が無いため口座 (mediaId) を assert し、分離はレポート単位 (site-rows のみ stats47 単独と言える)。品質採点は a8-csv-auditor に分離。skill `/a8-report` | 2026-07-28 新設 (doboku-note から移植) |
-| `a8-csv-auditor` 🆕 | 収集した A8 CSV の**データ品質だけ**を検査する Evaluator (行数/sha256/encoding/rejects/重複/サイト帰属/共用プログラム/取りこぼし)。audit-only・ネットワーク不可。収集者が自分の成果物を採点しないための分離 | 2026-07-28 新設 (doboku-note から移植) |
-| `affiliate-operator` 🆕 | 3 ASP (A8 / もしも / afb) 横断の**提携運用** (状態照合 `affiliate-status` / 申請 `affiliate-apply` dry-run→commit / afb 走査 `afb-scan` / 承認済み afb 広告コードのローカル取得 `afb-harvest` / ASP 間比較 / 台帳 `affiliate-catalog.json`)。3 ASP とも stats47 と doboku-note が同一口座に同居するため全操作でサイト帰属 assert (不一致は例外停止)。案件開拓は asp-scout、SSOT 追記は affiliate-manager、成果 CSV は a8-report-collector に委譲。skill `/affiliate-operate`。必読 `.claude/rules/affiliate-ads-standards.md` §11 | 2026-07-28 新設 (doboku-note から移植) |
-| `coconala-product-manager` 🆕 | ココナラ商品ファクトリー (`packages/product-factory`) 単一所有。型付きカタログ (テーマ別 13 パック P-01〜P-13・旧 A-01〜L-07 174件を 2026-07-23 に縮約) / ジェネレータ (pptx custGeom地図・xlsx RANK数式・pdf/csv/svg/png) / 生成 (`products:generate --all/--id`) / 検証 (`catalog --check`) / 台帳 (`.claude/state/products/catalog-status.json`) / 出品前チェック (READINESS)。SSOT=git TS 定義 + R2→スナップショット実データ、生成物=`.local` (git管理外)。実データ接続済みパックのみ出品可 (validator が誇大表示を弾く・当面 P-01)。実データ投入=data-ingester、e-Stat 実在=estat-researcher、実機検証=人間、ココナラ出品操作=coconala-operator に委譲。必読 `.claude/rules/coconala-product-standards.md` | 2026-07-18 新設 |
-| `coconala-operator` 🆕 | ココナラ出品の**フォーム操作自動化** (Playwright: 新規出品/内容修正/価格反映/下書き掃除)。出品内容 SoT=`.claude/config/coconala-listings.json` を product-factory 商品から 1 商品ずつ書き起こし出品。安全弁=account assert (★dobokunote と別アカウント・別プロファイル `.local/playwright-coconala-profile`) / draft-first + `--commit` gate + オーナー承認。商品生成=coconala-product-manager に委譲。skill `/coconala-publish`・`.claude/scripts/coconala/`。必読 `.claude/rules/coconala-product-standards.md` §6。doboku-note から移植 | 2026-07-23 新設 |
-| `kindle-publisher` 🆕 | Kindle出版ファクトリー単一所有。書籍カタログSSOT=`book-catalog.ts` (32冊)、原稿=`manuscripts/<id>/*.md`、EPUB3生成・30%比率ゲート・生成台帳を管理し、`/content/kindle`+`audit:content-operations`でKDP状態と横断確認。KDP出品操作はkdp-operatorへ委譲 | 2026-07-23 新設 |
-| `kdp-operator` 🆕 | Amazon KDP (★**kdp.amazon.co.jp** — .com ではアカウントが見つからない) 出品の**フォーム操作自動化** (Playwright: 下書き作成/内容修正/公開)。出品内容 SoT=`.claude/config/kdp-listings.json` を KINDLE_BOOKS/EPUB から生成し 1 冊ずつ出品。安全弁=account assert (★別アカウント取り違え防止) / ログイン・2FA・税務情報 (Tax interview)・銀行口座は人間工程 (代行しない) / draft-first + `--commit` gate + オーナー承認 / KDP は React SPA で `--probe` 構造 dump→セレクタ調整。書籍生成・カタログ=kindle-publisher に委譲。skill `/kdp-publish`・`.claude/scripts/kdp/`。coconala-operator から移植。必読 `.claude/rules/coconala-product-standards.md` §8 | 2026-07-23 新設 |
+| agent | 領域 | role | 派生元 |
+|---|---|---|---|
+| `gsc-analyst` 🆕 | site | GSC 専任 (fetch + inspect + improvement + indexing) | seo-auditor 分割 |
+| `ga4-analyst` 🆕 | site | GA4 専任 | seo-auditor 分割 |
+| `performance-auditor` 🆕 | site | PSI / Lighthouse / Cloudflare cost | seo-auditor 分割 |
+| `adsense-analyst` 🆕 | affiliate | AdSense 収益計測 + アフィ収益の計測協働 (在庫管理は affiliate-manager に移管) | seo-auditor 分割 + new |
+| `affiliate-manager` 🆕 | affiliate | アフィリエイト一元管理 (SSOT=`affiliate-{ads,direct-placements}-data.ts` 在庫 CRUD / サイズ・プログラム規約 / priority 整合 / compliance 監査 `/audit-affiliate-compliance` / 実験 `/manage-affiliate-experiment` / 集約 state `affiliate-operations-latest.json` / publish 段取り / A8 自動 scout の register 段=SSOT 排他 writer)。計測は adsense/ga4、effect は improvement-triage、A8 ブラウザ操作は asp-scout に委譲。必読 `.claude/rules/affiliate-ads-standards.md` | 2026-06-30 新設 (adsense-analyst 分離)・2026-07-15 運用 SSOT 移行で拡張 |
+| `asp-scout` 🆕 | affiliate | A8.net ブラウザ操作専任 (Playwright: scout/apply/check-approval/harvest)。高単価案件を scoreAndRank→自動申請 (週次上限機械強制)→承認再走査→広告コード取得→parse。判定は決定的コード、意味判断は pending-vertical 解決と UI 変化診断のみ。SSOT 追記・commit/push は affiliate-manager に委譲。skill `/scout-asp`・cron `scout-asp-weekly` (ローカル限定・Mac/Windows 両対応、launchd cron は Mac のみ)。必読 `.claude/rules/affiliate-ads-standards.md` §10 | 2026-07-19 新設 |
+| `a8-report-collector` 🆕 | affiliate | A8 の**成果レポート CSV 収集** (`fetch-a8-ui-csv` → `normalize-a8-csv` → 成果 SSOT `.claude/state/metrics/affiliate/`)。A8 にサイト切替が無いため口座 (mediaId) を assert し、分離はレポート単位 (site-rows のみ stats47 単独と言える)。品質採点は a8-csv-auditor に分離。skill `/a8-report` | 2026-07-28 新設 (doboku-note から移植) |
+| `a8-csv-auditor` 🆕 | affiliate | 収集した A8 CSV の**データ品質だけ**を検査する Evaluator (行数/sha256/encoding/rejects/重複/サイト帰属/共用プログラム/取りこぼし)。audit-only・ネットワーク不可。収集者が自分の成果物を採点しないための分離 | 2026-07-28 新設 (doboku-note から移植) |
+| `affiliate-operator` 🆕 | affiliate | 3 ASP (A8 / もしも / afb) 横断の**提携運用** (状態照合 `affiliate-status` / 申請 `affiliate-apply` dry-run→commit / afb 走査 `afb-scan` / 承認済み afb 広告コードのローカル取得 `afb-harvest` / ASP 間比較 / 台帳 `affiliate-catalog.json`)。3 ASP とも stats47 と doboku-note が同一口座に同居するため全操作でサイト帰属 assert (不一致は例外停止)。案件開拓は asp-scout、SSOT 追記は affiliate-manager、成果 CSV は a8-report-collector に委譲。skill `/affiliate-operate`。必読 `.claude/rules/affiliate-ads-standards.md` §11 | 2026-07-28 新設 (doboku-note から移植) |
+| `coconala-product-manager` 🆕 | product | ココナラ商品ファクトリー (`packages/product-factory`) 単一所有。型付きカタログ (テーマ別 13 パック P-01〜P-13・旧 A-01〜L-07 174件を 2026-07-23 に縮約) / ジェネレータ (pptx custGeom地図・xlsx RANK数式・pdf/csv/svg/png) / 生成 (`products:generate --all/--id`) / 検証 (`catalog --check`) / 台帳 (`.claude/state/products/catalog-status.json`) / 出品前チェック (READINESS)。SSOT=git TS 定義 + R2→スナップショット実データ、生成物=`.local` (git管理外)。実データ接続済みパックのみ出品可 (validator が誇大表示を弾く・当面 P-01)。実データ投入=data-ingester、e-Stat 実在=estat-researcher、実機検証=人間、ココナラ出品操作=coconala-operator に委譲。必読 `.claude/rules/coconala-product-standards.md` | 2026-07-18 新設 |
+| `coconala-operator` 🆕 | product | ココナラ出品の**フォーム操作自動化** (Playwright: 新規出品/内容修正/価格反映/下書き掃除)。出品内容 SoT=`.claude/config/coconala-listings.json` を product-factory 商品から 1 商品ずつ書き起こし出品。安全弁=account assert (★dobokunote と別アカウント・別プロファイル `.local/playwright-coconala-profile`) / draft-first + `--commit` gate + オーナー承認。商品生成=coconala-product-manager に委譲。skill `/coconala-publish`・`.claude/scripts/coconala/`。必読 `.claude/rules/coconala-product-standards.md` §6。doboku-note から移植 | 2026-07-23 新設 |
+| `kindle-publisher` 🆕 | product | Kindle出版ファクトリー単一所有。書籍カタログSSOT=`book-catalog.ts` (32冊)、原稿=`manuscripts/<id>/*.md`、EPUB3生成・30%比率ゲート・生成台帳を管理し、`/content/kindle`+`audit:content-operations`でKDP状態と横断確認。KDP出品操作はkdp-operatorへ委譲 | 2026-07-23 新設 |
+| `kdp-operator` 🆕 | product | Amazon KDP (★**kdp.amazon.co.jp** — .com ではアカウントが見つからない) 出品の**フォーム操作自動化** (Playwright: 下書き作成/内容修正/公開)。出品内容 SoT=`.claude/config/kdp-listings.json` を KINDLE_BOOKS/EPUB から生成し 1 冊ずつ出品。安全弁=account assert (★別アカウント取り違え防止) / ログイン・2FA・税務情報 (Tax interview)・銀行口座は人間工程 (代行しない) / draft-first + `--commit` gate + オーナー承認 / KDP は React SPA で `--probe` 構造 dump→セレクタ調整。書籍生成・カタログ=kindle-publisher に委譲。skill `/kdp-publish`・`.claude/scripts/kdp/`。coconala-operator から移植。必読 `.claude/rules/coconala-product-standards.md` §8 | 2026-07-23 新設 |
 
 ## Tier 6: Theme / UI
 
-| agent | role | 派生元 |
-|---|---|---|
-| `theme-researcher` 🆕 | テーマ指標×チャート候補を白書(NotebookLM)/Web/競合/GSC から調査し provenance 付き提案を 03_指標バックログ へ (read-only)。採択は theme-designer に委譲 | 2026-07-04 新設 |
-| `theme-designer` | テーマ → 統合カタログ (ThemeCatalog) 設計 (どの指標を載せるか)。カタログ駆動テーマは `packages/data-configs/src/theme-catalog/` が SSOT | 既存 |
-| `theme-component-builder` | page_components 監査・編集 (旧 theme-enhancer)。カタログ駆動テーマは catalog TS の charts[] を編集 | リネーム |
-| `theme-ui-manager` 🆕 | テーマページ UI 層の統一・監査・是正 (レイアウト/見出し/セレクタ/カード構成/コピー)。重複セレクタ・古い「地図」コピー等のドリフトを管理 | 2026-06-20 新設 |
-| `ranking-ui-manager` 🆕 | ランキングページ (/ranking/*) UI 層の統一・監査・是正 (レイアウト/見出し/パンくず/サイドバー/SEO構造化データ/コピー)。theme-ui-manager の ranking 版。データ=data-ingester、公開=ranking-publisher に委譲 | 2026-06-21 新設 |
-| `site-ux-manager` 🆕 | サイト横断 UI/IA の統一・監査・是正 (ヘッダー/ナビ IA・モバイルドロワー・ホーム・ブログ/タグ一覧カード・共通 shell・リンクカード taxonomy・右レール構成・UX 計装配線)。ページ内部は各 page manager、GA4 台帳は ga4-analyst に委譲。site-content-layout ベンチマーク駆動 | 2026-07-20 新設 |
-| `chart-component-builder` | shadcn UI + D3.js チャートコンポーネント実装・カタログ管理 (chart-component-standards.md が SSoT)。静的 SVG の chart-author とは別物 (React/D3 実装専任) | 既存 (2026-07-03 Tier 表へ追記・棚卸し漏れ是正) |
-| `ui-reviewer` | melta-ui 準拠 + UI panel review | 既存 |
-| `image-prompt-curator` 🆕 | 画像prompt SSOT + Codex MCPブログ背景生成 (`/generate-blog-images`) + 画像資産監査 (`/audit-ogp-images`) | sns-renderer + note-manager 分離 |
+| agent | 領域 | role | 派生元 |
+|---|---|---|---|
+| `theme-researcher` 🆕 | data | テーマ指標×チャート候補を白書(NotebookLM)/Web/競合/GSC から調査し provenance 付き提案を 03_指標バックログ へ (read-only)。採択は theme-designer に委譲 | 2026-07-04 新設 |
+| `theme-designer` | data | テーマ → 統合カタログ (ThemeCatalog) 設計 (どの指標を載せるか)。カタログ駆動テーマは `packages/data-configs/src/theme-catalog/` が SSOT | 既存 |
+| `theme-component-builder` | data | page_components 監査・編集 (旧 theme-enhancer)。カタログ駆動テーマは catalog TS の charts[] を編集 | リネーム |
+| `theme-ui-manager` 🆕 | data | テーマページ UI 層の統一・監査・是正 (レイアウト/見出し/セレクタ/カード構成/コピー)。重複セレクタ・古い「地図」コピー等のドリフトを管理 | 2026-06-20 新設 |
+| `ranking-ui-manager` 🆕 | data | ランキングページ (/ranking/*) UI 層の統一・監査・是正 (レイアウト/見出し/パンくず/サイドバー/SEO構造化データ/コピー)。theme-ui-manager の ranking 版。データ=data-ingester、公開=ranking-publisher に委譲 | 2026-06-21 新設 |
+| `site-ux-manager` 🆕 | site | サイト横断 UI/IA の統一・監査・是正 (ヘッダー/ナビ IA・モバイルドロワー・ホーム・ブログ/タグ一覧カード・共通 shell・リンクカード taxonomy・右レール構成・UX 計装配線)。ページ内部は各 page manager、GA4 台帳は ga4-analyst に委譲。site-content-layout ベンチマーク駆動 | 2026-07-20 新設 |
+| `chart-component-builder` | data | shadcn UI + D3.js チャートコンポーネント実装・カタログ管理 (chart-component-standards.md が SSoT)。静的 SVG の chart-author とは別物 (React/D3 実装専任) | 既存 (2026-07-03 Tier 表へ追記・棚卸し漏れ是正) |
+| `ui-reviewer` | site | melta-ui 準拠 + UI panel review | 既存 |
+| `image-prompt-curator` 🆕 | site | 画像prompt SSOT + Codex MCPブログ背景生成 (`/generate-blog-images`) + 画像資産監査 (`/audit-ogp-images`) | sns-renderer + note-manager 分離 |
 
 ## Tier 7: Code Quality / DevOps (4 体)
 
-| agent | role | 派生元 |
-|---|---|---|
-| `code-reviewer` | feature / packages / types / app コード review (UI 一貫性は分離) | 既存縮退 |
-| `ui-consistency-reviewer` 🆕 | ページ横断 UI 一貫性 review | code-reviewer `--scope ui-consistency` 分離 |
-| `tdd-guide` | TDD 設計・テスト品質 (Red-Green-Refactor) | 既存 |
-| `devops-runner` | テスト・デプロイ・Git・CDN 実行 | 既存 |
+| agent | 領域 | role | 派生元 |
+|---|---|---|---|
+| `code-reviewer` | ops | feature / packages / types / app コード review (UI 一貫性は分離) | 既存縮退 |
+| `ui-consistency-reviewer` 🆕 | site | ページ横断 UI 一貫性 review | code-reviewer `--scope ui-consistency` 分離 |
+| `tdd-guide` | ops | TDD 設計・テスト品質 (Red-Green-Refactor) | 既存 |
+| `devops-runner` | ops | テスト・デプロイ・Git・CDN 実行 | 既存 |
 
 ## 並行衝突回避マトリクス
 

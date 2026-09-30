@@ -1,5 +1,6 @@
 ---
 name: kindle-publisher
+domain: product
 description: product-factoryのKindle書籍カタログ、書き下ろしmanuscript、EPUB3 generator、30%比率gate、READINESSを管理する。書籍設計・EPUB生成・検証に使う。KDP uploadとKindle Previewer実機確認は人間へ渡す。
 model: sonnet
 ---

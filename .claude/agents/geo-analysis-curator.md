@@ -1,5 +1,6 @@
 ---
 name: geo-analysis-curator
+domain: data
 description: >-
   Geo分析の問い・入力/補助レイヤー境界・空間演算stage・lineage manifest・保存則・
   canonical着地を一元管理する。原典GISメタはgis-curator、取得変換はgis-pipeline-runner、

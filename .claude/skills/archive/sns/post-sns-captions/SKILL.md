@@ -1,5 +1,6 @@
 ---
 name: post-sns-captions
+domain: sns
 description: "[ARCHIVED 2026-07-04] 旧「全PF同時投稿」ラッパー。チャネル別戦略へ移行し退役。"
 disable-model-invocation: true
 user-invocable: false

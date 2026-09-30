@@ -1,5 +1,6 @@
 ---
 name: devops-runner
+domain: ops
 description: ユニット/E2Eテスト実行、型チェック、feature→develop→mainのマージとデプロイ、Git履歴リセット、新規スキル作成ガイドを担当する。アフィリエイトバナー登録は affiliate-manager が主担当 (本 agent は publish 段取りの co-agent)。デプロイ・テスト実行・Git整理が必要なときに使う。
 model: sonnet
 ---

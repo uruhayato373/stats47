@@ -1,5 +1,6 @@
 ---
 name: fetch-estat-data
+domain: data
 description: e-Stat API から指定カテゴリのランキングデータを取得する。Use when user says "e-Statデータ取得", "fetch-estat-data", "ランキングデータ取って". inspect-estat-meta でパラメータ確定後に使用.
 primary_agent: estat-researcher
 co_agents: [theme-designer]

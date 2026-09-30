@@ -1,5 +1,6 @@
 ---
 name: ranking-expander
+domain: data
 description: SSDS 由来のランキングを「計測ゲート付き需要ファースト」で継続拡充する専任エージェント。候補キュレーション(需要スコア・既存重複判定・subtitle 分離)→ config 生成(gen-ssds-configs)→ キュー状態管理(build-expansion-queue)を単一所有する。投入は data-ingester、公開は ranking-publisher、GSC 計測は gsc-analyst に委譲。闇雲に増やさず「公開→実測→流入が付いたカテゴリのみ深掘り」で thin-content を回避する。
 model: sonnet
 ---

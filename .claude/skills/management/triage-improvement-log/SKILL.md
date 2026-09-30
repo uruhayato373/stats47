@@ -1,5 +1,6 @@
 ---
 name: triage-improvement-log
+domain: plan
 description: 改善バックログ全施策を Tier × 期日マトリクスで可視化 + 自動アクション提案 + CSV エクスポート (triage-matrix.mjs の高度ラッパー)。Use when user says "改善ログ triage", "施策の優先順位", "triage-improvement-log".
 primary_agent: improvement-triage
 ---

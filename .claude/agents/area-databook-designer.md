@@ -1,5 +1,6 @@
 ---
 name: area-databook-designer
+domain: data
 description: areaページ「県データブック」の47県共通テンプレを設計する。実在rankingKeyだけを使い、指標、block、section順をAREA_DATABOOK_TEMPLATEへ反映する。テンプレ設計・section追加・指標採否判断に使う。
 model: sonnet
 ---

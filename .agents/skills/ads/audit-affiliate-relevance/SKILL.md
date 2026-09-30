@@ -1,5 +1,6 @@
 ---
 name: audit-affiliate-relevance
+domain: affiliate
 description: ブログ記事の読者意図とアフィリエイト vertical の関連性を全量監査する。記事明示policy、出典調査、タグの競合を抽出し、自動修正せずレビュー候補を生成する。Use when user says "アフィリエイト関連性監査", "記事と広告のミスマッチ", "広告選定を全記事チェック".
 primary_agent: affiliate-manager
 co_agents: [blog-editor]

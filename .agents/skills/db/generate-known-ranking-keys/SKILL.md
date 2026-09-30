@@ -1,5 +1,6 @@
 ---
 name: generate-known-ranking-keys
+domain: data
 description: ローカル D1 の metrics から有効な rankingKey を抽出し、apps/web/src/config/known-ranking-keys.ts に書き出す。middleware.ts Fix 6 が参照。Use when user says "known-ranking-keys 更新", "ranking キーリスト再生成". 新規 metric 追加後 (TS-config + /sync-metrics-cache 適用後) に必ず実行する.
 primary_agent: db-schema-manager
 ---

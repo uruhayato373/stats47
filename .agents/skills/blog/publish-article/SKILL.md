@@ -1,5 +1,6 @@
 ---
 name: publish-article
+domain: site
 description: 下書き記事を公開フォルダへコピーし publishedAt を設定する。Use when user says "記事公開", "publish", "公開する". 本番反映は /sync-snapshots --only blog (all.json 生成).
 disable-model-invocation: true
 primary_agent: blog-editor

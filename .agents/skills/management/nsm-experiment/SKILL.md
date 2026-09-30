@@ -1,5 +1,6 @@
 ---
 name: nsm-experiment
+domain: strategy
 description: >
   NSM（週間エンゲージドセッション数）改善の実験ライフサイクルを管理する。
   propose（候補提案）→ start（実行開始）→ measure（前後比較）→ close（学び記録）の

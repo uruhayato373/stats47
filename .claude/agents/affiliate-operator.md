@@ -1,5 +1,6 @@
 ---
 name: affiliate-operator
+domain: affiliate
 description: A8 / もしも / afb の提携運用担当。状態照合、申請、未提携走査、ASP比較、承認済み afb 広告コードのローカル取得を行う。全操作でサイト帰属を assert し、不一致は停止する。SSOT登録は affiliate-manager、A8開拓は asp-scout に委譲。提携確認・申請・afbコード取得に使う。
 model: sonnet
 ---

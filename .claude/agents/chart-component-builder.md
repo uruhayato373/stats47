@@ -1,5 +1,6 @@
 ---
 name: chart-component-builder
+domain: data
 description: >
   shadcn UI + D3.js チャートコンポーネントの設計・実装・カタログ管理・監査専任。
   テーマ・ダッシュボードに新しいチャートを追加するとき、または既存の独自実装を

@@ -1,5 +1,6 @@
 ---
 name: register-affiliate-banner
+domain: affiliate
 description: アフィリエイト広告を意図軸 (vertical) SSOT に対話式で登録する。propose (次に提携すべき案件を提案) → ユーザーが ASP 提携 → register (コード解析・サイズ検証・vertical 判定・1エントリ追記) のループ。Use when user says "バナー登録", "アフィリエイト追加", "広告登録", "アフィリエイト提案".
 disable-model-invocation: true
 primary_agent: affiliate-manager

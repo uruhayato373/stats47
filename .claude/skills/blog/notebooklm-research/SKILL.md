@@ -1,5 +1,6 @@
 ---
 name: notebooklm-research
+domain: site
 description: >
   NotebookLM CLI (notebooklm Python v0.3.4) を使って既存ブログ記事を深掘り調査し、
   e-Stat 白書・政府統計・過去ブログ記事などを横断クエリした引用根拠をもとに

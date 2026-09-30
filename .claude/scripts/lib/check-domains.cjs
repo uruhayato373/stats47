@@ -7,6 +7,8 @@
  * 検査: 領域 id / label の重複なし・role が 5 役割のどれか・nav の kind が navKinds にある・
  * nav は href (管理画面のページが実在) か channels (チャネル別の枝) のどちらか 1 つ・href の重複なし・
  * documents の値が既知の領域 id でパスが実在。
+ * エージェント (.claude/agents 直下の .md) とスキル (.claude/skills 配下の SKILL.md) の frontmatter `domain:` が
+ * ちょうど 1 つあり、既知の領域 id であること (DOMAIN-AGENT-01)。
  * 領域 0 件は検査不成立として exit 2 (全 PASS が何も見ていない状態と区別する)。
  */
 const fs = require("node:fs");
@@ -63,6 +65,62 @@ function checkDomains(cfg, { pageExists, pathExists }) {
   return { errors, domainCount: domains.length, navCount, documentCount: Object.keys(cfg.documents ?? {}).length };
 }
 
+/** frontmatter の `domain:` を読む。無ければ null、複数行あれば配列で返す。 */
+function frontmatterDomain(text) {
+  const m = /^---\r?\n([\s\S]*?)\r?\n---/.exec(text);
+  if (!m) return null;
+  const found = m[1]
+    .split(/\r?\n/)
+    .filter((l) => /^domain:/.test(l))
+    .map((l) => l.slice("domain:".length).trim().replace(/^["']|["']$/g, ""));
+  if (found.length === 0) return null;
+  return found.length === 1 ? found[0] : found;
+}
+
+/** owners: [{ kind: "agent"|"skill", file, text }] を検査し、未設定・語彙外・複数指定を error にする。 */
+function checkOwners(owners, domainIds) {
+  const ids = new Set(domainIds);
+  const errors = [];
+  const byDomain = Object.fromEntries(domainIds.map((id) => [id, { agent: 0, skill: 0 }]));
+  let missing = 0;
+  let unknown = 0;
+  for (const o of owners) {
+    const d = frontmatterDomain(o.text);
+    if (d === null) {
+      missing++;
+      errors.push(`${o.file}: frontmatter に domain が無い`);
+    } else if (Array.isArray(d)) {
+      unknown++;
+      errors.push(`${o.file}: domain が複数ある (主担当を 1 つにする)`);
+    } else if (!ids.has(d)) {
+      unknown++;
+      errors.push(`${o.file}: domain が領域の正本に無い: ${d}`);
+    } else {
+      byDomain[d][o.kind]++;
+    }
+  }
+  const count = (k) => owners.filter((o) => o.kind === k).length;
+  return { errors, missing, unknown, agentCount: count("agent"), skillCount: count("skill"), byDomain };
+}
+
+function collectOwners(root) {
+  const owners = [];
+  const agentsDir = path.join(root, ".claude/agents");
+  for (const f of fs.readdirSync(agentsDir).sort()) {
+    if (!f.endsWith(".md") || f === "README.md") continue;
+    owners.push({ kind: "agent", file: `.claude/agents/${f}`, text: fs.readFileSync(path.join(agentsDir, f), "utf8") });
+  }
+  const walk = (dir) => {
+    for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+      const p = path.join(dir, e.name);
+      if (e.isDirectory()) walk(p);
+      else if (e.name === "SKILL.md") owners.push({ kind: "skill", file: path.relative(root, p), text: fs.readFileSync(p, "utf8") });
+    }
+  };
+  walk(path.join(root, ".claude/skills"));
+  return owners;
+}
+
 function main() {
   const root = path.resolve(__dirname, "../../..");
   const cfg = JSON.parse(fs.readFileSync(path.join(root, ".claude/config/domains.json"), "utf8"));
@@ -79,10 +137,16 @@ function main() {
     console.error("✗ check-domains: 領域が 0 件 (検査不成立)");
     process.exit(2);
   }
-  for (const e of result.errors) console.error(`✗ ${e}`);
-  const summary = `領域 ${result.domainCount} / メニュー項目 ${result.navCount} / 文書の割り当て ${result.documentCount}`;
-  if (result.errors.length > 0) {
-    console.error(`check-domains: error ${result.errors.length} (${summary})`);
+  const owners = checkOwners(collectOwners(root), cfg.domains.map((d) => d.id));
+  const errors = [...result.errors, ...owners.errors];
+  for (const e of errors) console.error(`✗ ${e}`);
+  const perDomain = Object.entries(owners.byDomain).map(([id, c]) => `${id} ${c.agent}/${c.skill}`).join(", ");
+  console.log(`  領域別 エージェント/スキル: ${perDomain}`);
+  const summary =
+    `領域 ${result.domainCount} / メニュー項目 ${result.navCount} / 文書の割り当て ${result.documentCount} / ` +
+    `エージェント ${owners.agentCount}・スキル ${owners.skillCount} (domain 未設定 ${owners.missing}・語彙外 ${owners.unknown})`;
+  if (errors.length > 0) {
+    console.error(`check-domains: error ${errors.length} (${summary})`);
     process.exit(1);
   }
   console.log(`✓ check-domains: ${summary} を検査、error 0`);
@@ -90,4 +154,4 @@ function main() {
 
 if (require.main === module) main();
 
-module.exports = { checkDomains, ROLES };
+module.exports = { checkDomains, checkOwners, frontmatterDomain, ROLES };

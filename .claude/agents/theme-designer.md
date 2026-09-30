@@ -1,5 +1,6 @@
 ---
 name: theme-designer
+domain: data
 description: テーマダッシュボード向けの指標発見・選定とThemeCatalog設計を担当する専門エージェント。primary/secondary/context、チャート、指標ハブ導線を一貫して設計する。
 model: sonnet
 ---

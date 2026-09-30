@@ -1,5 +1,6 @@
 ---
 name: post-note-ranking
+domain: product
 description: R2ランキング観測値からnote Aシリーズの記事、chart-data、provenance、画像をslug単位で生成する。Use when user says "noteランキング記事", "Aシリーズ生成", "note量産".
 disable-model-invocation: true
 primary_agent: note-manager
