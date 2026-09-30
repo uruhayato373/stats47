@@ -39,7 +39,7 @@ SSOT への登録・公開は affiliate-manager に渡す 2-agent 分業。
 
 - SSOT 追記 (affiliate-ads-data.ts) + commit/push → **affiliate-manager** (排他 writer)
 - 手動貼付での 1 件登録 → `/register-affiliate-banner` (affiliate-manager)
-- 収益計測 (imp/click/CTR) → ga4-analyst / adsense-analyst
+- 収益計測 (imp/click/CTR) → ga4-analyst / affiliate-manager
 - effect/* 判定 → improvement-triage
 - R2 push → CI (`publish-affiliate-ads.yml`)
 

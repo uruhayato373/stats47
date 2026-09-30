@@ -85,8 +85,7 @@
 | `gsc-analyst` 🆕 | site | GSC 専任 (fetch + inspect + improvement + indexing) | seo-auditor 分割 |
 | `ga4-analyst` 🆕 | site | GA4 専任 | seo-auditor 分割 |
 | `performance-auditor` 🆕 | site | PSI / Lighthouse / Cloudflare cost | seo-auditor 分割 |
-| `adsense-analyst` 🆕 | affiliate | AdSense 収益計測 + アフィ収益の計測協働 (在庫管理は affiliate-manager に移管) | seo-auditor 分割 + new |
-| `affiliate-manager` 🆕 | affiliate | アフィリエイト一元管理 (SSOT=`affiliate-{ads,direct-placements}-data.ts` 在庫 CRUD / サイズ・プログラム規約 / priority 整合 / compliance 監査 `/audit-affiliate-compliance` / 実験 `/manage-affiliate-experiment` / 集約 state `affiliate-operations-latest.json` / publish 段取り / A8 自動 scout の register 段=SSOT 排他 writer)。計測は adsense/ga4、effect は improvement-triage、A8 ブラウザ操作は asp-scout に委譲。必読 `.claude/rules/affiliate-ads-standards.md` | 2026-06-30 新設 (adsense-analyst 分離)・2026-07-15 運用 SSOT 移行で拡張 |
+| `affiliate-manager` 🆕 | affiliate | アフィリエイト一元管理 (SSOT=`affiliate-{ads,direct-placements}-data.ts` 在庫 CRUD / サイズ・プログラム規約 / priority 整合 / compliance 監査 `/audit-affiliate-compliance` / 実験 `/manage-affiliate-experiment` / 集約 state `affiliate-operations-latest.json` / publish 段取り / A8 自動 scout の register 段=SSOT 排他 writer)。計測値の取得は ga4-analyst (分析は本 agent・2026-09-30 に adsense-analyst を統合)、effect は improvement-triage、A8 ブラウザ操作は asp-scout に委譲。必読 `.claude/rules/affiliate-ads-standards.md` | 2026-06-30 新設 (adsense-analyst 分離)・2026-07-15 運用 SSOT 移行で拡張 |
 | `asp-scout` 🆕 | affiliate | A8.net ブラウザ操作専任 (Playwright: scout/apply/check-approval/harvest)。高単価案件を scoreAndRank→自動申請 (週次上限機械強制)→承認再走査→広告コード取得→parse。判定は決定的コード、意味判断は pending-vertical 解決と UI 変化診断のみ。SSOT 追記・commit/push は affiliate-manager に委譲。skill `/scout-asp`・cron `scout-asp-weekly` (ローカル限定・Mac/Windows 両対応、launchd cron は Mac のみ)。必読 `.claude/rules/affiliate-ads-standards.md` §10 | 2026-07-19 新設 |
 | `a8-report-collector` 🆕 | affiliate | A8 の**成果レポート CSV 収集** (`fetch-a8-ui-csv` → `normalize-a8-csv` → 成果 SSOT `.claude/state/metrics/affiliate/`)。A8 にサイト切替が無いため口座 (mediaId) を assert し、分離はレポート単位 (site-rows のみ stats47 単独と言える)。品質採点は a8-csv-auditor に分離。skill `/a8-report` | 2026-07-28 新設 (doboku-note から移植) |
 | `a8-csv-auditor` 🆕 | affiliate | 収集した A8 CSV の**データ品質だけ**を検査する Evaluator (行数/sha256/encoding/rejects/重複/サイト帰属/共用プログラム/取りこぼし)。audit-only・ネットワーク不可。収集者が自分の成果物を採点しないための分離 | 2026-07-28 新設 (doboku-note から移植) |
@@ -156,6 +155,20 @@
 | コード変更 → デプロイ | code-reviewer → scopeにUI/testを含む時だけ対応reviewerを1体追加 → devops-runner |
 | テーマダッシュボード設計 | theme-designer → data-ingester → theme-component-builder → ui-reviewer |
 
+## 責務が近い agent の境界 (2026-09-30 判断)
+
+領域付与 (`npm run check-domains`) で責務が近いと挙がった組の扱い。統合したのは adsense-analyst だけで、ほかは境界を下のとおり保つ。
+
+| 組 | 扱い | 境界 |
+|---|---|---|
+| adsense-analyst → affiliate-manager | 統合 (廃止) | AdSense は 2026-09-20 に恒久停止。残っていたアフィリエイト収益の計測分析と停止の維持確認を affiliate-manager へ |
+| asp-scout / affiliate-operator | 維持 | A8 の新規開拓 (探索・申請・コード取得) は asp-scout。3 ASP の状態照合、もしも・afb の申請、afb のコード取得は affiliate-operator |
+| ui-reviewer / ui-consistency-reviewer / code-reviewer | 維持 | デザイン規約への準拠と専門家評価 / ページをまたぐ一貫性とデザイン SSOT のずれ / コードの品質と安全性 |
+| theme-ui-manager / ranking-ui-manager / site-ux-manager | 維持 | 担当ファイルで分ける (テーマページ / ランキングページ / サイト共通の枠) |
+| theme-researcher / theme-designer / theme-portfolio-manager | 維持 | 調査 → 設計 (ThemeCatalog) → 公開後の効果判定の段階 |
+| article-writer / blog-editor | 維持 | 文章を書くのは article-writer。公開と是正の段取りは blog-editor |
+| データ領域に 23 体 | 維持 | 領域は domains.json の 8 つに固定し、分割しない |
+
 ## 移行ステータス
 
 **Phase 1-5 完了 (2026-05-28)**: 新 18 agent 追加 → 既存 8 agent 縮退記述 → 136 SKILL.md に `primary_agent` frontmatter 付与 (task-router のみ意図的 skip) → 縮退 agent への primary 参照 28 件を精査し責務に応じて 4 件移動・24 件維持 (Session B) → 並行運用検証 (Session 5-1/5-2/5-3) 実施済。L3-1 統合は Cluster 1 (blog-review) + Cluster 7 (brushup-blog) のみ実装、Cluster 2/3/4/5/6 は KEEP-SKIP 判定 (各 Cluster の責務分離が既に適切なため、形式統合より現状維持が CLAUDE.md 行動原則「シンプル最優先」に整合)。判定詳細: `.claude/todo/improvements.md` AGENT-L3-CONSOLIDATE-01。
@@ -165,6 +178,7 @@
 | `data-pipeline` | **削除済 (2026-05-28)** | `estat-researcher` + `data-ingester` |
 | `db-manager` | **削除済 (2026-05-28)** | `db-schema-manager` + `snapshot-exporter` + `r2-publisher` + `data-ingester` |
 | `blog-editor` | 縮退予定 (Phase 3、publish 系のみ保持) | + `trend-scout` + `chart-author` + `blog-critic` (企画は article-writer に統合) |
+| `adsense-analyst` | **削除済 (2026-09-30)** | `affiliate-manager` (アフィリエイト収益の計測分析・AdSense 停止の維持確認)。AdSense は 2026-09-20 に恒久停止 |
 | `seo-auditor` | **削除済 (2026-07-03)** | `gsc-analyst` + `ga4-analyst` + `performance-auditor` + `adsense-analyst` (skill 参照の差し替え完了) |
 | `sns-renderer` | 役割縮退 (render 専任) | `sns-metrics-sync`, `image-prompt-curator` に分離 |
 | `theme-enhancer` | **リネーム済** | `theme-component-builder` |

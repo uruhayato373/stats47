@@ -3,7 +3,7 @@ paths:
   - "apps/web/scripts/affiliate-*.ts"
   - "apps/web/src/{features/ads,lib/a8net,lib/google-adsense}/**"
   - ".claude/{scripts/ads,skills/ads,skills/analytics/affiliate-improvement,state/ads}/**"
-  - ".claude/agents/{affiliate-*,asp-scout,a8-*,adsense-analyst}.md"
+  - ".claude/agents/{affiliate-*,asp-scout,a8-*}.md"
 ---
 # アフィリエイト広告 標準 (SSOT + 意図ハブ + 共通ルール)
 
@@ -334,7 +334,7 @@ state と二重 SSOT になり、**表側が実態から乖離した** (2026-08-
 | クリエイティブ A/B 実験 (plan/start/observe/decide/close) | `affiliate-manager` (skill `/manage-affiliate-experiment`。勝者の自動反映は禁止) |
 | 集約状態 (`affiliate-operations-latest.json`) の生成・計測ゲート判定 | 決定的スクリプト `build-affiliate-operations-state.ts` (週次 CI `affiliate-ga4-weekly.yml`) |
 | サイズ / vertical 規約の enforcement | `affiliate-manager` (audit `--check-size` + export validation + pre-commit §6.7/6.8) |
-| imp / click / CTR の実測値取得 | `ga4-analyst` / `adsense-analyst` |
+| imp / click / CTR の実測値取得 | `ga4-analyst` (分析は `affiliate-manager`) |
 | effect/* 判定・改善ログ status | `improvement-triage` |
 | R2 公開 | develop push → `publish-affiliate-ads.yml` (CI 自動) |
 | 記事内手動配置 (`<affiliate-banner>` タグ) | `blog-editor` / `article-writer` (台帳登録は affiliate-manager) |
