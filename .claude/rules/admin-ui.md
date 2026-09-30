@@ -19,7 +19,7 @@ paths:
 | 公式部品 | `apps/admin/components/ui/*.tsx` (+ `hooks/use-mobile.ts`) | shadcn/ui 公式 (new-york-v4) をそのまま。変えてよいのは import 先 (`cn` → `@/lib/cn`・registry の別名 → admin の alias) だけ。足すときは `node .claude/scripts/admin-ui/sync-shadcn-reference.mjs <name> --install` |
 | 並べ方 | `apps/admin/components/layout-primitives.tsx` | `Stack` / `Grid` / `Section` (`id` = ページ内リンクの着地・`count` = 見出し横の件数)。部品は外側の余白を持たず、間隔は親の `gap` が決める |
 | 組み立て部品 | `apps/admin/components/admin-ui/` | `TableFrame` (表の枠)・`DataTable` + `Row` / `Cell` (見出し行つきの一覧)・`PanelCard` (題名つきの区画)・`StatCard` (数値タイル)・`StatusBadge` (状態: good/warn/bad/info/neutral)・`LinkCard` (リンクになるカード)。ページはここと `components/ui/*` から組む |
-| ナビ | `apps/admin/lib/nav-registry.ts` (SSOT) + `components/console-nav*.tsx` | メニューの定義と現在地の判定は純モジュール。表示は公式 `Sidebar` (md 未満は Sheet)。`tests/unit/nav-registry.test.ts` が「全項目のページが実在する」を止める |
+| ナビ | `apps/admin/lib/nav-registry.ts` (SSOT) + `lib/channel-registry.ts` + `components/console-nav*.tsx` | メニューの定義と現在地の判定は純モジュール。グループは事業の役割 (商品・SNS・制作・資産・戦略…)。チャネルは最上位に並べず、商品・SNS の「チャネル別」の枝 (折りたたみ・現在地を含む枝だけ開く) に channel-registry から入れる。表示は公式 `Sidebar` (md 未満は Sheet)。`tests/unit/nav-registry.test.ts` が「全項目のページが実在する」を止める |
 | グラフ色 | `apps/admin/components/dashboard/chart-tone.ts` | `ChartTone` → `text-console-*` / `fill-console-*` のクラス。SVG は `currentColor`・幅は属性で決め、`style` を使わない |
 | 公式の保存物 | `.claude/config/shadcn-reference/*.tsx` | 公式ソースの写し (CI がネットワークに依存しないため)。手編集しない |
 

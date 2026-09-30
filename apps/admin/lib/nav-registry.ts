@@ -4,22 +4,50 @@
  * 並びは見る目的でグループ化する。URL を変えたら tests/unit/nav-registry.test.ts が「ルートが実在するか」で止める。
  */
 
-export type NavItem = { href: string; label: string };
-export type NavGroup = { title: string | null; items: readonly NavItem[] };
+import { channelsOf, type ChannelGroup } from "./channel-registry";
 
+export type NavItem = { href: string; label: string };
+/** 折りたたみの第二階層 (公式 SidebarMenuSub)。現在地を含む枝だけ開いて表示する */
+export type NavBranch = { label: string; children: readonly NavItem[] };
+export type NavEntry = NavItem | NavBranch;
+export type NavGroup = { title: string | null; items: readonly NavEntry[] };
+
+export function isBranch(entry: NavEntry): entry is NavBranch {
+  return "children" in entry;
+}
+
+/** チャネル別の枝。中身は channel-registry.ts から作り、ここにチャネル名を直書きしない */
+function channelBranch(group: ChannelGroup): NavBranch {
+  return { label: "チャネル別", children: channelsOf(group).map(({ href, label }) => ({ href, label })) };
+}
+
+/**
+ * グループは事業の役割 (doboku-note の領域モデル): 売る = 商品・アフィリエイト / 集める = SNS / つくる = 制作・資産 / 決める・支える = 戦略・品質・TODO。
+ * チャネルは最上位に並べず、各グループの「チャネル別」の枝に入れる。
+ */
 export const NAV_GROUPS: readonly NavGroup[] = [
   { title: null, items: [{ href: "/", label: "ホーム" }] },
   {
-    title: "制作・投稿",
+    title: "商品",
     items: [
-      { href: "/content", label: "コンテンツ運用" },
-      { href: "/content/x", label: "X" },
-      { href: "/content/instagram", label: "Instagram" },
-      { href: "/content/note", label: "note" },
-      { href: "/content/kindle", label: "Kindle" },
-      { href: "/content/references", label: "参考文献管理" },
-      { href: "/sns", label: "SNS" },
+      { href: "/product/status", label: "販売状態" },
+      channelBranch("product"),
+      { href: "/revenue", label: "売上" },
+    ],
+  },
+  {
+    title: "SNS",
+    items: [
+      { href: "/sns", label: "投稿状況" },
+      channelBranch("sns"),
       { href: "/buzz-map", label: "バズ地図" },
+    ],
+  },
+  {
+    title: "制作",
+    items: [
+      { href: "/content", label: "コンテンツ横断・監査" },
+      { href: "/content/references", label: "参考文献管理" },
     ],
   },
   {
@@ -30,13 +58,12 @@ export const NAV_GROUPS: readonly NavGroup[] = [
     ],
   },
   {
-    title: "戦略・収益化",
+    title: "戦略",
     items: [
       { href: "/strategy/lanes", label: "戦略レーン" },
       { href: "/strategy/policy", label: "共通方針" },
       { href: "/strategy", label: "方針・事業計画" },
       { href: "/research", label: "調査カタログ" },
-      { href: "/revenue", label: "収益 (AdSense)" },
     ],
   },
   {
@@ -67,7 +94,12 @@ export const NAV_GROUPS: readonly NavGroup[] = [
   },
 ];
 
-const TODO_LAYERS = new Set(["weekly", "monthly", "improvements"]);
+/** 枝の中まで含めた全項目の href (現在地の親子判定とテストが使う) */
+export function navHrefs(groups: readonly NavGroup[]): string[] {
+  return groups.flatMap((g) => g.items.flatMap((e) => (isBranch(e) ? e.children.map((c) => c.href) : [e.href])));
+}
+
+const TODO_LAYERS =new Set(["weekly", "monthly", "improvements"]);
 
 /**
  * ルート以外は前方一致。TODO だけは同じ pathname 内の f=層まで比較する。

@@ -3,6 +3,11 @@ import { SummaryCards } from "@/components/home/summary-cards";
 import { LinkCard } from "@/components/admin-ui";
 const SECTIONS = [
   {
+    href: "/product/status",
+    title: "販売状態",
+    desc: "note・ココナラ・Kindle の商品数と公開段階。各チャネルの詳細へ",
+  },
+  {
     href: "/content",
     title: "コンテンツ運用",
     desc: "X・Instagram・note・Kindleの原稿、公開状態、次の作業、SSOT整合性",
@@ -39,8 +44,8 @@ const SECTIONS = [
   },
   {
     href: "/revenue",
-    title: "収益 (AdSense)",
-    desc: "週次収益・RPM・内訳。実測は AdSense のみで他チャネルは未計測と明示する",
+    title: "売上",
+    desc: "商品売上 (KDP・ココナラの販売台帳) と AdSense の週次実績 (2026-09-20 停止)。未計測は 0 円と表示しない",
   },
   {
     href: "/affiliate",

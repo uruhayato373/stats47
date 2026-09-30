@@ -8,6 +8,7 @@ import type {
   NoteContentDTO,
   ReferenceContentPortfolioDTO,
 } from "../contracts/types";
+import { channelById } from "../channel-registry";
 import { buildReferenceContentPortfolio } from "./reference";
 
 export interface SourceSocialPost {
@@ -97,20 +98,6 @@ export interface ContentOperationsInput {
   references?: ReferenceContentPortfolioDTO;
 }
 
-const LABELS: Record<ContentChannelDTO, string> = {
-  x: "X",
-  instagram: "Instagram",
-  note: "note",
-  kindle: "Kindle",
-};
-
-const HREFS: Record<ContentChannelDTO, string> = {
-  x: "/content/x",
-  instagram: "/content/instagram",
-  note: "/content/note",
-  kindle: "/content/kindle",
-};
-
 const SOURCES: Record<ContentChannelDTO, string> = {
   x: ".claude/state/sns/posts.json",
   instagram: ".claude/state/sns/posts.json",
@@ -140,8 +127,8 @@ function summarize(
   const count = (stage: ContentStageDTO) => stages.filter((x) => x === stage).length;
   return {
     channel,
-    label: LABELS[channel],
-    href: HREFS[channel],
+    label: channelById(channel).label,
+    href: channelById(channel).href,
     total: stages.length,
     draft: count("draft"),
     ready: count("ready"),
