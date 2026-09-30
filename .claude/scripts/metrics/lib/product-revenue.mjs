@@ -6,7 +6,9 @@
  * (summarize.mjs が書く)。チャネルごとに意味が違うので、足し方もチャネルごとに固定する。
  * - coconala … 売上管理の「累積売上」(手数料控除後・取引完了時点で計上)。単調増加なので
  *              週の実売 = 週末時点の累積 − 週初め前の累積
- * - kdp      … Reports の日別「電子書籍ロイヤリティ見積り」と有料注文数。7 日そろった週だけ合計する
+ * - kdp      … Reports の日別「電子書籍ロイヤリティ見積り」と有料注文数。7 日そろった週だけ合計する。
+ *              見積りは確定ロイヤリティではないので金額は週次の合計に入れない (オーナー契約・
+ *              AUTHENTICATED-MEASUREMENT-ACTIVATION-01 の停止条件)。有料注文数だけを件数に入れる
  * - note     … 売上 API の「今月の売上」(手数料控除前) と締め済みの月別売上 (closedMonths)。
  *              同じ月なら今月の売上の増分、月をまたいだら「前月の締め額 − 基準点の今月売上 + 週末の今月売上」
  *
@@ -47,7 +49,8 @@ function kdpWeek(entries, { weekStart, weekEnd }) {
     status: "ok",
     yen: rows.reduce((sum, e) => sum + (Number(e.royaltyYen) || 0), 0),
     count: rows.reduce((sum, e) => sum + (Number(e.paidOrders) || 0), 0),
-    basis: "ロイヤリティ見積り 7 日分",
+    basis: "ロイヤリティ見積り 7 日分・合計に含めない",
+    estimate: true,
   };
 }
 
@@ -84,7 +87,7 @@ export function weeklyProductRevenue({ revenueHistory, weekStart, weekEnd }) {
   return {
     channels,
     status: complete ? "ok" : "unmeasurable",
-    yen: complete ? all.reduce((sum, c) => sum + c.yen, 0) : null,
+    yen: complete ? all.filter((c) => !c.estimate).reduce((sum, c) => sum + c.yen, 0) : null,
     count: complete && all.every((c) => c.count != null || c.yen === 0) ? all.reduce((sum, c) => sum + (c.count ?? 0), 0) : null,
   };
 }
@@ -95,5 +98,5 @@ const LABEL = { coconala: "ココナラ", kdp: "KDP", note: "note" };
 export function describeChannel(name, result) {
   if (result.status !== "ok") return `${LABEL[name]} 判定不能（${result.note}）`;
   const count = result.count == null ? "" : `・${result.count} 件`;
-  return `${LABEL[name]} ${yen(result.yen)}${count}（${result.basis}）`;
+  return `${LABEL[name]} ${result.estimate ? "見積り " : ""}${yen(result.yen)}${count}（${result.basis}）`;
 }

@@ -13,7 +13,7 @@ const kdpDays = (royaltyYen, paidOrders = 0, n = 7) =>
   Array.from({ length: n }, (_, i) => ({ channel: "kdp", date: `2026-09-${21 + i}`, royaltyYen, paidOrders }));
 const history = (...entries) => ({ schemaVersion: 1, entries: entries.flat() });
 
-test("ココナラは週初め前と週末の累積の差分、KDP は 7 日分の合計", () => {
+test("ココナラは累積の差分、KDP は 7 日分の見積りを表示するが合計には入れない", () => {
   const week = weeklyProductRevenue({
     revenueHistory: history(
       { channel: "coconala", date: "2026-09-20", cumulativeYen: 1000 },
@@ -28,7 +28,9 @@ test("ココナラは週初め前と週末の累積の差分、KDP は 7 日分�
   assert.equal(week.channels.coconala.yen, 2500);
   assert.equal(week.channels.kdp.yen, 700);
   assert.equal(week.channels.note.yen, 300);
-  assert.equal(week.yen, 2500 + 700 + 300);
+  // KDP の見積り ¥700 は確定ロイヤリティではないので合計に入れない。注文数は件数に入れる
+  assert.equal(week.yen, 2500 + 300);
+  assert.equal(week.channels.kdp.estimate, true);
 });
 
 test("KDP の日別が欠けた週・基準点の無い正の累積は判定不能にし、¥0 にしない", () => {
