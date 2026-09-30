@@ -16,6 +16,10 @@ export const BLOG_AFFILIATE_POLICY: Readonly<Record<string, BlogAffiliatePolicyE
     vertical: null,
     reason: "家計調査はデータ出典にすぎず、ゴルフ料金・用品にふるさと納税広告は関連しない。適合案件の登録までは広告なし。",
   },
+  "household-growth-population-decline-census-2025": {
+    vertical: "housing",
+    reason: "人口が減っても世帯が増える理由(単身化・転入)が主題。人口分類の婚活・保険より引っ越し・住まいが合う。",
+  },
 };
 
 /**
