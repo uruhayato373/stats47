@@ -129,3 +129,4 @@
 - [feedback_permission_grant_owner_only.md](feedback_permission_grant_owner_only.md) — GA4/GCP の権限付与は Claude 実行不可 (安全チェック)。準備まで Claude、最後はオーナー。GA4 アクセス管理 UI が止まる時は APIs Explorer
 - [feedback_backlog_card_move_fence_aware.md](feedback_backlog_card_move_fence_aware.md) — backlog カード移動は正規表現の「\n## 」で切るとフェンス内見出しで途中切断。フェンス対応の分割+本文一致検証
 - [feedback_note_draft_index_r2_path.md](feedback_note_draft_index_r2_path.md) — note-draft-index の r2_path は移送済みの印。有料ドラフトはそもそも公開R2へ移らず、派生PNG参照がMISSING_REFERENCEになるのでbaseline仮登録
+- [feedback_reply_in_japanese.md](feedback_reply_in_japanese.md) — 返答は常に日本語。長い作業の途中で英語に切り替わり何度も言い直させた (2026-09-30)
