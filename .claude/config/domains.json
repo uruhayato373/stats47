@@ -102,7 +102,9 @@
     "docs/21_ブログ記事原稿/": "site",
     "docs/30_note記事企画/": "product",
     "docs/31_note記事原稿/": "product",
-    ".claude/todo/": "plan"
+    ".claude/todo/": "plan",
+    "docs/INDEX.md": "ops",
+    "docs/assets/": "ops"
   },
   "navKinds": {
     "inventory": "品揃え・一覧（何があり何が足りないか）",

@@ -2518,18 +2518,6 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 
 ## 🟢 低 — 時期未定・条件付き (trigger は本文に)
 
-### [DOMAIN-AGENT-01] エージェント・スキル・文書に領域を付け、持ち主の空白と重複を検査する
-タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run check-domains] [起票:2026-09-27] [領域:管理]
-
-- **trigger**: 領域の正本 `.claude/config/domains.json` は 2026-09-30 に作成済み。着手可。
-- **方向性**: 土木ノートと同じく、`.claude/agents/*.md` と `.claude/skills/**/SKILL.md` の frontmatter に `domain: <領域 id>` を 1 つ付け、`docs/**` は domains.json の `documents` (パス接頭辞) でちょうど 1 つの領域に解決させる。ファイルの置き場は動かさない。
-- **手順**:
-  1. エージェント全件 (40 体超) に領域案を付けた一覧を作る。複数領域にまたがるものは主担当を 1 つ選ぶ。領域ごとの担当が 0 体の空白と、同じ責務の重複を一覧の末尾に書く。
-  2. `check-domains` に frontmatter と documents の検査を足す。最初は warning で出し、全件付与後に error へ上げる。
-  3. エージェント → スキル → 文書の順に付ける。`node .claude/scripts/lib/sync-codex-mirror.cjs` でミラーを同期し、`.claude/agents/README.md` のチーム構成表に領域列を足す。
-- **停止条件**: どの領域にも収まらないエージェントが見つかったら、領域を増やさずに責務の分割を別カードで提案する。
-- **完了条件**: 全エージェント・スキル・対象文書に領域が付き、検証コマンドが未設定・語彙外 0 件を報告する。
-
 ### [CHART-SOURCE-DERIVE-01] 図ごとの出典 (ブログの `<data-source>` タグ・機能別 ChartFooter の固定値) をデータから導出する
 
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-09-25] [領域:データ]
@@ -2749,6 +2737,22 @@ warning のまま**理由付きで残す**のが正しい形で、これが本�
 - **制約**: 約4,000件の未使用項目や約17万metric相当を一括投入しない。1バッチ最大20件、公開後4週の実測を次バッチのgateにする。
 
 ## 🟣 判断待ち — やるかどうかの意思決定が未了
+
+### [DOMAIN-AGENT-OVERLAP-01] 領域付与で見つかったエージェントの責務の重複と、データ領域への偏りを整理するか決める
+タグ: [エージェント・SSOT] [種類:意思決定] [実行:対話] [検証:npm run check-domains] [起票:2026-09-30] [領域:管理]
+
+- **背景 (2026-09-30)**: 全エージェント 61 体・スキル 164 件に主担当の領域を付けた (`npm run check-domains` が未設定・語彙外 0 を検査)。領域別のエージェント/スキルは strategy 1/9・plan 4/6・product 6/14・affiliate 6/10・site 13/35・sns 4/31・data 23/40・ops 4/19。
+- **決めること**: 次の重複を統合するか、責務の境界を書き分けるか。
+  - asp-scout と affiliate-operator (どちらも A8 管理画面で申請・走査・広告コード取得)
+  - adsense-analyst (AdSense 恒久停止後はアフィリエイト計測のみ) と affiliate-manager・a8-report-collector
+  - ui-reviewer・ui-consistency-reviewer・code-reviewer (いずれも UI をレビュー)
+  - theme-ui-manager と ranking-ui-manager (ページ別の同じ役割。横断は site-ux-manager)
+  - theme-researcher・theme-designer・theme-portfolio-manager (テーマ選定 1 つの判断を 3 段に分割)
+  - article-writer と blog-editor (どちらもリライト)
+  - data 領域が 23 体を持つ。ランキング・テーマ・GIS の 3 群に分けるか
+- **停止条件**: 領域を増やす提案はしない (領域は domains.json の 8 つに固定)。統合で agent を消すときは呼び出し元 skill を同時に直す。
+- **完了条件**: 各重複について統合・書き分け・現状維持のどれかを決め、決めた変更後も `npm run check-domains` と `check-agent-skill-consistency.cjs` が error 0。
+
 
 ### [DOMAIN-SHARED-POLICY-01] 管理の枠組み (5 役割・画面の種類・サイドメニューの規則) を共通事業方針に載せるか決める
 タグ: [エージェント・SSOT] [種類:意思決定] [実行:ユーザー] [起票:2026-09-27]

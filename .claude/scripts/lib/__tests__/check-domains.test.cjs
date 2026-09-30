@@ -3,7 +3,7 @@ const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
 
-const { checkDomains, checkOwners, frontmatterDomain } = require("../check-domains.cjs");
+const { checkDomains, checkOwners, checkDocuments, documentDomain, frontmatterDomain } = require("../check-domains.cjs");
 
 const ROOT = path.resolve(__dirname, "../../../..");
 const always = { pageExists: () => true, pathExists: () => true };
@@ -90,4 +90,15 @@ test("domain の未設定・語彙外・複数指定を error にし、件数を
   assert.match(text, /two\/SKILL\.md: domain が複数ある/);
   assert.equal(r.missing, 1);
   assert.equal(r.unknown, 2);
+});
+
+test("文書は documents の長い接頭辞を優先して 1 つの領域に決まり、どれにも一致しなければ error にする", () => {
+  const docs = { "docs/": "ops", "docs/00_x/": "strategy", "docs/INDEX.md": "ops" };
+  assert.equal(documentDomain(docs, "docs/00_x/a.md"), "strategy");
+  assert.equal(documentDomain(docs, "docs/y/b.md"), "ops");
+  assert.equal(documentDomain({ "docs/00_x/": "strategy" }, "docs/y/b.md"), null);
+  const r = checkDocuments(["docs/00_x/a.md", "docs/z.md"], { "docs/00_x/": "strategy" });
+  assert.equal(r.docCount, 2);
+  assert.match(r.errors.join("\n"), /docs\/z\.md: documents のどの接頭辞にも一致しない/);
+  assert.deepEqual(checkDocuments(["docs/00_x/a.md"], { "docs/00_x/": "strategy" }).errors, []);
 });

@@ -1,21 +1,8 @@
 {
-  "hash": "ca3b4edd7ab55ac7de120041045f289e4ed38f6f84a8cfff6f8e02b63f266fb3",
-  "audited_at": "2026-09-30T06:55:00",
+  "hash": "ad68d728c7906c41c54582f9942b623f43af0517df5116844470b97b87af7241",
+  "audited_at": "2026-09-30T06:56:03",
   "files": [
-    ".agents/skills/management/monthly-plan/SKILL.md",
-    ".agents/skills/management/weekly-plan/SKILL.md",
-    ".claude/agents/todo-curator.md",
-    ".claude/rules/docs-vs-issues.md",
-    ".claude/rules/todo-standards.md",
-    ".claude/scripts/data/lib/year-coverage-backlog.mjs",
-    ".claude/scripts/gsc/lib/coverage-backlog.mjs",
-    ".claude/scripts/lib/__tests__/strategy-lanes.test.cjs",
-    ".claude/scripts/lib/backlog-lib.cjs",
-    ".claude/scripts/lib/check-docs-governance.cjs",
-    ".claude/scripts/lib/strategy-lanes.cjs",
-    ".claude/scripts/metrics/build-measurement-cycle.mjs",
-    ".claude/scripts/page-quality/lib/ui-findings.ts",
-    ".claude/skills/management/monthly-plan/SKILL.md",
-    ".claude/skills/management/weekly-plan/SKILL.md"
+    ".claude/scripts/lib/__tests__/check-domains.test.cjs",
+    ".claude/scripts/lib/check-domains.cjs"
   ]
 }
