@@ -120,19 +120,19 @@ test.describe("smoke: 管理画面の疎通", () => {
     await (await sidebarOf(page)).getByRole("link", { name: "調査カタログ", exact: true }).click();
     await expect(page).toHaveURL(/\/research$/);
 
-    await (await sidebarOf(page)).getByRole("link", { name: "プロジェクト現況", exact: true }).click();
+    await (await sidebarOf(page)).getByRole("link", { name: "現況レビュー", exact: true }).click();
     await expect(page).toHaveURL(/\/dashboard$/);
 
     await (await sidebarOf(page)).getByRole("link", { name: "ホーム", exact: true }).click();
     await expect(page).toHaveURL(/\/$/);
   });
 
-  test("TODO は独立グループとして各台帳へ遷移できる", async ({ page }) => {
+  test("計画グループ (旧 TODO) から各台帳へ遷移できる", async ({ page }) => {
     await page.goto("/");
     let sidebar = await sidebarOf(page);
 
-    await expect(sidebar.getByRole("button", { name: "TODO", exact: true })).toHaveCount(0);
-    await expect(sidebar.getByText("TODO", { exact: true })).toBeVisible();
+    await expect(sidebar.getByRole("button", { name: "計画", exact: true })).toHaveCount(0);
+    await expect(sidebar.getByText("計画", { exact: true })).toBeVisible();
     await expect(sidebar.getByRole("link", { name: "実行バックログ", exact: true })).toBeVisible();
     await expect(sidebar.getByRole("link", { name: "今月の計画", exact: true })).toBeVisible();
 
