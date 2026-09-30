@@ -34,8 +34,8 @@ export default function RevenuePage() {
       {/* ★計測範囲。0 と「未計測」を混同させないために必ず出す */}
       <PanelCard title="計測範囲">
         <p className="text-[11px] text-console-muted">
-          証拠付きの観測だけを実測として扱います。期間がないチャネルは、0 円ではなく
-          <Unmeasured />= 未計測です。
+          証拠付きの販売台帳か、直近 3 日以内の自動取得 (revenue-history.json) があるチャネルを実測として扱います。
+          どちらも無いチャネルは、0 円ではなく<Unmeasured />= 未計測です。
         </p>
         <ul className="mt-2 space-y-1">
           {d.coverage.map((c) => (
