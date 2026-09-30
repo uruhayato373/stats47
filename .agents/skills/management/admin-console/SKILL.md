@@ -1,5 +1,6 @@
 ---
 name: admin-console
+domain: ops
 description: 統合メディア管理コンソール (ローカル) を起動する。X/Instagram/note/Kindleの原稿・公開状態、参考文献の展開状況、Geo契約、画像資産、SVG、調査、収益、品質、TODOを読み取り専用で横断確認する。Use when the user wants to open or browse the local admin console (管理画面・メディアコンソール) for content, publishing state, assets, references, revenue, quality or TODO.
 primary_agent: sns-metrics-sync
 co_agents: [note-manager, kindle-publisher, kdp-operator]

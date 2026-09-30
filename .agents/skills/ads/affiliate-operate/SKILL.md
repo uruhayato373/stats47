@@ -1,5 +1,6 @@
 ---
 name: affiliate-operate
+domain: affiliate
 description: A8 / もしも / afb の 3 ASP を横断して提携状態を実機と照合し (status)、提携申請を dry-run→commit で送り (apply)、afb の未提携案件を走査する (scan)。3 ASP とも stats47 と doboku-note が同一口座に同居するため、全操作でサイト帰属 assert を通し不一致は例外で停止する。Use when user says "提携状況を確認", "ASP 横断で比較", "提携申請", "afb を調べる", "もしもを調べる", "affiliate-operate".
 disable-model-invocation: true
 primary_agent: affiliate-operator

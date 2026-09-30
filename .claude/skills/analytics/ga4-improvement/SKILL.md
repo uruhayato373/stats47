@@ -1,5 +1,6 @@
 ---
 name: ga4-improvement
+domain: site
 description: Google Analytics 4 のアクセス指標（Users / Sessions / Engagement / Bounce / Key Events）を .claude/todo/improvements.md で追跡し、週次 snapshot と施策の効果判定を記録する。Use when user says "GA4改善", "PV改善", "流入改善", "GA4記録".
 primary_agent: ga4-analyst
 ---

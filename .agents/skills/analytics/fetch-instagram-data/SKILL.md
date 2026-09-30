@@ -1,5 +1,6 @@
 ---
 name: fetch-instagram-data
+domain: sns
 description: Instagram Graph API v21 から自アカウント (stats47jp) のプロフィール・投稿・インサイトを取得する。Use when user says "Instagramデータ", "Instagram分析", "IG確認". リーチ・エンゲージメント・投稿別パフォーマンス対応。
 primary_agent: instagram-strategist
 ---

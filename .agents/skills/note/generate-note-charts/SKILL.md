@@ -1,5 +1,6 @@
 ---
 name: generate-note-charts
+domain: product
 description: note 記事用 SVG チャートを生成し PNG に変換する。Use when user says "noteチャート生成", "note画像生成". 散布図・カバー画像・横棒グラフ等に対応. 記事本文完成後に実行.
 disable-model-invocation: true
 primary_agent: chart-author

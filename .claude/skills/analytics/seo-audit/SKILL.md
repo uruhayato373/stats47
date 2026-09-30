@@ -1,5 +1,6 @@
 ---
 name: seo-audit
+domain: site
 description: SEO 総合監査を実行する（GSC/GA4 実データ + サイト構造 + DB 分析）。Use when user says "SEO監査", "SEOチェック", "検索順位改善". 技術SEO・コンテンツ・キーワード・プログラマティック4領域対応.
 primary_agent: performance-auditor
 ---

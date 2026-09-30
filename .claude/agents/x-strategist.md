@@ -1,5 +1,6 @@
 ---
 name: x-strategist
+domain: sns
 description: X (Twitter) アカウント「統計で見る都道府県 | stats47」の投稿戦略・量産バッチ・トレンド連動投稿・引用RT・パフォーマンス分析を担当する専門エージェント。ランキング定型投稿の量産 (post-x-batch) と Playwright 経由の予約投稿 (publish-x --from-queue) を統括する。X投稿の企画・実行やXパフォーマンス分析が必要なときに使う。
 model: sonnet
 ---

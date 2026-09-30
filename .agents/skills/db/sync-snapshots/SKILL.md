@@ -1,5 +1,6 @@
 ---
 name: sync-snapshots
+domain: data
 description: git TS / R2 観測値から全 R2 snapshot を一括 export する。R2 キーパスは app/ 名前空間に統一。データ変更後に必ず実行。
 argument-hint: "[--only <category>] [--dry-run]"
 disable-model-invocation: true

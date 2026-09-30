@@ -1,5 +1,6 @@
 ---
 name: insert-theme-components
+domain: data
 description: 設計済みチャートをテーマページに反映 — git TS SSOT (page_components JSON) を編集して R2 生成
 argument-hint: "<theme-key>"
 disable-model-invocation: true

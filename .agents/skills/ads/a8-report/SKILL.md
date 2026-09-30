@@ -1,5 +1,6 @@
 ---
 name: a8-report
+domain: affiliate
 description: A8.net の成果レポート CSV を Playwright で収集し (collect)、データ品質を検査し (validate)、決定的に正規化して成果 SSOT へ upsert する (normalize)。A8 にはサイト切替が無いため口座 (mediaId) を assert し、stats47 と doboku-note の分離はレポート単位で行う。account-wide レポートは口座横断なので stats47 単独の実績として扱わない。Use when user says "A8 レポートを収集", "アフィリ成果を取得", "EPC を実測", "a8-report".
 disable-model-invocation: true
 primary_agent: a8-report-collector

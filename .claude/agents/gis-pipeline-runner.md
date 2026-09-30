@@ -1,5 +1,6 @@
 ---
 name: gis-pipeline-runner
+domain: data
 description: >-
   KSJ GIS パイプライン実行専任 (download → TopoJSON + provenance → R2実体監査)。
   SSOT編集はgis-curator、R2 pushはr2-publisherへ委譲する完全DBレス運用。

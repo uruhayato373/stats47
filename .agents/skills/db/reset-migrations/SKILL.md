@@ -1,5 +1,6 @@
 ---
 name: reset-migrations
+domain: ops
 description: Drizzle マイグレーションファイルを1本にリセットする。Use when user says "マイグレーションリセット", "reset-migrations", "マイグレーション整理". 10本超 or 不整合時に実行.
 disable-model-invocation: true
 primary_agent: db-schema-manager

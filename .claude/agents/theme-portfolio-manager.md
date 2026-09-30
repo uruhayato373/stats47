@@ -1,5 +1,6 @@
 ---
 name: theme-portfolio-manager
+domain: data
 description: ThemeCatalogとGSC/GA4/data qualityを突合し、theme portfolioとexperiment stateを管理する。keep/improve/merge/split/rename/retire候補、baseline、効果測定の判断に使う。実装は既存ownerへ渡す。
 model: sonnet
 ---

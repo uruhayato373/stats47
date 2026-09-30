@@ -1,5 +1,6 @@
 ---
 name: indexing-api-submit
+domain: site
 description: RETIRED 2026-07-23。Google Indexing API は公式に JobPosting / BroadcastEvent VideoObject ページ専用で、stats47 の通常ページ (ranking/area/theme/blog/410) には使わない。通常ページの再クロールは observe-after-fix (sitemap/内部リンク/HTTP/canonical/content 修正 + URL Inspection 観測) で行う。過去の送信ログは証拠として保持。
 primary_agent: gsc-analyst
 status: retired

@@ -1,5 +1,6 @@
 ---
 name: fetch-note-metrics
+domain: product
 description: note.com/dashboardから記事別インプレッション・PV・スキ・コメント・売上を期間指定で収集し、カバー監査と突合する。Use when user says "noteメトリクス", "note統計", "note ビュー数取得", "fetch-note-metrics". stats47専用Chrome Profile 5を使用する読み取り専用CLI。
 disable-model-invocation: true
 primary_agent: sns-metrics-sync

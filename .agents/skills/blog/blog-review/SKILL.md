@@ -1,5 +1,6 @@
 ---
 name: blog-review
+domain: site
 description: ブログ記事のレビュー (専門家視点 or 公開前校正)。Use when user says "専門家レビュー", "校正して", "proofread", "expert review", "公開前チェック". --mode で expert (事実/統計的妥当性) と proofread (frontmatter/本文/出典/リンク) を切替。旧 /expert-review + /proofread-article を統合.
 argument-hint: <記事パスまたは slug> [--mode expert|proofread]
 primary_agent: blog-critic

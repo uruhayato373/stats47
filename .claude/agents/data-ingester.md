@@ -1,5 +1,6 @@
 ---
 name: data-ingester
+domain: data
 description: TS-config (packages/data-configs) を SSOT に、e-Stat / MLIT から R2 (`app/stats/<metric>/*.json`) へ観測値を直接投入する agent。D1 metrics cache の sync も担当。
 model: sonnet
 ---

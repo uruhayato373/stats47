@@ -1,5 +1,6 @@
 ---
 name: publish-geo-portfolio
+domain: data
 description: >
   Geo企画カタログの4分析を、canonical Geoページ、ブログ、X、note再現パック、計測まで公開する統合オーケストレーション。
   カタログの順序とgateを守り、既存owner skillへ委譲する。Use when user says "Geoを全て公開", "GIS企画を展開", "Geo商品化".

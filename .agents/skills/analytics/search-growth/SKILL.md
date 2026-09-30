@@ -1,5 +1,6 @@
 ---
 name: search-growth
+domain: site
 description: 検索成長の統合入口。GSC / URL Inspection / Sitemaps / GA4 / CrUX / PSI / Lighthouse / Cloudflare / HTTP / static audit を正規化 Observation に統合し、決定的 candidate engine で改善候補を作る。Use when user says "検索改善候補", "SEO の次にやること", "search growth", "GSC 以外も見て", "検索露出とインデックスと性能をまとめて". CLI 1 入口 + read-only MCP。
 primary_agent: gsc-analyst
 ---

@@ -1,5 +1,6 @@
 ---
 name: publish-bulk-articles
+domain: site
 description: 複数のブログ記事を完全DBレスで一括公開する。品質ゲート、R2記事、用途別OGP/カード、all.json、HTTP検証を扱う。Use when user says "記事一括公開", "publish bulk", "まとめて公開".
 argument-hint: <slug1> <slug2> ... [--no-verify]
 disable-model-invocation: true

@@ -1,5 +1,6 @@
 ---
 name: coconala-publish
+domain: product
 description: >
   ココナラ出品サービスを Playwright で「新規出品」「内容修正」するスキル (stats47)。出品内容の
   真実源 .claude/config/coconala-listings.json (title/価格/カテゴリ/本文/ジャンル/納期) を product id で

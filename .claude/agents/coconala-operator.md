@@ -1,5 +1,6 @@
 ---
 name: coconala-operator
+domain: product
 description: ココナラの出品・内容修正・価格反映をPlaywrightで行う。listings SSOTと商品を突合し、account assertとdraft-firstを守る。実公開は--commitとオーナー承認が必要。Use for ココナラ出品・修正・価格反映・/coconala-publish.
 model: sonnet
 ---

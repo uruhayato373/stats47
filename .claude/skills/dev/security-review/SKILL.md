@@ -1,5 +1,6 @@
 ---
 name: security-review
+domain: ops
 description: セキュリティレビューを実施する（OWASP Top 10 + D1/R2/Cloudflare 固有チェック）。Use when user says "セキュリティレビュー", "security-review", "脆弱性チェック". 自動修正オプション付き.
 disable-model-invocation: true
 primary_agent: code-reviewer

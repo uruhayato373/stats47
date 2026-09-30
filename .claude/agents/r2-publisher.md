@@ -1,5 +1,6 @@
 ---
 name: r2-publisher
+domain: data
 description: R2 への push / pull / du 専任。 snapshot 生成は snapshot-exporter、 D1 操作は data-ingester に委譲。
 model: haiku
 ---

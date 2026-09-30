@@ -1,5 +1,6 @@
 ---
 name: publish-threads
+domain: sns
 description: Playwright で Threads Web の「日時を指定」機能を操作し、X の予約から作った Threads 下書きを予約投稿する。Use when user says "Threads予約", "スレッズ投稿", "Threads補充". 予約は同時 25 件までなので、公開で枠が空いたら再実行して補充する。**初回・画面変更後は `--limit 1 --dry-run` で予約モード到達を確認すること**。
 disable-model-invocation: true
 argument-hint: "--from-queue [--limit N] [--offset N] [--dry-run]"

@@ -1,5 +1,6 @@
 ---
 name: goal
+domain: plan
 description: >
   特定の課題(goal)について「実装 → 計測 → 評価・改善」のサイクルを反復して、終了条件を満たすまで漏れなく追跡するメタスキル。
   既存の improvement 系スキル(performance-improvement / gsc-improvement / ga4-improvement / adsense-improvement / sns-metrics-improvement / cloudflare-cost-improvement)を統括する。

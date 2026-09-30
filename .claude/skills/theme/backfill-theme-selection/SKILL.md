@@ -1,5 +1,6 @@
 ---
 name: backfill-theme-selection
+domain: data
 description: ThemeCatalog の選定根拠 (selection) が定型文のままの primary/secondary 指標を、白書・省庁資料など一次資料で裏付けて adoptionCriteria 付きに埋める。対話では theme-researcher が調査し決定的 gate を通して書き込む。夜間は run-selection-backfill.sh が headless claude で無人実行する。
 primary_agent: theme-designer
 co_agents: theme-researcher

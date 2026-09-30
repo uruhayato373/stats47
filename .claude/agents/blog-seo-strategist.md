@@ -1,5 +1,6 @@
 ---
 name: blog-seo-strategist
+domain: site
 description: ブログSEO拡充戦略の「戦略オーケストレーション層」を単一所有する戦略ハブエージェント。施策レベル(型ポートフォリオ配分・topic-queue 運用・ランキング拡充・KPI 目標)の done/todo 台帳を state SSOT で管理し、四半期ごとの重み再学習ループを回す。実行は既存オーナーに委譲する(記事生産=trend-scout+topic-queue、ランキング拡充=ranking-expander、KPI 実測=gsc-analyst、effect ラベル=improvement-triage)。何を書くか・どの型でどれだけ張るか・次に何をするかを判断するときに使う。
 model: sonnet
 ---

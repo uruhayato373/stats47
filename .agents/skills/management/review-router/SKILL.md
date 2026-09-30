@@ -1,5 +1,6 @@
 ---
 name: review-router
+domain: strategy
 description: 「レビューして」と言われたとき、対象・文脈・日付から適切なレビュースキルを自動選択して実行する。レビュー系スキルのルーティングガイド。
 user-invocable: false
 primary_agent: strategy-advisor

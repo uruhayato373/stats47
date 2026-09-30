@@ -1,5 +1,6 @@
 ---
 name: process-reference-source
+domain: data
 description: 参考文献 PDF を S0 保全 → S1 ページ画像 → S2 文字起こし (生 OCR + Markdown) → S3 図クロップ → S4 台帳 の段階で処理し、各段階の成果物を private Drive の版 folder (展開配置) へ足す。ユーザーが「PDF をページ画像にして」「文字起こしを Markdown にして」「図をクロップして」「参考文献をどこまで処理したか確認して」等と言ったときに使う。
 primary_agent: open-data-curator
 ---

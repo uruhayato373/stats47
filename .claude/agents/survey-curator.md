@@ -1,5 +1,6 @@
 ---
 name: survey-curator
+domain: data
 description: ranking↔survey紐付け、surveys.json、provenance辞書、survey-editorial、survey portfolio/experiment stateを管理する。紐付け監査・未分類回収・編集ハブ候補評価に使う。データ投入・R2・公開・UI・計測は各ownerへ渡す。
 model: sonnet
 ---

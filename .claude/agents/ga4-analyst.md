@@ -1,5 +1,6 @@
 ---
 name: ga4-analyst
+domain: site
 description: GA4 専任 (fetch + improvement)。 seo-auditor から分離。 改善ログ更新は improvement-triage に委譲。
 model: sonnet
 ---

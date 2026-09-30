@@ -1,5 +1,6 @@
 ---
 name: performance-auditor
+domain: site
 description: PSI / Lighthouse / Cloudflare cost / SEO 監査専任。 seo-auditor から performance 系を集約。 改善ログ更新は improvement-triage に委譲。
 model: sonnet
 ---

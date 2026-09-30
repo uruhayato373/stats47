@@ -1,5 +1,6 @@
 ---
 name: knowledge
+domain: ops
 description: 過去の失敗と学びを検索し、問題・原因・対策の3点で恒久知見を記録する。バグ解決、非自明なAPI制約、再発防止策を扱う。
 user-invocable: false
 primary_agent: knowledge-curator

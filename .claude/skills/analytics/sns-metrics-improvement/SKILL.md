@@ -1,5 +1,6 @@
 ---
 name: sns-metrics-improvement
+domain: sns
 description: X / YouTube / Instagram の投稿パフォーマンスを週次スナップショットで追跡し、改善施策と効果判定を記録する。Use when user says "SNSメトリクス", "SNS改善", "投稿パフォーマンス分析", "エンゲージメント改善", or when reviewing sns-metrics-improvement issues.
 primary_agent: sns-metrics-sync
 ---

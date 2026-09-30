@@ -1,5 +1,6 @@
 ---
 name: lighthouse-audit
+domain: site
 description: PageSpeed Insights API で stats47.jp の CWV を計測し .claude/state/metrics/psi に蓄積する。Use when user says "Lighthouse実行", "パフォーマンス測定", "CWV計測", "PSI計測". mobile/desktop 一括計測+閾値チェック.
 disable-model-invocation: true
 argument-hint: "[--strategy mobile|desktop] [--file urls.txt]"

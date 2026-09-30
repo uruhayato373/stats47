@@ -1,5 +1,6 @@
 ---
 name: render-ges-ports
+domain: data
 description: browser-use CLI で Google Earth Studio を自動操作し、港湾旋回動画の .esp アップロード→レンダリング→MP4 ダウンロードをバッチ実行する
 disable-model-invocation: true
 argument-hint: "[--port-code 14002] [--limit 5] [--grade 国際戦略港湾]"

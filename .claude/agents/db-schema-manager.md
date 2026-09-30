@@ -1,5 +1,6 @@
 ---
 name: db-schema-manager
+domain: data
 description: Drizzle schema (型ソース) + migration SQL (使い捨てビルドキャッシュ / テスト適用用) の管理専任。永続/リモート D1 は無い (完全DBレス)。テーブル CRUD は data-ingester、snapshot 派生は snapshot-exporter に委譲。
 model: sonnet
 ---

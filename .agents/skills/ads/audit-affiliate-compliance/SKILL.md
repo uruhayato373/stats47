@@ -1,5 +1,6 @@
 ---
 name: audit-affiliate-compliance
+domain: affiliate
 description: アフィリエイトの compliance を決定的に監査する。直接配置 (direct-attribute) の孤立・本文タグ不一致・PR 表記 (景表法) 漏れ・台帳未登録タグ、および自動配置の canonical サイズ違反を検出する。Use when user says "アフィリエイト監査", "PR 表記チェック", "景表法チェック", "直接配置の監査", "コンプライアンス監査".
 primary_agent: affiliate-manager
 co_agents: [improvement-triage]

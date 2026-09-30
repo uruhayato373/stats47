@@ -1,5 +1,6 @@
 ---
 name: cloudflare-cost-improvement
+domain: ops
 description: Cloudflare Workers / D1 / R2 の月次コストと主要メトリクス（D1 rows read、Workers CPU ms、storage、月額課金）を .claude/todo/improvements.md で追跡し、budget 超過検知・施策と効果を記録する。Use when user says "Cloudflare コスト確認", "D1 使用量", "Workers CPU 使用量", "請求書チェック", or when analyzing Cloudflare invoices / cost anomalies.
 primary_agent: performance-auditor
 ---

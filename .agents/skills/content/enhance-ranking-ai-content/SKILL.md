@@ -1,5 +1,6 @@
 ---
 name: enhance-ranking-ai-content
+domain: data
 description: >
   ranking_key ページ (/ranking/<key>) の ai_content (faq / regionalAnalysis / insights / prefectureCommentary)
   を NotebookLM (e-Stat 白書) と必要に応じ WebSearch で根拠補完しながらリライトする

@@ -1,5 +1,6 @@
 ---
 name: generate-ai-content
+domain: data
 description: ランキングページ向け AI コンテンツ（考察・地域傾向・FAQ・県別解説）を R2 観測値から生成し、決定的ゲートを通して staging→R2 に反映する。Use when user says "AIコンテンツ生成", "FAQ生成", "ランキング分析生成".
 disable-model-invocation: true
 primary_agent: ranking-content-author

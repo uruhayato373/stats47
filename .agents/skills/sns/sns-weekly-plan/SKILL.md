@@ -1,5 +1,6 @@
 ---
 name: sns-weekly-plan
+domain: sns
 description: SNS の週次運用ルーチンを1コマンドで回す (先週計測→題材選定→IG/X生成予約→消化チェック)。Use when user says "SNS週次計画", "今週のSNS", "SNS運用まわす", "sns weekly plan". 6週投稿ゼロの再発防止。
 disable-model-invocation: true
 argument-hint: "[YYYY-Www] [--dry-run]"

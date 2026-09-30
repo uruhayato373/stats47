@@ -1,5 +1,6 @@
 ---
 name: continuous-learning
+domain: ops
 description: セッション中の再利用可能なパターンを抽出し learned/ に保存する。Use when user says "パターン記録", "continuous-learning", "学び保存". 同じエラーを2回解決した場合に自動適用.
 primary_agent: knowledge-curator
 ---

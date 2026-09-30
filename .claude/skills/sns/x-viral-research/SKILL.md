@@ -1,5 +1,6 @@
 ---
 name: x-viral-research
+domain: sns
 description: X で stats47 関連キーワード (統計/ランキング/地図/GIS/データ可視化) を検索し、伸びている投稿の型・フック・画像フォーマットを収集して台帳化する。Use when user says "Xリサーチ", "バズ投稿調査", "伸びてる投稿を集めて", "viral research". 投稿単位のパターン収集 (アカウント単位の月次観測は /competitor-scan)。
 disable-model-invocation: true
 argument-hint: "[--axis stats|map|dataviz|all] [--days 7] [--min-faves 500]"

@@ -1,5 +1,6 @@
 ---
 name: gsc-analyst
+domain: site
 description: GSC 専任 (fetch + inspect + improvement + indexing API)。 seo-auditor から分離。 改善ログ更新は improvement-triage に委譲。
 model: sonnet
 ---

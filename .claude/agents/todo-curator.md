@@ -1,5 +1,6 @@
 ---
 name: todo-curator
+domain: plan
 description: .claude/todo の台帳を整える agent。分類待ちカードへの ID 採番・タグ付与 (種類/実行/起票)、期限超過・鮮度切れの棚卸し提案、todo-standards の整合維持、docs 全域に散った影のバックログの回収を担う。カードの行削除と improvements の編集は行わない (排他 writer に委ねる)。
 model: sonnet
 ---

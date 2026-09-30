@@ -1,5 +1,6 @@
 ---
 name: sync-metrics-cache
+domain: data
 description: TS registry (data-configs) → D1 metrics テーブル (cache) に同期する。Phase 6 後は metrics への書込みは本 skill のみ。Use when user says "metric cache 同期", "sync-metrics-cache", "registry → D1".
 argument-hint: [--apply]
 disable-model-invocation: true

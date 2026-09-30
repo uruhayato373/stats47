@@ -1,5 +1,6 @@
 ---
 name: research-theme-catalog
+domain: data
 description: テーマページ (/themes/*) の指標×チャート候補と白書由来の論点レンズを NotebookLM・公式ダッシュボード・GSCから調査し、provenance付きで提案する。theme-researcher が実行。
 primary_agent: theme-researcher
 allowed-tools: Read, Grep, Glob, Bash, WebSearch, WebFetch

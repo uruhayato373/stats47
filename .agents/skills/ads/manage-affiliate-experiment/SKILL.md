@@ -1,5 +1,6 @@
 ---
 name: manage-affiliate-experiment
+domain: affiliate
 description: アフィリエイト クリエイティブ A/B 実験のライフサイクル管理 (plan/start/observe/decide/close)。実験 registry (.claude/state/ads/experiments.json) と SSOT の variant エントリを整合させ、判定は決定的スクリプトに委ねる。Use when user says "アフィリエイトABテスト", "クリエイティブ実験", "variant 実験", "実験を開始/判定/終了".
 primary_agent: affiliate-manager
 co_agents: [improvement-triage, ga4-analyst]

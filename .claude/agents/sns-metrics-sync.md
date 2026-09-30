@@ -1,5 +1,6 @@
 ---
 name: sns-metrics-sync
+domain: sns
 description: SNS (X / IG / YouTube pilot) のメトリクス同期と post 連携。YouTube pilot はStudio手動値とGA4 UTMをEXP-006へ記録し、API自動取得は行わない。各 strategist と sns-renderer から metrics 系を集約。TikTok は撤退で対象外。
 model: sonnet
 ---

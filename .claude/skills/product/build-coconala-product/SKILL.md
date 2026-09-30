@@ -1,5 +1,6 @@
 ---
 name: build-coconala-product
+domain: product
 description: ココナラで売る都道府県データ商品 (PowerPoint / Excel / CSV / SVG / PNG / PDF) を型付きカタログから生成・検証・出品準備する。Use when user says "ココナラ商品", "商品を生成", "商品ファクトリー", "product factory", "coconala 商品を作って". 生成先は .local (git 管理外)、出品は人間工程。
 disable-model-invocation: true
 primary_agent: coconala-product-manager

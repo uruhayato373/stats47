@@ -1,5 +1,6 @@
 ---
 name: draft-from-trend
+domain: site
 description: metric/トレンドから記事下書きを R2 観測値直 fetch で一気通貫生成 (metric 選定 → fetch-ranking-data-r2 → article.md(archetype) → generate-article-charts → factual-check)。docs/21 は ephemeral outbox。Use when user says "下書き生成", "ドラフト", "記事を作って", "draft-from-trend"。
 primary_agent: article-writer
 ---
