@@ -30,7 +30,7 @@ export default function CoconalaPage() {
     <div className="space-y-8">
       <PageHeading title="ココナラ" source={data.source}>
         <p className="text-xs text-console-muted">
-          出品・内容修正・価格反映は /coconala-publish (coconala-operator) で行います。売上の列は販売台帳 (公式レポートを証拠として保存し product-factory の販売台帳 CLI で記録したもの) の合計で、記録が無い商品は「未計測」と出します。
+          出品・内容修正・価格反映は /coconala-publish (coconala-operator) で行います。売上の列は販売台帳 (公式レポートを証拠として保存し product-factory の販売台帳 CLI で記録したもの) の合計で、記録が無い商品は「未計測」と出します。閲覧・お気に入りはココナラの「サービス別分析」の過去30日です。CI (authenticated-measurement) が毎日取得して暗号化 private R2 に置き、`npm run measurement:restore -- coconala` (MEASUREMENT_VAULT_KEY が必要) でこの画面へ復元します。
         </p>
       </PageHeading>
 
@@ -38,20 +38,39 @@ export default function CoconalaPage() {
         <StatCard label="出品中" value={data.listed} tone="good" />
         <StatCard label="台帳のみ (未公開)" value={data.draft} tone="warn" />
         <StatCard label="未出品 (カタログのみ)" value={data.unlisted} />
+        <StatCard
+          label="閲覧 (過去30日・全商品)"
+          value={data.viewsTotal ? data.viewsTotal.views : "未計測"}
+          sub={
+            data.viewsTotal
+              ? `${data.viewsTotal.start}〜${data.viewsTotal.end} (取得 ${data.viewsTotal.observedAt.slice(0, 10)})`
+              : "npm run measurement:restore -- coconala で復元"
+          }
+        />
       </Grid>
 
       {data.salesError ? <ErrorNote error={`販売台帳を読めません: ${data.salesError}`} /> : null}
 
       <Section title="商品" count={data.rows.length}>
-        <DataTable columns={["ID", "タイトル", "価格", "状態", "受注", "販売数", "純売上", "最終集計日", "出品ページ"]}>
+        <DataTable columns={["ID", "タイトル", "価格", "状態", "閲覧 (30日)", "お気に入り", "受注", "販売数", "純売上", "最終集計日", "出品ページ"]}>
           {data.rows.map((row) => (
             <Row key={row.id}>
               <Cell nowrap className="font-mono text-xs">{row.id}</Cell>
-              <Cell>{row.title}</Cell>
+              <Cell className="min-w-64">{row.title}</Cell>
               <Cell nowrap>{row.priceYen === null ? "—" : `¥${YEN.format(row.priceYen)}`}</Cell>
               <Cell nowrap>
                 <StatusBadge tone={STATE[row.state].tone}>{STATE[row.state].label}</StatusBadge>
               </Cell>
+              {row.views ? (
+                <>
+                  <Cell nowrap className="text-right font-mono">{row.views.views}</Cell>
+                  <Cell nowrap className="text-right font-mono">{row.views.favorites}</Cell>
+                </>
+              ) : (
+                <Cell nowrap muted colSpan={2}>
+                  未計測
+                </Cell>
+              )}
               {row.sales ? (
                 <>
                   <Cell nowrap className="text-right font-mono">{row.sales.orders}</Cell>
