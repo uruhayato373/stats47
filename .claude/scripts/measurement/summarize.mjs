@@ -46,6 +46,17 @@ const state = { schemaVersion: 1, generatedAt: new Date().toISOString(), runId: 
   status: sources.every(s => s.status === 'pass') ? 'pass' : 'action_required' };
 mkdirSync(dirname(output), { recursive: true });
 writeFileSync(output, JSON.stringify(state, null, 2) + '\n');
+// 商品の週次実売の入力 (metrics/lib/product-revenue.mjs)。成功した取得元の quality.revenue だけを日付単位で足す。
+const historyPath = '.claude/state/metrics/authenticated/revenue-history.json';
+const history = existsSync(historyPath) ? JSON.parse(readFileSync(historyPath, 'utf8')) : { schemaVersion: 1, entries: [] };
+for (const s of sources) {
+  const revenue = s.status === 'pass' ? s.quality?.revenue : null;
+  if (!revenue || !/^\d{4}-\d{2}-\d{2}$/.test(revenue.date ?? '')) continue;
+  history.entries = history.entries.filter(e => !(e.channel === s.source && e.date === revenue.date));
+  history.entries.push({ channel: s.source, ...revenue, observedAt: s.observedAt });
+}
+history.entries.sort((a, b) => a.date.localeCompare(b.date) || a.channel.localeCompare(b.channel));
+writeFileSync(historyPath, JSON.stringify(history, null, 2) + '\n');
 const lines = ['認証付き計測の最新試行。生データと認証状態は暗号化したprivate R2に保存。', '',
   '| 対象 | 収集範囲 | 状態 | 次の操作 |', '|---|---|---|---|',
   ...sources.map(s => `| ${s.source} | ${s.capability} | ${s.status} | ${s.source === 'afb' && ['api_key_missing', 'api_auth_required'].includes(s.code) ? 'AFB_API_KEY Secretを公式API設定と照合（Cookie再ログインは不要）' : s.code === 'auth_required' || s.code === 'session_missing' ? `認証プロファイル手順書で${s.source}の認証を復旧し bootstrap-session.mjs ${s.source}${s.source === 'gsc' ? ' --from-profile' : s.source === 'kdp' ? ' --login --reports' : ''} --publish` : s.code ?? (s.knownIncomplete ? `既知の欠け (${s.knownIncomplete.code}・${s.knownIncomplete.missingRows} 件・値は null のまま)` : null) ?? s.remaining ?? 'なし'} |`),

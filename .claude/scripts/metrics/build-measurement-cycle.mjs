@@ -175,6 +175,7 @@ function main() {
       liveProductCount: liveProductCountOf(readJsonIfExists(".claude/state/products/kdp-weekly-publication.json")),
       weekStart: isoWeekToDateRange(week).startDate,
       weekEnd: asOf,
+      revenueHistory: readJsonIfExists(".claude/state/metrics/authenticated/revenue-history.json"),
     }),
   });
 

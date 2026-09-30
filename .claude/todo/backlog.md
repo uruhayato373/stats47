@@ -66,6 +66,10 @@ updated: 2026-09-29
 
 タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [検証:npm run measurement:status -- --check] [起票:2026-09-21] [レーン:計測]
 
+- **2026-09-30 進捗 (商品の実売を配線)**: 9/28・9/29 の Mac 自動更新が A8・KDP で `no_credential` になっていた原因は、キーチェーンのアカウント名の先頭の全角スペース (A8・KDP) と KDP のパスワード空。オーナーの再登録待ち。
+  併せて、ココナラ売上管理の累積売上・KDP 日別ロイヤリティ見積り・note 売上 API を毎日の収集に載せ、`revenue-history.json` 経由で週次収益 (NSM) と有料購入 KPI へ配線した (`metrics/lib/product-revenue.mjs`)。KDP の見積りは停止条件どおり合計に入れない。
+  note の売上 API はパスワード再確認 (約 30 分) が要るので、Mac の `refresh-session.mjs note` がキーチェーン `stats47-measurement-note` で通してから収集を起動する (登録待ち)。
+
 - **2026-09-27 進捗 (もしも・KDP は自動化で解消)**: 手動収集 run `36312413051` で A8・もしも・KDP・afb・GSC・ココナラの 6 取得元が pass、残りは note (`report_incomplete`) だけ。
   もしもはセッションが数時間で切れ、定期実行が 4〜5 時間遅れて動くのが原因だった → Mac の `measurement-session-refresh.sh` がログイン直後に収集を起動し、定期実行はその日収集済みなら gate で省略する。
   KDP はキーチェーン自動ログイン (オーナー承認) を追加し、本棚の検索が 1 ページ目以外を見つけられない不具合 (publication_status_incomplete) をページ送りで直した。**残り: note の取得不完全**と、定期実行の gate が main 反映後に効くことの確認。
@@ -2578,6 +2582,7 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - **trigger**: `DOMAIN-CONFIG-01` と `DOMAIN-LANES-MIGRATE-01` が完了してから着手する。
 - **方向性**: サイドメニュー (`apps/admin/lib/nav-registry.ts` の `NAV_GROUPS` 直書き。2026-09-30 に純モジュールへ移し、表示は公式 Sidebar の `components/console-nav*.tsx`。項目のページ実在は `tests/unit/nav-registry.test.ts` が検査) を、domains.json の各領域の `nav` から描く形に変える。サイドメニューには「その領域で人が判断するときに開く画面」だけを置き、各項目に画面の種類 (inventory / results / actions / policy / assets) を 1 つ付ける。規則は土木ノートの領域モデル (doboku-note リポジトリの戦略文書「14_領域モデル」と、機械可読の正本 domains.json)と同じにする。
 - **先行実施済み (2026-09-27)**: アフィリエイト領域は土木ノートと同じ 3 画面 (`/affiliate` 成果・`/affiliate/placements` 掲載先・`/affiliate/programs` 提携・案件) に分け、サイドメニューに「アフィリエイト」グループを置いた。旧 `/ads` は転送。残りの領域はこの形に揃える。
+- **先行実施済み (2026-09-30)**: 「商品」(販売状態 `/product/status`・チャネル別・売上 `/revenue`) と「SNS」(投稿状況 `/sns`・チャネル別・バズ地図) のグループを置いた。**チャネルは最上位に並べず、折りたたみの「チャネル別」の枝に入れる (オーナー判断)**。枝の中身は `apps/admin/lib/channel-registry.ts` (note・ココナラ・Kindle / X・Instagram) から作る。domains.json へ移すときもこの枝を残し、チャネル一覧は registry を読む (domains.json に写さない)。
 - **今の画面で直すところ (2026-09-27 時点)**:
   - 「制作・投稿」の下に X・Instagram・note・Kindle が直接並ぶ → チャネルは枝にせず、「SNS」領域の投稿状況・「商品」領域の販売状態の画面内タブにする。
   - 「戦略・収益化」に戦略と恒久停止した「収益 (AdSense)」が残る → 戦略は「戦略」とし、AdSense は停止の記録を見る画面として「管理 > すべて」側へ寄せる。

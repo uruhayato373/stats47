@@ -147,7 +147,8 @@ function readCandidates(): RevenueSummary["candidates"] {
   });
 }
 
-function readProductSales(): RevenueSummary["productSales"] {
+/** 販売台帳 (証拠つきの実測だけ)。/revenue と /product/coconala が同じ読み口を使う */
+export function readProductSales(): RevenueSummary["productSales"] {
   return wrap(() => {
     const ledger = readJson<ProductSalesLedger>(
       ".claude/state/products/sales-ledger.json",
@@ -185,9 +186,36 @@ function readPublishedCounts(): { kindle: number; coconala: number } {
   };
 }
 
+const REVENUE_HISTORY = ".claude/state/metrics/authenticated/revenue-history.json";
+/** 自動取得の観測をこの日数より古いものは「計測中」と見なさない (日次収集が止まったら未計測に戻す) */
+const AUTO_FRESH_DAYS = 3;
+
+/** チャネルごとの自動取得 (revenue-history.json) の最新観測日。読めなければ空 */
+function latestAutoObservation(): Map<string, string> {
+  const latest = new Map<string, string>();
+  if (!fileExists(REVENUE_HISTORY)) return latest;
+  const history = readJson<{ entries?: { channel?: string; date?: string }[] }>(REVENUE_HISTORY);
+  for (const e of history.entries ?? []) {
+    if (!e.channel || !e.date) continue;
+    if ((latest.get(e.channel) ?? "") < e.date) latest.set(e.channel, e.date);
+  }
+  return latest;
+}
+
+function autoState(date: string | undefined): { fresh: boolean; label: string } {
+  if (!date) return { fresh: false, label: "自動取得の記録なし" };
+  const age = Math.floor((Date.now() - Date.parse(`${date}T00:00:00+09:00`)) / 86400000);
+  return { fresh: age <= AUTO_FRESH_DAYS, label: `自動取得 最新 ${date}${age > AUTO_FRESH_DAYS ? ` (${age}日前・停止中)` : ""}` };
+}
+
 function revenueCoverage(
   productSales: RevenueSummary["productSales"],
 ): RevenueChannel[] {
+  const auto = wrap(latestAutoObservation);
+  const autoDate = (channel: string) => ("error" in auto ? undefined : auto.get(channel));
+  const kdpAuto = autoState(autoDate("kdp"));
+  const coconalaAuto = autoState(autoDate("coconala"));
+  const noteAuto = autoState(autoDate("note"));
   const counts = wrap(readPublishedCounts);
   const observations = "error" in productSales ? [] : productSales.observations;
   const kindlePeriods = observations.filter((row) => row.channel === "kdp").length;
@@ -204,13 +232,18 @@ function revenueCoverage(
     },
     {
       channel: "Kindle (KDP)",
-      state: kindlePeriods > 0 ? "measured" : "unmeasured",
-      note: `${kindleCount}冊販売中・証拠付き販売期間 ${kindlePeriods}件`,
+      state: kindlePeriods > 0 || kdpAuto.fresh ? "measured" : "unmeasured",
+      note: `${kindleCount}冊販売中・${kdpAuto.label} (ロイヤリティ見積り)・証拠付き販売期間 ${kindlePeriods}件`,
     },
     {
       channel: "ココナラ",
-      state: coconalaPeriods > 0 ? "measured" : "unmeasured",
-      note: `${coconalaCount}商品公開中・証拠付き販売期間 ${coconalaPeriods}件`,
+      state: coconalaPeriods > 0 || coconalaAuto.fresh ? "measured" : "unmeasured",
+      note: `${coconalaCount}商品公開中・${coconalaAuto.label} (累積売上)・証拠付き販売期間 ${coconalaPeriods}件`,
+    },
+    {
+      channel: "note",
+      state: noteAuto.fresh ? "measured" : "unmeasured",
+      note: `${noteAuto.label} (売上 API・手数料控除前)`,
     },
   ];
 }

@@ -1,7 +1,15 @@
+import { KpiTree } from "@/components/home/kpi-tree";
 import { SummaryCards } from "@/components/home/summary-cards";
 
 import { LinkCard } from "@/components/admin-ui";
+export const dynamic = "force-dynamic";
+
 const SECTIONS = [
+  {
+    href: "/product/status",
+    title: "販売状態",
+    desc: "note・ココナラ・Kindle の商品数と公開段階。各チャネルの詳細へ",
+  },
   {
     href: "/content",
     title: "コンテンツ運用",
@@ -39,8 +47,8 @@ const SECTIONS = [
   },
   {
     href: "/revenue",
-    title: "収益 (AdSense)",
-    desc: "週次収益・RPM・内訳。実測は AdSense のみで他チャネルは未計測と明示する",
+    title: "売上",
+    desc: "商品の週次実売 (ココナラ・note・KDP の自動取得)・販売台帳・AdSense の週次実績 (2026-09-20 停止)。未計測は 0 円と表示しない",
   },
   {
     href: "/affiliate",
@@ -80,6 +88,8 @@ export default function HomePage() {
           ローカル専用 (127.0.0.1)・完全読み取り専用。制作・収益・品質・運用・Geo契約を横断確認し、実行は担当agent/skillだけが行う。
         </p>
       </div>
+
+      <KpiTree />
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         {SECTIONS.map((section) => (

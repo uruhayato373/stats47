@@ -1,6 +1,6 @@
 import {
+  ChannelSummaryCard,
   ContentAuditPanel,
-  StageBadge,
 } from "@/components/content/content-ui";
 import { LinkCard, StatCard } from "@/components/admin-ui";
 import { Section } from "@/components/layout-primitives";
@@ -36,28 +36,7 @@ export default function ContentPage() {
       <Section title="チャネル別の現在地">
         <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
           {data.channels.map((channel) => (
-            <LinkCard key={channel.channel} href={channel.href}>
-              <div className="flex items-baseline justify-between gap-2">
-                <h2 className="font-semibold text-console-fg">{channel.label}</h2>
-                <span className="font-mono text-xl font-bold text-console-fg">{channel.total}</span>
-              </div>
-              <div className="mt-3 flex flex-wrap gap-1.5">
-                {channel.ready > 0 ? <StageBadge stage="ready" /> : null}
-                {channel.review > 0 ? <StageBadge stage="review" /> : null}
-                {channel.scheduled > 0 ? <StageBadge stage="scheduled" /> : null}
-                {channel.published > 0 ? <StageBadge stage="published" /> : null}
-                {channel.draft > 0 ? <StageBadge stage="draft" /> : null}
-                {channel.blocked > 0 ? <StageBadge stage="blocked" /> : null}
-              </div>
-              <dl className="mt-3 grid grid-cols-2 gap-x-3 gap-y-1 text-[11px] text-console-muted">
-                <div>準備完了 {channel.ready}</div>
-                <div>審査中 {channel.review}</div>
-                <div>予約 {channel.scheduled}</div>
-                <div>公開 {channel.published}</div>
-                <div>準備中 {channel.draft}</div>
-              </dl>
-              <p className="mt-3 break-all text-[10px] text-console-muted/80">{channel.source}</p>
-            </LinkCard>
+            <ChannelSummaryCard key={channel.channel} channel={channel} />
           ))}
         </div>
       </Section>

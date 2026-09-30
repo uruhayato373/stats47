@@ -11,7 +11,7 @@ co_agents: [note-manager, kindle-publisher, kdp-operator]
 
 ## 起動 / 停止
 
-共通事業方針は「戦略・収益化」→「共通事業方針」(`/strategy/policy`) の専用ページで読み取り専用表示する(全画面共通ヘッダーには置かない)。`npm run admin` は起動前に `policy:check` を実行する。正本はObsidian vaultの `.claude/共通事業方針SSOT.md`。正本更新後はObsidian vault側で `npm run policy:sync` を実行して配布版を更新する。画面とagentの参照先は `.claude/shared-policy/`、個別適用は `application.json`。
+共通事業方針は「戦略」→「共通方針」(`/strategy/policy`) の専用ページで読み取り専用表示する(全画面共通ヘッダーには置かない)。`npm run admin` は起動前に `policy:check` を実行する。正本はObsidian vaultの `.claude/共通事業方針SSOT.md`。正本更新後はObsidian vault側で `npm run policy:sync` を実行して配布版を更新する。画面とagentの参照先は `.claude/shared-policy/`、個別適用は `application.json`。
 
 ```bash
 npm run admin              # http://127.0.0.1:4747/ (Ctrl-C で停止)
@@ -25,6 +25,8 @@ PORT=5000 npm run admin    # ポート変更
 | パス | セクション | 内容 |
 |---|---|---|
 | `/` | ホーム | 各セクションへのナビ + 件数サマリ (`GET /api/assets/summary`) |
+| `/product/status` | 販売状態 | 商品チャネル (note・ココナラ・Kindle) の件数・公開段階。左メニューは「商品」グループの下に「チャネル別」の枝 (定義は `apps/admin/lib/channel-registry.ts`) |
+| `/product/coconala` | ココナラ | `coconala-listings.json` と product-factory カタログを突合した出品状況 (出品中・台帳のみ・未出品) |
 | `/content` | コンテンツ運用 | X / Instagram / note / Kindle の件数・制作段階・次アクション・SSOT監査を横断表示 |
 | `/content/{x,instagram}` | SNSチャネル別 | `/sns` の共通コンポーネントをチャネル別に初期絞り込み。Geo role・素材・caption・状態を閲覧 |
 | `/content/note` | note運用 | git TS catalog + R2本文所在 + 公開URL/準備状態。読み取り専用 |

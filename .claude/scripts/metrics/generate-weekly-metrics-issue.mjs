@@ -277,6 +277,7 @@ function revenueSection(week) {
       liveProductCount,
       weekStart: weekMon.toISOString().slice(0, 10),
       weekEnd: sundayStr,
+      revenueHistory: readJsonOrNull(".claude/state/metrics/authenticated/revenue-history.json"),
     }),
   );
 

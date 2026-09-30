@@ -5,6 +5,7 @@
  * 週次メトリクス Issue / weekly-review / CI の improvement-triage run が同じ事実を読むための 1 つの state にする。
  * 欠けた入力は 0 に丸めず status で区別する (evidence-based-judgment)。
  */
+import { describeChannel, weeklyProductRevenue } from "./product-revenue.mjs";
 import { reconcileDimensions } from "../../google-admin/dimension-ledger.mjs";
 import { isoWeekOf, isoWeekRange } from "./periods.mjs";
 
@@ -319,13 +320,19 @@ export function summarizeDataQuality(audit) {
  * 売上を自動で取り込む経路が無い。よって記録 0 件でも販売中の商品があれば 0 件と書かず判定不能にする
  * (週次 Issue の productRevenueLine と同じ扱い)。
  */
-export function summarizePaidPurchases({ ledger, liveProductCount, weekStart, weekEnd }) {
+export function summarizePaidPurchases({ ledger, liveProductCount, weekStart, weekEnd, revenueHistory = null }) {
   const observations = Array.isArray(ledger?.observations) ? ledger.observations : null;
   if (observations == null) return { status: "missing", value: null, note: "sales-ledger.json が無い" };
   const inWeek = observations.filter((o) => typeof o?.periodEnd === "string" && o.periodEnd >= weekStart && o.periodEnd <= weekEnd);
   if (inWeek.length > 0) {
     const total = inWeek.reduce((sum, o) => sum + (Number(o.netRevenueYen) || 0), 0);
     return { status: "ok", value: `${inWeek.length} 件・¥${total.toLocaleString("ja-JP")}` };
+  }
+  if (revenueHistory) {
+    const week = weeklyProductRevenue({ revenueHistory, weekStart, weekEnd });
+    const detail = Object.entries(week.channels).map(([name, r]) => describeChannel(name, r)).join(" / ");
+    if (week.status === "ok") return { status: "ok", value: `${week.count ?? "件数不明"}${week.count == null ? "" : " 件"}・¥${week.yen.toLocaleString("ja-JP")}`, note: detail };
+    return { status: "unmeasurable", value: null, note: detail };
   }
   if (liveProductCount === 0) return { status: "ok", value: "0 件", note: "販売中の商品なし" };
   return {
@@ -461,11 +468,11 @@ function renderKpiTree(k) {
   const lines = [];
   lines.push(`**KPI ツリー**（正典: 事業計画 catalog → \`.claude/state/business-plan/kpi-tree.json\`。比較は ${KPI_COMPARE_WEEKS_BACK} 週前 ${k.compareWeek} = 窓が重ならない値。★ = 今月の重点レーンの KPI）`);
   lines.push("");
-  lines.push("| 階層 | KPI | 今週 | 比較 | 状態 | 施策 |");
-  lines.push("|---|---|---|---|---|---|");
+  lines.push("| 階層 | KPI | 今週 | 比較 | 目標 | 状態 | 施策 |");
+  lines.push("|---|---|---|---|---|---|---|");
   for (const n of k.nodes) {
     const imp = n.improvements.length ? n.improvements.map((id) => `\`${id}\``).join(", ") : "—";
-    lines.push(`| ${TIER_LABEL[n.tier] ?? n.tier} | ${n.focus ? "★ " : ""}${n.label} | ${n.value ?? "—"} | ${n.previous ?? "—"} | ${n.status}${n.note ? `（${n.note}）` : ""} | ${imp} |`);
+    lines.push(`| ${TIER_LABEL[n.tier] ?? n.tier} | ${n.focus ? "★ " : ""}${n.label} | ${n.value ?? "—"} | ${n.previous ?? "—"} | ${n.target ? `${n.target.value.toLocaleString("ja-JP")}（${n.target.dueWeek}）` : "—"} | ${n.status}${n.note ? `（${n.note}）` : ""} | ${imp} |`);
   }
   lines.push("");
   const i = k.improvements;

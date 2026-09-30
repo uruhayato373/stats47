@@ -18,6 +18,8 @@
 /** 観測をこの日数より古いものは判定に使わない (週次の報告なので 1 週と数日の余裕) */
 export const ASP_OBSERVATION_MAX_AGE_DAYS = 10;
 
+import { describeChannel, weeklyProductRevenue } from "./lib/product-revenue.mjs";
+
 const yen = (value) => `¥${Number(value ?? 0).toLocaleString("ja-JP")}`;
 
 function ageDays(isoDate, asOf) {
@@ -100,7 +102,7 @@ export function aspRevenueLines({ authLatest, a8Results, moshimoResults, asOf })
  *                      S1 シリーズと試行分だけなので全体の数ではなく下限。読めなければ null
  *   weekStart / weekEnd … 週の月曜・日曜 (YYYY-MM-DD)
  */
-export function productRevenueLine({ ledger, liveProductCount, weekStart, weekEnd }) {
+export function productRevenueLine({ ledger, liveProductCount, weekStart, weekEnd, revenueHistory = null }) {
   const observations = Array.isArray(ledger?.observations) ? ledger.observations : null;
   if (observations == null) return "- 商品: **判定不能**（sales-ledger.json が無いか observations 配列が無い）";
   const inWeek = observations.filter(
@@ -109,6 +111,12 @@ export function productRevenueLine({ ledger, liveProductCount, weekStart, weekEn
   if (inWeek.length > 0) {
     const total = inWeek.reduce((sum, o) => sum + (Number(o.netRevenueYen) || 0), 0);
     return `- 商品: **${yen(total)}**（期間末が今週の実売記録 ${inWeek.length} 件の手取り合計）`;
+  }
+  // 台帳に手入力の記録が無い週は、認証付き収集の日次履歴 (revenue-history.json) から出す。
+  if (revenueHistory) {
+    const week = weeklyProductRevenue({ revenueHistory, weekStart, weekEnd });
+    const detail = Object.entries(week.channels).map(([name, r]) => describeChannel(name, r)).join(" / ");
+    return week.status === "ok" ? `- 商品: **${yen(week.yen)}**（${detail}）` : `- 商品: **判定不能**（${detail}）`;
   }
   if (liveProductCount == null) return "- 商品: **判定不能**（今週の実売記録 0 件で、販売中の商品数も読めない）";
   if (liveProductCount === 0) return "- 商品: **¥0**（販売中の商品なし）";

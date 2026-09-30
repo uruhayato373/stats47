@@ -10,6 +10,8 @@ import { expect, test, type Page } from "@playwright/test";
 const PAGES = [
   { path: "/", heading: "管理コンソール" },
   { path: "/content", heading: "コンテンツ運用" },
+  { path: "/product/status", heading: "販売状態" },
+  { path: "/product/coconala", heading: "ココナラ" },
   { path: "/content/x", heading: "X運用" },
   { path: "/content/instagram", heading: "Instagram運用" },
   { path: "/content/note", heading: "note運用" },
@@ -20,7 +22,7 @@ const PAGES = [
   { path: "/assets", heading: null },
   { path: "/svg", heading: null },
   { path: "/research", heading: "調査カタログ" },
-  { path: "/revenue", heading: "収益 (AdSense)" },
+  { path: "/revenue", heading: "収益" },
   { path: "/affiliate", heading: "アフィリエイト 成果" },
   { path: "/affiliate/placements", heading: "アフィリエイト 掲載先" },
   { path: "/affiliate/programs", heading: "アフィリエイト 提携・案件" },
@@ -91,13 +93,22 @@ test.describe("smoke: 管理画面の疎通", () => {
 
     // 左メニューは shadcn 公式の Sidebar。旧 aside/nav ではない (2026-09-30)
 
-    await (await sidebarOf(page)).getByRole("link", { name: "コンテンツ運用", exact: true }).click();
+    await (await sidebarOf(page)).getByRole("link", { name: "コンテンツ横断・監査", exact: true }).click();
     await expect(page).toHaveURL(/\/content$/);
 
-    await (await sidebarOf(page)).getByRole("link", { name: "Kindle", exact: true }).click();
-    await expect(page).toHaveURL(/\/content\/kindle$/);
+    await (await sidebarOf(page)).getByRole("link", { name: "販売状態", exact: true }).click();
+    await expect(page).toHaveURL(/\/product\/status$/);
 
-    await (await sidebarOf(page)).getByRole("link", { name: "SNS", exact: true }).click();
+    // チャネルは「チャネル別」の枝 (折りたたみ) の中。現在地を含まない枝は閉じているので開いてから押す
+    let sidebar = await sidebarOf(page);
+    await sidebar.locator("summary", { hasText: "チャネル別" }).first().click();
+    await sidebar.getByRole("link", { name: "Kindle", exact: true }).click();
+    await expect(page).toHaveURL(/\/content\/kindle$/);
+    // 現在地を含む枝は開いた状態で描かれる
+    sidebar = await sidebarOf(page);
+    await expect(sidebar.getByRole("link", { name: "Kindle", exact: true })).toHaveAttribute("aria-current", "page");
+
+    await (await sidebarOf(page)).getByRole("link", { name: "投稿状況", exact: true }).click();
     await expect(page).toHaveURL(/\/sns$/);
 
     await (await sidebarOf(page)).getByRole("link", { name: "画像資産", exact: true }).click();
