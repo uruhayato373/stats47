@@ -147,7 +147,8 @@ function readCandidates(): RevenueSummary["candidates"] {
   });
 }
 
-function readProductSales(): RevenueSummary["productSales"] {
+/** 販売台帳 (証拠つきの実測だけ)。/revenue と /product/coconala が同じ読み口を使う */
+export function readProductSales(): RevenueSummary["productSales"] {
   return wrap(() => {
     const ledger = readJson<ProductSalesLedger>(
       ".claude/state/products/sales-ledger.json",

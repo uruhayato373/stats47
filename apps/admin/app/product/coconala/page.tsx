@@ -30,7 +30,7 @@ export default function CoconalaPage() {
     <div className="space-y-8">
       <PageHeading title="ココナラ" source={data.source}>
         <p className="text-xs text-console-muted">
-          出品・内容修正・価格反映は /coconala-publish (coconala-operator) で行います。売上は「売上」画面の販売台帳で見ます。
+          出品・内容修正・価格反映は /coconala-publish (coconala-operator) で行います。売上の列は販売台帳 (公式レポートを証拠として保存し product-factory の販売台帳 CLI で記録したもの) の合計で、記録が無い商品は「未計測」と出します。
         </p>
       </PageHeading>
 
@@ -40,8 +40,10 @@ export default function CoconalaPage() {
         <StatCard label="未出品 (カタログのみ)" value={data.unlisted} />
       </Grid>
 
+      {data.salesError ? <ErrorNote error={`販売台帳を読めません: ${data.salesError}`} /> : null}
+
       <Section title="商品" count={data.rows.length}>
-        <DataTable columns={["ID", "タイトル", "価格", "状態", "出品ページ"]}>
+        <DataTable columns={["ID", "タイトル", "価格", "状態", "受注", "販売数", "純売上", "最終集計日", "出品ページ"]}>
           {data.rows.map((row) => (
             <Row key={row.id}>
               <Cell nowrap className="font-mono text-xs">{row.id}</Cell>
@@ -50,6 +52,19 @@ export default function CoconalaPage() {
               <Cell nowrap>
                 <StatusBadge tone={STATE[row.state].tone}>{STATE[row.state].label}</StatusBadge>
               </Cell>
+              {row.sales ? (
+                <>
+                  <Cell nowrap className="text-right font-mono">{row.sales.orders}</Cell>
+                  <Cell nowrap className="text-right font-mono">{row.sales.units}</Cell>
+                  <Cell nowrap className="text-right font-mono">¥{YEN.format(row.sales.netRevenueYen)}</Cell>
+                  <Cell nowrap muted>{row.sales.latestPeriodEnd}</Cell>
+                </>
+              ) : (
+                // 台帳に記録が無い商品は「未計測」。0 件・0 円と書かない (売れていないのか、記録していないのか区別できなくなる)
+                <Cell nowrap muted colSpan={4}>
+                  未計測
+                </Cell>
+              )}
               <Cell nowrap>
                 {row.serviceUrl ? (
                   <a href={row.serviceUrl} target="_blank" rel="noreferrer" className="text-console-accent hover:underline">

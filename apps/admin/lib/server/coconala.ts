@@ -1,7 +1,8 @@
 import "server-only";
 
 import { ALL_PRODUCTS } from "../../../../packages/product-factory/src/catalog/products";
-import { cached, readJson, TTL, wrap, type Wrapped } from "./state-io";
+import { readProductSales } from "./revenue";
+import { cached, hasError, readJson, TTL, wrap, type Wrapped } from "./state-io";
 
 /**
  * ココナラの出品状況 (読み取り専用)。
@@ -21,6 +22,8 @@ export interface CoconalaRow {
   state: "listed" | "draft" | "unlisted";
   serviceUrl: string | null;
   listedAt: string | null;
+  /** 販売台帳 (sales-ledger.json) のこの商品の合計。記録が 1 件も無ければ null (= 未計測。0 件と区別する) */
+  sales: { orders: number; units: number; netRevenueYen: number; latestPeriodEnd: string } | null;
 }
 
 export interface CoconalaSummary {
@@ -28,6 +31,8 @@ export interface CoconalaSummary {
   listed: number;
   draft: number;
   unlisted: number;
+  /** 販売台帳が読めないときの理由 (読めたら null) */
+  salesError: string | null;
   source: string;
 }
 
@@ -35,6 +40,18 @@ export function coconalaSummary(): Wrapped<CoconalaSummary> {
   return cached("coconala", TTL.daily, () =>
     wrap(() => {
       const { listings } = readJson<{ listings: Record<string, RawListing> }>(LISTINGS);
+      const ledger = readProductSales();
+      const salesOf = (id: string): CoconalaRow["sales"] => {
+        if (hasError(ledger)) return null;
+        const rows = ledger.observations.filter((o) => o.channel === "coconala" && o.productId === id);
+        if (rows.length === 0) return null;
+        return {
+          orders: rows.reduce((sum, o) => sum + o.orders, 0),
+          units: rows.reduce((sum, o) => sum + o.units, 0),
+          netRevenueYen: rows.reduce((sum, o) => sum + o.netRevenueYen, 0),
+          latestPeriodEnd: rows.reduce((max, o) => (o.periodEnd > max ? o.periodEnd : max), ""),
+        };
+      };
       const listedRows: CoconalaRow[] = Object.entries(listings).map(([id, row]) => ({
         id,
         title: row.title ?? id,
@@ -42,6 +59,7 @@ export function coconalaSummary(): Wrapped<CoconalaSummary> {
         state: row.status === "listed" && row.serviceUrl ? "listed" : "draft",
         serviceUrl: row.serviceUrl ?? null,
         listedAt: row.listedAt ?? null,
+        sales: salesOf(id),
       }));
       const unlistedRows: CoconalaRow[] = ALL_PRODUCTS.filter((p) => !(p.id in listings)).map((p) => ({
         id: p.id,
@@ -50,6 +68,7 @@ export function coconalaSummary(): Wrapped<CoconalaSummary> {
         state: "unlisted",
         serviceUrl: null,
         listedAt: null,
+        sales: salesOf(p.id),
       }));
       const rows = [...listedRows, ...unlistedRows].sort((a, b) => a.id.localeCompare(b.id));
       const count = (state: CoconalaRow["state"]) => rows.filter((r) => r.state === state).length;
@@ -58,7 +77,8 @@ export function coconalaSummary(): Wrapped<CoconalaSummary> {
         listed: count("listed"),
         draft: count("draft"),
         unlisted: count("unlisted"),
-        source: `${LISTINGS} + packages/product-factory/src/catalog/products`,
+        salesError: hasError(ledger) ? ledger.error : null,
+        source: `${LISTINGS} + packages/product-factory/src/catalog/products + .claude/state/products/sales-ledger.json`,
       };
     }),
   );
