@@ -34,21 +34,31 @@ export function Grid({
   return <div className={cn("grid", MIN[min], GAP[gap], className)} {...props} />;
 }
 
-/** 見出しつきのまとまり。見出しと中身の間隔もここで持つ。note は中身の下に出す注記。 */
+/**
+ * 見出しつきのまとまり。見出しと中身の間隔もここで持つ。note は中身の下に出す注記。
+ * id はページ内リンク (#id) の着地、count は見出しの横に出す件数。
+ */
 export function Section({
+  id,
   title,
+  count,
   note,
   children,
   className,
 }: {
+  id?: string;
   title: ReactNode;
+  count?: ReactNode;
   note?: ReactNode;
   children: ReactNode;
   className?: string;
 }) {
   return (
-    <section className={cn("flex flex-col gap-2", className)}>
-      <h2 className="m-0 text-sm font-semibold">{title}</h2>
+    <section id={id} className={cn("flex scroll-mt-6 flex-col gap-2", className)}>
+      <h2 className="m-0 text-sm font-semibold">
+        {title}
+        {count !== undefined ? <span className="ml-2 font-normal text-muted-foreground">({count})</span> : null}
+      </h2>
       {children}
       {note ? <p className="m-0 text-xs text-muted-foreground">{note}</p> : null}
     </section>

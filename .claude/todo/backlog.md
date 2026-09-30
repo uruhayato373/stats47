@@ -196,8 +196,8 @@ updated: 2026-09-29
 ### [ADMIN-UI-SHADCN-01] 管理画面 apps/admin の残りのページを shadcn 公式部品と共通の組み立て部品へ移す
 タグ: [UI・UX] [種類:改善] [実行:対話] [検証:npm run admin-ui:check] [起票:2026-09-30]
 
-- **済 (2026-09-30)**: 土台 (Tailwind v4・公式 new-york-v4 の部品 11 個・`components.json`・`check-shadcn-parity` / `check-admin-ui-debt`・`Stack`/`Grid`/`Section`/`TableFrame`/`PanelCard`/`StatusBadge`) とパイロット `/content/note/covers`。規約は `.claude/rules/admin-ui.md`。
-- **残り (基準値 `.claude/config/admin-ui-debt-baseline.json` が正典)**: ユーティリティで組んだカード面 (`bg-console-card`) 約 60 件・生の `<table>` 約 11 件・インライン style 2 件。多いページから順に: `content/references`・`strategy`・`content/kindle`・`todo`・`ops/primitives`・`revenue`・ダッシュボード各 section。
+- **済 (2026-09-30)**: 土台 (Tailwind v4・公式 new-york-v4 の部品 13 個・`components.json`・`check-shadcn-parity` / `check-admin-ui-debt`・`Stack`/`Grid`/`Section`/`TableFrame`/`DataTable`/`PanelCard`/`StatCard`/`StatusBadge`) と、移行済みページ `/content/note/covers`・`/content/references`。規約は `.claude/rules/admin-ui.md`。
+- **残り (基準値 `.claude/config/admin-ui-debt-baseline.json` が正典)**: ユーティリティで組んだカード面 (`bg-console-card`) 約 50 件・生の `<table>` 約 11 件・インライン style 2 件。多いところから順に: `strategy`・`content/kindle`・`todo`・`ops/primitives` (Section/Stat/Badge/Table/Td/Tr の実装。ここを DataTable/StatCard/StatusBadge へ委譲すると使う全ページが一度に移る)・`revenue`・ダッシュボード各 section。
 - **次**: (1) ページ単位で `PanelCard` / `TableFrame` / `Stack` / `StatusBadge` へ組み直し、light/dark で見た目を確認して `check-admin-ui-debt.mjs --update` で基準値を下げる。(2) ナビ `console-nav.tsx` を公式 Sidebar (`sidebar.tsx`・`sheet`・`tooltip`) へ置き換え、チャネル定義を `channel-registry.ts` の SSOT に集約する (doboku-note admin-app と同じ)。(3) `FacetShell`/`Facet` (一覧の絞り込み) を必要になったページで足す。
 - **完了条件**: 基準値の `rawSurface`・`rawTable`・`inlineStyle` が 0、`console-nav` が公式 Sidebar、`npm run admin-ui:check` が通る。
 - **禁止**: 一度に全ページを書き換えない (1 ページずつ見た目を確認する)。`components/ui/*` を公式から変えない (差は理由付きで例外登録)。

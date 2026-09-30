@@ -6,7 +6,7 @@
     "inlineStyle": 2,
     "rawTable": 11,
     "rawBadge": 0,
-    "rawSurface": 62
+    "rawSurface": 51
   },
   "files": {
     "apps/admin/app/content/kindle/page.tsx": {
@@ -29,13 +29,6 @@
       "rawTable": 0,
       "rawBadge": 0,
       "rawSurface": 2
-    },
-    "apps/admin/app/content/references/page.tsx": {
-      "rawCard": 0,
-      "inlineStyle": 0,
-      "rawTable": 0,
-      "rawBadge": 0,
-      "rawSurface": 11
     },
     "apps/admin/app/ops/page.tsx": {
       "rawCard": 0,

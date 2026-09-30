@@ -17,8 +17,8 @@ paths:
 |---|---|---|
 | 土台 | `apps/admin/app/globals.css` | Tailwind **v4** (CSS-first)。`@theme` に `console-*` と shadcn トークン、`@custom-variant dark`、v3 互換 (border 既定色・cursor・行高) |
 | 公式部品 | `apps/admin/components/ui/*.tsx` | shadcn/ui 公式 (new-york-v4) をそのまま。変えてよいのは `cn` の import 先 (`@/lib/cn`) だけ。`components.json` で `npx shadcn add` と同じ流儀 |
-| 並べ方 | `apps/admin/components/layout-primitives.tsx` | `Stack` / `Grid` / `Section`。部品は外側の余白を持たず、間隔は親の `gap` が決める |
-| 組み立て部品 | `apps/admin/components/admin-ui/` | `TableFrame` (表)・`PanelCard` (題名つきの区画)・`StatusBadge` (状態)。ページはここと `components/ui/*` から組む |
+| 並べ方 | `apps/admin/components/layout-primitives.tsx` | `Stack` / `Grid` / `Section` (`id` = ページ内リンクの着地・`count` = 見出し横の件数)。部品は外側の余白を持たず、間隔は親の `gap` が決める |
+| 組み立て部品 | `apps/admin/components/admin-ui/` | `TableFrame` (表の枠)・`DataTable` + `Row` / `Cell` (見出し行つきの一覧。旧 `ops/primitives` の Table/Tr/Td の置き換え先)・`PanelCard` (題名つきの区画)・`StatCard` (数値タイル。旧 Stat)・`StatusBadge` (状態)。ページはここと `components/ui/*` から組む |
 | 公式の保存物 | `.claude/config/shadcn-reference/*.tsx` | 公式ソースの写し (CI がネットワークに依存しないため)。手編集しない |
 
 ## 契約
@@ -49,6 +49,8 @@ paths:
 
 1. ページを `PanelCard` / `TableFrame` / `Stack` / `StatusBadge` / 公式部品で組み直す。
 2. `npm run admin-ui:check` が通ることを確認し、減った分を `node .claude/scripts/admin-ui/check-admin-ui-debt.mjs --update` で基準値へ反映する。
-3. light / dark の両方で見た目を確認する (`/content/note/covers` がパイロット)。
+3. light / dark の両方で見た目を確認する (移行済み: `/content/note/covers`・`/content/references`)。
+4. フォームは公式の `Input` / `NativeSelect` (サーバー描画の GET フォーム向け。Radix の Select は使わない) / `Button`、注記は `Alert`、ページ内リンクは `Button asChild variant="outline"`。
+   `ops/primitives` (`Section` / `Stat` / `Badge` / `Table`) は移行中の旧部品で、新しい画面では使わない。
 
 残りの手組みは `admin-ui-debt-baseline.json` のページ別件数が正典で、バックログ `ADMIN-UI-SHADCN-01` が進捗を持つ。
