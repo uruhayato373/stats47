@@ -1,0 +1,7 @@
+{
+  "kind": "derived",
+  "derived": "R2 app/stats/ratio-65-plus/cities.json (2025年・65歳以上人口割合、国勢調査の原数値で年齢不詳を除いて算出)。市区町村(政令市の区を除く)で高齢化率50%超を抽出し県別に集計。2020年との比較も同ファイルの yearCode 2020 から。",
+  "source": "r2:app/stats/ratio-65-plus/cities.json",
+  "fetchedAt": "2026-09-30T00:00:00.000Z",
+  "generatedBy": "manual aggregation (brushup 2025 census update)"
+}

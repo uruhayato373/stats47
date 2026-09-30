@@ -1,0 +1,11 @@
+{
+  "kind": "metric",
+  "metricKey": "ratio-65-plus",
+  "year": "2005-2025",
+  "unit": "％",
+  "source": "r2:app/stats/ratio-65-plus/values.json",
+  "transform": "5県 × 2005/2010/2015/2020/2025 の5点を抽出 (2025は小数第2位で丸め)",
+  "restore": "curl -s https://storage.stats47.jp/app/stats/ratio-65-plus/values.json  # areaName と yearCode で抽出",
+  "fetchedAt": "2026-09-30T01:50:05.530Z",
+  "generatedBy": "article-writer"
+}

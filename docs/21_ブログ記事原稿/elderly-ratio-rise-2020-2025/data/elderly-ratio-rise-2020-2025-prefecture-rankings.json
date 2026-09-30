@@ -1,0 +1,440 @@
+{
+  "title": "高齢化率の上昇幅",
+  "subtitle": "2020→2025年（ポイント）",
+  "label": "高齢化率の上昇幅",
+  "readerLabel": "高齢化率の上昇幅",
+  "hook": "5年で高齢化率が最も上がった県は？",
+  "unit": "ポイント",
+  "year": "2025",
+  "highLabel": "上昇が大きい県",
+  "lowLabel": "上昇が小さい県",
+  "palette": "red",
+  "rightPalette": "blue",
+  "source": "国勢調査 (2020年・2025年の差)",
+  "generatedBy": "calc-diff",
+  "data": [
+    {
+      "rank": 1,
+      "areaName": "青森県",
+      "pref": "青森県",
+      "value": 2.54,
+      "areaCode": "02000",
+      "value2020": 33.9,
+      "value2025": 36.44
+    },
+    {
+      "rank": 2,
+      "areaName": "秋田県",
+      "pref": "秋田県",
+      "value": 2.51,
+      "areaCode": "05000",
+      "value2020": 37.6,
+      "value2025": 40.11
+    },
+    {
+      "rank": 2,
+      "areaName": "福島県",
+      "pref": "福島県",
+      "value": 2.51,
+      "areaCode": "07000",
+      "value2020": 31.8,
+      "value2025": 34.31
+    },
+    {
+      "rank": 4,
+      "areaName": "山形県",
+      "pref": "山形県",
+      "value": 2.34,
+      "areaCode": "06000",
+      "value2020": 34,
+      "value2025": 36.34
+    },
+    {
+      "rank": 5,
+      "areaName": "岩手県",
+      "pref": "岩手県",
+      "value": 2.27,
+      "areaCode": "03000",
+      "value2020": 33.8,
+      "value2025": 36.07
+    },
+    {
+      "rank": 5,
+      "areaName": "鳥取県",
+      "pref": "鳥取県",
+      "value": 2.27,
+      "areaCode": "31000",
+      "value2020": 32.5,
+      "value2025": 34.77
+    },
+    {
+      "rank": 7,
+      "areaName": "長崎県",
+      "pref": "長崎県",
+      "value": 2.17,
+      "areaCode": "42000",
+      "value2020": 33.1,
+      "value2025": 35.27
+    },
+    {
+      "rank": 8,
+      "areaName": "愛媛県",
+      "pref": "愛媛県",
+      "value": 2.12,
+      "areaCode": "38000",
+      "value2020": 33.4,
+      "value2025": 35.52
+    },
+    {
+      "rank": 9,
+      "areaName": "鹿児島県",
+      "pref": "鹿児島県",
+      "value": 1.91,
+      "areaCode": "46000",
+      "value2020": 32.8,
+      "value2025": 34.71
+    },
+    {
+      "rank": 10,
+      "areaName": "沖縄県",
+      "pref": "沖縄県",
+      "value": 1.9,
+      "areaCode": "47000",
+      "value2020": 22.6,
+      "value2025": 24.5
+    },
+    {
+      "rank": 11,
+      "areaName": "宮崎県",
+      "pref": "宮崎県",
+      "value": 1.83,
+      "areaCode": "45000",
+      "value2020": 32.7,
+      "value2025": 34.53
+    },
+    {
+      "rank": 12,
+      "areaName": "栃木県",
+      "pref": "栃木県",
+      "value": 1.77,
+      "areaCode": "09000",
+      "value2020": 29.2,
+      "value2025": 30.97
+    },
+    {
+      "rank": 13,
+      "areaName": "宮城県",
+      "pref": "宮城県",
+      "value": 1.76,
+      "areaCode": "04000",
+      "value2020": 28.3,
+      "value2025": 30.06
+    },
+    {
+      "rank": 14,
+      "areaName": "山梨県",
+      "pref": "山梨県",
+      "value": 1.67,
+      "areaCode": "19000",
+      "value2020": 31.1,
+      "value2025": 32.77
+    },
+    {
+      "rank": 14,
+      "areaName": "徳島県",
+      "pref": "徳島県",
+      "value": 1.67,
+      "areaCode": "36000",
+      "value2020": 34.5,
+      "value2025": 36.17
+    },
+    {
+      "rank": 16,
+      "areaName": "新潟県",
+      "pref": "新潟県",
+      "value": 1.66,
+      "areaCode": "15000",
+      "value2020": 32.9,
+      "value2025": 34.56
+    },
+    {
+      "rank": 17,
+      "areaName": "静岡県",
+      "pref": "静岡県",
+      "value": 1.55,
+      "areaCode": "22000",
+      "value2020": 30.2,
+      "value2025": 31.75
+    },
+    {
+      "rank": 18,
+      "areaName": "佐賀県",
+      "pref": "佐賀県",
+      "value": 1.54,
+      "areaCode": "41000",
+      "value2020": 30.8,
+      "value2025": 32.34
+    },
+    {
+      "rank": 19,
+      "areaName": "和歌山県",
+      "pref": "和歌山県",
+      "value": 1.51,
+      "areaCode": "30000",
+      "value2020": 33.4,
+      "value2025": 34.91
+    },
+    {
+      "rank": 20,
+      "areaName": "奈良県",
+      "pref": "奈良県",
+      "value": 1.43,
+      "areaCode": "29000",
+      "value2020": 31.7,
+      "value2025": 33.13
+    },
+    {
+      "rank": 21,
+      "areaName": "高知県",
+      "pref": "高知県",
+      "value": 1.42,
+      "areaCode": "39000",
+      "value2020": 35.6,
+      "value2025": 37.02
+    },
+    {
+      "rank": 22,
+      "areaName": "北海道",
+      "pref": "北海道",
+      "value": 1.4,
+      "areaCode": "01000",
+      "value2020": 32.2,
+      "value2025": 33.6
+    },
+    {
+      "rank": 23,
+      "areaName": "熊本県",
+      "pref": "熊本県",
+      "value": 1.34,
+      "areaCode": "43000",
+      "value2020": 31.6,
+      "value2025": 32.94
+    },
+    {
+      "rank": 24,
+      "areaName": "長野県",
+      "pref": "長野県",
+      "value": 1.31,
+      "areaCode": "20000",
+      "value2020": 32.2,
+      "value2025": 33.51
+    },
+    {
+      "rank": 25,
+      "areaName": "岐阜県",
+      "pref": "岐阜県",
+      "value": 1.28,
+      "areaCode": "21000",
+      "value2020": 30.6,
+      "value2025": 31.88
+    },
+    {
+      "rank": 26,
+      "areaName": "群馬県",
+      "pref": "群馬県",
+      "value": 1.27,
+      "areaCode": "10000",
+      "value2020": 30.4,
+      "value2025": 31.67
+    },
+    {
+      "rank": 27,
+      "areaName": "福井県",
+      "pref": "福井県",
+      "value": 1.25,
+      "areaCode": "18000",
+      "value2020": 30.8,
+      "value2025": 32.05
+    },
+    {
+      "rank": 27,
+      "areaName": "大分県",
+      "pref": "大分県",
+      "value": 1.25,
+      "areaCode": "44000",
+      "value2020": 33.5,
+      "value2025": 34.75
+    },
+    {
+      "rank": 29,
+      "areaName": "茨城県",
+      "pref": "茨城県",
+      "value": 1.23,
+      "areaCode": "08000",
+      "value2020": 29.9,
+      "value2025": 31.13
+    },
+    {
+      "rank": 30,
+      "areaName": "島根県",
+      "pref": "島根県",
+      "value": 1.2,
+      "areaCode": "32000",
+      "value2020": 34.4,
+      "value2025": 35.6
+    },
+    {
+      "rank": 31,
+      "areaName": "三重県",
+      "pref": "三重県",
+      "value": 1.13,
+      "areaCode": "24000",
+      "value2020": 30.2,
+      "value2025": 31.33
+    },
+    {
+      "rank": 31,
+      "areaName": "滋賀県",
+      "pref": "滋賀県",
+      "value": 1.13,
+      "areaCode": "25000",
+      "value2020": 26.4,
+      "value2025": 27.53
+    },
+    {
+      "rank": 33,
+      "areaName": "広島県",
+      "pref": "広島県",
+      "value": 1.09,
+      "areaCode": "34000",
+      "value2020": 29.6,
+      "value2025": 30.69
+    },
+    {
+      "rank": 34,
+      "areaName": "石川県",
+      "pref": "石川県",
+      "value": 1.06,
+      "areaCode": "17000",
+      "value2020": 30,
+      "value2025": 31.06
+    },
+    {
+      "rank": 35,
+      "areaName": "香川県",
+      "pref": "香川県",
+      "value": 1.05,
+      "areaCode": "37000",
+      "value2020": 31.9,
+      "value2025": 32.95
+    },
+    {
+      "rank": 36,
+      "areaName": "山口県",
+      "pref": "山口県",
+      "value": 1.01,
+      "areaCode": "35000",
+      "value2020": 34.8,
+      "value2025": 35.81
+    },
+    {
+      "rank": 37,
+      "areaName": "岡山県",
+      "pref": "岡山県",
+      "value": 0.94,
+      "areaCode": "33000",
+      "value2020": 30.7,
+      "value2025": 31.64
+    },
+    {
+      "rank": 38,
+      "areaName": "兵庫県",
+      "pref": "兵庫県",
+      "value": 0.82,
+      "areaCode": "28000",
+      "value2020": 29.3,
+      "value2025": 30.12
+    },
+    {
+      "rank": 39,
+      "areaName": "千葉県",
+      "pref": "千葉県",
+      "value": 0.81,
+      "areaCode": "12000",
+      "value2020": 27.6,
+      "value2025": 28.41
+    },
+    {
+      "rank": 40,
+      "areaName": "福岡県",
+      "pref": "福岡県",
+      "value": 0.69,
+      "areaCode": "40000",
+      "value2020": 28.1,
+      "value2025": 28.79
+    },
+    {
+      "rank": 41,
+      "areaName": "富山県",
+      "pref": "富山県",
+      "value": 0.67,
+      "areaCode": "16000",
+      "value2020": 32.8,
+      "value2025": 33.47
+    },
+    {
+      "rank": 42,
+      "areaName": "埼玉県",
+      "pref": "埼玉県",
+      "value": 0.63,
+      "areaCode": "11000",
+      "value2020": 27.1,
+      "value2025": 27.73
+    },
+    {
+      "rank": 43,
+      "areaName": "愛知県",
+      "pref": "愛知県",
+      "value": 0.61,
+      "areaCode": "23000",
+      "value2020": 25.4,
+      "value2025": 26.01
+    },
+    {
+      "rank": 44,
+      "areaName": "京都府",
+      "pref": "京都府",
+      "value": 0.58,
+      "areaCode": "26000",
+      "value2020": 29.4,
+      "value2025": 29.98
+    },
+    {
+      "rank": 45,
+      "areaName": "神奈川県",
+      "pref": "神奈川県",
+      "value": 0.54,
+      "areaCode": "14000",
+      "value2020": 25.6,
+      "value2025": 26.14
+    },
+    {
+      "rank": 46,
+      "areaName": "東京都",
+      "pref": "東京都",
+      "value": 0.02,
+      "areaCode": "13000",
+      "value2020": 22.8,
+      "value2025": 22.82
+    },
+    {
+      "rank": 47,
+      "areaName": "大阪府",
+      "pref": "大阪府",
+      "value": -0.18,
+      "areaCode": "27000",
+      "value2020": 27.5,
+      "value2025": 27.32
+    }
+  ]
+}
