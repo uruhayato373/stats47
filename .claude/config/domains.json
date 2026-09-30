@@ -10,7 +10,7 @@
       "manages": "方針と KPI ツリー・週次/月次の判断・競合・事業計画",
       "nav": [
         { "label": "現況レビュー", "href": "/dashboard", "kind": "results" },
-        { "label": "戦略レーン", "href": "/strategy/lanes", "kind": "actions" },
+        { "label": "領域と構え", "href": "/strategy/lanes", "kind": "actions" },
         { "label": "方針・事業計画", "href": "/strategy", "kind": "policy" },
         { "label": "共通方針", "href": "/strategy/policy", "kind": "policy" },
         { "label": "調査カタログ", "href": "/research", "kind": "inventory" }

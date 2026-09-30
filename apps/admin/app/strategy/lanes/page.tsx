@@ -6,10 +6,10 @@ import { ErrorNote, PageHeading } from "@/components/ops/primitives";
 import { strategyLaneBoard, type Stance } from "@/lib/server/strategy-lanes";
 
 export const dynamic = "force-dynamic";
-export const metadata = { title: "戦略レーン — stats47 admin" };
+export const metadata = { title: "領域と構え — stats47 admin" };
 
 /**
- * 戦略レーン: 収益化戦略 §5 の優先順位表と、月次 focus_lanes → 週次 Must → backlog [レーン:] の配線。
+ * 領域と構え: 収益化戦略 §5 の優先順位表と、月次 focus_domains → 週次 Must → backlog [領域:] の配線。
  * 読み取り専用。構えの変更は収益化戦略の表を編集し、計画は /monthly-plan・/weekly-plan が書く。
  */
 
@@ -27,7 +27,7 @@ const weeklyTone = {
 const weeklyLabel = {
   aligned: "重点内",
   "off-focus": "重点外",
-  unresolved: "レーン不明",
+  unresolved: "領域不明",
   frozen: "凍結",
 } as const;
 const tierLabel = { high: "高", mid: "中", low: "低", hold: "判断待ち" } as const;
@@ -59,11 +59,11 @@ export default function StrategyLanesPage() {
 
   return (
     <div className="space-y-8">
-      <PageHeading title="戦略レーン" source={`${board.strategyDoc} §5「戦略レーンと優先順位」`}>
+      <PageHeading title="領域と構え" source={`${board.strategyDoc} §5「領域と優先順位」`}>
         <p className="max-w-4xl text-sm text-console-muted">
-          施策を収益までの流れの上のレーンに分け、どこに投資を増やすか（攻める）・現状維持か・止めるかを示す。
-          月次の重点は「攻める」レーンから選び、週次の Must は重点レーンのタスクか不具合から選ぶ。
-          構えを変えるときは収益化戦略の表を編集する。判定は <code>npm run docs:check</code>（DG073〜080）と同じ。KPI 列はレーンの構えを変える判断に使う KPI ツリーの id。
+          施策を収益までの流れの上の領域に分け、どこに投資を増やすか（攻める）・現状維持か・止めるかを示す。
+          月次の重点は「攻める」領域から選び、週次の Must は重点領域のタスクか不具合から選ぶ。
+          構えを変えるときは収益化戦略の表を編集する。判定は <code>npm run docs:check</code>（DG073〜080）と同じ。KPI 列は領域の構えを変える判断に使う KPI ツリーの id。
         </p>
       </PageHeading>
 
@@ -71,9 +71,9 @@ export default function StrategyLanesPage() {
 
       <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-4">
         <StatCard
-          label="今月の重点レーン"
+          label="今月の重点領域"
           value={board.focusLanes?.length ? board.focusLanes.join(" / ") : "未設定"}
-          sub="monthly.md の focus_lanes"
+          sub="monthly.md の focus_domains"
           tone={board.focusLanes?.length ? "good" : "warn"}
         />
         <StatCard
@@ -83,9 +83,9 @@ export default function StrategyLanesPage() {
           tone={must.length > 0 && mustAligned === must.length ? "good" : "warn"}
         />
         <StatCard
-          label="レーン付きカード"
+          label="領域付きカード"
           value={`${laned}/${board.totalCards}`}
-          sub="backlog の [レーン:] タグ"
+          sub="backlog の [領域:] タグ"
           tone={laned === board.totalCards ? "good" : "warn"}
         />
         <StatCard
@@ -96,8 +96,8 @@ export default function StrategyLanesPage() {
         />
       </div>
 
-      <Section title="レーンと構え" count={board.lanes.length}>
-        <DataTable columns={["順", "レーン", "構え", "今の狙い", "構えを変える条件", "KPI", "backlog", "改善", "今週"]}>
+      <Section title="領域と構え" count={board.lanes.length}>
+        <DataTable columns={["順", "領域", "構え", "今の狙い", "構えを変える条件", "KPI", "backlog", "改善", "今週"]}>
           {board.lanes.map((lane) => (
             <Row key={lane.name}>
               <Cell nowrap muted>{lane.order}</Cell>
@@ -153,8 +153,8 @@ export default function StrategyLanesPage() {
         </Section>
       ) : null}
 
-      <Section title="今週の計画とレーン" count={board.weekly.length}>
-        <DataTable columns={["節", "タスク", "参照 ID", "レーン", "判定"]}>
+      <Section title="今週の計画と領域" count={board.weekly.length}>
+        <DataTable columns={["節", "タスク", "参照 ID", "領域", "判定"]}>
           {board.weekly.map((item) => (
             <Row key={item.line}>
               <Cell nowrap muted>{item.section}</Cell>
@@ -177,7 +177,7 @@ export default function StrategyLanesPage() {
         </p>
       </Section>
 
-      <Section title="レーン別のバックログ">
+      <Section title="領域別のバックログ">
         <div className="space-y-2">
           {board.lanes.map((lane) => (
             <details key={lane.name} className="rounded-md border p-3">

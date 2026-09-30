@@ -171,7 +171,7 @@ describe("revenue server", () => {
     const unmeasured = d.coverage.filter((c: any) => c.state === "unmeasured").map(
       (c: any) => c.channel,
     );
-    expect(unmeasured).toEqual(["アフィリエイト", "Kindle (KDP)", "ココナラ"]);
+    expect(unmeasured).toEqual(["アフィリエイト", "Kindle (KDP)", "ココナラ", "note"]);
     // 金額 0 を返していない (CSV が無ければ error に畳む)
     expect(d.adsense).toHaveProperty("error");
   });

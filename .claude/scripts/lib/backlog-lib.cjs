@@ -69,8 +69,8 @@ const KINDS = ['不具合', '改善', '意思決定', '制作', '定期'];
 const DEFECT_KIND = '不具合';
 
 /** タグ行の kv キー → カード側のフィールド名 (期日 は stats47 発の拡張・doboku にも移植済み) */
-// レーン は stats47 拡張 (値の語彙は収益化戦略のレーン表 → strategy-lanes.cjs が検査する)
-const TAG_KEYS = { 種類: 'kind', 実行: 'executor', 検証: 'verify', 起票: 'filed', 期日: 'due', レーン: 'lane' };
+// 領域 は stats47 拡張 (値の語彙は収益化戦略の領域表と .claude/config/domains.json → strategy-lanes.cjs が検査する)
+const TAG_KEYS = { 種類: 'kind', 実行: 'executor', 検証: 'verify', 起票: 'filed', 期日: 'due', 領域: 'lane' };
 
 /** この環境 (AI セッション / CI) が単独で消化できる executor */
 const SELF_EXECUTABLE = new Set(['sweep', '機械']);

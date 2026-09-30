@@ -1,9 +1,21 @@
 {
-  "hash": "5bbd0dddebe9cfc245a607ee51e2977bc93c1873f2994dc7520326f22df700d7",
-  "audited_at": "2026-09-30T06:46:39",
+  "hash": "ca3b4edd7ab55ac7de120041045f289e4ed38f6f84a8cfff6f8e02b63f266fb3",
+  "audited_at": "2026-09-30T06:55:00",
   "files": [
-    ".agents/skills/management/admin-console/SKILL.md",
-    ".claude/scripts/lib/__tests__/check-domains.test.cjs",
-    ".claude/scripts/lib/check-domains.cjs"
+    ".agents/skills/management/monthly-plan/SKILL.md",
+    ".agents/skills/management/weekly-plan/SKILL.md",
+    ".claude/agents/todo-curator.md",
+    ".claude/rules/docs-vs-issues.md",
+    ".claude/rules/todo-standards.md",
+    ".claude/scripts/data/lib/year-coverage-backlog.mjs",
+    ".claude/scripts/gsc/lib/coverage-backlog.mjs",
+    ".claude/scripts/lib/__tests__/strategy-lanes.test.cjs",
+    ".claude/scripts/lib/backlog-lib.cjs",
+    ".claude/scripts/lib/check-docs-governance.cjs",
+    ".claude/scripts/lib/strategy-lanes.cjs",
+    ".claude/scripts/metrics/build-measurement-cycle.mjs",
+    ".claude/scripts/page-quality/lib/ui-findings.ts",
+    ".claude/skills/management/monthly-plan/SKILL.md",
+    ".claude/skills/management/weekly-plan/SKILL.md"
   ]
 }

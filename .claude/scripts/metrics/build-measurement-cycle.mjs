@@ -36,7 +36,7 @@ const HISTORY_COLUMNS = [
 
 /**
  * KPI ツリー (事業計画 catalog の写し) と、施策・今月の重点レーンの配線を読む。
- * 施策の [kpi:] と重点レーンの KPI 列の解釈は strategy-lanes.cjs (docs:check DG079/DG080) と共有する。
+ * 施策の [kpi:] と重点領域の KPI 列の解釈は strategy-lanes.cjs (docs:check DG079/DG080) と共有する。
  */
 function readKpiInputs() {
   const read = (rel) => (existsSync(join(PROJECT_ROOT, rel)) ? readFileSync(join(PROJECT_ROOT, rel), "utf8") : "");
