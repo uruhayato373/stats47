@@ -20,7 +20,7 @@ npx tsx .claude/skills/sns/publish-x/delete-x-scheduled.ts --match "<本文の�
 ```
 
 取り消したら台帳 (`posts.json`) の該当行を `sns-posts-store.cjs` の `updateById(id, { status: "deleted" })` で更新する。
-`--media` / `--caption` の直接指定で予約した投稿は台帳に自動で入らないので、`insert()` で `status: "scheduled"` の行を足す (1 日 3 本の検査は台帳を数える)。
+直接指定 (`--media` / `--caption`・キー指定) の投稿は、同じキーの下書きがあればその 1 件を、無ければ新しい行を台帳に自動で記録する (予約・即時投稿とも。既に scheduled / posted の行は別の投稿なので上書きしない。判定は `.claude/scripts/sns/lib/x-direct-ledger.cjs`)。
 
 ## ログインの維持
 

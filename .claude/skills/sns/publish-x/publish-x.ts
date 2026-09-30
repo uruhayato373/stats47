@@ -30,6 +30,9 @@ import * as fs from "fs";
 import { execFileSync } from "child_process";
 // 完全DBレス (doc12 Phase E): sns_posts は共有ストア (.claude/state/sns/posts.json) 経由で読み書きする。
 import store from "../../../scripts/lib/sns-posts-store.cjs";
+import directLedger from "../../../scripts/sns/lib/x-direct-ledger.cjs";
+
+const { planDirectLedgerWrite } = directLedger;
 // X 頻度ガード (SSOT: sns-content-standards §1 quota)。--from-queue の予約が上限を超えないよう判定する。
 import budget from "../../../scripts/sns/check-x-post-budget.cjs";
 
@@ -886,38 +889,33 @@ function updateDb(
       });
       console.log(`📝 DB INSERT: ${post.contentKey} → ${status}`);
     } else {
-      // 旧: 2 本の複数行 UPDATE (WHERE が id 以外)。loadAll でフィルタ → 各 id を updateById。
+      // 同じキーの下書き 1 件だけを更新し、無ければ新しい行を足す (予約・即時投稿とも)。
+      // scheduled / posted の行は X 上の別の投稿なので触らない。判定は x-direct-ledger.cjs (テスト済み)。
       const allPosts = store.loadAll();
-
-      // UPDATE 1: status / posted_at（draft|scheduled の original 行）
-      const toMarkPosted = allPosts.filter(
-        (p) =>
-          p.platform === "x" &&
-          p.content_key === post.contentKey &&
-          p.domain === post.domain &&
-          p.post_type === "original" &&
-          (p.status === "draft" || p.status === "scheduled")
-      );
-      for (const p of toMarkPosted) {
-        store.updateById(p.id, {
+      const plan = planDirectLedgerWrite(allPosts, { domain: post.domain, contentKey: post.contentKey });
+      const utmUrl = caption.match(/https:\/\/stats47\.jp\S+/)?.[0] ?? null;
+      if (plan.action === "update") {
+        store.updateById(plan.id, {
           status,
           scheduled_at: post.scheduledDate?.toISOString() ?? null,
           posted_at: status === "posted" ? postedAt : null,
           ...(postUrl ? { post_url: postUrl } : {}),
         });
-      }
-      if (toMarkPosted.length === 0 && status === "posted") {
+      } else {
         store.insert({
           platform: "x",
           post_type: "original",
           domain: post.domain,
           content_key: post.contentKey,
           caption,
-          post_url: postUrl,
+          utm_url: utmUrl,
+          post_url: postUrl ?? null,
           media_path: post.imagePaths[0] ?? null,
           has_link: /https?:\/\//.test(caption) ? 1 : 0,
           status,
-          posted_at: postedAt,
+          scheduled_at: post.scheduledDate?.toISOString() ?? null,
+          posted_at: status === "posted" ? postedAt : null,
+          metric_keys: post.domain === "ranking" ? post.contentKey : null,
         });
       }
 

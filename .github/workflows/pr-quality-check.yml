@@ -120,6 +120,7 @@ jobs:
         run: |
           node --test \
             .claude/scripts/lib/__tests__/check-domains.test.cjs \
+            .claude/scripts/sns/__tests__/x-direct-ledger.test.cjs \
             .claude/scripts/lib/__tests__/check-money-unit-audit.test.cjs \
             .claude/scripts/lib/__tests__/check-quality-exceptions.test.cjs \
             .claude/scripts/lib/__tests__/check-quality-warning-ratchet.test.cjs \
