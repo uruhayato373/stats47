@@ -7,7 +7,7 @@
  * 詳細な背景は生成スクリプトの docstring を参照。
  *
  * 最終生成日: 2026-09-30
- * 件数: blog 605 / tag 67 / survey 147
+ * 件数: blog 608 / tag 67 / survey 147
  */
 
 export interface SitemapBlogEntry {
@@ -109,6 +109,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "cc-estat-18-cache-r2", lastModified: "2026-05-17" },
   { slug: "cc-estat-19-skill-pipeline", lastModified: "2026-05-17" },
   { slug: "cc-estat-20-publish", lastModified: "2026-05-17" },
+  { slug: "census-2025-population-change-rate-prefecture", lastModified: "2026-09-30" },
   { slug: "cheese-expenditure-ranking", lastModified: "2026-07-10" },
   { slug: "chiba-food-culture", lastModified: "2026-07-10" },
   { slug: "chicken-consumption-prefecture-gap", lastModified: "2026-05-17" },
@@ -175,6 +176,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "ehime-food-culture", lastModified: "2026-07-10" },
   { slug: "ehime-migration-flow", lastModified: "2026-09-02" },
   { slug: "elderly-population-care-capacity-gap", lastModified: "2026-07-16" },
+  { slug: "elderly-ratio-rise-2020-2025", lastModified: "2026-09-30" },
   { slug: "electricity-bill-hike-impact", lastModified: "2026-03-28" },
   { slug: "electricity-demand-gap", lastModified: "2026-03-06" },
   { slug: "elementary-school-children-count", lastModified: "2026-06-14" },
@@ -257,6 +259,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "horse-mackerel-expenditure-ranking", lastModified: "2026-07-10" },
   { slug: "hospital-bed-utilization-map", lastModified: "2026-04-27" },
   { slug: "household-consumption-expenditure-ranking", lastModified: "2026-07-09" },
+  { slug: "household-growth-population-decline-census-2025", lastModified: "2026-09-30" },
   { slug: "household-income-tokyo-okinawa", lastModified: "2026-03-09" },
   { slug: "household-liabilities-prefecture-gap", lastModified: "2026-08-29" },
   { slug: "household-solo-vs-dualincome", lastModified: "2026-03-09" },
@@ -643,7 +646,7 @@ export const SITEMAP_TAG_ENTRIES: readonly SitemapTagEntry[] = [
   { tagKey: "エンゲル係数", lastModified: "2026-09-05" },
   { tagKey: "テレワーク", lastModified: "2026-06-02" },
   { tagKey: "人口", lastModified: "2026-08-29" },
-  { tagKey: "人口減少", lastModified: "2026-09-01" },
+  { tagKey: "人口減少", lastModified: "2026-09-30" },
   { tagKey: "住宅", lastModified: "2026-08-29" },
   { tagKey: "健康", lastModified: "2026-08-28" },
   { tagKey: "共働き", lastModified: "2026-08-28" },
@@ -652,7 +655,7 @@ export const SITEMAP_TAG_ENTRIES: readonly SitemapTagEntry[] = [
   { tagKey: "北海道", lastModified: "2026-07-10" },
   { tagKey: "医療", lastModified: "2026-08-29" },
   { tagKey: "医療費", lastModified: "2026-09-05" },
-  { tagKey: "国勢調査", lastModified: "2026-08-29" },
+  { tagKey: "国勢調査", lastModified: "2026-09-30" },
   { tagKey: "地名", lastModified: "2026-07-17" },
   { tagKey: "地域差", lastModified: "2026-07-10" },
   { tagKey: "地域格差", lastModified: "2026-07-12" },
@@ -661,7 +664,7 @@ export const SITEMAP_TAG_ENTRIES: readonly SitemapTagEntry[] = [
   { tagKey: "家計", lastModified: "2026-08-29" },
   { tagKey: "家計調査", lastModified: "2026-09-06" },
   { tagKey: "少子化", lastModified: "2026-06-14" },
-  { tagKey: "市区町村", lastModified: "2026-07-16" },
+  { tagKey: "市区町村", lastModified: "2026-09-30" },
   { tagKey: "年収", lastModified: "2026-09-05" },
   { tagKey: "所得格差", lastModified: "2026-07-19" },
   { tagKey: "教育", lastModified: "2026-09-05" },
