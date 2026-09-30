@@ -1,5 +1,6 @@
 import type { BuzzMapCatalogResponse } from "@/lib/contracts/types";
 
+import { Card, CardContent } from "@/components/ui/card";
 /** 集計ヘッダ: 総候補、eligible、blocked、landing-ready、generated、draft、posted。 */
 export function BuzzMapSummary({ summary }: { summary: BuzzMapCatalogResponse["summary"] }) {
   const { aggregate, generatedAt } = summary;
@@ -13,7 +14,7 @@ export function BuzzMapSummary({ summary }: { summary: BuzzMapCatalogResponse["s
     ["posted", aggregate.posted],
   ];
   return (
-    <div className="flex flex-wrap items-center gap-2 rounded-md border border-console-border bg-console-card px-3 py-2">
+    <Card className="gap-0 py-2"><CardContent className="flex flex-wrap items-center gap-2 px-3">
       {items.map(([label, value]) => (
         <span
           key={label}
@@ -27,6 +28,6 @@ export function BuzzMapSummary({ summary }: { summary: BuzzMapCatalogResponse["s
           catalog 更新: {generatedAt}
         </span>
       ) : null}
-    </div>
+    </CardContent></Card>
   );
 }

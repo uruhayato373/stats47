@@ -92,9 +92,11 @@ CLAUDE.md 内に詳細を複製しない。状況に応じて参照する。
 | `sns-content-standards.md` | SNS 投稿 (X/IG/YouTube pilot/note) の企画・生成・投稿・計測。管理コンソールは `npm run admin` (skill `/admin-console`) | scripts/sns・skills/sns・apps/remotion・admin |
 | `buzz-map-standards.md` | 日本地図×統計のバズカード (型A〜E・spec・カタログ) | remotion buzz-map・skills/sns/buzz-map |
 | `analytics-event-standards.md` | GA4 計装イベント追加・変更 (custom dimension 登録台帳) | apps/web/src/lib/analytics |
+| `admin-ui.md` | 管理画面 apps/admin の UI 規約 (Tailwind v4・shadcn 公式部品・組み立て部品・parity/debt 検査) | apps/admin・scripts/admin-ui |
 | `ui-components.md` | UI 実装 (shadcn / melta-ui / ブレイクポイント / page_components) | apps/web の tsx・skills/ui |
 | `chart-component-standards.md` | D3 / shadcn チャートコンポーネントのカタログ・監査 | packages/visualization・components/charts |
 | `nextjs-ssg-preservation.md` | layout / page / route 変更 (cookies() 禁止・generateStaticParams と R2 の関係) | apps/web/src/app・middleware |
+| `note-image-assets.md` | note 原稿の画像・データ資産の置き場 (派生 PNG を git に置かない・ランキング記事の chart-data.json 契約・PNG 予算) | docs/31・scripts/note・skills/note |
 | `ogp-image-standards.md` | OGP / リンクカード / note カバー画像の生成・差分反映 | features/ogp・scripts/ogp・skills/image-prompt |
 | `r2-storage-design.md` | snapshot 追加・変更・R2 キー設計・保持ポリシー | packages/r2-storage・skills/db/push-r2 等 |
 | `shared-business-policy.md` | 3プロジェクト共通事業方針(HARM)の同期・検証・管理画面表示 (正本はObsidian vault) | .claude/shared-policy・apps/admin/app/strategy/policy |

@@ -1,0 +1,229 @@
+{
+  "note": "本文の補助数値。すべて cities.json / values.json (ratio-65-plus) と total-population の値から build 時に計算。65歳以上人口の概算 = 割合 x 総人口 (年齢不詳を除く分母との差で数値がわずかにずれる)",
+  "windowsMeanRisePt": [
+    {
+      "from": "2005",
+      "to": "2010",
+      "meanRisePt": 2.76
+    },
+    {
+      "from": "2010",
+      "to": "2015",
+      "meanRisePt": 3.73
+    },
+    {
+      "from": "2015",
+      "to": "2020",
+      "meanRisePt": 2.58
+    },
+    {
+      "from": "2020",
+      "to": "2025",
+      "meanRisePt": 1.37
+    }
+  ],
+  "prefecturesSlowerThanPrevious5y": 47,
+  "prefecturesTotal": 47,
+  "prefecturesPopDecline": 46,
+  "prefecturesAgedApproxDecline": 23,
+  "ge30": {
+    "y2020": 32,
+    "y2025": 37
+  },
+  "ge35": {
+    "y2020": 2,
+    "y2025": 10
+  },
+  "ge40": {
+    "y2020": 0,
+    "y2025": 1
+  },
+  "decomposition": [
+    {
+      "areaName": "青森県",
+      "pop2020": 1237984,
+      "pop2025": 1139461,
+      "popChangePct": -7.96,
+      "aged2020Approx": 419677,
+      "aged2025Approx": 415221,
+      "agedChangePct": -1.06,
+      "underAged65ChangePct": -11.5,
+      "risePt": 2.54
+    },
+    {
+      "areaName": "秋田県",
+      "pop2020": 959502,
+      "pop2025": 881470,
+      "popChangePct": -8.13,
+      "aged2020Approx": 360773,
+      "aged2025Approx": 353528,
+      "agedChangePct": -2.01,
+      "underAged65ChangePct": -11.82,
+      "risePt": 2.51
+    },
+    {
+      "areaName": "福島県",
+      "pop2020": 1833152,
+      "pop2025": 1710242,
+      "popChangePct": -6.7,
+      "aged2020Approx": 582942,
+      "aged2025Approx": 586753,
+      "agedChangePct": 0.65,
+      "underAged65ChangePct": -10.14,
+      "risePt": 2.51
+    },
+    {
+      "areaName": "東京都",
+      "pop2020": 14047594,
+      "pop2025": 14236627,
+      "popChangePct": 1.35,
+      "aged2020Approx": 3202851,
+      "aged2025Approx": 3249245,
+      "agedChangePct": 1.45,
+      "underAged65ChangePct": 1.32,
+      "risePt": 0.02
+    },
+    {
+      "areaName": "神奈川県",
+      "pop2020": 9237337,
+      "pop2025": 9193922,
+      "popChangePct": -0.47,
+      "aged2020Approx": 2364758,
+      "aged2025Approx": 2403381,
+      "agedChangePct": 1.63,
+      "underAged65ChangePct": -1.19,
+      "risePt": 0.54
+    },
+    {
+      "areaName": "愛知県",
+      "pop2020": 7542415,
+      "pop2025": 7448043,
+      "popChangePct": -1.25,
+      "aged2020Approx": 1915773,
+      "aged2025Approx": 1937350,
+      "agedChangePct": 1.13,
+      "underAged65ChangePct": -2.06,
+      "risePt": 0.61
+    },
+    {
+      "areaName": "大阪府",
+      "pop2020": 8837685,
+      "pop2025": 8759312,
+      "popChangePct": -0.89,
+      "aged2020Approx": 2430363,
+      "aged2025Approx": 2392932,
+      "agedChangePct": -1.54,
+      "underAged65ChangePct": -0.64,
+      "risePt": -0.18
+    },
+    {
+      "areaName": "沖縄県",
+      "pop2020": 1467480,
+      "pop2025": 1466548,
+      "popChangePct": -0.06,
+      "aged2020Approx": 331650,
+      "aged2025Approx": 359343,
+      "agedChangePct": 8.35,
+      "underAged65ChangePct": -2.52,
+      "risePt": 1.9
+    }
+  ],
+  "municipalities": {
+    "count": 1740,
+    "excluded": "政令市の区 (171) と特別区部 (13100) を除く。福島県双葉町は2020年の値が無いため除外。東京23区は区ごと",
+    "risePt": {
+      "median": 2.23,
+      "declined": 84,
+      "rose": 1654
+    },
+    "under5000": {
+      "count": 290,
+      "sdPt": 2.25,
+      "declined": 39
+    },
+    "over100000": {
+      "count": 283,
+      "sdPt": 1,
+      "declined": 13
+    },
+    "sizeBasis": "2020年の総人口 (total-population cities.json)",
+    "top50Under5000": 28,
+    "bottom50Under5000": 26,
+    "tokyoWardsDeclined": 9,
+    "tokyoWards": 23,
+    "tokyoWardsFell": [
+      {
+        "areaName": "東京都 千代田区",
+        "risePt": -0.04
+      },
+      {
+        "areaName": "東京都 江東区",
+        "risePt": -0.13
+      },
+      {
+        "areaName": "東京都 中央区",
+        "risePt": -0.37
+      },
+      {
+        "areaName": "東京都 葛飾区",
+        "risePt": -0.47
+      },
+      {
+        "areaName": "東京都 豊島区",
+        "risePt": -0.66
+      },
+      {
+        "areaName": "東京都 荒川区",
+        "risePt": -1.34
+      },
+      {
+        "areaName": "東京都 墨田区",
+        "risePt": -1.58
+      },
+      {
+        "areaName": "東京都 北区",
+        "risePt": -1.79
+      },
+      {
+        "areaName": "東京都 台東区",
+        "risePt": -1.93
+      }
+    ],
+    "pop": [
+      {
+        "areaName": "長野県 平谷村",
+        "pop2020": 387,
+        "pop2025": 353
+      },
+      {
+        "areaName": "福島県 浪江町",
+        "pop2020": 1923,
+        "pop2025": 2574
+      },
+      {
+        "areaName": "熊本県 球磨村",
+        "pop2020": 2433,
+        "pop2025": 2263
+      },
+      {
+        "areaName": "福島県 浪江町",
+        "pop2020": 1923,
+        "pop2025": 2574
+      }
+    ],
+    "largest300k": [
+      {
+        "areaName": "愛媛県 松山市",
+        "risePt": 4.28
+      },
+      {
+        "areaName": "東京都 八王子市",
+        "risePt": 3.8
+      },
+      {
+        "areaName": "鹿児島県 鹿児島市",
+        "risePt": 3.58
+      }
+    ]
+  }
+}

@@ -22,7 +22,7 @@ export function useToast() {
 export function ToastPortal({ message }: { message: string | null }) {
   if (!message) return null;
   return (
-    <div className="fixed bottom-5 right-5 z-[99] rounded-lg bg-green-500 px-4 py-2 text-sm font-medium text-console-bg shadow-lg">
+    <div className="fixed bottom-5 right-5 z-99 rounded-lg bg-green-500 px-4 py-2 text-sm font-medium text-console-bg shadow-lg">
       {message}
     </div>
   );

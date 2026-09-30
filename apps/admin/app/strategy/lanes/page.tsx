@@ -1,15 +1,8 @@
 import Link from "next/link";
 
-import {
-  Badge,
-  ErrorNote,
-  PageHeading,
-  Section,
-  Stat,
-  Table,
-  Td,
-  Tr,
-} from "@/components/ops/primitives";
+import { Cell, DataTable, Row, StatCard, StatusBadge } from "@/components/admin-ui";
+import { Section } from "@/components/layout-primitives";
+import { ErrorNote, PageHeading } from "@/components/ops/primitives";
 import { strategyLaneBoard, type Stance } from "@/lib/server/strategy-lanes";
 
 export const dynamic = "force-dynamic";
@@ -77,25 +70,25 @@ export default function StrategyLanesPage() {
       {board.error ? <ErrorNote error={board.error} /> : null}
 
       <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-4">
-        <Stat
+        <StatCard
           label="今月の重点レーン"
           value={board.focusLanes?.length ? board.focusLanes.join(" / ") : "未設定"}
           sub="monthly.md の focus_lanes"
           tone={board.focusLanes?.length ? "good" : "warn"}
         />
-        <Stat
+        <StatCard
           label="今週の Must が重点内"
           value={`${mustAligned}/${must.length}`}
           sub="不具合カードは重点外でも可"
           tone={must.length > 0 && mustAligned === must.length ? "good" : "warn"}
         />
-        <Stat
+        <StatCard
           label="レーン付きカード"
           value={`${laned}/${board.totalCards}`}
           sub="backlog の [レーン:] タグ"
           tone={laned === board.totalCards ? "good" : "warn"}
         />
-        <Stat
+        <StatCard
           label="配線の検査"
           value={`error ${errors.length} / warning ${warnings.length}`}
           sub="DG073〜080"
@@ -104,46 +97,46 @@ export default function StrategyLanesPage() {
       </div>
 
       <Section title="レーンと構え" count={board.lanes.length}>
-        <Table columns={["順", "レーン", "構え", "今の狙い", "構えを変える条件", "KPI", "backlog", "改善", "今週"]}>
+        <DataTable columns={["順", "レーン", "構え", "今の狙い", "構えを変える条件", "KPI", "backlog", "改善", "今週"]}>
           {board.lanes.map((lane) => (
-            <Tr key={lane.name}>
-              <Td nowrap muted>{lane.order}</Td>
-              <Td nowrap>
+            <Row key={lane.name}>
+              <Cell nowrap muted>{lane.order}</Cell>
+              <Cell nowrap>
                 <span className="font-semibold">{lane.name}</span>
                 {lane.isFocus ? (
                   <span className="ml-1.5">
-                    <Badge tone="info">今月の重点</Badge>
+                    <StatusBadge tone="info">今月の重点</StatusBadge>
                   </span>
                 ) : null}
-              </Td>
-              <Td nowrap>
-                <Badge tone={stanceTone[lane.stance]}>{lane.stance}</Badge>
-              </Td>
-              <Td>
+              </Cell>
+              <Cell nowrap>
+                <StatusBadge tone={stanceTone[lane.stance]}>{lane.stance}</StatusBadge>
+              </Cell>
+              <Cell>
                 <div className="min-w-64">
                   <InlineText text={lane.aim} />
                 </div>
-              </Td>
-              <Td muted>
+              </Cell>
+              <Cell muted>
                 <div className="min-w-56">
                   <InlineText text={lane.gate} />
                 </div>
-              </Td>
-              <Td nowrap muted>
+              </Cell>
+              <Cell nowrap muted>
                 {lane.kpis.length ? lane.kpis.map((id) => <code key={id} className="mr-1 text-[11px]">{id}</code>) : "—"}
-              </Td>
-              <Td nowrap>
+              </Cell>
+              <Cell nowrap>
                 {lane.cards.length}
                 <span className="ml-1 text-[11px] text-console-muted">
                   (高{lane.tierCounts.high}・中{lane.tierCounts.mid}・低{lane.tierCounts.low}・判断待ち
                   {lane.tierCounts.hold})
                 </span>
-              </Td>
-              <Td nowrap>{lane.improvementIds.length}</Td>
-              <Td nowrap>{lane.weeklyCount}</Td>
-            </Tr>
+              </Cell>
+              <Cell nowrap>{lane.improvementIds.length}</Cell>
+              <Cell nowrap>{lane.weeklyCount}</Cell>
+            </Row>
           ))}
-        </Table>
+        </DataTable>
       </Section>
 
       {board.issues.length > 0 ? (
@@ -151,7 +144,7 @@ export default function StrategyLanesPage() {
           <ul className="space-y-1 text-[13px]">
             {board.issues.map((issue, i) => (
               <li key={`${issue.code}-${i}`} className="flex gap-2">
-                <Badge tone={issue.level === "error" ? "bad" : "warn"}>{issue.code}</Badge>
+                <StatusBadge tone={issue.level === "error" ? "bad" : "warn"}>{issue.code}</StatusBadge>
                 <span className="text-console-muted">{issue.file}</span>
                 <span className="text-console-fg">{issue.message}</span>
               </li>
@@ -161,24 +154,24 @@ export default function StrategyLanesPage() {
       ) : null}
 
       <Section title="今週の計画とレーン" count={board.weekly.length}>
-        <Table columns={["節", "タスク", "参照 ID", "レーン", "判定"]}>
+        <DataTable columns={["節", "タスク", "参照 ID", "レーン", "判定"]}>
           {board.weekly.map((item) => (
-            <Tr key={item.line}>
-              <Td nowrap muted>{item.section}</Td>
-              <Td>
+            <Row key={item.line}>
+              <Cell nowrap muted>{item.section}</Cell>
+              <Cell>
                 {item.done ? <span className="mr-1 text-console-good">✓</span> : null}
                 {item.text}
-              </Td>
-              <Td nowrap muted>
+              </Cell>
+              <Cell nowrap muted>
                 {item.refs.length ? item.refs.map((r) => r.id).join(", ") : "—"}
-              </Td>
-              <Td nowrap>{item.lanes.length ? item.lanes.join(", ") : "—"}</Td>
-              <Td nowrap>
-                <Badge tone={weeklyTone[item.status]}>{weeklyLabel[item.status]}</Badge>
-              </Td>
-            </Tr>
+              </Cell>
+              <Cell nowrap>{item.lanes.length ? item.lanes.join(", ") : "—"}</Cell>
+              <Cell nowrap>
+                <StatusBadge tone={weeklyTone[item.status]}>{weeklyLabel[item.status]}</StatusBadge>
+              </Cell>
+            </Row>
           ))}
-        </Table>
+        </DataTable>
         <p className="text-[12px] text-console-muted">
           詳細は <Link className="text-console-info underline" href="/todo?f=weekly">今週の計画</Link>。
         </p>
@@ -187,11 +180,11 @@ export default function StrategyLanesPage() {
       <Section title="レーン別のバックログ">
         <div className="space-y-2">
           {board.lanes.map((lane) => (
-            <details key={lane.name} className="rounded-md border border-console-border bg-console-card p-3">
+            <details key={lane.name} className="rounded-md border p-3">
               <summary className="cursor-pointer text-sm">
                 <span className="font-semibold">{lane.name}</span>
                 <span className="ml-2">
-                  <Badge tone={stanceTone[lane.stance]}>{lane.stance}</Badge>
+                  <StatusBadge tone={stanceTone[lane.stance]}>{lane.stance}</StatusBadge>
                 </span>
                 <span className="ml-2 text-[12px] text-console-muted">
                   backlog {lane.cards.length} 件 / 改善 {lane.improvementIds.length} 件
@@ -200,15 +193,15 @@ export default function StrategyLanesPage() {
               <ul className="mt-2 space-y-1 text-[13px]">
                 {lane.cards.map((card) => (
                   <li key={card.id ?? card.title} className="flex flex-wrap gap-2">
-                    <Badge>{tierLabel[card.tier]}</Badge>
-                    {card.kind ? <Badge tone={card.kind === "不具合" ? "bad" : "neutral"}>{card.kind}</Badge> : null}
+                    <StatusBadge>{tierLabel[card.tier]}</StatusBadge>
+                    {card.kind ? <StatusBadge tone={card.kind === "不具合" ? "bad" : "neutral"}>{card.kind}</StatusBadge> : null}
                     <code className="text-[11px] text-console-muted">{card.id}</code>
                     <span>{card.title}</span>
                   </li>
                 ))}
                 {lane.improvementIds.map((id) => (
                   <li key={id} className="flex gap-2">
-                    <Badge tone="info">改善</Badge>
+                    <StatusBadge tone="info">改善</StatusBadge>
                     <code className="text-[11px] text-console-muted">{id}</code>
                   </li>
                 ))}

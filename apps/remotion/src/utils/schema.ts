@@ -28,6 +28,10 @@ export const CommonPreviewSchema = z.object({
   colorSchemeType: z.enum(["sequential", "diverging"]).optional(),
   /** diverging スケールの中間値 */
   divergingMidpointValue: z.number().optional(),
+  /** note ランキング画像: 記事本文の全国平均 (chart-data.json summary.mean) */
+  mean: z.number().optional(),
+  /** note ランキング画像: 生成 AI の背景 (data URI・カバー用)。render-spec.json の background を SHA 検証して渡す */
+  backgroundImage: z.string().optional(),
 });
 
 /**

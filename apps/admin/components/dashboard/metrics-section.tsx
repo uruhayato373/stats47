@@ -1,6 +1,8 @@
 import { num, wow } from "./format";
+import type { ChartTone } from "./chart-tone";
 import { Sparkline, WowBadge } from "./sparkline";
 
+import { Card, CardContent } from "@/components/ui/card";
 type Row = Record<string, string | number>;
 type Wrapped<T> = T | { error: string };
 
@@ -13,21 +15,21 @@ function StatCard({
   label,
   sub,
   sparkValues,
-  sparkColor,
+  sparkTone,
 }: {
   value: string;
   label: string;
   sub?: React.ReactNode;
   sparkValues?: Array<number | null | undefined>;
-  sparkColor?: string;
+  sparkTone?: ChartTone;
 }) {
   return (
-    <div className="min-w-0 overflow-hidden rounded-lg border border-console-border bg-console-card p-3">
-      <div className="break-words text-xl font-bold text-console-fg">{value}</div>
-      <div className="mt-0.5 break-words text-[11px] text-console-muted">{label}</div>
+    <Card className="min-w-0 gap-0 overflow-hidden py-3"><CardContent className="px-3">
+      <div className="wrap-break-word text-xl font-bold text-console-fg">{value}</div>
+      <div className="mt-0.5 wrap-break-word text-[11px] text-console-muted">{label}</div>
       {sub ? <div className="mt-1 text-[11px] text-console-muted">{sub}</div> : null}
-      {sparkValues ? <Sparkline values={sparkValues} color={sparkColor} /> : null}
-    </div>
+      {sparkValues ? <Sparkline values={sparkValues} tone={sparkTone} /> : null}
+    </CardContent></Card>
   );
 }
 
@@ -76,7 +78,7 @@ export function MetricsSection({ metrics, psi, coverage }: MetricsData) {
           value={`${(Number(last.ctr) * 100).toFixed(2)}%`}
           label="GSC CTR"
           sparkValues={g.map((r) => Number(r.ctr))}
-          sparkColor="rgb(var(--console-good))"
+          sparkTone="good"
         />,
       );
       cards.push(
@@ -85,7 +87,7 @@ export function MetricsSection({ metrics, psi, coverage }: MetricsData) {
           value={String(last.position)}
           label="GSC 平均掲載順位"
           sparkValues={g.map((r) => Number(r.position))}
-          sparkColor="rgb(var(--console-warn))"
+          sparkTone="warn"
         />,
       );
     } else {
@@ -123,7 +125,7 @@ export function MetricsSection({ metrics, psi, coverage }: MetricsData) {
           label={`AdSense/週 (${last.week})`}
           sub={`RPM ¥${last.rpm}`}
           sparkValues={ad.map((r) => Number(r.earnings))}
-          sparkColor="rgb(var(--console-good))"
+          sparkTone="good"
         />,
       );
     }

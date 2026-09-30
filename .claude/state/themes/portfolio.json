@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-21",
+  "generatedAt": "2026-09-28",
   "themes": [
     {
       "themeKey": "aging-society",
@@ -16,23 +16,23 @@
       "selectionMissingCount": 0,
       "chartCount": 6,
       "officialSourceReviewedAt": "2026-09-16",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
           "status": "measured",
           "windowDays": 56,
           "weeks": [
-            "2026-W34",
-            "2026-W38"
+            "2026-W35",
+            "2026-W39"
           ],
-          "periodStart": "2026-07-24",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-07-31",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
-          "clicks": 21,
-          "impressions": 1623,
-          "ctr": 0.0129,
-          "avgPosition": 8.46
+          "clicks": 22,
+          "impressions": 1876,
+          "ctr": 0.0117,
+          "avgPosition": 8.53
         },
         "ga4": {
           "status": "insufficient-data",
@@ -57,7 +57,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-aging-society.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 25,
         "oldestLatestDataYear": "2019",
         "ageReviewKeys": [
@@ -78,35 +78,35 @@
           "status": "measured",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-21",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
-          "clicks": 15,
-          "impressions": 1336,
-          "ctr": 0.0112,
-          "avgPosition": 8.38
+          "clicks": 13,
+          "impressions": 1305,
+          "ctr": 0.01,
+          "avgPosition": 8.53
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-23",
-          "periodEnd": "2026-09-19",
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
-          "pageViews": 89
+          "pageViews": 58
         },
         "internalNav": {
           "status": "measured",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-23",
-          "periodEnd": "2026-09-19",
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
           "eventCount": 2
         }
@@ -126,7 +126,7 @@
       "selectionMissingCount": 0,
       "chartCount": 0,
       "officialSourceReviewedAt": "2026-09-16",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
@@ -160,19 +160,24 @@
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-21",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
           "clicks": 0,
-          "impressions": 9
+          "impressions": 27
         },
         "ga4": {
-          "status": "insufficient-data",
-          "windowDays": 0,
+          "status": "measured-low",
+          "windowDays": 28,
+          "weeks": [
+            "2026-W39"
+          ],
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
-          "reason": "non-overlapping reports or page rows missing"
+          "pageViews": 1
         },
         "internalNav": {
           "status": "insufficient-data",
@@ -182,7 +187,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 11,
         "oldestLatestDataYear": "2014",
         "ageReviewKeys": [
@@ -210,7 +215,7 @@
       "selectionMissingCount": 0,
       "chartCount": 0,
       "officialSourceReviewedAt": "2026-09-09",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
@@ -244,39 +249,39 @@
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-21",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
-          "clicks": 5,
-          "impressions": 31
+          "clicks": 7,
+          "impressions": 69
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-23",
-          "periodEnd": "2026-09-19",
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
-          "pageViews": 22
+          "pageViews": 27
         },
         "internalNav": {
           "status": "measured",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-23",
-          "periodEnd": "2026-09-19",
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
           "eventCount": 6
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 9,
         "oldestLatestDataYear": "2021",
         "ageReviewKeys": [
@@ -305,7 +310,7 @@
       "selectionMissingCount": 0,
       "chartCount": 0,
       "officialSourceReviewedAt": "2026-09-09",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
@@ -339,13 +344,13 @@
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-21",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
           "clicks": 0,
-          "impressions": 1
+          "impressions": 5
         },
         "ga4": {
           "status": "insufficient-data",
@@ -361,7 +366,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 5,
         "oldestLatestDataYear": "2020",
         "ageReviewKeys": [
@@ -389,21 +394,21 @@
       "selectionMissingCount": 0,
       "chartCount": 1,
       "officialSourceReviewedAt": "2026-09-09",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W34",
-            "2026-W38"
+            "2026-W35",
+            "2026-W39"
           ],
-          "periodStart": "2026-07-24",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-07-31",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
           "clicks": 0,
-          "impressions": 16
+          "impressions": 43
         },
         "ga4": {
           "status": "insufficient-data",
@@ -428,7 +433,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-13-theme-climate.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 10,
         "oldestLatestDataYear": "2007",
         "ageReviewKeys": [
@@ -446,24 +451,24 @@
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-21",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
           "clicks": 0,
-          "impressions": 15
+          "impressions": 38
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-23",
-          "periodEnd": "2026-09-19",
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
-          "pageViews": 17
+          "pageViews": 14
         },
         "internalNav": {
           "status": "insufficient-data",
@@ -487,7 +492,7 @@
       "selectionMissingCount": 0,
       "chartCount": 0,
       "officialSourceReviewedAt": "2026-09-09",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
@@ -518,10 +523,16 @@
       "evidenceRefs": [],
       "metrics28d": {
         "gsc": {
-          "status": "insufficient-data",
-          "windowDays": 0,
+          "status": "measured-low",
+          "windowDays": 28,
+          "weeks": [
+            "2026-W39"
+          ],
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
-          "reason": "non-overlapping reports or page rows missing"
+          "clicks": 0,
+          "impressions": 1
         },
         "ga4": {
           "status": "insufficient-data",
@@ -537,7 +548,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 4,
         "oldestLatestDataYear": "2014",
         "ageReviewKeys": [
@@ -564,7 +575,7 @@
       "selectionMissingCount": 0,
       "chartCount": 0,
       "officialSourceReviewedAt": "2026-09-09",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
@@ -614,7 +625,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 4,
         "oldestLatestDataYear": "2019",
         "ageReviewKeys": [
@@ -643,7 +654,7 @@
       "selectionMissingCount": 0,
       "chartCount": 0,
       "officialSourceReviewedAt": "2026-09-16",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
@@ -674,10 +685,16 @@
       "evidenceRefs": [],
       "metrics28d": {
         "gsc": {
-          "status": "insufficient-data",
-          "windowDays": 0,
+          "status": "measured-low",
+          "windowDays": 28,
+          "weeks": [
+            "2026-W39"
+          ],
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
-          "reason": "non-overlapping reports or page rows missing"
+          "clicks": 0,
+          "impressions": 15
         },
         "ga4": {
           "status": "insufficient-data",
@@ -693,7 +710,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 12,
         "oldestLatestDataYear": "2020",
         "ageReviewKeys": [
@@ -724,21 +741,23 @@
       "selectionMissingCount": 0,
       "chartCount": 4,
       "officialSourceReviewedAt": "2026-09-09",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
-          "status": "measured-low",
+          "status": "measured",
           "windowDays": 56,
           "weeks": [
-            "2026-W34",
-            "2026-W38"
+            "2026-W35",
+            "2026-W39"
           ],
-          "periodStart": "2026-07-24",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-07-31",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
-          "clicks": 2,
-          "impressions": 181
+          "clicks": 3,
+          "impressions": 205,
+          "ctr": 0.0146,
+          "avgPosition": 9.08
         },
         "ga4": {
           "status": "insufficient-data",
@@ -763,7 +782,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-consumer-prices.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 15,
         "oldestLatestDataYear": "2024",
         "ageReviewKeys": [],
@@ -777,35 +796,35 @@
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-21",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
-          "clicks": 2,
-          "impressions": 155
+          "clicks": 3,
+          "impressions": 169
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-23",
-          "periodEnd": "2026-09-19",
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
-          "pageViews": 52
+          "pageViews": 25
         },
         "internalNav": {
           "status": "measured",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-23",
-          "periodEnd": "2026-09-19",
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
-          "eventCount": 2
+          "eventCount": 3
         }
       }
     },
@@ -823,7 +842,7 @@
       "selectionMissingCount": 0,
       "chartCount": 0,
       "officialSourceReviewedAt": "2026-09-16",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
@@ -863,10 +882,10 @@
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-23",
-          "periodEnd": "2026-09-19",
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
           "pageViews": 2
         },
@@ -874,16 +893,16 @@
           "status": "measured",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-23",
-          "periodEnd": "2026-09-19",
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
           "eventCount": 1
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 10,
         "oldestLatestDataYear": "2015",
         "ageReviewKeys": [
@@ -918,7 +937,7 @@
       "selectionMissingCount": 0,
       "chartCount": 0,
       "officialSourceReviewedAt": "2026-09-09",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
@@ -949,10 +968,16 @@
       "evidenceRefs": [],
       "metrics28d": {
         "gsc": {
-          "status": "insufficient-data",
-          "windowDays": 0,
+          "status": "measured-low",
+          "windowDays": 28,
+          "weeks": [
+            "2026-W39"
+          ],
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
-          "reason": "non-overlapping reports or page rows missing"
+          "clicks": 0,
+          "impressions": 3
         },
         "ga4": {
           "status": "insufficient-data",
@@ -968,7 +993,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 8,
         "oldestLatestDataYear": "2021",
         "ageReviewKeys": [
@@ -1001,7 +1026,7 @@
       "selectionMissingCount": 0,
       "chartCount": 0,
       "officialSourceReviewedAt": "2026-09-09",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
@@ -1032,10 +1057,16 @@
       "evidenceRefs": [],
       "metrics28d": {
         "gsc": {
-          "status": "insufficient-data",
-          "windowDays": 0,
+          "status": "measured-low",
+          "windowDays": 28,
+          "weeks": [
+            "2026-W39"
+          ],
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
-          "reason": "non-overlapping reports or page rows missing"
+          "clicks": 0,
+          "impressions": 13
         },
         "ga4": {
           "status": "insufficient-data",
@@ -1051,7 +1082,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 5,
         "oldestLatestDataYear": "2011",
         "ageReviewKeys": [
@@ -1079,7 +1110,7 @@
       "selectionMissingCount": 0,
       "chartCount": 0,
       "officialSourceReviewedAt": "2026-09-09",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
@@ -1113,13 +1144,13 @@
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-21",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
           "clicks": 0,
-          "impressions": 3
+          "impressions": 20
         },
         "ga4": {
           "status": "insufficient-data",
@@ -1135,7 +1166,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 3,
         "oldestLatestDataYear": "2008",
         "ageReviewKeys": [
@@ -1161,21 +1192,21 @@
       "selectionMissingCount": 0,
       "chartCount": 2,
       "officialSourceReviewedAt": "2026-09-16",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W34",
-            "2026-W38"
+            "2026-W35",
+            "2026-W39"
           ],
-          "periodStart": "2026-07-24",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-07-31",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
-          "clicks": 0,
-          "impressions": 41
+          "clicks": 1,
+          "impressions": 47
         },
         "ga4": {
           "status": "insufficient-data",
@@ -1201,7 +1232,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/theme-taxonomy-reorganization.md#education-culture-split--parent-hub候補"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 29,
         "oldestLatestDataYear": "2015",
         "ageReviewKeys": [
@@ -1225,35 +1256,35 @@
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-21",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
-          "clicks": 0,
-          "impressions": 28
+          "clicks": 1,
+          "impressions": 33
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-23",
-          "periodEnd": "2026-09-19",
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
-          "pageViews": 24
+          "pageViews": 26
         },
         "internalNav": {
           "status": "measured",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-23",
-          "periodEnd": "2026-09-19",
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
-          "eventCount": 4
+          "eventCount": 5
         }
       }
     },
@@ -1271,7 +1302,7 @@
       "selectionMissingCount": 0,
       "chartCount": 0,
       "officialSourceReviewedAt": "2026-09-09",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
@@ -1305,13 +1336,13 @@
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-21",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
           "clicks": 0,
-          "impressions": 2
+          "impressions": 17
         },
         "ga4": {
           "status": "insufficient-data",
@@ -1327,7 +1358,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 6,
         "oldestLatestDataYear": "2019",
         "ageReviewKeys": [
@@ -1354,23 +1385,23 @@
       "selectionMissingCount": 0,
       "chartCount": 5,
       "officialSourceReviewedAt": "2026-09-08",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
           "status": "measured",
           "windowDays": 56,
           "weeks": [
-            "2026-W34",
-            "2026-W38"
+            "2026-W35",
+            "2026-W39"
           ],
-          "periodStart": "2026-07-24",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-07-31",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
           "clicks": 4,
-          "impressions": 249,
-          "ctr": 0.0161,
-          "avgPosition": 8.66
+          "impressions": 275,
+          "ctr": 0.0145,
+          "avgPosition": 8.59
         },
         "ga4": {
           "status": "insufficient-data",
@@ -1395,7 +1426,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-13-theme-fishery-marine.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 23,
         "oldestLatestDataYear": "2015",
         "ageReviewKeys": [
@@ -1423,35 +1454,35 @@
           "status": "measured",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-21",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
           "clicks": 2,
-          "impressions": 208,
-          "ctr": 0.0096,
+          "impressions": 215,
+          "ctr": 0.0093,
           "avgPosition": 8.62
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-23",
-          "periodEnd": "2026-09-19",
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
-          "pageViews": 22
+          "pageViews": 19
         },
         "internalNav": {
           "status": "measured",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-23",
-          "periodEnd": "2026-09-19",
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
           "eventCount": 6
         }
@@ -1471,21 +1502,21 @@
       "selectionMissingCount": 0,
       "chartCount": 2,
       "officialSourceReviewedAt": "2026-09-09",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W34",
-            "2026-W38"
+            "2026-W35",
+            "2026-W39"
           ],
-          "periodStart": "2026-07-24",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-07-31",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
           "clicks": 0,
-          "impressions": 15
+          "impressions": 40
         },
         "ga4": {
           "status": "insufficient-data",
@@ -1510,7 +1541,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-13-theme-foreign-residents.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 12,
         "oldestLatestDataYear": "2020",
         "ageReviewKeys": [
@@ -1533,22 +1564,22 @@
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-21",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
           "clicks": 0,
-          "impressions": 10
+          "impressions": 35
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-23",
-          "periodEnd": "2026-09-19",
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
           "pageViews": 19
         },
@@ -1574,7 +1605,7 @@
       "selectionMissingCount": 0,
       "chartCount": 0,
       "officialSourceReviewedAt": "2026-09-16",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
@@ -1608,29 +1639,39 @@
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-21",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
           "clicks": 0,
-          "impressions": 12
+          "impressions": 33
         },
         "ga4": {
-          "status": "insufficient-data",
-          "windowDays": 0,
+          "status": "measured-low",
+          "windowDays": 28,
+          "weeks": [
+            "2026-W39"
+          ],
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
-          "reason": "non-overlapping reports or page rows missing"
+          "pageViews": 12
         },
         "internalNav": {
-          "status": "insufficient-data",
-          "windowDays": 0,
+          "status": "measured",
+          "windowDays": 28,
+          "weeks": [
+            "2026-W39"
+          ],
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
-          "reason": "navigation reports or page rows missing"
+          "eventCount": 1
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 15,
         "oldestLatestDataYear": "2007",
         "ageReviewKeys": [
@@ -1658,7 +1699,7 @@
       "selectionMissingCount": 0,
       "chartCount": 0,
       "officialSourceReviewedAt": "2026-09-09",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
@@ -1692,29 +1733,39 @@
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-21",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
           "clicks": 0,
-          "impressions": 20
+          "impressions": 55
         },
         "ga4": {
-          "status": "insufficient-data",
-          "windowDays": 0,
+          "status": "measured-low",
+          "windowDays": 28,
+          "weeks": [
+            "2026-W39"
+          ],
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
-          "reason": "non-overlapping reports or page rows missing"
+          "pageViews": 3
         },
         "internalNav": {
-          "status": "insufficient-data",
-          "windowDays": 0,
+          "status": "measured",
+          "windowDays": 28,
+          "weeks": [
+            "2026-W39"
+          ],
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
-          "reason": "navigation reports or page rows missing"
+          "eventCount": 1
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 4,
         "oldestLatestDataYear": "2008",
         "ageReviewKeys": [
@@ -1740,7 +1791,7 @@
       "selectionMissingCount": 0,
       "chartCount": 0,
       "officialSourceReviewedAt": "2026-09-09",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
@@ -1790,7 +1841,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 8,
         "oldestLatestDataYear": "2020",
         "ageReviewKeys": [
@@ -1819,7 +1870,7 @@
       "selectionMissingCount": 0,
       "chartCount": 0,
       "officialSourceReviewedAt": "2026-09-09",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
@@ -1850,16 +1901,27 @@
       "evidenceRefs": [],
       "metrics28d": {
         "gsc": {
-          "status": "insufficient-data",
-          "windowDays": 0,
+          "status": "measured-low",
+          "windowDays": 28,
+          "weeks": [
+            "2026-W39"
+          ],
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
-          "reason": "non-overlapping reports or page rows missing"
+          "clicks": 1,
+          "impressions": 24
         },
         "ga4": {
-          "status": "insufficient-data",
-          "windowDays": 0,
+          "status": "measured-low",
+          "windowDays": 28,
+          "weeks": [
+            "2026-W39"
+          ],
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
-          "reason": "non-overlapping reports or page rows missing"
+          "pageViews": 2
         },
         "internalNav": {
           "status": "insufficient-data",
@@ -1869,7 +1931,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 3,
         "oldestLatestDataYear": "2013",
         "ageReviewKeys": [
@@ -1896,7 +1958,7 @@
       "selectionMissingCount": 0,
       "chartCount": 0,
       "officialSourceReviewedAt": "2026-09-16",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
@@ -1930,19 +1992,24 @@
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-21",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
           "clicks": 0,
-          "impressions": 4
+          "impressions": 37
         },
         "ga4": {
-          "status": "insufficient-data",
-          "windowDays": 0,
+          "status": "measured-low",
+          "windowDays": 28,
+          "weeks": [
+            "2026-W39"
+          ],
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
-          "reason": "non-overlapping reports or page rows missing"
+          "pageViews": 9
         },
         "internalNav": {
           "status": "insufficient-data",
@@ -1952,7 +2019,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 11,
         "oldestLatestDataYear": "2020",
         "ageReviewKeys": [
@@ -1978,21 +2045,21 @@
       "selectionMissingCount": 0,
       "chartCount": 6,
       "officialSourceReviewedAt": "2026-09-16",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W34",
-            "2026-W38"
+            "2026-W35",
+            "2026-W39"
           ],
-          "periodStart": "2026-07-24",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-07-31",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
           "clicks": 2,
-          "impressions": 117
+          "impressions": 154
         },
         "ga4": {
           "status": "insufficient-data",
@@ -2017,7 +2084,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-healthcare.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 51,
         "oldestLatestDataYear": "2020",
         "ageReviewKeys": [
@@ -2036,22 +2103,22 @@
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-21",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
-          "clicks": 2,
-          "impressions": 90
+          "clicks": 1,
+          "impressions": 109
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-23",
-          "periodEnd": "2026-09-19",
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
           "pageViews": 21
         },
@@ -2059,10 +2126,10 @@
           "status": "measured",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-23",
-          "periodEnd": "2026-09-19",
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
           "eventCount": 9
         }
@@ -2082,7 +2149,7 @@
       "selectionMissingCount": 0,
       "chartCount": 0,
       "officialSourceReviewedAt": "2026-09-09",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
@@ -2132,7 +2199,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 7,
         "oldestLatestDataYear": "2019",
         "ageReviewKeys": [
@@ -2163,7 +2230,7 @@
       "selectionMissingCount": 0,
       "chartCount": 0,
       "officialSourceReviewedAt": "2026-09-10",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
@@ -2194,10 +2261,16 @@
       "evidenceRefs": [],
       "metrics28d": {
         "gsc": {
-          "status": "insufficient-data",
-          "windowDays": 0,
+          "status": "measured-low",
+          "windowDays": 28,
+          "weeks": [
+            "2026-W39"
+          ],
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
-          "reason": "non-overlapping reports or page rows missing"
+          "clicks": 0,
+          "impressions": 5
         },
         "ga4": {
           "status": "insufficient-data",
@@ -2213,7 +2286,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 3,
         "oldestLatestDataYear": "2021",
         "ageReviewKeys": [
@@ -2241,7 +2314,7 @@
       "selectionMissingCount": 0,
       "chartCount": 0,
       "officialSourceReviewedAt": "2026-09-09",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
@@ -2275,13 +2348,13 @@
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-21",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
           "clicks": 0,
-          "impressions": 1
+          "impressions": 25
         },
         "ga4": {
           "status": "insufficient-data",
@@ -2297,7 +2370,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 7,
         "oldestLatestDataYear": "2024",
         "ageReviewKeys": [],
@@ -2321,21 +2394,21 @@
       "selectionMissingCount": 0,
       "chartCount": 4,
       "officialSourceReviewedAt": "2026-09-16",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W34",
-            "2026-W38"
+            "2026-W35",
+            "2026-W39"
           ],
-          "periodStart": "2026-07-24",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-07-31",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
           "clicks": 0,
-          "impressions": 22
+          "impressions": 21
         },
         "ga4": {
           "status": "insufficient-data",
@@ -2360,7 +2433,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-labor-mobility.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 19,
         "oldestLatestDataYear": "2020",
         "ageReviewKeys": [
@@ -2380,10 +2453,10 @@
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-21",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
           "clicks": 0,
           "impressions": 15
@@ -2392,10 +2465,10 @@
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-23",
-          "periodEnd": "2026-09-19",
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
           "pageViews": 0
         },
@@ -2421,21 +2494,21 @@
       "selectionMissingCount": 0,
       "chartCount": 3,
       "officialSourceReviewedAt": "2026-09-09",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W34",
-            "2026-W38"
+            "2026-W35",
+            "2026-W39"
           ],
-          "periodStart": "2026-07-24",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-07-31",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
           "clicks": 0,
-          "impressions": 19
+          "impressions": 13
         },
         "ga4": {
           "status": "insufficient-data",
@@ -2460,7 +2533,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-labor-wages.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 20,
         "oldestLatestDataYear": "2020",
         "ageReviewKeys": [
@@ -2479,10 +2552,10 @@
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-21",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
           "clicks": 0,
           "impressions": 1
@@ -2491,23 +2564,23 @@
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-23",
-          "periodEnd": "2026-09-19",
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
-          "pageViews": 26
+          "pageViews": 29
         },
         "internalNav": {
           "status": "measured",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-23",
-          "periodEnd": "2026-09-19",
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
-          "eventCount": 1
+          "eventCount": 3
         }
       }
     },
@@ -2525,7 +2598,7 @@
       "selectionMissingCount": 0,
       "chartCount": 0,
       "officialSourceReviewedAt": "2026-09-09",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
@@ -2559,13 +2632,13 @@
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-21",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
           "clicks": 0,
-          "impressions": 2
+          "impressions": 14
         },
         "ga4": {
           "status": "insufficient-data",
@@ -2581,7 +2654,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 6,
         "oldestLatestDataYear": "2024",
         "ageReviewKeys": [],
@@ -2605,7 +2678,7 @@
       "selectionMissingCount": 0,
       "chartCount": 0,
       "officialSourceReviewedAt": "2026-09-09",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
@@ -2639,13 +2712,13 @@
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-21",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
           "clicks": 0,
-          "impressions": 3
+          "impressions": 33
         },
         "ga4": {
           "status": "insufficient-data",
@@ -2661,7 +2734,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 8,
         "oldestLatestDataYear": "2026",
         "ageReviewKeys": [],
@@ -2685,21 +2758,21 @@
       "selectionMissingCount": 0,
       "chartCount": 6,
       "officialSourceReviewedAt": "2026-09-16",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W34",
-            "2026-W38"
+            "2026-W35",
+            "2026-W39"
           ],
-          "periodStart": "2026-07-24",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-07-31",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
-          "clicks": 2,
-          "impressions": 35
+          "clicks": 0,
+          "impressions": 70
         },
         "ga4": {
           "status": "insufficient-data",
@@ -2724,7 +2797,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-living-housing.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 37,
         "oldestLatestDataYear": "2019",
         "ageReviewKeys": [
@@ -2751,35 +2824,30 @@
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-21",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
           "clicks": 0,
-          "impressions": 29
+          "impressions": 67
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-23",
-          "periodEnd": "2026-09-19",
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
-          "pageViews": 30
+          "pageViews": 22
         },
         "internalNav": {
-          "status": "measured",
-          "windowDays": 28,
-          "weeks": [
-            "2026-W38"
-          ],
-          "periodStart": "2026-08-23",
-          "periodEnd": "2026-09-19",
+          "status": "insufficient-data",
+          "windowDays": 0,
           "scope": "Japan",
-          "eventCount": 4
+          "reason": "navigation reports or page rows missing"
         }
       }
     },
@@ -2797,23 +2865,23 @@
       "selectionMissingCount": 0,
       "chartCount": 4,
       "officialSourceReviewedAt": "2026-09-16",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
           "status": "measured",
           "windowDays": 56,
           "weeks": [
-            "2026-W34",
-            "2026-W38"
+            "2026-W35",
+            "2026-W39"
           ],
-          "periodStart": "2026-07-24",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-07-31",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
-          "clicks": 5,
-          "impressions": 263,
-          "ctr": 0.019,
-          "avgPosition": 9.65
+          "clicks": 6,
+          "impressions": 274,
+          "ctr": 0.0219,
+          "avgPosition": 9.64
         },
         "ga4": {
           "status": "insufficient-data",
@@ -2838,7 +2906,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-local-economy.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 19,
         "oldestLatestDataYear": "2014",
         "ageReviewKeys": [
@@ -2865,37 +2933,37 @@
           "status": "measured",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-21",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
-          "clicks": 3,
-          "impressions": 238,
-          "ctr": 0.0126,
-          "avgPosition": 9.85
+          "clicks": 4,
+          "impressions": 217,
+          "ctr": 0.0184,
+          "avgPosition": 9.61
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-23",
-          "periodEnd": "2026-09-19",
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
-          "pageViews": 27
+          "pageViews": 31
         },
         "internalNav": {
           "status": "measured",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-23",
-          "periodEnd": "2026-09-19",
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
-          "eventCount": 8
+          "eventCount": 9
         }
       }
     },
@@ -2913,21 +2981,21 @@
       "selectionMissingCount": 0,
       "chartCount": 0,
       "officialSourceReviewedAt": "2026-09-16",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W34",
-            "2026-W38"
+            "2026-W35",
+            "2026-W39"
           ],
-          "periodStart": "2026-07-24",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-07-31",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
           "clicks": 0,
-          "impressions": 52
+          "impressions": 53
         },
         "ga4": {
           "status": "insufficient-data",
@@ -2955,7 +3023,7 @@
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W28/pages.csv"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 41,
         "oldestLatestDataYear": "2022",
         "ageReviewKeys": [],
@@ -2969,33 +3037,33 @@
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-21",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
           "clicks": 0,
-          "impressions": 37
+          "impressions": 29
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-23",
-          "periodEnd": "2026-09-19",
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
-          "pageViews": 69
+          "pageViews": 42
         },
         "internalNav": {
           "status": "measured",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-23",
-          "periodEnd": "2026-09-19",
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
           "eventCount": 4
         }
@@ -3015,7 +3083,7 @@
       "selectionMissingCount": 0,
       "chartCount": 0,
       "officialSourceReviewedAt": "2026-09-09",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
@@ -3049,19 +3117,24 @@
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-21",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
-          "clicks": 0,
-          "impressions": 1
+          "clicks": 1,
+          "impressions": 5
         },
         "ga4": {
-          "status": "insufficient-data",
-          "windowDays": 0,
+          "status": "measured-low",
+          "windowDays": 28,
+          "weeks": [
+            "2026-W39"
+          ],
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
-          "reason": "non-overlapping reports or page rows missing"
+          "pageViews": 3
         },
         "internalNav": {
           "status": "insufficient-data",
@@ -3071,7 +3144,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 8,
         "oldestLatestDataYear": "2022",
         "ageReviewKeys": [],
@@ -3095,7 +3168,7 @@
       "selectionMissingCount": 0,
       "chartCount": 0,
       "officialSourceReviewedAt": "2026-09-16",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
@@ -3129,10 +3202,10 @@
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-21",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
           "clicks": 0,
           "impressions": 3
@@ -3141,10 +3214,10 @@
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-23",
-          "periodEnd": "2026-09-19",
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
           "pageViews": 12
         },
@@ -3152,16 +3225,16 @@
           "status": "measured",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-23",
-          "periodEnd": "2026-09-19",
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
           "eventCount": 3
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 16,
         "oldestLatestDataYear": "2006",
         "ageReviewKeys": [
@@ -3201,7 +3274,7 @@
       "selectionMissingCount": 0,
       "chartCount": 0,
       "officialSourceReviewedAt": "2026-09-09",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
@@ -3232,10 +3305,16 @@
       "evidenceRefs": [],
       "metrics28d": {
         "gsc": {
-          "status": "insufficient-data",
-          "windowDays": 0,
+          "status": "measured-low",
+          "windowDays": 28,
+          "weeks": [
+            "2026-W39"
+          ],
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
-          "reason": "non-overlapping reports or page rows missing"
+          "clicks": 0,
+          "impressions": 2
         },
         "ga4": {
           "status": "insufficient-data",
@@ -3251,7 +3330,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 5,
         "oldestLatestDataYear": "2023",
         "ageReviewKeys": [],
@@ -3275,21 +3354,21 @@
       "selectionMissingCount": 0,
       "chartCount": 5,
       "officialSourceReviewedAt": "2026-09-09",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W34",
-            "2026-W38"
+            "2026-W35",
+            "2026-W39"
           ],
-          "periodStart": "2026-07-24",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-07-31",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
-          "clicks": 1,
-          "impressions": 60
+          "clicks": 0,
+          "impressions": 88
         },
         "ga4": {
           "status": "insufficient-data",
@@ -3314,7 +3393,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-12-theme-manufacturing.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 13,
         "oldestLatestDataYear": "2015",
         "ageReviewKeys": [
@@ -3331,24 +3410,24 @@
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-21",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
           "clicks": 0,
-          "impressions": 48
+          "impressions": 66
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-23",
-          "periodEnd": "2026-09-19",
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
-          "pageViews": 13
+          "pageViews": 17
         },
         "internalNav": {
           "status": "insufficient-data",
@@ -3372,7 +3451,7 @@
       "selectionMissingCount": 0,
       "chartCount": 0,
       "officialSourceReviewedAt": "2026-09-09",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
@@ -3406,13 +3485,13 @@
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-21",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
           "clicks": 0,
-          "impressions": 9
+          "impressions": 14
         },
         "ga4": {
           "status": "insufficient-data",
@@ -3428,7 +3507,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 6,
         "oldestLatestDataYear": "2007",
         "ageReviewKeys": [
@@ -3456,18 +3535,18 @@
       "selectionMissingCount": 0,
       "chartCount": 5,
       "officialSourceReviewedAt": "2026-09-08",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W34",
-            "2026-W38"
+            "2026-W35",
+            "2026-W39"
           ],
-          "periodStart": "2026-07-24",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-07-31",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
           "clicks": 0,
           "impressions": 7
@@ -3495,7 +3574,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-occupation-salary.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 39,
         "oldestLatestDataYear": "2022",
         "ageReviewKeys": [],
@@ -3509,30 +3588,35 @@
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-21",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
           "clicks": 0,
-          "impressions": 6
+          "impressions": 5
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-23",
-          "periodEnd": "2026-09-19",
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
-          "pageViews": 8
+          "pageViews": 10
         },
         "internalNav": {
-          "status": "insufficient-data",
-          "windowDays": 0,
+          "status": "measured",
+          "windowDays": 28,
+          "weeks": [
+            "2026-W39"
+          ],
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
-          "reason": "navigation reports or page rows missing"
+          "eventCount": 1
         }
       }
     },
@@ -3550,23 +3634,23 @@
       "selectionMissingCount": 0,
       "chartCount": 4,
       "officialSourceReviewedAt": "2026-09-16",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
           "status": "measured",
           "windowDays": 56,
           "weeks": [
-            "2026-W34",
-            "2026-W38"
+            "2026-W35",
+            "2026-W39"
           ],
-          "periodStart": "2026-07-24",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-07-31",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
           "clicks": 7,
-          "impressions": 713,
-          "ctr": 0.0098,
-          "avgPosition": 12.73
+          "impressions": 728,
+          "ctr": 0.0096,
+          "avgPosition": 12.56
         },
         "ga4": {
           "status": "insufficient-data",
@@ -3591,7 +3675,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-population-dynamics.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 33,
         "oldestLatestDataYear": "2019",
         "ageReviewKeys": [
@@ -3607,41 +3691,39 @@
       },
       "metrics28d": {
         "gsc": {
-          "status": "measured",
+          "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-21",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
           "clicks": 1,
-          "impressions": 352,
-          "ctr": 0.0028,
-          "avgPosition": 13.37
+          "impressions": 186
         },
         "ga4": {
           "status": "measured",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-23",
-          "periodEnd": "2026-09-19",
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
-          "pageViews": 209,
-          "activeUsersLast28d": 35,
-          "engagementRatePvWeighted": 0.8108,
-          "avgSessionDurationSecPvWeighted": 33.6
+          "pageViews": 187,
+          "activeUsersLast28d": 24,
+          "engagementRatePvWeighted": 0.9231,
+          "avgSessionDurationSecPvWeighted": 85.1
         },
         "internalNav": {
           "status": "measured",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-23",
-          "periodEnd": "2026-09-19",
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
           "eventCount": 65
         }
@@ -3661,18 +3743,18 @@
       "selectionMissingCount": 0,
       "chartCount": 1,
       "officialSourceReviewedAt": "2026-09-08",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W34",
-            "2026-W38"
+            "2026-W35",
+            "2026-W39"
           ],
-          "periodStart": "2026-07-24",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-07-31",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
           "clicks": 2,
           "impressions": 26
@@ -3700,7 +3782,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-13-theme-ports.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 8,
         "oldestLatestDataYear": "2023",
         "ageReviewKeys": [],
@@ -3714,24 +3796,24 @@
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-21",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
           "clicks": 1,
-          "impressions": 16
+          "impressions": 12
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-23",
-          "periodEnd": "2026-09-19",
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
-          "pageViews": 8
+          "pageViews": 7
         },
         "internalNav": {
           "status": "insufficient-data",
@@ -3755,7 +3837,7 @@
       "selectionMissingCount": 0,
       "chartCount": 0,
       "officialSourceReviewedAt": "2026-09-09",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
@@ -3789,22 +3871,22 @@
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-21",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
           "clicks": 0,
-          "impressions": 7
+          "impressions": 35
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-23",
-          "periodEnd": "2026-09-19",
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
           "pageViews": 4
         },
@@ -3812,16 +3894,16 @@
           "status": "measured",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-23",
-          "periodEnd": "2026-09-19",
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
           "eventCount": 1
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 5,
         "oldestLatestDataYear": "2022",
         "ageReviewKeys": [],
@@ -3845,21 +3927,21 @@
       "selectionMissingCount": 0,
       "chartCount": 3,
       "officialSourceReviewedAt": "2026-09-08",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W34",
-            "2026-W38"
+            "2026-W35",
+            "2026-W39"
           ],
-          "periodStart": "2026-07-24",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-07-31",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
           "clicks": 2,
-          "impressions": 46
+          "impressions": 52
         },
         "ga4": {
           "status": "insufficient-data",
@@ -3884,7 +3966,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-13-theme-railway.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 5,
         "oldestLatestDataYear": "2023",
         "ageReviewKeys": [],
@@ -3898,24 +3980,24 @@
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-21",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
           "clicks": 2,
-          "impressions": 26
+          "impressions": 25
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-23",
-          "periodEnd": "2026-09-19",
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
-          "pageViews": 16
+          "pageViews": 14
         },
         "internalNav": {
           "status": "insufficient-data",
@@ -3939,21 +4021,21 @@
       "selectionMissingCount": 0,
       "chartCount": 4,
       "officialSourceReviewedAt": "2026-09-14",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W34",
-            "2026-W38"
+            "2026-W35",
+            "2026-W39"
           ],
-          "periodStart": "2026-07-24",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-07-31",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
           "clicks": 11,
-          "impressions": 90
+          "impressions": 108
         },
         "ga4": {
           "status": "insufficient-data",
@@ -3978,7 +4060,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-real-income.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 26,
         "oldestLatestDataYear": "2019",
         "ageReviewKeys": [
@@ -3997,22 +4079,22 @@
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-21",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
-          "clicks": 7,
-          "impressions": 54
+          "clicks": 6,
+          "impressions": 67
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-23",
-          "periodEnd": "2026-09-19",
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
           "pageViews": 34
         },
@@ -4020,12 +4102,12 @@
           "status": "measured",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-23",
-          "periodEnd": "2026-09-19",
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
-          "eventCount": 2
+          "eventCount": 1
         }
       }
     },
@@ -4043,7 +4125,7 @@
       "selectionMissingCount": 0,
       "chartCount": 0,
       "officialSourceReviewedAt": "2026-09-16",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
@@ -4077,19 +4159,24 @@
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-21",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
           "clicks": 0,
-          "impressions": 24
+          "impressions": 28
         },
         "ga4": {
-          "status": "insufficient-data",
-          "windowDays": 0,
+          "status": "measured-low",
+          "windowDays": 28,
+          "weeks": [
+            "2026-W39"
+          ],
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
-          "reason": "non-overlapping reports or page rows missing"
+          "pageViews": 4
         },
         "internalNav": {
           "status": "insufficient-data",
@@ -4099,7 +4186,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 17,
         "oldestLatestDataYear": "2022",
         "ageReviewKeys": [],
@@ -4123,7 +4210,7 @@
       "selectionMissingCount": 0,
       "chartCount": 0,
       "officialSourceReviewedAt": "2026-09-09",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
@@ -4157,39 +4244,39 @@
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-21",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
-          "clicks": 0,
-          "impressions": 6
+          "clicks": 1,
+          "impressions": 62
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-23",
-          "periodEnd": "2026-09-19",
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
-          "pageViews": 2
+          "pageViews": 5
         },
         "internalNav": {
           "status": "measured",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-23",
-          "periodEnd": "2026-09-19",
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
           "eventCount": 1
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 6,
         "oldestLatestDataYear": "2013",
         "ageReviewKeys": [
@@ -4219,7 +4306,7 @@
       "selectionMissingCount": 0,
       "chartCount": 0,
       "officialSourceReviewedAt": "2026-09-09",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
@@ -4253,22 +4340,22 @@
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-21",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
           "clicks": 0,
-          "impressions": 8
+          "impressions": 37
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-23",
-          "periodEnd": "2026-09-19",
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
           "pageViews": 8
         },
@@ -4280,7 +4367,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 4,
         "oldestLatestDataYear": "2021",
         "ageReviewKeys": [
@@ -4309,21 +4396,21 @@
       "selectionMissingCount": 0,
       "chartCount": 1,
       "officialSourceReviewedAt": "2026-09-16",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W34",
-            "2026-W38"
+            "2026-W35",
+            "2026-W39"
           ],
-          "periodStart": "2026-07-24",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-07-31",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
           "clicks": 1,
-          "impressions": 43
+          "impressions": 63
         },
         "ga4": {
           "status": "insufficient-data",
@@ -4348,7 +4435,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-13-theme-roads.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 16,
         "oldestLatestDataYear": "2020",
         "ageReviewKeys": [
@@ -4364,35 +4451,35 @@
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-21",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
           "clicks": 0,
-          "impressions": 25
+          "impressions": 49
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-23",
-          "periodEnd": "2026-09-19",
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
-          "pageViews": 9
+          "pageViews": 17
         },
         "internalNav": {
           "status": "measured",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-23",
-          "periodEnd": "2026-09-19",
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
-          "eventCount": 1
+          "eventCount": 4
         }
       }
     },
@@ -4410,21 +4497,21 @@
       "selectionMissingCount": 0,
       "chartCount": 6,
       "officialSourceReviewedAt": "2026-09-16",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W34",
-            "2026-W38"
+            "2026-W35",
+            "2026-W39"
           ],
-          "periodStart": "2026-07-24",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-07-31",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
           "clicks": 1,
-          "impressions": 65
+          "impressions": 101
         },
         "ga4": {
           "status": "insufficient-data",
@@ -4450,7 +4537,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/theme-taxonomy-reorganization.md#safety-split--parent-hub候補"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 46,
         "oldestLatestDataYear": "2014",
         "ageReviewKeys": [
@@ -4467,35 +4554,30 @@
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-21",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
           "clicks": 0,
-          "impressions": 38
+          "impressions": 68
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-23",
-          "periodEnd": "2026-09-19",
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
-          "pageViews": 4
+          "pageViews": 0
         },
         "internalNav": {
-          "status": "measured",
-          "windowDays": 28,
-          "weeks": [
-            "2026-W38"
-          ],
-          "periodStart": "2026-08-23",
-          "periodEnd": "2026-09-19",
+          "status": "insufficient-data",
+          "windowDays": 0,
           "scope": "Japan",
-          "eventCount": 7
+          "reason": "navigation reports or page rows missing"
         }
       }
     },
@@ -4513,7 +4595,7 @@
       "selectionMissingCount": 0,
       "chartCount": 1,
       "officialSourceReviewedAt": "2026-09-09",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
@@ -4544,16 +4626,27 @@
       "evidenceRefs": [],
       "metrics28d": {
         "gsc": {
-          "status": "insufficient-data",
-          "windowDays": 0,
+          "status": "measured-low",
+          "windowDays": 28,
+          "weeks": [
+            "2026-W39"
+          ],
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
-          "reason": "non-overlapping reports or page rows missing"
+          "clicks": 0,
+          "impressions": 1
         },
         "ga4": {
-          "status": "insufficient-data",
-          "windowDays": 0,
+          "status": "measured-low",
+          "windowDays": 28,
+          "weeks": [
+            "2026-W39"
+          ],
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
-          "reason": "non-overlapping reports or page rows missing"
+          "pageViews": 3
         },
         "internalNav": {
           "status": "insufficient-data",
@@ -4563,7 +4656,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 12,
         "oldestLatestDataYear": "2020",
         "ageReviewKeys": [
@@ -4592,7 +4685,7 @@
       "selectionMissingCount": 0,
       "chartCount": 0,
       "officialSourceReviewedAt": "2026-09-16",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
@@ -4626,22 +4719,22 @@
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-21",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
           "clicks": 3,
-          "impressions": 16
+          "impressions": 22
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-23",
-          "periodEnd": "2026-09-19",
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
           "pageViews": 6
         },
@@ -4653,7 +4746,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 12,
         "oldestLatestDataYear": "2021",
         "ageReviewKeys": [
@@ -4681,21 +4774,21 @@
       "selectionMissingCount": 0,
       "chartCount": 3,
       "officialSourceReviewedAt": "2026-09-09",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
           "status": "measured-low",
           "windowDays": 56,
           "weeks": [
-            "2026-W34",
-            "2026-W38"
+            "2026-W35",
+            "2026-W39"
           ],
-          "periodStart": "2026-07-24",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-07-31",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
-          "clicks": 1,
-          "impressions": 54
+          "clicks": 3,
+          "impressions": 108
         },
         "ga4": {
           "status": "insufficient-data",
@@ -4720,7 +4813,7 @@
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-12-theme-tourism.md"
       ],
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 17,
         "oldestLatestDataYear": "2007",
         "ageReviewKeys": [
@@ -4742,24 +4835,24 @@
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-21",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
-          "clicks": 1,
-          "impressions": 38
+          "clicks": 3,
+          "impressions": 87
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-23",
-          "periodEnd": "2026-09-19",
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
-          "pageViews": 4
+          "pageViews": 6
         },
         "internalNav": {
           "status": "insufficient-data",
@@ -4783,7 +4876,7 @@
       "selectionMissingCount": 0,
       "chartCount": 0,
       "officialSourceReviewedAt": "2026-09-16",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
@@ -4817,19 +4910,24 @@
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-21",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
           "clicks": 0,
-          "impressions": 5
+          "impressions": 21
         },
         "ga4": {
-          "status": "insufficient-data",
-          "windowDays": 0,
+          "status": "measured-low",
+          "windowDays": 28,
+          "weeks": [
+            "2026-W39"
+          ],
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
-          "reason": "non-overlapping reports or page rows missing"
+          "pageViews": 2
         },
         "internalNav": {
           "status": "insufficient-data",
@@ -4839,7 +4937,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 2,
         "oldestLatestDataYear": "2023",
         "ageReviewKeys": [],
@@ -4863,7 +4961,7 @@
       "selectionMissingCount": 0,
       "chartCount": 0,
       "officialSourceReviewedAt": "2026-09-09",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
@@ -4897,22 +4995,22 @@
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-21",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
           "clicks": 1,
-          "impressions": 14
+          "impressions": 46
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-23",
-          "periodEnd": "2026-09-19",
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
           "pageViews": 1
         },
@@ -4924,7 +5022,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 3,
         "oldestLatestDataYear": "2023",
         "ageReviewKeys": [],
@@ -4948,7 +5046,7 @@
       "selectionMissingCount": 0,
       "chartCount": 0,
       "officialSourceReviewedAt": "2026-09-09",
-      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W38/pages.csv",
+      "gscSnapshotRef": ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W39/pages.csv",
       "ga4SnapshotRef": null,
       "metrics": {
         "gsc": {
@@ -4982,22 +5080,22 @@
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-21",
-          "periodEnd": "2026-09-17",
+          "periodStart": "2026-08-28",
+          "periodEnd": "2026-09-24",
           "scope": "search-console",
           "clicks": 2,
-          "impressions": 14
+          "impressions": 43
         },
         "ga4": {
           "status": "measured-low",
           "windowDays": 28,
           "weeks": [
-            "2026-W38"
+            "2026-W39"
           ],
-          "periodStart": "2026-08-23",
-          "periodEnd": "2026-09-19",
+          "periodStart": "2026-08-30",
+          "periodEnd": "2026-09-26",
           "scope": "Japan",
           "pageViews": 4
         },
@@ -5009,7 +5107,7 @@
         }
       },
       "dataQuality": {
-        "observedAt": "2026-09-21T03:41:36.248Z",
+        "observedAt": "2026-09-28T04:03:15.810Z",
         "keysChecked": 9,
         "oldestLatestDataYear": "2022",
         "ageReviewKeys": [],

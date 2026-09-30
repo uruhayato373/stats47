@@ -248,6 +248,18 @@ export type CalculationFormula =
   | { op: 'per_population'; numerator: string };
 
 /** 取得対象年 */
+/** `MetricConfig.supplementalSources` の 1 件。軸の pin だけを持つ単発クエリに限る。 */
+export interface SupplementalSource {
+  /** 補完側の値を採る年 (4 桁) */
+  years: readonly number[];
+  source: Pick<
+    EstatSource,
+    'kind' | 'statsDataId' | 'cdCat01' | 'cdCat02' | 'cdCat03' | 'cdCat04' | 'cdCat05' | 'cdTab' | 'displayName' | 'url'
+  >;
+  /** 主出典で足りない理由 (監査で読む説明) */
+  reason: string;
+}
+
 export type YearSpec =
   'all' | { from: number; to: number } | { years: number[] };
 
@@ -395,6 +407,18 @@ export interface MetricConfig {
   source: SourceConfig;
   /** 県と取得元が異なる場合の市区町村専用e-Stat表。statsDataIdは市表そのものを指定する。 */
   citySource?: EstatSource;
+  /**
+   * 主出典にまだ無い年を、別の e-Stat 表から補う。
+   *
+   * 社会・人口統計体系 (SSDS) は国勢調査の年に国勢調査の値を載せるが、公表から反映まで
+   * 1 年近くかかる。その間に同じ定義の値を国勢調査の表から直接取るためのもの
+   * (2026-09-30 実測: SSDS 2020 の 65歳以上割合は国勢調査の原数値と一致)。
+   *
+   * `years` の年は**補完側の値を採り**、主出典の同じ年は捨てる。主出典にも同じ年が
+   * 現れたら取り込みが警告を出すので、値を確かめて補完を外す。
+   * 補う年は `years` (取得年範囲) にも含めること (含めないと取り込みが止まる)。
+   */
+  supplementalSources?: readonly SupplementalSource[];
   /** 保持するエンティティ種別 (どの stats_* に相当するか) */
   entities: EntityKind[];
   /** 取得年範囲 */

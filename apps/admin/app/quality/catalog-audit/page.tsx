@@ -1,6 +1,8 @@
 import Link from "next/link";
 
-import { Badge, PageHeading, Section, Stat, Table, Td, Tr } from "@/components/ops/primitives";
+import { Cell, DataTable, Row, StatCard, StatusBadge } from "@/components/admin-ui";
+import { Section } from "@/components/layout-primitives";
+import { PageHeading } from "@/components/ops/primitives";
 import { catalogAuditSummary } from "@/lib/server/catalog-audit";
 
 export const dynamic = "force-dynamic";
@@ -33,48 +35,48 @@ export default async function CatalogAuditPage({
       >
         <p className="mt-2 max-w-3xl text-sm text-console-muted">
           ThemeCatalog の指標選定根拠 (readerQuestion / adoptionCriteria / harmRelevance 等) の
-          充足状況と、<code className="rounded bg-console-card px-1">npm run validate:catalog</code>{" "}
+          充足状況と、<code className="rounded bg-muted px-1">npm run validate:catalog</code>{" "}
           と同じ判定ロジックの error/warn を毎回 SSOT から再計算して表示する読み取り専用画面。
           正典は{" "}
-          <code className="rounded bg-console-card px-1">.claude/rules/theme-catalog-standards.md</code>。
+          <code className="rounded bg-muted px-1">.claude/rules/theme-catalog-standards.md</code>。
         </p>
       </PageHeading>
 
       <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-4">
-        <Stat label="対象テーマ" value={summary.themeCount} />
-        <Stat label="error" value={summary.totalErrorCount} tone={summary.totalErrorCount ? "bad" : "good"} />
-        <Stat label="warning" value={summary.totalWarnCount} tone={summary.totalWarnCount ? "warn" : "good"} />
-        <Stat label="HARM該当テーマ" value={summary.harmThemes.length} />
+        <StatCard label="対象テーマ" value={summary.themeCount} />
+        <StatCard label="error" value={summary.totalErrorCount} tone={summary.totalErrorCount ? "bad" : "good"} />
+        <StatCard label="warning" value={summary.totalWarnCount} tone={summary.totalWarnCount ? "warn" : "good"} />
+        <StatCard label="HARM該当テーマ" value={summary.harmThemes.length} />
       </div>
 
       <Section title="違反の内訳 (error)" count={summary.errorTally.length}>
         {summary.errorTally.length === 0 ? (
           <p className="text-sm text-console-good">error はありません。</p>
         ) : (
-          <Table columns={["種別", "件数"]}>
+          <DataTable columns={["種別", "件数"]}>
             {summary.errorTally.map((row) => (
-              <Tr key={row.tag}>
-                <Td>
+              <Row key={row.tag}>
+                <Cell>
                   <code className="text-[11px]">{row.tag}</code>
-                </Td>
-                <Td nowrap>{row.count}</Td>
-              </Tr>
+                </Cell>
+                <Cell nowrap>{row.count}</Cell>
+              </Row>
             ))}
-          </Table>
+          </DataTable>
         )}
       </Section>
 
       <Section title="違反の内訳 (warning)" count={summary.warnTally.length}>
-        <Table columns={["種別", "件数"]}>
+        <DataTable columns={["種別", "件数"]}>
           {summary.warnTally.map((row) => (
-            <Tr key={row.tag}>
-              <Td>
+            <Row key={row.tag}>
+              <Cell>
                 <code className="text-[11px]">{row.tag}</code>
-              </Td>
-              <Td nowrap>{row.count}</Td>
-            </Tr>
+              </Cell>
+              <Cell nowrap>{row.count}</Cell>
+            </Row>
           ))}
-        </Table>
+        </DataTable>
       </Section>
 
       <Section title="HARM 該当テーマ (企画側の参照材料。UI の広告枠設定ではない)" count={summary.harmThemes.length}>
@@ -83,26 +85,26 @@ export default async function CatalogAuditPage({
             HARM 該当が記録されたテーマはまだありません (任意項目・全テーマへの強制なし)。
           </p>
         ) : (
-          <Table columns={["テーマ", "軸", "理由"]}>
+          <DataTable columns={["テーマ", "軸", "理由"]}>
             {summary.harmThemes.map((row, i) => (
-              <Tr key={`${row.key}-${row.axis}-${i}`}>
-                <Td>
+              <Row key={`${row.key}-${row.axis}-${i}`}>
+                <Cell>
                   <Link
                     className="text-console-info underline underline-offset-2"
                     href={`/themes/${row.key}`}
                   >
                     {row.title}
                   </Link>
-                </Td>
-                <Td nowrap>
-                  <Badge tone="info">{HARM_LABELS[row.axis] ?? row.axis}</Badge>
-                </Td>
-                <Td>
+                </Cell>
+                <Cell nowrap>
+                  <StatusBadge tone="info">{HARM_LABELS[row.axis] ?? row.axis}</StatusBadge>
+                </Cell>
+                <Cell>
                   <span className="text-[12px] text-console-muted">{row.reason}</span>
-                </Td>
-              </Tr>
+                </Cell>
+              </Row>
             ))}
-          </Table>
+          </DataTable>
         )}
       </Section>
 
@@ -120,7 +122,7 @@ export default async function CatalogAuditPage({
           </p>
         ) : null}
         <div className="max-h-[32rem] overflow-auto">
-          <Table
+          <DataTable
             columns={[
               "テーマ",
               "指標数",
@@ -133,8 +135,8 @@ export default async function CatalogAuditPage({
             ]}
           >
             {visibleThemes.map((t) => (
-              <Tr key={t.key}>
-                <Td>
+              <Row key={t.key}>
+                <Cell>
                   <Link
                     className="text-console-info underline underline-offset-2"
                     href={`/themes/${t.key}`}
@@ -142,27 +144,27 @@ export default async function CatalogAuditPage({
                     {t.title}
                   </Link>
                   <div className="text-[10px] text-console-muted">{t.key}</div>
-                </Td>
-                <Td nowrap>{t.metricCount}</Td>
-                <Td nowrap>{t.primaryAndSecondaryCount}</Td>
-                <Td nowrap>
+                </Cell>
+                <Cell nowrap>{t.metricCount}</Cell>
+                <Cell nowrap>{t.primaryAndSecondaryCount}</Cell>
+                <Cell nowrap>
                   {t.selectionCount}/{t.primaryAndSecondaryCount}
-                </Td>
-                <Td nowrap>
+                </Cell>
+                <Cell nowrap>
                   {t.adoptionCriteriaCount}/{t.primaryAndSecondaryCount}
-                </Td>
-                <Td nowrap>
+                </Cell>
+                <Cell nowrap>
                   {t.readerQuestionCount}/{t.primaryAndSecondaryCount}
-                </Td>
-                <Td nowrap>
-                  <Badge tone={t.errorCount ? "bad" : "good"}>{t.errorCount}</Badge>
-                </Td>
-                <Td nowrap>
-                  <Badge tone={t.warnCount ? "warn" : "good"}>{t.warnCount}</Badge>
-                </Td>
-              </Tr>
+                </Cell>
+                <Cell nowrap>
+                  <StatusBadge tone={t.errorCount ? "bad" : "good"}>{t.errorCount}</StatusBadge>
+                </Cell>
+                <Cell nowrap>
+                  <StatusBadge tone={t.warnCount ? "warn" : "good"}>{t.warnCount}</StatusBadge>
+                </Cell>
+              </Row>
             ))}
-          </Table>
+          </DataTable>
         </div>
       </Section>
     </div>

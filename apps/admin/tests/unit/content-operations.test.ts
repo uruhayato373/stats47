@@ -77,6 +77,45 @@ describe("content operations core", () => {
     ]);
   });
 
+  it("商品別の表紙分類と最新版を読み取りモデルへ渡す", () => {
+    const input = fixture();
+    const result = buildContentOperations({
+      ...input,
+      kindleListings: [{
+        ...input.kindleListings[0],
+        series: "S1-issues",
+        seriesLabel: "論点読み物",
+        coverTemplate: "issue-pop",
+        coverTemplateLabel: "問いかけ型",
+        coverTheme: "household-money",
+        coverThemeLabel: "家計・所得",
+        coverPalette: "navy-yellow",
+        coverDataLabels: ["所得", "物価", "貯蓄"],
+        coverBackgroundConcept: "家計を表す具体物を日本地図の周囲へ配置する",
+        coverReviewStatus: "needs-redesign",
+        coverBackgroundPath: "media/kindle-cover-assets/K-S1-01/27392ac2be97/background.jpg",
+        hasCoverBackground: true,
+        hasDraftCover: true,
+        draftCoverPath: ".local/kindle-cover-drafts/K-S1-01/cover.jpg",
+        coverPath: ".local/kindle-books/K-S1-01/v4-current/cover.jpg",
+      }],
+    });
+
+    expect(result.kindle[0]).toMatchObject({
+      series: "S1-issues",
+      seriesLabel: "論点読み物",
+      coverTemplate: "issue-pop",
+      coverTheme: "household-money",
+      coverThemeLabel: "家計・所得",
+      coverDataLabels: ["所得", "物価", "貯蓄"],
+      coverReviewStatus: "needs-redesign",
+      hasCoverBackground: true,
+      hasDraftCover: true,
+      draftCoverPath: ".local/kindle-cover-drafts/K-S1-01/cover.jpg",
+      coverVersion: "draft",
+    });
+  });
+
   it("listedの証跡欠落とnote孤児をerrorとして検出する", () => {
     const input = fixture({
       kindleListings: [

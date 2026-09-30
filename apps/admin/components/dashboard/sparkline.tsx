@@ -1,14 +1,15 @@
 import { sparkPoints, type WowResult } from "./format";
+import { CHART_TONE_TEXT, type ChartTone } from "./chart-tone";
 
 /** 旧 UI の spark() 相当。inline SVG polyline のみ (外部チャートライブラリ禁止)。 */
 export function Sparkline({
   values,
-  color = "rgb(var(--console-info))",
+  tone = "info",
   w = 140,
   h = 30,
 }: {
   values: Array<number | null | undefined>;
-  color?: string;
+  tone?: ChartTone;
   w?: number;
   h?: number;
 }) {
@@ -19,12 +20,12 @@ export function Sparkline({
       width={w}
       height={h}
       viewBox={`0 0 ${w} ${h}`}
-      className="mt-1.5 block max-w-full"
+      className={`mt-1.5 block max-w-full ${CHART_TONE_TEXT[tone]}`}
       role="img"
       aria-hidden="true"
     >
-      {/* ★stroke は「属性」だと var() が解決されないので style で当てる */}
-      <polyline points={points} fill="none" style={{ stroke: color }} strokeWidth={1.5} />
+      {/* 色は tone のクラス (text-console-*) の currentColor。属性では var() が解決されず、style は使わない */}
+      <polyline points={points} fill="none" stroke="currentColor" strokeWidth={1.5} />
     </svg>
   );
 }

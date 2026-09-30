@@ -1,36 +1,46 @@
 {
   "schemaVersion": 1,
-  "week": "2026-W38",
-  "base": "51d183c950a945fc08de46623eef887653810bab",
-  "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/35999010240",
-  "generatedAt": "2026-09-24T12:35:26.729Z",
+  "week": "2026-W39",
+  "base": "2da5f3ad2d9ba40d426d9b7d6e0ec546dbca3188",
+  "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/36359637476",
+  "generatedAt": "2026-09-27T23:50:00.317Z",
   "gate": "pass",
   "proposal": {
     "updated": [
-      "TOKEN-AICONTENT-01",
-      "THEME-EXPANSION-EFFECT-01"
+      "ASSET-POLICY-BURNDOWN-01",
+      "DATA-ESTAT-FETCH-01",
+      "DATA-MANUAL-RESTORE-01",
+      "DEPS-RENOVATE-01",
+      "PERF-WORKER-P99-01",
+      "R2-STORAGE-01",
+      "RANK-THIN-01"
     ],
     "deleted": [
-      "COVERAGE-LOOP-01"
+      "AFF-SCOUT-PIPE-01"
     ],
     "logs": [
-      "gsc-improvement"
+      "affiliate-improvement"
     ],
     "cards": []
   },
   "problems": [],
   "changedFiles": [
-    ".claude/skills/analytics/gsc-improvement/reference/improvement-log.md",
+    ".claude/skills/analytics/affiliate-improvement/reference/improvement-log.md",
     ".claude/todo/improvements.md"
   ],
   "improvements": {
     "deleted": [
-      "COVERAGE-LOOP-01"
+      "AFF-SCOUT-PIPE-01"
     ],
     "added": [],
     "updated": [
-      "TOKEN-AICONTENT-01",
-      "THEME-EXPANSION-EFFECT-01"
+      "PERF-WORKER-P99-01",
+      "R2-STORAGE-01",
+      "DATA-ESTAT-FETCH-01",
+      "DATA-MANUAL-RESTORE-01",
+      "ASSET-POLICY-BURNDOWN-01",
+      "RANK-THIN-01",
+      "DEPS-RENOVATE-01"
     ]
   },
   "backlogAdded": []

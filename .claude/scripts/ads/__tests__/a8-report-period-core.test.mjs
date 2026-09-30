@@ -182,14 +182,31 @@ test("共用案件を含む口座横断値は専用分を下限・共用込み�
     lowerBound: 280,
     upperBound: 326,
     delta: 32,
+    tolerance: 6,
   });
+
+  // クリックは max(3, ceil(294×2%)=6) までの超過を許す。原因を特定できない小差でゲートを止めない (A8-CROSSCHECK-EXCEED-01)
+  const withinTolerance = crossCheckAgainstSite(
+    siteRow,
+    [{ ...rows[0], clicks: 300 }, rows[1]],
+    { sharedProgramIds: ["s-shared"] },
+  );
+  assert.equal(withinTolerance.exceeded, false);
 
   const exclusiveOverflow = crossCheckAgainstSite(
     siteRow,
-    [{ ...rows[0], clicks: 295 }, rows[1]],
+    [{ ...rows[0], clicks: 301 }, rows[1]],
     { sharedProgramIds: ["s-shared"] },
   );
   assert.equal(exclusiveOverflow.exceeded, true);
+
+  // 件数・金額には許容差を持たない。成果が 1 件でも専用分で超えたら混入の疑いとして止める
+  const conversionOverflow = crossCheckAgainstSite(
+    siteRow,
+    [{ ...rows[0], conversions: siteRow.conversions + 1 }, rows[1]],
+    { sharedProgramIds: ["s-shared"] },
+  );
+  assert.equal(conversionOverflow.exceeded, true);
 
   const unexplainedShortfall = crossCheckAgainstSite(
     siteRow,

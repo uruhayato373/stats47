@@ -28,6 +28,7 @@ import {
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const PF_ROOT = resolve(HERE, "..");
+const REPO_ROOT = resolve(PF_ROOT, "../..");
 const R2 = process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp";
 
 /** カバーの実寸 (cover.ts の W/H と一致させる)。 */
@@ -138,7 +139,7 @@ async function main(): Promise<void> {
   const metric = arg("metric");
   if (!book || !metric) throw new Error("--book と --metric は必須");
   const out =
-    arg("out") ?? resolve(PF_ROOT, "src/channels/kindle/assets/cover-backgrounds", `${book}.jpg`);
+    arg("out") ?? resolve(REPO_ROOT, ".local/kindle-cover-drafts", book, "background-generated.jpg");
 
   const seaKey = arg("sea") ?? "black";
   const sea = SEA_PRESETS[seaKey];

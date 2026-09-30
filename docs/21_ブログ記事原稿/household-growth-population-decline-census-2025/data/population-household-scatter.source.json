@@ -1,0 +1,19 @@
+{
+  "kind": "derived",
+  "label": "人口増減率と世帯増減率の関係",
+  "year": "2025",
+  "unit": "％ × ％",
+  "xKey": "census-population-change-rate-5y",
+  "yKey": "census-household-change-rate-5y",
+  "source": "r2:app/stats/census-population-change-rate-5y/values.json + r2:app/stats/census-household-change-rate-5y/values.json",
+  "derivedFrom": [
+    {
+      "metricKey": "census-population-change-rate-5y"
+    },
+    {
+      "metricKey": "census-household-change-rate-5y"
+    }
+  ],
+  "transform": "47都道府県を areaCode で結合 (x=人口増減率, y=世帯増減率。値は小数第2位で丸め)",
+  "restore": "curl -s https://storage.stats47.jp/app/stats/census-population-change-rate-5y/values.json ほか census-household-change-rate-5y を areaCode で結合し x,y を小数第2位に丸める"
+}

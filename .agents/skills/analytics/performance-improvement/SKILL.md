@@ -1,6 +1,6 @@
 ---
 name: performance-improvement
-description: PSI、Chrome DevTools MCP、Cloudflare MCPでCore Web VitalsとWorkers性能を実測し、改善バックログ・実装・再計測を証拠ベースで進める。Use when user says "PSI改善", "LCP改善", "CLS改善", "パフォーマンス改善", "Core Web Vitals", "Cloudflare性能", or asks for a web performance audit.
+description: PSI、Chrome DevTools MCP、Cloudflare の日次 snapshotでCore Web VitalsとWorkers性能を実測し、改善バックログ・実装・再計測を証拠ベースで進める。Use when user says "PSI改善", "LCP改善", "CLS改善", "パフォーマンス改善", "Core Web Vitals", "Cloudflare性能", or asks for a web performance audit.
 primary_agent: performance-auditor
 ---
 
@@ -32,10 +32,8 @@ Claude Code の `/mcp` で次を確認する。
 |---|---|---|
 | `chrome-devtools` | Performance trace、Network、DOM、Lighthouse | connected |
 | `cloudflare-docs` | 現行仕様の確認 | connected |
-| `cloudflare-observability` | Workers logs / traces | authenticated |
-| `cloudflare-graphql` | CPU・Wall time・request集計 | authenticated |
 
-Observability / GraphQL が `Needs authentication` の場合は `/mcp` から認証する。認証できない場合でもローカル実装と Chrome 監査は進め、Cloudflareの読取・外部設定変更だけを未完了として報告する。
+Workers の CPU・wall time・request の集計は日次 snapshot（`.claude/state/metrics/cloudflare/snapshots/`、CI の `fetch-usage.mjs` が取得）を読む。route 別の内訳・trace・エラーログは Cloudflare Dashboard の Workers Observability でオーナーが確認する。
 
 ## 標準監査条件
 
@@ -150,8 +148,8 @@ Cloudflare 公式 ([Workers static assets headers](https://developers.cloudflare
 
 ### 5. `PERF-WORKER-P99-01` — Workersの遅いrouteを特定する
 
-1. `cloudflare-observability` で過去24時間と7日を読み、route別のhandler duration、CPU、wall time、error、fetch / R2 binding spanを集計する。
-2. `cloudflare-graphql` のrequest・CPU・wall・subrequest集計と突合する。
+1. Cloudflare Dashboard の Workers Observability で過去24時間と7日を読み、route別のhandler duration、CPU、wall time、error、fetch / R2 binding spanを集計する（オーナーの画面共有かCSV）。
+2. 日次 snapshot のrequest・CPU・wall集計と突合する。
 3. p99だけでコードを推測しない。slow trace上位20件についてpath、cache status、R2 key / size、outbound fetchを記録する。
 4. 同じroute / bindingが複数回支配する場合だけ、対象routeの重複fetch、直列await、巨大JSON parse、cache missをコードと照合する。
 5. route単位の修正と対象テストを行い、無関係なWorker refactorやsampling変更はしない。
@@ -219,7 +217,7 @@ SSOT:
 - .claude/skills/analytics/performance-improvement/reference/improvement-log.md の [MCP-PERF-2026-08-05]
 - .claude/todo/improvements.md
 
-最初に /mcp を確認し、chrome-devtools と cloudflare-docs の接続、cloudflare-observability と cloudflare-graphql の認証状態を報告してください。後者が Needs authentication なら認証を案内し、Chrome/ローカルで進められる作業は止めないでください。
+最初に /mcp で chrome-devtools と cloudflare-docs の接続を確認してください。Workers の route 別内訳が必要な作業は、Dashboard の確認をオーナーへ依頼し、Chrome/ローカルで進められる作業は止めないでください。
 
 実行順は次の通りです:
 1. PERF-RANKING-LCP-02

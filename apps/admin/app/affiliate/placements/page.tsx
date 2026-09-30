@@ -1,13 +1,6 @@
-import {
-  Badge,
-  ErrorNote,
-  PageHeading,
-  Section,
-  Stat,
-  Table,
-  Td,
-  Tr,
-} from "@/components/ops/primitives";
+import { Cell, DataTable, Row, StatCard, StatusBadge } from "@/components/admin-ui";
+import { Section } from "@/components/layout-primitives";
+import { ErrorNote, PageHeading } from "@/components/ops/primitives";
 import { affiliatePlacements } from "@/lib/server/affiliate";
 import { adsSummary } from "@/lib/server/ads";
 import { hasError } from "@/lib/server/state-io";
@@ -41,36 +34,36 @@ export default function AffiliatePlacementsPage() {
             <p className="text-[11px] text-console-muted">
               配信中 {p.autoTotals.activeAds} 件・停止または期間外 {p.autoTotals.inactiveAds} 件。どのページに出るかは分野 (vertical) の解決で決まる
             </p>
-            <Table columns={["置き場所", "広告", "案件", "分野"]}>
+            <DataTable columns={["置き場所", "広告", "案件", "分野"]}>
               {p.auto.map((row) => (
-                <Tr key={row.locationCode}>
-                  <Td nowrap>
+                <Row key={row.locationCode}>
+                  <Cell nowrap>
                     {row.label}
                     <span className="ml-1 text-[11px] text-console-muted">{row.locationCode}</span>
-                  </Td>
-                  <Td nowrap>{row.ads}</Td>
-                  <Td nowrap muted>{row.programs}</Td>
-                  <Td muted>{row.verticals.join("・")}</Td>
-                </Tr>
+                  </Cell>
+                  <Cell nowrap>{row.ads}</Cell>
+                  <Cell nowrap muted>{row.programs}</Cell>
+                  <Cell muted>{row.verticals.join("・")}</Cell>
+                </Row>
               ))}
-            </Table>
+            </DataTable>
           </Section>
 
           <Section title="記事への直貼り" count={p.direct.length}>
             {p.direct.length === 0 ? (
               <p className="text-sm text-console-muted">直貼りの配置はありません。</p>
             ) : (
-              <Table columns={["掲載先", "記事", "位置", "案件", "ASP"]}>
+              <DataTable columns={["掲載先", "記事", "位置", "案件", "ASP"]}>
                 {p.direct.map((row) => (
-                  <Tr key={`${row.id}-${row.channel}-${row.slug}`}>
-                    <Td nowrap>{CHANNEL[row.channel] ?? row.channel}</Td>
-                    <Td>{row.slug}</Td>
-                    <Td muted>{row.position}</Td>
-                    <Td>{row.title}</Td>
-                    <Td nowrap muted>{row.asp}</Td>
-                  </Tr>
+                  <Row key={`${row.id}-${row.channel}-${row.slug}`}>
+                    <Cell nowrap>{CHANNEL[row.channel] ?? row.channel}</Cell>
+                    <Cell>{row.slug}</Cell>
+                    <Cell muted>{row.position}</Cell>
+                    <Cell>{row.title}</Cell>
+                    <Cell nowrap muted>{row.asp}</Cell>
+                  </Row>
                 ))}
-              </Table>
+              </DataTable>
             )}
           </Section>
         </>
@@ -82,9 +75,9 @@ export default function AffiliatePlacementsPage() {
         ) : (
           <>
             <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
-              <Stat label="広告エントリ" value={d.inventory.totals.entries} sub={`active ${d.inventory.totals.active}`} />
-              <Stat label="広告主" value={d.inventory.totals.uniqueAdvertisers} />
-              <Stat
+              <StatCard label="広告エントリ" value={d.inventory.totals.entries} sub={`active ${d.inventory.totals.active}`} />
+              <StatCard label="広告主" value={d.inventory.totals.uniqueAdvertisers} />
+              <StatCard
                 label="分野のカバー"
                 value={`${d.inventory.coverage.verticalsCovered}/${d.inventory.coverage.verticalsTotal}`}
                 tone={d.inventory.coverage.gapVerticals.length > 0 ? "warn" : "good"}
@@ -94,29 +87,29 @@ export default function AffiliatePlacementsPage() {
                     : "欠落なし"
                 }
               />
-              <Stat
+              <StatCard
                 label="サイズ違反"
                 value={d.inventory.sizeViolations.length}
                 tone={d.inventory.sizeViolations.length > 0 ? "warn" : "good"}
               />
             </div>
             <div className="mt-2 grid gap-2 lg:grid-cols-2">
-              <Table columns={["分野", "件数"]}>
+              <DataTable columns={["分野", "件数"]}>
                 {d.inventory.byVertical.map((v) => (
-                  <Tr key={v.vertical}>
-                    <Td nowrap>{v.vertical}</Td>
-                    <Td nowrap muted>{v.count}</Td>
-                  </Tr>
+                  <Row key={v.vertical}>
+                    <Cell nowrap>{v.vertical}</Cell>
+                    <Cell nowrap muted>{v.count}</Cell>
+                  </Row>
                 ))}
-              </Table>
-              <Table columns={["種類", "件数"]}>
+              </DataTable>
+              <DataTable columns={["種類", "件数"]}>
                 {d.inventory.byAdType.map((v) => (
-                  <Tr key={v.adType}>
-                    <Td nowrap>{v.adType}</Td>
-                    <Td nowrap muted>{v.count}</Td>
-                  </Tr>
+                  <Row key={v.adType}>
+                    <Cell nowrap>{v.adType}</Cell>
+                    <Cell nowrap muted>{v.count}</Cell>
+                  </Row>
                 ))}
-              </Table>
+              </DataTable>
             </div>
           </>
         )}
@@ -127,22 +120,22 @@ export default function AffiliatePlacementsPage() {
           <ErrorNote error={d.compliance.error} />
         ) : (
           <div className="grid gap-2 sm:grid-cols-3">
-            <Stat
+            <StatCard
               label="構造の問題"
               value={d.compliance.structureIssues.length}
               tone={d.compliance.structureIssues.length > 0 ? "warn" : "good"}
             />
-            <Stat
+            <StatCard
               label="孤立した直貼り"
               value={d.compliance.directPlacements.orphaned.length}
               tone={d.compliance.directPlacements.orphaned.length > 0 ? "bad" : "good"}
               sub="記事の削除・タグ欠落"
             />
-            <Stat
+            <StatCard
               label="PR 表記漏れ"
               value={
                 d.compliance.directPlacements.missingDisclosure.length > 0 ? (
-                  <Badge tone="bad">{d.compliance.directPlacements.missingDisclosure.length}</Badge>
+                  <StatusBadge tone="bad">{d.compliance.directPlacements.missingDisclosure.length}</StatusBadge>
                 ) : (
                   0
                 )

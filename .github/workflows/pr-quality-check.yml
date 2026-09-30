@@ -225,6 +225,23 @@ jobs:
         run: node .claude/scripts/lib/check-asset-policy.cjs --baseline
         continue-on-error: false
 
+      - name: 🧩 Admin UI Guard (shadcn parity / UI debt)
+        # 管理画面の UI 部品が shadcn/ui 公式 (new-york-v4) と同じクラスか、ページに生のカード面・<table>・style が増えていないか。
+        # 契約: .claude/rules/admin-ui.md
+        run: |
+          node --test .claude/scripts/admin-ui/__tests__/check-shadcn-parity.test.mjs .claude/scripts/admin-ui/__tests__/check-admin-ui-debt.test.mjs
+          node .claude/scripts/admin-ui/check-shadcn-parity.mjs
+          node .claude/scripts/admin-ui/check-admin-ui-debt.mjs
+        continue-on-error: false
+
+      - name: 🗒️ note Image Asset Contract Guard
+        # docs/31 の派生 PNG を追跡しない・ランキング記事が chart-data.json だけでデータを復元できる・
+        # 追跡 PNG の総量が予算 (縮小専用) を超えない。契約: .claude/rules/note-image-assets.md
+        run: |
+          node --test .claude/scripts/note/__tests__/image-assets-audit.test.mjs .claude/scripts/note/__tests__/image-assets-tools.test.mjs
+          node .claude/scripts/note/audit-note-image-assets.mjs
+        continue-on-error: false
+
       - name: 🧹 Repository Hygiene Regression Guard
         # origin/develop 由来の既存findingはbaselineで許容し、一時出力・大容量・
         # case/Unicode衝突の新規悪化だけをブロックする。

@@ -67,6 +67,11 @@ export interface RecipeOps {
   /** 家計調査の県庁所在市 → 都道府県 写像 */
   areaRemap?: "kakei-capital-city";
   /**
+   * 指定年を別表から補う (`MetricConfig.supplementalSources`)。
+   * 主出典の単発クエリではその年が取れないので、あれば derived になる。
+   */
+  supplements?: ReadonlyArray<{ years: readonly number[]; estatParams: EstatQueryParams }>;
+  /**
    * 他 metric から計算して作る値 (`fetcherKey:"calculated"`)。
    *
    * ★ここに入れる理由: 期間換算 (`periodAlign`) や `scaleFactor` を変えると**配信される
@@ -287,6 +292,14 @@ function buildOps(config: MetricConfig): RecipeOps | undefined {
     }
   }
 
+  const supplements = (config.supplementalSources ?? [])
+    .map((sup) => {
+      const estatParams = buildEstatParams(sup.source as unknown as Record<string, unknown>);
+      return estatParams ? { years: [...sup.years].sort((a, b) => a - b), estatParams } : undefined;
+    })
+    .filter((sup): sup is { years: number[]; estatParams: EstatQueryParams } => sup !== undefined);
+  if (supplements.length > 0) ops.supplements = supplements;
+
   // 計算型 (fetcherKey:"calculated") — 分子・分母から作る値。
   // ★対象を calculated fetcher に絞るのは、estat metric の `calculation` が
   //   ランタイム正規化 (per_population 等) の設定であって app/stats の値を作らないため。
@@ -437,6 +450,20 @@ function parseOps(value: unknown): RecipeOps | undefined {
   }
 
   if (value.areaRemap === "kakei-capital-city") ops.areaRemap = "kakei-capital-city";
+
+  if (Array.isArray(value.supplements)) {
+    const supplements = value.supplements
+      .filter(isRecord)
+      .map((sup) => ({
+        years: Array.isArray(sup.years) ? sup.years.filter((y): y is number => typeof y === "number") : [],
+        estatParams: isRecord(sup.estatParams) ? buildEstatParams(sup.estatParams) : undefined,
+      }))
+      .filter(
+        (sup): sup is { years: number[]; estatParams: EstatQueryParams } =>
+          sup.years.length > 0 && sup.estatParams !== undefined,
+      );
+    if (supplements.length > 0) ops.supplements = supplements;
+  }
 
   if (isRecord(value.calc)) {
     const type = asCalcType(value.calc.type);

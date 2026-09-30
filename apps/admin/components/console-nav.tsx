@@ -1,94 +1,28 @@
 import { Suspense } from "react";
 
-import { ConsoleNavLinks, type NavGroup } from "./console-nav-links";
+import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader } from "@/components/ui/sidebar";
+import { NAV_GROUPS } from "@/lib/nav-registry";
+
+import { ConsoleNavLinks } from "./console-nav-links";
 import { ThemeToggle } from "./theme-toggle";
 
-/** 左サイドメニューの並び。見る目的でグループ化する (doboku-note admin と同型)。 */
-const NAV_GROUPS: readonly NavGroup[] = [
-  { title: null, items: [{ href: "/", label: "ホーム" }] },
-  {
-    title: "制作・投稿",
-    items: [
-      { href: "/content", label: "コンテンツ運用" },
-      { href: "/content/x", label: "X" },
-      { href: "/content/instagram", label: "Instagram" },
-      { href: "/content/note", label: "note" },
-      { href: "/content/kindle", label: "Kindle" },
-      { href: "/content/references", label: "参考文献管理" },
-      { href: "/sns", label: "SNS" },
-      { href: "/buzz-map", label: "バズ地図" },
-    ],
-  },
-  {
-    title: "資産",
-    items: [
-      { href: "/assets", label: "画像資産" },
-      { href: "/svg", label: "SVG カタログ" },
-    ],
-  },
-  {
-    title: "戦略・収益化",
-    items: [
-      { href: "/strategy/lanes", label: "戦略レーン" },
-      { href: "/strategy/policy", label: "共通方針" },
-      { href: "/strategy", label: "方針・事業計画" },
-      { href: "/research", label: "調査カタログ" },
-      { href: "/revenue", label: "収益 (AdSense)" },
-    ],
-  },
-  {
-    // doboku-note の「アフィリエイト」領域と同じ 3 画面 (成果 = results / 掲載先 = inventory / 提携・案件 = actions)
-    title: "アフィリエイト",
-    items: [
-      { href: "/affiliate", label: "成果" },
-      { href: "/affiliate/placements", label: "掲載先" },
-      { href: "/affiliate/programs", label: "提携・案件" },
-    ],
-  },
-  {
-    title: "品質・運用",
-    items: [
-      { href: "/dashboard", label: "プロジェクト現況" },
-      { href: "/quality", label: "品質" },
-      { href: "/ops", label: "CI・台帳" },
-    ],
-  },
-  {
-    title: "TODO",
-    items: [
-      { href: "/todo", label: "実行バックログ" },
-      { href: "/todo?f=weekly", label: "今週の計画" },
-      { href: "/todo?f=monthly", label: "今月の計画" },
-      { href: "/todo?f=improvements", label: "効果測定・改善" },
-    ],
-  },
-];
-
+/** 左サイドメニュー (shadcn/ui 公式の Sidebar)。メニューの定義は lib/nav-registry.ts。md 未満では Sheet になる。 */
 export function ConsoleSidebar() {
   return (
-    <aside className="sticky top-0 flex h-screen w-44 shrink-0 flex-col gap-6 overflow-y-auto border-r border-console-border bg-console-card px-2 py-4 sm:w-60 sm:px-3 sm:py-5">
-      <div className="px-3">
-        <span className="block text-sm font-bold leading-tight tracking-tight text-console-fg">
-          stats47
-        </span>
-        <span className="block text-xs text-console-muted">
-          管理コンソール
-        </span>
-        <span className="mt-1 block text-[11px] text-console-muted/70">
-          local · :4747
-        </span>
-      </div>
-
-      <Suspense fallback={<div className="h-64" aria-hidden="true" />}>
-        <ConsoleNavLinks groups={NAV_GROUPS} />
-      </Suspense>
-
-      {/* spacer: テーマ切替を最下部へ落とす */}
-      <div className="flex-1" />
-
-      <div className="px-1 pb-1">
+    <Sidebar>
+      <SidebarHeader className="px-4 pt-5">
+        <span className="block text-sm font-bold leading-tight tracking-tight text-sidebar-foreground">stats47</span>
+        <span className="block text-xs text-muted-foreground">管理コンソール</span>
+        <span className="mt-1 block text-[11px] text-muted-foreground/70">local · :4747</span>
+      </SidebarHeader>
+      <SidebarContent>
+        <Suspense fallback={<div className="h-64" aria-hidden="true" />}>
+          <ConsoleNavLinks groups={NAV_GROUPS} />
+        </Suspense>
+      </SidebarContent>
+      <SidebarFooter className="px-3 pb-4">
         <ThemeToggle />
-      </div>
-    </aside>
+      </SidebarFooter>
+    </Sidebar>
   );
 }

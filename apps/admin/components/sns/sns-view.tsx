@@ -2,7 +2,9 @@
 
 import { useEffect, useMemo, useState } from "react";
 
-import { Button, Input, cn } from "@stats47/components";
+import { cn } from "@/lib/cn";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 import { apiGet, ApiError } from "@/lib/client/api-client";
 import { ErrorState, Loading } from "@/components/async-state";
@@ -194,7 +196,6 @@ export function SnsView({ initialPlatform = "" }: { initialPlatform?: string }) 
             type="button"
             size="sm"
             variant="outline"
-            className="h-8 text-xs"
             onClick={refreshAll}
           >
             再読込

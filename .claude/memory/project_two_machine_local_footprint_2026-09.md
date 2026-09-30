@@ -43,8 +43,8 @@ husky は両 OS で一度も走っていなかった、memory の symlink は Wi
 - 証拠の取り方: `~/.codex/logs_2.sqlite` を `node:sqlite` (Node 22) で読む。`target='codex_api::endpoint::responses_websocket'`
   の ERROR と `codex_core::responses_retry`。session の `task_complete.time_to_first_token_ms` で待ち時間が分かる。
 - Mac 側 f44ff75a0 (invalid transport で Codex 起動不能) は別症状。Windows でも `codex mcp list` / `codex doctor` は正常。
-- `~/.codex/config.toml` (git 外) で thread 起動ごとに失敗していた MCP 4 台 (notebooklm = Google 認証切れ、
-  cloudflare-graphql/observability = OAuth 未ログイン、cloudflare-api = env 未設定) を `enabled = false` にし、
+- `~/.codex/config.toml` (git 外) で thread 起動ごとに失敗していた MCP (notebooklm = Google 認証切れ、
+  cloudflare-api = env 未設定) を `enabled = false` にし、
   dotfiles `codex/host.windows.toml` にも同じ無効化を入れた (link.mjs は host セクションで丸ごと置換するので url も持たせる)。
 - **注意**: `bin/link.mjs` は base.toml の `model` / `model_reasoning_effort` で先頭スカラーを置き換えるので、
   アプリで選んだモデル (2026-09-17 時点 gpt-5.6-sol / xhigh) が gpt-6-astra / medium に戻る。実行前に base.toml を合わせる。

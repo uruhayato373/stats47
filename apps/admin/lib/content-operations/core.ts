@@ -33,6 +33,20 @@ export interface SourceKindleListing {
   kdpStatusCheckedAt?: string | null;
   epubPath: string;
   coverPath: string;
+  series?: string;
+  seriesLabel?: string;
+  coverTemplate?: string;
+  coverTemplateLabel?: string;
+  coverTheme?: string;
+  coverThemeLabel?: string;
+  coverPalette?: string;
+  coverDataLabels?: readonly string[];
+  coverBackgroundConcept?: string;
+  coverReviewStatus?: "needs-redesign" | "draft" | "approved";
+  coverBackgroundPath?: string;
+  hasCoverBackground?: boolean;
+  hasDraftCover?: boolean;
+  draftCoverPath?: string;
   hasEpub: boolean;
   hasCover: boolean;
   archiveVersion?: string | null;
@@ -142,6 +156,11 @@ function summarize(
 function kindleSeries(id: string): string {
   const match = id.match(/^K-(S\d)-/);
   return match?.[1] ?? "unknown";
+}
+
+function coverVersion(coverPath: string): string | null {
+  const normalized = coverPath.replaceAll("\\", "/");
+  return normalized.match(/\/([^/]+)\/cover\.(?:jpe?g|png)$/i)?.[1] ?? null;
 }
 
 function auditDuplicateIds(
@@ -317,7 +336,22 @@ export function buildContentOperations(
       id: listing.id,
       title: listing.title,
       subtitle: listing.subtitle ?? null,
-      series: kindleSeries(listing.id),
+      series: listing.series ?? kindleSeries(listing.id),
+      seriesLabel: listing.seriesLabel ?? listing.series ?? kindleSeries(listing.id),
+      coverTemplate: listing.coverTemplate ?? "unknown",
+      coverTemplateLabel: listing.coverTemplateLabel ?? listing.coverTemplate ?? "未分類",
+      coverTheme: listing.coverTheme ?? "unknown",
+      coverThemeLabel: listing.coverThemeLabel ?? listing.coverTheme ?? "未分類",
+      coverPalette: listing.coverPalette ?? "unknown",
+      coverDataLabels: [...(listing.coverDataLabels ?? [])],
+      coverBackgroundConcept: listing.coverBackgroundConcept ?? "",
+      coverReviewStatus: listing.coverReviewStatus ?? "needs-redesign",
+      coverBackgroundPath: listing.coverBackgroundPath ?? null,
+      hasCoverBackground: listing.hasCoverBackground ?? false,
+      hasDraftCover: listing.hasDraftCover ?? false,
+      draftCoverPath: listing.draftCoverPath ?? null,
+      coverPath: listing.coverPath,
+      coverVersion: listing.hasDraftCover ? "draft" : coverVersion(listing.coverPath),
       stage,
       listingStatus: listing.status,
       buildStatus: build?.status ?? null,

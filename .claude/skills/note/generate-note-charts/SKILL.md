@@ -104,6 +104,9 @@ import { generateLineSvg } from "@stats47/svg-builder";
 
 ### Phase 4: SVG → PNG 変換
 
+> SVG が正本で git に置く。PNG は再生成できる派生物なので **git に載せない** (`docs/31` の家計・koumuin 系列は gitignore)。
+> clone 直後や restore 後に PNG が無ければ `npm run note:images:regen -- --slug <slug>`。契約: `.claude/rules/note-image-assets.md`
+
 同梱の変換スクリプトを使用:
 
 ```bash

@@ -152,8 +152,6 @@ _Appended by improvement-triage 2026-07-03_
 - **Claude Code MCP状態**:
   - `chrome-devtools`: connected
   - `cloudflare-docs`: connected
-  - `cloudflare-observability`: Needs authentication
-  - `cloudflare-graphql`: Needs authentication
 
 #### Route別の再現値
 
@@ -198,7 +196,7 @@ _Appended by improvement-triage 2026-07-03_
 | `PERF-RANKING-PAYLOAD-01` | sidebar server選別、TopoJSON候補削減 | Client最大20件、HTML 50%以上削減、候補150KB以下 | R2 write前に承認 |
 | `PERF-AREA-DOM-01` | rail各12件制限 | DOM 70%以上削減、最大children解消 | なし。ローカル実装・検証まで進める |
 | `PERF-STATIC-CACHE-01` | `/_next/static/*` browser cache rule案 | `max-age=31536000, immutable`、304再検証なし | Cloudflare rule変更前に承認 |
-| `PERF-WORKER-P99-01` | route / binding別slow trace調査 | 支配routeを実測特定、またはsample不足を明記 | MCP認証不能または根拠不足ならコード変更しない |
+| `PERF-WORKER-P99-01` | route / binding別slow trace調査 | 支配routeを実測特定、またはsample不足を明記 | 根拠不足ならコード変更しない |
 | `A11Y-AREA-CONTRAST-01` | 男女KPI色のcontrast是正 | light/dark 4.5:1以上、当該Lighthouse違反0 | なし。ローカル実装・検証まで進める |
 
 #### 今回追加しない施策
@@ -216,8 +214,7 @@ _Appended by improvement-triage 2026-07-03_
 
 - **実装日**: 2026-08-05 (デプロイ前)
 - **環境**: 会社 Windows PC。dev サーバーは hook で機械ブロックされるため、検証は
-  unit test / type-check / build と**デプロイ後の本番実測**で行う。Chrome DevTools MCP と
-  Cloudflare MCP は本セッションに未ロード (`.mcp.json` 修正前に起動したため) で、
+  unit test / type-check / build と**デプロイ後の本番実測**で行う。Chrome DevTools MCP は本セッションに未ロード (`.mcp.json` 修正前に起動したため) で、
   after の trace 取得はデプロイ後の別セッションに残す。
 
 #### 変更内容と機械的検証
@@ -282,7 +279,7 @@ Cache Response Rule は同じ効果を外部設定として持つため、rollba
 | ID | 状態 |
 |---|---|
 | `PERF-RANKING-PAYLOAD-01` (TopoJSON 1.9MB の削減) | 未着手。sidebar 分のみ実装。別段階 |
-| `PERF-WORKER-P99-01` | **未着手**。Cloudflare MCP がこのセッションに未ロードのため read-only 調査ができない。推測でコードを変更しない |
+| `PERF-WORKER-P99-01` | **未着手**。route 別の内訳を未取得。推測でコードを変更しない |
 
 - **判定**: `effect/pending`。デプロイ前のため before/after の比較なし。
   デプロイ後に LCP (PSI)・ranking HTML byte・`/areas/13000` DOM・static asset のヘッダを実測して判定する。

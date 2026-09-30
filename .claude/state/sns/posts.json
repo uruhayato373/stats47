@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "SNS 投稿台帳 (完全DBレス doc12 Phase E)。SQLite から移行。書込専用運用ログ。store: .claude/scripts/lib/sns-posts-store.cjs",
-    "count": 870,
-    "nextId": 1056
+    "count": 873,
+    "nextId": 1059
   },
   "posts": [
     {
@@ -18846,9 +18846,9 @@
     },
     {
       "id": 981,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:17.951Z",
-      "updated_at": "2026-09-23T08:56:35.244Z",
+      "updated_at": "2026-09-27T18:42:38.401Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "ranking",
@@ -18858,13 +18858,15 @@
       "utm_url": "https://stats47.jp/ranking/room-utilization-rate?utm_source=threads&utm_medium=social&utm_campaign=room-utilization-rate&utm_content=question",
       "template": "question",
       "metric_keys": "room-utilization-rate",
-      "scheduled_at": "2026-09-27T01:40:00.000Z"
+      "scheduled_at": "2026-09-27T01:40:00.000Z",
+      "post_url": "https://www.threads.com/@stats47jp/post/Ddxc53MDqN6",
+      "posted_at": "2026-09-27T01:40:29.000Z"
     },
     {
       "id": 982,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:17.957Z",
-      "updated_at": "2026-09-23T08:56:46.926Z",
+      "updated_at": "2026-09-27T18:42:38.413Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "area",
@@ -18874,13 +18876,15 @@
       "utm_url": "https://stats47.jp/areas/04000?utm_source=threads&utm_medium=social&utm_campaign=area-04000&utm_content=area-profile",
       "template": "area-profile",
       "metric_keys": null,
-      "scheduled_at": "2026-09-27T08:20:00.000Z"
+      "scheduled_at": "2026-09-27T08:20:00.000Z",
+      "post_url": "https://www.threads.com/@stats47jp/post/DdyKtCaET_x",
+      "posted_at": "2026-09-27T08:20:41.000Z"
     },
     {
       "id": 983,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:17.963Z",
-      "updated_at": "2026-09-23T08:56:59.038Z",
+      "updated_at": "2026-09-28T20:54:41.947Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "ranking",
@@ -18890,13 +18894,15 @@
       "utm_url": "https://stats47.jp/ranking/daytime-population-ratio?utm_source=threads&utm_medium=social&utm_campaign=daytime-population-ratio&utm_content=question",
       "template": "question",
       "metric_keys": "daytime-population-ratio",
-      "scheduled_at": "2026-09-28T01:50:00.000Z"
+      "scheduled_at": "2026-09-28T01:50:00.000Z",
+      "post_url": "https://www.threads.com/@stats47jp/post/Dd0C45nkllM",
+      "posted_at": "2026-09-28T01:50:53.000Z"
     },
     {
       "id": 984,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:17.968Z",
-      "updated_at": "2026-09-23T08:57:11.356Z",
+      "updated_at": "2026-09-28T20:54:41.967Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "area",
@@ -18906,13 +18912,15 @@
       "utm_url": "https://stats47.jp/areas/05000?utm_source=threads&utm_medium=social&utm_campaign=area-05000&utm_content=area-profile",
       "template": "area-profile",
       "metric_keys": null,
-      "scheduled_at": "2026-09-28T08:40:00.000Z"
+      "scheduled_at": "2026-09-28T08:40:00.000Z",
+      "post_url": "https://www.threads.com/@stats47jp/post/Dd0xuCIDknQ",
+      "posted_at": "2026-09-28T08:40:05.000Z"
     },
     {
       "id": 985,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:17.974Z",
-      "updated_at": "2026-09-23T08:57:23.275Z",
+      "updated_at": "2026-09-29T19:43:03.750Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "ranking",
@@ -18922,13 +18930,15 @@
       "utm_url": "https://stats47.jp/ranking/wooden-housing-ratio?utm_source=threads&utm_medium=social&utm_campaign=wooden-housing-ratio&utm_content=question",
       "template": "question",
       "metric_keys": "wooden-housing-ratio",
-      "scheduled_at": "2026-09-29T01:30:00.000Z"
+      "scheduled_at": "2026-09-29T01:30:00.000Z",
+      "post_url": "https://www.threads.com/@stats47jp/post/Dd2lVBxkiLb",
+      "posted_at": "2026-09-29T01:30:18.000Z"
     },
     {
       "id": 986,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:17.979Z",
-      "updated_at": "2026-09-23T08:57:35.641Z",
+      "updated_at": "2026-09-29T19:43:03.763Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "area",
@@ -18938,7 +18948,9 @@
       "utm_url": "https://stats47.jp/areas/06000?utm_source=threads&utm_medium=social&utm_campaign=area-06000&utm_content=area-profile",
       "template": "area-profile",
       "metric_keys": null,
-      "scheduled_at": "2026-09-29T08:10:00.000Z"
+      "scheduled_at": "2026-09-29T08:10:00.000Z",
+      "post_url": "https://www.threads.com/@stats47jp/post/Dd3TIFHkasu",
+      "posted_at": "2026-09-29T08:10:29.000Z"
     },
     {
       "id": 987,
@@ -20023,6 +20035,42 @@
       "content_key": "01000",
       "post_url": "https://www.instagram.com/p/DdwPSPbm50A/",
       "posted_at": "2026-09-26T14:22:26Z"
+    },
+    {
+      "id": 1056,
+      "status": "posted",
+      "created_at": "2026-09-27T15:06:46.860Z",
+      "updated_at": "2026-09-27T15:06:46.860Z",
+      "platform": "instagram",
+      "post_type": "carousel",
+      "domain": "map-carousel",
+      "content_key": "miso-consumption-quantity",
+      "post_url": "https://www.instagram.com/p/Ddy5JqmIE_t/",
+      "posted_at": "2026-09-27T15:06:46Z"
+    },
+    {
+      "id": 1057,
+      "status": "posted",
+      "created_at": "2026-09-28T18:06:29.754Z",
+      "updated_at": "2026-09-28T18:06:29.754Z",
+      "platform": "instagram",
+      "post_type": "carousel",
+      "domain": "ranking-quiz",
+      "content_key": "side-job-rate",
+      "post_url": "https://www.instagram.com/p/Dd1yg5lmEk3/",
+      "posted_at": "2026-09-28T18:06:29Z"
+    },
+    {
+      "id": 1058,
+      "status": "posted",
+      "created_at": "2026-09-29T16:28:41.963Z",
+      "updated_at": "2026-09-29T16:28:41.963Z",
+      "platform": "instagram",
+      "post_type": "carousel",
+      "domain": "area-carousel",
+      "content_key": "47000",
+      "post_url": "https://www.instagram.com/p/Dd4MHf-Fe7i/",
+      "posted_at": "2026-09-29T16:28:41Z"
     }
   ],
   "nextId": 580,

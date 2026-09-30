@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-29",
+  "updated": "2026-09-29",
   "drafts": {
     "A-laborwage-commute-time-prefecture": {
       "vertical": "stats47-note",
@@ -185,6 +185,16 @@
       "vertical": "stats47-note",
       "r2_path": "note/stats47-note/d-kakei-category-dataset",
       "status": "draft"
+    },
+    "12-fiscal-peer-comparison": {
+      "vertical": "koumuin-estat-claude-code",
+      "r2_path": "note/koumuin-estat-claude-code/12-fiscal-peer-comparison",
+      "status": "ready-to-publish"
+    },
+    "13-fiscal-peer-no-code": {
+      "vertical": "koumuin-estat-claude-code",
+      "r2_path": "note/koumuin-estat-claude-code/13-fiscal-peer-no-code",
+      "status": "ready-to-publish"
     }
   }
 }

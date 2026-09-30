@@ -339,7 +339,18 @@ export function normalizeA8Csv(csvText, { reportKey, cfg, fetchedAt = null } = {
  * 両サイト共用プログラムはサイト別の内訳を持たないため、専用分を下限、共用込みを上限にする。
  * 専用分だけでサイト値を超えた場合、または共用込みでもサイト値に届かない場合だけ不整合とする。
  * 判定は呼び出し側（auditor）が行うため、ここでは差分を返すだけ。
+ *
+ * クリック数だけ許容差を持つ（2026-09-28 オーナー判断）。9 月の実測で専用 157 > サイト別 155 の 2 クリック差が出たが、
+ * A8 にサイト×プログラム明細が無く原因を特定できないため（backlog `A8-CROSSCHECK-EXCEED-01`）。
+ * 件数・金額は 1 でも超えたら超過のまま（成果の混入は許容しない）。
  */
+export const CLICK_EXCEED_TOLERANCE = { minClicks: 3, ratio: 0.02 };
+
+/** サイト別クリック数に対する許容差。max(3, ceil(site × 2%))。 */
+export function clickExceedTolerance(siteClicks) {
+  return Math.max(CLICK_EXCEED_TOLERANCE.minClicks, Math.ceil(siteClicks * CLICK_EXCEED_TOLERANCE.ratio));
+}
+
 export function crossCheckAgainstSite(siteRow, allowlistedRows, { sharedProgramIds = [] } = {}) {
   if (!siteRow) return { comparable: false, reason: "サイト別レポートが無い" };
   const sharedIds = new Set(sharedProgramIds);
@@ -358,7 +369,9 @@ export function crossCheckAgainstSite(siteRow, allowlistedRows, { sharedProgramI
     const upperBound = exclusive + shared;
     const picked = upperBound;
     deltas[f] = { site, picked, exclusive, shared, lowerBound, upperBound, delta: site == null ? null : picked - site };
-    if (site != null && lowerBound > site) exceeded = true;
+    const tolerance = f === "clicks" && site != null ? clickExceedTolerance(site) : 0;
+    if (tolerance > 0) deltas[f].tolerance = tolerance;
+    if (site != null && lowerBound - site > tolerance) exceeded = true;
     if (site != null && upperBound < site) hasShortfall = true;
   }
   // 不足（site > picked）= allowlist で説明できない対象サイトの活動＝**未登録プログラムの疑い**。

@@ -1,10 +1,95 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+/* ── Tailwind v4 (CSS-first) ──
+   旧 tailwind.config.ts の内容をここへ移した (2026-09-30)。doboku-note の admin-app と同じ構成
+   (公式 shadcn new-york-v4 の部品をそのまま使うため)。契約: .claude/rules/admin-ui.md */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* v3 互換: v4 の text-* は行高を単位なしの比率で持ち、子孫へ比率として継承される。v3 と同じ rem 値に戻す */
+@theme {
+  --text-xs--line-height: 1rem;
+  --text-sm--line-height: 1.25rem;
+  --text-base--line-height: 1.5rem;
+  --text-lg--line-height: 1.75rem;
+  --text-xl--line-height: 1.75rem;
+  --text-2xl--line-height: 2rem;
+  --text-3xl--line-height: 2.25rem;
+  --text-4xl--line-height: 2.5rem;
+}
+
+@theme {
+  /* console-*: 空白区切りの RGB チャンネル (--console-*) を参照する。alpha 修飾 (bg-console-bg/95) は v4 が
+     color-mix で処理するので、値は rgb(var(--…)) のままで効く。hex 直書きに戻さない (light/dark の切替が効かなくなる) */
+  --color-console-bg: rgb(var(--console-bg));
+  --color-console-card: rgb(var(--console-card));
+  --color-console-border: rgb(var(--console-border));
+  --color-console-fg: rgb(var(--console-fg));
+  --color-console-muted: rgb(var(--console-muted));
+  --color-console-accent: rgb(var(--console-accent));
+  --color-console-good: rgb(var(--console-good));
+  --color-console-warn: rgb(var(--console-warn));
+  --color-console-info: rgb(var(--console-info));
+  --color-console-bad: rgb(var(--console-bad));
+  --color-console-neutral: rgb(var(--console-neutral));
+
+  /* shadcn トークン。値は下の :root / .dark の CSS 変数 (console パレットへ割り当て済み) */
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-card-outline: var(--card-outline);
+
+  /* shadcn/ui 公式 Sidebar のトークン。管理画面のカード面 (console-card) をサイドバーの面にする */
+  --color-sidebar: rgb(var(--console-card));
+  --color-sidebar-foreground: rgb(var(--console-fg));
+  --color-sidebar-primary: hsl(var(--primary));
+  --color-sidebar-primary-foreground: hsl(var(--primary-foreground));
+  --color-sidebar-accent: rgb(var(--console-accent) / 0.15);
+  --color-sidebar-accent-foreground: rgb(var(--console-accent));
+  --color-sidebar-border: rgb(var(--console-border));
+  --color-sidebar-ring: hsl(var(--ring));
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-card: var(--card-radius);
+}
+
+/* v4 で既定が変わった 2 点を v3 に戻す (doboku-note admin-app と同じ):
+   border の既定色は currentcolor → gray-200、button の cursor は default → pointer */
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: rgb(229 231 235);
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
 
 /* ── テーマトークン ──
    既定はライト。ダークは `.dark` の 1 経路だけで表現する
-   (Tailwind の darkMode: ["class"] と揃える)。
+   (上の @custom-variant dark と揃える)。
    layout.tsx の head inline script が「保存値 or 既定ライト」を描画前に解決して
    .dark を付けるため、prefers-color-scheme のメディアクエリは持たない
    (同じパレットを 2 箇所に書くとドリフトするため)。
@@ -34,7 +119,7 @@
   --console-bad: 185 28 28;
   --console-neutral: 148 163 184;
 
-  /* shadcn トークン (@stats47/components の Button/Badge/Card/Dialog が参照)。
+  /* shadcn トークン (components/ui/* の公式部品が参照)。
      console パレットに合わせ、同等 primitive の再実装を避ける。 */
   --background: 220 37% 97%;
   --foreground: 219 43% 12%;
@@ -56,7 +141,7 @@
   --input: 218 25% 86%;
   --ring: 213 74% 47%;
   --radius: 0.5rem;
-  /* @stats47/components の Card 外枠 (CARD_SURFACE_CLASS)。管理画面は線ありの角丸カード。
+  /* Card 外枠の線 (--card-outline)。管理画面は線ありの角丸カード。
      --border は .dark で上書きされるので、線色は dark にも追従する */
   --card-radius: calc(var(--radius) - 4px);
   --card-outline: hsl(var(--border));
@@ -97,16 +182,20 @@
   --ring: 207 100% 63%;
 }
 
-body {
-  background: rgb(var(--console-bg));
-  color: rgb(var(--console-fg));
-  font-family:
-    -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
-    "Yu Gothic", "Segoe UI", sans-serif;
-  -webkit-font-smoothing: antialiased;
-}
+/* ★@layer base に入れる。v4 はユーティリティを @layer utilities に置くので、レイヤー外の自作 CSS は詳細度に関係なく勝つ
+   (`a { color: inherit }` が text-console-accent を上書きしてリンクが黒くなった。2026-09-30 実測) */
+@layer base {
+  body {
+    background: rgb(var(--console-bg));
+    color: rgb(var(--console-fg));
+    font-family:
+      -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN",
+      "Yu Gothic", "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
 
-a {
-  color: inherit;
-  text-decoration: none;
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
 }

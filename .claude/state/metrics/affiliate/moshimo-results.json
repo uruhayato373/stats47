@@ -1,22 +1,22 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-20T09:46:28.130Z",
+  "updatedAt": "2026-09-27T10:27:44.924Z",
   "source": {
     "asp": "moshimo",
     "site": "stats47",
     "siteId": "638943",
-    "url": "https://af.moshimo.com/af/shop/report/kpi/promotion?from_date=2026%2F08%2F17&to_date=2026%2F09%2F20&terminal_type=0&order=result_price_d&shop_site_id=638943"
+    "url": "https://af.moshimo.com/af/shop/report/kpi/promotion?from_date=2026%2F08%2F24&to_date=2026%2F09%2F27&terminal_type=0&order=result_price_d&shop_site_id=638943"
   },
   "period": {
-    "from": "2026-08-17",
-    "to": "2026-09-20",
+    "from": "2026-08-24",
+    "to": "2026-09-27",
     "days": 35
   },
   "coverage": {
     "complete": true,
     "approvedPrograms": 44,
-    "observedPrograms": 1,
-    "zeroFilledPrograms": 43
+    "observedPrograms": 3,
+    "zeroFilledPrograms": 41
   },
   "records": [
     {
@@ -36,14 +36,14 @@
       "programId": "55",
       "programRef": "moshimo:55",
       "programName": "楽天トラベルの予約申込 / 楽天グループ株式会社",
-      "impressions": 0,
-      "clicks": 0,
+      "impressions": 10,
+      "clicks": 1,
       "clickRevenueYen": 0,
       "conversions": 0,
       "grossRevenueYen": 0,
       "approved": 0,
       "revenueYen": 0,
-      "observedInReport": false
+      "observedInReport": true
     },
     {
       "programId": "1271",
@@ -387,14 +387,14 @@
       "programId": "6722",
       "programRef": "moshimo:6722",
       "programName": "テックゴー｜IT転職エージェントの無料キャリア面談",
-      "impressions": 0,
+      "impressions": 1,
       "clicks": 0,
       "clickRevenueYen": 0,
       "conversions": 0,
       "grossRevenueYen": 0,
       "approved": 0,
       "revenueYen": 0,
-      "observedInReport": false
+      "observedInReport": true
     },
     {
       "programId": "7059",
@@ -478,8 +478,8 @@
       "programId": "7494",
       "programRef": "moshimo:7494",
       "programName": "AI鬼管理｜Claude Code活用の業務自動化トレーニングの無料申込完了",
-      "impressions": 4,
-      "clicks": 1,
+      "impressions": 11,
+      "clicks": 0,
       "clickRevenueYen": 0,
       "conversions": 0,
       "grossRevenueYen": 0,

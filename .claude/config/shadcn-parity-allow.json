@@ -1,0 +1,23 @@
+{
+  "_comment": "check-shadcn-parity の例外。管理画面の UI 部品 (apps/admin/components/ui/*.tsx) は shadcn/ui 公式 (.claude/config/shadcn-reference/*.tsx) と同じクラスにするのが原則で、ここに書いた差だけを許す。1 件ごとに理由を書く。登録した差が無くなったら (公式へ寄せたら) 検査が知らせるので行を消す (ADMIN-UI-SHADCN-01)。",
+  "components": {
+    "badge": {
+      "cva:badgeVariants:variant.success": {
+        "extra": ["[a&]:hover:bg-console-good/20", "bg-console-good/10", "text-console-good"],
+        "reason": "公式には状態を表す variant が無い。管理画面の「済・正常・確定」を destructive / outline と区別して出すために足した。色は console-good (light/dark でコントラスト AA を実測して選定済み)"
+      },
+      "cva:badgeVariants:variant.danger": {
+        "extra": ["[a&]:hover:bg-console-bad/20", "bg-console-bad/10", "text-console-bad"],
+        "reason": "同上。「失敗・不健全・止まっている」用。公式の destructive (塗りつぶしの赤) は一覧に並ぶと主張が強すぎるため、success/warning/info と同じ淡い面にそろえる。色は console-bad"
+      },
+      "cva:badgeVariants:variant.info": {
+        "extra": ["[a&]:hover:bg-console-info/20", "bg-console-info/10", "text-console-info"],
+        "reason": "同上。「情報・進行中・参考」用 (旧 ops/primitives の Badge tone=info の置き換え先)。色は console-info"
+      },
+      "cva:badgeVariants:variant.warning": {
+        "extra": ["[a&]:hover:bg-console-warn/20", "bg-console-warn/10", "text-console-warn"],
+        "reason": "同上。「一部・暫定・未実施・不足あり」用。色は console-warn"
+      }
+    }
+  }
+}

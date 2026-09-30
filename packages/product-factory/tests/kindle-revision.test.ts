@@ -4,6 +4,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import JSZip from "jszip";
 import type { KindleBook } from "../src/channels/kindle/types";
+import { coverDesignForBook } from "../src/channels/kindle/cover-design";
 
 const mocked = vi.hoisted(() => ({ sections: vi.fn(), blog: vi.fn() }));
 vi.mock("../src/channels/kindle/ranking-databook", () => ({
@@ -20,6 +21,7 @@ const book: KindleBook = {
   series: "S2-theme-databook",
   title: "検証本",
   concept: "検証",
+  coverDesign: coverDesignForBook("K-S2-01"),
   author: "stats47",
   priceYen: 500,
   keywords: ["統計"],

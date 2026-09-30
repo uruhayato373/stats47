@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640">
+  <style>text{font-family:'Hiragino Kaku Gothic ProN','Yu Gothic','Noto Sans JP',sans-serif;}</style>
+  <rect width="1280" height="640" fill="#ffffff"/>
+  <text x="640" y="62" text-anchor="middle" font-size="30" font-weight="800" fill="#0f172a">将来負担比率の「－」の扱いで、同規模中央値が約 4 倍変わる</text>
+  <text x="640" y="100" text-anchor="middle" font-size="19" fill="#475569">人口約 10 万人の市と、人口 ±20% の市 117 市・2022 年度</text>
+
+  <!-- 目盛り: 1% = 10px、基線 y=520 -->
+  <line x1="200" y1="520" x2="1080" y2="520" stroke="#cbd5e1" stroke-width="2"/>
+
+  <rect x="330" y="202" width="220" height="318" rx="6" fill="#ef4444"/>
+  <text x="440" y="186" text-anchor="middle" font-size="40" font-weight="800" fill="#b91c1c">31.8%</text>
+  <text x="440" y="556" text-anchor="middle" font-size="21" font-weight="700" fill="#0f172a">「－」を欠損として除外</text>
+  <text x="440" y="584" text-anchor="middle" font-size="17" fill="#475569">66 市で計算（誤り）</text>
+
+  <rect x="730" y="439" width="220" height="81" rx="6" fill="#16a34a"/>
+  <text x="840" y="423" text-anchor="middle" font-size="40" font-weight="800" fill="#15803d">8.1%</text>
+  <text x="840" y="556" text-anchor="middle" font-size="21" font-weight="700" fill="#0f172a">「－」を負担なし＝ 0% で含める</text>
+  <text x="840" y="584" text-anchor="middle" font-size="17" fill="#475569">117 市で計算（正しい）</text>
+
+  <text x="1240" y="625" text-anchor="end" font-size="14" fill="#94a3b8">出典: e-Stat「社会・人口統計体系」0000020204 D2212・0000020201 A1101（2026-09-29 取得）</text>
+</svg>

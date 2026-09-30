@@ -2,11 +2,13 @@
 
 import { useState } from "react";
 
-import { Badge, cn } from "@stats47/components";
+import { cn } from "@/lib/cn";
+import { Badge } from "@/components/ui/badge";
 
 import { MediaPreview } from "@/components/media-preview";
 import type { PostDTO } from "@/lib/contracts/types";
 
+import { Card } from "@/components/ui/card";
 type ExtraItem = Record<string, unknown> & {
   id?: null;
   platform: string;
@@ -58,12 +60,12 @@ export function PostCard({ item }: { item: GalleryItem }) {
   const isSquareRankingMap =
     item.domain === "ranking" && String(item.media_path || "").includes("choropleth-map");
   const mediaAspect = usesMapFeedAspect
-    ? "aspect-[4/5]"
+    ? "aspect-4/5"
     : isSquareRankingMap
       ? "aspect-square"
       : item.domain === "ranking"
-        ? "aspect-[240/101]"
-        : "aspect-[40/21]";
+        ? "aspect-240/101"
+        : "aspect-40/21";
   const mediaCandidates = ((item.media_candidates ?? []) as Array<{
     url: string | null;
     source: string;
@@ -84,7 +86,7 @@ export function PostCard({ item }: { item: GalleryItem }) {
       : "-";
 
   return (
-    <article className="flex flex-col overflow-hidden rounded-lg border border-console-border bg-console-card">
+    <Card className="flex-col gap-0 overflow-hidden py-0">
       <div className="relative">
         <MediaPreview
           candidates={mediaCandidates}
@@ -183,6 +185,6 @@ export function PostCard({ item }: { item: GalleryItem }) {
           </p>
         ) : null}
       </div>
-    </article>
+    </Card>
   );
 }

@@ -1,6 +1,8 @@
 import { num, statusBadgeClass } from "./format";
 import { ProgressBar } from "./progress-bar";
 
+import { Cell, DataTable, Row, TableBody, TableFrame } from "@/components/admin-ui";
+import { Card, CardContent } from "@/components/ui/card";
 type Wrapped<T> = T | { error: string };
 
 function hasError(v: unknown): v is { error: string } {
@@ -10,12 +12,12 @@ function hasError(v: unknown): v is { error: string } {
 function QueueCard({ title, fresh, children }: { title: string; fresh?: string; children: React.ReactNode }) {
   return (
     // min-w-0: grid item の automatic minimum size を殺し、内側 overflow-x-auto を効かせる (390px 対策)
-    <div className="min-w-0 rounded-lg border border-console-border bg-console-card p-3.5">
+    <Card className="min-w-0 gap-0 py-3.5"><CardContent className="px-3.5">
       <h3 className="m-0 text-[13px] font-semibold text-console-fg">
         {title} {fresh ? <span className="ml-1 text-[10px] font-normal text-console-muted">({fresh})</span> : null}
       </h3>
       <div className="mt-2">{children}</div>
-    </div>
+    </CardContent></Card>
   );
 }
 
@@ -85,9 +87,9 @@ export function QueuesSection(d: QueuesData) {
       >
         <ProgressBar
           parts={[
-            { n: s.done, color: "rgb(var(--console-good))" },
-            { n: s.inProgress, color: "rgb(var(--console-info))" },
-            { n: s.pending, color: "rgb(var(--console-neutral))" },
+            { n: s.done, tone: "good" },
+            { n: s.inProgress, tone: "info" },
+            { n: s.pending, tone: "neutral" },
           ]}
         />
         <div className="text-[12px] text-console-muted">
@@ -95,28 +97,17 @@ export function QueuesSection(d: QueuesData) {
         </div>
         {top.length > 0 ? (
           // カード内テーブルは overflow-x-auto でラップ (390px で body を押し出さない)
-          <div className="mt-2 overflow-x-auto">
-          <table className="w-full text-xs">
-            <thead>
-              <tr className="text-console-muted">
-                <th className="text-left font-medium">must-fix top</th>
-                <th className="text-left font-medium">blocker</th>
-                <th className="text-left font-medium">imp</th>
-              </tr>
-            </thead>
-            <tbody>
+          <DataTable columns={["must-fix top", "blocker", "imp"]}>
               {top.slice(0, 5).map((e, i) => (
-                <tr key={i} className="border-t border-console-border/50">
-                  <td className="max-w-[220px] truncate py-1" title={e.slug}>
+                <Row key={i}>
+                  <Cell className="max-w-[220px] truncate" title={e.slug}>
                     {e.slug}
-                  </td>
-                  <td className="py-1">{e.blockers}</td>
-                  <td className="py-1">{num(e.impressions)}</td>
-                </tr>
+                  </Cell>
+                  <Cell>{e.blockers}</Cell>
+                  <Cell>{num(e.impressions)}</Cell>
+                </Row>
               ))}
-            </tbody>
-          </table>
-          </div>
+            </DataTable>
         ) : null}
         <div className="mt-1.5 text-[10px] text-console-muted">
           払い出し: <code className="rounded bg-console-bg px-1">build-remediation-queue.mjs --next N</code> →{" "}
@@ -134,8 +125,8 @@ export function QueuesSection(d: QueuesData) {
       <QueueCard key="ai-content" title="🤖 ランキング ai-content" fresh={(d.aiContent.generatedAt ?? "").slice(0, 10)}>
         <ProgressBar
           parts={[
-            { n: s.done, color: "rgb(var(--console-good))" },
-            { n: s.needsRegen, color: "rgb(var(--console-neutral))" },
+            { n: s.done, tone: "good" },
+            { n: s.needsRegen, tone: "neutral" },
           ]}
         />
         <div className="text-[12px] text-console-muted">
@@ -152,28 +143,17 @@ export function QueuesSection(d: QueuesData) {
           <div className="mt-1 text-[11px] text-console-muted">Gemini 定期 run は未観測</div>
         )}
         {top.length > 0 ? (
-          <div className="mt-2 overflow-x-auto">
-          <table className="w-full text-xs">
-            <thead>
-              <tr className="text-console-muted">
-                <th className="text-left font-medium">needs-regen top (imp順)</th>
-                <th className="text-left font-medium">imp</th>
-                <th className="text-left font-medium">tier</th>
-              </tr>
-            </thead>
-            <tbody>
+          <DataTable columns={["needs-regen top (imp順)", "imp", "tier"]}>
               {top.slice(0, 5).map((e, i) => (
-                <tr key={i} className="border-t border-console-border/50">
-                  <td className="max-w-[220px] truncate py-1" title={e.rankingKey}>
+                <Row key={i}>
+                  <Cell className="max-w-[220px] truncate" title={e.rankingKey}>
                     {e.rankingKey}
-                  </td>
-                  <td className="py-1">{num(e.impressions)}</td>
-                  <td className="py-1">{e.reviewTier ?? "-"}</td>
-                </tr>
+                  </Cell>
+                  <Cell>{num(e.impressions)}</Cell>
+                  <Cell>{e.reviewTier ?? "-"}</Cell>
+                </Row>
               ))}
-            </tbody>
-          </table>
-          </div>
+            </DataTable>
         ) : null}
         <div className="mt-1.5 text-[10px] text-console-muted">
           定期量産: <code className="rounded bg-console-bg px-1">ai-content-gemini-daily.yml</code>・手動是正候補 {s.manualEscalationTier ?? 30}件
@@ -201,26 +181,16 @@ export function QueuesSection(d: QueuesData) {
           </div>
         ) : null}
         {top.length > 0 ? (
-          <div className="mt-2 overflow-x-auto">
-          <table className="w-full text-xs">
-            <thead>
-              <tr className="text-console-muted">
-                <th className="text-left font-medium">top</th>
-                <th className="text-left font-medium">型</th>
-              </tr>
-            </thead>
-            <tbody>
+          <DataTable columns={["top", "型"]}>
               {top.slice(0, 5).map((e, i) => (
-                <tr key={i} className="border-t border-console-border/50">
-                  <td className="max-w-[260px] truncate py-1" title={e.label}>
+                <Row key={i}>
+                  <Cell className="max-w-[260px] truncate" title={e.label}>
                     {e.label}
-                  </td>
-                  <td className="py-1">{e.archetype}</td>
-                </tr>
+                  </Cell>
+                  <Cell>{e.archetype}</Cell>
+                </Row>
               ))}
-            </tbody>
-          </table>
-          </div>
+            </DataTable>
         ) : null}
       </QueueCard>,
     );
@@ -273,25 +243,21 @@ export function QueuesSection(d: QueuesData) {
     const list = d.experiments.experiments ?? [];
     cards.push(
       <QueueCard key="experiments" title="🧪 実験 (PDCA)">
-        <div className="overflow-x-auto">
-        <table className="w-full text-xs">
-          <tbody>
+        <TableFrame><TableBody>
             {list.map((e) => (
-              <tr key={e.id}>
-                <td className="whitespace-nowrap py-1 pr-2">{e.id}</td>
-                <td className="max-w-[240px] truncate py-1 pr-2" title={e.title}>
+              <Row key={e.id}>
+                <Cell nowrap>{e.id}</Cell>
+                <Cell className="max-w-[240px] truncate" title={e.title}>
                   {e.title}
-                </td>
-                <td className="py-1">
+                </Cell>
+                <Cell>
                   <span className={`rounded-full border px-2 py-0.5 text-[10px] ${statusBadgeClass(e.status)}`}>
                     {e.status}
                   </span>
-                </td>
-              </tr>
+                </Cell>
+              </Row>
             ))}
-          </tbody>
-        </table>
-        </div>
+          </TableBody></TableFrame>
       </QueueCard>,
     );
   }

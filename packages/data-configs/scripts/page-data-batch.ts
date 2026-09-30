@@ -43,6 +43,7 @@ import {
 import { classifyEmptyOutcome } from "../src/expected-empty.js";
 import { applyValueScale } from "../src/money-unit.js";
 import { fillMissingTimeFromSurveyDate } from "../src/estat-time.js";
+import { mergeSupplementalValues } from "../src/supplemental-values.js";
 import {
   combineLinear,
   ratioPercent,
@@ -678,6 +679,16 @@ function isCityCode5(code: string): boolean {
 }
 
 /**
+ * 市区町村として取り込むコードか。5 桁の形式に加えて、現行の市区町村マスタにあることを要求する。
+ * 国勢調査の「2000年市区町村含む」表は合併前の旧町村 (「（旧：家島町）」等) を別コードで返し、
+ * 形式だけでは現行と区別できない (2026-09-30 実測: 0004065882 の市区町村 3,736 = 現行 1,913 +
+ * 旧 1,823、マスタとの重複 0。既存 cities.json 39 指標 816,460 行にマスタ外コードは 0)。
+ */
+export function isIngestableCityCode(code: string, currentCities: ReadonlyMap<string, string>): boolean {
+  return isCityCode5(code) && currentCities.has(code);
+}
+
+/**
  * 社会・人口統計体系: 都道府県表 statsDataId → 市区町村表 statsDataId を解決。
  *
  * metric は pref 表 (00000101xx / 00000102xx) のみを source に持つため、city データは
@@ -848,7 +859,7 @@ function shapeForCity(config: MetricConfig, values: EstatValue[]) {
   const masters = loadAreaMasters();
   const scale = valueScaleOf(config);
   const rows: ShapedRow[] = values
-    .filter((v) => isCityCode5(v["@area"]) && inYearRange(v["@time"].slice(0, 4), config))
+    .filter((v) => isIngestableCityCode(v["@area"], masters.city) && inYearRange(v["@time"].slice(0, 4), config))
     .map((v) => {
       const yearCode = v["@time"].slice(0, 4);
       return {
@@ -958,6 +969,56 @@ async function readPublishedCoverage(
   }
 }
 
+/**
+ * `supplementalSources` の年を別表から取り、主出典の取得結果へ合流させる。
+ * 県と市で同じ補完表を使うので、1 回の processOne の中では取得を共有する。
+ */
+async function applySupplements(
+  appId: string,
+  config: MetricConfig,
+  fetched: EstatFetchResult,
+  cache: Map<string, Promise<EstatFetchResult>>,
+  notes: string[],
+  entity: "prefecture" | "city",
+): Promise<EstatFetchResult> {
+  const supplements = config.supplementalSources ?? [];
+  if (supplements.length === 0) return fetched;
+
+  const batches = await Promise.all(
+    supplements.map(async (s) => {
+      const outOfRange = s.years.filter((y) => !inYearRange(String(y), config));
+      if (outOfRange.length > 0) {
+        throw new Error(
+          `${config.key}: supplementalSources の年 ${outOfRange.join(",")} が years に含まれていない`,
+        );
+      }
+      const cacheKey = JSON.stringify(s.source);
+      if (!cache.has(cacheKey)) cache.set(cacheKey, fetchEstatData(appId, { ...s.source }));
+      const result = await cache.get(cacheKey)!;
+      return { years: s.years, values: result.values, raw: result.raw };
+    }),
+  );
+
+  const merged = mergeSupplementalValues(fetched.values, batches);
+  notes.push(`${entity}-supplement=${merged.suppliedYears.join("|") || "none"}`);
+  if (merged.overlapYears.length > 0) {
+    console.warn(
+      `  [supplement-overlap] ${config.key} ${entity}: 主出典も ${merged.overlapYears.join(",")} 年を持つ。` +
+        `値を確かめて supplementalSources から外す`,
+    );
+  }
+  return {
+    values: merged.values,
+    raw: batches.reduce(
+      (acc, b) => ({
+        totalNumber: acc.totalNumber + b.raw.totalNumber,
+        toNumber: acc.toNumber + b.raw.toNumber,
+      }),
+      fetched.raw,
+    ),
+  };
+}
+
 export async function processOne(
   config: MetricConfig,
   appId: string,
@@ -1017,6 +1078,7 @@ export async function processOne(
     let softEmpty = false;
     let hardShape = false;
     let softShape = false;
+    const supplementCache = new Map<string, Promise<EstatFetchResult>>();
 
     /**
      * 形状 (重複行 / 打ち切り / 単位と値の矛盾 / 県のカバレッジ) を判定し、書いてよいかを返す。
@@ -1139,7 +1201,9 @@ export async function processOne(
     }
 
     if (wantPref) {
-      const fetched = await fetchEstatData(appId, src);
+      const fetched = await applySupplements(
+        appId, config, await fetchEstatData(appId, src), supplementCache, notes, "prefecture",
+      );
       const values =
         config.source.kind === "kakei-chousa" ? remapKakeiAreas(fetched.values) : fetched.values;
       const payload = shapeForPrefecture(config, values);
@@ -1179,6 +1243,7 @@ export async function processOne(
             });
           }
         }
+        fetched = await applySupplements(appId, config, fetched, supplementCache, notes, "city");
         const values = fetched.values;
         const payload = shapeForCity(config.citySource ? { ...config, source: config.citySource } : config, values);
         const notEmpty = await gateEmpty("city", values.length, payload.rows.length, "cities.json");
@@ -1289,6 +1354,8 @@ async function main() {
       switch (result.status) {
         case "ok":
           ok++;
+          // dry-run は書き込まないので、何が取れたか (行数・補完年) をここでしか確かめられない
+          if (args.dryRun) console.log(`  [ok] ${result.key}: ${result.message}`);
           if (ok % 20 === 0) console.log(`  ok=${ok} fail=${fail} skip=${skip} empty=${empty} shape=${shape} remaining=${queue.length}`);
           break;
         case "empty-allowed":

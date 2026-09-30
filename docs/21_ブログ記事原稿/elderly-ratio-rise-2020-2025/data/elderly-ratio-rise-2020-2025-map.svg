@@ -1,0 +1,414 @@
+<!-- data-source: elderly-ratio-rise-2020-2025-map.json | generated: 2026-09-30T01:50:11.007Z -->
+<svg width="720" height="720" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 720" role="img" aria-label="高齢化率の上昇幅（2020→2025年）">
+  <title>高齢化率の上昇幅（2020→2025年）</title>
+  <desc>65歳以上人口割合の差</desc>
+  <text x="22" y="46" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" font-size="19" font-weight="bold" fill="#6e7d94">高齢化率の上昇幅（2020→2025年）</text>
+  <text x="22" y="66" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" font-size="12" fill="#6e7d94">65歳以上人口割合の差</text>
+  <rect x="22" y="113" width="15" height="15" rx="2" fill="rgb(103, 0, 13)" stroke="#ffffff" stroke-width="1"/>
+  <text x="46" y="126" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" font-size="17" font-weight="600" fill="#6e7d94">1. 青森県</text>
+  <text x="176.5" y="126" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" font-size="17" font-weight="700" fill="#6e7d94" text-anchor="end">2.54</text>
+  <text x="181.5" y="126" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" font-size="13" fill="#6e7d94">ポイント</text>
+  <rect x="22" y="143" width="15" height="15" rx="2" fill="rgb(108, 1, 14)" stroke="#ffffff" stroke-width="1"/>
+  <text x="46" y="156" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" font-size="17" font-weight="600" fill="#6e7d94">2. 秋田県</text>
+  <text x="176.5" y="156" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" font-size="17" font-weight="700" fill="#6e7d94" text-anchor="end">2.51</text>
+  <text x="181.5" y="156" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" font-size="13" fill="#6e7d94">ポイント</text>
+  <rect x="22" y="173" width="15" height="15" rx="2" fill="rgb(108, 1, 14)" stroke="#ffffff" stroke-width="1"/>
+  <text x="46" y="186" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" font-size="17" font-weight="600" fill="#6e7d94">2. 福島県</text>
+  <text x="176.5" y="186" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" font-size="17" font-weight="700" fill="#6e7d94" text-anchor="end">2.51</text>
+  <text x="181.5" y="186" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" font-size="13" fill="#6e7d94">ポイント</text>
+  <g aria-label="群馬県 1.27ポイント">
+    <title>群馬県：1.27ポイント</title>
+    <rect x="579.0" y="327.0" width="39" height="39" rx="3" fill="rgb(247, 93, 67)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="598.5" y="346.0" font-size="11" font-weight="700">群馬</tspan>
+      <tspan x="598.5" y="356.5" font-size="9" font-weight="600">1.27</tspan>
+    </text>
+  </g>
+  <g aria-label="埼玉県 0.63ポイント">
+    <title>埼玉県：0.63ポイント</title>
+    <rect x="621.0" y="369.0" width="39" height="39" rx="3" fill="rgb(252, 171, 143)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="640.5" y="388.0" font-size="11" font-weight="700">埼玉</tspan>
+      <tspan x="640.5" y="398.5" font-size="9" font-weight="600">0.63</tspan>
+    </text>
+  </g>
+  <g aria-label="千葉県 0.81ポイント">
+    <title>千葉県：0.81ポイント</title>
+    <rect x="663.0" y="369.0" width="39" height="81" rx="3" fill="rgb(252, 150, 119)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="682.5" y="409.0" font-size="11" font-weight="700">千葉</tspan>
+      <tspan x="682.5" y="419.5" font-size="9" font-weight="600">0.81</tspan>
+    </text>
+  </g>
+  <g aria-label="東京都 0.02ポイント">
+    <title>東京都：0.02ポイント</title>
+    <rect x="621.0" y="411.0" width="39" height="39" rx="3" fill="rgb(254, 232, 222)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="640.5" y="430.0" font-size="11" font-weight="700">東京</tspan>
+      <tspan x="640.5" y="440.5" font-size="9" font-weight="600">0.02</tspan>
+    </text>
+  </g>
+  <g aria-label="神奈川県 0.54ポイント">
+    <title>神奈川県：0.54ポイント</title>
+    <rect x="621.0" y="453.0" width="39" height="39" rx="3" fill="rgb(252, 182, 156)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="640.5" y="472.0" font-size="11" font-weight="700">神奈川</tspan>
+      <tspan x="640.5" y="482.5" font-size="9" font-weight="600">0.54</tspan>
+    </text>
+  </g>
+  <g aria-label="新潟県 1.66ポイント">
+    <title>新潟県：1.66ポイント</title>
+    <rect x="537.0" y="285.0" width="81" height="39" rx="3" fill="rgb(223, 45, 38)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#f5f8fc" text-anchor="middle" paint-order="stroke" stroke="rgba(16,28,46,.92)" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="577.5" y="304.0" font-size="11" font-weight="700">新潟</tspan>
+      <tspan x="577.5" y="314.5" font-size="9" font-weight="600">1.66ポイント</tspan>
+    </text>
+  </g>
+  <g aria-label="富山県 0.67ポイント">
+    <title>富山県：0.67ポイント</title>
+    <rect x="495.0" y="285.0" width="39" height="39" rx="3" fill="rgb(252, 166, 138)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="514.5" y="304.0" font-size="11" font-weight="700">富山</tspan>
+      <tspan x="514.5" y="314.5" font-size="9" font-weight="600">0.67</tspan>
+    </text>
+  </g>
+  <g aria-label="石川県 1.06ポイント">
+    <title>石川県：1.06ポイント</title>
+    <rect x="453.0" y="285.0" width="39" height="39" rx="3" fill="rgb(251, 120, 89)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="472.5" y="304.0" font-size="11" font-weight="700">石川</tspan>
+      <tspan x="472.5" y="314.5" font-size="9" font-weight="600">1.06</tspan>
+    </text>
+  </g>
+  <g aria-label="福井県 1.25ポイント">
+    <title>福井県：1.25ポイント</title>
+    <rect x="453.0" y="327.0" width="39" height="39" rx="3" fill="rgb(248, 96, 69)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="472.5" y="346.0" font-size="11" font-weight="700">福井</tspan>
+      <tspan x="472.5" y="356.5" font-size="9" font-weight="600">1.25</tspan>
+    </text>
+  </g>
+  <g aria-label="山梨県 1.67ポイント">
+    <title>山梨県：1.67ポイント</title>
+    <rect x="579.0" y="369.0" width="39" height="39" rx="3" fill="rgb(222, 44, 38)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#f5f8fc" text-anchor="middle" paint-order="stroke" stroke="rgba(16,28,46,.92)" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="598.5" y="388.0" font-size="11" font-weight="700">山梨</tspan>
+      <tspan x="598.5" y="398.5" font-size="9" font-weight="600">1.67</tspan>
+    </text>
+  </g>
+  <g aria-label="長野県 1.31ポイント">
+    <title>長野県：1.31ポイント</title>
+    <rect x="537.0" y="327.0" width="39" height="81" rx="3" fill="rgb(246, 88, 63)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="556.5" y="367.0" font-size="11" font-weight="700">長野</tspan>
+      <tspan x="556.5" y="377.5" font-size="9" font-weight="600">1.31</tspan>
+    </text>
+  </g>
+  <g aria-label="岐阜県 1.28ポイント">
+    <title>岐阜県：1.28ポイント</title>
+    <rect x="495.0" y="327.0" width="39" height="81" rx="3" fill="rgb(247, 92, 66)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="514.5" y="367.0" font-size="11" font-weight="700">岐阜</tspan>
+      <tspan x="514.5" y="377.5" font-size="9" font-weight="600">1.28</tspan>
+    </text>
+  </g>
+  <g aria-label="静岡県 1.55ポイント">
+    <title>静岡県：1.55ポイント</title>
+    <rect x="537.0" y="411.0" width="81" height="39" rx="3" fill="rgb(233, 57, 45)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#f5f8fc" text-anchor="middle" paint-order="stroke" stroke="rgba(16,28,46,.92)" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="577.5" y="430.0" font-size="11" font-weight="700">静岡</tspan>
+      <tspan x="577.5" y="440.5" font-size="9" font-weight="600">1.55ポイント</tspan>
+    </text>
+  </g>
+  <g aria-label="愛知県 0.61ポイント">
+    <title>愛知県：0.61ポイント</title>
+    <rect x="495.0" y="411.0" width="39" height="39" rx="3" fill="rgb(252, 174, 146)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="514.5" y="430.0" font-size="11" font-weight="700">愛知</tspan>
+      <tspan x="514.5" y="440.5" font-size="9" font-weight="600">0.61</tspan>
+    </text>
+  </g>
+  <g aria-label="三重県 1.13ポイント">
+    <title>三重県：1.13ポイント</title>
+    <rect x="453.0" y="411.0" width="39" height="81" rx="3" fill="rgb(250, 111, 81)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="472.5" y="451.0" font-size="11" font-weight="700">三重</tspan>
+      <tspan x="472.5" y="461.5" font-size="9" font-weight="600">1.13</tspan>
+    </text>
+  </g>
+  <g aria-label="滋賀県 1.13ポイント">
+    <title>滋賀県：1.13ポイント</title>
+    <rect x="453.0" y="369.0" width="39" height="39" rx="3" fill="rgb(250, 111, 81)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="472.5" y="388.0" font-size="11" font-weight="700">滋賀</tspan>
+      <tspan x="472.5" y="398.5" font-size="9" font-weight="600">1.13</tspan>
+    </text>
+  </g>
+  <g aria-label="京都府 0.58ポイント">
+    <title>京都府：0.58ポイント</title>
+    <rect x="369.0" y="369.0" width="81" height="39" rx="3" fill="rgb(252, 177, 150)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="409.5" y="388.0" font-size="11" font-weight="700">京都</tspan>
+      <tspan x="409.5" y="398.5" font-size="9" font-weight="600">0.58ポイント</tspan>
+    </text>
+  </g>
+  <g aria-label="大阪府 -0.18ポイント">
+    <title>大阪府：-0.18ポイント</title>
+    <rect x="369.0" y="411.0" width="39" height="39" rx="3" fill="rgb(255, 245, 240)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="388.5" y="430.0" font-size="11" font-weight="700">大阪</tspan>
+      <tspan x="388.5" y="440.5" font-size="9" font-weight="600">-0.18</tspan>
+    </text>
+  </g>
+  <g aria-label="兵庫県 0.82ポイント">
+    <title>兵庫県：0.82ポイント</title>
+    <rect x="327.0" y="369.0" width="39" height="81" rx="3" fill="rgb(252, 149, 118)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="346.5" y="409.0" font-size="11" font-weight="700">兵庫</tspan>
+      <tspan x="346.5" y="419.5" font-size="9" font-weight="600">0.82</tspan>
+    </text>
+  </g>
+  <g aria-label="奈良県 1.43ポイント">
+    <title>奈良県：1.43ポイント</title>
+    <rect x="411.0" y="411.0" width="39" height="39" rx="3" fill="rgb(241, 72, 53)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="430.5" y="430.0" font-size="11" font-weight="700">奈良</tspan>
+      <tspan x="430.5" y="440.5" font-size="9" font-weight="600">1.43</tspan>
+    </text>
+  </g>
+  <g aria-label="和歌山県 1.51ポイント">
+    <title>和歌山県：1.51ポイント</title>
+    <rect x="369.0" y="453.0" width="81" height="39" rx="3" fill="rgb(236, 62, 47)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="409.5" y="472.0" font-size="11" font-weight="700">和歌山</tspan>
+      <tspan x="409.5" y="482.5" font-size="9" font-weight="600">1.51ポイント</tspan>
+    </text>
+  </g>
+  <g aria-label="鳥取県 2.27ポイント">
+    <title>鳥取県：2.27ポイント</title>
+    <rect x="285.0" y="369.0" width="39" height="39" rx="3" fill="rgb(150, 11, 19)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#f5f8fc" text-anchor="middle" paint-order="stroke" stroke="rgba(16,28,46,.92)" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="304.5" y="388.0" font-size="11" font-weight="700">鳥取</tspan>
+      <tspan x="304.5" y="398.5" font-size="9" font-weight="600">2.27</tspan>
+    </text>
+  </g>
+  <g aria-label="島根県 1.20ポイント">
+    <title>島根県：1.20ポイント</title>
+    <rect x="243.0" y="369.0" width="39" height="39" rx="3" fill="rgb(249, 102, 74)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="262.5" y="388.0" font-size="11" font-weight="700">島根</tspan>
+      <tspan x="262.5" y="398.5" font-size="9" font-weight="600">1.20</tspan>
+    </text>
+  </g>
+  <g aria-label="岡山県 0.94ポイント">
+    <title>岡山県：0.94ポイント</title>
+    <rect x="285.0" y="411.0" width="39" height="39" rx="3" fill="rgb(252, 134, 103)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="304.5" y="430.0" font-size="11" font-weight="700">岡山</tspan>
+      <tspan x="304.5" y="440.5" font-size="9" font-weight="600">0.94</tspan>
+    </text>
+  </g>
+  <g aria-label="広島県 1.09ポイント">
+    <title>広島県：1.09ポイント</title>
+    <rect x="243.0" y="411.0" width="39" height="39" rx="3" fill="rgb(251, 116, 85)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="262.5" y="430.0" font-size="11" font-weight="700">広島</tspan>
+      <tspan x="262.5" y="440.5" font-size="9" font-weight="600">1.09</tspan>
+    </text>
+  </g>
+  <g aria-label="山口県 1.01ポイント">
+    <title>山口県：1.01ポイント</title>
+    <rect x="201.0" y="369.0" width="39" height="81" rx="3" fill="rgb(251, 126, 94)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="220.5" y="409.0" font-size="11" font-weight="700">山口</tspan>
+      <tspan x="220.5" y="419.5" font-size="9" font-weight="600">1.01</tspan>
+    </text>
+  </g>
+  <g aria-label="徳島県 1.67ポイント">
+    <title>徳島県：1.67ポイント</title>
+    <rect x="285.0" y="537.0" width="39" height="39" rx="3" fill="rgb(222, 44, 38)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#f5f8fc" text-anchor="middle" paint-order="stroke" stroke="rgba(16,28,46,.92)" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="304.5" y="556.0" font-size="11" font-weight="700">徳島</tspan>
+      <tspan x="304.5" y="566.5" font-size="9" font-weight="600">1.67</tspan>
+    </text>
+  </g>
+  <g aria-label="香川県 1.05ポイント">
+    <title>香川県：1.05ポイント</title>
+    <rect x="285.0" y="495.0" width="39" height="39" rx="3" fill="rgb(251, 121, 90)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="304.5" y="514.0" font-size="11" font-weight="700">香川</tspan>
+      <tspan x="304.5" y="524.5" font-size="9" font-weight="600">1.05</tspan>
+    </text>
+  </g>
+  <g aria-label="愛媛県 2.12ポイント">
+    <title>愛媛県：2.12ポイント</title>
+    <rect x="243.0" y="495.0" width="39" height="39" rx="3" fill="rgb(172, 17, 23)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#f5f8fc" text-anchor="middle" paint-order="stroke" stroke="rgba(16,28,46,.92)" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="262.5" y="514.0" font-size="11" font-weight="700">愛媛</tspan>
+      <tspan x="262.5" y="524.5" font-size="9" font-weight="600">2.12</tspan>
+    </text>
+  </g>
+  <g aria-label="高知県 1.42ポイント">
+    <title>高知県：1.42ポイント</title>
+    <rect x="243.0" y="537.0" width="39" height="39" rx="3" fill="rgb(241, 73, 54)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="262.5" y="556.0" font-size="11" font-weight="700">高知</tspan>
+      <tspan x="262.5" y="566.5" font-size="9" font-weight="600">1.42</tspan>
+    </text>
+  </g>
+  <g aria-label="福岡県 0.69ポイント">
+    <title>福岡県：0.69ポイント</title>
+    <rect x="159.0" y="453.0" width="39" height="39" rx="3" fill="rgb(252, 164, 135)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="178.5" y="472.0" font-size="11" font-weight="700">福岡</tspan>
+      <tspan x="178.5" y="482.5" font-size="9" font-weight="600">0.69</tspan>
+    </text>
+  </g>
+  <g aria-label="佐賀県 1.54ポイント">
+    <title>佐賀県：1.54ポイント</title>
+    <rect x="117.0" y="453.0" width="39" height="39" rx="3" fill="rgb(234, 59, 45)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="136.5" y="472.0" font-size="11" font-weight="700">佐賀</tspan>
+      <tspan x="136.5" y="482.5" font-size="9" font-weight="600">1.54</tspan>
+    </text>
+  </g>
+  <g aria-label="長崎県 2.17ポイント">
+    <title>長崎県：2.17ポイント</title>
+    <rect x="117.0" y="495.0" width="39" height="39" rx="3" fill="rgb(165, 15, 22)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#f5f8fc" text-anchor="middle" paint-order="stroke" stroke="rgba(16,28,46,.92)" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="136.5" y="514.0" font-size="11" font-weight="700">長崎</tspan>
+      <tspan x="136.5" y="524.5" font-size="9" font-weight="600">2.17</tspan>
+    </text>
+  </g>
+  <g aria-label="熊本県 1.34ポイント">
+    <title>熊本県：1.34ポイント</title>
+    <rect x="117.0" y="537.0" width="39" height="39" rx="3" fill="rgb(245, 84, 60)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="136.5" y="556.0" font-size="11" font-weight="700">熊本</tspan>
+      <tspan x="136.5" y="566.5" font-size="9" font-weight="600">1.34</tspan>
+    </text>
+  </g>
+  <g aria-label="大分県 1.25ポイント">
+    <title>大分県：1.25ポイント</title>
+    <rect x="159.0" y="495.0" width="39" height="39" rx="3" fill="rgb(248, 96, 69)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="178.5" y="514.0" font-size="11" font-weight="700">大分</tspan>
+      <tspan x="178.5" y="524.5" font-size="9" font-weight="600">1.25</tspan>
+    </text>
+  </g>
+  <g aria-label="宮崎県 1.83ポイント">
+    <title>宮崎県：1.83ポイント</title>
+    <rect x="159.0" y="537.0" width="39" height="39" rx="3" fill="rgb(206, 30, 31)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#f5f8fc" text-anchor="middle" paint-order="stroke" stroke="rgba(16,28,46,.92)" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="178.5" y="556.0" font-size="11" font-weight="700">宮崎</tspan>
+      <tspan x="178.5" y="566.5" font-size="9" font-weight="600">1.83</tspan>
+    </text>
+  </g>
+  <g aria-label="鹿児島県 1.91ポイント">
+    <title>鹿児島県：1.91ポイント</title>
+    <rect x="117.0" y="579.0" width="81" height="39" rx="3" fill="rgb(197, 25, 29)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#f5f8fc" text-anchor="middle" paint-order="stroke" stroke="rgba(16,28,46,.92)" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="157.5" y="598.0" font-size="11" font-weight="700">鹿児島</tspan>
+      <tspan x="157.5" y="608.5" font-size="9" font-weight="600">1.91ポイント</tspan>
+    </text>
+  </g>
+  <g aria-label="沖縄県 1.90ポイント">
+    <title>沖縄県：1.90ポイント</title>
+    <rect x="117.0" y="663.0" width="39" height="39" rx="3" fill="rgb(198, 26, 29)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#f5f8fc" text-anchor="middle" paint-order="stroke" stroke="rgba(16,28,46,.92)" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="136.5" y="682.0" font-size="11" font-weight="700">沖縄</tspan>
+      <tspan x="136.5" y="692.5" font-size="9" font-weight="600">1.90</tspan>
+    </text>
+  </g>
+  <g aria-label="北海道 1.40ポイント">
+    <title>北海道：1.40ポイント</title>
+    <rect x="621.0" y="33.0" width="81" height="81" rx="3" fill="rgb(242, 76, 55)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="661.5" y="73.0" font-size="11" font-weight="700">北海道</tspan>
+      <tspan x="661.5" y="83.5" font-size="9" font-weight="600">1.40ポイント</tspan>
+    </text>
+  </g>
+  <g aria-label="青森県 2.54ポイント">
+    <title>青森県：2.54ポイント</title>
+    <rect x="621.0" y="159.0" width="81" height="39" rx="3" fill="rgb(103, 0, 13)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#f5f8fc" text-anchor="middle" paint-order="stroke" stroke="rgba(16,28,46,.92)" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="661.5" y="178.0" font-size="11" font-weight="700">青森</tspan>
+      <tspan x="661.5" y="188.5" font-size="9" font-weight="600">2.54ポイント</tspan>
+    </text>
+  </g>
+  <g aria-label="岩手県 2.27ポイント">
+    <title>岩手県：2.27ポイント</title>
+    <rect x="663.0" y="201.0" width="39" height="39" rx="3" fill="rgb(150, 11, 19)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#f5f8fc" text-anchor="middle" paint-order="stroke" stroke="rgba(16,28,46,.92)" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="682.5" y="220.0" font-size="11" font-weight="700">岩手</tspan>
+      <tspan x="682.5" y="230.5" font-size="9" font-weight="600">2.27</tspan>
+    </text>
+  </g>
+  <g aria-label="宮城県 1.76ポイント">
+    <title>宮城県：1.76ポイント</title>
+    <rect x="663.0" y="243.0" width="39" height="39" rx="3" fill="rgb(213, 36, 34)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#f5f8fc" text-anchor="middle" paint-order="stroke" stroke="rgba(16,28,46,.92)" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="682.5" y="262.0" font-size="11" font-weight="700">宮城</tspan>
+      <tspan x="682.5" y="272.5" font-size="9" font-weight="600">1.76</tspan>
+    </text>
+  </g>
+  <g aria-label="秋田県 2.51ポイント">
+    <title>秋田県：2.51ポイント</title>
+    <rect x="621.0" y="201.0" width="39" height="39" rx="3" fill="rgb(108, 1, 14)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#f5f8fc" text-anchor="middle" paint-order="stroke" stroke="rgba(16,28,46,.92)" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="640.5" y="220.0" font-size="11" font-weight="700">秋田</tspan>
+      <tspan x="640.5" y="230.5" font-size="9" font-weight="600">2.51</tspan>
+    </text>
+  </g>
+  <g aria-label="山形県 2.34ポイント">
+    <title>山形県：2.34ポイント</title>
+    <rect x="621.0" y="243.0" width="39" height="39" rx="3" fill="rgb(139, 9, 18)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#f5f8fc" text-anchor="middle" paint-order="stroke" stroke="rgba(16,28,46,.92)" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="640.5" y="262.0" font-size="11" font-weight="700">山形</tspan>
+      <tspan x="640.5" y="272.5" font-size="9" font-weight="600">2.34</tspan>
+    </text>
+  </g>
+  <g aria-label="福島県 2.51ポイント">
+    <title>福島県：2.51ポイント</title>
+    <rect x="621.0" y="285.0" width="81" height="39" rx="3" fill="rgb(108, 1, 14)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#f5f8fc" text-anchor="middle" paint-order="stroke" stroke="rgba(16,28,46,.92)" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="661.5" y="304.0" font-size="11" font-weight="700">福島</tspan>
+      <tspan x="661.5" y="314.5" font-size="9" font-weight="600">2.51ポイント</tspan>
+    </text>
+  </g>
+  <g aria-label="茨城県 1.23ポイント">
+    <title>茨城県：1.23ポイント</title>
+    <rect x="663.0" y="327.0" width="39" height="39" rx="3" fill="rgb(248, 98, 71)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#16243a" text-anchor="middle" paint-order="stroke" stroke="#f5f8fc" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="682.5" y="346.0" font-size="11" font-weight="700">茨城</tspan>
+      <tspan x="682.5" y="356.5" font-size="9" font-weight="600">1.23</tspan>
+    </text>
+  </g>
+  <g aria-label="栃木県 1.77ポイント">
+    <title>栃木県：1.77ポイント</title>
+    <rect x="621.0" y="327.0" width="39" height="39" rx="3" fill="rgb(212, 35, 33)" stroke="#ffffff" stroke-width="1"/>
+    <text font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" fill="#f5f8fc" text-anchor="middle" paint-order="stroke" stroke="rgba(16,28,46,.92)" stroke-width="1.4" stroke-linejoin="round">
+      <tspan x="640.5" y="346.0" font-size="11" font-weight="700">栃木</tspan>
+      <tspan x="640.5" y="356.5" font-size="9" font-weight="600">1.77</tspan>
+    </text>
+  </g>
+
+  <defs>
+    <linearGradient id="choropleth-lg" x1="0" x2="1">
+      <stop offset="0%" stop-color="rgb(255, 245, 240)"/>
+      <stop offset="25%" stop-color="rgb(252, 186, 161)"/>
+      <stop offset="50%" stop-color="rgb(249, 105, 76)"/>
+      <stop offset="75%" stop-color="rgb(203, 28, 30)"/>
+      <stop offset="100%" stop-color="rgb(103, 0, 13)"/>
+    </linearGradient>
+    <filter id="txt-halo-dark" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="0" stdDeviation="1.3" flood-color="#000000" flood-opacity="0.7"/>
+    </filter>
+  </defs>
+  <text x="468" y="678" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" font-size="11" fill="#6e7d94" text-anchor="end">低い</text>
+  <rect x="474" y="670" width="200" height="11" rx="2" fill="url(#choropleth-lg)"/>
+  <text x="680" y="678" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" font-size="11" fill="#6e7d94">高い</text>
+  <text x="474" y="694" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" font-size="9.5" fill="#6e7d94">-0.18ポイント</text>
+  <text x="574" y="694" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" font-size="9.5" fill="#6e7d94" text-anchor="middle">1.18ポイント</text>
+  <text x="674" y="694" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" font-size="9.5" fill="#6e7d94" text-anchor="end">2.54ポイント</text>
+</svg>

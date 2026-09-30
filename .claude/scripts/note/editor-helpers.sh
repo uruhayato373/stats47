@@ -237,6 +237,7 @@ process_article(){
   local ARTICLE_DIR="/Users/minamidaisuke/stats47/docs/31_note記事原稿/$VERT/$SLUG"
   [ -d "$ARTICLE_DIR" ] || ARTICLE_DIR="/Users/minamidaisuke/stats47/docs/31_note記事原稿/$SLUG"
   local ADIR="$ARTICLE_DIR/images"
+  node /Users/minamidaisuke/stats47/.claude/scripts/note/ensure-note-images.mjs "$ARTICLE_DIR" || { echo "  [FAIL] 画像が揃っていない"; return 1; }
   node /Users/minamidaisuke/stats47/.claude/scripts/note/build-body.cjs "$SLUG" >/dev/null
   BU open "https://editor.note.com/notes/$NOTEID/edit" >/dev/null 2>&1; sleep 6
   BU state 2>&1 > /tmp/ns.txt
@@ -310,6 +311,10 @@ process_article(){
 new_post_cover_title(){
   local SLUG="$1" VERT="$2" TITLE="$3"
   local ADIR="/Users/minamidaisuke/stats47/docs/31_note記事原稿/$VERT/$SLUG"
+  [ -d "$ADIR" ] || ADIR="/Users/minamidaisuke/stats47/docs/31_note記事原稿/$SLUG"
+  # カバーが無いまま黙って公開しない (旧: cover が無ければ設定を飛ばしていた)
+  node /Users/minamidaisuke/stats47/.claude/scripts/note/ensure-note-images.mjs "$ADIR" || { echo "  [FAIL] 画像が揃っていない"; return 1; }
+  [ -f "$ADIR/images/cover-1280x670.png" ] || { echo "  [FAIL] cover-1280x670.png が無い (カバー無しでは公開しない)"; return 1; }
   BU open "https://editor.note.com/new" >/dev/null 2>&1; sleep 5
   BU state 2>&1 > /tmp/ns.txt
   if ! grep -qE "contenteditable=true role=textbox" /tmp/ns.txt; then echo "  [FAIL] /new not loaded (login?)"; return 1; fi

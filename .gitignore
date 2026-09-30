@@ -139,6 +139,9 @@ apps/remotion/build/
 # Local development data
 .local/
 
+# Kindle表紙の画像バイナリはR2をSSOTとし、Gitにはキー/SHAだけを置く。
+packages/product-factory/src/channels/kindle/assets/cover-backgrounds/
+
 # ローカルビルド DB (SQLite) — R2 database/stats47.sqlite から db:pull で取得 (git 管理外)
 packages/database/.data/
 
@@ -177,10 +180,17 @@ inspect-knip.js
 # git worktree (Agent isolation 用、リポジトリにコミットしない)
 .claude/worktrees/
 
-# note 記事 (docs/31_note記事原稿/) の PNG は SVG から再生成できる派生物
-# (.claude/scripts/note/regenerate-svg-png.sh で随時再生成)。容量を詰めたい公開済み記事は
-# PNG を削除し SVG のみ残してよい。SVG ソースを持たない旧記事 (例: a-maximum-temperature) は
-# PNG が唯一のソースなので追跡対象 (docs/31 配下の images は現状すべて追跡)。
+# note 記事 (docs/31_note記事原稿/) の PNG は SVG から再生成できる派生物なので git に載せない
+# (契約: .claude/rules/note-image-assets.md。復元: node .claude/scripts/note/regen-derived-png.mjs --slug <dir>)。
+# 下の系列は PNG がすべて SVG 由来。SVG を持たない PNG が混ざると git に載らず失われるため、
+# `npm run note:images:audit` が IGNORED_PNG_WITHOUT_SVG として止める。
+# a-<rankingKey> (ランキング記事) の 4 枚は SVG ではなく render-spec.json + chart-data.json から作る (render-ranking-images.mjs)。
+# SVG も render-spec も持たない画像 (product-sales) はここに含めず追跡のまま。
+/docs/31_note記事原稿/a-*/**/*.png
+/docs/31_note記事原稿/b-kakei-*/**/*.png
+/docs/31_note記事原稿/koumuin-*/**/*.png
+/docs/31_note記事原稿/a-maximum-temperature/images/cover-1280x670.png
+/docs/31_note記事原稿/pinned-intro/images/cover-1280x670.png
 # 家計データセットの3点は build-kakei-dataset-sample-images.mjs の SVG が正本。
 /docs/31_note記事原稿/d-kakei-category-dataset/images/sample-ratio-table.png
 /docs/31_note記事原稿/d-kakei-category-dataset/images/sample-timeseries-table.png

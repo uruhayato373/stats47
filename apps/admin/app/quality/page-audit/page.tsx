@@ -1,19 +1,12 @@
 import Link from "next/link";
 
 import { Sparkline } from "@/components/dashboard/sparkline";
-import {
-  Badge,
-  ErrorNote,
-  Freshness,
-  PageHeading,
-  Section,
-  Stat,
-  Table,
-  Td,
-  Tr,
-} from "@/components/ops/primitives";
+import { Cell, DataTable, Row, StatCard, StatusBadge } from "@/components/admin-ui";
+import { Section } from "@/components/layout-primitives";
+import { ErrorNote, Freshness, PageHeading } from "@/components/ops/primitives";
 import { pageQualitySummary, type MetricValue } from "@/lib/server/page-quality";
 
+import { Card, CardContent } from "@/components/ui/card";
 export const dynamic = "force-dynamic";
 export const metadata = { title: "ページ品質監査 — stats47 admin" };
 
@@ -30,7 +23,7 @@ function MetricCell({ value, unit = "" }: { value: MetricValue; unit?: string })
       </span>
     );
   }
-  if (typeof value === "boolean") return <Badge tone={value ? "bad" : "good"}>{value ? "あり" : "なし"}</Badge>;
+  if (typeof value === "boolean") return <StatusBadge tone={value ? "bad" : "good"}>{value ? "あり" : "なし"}</StatusBadge>;
   return (
     <span>
       {typeof value === "number" ? value.toLocaleString("ja-JP") : String(value)}
@@ -56,7 +49,7 @@ export default async function PageQualityAuditPage({
         />
         <ErrorNote error={summary.error ?? "unknown error"} />
         <p className="text-sm text-console-muted">
-          ローカルで <code className="rounded bg-console-card px-1">npm run page-quality:check --all</code> を実行すると生成されます。
+          ローカルで <code className="rounded bg-muted px-1">npm run page-quality:check --all</code> を実行すると生成されます。
         </p>
       </div>
     );
@@ -91,8 +84,8 @@ export default async function PageQualityAuditPage({
         source=".claude/state/metrics/page-quality/latest.json"
       >
         <div className="flex flex-wrap items-center gap-2 pt-1">
-          <Badge tone="info">{summary.mode}</Badge>
-          {summary.commitSha ? <Badge>{summary.commitSha.slice(0, 8)}</Badge> : null}
+          <StatusBadge tone="info">{summary.mode}</StatusBadge>
+          {summary.commitSha ? <StatusBadge>{summary.commitSha.slice(0, 8)}</StatusBadge> : null}
           {summary.generatedAt ? <Freshness iso={summary.generatedAt} /> : null}
         </div>
         <p className="mt-2 max-w-3xl text-sm text-console-muted">
@@ -107,52 +100,54 @@ export default async function PageQualityAuditPage({
       </PageHeading>
 
       <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-4">
-        <Stat label="対象URL" value={summary.totalUrls} />
-        <Stat label="正常" value={summary.successCount} tone="good" />
-        <Stat label="warningのみ" value={summary.warningOnlyCount} tone={summary.warningOnlyCount ? "warn" : "good"} />
-        <Stat label="error" value={summary.errorCount} tone={summary.errorCount ? "bad" : "good"} />
+        <StatCard label="対象URL" value={summary.totalUrls} />
+        <StatCard label="正常" value={summary.successCount} tone="good" />
+        <StatCard label="warningのみ" value={summary.warningOnlyCount} tone={summary.warningOnlyCount ? "warn" : "good"} />
+        <StatCard label="error" value={summary.errorCount} tone={summary.errorCount ? "bad" : "good"} />
       </div>
 
       {summary.trend.length > 1 ? (
         <Section title="推移 (直近runのerror/warning件数)">
-          <div className="flex items-center gap-6 rounded-md border border-console-border bg-console-card p-3">
+          <Card className="py-3">
+            <CardContent className="flex items-center gap-6 px-3">
             <div>
               <p className="text-[11px] text-console-muted">error</p>
-              <Sparkline values={summary.trend.map((t) => t.errorCount)} color="rgb(var(--console-bad))" />
+              <Sparkline values={summary.trend.map((t) => t.errorCount)} tone="bad" />
             </div>
             <div>
               <p className="text-[11px] text-console-muted">warning</p>
-              <Sparkline values={summary.trend.map((t) => t.warningCount)} color="rgb(var(--console-warn))" />
+              <Sparkline values={summary.trend.map((t) => t.warningCount)} tone="warn" />
             </div>
             <p className="text-[11px] text-console-muted">
               {summary.trend[0]?.date} 〜 {summary.trend[summary.trend.length - 1]?.date} ({summary.trend.length}run)
             </p>
-          </div>
+            </CardContent>
+          </Card>
         </Section>
       ) : null}
 
       <Section title="テンプレート別集計" count={summary.templateRollups.length}>
-        <Table columns={["テンプレート", "URL数", "error", "warning"]}>
+        <DataTable columns={["テンプレート", "URL数", "error", "warning"]}>
           {summary.templateRollups.map((t) => (
-            <Tr key={t.template}>
-              <Td>
+            <Row key={t.template}>
+              <Cell>
                 <Link
                   className="text-console-info underline underline-offset-2"
                   href={`/quality/page-audit?template=${t.template}`}
                 >
                   {t.template}
                 </Link>
-              </Td>
-              <Td nowrap>{t.urlCount}</Td>
-              <Td nowrap>
-                <Badge tone={t.errorCount ? "bad" : "good"}>{t.errorCount}</Badge>
-              </Td>
-              <Td nowrap>
-                <Badge tone={t.warningCount ? "warn" : "good"}>{t.warningCount}</Badge>
-              </Td>
-            </Tr>
+              </Cell>
+              <Cell nowrap>{t.urlCount}</Cell>
+              <Cell nowrap>
+                <StatusBadge tone={t.errorCount ? "bad" : "good"}>{t.errorCount}</StatusBadge>
+              </Cell>
+              <Cell nowrap>
+                <StatusBadge tone={t.warningCount ? "warn" : "good"}>{t.warningCount}</StatusBadge>
+              </Cell>
+            </Row>
           ))}
-        </Table>
+        </DataTable>
       </Section>
 
       <Section title="問題が大きいページ (悪化ランキング)" count={filteredOffenders.length}>
@@ -173,20 +168,20 @@ export default async function PageQualityAuditPage({
         {filteredOffenders.length === 0 ? (
           <p className="text-sm text-console-good">対象範囲に違反ページはありません。</p>
         ) : (
-          <Table columns={["URL", "テンプレート", "error", "warning", "理由"]}>
+          <DataTable columns={["URL", "テンプレート", "error", "warning", "理由"]}>
             {filteredOffenders.map((o) => (
-              <Tr key={o.url}>
-                <Td>
+              <Row key={o.url}>
+                <Cell>
                   <code className="text-[11px]">{o.path}</code>
-                </Td>
-                <Td nowrap>{o.template}</Td>
-                <Td nowrap>
-                  <Badge tone={o.errorCount ? "bad" : "good"}>{o.errorCount}</Badge>
-                </Td>
-                <Td nowrap>
-                  <Badge tone={o.warningCount ? "warn" : "good"}>{o.warningCount}</Badge>
-                </Td>
-                <Td>
+                </Cell>
+                <Cell nowrap>{o.template}</Cell>
+                <Cell nowrap>
+                  <StatusBadge tone={o.errorCount ? "bad" : "good"}>{o.errorCount}</StatusBadge>
+                </Cell>
+                <Cell nowrap>
+                  <StatusBadge tone={o.warningCount ? "warn" : "good"}>{o.warningCount}</StatusBadge>
+                </Cell>
+                <Cell>
                   <div className="space-y-1 text-[10px] text-console-muted">
                     {o.violations.slice(0, 4).map((v, i) => (
                       <div key={i}>
@@ -195,10 +190,10 @@ export default async function PageQualityAuditPage({
                       </div>
                     ))}
                   </div>
-                </Td>
-              </Tr>
+                </Cell>
+              </Row>
             ))}
-          </Table>
+          </DataTable>
         )}
       </Section>
 
@@ -213,35 +208,35 @@ export default async function PageQualityAuditPage({
           </p>
         ) : null}
         <div className="max-h-[32rem] overflow-auto">
-          <Table columns={["URL", "テンプレート", "HTML", "RSC", "DOM", "重複リンク率", "広告重複", "LCP"]}>
+          <DataTable columns={["URL", "テンプレート", "HTML", "RSC", "DOM", "重複リンク率", "広告重複", "LCP"]}>
             {filteredResults.map((r) => (
-              <Tr key={r.url}>
-                <Td>
+              <Row key={r.url}>
+                <Cell>
                   <code className="text-[10px]">{r.path}</code>
                   {r.error ? <div className="text-[10px] text-console-bad">{r.error}</div> : null}
-                </Td>
-                <Td nowrap>{r.template}</Td>
-                <Td nowrap>
+                </Cell>
+                <Cell nowrap>{r.template}</Cell>
+                <Cell nowrap>
                   <MetricCell value={r.metrics.html_bytes} unit=" B" />
-                </Td>
-                <Td nowrap>
+                </Cell>
+                <Cell nowrap>
                   <MetricCell value={r.metrics.rsc_bytes} unit=" B" />
-                </Td>
-                <Td nowrap>
+                </Cell>
+                <Cell nowrap>
                   <MetricCell value={r.metrics.dom_nodes} />
-                </Td>
-                <Td nowrap>
+                </Cell>
+                <Cell nowrap>
                   <MetricCell value={r.metrics.duplicate_link_ratio} />
-                </Td>
-                <Td nowrap>
+                </Cell>
+                <Cell nowrap>
                   <MetricCell value={r.metrics.ad_duplicate_count} />
-                </Td>
-                <Td nowrap>
+                </Cell>
+                <Cell nowrap>
                   <MetricCell value={r.metrics.lcp_ms} unit=" ms" />
-                </Td>
-              </Tr>
+                </Cell>
+              </Row>
             ))}
-          </Table>
+          </DataTable>
         </div>
       </Section>
     </div>

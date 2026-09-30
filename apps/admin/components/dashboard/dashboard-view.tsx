@@ -123,7 +123,7 @@ export function DashboardView() {
               機能バックログ
             </h2>
             <p className="mb-3 text-xs text-console-muted">
-              真実源: <code className="rounded bg-console-card px-1">.claude/todo/backlog.md</code>{" "}
+              真実源: <code className="rounded bg-muted px-1">.claude/todo/backlog.md</code>{" "}
               (読み取り専用ミラー。編集は md 側で)
             </p>
             <FeatureTable featureBacklog={data.featureBacklog} />

@@ -186,6 +186,29 @@ agent 用詳細ログ。施策一覧 (簡易表) は `.claude/todo/improvements.
   fixed house bannerも意図的に`other`を送るため合成値である。`AFF-CATEGORY-MAP-01`は前提不成立として
   改善バックログから削除し、今後の写像漏れはplacement-mapの`unmapped.byReason`で判定する。
 
+- **2026-09-28 T14d 比較 (W40 Should 1・判定不能として保留)**:
+  - 窓: before = 2026-09-06〜09-12 (run 36370229764 で補完、`ga4-affiliate-history.csv` の `2026-09-12,7,*`)、
+    after = 2026-09-20〜09-26 (`2026-09-26,7,*`)。09-13〜09-19 はデプロイ当日 (09-13 14:02) を含むので比較に使わない。
+    PV は `.claude/state/metrics/ga4/history-finalized7d.csv` の国内確定7日 (W37 11,424 / W39 9,489)。
+  - 全体: affiliate_impression 7,212 → 3,391、imp/PV **0.631 → 0.357 (-43%)**、click 9 → 2 (CTR 0.12% → 0.06%・標本不足)。
+    8 月の近似 baseline 0.710 は 28 日窓の差分から作った別定義なので比べない。
+  - position 別 (before → after): article-inline 1,698 → 708 / ranking-incontent 1,033 → 485 / blog-sidebar 877 → 278 /
+    sidebar 845 → 20 / ranking-native 770 → 326 / ranking-sidebar 716 → 483 / area-sidebar 92 → 0 / area-content 35 → 0 /
+    rakuten-native 0 → 122 (新設)。
+  - **判定不能の理由**: ① **境界が成立していない**: 本施策の枠 `ranking-incontent` が before (09-06〜09-12) に既に 1,033 表示ある。
+    09-13 の PR963 より前 (09-03 の PR #915 等) に本番へ出ていた可能性があり、09-13 を before/after の境界にできない。
+    どの deploy で `ranking-incontent` が出始めたかは未確認。② **交絡**: after の期間に、ブログの出典調査だけで furusato になる
+    記事 180 本の A8 抑止 (09-24、article-inline・blog-sidebar の減少と整合)、家計調査系 ranking の本文 native を楽天カードへ置換
+    (09-16 方針、ranking-native 減・rakuten-native 新設と整合)、県ページ枠の撤去 (09-15 方針、area-* が 0) が重なる。
+    ③ click は 2 週で計 11 件で CTR を比べられない。
+  - **境界の調査結果**: `ranking-incontent` を足した `fa22cc09f` (2026-08-16) は同日 PR #772 (`28017083d`、08-16 14:30 JST) で
+    main に入っている。この枠は `ADSENSE_DISPLAY_ENABLED=false` のときだけ描画されるので、実際の表示開始は AdSense 停止の本番反映
+    (08-29、PR #849) と推定される (GA4 日次での初出は未確認)。したがって本施策の実質の境界は 09-13 ではなく 08-29 前後で、
+    09-06〜09-12 は既に施策後の窓である。
+  - **次**: 境界 08-29 の前後で比べるには、08-22〜08-28 の affiliate_impression が要るが、履歴は 08-28 まで 28 日窓しかなく、
+    7 日窓の補完 (同じ workflow_dispatch) は可能。ただし 08-29 以前は AdSense 表示中で PV あたりの枠構成が別物のため、
+    本施策単独の効果は取り出せない見込みが高い。本施策は単独判定をやめ、ranking 面の枠構成全体として T28d 以降に
+    ranking 系 position の imp/PV を追う形へ improvement-triage が改めるのが妥当 (effect ラベルは付けない)。
 - **2026-09-13公開確認**: [deploy34739098468](https://github.com/uruhayato373/stats47/actions/runs/34739098468) は本番公開・route smoke・sitemap検査が成功。計測定義の切替は14:02:32 JST。9/15にpage/device/placement別の到達を確認し、9/27に確定した非重複期間の比較可否を判定する。同時施策・click定義変更はconfoundedとして扱う。新しいGA4取得9472 placement行は公開前baselineであり、効果の根拠にしない。
 
 ---
@@ -343,3 +366,9 @@ agent 用詳細ログ。施策一覧 (簡易表) は `.claude/todo/improvements.
   停止措置の因果効果を確定するには反映前に実際に配信されていたことを示す別の実測 (当時の
   inventory snapshot や impression ログ) が要るが、それは本施策の完了条件の範囲外。ブランド不適合の
   禁止事項 (`精力` / `マカ` blocklist 化) は収益化戦略 §8 に恒久化済み。
+
+### [AFF-SCOUT-PIPE-01] 週次cron運用は稼働中 — 未解決vertical・cron失敗の再発なし (2026-09-27)
+
+- 判定: A8 scoutの週次cron運用で、未解決vertical・重複・cron失敗の再発は観測されなかった。行を削除する
+- 根拠データ: `.claude/state/ads/a8-catalog.json` (2026-09-27時点) は256プログラムを保持し、`status: pending-vertical` は0件だった。`status: error` は14件あるが、確認した全件が2026-07-19の初期ブートストラップ時のapply失敗で、いずれも同日中に `reconcile-detail-2026-07-20` ノート付きで approved→applied へ復旧済みだった(例: programId `s00000023687001` のhistory)。2026-09-25T13:46〜14:20Z にcandidate→applied遷移が複数件記録されており、直近の週次cron (`scripts/scheduled/scout-asp-weekly.sh`) が正常に稼働していることを確認した
+- 再現コマンド: `grep -c '"status": "pending-vertical"' .claude/state/ads/a8-catalog.json` (0件を確認) / `grep -n '"status": "error"' .claude/state/ads/a8-catalog.json` で該当行の直前history `at` を確認し全件2026-07-19付けであることを確認

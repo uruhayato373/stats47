@@ -250,7 +250,7 @@ describe('theme chart indicator-hub links', () => {
     );
     expect(coverage.totalKeys).toBe(115);
     expect(coverage.missingDescriptionKeys).toHaveLength(0);
-    expect(coverage.authoredNoteKeys).toHaveLength(67);
+    expect(coverage.authoredNoteKeys).toHaveLength(69);
     expect(errors).toEqual([]);
     expect(warns).toEqual([]);
   });

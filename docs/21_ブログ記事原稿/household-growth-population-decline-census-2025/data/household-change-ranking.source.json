@@ -1,0 +1,10 @@
+{
+  "kind": "metric",
+  "metricKey": "census-household-change-rate-5y",
+  "year": "2025",
+  "unit": "％",
+  "label": "5年間の世帯増減率",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/stats/census-household-change-rate-5y/values.json",
+  "restore": "curl -s https://storage.stats47.jp/app/stats/census-household-change-rate-5y/values.json  # rows[].value (yearCode 2025) をそのまま value 降順で順位付け"
+}

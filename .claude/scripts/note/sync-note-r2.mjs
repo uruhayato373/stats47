@@ -89,6 +89,12 @@ for (const [slug, info] of Object.entries(articles)) {
 
   try {
     if (!DRY_RUN) {
+      // 0. SVG 由来の PNG は git に無い (.claude/rules/note-image-assets.md)。R2 へ載せる前に作り直す
+      execSync(
+        `node .claude/scripts/note/regen-derived-png.mjs --slug "${relative(DOCS31, srcDir)}"`,
+        { stdio: 'inherit', cwd: ROOT }
+      )
+
       // 1. .local/r2/note/<vertical>/<slug>/ にステージング
       mkdirSync(r2StagingDir, { recursive: true })
       cpSync(srcDir, r2StagingDir, { recursive: true })

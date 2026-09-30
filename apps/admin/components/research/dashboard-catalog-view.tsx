@@ -1,26 +1,12 @@
 "use client";
 
-import {
-  Badge,
-  Button,
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  Input,
-  Label,
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@stats47/components";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { ExternalLink } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 
@@ -82,7 +68,6 @@ function StatusBadge({ status }: { status: DashboardVerificationStatusDTO }) {
   return (
     <Badge
       variant="outline"
-      size="sm"
       className={
         status === "verified"
           ? "border-console-good/50 text-console-good"
@@ -141,7 +126,7 @@ function DashboardTable({ data }: { data: DashboardCatalogResponse }) {
         </span>
       </CardHeader>
       <CardContent className="p-0">
-        <Table containerClassName="max-w-full">
+        <Table>
           <TableHeader>
             <TableRow>
               <TableHead>名称・提供者</TableHead>
@@ -301,7 +286,6 @@ export function DashboardCatalogView() {
                 </CardTitle>
                 <Badge
                   variant="outline"
-                  size="sm"
                   className={
                     data.audit.status === "fail"
                       ? "border-console-bad/50 text-console-bad"
@@ -447,7 +431,7 @@ export function DashboardCatalogView() {
             ) : (
               <Card className="shadow-none">
                 <CardContent className="p-0">
-                  <Table containerClassName="max-w-full">
+                  <Table>
                     <TableHeader>
                       <TableRow>
                         <TableHead>ストーリー</TableHead>
@@ -468,7 +452,7 @@ export function DashboardCatalogView() {
                               {story.dashboardTitle}
                             </div>
                             <div className="mt-1 flex flex-wrap gap-1">
-                              <Badge variant="outline" size="sm">
+                              <Badge variant="outline">
                                 {PATTERN_LABELS[story.storyPattern] ??
                                   story.storyPattern}
                               </Badge>
@@ -484,7 +468,6 @@ export function DashboardCatalogView() {
                                 <Badge
                                   key={indicator}
                                   variant="secondary"
-                                  size="sm"
                                 >
                                   {indicator}
                                 </Badge>
@@ -494,7 +477,7 @@ export function DashboardCatalogView() {
                           <TableCell className="min-w-48 align-top">
                             <div className="flex flex-wrap gap-1">
                               {story.stats47ThemeKeys.map((key) => (
-                                <Badge key={key} variant="outline" size="sm">
+                                <Badge key={key} variant="outline">
                                   {data.filters.themes.find(
                                     (item) => item.key === key
                                   )?.label ?? key}
@@ -508,7 +491,6 @@ export function DashboardCatalogView() {
                                 <Badge
                                   key={visualization}
                                   variant="secondary"
-                                  size="sm"
                                 >
                                   {VISUALIZATION_LABELS[visualization] ??
                                     visualization}

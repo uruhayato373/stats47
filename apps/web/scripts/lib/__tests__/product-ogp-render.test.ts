@@ -6,12 +6,15 @@ import { describe, expect, it } from 'vitest';
 
 import {
   buildProductOgpElement,
-  resolveProductBackgroundPath,
+  resolveProductBackground,
   resolveProductTitleLayout,
-  sha256File,
   splitProductTitle,
 } from '../product-ogp-render';
 import { loadFonts, renderToPng } from '../satori-image-render';
+import {
+  KINDLE_COVER_BACKGROUND_BY_ID,
+  KINDLE_COVER_DESIGN_BY_ID,
+} from '../../../../../packages/product-factory/src/channels/kindle/cover-design';
 
 // apps/web/scripts/lib/__tests__ から見たリポジトリルート (既存 __tests__ と同じ算出方法)。
 const PROJECT_ROOT = resolve(import.meta.dirname, '../../../../..');
@@ -55,38 +58,50 @@ describe('resolveProductTitleLayout', () => {
   });
 });
 
-describe('resolveProductBackgroundPath', () => {
-  it('kindle商品はproduct-factoryの表紙背景を指す', () => {
-    const path = resolveProductBackgroundPath({
+describe('resolveProductBackground', () => {
+  it('背景が承認・公開済みのkindle商品はR2の背景URLとSHAを返す', () => {
+    const background = resolveProductBackground({
       projectRoot: PROJECT_ROOT,
       channel: 'kindle',
-      productId: 'K-S1-02',
+      productId: 'K-S1-01',
     });
-    expect(path).toContain(
-      'packages/product-factory/src/channels/kindle/assets/cover-backgrounds/K-S1-02.jpg'
+    expect(background.image).toBe(
+      `https://storage.stats47.jp/${KINDLE_COVER_BACKGROUND_BY_ID['K-S1-01'].r2Key}`
     );
-    // 実在確認 (read-only)。
-    expect(() => sha256File(path)).not.toThrow();
+    expect(background.sha256).toBe(KINDLE_COVER_BACKGROUND_BY_ID['K-S1-01'].sha256);
+  });
+
+  it('背景未承認のkindle商品はGitの共通ブランド背景へdegradeする', () => {
+    // 承認済みの一覧は cover-design.ts が SSOT。背景を持たない書籍を選ぶ
+    const productId = Object.keys(KINDLE_COVER_DESIGN_BY_ID).find((id) => !KINDLE_COVER_BACKGROUND_BY_ID[id]);
+    expect(productId).toBeTruthy();
+    const background = resolveProductBackground({
+      projectRoot: PROJECT_ROOT,
+      channel: 'kindle',
+      productId: productId!,
+    });
+    expect(background.image).toMatch(/^data:image\/jpeg;base64,/);
+    expect(background.sha256).toMatch(/^[a-f0-9]{64}$/);
   });
 
   it('未知のkindle商品IDはfail-closedでエラーにする', () => {
     expect(() =>
-      resolveProductBackgroundPath({
+      resolveProductBackground({
         projectRoot: PROJECT_ROOT,
         channel: 'kindle',
         productId: 'NOT-A-REAL-ID',
       })
-    ).toThrow('kindle cover background が見つかりません');
+    ).toThrow('未知のkindle商品IDです');
   });
 
   it('coconala商品は共通ブランド背景を指す', () => {
-    const path = resolveProductBackgroundPath({
+    const background = resolveProductBackground({
       projectRoot: PROJECT_ROOT,
       channel: 'coconala',
       productId: 'P-01',
     });
-    expect(path).toContain('apps/web/scripts/lib/assets/ogp-bg-brand-light.jpg');
-    expect(() => sha256File(path)).not.toThrow();
+    expect(background.image).toMatch(/^data:image\/jpeg;base64,/);
+    expect(background.sha256).toMatch(/^[a-f0-9]{64}$/);
   });
 });
 

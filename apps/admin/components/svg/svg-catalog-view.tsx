@@ -2,12 +2,16 @@
 
 import { useMemo, useState } from "react";
 
-import { Badge, Button, Input, cn } from "@stats47/components";
+import { cn } from "@/lib/cn";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 import { apiGet, ApiError } from "@/lib/client/api-client";
 import { EmptyState, ErrorState, Loading } from "@/components/async-state";
 import type { SvgCatalogResponse, SvgChartDTO } from "@/lib/contracts/types";
 
+import { Card, CardContent } from "@/components/ui/card";
 const MAX_RENDERED = 300;
 
 /**
@@ -76,7 +80,7 @@ export function SvgCatalogView() {
 
   return (
     <div className="space-y-4">
-      <div className="flex flex-wrap items-center gap-3 rounded-lg border border-console-border bg-console-card p-3 text-sm">
+      <Card className="gap-0 py-3"><CardContent className="flex flex-wrap items-center gap-3 px-3 text-sm">
         <Input
           value={query}
           onChange={(e) => setQuery(e.target.value)}
@@ -113,7 +117,7 @@ export function SvgCatalogView() {
         <span className="ml-auto text-[11px] text-console-muted">
           ※ SVG は img 参照 (dark 対応は静的ギャラリー build-svg-gallery-tabbed で確認)
         </span>
-      </div>
+      </CardContent></Card>
 
       {!loaded && !loading ? (
         <EmptyState message="「読込」を押すと R2 から SVG を取得・分類します" />
@@ -170,7 +174,7 @@ function SvgGrid({ items }: { items: SvgChartDTO[] }) {
   const overflow = items.length - shown.length;
 
   return (
-    <div className="grid grid-cols-1 gap-4 [grid-template-columns:repeat(auto-fill,minmax(380px,1fr))]">
+    <div className="grid grid-cols-1 gap-4 grid-cols-[repeat(auto-fill,minmax(380px,1fr))]">
       {shown.map((item) => (
         <figure
           key={`${item.slug}/${item.file}`}
@@ -191,12 +195,12 @@ function SvgGrid({ items }: { items: SvgChartDTO[] }) {
             </code>{" "}
             <span className="text-console-muted">{item.viewBox || "?"}</span>{" "}
             {!item.hasViewBox ? (
-              <Badge variant="destructive" className="ml-1 px-1.5 py-0 text-[10px]">
+              <Badge variant="destructive" className="ml-1">
                 no viewBox
               </Badge>
             ) : null}
             {!item.hasTheme ? (
-              <Badge variant="secondary" className="ml-1 px-1.5 py-0 text-[10px]">
+              <Badge variant="secondary" className="ml-1">
                 no dark
               </Badge>
             ) : null}

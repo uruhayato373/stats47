@@ -52,6 +52,9 @@ import { RankingScrollGesPreview } from './features/ranking-youtube/previews/Ran
 import { BarChartRaceNormalPreview } from './features/ranking-youtube/previews/BarChartRaceNormalPreview';
 // ranking-note
 import { NoteCoverPreview } from './features/ranking-note/previews/NoteCoverPreview';
+import { NoteMapPreview } from './features/ranking-note/previews/NoteMapPreview';
+import { NoteBarChartPreview } from './features/ranking-note/previews/NoteBarChartPreview';
+import { NoteBoxplotPreview } from './features/ranking-note/previews/NoteBoxplotPreview';
 // kazu-note
 import { KazuNoteCoverPreview } from './features/kazu-note/previews/KazuNoteCoverPreview';
 // compare-instagram
@@ -673,7 +676,7 @@ export const RemotionRoot: React.FC = () => {
           {/* コロプレス地図 (1080x1080) — note 記事用 */}
           <Composition
             id="RankingNote-ChoroplethMap"
-            component={ChoroplethMapStillPreview}
+            component={NoteMapPreview}
             width={CANVAS.square.width}
             height={CANVAS.square.height}
             fps={1}
@@ -689,7 +692,7 @@ export const RemotionRoot: React.FC = () => {
           {/* チャート画像 (1200x630) — note 記事用 */}
           <Composition
             id="RankingNote-Chart"
-            component={RankingChartXPreview}
+            component={NoteBarChartPreview}
             width={CANVAS.ogp.width}
             height={CANVAS.ogp.height}
             fps={1}
@@ -705,7 +708,7 @@ export const RemotionRoot: React.FC = () => {
           {/* 箱ひげ図 (1200x630) — note 記事用 */}
           <Composition
             id="RankingNote-Boxplot"
-            component={RankingBoxplotPreview}
+            component={NoteBoxplotPreview}
             width={CANVAS.ogp.width}
             height={CANVAS.ogp.height}
             fps={1}

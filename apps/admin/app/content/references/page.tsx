@@ -5,15 +5,14 @@ import {
   REFERENCE_STAGE_LABELS,
   ReferenceStageBadge,
 } from '@/components/content/content-ui';
-import {
-  ErrorNote,
-  PageHeading,
-  Section,
-  Stat,
-  Table,
-  Td,
-  Tr,
-} from '@/components/ops/primitives';
+import { Cell, DataTable, Row, StatCard } from '@/components/admin-ui';
+import { Section, Stack } from '@/components/layout-primitives';
+import { ErrorNote, PageHeading } from '@/components/ops/primitives';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { NativeSelect } from '@/components/ui/native-select';
 import type {
   ReferenceProductionChannelDTO,
   ReferenceProductionKindDTO,
@@ -157,13 +156,13 @@ export default async function ReferenceContentPage({
   const query = await searchParams;
   if (hasError(data)) {
     return (
-      <div className="space-y-4">
+      <Stack>
         <PageHeading
           title="参考文献の活用・展開管理"
           source="参考文献台帳 + 各コンテンツ管理台帳"
         />
         <ErrorNote error={data.error} />
-      </div>
+      </Stack>
     );
   }
   const portfolio = data.references;
@@ -255,7 +254,7 @@ export default async function ReferenceContentPage({
   );
 
   return (
-    <div className="space-y-8">
+    <Stack gap="lg">
       <PageHeading
         title="参考文献の活用・展開管理"
         source="参考文献台帳 + 各コンテンツ管理台帳"
@@ -267,36 +266,36 @@ export default async function ReferenceContentPage({
       </PageHeading>
 
       <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-8">
-        <Stat label="確認した資料項目" value={portfolio.summary.sourceItems} />
-        <Stat
+        <StatCard label="確認した資料項目" value={portfolio.summary.sourceItems} />
+        <StatCard
           label="展開テーマ"
           value={portfolio.summary.productionUnits}
           tone="info"
         />
-        <Stat
+        <StatCard
           label="既存内容の補強候補"
           value={portfolio.summary.contextEvidence}
         />
-        <Stat
+        <StatCard
           label="補強資料グループ"
           value={portfolio.summary.contextGroups}
         />
-        <Stat
+        <StatCard
           label="反映済み"
           value={portfolio.summary.integratedSlots}
           tone="good"
         />
-        <Stat
+        <StatCard
           label="下書き・制作中"
           value={portfolio.summary.draftSlots}
           tone="warn"
         />
-        <Stat
+        <StatCard
           label="制作可能"
           value={portfolio.summary.readySlots}
           tone="info"
         />
-        <Stat
+        <StatCard
           label="権利・出典確認待ち"
           value={portfolio.summary.blockedEvidence}
           tone="warn"
@@ -305,7 +304,7 @@ export default async function ReferenceContentPage({
 
       <nav
         aria-label="参考文献管理のページ内メニュー"
-        className="flex flex-wrap gap-2 rounded-md border border-console-border bg-console-card p-3 text-xs"
+        className="flex flex-wrap gap-2"
       >
         {[
           ['portfolio', '展開テーマを探す'],
@@ -315,18 +314,15 @@ export default async function ReferenceContentPage({
           ['context', '補強候補'],
           ['audit', '機械監査'],
         ].map(([anchor, label]) => (
-          <a
-            key={anchor}
-            href={`#${anchor}`}
-            className="rounded border border-console-border px-2 py-1 text-console-fg hover:border-console-accent hover:text-console-accent"
-          >
-            {label}
-          </a>
+          <Button key={anchor} asChild variant="outline" size="sm">
+            <a href={`#${anchor}`}>{label}</a>
+          </Button>
         ))}
       </nav>
 
       <Section id="filters" title="検索・絞り込み">
-        <div className="space-y-2 rounded-md border border-console-border bg-console-card p-3">
+        <Card className="py-4">
+          <CardContent className="flex flex-col gap-2 px-4">
           <div className="flex flex-wrap gap-2">
             <FilterLink
               href={href(
@@ -357,46 +353,33 @@ export default async function ReferenceContentPage({
             action="/content/references#portfolio"
           >
             {stage ? <input type="hidden" name="stage" value={stage} /> : null}
-            <select
-              name="kind"
-              defaultValue={kind}
-              aria-label="展開テーマの種類"
-              className="h-8 rounded-md border border-console-border bg-console-bg px-2 text-xs text-console-fg"
-            >
+            <NativeSelect name="kind" defaultValue={kind} aria-label="展開テーマの種類">
               <option value="">すべての種類</option>
               <option value="metric">統計指標</option>
               <option value="area">都道府県ページ</option>
-            </select>
-            <select
-              name="channel"
-              defaultValue={channel}
-              aria-label="展開先"
-              className="h-8 rounded-md border border-console-border bg-console-bg px-2 text-xs text-console-fg"
-            >
+            </NativeSelect>
+            <NativeSelect name="channel" defaultValue={channel} aria-label="展開先">
               <option value="">すべての展開先</option>
               {CHANNELS.map((value) => (
                 <option key={value} value={value}>
                   {REFERENCE_PRODUCTION_CHANNEL_LABELS[value]}
                 </option>
               ))}
-            </select>
-            <input
+            </NativeSelect>
+            <Input
               name="q"
               defaultValue={query.q}
               aria-label="展開テーマを検索"
               placeholder="指標名・地域名・資料名で検索"
-              className="h-8 w-64 rounded-md border border-console-border bg-console-bg px-2 text-xs text-console-fg"
-            />
-            <button className="h-8 rounded-md border border-console-accent px-3 text-xs text-console-accent hover:bg-console-accent/10">
+              className="w-64"
+              />
+            <Button type="submit" variant="outline">
               検索する
-            </button>
+            </Button>
             {hasFilters ? (
-              <a
-                href="/content/references#portfolio"
-                className="inline-flex h-8 items-center px-2 text-xs text-console-muted hover:text-console-fg"
-              >
-                条件を解除
-              </a>
+              <Button asChild variant="ghost">
+                <a href="/content/references#portfolio">条件を解除</a>
+              </Button>
             ) : null}
           </form>
           <p className="text-[11px] text-console-muted">
@@ -404,7 +387,8 @@ export default async function ReferenceContentPage({
               ? `${portfolio.units.length}件中${units.length}件を表示しています。`
               : `展開テーマ${portfolio.units.length}件を表示しています。`}
           </p>
-        </div>
+          </CardContent>
+        </Card>
       </Section>
 
       <Section
@@ -412,7 +396,7 @@ export default async function ReferenceContentPage({
         title="資料別の利用状況"
         count={portfolio.sources.length}
       >
-        <Table
+        <DataTable
           columns={[
             '資料',
             '全項目',
@@ -423,8 +407,8 @@ export default async function ReferenceContentPage({
           ]}
         >
           {portfolio.sources.map((source) => (
-            <Tr key={`${source.sourceKey}-${source.edition}`}>
-              <Td>
+            <Row key={`${source.sourceKey}-${source.edition}`}>
+              <Cell>
                 <div className="font-medium">
                   {sourceLabel(source.sourceKey)}
                 </div>
@@ -432,15 +416,15 @@ export default async function ReferenceContentPage({
                   {editionLabel(source.sourceKey, source.edition)}
                 </div>
                 <InternalDetails>{source.sourceKey}</InternalDetails>
-              </Td>
-              <Td nowrap>{source.itemCount}</Td>
-              <Td nowrap>{source.productionEvidence}</Td>
-              <Td nowrap>{source.contextEvidence}</Td>
-              <Td nowrap>{source.blockedEvidence}</Td>
-              <Td nowrap>{source.notApplicable}</Td>
-            </Tr>
+              </Cell>
+              <Cell nowrap>{source.itemCount}</Cell>
+              <Cell nowrap>{source.productionEvidence}</Cell>
+              <Cell nowrap>{source.contextEvidence}</Cell>
+              <Cell nowrap>{source.blockedEvidence}</Cell>
+              <Cell nowrap>{source.notApplicable}</Cell>
+            </Row>
           ))}
-        </Table>
+        </DataTable>
       </Section>
 
       <Section id="channels" title="展開先別の状況" count={CHANNELS.length}>
@@ -448,7 +432,7 @@ export default async function ReferenceContentPage({
           サイト、長文記事、書籍、動画、SNSへの展開状況を同じ基準で追跡します。
           「対象外」も残し、内容に合わない展開を増やさないための判断に使います。
         </p>
-        <Table
+        <DataTable
           columns={[
             '展開先',
             '反映済み',
@@ -461,28 +445,28 @@ export default async function ReferenceContentPage({
           {CHANNELS.map((value) => {
             const counts = portfolio.summary.byChannel[value];
             return (
-              <Tr key={value}>
-                <Td>
+              <Row key={value}>
+                <Cell>
                   <span className="font-medium">
                     {REFERENCE_PRODUCTION_CHANNEL_LABELS[value]}
                   </span>
-                </Td>
-                <Td nowrap>{counts.integrated}</Td>
-                <Td nowrap>{counts.draft}</Td>
-                <Td nowrap>{counts.ready}</Td>
-                <Td nowrap>{counts.blocked}</Td>
-                <Td nowrap>{counts['not-applicable']}</Td>
-              </Tr>
+                </Cell>
+                <Cell nowrap>{counts.integrated}</Cell>
+                <Cell nowrap>{counts.draft}</Cell>
+                <Cell nowrap>{counts.ready}</Cell>
+                <Cell nowrap>{counts.blocked}</Cell>
+                <Cell nowrap>{counts['not-applicable']}</Cell>
+              </Row>
             );
           })}
-        </Table>
+        </DataTable>
       </Section>
 
       <Section id="plans" title="企画・下書き" count={plans.length}>
         <div className="mb-3 grid gap-3 sm:grid-cols-3">
-          <Stat label="テーマ企画" value={themePlans.length} tone="info" />
-          <Stat label="ブログ下書き" value={blogDrafts.length} tone="warn" />
-          <Stat
+          <StatCard label="テーマ企画" value={themePlans.length} tone="info" />
+          <StatCard label="ブログ下書き" value={blogDrafts.length} tone="warn" />
+          <StatCard
             label="確認待ち"
             value={plans.filter((plan) => plan.status === 'blocked').length}
             tone="warn"
@@ -492,7 +476,7 @@ export default async function ReferenceContentPage({
           テーマ企画は実行待ちの作業台帳、ブログは非公開の原稿ファイルが管理元です。
           参考文献は論点の発見に使い、一次資料と保存済み統計データを確認するまで公開へ進めません。
         </p>
-        <Table
+        <DataTable
           columns={[
             '種類',
             '企画名',
@@ -503,12 +487,12 @@ export default async function ReferenceContentPage({
           ]}
         >
           {plans.map((plan) => (
-            <Tr key={plan.id}>
-              <Td nowrap>{plan.kind === 'theme' ? 'テーマ' : 'ブログ'}</Td>
-              <Td>
+            <Row key={plan.id}>
+              <Cell nowrap>{plan.kind === 'theme' ? 'テーマ' : 'ブログ'}</Cell>
+              <Cell>
                 <div className="font-medium">{plan.title}</div>
-              </Td>
-              <Td muted>
+              </Cell>
+              <Cell muted>
                 <div className="text-console-fg">
                   {plan.kind === 'theme'
                     ? themeTargetLabel(plan.target)
@@ -524,22 +508,22 @@ export default async function ReferenceContentPage({
                       .join('、')}
                   </div>
                 ) : null}
-              </Td>
-              <Td nowrap>
+              </Cell>
+              <Cell nowrap>
                 <ReferenceStageBadge stage={plan.status} />
-              </Td>
-              <Td>{plan.summary}</Td>
-              <Td muted>
+              </Cell>
+              <Cell>{plan.summary}</Cell>
+              <Cell muted>
                 <InternalDetails summary="識別子と保存先を表示">
                   <div>{plan.id}</div>
                   <div>{plan.target}</div>
                   <div>{plan.metricKeys.join(' / ')}</div>
                   <div>{plan.sourcePath}</div>
                 </InternalDetails>
-              </Td>
-            </Tr>
+              </Cell>
+            </Row>
           ))}
-        </Table>
+        </DataTable>
       </Section>
 
       <Section
@@ -548,11 +532,11 @@ export default async function ReferenceContentPage({
         count={`${visibleUnits.length}/${units.length}`}
       >
         {units.length === 0 ? (
-          <p className="rounded-md border border-console-border bg-console-card p-3 text-xs text-console-muted">
-            条件に合う展開テーマはありません。検索語または絞り込み条件を変更してください。
-          </p>
+          <Alert>
+            <AlertDescription>条件に合う展開テーマはありません。検索語または絞り込み条件を変更してください。</AlertDescription>
+          </Alert>
         ) : null}
-        <Table
+        <DataTable
           columns={[
             '展開テーマ',
             '参考資料・根拠',
@@ -569,8 +553,8 @@ export default async function ReferenceContentPage({
               (entry) => entry.stage !== 'not-applicable'
             );
             return (
-              <Tr key={unit.id}>
-                <Td>
+              <Row key={unit.id}>
+                <Cell>
                   <div className="font-medium">{unit.label}</div>
                   <div className="mt-1 text-[10px] text-console-muted">
                     {japaneseLabels(unit.geoScopes, GEO_SCOPE_LABELS).join(
@@ -578,8 +562,8 @@ export default async function ReferenceContentPage({
                     ) || '対象範囲未指定'}
                   </div>
                   <InternalDetails>{unit.id}</InternalDetails>
-                </Td>
-                <Td muted>
+                </Cell>
+                <Cell muted>
                   <div>
                     {unit.sourceKeys.map(sourceLabel).join('・')} · 根拠
                     {unit.evidenceCount}件
@@ -599,8 +583,8 @@ export default async function ReferenceContentPage({
                       {unit.surveyIds.join(' / ')}
                     </InternalDetails>
                   ) : null}
-                </Td>
-                <Td>
+                </Cell>
+                <Cell>
                   <div className="flex max-w-xl flex-wrap gap-1.5">
                     {applicable.map((entry) => (
                       <span
@@ -614,8 +598,8 @@ export default async function ReferenceContentPage({
                       </span>
                     ))}
                   </div>
-                </Td>
-                <Td muted>
+                </Cell>
+                <Cell muted>
                   {selected ? (
                     <div className="max-w-72">
                       <div className="flex items-center gap-2">
@@ -640,12 +624,12 @@ export default async function ReferenceContentPage({
                       展開先を選ぶと、根拠や確認待ちの理由を表示します
                     </span>
                   )}
-                </Td>
-                <Td>{unit.nextAction}</Td>
-              </Tr>
+                </Cell>
+                <Cell>{unit.nextAction}</Cell>
+              </Row>
             );
           })}
-        </Table>
+        </DataTable>
         {pageCount > 1 ? (
           <div className="flex items-center justify-end gap-2 text-xs text-console-muted">
             {currentPage > 1 ? (
@@ -685,17 +669,17 @@ export default async function ReferenceContentPage({
         count={`${visibleContextGroups.length}/${contextGroups.length}`}
       >
         <div className="mb-3 grid gap-3 sm:grid-cols-3">
-          <Stat
+          <StatCard
             label="既存ページへ反映済み"
             value={portfolio.summary.contextIntegratedEvidence}
             tone="good"
           />
-          <Stat
+          <StatCard
             label="補強に利用可能"
             value={portfolio.summary.contextReadyEvidence}
             tone="info"
           />
-          <Stat
+          <StatCard
             label="反映先の確認待ち"
             value={portfolio.summary.contextBlockedEvidence}
             tone="warn"
@@ -706,11 +690,11 @@ export default async function ReferenceContentPage({
           既存ページの用語説明、よくある質問、考察、出典の補強にだけ使います。
         </p>
         {contextGroups.length === 0 ? (
-          <p className="rounded-md border border-console-border bg-console-card p-3 text-xs text-console-muted">
-            条件に合う補強候補はありません。
-          </p>
+          <Alert>
+            <AlertDescription>条件に合う補強候補はありません。</AlertDescription>
+          </Alert>
         ) : null}
-        <Table
+        <DataTable
           columns={[
             '公式資料のまとまり',
             '根拠数',
@@ -721,8 +705,8 @@ export default async function ReferenceContentPage({
           ]}
         >
           {visibleContextGroups.map((group) => (
-            <Tr key={group.id}>
-              <Td>
+            <Row key={group.id}>
+              <Cell>
                 <div className="font-medium">{group.label}</div>
                 <div className="text-[10px] text-console-muted">
                   {group.organization} · {sourceLabel(group.sourceKey)}
@@ -738,9 +722,9 @@ export default async function ReferenceContentPage({
                     一次資料
                   </a>
                 ) : null}
-              </Td>
-              <Td nowrap>{group.evidenceCount}</Td>
-              <Td muted>
+              </Cell>
+              <Cell nowrap>{group.evidenceCount}</Cell>
+              <Cell muted>
                 <div>
                   {japaneseLabels(group.geoScopes, GEO_SCOPE_LABELS).join(
                     '・'
@@ -749,11 +733,11 @@ export default async function ReferenceContentPage({
                 <div className="mt-1 text-[10px]">
                   {japaneseLabels(group.roles, ROLE_LABELS).join('・')}
                 </div>
-              </Td>
-              <Td nowrap>
+              </Cell>
+              <Cell nowrap>
                 <ReferenceStageBadge stage={group.stage} />
-              </Td>
-              <Td muted>
+              </Cell>
+              <Cell muted>
                 <div className="max-w-72 text-console-fg">
                   {group.targetPaths.length > 0
                     ? Array.from(
@@ -766,11 +750,11 @@ export default async function ReferenceContentPage({
                     {group.targetPaths.join(' / ')}
                   </InternalDetails>
                 ) : null}
-              </Td>
-              <Td>{group.detail}</Td>
-            </Tr>
+              </Cell>
+              <Cell>{group.detail}</Cell>
+            </Row>
           ))}
-        </Table>
+        </DataTable>
         {contextPageCount > 1 ? (
           <div className="flex items-center justify-end gap-2 text-xs text-console-muted">
             {currentContextPage > 1 ? (
@@ -810,53 +794,61 @@ export default async function ReferenceContentPage({
 
       <Section title="展開しない判断も含む完了境界">
         <div className="grid gap-3 text-xs text-console-muted md:grid-cols-2 xl:grid-cols-3">
-          <div className="rounded-md border border-console-border bg-console-card p-3">
-            <div className="font-semibold text-console-fg">世界統計</div>
-            <p className="mt-1">
-              世界比較ページの基盤が完成するまでは「確認待ち」です。国際比較の候補を国内ランキングへ混在させません。
-            </p>
-          </div>
-          <div className="rounded-md border border-console-border bg-console-card p-3">
-            <div className="font-semibold text-console-fg">
-              Kindle・データ商品
-            </div>
-            <p className="mt-1">
-              1指標ごとに商品化せず、既存書籍への追加、無料コンテンツでの需要確認、少数の試験販売、実売確認の順で進めます。
-            </p>
-          </div>
-          <div className="rounded-md border border-console-border bg-console-card p-3">
-            <div className="font-semibold text-console-fg">YouTube・SNS</div>
-            <p className="mt-1">
-              YouTubeの通常動画を基礎に、Instagram・X向け素材を作ります。TikTokは撤退済みのため再開しません。
-            </p>
-          </div>
-          <div className="rounded-md border border-console-border bg-console-card p-3">
-            <div className="font-semibold text-console-fg">補強専用資料</div>
-            <p className="mt-1">
-              既存コンテンツ補強専用。単独ページ・記事・書籍への水増しを禁止します。
-            </p>
-          </div>
-          <div className="rounded-md border border-console-border bg-console-card p-3">
-            <div className="font-semibold text-console-fg">
-              権利・一次資料の確認待ち
-            </div>
-            <p className="mt-1">
-              権利確認中、または一次資料を確認できない資料はGoogle
-              Driveに保全したまま、制作予定へは入れません。
-            </p>
-          </div>
-          <div className="rounded-md border border-console-border bg-console-card p-3">
-            <div className="font-semibold text-console-fg">公開承認</div>
-            <p className="mt-1">
-              この画面は読み取り専用です。各担当の品質確認と公開確認が終わるまで外部公開しません。
-            </p>
-          </div>
+          <Card className="gap-1 py-3">
+            <CardHeader className="px-3">
+              <CardTitle className="text-sm">世界統計</CardTitle>
+            </CardHeader>
+            <CardContent className="px-3">
+              {`世界比較ページの基盤が完成するまでは「確認待ち」です。国際比較の候補を国内ランキングへ混在させません。`}
+            </CardContent>
+          </Card>
+          <Card className="gap-1 py-3">
+            <CardHeader className="px-3">
+              <CardTitle className="text-sm">Kindle・データ商品</CardTitle>
+            </CardHeader>
+            <CardContent className="px-3">
+              {`1指標ごとに商品化せず、既存書籍への追加、無料コンテンツでの需要確認、少数の試験販売、実売確認の順で進めます。`}
+            </CardContent>
+          </Card>
+          <Card className="gap-1 py-3">
+            <CardHeader className="px-3">
+              <CardTitle className="text-sm">YouTube・SNS</CardTitle>
+            </CardHeader>
+            <CardContent className="px-3">
+              {`YouTubeの通常動画を基礎に、Instagram・X向け素材を作ります。TikTokは撤退済みのため再開しません。`}
+            </CardContent>
+          </Card>
+          <Card className="gap-1 py-3">
+            <CardHeader className="px-3">
+              <CardTitle className="text-sm">補強専用資料</CardTitle>
+            </CardHeader>
+            <CardContent className="px-3">
+              {`既存コンテンツ補強専用。単独ページ・記事・書籍への水増しを禁止します。`}
+            </CardContent>
+          </Card>
+          <Card className="gap-1 py-3">
+            <CardHeader className="px-3">
+              <CardTitle className="text-sm">権利・一次資料の確認待ち</CardTitle>
+            </CardHeader>
+            <CardContent className="px-3">
+              {`権利確認中、または一次資料を確認できない資料はGoogle Driveに保全したまま、制作予定へは入れません。`}
+            </CardContent>
+          </Card>
+          <Card className="gap-1 py-3">
+            <CardHeader className="px-3">
+              <CardTitle className="text-sm">公開承認</CardTitle>
+            </CardHeader>
+            <CardContent className="px-3">
+              {`この画面は読み取り専用です。各担当の品質確認と公開確認が終わるまで外部公開しません。`}
+            </CardContent>
+          </Card>
         </div>
       </Section>
 
       <Section id="audit" title="機械監査">
-        <div className="rounded-md border border-console-border bg-console-card p-3 text-xs text-console-muted">
-          <div className="font-semibold text-console-fg">
+        <Card className="py-4">
+          <CardContent className="px-4 text-xs text-muted-foreground">
+          <div className="font-semibold text-foreground">
             {{
               pass: '問題なし',
               warn: '確認事項あり',
@@ -886,8 +878,9 @@ export default async function ReferenceContentPage({
               ))}
             </ul>
           )}
-        </div>
+          </CardContent>
+        </Card>
       </Section>
-    </div>
+    </Stack>
   );
 }

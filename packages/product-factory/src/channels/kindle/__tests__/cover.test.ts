@@ -127,7 +127,8 @@ describe("buildCoverPng — 明るい文字面と画像面を分離する", () =
       backgroundJpeg: await solidJpeg("#040a14"),
     });
     const image = sharp(cover);
-    const top = await image.clone().extract({ left: 20, top: 20, width: 1, height: 1 }).raw().toBuffer();
+    // 上端28pxは商品別アクセント帯。帯の直下が明るい文字面であることを見る。
+    const top = await image.clone().extract({ left: 20, top: 40, width: 1, height: 1 }).raw().toBuffer();
     const bottom = await image.clone().extract({ left: 20, top: 2500, width: 1, height: 1 }).raw().toBuffer();
 
     expect([...top.slice(0, 3)]).toEqual([242, 246, 250]);

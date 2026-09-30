@@ -1,13 +1,6 @@
-import {
-  Badge,
-  ErrorNote,
-  PageHeading,
-  Section,
-  Stat,
-  Table,
-  Td,
-  Tr,
-} from "@/components/ops/primitives";
+import { Cell, DataTable, Row, StatCard, StatusBadge } from "@/components/admin-ui";
+import { Section } from "@/components/layout-primitives";
+import { ErrorNote, PageHeading } from "@/components/ops/primitives";
 import { affiliatePrograms } from "@/lib/server/affiliate";
 import { adsSummary } from "@/lib/server/ads";
 import { hasError } from "@/lib/server/state-io";
@@ -48,34 +41,34 @@ export default function AffiliateProgramsPage() {
         ) : (
           <>
             <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
-              <Stat label="案件" value={d.portfolio.totals.offers} sub={`creative ${d.portfolio.totals.ads}`} />
-              <Stat
+              <StatCard label="案件" value={d.portfolio.totals.offers} sub={`creative ${d.portfolio.totals.ads}`} />
+              <StatCard
                 label="未分類"
                 value={d.portfolio.totals.unclassified}
                 tone={d.portfolio.totals.unclassified > 0 ? "warn" : "good"}
                 sub="推測せず配信候補から隔離"
               />
-              <Stat
+              <StatCard
                 label="欠損指標を持つ案件"
                 value={d.portfolio.unknownMetricOffers}
                 tone={d.portfolio.unknownMetricOffers > 0 ? "warn" : "good"}
                 sub={`共用口座 ${d.portfolio.totals.sharedOutcomePrograms} 件`}
               />
-              <Stat
+              <StatCard
                 label="次の1件"
                 value={d.portfolio.nextAction?.id ?? "—"}
                 sub={d.portfolio.nextAction?.programRef ?? d.portfolio.nextAction?.reasons.join(" / ") ?? "—"}
               />
             </div>
             <div className="mt-2">
-              <Table columns={["レーン", "案件数"]}>
+              <DataTable columns={["レーン", "案件数"]}>
                 {d.portfolio.lanes.map((lane) => (
-                  <Tr key={lane.lane}>
-                    <Td nowrap>{lane.lane}</Td>
-                    <Td nowrap muted>{lane.count}</Td>
-                  </Tr>
+                  <Row key={lane.lane}>
+                    <Cell nowrap>{lane.lane}</Cell>
+                    <Cell nowrap muted>{lane.count}</Cell>
+                  </Row>
                 ))}
-              </Table>
+              </DataTable>
             </div>
           </>
         )}
@@ -103,19 +96,19 @@ export default function AffiliateProgramsPage() {
 
           <Section title="案件" count={p.rows.length}>
             <p className="text-[11px] text-console-muted">配信中の案件を先頭に並べる。報酬は ASP カタログの記録値</p>
-            <Table columns={["案件", "配信", "ASP", "提携", "報酬", "分野", "掲載終了日"]}>
+            <DataTable columns={["案件", "配信", "ASP", "提携", "報酬", "分野", "掲載終了日"]}>
               {p.rows.map((r) => (
-                <Tr key={r.programRef}>
-                  <Td>{r.name}</Td>
-                  <Td nowrap>{r.live ? <Badge tone="good">配信中</Badge> : <span className="text-console-muted">なし</span>}</Td>
-                  <Td nowrap muted>{ASP[r.asp] ?? r.asp}</Td>
-                  <Td nowrap>{STATUS[r.status] ?? r.status}</Td>
-                  <Td nowrap muted>{r.rewardYen == null ? "—" : `¥${r.rewardYen.toLocaleString()}`}</Td>
-                  <Td nowrap muted>{r.vertical ?? "—"}</Td>
-                  <Td nowrap muted>{r.endDate ?? "—"}</Td>
-                </Tr>
+                <Row key={r.programRef}>
+                  <Cell>{r.name}</Cell>
+                  <Cell nowrap>{r.live ? <StatusBadge tone="good">配信中</StatusBadge> : <span className="text-console-muted">なし</span>}</Cell>
+                  <Cell nowrap muted>{ASP[r.asp] ?? r.asp}</Cell>
+                  <Cell nowrap>{STATUS[r.status] ?? r.status}</Cell>
+                  <Cell nowrap muted>{r.rewardYen == null ? "—" : `¥${r.rewardYen.toLocaleString()}`}</Cell>
+                  <Cell nowrap muted>{r.vertical ?? "—"}</Cell>
+                  <Cell nowrap muted>{r.endDate ?? "—"}</Cell>
+                </Row>
               ))}
-            </Table>
+            </DataTable>
           </Section>
         </>
       )}

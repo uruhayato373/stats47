@@ -1,28 +1,8 @@
 {
-  "hash": "12e7efe1361c7afedc732cbef43ecd245db6613feb120ec9e9e8fba78d8a3c4b",
-  "audited_at": "2026-09-27T07:15:43",
+  "hash": "68b1aaaad5dbbb768bb43cb7fd88f8d3e5d80a12c82bed3711b1940c74f0b805",
+  "audited_at": "2026-09-29T23:21:16",
   "files": [
-    ".agents/skills/image-prompt/SKILL.md",
-    ".agents/skills/management/monthly-plan/SKILL.md",
-    ".agents/skills/management/weekly-plan/SKILL.md",
-    ".agents/skills/management/weekly-review/SKILL.md",
-    ".agents/skills/note/publish-note/SKILL.md",
-    ".claude/agents/improvement-triage.md",
-    ".claude/agents/strategy-advisor.md",
-    ".claude/agents/todo-curator.md",
-    ".claude/rules/todo-standards.md",
-    ".claude/scripts/lib/__tests__/strategy-lanes.test.cjs",
-    ".claude/scripts/lib/check-docs-governance.cjs",
-    ".claude/scripts/lib/strategy-lanes.cjs",
-    ".claude/scripts/metrics/__tests__/improvement-cycle-gate.test.mjs",
-    ".claude/scripts/metrics/__tests__/measurement-cycle.test.mjs",
-    ".claude/scripts/metrics/build-measurement-cycle.mjs",
-    ".claude/scripts/metrics/lib/cycle-health.mjs",
-    ".claude/scripts/metrics/lib/improvement-cycle-gate.mjs",
-    ".claude/scripts/metrics/lib/measurement-cycle.mjs",
-    ".claude/scripts/metrics/verify-improvement-cycle-run.mjs",
-    ".claude/skills/management/monthly-plan/SKILL.md",
-    ".claude/skills/management/weekly-plan/SKILL.md",
-    ".claude/skills/management/weekly-review/SKILL.md"
+    ".agents/skills/sns/react-to-news/SKILL.md",
+    ".claude/skills/sns/react-to-news/SKILL.md"
   ]
 }

@@ -134,6 +134,7 @@ note 記事の表紙画像（ヘッダー）は **`/image-prompt` スキル**で
 - `--use-case note-header` で note 最適サイズ（1280×670 ≒ 1.91:1）が自動適用
 - fit=high の 10 種（51/54/55/66/69/75/77/82/85/88）が stats47 ブランド安全圏
 - 保存先: `docs/31_note記事原稿/<vertical>/<slug>/images/cover-1280x670.png`
+- **生成AIで作ったカバー/背景は作り直せない入力**。PNG を `docs/31` に置くだけだと (家計・koumuin 系列は gitignore で) git に載らず失われる。二層で保管する: 候補は Drive、採用版は R2、git には SHA だけ (`.claude/rules/note-image-assets.md` 契約7・ランキング記事は `ingest-note-background.mjs`)。SVG 由来の PNG は git に置かず `npm run note:images:regen` で復元する
 
 このエージェントが扱う画像の方式割当（補足）:
 

@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "siteUrl": "sc-domain:stats47.jp",
+  "asOf": "2026-09-28",
+  "generatedAt": "2026-09-28T06:54:50.236Z",
+  "limitations": [
+    "GSC reports average position, not a universal SERP rank.",
+    "Anonymous and omitted query rows are unknown, never rank zero."
+  ],
+  "current": {
+    "period": {
+      "periodStart": "2026-09-19",
+      "periodEnd": "2026-09-25",
+      "windowDays": 7
+    },
+    "dataState": "final",
+    "coverage": {
+      "status": "complete",
+      "missingDates": [],
+      "presentCount": 7,
+      "expectedCount": 7
+    },
+    "excludedNonCanonicalRows": 1736,
+    "rows": [
+      {
+        "keyword": "外国人",
+        "targetPath": "/blog/foreign-residents-diversity-map",
+        "rank": 2.923954372623574,
+        "impressions": 263,
+        "clicks": 29
+      },
+      {
+        "keyword": "住みやすい県ランキング",
+        "targetPath": "/blog/livable-prefecture-composite-ranking",
+        "rank": 4.366726296958856,
+        "impressions": 559,
+        "clicks": 16
+      },
+      {
+        "keyword": "全国の公衆電話の数",
+        "targetPath": "/ranking/public-phone-count",
+        "rank": 6.569015725101922,
+        "impressions": 1717,
+        "clicks": 2
+      },
+      {
+        "keyword": "全国の公衆電話の数",
+        "targetPath": "/blog/public-phone-count",
+        "rank": 8.241379310344827,
+        "impressions": 29,
+        "clicks": 0
+      },
+      {
+        "keyword": "道の駅 多い県",
+        "targetPath": "/blog/roadside-station-count-prefecture-gap",
+        "rank": 8.69243156199678,
+        "impressions": 621,
+        "clicks": 0
+      },
+      {
+        "keyword": "高校2年生 平均身長",
+        "targetPath": "/blog/avg-height-high-school-2nd-male",
+        "rank": 7.543778801843318,
+        "impressions": 217,
+        "clicks": 0
+      },
+      {
+        "keyword": "高校教師 年収",
+        "targetPath": "/blog/high-school-teacher-salary-prefecture-gap",
+        "rank": 12.333333333333334,
+        "impressions": 3,
+        "clicks": 0
+      },
+      {
+        "keyword": "高校教師 年収",
+        "targetPath": "/ranking/high-school-teacher-annual-income",
+        "rank": 22.666666666666668,
+        "impressions": 3,
+        "clicks": 0
+      }
+    ]
+  },
+  "previous": {
+    "period": {
+      "periodStart": "2026-09-12",
+      "periodEnd": "2026-09-18",
+      "windowDays": 7
+    },
+    "dataState": "final",
+    "coverage": {
+      "status": "complete",
+      "missingDates": [],
+      "presentCount": 7,
+      "expectedCount": 7
+    },
+    "excludedNonCanonicalRows": 2093,
+    "rows": [
+      {
+        "keyword": "外国人",
+        "targetPath": "/blog/foreign-residents-diversity-map",
+        "rank": 2.60546875,
+        "impressions": 768,
+        "clicks": 39
+      },
+      {
+        "keyword": "住みやすい県ランキング",
+        "targetPath": "/blog/livable-prefecture-composite-ranking",
+        "rank": 6.935684647302905,
+        "impressions": 482,
+        "clicks": 13
+      },
+      {
+        "keyword": "高校2年生 平均身長",
+        "targetPath": "/blog/avg-height-high-school-2nd-male",
+        "rank": 7.033653846153846,
+        "impressions": 208,
+        "clicks": 1
+      },
+      {
+        "keyword": "全国の公衆電話の数",
+        "targetPath": "/ranking/public-phone-count",
+        "rank": 9,
+        "impressions": 1,
+        "clicks": 0
+      },
+      {
+        "keyword": "外国人",
+        "targetPath": "/blog/future-population-tokyo-paradox",
+        "rank": 2,
+        "impressions": 2,
+        "clicks": 0
+      },
+      {
+        "keyword": "外国人",
+        "targetPath": "/blog/livable-prefecture-composite-ranking",
+        "rank": 2,
+        "impressions": 1,
+        "clicks": 0
+      },
+      {
+        "keyword": "道の駅 多い県",
+        "targetPath": "/blog/roadside-station-count-prefecture-gap",
+        "rank": 9.8,
+        "impressions": 5,
+        "clicks": 0
+      },
+      {
+        "keyword": "高校教師 年収",
+        "targetPath": "/blog/high-school-teacher-salary-prefecture-gap",
+        "rank": 8.888198757763975,
+        "impressions": 161,
+        "clicks": 0
+      },
+      {
+        "keyword": "高校教師 年収",
+        "targetPath": "/ranking/high-school-teacher-annual-income",
+        "rank": 58,
+        "impressions": 1,
+        "clicks": 0
+      }
+    ]
+  }
+}

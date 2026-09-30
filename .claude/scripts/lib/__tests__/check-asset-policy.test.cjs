@@ -104,3 +104,26 @@ test("コードスパン/コードブロック内の画像記法は参照とみ�
   const parsed = JSON.parse(run(f).stdout);
   assert.equal(parsed.newFindings.filter((x) => x.code === "MISSING_REFERENCE" && x.file.includes("guide.md")).length, 0);
 });
+
+test("docs/31 の派生 PNG は、追跡された同名 SVG があれば CI に無くても欠落にしない", async (t) => {
+  const f = await fixture(); t.after(() => fs.rmSync(f.root, { recursive: true, force: true }));
+  const dir = path.join(f.root, "docs/31_note記事原稿/s/images");
+  fs.mkdirSync(dir, { recursive: true });
+  fs.writeFileSync(path.join(dir, "a.svg"), '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"></svg>');
+  fs.writeFileSync(path.join(f.root, "docs/31_note記事原稿/s/draft.md"), "![再生成できる](images/a.png)\n![再生成元が無い](images/b.png)\n");
+  const result = run(f);
+  const missing = JSON.parse(result.stdout).newFindings.filter((x) => x.code === "MISSING_REFERENCE").map((x) => x.message);
+  assert.deepEqual(missing, ["images/b.png"]);
+});
+
+test("docs/31 のランキング記事は render-spec.json があれば、CI に無い images/*.png を欠落にしない", async (t) => {
+  const f = await fixture(); t.after(() => fs.rmSync(f.root, { recursive: true, force: true }));
+  const slugDir = path.join(f.root, "docs/31_note記事原稿/a-foo");
+  fs.mkdirSync(slugDir, { recursive: true });
+  fs.writeFileSync(path.join(slugDir, "render-spec.json"), "{}");
+  fs.writeFileSync(path.join(slugDir, "draft.md"), "![地図](images/cover-1280x670.png)\n");
+  const missing = (r) => JSON.parse(r.stdout).newFindings.filter((x) => x.code === "MISSING_REFERENCE");
+  assert.deepEqual(missing(run(f)), []);
+  fs.rmSync(path.join(slugDir, "render-spec.json"));
+  assert.equal(missing(run(f)).length, 1);
+});

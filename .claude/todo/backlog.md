@@ -2,7 +2,7 @@
 title: バックログ (タスクマスタ)
 type: backlog
 status: active
-updated: 2026-09-21
+updated: 2026-09-29
 ---
 
 # バックログ (タスクマスタ)
@@ -22,33 +22,6 @@ updated: 2026-09-21
 ## 🔴 高 — 今月中に着手したい
 
 並び順が着手順 (2026-09-27 オーナー判断: 計測・記録・改善とデータ品質を優先する)。上限 10 枚 (DG081)。
-
-### [DATA-VALUE-ERRORS-01] 公開中の誤った値・誤った表記を全指標で洗い出し、早急に直す
-タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-09-25] [レーン:データ品質]
-
-- **オーナー判断 (2026-09-25 壁打ち)**: 誤った値は**非公開にせず、すべて早急に直す**。対象は全指標 (2,603 metric)。
-  見つける手段は `DATA-QUALITY-LOOP-01` の機械チェックで、このカードは「見つかった誤りを直す」側を持つ。
-- **既知の誤り**: `elderly-single-person-households` (国勢調査由来・10 月 1 日時点の「年」) が `yearFormat: "fiscal"` のため
-  本番で「2005年度」と表示されている (`curl -s https://storage.stats47.jp/app/ranking/elderly-single-person-households/values.json | grep -o '"yearName":"[^"]*"' | sort -u`)。
-  同じ SSDS (社会・人口統計体系) の時点統計で同じ設定の metric が他にもある可能性が高い (未確認)。
-- **誤りの定義**: 一次資料と値が合わない / 単位の誤り (`.claude/rules/unit-semantics-standards.md`) / 年・年度の表記の誤り /
-  47 都道府県の欠け / 順位の不整合。「古いだけ」は誤りではなく `DATA-QUALITY-LOOP-01` の基準 2〜4 で扱う。
-- **次**: ① `DATA-QUALITY-LOOP-01` の年表記チェックで対象を列挙する。② 需要 (GSC 表示) の多い順に config を直し、
-  values を再生成して R2 へ反映する (R2 反映は承認後)。③ 代表 URL で表示を確認する。
-- **実行順 (2026-09-27・1 週で終わる単位。上から着手し、終わった段は消す)**:
-  1. 年表記: 時点統計 (国勢調査・人口推計など 10 月 1 日時点) なのに `yearFormat: "fiscal"` の metric を機械列挙し、config を直して values を再生成する。代表 `elderly-single-person-households`・総人口・人口推移の横軸。
-     - **2026-09-27 進捗**: 原典が国勢調査・人口推計だけの 69 件を `calendar` に修正 (根拠: 統計局「令和2年国勢調査」・人口推計「2026年（令和8年）4月1日現在」、いずれも「年度」表記なし、同日確認)。テーマ画面はデプロイだけで直る (`themeYearLabel`)。ランキングの yearName は `data-refresh.yml` (snapshot_scope=ranking) で再生成済み (対象はランキング公開中の 62 件。残る 38 件はテーマ専用で `themeYearLabel` が直す)。同日、AI 解説にも「○年度」が残っていた (生成プロンプトが全 metric に「年度」を書かせていた) ので、プロンプトと決定的生成を yearName 準拠に直し、公開済み 48 件の「4 桁の年+年度」113 箇所を置換して再公開した (R2 で 48/48 確認)。JSON-LD (Dataset 名・FAQ) の同じ誤りは develop で修正済みで、**本番反映 (デプロイ) が残り**。確認: `curl -s https://stats47.jp/ranking/total-population | grep -c 2024年度` が 0。同日、公式表記を確認した人口動態統計 (厚労省「令和○年人口動態統計」・暦年)・住宅・土地統計調査 (「令和5年10月1日現在」)・社会生活基本調査 (「令和3年10月20日現在」) の 31 件にも広げた (計 100 件)。Kindle K-S1-08 の図校訂 `solar-power-housing-map` (年→年度) は誤りになるので外した。書籍の再アップロード (KDP) は人の作業。家計調査は `METRIC-YEARFORMAT-KAKEI-01`、残りの調査も公式表記を確認してから同じ手順で広げる。
-  2. 単位: 全面点検で見つけた 5 件 (人口密度「人」・合計特殊出生率「(人)」・外国人 10 万人比「人」・道路実延長 1km² 当たり「km」・人口当たり指標の分母表示なし) を直す。
-  3. 値の食い違い・定義: 東京都人口の県ページと人口動態ページの不一致、平均余命の年齢、市区町村ランキングの説明文、`/survey/census` の最新年。
-  4. 「全国平均」が 47 都道府県の単純平均である件は表示方針の判断が要るので、オーナーに確認してから直す。
-- **完了条件**: 機械チェックが検出した誤りが 0 件になり、直した metric の本番ページで値・単位・年表記が一次資料と一致する。
-- **全面点検で見つかった表示上の誤り (UI 全面点検 (2026-09-25・本番 44 URL × 7 幅 = 308 枚を撮影、250 枚を目視。`UI-FULL-SWEEP-01`))**:
-  - 単位の誤り: 県データブックの人口密度が「人」/ 合計特殊出生率に「(人)」/ 「外国人 (10万人比)」の単位が「人」、`/category/population` で「東京都 1,393.4人」/
-    道路実延長 (1km² 当たり) の単位が「km」(`/category/landweather`・`/survey/census`) / `/japan/education-culture` の「図書館数 27 館」「小学校数 15.31 校」に分母 (人口当たり) の表示が無い。
-  - 年の表記: 総人口 (10 月 1 日時点) が「2024年度」、人口推移の横軸が「1975年度」(国勢調査は時点の「年」)。
-  - 値の食い違い: 東京都の人口が県ページで 13,463,000 人 (年の表示なし)、人口動態ページで 14,178,000 人 (2024 年)。
-  - 定義の不足: 「平均余命 25.44 年」が何歳時点か書かれていない (沖縄県ページ)。市区町村ランキングの説明が「都道府県内に所在する中学校の総数」。
-  - 「全国平均」が 47 都道府県の単純平均 (ランキング全般)。`/survey/census` の「最新 2024 年」(国勢調査の最新回は 2020 年)。
 
 ### [DATA-QUALITY-LOOP-01] 全指標のデータ品質を機械チェックし、「誤り・古さ・終了・薄さ」の 4 基準で継続的に直すループを作る
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-09-25] [レーン:データ品質]
@@ -76,6 +49,16 @@ updated: 2026-09-21
   再生成後の誤りは 0。残りは ③ 週 5 指標ずつの処置 (2 更新 1,072 / 3 調査終了候補 126 / 4 noindex 候補 189。2〜4 は配信年からの推定なので
   処置前に公式の最新公表を確認する) と、4 週連続の減少の観測。年表記「判定不能」2,257 件は公式表記を確認した調査を
   `CALENDAR_CONFIRMED_SOURCES` に足すたびに減る。
+- **2026-09-28 ③ 第1週 (W40 Must 1・需要上位 5 指標)**: 公式の範囲は統計局の SSDS 掲載年次一覧
+  (`https://www.stat.go.jp/data/ssds/zuhyou/kiso_ken.xlsx` / `shihyou_ken.xlsx`、2026-02 更新分) で確認。
+  - `avg-height-high-school-2nd-male` / `annual-sunshine-duration` / `local-allocation-tax-prefecture`: 最新年は公式と一致、
+    過去の年が欠けていた (それぞれ 2023 のみ / 2024 のみ / 2016〜2021 欠落)。years を広げた (`401f4c0ab`)。
+    data-refresh の dryRun (run 36363769924) は ok=4・empty=0。オーナー承認のうえ run 36364277938 で R2 反映済み (公開 URL で 47 年 / 50 年 / 48 年・全年 47 県を確認)。
+    教員の年収は `DATA-WAGE-TABLE-YEARS-01` へ切り出した。
+  - `voluntary-car-insurance-rate-vehicle`: 配信 1975〜2023 = SSDS の収録上限。「1 周期遅れ」は推定の誤検出で処置なし。
+  - `school-teacher-annual-income`: 表 `0003445758` は「令和２年以降」の複数年 DB (e-Stat カタログ) なのに、同じ表を使う 40 指標が
+    すべて 2022 年だけを配信。原因未確定 ([仮説] `cdTab` 08/12 の組み合わせが年で変わる)。dryRun は年別の件数を出さないため、
+    CI で年別の non-null を観測する必要がある (e-Stat の取得は CI 専用)。
 - **完了条件**: 週次の監査が全指標の古さ・表記を検出してキューへ積み、キューの処置状況が管理画面か週次レビューで見え、
   4 週続けて「新規検出 ≤ 処置件数」で残件が減っている。
 
@@ -106,55 +89,34 @@ updated: 2026-09-21
 - **停止条件**: 2FA/CAPTCHA/規約同意を自動化しない。Cookie/APIキーをgit/ログ/artifactへ出さない。KDPの速報売上/KENPを確定ロイヤリティや週次純収益へ代入しない。afbの発生日/確定日系列を合算せず、API報酬を純収益・入金へ代入しない。出版/提携状態の成功を全計測完了と言わない。自動投稿/申請/振込/商品変更は範囲外。
 
 ### [A8-CROSSCHECK-EXCEED-01] A8 の 9 月検算で専用案件のクリックがサイト別合計を超える原因を確定する
-タグ: [収益化] [種類:不具合] [実行:対話] [検証:node .claude/scripts/ads/check-a8-outcome-gate.mjs] [起票:2026-09-27] [期日:2026-09-29] [レーン:計測]
+タグ: [収益化] [種類:不具合] [実行:対話] [検証:node .claude/scripts/ads/check-a8-outcome-gate.mjs] [起票:2026-09-27] [期日:2026-10-05] [レーン:計測]
 
 - **事象**: 2026-09-27 に 9 月の A8 案件別明細を取り込んだ後、成果ゲートが `a8-cross-check-exceeded` で blocked。stats47 専用案件のクリック 157 がサイト別集計 141 を超える (`.claude/state/metrics/affiliate/a8-report-log.json` の crossCheck)。週次 `affiliate-ga4-weekly.yml` の計測ゲートもこれで落ちる。
 - **[仮説]** 取得時刻のずれ。サイト別は 09-26 22:47 JST (CI)、明細は 09-27 17:17 JST (ローカル) で約 18.5 時間ずれている。ただし 9 月平均は 1 日約 5 クリックで、差 16 を全部は説明しきれない。対抗仮説は、doboku-note 側の対応表も手同期で古く、両サイトが配信する案件を共用として登録できていないこと (a8mat の案件コード照合では未検出)。
 - **次**: 09-27 18:20 JST 以降の CI 収集でサイト別が明細より新しくなる。09-28 に `check-a8-outcome-gate.mjs` を実行し、超過が消えていれば時刻ずれで確定しカードを削除する。残れば doboku-note の programIdMap も広告定義から再生成 (本リポジトリの `build-a8-program-id-map.ts` と同じ方式) して共用案件を洗い出す。
+- **2026-09-28 検証結果**: サイト別を明細より後 (09-27 19:26 JST・155) に取り直しても専用 157 > サイト別 155 のまま → **時刻ずれ仮説はほぼ棄却**。
+  doboku-note と照合した「共用の登録漏れ」候補は `s00000025671001` (イオン九州・9 月 21 クリック) の 1 件だけで、doboku-note の広告定義
+  (`src/config/affiliate-creatives.ts`・5 案件) にも対応表にも無く、口座共通の案件カタログにあるだけ → **共用漏れ仮説も棄却** (停止条件どおり共用登録はしない)。
+  残る差 2 クリック (1.3%) の原因は未確定。
+- **次 (更新)**: A8 の「サイト別 × プログラム別」の明細で stats47 サイト行の案件別クリックを取り、専用 157 のどの案件がサイト別に入っていないかを特定する。
+  取れない場合は、差が 2 クリックに留まるかを 10 月初めの確定値で再確認し、許容差の導入はオーナー判断に回す。
 - **関連**: ローカルでサイト別集計を `--month 2026-09` で取ると download-failed になる (CI では成功)。debug artifact は `.local/playwright-a8-debug/2026-09-27T08-24-42Z`。
+- **2026-09-28 W40 Must 2 の調査結果 (原因は未確定・オーナー判断へ)**:
+  - 「サイト別 × プログラム別」の明細は **A8 に存在しない**。`.claude/config/a8-report-automation.json` の `_isolationNote` に実機確認の記録
+    (`/report/program/detail` はサイト列なし・素材 ID でも分離不可)。上の「次 (更新)」はこの経路では実行できない。
+  - a8mat のトークンの意味は公式に文書化されておらず、手元のリンクからは発行サイトを判別できない。
+  - [仮説] 専用案件のリンクの一部が doboku-note 側の名義で発行された、またはサイトの外で使われている。サイトの外の使用は
+    `.claude/scripts/note/editor-helpers.sh` の note 記事用 A8 リンク 3 件 (L116〜118) が該当しうる。A8 の公式ヘルプ
+    (`https://support.a8.net/as/supportguide/support/pg04.php`、2026-09-28 取得) にサイト別の計上規則の記載は無く、未検証。
+  - **オーナーに決めてほしいこと (どちらか)**: ① A8 管理画面で note 用 3 リンクの発行サイトを確かめる (発行時のサイト選択が
+    doboku-note なら差の説明になる)。② 差 2 クリック (1.3%) を許容差として計測ゲートに入れる (例: exclusive − site ≤ max(3, site×2%))。
+    10 月初めの確定値で差が 2 に留まるかも併せて見る。
+  - **2026-09-28 オーナー判断で ② を採用**: `crossCheckAgainstSite` (`.claude/scripts/ads/lib/a8-report-csv.mjs`) にクリックだけの許容差
+    max(3, ceil(サイト別×2%)) を入れた。件数・金額は従来どおり 1 でも超えたら超過。9 月の記録値 (157−155=2、許容差 4) は内側。
+    `a8-report-log.json` は次回の A8 収集・正規化で再計算される (状態ファイルは手で書き換えない)。**残り**: 次回の収集後に
+    検証コマンドが `a8-cross-check-exceeded` を出さないこと、Issue #1007 の計測ゲートが success になることを確かめてカードを閉じる。
 - **停止条件**: 共用案件の振り分けを推測で決めない。根拠 (両サイトの広告定義) が無い ID は unmapped のまま残す。
 - **完了条件**: 検証コマンドが `a8-cross-check-exceeded` を出さず、原因 (時刻ずれか共用漏れか) が本カードの削除コミットに書かれている。
-
-### [AREA-HIGHLIGHTS-SSOT-01] 県の「特徴」の候補・値・選び方・表示を 1 系統にまとめ、Web と SNS で共用する
-
-タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-09-25] [レーン:データ品質]
-
-- **背景 (2026-09-25 実測)**: 県の特徴データが 3 系統ある。A `app/areas/<code>/profile.json` (公開中の全約 2,000 指標から
-  5位以内/43位以下を抽出、`packages/area-profile/src/exporters/area-profile-snapshot.ts`) を Web のカード
-  (`AreaRelatedRankingsCard`)・`<title>`/description・OGP 画像 (`AreaOgp`)・関連ブログ記事 (`AreaRelatedBlogArticles`) が
-  それぞれ先頭から切り出す。東京都は上位 893 件 (1位 588 件) で、表示は R2 の読み出し順で決まり、title もこれで決まる。
-  古い値 (上位 85 件・下位 20 件が 2014 年以前、「耕地放棄面積 2014年度」を表示中)、規模効果 (下位表示 4 件が農業の総数)、
-  「下位=赤の下向き矢印」による良否の誤解 (耕作放棄地 47 位 = 最少) を含む。B `databook.json` (人手選定の
-  `AREA_DATABOOK_TEMPLATE` の値・全国順位・年・単位・全国平均) と、C SNS `.claude/scripts/sns/lib/ig-area-props.ts`
-  (同じテンプレートの値・順位を values.json から自前で再計算) が並存する。SNS は 2026-09-23 に A を「品質が悪い」として捨て、
-  中立表現 (強み/弱みと書かない)・サブタイトル込みラベル・家計調査の県庁所在市注記を実装済み。しきい値 5/43/47 は
-  抽出関数・県ページ・市区町村ページに直書き。市区町村は Web が型 (`CityProfileData`) と R2 パスを独自定義
-  (パッケージに `cityProfileKeyPath` がある)。A の `percentile` は未使用。A の生成は sync-snapshots の約 15 分。
-  生成物の検査・週次監視は無い (しきい値関数の単体テストのみ)。
-- **次 (実行順)**:
-  1. 候補を `AREA_DATABOOK_TEMPLATE` の指標に限定し、値・順位に加えて表示ラベル (readerLabel + subtitle)・分野・
-     家計調査判定・決定力 (隣接順位との差) を `databook.json` に焼き込む。SNS の再計算は廃止して `databook.json` を読む。
-  2. SNS の選定純粋関数を `packages/area-profile` へ移し、既存の掲載価値スコア (`packages/data-configs/src/prominence/`、
-     GSC 需要を含み週次再生成) と新しさを加える。Web の 5 か所 (カード・title/description・OGP・関連ブログ記事・
-     市区町村ページ) と SNS が共用し、件数は引数で渡す。1 カード内の分野重複は禁止。
-  3. 「順位 + 指標 + 値」の一覧表示部品を 1 つにし、県カードと市区町村ページで共用する。表現は SNS の中立規約に合わせ、
-     良否の色は `METRIC_POLARITY` で確定した指標だけに付ける。**順位チップは既存の `RankBadge`
-     (`apps/web/src/components/atoms/RankBadge.tsx`、2026-09-25 `52e582d98`) を使い、新しい部品を作らない。** 現在
-     `AreaRelatedRankingsCard` は上位=`tone="positive"`・下位=`tone="negative"` 固定なので、`tone` を極性から決める形に変える
-     (高いほど良い→上位 positive / 下位 negative、高いほど悪い→逆、未確定→`neutral`)。見出しの上向き・下向き矢印の色も同じ規則にする。
-  4. 市区町村の型・R2 パスをパッケージに一本化し、しきい値は選定関数の中だけに置く。
-  5. 契約テストで固定する: 選定関数以外での `strengths` / `weaknesses` / databook 指標の直接切り出し 0・しきい値の直書き 0・
-     同じ値の二重計算 0。生成直後に 47 県を検査し (古い年・分野偏り・非公開指標)、違反で R2 反映を止める。
-     カードのクリックは `NAV-CLICK-COVERAGE-01` の導線名で計測する。
-- **決めること**: 県の `profile.json` を廃止するか (移行後は利用者 0) / 総数指標を人口当たり指標に置き換えるか /
-  掲載価値スコアと順位の極端さの組み合わせ方。
-- **停止条件**: OGP 画像の再生成と R2 反映はオーナー承認まで行わない。候補を絞った結果カードが埋まらない県が出たら、
-  テンプレートの拡充 (`area-databook-designer`) を先に行い、全指標プールへは戻さない。
-- **完了条件**: Web と SNS が同じ選定関数と `databook.json` を使う。47 県すべてでカードが埋まる候補数がある (実測)。
-  古い年 0・分野重複 0・良否の誤表示 0。契約テストと生成時検査が違反の注入で落ちる。title は選定入力が変わるとき以外に変わらない。
-- **全面点検の指摘 (UI 全面点検 (2026-09-25・本番 44 URL × 7 幅 = 308 枚を撮影、250 枚を目視。`UI-FULL-SWEEP-01`))**: 県の「特徴」カードで、2003・2007・2014 年度の古い値が新しい値と同じ見た目で並ぶ / 北海道で大人用サンダルの
-  支出額と消費量という重複した指標が下位に 2 つ並ぶ / 老年化指数・年平均気温など良し悪しの向きの無い指標が赤い「下位」扱い / 失業率・交通事故件数の
-  1 位が青い強調バッジで良い順位に見える / 順位バッジの見た目が 3 種類混在。選び方と表示を 1 系統にまとめる際にこれらを基準に入れる。
 
 ### [GSC-COVERAGE-DEPLOY-01] カバレッジ是正と入力鮮度ガードを本番反映する
 
@@ -180,9 +142,7 @@ updated: 2026-09-21
   ブログの A8 バナー抑止 (`c9e2b6a93`) は develop のみで未リリース。
 - **2026-09-27 ① 確認済**: 9/27 04:43 の `sync-rakuten-catalog` (run 36273912838) は差分 purge で「purge 1924 URL (ranking 707 / blog 281 / 県 20 / 市区町村 916)」、`--all` ではない。
 - **次**: ① (済) 9/25 JST 04:00 の `sync-rakuten-catalog` で purge が `--urls` (約 1,900 件) になり `--all` でないことをログで確かめる。
-  ② Cloudflare Observability で route 別の CPU 時間を見て主因を絞る (MCP 認証かダッシュボードのログインが要る)。
-     2026-09-25 のセッションでも `cloudflare-observability` / `cloudflare-graphql` MCP は未認証だった。
-     再認証は対話セッションの `/mcp` でユーザーが行う。
+  ② Cloudflare Dashboard の Workers Observability で route 別の CPU 時間を見て主因を絞る (オーナーがダッシュボードで確認する)。
   ③ 日次 snapshot の cpu_p50/p99 と 10/15 の請求書の CPU 行で効果を見る (請求書は invoice モードで記録)。
 - **停止条件**: 本番 deploy はオーナー承認まで行わない。原因を実測で絞らないまま対策を足さない。
 - **完了条件**: CPU 増加の主因を route か仕組みで特定して対策を決め、10/15 の請求書の CPU 行を記録している。
@@ -210,7 +170,133 @@ updated: 2026-09-21
 - **停止条件**: 単発の PSI 値で改善と判定しない (日次計測はばらつくため 3 週以上の推移で見る)。デプロイはオーナーの明示承認まで行わない。ベースライン 9,347ms は 2026-08-04 の実測値で、これを更新して達成扱いにしない。
 - **完了条件**: `ranking/total-population,mobile` の LCP が 3 週連続でベースライン 9,347ms を下回る。悪化要因が topology fetch でなかった場合は、実測で特定した真因と対策を本カードへ記録してから閉じる。
 
+### [NOTE-FISCAL-PEER-PUBLISH-01] 財政指標の同規模比較 note 2 本 (#12 コード版 / #13 コードなし版) を Mac から公開する
+
+タグ: [収益化] [種類:制作] [実行:別環境] [起票:2026-09-29] [期日:2026-10-06] [レーン:note・商品販売]
+
+- **owner**: オーナー (Mac で `/publish-note` を実行・有料境界を目視承認) / note-manager (公開後の state 記録)
+- **対象**: `koumuin-estat-claude-code` の `12-fiscal-peer-comparison` (有料 ¥300・e-Stat API + Python) と `13-fiscal-peer-no-code` (有料 ¥300・Claude / ChatGPT にプロンプトを貼るだけ)。原稿は commit `328a498ee` で develop の `docs/31_note記事原稿/koumuin-estat-claude-code/<slug>/` に入っている。有料原稿は `sync-drafts-r2.mjs` が公開側 R2 への移送を拒否する設計なので、公開までは git に残る (R2 は 404 を確認済み)。note-critic は 2 本とも PASS。
+- **なぜ Mac か**: `publish-new-note.sh` が Mac のパスと osascript を前提にしており、Windows には browser-use も無い (2026-09-29 確認)。
+- **なぜ 2 本同時か**: 売れた note 3 本 (各 ¥300) はすべて AI × e-Stat の技術記事だった。コードを書く層と書かない層のどちらが買うかを、同時公開した 2 本の売上で比べる。
+- **手順** (Mac・`note.com/stats47` にログイン済みの Chrome Profile 5):
+  1. `git pull origin develop` で原稿を取得する。R2 には無いので `restore-from-r2.sh` は使わない。
+  2. PNG を作り直す (資産ポリシーで PNG は git に入れていない)。先に `.claude/scripts/note/regenerate-svg-png.sh docs/31_note記事原稿/koumuin-estat-claude-code/12-fiscal-peer-comparison` を実行し (13 も同様)、そのあと `node .claude/scripts/note/generate-koumuin-covers.cjs --slug <slug>` で表紙を背景入りに上書きする (順序を逆にすると表紙が背景なしになる)。
+  3. **#12 を先に公開する**: `/publish-note 12-fiscal-peer-comparison`。有料境界は「手順 2: 「－」を正しく処理する」の見出しの直前にあることを screenshot で目視してから確定する。マガジンはシリーズ「公務員のための e-Stat × Claude Code 実務ガイド」に入れ、note 上の既存マガジン「自治体財政」にも入れるかはその場で決める。
+  4. #13 の本文にあるシリーズ内リンク `../12-fiscal-peer-comparison/draft.md` と `../08-benchmark-table-5min/draft.md` を、それぞれの note の URL に置き換える (#12 の原稿にある `../06`・`../07`・`../08`・`../09`・`../10` のリンクも公開前に同じく置き換える。URL の対応表は `.claude/state/note-published-urls.json`)。
+  5. `/publish-note 13-fiscal-peer-no-code` で公開する。有料境界は「手順 2: AI に渡す前に知っておく 3 つの約束事」の直前。
+  6. 公開後、SKILL の「Phase 8 後」に従い、`migrate-note-frontmatter.mjs` → `build-note-published-index.mjs` で `note_url` を記録し、`.claude/state/note-draft-index.json` から 2 件を消す。
+  7. 公開後、SKILL の Phase 8.5 に従い `npx tsx .claude/scripts/note/publish-paid-note-private-r2.ts <slug> --commit` で完全原稿を非公開の R2 へ移し、docs/31 から 2 本を消す。そのとき `.claude/config/asset-policy-baseline.json` に仮登録した `MISSING_REFERENCE:...fiscal-peer-...` の 6 件も外す (PNG を git に入れない規則と、原稿が .png を参照することの衝突を一時的に許容している)。
+  8. 図の位置を `node .claude/scripts/note/audit-note-figure-split.mjs` で確かめる。`ins_img` は見出し直前の段落をアンカーにすると画像が 1 ブロック後ろにずれる既知の不具合がある (`NOTE-INS-IMG-HEADING-PLACEMENT-01`)。
+- **禁止**: 有料境界を目視せずに確定しない (有料部分が無料で見える)。予約・即時の別はオーナーが決める。
+- **停止条件**: Phase 1 のアカウント照合で `stats47` と一致しなければ 1 本も投稿しない。
+- **完了条件**: 2 本が note で公開され、`note-published-urls.json` に 2 件の URL があり、無料部分と有料部分の境界が意図どおりであることを screenshot で確認済み。公開日から 4 週間後 (公開日 + 28 日) に 2 本の売上を note ダッシュボードで比べる予定を `improvements.md` 側へ引き渡す。
+
 ## 🟡 中 — 2〜3ヶ月以内
+
+### [CENSUS-2025-ROLLOUT-01] 2025年国勢調査の確定値を既存の人口系ランキングと市区町村別へ展開する
+
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run validate:config --workspace packages/data-configs] [起票:2026-09-30] [レーン:ランキング]
+
+- **背景**: 令和7年国勢調査の人口等基本集計が 2026-09-29 に e-Stat へ公開された (人口等基本集計 DB 671 表)。既存の総人口・人口増減率・65歳以上人口割合・15歳未満人口割合は社会・人口統計体系 (SSDS) 固定で、人口推計の 2024 年止まり。2026-09-30 に「5年間の人口増減率」(`census-population-change-rate-5y`、`0004065882` / cdTab `2025_35`) だけを都道府県別の新しい指標として追加した。
+- **2026-09-30 の実測 (公開 xlsx、API キー不要)**:
+  - SSDS の国勢調査年は国勢調査の**原数値** (年齢不詳を除いて算出) と一致し、不詳補完値とは一致しない。65歳以上割合 2020 は秋田 SSDS 37.6 = 原数値 37.60 (不詳補完 37.49)、東京 22.8 = 22.82 (22.74)。15歳未満割合 東京 11.5 = 11.50 (11.17)。総人口 2020 も国勢調査と一致 (東京 14,047,594)。
+  - 2025 の原数値: 65歳以上割合は全国 29.54・秋田 40.11。報道の 29.4% は不詳補完値 (29.39)。
+  - 表 `0004065882` の API 地域コード: 市区町村 3,736 = 現行 1,913 (市区町村マスタと完全一致) + 旧町村 1,823 (マスタとの重複 0)。既存の cities.json 39 指標・816,460 行にマスタ外コードは 0 行。
+  - 試算 (現行市区町村 1,888、政令市の区を含む): 高齢化率 50% 以上は 114 (記事 `half-population-elderly-municipalities` の 2020 年は 60)。5 年で 10% 以上減は 485 (記事 `municipality-population-decline-tiers` の 2015→2020 は 246。区の扱いなど数え方の一致は未確認)。最大は珠洲市 -34.6%、高齢化率最大は南牧村 68.9% (報道と一致)。
+- **2026-09-30 ローカル実装済み (未 push)**: `page-data-batch.ts` の市区町村を現行マスタのコードに限定 (`isIngestableCityCode`)。`MetricConfig.supplementalSources` を追加し、指定年は補完表の値を採る (主出典に同じ年があれば捨てて `[supplement-overlap]` を警告。推計値で国勢調査を上書きしないため)。レシピ `ops.supplements` で derived になる。適用: 総人口 (`0004065881` cdTab 2025_01 cdCat01 0)、65歳以上・15歳未満・15〜64歳割合 (`0004065933` cdTab 2025_42 cdCat01 0 cdCat02 0 cdCat03 3/1/2)、`census-population-change-rate-5y` に city。cat01〜03 の軸番号は e-Stat の並び順からの推定で、CI の dry run で行数・重複を確認する。
+- **次 (実行順・外部変更は各段で承認)**: ① develop へ push ② `data-refresh` を dry_run で 5 指標 → 県 47 行・市区町村 1,913 行・重複 0 を確認 → 本実行 ③ 取り込み後に 4 指標の `seoTitle`/`seoDescription` を 2025 年値へ更新 (`audit-seo-meta-facts.ts` が R2 と照合するので取り込み前は変えない) ④ `/publish-ranking` ⑤ ブログ: 市区町村の 2 記事を 2025 年へ更新 (URL 維持)、5 年間の人口増減の新記事 1 本。
+- **完了条件**: 上記の指標が本番で 200 を返し、2025 年の値を配信している。
+- **停止条件**: 同じ意味の指標を複製して公開しない。旧町村コードを含んだ cities.json を配信しない。原数値と不詳補完値を同じ系列で混ぜない。
+
+### [ADMIN-MCP-STATUS-01] 管理画面で、この PC が使う MCP の一覧と接続状況を見られるようにする
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-09-28] [レーン:基盤]
+
+- **目的**: どの MCP を何のために使い、この PC で今つながるのかを 1 画面で確かめる。今はセッション開始時の通知でしか分からず、未認証が何日も放置される。
+- **表示する列**: サーバー名 / 用途と使うスキル / 有効か (`.claude/settings.json` の `enabledMcpjsonServers` とこの PC の `settings.local.json` の無効化) / 認証方式 (OAuth・トークン・なし) / トークンが資格情報ストアにあるか (値は出さない) / 接続確認の結果 (HTTP サーバーへの `initialize` の応答コード)。
+- **設計の制約**: 接続状況は PC ごとに違うので、git や R2 の state に保存せず、画面を開いたときにその PC で調べる。管理画面は各 PC のローカル (`npm run admin`) で動くので、この形でそのまま両 PC の状態が見える。置き場は既存の「CI・台帳」(`apps/admin/app/ops/`) の 1 節か、隣の 1 ページにする。
+- **完了条件**: Windows と Mac で画面を開き、各 MCP の行が実際の `/mcp` の表示と同じ状態を示す。
+
+### [ADSENSE-RESTART-01] AdSense を個人のお支払いプロファイルで作り直し、Cloudflare の維持費の相殺として再開する
+タグ: [収益化] [種類:改善] [実行:ユーザー] [レーン:収益導線] [起票:2026-09-28]
+
+- **決定 (2026-09-28 オーナー)**: 9/20 の「恒久停止」を改め、Cloudflare の維持費を相殺する目的で再開する。
+  根拠: Cloudflare の請求は月 ¥1,556〜1,846 (直近 3 か月・税込み、`cloudflare-cost-improvement/reference/weekly-snapshots/2026-W33〜W38.json`)、
+  AdSense の見込みは月 ¥1,400〜1,800 (停止前のページ RPM ¥37、`adsense-improvement/reference/improvement-log.md`)。
+- **経緯の正本は Obsidian vault の `memos/副業の経理と確定申告.md`** (「AdSense のお支払いプロファイルが『組織・兵庫県庁』になっている」節)。
+  旧アカウント (pub-7995274743017484) はお支払いプロファイルが誤って組織・兵庫県庁で登録され、本人確認・閉鎖・プロファイル閉鎖が
+  循環してロックされた。8/18 の最終プラン = 8/19 の期限切れで利用停止 → サイトから旧コードを外す (8/29 の全停止で済み、
+  9/18 に本番 `adsbygoogle` 0 件を確認) → uruhayato373 の個人プロファイルで新規申請。Google 公式 answer/10163
+  「既存アカウントの利用を停止してから新しい種類のアカウントを開設する」に沿う。stats47 のリポジトリには記録が無かった。
+- **アカウント作成の方針 (オーナー承認済み)**:
+  - Google アカウントは **uruhayato373 だけ**で AdSense とお支払いプロファイルの両方を作る (8 月は管理者が dicechick373 に分かれ権限エラーになった)。
+  - お支払いプロファイルは **個人**。受取人名は写真付き身分証と完全一致する本名。振込口座は本人名義。
+  - 既存プロファイル (dicechick373 の個人 0714-… を含む) は流用しない。
+  - サイトは stats47.jp だけで申請し、doboku-note は承認後に同じアカウントへ追加する (1 名義 1 アカウント)。
+  - 審査中のサイト確認は **meta タグか ads.txt** で行い、広告コードは入れない。承認後も自動広告・広告インテントはオフ、手動枠だけ
+    (2026-08 に自動広告が出典の文言をリンクへ書き換えた。`google-anno-skip` は外さない。`affiliate-ads-standards.md` §12)。
+- **次 (実行順)**:
+  1. (オーナー) 旧アカウントが利用停止か無効化の状態であることを確かめる。勤務先の兼業確認は vault でも別扱いで、申請前に本人が確認する。
+  2. (オーナー) uruhayato373 で AdSense に申請し、個人のお支払いプロファイルを作る。発行された `pub-…` を伝える。
+  3. (Claude) 確認用の meta タグか ads.txt を入れる。`ADSENSE_DISPLAY_ENABLED` は false のまま (広告は出さない)。本番反映はオーナー承認。
+  4. 審査結果を待つ。「重複アカウント」で拒否されたら、その画面を添えてサポートに旧アカウントの閉鎖を依頼する (依頼文は 8/18 に作成済み・vault 参照)。
+  5. (Claude) 承認後、手動の広告枠の配置を設計し、`docs/00_プロジェクト管理/02_収益化戦略.md` §3.1 と memory `project_monetization_contract` の
+     「恒久停止」を改訂する。配置はアフィリエイトの実験窓 (`AFF-IMPRESSION-ROUTING-01` 等) と交絡しないよう区切り日を記録する。
+- **停止条件**: 旧アカウントと並行して新規アカウントを作らない (重複アカウント扱い)。組織タイプを選ばない。承認前に広告コードを入れない。
+- **完了条件**: 新アカウントの審査が承認され、stats47.jp に手動枠の広告が表示され、収益化戦略とメモリの記述が「維持費の相殺として再開」に改訂されている。
+
+### [DATA-WAGE-TABLE-YEARS-01] 賃金構造基本統計の表を使う 40 指標が 2022 年しか配信していない原因を CI で確かめて直す
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [レーン:データ品質] [起票:2026-09-28]
+
+- **事象 (2026-09-28 実測)**: `statsDataId: "0003445758"` を使う metric は 40 件。代表の `school-teacher-annual-income` /
+  `nurse-annual-income` / `nursery-teacher-annual-income` / `doctor-annual-income` は R2 `app/stats/<key>/values.json` が
+  すべて `2022` の 47 行だけ。config の years は `{from: 2010, to: 2023}`。e-Stat カタログでは表名が
+  「令和２年以降 一般_都道府県別_職種（特掲）DB」で、複数年を持つ表のはず。データ品質キューでは `school-teacher-annual-income` が
+  「最新 2022 年・2 周期遅れ (推定)」、GSC 表示 916 で需要順 4 位 (`DATA-QUALITY-LOOP-01` の第1週で切り出し)。
+- **[仮説]** ① `cdTab` 08×12 + 12 の組み合わせが 2022 年だけに存在し、他の年は別の表章項目コード (memory
+  `reference_estat_wage_survey` は tab 40 / 44 と記録) ② 表が年ごとに更新され、取り込み時点で 2022 年分しか無かった
+  ③ config の years (〜2023) より新しい 2024・2025 年が表にあり、範囲外で落ちている。
+- **次**: e-Stat の取得は CI 専用 (ローカルに API キーが無い)。CI で `0003445758` の `getMetaInfo` の time / tab と、
+  `cdCat01=01, cdCat02=1192` で年ごとの non-null 県数を出す (data-refresh の dryRun は年別の件数を出さないので、
+  出力を足すか調査用の workflow_dispatch を使う)。原因に合わせて 40 件の config を直し、data-refresh で再取り込みする。
+- **停止条件**: 年によって表章項目の定義 (所定内給与か、きまって支給する給与か) が違う場合は、同じ系列として並べない。
+  R2 反映はオーナー承認。40 件を推測で一括変更しない (代表 1 件で年別の値を確かめてから広げる)。
+- **完了条件**: 40 件が e-Stat に実在する全年を配信し、`school-teacher-annual-income` の最新年が公表済みの最新年と一致している。
+  年ごとに定義が違って並べられない場合は、その理由と採った年の範囲が本カードの削除コミットに書かれている。
+### [NOTE-COVER-ROLLOUT-20260928] 生成済みのnote記事カバー286件を公開記事へ差し替える
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-09-28] [レーン:note・商品販売]
+
+- **監査結果 (2026-09-28)**: 公開286件はカタログと全件対応。分類は導入1・家計47・解説14・Geo/データセット6・質問型ランキング90・物語型ランキング70・実務52・配色6。根拠と全件比較は `.local/note-cover-refresh/2026-09-28/audit/classification.json` と `audit/index.html`。現時点でnote.comには未反映。
+- **v2監査で分かった不足**: 初稿は導入・家計の48件のみ `visualReview: pass`、残る238件は `needs-revision`。共通日本地図・文書アイコンへの一律置換では、ランキングの値、配色記事の色見本、Geo/データセット・解説記事の固有図版が消える。
+- **分類別の管理画面 (2026-09-28)**: `/content/note/covers` に8分類・レビュー状態の集計、絞り込み、公開前スナップショットと生成候補の比較を追加。286件の分類とmanifestの `auditCategory` は全件一致。候補配信は公開済み記事keyに限定したローカル読み取り専用ルート。画像更新時はこの画面で分類別に再レビューする。
+- **地図レイアウト v4 (2026-09-28)**: 左上の定型文・定型フッターを削除し、日本地図を時計回り55度の横置きへ変更。沖縄県は実際の県形状を別枠に表示。公開タイトルの年・1位とR2観測値の47県・年・1位が一致するランキング22件は、順位を5色で表すコロプレスへ変更し、縮小一覧と代表画像を目視確認。家計47件の画像hashはv2と同一。現行 `production-manifest.json` は `2026-09-28-v4`、70件 `pass`、216件 `needs-revision`。未確認画像のdry-runは `cover_gate:visualReview` で停止し、note.com公開画像は未更新。
+- **次**: 分類ごとに公開画像の情報量を維持するカバーを設計・再生成する。特にランキングの上位県と値、配色の色見本、Geo/データセット・解説の固有図版を確認し、286件すべてを公開画像と並べて再レビューする。その後、新しいmanifestで画像ハッシュ・記事対応・認証口座を検証し、差し替え依頼を受けてから `.claude/skills/note/publish-note/SKILL.md` の手順で更新する。
+- **停止条件**: 現行 `.local/note-cover-refresh/2026-09-28/production-manifest.json` の `--commit` を実行しない。分類別修正と全件再レビューが終わるまで一括差し替えを保留する。更新時も記事件数・対応・画像ハッシュ・認証口座が合わない、POST応答が不明、または本文・タイトル・価格に差分が出た場合は停止する。
+- **完了条件**: 修正版の全286件が分類別レビューを通り、更新後に `verify-cover-refresh.mjs` が公開カバー一致と記事内容の不変を確認する。
+
+### [AREA-PROFILE-JSON-RETIRE-01] 県の profile.json の生成をやめる (読み手 0 になったため)
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-09-28] [レーン:データ品質]
+
+- **経緯**: `AREA-HIGHLIGHTS-SSOT-01` (2026-09-28 完了・本番で東京都の「特徴」と総人口 14,178,000 を確認) で Web と SNS は `databook.json` (schemaVersion 2) と共通の選定関数へ移った。
+  `app/areas/<code>/profile.json` はオーナー判断で「読み手移行後に廃止」とした。あわせて市区町村の「特徴」一覧は極性情報が無く色がすべて中立。
+- **次**: `git grep -n "profile.json\|areaProfileKeyPath"` で読み手 0 を確認してから生成 (`packages/area-profile/src/exporters/area-profile-snapshot.ts`) と sync-snapshots の task を外す。
+- **完了条件**: profile.json の生成と読み手が 0 件、sync-snapshots の area-profile task が短くなる。
+
+### [KDP-K-S1-08-REUPLOAD-01] 公開中のKindle S1全12冊へ承認済みポップ表紙を反映する
+タグ: [収益化] [種類:制作] [実行:ユーザー] [起票:2026-09-28] [レーン:note・商品販売]
+
+- **経緯**: 2026-09-29 にK-S1-01〜K-S1-12の新しいポップ表紙を1冊ずつ目視承認し、背景・完成JPEG・完成PNG・manifestをR2 `media/kindle-cover-assets/<id>/<revision>/`へ保存して再取得SHA一致を確認した。KDPで販売中の版には未反映。K-S1-08は2026-09-27に住宅・土地統計調査などを暦年 (`yearFormat: calendar`) に直し、図校訂 (`solar-power-housing-map` の 年→年度) を外したため、同じ更新で販売中版の「年度」表記も是正する。
+- **次（実行順）**: ①K-S1-01〜K-S1-12を承認済みR2背景でそれぞれ新しいversionとして再生成する ②旧確定版との章テキスト差分0、`verify-epub`、review receipt、`verify-publishable --content-only` blocker 0を冊ごとに確認する ③入稿提案を新versionへ更新し、暗号化R2 archiveをpush・deep audit・recordする ④オーナーがKindle Previewerで各EPUBと表紙を確認する ⑤`kdp-publish --update --id K-S1-NN`をdraft確認し、対象12冊と版SHAを提示してオーナーの明示承認後にだけ`--commit`する ⑥KDP本棚のread-backと商品ページで新表紙を確認する。
+- **停止条件**: KDPへの`--commit`を事前承認なしで実行しない。出版停止済みのS2/S3/S4を対象に含めない。既存versionを上書きしない。本文差分、検証blocker、archive不一致、Previewer未確認が1冊でもあれば、その冊の反映を止める。
+- **完了条件**: K-S1-01〜K-S1-12の販売中版が承認済み表紙へ更新され、KDP本棚read-backと商品ページで12冊すべて確認できる。各冊の入稿版SHA・R2 archive・review receiptが一致し、K-S1-08の該当図が「年」表記になっている。
+
+### [AI-CONTENT-NATIONAL-AVERAGE-WORDING-01] 公開済みの AI 解説の「全国平均」を「47都道府県の単純平均」に直す
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-09-28] [レーン:データ品質]
+
+- **経緯**: 2026-09-27 に画面・JSON-LD・生成プロンプトは「47都道府県の単純平均」(公表の全国値が R2 に無いため。201 件標本で 0 件) に直したが、
+  公開済みの ai-content (約 2,100 件) の本文は「全国平均は1.29」のまま (例: `/ranking/total-fertility-rate`)。
+- **次**: 「全国平均」を機械置換できる文脈 (値の直前) だけを置換し、`audit-ai-content.mjs` を通して outbox から 35 件ずつ公開する
+  (2026-09-27 の年表記是正と同じ手順)。言い換えで文が崩れる文脈は再生成キューに回す。
+- **完了条件**: 公開中の ai-content の本文に「全国平均」が 0 件 (公表の全国値を使う指標を除く)。
 
 ### [UNIT-NOTATION-SITEWIDE-01] 画面に単位を出す 38 か所を表示用の整形 (`formatUnitForDisplay`) に通し、%/％ の混在をなくす
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-09-27] [レーン:データ品質]
@@ -680,9 +766,9 @@ updated: 2026-09-21
 タグ: [収益化] [種類:制作] [実行:ユーザー] [検証:node --import tsx packages/product-factory/scripts/verify-publishable.mts --version <版> --book <id> --content-only] [起票:2026-09-19] [期日:2026-10-17] [レーン:note・商品販売]
 
 - **owner**: オーナー (画像生成) / kindle-publisher (取り込み・再生成・検証)
-- **現状**: 2026-09-19 に `codex exec` + `$imagegen` で 12 枚を生成し、`assets/cover-backgrounds/K-S1-NN.jpg` (git 管理) に取り込み済み。最終版 (01 r9 / 02 r10 / 03 r11 / 04 r8 / 05 r11 / 06 r10 / 07 r9 / 08 r12 / 09 r10 / 10 r8 / 11 r8 / 12 r7) はこの帯絵で生成されている。オーナーは Codex アプリ (standalone) で自分の目で選んだ絵に差し替えたい。
-- **作り方 (Codex アプリ)**: 貼るプロンプトは `.local/kindle-cover-imagegen/CODEX-APP-PROMPT.md` (12 冊を 1 メッセージで。1 冊だけなら表を 1 行に)。1 冊ずつの英文は同 dir の `prompt-K-S1-NN.txt` (12 本。型は同 dir の `build-prompts.mjs`: 紺地 #0f2540 + 琥珀のペーパーカット風・大きなモチーフ 2〜3 個・**横長 1536×1024**・文字/数字/通貨記号/ロゴ/地図/顔なし)。帯絵は表紙の**下 42% だけ**に出る (上は文字面) ので、縦長で描かない。生成した PNG を `.local/kindle-cover-imagegen/K-S1-NN.png` に置く。
-- **次 (差し替え手順・kindle-publisher が実行)**: ①`npx tsx packages/product-factory/scripts/ingest-cover-background.mts --book K-S1-NN --input <png> --band` ②`products:kindle:generate -- --id K-S1-NN --version <次の版>` ③章テキストの差分 0 を確認 (`.local/kindle-audit/extract-one.mjs` で展開して前版と diff) ④`verify-epub.mts --report` → `write-review-receipt.mts` → `verify-publishable --content-only` blocker 0 ⑤入稿提案を作り直す (`export-kdp-listings.ts --version <版> --id K-S1-NN`) ⑥表紙 12 枚を 150px 幅に縮めて並べ、文字なし・主題が読めることを目視。
+- **現状**: 2026-09-29 に画像バイナリをGit管理から外し、承認済みassetをR2 `media/kindle-cover-assets/<id>/<revision>/`、Gitをkey/SHA台帳だけにする方式へ変更した。KDP台帳で現在公開中なのはK-S1-01〜K-S1-12の12冊で、S2/S3/S4は出版停止済みのため表紙更新対象外。K-S1-01〜K-S1-12は新しいポップ表紙を1冊ずつ目視承認済みでR2へ公開し、各4ファイルの再取得SHA一致と公開URL 200を確認済み。画像制作・承認・R2保全は12冊すべて完了し、残工程は各冊を新versionで再生成して本文差分0・検証・入稿提案更新を確認する工程。
+- **作り方 (Codex アプリ)**: 貼るプロンプトは Drive の `stats47/Kindle表紙/_imagegen-tooling/`の `CODEX-APP-PROMPT.md` (12 冊を 1 メッセージで。1 冊だけなら表を 1 行に)。1 冊ずつの英文は各書籍の Drive 候補フォルダ `Kindle表紙/K-S1-NN/candidates/` の `original-K-S1-NN.prompt.txt` (元画像は同フォルダの `original-K-S1-NN.png`、12 本。型は `_imagegen-tooling/build-prompts.mjs`: 紺地 #0f2540 + 琥珀のペーパーカット風・大きなモチーフ 2〜3 個・**横長 1536×1024**・文字/数字/通貨記号/ロゴ/地図/顔なし)。帯絵は表紙の**下 42% だけ**に出る (上は文字面) ので、縦長で描かない。生成した PNG を `.local/kindle-cover-imagegen/K-S1-NN.png` に置く。
+- **次 (差し替え手順・kindle-publisher が実行)**: ①1冊だけ生成して目視承認 ②`ingest-cover-background.mts --book K-S1-NN --input <png> --pop-band`でR2 staging ③完成PNG/JPEGとmanifestを同revisionへ置き、exact keyをR2 push ④`cover-design.ts`へkey/SHA/byte/寸法を登録 ⑤`products:kindle:generate -- --id K-S1-NN --version <次の版>` ⑥章テキスト差分0、`verify-epub`、review receipt、`verify-publishable --content-only` blocker 0を確認 ⑦入稿提案を最新版へ更新。
 - **禁止**: 画像に文字・数字を焼き込まない (書名・著者は satori が実テキストで重ねる)。生成 AI の描く日本列島を使わない (2026-08-12 の指摘)。差し替え版は必ず新しい version で作り、既存版を上書きしない。KDP への表紙アップロードは `kdp-publish --update` の工程で行い、ここでは触らない。
 - **完了条件**: 12 冊ぶんの帯絵がオーナー選定の絵に置き換わり、各冊の最終版が本文差分 0・`verify-publishable --content-only` blocker 0 で、入稿提案が最新版を指している。差し替えない冊は現行の帯絵のままでよい (その旨をこのカードから消して閉じる)。
 
@@ -2490,7 +2576,7 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 タグ: [UI・UX] [種類:改善] [実行:対話] [検証:npm run check-domains && npm run type-check --workspace admin] [起票:2026-09-27] [レーン:基盤]
 
 - **trigger**: `DOMAIN-CONFIG-01` と `DOMAIN-LANES-MIGRATE-01` が完了してから着手する。
-- **方向性**: サイドメニュー (`apps/admin/components/console-nav.tsx` の `NAV_GROUPS` 直書き) を、domains.json の各領域の `nav` から描く形に変える。サイドメニューには「その領域で人が判断するときに開く画面」だけを置き、各項目に画面の種類 (inventory / results / actions / policy / assets) を 1 つ付ける。規則は土木ノートの領域モデル (doboku-note リポジトリの戦略文書「14_領域モデル」と、機械可読の正本 domains.json)と同じにする。
+- **方向性**: サイドメニュー (`apps/admin/lib/nav-registry.ts` の `NAV_GROUPS` 直書き。2026-09-30 に純モジュールへ移し、表示は公式 Sidebar の `components/console-nav*.tsx`。項目のページ実在は `tests/unit/nav-registry.test.ts` が検査) を、domains.json の各領域の `nav` から描く形に変える。サイドメニューには「その領域で人が判断するときに開く画面」だけを置き、各項目に画面の種類 (inventory / results / actions / policy / assets) を 1 つ付ける。規則は土木ノートの領域モデル (doboku-note リポジトリの戦略文書「14_領域モデル」と、機械可読の正本 domains.json)と同じにする。
 - **先行実施済み (2026-09-27)**: アフィリエイト領域は土木ノートと同じ 3 画面 (`/affiliate` 成果・`/affiliate/placements` 掲載先・`/affiliate/programs` 提携・案件) に分け、サイドメニューに「アフィリエイト」グループを置いた。旧 `/ads` は転送。残りの領域はこの形に揃える。
 - **今の画面で直すところ (2026-09-27 時点)**:
   - 「制作・投稿」の下に X・Instagram・note・Kindle が直接並ぶ → チャネルは枝にせず、「SNS」領域の投稿状況・「商品」領域の販売状態の画面内タブにする。

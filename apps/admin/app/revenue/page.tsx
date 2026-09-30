@@ -1,14 +1,6 @@
-import {
-  Badge,
-  ErrorNote,
-  PageHeading,
-  Section,
-  Stat,
-  Table,
-  Td,
-  Tr,
-  Unmeasured,
-} from "@/components/ops/primitives";
+import { Cell, DataTable, PanelCard, Row, StatCard, StatusBadge } from "@/components/admin-ui";
+import { Section } from "@/components/layout-primitives";
+import { ErrorNote, PageHeading, Unmeasured } from "@/components/ops/primitives";
 import { revenueSummary } from "@/lib/server/revenue";
 import { hasError } from "@/lib/server/state-io";
 
@@ -38,24 +30,23 @@ export default function RevenuePage() {
       />
 
       {/* ★計測範囲。0 と「未計測」を混同させないために必ず出す */}
-      <section className="rounded-md border border-console-border bg-console-card p-3">
-        <h2 className="text-sm font-bold text-console-fg">計測範囲</h2>
-        <p className="mt-1 text-[11px] text-console-muted">
+      <PanelCard title="計測範囲">
+        <p className="text-[11px] text-console-muted">
           証拠付きの観測だけを実測として扱います。期間がないチャネルは、0 円ではなく
           <Unmeasured />= 未計測です。
         </p>
         <ul className="mt-2 space-y-1">
           {d.coverage.map((c) => (
             <li key={c.channel} className="flex flex-wrap items-center gap-2 text-[13px]">
-              <Badge tone={c.state === "measured" ? "good" : "neutral"}>
+              <StatusBadge tone={c.state === "measured" ? "good" : "neutral"}>
                 {c.state === "measured" ? "実測" : "未計測"}
-              </Badge>
+              </StatusBadge>
               <span className="font-medium text-console-fg">{c.channel}</span>
               <span className="text-console-muted">{c.note}</span>
             </li>
           ))}
         </ul>
-      </section>
+      </PanelCard>
 
       <Section title="商品売上 (KDP / ココナラ)">
         {hasError(d.productSales) ? (
@@ -63,7 +54,7 @@ export default function RevenuePage() {
         ) : (
           <>
             <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
-              <Stat
+              <StatCard
                 label="実売額"
                 value={
                   productSales && productSales.observations.length > 0
@@ -72,34 +63,34 @@ export default function RevenuePage() {
                 }
                 sub={productSales?.latestPeriodEnd ? `最終期間 ${productSales.latestPeriodEnd}` : "証拠付き期間なし"}
               />
-              <Stat
+              <StatCard
                 label="注文件数"
                 value={productSales && productSales.observations.length > 0 ? YEN.format(productSales.orders) : <Unmeasured />}
               />
-              <Stat
+              <StatCard
                 label="販売数"
                 value={productSales && productSales.observations.length > 0 ? YEN.format(productSales.units) : <Unmeasured />}
               />
-              <Stat
+              <StatCard
                 label="計測期間数"
                 value={productSales ? YEN.format(productSales.observations.length) : <Unmeasured />}
               />
             </div>
             {productSales && productSales.observations.length > 0 ? (
               <div className="mt-4">
-                <Table columns={["channel", "product", "period", "orders", "units", "net_yen", "evidence"]}>
+                <DataTable columns={["channel", "product", "period", "orders", "units", "net_yen", "evidence"]}>
                   {productSales.observations.map((row) => (
-                    <Tr key={row.id}>
-                      <Td nowrap>{row.channel}</Td>
-                      <Td nowrap>{row.productId}</Td>
-                      <Td nowrap muted>{row.periodStart}〜{row.periodEnd}</Td>
-                      <Td nowrap>{row.orders}</Td>
-                      <Td nowrap>{row.units}</Td>
-                      <Td nowrap>¥{YEN.format(row.netRevenueYen)}</Td>
-                      <Td muted>{row.evidencePath}</Td>
-                    </Tr>
+                    <Row key={row.id}>
+                      <Cell nowrap>{row.channel}</Cell>
+                      <Cell nowrap>{row.productId}</Cell>
+                      <Cell nowrap muted>{row.periodStart}〜{row.periodEnd}</Cell>
+                      <Cell nowrap>{row.orders}</Cell>
+                      <Cell nowrap>{row.units}</Cell>
+                      <Cell nowrap>¥{YEN.format(row.netRevenueYen)}</Cell>
+                      <Cell muted>{row.evidencePath}</Cell>
+                    </Row>
                   ))}
-                </Table>
+                </DataTable>
               </div>
             ) : (
               <p className="mt-3 text-sm text-console-muted">
@@ -116,7 +107,7 @@ export default function RevenuePage() {
         <>
           <Section title="直近週">
             <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
-              <Stat
+              <StatCard
                 label={`収益 (${latest?.week ?? "—"})`}
                 value={latest ? `¥${YEN.format(Number(latest.earnings))}` : <Unmeasured />}
                 tone={earningsDelta === null ? "neutral" : earningsDelta >= 0 ? "good" : "bad"}
@@ -126,12 +117,12 @@ export default function RevenuePage() {
                     : `前週比 ${earningsDelta >= 0 ? "+" : ""}${earningsDelta.toFixed(1)}%`
                 }
               />
-              <Stat label="RPM" value={latest ? `¥${latest.rpm}` : <Unmeasured />} />
-              <Stat
+              <StatCard label="RPM" value={latest ? `¥${latest.rpm}` : <Unmeasured />} />
+              <StatCard
                 label="PV"
                 value={latest ? YEN.format(Number(latest.page_views)) : <Unmeasured />}
               />
-              <Stat
+              <StatCard
                 label="CTR"
                 value={latest ? `${(Number(latest.ctr) * 100).toFixed(2)}%` : <Unmeasured />}
                 sub={latest ? `clicks ${YEN.format(Number(latest.clicks))}` : undefined}
@@ -140,17 +131,17 @@ export default function RevenuePage() {
           </Section>
 
           <Section title="週次推移" count={weeks.length}>
-            <Table columns={columns}>
+            <DataTable columns={columns}>
               {weeks.slice(0, 20).map((w) => (
-                <Tr key={String(w.week)}>
+                <Row key={String(w.week)}>
                   {columns.map((c) => (
-                    <Td key={c} nowrap muted={c !== "week" && c !== "earnings"}>
+                    <Cell key={c} nowrap muted={c !== "week" && c !== "earnings"}>
                       {String(w[c] ?? "")}
-                    </Td>
+                    </Cell>
                   ))}
-                </Tr>
+                </Row>
               ))}
-            </Table>
+            </DataTable>
             {weeks.length > 20 ? (
               <p className="mt-1 text-[11px] text-console-muted">直近 20 週を表示 (全 {weeks.length} 週)</p>
             ) : null}
@@ -170,17 +161,17 @@ export default function RevenuePage() {
                 <h3 className="text-[13px] font-medium text-console-muted">
                   {b.label} <span className="text-console-muted/70">({b.latestWeek})</span>
                 </h3>
-                <Table columns={b.columns}>
+                <DataTable columns={b.columns}>
                   {b.rows.slice(0, 10).map((r, i) => (
-                    <Tr key={i}>
+                    <Row key={i}>
                       {b.columns.map((c) => (
-                        <Td key={c} nowrap muted={c !== "earnings"}>
+                        <Cell key={c} nowrap muted={c !== "earnings"}>
                           {String(r[c] ?? "")}
-                        </Td>
+                        </Cell>
                       ))}
-                    </Tr>
+                    </Row>
                   ))}
-                </Table>
+                </DataTable>
               </div>
             ))}
           </div>
@@ -197,7 +188,7 @@ export default function RevenuePage() {
             {d.candidates.candidates.map((c, i) => (
               <li
                 key={i}
-                className="rounded-md border border-console-border bg-console-card px-3 py-2 text-[13px]"
+                className="rounded-md border px-3 py-2 text-[13px]"
               >
                 <span className="font-medium text-console-fg">{String(c.id ?? c.rule ?? i)}</span>{" "}
                 <span className="text-console-muted">{String(c.key ?? "")}</span>
@@ -211,7 +202,7 @@ export default function RevenuePage() {
         {hasError(d.latestMd) ? (
           <ErrorNote error={d.latestMd.error} />
         ) : (
-          <pre className="max-h-96 overflow-auto rounded-md border border-console-border bg-console-card p-3 text-[11px] leading-relaxed text-console-fg">
+          <pre className="max-h-96 overflow-auto rounded-md border bg-muted p-3 text-[11px] leading-relaxed text-foreground">
             {d.latestMd}
           </pre>
         )}

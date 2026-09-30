@@ -1,0 +1,24 @@
+{
+  "kind": "calculated",
+  "inputs": [
+    {
+      "rankingKey": "ratio-65-plus",
+      "year": "2020",
+      "role": "minuend-base"
+    },
+    {
+      "rankingKey": "ratio-65-plus",
+      "year": "2025",
+      "role": "minuend"
+    }
+  ],
+  "formula": "変化(ポイント) = 2025年の65歳以上人口割合 - 2020年の65歳以上人口割合 (小数第2位で四捨五入)",
+  "unit": "ポイント",
+  "source": "r2:app/stats/ratio-65-plus/values.json",
+  "upstream": "metric config (packages/data-configs ratio-65-plus) → e-Stat (国勢調査 2020・2025) → R2 app/stats",
+  "restore": "curl -s https://storage.stats47.jp/app/stats/ratio-65-plus/values.json  # yearCode 2020 と 2025 の value を県ごとに引く (2025-2020)",
+  "fetchedAt": "2026-09-30T01:50:05.530Z",
+  "generatedBy": "article-writer (elderly-ratio-rise-2020-2025)",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "note": "2020年は1桁小数の公表値、2025年は小数5桁の値。差は小数第2位で丸めて保存"
+}

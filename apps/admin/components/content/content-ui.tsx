@@ -1,12 +1,13 @@
 import type { ReactNode } from 'react';
 
-import { Badge } from '@/components/ops/primitives';
+import { StatusBadge } from '@/components/admin-ui';
 import type {
   ContentFindingDTO,
   ContentStageDTO,
   ReferenceProductionStageDTO,
 } from '@/lib/contracts/types';
 
+import { Card, CardContent } from "@/components/ui/card";
 const STAGE_LABEL: Record<ContentStageDTO, string> = {
   draft: '原稿・準備中',
   ready: '公開準備完了',
@@ -25,7 +26,7 @@ export function StageBadge({ stage }: { stage: ContentStageDTO }) {
         : stage === 'blocked'
           ? 'bad'
           : 'neutral';
-  return <Badge tone={tone}>{STAGE_LABEL[stage]}</Badge>;
+  return <StatusBadge tone={tone}>{STAGE_LABEL[stage]}</StatusBadge>;
 }
 
 export const REFERENCE_STAGE_LABELS: Record<
@@ -54,7 +55,7 @@ export function ReferenceStageBadge({
           : stage === 'blocked'
             ? 'bad'
             : 'neutral';
-  return <Badge tone={tone}>{REFERENCE_STAGE_LABELS[stage]}</Badge>;
+  return <StatusBadge tone={tone}>{REFERENCE_STAGE_LABELS[stage]}</StatusBadge>;
 }
 
 export function ContentAuditPanel({
@@ -65,14 +66,14 @@ export function ContentAuditPanel({
   findings: ContentFindingDTO[];
 }) {
   return (
-    <div className="rounded-md border border-console-border bg-console-card p-3">
+    <Card className="gap-0 py-3"><CardContent className="px-3">
       <div className="flex items-center gap-2 text-sm font-semibold text-console-fg">
         SSOT整合性
-        <Badge
+        <StatusBadge
           tone={status === 'pass' ? 'good' : status === 'warn' ? 'warn' : 'bad'}
         >
           {status.toUpperCase()}
-        </Badge>
+        </StatusBadge>
       </div>
       {findings.length === 0 ? (
         <p className="mt-2 text-xs text-console-muted">不整合はありません。</p>
@@ -95,7 +96,7 @@ export function ContentAuditPanel({
           ))}
         </ul>
       )}
-    </div>
+    </CardContent></Card>
   );
 }
 

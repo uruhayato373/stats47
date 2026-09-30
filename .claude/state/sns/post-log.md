@@ -3,10 +3,19 @@
 投稿済み全件。`posted_at` 降順。
 スクリプトで自動生成 — 手編集しない (`sns-posts-store.cjs` が `insert()`/`updateById()` のたびに再生成)。
 
-**570 件** (最終更新: 2026-09-26)
+**579 件** (最終更新: 2026-09-29)
 
 | 日付 | 媒体 | コンテンツ | キャプション | URL |
 |---|---|---|---|---|
+| 2026-09-29 | 📸 Instagram | area-carousel/47000 |  | [🔗](https://www.instagram.com/p/Dd4MHf-Fe7i/) |
+| 2026-09-29 | 🧵 Threads | area/area-06000-profile | 山形のデータブックを公開中。 オシドリと小野川豆もやし、ウコギを入口に、人口・産業・消費の数字を県別に深掘り。 続きは�… | [🔗](https://www.threads.com/@stats47jp/post/Dd3TIFHkasu) |
+| 2026-09-29 | 🧵 Threads | ranking/wooden-housing-ratio | なぜ秋田県の木造住宅率は88.8%とこれほど高いのか?  2位青森県88.1%、3位山形県83.3%と東北勢が上位を占め… | [🔗](https://www.threads.com/@stats47jp/post/Dd2lVBxkiLb) |
+| 2026-09-28 | 📸 Instagram | ranking-quiz/side-job-rate |  | [🔗](https://www.instagram.com/p/Dd1yg5lmEk3/) |
+| 2026-09-28 | 🧵 Threads | area/area-05000-profile | 旅先では見えにくい秋田の輪郭。 県木秋田杉と特産とんぶり、暮らしの統計を同じページで確認できます。 続きは👇 http… | [🔗](https://www.threads.com/@stats47jp/post/Dd0xuCIDknQ) |
+| 2026-09-28 | 🧵 Threads | ranking/daytime-population-ratio | 昼になると人が増える県、減る県。  昼夜間人口比率の1位は東京116.1％。 最下位の埼玉は89.6％で、昼の人口が約1… | [🔗](https://www.threads.com/@stats47jp/post/Dd0C45nkllM) |
+| 2026-09-27 | 📸 Instagram | map-carousel/miso-consumption-quantity |  | [🔗](https://www.instagram.com/p/Ddy5JqmIE_t/) |
+| 2026-09-27 | 🧵 Threads | area/area-04000-profile | 宮城を数字と地域文化の両方から見る。 県鳥ガン、特産サンマ、全国順位をまとめた県別ページです。 続きは👇 https:… | [🔗](https://www.threads.com/@stats47jp/post/DdyKtCaET_x) |
+| 2026-09-27 | 🧵 Threads | ranking/room-utilization-rate | ホテルの客室が最も埋まっている県は？  1位東京80.4％、2位大阪77.9％、3位福岡75％。 最も低いのは長野の57… | [🔗](https://www.threads.com/@stats47jp/post/Ddxc53MDqN6) |
 | 2026-09-26 | 📸 Instagram | area-carousel/01000 |  | [🔗](https://www.instagram.com/p/DdwPSPbm50A/) |
 | 2026-09-26 | 🧵 Threads | area/area-03000-profile | あなたの知る岩手は、データでも同じ姿ですか？ ナンブアカマツやワラビから、人口・経済・暮らしまで横断できます。 続きは�… | [🔗](https://www.threads.com/@stats47jp/post/DdvouO7AEJz) |
 | 2026-09-26 | 🧵 Threads | ranking/detached-house-ratio | 一戸建てに住む割合、秋田と東京で3倍差。  秋田 79.4％ 東京 26.3％  2位山形76.1％、3位青森75.3％… | [🔗](https://www.threads.com/@stats47jp/post/Ddu6WmlEXh7) |

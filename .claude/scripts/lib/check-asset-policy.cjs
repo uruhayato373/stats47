@@ -257,7 +257,16 @@ async function collect() {
       if (!scanRefsForMissing) continue; // TS(X) は参照集計のみ (誤検出防止), 欠落 block はしない
       const resolved = resolveRef(file, target);
       if (!resolved) continue;
-      if (!fs.existsSync(resolved)) add(findings, "MISSING_REFERENCE", file, target);
+      if (!fs.existsSync(resolved)) {
+        // docs/31 の派生 PNG は git に載せない (.claude/rules/note-image-assets.md)。CI checkout には無いが、
+        // 追跡された同名 SVG から regen-derived-png.mjs で再生成できるので欠落ではない。
+        const derivedSvg = resolved.replace(/\.png$/i, ".svg");
+        // ランキング記事 (a-<key>) の 4 枚は SVG でなく、追跡された render-spec.json (記事直下) から作り直せる
+        const articleRenderSpec = path.join(path.dirname(path.dirname(resolved)), "render-spec.json");
+        const isDerivedNotePng = /\.png$/i.test(resolved) && resolved.startsWith(path.join(ROOT, "docs/31_note記事原稿") + path.sep)
+          && (trackedSet.has(rel(derivedSvg)) || (path.basename(path.dirname(resolved)) === "images" && fs.existsSync(articleRenderSpec)));
+        if (!isDerivedNotePng) add(findings, "MISSING_REFERENCE", file, target);
+      }
       else if (!exactCasePath(resolved)) add(findings, "CASE_MISMATCH", file, target);
     }
   }

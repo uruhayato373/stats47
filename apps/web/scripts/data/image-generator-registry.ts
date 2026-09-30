@@ -127,6 +127,7 @@ export const IMAGE_GENERATOR_SPECS = {
       'apps/web/src/features/ogp/ProductOgp.tsx',
       'apps/web/src/features/ogp/brand.ts',
       'apps/web/scripts/lib/product-ogp-render.ts',
+      'packages/product-factory/src/channels/kindle/cover-design.ts',
       // kindle 表紙は商品ごとに別ファイルなので rendererHash には含めない (readFileSync は
       // ディレクトリを読めない上、1商品の表紙差し替えで全商品が再生成されてしまう)。
       // 表紙の内容 SHA は各商品の input (entity fingerprint) へ入れる。

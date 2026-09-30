@@ -6,8 +6,8 @@
  * ビルド時は R2 に到達できないため、sitemap.ts はこの git 定数を読む。
  * 詳細な背景は生成スクリプトの docstring を参照。
  *
- * 最終生成日: 2026-09-24
- * 件数: blog 605 / tag 66 / survey 147
+ * 最終生成日: 2026-09-30
+ * 件数: blog 605 / tag 67 / survey 147
  */
 
 export interface SitemapBlogEntry {
@@ -652,6 +652,7 @@ export const SITEMAP_TAG_ENTRIES: readonly SitemapTagEntry[] = [
   { tagKey: "北海道", lastModified: "2026-07-10" },
   { tagKey: "医療", lastModified: "2026-08-29" },
   { tagKey: "医療費", lastModified: "2026-09-05" },
+  { tagKey: "国勢調査", lastModified: "2026-08-29" },
   { tagKey: "地名", lastModified: "2026-07-17" },
   { tagKey: "地域差", lastModified: "2026-07-10" },
   { tagKey: "地域格差", lastModified: "2026-07-12" },

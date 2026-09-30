@@ -16,6 +16,9 @@
 import type { KindleBook, BookChapter } from "./types";
 import { PACK_RANKING_KEYS } from "../../catalog/pack-rankingkeys.generated";
 import { BOOK_RANKING_KEYS } from "./book-ranking-keys";
+import { coverDesignForBook } from "./cover-design";
+
+type KindleBookDraft = Omit<KindleBook, "coverDesign">;
 
 /** 書き下ろし章の配置先 (S1 と同じ manuscripts/<bookId>/)。 */
 const S2_M = (suffix: string): string => `src/channels/kindle/manuscripts/K-S2-${suffix}`;
@@ -28,7 +31,7 @@ const AUTHOR = "stats47";
 const M = "src/channels/kindle/manuscripts/K-S1-01";
 
 /** S1 (論点読み物) — 既存公開ブログのテーマクラスタを束ねる。全 blogSlug は R2 実在。 */
-const S1_BOOKS: readonly KindleBook[] = [
+const S1_BOOKS: readonly KindleBookDraft[] = [
   {
     id: "K-S1-01",
     series: "S1-issues",
@@ -452,7 +455,7 @@ function s2IntroMd(label: string, pack: string): string {
 それでは、${label}の地図を、県ごとの数字から読み解いていきましょう。`;
 }
 
-const S2_BOOKS: readonly KindleBook[] = S2_THEMES.map((t) => ({
+const S2_BOOKS: readonly KindleBookDraft[] = S2_THEMES.map((t) => ({
   id: `K-S2-${t.suffix}`,
   series: "S2-theme-databook" as const,
   title: `データで見る47都道府県 ${t.label}`,
@@ -539,7 +542,7 @@ function s3IntroMd(label: string): string {
 数値はすべて e-Stat（政府統計の総合窓口）で公開されている政府統計から取得し、基準年をそろえて並べ直したものです。書籍のために数字を作ったり、独自に推計したりはしていません。それでは、${label}の県々を、数字の地図とともにめぐっていきましょう。`;
 }
 
-const S3_BOOKS: readonly KindleBook[] = S3_REGIONS.map((r) => ({
+const S3_BOOKS: readonly KindleBookDraft[] = S3_REGIONS.map((r) => ({
   id: `K-S3-${r.suffix}`,
   series: "S3-region" as const,
   title: `${r.label}データブック — 統計で読む県の横顔`,
@@ -571,7 +574,7 @@ const S3_BOOKS: readonly KindleBook[] = S3_REGIONS.map((r) => ({
 }));
 
 /** S4 (ランキング大全) — 競合最強ゾーン。最後発・優先度最低。 */
-const S4_BOOKS: readonly KindleBook[] = [
+const S4_BOOKS: readonly KindleBookDraft[] = [
   {
     id: "K-S4-01",
     series: "S4-ranking-compendium",
@@ -618,7 +621,7 @@ const S4_BOOKS: readonly KindleBook[] = [
  * manuscripts/<id>/ から注入する。K-S1-01 は個別構成 (出典章を含む) のためそのまま。
  * ブログ章はそのまま挟み込む。出典補章は build-book が自動付与する。
  */
-function withS1Fresh(b: KindleBook): KindleBook {
+function withS1Fresh(b: KindleBookDraft): KindleBookDraft {
   if (b.id === "K-S1-01") return b;
   const m = `src/channels/kindle/manuscripts/${b.id}`;
   const chapters: BookChapter[] = [
@@ -631,13 +634,18 @@ function withS1Fresh(b: KindleBook): KindleBook {
   return { ...b, chapters, status: "generated" };
 }
 
-/** 全書籍 (SSOT)。 */
-export const KINDLE_BOOKS: readonly KindleBook[] = [
+const KINDLE_BOOK_DRAFTS: readonly KindleBookDraft[] = [
   ...S1_BOOKS.map(withS1Fresh),
   ...S2_BOOKS,
   ...S3_BOOKS,
   ...S4_BOOKS,
 ];
+
+/** 全書籍 (SSOT)。表紙設計も同じ安定 ID で必ず結合する。 */
+export const KINDLE_BOOKS: readonly KindleBook[] = KINDLE_BOOK_DRAFTS.map((book) => ({
+  ...book,
+  coverDesign: coverDesignForBook(book.id),
+}));
 
 /** 期待シリーズ集合 (validator の二重チェック用)。 */
 export const EXPECTED_SERIES: ReadonlySet<KindleBook["series"]> = new Set([

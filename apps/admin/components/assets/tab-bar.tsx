@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@stats47/components";
+import { cn } from "@/lib/cn";
 
 import type { AssetTabDTO } from "@/lib/contracts/types";
 

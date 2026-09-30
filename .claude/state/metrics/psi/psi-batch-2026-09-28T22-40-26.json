@@ -1,0 +1,2512 @@
+{
+  "version": 1,
+  "generated_at": "2026-09-28T22:40:26.498Z",
+  "results": [
+    {
+      "url": "https://stats47.jp/",
+      "strategy": "mobile",
+      "fetched_at": "2026-09-28T22:27:02.840Z",
+      "scores": {
+        "performance": 88,
+        "accessibility": 100,
+        "best_practices": 100,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 3711.0101855310104,
+        "TBT_ms": 66.50000000000045,
+        "CLS": 0,
+        "FCP_ms": 1674.7003251680176,
+        "TTI_ms": 5706.465391469084,
+        "SI_ms": 2045.0103266119913,
+        "TTFB_ms": 29
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 3438,
+          "category": "AVERAGE"
+        },
+        "INP": {
+          "percentile": 116,
+          "category": "FAST"
+        },
+        "CLS": {
+          "percentile": 0,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 2744,
+          "category": "AVERAGE"
+        },
+        "TTFB": {
+          "percentile": 2343,
+          "category": "SLOW"
+        }
+      },
+      "dom_size": {
+        "total_elements": 1218,
+        "max_depth": 19,
+        "max_child_elements": 80
+      },
+      "lcp_element": {
+        "selector": "div > div.grid > a.rounded-card > img.pointer-events-none",
+        "node_label": "div > div.grid > a.rounded-card > img.pointer-events-none",
+        "snippet": "<img alt=\"\" loading=\"lazy\" width=\"640\" height=\"336\" decoding=\"async\" data-nimg=\"1\" class=\"pointer-events-none absolute -bottom-2 -right-4 h-[77%] w-[74%] object-cov…\" style=\"color:transparent\" src=\"https://storage.stats47.jp/app/blog/beer-peak-month-july-to-december/thumb…\">",
+        "breakdown_ms": {
+          "timeToFirstByte": 29,
+          "resourceLoadDelay": 370,
+          "resourceLoadDuration": 276,
+          "elementRenderDelay": 53
+        }
+      },
+      "cls_contributors": [],
+      "analysis_utc": "2026-09-28T22:26:46.493Z",
+      "final_url": "https://stats47.jp/"
+    },
+    {
+      "url": "https://stats47.jp/",
+      "strategy": "desktop",
+      "fetched_at": "2026-09-28T22:27:28.413Z",
+      "scores": {
+        "performance": 99,
+        "accessibility": 100,
+        "best_practices": 100,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 1030.0455651343675,
+        "TBT_ms": 36.5,
+        "CLS": 0,
+        "FCP_ms": 479.10517378026844,
+        "TTI_ms": 1459.1125707748738,
+        "SI_ms": 684.7100280261357,
+        "TTFB_ms": 10
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 3235,
+          "category": "AVERAGE"
+        },
+        "INP": {
+          "percentile": 87,
+          "category": "FAST"
+        },
+        "CLS": {
+          "percentile": 7,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 2465,
+          "category": "AVERAGE"
+        },
+        "TTFB": {
+          "percentile": 2339,
+          "category": "SLOW"
+        }
+      },
+      "dom_size": {
+        "total_elements": 1218,
+        "max_depth": 19,
+        "max_child_elements": 80
+      },
+      "lcp_element": {
+        "selector": "div > div.grid > a.rounded-card > img.pointer-events-none",
+        "node_label": "div > div.grid > a.rounded-card > img.pointer-events-none",
+        "snippet": "<img alt=\"\" loading=\"lazy\" width=\"640\" height=\"336\" decoding=\"async\" data-nimg=\"1\" class=\"pointer-events-none absolute -bottom-2 -right-4 h-[77%] w-[74%] object-cov…\" style=\"color:transparent\" src=\"https://storage.stats47.jp/app/blog/academic-achievement-test-prefecture-r…\">",
+        "breakdown_ms": {
+          "timeToFirstByte": 10,
+          "resourceLoadDelay": 237,
+          "resourceLoadDuration": 288,
+          "elementRenderDelay": 61
+        }
+      },
+      "cls_contributors": [],
+      "analysis_utc": "2026-09-28T22:27:05.256Z",
+      "final_url": "https://stats47.jp/"
+    },
+    {
+      "url": "https://stats47.jp/ranking",
+      "strategy": "mobile",
+      "fetched_at": "2026-09-28T22:27:46.167Z",
+      "scores": {
+        "performance": 82,
+        "accessibility": 100,
+        "best_practices": 100,
+        "seo": 92
+      },
+      "lab_data": {
+        "LCP_ms": 4064.0355180235983,
+        "TBT_ms": 229.99999999999955,
+        "CLS": 0,
+        "FCP_ms": 1681.3766550891987,
+        "TTI_ms": 4147.035518023598,
+        "SI_ms": 1681.3766550891987,
+        "TTFB_ms": 9
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 3438,
+          "category": "AVERAGE"
+        },
+        "INP": {
+          "percentile": 116,
+          "category": "FAST"
+        },
+        "CLS": {
+          "percentile": 0,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 2744,
+          "category": "AVERAGE"
+        },
+        "TTFB": {
+          "percentile": 2343,
+          "category": "SLOW"
+        }
+      },
+      "dom_size": {
+        "total_elements": 1111,
+        "max_depth": 16,
+        "max_child_elements": 112
+      },
+      "lcp_element": {
+        "selector": "body.google-anno-skip > div.fixed > div.mx-auto > p.min-w-0",
+        "node_label": "当サイトでは、利用状況の分析のために Cookie を使用しています。",
+        "snippet": "<p class=\"min-w-0 leading-snug\">",
+        "breakdown_ms": {
+          "timeToFirstByte": 9,
+          "elementRenderDelay": 852
+        }
+      },
+      "cls_contributors": [],
+      "analysis_utc": "2026-09-28T22:27:31.046Z",
+      "final_url": "https://stats47.jp/ranking"
+    },
+    {
+      "url": "https://stats47.jp/ranking",
+      "strategy": "desktop",
+      "fetched_at": "2026-09-28T22:28:09.657Z",
+      "scores": {
+        "performance": 94,
+        "accessibility": 100,
+        "best_practices": 100,
+        "seo": 92
+      },
+      "lab_data": {
+        "LCP_ms": 1024.5007549369002,
+        "TBT_ms": 150.50009741121312,
+        "CLS": 0.06785356521615485,
+        "FCP_ms": 474.81097358668467,
+        "TTI_ms": 1072.8507792897035,
+        "SI_ms": 581.2046757199687,
+        "TTFB_ms": 10
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 3235,
+          "category": "AVERAGE"
+        },
+        "INP": {
+          "percentile": 87,
+          "category": "FAST"
+        },
+        "CLS": {
+          "percentile": 7,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 2465,
+          "category": "AVERAGE"
+        },
+        "TTFB": {
+          "percentile": 2339,
+          "category": "SLOW"
+        }
+      },
+      "dom_size": {
+        "total_elements": 1111,
+        "max_depth": 16,
+        "max_child_elements": 112
+      },
+      "lcp_element": {
+        "selector": "header.mb-6 > div.mt-1 > div.min-w-0 > h1.text-2xl",
+        "node_label": "都道府県ランキング一覧",
+        "snippet": "<h1 class=\"text-2xl font-bold leading-tight text-foreground\">",
+        "breakdown_ms": {
+          "timeToFirstByte": 10,
+          "elementRenderDelay": 1096
+        }
+      },
+      "cls_contributors": [
+        {
+          "selector": "body.google-anno-skip > div.relative > footer.w-full",
+          "node_label": "商品・書籍\nこのサイトについて\nプライバシーポリシー\n利用規約",
+          "score": 0.06382978723404255,
+          "causes": []
+        },
+        {
+          "selector": null,
+          "node_label": null,
+          "score": 0.004023777982112303,
+          "causes": []
+        }
+      ],
+      "analysis_utc": "2026-09-28T22:27:49.034Z",
+      "final_url": "https://stats47.jp/ranking"
+    },
+    {
+      "url": "https://stats47.jp/areas",
+      "strategy": "mobile",
+      "fetched_at": "2026-09-28T22:28:27.456Z",
+      "scores": {
+        "performance": 96,
+        "accessibility": 100,
+        "best_practices": 100,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 1984.0568606662894,
+        "TBT_ms": 188,
+        "CLS": 0,
+        "FCP_ms": 1687.7186954699664,
+        "TTI_ms": 4131.11889048406,
+        "SI_ms": 2261.0187065090613,
+        "TTFB_ms": 4
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 3438,
+          "category": "AVERAGE"
+        },
+        "INP": {
+          "percentile": 116,
+          "category": "FAST"
+        },
+        "CLS": {
+          "percentile": 0,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 2744,
+          "category": "AVERAGE"
+        },
+        "TTFB": {
+          "percentile": 2343,
+          "category": "SLOW"
+        }
+      },
+      "dom_size": {
+        "total_elements": 425,
+        "max_depth": 15,
+        "max_child_elements": 41
+      },
+      "lcp_element": {
+        "selector": "header.mb-6 > div.mt-1 > div.min-w-0 > p.mt-2",
+        "node_label": "47都道府県の全国順位、地域の強み・弱み、人口・産業・暮らしの統計を確認できます。",
+        "snippet": "<p class=\"mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground\">",
+        "breakdown_ms": {
+          "timeToFirstByte": 4,
+          "elementRenderDelay": 1154
+        }
+      },
+      "cls_contributors": [],
+      "analysis_utc": "2026-09-28T22:28:12.240Z",
+      "final_url": "https://stats47.jp/areas"
+    },
+    {
+      "url": "https://stats47.jp/areas",
+      "strategy": "desktop",
+      "fetched_at": "2026-09-28T22:29:08.804Z",
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best_practices": 100,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 547.5269514742721,
+        "TBT_ms": 15,
+        "CLS": 0,
+        "FCP_ms": 473.72079993437,
+        "TTI_ms": 962.3273189943757,
+        "SI_ms": 473.72079993437,
+        "TTFB_ms": 6
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 3235,
+          "category": "AVERAGE"
+        },
+        "INP": {
+          "percentile": 87,
+          "category": "FAST"
+        },
+        "CLS": {
+          "percentile": 7,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 2465,
+          "category": "AVERAGE"
+        },
+        "TTFB": {
+          "percentile": 2339,
+          "category": "SLOW"
+        }
+      },
+      "dom_size": {
+        "total_elements": 425,
+        "max_depth": 15,
+        "max_child_elements": 41
+      },
+      "lcp_element": {
+        "selector": "header.mb-6 > div.mt-1 > div.min-w-0 > p.mt-2",
+        "node_label": "47都道府県の全国順位、地域の強み・弱み、人口・産業・暮らしの統計を確認できます。",
+        "snippet": "<p class=\"mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground\">",
+        "breakdown_ms": {
+          "timeToFirstByte": 6,
+          "elementRenderDelay": 224
+        }
+      },
+      "cls_contributors": [
+        {
+          "selector": null,
+          "node_label": null,
+          "score": 0.000001590618707251843,
+          "causes": []
+        }
+      ],
+      "analysis_utc": "2026-09-28T22:28:29.542Z",
+      "final_url": "https://stats47.jp/areas"
+    },
+    {
+      "url": "https://stats47.jp/themes",
+      "strategy": "mobile",
+      "fetched_at": "2026-09-28T22:29:20.883Z",
+      "scores": {
+        "performance": 98,
+        "accessibility": 98,
+        "best_practices": 100,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 2251.022906523167,
+        "TBT_ms": 19,
+        "CLS": 0,
+        "FCP_ms": 1667.7053149549138,
+        "TTI_ms": 3914.0405269256034,
+        "SI_ms": 1667.7053149549138,
+        "TTFB_ms": 9
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 3438,
+          "category": "AVERAGE"
+        },
+        "INP": {
+          "percentile": 116,
+          "category": "FAST"
+        },
+        "CLS": {
+          "percentile": 0,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 2744,
+          "category": "AVERAGE"
+        },
+        "TTFB": {
+          "percentile": 2343,
+          "category": "SLOW"
+        }
+      },
+      "dom_size": {
+        "total_elements": 396,
+        "max_depth": 10,
+        "max_child_elements": 61
+      },
+      "lcp_element": {
+        "selector": "header.mb-6 > div.mt-1 > div.min-w-0 > p.mt-2",
+        "node_label": "テーマ別に複数の指標を横断して都道府県を比較できます。少子高齢化・労働・医療・観光・物価など、社会課題に直結するダッシュボードを 55 種類。",
+        "snippet": "<p class=\"mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground\">",
+        "breakdown_ms": {
+          "timeToFirstByte": 9,
+          "elementRenderDelay": 192
+        }
+      },
+      "cls_contributors": [],
+      "analysis_utc": "2026-09-28T22:29:10.954Z",
+      "final_url": "https://stats47.jp/themes"
+    },
+    {
+      "url": "https://stats47.jp/themes",
+      "strategy": "desktop",
+      "fetched_at": "2026-09-28T22:29:39.683Z",
+      "scores": {
+        "performance": 86,
+        "accessibility": 98,
+        "best_practices": 100,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 601.0990419638731,
+        "TBT_ms": 318.52666514411953,
+        "CLS": 0,
+        "FCP_ms": 469.16908829525335,
+        "TTI_ms": 1137.2578033683697,
+        "SI_ms": 469.16908829525335,
+        "TTFB_ms": 13
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 3235,
+          "category": "AVERAGE"
+        },
+        "INP": {
+          "percentile": 87,
+          "category": "FAST"
+        },
+        "CLS": {
+          "percentile": 7,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 2465,
+          "category": "AVERAGE"
+        },
+        "TTFB": {
+          "percentile": 2339,
+          "category": "SLOW"
+        }
+      },
+      "dom_size": {
+        "total_elements": 396,
+        "max_depth": 10,
+        "max_child_elements": 61
+      },
+      "lcp_element": {
+        "selector": "header.mb-6 > div.mt-1 > div.min-w-0 > p.mt-2",
+        "node_label": "テーマ別に複数の指標を横断して都道府県を比較できます。少子高齢化・労働・医療・観光・物価など、社会課題に直結するダッシュボードを 55 種類。",
+        "snippet": "<p class=\"mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground\">",
+        "breakdown_ms": {
+          "timeToFirstByte": 13,
+          "elementRenderDelay": 366
+        }
+      },
+      "cls_contributors": [],
+      "analysis_utc": "2026-09-28T22:29:24.285Z",
+      "final_url": "https://stats47.jp/themes"
+    },
+    {
+      "url": "https://stats47.jp/search",
+      "strategy": "mobile",
+      "fetched_at": "2026-09-28T22:29:49.414Z",
+      "scores": {
+        "performance": 96,
+        "accessibility": 93,
+        "best_practices": 100,
+        "seo": 69
+      },
+      "lab_data": {
+        "LCP_ms": 2564.017955662892,
+        "TBT_ms": 83,
+        "CLS": 0,
+        "FCP_ms": 1667.7030549852323,
+        "TTI_ms": 3960.627532016434,
+        "SI_ms": 2711.7975040072706,
+        "TTFB_ms": 4
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 3438,
+          "category": "AVERAGE"
+        },
+        "INP": {
+          "percentile": 116,
+          "category": "FAST"
+        },
+        "CLS": {
+          "percentile": 0,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 2744,
+          "category": "AVERAGE"
+        },
+        "TTFB": {
+          "percentile": 2343,
+          "category": "SLOW"
+        }
+      },
+      "dom_size": {
+        "total_elements": 171,
+        "max_depth": 16,
+        "max_child_elements": 32
+      },
+      "lcp_element": {
+        "selector": "header.mb-6 > div.mt-1 > div.min-w-0 > p.mt-2",
+        "node_label": "キーワードを入力して 1,800 以上のランキング・記事を横断検索できます。",
+        "snippet": "<p class=\"mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground\">",
+        "breakdown_ms": {
+          "timeToFirstByte": 4,
+          "elementRenderDelay": 1464
+        }
+      },
+      "cls_contributors": [],
+      "analysis_utc": "2026-09-28T22:29:41.519Z",
+      "final_url": "https://stats47.jp/search"
+    },
+    {
+      "url": "https://stats47.jp/search",
+      "strategy": "desktop",
+      "fetched_at": "2026-09-28T22:30:00.818Z",
+      "scores": {
+        "performance": 100,
+        "accessibility": 93,
+        "best_practices": 100,
+        "seo": 69
+      },
+      "lab_data": {
+        "LCP_ms": 499.01589690006773,
+        "TBT_ms": 43.5,
+        "CLS": 0.005264725120033367,
+        "FCP_ms": 462.7031399472787,
+        "TTI_ms": 820.3677250435755,
+        "SI_ms": 462.7031399472787,
+        "TTFB_ms": 4
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 3235,
+          "category": "AVERAGE"
+        },
+        "INP": {
+          "percentile": 87,
+          "category": "FAST"
+        },
+        "CLS": {
+          "percentile": 7,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 2465,
+          "category": "AVERAGE"
+        },
+        "TTFB": {
+          "percentile": 2339,
+          "category": "SLOW"
+        }
+      },
+      "dom_size": {
+        "total_elements": 172,
+        "max_depth": 16,
+        "max_child_elements": 33
+      },
+      "lcp_element": {
+        "selector": "header.mb-6 > div.mt-1 > div.min-w-0 > p.mt-2",
+        "node_label": "キーワードを入力して 1,800 以上のランキング・記事を横断検索できます。",
+        "snippet": "<p class=\"mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground\">",
+        "breakdown_ms": {
+          "timeToFirstByte": 4,
+          "elementRenderDelay": 165
+        }
+      },
+      "cls_contributors": [
+        {
+          "selector": null,
+          "node_label": null,
+          "score": 0.01265614969096423,
+          "causes": [
+            "Media element lacking an explicit size"
+          ]
+        },
+        {
+          "selector": null,
+          "node_label": null,
+          "score": 0.01265614969096423,
+          "causes": [
+            "Media element lacking an explicit size"
+          ]
+        },
+        {
+          "selector": "body.google-anno-skip > div.relative > main#main-content > div.mx-auto",
+          "node_label": "検索\n\nサイト内検索\n\nキーワードを入力して 1,800 以上のランキング・記事を横断検索できます。\n\n検索\n\n検索キーワードを入力してください\n\nコンテンツ…",
+          "score": 0.005264725120033367,
+          "causes": [
+            "Media element lacking an explicit size"
+          ]
+        }
+      ],
+      "analysis_utc": "2026-09-28T22:29:51.532Z",
+      "final_url": "https://stats47.jp/search"
+    },
+    {
+      "url": "https://stats47.jp/themes/population-dynamics",
+      "strategy": "mobile",
+      "fetched_at": "2026-09-28T22:30:39.053Z",
+      "scores": {
+        "performance": 46,
+        "accessibility": 98,
+        "best_practices": 100,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 4501.009078332584,
+        "TBT_ms": 1454.500000000001,
+        "CLS": 0,
+        "FCP_ms": 2411.805314788579,
+        "TTI_ms": 12244.724446652752,
+        "SI_ms": 14701.25421782317,
+        "TTFB_ms": 30
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 3438,
+          "category": "AVERAGE"
+        },
+        "INP": {
+          "percentile": 116,
+          "category": "FAST"
+        },
+        "CLS": {
+          "percentile": 0,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 2744,
+          "category": "AVERAGE"
+        },
+        "TTFB": {
+          "percentile": 2343,
+          "category": "SLOW"
+        }
+      },
+      "dom_size": {
+        "total_elements": 3163,
+        "max_depth": 23,
+        "max_child_elements": 254
+      },
+      "lcp_element": {
+        "selector": "section#theme-indicators > section#theme-section-population-change > div.border-b > p.mt-2",
+        "node_label": "人口の規模と増減を分けて確かめます。各指標の対象年は同じとは限りません。",
+        "snippet": "<p class=\"mt-2 text-sm leading-relaxed text-muted-foreground\">",
+        "breakdown_ms": {
+          "timeToFirstByte": 30,
+          "elementRenderDelay": 9188
+        }
+      },
+      "cls_contributors": [],
+      "analysis_utc": "2026-09-28T22:30:03.286Z",
+      "final_url": "https://stats47.jp/themes/population-dynamics"
+    },
+    {
+      "url": "https://stats47.jp/themes/population-dynamics",
+      "strategy": "desktop",
+      "fetched_at": "2026-09-28T22:31:00.930Z",
+      "scores": {
+        "performance": 76,
+        "accessibility": 100,
+        "best_practices": 100,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 781.0028197527014,
+        "TBT_ms": 558.4999999999999,
+        "CLS": 0.04695212410478569,
+        "FCP_ms": 597.699394700864,
+        "TTI_ms": 2422.8577341788377,
+        "SI_ms": 895.2495192413751,
+        "TTFB_ms": 30
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 3235,
+          "category": "AVERAGE"
+        },
+        "INP": {
+          "percentile": 87,
+          "category": "FAST"
+        },
+        "CLS": {
+          "percentile": 7,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 2465,
+          "category": "AVERAGE"
+        },
+        "TTFB": {
+          "percentile": 2339,
+          "category": "SLOW"
+        }
+      },
+      "dom_size": {
+        "total_elements": 3163,
+        "max_depth": 23,
+        "max_child_elements": 254
+      },
+      "lcp_element": {
+        "selector": "section#theme-indicators > section#theme-section-natural-social-change > div.border-b > p.mt-2",
+        "node_label": "出生・死亡と転入・転出を別々に確認します。出典・対象期間の違う数値を足し合わせて人口増減を再計算しないでください。転入・転出の系列は外国人移動者を対象とします。",
+        "snippet": "<p class=\"mt-2 text-sm leading-relaxed text-muted-foreground\">",
+        "breakdown_ms": {
+          "timeToFirstByte": 30,
+          "elementRenderDelay": 290
+        }
+      },
+      "cls_contributors": [
+        {
+          "selector": "div.text-foreground > div.space-y-4 > section#theme-indicators > section#theme-section-natural-social-change",
+          "node_label": "出生と死亡・転入と転出の内訳\n\n出生・死亡と転入・転出を別々に確認します。出典・対象期間の違う数値を足し合わせて人口増減を再計算しないでください。転入・転出の…",
+          "score": 0.04695212410478569,
+          "causes": []
+        }
+      ],
+      "analysis_utc": "2026-09-28T22:30:40.920Z",
+      "final_url": "https://stats47.jp/themes/population-dynamics"
+    },
+    {
+      "url": "https://stats47.jp/themes/local-economy",
+      "strategy": "mobile",
+      "fetched_at": "2026-09-28T22:31:28.138Z",
+      "scores": {
+        "performance": 67,
+        "accessibility": 98,
+        "best_practices": 100,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 2851.0141748096457,
+        "TBT_ms": 826.4995830938351,
+        "CLS": 0,
+        "FCP_ms": 1983.7030220696804,
+        "TTI_ms": 11676.612494234294,
+        "SI_ms": 7834.904609543066,
+        "TTFB_ms": 130
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 3438,
+          "category": "AVERAGE"
+        },
+        "INP": {
+          "percentile": 116,
+          "category": "FAST"
+        },
+        "CLS": {
+          "percentile": 0,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 2744,
+          "category": "AVERAGE"
+        },
+        "TTFB": {
+          "percentile": 2343,
+          "category": "SLOW"
+        }
+      },
+      "dom_size": {
+        "total_elements": 1922,
+        "max_depth": 23,
+        "max_child_elements": 155
+      },
+      "lcp_element": {
+        "selector": "header.mb-6 > div.grid > div.relative > img.object-cover",
+        "node_label": "header.mb-6 > div.grid > div.relative > img.object-cover",
+        "snippet": "<img alt=\"\" decoding=\"async\" data-nimg=\"fill\" class=\"object-cover object-center dark:brightness-[0.85]\" style=\"position: absolute; height: 100%; width: 100%; inset: 0px;\" src=\"/images/theme-local-economy-hero.webp\">",
+        "breakdown_ms": {
+          "timeToFirstByte": 130,
+          "resourceLoadDelay": 3334,
+          "resourceLoadDuration": 110,
+          "elementRenderDelay": 54
+        }
+      },
+      "cls_contributors": [],
+      "analysis_utc": "2026-09-28T22:31:03.254Z",
+      "final_url": "https://stats47.jp/themes/local-economy"
+    },
+    {
+      "url": "https://stats47.jp/themes/local-economy",
+      "strategy": "desktop",
+      "fetched_at": "2026-09-28T22:31:49.262Z",
+      "scores": {
+        "performance": 86,
+        "accessibility": 100,
+        "best_practices": 100,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 661.0011726413858,
+        "TBT_ms": 316.00000000000034,
+        "CLS": 0.01274477090571278,
+        "FCP_ms": 321.00048523091823,
+        "TTI_ms": 2464.9036554062513,
+        "SI_ms": 915.1350624710162,
+        "TTFB_ms": 13
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 3235,
+          "category": "AVERAGE"
+        },
+        "INP": {
+          "percentile": 87,
+          "category": "FAST"
+        },
+        "CLS": {
+          "percentile": 7,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 2465,
+          "category": "AVERAGE"
+        },
+        "TTFB": {
+          "percentile": 2339,
+          "category": "SLOW"
+        }
+      },
+      "dom_size": {
+        "total_elements": 1922,
+        "max_depth": 23,
+        "max_child_elements": 155
+      },
+      "lcp_element": {
+        "selector": "header.mb-6 > div.grid > div.relative > img.object-cover",
+        "node_label": "header.mb-6 > div.grid > div.relative > img.object-cover",
+        "snippet": "<img alt=\"\" decoding=\"async\" data-nimg=\"fill\" class=\"object-cover object-center dark:brightness-[0.85]\" style=\"position: absolute; height: 100%; width: 100%; inset: 0px;\" src=\"/images/theme-local-economy-hero.webp\">",
+        "breakdown_ms": {
+          "timeToFirstByte": 13,
+          "resourceLoadDelay": 92,
+          "resourceLoadDuration": 39,
+          "elementRenderDelay": 146
+        }
+      },
+      "cls_contributors": [
+        {
+          "selector": "div.text-foreground > div.space-y-4 > section#theme-indicators > section#theme-section-industry",
+          "node_label": "どの産業で働いているか\n\n産業別就業者の割合から地域の仕事の構成を確認します。産出額は就業者の割合や所得とは別の尺度です。\n\n第1次産業就業者比率・第2次産業…",
+          "score": 0.01274477090571278,
+          "causes": []
+        },
+        {
+          "selector": "div.border-t > div.space-y-1.5 > div.flex > a.inline-flex",
+          "node_label": "出典",
+          "score": 0.000185218714303996,
+          "causes": []
+        }
+      ],
+      "analysis_utc": "2026-09-28T22:31:30.013Z",
+      "final_url": "https://stats47.jp/themes/local-economy"
+    },
+    {
+      "url": "https://stats47.jp/themes/labor-wages",
+      "strategy": "mobile",
+      "fetched_at": "2026-09-28T22:32:12.494Z",
+      "scores": {
+        "performance": 79,
+        "accessibility": 98,
+        "best_practices": 100,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 2718.0041279413895,
+        "TBT_ms": 357,
+        "CLS": 0,
+        "FCP_ms": 1054.001289981684,
+        "TTI_ms": 10181.516705262811,
+        "SI_ms": 9774.801185708515,
+        "TTFB_ms": 150
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 3438,
+          "category": "AVERAGE"
+        },
+        "INP": {
+          "percentile": 116,
+          "category": "FAST"
+        },
+        "CLS": {
+          "percentile": 0,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 2744,
+          "category": "AVERAGE"
+        },
+        "TTFB": {
+          "percentile": 2343,
+          "category": "SLOW"
+        }
+      },
+      "dom_size": {
+        "total_elements": 1366,
+        "max_depth": 23,
+        "max_child_elements": 95
+      },
+      "lcp_element": {
+        "selector": "section#theme-indicators > section#theme-section-minimum-wage > div.border-b > p.mt-2",
+        "node_label": "地域別最低賃金は時間額です。適用時点と対象年を確認します。",
+        "snippet": "<p class=\"mt-2 text-sm leading-relaxed text-muted-foreground\">",
+        "breakdown_ms": {
+          "timeToFirstByte": 150,
+          "elementRenderDelay": 5153
+        }
+      },
+      "cls_contributors": [],
+      "analysis_utc": "2026-09-28T22:31:51.142Z",
+      "final_url": "https://stats47.jp/themes/labor-wages"
+    },
+    {
+      "url": "https://stats47.jp/themes/labor-wages",
+      "strategy": "desktop",
+      "fetched_at": "2026-09-28T22:32:33.288Z",
+      "scores": {
+        "performance": 73,
+        "accessibility": 100,
+        "best_practices": 100,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 707.0245065015065,
+        "TBT_ms": 759.5,
+        "CLS": 0.05330025404890442,
+        "FCP_ms": 519.7719356331468,
+        "TTI_ms": 2784.87548002464,
+        "SI_ms": 956.7691691057014,
+        "TTFB_ms": 9
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 3235,
+          "category": "AVERAGE"
+        },
+        "INP": {
+          "percentile": 87,
+          "category": "FAST"
+        },
+        "CLS": {
+          "percentile": 7,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 2465,
+          "category": "AVERAGE"
+        },
+        "TTFB": {
+          "percentile": 2339,
+          "category": "SLOW"
+        }
+      },
+      "dom_size": {
+        "total_elements": 1366,
+        "max_depth": 23,
+        "max_child_elements": 95
+      },
+      "lcp_element": {
+        "selector": "section#theme-indicators > section#theme-section-starting-pay > div.border-b > p.mt-2",
+        "node_label": "初任給は学歴別の月額です。最低賃金の時間額とは直接比較できません。",
+        "snippet": "<p class=\"mt-2 text-sm leading-relaxed text-muted-foreground\">",
+        "breakdown_ms": {
+          "timeToFirstByte": 9,
+          "elementRenderDelay": 361
+        }
+      },
+      "cls_contributors": [
+        {
+          "selector": "div.text-foreground > div.space-y-4 > section#theme-indicators > section#theme-section-starting-pay",
+          "node_label": "初任給はいくらか\n\n初任給は学歴別の月額です。最低賃金の時間額とは直接比較できません。\n\n初任給はいくらか\n大卒初任給\n2023年\n227.8千円\n27位 /…",
+          "score": 0.05330025404890442,
+          "causes": []
+        }
+      ],
+      "analysis_utc": "2026-09-28T22:32:14.629Z",
+      "final_url": "https://stats47.jp/themes/labor-wages"
+    },
+    {
+      "url": "https://stats47.jp/ranking/total-population",
+      "strategy": "mobile",
+      "fetched_at": "2026-09-28T22:32:50.164Z",
+      "scores": {
+        "performance": 53,
+        "accessibility": 100,
+        "best_practices": 96,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 9885.09035161549,
+        "TBT_ms": 870.0000000000005,
+        "CLS": 0.002379301764654188,
+        "FCP_ms": 1713.727345493739,
+        "TTI_ms": 9885.09035161549,
+        "SI_ms": 3452.7965495404005,
+        "TTFB_ms": 6
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 3438,
+          "category": "AVERAGE"
+        },
+        "INP": {
+          "percentile": 116,
+          "category": "FAST"
+        },
+        "CLS": {
+          "percentile": 0,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 2744,
+          "category": "AVERAGE"
+        },
+        "TTFB": {
+          "percentile": 2343,
+          "category": "SLOW"
+        }
+      },
+      "dom_size": {
+        "total_elements": 1077,
+        "max_depth": 24,
+        "max_child_elements": 82
+      },
+      "lcp_element": {
+        "selector": "div.leaflet-pane > div.leaflet-layer > div.leaflet-tile-container > img.leaflet-tile",
+        "node_label": "div.leaflet-pane > div.leaflet-layer > div.leaflet-tile-container > img.leaflet-tile",
+        "snippet": "<img alt=\"\" src=\"https://cyberjapandata.gsi.go.jp/xyz/pale/4/14/6.png\" class=\"leaflet-tile leaflet-tile-loaded\" style=\"width: 256px; height: 256px; transform: translate3d(166px, 218px, 0px);\">",
+        "breakdown_ms": {
+          "timeToFirstByte": 6,
+          "resourceLoadDelay": 1576,
+          "resourceLoadDuration": 48,
+          "elementRenderDelay": 443
+        }
+      },
+      "cls_contributors": [
+        {
+          "selector": "div.h-[500px] > div.leaflet-container > div.leaflet-control-container > div.leaflet-bottom",
+          "node_label": "531,000\n14,178,000 人\n Leaflet | 地理院タイル",
+          "score": 0.002379301764654188,
+          "causes": []
+        }
+      ],
+      "analysis_utc": "2026-09-28T22:32:35.734Z",
+      "final_url": "https://stats47.jp/ranking/total-population"
+    },
+    {
+      "url": "https://stats47.jp/ranking/total-population",
+      "strategy": "desktop",
+      "fetched_at": "2026-09-28T22:33:14.288Z",
+      "scores": {
+        "performance": 67,
+        "accessibility": 100,
+        "best_practices": 100,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 1923.056576743351,
+        "TBT_ms": 562.5000000000002,
+        "CLS": 0.05957446808510639,
+        "FCP_ms": 496.595449406674,
+        "TTI_ms": 2094.550840490206,
+        "SI_ms": 905.3199388169493,
+        "TTFB_ms": 5
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 3235,
+          "category": "AVERAGE"
+        },
+        "INP": {
+          "percentile": 87,
+          "category": "FAST"
+        },
+        "CLS": {
+          "percentile": 7,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 2465,
+          "category": "AVERAGE"
+        },
+        "TTFB": {
+          "percentile": 2339,
+          "category": "SLOW"
+        }
+      },
+      "dom_size": {
+        "total_elements": 1276,
+        "max_depth": 24,
+        "max_child_elements": 82
+      },
+      "lcp_element": {
+        "selector": "div.leaflet-pane > div.leaflet-layer > div.leaflet-tile-container > img.leaflet-tile",
+        "node_label": "div.leaflet-pane > div.leaflet-layer > div.leaflet-tile-container > img.leaflet-tile",
+        "snippet": "<img alt=\"\" src=\"https://cyberjapandata.gsi.go.jp/xyz/pale/4/14/6.png\" class=\"leaflet-tile leaflet-tile-loaded\" style=\"width: 256px; height: 256px; transform: translate3d(186px, 218px, 0px);\">",
+        "breakdown_ms": {
+          "timeToFirstByte": 5,
+          "resourceLoadDelay": 1755,
+          "resourceLoadDuration": 52,
+          "elementRenderDelay": 427
+        }
+      },
+      "cls_contributors": [
+        {
+          "selector": "body.google-anno-skip > div.relative > footer.w-full",
+          "node_label": "商品・書籍\nこのサイトについて\nプライバシーポリシー\n利用規約",
+          "score": 0.05957446808510639,
+          "causes": []
+        },
+        {
+          "selector": "div.mx-auto > div.lg:flex > aside.hidden > section.rounded-card",
+          "node_label": "この統計の出典調査\n人口推計\n国勢調査報告\n\n同じ調査のランキング\n\n粗出生率\n消防ポンプ自動車等現有数\n日本人人口\n警察費\n不慮の事故による死亡者数",
+          "score": 0.04059472801126157,
+          "causes": []
+        }
+      ],
+      "analysis_utc": "2026-09-28T22:32:52.666Z",
+      "final_url": "https://stats47.jp/ranking/total-population"
+    },
+    {
+      "url": "https://stats47.jp/ranking/annual-sunshine-duration",
+      "strategy": "mobile",
+      "fetched_at": "2026-09-28T22:33:34.874Z",
+      "scores": {
+        "performance": 49,
+        "accessibility": 100,
+        "best_practices": 96,
+        "seo": 92
+      },
+      "lab_data": {
+        "LCP_ms": 8482.13942344925,
+        "TBT_ms": 1133.0000000000005,
+        "CLS": 0.002379301764654188,
+        "FCP_ms": 1688.1408053344194,
+        "TTI_ms": 9003.5912476813,
+        "SI_ms": 4292.03512278291,
+        "TTFB_ms": 6
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 3438,
+          "category": "AVERAGE"
+        },
+        "INP": {
+          "percentile": 116,
+          "category": "FAST"
+        },
+        "CLS": {
+          "percentile": 0,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 2744,
+          "category": "AVERAGE"
+        },
+        "TTFB": {
+          "percentile": 2343,
+          "category": "SLOW"
+        }
+      },
+      "dom_size": {
+        "total_elements": 1133,
+        "max_depth": 24,
+        "max_child_elements": 118
+      },
+      "lcp_element": {
+        "selector": "div.leaflet-pane > div.leaflet-layer > div.leaflet-tile-container > img.leaflet-tile",
+        "node_label": "div.leaflet-pane > div.leaflet-layer > div.leaflet-tile-container > img.leaflet-tile",
+        "snippet": "<img alt=\"\" src=\"https://cyberjapandata.gsi.go.jp/xyz/pale/4/14/6.png\" class=\"leaflet-tile leaflet-tile-loaded\" style=\"width: 256px; height: 256px; transform: translate3d(166px, 218px, 0px);\">",
+        "breakdown_ms": {
+          "timeToFirstByte": 6,
+          "resourceLoadDelay": 2058,
+          "resourceLoadDuration": 46,
+          "elementRenderDelay": 547
+        }
+      },
+      "cls_contributors": [
+        {
+          "selector": "div.h-[500px] > div.leaflet-container > div.leaflet-control-container > div.leaflet-bottom",
+          "node_label": "1,625.6\n2,309.0 時間\n Leaflet | 地理院タイル",
+          "score": 0.002379301764654188,
+          "causes": []
+        }
+      ],
+      "analysis_utc": "2026-09-28T22:33:17.089Z",
+      "final_url": "https://stats47.jp/ranking/annual-sunshine-duration"
+    },
+    {
+      "url": "https://stats47.jp/ranking/annual-sunshine-duration",
+      "strategy": "desktop",
+      "fetched_at": "2026-09-28T22:33:53.647Z",
+      "scores": {
+        "performance": 77,
+        "accessibility": 100,
+        "best_practices": 100,
+        "seo": 92
+      },
+      "lab_data": {
+        "LCP_ms": 1836.0242969405613,
+        "TBT_ms": 274.9999999999998,
+        "CLS": 0.1145892172184785,
+        "FCP_ms": 460.1361957745164,
+        "TTI_ms": 1962.7271372871337,
+        "SI_ms": 993.3525666516264,
+        "TTFB_ms": 7
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 3235,
+          "category": "AVERAGE"
+        },
+        "INP": {
+          "percentile": 87,
+          "category": "FAST"
+        },
+        "CLS": {
+          "percentile": 7,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 2465,
+          "category": "AVERAGE"
+        },
+        "TTFB": {
+          "percentile": 2339,
+          "category": "SLOW"
+        }
+      },
+      "dom_size": {
+        "total_elements": 1322,
+        "max_depth": 24,
+        "max_child_elements": 118
+      },
+      "lcp_element": null,
+      "cls_contributors": [
+        {
+          "selector": "body.google-anno-skip > div.relative > footer.w-full",
+          "node_label": "商品・書籍\nこのサイトについて\nプライバシーポリシー\n利用規約",
+          "score": 0.05957446808510639,
+          "causes": []
+        },
+        {
+          "selector": "div.mx-auto > div.lg:flex > aside.hidden > section.rounded-card",
+          "node_label": "この統計の出典調査\n気象統計\n\n同じ調査のランキング\n\n年間快晴日数\n年間降水日数\n年間降水量\n年間雪日数\n年平均気温",
+          "score": 0.04269872306062574,
+          "causes": []
+        },
+        {
+          "selector": "div.lg:flex > main.min-w-0 > div.flex > div.order-2",
+          "node_label": "2024年\n\n年間日照時間の都道府県別カラーマップ。 値が高いほど濃い色で表示されます。詳細データは下のテーブルを参照してください。\n\n+\n−\n1,625.6…",
+          "score": 0.01218297208779854,
+          "causes": []
+        },
+        {
+          "selector": "div.h-[500px] > div.leaflet-container > div.leaflet-control-container > div.leaflet-bottom",
+          "node_label": "1,625.6\n2,309.0 時間\n Leaflet | 地理院タイル",
+          "score": 0.0001330539849478394,
+          "causes": []
+        }
+      ],
+      "analysis_utc": "2026-09-28T22:33:36.864Z",
+      "final_url": "https://stats47.jp/ranking/annual-sunshine-duration"
+    },
+    {
+      "url": "https://stats47.jp/ranking/future-population-change-rate-2050",
+      "strategy": "mobile",
+      "fetched_at": "2026-09-28T22:34:16.808Z",
+      "scores": {
+        "performance": 49,
+        "accessibility": 100,
+        "best_practices": 96,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 9751.03634167792,
+        "TBT_ms": 710.5000000000014,
+        "CLS": 0.002379301764654188,
+        "FCP_ms": 1051.0038661359492,
+        "TTI_ms": 9882.493571352146,
+        "SI_ms": 8446.390162925461,
+        "TTFB_ms": 6
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 3438,
+          "category": "AVERAGE"
+        },
+        "INP": {
+          "percentile": 116,
+          "category": "FAST"
+        },
+        "CLS": {
+          "percentile": 0,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 2744,
+          "category": "AVERAGE"
+        },
+        "TTFB": {
+          "percentile": 2343,
+          "category": "SLOW"
+        }
+      },
+      "dom_size": {
+        "total_elements": 1054,
+        "max_depth": 23,
+        "max_child_elements": 94
+      },
+      "lcp_element": {
+        "selector": "div.leaflet-pane > div.leaflet-layer > div.leaflet-tile-container > img.leaflet-tile",
+        "node_label": "div.leaflet-pane > div.leaflet-layer > div.leaflet-tile-container > img.leaflet-tile",
+        "snippet": "<img alt=\"\" src=\"https://cyberjapandata.gsi.go.jp/xyz/pale/4/14/6.png\" class=\"leaflet-tile leaflet-tile-loaded\" style=\"width: 256px; height: 256px; transform: translate3d(166px, 218px, 0px);\">",
+        "breakdown_ms": {
+          "timeToFirstByte": 6,
+          "resourceLoadDelay": 4979,
+          "resourceLoadDuration": 40,
+          "elementRenderDelay": 476
+        }
+      },
+      "cls_contributors": [
+        {
+          "selector": "div.h-[500px] > div.leaflet-container > div.leaflet-control-container > div.leaflet-bottom",
+          "node_label": "-41.59\n2.50 %\n Leaflet | 地理院タイル",
+          "score": 0.002379301764654188,
+          "causes": []
+        }
+      ],
+      "analysis_utc": "2026-09-28T22:33:56.068Z",
+      "final_url": "https://stats47.jp/ranking/future-population-change-rate-2050"
+    },
+    {
+      "url": "https://stats47.jp/ranking/future-population-change-rate-2050",
+      "strategy": "desktop",
+      "fetched_at": "2026-09-28T22:34:31.707Z",
+      "scores": {
+        "performance": 88,
+        "accessibility": 100,
+        "best_practices": 100,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 1900.0260610387625,
+        "TBT_ms": 98.00000000000023,
+        "CLS": 0.0951657847025886,
+        "FCP_ms": 458.7008569650289,
+        "TTI_ms": 1917.4248019099234,
+        "SI_ms": 923.9397818805166,
+        "TTFB_ms": 6
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 3235,
+          "category": "AVERAGE"
+        },
+        "INP": {
+          "percentile": 87,
+          "category": "FAST"
+        },
+        "CLS": {
+          "percentile": 7,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 2465,
+          "category": "AVERAGE"
+        },
+        "TTFB": {
+          "percentile": 2339,
+          "category": "SLOW"
+        }
+      },
+      "dom_size": {
+        "total_elements": 1229,
+        "max_depth": 24,
+        "max_child_elements": 91
+      },
+      "lcp_element": null,
+      "cls_contributors": [
+        {
+          "selector": "body.google-anno-skip > div.relative > footer.w-full",
+          "node_label": "商品・書籍\nこのサイトについて\nプライバシーポリシー\n利用規約",
+          "score": 0.05957446808510639,
+          "causes": []
+        },
+        {
+          "selector": "div.mx-auto > div.lg:flex > aside.hidden > section.rounded-card",
+          "node_label": "この統計の出典調査\n日本の地域別将来推計人口（令和5年推計）\n\n同じ調査のランキング\n\n将来推計人口",
+          "score": 0.02302018112833736,
+          "causes": []
+        },
+        {
+          "selector": "div.lg:flex > main.min-w-0 > div.flex > div.order-2",
+          "node_label": "2050年\n\n将来人口増減率の都道府県別カラーマップ。 値が高いほど濃い色で表示されます。詳細データは下のテーブルを参照してください。\n\n+\n−\n-41.59…",
+          "score": 0.01218297208779854,
+          "causes": []
+        },
+        {
+          "selector": "body.google-anno-skip > div.relative > footer.w-full > div.mx-auto",
+          "node_label": "商品・書籍\nこのサイトについて\nプライバシーポリシー\n利用規約",
+          "score": 0.0002551094163984776,
+          "causes": []
+        },
+        {
+          "selector": "div.h-[500px] > div.leaflet-container > div.leaflet-control-container > div.leaflet-bottom",
+          "node_label": "-41.59\n2.50 %\n Leaflet | 地理院タイル",
+          "score": 0.0001330539849478394,
+          "causes": []
+        }
+      ],
+      "analysis_utc": "2026-09-28T22:34:18.675Z",
+      "final_url": "https://stats47.jp/ranking/future-population-change-rate-2050"
+    },
+    {
+      "url": "https://stats47.jp/ranking/agricultural-output",
+      "strategy": "mobile",
+      "fetched_at": "2026-09-28T22:34:48.587Z",
+      "scores": {
+        "performance": 60,
+        "accessibility": 100,
+        "best_practices": 96,
+        "seo": 92
+      },
+      "lab_data": {
+        "LCP_ms": 10156.08426152111,
+        "TBT_ms": 509.5,
+        "CLS": 0.002379301764654188,
+        "FCP_ms": 1719.2535147519864,
+        "TTI_ms": 10643.588474597167,
+        "SI_ms": 3794.9940767993035,
+        "TTFB_ms": 8
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 3438,
+          "category": "AVERAGE"
+        },
+        "INP": {
+          "percentile": 116,
+          "category": "FAST"
+        },
+        "CLS": {
+          "percentile": 0,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 2744,
+          "category": "AVERAGE"
+        },
+        "TTFB": {
+          "percentile": 2343,
+          "category": "SLOW"
+        }
+      },
+      "dom_size": {
+        "total_elements": 1142,
+        "max_depth": 24,
+        "max_child_elements": 125
+      },
+      "lcp_element": {
+        "selector": "div.leaflet-pane > div.leaflet-layer > div.leaflet-tile-container > img.leaflet-tile",
+        "node_label": "div.leaflet-pane > div.leaflet-layer > div.leaflet-tile-container > img.leaflet-tile",
+        "snippet": "<img alt=\"\" src=\"https://cyberjapandata.gsi.go.jp/xyz/pale/4/14/6.png\" class=\"leaflet-tile leaflet-tile-loaded\" style=\"width: 256px; height: 256px; transform: translate3d(166px, 218px, 0px);\">",
+        "breakdown_ms": {
+          "timeToFirstByte": 8,
+          "resourceLoadDelay": 1434,
+          "resourceLoadDuration": 140,
+          "elementRenderDelay": 337
+        }
+      },
+      "cls_contributors": [
+        {
+          "selector": "div.h-[500px] > div.leaflet-container > div.leaflet-control-container > div.leaflet-bottom",
+          "node_label": "22,600\n1,481,700 百万円\n Leaflet | 地理院タイル",
+          "score": 0.002379301764654188,
+          "causes": []
+        }
+      ],
+      "analysis_utc": "2026-09-28T22:34:34.140Z",
+      "final_url": "https://stats47.jp/ranking/agricultural-output"
+    },
+    {
+      "url": "https://stats47.jp/ranking/agricultural-output",
+      "strategy": "desktop",
+      "fetched_at": "2026-09-28T22:35:08.581Z",
+      "scores": {
+        "performance": 74,
+        "accessibility": 100,
+        "best_practices": 100,
+        "seo": 92
+      },
+      "lab_data": {
+        "LCP_ms": 2177.039939322169,
+        "TBT_ms": 339.50000000000034,
+        "CLS": 0.05957446808510639,
+        "FCP_ms": 462.8787596133594,
+        "TTI_ms": 2287.741254397412,
+        "SI_ms": 977.6613081959493,
+        "TTFB_ms": 6
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 3235,
+          "category": "AVERAGE"
+        },
+        "INP": {
+          "percentile": 87,
+          "category": "FAST"
+        },
+        "CLS": {
+          "percentile": 7,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 2465,
+          "category": "AVERAGE"
+        },
+        "TTFB": {
+          "percentile": 2339,
+          "category": "SLOW"
+        }
+      },
+      "dom_size": {
+        "total_elements": 1335,
+        "max_depth": 24,
+        "max_child_elements": 125
+      },
+      "lcp_element": {
+        "selector": "div.leaflet-pane > div.leaflet-layer > div.leaflet-tile-container > img.leaflet-tile",
+        "node_label": "div.leaflet-pane > div.leaflet-layer > div.leaflet-tile-container > img.leaflet-tile",
+        "snippet": "<img alt=\"\" src=\"https://cyberjapandata.gsi.go.jp/xyz/pale/4/14/6.png\" class=\"leaflet-tile leaflet-tile-loaded\" style=\"width: 256px; height: 256px; transform: translate3d(186px, 218px, 0px);\">",
+        "breakdown_ms": {
+          "timeToFirstByte": 6,
+          "resourceLoadDelay": 1537,
+          "resourceLoadDuration": 44,
+          "elementRenderDelay": 335
+        }
+      },
+      "cls_contributors": [
+        {
+          "selector": "body.google-anno-skip > div.relative > footer.w-full",
+          "node_label": "商品・書籍\nこのサイトについて\nプライバシーポリシー\n利用規約",
+          "score": 0.05957446808510639,
+          "causes": [
+            "Media element lacking an explicit size"
+          ]
+        },
+        {
+          "selector": "div.mx-auto > div.lg:flex > aside.hidden > section.rounded-card",
+          "node_label": "この統計の出典調査\n生産農業所得統計\n\n同じ調査のランキング\n\n就業者1人当たり農業産出額\n土地生産性",
+          "score": 0.02623805590971784,
+          "causes": []
+        }
+      ],
+      "analysis_utc": "2026-09-28T22:34:50.851Z",
+      "final_url": "https://stats47.jp/ranking/agricultural-output"
+    },
+    {
+      "url": "https://stats47.jp/areas/13000",
+      "strategy": "mobile",
+      "fetched_at": "2026-09-28T22:35:38.927Z",
+      "scores": {
+        "performance": 79,
+        "accessibility": 100,
+        "best_practices": 100,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 3451.055508991688,
+        "TBT_ms": 242,
+        "CLS": 0,
+        "FCP_ms": 1689.827179939877,
+        "TTI_ms": 6861.612471790302,
+        "SI_ms": 7216.630908672645,
+        "TTFB_ms": 7
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 3438,
+          "category": "AVERAGE"
+        },
+        "INP": {
+          "percentile": 116,
+          "category": "FAST"
+        },
+        "CLS": {
+          "percentile": 0,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 2744,
+          "category": "AVERAGE"
+        },
+        "TTFB": {
+          "percentile": 2343,
+          "category": "SLOW"
+        }
+      },
+      "dom_size": {
+        "total_elements": 2270,
+        "max_depth": 21,
+        "max_child_elements": 128
+      },
+      "lcp_element": {
+        "selector": "main.min-w-0 > section > div.mb-4 > p.mt-1",
+        "node_label": "県データブックの指標のうち、全国順位が上位・下位の指標です。順位の色は、値が高いほど良い・悪いが定まった指標にだけ付けています。",
+        "snippet": "<p class=\"mt-1 text-sm text-muted-foreground\">",
+        "breakdown_ms": {
+          "timeToFirstByte": 7,
+          "elementRenderDelay": 4469
+        }
+      },
+      "cls_contributors": [],
+      "analysis_utc": "2026-09-28T22:35:11.109Z",
+      "final_url": "https://stats47.jp/areas/13000"
+    },
+    {
+      "url": "https://stats47.jp/areas/13000",
+      "strategy": "desktop",
+      "fetched_at": "2026-09-28T22:36:03.194Z",
+      "scores": {
+        "performance": 88,
+        "accessibility": 100,
+        "best_practices": 100,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 997.0092914386114,
+        "TBT_ms": 212.0000000000001,
+        "CLS": 0.12269771853656455,
+        "FCP_ms": 470.12444507656335,
+        "TTI_ms": 1693.015938390849,
+        "SI_ms": 597.3627211598646,
+        "TTFB_ms": 8
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 3235,
+          "category": "AVERAGE"
+        },
+        "INP": {
+          "percentile": 87,
+          "category": "FAST"
+        },
+        "CLS": {
+          "percentile": 7,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 2465,
+          "category": "AVERAGE"
+        },
+        "TTFB": {
+          "percentile": 2339,
+          "category": "SLOW"
+        }
+      },
+      "dom_size": {
+        "total_elements": 2270,
+        "max_depth": 21,
+        "max_child_elements": 128
+      },
+      "lcp_element": {
+        "selector": "main.min-w-0 > section > div.mb-4 > p.mt-1",
+        "node_label": "県データブックの指標のうち、全国順位が上位・下位の指標です。順位の色は、値が高いほど良い・悪いが定まった指標にだけ付けています。",
+        "snippet": "<p class=\"mt-1 text-sm text-muted-foreground\">",
+        "breakdown_ms": {
+          "timeToFirstByte": 8,
+          "elementRenderDelay": 717
+        }
+      },
+      "cls_contributors": [
+        {
+          "selector": "body.google-anno-skip > div.relative > footer.w-full",
+          "node_label": "商品・書籍\nこのサイトについて\nプライバシーポリシー\n利用規約",
+          "score": 0.06803750894621842,
+          "causes": []
+        },
+        {
+          "selector": "div.xl:grid > div.min-w-0 > main.min-w-0 > section.rounded-card",
+          "node_label": "東京都の市区町村40 件\n東京都 特別区部\n東京都 八王子市\n東京都 立川市\n東京都 武蔵野市\n東京都 三鷹市\n東京都 青梅市\n東京都 府中市\n東京都 昭島市…",
+          "score": 0.05466020959034614,
+          "causes": []
+        }
+      ],
+      "analysis_utc": "2026-09-28T22:35:41.485Z",
+      "final_url": "https://stats47.jp/areas/13000"
+    },
+    {
+      "url": "https://stats47.jp/areas/27000",
+      "strategy": "mobile",
+      "fetched_at": "2026-09-28T22:36:26.051Z",
+      "scores": {
+        "performance": 68,
+        "accessibility": 100,
+        "best_practices": 100,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 4652.024602264392,
+        "TBT_ms": 369.5,
+        "CLS": 0,
+        "FCP_ms": 1703.7136528177093,
+        "TTI_ms": 7516.540424065461,
+        "SI_ms": 6134.7998296636915,
+        "TTFB_ms": 7
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 3438,
+          "category": "AVERAGE"
+        },
+        "INP": {
+          "percentile": 116,
+          "category": "FAST"
+        },
+        "CLS": {
+          "percentile": 0,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 2744,
+          "category": "AVERAGE"
+        },
+        "TTFB": {
+          "percentile": 2343,
+          "category": "SLOW"
+        }
+      },
+      "dom_size": {
+        "total_elements": 2237,
+        "max_depth": 21,
+        "max_child_elements": 125
+      },
+      "lcp_element": {
+        "selector": "main.min-w-0 > section > div.mb-4 > p.mt-1",
+        "node_label": "県データブックの指標のうち、全国順位が上位・下位の指標です。順位の色は、値が高いほど良い・悪いが定まった指標にだけ付けています。",
+        "snippet": "<p class=\"mt-1 text-sm text-muted-foreground\">",
+        "breakdown_ms": {
+          "timeToFirstByte": 7,
+          "elementRenderDelay": 3762
+        }
+      },
+      "cls_contributors": [],
+      "analysis_utc": "2026-09-28T22:36:05.461Z",
+      "final_url": "https://stats47.jp/areas/27000"
+    },
+    {
+      "url": "https://stats47.jp/areas/27000",
+      "strategy": "desktop",
+      "fetched_at": "2026-09-28T22:36:49.850Z",
+      "scores": {
+        "performance": 85,
+        "accessibility": 100,
+        "best_practices": 100,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 1003.0341667699357,
+        "TBT_ms": 259,
+        "CLS": 0.12269771853656455,
+        "FCP_ms": 477.57034517643115,
+        "TTI_ms": 1521.0568570094574,
+        "SI_ms": 655.0471720494555,
+        "TTFB_ms": 11
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 3235,
+          "category": "AVERAGE"
+        },
+        "INP": {
+          "percentile": 87,
+          "category": "FAST"
+        },
+        "CLS": {
+          "percentile": 7,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 2465,
+          "category": "AVERAGE"
+        },
+        "TTFB": {
+          "percentile": 2339,
+          "category": "SLOW"
+        }
+      },
+      "dom_size": {
+        "total_elements": 2237,
+        "max_depth": 21,
+        "max_child_elements": 125
+      },
+      "lcp_element": {
+        "selector": "main.min-w-0 > section > div.mb-4 > p.mt-1",
+        "node_label": "県データブックの指標のうち、全国順位が上位・下位の指標です。順位の色は、値が高いほど良い・悪いが定まった指標にだけ付けています。",
+        "snippet": "<p class=\"mt-1 text-sm text-muted-foreground\">",
+        "breakdown_ms": {
+          "timeToFirstByte": 11,
+          "elementRenderDelay": 799
+        }
+      },
+      "cls_contributors": [
+        {
+          "selector": "body.google-anno-skip > div.relative > footer.w-full",
+          "node_label": "商品・書籍\nこのサイトについて\nプライバシーポリシー\n利用規約",
+          "score": 0.06803750894621842,
+          "causes": []
+        },
+        {
+          "selector": "div.xl:grid > div.min-w-0 > main.min-w-0 > section.rounded-card",
+          "node_label": "大阪府の市区町村43 件\n大阪府 大阪市\n大阪府 堺市\n大阪府 岸和田市\n大阪府 豊中市\n大阪府 池田市\n大阪府 吹田市\n大阪府 泉大津市\n大阪府 高槻市\n大…",
+          "score": 0.05466020959034614,
+          "causes": []
+        }
+      ],
+      "analysis_utc": "2026-09-28T22:36:28.768Z",
+      "final_url": "https://stats47.jp/areas/27000"
+    },
+    {
+      "url": "https://stats47.jp/areas/01000",
+      "strategy": "mobile",
+      "fetched_at": "2026-09-28T22:37:12.922Z",
+      "scores": {
+        "performance": 73,
+        "accessibility": 100,
+        "best_practices": 100,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 4521.041821106065,
+        "TBT_ms": 230,
+        "CLS": 0,
+        "FCP_ms": 1826.0947498535525,
+        "TTI_ms": 6919.064225270029,
+        "SI_ms": 6065.77587472069,
+        "TTFB_ms": 30
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 3438,
+          "category": "AVERAGE"
+        },
+        "INP": {
+          "percentile": 116,
+          "category": "FAST"
+        },
+        "CLS": {
+          "percentile": 0,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 2744,
+          "category": "AVERAGE"
+        },
+        "TTFB": {
+          "percentile": 2343,
+          "category": "SLOW"
+        }
+      },
+      "dom_size": {
+        "total_elements": 2549,
+        "max_depth": 21,
+        "max_child_elements": 179
+      },
+      "lcp_element": {
+        "selector": "main.min-w-0 > section > div.mb-4 > p.mt-1",
+        "node_label": "県データブックの指標のうち、全国順位が上位・下位の指標です。順位の色は、値が高いほど良い・悪いが定まった指標にだけ付けています。",
+        "snippet": "<p class=\"mt-1 text-sm text-muted-foreground\">",
+        "breakdown_ms": {
+          "timeToFirstByte": 30,
+          "elementRenderDelay": 3709
+        }
+      },
+      "cls_contributors": [],
+      "analysis_utc": "2026-09-28T22:36:51.863Z",
+      "final_url": "https://stats47.jp/areas/01000"
+    },
+    {
+      "url": "https://stats47.jp/areas/01000",
+      "strategy": "desktop",
+      "fetched_at": "2026-09-28T22:37:32.201Z",
+      "scores": {
+        "performance": 97,
+        "accessibility": 100,
+        "best_practices": 100,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 1010.0233556725962,
+        "TBT_ms": 71.99941610818507,
+        "CLS": 0.06946967291203557,
+        "FCP_ms": 502.1475807235406,
+        "TTI_ms": 1512.0380113571503,
+        "SI_ms": 605.309196895252,
+        "TTFB_ms": 42
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 3235,
+          "category": "AVERAGE"
+        },
+        "INP": {
+          "percentile": 87,
+          "category": "FAST"
+        },
+        "CLS": {
+          "percentile": 7,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 2465,
+          "category": "AVERAGE"
+        },
+        "TTFB": {
+          "percentile": 2339,
+          "category": "SLOW"
+        }
+      },
+      "dom_size": {
+        "total_elements": 2549,
+        "max_depth": 21,
+        "max_child_elements": 179
+      },
+      "lcp_element": {
+        "selector": "main.min-w-0 > section > div.mb-4 > p.mt-1",
+        "node_label": "県データブックの指標のうち、全国順位が上位・下位の指標です。順位の色は、値が高いほど良い・悪いが定まった指標にだけ付けています。",
+        "snippet": "<p class=\"mt-1 text-sm text-muted-foreground\">",
+        "breakdown_ms": {
+          "timeToFirstByte": 42,
+          "elementRenderDelay": 676
+        }
+      },
+      "cls_contributors": [
+        {
+          "selector": "body.google-anno-skip > div.relative > footer.w-full",
+          "node_label": "商品・書籍\nこのサイトについて\nプライバシーポリシー\n利用規約",
+          "score": 0.06946967291203557,
+          "causes": []
+        }
+      ],
+      "analysis_utc": "2026-09-28T22:37:15.218Z",
+      "final_url": "https://stats47.jp/areas/01000"
+    },
+    {
+      "url": "https://stats47.jp/areas/47000",
+      "strategy": "mobile",
+      "fetched_at": "2026-09-28T22:37:52.504Z",
+      "scores": {
+        "performance": 71,
+        "accessibility": 100,
+        "best_practices": 100,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 5701.017957306103,
+        "TBT_ms": 82.5,
+        "CLS": 0,
+        "FCP_ms": 1683.0014145151508,
+        "TTI_ms": 6774.521224538187,
+        "SI_ms": 7564.527380909692,
+        "TTFB_ms": 8
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 3438,
+          "category": "AVERAGE"
+        },
+        "INP": {
+          "percentile": 116,
+          "category": "FAST"
+        },
+        "CLS": {
+          "percentile": 0,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 2744,
+          "category": "AVERAGE"
+        },
+        "TTFB": {
+          "percentile": 2343,
+          "category": "SLOW"
+        }
+      },
+      "dom_size": {
+        "total_elements": 2245,
+        "max_depth": 21,
+        "max_child_elements": 126
+      },
+      "lcp_element": {
+        "selector": "main.min-w-0 > section > div.mb-4 > p.mt-1",
+        "node_label": "県データブックの指標のうち、全国順位が上位・下位の指標です。順位の色は、値が高いほど良い・悪いが定まった指標にだけ付けています。",
+        "snippet": "<p class=\"mt-1 text-sm text-muted-foreground\">",
+        "breakdown_ms": {
+          "timeToFirstByte": 8,
+          "elementRenderDelay": 4605
+        }
+      },
+      "cls_contributors": [],
+      "analysis_utc": "2026-09-28T22:37:34.199Z",
+      "final_url": "https://stats47.jp/areas/47000"
+    },
+    {
+      "url": "https://stats47.jp/areas/47000",
+      "strategy": "desktop",
+      "fetched_at": "2026-09-28T22:38:18.824Z",
+      "scores": {
+        "performance": 84,
+        "accessibility": 100,
+        "best_practices": 100,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 1023.0425332413356,
+        "TBT_ms": 282.9999999999998,
+        "CLS": 0.11063353445538265,
+        "FCP_ms": 496.9238752454876,
+        "TTI_ms": 1740.7267725006109,
+        "SI_ms": 661.531750963424,
+        "TTFB_ms": 8
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 3235,
+          "category": "AVERAGE"
+        },
+        "INP": {
+          "percentile": 87,
+          "category": "FAST"
+        },
+        "CLS": {
+          "percentile": 7,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 2465,
+          "category": "AVERAGE"
+        },
+        "TTFB": {
+          "percentile": 2339,
+          "category": "SLOW"
+        }
+      },
+      "dom_size": {
+        "total_elements": 2245,
+        "max_depth": 21,
+        "max_child_elements": 126
+      },
+      "lcp_element": {
+        "selector": "main.min-w-0 > section > div.mb-4 > p.mt-1",
+        "node_label": "県データブックの指標のうち、全国順位が上位・下位の指標です。順位の色は、値が高いほど良い・悪いが定まった指標にだけ付けています。",
+        "snippet": "<p class=\"mt-1 text-sm text-muted-foreground\">",
+        "breakdown_ms": {
+          "timeToFirstByte": 8,
+          "elementRenderDelay": 752
+        }
+      },
+      "cls_contributors": [
+        {
+          "selector": "body.google-anno-skip > div.relative > footer.w-full",
+          "node_label": "商品・書籍\nこのサイトについて\nプライバシーポリシー\n利用規約",
+          "score": 0.06946967291203557,
+          "causes": []
+        },
+        {
+          "selector": "div.xl:grid > div.min-w-0 > main.min-w-0 > section.rounded-card",
+          "node_label": "沖縄県の市区町村41 件\n沖縄県 那覇市\n沖縄県 宜野湾市\n沖縄県 石垣市\n沖縄県 浦添市\n沖縄県 名護市\n沖縄県 糸満市\n沖縄県 沖縄市\n沖縄県 豊見城市\n…",
+          "score": 0.04116386154334709,
+          "causes": []
+        }
+      ],
+      "analysis_utc": "2026-09-28T22:37:55.154Z",
+      "final_url": "https://stats47.jp/areas/47000"
+    },
+    {
+      "url": "https://stats47.jp/blog",
+      "strategy": "mobile",
+      "fetched_at": "2026-09-28T22:38:38.623Z",
+      "scores": {
+        "performance": 83,
+        "accessibility": 98,
+        "best_practices": 100,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 4501.045648195485,
+        "TBT_ms": 112.5,
+        "CLS": 0,
+        "FCP_ms": 1673.9054767104528,
+        "TTI_ms": 5217.600049985764,
+        "SI_ms": 1673.9054767104528,
+        "TTFB_ms": 18
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 3438,
+          "category": "AVERAGE"
+        },
+        "INP": {
+          "percentile": 116,
+          "category": "FAST"
+        },
+        "CLS": {
+          "percentile": 0,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 2744,
+          "category": "AVERAGE"
+        },
+        "TTFB": {
+          "percentile": 2343,
+          "category": "SLOW"
+        }
+      },
+      "dom_size": {
+        "total_elements": 828,
+        "max_depth": 14,
+        "max_child_elements": 84
+      },
+      "lcp_element": {
+        "selector": "body.google-anno-skip > div.fixed > div.mx-auto > p.min-w-0",
+        "node_label": "当サイトでは、利用状況の分析のために Cookie を使用しています。",
+        "snippet": "<p class=\"min-w-0 leading-snug\">",
+        "breakdown_ms": {
+          "timeToFirstByte": 18,
+          "elementRenderDelay": 565
+        }
+      },
+      "cls_contributors": [],
+      "analysis_utc": "2026-09-28T22:38:21.097Z",
+      "final_url": "https://stats47.jp/blog"
+    },
+    {
+      "url": "https://stats47.jp/blog",
+      "strategy": "desktop",
+      "fetched_at": "2026-09-28T22:39:01.757Z",
+      "scores": {
+        "performance": 95,
+        "accessibility": 100,
+        "best_practices": 100,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 1282.0903375920575,
+        "TBT_ms": 90,
+        "CLS": 0.06757949100164468,
+        "FCP_ms": 460.6812318096965,
+        "TTI_ms": 1294.0912409679781,
+        "SI_ms": 496.856549218016,
+        "TTFB_ms": 5
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 3235,
+          "category": "AVERAGE"
+        },
+        "INP": {
+          "percentile": 87,
+          "category": "FAST"
+        },
+        "CLS": {
+          "percentile": 7,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 2465,
+          "category": "AVERAGE"
+        },
+        "TTFB": {
+          "percentile": 2339,
+          "category": "SLOW"
+        }
+      },
+      "dom_size": {
+        "total_elements": 828,
+        "max_depth": 14,
+        "max_child_elements": 84
+      },
+      "lcp_element": {
+        "selector": "div.grid > a.rounded-card > div.relative > img.object-cover",
+        "node_label": "div.grid > a.rounded-card > div.relative > img.object-cover",
+        "snippet": "<img alt=\"\" loading=\"lazy\" decoding=\"async\" data-nimg=\"fill\" class=\"object-cover\" style=\"position: absolute; height: 100%; width: 100%; inset: 0px;\" src=\"https://storage.stats47.jp/app/blog/fish-catch-vs-consumption-prefecture/t…\">",
+        "breakdown_ms": {
+          "timeToFirstByte": 5,
+          "resourceLoadDelay": 603,
+          "resourceLoadDuration": 193,
+          "elementRenderDelay": 47
+        }
+      },
+      "cls_contributors": [
+        {
+          "selector": "body.google-anno-skip > div.relative > footer.w-full",
+          "node_label": "商品・書籍\nこのサイトについて\nプライバシーポリシー\n利用規約",
+          "score": 0.06382978723404255,
+          "causes": []
+        },
+        {
+          "selector": null,
+          "node_label": null,
+          "score": 0.003749703767602129,
+          "causes": []
+        }
+      ],
+      "analysis_utc": "2026-09-28T22:38:40.734Z",
+      "final_url": "https://stats47.jp/blog"
+    },
+    {
+      "url": "https://stats47.jp/blog/telework-gap-tokyo-6x",
+      "strategy": "mobile",
+      "fetched_at": "2026-09-28T22:39:27.837Z",
+      "scores": {
+        "performance": 72,
+        "accessibility": 96,
+        "best_practices": 100,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 5026.146148722668,
+        "TBT_ms": 251,
+        "CLS": 0,
+        "FCP_ms": 1689.0779611382004,
+        "TTI_ms": 6090.264939272726,
+        "SI_ms": 4918.99884445509,
+        "TTFB_ms": 30
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 3438,
+          "category": "AVERAGE"
+        },
+        "INP": {
+          "percentile": 116,
+          "category": "FAST"
+        },
+        "CLS": {
+          "percentile": 0,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 2744,
+          "category": "AVERAGE"
+        },
+        "TTFB": {
+          "percentile": 2343,
+          "category": "SLOW"
+        }
+      },
+      "dom_size": {
+        "total_elements": 727,
+        "max_depth": 16,
+        "max_child_elements": 43
+      },
+      "lcp_element": {
+        "selector": "div.space-y-6 > div.rounded-card > article.blog-news-article > p.my-4",
+        "node_label": "東京都のテレワーク実施率は39.8%。一方、秋田県はわずか6.4%。同じ日本で働いていても、テレワークできるかどうかは住む場所によって6倍以上の差があります。",
+        "snippet": "<p class=\"my-4 leading-[1.9] [&amp;+p]:mt-6\">",
+        "breakdown_ms": {
+          "timeToFirstByte": 30,
+          "elementRenderDelay": 3238
+        }
+      },
+      "cls_contributors": [],
+      "analysis_utc": "2026-09-28T22:39:04.599Z",
+      "final_url": "https://stats47.jp/blog/telework-gap-tokyo-6x"
+    },
+    {
+      "url": "https://stats47.jp/blog/telework-gap-tokyo-6x",
+      "strategy": "desktop",
+      "fetched_at": "2026-09-28T22:39:57.100Z",
+      "scores": {
+        "performance": 89,
+        "accessibility": 97,
+        "best_practices": 100,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 1350.200281608703,
+        "TBT_ms": 200,
+        "CLS": 0.06946967291203557,
+        "FCP_ms": 469.38667460485937,
+        "TTI_ms": 1799.736816064145,
+        "SI_ms": 585.1004390380892,
+        "TTFB_ms": 5
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 3235,
+          "category": "AVERAGE"
+        },
+        "INP": {
+          "percentile": 87,
+          "category": "FAST"
+        },
+        "CLS": {
+          "percentile": 7,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 2465,
+          "category": "AVERAGE"
+        },
+        "TTFB": {
+          "percentile": 2339,
+          "category": "SLOW"
+        }
+      },
+      "dom_size": {
+        "total_elements": 719,
+        "max_depth": 17,
+        "max_child_elements": 46
+      },
+      "lcp_element": {
+        "selector": "div > div.relative > a > img.max-w-full",
+        "node_label": "div > div.relative > a > img.max-w-full",
+        "snippet": "<img src=\"https://www29.a8.net/svt/bgt?aid=260529673996&amp;wid=002&amp;eno=01&amp;mid=s00000023…\" width=\"300\" height=\"250\" alt=\"\" class=\"max-w-full h-auto\">",
+        "breakdown_ms": {
+          "timeToFirstByte": 5,
+          "resourceLoadDelay": 52,
+          "resourceLoadDuration": 229,
+          "elementRenderDelay": 508
+        }
+      },
+      "cls_contributors": [
+        {
+          "selector": "body.google-anno-skip > div.relative > footer.w-full",
+          "node_label": "商品・書籍\nこのサイトについて\nプライバシーポリシー\n利用規約",
+          "score": 0.06946967291203557,
+          "causes": [
+            "Media element lacking an explicit size"
+          ]
+        }
+      ],
+      "analysis_utc": "2026-09-28T22:39:31.236Z",
+      "final_url": "https://stats47.jp/blog/telework-gap-tokyo-6x"
+    },
+    {
+      "url": "https://stats47.jp/about",
+      "strategy": "mobile",
+      "fetched_at": "2026-09-28T22:40:12.341Z",
+      "scores": {
+        "performance": 66,
+        "accessibility": 100,
+        "best_practices": 100,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 5324.531914934894,
+        "TBT_ms": 261,
+        "CLS": 0,
+        "FCP_ms": 3324.0504740917063,
+        "TTI_ms": 5358.085069565626,
+        "SI_ms": 4877.814621413192,
+        "TTFB_ms": 4
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 3438,
+          "category": "AVERAGE"
+        },
+        "INP": {
+          "percentile": 116,
+          "category": "FAST"
+        },
+        "CLS": {
+          "percentile": 0,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 2744,
+          "category": "AVERAGE"
+        },
+        "TTFB": {
+          "percentile": 2343,
+          "category": "SLOW"
+        }
+      },
+      "dom_size": {
+        "total_elements": 297,
+        "max_depth": 13,
+        "max_child_elements": 40
+      },
+      "lcp_element": {
+        "selector": "main#main-content > div.mx-auto > div.min-w-0 > img.mb-6",
+        "node_label": "main#main-content > div.mx-auto > div.min-w-0 > img.mb-6",
+        "snippet": "<img alt=\"\" loading=\"lazy\" width=\"1536\" height=\"1024\" decoding=\"async\" data-nimg=\"1\" class=\"mb-6 h-32 w-full rounded-card object-cover object-center sm:h-40\" style=\"color:transparent\" src=\"/brand/atlas-v1/site-hero-1536x1024.webp\">",
+        "breakdown_ms": {
+          "timeToFirstByte": 4,
+          "resourceLoadDelay": 1279,
+          "resourceLoadDuration": 41,
+          "elementRenderDelay": 987
+        }
+      },
+      "cls_contributors": [],
+      "analysis_utc": "2026-09-28T22:39:59.766Z",
+      "final_url": "https://stats47.jp/about"
+    },
+    {
+      "url": "https://stats47.jp/about",
+      "strategy": "desktop",
+      "fetched_at": "2026-09-28T22:40:26.498Z",
+      "scores": {
+        "performance": 100,
+        "accessibility": 100,
+        "best_practices": 100,
+        "seo": 100
+      },
+      "lab_data": {
+        "LCP_ms": 703.1122723776709,
+        "TBT_ms": 19.50000000000017,
+        "CLS": 0,
+        "FCP_ms": 456.7300970762091,
+        "TTI_ms": 1042.7871326898698,
+        "SI_ms": 784.8958376607264,
+        "TTFB_ms": 3
+      },
+      "field_data": {
+        "LCP": {
+          "percentile": 3235,
+          "category": "AVERAGE"
+        },
+        "INP": {
+          "percentile": 87,
+          "category": "FAST"
+        },
+        "CLS": {
+          "percentile": 7,
+          "category": "FAST"
+        },
+        "FCP": {
+          "percentile": 2465,
+          "category": "AVERAGE"
+        },
+        "TTFB": {
+          "percentile": 2339,
+          "category": "SLOW"
+        }
+      },
+      "dom_size": {
+        "total_elements": 297,
+        "max_depth": 13,
+        "max_child_elements": 40
+      },
+      "lcp_element": {
+        "selector": "main#main-content > div.mx-auto > div.min-w-0 > img.mb-6",
+        "node_label": "main#main-content > div.mx-auto > div.min-w-0 > img.mb-6",
+        "snippet": "<img alt=\"\" loading=\"lazy\" width=\"1536\" height=\"1024\" decoding=\"async\" data-nimg=\"1\" class=\"mb-6 h-32 w-full rounded-card object-cover object-center sm:h-40\" style=\"color:transparent\" src=\"/brand/atlas-v1/site-hero-1536x1024.webp\">",
+        "breakdown_ms": {
+          "timeToFirstByte": 3,
+          "resourceLoadDelay": 922,
+          "resourceLoadDuration": 28,
+          "elementRenderDelay": 106
+        }
+      },
+      "cls_contributors": [],
+      "analysis_utc": "2026-09-28T22:40:14.544Z",
+      "final_url": "https://stats47.jp/about"
+    }
+  ]
+}

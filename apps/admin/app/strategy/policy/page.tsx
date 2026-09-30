@@ -1,6 +1,7 @@
 import Link from "next/link";
 
-import { Badge, PageHeading } from "@/components/ops/primitives";
+import { LinkCard, StatusBadge } from "@/components/admin-ui";
+import { PageHeading } from "@/components/ops/primitives";
 import { sharedPolicyDocuments } from "@/lib/server/shared-policy";
 
 export const dynamic = "force-dynamic";
@@ -23,7 +24,7 @@ export default function SharedPolicyIndexPage() {
       <p className="text-sm text-console-muted">
         stats47・doboku-note・Obsidian vault
         で共有する判断枠組み。編集はObsidian vaultの正本だけで行い、
-        <code className="rounded bg-console-card px-1">npm run policy:sync</code>
+        <code className="rounded bg-muted px-1">npm run policy:sync</code>
         で配布する。ここは読み取り専用のミラー表示で、対象読者・商品・KPI・優先順位は
         stats47固有の
         <a
@@ -44,12 +45,9 @@ export default function SharedPolicyIndexPage() {
         <ul className="grid gap-3 md:grid-cols-3">
           {documents.map((d) => (
             <li key={d.name}>
-              <Link
-                className="block h-full rounded border border-console-border bg-console-card p-4 hover:border-console-info"
-                href={`/strategy/policy/${d.slug}`}
-              >
+              <LinkCard href={`/strategy/policy/${d.slug}`}>
                 <div className="flex flex-wrap items-center gap-2">
-                  <Badge>v{d.version}</Badge>
+                  <StatusBadge>v{d.version}</StatusBadge>
                   <span className="text-[11px] text-console-muted">更新 {d.updated}</span>
                 </div>
                 <h2 className="pt-2 text-base font-semibold">{d.title}</h2>
@@ -57,7 +55,7 @@ export default function SharedPolicyIndexPage() {
                 <code className="mt-2 block text-[11px] text-console-muted">
                   {d.name} ← {d.sourcePath}
                 </code>
-              </Link>
+              </LinkCard>
             </li>
           ))}
         </ul>
