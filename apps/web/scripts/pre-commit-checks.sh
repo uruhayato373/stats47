@@ -170,6 +170,10 @@ if [ -n "$STAGED_ANY" ]; then
     echo -e "${RED}❌ note 画像資産の契約違反 (派生 PNG の追跡・ランキング記事のデータ欠落)。.claude/rules/note-image-assets.md を参照。${NC}"
     ERROR_COUNT=$((ERROR_COUNT + 1))
   fi
+  if ! node "$GUARD_ROOT/.claude/scripts/admin-ui/check-shadcn-parity.mjs" || ! node "$GUARD_ROOT/.claude/scripts/admin-ui/check-admin-ui-debt.mjs"; then
+    echo -e "${RED}❌ 管理画面の UI 契約違反 (shadcn 公式との差・生のカード面/<table>/style の増加)。.claude/rules/admin-ui.md を参照。${NC}"
+    ERROR_COUNT=$((ERROR_COUNT + 1))
+  fi
   if ! node "$GUARD_ROOT/.claude/scripts/lib/check-maintenance-debt.cjs" --baseline; then
     # ★判定は行単位。legacy / deprecated と同じ行に削除条件を書く (別行だと素通りしない)
     echo -e "${RED}❌ 無根拠な TODO/legacy/deprecated。削除条件を legacy と同じ行に書いてください。${NC}"

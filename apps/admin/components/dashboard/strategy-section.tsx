@@ -19,7 +19,7 @@ export function StrategySection({ strategy }: { strategy: Wrapped<StrategyData> 
 
   return (
     <div>
-      <div className="rounded-lg border border-console-accent bg-gradient-to-br from-console-bg to-console-card p-5 text-[17px] font-bold text-console-fg">
+      <div className="rounded-lg border border-console-accent bg-linear-to-br from-console-bg to-console-card p-5 text-[17px] font-bold text-console-fg">
         「{strategy.statement}」
         <small className="mt-1.5 block text-[11px] font-normal text-console-muted">
           ポジショニング・ステートメント — 正典: docs/00_プロジェクト管理/03_マーケティング戦略.md

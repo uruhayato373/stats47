@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 
-import { cn } from "@stats47/components";
+import { cn } from "@/lib/cn";
 
 export type MediaCandidate = {
   url: string;
@@ -29,7 +29,7 @@ export function MediaPreview({
   candidates,
   alt = "",
   className,
-  aspectClassName = "aspect-[16/10]",
+  aspectClassName = "aspect-16/10",
   variant,
 }: {
   candidates: MediaCandidate[];

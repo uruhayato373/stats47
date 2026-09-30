@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 
-import { Badge, cn } from "@stats47/components";
+import { cn } from "@/lib/cn";
+import { Badge } from "@/components/ui/badge";
 
 import { MediaPreview } from "@/components/media-preview";
 import type { BuzzMapEntryDTO } from "@/lib/contracts/types";
@@ -57,7 +58,7 @@ export function BuzzMapCard({
   return (
     <div className="flex flex-col overflow-hidden rounded-lg border border-console-border bg-console-card">
       <div className="relative">
-        <MediaPreview candidates={mediaCandidates} aspectClassName="aspect-[16/10]" />
+        <MediaPreview candidates={mediaCandidates} aspectClassName="aspect-16/10" />
         <Badge
           variant="outline"
           className={cn(
@@ -70,7 +71,7 @@ export function BuzzMapCard({
         {entry.priority ? (
           <Badge
             variant="outline"
-            className="absolute right-1.5 top-1.5 z-10 border-console-accent/50 bg-console-accent/10 text-[10px] text-console-accent"
+            className="absolute right-1.5 top-1.5 z-10 border-console-accent/50 bg-console-accent/10 text-console-accent"
           >
             {entry.priority}
           </Badge>

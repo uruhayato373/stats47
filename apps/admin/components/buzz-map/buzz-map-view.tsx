@@ -2,7 +2,8 @@
 
 import { useEffect, useMemo, useState } from "react";
 
-import { Input, cn } from "@stats47/components";
+import { cn } from "@/lib/cn";
+import { Input } from "@/components/ui/input";
 
 import { apiGet, ApiError } from "@/lib/client/api-client";
 import { ErrorState, Loading } from "@/components/async-state";

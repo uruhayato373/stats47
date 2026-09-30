@@ -1,4 +1,4 @@
-import { cn } from "@stats47/components";
+import { cn } from "@/lib/cn";
 
 /** 読込中プレースホルダ。旧 UI の `.lead` (muted テキスト) 相当。 */
 export function Loading({ label = "読込中...", className }: { label?: string; className?: string }) {

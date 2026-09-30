@@ -131,7 +131,7 @@ export default async function KindleContentPage({
                   href={`/kindle-cover/${book.id}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block aspect-[5/8] bg-console-bg"
+                  className="block aspect-5/8 bg-console-bg"
                   aria-label={`${book.title}の表紙を原寸で開く`}
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -143,7 +143,7 @@ export default async function KindleContentPage({
                   />
                 </a>
               ) : (
-                <div className="flex aspect-[5/8] items-center justify-center bg-console-bg text-xs text-console-muted">
+                <div className="flex aspect-5/8 items-center justify-center bg-console-bg text-xs text-console-muted">
                   表紙なし
                 </div>
               )}

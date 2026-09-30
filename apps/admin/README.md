@@ -41,6 +41,8 @@ PORT=5000 npm run admin    # ポート上書き
 ```
 app/            管理画面 + api/** (Route Handler) + media/ pilot/ (ローカルファイル配信)
 components/     共有 (console-nav / async-state / media-preview) + ページ別
+components/ui/  shadcn/ui 公式 (new-york-v4) の部品。公式のままにする (差は check-shadcn-parity が止める)
+components/admin-ui/  組み立て部品 (TableFrame / PanelCard / StatusBadge)。layout-primitives.tsx は Stack / Grid / Section
 lib/client/     fetch wrapper (SWR 等は使わない)
 lib/contracts/  読み取りAPI DTO + Zod schema
 lib/content-operations/ 各チャネルSSOTの正規化 + 決定的監査 (書込なし)
@@ -48,6 +50,8 @@ lib/server/     server-only read model (project-root / posts / collectors / ...)
 tests/          unit + integration (Vitest) / e2e (Playwright)
 ```
 
+- **UI**: Tailwind v4 (CSS-first・`app/globals.css`) + shadcn/ui 公式部品。web (`apps/web`) とは独立で `@stats47/components` は使わない。
+  規約・検査・移行手順は `.claude/rules/admin-ui.md` (`npm run admin-ui:check`)。
 - fs / child_process を使う route は `runtime="nodejs"` + `dynamic="force-dynamic"` + `Cache-Control: no-store`。
 - project root は `lib/server/project-root.ts` が一元解決 (`STATS47_PROJECT_ROOT` env で上書き可、
   `package.json name === "stats47-monorepo"` を検証)。

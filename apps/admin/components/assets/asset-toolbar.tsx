@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@stats47/components";
+import { Button } from "@/components/ui/button";
 
 /** 画像資産を絞り込み・再読込する読み取り専用ツールバー。 */
 export function AssetToolbar({

@@ -1,0 +1,32 @@
+// shadcn/ui 公式（new-york-v4）の progress.tsx をそのまま使う。変えたのは cn の import 先 (@/lib/cn) だけ。
+// 公式との差は check-shadcn-parity が止める（参照: .claude/config/shadcn-reference/progress.tsx・例外: .claude/config/shadcn-parity-allow.json）。
+"use client"
+
+import * as React from "react"
+import { cn } from "@/lib/cn"
+import { Progress as ProgressPrimitive } from "radix-ui"
+
+function Progress({
+  className,
+  value,
+  ...props
+}: React.ComponentProps<typeof ProgressPrimitive.Root>) {
+  return (
+    <ProgressPrimitive.Root
+      data-slot="progress"
+      className={cn(
+        "relative h-2 w-full overflow-hidden rounded-full bg-primary/20",
+        className
+      )}
+      {...props}
+    >
+      <ProgressPrimitive.Indicator
+        data-slot="progress-indicator"
+        className="h-full w-full flex-1 bg-primary transition-all"
+        style={{ transform: `translateX(-${100 - (value || 0)}%)` }}
+      />
+    </ProgressPrimitive.Root>
+  )
+}
+
+export { Progress }

@@ -23,8 +23,8 @@ function StatCard({
 }) {
   return (
     <div className="min-w-0 overflow-hidden rounded-lg border border-console-border bg-console-card p-3">
-      <div className="break-words text-xl font-bold text-console-fg">{value}</div>
-      <div className="mt-0.5 break-words text-[11px] text-console-muted">{label}</div>
+      <div className="wrap-break-word text-xl font-bold text-console-fg">{value}</div>
+      <div className="mt-0.5 wrap-break-word text-[11px] text-console-muted">{label}</div>
       {sub ? <div className="mt-1 text-[11px] text-console-muted">{sub}</div> : null}
       {sparkValues ? <Sparkline values={sparkValues} color={sparkColor} /> : null}
     </div>

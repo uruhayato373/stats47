@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 
-import { Badge, cn } from "@stats47/components";
+import { cn } from "@/lib/cn";
+import { Badge } from "@/components/ui/badge";
 
 import { MediaPreview } from "@/components/media-preview";
 import type { PostDTO } from "@/lib/contracts/types";
@@ -58,12 +59,12 @@ export function PostCard({ item }: { item: GalleryItem }) {
   const isSquareRankingMap =
     item.domain === "ranking" && String(item.media_path || "").includes("choropleth-map");
   const mediaAspect = usesMapFeedAspect
-    ? "aspect-[4/5]"
+    ? "aspect-4/5"
     : isSquareRankingMap
       ? "aspect-square"
       : item.domain === "ranking"
-        ? "aspect-[240/101]"
-        : "aspect-[40/21]";
+        ? "aspect-240/101"
+        : "aspect-40/21";
   const mediaCandidates = ((item.media_candidates ?? []) as Array<{
     url: string | null;
     source: string;

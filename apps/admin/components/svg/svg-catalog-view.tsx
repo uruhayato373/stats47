@@ -2,7 +2,10 @@
 
 import { useMemo, useState } from "react";
 
-import { Badge, Button, Input, cn } from "@stats47/components";
+import { cn } from "@/lib/cn";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 import { apiGet, ApiError } from "@/lib/client/api-client";
 import { EmptyState, ErrorState, Loading } from "@/components/async-state";
@@ -170,7 +173,7 @@ function SvgGrid({ items }: { items: SvgChartDTO[] }) {
   const overflow = items.length - shown.length;
 
   return (
-    <div className="grid grid-cols-1 gap-4 [grid-template-columns:repeat(auto-fill,minmax(380px,1fr))]">
+    <div className="grid grid-cols-1 gap-4 grid-cols-[repeat(auto-fill,minmax(380px,1fr))]">
       {shown.map((item) => (
         <figure
           key={`${item.slug}/${item.file}`}
@@ -191,12 +194,12 @@ function SvgGrid({ items }: { items: SvgChartDTO[] }) {
             </code>{" "}
             <span className="text-console-muted">{item.viewBox || "?"}</span>{" "}
             {!item.hasViewBox ? (
-              <Badge variant="destructive" className="ml-1 px-1.5 py-0 text-[10px]">
+              <Badge variant="destructive" className="ml-1">
                 no viewBox
               </Badge>
             ) : null}
             {!item.hasTheme ? (
-              <Badge variant="secondary" className="ml-1 px-1.5 py-0 text-[10px]">
+              <Badge variant="secondary" className="ml-1">
                 no dark
               </Badge>
             ) : null}
