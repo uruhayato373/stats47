@@ -1,6 +1,7 @@
 import { Cell, DataTable, PanelCard, Row, StatCard, StatusBadge } from "@/components/admin-ui";
 import { Section } from "@/components/layout-primitives";
 import { ErrorNote, PageHeading, Unmeasured } from "@/components/ops/primitives";
+import { readWeeklyProductRevenue } from "@/lib/server/kpi";
 import { revenueSummary } from "@/lib/server/revenue";
 import { hasError } from "@/lib/server/state-io";
 
@@ -17,6 +18,7 @@ export default function RevenuePage() {
   const latest = weeks[0];
   const prev = weeks[1];
   const productSales = hasError(d.productSales) ? null : d.productSales;
+  const weekly = readWeeklyProductRevenue();
 
   const delta = (a?: number, b?: number) =>
     a === undefined || b === undefined || b === 0 ? null : ((a - b) / b) * 100;
@@ -26,7 +28,7 @@ export default function RevenuePage() {
     <div className="space-y-8">
       <PageHeading
         title="収益"
-        source=".claude/state/metrics/adsense/ + .claude/state/products/sales-ledger.json"
+        source=".claude/state/metrics/authenticated/revenue-history.json + .claude/state/products/sales-ledger.json + .claude/state/metrics/adsense/"
       />
 
       {/* ★計測範囲。0 と「未計測」を混同させないために必ず出す */}
@@ -48,7 +50,45 @@ export default function RevenuePage() {
         </ul>
       </PanelCard>
 
-      <Section title="商品売上 (KDP / ココナラ)">
+      <Section
+        title="商品の週次実売 (自動取得)"
+        note="週次 Issue の NSM 節と同じ計算 (product-revenue.mjs)。KDP はロイヤリティ見積りなので合計に入れない。欠測は 0 円ではなく判定不能。"
+      >
+        {hasError(weekly) ? (
+          <ErrorNote error={weekly.error} />
+        ) : (
+          <>
+            <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+              <StatCard
+                label={`実売 ${weekly.weekStart}〜${weekly.weekEnd}`}
+                value={weekly.yen == null ? <Unmeasured /> : `¥${YEN.format(weekly.yen)}`}
+                sub={weekly.status === "ok" ? "全チャネル判定済み" : "判定不能のチャネルあり"}
+              />
+              <StatCard label="件数" value={weekly.count == null ? <Unmeasured /> : YEN.format(weekly.count)} />
+              <StatCard
+                label="日次の観測"
+                value={YEN.format(weekly.entries)}
+                sub={weekly.latestDate ? `最新 ${weekly.latestDate}` : "記録なし"}
+              />
+            </div>
+            <DataTable columns={["チャネル", "状態", "内訳"]}>
+              {weekly.channels.map((c) => (
+                <Row key={c.channel}>
+                  <Cell nowrap>{c.channel}</Cell>
+                  <Cell nowrap>
+                    <StatusBadge tone={c.status === "ok" ? (c.estimate ? "info" : "good") : "neutral"}>
+                      {c.status === "ok" ? (c.estimate ? "見積り" : "判定済み") : "判定不能"}
+                    </StatusBadge>
+                  </Cell>
+                  <Cell muted>{c.text}</Cell>
+                </Row>
+              ))}
+            </DataTable>
+          </>
+        )}
+      </Section>
+
+      <Section title="販売台帳 (証拠付きの手入力・KDP / ココナラ)">
         {hasError(d.productSales) ? (
           <ErrorNote error={d.productSales.error} />
         ) : (

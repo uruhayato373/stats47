@@ -72,8 +72,9 @@ function noteWeek(entries, { weekStart, weekEnd }) {
 }
 
 /**
+ * @typedef {{ status: "ok"|"unmeasurable", yen?: number, count?: number|null, basis?: string, note?: string, estimate?: boolean }} ChannelWeek
  * @param {{ revenueHistory: object|null, weekStart: string, weekEnd: string }} input
- * @returns {{ channels: Record<string, {status, yen?, count?, basis?, note?}>, status: string, yen: number|null, count: number|null }}
+ * @returns {{ channels: Record<string, ChannelWeek>, status: "ok"|"unmeasurable", yen: number|null, count: number|null }}
  */
 export function weeklyProductRevenue({ revenueHistory, weekStart, weekEnd }) {
   const window = { weekStart, weekEnd };
@@ -94,7 +95,9 @@ export function weeklyProductRevenue({ revenueHistory, weekStart, weekEnd }) {
 
 const LABEL = { coconala: "ココナラ", kdp: "KDP", note: "note" };
 
-/** チャネル別の 1 行説明 (週次 Issue 用)。 */
+/** チャネル別の 1 行説明 (週次 Issue 用)。
+ * @param {string} name
+ * @param {ChannelWeek} result */
 export function describeChannel(name, result) {
   if (result.status !== "ok") return `${LABEL[name]} 判定不能（${result.note}）`;
   const count = result.count == null ? "" : `・${result.count} 件`;
