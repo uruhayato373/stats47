@@ -211,9 +211,9 @@ updated: 2026-09-29
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:npm run model-usage:test] [起票:2026-10-02] [領域:管理]
 
 - **経緯**: 2026-10-02 に計測→記録→改善のサイクルを作った (正典 `.claude/rules/model-prompting.md`「継続最適化サイクル」、画面 `/ops/agents`)。初回の提案は 4 件とも `set-effort` (effort 未指定でセッションの xhigh を継承): open-data-curator ($87.8・2 回)・sns-renderer ($51.7・6 回)・article-writer ($16.7・8 回)・blog-critic ($4.8・5 回)。直近 4 週・API 換算。
-- **canary 済み (2026-10-02)**: code-reviewer を Opus 5.5 xhigh → Sonnet 5.5 xhigh。fixture v3 (basic 4 件 + subtle 4 件) × 2 回で recall 1.0 → 1.0、1 回 $0.79 → $0.39、判定 pass。結果 `.claude/state/metrics/model-usage/canary/2026-10-01-code-reviewer-opus-xhigh-vs-claude-sonnet-5-5-xhigh.json`。frontmatter はまだ opus のまま (採否はオーナー判断)。
+- **canary 済み (2026-10-02)**: code-reviewer を Opus 5.5 xhigh → Sonnet 5.5 xhigh。fixture v3 (basic 4 件 + subtle 4 件) × 2 回で recall 1.0 → 1.0、1 回 $0.79 → $0.39、判定 pass。結果 `.claude/state/metrics/model-usage/canary/2026-10-01-code-reviewer-opus-xhigh-vs-claude-sonnet-5-5-xhigh.json`。2026-10-02 に frontmatter を sonnet へ変更済み。
 - **残り**:
-  1. code-reviewer の model を sonnet に変えるかを決める (2 課題の合成差分だけの結果なので、変えるなら 2〜4 週の実運用で指摘の見落としを見る)
+  1. code-reviewer は 2026-10-02 にオーナー判断で sonnet へ切り替えた。2 課題の合成差分だけの結果なので、2026-10-30 まで実運用のレビューで指摘の見落としを見る。見落としが出たら `model: opus` に戻して canary に見落とした型の課題を足す
   2. `set-effort` 4 件の agent に canary 課題を作る (`canary-fixtures/<agent>.json`。課題文の自己採点 0・模範解答満点を確かめる) → `npm run model-usage:canary -- --agent <name> --model claude-sonnet-5-5 --effort high --baseline-model claude-sonnet-5-5`
   3. 費用の大半はメインセッション (4 週 $1,231・Opus 5 / 5.5 の xhigh が中心)。対話の既定 effort を下げるかはオーナーの使い方次第なので、`/ops/agents` の「メインセッション」を週次で見る
 - **完了条件**: 4 件の `set-effort` 提案それぞれに canary 結果があり、合格したものは frontmatter に effort を書き、次の `npm run model-usage:report` で提案が消えている。
