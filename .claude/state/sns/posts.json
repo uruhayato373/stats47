@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "SNS 投稿台帳 (完全DBレス doc12 Phase E)。SQLite から移行。書込専用運用ログ。store: .claude/scripts/lib/sns-posts-store.cjs",
-    "count": 880,
-    "nextId": 1066
+    "count": 881,
+    "nextId": 1067
   },
   "posts": [
     {
@@ -18954,9 +18954,9 @@
     },
     {
       "id": 987,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:17.984Z",
-      "updated_at": "2026-09-23T08:57:47.776Z",
+      "updated_at": "2026-09-30T19:42:04.068Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "ranking",
@@ -18966,13 +18966,15 @@
       "utm_url": "https://stats47.jp/ranking/taro-consumption-expenditure?utm_source=threads&utm_medium=social&utm_campaign=taro-consumption-expenditure&utm_content=angle-experience",
       "template": "angle-experience",
       "metric_keys": "taro-consumption-expenditure",
-      "scheduled_at": "2026-09-30T01:45:00.000Z"
+      "scheduled_at": "2026-09-30T01:45:00.000Z",
+      "post_url": "https://www.threads.com/@stats47jp/post/Dd5L4-7CrCc",
+      "posted_at": "2026-09-30T01:45:44.000Z"
     },
     {
       "id": 988,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:17.989Z",
-      "updated_at": "2026-09-23T08:58:00.099Z",
+      "updated_at": "2026-09-30T19:42:04.081Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "area",
@@ -18982,7 +18984,9 @@
       "utm_url": "https://stats47.jp/areas/07000?utm_source=threads&utm_medium=social&utm_campaign=area-07000&utm_content=area-profile",
       "template": "area-profile",
       "metric_keys": null,
-      "scheduled_at": "2026-09-30T08:30:00.000Z"
+      "scheduled_at": "2026-09-30T08:30:00.000Z",
+      "post_url": "https://www.threads.com/@stats47jp/post/Dd56QkxDD0i",
+      "posted_at": "2026-09-30T08:30:55.000Z"
     },
     {
       "id": 989,
@@ -20197,6 +20201,18 @@
       "content_key": "squid-consumption-expenditure",
       "post_url": "https://www.instagram.com/reel/Dd6AASLFICC/",
       "posted_at": "2026-09-30T09:21:38Z"
+    },
+    {
+      "id": 1066,
+      "status": "posted",
+      "created_at": "2026-09-30T16:22:47.636Z",
+      "updated_at": "2026-09-30T16:22:47.636Z",
+      "platform": "instagram",
+      "post_type": "carousel",
+      "domain": "correlation-carousel",
+      "content_key": "dual-income-household-ratio--floor-area-per-dwelling-owner",
+      "post_url": "https://www.instagram.com/p/Dd6wPczFILm/",
+      "posted_at": "2026-09-30T16:22:47Z"
     }
   ],
   "nextId": 580,

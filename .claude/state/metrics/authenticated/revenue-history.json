@@ -26,6 +26,13 @@
         "2026-05": 300
       },
       "observedAt": "2026-09-30T05:52:00.330Z"
+    },
+    {
+      "channel": "coconala",
+      "date": "2026-10-01",
+      "cumulativeYen": 0,
+      "monthToDateYen": 0,
+      "observedAt": "2026-10-01T04:56:49.729Z"
     }
   ]
 }

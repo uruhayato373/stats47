@@ -67,6 +67,25 @@ export const LOGIN = {
     submit: 'button:has-text("確認して続ける")',
     loggedIn: (url) => /note\.com\/dashboard\/salesmanage/.test(url),
     challengeUrl: /note\.com\/login/,
+    // CI (--ci) はセッション自体の切れを通常のログイン画面で入り直す。セレクタは doboku-note が 2026-09-28 に DOM で確認したもの
+    ci: {
+      loginUrl: 'https://note.com/login',
+      checkUrl: 'https://note.com/dashboard',
+      user: 'input[name=login]',
+      password: 'input[name=password]',
+      submit: 'button[type=submit]',
+      loggedIn: (url) => /^https:\/\/(editor\.)?note\.com\//.test(url) && !/\/login|\/signup/.test(url),
+    },
+  },
+  // ココナラ (2026-10-01 追加): 手元と CI の入り直し。セレクタは doboku-note が 2026-09-28 に DOM で確認したもの
+  coconala: {
+    loginUrl: 'https://coconala.com/login',
+    checkUrl: 'https://coconala.com/mypage/dashboard',
+    user: '#UserLoginEmail',
+    password: '#UserLoginPassword',
+    remember: '#loginEmailSave',
+    submit: 'form[action*="/login"] button[type=submit]',
+    loggedIn: (url) => /^https:\/\/coconala\.com\//.test(url) && !/\/login|\/signup/.test(url),
   },
   // X (2026-09-30 オーナー判断で追加): 予約投稿 (publish-x) の専用プロファイルのログインを保つ。
   // publish-x は Playwright 同梱の Chromium でこのプロファイルを開くので、ここも同じブラウザで開く
@@ -260,11 +279,62 @@ async function refresh(source, { root, publish, headed, waitHuman }) {
   return { source, status: 'ok', loggedInBy, published: publish };
 }
 
+/**
+ * CI 専用 (--ci): 復元した state でログイン済みか確かめ、切れていたら Secrets の ID/PW で 1 回だけ入り直す。
+ * 入り直せたときだけ outPath へ state を書く (relogged: true)。2FA/CAPTCHA は突破せず human_required を返す。
+ * 失敗後の再試行抑止は呼び側 (collect.mjs) が vault の auth-recovery に記録して行う。
+ */
+export async function ciRelogin(source, { statePath, outPath }) {
+  const base = LOGIN[source];
+  const conf = { ...base, ...base.ci };
+  const cred = readCredential(source);
+  if (!cred) return { source, status: 'no_credential' };
+  const { chromium } = await import('playwright');
+  const browser = await chromium.launch({ headless: !conf.headed, args: ['--disable-blink-features=AutomationControlled'] });
+  try {
+    const context = await browser.newContext({ ...(existsSync(statePath) ? { storageState: statePath } : {}),
+      locale: 'ja-JP', timezoneId: 'Asia/Tokyo', viewport: { width: 1280, height: 900 } });
+    const page = await context.newPage();
+    await page.goto(conf.checkUrl, { waitUntil: 'domcontentloaded', timeout: 60000 }).catch(() => {});
+    await page.waitForTimeout(3000);
+    if (conf.loggedIn(page.url()) && !(await pageSignals(page)).hasPassword) return { source, status: 'ok', relogged: false };
+    await page.goto(conf.loginUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
+    await submitCredential(page, conf, cred);
+    await passTotpIfOffered(page, conf, cred);
+    const signals = await pageSignals(page);
+    const url = page.url();
+    const status = conf.loggedIn(url) && !signals.hasPassword ? 'ok'
+      : signals.hasChallenge || conf.challengeUrl?.test(url) ? 'human_required' : 'login_failed';
+    if (status !== 'ok') return { source, status };
+    if (source === 'kdp') {
+      const after = await afterKdpLogin(page, cred);
+      if (after.status !== 'ok') return { source, status: after.status };
+    }
+    writeFileSync(outPath, JSON.stringify(scopedState(source, await context.storageState({ indexedDB: true }))), { mode: 0o600 });
+    return { source, status: 'ok', relogged: true };
+  } finally {
+    await browser.close();
+  }
+}
+
+if (process.argv[1] === fileURLToPath(import.meta.url) && process.argv.includes('--ci')) {
+  // Usage: refresh-session.mjs SOURCE --ci --state IN --out OUT  (GitHub Actions 専用。出力は固定のコードだけ)
+  const args = process.argv.slice(2);
+  const source = args[0];
+  const valueOf = (flag) => args[args.indexOf(flag) + 1];
+  const result = process.env.GITHUB_ACTIONS === 'true' && LOGIN[source]
+    ? await ciRelogin(source, { statePath: valueOf('--state'), outPath: valueOf('--out') })
+      .catch((e) => ({ source, status: /Timeout/.test(String(e?.message)) ? 'timeout' : 'error' }))
+    : { source, status: 'unsupported' };
+  console.log(JSON.stringify(result));
+  process.exit(result.status === 'ok' ? 0 : 1);
+}
+
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const args = process.argv.slice(2);
   const sources = args.filter((a) => !a.startsWith('--'));
   if (!sources.length || args.includes('--help')) {
-    console.log('Usage: refresh-session.mjs SOURCE... [--publish] [--headed] [--wait-human]  (SOURCE: a8 | moshimo | kdp | note | x)');
+    console.log('Usage: refresh-session.mjs SOURCE... [--publish] [--headed] [--wait-human]  (SOURCE: a8 | moshimo | kdp | note | x | coconala)');
     process.exit(0);
   }
   const root = fileURLToPath(new URL('../../../', import.meta.url));

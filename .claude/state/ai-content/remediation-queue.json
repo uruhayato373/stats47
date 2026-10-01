@@ -1,16 +1,17 @@
 {
-  "generatedAt": "2026-09-30T01:22:19.881Z",
+  "generatedAt": "2026-10-01T01:20:11.880Z",
   "gscSnapshot": "2026-W39",
   "scopeKind": "all",
   "scope": "R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)",
   "doneCriteria": "R2 の ai-content が auditRow を通る (blocker 0)",
   "summary": {
-    "total": 2420,
-    "done": 2166,
-    "needsRegen": 242,
+    "total": 2423,
+    "done": 2165,
+    "needsRegen": 246,
     "needsByReason": {
-      "missing": 241,
-      "incomplete": 1
+      "missing": 244,
+      "incomplete": 1,
+      "fetch-error:TypeError: fetch failed": 1
     },
     "notEligible": 12,
     "notEligibleByCode": {
@@ -19911,6 +19912,36 @@
       "updatedAt": "2026-05-17T04:38:14.451Z"
     },
     {
+      "rankingKey": "census-household-change-rate-5y",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "census-population-change-5y",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
+      "rankingKey": "census-population-change-rate-5y",
+      "impressions": 0,
+      "clicks": 0,
+      "position": 0,
+      "status": "needs-regen",
+      "reason": "missing",
+      "blockers": [],
+      "reviewTier": "gemini-auto"
+    },
+    {
       "rankingKey": "certified-childcare-center-count-per-100k-0-5",
       "impressions": 0,
       "clicks": 0,
@@ -25485,12 +25516,10 @@
       "impressions": 0,
       "clicks": 0,
       "position": 0,
-      "status": "done",
-      "reason": "ok",
+      "status": "needs-regen",
+      "reason": "fetch-error:TypeError: fetch failed",
       "blockers": [],
-      "warns": [],
-      "lastModified": "Sun, 06 Sep 2026 23:12:14 GMT",
-      "updatedAt": "2026-09-06T23:09:29.691Z"
+      "reviewTier": "gemini-auto"
     },
     {
       "rankingKey": "milk-drink-consumption-expenditure",
