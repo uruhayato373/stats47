@@ -207,6 +207,33 @@ updated: 2026-09-29
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [REVIEW-ROUTE-IMPROVEMENTS-IDS-01] レビューの申し送り検査が improvements.md の施策 ID を実在 ID と認識しない
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:node .claude/scripts/management/check-review-cadence.mjs] [起票:2026-10-02] [領域:管理]
+
+- **経緯 (2026-10-02 実測)**: 2026-09 の月次レビュー作成時に `loadIdIndex` (`.claude/scripts/management/lib/review-cadence.mjs`) を直接呼んで確かめたところ、
+  backlog の `### [ID]` 見出しは認識するが、improvements.md の表行の ID (`AFF-IMPRESSION-ROUTING-01` / `DATA-ESTAT-FETCH-01` / `R2-STORAGE-01` など) は false だった。
+  monthly-review / weekly-review の SKILL は「カード ID は backlog / improvements に実在するもの」と書いているので、手順と検査が食い違っている。
+- **影響**: 改善施策へ申し送りを結ぶと `unknown-id` で error になるため、レビューは施策 ID を避けて `定常` や近いカードへ迂回させている (2026-09 の月次レビューで実際に迂回した)。
+- **次**: `parseBacklog` とは別に improvements.md の表の 1 列目を ID として読む。テストに「表行の ID は ok・存在しない ID は unknown-id」の 2 例を足す。
+- **完了条件**: improvements.md の表行 ID を申し送りの行き先に書いたレビューで `check-review-cadence.mjs` が exit 0 になり、存在しない ID は従来どおり error になる。
+
+### [BLOG-REMEDIATION-PROOF-01] ブログ品質是正キューで 1 本をゲートと critic まで通すか、是正を計画から外すかを決める
+タグ: [コンテンツ品質] [種類:意思決定] [実行:対話] [起票:2026-10-02] [領域:サイト]
+
+- **経緯**: 是正キュー (`.claude/state/blog/remediation-queue.json`) の「1 本だけ通す」は W35〜W39 の 5 週連続で未達で、どの台帳にもカードが無かった (W39 レビューに「backlog ID なし」と記録)。
+  done は W35 25 → W39 18、must-fix pending は 32 → 50 で、W38 レビューは done の減少を記事の再劣化ではなく母集団の入替と特定している。
+- **次**: `/brushup-blog --target queue --next 1` で 1 本を quality-gate と blog-critic PASS まで通す。通せない場合は、その理由を書いて月次計画の対象から外す。
+  キューの報告は status 遷移と母集団の追加・削除を分けて出す。
+- **完了条件**: 1 本の `remediated_at` と critic PASS の review.md が残っているか、オーナーが是正を計画から外す判断をこのカードに記録している。
+
+### [GSC-CTR-DECOMPOSE-01] W39 の CTR 低下 (3.82% → 3.06%) をページ × クエリで分解する
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-02] [領域:サイト]
+
+- **経緯**: W39 の GSC 確定 7 日は表示 +10.0%・平均順位横ばいでクリック -11.8% だった (W39 週次レビュー)。どのページ・クエリで CTR が落ちたかは分解されておらず、
+  月次の `ctr-improvement` workflow の 2026-09 記録 (`.claude/state/metrics/monthly-jobs/ctr-improvement.json`) も summary が null で改善候補の本文が無い。
+- **次**: 確定 7 日の page × query を W38 と W39 で突き合わせ、表示が増えて CTR が低い上位 10 件を特定する。title の一括変更はしない。
+- **完了条件**: 上位 10 件と、それぞれを search-growth 候補へ渡すか見送るかの判断が記録されている。
+
 ### [MODEL-OPT-APPLY-01] モデル使用量の改善提案を canary で確かめて agent の model / effort に反映する
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:npm run model-usage:test] [起票:2026-10-02] [領域:管理]
 
