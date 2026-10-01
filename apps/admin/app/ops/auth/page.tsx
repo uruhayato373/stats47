@@ -10,7 +10,7 @@ export const metadata = { title: "ログインと資格情報 — stats47 admin"
 /**
  * /ops/auth — ログインが必要な全サービスについて、人が見るべきことだけを出す
  * (ログイン ID・この PC の登録・CI の登録・自動ログインの有無・要対応)。doboku-note の /ops/auth と同じ構成。
- * 正本は .claude/config/auth-credentials.json。登録状況は credential-status.mjs が書いたファイル (パスワードは読まない)。
+ * 正本は .claude/config/auth-credentials.json。登録状況はページを開くたびに読む (パスワードは読まない)。
  */
 function action(r: AuthCredentialRow): string | null {
   if (r.stored === false) return "未登録";
@@ -53,7 +53,7 @@ export default function AuthCredentialsPage() {
           <StatCard label="この PC の登録" value={`${v.rows.length - unregistered.length}/${v.rows.length}`} />
           <StatCard label="要対応" value={todo.length} tone={todo.length > 0 ? "warn" : "good"} />
           <StatCard
-            label="登録状況の確認"
+            label="確認した時刻"
             value={v.generatedAt ? <Freshness iso={v.generatedAt} /> : "未確認"}
           />
         </div>
@@ -78,14 +78,14 @@ export default function AuthCredentialsPage() {
           </DataTable>
           <p className="mt-1 text-[11px] text-console-muted">
             CI は note・ココナラ・KDP だけがパスワードを使う (セッション切れの入り直し)。「保管」は Secrets にあるだけで CI は使わない。方針は「自動ログイン」欄にマウスを置くと出る。
-            登録状況は npm run admin の起動時に調べる。パスワードは表示も読み出しもしない。
+            登録状況はページを開くたびに調べる。パスワードは表示も読み出しもしない。
           </p>
         </Section>
 
         {unregistered.length > 0 && (
           <PanelCard
             title="未登録のサービスを登録する"
-            description="ターミナルで実行し、聞かれたらパスワードを入力する。登録後に node .claude/scripts/measurement/credential-status.mjs を実行して再読み込みする"
+            description="ターミナルで実行し、聞かれたらパスワードを入力する。登録後にこのページを再読み込みする"
           >
             <Stack gap="sm">
               {unregistered.map((r) => (
