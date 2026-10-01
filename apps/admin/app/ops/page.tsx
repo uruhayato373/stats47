@@ -113,13 +113,13 @@ export default function OpsPage() {
         ) : (
           <>
             <DataTable columns={["サービス", "ログイン ID", "この PC", "CI の Secrets", "自動ログイン", "要対応"]}>
-              {auth.map((a) => (
+              {auth.rows.map((a) => (
                 <Row key={a.id}>
                   <Cell nowrap>{a.label}</Cell>
                   <Cell nowrap muted>{a.user ?? "—"}</Cell>
                   <Cell nowrap>
                     {a.stored === null ? (
-                      <StatusBadge>未対応 OS</StatusBadge>
+                      <StatusBadge>未確認</StatusBadge>
                     ) : a.stored ? (
                       <StatusBadge tone="good">登録済み</StatusBadge>
                     ) : (
@@ -145,7 +145,7 @@ export default function OpsPage() {
               ))}
             </DataTable>
             <p className="mt-1 text-[11px] text-console-muted">
-              正本は .claude/config/auth-credentials.json。パスワードは表示も読み出しもしない。CI の Secrets は STATS47_AUTH_&lt;SERVICE&gt;_USER / _PASSWORD。
+              正本は .claude/config/auth-credentials.json。パスワードは表示も読み出しもしない。CI の Secrets は STATS47_AUTH_&lt;SERVICE&gt;_USER / _PASSWORD。登録状況は npm run admin の起動時に調べる ({auth.generatedAt ? <Freshness iso={auth.generatedAt} /> : "未確認: node .claude/scripts/measurement/credential-status.mjs"})。
             </p>
           </>
         )}

@@ -1,17 +1,15 @@
 import "server-only";
 
-import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 
-import { storedAccounts } from "../../../../.claude/scripts/measurement/credential-store.mjs";
 import { projectRoot } from "./project-root";
-import { cached, wrap } from "./state-io";
+import { wrap } from "./state-io";
 
 /**
  * ログインと資格情報の一覧 (読み取り専用)。正本は .claude/config/auth-credentials.json。
- * この PC の登録は OS の資格情報ストアから「有無と ID」だけを読み、CI は Secrets の名前だけを見る。
- * パスワードはどこからも取り出さない。
+ * 登録状況は .claude/scripts/measurement/credential-status.mjs が書いたファイルを読む
+ * (`npm run admin` の前に自動実行。管理画面は子プロセスを起動しない)。パスワードはどこにも無い。
  */
 export interface AuthCredentialRow {
   id: string;
@@ -34,38 +32,34 @@ interface ServiceSpec {
   policyNote: string;
 }
 
-const CI_SECRETS_TTL_MS = 10 * 60 * 1000;
-
-function ciSecretNames(): Set<string> | null {
-  return cached("auth-credentials:ci-secrets", CI_SECRETS_TTL_MS, () => {
-    try {
-      const out = execFileSync("gh", ["secret", "list", "--repo", "uruhayato373/stats47", "--json", "name"], {
-        encoding: "utf8",
-        stdio: ["ignore", "pipe", "ignore"],
-        windowsHide: true,
-      });
-      return new Set((JSON.parse(out) as Array<{ name: string }>).map((s) => s.name));
-    } catch {
-      return null;
-    }
-  });
+interface CredentialStatus {
+  generatedAt: string;
+  platform: string;
+  local: Record<string, { stored: boolean; user: string | null }> | null;
+  ciSecrets: string[] | null;
 }
 
-function registerCommand(storeItem: string): string {
-  return process.platform === "darwin"
-    ? `security add-generic-password -s ${storeItem} -a <ログインID> -w`
-    : `cmdkey /generic:${storeItem} /user:<ログインID> /pass`;
+const STATUS_PATH = ".local/authenticated-measurement/credential-status.json";
+
+function readStatus(root: string): CredentialStatus | null {
+  try {
+    return JSON.parse(fs.readFileSync(path.join(root, STATUS_PATH), "utf8")) as CredentialStatus;
+  } catch {
+    return null;
+  }
 }
 
 export function authCredentialRows() {
-  return wrap((): AuthCredentialRow[] => {
-    const config = path.join(projectRoot(), ".claude/config/auth-credentials.json");
+  return wrap(() => {
+    const root = projectRoot();
+    const config = path.join(root, ".claude/config/auth-credentials.json");
     const services = (JSON.parse(fs.readFileSync(config, "utf8")) as { services: Record<string, ServiceSpec> }).services;
-    const items = Object.values(services).map((s) => s.storeItem);
-    const local = storedAccounts(items) as Record<string, { stored: boolean; user: string | null }> | null;
-    const secrets = ciSecretNames();
-    return Object.entries(services).map(([id, s]) => {
+    const status = readStatus(root);
+    const secrets = status?.ciSecrets ? new Set(status.ciSecrets) : null;
+    const mac = (status?.platform ?? process.platform) === "darwin";
+    const rows = Object.entries(services).map(([id, s]): AuthCredentialRow => {
       const key = id.toUpperCase();
+      const local = status?.local?.[s.storeItem];
       return {
         id,
         label: s.label,
@@ -73,13 +67,16 @@ export function authCredentialRows() {
         autoLogin: s.autoLogin,
         ciCredential: s.ciCredential,
         policyNote: s.policyNote,
-        stored: local ? local[s.storeItem].stored : null,
-        user: local ? local[s.storeItem].user : null,
+        stored: local ? local.stored : null,
+        user: local?.user ?? null,
         ciSecrets: !s.ciCredential || !secrets
           ? null
           : secrets.has(`STATS47_AUTH_${key}_USER`) && secrets.has(`STATS47_AUTH_${key}_PASSWORD`),
-        registerCommand: registerCommand(s.storeItem),
+        registerCommand: mac
+          ? `security add-generic-password -s ${s.storeItem} -a <ログインID> -w`
+          : `cmdkey /generic:${s.storeItem} /user:<ログインID> /pass`,
       };
     });
+    return { rows, generatedAt: status?.generatedAt ?? null };
   });
 }
