@@ -1,9 +1,11 @@
 {
-  "hash": "1d134f58531ceaee9750fc06c002796fac7a30df80b8f791efe4ac7385fad62d",
-  "audited_at": "2026-10-01T11:53:06",
+  "hash": "229f582a8f9dfe7b6b24333832b293b47686f0b4ae2e50d0825a7c1325ea7559",
+  "audited_at": "2026-10-01T11:57:18",
   "files": [
     ".agents/skills/management/monthly-review/SKILL.md",
+    ".claude/scripts/management/__tests__/review-cadence.test.mjs",
     ".claude/scripts/management/lib/review-cadence.mjs",
+    ".claude/scripts/metrics/record-monthly-job.mjs",
     ".claude/skills/management/monthly-review/SKILL.md"
   ]
 }

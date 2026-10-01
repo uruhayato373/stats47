@@ -46,7 +46,7 @@ node .claude/scripts/management/check-review-cadence.mjs
 | 収益 (楽天以外) | `.claude/state/metrics/affiliate/a8-results.json`・`.claude/state/metrics/affiliate/moshimo-results.json` (afb は認証付き計測の `afb`)、商品は `.claude/state/products/sales-ledger.json`、KDP は月次レポート (`kdp-monthly-reports.mjs` の出力)。各週の合計は `node .claude/scripts/metrics/generate-weekly-metrics-issue.mjs --week <YYYY-Www>` の「週次収益 (NSM)」節 |
 | NSM 改善実験 | `.claude/state/experiments.json` の `status` と `next_check_date`。対象月までに期日が来た running / proposed |
 | 事業計画 | `.claude/state/business-plan/latest.json` の `nextActions` と開始ゲート |
-| 月次の自動処理 | Cloudflare は `.claude/skills/analytics/cloudflare-cost-improvement/reference/monthly-snapshots` (請求サイクル開始月の名前で、対象月 15 日に作られる)。CTR 改善候補・e-Stat カタログ・国土数値情報カタログは結果を Workflow Summary にしか残さないので `gh run list --workflow ctr-improvement-monthly.yml` (同様に `estat-catalog-monthly.yml`・`ksj-catalog-monthly.yml`) で対象月の run と結論を見る |
+| 月次の自動処理 | `.claude/state/metrics/monthly-jobs` の各ジョブ (`ksj-catalog`・`estat-catalog`・`ctr-improvement`・`cloudflare-snapshot`) の対象月の記録。`status` (ok / skipped / failed)・`runUrl`・`summary` (CTR は改善候補の本文) を読む。Cloudflare の費用の中身は `.claude/skills/analytics/cloudflare-cost-improvement/reference/monthly-snapshots` (請求サイクル開始月の名前) |
 | 月次の定点観測 | `/competitor-scan` の `.claude/skills/sns/competitor-scan/reference/reports` (対象月の日付のレポート)、X の勝ちパターンの月次レポート |
 | 開いているアラート | `gh issue list --label auto-generated --state open` (横断監視 #763 を含む) |
 | GSC の月次接続 | `node .claude/scripts/gsc/audit-operations-cycle.mjs --stage monthly` |

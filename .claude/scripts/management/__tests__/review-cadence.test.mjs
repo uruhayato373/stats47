@@ -1,9 +1,10 @@
 import assert from "node:assert/strict";
-import { mkdirSync, mkdtempSync, writeFileSync } from "node:fs";
+import { mkdirSync, mkdtempSync, readFileSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { test } from "node:test";
 
+import { appendRun } from "../../metrics/record-monthly-job.mjs";
 import { classifyRoute, parseRoutes, reviewCadence, reviewRun, weekRange, weeksOfMonth } from "../lib/review-cadence.mjs";
 
 // 実リポジトリの state に依存しないよう、配線の正本と台帳を持つ小さなリポジトリを毎回組み立てる。
@@ -182,4 +183,26 @@ test("回ごとの判定: 期限前・未実施・不足あり・実施できた
   const w40 = reviewRun(root, "weekly", "2026-W40", at("2026-10-13"));
   assert.equal(w40.steps.find((x) => x.label === "申し送りの振り分け").state, "done");
   assert.ok(w40.options.some((o) => o.key === "2026-W41"));
+});
+
+// 意図: 月次 workflow は結果を Workflow Summary にしか残さなかった。記録は月ごとに 1 件 (再実行は上書き) で、
+// 今月分が failed・実行日 + 猶予を過ぎても無いときだけ毎朝のガードが error にする
+test("月次ジョブの記録: 同じ月は上書き・新しい順", () => {
+  const a = appendRun(null, { job: "x", month: "2026-09", status: "failed" });
+  const b = appendRun(a, { job: "x", month: "2026-09", status: "ok" });
+  const c = appendRun(b, { job: "x", month: "2026-10", status: "ok" });
+  assert.deepEqual(c.runs.map((r) => `${r.month}:${r.status}`), ["2026-10:ok", "2026-09:ok"]);
+});
+
+test("月次ジョブ: 今月分が failed、または実行日 + 猶予を過ぎて記録が無いと error", () => {
+  const root = fixture({ weeks: { "2026-W40": okWeek() }, months: { "2026-09": okMonth } });
+  const wiringPath = join(root, ".claude/config/review-wiring.json");
+  const wiring = JSON.parse(readFileSync(wiringPath, "utf8"));
+  wiring.monthlyJobs = { dir: "jobs", graceDays: 2, jobs: [{ job: "a", label: "A", workflow: "a.yml", day: 2 }, { job: "b", label: "B", workflow: "b.yml", day: 10 }] };
+  writeFileSync(wiringPath, JSON.stringify(wiring));
+  write(root, "jobs/a.json", JSON.stringify({ runs: [{ month: "2026-10", status: "failed" }] }));
+  const day5 = reviewCadence(root, at("2026-10-05"));
+  assert.deepEqual(day5.findings.filter((f) => f.code.startsWith("monthly-job")).map((f) => f.code), ["monthly-job-failed"]);
+  const day13 = reviewCadence(root, at("2026-10-13"));
+  assert.deepEqual(day13.findings.filter((f) => f.code.startsWith("monthly-job")).map((f) => f.code).sort(), ["monthly-job-failed", "monthly-job-missing"]);
 });

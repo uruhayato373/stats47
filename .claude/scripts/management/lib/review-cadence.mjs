@@ -239,6 +239,34 @@ function monthlyExpected(cal, reviews, conf) {
 
 const frontmatterValue = (text, key) => text?.match(new RegExp(`^${key}:\\s*(\\S+)\\s*$`, "m"))?.[1] ?? null;
 
+// ---------- 月次 workflow の実行記録 ----------
+
+/** 月次ジョブごとの、指定月の記録 (record-monthly-job.mjs が書く) */
+export function monthlyJobRuns(root, wiring, month) {
+  const conf = wiring.monthlyJobs;
+  if (!conf) return [];
+  return conf.jobs.map((j) => {
+    const text = readText(root, `${conf.dir}/${j.job}.json`);
+    const run = text ? (JSON.parse(text).runs ?? []).find((r) => r.month === month) ?? null : null;
+    return { ...j, run };
+  });
+}
+
+/** 今月分: 失敗した・実行日 + 猶予を過ぎても記録が無いジョブ (毎朝のガードが error にする) */
+function monthlyJobFindings(root, wiring, cal) {
+  const conf = wiring.monthlyJobs;
+  if (!conf) return [];
+  const out = [];
+  for (const j of monthlyJobRuns(root, wiring, cal.currentMonth)) {
+    if (j.run?.status === "failed") {
+      out.push({ severity: "error", code: "monthly-job-failed", file: `${conf.dir}/${j.job}.json`, message: `月次の自動処理「${j.label}」の ${cal.currentMonth} 分が失敗した`, fix: `${j.run.runUrl ?? j.workflow} のログを見て直し、${j.workflow} を workflow_dispatch で再実行する` });
+    } else if (!j.run && cal.dayOfMonth > j.day + conf.graceDays) {
+      out.push({ severity: "error", code: "monthly-job-missing", file: `${conf.dir}/${j.job}.json`, message: `月次の自動処理「${j.label}」の ${cal.currentMonth} 分の記録が無い (実行日 ${j.day} 日)`, fix: `gh run list --workflow ${j.workflow} で起動を確認し、走っていなければ workflow_dispatch で実行する` });
+    }
+  }
+  return out;
+}
+
 // ---------- 全体 ----------
 
 export function reviewCadence(root, now = new Date()) {
@@ -336,6 +364,8 @@ export function reviewCadence(root, now = new Date()) {
     });
   }
 
+  findings.push(...monthlyJobFindings(root, wiring, cal));
+
   const wiringRows = checkWiring(root, wiring);
   for (const w of wiringRows.filter((r) => r.problem)) {
     findings.push({
@@ -395,7 +425,6 @@ export function handoffSummary(result, cadence = "weekly") {
 
 const MEASUREMENT_HISTORY = ".claude/state/metrics/measurement-cycle/history.csv";
 const VERDICT_DIR = ".claude/state/effect-verdict";
-const CLOUDFLARE_MONTHLY = ".claude/skills/analytics/cloudflare-cost-improvement/reference/monthly-snapshots";
 const COMPETITOR_REPORTS = ".claude/skills/sns/competitor-scan/reference/reports";
 
 /** ISO 週 YYYY-Www の月曜〜日曜 */
@@ -470,11 +499,12 @@ export function reviewRun(root, cadence, period, now = new Date()) {
     steps.push(step("週次レビュー", `月内の週次レビュー (${weeks[0]}〜${weeks.at(-1)}) が揃っている`, reviewed.length === weeks.length ? "done" : reviewed.length ? "partial" : "missing", `${reviewed.length} / ${weeks.length} 週`));
     const judged = weeks.filter(verdictExists);
     steps.push(step("効果判定", "月内の各週で閾値エンジンが施策を判定している", judged.length === weeks.length ? "done" : judged.length ? "partial" : "missing", `${judged.length} / ${weeks.length} 週`));
-    // Cloudflare は請求サイクル (前月 15 日〜当月 14 日) を開始月の名前で当月 15 日に保存する
-    const cfName = monthLabel(addMonths(new Date(`${period}-01T00:00:00Z`), -1));
-    const cfDone = [".json", ".md"].some((ext) => existsSync(join(root, CLOUDFLARE_MONTHLY, `${cfName}${ext}`)));
-    steps.push(step("月次の自動処理", "Cloudflare の費用 snapshot が保存され、CTR 改善候補・e-Stat / 国土数値情報カタログの月次 run が走った", cfDone ? "partial" : "missing",
-      `${cfDone ? `Cloudflare ${cfName} あり` : `Cloudflare ${cfName} なし`}。CTR・カタログは Workflow Summary だけに残るので gh run list --workflow ctr-improvement-monthly.yml などで確認し、レビューの「点検と Issue」に書く`));
+    const jobs = monthlyJobRuns(root, wiring, period);
+    const recorded = jobs.filter((x) => x.run && x.run.status !== "failed");
+    const failed = jobs.filter((x) => x.run?.status === "failed");
+    steps.push(step("月次の自動処理", `月次 workflow (${jobs.map((x) => x.label).join("・")}) が対象月に走り、結果を記録した`,
+      recorded.length === jobs.length ? "done" : recorded.length || failed.length ? "partial" : "missing",
+      jobs.map((x) => `${x.label}: ${x.run ? x.run.status : "記録なし"}`).join(" / ")));
     const scans = existsSync(join(root, COMPETITOR_REPORTS)) ? readdirSync(join(root, COMPETITOR_REPORTS)).filter((f) => f.startsWith(period)) : [];
     steps.push(step("月次の定点観測", "/competitor-scan が対象月にレポートを書いた", scans.length ? "done" : "missing", scans[0] ? `${COMPETITOR_REPORTS}/${scans[0]}` : `${COMPETITOR_REPORTS} に ${period} のレポートなし`));
   }

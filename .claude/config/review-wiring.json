@@ -77,14 +77,25 @@
         { "label": "NSM 改善実験", "read": ".claude/state/experiments.json" },
         { "label": "事業計画の state", "read": ".claude/state/business-plan/latest.json" },
         { "label": "Cloudflare 月次 snapshot", "read": ".claude/skills/analytics/cloudflare-cost-improvement/reference/monthly-snapshots" },
+        { "label": "月次 workflow の実行記録", "read": ".claude/state/metrics/monthly-jobs" },
         { "label": "競合の月次定点観測", "read": ".claude/skills/sns/competitor-scan/reference/reports" },
-        { "label": "月次の自動処理の実行結果", "run": "gh run list --workflow ctr-improvement-monthly.yml" },
         { "label": "開いているアラート Issue", "run": "gh issue list --label auto-generated --state open" },
         { "label": "GSC 月次の接続ゲート", "run": "node .claude/scripts/gsc/audit-operations-cycle.mjs --stage monthly" },
         { "label": "改善施策", "read": ".claude/todo/improvements.md" },
         { "label": "レビューの契約検査", "run": "node .claude/scripts/management/check-review-cadence.mjs" }
       ]
     }
+  },
+  "monthlyJobs": {
+    "_comment": "月次 workflow の実行結果 (record-monthly-job.mjs が .claude/state/metrics/monthly-jobs/<job>.json に残す)。day は JST の実行日。day + graceDays を過ぎても今月の記録が無い・failed なら毎朝のガードが error にする。月次レビューの手順「月次の自動処理」は対象月の記録で判定する",
+    "dir": ".claude/state/metrics/monthly-jobs",
+    "graceDays": 2,
+    "jobs": [
+      { "job": "ksj-catalog", "label": "国土数値情報カタログ", "workflow": "ksj-catalog-monthly.yml", "day": 2 },
+      { "job": "estat-catalog", "label": "e-Stat カタログ", "workflow": "estat-catalog-monthly.yml", "day": 3 },
+      { "job": "ctr-improvement", "label": "CTR 改善候補", "workflow": "ctr-improvement-monthly.yml", "day": 5 },
+      { "job": "cloudflare-snapshot", "label": "Cloudflare 月次 snapshot", "workflow": "cloudflare-monthly-snapshot.yml", "day": 15 }
+    ]
   },
   "plans": {
     "weekly": { "label": "週次計画", "file": ".claude/todo/weekly.md", "command": "/weekly-plan" },

@@ -8,7 +8,8 @@ name: 📚 e-Stat Catalog (monthly)
 #      差分 plan → getMetaInfo を時間予算まで → .local/r2/estat-catalog/ に staging
 #   2. diff-push-r2 --prefix estat-catalog: R2 へ push
 #
-# git への commit-back はしない (状態は R2 の manifest.json のみ)。
+# カタログ本体の git commit-back はしない (状態は R2 の manifest.json)。実行結果だけを
+# .claude/state/metrics/monthly-jobs/estat-catalog.json に残す (月次レビューが読む)。
 # concurrency は estat-catalog 専用 group とし、r2-write (data-refresh / sync-snapshots) と
 # 直列化しない — このプレフィックスは本 workflow が専有し app 配信に触れないため、
 # 30〜150 分の crawl 中に他の R2 反映を塞ぐ必要がない。
@@ -48,7 +49,7 @@ on:
     - cron: "0 18 2 * *"
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: estat-catalog
@@ -70,7 +71,7 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           ref: develop
-          fetch-depth: 1
+          fetch-depth: 0
 
       - name: 🟢 Setup Node.js
         uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
@@ -93,3 +94,19 @@ jobs:
       - name: 📤 Push to R2
         if: ${{ github.event.inputs.dry_run != 'true' }}
         run: npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix estat-catalog
+
+      # 月次レビューがファイルから「走ったか・何が出たか」を判定できるよう、結果を state に残す (2026-10-01)。
+      # 失敗した回も failed として残す。読み手: .claude/scripts/management/lib/review-cadence.mjs
+      - name: 🗂️ Record monthly job result
+        if: always()
+        run: |
+          STATUS="${{ job.status == 'success' && (github.event.inputs.dry_run == 'true' && 'skipped' || 'ok') || 'failed' }}"
+          node .claude/scripts/metrics/record-monthly-job.mjs --job estat-catalog --status "$STATUS" \
+            --field trigger="${{ github.event_name }}"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .claude/state/metrics/monthly-jobs/estat-catalog.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "chore(metrics): monthly job estat-catalog $STATUS [skip ci]"
+          git pull --rebase origin develop
+          git push origin develop
