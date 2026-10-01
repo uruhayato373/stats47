@@ -21,9 +21,11 @@ test.describe("ランキング詳細ページ", () => {
   });
 
   test("地図チャートが表示される", async ({ page }) => {
-    const mapChart = page.getByRole("img", { name: /都道府県別カラーマップ/ });
-    // 地図は R2 のデータを読んでから描画されるので CI では遅い。scrollIntoViewIfNeeded は自前の待ち上限を持たず
-    // テスト全体の 90 秒を使い切って落ちた (quality-suite-weekly 2026-09-27)。待ちを段ごとに区切る
+    // 地図は role="figure" (2026-09-24 a76f71195。操作できる地図を role="img" で包むと axe nested-interactive になるため)。
+    // テストが img のまま探していて、2026-09-27 以降の週次 E2E が要素を見つけられず落ちていた
+    // 同じ名前の figure がレイアウト違いで 2 つある (2026-10-02 本番で確認)。strict mode で落ちないよう 1 つ目を見る
+    const mapChart = page.getByRole("figure", { name: /都道府県別カラーマップ/ }).first();
+    // scrollIntoViewIfNeeded は自前の待ち上限を持たずテスト全体の 90 秒を使い切るので、待ちを段ごとに区切る
     await expect(mapChart).toBeAttached({ timeout: 30_000 });
     await mapChart.scrollIntoViewIfNeeded({ timeout: 15_000 });
     await expect(mapChart).toBeVisible({ timeout: 15_000 });
