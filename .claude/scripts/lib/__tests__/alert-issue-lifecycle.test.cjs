@@ -18,6 +18,7 @@ const WORKFLOWS = [
   "post-deploy-smoke.yml", // 2026-09-18: 7 デプロイ連続失敗が無通知だった (CI-POST-DEPLOY-SMOKE-ALERT-01)
   "affiliate-ga4-weekly.yml", // 2026-09-20: stale観測を次の週次監査まで見逃さない
   "improvement-cycle-weekly.yml", // 2026-09-24: 無人記録のゲート違反を翌週まで見逃さない
+  "review-cadence-guard.yml", // 2026-10-01: 週次・月次レビューの期限切れ・契約違反を毎朝見張る
 ];
 
 test("domain alert は固定タイトルでupsertし、正常復帰時に自動Closeする", () => {

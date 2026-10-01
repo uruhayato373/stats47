@@ -1,7 +1,27 @@
 {
-  "hash": "32488f06ef36ba20a009883ddb755be63a8054d5940fe67b78196c4c5515ea96",
-  "audited_at": "2026-10-01T11:00:51",
+  "hash": "1412c5736c1fb55bbe4ce2e734219b6da8f65e6fdcc4afe27e6a6f260beb697c",
+  "audited_at": "2026-10-01T11:43:52",
   "files": [
-    ".claude/scripts/ads/__tests__/affiliate-workflow-safety.test.mjs"
+    ".agents/skills/management/monthly-plan/SKILL.md",
+    ".agents/skills/management/monthly-review/SKILL.md",
+    ".agents/skills/management/weekly-plan/SKILL.md",
+    ".agents/skills/management/weekly-review/SKILL.md",
+    ".claude/agents/strategy-advisor.md",
+    ".claude/hooks/check-weekly-cadence-on-stop.js",
+    ".claude/rules/docs-vs-issues.md",
+    ".claude/scripts/lib/__tests__/alert-issue-lifecycle.test.cjs",
+    ".claude/scripts/lib/check-docs-governance.cjs",
+    ".claude/scripts/management/__tests__/check-weekly-cadence.test.mjs",
+    ".claude/scripts/management/__tests__/review-cadence.test.mjs",
+    ".claude/scripts/management/check-review-cadence.mjs",
+    ".claude/scripts/management/check-weekly-cadence.mjs",
+    ".claude/scripts/management/lib/review-cadence.mjs",
+    ".claude/scripts/metrics/lib/cycle-health.mjs",
+    ".claude/skills/management/README.md",
+    ".claude/skills/management/monthly-plan/SKILL.md",
+    ".claude/skills/management/monthly-review/SKILL.md",
+    ".claude/skills/management/weekly-plan/SKILL.md",
+    ".claude/skills/management/weekly-review/SKILL.md",
+    ".claude/skills/management/weekly-review/reference/runbook.md"
   ]
 }

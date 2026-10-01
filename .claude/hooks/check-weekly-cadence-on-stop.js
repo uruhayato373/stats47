@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 /**
- * Stop hook: 会話終了時に「週次レビューの実行漏れ」を促す (CI ガードの二重化)。
+ * Stop hook: 会話終了時に「週次・月次レビューの実行漏れ」を促す (CI ガードの二重化)。
  *
- * weekly-cadence-guard.yml (月曜 cron) が Issue で拾うのに加え、セッション作業中にも
- * 気づけるようにする。ただし low-noise 設計:
- *   - 通知対象は **未作成の週次レビュー** のみ (完了済み週の振り返り漏れ = 今回の失敗モード)。
- *     当週の週次計画の未作成は週頭は正常なので対象外。
+ * review-cadence-guard.yml (毎朝) が Issue で拾うのに加え、セッション作業中にも
+ * 気づけるようにする。判定は check-review-cadence.mjs (正本 .claude/config/review-wiring.json)。low-noise 設計:
+ *   - 通知対象は **期限を過ぎた未作成のレビュー** (週次・月次) のみ。
+ *     計画の欠落・本文の契約違反は CI ガードと docs:check (DG084) に任せる。
  *   - 1 日 1 回まで (同日 2 回目以降は黙る)。
  *   - stop_hook_active なら無限ループ防止で即終了。
  * 決定的 (LLM 呼ばない)。欠落が無ければ黙る。
@@ -45,7 +45,7 @@ function main() {
   }
 
   // 検知スクリプトを JSON で実行
-  const script = path.join(PROJECT_ROOT, ".claude/scripts/management/check-weekly-cadence.mjs");
+  const script = path.join(PROJECT_ROOT, ".claude/scripts/management/check-review-cadence.mjs");
   let result;
   try {
     const out = execFileSync("node", [script, "--json"], {
@@ -58,7 +58,9 @@ function main() {
     process.exit(0); // 検知に失敗しても作業は止めない
   }
 
-  const missing = result.missingReviews || [];
+  const missing = (result.status || [])
+    .filter((s) => s.kind.endsWith("-review"))
+    .flatMap((s) => (s.missing || []).map((period) => ({ period, label: s.label, command: s.command })));
   if (missing.length === 0) process.exit(0); // レビュー欠落なし → 黙る
 
   // 同日再通知を抑止するため今日の日付を記録
@@ -69,9 +71,9 @@ function main() {
     /* 記録できなくても通知は出す */
   }
 
-  const list = missing.map((w) => `  - ${w} → \`/weekly-review ${w}\``).join("\n");
+  const list = missing.map((m) => `  - ${m.label} ${m.period} → \`${m.command} ${m.period}\``).join("\n");
   const reason = [
-    `⚠️ 週次レビューが ${missing.length} 週分未作成です (完了済み週の振り返り漏れ)。`,
+    `⚠️ レビューが ${missing.length} 件未作成です (期限を過ぎた振り返り漏れ)。`,
     list,
     "",
     "実測メトリクスは NSM snapshot と .claude/state/metrics/*/history.csv に残っています",

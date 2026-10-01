@@ -94,7 +94,7 @@ npm run kdp:weekly -- --week [YYYY-Www] --write
 2. Must / Should / Couldごとに完了・未完了・計画外を分ける。
 3. KPI変化は同じ定義・同じ期間のsnapshotだけで比較する。
 4. effect判定が必要な施策は`.claude/rules/evidence-based-judgment.md`に従う。
-5. 未完了は削除せず、次週へ渡す理由とownerを記録する。Mustの達成数は「Must N/M」の形で書く（週次メトリクスIssueの連続未達計測がこの形を読む）。Mustの結果表は1行1件で「| Must N | <タスク> `<主ID>` | <S/M/L> | **未達** / 完了 | <証拠> |」の形にする（DG082が未達行の主IDを読み、次週計画の再掲を止める）。2週連続で残ったMustは、申し送りに分割案か降格を書く。申し送りの各項目にはbacklog / improvementsのIDを付ける。
+5. 未完了は削除せず、次週へ渡す理由とownerを記録する。Mustの達成数は「Must N/M」の形で書く（週次メトリクスIssueの連続未達計測がこの形を読む）。Mustの結果表は1行1件で「| Must N | <タスク> `<主ID>` | <S/M/L> | **未達** / 完了 | <証拠> |」の形にする（DG082が未達行の主IDを読み、次週計画の再掲を止める）。2週連続で残ったMustは、申し送りに分割案か降格を書く。申し送りの各項目は末尾に「→ 振り分け: <カード ID / EXP-NNN / #Issue / 定常 / 見送り (理由)>」を書く（2026-W40 から必須。正本 `.claude/config/review-wiring.json`。カード ID は backlog / improvements に実在するもの、行き先が無ければ先にカードを起票する）。
 6. search-growth候補は最大3件（technical/blocker、acquisition/content、measurementを原則各1件）だけ審査する。
 7. CTR候補はpage×query、現行title/content、past effectを確認する。大量title書換えを提案しない。
 8. 候補は人間承認前に改善バックログへ追加しない。search-growth候補のWIP（approved / in-progress）は5以下を守る（`triage.mjs` の `WIP_LIMIT`。improvements.md全体の上限10件とは別）。
@@ -135,6 +135,13 @@ node .claude/scripts/gsc/audit-operations-cycle.mjs --stage review --week [YYYY-
 
 FAILが残る場合はレビューを「完了」と報告せず、出力された次アクションをBlockersに残す。
 
+続けてレビューの契約 (必須見出し・申し送りの振り分け・期限) を検査する。同じ検査が docs:check (DG084) と
+毎朝の `review-cadence-guard.yml` でも走る。error が残る間は完了と報告しない。
+
+```bash
+node .claude/scripts/management/check-review-cadence.mjs
+```
+
 ## Phase 4: 次週計画
 
 レビュー保存後、ユーザーの依頼範囲に週次計画が含まれる場合だけ`/weekly-plan`を実行する。
@@ -153,6 +160,7 @@ FAILが残る場合はレビューを「完了」と報告せず、出力され�
 - KDPの実公開を週次レビュー単独の副作用として実行していない。
 - GSC証拠がfreshで候補がある場合、approve/dismissが最低1件記録されている。
 - 保存先が`reference/reviews/YYYY-Www.md`である。
+- `check-review-cadence.mjs` が error 0 (必須見出し・申し送りの振り分けを含む)。
 
 ## Output Contract
 

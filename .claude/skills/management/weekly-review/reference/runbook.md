@@ -564,6 +564,22 @@ node .claude/scripts/blog/analyze-winning-patterns.mjs   # CTR×構造特徴→f
 `KDP-EXPANSION-01`、対象書籍の読者課題 / HARMと理由 / 支払う理由 / 需要証拠 / 次の検証を短く記す。
 販売数/KENPが未計測なら0件とは書かず`not-measured`とする。
 
+## KPI ツリー
+
+| KPI (重点レーン ★) | 今週 | 4 週前 (窓が重ならない週) | 判定 | ぶら下がる施策 |
+|---|---|---|---|---|
+
+<!-- not-connected / missing / stale / degraded は 0 と読まず理由を書き、課題・ブロッカーへ入れる -->
+
+## 計測→記録→改善サイクル
+
+| 段 | 今週 | 根拠 |
+|---|---|---|
+| 計測 (fetch-metrics-weekly) | 生成 / 未生成 | `.claude/state/metrics/measurement-cycle/latest.json` の week |
+| 記録 (無人 improvement-triage) | pass / fail・閉じた N・更新 N・追加 N | `triage-latest.json` |
+| 改善 (今週動いた施策) | 施策 ID | improvements.md / backlog-loop ledger |
+| 振り返り → 起票 (前週の申し送り) | 振り分け済み N / M | `node .claude/scripts/management/check-review-cadence.mjs --json` |
+
 ## 課題・ブロッカー
 
 1. **課題名**: 原因分析、影響範囲
@@ -580,9 +596,11 @@ node .claude/scripts/blog/analyze-winning-patterns.mjs   # CTR×構造特徴→f
 
 ## 来週への申し送り
 
-- 未達タスクの引き継ぎ
-- 来週注意すべきこと
-<!-- 次回 /weekly-plan が .claude/todo/weekly.md に引き継ぐ -->
+- 未達タスクの引き継ぎ → 振り分け: <カード ID>
+- 来週注意すべきこと → 振り分け: <カード ID / EXP-NNN / #Issue / 定常 / 見送り (理由)>
+<!-- 2026-W40 から、各項目の末尾の「→ 振り分け:」が必須 (正本 .claude/config/review-wiring.json)。
+     カード ID は backlog / improvements に実在するもの。行き先が無ければ先にカードを起票する。
+     次回 /weekly-plan はこの行き先を読んで .claude/todo/weekly.md に引き継ぐ -->
 
 ## 関連ドキュメント・施策
 
