@@ -2,17 +2,27 @@
   "findings": [
     {
       "themeKey": "healthcare",
-      "detail": "healthcare(1440px)で503を新規観測した(2026-09-28T04:03:46Z, cf-ray a41fdc381d08175d-IAD, buildId null, cf-cache-status BYPASS, content-type空, スクリーンショットは白紙)。同一URLを2.5分後に390pxで再検証すると200/buildId zloc9k7UBFBl0_XBvCB-g/cf-cache-status MISSで正常なh1・章・チャートを返した。buildIdがnullなのはNext.jsアプリではなく上流/エッジ側のエラー応答である可能性を示す。2026-09-13に観測されたrailway/tourism/real-income/population-dynamics/regional-energyの散発503(THEME-EXPANSION-EFFECT-01, 09-18に110/110で再現せず解消)と同じ単発・自己解消パターンで、テーマUI・ThemeCatalog・テーマ用スクリプト側に対応する差分は見つからない。根本原因を証明できないため推測修正はしていない。",
+      "detail": "前回(2026-09-28)observedしたhealthcare(1440px)の単発503は今回run(2026-10-01)で再現せず、runtime.log/ci-followup.jsonは55テーマ110件すべてPASS(failed:0)。quality.jsonもerror 0・warn 62(既存partial-coverage警告のみ)・actionableChange:falseで、テーマUI・ThemeCatalog・テーマ用スクリプト側に対応する差分は見つからない。根本原因(buildId null応答の発生源)は依然未確定だが、再発していない以上は推測修正をしていない。",
       "evidenceRefs": [
-        ".claude/state/themes/ci-followup.json",
-        ".local/ci/theme-followup/runtime.json",
         ".local/ci/theme-followup/runtime.log",
-        ".local/ci/theme-followup/healthcare-1440.png"
+        ".local/ci/theme-followup/runtime.json",
+        ".claude/state/themes/ci-followup.json",
+        ".claude/state/themes/quality.json"
+      ]
+    },
+    {
+      "themeKey": "earthquake-exposure",
+      "detail": "候補105(地震への備え)の住宅戸数空間原典は今回2つの候補を官公庁一次資料で再確認したが、いずれも全国網羅の空間原典にならず未充足を維持する。(1) 総務省統計局『令和2年国勢調査に関する地域メッシュ統計(JGD2011)』は編成名が明示的に「人口及び世帯に関する編成」で、結果概要ページの掲載マップも人口・世帯のみ(住宅の建て方・建築時期・耐震性の項目は確認できず)。(2) 平成30年住宅・土地統計調査の統計表6-3(住宅の所有関係・建築時期別住宅数)は市区町村単位まで集計されるが、公式ページ記載どおり対象は「市、区及び人口1万5千人以上の町村」のみで、人口1.5万未満の町村は非掲載のため全国網羅ではない。両者とも候補にならず、2026-09-10時点の`earthquakeHousingSourceReview`(housingSpatialScope: unfulfilled)の判定は変更しない。人口・一般世帯・建物棟数・PLATEAU部分カバレッジを住宅戸数の代用にしておらず、原典が存在しないという断定もしていない。",
+      "evidenceRefs": [
+        "https://www.stat.go.jp/data/mesh/r2_w.html",
+        "https://www.stat.go.jp/data/mesh/pdf/r2kokusei_2011.pdf",
+        "https://www.e-stat.go.jp/stat-search/files?page=1&layout=datalist&cycle=0&toukei=00200522&tstat=000001127155&tclass1=000001129435&tclass2=000001129436&tclass3val=0&stat_infid=000031865679",
+        ".claude/state/metrics/themes/2026-09-10-all-expansion.json"
       ]
     },
     {
       "themeKey": "population-dynamics",
-      "detail": "THEME-EXP-001のd56(due 2026-09-08)は window-includes-pre-publication / baseline-missing-or-low-sample / baseline-scope-unknown-or-incompatible の3ガードでinsufficient-dataを維持しており、標本・baseline不足を理由に実験を終了させていない。値(ga4.pageViews=112, gsc.impressions=895, engagementRate=0.6868)・判定は前回から変更なし。新規34 launchのd7チェックポイントも全件quality-only/pending(due 2026-09-18)のままでeffectラベルは付与されていない。d28暫定判定の期日は2026-10-09でまだ未到達。",
+      "detail": "THEME-EXP-001のd56(due 2026-09-08)は3ガード(window-includes-pre-publication / baseline-missing-or-low-sample / baseline-scope-unknown-or-incompatible)でinsufficient-dataを維持しており、今回も標本・baseline不足のまま実験を終了させていない。新規34 launchのd7は全件quality-only/pendingのまま(due 2026-09-18)で、d28暫定判定の期日(2026-10-09)はまだ未到達。新規launchへeffectラベルは付与していない。",
       "evidenceRefs": [
         ".claude/state/themes/ci-followup.json",
         ".claude/state/themes/experiments.json"
@@ -21,32 +31,18 @@
   ],
   "sourceReviews": [
     {
-      "themeKey": "population-dynamics",
-      "detail": "e-stat.go.jp(出生数・出生率等統計表, sid=0003411595)とmhlw.go.jp(人口動態統計一覧)を確認。最新公表年2024、公表日2026-03-17で、カタログの想定年次・定義と一致。公開範囲に変更なし。",
+      "themeKey": "waste-recycling",
+      "detail": "env.go.jp(一般廃棄物処理事業実態調査)をWebFetchで確認。最新公表は令和6年度(FY2024)分で、ThemeCatalogのselection.surveyedAt(2026-09-09)時点で想定していた年次と一致し、更新による定義・公開範囲の変更は確認できなかった。",
       "evidenceRefs": [
-        "https://www.e-stat.go.jp/dbview?sid=0003411595",
-        "https://www.mhlw.go.jp/toukei/list/81-1.html"
-      ]
-    },
-    {
-      "themeKey": "construction-industry",
-      "detail": "mlit.go.jp(建設業許可業者数調査プレスリリース)を確認。対象は令和5年度末(2024年3月末)、公表日2024-05-15で、selection.surveyedAt(2026-09-16)記載と一致。定義・地域範囲に変更なし。",
-      "evidenceRefs": [
-        "https://www.mlit.go.jp/report/press/tochi_fudousan_kensetsugyo13_hh_000001_00239.html"
-      ]
-    },
-    {
-      "themeKey": "healthcare",
-      "detail": "e-stat.go.jp(sid=0000010209、社会・人口統計体系 都道府県データ 社会生活統計指標 I.健康・医療)をWebFetchで確認。対象期間FY1975〜FY2024、公表日2026-02-20 14:00、全47都道府県+全国集計。ThemeCatalogのlatestDataYear・47都道府県カバレッジと齟齬なし。mhlw.go.jp配下(kekka1-2-4.html等、SJIS)は前回(2026-09-18)と同様WebFetchで文字化けし内容確認不能で、確認手段は持ち越し。",
-      "evidenceRefs": [
-        "https://www.e-stat.go.jp/dbview?sid=0000010209"
+        "https://www.env.go.jp/recycle/waste_tech/ippan/"
       ]
     }
   ],
   "status": "no-change",
-  "summary": "healthcare(1440px)で単発503を新規観測したが、同一URLが2.5分後(390px)には正常応答(buildId有り・cf-cache MISS)に戻り、2026-09-13に観測済みの他5テーマの散発503(09-18に再現せず解消)と同じ自己解消パターンで、テーマUI・ThemeCatalog・スクリプト側に対応する原因は特定できなかった。根拠のない推測修正は行っていないためコード変更なし。quality.jsonはerror 0・warn 62・actionableChange:falseで前回(2026-09-18)から劣化なし。experiments.jsonは全34新規launchのd7がquality-only/pendingを維持(due 09-18、d28期日10-09は未到達)、既存THEME-EXP-001のd56も3ガードでinsufficient-dataを維持し、いずれも新規effectラベルは付与していない。前回review(2026-09-18)と同月のため月次の原典全件確認・候補105住宅データ調査は今回対象外とし、同月内に残るunreviewedThemes(53件)のうちhealthcareのみ公式原典(e-stat sid=0000010209)を確認し、FY1975-2024・2026-02-20公表・47都道府県集計でカタログ定義と齟齬なしを確認した。mhlw.go.jp等のSJISページは前回同様文字化けで確認不能。残るテーマの確認は次回以降に持ち越す。",
+  "summary": "今回run(2026-10-01)はコード変更なし。前回観測したhealthcare(1440px)の単発503は55テーマ110件全PASSで再現せず、quality.jsonもerror 0・warn 62(既存partial-coverage)・actionableChange:falseで、テーマUI・ThemeCatalog・スクリプト側に対応する不具合は見つからなかった。月が変わった(2026-09→2026-10)ため公式原典の更新確認と候補105(地震曝露の住宅戸数空間原典)の未充足調査を実施。候補105は『令和2年国勢調査 地域メッシュ統計(人口及び世帯に関する編成)』と『平成30年住宅・土地統計調査(市・区・人口1.5万人以上の町村のみ)』の2つの官公庁一次資料を新たに確認したが、いずれも全国網羅の住宅空間原典にはならず、未充足(housingSpatialScope: unfulfilled)を維持する。waste-recyclingは公式原典(env.go.jp)で最新年次(FY2024)の一致を確認した。55テーマ全件の公式source再確認は時間制約により完了できず、今回確認できたのはwaste-recyclingの1テーマのみで、残り54テーマは次回以降に持ち越す。population-dynamics(THEME-EXP-001)のd56は3ガードでinsufficient-dataを維持し、新規34 launchのd7もquality-only/pendingのまま新規effectラベルは付与していない。証拠が揃う修正対象が今回は確認できなかったため、PRは準備していない。",
   "tests": [
-    "コード変更なし。修正対象が確定しなかったため追加のテストは実行していない。今回参照した実測はいずれも前段の決定的CIが生成済みのもの: quality.json(error 0 / warn 62 / actionableChange:false)、ci-followup.json(runtime 110件中109 PASS / healthcare 1440pxのみfailed)。"
+    "コード変更なし。前段の決定的CIが生成済みの実測を参照: runtime.log(110件中110PASS/failed:0)、quality.json(error:0, warn:62, actionableChange:false)",
+    "追加のテストは実行していない(修正対象が確定しなかったため)"
   ],
   "unreviewedThemes": [
     "aging-society",
@@ -56,6 +52,7 @@
     "climate",
     "communication-access",
     "community-participation",
+    "construction-industry",
     "consumer-prices",
     "cultural-participation",
     "daily-time-use",
@@ -70,6 +67,7 @@
     "gender-participation",
     "geographic-access",
     "health-checkups",
+    "healthcare",
     "household-assets-debt",
     "information-industry",
     "innovation-patents",
@@ -86,6 +84,7 @@
     "manufacturing",
     "natural-environment",
     "occupation-salary",
+    "population-dynamics",
     "ports",
     "public-assistance",
     "railway",
@@ -99,11 +98,10 @@
     "sports-participation",
     "tourism",
     "tsunami-exposure",
-    "waste-recycling",
     "water-services"
   ],
   "schemaVersion": 1,
-  "inputSha256": "b4b93071a633b25a9bcb04623cf774581eb4de620bd12dbb8c95081ab3c33b39",
-  "reviewedAt": "2026-09-28",
-  "month": "2026-09"
+  "inputSha256": "d254b8f4029e23b72c595713d45f5bacd87ddd5a893c4ba18ba277ac33a3ca61",
+  "reviewedAt": "2026-10-01",
+  "month": "2026-10"
 }
