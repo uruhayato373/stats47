@@ -14,7 +14,7 @@ export const metadata = { title: "ログインと資格情報 — stats47 admin"
  */
 function action(r: AuthCredentialRow): string | null {
   if (r.stored === false) return "未登録";
-  if (r.ciCredential && r.ciSecrets === false) return "CI 未登録";
+  if ((r.ciCredential || r.ciStored) && r.ciSecrets === false) return "CI 未登録";
   return null;
 }
 
@@ -24,9 +24,11 @@ function localCell(r: AuthCredentialRow) {
 }
 
 function ciCell(r: AuthCredentialRow) {
-  if (!r.ciCredential) return <span className="text-console-muted">—</span>;
+  if (!r.ciCredential && !r.ciStored) return <span className="text-console-muted">—</span>;
   if (r.ciSecrets === null) return <span className="text-console-muted">?</span>;
-  return r.ciSecrets ? <StatusBadge tone="good">済</StatusBadge> : <StatusBadge tone="warn">未</StatusBadge>;
+  if (!r.ciSecrets) return <StatusBadge tone="warn">未</StatusBadge>;
+  // CI が実際に使うのは ciCredential だけ。保管だけのものは「保管」(理由は自動ログイン欄のツールチップ)
+  return r.ciCredential ? <StatusBadge tone="good">済</StatusBadge> : <StatusBadge tone="info">保管</StatusBadge>;
 }
 
 export default function AuthCredentialsPage() {
@@ -41,7 +43,7 @@ export default function AuthCredentialsPage() {
   }
   const todo = v.rows.filter((r) => action(r));
   const unregistered = v.rows.filter((r) => r.stored === false);
-  const ciMissing = v.rows.filter((r) => r.ciCredential && r.ciSecrets === false);
+  const ciMissing = v.rows.filter((r) => (r.ciCredential || r.ciStored) && r.ciSecrets === false);
 
   return (
     <div className="space-y-8">
@@ -75,7 +77,7 @@ export default function AuthCredentialsPage() {
             })}
           </DataTable>
           <p className="mt-1 text-[11px] text-console-muted">
-            CI は note・ココナラ・KDP だけがパスワードを使う (セッション切れの入り直し)。方針は「自動ログイン」欄にマウスを置くと出る。
+            CI は note・ココナラ・KDP だけがパスワードを使う (セッション切れの入り直し)。「保管」は Secrets にあるだけで CI は使わない。方針は「自動ログイン」欄にマウスを置くと出る。
             登録状況は npm run admin の起動時に調べる。パスワードは表示も読み出しもしない。
           </p>
         </Section>

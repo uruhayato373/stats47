@@ -17,6 +17,7 @@ export interface AuthCredentialRow {
   storeItem: string;
   autoLogin: boolean;
   ciCredential: boolean;
+  ciStored: boolean;
   policyNote: string;
   stored: boolean | null;
   user: string | null;
@@ -29,6 +30,7 @@ interface ServiceSpec {
   storeItem: string;
   autoLogin: boolean;
   ciCredential: boolean;
+  ciStored?: boolean;
   policyNote: string;
 }
 
@@ -66,10 +68,11 @@ export function authCredentialRows() {
         storeItem: s.storeItem,
         autoLogin: s.autoLogin,
         ciCredential: s.ciCredential,
+        ciStored: s.ciStored === true,
         policyNote: s.policyNote,
         stored: local ? local.stored : null,
         user: local?.user ?? null,
-        ciSecrets: !s.ciCredential || !secrets
+        ciSecrets: !(s.ciCredential || s.ciStored) || !secrets
           ? null
           : secrets.has(`STATS47_AUTH_${key}_USER`) && secrets.has(`STATS47_AUTH_${key}_PASSWORD`),
         registerCommand: mac
