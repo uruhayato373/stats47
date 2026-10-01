@@ -1,0 +1,105 @@
+{
+  "_doc": "code-reviewer の canary。欠陥を仕込んだ差分 (cases)をレビューさせ、各欠陥を指摘できたか (recall) を正規表現で機械採点する。正解をモデルに見せない。fixture を変えたら過去の結果と比べない (fixtureVersion を上げる)。採点は欠陥の説明に当たる語句で行い、差分に含まれるコード片 (size - 1 / === 0 / forEach) そのものは正解にしない (引用しただけで当たるため)",
+  "agent": "code-reviewer",
+  "fixtureVersion": 3,
+  "_versionNote": "v1 は basic 1 件のみ。2026-10-02 の初回比較で Opus 4.8 / Sonnet 5.5 とも満点になり差が測れなかったため、気づきにくい欠陥の subtle を足して v2 にした。v3 (2026-10-02): Sonnet 5.5 の「実際の 0 値と欠損値を区別できない」を取りこぼしたので zero-as-missing の語句を広げた (--rescore で保存済み出力を採点し直せる)",
+  "cases": [
+    {
+      "id": "basic",
+      "prompt": "次の差分をレビューしてください。ファイルは読めないので、差分だけから判断してください。問題点を file:line と理由付きで全件挙げてください。\n\n```diff\ndiff --git a/packages/ranking/src/paginate.ts b/packages/ranking/src/paginate.ts\n--- a/packages/ranking/src/paginate.ts\n+++ b/packages/ranking/src/paginate.ts\n@@ -1,6 +1,6 @@\n export function pageOf<T>(items: T[], page: number, size: number): T[] {\n-  return items.slice(page * size, page * size + size);\n+  return items.slice(page * size, page * size + size - 1);\n }\ndiff --git a/apps/web/src/features/ranking/format.ts b/apps/web/src/features/ranking/format.ts\n--- a/apps/web/src/features/ranking/format.ts\n+++ b/apps/web/src/features/ranking/format.ts\n@@ -3,7 +3,7 @@\n export function formatValue(value: number | null, unit: string): string {\n-  if (value === null) return \"—\";\n+  if (value == null || value === 0) return \"—\";\n   return `${value.toLocaleString(\"ja-JP\")}${unit}`;\n }\ndiff --git a/packages/r2-storage/src/sync.ts b/packages/r2-storage/src/sync.ts\n--- a/packages/r2-storage/src/sync.ts\n+++ b/packages/r2-storage/src/sync.ts\n@@ -10,8 +10,7 @@\n export async function pushAll(keys: string[], put: (k: string) => Promise<void>): Promise<string> {\n-  for (const k of keys) await put(k);\n+  keys.forEach(async (k) => await put(k));\n   return \"done\";\n }\ndiff --git a/packages/database/src/query.ts b/packages/database/src/query.ts\n--- a/packages/database/src/query.ts\n+++ b/packages/database/src/query.ts\n@@ -1,5 +1,5 @@\n export function findMetric(db: Db, key: string) {\n-  return db.prepare(\"SELECT key, title FROM metrics WHERE key = ?\").get(key);\n+  return db.prepare(`SELECT key, title FROM metrics WHERE key = '${key}'`).get();\n }\n```",
+      "expected": [
+        {
+          "id": "slice-off-by-one",
+          "anyOf": [
+            "off[- ]?by[- ]?one",
+            "(末尾|最後|最終)の?.{0,8}(件|要素|個|アイテム|項目).{0,15}(欠|落|含まれ|漏|抜け|返らな)",
+            "1\\s*(件|個|要素)(少な|欠|落|足りな|抜け)",
+            "(含まれない|除外され|取りこぼ|抜け落ち)"
+          ]
+        },
+        {
+          "id": "zero-as-missing",
+          "anyOf": [
+            "\\b0\\b\\s*(を|が|も|は|の値).{0,40}(欠損|—|ダッシュ|表示されな|隠|区別|null)",
+            "ゼロ.{0,40}(欠損|—|ダッシュ|表示|隠|区別|null)",
+            "(正当|有効|実在|正しい)な\\s*(0|ゼロ)",
+            "\\bzero\\b.{0,40}(missing|hidden|dash|null)",
+            "(実際|本当|本来)の\\s*(0|ゼロ)",
+            "\\b0\\s*値",
+            "\\b0\\s*(件|%|％).{0,30}(正当|有効|正常)"
+          ]
+        },
+        {
+          "id": "foreach-async",
+          "anyOf": [
+            "forEach[^\\n(]{0,60}(await されない|待たない|待たず|完了を待|Promise を(返|無視)|ignores?|doesn'?t await|not awaited)",
+            "(await|待|完了).{0,30}(されない|しない|待たない|前に|せず)",
+            "fire[- ]and[- ]forget",
+            "(未処理|unhandled).{0,20}(reject|拒否|Promise)",
+            "not\\s+awaited"
+          ]
+        },
+        {
+          "id": "sql-injection",
+          "anyOf": [
+            "sql\\s*injection",
+            "SQL\\s*インジェクション",
+            "インジェクション",
+            "プレースホルダ",
+            "placeholder",
+            "バインド"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "subtle",
+      "prompt": "次の差分をレビューしてください。ファイルは読めないので、差分だけから判断してください。問題点を file:line と理由付きで全件挙げてください。\n\n```diff\ndiff --git a/.claude/scripts/metrics/weekly-label.mjs b/.claude/scripts/metrics/weekly-label.mjs\n--- a/.claude/scripts/metrics/weekly-label.mjs\n+++ b/.claude/scripts/metrics/weekly-label.mjs\n@@ -1,6 +1,6 @@\n-export function todayLabel(now = new Date()) {\n-  return new Intl.DateTimeFormat(\"sv-SE\", { timeZone: \"Asia/Tokyo\" }).format(now);\n-}\n+export function todayLabel(now = new Date()) {\n+  return now.toISOString().slice(0, 10);\n+}\ndiff --git a/packages/ranking/src/rank.ts b/packages/ranking/src/rank.ts\n--- a/packages/ranking/src/rank.ts\n+++ b/packages/ranking/src/rank.ts\n@@ -4,12 +4,8 @@ export interface Entry { areaCode: string; value: number }\n export function assignRanks(entries: Entry[]): Array<Entry & { rank: number }> {\n-  const sorted = [...entries].sort((x, y) => y.value - x.value);\n-  return sorted.map((e) => ({ ...e, rank: 1 + sorted.filter((o) => o.value > e.value).length }));\n+  const sorted = [...entries].sort((x, y) => y.value - x.value);\n+  return sorted.map((e, i) => ({ ...e, rank: i + 1 }));\n }\ndiff --git a/packages/ranking/src/median.ts b/packages/ranking/src/median.ts\n--- a/packages/ranking/src/median.ts\n+++ b/packages/ranking/src/median.ts\n@@ -1,7 +1,7 @@\n export function median(values: number[]): number {\n-  const v = [...values].sort((x, y) => x - y);\n+  const v = [...values].sort();\n   const mid = Math.floor(v.length / 2);\n   return v.length % 2 ? v[mid] : (v[mid - 1] + v[mid]) / 2;\n }\ndiff --git a/apps/web/src/lib/cache.ts b/apps/web/src/lib/cache.ts\n--- a/apps/web/src/lib/cache.ts\n+++ b/apps/web/src/lib/cache.ts\n@@ -8,7 +8,7 @@ const memo = new Map<string, unknown>();\n export function cacheKey(areaCode: string, year: string): string {\n-  return JSON.stringify([areaCode, year]);\n+  return areaCode + year;\n }\n```",
+      "expected": [
+        {
+          "id": "utc-date",
+          "anyOf": [
+            "UTC",
+            "タイムゾーン",
+            "時差",
+            "日本時間",
+            "JST",
+            "9\\s*時",
+            "Asia/Tokyo.{0,40}(消え|失わ|無くな|削除|外れ|使わ)",
+            "time\\s+zone\\b(?!:)"
+          ]
+        },
+        {
+          "id": "tie-rank",
+          "anyOf": [
+            "同(値|順位|率|点)",
+            "タイ\\b|\\btie",
+            "同じ値.{0,30}(順位|rank|別)",
+            "並列"
+          ]
+        },
+        {
+          "id": "lexicographic-sort",
+          "anyOf": [
+            "(辞書|文字列)(順|として|比較)",
+            "lexicographic",
+            "比較関数",
+            "compare\\s*(fn|function)",
+            "10\\s*が\\s*9\\s*より前|\\[\\s*1\\s*,\\s*10\\s*,\\s*2\\s*\\]"
+          ]
+        },
+        {
+          "id": "cache-key-collision",
+          "anyOf": [
+            "衝突",
+            "collision",
+            "区切り",
+            "separator",
+            "一意(で|に)(ない|なく|ならない)",
+            "区別(でき|され)な"
+          ]
+        }
+      ]
+    }
+  ]
+}

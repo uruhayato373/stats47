@@ -38,6 +38,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 45
     env:
+      # claude_args と使用量の記録が同じ値を読む (1 か所で変える)
+      CLAUDE_EFFORT: high
       DRY_RUN: ${{ inputs.dry_run || 'false' }}
     steps:
       - name: 🧰 Checkout develop
@@ -116,7 +118,7 @@ jobs:
       - name: 🧾 Record measurements with Claude Code (improvement-triage)
         id: claude
         if: ${{ env.DRY_RUN != 'true' }}
-        uses: anthropics/claude-code-base-action@09641f2ee92b8a382a1c63c69b915d7a4540d6b6 # Claude Code v2.1.220 (base-action main 2026-08-02)
+        uses: anthropics/claude-code-base-action@4bd489c7d926da56528f2d27386d1ea78737fc5c # Claude Code v2.1.287 (base-action main 2026-10-01。sonnet / opus の別名が 5.5 に解決される版)
         env:
           NODE_VERSION: "20.x"
           GOOGLE_SERVICE_ACCOUNT_KEY_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_KEY_JSON }}
@@ -131,7 +133,7 @@ jobs:
             }
           claude_args: |
             --model sonnet
-            --effort high
+            --effort ${{ env.CLAUDE_EFFORT }}
             --max-turns 150
             --no-session-persistence
             --setting-sources project
@@ -224,39 +226,15 @@ jobs:
           echo "::error::develop への push に 3 回失敗した"
           exit 1
 
-      # 計測のみ。失敗しても本体の成否を変えないよう、push 失敗は warning で終える
+      # 計測のみ。失敗しても本体の成否を変えない (共通スクリプトが常に exit 0)
       - name: 📊 Record token usage
         if: ${{ always() && steps.claude.outcome != 'skipped' }}
         env:
           CLAUDE_EXECUTION_FILE: ${{ steps.claude.outputs.execution_file }}
-          RUN_ID: ${{ github.run_id }}
         run: |
-          FILE="${CLAUDE_EXECUTION_FILE:-/home/runner/work/_temp/claude-execution-output.json}"
           # items = この run が削除または更新した施策の数 (ゲート結果から。ゲート前に落ちたら 0)
           ITEMS=$(node -e 'try{const i=require("./.claude/state/metrics/measurement-cycle/triage-latest.json").improvements;process.stdout.write(String(i.deleted.length+i.updated.length))}catch{process.stdout.write("0")}')
-          if ! node .claude/scripts/lib/record-claude-usage.mjs "$FILE" \
-            --workflow improvement-cycle \
-            --run-id "$RUN_ID" \
-            --limit 8 \
-            --items "$ITEMS"; then
-            echo "::warning::トークン実績を記録できなかった (計測のみ・本体には影響しない)"
-            exit 0
-          fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .claude/state/metrics/claude-usage || true
-          if git diff --cached --quiet; then echo "記録する変更なし"; exit 0; fi
-          git commit -q -m "chore(metrics): record Claude token usage [skip ci]"
-          git stash push --include-untracked --quiet || true
-          for _ in 1 2 3; do
-            if git pull --rebase --quiet origin develop && git push origin HEAD:develop; then
-              echo "✅ トークン実績を記録した"
-              exit 0
-            fi
-            sleep 5
-          done
-          echo "::warning::トークン実績の push に失敗した (計測のみ・本体には影響しない)"
-          exit 0
+          bash .claude/scripts/lib/record-claude-usage-ci.sh "$CLAUDE_EXECUTION_FILE" improvement-cycle 8 "$ITEMS" "$CLAUDE_EFFORT"
 
       - name: 🚨 Upsert failure issue
         if: ${{ failure() && env.DRY_RUN != 'true' }}

@@ -1,0 +1,227 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-01T19:59:46.751Z",
+  "agent": "code-reviewer",
+  "fixture": {
+    "file": ".claude/scripts/model-usage/canary-fixtures/code-reviewer.json",
+    "version": 3,
+    "expected": [
+      "basic/slice-off-by-one",
+      "basic/zero-as-missing",
+      "basic/foreach-async",
+      "basic/sql-injection",
+      "subtle/utc-date",
+      "subtle/tie-rank",
+      "subtle/lexicographic-sort",
+      "subtle/cache-key-collision"
+    ]
+  },
+  "baseline": {
+    "model": "opus",
+    "effort": "xhigh"
+  },
+  "candidate": {
+    "model": "claude-sonnet-5-5",
+    "effort": "xhigh"
+  },
+  "repeats": 2,
+  "rules": {
+    "maxRecallDrop": 0,
+    "maxCostRatio": 1.1
+  },
+  "verdict": "pass",
+  "scores": {
+    "baseline": {
+      "recall": 1,
+      "cost": 0.7933065
+    },
+    "candidate": {
+      "recall": 1,
+      "cost": 0.394017
+    }
+  },
+  "runs": {
+    "baseline": [
+      {
+        "hits": [
+          {
+            "id": "basic/slice-off-by-one",
+            "hit": true
+          },
+          {
+            "id": "basic/zero-as-missing",
+            "hit": true
+          },
+          {
+            "id": "basic/foreach-async",
+            "hit": true
+          },
+          {
+            "id": "basic/sql-injection",
+            "hit": true
+          },
+          {
+            "id": "subtle/utc-date",
+            "hit": true
+          },
+          {
+            "id": "subtle/tie-rank",
+            "hit": true
+          },
+          {
+            "id": "subtle/lexicographic-sort",
+            "hit": true
+          },
+          {
+            "id": "subtle/cache-key-collision",
+            "hit": true
+          }
+        ],
+        "recall": 1,
+        "isError": false,
+        "costUsd": 0.793655,
+        "durationMs": 120007,
+        "models": [
+          "claude-opus-5-5"
+        ],
+        "outputTokens": 11410
+      },
+      {
+        "hits": [
+          {
+            "id": "basic/slice-off-by-one",
+            "hit": true
+          },
+          {
+            "id": "basic/zero-as-missing",
+            "hit": true
+          },
+          {
+            "id": "basic/foreach-async",
+            "hit": true
+          },
+          {
+            "id": "basic/sql-injection",
+            "hit": true
+          },
+          {
+            "id": "subtle/utc-date",
+            "hit": true
+          },
+          {
+            "id": "subtle/tie-rank",
+            "hit": true
+          },
+          {
+            "id": "subtle/lexicographic-sort",
+            "hit": true
+          },
+          {
+            "id": "subtle/cache-key-collision",
+            "hit": true
+          }
+        ],
+        "recall": 1,
+        "isError": false,
+        "costUsd": 0.792958,
+        "durationMs": 128104,
+        "models": [
+          "claude-opus-5-5"
+        ],
+        "outputTokens": 11872
+      }
+    ],
+    "candidate": [
+      {
+        "hits": [
+          {
+            "id": "basic/slice-off-by-one",
+            "hit": true
+          },
+          {
+            "id": "basic/zero-as-missing",
+            "hit": true
+          },
+          {
+            "id": "basic/foreach-async",
+            "hit": true
+          },
+          {
+            "id": "basic/sql-injection",
+            "hit": true
+          },
+          {
+            "id": "subtle/utc-date",
+            "hit": true
+          },
+          {
+            "id": "subtle/tie-rank",
+            "hit": true
+          },
+          {
+            "id": "subtle/lexicographic-sort",
+            "hit": true
+          },
+          {
+            "id": "subtle/cache-key-collision",
+            "hit": true
+          }
+        ],
+        "recall": 1,
+        "isError": false,
+        "costUsd": 0.40478800000000004,
+        "durationMs": 104976,
+        "models": [
+          "claude-sonnet-5-5"
+        ],
+        "outputTokens": 12719
+      },
+      {
+        "hits": [
+          {
+            "id": "basic/slice-off-by-one",
+            "hit": true
+          },
+          {
+            "id": "basic/zero-as-missing",
+            "hit": true
+          },
+          {
+            "id": "basic/foreach-async",
+            "hit": true
+          },
+          {
+            "id": "basic/sql-injection",
+            "hit": true
+          },
+          {
+            "id": "subtle/utc-date",
+            "hit": true
+          },
+          {
+            "id": "subtle/tie-rank",
+            "hit": true
+          },
+          {
+            "id": "subtle/lexicographic-sort",
+            "hit": true
+          },
+          {
+            "id": "subtle/cache-key-collision",
+            "hit": true
+          }
+        ],
+        "recall": 1,
+        "isError": false,
+        "costUsd": 0.383246,
+        "durationMs": 89684,
+        "models": [
+          "claude-sonnet-5-5"
+        ],
+        "outputTokens": 10470
+      }
+    ]
+  },
+  "raw": ".local/model-canary/2026-10-01-code-reviewer-opus-xhigh-vs-claude-sonnet-5-5-xhigh",
+  "rescoredAt": "2026-10-01T19:59:52.610Z"
+}

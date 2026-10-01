@@ -17,7 +17,7 @@ import {
 } from "./state-io";
 
 /**
- * CI の健全性と、能力の台帳 (agents / skills / memory)。
+ * CI の健全性と、memory の台帳。agents / skills の一覧はモデル・使用量と一緒に agent-models.ts (/ops/agents) が持つ。
  *
  * ★台帳は frontmatter だけ読む。agents 61 / skills 157 / memory 109 の本文まで読むと
  *   毎リクエスト数 MB を舐めることになる。ここで要るのは「何がいるか」の一覧で、
@@ -36,11 +36,6 @@ export interface WorkflowHealth {
 export interface LedgerEntry {
   name: string;
   description: string;
-  /** agents のみ。skills は frontmatter に model を持たない */
-  model?: string | null;
-  /** skills のみ */
-  primaryAgent?: string | null;
-  /** memory のみ */
   type?: string | null;
   relPath: string;
 }
@@ -65,8 +60,6 @@ export interface OpsSummary {
   }>;
   r2Freshness: Wrapped<Array<{ key: string; status: string; ageDays: number | null; maxAgeDays: number | null }>>;
   usage: Wrapped<{ columns: string[]; rows: ClaudeUsageRow[] }>;
-  agents: Wrapped<LedgerEntry[]>;
-  skills: Wrapped<LedgerEntry[]>;
   memories: Wrapped<LedgerEntry[]>;
 }
 
@@ -124,8 +117,6 @@ function frontmatterOf(abs: string) {
   return {
     name: frontmatterValue(head, "name"),
     description: frontmatterValue(head, "description"),
-    model: frontmatterValue(head, "model"),
-    primaryAgent: frontmatterValue(head, "primary_agent"),
     type: frontmatterValue(head, "type"),
   };
 }
@@ -181,16 +172,6 @@ export function opsSummary(): OpsSummary {
     ci: readCi(),
     r2Freshness: readR2Freshness(),
     usage: readUsage(),
-    agents: wrap(() =>
-      toEntries(listMarkdown(".claude/agents"), (fm) => ({ model: fm.model })).filter(
-        (e) => e.name !== "README",
-      ),
-    ),
-    skills: wrap(() =>
-      toEntries(listMarkdown(".claude/skills", { recursive: true, fileName: "SKILL.md" }), (fm) => ({
-        primaryAgent: fm.primaryAgent,
-      })),
-    ),
     memories: wrap(() =>
       toEntries(listMarkdown(".claude/memory"), (fm) => ({ type: fm.type })).filter(
         (e) => e.name !== "MEMORY",

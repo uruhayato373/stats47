@@ -1,4 +1,4 @@
-import { Cell, DataTable, Row, StatCard, StatusBadge } from "@/components/admin-ui";
+import { Cell, DataTable, LinkCard, Row, StatCard, StatusBadge } from "@/components/admin-ui";
 import { Section } from "@/components/layout-primitives";
 import { ErrorNote, Freshness, PageHeading } from "@/components/ops/primitives";
 import { opsSummary } from "@/lib/server/ops-ledger";
@@ -12,7 +12,7 @@ export default function OpsPage() {
 
   return (
     <div className="space-y-8">
-      <PageHeading title="CI・台帳" source=".claude/state/ci/ ・ .claude/{agents,skills,memory}/" />
+      <PageHeading title="CI・台帳" source=".claude/state/ci/ ・ .claude/memory/" />
 
       {/* CI 健全性 */}
       <Section title="workflow の健全性">
@@ -104,11 +104,13 @@ export default function OpsPage() {
         )}
       </Section>
 
-      {/* 台帳 */}
+      {/* 台帳。agents / skills はモデル・effort・実測費用と一緒に /ops/agents が持つ (同じ一覧を 2 画面に置かない) */}
       <Section title="能力の台帳">
         <div className="grid gap-4 lg:grid-cols-3">
-          <Ledger title="agents" data={d.agents} extra="model" />
-          <Ledger title="skills" data={d.skills} extra="primaryAgent" />
+          <LinkCard href="/ops/agents">
+            <div className="font-semibold">エージェントとスキル</div>
+            <div className="text-[12px] text-console-muted">モデル・effort・直近の使用量・改善提案は「エージェントとモデル」で見る</div>
+          </LinkCard>
           <Ledger title="memory" data={d.memories} extra="type" />
         </div>
       </Section>
@@ -122,8 +124,8 @@ function Ledger({
   extra,
 }: {
   title: string;
-  data: ReturnType<typeof opsSummary>["agents"];
-  extra: "model" | "primaryAgent" | "type";
+  data: ReturnType<typeof opsSummary>["memories"];
+  extra: "type";
 }) {
   if (hasError(data)) {
     return (

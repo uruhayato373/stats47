@@ -18,6 +18,10 @@ permissions:
 concurrency:
   group: theme-chart-audit
   cancel-in-progress: false
+env:
+  # claude_args と使用量の記録が同じ値を読む (1 か所で変える)
+  CLAUDE_EFFORT: high
+
 jobs:
   audit:
     runs-on: ubuntu-latest
@@ -140,7 +144,7 @@ jobs:
         id: review
         if: always() && steps.review_plan.outputs.run == 'true'
         timeout-minutes: 20
-        uses: anthropics/claude-code-base-action@09641f2ee92b8a382a1c63c69b915d7a4540d6b6 # v2.1.220
+        uses: anthropics/claude-code-base-action@4bd489c7d926da56528f2d27386d1ea78737fc5c # Claude Code v2.1.287 (base-action main 2026-10-01。sonnet / opus の別名が 5.5 に解決される版)
         env:
           NODE_VERSION: '20.x'
         with:
@@ -151,7 +155,7 @@ jobs:
           claude_args: |
             --model sonnet
             --json-schema '{"type":"object","properties":{"status":{"type":"string","enum":["proposed","no-change","blocked"]},"summary":{"type":"string","minLength":20,"maxLength":1000},"findings":{"type":"array","items":{"type":"object","properties":{"themeKey":{"type":"string"},"detail":{"type":"string","minLength":20},"evidenceRefs":{"type":"array","items":{"type":"string","minLength":10},"minItems":1}},"required":["themeKey","detail","evidenceRefs"],"additionalProperties":false},"maxItems":10},"tests":{"type":"array","items":{"type":"string"}},"sourceReviews":{"type":"array","items":{"type":"object","properties":{"themeKey":{"type":"string"},"detail":{"type":"string","minLength":20},"evidenceRefs":{"type":"array","items":{"type":"string","minLength":10},"minItems":1}},"required":["themeKey","detail","evidenceRefs"],"additionalProperties":false}}},"required":["status","summary","findings","sourceReviews","tests"],"additionalProperties":false}'
-            --effort high
+            --effort ${{ env.CLAUDE_EFFORT }}
             --max-turns 80
             --no-session-persistence
             --setting-sources project
@@ -245,3 +249,11 @@ jobs:
           RUNTIME_CODE: ${{ steps.check.outputs.runtime_code }}
         run: |
           test "$CHECK_OUTCOME" = success && test "$LIVE_CODE" = 0 && test "$QUALITY_CODE" = 0 && test "$ALERT_CODE" = 0 && test "$SUMMARY_CODE" = 0 && test "$RUNTIME_CODE" = 0
+
+      # 計測のみ (失敗しても本体の成否を変えない)。model / effort ごとの費用を比べるため history.csv に 1 行足す。
+      # 正典: .claude/rules/model-prompting.md「継続最適化サイクル」
+      - name: 📊 Record token usage
+        if: ${{ always() && (steps.review.outcome == 'success' || steps.review.outcome == 'failure') }}
+        env:
+          CLAUDE_EXECUTION_FILE: ${{ steps.review.outputs.execution_file }}
+        run: bash .claude/scripts/lib/record-claude-usage-ci.sh "$CLAUDE_EXECUTION_FILE" theme-chart-review 1 1 "$CLAUDE_EFFORT"

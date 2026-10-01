@@ -14,6 +14,8 @@ paths:
 - [Prompting Claude Opus 5](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-opus-5)
 - [Prompting Claude Fable 5](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5)
 - [Prompting Claude Sonnet 5](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-sonnet-5)
+- [Subagent frontmatter](https://code.claude.com/docs/en/sub-agents) (`model` / `effort` の許容値。2026-10-02 参照)
+- [Pricing](https://platform.claude.com/docs/en/about-claude/pricing) (単価の正本。写しは `.claude/config/model-pricing.json`)
 - [Prompting best practices](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices)
 
 ## 共通の Task Capsule
@@ -108,3 +110,29 @@ visible output量、token/cost、所要時間。保存する場合は
 `.claude/state/metrics/prompt-evals/YYYY-MM-DD.json`へ置く。モデル、effort、promptの複数要因を
 同時に変えず、採用条件を先に固定する。PRの静的checkerは構造driftを防ぐ床であり、実モデルevalの
 代替ではない。
+
+## 継続最適化サイクル (計測 → 記録 → 改善)
+
+モデルと effort は印象で変えず、次の 3 段で回す (2026-10-02 導入)。閾値は
+`.claude/config/model-optimization-policy.json`、単価は `.claude/config/model-pricing.json` だけに置く。
+
+| 段 | 何をするか | 実体 |
+|---|---|---|
+| 計測 | 対話・agent の使用量を transcript から集計 (agent × モデル × effort × 週)。CI の無人実行は 1 run 1 行 | `npm run model-usage:collect` (`npm run admin` 起動時にも走る) / `record-claude-usage-ci.sh` (5 workflow) |
+| 記録 | 集計と提案を 1 ファイルにまとめる | `npm run model-usage:report` → `.claude/state/metrics/model-usage/latest.json`、表示は管理画面 `/ops/agents` |
+| 改善 | 決定的な規則で「試す価値がある変更」を出し、canary (答えの分かっている課題) の recall と費用で合否を決める | `proposeChanges` (usage-core.mjs) / `npm run model-usage:canary -- --agent <name> --model <候補>` |
+
+- **effort を継承させない。** agent frontmatter の `effort` を省くと呼び出し元セッションの effort を継承する
+  (公式 sub-agents 欄)。2026-10-02 の実測では応答の 6 割強が xhigh で、日常作業の agent まで xhigh で動いていた。
+  提案 `set-effort` が出た agent は canary で `high` と比べ、品質が落ちなければ frontmatter に書く。
+- **別名の解決先は Claude Code の版で変わる。** 実測 (2026-10-02): CLI 2.1.197 では `sonnet` → claude-sonnet-5・
+  `opus` → claude-opus-4-8、2.1.287 では両方 5.5。Opus 5.5 は 2.1.280 未満で API 400。CI は
+  claude-code-base-action の固定 SHA が入れる版で決まるので、新モデルが出たら固定 SHA を上げる。
+  提案 `stale-alias` は「別名が系統の最新版 (policy.latestModels) 以外に解決された」実測を出す。
+- **提案は自動で適用しない。** frontmatter / workflow の書き換えは canary 合格を見て人が行う。
+  canary 不合格は「据え置き」と表示される。採点は正規表現だけで行い、モデルに採点させない。
+- **canary の fixture は採点器ごと検証する。** 課題文そのものを採点して 0 になること (差分の引用だけで当たらない)、
+  模範解答が満点になることを確かめてから使う。両者が満点になる課題は差を測れないので、難しい case を足して
+  `fixtureVersion` を上げる (版の違う結果どうしは比べない)。
+- 週次では `/weekly-review` が `latest.json` の提案を読み、採否と canary の要否を決める。
+

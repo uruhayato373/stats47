@@ -220,8 +220,8 @@ describe("ops-ledger server", () => {
             { workflow: "warn.yml", unhealthy: true, failureStreak: 2, everSucceeded: true },
           ],
         }),
-        ".claude/agents/alpha.md":
-          "---\nname: alpha\ndescription: A エージェント\nmodel: sonnet\n---\n\n" + "本文".repeat(5000),
+        ".claude/memory/alpha.md":
+          "---\nname: alpha\ndescription: A の記憶\nmetadata:\n  type: project\n---\n\n" + "本文".repeat(5000),
       },
     });
     const { opsSummary } = await load(root, "@/lib/server/ops-ledger");
@@ -230,12 +230,13 @@ describe("ops-ledger server", () => {
     expect(d.ci.unhealthyCount).toBe(2);
     expect(d.ci.workflows.map((w: any) => w.workflow)).toEqual(["bad.yml", "warn.yml", "ok.yml"]);
 
-    expect(d.agents).toEqual([
-      expect.objectContaining({ name: "alpha", model: "sonnet", description: "A エージェント" }),
-    ]);
+    expect(d.memories).toEqual([expect.objectContaining({ name: "alpha", description: "A の記憶" })]);
     // 本文は読み込んでいない (description は frontmatter 由来で 200 字以内)
-    expect(d.agents[0].description.length).toBeLessThanOrEqual(200);
-    expect(JSON.stringify(d.agents)).not.toContain("本文本文");
+    expect(d.memories[0].description.length).toBeLessThanOrEqual(200);
+    expect(JSON.stringify(d.memories)).not.toContain("本文本文");
+    // agents / skills は /ops/agents (agent-models.ts) が持つ。同じ一覧を 2 画面で描かない
+    expect(d).not.toHaveProperty("agents");
+    expect(d).not.toHaveProperty("skills");
   });
 
   it("CI state が無くても {error} に畳む", async () => {

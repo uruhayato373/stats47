@@ -94,6 +94,7 @@
         { "label": "品質", "href": "/quality", "kind": "results" },
         { "label": "CI・台帳", "href": "/ops", "kind": "actions" },
         { "label": "CI ワークフロー", "href": "/ops/workflows", "kind": "results" },
+        { "label": "エージェントとモデル", "href": "/ops/agents", "kind": "inventory" },
         { "label": "ログインと資格情報", "href": "/ops/auth", "kind": "results" },
         { "label": "画像資産", "href": "/assets", "kind": "assets" },
         { "label": "SVG カタログ", "href": "/svg", "kind": "assets" }

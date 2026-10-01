@@ -1,0 +1,32 @@
+{
+  "_doc": "モデル・effort 最適化の閾値の唯一の置き場。.claude/scripts/model-usage/usage-core.mjs の proposeChanges と run-canary.mjs が読む。スクリプトに数値を直書きしない。提案は「試す価値がある」までで、frontmatter を自動で書き換えない。正典: .claude/rules/model-prompting.md「継続最適化サイクル」",
+  "windowWeeks": 4,
+  "minRuns": 3,
+  "minCostUsd": 20,
+  "heavyEfforts": [
+    "xhigh",
+    "max"
+  ],
+  "heavyEffortShare": 0.5,
+  "defaultEffortSuggestion": "high",
+  "minSavingUsd": 5,
+  "downgradeTarget": {
+    "fable": "claude-opus-5-5",
+    "opus": "claude-sonnet-5-5"
+  },
+  "driftShare": 0.5,
+  "latestModels": {
+    "_doc": "系統ごとの最新版 (2026-10-02 時点、出典 https://platform.claude.com/docs/en/about-claude/pricing)。新モデルが出たらここだけ更新する",
+    "haiku": "claude-haiku-4-5",
+    "sonnet": "claude-sonnet-5-5",
+    "opus": "claude-opus-5-5",
+    "fable": "claude-fable-5-1"
+  },
+  "canary": {
+    "_doc": "候補設定が合格する条件。recall = 既知の正解 (仕込んだ欠陥など) をどれだけ見つけたか。baseline と同じ fixture・同じ回数で比べる。baselineEffort は --baseline-effort 省略時の値で、ローカル実測で agent が継承していた effort (xhigh が 6 割強、2026-10-02)。maxCostRatio 1.1 は同一設定 2 回の揺れを不合格にしないため (2026-10-02 実測: 同じ設定で出力トークンが 2093 と 2516、約 20% 揺れた)",
+    "repeats": 2,
+    "baselineEffort": "xhigh",
+    "maxRecallDrop": 0,
+    "maxCostRatio": 1.1
+  }
+}

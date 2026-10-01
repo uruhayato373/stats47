@@ -46,8 +46,8 @@ export function createUtf8Collector(): {
  */
 export const CLAUDE_CLI_MODELS = {
   "claude-haiku": "claude-haiku-4-5",
-  "claude-sonnet": "claude-sonnet-5",
-  "claude-opus": "claude-opus-5",
+  "claude-sonnet": "claude-sonnet-5-5",
+  "claude-opus": "claude-opus-5-5",
 } as const;
 
 export type ClaudeCliAlias = keyof typeof CLAUDE_CLI_MODELS;
