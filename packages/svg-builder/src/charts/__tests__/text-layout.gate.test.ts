@@ -97,7 +97,7 @@ describe("generateLineSvg: 長いラベルでも文字がはみ出さず重な�
     );
   });
 
-  itKnown("47 都道府県を X 軸に並べる (回転が必要なケース)", () => {
+  it("47 都道府県を X 軸に並べる (回転が必要なケース)", () => {
     const data = rows(PREFS, ["2015年", "2020年"], (xi, si) => 1_000_000 + xi * 20_000 + si * 5_000, "人");
     expectClean(
       generateLineSvg(data, { title: "都道府県別の人口", unit: "人", xKey: "yearCode", seriesKey: "areaCode", xLabel: "都道府県" }),

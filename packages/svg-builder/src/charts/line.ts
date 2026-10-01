@@ -94,6 +94,11 @@ export function generateLineSvg(data: StatsSchema[], options: LineChartOptions):
     const step = yTicks.length >= 2 ? yTicks[1] - yTicks[0] : yHi;
     yTicks.push(parseFloat((yTicks[yTicks.length - 1] + step).toFixed(10)));
   }
+  // 負の値: niceTicks は lo を切り上げて始まるため、最小値が最下段の目盛りより下に出る
+  while (yTicks[0] > yLo) {
+    const step = yTicks.length >= 2 ? yTicks[1] - yTicks[0] : Math.abs(yLo);
+    yTicks.unshift(parseFloat((yTicks[0] - step).toFixed(10)));
+  }
   const yScaleLo = yTicks[0];
   const yScaleHi = yTicks[yTicks.length - 1];
 
@@ -159,7 +164,8 @@ export function generateLineSvg(data: StatsSchema[], options: LineChartOptions):
       const itemWidth = 90;
       const totalW = series.length * itemWidth;
       const startX = (W - totalW) / 2;
-      const ly = plot.bottom + 18;
+      // 斜めの X 軸ラベルは下へ約 30px はみ出すので、その下に置く
+      const ly = plot.bottom + (rotateTick ? 50 : 18);
       return series
         .map((s, si) => {
           const color = LINE_COLORS[si % LINE_COLORS.length];
