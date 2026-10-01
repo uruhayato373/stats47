@@ -1,0 +1,214 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-01T20:39:15.383Z",
+  "agent": "blog-critic",
+  "fixture": {
+    "file": ".claude/scripts/model-usage/canary-fixtures/blog-critic.json",
+    "version": 1,
+    "expected": [
+      "seeded-article/value-mismatch",
+      "seeded-article/simple-mean",
+      "seeded-article/causation",
+      "seeded-article/city-scope"
+    ]
+  },
+  "baseline": {
+    "model": "claude-sonnet-5-5",
+    "effort": "xhigh"
+  },
+  "candidate": {
+    "model": "claude-sonnet-5-5",
+    "effort": "high"
+  },
+  "repeats": 3,
+  "rules": {
+    "maxRecallDrop": 0,
+    "maxCostRatio": 1.1
+  },
+  "verdict": "pass",
+  "scores": {
+    "baseline": {
+      "recall": 1,
+      "cost": 0.19884100000000002
+    },
+    "candidate": {
+      "recall": 1,
+      "cost": 0.16922299999999998
+    }
+  },
+  "runs": {
+    "baseline": [
+      {
+        "hits": [
+          {
+            "id": "seeded-article/value-mismatch",
+            "hit": true
+          },
+          {
+            "id": "seeded-article/simple-mean",
+            "hit": true
+          },
+          {
+            "id": "seeded-article/causation",
+            "hit": true
+          },
+          {
+            "id": "seeded-article/city-scope",
+            "hit": true
+          }
+        ],
+        "recall": 1,
+        "isError": false,
+        "costUsd": 0.206341,
+        "durationMs": 59204,
+        "models": [
+          "claude-sonnet-5-5"
+        ],
+        "outputTokens": 6810
+      },
+      {
+        "hits": [
+          {
+            "id": "seeded-article/value-mismatch",
+            "hit": true
+          },
+          {
+            "id": "seeded-article/simple-mean",
+            "hit": true
+          },
+          {
+            "id": "seeded-article/causation",
+            "hit": true
+          },
+          {
+            "id": "seeded-article/city-scope",
+            "hit": true
+          }
+        ],
+        "recall": 1,
+        "isError": false,
+        "costUsd": 0.184797,
+        "durationMs": 42126,
+        "models": [
+          "claude-sonnet-5-5"
+        ],
+        "outputTokens": 4654
+      },
+      {
+        "hits": [
+          {
+            "id": "seeded-article/value-mismatch",
+            "hit": true
+          },
+          {
+            "id": "seeded-article/simple-mean",
+            "hit": true
+          },
+          {
+            "id": "seeded-article/causation",
+            "hit": true
+          },
+          {
+            "id": "seeded-article/city-scope",
+            "hit": true
+          }
+        ],
+        "recall": 1,
+        "isError": false,
+        "costUsd": 0.20538500000000004,
+        "durationMs": 55963,
+        "models": [
+          "claude-sonnet-5-5"
+        ],
+        "outputTokens": 6714
+      }
+    ],
+    "candidate": [
+      {
+        "hits": [
+          {
+            "id": "seeded-article/value-mismatch",
+            "hit": true
+          },
+          {
+            "id": "seeded-article/simple-mean",
+            "hit": true
+          },
+          {
+            "id": "seeded-article/causation",
+            "hit": true
+          },
+          {
+            "id": "seeded-article/city-scope",
+            "hit": true
+          }
+        ],
+        "recall": 1,
+        "isError": false,
+        "costUsd": 0.166097,
+        "durationMs": 25960,
+        "models": [
+          "claude-sonnet-5-5"
+        ],
+        "outputTokens": 2784
+      },
+      {
+        "hits": [
+          {
+            "id": "seeded-article/value-mismatch",
+            "hit": true
+          },
+          {
+            "id": "seeded-article/simple-mean",
+            "hit": true
+          },
+          {
+            "id": "seeded-article/causation",
+            "hit": true
+          },
+          {
+            "id": "seeded-article/city-scope",
+            "hit": true
+          }
+        ],
+        "recall": 1,
+        "isError": false,
+        "costUsd": 0.172723,
+        "durationMs": 32853,
+        "models": [
+          "claude-sonnet-5-5"
+        ],
+        "outputTokens": 3449
+      },
+      {
+        "hits": [
+          {
+            "id": "seeded-article/value-mismatch",
+            "hit": true
+          },
+          {
+            "id": "seeded-article/simple-mean",
+            "hit": true
+          },
+          {
+            "id": "seeded-article/causation",
+            "hit": true
+          },
+          {
+            "id": "seeded-article/city-scope",
+            "hit": true
+          }
+        ],
+        "recall": 1,
+        "isError": false,
+        "costUsd": 0.16884899999999997,
+        "durationMs": 29866,
+        "models": [
+          "claude-sonnet-5-5"
+        ],
+        "outputTokens": 3060
+      }
+    ]
+  },
+  "raw": ".local/model-canary/2026-10-01-blog-critic-claude-sonnet-5-5-xhigh-vs-claude-sonnet-5-5-high"
+}

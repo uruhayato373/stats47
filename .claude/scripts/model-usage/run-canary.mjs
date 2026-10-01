@@ -35,9 +35,17 @@ function arg(name, fallback) {
   return i !== -1 && process.argv[i + 1] ? process.argv[i + 1] : fallback;
 }
 
-/** 出力テキストが fixture の各正解に当たったか。パターンは大文字小文字を区別しない */
+/**
+ * 出力テキストが fixture の各正解に当たったか。パターンは大文字小文字を区別しない。
+ * anyOf = どれか 1 つが出れば当たり。noneOf = どれか 1 つでも出たら外れ (禁止表現・誤った値を書いていないかの検査)。
+ * noneOf だけの項目は「禁止表現を書かなかった」ことを 1 点として数える。
+ */
 export function scoreOutput(text, expected) {
-  const hits = expected.map((e) => ({ id: e.id, hit: e.anyOf.some((p) => new RegExp(p, 'i').test(text)) }));
+  const has = (p) => new RegExp(p, 'i').test(text);
+  const hits = expected.map((e) => ({
+    id: e.id,
+    hit: (e.anyOf ? e.anyOf.some(has) : true) && !(e.noneOf ?? []).some(has),
+  }));
   return { hits, recall: hits.length ? hits.filter((h) => h.hit).length / hits.length : 0 };
 }
 

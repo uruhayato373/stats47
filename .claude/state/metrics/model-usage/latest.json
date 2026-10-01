@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-01T20:18:45.064Z",
+  "generatedAt": "2026-10-01T20:39:27.385Z",
   "window": {
     "weeks": 4,
     "subWeeks": [
@@ -482,6 +482,54 @@
   ],
   "canary": [
     {
+      "file": "2026-10-01-article-writer-claude-sonnet-5-5-xhigh-vs-claude-sonnet-5-5-high.json",
+      "agent": "article-writer",
+      "baseline": {
+        "model": "claude-sonnet-5-5",
+        "effort": "xhigh"
+      },
+      "candidate": {
+        "model": "claude-sonnet-5-5",
+        "effort": "high"
+      },
+      "verdict": "pass",
+      "scores": {
+        "baseline": {
+          "recall": 1,
+          "cost": 0.17496546666666668
+        },
+        "candidate": {
+          "recall": 1,
+          "cost": 0.15673653333333334
+        }
+      },
+      "generatedAt": "2026-10-01T20:25:33.298Z"
+    },
+    {
+      "file": "2026-10-01-blog-critic-claude-sonnet-5-5-xhigh-vs-claude-sonnet-5-5-high.json",
+      "agent": "blog-critic",
+      "baseline": {
+        "model": "claude-sonnet-5-5",
+        "effort": "xhigh"
+      },
+      "candidate": {
+        "model": "claude-sonnet-5-5",
+        "effort": "high"
+      },
+      "verdict": "pass",
+      "scores": {
+        "baseline": {
+          "recall": 1,
+          "cost": 0.19884100000000002
+        },
+        "candidate": {
+          "recall": 1,
+          "cost": 0.16922299999999998
+        }
+      },
+      "generatedAt": "2026-10-01T20:39:15.383Z"
+    },
+    {
       "file": "2026-10-01-code-reviewer-opus-xhigh-vs-claude-sonnet-5-5-xhigh.json",
       "agent": "code-reviewer",
       "baseline": {
@@ -504,6 +552,54 @@
         }
       },
       "generatedAt": "2026-10-01T19:59:46.751Z"
+    },
+    {
+      "file": "2026-10-01-open-data-curator-claude-sonnet-5-5-xhigh-vs-claude-sonnet-5-5-high.json",
+      "agent": "open-data-curator",
+      "baseline": {
+        "model": "claude-sonnet-5-5",
+        "effort": "xhigh"
+      },
+      "candidate": {
+        "model": "claude-sonnet-5-5",
+        "effort": "high"
+      },
+      "verdict": "pass",
+      "scores": {
+        "baseline": {
+          "recall": 1,
+          "cost": 0.15796866666666667
+        },
+        "candidate": {
+          "recall": 1,
+          "cost": 0.14881033333333332
+        }
+      },
+      "generatedAt": "2026-10-01T20:24:58.455Z"
+    },
+    {
+      "file": "2026-10-01-sns-renderer-claude-sonnet-5-5-xhigh-vs-claude-sonnet-5-5-high.json",
+      "agent": "sns-renderer",
+      "baseline": {
+        "model": "claude-sonnet-5-5",
+        "effort": "xhigh"
+      },
+      "candidate": {
+        "model": "claude-sonnet-5-5",
+        "effort": "high"
+      },
+      "verdict": "pass",
+      "scores": {
+        "baseline": {
+          "recall": 1,
+          "cost": 0.16183613333333335
+        },
+        "candidate": {
+          "recall": 1,
+          "cost": 0.1533482
+        }
+      },
+      "generatedAt": "2026-10-01T20:25:41.147Z"
     }
   ],
   "proposals": [
@@ -516,8 +612,8 @@
       "costUsd": 87.8153,
       "runs": 2,
       "evidence": "呼び出し 2 回・応答 646 件・換算 $87.8153",
-      "canary": "not-run",
-      "next": "canary 未実施: node .claude/scripts/model-usage/run-canary.mjs --agent open-data-curator --model <現行モデルの full ID> --effort high"
+      "canary": "pass",
+      "next": "canary 合格。frontmatter に effort: high を書いてよい"
     },
     {
       "id": "effort:sns-renderer",
@@ -528,8 +624,8 @@
       "costUsd": 51.6883,
       "runs": 6,
       "evidence": "呼び出し 6 回・応答 744 件・換算 $51.6883",
-      "canary": "not-run",
-      "next": "canary 未実施: node .claude/scripts/model-usage/run-canary.mjs --agent sns-renderer --model <現行モデルの full ID> --effort high"
+      "canary": "pass",
+      "next": "canary 合格。frontmatter に effort: high を書いてよい"
     },
     {
       "id": "effort:article-writer",
@@ -540,8 +636,8 @@
       "costUsd": 16.6879,
       "runs": 8,
       "evidence": "呼び出し 8 回・応答 292 件・換算 $16.6879",
-      "canary": "not-run",
-      "next": "canary 未実施: node .claude/scripts/model-usage/run-canary.mjs --agent article-writer --model <現行モデルの full ID> --effort high"
+      "canary": "pass",
+      "next": "canary 合格。frontmatter に effort: high を書いてよい"
     },
     {
       "id": "effort:blog-critic",
@@ -552,8 +648,8 @@
       "costUsd": 4.8133,
       "runs": 5,
       "evidence": "呼び出し 5 回・応答 62 件・換算 $4.8133",
-      "canary": "not-run",
-      "next": "canary 未実施: node .claude/scripts/model-usage/run-canary.mjs --agent blog-critic --model <現行モデルの full ID> --effort high"
+      "canary": "pass",
+      "next": "canary 合格。frontmatter に effort: high を書いてよい"
     }
   ]
 }

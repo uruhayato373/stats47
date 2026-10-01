@@ -1,0 +1,264 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-01T20:25:41.147Z",
+  "agent": "sns-renderer",
+  "fixture": {
+    "file": ".claude/scripts/model-usage/canary-fixtures/sns-renderer.json",
+    "version": 1,
+    "expected": [
+      "quiz-spec/options-include-answer",
+      "quiz-spec/options-count",
+      "quiz-spec/answer",
+      "quiz-spec/hint-hides-answer",
+      "quiz-spec/scope-note",
+      "quiz-spec/five-slides"
+    ]
+  },
+  "baseline": {
+    "model": "claude-sonnet-5-5",
+    "effort": "xhigh"
+  },
+  "candidate": {
+    "model": "claude-sonnet-5-5",
+    "effort": "high"
+  },
+  "repeats": 3,
+  "rules": {
+    "maxRecallDrop": 0,
+    "maxCostRatio": 1.1
+  },
+  "verdict": "pass",
+  "scores": {
+    "baseline": {
+      "recall": 1,
+      "cost": 0.16183613333333335
+    },
+    "candidate": {
+      "recall": 1,
+      "cost": 0.1533482
+    }
+  },
+  "runs": {
+    "baseline": [
+      {
+        "hits": [
+          {
+            "id": "quiz-spec/options-include-answer",
+            "hit": true
+          },
+          {
+            "id": "quiz-spec/options-count",
+            "hit": true
+          },
+          {
+            "id": "quiz-spec/answer",
+            "hit": true
+          },
+          {
+            "id": "quiz-spec/hint-hides-answer",
+            "hit": true
+          },
+          {
+            "id": "quiz-spec/scope-note",
+            "hit": true
+          },
+          {
+            "id": "quiz-spec/five-slides",
+            "hit": true
+          }
+        ],
+        "recall": 1,
+        "isError": false,
+        "costUsd": 0.16722,
+        "durationMs": 18480,
+        "models": [
+          "claude-sonnet-5-5"
+        ],
+        "outputTokens": 2046
+      },
+      {
+        "hits": [
+          {
+            "id": "quiz-spec/options-include-answer",
+            "hit": true
+          },
+          {
+            "id": "quiz-spec/options-count",
+            "hit": true
+          },
+          {
+            "id": "quiz-spec/answer",
+            "hit": true
+          },
+          {
+            "id": "quiz-spec/hint-hides-answer",
+            "hit": true
+          },
+          {
+            "id": "quiz-spec/scope-note",
+            "hit": true
+          },
+          {
+            "id": "quiz-spec/five-slides",
+            "hit": true
+          }
+        ],
+        "recall": 1,
+        "isError": false,
+        "costUsd": 0.1620142,
+        "durationMs": 28576,
+        "models": [
+          "claude-sonnet-5-5"
+        ],
+        "outputTokens": 2409
+      },
+      {
+        "hits": [
+          {
+            "id": "quiz-spec/options-include-answer",
+            "hit": true
+          },
+          {
+            "id": "quiz-spec/options-count",
+            "hit": true
+          },
+          {
+            "id": "quiz-spec/answer",
+            "hit": true
+          },
+          {
+            "id": "quiz-spec/hint-hides-answer",
+            "hit": true
+          },
+          {
+            "id": "quiz-spec/scope-note",
+            "hit": true
+          },
+          {
+            "id": "quiz-spec/five-slides",
+            "hit": true
+          }
+        ],
+        "recall": 1,
+        "isError": false,
+        "costUsd": 0.1562742,
+        "durationMs": 25215,
+        "models": [
+          "claude-sonnet-5-5"
+        ],
+        "outputTokens": 1835
+      }
+    ],
+    "candidate": [
+      {
+        "hits": [
+          {
+            "id": "quiz-spec/options-include-answer",
+            "hit": true
+          },
+          {
+            "id": "quiz-spec/options-count",
+            "hit": true
+          },
+          {
+            "id": "quiz-spec/answer",
+            "hit": true
+          },
+          {
+            "id": "quiz-spec/hint-hides-answer",
+            "hit": true
+          },
+          {
+            "id": "quiz-spec/scope-note",
+            "hit": true
+          },
+          {
+            "id": "quiz-spec/five-slides",
+            "hit": true
+          }
+        ],
+        "recall": 1,
+        "isError": false,
+        "costUsd": 0.15435020000000002,
+        "durationMs": 15165,
+        "models": [
+          "claude-sonnet-5-5"
+        ],
+        "outputTokens": 1641
+      },
+      {
+        "hits": [
+          {
+            "id": "quiz-spec/options-include-answer",
+            "hit": true
+          },
+          {
+            "id": "quiz-spec/options-count",
+            "hit": true
+          },
+          {
+            "id": "quiz-spec/answer",
+            "hit": true
+          },
+          {
+            "id": "quiz-spec/hint-hides-answer",
+            "hit": true
+          },
+          {
+            "id": "quiz-spec/scope-note",
+            "hit": true
+          },
+          {
+            "id": "quiz-spec/five-slides",
+            "hit": true
+          }
+        ],
+        "recall": 1,
+        "isError": false,
+        "costUsd": 0.1524702,
+        "durationMs": 22903,
+        "models": [
+          "claude-sonnet-5-5"
+        ],
+        "outputTokens": 1453
+      },
+      {
+        "hits": [
+          {
+            "id": "quiz-spec/options-include-answer",
+            "hit": true
+          },
+          {
+            "id": "quiz-spec/options-count",
+            "hit": true
+          },
+          {
+            "id": "quiz-spec/answer",
+            "hit": true
+          },
+          {
+            "id": "quiz-spec/hint-hides-answer",
+            "hit": true
+          },
+          {
+            "id": "quiz-spec/scope-note",
+            "hit": true
+          },
+          {
+            "id": "quiz-spec/five-slides",
+            "hit": true
+          }
+        ],
+        "recall": 1,
+        "isError": false,
+        "costUsd": 0.15322419999999998,
+        "durationMs": 13475,
+        "models": [
+          "claude-sonnet-5-5"
+        ],
+        "outputTokens": 1528
+      }
+    ]
+  },
+  "raw": ".local/model-canary/2026-10-01-sns-renderer-claude-sonnet-5-5-xhigh-vs-claude-sonnet-5-5-high"
+}

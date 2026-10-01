@@ -202,3 +202,13 @@ test('採点器を直したら保存済みの出力を採点し直し、費用�
 test('cases の無い旧形式の fixture も 1 件の case として読む', () => {
   assert.deepEqual(fixtureCases({ prompt: 'p', expected: [] }), [{ id: 'default', prompt: 'p', expected: [] }]);
 });
+
+test('noneOf は禁止表現が出たら外れにし、noneOf だけの項目は書かなかったことを 1 点にする', () => {
+  const expected = [
+    { id: 'top', anyOf: ['宮崎県'], noneOf: ['東京都が1位'] },
+    { id: 'no-national-average', noneOf: ['全国平均'] },
+  ];
+  assert.equal(scoreOutput('1位は宮崎県。47都道府県の単純平均は 3.1', expected).recall, 1);
+  assert.equal(scoreOutput('1位は宮崎県。全国平均は 3.1', expected).recall, 0.5);
+  assert.equal(scoreOutput('東京都が1位、宮崎県は2位', expected).recall, 0.5);
+});
