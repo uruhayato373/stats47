@@ -52,7 +52,10 @@ function isLinkInto(linkPath, targetRoot) {
   try {
     if (!fs.lstatSync(linkPath).isSymbolicLink()) return false;
     const real = fs.realpathSync(linkPath);
-    return real === targetRoot || real.startsWith(targetRoot + path.sep);
+    // 比較する両側を実体パスに揃える。片側だけ realpath にすると、root 自体が symlink を含む場所
+    // (macOS の /var → /private/var など) で正しいリンクを「外を指す」と誤判定する (2026-10-02)
+    const root = fs.realpathSync(targetRoot);
+    return real === root || real.startsWith(root + path.sep);
   } catch {
     return false;
   }
