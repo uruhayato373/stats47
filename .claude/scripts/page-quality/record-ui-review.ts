@@ -14,7 +14,15 @@ import { dirname, join } from "node:path";
 
 import { SCREENSHOT_PREFIX } from "./lib/screenshots";
 import { STATE_DIR } from "./lib/storage";
-import { buildUiAlert, type ReviewInput, type ReviewReport, structuredOutput, validateReview } from "./lib/ui-report";
+import {
+  buildUiAlert,
+  type ReadCoverage,
+  readCoverage,
+  type ReviewInput,
+  type ReviewReport,
+  structuredOutput,
+  validateReview,
+} from "./lib/ui-report";
 import type { Violation } from "./types";
 
 const CI_DIR = ".local/ci/page-quality";
@@ -37,6 +45,7 @@ function main() {
 
   let report: ReviewReport | null = null;
   let rejected: string[] = [];
+  let coverage: ReadCoverage | null = null;
   let reviewError: string | null = arg("--no-review") ?? null;
   const execution = arg("--execution");
   if (!reviewError) {
@@ -45,6 +54,7 @@ function main() {
     else {
       try {
         ({ report, rejected } = validateReview(structuredOutput(execution), input));
+        coverage = readCoverage(execution, input);
       } catch (e) {
         reviewError = (e as Error).message;
       }
@@ -57,8 +67,13 @@ function main() {
     auditGeneratedAt: input.generatedAt,
     reviewStatus: report?.status ?? "not-run",
     reviewError,
-    /** この週に agent が確認したページ (`page_key`)。確認しなかったページの指摘を「消えた」と扱わないために使う */
-    reviewedPages: input.pages.map((p) => p.template),
+    /**
+     * この週に agent が確認したページ (`page_key`)。確認しなかったページの指摘を「消えた」と扱わないために使う。
+     * 切り出しを全部読んだページだけを入れる (自己申告の no-issues で未読ページの指摘を閉じない)
+     */
+    reviewedPages: coverage ? coverage.fullyReadPages : input.pages.map((p) => p.template),
+    /** agent が実際に Read した切り出し画像の枚数 (execution file から数えた実測) */
+    readCoverage: coverage,
     summary: report?.summary ?? null,
     findings: report?.findings ?? [],
     rejected,
@@ -68,12 +83,17 @@ function main() {
   mkdirSync(STATE_DIR, { recursive: true });
   writeFileSync(join(STATE_DIR, "ui-review-latest.json"), `${JSON.stringify(state, null, 2)}\n`);
 
+  const coverageGap =
+    coverage && coverage.unreadScreens.length > 0
+      ? `agent が読んだ切り出しは ${coverage.readTiles} / ${coverage.expectedTiles} 枚。読み残した画面 ${coverage.unreadScreens.length} 件 (${coverage.unreadScreens.slice(0, 10).join(", ")}${coverage.unreadScreens.length > 10 ? " ほか" : ""}) は確認済みとして扱わない`
+      : null;
   const body = buildUiAlert({
     date,
     newViolations: fresh.violations,
     firstRun: fresh.firstRun,
     review: report,
     reviewError,
+    coverageGap,
     input,
     screenshotBaseUrl: process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp",
     keyOf: (template, device) => `${SCREENSHOT_PREFIX}/${date}/${template}-${device}.webp`,
@@ -84,7 +104,7 @@ function main() {
     writeFileSync(alertOut, `${body}\n`);
   }
   console.error(
-    `[ui-review] 新規の機械検出 ${fresh.violations.length} 件 / agent 指摘 ${state.findings.length} 件 / 不採用 ${rejected.length} 件${reviewError ? ` / agent 未実行: ${reviewError}` : ""}`
+    `[ui-review] 新規の機械検出 ${fresh.violations.length} 件 / agent 指摘 ${state.findings.length} 件 / 不採用 ${rejected.length} 件${coverage ? ` / 読んだ切り出し ${coverage.readTiles}/${coverage.expectedTiles} 枚` : ""}${reviewError ? ` / agent 未実行: ${reviewError}` : ""}`
   );
   console.log(`alert_open=${body ? "true" : "false"}`);
 }

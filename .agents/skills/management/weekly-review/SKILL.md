@@ -59,6 +59,7 @@ FAIL項目はレビュー本文の`Blockers`へ転記する。レビュー作成
 | 計画差分 | `.claude/todo/weekly.md` |
 | note画像資産 | `npm run note:images:audit -- --json` の `summary` (追跡PNG枚数・容量、再生成元なしの内訳、ランキング記事のデータ契約違反数)。`findings` が1件でもあれば原因を `.claude/rules/note-image-assets.md` の契約番号で示す。追跡PNGが前週より増えていれば理由を確認する(予算は縮小専用)。週次CIの結果は `note-circulation-audit` artifact の `note-image-assets.json` |
 | noteカード表示 | `npm run note:cards:audit -- --browser-verify --previous .claude/state/metrics/note/card-visibility-latest.json --output .claude/state/metrics/note/card-visibility-latest.json` の `summary`。公開HTMLで空の候補はブラウザ描画で確定し、カード前の余分な空段落も検出。ブラウザ検証失敗があれば `--retry-unknown-from <直前report> --output <同report>` で失敗記事だけ再確認。取得・検証失敗は0件扱いしない。スクショは異常時だけ `--screenshots /tmp/note-card-screenshots --max-screenshots 3` で一時取得 |
+| ページUI週次確認 | `.claude/state/metrics/page-quality/ui-review-latest.json` (`page-quality-audit-weekly` が毎週日曜に更新)。`auditGeneratedAt` が当週か、`reviewStatus`、`readCoverage` の読んだ切り出し / 読むべき枚数、agent 指摘件数 (`findings`)、新規の機械検出件数 (`newViolationCount`) を書く。監査が当週に無い・`reviewStatus` が `not-run`/`blocked`・読み残し (`readCoverage.unreadScreens`) がある週は Blockers へ。読み残したページは確認済みに数えない。正典 `.claude/rules/page-quality-standards.md` |
 | 事業計画 | `.claude/state/business-plan/latest.json` + `packages/data-configs/src/business-plan/` |
 | Kindle | `.claude/config/kdp-listings.json` + `.claude/state/products/{sales-ledger,kdp-weekly-publication}.json` |
 
@@ -124,6 +125,7 @@ npm run kdp:weekly -- --week [YYYY-Www] --write
 - note画像資産（追跡PNGの枚数・容量と前週差、再生成元を持たない追跡PNGの内訳、ランキング記事のデータ契約違反数。違反があれば契約番号と該当記事を示す。正典 `.claude/rules/note-image-assets.md`）
 - noteカード表示（検査記事数・ブラウザで確定した空白カード数・余分な空段落数・未確認カード数・影響記事数・取得/ブラウザ検証失敗数・新規/継続/解消。検証失敗があれば解消数は判定不能として扱う。詳細は `.claude/state/metrics/note/card-visibility-latest.json`）
 
+- ページUI週次確認（監査日、レビュー状態、読んだ切り出し / 読むべき枚数と読み残し画面、agent 指摘件数、新規の機械検出件数。詳細は `.claude/state/metrics/page-quality/ui-review-latest.json`）
 恒久的な失敗知見だけを`/knowledge`へ渡す。改善施策statusの更新は`improvement-triage`へ渡す。
 `.claude/todo/weekly.md`はレビュー中に書き換えない。
 

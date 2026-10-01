@@ -61,6 +61,9 @@ variants を key 順に 4 つへ分けたうちの 1 組 (ISO 週番号で決め
 読めないので、画面 1 枚分ずつ切り出した画像 (`tilePaths`、R2 には上げない) を読ませる。
 **記録と通知の判断はスクリプトが行う** (`record-ui-review.ts`): 撮影していない画面を指す指摘や形の崩れた
 指摘は捨て、結果を `.claude/state/metrics/page-quality/ui-review-latest.json` に残す。
+agent の「問題なし」は自己申告なので、execution file の `Read` 呼び出しから実際に読んだ切り出しを数え
+(`readCoverage()`・失敗した Read は数えない)、`readCoverage` に枚数を残す。1 枚でも読み残したページは
+`reviewedPages` に入れず (その週は過去の指摘を閉じない)、読み残しがあれば指摘 0 件でも通知する (2026-10-02)。
 手元の試行 (2026-09-23) は 11 ページで 73 回のやり取り・2 分半だった。約 20 ページを見るため `--max-turns 200`・step の制限時間 30 分にしている。
 
 **通知**: 「先週の週次結果に無かった UI 違反」と agent の指摘を `ui-review-alert` Issue 1 件へまとめ、
