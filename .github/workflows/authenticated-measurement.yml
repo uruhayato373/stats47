@@ -66,10 +66,10 @@ jobs:
           - {source: moshimo, secret: MEASUREMENT_SESSION_MOSHIMO}
           - {source: a8, secret: MEASUREMENT_SESSION_A8}
           - {source: afb, secret: AFB_API_KEY}
-          - {source: note, secret: MEASUREMENT_SESSION_NOTE}
+          - {source: note, secret: MEASUREMENT_SESSION_NOTE, auth: NOTE}
           - {source: gsc, secret: MEASUREMENT_SESSION_GSC}
-          - {source: kdp, secret: MEASUREMENT_SESSION_KDP}
-          - {source: coconala, secret: MEASUREMENT_SESSION_COCONALA}
+          - {source: kdp, secret: MEASUREMENT_SESSION_KDP, auth: KDP}
+          - {source: coconala, secret: MEASUREMENT_SESSION_COCONALA, auth: COCONALA}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -89,6 +89,12 @@ jobs:
           R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
           R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
           SOURCE: ${{ matrix.source }}
+          # CI 再ログイン: .claude/config/auth-credentials.json の ciCredential=true の service だけ matrix.auth を持つ。
+          # 他の source には空文字が渡り、collect.mjs は入り直しを試みない。
+          STATS47_AUTH_SOURCE: ${{ matrix.auth && matrix.source || '' }}
+          STATS47_AUTH_USER: ${{ matrix.auth && secrets[format('STATS47_AUTH_{0}_USER', matrix.auth)] || '' }}
+          STATS47_AUTH_PASSWORD: ${{ matrix.auth && secrets[format('STATS47_AUTH_{0}_PASSWORD', matrix.auth)] || '' }}
+          STATS47_AUTH_TOTP: ${{ matrix.auth && secrets[format('STATS47_AUTH_{0}_TOTP', matrix.auth)] || '' }}
         run: |
           if [ "$SOURCE" = 'afb' ]; then
             node .claude/scripts/measurement/collect.mjs "$SOURCE"

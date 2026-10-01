@@ -72,9 +72,13 @@ try {
       bundle = selectSessionBundle(bundle, remote);
     }
     if (!bundle || bundle.source !== name) throw new Error('session_missing');
+    // CI 再ログイン (auth-credentials.json の ciCredential。workflow が許可 service にだけ Secrets を渡す)。
+    // 前回の CI 再ログインが失敗した世代では再試行しない (アカウントロック回避)。新しい人のセッションで解除される。
+    const ciLogin = !local && process.env.STATS47_AUTH_SOURCE === name && Boolean(process.env.STATS47_AUTH_USER);
+    let pause = null;
     if (!local) {
-      const pause = authenticationPause(name, bundle, await readVault(`${name}/auth-recovery`), await readVault(`${name}/latest-attempt`));
-      if (pause) {
+      pause = authenticationPause(name, bundle, await readVault(`${name}/auth-recovery`), await readVault(`${name}/latest-attempt`));
+      if (pause && (!ciLogin || pause.reloginFailedAt)) {
         await writeVault(`${name}/auth-recovery`, pause);
         result.recovery = { state: 'awaiting_reauthentication', blockedSince: pause.blockedSince };
         throw new Error('auth_required: awaiting_new_human_session');
@@ -84,6 +88,32 @@ try {
     if (name === 'kdp') {
       if (!/^B0[A-Z0-9]{8}$/.test(bundle.account?.knownAsin ?? '')) throw new Error('account_mismatch');
       writeFileSync(join(ROOT, '.local/kdp-account.local.json'), JSON.stringify(bundle.account), { mode: 0o600 });
+    }
+    if (ciLogin) {
+      let relogin;
+      try {
+        const { stdout } = await run(process.execPath, ['.claude/scripts/measurement/refresh-session.mjs', name, '--ci',
+          '--state', join(work, 'state.json'), '--out', join(work, 'relogin.json')], { cwd: ROOT, timeout: 300000 });
+        relogin = JSON.parse(stdout.trim().split('\n').pop());
+      } catch (error) {
+        try { relogin = JSON.parse(String(error.stdout ?? '').trim().split('\n').pop()); } catch { relogin = { status: 'error' }; }
+      }
+      result.relogin = relogin.status === 'ok' ? (relogin.relogged ? 'relogged' : 'session_valid') : relogin.status;
+      if (relogin.status === 'ok' && relogin.relogged) {
+        // パスワードで入り直した state は新しい世代として扱い、拒否済み世代の停止を解除する
+        const state = scopedState(name, JSON.parse(readFileSync(join(work, 'relogin.json'), 'utf8')));
+        bundle = { ...bundle, capturedAt: now, bootstrapCapturedAt: now, state };
+        writeFileSync(join(work, 'state.json'), JSON.stringify(state), { mode: 0o600 });
+        await writeVault(`${name}/session`, bundle);
+      } else if (relogin.status !== 'ok' && relogin.status !== 'no_credential') {
+        const recovery = { ...(pause ?? rejectedAuthentication(name, bundle, now)), reloginFailedAt: now, reloginStatus: relogin.status };
+        await writeVault(`${name}/auth-recovery`, recovery);
+        result.recovery = { state: 'awaiting_reauthentication', blockedSince: recovery.blockedSince };
+        throw new Error(`auth_required: ci_relogin_${relogin.status}`);
+      } else if (pause) {
+        result.recovery = { state: 'awaiting_reauthentication', blockedSince: pause.blockedSince };
+        throw new Error('auth_required: awaiting_new_human_session');
+      }
     }
   }
   result.collectionAttempted = true;
