@@ -1,15 +1,15 @@
 # ranking ai-content 是正キュー (LATEST)
 
-- 生成: 2026-09-30T01:22:19.881Z
+- 生成: 2026-10-01T01:20:11.880Z
 - GSC snapshot: 2026-W39 / スコープ: R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)
 - done 判定: R2 の ai-content が auditRow を通る (blocker 0)
 - スコープ境界: このキューは**都道府県ランキング (app/ranking) 専用**。市区町村 (公開 171 key・app/municipalities) と全国 (/japan) は対象外 — 別契約 (backlog MUNI-AI-CONTENT-01 / JAPAN-COMMENTARY-01、正典 ranking-content-standards.md §スコープ境界)
 
-## サマリ (active ranking 全件 2420 件)
+## サマリ (active ranking 全件 2423 件)
 
-- ✅ done: 2166 件 (89.5% / impressions 計 104657)
-- ⏳ needs-regen: 242 件 (impressions 計 2667)
-  - 内訳: missing 241 / incomplete 1
+- ✅ done: 2165 件 (89.4% / impressions 計 104657)
+- ⏳ needs-regen: 246 件 (impressions 計 2667)
+  - 内訳: missing 244 / incomplete 1 / fetch-error:TypeError: fetch failed 1
 - 🚫 not-eligible: 12 件 — 観測値が順位として成立しないので生成しない
   - 内訳: no-values 12
 
@@ -34,8 +34,8 @@
 
 ## 進捗 (progress-history.csv より)
 
-- 消化ペース: **31.8 件/日** (2026-07-30 からの平均)
-- 残り 242 件 → **完了見込み 約 8 日**
+- 消化ペース: **31.3 件/日** (2026-07-30 からの平均)
+- 残り 246 件 → **完了見込み 約 8 日**
 
 ## いつ修正したか (done を R2 last-modified 降順・上位15)
 
