@@ -1,0 +1,21 @@
+{
+  "kind": "manual",
+  "sourceName": "中小企業景況調査",
+  "source": "https://www.smrj.go.jp/research_case/survey/fbrion0000002oup-att/185_51_gyoukyou.xlsx",
+  "url": "https://www.smrj.go.jp/research_case/survey/",
+  "table": "185_51_gyoukyou.xlsx シート『業況（前年同期比）』DI列（全産業=F列・製造業=J列・非製造業=N列）",
+  "label": "業況判断DI（全国・前年同期比）",
+  "year": "2017年1-3月期〜2026年7-9月期",
+  "unit": "ポイント",
+  "transform": "2017年以降の四半期を抽出。x軸『17年1Q』は2017年1-3月期",
+  "surveyScope": "not-applicable",
+  "surveyScopeReason": "中小企業景況調査は調査マスタ未登録",
+  "displaySources": [
+    {
+      "label": "中小企業庁・中小機構『中小企業景況調査』（第185回・2026年7-9月期）",
+      "url": "https://www.smrj.go.jp/research_case/survey/"
+    }
+  ],
+  "fetchedAt": "2026-10-02",
+  "restore": "curl -sL -o g.xlsx <source> → openpyxl でシート『業況（前年同期比）』を読む"
+}

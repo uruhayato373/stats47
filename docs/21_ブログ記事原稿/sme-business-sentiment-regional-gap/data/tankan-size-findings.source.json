@@ -1,0 +1,21 @@
+{
+  "kind": "manual",
+  "sourceName": "全国企業短期経済観測調査",
+  "source": "https://www.boj.or.jp/statistics/tk/gaiyo/2026/tka2609.pdf",
+  "url": "https://www.boj.or.jp/statistics/tk/index.htm",
+  "table": "短観（要旨）2026年9月調査 1.業況判断 『最近』の値（全国・企業規模別）",
+  "label": "業況判断DI（良い−悪い）",
+  "year": "2026年9月調査",
+  "unit": "ポイント",
+  "transform": "要旨PDFの表から大企業・中小企業の製造業・非製造業の『最近』を2026年6月調査・9月調査で抽出",
+  "surveyScope": "not-applicable",
+  "surveyScopeReason": "日銀短観は調査マスタ未登録",
+  "displaySources": [
+    {
+      "label": "日本銀行『全国企業短期経済観測調査（短観）』2026年9月調査",
+      "url": "https://www.boj.or.jp/statistics/tk/index.htm"
+    }
+  ],
+  "fetchedAt": "2026-10-02",
+  "publishedAt": "2026-10-01 08:50（要旨PDF表紙の記載）"
+}

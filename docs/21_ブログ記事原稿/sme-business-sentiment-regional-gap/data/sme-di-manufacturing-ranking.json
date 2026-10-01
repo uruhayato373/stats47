@@ -1,0 +1,66 @@
+{
+  "title": "中小企業の業況判断DI（製造業・前年同期比）",
+  "subtitle": "2026年7-9月期・経済産業局管内の8地域",
+  "unit": "ポイント",
+  "highLabel": "高い地域",
+  "lowLabel": "低い地域",
+  "data": [
+    {
+      "areaName": "北海道",
+      "label": "業況判断DI（製造業）",
+      "value": -13.4,
+      "unit": "ポイント",
+      "period": "2026年7-9月期"
+    },
+    {
+      "areaName": "東北",
+      "label": "業況判断DI（製造業）",
+      "value": -16.7,
+      "unit": "ポイント",
+      "period": "2026年7-9月期"
+    },
+    {
+      "areaName": "関東",
+      "label": "業況判断DI（製造業）",
+      "value": -4.0,
+      "unit": "ポイント",
+      "period": "2026年7-9月期"
+    },
+    {
+      "areaName": "中部",
+      "label": "業況判断DI（製造業）",
+      "value": -7.1,
+      "unit": "ポイント",
+      "period": "2026年7-9月期"
+    },
+    {
+      "areaName": "近畿",
+      "label": "業況判断DI（製造業）",
+      "value": -9.9,
+      "unit": "ポイント",
+      "period": "2026年7-9月期"
+    },
+    {
+      "areaName": "中国",
+      "label": "業況判断DI（製造業）",
+      "value": -7.8,
+      "unit": "ポイント",
+      "period": "2026年7-9月期"
+    },
+    {
+      "areaName": "四国",
+      "label": "業況判断DI（製造業）",
+      "value": -23.1,
+      "unit": "ポイント",
+      "period": "2026年7-9月期"
+    },
+    {
+      "areaName": "九州・沖縄",
+      "label": "業況判断DI（製造業）",
+      "value": -16.9,
+      "unit": "ポイント",
+      "period": "2026年7-9月期"
+    }
+  ],
+  "showBars": false
+}

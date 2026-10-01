@@ -1,0 +1,35 @@
+{
+  "kind": "manual",
+  "sourceName": "中小企業景況調査",
+  "source": "https://www.smrj.go.jp/research_case/survey/fbrion0000002oup-att/185_30_report_appendix.pdf",
+  "url": "https://www.smrj.go.jp/research_case/survey/",
+  "table": "第185回 中小企業景況調査 資料編 第11-(1)表 地域別DIの動向（業況・前年同期比）",
+  "surveyScope": "not-applicable",
+  "surveyScopeReason": "中小企業景況調査は調査マスタ未登録。公表は全国と経済産業局管内の8地域のみで、都道府県別はない",
+  "displaySources": [
+    {
+      "label": "中小企業庁・中小機構『中小企業景況調査』（第185回・2026年7-9月期）",
+      "url": "https://www.smrj.go.jp/research_case/survey/"
+    }
+  ],
+  "regionDefinition": "経済産業局管内による区分。関東は新潟・長野・山梨・静岡を含む。中部は富山・石川を含む（愛知・岐阜・三重と合わせ5県）。近畿は福井を含む。九州・沖縄は九州各県と沖縄県",
+  "fetchedAt": "2026-10-02",
+  "restore": "資料編PDFを pdftotext -layout で抽出し第11-(1)表の▲値を読む（2026-10-02に264値を機械照合済み）",
+  "label": "業況判断DI（製造業・前年同期比）",
+  "year": "2024年1-3月期〜2026年7-9月期",
+  "unit": "ポイント",
+  "transform": "8地域のうち関東・中部・四国・九州・沖縄の4系列を抽出。x軸の『24年1Q』は2024年1-3月期",
+  "quarters": [
+    "2024年1-3月期",
+    "2024年4-6月期",
+    "2024年7-9月期",
+    "2024年10-12月期",
+    "2025年1-3月期",
+    "2025年4-6月期",
+    "2025年7-9月期",
+    "2025年10-12月期",
+    "2026年1-3月期",
+    "2026年4-6月期",
+    "2026年7-9月期"
+  ]
+}

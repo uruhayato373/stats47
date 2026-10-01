@@ -1,0 +1,35 @@
+<!-- data-source: tankan-size-findings.json | generated: 2026-10-01T22:13:49.225Z -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 274" width="960" height="274" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" role="img" aria-label="日銀短観（2026年9月調査）の業況判断DI">
+  <style>
+    .svg-bg{fill:#ffffff}
+    .svg-plot{fill:#f9fafb}
+    .svg-plot-border{stroke:#d1d5db}
+    .svg-title{fill:#1f2937}
+    .svg-axis{fill:#374151}
+    .svg-tick{fill:#6b7280}
+    .svg-grid{stroke:#e5e7eb}
+    @media (prefers-color-scheme:dark){
+    .svg-bg{fill:#0f172a}
+    .svg-plot{fill:#1e293b}
+    .svg-plot-border{stroke:#334155}
+    .svg-title{fill:#e2e8f0}
+    .svg-axis{fill:#cbd5e1}
+    .svg-tick{fill:#94a3b8}
+    .svg-grid{stroke:#334155}
+    }
+  </style>
+  <rect width="960" height="274" class="svg-bg"/>
+  <text x="480" y="46" text-anchor="middle" font-size="26" font-weight="bold" class="svg-title">日銀短観（2026年9月調査）の業況判断DI</text>
+  <rect x="40" y="72" width="880" height="50" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="97" r="18" fill="#dc2626"/>
+  <text x="58" y="103" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">1</text>
+  <text x="90" y="103.6" font-size="18" class="svg-title"><tspan x="90" dy="0">製造業の業況判断DIは大企業24（6月調査22）、中小企業14（同9）</tspan></text>
+  <rect x="40" y="132" width="880" height="50" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="157" r="18" fill="#dc2626"/>
+  <text x="58" y="163" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">2</text>
+  <text x="90" y="163.6" font-size="18" class="svg-title"><tspan x="90" dy="0">非製造業は大企業35（同37）、中小企業15（同15）</tspan></text>
+  <rect x="40" y="192" width="880" height="50" class="svg-plot" rx="8"/>
+  <circle cx="58" cy="217" r="18" fill="#dc2626"/>
+  <text x="58" y="223" text-anchor="middle" font-size="16" font-weight="bold" fill="#ffffff">3</text>
+  <text x="90" y="223.6" font-size="18" class="svg-title"><tspan x="90" dy="0">短観のDIは「良い」−「悪い」で、今の水準を尋ねる</tspan></text>
+</svg>
