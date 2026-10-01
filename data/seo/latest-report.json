@@ -1,30 +1,39 @@
 {
   "schemaVersion": 1,
-  "date": "2026-09-30",
+  "date": "2026-10-01",
   "period": {
-    "periodStart": "2026-09-21",
-    "periodEnd": "2026-09-27",
+    "periodStart": "2026-09-22",
+    "periodEnd": "2026-09-28",
     "windowDays": 7
   },
-  "inputHash": "dd79b63c497add6757a52b021519b3a10acca08f2156e68051e2078cd97ae56e",
+  "inputHash": "205389061a8d3bd16c24e9044f3eddba09038b966761671a3495dcdd7939eed9",
   "movements": [
     {
-      "keyword": "日本人口ランキング",
-      "targetPath": "/municipalities/ranking/japanese-population",
-      "before": 47,
-      "after": 94,
-      "beforeImpressions": 2,
-      "impressions": 1,
-      "change": -47
+      "keyword": "ふるさと納税 募集費用",
+      "targetPath": "/ranking/furusato-fundraising-cost-prefecture",
+      "before": 62,
+      "after": 23.428571428571427,
+      "beforeImpressions": 1,
+      "impressions": 7,
+      "change": 38.57142857142857
     },
     {
       "keyword": "site:stats47.jp",
       "targetPath": "/areas/15000",
-      "before": 47.486486486486484,
-      "after": 9.307692307692308,
-      "beforeImpressions": 74,
-      "impressions": 13,
-      "change": 38.17879417879418
+      "before": 46.96,
+      "after": 9.416666666666666,
+      "beforeImpressions": 75,
+      "impressions": 12,
+      "change": 37.54333333333334
+    },
+    {
+      "keyword": "任意保険 加入率",
+      "targetPath": "/ranking/voluntary-car-insurance-rate-bodily-injury",
+      "before": 79.44444444444444,
+      "after": 42.333333333333336,
+      "beforeImpressions": 9,
+      "impressions": 6,
+      "change": 37.11111111111111
     },
     {
       "keyword": "小松 市 人口",
@@ -47,47 +56,20 @@
     {
       "keyword": "site:stats47.jp",
       "targetPath": "/ranking/railway-passengers",
-      "before": 47.39705882352941,
-      "after": 12.785714285714286,
-      "beforeImpressions": 68,
-      "impressions": 14,
-      "change": 34.61134453781513
-    },
-    {
-      "keyword": "任意保険 加入率",
-      "targetPath": "/ranking/voluntary-car-insurance-rate-bodily-injury",
-      "before": 79.83333333333333,
-      "after": 45.5,
-      "beforeImpressions": 12,
-      "impressions": 4,
-      "change": 34.33333333333333
-    },
-    {
-      "keyword": "医薬品 卸 ランキング 県 別",
-      "targetPath": "/ranking/pharmaceutical-sales-count",
-      "before": 41,
-      "after": 8,
-      "beforeImpressions": 1,
-      "impressions": 2,
-      "change": 33
+      "before": 46.47142857142857,
+      "after": 12.416666666666666,
+      "beforeImpressions": 70,
+      "impressions": 12,
+      "change": 34.054761904761904
     },
     {
       "keyword": "都道府県",
       "targetPath": "/",
       "before": 28.333333333333332,
-      "after": 60,
+      "after": 59,
       "beforeImpressions": 3,
-      "impressions": 1,
-      "change": -31.666666666666668
-    },
-    {
-      "keyword": "高校 教師 年収",
-      "targetPath": "/blog/high-school-teacher-salary-prefecture-gap",
-      "before": 13.214285714285714,
-      "after": 44,
-      "beforeImpressions": 14,
       "impressions": 2,
-      "change": -30.785714285714285
+      "change": -30.666666666666668
     },
     {
       "keyword": "site:stats47.jp",
@@ -97,6 +79,24 @@
       "beforeImpressions": 23,
       "impressions": 1,
       "change": -30.52173913043478
+    },
+    {
+      "keyword": "site:stats47.jp",
+      "targetPath": "/areas/14000/innovation-patents",
+      "before": 61,
+      "after": 30.5,
+      "beforeImpressions": 57,
+      "impressions": 2,
+      "change": 30.5
+    },
+    {
+      "keyword": "site:stats47.jp",
+      "targetPath": "/ranking/engel-coefficient",
+      "before": 55.52307692307692,
+      "after": 26.1,
+      "beforeImpressions": 65,
+      "impressions": 10,
+      "change": 29.42307692307692
     }
   ],
   "verdicts": [
