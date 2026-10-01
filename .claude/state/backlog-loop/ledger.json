@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-25T23:01:29.489Z",
+  "updatedAt": "2026-10-01T20:13:03.008Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -5389,6 +5389,44 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-09-25T23:01:29.489Z"
+    },
+    "SCRIPT-ORPHAN-DELETE-01": {
+      "class": "mechanical-gate",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-01T20:13:03.008Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node .claude/scripts/lib/check-agent-skill-consistency.cjs",
+              "npm run kdp:test",
+              "npm run review-cadence:test",
+              "npm run theme:quality:test",
+              "npm run theme:py:test",
+              "npm run docs:check"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-10-02 対話セッションでオーナー指示 (不要なものは削除・利用しているものは修正) により orphan W1 を 50 → 0。削除 9 本: D1 前提の市区町村 4 本 (discover-city-stats / etl-city-stats / fetch-city-local-finance / export-city-local-finance。miniflare SQLite を読み書きし完全DBレス正典と矛盾、仕様書44は R2 経路で未参照)、家計一括公開 3 本 (generate-kakei-charts SKILL",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-01T20:13:03.008Z"
     }
   }
 }

@@ -1,16 +1,16 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { createRequire } from 'node:module';
-import { parseFactoryWorkbook } from './ingest-factory-investment.mjs';
+import { parseFactoryWorkbook } from '../ingest-factory-investment.mjs';
 const require = createRequire(import.meta.url);
 const ExcelJS = require('exceljs');
-const prefs = require('../../../packages/area/src/data/prefectures.json');
+const prefs = require('../../../../packages/area/src/data/prefectures.json');
 const {
   FACTORY_INVESTMENT_SOURCE: source,
-} = require('../../../packages/data-configs/src/theme-catalog/factory-investment-source.ts');
+} = require('../../../../packages/data-configs/src/theme-catalog/factory-investment-source.ts');
 const {
   factoryInvestmentSnapshotSchema,
-} = require('../../../apps/web/src/features/factory-investment/lib/factory-investment-snapshot.ts');
+} = require('../../../../apps/web/src/features/factory-investment/lib/factory-investment-snapshot.ts');
 function workbook() {
   const w = new ExcelJS.Workbook(),
     s = w.addWorksheet('14'),

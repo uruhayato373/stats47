@@ -7,7 +7,7 @@ import {
   sha,
   FIELDS,
   EXPECTED_SOURCES,
-} from './ingest-parks-childcare.mjs';
+} from '../ingest-parks-childcare.mjs';
 const fixture = (field) => ({
   key: field.key,
   unit: field.unit,

@@ -1,5 +1,7 @@
 /** Authored definition. Observations are generated from the three SHA-pinned public XLSX files. */
 export const BRIDGE_INSPECTION_AGE_SOURCE = {
+  // 原典からこの値を作り直すコマンド (data-provenance-standards の再現性。--write-local を付けたときだけローカル R2 へ書く)
+  restore: 'node --import tsx .claude/scripts/themes/ingest-bridge-inspection-age.mjs --source-dir <原表 XLSX 3 件> --write-local',
   profileKey: "bridge-inspection-age",
   r2Key: "app/themes/roads/inspection-age.json",
   year: "2025",

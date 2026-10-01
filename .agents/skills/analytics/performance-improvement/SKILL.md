@@ -170,6 +170,12 @@ Cloudflare 公式 ([Workers static assets headers](https://developers.cloudflare
 
 `apps/web/src/features/area-databook/components/GenderPairedKpiGrid.tsx` の固定青・桃（実測contrast 3.67 / 3.52）を、light/dark双方で4.5:1以上になる既存tokenまたは濃色へ変更する。男女の識別を色だけに依存させず、Lighthouse accessibility 100または当該contrast違反0を確認する。
 
+## CWV 改修 PR の手動代替
+
+通常は Claude Code Routine `stats47 weekly CWV PR` (`.claude/state/triggers.json`) が PSI Alert から draft PR を作る。
+Routine が止まっているときだけ、API キーのある環境で手動実行する (既定は `--dry-run`)。
+`node .claude/scripts/psi/generate-cwv-pr.mjs --url https://stats47.jp/... --dry-run`
+
 ## 検証コマンド
 
 変更範囲に応じて段階的に行う。

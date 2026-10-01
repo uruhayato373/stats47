@@ -3,7 +3,7 @@ import { test } from "node:test";
 import { mkdtempSync, mkdirSync, symlinkSync, rmSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { assertPrivateSourcePath } from "./ingest-cultural-heritage.mjs";
+import { assertPrivateSourcePath } from "../ingest-cultural-heritage.mjs";
 test("raw HTML/PDF cannot be placed in a public R2 tree, including misleading relative names", () => {
   const root = "/tmp/heritage-test-public-root";
   for (const path of [root, `${root}/app/source`, `${root}/..foo/source`])

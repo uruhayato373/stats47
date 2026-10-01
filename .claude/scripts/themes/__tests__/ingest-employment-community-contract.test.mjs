@@ -12,7 +12,7 @@ import {
   sha,
   reconcileRoundedCounts,
   EXPECTED_CONFIGS,
-} from './ingest-employment-community.mjs';
+} from '../ingest-employment-community.mjs';
 const require = createRequire(resolve(process.cwd(), 'package.json'));
 const prefs = require('./packages/area/src/data/prefectures.json').map(
     (p) => p.prefCode

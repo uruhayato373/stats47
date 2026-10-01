@@ -1,9 +1,17 @@
-import copy,json,statistics,unittest
+import copy,importlib,json,os,statistics,unittest
 from collections import defaultdict
-import aggregate as a
+from pathlib import Path
+# aggregate.py は import 時に取得済みの原典 (prefectures.json / property-prices.json) を読む。
+# 原典は git に置かない private 資料なので、無い環境 (CI など) では落とさずスキップと明示する。
+_BASE=Path(os.environ.get('STATS47_PROPERTY_SOURCE_DIR',Path(__file__).resolve().parent))
+a=None
 class AggregateTests(unittest.TestCase):
  @classmethod
  def setUpClass(cls):
+  global a
+  missing=[f for f in ('prefectures.json','property-prices.json') if not (_BASE/f).exists()]
+  if missing: raise unittest.SkipTest('原典が無い: '+', '.join(missing)+' (STATS47_PROPERTY_SOURCE_DIR に取得済みの原典を置いて実行する)')
+  a=importlib.import_module('aggregate')
   cls.profile=json.loads((a.BASE/'property-prices.json').read_text())
   cls.row={'価格情報区分':'不動産取引価格情報','種類':'宅地(土地)','市区町村コード':'13101','都道府県名':'東京都','取引時期':'2025年第1四半期','地域':'住宅地','面積（㎡）':'150','取引価格（㎡単価）':'100000'}
  def test_median_and_quartiles_known_interpolation(self):

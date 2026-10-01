@@ -207,6 +207,17 @@ updated: 2026-09-29
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [MODEL-OPT-APPLY-01] モデル使用量の改善提案を canary で確かめて agent の model / effort に反映する
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:npm run model-usage:test] [起票:2026-10-02] [領域:管理]
+
+- **経緯**: 2026-10-02 に計測→記録→改善のサイクルを作った (正典 `.claude/rules/model-prompting.md`「継続最適化サイクル」、画面 `/ops/agents`)。初回の提案は 4 件とも `set-effort` (effort 未指定でセッションの xhigh を継承): open-data-curator ($87.8・2 回)・sns-renderer ($51.7・6 回)・article-writer ($16.7・8 回)・blog-critic ($4.8・5 回)。直近 4 週・API 換算。
+- **canary 済み (2026-10-02)**: code-reviewer を Opus 5.5 xhigh → Sonnet 5.5 xhigh。fixture v3 (basic 4 件 + subtle 4 件) × 2 回で recall 1.0 → 1.0、1 回 $0.79 → $0.39、判定 pass。結果 `.claude/state/metrics/model-usage/canary/2026-10-01-code-reviewer-opus-xhigh-vs-claude-sonnet-5-5-xhigh.json`。frontmatter はまだ opus のまま (採否はオーナー判断)。
+- **残り**:
+  1. code-reviewer の model を sonnet に変えるかを決める (2 課題の合成差分だけの結果なので、変えるなら 2〜4 週の実運用で指摘の見落としを見る)
+  2. `set-effort` 4 件の agent に canary 課題を作る (`canary-fixtures/<agent>.json`。課題文の自己採点 0・模範解答満点を確かめる) → `npm run model-usage:canary -- --agent <name> --model claude-sonnet-5-5 --effort high --baseline-model claude-sonnet-5-5`
+  3. 費用の大半はメインセッション (4 週 $1,231・Opus 5 / 5.5 の xhigh が中心)。対話の既定 effort を下げるかはオーナーの使い方次第なので、`/ops/agents` の「メインセッション」を週次で見る
+- **完了条件**: 4 件の `set-effort` 提案それぞれに canary 結果があり、合格したものは frontmatter に effort を書き、次の `npm run model-usage:report` で提案が消えている。
+
 ### [ADMIN-MCP-STATUS-01] 管理画面で、この PC が使う MCP の一覧と接続状況を見られるようにする
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-09-28] [領域:管理]
 
@@ -2554,60 +2565,6 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - **次**: 3 スクリプトの npm/npx 起動を、Windows でも動く形 (node で npm-cli を直接起動するか `shell` 指定) に揃える。
   共通の起動ヘルパーがあればそれを使う。
 - **完了条件**: この PC で上記 3 gate が判定まで進む (成功・失敗は中身次第)。
-
-### [SCRIPT-ORPHAN-DELETE-01] orphan スクリプトを紐づけ先カードの完了時に再判定する ((c) 群は 2026-09-24 判定済み)
-
-タグ: [種類:改善] [実行:対話] [検証:node .claude/scripts/lib/check-agent-skill-consistency.cjs で orphan 一覧を再取得] [起票:2026-08-17] [領域:管理]
-
-- **owner**: uruhayato373 (削除可否はオーナー判断)
-- **前提**: `SCRIPT-ORPHAN-TRIAGE-01` で orphan **29 本すべてを分類し、残す理由を記録した**
-  (下記「orphan 29 本の分類」)。
-- **済 (2026-09-16)**: (a) 群 6 本をオーナー承認で削除。`estat/estimate-city-data-size.mjs` (D1 前提。出力・cache・
-  local-resources / .gitignore 登録も同時撤去) と、`blog/gen-chart-svg.cjs` / `lib/update-skill-primary-agent.cjs`
-  (maintenance-debt baseline の UNBOUNDED_LEGACY 1 件も除去) / `note/generate-remaining-covers.cjs` /
-  `note/inject-affiliate-blocks.mjs` / `sns/backfill-x-templates.cjs`。いずれも他スクリプト・skill・workflow からの参照なし。
-- **trigger**: 下表 (b) の紐づけ先カードが閉じたとき。そのカードに紐づくスクリプトだけを再判定する。
-- **次**: (c) 群は 2026-09-24 に判定・削除済み。残作業は (b) 群と (c) で残した 3 本の、紐づけ先が閉じた時点での再判定だけ。
-- **完了条件**: (b) 群と残した 3 本がすべて、紐づけ先の完了後に削除されるか恒常利用へ移っている。
-- **禁止**: (b) 群を巻き込んで一括削除しない。
-
-#### orphan 29 本の分類 (2026-08-17 実測・`check-agent-skill-consistency.cjs`)
-
-エントリ記載の 20 本は古い。実測は **29 本**。全件に残す/消す理由を付けた。
-
-**(a) 役目が終わっている 6 本** → 2026-09-16 に全て削除済み (上記「済」)
-
-**(b) 生きているバックログに紐づく 13 本** → 消さない。紐づけ先が閉じるまで資産として残す
-
-| 紐づけ先                                                                        | スクリプト                                                                                                                          |
-| ------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| `docs/02_実装計画/44_市区町村統計スコープ分離・ランキング基盤実装仕様.md`      | `db/export-city-local-finance.cjs` / `estat/{etl-city-stats,fetch-city-local-finance}` / `gsc/inspect-cities-sample.cjs`            |
-| `BLOG-SVG-LINEAGE-RESTORE-01` (in-progress)                                     | `blog/restore-{findings,ranking,scatter}-from-svg.mjs`                                                                              |
-| `NOTE-MAGAZINE-REORG-01` (in-progress)                                          | `note/{note-magazine,fetch-note-magazines,fetch-magazine-members}.mjs` / `note/probe-{create-form,magazine-create,magazine-ui}.mjs` |
-| `CHART-LINEAGE-RESIDUAL-01` (pending)                                           | `blog/resolve-scatter-axes.mjs`                                                                                                     |
-
-`restore-*-from-svg.mjs` は名前に反して**逆復元をしない** — 旧 SVG の表示値を
-「SSOT が正しいことの照合先」としてのみ使い、≥0.95 一致したときだけ SSOT から再生成する
-(`.claude/rules/blog-data-schema.md` §1.6 の捏造防止規約に適合)。名前だけで消さない。
-
-`probe-*` は note.com の UI が変わったとき再実行する read-only 調査用。note は SPA で
-DOM が変わりやすく、実機 probe なしでは実装を直せない (`kdp-publish` と同じ理由)。
-
-**(c) 用途が判断できなかった 9 本** → 2026-09-24 に判定済み (リリース #1021〜#1023 後も未使用を確認)
-
-- 削除 6 本: `blog/prefecture-food-profile.mjs` (一度きりの記事用・入力は /tmp) / `blog/select-conformance-candidates.mjs`
-  (依存する routine は 6 月から未登録・無効。`triggers.json` の該当定義に削除を注記) / `gsc/discover-trends-fetch.cjs`
-  (`/discover-trends` から呼ばれない) / `note/affiliate-incremental.sh` (単一広告・Profile 直書きの一度きり作業) /
-  `note/download-affiliate-banners.mjs` (取得済み・呼び出し元なし) / `note/expand-for-fix.mjs` (/tmp 入力の一度きり作業)
-- 残す 3 本: `blog/build-article-data-from-r2.mjs` (2026-08-26 にも修正あり。R2 から記事 data を作り直す代替手段) /
-  `note/publish-new-note.sh` (publish-note SKILL・テストから参照され使用中。orphan 一覧からも外れた) /
-  `psi/generate-cwv-pr.mjs` (有効な routine `stats47 weekly CWV PR` の手動代替として `triggers.json` に明記)
-
-**なぜ orphan 警告を 0 にしないか**: (b) の 13 本は「今は呼ばれていないが消してはいけない」もので、
-これを 0 にするには allowlist を作るか無理に参照を生やすことになる。どちらも実態を曇らせる。
-warning のまま**理由付きで残す**のが正しい形で、これが本エントリの成果物。
-
-- **完了条件**: orphan 警告が 0 になるか、残るものが「なぜ残すか」を添えて記録されている。
 
 ### [NOTE-PAID-MANUSCRIPT-SYNC-01] API パッチで変えた有料記事 6 本の private R2 原稿を live 本文に追従させる
 

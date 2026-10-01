@@ -14,7 +14,7 @@ import {
   validateSourceBytes,
   validateConfig,
   integer,
-} from "./ingest-prefectural-buildings.mjs";
+} from "../ingest-prefectural-buildings.mjs";
 const requireRepo = createRequire(resolve(process.cwd(), "package.json"));
 const prefs = requireRepo("./packages/area/src/data/prefectures.json");
 const check = (code) =>

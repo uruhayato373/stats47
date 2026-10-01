@@ -4,11 +4,11 @@ import { createRequire } from 'node:module';
 import {
   extractSettlementTable,
   validateReportBytes,
-} from './ingest-depopulated-settlements.mjs';
+} from '../ingest-depopulated-settlements.mjs';
 const require = createRequire(import.meta.url);
 const {
   depopulatedSettlementsFixture,
-} = require('../../../apps/web/src/features/depopulated-settlements/__tests__/depopulated-settlements-fixture.ts');
+} = require('../../../../apps/web/src/features/depopulated-settlements/__tests__/depopulated-settlements-fixture.ts');
 const rowNumbers = (row) =>
   [
     ...row.categories.map((category) => category.count),
