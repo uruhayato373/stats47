@@ -4,7 +4,8 @@
   "scripts": {
     "policy:sync": "node .claude/shared-policy/sync.mjs --sync",
     "policy:check": "node .claude/shared-policy/sync.mjs --check",
-    "preadmin": "npm run policy:check",
+    "preadmin": "npm run policy:check && (npm run ci:workflows || true)",
+    "ci:workflows": "node .claude/scripts/ci/workflow-catalog.mjs",
     "rakuten:record": "node .claude/scripts/ads/record-rakuten-results.mjs",
     "auth:ci-secret": "node .claude/scripts/measurement/set-ci-secret.mjs",
     "page-quality:check": "tsx .claude/scripts/page-quality/run-representative.ts",

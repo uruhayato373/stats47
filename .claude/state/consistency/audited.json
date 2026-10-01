@@ -1,15 +1,7 @@
 {
-  "hash": "22d0fc42eb9ce06baebde783ade83d4a7fad6c36ee624cd133afa429adfe1d13",
-  "audited_at": "2026-10-01T12:04:31",
+  "hash": "8443c3e5f30c83f08e9e30dddf9cbbcaace851231e3f743bc0742b07b8252c08",
+  "audited_at": "2026-10-01T12:17:45",
   "files": [
-    ".agents/skills/analytics/gsc-coverage-remediation/SKILL.md",
-    ".agents/skills/analytics/indexing-api-submit/SKILL.md",
-    ".agents/skills/analytics/search-growth/SKILL.md",
-    ".claude/scripts/instagram/post-angle-carousel.cjs",
-    ".claude/scripts/lib/check-agent-skill-consistency.cjs",
-    ".claude/scripts/search-growth/__tests__/compliance.test.mjs",
-    ".claude/skills/analytics/gsc-coverage-remediation/SKILL.md",
-    ".claude/skills/analytics/indexing-api-submit/SKILL.md",
-    ".claude/skills/analytics/search-growth/SKILL.md"
+    ".claude/scripts/ci/workflow-catalog.mjs"
   ]
 }
