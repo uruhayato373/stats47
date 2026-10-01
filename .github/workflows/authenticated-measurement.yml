@@ -70,7 +70,7 @@ jobs:
           - {source: gsc, secret: MEASUREMENT_SESSION_GSC}
           - {source: kdp, secret: MEASUREMENT_SESSION_KDP, auth: KDP}
           - {source: rakuten, secret: MEASUREMENT_SESSION_RAKUTEN, auth: RAKUTEN}
-          - {source: coconala, secret: MEASUREMENT_SESSION_COCONALA, auth: COCONALA}
+          - {source: coconala, secret: MEASUREMENT_SESSION_COCONALA}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:

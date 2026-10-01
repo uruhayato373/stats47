@@ -80,7 +80,7 @@ export default function AuthCredentialsPage() {
             })}
           </DataTable>
           <p className="mt-1 text-[11px] text-console-muted">
-            CI は note・ココナラ・KDP・A8・もしもがパスワードを使う (セッション切れの入り直し)。「保管」は Secrets にあるだけで CI は使わない。方針は「自動ログイン」欄にマウスを置くと出る。
+            CI は note・KDP・A8・もしも・楽天がパスワードを使う (セッション切れの入り直し)。ココナラは自動操作が拒否されるので人が入り直す。「保管」は Secrets にあるだけで CI は使わない。方針は「自動ログイン」欄にマウスを置くと出る。
             登録状況はページを開くたびに調べる。パスワードは表示も読み出しもしない。
           </p>
         </Section>

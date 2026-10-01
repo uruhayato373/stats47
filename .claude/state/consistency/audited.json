@@ -1,7 +1,8 @@
 {
-  "hash": "2c445d53daaf7f3a967a4f1419b2cfd0ceb31d3f0705001918f18edd139b173e",
-  "audited_at": "2026-10-01T18:45:45",
+  "hash": "0c226e0860ea39a0cb2fef22e9333ab0690d618fe53dbc1d203926795c038775",
+  "audited_at": "2026-10-01T19:14:20",
   "files": [
-    ".claude/scripts/note/audit-note-card-visibility.mjs"
+    ".claude/scripts/measurement/credential-store.mjs",
+    ".claude/scripts/measurement/refresh-session.mjs"
   ]
 }
