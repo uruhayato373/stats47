@@ -260,6 +260,7 @@ function revenueSection(week) {
       authLatest: readJsonOrNull(".claude/state/metrics/authenticated/latest.json"),
       a8Results: readJsonOrNull(".claude/state/metrics/affiliate/a8-results.json"),
       moshimoResults: readJsonOrNull(".claude/state/metrics/affiliate/moshimo-results.json"),
+      rakutenResults: readJsonOrNull(".claude/state/metrics/affiliate/rakuten-results.json"),
       asOf: weekSun,
     }).map((line) => `  ${line}`),
   );
