@@ -16,7 +16,7 @@ test('autoLogin=true の service と refresh-session の LOGIN が一致する',
   assert.deepEqual(auto, Object.keys(LOGIN).sort());
 });
 
-test('項目名は stats47-measurement-<service> で、ID やパスワードを持たない', () => {
+test('項目名は stats47-measurement-<service> で、パスワードを持たない (ログイン ID は loginId だけ)', () => {
   for (const [id, v] of Object.entries(services)) {
     assert.equal(v.storeItem, `stats47-measurement-${id}`, id);
     assert.deepEqual(Object.keys(v).filter((k) => /user|password|secret|email/i.test(k)), [], id);

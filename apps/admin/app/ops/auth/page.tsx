@@ -14,6 +14,8 @@ export const metadata = { title: "ログインと資格情報 — stats47 admin"
  */
 function action(r: AuthCredentialRow): string | null {
   if (r.stored === false) return "未登録";
+  // 正本の ID とこの PC のストアの ID が違うと、ログインは別アカウントか失敗になる (2026-09-30 の全角スペース事故)
+  if (r.stored && r.loginId && r.user !== r.loginId) return "ID 不一致";
   if ((r.ciCredential || r.ciStored) && r.ciSecrets === false) return "CI 未登録";
   return null;
 }
@@ -43,6 +45,7 @@ export default function AuthCredentialsPage() {
   }
   const todo = v.rows.filter((r) => action(r));
   const unregistered = v.rows.filter((r) => r.stored === false);
+  const toRegister = v.rows.filter((r) => action(r) === "未登録" || action(r) === "ID 不一致");
   const ciMissing = v.rows.filter((r) => (r.ciCredential || r.ciStored) && r.ciSecrets === false);
 
   return (
@@ -65,7 +68,7 @@ export default function AuthCredentialsPage() {
               return (
                 <Row key={r.id}>
                   <Cell nowrap>{r.label}</Cell>
-                  <Cell nowrap muted>{r.user ?? "—"}</Cell>
+                  <Cell nowrap muted>{r.loginId ?? r.user ?? "—"}</Cell>
                   <Cell nowrap>{localCell(r)}</Cell>
                   <Cell nowrap>{ciCell(r)}</Cell>
                   <Cell nowrap>
@@ -82,13 +85,13 @@ export default function AuthCredentialsPage() {
           </p>
         </Section>
 
-        {unregistered.length > 0 && (
+        {toRegister.length > 0 && (
           <PanelCard
-            title="未登録のサービスを登録する"
+            title="未登録・ID 不一致のサービスを登録する"
             description="ターミナルで実行し、聞かれたらパスワードを入力する。登録後にこのページを再読み込みする"
           >
             <Stack gap="sm">
-              {unregistered.map((r) => (
+              {toRegister.map((r) => (
                 <code key={r.id} className="text-[12px]">{r.registerCommand}</code>
               ))}
             </Stack>

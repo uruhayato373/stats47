@@ -1,23 +1,7 @@
 {
-  "hash": "2c97631b5257ae282673d8150d82ce5dda390bab5eb896c038ba1601f11d563f",
-  "audited_at": "2026-09-30T09:46:16",
+  "hash": "3e13a9fa463d0d68d239191975936ab229916eecc430ebad6ffa84193f0e5a45",
+  "audited_at": "2026-10-01T10:09:43",
   "files": [
-    ".agents/skills/analytics/adsense-improvement/SKILL.md",
-    ".agents/skills/analytics/affiliate-improvement/SKILL.md",
-    ".agents/skills/analytics/fetch-adsense-data/SKILL.md",
-    ".agents/skills/management/business-plan-operate/SKILL.md",
-    ".claude/agents/README.md",
-    ".claude/agents/adsense-analyst.md",
-    ".claude/agents/affiliate-manager.md",
-    ".claude/agents/asp-scout.md",
-    ".claude/agents/ga4-analyst.md",
-    ".claude/agents/gsc-analyst.md",
-    ".claude/agents/improvement-triage.md",
-    ".claude/agents/performance-auditor.md",
-    ".claude/rules/affiliate-ads-standards.md",
-    ".claude/skills/analytics/adsense-improvement/SKILL.md",
-    ".claude/skills/analytics/affiliate-improvement/SKILL.md",
-    ".claude/skills/analytics/fetch-adsense-data/SKILL.md",
-    ".claude/skills/management/business-plan-operate/SKILL.md"
+    ".claude/scripts/measurement/__tests__/auth-credential-ssot.test.mjs"
   ]
 }

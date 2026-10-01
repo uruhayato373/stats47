@@ -17,6 +17,8 @@ import { wrap } from "./state-io";
 export interface AuthCredentialRow {
   id: string;
   label: string;
+  /** 正本のログイン ID。未確定の service は null */
+  loginId: string | null;
   storeItem: string;
   autoLogin: boolean;
   ciCredential: boolean;
@@ -30,6 +32,7 @@ export interface AuthCredentialRow {
 
 interface ServiceSpec {
   label: string;
+  loginId?: string;
   storeItem: string;
   autoLogin: boolean;
   ciCredential: boolean;
@@ -63,9 +66,11 @@ export function authCredentialRows() {
     const rows = Object.entries(services).map(([id, s]): AuthCredentialRow => {
       const key = id.toUpperCase();
       const entry = local?.[s.storeItem];
+      const loginArg = s.loginId ?? "<ログインID>";
       return {
         id,
         label: s.label,
+        loginId: s.loginId ?? null,
         storeItem: s.storeItem,
         autoLogin: s.autoLogin,
         ciCredential: s.ciCredential,
@@ -77,8 +82,8 @@ export function authCredentialRows() {
           ? null
           : secrets.has(`STATS47_AUTH_${key}_USER`) && secrets.has(`STATS47_AUTH_${key}_PASSWORD`),
         registerCommand: mac
-          ? `security add-generic-password -s ${s.storeItem} -a <ログインID> -w`
-          : `cmdkey /generic:${s.storeItem} /user:<ログインID> /pass`,
+          ? `security add-generic-password -U -s ${s.storeItem} -a ${loginArg} -w`
+          : `cmdkey /generic:${s.storeItem} /user:${loginArg} /pass`,
       };
     });
     return { rows, generatedAt: new Date().toISOString() };
