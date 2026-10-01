@@ -6,7 +6,7 @@
  *   - Stop hook check-weekly-cadence-on-stop.js (書き漏れの通知)
  *   - review-cadence-guard.yml (毎朝、期限切れ・契約違反を Issue にして直ったら閉じる)
  *   - docs:check DG084 (書いたレビューの契約違反を pre-commit / PR で止める)
- *   - 管理画面 /strategy/reviews と週次メトリクス Issue の「サイクルの健全性」節
+ *   - 管理画面 /strategy/reviews/{weekly,monthly} と週次メトリクス Issue の「サイクルの健全性」節
  *
  * 判定の考え方 (doboku-note の移植。2026-10-01):
  *   - 週次レビュー: 完了した週 (日曜まで) ごとに 1 本。今日が日曜なら今週はまだ対象外
@@ -390,3 +390,145 @@ export function handoffSummary(result, cadence = "weekly") {
   return { period: latest.period, inContract: latest.inContract, routed: latest.routed, total: latest.handoff.length };
 }
 
+
+// ---------- 回ごとの実施状況 (管理画面の週次・月次ページ) ----------
+
+const MEASUREMENT_HISTORY = ".claude/state/metrics/measurement-cycle/history.csv";
+const VERDICT_DIR = ".claude/state/effect-verdict";
+
+/** ISO 週 YYYY-Www の月曜〜日曜 */
+export function weekRange(week) {
+  const [y, w] = week.split("-W").map(Number);
+  const jan4 = new Date(Date.UTC(y, 0, 4));
+  const monday = addDays(jan4, -((jan4.getUTCDay() || 7) - 1) + (w - 1) * 7);
+  return { start: ymd(monday), end: ymd(addDays(monday, 6)) };
+}
+
+/** 月 YYYY-MM の初日〜末日 */
+export function monthRange(month) {
+  const first = new Date(`${month}-01T00:00:00Z`);
+  return { start: ymd(first), end: ymd(addDays(addMonths(first, 1), -1)) };
+}
+
+/** 木曜がその月に入る ISO 週 (月次レビューが集約する週) */
+export function weeksOfMonth(month) {
+  const { start, end } = monthRange(month);
+  const weeks = new Set();
+  for (let d = new Date(`${start}T00:00:00Z`); ymd(d) <= end; d = addDays(d, 1)) {
+    if (d.getUTCDay() === 4) weeks.add(isoWeekLabel(d));
+  }
+  return [...weeks];
+}
+
+function measuredWeeks(root) {
+  const text = readText(root, MEASUREMENT_HISTORY);
+  if (!text) return [];
+  return text.split("\n").slice(1).map((l) => l.split(",")[0]).filter((w) => /^\d{4}-W\d{2}$/.test(w));
+}
+
+/** 状態: done / partial / missing / unknown (記録の開始前など、判定できない) / skipped (契約前) */
+function step(label, does, state, note) {
+  return { label, does, state, note };
+}
+
+function sectionText(text, name) {
+  const s = findSection(splitSections(text), name);
+  return s ? s.lines.join("\n").trim() : null;
+}
+
+/**
+ * 1 回分 (週次は ISO 週、月次は月) の実施状況・手順・判断。
+ * 手順は「計測 → 記録 → 振り返り → 起票 → 計画」の順で、根拠のファイルが確認できたかを出す。
+ */
+export function reviewRun(root, cadence, period, now = new Date()) {
+  const result = reviewCadence(root, now);
+  const wiring = loadWiring(root);
+  const conf = wiring.cadences[cadence];
+  const list = listReviews(root, conf);
+  const index = list.findIndex((r) => r.period === period);
+  const file = index >= 0 ? list[index] : null;
+  const check = index >= 0 ? result.reviews[cadence][index] : null;
+  const range = cadence === "weekly" ? weekRange(period) : monthRange(period);
+  const statusRow = result.status.find((s) => s.kind === `${cadence}-review`);
+  const isLatest = index === 0;
+
+  const measured = measuredWeeks(root);
+  const firstMeasured = measured.slice().sort()[0] ?? null;
+  const weekState = (w) => (measured.includes(w) ? "done" : firstMeasured && w < firstMeasured ? "unknown" : "missing");
+  const verdictExists = (w) => existsSync(join(root, VERDICT_DIR, `verdicts-${w}.json`));
+
+  const steps = [];
+  if (cadence === "weekly") {
+    const ms = weekState(period);
+    steps.push(step("計測", "日曜の fetch-metrics-weekly が計測→記録→改善サイクルの state を作る", ms, ms === "unknown" ? `計測履歴は ${firstMeasured} から` : MEASUREMENT_HISTORY));
+    steps.push(step("効果判定", "閾値エンジンがその週の施策の効果を判定する", verdictExists(period) ? "done" : "missing", `${VERDICT_DIR}/verdicts-${period}.json`));
+  } else {
+    const weeks = weeksOfMonth(period);
+    const reviewed = weeks.filter((w) => listReviews(root, wiring.cadences.weekly).some((r) => r.period === w));
+    steps.push(step("週次レビュー", `月内の週次レビュー (${weeks[0]}〜${weeks.at(-1)}) が揃っている`, reviewed.length === weeks.length ? "done" : reviewed.length ? "partial" : "missing", `${reviewed.length} / ${weeks.length} 週`));
+    const judged = weeks.filter(verdictExists);
+    steps.push(step("効果判定", "月内の各週で閾値エンジンが施策を判定している", judged.length === weeks.length ? "done" : judged.length ? "partial" : "missing", `${judged.length} / ${weeks.length} 週`));
+  }
+  steps.push(step("レビューを保存", `${conf.command} が ${conf.dir}/${period}.md に書く`, file ? "done" : "missing", file?.path ?? "未作成"));
+  if (!file) {
+    steps.push(step("必須の見出し", "正本の requiredSections がすべてある", "missing", "レビューが無い"));
+    steps.push(step("申し送りの振り分け", `各項目の末尾に「${wiring.handoffRouting.marker} <行き先>」`, "missing", "レビューが無い"));
+  } else if (!check.inContract) {
+    steps.push(step("必須の見出し", "正本の requiredSections がすべてある", "skipped", `契約の開始 ${conf.contractFrom} より前`));
+    steps.push(step("申し送りの振り分け", `各項目の末尾に「${wiring.handoffRouting.marker} <行き先>」`, "skipped", `契約の開始 ${conf.contractFrom} より前`));
+  } else {
+    steps.push(step("必須の見出し", "正本の requiredSections がすべてある", check.missingSections.length ? "partial" : "done", check.missingSections.length ? `不足: ${check.missingSections.join(" / ")}` : `${conf.requiredSections.length} 見出し`));
+    const all = check.handoff.length;
+    steps.push(step("申し送りの振り分け", `各項目の末尾に「${wiring.handoffRouting.marker} <行き先>」`, all === 0 ? "missing" : check.routed === all ? "done" : "partial", `${check.routed} / ${all} 件`));
+  }
+  // 次の計画への引き継ぎは、計画ファイルが「次の回」を指しているときだけ判定できる (過去の計画は上書きされている)
+  const plan = wiring.plans[cadence];
+  const planText = readText(root, plan.file) ?? "";
+  const planPeriod = frontmatterValue(planText, cadence === "weekly" ? "week" : "month");
+  const nextPeriod = cadence === "weekly" ? isoWeekLabel(addDays(new Date(`${range.end}T00:00:00Z`), 1)) : monthLabel(addMonths(new Date(`${period}-01T00:00:00Z`), 1));
+  const routedIds = (check?.handoff ?? []).flatMap((h) => h.routes ?? []).filter((r) => CARD_ID.test(r) || EXP_ID.test(r));
+  if (planPeriod !== nextPeriod) {
+    steps.push(step("次の計画へ引き継ぎ", `${plan.command} が ${nextPeriod} の計画で申し送りの行き先を拾う`, planPeriod && planPeriod > nextPeriod ? "unknown" : "missing", planPeriod && planPeriod > nextPeriod ? "計画は上書き済みで過去分は判定できない" : `${plan.file} は ${planPeriod ?? "なし"}`));
+  } else if (routedIds.length === 0) {
+    steps.push(step("次の計画へ引き継ぎ", `${plan.command} が ${nextPeriod} の計画で申し送りの行き先を拾う`, "unknown", "振り分け済みのカード ID が無い"));
+  } else {
+    const picked = routedIds.filter((id) => planText.includes(id));
+    steps.push(step("次の計画へ引き継ぎ", `${plan.command} が ${nextPeriod} の計画で申し送りの行き先を拾う`, picked.length === routedIds.length ? "done" : "partial", `計画に載った ID ${picked.length} / ${routedIds.length}`));
+  }
+
+  // 期限前の回 (月次は 3 日まで) は未実施ではなく「期限前」
+  const notYetDue = !file && !(statusRow?.missing ?? []).includes(period) && (cadence === "monthly" ? Boolean(statusRow?.nextDue) : period > result.lastCompletedWeek);
+  const verdict = !file ? (notYetDue ? "upcoming" : "missing") : steps.some((s) => s.state === "missing" || s.state === "partial") ? "partial" : "ok";
+  const options = [...new Set([period, ...list.map((r) => r.period), ...(statusRow?.missing ?? [])])]
+    .sort((a, b) => b.localeCompare(a))
+    .map((p) => ({ key: p, missing: !list.some((r) => r.period === p) }));
+
+  return {
+    cadence,
+    label: conf.label,
+    command: conf.command,
+    period,
+    range,
+    isLatest,
+    verdict,
+    nextDue: notYetDue ? statusRow?.nextDue ?? null : null,
+    steps,
+    summary: file ? sectionText(file.text, "サマリー") : null,
+    handoff: check?.handoff ?? [],
+    handoffSection: conf.handoffSection,
+    inContract: check?.inContract ?? period >= conf.contractFrom,
+    path: file?.path ?? `${conf.dir}/${period}.md`,
+    options,
+    status: result.status.filter((s) => s.kind.startsWith(cadence)),
+    findings: result.findings.filter((f) => (f.file ?? "").startsWith(conf.dir) || f.message.startsWith(conf.label) || f.message.startsWith(plan.label)),
+    wiring: result.wiring.filter((w) => w.cadence === cadence),
+    marker: wiring.handoffRouting.marker,
+  };
+}
+
+/** ページを開いたときに選ぶ回: 期限が来ている最新の回 (無ければ最新のレビュー) */
+export function defaultRun(root, cadence, now = new Date()) {
+  const result = reviewCadence(root, now);
+  const s = result.status.find((x) => x.kind === `${cadence}-review`);
+  return s.expected ?? s.latest ?? (cadence === "weekly" ? result.lastCompletedWeek : result.previousMonth);
+}

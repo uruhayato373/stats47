@@ -1,5 +1,5 @@
 {
-  "_comment": "週次・月次レビューと計画の配線の正本 (2026-10-01、doboku-note の review-wiring を stats47 の計測→記録→改善サイクルへ移植)。読み口は .claude/scripts/management/lib/review-cadence.mjs だけ。検査 = check-review-cadence.mjs (Stop hook・review-cadence-guard.yml・docs:check DG084)、表示 = 管理画面 /strategy/reviews、週次メトリクス Issue の「サイクルの健全性」節。contractFrom より前の期間は必須見出しと申し送りの振り分けを検査しない (遡って書き直さない)。inputs はレビューのスキルが実際に使うコマンド・state で、run は SKILL.md に同じ文字列があること、read はパスが実在することを検査する。",
+  "_comment": "週次・月次レビューと計画の配線の正本 (2026-10-01、doboku-note の review-wiring を stats47 の計測→記録→改善サイクルへ移植)。読み口は .claude/scripts/management/lib/review-cadence.mjs だけ。検査 = check-review-cadence.mjs (Stop hook・review-cadence-guard.yml・docs:check DG084)、表示 = 管理画面 /strategy/reviews/{weekly,monthly}、週次メトリクス Issue の「サイクルの健全性」節。contractFrom より前の期間は必須見出しと申し送りの振り分けを検査しない (遡って書き直さない)。inputs はレビューのスキルが実際に使うコマンド・state で、run は SKILL.md に同じ文字列があること、read はパスが実在することを検査する。",
   "handoffRouting": {
     "marker": "→ 振り分け:",
     "routes": [

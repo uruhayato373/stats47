@@ -42,7 +42,7 @@
 
 どちらも週次の重い収集を再実行せず集約する軽量設計。期限・必須見出し・申し送りの振り分け・入力の配線の正本は
 `.claude/config/review-wiring.json` で、`node .claude/scripts/management/check-review-cadence.mjs` が検査する
-(毎朝 `review-cadence-guard.yml` が Issue 化、書いた時点は docs:check DG084、管理画面 `/strategy/reviews`)。
+(毎朝 `review-cadence-guard.yml` が Issue 化、書いた時点は docs:check DG084、管理画面 `/strategy/reviews/{weekly,monthly}`)。
 
 ### 週次運用（毎週のルーティン）
 

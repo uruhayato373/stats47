@@ -1,6 +1,6 @@
 import "server-only";
 
-import { reviewCadence } from "../../../../.claude/scripts/management/lib/review-cadence.mjs";
+import { defaultRun, reviewRun } from "../../../../.claude/scripts/management/lib/review-cadence.mjs";
 import { projectRoot } from "./project-root";
 import { wrap } from "./state-io";
 
@@ -48,18 +48,46 @@ export interface WiringRow {
   target: string;
   problem: string | null;
 }
-export interface ReviewCadenceView {
-  today: string;
-  currentWeek: string;
-  lastCompletedWeek: string;
-  currentMonth: string;
+
+
+export type Cadence = "weekly" | "monthly";
+export type StepState = "done" | "partial" | "missing" | "unknown" | "skipped";
+export type RunVerdict = "ok" | "partial" | "missing" | "upcoming";
+export interface RunStep {
+  label: string;
+  does: string;
+  state: StepState;
+  note: string;
+}
+export interface ReviewRunView {
+  cadence: Cadence;
+  label: string;
+  command: string;
+  period: string;
+  range: { start: string; end: string };
+  isLatest: boolean;
+  verdict: RunVerdict;
+  nextDue: string | null;
+  steps: RunStep[];
+  summary: string | null;
+  handoff: HandoffItem[];
+  handoffSection: string;
+  inContract: boolean;
+  path: string;
+  options: Array<{ key: string; missing: boolean }>;
   status: CadenceStatus[];
-  reviews: { weekly: ReviewCheck[]; monthly: ReviewCheck[] };
-  wiring: WiringRow[];
   findings: CadenceFinding[];
+  wiring: WiringRow[];
   marker: string;
 }
 
-export function reviewCadenceView() {
-  return wrap(() => reviewCadence(projectRoot()) as ReviewCadenceView);
+const PERIOD = { weekly: /^\d{4}-W\d{2}$/, monthly: /^\d{4}-\d{2}$/ } as const;
+
+/** 週次・月次ページの 1 回分。run が無い・形が違うときは期限が来ている最新の回 */
+export function reviewRunView(cadence: Cadence, run?: string) {
+  return wrap(() => {
+    const root = projectRoot();
+    const period = run && PERIOD[cadence].test(run) ? run : (defaultRun(root, cadence) as string);
+    return reviewRun(root, cadence, period) as ReviewRunView;
+  });
 }

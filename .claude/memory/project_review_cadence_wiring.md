@@ -8,7 +8,7 @@ metadata:
   modified: 2026-10-01T11:43:43.057Z
 ---
 
-2026-10-01 に週次・月次レビューを計測→記録→改善サイクルへ配線した。正本は `.claude/config/review-wiring.json`、判定は `.claude/scripts/management/lib/review-cadence.mjs` だけで、次がすべてこれを読む: `check-review-cadence.mjs` (旧 check-weekly-cadence.mjs を置換)、Stop hook `check-weekly-cadence-on-stop.js`、`review-cadence-guard.yml` (毎朝 08:30 JST、`review-cadence-alert` Issue を upsert/自動 close)、docs:check DG084、管理画面 `/strategy/reviews`、週次メトリクス Issue の「サイクルの健全性」節 (cycle-health.mjs)。
+2026-10-01 に週次・月次レビューを計測→記録→改善サイクルへ配線した。正本は `.claude/config/review-wiring.json`、判定は `.claude/scripts/management/lib/review-cadence.mjs` だけで、次がすべてこれを読む: `check-review-cadence.mjs` (旧 check-weekly-cadence.mjs を置換)、Stop hook `check-weekly-cadence-on-stop.js`、`review-cadence-guard.yml` (毎朝 08:30 JST、`review-cadence-alert` Issue を upsert/自動 close)、docs:check DG084、管理画面 `/strategy/reviews/{weekly,monthly}`、週次メトリクス Issue の「サイクルの健全性」節 (cycle-health.mjs)。
 
 - 月次の振り返りは `/monthly-review` に独立 (保存先 `.claude/skills/management/monthly-review/reference/reviews/YYYY-MM.md`、毎月 3 日から前月分が必須)。`/monthly-plan` はそれを読むだけ。
 - 契約は週次 2026-W40・月次 2026-09 から。申し送りの各項目の末尾に `→ 振り分け: <カード ID / EXP-NNN / #Issue / 定常 / 見送り>`。ID の実在は最新のレビューだけで見る (古い行き先は完了して消えるのが正常)。

@@ -4,7 +4,7 @@ import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
 import { test } from "node:test";
 
-import { classifyRoute, parseRoutes, reviewCadence } from "../lib/review-cadence.mjs";
+import { classifyRoute, parseRoutes, reviewCadence, reviewRun, weekRange, weeksOfMonth } from "../lib/review-cadence.mjs";
 
 // 実リポジトリの state に依存しないよう、配線の正本と台帳を持つ小さなリポジトリを毎回組み立てる。
 const WEEKLY_SECTIONS = ["サマリー", "計画 vs 実績", "来週への申し送り"];
@@ -165,4 +165,21 @@ test("配線: inputs の run がスキルの手順に無い・read のパスが�
 test("全部揃っていれば findings は 0 件", () => {
   const root = fixture({ weeks: { "2026-W40": okWeek(), "2026-W41": okWeek() }, months: { "2026-09": okMonth }, weeklyPlan: "2026-W42" });
   assert.deepEqual(reviewCadence(root, at("2026-10-13")).findings, []);
+});
+
+test("週の範囲は月曜〜日曜、月次が集約する週は木曜がその月に入る ISO 週", () => {
+  assert.deepEqual(weekRange("2026-W40"), { start: "2026-09-28", end: "2026-10-04" });
+  assert.deepEqual(weeksOfMonth("2026-09"), ["2026-W36", "2026-W37", "2026-W38", "2026-W39"]);
+});
+
+// 意図: 管理画面の週次・月次ページは回ごとに「未実施」「期限前」「不足あり」「実施できた」を出し分ける。
+// 期限前の月次を未実施と出すと、毎月 1〜2 日に偽の警告が出る
+test("回ごとの判定: 期限前・未実施・不足あり・実施できた", () => {
+  const root = fixture({ weeks: { "2026-W40": okWeek(["定常"]), "2026-W41": review(["サマリー"], "来週への申し送り", []) }, weeklyPlan: "2026-W42" });
+  assert.equal(reviewRun(root, "monthly", "2026-09", at("2026-10-02")).verdict, "upcoming");
+  assert.equal(reviewRun(root, "monthly", "2026-09", at("2026-10-05")).verdict, "missing");
+  assert.equal(reviewRun(root, "weekly", "2026-W41", at("2026-10-13")).verdict, "partial");
+  const w40 = reviewRun(root, "weekly", "2026-W40", at("2026-10-13"));
+  assert.equal(w40.steps.find((x) => x.label === "申し送りの振り分け").state, "done");
+  assert.ok(w40.options.some((o) => o.key === "2026-W41"));
 });
