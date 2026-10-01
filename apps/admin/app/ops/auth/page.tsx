@@ -96,15 +96,11 @@ export default function AuthCredentialsPage() {
         )}
 
         {ciMissing.length > 0 && (
-          <PanelCard title="CI の Secrets を登録する" description="値は聞かれたら入力する (コマンド引数に書かない)">
+          <PanelCard title="CI の Secrets を登録する" description="ID はこの PC に登録済みのものを自動で入れる。聞かれたらパスワードだけを入力する">
             <Stack gap="sm">
-              {ciMissing.flatMap((r) =>
-                ["USER", "PASSWORD"].map((k) => (
-                  <code key={`${r.id}-${k}`} className="text-[12px]">
-                    gh secret set STATS47_AUTH_{r.id.toUpperCase()}_{k} --repo uruhayato373/stats47
-                  </code>
-                )),
-              )}
+              {ciMissing.map((r) => (
+                <code key={r.id} className="text-[12px]">npm run auth:ci-secret -- {r.id}</code>
+              ))}
             </Stack>
           </PanelCard>
         )}

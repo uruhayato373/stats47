@@ -5,6 +5,7 @@
     "policy:sync": "node .claude/shared-policy/sync.mjs --sync",
     "policy:check": "node .claude/shared-policy/sync.mjs --check",
     "preadmin": "npm run policy:check",
+    "auth:ci-secret": "node .claude/scripts/measurement/set-ci-secret.mjs",
     "page-quality:check": "tsx .claude/scripts/page-quality/run-representative.ts",
     "page-quality:audit-weekly": "tsx .claude/scripts/page-quality/run-full.ts",
     "page-quality:validate": "tsx .claude/scripts/page-quality/validate-schema.ts",
