@@ -30,6 +30,7 @@ updated: 2026-09-29
 - **残り (オーナーのみ・パスワードは対話入力)**:
   1. **Mac に全 9 サービス**: `security add-generic-password -s stats47-measurement-<service> -a <ID> -w`。ID は Windows の `/ops/auth` のログイン ID 列と同じ (ココナラは未定)。A8・もしもは doboku-note と共用で、この 1 項目だけを登録する (`doboku-note-auth-a8` 等は作らない)
   2. **ココナラ**: Windows `cmdkey /generic:stats47-measurement-coconala /user:<ID> /pass` → CI `npm run auth:ci-secret -- coconala` (ID は自動、パスワードだけ入力)
+  3. **CI のセッション待ちを解く (Mac・保管庫の鍵がある端末)**: 2026-10-01 の CI 初回試行で、A8・もしもの Secrets 再ログインは `login_failed`、楽天は `timeout` だった (失敗印 `reloginFailedAt` で以後は再試行しない)。楽天 `node .claude/scripts/measurement/bootstrap-session.mjs rakuten --login --publish`、A8・もしも `node .claude/scripts/measurement/refresh-session.mjs a8 moshimo --headed --publish`。--headed で画面を見て、パスワード入力後に何が出るか (追加確認・遷移先 URL) を確かめ、`refresh-session.mjs` の LOGIN の判定を直す。KDP は本棚は有効だが Reports 認証で止まる (CI の入り直しが本棚しか見ない)
 - **完了条件**: Mac と Windows の両方で `/ops/auth` の「この PC」が全行「済」、CI 欄が「済」か「保管」。その後の authenticated-measurement で note・ココナラ・KDP の状態ファイルの `relogin` が `session_valid` か `relogged` になる (CI での再ログインは未実証)。
 
 ### [DATA-QUALITY-LOOP-01] 全指標のデータ品質を機械チェックし、「誤り・古さ・終了・薄さ」の 4 基準で継続的に直すループを作る
