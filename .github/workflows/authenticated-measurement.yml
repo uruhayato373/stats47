@@ -63,8 +63,8 @@ jobs:
       max-parallel: 7 # separate services and ephemeral runners; no shared browser profile
       matrix:
         include:
-          - {source: moshimo, secret: MEASUREMENT_SESSION_MOSHIMO}
-          - {source: a8, secret: MEASUREMENT_SESSION_A8}
+          - {source: moshimo, secret: MEASUREMENT_SESSION_MOSHIMO, auth: MOSHIMO}
+          - {source: a8, secret: MEASUREMENT_SESSION_A8, auth: A8}
           - {source: afb, secret: AFB_API_KEY}
           - {source: note, secret: MEASUREMENT_SESSION_NOTE, auth: NOTE}
           - {source: gsc, secret: MEASUREMENT_SESSION_GSC}
