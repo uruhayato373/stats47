@@ -23,12 +23,14 @@ updated: 2026-09-29
 
 並び順が着手順 (2026-09-27 オーナー判断: 計測・記録・改善とデータ品質を優先する)。上限 10 枚 (DG081)。
 
-### [AUTH-CREDENTIAL-REGISTER-01] 全ログインサービスの資格情報を Windows・Mac・CI に登録する
+### [AUTH-CREDENTIAL-REGISTER-01] 残りの資格情報 (Mac 全サービス・ココナラ) を登録する
 タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [起票:2026-10-01] [領域:管理]
 
-- **経緯**: 2026-10-01 に doboku-note と同じく、全サービスの資格情報の正本 `.claude/config/auth-credentials.json` と管理画面 `/ops`「ログインと資格情報」、note・ココナラ・KDP の CI 再ログインを実装した。2026-10-01 時点でこの Windows PC は 8 サービスとも未登録、CI の Secrets も 3 件とも未登録 (管理画面で確認)。
-- **やること (オーナーのみ・パスワードは対話入力)**: Windows は `cmdkey /generic:stats47-measurement-<service> /user:<ID> /pass`、Mac は `security add-generic-password -s stats47-measurement-<service> -a <ID> -w`。CI は `gh secret set STATS47_AUTH_{NOTE,COCONALA,KDP}_USER` と `_PASSWORD` (KDP の TOTP を使うなら `_TOTP`)。
-- **完了条件**: `/ops` で全行の「この PC」が登録済み (Windows・Mac の両方で確認)、CI の Secrets 3 件が登録済み。その後の authenticated-measurement で note・ココナラ・KDP の状態ファイルの `relogin` が `session_valid` か `relogged` になる (CI での再ログインは未実証)。
+- **経緯**: 2026-10-01 に資格情報の正本 `.claude/config/auth-credentials.json` (9 サービス) と管理画面 `/ops/auth` を作り、note・ココナラ・KDP は CI でセッション切れを入り直す。同日 Windows PC と CI に 8 サービスを登録済み (A8・もしも・afb・楽天・note・KDP・X・Google。ID と登録先は `/ops/auth` で確認)。
+- **残り (オーナーのみ・パスワードは対話入力)**:
+  1. **Mac に全 9 サービス**: `security add-generic-password -s stats47-measurement-<service> -a <ID> -w`。ID は Windows の `/ops/auth` のログイン ID 列と同じ (ココナラは未定)。A8・もしもは doboku-note と共用で、この 1 項目だけを登録する (`doboku-note-auth-a8` 等は作らない)
+  2. **ココナラ**: Windows `cmdkey /generic:stats47-measurement-coconala /user:<ID> /pass` → CI `npm run auth:ci-secret -- coconala` (ID は自動、パスワードだけ入力)
+- **完了条件**: Mac と Windows の両方で `/ops/auth` の「この PC」が全行「済」、CI 欄が「済」か「保管」。その後の authenticated-measurement で note・ココナラ・KDP の状態ファイルの `relogin` が `session_valid` か `relogged` になる (CI での再ログインは未実証)。
 
 ### [DATA-QUALITY-LOOP-01] 全指標のデータ品質を機械チェックし、「誤り・古さ・終了・薄さ」の 4 基準で継続的に直すループを作る
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-09-25] [領域:データ]
