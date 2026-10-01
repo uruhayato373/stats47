@@ -52,7 +52,7 @@ FAIL項目はレビュー本文の`Blockers`へ転記する。レビュー作成
 | 検索成長 | `npm run search-growth:status`、`npm run search-growth:next -- --limit 10` |
 | NSM実験 | `.claude/skills/management/nsm-experiment/reference/` |
 | 週次収益 (NSM) | `node .claude/scripts/metrics/generate-weekly-metrics-issue.mjs --week <YYYY-Www>` の「週次収益 (NSM)」節。欠測は 0 円ではなく「判定不能」。AdSense は恒久停止で ¥0 固定 |
-| 楽天アフィリエイト成果 | 成果 API が無く自動収集しない。**オーナーに楽天アフィリエイト管理画面の成果レポート (当月の成果件数・成果報酬、前月の確定報酬) を確認してもらい**、`npm run rakuten:record -- --month <YYYY-MM> --orders <件> --estimated-yen <円> [--confirmed-yen <円>]` で月ごとに記録する (前月が確定したら前月分も記録し直す)。週次 Issue の「週次収益 (NSM)」の楽天行に出る。未記録・10 日超の記録は判定不能として Blockers へ。値を推測で入れない |
+| 楽天アフィリエイト成果 | 認証付き収集の `rakuten` (毎日。`rakuten-report.mjs` が管理画面の JSON から当月・前月の発生と確定を読み `.claude/state/metrics/affiliate/rakuten-results.json` へ) を週次 Issue の「週次収益 (NSM)」の楽天行で確認する。収集が失敗・10 日超なら判定不能として Blockers へ。**収集が止まっている週だけ**、オーナーに管理画面の成果レポートを見てもらい `npm run rakuten:record -- --month <YYYY-MM> --orders <件> --estimated-yen <円> [--confirmed-yen <円>]` で記録する。値を推測で入れない |
 | 認証付き計測 | `npm run measurement:status` + `.claude/state/metrics/authenticated/latest.json`。48時間超・取得失敗・status-only・成果未取得をBlockersへ分離する。生データはprivate R2、現在の収集状態を過去週の実測にしない |
 | 計測→記録→改善サイクル | `.claude/state/metrics/measurement-cycle/{LATEST.md,triage-latest.json}`（週次メトリクス Issue の「🔁」節と同じ。GA4 回遊・GSC 判定目印・PSI / Cloudflare / SNS の週次要約を含む）。state の週が当週と違う・ゲート fail・無人記録の未実行は Blockers、未登録 custom dimension の登録と再ログインはオーナー作業として申し送る。個別の再照会は `node .claude/scripts/metrics/ga4-query.mjs` |
 | データ品質キュー | `.claude/state/data/data-quality/{LATEST.md,queue.json}`（`ranking-integrity-audit-weekly` が毎週生成。`npx tsx packages/ranking/src/scripts/build-data-quality-queue.ts` で再生成）。処置 1 誤り〜4 noindex 候補の件数を前週と比べ、「新規検出 ≤ 処置件数」かを書く (DATA-QUALITY-LOOP-01)。2〜4 は配信年からの推定候補で、公式の最新公表は未照会 |

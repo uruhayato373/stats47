@@ -4,6 +4,7 @@ import { createHash } from 'node:crypto';
 export function consumerPath(name, path) {
   if (name === 'afb' && /^\.local\/authenticated-measurement\/afb-\d+\/outcomes\.json$/.test(path)) return '.local/authenticated-measurement/restored/afb.json';
   if (name === 'moshimo' && path === '.claude/state/metrics/affiliate/moshimo-results.json') return path;
+  if (name === 'rakuten' && path === '.claude/state/metrics/affiliate/rakuten-results.json') return path;
   if (name === 'a8' && /^\.claude\/state\/metrics\/affiliate\/a8-(results|report-log|ui-last-run)\.json$/.test(path)) return path;
   if (name === 'gsc' && /^\.claude\/state\/metrics\/gsc\/coverage-drilldown\/\d{4}-W\d{2}\/[a-z0-9_-]+\.(csv|json)$/.test(path)) return path;
   if (name === 'note') {

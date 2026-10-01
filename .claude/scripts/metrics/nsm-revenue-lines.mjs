@@ -102,7 +102,7 @@ export function aspRevenueLines({ authLatest, a8Results, moshimoResults, rakuten
  */
 export function rakutenLine(rakutenResults, asOf) {
   const records = Array.isArray(rakutenResults?.records) ? rakutenResults.records : [];
-  if (records.length === 0) return "- 楽天: **判定不能**（未記録。週次レビューで管理画面を確認し npm run rakuten:record で記録する）";
+  if (records.length === 0) return "- 楽天: **判定不能**（未記録。認証付き収集の rakuten が未成功。急ぐときは管理画面を見て npm run rakuten:record で記録する）";
   const latest = records.reduce((a, b) => (String(b.observedAt) > String(a.observedAt) ? b : a));
   const age = ageDays(latest.observedAt, asOf);
   if (age == null) return "- 楽天: **判定不能**（記録日時が読めない）";
@@ -112,7 +112,8 @@ export function rakutenLine(rakutenResults, asOf) {
   const month = records.map((r) => r.month).sort().at(-1);
   const r = records.find((x) => x.month === month);
   const confirmed = r.confirmedYen == null ? "未確定" : yen(r.confirmedYen);
-  return `- 楽天 (${month} 月累計・記録 ${String(r.observedAt).slice(0, 10)}・管理画面の手入力): 発生 **${r.orders} 件・${yen(r.estimatedYen)}** / 確定 **${confirmed}**`;
+  const how = String(r.source ?? "").startsWith("collector:") ? "自動収集" : "管理画面の手入力";
+  return `- 楽天 (${month} 月累計・記録 ${String(r.observedAt).slice(0, 10)}・${how}): 発生 **${r.orders} 件・${yen(r.estimatedYen)}** / 確定 **${confirmed}**（確定はその月に確定した額）`;
 }
 
 /**

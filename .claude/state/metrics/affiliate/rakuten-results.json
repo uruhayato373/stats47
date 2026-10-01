@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "records": [
+    {
+      "month": "2026-09",
+      "clicks": 30,
+      "orders": 0,
+      "amountYen": 0,
+      "estimatedYen": 0,
+      "confirmedYen": 0,
+      "observedAt": "2026-10-01T07:11:54.880Z",
+      "source": "collector:rakuten-affiliate-api"
+    },
+    {
+      "month": "2026-10",
+      "clicks": 0,
+      "orders": 0,
+      "amountYen": 0,
+      "estimatedYen": 0,
+      "confirmedYen": 0,
+      "observedAt": "2026-10-01T07:11:54.880Z",
+      "source": "collector:rakuten-affiliate-api"
+    }
+  ]
+}

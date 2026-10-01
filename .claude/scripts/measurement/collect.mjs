@@ -71,6 +71,11 @@ try {
       const remote = await readVault(`${name}/session`);
       bundle = selectSessionBundle(bundle, remote);
     }
+    // CI 再ログイン対象でセッションがまだ無い source (楽天など) は、空の state から Secrets で初回ログインする。
+    // 世代は 1970 (人のセッションより必ず古い) にしておき、入り直しに成功した時点の世代で置き換わる。
+    if (!bundle && !local && process.env.STATS47_AUTH_SOURCE === name && process.env.STATS47_AUTH_USER) {
+      bundle = { schemaVersion: 1, source: name, capturedAt: '1970-01-01T00:00:00.000Z', state: null };
+    }
     if (!bundle || bundle.source !== name) throw new Error('session_missing');
     // CI 再ログイン (auth-credentials.json の ciCredential。workflow が許可 service にだけ Secrets を渡す)。
     // 前回の CI 再ログインが失敗した世代では再試行しない (アカウントロック回避)。新しい人のセッションで解除される。
@@ -84,7 +89,7 @@ try {
         throw new Error('auth_required: awaiting_new_human_session');
       }
     }
-    writeFileSync(join(work, 'state.json'), JSON.stringify(scopedState(name, bundle.state)), { mode: 0o600 });
+    writeFileSync(join(work, 'state.json'), JSON.stringify(bundle.state ? scopedState(name, bundle.state) : { cookies: [], origins: [] }), { mode: 0o600 });
     if (name === 'kdp') {
       if (!/^B0[A-Z0-9]{8}$/.test(bundle.account?.knownAsin ?? '')) throw new Error('account_mismatch');
       writeFileSync(join(ROOT, '.local/kdp-account.local.json'), JSON.stringify(bundle.account), { mode: 0o600 });
@@ -133,6 +138,9 @@ try {
     }
     capture(`.local/a8-ui/${marker.lastRun}`);
     for (const file of ['a8-ui-last-run.json', 'a8-results.json', 'a8-report-log.json']) capture(`.claude/state/metrics/affiliate/${file}`);
+  } else if (name === 'rakuten') {
+    await command('.claude/scripts/ads/rakuten-report.mjs');
+    capture('.claude/state/metrics/affiliate/rakuten-results.json');
   } else if (name === 'afb') {
     const config = JSON.parse(readFileSync(join(ROOT, '.claude/config/affiliate-asp.json'), 'utf8'));
     const outcomes = await collectAfbOutcomes({ config, apiKey: process.env.AFB_API_KEY, now: new Date(now) });

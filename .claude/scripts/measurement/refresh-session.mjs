@@ -77,6 +77,20 @@ export const LOGIN = {
       loggedIn: (url) => /^https:\/\/(editor\.)?note\.com\//.test(url) && !/\/login|\/signup/.test(url),
     },
   },
+  // 楽天アフィリエイト (2026-10-01 追加): 楽天 ID の SSO。ID → 次へ (#cta001) → パスワード → 次へ/ログイン の 2 段階。
+  // ID 画面は 2026-10-01 に公開画面で確認。パスワード画面のボタンは ID を入れないと出ないため未確認で、
+  // 「次へ」「ログイン」の文字で押す。外れたら login_failed で止まり失敗印が残る (再試行しない)。
+  // 追加確認 (メールのコード等) は突破せず human_required。
+  rakuten: {
+    loginUrl: 'https://login.account.rakuten.com/sso/authorize?client_id=affiliate_jp_web&redirect_uri=https://affiliate.rakuten.co.jp/auth/callback&response_type=code&scope=openid%20profile&r10_required_claims=r10_name&ui_locales=ja-JP&state=https%3A%2F%2Faffiliate.rakuten.co.jp%2Freport%2Fsummary',
+    checkUrl: 'https://affiliate.rakuten.co.jp/report/summary',
+    user: '#user_id',
+    next: '#cta001',
+    password: 'input[type=password]',
+    submit: '[id^="cta"]:has-text("次へ"), [id^="cta"]:has-text("ログイン")',
+    bundledChromium: true,
+    loggedIn: (url) => /^https:\/\/affiliate\.rakuten\.co\.jp\/report/.test(url),
+  },
   // ココナラ (2026-10-01 追加): 手元と CI の入り直し。セレクタは doboku-note が 2026-09-28 に DOM で確認したもの
   coconala: {
     loginUrl: 'https://coconala.com/login',
