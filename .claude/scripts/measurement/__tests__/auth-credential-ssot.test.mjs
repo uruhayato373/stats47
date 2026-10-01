@@ -16,7 +16,7 @@ test('autoLogin=true の service と refresh-session の LOGIN が一致する',
   assert.deepEqual(auto, Object.keys(LOGIN).sort());
 });
 
-test('項目名は stats47-measurement-<service> で、ID やパスワードを持たない', () => {
+test('項目名は stats47-measurement-<service> で、パスワードを持たない (ログイン ID は loginId だけ)', () => {
   for (const [id, v] of Object.entries(services)) {
     assert.equal(v.storeItem, `stats47-measurement-${id}`, id);
     assert.deepEqual(Object.keys(v).filter((k) => /user|password|secret|email/i.test(k)), [], id);
@@ -38,7 +38,7 @@ test('CI の資格情報は GitHub Actions で、許可 service が指定され�
   const env = { GITHUB_ACTIONS: 'true', STATS47_AUTH_SOURCE: 'note', STATS47_AUTH_USER: 'u', STATS47_AUTH_PASSWORD: 'p' };
   assert.deepEqual(readCiCredential('note', env), { user: 'u', password: 'p', totpSecret: null });
   assert.deepEqual(readCredential('note', { platform: 'linux', env }), { user: 'u', password: 'p', totpSecret: null });
-  assert.equal(readCiCredential('a8', { ...env, STATS47_AUTH_SOURCE: 'a8' }), null, 'ciCredential=false');
+  assert.equal(readCiCredential('afb', { ...env, STATS47_AUTH_SOURCE: 'afb' }), null, 'ciCredential=false (保管のみ)');
   assert.equal(readCiCredential('coconala', env), null, '別 service の Secrets を使わない');
   assert.equal(readCiCredential('note', { ...env, GITHUB_ACTIONS: undefined }), null, 'GitHub Actions 以外');
   assert.equal(readCiCredential('note', { ...env, STATS47_AUTH_PASSWORD: '' }), null, 'Secrets 未登録');

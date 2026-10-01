@@ -38,11 +38,11 @@ const getArg = (flag) => {
 const URL_ARG = getArg("--url");
 const DRY_RUN = !args.includes("--execute");
 const MAX_TOKENS = Number(getArg("--max-tokens") || 16000);
-const MODEL = getArg("--model") || "claude-sonnet-5";
+const MODEL = getArg("--model") || "claude-sonnet-5-5";
 
 if (!URL_ARG) {
   console.error(
-    "Usage: --url <URL> [--dry-run|--execute] [--max-tokens 16000] [--model claude-sonnet-5]"
+    "Usage: --url <URL> [--dry-run|--execute] [--max-tokens 16000] [--model claude-sonnet-5-5]"
   );
   process.exit(1);
 }

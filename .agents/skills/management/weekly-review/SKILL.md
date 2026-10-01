@@ -52,13 +52,16 @@ FAIL項目はレビュー本文の`Blockers`へ転記する。レビュー作成
 | 検索成長 | `npm run search-growth:status`、`npm run search-growth:next -- --limit 10` |
 | NSM実験 | `.claude/skills/management/nsm-experiment/reference/` |
 | 週次収益 (NSM) | `node .claude/scripts/metrics/generate-weekly-metrics-issue.mjs --week <YYYY-Www>` の「週次収益 (NSM)」節。欠測は 0 円ではなく「判定不能」。AdSense は恒久停止で ¥0 固定 |
+| 楽天アフィリエイト成果 | 認証付き収集の `rakuten` (毎日。`rakuten-report.mjs` が管理画面の JSON から当月・前月の発生と確定を読み `.claude/state/metrics/affiliate/rakuten-results.json` へ) を週次 Issue の「週次収益 (NSM)」の楽天行で確認する。収集が失敗・10 日超なら判定不能として Blockers へ。**収集が止まっている週だけ**、オーナーに管理画面の成果レポートを見てもらい `npm run rakuten:record -- --month <YYYY-MM> --orders <件> --estimated-yen <円> [--confirmed-yen <円>]` で記録する。値を推測で入れない |
 | 認証付き計測 | `npm run measurement:status` + `.claude/state/metrics/authenticated/latest.json`。48時間超・取得失敗・status-only・成果未取得をBlockersへ分離する。生データはprivate R2、現在の収集状態を過去週の実測にしない |
 | 計測→記録→改善サイクル | `.claude/state/metrics/measurement-cycle/{LATEST.md,triage-latest.json}`（週次メトリクス Issue の「🔁」節と同じ。GA4 回遊・GSC 判定目印・PSI / Cloudflare / SNS の週次要約を含む）。state の週が当週と違う・ゲート fail・無人記録の未実行は Blockers、未登録 custom dimension の登録と再ログインはオーナー作業として申し送る。個別の再照会は `node .claude/scripts/metrics/ga4-query.mjs` |
 | データ品質キュー | `.claude/state/data/data-quality/{LATEST.md,queue.json}`（`ranking-integrity-audit-weekly` が毎週生成。`npx tsx packages/ranking/src/scripts/build-data-quality-queue.ts` で再生成）。処置 1 誤り〜4 noindex 候補の件数を前週と比べ、「新規検出 ≤ 処置件数」かを書く (DATA-QUALITY-LOOP-01)。2〜4 は配信年からの推定候補で、公式の最新公表は未照会 |
 | 計画差分 | `.claude/todo/weekly.md` |
 | note画像資産 | `npm run note:images:audit -- --json` の `summary` (追跡PNG枚数・容量、再生成元なしの内訳、ランキング記事のデータ契約違反数)。`findings` が1件でもあれば原因を `.claude/rules/note-image-assets.md` の契約番号で示す。追跡PNGが前週より増えていれば理由を確認する(予算は縮小専用)。週次CIの結果は `note-circulation-audit` artifact の `note-image-assets.json` |
 | noteカード表示 | `npm run note:cards:audit -- --browser-verify --previous .claude/state/metrics/note/card-visibility-latest.json --output .claude/state/metrics/note/card-visibility-latest.json` の `summary`。公開HTMLで空の候補はブラウザ描画で確定し、カード前の余分な空段落も検出。ブラウザ検証失敗があれば `--retry-unknown-from <直前report> --output <同report>` で失敗記事だけ再確認。取得・検証失敗は0件扱いしない。スクショは異常時だけ `--screenshots /tmp/note-card-screenshots --max-screenshots 3` で一時取得 |
+| ページUI週次確認 | `.claude/state/metrics/page-quality/ui-review-latest.json` (`page-quality-audit-weekly` が毎週日曜に更新)。`auditGeneratedAt` が当週か、`reviewStatus`、`readCoverage` の読んだ切り出し / 読むべき枚数、agent 指摘件数 (`findings`)、新規の機械検出件数 (`newViolationCount`) を書く。監査が当週に無い・`reviewStatus` が `not-run`/`blocked`・読み残し (`readCoverage.unreadScreens`) がある週は Blockers へ。読み残したページは確認済みに数えない。正典 `.claude/rules/page-quality-standards.md` |
 | 事業計画 | `.claude/state/business-plan/latest.json` + `packages/data-configs/src/business-plan/` |
+| モデル使用量 | `npm run model-usage:collect && npm run model-usage:report` → `.claude/state/metrics/model-usage/latest.json` の `proposals` / `canary`。提案は採否だけ決め、frontmatter・workflow は canary 合格を見てから変える (`.claude/rules/model-prompting.md`「継続最適化サイクル」)。canary 未実施で費用の大きい提案は今週の Should に 1 件まで |
 | Kindle | `.claude/config/kdp-listings.json` + `.claude/state/products/{sales-ledger,kdp-weekly-publication}.json` |
 
 各snapshotの期間、取得日、freshnessを保持する。行が無い場合を推測の0へ変換せず、
@@ -93,7 +96,7 @@ npm run kdp:weekly -- --week [YYYY-Www] --write
 2. Must / Should / Couldごとに完了・未完了・計画外を分ける。
 3. KPI変化は同じ定義・同じ期間のsnapshotだけで比較する。
 4. effect判定が必要な施策は`.claude/rules/evidence-based-judgment.md`に従う。
-5. 未完了は削除せず、次週へ渡す理由とownerを記録する。Mustの達成数は「Must N/M」の形で書く（週次メトリクスIssueの連続未達計測がこの形を読む）。Mustの結果表は1行1件で「| Must N | <タスク> `<主ID>` | <S/M/L> | **未達** / 完了 | <証拠> |」の形にする（DG082が未達行の主IDを読み、次週計画の再掲を止める）。2週連続で残ったMustは、申し送りに分割案か降格を書く。申し送りの各項目にはbacklog / improvementsのIDを付ける。
+5. 未完了は削除せず、次週へ渡す理由とownerを記録する。Mustの達成数は「Must N/M」の形で書く（週次メトリクスIssueの連続未達計測がこの形を読む）。Mustの結果表は1行1件で「| Must N | <タスク> `<主ID>` | <S/M/L> | **未達** / 完了 | <証拠> |」の形にする（DG082が未達行の主IDを読み、次週計画の再掲を止める）。2週連続で残ったMustは、申し送りに分割案か降格を書く。申し送りの各項目は末尾に「→ 振り分け: <カード ID / EXP-NNN / #Issue / 定常 / 見送り (理由)>」を書く（2026-W40 から必須。正本 `.claude/config/review-wiring.json`。カード ID は backlog / improvements に実在するもの、行き先が無ければ先にカードを起票する）。
 6. search-growth候補は最大3件（technical/blocker、acquisition/content、measurementを原則各1件）だけ審査する。
 7. CTR候補はpage×query、現行title/content、past effectを確認する。大量title書換えを提案しない。
 8. 候補は人間承認前に改善バックログへ追加しない。search-growth候補のWIP（approved / in-progress）は5以下を守る（`triage.mjs` の `WIP_LIMIT`。improvements.md全体の上限10件とは別）。
@@ -122,6 +125,7 @@ npm run kdp:weekly -- --week [YYYY-Www] --write
 - KDP公開ゲート（S1 live数、4週販売/KENP計測、需要シグナル、当週候補、停止理由）
 - note画像資産（追跡PNGの枚数・容量と前週差、再生成元を持たない追跡PNGの内訳、ランキング記事のデータ契約違反数。違反があれば契約番号と該当記事を示す。正典 `.claude/rules/note-image-assets.md`）
 - noteカード表示（検査記事数・ブラウザで確定した空白カード数・余分な空段落数・未確認カード数・影響記事数・取得/ブラウザ検証失敗数・新規/継続/解消。検証失敗があれば解消数は判定不能として扱う。詳細は `.claude/state/metrics/note/card-visibility-latest.json`）
+- ページUI週次確認（監査日、レビュー状態、読んだ切り出し / 読むべき枚数と読み残し画面、agent 指摘件数、新規の機械検出件数。詳細は `.claude/state/metrics/page-quality/ui-review-latest.json`）
 
 恒久的な失敗知見だけを`/knowledge`へ渡す。改善施策statusの更新は`improvement-triage`へ渡す。
 `.claude/todo/weekly.md`はレビュー中に書き換えない。
@@ -133,6 +137,13 @@ node .claude/scripts/gsc/audit-operations-cycle.mjs --stage review --week [YYYY-
 ```
 
 FAILが残る場合はレビューを「完了」と報告せず、出力された次アクションをBlockersに残す。
+
+続けてレビューの契約 (必須見出し・申し送りの振り分け・期限) を検査する。同じ検査が docs:check (DG084) と
+毎朝の `review-cadence-guard.yml` でも走る。error が残る間は完了と報告しない。
+
+```bash
+node .claude/scripts/management/check-review-cadence.mjs
+```
 
 ## Phase 4: 次週計画
 
@@ -152,6 +163,7 @@ FAILが残る場合はレビューを「完了」と報告せず、出力され�
 - KDPの実公開を週次レビュー単独の副作用として実行していない。
 - GSC証拠がfreshで候補がある場合、approve/dismissが最低1件記録されている。
 - 保存先が`reference/reviews/YYYY-Www.md`である。
+- `check-review-cadence.mjs` が error 0 (必須見出し・申し送りの振り分けを含む)。
 
 ## Output Contract
 

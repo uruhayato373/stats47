@@ -149,8 +149,8 @@ describe("claude CLI model alias", () => {
   });
 
   it("alias は現行の model ID に解決する (stale な 4.x 系 ID を残さない)", () => {
-    expect(CLAUDE_CLI_MODELS["claude-sonnet"]).toBe("claude-sonnet-5");
-    expect(CLAUDE_CLI_MODELS["claude-opus"]).toBe("claude-opus-5");
+    expect(CLAUDE_CLI_MODELS["claude-sonnet"]).toBe("claude-sonnet-5-5");
+    expect(CLAUDE_CLI_MODELS["claude-opus"]).toBe("claude-opus-5-5");
     expect(CLAUDE_CLI_MODELS["claude-haiku"]).toBe("claude-haiku-4-5");
   });
 });

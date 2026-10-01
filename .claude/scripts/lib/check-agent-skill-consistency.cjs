@@ -632,7 +632,7 @@ function checkOrphanScripts(findings) {
   //      **親ディレクトリのパスが корпус に出るかも見る**
   //   3. `出現回数 > 1` を要求していた。これは「自分の定義ファイルでの一致」を除くための
   //      代用だったが、**1 箇所からだけ呼ばれる配線済みスクリプトを落としていた**
-  //      (例: post-angle-carousel.yml から 1 回、pr-quality-check から 1 回)。
+  //      (例: ある workflow から 1 回、pr-quality-check から 1 回)。
   //      自分自身をコーパスから除けば代用は不要で、正確に「他から参照されているか」を判定できる。
   //   4. `.claude/rules/` がコーパスに無かった → rules に手順として書かれた運用ツールを orphan 扱い
   const corpusDirs = [
@@ -651,7 +651,28 @@ function checkOrphanScripts(findings) {
     // metric config の provenance.restore に「このデータの再取得コマンド」が書かれている
     // (data-provenance-standards.md §2)。手動投入データの取得スクリプトはここからしか参照されない。
     "packages/data-configs/src/metrics",
+    // テーマ専用データ (水質・豪雪地帯・橋梁点検・貨物/空港 など) は metric ではなく theme-catalog の
+    // *-source.ts が出典を持ち、同じ restore 欄に再取得コマンドを書く (2026-10-02)
+    "packages/data-configs/src/theme-catalog",
+    // 管理画面と Remotion は .claude/scripts の部品を相対 import で使う (2026-10-02 に
+    // note/catalog/cover-categories.ts が apps/admin から import されているのに orphan と誤報した)
+    "apps/admin/lib",
+    "apps/admin/app",
+    "apps/remotion/src",
   ];
+  // パッケージ直下の README は docs と同じく運用手順の置き場 (例: product-factory README の
+  // coconala 改訂版の再生成・検査コマンド)。パッケージのソース全体は読まない (重く、参照の根拠にならない)
+  const packageReadmes = (() => {
+    try {
+      return fs
+        .readdirSync(path.join(ROOT, "packages"), { withFileTypes: true })
+        .filter((e) => e.isDirectory())
+        .map((e) => path.join(ROOT, "packages", e.name, "README.md"))
+        .filter((f) => fs.existsSync(f));
+    } catch {
+      return [];
+    }
+  })();
   let pkgScripts = "";
   try {
     pkgScripts = JSON.stringify(JSON.parse(readSafe(path.join(ROOT, "package.json"))).scripts ?? {});
@@ -685,6 +706,7 @@ function checkOrphanScripts(findings) {
     }
   }
   corpus.push({ file: path.join(ROOT, "package.json"), text: pkgScripts });
+  for (const f of packageReadmes) corpus.push({ file: f, text: readSafe(f) });
 
   /** 自分自身のファイルを除いて needle が 1 回でも出現するか */
   function referencedElsewhere(needle, selfFile) {

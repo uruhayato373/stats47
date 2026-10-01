@@ -77,16 +77,25 @@ export const LOGIN = {
       loggedIn: (url) => /^https:\/\/(editor\.)?note\.com\//.test(url) && !/\/login|\/signup/.test(url),
     },
   },
-  // ココナラ (2026-10-01 追加): 手元と CI の入り直し。セレクタは doboku-note が 2026-09-28 に DOM で確認したもの
-  coconala: {
-    loginUrl: 'https://coconala.com/login',
-    checkUrl: 'https://coconala.com/mypage/dashboard',
-    user: '#UserLoginEmail',
-    password: '#UserLoginPassword',
-    remember: '#loginEmailSave',
-    submit: 'form[action*="/login"] button[type=submit]',
-    loggedIn: (url) => /^https:\/\/coconala\.com\//.test(url) && !/\/login|\/signup/.test(url),
+  // 楽天アフィリエイト (2026-10-01 追加): 楽天 ID の SSO。ID → 次へ (#cta001) → パスワード → 次へ/ログイン の 2 段階。
+  // ID 画面は 2026-10-01 に公開画面で確認。パスワード画面のボタンは ID を入れないと出ないため未確認で、
+  // 「次へ」「ログイン」の文字で押す。外れたら login_failed で止まり失敗印が残る (再試行しない)。
+  // 追加確認 (メールのコード等) は突破せず human_required。
+  rakuten: {
+    loginUrl: 'https://login.account.rakuten.com/sso/authorize?client_id=affiliate_jp_web&redirect_uri=https://affiliate.rakuten.co.jp/auth/callback&response_type=code&scope=openid%20profile&r10_required_claims=r10_name&ui_locales=ja-JP&state=https%3A%2F%2Faffiliate.rakuten.co.jp%2Freport%2Fsummary',
+    checkUrl: 'https://affiliate.rakuten.co.jp/report/summary',
+    user: '#user_id',
+    next: '#cta001',
+    password: 'input[type=password]',
+    submit: '[id^="cta"]:has-text("次へ"), [id^="cta"]:has-text("ログイン")',
+    // パスワード画面の送信ボタンが上のセレクタに一致せず click が 30 秒で時間切れになった (2026-10-01 Mac 実機)。
+    // パスワード欄で Enter を押して送信する
+    submitByEnter: true,
+    bundledChromium: true,
+    loggedIn: (url) => /^https:\/\/affiliate\.rakuten\.co\.jp\/report/.test(url),
   },
+  // ココナラは 2026-10-02 に自動ログインの対象から外した (自動操作のブラウザを見えない reCAPTCHA が拒否する)。
+  // セッションが切れたら普通の Chrome でログインし bootstrap-session.mjs coconala --from-profile --publish (正本 auth-credentials.json)
   // X (2026-09-30 オーナー判断で追加): 予約投稿 (publish-x) の専用プロファイルのログインを保つ。
   // publish-x は Playwright 同梱の Chromium でこのプロファイルを開くので、ここも同じブラウザで開く
   // (Chrome 本体で開くと Cookie の暗号化方式が変わりログインが壊れうる)。X の投稿は Mac だけなので state は CI へ渡さない。
@@ -130,7 +139,7 @@ export function classifyLoginOutcome(source, { url, hasPassword, hasChallenge })
 
 function notify(message) {
   if (process.platform !== 'darwin') { console.error(`[stats47 計測ログイン] ${message}`); return; }
-  try { execFileSync('osascript', ['-e', `display notification ${JSON.stringify(message)} with title "stats47 計測ログイン"`]); } catch { /* 通知は補助 */ }
+  try { execFileSync('osascript', ['-e', `display notification ${JSON.stringify(message.replace(/[\u0000-\u001f]+/g, ' ').slice(0, 200))} with title "stats47 計測ログイン"`]); } catch { /* 通知は補助 */ }
 }
 
 async function pageSignals(page) {
@@ -138,7 +147,10 @@ async function pageSignals(page) {
     const visible = (el) => !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length);
     const hasPassword = [...document.querySelectorAll('input[type=password]')].some(visible);
     const text = document.body?.innerText ?? '';
-    const hasChallenge = !!document.querySelector('iframe[src*="recaptcha"], iframe[src*="hcaptcha"], iframe[src*="turnstile"]')
+    // 見えない reCAPTCHA (size=invisible・右下のバッジ) はログイン画面に常に置かれるので確認画面に数えない。
+    // ココナラで、ログインが通らず画面に留まると必ず human_required になり、止まった本当の理由が見えなかった (2026-10-02)
+    const hasChallenge = [...document.querySelectorAll('iframe[src*="recaptcha"], iframe[src*="hcaptcha"], iframe[src*="turnstile"]')]
+      .some((frame) => !/[?&]size=invisible\b/.test(frame.getAttribute('src') || ''))
       || /認証コード|ワンタイム|確認コード|私はロボットではありません|画像認証|2段階認証|文字を入力してください/.test(text);
     return { hasPassword, hasChallenge };
   }).catch(() => ({ hasPassword: true, hasChallenge: false }));
@@ -160,9 +172,22 @@ async function submitCredential(page, conf, cred) {
   if (!(await visible(conf.password))) return;
   await page.fill(conf.password, cred.password);
   if (conf.remember && await visible(conf.remember)) await page.check(conf.remember).catch(() => {});
-  await page.click(conf.submit);
+  if (conf.submitByEnter) await page.press(conf.password, 'Enter');
+  else await page.click(conf.submit);
   await page.waitForLoadState('domcontentloaded', { timeout: 60000 }).catch(() => {});
   await page.waitForTimeout(5000);
+}
+
+/**
+ * 送信後の着地ページがログイン済みの形でなければ、checkUrl を 1 回開き直す。SSO の戻り先がトップ等で、
+ * ログインできているのに login_failed と判定された (2026-10-01 楽天 Mac 実機)。未ログインなら checkUrl が
+ * ログイン画面へ戻すので失敗は失敗のまま残る。2FA/CAPTCHA の画面は開き直さない (human_required を保つ)。
+ */
+async function settleOnCheckUrl(page, conf) {
+  if (conf.loggedIn(page.url()) || conf.challengeUrl?.test(page.url())) return;
+  if ((await pageSignals(page)).hasChallenge) return;
+  await page.goto(conf.checkUrl, { waitUntil: 'domcontentloaded', timeout: 60000 }).catch(() => {});
+  await page.waitForTimeout(3000);
 }
 
 /** 画面が認証アプリの 2FA のときだけ、TOTP を計算して 1 回入力する。入力できなければ何もしない (呼び側が human_required で止める)。 */
@@ -249,12 +274,25 @@ async function refresh(source, { root, publish, headed, waitHuman }) {
       await page.goto(conf.loginUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
       await submitCredential(page, conf, cred);
       await passTotpIfOffered(page, conf, cred);
+      // 送信直後の画面と、画面に出たエラー文を控える。checkUrl を開き直したあとの画面ではログイン画面へ戻されて
+      // 送信の結果が写らない (ココナラで、パスワード欄が空の画面しか残らなかった。2026-10-02)
+      const afterSubmit = {
+        url: page.url().split('?')[0],
+        shot: await page.screenshot({ fullPage: true }).catch(() => null),
+        errors: await page.evaluate(() => [...document.querySelectorAll('[role=alert], .error, .error-message, [class*="error"], [class*="Error"], .flash, .alert')]
+          .map((element) => element.innerText?.trim()).filter(Boolean).slice(0, 5)).catch(() => []),
+      };
+      await settleOnCheckUrl(page, conf);
       const signals = await pageSignals(page);
       if (conf.challengeSelector && await page.locator(conf.challengeSelector).first().isVisible().catch(() => false)) signals.hasChallenge = true;
       const status = classifyLoginOutcome(source, { url: page.url(), ...signals });
       if (status !== 'ok') {
         writeFileSync(failMark, `${new Date().toISOString()} ${status}\n`, { mode: 0o600 });
-        return { source, status, reason: status === 'human_required' ? '2FA/CAPTCHA 等の人の確認が必要' : 'ID/PW が通らなかった (資格情報ストアの値を確認)' };
+        // 止まった画面を残す (パスワード欄は伏せ字で写る)。原因の切り分けに使い、git には入らない (.local)
+        const shot = join(privateDir, `${source}-login-${status}.png`);
+        if (afterSubmit.shot) writeFileSync(shot, afterSubmit.shot);
+        const finalUrl = page.url().split('?')[0];
+        return { source, status, url: finalUrl, afterSubmitUrl: afterSubmit.url, pageErrors: afterSubmit.errors, screenshot: shot, reason: status === 'human_required' ? '2FA/CAPTCHA 等の人の確認が必要' : 'ID/PW が通らなかった (資格情報ストアの値を確認)' };
       }
       }
     }
@@ -301,6 +339,7 @@ export async function ciRelogin(source, { statePath, outPath }) {
     await page.goto(conf.loginUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
     await submitCredential(page, conf, cred);
     await passTotpIfOffered(page, conf, cred);
+    await settleOnCheckUrl(page, conf);
     const signals = await pageSignals(page);
     const url = page.url();
     const status = conf.loggedIn(url) && !signals.hasPassword ? 'ok'
@@ -334,7 +373,7 @@ if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const args = process.argv.slice(2);
   const sources = args.filter((a) => !a.startsWith('--'));
   if (!sources.length || args.includes('--help')) {
-    console.log('Usage: refresh-session.mjs SOURCE... [--publish] [--headed] [--wait-human]  (SOURCE: a8 | moshimo | kdp | note | x | coconala)');
+    console.log('Usage: refresh-session.mjs SOURCE... [--publish] [--headed] [--wait-human]  (SOURCE: a8 | moshimo | kdp | note | x | rakuten)');
     process.exit(0);
   }
   const root = fileURLToPath(new URL('../../../', import.meta.url));

@@ -8,7 +8,8 @@
  *   - bot-block : 403 (公式サイトの bot 拒否。404/410 と同一視しない。到達扱い)
  *   - gone      : 404/410 (移転・廃止の疑い。人間が調査して catalog の status を更新する)
  *   - server-err: 5xx (3回再試行後も失敗した場合にalert)
- *   - timeout   : タイムアウト / ネットワークエラー (3回再試行後にalert)
+ *   - timeout   : タイムアウト / ネットワークエラー (3回再試行後にalert。confirmFn を渡さない場合)
+ *   - unreachable: fetch も curl の再確認も届かない (警告のみ。ランナーの経路とサイト停止を区別できない。鮮度 stale が最終的に人の確認を求める)
  *   - stale     : catalog の一次資料確認日が120日超過
  *                 (注: www.gsi.go.jp は Node fetch(undici) が fetch failed になる環境があるが
  *                  curl では 200。timeout は dead link と断定せず curl で再確認する。2026-07-18 実測)
@@ -25,6 +26,7 @@ import {
   type LinkProbeResult,
   type LinkProbeTarget,
 } from "../src/link-audit/link-check-core";
+import { curlStatus } from "./lib/curl-confirm";
 
 const MAX_CONCURRENCY = 6;
 
@@ -53,7 +55,7 @@ async function main(): Promise<void> {
   const results: LinkProbeResult[] = [];
   for (let offset = 0; offset < unique.length; offset += MAX_CONCURRENCY) {
     const batch = unique.slice(offset, offset + MAX_CONCURRENCY);
-    results.push(...(await Promise.all(batch.map((target) => probeLinkWithRetry(target)))));
+    results.push(...(await Promise.all(batch.map((target) => probeLinkWithRetry(target, { confirmFn: (url) => curlStatus(url) })))));
   }
 
   const byVerdict = new Map<LinkProbeResult["verdict"], typeof results>();
@@ -62,12 +64,12 @@ async function main(): Promise<void> {
     list.push(r);
     byVerdict.set(r.verdict, list);
   }
-  for (const verdict of ["gone", "server-err", "timeout", "stale", "bot-block"] as const) {
+  for (const verdict of ["gone", "server-err", "timeout", "stale", "unreachable", "bot-block"] as const) {
     for (const r of byVerdict.get(verdict) || []) {
       console.log(`[${verdict}] ${r.target.targetId} ${r.target.label}: ${r.detail} ${r.target.url} attempts=${r.attempts}`);
     }
   }
-  const counts = (["ok", "bot-block", "gone", "server-err", "timeout", "stale"] as const)
+  const counts = (["ok", "bot-block", "gone", "server-err", "timeout", "unreachable", "stale"] as const)
     .map((v) => `${v}=${byVerdict.get(v)?.length || 0}`)
     .join(" / ");
   console.log(`\nopen-data links: ${unique.length} URLs → ${counts}`);

@@ -1,5 +1,7 @@
 /** Official fixed inputs and reference documents; observations are derived, not authored here. */
 export const SNOW_DESIGNATION_SOURCE = {
+  // 原典からこの値を作り直すコマンド (data-provenance-standards の再現性。--write-local を付けたときだけローカル R2 へ書く)
+  restore: 'node .claude/scripts/themes/ingest-snow-designation-exposure.mjs --snow-dir <KSJ A22 豪雪地帯> --population-dir <250m 人口メッシュ> --write-local',
   slug: 'population-snow-designation',
   dataVersion: 'A22-16_m250r6-24_PTN2020_center-v1',
   r2Root: 'app/geo/population-snow-designation',

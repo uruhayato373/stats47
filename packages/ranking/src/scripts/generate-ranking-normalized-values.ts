@@ -44,6 +44,7 @@ import {
   type NormalizationOption,
   findExpectedEmpty,
 } from "@stats47/data-configs";
+import { selectUnexpectedEmpties } from "./lib/empty-values-alarm";
 import { assertR2WriteAllowed, saveToR2 } from "@stats47/r2-storage/server";
 import { readStatsValues } from "@stats47/stats-r2/readers";
 
@@ -413,10 +414,14 @@ async function main(): Promise<void> {
     console.log(`[normalized] no observations: ${skippedNoValues.map((o) => o.key).join(", ")}`);
   }
   // 沈黙させない (2026-07-29 障害): 一覧を出すだけでは CI が緑のまま通ってしまう。
-  // EXPECTED_EMPTY に登録済みのキーだけを許容する。
-  const unexpectedSkips = skippedNoValues.filter(
-    (o) => !findExpectedEmpty(o.key, AREA_TYPE, new Date()),
-  );
+  // EXPECTED_EMPTY に登録済みのキーだけを許容する。判定は値の生成 (generate-ranking-values.ts) と同じ
+  // selectUnexpectedEmpties で、公開中 (isActive) のキーだけを異常とする。2026-09-06 に非公開にした
+  // 国土数値情報の 9 系列が、ここだけ isActive を見ていなかったため毎回 exit 1 になっていた (2026-09-30)。
+  const activeByKey = new Map(targets.map((c) => [c.key, c.isActive === true]));
+  const unexpectedSkips = selectUnexpectedEmpties(
+    skippedNoValues.map((o) => ({ key: o.key, isActive: activeByKey.get(o.key) === true })),
+    (key) => findExpectedEmpty(key, AREA_TYPE, new Date()) !== null,
+  ).map((key) => ({ key }));
   if (unexpectedSkips.length > 0) {
     console.error(
       `[normalized] ✗ 観測値が無い未登録キー ${unexpectedSkips.length} 件: ${unexpectedSkips.map((o) => o.key).join(", ")}\n` +

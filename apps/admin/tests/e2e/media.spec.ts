@@ -90,7 +90,9 @@ test.describe("/sns ページ内 video の seek", () => {
     // ローカル素材が無い checkout (CI) では mediaCandidates が R2 URL へ落ちる。投稿済み動画は R2 から
     // 30 日で消えるため loadedmetadata が来ず、待ち続けて 30 秒で時間切れになっていた (2026-09-20)。
     // 上の Range 検証と同じく、ローカル配信 (/media/) の video が無ければスキップする。
-    const src = hasVideo ? ((await video.getAttribute("src")) ?? "") : "";
+    // 検索で一覧が描き直されると、数えた video が消えて getAttribute がテスト全体の 30 秒を待ち続けた (2026-10-01 CI)。
+    // 短い上限で取り、取れなければ下のスキップ判定 (ローカル配信の video が無い) に乗せる
+    const src = hasVideo ? ((await video.getAttribute("src", { timeout: 5_000 }).catch(() => null)) ?? "") : "";
     const servedLocally = new URL(src || "about:blank", page.url()).pathname.startsWith("/media/");
     test.skip(!hasVideo || !servedLocally, "ローカル素材 (.local/r2/sns) の video を持つカードが無いためスキップ");
 

@@ -334,6 +334,18 @@ SVG の byte 一致を要求し、既知の復元対象7件は ranking / e-Stat 
 **復元は SSOT (`app/ranking`) から行う (SVG の絵から逆復元しない、§1.6)。** 値が記事本文と一致するか自己検算
 (タイルマップの trusted/Derived 手法) して捏造を防ぐ。担当 = `chart-author` agent (データ系譜の整備・復元責務)。
 
+`ssot-restore-new` と `manual` の道具 (いずれも旧 SVG の表示値は SSOT が正しいかの照合先にだけ使い、≥0.95 一致したときだけ SSOT から再生成する):
+
+```bash
+node .claude/scripts/blog/restore-ranking-from-svg.mjs [--slugs a,b]     # neither の ranking
+node .claude/scripts/blog/restore-scatter-from-svg.mjs [--base slug/x]   # neither の scatter (軸の対応づけは下)
+node .claude/scripts/blog/resolve-scatter-axes.mjs                       # scatter の x/y 軸を SSOT key へ対応づけ
+node .claude/scripts/blog/restore-findings-from-svg.mjs [--probe-only]   # neither の findings カード
+```
+
+R2 の観測値から記事の `data/*.json` だけを作り直す代替 (クラウド環境など §0 の取得経路が使えないとき):
+`node .claude/scripts/blog/build-article-data-from-r2.mjs <slug>:<metricKey>[,<metricKey2>]`
+
 ## 2. Wave 命名規則
 
 Blog の brushup 施策は **wave 単位** で記録・追跡する。wave は「同一目的・同一日付・同一手法」でまとめた施策のセット。

@@ -1,0 +1,77 @@
+name: 🗓️ Review Cadence Guard (daily)
+
+# 週次・月次レビューと計画の期限切れ・本文の契約違反・配線の切れを毎朝検査し、問題があれば
+# review-cadence-alert Issue を 1 件だけ作って更新し、直ったら自動で閉じる。
+#
+# 計測 (fetch-metrics-weekly.yml) と無人記録 (improvement-cycle-weekly.yml) は自動で回るが、
+# レビューと計画は /weekly-review・/monthly-review・/weekly-plan・/monthly-plan を人が起動して書く。
+# 振り返りが止まると計測が改善へ戻らないので、その段をここで見張る (doboku-note の weekly-review-guard の移植)。
+#
+# 判定: .claude/scripts/management/check-review-cadence.mjs (正本 .claude/config/review-wiring.json)
+# レビューは develop に commit されるので develop を checkout して読む。
+# 正典: .claude/skills/management/{weekly-review,monthly-review}/SKILL.md / .claude/rules/docs-vs-issues.md
+
+on:
+  schedule:
+    - cron: "30 23 * * *" # 毎日 08:30 JST。月曜は週次メトリクス Issue (09:00) の直前に先週分の欠落を出す
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  issues: write
+
+concurrency:
+  group: review-cadence-guard
+  cancel-in-progress: false
+
+jobs:
+  guard:
+    name: Review cadence
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: 🧰 Checkout repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: develop
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 22
+
+      - name: 🗓️ Check review cadence
+        id: check
+        run: |
+          node .claude/scripts/management/check-review-cadence.mjs --body-out /tmp/review-cadence.md
+          cat /tmp/review-cadence.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: 🚨 Upsert alert issue
+        if: steps.check.outputs.errors != '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          TITLE="🗓️ Review cadence: 振り返りが止まっている"
+          {
+            cat /tmp/review-cadence.md
+            echo ""
+            echo "直し方: 表の \`/weekly-review\` などを実行して保存し、\`node .claude/scripts/management/check-review-cadence.mjs\` が error 0 になれば翌朝この Issue は自動で閉じる。"
+            echo ""
+            echo "Run: ${RUN_URL}"
+          } > /tmp/review-cadence-issue.md
+          gh label create review-cadence-alert --color FBCA04 --description "週次・月次レビュー/計画の期限切れ・契約違反" --force 2>/dev/null || true
+          NUMBER=$(gh issue list --label review-cadence-alert --state open --json number --jq '.[0].number // empty')
+          if [ -n "$NUMBER" ]; then
+            gh issue edit "$NUMBER" --body-file /tmp/review-cadence-issue.md
+          else
+            gh issue create --title "$TITLE" --label auto-generated,review-cadence-alert --body-file /tmp/review-cadence-issue.md
+          fi
+
+      - name: 🧹 Close resolved issue
+        if: steps.check.outputs.errors == '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          NUMBER=$(gh issue list --label review-cadence-alert --state open --json number --jq '.[0].number // empty')
+          if [ -n "$NUMBER" ]; then gh issue close "$NUMBER" --reason completed --comment "検査が error 0 に戻ったため自動で閉じる。"; fi

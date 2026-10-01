@@ -224,7 +224,7 @@ jobs:
           # (2026-09-21 は A8、2026-09-26 以降はもしもの認証切れで operations が丸ごと落ちる形だった)。
           # 認証切れの通知は authenticated-measurement.yml の Issue が担う。取り出せなかった ASP は git の前回値のまま残り、
           # portfolio / 週次 NSM は観測日から鮮度を判定する。
-          for SOURCE in moshimo a8; do
+          for SOURCE in moshimo a8 rakuten; do
             node .claude/scripts/measurement/restore.mjs "$SOURCE" --if-activated \
               || echo "::warning::${SOURCE} の成果を保管庫から取り出せなかった (認証切れ等)。前回値のまま進める"
           done
@@ -306,6 +306,7 @@ jobs:
             .claude/state/metrics/affiliate/a8-report-log.json
             .claude/state/metrics/affiliate/a8-ui-last-run.json
             .claude/state/metrics/affiliate/moshimo-results.json
+            .claude/state/metrics/affiliate/rakuten-results.json
           )
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

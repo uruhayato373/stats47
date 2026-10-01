@@ -385,10 +385,17 @@ function parseJsonObject(
   requireCommittedMetadata: boolean
 ): Record<string, unknown> {
   const digest = sha256(object.body);
+  const committed = object.metadata['stats47-sha256'];
+  // stats47-sha256 が「無い」manifest は、画像パイプライン以外の経路 (app/blog を一括で R2 に反映する公開経路) が書いたもので、
+  // 2026-10-01 時点で 609 件中 366 件がこの状態だった。1 件で自己修復全体 (609 件) が止まっていたので、無いものは警告して受け入れ、
+  // 次にパイプラインが書き直したときに付く。値が「食い違う」ものは書き込みの破損を疑ってこれまでどおり止める。
+  if (requireCommittedMetadata && committed === undefined) {
+    console.warn(`R2 blog画像metadataに stats47-sha256 が無い (パイプライン外の書き込み): ${key}`);
+  }
   if (
     object.contentType !== 'application/json' ||
     object.contentLength !== object.body.byteLength ||
-    (requireCommittedMetadata && object.metadata['stats47-sha256'] !== digest)
+    (requireCommittedMetadata && committed !== undefined && committed !== digest)
   ) {
     throw new Error(`R2 blog画像metadata契約が不正です: ${key}`);
   }

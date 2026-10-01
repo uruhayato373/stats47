@@ -55,7 +55,7 @@ coverage 是正キュー (`build-coverage-queue.mjs`) の旧 `resubmit` action �
 
 ## 退役したコードパス
 
-- `.github/workflows/gsc-auto-resubmit-daily.yml` — schedule 削除・retired stub 化 (送信しない)
+- `.github/workflows/gsc-auto-resubmit-daily.yml` — 2026-07-23 に送信を止め、2026-10-01 に workflow ごと削除
 - `.claude/scripts/gsc/auto-resubmit.mjs` — publish path 撤去・retired stub 化
 - `.claude/scripts/gsc/submit-cities-indexing.mjs` — publish path 撤去・retired stub 化
 

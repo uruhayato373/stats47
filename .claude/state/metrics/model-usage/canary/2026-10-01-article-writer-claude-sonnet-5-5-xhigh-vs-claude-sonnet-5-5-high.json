@@ -1,0 +1,265 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-01T20:25:33.298Z",
+  "agent": "article-writer",
+  "fixture": {
+    "file": ".claude/scripts/model-usage/canary-fixtures/article-writer.json",
+    "version": 2,
+    "expected": [
+      "lead-and-findings/top",
+      "lead-and-findings/bottom",
+      "lead-and-findings/ratio",
+      "lead-and-findings/source-year",
+      "lead-and-findings/no-national-average",
+      "lead-and-findings/no-causation"
+    ]
+  },
+  "baseline": {
+    "model": "claude-sonnet-5-5",
+    "effort": "xhigh"
+  },
+  "candidate": {
+    "model": "claude-sonnet-5-5",
+    "effort": "high"
+  },
+  "repeats": 3,
+  "rules": {
+    "maxRecallDrop": 0,
+    "maxCostRatio": 1.1
+  },
+  "verdict": "pass",
+  "scores": {
+    "baseline": {
+      "recall": 1,
+      "cost": 0.17496546666666668
+    },
+    "candidate": {
+      "recall": 1,
+      "cost": 0.15673653333333334
+    }
+  },
+  "runs": {
+    "baseline": [
+      {
+        "hits": [
+          {
+            "id": "lead-and-findings/top",
+            "hit": true
+          },
+          {
+            "id": "lead-and-findings/bottom",
+            "hit": true
+          },
+          {
+            "id": "lead-and-findings/ratio",
+            "hit": true
+          },
+          {
+            "id": "lead-and-findings/source-year",
+            "hit": true
+          },
+          {
+            "id": "lead-and-findings/no-national-average",
+            "hit": true
+          },
+          {
+            "id": "lead-and-findings/no-causation",
+            "hit": true
+          }
+        ],
+        "recall": 1,
+        "isError": false,
+        "costUsd": 0.18835400000000002,
+        "durationMs": 17086,
+        "models": [
+          "claude-sonnet-5-5"
+        ],
+        "outputTokens": 1949
+      },
+      {
+        "hits": [
+          {
+            "id": "lead-and-findings/top",
+            "hit": true
+          },
+          {
+            "id": "lead-and-findings/bottom",
+            "hit": true
+          },
+          {
+            "id": "lead-and-findings/ratio",
+            "hit": true
+          },
+          {
+            "id": "lead-and-findings/source-year",
+            "hit": true
+          },
+          {
+            "id": "lead-and-findings/no-national-average",
+            "hit": true
+          },
+          {
+            "id": "lead-and-findings/no-causation",
+            "hit": true
+          }
+        ],
+        "recall": 1,
+        "isError": false,
+        "costUsd": 0.1696192,
+        "durationMs": 25604,
+        "models": [
+          "claude-sonnet-5-5"
+        ],
+        "outputTokens": 3111
+      },
+      {
+        "hits": [
+          {
+            "id": "lead-and-findings/top",
+            "hit": true
+          },
+          {
+            "id": "lead-and-findings/bottom",
+            "hit": true
+          },
+          {
+            "id": "lead-and-findings/ratio",
+            "hit": true
+          },
+          {
+            "id": "lead-and-findings/source-year",
+            "hit": true
+          },
+          {
+            "id": "lead-and-findings/no-national-average",
+            "hit": true
+          },
+          {
+            "id": "lead-and-findings/no-causation",
+            "hit": true
+          }
+        ],
+        "recall": 1,
+        "isError": false,
+        "costUsd": 0.16692320000000002,
+        "durationMs": 23737,
+        "models": [
+          "claude-sonnet-5-5"
+        ],
+        "outputTokens": 2843
+      }
+    ],
+    "candidate": [
+      {
+        "hits": [
+          {
+            "id": "lead-and-findings/top",
+            "hit": true
+          },
+          {
+            "id": "lead-and-findings/bottom",
+            "hit": true
+          },
+          {
+            "id": "lead-and-findings/ratio",
+            "hit": true
+          },
+          {
+            "id": "lead-and-findings/source-year",
+            "hit": true
+          },
+          {
+            "id": "lead-and-findings/no-national-average",
+            "hit": true
+          },
+          {
+            "id": "lead-and-findings/no-causation",
+            "hit": true
+          }
+        ],
+        "recall": 1,
+        "isError": false,
+        "costUsd": 0.1584352,
+        "durationMs": 17672,
+        "models": [
+          "claude-sonnet-5-5"
+        ],
+        "outputTokens": 1995
+      },
+      {
+        "hits": [
+          {
+            "id": "lead-and-findings/top",
+            "hit": true
+          },
+          {
+            "id": "lead-and-findings/bottom",
+            "hit": true
+          },
+          {
+            "id": "lead-and-findings/ratio",
+            "hit": true
+          },
+          {
+            "id": "lead-and-findings/source-year",
+            "hit": true
+          },
+          {
+            "id": "lead-and-findings/no-national-average",
+            "hit": true
+          },
+          {
+            "id": "lead-and-findings/no-causation",
+            "hit": true
+          }
+        ],
+        "recall": 1,
+        "isError": false,
+        "costUsd": 0.1547752,
+        "durationMs": 15771,
+        "models": [
+          "claude-sonnet-5-5"
+        ],
+        "outputTokens": 1625
+      },
+      {
+        "hits": [
+          {
+            "id": "lead-and-findings/top",
+            "hit": true
+          },
+          {
+            "id": "lead-and-findings/bottom",
+            "hit": true
+          },
+          {
+            "id": "lead-and-findings/ratio",
+            "hit": true
+          },
+          {
+            "id": "lead-and-findings/source-year",
+            "hit": true
+          },
+          {
+            "id": "lead-and-findings/no-national-average",
+            "hit": true
+          },
+          {
+            "id": "lead-and-findings/no-causation",
+            "hit": true
+          }
+        ],
+        "recall": 1,
+        "isError": false,
+        "costUsd": 0.1569992,
+        "durationMs": 16671,
+        "models": [
+          "claude-sonnet-5-5"
+        ],
+        "outputTokens": 1849
+      }
+    ]
+  },
+  "raw": ".local/model-canary/2026-10-01-article-writer-claude-sonnet-5-5-xhigh-vs-claude-sonnet-5-5-high",
+  "rescoredAt": "2026-10-01T20:34:53.971Z"
+}

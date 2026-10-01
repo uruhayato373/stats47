@@ -1,5 +1,7 @@
 /** 公式原表の期間・分類・出典と地理対応を固定する。 */
 export const FREIGHT_OD_SOURCE = {
+  // 原典からこの値を作り直すコマンド (data-provenance-standards の再現性。--write-local を付けたときだけローカル R2 へ書く)
+  restore: 'node --import tsx .claude/scripts/themes/ingest-freight-airports.mjs --write-local',
   r2Key: 'app/themes/freight-logistics/freight-od.json',
   period: '2024',
   title:

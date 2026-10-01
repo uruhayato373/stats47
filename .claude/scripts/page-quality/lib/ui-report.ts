@@ -1,4 +1,5 @@
 import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
 
 import type { AuditRun, MetricKey, PageAuditResult, ScreenshotRecord, Violation } from "../types";
 
@@ -147,13 +148,15 @@ export function buildUiAlert(params: {
   firstRun: boolean;
   review: ReviewReport | null;
   reviewError: string | null;
+  /** agent が切り出しを読み残した画面の説明。読み残しがあれば指摘 0 件でも通知する */
+  coverageGap?: string | null;
   input: ReviewInput;
   screenshotBaseUrl: string;
   keyOf: (template: string, device: string) => string;
 }): string | null {
   const { newViolations, review } = params;
   const reviewFindings = review?.findings ?? [];
-  if (newViolations.length === 0 && reviewFindings.length === 0 && !params.reviewError) return null;
+  if (newViolations.length === 0 && reviewFindings.length === 0 && !params.reviewError && !params.coverageGap) return null;
 
   const lines: string[] = [];
   lines.push(`## ページ UI の週次確認 (${params.date})`);
@@ -179,6 +182,7 @@ export function buildUiAlert(params: {
 
   lines.push("### スクショを見た agent の指摘");
   lines.push("");
+  if (params.coverageGap) lines.push(`⚠️ ${params.coverageGap}`, "");
   if (params.reviewError) lines.push(`agent の確認は実行できなかった: ${params.reviewError}`);
   else if (reviewFindings.length === 0) lines.push(`なし (${review?.summary ?? ""})`);
   for (const f of [...reviewFindings].sort((a, b) => ["high", "medium", "low"].indexOf(a.severity) - ["high", "medium", "low"].indexOf(b.severity))) {
@@ -199,6 +203,60 @@ export function buildUiAlert(params: {
     lines.push("");
   }
   return lines.join("\n");
+}
+
+export interface ReadCoverage {
+  expectedTiles: number;
+  readTiles: number;
+  /** 切り出しを 1 枚でも読み残した画面 (`<template>|<device>`) */
+  unreadScreens: string[];
+  /** 確認対象の全幅で切り出しを全部読んだページ */
+  fullyReadPages: string[];
+}
+
+/**
+ * agent が実際に読んだ切り出し画像を execution file の `Read` 呼び出しから数える。
+ * 構造化出力の「問題なし」は自己申告なので、見ていない画面を確認済みと扱わないためにこれで裏を取る
+ * (2026-10-02: 読んだ枚数が記録に残らず、no-issues が全画面を見た結果か判別できなかった)。
+ * 失敗した Read (tool_result が is_error) は見ていないものとして数えない。
+ */
+export function readCoverage(executionPath: string, input: ReviewInput, cwd = process.cwd()): ReadCoverage {
+  const entries = JSON.parse(readFileSync(executionPath, "utf-8")) as Array<{ message?: { content?: unknown } }>;
+  const parts = (Array.isArray(entries) ? entries : []).flatMap((e) =>
+    Array.isArray(e?.message?.content) ? (e.message.content as Array<Record<string, unknown>>) : []
+  );
+  const readPaths = new Map<string, string>(); // tool_use id → 絶対パス
+  for (const p of parts) {
+    const filePath = (p?.input as { file_path?: unknown } | undefined)?.file_path;
+    if (p?.type === "tool_use" && p.name === "Read" && typeof p.id === "string" && typeof filePath === "string") {
+      readPaths.set(p.id, resolve(cwd, filePath));
+    }
+  }
+  for (const p of parts) {
+    if (p?.type === "tool_result" && p.is_error === true && typeof p.tool_use_id === "string") readPaths.delete(p.tool_use_id);
+  }
+  const read = new Set(readPaths.values());
+
+  let expectedTiles = 0;
+  let readTiles = 0;
+  const unreadScreens: string[] = [];
+  const fullyReadPages: string[] = [];
+  for (const page of input.pages) {
+    let pageComplete = true;
+    for (const s of page.screenshots) {
+      const tiles = (s.tilePaths ?? []).map((t) => resolve(cwd, t));
+      if (tiles.length === 0) continue;
+      const hit = tiles.filter((t) => read.has(t)).length;
+      expectedTiles += tiles.length;
+      readTiles += hit;
+      if (hit < tiles.length) {
+        pageComplete = false;
+        unreadScreens.push(`${page.template}|${s.device}`);
+      }
+    }
+    if (pageComplete) fullyReadPages.push(page.template);
+  }
+  return { expectedTiles, readTiles, unreadScreens, fullyReadPages };
 }
 
 /** claude-code-base-action の execution file (JSON 配列) から最後の成功結果の構造化出力を取り出す。 */

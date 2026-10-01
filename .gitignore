@@ -169,7 +169,7 @@ inspect-knip.js
 # セッションロック (session-guard.js のランタイム状態、マシン固有・コミット不要)
 .claude/state/session-locks/
 
-# 週次リマインドの「今日は通知済み」マーカー (check-weekly-cadence-on-stop.js が書く)
+# 週次リマインドの「今日は通知済み」マーカー (check-weekly-cadence-on-stop.js が書く。判定は check-review-cadence.mjs)
 # 中身は日付 1 行だけで、マシンごとに別々に進む。commit するとマシン間で毎日衝突し、
 # 履歴も意味を持たない。session-locks と同じランタイム状態として扱う。
 .claude/state/cadence/

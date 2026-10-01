@@ -23,12 +23,15 @@ updated: 2026-09-29
 
 並び順が着手順 (2026-09-27 オーナー判断: 計測・記録・改善とデータ品質を優先する)。上限 10 枚 (DG081)。
 
-### [AUTH-CREDENTIAL-REGISTER-01] 全ログインサービスの資格情報を Windows・Mac・CI に登録する
+### [AUTH-CREDENTIAL-REGISTER-01] 残りの資格情報 (Mac 全サービス・ココナラ) を登録する
 タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [起票:2026-10-01] [領域:管理]
 
-- **経緯**: 2026-10-01 に doboku-note と同じく、全サービスの資格情報の正本 `.claude/config/auth-credentials.json` と管理画面 `/ops`「ログインと資格情報」、note・ココナラ・KDP の CI 再ログインを実装した。2026-10-01 時点でこの Windows PC は 8 サービスとも未登録、CI の Secrets も 3 件とも未登録 (管理画面で確認)。
-- **やること (オーナーのみ・パスワードは対話入力)**: Windows は `cmdkey /generic:stats47-measurement-<service> /user:<ID> /pass`、Mac は `security add-generic-password -s stats47-measurement-<service> -a <ID> -w`。CI は `gh secret set STATS47_AUTH_{NOTE,COCONALA,KDP}_USER` と `_PASSWORD` (KDP の TOTP を使うなら `_TOTP`)。
-- **完了条件**: `/ops` で全行の「この PC」が登録済み (Windows・Mac の両方で確認)、CI の Secrets 3 件が登録済み。その後の authenticated-measurement で note・ココナラ・KDP の状態ファイルの `relogin` が `session_valid` か `relogged` になる (CI での再ログインは未実証)。
+- **経緯**: 2026-10-01 に資格情報の正本 `.claude/config/auth-credentials.json` (9 サービス) と管理画面 `/ops/auth` を作り、note・ココナラ・KDP は CI でセッション切れを入り直す。同日 Windows PC と CI に 8 サービスを登録済み (A8・もしも・afb・楽天・note・KDP・X・Google。ID と登録先は `/ops/auth` で確認)。
+- **2026-10-01 済**: ログイン ID を正本の `loginId` に記録 (9 サービス・オーナー判断で公開リポジトリに記載。`/ops/auth` が表示し、ストアの ID と違えば「ID 不一致」)。Mac に全 9 サービスを登録、ココナラの CI Secrets を登録。Mac の `refresh-session.mjs --headed` で note はキーチェーンの ID/PW で自動ログイン成功、A8・もしも・ココナラは既存セッションで ok (パスワード経路は未検証)。
+- **残り (オーナーのみ・パスワードは対話入力)**:
+  1. **Windows のココナラ**: `cmdkey /generic:stats47-measurement-coconala /user:stats47jp@gmail.com /pass` (コマンドは Windows の `/ops/auth` にも出る)
+  2. **パスワード経路の実証 (セッションが切れたとき)**: 2026-10-01 に A8・もしも・楽天の有効セッションを Mac から CI へ渡した (Secrets 更新済み)。楽天は送信を Enter に、送信後の着地がログイン済みでなければ checkUrl を開き直して判定するよう直した (ログインできているのに login_failed と判定された)。ココナラは 2026-10-02 に自動ログインの対象から外した (自動操作のブラウザは見えない reCAPTCHA に「認証できませんでした」で拒否され、普通の Chrome では同じ ID/PW で入れた。セッション切れは普通の Chrome で専用プロファイルにログインし `bootstrap-session.mjs coconala --from-profile --publish`)。A8・もしも・楽天のパスワードでの自動ログインは未実証で、セッション切れ時に `refresh-session.mjs <source> --headed` で確かめる。KDP は `.local/authenticated-measurement/kdp.autologin-failed` で停止中で、本棚は有効だが Reports 認証で止まる (CI の入り直しが本棚しか見ない)
+- **完了条件**: Mac と Windows の両方で `/ops/auth` の「この PC」が全行「済」、CI 欄が「済」か「保管」。その後の authenticated-measurement で note・ココナラ・KDP の状態ファイルの `relogin` が `session_valid` か `relogged` になる (CI での再ログインは未実証)。
 
 ### [DATA-QUALITY-LOOP-01] 全指標のデータ品質を機械チェックし、「誤り・古さ・終了・薄さ」の 4 基準で継続的に直すループを作る
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-09-25] [領域:データ]
@@ -203,6 +206,44 @@ updated: 2026-09-29
 - **完了条件**: 2 本が note で公開され、`note-published-urls.json` に 2 件の URL があり、無料部分と有料部分の境界が意図どおりであることを screenshot で確認済み。公開日から 4 週間後 (公開日 + 28 日) に 2 本の売上を note ダッシュボードで比べる予定を `improvements.md` 側へ引き渡す。
 
 ## 🟡 中 — 2〜3ヶ月以内
+
+### [REVIEW-ROUTE-IMPROVEMENTS-IDS-01] レビューの申し送り検査が improvements.md の施策 ID を実在 ID と認識しない
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:node .claude/scripts/management/check-review-cadence.mjs] [起票:2026-10-02] [領域:管理]
+
+- **経緯 (2026-10-02 実測)**: 2026-09 の月次レビュー作成時に `loadIdIndex` (`.claude/scripts/management/lib/review-cadence.mjs`) を直接呼んで確かめたところ、
+  backlog の `### [ID]` 見出しは認識するが、improvements.md の表行の ID (`AFF-IMPRESSION-ROUTING-01` / `DATA-ESTAT-FETCH-01` / `R2-STORAGE-01` など) は false だった。
+  monthly-review / weekly-review の SKILL は「カード ID は backlog / improvements に実在するもの」と書いているので、手順と検査が食い違っている。
+- **影響**: 改善施策へ申し送りを結ぶと `unknown-id` で error になるため、レビューは施策 ID を避けて `定常` や近いカードへ迂回させている (2026-09 の月次レビューで実際に迂回した)。
+- **次**: `parseBacklog` とは別に improvements.md の表の 1 列目を ID として読む。テストに「表行の ID は ok・存在しない ID は unknown-id」の 2 例を足す。
+- **完了条件**: improvements.md の表行 ID を申し送りの行き先に書いたレビューで `check-review-cadence.mjs` が exit 0 になり、存在しない ID は従来どおり error になる。
+
+### [BLOG-REMEDIATION-PROOF-01] ブログ品質是正キューで 1 本をゲートと critic まで通すか、是正を計画から外すかを決める
+タグ: [コンテンツ品質] [種類:意思決定] [実行:対話] [起票:2026-10-02] [領域:サイト]
+
+- **経緯**: 是正キュー (`.claude/state/blog/remediation-queue.json`) の「1 本だけ通す」は W35〜W39 の 5 週連続で未達で、どの台帳にもカードが無かった (W39 レビューに「backlog ID なし」と記録)。
+  done は W35 25 → W39 18、must-fix pending は 32 → 50 で、W38 レビューは done の減少を記事の再劣化ではなく母集団の入替と特定している。
+- **次**: `/brushup-blog --target queue --next 1` で 1 本を quality-gate と blog-critic PASS まで通す。通せない場合は、その理由を書いて月次計画の対象から外す。
+  キューの報告は status 遷移と母集団の追加・削除を分けて出す。
+- **完了条件**: 1 本の `remediated_at` と critic PASS の review.md が残っているか、オーナーが是正を計画から外す判断をこのカードに記録している。
+
+### [GSC-CTR-DECOMPOSE-01] W39 の CTR 低下 (3.82% → 3.06%) をページ × クエリで分解する
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-02] [領域:サイト]
+
+- **経緯**: W39 の GSC 確定 7 日は表示 +10.0%・平均順位横ばいでクリック -11.8% だった (W39 週次レビュー)。どのページ・クエリで CTR が落ちたかは分解されておらず、
+  月次の `ctr-improvement` workflow の 2026-09 記録 (`.claude/state/metrics/monthly-jobs/ctr-improvement.json`) も summary が null で改善候補の本文が無い。
+- **次**: 確定 7 日の page × query を W38 と W39 で突き合わせ、表示が増えて CTR が低い上位 10 件を特定する。title の一括変更はしない。
+- **完了条件**: 上位 10 件と、それぞれを search-growth 候補へ渡すか見送るかの判断が記録されている。
+
+### [MODEL-OPT-APPLY-01] モデル使用量の改善提案を canary で確かめて agent の model / effort に反映する
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:npm run model-usage:test] [起票:2026-10-02] [領域:管理]
+
+- **経緯**: 2026-10-02 に計測→記録→改善のサイクルを作った (正典 `.claude/rules/model-prompting.md`「継続最適化サイクル」、画面 `/ops/agents`)。初回の提案は 4 件とも `set-effort` (effort 未指定でセッションの xhigh を継承): open-data-curator ($87.8・2 回)・sns-renderer ($51.7・6 回)・article-writer ($16.7・8 回)・blog-critic ($4.8・5 回)。直近 4 週・API 換算。
+- **canary 済み (2026-10-02)**: code-reviewer を Opus 5.5 xhigh → Sonnet 5.5 xhigh。fixture v3 (basic 4 件 + subtle 4 件) × 2 回で recall 1.0 → 1.0、1 回 $0.79 → $0.39、判定 pass。結果 `.claude/state/metrics/model-usage/canary/2026-10-01-code-reviewer-opus-xhigh-vs-claude-sonnet-5-5-xhigh.json`。2026-10-02 に frontmatter を sonnet へ変更済み。
+- **残り**:
+  1. code-reviewer は 2026-10-02 にオーナー判断で sonnet へ切り替えた。2 課題の合成差分だけの結果なので、2026-10-30 まで実運用のレビューで指摘の見落としを見る。見落としが出たら `model: opus` に戻して canary に見落とした型の課題を足す
+  2. `set-effort` 4 件は 2026-10-02 に canary 済みで全件合格 (Sonnet 5.5 の xhigh → high、各 3 回)。recall はすべて 1.0 → 1.0、1 回の費用は article-writer 10%・blog-critic 15%・open-data-curator 6%・sns-renderer 5% 減。frontmatter に `effort: high` を書くかはオーナー判断待ち。課題は合成の 1 題ずつなので、書いたら 2 週の実運用で品質を見る
+  3. 費用の大半はメインセッション (4 週 $1,231・Opus 5 / 5.5 の xhigh が中心)。対話の既定 effort を下げるかはオーナーの使い方次第なので、`/ops/agents` の「メインセッション」を週次で見る
+- **完了条件**: 合格した 4 体の frontmatter に effort を書き (またはオーナーが見送りを決め)、次の `npm run model-usage:report` で `set-effort` 提案が消えている。
 
 ### [ADMIN-MCP-STATUS-01] 管理画面で、この PC が使う MCP の一覧と接続状況を見られるようにする
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-09-28] [領域:管理]
@@ -2551,60 +2592,6 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - **次**: 3 スクリプトの npm/npx 起動を、Windows でも動く形 (node で npm-cli を直接起動するか `shell` 指定) に揃える。
   共通の起動ヘルパーがあればそれを使う。
 - **完了条件**: この PC で上記 3 gate が判定まで進む (成功・失敗は中身次第)。
-
-### [SCRIPT-ORPHAN-DELETE-01] orphan スクリプトを紐づけ先カードの完了時に再判定する ((c) 群は 2026-09-24 判定済み)
-
-タグ: [種類:改善] [実行:対話] [検証:node .claude/scripts/lib/check-agent-skill-consistency.cjs で orphan 一覧を再取得] [起票:2026-08-17] [領域:管理]
-
-- **owner**: uruhayato373 (削除可否はオーナー判断)
-- **前提**: `SCRIPT-ORPHAN-TRIAGE-01` で orphan **29 本すべてを分類し、残す理由を記録した**
-  (下記「orphan 29 本の分類」)。
-- **済 (2026-09-16)**: (a) 群 6 本をオーナー承認で削除。`estat/estimate-city-data-size.mjs` (D1 前提。出力・cache・
-  local-resources / .gitignore 登録も同時撤去) と、`blog/gen-chart-svg.cjs` / `lib/update-skill-primary-agent.cjs`
-  (maintenance-debt baseline の UNBOUNDED_LEGACY 1 件も除去) / `note/generate-remaining-covers.cjs` /
-  `note/inject-affiliate-blocks.mjs` / `sns/backfill-x-templates.cjs`。いずれも他スクリプト・skill・workflow からの参照なし。
-- **trigger**: 下表 (b) の紐づけ先カードが閉じたとき。そのカードに紐づくスクリプトだけを再判定する。
-- **次**: (c) 群は 2026-09-24 に判定・削除済み。残作業は (b) 群と (c) で残した 3 本の、紐づけ先が閉じた時点での再判定だけ。
-- **完了条件**: (b) 群と残した 3 本がすべて、紐づけ先の完了後に削除されるか恒常利用へ移っている。
-- **禁止**: (b) 群を巻き込んで一括削除しない。
-
-#### orphan 29 本の分類 (2026-08-17 実測・`check-agent-skill-consistency.cjs`)
-
-エントリ記載の 20 本は古い。実測は **29 本**。全件に残す/消す理由を付けた。
-
-**(a) 役目が終わっている 6 本** → 2026-09-16 に全て削除済み (上記「済」)
-
-**(b) 生きているバックログに紐づく 13 本** → 消さない。紐づけ先が閉じるまで資産として残す
-
-| 紐づけ先                                                                        | スクリプト                                                                                                                          |
-| ------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| `docs/02_実装計画/44_市区町村統計スコープ分離・ランキング基盤実装仕様.md`      | `db/export-city-local-finance.cjs` / `estat/{etl-city-stats,fetch-city-local-finance}` / `gsc/inspect-cities-sample.cjs`            |
-| `BLOG-SVG-LINEAGE-RESTORE-01` (in-progress)                                     | `blog/restore-{findings,ranking,scatter}-from-svg.mjs`                                                                              |
-| `NOTE-MAGAZINE-REORG-01` (in-progress)                                          | `note/{note-magazine,fetch-note-magazines,fetch-magazine-members}.mjs` / `note/probe-{create-form,magazine-create,magazine-ui}.mjs` |
-| `CHART-LINEAGE-RESIDUAL-01` (pending)                                           | `blog/resolve-scatter-axes.mjs`                                                                                                     |
-
-`restore-*-from-svg.mjs` は名前に反して**逆復元をしない** — 旧 SVG の表示値を
-「SSOT が正しいことの照合先」としてのみ使い、≥0.95 一致したときだけ SSOT から再生成する
-(`.claude/rules/blog-data-schema.md` §1.6 の捏造防止規約に適合)。名前だけで消さない。
-
-`probe-*` は note.com の UI が変わったとき再実行する read-only 調査用。note は SPA で
-DOM が変わりやすく、実機 probe なしでは実装を直せない (`kdp-publish` と同じ理由)。
-
-**(c) 用途が判断できなかった 9 本** → 2026-09-24 に判定済み (リリース #1021〜#1023 後も未使用を確認)
-
-- 削除 6 本: `blog/prefecture-food-profile.mjs` (一度きりの記事用・入力は /tmp) / `blog/select-conformance-candidates.mjs`
-  (依存する routine は 6 月から未登録・無効。`triggers.json` の該当定義に削除を注記) / `gsc/discover-trends-fetch.cjs`
-  (`/discover-trends` から呼ばれない) / `note/affiliate-incremental.sh` (単一広告・Profile 直書きの一度きり作業) /
-  `note/download-affiliate-banners.mjs` (取得済み・呼び出し元なし) / `note/expand-for-fix.mjs` (/tmp 入力の一度きり作業)
-- 残す 3 本: `blog/build-article-data-from-r2.mjs` (2026-08-26 にも修正あり。R2 から記事 data を作り直す代替手段) /
-  `note/publish-new-note.sh` (publish-note SKILL・テストから参照され使用中。orphan 一覧からも外れた) /
-  `psi/generate-cwv-pr.mjs` (有効な routine `stats47 weekly CWV PR` の手動代替として `triggers.json` に明記)
-
-**なぜ orphan 警告を 0 にしないか**: (b) の 13 本は「今は呼ばれていないが消してはいけない」もので、
-これを 0 にするには allowlist を作るか無理に参照を生やすことになる。どちらも実態を曇らせる。
-warning のまま**理由付きで残す**のが正しい形で、これが本エントリの成果物。
-
-- **完了条件**: orphan 警告が 0 になるか、残るものが「なぜ残すか」を添えて記録されている。
 
 ### [NOTE-PAID-MANUSCRIPT-SYNC-01] API パッチで変えた有料記事 6 本の private R2 原稿を live 本文に追従させる
 

@@ -3,10 +3,13 @@
 投稿済み全件。`posted_at` 降順。
 スクリプトで自動生成 — 手編集しない (`sns-posts-store.cjs` が `insert()`/`updateById()` のたびに再生成)。
 
-**583 件** (最終更新: 2026-09-30)
+**586 件** (最終更新: 2026-10-01)
 
 | 日付 | 媒体 | コンテンツ | キャプション | URL |
 |---|---|---|---|---|
+| 2026-10-01 | 📸 Instagram | ranking-quiz/sake-consumption-expenditure |  | [🔗](https://www.instagram.com/p/Dd9ZXGRGjvL/) |
+| 2026-10-01 | 🧵 Threads | area/area-08000-profile | 茨城の「らしさ」をデータでたどる。 県花バラ、べにはるか・ふくむらさき・シルクス…と常陸大黒、統計ランキングを1ページに… | [🔗](https://www.threads.com/@stats47jp/post/Dd8gtEDj_KR) |
+| 2026-10-01 | 🧵 Threads | ranking/sewerage-coverage-rate | 下水道の普及率、徳島は19.5％。  1位の東京は99.7％で、約5倍の差があります。 2位神奈川97.1％、3位大阪9… | [🔗](https://www.threads.com/@stats47jp/post/Dd7yVYYgu9n) |
 | 2026-09-30 | 📸 Instagram | correlation-carousel/dual-income-household-ratio--floor-area-per-dwelling-owner |  | [🔗](https://www.instagram.com/p/Dd6wPczFILm/) |
 | 2026-09-30 | 📸 Instagram | ranking-quiz-reel/squid-consumption-expenditure |  | [🔗](https://www.instagram.com/reel/Dd6AASLFICC/) |
 | 2026-09-30 | 🧵 Threads | area/area-07000-profile | 福島を1位・47位だけで語らない。 県木はケヤキ、県鳥はキビタキ。人口・産業・暮らしの県データブックへ。 続きは👇 h… | [🔗](https://www.threads.com/@stats47jp/post/Dd56QkxDD0i) |

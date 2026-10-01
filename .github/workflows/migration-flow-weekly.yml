@@ -16,10 +16,9 @@ name: 🗾 Migration-flow Weekly Deep Dive
 #   この workflow は checkout しかせず R2 から media を取る step が無いので、clean checkout の
 #   CI では構造的に必ず失敗する。県名だけが週ローテーションで変わり同一エラーを繰り返していた。
 #
-#   投稿を再開する場合は、成功している post-instagram-scheduled.yml と同じ経路
-#   (公開 R2 URL https://storage.stats47.jp を IG Graph API に URL のまま渡す) へ寄せるか、
-#   post step の前に R2 から pull する step を足すこと。**未修正のままなので dispatch でも
-#   Post step は失敗する** (schedule を止めたのは無言の連続失敗を止めるため)。
+#   2026-10-01: post step の前に公開 R2 から caption.txt / reel.mp4 を取る step を足した (欠陥は修正済み)。
+#   schedule は戻していない。投稿を再開するか (R2 の動画 30 日削除との整合を含む) はオーナー判断
+#   (backlog MIGRATION-FLOW-IG-01)。再開するときは下の on: に schedule を戻す。
 
 on:
   # schedule は 2026-08-16 に削除 (上記)。再開は設計欠陥の修正とセットで。
@@ -104,6 +103,21 @@ jobs:
           else
             echo "skip=false" >> "$GITHUB_OUTPUT"
           fi
+
+      # post-instagram.ts は .local/r2/sns/<domain>/<slug>/instagram/ を読む (gitignored)。clean checkout の CI には
+      # 無いので、公開 R2 から caption.txt と reel.mp4 を取ってくる (2026-10-01。それまで 12 回連続で失敗していた)
+      - name: 📥 Pull reel and caption from R2
+        if: steps.check.outputs.skip != 'true'
+        env:
+          SLUG: ${{ steps.pick.outputs.slug }}
+        run: |
+          DIR=".local/r2/sns/migration-flow/${SLUG}/instagram"
+          mkdir -p "$DIR"
+          for f in caption.txt reel.mp4; do
+            curl --fail --silent --show-error --location --max-time 120 \
+              -o "$DIR/$f" "https://storage.stats47.jp/sns/migration-flow/${SLUG}/instagram/$f"
+          done
+          ls -l "$DIR"
 
       - name: 📱 Post to Instagram + X
         if: steps.check.outputs.skip != 'true' && inputs.dry_run != 'true'

@@ -14,6 +14,10 @@
  *              換算値であって実請求ではない。枠の残りは枠に当たったエラーからしか分からない。
  *
  * 追記専用。既存行は書き換えない。同じ run_id が既にあれば何もしない (再実行で二重化しない)。
+ *
+ * ★model / effort 列 (2026-10-02 追加): モデルや effort を変えた前後で 1 件あたりの費用を比べるため。
+ * model は execution log の init 行から取り、effort は log に載らないので workflow が --effort で渡す。
+ * 列を足す前の行はこの 2 列が空のまま (ヘッダ行だけを新しい形に置き換え、データ行は書き換えない)。
  */
 
 import { appendFileSync, existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
@@ -23,10 +27,10 @@ import { summarizeClaudeExecution } from './summarize-claude-execution.mjs';
 import { pathToFileURL } from "node:url";
 
 export const CSV_HEADER =
-  'date,workflow,run_id,limit,items,turns,duration_ms,cost_usd,input,output,cache_write,cache_read,token_source,is_error';
+  'date,workflow,run_id,limit,items,turns,duration_ms,cost_usd,input,output,cache_write,cache_read,token_source,is_error,model,effort';
 
 /** CSV に落とす前の 1 行。値は全て単純な数値か短い識別子で、自由文を入れない。 */
-export function buildUsageRow({ summary, date, workflow, runId, limit, items }) {
+export function buildUsageRow({ summary, date, workflow, runId, limit, items, effort }) {
   const t = summary.tokens;
   return {
     date,
@@ -44,6 +48,8 @@ export function buildUsageRow({ summary, date, workflow, runId, limit, items }) 
     // 未取得を 0 と読み違えないよう source を残す (none = 記録が無かった)
     token_source: t.source ?? 'none',
     is_error: summary.isError ? 1 : 0,
+    model: summary.model ?? '',
+    effort: effort ?? '',
   };
 }
 
@@ -71,7 +77,13 @@ export function hasRunId(csvText, runId) {
 export function appendUsageRow(file, row) {
   mkdirSync(dirname(file), { recursive: true });
   if (!existsSync(file)) writeFileSync(file, `${CSV_HEADER}\n`);
-  const text = readFileSync(file, 'utf8');
+  let text = readFileSync(file, 'utf8');
+  // 列を足す前のヘッダなら、ヘッダ行だけ新しい形にする (データ行は空欄のまま残す)
+  const [head, ...rest] = text.split('\n');
+  if (head !== CSV_HEADER && CSV_HEADER.startsWith(`${head},`)) {
+    text = [CSV_HEADER, ...rest].join('\n');
+    writeFileSync(file, text);
+  }
   if (hasRunId(text, row.run_id)) return { appended: false, reason: 'duplicate-run-id' };
   appendFileSync(file, `${formatCsvLine(row)}\n`);
   return { appended: true };
@@ -105,6 +117,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
     runId: arg('--run-id'),
     limit: arg('--limit', '0'),
     items: arg('--items', '0'),
+    effort: arg('--effort'),
   });
   const res = appendUsageRow(out, row);
   console.log(res.appended ? `記録: ${formatCsvLine(row)}` : `記録しない (${res.reason}): run ${row.run_id}`);

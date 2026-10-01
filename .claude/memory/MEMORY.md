@@ -2,6 +2,7 @@
 
 - [project_note_image_assets_contract.md](project_note_image_assets_contract.md) — note原稿(docs/31)の画像契約。派生PNGはgit非追跡・ランキング記事はchart-data.jsonでデータ復元・catalogのr2_bodyは実在確認要(a-*14本がR2に無い)
 
+- [project_model_usage_cycle.md](project_model_usage_cycle.md) — モデル/effort最適化サイクル。agentはeffort未指定でセッションのxhighを継承、別名sonnet/opusの解決先はCLI版次第(2.1.280未満はOpus 5.5不可)、canaryは採点器ごと検証
 - [feedback_gsc_export_false_positive.md](feedback_gsc_export_false_positive.md) — GSC理由行の非表示クリック失敗は概要ZIPの偽成功を生む。概要+5詳細の内容・件数・帰属とcapabilityを照合
 - [feedback_native_chrome_session_export.md](feedback_native_chrome_session_export.md) — Google認証exportはOS keychain互換を保った専用profileの一時コピーで行い、元profileをテスト既定値で開かない
 - [project_monetization_contract.md](project_monetization_contract.md) — 収益化の恒久判断。AdSenseは恒久停止(RPM ¥37で月¥1,400上限)、NSMは週次収益でPVではない、アフィ評価は確定収益/1,000 viewable imp、affiliate_verticalは広告自身のverticalを送る(契約テストで強制)、本線は行政実務向け商品
@@ -98,6 +99,7 @@
 - [feedback_ga4_history_unreliable_wow.md](feedback_ga4_history_unreliable_wow.md) — GA4 history.csvのpageviewsはlast28d/bot混入。WoWはGSC clicksを使う
 - [feedback_ga4_journey_referrer_over_navclick.md](feedback_ga4_journey_referrer_over_navclick.md) — 回遊はnav_clickでなく週次internal-transitions.csv(referrer)で読む(theme→ranking実44/nav3)。GSC 0の流入増はBingを疑う
 - [project_measurement_cycle_ci.md](project_measurement_cycle_ci.md) — 計測→記録→改善サイクルのCI化(2026-09-24)。日曜計測→月曜06:00無人triage(ゲート付き)→09:00週次Issue。schedule/取得段はmain定義で動く。無人ClaudeはdontAskで.claude/を書けない→提案JSONを決定的適用
+- [project_review_cadence_wiring.md](project_review_cadence_wiring.md) — 週次・月次レビューの配線(2026-10-01)。正本review-wiring.json・判定review-cadence.mjsをCLI/Stop hook/review-cadence-guard.yml/DG084/管理画面/週次Issueが共有。月次は/monthly-review独立・申し送りは「→ 振り分け:」必須
 - [project_r2_s3_token_expired_2026_05_29.md](project_r2_s3_token_expired_2026_05_29.md) — R2 S3トークン(.env.local)401失効。※ローカル再発行は原則不要(R2書込CI専用化)
 - [feedback_sync_snapshots_checks_out_main.md](feedback_sync_snapshots_checks_out_main.md) — sync-snapshots は --ref を渡しても常に main を checkout。develop の git TS 変更はマージ後に実行しないと R2 に反映されない (しかも success + verify 一致と報告するので失敗に見えない)
 - [project_r2_writes_ci_only.md](project_r2_writes_ci_only.md) — 2026-06-20: ローカル/CI両方からremote R2読み書き可。remoteが唯一の真実源。ローカルミラー廃止。ローカル書込はR2 S3 creds要

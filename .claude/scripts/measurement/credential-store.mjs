@@ -7,7 +7,7 @@
  *
  * CI (GitHub Actions) は正本で ciCredential=true の service だけ、collect step の環境変数
  * (STATS47_AUTH_SOURCE / _USER / _PASSWORD / _TOTP。workflow が Secrets STATS47_AUTH_<SERVICE>_* から渡す) を読む。
- * それ以外の service・OS では null (2026-10-01 オーナー決定で note・ココナラ・KDP だけ CI がパスワードを持つ)。
+ * それ以外の service・OS では null (どの service が CI でパスワードを使うかは正本の ciCredential。2026-10-02 にココナラを外した)。
  *
  * サービス名 (オーナーが各マシンで 1 回だけ登録する。値をログ・引数・ファイルへ出さない):
  *   stats47-measurement-<source>        アカウント = ログイン ID、パスワード = パスワード

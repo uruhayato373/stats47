@@ -14,6 +14,15 @@ function filesUnder(dir: string): string[] {
   });
 }
 
+/**
+ * 子プロセスの例外 (理由付き)。例外のファイルも書き込みはしない (下のテストで固定)。
+ * auth-credentials.ts: /ops/auth で資格情報の登録状況をページを開くたびに読む (2026-10-01 オーナー判断)。
+ *   呼ぶのは gh secret list と credential-store の storedAccounts (cmdkey /list・security -w なし) だけ。
+ */
+const CHILD_PROCESS_EXCEPTIONS: Record<string, RegExp> = {
+  "lib/server/auth-credentials.ts": /execFileSync\("gh", \["secret", "list"/,
+};
+
 describe("admin read-only contract", () => {
   it("API routeはGETだけを公開する", () => {
     const violations = filesUnder(path.join(adminRoot, "app/api"))
@@ -48,9 +57,19 @@ describe("admin read-only contract", () => {
     );
     const forbidden =
       /node:child_process|from\s+["']child_process["']|\bspawn\s*\(|\bexecFile\s*\(|\bwriteFile(?:Sync)?\s*\(|\bappendFile(?:Sync)?\s*\(|\bupdateById\s*\(|\binsert\s*\(/;
-    const violations = serverFiles.flatMap((file) =>
-      forbidden.test(fs.readFileSync(file, "utf8")) ? [path.relative(adminRoot, file)] : [],
-    );
+    const violations = serverFiles
+      .filter((file) => !Object.hasOwn(CHILD_PROCESS_EXCEPTIONS, path.relative(adminRoot, file).replaceAll("\\", "/")))
+      .flatMap((file) => (forbidden.test(fs.readFileSync(file, "utf8")) ? [path.relative(adminRoot, file)] : []));
     expect(violations).toEqual([]);
+  });
+
+  it("子プロセスの例外はパスワードを読まない読み取りコマンドだけで、書き込みをしない", () => {
+    for (const [rel, allowed] of Object.entries(CHILD_PROCESS_EXCEPTIONS)) {
+      const source = fs.readFileSync(path.join(adminRoot, rel), "utf8");
+      expect(source, rel).toMatch(allowed);
+      expect(source.match(/\b(?:execFileSync|execFile|execSync|exec|spawn|spawnSync)\(/g)?.length, rel).toBe(1);
+      // パスワードを読む経路 (資格情報ストアの直接読み) と書き込みを持たない
+      expect(source, rel).not.toMatch(/writeFile|appendFile|CredRead|find-generic-password|readCredential|readSecret/);
+    }
   });
 });

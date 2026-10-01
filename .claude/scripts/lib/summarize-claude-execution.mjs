@@ -219,8 +219,15 @@ export function summarizeClaudeExecution(entries) {
     earlyAssistantText = textOf(last?.message?.content);
   }
 
+  // CLI が最初に出す init 行の model = run 本体のモデル (agent の委譲先は result.modelUsage に別キーで載る)
+  const init = list.find((entry) => entry.type === 'system' && entry.subtype === 'init');
+  const model = typeof init?.model === 'string' ? init.model : null;
+  const modelUsage = result?.modelUsage && typeof result.modelUsage === 'object' ? Object.keys(result.modelUsage).sort() : [];
+
   return {
     found: result !== null,
+    model,
+    modelUsage,
     isError: result?.is_error === true,
     subtype: typeof result?.subtype === 'string' ? result.subtype : null,
     numTurns,

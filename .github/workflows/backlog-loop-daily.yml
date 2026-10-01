@@ -61,6 +61,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 60
     env:
+      # claude_args と使用量の記録が同じ値を読む (1 か所で変える)
+      CLAUDE_EFFORT: high
       LIMIT: ${{ inputs.limit || '2' }}
       DRY_RUN: ${{ inputs.dry_run || 'false' }}
     steps:
@@ -125,7 +127,7 @@ jobs:
       - name: 🛠️ Process backlog entries with Claude Code
         id: claude
         if: ${{ env.DRY_RUN != 'true' && steps.pick.outputs.count != '0' }}
-        uses: anthropics/claude-code-base-action@09641f2ee92b8a382a1c63c69b915d7a4540d6b6 # Claude Code v2.1.220 (base-action main 2026-08-02)
+        uses: anthropics/claude-code-base-action@4bd489c7d926da56528f2d27386d1ea78737fc5c # Claude Code v2.1.287 (base-action main 2026-10-01。sonnet / opus の別名が 5.5 に解決される版)
         env:
           NODE_VERSION: "20.x"
         with:
@@ -138,7 +140,7 @@ jobs:
             }
           claude_args: |
             --model sonnet
-            --effort high
+            --effort ${{ env.CLAUDE_EFFORT }}
             --max-turns 300
             --no-session-persistence
             --setting-sources project
@@ -237,33 +239,10 @@ jobs:
 
       - name: 📊 Record token usage
         if: ${{ always() && steps.claude.outcome != 'skipped' }}
-        continue-on-error: true
         env:
           CLAUDE_EXECUTION_FILE: ${{ steps.claude.outputs.execution_file }}
-          RUN_ID: ${{ github.run_id }}
           TARGET_COUNT: ${{ steps.pick.outputs.count || '0' }}
-        run: |
-          FILE="${CLAUDE_EXECUTION_FILE:-/home/runner/work/_temp/claude-execution-output.json}"
-          node .claude/scripts/lib/record-claude-usage.mjs "$FILE" \
-            --workflow backlog-loop \
-            --run-id "$RUN_ID" \
-            --limit "${LIMIT}" \
-            --items "$TARGET_COUNT"
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .claude/state/metrics/claude-usage || true
-          if git diff --cached --quiet; then echo "記録する変更なし"; exit 0; fi
-          git commit -q -m "chore(metrics): record Claude token usage [skip ci]"
-          git stash push --include-untracked --quiet || true
-          for _ in 1 2 3; do
-            if git pull --rebase --quiet origin develop && git push origin HEAD:develop; then
-              echo "✅ トークン実績を記録した"
-              exit 0
-            fi
-            sleep 5
-          done
-          echo "::error::トークン実績の push に失敗した (計測のみ・本体には影響しない)"
-          exit 1
+        run: bash .claude/scripts/lib/record-claude-usage-ci.sh "$CLAUDE_EXECUTION_FILE" backlog-loop "$LIMIT" "$TARGET_COUNT" "$CLAUDE_EFFORT"
 
       - name: 🚨 Upsert failure issue
         if: ${{ failure() && env.DRY_RUN != 'true' }}

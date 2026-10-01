@@ -11,6 +11,7 @@
  *                   件数は発生 (`conversions`)・確定 (`approved`)、金額は確定額 (`revenueYen`) だけを持つ
  * - `moshimoResults` … もしもの期間記録 (`moshimo-results.json`)。発生額 `grossRevenueYen`・確定額 `revenueYen`
  * - afb の金額は非公開の証拠保管にしか無く、`authLatest` は件数だけを持つ。件数 0 の成功なら ¥0 と確定できる
+ * - `rakutenResults` … 楽天アフィリエイトの月別記録 (`rakuten-results.json`)。管理画面の値を週次レビューで手入力する
  *
  * 欠測・認証切れ・古い観測は 0 円にしない。「判定不能」と理由を書く (`project_monetization_contract`)。
  */
@@ -83,13 +84,36 @@ function afbLine(source, asOf) {
  * @param {{ authLatest: object|null, a8Results: object|null, moshimoResults: object|null, asOf: Date }} input
  * @returns {string[]} ASP ごとの行 (A8 / もしも / afb の順)
  */
-export function aspRevenueLines({ authLatest, a8Results, moshimoResults, asOf }) {
-  if (!authLatest) return ["- ASP の成果: **判定不能**（認証付き収集の結果 latest.json が無い）"];
+export function aspRevenueLines({ authLatest, a8Results, moshimoResults, rakutenResults = null, asOf }) {
+  const rakuten = rakutenLine(rakutenResults, asOf);
+  if (!authLatest) return ["- ASP の成果: **判定不能**（認証付き収集の結果 latest.json が無い）", rakuten];
   return [
     a8Line(findSource(authLatest, "a8"), a8Results, asOf),
     moshimoLine(findSource(authLatest, "moshimo"), moshimoResults, asOf),
     afbLine(findSource(authLatest, "afb"), asOf),
+    rakuten,
   ];
+}
+
+/**
+ * 楽天アフィリエイトの行。成果 API が無いので、週次レビューでオーナーが管理画面を見て
+ * `record-rakuten-results.mjs` で記録した月別の値 (`rakuten-results.json`) を読む。
+ * 記録が無い・最後の記録が古いときは判定不能 (記録し忘れた週を 0 円にしない)。
+ */
+export function rakutenLine(rakutenResults, asOf) {
+  const records = Array.isArray(rakutenResults?.records) ? rakutenResults.records : [];
+  if (records.length === 0) return "- 楽天: **判定不能**（未記録。認証付き収集の rakuten が未成功。急ぐときは管理画面を見て npm run rakuten:record で記録する）";
+  const latest = records.reduce((a, b) => (String(b.observedAt) > String(a.observedAt) ? b : a));
+  const age = ageDays(latest.observedAt, asOf);
+  if (age == null) return "- 楽天: **判定不能**（記録日時が読めない）";
+  if (age > ASP_OBSERVATION_MAX_AGE_DAYS) {
+    return `- 楽天: **判定不能**（最終記録 ${latest.observedAt.slice(0, 10)} が ${age} 日前 (上限 ${ASP_OBSERVATION_MAX_AGE_DAYS} 日)。週次レビューで記録する）`;
+  }
+  const month = records.map((r) => r.month).sort().at(-1);
+  const r = records.find((x) => x.month === month);
+  const confirmed = r.confirmedYen == null ? "未確定" : yen(r.confirmedYen);
+  const how = String(r.source ?? "").startsWith("collector:") ? "自動収集" : "管理画面の手入力";
+  return `- 楽天 (${month} 月累計・記録 ${String(r.observedAt).slice(0, 10)}・${how}): 発生 **${r.orders} 件・${yen(r.estimatedYen)}** / 確定 **${confirmed}**（確定はその月に確定した額）`;
 }
 
 /**

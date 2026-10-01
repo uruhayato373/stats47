@@ -71,11 +71,9 @@ test(".claude/scripts 配下の全スクリプトが Indexing API publish を参
   );
 });
 
-test("gsc-auto-resubmit-daily.yml は退役 (schedule トリガー無し・送信しない)", () => {
-  const yml = read(".github/workflows/gsc-auto-resubmit-daily.yml");
-  assert.ok(!/^\s*schedule:/m.test(yml), "schedule トリガーが残存している (自動送信が起きうる)");
-  assert.ok(!/--execute/.test(yml), "--execute で送信するステップが残存している");
-  assert.ok(/RETIRED/i.test(yml), "退役マーカーが無い");
+// 2026-07-23 に退役した送信 cron は 2026-10-01 に workflow ごと削除した。復活して自動送信が起きないことを固定する
+test("gsc-auto-resubmit-daily.yml は削除済み (Indexing API の自動送信 cron を持たない)", () => {
+  assert.ok(!fs.existsSync(path.join(ROOT, ".github/workflows/gsc-auto-resubmit-daily.yml")), "退役した送信 cron が復活している");
 });
 
 test("URL Inspection (観測) は維持されている", () => {

@@ -23,7 +23,7 @@ function channelBranch(group: ChannelGroup): NavBranch {
   return { label: "チャネル別", children: channelsOf(group).map(({ href, label }) => ({ href, label })) };
 }
 
-type DomainNavEntry = { label: string; kind: string } & ({ href: string } | { channels: ChannelGroup });
+type DomainNavEntry = { label: string; kind: string } & ({ href: string } | { channels: ChannelGroup } | { children: readonly NavItem[] });
 type Domain = { id: string; label: string; role: string; nav: readonly DomainNavEntry[] };
 
 /**
@@ -35,7 +35,13 @@ export const NAV_GROUPS: readonly NavGroup[] = [
   { title: null, items: [{ href: "/", label: "ホーム" }] },
   ...(domainsConfig.domains as readonly Domain[]).map((d) => ({
     title: d.label,
-    items: d.nav.map((n): NavEntry => ("channels" in n ? channelBranch(n.channels) : { href: n.href, label: n.label })),
+    items: d.nav.map((n): NavEntry =>
+      "channels" in n
+        ? channelBranch(n.channels)
+        : "children" in n
+          ? { label: n.label, children: n.children.map(({ href, label }) => ({ href, label })) }
+          : { href: n.href, label: n.label },
+    ),
   })),
 ];
 

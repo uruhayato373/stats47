@@ -65,9 +65,11 @@ test("afb に件数があるときは金額を判定不能とし、0 円にし�
   assert.doesNotMatch(afb, /¥0/);
 });
 
-test("latest.json が無ければ ASP 全体を判定不能にする", () => {
+test("latest.json が無ければ認証付き収集の ASP 全体を判定不能にする (手入力の楽天は別の行)", () => {
   const lines = aspRevenueLines({ authLatest: null, a8Results: A8, moshimoResults: MOSHIMO, asOf: AS_OF });
-  assert.deepEqual(lines, ["- ASP の成果: **判定不能**（認証付き収集の結果 latest.json が無い）"]);
+  assert.equal(lines[0], "- ASP の成果: **判定不能**（認証付き収集の結果 latest.json が無い）");
+  assert.match(lines[1], /^- 楽天: \*\*判定不能\*\*/);
+  assert.equal(lines.length, 2);
 });
 
 /**
@@ -98,4 +100,19 @@ test("期間末が今週の記録だけを手取り (netRevenueYen) で合計す
 test("台帳が壊れている・販売中の数が読めないときは判定不能", () => {
   assert.match(productRevenueLine({ ledger: null, liveProductCount: 3, ...WEEK }), /判定不能/);
   assert.match(productRevenueLine({ ledger: { observations: [] }, liveProductCount: null, ...WEEK }), /判定不能/);
+});
+
+// 楽天 (2026-10-01): 成果 API が無く週次レビューで手入力する。記録し忘れた週を 0 円にしないことを固定する。
+test("楽天: 未記録・古い記録は判定不能、新しい記録は最新月の発生と確定を出す", async () => {
+  const { rakutenLine } = await import("../nsm-revenue-lines.mjs");
+  assert.match(rakutenLine(null, AS_OF), /楽天: \*\*判定不能\*\*（未記録/);
+  const old = { records: [{ month: "2026-08", orders: 2, estimatedYen: 300, confirmedYen: 100, observedAt: "2026-09-01T00:00:00Z" }] };
+  assert.match(rakutenLine(old, AS_OF), /判定不能.*26 日前/);
+  const fresh = { records: [
+    { month: "2026-08", orders: 2, estimatedYen: 300, confirmedYen: 100, observedAt: "2026-09-20T00:00:00Z" },
+    { month: "2026-09", orders: 1, estimatedYen: 120, confirmedYen: null, observedAt: "2026-09-26T00:00:00Z" },
+  ] };
+  assert.match(rakutenLine(fresh, AS_OF), /2026-09 月累計.*発生 \*\*1 件・¥120\*\* \/ 確定 \*\*未確定\*\*/);
+  const lines = aspRevenueLines({ authLatest: null, a8Results: null, moshimoResults: null, rakutenResults: fresh, asOf: AS_OF });
+  assert.equal(lines.length, 2, "認証付き収集が無くても楽天の行は出す");
 });

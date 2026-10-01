@@ -25,6 +25,10 @@ concurrency:
   group: seo-keyword-cycle
   cancel-in-progress: false
 
+env:
+  # claude_args と使用量の記録が同じ値を読む (1 か所で変える)
+  CLAUDE_EFFORT: high
+
 jobs:
   cycle:
     if: github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success'
@@ -92,7 +96,7 @@ jobs:
         id: review
         if: steps.plan.outputs.review == 'true'
         timeout-minutes: 15
-        uses: anthropics/claude-code-base-action@09641f2ee92b8a382a1c63c69b915d7a4540d6b6 # v2.1.220
+        uses: anthropics/claude-code-base-action@4bd489c7d926da56528f2d27386d1ea78737fc5c # Claude Code v2.1.287 (base-action main 2026-10-01。sonnet / opus の別名が 5.5 に解決される版)
         env:
           NODE_VERSION: '20.x'
         with:
@@ -102,7 +106,7 @@ jobs:
           settings: '{"disableAllHooks":true}'
           claude_args: |
             --model sonnet
-            --effort high
+            --effort ${{ env.CLAUDE_EFFORT }}
             --max-turns 45
             --json-schema '{"type":"object","properties":{"status":{"type":"string","enum":["proposed","no-change","implementation-needed","needs-approval"]},"keyword":{"type":"string"},"targetPath":{"type":"string"},"needs":{"type":"string","minLength":20,"maxLength":500},"gap":{"type":"string","minLength":20,"maxLength":500},"done":{"type":"string","minLength":20,"maxLength":500},"method":{"type":"string","enum":["title","description","intro","faq","content","internal-links","data"]},"competitors":{"type":"array","minItems":1,"maxItems":3,"items":{"type":"object","properties":{"url":{"type":"string"},"findings":{"type":"string","minLength":20}},"required":["url","findings"],"additionalProperties":false}},"patches":{"type":"array","maxItems":3,"items":{"type":"object","properties":{"property":{"type":"string"},"oldText":{"type":"string"},"newText":{"type":"string","maxLength":900}},"required":["property","oldText","newText"],"additionalProperties":false}}},"required":["status","keyword","targetPath","needs","gap","done","method","competitors","patches"],"additionalProperties":false}'
             --tools "Read,Glob,Grep,WebFetch,WebSearch"
@@ -173,3 +177,11 @@ jobs:
           path: .local/seo-rank-watch/
           include-hidden-files: true
           retention-days: 30
+
+      # 計測のみ (失敗しても本体の成否を変えない)。model / effort ごとの費用を比べるため history.csv に 1 行足す。
+      # 正典: .claude/rules/model-prompting.md「継続最適化サイクル」
+      - name: 📊 Record token usage
+        if: ${{ always() && (steps.review.outcome == 'success' || steps.review.outcome == 'failure') }}
+        env:
+          CLAUDE_EXECUTION_FILE: ${{ steps.review.outputs.execution_file }}
+        run: bash .claude/scripts/lib/record-claude-usage-ci.sh "$CLAUDE_EXECUTION_FILE" seo-keyword-cycle 1 1 "$CLAUDE_EFFORT"

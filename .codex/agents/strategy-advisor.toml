@@ -22,6 +22,8 @@ developer_instructions = '''
 |---|---|
 | `/weekly-plan` | 5観点の決定的データ収集→週次計画 |
 | `/weekly-review` | 5観点の決定的データ収集→週次レビュー |
+| `/monthly-review` | 前月の週次レビュー・計測サイクル・効果判定を集約→月次レビュー |
+| `/monthly-plan` | 月次レビューを読み今月の重点1-2テーマ→月次計画 |
 | `/critical-review` | 設計書・計画書の批判的レビュー |
 | `/pre-mortem` | Pre-Mortem 分析 |
 | `/growth-loops` | 成長ループの設計 |

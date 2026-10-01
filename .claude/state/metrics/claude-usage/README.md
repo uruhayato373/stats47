@@ -25,6 +25,8 @@
 | `input` / `output` / `cache_write` / `cache_read` | usage の 4 種 |
 | `token_source` | `result` / `messages` / **`none`** |
 | `is_error` | 1 なら失敗 run |
+| `model` | execution log の init 行のモデル ID (run 本体。agent の委譲先は含まない)。2026-10-02 より前の行は空 |
+| `effort` | workflow が `--effort` に渡した値 (log に載らないので workflow の `CLAUDE_EFFORT` から記録)。同上 |
 
 ## 読むときの注意
 
@@ -37,6 +39,8 @@
   枠の残りは枠に当たったときのエラーからしか観測できない（`is_error=1` かつ `turns` が
   極端に小さい行がその候補）
 - 失敗 run も記録する。利用枠に当たったかを見たいのは主にそちら
+- モデルや effort を変えた前後の比較は `npm run model-usage:report` が workflow ごとにまとめる
+  (`.claude/state/metrics/model-usage/latest.json`・管理画面 `/ops/agents`)
 
 ## (廃止) 期間限定 boost
 

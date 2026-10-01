@@ -164,6 +164,7 @@ theme-researcher を Agent tool で呼ぶ場合、呼び元は報告が指す一
 採否や公開状況ではない。後続の作業入口は `.claude/todo/backlog.md` の `THEME-EXPANSION-IMPLEMENT-01`。
 
 - 全件の判断、統合先、実装順と初回指標の比較年を検査: `npm run theme:expansion:check`
+- テーマを実装・統合したら、候補と実装済みテーマの対応 (`decision.implementedThemeKey`) を ThemeCatalog から書き戻す: `npm run theme:expansion:record` (`.claude/scripts/themes/record-theme-expansion.mjs`)。書き戻した後に上の check を通す
 - 欠測・地理混入・重複・不正な引き渡しを拒否するテスト: `npm run theme:expansion:test`
 - コード明記のSSDS系列を再取得: 既存の `NEXT_PUBLIC_ESTAT_APP_ID` を環境に設定して `npm run theme:expansion:verify`
 

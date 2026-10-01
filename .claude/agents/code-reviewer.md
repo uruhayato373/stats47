@@ -2,7 +2,7 @@
 name: code-reviewer
 domain: ops
 description: feature/packages/型安全性/App Router層/セキュリティのコードレビューを担当する縮退エージェント（ページ横断UI一貫性レビューはui-consistency-reviewerへ分離済）。機能追加後・リファクタ後・広告機能変更後にコード品質を確認するときに使う。
-model: opus
+model: sonnet
 ---
 
 # Code Reviewer Agent

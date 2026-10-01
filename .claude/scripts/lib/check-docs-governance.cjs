@@ -746,6 +746,26 @@ function inspectRepository({
     add(issue.level, issue.code, issue.file, issue.message);
   }
 
+  // 週次・月次レビューの本文の契約 (必須見出し・申し送りの振り分け) と配線 (DG084)。判定は
+  // check-review-cadence.mjs (正本 .claude/config/review-wiring.json)。期限切れ・計画の欠落は暦で決まり
+  // 無関係な commit まで止めてしまうので、ここでは扱わず Stop hook と review-cadence-guard.yml に任せる。
+  const cadenceScript = path.join(root, ".claude/scripts/management/check-review-cadence.mjs");
+  if (fs.existsSync(cadenceScript)) {
+    try {
+      const out = require("node:child_process").execFileSync(process.execPath, [cadenceScript, "--json", "--date", now], {
+        cwd: root,
+        encoding: "utf8",
+        stdio: ["ignore", "pipe", "pipe"],
+      });
+      for (const f of JSON.parse(out).findings) {
+        if (f.code === "review-missing" || f.code === "plan-missing") continue;
+        add(f.severity === "error" ? "error" : "warning", "DG084", f.file, `${f.message}。${f.fix}`);
+      }
+    } catch (error) {
+      add("warning", "DG084", ".claude/config/review-wiring.json", `レビューの契約検査を実行できない: ${String(error.message).split("\n")[0]}`);
+    }
+  }
+
   const definitionOwners = new Map();
   for (const definition of todoDefinitions) {
     if (definitionOwners.has(definition.id)) {

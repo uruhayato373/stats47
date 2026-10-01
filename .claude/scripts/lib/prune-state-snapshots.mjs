@@ -53,6 +53,13 @@ export const RETENTION_POLICIES = Object.freeze({
     pattern: /^\d{4}-\d{2}-\d{2}-.+\.json$/,
     keep: 8,
   },
+  // モデル / effort の canary 比較 (run-canary.mjs)。レポートは agent × 候補ごとに最新 1 件だけ読むので、
+  // 直近の比較をさかのぼれる分だけ残す
+  "model-usage-canary": {
+    directory: ".claude/state/metrics/model-usage/canary",
+    pattern: /^\d{4}-\d{2}-\d{2}-.+\.json$/,
+    keep: 20,
+  },
   "business-plan": {
     directory: ".claude/state/business-plan/history",
     pattern: /^\d{4}-\d{2}-\d{2}\.json$/,

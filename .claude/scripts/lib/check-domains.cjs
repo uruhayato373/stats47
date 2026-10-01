@@ -5,7 +5,7 @@
  *   node .claude/scripts/lib/check-domains.cjs     # npm run check-domains
  *
  * 検査: 領域 id / label の重複なし・role が 5 役割のどれか・nav の kind が navKinds にある・
- * nav は href (管理画面のページが実在) か channels (チャネル別の枝) のどちらか 1 つ・href の重複なし・
+ * nav は href (管理画面のページが実在)・channels (チャネル別の枝)・children (固定の枝。各子の href が実在) のどれか 1 つ・href の重複なし・
  * documents の値が既知の領域 id でパスが実在。
  * エージェント (.claude/agents 直下の .md) とスキル (.claude/skills 配下の SKILL.md) の frontmatter `domain:` が
  * ちょうど 1 つあり、既知の領域 id であること、docs/ 配下の Markdown が documents で 1 つの領域に決まること (DOMAIN-AGENT-01)。
@@ -43,17 +43,27 @@ function checkDomains(cfg, { pageExists, pathExists }) {
       if (!kinds.has(n.kind)) errors.push(`${where}: kind が navKinds にない: ${n.kind}`);
       const hasHref = typeof n.href === "string";
       const hasChannels = typeof n.channels === "string";
-      if (hasHref === hasChannels) {
-        errors.push(`${where}: href と channels のどちらか 1 つだけを持つ`);
+      const hasChildren = Array.isArray(n.children);
+      if ([hasHref, hasChannels, hasChildren].filter(Boolean).length !== 1) {
+        errors.push(`${where}: href・channels・children のどれか 1 つだけを持つ`);
         continue;
       }
       if (hasChannels) {
         if (!CHANNEL_GROUPS.includes(n.channels)) errors.push(`${where}: channels は ${CHANNEL_GROUPS.join("/")} のどれか`);
         continue;
       }
-      if (hrefs.has(n.href)) errors.push(`${where}: href が重複: ${n.href}`);
-      hrefs.add(n.href);
-      if (!pageExists(n.href)) errors.push(`${where}: 管理画面のページが無い: ${n.href}`);
+      const leaves = hasChildren ? n.children : [n];
+      if (hasChildren && leaves.length === 0) errors.push(`${where}: children が空`);
+      for (const leaf of leaves) {
+        const at = hasChildren ? `${where} > ${leaf.label}` : where;
+        if (typeof leaf.href !== "string" || typeof leaf.label !== "string") {
+          errors.push(`${at}: 子の項目は label と href を持つ`);
+          continue;
+        }
+        if (hrefs.has(leaf.href)) errors.push(`${at}: href が重複: ${leaf.href}`);
+        hrefs.add(leaf.href);
+        if (!pageExists(leaf.href)) errors.push(`${at}: 管理画面のページが無い: ${leaf.href}`);
+      }
     }
   }
 

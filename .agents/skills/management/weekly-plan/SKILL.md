@@ -210,7 +210,7 @@ primary_agent: strategy-advisor
   cat .claude/todo/weekly.md 2>/dev/null
   ls -t .claude/skills/management/weekly-review/reference/reviews/*.md 2>/dev/null | head -1
   → 上書き前の current-week と前週レビューを取得
-  → 計画 vs 実績の差分と「来週への申し送り」を抽出
+  → 計画 vs 実績の差分と「来週への申し送り」を抽出。各項目末尾の「→ 振り分け: <行き先>」(2026-W40 から必須) のカード ID を今週の Must / Should の候補に必ず載せ、載せない ID は「前週の申し送り」節に見送り理由を書く
   → **前週計画の `- [ ] xxx` (未チェック) を抽出** し、Phase 3 の「前週からの持ち越し」セクションに自動転載:
     ```bash
     grep -E "^- \[ \]" .claude/todo/weekly.md 2>/dev/null || true

@@ -1,0 +1,53 @@
+{
+  "_doc": "sns-renderer の canary。sns-content-standards §2-3b の予想クイズ型カルーセルの spec を JSON で書かせ、選択肢・答え・ヒント・注記の契約を採点する",
+  "agent": "sns-renderer",
+  "fixtureVersion": 1,
+  "cases": [
+    {
+      "id": "quiz-spec",
+      "prompt": "ツールは使えない。ファイルも読めない。以下に書いた情報だけで答える。数値は検証用に用意した値で、正しいものとして扱う。\n\n次のランキングから、Instagram の予想クイズ型カルーセル (5 枚: 出題 / ヒント / 正解 / 全47都市の表 / 保存導線) の spec を JSON 1 つで出力してください。前置きや説明は不要で JSON だけを返します。\n\nJSON の形: {\"question\": string, \"options\": string[], \"answer\": string, \"hint\": string, \"scopeNote\": string, \"slides\": string[]}\n守ること: 選択肢は 2〜4 個で正解を必ず含める。ヒントは正解を明かさない。家計調査の値はどの地域の値かを scopeNote に書く。slides は表示順の 5 枚。\n\n| 順位 | 都市 | 焼酎への年間支出 (円) |\n|---|---|---|\n| 1 | 宮崎市 | 11,782 |\n| 2 | 鹿児島市 | 10,950 |\n| 3 | 大分市 | 7,604 |\n| 45 | 金沢市 | 2,480 |\n| 46 | 福井市 | 2,402 |\n| 47 | 富山市 | 2,310 |\n\n出典: 総務省「家計調査」2024年 二人以上の世帯 (都市別)。47 都市の単純平均は 4,120 円。",
+      "expected": [
+        {
+          "id": "options-include-answer",
+          "anyOf": [
+            "\"options\"\\s*:\\s*\\[[^\\]]*宮崎"
+          ]
+        },
+        {
+          "id": "options-count",
+          "anyOf": [
+            "\"options\"\\s*:\\s*\\[\\s*\"[^\"]+\"(\\s*,\\s*\"[^\"]+\"){1,3}\\s*\\]"
+          ]
+        },
+        {
+          "id": "answer",
+          "anyOf": [
+            "\"answer\"\\s*:\\s*\"[^\"]*宮崎"
+          ]
+        },
+        {
+          "id": "hint-hides-answer",
+          "anyOf": [
+            "\"hint\"\\s*:\\s*\"[^\"]+\""
+          ],
+          "noneOf": [
+            "\"hint\"\\s*:\\s*\"[^\"]*宮崎",
+            "\"hint\"\\s*:\\s*\"[^\"]*11,?782"
+          ]
+        },
+        {
+          "id": "scope-note",
+          "anyOf": [
+            "\"scopeNote\"\\s*:\\s*\"[^\"]*(県庁所在|都市|市の)"
+          ]
+        },
+        {
+          "id": "five-slides",
+          "anyOf": [
+            "\"slides\"\\s*:\\s*\\[\\s*\"[^\"]+\"(\\s*,\\s*\"[^\"]+\"){4}\\s*\\]"
+          ]
+        }
+      ]
+    }
+  ]
+}

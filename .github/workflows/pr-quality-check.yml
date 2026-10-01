@@ -578,6 +578,21 @@ jobs:
         run: npm run psi:test
         continue-on-error: false
 
+      - name: 🧠 Model Usage Contract Guard
+        # モデル使用量の集計 (同じ応答の重複除去・単価換算)、改善提案の閾値、canary の採点と判定を検証する。
+        # headless claude も transcript も使わない (実計測は npm run model-usage:collect / :canary)。
+        # 正典: .claude/rules/model-prompting.md「継続最適化サイクル」
+        run: npm run model-usage:test
+        continue-on-error: false
+
+      - name: 📚 KDP / Review Cadence Contract Guard
+        # KDP の公開前ゲート (archive / preflight / 週次承認) と、週次・月次レビューの周期判定を検証する。
+        # どちらもテストはあったが CI から一度も実行されていなかった (2026-10-02 に orphan 検査で発見)。
+        run: |
+          npm run kdp:test
+          npm run review-cadence:test
+        continue-on-error: false
+
       - name: 🔐 Google Admin Allowlist Guard
         # allowlist が意図した集合そのものであること、ad unit の破壊的 action が denylist の
         # ままであること、承認ゲート (--commit / --approve token) が迂回できないこと、
@@ -640,6 +655,8 @@ jobs:
         run: |
           node .claude/scripts/themes/validate-theme-state.mjs
           npm run theme:quality:test
+          # 原典抽出の Python 部品 (文化財の検索結果・橋梁点検の年差)。property-prices は原典が無いと skip を明示する
+          npm run theme:py:test
         continue-on-error: false
 
       - name: 📊 Affiliate Compliance / Operations Guard

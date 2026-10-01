@@ -1,0 +1,215 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-01T20:24:58.455Z",
+  "agent": "open-data-curator",
+  "fixture": {
+    "file": ".claude/scripts/model-usage/canary-fixtures/open-data-curator.json",
+    "version": 2,
+    "expected": [
+      "dataset-triage/alpha-adopt",
+      "dataset-triage/bravo-reject-license",
+      "dataset-triage/charlie-reject-granularity",
+      "dataset-triage/delta-not-adopt"
+    ]
+  },
+  "baseline": {
+    "model": "claude-sonnet-5-5",
+    "effort": "xhigh"
+  },
+  "candidate": {
+    "model": "claude-sonnet-5-5",
+    "effort": "high"
+  },
+  "repeats": 3,
+  "rules": {
+    "maxRecallDrop": 0,
+    "maxCostRatio": 1.1
+  },
+  "verdict": "pass",
+  "scores": {
+    "baseline": {
+      "recall": 1,
+      "cost": 0.15796866666666667
+    },
+    "candidate": {
+      "recall": 1,
+      "cost": 0.14881033333333332
+    }
+  },
+  "runs": {
+    "baseline": [
+      {
+        "hits": [
+          {
+            "id": "dataset-triage/alpha-adopt",
+            "hit": true
+          },
+          {
+            "id": "dataset-triage/bravo-reject-license",
+            "hit": true
+          },
+          {
+            "id": "dataset-triage/charlie-reject-granularity",
+            "hit": true
+          },
+          {
+            "id": "dataset-triage/delta-not-adopt",
+            "hit": true
+          }
+        ],
+        "recall": 1,
+        "isError": false,
+        "costUsd": 0.16331199999999998,
+        "durationMs": 12203,
+        "models": [
+          "claude-sonnet-5-5"
+        ],
+        "outputTokens": 1078
+      },
+      {
+        "hits": [
+          {
+            "id": "dataset-triage/alpha-adopt",
+            "hit": true
+          },
+          {
+            "id": "dataset-triage/bravo-reject-license",
+            "hit": true
+          },
+          {
+            "id": "dataset-triage/charlie-reject-granularity",
+            "hit": true
+          },
+          {
+            "id": "dataset-triage/delta-not-adopt",
+            "hit": true
+          }
+        ],
+        "recall": 1,
+        "isError": false,
+        "costUsd": 0.15897899999999998,
+        "durationMs": 19378,
+        "models": [
+          "claude-sonnet-5-5"
+        ],
+        "outputTokens": 2074
+      },
+      {
+        "hits": [
+          {
+            "id": "dataset-triage/alpha-adopt",
+            "hit": true
+          },
+          {
+            "id": "dataset-triage/bravo-reject-license",
+            "hit": true
+          },
+          {
+            "id": "dataset-triage/charlie-reject-granularity",
+            "hit": true
+          },
+          {
+            "id": "dataset-triage/delta-not-adopt",
+            "hit": true
+          }
+        ],
+        "recall": 1,
+        "isError": false,
+        "costUsd": 0.151615,
+        "durationMs": 13088,
+        "models": [
+          "claude-sonnet-5-5"
+        ],
+        "outputTokens": 1336
+      }
+    ],
+    "candidate": [
+      {
+        "hits": [
+          {
+            "id": "dataset-triage/alpha-adopt",
+            "hit": true
+          },
+          {
+            "id": "dataset-triage/bravo-reject-license",
+            "hit": true
+          },
+          {
+            "id": "dataset-triage/charlie-reject-granularity",
+            "hit": true
+          },
+          {
+            "id": "dataset-triage/delta-not-adopt",
+            "hit": true
+          }
+        ],
+        "recall": 1,
+        "isError": false,
+        "costUsd": 0.145809,
+        "durationMs": 9460,
+        "models": [
+          "claude-sonnet-5-5"
+        ],
+        "outputTokens": 755
+      },
+      {
+        "hits": [
+          {
+            "id": "dataset-triage/alpha-adopt",
+            "hit": true
+          },
+          {
+            "id": "dataset-triage/bravo-reject-license",
+            "hit": true
+          },
+          {
+            "id": "dataset-triage/charlie-reject-granularity",
+            "hit": true
+          },
+          {
+            "id": "dataset-triage/delta-not-adopt",
+            "hit": true
+          }
+        ],
+        "recall": 1,
+        "isError": false,
+        "costUsd": 0.147397,
+        "durationMs": 11231,
+        "models": [
+          "claude-sonnet-5-5"
+        ],
+        "outputTokens": 915
+      },
+      {
+        "hits": [
+          {
+            "id": "dataset-triage/alpha-adopt",
+            "hit": true
+          },
+          {
+            "id": "dataset-triage/bravo-reject-license",
+            "hit": true
+          },
+          {
+            "id": "dataset-triage/charlie-reject-granularity",
+            "hit": true
+          },
+          {
+            "id": "dataset-triage/delta-not-adopt",
+            "hit": true
+          }
+        ],
+        "recall": 1,
+        "isError": false,
+        "costUsd": 0.153225,
+        "durationMs": 14778,
+        "models": [
+          "claude-sonnet-5-5"
+        ],
+        "outputTokens": 1497
+      }
+    ]
+  },
+  "raw": ".local/model-canary/2026-10-01-open-data-curator-claude-sonnet-5-5-xhigh-vs-claude-sonnet-5-5-high",
+  "rescoredAt": "2026-10-01T20:34:54.006Z"
+}

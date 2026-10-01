@@ -20,6 +20,8 @@ permissions:
   issues: write
 
 env:
+  # claude_args と使用量の記録が同じ値を読む (1 か所で変える)
+  CLAUDE_EFFORT: medium
   # スクショを R2 state/ へ push する diff-push-r2.ts の認証 (affiliate-ga4-weekly.yml と同じ導出)
   R2_S3_ENDPOINT: https://${{ vars.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
   R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
@@ -79,7 +81,7 @@ jobs:
         if: always() && hashFiles('.local/ci/page-quality/review-input.json') != ''
         # 代表URL 12 件 + データの型の違い (variants) 8 件 = 約 20 ページ。2026-09-23 の試行は 11 ページで 73 回のやり取り
         timeout-minutes: 30
-        uses: anthropics/claude-code-base-action@09641f2ee92b8a382a1c63c69b915d7a4540d6b6 # v2.1.220
+        uses: anthropics/claude-code-base-action@4bd489c7d926da56528f2d27386d1ea78737fc5c # Claude Code v2.1.287 (base-action main 2026-10-01。sonnet / opus の別名が 5.5 に解決される版)
         env:
           NODE_VERSION: '20.x'
         with:
@@ -90,7 +92,7 @@ jobs:
           claude_args: |
             --model sonnet
             --json-schema '{"type":"object","properties":{"status":{"type":"string","enum":["reviewed","no-issues","blocked"]},"summary":{"type":"string","minLength":10,"maxLength":800},"findings":{"type":"array","maxItems":20,"items":{"type":"object","properties":{"template":{"type":"string"},"device":{"type":"string","enum":["mobile-390","tablet-768","desktop-1440"]},"severity":{"type":"string","enum":["high","medium","low"]},"location":{"type":"string","minLength":5},"issue":{"type":"string","minLength":10},"suggestion":{"type":"string","minLength":5}},"required":["template","device","severity","location","issue","suggestion"],"additionalProperties":false}}},"required":["status","summary","findings"],"additionalProperties":false}'
-            --effort medium
+            --effort ${{ env.CLAUDE_EFFORT }}
             --max-turns 200
             --no-session-persistence
             --setting-sources project
@@ -207,3 +209,11 @@ jobs:
           elif [ -n "$EXISTING" ]; then
             gh issue close "$EXISTING" --reason completed --comment "新しい UI 違反も agent の指摘も無くなったため自動Closeします。"
           fi
+
+      # 計測のみ (失敗しても本体の成否を変えない)。model / effort ごとの費用を比べるため history.csv に 1 行足す。
+      # 正典: .claude/rules/model-prompting.md「継続最適化サイクル」
+      - name: 📊 Record token usage
+        if: ${{ always() && (steps.review.outcome == 'success' || steps.review.outcome == 'failure') }}
+        env:
+          CLAUDE_EXECUTION_FILE: ${{ steps.review.outputs.execution_file }}
+        run: bash .claude/scripts/lib/record-claude-usage-ci.sh "$CLAUDE_EXECUTION_FILE" page-quality-review 1 1 "$CLAUDE_EFFORT"

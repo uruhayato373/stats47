@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "job": "ksj-catalog",
+  "runs": [
+    {
+      "job": "ksj-catalog",
+      "month": "2026-09",
+      "status": "ok",
+      "ranAt": "2026-09-01T20:49:58Z",
+      "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/33557610051",
+      "fields": {
+        "backfill": "gh-run-list"
+      },
+      "summary": null
+    }
+  ]
+}

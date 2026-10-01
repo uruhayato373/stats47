@@ -1,5 +1,7 @@
 /** 公共用水域の原表掲載行。水域名による結合や全国値の再計算をしない。 */
 export const WATER_QUALITY_SOURCE = {
+  // 原典からこの値を作り直すコマンド (data-provenance-standards の再現性。--write-local を付けたときだけローカル R2 へ書く)
+  restore: 'node --import tsx .claude/scripts/themes/ingest-water-quality.mjs --write-local',
   r2Key: 'app/themes/environmental-quality/water-quality.json',
   period: '2023年度',
   title: '環境省 令和5年度公共用水域水質測定結果・付表1〜3',

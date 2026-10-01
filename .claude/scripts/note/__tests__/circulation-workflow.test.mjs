@@ -16,7 +16,8 @@ function step(name) {
 }
 
 test("weekly circulation workflow remains read-only except issue lifecycle", () => {
-  assert.deepEqual(WORKFLOW.permissions, { contents: "read", issues: "write" });
+  // actions: read は前回 run の artifact (カード表示の前回結果) を gh run download で読むため (2026-09-27)。書き込みは issues だけ
+  assert.deepEqual(WORKFLOW.permissions, { contents: "read", actions: "read", issues: "write" });
   assert.equal(WORKFLOW.jobs.audit["timeout-minutes"], 30);
   assert.equal(WORKFLOW.jobs.audit.runsOn ?? WORKFLOW.jobs.audit["runs-on"], "ubuntu-latest");
   assert.match(SOURCE, /cron:\s*['"]15 20 \* \* 6['"]/);

@@ -42,6 +42,12 @@ node --import tsx .claude/scripts/themes/ingest-tourism-consumption.mjs --write-
 node --import tsx .claude/scripts/themes/ingest-tourism-seasonality.mjs --write-local
 node --import tsx .claude/scripts/themes/ingest-food-livestock.mjs --write-local
 node --env-file=apps/web/.env.development --import tsx .claude/scripts/themes/ingest-perinatal-heritage.mjs --write-local
+node --import tsx .claude/scripts/themes/ingest-birth-composition.mjs --write-local          # 出生の母の年齢・出生順位 (births-*)
+node --env-file=apps/web/.env.development --import tsx .claude/scripts/themes/ingest-construction-enterprise.mjs --write-local   # 建設業の就業者・企業規模
+node --import tsx .claude/scripts/themes/ingest-housing-debt.mjs --write-local              # 住宅・土地の負債
+node --env-file=apps/web/.env.development --import tsx .claude/scripts/themes/ingest-population-core.mjs --write-local   # 人口の年齢区分・世帯 (population-core)
+node --import tsx .claude/scripts/themes/ingest-traffic-elderly.mjs --write-local           # 高齢者の交通事故死傷者
+node --import tsx .claude/scripts/themes/ingest-property-prices.mjs --source-dir <取得済みの原典> --write-local   # 地価・取引価格の分布 (原典は private)
 node --import tsx --test .claude/scripts/themes/__tests__/official-theme-sources.test.mjs
 ```
 

@@ -107,6 +107,32 @@ if (browserVerify) {
   const browser = await chromium.launch({ headless: true, channel: "chrome" });
   try {
     const candidates = results.filter((row) => row.issues.some((issue) => issue.code === "card_empty_in_public_html"));
+    // この環境で note の埋め込みカードが描画されるかを先に 1 記事で確かめる。CI (GitHub ランナー) のヘッドレスでは 1 枚も
+    // 中身が入らず、1 枚 8 秒待って 30 分で時間切れになり、実ブラウザでは表示される 720 枚を「空」と判定した (2026-10-01)。
+    // 描画されない環境ではカードの空判定を card_unverifiable (CI では確認できない) として記録し、個別の確認をしない
+    if (candidates.length > 0) {
+      const probe = await browser.newPage({ viewport: { width: 1280, height: 900 } });
+      let renders = false;
+      try {
+        await probe.goto(candidates[0].noteUrl, { waitUntil: "domcontentloaded", timeout: 30_000 });
+        await probe.evaluate(async () => {
+          for (let y = 0; y < document.body.scrollHeight; y += 600) {
+            window.scrollTo(0, y);
+            await new Promise((done) => setTimeout(done, 200));
+          }
+        });
+        renders = await probe.waitForFunction(() => [...document.querySelectorAll("figure[embedded-content-key]")]
+          .some((element) => (element.querySelector("iframe[src],img[src]") || element.textContent?.trim()) && element.getBoundingClientRect().height > 0),
+        undefined, { timeout: 15_000 }).then(() => true, () => false);
+      } catch { renders = false; } finally { await probe.close(); }
+      if (!renders) {
+        console.error("[note-card-audit] この環境では note の埋め込みカードが描画されないため、カードの空判定は確認できない (card_unverifiable)");
+        for (const row of candidates) {
+          for (const issue of row.issues) if (issue.code === "card_empty_in_public_html") issue.code = "card_unverifiable";
+        }
+        candidates.length = 0;
+      }
+    }
     let candidateIndex = 0;
     let completedCandidates = 0;
     await Promise.all(Array.from({ length: 3 }, async () => {
@@ -122,7 +148,12 @@ if (browserVerify) {
               try {
                 await page.waitForSelector(`figure[embedded-content-key="${issue.key}"]`, { state: "attached", timeout: 3_000 });
                 await page.evaluate((key) => document.querySelector(`figure[embedded-content-key="${key}"]`)?.scrollIntoView({ block: "center" }), issue.key);
-                await page.waitForTimeout(400);
+                // カードの中身は note 側の JS が後から読み込む。固定 400ms では CI で間に合わず、実ブラウザでは表示される 720 枚を
+                // 「空」と誤判定した (2026-10-01)。中身が入るまで最大 8 秒待ち、入らなければ下の判定で空とする
+                await page.waitForFunction((key) => {
+                  const element = document.querySelector(`figure[embedded-content-key="${key}"]`);
+                  return Boolean(element && (element.querySelector("iframe[src],img[src]") || element.textContent?.trim()) && element.getBoundingClientRect().height > 0);
+                }, issue.key, { timeout: 8_000 }).catch(() => {});
                 rendered = await page.evaluate((key) => {
                   const element = document.querySelector(`figure[embedded-content-key="${key}"]`);
                   return element && {
@@ -191,16 +222,18 @@ const summary = {
   checked: results.length,
   fetchFailed: results.filter((row) => row.issues.some((issue) => issue.code === "fetch_failed")).length,
   browserVerifyFailedArticles: results.filter((row) => row.issues.some((issue) => issue.code === "browser_verify_failed")).length,
-  affectedArticles: results.filter((row) => row.issues.some((issue) => issue.code !== "fetch_failed")).length,
+  affectedArticles: results.filter((row) => row.issues.some((issue) => issue.code !== "fetch_failed" && issue.code !== "card_unverifiable")).length,
   emptyCards: results.flatMap((row) => row.issues).filter((issue) => issue.code === "card_blank_in_browser" || (!browserVerify && issue.code === "card_empty_in_public_html")).length,
   unknownCards: browserVerify ? results.flatMap((row) => row.issues).filter((issue) => issue.code === "card_empty_in_public_html").length : 0,
+  /** この環境では描画を確認できなかったカード (失敗には数えない。手元のブラウザで確かめる) */
+  unverifiableCards: results.flatMap((row) => row.issues).filter((issue) => issue.code === "card_unverifiable").length,
   missingCards: results.flatMap((row) => row.issues).filter((issue) => issue.code === "card_missing_from_public_html").length,
   footerWithoutCards: results.flatMap((row) => row.issues).filter((issue) => issue.code === "navigation_footer_has_no_cards").length,
   spacingIssues: results.flatMap((row) => row.issues).filter((issue) => issue.code === "card_extra_blank_paragraph").length,
 };
 if (previous?.articles) {
   const signatures = (rows) => new Set(rows.flatMap((row) => row.issues
-    .filter((issue) => issue.code !== "fetch_failed")
+    .filter((issue) => issue.code !== "fetch_failed" && issue.code !== "card_unverifiable")
     .map((issue) => `${row.key}|${issue.code}|${issue.url || ""}`)));
   const before = signatures(previous.articles);
   const now = signatures(results);

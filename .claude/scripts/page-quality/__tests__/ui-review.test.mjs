@@ -6,7 +6,7 @@ import { join } from "node:path";
 import { PNG } from "pngjs";
 
 import { compareScreenshots, responsiveFindings, sliceIntoTiles } from "../lib/screenshots.ts";
-import { buildReviewInput, buildUiAlert, newUiViolations, structuredOutput, validateReview } from "../lib/ui-report.ts";
+import { buildReviewInput, buildUiAlert, newUiViolations, readCoverage, structuredOutput, validateReview } from "../lib/ui-report.ts";
 
 function png(width, height, paint) {
   const img = new PNG({ width, height });
@@ -164,4 +164,68 @@ test("agent への入力はその週に確認するページだけに絞り、�
   const input = buildReviewInput(run, ["ranking", "ranking--negative"]);
   assert.deepEqual(input.pages.map((p) => p.template), ["ranking", "ranking--negative"]);
   assert.equal(buildReviewInput(run).pages.length, 3, "絞り込み無しなら撮影した全ページ");
+});
+
+test("agent が Read した切り出しを数え、1 枚でも読み残したページは確認済みに入れない (失敗した Read は数えない)", () => {
+  const cwd = "/repo";
+  const input = {
+    generatedAt: "2026-10-02T00:00:00Z",
+    pages: [
+      {
+        template: "home",
+        url: "https://stats47.jp/",
+        automatedFindings: [],
+        screenshots: [
+          { device: "mobile-390", localPath: "x", changeRatio: null, height: 1, tilePaths: ["tiles/home-mobile-1.png", "tiles/home-mobile-2.png"] },
+          { device: "sm-640", localPath: "x", changeRatio: null, height: 1, tilePaths: [] },
+        ],
+      },
+      {
+        template: "ranking",
+        url: "https://stats47.jp/ranking",
+        automatedFindings: [],
+        screenshots: [{ device: "mobile-390", localPath: "x", changeRatio: null, height: 1, tilePaths: ["tiles/ranking-1.png", "tiles/ranking-2.png"] }],
+      },
+    ],
+  };
+  const read = (id, path) => ({ type: "assistant", message: { content: [{ type: "tool_use", id, name: "Read", input: { file_path: path } }] } });
+  const result = (id, isError) => ({ type: "user", message: { content: [{ type: "tool_result", tool_use_id: id, is_error: isError }] } });
+  const dir = mkdtempSync(join(tmpdir(), "coverage-"));
+  const path = join(dir, "exec.json");
+  writeFileSync(
+    path,
+    JSON.stringify([
+      read("a", "/repo/tiles/home-mobile-1.png"), // 絶対パスで読む (CI の Claude の実際の形)
+      result("a", false),
+      read("b", "tiles/home-mobile-2.png"), // 相対パスでも同じファイルとみなす
+      result("b", false),
+      read("c", "/repo/tiles/ranking-1.png"),
+      result("c", false),
+      read("d", "/repo/tiles/ranking-2.png"),
+      result("d", true), // 読み込みに失敗 = 見ていない
+      read("e", "/repo/.local/ci/page-quality/review-input.json"), // 入力 JSON は枚数に数えない
+      { type: "result", subtype: "success", structured_output: { status: "no-issues", summary: "問題なし", findings: [] } },
+    ])
+  );
+
+  const coverage = readCoverage(path, input, cwd);
+  assert.equal(coverage.expectedTiles, 4);
+  assert.equal(coverage.readTiles, 3);
+  assert.deepEqual(coverage.fullyReadPages, ["home"]);
+  assert.deepEqual(coverage.unreadScreens, ["ranking|mobile-390"]);
+});
+
+test("読み残しがあれば、機械検出も指摘も 0 件の週でも通知を出す", () => {
+  const base = {
+    date: "2026-10-02",
+    newViolations: [],
+    firstRun: false,
+    review: { status: "no-issues", summary: "問題なし", findings: [] },
+    reviewError: null,
+    input: { generatedAt: "2026-10-02T00:00:00Z", pages: [] },
+    screenshotBaseUrl: "https://example.com",
+    keyOf: (t, d) => `${t}-${d}`,
+  };
+  assert.equal(buildUiAlert(base), null);
+  assert.match(buildUiAlert({ ...base, coverageGap: "agent が読んだ切り出しは 3 / 4 枚" }), /3 \/ 4 枚/);
 });

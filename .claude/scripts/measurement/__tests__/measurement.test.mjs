@@ -56,8 +56,11 @@ test('native Google session export preserves the OS keychain and original profil
   assert.match(code, /cpSync\(profile, temporaryProfile/);
   assert.match(code, /launchPersistentContext\(temporaryProfile \?\? profile/);
   assert.match(code, /ignoreDefaultArgs: \['--password-store=basic', '--use-mock-keychain'\]/);
-  assert.match(code, /const nativeProfile = sourceName === 'gsc';/);
+  // 普通の Chrome で入る対象: Google と、自動操作を拒否するココナラ (2026-10-02)。どちらも Playwright での --login を拒む
+  assert.match(code, /const NATIVE_PROFILE_SOURCES = new Set\(\['gsc', 'coconala'\]\);/);
+  assert.match(code, /const nativeProfile = NATIVE_PROFILE_SOURCES\.has\(sourceName\);/);
   assert.match(code, /google_login_requires_native_chrome/);
+  assert.match(code, /coconala_login_requires_native_chrome/);
   assert.doesNotMatch(code, /AutomationControlled|--enable-automation|navigator\.webdriver/);
   assert.match(code, /reports_requires_kdp_login/);
 });

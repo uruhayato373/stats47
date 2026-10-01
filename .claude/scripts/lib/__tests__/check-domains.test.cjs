@@ -44,8 +44,22 @@ test("navKinds に無い画面の種類・href と channels の両持ち・id �
   };
   const text = checkDomains(cfg, always).errors.join("\n");
   assert.match(text, /kind が navKinds にない/);
-  assert.match(text, /どちらか 1 つだけ/);
+  assert.match(text, /どれか 1 つだけ/);
   assert.match(text, /id が重複/);
+});
+
+// 意図: レビュー (週次・月次) のような固定の枝は children で持つ。子のページ実在と href 重複も葉と同じに検査する
+test("children の枝は子ごとにページ実在と href 重複を検査し、空の枝と href の両持ちを error にする", () => {
+  const branch = { label: "レビュー", kind: "results", children: [{ label: "週次", href: "/r/weekly" }, { label: "月次", href: "/r/monthly" }] };
+  assert.deepEqual(checkDomains({ ...kinds, domains: [domain({ nav: [branch] })] }, always).errors, []);
+  const missing = checkDomains({ ...kinds, domains: [domain({ nav: [branch] })] }, { ...always, pageExists: (h) => h !== "/r/monthly" });
+  assert.match(missing.errors.join("\n"), /レビュー > 月次: 管理画面のページが無い/);
+  const bad = checkDomains(
+    { ...kinds, domains: [domain({ nav: [{ ...branch, children: [] }, { ...branch, label: "両持ち", href: "/x" }, { label: "重複", href: "/r/weekly", kind: "actions" }] })] },
+    always,
+  ).errors.join("\n");
+  assert.match(bad, /children が空/);
+  assert.match(bad, /どれか 1 つだけ/);
 });
 
 test("documents が未知の領域を指したら error にする", () => {

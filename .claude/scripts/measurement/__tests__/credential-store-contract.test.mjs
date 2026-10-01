@@ -10,7 +10,8 @@ const STORE = '.claude/scripts/measurement/credential-store.mjs';
 function trackedScripts() {
   return execFileSync('git', ['ls-files', '-z', '--', '.claude/scripts', 'scripts', 'packages', 'apps'], { cwd: ROOT, encoding: 'utf8' })
     .split('\0')
-    .filter((path) => /\.(mjs|cjs|js|ts|sh|ps1)$/.test(path) && !path.includes('/__tests__/'));
+    // テストは「その語を含まないこと」を検査するために語そのものを書くので対象外 (読み口ではない)
+    .filter((path) => /\.(mjs|cjs|js|ts|sh|ps1)$/.test(path) && !path.includes('/__tests__/') && !/(^|\/)tests\//.test(path));
 }
 
 // 意図: 資格情報ストアの読み口を 1 か所に保つ。別の場所で直接読むと、OS 切替・「ログへ出さない」・

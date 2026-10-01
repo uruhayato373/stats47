@@ -14,6 +14,8 @@ const strategyLanes = require("../../lib/strategy-lanes.cjs");
 
 import { CARD_ACTIONS as GSC_CARD_ACTIONS, CARD_PREFIX as GSC_PREFIX } from "../../gsc/lib/coverage-backlog.mjs";
 import { BY_DESIGN_PATH as YEAR_BY_DESIGN, CARD_PREFIX as YEAR_PREFIX } from "../../data/lib/year-coverage-backlog.mjs";
+// 振り返りの段 (週次・月次レビューの期限と申し送りの振り分け) は check-review-cadence.mjs と同じ実装を読む
+import { handoffSummary, reviewCadence } from "../../management/lib/review-cadence.mjs";
 
 const TODO_FILES = [".claude/todo/backlog.md", ".claude/todo/improvements.md"];
 /** 連続未達がこの週数に達したら、次週計画で分割か降格を必須にする (DG082 が再掲を error にする) */
@@ -27,15 +29,6 @@ export function summarizeCards(cards, today) {
 }
 
 export const parseMustRatio = strategyLanes.parseMustRatio;
-
-/** 前週の ISO 週 (レビューは週が終わってから書くので、今日の前週のレビューがあれば最新)。 */
-function previousIsoWeek(today) {
-  const d = new Date(Date.parse(`${today}T00:00:00Z`) - 7 * 86_400_000);
-  const day = d.getUTCDay() || 7;
-  d.setUTCDate(d.getUTCDate() + 4 - day);
-  const yearStart = Date.UTC(d.getUTCFullYear(), 0, 1);
-  return `${d.getUTCFullYear()}-W${String(Math.ceil(((d - yearStart) / 86_400_000 + 1) / 7)).padStart(2, "0")}`;
-}
 
 /** 計画 → 実行: 週の新しい順に並べた Must 比から、直近の達成率と連続未達週数を出す */
 export function summarizeMust(weeks) {
@@ -74,6 +67,22 @@ function readText(root, rel) {
   return existsSync(path) ? readFileSync(path, "utf-8") : null;
 }
 
+/** 振り返り: 週次・月次レビューの期限と、最新レビューの申し送りがカード ID に結ばれた割合 */
+function summarizeReviews(root, today) {
+  try {
+    const cadence = reviewCadence(root, new Date(`${today}T12:00:00+09:00`));
+    const pick = (kind) => cadence.status.find((s) => s.kind === kind);
+    return {
+      weekly: pick("weekly-review"),
+      monthly: pick("monthly-review"),
+      handoff: handoffSummary(cadence, "weekly"),
+      contractErrors: cadence.findings.filter((f) => f.severity === "error" && f.code !== "review-missing" && f.code !== "plan-missing").length,
+    };
+  } catch {
+    return null;
+  }
+}
+
 export function readCycleHealth(root, today) {
   const cards = TODO_FILES.flatMap((rel) => parseBacklog(readText(root, rel) ?? "")).filter((c) => c.id);
   const reviews = strategyLanes.readReviews(root);
@@ -98,7 +107,7 @@ export function readCycleHealth(root, today) {
     cards: summarizeCards(cards, today),
     must: summarizeMust(weeks),
     stalePlanIds: findStalePlanIds(readText(root, ".claude/todo/weekly.md") ?? "", completedIds, new Set(cards.map((c) => c.id))),
-    review: { latestWeek: reviews[0]?.week ?? null, expectedWeek: previousIsoWeek(today) },
+    review: summarizeReviews(root, today),
     discipline: board.discipline
       ? {
           highCount: board.discipline.highCount,
@@ -116,11 +125,21 @@ const list = (ids, max = 8) => ids.slice(0, max).map((id) => `\`${id}\``).join("
 
 export function formatCycleHealth(h) {
   const { cards, must, stalePlanIds, detectors, review, discipline } = h;
-  const reviewLine = review
-    ? review.latestWeek && review.latestWeek >= review.expectedWeek
-      ? `${review.latestWeek} まで記録済み`
-      : `⚠️ ${review.expectedWeek} のレビューが無い (最新 ${review.latestWeek ?? "なし"})。\`/weekly-review\` を実行する`
-    : "未計測";
+  const cadenceLine = (s) =>
+    !s
+      ? "未計測"
+      : s.ok
+        ? `${s.latest ? `${s.latest} まで記録済み` : "まだ無い"}${s.nextDue ? ` (次の期限 ${s.nextDue})` : ""}`
+        : `⚠️ ${s.missing.join(", ")} が無い (最新 ${s.latest ?? "なし"})。\`${s.command}\` を実行する`;
+  const reviewLine = cadenceLine(review?.weekly);
+  const monthlyLine = cadenceLine(review?.monthly);
+  const handoff = review?.handoff;
+  const handoffLine = !handoff
+    ? "未計測"
+    : !handoff.inContract
+      ? `${handoff.period} は契約の開始 (review-wiring.json の contractFrom) より前のため未検査`
+      : `${handoff.period}: 振り分け済み ${handoff.routed} / ${handoff.total} 件${handoff.routed < handoff.total ? " ⚠️ `check-review-cadence.mjs` で行き先の無い項目を確認する" : ""}`;
+  const contractLine = review ? (review.contractErrors ? `⚠️ ${review.contractErrors} 件 (\`check-review-cadence.mjs\`)` : "なし") : "未計測";
   const highLine = discipline
     ? `${discipline.highCount} / 上限 ${strategyLanes.MAX_HIGH_TIER_CARDS} 枚${discipline.highCount > strategyLanes.MAX_HIGH_TIER_CARDS ? " ⚠️ 月次計画で 🟡 へ下げる" : ""}` +
       `・${strategyLanes.HIGH_TIER_MAX_AGE_DAYS} 日超の未着手 ${discipline.staleHigh.length} 枚${discipline.staleHigh.length ? `: ${list(discipline.staleHigh)}` : ""}`
@@ -150,7 +169,9 @@ export function formatCycleHealth(h) {
     `| 実行 → 完了 | 期日超過のカード | ${cards.overdue.length} 件${cards.overdue.length ? `: ${list(cards.overdue)}` : ""} |`,
     `| 実行 → 完了 | 完了済みなのに週次計画が参照する ID | ${stalePlanIds.length} 件${stalePlanIds.length ? `: ${list(stalePlanIds)}` : ""} |`,
     `| 振り返り | 前週の週次レビュー | ${reviewLine} |`,
-    "| 振り返り → 起票 | 申し送りがカード ID に結ばれているか | 未計測 |",
+    `| 振り返り | 前月の月次レビュー (毎月 3 日から必須) | ${monthlyLine} |`,
+    `| 振り返り | レビュー本文の契約違反 (必須見出し・配線) | ${contractLine} |`,
+    `| 振り返り → 起票 | 最新の週次レビューの申し送りがカード ID に結ばれているか | ${handoffLine} |`,
     "",
   ].join("\n");
 }
