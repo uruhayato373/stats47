@@ -200,7 +200,7 @@ Googleの初回ログイン・期限切れ・2FAは人間工程として残す�
 - `/weekly-review` 前に認証付き計測の成否と入力鮮度を確認し、未取得は欠測として扱う。
 - 自動アーム (CI・既存): `gsc-url-inspection-daily.yml` (個別URL状態=observe-after-fix 観測 → `--sync-inspection` で queue 反映) が毎日稼働。
   2026-09-23 まではCI既定の `--limit 500` が検索実績上位 500 件だけで埋まり、是正キューを 1 件も検査していなかった (7日間 0/1,133)。
-  枠は割合配分に変えた (`url-inspection-daily.cjs` の `*_SHARE`)。`gsc-auto-resubmit-daily.yml` は 2026-07-23 退役 (Indexing API 送信しない)。
+  枠は割合配分に変えた (`url-inspection-daily.cjs` の `*_SHARE`)。`gsc-auto-resubmit-daily.yml` は 2026-07-23 退役・2026-10-01 削除 (Indexing API 送信しない)。
   本スキルのUI export経路は「UI exportでしか取れない総件数・未把握URL」を補う。
 
 ## 関連

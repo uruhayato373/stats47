@@ -103,7 +103,7 @@ title rewrite の effect/none を踏まえ confidence を抑制済 — CTR だ�
 ## Indexing API は使わない
 
 Google Indexing API は公式に JobPosting / BroadcastEvent VideoObject 専用。通常ページには使わない
-(2026-07-23 に `indexing-api-submit` / `gsc-auto-resubmit-daily.yml` を退役)。再クロールは
+(2026-07-23 に `indexing-api-submit` / `gsc-auto-resubmit-daily.yml` を退役。workflow は 2026-10-01 に削除)。再クロールは
 observe-after-fix (sitemap/内部リンク/canonical/content 修正 + URL Inspection 観測) で行う。
 詳細は`reference/platform-contract.md`の「Indexing API準拠」。
 

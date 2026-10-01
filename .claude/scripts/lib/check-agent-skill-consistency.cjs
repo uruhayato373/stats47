@@ -632,7 +632,7 @@ function checkOrphanScripts(findings) {
   //      **親ディレクトリのパスが корпус に出るかも見る**
   //   3. `出現回数 > 1` を要求していた。これは「自分の定義ファイルでの一致」を除くための
   //      代用だったが、**1 箇所からだけ呼ばれる配線済みスクリプトを落としていた**
-  //      (例: post-angle-carousel.yml から 1 回、pr-quality-check から 1 回)。
+  //      (例: ある workflow から 1 回、pr-quality-check から 1 回)。
   //      自分自身をコーパスから除けば代用は不要で、正確に「他から参照されているか」を判定できる。
   //   4. `.claude/rules/` がコーパスに無かった → rules に手順として書かれた運用ツールを orphan 扱い
   const corpusDirs = [
