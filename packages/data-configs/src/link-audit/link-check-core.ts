@@ -11,6 +11,8 @@ export type LinkVerdict =
   | "gone"
   | "server-err"
   | "timeout"
+  /** fetch も confirmFn (curl) も届かない。GitHub ランナーの経路の問題とサイト停止を区別できないので警告に留める */
+  | "unreachable"
   | "stale";
 
 export interface LinkProbeTarget {
@@ -38,7 +40,7 @@ export function isVerificationStale(
   return now.getTime() - verified > staleAfterDays * 86_400_000;
 }
 
-export function classifyLinkStatus(status: number): Exclude<LinkVerdict, "timeout" | "stale"> {
+export function classifyLinkStatus(status: number): Exclude<LinkVerdict, "timeout" | "unreachable" | "stale"> {
   if (status === 403) return "bot-block";
   if (status === 404 || status === 410 || status >= 400 && status < 500) return "gone";
   if (status >= 500) return "server-err";
@@ -106,6 +108,10 @@ export async function probeLinkWithRetry(
       const verdict = statusVerdict === "ok" && isVerificationStale(target.verifiedAt, now, options.staleAfterDays) ? "stale" : statusVerdict;
       return { target, verdict, detail: `HTTP ${status} (fetch は ${last!.detail}・再確認で取得)`, attempts: last!.attempts + 1 };
     }
+    // www.gsi.go.jp は GitHub ランナーから fetch も curl も届かないが手元では 200 (2026-10-01 実測)。経路の問題を異常にしない。
+    // 本当に止まったサイトは lastVerifiedAt の鮮度 (stale) が期限で必ず異常にし、人の再確認を求める
+    const verdict = isVerificationStale(target.verifiedAt, now, options.staleAfterDays) ? "stale" : "unreachable";
+    return { ...last!, verdict, detail: `${last!.detail} (再確認も到達せず)`, attempts: last!.attempts + 1 };
   }
   return last!;
 }

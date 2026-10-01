@@ -97,7 +97,9 @@ export const LOGIN = {
   // ココナラ (2026-10-01 追加): 手元と CI の入り直し。セレクタは doboku-note が 2026-09-28 に DOM で確認したもの
   coconala: {
     loginUrl: 'https://coconala.com/login',
-    checkUrl: 'https://coconala.com/mypage/dashboard',
+    // 判定は収集 (marketplace-status.mjs) が実際に読む販売分析ページで行う。ダッシュボードだけ見ていると、ダッシュボードは開けるが
+    // 分析ページで再認証を求められるセッションを session_valid と誤判定し、パスワードでの入り直しをしなかった (2026-10-01 CI)
+    checkUrl: 'https://coconala.com/mypage/analytics',
     user: '#UserLoginEmail',
     password: '#UserLoginPassword',
     remember: '#loginEmailSave',

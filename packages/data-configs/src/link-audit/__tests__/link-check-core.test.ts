@@ -90,7 +90,16 @@ describe("link audit retry and stale contract", () => {
     const gone = await probeLinkWithRetry(target, { fetchFn, sleep, now, confirmFn: async () => 404 });
     expect(gone.verdict).toBe("gone");
     const still = await probeLinkWithRetry(target, { fetchFn, sleep, now, confirmFn: async () => null });
-    expect(still.verdict).toBe("timeout");
+    expect(still.verdict).toBe("unreachable");
+    expect(isAlertVerdict("unreachable")).toBe(false);
+    const deadAndOld = await probeLinkWithRetry(target, { fetchFn, sleep, now: new Date("2027-01-01T00:00:00Z"), confirmFn: async () => null });
+    expect(deadAndOld.verdict).toBe("stale");
+    const noConfirm = await probeLinkWithRetry(target, { fetchFn, sleep, now });
+    expect(noConfirm.verdict).toBe("timeout");
+    const thrown = await probeLinkWithRetry(target, { fetchFn, sleep, now, confirmFn: async () => { throw new Error("curl missing"); } });
+    expect(thrown.verdict).toBe("unreachable");
+    const stale = await probeLinkWithRetry(target, { fetchFn, sleep, now: new Date("2027-01-01T00:00:00Z"), confirmFn: async () => 200 });
+    expect(stale.verdict).toBe("stale");
     const confirm = vi.fn().mockResolvedValue(200);
     await probeLinkWithRetry(target, { fetchFn: vi.fn().mockResolvedValue(response(500)), sleep, now, confirmFn: confirm });
     expect(confirm).not.toHaveBeenCalled();

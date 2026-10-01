@@ -15,6 +15,11 @@ on:
   schedule:
     - cron: '0 18 * * 6' # 土 18:00 UTC = 日 03:00 JST (既存 cron と非重複)
   workflow_dispatch:
+    inputs:
+      max_generate:
+        description: "1 回で再生成する上限 (種類ごと。既定 500。溜まった古い画像を一度に解消するときだけ上げる)"
+        required: false
+        default: "500"
 
 permissions:
   contents: write
@@ -37,6 +42,9 @@ jobs:
   audit:
     runs-on: ubuntu-latest
     timeout-minutes: 90
+    env:
+      # schedule は inputs が空なので既定 500。手動で溜まった古い画像を解消するときだけ上げる
+      MAX_GENERATE: ${{ inputs.max_generate || '500' }}
     steps:
       - name: 🧰 Checkout develop
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -60,7 +68,7 @@ jobs:
           SC="apps/web/scripts/generate-ogp-images.ts"
           for TYPE in ranking ranking-cards areas note-covers pref-silhouette; do
             echo "=== self-heal $TYPE ==="
-            npx tsx --tsconfig "$TSC" "$SC" --type "$TYPE" --limit 500 --max-generate 500
+            npx tsx --tsconfig "$TSC" "$SC" --type "$TYPE" --limit "$MAX_GENERATE" --max-generate "$MAX_GENERATE"
             PLAN=".local/image-generation-publish-plan-${TYPE}.json"
             test -f "$PLAN" || { echo "exact publish plan が生成されませんでした: $TYPE"; exit 1; }
             npx tsx packages/r2-storage/src/scripts/push-generated-image-set.ts --plan "$PLAN"
@@ -70,7 +78,7 @@ jobs:
         id: blog_repair
         run: |
           npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts \
-            --limit 500 --max-generate 500
+            --limit "$MAX_GENERATE" --max-generate "$MAX_GENERATE"
           PLAN=".local/image-generation-publish-plan-blog.json"
           test -f "$PLAN" || { echo "exact publish plan が生成されませんでした: blog"; exit 1; }
           npx tsx packages/r2-storage/src/scripts/push-generated-image-set.ts --plan "$PLAN"

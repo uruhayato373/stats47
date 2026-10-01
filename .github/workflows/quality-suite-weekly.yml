@@ -144,6 +144,10 @@ jobs:
         env:
           NEXT_PUBLIC_R2_PUBLIC_URL: ""
           R2_PUBLIC_FETCH_URL: ""
+          # 地図の境界データ (TopoJSON) の取得先はビルド時にクライアントへ埋め込まれる。上で R2 の URL を空にすると
+          # ブラウザが「ベース URL 未設定」で地図を描けず、地図の E2E が落ちていた (2026-09-27・10-01)。
+          # この変数は境界データの取得にしか使われないので、静的生成で R2 を読まない意図は保たれる
+          NEXT_PUBLIC_R2_GEOSHAPE_URL: https://storage.stats47.jp
       - name: Start built web app
         working-directory: apps/web
         run: |

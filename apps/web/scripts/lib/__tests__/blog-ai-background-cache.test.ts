@@ -349,3 +349,34 @@ describe('published AI background reuse via S3', () => {
     ).rejects.toThrow('画像契約');
   });
 });
+
+// 意図: パイプライン外の経路が書いた manifest は stats47-sha256 を持たない (2026-10-01 に 609 件中 366 件)。
+// 1 件で自己修復全体を止めないよう「無い」は受け入れ、「食い違う」(書き込みの破損の疑い) は止める
+describe('published manifest committed metadata', () => {
+  const brandManifest = Buffer.from(JSON.stringify({ metadata: { background: { source: 'brand' } } }));
+  const read = (metadata: Record<string, string>) => {
+    const slug = 'article-legacy';
+    const keys = blogImageKeys(slug);
+    const { store } = makeStore({
+      [keys.manifest]: {
+        body: brandManifest,
+        etag: '"manifest"',
+        contentType: 'application/json',
+        contentLength: brandManifest.byteLength,
+        metadata,
+      },
+    });
+    return readPublishedBackgroundState({ store, slug, descriptor: { promptHash: PROMPT_HASH, legacyPromptHash: null } });
+  };
+
+  it('accepts a manifest without stats47-sha256 written outside the image pipeline', async () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    await expect(read({})).resolves.toEqual({ source: 'brand', reusable: null });
+    expect(warn).toHaveBeenCalledWith(expect.stringContaining('stats47-sha256 が無い'));
+    warn.mockRestore();
+  });
+
+  it('still rejects a manifest whose stats47-sha256 does not match its body', async () => {
+    await expect(read({ 'stats47-sha256': 'f'.repeat(64) })).rejects.toThrow('metadata契約が不正');
+  });
+});

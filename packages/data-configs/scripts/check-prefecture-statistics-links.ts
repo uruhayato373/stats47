@@ -23,6 +23,7 @@ async function checkResource(resource: (typeof resources)[number]): Promise<stri
     alertOwner: "open-data-curator",
   };
   const result = await probeLinkWithRetry(target, { userAgent: "stats47-link-check/2.0", confirmFn: (url) => curlStatus(url) });
+  if (result.verdict === "unreachable") console.warn(`[unreachable] ${resource.prefectureName}: ${result.detail} ${resource.url}`);
   return isAlertVerdict(result.verdict)
     ? `[${result.verdict}] ${resource.prefectureName}: ${result.detail} ${resource.url} attempts=${result.attempts}`
     : null;

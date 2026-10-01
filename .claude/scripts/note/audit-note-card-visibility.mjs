@@ -122,7 +122,12 @@ if (browserVerify) {
               try {
                 await page.waitForSelector(`figure[embedded-content-key="${issue.key}"]`, { state: "attached", timeout: 3_000 });
                 await page.evaluate((key) => document.querySelector(`figure[embedded-content-key="${key}"]`)?.scrollIntoView({ block: "center" }), issue.key);
-                await page.waitForTimeout(400);
+                // カードの中身は note 側の JS が後から読み込む。固定 400ms では CI で間に合わず、実ブラウザでは表示される 720 枚を
+                // 「空」と誤判定した (2026-10-01)。中身が入るまで最大 8 秒待ち、入らなければ下の判定で空とする
+                await page.waitForFunction((key) => {
+                  const element = document.querySelector(`figure[embedded-content-key="${key}"]`);
+                  return Boolean(element && (element.querySelector("iframe[src],img[src]") || element.textContent?.trim()) && element.getBoundingClientRect().height > 0);
+                }, issue.key, { timeout: 8_000 }).catch(() => {});
                 rendered = await page.evaluate((key) => {
                   const element = document.querySelector(`figure[embedded-content-key="${key}"]`);
                   return element && {
