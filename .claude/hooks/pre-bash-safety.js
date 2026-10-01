@@ -21,6 +21,10 @@ const DANGEROUS_PATTERNS = [
   { pattern: /TRUNCATE\s+TABLE/i, reason: "TRUNCATE TABLE は全行を削除します" },
   { pattern: /git\s+clean\s+-fd/, reason: "git clean -fd は追跡されていないファイルを削除します" },
 
+  // 並行エージェント / branch-workflow (コマンド先頭のみ照合し、commit メッセージ中の言及では止めない)
+  { pattern: /(?:^|[;&|(\n]\s*)git\s+add\s+(?:\S+\s+)*(?:-A|--all|\.)(?=\s|$|[;&|)])/, reason: "git add -A / --all / . は禁止です (並行エージェントの WIP 混入防止)。対象ファイルを明示して add してください" },
+  { pattern: /(?:^|[;&|(\n]\s*)git\s+push\b[^;&|\n]*\s(?:\S*:)?main(?=\s|$|[;&|)])/, reason: "main への直接 push は禁止です。develop→main は PR 経由のみ (.claude/rules/branch-workflow.md)" },
+
   // シークレット漏洩
   { pattern: /cat\s+\.env/, reason: ".env ファイルの内容がコンソールに出力されます" },
   { pattern: /echo\s+.*\$(ESTAT_API_KEY|SECRET|PASSWORD|TOKEN)/i, reason: "シークレットがコンソールに出力される可能性があります" },
