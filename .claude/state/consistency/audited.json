@@ -1,11 +1,9 @@
 {
-  "hash": "d4cdb81e914d2aaf6f6d896fdf5f1577610f1b99d428e8dd2bc6eef26b32444c",
-  "audited_at": "2026-10-01T11:49:39",
+  "hash": "1d134f58531ceaee9750fc06c002796fac7a30df80b8f791efe4ac7385fad62d",
+  "audited_at": "2026-10-01T11:53:06",
   "files": [
-    ".claude/scripts/lib/__tests__/check-domains.test.cjs",
-    ".claude/scripts/lib/check-domains.cjs",
-    ".claude/scripts/management/__tests__/review-cadence.test.mjs",
+    ".agents/skills/management/monthly-review/SKILL.md",
     ".claude/scripts/management/lib/review-cadence.mjs",
-    ".claude/skills/management/README.md"
+    ".claude/skills/management/monthly-review/SKILL.md"
   ]
 }

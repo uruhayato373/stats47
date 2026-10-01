@@ -43,6 +43,13 @@ node .claude/scripts/management/check-review-cadence.mjs
 | KPI ツリー | `.claude/state/business-plan/kpi-tree.json` (重点レーンの駆動 KPI とガードレール) |
 | 楽天アフィリエイト成果 | `.claude/state/metrics/affiliate/rakuten-results.json` の対象月の行。`observedAt` が月をまたいだ後なら確定として扱う。収集が止まっていれば判定不能と書く |
 | 改善施策 | `.claude/todo/improvements.md` の active 施策と上限 |
+| 収益 (楽天以外) | `.claude/state/metrics/affiliate/a8-results.json`・`.claude/state/metrics/affiliate/moshimo-results.json` (afb は認証付き計測の `afb`)、商品は `.claude/state/products/sales-ledger.json`、KDP は月次レポート (`kdp-monthly-reports.mjs` の出力)。各週の合計は `node .claude/scripts/metrics/generate-weekly-metrics-issue.mjs --week <YYYY-Www>` の「週次収益 (NSM)」節 |
+| NSM 改善実験 | `.claude/state/experiments.json` の `status` と `next_check_date`。対象月までに期日が来た running / proposed |
+| 事業計画 | `.claude/state/business-plan/latest.json` の `nextActions` と開始ゲート |
+| 月次の自動処理 | Cloudflare は `.claude/skills/analytics/cloudflare-cost-improvement/reference/monthly-snapshots` (請求サイクル開始月の名前で、対象月 15 日に作られる)。CTR 改善候補・e-Stat カタログ・国土数値情報カタログは結果を Workflow Summary にしか残さないので `gh run list --workflow ctr-improvement-monthly.yml` (同様に `estat-catalog-monthly.yml`・`ksj-catalog-monthly.yml`) で対象月の run と結論を見る |
+| 月次の定点観測 | `/competitor-scan` の `.claude/skills/sns/competitor-scan/reference/reports` (対象月の日付のレポート)、X の勝ちパターンの月次レポート |
+| 開いているアラート | `gh issue list --label auto-generated --state open` (横断監視 #763 を含む) |
+| GSC の月次接続 | `node .claude/scripts/gsc/audit-operations-cycle.mjs --stage monthly` |
 
 ## Phase 2: 判定
 
@@ -57,7 +64,12 @@ node .claude/scripts/management/check-review-cadence.mjs
 4. **施策の効果判定**: 対象月の verdict を full / partial / none / adverse / pending ごとに数え、pending は効いている
    ガード (`insufficient-sample` など) を書く。新しい判定をこのスキルで下さない (`.claude/rules/evidence-based-judgment.md`。
    判定の更新は `improvement-triage` へ渡す)。active 施策が上限を超えていれば申し送りに降格候補を書く。
-5. **計測→記録→改善サイクル**: 対象月の各週で、計測 state の生成・無人 triage のゲート・週次レビューの有無が揃ったかを表にし、
+5. **収益の締め**: 収益源ごと (楽天・A8・もしも・afb・商品・KDP) に対象月の発生と確定を表にする。値が無い源は
+   「判定不能」と書き理由 (認証切れ・未計測) を添える。合計は判定できた源だけで出し、判定不能を 0 円と足さない。
+6. **実験の判定**: 期日が来た実験ごとに、継続・終了・延長 (延長理由と次の期日) を書く。判定の更新は `/nsm-experiment` に渡す。
+7. **点検と Issue**: 開いている `auto-generated` Issue を 1 件 1 行で、振り分け (カード ID / 定常 / 見送り) を付ける。
+   月次の自動処理 (Cloudflare・CTR・カタログ) と定点観測 (競合・X) が対象月に走ったかもここに書く。走っていなければ課題・ブロッカーへ。
+8. **計測→記録→改善サイクル**: 対象月の各週で、計測 state の生成・無人 triage のゲート・週次レビューの有無が揃ったかを表にし、
    止まった段と週を書く (週次メトリクス Issue の「サイクルの健全性」節と同じ段の名前を使う)。
 
 ## Phase 3: 記録
@@ -81,11 +93,20 @@ node .claude/scripts/management/check-review-cadence.mjs
 ## 週次レビューの総括
 | 週 | Must | 未達の主 ID | 申し送りの振り分け |
 
+## 収益の締め
+| 収益源 | 発生 | 確定 | 状態 (判定済み / 判定不能と理由) |
+
 ## 施策の効果判定
 | 判定 | 件数 | 施策 ID |
 
+## 実験の判定
+| 実験 | 期日 | 判定 (継続 / 終了 / 延長) | 根拠 |
+
 ## 計測→記録→改善サイクル
 | 週 | 計測 state | 無人 triage | 週次レビュー | 止まった段 |
+
+## 点検と Issue
+| Issue / 自動処理 | 状態 | 振り分け |
 
 ## 課題・ブロッカー
 
@@ -115,6 +136,8 @@ node .claude/scripts/management/check-review-cadence.mjs
 - 申し送りのすべての項目に実在する行き先がある。
 - KPI の数値は計測 state の値で、判定不能を 0 にしていない。
 - 効果判定を新しく下していない (エンジンと improvement-triage の判定を写しただけ)。
+- 収益の締めで判定不能の源を 0 円にしていない。期日の来た実験すべてに判定か延長理由がある。
+- 開いている `auto-generated` Issue と月次の自動処理がすべて「点検と Issue」で振り分けられている。
 - `check-review-cadence.mjs` が error 0。
 
 ## Output Contract

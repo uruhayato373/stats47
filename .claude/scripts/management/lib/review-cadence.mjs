@@ -395,6 +395,8 @@ export function handoffSummary(result, cadence = "weekly") {
 
 const MEASUREMENT_HISTORY = ".claude/state/metrics/measurement-cycle/history.csv";
 const VERDICT_DIR = ".claude/state/effect-verdict";
+const CLOUDFLARE_MONTHLY = ".claude/skills/analytics/cloudflare-cost-improvement/reference/monthly-snapshots";
+const COMPETITOR_REPORTS = ".claude/skills/sns/competitor-scan/reference/reports";
 
 /** ISO 週 YYYY-Www の月曜〜日曜 */
 export function weekRange(week) {
@@ -468,6 +470,13 @@ export function reviewRun(root, cadence, period, now = new Date()) {
     steps.push(step("週次レビュー", `月内の週次レビュー (${weeks[0]}〜${weeks.at(-1)}) が揃っている`, reviewed.length === weeks.length ? "done" : reviewed.length ? "partial" : "missing", `${reviewed.length} / ${weeks.length} 週`));
     const judged = weeks.filter(verdictExists);
     steps.push(step("効果判定", "月内の各週で閾値エンジンが施策を判定している", judged.length === weeks.length ? "done" : judged.length ? "partial" : "missing", `${judged.length} / ${weeks.length} 週`));
+    // Cloudflare は請求サイクル (前月 15 日〜当月 14 日) を開始月の名前で当月 15 日に保存する
+    const cfName = monthLabel(addMonths(new Date(`${period}-01T00:00:00Z`), -1));
+    const cfDone = [".json", ".md"].some((ext) => existsSync(join(root, CLOUDFLARE_MONTHLY, `${cfName}${ext}`)));
+    steps.push(step("月次の自動処理", "Cloudflare の費用 snapshot が保存され、CTR 改善候補・e-Stat / 国土数値情報カタログの月次 run が走った", cfDone ? "partial" : "missing",
+      `${cfDone ? `Cloudflare ${cfName} あり` : `Cloudflare ${cfName} なし`}。CTR・カタログは Workflow Summary だけに残るので gh run list --workflow ctr-improvement-monthly.yml などで確認し、レビューの「点検と Issue」に書く`));
+    const scans = existsSync(join(root, COMPETITOR_REPORTS)) ? readdirSync(join(root, COMPETITOR_REPORTS)).filter((f) => f.startsWith(period)) : [];
+    steps.push(step("月次の定点観測", "/competitor-scan が対象月にレポートを書いた", scans.length ? "done" : "missing", scans[0] ? `${COMPETITOR_REPORTS}/${scans[0]}` : `${COMPETITOR_REPORTS} に ${period} のレポートなし`));
   }
   steps.push(step("レビューを保存", `${conf.command} が ${conf.dir}/${period}.md に書く`, file ? "done" : "missing", file?.path ?? "未作成"));
   if (!file) {
@@ -478,6 +487,12 @@ export function reviewRun(root, cadence, period, now = new Date()) {
     steps.push(step("申し送りの振り分け", `各項目の末尾に「${wiring.handoffRouting.marker} <行き先>」`, "skipped", `契約の開始 ${conf.contractFrom} より前`));
   } else {
     steps.push(step("必須の見出し", "正本の requiredSections がすべてある", check.missingSections.length ? "partial" : "done", check.missingSections.length ? `不足: ${check.missingSections.join(" / ")}` : `${conf.requiredSections.length} 見出し`));
+    if (cadence === "monthly") {
+      for (const [name, does] of [["収益の締め", "収益源ごとの発生・確定と判定不能の理由"], ["実験の判定", "期日が来た実験の継続・終了・延長"], ["点検と Issue", "開いているアラート Issue と月次の自動処理の振り分け"]]) {
+        const body = sectionText(file.text, name);
+        steps.push(step(name, does, body ? "done" : "missing", body ? `${body.split("\n").filter((l) => l.startsWith("|")).length} 行` : "見出しが無い"));
+      }
+    }
     const all = check.handoff.length;
     steps.push(step("申し送りの振り分け", `各項目の末尾に「${wiring.handoffRouting.marker} <行き先>」`, all === 0 ? "missing" : check.routed === all ? "done" : "partial", `${check.routed} / ${all} 件`));
   }
