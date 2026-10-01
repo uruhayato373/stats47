@@ -88,6 +88,9 @@ export const LOGIN = {
     next: '#cta001',
     password: 'input[type=password]',
     submit: '[id^="cta"]:has-text("次へ"), [id^="cta"]:has-text("ログイン")',
+    // パスワード画面の送信ボタンが上のセレクタに一致せず click が 30 秒で時間切れになった (2026-10-01 Mac 実機)。
+    // パスワード欄で Enter を押して送信する
+    submitByEnter: true,
     bundledChromium: true,
     loggedIn: (url) => /^https:\/\/affiliate\.rakuten\.co\.jp\/report/.test(url),
   },
@@ -144,7 +147,7 @@ export function classifyLoginOutcome(source, { url, hasPassword, hasChallenge })
 
 function notify(message) {
   if (process.platform !== 'darwin') { console.error(`[stats47 計測ログイン] ${message}`); return; }
-  try { execFileSync('osascript', ['-e', `display notification ${JSON.stringify(message)} with title "stats47 計測ログイン"`]); } catch { /* 通知は補助 */ }
+  try { execFileSync('osascript', ['-e', `display notification ${JSON.stringify(message.replace(/[\u0000-\u001f]+/g, ' ').slice(0, 200))} with title "stats47 計測ログイン"`]); } catch { /* 通知は補助 */ }
 }
 
 async function pageSignals(page) {
@@ -174,9 +177,22 @@ async function submitCredential(page, conf, cred) {
   if (!(await visible(conf.password))) return;
   await page.fill(conf.password, cred.password);
   if (conf.remember && await visible(conf.remember)) await page.check(conf.remember).catch(() => {});
-  await page.click(conf.submit);
+  if (conf.submitByEnter) await page.press(conf.password, 'Enter');
+  else await page.click(conf.submit);
   await page.waitForLoadState('domcontentloaded', { timeout: 60000 }).catch(() => {});
   await page.waitForTimeout(5000);
+}
+
+/**
+ * 送信後の着地ページがログイン済みの形でなければ、checkUrl を 1 回開き直す。SSO の戻り先がトップ等で、
+ * ログインできているのに login_failed と判定された (2026-10-01 楽天 Mac 実機)。未ログインなら checkUrl が
+ * ログイン画面へ戻すので失敗は失敗のまま残る。2FA/CAPTCHA の画面は開き直さない (human_required を保つ)。
+ */
+async function settleOnCheckUrl(page, conf) {
+  if (conf.loggedIn(page.url()) || conf.challengeUrl?.test(page.url())) return;
+  if ((await pageSignals(page)).hasChallenge) return;
+  await page.goto(conf.checkUrl, { waitUntil: 'domcontentloaded', timeout: 60000 }).catch(() => {});
+  await page.waitForTimeout(3000);
 }
 
 /** 画面が認証アプリの 2FA のときだけ、TOTP を計算して 1 回入力する。入力できなければ何もしない (呼び側が human_required で止める)。 */
@@ -263,6 +279,7 @@ async function refresh(source, { root, publish, headed, waitHuman }) {
       await page.goto(conf.loginUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
       await submitCredential(page, conf, cred);
       await passTotpIfOffered(page, conf, cred);
+      await settleOnCheckUrl(page, conf);
       const signals = await pageSignals(page);
       if (conf.challengeSelector && await page.locator(conf.challengeSelector).first().isVisible().catch(() => false)) signals.hasChallenge = true;
       const status = classifyLoginOutcome(source, { url: page.url(), ...signals });
@@ -315,6 +332,7 @@ export async function ciRelogin(source, { statePath, outPath }) {
     await page.goto(conf.loginUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
     await submitCredential(page, conf, cred);
     await passTotpIfOffered(page, conf, cred);
+    await settleOnCheckUrl(page, conf);
     const signals = await pageSignals(page);
     const url = page.url();
     const status = conf.loggedIn(url) && !signals.hasPassword ? 'ok'

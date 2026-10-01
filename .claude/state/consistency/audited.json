@@ -1,7 +1,8 @@
 {
-  "hash": "3e13a9fa463d0d68d239191975936ab229916eecc430ebad6ffa84193f0e5a45",
-  "audited_at": "2026-10-01T10:09:43",
+  "hash": "db60bcf9c4bb046c0697a5ce47cf517c5d993a2f20aa481a53e5088334885f27",
+  "audited_at": "2026-10-01T10:48:18",
   "files": [
-    ".claude/scripts/measurement/__tests__/auth-credential-ssot.test.mjs"
+    ".claude/scripts/measurement/bootstrap-session.mjs",
+    ".claude/scripts/measurement/refresh-session.mjs"
   ]
 }

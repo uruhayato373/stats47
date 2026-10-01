@@ -57,7 +57,8 @@ else {
     if (login) {
       const urls = { a8: 'https://pub.a8.net/', moshimo: 'https://af.moshimo.com/af/shop/index', afb: 'https://www.afi-b.com/pa/',
         note: 'https://note.com/settings/account', gsc: 'https://search.google.com/search-console?resource_id=sc-domain%3Astats47.jp',
-        kdp: 'https://kdp.amazon.co.jp/ja_JP/bookshelf', coconala: 'https://coconala.com/mypage/dashboard' };
+        kdp: 'https://kdp.amazon.co.jp/ja_JP/bookshelf', coconala: 'https://coconala.com/mypage/dashboard',
+        rakuten: 'https://affiliate.rakuten.co.jp/report/summary' };
       const page = context.pages()[0] || await context.newPage();
       await page.goto(args.includes('--reports') ? 'https://kdpreports.amazon.co.jp/' : urls[sourceName], { waitUntil: 'domcontentloaded', timeout: 60000 });
       const prompt = createInterface({ input: process.stdin, output: process.stdout });

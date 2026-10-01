@@ -27,10 +27,10 @@ updated: 2026-09-29
 タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [起票:2026-10-01] [領域:管理]
 
 - **経緯**: 2026-10-01 に資格情報の正本 `.claude/config/auth-credentials.json` (9 サービス) と管理画面 `/ops/auth` を作り、note・ココナラ・KDP は CI でセッション切れを入り直す。同日 Windows PC と CI に 8 サービスを登録済み (A8・もしも・afb・楽天・note・KDP・X・Google。ID と登録先は `/ops/auth` で確認)。
-- **2026-10-01 済**: ログイン ID を正本の `loginId` に記録 (9 サービス・オーナー判断で公開リポジトリに記載。`/ops/auth` が表示し、ストアの ID と違えば「ID 不一致」)。Mac に全 9 サービスを登録、ココナラの CI Secrets を登録。
+- **2026-10-01 済**: ログイン ID を正本の `loginId` に記録 (9 サービス・オーナー判断で公開リポジトリに記載。`/ops/auth` が表示し、ストアの ID と違えば「ID 不一致」)。Mac に全 9 サービスを登録、ココナラの CI Secrets を登録。Mac の `refresh-session.mjs --headed` で note はキーチェーンの ID/PW で自動ログイン成功、A8・もしも・ココナラは既存セッションで ok (パスワード経路は未検証)。
 - **残り (オーナーのみ・パスワードは対話入力)**:
   1. **Windows のココナラ**: `cmdkey /generic:stats47-measurement-coconala /user:stats47jp@gmail.com /pass` (コマンドは Windows の `/ops/auth` にも出る)
-  2. **CI のセッション待ちを解く (Mac・保管庫の鍵がある端末)**: 2026-10-01 の CI 初回試行で、A8・もしもの Secrets 再ログインは `login_failed`、楽天は `timeout` だった (失敗印 `reloginFailedAt` で以後は再試行しない)。楽天 `node .claude/scripts/measurement/bootstrap-session.mjs rakuten --login --publish`、A8・もしも `node .claude/scripts/measurement/refresh-session.mjs a8 moshimo --headed --publish`。--headed で画面を見て、パスワード入力後に何が出るか (追加確認・遷移先 URL) を確かめ、`refresh-session.mjs` の LOGIN の判定を直す。KDP は本棚は有効だが Reports 認証で止まる (CI の入り直しが本棚しか見ない)
+  2. **パスワード経路の実証 (セッションが切れたとき)**: 2026-10-01 に A8・もしも・楽天の有効セッションを Mac から CI へ渡した (Secrets 更新済み)。楽天は送信を Enter に、送信後の着地がログイン済みでなければ checkUrl を開き直して判定するよう直した (ログインできているのに login_failed と判定された)。A8・もしも・楽天・ココナラのパスワードでの自動ログインは未実証で、セッション切れ時に `refresh-session.mjs <source> --headed` で確かめる。KDP は `.local/authenticated-measurement/kdp.autologin-failed` で停止中で、本棚は有効だが Reports 認証で止まる (CI の入り直しが本棚しか見ない)
 - **完了条件**: Mac と Windows の両方で `/ops/auth` の「この PC」が全行「済」、CI 欄が「済」か「保管」。その後の authenticated-measurement で note・ココナラ・KDP の状態ファイルの `relogin` が `session_valid` か `relogged` になる (CI での再ログインは未実証)。
 
 ### [DATA-QUALITY-LOOP-01] 全指標のデータ品質を機械チェックし、「誤り・古さ・終了・薄さ」の 4 基準で継続的に直すループを作る
