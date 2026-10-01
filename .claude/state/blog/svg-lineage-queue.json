@@ -1,13 +1,13 @@
 {
-  "total": 1589,
+  "total": 1598,
   "staged": false,
   "byStatus": {
-    "both": 1494,
+    "both": 1503,
     "jsonOnly": 0,
     "neither": 95
   },
   "byMethod": {
-    "done": 1494,
+    "done": 1503,
     "manual": 40,
     "ssot-restore": 22,
     "ssot-restore-new": 33
@@ -1907,6 +1907,28 @@
       "residualCard": null
     },
     {
+      "slug": "census-2025-population-change-rate-prefecture",
+      "base": "population-change-rate-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "census-2025-population-change-rate-prefecture",
+      "base": "census-2025-population-change-rate-prefecture-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "cheese-expenditure-ranking",
       "base": "cheese-expenditure-ranking-ranking",
       "chartType": "ranking",
@@ -3670,6 +3692,50 @@
       "slug": "elderly-population-care-capacity-gap",
       "base": "elderly-population-care-capacity-gap-summary-findings",
       "chartType": "findings",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "elderly-ratio-rise-2020-2025",
+      "base": "elderly-ratio-rise-2020-2025-timeseries",
+      "chartType": "line",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "elderly-ratio-rise-2020-2025",
+      "base": "elderly-ratio-rise-2020-2025-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "elderly-ratio-rise-2020-2025",
+      "base": "elderly-ratio-rise-2020-2025-map",
+      "chartType": "tilemap",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "elderly-ratio-rise-2020-2025",
+      "base": "elderly-ratio-rise-2020-2025-municipality-ranking",
+      "chartType": "ranking",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -6254,6 +6320,39 @@
     {
       "slug": "household-consumption-expenditure-ranking",
       "base": "household-consumption-expenditure-ranking-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "household-growth-population-decline-census-2025",
+      "base": "household-change-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "household-growth-population-decline-census-2025",
+      "base": "population-household-scatter",
+      "chartType": "scatter",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "household-growth-population-decline-census-2025",
+      "base": "household-gap-ranking",
       "chartType": "ranking",
       "hasJson": true,
       "hasSource": true,
