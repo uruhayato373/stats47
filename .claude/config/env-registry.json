@@ -41,6 +41,34 @@
       ]
     },
     {
+      "name": "STATS47_AUTH_PASSWORD",
+      "visibility": "secret",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "STATS47_AUTH_SOURCE",
+      "visibility": "public",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "STATS47_AUTH_TOTP",
+      "visibility": "secret",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
+      "name": "STATS47_AUTH_USER",
+      "visibility": "secret",
+      "contexts": [
+        "process"
+      ]
+    },
+    {
       "name": "MEASUREMENT_SESSION_A8",
       "visibility": "secret",
       "contexts": [
