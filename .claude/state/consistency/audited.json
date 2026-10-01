@@ -1,8 +1,7 @@
 {
-  "hash": "db60bcf9c4bb046c0697a5ce47cf517c5d993a2f20aa481a53e5088334885f27",
-  "audited_at": "2026-10-01T10:48:18",
+  "hash": "32488f06ef36ba20a009883ddb755be63a8054d5940fe67b78196c4c5515ea96",
+  "audited_at": "2026-10-01T11:00:51",
   "files": [
-    ".claude/scripts/measurement/bootstrap-session.mjs",
-    ".claude/scripts/measurement/refresh-session.mjs"
+    ".claude/scripts/ads/__tests__/affiliate-workflow-safety.test.mjs"
   ]
 }

@@ -20,7 +20,8 @@ test(`${files[0]}は観測artifactだけで外部変更しない`, () => {
 });
 
 // GA4週次は生snapshotをR2 state/へ置き、git書き戻しを週次集約CSVと、認証付き収集の保管庫から
-// restore した ASP 成果 (restore の許可リストにある集計値 4 ファイル) だけに限定する (2026-09-27 に成果を追加)。
+// restore した ASP 成果 (restore の許可リストにある集計値 5 ファイル) だけに限定する (2026-09-27 に成果を追加、
+// 2026-10-01 に楽天を追加)。
 // Issue mutationは運用異常のalert/recoveryだけに使い、広告配信自体は変更しない。
 test(`${files[1]}はgit書き戻しを週次集約CSVとASP成果に限定し、広告配信を変更しない`, () => {
   const source = readFileSync(files[1], "utf8");
@@ -39,6 +40,7 @@ test(`${files[1]}はgit書き戻しを週次集約CSVとASP成果に限定し、
     ".claude/state/metrics/affiliate/a8-report-log.json",
     ".claude/state/metrics/affiliate/a8-ui-last-run.json",
     ".claude/state/metrics/affiliate/moshimo-results.json",
+    ".claude/state/metrics/affiliate/rakuten-results.json",
   ]);
   // 書き戻す成果は restore (consumer-paths の許可リスト) が書くものに限る。生 snapshot は含めない
   assert.doesNotMatch(outcomeBlock[1], /ga4-affiliate-\d|\.local\//);
