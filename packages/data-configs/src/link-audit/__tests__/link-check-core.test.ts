@@ -78,4 +78,21 @@ describe("link audit retry and stale contract", () => {
   it("maxAttempts 0をfail-closedにする", async () => {
     await expect(probeLinkWithRetry(target, { maxAttempts: 0 })).rejects.toThrow("maxAttempts");
   });
+
+  // 意図: Node の fetch だけが届かない官公庁サイトを、curl の再確認で到達扱いにする。curl も届かなければ timeout のまま異常
+  it("fetch が全試行で失敗したときだけ confirmFn で再確認し、その status で判定する", async () => {
+    const fetchFn = vi.fn().mockRejectedValue(new Error("fetch failed"));
+    const sleep = vi.fn().mockResolvedValue(undefined);
+    const now = new Date("2026-08-02T00:00:00Z");
+    const ok = await probeLinkWithRetry(target, { fetchFn, sleep, now, confirmFn: async () => 200 });
+    expect(ok.verdict).toBe("ok");
+    expect(ok.detail).toContain("再確認");
+    const gone = await probeLinkWithRetry(target, { fetchFn, sleep, now, confirmFn: async () => 404 });
+    expect(gone.verdict).toBe("gone");
+    const still = await probeLinkWithRetry(target, { fetchFn, sleep, now, confirmFn: async () => null });
+    expect(still.verdict).toBe("timeout");
+    const confirm = vi.fn().mockResolvedValue(200);
+    await probeLinkWithRetry(target, { fetchFn: vi.fn().mockResolvedValue(response(500)), sleep, now, confirmFn: confirm });
+    expect(confirm).not.toHaveBeenCalled();
+  });
 });

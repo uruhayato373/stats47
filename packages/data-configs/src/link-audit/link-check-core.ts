@@ -56,6 +56,12 @@ export async function probeLinkWithRetry(
     readonly retryDelayMs?: number;
     readonly staleAfterDays?: number;
     readonly userAgent?: string;
+    /**
+     * fetch が全試行でタイムアウト / ネットワークエラーだったときだけ呼ぶ再確認 (HTTP status か null)。
+     * Node の fetch (undici) は一部の官公庁サイト (www.gsi.go.jp・pref.aichi.jp 等) で GitHub ランナーから
+     * fetch failed になるが curl では 200 を返す (2026-07-18・2026-10-01 実測)。スクリプトが curl 実装を渡す。
+     */
+    readonly confirmFn?: (url: string) => Promise<number | null>;
   } = {},
 ): Promise<LinkProbeResult> {
   const fetchFn = options.fetchFn ?? fetch;
@@ -92,6 +98,14 @@ export async function probeLinkWithRetry(
     }
     if (last.verdict !== "server-err" && last.verdict !== "timeout") return last;
     if (attempt < maxAttempts) await sleep(retryDelayMs * attempt);
+  }
+  if (last!.verdict === "timeout" && options.confirmFn) {
+    const status = await options.confirmFn(target.url).catch(() => null);
+    if (status !== null && status > 0) {
+      const statusVerdict = classifyLinkStatus(status);
+      const verdict = statusVerdict === "ok" && isVerificationStale(target.verifiedAt, now, options.staleAfterDays) ? "stale" : statusVerdict;
+      return { target, verdict, detail: `HTTP ${status} (fetch は ${last!.detail}・再確認で取得)`, attempts: last!.attempts + 1 };
+    }
   }
   return last!;
 }

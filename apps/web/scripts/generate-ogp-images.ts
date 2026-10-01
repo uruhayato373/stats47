@@ -263,6 +263,8 @@ interface NoteEntry {
   slug: string;
   r2Path: string;
   vertical: string;
+  /** r2_access: private (有料記事。本文もカバーも公開 R2 に無い) */
+  isPrivate: boolean;
 }
 async function listNoteEntries(): Promise<NoteEntry[]> {
   const readJson = (path: string): unknown => {
@@ -276,7 +278,7 @@ async function listNoteEntries(): Promise<NoteEntry[]> {
   };
   const out = new Map<string, NoteEntry>();
   const draft = readJson('.claude/state/note-draft-index.json') as {
-    drafts?: Record<string, { vertical?: string; r2_path?: string }>;
+    drafts?: Record<string, { vertical?: string; r2_path?: string; r2_access?: string }>;
   } | null;
   for (const [slug, v] of Object.entries(draft?.drafts ?? {})) {
     if (!isSafeNoteSlug(slug)) {
@@ -294,11 +296,12 @@ async function listNoteEntries(): Promise<NoteEntry[]> {
         slug,
         r2Path: v.r2_path,
         vertical: v.vertical ?? 'stats47-note',
+        isPrivate: v.r2_access === 'private',
       });
     }
   }
   const pub = readJson('.claude/state/note-published-urls.json') as {
-    articles?: Record<string, { vertical?: string; r2_path?: string }>;
+    articles?: Record<string, { vertical?: string; r2_path?: string; r2_access?: string }>;
   } | null;
   for (const [slug, v] of Object.entries(pub?.articles ?? {})) {
     if (slug.startsWith('_') || !v?.r2_path) continue;
@@ -316,6 +319,7 @@ async function listNoteEntries(): Promise<NoteEntry[]> {
       slug,
       r2Path: v.r2_path,
       vertical: v.vertical ?? 'stats47-note',
+      isPrivate: v.r2_access === 'private',
     });
   }
   return [...out.values()].sort((a, b) => a.slug.localeCompare(b.slug));
@@ -457,8 +461,11 @@ async function main() {
       'koumuin-claude-code',
       'koumuin-estat-claude-code',
     ]);
+    // 有料記事 (r2_access: private) の本文は公開 R2 に置かないので、公開 URL から入力を取れず生成できない。
+    // 入力取得の 404 で自己修復全体が止まり、公開記事のカバーまで生成されなくなっていた (2026-10-01)。
+    // 除外の範囲は .claude/scripts/lib/gallery-collectors.mjs (欠落の監査) と同じ (契約テストで固定)。
     noteEntries = (await listNoteEntries()).filter(
-      (n) => !BESPOKE_COVER_VERTICALS.has(n.vertical)
+      (n) => !BESPOKE_COVER_VERTICALS.has(n.vertical) && !n.isPrivate
     );
     ids = noteEntries.map((n) => n.slug);
   } else if (opts.type === 'areas') {

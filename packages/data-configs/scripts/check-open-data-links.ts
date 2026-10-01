@@ -25,6 +25,7 @@ import {
   type LinkProbeResult,
   type LinkProbeTarget,
 } from "../src/link-audit/link-check-core";
+import { curlStatus } from "./lib/curl-confirm";
 
 const MAX_CONCURRENCY = 6;
 
@@ -53,7 +54,7 @@ async function main(): Promise<void> {
   const results: LinkProbeResult[] = [];
   for (let offset = 0; offset < unique.length; offset += MAX_CONCURRENCY) {
     const batch = unique.slice(offset, offset + MAX_CONCURRENCY);
-    results.push(...(await Promise.all(batch.map((target) => probeLinkWithRetry(target)))));
+    results.push(...(await Promise.all(batch.map((target) => probeLinkWithRetry(target, { confirmFn: (url) => curlStatus(url) })))));
   }
 
   const byVerdict = new Map<LinkProbeResult["verdict"], typeof results>();

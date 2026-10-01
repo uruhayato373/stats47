@@ -43,13 +43,7 @@ jobs:
       - name: 🗓️ Check review cadence
         id: check
         run: |
-          node .claude/scripts/management/check-review-cadence.mjs --json > /tmp/review-cadence.json
-          node -e '
-            const r = JSON.parse(require("fs").readFileSync("/tmp/review-cadence.json", "utf8"));
-            require("fs").writeFileSync("/tmp/review-cadence.md", r.body);
-            const errors = r.findings.filter((f) => f.severity === "error").length;
-            require("fs").appendFileSync(process.env.GITHUB_OUTPUT, `errors=${errors}\n`);
-          '
+          node .claude/scripts/management/check-review-cadence.mjs --body-out /tmp/review-cadence.md
           cat /tmp/review-cadence.md >> "$GITHUB_STEP_SUMMARY"
 
       - name: 🚨 Upsert alert issue

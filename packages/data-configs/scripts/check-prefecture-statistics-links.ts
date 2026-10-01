@@ -4,6 +4,7 @@ import {
   probeLinkWithRetry,
   type LinkProbeTarget,
 } from "../src/link-audit/link-check-core";
+import { curlStatus } from "./lib/curl-confirm";
 
 const MAX_CONCURRENCY = 6;
 const resources = PREFECTURE_STATISTICS_CATALOG.flatMap((entry) =>
@@ -21,7 +22,7 @@ async function checkResource(resource: (typeof resources)[number]): Promise<stri
     verifiedAt: resource.lastVerifiedAt,
     alertOwner: "open-data-curator",
   };
-  const result = await probeLinkWithRetry(target, { userAgent: "stats47-link-check/2.0" });
+  const result = await probeLinkWithRetry(target, { userAgent: "stats47-link-check/2.0", confirmFn: (url) => curlStatus(url) });
   return isAlertVerdict(result.verdict)
     ? `[${result.verdict}] ${resource.prefectureName}: ${result.detail} ${resource.url} attempts=${result.attempts}`
     : null;

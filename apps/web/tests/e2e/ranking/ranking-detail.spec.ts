@@ -22,8 +22,11 @@ test.describe("ランキング詳細ページ", () => {
 
   test("地図チャートが表示される", async ({ page }) => {
     const mapChart = page.getByRole("img", { name: /都道府県別カラーマップ/ });
-    await mapChart.scrollIntoViewIfNeeded();
-    await expect(mapChart).toBeVisible({ timeout: 15000 });
+    // 地図は R2 のデータを読んでから描画されるので CI では遅い。scrollIntoViewIfNeeded は自前の待ち上限を持たず
+    // テスト全体の 90 秒を使い切って落ちた (quality-suite-weekly 2026-09-27)。待ちを段ごとに区切る
+    await expect(mapChart).toBeAttached({ timeout: 30_000 });
+    await mapChart.scrollIntoViewIfNeeded({ timeout: 15_000 });
+    await expect(mapChart).toBeVisible({ timeout: 15_000 });
   });
 
   test("データテーブルが表示される", async ({ page }) => {

@@ -50,6 +50,13 @@ async function fetchWithRetry(url, options = {}, attempts = 4) {
         headers: { "user-agent": UA, ...(options.headers || {}) },
         signal: AbortSignal.timeout(20_000),
       });
+      // 5xx は一時的なことがあるので最後の試行まで待って取り直す。本番の /ranking が監査中に 1 回だけ 503 を返し、
+      // リンク切れとして週次監査が落ちた (2026-09-26・同じ URL は翌日 200)
+      if (response.status >= 500 && attempt < attempts) {
+        await response.body?.cancel();
+        await new Promise((done) => setTimeout(done, attempt * 2000));
+        continue;
+      }
       return response;
     } catch (error) {
       lastError = error;
@@ -116,14 +123,14 @@ async function fetchMagazine(magazine) {
 
 async function checkSiteLink(url) {
   try {
-    const initial = await fetchWithRetry(url, { method: "HEAD", redirect: "manual" }, 2);
+    const initial = await fetchWithRetry(url, { method: "HEAD", redirect: "manual" }, 3);
     const redirected = initial.status >= 300 && initial.status < 400;
     let finalUrl = url;
     let finalStatus = initial.status;
     if (redirected) {
       const location = initial.headers.get("location");
       finalUrl = location ? new URL(location, url).href : url;
-      const final = await fetchWithRetry(finalUrl, { method: "HEAD", redirect: "follow" }, 2);
+      const final = await fetchWithRetry(finalUrl, { method: "HEAD", redirect: "follow" }, 3);
       finalStatus = final.status;
       finalUrl = final.url || finalUrl;
     }

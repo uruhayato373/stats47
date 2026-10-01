@@ -1,7 +1,11 @@
 {
-  "hash": "8443c3e5f30c83f08e9e30dddf9cbbcaace851231e3f743bc0742b07b8252c08",
-  "audited_at": "2026-10-01T12:17:45",
+  "hash": "d4a27c64946975e8b9f57ef3b3ee06b8bf9232721e24aab5bc3e530d4e64267b",
+  "audited_at": "2026-10-01T12:31:31",
   "files": [
-    ".claude/scripts/ci/workflow-catalog.mjs"
+    ".claude/scripts/lib/__tests__/gallery-collectors.test.mjs",
+    ".claude/scripts/lib/gallery-collectors.mjs",
+    ".claude/scripts/management/check-review-cadence.mjs",
+    ".claude/scripts/note/__tests__/circulation-workflow.test.mjs",
+    ".claude/scripts/note/audit-note-circulation.mjs"
   ]
 }

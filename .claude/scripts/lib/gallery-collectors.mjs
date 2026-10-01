@@ -181,16 +181,32 @@ export async function enumerateBlogSlugs(r2) {
  * note カバーは R2 に archive されず公開時に note.com へ直接アップロードされる ephemeral
  * (2026-07-06 確認)。published は note.com リンクを提示、r2Path から archive パスを組む。
  */
+/**
+ * 公開 R2 に汎用カバー (cover-1280x670.png) を持たない note シリーズ。専用デザインのカバーを note.com に直接上げるのが正典
+ * (.claude/scripts/note/generate-koumuin-covers.cjs)。生成側 apps/web/scripts/generate-ogp-images.ts の
+ * BESPOKE_COVER_VERTICALS と同じ集合 (gallery-collectors.test.mjs が一致を固定する)。
+ */
+export const BESPOKE_COVER_VERTICALS = Object.freeze(["koumuin-claude-code", "koumuin-estat-claude-code"]);
+
+/**
+ * 公開 R2 にカバーがあるべき note 記事。有料記事 (r2_access: private) と専用デザインのシリーズは除く
+ * (どちらも公開 R2 に無いのが正しい。2026-09 に 79 件の有料記事を「欠落」と数え、OGP の週次監査が毎回落ちていた)。
+ */
 export function enumerateNoteCovers(projectRoot) {
   const out = new Map(); // slug -> { slug, status, noteUrl, r2Path }
+  const inScope = (v) => v?.r2_path && v.r2_access !== "private" && !BESPOKE_COVER_VERTICALS.includes(v.vertical);
   const draft = readJsonSafe(path.join(projectRoot, ".claude/state/note-draft-index.json"));
   for (const [slug, v] of Object.entries(draft?.drafts || {})) {
-    if (!v?.r2_path) continue;
+    if (!inScope(v)) continue;
     out.set(slug, { slug, status: v?.status || "draft", noteUrl: null, r2Path: v.r2_path });
   }
   const pub = readJsonSafe(path.join(projectRoot, ".claude/state/note-published-urls.json"));
   for (const [slug, v] of Object.entries(pub?.articles || {})) {
-    if (slug.startsWith("_") || !v?.r2_path) continue;
+    if (slug.startsWith("_")) continue;
+    if (!inScope(v)) {
+      out.delete(slug); // 公開版が有料・専用デザインなら下書き側の登録も外す
+      continue;
+    }
     out.set(slug, { slug, status: "published", noteUrl: v?.url || null, r2Path: v.r2_path });
   }
   return [...out.values()].sort((a, b) => a.slug.localeCompare(b.slug));
