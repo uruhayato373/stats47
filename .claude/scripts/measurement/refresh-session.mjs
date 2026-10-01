@@ -95,7 +95,7 @@ export const LOGIN = {
     loggedIn: (url) => /^https:\/\/affiliate\.rakuten\.co\.jp\/report/.test(url),
   },
   // ココナラは 2026-10-02 に自動ログインの対象から外した (自動操作のブラウザを見えない reCAPTCHA が拒否する)。
-  // セッションが切れたら人が bootstrap-session.mjs coconala --login --publish で入り直す (正本 auth-credentials.json)
+  // セッションが切れたら普通の Chrome でログインし bootstrap-session.mjs coconala --from-profile --publish (正本 auth-credentials.json)
   // X (2026-09-30 オーナー判断で追加): 予約投稿 (publish-x) の専用プロファイルのログインを保つ。
   // publish-x は Playwright 同梱の Chromium でこのプロファイルを開くので、ここも同じブラウザで開く
   // (Chrome 本体で開くと Cookie の暗号化方式が変わりログインが壊れうる)。X の投稿は Mac だけなので state は CI へ渡さない。

@@ -1,8 +1,9 @@
 {
-  "hash": "0c226e0860ea39a0cb2fef22e9333ab0690d618fe53dbc1d203926795c038775",
-  "audited_at": "2026-10-01T19:14:20",
+  "hash": "358eb5d6736dc55b35922b33961415643c25bfc7f10dae00a093e68fd35943c5",
+  "audited_at": "2026-10-01T19:19:40",
   "files": [
-    ".claude/scripts/measurement/credential-store.mjs",
+    ".claude/scripts/measurement/__tests__/measurement.test.mjs",
+    ".claude/scripts/measurement/bootstrap-session.mjs",
     ".claude/scripts/measurement/refresh-session.mjs"
   ]
 }

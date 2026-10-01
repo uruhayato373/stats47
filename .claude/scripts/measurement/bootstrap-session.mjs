@@ -19,7 +19,14 @@ if (!sourceName || args.includes('--help')) {
 const source = sourceFor(sourceName);
 if (source.transport === 'api') throw new Error(`api_source_requires_secret: configure ${source.apiSecret}; browser session export cannot activate this source`);
 if (args.includes('--reports') && (sourceName !== 'kdp' || !args.includes('--login'))) throw new Error('reports_requires_kdp_login');
+// 自動操作のブラウザ (Playwright) を拒否するサービスは、普通の Chrome で専用プロファイルにログインし、閉じてから取り出す。
+// Google (gsc) と、見えない reCAPTCHA が自動操作を拒否するココナラ (2026-10-02)
+const NATIVE_PROFILE_SOURCES = new Set(['gsc', 'coconala']);
 if (sourceName === 'gsc' && args.includes('--login')) throw new Error('google_login_requires_native_chrome: run google-admin/cli.mjs login, close that Chrome, then export with --from-profile --publish');
+if (sourceName === 'coconala' && args.includes('--login')) {
+  const dir = join(resolve(process.cwd()), '.local', source.profile);
+  throw new Error(`coconala_login_requires_native_chrome: 1) open -na "Google Chrome" --args --user-data-dir="${dir}" https://coconala.com/login 2) ログインして Chrome を完全に終了 (Cmd+Q) 3) node .claude/scripts/measurement/bootstrap-session.mjs coconala --from-profile --publish`);
+}
 const rootArg = args.indexOf('--root');
 const root = resolve(rootArg < 0 ? process.cwd() : args[rootArg + 1]);
 const publish = args.includes('--publish');
@@ -44,7 +51,7 @@ else {
   // A normal Chrome profile uses the OS keychain, unlike Playwright's test profile.
   // Export from a disposable copy: opening with incompatible defaults must never
   // discard the user's original encrypted cookies.
-  const nativeProfile = sourceName === 'gsc';
+  const nativeProfile = NATIVE_PROFILE_SOURCES.has(sourceName);
   const temporaryProfile = nativeProfile ? mkdtempSync(join(tmpdir(), 'stats47-measurement-profile-')) : null;
   let context;
   try {
