@@ -1,13 +1,31 @@
 {
   "schemaVersion": 1,
-  "date": "2026-10-01",
+  "date": "2026-10-02",
   "period": {
-    "periodStart": "2026-09-22",
-    "periodEnd": "2026-09-28",
+    "periodStart": "2026-09-23",
+    "periodEnd": "2026-09-29",
     "windowDays": 7
   },
-  "inputHash": "7c661231781d8427d369ef331b289669d94f9330ab4514a3eb609c5124f5d530",
+  "inputHash": "ff99e8c1bf29f6f529837c67a4d3fb7136310cda2efaf0c2270f07a1d0223203",
   "movements": [
+    {
+      "keyword": "任意保険 加入率",
+      "targetPath": "/ranking/voluntary-car-insurance-rate-bodily-injury",
+      "before": 78.875,
+      "after": 35.714285714285715,
+      "beforeImpressions": 8,
+      "impressions": 7,
+      "change": 43.160714285714285
+    },
+    {
+      "keyword": "任意保険 加入 率",
+      "targetPath": "/ranking/voluntary-car-insurance-rate-bodily-injury",
+      "before": 76.6,
+      "after": 35,
+      "beforeImpressions": 5,
+      "impressions": 2,
+      "change": 41.599999999999994
+    },
     {
       "keyword": "ふるさと納税 募集費用",
       "targetPath": "/ranking/furusato-fundraising-cost-prefecture",
@@ -20,29 +38,11 @@
     {
       "keyword": "site:stats47.jp",
       "targetPath": "/areas/15000",
-      "before": 46.96,
-      "after": 9.416666666666666,
-      "beforeImpressions": 75,
-      "impressions": 12,
-      "change": 37.54333333333334
-    },
-    {
-      "keyword": "任意保険 加入率",
-      "targetPath": "/ranking/voluntary-car-insurance-rate-bodily-injury",
-      "before": 79.44444444444444,
-      "after": 42.333333333333336,
-      "beforeImpressions": 9,
-      "impressions": 6,
-      "change": 37.11111111111111
-    },
-    {
-      "keyword": "小松 市 人口",
-      "targetPath": "/areas/17000/cities/17203/population",
-      "before": 11,
-      "after": 48,
-      "beforeImpressions": 1,
-      "impressions": 1,
-      "change": -37
+      "before": 43.05952380952381,
+      "after": 6.25,
+      "beforeImpressions": 84,
+      "impressions": 4,
+      "change": 36.80952380952381
     },
     {
       "keyword": "高校の先生 給料",
@@ -55,21 +55,30 @@
     },
     {
       "keyword": "site:stats47.jp",
-      "targetPath": "/ranking/railway-passengers",
-      "before": 46.47142857142857,
-      "after": 12.416666666666666,
-      "beforeImpressions": 70,
-      "impressions": 12,
-      "change": 34.054761904761904
+      "targetPath": "/ranking/engel-coefficient",
+      "before": 52.054054054054056,
+      "after": 18,
+      "beforeImpressions": 74,
+      "impressions": 1,
+      "change": 34.054054054054056
     },
     {
-      "keyword": "都道府県",
-      "targetPath": "/",
-      "before": 28.333333333333332,
-      "after": 59,
-      "beforeImpressions": 3,
-      "impressions": 2,
-      "change": -30.666666666666668
+      "keyword": "site:stats47.jp",
+      "targetPath": "/ranking/railway-passengers",
+      "before": 42.734177215189874,
+      "after": 9.857142857142858,
+      "beforeImpressions": 79,
+      "impressions": 7,
+      "change": 32.87703435804701
+    },
+    {
+      "keyword": "site:stats47.jp",
+      "targetPath": "/areas/14000/innovation-patents",
+      "before": 61,
+      "after": 30.333333333333332,
+      "beforeImpressions": 57,
+      "impressions": 3,
+      "change": 30.666666666666668
     },
     {
       "keyword": "site:stats47.jp",
@@ -81,22 +90,13 @@
       "change": -30.52173913043478
     },
     {
-      "keyword": "site:stats47.jp",
-      "targetPath": "/areas/14000/innovation-patents",
-      "before": 61,
-      "after": 30.5,
-      "beforeImpressions": 57,
-      "impressions": 2,
-      "change": 30.5
-    },
-    {
-      "keyword": "site:stats47.jp",
-      "targetPath": "/ranking/engel-coefficient",
-      "before": 55.52307692307692,
-      "after": 26.1,
-      "beforeImpressions": 65,
-      "impressions": 10,
-      "change": 29.42307692307692
+      "keyword": "自動車保険 加入率",
+      "targetPath": "/ranking/voluntary-car-insurance-rate-bodily-injury",
+      "before": 58,
+      "after": 29,
+      "beforeImpressions": 3,
+      "impressions": 7,
+      "change": 29
     }
   ],
   "verdicts": [
@@ -107,10 +107,10 @@
     }
   ],
   "selected": {
-    "keyword": "公衆電話の数 日本",
-    "targetPath": "/blog/public-phone-count",
-    "rank": 9.936739659367397,
-    "impressions": 411,
+    "keyword": "山形県 コンビニ 店舗数",
+    "targetPath": "/blog/convenience-store-density-map",
+    "rank": 11.745928338762216,
+    "impressions": 307,
     "clicks": 0,
     "group": 5,
     "previousMethod": null,
@@ -152,6 +152,11 @@
       "keyword": "道の駅多い県",
       "targetPath": "/blog/roadside-station-count-prefecture-gap",
       "proposalId": "36533510014-1"
+    },
+    {
+      "keyword": "公衆電話の数 日本",
+      "targetPath": "/blog/public-phone-count",
+      "proposalId": "36828852546-1"
     }
   ]
 }
