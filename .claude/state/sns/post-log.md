@@ -3,10 +3,12 @@
 投稿済み全件。`posted_at` 降順。
 スクリプトで自動生成 — 手編集しない (`sns-posts-store.cjs` が `insert()`/`updateById()` のたびに再生成)。
 
-**586 件** (最終更新: 2026-10-01)
+**588 件** (最終更新: 2026-10-02)
 
 | 日付 | 媒体 | コンテンツ | キャプション | URL |
 |---|---|---|---|---|
+| 2026-10-02 | 🧵 Threads | area/area-09000-profile | あなたの知る栃木は、データでも同じ姿ですか？ トチノキやイチゴから、人口・経済・暮らしまで横断できます。 続きは👇 h… | [🔗](https://www.threads.com/@stats47jp/post/Dd_CsQeCAmr) |
+| 2026-10-02 | 🧵 Threads | ranking/spouse-income | 勤労者世帯の「配偶者の収入」が最も多い県は？  1位山形15万9,360円、2位新潟15万6,286円、3位茨城15万6… | [🔗](https://www.threads.com/@stats47jp/post/Dd-U4sKgSJm) |
 | 2026-10-01 | 📸 Instagram | ranking-quiz/sake-consumption-expenditure |  | [🔗](https://www.instagram.com/p/Dd9ZXGRGjvL/) |
 | 2026-10-01 | 🧵 Threads | area/area-08000-profile | 茨城の「らしさ」をデータでたどる。 県花バラ、べにはるか・ふくむらさき・シルクス…と常陸大黒、統計ランキングを1ページに… | [🔗](https://www.threads.com/@stats47jp/post/Dd8gtEDj_KR) |
 | 2026-10-01 | 🧵 Threads | ranking/sewerage-coverage-rate | 下水道の普及率、徳島は19.5％。  1位の東京は99.7％で、約5倍の差があります。 2位神奈川97.1％、3位大阪9… | [🔗](https://www.threads.com/@stats47jp/post/Dd7yVYYgu9n) |

@@ -19026,9 +19026,9 @@
     },
     {
       "id": 991,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:18.004Z",
-      "updated_at": "2026-09-23T08:58:39.130Z",
+      "updated_at": "2026-10-02T19:37:08.275Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "ranking",
@@ -19038,13 +19038,15 @@
       "utm_url": "https://stats47.jp/ranking/spouse-income?utm_source=threads&utm_medium=social&utm_campaign=spouse-income&utm_content=question",
       "template": "question",
       "metric_keys": "spouse-income",
-      "scheduled_at": "2026-10-02T01:40:00.000Z"
+      "scheduled_at": "2026-10-02T01:40:00.000Z",
+      "post_url": "https://www.threads.com/@stats47jp/post/Dd-U4sKgSJm",
+      "posted_at": "2026-10-02T01:40:32.000Z"
     },
     {
       "id": 992,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:18.008Z",
-      "updated_at": "2026-09-23T08:58:50.870Z",
+      "updated_at": "2026-10-02T19:37:08.383Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "area",
@@ -19054,7 +19056,9 @@
       "utm_url": "https://stats47.jp/areas/09000?utm_source=threads&utm_medium=social&utm_campaign=area-09000&utm_content=area-profile",
       "template": "area-profile",
       "metric_keys": null,
-      "scheduled_at": "2026-10-02T08:20:00.000Z"
+      "scheduled_at": "2026-10-02T08:20:00.000Z",
+      "post_url": "https://www.threads.com/@stats47jp/post/Dd_CsQeCAmr",
+      "posted_at": "2026-10-02T08:20:48.000Z"
     },
     {
       "id": 993,
