@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { validateCoverLedger, emptyCoverArticle, coverSha, coverAssetKey, addCoverRevision, reviewCoverRevision,
-  recordCoverObservation, applyCoverAudit, coverDisplayState, updateCoverLedger, readCoverLedger, approvedCoverRevision } from '../lib/cover-assets.mjs';
+  recordCoverObservation, applyCoverAudit, coverDisplayState, updateCoverLedger, readCoverLedger, adoptedCoverRevision, approvedCoverRevision } from '../lib/cover-assets.mjs';
 import { storeCoverBytes, readStoredCover, fetchCoverSource, wranglerTokenProvider } from '../lib/cover-storage.mjs';
 import { buildTab } from '../../lib/gallery-collectors.mjs';
 import { COVER_ROOT, assertCoverGenerationType } from '../lib/cover-assets.mjs';
@@ -157,8 +157,11 @@ test('cover updates cannot select a pending candidate for upload', () => {
   assert.equal(approvedCoverRevision(row), null);
   reviewCoverRevision(row, candidate.id, 'pass', 'Reviewed', now);
   assert.equal(approvedCoverRevision(row).id, candidate.id);
+  assert.equal(adoptedCoverRevision(row).id, candidate.id);
   row.published = { status: 'configured', url: 'https://assets.st-note.com/cover.png', observedAt: now, revisionId: candidate.id };
   assert.equal(approvedCoverRevision(row), null);
+  assert.equal(adoptedCoverRevision(row).id, candidate.id);
   addCoverRevision(row, revision('new unreviewed candidate'), { candidate: true });
   assert.equal(approvedCoverRevision(row), null);
+  assert.equal(adoptedCoverRevision(row), null);
 });

@@ -90,3 +90,10 @@ note配信PNGは減色される（初回API試験は画素平均絶対誤差0.66
 `edit?draft_reedit=true` → エディタ上の「公開に進む」を click → guard → 「更新する」。成功判定は
 `https://note.com/api/v3/notes/<id>` の本文に新見出し・figure 数があること。全消去は実クリック +
 Range 全選択 + 実キー Backspace (eval の execCommand だけでは消えない)。実装: `publish-kakei-update.sh`。
+
+## カバー専用更新のWindows対応とバッチ再開（2026-10-02）
+
+- **問題**: カバー専用CLIがWindowsでブラウザを起動・終了できず、途中成功した行を除くとjournal識別子が変わり、応答不明のPOST履歴を失う可能性があった。
+- **原因**: browser-useの実行パスと終了時のpsがPOSIX固定。journalのhashは未公開の採用版だけから計算していた。またChromeのProfile番号はPCごとに異なり、このWindowsのProfile 5はstats47専用ではなかった。
+- **対策**: Windowsは既存note-session.mjsの専用Playwright profile、サービス別一時認証はmeasurementContextを使い、current_userと設定画面でstats47を照合。所有するcontextを閉じる。採用scopeには公開済みの同一版も含め、同じ--keysの再開でjournalを維持し、別scopeの先行操作も検索して二重送信を停止する。人のログインが必要ならlogin-note-profile.mjsを使い、通常ログイン失敗後に資格情報を繰り返し送信しない。
+- **証拠**: cover-update.test.mjsの9件とcover-assets.test.mjsの17件（採用済みと未配信の区別）。差し替えの公開結果・認証待ちは共有台帳とcover-operations-latest.json、未完了はbacklogのNOTE-COVER-ROLLOUT-20260928。

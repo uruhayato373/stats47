@@ -133,10 +133,15 @@ export function reviewCoverRevision(row, id, status, reason, now = new Date().to
   else if (row.approvedRevisionId === id) row.approvedRevisionId = null;
 }
 
-export function approvedCoverRevision(row) {
+export function adoptedCoverRevision(row) {
   const revision = row.revisions.find(r => r.id === row.approvedRevisionId);
   return revision && revision.review.status === 'pass' && revision.id === row.candidateRevisionId
-    && row.noteUrl && revision.id !== row.published?.revisionId ? revision : null;
+    && row.noteUrl ? revision : null;
+}
+
+export function approvedCoverRevision(row) {
+  const revision = adoptedCoverRevision(row);
+  return revision && revision.id !== row.published?.revisionId ? revision : null;
 }
 
 export function coverDisplayState(row, now = Date.now()) {

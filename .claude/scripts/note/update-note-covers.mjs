@@ -7,8 +7,10 @@ import { fileURLToPath } from 'node:url';
 import { execFile, execFileSync } from 'node:child_process';
 import { promisify } from 'node:util';
 import sharp from 'sharp';
-import { readCoverLedger, updateCoverLedger, recordCoverObservation, approvedCoverRevision } from './lib/cover-assets.mjs';
+import { readCoverLedger, updateCoverLedger, recordCoverObservation, adoptedCoverRevision, approvedCoverRevision } from './lib/cover-assets.mjs';
 import { readStoredCover, createCoverStore, fetchNoteDetail, fetchCoverSource } from './lib/cover-storage.mjs';
+import { launchContext, assertAccount, pruneProfileCaches } from './lib/note-session.mjs';
+import { measurementContext, unattended, markMeasurementAuthenticated } from '../measurement/browser-session.mjs';
 import {
   sha256,
   assetPath,
@@ -16,6 +18,8 @@ import {
   assertPreserved,
   assertProduction,
   uploadInBrowser,
+  coverOperationVersion,
+  findCoverOperation,
 } from './lib/cover-update.mjs';
 
 const ROOT = path.resolve(
@@ -43,8 +47,16 @@ for (let i = 2; i < process.argv.length; i++) {
   opts[flag.slice(2)] = process.argv[++i];
 }
 opts.limit = Number(opts.limit);
-if (!(opts.limit > 0)) throw Error('invalid limit');
+if (!(opts.limit > 0) || (opts.limit !== Infinity && !Number.isSafeInteger(opts.limit))) throw Error('invalid limit');
 const ledger = readCoverLedger();
+const selected = new Set(opts.keys?.split(',') ?? []);
+const scope = ledger.articles.flatMap((row) => {
+  const revision = adoptedCoverRevision(row);
+  if (!revision || (selected.size && !selected.has(row.articleKey))) return [];
+  return [{ key: row.articleKey, sha256: revision.sha256 }];
+});
+if (selected.size && selected.size !== scope.length)
+  throw Error('unknown/unapproved selected key');
 const manifest = { account: 'stats47', version: '', articles: ledger.articles.flatMap((row) => {
   const revision = approvedCoverRevision(row);
   if (!revision) return [];
@@ -53,7 +65,7 @@ const manifest = { account: 'stats47', version: '', articles: ledger.articles.fl
     sha256: revision.sha256, revision, beforeCover: { url: row.published?.url ?? null },
     quality: { ...revision.quality, visualReview: revision.review.status } }];
 }) };
-manifest.version = `ledger-${sha256(manifest.articles.map((a) => `${a.key}:${a.sha256}`).sort().join('\n')).slice(0, 16)}`;
+manifest.version = coverOperationVersion(scope);
 const catalog = JSON.parse(
   execFileSync(
     process.execPath,
@@ -66,19 +78,16 @@ const catalog = JSON.parse(
   )
 );
 const catalogByKey = new Map(catalog.articles.map((a) => [a.key, a]));
-const selected = new Set(opts.keys?.split(',') ?? []);
 const articles = manifest.articles.filter(
   (a) => a.action !== 'keep' && (!selected.size || selected.has(a.key))
 );
-if (selected.size && selected.size !== articles.length)
-  throw Error('unknown/unchanged selected key');
 if (
   new Set(manifest.articles.map((a) => a.noteId)).size !==
   manifest.articles.length
 )
   throw Error('duplicate note');
 const assets = new Map(), originals = new Map(), store = articles.length ? createCoverStore() : null;
-for (const a of articles) {
+for (const a of articles.slice(0, opts.limit)) {
   if (catalogByKey.get(a.key)?.noteUrl !== a.noteUrl)
     throw Error('catalog mismatch ' + a.key);
   const bytes = await readStoredCover(a.revision, store);
@@ -87,7 +96,7 @@ for (const a of articles) {
   const original = await publicDetail(a);
   originals.set(a.key, original);
 }
-console.log(`[note-covers] ${articles.length} reviewed assets validated`);
+console.log(`[note-covers] ${assets.size} reviewed assets validated`);
 if (!opts.commit || !articles.length) process.exit(0);
 
 const journalPath = path.join(
@@ -102,11 +111,17 @@ const journal = fs.existsSync(journalPath)
       version: manifest.version,
       account: 'stats47',
       kind: 'cover-remediation',
+      scope,
       startedAt: new Date().toISOString(),
       articles: [],
     };
 if (journal.version !== manifest.version || journal.account !== 'stats47')
   throw Error('journal identity');
+// Retain recovery evidence even if an operator changed the selected batch.
+const previousJournals = fs.readdirSync(path.dirname(journalPath))
+  .filter((name) => /^note-cover-refresh-ledger-[a-f0-9]+\.json$/.test(name)
+    && path.join(path.dirname(journalPath), name) !== journalPath)
+  .map((name) => JSON.parse(fs.readFileSync(path.join(path.dirname(journalPath), name), 'utf8')));
 const writeJournal = () => {
   fs.mkdirSync(path.dirname(journalPath), { recursive: true });
   journal.updatedAt = new Date().toISOString();
@@ -122,7 +137,21 @@ const run = promisify(execFile),
     path.join(os.homedir(), '.browser-use-env/bin/browser-use');
 const session = `note-covers-${process.pid}-${Date.now()}`;
 const pause = (ms) => new Promise((r) => setTimeout(r, ms));
+const usePlaywright = process.platform === 'win32' || unattended();
+let playwrightContext, playwrightPage;
 async function browser(command, ...args) {
+  if (usePlaywright) {
+    playwrightContext ??= unattended() ? await measurementContext('note') : await launchContext();
+    playwrightPage ??= await playwrightContext.newPage();
+    if (command === 'open') {
+      await playwrightPage.goto(args[0], { waitUntil: 'domcontentloaded', timeout: 45000 });
+      await assertAccount(playwrightContext);
+      markMeasurementAuthenticated('note');
+      return {};
+    }
+    if (command === 'eval') return { result: await playwrightPage.evaluate(args[0]) };
+    throw Error('unsupported browser command');
+  }
   const { stdout } = await run(
     cli,
     [
@@ -197,6 +226,11 @@ function processes() {
     .map((m) => ({ pid: +m[1], ppid: +m[2], command: m[3] }));
 }
 async function cleanup() {
+  if (usePlaywright) {
+    await playwrightContext?.close();
+    if (playwrightContext && !unattended()) pruneProfileCaches();
+    return;
+  }
   const before = processes(),
     daemon = before.find(
       (p) =>
@@ -257,6 +291,10 @@ try {
   for (const a of articles) {
     if (completed >= opts.limit) break;
     active = journal.articles.find((x) => x.key === a.key);
+    if (!active) {
+      const prior = findCoverOperation(previousJournals, a);
+      if (prior) throw Error('earlier cover operation requires recovery with its recorded selection: ' + a.key);
+    }
     if (active?.status === 'verified') {
       if (active.sourceSha256 !== a.sha256)
         throw Error('review changed after upload');
@@ -346,7 +384,7 @@ try {
     });
     completed++;
     console.log(
-      `[note-covers] verified ${journal.articles.filter((x) => x.status === 'verified').length}/${manifest.articles.filter((x) => x.action !== 'keep').length}: ${a.key}`
+      `[note-covers] verified ${journal.articles.filter((x) => x.status === 'verified').length}/${scope.length}: ${a.key}`
     );
     await pause(350);
   }

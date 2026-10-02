@@ -25,6 +25,7 @@ export function updateCoverLedger(edit: (ledger: CoverLedger) => void | Promise<
 export function recordCoverObservation(ledger: CoverLedger, observation: { key: string; noteUrl: string; status: 'configured' | 'missing' | 'unknown'; url: string | null; observedAt: string }): void;
 export function addCoverRevision(row: CoverArticle, revision: CoverRevision, options?: { candidate?: boolean }): void;
 export function reviewCoverRevision(row: CoverArticle, id: string, status: 'pass' | 'needs-revision', reason: string, now?: string): void;
+export function adoptedCoverRevision(row: CoverArticle): CoverRevision | null;
 export function approvedCoverRevision(row: CoverArticle): CoverRevision | null;
 export function coverDisplayState(row: CoverArticle, now?: number): { candidate?: CoverRevision; approved?: CoverRevision; review: CoverRevision['review']['status'] | 'unavailable' | 'missing'; publication: 'published' | 'unpublished' | 'unapproved'; stale: boolean };
 export function applyCoverAudit(ledger: CoverLedger, report: unknown): void;

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-02T04:30:19.105Z",
+  "updatedAt": "2026-10-02T05:32:00.762Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -2167,9 +2167,9 @@
             "evidenceSha256": "8f74a686b27c0df5b2cb584c7e4eeb647f08834d7989c88455b2a9c12d0f230a"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.105Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -2204,7 +2204,7 @@
         }
       ],
       "candidateRevisionId": "ff284bb8eebea85feee7229520506c4bea980dbb794b2140008a8219cc85ffb1",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "ff284bb8eebea85feee7229520506c4bea980dbb794b2140008a8219cc85ffb1",
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312770047/rectangle_large_type_2_eaa8194e8992dc5aa637f4d55163c999.png?fit=bounds&quality=85&width=1280",
@@ -2264,9 +2264,9 @@
             "evidenceSha256": "c9344240c855604b12048a6245b36c38a8bc11c155b58a0bb1e2bef27195f0f0"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.111Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -2301,7 +2301,7 @@
         }
       ],
       "candidateRevisionId": "e8ecf1f93bce2e978d4a48ef3893de7250cb8faa0b58fc4e76bf50c662321650",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "e8ecf1f93bce2e978d4a48ef3893de7250cb8faa0b58fc4e76bf50c662321650",
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312770939/rectangle_large_type_2_a331a991bddbbb86b6078a829e9ecd39.png?fit=bounds&quality=85&width=1280",
@@ -2361,9 +2361,9 @@
             "evidenceSha256": "66b5da93a0b92284863eaa5addab2e0b7f606f49c7ddc0247fb7bc255dc6f52d"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.111Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -2398,7 +2398,7 @@
         }
       ],
       "candidateRevisionId": "b0aeb954aba1863f0651c12ee5cc1b9c30bc870457027b35a686cf60a2cb44a7",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "b0aeb954aba1863f0651c12ee5cc1b9c30bc870457027b35a686cf60a2cb44a7",
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312770953/rectangle_large_type_2_697858eb0c705c336e603df04776465d.png?fit=bounds&quality=85&width=1280",
@@ -2458,9 +2458,9 @@
             "evidenceSha256": "39b04535303c72b624dfb28d6ac45ad2a55feb04c5586c63f0a6dd451efb2219"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.111Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -2495,7 +2495,7 @@
         }
       ],
       "candidateRevisionId": "1d4404f06d5d94ad6eddccc5c1ff46e26e1679b37ed8551b79bb1cd6c49a9ce8",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "1d4404f06d5d94ad6eddccc5c1ff46e26e1679b37ed8551b79bb1cd6c49a9ce8",
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312770996/rectangle_large_type_2_dbf988ebe86b5b29220a50953ceb8695.png?fit=bounds&quality=85&width=1280",
@@ -2555,9 +2555,9 @@
             "evidenceSha256": "de18c2f95f19b71537a1aff239e014ebc2726ddf325d0531b7ff5b0afa092350"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.111Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -2592,7 +2592,7 @@
         }
       ],
       "candidateRevisionId": "c15c6fd53cdc4af8226b7316a25bf1d06b168b3b3293666b8a751a0ec2f3aa5b",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "c15c6fd53cdc4af8226b7316a25bf1d06b168b3b3293666b8a751a0ec2f3aa5b",
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312771112/rectangle_large_type_2_c9204acf0a89d60034588942e7c0856c.png?fit=bounds&quality=85&width=1280",
@@ -2652,9 +2652,9 @@
             "evidenceSha256": "7ccf042e0e269c940174f9887c828bf45145dae74e457bd6df2eafc8484d4b33"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.111Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -2689,7 +2689,7 @@
         }
       ],
       "candidateRevisionId": "bc22abdbe0705c8ad441dcf6983a18b8908fa0f57309f210760adbe79b8a3032",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "bc22abdbe0705c8ad441dcf6983a18b8908fa0f57309f210760adbe79b8a3032",
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312771140/rectangle_large_type_2_3d2c40ea54b58f91ceb8dca4a0d3398f.png?fit=bounds&quality=85&width=1280",
@@ -2749,9 +2749,9 @@
             "evidenceSha256": "23a51bd48c2179ed3e7af309c4fe50f9323a0046be5726af736e11901d674c35"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.111Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -2786,7 +2786,7 @@
         }
       ],
       "candidateRevisionId": "10774f512d02a6297bde61e899529d01146bc0a9a0f476c677440a3023672c47",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "10774f512d02a6297bde61e899529d01146bc0a9a0f476c677440a3023672c47",
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312771153/rectangle_large_type_2_47d22d3e41cce44b0bf368cebe175447.png?fit=bounds&quality=85&width=1280",
@@ -2846,9 +2846,9 @@
             "evidenceSha256": "150d9ffbc4a12076ca4698abd0860fc09bbdaff4ec17053dd3dc6f0ad20b1b10"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.111Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -2883,7 +2883,7 @@
         }
       ],
       "candidateRevisionId": "d386d281fc9226696fa3d10f65d532fdc2a0fdce146bb158d914c5da200f7e89",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "d386d281fc9226696fa3d10f65d532fdc2a0fdce146bb158d914c5da200f7e89",
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312771160/rectangle_large_type_2_c7c4b674635306031ec313c9e20dc904.png?fit=bounds&quality=85&width=1280",
@@ -2943,9 +2943,9 @@
             "evidenceSha256": "2d4dcf628c24c7eac40a921005da064508e1764f04a680f2e58c70aabf02e81e"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -2980,7 +2980,7 @@
         }
       ],
       "candidateRevisionId": "d2e7d3647d5f733286f16281ffe1b2007c2c5120eef81d998081f5c327b81c54",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "d2e7d3647d5f733286f16281ffe1b2007c2c5120eef81d998081f5c327b81c54",
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312771184/rectangle_large_type_2_2ca9c801988e033bc47822853b3cb9d1.png?fit=bounds&quality=85&width=1280",
@@ -3040,9 +3040,9 @@
             "evidenceSha256": "e864148167d3e0054d2d3ec95727c4ae8e14622377a2dd49c3fd0deaef9adad3"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -3077,7 +3077,7 @@
         }
       ],
       "candidateRevisionId": "0ea5c91a38d4f1ddbb32ecc26489e964217cc33de75bbf285bf379b3a25c78ba",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "0ea5c91a38d4f1ddbb32ecc26489e964217cc33de75bbf285bf379b3a25c78ba",
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312771205/rectangle_large_type_2_fd458b87e1293dc7702de715bbd36a78.png?fit=bounds&quality=85&width=1280",
@@ -3137,9 +3137,9 @@
             "evidenceSha256": "0317f336b0948f2b842abf7d234d4908aeca843a9c8d93f3d9b60cd30f8ed424"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -3174,7 +3174,7 @@
         }
       ],
       "candidateRevisionId": "71e9a41de13b14e33b230b67522b350a88a51f743f1883d512d674aa8aa3456c",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "71e9a41de13b14e33b230b67522b350a88a51f743f1883d512d674aa8aa3456c",
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312771217/rectangle_large_type_2_5d9a06cdc3f81390b91267b93b48b2a6.png?fit=bounds&quality=85&width=1280",
@@ -3234,9 +3234,9 @@
             "evidenceSha256": "d6f478138d4586f1d13fb0a0a6138cd71d558d840b1e01150b645d6bcf762247"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -3271,7 +3271,7 @@
         }
       ],
       "candidateRevisionId": "1aeb61464c0a97aa14a9cc42be1e70195ea40ebbe828c1c67cd87f98df004f04",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "1aeb61464c0a97aa14a9cc42be1e70195ea40ebbe828c1c67cd87f98df004f04",
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312768359/rectangle_large_type_2_69ad79e75e85c70cff43d2a6edc66a43.png?fit=bounds&quality=85&width=1280",
@@ -3331,9 +3331,9 @@
             "evidenceSha256": "7e9b525ade4530f26a2d9c8752b40fdfa76db5a745a43341b814efb01659af6b"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -3368,7 +3368,7 @@
         }
       ],
       "candidateRevisionId": "f5b9e70905d777e9655bbb5bbe4573dc7d9745a9d9c7cee4e18eaae45bdc4e1a",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "f5b9e70905d777e9655bbb5bbe4573dc7d9745a9d9c7cee4e18eaae45bdc4e1a",
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312771237/rectangle_large_type_2_1c52cac47a7b1859a2a1be84f78fbb1c.png?fit=bounds&quality=85&width=1280",
@@ -3428,9 +3428,9 @@
             "evidenceSha256": "83b34e51d9d13346bde97603a336d4c356406fe0d032da40f07cd95b9f7c9ea5"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -3465,7 +3465,7 @@
         }
       ],
       "candidateRevisionId": "a07e8765921137f972cf53ee25c142d169b270d6c4e364db2521a8f29a5dc902",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "a07e8765921137f972cf53ee25c142d169b270d6c4e364db2521a8f29a5dc902",
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312771253/rectangle_large_type_2_b218d10b8ed0e0286c0292248c86b2ce.png?fit=bounds&quality=85&width=1280",
@@ -3525,9 +3525,9 @@
             "evidenceSha256": "1c1b4a7685ad3ee19668ecc551e08d4ada4fa00218c39921cc6d906bbfb07979"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -3562,7 +3562,7 @@
         }
       ],
       "candidateRevisionId": "266a6ec25ee686aa39cb16f11bfb72f7d2357f87e4cfba55a569a0ea0a25dc7e",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "266a6ec25ee686aa39cb16f11bfb72f7d2357f87e4cfba55a569a0ea0a25dc7e",
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312771263/rectangle_large_type_2_3099ce313bf06bd2c3c9c1f89bcdce10.png?fit=bounds&quality=85&width=1280",
@@ -3622,9 +3622,9 @@
             "evidenceSha256": "4510bcf12c9dd415f57aab1e86fc043d8fb28ac4fc9bd382deba82fc15a2249e"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -3659,7 +3659,7 @@
         }
       ],
       "candidateRevisionId": "64414f034db38a66f7fe719475aac5996bc35942302aa1a2588ec65d68b033d1",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "64414f034db38a66f7fe719475aac5996bc35942302aa1a2588ec65d68b033d1",
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312771277/rectangle_large_type_2_d766df497369377af1209878f4dfca15.png?fit=bounds&quality=85&width=1280",
@@ -3719,9 +3719,9 @@
             "evidenceSha256": "4821a946f566ff167b3ea463a55af2a5f172b3a753b4132bd18ecb08b11ab37f"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -3756,7 +3756,7 @@
         }
       ],
       "candidateRevisionId": "dfbe2ed77ceaf26b9f6c5e9daeaf3864f8a2bd5718c057c4ea8bce4a3aca72e6",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "dfbe2ed77ceaf26b9f6c5e9daeaf3864f8a2bd5718c057c4ea8bce4a3aca72e6",
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312771285/rectangle_large_type_2_23e7b69f3c854b8bdf5d8cd5799d84b0.png?fit=bounds&quality=85&width=1280",
@@ -3816,9 +3816,9 @@
             "evidenceSha256": "11eca62e097a90edebc894d0958f1c41509a340a028377d5bb906237466f8058"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -3853,7 +3853,7 @@
         }
       ],
       "candidateRevisionId": "85fe7595c2b76805af7eab696d9ca39144b6f72be625c59d887d4008338b37b5",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "85fe7595c2b76805af7eab696d9ca39144b6f72be625c59d887d4008338b37b5",
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312771329/rectangle_large_type_2_c00900adf967246d213fcaf879ac1722.png?fit=bounds&quality=85&width=1280",
@@ -3913,9 +3913,9 @@
             "evidenceSha256": "c3b32267f73cc0776d223a49de2a347a8cfebea0621eda2a92107f79e9839af5"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -3950,7 +3950,7 @@
         }
       ],
       "candidateRevisionId": "0bdccc9d91c732ff15241edcf55b53363f96532f3b82aa520b854dc648da82e3",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "0bdccc9d91c732ff15241edcf55b53363f96532f3b82aa520b854dc648da82e3",
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312771353/rectangle_large_type_2_6d9c06074e17bd29e85106e22a173bcb.png?fit=bounds&quality=85&width=1280",
@@ -4010,9 +4010,9 @@
             "evidenceSha256": "a6ae292353b84b4d25198b0c88d6e56da32ed8db40e0a58d40c0edeb49a83366"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -4047,7 +4047,7 @@
         }
       ],
       "candidateRevisionId": "477e2da1d17c4782142f64b8bff897554ed0e7a688edb561690f9b54493edfc9",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "477e2da1d17c4782142f64b8bff897554ed0e7a688edb561690f9b54493edfc9",
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312771432/rectangle_large_type_2_f00e8c59055bebdd55cd6be352681040.png?fit=bounds&quality=85&width=1280",
@@ -4107,9 +4107,9 @@
             "evidenceSha256": "51700640945031ee13cb3b0cc606c6cac4602712b035218bdec1823cca30b335"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -4144,7 +4144,7 @@
         }
       ],
       "candidateRevisionId": "dbda393c968778ce0ae4fa2c4e95f03fd5884e1e312c1b8942f2eb4b087db4f9",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "dbda393c968778ce0ae4fa2c4e95f03fd5884e1e312c1b8942f2eb4b087db4f9",
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312771446/rectangle_large_type_2_260ccaf4dfa666d5308641dfab6ea8a6.png?fit=bounds&quality=85&width=1280",
@@ -4204,9 +4204,9 @@
             "evidenceSha256": "94b8246860a7b3b7d7fb539725ec3956e95d3212c195bd37df744c6a09779a5d"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -4241,7 +4241,7 @@
         }
       ],
       "candidateRevisionId": "dac7e7f60bb670d1c87d447f03eb3f708162687e0ab9d89de1777878371d0abd",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "dac7e7f60bb670d1c87d447f03eb3f708162687e0ab9d89de1777878371d0abd",
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312771465/rectangle_large_type_2_a740ff903b97b31062527d0156c67e31.png?fit=bounds&quality=85&width=1280",
@@ -4301,9 +4301,9 @@
             "evidenceSha256": "ce1a92b5195a452a23be153d2b27dd4963a6e44af8f0416a021c9bd9babe4cae"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -4338,7 +4338,7 @@
         }
       ],
       "candidateRevisionId": "f85c43ea579454caffbcda84ae121cc523ed4c963ad6ab9257879f600c3bcfb8",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "f85c43ea579454caffbcda84ae121cc523ed4c963ad6ab9257879f600c3bcfb8",
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312771474/rectangle_large_type_2_4fb00abe4a4d7c597ac4ed682b23aa8c.png?fit=bounds&quality=85&width=1280",
@@ -4398,9 +4398,9 @@
             "evidenceSha256": "32047c7a8d3c9cfa5fc39b0c4a1d32eef130ce36248fb54ce82587f272c1a12a"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -4435,7 +4435,7 @@
         }
       ],
       "candidateRevisionId": "d102d6273f25418d49dc215d1bb0b4152350b1b8cadaee0bb4962a311179e719",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "d102d6273f25418d49dc215d1bb0b4152350b1b8cadaee0bb4962a311179e719",
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312771512/rectangle_large_type_2_a78fab8683346ce0db5cb0c76bd3b685.png?fit=bounds&quality=85&width=1280",
@@ -4495,9 +4495,9 @@
             "evidenceSha256": "13505a67154ff49b083f99cff19ded0a8dd69f3c74cff6ba20c7b2aaa03a154a"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -4532,7 +4532,7 @@
         }
       ],
       "candidateRevisionId": "1645e9b9388e281269396fad619caec750ae269f1563d9b5ba279e32d003b366",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "1645e9b9388e281269396fad619caec750ae269f1563d9b5ba279e32d003b366",
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312771544/rectangle_large_type_2_e048bd1e482533c33d69c649ac650b97.png?fit=bounds&quality=85&width=1280",
@@ -4592,9 +4592,9 @@
             "evidenceSha256": "128258afe0bf356113e936f07700294771a94d64083bf303d1797c067b21ab60"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -4629,7 +4629,7 @@
         }
       ],
       "candidateRevisionId": "0d0c8341f30d3845810c6be537438a124a91a0074d6a8d4d9ab82a24db247c9d",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "0d0c8341f30d3845810c6be537438a124a91a0074d6a8d4d9ab82a24db247c9d",
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312771566/rectangle_large_type_2_fd5a722bca85e1b2371624416c4b5bec.png?fit=bounds&quality=85&width=1280",
@@ -4689,9 +4689,9 @@
             "evidenceSha256": "d86d08d70ac13eefe8e0c2aebd58a81a13d6720a16b75dbb996783d29189b562"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -4726,7 +4726,7 @@
         }
       ],
       "candidateRevisionId": "59783c1b77c29e000b0ff701cab4dec451d3f65787367af9e3054e67597bbed3",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "59783c1b77c29e000b0ff701cab4dec451d3f65787367af9e3054e67597bbed3",
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312771580/rectangle_large_type_2_b2a172a99305f6d67349917a3839782d.png?fit=bounds&quality=85&width=1280",
@@ -4786,9 +4786,9 @@
             "evidenceSha256": "ae5d534e1c7488868d4cc3f86dc6bc1dd6b0cd90ccbc217dd6fea9dccaeaea72"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -4823,7 +4823,7 @@
         }
       ],
       "candidateRevisionId": "34cc1cdc7046be61b1a0af52eb1cd35ec5e88d5c9d3a94284cd3fc9f2ec6e3a3",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "34cc1cdc7046be61b1a0af52eb1cd35ec5e88d5c9d3a94284cd3fc9f2ec6e3a3",
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312771600/rectangle_large_type_2_e066c55ba4966a904e61d1a9a282c0b2.png?fit=bounds&quality=85&width=1280",
@@ -4883,9 +4883,9 @@
             "evidenceSha256": "35862957122efc9ae02f65370a32ea5a4a2ec3131007cea045ef7d9b2db04dcb"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -4920,7 +4920,7 @@
         }
       ],
       "candidateRevisionId": "9b791e2d49ffdf6b1e40977a8e8467d4bb187e14ce6ae01ed977d225c925e2d9",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "9b791e2d49ffdf6b1e40977a8e8467d4bb187e14ce6ae01ed977d225c925e2d9",
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312771612/rectangle_large_type_2_722e658db1ead621a4f4db4dbbf2efc3.png?fit=bounds&quality=85&width=1280",
@@ -4980,9 +4980,9 @@
             "evidenceSha256": "51889b2908641104778dd57b6ba8e56bcffff5a3ee4d71b38ab495d66cfe8201"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -5017,7 +5017,7 @@
         }
       ],
       "candidateRevisionId": "6705e01f0f3c4a3aa5cdace6226abc5d21926cbbdfd9d003be5143cc876a5a80",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "6705e01f0f3c4a3aa5cdace6226abc5d21926cbbdfd9d003be5143cc876a5a80",
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312771624/rectangle_large_type_2_6421f0dd9e7b5b8eb6b29706ab041e54.png?fit=bounds&quality=85&width=1280",
@@ -5077,9 +5077,9 @@
             "evidenceSha256": "e58371129cca2b8e1f120de3bebfa97f2fb963da1960c12944d772630f7c4f00"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -5114,7 +5114,7 @@
         }
       ],
       "candidateRevisionId": "96202d0f22971e17a68c5c7aa28e646796dd9962e94a9cd77d74535a55095286",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "96202d0f22971e17a68c5c7aa28e646796dd9962e94a9cd77d74535a55095286",
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312771645/rectangle_large_type_2_e28a7f0936baa8edac0888f327500fc3.png?fit=bounds&quality=85&width=1280",
@@ -5174,9 +5174,9 @@
             "evidenceSha256": "3b3ed160186765226e3bdd0b27373fc28ffc94f7736332e18e13c60703625d0c"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -5211,7 +5211,7 @@
         }
       ],
       "candidateRevisionId": "62dbec3170b15f5c32627ba14252459a0da4bbb39ac14b692f2ce374d43eb650",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "62dbec3170b15f5c32627ba14252459a0da4bbb39ac14b692f2ce374d43eb650",
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312771656/rectangle_large_type_2_2e88db840f2bed08564276e4fd88ac6f.png?fit=bounds&quality=85&width=1280",
@@ -5271,9 +5271,9 @@
             "evidenceSha256": "36da1b1e8a1b2de98d084807c0056309485c5d696e60702514f0b302ad965b18"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -5308,7 +5308,7 @@
         }
       ],
       "candidateRevisionId": "e28d6f515e1653d9d42299571bd59fca4fcabb91379b57eaba04cdabaf93610b",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "e28d6f515e1653d9d42299571bd59fca4fcabb91379b57eaba04cdabaf93610b",
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312771668/rectangle_large_type_2_aaf009d2dd039bb8af6b46ee1e054622.png?fit=bounds&quality=85&width=1280",
@@ -5368,9 +5368,9 @@
             "evidenceSha256": "6e280dc74a848fbdc840c65a3f53abd0676d29ef6575dcd069c73386dc2be3c0"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -5405,7 +5405,7 @@
         }
       ],
       "candidateRevisionId": "5d2bd8f06605dec1758dbe9d367f11a1fc07c7168ff2320344954afcc41fcd9e",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "5d2bd8f06605dec1758dbe9d367f11a1fc07c7168ff2320344954afcc41fcd9e",
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312771678/rectangle_large_type_2_30358f64b03bfc366269671bb1223b90.png?fit=bounds&quality=85&width=1280",
@@ -5465,9 +5465,9 @@
             "evidenceSha256": "be14a92dd343e93a05e20843f82a70c84e67f928ad530483ce2ecfb1637a29f7"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -5502,7 +5502,7 @@
         }
       ],
       "candidateRevisionId": "360d115624d6f097cb01aed941babbcbe8aaaa27a16ce4f302c7334460519be7",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "360d115624d6f097cb01aed941babbcbe8aaaa27a16ce4f302c7334460519be7",
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312771699/rectangle_large_type_2_43a2be766f7b91285f2d6a34778438dd.png?fit=bounds&quality=85&width=1280",
@@ -5562,9 +5562,9 @@
             "evidenceSha256": "8c7b754fe71c72982920ca2bc05b246a3e93fb1b6b7c2b757f4b1c24be8f681b"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -5599,7 +5599,7 @@
         }
       ],
       "candidateRevisionId": "4026055612467ec46fa7e271ac7d6b2751770d2dcd48f5ce4f4b357c0164b091",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "4026055612467ec46fa7e271ac7d6b2751770d2dcd48f5ce4f4b357c0164b091",
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312771713/rectangle_large_type_2_0461bc5ba7bd4d6f2736d980d508fa3f.png?fit=bounds&quality=85&width=1280",
@@ -5659,9 +5659,9 @@
             "evidenceSha256": "c697a4135677db8efb6b30fe5f6358e23979de5036c404b8eeee48b92fd29c81"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -5696,7 +5696,7 @@
         }
       ],
       "candidateRevisionId": "f3a976f034d06844e878f660d1f660a9c3fcd1df7d15508c47d80be9db70f10e",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "f3a976f034d06844e878f660d1f660a9c3fcd1df7d15508c47d80be9db70f10e",
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312771726/rectangle_large_type_2_b2feeb2af6f68f17e9c0ad9a80d4331d.png?fit=bounds&quality=85&width=1280",
@@ -5756,9 +5756,9 @@
             "evidenceSha256": "fbd38555f8f9d3e4c49bbef8fe7f074ff9c0193ff411f7628c485e35ac63fefe"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -5793,7 +5793,7 @@
         }
       ],
       "candidateRevisionId": "733f9b55a2650a0ee041316b132237d0964faa56496a4b1c568c5d4bb96b883d",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "733f9b55a2650a0ee041316b132237d0964faa56496a4b1c568c5d4bb96b883d",
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312771739/rectangle_large_type_2_7d45899a786dfbaeffaa0abc71731328.png?fit=bounds&quality=85&width=1280",
@@ -5853,9 +5853,9 @@
             "evidenceSha256": "13866dcedcbd79cf12dfaddd503e3eeac528e8e69bdf587ef20bd23e6bd8c7dc"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -5890,7 +5890,7 @@
         }
       ],
       "candidateRevisionId": "6a3217e1325f8a79d1e47060884158a974cdbede7d09ddad2e37841bc3de6efa",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "6a3217e1325f8a79d1e47060884158a974cdbede7d09ddad2e37841bc3de6efa",
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312771774/rectangle_large_type_2_551f87848c267acd4c37098e7d1b7bfd.png?fit=bounds&quality=85&width=1280",
@@ -5950,9 +5950,9 @@
             "evidenceSha256": "c017d136ab5781bf9aeabb7269709ef811c2d7393db4da594cb0bb93a586b2e4"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -5987,7 +5987,7 @@
         }
       ],
       "candidateRevisionId": "90816a019161005b71339e1f80439b443d2ad37d33bc113640e4784b209e2aa3",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "90816a019161005b71339e1f80439b443d2ad37d33bc113640e4784b209e2aa3",
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312771883/rectangle_large_type_2_66607b56a57dcb850e19d8bb5fed1c9f.png?fit=bounds&quality=85&width=1280",
@@ -6047,9 +6047,9 @@
             "evidenceSha256": "90f47c0461623e08edc84b8ea7aefbaf4ea824e87ad5d8b4c8d687108cfd4bd5"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -6084,7 +6084,7 @@
         }
       ],
       "candidateRevisionId": "2a1090be1a739d46d86caf0ea0bf6805a779d5debf8c95822d60bb4a88b2b195",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "2a1090be1a739d46d86caf0ea0bf6805a779d5debf8c95822d60bb4a88b2b195",
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312771892/rectangle_large_type_2_05d638ab2b9f05767bacf847c4f6d2fc.png?fit=bounds&quality=85&width=1280",
@@ -6144,9 +6144,9 @@
             "evidenceSha256": "fc997e08209523aeb1e612449113b65cbdabf3b763a530c2bf8f552a61027d31"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -6181,7 +6181,7 @@
         }
       ],
       "candidateRevisionId": "d6370a3caadb6ab15e1ee0d14dd81579a130509aa085dc4176bc745a8172a6b1",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "d6370a3caadb6ab15e1ee0d14dd81579a130509aa085dc4176bc745a8172a6b1",
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312771907/rectangle_large_type_2_7a8cecc4e8e941d2241d797b5a3c962b.png?fit=bounds&quality=85&width=1280",
@@ -6241,9 +6241,9 @@
             "evidenceSha256": "2463cd72ea3de1d3af6856107e9e4943fe2584469944591e06ba17f21a20a1e9"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -6278,7 +6278,7 @@
         }
       ],
       "candidateRevisionId": "246aecc9881fb9dcd120bcb0f074d74fd4b0643a062b3bfcf05d76548ec68872",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "246aecc9881fb9dcd120bcb0f074d74fd4b0643a062b3bfcf05d76548ec68872",
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312771923/rectangle_large_type_2_d8b4b65b71c3eff8e6902a3676fb5194.png?fit=bounds&quality=85&width=1280",
@@ -6338,9 +6338,9 @@
             "evidenceSha256": "978b38e52a8715a914ee06f82709c9fdd125b9a50b7c8443f5c2a41c7ad64062"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -6375,7 +6375,7 @@
         }
       ],
       "candidateRevisionId": "7910276bd18fa9d15552a9884038b931ba88556e5c8b75d582663eb47d8b9e8f",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "7910276bd18fa9d15552a9884038b931ba88556e5c8b75d582663eb47d8b9e8f",
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312771935/rectangle_large_type_2_e6b86878ebb40dff5d461f46c5ec4e5e.png?fit=bounds&quality=85&width=1280",
@@ -6435,9 +6435,9 @@
             "evidenceSha256": "2d051e40901b6fb9be596cd64a0753a047224172903427d0eaff78a3ce27f5d8"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -6472,7 +6472,7 @@
         }
       ],
       "candidateRevisionId": "d75ae0cbd6ac558272fa0c9069eb5965d40d2d58b44f988818230edf158ba9d8",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "d75ae0cbd6ac558272fa0c9069eb5965d40d2d58b44f988818230edf158ba9d8",
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312771954/rectangle_large_type_2_53eab77acc016568751a144b64c5387f.png?fit=bounds&quality=85&width=1280",
@@ -6532,9 +6532,9 @@
             "evidenceSha256": "fac25c42210b876cd9905510246844195920566ff7ffdf0c11291db3185ce280"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -6569,7 +6569,7 @@
         }
       ],
       "candidateRevisionId": "60a0ae2ac00930b2735a5a62c4c06970161c2ec3045d12b57c7b2384777862e5",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "60a0ae2ac00930b2735a5a62c4c06970161c2ec3045d12b57c7b2384777862e5",
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312771968/rectangle_large_type_2_f7ce414d0e7f644fa39b6cc92123d416.png?fit=bounds&quality=85&width=1280",
@@ -6629,9 +6629,9 @@
             "evidenceSha256": "b157133d7fde15ebb145cf93d25fb4ff60138935345e48c2727b4b6406c6f591"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -6666,7 +6666,7 @@
         }
       ],
       "candidateRevisionId": "ea7ba38023ab48e6b41e02a61d6d8f35d585567fd8428b9969c191c7d31ae56c",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "ea7ba38023ab48e6b41e02a61d6d8f35d585567fd8428b9969c191c7d31ae56c",
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312771997/rectangle_large_type_2_58ba1cd435399339671b316a7d773657.png?fit=bounds&quality=85&width=1280",

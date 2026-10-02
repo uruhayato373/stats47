@@ -7,7 +7,35 @@ import {
   assertProduction,
   sha256,
   uploadInBrowser,
+  coverOperationVersion,
+  findCoverOperation,
 } from '../lib/cover-update.mjs';
+import fs from 'node:fs';
+
+test('batch identity keeps already delivered revisions when resuming a partial publication', () => {
+  const scope = [{ key: 'a-kakei-aichi', sha256: 'first' }, { key: 'a-kakei-akita', sha256: 'second' }];
+  assert.equal(coverOperationVersion(scope), coverOperationVersion([...scope].reverse()));
+  assert.notEqual(coverOperationVersion(scope), coverOperationVersion(scope.slice(1)));
+  assert.notEqual(coverOperationVersion(scope), coverOperationVersion([{ ...scope[0], sha256: 'replaced' }, scope[1]]));
+});
+test('changing the selected batch cannot hide an uncertain cover upload', () => {
+  const article = { key: 'a-kakei-aichi', sha256: 'reviewed' };
+  const operation = { key: article.key, sourceSha256: article.sha256, status: 'uploading' };
+  const journal = { account: 'stats47', articles: [operation] };
+  assert.equal(findCoverOperation([journal], article), operation);
+  assert.equal(findCoverOperation([journal], { ...article, sha256: 'different' }), null);
+  assert.throws(() => findCoverOperation([{ ...journal, account: 'dobokunote' }], article), /account/);
+  assert.throws(() => findCoverOperation([journal, journal], article), /multiple/);
+});
+test('Windows uses the dedicated authenticated browser and closes it without a POSIX daemon lookup', () => {
+  const source = fs.readFileSync(new URL('../update-note-covers.mjs', import.meta.url), 'utf8');
+  assert.match(source, /process\.platform === 'win32' \|\| unattended\(\)/);
+  assert.match(source, /await assertAccount\(playwrightContext\)/);
+  const cleanup = source.slice(source.indexOf('async function cleanup()'));
+  assert.ok(cleanup.indexOf('await playwrightContext?.close()') < cleanup.indexOf('const before = processes()'));
+  assert.match(cleanup, /pruneProfileCaches\(\);\s*return;/);
+  assert.match(source, /const prior = findCoverOperation\(previousJournals, a\)/);
+});
 
 const note = {
   id: 123,

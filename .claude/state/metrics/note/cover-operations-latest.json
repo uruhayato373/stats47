@@ -19,7 +19,9 @@
     "formerR2Images": 47,
     "remoteRevisions": 380,
     "remoteReadBackVerified": 380,
-    "pendingReviews": 47
+    "pendingReviews": 0,
+    "approvedHousehold": 47,
+    "publishedHousehold": 0
   },
   "validation": {
     "assetTests": {
@@ -592,5 +594,33 @@
       "Full 286-article Node audit stopped after GET returned HTTP503; household-only GETs via PowerShell succeeded 47/47.",
       "R2 sample does not establish which job performed the upload."
     ]
+  },
+  "updatedAt": "2026-10-02T05:34:09.498Z",
+  "householdRollout": {
+    "version": "2026-10-02-household-r1",
+    "status": "awaiting-note-authentication",
+    "authorizedScope": "Replace 47 household note covers and update management view",
+    "reviewed": 47,
+    "adopted": 47,
+    "dryRun": {
+      "status": "pass",
+      "checked": 47
+    },
+    "published": 0,
+    "account": "stats47",
+    "authentication": {
+      "status": "human_required",
+      "automaticLoginAttempts": 1,
+      "humanLogin": "timed-out",
+      "profile": ".local/playwright-note-profile"
+    },
+    "validation": {
+      "assetTests": 17,
+      "publicationTests": 9,
+      "typeCheck": "25 packages and 8 script projects passed",
+      "docsCheck": "0 errors; 12 existing warnings",
+      "admin": "47 reviewed and unpublished; candidates retrieved from private R2"
+    },
+    "next": "Authenticate stats47 with login-note-profile.mjs, then resume the same 47 household keys; --limit 1 pilot, full remaining batch, verify public covers and fingerprints"
   }
 }
