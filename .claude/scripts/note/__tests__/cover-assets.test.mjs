@@ -5,7 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { validateCoverLedger, emptyCoverArticle, coverSha, coverAssetKey, addCoverRevision, reviewCoverRevision,
   recordCoverObservation, applyCoverAudit, coverDisplayState, updateCoverLedger, readCoverLedger, approvedCoverRevision } from '../lib/cover-assets.mjs';
-import { storeCoverBytes, readStoredCover, fetchCoverSource } from '../lib/cover-storage.mjs';
+import { storeCoverBytes, readStoredCover, fetchCoverSource, wranglerTokenProvider } from '../lib/cover-storage.mjs';
 import { buildTab } from '../../lib/gallery-collectors.mjs';
 import { COVER_ROOT, assertCoverGenerationType } from '../lib/cover-assets.mjs';
 
@@ -94,6 +94,35 @@ test('remote store is immutable, read-back checked and tamper detected', async (
 test('failed remote verification never reports a registered asset', async () => {
   await assert.rejects(storeCoverBytes('a-kakei-aichi', Buffer.from('bytes'), { get: async () => null, put: async () => {} }), /verification failed/);
   await assert.rejects(fetchCoverSource('https://example.com/private'), /host not allowed/);
+});
+
+test('expired remote sessions renew once for concurrent image reads and reload rotated tokens', async () => {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'cover-auth-test-'));
+  const config = path.join(directory, 'config.toml'); let renewals = 0;
+  try {
+    fs.writeFileSync(config, 'oauth_token = "old-test-token"\nexpiration_time = "2000-01-01T00:00:00Z"\n');
+    const renew = async () => {
+      renewals++;
+      await new Promise(resolve => setTimeout(resolve, 20));
+      fs.writeFileSync(config, 'oauth_token = "new-test-token"\nexpiration_time = "2100-01-01T00:00:00Z"\n');
+    };
+    const readers = Array.from({ length: 12 }, () => wranglerTokenProvider(config, renew));
+    assert.deepEqual(await Promise.all(readers.map(read => read())), Array(12).fill('new-test-token'));
+    assert.equal(renewals, 1); assert.equal(await readers[0](), 'new-test-token');
+    fs.writeFileSync(config, 'api_token = "rotated-test-token"\n');
+    assert.equal(await readers[0](), 'rotated-test-token'); assert.equal(renewals, 1);
+  } finally { fs.rmSync(directory, { recursive: true, force: true }); }
+});
+
+test('failed session renewal stops reads and does not expose credential errors', async () => {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'cover-auth-test-'));
+  const config = path.join(directory, 'config.toml');
+  try {
+    fs.writeFileSync(config, 'oauth_token = "expired-test-token"\nexpiration_time = "2000-01-01T00:00:00Z"\n');
+    const read = wranglerTokenProvider(config, async () => { throw Error('sensitive test credential'); });
+    await assert.rejects(read(), error => /renewal failed/.test(error.message) && !error.message.includes('sensitive'));
+    await assert.rejects(wranglerTokenProvider(config, async () => {})(), /expired/);
+  } finally { fs.rmSync(directory, { recursive: true, force: true }); }
 });
 test('ledger update is atomic and exclusive; validation failure leaves prior data intact', async () => {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'cover-ledger-test-'));

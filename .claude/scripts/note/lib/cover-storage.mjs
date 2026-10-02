@@ -4,13 +4,60 @@ import os from 'node:os';
 import path from 'node:path';
 import https from 'node:https';
 import { rootCertificates } from 'node:tls';
-import { execFileSync } from 'node:child_process';
+import { execFile, execFileSync } from 'node:child_process';
+import { promisify } from 'node:util';
 import { HttpsProxyAgent } from 'https-proxy-agent';
 import { S3Client, GetObjectCommand, PutObjectCommand } from '@aws-sdk/client-s3';
-import { coverSha, coverAssetKey } from './cover-assets.mjs';
+import { COVER_ROOT, coverSha, coverAssetKey } from './cover-assets.mjs';
 
 const BUCKET = 'stats47-private';
 const LIMIT = 16 * 1024 * 1024;
+const pendingRefreshes = new Map();
+const runFile = promisify(execFile);
+
+async function renewWranglerSession() {
+  const authorities = windowsTrustedAuthorities();
+  const directory = authorities ? fs.mkdtempSync(path.join(os.tmpdir(), 'stats47-note-r2-ca-')) : null;
+  try {
+    const env = { ...process.env, CI: 'true', NODE_TLS_REJECT_UNAUTHORIZED: '1' };
+    if (directory) {
+      const certificates = path.join(directory, 'roots.pem');
+      fs.writeFileSync(certificates, authorities.join('\n'));
+      env.NODE_EXTRA_CA_CERTS = certificates;
+    }
+    await runFile(process.execPath, [path.join(COVER_ROOT, 'node_modules/wrangler/bin/wrangler.js'), 'whoami'], {
+      env, cwd: COVER_ROOT, timeout: 30000, maxBuffer: 1e6, windowsHide: true,
+    });
+  } catch { throw Error('private R2 session renewal failed; run wrangler login'); }
+  finally { if (directory) fs.rmSync(directory, { recursive: true, force: true }); }
+}
+
+/** Renew only the existing session, non-interactively. Concurrent image reads share one renewal. */
+export function wranglerTokenProvider(config, renew = renewWranglerSession) {
+  function credential() {
+    const auth = fs.readFileSync(config, 'utf8');
+    const token = /^(?:oauth_token|api_token)\s*=\s*"([^"]+)"/m.exec(auth)?.[1];
+    if (!token) throw Error('private R2 authentication unavailable');
+    const oauth = /^oauth_token\s*=/m.test(auth);
+    const expires = Date.parse(/^expiration_time\s*=\s*"([^"]+)"/m.exec(auth)?.[1] ?? '');
+    return { token, expired: oauth && (!Number.isFinite(expires) || expires <= Date.now() + 30000) };
+  }
+  return async function token() {
+    const current = credential();
+    if (current.expired) {
+      let pending = pendingRefreshes.get(config);
+      if (!pending) {
+        pending = Promise.resolve().then(renew).finally(() => pendingRefreshes.delete(config));
+        pendingRefreshes.set(config, pending);
+      }
+      try { await pending; } catch { throw Error('private R2 session renewal failed; run wrangler login'); }
+      const refreshed = credential();
+      if (refreshed.expired) throw Error('private R2 session expired; run wrangler login');
+      return refreshed.token;
+    }
+    return current.token;
+  };
+}
 let trustedAuthorities;
 function windowsTrustedAuthorities() {
   if (process.platform !== 'win32') return undefined;
@@ -94,14 +141,12 @@ export function createCoverStore() {
   const config = path.join(process.platform === 'win32' ? path.join(process.env.APPDATA ?? '', 'xdg.config')
     : process.env.XDG_CONFIG_HOME ?? path.join(os.homedir(), '.config'), '.wrangler/config/default.toml');
   if (!fs.existsSync(config)) throw Error('private R2 authentication unavailable (S3 or wrangler login required)');
-  const auth = fs.readFileSync(config, 'utf8');
-  const token = /^(?:oauth_token|api_token)\s*=\s*"([^"]+)"/m.exec(auth)?.[1];
-  if (!token) throw Error('private R2 authentication unavailable');
+  const token = wranglerTokenProvider(config);
   // Authorization is confined to the Cloudflare API; never persisted in the ledger or returned to the UI.
   let account = process.env.CLOUDFLARE_ACCOUNT_ID;
   async function api(resource, options = {}) {
     return request(`https://api.cloudflare.com/client/v4${resource}`, {
-      ...options, headers: { ...options.headers, authorization: `Bearer ${token}` },
+      ...options, headers: { ...options.headers, authorization: `Bearer ${await token()}` },
     });
   }
   async function objectPath(key) {

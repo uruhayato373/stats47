@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "account": "stats47",
   "status": "implemented",
-  "completedAt": "2026-10-02T04:01:36.058Z",
+  "completedAt": "2026-10-02T04:37:40.593Z",
   "scope": "note cover ledger, private remote storage, generation/review/publication lifecycle and admin views",
   "ledger": "data/note/cover-assets.json",
   "schema": "data/note/cover-assets.schema.json",
@@ -23,7 +23,7 @@
   },
   "validation": {
     "assetTests": {
-      "passed": 15,
+      "passed": 17,
       "failed": 0
     },
     "publicationTests": {
@@ -67,7 +67,49 @@
       "passed": 21,
       "failed": 0
     },
-    "security": "staged hardcoded credential scan and pre-commit secret guard passed; dependency audit emitted an advisory and is not claimed clean"
+    "security": "staged credential scan and secret guard passed; latest integrated dependency audit found 0 vulnerabilities",
+    "dependencyAudit": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    },
+    "integration": {
+      "base": "c481064c2",
+      "typeCheck": "25 packages and 8 script projects passed",
+      "adminFocusedTests": {
+        "passed": 11,
+        "failed": 0
+      },
+      "adminLint": "passed",
+      "browserPrivateImages": 3,
+      "oauthExpiryRecovery": "passed live; concurrent refresh and failure fixtures passed",
+      "adminBuild": "passed after OAuth renewal fix"
+    },
+    "preflightPr": {
+      "passed": 41,
+      "failed": 4,
+      "failures": [
+        {
+          "gate": "Sitemap / Tag Keys",
+          "reason": "unmodified public blog snapshot fetch returned HTTP 503"
+        },
+        {
+          "gate": "money-unit-audit",
+          "reason": "pre-existing Windows npm spawn failure; WIN-PREFLIGHT-NPM-SPAWN-01"
+        },
+        {
+          "gate": "quality-warning-ratchet",
+          "reason": "pre-existing Windows spawnSync npm ENOENT; WIN-PREFLIGHT-NPM-SPAWN-01"
+        },
+        {
+          "gate": "japan-zue-evidence-inventory",
+          "reason": "pre-existing Windows spawnSync npm ENOENT; WIN-PREFLIGHT-NPM-SPAWN-01"
+        }
+      ]
+    }
   },
   "limitations": [
     "2026-09-28-v4 candidates could not be recovered; do not treat new household candidates as the recovered version.",

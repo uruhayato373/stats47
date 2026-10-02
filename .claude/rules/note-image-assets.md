@@ -42,6 +42,8 @@ paths:
   `verify-cover-refresh.mjs [--keys ...]` も台帳起点で検査する。管理画面はGET専用のまま。
 - `/content/note/covers` と `/assets` は同じ台帳を読む。非公開画像はlocalhostのGET proxyでSHAを照合して表示し、
   ローカル画像キャッシュを永続化しない。取得失敗・旧版未回収・未判定・未反映・観測の鮮度を表示する。
+- Wrangler OAuthの期限切れは、既存sessionを非対話で更新し、同時画像取得は1回の更新を共有する。
+  更新後の認証を読み直し、子プロセスもTLSを検証する。失効などで更新不能なら接続案内を表示して停止する。
 - 週次監査は完全取得した観測だけを台帳へ反映し、developへ限定commitする。失敗・不明で直前の画像を消さない。
 - 汎用 `generate-ogp-images.ts --type note-covers` は書込開始前に停止する。既存のSVG/Remotion等は制作入力用の旧rendererであり、
   保存・採用・公開の正典ではない。本文チャートの再生成契約は以下に残す。
