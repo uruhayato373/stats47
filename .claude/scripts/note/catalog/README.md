@@ -11,7 +11,8 @@ note コーパス全体 (公開済み + ドラフト) の **editorial メタの�
 
 | データ | SSOT | 派生 (手編集しない) |
 |---|---|---|
-| 記事本文・画像 | R2 `note/<vertical>/<slug>/` | — |
+| 記事本文・本文画像 | R2 `note/<vertical>/<slug>/` | — |
+| カバー画像・候補/採用/公開の対応 | private R2 + `data/note/cover-assets.json` (JSON Schema付き) | 管理画面・画像一覧 |
 | editorial メタ (vertical/series/**magazine**/isPaid/priceJpy/status/noteUrl/publishedAt/r2Path/**r2Body**/**stats47Targets**) | **`catalog/data/<vertical>.ts`** | — |
 | マガジン定義 (名称/有料無料/束ねる vertical/URL/商品導線) | **`catalog/magazines.ts`** | 商品導線は記事別 clean path に変換し、サイト到着時だけGA4標準UTMへ転送 |
 | 公開済みインデックス | (派生) | `.claude/state/note-published-urls.json` ← `generate-note-catalog.ts` |
@@ -50,20 +51,20 @@ v3記事詳細APIで確認し、一覧サムネイルに代用された本文画
 期間内に一覧行がない記事は指標nullで残し、全体をincompleteとする。旧viewsへ変換しない。
 収集契約・期間指定は[fetch-note-metrics](../../../skills/analytics/fetch-note-metrics/SKILL.md)を参照する。
 
-### 公開カバーの制作と差し替え
+## カバー制作・画像専用更新の実装
 
 `cover-designs.ts`が既存維持リスト・短い見出し・補足の編集判断を持つ。画像は派生物。
 `../generate-cover-refresh.ts`は共有`note-cover-render.ts`のeditorial rendererを使い、
 既存GISの県輪郭/日本地図を配置する。家計調査は2024年の47都市観測値から単純平均と増減率を再計算し、
 記事のchart-dataと一致する場合だけ描く。県名と調査対象都市名を併記する。
 
-改修versionごとの`.local/note-cover-refresh/<日付>/`に公開前の`before/`、`inventory.json`、
-検算入力`sources/`、制作物`after/`、`production-manifest.json`を保持する。
-manifestは記事ID・旧画像hash・新画像hash・コピー・データ根拠・1280×670・文字境界・重なり・目視判定を持つ。
+一時領域の`before/`、`inventory.json`、検算入力`sources/`、制作物`after/`、`production-manifest.json`は
+生成時の入力と検査結果であり、正本として保持しない。remote保管・読み戻しSHA検証後に削除する。
+共通画像台帳には記事ID・画像SHA・版・1280×670・文字境界/重なりの根拠・目視判定を保存する。
 Satoriは文字をpath化するため、SVGの`text`要素検索だけで合格させず、`onNodeDetected`の実レイアウトで検査する。
 再生成すると目視判定はpendingへ戻る。PNGを手修正してもhashが変わり反映ゲートで止まる。
 
-`../update-note-covers.mjs --manifest <path>`はローカル検査のみ。`--commit`で実際に変更し、
+`../update-note-covers.mjs`は採用済みremote版と現在の公開画像を検査する。`--commit`で実際に変更し、
 `--keys`/`--limit`で範囲を絞れる。stats47アカウント・git TSの記事URL・公開前の内容を照合した後、
 実際のエディタで観測した`POST /api/v1/image_upload/note_eyecatch`へ画像だけを送る。
 `note_id`はv3詳細の数値`id`であり、`n...`形式のkeyではない。FormDataはnote_id/file/width/heightの4項目、
@@ -71,8 +72,10 @@ Satoriは文字をpath化するため、SVGの`text`要素検索だけで合格�
 
 履歴は`.claude/state/metrics/note-cover-refresh-<version>.json`。本文自体を保存せず、前後の保全項目hash・
 旧新URL・制作画像SHA・変更時刻・配信検証結果を記録する。確定済みは再送しない。応答不明は停止して照合する。
-仕上げに`../verify-cover-refresh.mjs --manifest <path>`で全件カバー監査と前後照合を実行する。
+仕上げに`../verify-cover-refresh.mjs [--keys <key>]`で共通画像台帳からカバー監査と前後照合を実行する。
 改修は`cover-remediation`として記録し、KPI改善の実験成功とは区別する。
+
+### マガジンの登録と割り当て
 
 1. `magazines.ts` にマガジンを定義 (無料キュレーション or 有料メンバーシップ)。
 2. 束ねたい記事の `data/<vertical>.ts` の `magazine` を該当キーに設定する。
@@ -94,7 +97,29 @@ Satoriは文字をpath化するため、SVGの`text`要素検索だけで合格�
 - **warn**: title 重複の疑い (実質重複記事の surface) / 有料マガジンに無料記事 / isPaid だが priceJpy 未設定 /
   stats47Targets が KNOWN_RANKING_KEYS に不在
 
-## 禁止事項
+## 公開カバーの制作と差し替え
+
+画像の正本は非公開R2、台帳は `data/note/cover-assets.json`、形の契約は同ディレクトリのJSON Schema。
+公開済み記事もドラフトも記事keyで結び、タイトルや分類はTSカタログから読む。
+管理画面の `/content/note/covers` と `/assets` は共通台帳を読む。特定PCのPNGや絶対パスに依存しない。
+
+1. 新規catalog登録後は `npm run note:assets -- seed`。現在の公開画像は `archive --keys <key>` で保全する。
+2. `prepare --keys <key1,key2> --output /tmp/<task>` で一時入力を取得する。draftはdocs/31の原稿を使う。
+3. `node --import tsx .claude/scripts/note/generate-cover-refresh.ts --output /tmp/<task> --version <版>`。
+   文字境界/重なり/数値を検算し、private R2へ保存・読み戻しSHAを確認する。成功後は一時入力を削除する。
+4. 管理画面で320px相当の縮小表示を確認後、`npm run note:assets -- review --keys <key> --revision <sha> --status pass --reason <理由>`。
+   要修正なら `--status needs-revision`。新しい候補に旧版の承認を引き継がない。
+5. 既存記事は `node .claude/scripts/note/update-note-covers.mjs --keys <key>` でdry-runする。
+   明示された差し替え時だけ `--commit` を付け、画像専用POSTと本文/価格/有料境界の保全・配信確認後に公開ポインタを更新する。
+   Windowsは`note-session.mjs`の専用Playwright profileで投稿先を照合し、未ログイン時は`login-note-profile.mjs`で人がログインする。
+   再開は同じ`--keys`を指定する。採用版からjournalを識別し、完了行は送信せず、応答不明のPOSTは検査するまで再送しない。
+6. `node .claude/scripts/note/verify-cover-refresh.mjs --keys <key>` と `npm run note:assets:validate` で整合を確認する。
+
+旧manifestは `note:assets import --manifest <path>`、旧public R2は `archive-r2 --keys <key>` で移行できる。
+旧manifestの絶対パスは入力にだけ使用し、旧レビューは自動採用せず未判定で登録する。未回収の版は `missingVersions` に残す。
+認証は既存S3環境変数または `wrangler login` のセッション。署名URLや認証情報を台帳に保存しない。
+
+## カタログの禁止事項
 
 | NG | OK |
 |---|---|

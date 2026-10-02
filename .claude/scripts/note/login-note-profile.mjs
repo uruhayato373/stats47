@@ -13,6 +13,7 @@ import { chromium } from "playwright";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { mkdirSync, writeFileSync } from "node:fs";
+import { currentUrlname } from './lib/note-session.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 const PROFILE = join(ROOT, ".local/playwright-note-profile");
@@ -34,18 +35,6 @@ async function launch() {
     return await chromium.launchPersistentContext(PROFILE, { ...opts, channel: "chrome" });
   } catch {
     return await chromium.launchPersistentContext(PROFILE, opts);
-  }
-}
-
-async function currentUrlname(ctx) {
-  try {
-    const r = await ctx.request.get("https://note.com/api/v2/current_user", {
-      headers: { "User-Agent": UA },
-    });
-    const d = (await r.json())?.data;
-    return d && typeof d === "object" ? d.urlname ?? null : null;
-  } catch {
-    return null;
   }
 }
 

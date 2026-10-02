@@ -1,22 +1,19 @@
 {
-  "generatedAt": "2026-10-01T01:20:11.880Z",
+  "generatedAt": "2026-10-02T01:44:19.107Z",
   "gscSnapshot": "2026-W39",
   "scopeKind": "all",
   "scope": "R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)",
   "doneCriteria": "R2 の ai-content が auditRow を通る (blocker 0)",
   "summary": {
     "total": 2423,
-    "done": 2165,
-    "needsRegen": 246,
+    "done": 2166,
+    "needsRegen": 257,
     "needsByReason": {
-      "missing": 244,
-      "incomplete": 1,
-      "fetch-error:TypeError: fetch failed": 1
+      "missing": 256,
+      "incomplete": 1
     },
-    "notEligible": 12,
-    "notEligibleByCode": {
-      "no-values": 12
-    },
+    "notEligible": 0,
+    "notEligibleByCode": {},
     "doneButUnhealthy": 0,
     "doneImpressions": 104657,
     "needsImpressions": 2667,
@@ -19229,28 +19226,20 @@
       "impressions": 0,
       "clicks": 0,
       "position": 0,
-      "status": "not-eligible",
-      "reason": "data:no-values",
+      "status": "needs-regen",
+      "reason": "missing",
       "blockers": [],
-      "dataBlockers": [
-        "no-values"
-      ],
-      "dataReason": "values.json が R2 に無い",
-      "dataYear": null
+      "reviewTier": "gemini-auto"
     },
     {
       "rankingKey": "auto-insurance-penetration-bodily-injury-fixed",
       "impressions": 0,
       "clicks": 0,
       "position": 0,
-      "status": "not-eligible",
-      "reason": "data:no-values",
+      "status": "needs-regen",
+      "reason": "missing",
       "blockers": [],
-      "dataBlockers": [
-        "no-values"
-      ],
-      "dataReason": "values.json が R2 に無い",
-      "dataYear": null
+      "reviewTier": "gemini-auto"
     },
     {
       "rankingKey": "auto-liability-insurance-amount-received-per-payment",
@@ -20009,14 +19998,10 @@
       "impressions": 0,
       "clicks": 0,
       "position": 0,
-      "status": "not-eligible",
-      "reason": "data:no-values",
+      "status": "needs-regen",
+      "reason": "missing",
       "blockers": [],
-      "dataBlockers": [
-        "no-values"
-      ],
-      "dataReason": "values.json が R2 に無い",
-      "dataYear": null
+      "reviewTier": "gemini-auto"
     },
     {
       "rankingKey": "child-consultation-center-cases-per-1000",
@@ -20754,14 +20739,10 @@
       "impressions": 0,
       "clicks": 0,
       "position": 0,
-      "status": "not-eligible",
-      "reason": "data:no-values",
+      "status": "needs-regen",
+      "reason": "missing",
       "blockers": [],
-      "dataBlockers": [
-        "no-values"
-      ],
-      "dataReason": "values.json が R2 に無い",
-      "dataYear": null
+      "reviewTier": "gemini-auto"
     },
     {
       "rankingKey": "criminal-arrest-rate",
@@ -20998,14 +20979,10 @@
       "impressions": 0,
       "clicks": 0,
       "position": 0,
-      "status": "not-eligible",
-      "reason": "data:no-values",
+      "status": "needs-regen",
+      "reason": "missing",
       "blockers": [],
-      "dataBlockers": [
-        "no-values"
-      ],
-      "dataReason": "values.json が R2 に無い",
-      "dataYear": null
+      "reviewTier": "gemini-auto"
     },
     {
       "rankingKey": "deaths-cerebrovascular-disease-per-100k",
@@ -22303,28 +22280,20 @@
       "impressions": 0,
       "clicks": 0,
       "position": 0,
-      "status": "not-eligible",
-      "reason": "data:no-values",
+      "status": "needs-regen",
+      "reason": "missing",
       "blockers": [],
-      "dataBlockers": [
-        "no-values"
-      ],
-      "dataReason": "values.json が R2 に無い",
-      "dataYear": null
+      "reviewTier": "gemini-auto"
     },
     {
       "rankingKey": "fire-damage-amount",
       "impressions": 0,
       "clicks": 0,
       "position": 0,
-      "status": "not-eligible",
-      "reason": "data:no-values",
+      "status": "needs-regen",
+      "reason": "missing",
       "blockers": [],
-      "dataBlockers": [
-        "no-values"
-      ],
-      "dataReason": "values.json が R2 に無い",
-      "dataYear": null
+      "reviewTier": "gemini-auto"
     },
     {
       "rankingKey": "fire-damage-casualties-per-accident",
@@ -22927,14 +22896,10 @@
       "impressions": 0,
       "clicks": 0,
       "position": 0,
-      "status": "not-eligible",
-      "reason": "data:no-values",
+      "status": "needs-regen",
+      "reason": "missing",
       "blockers": [],
-      "dataBlockers": [
-        "no-values"
-      ],
-      "dataReason": "values.json が R2 に無い",
-      "dataYear": null
+      "reviewTier": "gemini-auto"
     },
     {
       "rankingKey": "fulfillment-rate",
@@ -25516,10 +25481,12 @@
       "impressions": 0,
       "clicks": 0,
       "position": 0,
-      "status": "needs-regen",
-      "reason": "fetch-error:TypeError: fetch failed",
+      "status": "done",
+      "reason": "ok",
       "blockers": [],
-      "reviewTier": "gemini-auto"
+      "warns": [],
+      "lastModified": "Sun, 06 Sep 2026 23:12:14 GMT",
+      "updatedAt": "2026-09-06T23:09:29.691Z"
     },
     {
       "rankingKey": "milk-drink-consumption-expenditure",
@@ -25646,14 +25613,10 @@
       "impressions": 0,
       "clicks": 0,
       "position": 0,
-      "status": "not-eligible",
-      "reason": "data:no-values",
+      "status": "needs-regen",
+      "reason": "missing",
       "blockers": [],
-      "dataBlockers": [
-        "no-values"
-      ],
-      "dataReason": "values.json が R2 に無い",
-      "dataYear": null
+      "reviewTier": "gemini-auto"
     },
     {
       "rankingKey": "movers-in",
@@ -26418,14 +26381,10 @@
       "impressions": 0,
       "clicks": 0,
       "position": 0,
-      "status": "not-eligible",
-      "reason": "data:no-values",
+      "status": "needs-regen",
+      "reason": "missing",
       "blockers": [],
-      "dataBlockers": [
-        "no-values"
-      ],
-      "dataReason": "values.json が R2 に無い",
-      "dataYear": null
+      "reviewTier": "gemini-auto"
     },
     {
       "rankingKey": "nurses-general-hospital-per-100beds",
@@ -29126,14 +29085,10 @@
       "impressions": 0,
       "clicks": 0,
       "position": 0,
-      "status": "not-eligible",
-      "reason": "data:no-values",
+      "status": "needs-regen",
+      "reason": "missing",
       "blockers": [],
-      "dataBlockers": [
-        "no-values"
-      ],
-      "dataReason": "values.json が R2 に無い",
-      "dataYear": null
+      "reviewTier": "gemini-auto"
     },
     {
       "rankingKey": "secondary-activity-avg-time-employed-female",
@@ -30181,14 +30136,10 @@
       "impressions": 0,
       "clicks": 0,
       "position": 0,
-      "status": "not-eligible",
-      "reason": "data:no-values",
+      "status": "needs-regen",
+      "reason": "missing",
       "blockers": [],
-      "dataBlockers": [
-        "no-values"
-      ],
-      "dataReason": "values.json が R2 に無い",
-      "dataYear": null
+      "reviewTier": "gemini-auto"
     },
     {
       "rankingKey": "total-administrative-investment",

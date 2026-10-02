@@ -1,0 +1,668 @@
+{
+  "schemaVersion": 2,
+  "account": "stats47",
+  "status": "implemented",
+  "completedAt": "2026-10-02T04:37:40.593Z",
+  "scope": "note cover ledger, private remote storage, generation/review/publication lifecycle and admin views",
+  "ledger": "data/note/cover-assets.json",
+  "schema": "data/note/cover-assets.schema.json",
+  "storage": {
+    "provider": "r2-private",
+    "bucket": "stats47-private",
+    "namespace": "note/covers/<articleKey>/revisions/<sha256>.png",
+    "localCanonicalImages": false
+  },
+  "counts": {
+    "articles": 389,
+    "publishedOriginals": 286,
+    "householdCandidates": 47,
+    "formerR2Images": 47,
+    "remoteRevisions": 380,
+    "remoteReadBackVerified": 380,
+    "pendingReviews": 0,
+    "approvedHousehold": 47,
+    "publishedHousehold": 47
+  },
+  "validation": {
+    "assetTests": {
+      "passed": 19,
+      "failed": 0
+    },
+    "publicationTests": {
+      "passed": 10,
+      "failed": 0
+    },
+    "imageTests": {
+      "passed": 20,
+      "failed": 0
+    },
+    "adminFocusedTests": {
+      "passed": 11,
+      "failed": 0
+    },
+    "typeCheck": "25 packages and 8 script projects passed",
+    "adminBuild": "passed",
+    "adminLint": "passed",
+    "adminUiContracts": "passed",
+    "docsCheck": "0 errors; 12 pre-existing warnings",
+    "envRegistry": "passed",
+    "workspaceContract": "passed",
+    "repoHygiene": "0 new findings",
+    "browser": {
+      "light": "passed",
+      "dark": "passed",
+      "imageFailureGuidance": "passed",
+      "sample": "a-kakei-aichi",
+      "images": 3,
+      "dimensions": [
+        1280,
+        670
+      ],
+      "pageErrors": 0
+    },
+    "livePublicationVerification": "All 286 public articles and 380 private revisions passed; household 47 new covers and preserved article fingerprints verified",
+    "imagePipeline": {
+      "passed": 99,
+      "failed": 0
+    },
+    "imageWorkflowAndGalleryContracts": {
+      "passed": 21,
+      "failed": 0
+    },
+    "security": "staged credential scan and secret guard passed; latest integrated dependency audit found 0 vulnerabilities",
+    "dependencyAudit": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    },
+    "integration": {
+      "base": "c481064c2",
+      "typeCheck": "25 packages and 8 script projects passed",
+      "adminFocusedTests": {
+        "passed": 11,
+        "failed": 0
+      },
+      "adminLint": "passed",
+      "browserPrivateImages": 3,
+      "oauthExpiryRecovery": "passed live; concurrent refresh and failure fixtures passed",
+      "adminBuild": "passed after OAuth renewal fix"
+    },
+    "preflightPr": {
+      "passed": 41,
+      "failed": 4,
+      "failures": [
+        {
+          "gate": "Sitemap / Tag Keys",
+          "reason": "unmodified public blog snapshot fetch returned HTTP 503"
+        },
+        {
+          "gate": "money-unit-audit",
+          "reason": "pre-existing Windows npm spawn failure; WIN-PREFLIGHT-NPM-SPAWN-01"
+        },
+        {
+          "gate": "quality-warning-ratchet",
+          "reason": "pre-existing Windows spawnSync npm ENOENT; WIN-PREFLIGHT-NPM-SPAWN-01"
+        },
+        {
+          "gate": "japan-zue-evidence-inventory",
+          "reason": "pre-existing Windows spawnSync npm ENOENT; WIN-PREFLIGHT-NPM-SPAWN-01"
+        }
+      ]
+    }
+  },
+  "limitations": [
+    "2026-09-28-v4 candidates could not be recovered; do not treat new household candidates as the recovered version.",
+    "Weekly CI ledger commit-back is implemented but has not yet executed.",
+    "Full web production build and whole-site E2E are outside this admin-only validation scope."
+  ],
+  "initialAudit": {
+    "schemaVersion": 1,
+    "observedAt": "2026-10-02T02:40:20.4602998+00:00",
+    "scope": "note cover operation audit; 47 household public cover URLs and one R2 generation manifest",
+    "account": "stats47",
+    "household": {
+      "total": 47,
+      "sameAsSeptember12": 47,
+      "failed": 0,
+      "articles": [
+        {
+          "key": "a-kakei-yamanashi",
+          "noteUrl": "https://note.com/stats47/n/n3416a225e0c6",
+          "previousUrl": "https://assets.st-note.com/production/uploads/images/312771997/rectangle_large_type_2_58ba1cd435399339671b316a7d773657.png?fit=bounds&quality=85&width=1280",
+          "liveUrl": "https://assets.st-note.com/production/uploads/images/312771997/rectangle_large_type_2_58ba1cd435399339671b316a7d773657.png?fit=bounds&quality=85&width=1280",
+          "same": true,
+          "observedAt": "2026-10-02T11:37:54.2045859+09:00",
+          "error": null
+        },
+        {
+          "key": "a-kakei-kanagawa",
+          "noteUrl": "https://note.com/stats47/n/nd0326279977a",
+          "previousUrl": "https://assets.st-note.com/production/uploads/images/312771353/rectangle_large_type_2_6d9c06074e17bd29e85106e22a173bcb.png?fit=bounds&quality=85&width=1280",
+          "liveUrl": "https://assets.st-note.com/production/uploads/images/312771353/rectangle_large_type_2_6d9c06074e17bd29e85106e22a173bcb.png?fit=bounds&quality=85&width=1280",
+          "same": true,
+          "observedAt": "2026-10-02T11:37:54.2046218+09:00",
+          "error": null
+        },
+        {
+          "key": "a-kakei-kumamoto",
+          "noteUrl": "https://note.com/stats47/n/n7e98a46bf791",
+          "previousUrl": "https://assets.st-note.com/production/uploads/images/312771446/rectangle_large_type_2_260ccaf4dfa666d5308641dfab6ea8a6.png?fit=bounds&quality=85&width=1280",
+          "liveUrl": "https://assets.st-note.com/production/uploads/images/312771446/rectangle_large_type_2_260ccaf4dfa666d5308641dfab6ea8a6.png?fit=bounds&quality=85&width=1280",
+          "same": true,
+          "observedAt": "2026-10-02T11:37:54.204584+09:00",
+          "error": null
+        },
+        {
+          "key": "a-kakei-kochi",
+          "noteUrl": "https://note.com/stats47/n/n29417de32c83",
+          "previousUrl": "https://assets.st-note.com/production/uploads/images/312771432/rectangle_large_type_2_f00e8c59055bebdd55cd6be352681040.png?fit=bounds&quality=85&width=1280",
+          "liveUrl": "https://assets.st-note.com/production/uploads/images/312771432/rectangle_large_type_2_f00e8c59055bebdd55cd6be352681040.png?fit=bounds&quality=85&width=1280",
+          "same": true,
+          "observedAt": "2026-10-02T11:37:54.204643+09:00",
+          "error": null
+        },
+        {
+          "key": "a-kakei-yamaguchi",
+          "noteUrl": "https://note.com/stats47/n/n88dde65e0774",
+          "previousUrl": "https://assets.st-note.com/production/uploads/images/312771968/rectangle_large_type_2_f7ce414d0e7f644fa39b6cc92123d416.png?fit=bounds&quality=85&width=1280",
+          "liveUrl": "https://assets.st-note.com/production/uploads/images/312771968/rectangle_large_type_2_f7ce414d0e7f644fa39b6cc92123d416.png?fit=bounds&quality=85&width=1280",
+          "same": true,
+          "observedAt": "2026-10-02T11:37:54.4091023+09:00",
+          "error": null
+        },
+        {
+          "key": "a-kakei-yamagata",
+          "noteUrl": "https://note.com/stats47/n/na3d645a7d50c",
+          "previousUrl": "https://assets.st-note.com/production/uploads/images/312771954/rectangle_large_type_2_53eab77acc016568751a144b64c5387f.png?fit=bounds&quality=85&width=1280",
+          "liveUrl": "https://assets.st-note.com/production/uploads/images/312771954/rectangle_large_type_2_53eab77acc016568751a144b64c5387f.png?fit=bounds&quality=85&width=1280",
+          "same": true,
+          "observedAt": "2026-10-02T11:37:54.4372474+09:00",
+          "error": null
+        },
+        {
+          "key": "a-kakei-wakayama",
+          "noteUrl": "https://note.com/stats47/n/ncc56ff8990d0",
+          "previousUrl": "https://assets.st-note.com/production/uploads/images/312771935/rectangle_large_type_2_e6b86878ebb40dff5d461f46c5ec4e5e.png?fit=bounds&quality=85&width=1280",
+          "liveUrl": "https://assets.st-note.com/production/uploads/images/312771935/rectangle_large_type_2_e6b86878ebb40dff5d461f46c5ec4e5e.png?fit=bounds&quality=85&width=1280",
+          "same": true,
+          "observedAt": "2026-10-02T11:37:54.4384577+09:00",
+          "error": null
+        },
+        {
+          "key": "a-kakei-toyama",
+          "noteUrl": "https://note.com/stats47/n/n13bca568c98a",
+          "previousUrl": "https://assets.st-note.com/production/uploads/images/312771923/rectangle_large_type_2_d8b4b65b71c3eff8e6902a3676fb5194.png?fit=bounds&quality=85&width=1280",
+          "liveUrl": "https://assets.st-note.com/production/uploads/images/312771923/rectangle_large_type_2_d8b4b65b71c3eff8e6902a3676fb5194.png?fit=bounds&quality=85&width=1280",
+          "same": true,
+          "observedAt": "2026-10-02T11:37:54.4579906+09:00",
+          "error": null
+        },
+        {
+          "key": "a-kakei-tottori",
+          "noteUrl": "https://note.com/stats47/n/n24d6b689079d",
+          "previousUrl": "https://assets.st-note.com/production/uploads/images/312771907/rectangle_large_type_2_7a8cecc4e8e941d2241d797b5a3c962b.png?fit=bounds&quality=85&width=1280",
+          "liveUrl": "https://assets.st-note.com/production/uploads/images/312771907/rectangle_large_type_2_7a8cecc4e8e941d2241d797b5a3c962b.png?fit=bounds&quality=85&width=1280",
+          "same": true,
+          "observedAt": "2026-10-02T11:37:54.5893817+09:00",
+          "error": null
+        },
+        {
+          "key": "a-kakei-tokyo",
+          "noteUrl": "https://note.com/stats47/n/n9d384a674462",
+          "previousUrl": "https://assets.st-note.com/production/uploads/images/312771892/rectangle_large_type_2_05d638ab2b9f05767bacf847c4f6d2fc.png?fit=bounds&quality=85&width=1280",
+          "liveUrl": "https://assets.st-note.com/production/uploads/images/312771892/rectangle_large_type_2_05d638ab2b9f05767bacf847c4f6d2fc.png?fit=bounds&quality=85&width=1280",
+          "same": true,
+          "observedAt": "2026-10-02T11:37:54.6021079+09:00",
+          "error": null
+        },
+        {
+          "key": "a-kakei-tochigi",
+          "noteUrl": "https://note.com/stats47/n/n0fd0305a6b8c",
+          "previousUrl": "https://assets.st-note.com/production/uploads/images/312771774/rectangle_large_type_2_551f87848c267acd4c37098e7d1b7bfd.png?fit=bounds&quality=85&width=1280",
+          "liveUrl": "https://assets.st-note.com/production/uploads/images/312771774/rectangle_large_type_2_551f87848c267acd4c37098e7d1b7bfd.png?fit=bounds&quality=85&width=1280",
+          "same": true,
+          "observedAt": "2026-10-02T11:37:54.6401612+09:00",
+          "error": null
+        },
+        {
+          "key": "a-kakei-tokushima",
+          "noteUrl": "https://note.com/stats47/n/ne2abc0fc7530",
+          "previousUrl": "https://assets.st-note.com/production/uploads/images/312771883/rectangle_large_type_2_66607b56a57dcb850e19d8bb5fed1c9f.png?fit=bounds&quality=85&width=1280",
+          "liveUrl": "https://assets.st-note.com/production/uploads/images/312771883/rectangle_large_type_2_66607b56a57dcb850e19d8bb5fed1c9f.png?fit=bounds&quality=85&width=1280",
+          "same": true,
+          "observedAt": "2026-10-02T11:37:54.6616731+09:00",
+          "error": null
+        },
+        {
+          "key": "a-kakei-shimane",
+          "noteUrl": "https://note.com/stats47/n/n75d68c2bb7e9",
+          "previousUrl": "https://assets.st-note.com/production/uploads/images/312771726/rectangle_large_type_2_b2feeb2af6f68f17e9c0ad9a80d4331d.png?fit=bounds&quality=85&width=1280",
+          "liveUrl": "https://assets.st-note.com/production/uploads/images/312771726/rectangle_large_type_2_b2feeb2af6f68f17e9c0ad9a80d4331d.png?fit=bounds&quality=85&width=1280",
+          "same": true,
+          "observedAt": "2026-10-02T11:37:54.7852804+09:00",
+          "error": null
+        },
+        {
+          "key": "a-kakei-shizuoka",
+          "noteUrl": "https://note.com/stats47/n/n35ce2a1b9248",
+          "previousUrl": "https://assets.st-note.com/production/uploads/images/312771739/rectangle_large_type_2_7d45899a786dfbaeffaa0abc71731328.png?fit=bounds&quality=85&width=1280",
+          "liveUrl": "https://assets.st-note.com/production/uploads/images/312771739/rectangle_large_type_2_7d45899a786dfbaeffaa0abc71731328.png?fit=bounds&quality=85&width=1280",
+          "same": true,
+          "observedAt": "2026-10-02T11:37:54.7974297+09:00",
+          "error": null
+        },
+        {
+          "key": "a-kakei-shiga",
+          "noteUrl": "https://note.com/stats47/n/ne5569b417135",
+          "previousUrl": "https://assets.st-note.com/production/uploads/images/312771713/rectangle_large_type_2_0461bc5ba7bd4d6f2736d980d508fa3f.png?fit=bounds&quality=85&width=1280",
+          "liveUrl": "https://assets.st-note.com/production/uploads/images/312771713/rectangle_large_type_2_0461bc5ba7bd4d6f2736d980d508fa3f.png?fit=bounds&quality=85&width=1280",
+          "same": true,
+          "observedAt": "2026-10-02T11:37:54.8168872+09:00",
+          "error": null
+        },
+        {
+          "key": "a-kakei-saitama",
+          "noteUrl": "https://note.com/stats47/n/ne760e2866251",
+          "previousUrl": "https://assets.st-note.com/production/uploads/images/312771699/rectangle_large_type_2_43a2be766f7b91285f2d6a34778438dd.png?fit=bounds&quality=85&width=1280",
+          "liveUrl": "https://assets.st-note.com/production/uploads/images/312771699/rectangle_large_type_2_43a2be766f7b91285f2d6a34778438dd.png?fit=bounds&quality=85&width=1280",
+          "same": true,
+          "observedAt": "2026-10-02T11:37:54.8295565+09:00",
+          "error": null
+        },
+        {
+          "key": "a-kakei-saga",
+          "noteUrl": "https://note.com/stats47/n/n1972caf5203d",
+          "previousUrl": "https://assets.st-note.com/production/uploads/images/312771678/rectangle_large_type_2_30358f64b03bfc366269671bb1223b90.png?fit=bounds&quality=85&width=1280",
+          "liveUrl": "https://assets.st-note.com/production/uploads/images/312771678/rectangle_large_type_2_30358f64b03bfc366269671bb1223b90.png?fit=bounds&quality=85&width=1280",
+          "same": true,
+          "observedAt": "2026-10-02T11:37:54.9499146+09:00",
+          "error": null
+        },
+        {
+          "key": "a-kakei-okinawa",
+          "noteUrl": "https://note.com/stats47/n/n757284230786",
+          "previousUrl": "https://assets.st-note.com/production/uploads/images/312771656/rectangle_large_type_2_2e88db840f2bed08564276e4fd88ac6f.png?fit=bounds&quality=85&width=1280",
+          "liveUrl": "https://assets.st-note.com/production/uploads/images/312771656/rectangle_large_type_2_2e88db840f2bed08564276e4fd88ac6f.png?fit=bounds&quality=85&width=1280",
+          "same": true,
+          "observedAt": "2026-10-02T11:37:54.9837336+09:00",
+          "error": null
+        },
+        {
+          "key": "a-kakei-okayama",
+          "noteUrl": "https://note.com/stats47/n/ne788feae75bf",
+          "previousUrl": "https://assets.st-note.com/production/uploads/images/312771645/rectangle_large_type_2_e28a7f0936baa8edac0888f327500fc3.png?fit=bounds&quality=85&width=1280",
+          "liveUrl": "https://assets.st-note.com/production/uploads/images/312771645/rectangle_large_type_2_e28a7f0936baa8edac0888f327500fc3.png?fit=bounds&quality=85&width=1280",
+          "same": true,
+          "observedAt": "2026-10-02T11:37:54.9999728+09:00",
+          "error": null
+        },
+        {
+          "key": "a-kakei-osaka",
+          "noteUrl": "https://note.com/stats47/n/n7ac1079b6f20",
+          "previousUrl": "https://assets.st-note.com/production/uploads/images/312771668/rectangle_large_type_2_aaf009d2dd039bb8af6b46ee1e054622.png?fit=bounds&quality=85&width=1280",
+          "liveUrl": "https://assets.st-note.com/production/uploads/images/312771668/rectangle_large_type_2_aaf009d2dd039bb8af6b46ee1e054622.png?fit=bounds&quality=85&width=1280",
+          "same": true,
+          "observedAt": "2026-10-02T11:37:55.0247866+09:00",
+          "error": null
+        },
+        {
+          "key": "a-kakei-oita",
+          "noteUrl": "https://note.com/stats47/n/n37ab621d01ad",
+          "previousUrl": "https://assets.st-note.com/production/uploads/images/312771624/rectangle_large_type_2_6421f0dd9e7b5b8eb6b29706ab041e54.png?fit=bounds&quality=85&width=1280",
+          "liveUrl": "https://assets.st-note.com/production/uploads/images/312771624/rectangle_large_type_2_6421f0dd9e7b5b8eb6b29706ab041e54.png?fit=bounds&quality=85&width=1280",
+          "same": true,
+          "observedAt": "2026-10-02T11:37:55.1156911+09:00",
+          "error": null
+        },
+        {
+          "key": "a-kakei-niigata",
+          "noteUrl": "https://note.com/stats47/n/ndd0bb1c14aa4",
+          "previousUrl": "https://assets.st-note.com/production/uploads/images/312771612/rectangle_large_type_2_722e658db1ead621a4f4db4dbbf2efc3.png?fit=bounds&quality=85&width=1280",
+          "liveUrl": "https://assets.st-note.com/production/uploads/images/312771612/rectangle_large_type_2_722e658db1ead621a4f4db4dbbf2efc3.png?fit=bounds&quality=85&width=1280",
+          "same": true,
+          "observedAt": "2026-10-02T11:37:55.1649514+09:00",
+          "error": null
+        },
+        {
+          "key": "a-kakei-nara",
+          "noteUrl": "https://note.com/stats47/n/n366d898d8107",
+          "previousUrl": "https://assets.st-note.com/production/uploads/images/312771600/rectangle_large_type_2_e066c55ba4966a904e61d1a9a282c0b2.png?fit=bounds&quality=85&width=1280",
+          "liveUrl": "https://assets.st-note.com/production/uploads/images/312771600/rectangle_large_type_2_e066c55ba4966a904e61d1a9a282c0b2.png?fit=bounds&quality=85&width=1280",
+          "same": true,
+          "observedAt": "2026-10-02T11:37:55.1709942+09:00",
+          "error": null
+        },
+        {
+          "key": "a-kakei-nagasaki",
+          "noteUrl": "https://note.com/stats47/n/nd547ff50cbe6",
+          "previousUrl": "https://assets.st-note.com/production/uploads/images/312771580/rectangle_large_type_2_b2a172a99305f6d67349917a3839782d.png?fit=bounds&quality=85&width=1280",
+          "liveUrl": "https://assets.st-note.com/production/uploads/images/312771580/rectangle_large_type_2_b2a172a99305f6d67349917a3839782d.png?fit=bounds&quality=85&width=1280",
+          "same": true,
+          "observedAt": "2026-10-02T11:37:55.1714148+09:00",
+          "error": null
+        },
+        {
+          "key": "a-kakei-nagano",
+          "noteUrl": "https://note.com/stats47/n/nb6061a164201",
+          "previousUrl": "https://assets.st-note.com/production/uploads/images/312771566/rectangle_large_type_2_fd5a722bca85e1b2371624416c4b5bec.png?fit=bounds&quality=85&width=1280",
+          "liveUrl": "https://assets.st-note.com/production/uploads/images/312771566/rectangle_large_type_2_fd5a722bca85e1b2371624416c4b5bec.png?fit=bounds&quality=85&width=1280",
+          "same": true,
+          "observedAt": "2026-10-02T11:37:55.3212041+09:00",
+          "error": null
+        },
+        {
+          "key": "a-kakei-miyazaki",
+          "noteUrl": "https://note.com/stats47/n/n7f0be4fef37c",
+          "previousUrl": "https://assets.st-note.com/production/uploads/images/312771544/rectangle_large_type_2_e048bd1e482533c33d69c649ac650b97.png?fit=bounds&quality=85&width=1280",
+          "liveUrl": "https://assets.st-note.com/production/uploads/images/312771544/rectangle_large_type_2_e048bd1e482533c33d69c649ac650b97.png?fit=bounds&quality=85&width=1280",
+          "same": true,
+          "observedAt": "2026-10-02T11:37:55.3221691+09:00",
+          "error": null
+        },
+        {
+          "key": "a-kakei-miyagi",
+          "noteUrl": "https://note.com/stats47/n/nb479aff3cf05",
+          "previousUrl": "https://assets.st-note.com/production/uploads/images/312771512/rectangle_large_type_2_a78fab8683346ce0db5cb0c76bd3b685.png?fit=bounds&quality=85&width=1280",
+          "liveUrl": "https://assets.st-note.com/production/uploads/images/312771512/rectangle_large_type_2_a78fab8683346ce0db5cb0c76bd3b685.png?fit=bounds&quality=85&width=1280",
+          "same": true,
+          "observedAt": "2026-10-02T11:37:55.3455324+09:00",
+          "error": null
+        },
+        {
+          "key": "a-kakei-mie",
+          "noteUrl": "https://note.com/stats47/n/n8113876eaeab",
+          "previousUrl": "https://assets.st-note.com/production/uploads/images/312771474/rectangle_large_type_2_4fb00abe4a4d7c597ac4ed682b23aa8c.png?fit=bounds&quality=85&width=1280",
+          "liveUrl": "https://assets.st-note.com/production/uploads/images/312771474/rectangle_large_type_2_4fb00abe4a4d7c597ac4ed682b23aa8c.png?fit=bounds&quality=85&width=1280",
+          "same": true,
+          "observedAt": "2026-10-02T11:37:55.3741511+09:00",
+          "error": null
+        },
+        {
+          "key": "a-kakei-kyoto",
+          "noteUrl": "https://note.com/stats47/n/n2a18f8e7098c",
+          "previousUrl": "https://assets.st-note.com/production/uploads/images/312771465/rectangle_large_type_2_a740ff903b97b31062527d0156c67e31.png?fit=bounds&quality=85&width=1280",
+          "liveUrl": "https://assets.st-note.com/production/uploads/images/312771465/rectangle_large_type_2_a740ff903b97b31062527d0156c67e31.png?fit=bounds&quality=85&width=1280",
+          "same": true,
+          "observedAt": "2026-10-02T11:37:55.4756908+09:00",
+          "error": null
+        },
+        {
+          "key": "a-kakei-kagoshima",
+          "noteUrl": "https://note.com/stats47/n/n555435ada7ed",
+          "previousUrl": "https://assets.st-note.com/production/uploads/images/312771329/rectangle_large_type_2_c00900adf967246d213fcaf879ac1722.png?fit=bounds&quality=85&width=1280",
+          "liveUrl": "https://assets.st-note.com/production/uploads/images/312771329/rectangle_large_type_2_c00900adf967246d213fcaf879ac1722.png?fit=bounds&quality=85&width=1280",
+          "same": true,
+          "observedAt": "2026-10-02T11:37:55.4977933+09:00",
+          "error": null
+        },
+        {
+          "key": "a-kakei-kagawa",
+          "noteUrl": "https://note.com/stats47/n/ne69b740f702e",
+          "previousUrl": "https://assets.st-note.com/production/uploads/images/312771285/rectangle_large_type_2_23e7b69f3c854b8bdf5d8cd5799d84b0.png?fit=bounds&quality=85&width=1280",
+          "liveUrl": "https://assets.st-note.com/production/uploads/images/312771285/rectangle_large_type_2_23e7b69f3c854b8bdf5d8cd5799d84b0.png?fit=bounds&quality=85&width=1280",
+          "same": true,
+          "observedAt": "2026-10-02T11:37:55.4992768+09:00",
+          "error": null
+        },
+        {
+          "key": "a-kakei-iwate",
+          "noteUrl": "https://note.com/stats47/n/na3020a08cef7",
+          "previousUrl": "https://assets.st-note.com/production/uploads/images/312771277/rectangle_large_type_2_d766df497369377af1209878f4dfca15.png?fit=bounds&quality=85&width=1280",
+          "liveUrl": "https://assets.st-note.com/production/uploads/images/312771277/rectangle_large_type_2_d766df497369377af1209878f4dfca15.png?fit=bounds&quality=85&width=1280",
+          "same": true,
+          "observedAt": "2026-10-02T11:37:55.5289377+09:00",
+          "error": null
+        },
+        {
+          "key": "a-kakei-ibaraki",
+          "noteUrl": "https://note.com/stats47/n/n65d95575f7a5",
+          "previousUrl": "https://assets.st-note.com/production/uploads/images/312771253/rectangle_large_type_2_b218d10b8ed0e0286c0292248c86b2ce.png?fit=bounds&quality=85&width=1280",
+          "liveUrl": "https://assets.st-note.com/production/uploads/images/312771253/rectangle_large_type_2_b218d10b8ed0e0286c0292248c86b2ce.png?fit=bounds&quality=85&width=1280",
+          "same": true,
+          "observedAt": "2026-10-02T11:37:55.6557912+09:00",
+          "error": null
+        },
+        {
+          "key": "a-kakei-ishikawa",
+          "noteUrl": "https://note.com/stats47/n/ndf2afaef16c0",
+          "previousUrl": "https://assets.st-note.com/production/uploads/images/312771263/rectangle_large_type_2_3099ce313bf06bd2c3c9c1f89bcdce10.png?fit=bounds&quality=85&width=1280",
+          "liveUrl": "https://assets.st-note.com/production/uploads/images/312771263/rectangle_large_type_2_3099ce313bf06bd2c3c9c1f89bcdce10.png?fit=bounds&quality=85&width=1280",
+          "same": true,
+          "observedAt": "2026-10-02T11:37:55.6576384+09:00",
+          "error": null
+        },
+        {
+          "key": "a-kakei-gunma",
+          "noteUrl": "https://note.com/stats47/n/n1b9bf465327d",
+          "previousUrl": "https://assets.st-note.com/production/uploads/images/312771205/rectangle_large_type_2_fd458b87e1293dc7702de715bbd36a78.png?fit=bounds&quality=85&width=1280",
+          "liveUrl": "https://assets.st-note.com/production/uploads/images/312771205/rectangle_large_type_2_fd458b87e1293dc7702de715bbd36a78.png?fit=bounds&quality=85&width=1280",
+          "same": true,
+          "observedAt": "2026-10-02T11:37:55.6921877+09:00",
+          "error": null
+        },
+        {
+          "key": "a-kakei-fukushima",
+          "noteUrl": "https://note.com/stats47/n/n4c363c356b63",
+          "previousUrl": "https://assets.st-note.com/production/uploads/images/312771160/rectangle_large_type_2_c7c4b674635306031ec313c9e20dc904.png?fit=bounds&quality=85&width=1280",
+          "liveUrl": "https://assets.st-note.com/production/uploads/images/312771160/rectangle_large_type_2_c7c4b674635306031ec313c9e20dc904.png?fit=bounds&quality=85&width=1280",
+          "same": true,
+          "observedAt": "2026-10-02T11:37:55.6953141+09:00",
+          "error": null
+        },
+        {
+          "key": "a-kakei-fukuoka",
+          "noteUrl": "https://note.com/stats47/n/nb7cfd81af156",
+          "previousUrl": "https://assets.st-note.com/production/uploads/images/312771153/rectangle_large_type_2_47d22d3e41cce44b0bf368cebe175447.png?fit=bounds&quality=85&width=1280",
+          "liveUrl": "https://assets.st-note.com/production/uploads/images/312771153/rectangle_large_type_2_47d22d3e41cce44b0bf368cebe175447.png?fit=bounds&quality=85&width=1280",
+          "same": true,
+          "observedAt": "2026-10-02T11:37:55.8363679+09:00",
+          "error": null
+        },
+        {
+          "key": "a-kakei-fukui",
+          "noteUrl": "https://note.com/stats47/n/n18bb5a58060c",
+          "previousUrl": "https://assets.st-note.com/production/uploads/images/312771140/rectangle_large_type_2_3d2c40ea54b58f91ceb8dca4a0d3398f.png?fit=bounds&quality=85&width=1280",
+          "liveUrl": "https://assets.st-note.com/production/uploads/images/312771140/rectangle_large_type_2_3d2c40ea54b58f91ceb8dca4a0d3398f.png?fit=bounds&quality=85&width=1280",
+          "same": true,
+          "observedAt": "2026-10-02T11:37:55.8419989+09:00",
+          "error": null
+        },
+        {
+          "key": "a-kakei-hyogo",
+          "noteUrl": "https://note.com/stats47/n/n6f5ab18ba6ff",
+          "previousUrl": "https://assets.st-note.com/production/uploads/images/312771237/rectangle_large_type_2_1c52cac47a7b1859a2a1be84f78fbb1c.png?fit=bounds&quality=85&width=1280",
+          "liveUrl": "https://assets.st-note.com/production/uploads/images/312771237/rectangle_large_type_2_1c52cac47a7b1859a2a1be84f78fbb1c.png?fit=bounds&quality=85&width=1280",
+          "same": true,
+          "observedAt": "2026-10-02T11:37:55.8527456+09:00",
+          "error": null
+        },
+        {
+          "key": "a-kakei-gifu",
+          "noteUrl": "https://note.com/stats47/n/n6136c0f13156",
+          "previousUrl": "https://assets.st-note.com/production/uploads/images/312771184/rectangle_large_type_2_2ca9c801988e033bc47822853b3cb9d1.png?fit=bounds&quality=85&width=1280",
+          "liveUrl": "https://assets.st-note.com/production/uploads/images/312771184/rectangle_large_type_2_2ca9c801988e033bc47822853b3cb9d1.png?fit=bounds&quality=85&width=1280",
+          "same": true,
+          "observedAt": "2026-10-02T11:37:55.8757829+09:00",
+          "error": null
+        },
+        {
+          "key": "a-kakei-ehime",
+          "noteUrl": "https://note.com/stats47/n/nb627534c8b66",
+          "previousUrl": "https://assets.st-note.com/production/uploads/images/312771112/rectangle_large_type_2_c9204acf0a89d60034588942e7c0856c.png?fit=bounds&quality=85&width=1280",
+          "liveUrl": "https://assets.st-note.com/production/uploads/images/312771112/rectangle_large_type_2_c9204acf0a89d60034588942e7c0856c.png?fit=bounds&quality=85&width=1280",
+          "same": true,
+          "observedAt": "2026-10-02T11:37:55.9886277+09:00",
+          "error": null
+        },
+        {
+          "key": "a-kakei-chiba",
+          "noteUrl": "https://note.com/stats47/n/n1d5481680c03",
+          "previousUrl": "https://assets.st-note.com/production/uploads/images/312770996/rectangle_large_type_2_dbf988ebe86b5b29220a50953ceb8695.png?fit=bounds&quality=85&width=1280",
+          "liveUrl": "https://assets.st-note.com/production/uploads/images/312770996/rectangle_large_type_2_dbf988ebe86b5b29220a50953ceb8695.png?fit=bounds&quality=85&width=1280",
+          "same": true,
+          "observedAt": "2026-10-02T11:37:56.0272137+09:00",
+          "error": null
+        },
+        {
+          "key": "a-kakei-akita",
+          "noteUrl": "https://note.com/stats47/n/n5e9502c6507c",
+          "previousUrl": "https://assets.st-note.com/production/uploads/images/312770939/rectangle_large_type_2_a331a991bddbbb86b6078a829e9ecd39.png?fit=bounds&quality=85&width=1280",
+          "liveUrl": "https://assets.st-note.com/production/uploads/images/312770939/rectangle_large_type_2_a331a991bddbbb86b6078a829e9ecd39.png?fit=bounds&quality=85&width=1280",
+          "same": true,
+          "observedAt": "2026-10-02T11:37:56.0348856+09:00",
+          "error": null
+        },
+        {
+          "key": "a-kakei-hiroshima",
+          "noteUrl": "https://note.com/stats47/n/n0be24c40b88d",
+          "previousUrl": "https://assets.st-note.com/production/uploads/images/312771217/rectangle_large_type_2_5d9a06cdc3f81390b91267b93b48b2a6.png?fit=bounds&quality=85&width=1280",
+          "liveUrl": "https://assets.st-note.com/production/uploads/images/312771217/rectangle_large_type_2_5d9a06cdc3f81390b91267b93b48b2a6.png?fit=bounds&quality=85&width=1280",
+          "same": true,
+          "observedAt": "2026-10-02T11:37:56.0855751+09:00",
+          "error": null
+        },
+        {
+          "key": "a-kakei-aichi",
+          "noteUrl": "https://note.com/stats47/n/nda72a0bed2c4",
+          "previousUrl": "https://assets.st-note.com/production/uploads/images/312770047/rectangle_large_type_2_eaa8194e8992dc5aa637f4d55163c999.png?fit=bounds&quality=85&width=1280",
+          "liveUrl": "https://assets.st-note.com/production/uploads/images/312770047/rectangle_large_type_2_eaa8194e8992dc5aa637f4d55163c999.png?fit=bounds&quality=85&width=1280",
+          "same": true,
+          "observedAt": "2026-10-02T11:37:56.1504448+09:00",
+          "error": null
+        },
+        {
+          "key": "a-kakei-aomori",
+          "noteUrl": "https://note.com/stats47/n/n85831c0c47aa",
+          "previousUrl": "https://assets.st-note.com/production/uploads/images/312770953/rectangle_large_type_2_697858eb0c705c336e603df04776465d.png?fit=bounds&quality=85&width=1280",
+          "liveUrl": "https://assets.st-note.com/production/uploads/images/312770953/rectangle_large_type_2_697858eb0c705c336e603df04776465d.png?fit=bounds&quality=85&width=1280",
+          "same": true,
+          "observedAt": "2026-10-02T11:37:56.1910335+09:00",
+          "error": null
+        },
+        {
+          "key": "a-kakei-hokkaido",
+          "noteUrl": "https://note.com/stats47/n/n39016e5f0002",
+          "previousUrl": "https://assets.st-note.com/production/uploads/images/312768359/rectangle_large_type_2_69ad79e75e85c70cff43d2a6edc66a43.png?fit=bounds&quality=85&width=1280",
+          "liveUrl": "https://assets.st-note.com/production/uploads/images/312768359/rectangle_large_type_2_69ad79e75e85c70cff43d2a6edc66a43.png?fit=bounds&quality=85&width=1280",
+          "same": true,
+          "observedAt": "2026-10-02T11:37:56.2020033+09:00",
+          "error": null
+        }
+      ]
+    },
+    "localCandidate": {
+      "version": "2026-09-28-v4",
+      "path": ".local/note-cover-refresh/2026-09-28/production-manifest.json",
+      "exists": false
+    },
+    "r2Sample": {
+      "sourceUrl": "https://storage.stats47.jp/note/stats47-note/a-kakei-aichi/images/cover-generation.json",
+      "generation": {
+        "kind": "stats47-image-generation",
+        "schemaVersion": 1,
+        "generator": "note-cover",
+        "entityId": "a-kakei-aichi",
+        "inputHash": "5a6dad8aa36630872189bd7598c346761f6d22c140e684ce05da576afe531157",
+        "rendererHash": "bbf09c8658d374730c374fa69936d0a97eaa15cd883ba8c5ee8322a5f5e12622",
+        "fingerprint": "2c161909e457467151593350fc4f8956fa6249b1ce28a7eb853772e4355f3b19",
+        "generatedAt": "2026-10-01T13:29:26.158Z",
+        "assets": [
+          {
+            "key": "note/stats47-note/a-kakei-aichi/images/cover-1280x670.png",
+            "variant": "cover",
+            "contentType": "image/png",
+            "width": 1280,
+            "height": 670,
+            "bytes": 102049,
+            "sha256": "6ddb616811942fba83d6b2d07dbfa0ef9f1bd97590ed2eec63d0472640aa6351"
+          }
+        ],
+        "metadata": {
+          "slug": "a-kakei-aichi",
+          "title": "愛知県の家計は何にお金が偏っているか ── 住居費最少、たんすと婚礼に厚い名古屋市の暮らし",
+          "vertical": "stats47-note"
+        }
+      }
+    },
+    "limitations": [
+      "Compared public cover URLs, not all image bytes.",
+      "9/28 candidate assets are absent on this PC; visual/hash reproduction not verified.",
+      "Full 286-article Node audit stopped after GET returned HTTP503; household-only GETs via PowerShell succeeded 47/47.",
+      "R2 sample does not establish which job performed the upload."
+    ]
+  },
+  "updatedAt": "2026-10-02T06:08:06.140Z",
+  "householdRollout": {
+    "version": "2026-10-02-household-r1",
+    "status": "completed",
+    "authorizedScope": "Replace 47 household note covers and update management view",
+    "reviewed": 47,
+    "adopted": 47,
+    "dryRun": {
+      "status": "pass",
+      "checked": 47
+    },
+    "published": 47,
+    "account": "stats47",
+    "completedAt": "2026-10-02T05:59:51.344Z",
+    "verifiedAt": "2026-10-02T06:05:08.551Z",
+    "journal": ".claude/state/metrics/note-cover-refresh-ledger-91214c55dafc1456.json",
+    "authentication": {
+      "status": "verified",
+      "account": "stats47",
+      "source": "browser same-origin current_user GET",
+      "profile": ".local/playwright-note-profile"
+    },
+    "validation": {
+      "assetTests": {
+        "passed": 19,
+        "failed": 0
+      },
+      "publicationTests": {
+        "passed": 10,
+        "failed": 0
+      },
+      "typeCheck": "25 packages and 8 script projects passed",
+      "docsCheck": "0 errors; 12 existing warnings",
+      "livePortfolio": {
+        "status": "pass",
+        "publicArticles": 286,
+        "privateRevisions": 380,
+        "householdPublished": 47,
+        "unchangedOtherCovers": 239,
+        "preservedArticleFingerprints": 47,
+        "report": ".claude/state/metrics/note/cover-lifecycle-latest.json"
+      },
+      "imageVerification": {
+        "dimensions": [
+          1280,
+          670
+        ],
+        "meanPixelErrorMin": 0.6223332555970149,
+        "meanPixelErrorMax": 0.8780771921641791
+      },
+      "admin": {
+        "status": "pass",
+        "householdReviewed": 47,
+        "householdPublished": 47,
+        "sample": "a-kakei-aichi",
+        "visibleImages": [
+          [
+            1280,
+            670
+          ],
+          [
+            1280,
+            670
+          ]
+        ],
+        "pageErrors": 0,
+        "verifiedAt": "2026-10-02T06:07:27.925Z"
+      }
+    },
+    "remaining": "239 non-household candidates still require recovery or regeneration and review; the 2026-09-28-v4 assets were not recovered"
+  }
+}

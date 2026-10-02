@@ -9,7 +9,7 @@
  */
 import { execFileSync } from "node:child_process";
 import { existsSync, readFileSync } from "node:fs";
-import { dirname, join, relative, resolve } from "node:path";
+import { basename, dirname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { regenerateSlug } from "./regen-derived-png.mjs";
 import { NOTE_RANKING_IMAGES } from "./lib/note-render-spec.mjs";
@@ -33,7 +33,7 @@ export function missingImages(dir) {
 export async function ensureNoteImages(dir) {
   let missing = missingImages(dir);
   if (missing.length === 0) return { made: [], missing: [] };
-  const slug = dir.split("/").pop();
+  const slug = basename(dir);
   if (existsSync(join(dir, "render-spec.json"))) {
     execFileSync("node", [join(ROOT, ".claude/scripts/note/render-ranking-images.mjs"), slug], { stdio: "inherit", cwd: ROOT });
   } else {

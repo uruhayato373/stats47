@@ -7,7 +7,7 @@ import { NOTE_ARTICLES, NOTE_MAGAZINES } from "./index";
 
 const articles = NOTE_ARTICLES.filter(
   // 公開URL欠損も監査側へ渡し、不正な公開済みエントリを黙って除外しない。
-  (article) => article.status === "published",
+  (article) => process.argv.includes('--all') || article.status === "published",
 ).map((article) => ({
   key: article.key,
   vertical: article.vertical,

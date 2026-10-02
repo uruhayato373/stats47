@@ -1,10 +1,14 @@
 /** 公開カバーの棚卸し入力から、既存GIS+検証済みデータで派生画像を制作する。note書込なし。 */
 import fs from 'node:fs';
 import path from 'node:path';
+import os from 'node:os';
 import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { geoArea, geoMercator, geoPath } from 'd3-geo';
+import { scaleSequential } from 'd3-scale';
+import { interpolateYlOrRd } from 'd3-scale-chromatic';
 import { feature } from 'topojson-client';
+import type { Feature, Geometry } from 'geojson';
 import sharp from 'sharp';
 import satori from 'satori';
 import {
@@ -16,18 +20,36 @@ import {
   KEEP_EXISTING_COVER_KEYS,
   BOLD_COVER_HEADLINES,
   NOTE_COVER_COPY,
-  NOTE_COVER_REFRESH_VERSION,
 } from './catalog/cover-designs';
 import { NOTE_ARTICLES } from './catalog';
+import { noteCoverCategory } from './catalog/cover-categories';
+import { freezeQuestionRankingData, questionRankingIdentity, questionRankingCopy } from './lib/question-cover-data.mjs';
 async function main() {
+  const { fetchCoverSource, createCoverStore } = await import('./lib/cover-storage.mjs');
+  const { registerCoverCandidate } = await import('./lib/cover-ingest.mjs');
   const ROOT = path.resolve(
     path.dirname(fileURLToPath(import.meta.url)),
     '../../..'
   );
-  const OUT = path.join(ROOT, '.local/note-cover-refresh', NOTE_COVER_REFRESH_VERSION.replace(/-v\d+$/, ''));
+  const args = process.argv.slice(2);
+  if (args.length !== 4 || args[0] !== '--output' || args[2] !== '--version' || !/^[\w-]+$/.test(args[3]))
+    throw Error('Usage: generate-cover-refresh.ts --output TEMP_INPUT_DIR --version VERSION (prepare with note:assets first)');
+  const OUT = path.resolve(args[1]);
+  const version = args[3];
+  const isTemporary = [os.tmpdir(), 'C:/tmp', '/tmp'].some((dir) => {
+    const relative = path.relative(path.resolve(dir), OUT);
+    return relative && !relative.startsWith('..') && !path.isAbsolute(relative);
+  });
+  const relativeRoot = path.relative(ROOT, OUT);
+  if (!isTemporary || (!relativeRoot.startsWith('..') && !path.isAbsolute(relativeRoot)))
+    throw Error('generation input/output must be a temporary subdirectory outside the repository');
+  if (!fs.existsSync(path.join(OUT, '.note-cover-temporary-input')) || fs.readFileSync(path.join(OUT, '.note-cover-temporary-input'), 'utf8') !== 'stats47')
+    throw Error('unowned temporary directory');
   const inventory = JSON.parse(
     fs.readFileSync(path.join(OUT, 'inventory.json'), 'utf8')
   );
+  if (!Array.isArray(inventory) || new Set(inventory.map(a => a.catalogKey)).size !== inventory.length)
+    throw Error('duplicate/invalid cover inventory');
   const fonts = loadFonts(ROOT);
   const sha = (data: Buffer | string) =>
     createHash('sha256').update(data).digest('hex');
@@ -105,13 +127,14 @@ async function main() {
     その他の消費支出: 'other-living-expenditure-total',
   };
   const cached = new Map<string, any>();
+  const capturedSourcePath = path.join(OUT, 'sources', 'question-source-inventory.json');
+  const capturedSources = fs.existsSync(capturedSourcePath)
+    ? JSON.parse(fs.readFileSync(capturedSourcePath, 'utf8')) : null;
   async function jsonSource(url: string, name: string) {
     const p = path.join(OUT, 'sources', name);
     fs.mkdirSync(path.dirname(p), { recursive: true });
     if (!fs.existsSync(p)) {
-      const r = await fetch(url);
-      if (!r.ok) throw Error(`${url}: ${r.status}`);
-      fs.writeFileSync(p, Buffer.from(await r.arrayBuffer()));
+      fs.writeFileSync(p, await fetchCoverSource(url));
     }
     return JSON.parse(fs.readFileSync(p, 'utf8'));
   }
@@ -214,6 +237,67 @@ async function main() {
       subline: colorGuide ? '配色の使い方を解説' : subline,
       ...(isGuide ? { mapImage: guideImage } : genericMap),
       ...(isGuide ? { badge: colorGuide ? '配色ガイド' : '自治体実務ガイド' } : {}),
+    };
+  }
+  async function questionRanking(article: (typeof NOTE_ARTICLES)[number]) {
+    const { rankingKey, year } = questionRankingIdentity(article);
+    const valuesSource = `https://storage.stats47.jp/app/ranking/${rankingKey}/values.json`;
+    const sourceName = `ranking-${rankingKey}.json`;
+    const source = await jsonSource(valuesSource, sourceName);
+    const fixedChartUrl = `https://storage.stats47.jp/${article.r2Path}/chart-data.json`;
+    const captured = capturedSources?.articles?.[article.key];
+    if (capturedSources && (!captured || !Number.isFinite(Date.parse(capturedSources.observedAt)) ||
+      captured.valuesSource !== valuesSource || captured.fixedChartSource !== fixedChartUrl ||
+      captured.valuesSha256 !== sha(fs.readFileSync(path.join(OUT, 'sources', sourceName))) ||
+      ![200, 404].includes(captured.fixedChartStatus)))
+      throw Error('captured question source mismatch ' + article.key);
+    let fixed = null;
+    if (captured?.fixedChartStatus !== 404) {
+      try { fixed = await jsonSource(fixedChartUrl, `${article.key}-article-chart.json`); }
+      catch (error) { if (!(error instanceof Error) || error.message !== 'cover source HTTP 404') throw error; }
+      if (captured && (!fixed || captured.fixedChartSha256 !==
+        sha(fs.readFileSync(path.join(OUT, 'sources', `${article.key}-article-chart.json`)))))
+        throw Error('captured question fixed chart mismatch ' + article.key);
+    }
+    const frozen = freezeQuestionRankingData(article, source, fixed);
+    const copy = questionRankingCopy(article, frozen.winners, year);
+    const values = new Map<string, number>(frozen.chartData.data.map((r: { area_code: string; value: number }) =>
+      [r.area_code.slice(0, 2), r.value]));
+    if (fc.features.some((f: { properties: { N03_007: string } }) => !values.has(f.properties.N03_007)))
+      throw Error('question choropleth geography mismatch ' + article.key);
+    const domain: [number, number] = [Math.min(...values.values()), Math.max(...values.values())];
+    const scale = scaleSequential(domain, (t) => interpolateYlOrRd(0.15 + 0.70 * t));
+    const collection = { type: 'FeatureCollection' as const, features: mainFeatures };
+    const mapProjection = geoMercator().fitHeight(575, collection);
+    const bounds = geoPath(mapProjection).bounds(collection);
+    const translation = mapProjection.translate();
+    mapProjection.translate([translation[0] + 1226 - bounds[1][0], translation[1] + 18 - bounds[0][1]]);
+    const mapPath = geoPath(mapProjection);
+    const insetPath = geoPath(geoMercator().fitExtent([[1045, 462], [1190, 533]], okinawa));
+    const color = (code: string) => scale(values.get(code)!);
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="670">${mainFeatures.map((f: Feature<Geometry, { N03_007: string }>) =>
+      `<path d="${mapPath(f)}" fill="${color(f.properties.N03_007)}" stroke="#ba8d70" stroke-width="1.5"/>`).join('')}<path d="${insetPath(okinawa)}" fill="${color('47')}" stroke="#ba8d70" stroke-width="1.5"/></svg>`;
+    const map = await sharp(Buffer.from(svg)).png().toBuffer();
+    return {
+      design: { kicker: copy.kicker, headline: '', subline: '',
+        mapImage: `data:image/png;base64,${map.toString('base64')}`, questionRanking: copy },
+      evidence: { renderer: 'question-ranking-note-cover-v1', articleKey: article.key, noteUrl: article.noteUrl,
+        title: article.title, rankingKey, year, winners: frozen.winners, chartData: frozen.chartData,
+        fixedCopyCreated: frozen.fixedCopyCreated, unitRepaired: frozen.unitRepaired,
+        sourceObservation: captured ? { observedAt: capturedSources.observedAt,
+          fixedChartStatus: captured.fixedChartStatus } : null,
+        valuesSource, valuesSha256: sha(fs.readFileSync(path.join(OUT, 'sources', sourceName))),
+        fixedChartSource: fixed ? fixedChartUrl : null,
+        fixedChartSha256: fixed ? sha(fs.readFileSync(path.join(OUT, 'sources', `${article.key}-article-chart.json`))) : null,
+        mapSource: 'apps/remotion/public/prefecture.topojson',
+        mapSha256: sha(fs.readFileSync(path.join(ROOT, 'apps/remotion/public/prefecture.topojson'))),
+        rendererSha256: sha(Buffer.concat(['.claude/scripts/note/generate-cover-refresh.ts',
+          '.claude/scripts/note/lib/question-cover-data.mjs', 'apps/web/scripts/lib/note-cover-render.ts']
+          .map(file => fs.readFileSync(path.join(ROOT, file))))),
+        fonts: fonts.map(font => ({ name: font.name, weight: font.weight, sha256: sha(Buffer.from(font.data)) })),
+        copy, renderSpec: { version, palette: 'YlOrRd', paletteRange: [0.15, 0.85], domain, scale: 'linear',
+          background: '#faf9f5', mapOpacity: 0.52, mapHeight: 575, mapAnchor: [1226, 18],
+          legend: false, size: [1280, 670] } },
     };
   }
   async function household(a: any) {
@@ -363,7 +447,7 @@ async function main() {
   for (const a of inventory) {
     try {
     const meta = metadata.get(a.catalogKey);
-    if (!meta || meta.noteUrl !== a.noteUrl)
+    if (!meta || (meta.noteUrl ?? null) !== a.noteUrl)
       throw Error('catalog mismatch ' + a.catalogKey);
     const beforePath = a.cover.url
       ? path.join(OUT, 'before', a.noteKey + '.image')
@@ -378,7 +462,8 @@ async function main() {
       beforeCover: a.cover,
       beforeSha256: beforePath ? sha(fs.readFileSync(beforePath)) : null,
     };
-    if (KEEP_EXISTING_COVER_KEYS.has(a.catalogKey)) {
+    const isQuestionRanking = /[？?]\s*1位は/.test(a.title) && noteCoverCategory(meta) === 'ranking-question';
+    if (KEEP_EXISTING_COVER_KEYS.has(a.catalogKey) && !isQuestionRanking) {
       if (a.cover.status !== 'configured')
         throw Error('cannot keep missing cover ' + a.catalogKey);
       reports.push({
@@ -392,34 +477,11 @@ async function main() {
       evidence: any = {
         source: NOTE_COVER_COPY[a.catalogKey]
           ? 'published title, article and original cover'
-          : 'published title',
+          : a.noteUrl ? 'published title' : 'draft catalog title',
         title: a.title,
         originalCoverSha256: base.beforeSha256,
       };
-    if (a.catalogKey.startsWith('a-') && !a.catalogKey.startsWith('a-kakei-') && /[？?]\s*1位は/.test(a.title)) {
-      const rankingKey = a.catalogKey.slice(2);
-      const year = a.title.match(/20\d{2}/)?.[0];
-      const winner = a.title.match(/[？?]\s*1位は(.+?)(?:[｜|]|$)/)?.[1].trim();
-      if (!year || !winner) throw Error('ranking article identity ' + a.catalogKey);
-      const sourceUrl = `https://storage.stats47.jp/app/ranking/${rankingKey}/values.json`;
-      const sourceName = `ranking-${rankingKey}.json`;
-      const source = await jsonSource(sourceUrl, sourceName);
-      const partition = source.partitions?.find((p: any) => p.yearCode === year);
-      const rows = partition?.values;
-      if (source.rankingKey !== rankingKey || source.areaType !== 'prefecture' ||
-        partition?.count !== 47 || !Array.isArray(rows) || rows.length !== 47 ||
-        new Set(rows.map((r: any) => r.areaCode)).size !== 47 ||
-        rows.some((r: any) => r.yearCode !== year || !Number.isFinite(r.value) || !Number.isInteger(r.rank)) ||
-        rows.find((r: any) => r.rank === 1)?.areaName !== winner)
-        throw Error('ranking choropleth source mismatch ' + a.catalogKey);
-      const ranks = new Map<string, number>(rows.map((r: any) => [r.areaCode.slice(0, 2), r.rank]));
-      if (fc.features.some((f: any) => !ranks.has(f.properties.N03_007)))
-        throw Error('ranking choropleth geography mismatch ' + a.catalogKey);
-      design = { ...design, ...await horizontalMap(ranks), mapLegend: `${year}年版｜濃い青ほど上位` };
-      evidence = { ...evidence, rankingKey, year, winner, valuesSource: sourceUrl,
-        valuesSha256: sha(fs.readFileSync(path.join(OUT, 'sources', sourceName))),
-        mapSource: 'apps/remotion/public/prefecture.topojson' };
-    }
+    if (isQuestionRanking) ({ design, evidence } = await questionRanking(meta));
     if (a.catalogKey.startsWith('a-kakei-'))
       ({ design, evidence } = await household(a));
     let element;
@@ -436,10 +498,11 @@ async function main() {
       height: 670,
       fonts,
       onNodeDetected: (n) => {
-        if (typeof n.props.children === 'string')
-          textBoxes.push({ ...n, text: n.props.children, props: undefined });
+        if (typeof n.textContent === 'string')
+          textBoxes.push({ ...n, text: n.textContent, props: undefined });
       },
     });
+    if (!textBoxes.length) throw Error('layout inspection returned no text nodes ' + a.catalogKey);
     for (const b of textBoxes)
       if (
         b.left < 48 ||
@@ -477,11 +540,11 @@ async function main() {
         a.cover.status === 'missing'
           ? '記事詳細のカバー未設定'
           : '小さい文字・全文詰め込み・主題の弱さを大きな文字組みと地図で改善',
-      version: NOTE_COVER_REFRESH_VERSION,
+      version,
       file,
       sha256: sha(fs.readFileSync(file)),
       copy,
-      evidence,
+      evidence: { ...evidence, layout: textBoxes.map(({ left, top, width, height, text }) => ({ left, top, width, height, text })) },
       quality: {
         width: m.width,
         height: m.height,
@@ -501,7 +564,7 @@ async function main() {
     path.join(OUT, 'production-manifest.json'),
     JSON.stringify(
       {
-        version: NOTE_COVER_REFRESH_VERSION,
+        version,
         generatedAt: new Date().toISOString(),
         account: 'stats47',
         articles: reports,
@@ -510,6 +573,18 @@ async function main() {
       2
     ) + '\n'
   );
+  const store = createCoverStore();
+  for (const report of reports.filter((r) => r.action !== 'keep')) {
+    if (typeof report.file !== 'string') throw Error('candidate file missing');
+    await registerCoverCandidate(report, fs.readFileSync(report.file), version, store);
+    console.log('Remote cover + input verified:', report.key);
+  }
+  // Temporary input/render files are removed after every image is verified remotely.
+  // OUT is confined to an owned temporary subdirectory above; remove after remote registration.
+  if (fs.readdirSync(OUT).some(name => !['before', 'after', 'sources', 'inventory.json', 'production-manifest.json', '.note-cover-temporary-input'].includes(name)))
+    throw Error('remote assets saved; unknown temporary files prevent automatic cleanup');
+  fs.rmSync(OUT, { recursive: true, force: true });
+  console.log('Remote revisions registered; temporary generation inputs removed');
   console.log(
     JSON.stringify(
       reports.reduce(

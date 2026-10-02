@@ -1,5 +1,6 @@
-import { buildElement } from './blog-thumbnail-render';
 import { createElement as h } from 'react';
+
+import { buildElement } from './blog-thumbnail-render';
 
 export function buildNoteCoverElement(title: string) {
   return buildElement(
@@ -24,6 +25,13 @@ export interface EditorialNoteCover {
   mapLayout?: 'horizontal';
   mapLegend?: string;
   mapInsetImage?: string;
+  questionRanking?: {
+    subjectLines: string[];
+    question: string;
+    answer: string;
+    year: string;
+    kicker: string;
+  };
   household?: {
     prefecture: string;
     city: string;
@@ -196,6 +204,7 @@ export function buildEditorialNoteCoverElement(data: EditorialNoteCover) {
 
 /** 一覧の小さい表示でも主題が読める、地図付きの太字カバー。 */
 export function buildBoldNoteCoverElement(data: EditorialNoteCover) {
+  if (data.questionRanking) return buildQuestionRankingNoteCoverElement(data);
   const hh = data.household;
   const text = (value: string, style: Record<string, string | number> = {}) =>
     h('div', { style: { display: 'flex', whiteSpace: 'pre-wrap', ...style } }, value);
@@ -294,4 +303,33 @@ export function buildBoldNoteCoverElement(data: EditorialNoteCover) {
       color: '#c4d4ee', fontSize: 20,
     })
   );
+}
+
+/** Question covers use the approved light paper / warm D3 map, with no chart legend. */
+export function buildQuestionRankingNoteCoverElement(data: EditorialNoteCover) {
+  const copy = data.questionRanking;
+  if (!copy || copy.subjectLines.length < 1 || copy.subjectLines.length > 2)
+    throw new Error('question cover subject must have one or two lines');
+  const units = (value: string) => [...value].reduce((sum,ch) => sum + (/^[\x00-\x7f]$/.test(ch) ? 0.65 : 1), 0);
+  const isTwoLines = copy.subjectLines.length === 2;
+  const subjectSize = Math.min(124, Math.floor(760 / Math.max(...copy.subjectLines.map(units))),
+    Math.floor(210 / (copy.subjectLines.length * 1.12)));
+  const questionSize = Math.min(isTwoLines ? 86 : 124, Math.floor(760 / units(copy.question)));
+  const answerSize = Math.min(61, Math.floor(760 / units(copy.answer)));
+  if (subjectSize < 60 || questionSize < 60 || answerSize < 35)
+    throw new Error('question cover needs shorter editorial copy');
+  const text = (value: string, left: number, top: number, size: number, color = '#0b2152') =>
+    h('div', { style: { position: 'absolute', display: 'flex', whiteSpace: 'pre', left, top,
+      fontSize: size, fontWeight: 900, color, lineHeight: 1.12 } }, value);
+  return h('div', { style: { width: 1280, height: 670, display: 'flex', position: 'relative',
+    overflow: 'hidden', background: '#faf9f5', fontFamily: 'Noto Sans JP' } },
+    h('img', { src: data.mapImage, width: 1280, height: 670,
+      style: { position: 'absolute', left: 0, top: 0, opacity: 0.52 } }),
+    text(copy.kicker, 64, 52, 29, '#53657f'),
+    text(copy.subjectLines.join('\n'), 55, 132, subjectSize),
+    text(copy.question, 55, isTwoLines ? 364 : 294, questionSize),
+    text(copy.answer, 63, isTwoLines ? 492 : 467, answerSize, '#aa421b'),
+    text('stats47', 63, 582, 29, '#53657f'),
+    text('沖縄県', 1076, 536, 16, '#9d714d'),
+    text(`${copy.year}年版`, 1080, 589, 23, '#53657f'));
 }

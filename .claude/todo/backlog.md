@@ -299,17 +299,17 @@ updated: 2026-09-29
   R2 反映はオーナー承認。40 件を推測で一括変更しない (代表 1 件で年別の値を確かめてから広げる)。
 - **完了条件**: 40 件が e-Stat に実在する全年を配信し、`school-teacher-annual-income` の最新年が公表済みの最新年と一致している。
   年ごとに定義が違って並べられない場合は、その理由と採った年の範囲が本カードの削除コミットに書かれている。
-### [NOTE-COVER-ROLLOUT-20260928] 生成済みのnote記事カバー286件を公開記事へ差し替える
+### [NOTE-COVER-ROLLOUT-20260928] noteカバーの未回収版を回収し、分類別にレビューして公開する
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-09-28] [領域:商品]
 
-- **監査結果 (2026-09-28)**: 公開286件はカタログと全件対応。分類は導入1・家計47・解説14・Geo/データセット6・質問型ランキング90・物語型ランキング70・実務52・配色6。根拠と全件比較は `.local/note-cover-refresh/2026-09-28/audit/classification.json` と `audit/index.html`。現時点でnote.comには未反映。
-- **v2監査で分かった不足**: 初稿は導入・家計の48件のみ `visualReview: pass`、残る238件は `needs-revision`。共通日本地図・文書アイコンへの一律置換では、ランキングの値、配色記事の色見本、Geo/データセット・解説記事の固有図版が消える。
-- **分類別の管理画面 (2026-09-28)**: `/content/note/covers` に8分類・レビュー状態の集計、絞り込み、公開前スナップショットと生成候補の比較を追加。286件の分類とmanifestの `auditCategory` は全件一致。候補配信は公開済み記事keyに限定したローカル読み取り専用ルート。画像更新時はこの画面で分類別に再レビューする。
-- **地図レイアウト v4 (2026-09-28)**: 左上の定型文・定型フッターを削除し、日本地図を時計回り55度の横置きへ変更。沖縄県は実際の県形状を別枠に表示。公開タイトルの年・1位とR2観測値の47県・年・1位が一致するランキング22件は、順位を5色で表すコロプレスへ変更し、縮小一覧と代表画像を目視確認。家計47件の画像hashはv2と同一。現行 `production-manifest.json` は `2026-09-28-v4`、70件 `pass`、216件 `needs-revision`。未確認画像のdry-runは `cover_gate:visualReview` で停止し、note.com公開画像は未更新。
-- **次**: 分類ごとに公開画像の情報量を維持するカバーを設計・再生成する。特にランキングの上位県と値、配色の色見本、Geo/データセット・解説の固有図版を確認し、286件すべてを公開画像と並べて再レビューする。その後、新しいmanifestで画像ハッシュ・記事対応・認証口座を検証し、差し替え依頼を受けてから `.claude/skills/note/publish-note/SKILL.md` の手順で更新する。
-- **停止条件**: 現行 `.local/note-cover-refresh/2026-09-28/production-manifest.json` の `--commit` を実行しない。分類別修正と全件再レビューが終わるまで一括差し替えを保留する。更新時も記事件数・対応・画像ハッシュ・認証口座が合わない、POST応答が不明、または本文・タイトル・価格に差分が出た場合は停止する。
-- **完了条件**: 修正版の全286件が分類別レビューを通り、更新後に `verify-cover-refresh.mjs` が公開カバー一致と記事内容の不変を確認する。
-
+- **正典・owner**: 記事メタはTSカタログ、画像と採用/公開の対応は `data/note/cover-assets.json` + JSON Schema。実体はprivate R2のSHA付き版。契約は `.claude/rules/note-image-assets.md`。owner: note-manager / 管理画面担当。
+- **残る不足**: 9/28-v4の候補PNG・入力・レビュー実体がこのPCには無い。旧記録は70件pass・216件needs-revisionだったが、回収してSHAを照合するまで承認を引き継がない。未回収版は各記事の `missingVersions` に記録する。生成環境から元実体を回収するか、分類別の根拠から別版として再制作する。
+- **運用基盤**: 画像はprivate R2のSHA付き版に保管し、管理画面は共通台帳から表示する。家計47件の別版 `2026-10-02-household-r1` はレビュー・採用・公開反映と記事保全の照合まで完了。旧public R2版も過去版として保全。公開286件と保管版の全件照合、実測・検査結果の正典は `.claude/state/metrics/note/cover-operations-latest.json` と `cover-lifecycle-latest.json`。
+- **公開待ち**: 問い型90件の採用版 `2026-10-02-ranking-question-v1` はnote未反映。採用SHA・固定入力・検査結果は `.claude/state/metrics/note/ranking-question-cover-latest.json` と共通台帳を参照する。
+- **一時領域の残作業**: 問い型制作フォルダーの削除が実行環境の自動審査で拒否されたため未完了。保存済みR2を正本として扱い、環境で許可された方法で一時ファイルを整理する。
+- **実行順**: ①問い型90件の公開指示後、採用済みSHAだけでdry-run→差し替え→公開ポインタ/記事保全を検証する。②未制作・未採用の残る149件は旧版の実体と入力を回収し `note:assets import` で保管する。回収不能は分類別の根拠から別版として作り直す。③公開画像と比較し、ランキングの上位県と値、配色の色見本、Geo/データセット・解説の固有図版を維持した上で、画像SHAを指定してレビュー・採用・dry-run・公開後検証を通す。
+- **停止条件**: 9/28版を回収済みと扱わず、旧レビューや新生成を公開済みに読み替えない。未判定/要修正を一括差し替えしない。記事対応・画像SHA・認証口座が不一致、POST応答不明、本文/タイトル/価格/有料境界が変化した場合は停止する。
+- **完了条件**: 全286件の採用版が分類別レビューを通り、差し替え後の `verify-cover-refresh.mjs` が公開カバーの対応と記事内容の不変を確認する。
 ### [AREA-PROFILE-JSON-RETIRE-01] 県の profile.json の生成をやめる (読み手 0 になったため)
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-09-28] [領域:データ]
 
@@ -2584,6 +2584,10 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 ### [WIN-PREFLIGHT-NPM-SPAWN-01] Windows で preflight:pr の 3 gate が `spawnSync npm ENOENT` で判定前に落ちる
 
 タグ: [インフラ・計測] [種類:不具合] [実行:windows] [検証:npm run preflight:pr] [起票:2026-09-25] [領域:管理]
+
+- **再現確認 (2026-10-02)**: noteカバー台帳の統合後も3 gateが同じ起動エラーで未判定。対象checkerは今回未変更。
+  全体は41/45合格、残る1件は公開blog snapshotのHTTP503。note関連・全25package/8scriptの型検査・管理画面テストは合格。
+  実測は `.claude/state/metrics/note/cover-operations-latest.json` の `validation.preflightPr`。
 
 - **背景**: 2026-09-25 にこの Windows PC で `npm run preflight:pr` を実行すると、`check-japan-zue-evidence-inventory.mjs` と
   `check-quality-warning-ratchet.cjs` が `spawnSync("npm", …)` で ENOENT、`check-money-unit-audit.cjs` も collector の起動で失敗し、

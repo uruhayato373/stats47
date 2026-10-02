@@ -37,6 +37,13 @@ export async function launchContext({ headless = true } = {}) {
 /** current_user API で urlname を取得。 */
 export async function currentUrlname(ctx) {
   try {
+    const page = ctx.pages().find((p) => new URL(p.url()).origin === 'https://note.com');
+    if (page) return await page.evaluate(async () => {
+      if (location.origin !== 'https://note.com') return null;
+      const response = await fetch('/api/v2/current_user', { credentials: 'include' });
+      if (!response.ok) return null;
+      return (await response.json())?.data?.urlname ?? null;
+    });
     const r = await ctx.request.get("https://note.com/api/v2/current_user", { headers: { "User-Agent": UA } });
     const d = (await r.json())?.data;
     return d && typeof d === "object" ? d.urlname ?? null : null;

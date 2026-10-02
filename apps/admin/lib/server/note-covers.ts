@@ -1,89 +1,46 @@
 import 'server-only';
-
-import fs from 'node:fs';
-import path from 'node:path';
-
-import { NOTE_COVER_REFRESH_VERSION } from '../../../../.claude/scripts/note/catalog/cover-designs';
+import { readCoverLedger, validateCoverLedger, coverDisplayState, type CoverRevision } from '../../../../.claude/scripts/note/lib/cover-assets.mjs';
 import { NOTE_COVER_CATEGORIES, noteCoverCategory, type NoteCoverCategory } from '../../../../.claude/scripts/note/catalog/cover-categories';
-import { publishedArticles } from '../../../../.claude/scripts/note/catalog';
+import { NOTE_ARTICLES, publishedArticles } from '../../../../.claude/scripts/note/catalog';
 import { projectRoot } from './project-root';
 
 export { NOTE_COVER_CATEGORIES };
 export type { NoteCoverCategory };
-
-export type NoteCoverReview = 'pass' | 'needs-revision' | 'pending' | 'missing';
-
+export type NoteCoverReview = 'pass' | 'needs-revision' | 'pending' | 'missing' | 'unavailable';
 export interface NoteCoverRow {
-  key: string;
-  title: string;
-  noteUrl: string;
-  category: NoteCoverCategory;
-  review: NoteCoverReview;
-  reviewReason: string | null;
-  currentImageUrl: string | null;
-  candidateImageUrl: string | null;
+  key: string; title: string; noteUrl: string; category: NoteCoverCategory;
+  review: NoteCoverReview; reviewReason: string | null;
+  currentImageUrl: string | null; coverObservedAt: string | null; candidateImageUrl: string | null;
+  candidateVersion: string | null; publication: 'published' | 'unpublished' | 'unapproved';
+  stale: boolean; missingVersions: string[];
+  archivedVersions: { id: string; version: string; imageUrl: string }[];
 }
-
-type ManifestArticle = {
-  key: string;
-  noteUrl: string;
-  file: string;
-  beforeCover?: { url?: string | null };
-  quality?: { visualReview?: string; reviewReason?: string };
-};
-
-type Manifest = {
-  account: string;
-  version: string;
-  generatedAt: string;
-  articles: ManifestArticle[];
-};
-
-export function noteCoverDirectory(): string {
-  const date = NOTE_COVER_REFRESH_VERSION.replace(/-v\d+$/, '');
-  return path.join(projectRoot(), '.local/note-cover-refresh', date);
+export function privateCoverUrl(key: string, revision: CoverRevision) {
+  return `/note-cover/${encodeURIComponent(key)}?revision=${revision.id}`;
 }
-
-function loadManifest(): Manifest | null {
-  const file = path.join(noteCoverDirectory(), 'production-manifest.json');
-  if (!fs.existsSync(file)) return null;
-  const value: unknown = JSON.parse(fs.readFileSync(file, 'utf8'));
-  if (!value || typeof value !== 'object') throw new Error('note cover manifest is invalid');
-  const manifest = value as Manifest;
-  if (manifest.account !== 'stats47' || manifest.version !== NOTE_COVER_REFRESH_VERSION || !Array.isArray(manifest.articles))
-    throw new Error('note cover manifest identity mismatch');
-  return manifest;
-}
-
 export function noteCoverManagement() {
-  const manifest = loadManifest();
-  const proposals = new Map(manifest?.articles.map((a) => [a.key, a]) ?? []);
+  const ledger = validateCoverLedger(readCoverLedger(projectRoot()), NOTE_ARTICLES);
+  const byKey = new Map(ledger.articles.map((row) => [row.articleKey, row]));
   const rows: NoteCoverRow[] = publishedArticles().map((article) => {
-    const proposal = proposals.get(article.key);
-    const expectedFile = path.join(noteCoverDirectory(), 'after', `${article.key}.png`);
-    const hasCandidate = Boolean(proposal && proposal.noteUrl === article.noteUrl &&
-      typeof proposal.file === 'string' && path.resolve(proposal.file) === expectedFile && fs.existsSync(expectedFile));
-    const value = hasCandidate ? proposal?.quality?.visualReview : null;
-    const review: NoteCoverReview = !hasCandidate ? 'missing'
-      : value === 'pass' ? 'pass'
-      : value === 'needs-revision' ? 'needs-revision' : 'pending';
+    const record = byKey.get(article.key);
+    if (!record) throw new Error('note cover catalog coverage mismatch');
+    const state = coverDisplayState(record);
+    const archived = record.revisions.find((r) => r.id === record.published?.revisionId);
     return {
-      key: article.key,
-      title: article.title,
-      noteUrl: article.noteUrl ?? '',
-      category: noteCoverCategory(article),
-      review,
-      reviewReason: proposal?.quality?.reviewReason ?? null,
-      currentImageUrl: proposal?.beforeCover?.url ?? null,
-      candidateImageUrl: hasCandidate ? `/note-cover/${encodeURIComponent(article.key)}` : null,
+      key: article.key, title: article.title, noteUrl: article.noteUrl ?? '', category: noteCoverCategory(article),
+      review: state.review === 'not-required' ? 'pending' : state.review,
+      reviewReason: state.candidate?.review.reason ?? null,
+      currentImageUrl: archived ? privateCoverUrl(article.key, archived) : record.published?.url ?? null,
+      coverObservedAt: record.published?.observedAt ?? null,
+      candidateImageUrl: state.candidate ? privateCoverUrl(article.key, state.candidate) : null,
+      candidateVersion: state.candidate?.version ?? null, publication: state.publication, stale: state.stale,
+      missingVersions: record.missingVersions,
+      archivedVersions: record.revisions.filter((r) => r.id !== record.candidateRevisionId && r.id !== record.published?.revisionId)
+        .map((r) => ({ id: r.id, version: r.version, imageUrl: privateCoverUrl(article.key, r) })),
     };
   });
   const counts = Object.fromEntries(NOTE_COVER_CATEGORIES.map(({ key }) => [key, rows.filter((row) => row.category === key).length])) as Record<NoteCoverCategory, number>;
-  const reviewCounts = {
-    pass: rows.filter((row) => row.review === 'pass').length,
-    'needs-revision': rows.filter((row) => row.review === 'needs-revision').length,
-    pending: rows.filter((row) => row.review === 'pending').length,
-    missing: rows.filter((row) => row.review === 'missing').length,
-  };
-  return { rows, counts, reviewCounts, version: manifest?.version ?? null, generatedAt: manifest?.generatedAt ?? null };
+  const reviews: NoteCoverReview[] = ['pass', 'needs-revision', 'pending', 'missing', 'unavailable'];
+  const reviewCounts = Object.fromEntries(reviews.map((review) => [review, rows.filter((row) => row.review === review).length])) as Record<NoteCoverReview, number>;
+  return { rows, counts, reviewCounts, updatedAt: ledger.updatedAt };
 }

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/** Cover-only updates. Requires reviewed production manifest; no body/publish endpoint is called. */
+/** Cover-only updates from approved, immutable remote ledger revisions. */
 import fs from 'node:fs';
 import path from 'node:path';
 import os from 'node:os';
@@ -7,6 +7,10 @@ import { fileURLToPath } from 'node:url';
 import { execFile, execFileSync } from 'node:child_process';
 import { promisify } from 'node:util';
 import sharp from 'sharp';
+import { readCoverLedger, updateCoverLedger, recordCoverObservation, adoptedCoverRevision, approvedCoverRevision, renameCoverFile } from './lib/cover-assets.mjs';
+import { readStoredCover, createCoverStore, fetchNoteDetail, fetchCoverSource } from './lib/cover-storage.mjs';
+import { launchContext, assertAccount, pruneProfileCaches } from './lib/note-session.mjs';
+import { measurementContext, unattended, markMeasurementAuthenticated } from '../measurement/browser-session.mjs';
 import {
   sha256,
   assetPath,
@@ -14,13 +18,15 @@ import {
   assertPreserved,
   assertProduction,
   uploadInBrowser,
+  coverOperationVersion,
+  findCoverOperation,
 } from './lib/cover-update.mjs';
 
 const ROOT = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
   '../../..'
 );
-const opts = { commit: false, limit: Infinity, keys: null, manifest: null };
+const opts = { commit: false, limit: Infinity, keys: null };
 for (let i = 2; i < process.argv.length; i++) {
   const flag = process.argv[i];
   if (flag === '--commit') {
@@ -29,25 +35,37 @@ for (let i = 2; i < process.argv.length; i++) {
   }
   if (flag === '--help') {
     console.log(
-      'node update-note-covers.mjs --manifest PATH [--keys key1,key2] [--limit N] [--commit]\nWithout --commit: validate local assets/catalog only. Resume uses the versioned journal; uncertain POST is never repeated blindly.'
+      'node update-note-covers.mjs [--keys key1,key2] [--limit N] [--commit]\nWithout --commit: validate approved remote assets/catalog only. Import old manifests with note:assets import first. Resume uses a revision-specific journal.'
     );
     process.exit(0);
   }
   if (
-    !['--manifest', '--keys', '--limit'].includes(flag) ||
+    !['--keys', '--limit'].includes(flag) ||
     !process.argv[i + 1]
   )
     throw Error('invalid argument ' + flag);
   opts[flag.slice(2)] = process.argv[++i];
 }
-if (!opts.manifest) throw Error('--manifest required');
 opts.limit = Number(opts.limit);
-if (!(opts.limit > 0)) throw Error('invalid limit');
-const manifestPath = path.resolve(opts.manifest),
-  base = path.dirname(manifestPath);
-const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
-if (manifest.account !== 'stats47' || !/^[\w-]+$/.test(manifest.version))
-  throw Error('manifest identity');
+if (!(opts.limit > 0) || (opts.limit !== Infinity && !Number.isSafeInteger(opts.limit))) throw Error('invalid limit');
+const ledger = readCoverLedger();
+const selected = new Set(opts.keys?.split(',') ?? []);
+const scope = ledger.articles.flatMap((row) => {
+  const revision = adoptedCoverRevision(row);
+  if (!revision || (selected.size && !selected.has(row.articleKey))) return [];
+  return [{ key: row.articleKey, sha256: revision.sha256 }];
+});
+if (selected.size && selected.size !== scope.length)
+  throw Error('unknown/unapproved selected key');
+const manifest = { account: 'stats47', version: '', articles: ledger.articles.flatMap((row) => {
+  const revision = approvedCoverRevision(row);
+  if (!revision) return [];
+  return [{ key: row.articleKey, noteUrl: row.noteUrl, noteId: row.noteUrl.split('/').at(-1),
+    action: row.published?.status === 'missing' ? 'create' : 'improve',
+    sha256: revision.sha256, revision, beforeCover: { url: row.published?.url ?? null },
+    quality: { ...revision.quality, visualReview: revision.review.status } }];
+}) };
+manifest.version = coverOperationVersion(scope);
 const catalog = JSON.parse(
   execFileSync(
     process.execPath,
@@ -60,30 +78,26 @@ const catalog = JSON.parse(
   )
 );
 const catalogByKey = new Map(catalog.articles.map((a) => [a.key, a]));
-const selected = new Set(opts.keys?.split(',') ?? []);
 const articles = manifest.articles.filter(
   (a) => a.action !== 'keep' && (!selected.size || selected.has(a.key))
 );
-if (selected.size && selected.size !== articles.length)
-  throw Error('unknown/unchanged selected key');
 if (
   new Set(manifest.articles.map((a) => a.noteId)).size !==
   manifest.articles.length
 )
   throw Error('duplicate note');
-for (const a of articles) {
+const assets = new Map(), originals = new Map(), store = articles.length ? createCoverStore() : null;
+for (const a of articles.slice(0, opts.limit)) {
   if (catalogByKey.get(a.key)?.noteUrl !== a.noteUrl)
     throw Error('catalog mismatch ' + a.key);
-  assertProduction(a, fs.readFileSync(a.file), await sharp(a.file).metadata());
-  assertTarget(
-    JSON.parse(
-      fs.readFileSync(path.join(base, 'before', a.noteId + '.json'), 'utf8')
-    ),
-    a
-  );
+  const bytes = await readStoredCover(a.revision, store);
+  assertProduction(a, bytes, await sharp(bytes).metadata());
+  assets.set(a.key, bytes);
+  const original = await publicDetail(a);
+  originals.set(a.key, original);
 }
-console.log(`[note-covers] ${articles.length} reviewed assets validated`);
-if (!opts.commit) process.exit(0);
+console.log(`[note-covers] ${assets.size} reviewed assets validated`);
+if (!opts.commit || !articles.length) process.exit(0);
 
 const journalPath = path.join(
   ROOT,
@@ -97,19 +111,25 @@ const journal = fs.existsSync(journalPath)
       version: manifest.version,
       account: 'stats47',
       kind: 'cover-remediation',
+      scope,
       startedAt: new Date().toISOString(),
       articles: [],
     };
 if (journal.version !== manifest.version || journal.account !== 'stats47')
   throw Error('journal identity');
-const writeJournal = () => {
+// Retain recovery evidence even if an operator changed the selected batch.
+const previousJournals = fs.readdirSync(path.dirname(journalPath))
+  .filter((name) => /^note-cover-refresh-ledger-[a-f0-9]+\.json$/.test(name)
+    && path.join(path.dirname(journalPath), name) !== journalPath)
+  .map((name) => JSON.parse(fs.readFileSync(path.join(path.dirname(journalPath), name), 'utf8')));
+const writeJournal = async () => {
   fs.mkdirSync(path.dirname(journalPath), { recursive: true });
   journal.updatedAt = new Date().toISOString();
   fs.writeFileSync(
     journalPath + '.tmp',
     JSON.stringify(journal, null, 2) + '\n'
   );
-  fs.renameSync(journalPath + '.tmp', journalPath);
+  await renameCoverFile(journalPath + '.tmp', journalPath);
 };
 const run = promisify(execFile),
   cli =
@@ -117,7 +137,21 @@ const run = promisify(execFile),
     path.join(os.homedir(), '.browser-use-env/bin/browser-use');
 const session = `note-covers-${process.pid}-${Date.now()}`;
 const pause = (ms) => new Promise((r) => setTimeout(r, ms));
+const usePlaywright = process.platform === 'win32' || unattended();
+let playwrightContext, playwrightPage;
 async function browser(command, ...args) {
+  if (usePlaywright) {
+    playwrightContext ??= unattended() ? await measurementContext('note') : await launchContext();
+    playwrightPage ??= await playwrightContext.newPage();
+    if (command === 'open') {
+      await playwrightPage.goto(args[0], { waitUntil: 'domcontentloaded', timeout: 45000 });
+      await assertAccount(playwrightContext);
+      markMeasurementAuthenticated('note');
+      return {};
+    }
+    if (command === 'eval') return { result: await playwrightPage.evaluate(args[0]) };
+    throw Error('unsupported browser command');
+  }
   const { stdout } = await run(
     cli,
     [
@@ -147,21 +181,14 @@ async function evaluate(code) {
     : data.result;
 }
 async function publicDetail(a) {
-  const r = await fetch(
-    `https://note.com/api/v3/notes/${a.noteId}?coverRefresh=${Date.now()}`,
-    { signal: AbortSignal.timeout(30000) }
-  );
-  if (!r.ok) throw Error('detail HTTP ' + r.status);
-  const d = (await r.json()).data;
+  const d = await fetchNoteDetail(a.noteId);
   assertTarget(d, a);
   return d;
 }
 async function verifyImage(a, url, ui = false) {
   if (new URL(url).origin !== 'https://assets.st-note.com')
     throw Error('unexpected image host');
-  const r = await fetch(url, { signal: AbortSignal.timeout(30000) });
-  if (!r.ok) throw Error('image HTTP ' + r.status);
-  const bytes = Buffer.from(await r.arrayBuffer()),
+  const bytes = await fetchCoverSource(url),
     m = await sharp(bytes).metadata();
   if (Math.abs(m.width / m.height - 1280 / 670) > 0.001)
     throw Error('public image aspect ratio');
@@ -170,7 +197,7 @@ async function verifyImage(a, url, ui = false) {
     .removeAlpha()
     .raw()
     .toBuffer();
-  const expected = await sharp(a.file)
+  const expected = await sharp(assets.get(a.key))
     .resize(1280, 670)
     .removeAlpha()
     .raw()
@@ -199,6 +226,11 @@ function processes() {
     .map((m) => ({ pid: +m[1], ppid: +m[2], command: m[3] }));
 }
 async function cleanup() {
+  if (usePlaywright) {
+    await playwrightContext?.close();
+    if (playwrightContext && !unattended()) pruneProfileCaches();
+    return;
+  }
   const before = processes(),
     daemon = before.find(
       (p) =>
@@ -259,16 +291,22 @@ try {
   for (const a of articles) {
     if (completed >= opts.limit) break;
     active = journal.articles.find((x) => x.key === a.key);
+    if (!active) {
+      const prior = findCoverOperation(previousJournals, a);
+      if (prior) throw Error('earlier cover operation requires recovery with its recorded selection: ' + a.key);
+    }
     if (active?.status === 'verified') {
       if (active.sourceSha256 !== a.sha256)
         throw Error('review changed after upload');
-      continue;
     }
-    const original = JSON.parse(
-      fs.readFileSync(path.join(base, 'before', a.noteId + '.json'), 'utf8')
-    );
+    // Recheck approval immediately before mutation, including resumed journals.
+    const approvedRow = readCoverLedger().articles.find((r) => r.articleKey === a.key);
+    if (approvedRow?.approvedRevisionId !== a.sha256) throw Error('cover approval changed');
+    const original = originals.get(a.key);
     const before = await publicDetail(a);
     const fingerprint = assertPreserved(original, before);
+    if (active?.contentFingerprint && Object.keys(active.contentFingerprint).some((field) => active.contentFingerprint[field] !== fingerprint[field]))
+      throw Error('article content changed since the recorded operation');
     // Recovery after uncertain POST: verify the recorded returned URL, never repeat mutation.
     if (active && active.status !== 'preparing') {
       if (
@@ -294,8 +332,8 @@ try {
         };
         journal.articles.push(active);
       }
-      writeJournal();
-      const data = fs.readFileSync(a.file).toString('base64');
+      await writeJournal();
+      const data = assets.get(a.key).toString('base64');
       await evaluate(
         'window.__noteCoverBytes="";window.__noteCoverResult=null;true'
       );
@@ -304,7 +342,7 @@ try {
           `window.__noteCoverBytes+=${JSON.stringify(data.slice(i, i + 12000))};true`
         );
       active.status = 'uploading';
-      writeJournal();
+      await writeJournal();
       await evaluate(
         uploadInBrowser({ noteId: before.id, width: 1280, height: 670 })
       );
@@ -319,7 +357,7 @@ try {
       active.uploadedUrl = result.body.data.url;
       active.uploadedAt = new Date().toISOString();
       active.status = 'uploaded';
-      writeJournal();
+      await writeJournal();
     }
     const after = await publicDetail(a);
     assertPreserved(original, after);
@@ -336,17 +374,24 @@ try {
     active.status = 'verified';
     active.verifiedAt = new Date().toISOString();
     delete active.error;
-    writeJournal();
+    await writeJournal();
+    await updateCoverLedger((current) => {
+      const row = current.articles.find((r) => r.articleKey === a.key);
+      if (row?.approvedRevisionId !== a.sha256) throw Error('cover approval changed after upload; inspect journal');
+      recordCoverObservation(current, { key: a.key, noteUrl: a.noteUrl, status: 'configured',
+        url: after.eyecatch, observedAt: active.verifiedAt });
+      row.published.revisionId = a.sha256;
+    });
     completed++;
     console.log(
-      `[note-covers] verified ${journal.articles.filter((x) => x.status === 'verified').length}/${manifest.articles.filter((x) => x.action !== 'keep').length}: ${a.key}`
+      `[note-covers] verified ${journal.articles.filter((x) => x.status === 'verified').length}/${scope.length}: ${a.key}`
     );
     await pause(350);
   }
 } catch (error) {
   if (active) {
     active.error = error.message;
-    writeJournal();
+    await writeJournal();
   }
   console.error(error);
   process.exitCode = 2;

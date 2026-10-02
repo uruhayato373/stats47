@@ -314,17 +314,19 @@ new_post_cover_title(){
   [ -d "$ADIR" ] || ADIR="/Users/minamidaisuke/stats47/docs/31_note記事原稿/$SLUG"
   # カバーが無いまま黙って公開しない (旧: cover が無ければ設定を飛ばしていた)
   node /Users/minamidaisuke/stats47/.claude/scripts/note/ensure-note-images.mjs "$ADIR" || { echo "  [FAIL] 画像が揃っていない"; return 1; }
-  [ -f "$ADIR/images/cover-1280x670.png" ] || { echo "  [FAIL] cover-1280x670.png が無い (カバー無しでは公開しない)"; return 1; }
+  local COVER_FILE
+  COVER_FILE=$(node /Users/minamidaisuke/stats47/.claude/scripts/note/materialize-cover.mjs "$SLUG") || { echo "  [FAIL] 台帳に確認済みのカバーがありません"; return 1; }
   BU open "https://editor.note.com/new" >/dev/null 2>&1; sleep 5
   BU state 2>&1 > /tmp/ns.txt
-  if ! grep -qE "contenteditable=true role=textbox" /tmp/ns.txt; then echo "  [FAIL] /new not loaded (login?)"; return 1; fi
-  if [ -f "$ADIR/images/cover-1280x670.png" ]; then
+  if ! grep -qE "contenteditable=true role=textbox" /tmp/ns.txt; then rm -f -- "$COVER_FILE"; rmdir -- "$(dirname "$COVER_FILE")"; echo "  [FAIL] /new not loaded (login?)"; return 1; fi
+  if [ -f "$COVER_FILE" ]; then
     local ADD=$(grep -oE '\[[0-9]+\]<button aria-label=画像を追加' /tmp/ns.txt | grep -oE '[0-9]+' | head -1)
     BU click "$ADD" >/dev/null 2>&1; sleep 2; BU state 2>&1 > /tmp/ns.txt
     local UP=$(grep -B1 '画像をアップロード' /tmp/ns.txt | head -1 | grep -oE '\[[0-9]+\]' | tr -d '[]')
     BU click "$UP" >/dev/null 2>&1; sleep 2; BU state 2>&1 > /tmp/ns.txt
     local FI=$(grep -oE '\[[0-9]+\]<input id=note-editor-eyecatch-input' /tmp/ns.txt | grep -oE '[0-9]+')
-    BU upload "$FI" "$ADIR/images/cover-1280x670.png" >/dev/null 2>&1; sleep 3; BU state 2>&1 > /tmp/ns.txt
+    BU upload "$FI" "$COVER_FILE" >/dev/null 2>&1; sleep 3; BU state 2>&1 > /tmp/ns.txt
+    rm -f -- "$COVER_FILE"; rmdir -- "$(dirname "$COVER_FILE")"
     local SV=$(awk '/^\t+保存$/{print prev} {prev=$0}' /tmp/ns.txt | grep -oE '\[[0-9]+\]<button' | grep -oE '[0-9]+' | tail -1)
     BU click "$SV" >/dev/null 2>&1; sleep 3
   fi

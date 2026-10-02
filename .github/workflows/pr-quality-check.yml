@@ -242,6 +242,8 @@ jobs:
         run: |
           node --test .claude/scripts/note/__tests__/image-assets-audit.test.mjs .claude/scripts/note/__tests__/image-assets-tools.test.mjs
           node .claude/scripts/note/audit-note-image-assets.mjs
+          npm run note:assets:validate
+          npm run note:assets:test
         continue-on-error: false
 
       - name: 🧹 Repository Hygiene Regression Guard
