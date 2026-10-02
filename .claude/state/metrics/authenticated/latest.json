@@ -1,23 +1,23 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-01T21:02:44.293Z",
-  "runId": "36922869472",
+  "generatedAt": "2026-10-02T08:36:02.098Z",
+  "runId": "36984502550",
   "sources": [
     {
       "source": "moshimo",
       "capability": "outcomes",
-      "observedAt": "2026-10-01T20:39:54.810Z",
+      "observedAt": "2026-10-02T08:34:40.415Z",
       "activated": true,
       "status": "pass",
       "code": null,
-      "runId": "36922869472",
+      "runId": "36984502550",
       "runAttempt": 1,
       "metricsAvailable": true,
       "inventoryAvailable": false,
       "collectionAttempted": true,
       "recovery": null,
       "evidence": {
-        "sha256": "d6e83f99ee25c22d5d9a4223b68ec7f2a50bc2e5752bff6b3509dee05788034c",
+        "sha256": "fe1bd73e302c78a041f45b8a5681d3369e43b5cbc84b75d71dc6d67b7372d900",
         "bytes": 24044
       },
       "quality": null,
@@ -27,18 +27,18 @@
     {
       "source": "a8",
       "capability": "site-outcomes",
-      "observedAt": "2026-10-01T20:39:11.783Z",
+      "observedAt": "2026-10-02T08:35:02.833Z",
       "activated": true,
       "status": "pass",
       "code": null,
-      "runId": "36922869472",
+      "runId": "36984502550",
       "runAttempt": 1,
       "metricsAvailable": true,
       "inventoryAvailable": false,
       "collectionAttempted": true,
       "recovery": null,
       "evidence": {
-        "sha256": "7d153436bf966370e291152056fdd21f72d7b44a7e249996821b36dada0d20c7",
+        "sha256": "21f3ad4d1fedab130a42cb7b2c35f99b6b0c378e1b8b10dd644dbfe081b6fd0d",
         "bytes": 210026
       },
       "quality": null,
@@ -48,18 +48,18 @@
     {
       "source": "afb",
       "capability": "site-conversion-outcomes",
-      "observedAt": "2026-10-01T20:39:37.393Z",
+      "observedAt": "2026-10-02T08:33:56.957Z",
       "activated": true,
       "status": "pass",
       "code": null,
-      "runId": "36922869472",
+      "runId": "36984502550",
       "runAttempt": 1,
       "metricsAvailable": true,
       "inventoryAvailable": false,
       "collectionAttempted": true,
       "recovery": null,
       "evidence": {
-        "sha256": "0e58cc7e7b421d76ae7024816be3abd2f2fe9343a03e54c7072a0af20d99fc0f",
+        "sha256": "dff4fdffb04b3e4002969be556406b89aa55591166325c8d536b58ceb1cdff68",
         "bytes": 1409
       },
       "quality": {
@@ -73,18 +73,18 @@
     {
       "source": "note",
       "capability": "dashboard-metrics",
-      "observedAt": "2026-10-01T20:40:05.975Z",
+      "observedAt": "2026-10-02T08:33:51.234Z",
       "activated": true,
       "status": "pass",
       "code": null,
-      "runId": "36922869472",
+      "runId": "36984502550",
       "runAttempt": 1,
       "metricsAvailable": true,
       "inventoryAvailable": true,
       "collectionAttempted": true,
       "recovery": null,
       "evidence": {
-        "sha256": "ebb179e0b48a3dc13449701438eb4b3ab947c48b7fa24da1e714e70a93f6fe44",
+        "sha256": "66ce37dd2298522e6b00a61d273982eeb337ceadbff9733967aaa612fab20db2",
         "bytes": 1701802
       },
       "quality": {
@@ -102,17 +102,20 @@
     {
       "source": "gsc",
       "capability": "verified-coverage-export",
-      "observedAt": null,
+      "observedAt": "2026-10-02T08:34:02.923Z",
       "activated": true,
-      "status": "failed",
-      "code": "runner_failed",
-      "runId": "36922869472",
-      "runAttempt": null,
-      "metricsAvailable": false,
+      "status": "pass",
+      "code": null,
+      "runId": "36984502550",
+      "runAttempt": 1,
+      "metricsAvailable": true,
       "inventoryAvailable": false,
-      "collectionAttempted": null,
+      "collectionAttempted": true,
       "recovery": null,
-      "evidence": null,
+      "evidence": {
+        "sha256": "2ce9ba4487b6cc03e6baffdf228c336232eba22dc7e780105b10b3d404baf312",
+        "bytes": 2682896
+      },
       "quality": null,
       "knownIncomplete": null,
       "remaining": null
@@ -120,11 +123,11 @@
     {
       "source": "kdp",
       "capability": "publication-daily-and-monthly-royalties",
-      "observedAt": "2026-10-01T20:39:53.975Z",
+      "observedAt": "2026-10-02T08:34:25.002Z",
       "activated": true,
       "status": "failed",
       "code": "auth_required",
-      "runId": "36922869472",
+      "runId": "36984502550",
       "runAttempt": 1,
       "metricsAvailable": false,
       "inventoryAvailable": false,
@@ -134,7 +137,7 @@
         "blockedSince": "2026-09-30T08:35:08.183Z"
       },
       "evidence": {
-        "sha256": "fe7c365a38ed0cd63567530d431abb79c0c32870943f5604a11f6e88ca25a4ea",
+        "sha256": "fc997963c58d8aafb547f4c0d92b7a41ebb6f2d6681ae4dbb87a024a5517ced9",
         "bytes": 159
       },
       "quality": null,
@@ -144,18 +147,18 @@
     {
       "source": "rakuten",
       "capability": "monthly-outcomes",
-      "observedAt": "2026-10-01T20:39:43.061Z",
+      "observedAt": "2026-10-02T08:34:29.983Z",
       "activated": true,
       "status": "pass",
       "code": null,
-      "runId": "36922869472",
+      "runId": "36984502550",
       "runAttempt": 1,
       "metricsAvailable": true,
       "inventoryAvailable": false,
       "collectionAttempted": true,
       "recovery": null,
       "evidence": {
-        "sha256": "68adfb5b58ebc615249b9a5232cb2e66c42f67f5844ef00145c028f3105722a4",
+        "sha256": "563fba1e2fe36e1044360e5e38a62246cc1daacbea806ab64c0ca3f627d62378",
         "bytes": 1062
       },
       "quality": null,
@@ -165,11 +168,11 @@
     {
       "source": "coconala",
       "capability": "marketplace-metrics",
-      "observedAt": "2026-10-01T20:39:37.619Z",
+      "observedAt": "2026-10-02T08:33:30.674Z",
       "activated": true,
       "status": "failed",
       "code": "auth_required",
-      "runId": "36922869472",
+      "runId": "36984502550",
       "runAttempt": 1,
       "metricsAvailable": false,
       "inventoryAvailable": false,
@@ -179,7 +182,7 @@
         "blockedSince": "2026-10-01T12:39:06.962Z"
       },
       "evidence": {
-        "sha256": "80b53d17147a7ab3422f6e701a953d999454d94c7e9860e5b8385ed28b0f6c27",
+        "sha256": "5856298a17a996d9fa1dd57e20b42a7a48777df14ade718a336a392fbc0e840b",
         "bytes": 164
       },
       "quality": null,
