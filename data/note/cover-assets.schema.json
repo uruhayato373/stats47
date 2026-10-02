@@ -79,7 +79,24 @@
           "properties": {
             "renderer": { "type": ["string", "null"] },
             "sourceUrl": { "type": ["string", "null"], "pattern": "^https://" },
-            "sourceSha256": { "$ref": "#/definitions/nullableId" }
+            "sourceSha256": { "$ref": "#/definitions/nullableId" },
+            "input": {
+              "type": "object", "additionalProperties": false,
+              "required": ["sha256", "bytes", "storage"],
+              "properties": {
+                "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+                "bytes": { "type": "integer", "minimum": 1, "maximum": 16777216 },
+                "storage": {
+                  "type": "object", "additionalProperties": false,
+                  "required": ["provider", "bucket", "key"],
+                  "properties": {
+                    "provider": { "const": "r2-private" },
+                    "bucket": { "const": "stats47-private" },
+                    "key": { "type": "string", "pattern": "^note/covers/[A-Za-z0-9_-]+/inputs/[a-f0-9]{64}\\.json$" }
+                  }
+                }
+              }
+            }
           }
         }
       }

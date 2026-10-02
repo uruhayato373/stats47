@@ -12,6 +12,7 @@ const ajv = new Ajv({ allErrors: true });
 const validateShape = ajv.compile(schema);
 export const coverSha = (bytes) => createHash('sha256').update(bytes).digest('hex');
 export const coverAssetKey = (key, sha) => `note/covers/${key}/revisions/${sha}.png`;
+export const coverInputKey = (key, sha) => `note/covers/${key}/inputs/${sha}.json`;
 const FILE_RENAME_ATTEMPTS = 8;
 const FILE_RENAME_BACKOFF_MS = 50;
 /** Preserve the old file and pending bytes through transient Windows reader locks. */
@@ -46,6 +47,9 @@ export function validateCoverLedger(ledger, catalog) {
       ids.add(rev.id);
       if (rev.kind === 'candidate' && (!rev.quality || rev.width !== 1280 || rev.height !== 670))
         throw Error(`candidate quality evidence required: ${row.articleKey}`);
+      if (rev.provenance.input && (rev.provenance.input.storage.key !== coverInputKey(row.articleKey, rev.provenance.input.sha256)
+          || rev.provenance.input.sha256 !== rev.quality?.evidenceSha256))
+        throw Error(`cover input identity: ${row.articleKey}`);
       if (rev.review.status === 'pass' && (!rev.review.reason || !rev.review.reviewedAt))
         throw Error(`cover review evidence required: ${row.articleKey}`);
     }

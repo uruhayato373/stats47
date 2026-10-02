@@ -7,7 +7,7 @@ import { execFileSync } from 'node:child_process';
 import sharp from 'sharp';
 import { COVER_ROOT, readCoverLedger, validateCoverLedger, emptyCoverArticle, updateCoverLedger,
   recordCoverObservation, addCoverRevision, reviewCoverRevision, coverSha } from './lib/cover-assets.mjs';
-import { createCoverStore, fetchCoverSource, fetchNoteDetail, storeCoverBytes, readStoredCover } from './lib/cover-storage.mjs';
+import { createCoverStore, fetchCoverSource, fetchNoteDetail, storeCoverBytes, readStoredCover, readStoredCoverInput } from './lib/cover-storage.mjs';
 import { registerCoverCandidate } from './lib/cover-ingest.mjs';
 import { enumerateNoteBodies } from '../lib/gallery-collectors.mjs';
 
@@ -15,7 +15,7 @@ const command = process.argv[2];
 const options = {};
 for (let i = 3; i < process.argv.length; i += 2) {
   const flag = process.argv[i];
-  if (!['--keys', '--manifest', '--output', '--revision', '--status', '--reason', '--missing-version'].includes(flag) || !process.argv[i + 1])
+  if (!['--keys', '--manifest', '--output', '--revision', '--status', '--reason', '--missing-version', '--source'].includes(flag) || !process.argv[i + 1])
     throw Error(`invalid argument: ${flag}`);
   options[flag.slice(2)] = process.argv[i + 1];
 }
@@ -125,6 +125,9 @@ if (command === 'seed') {
   console.log('Legacy R2 assets preserved without changing candidate/approval/publication pointers');
 } else if (command === 'prepare') {
   if (!options.output || !keys.size) throw Error('prepare requires --output and --keys');
+  if (options.source && !['note', 'ledger'].includes(options.source)) throw Error('prepare source must be note or ledger');
+  const ledgerInput = options.source === 'ledger' ? readCoverLedger() : null;
+  const inputStore = ledgerInput ? createCoverStore() : null;
   const output = path.resolve(options.output);
   const relative = path.relative(COVER_ROOT, output);
   if (!relative.startsWith('..') && !path.isAbsolute(relative)) throw Error('temporary input must be outside the repository');
@@ -141,7 +144,17 @@ if (command === 'seed') {
   await boundedMap(selected, async (article) => {
     const id = article.noteUrl?.split('/').at(-1) ?? article.key;
     let detail;
-    if (article.noteUrl) detail = await fetchNoteDetail(id);
+    if (ledgerInput) {
+      const record = ledgerInput.articles.find(row => row.articleKey === article.key);
+      const published = record?.published;
+      const revision = record?.revisions.find(r => r.id === published?.revisionId);
+      if (!article.noteUrl || record?.noteUrl !== article.noteUrl || published?.status !== 'configured' || !revision)
+        throw Error('verified archived public cover required for ledger preparation');
+      const bytes = await readStoredCover(revision, inputStore);
+      fs.writeFileSync(path.join(output, 'before', `${id}.image`), bytes);
+      detail = { body: '', eyecatch: published.url, price: article.priceJpy ?? 0,
+        source: 'verified-ledger-public-cover', observedAt: published.observedAt };
+    } else if (article.noteUrl) detail = await fetchNoteDetail(id);
     else {
       const directories = [path.join(COVER_ROOT, 'docs/31_note記事原稿', article.vertical, article.key),
         path.join(COVER_ROOT, 'docs/31_note記事原稿', article.key)];
@@ -150,7 +163,7 @@ if (command === 'seed') {
       detail = { body: fs.readFileSync(draft, 'utf8'), eyecatch: null, price: article.priceJpy ?? 0 };
     }
     fs.writeFileSync(path.join(output, 'before', `${id}.json`), JSON.stringify(detail));
-    if (detail.eyecatch) fs.writeFileSync(path.join(output, 'before', `${id}.image`), await fetchCoverSource(detail.eyecatch));
+    if (detail.eyecatch && !ledgerInput) fs.writeFileSync(path.join(output, 'before', `${id}.image`), await fetchCoverSource(detail.eyecatch));
     inventory.push({ catalogKey: article.key, noteKey: id, noteUrl: article.noteUrl ?? null, title: article.title,
       vertical: article.vertical, price: detail.price ?? 0, cover: { status: detail.eyecatch ? 'configured' : 'missing', url: detail.eyecatch ?? null } });
   });
@@ -178,7 +191,10 @@ if (command === 'seed') {
 } else if (command === 'verify') {
   const store = createCoverStore();
   const revisions = readCoverLedger().articles.filter((a) => !keys.size || keys.has(a.articleKey)).flatMap((a) => a.revisions.map((r) => ({ articleKey: a.articleKey, revision: r })));
-  await boundedMap(revisions, async (item) => { await readStoredCover(item.revision, store); });
+  await boundedMap(revisions, async (item) => {
+    await readStoredCover(item.revision, store);
+    await readStoredCoverInput(item.revision, store);
+  });
 } else {
-  throw Error('Usage: cover-assets.mjs seed|validate|archive|archive-r2|prepare|import|review|verify [--keys key1,key2] [--output TEMP_DIR] [--manifest PATH] [--revision SHA --status pass|needs-revision --reason TEXT]');
+  throw Error('Usage: cover-assets.mjs seed|validate|archive|archive-r2|prepare|import|review|verify [--keys key1,key2] [--output TEMP_DIR --source note|ledger] [--manifest PATH] [--revision SHA --status pass|needs-revision --reason TEXT]');
 }

@@ -8,7 +8,7 @@ import { execFile, execFileSync } from 'node:child_process';
 import { promisify } from 'node:util';
 import { HttpsProxyAgent } from 'https-proxy-agent';
 import { S3Client, GetObjectCommand, PutObjectCommand } from '@aws-sdk/client-s3';
-import { COVER_ROOT, coverSha, coverAssetKey } from './cover-assets.mjs';
+import { COVER_ROOT, coverSha, coverAssetKey, coverInputKey } from './cover-assets.mjs';
 
 const BUCKET = 'stats47-private';
 const LIMIT = 16 * 1024 * 1024;
@@ -151,7 +151,8 @@ export function createCoverStore() {
         }
       },
       async put(key, bytes) {
-        await client.send(new PutObjectCommand({ Bucket: BUCKET, Key: key, Body: bytes, ContentType: 'image/png', IfNoneMatch: '*' }));
+        await client.send(new PutObjectCommand({ Bucket: BUCKET, Key: key, Body: bytes,
+          ContentType: key.endsWith('.json') ? 'application/json' : 'image/png', IfNoneMatch: '*' }));
       },
     };
   }
@@ -185,7 +186,8 @@ export function createCoverStore() {
     },
     async put(key, bytes) {
       const out = await api(await objectPath(key), { method: 'PUT', body: bytes,
-        headers: { 'content-type': 'image/png', 'if-none-match': '*', 'content-length': String(bytes.length) } });
+        headers: { 'content-type': key.endsWith('.json') ? 'application/json' : 'image/png',
+          'if-none-match': '*', 'content-length': String(bytes.length) } });
       if (![200, 201].includes(out.status)) throw Error(`private cover write HTTP ${out.status}`);
     },
   };
@@ -200,8 +202,28 @@ export async function readStoredCover(revision, store = createCoverStore()) {
 
 /** Write once, then verify remote bytes before registering a revision. */
 export async function storeCoverBytes(articleKey, bytes, store = createCoverStore()) {
+  return storeImmutableCoverObject(articleKey, bytes, coverAssetKey, store);
+}
+
+/** Preserve the exact evidence JSON alongside the image, never only its hash. */
+export async function storeCoverInput(articleKey, bytes, store = createCoverStore()) {
+  JSON.parse(bytes.toString('utf8'));
+  return storeImmutableCoverObject(articleKey, bytes, coverInputKey, store);
+}
+
+export async function readStoredCoverInput(revision, store = createCoverStore()) {
+  const input = revision.provenance.input;
+  if (!input) return null;
+  const bytes = await store.get(input.storage.key);
+  if (!bytes || bytes.length !== input.bytes || coverSha(bytes) !== input.sha256
+      || input.sha256 !== revision.quality?.evidenceSha256) throw Error('private cover input missing or SHA mismatch');
+  JSON.parse(bytes.toString('utf8'));
+  return bytes;
+}
+
+async function storeImmutableCoverObject(articleKey, bytes, keyFor, store) {
   const sha256 = coverSha(bytes);
-  const key = coverAssetKey(articleKey, sha256);
+  const key = keyFor(articleKey, sha256);
   if (!/^[A-Za-z0-9][A-Za-z0-9_-]*$/.test(articleKey) || bytes.length > LIMIT) throw Error('invalid cover asset');
   const existing = await store.get(key);
   if (existing && (existing.length !== bytes.length || coverSha(existing) !== sha256)) throw Error('immutable remote cover conflict');
