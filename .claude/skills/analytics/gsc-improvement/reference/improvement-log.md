@@ -829,3 +829,11 @@ clicks 930 は期間最高。週次計画の「CTR -0.42pp」はこのピーク�
 - **対象**: `.claude/todo/improvements.md` の `SITE-LINKROT-01`
 - **統合理由**: 2026-09-07実測の内容が `BLOG-LINKROT-01` と同一の `.claude/state/site/link-audit.json` (2026-09-05生成、壊れリンク6件) を参照する完全な重複行だった (行内に「同上」と明記)。片方だけを更新すると台帳がドリフトするため、`BLOG-LINKROT-01` 側に一本化する。
 - **決着**: improvements.mdから本行を削除。以後の壊れリンク是正判定・目印付与 (`[gsc-page:]`等) は `BLOG-LINKROT-01` に記録する。
+
+## 地方債記事と既存財政商品導線の修正（2026-10-02、FUNNEL-CTA-01関連）
+
+対象は `/blog/local-government-debt-burden` と `/products/data-p-04`、`/products/kindle-k-s1-06`。地方債現在高の分母を歳出決算総額に訂正し、2022年度・都道府県財政・ストック対フローを明示。既存の `TrackedProductLink` と計測先を再利用する。Office実機互換性や現在販売版v2の検証完了は主張しない。公開日2026-10-02。商品導線はPR #1062、main `cdc043a1713bf6a56954d3ba6d08f27036c58ef0`（12:23:06Z merge）。記事修正版はdevelop `8208ab283d47e41c7d851cbff3241ee0ea510e9d`、公開run37007325517 SUCCESS。ISRを更新する同一mainコードの再deploy run37007676597 SUCCESS。12:42:56Zの本番3URL×desktop/mobile確認は全6ケースPASS（本文、metadata/JSONLD、canonical、商品リンク、価格/販売先、Office未確認表示、横幅390px）。初回post-deploy smoke37007434638はhealth11/11・Playwright48 PASS。
+
+比較窓は2026-09-04〜10-01（before）と2026-10-03〜10-30（after）。公開日10-02を除く直前28日と直後28日。両窓は重ねず、GSC確定値の反映を3日以上待つ。GSCはcanonical URLを固定し、fragment行を除いてclicks・impressions・CTR・positionを国とdevice別に取得する。GA4はJapan/organicの対象landing sessions、engaged sessions、商品ページ遷移session数と率、既存product_clickの内訳を同じ期間条件で取得する。外部販売リンクclickを購入と扱わず、Coconala/KDPの実購入件数・売上は別途オーナー提供の実データで確認する。新しいイベント・外部送信先・カスタムディメンションは追加しない。
+
+既存W39 GSCは2026-08-28〜09-24のrolling28日で461click/3,863impression、CTR11.93%、平均position4.78。既存GA4の2026-08-30〜09-26ではJapanの対象landing610sessions、494engaged sessions、file_download2events。窓とチャネルが一致しないため今回のbeforeには流用しない。購入、導線別率、公開後値は欠測。必要項目未取得や標本不足なら判定不能とする。CTR変化はpositionとquery構成の変化を併記し、順位変動・季節性・同時施策を因果効果から区別する。28日後、実購入と記事→商品の率をbeforeと比較し、増加・減少・判定不能を報告し、数値閾値を後付けしない。
