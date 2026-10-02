@@ -1,5 +1,5 @@
-/* eslint-disable @next/next/no-img-element -- 管理画面で元画像とローカル候補の実ファイルを比較するため */
 import Link from 'next/link';
+import { NoteCoverImage } from '@/components/content/note-cover-image';
 
 import { PanelCard, StatusBadge, TableBody, TableCell, TableFrame, TableHead, TableHeader, TableRow, numCol, type Tone } from '@/components/admin-ui';
 import { FilterLink } from '@/components/content/content-ui';
@@ -19,9 +19,10 @@ const REVIEWS: { key: NoteCoverReview; label: string }[] = [
   { key: 'pending', label: '未判定' },
   { key: 'pass', label: '確認済み' },
   { key: 'missing', label: '候補なし' },
+  { key: 'unavailable', label: '旧候補未回収' },
 ];
 // レビュー状態の色: 確認済み=済 / 要修正=要対応 / 未判定=保留 / 候補なし=欠落
-const REVIEW_TONE: Record<NoteCoverReview, Tone> = { pass: 'good', 'needs-revision': 'warn', pending: 'neutral', missing: 'bad' };
+const REVIEW_TONE: Record<NoteCoverReview, Tone> = { pass: 'good', 'needs-revision': 'warn', pending: 'neutral', missing: 'neutral', unavailable: 'warn' };
 const PAGE_SIZE = 24;
 
 function href(query: Query, patch: Partial<Query>) {
@@ -49,8 +50,8 @@ export default async function NoteCoversPage({ searchParams }: { searchParams: P
   const reviewLabel = (key: NoteCoverReview) => REVIEWS.find((item) => item.key === key)?.label ?? key;
 
   return <Stack gap="lg">
-    <PageHeading title="noteカバー管理" source="note catalog + ローカル生成候補・レビュー台帳">
-      <p className="text-xs text-console-muted">公開済み記事のカバーを用途別に確認します。左は差し替え前の保存画像、右は生成候補です。現在のnote.com画像をリアルタイム取得した表示ではありません。</p>
+    <PageHeading title="noteカバー管理" source="note記事台帳 + 共通画像台帳 + 非公開ストレージ">
+      <p className="text-xs text-console-muted">公開画像と生成候補を用途別に比較できます。画像は共通ストレージに保管し、確認済み・未判定・反映状況を同じ台帳で管理します。公開画像の確認日も表示します。</p>
       <Link href="/content/note" className="text-xs text-console-accent hover:underline">記事管理へ戻る</Link>
     </PageHeading>
 
@@ -78,14 +79,14 @@ export default async function NoteCoversPage({ searchParams }: { searchParams: P
               <TableCell className={numCol}>{group.length}</TableCell>
               <TableCell className={numCol}>{count('pass')}</TableCell>
               <TableCell className={numCol}><Link href={href(query, { category: item.key, review: 'needs-revision', page: undefined })} className="text-console-accent hover:underline">{count('needs-revision')}</Link></TableCell>
-              <TableCell className={numCol}>{count('pending') + count('missing')}</TableCell>
+              <TableCell className={numCol}>{count('pending') + count('missing') + count('unavailable')}</TableCell>
             </TableRow>;
           })}</TableBody>
         </TableFrame>
       </Stack>
     </PanelCard>
 
-    <PanelCard title="レビュー状態" description={`生成版 ${data.version ?? 'なし'} ／ 最終生成 ${data.generatedAt ?? 'なし'}。要修正は差し替え対象外です。`}>
+    <PanelCard title="レビュー状態" description={`台帳更新 ${new Date(data.updatedAt).toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' })}。候補は確認後に差し替えます。旧候補未回収は、過去の生成記録に対応する画像を回収できていない記事です。`}>
       <Stack>
         <div className="flex flex-wrap gap-2">
           <FilterLink href={href(query, { review: undefined, page: undefined })} active={!review}>すべて</FilterLink>
@@ -113,12 +114,16 @@ export default async function NoteCoversPage({ searchParams }: { searchParams: P
               <div className="flex flex-wrap items-center gap-2 text-xs text-console-muted">
                 <span>{categoryLabel(row.category)}</span>
                 <StatusBadge tone={REVIEW_TONE[row.review]}>{reviewLabel(row.review)}</StatusBadge>
+                {row.candidateImageUrl && <StatusBadge tone={row.publication === 'published' ? 'good' : 'neutral'}>{row.publication === 'published' ? 'noteに反映済み' : 'noteに未反映'}</StatusBadge>}
+                {row.stale && <StatusBadge tone="warn">公開画像の再確認が必要</StatusBadge>}
               </div>
               <div className="grid grid-cols-2 gap-2">
-                <figure><div className="mb-1 text-[11px] text-console-muted">差し替え前</div>{row.currentImageUrl ? <img src={row.currentImageUrl} alt={`${row.title} 差し替え前`} loading="lazy" className="aspect-[1.91] w-full rounded border border-console-border object-contain" /> : <div className="aspect-[1.91] rounded border border-console-border p-2 text-xs text-console-muted">画像なし</div>}</figure>
-                <figure><div className="mb-1 text-[11px] text-console-muted">生成候補</div>{row.candidateImageUrl ? <img src={row.candidateImageUrl} alt={`${row.title} 生成候補`} loading="lazy" className="aspect-[1.91] w-full rounded border border-console-border object-contain" /> : <div className="aspect-[1.91] rounded border border-console-border p-2 text-xs text-console-muted">候補なし</div>}</figure>
+                <figure><div className="mb-1 text-[11px] text-console-muted">{row.coverObservedAt ? `公開カバー（${new Date(row.coverObservedAt).toLocaleDateString('ja-JP', { timeZone: 'Asia/Tokyo' })}確認）` : '差し替え前の保存画像'}</div>{row.currentImageUrl ? <NoteCoverImage key={row.currentImageUrl} src={row.currentImageUrl} alt={`${row.title} 公開カバー`} /> : <div className="aspect-[1.91] rounded border border-console-border p-2 text-xs text-console-muted">画像なし</div>}</figure>
+                <figure><div className="mb-1 text-[11px] text-console-muted">生成候補{row.candidateVersion ? `（${row.candidateVersion}）` : ''}</div>{row.candidateImageUrl ? <NoteCoverImage key={row.candidateImageUrl} src={row.candidateImageUrl} alt={`${row.title} 生成候補`} /> : <div className="aspect-[1.91] rounded border border-console-border p-2 text-xs text-console-muted">{row.review === 'unavailable' ? '過去の候補画像は未回収です' : '候補なし'}</div>}</figure>
               </div>
               {row.reviewReason && <p className="text-xs text-console-muted">{row.reviewReason}</p>}
+              {row.missingVersions.length > 0 && <p className="text-xs text-console-muted">未回収の旧版: {row.missingVersions.join('、')}。表示中の新しい候補とは別の版です。</p>}
+              {row.archivedVersions.length > 0 && <details className="text-xs text-console-muted"><summary className="cursor-pointer">過去の保管版 {row.archivedVersions.length} 件</summary><div className="grid grid-cols-2 gap-2 pt-2">{row.archivedVersions.map((r) => <figure key={r.id}><figcaption>{r.version}</figcaption><NoteCoverImage key={r.imageUrl} src={r.imageUrl} alt={`${row.title} 過去の保管版`} /></figure>)}</div></details>}
             </CardContent>
           </Card>)}
         </div>

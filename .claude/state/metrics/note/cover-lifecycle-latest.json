@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "account": "stats47",
+  "generatedAt": "2026-10-02T03:47:16.575Z",
+  "status": "pass",
+  "articles": [
+    {
+      "key": "a-kakei-aichi",
+      "status": "pass",
+      "publicCover": "https://assets.st-note.com/production/uploads/images/312770047/rectangle_large_type_2_eaa8194e8992dc5aa637f4d55163c999.png?fit=bounds&quality=85&width=1280",
+      "observedAt": "2026-10-02T03:47:16.466Z"
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 /** 公開カバーの棚卸し入力から、既存GIS+検証済みデータで派生画像を制作する。note書込なし。 */
 import fs from 'node:fs';
 import path from 'node:path';
+import os from 'node:os';
 import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { geoArea, geoMercator, geoPath } from 'd3-geo';
@@ -16,18 +17,34 @@ import {
   KEEP_EXISTING_COVER_KEYS,
   BOLD_COVER_HEADLINES,
   NOTE_COVER_COPY,
-  NOTE_COVER_REFRESH_VERSION,
 } from './catalog/cover-designs';
 import { NOTE_ARTICLES } from './catalog';
 async function main() {
+  const { fetchCoverSource, createCoverStore } = await import('./lib/cover-storage.mjs');
+  const { registerCoverCandidate } = await import('./lib/cover-ingest.mjs');
   const ROOT = path.resolve(
     path.dirname(fileURLToPath(import.meta.url)),
     '../../..'
   );
-  const OUT = path.join(ROOT, '.local/note-cover-refresh', NOTE_COVER_REFRESH_VERSION.replace(/-v\d+$/, ''));
+  const args = process.argv.slice(2);
+  if (args.length !== 4 || args[0] !== '--output' || args[2] !== '--version' || !/^[\w-]+$/.test(args[3]))
+    throw Error('Usage: generate-cover-refresh.ts --output TEMP_INPUT_DIR --version VERSION (prepare with note:assets first)');
+  const OUT = path.resolve(args[1]);
+  const version = args[3];
+  const isTemporary = [os.tmpdir(), 'C:/tmp', '/tmp'].some((dir) => {
+    const relative = path.relative(path.resolve(dir), OUT);
+    return relative && !relative.startsWith('..') && !path.isAbsolute(relative);
+  });
+  const relativeRoot = path.relative(ROOT, OUT);
+  if (!isTemporary || (!relativeRoot.startsWith('..') && !path.isAbsolute(relativeRoot)))
+    throw Error('generation input/output must be a temporary subdirectory outside the repository');
+  if (!fs.existsSync(path.join(OUT, '.note-cover-temporary-input')) || fs.readFileSync(path.join(OUT, '.note-cover-temporary-input'), 'utf8') !== 'stats47')
+    throw Error('unowned temporary directory');
   const inventory = JSON.parse(
     fs.readFileSync(path.join(OUT, 'inventory.json'), 'utf8')
   );
+  if (!Array.isArray(inventory) || new Set(inventory.map(a => a.catalogKey)).size !== inventory.length)
+    throw Error('duplicate/invalid cover inventory');
   const fonts = loadFonts(ROOT);
   const sha = (data: Buffer | string) =>
     createHash('sha256').update(data).digest('hex');
@@ -109,9 +126,7 @@ async function main() {
     const p = path.join(OUT, 'sources', name);
     fs.mkdirSync(path.dirname(p), { recursive: true });
     if (!fs.existsSync(p)) {
-      const r = await fetch(url);
-      if (!r.ok) throw Error(`${url}: ${r.status}`);
-      fs.writeFileSync(p, Buffer.from(await r.arrayBuffer()));
+      fs.writeFileSync(p, await fetchCoverSource(url));
     }
     return JSON.parse(fs.readFileSync(p, 'utf8'));
   }
@@ -363,7 +378,7 @@ async function main() {
   for (const a of inventory) {
     try {
     const meta = metadata.get(a.catalogKey);
-    if (!meta || meta.noteUrl !== a.noteUrl)
+    if (!meta || (meta.noteUrl ?? null) !== a.noteUrl)
       throw Error('catalog mismatch ' + a.catalogKey);
     const beforePath = a.cover.url
       ? path.join(OUT, 'before', a.noteKey + '.image')
@@ -392,7 +407,7 @@ async function main() {
       evidence: any = {
         source: NOTE_COVER_COPY[a.catalogKey]
           ? 'published title, article and original cover'
-          : 'published title',
+          : a.noteUrl ? 'published title' : 'draft catalog title',
         title: a.title,
         originalCoverSha256: base.beforeSha256,
       };
@@ -477,7 +492,7 @@ async function main() {
         a.cover.status === 'missing'
           ? '記事詳細のカバー未設定'
           : '小さい文字・全文詰め込み・主題の弱さを大きな文字組みと地図で改善',
-      version: NOTE_COVER_REFRESH_VERSION,
+      version,
       file,
       sha256: sha(fs.readFileSync(file)),
       copy,
@@ -501,7 +516,7 @@ async function main() {
     path.join(OUT, 'production-manifest.json'),
     JSON.stringify(
       {
-        version: NOTE_COVER_REFRESH_VERSION,
+        version,
         generatedAt: new Date().toISOString(),
         account: 'stats47',
         articles: reports,
@@ -510,6 +525,17 @@ async function main() {
       2
     ) + '\n'
   );
+  const store = createCoverStore();
+  for (const report of reports.filter((r) => r.action !== 'keep')) {
+    if (typeof report.file !== 'string') throw Error('candidate file missing');
+    await registerCoverCandidate(report, fs.readFileSync(report.file), version, store);
+  }
+  // Temporary input/render files are removed after every image is verified remotely.
+  // OUT is confined to an owned temporary subdirectory above; remove after remote registration.
+  if (fs.readdirSync(OUT).some(name => !['before', 'after', 'sources', 'inventory.json', 'production-manifest.json', '.note-cover-temporary-input'].includes(name)))
+    throw Error('remote assets saved; unknown temporary files prevent automatic cleanup');
+  fs.rmSync(OUT, { recursive: true, force: true });
+  console.log('Remote revisions registered; temporary generation inputs removed');
   console.log(
     JSON.stringify(
       reports.reduce(

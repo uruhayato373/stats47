@@ -1,160 +1,54 @@
 #!/usr/bin/env node
-/** Read-only final audit of the whole public portfolio and a completed cover refresh. */
+/** Verify ledger-owned private bytes and public cover identity. No local manifest or image dependency. */
 import fs from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-import { execFileSync } from 'node:child_process';
-import { auditNoteCovers } from './lib/cover-audit.mjs';
-import {
-  assertTarget,
-  assertPreserved,
-  assetPath,
-} from './lib/cover-update.mjs';
+import { COVER_ROOT, readCoverLedger, updateCoverLedger, recordCoverObservation, coverUrlPath } from './lib/cover-assets.mjs';
+import { readStoredCover, createCoverStore, fetchNoteDetail } from './lib/cover-storage.mjs';
+import { contentFingerprint } from './lib/cover-update.mjs';
 
-const ROOT = path.resolve(
-  path.dirname(fileURLToPath(import.meta.url)),
-  '../../..'
-);
-if (process.argv.length !== 4 || process.argv[2] !== '--manifest')
-  throw Error('Usage: node verify-cover-refresh.mjs --manifest PATH');
-const manifestPath = path.resolve(process.argv[3]),
-  base = path.dirname(manifestPath);
-const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
-if (manifest.account !== 'stats47' || !/^[\w-]+$/.test(manifest.version))
-  throw Error('manifest identity');
-const state = path.join(ROOT, '.claude/state/metrics');
-const journal = JSON.parse(
-  fs.readFileSync(
-    path.join(state, `note-cover-refresh-${manifest.version}.json`),
-    'utf8'
-  )
-);
-const catalog = JSON.parse(
-  execFileSync(
-    process.execPath,
-    [
-      '--import',
-      'tsx',
-      '.claude/scripts/note/catalog/dump-circulation-json.ts',
-    ],
-    { cwd: ROOT, encoding: 'utf8', maxBuffer: 8e6 }
-  )
-);
-const details = new Map();
-const audit = await auditNoteCovers({
-  catalog,
-  fetchJson: async (url) => {
-    let last;
-    for (let i = 0; i < 3; i++) {
-      try {
-        const r = await fetch(url, {
-          signal: AbortSignal.timeout(30000),
-          headers: { 'cache-control': 'no-cache' },
-        });
-        if (!r.ok) throw Error('HTTP ' + r.status);
-        const json = await r.json();
-        if (new URL(url).pathname.startsWith('/api/v3/notes/'))
-          details.set(json.data?.key, json.data);
-        return json;
-      } catch (error) {
-        last = error;
-        if (i < 2) await new Promise((r) => setTimeout(r, 500 * (i + 1)));
+const args = process.argv.slice(2);
+if (args.length && (args.length !== 2 || args[0] !== '--keys' || !args[1]))
+  throw Error('Usage: verify-cover-refresh.mjs [--keys key1,key2] (ledger-based; import old manifests with note:assets import)');
+const keys = new Set(args[1]?.split(',') ?? []);
+const ledger = readCoverLedger();
+if ([...keys].some((key) => !ledger.articles.some((a) => a.articleKey === key))) throw Error('unknown article key');
+const selected = ledger.articles.filter((a) => a.noteUrl && (!keys.size || keys.has(a.articleKey)));
+const store = createCoverStore();
+const state = path.join(COVER_ROOT, '.claude/state/metrics');
+const journals = fs.readdirSync(state).filter((name) => /^note-cover-refresh-ledger-[a-f0-9]+\.json$/.test(name))
+  .flatMap((name) => {
+    const journal = JSON.parse(fs.readFileSync(path.join(state, name), 'utf8'));
+    if (journal.account !== 'stats47') throw Error('journal account mismatch');
+    return journal.articles;
+  });
+const checks = [], observations = [];
+let cursor = 0;
+await Promise.all(Array.from({ length: Math.min(4, selected.length) }, async () => {
+  while (cursor < selected.length) {
+    const row = selected[cursor++];
+    try {
+      for (const revision of row.revisions) await readStoredCover(revision, store);
+      const detail = await fetchNoteDetail(row.noteUrl.split('/').at(-1));
+      const observedAt = new Date().toISOString();
+      observations.push({ key: row.articleKey, noteUrl: row.noteUrl, status: detail.eyecatch ? 'configured' : 'missing', url: detail.eyecatch ?? null, observedAt });
+      if (coverUrlPath(detail.eyecatch) !== coverUrlPath(row.published?.url)) throw Error('public cover changed since last observation');
+      if (row.approvedRevisionId && row.approvedRevisionId !== row.published?.revisionId) throw Error('approved revision not published');
+      const operation = journals.find((a) => a.key === row.articleKey && a.sourceSha256 === row.published?.revisionId && a.status === 'verified');
+      if (operation) {
+        if (coverUrlPath(operation.publicUrl) !== coverUrlPath(detail.eyecatch)) throw Error('public cover differs from verified upload');
+        const fingerprint = contentFingerprint(detail);
+        if (Object.keys(operation.contentFingerprint).some((field) => operation.contentFingerprint[field] !== fingerprint[field]))
+          throw Error('article changed since cover-only update');
       }
-    }
-    throw last;
-  },
-});
-const checks = [],
-  issues = [];
-if (
-  new Set(manifest.articles.map((a) => a.noteId)).size !==
-  manifest.articles.length
-)
-  issues.push('duplicate manifest target');
-if (manifest.articles.length !== audit.summary.total)
-  issues.push('portfolio size changed');
-for (const a of manifest.articles) {
-  try {
-    const after = details.get(a.noteId);
-    assertTarget(after, a);
-    const before = JSON.parse(
-      fs.readFileSync(path.join(base, 'before', a.noteId + '.json'), 'utf8')
-    );
-    const fingerprint = assertPreserved(before, after);
-    const operation = journal.articles.find((x) => x.key === a.key);
-    if (a.action === 'keep') {
-      if (assetPath(after.eyecatch) !== assetPath(a.beforeCover.url))
-        throw Error('kept cover changed');
-      if (operation) throw Error('kept cover has mutation journal');
-    } else {
-      if (
-        operation?.status !== 'verified' ||
-        operation.sourceSha256 !== a.sha256
-      )
-        throw Error('upload not verified');
-      if (assetPath(after.eyecatch) !== assetPath(operation.uploadedUrl))
-        throw Error('public cover differs from verified upload');
-    }
-    const draftChanged = before.has_draft !== after.has_draft;
-    if (draftChanged && !operation?.editorDraftCreated)
-      throw Error('unexpected draft state change');
-    checks.push({
-      key: a.key,
-      noteId: a.noteId,
-      action: a.action,
-      status: 'pass',
-      publicCover: after.eyecatch,
-      contentFingerprint: fingerprint,
-      originalHasDraft: before.has_draft,
-      hasDraft: after.has_draft,
-      editorDraftCreated: Boolean(draftChanged),
-      observedAt: new Date().toISOString(),
-    });
-  } catch (error) {
-    issues.push({ key: a.key, error: error.message });
-    checks.push({ key: a.key, status: 'fail' });
+      checks.push({ key: row.articleKey, status: 'pass', publicCover: detail.eyecatch, observedAt });
+    } catch (error) { checks.push({ key: row.articleKey, status: 'fail', reason: error.message }); }
   }
-}
-const report = {
-  schemaVersion: 1,
-  version: manifest.version,
-  account: 'stats47',
-  kind: 'cover-remediation',
-  generatedAt: new Date().toISOString(),
-  status: audit.status === 'pass' && !issues.length ? 'pass' : 'fail',
-  summary: {
-    ...audit.summary,
-    created: checks.filter((a) => a.action === 'create' && a.status === 'pass')
-      .length,
-    improved: checks.filter(
-      (a) => a.action === 'improve' && a.status === 'pass'
-    ).length,
-    kept: checks.filter((a) => a.action === 'keep' && a.status === 'pass')
-      .length,
-    contentPreserved: checks.filter((a) => a.status === 'pass').length,
-    editorDrafts: checks.filter((a) => a.editorDraftCreated).map((a) => a.key),
-  },
-  issues,
-  articles: checks,
-};
-function save(name, data, dir = state) {
-  fs.mkdirSync(dir, { recursive: true });
-  const p = path.join(dir, name);
-  fs.writeFileSync(p + '.tmp', JSON.stringify(data, null, 2) + '\n');
-  fs.renameSync(p + '.tmp', p);
-}
-save('note-cover-audit-latest.json', audit);
-// 版ごとの検証証跡は release 台帳 (metrics/releases/<date>-<name>.json、keep 8) に置く。
-// metrics 直下の日付名 JSON は check-repo-hygiene.cjs (DATED_STATE_ARTIFACT) が止める。
-const releases = path.join(state, 'releases');
-const stamp = new Date().toISOString().slice(0, 10);
-save(`${stamp}-note-cover-audit-${manifest.version}-after.json`, audit, releases);
-save(`${stamp}-note-cover-refresh-${manifest.version}-verification.json`, report, releases);
-console.log(
-  JSON.stringify(
-    { status: report.status, summary: report.summary, issues: report.issues },
-    null,
-    2
-  )
-);
+}));
+await updateCoverLedger(current => { for (const observation of observations) recordCoverObservation(current, observation); });
+const report = { schemaVersion: 1, account: 'stats47', generatedAt: new Date().toISOString(),
+  status: checks.some(a => a.status === 'fail') ? 'fail' : 'pass', articles: checks };
+const output = path.join(state, 'note/cover-lifecycle-latest.json');
+fs.mkdirSync(path.dirname(output), { recursive: true });
+fs.writeFileSync(output, JSON.stringify(report, null, 2) + '\n');
+console.log(JSON.stringify({ status: report.status, checked: checks.length, failures: checks.filter(a => a.status === 'fail') }));
 process.exitCode = report.status === 'pass' ? 0 : 2;

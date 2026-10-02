@@ -20,7 +20,6 @@ on:
           - ranking
           - areas
           - ranking-cards
-          - note-covers
           - pref-silhouette
           - blog
           - geo-thumbnails

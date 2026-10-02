@@ -21,6 +21,11 @@ browser-use CLI（Chrome プロファイル経由）で note.com エディタを
 `docs/31_note記事原稿/<vertical>/<slug>/` または `docs/31_note記事原稿/<slug>/` で管理。git が SSOT。
 
 ### 画像 (PNG) の扱い
+カバーの保存・採用は `data/note/cover-assets.json` を正本とする。新規記事も `note:assets prepare` →
+`generate-cover-refresh.ts` → `note:assets review` で確認済みのremote候補を用意してから公開する。
+`editor-helpers.sh` は `materialize-cover.mjs <articleKey>` でSHA検証済みの採用版を一時領域へ復元し、アップロード後に削除する。
+公開後はTSカタログへURLを記録し `note:assets seed` → `note:assets archive --keys <articleKey>` で公開画像との対応を確認する。
+以下のPNG再生成は本文画像の準備であり、カバー採用の代用にしない。正典は `.claude/rules/note-image-assets.md`。
 SVG から作れる PNG は git に載せない (`docs/31` の家計・公務員シリーズ)。clone 直後や公開・更新の前に PNG が無ければ
 `npm run note:images:regen -- --slug <slug>` で復元する。ランキング記事 (a-<rankingKey>) の 4 枚は
 `node .claude/scripts/note/render-ranking-images.mjs <rankingKey>` で `chart-data.json` から作り直す。契約と機械検査は `.claude/rules/note-image-assets.md`。

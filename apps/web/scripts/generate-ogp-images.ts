@@ -85,6 +85,7 @@ import { resolveRankingOgpSource } from './lib/ranking-ogp-source';
 import { STOREFRONT_PRODUCTS } from '../src/features/products/storefront';
 
 import type { StorefrontProduct } from '../src/features/products/types';
+import { assertCoverGenerationType } from '../../../.claude/scripts/note/lib/cover-assets.mjs';
 
 const PUBLIC_URL =
   process.env.R2_PUBLIC_FETCH_URL ?? 'https://storage.stats47.jp';
@@ -434,6 +435,7 @@ function parseTitle(md: string): string | null {
 
 async function main() {
   const opts = parseArgs();
+  assertCoverGenerationType(opts.type);
   if (opts.force && !opts.keys) {
     throw new Error(
       '--force は全件指定できません。必ず --key で対象を明示してください。'

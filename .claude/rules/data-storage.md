@@ -1,5 +1,6 @@
 ---
 paths:
+  - "data/note*/**"
   - ".claude/{skills,state,todo,config}/**"
   - "docs/**"
   - "apps/web/scripts/export-*.ts"
@@ -15,6 +16,11 @@ paths:
 データの性質で保存先を厳格に分ける。**スキル実装・エージェントは以下の分類に従うこと**。
 
 判定軸: (a) 誰が読むか (app / agent / 人間)、(b) 何のために (CRUD / 振り返り / 計測ログ)。
+
+**note画像の運用台帳は例外として `data/note/` のgit管理JSON + JSON Schemaを採用する
+(2026-10-02 オーナー決定)。** 生成版・採用版・公開版と共有ストレージの所在を一元管理する。
+記事メタTSや監査履歴と二重に書かず、専用validatorとwriter/readerの切替を一組で実装する。
+詳細と移行状況は [note-image-assets.md](note-image-assets.md)。画像バイナリは台帳へ埋め込まない。
 
 ## アプリが読むデータ (git TS が SSOT → R2 配信) — 「設定 + 運用エンティティ」
 

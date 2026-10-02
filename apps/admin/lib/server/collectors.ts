@@ -1,4 +1,5 @@
 import "server-only";
+import type { CoverArticle } from '../../../../.claude/scripts/note/lib/cover-assets.mjs';
 
 /**
  * 共有 collector (.claude/scripts/lib/gallery-collectors.mjs / svg-classify.mjs) への adapter。
@@ -59,13 +60,14 @@ export interface BuildTabOpts {
   r2: string;
   rankingSample?: number;
   projectRoot?: string;
+  privateNoteCovers?: boolean;
 }
 
 export interface NoteCover {
   slug: string;
   status: string;
   noteUrl: string | null;
-  r2Path: string;
+  record: CoverArticle;
 }
 
 export interface ProbeResult {

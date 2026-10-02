@@ -166,7 +166,7 @@ if [ -n "$STAGED_ANY" ]; then
     echo -e "${RED}❌ 画像資産ポリシー違反 (重複画像・寸法・容量など)。${NC}"
     ERROR_COUNT=$((ERROR_COUNT + 1))
   fi
-  if ! node "$GUARD_ROOT/.claude/scripts/note/audit-note-image-assets.mjs"; then
+  if ! node "$GUARD_ROOT/.claude/scripts/note/audit-note-image-assets.mjs" || ! node "$GUARD_ROOT/.claude/scripts/note/cover-assets.mjs" validate; then
     echo -e "${RED}❌ note 画像資産の契約違反 (派生 PNG の追跡・ランキング記事のデータ欠落)。.claude/rules/note-image-assets.md を参照。${NC}"
     ERROR_COUNT=$((ERROR_COUNT + 1))
   fi

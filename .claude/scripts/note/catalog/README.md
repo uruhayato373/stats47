@@ -94,7 +94,27 @@ Satoriは文字をpath化するため、SVGの`text`要素検索だけで合格�
 - **warn**: title 重複の疑い (実質重複記事の surface) / 有料マガジンに無料記事 / isPaid だが priceJpy 未設定 /
   stats47Targets が KNOWN_RANKING_KEYS に不在
 
-## 禁止事項
+## 公開カバーの制作と差し替え
+
+画像の正本は非公開R2、台帳は `data/note/cover-assets.json`、形の契約は同ディレクトリのJSON Schema。
+公開済み記事もドラフトも記事keyで結び、タイトルや分類はTSカタログから読む。
+管理画面の `/content/note/covers` と `/assets` は共通台帳を読む。特定PCのPNGや絶対パスに依存しない。
+
+1. 新規catalog登録後は `npm run note:assets -- seed`。現在の公開画像は `archive --keys <key>` で保全する。
+2. `prepare --keys <key1,key2> --output /tmp/<task>` で一時入力を取得する。draftはdocs/31の原稿を使う。
+3. `node --import tsx .claude/scripts/note/generate-cover-refresh.ts --output /tmp/<task> --version <版>`。
+   文字境界/重なり/数値を検算し、private R2へ保存・読み戻しSHAを確認する。成功後は一時入力を削除する。
+4. 管理画面で320px相当の縮小表示を確認後、`npm run note:assets -- review --keys <key> --revision <sha> --status pass --reason <理由>`。
+   要修正なら `--status needs-revision`。新しい候補に旧版の承認を引き継がない。
+5. 既存記事は `node .claude/scripts/note/update-note-covers.mjs --keys <key>` でdry-runする。
+   明示された差し替え時だけ `--commit` を付け、画像専用POSTと本文/価格/有料境界の保全・配信確認後に公開ポインタを更新する。
+6. `node .claude/scripts/note/verify-cover-refresh.mjs --keys <key>` と `npm run note:assets:validate` で整合を確認する。
+
+旧manifestは `note:assets import --manifest <path>`、旧public R2は `archive-r2 --keys <key>` で移行できる。
+旧manifestの絶対パスは入力にだけ使用し、旧レビューは自動採用せず未判定で登録する。未回収の版は `missingVersions` に残す。
+認証は既存S3環境変数または `wrangler login` のセッション。署名URLや認証情報を台帳に保存しない。
+
+## カタログの禁止事項
 
 | NG | OK |
 |---|---|

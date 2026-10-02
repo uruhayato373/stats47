@@ -5,6 +5,7 @@ import { mkdirSync, renameSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { auditNoteCovers, coverAuditExitCode } from "./lib/cover-audit.mjs";
+import { applyCoverAudit, updateCoverLedger } from './lib/cover-assets.mjs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
 const args = process.argv.slice(2);
@@ -58,6 +59,8 @@ mkdirSync(dirname(output), { recursive: true });
 const temporaryOutput = `${output}.${process.pid}.tmp`;
 writeFileSync(temporaryOutput, `${JSON.stringify(report, null, 2)}\n`);
 renameSync(temporaryOutput, output);
+if (report.coverage?.complete && output === resolve(ROOT, '.claude/state/metrics/note-cover-audit-latest.json'))
+  await updateCoverLedger((ledger) => applyCoverAudit(ledger, report));
 console.log(`[note-cover] ${report.status.toUpperCase()}`);
 if (report.summary) {
   const s = report.summary;

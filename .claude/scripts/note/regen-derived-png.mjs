@@ -12,7 +12,7 @@
  */
 import { existsSync, readdirSync, readFileSync, statSync } from "node:fs";
 import { createRequire } from "node:module";
-import { dirname, join, resolve } from "node:path";
+import { basename, dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
@@ -35,7 +35,7 @@ export function pendingSvgs(slugDir, { force = false } = {}) {
   const markdown = files.filter((file) => file.endsWith(".md")).map((file) => readFileSync(file, "utf8")).join("\n");
   return files
     .filter((file) => file.endsWith(".svg"))
-    .filter((svg) => markdown.includes(`${svg.split("/").pop().replace(/\.svg$/, "")}.png`))
+    .filter((svg) => markdown.includes(`${basename(svg).replace(/\.svg$/, "")}.png`))
     .filter((svg) => force || !existsSync(svg.replace(/\.svg$/, ".png")));
 }
 

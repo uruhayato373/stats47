@@ -1,0 +1,88 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "stats47 note cover asset ledger",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "account", "updatedAt", "articles"],
+  "properties": {
+    "schemaVersion": { "const": 1 },
+    "account": { "const": "stats47" },
+    "updatedAt": { "type": "string", "format": "date-time" },
+    "articles": { "type": "array", "items": { "$ref": "#/definitions/article" } }
+  },
+  "definitions": {
+    "nullableId": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
+    "article": {
+      "type": "object", "additionalProperties": false,
+      "required": ["articleKey", "noteUrl", "revisions", "candidateRevisionId", "approvedRevisionId", "published", "missingVersions"],
+      "properties": {
+        "articleKey": { "type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9_-]*$" },
+        "noteUrl": { "type": ["string", "null"], "pattern": "^https://note\\.com/stats47/n/n[a-f0-9]+$" },
+        "revisions": { "type": "array", "items": { "$ref": "#/definitions/revision" } },
+        "candidateRevisionId": { "$ref": "#/definitions/nullableId" },
+        "approvedRevisionId": { "$ref": "#/definitions/nullableId" },
+        "missingVersions": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+        "published": {
+          "type": ["object", "null"], "additionalProperties": false,
+          "required": ["status", "url", "observedAt", "revisionId"],
+          "properties": {
+            "status": { "enum": ["configured", "missing", "unknown"] },
+            "url": { "type": ["string", "null"], "pattern": "^https://assets\\.st-note\\.com/" },
+            "observedAt": { "type": "string", "format": "date-time" },
+            "revisionId": { "$ref": "#/definitions/nullableId" }
+          }
+        }
+      }
+    },
+    "revision": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "kind", "version", "createdAt", "storage", "sha256", "bytes", "width", "height", "review", "provenance"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "kind": { "enum": ["candidate", "published-original", "r2-archive"] },
+        "version": { "type": "string", "minLength": 1 },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "bytes": { "type": "integer", "minimum": 1, "maximum": 16777216 },
+        "width": { "type": "integer", "minimum": 1 },
+        "height": { "type": "integer", "minimum": 1 },
+        "quality": {
+          "type": "object", "additionalProperties": false,
+          "required": ["textBounds", "textOverlap", "evidenceSha256"],
+          "properties": {
+            "textBounds": { "enum": ["pass"] },
+            "textOverlap": { "enum": ["pass"] },
+            "evidenceSha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+          }
+        },
+        "storage": {
+          "type": "object", "additionalProperties": false,
+          "required": ["provider", "bucket", "key"],
+          "properties": {
+            "provider": { "const": "r2-private" },
+            "bucket": { "const": "stats47-private" },
+            "key": { "type": "string", "pattern": "^note/covers/[A-Za-z0-9_-]+/revisions/[a-f0-9]{64}\\.png$" }
+          }
+        },
+        "review": {
+          "type": "object", "additionalProperties": false,
+          "required": ["status", "reason", "reviewedAt"],
+          "properties": {
+            "status": { "enum": ["pending", "pass", "needs-revision", "not-required"] },
+            "reason": { "type": ["string", "null"] },
+            "reviewedAt": { "type": ["string", "null"], "format": "date-time" }
+          }
+        },
+        "provenance": {
+          "type": "object", "additionalProperties": false,
+          "required": ["renderer", "sourceUrl", "sourceSha256"],
+          "properties": {
+            "renderer": { "type": ["string", "null"] },
+            "sourceUrl": { "type": ["string", "null"], "pattern": "^https://" },
+            "sourceSha256": { "$ref": "#/definitions/nullableId" }
+          }
+        }
+      }
+    }
+  }
+}
