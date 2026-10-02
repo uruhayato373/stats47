@@ -67,8 +67,15 @@ node .claude/scripts/note/verify-cover-refresh.mjs --keys <key>
 
 **画像の保存だけで公開カバーに即時反映される**（2026-09-12 UI実測）。「更新する」を押す必要はない。
 実際のUIで観測した画像専用POSTを認証済みProfile 5で実行し、本文・タイトル・価格・有料境界・タグ・公開日時のhashを照合する。
+Windowsのカバー専用CLIは既存の`note-session.mjs`と`.local/playwright-note-profile`を使う。
+未ログインなら`node .claude/scripts/note/login-note-profile.mjs`で人がログインし、`current_user.urlname === stats47`を確認してから再実行する。
+PCごとにChromeのProfile番号が違うため、Windowsでは番号を投稿先の証拠にしない。
+`MEASUREMENT_BROWSER_SOURCE=note`指定時は計測基盤のサービス別一時セッションを使い、同じアカウント照合を通す。
+終了時は所有するPlaywright contextとChromeを閉じる。画像の正本と採用は引き続きprivate R2と共通台帳に置く。
 通常の本文編集・再公開は行わない。独自の一意sessionを使い、終了時はそのdaemon・Chrome・一時profileだけを片付ける。
 応答不明のPOSTは再送せず、journalと記事詳細・配信画像を調べてから復旧する。
+途中で止まったバッチは同じ`--keys`で再開する。公開済みの採用版を含めてjournalの識別子を計算し、完了した行は送信しない。
+選択範囲を変えて未確認の操作を隠すことはできない。journalの`scope`と元の選択範囲を照合する。
 最終検証は全公開記事を再取得し、維持したカバーの不変・新カバーのURL一致・記事内容のhash一致を確認する。
 
 カンマ区切りで複数記事を指定可能:

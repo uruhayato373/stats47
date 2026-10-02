@@ -12,6 +12,18 @@ const ajv = new Ajv({ allErrors: true });
 const validateShape = ajv.compile(schema);
 export const coverSha = (bytes) => createHash('sha256').update(bytes).digest('hex');
 export const coverAssetKey = (key, sha) => `note/covers/${key}/revisions/${sha}.png`;
+const FILE_RENAME_ATTEMPTS = 8;
+const FILE_RENAME_BACKOFF_MS = 50;
+/** Preserve the old file and pending bytes through transient Windows reader locks. */
+export async function renameCoverFile(source, destination) {
+  for (let attempt = 0; ; attempt++) {
+    try { fs.renameSync(source, destination); return; }
+    catch (error) {
+      if (attempt >= FILE_RENAME_ATTEMPTS - 1 || !['EPERM', 'EACCES', 'EBUSY'].includes(error.code)) throw error;
+      await new Promise((resolve) => setTimeout(resolve, FILE_RENAME_BACKOFF_MS * (attempt + 1)));
+    }
+  }
+}
 export const coverUrlPath = (url) => url ? new URL(url).origin + new URL(url).pathname : null;
 export function assertCoverGenerationType(type) {
   if (type === 'note-covers') throw Error('noteカバーは data/note/cover-assets.json が正本です。note:assets と generate-cover-refresh.ts を使用してください。汎用OGP生成からの上書きは終了しました。');
@@ -79,7 +91,9 @@ export async function updateCoverLedger(edit, root = COVER_ROOT) {
     validateCoverLedger(ledger);
     ledger.articles.sort((a, b) => a.articleKey.localeCompare(b.articleKey));
     fs.writeFileSync(temporary, JSON.stringify(ledger, null, 2) + '\n');
-    fs.renameSync(temporary, file);
+    // Windows readers/virus scanners can briefly hold the destination. Keep the
+    // writer lock and old ledger intact while retrying the same atomic rename.
+    await renameCoverFile(temporary, file);
     return ledger;
   } finally {
     fs.rmSync(temporary, { force: true });
@@ -133,10 +147,15 @@ export function reviewCoverRevision(row, id, status, reason, now = new Date().to
   else if (row.approvedRevisionId === id) row.approvedRevisionId = null;
 }
 
-export function approvedCoverRevision(row) {
+export function adoptedCoverRevision(row) {
   const revision = row.revisions.find(r => r.id === row.approvedRevisionId);
   return revision && revision.review.status === 'pass' && revision.id === row.candidateRevisionId
-    && row.noteUrl && revision.id !== row.published?.revisionId ? revision : null;
+    && row.noteUrl ? revision : null;
+}
+
+export function approvedCoverRevision(row) {
+  const revision = adoptedCoverRevision(row);
+  return revision && revision.id !== row.published?.revisionId ? revision : null;
 }
 
 export function coverDisplayState(row, now = Date.now()) {

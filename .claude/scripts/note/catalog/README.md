@@ -111,6 +111,8 @@ Satoriは文字をpath化するため、SVGの`text`要素検索だけで合格�
    要修正なら `--status needs-revision`。新しい候補に旧版の承認を引き継がない。
 5. 既存記事は `node .claude/scripts/note/update-note-covers.mjs --keys <key>` でdry-runする。
    明示された差し替え時だけ `--commit` を付け、画像専用POSTと本文/価格/有料境界の保全・配信確認後に公開ポインタを更新する。
+   Windowsは`note-session.mjs`の専用Playwright profileで投稿先を照合し、未ログイン時は`login-note-profile.mjs`で人がログインする。
+   再開は同じ`--keys`を指定する。採用版からjournalを識別し、完了行は送信せず、応答不明のPOSTは検査するまで再送しない。
 6. `node .claude/scripts/note/verify-cover-refresh.mjs --keys <key>` と `npm run note:assets:validate` で整合を確認する。
 
 旧manifestは `note:assets import --manifest <path>`、旧public R2は `archive-r2 --keys <key>` で移行できる。

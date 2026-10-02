@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "account": "stats47",
-  "updatedAt": "2026-10-02T04:30:19.105Z",
+  "updatedAt": "2026-10-02T06:05:08.502Z",
   "articles": [
     {
       "articleKey": "00-claude-code-intro-for-public-servants",
@@ -38,7 +38,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/292992211/rectangle_large_type_2_c2123359a618101b9c959cf7e171c021.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:27.766Z",
+        "observedAt": "2026-10-02T06:03:39.851Z",
         "revisionId": "d8d476759ade46a24413d44bd656e0b4ccd2a7b055d384e9918bcfba57f47f81"
       },
       "missingVersions": [
@@ -80,7 +80,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/292994579/rectangle_large_type_2_b61fe60699faf515ca8b187656511686.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:41.479Z",
+        "observedAt": "2026-10-02T06:03:39.772Z",
         "revisionId": "b1bc21a8bf39afbf8db31d581caf9354ea4b0e3dc92f53709a97f93bcc769466"
       },
       "missingVersions": [
@@ -122,7 +122,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/292996566/rectangle_large_type_2_5170ab7de759bba645f7477d43bf73e0.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:27.896Z",
+        "observedAt": "2026-10-02T06:03:39.954Z",
         "revisionId": "bead4b9735b7f0f926d4774898837e2b8931681c47d8d14f0dffd008578dcb06"
       },
       "missingVersions": [
@@ -164,7 +164,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/293007955/rectangle_large_type_2_28d790d7bc0a97ea01d16f09e305ddc7.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:42.131Z",
+        "observedAt": "2026-10-02T06:03:39.942Z",
         "revisionId": "ce131d4d853c87fd1b3974174bb7881898111f2ead43034081a8cc48a26f7b96"
       },
       "missingVersions": [
@@ -206,7 +206,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/292992664/rectangle_large_type_2_ed27e90478c52c586604549dba626ac5.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:28.797Z",
+        "observedAt": "2026-10-02T06:03:40.913Z",
         "revisionId": "c270b3af7027107e223f77fa6aba290f9c9b6d6464c111dbff2808395d186f91"
       },
       "missingVersions": [
@@ -248,7 +248,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/293008327/rectangle_large_type_2_16031f72295d9f400a063b1f1ab4d227.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:42.926Z",
+        "observedAt": "2026-10-02T06:03:40.689Z",
         "revisionId": "f8452fdb20901179484a3747445ccba9239fc5911e016a6d4db6ac310d2afa1c"
       },
       "missingVersions": [
@@ -290,7 +290,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/292994711/rectangle_large_type_2_699a124bf40bb0c52441b53a0e6def38.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:42.950Z",
+        "observedAt": "2026-10-02T06:03:40.977Z",
         "revisionId": "09c2e00633850d7899f55b793c27f28a29c12eec91d92ad8d0ea3cf31b04795e"
       },
       "missingVersions": [
@@ -332,7 +332,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/293001119/rectangle_large_type_2_5df0c6cae961e94fa1f5ae1b443af17a.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:29.185Z",
+        "observedAt": "2026-10-02T06:03:40.820Z",
         "revisionId": "1a949970d31a3d6fb286d09a520bc0f1c873ecbc67dfc9a1a0fef5f6dc84899b"
       },
       "missingVersions": [
@@ -374,7 +374,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/293009010/rectangle_large_type_2_81ddfbc5aa45da7bf269204cb24e44a3.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:43.789Z",
+        "observedAt": "2026-10-02T06:03:41.716Z",
         "revisionId": "72a38f11ea9e78990dcf6febd7c0b8d6b0f45f029d54cbfac4ff9c43ba5cfe22"
       },
       "missingVersions": [
@@ -416,7 +416,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/292992920/rectangle_large_type_2_a88379bc52ca40f5753e3abbbbaf07fa.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:29.805Z",
+        "observedAt": "2026-10-02T06:03:41.820Z",
         "revisionId": "946629ca6e539fc80687692203710aba903a411a8ef70322c1fad99fc6c1dcb9"
       },
       "missingVersions": [
@@ -458,7 +458,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/293001670/rectangle_large_type_2_49033ece8b44e50d315a457f09374508.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:29.890Z",
+        "observedAt": "2026-10-02T06:03:41.649Z",
         "revisionId": "463c62a99a15f0033b449b8529bd30c4b201e34fd04985c94f92e231aee4f07d"
       },
       "missingVersions": [
@@ -500,7 +500,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/293009371/rectangle_large_type_2_823c31fd49414a32e32804eee99c67ca.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:44.050Z",
+        "observedAt": "2026-10-02T06:03:41.768Z",
         "revisionId": "412fc1ff5878d7934df85b5c3d2ec73fc804dae35804d74b6cc869279aebeac3"
       },
       "missingVersions": [
@@ -542,7 +542,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/293154943/rectangle_large_type_2_f5587735ba8267d219c5a043dd8af044.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:30.744Z",
+        "observedAt": "2026-10-02T06:03:42.346Z",
         "revisionId": "3431d86c130ea3576cb3217f733e2a363bddb829f7c82c920e77d5945b1bdf08"
       },
       "missingVersions": [
@@ -584,7 +584,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/293009701/rectangle_large_type_2_dcb0b4087290b256ed4bb254287a2fef.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:44.944Z",
+        "observedAt": "2026-10-02T06:03:42.729Z",
         "revisionId": "4c2de972cd61a91c36576f0b5dc325693f64188a0a08779b368b86eca05a3839"
       },
       "missingVersions": [
@@ -626,7 +626,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/293157277/rectangle_large_type_2_894701507f092977513c791d1351b308.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:31.463Z",
+        "observedAt": "2026-10-02T06:03:42.419Z",
         "revisionId": "e639aee7bad98a4f6d9b4e163f60f6aba4ee3efb72ca72c24269709994545d47"
       },
       "missingVersions": [
@@ -668,7 +668,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/293010602/rectangle_large_type_2_0b398e5bc0535327b2c9eba7cf818088.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:45.023Z",
+        "observedAt": "2026-10-02T06:03:42.475Z",
         "revisionId": "a10840211de63866cb424fb0126e28d5ac9e698de68e7229a17c8e62db562a71"
       },
       "missingVersions": [
@@ -710,7 +710,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/292994826/rectangle_large_type_2_91e6e9a85a7d0a447e762490c751a2ee.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:46.094Z",
+        "observedAt": "2026-10-02T06:03:43.071Z",
         "revisionId": "b4097f2addb224e6a9b1a7c46e6542251b67cd4582928f0a5809942389f94861"
       },
       "missingVersions": [
@@ -752,7 +752,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/293003004/rectangle_large_type_2_493d0f5f3367c5548d0969a52fad8df5.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:32.223Z",
+        "observedAt": "2026-10-02T06:03:43.198Z",
         "revisionId": "ed69bf3d1d1addde11c077742cab4cd5103bc055f76ffa2548676a57414f47b2"
       },
       "missingVersions": [
@@ -794,7 +794,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/293010945/rectangle_large_type_2_c40796a7b252bf27480a371e1b7d493f.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:46.432Z",
+        "observedAt": "2026-10-02T06:03:43.473Z",
         "revisionId": "1bad190d4066f19d76a50cb5084d5e9bc81d38099038d0df8dd1100a53b48dbf"
       },
       "missingVersions": [
@@ -836,7 +836,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/292993753/rectangle_large_type_2_ab5ba032f5f77f6e10b8e538461e6127.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:32.221Z",
+        "observedAt": "2026-10-02T06:03:43.524Z",
         "revisionId": "8cde6057e973b0e9c1c697a4c38b07fa915912683f3df0ec831599c3b75c0115"
       },
       "missingVersions": [
@@ -878,7 +878,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/292993969/rectangle_large_type_2_06f7768ef5ebb9a3802f80737a0985a8.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:32.937Z",
+        "observedAt": "2026-10-02T06:03:43.813Z",
         "revisionId": "8a0776ee12777f10218f64ec395e88dd2b5aa220c71f58434dfa598d0fb4fc67"
       },
       "missingVersions": [
@@ -920,7 +920,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/293011415/rectangle_large_type_2_b81dc814175e0cb04a39a5487a598ba6.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:46.869Z",
+        "observedAt": "2026-10-02T06:03:44.119Z",
         "revisionId": "262a0ce9b619cbb7d17175fe24d7c151f38ec65063290256a3d087503c201ac4"
       },
       "missingVersions": [
@@ -962,7 +962,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/293003315/rectangle_large_type_2_de5f667d59e082a1309938c3f9a76fd8.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:33.658Z",
+        "observedAt": "2026-10-02T06:03:44.212Z",
         "revisionId": "e491d013554e391f0eefd8e4d1decfab418ac6fe4d9e8904aedb27b8eeb4fded"
       },
       "missingVersions": [
@@ -1004,7 +1004,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/293011773/rectangle_large_type_2_19f68dc2158abd57be6fdc54b06e6e03.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:47.313Z",
+        "observedAt": "2026-10-02T06:03:44.349Z",
         "revisionId": "69c01d81085beb7b7f5ca71d91168da6769264c857ba1042592c67f9e133fcae"
       },
       "missingVersions": [
@@ -1046,7 +1046,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/293003943/rectangle_large_type_2_cca71ba8fbfeb2fecd37a6bcc0e77b9e.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:34.384Z",
+        "observedAt": "2026-10-02T06:03:44.605Z",
         "revisionId": "09dd30b995979ea30430d02480627e190ee89f5bb7ac8587803741bcff6156c9"
       },
       "missingVersions": [
@@ -1106,7 +1106,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/293004276/rectangle_large_type_2_05e9316de3a6f34659cb66b1303a958d.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:34.582Z",
+        "observedAt": "2026-10-02T06:03:44.904Z",
         "revisionId": "0da6091b821ec9f10de36332955664affb81ffac83cb3335e79bb2a617dd1370"
       },
       "missingVersions": [
@@ -1148,7 +1148,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/292994154/rectangle_large_type_2_eb396acacc53a5249d46d1ce070207b6.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:35.138Z",
+        "observedAt": "2026-10-02T06:03:45.220Z",
         "revisionId": "4f71536a67b06f01604c5963ea70650973ec3c17656f51c9198408f2263ca6ea"
       },
       "missingVersions": [
@@ -1190,7 +1190,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/293005397/rectangle_large_type_2_b3738df8fe432c90858a6e30dba0cf3a.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:35.772Z",
+        "observedAt": "2026-10-02T06:03:45.348Z",
         "revisionId": "2b332c7914fbb036d407ba07ab2c9b3c96bbae74cbe139259ea678777098643c"
       },
       "missingVersions": [
@@ -1232,7 +1232,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/293005770/rectangle_large_type_2_631468f302bcc37c5e81bf500f080aab.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:36.657Z",
+        "observedAt": "2026-10-02T06:03:45.492Z",
         "revisionId": "3a6677519ba1d36b671d6d75719ec99a6630770e63950d931b2d00ff476d39ce"
       },
       "missingVersions": [
@@ -1274,7 +1274,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/293006195/rectangle_large_type_2_1369d3f1455712cb336a2cf7141643a7.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:36.634Z",
+        "observedAt": "2026-10-02T06:03:45.771Z",
         "revisionId": "2ea2d1906bb7983c7f579b2d017c3fdc9af981ce359e1b1858e301b4a8ecd282"
       },
       "missingVersions": [
@@ -1316,7 +1316,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/293006473/rectangle_large_type_2_45ef6d24dba51811372f1f4e947ce5b4.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:37.368Z",
+        "observedAt": "2026-10-02T06:03:45.958Z",
         "revisionId": "6ed3303049f42682cb4bbd909c36f4312f01595d90736eb1ef73762de84a5c60"
       },
       "missingVersions": [
@@ -1358,7 +1358,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/292994338/rectangle_large_type_2_32fafcf2fe02800607bd27b23899fbae.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:37.874Z",
+        "observedAt": "2026-10-02T06:03:46.186Z",
         "revisionId": "c6d21e55f0d9cf3233179311173501858369757d4032e0afd2db9582c008571e"
       },
       "missingVersions": [
@@ -1400,7 +1400,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/293006974/rectangle_large_type_2_281129ef9c40e091c0aa945245483fc1.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:38.646Z",
+        "observedAt": "2026-10-02T06:03:46.422Z",
         "revisionId": "8cd200faaf036e939b205304fef7419d069cad5eac879023aee0cfa6c954ab88"
       },
       "missingVersions": [
@@ -1442,7 +1442,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/293007478/rectangle_large_type_2_0e1d9a6ce7974d54c7af10a6e46fede8.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:38.915Z",
+        "observedAt": "2026-10-02T06:03:46.639Z",
         "revisionId": "de93a4eb0106a183d0b8afaa4db68d2e1cb102efd2acda8fcea9bb759a91a305"
       },
       "missingVersions": [
@@ -1565,7 +1565,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/292994429/rectangle_large_type_2_51c3fa19b11fc28b05210a15fd92b363.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:39.345Z",
+        "observedAt": "2026-10-02T06:03:46.697Z",
         "revisionId": "2dea9c90a0a2c56735251133196850c0e6cbfc97669f125ec0b408efebf576e1"
       },
       "missingVersions": [
@@ -1607,7 +1607,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/292994504/rectangle_large_type_2_0f933da67fa9cf0d3d44daab9ad4b96b.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:40.001Z",
+        "observedAt": "2026-10-02T06:03:46.922Z",
         "revisionId": "9a5a7b4967739a191958f2832d59319c74076f96e27a19cadbb7d0825ec1e062"
       },
       "missingVersions": [
@@ -1649,7 +1649,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312770173/rectangle_large_type_2_eb35b30839c5fddb1204be80d3e0565a.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:07.166Z",
+        "observedAt": "2026-10-02T06:03:47.173Z",
         "revisionId": "5ddba712cf9b09f05f5a26d50daf9112e1dcd7599bce754f688533906ab253a6"
       },
       "missingVersions": [
@@ -1691,7 +1691,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312770676/rectangle_large_type_2_72886c88b442f4eca3d87befe244cd6b.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:07.025Z",
+        "observedAt": "2026-10-02T06:03:47.532Z",
         "revisionId": "1eb380713fa722770db79f0ceba4d233b6687f2676bc9d1e3f542e28d145f740"
       },
       "missingVersions": [
@@ -1733,7 +1733,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312770730/rectangle_large_type_2_2373b9079c2cb21aba27a7f78472cd82.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:07.019Z",
+        "observedAt": "2026-10-02T06:03:47.536Z",
         "revisionId": "5485b7e57b8a14cb6a670d0c538eece25a05a4d7bfdb783949a65011504b659c"
       },
       "missingVersions": [
@@ -1775,7 +1775,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312770750/rectangle_large_type_2_12c7435dcb340194d8943d9d8aa84c49.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:07.122Z",
+        "observedAt": "2026-10-02T06:03:47.673Z",
         "revisionId": "69a65eb9821bc8ac4b8f52bcb5247347824bdac526af7d0940e7bb690a55c700"
       },
       "missingVersions": [
@@ -1817,7 +1817,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312770807/rectangle_large_type_2_05f8aa230ebf2a51eb4ead263dd633f5.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:09.369Z",
+        "observedAt": "2026-10-02T06:03:47.908Z",
         "revisionId": "03dc46f612da5fbf3f063218a925f52240805a88161d3bfa7f05e5287fbf479e"
       },
       "missingVersions": [
@@ -1859,7 +1859,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312770819/rectangle_large_type_2_492a3dab2237d56f125551608e6dbe09.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:49.015Z",
+        "observedAt": "2026-10-02T06:03:48.591Z",
         "revisionId": "dc20cfe2b2f8a5ae596dd7b878f7f90de1a53dc6195bb79708053c1d556b5e31"
       },
       "missingVersions": [
@@ -1901,7 +1901,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312770832/rectangle_large_type_2_0946a602acb636c189922f097a774af5.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:09.479Z",
+        "observedAt": "2026-10-02T06:03:48.576Z",
         "revisionId": "56f4f7e4642d100219fb87098847a5d74d5a047a2f88dc7de178fd0c962e11cd"
       },
       "missingVersions": [
@@ -1943,7 +1943,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312770864/rectangle_large_type_2_54cee3b019e3ea1ac9e31613888a60ca.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:09.482Z",
+        "observedAt": "2026-10-02T06:03:48.450Z",
         "revisionId": "a5b068acb599a73e2041080b190896dbbafaaf192248a67f005c6f2ba57ea56f"
       },
       "missingVersions": [
@@ -1985,7 +1985,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312770884/rectangle_large_type_2_a780755e3d7100ef102685a96b59946a.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:53.278Z",
+        "observedAt": "2026-10-02T06:03:48.686Z",
         "revisionId": "9deb0cc39ac0d30f30dd657c950147457910bd95853d6ee81f539b368e618bc8"
       },
       "missingVersions": [
@@ -2027,7 +2027,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312770900/rectangle_large_type_2_4017538a13146a9c5024e317fbf7bae3.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:09.969Z",
+        "observedAt": "2026-10-02T06:03:49.336Z",
         "revisionId": "a12277e1d6176c3d9d3895dabff0de54ebec6acf5a532d334d794c6243daef57"
       },
       "missingVersions": [
@@ -2069,7 +2069,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312770918/rectangle_large_type_2_fd7e7afc4772cc9fd99897131129b80e.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:53.400Z",
+        "observedAt": "2026-10-02T06:03:49.399Z",
         "revisionId": "e02e851f7153b2261cea099ba14f5547855a159dbb8e28a903a5ca53720321e5"
       },
       "missingVersions": [
@@ -2111,7 +2111,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312770927/rectangle_large_type_2_901cbafb01c0169d62bed15d81fd0db0.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:11.840Z",
+        "observedAt": "2026-10-02T06:03:49.393Z",
         "revisionId": "7f67d9ef3ba3107227407c5e524ac6f89e30f3b7724ed4bff1c59e4662070c06"
       },
       "missingVersions": [
@@ -2167,9 +2167,9 @@
             "evidenceSha256": "8f74a686b27c0df5b2cb584c7e4eeb647f08834d7989c88455b2a9c12d0f230a"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.105Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -2204,12 +2204,12 @@
         }
       ],
       "candidateRevisionId": "ff284bb8eebea85feee7229520506c4bea980dbb794b2140008a8219cc85ffb1",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "ff284bb8eebea85feee7229520506c4bea980dbb794b2140008a8219cc85ffb1",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/312770047/rectangle_large_type_2_eaa8194e8992dc5aa637f4d55163c999.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T04:30:19.041Z",
-        "revisionId": "41b4674445286a13fd6e7f4e087c18573af89b373068725de67e04e6275f1cd8"
+        "url": "https://assets.st-note.com/production/uploads/images/319908384/rectangle_large_type_2_21171c7cfbf9a383e56ad5ca6335bd8a.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-02T06:03:50.998Z",
+        "revisionId": "ff284bb8eebea85feee7229520506c4bea980dbb794b2140008a8219cc85ffb1"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -2264,9 +2264,9 @@
             "evidenceSha256": "c9344240c855604b12048a6245b36c38a8bc11c155b58a0bb1e2bef27195f0f0"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.111Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -2301,12 +2301,12 @@
         }
       ],
       "candidateRevisionId": "e8ecf1f93bce2e978d4a48ef3893de7250cb8faa0b58fc4e76bf50c662321650",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "e8ecf1f93bce2e978d4a48ef3893de7250cb8faa0b58fc4e76bf50c662321650",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/312770939/rectangle_large_type_2_a331a991bddbbb86b6078a829e9ecd39.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:56.490Z",
-        "revisionId": "95b1e714adb9ca284466b25fec12722b9ecc0ae94d1e6048008d7de29618fd84"
+        "url": "https://assets.st-note.com/production/uploads/images/319908788/rectangle_large_type_2_1d82c7a164c3cf5bfdb9fe554c5fc99c.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-02T06:03:51.123Z",
+        "revisionId": "e8ecf1f93bce2e978d4a48ef3893de7250cb8faa0b58fc4e76bf50c662321650"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -2361,9 +2361,9 @@
             "evidenceSha256": "66b5da93a0b92284863eaa5addab2e0b7f606f49c7ddc0247fb7bc255dc6f52d"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.111Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -2398,12 +2398,12 @@
         }
       ],
       "candidateRevisionId": "b0aeb954aba1863f0651c12ee5cc1b9c30bc870457027b35a686cf60a2cb44a7",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "b0aeb954aba1863f0651c12ee5cc1b9c30bc870457027b35a686cf60a2cb44a7",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/312770953/rectangle_large_type_2_697858eb0c705c336e603df04776465d.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:54.410Z",
-        "revisionId": "a4be4ead114dfa9db5febacc0cb5412939ff3584f72b32d587a499d4d8740388"
+        "url": "https://assets.st-note.com/production/uploads/images/319908837/rectangle_large_type_2_4eeeccafaba509dd4f2f3b9e555553e7.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-02T06:03:51.600Z",
+        "revisionId": "b0aeb954aba1863f0651c12ee5cc1b9c30bc870457027b35a686cf60a2cb44a7"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -2458,9 +2458,9 @@
             "evidenceSha256": "39b04535303c72b624dfb28d6ac45ad2a55feb04c5586c63f0a6dd451efb2219"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.111Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -2495,12 +2495,12 @@
         }
       ],
       "candidateRevisionId": "1d4404f06d5d94ad6eddccc5c1ff46e26e1679b37ed8551b79bb1cd6c49a9ce8",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "1d4404f06d5d94ad6eddccc5c1ff46e26e1679b37ed8551b79bb1cd6c49a9ce8",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/312770996/rectangle_large_type_2_dbf988ebe86b5b29220a50953ceb8695.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:56.649Z",
-        "revisionId": "65e76e140b19a9d5b63f83c5f1ca2cdc3c059af2b1f011961c254f839df031a7"
+        "url": "https://assets.st-note.com/production/uploads/images/319908865/rectangle_large_type_2_61ec3529e7274b41b32f60b9b98c7ce6.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-02T06:03:51.390Z",
+        "revisionId": "1d4404f06d5d94ad6eddccc5c1ff46e26e1679b37ed8551b79bb1cd6c49a9ce8"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -2555,9 +2555,9 @@
             "evidenceSha256": "de18c2f95f19b71537a1aff239e014ebc2726ddf325d0531b7ff5b0afa092350"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.111Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -2592,12 +2592,12 @@
         }
       ],
       "candidateRevisionId": "c15c6fd53cdc4af8226b7316a25bf1d06b168b3b3293666b8a751a0ec2f3aa5b",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "c15c6fd53cdc4af8226b7316a25bf1d06b168b3b3293666b8a751a0ec2f3aa5b",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/312771112/rectangle_large_type_2_c9204acf0a89d60034588942e7c0856c.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:57.866Z",
-        "revisionId": "96b3e9ecbc2e86c42a28a263504d257d735573854741e7e5ef843ad766f95859"
+        "url": "https://assets.st-note.com/production/uploads/images/319908892/rectangle_large_type_2_05d5065394f8026e1168220ef36850ec.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-02T06:03:52.992Z",
+        "revisionId": "c15c6fd53cdc4af8226b7316a25bf1d06b168b3b3293666b8a751a0ec2f3aa5b"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -2652,9 +2652,9 @@
             "evidenceSha256": "7ccf042e0e269c940174f9887c828bf45145dae74e457bd6df2eafc8484d4b33"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.111Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -2689,12 +2689,12 @@
         }
       ],
       "candidateRevisionId": "bc22abdbe0705c8ad441dcf6983a18b8908fa0f57309f210760adbe79b8a3032",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "bc22abdbe0705c8ad441dcf6983a18b8908fa0f57309f210760adbe79b8a3032",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/312771140/rectangle_large_type_2_3d2c40ea54b58f91ceb8dca4a0d3398f.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:58.620Z",
-        "revisionId": "b3753a3b6dbc8354ed7d44eafd8ce7868bd4ab31b1606149fc351ec3072dad64"
+        "url": "https://assets.st-note.com/production/uploads/images/319908916/rectangle_large_type_2_3b1875626df0e9b41a828ca6559e67d2.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-02T06:03:52.923Z",
+        "revisionId": "bc22abdbe0705c8ad441dcf6983a18b8908fa0f57309f210760adbe79b8a3032"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -2749,9 +2749,9 @@
             "evidenceSha256": "23a51bd48c2179ed3e7af309c4fe50f9323a0046be5726af736e11901d674c35"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.111Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -2786,12 +2786,12 @@
         }
       ],
       "candidateRevisionId": "10774f512d02a6297bde61e899529d01146bc0a9a0f476c677440a3023672c47",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "10774f512d02a6297bde61e899529d01146bc0a9a0f476c677440a3023672c47",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/312771153/rectangle_large_type_2_47d22d3e41cce44b0bf368cebe175447.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:58.929Z",
-        "revisionId": "b48507fb03157484038d62a25e3c9b4000d173bc6ef9475e2f1a05df12e60c1a"
+        "url": "https://assets.st-note.com/production/uploads/images/319909781/rectangle_large_type_2_59d098aec42bcc7c5496b8e50604f282.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-02T06:03:53.315Z",
+        "revisionId": "10774f512d02a6297bde61e899529d01146bc0a9a0f476c677440a3023672c47"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -2846,9 +2846,9 @@
             "evidenceSha256": "150d9ffbc4a12076ca4698abd0860fc09bbdaff4ec17053dd3dc6f0ad20b1b10"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.111Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -2883,12 +2883,12 @@
         }
       ],
       "candidateRevisionId": "d386d281fc9226696fa3d10f65d532fdc2a0fdce146bb158d914c5da200f7e89",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "d386d281fc9226696fa3d10f65d532fdc2a0fdce146bb158d914c5da200f7e89",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/312771160/rectangle_large_type_2_c7c4b674635306031ec313c9e20dc904.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:58.946Z",
-        "revisionId": "e40d6cf65185c5ce28d10aa71420e96f4f8d02ff2a794a7a978be27052b61606"
+        "url": "https://assets.st-note.com/production/uploads/images/319909813/rectangle_large_type_2_659d80679f33e445eb8195de114139b4.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-02T06:03:53.325Z",
+        "revisionId": "d386d281fc9226696fa3d10f65d532fdc2a0fdce146bb158d914c5da200f7e89"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -2943,9 +2943,9 @@
             "evidenceSha256": "2d4dcf628c24c7eac40a921005da064508e1764f04a680f2e58c70aabf02e81e"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -2980,12 +2980,12 @@
         }
       ],
       "candidateRevisionId": "d2e7d3647d5f733286f16281ffe1b2007c2c5120eef81d998081f5c327b81c54",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "d2e7d3647d5f733286f16281ffe1b2007c2c5120eef81d998081f5c327b81c54",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/312771184/rectangle_large_type_2_2ca9c801988e033bc47822853b3cb9d1.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:59.857Z",
-        "revisionId": "78b70361b2830f623ac8ccc2297945c023bc7d53cfbb1b405f6abe656d17afba"
+        "url": "https://assets.st-note.com/production/uploads/images/319909829/rectangle_large_type_2_12e573eccf307c02876736d91a9cb597.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-02T06:03:54.987Z",
+        "revisionId": "d2e7d3647d5f733286f16281ffe1b2007c2c5120eef81d998081f5c327b81c54"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -3040,9 +3040,9 @@
             "evidenceSha256": "e864148167d3e0054d2d3ec95727c4ae8e14622377a2dd49c3fd0deaef9adad3"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -3077,12 +3077,12 @@
         }
       ],
       "candidateRevisionId": "0ea5c91a38d4f1ddbb32ecc26489e964217cc33de75bbf285bf379b3a25c78ba",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "0ea5c91a38d4f1ddbb32ecc26489e964217cc33de75bbf285bf379b3a25c78ba",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/312771205/rectangle_large_type_2_fd458b87e1293dc7702de715bbd36a78.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:00.819Z",
-        "revisionId": "9f15a16d34485b032736d5b7c1e1fa2f483634890690e0a2ec4b05fbbbf0bcf7"
+        "url": "https://assets.st-note.com/production/uploads/images/319909884/rectangle_large_type_2_cd61617ad6a0b8c021aa98e1433c2bbb.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-02T06:03:55.056Z",
+        "revisionId": "0ea5c91a38d4f1ddbb32ecc26489e964217cc33de75bbf285bf379b3a25c78ba"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -3137,9 +3137,9 @@
             "evidenceSha256": "0317f336b0948f2b842abf7d234d4908aeca843a9c8d93f3d9b60cd30f8ed424"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -3174,12 +3174,12 @@
         }
       ],
       "candidateRevisionId": "71e9a41de13b14e33b230b67522b350a88a51f743f1883d512d674aa8aa3456c",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "71e9a41de13b14e33b230b67522b350a88a51f743f1883d512d674aa8aa3456c",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/312771217/rectangle_large_type_2_5d9a06cdc3f81390b91267b93b48b2a6.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:55.752Z",
-        "revisionId": "f5218f1ad1b86b1adf380a0dd505d2948b6d2f97883f7654a9da3ebde5e18204"
+        "url": "https://assets.st-note.com/production/uploads/images/319909907/rectangle_large_type_2_8ef47bfc03381943ae2d0470b7668628.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-02T06:03:55.457Z",
+        "revisionId": "71e9a41de13b14e33b230b67522b350a88a51f743f1883d512d674aa8aa3456c"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -3234,9 +3234,9 @@
             "evidenceSha256": "d6f478138d4586f1d13fb0a0a6138cd71d558d840b1e01150b645d6bcf762247"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -3271,12 +3271,12 @@
         }
       ],
       "candidateRevisionId": "1aeb61464c0a97aa14a9cc42be1e70195ea40ebbe828c1c67cd87f98df004f04",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "1aeb61464c0a97aa14a9cc42be1e70195ea40ebbe828c1c67cd87f98df004f04",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/312768359/rectangle_large_type_2_69ad79e75e85c70cff43d2a6edc66a43.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:55.777Z",
-        "revisionId": "a4cff847d6a77ede582ea688ecf02a077600d67c2350434f75841d457ac16aca"
+        "url": "https://assets.st-note.com/production/uploads/images/319909941/rectangle_large_type_2_ce7920d4a0d90c56dce0d7063a5a21a4.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-02T06:03:55.219Z",
+        "revisionId": "1aeb61464c0a97aa14a9cc42be1e70195ea40ebbe828c1c67cd87f98df004f04"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -3331,9 +3331,9 @@
             "evidenceSha256": "7e9b525ade4530f26a2d9c8752b40fdfa76db5a745a43341b814efb01659af6b"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -3368,12 +3368,12 @@
         }
       ],
       "candidateRevisionId": "f5b9e70905d777e9655bbb5bbe4573dc7d9745a9d9c7cee4e18eaae45bdc4e1a",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "f5b9e70905d777e9655bbb5bbe4573dc7d9745a9d9c7cee4e18eaae45bdc4e1a",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/312771237/rectangle_large_type_2_1c52cac47a7b1859a2a1be84f78fbb1c.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:01.373Z",
-        "revisionId": "2459a4c19047193e3319c60e1405f36afebec296854c0c8530d36a6cf186cd6c"
+        "url": "https://assets.st-note.com/production/uploads/images/319909958/rectangle_large_type_2_bea9a21e898753c4e595532c9a458061.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-02T06:03:56.801Z",
+        "revisionId": "f5b9e70905d777e9655bbb5bbe4573dc7d9745a9d9c7cee4e18eaae45bdc4e1a"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -3428,9 +3428,9 @@
             "evidenceSha256": "83b34e51d9d13346bde97603a336d4c356406fe0d032da40f07cd95b9f7c9ea5"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -3465,12 +3465,12 @@
         }
       ],
       "candidateRevisionId": "a07e8765921137f972cf53ee25c142d169b270d6c4e364db2521a8f29a5dc902",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "a07e8765921137f972cf53ee25c142d169b270d6c4e364db2521a8f29a5dc902",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/312771253/rectangle_large_type_2_b218d10b8ed0e0286c0292248c86b2ce.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:02.375Z",
-        "revisionId": "2187c396348b62095aa9c38e3408c937afbf8005ab9ea379557dec28834427cc"
+        "url": "https://assets.st-note.com/production/uploads/images/319909969/rectangle_large_type_2_3a23e0f777adc4930c976368510195d6.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-02T06:03:56.965Z",
+        "revisionId": "a07e8765921137f972cf53ee25c142d169b270d6c4e364db2521a8f29a5dc902"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -3525,9 +3525,9 @@
             "evidenceSha256": "1c1b4a7685ad3ee19668ecc551e08d4ada4fa00218c39921cc6d906bbfb07979"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -3562,12 +3562,12 @@
         }
       ],
       "candidateRevisionId": "266a6ec25ee686aa39cb16f11bfb72f7d2357f87e4cfba55a569a0ea0a25dc7e",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "266a6ec25ee686aa39cb16f11bfb72f7d2357f87e4cfba55a569a0ea0a25dc7e",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/312771263/rectangle_large_type_2_3099ce313bf06bd2c3c9c1f89bcdce10.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:02.361Z",
-        "revisionId": "26f92732fb1e57239dae107fea0597946e2e20983036d079528a1eec5d197320"
+        "url": "https://assets.st-note.com/production/uploads/images/319909998/rectangle_large_type_2_4ef197abbef97aa51fb1ffb36c5c63fa.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-02T06:03:57.248Z",
+        "revisionId": "266a6ec25ee686aa39cb16f11bfb72f7d2357f87e4cfba55a569a0ea0a25dc7e"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -3622,9 +3622,9 @@
             "evidenceSha256": "4510bcf12c9dd415f57aab1e86fc043d8fb28ac4fc9bd382deba82fc15a2249e"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -3659,12 +3659,12 @@
         }
       ],
       "candidateRevisionId": "64414f034db38a66f7fe719475aac5996bc35942302aa1a2588ec65d68b033d1",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "64414f034db38a66f7fe719475aac5996bc35942302aa1a2588ec65d68b033d1",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/312771277/rectangle_large_type_2_d766df497369377af1209878f4dfca15.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:03.490Z",
-        "revisionId": "7cc4e797ea5e545a66bc0946fb96dfba8cc566ab52f9e260adc0ecc042d34ca6"
+        "url": "https://assets.st-note.com/production/uploads/images/319910024/rectangle_large_type_2_12ed796ffe4a235484b6664bac8c8cc6.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-02T06:03:57.399Z",
+        "revisionId": "64414f034db38a66f7fe719475aac5996bc35942302aa1a2588ec65d68b033d1"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -3719,9 +3719,9 @@
             "evidenceSha256": "4821a946f566ff167b3ea463a55af2a5f172b3a753b4132bd18ecb08b11ab37f"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -3756,12 +3756,12 @@
         }
       ],
       "candidateRevisionId": "dfbe2ed77ceaf26b9f6c5e9daeaf3864f8a2bd5718c057c4ea8bce4a3aca72e6",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "dfbe2ed77ceaf26b9f6c5e9daeaf3864f8a2bd5718c057c4ea8bce4a3aca72e6",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/312771285/rectangle_large_type_2_23e7b69f3c854b8bdf5d8cd5799d84b0.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:04.046Z",
-        "revisionId": "338b5176cc61c11dd00e65de810956b99e691c41ddbf02aac83a0cf2dac07c27"
+        "url": "https://assets.st-note.com/production/uploads/images/319910060/rectangle_large_type_2_afb43df173e85c36a121ada4f44ee1fd.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-02T06:03:58.930Z",
+        "revisionId": "dfbe2ed77ceaf26b9f6c5e9daeaf3864f8a2bd5718c057c4ea8bce4a3aca72e6"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -3816,9 +3816,9 @@
             "evidenceSha256": "11eca62e097a90edebc894d0958f1c41509a340a028377d5bb906237466f8058"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -3853,12 +3853,12 @@
         }
       ],
       "candidateRevisionId": "85fe7595c2b76805af7eab696d9ca39144b6f72be625c59d887d4008338b37b5",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "85fe7595c2b76805af7eab696d9ca39144b6f72be625c59d887d4008338b37b5",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/312771329/rectangle_large_type_2_c00900adf967246d213fcaf879ac1722.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:04.725Z",
-        "revisionId": "0a74726b26c8976b4f099e24fa59f07d3798335853cdc69c61ea13847860bc09"
+        "url": "https://assets.st-note.com/production/uploads/images/319910088/rectangle_large_type_2_0137a1501a4594ba37a1a07c572e2439.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-02T06:03:59.591Z",
+        "revisionId": "85fe7595c2b76805af7eab696d9ca39144b6f72be625c59d887d4008338b37b5"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -3913,9 +3913,9 @@
             "evidenceSha256": "c3b32267f73cc0776d223a49de2a347a8cfebea0621eda2a92107f79e9839af5"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -3950,12 +3950,12 @@
         }
       ],
       "candidateRevisionId": "0bdccc9d91c732ff15241edcf55b53363f96532f3b82aa520b854dc648da82e3",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "0bdccc9d91c732ff15241edcf55b53363f96532f3b82aa520b854dc648da82e3",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/312771353/rectangle_large_type_2_6d9c06074e17bd29e85106e22a173bcb.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:04.861Z",
-        "revisionId": "59353011ce0a15aceaffdc36218d0f4f4f92af3702ffd55f0c1312815d0c3c17"
+        "url": "https://assets.st-note.com/production/uploads/images/319910110/rectangle_large_type_2_75173aba0e66ae29d40d14af013f40a3.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-02T06:03:59.586Z",
+        "revisionId": "0bdccc9d91c732ff15241edcf55b53363f96532f3b82aa520b854dc648da82e3"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -4010,9 +4010,9 @@
             "evidenceSha256": "a6ae292353b84b4d25198b0c88d6e56da32ed8db40e0a58d40c0edeb49a83366"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -4047,12 +4047,12 @@
         }
       ],
       "candidateRevisionId": "477e2da1d17c4782142f64b8bff897554ed0e7a688edb561690f9b54493edfc9",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "477e2da1d17c4782142f64b8bff897554ed0e7a688edb561690f9b54493edfc9",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/312771432/rectangle_large_type_2_f00e8c59055bebdd55cd6be352681040.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:05.826Z",
-        "revisionId": "fb223fddf481b0f73d27fab9e9faaedca77d8d81e6cbf932b32e1157fb2b80c8"
+        "url": "https://assets.st-note.com/production/uploads/images/319910128/rectangle_large_type_2_6a0fb7d57f4be391935e9e641e5ba2b3.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-02T06:03:59.831Z",
+        "revisionId": "477e2da1d17c4782142f64b8bff897554ed0e7a688edb561690f9b54493edfc9"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -4107,9 +4107,9 @@
             "evidenceSha256": "51700640945031ee13cb3b0cc606c6cac4602712b035218bdec1823cca30b335"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -4144,12 +4144,12 @@
         }
       ],
       "candidateRevisionId": "dbda393c968778ce0ae4fa2c4e95f03fd5884e1e312c1b8942f2eb4b087db4f9",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "dbda393c968778ce0ae4fa2c4e95f03fd5884e1e312c1b8942f2eb4b087db4f9",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/312771446/rectangle_large_type_2_260ccaf4dfa666d5308641dfab6ea8a6.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:06.368Z",
-        "revisionId": "7655b909f3cd9747f321ecb4673cc505bbb0c063f8f9e886c8030e7c9a840337"
+        "url": "https://assets.st-note.com/production/uploads/images/319910152/rectangle_large_type_2_d3e08ed36828fc833f220cfe84f13f4a.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-02T06:04:01.764Z",
+        "revisionId": "dbda393c968778ce0ae4fa2c4e95f03fd5884e1e312c1b8942f2eb4b087db4f9"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -4204,9 +4204,9 @@
             "evidenceSha256": "94b8246860a7b3b7d7fb539725ec3956e95d3212c195bd37df744c6a09779a5d"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -4241,12 +4241,12 @@
         }
       ],
       "candidateRevisionId": "dac7e7f60bb670d1c87d447f03eb3f708162687e0ab9d89de1777878371d0abd",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "dac7e7f60bb670d1c87d447f03eb3f708162687e0ab9d89de1777878371d0abd",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/312771465/rectangle_large_type_2_a740ff903b97b31062527d0156c67e31.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:07.278Z",
-        "revisionId": "abd31b6cd1fdaef1b3e6f8e4843deab190cde61fe11d4ef7e80f79171c967b99"
+        "url": "https://assets.st-note.com/production/uploads/images/319910170/rectangle_large_type_2_952e255868fd0829a31e7b0c3e375454.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-02T06:04:02.163Z",
+        "revisionId": "dac7e7f60bb670d1c87d447f03eb3f708162687e0ab9d89de1777878371d0abd"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -4301,9 +4301,9 @@
             "evidenceSha256": "ce1a92b5195a452a23be153d2b27dd4963a6e44af8f0416a021c9bd9babe4cae"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -4338,12 +4338,12 @@
         }
       ],
       "candidateRevisionId": "f85c43ea579454caffbcda84ae121cc523ed4c963ad6ab9257879f600c3bcfb8",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "f85c43ea579454caffbcda84ae121cc523ed4c963ad6ab9257879f600c3bcfb8",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/312771474/rectangle_large_type_2_4fb00abe4a4d7c597ac4ed682b23aa8c.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:07.291Z",
-        "revisionId": "efb1d67a647a5f4f8d85238b473ea8d6250c42b8ab7c1ec7b7dec3c28d6103c2"
+        "url": "https://assets.st-note.com/production/uploads/images/319910199/rectangle_large_type_2_73607d26e0ecee27bd9c9f97a4973879.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-02T06:04:01.966Z",
+        "revisionId": "f85c43ea579454caffbcda84ae121cc523ed4c963ad6ab9257879f600c3bcfb8"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -4398,9 +4398,9 @@
             "evidenceSha256": "32047c7a8d3c9cfa5fc39b0c4a1d32eef130ce36248fb54ce82587f272c1a12a"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -4435,12 +4435,12 @@
         }
       ],
       "candidateRevisionId": "d102d6273f25418d49dc215d1bb0b4152350b1b8cadaee0bb4962a311179e719",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "d102d6273f25418d49dc215d1bb0b4152350b1b8cadaee0bb4962a311179e719",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/312771512/rectangle_large_type_2_a78fab8683346ce0db5cb0c76bd3b685.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:07.946Z",
-        "revisionId": "691293c6b20b26da41b548825a5bf736b1fb4114b7f6e74ffbd0986b3b44fcb4"
+        "url": "https://assets.st-note.com/production/uploads/images/319910258/rectangle_large_type_2_2737ea570a805fc6c4ebe3b2f9624db4.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-02T06:04:02.899Z",
+        "revisionId": "d102d6273f25418d49dc215d1bb0b4152350b1b8cadaee0bb4962a311179e719"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -4495,9 +4495,9 @@
             "evidenceSha256": "13505a67154ff49b083f99cff19ded0a8dd69f3c74cff6ba20c7b2aaa03a154a"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -4532,12 +4532,12 @@
         }
       ],
       "candidateRevisionId": "1645e9b9388e281269396fad619caec750ae269f1563d9b5ba279e32d003b366",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "1645e9b9388e281269396fad619caec750ae269f1563d9b5ba279e32d003b366",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/312771544/rectangle_large_type_2_e048bd1e482533c33d69c649ac650b97.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:08.769Z",
-        "revisionId": "d4e8bb44becb5a8830f1729cb845be991f762ee3512e09d39b22fe2687403f97"
+        "url": "https://assets.st-note.com/production/uploads/images/319910296/rectangle_large_type_2_320dc00ac06f0efab1f4e3a63207bced.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-02T06:04:04.228Z",
+        "revisionId": "1645e9b9388e281269396fad619caec750ae269f1563d9b5ba279e32d003b366"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -4592,9 +4592,9 @@
             "evidenceSha256": "128258afe0bf356113e936f07700294771a94d64083bf303d1797c067b21ab60"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -4629,12 +4629,12 @@
         }
       ],
       "candidateRevisionId": "0d0c8341f30d3845810c6be537438a124a91a0074d6a8d4d9ab82a24db247c9d",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "0d0c8341f30d3845810c6be537438a124a91a0074d6a8d4d9ab82a24db247c9d",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/312771566/rectangle_large_type_2_fd5a722bca85e1b2371624416c4b5bec.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:09.820Z",
-        "revisionId": "e848bc740a0e4ce91540ecb56c7c910b1805e982fd332584252991fa501cde4c"
+        "url": "https://assets.st-note.com/production/uploads/images/319910309/rectangle_large_type_2_ecd928ea7c87d19ff0187fedbdd633a4.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-02T06:04:03.891Z",
+        "revisionId": "0d0c8341f30d3845810c6be537438a124a91a0074d6a8d4d9ab82a24db247c9d"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -4689,9 +4689,9 @@
             "evidenceSha256": "d86d08d70ac13eefe8e0c2aebd58a81a13d6720a16b75dbb996783d29189b562"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -4726,12 +4726,12 @@
         }
       ],
       "candidateRevisionId": "59783c1b77c29e000b0ff701cab4dec451d3f65787367af9e3054e67597bbed3",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "59783c1b77c29e000b0ff701cab4dec451d3f65787367af9e3054e67597bbed3",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/312771580/rectangle_large_type_2_b2a172a99305f6d67349917a3839782d.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:09.623Z",
-        "revisionId": "814d1e29709ec20522e58b07f52c9b4976c4ba22da6a135bbd81dffa89db1083"
+        "url": "https://assets.st-note.com/production/uploads/images/319910348/rectangle_large_type_2_42f12010a78a386a4029cdb8ce8db6ae.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-02T06:04:04.091Z",
+        "revisionId": "59783c1b77c29e000b0ff701cab4dec451d3f65787367af9e3054e67597bbed3"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -4786,9 +4786,9 @@
             "evidenceSha256": "ae5d534e1c7488868d4cc3f86dc6bc1dd6b0cd90ccbc217dd6fea9dccaeaea72"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -4823,12 +4823,12 @@
         }
       ],
       "candidateRevisionId": "34cc1cdc7046be61b1a0af52eb1cd35ec5e88d5c9d3a94284cd3fc9f2ec6e3a3",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "34cc1cdc7046be61b1a0af52eb1cd35ec5e88d5c9d3a94284cd3fc9f2ec6e3a3",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/312771600/rectangle_large_type_2_e066c55ba4966a904e61d1a9a282c0b2.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:10.276Z",
-        "revisionId": "04f85bd0d9bd527d84203cd776289755a2cf2710329eacbacf45541f9825484f"
+        "url": "https://assets.st-note.com/production/uploads/images/319911101/rectangle_large_type_2_69f3cb9005c32f68ba47e09ee1566e6a.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-02T06:04:05.022Z",
+        "revisionId": "34cc1cdc7046be61b1a0af52eb1cd35ec5e88d5c9d3a94284cd3fc9f2ec6e3a3"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -4883,9 +4883,9 @@
             "evidenceSha256": "35862957122efc9ae02f65370a32ea5a4a2ec3131007cea045ef7d9b2db04dcb"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -4920,12 +4920,12 @@
         }
       ],
       "candidateRevisionId": "9b791e2d49ffdf6b1e40977a8e8467d4bb187e14ce6ae01ed977d225c925e2d9",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "9b791e2d49ffdf6b1e40977a8e8467d4bb187e14ce6ae01ed977d225c925e2d9",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/312771612/rectangle_large_type_2_722e658db1ead621a4f4db4dbbf2efc3.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:10.809Z",
-        "revisionId": "0bc23298eaef8cc176726bc47ccb400d8a0a6acf208f6d20aa4a1df9831cc8a6"
+        "url": "https://assets.st-note.com/production/uploads/images/319911136/rectangle_large_type_2_4859c91598047ef2cbc4254b5d07a79f.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-02T06:04:06.506Z",
+        "revisionId": "9b791e2d49ffdf6b1e40977a8e8467d4bb187e14ce6ae01ed977d225c925e2d9"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -4980,9 +4980,9 @@
             "evidenceSha256": "51889b2908641104778dd57b6ba8e56bcffff5a3ee4d71b38ab495d66cfe8201"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -5017,12 +5017,12 @@
         }
       ],
       "candidateRevisionId": "6705e01f0f3c4a3aa5cdace6226abc5d21926cbbdfd9d003be5143cc876a5a80",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "6705e01f0f3c4a3aa5cdace6226abc5d21926cbbdfd9d003be5143cc876a5a80",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/312771624/rectangle_large_type_2_6421f0dd9e7b5b8eb6b29706ab041e54.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:11.971Z",
-        "revisionId": "2baff2b3c705a117d161e64d776ad1de2e139ab818011c62d504e0efb8f92f63"
+        "url": "https://assets.st-note.com/production/uploads/images/319911170/rectangle_large_type_2_d8397ed71cf7a9f1ea498808a64a2d04.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-02T06:04:06.495Z",
+        "revisionId": "6705e01f0f3c4a3aa5cdace6226abc5d21926cbbdfd9d003be5143cc876a5a80"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -5077,9 +5077,9 @@
             "evidenceSha256": "e58371129cca2b8e1f120de3bebfa97f2fb963da1960c12944d772630f7c4f00"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -5114,12 +5114,12 @@
         }
       ],
       "candidateRevisionId": "96202d0f22971e17a68c5c7aa28e646796dd9962e94a9cd77d74535a55095286",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "96202d0f22971e17a68c5c7aa28e646796dd9962e94a9cd77d74535a55095286",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/312771645/rectangle_large_type_2_e28a7f0936baa8edac0888f327500fc3.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:12.037Z",
-        "revisionId": "19e10a812808d7eff665b4b08a2e98b2c03020f7483d4815075dc6ef0ff88603"
+        "url": "https://assets.st-note.com/production/uploads/images/319911190/rectangle_large_type_2_8889c282fa4961c702b272aad11e24bc.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-02T06:04:06.900Z",
+        "revisionId": "96202d0f22971e17a68c5c7aa28e646796dd9962e94a9cd77d74535a55095286"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -5174,9 +5174,9 @@
             "evidenceSha256": "3b3ed160186765226e3bdd0b27373fc28ffc94f7736332e18e13c60703625d0c"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -5211,12 +5211,12 @@
         }
       ],
       "candidateRevisionId": "62dbec3170b15f5c32627ba14252459a0da4bbb39ac14b692f2ce374d43eb650",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "62dbec3170b15f5c32627ba14252459a0da4bbb39ac14b692f2ce374d43eb650",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/312771656/rectangle_large_type_2_2e88db840f2bed08564276e4fd88ac6f.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:12.360Z",
-        "revisionId": "25f5fddd14c9bc71fd4a9a7eec9c46f7c8531da48796f5b96e38beea9bac9834"
+        "url": "https://assets.st-note.com/production/uploads/images/319911204/rectangle_large_type_2_07d6125e40f80dff8aa62040807620c7.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-02T06:04:07.683Z",
+        "revisionId": "62dbec3170b15f5c32627ba14252459a0da4bbb39ac14b692f2ce374d43eb650"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -5271,9 +5271,9 @@
             "evidenceSha256": "36da1b1e8a1b2de98d084807c0056309485c5d696e60702514f0b302ad965b18"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -5308,12 +5308,12 @@
         }
       ],
       "candidateRevisionId": "e28d6f515e1653d9d42299571bd59fca4fcabb91379b57eaba04cdabaf93610b",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "e28d6f515e1653d9d42299571bd59fca4fcabb91379b57eaba04cdabaf93610b",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/312771668/rectangle_large_type_2_aaf009d2dd039bb8af6b46ee1e054622.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:13.201Z",
-        "revisionId": "754d873ebbc9618fd96ddfc226391028ec18579a9dfc24af9f23f6ca9cb976fb"
+        "url": "https://assets.st-note.com/production/uploads/images/319911228/rectangle_large_type_2_93cea3c42e95bb31b2dde32fd70dbfdd.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-02T06:04:09.144Z",
+        "revisionId": "e28d6f515e1653d9d42299571bd59fca4fcabb91379b57eaba04cdabaf93610b"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -5368,9 +5368,9 @@
             "evidenceSha256": "6e280dc74a848fbdc840c65a3f53abd0676d29ef6575dcd069c73386dc2be3c0"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -5405,12 +5405,12 @@
         }
       ],
       "candidateRevisionId": "5d2bd8f06605dec1758dbe9d367f11a1fc07c7168ff2320344954afcc41fcd9e",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "5d2bd8f06605dec1758dbe9d367f11a1fc07c7168ff2320344954afcc41fcd9e",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/312771678/rectangle_large_type_2_30358f64b03bfc366269671bb1223b90.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:13.897Z",
-        "revisionId": "177b07a81acebdd34b23c3f041f1a6a80022a7bf32d78e1631cd9ace5945bf7d"
+        "url": "https://assets.st-note.com/production/uploads/images/319911247/rectangle_large_type_2_8c7579b0b3b860ad96b1fa5b9398abfb.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-02T06:04:08.615Z",
+        "revisionId": "5d2bd8f06605dec1758dbe9d367f11a1fc07c7168ff2320344954afcc41fcd9e"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -5465,9 +5465,9 @@
             "evidenceSha256": "be14a92dd343e93a05e20843f82a70c84e67f928ad530483ce2ecfb1637a29f7"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -5502,12 +5502,12 @@
         }
       ],
       "candidateRevisionId": "360d115624d6f097cb01aed941babbcbe8aaaa27a16ce4f302c7334460519be7",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "360d115624d6f097cb01aed941babbcbe8aaaa27a16ce4f302c7334460519be7",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/312771699/rectangle_large_type_2_43a2be766f7b91285f2d6a34778438dd.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:14.044Z",
-        "revisionId": "4608dd88faf3aac2fa37bf50878e61976825513de72eaabaafecbb25f52379ea"
+        "url": "https://assets.st-note.com/production/uploads/images/319911260/rectangle_large_type_2_de8fcf2bca2daf8898a092b2a96b60b1.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-02T06:04:09.032Z",
+        "revisionId": "360d115624d6f097cb01aed941babbcbe8aaaa27a16ce4f302c7334460519be7"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -5562,9 +5562,9 @@
             "evidenceSha256": "8c7b754fe71c72982920ca2bc05b246a3e93fb1b6b7c2b757f4b1c24be8f681b"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -5599,12 +5599,12 @@
         }
       ],
       "candidateRevisionId": "4026055612467ec46fa7e271ac7d6b2751770d2dcd48f5ce4f4b357c0164b091",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "4026055612467ec46fa7e271ac7d6b2751770d2dcd48f5ce4f4b357c0164b091",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/312771713/rectangle_large_type_2_0461bc5ba7bd4d6f2736d980d508fa3f.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:14.831Z",
-        "revisionId": "69ba127cd34c30b3554f9d9b0db2ce177526e7bf8b09a0e2d8df10e72efd26ef"
+        "url": "https://assets.st-note.com/production/uploads/images/319911279/rectangle_large_type_2_5ef233f51c941813b3ebd4216881ed0a.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-02T06:04:09.873Z",
+        "revisionId": "4026055612467ec46fa7e271ac7d6b2751770d2dcd48f5ce4f4b357c0164b091"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -5659,9 +5659,9 @@
             "evidenceSha256": "c697a4135677db8efb6b30fe5f6358e23979de5036c404b8eeee48b92fd29c81"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -5696,12 +5696,12 @@
         }
       ],
       "candidateRevisionId": "f3a976f034d06844e878f660d1f660a9c3fcd1df7d15508c47d80be9db70f10e",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "f3a976f034d06844e878f660d1f660a9c3fcd1df7d15508c47d80be9db70f10e",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/312771726/rectangle_large_type_2_b2feeb2af6f68f17e9c0ad9a80d4331d.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:15.682Z",
-        "revisionId": "4747ec0d02d7c209849ecfd0714a7bd6c2612b4b2b92ab653ff7d5d6d752a0a5"
+        "url": "https://assets.st-note.com/production/uploads/images/319911292/rectangle_large_type_2_c465e2b8c63183d749edc2f39ad393d5.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-02T06:04:11.183Z",
+        "revisionId": "f3a976f034d06844e878f660d1f660a9c3fcd1df7d15508c47d80be9db70f10e"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -5756,9 +5756,9 @@
             "evidenceSha256": "fbd38555f8f9d3e4c49bbef8fe7f074ff9c0193ff411f7628c485e35ac63fefe"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -5793,12 +5793,12 @@
         }
       ],
       "candidateRevisionId": "733f9b55a2650a0ee041316b132237d0964faa56496a4b1c568c5d4bb96b883d",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "733f9b55a2650a0ee041316b132237d0964faa56496a4b1c568c5d4bb96b883d",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/312771739/rectangle_large_type_2_7d45899a786dfbaeffaa0abc71731328.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:16.051Z",
-        "revisionId": "38f43d4e3320c513ea154efff5c3ac32d0056866e1de548256eb78cdb287dfb2"
+        "url": "https://assets.st-note.com/production/uploads/images/319911317/rectangle_large_type_2_668e7803437872bcc60459c9e9f05a0a.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-02T06:04:11.662Z",
+        "revisionId": "733f9b55a2650a0ee041316b132237d0964faa56496a4b1c568c5d4bb96b883d"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -5853,9 +5853,9 @@
             "evidenceSha256": "13866dcedcbd79cf12dfaddd503e3eeac528e8e69bdf587ef20bd23e6bd8c7dc"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -5890,12 +5890,12 @@
         }
       ],
       "candidateRevisionId": "6a3217e1325f8a79d1e47060884158a974cdbede7d09ddad2e37841bc3de6efa",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "6a3217e1325f8a79d1e47060884158a974cdbede7d09ddad2e37841bc3de6efa",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/312771774/rectangle_large_type_2_551f87848c267acd4c37098e7d1b7bfd.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:16.296Z",
-        "revisionId": "990eb83bbdff28ec8ec3d477ed2476c02d6cba5bcdd4cdc40a14b729c365fd24"
+        "url": "https://assets.st-note.com/production/uploads/images/319911339/rectangle_large_type_2_50d6d714b44dc5e6eb09fdb5b7e76c08.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-02T06:04:11.847Z",
+        "revisionId": "6a3217e1325f8a79d1e47060884158a974cdbede7d09ddad2e37841bc3de6efa"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -5950,9 +5950,9 @@
             "evidenceSha256": "c017d136ab5781bf9aeabb7269709ef811c2d7393db4da594cb0bb93a586b2e4"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -5987,12 +5987,12 @@
         }
       ],
       "candidateRevisionId": "90816a019161005b71339e1f80439b443d2ad37d33bc113640e4784b209e2aa3",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "90816a019161005b71339e1f80439b443d2ad37d33bc113640e4784b209e2aa3",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/312771883/rectangle_large_type_2_66607b56a57dcb850e19d8bb5fed1c9f.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:16.966Z",
-        "revisionId": "fa931b7ba34117f77ca1a9c18042beaa0fe3270a4450ff7b253672c17ef88ace"
+        "url": "https://assets.st-note.com/production/uploads/images/319911398/rectangle_large_type_2_6300531524e8f1c1b929f3b986739b12.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-02T06:04:12.569Z",
+        "revisionId": "90816a019161005b71339e1f80439b443d2ad37d33bc113640e4784b209e2aa3"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -6047,9 +6047,9 @@
             "evidenceSha256": "90f47c0461623e08edc84b8ea7aefbaf4ea824e87ad5d8b4c8d687108cfd4bd5"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -6084,12 +6084,12 @@
         }
       ],
       "candidateRevisionId": "2a1090be1a739d46d86caf0ea0bf6805a779d5debf8c95822d60bb4a88b2b195",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "2a1090be1a739d46d86caf0ea0bf6805a779d5debf8c95822d60bb4a88b2b195",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/312771892/rectangle_large_type_2_05d638ab2b9f05767bacf847c4f6d2fc.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:17.945Z",
-        "revisionId": "880439d8b39772b3491b98f02f1d38e13254d9cb903e837e0864deffd9add204"
+        "url": "https://assets.st-note.com/production/uploads/images/319911439/rectangle_large_type_2_0924dbf9f92ff8bd4292763199dd174b.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-02T06:04:13.998Z",
+        "revisionId": "2a1090be1a739d46d86caf0ea0bf6805a779d5debf8c95822d60bb4a88b2b195"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -6144,9 +6144,9 @@
             "evidenceSha256": "fc997e08209523aeb1e612449113b65cbdabf3b763a530c2bf8f552a61027d31"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -6181,12 +6181,12 @@
         }
       ],
       "candidateRevisionId": "d6370a3caadb6ab15e1ee0d14dd81579a130509aa085dc4176bc745a8172a6b1",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "d6370a3caadb6ab15e1ee0d14dd81579a130509aa085dc4176bc745a8172a6b1",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/312771907/rectangle_large_type_2_7a8cecc4e8e941d2241d797b5a3c962b.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:18.312Z",
-        "revisionId": "5a43ae8a7d230ae78c14231467417719faa433e09f6f66ddc900d5442581c08f"
+        "url": "https://assets.st-note.com/production/uploads/images/319911475/rectangle_large_type_2_ca8d517e2d566ce75e8454c29a7dee8d.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-02T06:04:14.263Z",
+        "revisionId": "d6370a3caadb6ab15e1ee0d14dd81579a130509aa085dc4176bc745a8172a6b1"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -6241,9 +6241,9 @@
             "evidenceSha256": "2463cd72ea3de1d3af6856107e9e4943fe2584469944591e06ba17f21a20a1e9"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -6278,12 +6278,12 @@
         }
       ],
       "candidateRevisionId": "246aecc9881fb9dcd120bcb0f074d74fd4b0643a062b3bfcf05d76548ec68872",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "246aecc9881fb9dcd120bcb0f074d74fd4b0643a062b3bfcf05d76548ec68872",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/312771923/rectangle_large_type_2_d8b4b65b71c3eff8e6902a3676fb5194.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:18.466Z",
-        "revisionId": "484847b5e80db07349afcbcbfd9b29130d45e5bb3309f9cda93964eeed0f4ce3"
+        "url": "https://assets.st-note.com/production/uploads/images/319911491/rectangle_large_type_2_18b48912e8d25daf34c5caed55ee8c65.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-02T06:04:14.737Z",
+        "revisionId": "246aecc9881fb9dcd120bcb0f074d74fd4b0643a062b3bfcf05d76548ec68872"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -6338,9 +6338,9 @@
             "evidenceSha256": "978b38e52a8715a914ee06f82709c9fdd125b9a50b7c8443f5c2a41c7ad64062"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -6375,12 +6375,12 @@
         }
       ],
       "candidateRevisionId": "7910276bd18fa9d15552a9884038b931ba88556e5c8b75d582663eb47d8b9e8f",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "7910276bd18fa9d15552a9884038b931ba88556e5c8b75d582663eb47d8b9e8f",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/312771935/rectangle_large_type_2_e6b86878ebb40dff5d461f46c5ec4e5e.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:19.200Z",
-        "revisionId": "473584208f60a5e8621d7cedbb87db7039bb0655eb29cb1cf18a9dc9815469d9"
+        "url": "https://assets.st-note.com/production/uploads/images/319911517/rectangle_large_type_2_29b86c14575405153bfee6514131b8b9.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-02T06:04:15.197Z",
+        "revisionId": "7910276bd18fa9d15552a9884038b931ba88556e5c8b75d582663eb47d8b9e8f"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -6435,9 +6435,9 @@
             "evidenceSha256": "2d051e40901b6fb9be596cd64a0753a047224172903427d0eaff78a3ce27f5d8"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -6472,12 +6472,12 @@
         }
       ],
       "candidateRevisionId": "d75ae0cbd6ac558272fa0c9069eb5965d40d2d58b44f988818230edf158ba9d8",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "d75ae0cbd6ac558272fa0c9069eb5965d40d2d58b44f988818230edf158ba9d8",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/312771954/rectangle_large_type_2_53eab77acc016568751a144b64c5387f.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:20.000Z",
-        "revisionId": "15c8f5c3a6fb0f1df303da4b410d39d5725bf5235688bb733d1c8386193ea8d1"
+        "url": "https://assets.st-note.com/production/uploads/images/319911888/rectangle_large_type_2_08e8d202db12635afa27411f00bb19ac.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-02T06:04:16.432Z",
+        "revisionId": "d75ae0cbd6ac558272fa0c9069eb5965d40d2d58b44f988818230edf158ba9d8"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -6532,9 +6532,9 @@
             "evidenceSha256": "fac25c42210b876cd9905510246844195920566ff7ffdf0c11291db3185ce280"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -6569,12 +6569,12 @@
         }
       ],
       "candidateRevisionId": "60a0ae2ac00930b2735a5a62c4c06970161c2ec3045d12b57c7b2384777862e5",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "60a0ae2ac00930b2735a5a62c4c06970161c2ec3045d12b57c7b2384777862e5",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/312771968/rectangle_large_type_2_f7ce414d0e7f644fa39b6cc92123d416.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:20.345Z",
-        "revisionId": "5ee889cb076fba3d808c910aea632c97e4198c22b4b732f9f0040737188a0194"
+        "url": "https://assets.st-note.com/production/uploads/images/319911903/rectangle_large_type_2_1ab5d8dfa7af860dada6fdd9d8535627.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-02T06:04:16.642Z",
+        "revisionId": "60a0ae2ac00930b2735a5a62c4c06970161c2ec3045d12b57c7b2384777862e5"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -6629,9 +6629,9 @@
             "evidenceSha256": "b157133d7fde15ebb145cf93d25fb4ff60138935345e48c2727b4b6406c6f591"
           },
           "review": {
-            "status": "pending",
-            "reason": null,
-            "reviewedAt": null
+            "status": "pass",
+            "reason": "縮小表示で県名・調査都市・地図の強調地域を確認。費目と平均との差を読め、文字切れや重なりなし。2024年・二人以上の世帯・47都市の単純平均を明記。記事の費目と元データの比率、生成時の文字検査も確認済み。",
+            "reviewedAt": "2026-10-02T05:27:41.112Z"
           },
           "provenance": {
             "renderer": "bold-note-cover",
@@ -6666,12 +6666,12 @@
         }
       ],
       "candidateRevisionId": "ea7ba38023ab48e6b41e02a61d6d8f35d585567fd8428b9969c191c7d31ae56c",
-      "approvedRevisionId": null,
+      "approvedRevisionId": "ea7ba38023ab48e6b41e02a61d6d8f35d585567fd8428b9969c191c7d31ae56c",
       "published": {
         "status": "configured",
-        "url": "https://assets.st-note.com/production/uploads/images/312771997/rectangle_large_type_2_58ba1cd435399339671b316a7d773657.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:20.448Z",
-        "revisionId": "572e917e14c9d5af63639969a88c14badaffc32628ec6df32326f18a769eae03"
+        "url": "https://assets.st-note.com/production/uploads/images/319911941/rectangle_large_type_2_6fb501ebc2f89a987b86f85053ef7e24.png?fit=bounds&quality=85&width=1280",
+        "observedAt": "2026-10-02T06:04:16.814Z",
+        "revisionId": "ea7ba38023ab48e6b41e02a61d6d8f35d585567fd8428b9969c191c7d31ae56c"
       },
       "missingVersions": [
         "2026-09-28-v4"
@@ -6757,7 +6757,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312772015/rectangle_large_type_2_09a50714ec66ed761f77976cb08f8e6d.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:11.783Z",
+        "observedAt": "2026-10-02T06:04:16.039Z",
         "revisionId": "bc5684db52a86e033d31e171efa62bacdb0f4a401f017b2dff7bedd1c8e4f7ab"
       },
       "missingVersions": [
@@ -6799,7 +6799,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312772027/rectangle_large_type_2_e872750525c2c78390f105ade98c7a6b.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:14.338Z",
+        "observedAt": "2026-10-02T06:04:16.962Z",
         "revisionId": "1ab8e8bb76f9b97bc83d211b953d3662dfb883f346ee9c1bf91ced43f1f1128f"
       },
       "missingVersions": [
@@ -6841,7 +6841,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312772039/rectangle_large_type_2_d1b6cd8dd7a7e52311cb343c46097af1.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:11.834Z",
+        "observedAt": "2026-10-02T06:04:17.545Z",
         "revisionId": "0f7feb3385414405cd71f59450fb35915720b744d6bb63283db7bbb4c7751bd9"
       },
       "missingVersions": [
@@ -6883,7 +6883,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312772066/rectangle_large_type_2_bf088a92a9bb5f83c58220a71e1ec235.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:12.078Z",
+        "observedAt": "2026-10-02T06:04:17.675Z",
         "revisionId": "2d9c0eefd155df94c3fa51e99175ae71d90ac0b1042b92cb90be8df74379d680"
       },
       "missingVersions": [
@@ -6961,7 +6961,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312772079/rectangle_large_type_2_803c733d97ee8b558d994cdff781c569.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:51.242Z",
+        "observedAt": "2026-10-02T06:04:17.681Z",
         "revisionId": "b847f49b5f896d6092e537bcb78824568f8bbc50e1721eddf740a99e0bebde17"
       },
       "missingVersions": [
@@ -7003,7 +7003,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312772110/rectangle_large_type_2_d1879b56f83c949478c2022117c480ec.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:51.359Z",
+        "observedAt": "2026-10-02T06:04:18.469Z",
         "revisionId": "a6db10287291afeca950e41cf1a3984ad629960e7b9d73261619120a221ff44f"
       },
       "missingVersions": [
@@ -7045,7 +7045,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312772124/rectangle_large_type_2_0ad1e4c165ed5db88c5715acaee2e130.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:52.057Z",
+        "observedAt": "2026-10-02T06:04:18.688Z",
         "revisionId": "c31bff3f75ecc635505b93db705462809c13ce9931da8e956c4146ee8ba69e44"
       },
       "missingVersions": [
@@ -7087,7 +7087,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312772155/rectangle_large_type_2_a6fc5c402585e4c507e99976a2d76bd2.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:13.935Z",
+        "observedAt": "2026-10-02T06:04:19.242Z",
         "revisionId": "3e343ca7275802e7633f096c4ef0c49c86ca7a098f17248a34a4a83eb7601d96"
       },
       "missingVersions": [
@@ -7129,7 +7129,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312772170/rectangle_large_type_2_56b8eaf14db4f79eaf536bca4932647a.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:14.081Z",
+        "observedAt": "2026-10-02T06:04:19.230Z",
         "revisionId": "8adf26713877ade4b45c62f686b876a4d49601a969b5ea6bc7884b5f2345d084"
       },
       "missingVersions": [
@@ -7171,7 +7171,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312772180/rectangle_large_type_2_077e75e948fc571ba3ab265a06077c68.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:49.024Z",
+        "observedAt": "2026-10-02T06:04:19.526Z",
         "revisionId": "dfdbcf280fbd79a42ca9d81d6ccea3ae5036cf6c6956f392511496ced8d0a7e0"
       },
       "missingVersions": [
@@ -7213,7 +7213,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312772210/rectangle_large_type_2_6448e009c8c4c99cbfcfb17fe35480db.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:51.084Z",
+        "observedAt": "2026-10-02T06:04:19.845Z",
         "revisionId": "6dc9cf5e666420f87cdc3392064830168560d02bb2c46da5c563f6854ed67cda"
       },
       "missingVersions": [
@@ -7300,7 +7300,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312772226/rectangle_large_type_2_6a912bea608907b56978bbe81db19660.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:21.736Z",
+        "observedAt": "2026-10-02T06:04:20.333Z",
         "revisionId": "787c47fbd1dd0d0922cf29d6218c5281d4d7465df0a61057c48b72a377990b6a"
       },
       "missingVersions": [
@@ -7342,7 +7342,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312772317/rectangle_large_type_2_d7e3452446181671883e1db01739aa81.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:22.650Z",
+        "observedAt": "2026-10-02T06:04:20.631Z",
         "revisionId": "527c41854ff04930d336a81bc856696a624d4dfd3f47c416542ab4ffed3dea41"
       },
       "missingVersions": [
@@ -7384,7 +7384,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312772339/rectangle_large_type_2_4a287e32717dd562e79a031b4a317d3d.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:22.801Z",
+        "observedAt": "2026-10-02T06:04:20.881Z",
         "revisionId": "8cd9337b1eed9ef055f615de315385b569803fbb2355159fd6a7faa046cc0d31"
       },
       "missingVersions": [
@@ -7426,7 +7426,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312772369/rectangle_large_type_2_3fe3508e637f020f8e61ad8f7bda3d74.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:23.533Z",
+        "observedAt": "2026-10-02T06:04:21.023Z",
         "revisionId": "49b75229b250fb3c543c5a467c85c6dc2c6f1c88b6fa9e95b360f6e44e239df8"
       },
       "missingVersions": [
@@ -7468,7 +7468,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312772383/rectangle_large_type_2_429e0cca973cb8b2c15f96c7695fce5c.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:24.135Z",
+        "observedAt": "2026-10-02T06:04:21.445Z",
         "revisionId": "a5850b0fc1bed4c078e340f2624513fc9f266ecd2f4288f0792e1a957ba80eaf"
       },
       "missingVersions": [
@@ -7510,7 +7510,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312772406/rectangle_large_type_2_8d73657e8a72d0da995ce7dece509be7.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:25.631Z",
+        "observedAt": "2026-10-02T06:04:21.561Z",
         "revisionId": "88407b84eb3a9457eaca16847ac69e20bc728d81a85cc61bf15d229dc672233c"
       },
       "missingVersions": [
@@ -7552,7 +7552,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312772423/rectangle_large_type_2_f4c9aae3462745717a3808df15401c8d.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:25.638Z",
+        "observedAt": "2026-10-02T06:04:22.073Z",
         "revisionId": "6505357974552fa997f5e306e6bbbba887ba2a873b85285e64a905738a8bb142"
       },
       "missingVersions": [
@@ -7594,7 +7594,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312772442/rectangle_large_type_2_1422eeefacbcce55e93b817c03e90b22.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:25.761Z",
+        "observedAt": "2026-10-02T06:04:22.475Z",
         "revisionId": "54c8c7174883c01cd8d203f6abbd1624533e31e7fd958eee2d5412418614cae7"
       },
       "missingVersions": [
@@ -7726,7 +7726,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312770457/rectangle_large_type_2_f8ddcb07183c6c703240b9e782b9985f.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:04.259Z",
+        "observedAt": "2026-10-02T06:04:22.928Z",
         "revisionId": "1028a1f32737a8648c0c3d28294e42c86e6add3f08d9c3ec7bffa638d51c25dc"
       },
       "missingVersions": [
@@ -7777,7 +7777,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312772458/rectangle_large_type_2_6da4e1818ff77fe196a5cf2f444d69a9.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:04.244Z",
+        "observedAt": "2026-10-02T06:04:23.381Z",
         "revisionId": "350e4f6125db7ddadab47f5833d460bb951f8b412c4c7191088b9b6f4bd80438"
       },
       "missingVersions": [
@@ -7828,7 +7828,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312772483/rectangle_large_type_2_768989768c4400f310fc36086f7b5aba.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:04.235Z",
+        "observedAt": "2026-10-02T06:04:23.739Z",
         "revisionId": "833c11813e0ea1d638cfa0e4b1fbb8664a259c48d5333319cb62a4a887c1f74b"
       },
       "missingVersions": [
@@ -7915,7 +7915,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312772510/rectangle_large_type_2_b275f23ac69890fcf580213346f4c206.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:04.225Z",
+        "observedAt": "2026-10-02T06:04:23.953Z",
         "revisionId": "26073e3934b50f5e28f17e8f15d4e08be1ae3ee9989340013ba9cf619aeb56b7"
       },
       "missingVersions": [
@@ -7975,7 +7975,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312772525/rectangle_large_type_2_e32ff61375adbd95c63534736322572e.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:26.514Z",
+        "observedAt": "2026-10-02T06:04:24.089Z",
         "revisionId": "2297c27715f1529a08b74e0f60dcdeb283df23b405d90e72e1187d6d621932d6"
       },
       "missingVersions": [
@@ -8323,7 +8323,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312770665/rectangle_large_type_2_9b7b50f8be51655a0d5a62facaeefa9b.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:48.834Z",
+        "observedAt": "2026-10-02T06:04:24.449Z",
         "revisionId": "f4b8b684fda3bbef0a7bb205db2202325e46d9ba3d7f1f5c91e37d239a6db5b7"
       },
       "missingVersions": [
@@ -8437,7 +8437,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312772541/rectangle_large_type_2_5920967a2e186d7e8ee87c7fb2299347.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:15.075Z",
+        "observedAt": "2026-10-02T06:04:24.564Z",
         "revisionId": "c2577e0449a0c58f8f6b99dc6cd1807c4ebcc9b1e49bbcc5b88739a2eb2a268e"
       },
       "missingVersions": [
@@ -8479,7 +8479,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/236924536/rectangle_large_type_2_11ba391c8476567563d620fdbc480ca0.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:15.984Z",
+        "observedAt": "2026-10-02T06:04:25.013Z",
         "revisionId": "6c8d433d720742539490f4cd98c3e078c8d836b89fd04a358b1cd59a64c83ffd"
       },
       "missingVersions": [
@@ -8521,7 +8521,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312772573/rectangle_large_type_2_d2d5db238048ae29204abe4538269b24.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:16.890Z",
+        "observedAt": "2026-10-02T06:04:25.349Z",
         "revisionId": "2aaf0c49acf9af802191e3a2566490d3e655c1da27f435ca44c0d947807a5787"
       },
       "missingVersions": [
@@ -8563,7 +8563,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312772586/rectangle_large_type_2_1a2cdf22fe653c29cb6b69f3a916d11e.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:17.329Z",
+        "observedAt": "2026-10-02T06:04:25.552Z",
         "revisionId": "62e7e3fa82620dc4e4238999524386d96e7ea939b1cf0c0324a474f17df545a8"
       },
       "missingVersions": [
@@ -8605,7 +8605,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/285393491/rectangle_large_type_2_560fceec3af8ce07a5cb72022c69848c.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:48.209Z",
+        "observedAt": "2026-10-02T06:04:26.287Z",
         "revisionId": "ad92a81e45400b18763393ce0092add8fcf8ea6506e1a72c019360ac3620bd40"
       },
       "missingVersions": [
@@ -8647,7 +8647,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312772629/rectangle_large_type_2_e4c44360d6e379aec33748d82f17ac03.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:18.292Z",
+        "observedAt": "2026-10-02T06:04:26.281Z",
         "revisionId": "ca03b6bfe91a98fd7b09bd8f410929fd6d47f796647104b022834a6a0b474b95"
       },
       "missingVersions": [
@@ -8689,7 +8689,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312772646/rectangle_large_type_2_2147605944a8093f59ef39d6751eb1a0.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:18.528Z",
+        "observedAt": "2026-10-02T06:04:26.292Z",
         "revisionId": "81d4a8cc5e110fe1ff41aa11800e3b1bdca263d11ee5467409e81d7a86501083"
       },
       "missingVersions": [
@@ -8731,7 +8731,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312772657/rectangle_large_type_2_e623f079c71e32c7b191d9925feb1260.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:19.051Z",
+        "observedAt": "2026-10-02T06:04:26.600Z",
         "revisionId": "83a1ac160ca3b29bcee48f98b76c70723cc1bac7ed4c07f775240da42c3e387b"
       },
       "missingVersions": [
@@ -8773,7 +8773,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312772685/rectangle_large_type_2_c8f96f80260fab8c6247c73e64883939.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:19.917Z",
+        "observedAt": "2026-10-02T06:04:27.725Z",
         "revisionId": "2480476c5fe7e9c8b3d9cd63b22ff67a9ad30ffff4043e41cf8f923ae95b2619"
       },
       "missingVersions": [
@@ -8815,7 +8815,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312772697/rectangle_large_type_2_8153b7fe76a4c697a2a04dbcb16bffed.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:20.450Z",
+        "observedAt": "2026-10-02T06:04:27.535Z",
         "revisionId": "a27e4d98453114667a59a9c7c4f415e7dcbe4d3e68cb094a88ec8f5810925980"
       },
       "missingVersions": [
@@ -8857,7 +8857,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312772722/rectangle_large_type_2_b15b1b06cbcc4b581298b9c6cbb40b31.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:21.267Z",
+        "observedAt": "2026-10-02T06:04:27.881Z",
         "revisionId": "3475cb7a6f03e030b3c7c47c729963f3dcb55a0778b69d75dac4b5a8b94ea9a5"
       },
       "missingVersions": [
@@ -8899,7 +8899,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312772764/rectangle_large_type_2_74e00065183a83c4632c54eb1862ea58.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:22.315Z",
+        "observedAt": "2026-10-02T06:04:28.173Z",
         "revisionId": "7446b1eb17b185c60738f6ac30e3c917ee97d8777733d1ee9bc4540ebdae4a64"
       },
       "missingVersions": [
@@ -8941,7 +8941,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312772828/rectangle_large_type_2_9e7e9ad597628f74777cb0484b4cd03b.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:22.566Z",
+        "observedAt": "2026-10-02T06:04:28.873Z",
         "revisionId": "c69e3eb34681f61df2340f0229fbb274dacff4c8664fad0edd525f32e9a45129"
       },
       "missingVersions": [
@@ -8983,7 +8983,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312772845/rectangle_large_type_2_b3977ada9dc25952c13e5fa31dd7aadf.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:23.705Z",
+        "observedAt": "2026-10-02T06:04:29.216Z",
         "revisionId": "10e7a60ce22b31e180bbc568358ff46aae7948e72d98d8a75c59a7b80c244053"
       },
       "missingVersions": [
@@ -9025,7 +9025,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/236924715/rectangle_large_type_2_3747afda2ec8dc5467abacea1fa1b070.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:23.750Z",
+        "observedAt": "2026-10-02T06:04:29.426Z",
         "revisionId": "313e17e6882008bd64f7597292bf8e3009a619f80abe5b425abec8f1cc4a738e"
       },
       "missingVersions": [
@@ -9067,7 +9067,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312772875/rectangle_large_type_2_be02d3cf500dc7ed999bff99b70d9ec2.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:24.737Z",
+        "observedAt": "2026-10-02T06:04:29.222Z",
         "revisionId": "fceff5ee449ce7b1ccfce5505457e56940c69759e8e11a04a2f27f1659c62c6b"
       },
       "missingVersions": [
@@ -9109,7 +9109,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312772883/rectangle_large_type_2_e1e9386ec51c8c1cc306dfddcfed0f82.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:24.766Z",
+        "observedAt": "2026-10-02T06:04:30.274Z",
         "revisionId": "cb711ee7db337b163dcb292af1314075e1c0fa5bba107732ed9be48fd56be35b"
       },
       "missingVersions": [
@@ -9151,7 +9151,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312772912/rectangle_large_type_2_572904f9a42ac34ca87fdb819491c802.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:26.035Z",
+        "observedAt": "2026-10-02T06:04:30.192Z",
         "revisionId": "a62cdd6222967bf191c34eaf1c6600179cd6d13222e2dc33a8a7804ddf52227b"
       },
       "missingVersions": [
@@ -9193,7 +9193,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312772937/rectangle_large_type_2_96d7ccbf117e320b0db19143cfc432c9.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:26.494Z",
+        "observedAt": "2026-10-02T06:04:30.037Z",
         "revisionId": "dba13c01f93a637aec0203363c93b5693c096aefd23d683f8acea921a58666f7"
       },
       "missingVersions": [
@@ -9235,7 +9235,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/236924639/rectangle_large_type_2_2bc8d1505b965876876c18f369a8bd7e.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:27.094Z",
+        "observedAt": "2026-10-02T06:04:30.408Z",
         "revisionId": "01022ee5ffa54f7d46bf6f8e63414a6cf4db27a2473c6daffb1c31c3746c2705"
       },
       "missingVersions": [
@@ -9277,7 +9277,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/236743797/rectangle_large_type_2_d6baff36ba9fa51e7555fba01f1ccdd5.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:27.197Z",
+        "observedAt": "2026-10-02T06:04:31.330Z",
         "revisionId": "fd4d34ee91eca63f5342b3054d76eb01c58170f62e8da2bc689af5deceffd1b5"
       },
       "missingVersions": [
@@ -9319,7 +9319,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312772965/rectangle_large_type_2_f9c5a5f840fc2285cb90ee47e5de8266.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:28.524Z",
+        "observedAt": "2026-10-02T06:04:30.974Z",
         "revisionId": "d0e87db8da99d1b844003ee232bdeb366504c7c53c42e754f08a31be5ac79604"
       },
       "missingVersions": [
@@ -9361,7 +9361,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312772979/rectangle_large_type_2_c22f8d1660a654f9731b19ba476fc2b3.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:29.122Z",
+        "observedAt": "2026-10-02T06:04:31.400Z",
         "revisionId": "0d1b5df87f19505939bacf9c226bfba7e314db5e1dd2e7cbee9c1213aca5f656"
       },
       "missingVersions": [
@@ -9403,7 +9403,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312772989/rectangle_large_type_2_071f3dfdf5d05c491408c13d72b02463.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:29.604Z",
+        "observedAt": "2026-10-02T06:04:31.467Z",
         "revisionId": "a599257eb8c12e503d2c5ced67cc57c789b31f6a51ea7ad58748b7f3287e7f89"
       },
       "missingVersions": [
@@ -9445,7 +9445,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312773008/rectangle_large_type_2_a57296f0614d06552e5fd8fa62066ed4.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:29.761Z",
+        "observedAt": "2026-10-02T06:04:31.835Z",
         "revisionId": "32313f8c6c60a0c69e4cdb679abb40d33ca1b2c16637495d3db3b09df56a28d6"
       },
       "missingVersions": [
@@ -9487,7 +9487,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/278339028/rectangle_large_type_2_14a63988ae822f391996761e3df538d3.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:40.797Z",
+        "observedAt": "2026-10-02T06:04:32.151Z",
         "revisionId": "dc28d1e2e41e59a299245a3b048d190e919659c209c8654b571c6fe77159d80e"
       },
       "missingVersions": [
@@ -9529,7 +9529,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312773018/rectangle_large_type_2_e694162e700958fa8a21d62454a4ab42.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:30.801Z",
+        "observedAt": "2026-10-02T06:04:32.243Z",
         "revisionId": "f79f4322ca684f9a97c78acd4dbf05f0f23103e4cfdd305cefb285442e81b225"
       },
       "missingVersions": [
@@ -9571,7 +9571,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312773056/rectangle_large_type_2_b986d822408c7227a2458a34475f729e.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:31.421Z",
+        "observedAt": "2026-10-02T06:04:32.252Z",
         "revisionId": "ce390ff78019b34c1fc4284fcb884bc539ce44bfd1b176ca53bc662974820ad5"
       },
       "missingVersions": [
@@ -9613,7 +9613,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312773067/rectangle_large_type_2_82bf113bd73c7e6af7433e8253a3c8ae.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:31.679Z",
+        "observedAt": "2026-10-02T06:04:32.629Z",
         "revisionId": "2fe6dc18297855294d663822b158a25414a9129366127b623e08c4e1f40c70c4"
       },
       "missingVersions": [
@@ -9655,7 +9655,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312773116/rectangle_large_type_2_8106b0cad36a0d91733e4dd668e0c5d9.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:31.979Z",
+        "observedAt": "2026-10-02T06:04:32.954Z",
         "revisionId": "c187e0f96edf4e188875e5fb694f45366602af33d8777aa157db6cc5b9b41434"
       },
       "missingVersions": [
@@ -9697,7 +9697,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312773172/rectangle_large_type_2_1d47e00e3aad8799c86a0a1aa3123d9c.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:32.876Z",
+        "observedAt": "2026-10-02T06:04:33.103Z",
         "revisionId": "1baf206b75030186018685db17b76f8acf9c82d27117954aaced97c4325614cb"
       },
       "missingVersions": [
@@ -9739,7 +9739,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312773192/rectangle_large_type_2_6bc8d9d321e62d2f71f34f33180fcfe9.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:33.571Z",
+        "observedAt": "2026-10-02T06:04:33.086Z",
         "revisionId": "f87df17fe307ee0d676c635b7ba0bdcca700b6e197ea8b4773d3fbb80b5dcf9e"
       },
       "missingVersions": [
@@ -9781,7 +9781,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312773209/rectangle_large_type_2_d250acdeca15165ad5dc7296050e000b.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:33.747Z",
+        "observedAt": "2026-10-02T06:04:33.491Z",
         "revisionId": "352f16347939b50e3885c03344a824106e3f25019747a97024967241128dfefc"
       },
       "missingVersions": [
@@ -9823,7 +9823,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312773242/rectangle_large_type_2_4b0b35a9194c602acba716a9052a6d79.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:34.324Z",
+        "observedAt": "2026-10-02T06:04:33.806Z",
         "revisionId": "1d88d2a2c2283cea623fa9c64761d7deb20fceeb6d28ff15d73b4ae76ac56cd1"
       },
       "missingVersions": [
@@ -9865,7 +9865,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312773258/rectangle_large_type_2_6b00d58c08438c6c0b23a31ab546b3de.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:35.137Z",
+        "observedAt": "2026-10-02T06:04:33.955Z",
         "revisionId": "df0dc22c787c25b52cf9383947abc30fcda91100764a17c6584fc45e524dcd02"
       },
       "missingVersions": [
@@ -9907,7 +9907,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312773265/rectangle_large_type_2_d2377011985e89eea9434cd4927fc881.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:35.952Z",
+        "observedAt": "2026-10-02T06:04:34.032Z",
         "revisionId": "9216b50eb73423ddd3c7d567caac4ea227fa5d61964c4e986edd4c4181938b97"
       },
       "missingVersions": [
@@ -9949,7 +9949,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312773277/rectangle_large_type_2_b7ba0490f24460a4e74a3b239a846d0b.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:36.272Z",
+        "observedAt": "2026-10-02T06:04:34.417Z",
         "revisionId": "9969488b18dd15795bb567e1e422ea9e039f1cbdda1b59d1b11c590496d1a9ca"
       },
       "missingVersions": [
@@ -9991,7 +9991,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312773297/rectangle_large_type_2_ed81a059e80e18823b5d8f8224cd5511.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:36.773Z",
+        "observedAt": "2026-10-02T06:04:34.570Z",
         "revisionId": "4d7dc1c101fa6bac32c0513b2eb516ae0bb7403fb7f2699b561b0ebf94116282"
       },
       "missingVersions": [
@@ -10033,7 +10033,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312773328/rectangle_large_type_2_6e67f56e4a2b284e4ddfd45bf86766c7.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:37.140Z",
+        "observedAt": "2026-10-02T06:04:34.823Z",
         "revisionId": "14d0d2a7f04b399f581192fe278915fbe786e3440596eaf89a980751001444e5"
       },
       "missingVersions": [
@@ -10075,7 +10075,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312773348/rectangle_large_type_2_698aaf7f4924aae8489e2b0ec83b7f8e.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:38.079Z",
+        "observedAt": "2026-10-02T06:04:34.953Z",
         "revisionId": "dff2ee4ac54d7ec0b56e3e529be28926932e5b1343a11ce88bbb172baead9a2f"
       },
       "missingVersions": [
@@ -10117,7 +10117,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312773360/rectangle_large_type_2_5d818e73afbb7a0087de20ace903e4b7.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:38.221Z",
+        "observedAt": "2026-10-02T06:04:35.326Z",
         "revisionId": "02d1af1988f82da8d4b7c256606a61afbe615c31bbeead541b76b90cd887c514"
       },
       "missingVersions": [
@@ -10159,7 +10159,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312773377/rectangle_large_type_2_a7d0fbb760c21bb61829c5bc25d48973.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:39.351Z",
+        "observedAt": "2026-10-02T06:04:35.499Z",
         "revisionId": "597963a7c208a7051c71150e60baa0c958d40983a8229e3bde7e7157e78bd785"
       },
       "missingVersions": [
@@ -10201,7 +10201,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312773395/rectangle_large_type_2_1adf10da7ceff04a074ee0b44f3a949b.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:39.379Z",
+        "observedAt": "2026-10-02T06:04:35.859Z",
         "revisionId": "eccc75ed7c6ece51ee8e892358f2323e463322a289f136a23b6665a263c97dbf"
       },
       "missingVersions": [
@@ -10243,7 +10243,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312773405/rectangle_large_type_2_9f9388a569210593478336683c765a99.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:40.442Z",
+        "observedAt": "2026-10-02T06:04:35.719Z",
         "revisionId": "d43a16f58e03e8c2ab29c091cf05103fde54933e30da86858d6d14de589f5519"
       },
       "missingVersions": [
@@ -10285,7 +10285,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312773428/rectangle_large_type_2_ba6503462452cef233d0f2c146d034d7.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:40.401Z",
+        "observedAt": "2026-10-02T06:04:36.215Z",
         "revisionId": "82aeb2864ce3f4e736a7df6482f5044400e0f242ed0b661ae9cb80cc6b086735"
       },
       "missingVersions": [
@@ -10327,7 +10327,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312773440/rectangle_large_type_2_d454459b79024a02c33c50e9ea4c59ae.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:41.737Z",
+        "observedAt": "2026-10-02T06:04:36.808Z",
         "revisionId": "2a22bfec65041d34cf14a60be12c591572ea8e804039e15990f63facd6343ef8"
       },
       "missingVersions": [
@@ -10369,7 +10369,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312773465/rectangle_large_type_2_fe2605bc8c82d83adb0bc10e7563cbfd.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:41.675Z",
+        "observedAt": "2026-10-02T06:04:36.831Z",
         "revisionId": "dea42a36ab781fa7cfd062512202866fe5f57731064cb4d4a6f62f5e090e802a"
       },
       "missingVersions": [
@@ -10411,7 +10411,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/236917060/rectangle_large_type_2_db908e8d66149b7f4d08afb25c21ce5a.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:49.424Z",
+        "observedAt": "2026-10-02T06:04:36.986Z",
         "revisionId": "5c3ff0017029900c95ca9ed6c7b09792070aea0f370671065473fbe47e4358db"
       },
       "missingVersions": [
@@ -10453,7 +10453,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312773491/rectangle_large_type_2_4c05819efb4bc5ce5e73e3ef91cf64f1.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:42.928Z",
+        "observedAt": "2026-10-02T06:04:37.609Z",
         "revisionId": "de5e5387a1864cda0934c9d3ed9c00c5fa81905f0d09892173bc7a9b15da79f3"
       },
       "missingVersions": [
@@ -10495,7 +10495,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/236924335/rectangle_large_type_2_849e4212c3ca8f136a8bd1668dfbebfa.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:43.755Z",
+        "observedAt": "2026-10-02T06:04:38.196Z",
         "revisionId": "d419bddca738ccbd17115df1438420d4cce23131805085065e2f82d8ce466a13"
       },
       "missingVersions": [
@@ -10537,7 +10537,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312767198/rectangle_large_type_2_394759d53ec9079a4b4ccddefa66a956.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:43.710Z",
+        "observedAt": "2026-10-02T06:04:38.023Z",
         "revisionId": "046826a1785a27f32ebecdbef4e291ef3a1f7470035d51fc86624a2be5df5f1a"
       },
       "missingVersions": [
@@ -10687,7 +10687,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/258720614/rectangle_large_type_2_52bbd43d435c98ab34583b367e4d29c6.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:43.998Z",
+        "observedAt": "2026-10-02T06:04:38.336Z",
         "revisionId": "873525585d990fbfb69c9ce4a133a42ec61ed43c4d6db87dd7226ea7fb3e6901"
       },
       "missingVersions": [
@@ -10729,7 +10729,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312773523/rectangle_large_type_2_0273806222ead869a6e1e8787b24466b.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:45.058Z",
+        "observedAt": "2026-10-02T06:04:38.730Z",
         "revisionId": "fb37a90e62e2a85d99f9a78a6aeb3f2e21893b7e2d509541211c6fcb7e3c76e1"
       },
       "missingVersions": [
@@ -10771,7 +10771,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/260039736/rectangle_large_type_2_e1faa72ed25da32415611332e10cf87b.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:45.858Z",
+        "observedAt": "2026-10-02T06:04:39.022Z",
         "revisionId": "7b167a2b5a17b9828bea7f9f194bd9286b328dd3d97ae3027e248b5763fbf429"
       },
       "missingVersions": [
@@ -10813,7 +10813,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/235566497/rectangle_large_type_2_64eff2fe94755c0b52c8be0882cf11f2.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:45.998Z",
+        "observedAt": "2026-10-02T06:04:39.240Z",
         "revisionId": "377848a2185410afc7e86983bc47fc669adbd3dfc1ad53681cec1b048860c9a8"
       },
       "missingVersions": [
@@ -10855,7 +10855,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312773551/rectangle_large_type_2_833ca16bd06ef623589556f1f95a43f3.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:46.133Z",
+        "observedAt": "2026-10-02T06:04:39.168Z",
         "revisionId": "7835bb1b9f0528763f372c40d5eece947b159fa38d4beec21ad0bd8a74f0b3e4"
       },
       "missingVersions": [
@@ -10897,7 +10897,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/258500479/rectangle_large_type_2_fc5b7a91cb882bff32d6f476cf3373ed.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:47.249Z",
+        "observedAt": "2026-10-02T06:04:39.521Z",
         "revisionId": "e2c6a2afb20633284cdaa0357589cae2e315c6ee3afc9a93080147dc7a16f766"
       },
       "missingVersions": [
@@ -10939,7 +10939,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312773560/rectangle_large_type_2_3f6c8225a46cb9895910aadd9b6cf78b.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:47.976Z",
+        "observedAt": "2026-10-02T06:04:39.919Z",
         "revisionId": "cdb8a7dd6f66f213f56b214f888ae706558a12cd174184b9854a4f0cf990aafa"
       },
       "missingVersions": [
@@ -10981,7 +10981,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312773574/rectangle_large_type_2_ce78c04ef3f2f9a0777972d569288dc5.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:48.232Z",
+        "observedAt": "2026-10-02T06:04:40.073Z",
         "revisionId": "a28bc6eedaa555272b7684121e25c7eaf4b970ee881f8a383523f377fe6744c0"
       },
       "missingVersions": [
@@ -11023,7 +11023,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312773597/rectangle_large_type_2_fe9f47a31a8998e9327aace14682114f.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:48.436Z",
+        "observedAt": "2026-10-02T06:04:40.291Z",
         "revisionId": "362b7fa4211fde39a7bf648136d33c7ba228af7e6e21479f2bdf03e2f96de2a3"
       },
       "missingVersions": [
@@ -11065,7 +11065,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312773614/rectangle_large_type_2_cf56ee600c933cd1ba4fd4bcd0e48683.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:49.470Z",
+        "observedAt": "2026-10-02T06:04:40.412Z",
         "revisionId": "aafee6ec3f3ad2b46a7e77d3aa99529b7c5720e350809a08b5f8a4c0e9f523da"
       },
       "missingVersions": [
@@ -11107,7 +11107,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/260023226/rectangle_large_type_2_d3e938d2c57362d63703a70f3e386547.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:50.434Z",
+        "observedAt": "2026-10-02T06:04:40.865Z",
         "revisionId": "f1199a0929dea5b609728166c8bb5a02d2000c3a5776201aabbff6dea1fd5ab6"
       },
       "missingVersions": [
@@ -11149,7 +11149,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312773632/rectangle_large_type_2_470c86e4557e5d662ece941b3a5765d6.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:50.641Z",
+        "observedAt": "2026-10-02T06:04:41.041Z",
         "revisionId": "37338dca05ca618c91872bb0f2adb3e778e6c99316e95b910ef7107466e2e1a3"
       },
       "missingVersions": [
@@ -11191,7 +11191,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312773657/rectangle_large_type_2_2e6d5d38e2369f1f79b892c6d7cc176f.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:50.793Z",
+        "observedAt": "2026-10-02T06:04:41.219Z",
         "revisionId": "74eb9a5a5340c40e5e0f9f1269572987b83a4203aa060c4ea540aeb10ec77682"
       },
       "missingVersions": [
@@ -11233,7 +11233,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312773672/rectangle_large_type_2_d3ab4ac20c34faf1c78b22e9b7b4abea.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:51.572Z",
+        "observedAt": "2026-10-02T06:04:41.348Z",
         "revisionId": "e6f0b9e9e30a378c7ed1aaca3c8f6c6ecf542f6c52ef7a2a1c07bae5a7d6e249"
       },
       "missingVersions": [
@@ -11275,7 +11275,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/258490090/rectangle_large_type_2_3c5a4796526a6e3179ebaa0d8def89c3.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:52.744Z",
+        "observedAt": "2026-10-02T06:04:41.662Z",
         "revisionId": "1984ad913169d6f3fbb616a399d5f9769fce1b31b61aea8dccbb1052364cba07"
       },
       "missingVersions": [
@@ -11317,7 +11317,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/265589100/rectangle_large_type_2_3c7a4dcb1d1701e7ab1dfc2554f17ff1.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:52.914Z",
+        "observedAt": "2026-10-02T06:04:41.973Z",
         "revisionId": "f40a948c61da92080a6617a4c46476d4e513c72cbd41a73ef6f4ed3ea1c762fe"
       },
       "missingVersions": [
@@ -11359,7 +11359,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312773686/rectangle_large_type_2_b6789ea6d44c93259a04ccbf73fb9c8c.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:52.994Z",
+        "observedAt": "2026-10-02T06:04:42.049Z",
         "revisionId": "2bee2d9523832524b32522c3c192f10fbac294ffc3a27ef9fd019b09f8ed19e3"
       },
       "missingVersions": [
@@ -11401,7 +11401,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312773700/rectangle_large_type_2_295ff4927491d0a302df7d7bed0811b2.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:53.893Z",
+        "observedAt": "2026-10-02T06:04:42.125Z",
         "revisionId": "da97259c37054bca2c72fe4a66546d446db9e275d3dfa9c5857b18fb8a8d2fb3"
       },
       "missingVersions": [
@@ -11443,7 +11443,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/259741193/rectangle_large_type_2_2658d8bca08a508994faa2644a69cb7d.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:54.847Z",
+        "observedAt": "2026-10-02T06:04:42.472Z",
         "revisionId": "d8e6d1903332381e080bbf72fd6719b8ecfd2b762be9590d348f9ddfa7874f16"
       },
       "missingVersions": [
@@ -11485,7 +11485,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312773717/rectangle_large_type_2_b43213aefc526775b4f39ebb022d5cb5.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:55.085Z",
+        "observedAt": "2026-10-02T06:04:42.767Z",
         "revisionId": "3816c9457f9087dd05bae579aa329de116cf1f15127116cace3abb4df91b8d8e"
       },
       "missingVersions": [
@@ -11527,7 +11527,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312773739/rectangle_large_type_2_2eb89505d2c59c2f468d72157d3f9d8e.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:55.236Z",
+        "observedAt": "2026-10-02T06:04:42.930Z",
         "revisionId": "389cda2b777d8130996643f9c72f11b26abcbabc6429746ca3a8c13d9ea73f1c"
       },
       "missingVersions": [
@@ -11569,7 +11569,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312773747/rectangle_large_type_2_78d24ac31b2a79d30ca7b4a06c08bc8f.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:55.912Z",
+        "observedAt": "2026-10-02T06:04:42.845Z",
         "revisionId": "fcce8025ed2b4a3a9198dcc5e78709767be46697a40976f94829584b1110c208"
       },
       "missingVersions": [
@@ -11611,7 +11611,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312773756/rectangle_large_type_2_b75bbc4f801b8813a402ca03b969b32f.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:57.206Z",
+        "observedAt": "2026-10-02T06:04:43.344Z",
         "revisionId": "e8ab0448ac93dba205fe453c3d67de72f55b4505378ff8882b8e31841fa86225"
       },
       "missingVersions": [
@@ -11653,7 +11653,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312773771/rectangle_large_type_2_ca61e2ae702a31ca49c0c954f1c3b353.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:57.215Z",
+        "observedAt": "2026-10-02T06:04:43.677Z",
         "revisionId": "97faecb179d221514312cb9d554e2244a4e9e7b82a1d62a8d082926b7993d914"
       },
       "missingVersions": [
@@ -11695,7 +11695,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312773779/rectangle_large_type_2_5b42bd9a51af8c8b18fce25df81fa720.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:57.899Z",
+        "observedAt": "2026-10-02T06:04:43.814Z",
         "revisionId": "e83b47180d1ef29b0743e301f19558a2d5e9ac990369a595a77bfa148a47c15f"
       },
       "missingVersions": [
@@ -11737,7 +11737,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312773788/rectangle_large_type_2_13f36b3231b5033d3f8c19610e7612c0.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:58.212Z",
+        "observedAt": "2026-10-02T06:04:43.801Z",
         "revisionId": "0756eb816ab14b2192b45af46ff84a1b3b8cd655241ba2f34faa343d2faa8681"
       },
       "missingVersions": [
@@ -11779,7 +11779,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312773804/rectangle_large_type_2_1d0dca13743941720a711ceff16cd747.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:59.599Z",
+        "observedAt": "2026-10-02T06:04:44.210Z",
         "revisionId": "986c84230acc764877bcaeb8fa1831240fbb0066ee7ec400c3bb5a769b145b20"
       },
       "missingVersions": [
@@ -11821,7 +11821,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312773821/rectangle_large_type_2_1c50819b2e122f444752aa394b15007d.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:11:59.552Z",
+        "observedAt": "2026-10-02T06:04:44.536Z",
         "revisionId": "79d3db069106c960d88f6eb68cb448f71c8532c0062004bbe9cc4fa6e655e68a"
       },
       "missingVersions": [
@@ -11863,7 +11863,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/260028999/rectangle_large_type_2_d9242522ad037397ddfc62c85742e36d.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:00.371Z",
+        "observedAt": "2026-10-02T06:04:44.706Z",
         "revisionId": "9ed0f0af97b056be041953396a62df8693f31a6bd720dc4f5c81fc8716e8517a"
       },
       "missingVersions": [
@@ -11905,7 +11905,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312773845/rectangle_large_type_2_0ac20f87d097a2bb393282141a1af63f.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:00.329Z",
+        "observedAt": "2026-10-02T06:04:44.886Z",
         "revisionId": "13bf98a8a4c2be352ee2d0a1975cf49bec914c8a8c2394eb35e3278689d99215"
       },
       "missingVersions": [
@@ -11947,7 +11947,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/256492452/rectangle_large_type_2_3e72d281388110e8f40feebc79788285.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:01.851Z",
+        "observedAt": "2026-10-02T06:04:45.089Z",
         "revisionId": "cf23ce2f7b48b25ae6728cd3a38fcd823f8451013e818d8c391c63828c889b2e"
       },
       "missingVersions": [
@@ -11989,7 +11989,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312773869/rectangle_large_type_2_c6184cf5301ca556d4ccc51fa0db9527.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:02.417Z",
+        "observedAt": "2026-10-02T06:04:46.061Z",
         "revisionId": "01faa847ec3e92c098e36352fcafa7abef2904f1c1af8b1a6ecaf04e036145d2"
       },
       "missingVersions": [
@@ -12031,7 +12031,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312773906/rectangle_large_type_2_a190d0b62f35c8e7a279c0d1128d0e0e.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:02.650Z",
+        "observedAt": "2026-10-02T06:04:45.528Z",
         "revisionId": "6829be83da9638b4733a61d8865454dc0ffcbb80a928c5c6885d4c334c74542e"
       },
       "missingVersions": [
@@ -12073,7 +12073,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312773927/rectangle_large_type_2_0ba0107d0b72e5a2d5d7d3a1194347d3.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:02.672Z",
+        "observedAt": "2026-10-02T06:04:46.458Z",
         "revisionId": "a61a57e2e2863ed2cb23cadd2227b51bcb8ae21903731f15cad8184ae419ec19"
       },
       "missingVersions": [
@@ -12115,7 +12115,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312773953/rectangle_large_type_2_57cf1bc3e0a8f006cc2eba3e38ffae13.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:04.178Z",
+        "observedAt": "2026-10-02T06:04:46.215Z",
         "revisionId": "6562bcf892d038db023f8062e4d7cbfce7ddf2817ffa813263cc9b07f65d9349"
       },
       "missingVersions": [
@@ -12157,7 +12157,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/258164785/rectangle_large_type_2_f30d06ec1f3ce75d639e17526b71a406.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:04.636Z",
+        "observedAt": "2026-10-02T06:04:46.902Z",
         "revisionId": "51bce17bbce558017bdb031bf8426bae863cf7c57a33601698d6b0792781980e"
       },
       "missingVersions": [
@@ -12199,7 +12199,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/255885160/rectangle_large_type_2_3579b1a05b1a169aea73c3f1fce1b8ed.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:05.021Z",
+        "observedAt": "2026-10-02T06:04:47.076Z",
         "revisionId": "b0a5b85cf709db13300120040c08cdb35105e448a884c183e1e807331c4df8b1"
       },
       "missingVersions": [
@@ -12241,7 +12241,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312773969/rectangle_large_type_2_4ea28ef863c6877b3aa699ddde03bc92.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:04.998Z",
+        "observedAt": "2026-10-02T06:04:47.375Z",
         "revisionId": "61d4baf86f1b08af3aee32eb4840f8d9c96550b89f14d26b463d9c7f4ee66e9e"
       },
       "missingVersions": [
@@ -12283,7 +12283,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312773981/rectangle_large_type_2_63141396f957f1d72a63f0ea992f9c75.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:06.527Z",
+        "observedAt": "2026-10-02T06:04:47.508Z",
         "revisionId": "638d356338b6af843cb9dfc753fe0e2e98c64e78a84c0d3a9a8aaad42a0e2998"
       },
       "missingVersions": [
@@ -12325,7 +12325,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312773998/rectangle_large_type_2_8b153c9a60db76a3f5baaeca58b8118c.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:06.700Z",
+        "observedAt": "2026-10-02T06:04:48.045Z",
         "revisionId": "9c35f0b90dd9f31b250ae123d0e6e5eac2e9cb56320e03a61e194cc9d89d8882"
       },
       "missingVersions": [
@@ -12367,7 +12367,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312774005/rectangle_large_type_2_23d54821431f96e1d58160fe0f628555.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:07.213Z",
+        "observedAt": "2026-10-02T06:04:48.242Z",
         "revisionId": "b03ef1b7699c28cf971d4a581eafab951093d2eb3ed9c415d6b91f9e1d628b7f"
       },
       "missingVersions": [
@@ -12409,7 +12409,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312774016/rectangle_large_type_2_9a2e69d85bd172915da055a0abfbce14.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:07.343Z",
+        "observedAt": "2026-10-02T06:04:48.433Z",
         "revisionId": "9739b6cce9ae707fea2a0bea139f811b22e004a34f4afb6217d7ad5451e652a8"
       },
       "missingVersions": [
@@ -12451,7 +12451,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312774054/rectangle_large_type_2_0bb7d6c4e76891ae8586f2b2675c8834.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:08.624Z",
+        "observedAt": "2026-10-02T06:04:48.578Z",
         "revisionId": "275598cf5b6664d1e602b64725aebf42420c956d44f42a4a6dc551a17169a4ef"
       },
       "missingVersions": [
@@ -12493,7 +12493,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312774072/rectangle_large_type_2_5ce676733c4253fed53444c0f2f92633.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:08.874Z",
+        "observedAt": "2026-10-02T06:04:49.163Z",
         "revisionId": "4b4fed38a9bf5c896746340794e02498a1fa3b3e5a2ee3137296c3a82313e5e9"
       },
       "missingVersions": [
@@ -12535,7 +12535,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/258502684/rectangle_large_type_2_6e0825bdce26293cbd098de6c6e15386.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:09.648Z",
+        "observedAt": "2026-10-02T06:04:49.168Z",
         "revisionId": "7291c7cca0f6d555bc48fbf25ce673ccd5b2120b1bef82e4ac015781ba62d291"
       },
       "missingVersions": [
@@ -12577,7 +12577,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312774092/rectangle_large_type_2_c53cb663bed22b0824370a3bbe6db0e0.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:09.617Z",
+        "observedAt": "2026-10-02T06:04:49.407Z",
         "revisionId": "57208553fe6afe622203e55288f5566853d3d7c3cf3d7684d6d95ec509599f9a"
       },
       "missingVersions": [
@@ -12619,7 +12619,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/263111288/rectangle_large_type_2_f04108c2f5fd4b27135d6ed7e9bc615e.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:10.706Z",
+        "observedAt": "2026-10-02T06:04:49.793Z",
         "revisionId": "385352655877d2b9cbe2571ae4b0451ea586d587f93c0ecda670f6ff725b88fb"
       },
       "missingVersions": [
@@ -12661,7 +12661,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312774111/rectangle_large_type_2_9712269ab6090afdb4b0818cb8b67bbf.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:11.084Z",
+        "observedAt": "2026-10-02T06:04:50.356Z",
         "revisionId": "bb1be40c1dd1062413d521d4109d27901e3c98dd0aeb6a47b828ab141afe0968"
       },
       "missingVersions": [
@@ -12703,7 +12703,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312774139/rectangle_large_type_2_346e011f621fb92ae4fa152a3859b01d.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:11.710Z",
+        "observedAt": "2026-10-02T06:04:50.362Z",
         "revisionId": "96a23d772f6747b9046d99da8503fcb5d8758746588299671822d32da53bb1df"
       },
       "missingVersions": [
@@ -12745,7 +12745,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312774172/rectangle_large_type_2_1f4244a70d4b0b17ba08961c50ef5ae7.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:12.456Z",
+        "observedAt": "2026-10-02T06:04:50.683Z",
         "revisionId": "8c98398e92c0939f94c69315bf47c469572e41dd794cabc4de608533012d3127"
       },
       "missingVersions": [
@@ -12787,7 +12787,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312774180/rectangle_large_type_2_1075a66980694d20515d93d6719986e8.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:12.897Z",
+        "observedAt": "2026-10-02T06:04:50.843Z",
         "revisionId": "ac4cb3c3dbba3ce5a7f8b4c72336f1e07ffc8535612f5dc48a76099f7a2fa375"
       },
       "missingVersions": [
@@ -12829,7 +12829,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312774202/rectangle_large_type_2_918d90c5f4124078f8b9804b20ec52e3.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:13.501Z",
+        "observedAt": "2026-10-02T06:04:51.404Z",
         "revisionId": "d55a4d31fa0a9a0140e5907bcdb6dae5d94cc1398c86ab77b4a7caafc51d442b"
       },
       "missingVersions": [
@@ -12871,7 +12871,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/258498513/rectangle_large_type_2_7c693542bf5a4fed16cd61f3af1d219c.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:13.646Z",
+        "observedAt": "2026-10-02T06:04:51.569Z",
         "revisionId": "07971e8abf633c5d28eb000be9af800a29922719a03831657edee701b3a9341f"
       },
       "missingVersions": [
@@ -12913,7 +12913,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312774228/rectangle_large_type_2_c52583609fc30c227c4a96942a09f0e0.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:14.843Z",
+        "observedAt": "2026-10-02T06:04:51.561Z",
         "revisionId": "e097e5bfae5d2182188f2a4a2fd3acde5e76d635bd206419e9fac0af63a94809"
       },
       "missingVersions": [
@@ -12955,7 +12955,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312774244/rectangle_large_type_2_a454cfdd7567bed37412a275929dcdb8.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:15.182Z",
+        "observedAt": "2026-10-02T06:04:52.163Z",
         "revisionId": "725adad1601dd07182136193fe36034d488b8f9f4ea451b952dc974fdc0b8cb0"
       },
       "missingVersions": [
@@ -12997,7 +12997,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/260043141/rectangle_large_type_2_d9361c274dc90baada4597c68a298234.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:15.591Z",
+        "observedAt": "2026-10-02T06:04:52.278Z",
         "revisionId": "9ff93b67fd60b4d0618ad66488b919efe103f68b3d5f0f703edd1d4173d6770a"
       },
       "missingVersions": [
@@ -13039,7 +13039,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312774264/rectangle_large_type_2_4d0843961ec506d5e22c5610f56e5acb.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:16.028Z",
+        "observedAt": "2026-10-02T06:04:52.738Z",
         "revisionId": "1ab8e8bb76f9b97bc83d211b953d3662dfb883f346ee9c1bf91ced43f1f1128f"
       },
       "missingVersions": [
@@ -13081,7 +13081,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312774280/rectangle_large_type_2_3622124a683c1d35489f4da3d2192bf9.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:17.173Z",
+        "observedAt": "2026-10-02T06:04:52.899Z",
         "revisionId": "523213eb8215f086199c6017be6c1e510c2a192332358e5dc977a43e8b792f86"
       },
       "missingVersions": [
@@ -13123,7 +13123,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/285320563/rectangle_large_type_2_b05121089f42329ad3db680af510da4b.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:48.525Z",
+        "observedAt": "2026-10-02T06:04:53.601Z",
         "revisionId": "9980f1d598844d02c3d656c8541f38822f7e645b13b5ff72a8bd1101395c253e"
       },
       "missingVersions": [
@@ -13165,7 +13165,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312774289/rectangle_large_type_2_14f6792428f25189fb19e86a64f4e801.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:17.181Z",
+        "observedAt": "2026-10-02T06:04:53.481Z",
         "revisionId": "33fce47c849476c1403f5af4d017a27052b038f65c81b8e6e824ed49538f4502"
       },
       "missingVersions": [
@@ -13207,7 +13207,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312774308/rectangle_large_type_2_ac5973396e9070fc006466cc7906b859.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:17.970Z",
+        "observedAt": "2026-10-02T06:04:53.819Z",
         "revisionId": "42aabd3bc5531dd2dabc3acad23919033490fbe82dafaa4f03fa8c0f66e94d55"
       },
       "missingVersions": [
@@ -13249,7 +13249,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312774331/rectangle_large_type_2_689d648b44955da96feabdcbdc8137df.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:19.267Z",
+        "observedAt": "2026-10-02T06:04:54.187Z",
         "revisionId": "4ab9ac7476901280c6d80a91f12d0e0e0904713d2823fb9d5058d0a7b895bfab"
       },
       "missingVersions": [
@@ -13291,7 +13291,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/258164192/rectangle_large_type_2_3fdb0ae6bbd8fefb2d12d6c1da229413.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:19.346Z",
+        "observedAt": "2026-10-02T06:04:54.498Z",
         "revisionId": "9f2dc18af3b40fcabc357d8ebce30c576e6214cb472af4aeed1425ee228acfd8"
       },
       "missingVersions": [
@@ -13333,7 +13333,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312774343/rectangle_large_type_2_2a94e3b350473e2ac7782160a5611c78.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:19.459Z",
+        "observedAt": "2026-10-02T06:04:54.739Z",
         "revisionId": "3832cfcac4c117e6bfd111547aaae3a15a4cbf53dfbd097c011993cc0caba2c1"
       },
       "missingVersions": [
@@ -13375,7 +13375,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/274657479/rectangle_large_type_2_a71e09fcc28e5603a7893a47097499e9.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:20.239Z",
+        "observedAt": "2026-10-02T06:04:55.067Z",
         "revisionId": "df47118a3470d8464163ea14726278a01282a0f1e4d062231d85271215b5ba07"
       },
       "missingVersions": [
@@ -13417,7 +13417,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312774361/rectangle_large_type_2_e7d18304f9a1d6edc3c8dee119106b0c.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:21.467Z",
+        "observedAt": "2026-10-02T06:04:55.415Z",
         "revisionId": "03016f162bab0a501876007376a3fa6a7c256e8e1f8f179a174ce928c7280b00"
       },
       "missingVersions": [
@@ -13459,7 +13459,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312774414/rectangle_large_type_2_67d2b24c296ebeef4946e8939bfdeddd.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:21.564Z",
+        "observedAt": "2026-10-02T06:04:55.701Z",
         "revisionId": "2b12696c2fa8e2c34ad381bc844a43275f81aa0159b2b4a5eccfec2b7fe7433c"
       },
       "missingVersions": [
@@ -13501,7 +13501,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/270241376/rectangle_large_type_2_c287c2be48baed1dd96e108c8c233529.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:21.706Z",
+        "observedAt": "2026-10-02T06:04:55.851Z",
         "revisionId": "ae1a7536288bbdb9efd756d3d4b3444d4cd0816c1992d3f193c75b180f0c132e"
       },
       "missingVersions": [
@@ -13543,7 +13543,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/256493458/rectangle_large_type_2_27e30d7d62837752b262318e692fb312.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:22.149Z",
+        "observedAt": "2026-10-02T06:04:56.261Z",
         "revisionId": "4cfca002293ba867baa6911dc1fe3362a4775dc02e1c39caa847d96ba89af888"
       },
       "missingVersions": [
@@ -13585,7 +13585,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312774472/rectangle_large_type_2_db32e05ac49bb0feffa09d89e4e48e0d.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:23.943Z",
+        "observedAt": "2026-10-02T06:04:56.340Z",
         "revisionId": "6e86ec0bbcc7b367dc084915c810b89f6eead759b7486ccf37bc883500bce85a"
       },
       "missingVersions": [
@@ -13627,7 +13627,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312774483/rectangle_large_type_2_83612e8ac30db586b678fd241503cf87.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:23.980Z",
+        "observedAt": "2026-10-02T06:04:56.690Z",
         "revisionId": "12818fd88f74c21de6402ba321bcd68333408e01f199d032aae8620d991f1689"
       },
       "missingVersions": [
@@ -13669,7 +13669,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312774501/rectangle_large_type_2_10a7f2e2c68c4a52c68a528d87dce857.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:24.060Z",
+        "observedAt": "2026-10-02T06:04:56.865Z",
         "revisionId": "7de57170a8b0d89d3b575c0f89f1770e6c8c2c81270d9a8072cb9cfc678ae1ce"
       },
       "missingVersions": [
@@ -13711,7 +13711,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312774521/rectangle_large_type_2_1d6b582f5c0dc7d745a0c3fe35300eb5.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:24.457Z",
+        "observedAt": "2026-10-02T06:04:57.078Z",
         "revisionId": "dd963794c4240d3f0bd9a7145efda642b20dbc7e9ab4f9c133cc93a98aea2249"
       },
       "missingVersions": [
@@ -13753,7 +13753,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312774541/rectangle_large_type_2_a24b4394cb4341b07e43d958c55af7e5.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:26.178Z",
+        "observedAt": "2026-10-02T06:04:57.278Z",
         "revisionId": "02a3382d878c58ac5e54c1a3984e9526f767800f40be2a59b0d782fbd92af612"
       },
       "missingVersions": [
@@ -13795,7 +13795,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312774558/rectangle_large_type_2_68f02df65db0943bf447b84853d98258.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:48.986Z",
+        "observedAt": "2026-10-02T06:04:57.404Z",
         "revisionId": "f9fa8d3ba168741cc7b0eb7011bd08328f7102d32c115ecda8ec723c0b5a0d58"
       },
       "missingVersions": [
@@ -13837,7 +13837,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312774588/rectangle_large_type_2_0b9bcba248880dbcc3322bd06836770d.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:26.190Z",
+        "observedAt": "2026-10-02T06:04:57.789Z",
         "revisionId": "1077bd84910cbeffbd5ee50b3b2b3d824d9b8e953dd00bd7764b31394973af87"
       },
       "missingVersions": [
@@ -13879,7 +13879,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312774603/rectangle_large_type_2_a6fd87bcbe690912bbe279aa6967a5e1.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:26.702Z",
+        "observedAt": "2026-10-02T06:04:57.869Z",
         "revisionId": "2afe91f8972535066f637807fabb97af7c8ec8db4ec2686947221fc823435f2f"
       },
       "missingVersions": [
@@ -13921,7 +13921,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312774621/rectangle_large_type_2_031a05a1e6e76fdf8a0eb583d9f3f245.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:26.715Z",
+        "observedAt": "2026-10-02T06:04:58.199Z",
         "revisionId": "2deb1a62078b162698c0ace5e7befe3e7b062a7cc948112b7c2c95551857d5a3"
       },
       "missingVersions": [
@@ -13963,7 +13963,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312774695/rectangle_large_type_2_edac2a7415302d22485d4bda7e031cac.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:28.720Z",
+        "observedAt": "2026-10-02T06:04:58.294Z",
         "revisionId": "626d9bc6238772c16654325cbd387d9a89d91eabdd455b858968a347b6b4ff5e"
       },
       "missingVersions": [
@@ -14005,7 +14005,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312774721/rectangle_large_type_2_d93ba999d4e353cba8e7f03d89f786bd.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:28.862Z",
+        "observedAt": "2026-10-02T06:04:58.689Z",
         "revisionId": "fa0c413dddf957d08ffe0ad633ae266438b7980c51734af038525d2368c28d6a"
       },
       "missingVersions": [
@@ -14047,7 +14047,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312774776/rectangle_large_type_2_d0aa9011e3922d4ac861b1c997b14336.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:28.866Z",
+        "observedAt": "2026-10-02T06:04:58.776Z",
         "revisionId": "c84289f88df1d79ed2bc44978dc6aaeadc8a8b70dd53a17d61741c98aecbdbb9"
       },
       "missingVersions": [
@@ -14089,7 +14089,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/263110645/rectangle_large_type_2_e889e17a1d64d01863e85ecb579f0f4d.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:29.489Z",
+        "observedAt": "2026-10-02T06:04:59.283Z",
         "revisionId": "df47118a3470d8464163ea14726278a01282a0f1e4d062231d85271215b5ba07"
       },
       "missingVersions": [
@@ -14131,7 +14131,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312774802/rectangle_large_type_2_45ef299ad35f849c950a880d4d5e08d4.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:30.968Z",
+        "observedAt": "2026-10-02T06:04:59.184Z",
         "revisionId": "201b58bb73753b801a64e66a3cae8976fc55c2cf73d3a246365c3881740504a2"
       },
       "missingVersions": [
@@ -14173,7 +14173,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312774819/rectangle_large_type_2_01139509d1c2901579bca88507527929.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:31.171Z",
+        "observedAt": "2026-10-02T06:04:59.603Z",
         "revisionId": "65eec3b548ca7f651497e539722819ff4c0cafe7493923dd353ece276c1bd7d3"
       },
       "missingVersions": [
@@ -14215,7 +14215,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312774836/rectangle_large_type_2_8dfdafdcd5f3772ecba45e644b53a07f.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:31.263Z",
+        "observedAt": "2026-10-02T06:04:59.725Z",
         "revisionId": "69054e0722856ca9b80540c333e730322752edeb05c39f269a40c25696f75bf2"
       },
       "missingVersions": [
@@ -14257,7 +14257,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312774850/rectangle_large_type_2_1ff0989c28efbb263ee59e5c64a5a2f7.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:31.550Z",
+        "observedAt": "2026-10-02T06:05:00.002Z",
         "revisionId": "ac3f77e43ec68a81894c53a8f059de314c7b0ca4c70ce072ae2588874465ad2a"
       },
       "missingVersions": [
@@ -14299,7 +14299,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/278339657/rectangle_large_type_2_dc8004555575b7cf34dab4e575b1c138.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:13:40.933Z",
+        "observedAt": "2026-10-02T06:05:00.151Z",
         "revisionId": "aecb0e3fbdba9b72b16569889d5ab28280c12088c2685894028260820a8874cb"
       },
       "missingVersions": [
@@ -14341,7 +14341,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312774865/rectangle_large_type_2_a49ffdfa108df6a5917638b34a092751.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:33.241Z",
+        "observedAt": "2026-10-02T06:05:00.522Z",
         "revisionId": "574bf23bdbaced73890404c6e4d74fec4a4d1bc6e9dcf97bdf48db59a6d73d51"
       },
       "missingVersions": [
@@ -14383,7 +14383,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312774887/rectangle_large_type_2_76482cf1121e7e8998c316c19666c969.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:33.388Z",
+        "observedAt": "2026-10-02T06:05:00.675Z",
         "revisionId": "3c02d10c0a909ad8265e20d2e5d73fe200185af37ed44ebbd82c0baa5ba87056"
       },
       "missingVersions": [
@@ -14425,7 +14425,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312774900/rectangle_large_type_2_639377bd84e195088b6e68c49577b06a.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:34.006Z",
+        "observedAt": "2026-10-02T06:05:01.420Z",
         "revisionId": "acc2a309f2893007c3ece7ae2f3b6d040f460482bfe7f4caa77efadf7b0f6337"
       },
       "missingVersions": [
@@ -14467,7 +14467,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312774917/rectangle_large_type_2_1e605c35cd5d4056dd25376336fbb6f1.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:34.016Z",
+        "observedAt": "2026-10-02T06:05:01.415Z",
         "revisionId": "87f351a18aec2ef1c0767a0f13c90f5e7bd4d32c6262cb456620b8b4ee2277b7"
       },
       "missingVersions": [
@@ -14509,7 +14509,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/263092816/rectangle_large_type_2_f63323daacd48f1a6b2b6540ac03f1ad.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:35.627Z",
+        "observedAt": "2026-10-02T06:05:01.630Z",
         "revisionId": "e078ceae7724dd39ffe4c69d7edf5936883fbd4e1fd39fa5d63a606660efa4e7"
       },
       "missingVersions": [
@@ -14551,7 +14551,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312774940/rectangle_large_type_2_d0681c8df4f4692069dbcb55a43ac4c6.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:35.630Z",
+        "observedAt": "2026-10-02T06:05:02.690Z",
         "revisionId": "0e67e43af2648fae98b89666f1dfa7183b12bbc10829825f7a924ea8e6a36a51"
       },
       "missingVersions": [
@@ -14593,7 +14593,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312774966/rectangle_large_type_2_f8a9033d449db54eec504fc840a7bd1a.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:36.261Z",
+        "observedAt": "2026-10-02T06:05:03.629Z",
         "revisionId": "0d7d85d4632fc7648cb8a496b794915483ff0eec74fb4c3b27c8bf8e936b70f7"
       },
       "missingVersions": [
@@ -14635,7 +14635,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312774996/rectangle_large_type_2_0143813a4a2213e5da85fca6e060ea78.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:36.304Z",
+        "observedAt": "2026-10-02T06:05:02.803Z",
         "revisionId": "ee09ec09e131dc866b3f364631272dbd0bed77f2c9d757bea890d3e7c20340da"
       },
       "missingVersions": [
@@ -14677,7 +14677,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/258719855/rectangle_large_type_2_8c546cf9990279564f0571a10bce093d.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:37.767Z",
+        "observedAt": "2026-10-02T06:05:03.229Z",
         "revisionId": "6a4b12b060fff268bbe82c56058079b9d5881d919902aefec52375324b3e143d"
       },
       "missingVersions": [
@@ -14719,7 +14719,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/258164341/rectangle_large_type_2_981ef24228a41d8478bc6c591e2a0d8f.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:38.003Z",
+        "observedAt": "2026-10-02T06:05:04.340Z",
         "revisionId": "49c5ec28fa9d346694b552798c98dd57321fb9f8ba81c07fb54e1c4f9927666b"
       },
       "missingVersions": [
@@ -14761,7 +14761,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/258493987/rectangle_large_type_2_e9f4230cdb950251f3ecdd6d644335f0.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:38.362Z",
+        "observedAt": "2026-10-02T06:05:03.773Z",
         "revisionId": "915fa2e766f50435d1dd210be9cbb7023db4547e5e1c8de28dfc5a4b67d334df"
       },
       "missingVersions": [
@@ -14803,7 +14803,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312775005/rectangle_large_type_2_96bc2cc4bde9e50cc79bebbf42ea94e4.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:38.985Z",
+        "observedAt": "2026-10-02T06:05:04.849Z",
         "revisionId": "91192026261d9f9f0fcd1c31e8eaca38d976b469c3d7dc950fe48eef382decf2"
       },
       "missingVersions": [
@@ -14845,7 +14845,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312775016/rectangle_large_type_2_50317cf0eddeadcd70bebcb4ec49dd01.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:39.944Z",
+        "observedAt": "2026-10-02T06:05:04.749Z",
         "revisionId": "48759c9c26f23fed332c0e5094a1659e22936501d17f52b90926ffc5cb587b97"
       },
       "missingVersions": [
@@ -14887,7 +14887,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312775044/rectangle_large_type_2_8f1dd6158178e3ff69063a0cfc2a06b2.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:40.230Z",
+        "observedAt": "2026-10-02T06:05:04.844Z",
         "revisionId": "73de9cf1ebc5863c0ad84acbeac06272a8673ddb601f5b31750d4ef7d51e4d14"
       },
       "missingVersions": [
@@ -14929,7 +14929,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312775072/rectangle_large_type_2_fcc56047ee6b5d96e958baf282d8db11.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:40.409Z",
+        "observedAt": "2026-10-02T06:05:06.172Z",
         "revisionId": "8350941be72b3027613d514bf77ce828615cc7abc5ab9cafe4eefc4b77bae6a7"
       },
       "missingVersions": [
@@ -14971,7 +14971,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/258490777/rectangle_large_type_2_3d4c78b44cdaac112894553ec88fe1f4.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:41.332Z",
+        "observedAt": "2026-10-02T06:05:05.592Z",
         "revisionId": "33dc7322627ebc50c68fa12f56c645e589b50a7968739829f7bf51a731fb2489"
       },
       "missingVersions": [
@@ -15013,7 +15013,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312775081/rectangle_large_type_2_4af4d4f68cfebb4bb0004b92896cdecd.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:42.237Z",
+        "observedAt": "2026-10-02T06:05:06.045Z",
         "revisionId": "187cc38f21272bcdb4677ca6261ff5169942557214109880918804286ff00400"
       },
       "missingVersions": [
@@ -15055,7 +15055,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312775122/rectangle_large_type_2_0857c9d7ae4ce8e4f58b4a3c6c011aca.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:42.389Z",
+        "observedAt": "2026-10-02T06:05:05.737Z",
         "revisionId": "a7f5ecb43c8f970708cc278bee47a01a2c485192243ecf373adebfbbe98b2f3b"
       },
       "missingVersions": [
@@ -15097,7 +15097,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312775150/rectangle_large_type_2_329477ba2f4aec445faf5972eb3995ee.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:42.422Z",
+        "observedAt": "2026-10-02T06:05:06.758Z",
         "revisionId": "e5570b7b45f50d68923138b01fe5f87ac405e72d4719830acc48b78406e6e0c3"
       },
       "missingVersions": [
@@ -15139,7 +15139,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312775254/rectangle_large_type_2_da57aef4ae030906f7593809b6db5dc7.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:43.481Z",
+        "observedAt": "2026-10-02T06:05:06.967Z",
         "revisionId": "8cd5d1fb9acf7476c69434d1a103feffa9926c0ff309436bda8d404fdbbd9e04"
       },
       "missingVersions": [
@@ -15181,7 +15181,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312775268/rectangle_large_type_2_fb3413db4874bc3b75c037639f274469.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:44.401Z",
+        "observedAt": "2026-10-02T06:05:07.105Z",
         "revisionId": "380c8f3467893489d06ebce159294c95e3ed09e53d5f5503ac09cc8232d337f9"
       },
       "missingVersions": [
@@ -15223,7 +15223,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312775285/rectangle_large_type_2_ce2321d3506ec2dc542e338a96c12801.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:44.405Z",
+        "observedAt": "2026-10-02T06:05:07.098Z",
         "revisionId": "7fc72f07663b38b3cf80aa6f4291019c188238dd15bf4483be9e26e598e29c82"
       },
       "missingVersions": [
@@ -15265,7 +15265,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312775318/rectangle_large_type_2_b230e740a4390cec6915732118756d80.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:44.556Z",
+        "observedAt": "2026-10-02T06:05:07.518Z",
         "revisionId": "a24db0af491ac4c3cbe68b7a352d141fbaf63f7b974e40275becdc1812b8966e"
       },
       "missingVersions": [
@@ -15307,7 +15307,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312775326/rectangle_large_type_2_7d2659e129cd9495069135605f9c370d.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:45.617Z",
+        "observedAt": "2026-10-02T06:05:07.775Z",
         "revisionId": "1076666dd86cda977c5349b4c76584f57b4b570149bf472cdee87f45079a82d3"
       },
       "missingVersions": [
@@ -15349,7 +15349,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/235142414/rectangle_large_type_2_956937f1dc98e5d482e0a48c59bf5521.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:46.687Z",
+        "observedAt": "2026-10-02T06:05:08.190Z",
         "revisionId": "84b7055f9fb0687608756dbcde873b002f3b07edf9cc2eb385ffce597502e78a"
       },
       "missingVersions": [
@@ -15391,7 +15391,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312775342/rectangle_large_type_2_88d152177d41bca9c417dc3037ff318c.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:46.741Z",
+        "observedAt": "2026-10-02T06:05:08.038Z",
         "revisionId": "b1f664b6dad2a1573adf280f295b250b169e5d742955bdb5f46858890f7270ef"
       },
       "missingVersions": [
@@ -15433,7 +15433,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312775360/rectangle_large_type_2_82b981d2980216c4bbf02677e1e24291.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:46.712Z",
+        "observedAt": "2026-10-02T06:05:08.370Z",
         "revisionId": "242f32fbda51f6ae8e957af401c2dbb12abfa1688671d755c593b5c98648daa2"
       },
       "missingVersions": [
@@ -15475,7 +15475,7 @@
       "published": {
         "status": "configured",
         "url": "https://assets.st-note.com/production/uploads/images/312775383/rectangle_large_type_2_e04990296a7fed2428587b6983d7897f.png?fit=bounds&quality=85&width=1280",
-        "observedAt": "2026-10-02T03:12:48.267Z",
+        "observedAt": "2026-10-02T06:05:08.486Z",
         "revisionId": "3d04b844baf9340c7a85521d4df082d3369512f7bc278f28931c8299ac26afe5"
       },
       "missingVersions": [
