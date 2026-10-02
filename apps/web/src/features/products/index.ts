@@ -7,10 +7,9 @@ export {
 export {
   STOREFRONT_PRODUCTS,
   findKindleProductForBlog,
+  findDataProductForBlog,
+  findFiscalCompanionProduct,
   findStorefrontProduct,
 } from "./storefront";
-export {
-  buildNoteProductDestination,
-  isValidNoteKey,
-} from "./note-referral";
+export { buildNoteProductDestination, isValidNoteKey } from "./note-referral";
 export type { StorefrontChannel, StorefrontProduct } from "./types";

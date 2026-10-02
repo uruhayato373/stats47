@@ -10,6 +10,8 @@ import { SurfaceSection } from "@/components/surface";
 import {
   STOREFRONT_PRODUCTS,
   TrackedProductOutboundLink,
+  TrackedProductLink,
+  findFiscalCompanionProduct,
   findStorefrontProduct,
 } from "@/features/products";
 
@@ -27,7 +29,9 @@ export function generateStaticParams() {
   return STOREFRONT_PRODUCTS.map((product) => ({ slug: product.slug }));
 }
 
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const product = findStorefrontProduct(slug);
   if (!product) return { title: "商品が見つかりません" };
@@ -55,6 +59,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
 
   const Icon = product.channel === "kindle" ? BookOpen : Database;
   const destinationLabel = product.channel === "kindle" ? "Amazon" : "ココナラ";
+  const fiscalCompanion = findFiscalCompanionProduct(slug);
   const baseUrl = getRequiredBaseUrl();
   const productJsonLd = {
     "@context": "https://schema.org",
@@ -106,8 +111,14 @@ export default async function ProductDetailPage({ params }: PageProps) {
         />
         <ul className="mt-4 space-y-2">
           {product.included.map((item) => (
-            <li key={item} className="flex items-start gap-2 text-sm text-foreground">
-              <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
+            <li
+              key={item}
+              className="flex items-start gap-2 text-sm text-foreground"
+            >
+              <Check
+                className="mt-0.5 h-4 w-4 shrink-0 text-primary"
+                aria-hidden="true"
+              />
               <span>{item}</span>
             </li>
           ))}
@@ -140,6 +151,45 @@ export default async function ProductDetailPage({ params }: PageProps) {
         </p>
       </SurfaceSection>
 
+      {fiscalCompanion && (
+        <SurfaceSection className="mt-6 p-5">
+          <SectionHeader
+            title="財政指標の読み方とデータ利用"
+            hideRule
+            className="mb-0"
+          />
+          <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+            地方債現在高の割合は年度末の残高を年間の歳出決算総額で割った値です。
+            将来負担比率・実質公債費比率とは算定範囲が異なり、単一指標で健全性を判断できません。
+          </p>
+          {slug === "data-p-04" && (
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+              本商品は固定年度のデータ集で、自動更新はありません。Excel・CSV・PDFは110指標、PowerPointは先頭30指標です。
+              Office実機での表示・編集互換性は未確認です。最新年度の資料や市町村比較に使う場合は、必要な年度と地域粒度を販売先で確認してください。
+            </p>
+          )}
+          <Link
+            href="/blog/local-government-debt-burden"
+            className="mt-3 inline-block text-sm text-primary underline"
+          >
+            2022年度の地方債比較と指標の定義を無料で読む
+          </Link>
+          <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+            {slug === "data-p-04"
+              ? "指標の読み方をまとめて学びたい方へ。"
+              : "県別の値をExcelで編集したい方へ。固定年度・対応形式を購入前に確認してください。"}
+          </p>
+          <TrackedProductLink
+            href={`/products/${fiscalCompanion.slug}`}
+            label={`${fiscalCompanion.id}:${fiscalCompanion.title}`}
+            surface="product_catalog"
+            className="mt-2 inline-flex min-h-10 items-center text-sm text-primary underline"
+          >
+            {fiscalCompanion.title}の内容と価格を見る
+          </TrackedProductLink>
+        </SurfaceSection>
+      )}
+
       <SurfaceSection className="mt-6 p-5">
         <SectionHeader
           title="先に無料データを確認できます"
@@ -149,7 +199,10 @@ export default async function ProductDetailPage({ params }: PageProps) {
         <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
           stats47では都道府県ランキングと統計の出典を無料公開しています。購入前に、データの内容やサイトの品質をご確認ください。
         </p>
-        <Link href="/ranking" className="mt-3 inline-block text-sm font-medium text-primary hover:underline">
+        <Link
+          href="/ranking"
+          className="mt-3 inline-block text-sm font-medium text-primary hover:underline"
+        >
           無料の都道府県ランキングを見る →
         </Link>
       </SurfaceSection>
