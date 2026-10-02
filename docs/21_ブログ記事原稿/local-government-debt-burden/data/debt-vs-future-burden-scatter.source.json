@@ -1,0 +1,16 @@
+{
+  "kind": "scatter",
+  "xKey": "local-debt-current-ratio",
+  "yKey": "future-burden-ratio",
+  "year": "x:2022/y:2022",
+  "xSource": "r2:app/ranking/local-debt-current-ratio/values.json",
+  "ySource": "r2:app/ranking/future-burden-ratio/values.json",
+  "fetchedAt": "2026-08-11T23:17:35.547Z",
+  "restoredFrom": "scatter-restore-from-ssot (session 2026-08-12)",
+  "verifiedBy": "article-title-value-match",
+  "verifiedMatchRate": {
+    "x": 1,
+    "y": 1
+  },
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug local-government-debt-burden --keys local-debt-current-ratio,future-burden-ratio --data-name debt-vs-future-burden-scatter"
+}
