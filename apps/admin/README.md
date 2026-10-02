@@ -28,7 +28,7 @@ PORT=5000 npm run admin    # ポート上書き
 | `/content` | X / Instagram / note / Kindle の制作・公開状態・次アクション・SSOT監査の横断サマリ |
 | `/content/x` `/content/instagram` | 投稿台帳をチャネル別に初期絞り込み。XはGeo role・分析ID・claim metricも表示 |
 | `/content/note` | note catalog (git TS)・R2本文所在・公開URL・公開準備状態の読み取り専用ミラー |
-| `/content/note/covers` | `data/note/cover-assets.json`から分類・レビュー・公開/候補/過去版を比較。画像はprivate R2からGET proxyでSHA確認し配信。ローカル画像管理なし |
+| `/content/note/covers` | 共通台帳から画像付き一覧・カバー比較を表示。右側で分類/確認状態/note反映を絞り込み、検索・列見出しの並べ替え・ページ送り・Sheetで拡大比較。画像はprivate R2からGET proxyでSHA確認し配信 |
 | `/content/kindle` | Kindle catalog・manuscript・ローカルEPUB/表紙・R2暗号化archive・KDPの下書き/審査中/販売中・価格/ロイヤリティ/KUの読み取り専用ミラー |
 | `/content/references` | 解決済みinventoryをranking・survey・theme・area・japan・world・blog・note・Kindle・YouTube・Instagram・Xへ突合した全展開ポートフォリオ。context-onlyは公式資料単位の補強プールとして別表示 |
 | `/sns` | 投稿台帳 (X/IG と YouTube 過去実績/pilot 記録)・素材再生・caption・投稿状態・残枠・IG 整合性警告の読み取りビュー |
@@ -47,6 +47,7 @@ app/            管理画面 + api/** (Route Handler) + media/ pilot/ (ローカ
 components/     共有 (console-nav / async-state / media-preview) + ページ別
 components/ui/  shadcn/ui 公式 (new-york-v4) の部品。公式のままにする (差は check-shadcn-parity が止める)
 components/admin-ui/  組み立て部品 (TableFrame / DataTable / PanelCard / StatCard / StatusBadge / LinkCard)。layout-primitives.tsx は Stack / Grid / Section
+components/content/note-covers-browser.tsx  shadcn Table + 既存のTanStack Table v8で検索/並べ替え。表示条件はURLに保持し、画像/公開台帳には書き込まない
 lib/nav-registry.ts  左メニューの定義 (SSOT) と現在地判定。表示は公式 Sidebar (components/console-nav*.tsx)
 lib/client/     fetch wrapper (SWR 等は使わない)
 lib/contracts/  読み取りAPI DTO + Zod schema
