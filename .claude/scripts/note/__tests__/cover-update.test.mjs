@@ -11,6 +11,24 @@ import {
   findCoverOperation,
 } from '../lib/cover-update.mjs';
 import fs from 'node:fs';
+import { currentUrlname, assertAccount } from '../lib/note-session.mjs';
+
+test('browser-authenticated account remains usable when the separate request transport cannot connect', async () => {
+  const requests = [];
+  let account = 'stats47';
+  const ctx = { pages: () => [{ url: () => 'https://note.com/settings/account', evaluate: async (fn) =>
+    new Function('fetch', 'location', `return (${fn.toString()})()`)(async (url, options) => {
+      requests.push({ url, options });
+      return { ok: true, json: async () => ({ data: { urlname: account } }) };
+    }, { origin: 'https://note.com' }) }], request: { get: () => { throw Error('separate transport unavailable'); } } };
+  assert.equal(await assertAccount(ctx), 'stats47');
+  assert.deepEqual(requests[0], { url: '/api/v2/current_user', options: { credentials: 'include' } });
+  account = 'dobokunote';
+  await assert.rejects(assertAccount(ctx), /別アカウント/);
+  account = null;
+  assert.equal(await currentUrlname(ctx), null);
+  await assert.rejects(assertAccount(ctx), /未ログイン/);
+});
 
 test('batch identity keeps already delivered revisions when resuming a partial publication', () => {
   const scope = [{ key: 'a-kakei-aichi', sha256: 'first' }, { key: 'a-kakei-akita', sha256: 'second' }];
@@ -23,7 +41,8 @@ test('changing the selected batch cannot hide an uncertain cover upload', () => 
   const operation = { key: article.key, sourceSha256: article.sha256, status: 'uploading' };
   const journal = { account: 'stats47', articles: [operation] };
   assert.equal(findCoverOperation([journal], article), operation);
-  assert.equal(findCoverOperation([journal], { ...article, sha256: 'different' }), null);
+  assert.equal(findCoverOperation([journal], { ...article, sha256: 'different' }), operation);
+  assert.equal(findCoverOperation([{ ...journal, articles: [{ ...operation, status: 'verified' }] }], { ...article, sha256: 'different' }), null);
   assert.throws(() => findCoverOperation([{ ...journal, account: 'dobokunote' }], article), /account/);
   assert.throws(() => findCoverOperation([journal, journal], article), /multiple/);
 });

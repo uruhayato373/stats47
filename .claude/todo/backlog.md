@@ -304,8 +304,8 @@ updated: 2026-09-29
 
 - **正典・owner**: 記事メタはTSカタログ、画像と採用/公開の対応は `data/note/cover-assets.json` + JSON Schema。実体はprivate R2のSHA付き版。契約は `.claude/rules/note-image-assets.md`。owner: note-manager / 管理画面担当。
 - **残る不足**: 9/28-v4の候補PNG・入力・レビュー実体がこのPCには無い。旧記録は70件pass・216件needs-revisionだったが、回収してSHAを照合するまで承認を引き継がない。未回収版は各記事の `missingVersions` に記録する。生成環境から元実体を回収するか、分類別の根拠から別版として再制作する。
-- **運用基盤**: 公開286件を2026-10-02に全件GETで確認してprivate R2へ保存・読み戻しSHA検証。家計47件は別版 `2026-10-02-household-r1` を全件縮小レビュー・採用し、private R2と公開記事のdry-runも47件pass。オーナーから差し替え依頼済みだが、noteは未ログインで、登録済み資格情報の通常ログインは追加確認、人のログイン待機もtimeoutだったためPOSTは0件。管理画面は確認済み47・未反映と表示する。Windowsは専用Playwright profileを使い、バッチ再開のjournalを維持する。旧public R2の家計47件も未採用の過去版として保全。実測・検査結果は `.claude/state/metrics/note/cover-operations-latest.json`。
-- **実行順**: ① `login-note-profile.mjs`で人がstats47へログインし、専用ブラウザを閉じる。家計47件の同じ`--keys`で画像専用更新を`--limit 1 --commit`のpilotから再開し、残りを反映・記事保全を検証する（依頼済みなので再承認不要）。②残る239件の未回収版の実体と入力を回収し `note:assets import` で保管する。回収不能は別版として作り直す。③分類別に公開画像と比較し、ランキングの上位県と値、配色の色見本、Geo/データセット・解説の固有図版を維持する。④画像SHAを指定してレビュー・採用とdry-runを通し、公開ポインタと記事保全を検証する。
+- **運用基盤**: 画像はprivate R2のSHA付き版に保管し、管理画面は共通台帳から表示する。家計47件の別版 `2026-10-02-household-r1` はレビュー・採用・公開反映と記事保全の照合まで完了。旧public R2版も過去版として保全。公開286件と保管版の全件照合、実測・検査結果の正典は `.claude/state/metrics/note/cover-operations-latest.json` と `cover-lifecycle-latest.json`。
+- **実行順**: ①残る239件の未回収版の実体と入力を回収し `note:assets import` で保管する。回収不能は別版として作り直す。②分類別に公開画像と比較し、ランキングの上位県と値、配色の色見本、Geo/データセット・解説の固有図版を維持する。③画像SHAを指定してレビュー・採用とdry-runを通し、公開ポインタと記事保全を検証する。
 - **停止条件**: 9/28版を回収済みと扱わず、旧レビューや新生成を公開済みに読み替えない。未判定/要修正を一括差し替えしない。記事対応・画像SHA・認証口座が不一致、POST応答不明、本文/タイトル/価格/有料境界が変化した場合は停止する。
 - **完了条件**: 全286件の採用版が分類別レビューを通り、差し替え後の `verify-cover-refresh.mjs` が公開カバーの対応と記事内容の不変を確認する。
 ### [AREA-PROFILE-JSON-RETIRE-01] 県の profile.json の生成をやめる (読み手 0 になったため)

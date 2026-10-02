@@ -96,4 +96,8 @@ Range 全選択 + 実キー Backspace (eval の execCommand だけでは消え�
 - **問題**: カバー専用CLIがWindowsでブラウザを起動・終了できず、途中成功した行を除くとjournal識別子が変わり、応答不明のPOST履歴を失う可能性があった。
 - **原因**: browser-useの実行パスと終了時のpsがPOSIX固定。journalのhashは未公開の採用版だけから計算していた。またChromeのProfile番号はPCごとに異なり、このWindowsのProfile 5はstats47専用ではなかった。
 - **対策**: Windowsは既存note-session.mjsの専用Playwright profile、サービス別一時認証はmeasurementContextを使い、current_userと設定画面でstats47を照合。所有するcontextを閉じる。採用scopeには公開済みの同一版も含め、同じ--keysの再開でjournalを維持し、別scopeの先行操作も検索して二重送信を停止する。人のログインが必要ならlogin-note-profile.mjsを使い、通常ログイン失敗後に資格情報を繰り返し送信しない。
-- **証拠**: cover-update.test.mjsの9件とcover-assets.test.mjsの17件（採用済みと未配信の区別）。差し替えの公開結果・認証待ちは共有台帳とcover-operations-latest.json、未完了はbacklogのNOTE-COVER-ROLLOUT-20260928。
+- **証拠**: cover-update.test.mjsとcover-assets.test.mjs（採用済みと未配信の区別）。差し替えの公開結果は共有台帳とcover-operations-latest.json、未完了はbacklogのNOTE-COVER-ROLLOUT-20260928。
+
+**Windowsのログイン判定（2026-10-02実測）**: ブラウザの設定画面と同一originのcurrent_user GETはstats47を返しても、APIRequestContextの別経路は取得に失敗し、未ログインと誤判定した。note-session.mjsはnote.comの開いているページからcredential付きGETで照合し、ログイン用CLIも同じ関数を使う。別口座・認証なしは引き続き停止する（cover-update.test.mjsの接続失敗・別口座fixture）。通信切断後の復旧はGETだけ最大3回、POST/PUTと401は再送しない（cover-assets.test.mjs）。
+
+外部更新後の台帳保存エラーでは二重送信を避ける。判断手順は `.claude/skills/learned/external-write-local-save-recovery.md`。

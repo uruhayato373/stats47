@@ -21,15 +21,15 @@
     "remoteReadBackVerified": 380,
     "pendingReviews": 0,
     "approvedHousehold": 47,
-    "publishedHousehold": 0
+    "publishedHousehold": 47
   },
   "validation": {
     "assetTests": {
-      "passed": 17,
+      "passed": 19,
       "failed": 0
     },
     "publicationTests": {
-      "passed": 16,
+      "passed": 10,
       "failed": 0
     },
     "imageTests": {
@@ -60,7 +60,7 @@
       ],
       "pageErrors": 0
     },
-    "livePublicationVerification": "a-kakei-aichi passed; no note update performed",
+    "livePublicationVerification": "All 286 public articles and 380 private revisions passed; household 47 new covers and preserved article fingerprints verified",
     "imagePipeline": {
       "passed": 99,
       "failed": 0
@@ -115,7 +115,6 @@
   },
   "limitations": [
     "2026-09-28-v4 candidates could not be recovered; do not treat new household candidates as the recovered version.",
-    "47 regenerated household candidates require visual review before publication. No candidate was approved or uploaded to note.",
     "Weekly CI ledger commit-back is implemented but has not yet executed.",
     "Full web production build and whole-site E2E are outside this admin-only validation scope."
   ],
@@ -595,10 +594,10 @@
       "R2 sample does not establish which job performed the upload."
     ]
   },
-  "updatedAt": "2026-10-02T05:34:09.498Z",
+  "updatedAt": "2026-10-02T06:08:06.140Z",
   "householdRollout": {
     "version": "2026-10-02-household-r1",
-    "status": "awaiting-note-authentication",
+    "status": "completed",
     "authorizedScope": "Replace 47 household note covers and update management view",
     "reviewed": 47,
     "adopted": 47,
@@ -606,21 +605,64 @@
       "status": "pass",
       "checked": 47
     },
-    "published": 0,
+    "published": 47,
     "account": "stats47",
+    "completedAt": "2026-10-02T05:59:51.344Z",
+    "verifiedAt": "2026-10-02T06:05:08.551Z",
+    "journal": ".claude/state/metrics/note-cover-refresh-ledger-91214c55dafc1456.json",
     "authentication": {
-      "status": "human_required",
-      "automaticLoginAttempts": 1,
-      "humanLogin": "timed-out",
+      "status": "verified",
+      "account": "stats47",
+      "source": "browser same-origin current_user GET",
       "profile": ".local/playwright-note-profile"
     },
     "validation": {
-      "assetTests": 17,
-      "publicationTests": 9,
+      "assetTests": {
+        "passed": 19,
+        "failed": 0
+      },
+      "publicationTests": {
+        "passed": 10,
+        "failed": 0
+      },
       "typeCheck": "25 packages and 8 script projects passed",
       "docsCheck": "0 errors; 12 existing warnings",
-      "admin": "47 reviewed and unpublished; candidates retrieved from private R2"
+      "livePortfolio": {
+        "status": "pass",
+        "publicArticles": 286,
+        "privateRevisions": 380,
+        "householdPublished": 47,
+        "unchangedOtherCovers": 239,
+        "preservedArticleFingerprints": 47,
+        "report": ".claude/state/metrics/note/cover-lifecycle-latest.json"
+      },
+      "imageVerification": {
+        "dimensions": [
+          1280,
+          670
+        ],
+        "meanPixelErrorMin": 0.6223332555970149,
+        "meanPixelErrorMax": 0.8780771921641791
+      },
+      "admin": {
+        "status": "pass",
+        "householdReviewed": 47,
+        "householdPublished": 47,
+        "sample": "a-kakei-aichi",
+        "visibleImages": [
+          [
+            1280,
+            670
+          ],
+          [
+            1280,
+            670
+          ]
+        ],
+        "pageErrors": 0,
+        "verifiedAt": "2026-10-02T06:07:27.925Z"
+      }
     },
-    "next": "Authenticate stats47 with login-note-profile.mjs, then resume the same 47 household keys; --limit 1 pilot, full remaining batch, verify public covers and fingerprints"
+    "remaining": "239 non-household candidates still require recovery or regeneration and review; the 2026-09-28-v4 assets were not recovered"
   }
 }

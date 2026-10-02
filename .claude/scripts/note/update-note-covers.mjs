@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url';
 import { execFile, execFileSync } from 'node:child_process';
 import { promisify } from 'node:util';
 import sharp from 'sharp';
-import { readCoverLedger, updateCoverLedger, recordCoverObservation, adoptedCoverRevision, approvedCoverRevision } from './lib/cover-assets.mjs';
+import { readCoverLedger, updateCoverLedger, recordCoverObservation, adoptedCoverRevision, approvedCoverRevision, renameCoverFile } from './lib/cover-assets.mjs';
 import { readStoredCover, createCoverStore, fetchNoteDetail, fetchCoverSource } from './lib/cover-storage.mjs';
 import { launchContext, assertAccount, pruneProfileCaches } from './lib/note-session.mjs';
 import { measurementContext, unattended, markMeasurementAuthenticated } from '../measurement/browser-session.mjs';
@@ -122,14 +122,14 @@ const previousJournals = fs.readdirSync(path.dirname(journalPath))
   .filter((name) => /^note-cover-refresh-ledger-[a-f0-9]+\.json$/.test(name)
     && path.join(path.dirname(journalPath), name) !== journalPath)
   .map((name) => JSON.parse(fs.readFileSync(path.join(path.dirname(journalPath), name), 'utf8')));
-const writeJournal = () => {
+const writeJournal = async () => {
   fs.mkdirSync(path.dirname(journalPath), { recursive: true });
   journal.updatedAt = new Date().toISOString();
   fs.writeFileSync(
     journalPath + '.tmp',
     JSON.stringify(journal, null, 2) + '\n'
   );
-  fs.renameSync(journalPath + '.tmp', journalPath);
+  await renameCoverFile(journalPath + '.tmp', journalPath);
 };
 const run = promisify(execFile),
   cli =
@@ -332,7 +332,7 @@ try {
         };
         journal.articles.push(active);
       }
-      writeJournal();
+      await writeJournal();
       const data = assets.get(a.key).toString('base64');
       await evaluate(
         'window.__noteCoverBytes="";window.__noteCoverResult=null;true'
@@ -342,7 +342,7 @@ try {
           `window.__noteCoverBytes+=${JSON.stringify(data.slice(i, i + 12000))};true`
         );
       active.status = 'uploading';
-      writeJournal();
+      await writeJournal();
       await evaluate(
         uploadInBrowser({ noteId: before.id, width: 1280, height: 670 })
       );
@@ -357,7 +357,7 @@ try {
       active.uploadedUrl = result.body.data.url;
       active.uploadedAt = new Date().toISOString();
       active.status = 'uploaded';
-      writeJournal();
+      await writeJournal();
     }
     const after = await publicDetail(a);
     assertPreserved(original, after);
@@ -374,7 +374,7 @@ try {
     active.status = 'verified';
     active.verifiedAt = new Date().toISOString();
     delete active.error;
-    writeJournal();
+    await writeJournal();
     await updateCoverLedger((current) => {
       const row = current.articles.find((r) => r.articleKey === a.key);
       if (row?.approvedRevisionId !== a.sha256) throw Error('cover approval changed after upload; inspect journal');
@@ -391,7 +391,7 @@ try {
 } catch (error) {
   if (active) {
     active.error = error.message;
-    writeJournal();
+    await writeJournal();
   }
   console.error(error);
   process.exitCode = 2;

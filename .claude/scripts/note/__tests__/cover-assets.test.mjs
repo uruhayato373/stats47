@@ -5,11 +5,29 @@ import os from 'node:os';
 import path from 'node:path';
 import { validateCoverLedger, emptyCoverArticle, coverSha, coverAssetKey, addCoverRevision, reviewCoverRevision,
   recordCoverObservation, applyCoverAudit, coverDisplayState, updateCoverLedger, readCoverLedger, adoptedCoverRevision, approvedCoverRevision } from '../lib/cover-assets.mjs';
-import { storeCoverBytes, readStoredCover, fetchCoverSource, wranglerTokenProvider } from '../lib/cover-storage.mjs';
+import { storeCoverBytes, readStoredCover, fetchCoverSource, wranglerTokenProvider, retryCoverRead } from '../lib/cover-storage.mjs';
 import { buildTab } from '../../lib/gallery-collectors.mjs';
 import { COVER_ROOT, assertCoverGenerationType } from '../lib/cover-assets.mjs';
 
 const now = '2026-10-02T00:00:00.000Z';
+test('transient read recovery is bounded and never retries an uncertain POST, write, or authentication failure', async () => {
+  const reset = Object.assign(Error('aborted'), { code: 'ECONNRESET' });
+  const waits = [];
+  let attempts = 0;
+  const recovered = await retryCoverRead(async () => { attempts++; if (attempts === 1) throw reset; return { status: attempts === 2 ? 503 : 200 }; }, 'GET', async (ms) => { waits.push(ms); });
+  assert.equal(recovered.status, 200); assert.equal(attempts, 3); assert.deepEqual(waits, [300, 600]);
+  for (const method of ['POST', 'PUT']) {
+    attempts = 0;
+    await assert.rejects(retryCoverRead(async () => { attempts++; throw reset; }, method, async () => {}), /aborted/);
+    assert.equal(attempts, 1);
+  }
+  attempts = 0;
+  assert.equal((await retryCoverRead(async () => { attempts++; return { status: 401 }; })).status, 401);
+  assert.equal(attempts, 1);
+  attempts = 0;
+  await assert.rejects(retryCoverRead(async () => { attempts++; throw reset; }, 'GET', async () => {}), /aborted/);
+  assert.equal(attempts, 3);
+});
 const catalog = [{ key: 'a-kakei-aichi', noteUrl: 'https://note.com/stats47/n/n123' }];
 function fixture() { return { schemaVersion: 1, account: 'stats47', updatedAt: now, articles: [emptyCoverArticle(catalog[0])] }; }
 function revision(text = 'candidate', kind = 'candidate') {
@@ -164,4 +182,26 @@ test('cover updates cannot select a pending candidate for upload', () => {
   addCoverRevision(row, revision('new unreviewed candidate'), { candidate: true });
   assert.equal(approvedCoverRevision(row), null);
   assert.equal(adoptedCoverRevision(row), null);
+});
+test('a temporary Windows reader lock cannot lose a verified publication or delete the old ledger', async (t) => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'cover-ledger-reader-test-'));
+  try {
+    await updateCoverLedger(l => l.articles.push(emptyCoverArticle(catalog[0])), root);
+    const file = path.join(root, 'data/note/cover-assets.json'), before = fs.readFileSync(file, 'utf8');
+    const rename = fs.renameSync;
+    let attempts = 0;
+    t.mock.method(fs, 'renameSync', (from, to) => {
+      attempts++;
+      if (attempts < 3) {
+        assert.equal(fs.readFileSync(file, 'utf8'), before);
+        assert.equal(fs.existsSync(file + '.lock'), true);
+        throw Object.assign(Error('destination held by reader'), { code: 'EPERM' });
+      }
+      return rename(from, to);
+    });
+    await updateCoverLedger(l => l.articles[0].missingVersions.push('reader-lock-test'), root);
+    assert.equal(attempts, 3);
+    assert.deepEqual(readCoverLedger(root).articles[0].missingVersions, ['reader-lock-test']);
+    assert.deepEqual(fs.readdirSync(path.dirname(file)), ['cover-assets.json']);
+  } finally { fs.rmSync(root, { recursive: true, force: true }); }
 });

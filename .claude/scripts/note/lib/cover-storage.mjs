@@ -74,7 +74,24 @@ function windowsTrustedAuthorities() {
   trustedAuthorities = [...rootCertificates, publicRoots, ...(extraFile && fs.existsSync(extraFile) ? [fs.readFileSync(extraFile, 'utf8')] : [])];
   return trustedAuthorities;
 }
-function request(url, { method = 'GET', body, headers = {} } = {}) {
+/** Retry transient reads only. Never repeat an image POST or private object write. */
+export async function retryCoverRead(read, method = 'GET', wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms))) {
+  for (let attempt = 0; attempt < 3; attempt++) {
+    try {
+      const result = await read();
+      if (method !== 'GET' || ![502, 503, 504].includes(result.status) || attempt === 2) return result;
+    } catch (error) {
+      if (method !== 'GET' || attempt === 2 ||
+        (!['ECONNRESET', 'ETIMEDOUT', 'EPIPE', 'ECONNABORTED'].includes(error.code)
+          && error.message !== 'cover remote request timed out')) throw error;
+    }
+    await wait(300 * (attempt + 1));
+  }
+}
+function request(url, options = {}) {
+  return retryCoverRead(() => requestOnce(url, options), options.method ?? 'GET');
+}
+function requestOnce(url, { method = 'GET', body, headers = {} } = {}) {
   return new Promise((resolve, reject) => {
     const proxy = process.env.HTTPS_PROXY ?? process.env.https_proxy;
     const req = https.request(url, { method, headers, rejectUnauthorized: true, ca: windowsTrustedAuthorities(), agent: proxy ? new HttpsProxyAgent(proxy) : undefined }, (res) => {

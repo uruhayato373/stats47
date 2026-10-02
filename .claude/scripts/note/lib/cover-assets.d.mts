@@ -13,6 +13,7 @@ export interface CoverArticle {
 }
 export interface CoverLedger { schemaVersion: 1; account: 'stats47'; updatedAt: string; articles: CoverArticle[] }
 export const COVER_ROOT: string;
+export function renameCoverFile(source: string, destination: string): Promise<void>;
 export function assertCoverGenerationType(type: string): void;
 export const COVER_LEDGER_PATH: string;
 export function coverSha(bytes: Uint8Array | string): string;
