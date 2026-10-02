@@ -50,16 +50,19 @@ SVG から作れる PNG は git に載せない (`docs/31` の家計・公務員
 
 本文更新の`--update`とは別に、`.claude/scripts/note/update-note-covers.mjs`を使う。
 制作判断は`catalog/cover-designs.ts`、制作は`generate-cover-refresh.ts`と共有Satori rendererに置く。
-今回の全件改修入力は`.local/note-cover-refresh/2026-09-28/`の公開前スナップショットとproduction manifest。
+画像はprivate R2、候補・採用・公開の対応は `data/note/cover-assets.json` を読む。旧9/28版は未回収として記録し、
+過去のレビューを現在の候補へ引き継がない。旧manifestを回収した場合も `note:assets import` で未判定版として登録する。
 制作・保存の契約は[カタログREADME](../../../scripts/note/catalog/README.md#公開カバーの制作と差し替え)を参照する。
 
 ```bash
-node --import tsx .claude/scripts/note/generate-cover-refresh.ts
-# 全画像を目視し、manifestのvisualReviewをpassにしてからローカル検査
-node .claude/scripts/note/update-note-covers.mjs --manifest .local/note-cover-refresh/2026-09-28/production-manifest.json
+npm run note:assets -- prepare --keys <key> --output /tmp/<task>
+node --import tsx .claude/scripts/note/generate-cover-refresh.ts --output /tmp/<task> --version <version>
+# 共通台帳の画像を縮小表示で確認し、正確な候補SHAをレビュー・採用してから検査
+npm run note:assets -- review --keys <key> --revision <sha> --status pass --reason <理由>
+node .claude/scripts/note/update-note-covers.mjs --keys <key>
 # ユーザーが依頼した公開カバー変更を反映（--keys / --limit で限定可能）
-node .claude/scripts/note/update-note-covers.mjs --manifest .local/note-cover-refresh/2026-09-28/production-manifest.json --commit
-node .claude/scripts/note/verify-cover-refresh.mjs --manifest .local/note-cover-refresh/2026-09-28/production-manifest.json
+node .claude/scripts/note/update-note-covers.mjs --keys <key> --commit
+node .claude/scripts/note/verify-cover-refresh.mjs --keys <key>
 ```
 
 **画像の保存だけで公開カバーに即時反映される**（2026-09-12 UI実測）。「更新する」を押す必要はない。

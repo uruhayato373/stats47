@@ -11,7 +11,8 @@ note コーパス全体 (公開済み + ドラフト) の **editorial メタの�
 
 | データ | SSOT | 派生 (手編集しない) |
 |---|---|---|
-| 記事本文・画像 | R2 `note/<vertical>/<slug>/` | — |
+| 記事本文・本文画像 | R2 `note/<vertical>/<slug>/` | — |
+| カバー画像・候補/採用/公開の対応 | private R2 + `data/note/cover-assets.json` (JSON Schema付き) | 管理画面・画像一覧 |
 | editorial メタ (vertical/series/**magazine**/isPaid/priceJpy/status/noteUrl/publishedAt/r2Path/**r2Body**/**stats47Targets**) | **`catalog/data/<vertical>.ts`** | — |
 | マガジン定義 (名称/有料無料/束ねる vertical/URL/商品導線) | **`catalog/magazines.ts`** | 商品導線は記事別 clean path に変換し、サイト到着時だけGA4標準UTMへ転送 |
 | 公開済みインデックス | (派生) | `.claude/state/note-published-urls.json` ← `generate-note-catalog.ts` |
@@ -50,20 +51,20 @@ v3記事詳細APIで確認し、一覧サムネイルに代用された本文画
 期間内に一覧行がない記事は指標nullで残し、全体をincompleteとする。旧viewsへ変換しない。
 収集契約・期間指定は[fetch-note-metrics](../../../skills/analytics/fetch-note-metrics/SKILL.md)を参照する。
 
-### 公開カバーの制作と差し替え
+## カバー制作・画像専用更新の実装
 
 `cover-designs.ts`が既存維持リスト・短い見出し・補足の編集判断を持つ。画像は派生物。
 `../generate-cover-refresh.ts`は共有`note-cover-render.ts`のeditorial rendererを使い、
 既存GISの県輪郭/日本地図を配置する。家計調査は2024年の47都市観測値から単純平均と増減率を再計算し、
 記事のchart-dataと一致する場合だけ描く。県名と調査対象都市名を併記する。
 
-改修versionごとの`.local/note-cover-refresh/<日付>/`に公開前の`before/`、`inventory.json`、
-検算入力`sources/`、制作物`after/`、`production-manifest.json`を保持する。
-manifestは記事ID・旧画像hash・新画像hash・コピー・データ根拠・1280×670・文字境界・重なり・目視判定を持つ。
+一時領域の`before/`、`inventory.json`、検算入力`sources/`、制作物`after/`、`production-manifest.json`は
+生成時の入力と検査結果であり、正本として保持しない。remote保管・読み戻しSHA検証後に削除する。
+共通画像台帳には記事ID・画像SHA・版・1280×670・文字境界/重なりの根拠・目視判定を保存する。
 Satoriは文字をpath化するため、SVGの`text`要素検索だけで合格させず、`onNodeDetected`の実レイアウトで検査する。
 再生成すると目視判定はpendingへ戻る。PNGを手修正してもhashが変わり反映ゲートで止まる。
 
-`../update-note-covers.mjs --manifest <path>`はローカル検査のみ。`--commit`で実際に変更し、
+`../update-note-covers.mjs`は採用済みremote版と現在の公開画像を検査する。`--commit`で実際に変更し、
 `--keys`/`--limit`で範囲を絞れる。stats47アカウント・git TSの記事URL・公開前の内容を照合した後、
 実際のエディタで観測した`POST /api/v1/image_upload/note_eyecatch`へ画像だけを送る。
 `note_id`はv3詳細の数値`id`であり、`n...`形式のkeyではない。FormDataはnote_id/file/width/heightの4項目、
@@ -71,8 +72,10 @@ Satoriは文字をpath化するため、SVGの`text`要素検索だけで合格�
 
 履歴は`.claude/state/metrics/note-cover-refresh-<version>.json`。本文自体を保存せず、前後の保全項目hash・
 旧新URL・制作画像SHA・変更時刻・配信検証結果を記録する。確定済みは再送しない。応答不明は停止して照合する。
-仕上げに`../verify-cover-refresh.mjs --manifest <path>`で全件カバー監査と前後照合を実行する。
+仕上げに`../verify-cover-refresh.mjs [--keys <key>]`で共通画像台帳からカバー監査と前後照合を実行する。
 改修は`cover-remediation`として記録し、KPI改善の実験成功とは区別する。
+
+### マガジンの登録と割り当て
 
 1. `magazines.ts` にマガジンを定義 (無料キュレーション or 有料メンバーシップ)。
 2. 束ねたい記事の `data/<vertical>.ts` の `magazine` を該当キーに設定する。

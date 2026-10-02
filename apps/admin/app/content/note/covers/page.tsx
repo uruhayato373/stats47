@@ -50,8 +50,8 @@ export default async function NoteCoversPage({ searchParams }: { searchParams: P
   const reviewLabel = (key: NoteCoverReview) => REVIEWS.find((item) => item.key === key)?.label ?? key;
 
   return <Stack gap="lg">
-    <PageHeading title="noteカバー管理" source="note記事台帳 + 共通画像台帳 + 非公開ストレージ">
-      <p className="text-xs text-console-muted">公開画像と生成候補を用途別に比較できます。画像は共通ストレージに保管し、確認済み・未判定・反映状況を同じ台帳で管理します。公開画像の確認日も表示します。</p>
+    <PageHeading title="noteカバー管理" source="記事・画像の共通台帳">
+      <p className="text-xs text-console-muted">公開中のカバーと差し替え候補を分類別に比較できます。確認済み・未判定・noteへの反映状況と、公開画像の確認日を表示します。</p>
       <Link href="/content/note" className="text-xs text-console-accent hover:underline">記事管理へ戻る</Link>
     </PageHeading>
 

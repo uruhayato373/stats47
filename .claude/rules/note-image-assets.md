@@ -128,4 +128,4 @@ note 記事の画像は、記事で使ったデータと設定から作り直せ
 - **見た目を変えたら** `.claude/scripts/note/lib/note-render-spec.mjs` の `NOTE_RENDER_TEMPLATE_VERSION` を上げ、
   `render-ranking-images.mjs --stale` で全記事を作り直す。上げ忘れても、古い spec は `RENDER_SPEC_INVALID` で止まる。
 - Remotionのカバー出力も制作入力であり、画像の保存・採用の正典は共通画像台帳。公開済み記事のカバー一括差し替えは
-  `NOTE-COVER-ROLLOUT-20260928` (Satori 版・別系統) が持ち、`production-manifest` が実際に note へ載せる画像を決める。
+  `NOTE-COVER-ROLLOUT-20260928` が持ち、共通画像台帳の現在の候補SHAに対する採用ポインタが実際に note へ載せる画像を決める。
