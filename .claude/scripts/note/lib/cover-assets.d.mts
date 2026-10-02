@@ -4,7 +4,8 @@ export interface CoverRevision {
   sha256: string; bytes: number; width: number; height: number;
   quality?: { textBounds: 'pass'; textOverlap: 'pass'; evidenceSha256: string };
   review: { status: 'pending' | 'pass' | 'needs-revision' | 'not-required'; reason: string | null; reviewedAt: string | null };
-  provenance: { renderer: string | null; sourceUrl: string | null; sourceSha256: string | null };
+  provenance: { renderer: string | null; sourceUrl: string | null; sourceSha256: string | null;
+    input?: { sha256: string; bytes: number; storage: CoverRevision['storage'] } };
 }
 export interface CoverArticle {
   articleKey: string; noteUrl: string | null; revisions: CoverRevision[];
@@ -18,6 +19,7 @@ export function assertCoverGenerationType(type: string): void;
 export const COVER_LEDGER_PATH: string;
 export function coverSha(bytes: Uint8Array | string): string;
 export function coverAssetKey(key: string, sha: string): string;
+export function coverInputKey(key: string, sha: string): string;
 export function coverUrlPath(url: string | null | undefined): string | null;
 export function validateCoverLedger(ledger: unknown, catalog?: { key: string; noteUrl?: string }[]): CoverLedger;
 export function readCoverLedger(root?: string): CoverLedger;

@@ -178,20 +178,13 @@ export async function enumerateBlogSlugs(r2) {
 }
 
 /**
- * note カバー: state の draft-index + published-urls から集約。
- * note カバーは R2 に archive されず公開時に note.com へ直接アップロードされる ephemeral
- * (2026-07-06 確認)。published は note.com リンクを提示、r2Path から archive パスを組む。
- */
-/**
- * 公開 R2 に汎用カバー (cover-1280x670.png) を持たない note シリーズ。専用デザインのカバーを note.com に直接上げるのが正典
- * (.claude/scripts/note/generate-koumuin-covers.cjs)。生成側 apps/web/scripts/generate-ogp-images.ts の
- * BESPOKE_COVER_VERTICALS と同じ集合 (gallery-collectors.test.mjs が一致を固定する)。
+ * 本文画像の旧public R2対象から除く専用デザインのシリーズ。
+ * カバーの対象集合・実体は、この除外を使わず共通台帳とprivate R2から解決する。
  */
 export const BESPOKE_COVER_VERTICALS = Object.freeze(["koumuin-claude-code", "koumuin-estat-claude-code"]);
 
 /**
- * 公開 R2 にカバーがあるべき note 記事。有料記事 (r2_access: private) と専用デザインのシリーズは除く
- * (どちらも公開 R2 に無いのが正しい。2026-09 に 79 件の有料記事を「欠落」と数え、OGP の週次監査が毎回落ちていた)。
+ * 全note記事のカバーを共通台帳から列挙する。有料・専用デザイン・下書きも同じ保存契約。
  */
 export function enumerateNoteCovers(projectRoot) {
   return readCoverLedger(projectRoot).articles.map((a) => ({ slug: a.articleKey, status: a.noteUrl ? 'published' : 'draft', noteUrl: a.noteUrl, record: a }));

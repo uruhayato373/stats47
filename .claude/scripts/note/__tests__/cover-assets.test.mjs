@@ -5,7 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { validateCoverLedger, emptyCoverArticle, coverSha, coverAssetKey, addCoverRevision, reviewCoverRevision,
   recordCoverObservation, applyCoverAudit, coverDisplayState, updateCoverLedger, readCoverLedger, adoptedCoverRevision, approvedCoverRevision } from '../lib/cover-assets.mjs';
-import { storeCoverBytes, readStoredCover, fetchCoverSource, wranglerTokenProvider, retryCoverRead } from '../lib/cover-storage.mjs';
+import { storeCoverBytes, readStoredCover, storeCoverInput, readStoredCoverInput, fetchCoverSource, wranglerTokenProvider, retryCoverRead } from '../lib/cover-storage.mjs';
 import { buildTab } from '../../lib/gallery-collectors.mjs';
 import { COVER_ROOT, assertCoverGenerationType } from '../lib/cover-assets.mjs';
 
@@ -42,6 +42,22 @@ function revision(text = 'candidate', kind = 'candidate') {
 function observe(ledger, url = 'https://assets.st-note.com/cover.png', observedAt = now, status = 'configured') {
   recordCoverObservation(ledger, { key: catalog[0].key, noteUrl: catalog[0].noteUrl, status, url, observedAt });
 }
+test('frozen cover input is stored immutably and independently verified by the ledger evidence hash', async () => {
+  const objects = new Map(); let writes = 0;
+  const store = { get: async key => objects.get(key) ?? null, put: async (key, bytes) => { writes++; objects.set(key, Buffer.from(bytes)); } };
+  const bytes = Buffer.from(JSON.stringify({ year: 2021, data: [{ value: 42 }], palette: 'YlOrRd' }));
+  const input = await storeCoverInput(catalog[0].key, bytes, store);
+  await storeCoverInput(catalog[0].key, bytes, store); assert.equal(writes, 1);
+  const rev = revision(); rev.quality.evidenceSha256 = input.sha256; rev.provenance.input = input;
+  assert.deepEqual(await readStoredCoverInput(rev, store), bytes);
+  const ledger = fixture(); addCoverRevision(ledger.articles[0], rev); validateCoverLedger(ledger);
+  const crossArticle = structuredClone(ledger); crossArticle.articles[0].revisions[0].provenance.input.storage.key = input.storage.key.replace(catalog[0].key, 'other-article');
+  assert.throws(() => validateCoverLedger(crossArticle), /input identity/);
+  objects.set(input.storage.key, Buffer.from('corrupted'));
+  await assert.rejects(readStoredCoverInput(rev, store), /SHA mismatch/);
+  await assert.rejects(storeCoverInput(catalog[0].key, bytes, store), /immutable remote cover conflict/);
+  await assert.rejects(storeCoverInput(catalog[0].key, Buffer.from('invalid-json'), store));
+});
 test('schema rejects local file paths and alternate accounts/buckets', () => {
   const ledger = fixture(); const r = revision(); addCoverRevision(ledger.articles[0], r);
   for (const mutate of [l => l.account = 'doboku-note', l => l.articles[0].revisions[0].storage.bucket = 'doboku-note',

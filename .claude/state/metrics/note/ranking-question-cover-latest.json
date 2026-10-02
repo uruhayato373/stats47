@@ -1,0 +1,1650 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-02T08:20:06.901Z",
+  "account": "stats47",
+  "category": "ranking-question",
+  "version": "2026-10-02-ranking-question-v1",
+  "status": "pass",
+  "total": 90,
+  "remoteImagesVerified": 90,
+  "remoteInputsVerified": 90,
+  "fixedCopyCreated": 68,
+  "unitRepaired": 8,
+  "tiedFirstArticles": 7,
+  "approved": 90,
+  "notePublished": 0,
+  "publishedPointersUnchanged": true,
+  "otherArticlesUnchanged": 299,
+  "privateBucket": "stats47-private",
+  "ledger": "data/note/cover-assets.json",
+  "schema": "data/note/cover-assets.schema.json",
+  "design": {
+    "renderer": "question-ranking-note-cover-v1",
+    "palette": "YlOrRd",
+    "scale": "linear",
+    "legend": false,
+    "size": [
+      1280,
+      670
+    ]
+  },
+  "visualReview": {
+    "count": 90,
+    "displayWidth": 320,
+    "contactSheets": 3
+  },
+  "records": [
+    {
+      "key": "a-agricultural-employment-population",
+      "sha256": "0327638e3729ad5cb2ca50be1d7f20a7c56eb95a1a7ea3d769df56542691dee9",
+      "inputSha256": "c72c945fe0f4ae8640263d847fbf9ce196cdbeeb67323a0b2e8be21a43844472",
+      "bytes": 114908,
+      "inputBytes": 7530,
+      "imageKey": "note/covers/a-agricultural-employment-population/revisions/0327638e3729ad5cb2ca50be1d7f20a7c56eb95a1a7ea3d769df56542691dee9.png",
+      "inputKey": "note/covers/a-agricultural-employment-population/inputs/c72c945fe0f4ae8640263d847fbf9ce196cdbeeb67323a0b2e8be21a43844472.json",
+      "year": "2014",
+      "winners": [
+        "北海道"
+      ],
+      "fixedCopyCreated": false,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "a-avg-propensity-to-consume-worker-households",
+      "sha256": "2cf341f499f077977ea78755fca75b98c78b3b380b60ecaca12c28cf9d3555c2",
+      "inputSha256": "4bc7035e794c79e2e0d0291e31cff3f2c116071666fb3e7f0588fdd4634e6b8b",
+      "bytes": 113502,
+      "inputBytes": 7498,
+      "imageKey": "note/covers/a-avg-propensity-to-consume-worker-households/revisions/2cf341f499f077977ea78755fca75b98c78b3b380b60ecaca12c28cf9d3555c2.png",
+      "inputKey": "note/covers/a-avg-propensity-to-consume-worker-households/inputs/4bc7035e794c79e2e0d0291e31cff3f2c116071666fb3e7f0588fdd4634e6b8b.json",
+      "year": "2024",
+      "winners": [
+        "鳥取県"
+      ],
+      "fixedCopyCreated": false,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "a-agricultural-output",
+      "sha256": "a3ea6632950ada141e4af43accf04e289555ec39a52fc58b98617e79ee982c57",
+      "inputSha256": "a6ad9f2cacaa948ce8fc5da6f59416ffdff15b0ab2d70f74d90d7ea8375fe0e5",
+      "bytes": 114353,
+      "inputBytes": 7482,
+      "imageKey": "note/covers/a-agricultural-output/revisions/a3ea6632950ada141e4af43accf04e289555ec39a52fc58b98617e79ee982c57.png",
+      "inputKey": "note/covers/a-agricultural-output/inputs/a6ad9f2cacaa948ce8fc5da6f59416ffdff15b0ab2d70f74d90d7ea8375fe0e5.json",
+      "year": "2023",
+      "winners": [
+        "北海道"
+      ],
+      "fixedCopyCreated": false,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "a-average-temperature",
+      "sha256": "b34ef362b918e62d123da92e084acde8be0ef040f5f561ca279fc2109f528ec8",
+      "inputSha256": "ec89d543de536fc53da30ebb3e741895cdc7983892e423fb8b07a09bc46578f8",
+      "bytes": 112847,
+      "inputBytes": 7362,
+      "imageKey": "note/covers/a-average-temperature/revisions/b34ef362b918e62d123da92e084acde8be0ef040f5f561ca279fc2109f528ec8.png",
+      "inputKey": "note/covers/a-average-temperature/inputs/ec89d543de536fc53da30ebb3e741895cdc7983892e423fb8b07a09bc46578f8.json",
+      "year": "2024",
+      "winners": [
+        "沖縄県"
+      ],
+      "fixedCopyCreated": false,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "a-consumption-expenditure-multi-person-households-per-month",
+      "sha256": "1b53aaacc5c02e898f948a72d625b5381284d7be58fd3a1f8a4dde27b61a4bb6",
+      "inputSha256": "2558d188b288bfbf8520bfc599ea514107b094a37b64e32f0aca3c66506cb8d0",
+      "bytes": 112988,
+      "inputBytes": 7628,
+      "imageKey": "note/covers/a-consumption-expenditure-multi-person-households-per-month/revisions/1b53aaacc5c02e898f948a72d625b5381284d7be58fd3a1f8a4dde27b61a4bb6.png",
+      "inputKey": "note/covers/a-consumption-expenditure-multi-person-households-per-month/inputs/2558d188b288bfbf8520bfc599ea514107b094a37b64e32f0aca3c66506cb8d0.json",
+      "year": "2024",
+      "winners": [
+        "埼玉県"
+      ],
+      "fixedCopyCreated": false,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "a-current-liabilities-balance-multi-person-households-per-household",
+      "sha256": "68463f86f9b5b919e06c09a2e0c0e40adb6ccb5416a7760ad8e9f6bd97cc7d36",
+      "inputSha256": "4a638feb9171e989595102762585f4083b4eae74d4d5fdccc102ebc036002bec",
+      "bytes": 113742,
+      "inputBytes": 7631,
+      "imageKey": "note/covers/a-current-liabilities-balance-multi-person-households-per-household/revisions/68463f86f9b5b919e06c09a2e0c0e40adb6ccb5416a7760ad8e9f6bd97cc7d36.png",
+      "inputKey": "note/covers/a-current-liabilities-balance-multi-person-households-per-household/inputs/4a638feb9171e989595102762585f4083b4eae74d4d5fdccc102ebc036002bec.json",
+      "year": "2019",
+      "winners": [
+        "神奈川県"
+      ],
+      "fixedCopyCreated": false,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "a-day-time-population",
+      "sha256": "f83fbad11d2ff5798a882cd9d30a9b1206d80a6378001c024942b00929ac0cf5",
+      "inputSha256": "28315b3852ccb0f4705cfff7c81c022dbff40ad351790453e2b9caf2ffe0921c",
+      "bytes": 110175,
+      "inputBytes": 7519,
+      "imageKey": "note/covers/a-day-time-population/revisions/f83fbad11d2ff5798a882cd9d30a9b1206d80a6378001c024942b00929ac0cf5.png",
+      "inputKey": "note/covers/a-day-time-population/inputs/28315b3852ccb0f4705cfff7c81c022dbff40ad351790453e2b9caf2ffe0921c.json",
+      "year": "2020",
+      "winners": [
+        "東京都"
+      ],
+      "fixedCopyCreated": false,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "a-electricity-generation-capacity",
+      "sha256": "c5907a578ebd2a8928d90fbfbfc9a3e13ab1e9ce23b551b986e5d1b80219ca4f",
+      "inputSha256": "3aef386365457edefc1c7c46f0f227ec8b2c86497bd51c8d38bae33b483e7e07",
+      "bytes": 112233,
+      "inputBytes": 7628,
+      "imageKey": "note/covers/a-electricity-generation-capacity/revisions/c5907a578ebd2a8928d90fbfbfc9a3e13ab1e9ce23b551b986e5d1b80219ca4f.png",
+      "inputKey": "note/covers/a-electricity-generation-capacity/inputs/3aef386365457edefc1c7c46f0f227ec8b2c86497bd51c8d38bae33b483e7e07.json",
+      "year": "2023",
+      "winners": [
+        "千葉県"
+      ],
+      "fixedCopyCreated": false,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "a-general-households",
+      "sha256": "74d6672e9ca6a617271b3071fd52acb3c7af7a9bc9df33b01c05c893062431e9",
+      "inputSha256": "ae6a73c6367c6e1e824a107b61087e20702a468dc613da636999dda0c683b522",
+      "bytes": 114334,
+      "inputBytes": 7296,
+      "imageKey": "note/covers/a-general-households/revisions/74d6672e9ca6a617271b3071fd52acb3c7af7a9bc9df33b01c05c893062431e9.png",
+      "inputKey": "note/covers/a-general-households/inputs/ae6a73c6367c6e1e824a107b61087e20702a468dc613da636999dda0c683b522.json",
+      "year": "2020",
+      "winners": [
+        "東京都"
+      ],
+      "fixedCopyCreated": false,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "a-late-elderly-medical-expense-per-insured",
+      "sha256": "37836c20cb0f82da4d0f0bfc14486b510103a59038459cbba7a6af7944fecc0b",
+      "inputSha256": "d1c062b14eb5696cb37549d0bb47ee8f767e4b9ac3a1c5d9bd3907e9a228d4b8",
+      "bytes": 114726,
+      "inputBytes": 7662,
+      "imageKey": "note/covers/a-late-elderly-medical-expense-per-insured/revisions/37836c20cb0f82da4d0f0bfc14486b510103a59038459cbba7a6af7944fecc0b.png",
+      "inputKey": "note/covers/a-late-elderly-medical-expense-per-insured/inputs/d1c062b14eb5696cb37549d0bb47ee8f767e4b9ac3a1c5d9bd3907e9a228d4b8.json",
+      "year": "2023",
+      "winners": [
+        "福岡県"
+      ],
+      "fixedCopyCreated": false,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "a-number-of-establishments-manufacturing",
+      "sha256": "ad6654a1922d548a42ae10b954218c7ca5de390ecc6786bf14a5a1057e5484cb",
+      "inputSha256": "920f129f61ab440b66a1f5e6bf813a24939a3b51b1c926c7175a96e44930580f",
+      "bytes": 113529,
+      "inputBytes": 7492,
+      "imageKey": "note/covers/a-number-of-establishments-manufacturing/revisions/ad6654a1922d548a42ae10b954218c7ca5de390ecc6786bf14a5a1057e5484cb.png",
+      "inputKey": "note/covers/a-number-of-establishments-manufacturing/inputs/920f129f61ab440b66a1f5e6bf813a24939a3b51b1c926c7175a96e44930580f.json",
+      "year": "2014",
+      "winners": [
+        "東京都"
+      ],
+      "fixedCopyCreated": false,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "a-minimum-wage-by-region",
+      "sha256": "c5b34fce73134686689976bc1d3f764907bd8e87ad1744baa45fb278ca9d2036",
+      "inputSha256": "d2ad4a3f4486f37d4f1c12ff586c36c74496c1860d576a7bf7f0b569573f21c6",
+      "bytes": 113347,
+      "inputBytes": 7402,
+      "imageKey": "note/covers/a-minimum-wage-by-region/revisions/c5b34fce73134686689976bc1d3f764907bd8e87ad1744baa45fb278ca9d2036.png",
+      "inputKey": "note/covers/a-minimum-wage-by-region/inputs/d2ad4a3f4486f37d4f1c12ff586c36c74496c1860d576a7bf7f0b569573f21c6.json",
+      "year": "2024",
+      "winners": [
+        "東京都"
+      ],
+      "fixedCopyCreated": false,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "a-room-utilization-rate",
+      "sha256": "04925ab6a262872ff58c4e0b55668c1d79ff5a6baa36584031eea1d0dc69cc23",
+      "inputSha256": "9bc0ac3ef654cb2584f830359884eaad9646e6985e502a43db370e585323b56d",
+      "bytes": 115490,
+      "inputBytes": 7379,
+      "imageKey": "note/covers/a-room-utilization-rate/revisions/04925ab6a262872ff58c4e0b55668c1d79ff5a6baa36584031eea1d0dc69cc23.png",
+      "inputKey": "note/covers/a-room-utilization-rate/inputs/9bc0ac3ef654cb2584f830359884eaad9646e6985e502a43db370e585323b56d.json",
+      "year": "2024",
+      "winners": [
+        "東京都"
+      ],
+      "fixedCopyCreated": false,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "a-total-fertility-rate",
+      "sha256": "a031fd67b72cd8b1585fc160b02bac558a5f52bc45c7b4b6b6930526125902a9",
+      "inputSha256": "50541b9bc8df33a4b0dc3744011c46b9cba067ddc937639be564ea63afc7d7b7",
+      "bytes": 112302,
+      "inputBytes": 7417,
+      "imageKey": "note/covers/a-total-fertility-rate/revisions/a031fd67b72cd8b1585fc160b02bac558a5f52bc45c7b4b6b6930526125902a9.png",
+      "inputKey": "note/covers/a-total-fertility-rate/inputs/50541b9bc8df33a4b0dc3744011c46b9cba067ddc937639be564ea63afc7d7b7.json",
+      "year": "2023",
+      "winners": [
+        "沖縄県"
+      ],
+      "fixedCopyCreated": false,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-n026bb22ad4eb",
+      "sha256": "16693aff1d8d142f417635a44ba201a10d46e4a5f05b2c15b67741cd3cee1ea4",
+      "inputSha256": "ef3e1ac66786f82536c12c9999f8b4675b75de21db7d9cdfcdf3b436d36d0263",
+      "bytes": 113880,
+      "inputBytes": 6548,
+      "imageKey": "note/covers/recovered-n026bb22ad4eb/revisions/16693aff1d8d142f417635a44ba201a10d46e4a5f05b2c15b67741cd3cee1ea4.png",
+      "inputKey": "note/covers/recovered-n026bb22ad4eb/inputs/ef3e1ac66786f82536c12c9999f8b4675b75de21db7d9cdfcdf3b436d36d0263.json",
+      "year": "2021",
+      "winners": [
+        "宮崎県"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-n04c2737daf2c",
+      "sha256": "3fe006d155d3c465276d76e082736b5b0c84ef705dc51943ec8a7bf1baa8d1c8",
+      "inputSha256": "0652995e820dc01c43f88f3e357fce0acf8b09981dafa1b2e2ab6eccea3fc00b",
+      "bytes": 110397,
+      "inputBytes": 6469,
+      "imageKey": "note/covers/recovered-n04c2737daf2c/revisions/3fe006d155d3c465276d76e082736b5b0c84ef705dc51943ec8a7bf1baa8d1c8.png",
+      "inputKey": "note/covers/recovered-n04c2737daf2c/inputs/0652995e820dc01c43f88f3e357fce0acf8b09981dafa1b2e2ab6eccea3fc00b.json",
+      "year": "2021",
+      "winners": [
+        "東京都"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-n0654ddf27920",
+      "sha256": "4ffce4228039b6055d8f33c6fe543c92c03aef43f2f46cd98bd29043d8640186",
+      "inputSha256": "e2d79f706022def3de2bcb6baae6417c9fe59d227105ebdef59b98737d196931",
+      "bytes": 115060,
+      "inputBytes": 6546,
+      "imageKey": "note/covers/recovered-n0654ddf27920/revisions/4ffce4228039b6055d8f33c6fe543c92c03aef43f2f46cd98bd29043d8640186.png",
+      "inputKey": "note/covers/recovered-n0654ddf27920/inputs/e2d79f706022def3de2bcb6baae6417c9fe59d227105ebdef59b98737d196931.json",
+      "year": "2021",
+      "winners": [
+        "東京都"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-n08eb33492a93",
+      "sha256": "ad0048f008171d83ab63c3d584d641d85eba66c8ad812ddeb022fbbe2664491e",
+      "inputSha256": "ae2e9dd1a338f8a858a22098ff791ef4d4ced9c0b3fb4525b566d175011ffb98",
+      "bytes": 113958,
+      "inputBytes": 6571,
+      "imageKey": "note/covers/recovered-n08eb33492a93/revisions/ad0048f008171d83ab63c3d584d641d85eba66c8ad812ddeb022fbbe2664491e.png",
+      "inputKey": "note/covers/recovered-n08eb33492a93/inputs/ae2e9dd1a338f8a858a22098ff791ef4d4ced9c0b3fb4525b566d175011ffb98.json",
+      "year": "2021",
+      "winners": [
+        "神奈川県"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-n0b7373c9648a",
+      "sha256": "9ed447223ef6890fdd547dc65ff8a2c6648148ad6f43ffe3eed8ceebe9430f6a",
+      "inputSha256": "209f6302a74ff0c38d48939735852b3dcdc33b17b3f5f54f24f4b5ed296ad1ee",
+      "bytes": 114745,
+      "inputBytes": 6508,
+      "imageKey": "note/covers/recovered-n0b7373c9648a/revisions/9ed447223ef6890fdd547dc65ff8a2c6648148ad6f43ffe3eed8ceebe9430f6a.png",
+      "inputKey": "note/covers/recovered-n0b7373c9648a/inputs/209f6302a74ff0c38d48939735852b3dcdc33b17b3f5f54f24f4b5ed296ad1ee.json",
+      "year": "2021",
+      "winners": [
+        "愛知県"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-n14f716fcd76d",
+      "sha256": "5a2218b8713803e1b604bd25f396565d65042fc5267ab6efd00a239aada79e9f",
+      "inputSha256": "01886613f817e0085b771b5e2fa9be2dbee521110a30c7015e35bf761bd9b22b",
+      "bytes": 113444,
+      "inputBytes": 6492,
+      "imageKey": "note/covers/recovered-n14f716fcd76d/revisions/5a2218b8713803e1b604bd25f396565d65042fc5267ab6efd00a239aada79e9f.png",
+      "inputKey": "note/covers/recovered-n14f716fcd76d/inputs/01886613f817e0085b771b5e2fa9be2dbee521110a30c7015e35bf761bd9b22b.json",
+      "year": "2021",
+      "winners": [
+        "東京都"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-n1649910097fb",
+      "sha256": "b84e8ee0879e43c376a12f0059460ab0edf4d0fc652d5ec22ea5a8c4fa44e11a",
+      "inputSha256": "b0cc0f244fcf0023daaf2b65559483f86c790fc77ad8fa0f1c13df4599de8ed7",
+      "bytes": 118364,
+      "inputBytes": 6551,
+      "imageKey": "note/covers/recovered-n1649910097fb/revisions/b84e8ee0879e43c376a12f0059460ab0edf4d0fc652d5ec22ea5a8c4fa44e11a.png",
+      "inputKey": "note/covers/recovered-n1649910097fb/inputs/b0cc0f244fcf0023daaf2b65559483f86c790fc77ad8fa0f1c13df4599de8ed7.json",
+      "year": "2021",
+      "winners": [
+        "東京都"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-n250b7aab145f",
+      "sha256": "8805dace712e04220dbf03b47896da5f998a48d7ae030d1bce9bc4c1e3ec3d08",
+      "inputSha256": "79131e3b36fe56d8b8a7deb65980b448907a4c2e6cb4db28e95662d90f3237c9",
+      "bytes": 117308,
+      "inputBytes": 6595,
+      "imageKey": "note/covers/recovered-n250b7aab145f/revisions/8805dace712e04220dbf03b47896da5f998a48d7ae030d1bce9bc4c1e3ec3d08.png",
+      "inputKey": "note/covers/recovered-n250b7aab145f/inputs/79131e3b36fe56d8b8a7deb65980b448907a4c2e6cb4db28e95662d90f3237c9.json",
+      "year": "2021",
+      "winners": [
+        "北海道"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-n279776fbbbb1",
+      "sha256": "4be73b5e2bdd083d423c6c21b3dd05df763f079e8d6b1eeea7865bf719409250",
+      "inputSha256": "8c299af5942441e777bb9a7fbac863fe7e565923617380a1e92c03c86a6d27fc",
+      "bytes": 115055,
+      "inputBytes": 6539,
+      "imageKey": "note/covers/recovered-n279776fbbbb1/revisions/4be73b5e2bdd083d423c6c21b3dd05df763f079e8d6b1eeea7865bf719409250.png",
+      "inputKey": "note/covers/recovered-n279776fbbbb1/inputs/8c299af5942441e777bb9a7fbac863fe7e565923617380a1e92c03c86a6d27fc.json",
+      "year": "2021",
+      "winners": [
+        "東京都"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-n27cb4242cb67",
+      "sha256": "050025d358c16ba770eb43bfab5589f2c6b232c1468a27ce89a949c8f1f3b6eb",
+      "inputSha256": "cf52dc506dde47f36eef70c9defa79b69be863effdb1364034f9ecbba8a7977b",
+      "bytes": 113074,
+      "inputBytes": 6474,
+      "imageKey": "note/covers/recovered-n27cb4242cb67/revisions/050025d358c16ba770eb43bfab5589f2c6b232c1468a27ce89a949c8f1f3b6eb.png",
+      "inputKey": "note/covers/recovered-n27cb4242cb67/inputs/cf52dc506dde47f36eef70c9defa79b69be863effdb1364034f9ecbba8a7977b.json",
+      "year": "2021",
+      "winners": [
+        "香川県"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-n285e0ba282d0",
+      "sha256": "890faff6440958ef6e958d61254092245477b33e3af09c641d2dc0c2cf3d4688",
+      "inputSha256": "0317b2c7563044546c505f71a699396f38c6feef6034a8d1304e028e0350aa1f",
+      "bytes": 125845,
+      "inputBytes": 6801,
+      "imageKey": "note/covers/recovered-n285e0ba282d0/revisions/890faff6440958ef6e958d61254092245477b33e3af09c641d2dc0c2cf3d4688.png",
+      "inputKey": "note/covers/recovered-n285e0ba282d0/inputs/0317b2c7563044546c505f71a699396f38c6feef6034a8d1304e028e0350aa1f.json",
+      "year": "2021",
+      "winners": [
+        "東京都"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-n28943c36410a",
+      "sha256": "0b77f7dea827f27fd6fa77ccad5b84bbce6c6398d8e29eac36bdf4214484807f",
+      "inputSha256": "de813fe3fd5ad7dec92df0127f14affec98bfe2eb93b084d7a2e778297cbc3cd",
+      "bytes": 117466,
+      "inputBytes": 6622,
+      "imageKey": "note/covers/recovered-n28943c36410a/revisions/0b77f7dea827f27fd6fa77ccad5b84bbce6c6398d8e29eac36bdf4214484807f.png",
+      "inputKey": "note/covers/recovered-n28943c36410a/inputs/de813fe3fd5ad7dec92df0127f14affec98bfe2eb93b084d7a2e778297cbc3cd.json",
+      "year": "2021",
+      "winners": [
+        "東京都"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-n361a963fb079",
+      "sha256": "02233a3a3128f6fbf9bf4ec89e28783eb750c48153a6d008e9ea518ae0fb9079",
+      "inputSha256": "7eded7a3504f1589a38b256fa9864dfc4a037a48a7f78b54e411b99ad76e4b9e",
+      "bytes": 111832,
+      "inputBytes": 6516,
+      "imageKey": "note/covers/recovered-n361a963fb079/revisions/02233a3a3128f6fbf9bf4ec89e28783eb750c48153a6d008e9ea518ae0fb9079.png",
+      "inputKey": "note/covers/recovered-n361a963fb079/inputs/7eded7a3504f1589a38b256fa9864dfc4a037a48a7f78b54e411b99ad76e4b9e.json",
+      "year": "2021",
+      "winners": [
+        "沖縄県"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-n36624f1c4134",
+      "sha256": "66439c84f68410cdae0cd362bc96b20fca443df57518c67f9618301f4783db0e",
+      "inputSha256": "b464083954f861aff6d8f0c49885f96a4ea8c2c11cd1845776b67ab4bf45a870",
+      "bytes": 119231,
+      "inputBytes": 6612,
+      "imageKey": "note/covers/recovered-n36624f1c4134/revisions/66439c84f68410cdae0cd362bc96b20fca443df57518c67f9618301f4783db0e.png",
+      "inputKey": "note/covers/recovered-n36624f1c4134/inputs/b464083954f861aff6d8f0c49885f96a4ea8c2c11cd1845776b67ab4bf45a870.json",
+      "year": "2021",
+      "winners": [
+        "東京都"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-n3a94353f31aa",
+      "sha256": "a7759bb10557d2d999de348b5184fa939628d0c101269b440ac9039ed05c32b8",
+      "inputSha256": "d8b35e65caab8786f776485a20ef93493bb70ea5820dcfd1d86011e6fe5482da",
+      "bytes": 117437,
+      "inputBytes": 6596,
+      "imageKey": "note/covers/recovered-n3a94353f31aa/revisions/a7759bb10557d2d999de348b5184fa939628d0c101269b440ac9039ed05c32b8.png",
+      "inputKey": "note/covers/recovered-n3a94353f31aa/inputs/d8b35e65caab8786f776485a20ef93493bb70ea5820dcfd1d86011e6fe5482da.json",
+      "year": "2021",
+      "winners": [
+        "鹿児島県"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-n3e67c2f80ec1",
+      "sha256": "07c58375dd98b7970242c863b861866f2b9706e30a6ed1ca60cbdb72e2e72288",
+      "inputSha256": "e3c15344e85a8eece6fc56bc877a1826e39a4b14fd28c1d203555ca771cbde59",
+      "bytes": 126054,
+      "inputBytes": 6725,
+      "imageKey": "note/covers/recovered-n3e67c2f80ec1/revisions/07c58375dd98b7970242c863b861866f2b9706e30a6ed1ca60cbdb72e2e72288.png",
+      "inputKey": "note/covers/recovered-n3e67c2f80ec1/inputs/e3c15344e85a8eece6fc56bc877a1826e39a4b14fd28c1d203555ca771cbde59.json",
+      "year": "2021",
+      "winners": [
+        "群馬県"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-n3e69a23bb946",
+      "sha256": "a7c30b292c331de8448a004558025f8758e3db2b578c36ed278490cad6205e2e",
+      "inputSha256": "e70f25f6c5afd35422d8203238b79f648369b1d7d98c34c28e4fe3f2f634c3d6",
+      "bytes": 117813,
+      "inputBytes": 6587,
+      "imageKey": "note/covers/recovered-n3e69a23bb946/revisions/a7c30b292c331de8448a004558025f8758e3db2b578c36ed278490cad6205e2e.png",
+      "inputKey": "note/covers/recovered-n3e69a23bb946/inputs/e70f25f6c5afd35422d8203238b79f648369b1d7d98c34c28e4fe3f2f634c3d6.json",
+      "year": "2021",
+      "winners": [
+        "秋田県"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-n4d38db115f82",
+      "sha256": "afd3f6c5476c3aecd522df52e2e77623817e502bf18e236391a2376440de3f2c",
+      "inputSha256": "00bea7e1d49bb542d9edd87e3ac9fa5736f1024054ccfaabc839e97c2d25002b",
+      "bytes": 119729,
+      "inputBytes": 6556,
+      "imageKey": "note/covers/recovered-n4d38db115f82/revisions/afd3f6c5476c3aecd522df52e2e77623817e502bf18e236391a2376440de3f2c.png",
+      "inputKey": "note/covers/recovered-n4d38db115f82/inputs/00bea7e1d49bb542d9edd87e3ac9fa5736f1024054ccfaabc839e97c2d25002b.json",
+      "year": "2021",
+      "winners": [
+        "北海道"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-n4e1e67f70686",
+      "sha256": "f876b4209bdd2eeb1f033b405f7c6eed2868a0bc256a25e430973a72fc8b4a08",
+      "inputSha256": "cbf1380ebcf5b9172c70c359f9211f0600289556c9f81333deb8b96ad04bee4d",
+      "bytes": 125430,
+      "inputBytes": 6759,
+      "imageKey": "note/covers/recovered-n4e1e67f70686/revisions/f876b4209bdd2eeb1f033b405f7c6eed2868a0bc256a25e430973a72fc8b4a08.png",
+      "inputKey": "note/covers/recovered-n4e1e67f70686/inputs/cbf1380ebcf5b9172c70c359f9211f0600289556c9f81333deb8b96ad04bee4d.json",
+      "year": "2021",
+      "winners": [
+        "東京都",
+        "神奈川県"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-n51f946877627",
+      "sha256": "0537fd1d131e32d7d5c3339552c5e4c508e7ffadb04405eacf4792b54e8d62ca",
+      "inputSha256": "5ae852cfd3d7053e5c1dc88f86219906bb8924e4c735ff892910527e2772b4a1",
+      "bytes": 127510,
+      "inputBytes": 6692,
+      "imageKey": "note/covers/recovered-n51f946877627/revisions/0537fd1d131e32d7d5c3339552c5e4c508e7ffadb04405eacf4792b54e8d62ca.png",
+      "inputKey": "note/covers/recovered-n51f946877627/inputs/5ae852cfd3d7053e5c1dc88f86219906bb8924e4c735ff892910527e2772b4a1.json",
+      "year": "2021",
+      "winners": [
+        "愛知県"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-n523b6fbeabdf",
+      "sha256": "ab100c8e55ba0ba1d975000c6092b8250788bcaed2433229a2f06089f40a48f6",
+      "inputSha256": "259e6d615074a153b2b3c626d5464889d58d920df8593850e25c922e15e1452a",
+      "bytes": 113794,
+      "inputBytes": 6491,
+      "imageKey": "note/covers/recovered-n523b6fbeabdf/revisions/ab100c8e55ba0ba1d975000c6092b8250788bcaed2433229a2f06089f40a48f6.png",
+      "inputKey": "note/covers/recovered-n523b6fbeabdf/inputs/259e6d615074a153b2b3c626d5464889d58d920df8593850e25c922e15e1452a.json",
+      "year": "2021",
+      "winners": [
+        "広島県"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-n55cd6de6a733",
+      "sha256": "9c403607b329437f2d90382fa6f165f6faf3da617017660eb1ad43d8b9d56ccd",
+      "inputSha256": "3013853219212e4282bdec471f9cebfa94b02227a36cbbacc1bae19289c6b419",
+      "bytes": 111386,
+      "inputBytes": 6499,
+      "imageKey": "note/covers/recovered-n55cd6de6a733/revisions/9c403607b329437f2d90382fa6f165f6faf3da617017660eb1ad43d8b9d56ccd.png",
+      "inputKey": "note/covers/recovered-n55cd6de6a733/inputs/3013853219212e4282bdec471f9cebfa94b02227a36cbbacc1bae19289c6b419.json",
+      "year": "2021",
+      "winners": [
+        "神奈川県"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-n583a06d171e1",
+      "sha256": "446f2dfa1f498034494f2ba3efc9cf66e0b0cfcd032affbe0e9f4c335dc3ed16",
+      "inputSha256": "a8b7d2f045b0280360be3c93221fb1e0eddf920cb18ca72392242815bda6f0bb",
+      "bytes": 110393,
+      "inputBytes": 6522,
+      "imageKey": "note/covers/recovered-n583a06d171e1/revisions/446f2dfa1f498034494f2ba3efc9cf66e0b0cfcd032affbe0e9f4c335dc3ed16.png",
+      "inputKey": "note/covers/recovered-n583a06d171e1/inputs/a8b7d2f045b0280360be3c93221fb1e0eddf920cb18ca72392242815bda6f0bb.json",
+      "year": "2021",
+      "winners": [
+        "島根県"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-n578b6e871067",
+      "sha256": "10b47148ae171f463cb93459a1596a0ad543ead85fdfe9ae6db8819dedbc9a01",
+      "inputSha256": "ac0eea76877ef3b055c7aa46a32569da5b7bcf3c0240218d30f2e74a62fa756c",
+      "bytes": 124132,
+      "inputBytes": 6690,
+      "imageKey": "note/covers/recovered-n578b6e871067/revisions/10b47148ae171f463cb93459a1596a0ad543ead85fdfe9ae6db8819dedbc9a01.png",
+      "inputKey": "note/covers/recovered-n578b6e871067/inputs/ac0eea76877ef3b055c7aa46a32569da5b7bcf3c0240218d30f2e74a62fa756c.json",
+      "year": "2021",
+      "winners": [
+        "東京都"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-n5867882dd7ab",
+      "sha256": "31a75df16cba5aa5aa7b43ec6a0600c9b5561ec4acc12ab9b189869f2999d1b6",
+      "inputSha256": "dbb1dacfeab0eede9ea04a36d78dfac3300755cbad91d7f13b5bd4a2c36894e0",
+      "bytes": 125583,
+      "inputBytes": 6678,
+      "imageKey": "note/covers/recovered-n5867882dd7ab/revisions/31a75df16cba5aa5aa7b43ec6a0600c9b5561ec4acc12ab9b189869f2999d1b6.png",
+      "inputKey": "note/covers/recovered-n5867882dd7ab/inputs/dbb1dacfeab0eede9ea04a36d78dfac3300755cbad91d7f13b5bd4a2c36894e0.json",
+      "year": "2021",
+      "winners": [
+        "東京都"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-n598a096ecbff",
+      "sha256": "50a8c21f3c80a360c0228e20f1390abdb51cc967620c4cb194c2a835babd14aa",
+      "inputSha256": "a5abc31149191dd52065229ce5c5b90fe7d3520836bdaad3c0a70ee8d6dee887",
+      "bytes": 117993,
+      "inputBytes": 6539,
+      "imageKey": "note/covers/recovered-n598a096ecbff/revisions/50a8c21f3c80a360c0228e20f1390abdb51cc967620c4cb194c2a835babd14aa.png",
+      "inputKey": "note/covers/recovered-n598a096ecbff/inputs/a5abc31149191dd52065229ce5c5b90fe7d3520836bdaad3c0a70ee8d6dee887.json",
+      "year": "2021",
+      "winners": [
+        "神奈川県"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-n5ddcfb6bf233",
+      "sha256": "c9f0a9ec574524e17bf48dea6fc0c7ecaec7a547d4dcf6519fa63d06956398e1",
+      "inputSha256": "af828a0c39b85b3c7af1b8a510e4433b23c4e2fc7d0bb1c88a51f7cfcc07f1bb",
+      "bytes": 110839,
+      "inputBytes": 6491,
+      "imageKey": "note/covers/recovered-n5ddcfb6bf233/revisions/c9f0a9ec574524e17bf48dea6fc0c7ecaec7a547d4dcf6519fa63d06956398e1.png",
+      "inputKey": "note/covers/recovered-n5ddcfb6bf233/inputs/af828a0c39b85b3c7af1b8a510e4433b23c4e2fc7d0bb1c88a51f7cfcc07f1bb.json",
+      "year": "2021",
+      "winners": [
+        "佐賀県"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-n5ced125edb74",
+      "sha256": "458f4709a3852824797b01a0cb4b24eebba3759c3de0e116a40056813b564dd5",
+      "inputSha256": "92e949058310b8d66ef107d9c1b19e7086d6bc7f0301291578edd9aaba56ab4f",
+      "bytes": 113913,
+      "inputBytes": 6490,
+      "imageKey": "note/covers/recovered-n5ced125edb74/revisions/458f4709a3852824797b01a0cb4b24eebba3759c3de0e116a40056813b564dd5.png",
+      "inputKey": "note/covers/recovered-n5ced125edb74/inputs/92e949058310b8d66ef107d9c1b19e7086d6bc7f0301291578edd9aaba56ab4f.json",
+      "year": "2021",
+      "winners": [
+        "愛知県"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-n6305d990f2d2",
+      "sha256": "a6d6ad70c9baec5d82c9dddcde683e215791628dbf79f5402ae9acdced209db3",
+      "inputSha256": "32d3d30f13162d8881ed4ad76d4032aa89c3a2e4a757d92c459ae128ddbabd29",
+      "bytes": 119171,
+      "inputBytes": 6620,
+      "imageKey": "note/covers/recovered-n6305d990f2d2/revisions/a6d6ad70c9baec5d82c9dddcde683e215791628dbf79f5402ae9acdced209db3.png",
+      "inputKey": "note/covers/recovered-n6305d990f2d2/inputs/32d3d30f13162d8881ed4ad76d4032aa89c3a2e4a757d92c459ae128ddbabd29.json",
+      "year": "2021",
+      "winners": [
+        "東京都",
+        "鹿児島県"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-n67729e8be7c4",
+      "sha256": "88f1b5e64b773d3e88e2ec97307a3cb677a8608bf1d6fe52dcdc433b85ec0b29",
+      "inputSha256": "9edba423e5e4c74761d3ff1848e9c05f00e16f112498c76c1cd833f75337cf12",
+      "bytes": 116226,
+      "inputBytes": 6551,
+      "imageKey": "note/covers/recovered-n67729e8be7c4/revisions/88f1b5e64b773d3e88e2ec97307a3cb677a8608bf1d6fe52dcdc433b85ec0b29.png",
+      "inputKey": "note/covers/recovered-n67729e8be7c4/inputs/9edba423e5e4c74761d3ff1848e9c05f00e16f112498c76c1cd833f75337cf12.json",
+      "year": "2021",
+      "winners": [
+        "宮城県"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-n724eab276711",
+      "sha256": "97862c59e3fad6998da4cf6023185d8ccbdfc3457202fe779a5dd369079c88cf",
+      "inputSha256": "0a5441d4b3e1272d8d9eb50c8ae4fc7d80ecddc681de154a3ea23297c53a55b5",
+      "bytes": 120454,
+      "inputBytes": 6620,
+      "imageKey": "note/covers/recovered-n724eab276711/revisions/97862c59e3fad6998da4cf6023185d8ccbdfc3457202fe779a5dd369079c88cf.png",
+      "inputKey": "note/covers/recovered-n724eab276711/inputs/0a5441d4b3e1272d8d9eb50c8ae4fc7d80ecddc681de154a3ea23297c53a55b5.json",
+      "year": "2021",
+      "winners": [
+        "東京都"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-n765fc88c67ef",
+      "sha256": "bdb1a95c773c04a35de673d93993a17973ce453d727efb641dd88eb28d856d9f",
+      "inputSha256": "5edc4e41b9aa6cb70cc093f2bec3f5976286adf1324d8c951595ecc605b191ac",
+      "bytes": 115466,
+      "inputBytes": 6557,
+      "imageKey": "note/covers/recovered-n765fc88c67ef/revisions/bdb1a95c773c04a35de673d93993a17973ce453d727efb641dd88eb28d856d9f.png",
+      "inputKey": "note/covers/recovered-n765fc88c67ef/inputs/5edc4e41b9aa6cb70cc093f2bec3f5976286adf1324d8c951595ecc605b191ac.json",
+      "year": "2021",
+      "winners": [
+        "東京都"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-n7ff099157abd",
+      "sha256": "0eb0c496d6e1269191a1b2339ddf6c9d72f812e9502fabab10454b59dd22c879",
+      "inputSha256": "d98714ea544bcf859c662c1d33d34cefa0c6f9cd298709f58fc3d6c83dffd174",
+      "bytes": 120323,
+      "inputBytes": 6636,
+      "imageKey": "note/covers/recovered-n7ff099157abd/revisions/0eb0c496d6e1269191a1b2339ddf6c9d72f812e9502fabab10454b59dd22c879.png",
+      "inputKey": "note/covers/recovered-n7ff099157abd/inputs/d98714ea544bcf859c662c1d33d34cefa0c6f9cd298709f58fc3d6c83dffd174.json",
+      "year": "2021",
+      "winners": [
+        "東京都"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-n7ea3a816d39b",
+      "sha256": "31a9698aea316d07964c0e35903b6e4ee61f9454989d8372c97f376f9c70f0c2",
+      "inputSha256": "77788758c91f4a076eab3703b6bfee00ca3cf133fd4e02d4171551592e3c7748",
+      "bytes": 117783,
+      "inputBytes": 6657,
+      "imageKey": "note/covers/recovered-n7ea3a816d39b/revisions/31a9698aea316d07964c0e35903b6e4ee61f9454989d8372c97f376f9c70f0c2.png",
+      "inputKey": "note/covers/recovered-n7ea3a816d39b/inputs/77788758c91f4a076eab3703b6bfee00ca3cf133fd4e02d4171551592e3c7748.json",
+      "year": "2001",
+      "winners": [
+        "埼玉県"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-n827191af8c1c",
+      "sha256": "bbaee4912589acf1ba38c1761c285c3908227d1866efa7e0eb7f36db49ddc86e",
+      "inputSha256": "12f859098b22d9d6108d3f8598d17cd03bb1c7ea451d5ce92bee055222605546",
+      "bytes": 117166,
+      "inputBytes": 6589,
+      "imageKey": "note/covers/recovered-n827191af8c1c/revisions/bbaee4912589acf1ba38c1761c285c3908227d1866efa7e0eb7f36db49ddc86e.png",
+      "inputKey": "note/covers/recovered-n827191af8c1c/inputs/12f859098b22d9d6108d3f8598d17cd03bb1c7ea451d5ce92bee055222605546.json",
+      "year": "2021",
+      "winners": [
+        "京都府"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-n88d2a55a9e36",
+      "sha256": "0cd2c4024b787261439d95d32d2ca9be18747fb97a30eb1ab8d8b25b7050a37c",
+      "inputSha256": "6fa47eea676923b8f4b250d0664972a67d190b23a374ac6fd085b2096681c148",
+      "bytes": 108926,
+      "inputBytes": 6465,
+      "imageKey": "note/covers/recovered-n88d2a55a9e36/revisions/0cd2c4024b787261439d95d32d2ca9be18747fb97a30eb1ab8d8b25b7050a37c.png",
+      "inputKey": "note/covers/recovered-n88d2a55a9e36/inputs/6fa47eea676923b8f4b250d0664972a67d190b23a374ac6fd085b2096681c148.json",
+      "year": "2021",
+      "winners": [
+        "山口県"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-n97bd102186c6",
+      "sha256": "bb0d0c6d134f6b426459981865949d03db07c0123f4dd803011e82d629e3b692",
+      "inputSha256": "cbac6ffc82bd97c18c92f3863f0226386a23c206dc57b75c52511ab37726236f",
+      "bytes": 118196,
+      "inputBytes": 6520,
+      "imageKey": "note/covers/recovered-n97bd102186c6/revisions/bb0d0c6d134f6b426459981865949d03db07c0123f4dd803011e82d629e3b692.png",
+      "inputKey": "note/covers/recovered-n97bd102186c6/inputs/cbac6ffc82bd97c18c92f3863f0226386a23c206dc57b75c52511ab37726236f.json",
+      "year": "2021",
+      "winners": [
+        "沖縄県"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-n8df3cf170cf4",
+      "sha256": "93bcdf6fdb114f1806d8d7a042fbeef32dd853c540c6a6f8a074fb38cbd1850e",
+      "inputSha256": "93c8b6898db0021eb70c969219bb96f8f0e6a09dd56936dba8222eef8ed1b92e",
+      "bytes": 113326,
+      "inputBytes": 6529,
+      "imageKey": "note/covers/recovered-n8df3cf170cf4/revisions/93bcdf6fdb114f1806d8d7a042fbeef32dd853c540c6a6f8a074fb38cbd1850e.png",
+      "inputKey": "note/covers/recovered-n8df3cf170cf4/inputs/93c8b6898db0021eb70c969219bb96f8f0e6a09dd56936dba8222eef8ed1b92e.json",
+      "year": "2021",
+      "winners": [
+        "山口県"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-n991a75be91ce",
+      "sha256": "4f6c1c7820163d924cc537468a81f61a1af1a0e41b3cc9c65330f496b781f3b6",
+      "inputSha256": "09dffb59b77cec2f8f4fb606e4c85ae2ac2486cbe663bbdfd1f229b615a84c40",
+      "bytes": 113614,
+      "inputBytes": 6568,
+      "imageKey": "note/covers/recovered-n991a75be91ce/revisions/4f6c1c7820163d924cc537468a81f61a1af1a0e41b3cc9c65330f496b781f3b6.png",
+      "inputKey": "note/covers/recovered-n991a75be91ce/inputs/09dffb59b77cec2f8f4fb606e4c85ae2ac2486cbe663bbdfd1f229b615a84c40.json",
+      "year": "2021",
+      "winners": [
+        "愛知県"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-n9dcb0680cea6",
+      "sha256": "fccb5086e64458583d008a13f8b1d2c6a2ac32054dfa1c453653d177932b9b66",
+      "inputSha256": "b8785bc989c4883ff52dd83452a29a799a41c06e3963efe9f45475efcbf3cf1c",
+      "bytes": 120303,
+      "inputBytes": 6571,
+      "imageKey": "note/covers/recovered-n9dcb0680cea6/revisions/fccb5086e64458583d008a13f8b1d2c6a2ac32054dfa1c453653d177932b9b66.png",
+      "inputKey": "note/covers/recovered-n9dcb0680cea6/inputs/b8785bc989c4883ff52dd83452a29a799a41c06e3963efe9f45475efcbf3cf1c.json",
+      "year": "2021",
+      "winners": [
+        "東京都"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-na2720854b1d9",
+      "sha256": "d41338f808a0fba9cb3061ce40e9eb08c575d950589ca67f561045147f3e716d",
+      "inputSha256": "4832e27f66e0441949d9eeddd23bb11723ebe80b2ac815bbbfebecc19cdc84e5",
+      "bytes": 116055,
+      "inputBytes": 6512,
+      "imageKey": "note/covers/recovered-na2720854b1d9/revisions/d41338f808a0fba9cb3061ce40e9eb08c575d950589ca67f561045147f3e716d.png",
+      "inputKey": "note/covers/recovered-na2720854b1d9/inputs/4832e27f66e0441949d9eeddd23bb11723ebe80b2ac815bbbfebecc19cdc84e5.json",
+      "year": "2021",
+      "winners": [
+        "北海道"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-na25ccb15a6cb",
+      "sha256": "c0ac433067bb841aca03f0ebf58ac9df08cae7121b1090a479ba6228f52bebbb",
+      "inputSha256": "4872d1e89d3acf006535a7bb8bc500a60730bfac5730b8b0840010fc51197fbc",
+      "bytes": 120027,
+      "inputBytes": 6666,
+      "imageKey": "note/covers/recovered-na25ccb15a6cb/revisions/c0ac433067bb841aca03f0ebf58ac9df08cae7121b1090a479ba6228f52bebbb.png",
+      "inputKey": "note/covers/recovered-na25ccb15a6cb/inputs/4872d1e89d3acf006535a7bb8bc500a60730bfac5730b8b0840010fc51197fbc.json",
+      "year": "2021",
+      "winners": [
+        "東京都"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-naa474d085c7b",
+      "sha256": "56080b282d73732bc510cf72f81590228a3073be54799c297cf5e6d6a29e7279",
+      "inputSha256": "3cb42e8ba1626cdc4e854331aabe10515047a3e6af01a362274475d2826bc322",
+      "bytes": 112391,
+      "inputBytes": 6480,
+      "imageKey": "note/covers/recovered-naa474d085c7b/revisions/56080b282d73732bc510cf72f81590228a3073be54799c297cf5e6d6a29e7279.png",
+      "inputKey": "note/covers/recovered-naa474d085c7b/inputs/3cb42e8ba1626cdc4e854331aabe10515047a3e6af01a362274475d2826bc322.json",
+      "year": "2021",
+      "winners": [
+        "広島県"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-nabd65a1c893d",
+      "sha256": "225a842b3d3bf69fec4fb932b806c1c3fd0c84d654ffd79c9fbddd15f28e9498",
+      "inputSha256": "00779a920a7b4bf0bef6b094c3b7ebdff22fae5b4d56ebbe3b215ea1581fc62a",
+      "bytes": 116089,
+      "inputBytes": 6568,
+      "imageKey": "note/covers/recovered-nabd65a1c893d/revisions/225a842b3d3bf69fec4fb932b806c1c3fd0c84d654ffd79c9fbddd15f28e9498.png",
+      "inputKey": "note/covers/recovered-nabd65a1c893d/inputs/00779a920a7b4bf0bef6b094c3b7ebdff22fae5b4d56ebbe3b215ea1581fc62a.json",
+      "year": "2021",
+      "winners": [
+        "東京都"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-nafc693255794",
+      "sha256": "61ba49cb850c26f8b255a6fe11e451bd2ad4d21a4551aee68462d79c3ae39c06",
+      "inputSha256": "94854ba9927b657b00c74526106382b56f7dee599e074947ed6e6da6906e23e3",
+      "bytes": 118487,
+      "inputBytes": 6587,
+      "imageKey": "note/covers/recovered-nafc693255794/revisions/61ba49cb850c26f8b255a6fe11e451bd2ad4d21a4551aee68462d79c3ae39c06.png",
+      "inputKey": "note/covers/recovered-nafc693255794/inputs/94854ba9927b657b00c74526106382b56f7dee599e074947ed6e6da6906e23e3.json",
+      "year": "2021",
+      "winners": [
+        "東京都"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-nb16c0b751d01",
+      "sha256": "09958c797c520cc3bf28d62b4095ef7cb10c991f9e7b92c2426f6bb8af5ebbc5",
+      "inputSha256": "db0b59e6c4199e401fede9cb8f438ab07d84bcdd50246378019ab50ec2606441",
+      "bytes": 121521,
+      "inputBytes": 6661,
+      "imageKey": "note/covers/recovered-nb16c0b751d01/revisions/09958c797c520cc3bf28d62b4095ef7cb10c991f9e7b92c2426f6bb8af5ebbc5.png",
+      "inputKey": "note/covers/recovered-nb16c0b751d01/inputs/db0b59e6c4199e401fede9cb8f438ab07d84bcdd50246378019ab50ec2606441.json",
+      "year": "2021",
+      "winners": [
+        "東京都"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-nb90f2342ebd8",
+      "sha256": "2dbb586f969a5d00b93a3da90d53e21a60b009431e89f9aad6a8e33c11876702",
+      "inputSha256": "5903cc81fd4dd48c4d8613bc81ebbf4ccafd747871194977eb54372eb4d663dc",
+      "bytes": 119341,
+      "inputBytes": 6637,
+      "imageKey": "note/covers/recovered-nb90f2342ebd8/revisions/2dbb586f969a5d00b93a3da90d53e21a60b009431e89f9aad6a8e33c11876702.png",
+      "inputKey": "note/covers/recovered-nb90f2342ebd8/inputs/5903cc81fd4dd48c4d8613bc81ebbf4ccafd747871194977eb54372eb4d663dc.json",
+      "year": "2021",
+      "winners": [
+        "東京都"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-nbedecc99f3a3",
+      "sha256": "c82d3e18adca918566b9f1a4aaf01fb065381b0352fb45329b061c48deda6be2",
+      "inputSha256": "a1cf0cc57b9afd9ffacf72dfb3f2968111613711a541aed7db574612442125ec",
+      "bytes": 116649,
+      "inputBytes": 6620,
+      "imageKey": "note/covers/recovered-nbedecc99f3a3/revisions/c82d3e18adca918566b9f1a4aaf01fb065381b0352fb45329b061c48deda6be2.png",
+      "inputKey": "note/covers/recovered-nbedecc99f3a3/inputs/a1cf0cc57b9afd9ffacf72dfb3f2968111613711a541aed7db574612442125ec.json",
+      "year": "2021",
+      "winners": [
+        "東京都",
+        "福井県",
+        "滋賀県"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-nbf1373427ca3",
+      "sha256": "772887056755565d93fb81f764fa37cda99aa56401b97e77e24ae3c8d6c9020f",
+      "inputSha256": "3305aedd3438be75878968632442dd7ea80191a3b36228b26edaa1b37cdc3002",
+      "bytes": 124450,
+      "inputBytes": 6674,
+      "imageKey": "note/covers/recovered-nbf1373427ca3/revisions/772887056755565d93fb81f764fa37cda99aa56401b97e77e24ae3c8d6c9020f.png",
+      "inputKey": "note/covers/recovered-nbf1373427ca3/inputs/3305aedd3438be75878968632442dd7ea80191a3b36228b26edaa1b37cdc3002.json",
+      "year": "2021",
+      "winners": [
+        "東京都"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-nc0e7474b34e1",
+      "sha256": "a63b5188a2c6957417e59aabd259d038d6e6b9f3be3e635a2e95a0a3234d4692",
+      "inputSha256": "09f71ab6d1f08b547da83c2ca681b8d8825d15d3813ad77f70dc065eddeb8142",
+      "bytes": 120967,
+      "inputBytes": 6637,
+      "imageKey": "note/covers/recovered-nc0e7474b34e1/revisions/a63b5188a2c6957417e59aabd259d038d6e6b9f3be3e635a2e95a0a3234d4692.png",
+      "inputKey": "note/covers/recovered-nc0e7474b34e1/inputs/09f71ab6d1f08b547da83c2ca681b8d8825d15d3813ad77f70dc065eddeb8142.json",
+      "year": "2021",
+      "winners": [
+        "東京都",
+        "兵庫県"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-nc60f702445f8",
+      "sha256": "2cfadd4d9976ce9d1d40726af1b59ab7a4f65f063dac67c43fb9928bb27f2699",
+      "inputSha256": "5fcb6a0547ba242cf625dadf410bd4320f7b7c99f7f60e9efd6a3a1eba257c6d",
+      "bytes": 116103,
+      "inputBytes": 6563,
+      "imageKey": "note/covers/recovered-nc60f702445f8/revisions/2cfadd4d9976ce9d1d40726af1b59ab7a4f65f063dac67c43fb9928bb27f2699.png",
+      "inputKey": "note/covers/recovered-nc60f702445f8/inputs/5fcb6a0547ba242cf625dadf410bd4320f7b7c99f7f60e9efd6a3a1eba257c6d.json",
+      "year": "2021",
+      "winners": [
+        "東京都"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-ncaddeaf3e2ff",
+      "sha256": "c3f004ed075dd7ba1e4f88d8c6042f2dadb7e839ce5f6cc75e14316c357e7768",
+      "inputSha256": "67fdaed0c0c0ee8a01c152c5b6a3506ea535ca6faa37472972074c4adf03ffe2",
+      "bytes": 111721,
+      "inputBytes": 6500,
+      "imageKey": "note/covers/recovered-ncaddeaf3e2ff/revisions/c3f004ed075dd7ba1e4f88d8c6042f2dadb7e839ce5f6cc75e14316c357e7768.png",
+      "inputKey": "note/covers/recovered-ncaddeaf3e2ff/inputs/67fdaed0c0c0ee8a01c152c5b6a3506ea535ca6faa37472972074c4adf03ffe2.json",
+      "year": "2021",
+      "winners": [
+        "東京都"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-ncf6086199c7d",
+      "sha256": "a22f96c700f38f238bdaa8d2e6e3b88427f42b7884d10921ecf3885d3d47765a",
+      "inputSha256": "26de7728c9120b11dca6479d9d1893e97f18d613f3af2425a7b50ae897d57ae3",
+      "bytes": 125447,
+      "inputBytes": 6707,
+      "imageKey": "note/covers/recovered-ncf6086199c7d/revisions/a22f96c700f38f238bdaa8d2e6e3b88427f42b7884d10921ecf3885d3d47765a.png",
+      "inputKey": "note/covers/recovered-ncf6086199c7d/inputs/26de7728c9120b11dca6479d9d1893e97f18d613f3af2425a7b50ae897d57ae3.json",
+      "year": "2021",
+      "winners": [
+        "東京都"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-nda04ec118c93",
+      "sha256": "368da7496c9dbac011adabe2d1c26338b8d5e6eda7dd66d92d0827aca9b5a3d1",
+      "inputSha256": "5130f3abd4fe55c18a845e75c7dbbcc40ba941b98079bf094c8e84d38b76e33a",
+      "bytes": 118061,
+      "inputBytes": 6614,
+      "imageKey": "note/covers/recovered-nda04ec118c93/revisions/368da7496c9dbac011adabe2d1c26338b8d5e6eda7dd66d92d0827aca9b5a3d1.png",
+      "inputKey": "note/covers/recovered-nda04ec118c93/inputs/5130f3abd4fe55c18a845e75c7dbbcc40ba941b98079bf094c8e84d38b76e33a.json",
+      "year": "2021",
+      "winners": [
+        "愛知県"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-ne3cdb7819c41",
+      "sha256": "d01f2a725cb2d0a7179687fa8837444ed8425492dc1ef1231e81567379071a91",
+      "inputSha256": "33e8b9a878769999456dcf830dadbe997e4d5fbe1250a8fb26cdaa9dc2469d80",
+      "bytes": 117906,
+      "inputBytes": 6618,
+      "imageKey": "note/covers/recovered-ne3cdb7819c41/revisions/d01f2a725cb2d0a7179687fa8837444ed8425492dc1ef1231e81567379071a91.png",
+      "inputKey": "note/covers/recovered-ne3cdb7819c41/inputs/33e8b9a878769999456dcf830dadbe997e4d5fbe1250a8fb26cdaa9dc2469d80.json",
+      "year": "2021",
+      "winners": [
+        "東京都"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-ne4a6ec30706a",
+      "sha256": "db8ff48e121bdee654ee5230ffe385905863ac2fd71c14a48bb478152a06a9da",
+      "inputSha256": "14b4102c9d2b120674059679452758e1cd474f727054fc4e534dba2041b44b2f",
+      "bytes": 114217,
+      "inputBytes": 6559,
+      "imageKey": "note/covers/recovered-ne4a6ec30706a/revisions/db8ff48e121bdee654ee5230ffe385905863ac2fd71c14a48bb478152a06a9da.png",
+      "inputKey": "note/covers/recovered-ne4a6ec30706a/inputs/14b4102c9d2b120674059679452758e1cd474f727054fc4e534dba2041b44b2f.json",
+      "year": "2021",
+      "winners": [
+        "東京都"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-ne5b9d2b01255",
+      "sha256": "3266de14243efd3040e795d8179f8820d73298de1a2ae869296ef5a295b00c52",
+      "inputSha256": "5acb7fc19b67c1b999f6fc1b3174cdf502ce73b5fe07fe5297cc2648cd0c1faa",
+      "bytes": 108920,
+      "inputBytes": 6424,
+      "imageKey": "note/covers/recovered-ne5b9d2b01255/revisions/3266de14243efd3040e795d8179f8820d73298de1a2ae869296ef5a295b00c52.png",
+      "inputKey": "note/covers/recovered-ne5b9d2b01255/inputs/5acb7fc19b67c1b999f6fc1b3174cdf502ce73b5fe07fe5297cc2648cd0c1faa.json",
+      "year": "2021",
+      "winners": [
+        "長崎県"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-ne85980349fda",
+      "sha256": "abafbe5cb0eca2ce436508cc693044e973fab81bfff25c57704dcfbd48b88825",
+      "inputSha256": "48d49356bfb85fb5d9b317f3349c26be2f8ce123367ab3f05cf0c7d9fe5af7f3",
+      "bytes": 116141,
+      "inputBytes": 6626,
+      "imageKey": "note/covers/recovered-ne85980349fda/revisions/abafbe5cb0eca2ce436508cc693044e973fab81bfff25c57704dcfbd48b88825.png",
+      "inputKey": "note/covers/recovered-ne85980349fda/inputs/48d49356bfb85fb5d9b317f3349c26be2f8ce123367ab3f05cf0c7d9fe5af7f3.json",
+      "year": "2021",
+      "winners": [
+        "広島県"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-ne62fa955bcff",
+      "sha256": "19b2a3c33d425abf364ccc954048706f59b6ce56e387a84ec1f6d97ae78f3b7f",
+      "inputSha256": "1d31f27b0b00ca0687f951b0ca415ca02a8ac269676328f8c9080917a970e183",
+      "bytes": 118937,
+      "inputBytes": 6646,
+      "imageKey": "note/covers/recovered-ne62fa955bcff/revisions/19b2a3c33d425abf364ccc954048706f59b6ce56e387a84ec1f6d97ae78f3b7f.png",
+      "inputKey": "note/covers/recovered-ne62fa955bcff/inputs/1d31f27b0b00ca0687f951b0ca415ca02a8ac269676328f8c9080917a970e183.json",
+      "year": "2021",
+      "winners": [
+        "愛知県"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-nead586305cdb",
+      "sha256": "d0101d1797eaf8a414277b98f1d3c46b9bfb93c5d38b11c0841f5b5fa2cb36b1",
+      "inputSha256": "04b57c2e5d2d627e2a0a2c0459d0240b9141cd1c2a89515ddb89c987cefa2c6d",
+      "bytes": 118294,
+      "inputBytes": 6574,
+      "imageKey": "note/covers/recovered-nead586305cdb/revisions/d0101d1797eaf8a414277b98f1d3c46b9bfb93c5d38b11c0841f5b5fa2cb36b1.png",
+      "inputKey": "note/covers/recovered-nead586305cdb/inputs/04b57c2e5d2d627e2a0a2c0459d0240b9141cd1c2a89515ddb89c987cefa2c6d.json",
+      "year": "2021",
+      "winners": [
+        "佐賀県",
+        "鹿児島県"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-nefd814b49c5d",
+      "sha256": "64ad2afa6c8da6b586a83430c71956fd37ab0fd4726af4f67dd8d780a65a01fc",
+      "inputSha256": "3ae68b749f823b98322b5329de4dd6e721c102da7a7762f2a55fc96ea4b7e56e",
+      "bytes": 114979,
+      "inputBytes": 6586,
+      "imageKey": "note/covers/recovered-nefd814b49c5d/revisions/64ad2afa6c8da6b586a83430c71956fd37ab0fd4726af4f67dd8d780a65a01fc.png",
+      "inputKey": "note/covers/recovered-nefd814b49c5d/inputs/3ae68b749f823b98322b5329de4dd6e721c102da7a7762f2a55fc96ea4b7e56e.json",
+      "year": "2021",
+      "winners": [
+        "東京都"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-nf0c533293f5b",
+      "sha256": "f49914aec7de15e7e703f136a40c180aae0aea08a3bbff3346a20253fea9c09d",
+      "inputSha256": "7b8faf6f161a191cfeca9d3a83dc97ce592f943c20e0d928edd3308742330450",
+      "bytes": 120031,
+      "inputBytes": 6627,
+      "imageKey": "note/covers/recovered-nf0c533293f5b/revisions/f49914aec7de15e7e703f136a40c180aae0aea08a3bbff3346a20253fea9c09d.png",
+      "inputKey": "note/covers/recovered-nf0c533293f5b/inputs/7b8faf6f161a191cfeca9d3a83dc97ce592f943c20e0d928edd3308742330450.json",
+      "year": "2021",
+      "winners": [
+        "東京都"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-nf0fc2a7eb326",
+      "sha256": "b54f9d817227ba1cf3bd969af7bf1c568b027d507435e1626d90953eadd3975d",
+      "inputSha256": "6181e51927789bdd5f7cdb234b79c93c2375ab5c9f551d62d5bab6a8918919db",
+      "bytes": 116085,
+      "inputBytes": 6602,
+      "imageKey": "note/covers/recovered-nf0fc2a7eb326/revisions/b54f9d817227ba1cf3bd969af7bf1c568b027d507435e1626d90953eadd3975d.png",
+      "inputKey": "note/covers/recovered-nf0fc2a7eb326/inputs/6181e51927789bdd5f7cdb234b79c93c2375ab5c9f551d62d5bab6a8918919db.json",
+      "year": "2021",
+      "winners": [
+        "京都府"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-nf1a5abab3d5e",
+      "sha256": "b01f0c16598fde08240a9f5d65281d69c3147420a47618620e55e38ccdb730c6",
+      "inputSha256": "eae88110c7c235f79d4467ce31d01eafd1df12984456d08274ba8905f6982b62",
+      "bytes": 118785,
+      "inputBytes": 6620,
+      "imageKey": "note/covers/recovered-nf1a5abab3d5e/revisions/b01f0c16598fde08240a9f5d65281d69c3147420a47618620e55e38ccdb730c6.png",
+      "inputKey": "note/covers/recovered-nf1a5abab3d5e/inputs/eae88110c7c235f79d4467ce31d01eafd1df12984456d08274ba8905f6982b62.json",
+      "year": "2021",
+      "winners": [
+        "東京都"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-nf5b4ced7a736",
+      "sha256": "58f3eab75d5a9096c70466787589abc9392f664cd7d678094b0771572b2ae323",
+      "inputSha256": "59d01d9897466f9bf2bf82185da070f6eec09c8be8d40583c0f6e935e6687981",
+      "bytes": 119284,
+      "inputBytes": 6711,
+      "imageKey": "note/covers/recovered-nf5b4ced7a736/revisions/58f3eab75d5a9096c70466787589abc9392f664cd7d678094b0771572b2ae323.png",
+      "inputKey": "note/covers/recovered-nf5b4ced7a736/inputs/59d01d9897466f9bf2bf82185da070f6eec09c8be8d40583c0f6e935e6687981.json",
+      "year": "2021",
+      "winners": [
+        "島根県"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-nfbdfd99fee1b",
+      "sha256": "7389af2e863ab16886a3fa50e3b818ff9a1c20c6164692cea2ac2a30b8e2325a",
+      "inputSha256": "f225fbd05455f334b55e275fa5ac906185c7743e7336d726a121c8379d815185",
+      "bytes": 123445,
+      "inputBytes": 6682,
+      "imageKey": "note/covers/recovered-nfbdfd99fee1b/revisions/7389af2e863ab16886a3fa50e3b818ff9a1c20c6164692cea2ac2a30b8e2325a.png",
+      "inputKey": "note/covers/recovered-nfbdfd99fee1b/inputs/f225fbd05455f334b55e275fa5ac906185c7743e7336d726a121c8379d815185.json",
+      "year": "2021",
+      "winners": [
+        "東京都"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-nfa4057b9b8de",
+      "sha256": "3d2133a2c75e2441c07439d173b00d58a5a8e1380e24dbfab66e8fc337f931d8",
+      "inputSha256": "32592bdcf3724ef0c900e1149350dec6e8152ed358f9fe16780ab49872784ea5",
+      "bytes": 113434,
+      "inputBytes": 6571,
+      "imageKey": "note/covers/recovered-nfa4057b9b8de/revisions/3d2133a2c75e2441c07439d173b00d58a5a8e1380e24dbfab66e8fc337f931d8.png",
+      "inputKey": "note/covers/recovered-nfa4057b9b8de/inputs/32592bdcf3724ef0c900e1149350dec6e8152ed358f9fe16780ab49872784ea5.json",
+      "year": "2021",
+      "winners": [
+        "富山県",
+        "奈良県",
+        "広島県"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "a-total-overnight-guests",
+      "sha256": "97a443fb80c8d9b9fa608592ea42a42491ae82a5948d404b644116129e7c53f4",
+      "inputSha256": "a2b1ba0b751ce3e96915f36c53e05d16ba483ae6120be0617a8d4afbe0dc426f",
+      "bytes": 115775,
+      "inputBytes": 7591,
+      "imageKey": "note/covers/a-total-overnight-guests/revisions/97a443fb80c8d9b9fa608592ea42a42491ae82a5948d404b644116129e7c53f4.png",
+      "inputKey": "note/covers/a-total-overnight-guests/inputs/a2b1ba0b751ce3e96915f36c53e05d16ba483ae6120be0617a8d4afbe0dc426f.json",
+      "year": "2024",
+      "winners": [
+        "東京都"
+      ],
+      "fixedCopyCreated": false,
+      "unitRepaired": true,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "recovered-na21015ac366d",
+      "sha256": "c082440b11cb26a376a97eaee9ab303db5ec0493b8a60b2821653ae0101915da",
+      "inputSha256": "e5cf59b6bbb54d8b95f8331a0194b683ae66b3ae0b7c294c2405b3a7d8076c15",
+      "bytes": 113865,
+      "inputBytes": 6522,
+      "imageKey": "note/covers/recovered-na21015ac366d/revisions/c082440b11cb26a376a97eaee9ab303db5ec0493b8a60b2821653ae0101915da.png",
+      "inputKey": "note/covers/recovered-na21015ac366d/inputs/e5cf59b6bbb54d8b95f8331a0194b683ae66b3ae0b7c294c2405b3a7d8076c15.json",
+      "year": "2021",
+      "winners": [
+        "山形県",
+        "長野県"
+      ],
+      "fixedCopyCreated": true,
+      "unitRepaired": false,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "a-vacant-housing-rate",
+      "sha256": "310d30db5349b8f1fe87d65b78f8a2d924e746ab958eef4b8f1a2034a2640d1b",
+      "inputSha256": "a229b056edb296d50420311b4321f74ce059c482f39f620b80b07f9ecb48a637",
+      "bytes": 114421,
+      "inputBytes": 7401,
+      "imageKey": "note/covers/a-vacant-housing-rate/revisions/310d30db5349b8f1fe87d65b78f8a2d924e746ab958eef4b8f1a2034a2640d1b.png",
+      "inputKey": "note/covers/a-vacant-housing-rate/inputs/a229b056edb296d50420311b4321f74ce059c482f39f620b80b07f9ecb48a637.json",
+      "year": "2023",
+      "winners": [
+        "徳島県"
+      ],
+      "fixedCopyCreated": false,
+      "unitRepaired": true,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "a-private-rental-housing-rent-per-3-3m2",
+      "sha256": "53a4304ef8211a37b00b6e9674372b3e790bda93e62229f4003353f92f6af656",
+      "inputSha256": "0dfce2abdb8d595f8c2f01f6c033162f41e6061397a7e8fb728efc26d4c6f5b7",
+      "bytes": 115173,
+      "inputBytes": 7547,
+      "imageKey": "note/covers/a-private-rental-housing-rent-per-3-3m2/revisions/53a4304ef8211a37b00b6e9674372b3e790bda93e62229f4003353f92f6af656.png",
+      "inputKey": "note/covers/a-private-rental-housing-rent-per-3-3m2/inputs/0dfce2abdb8d595f8c2f01f6c033162f41e6061397a7e8fb728efc26d4c6f5b7.json",
+      "year": "2024",
+      "winners": [
+        "東京都"
+      ],
+      "fixedCopyCreated": false,
+      "unitRepaired": true,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "a-railway-station-count",
+      "sha256": "ac69ad0aac02338e41c9b34d2f033a5dc804b4b50b7071b2017d3e90737e62d8",
+      "inputSha256": "3558f4a155d1d04c75a98f5f796f580f9d6111993c984fabe739767a96bc6154",
+      "bytes": 116677,
+      "inputBytes": 7319,
+      "imageKey": "note/covers/a-railway-station-count/revisions/ac69ad0aac02338e41c9b34d2f033a5dc804b4b50b7071b2017d3e90737e62d8.png",
+      "inputKey": "note/covers/a-railway-station-count/inputs/3558f4a155d1d04c75a98f5f796f580f9d6111993c984fabe739767a96bc6154.json",
+      "year": "2024",
+      "winners": [
+        "東京都"
+      ],
+      "fixedCopyCreated": false,
+      "unitRepaired": true,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "a-convenience-store-sales",
+      "sha256": "cdf16ae6d36008b5a680323f1a8167406b24cd429595886ade4c4f262dd2292b",
+      "inputSha256": "0b9102a192437bc1444731cdb44e2c12a79e4a4f63458cbd27c78acbafa77353",
+      "bytes": 110935,
+      "inputBytes": 7609,
+      "imageKey": "note/covers/a-convenience-store-sales/revisions/cdf16ae6d36008b5a680323f1a8167406b24cd429595886ade4c4f262dd2292b.png",
+      "inputKey": "note/covers/a-convenience-store-sales/inputs/0b9102a192437bc1444731cdb44e2c12a79e4a4f63458cbd27c78acbafa77353.json",
+      "year": "2025",
+      "winners": [
+        "東京都"
+      ],
+      "fixedCopyCreated": false,
+      "unitRepaired": true,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "a-road-total-length",
+      "sha256": "aba93c39c6eb27267954f41593ad4e7ecec21369590eea3fa586c1d4dbcab33c",
+      "inputSha256": "2b36b7df80cc8a9db053b1339067fba7d911bebe52cd046c8f5393a08d88b6a4",
+      "bytes": 114903,
+      "inputBytes": 7549,
+      "imageKey": "note/covers/a-road-total-length/revisions/aba93c39c6eb27267954f41593ad4e7ecec21369590eea3fa586c1d4dbcab33c.png",
+      "inputKey": "note/covers/a-road-total-length/inputs/2b36b7df80cc8a9db053b1339067fba7d911bebe52cd046c8f5393a08d88b6a4.json",
+      "year": "2023",
+      "winners": [
+        "北海道"
+      ],
+      "fixedCopyCreated": false,
+      "unitRepaired": true,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "a-electricity-demand",
+      "sha256": "4dab2f42f7d8d73d04b536eed3a644c2e5b4d78d02991f8fe7d3de8f1757ae79",
+      "inputSha256": "f7663595688fb0fe914caf325ca68d3ea4bc1b074588fa7928c1314dce4eb7dc",
+      "bytes": 111435,
+      "inputBytes": 7569,
+      "imageKey": "note/covers/a-electricity-demand/revisions/4dab2f42f7d8d73d04b536eed3a644c2e5b4d78d02991f8fe7d3de8f1757ae79.png",
+      "inputKey": "note/covers/a-electricity-demand/inputs/f7663595688fb0fe914caf325ca68d3ea4bc1b074588fa7928c1314dce4eb7dc.json",
+      "year": "2023",
+      "winners": [
+        "東京都"
+      ],
+      "fixedCopyCreated": false,
+      "unitRepaired": true,
+      "textNodes": 7,
+      "status": "pass"
+    },
+    {
+      "key": "a-final-energy-consumption-per-capita",
+      "sha256": "f986f9fbb180ba550c04b3e6c13c50de7db4eb11e10e1ffda71c5be8aec25747",
+      "inputSha256": "ce56bddaaede91efbb2c5e8ad94cdd67b98d9685a9681b05f6cfb48416c86e76",
+      "bytes": 119369,
+      "inputBytes": 7702,
+      "imageKey": "note/covers/a-final-energy-consumption-per-capita/revisions/f986f9fbb180ba550c04b3e6c13c50de7db4eb11e10e1ffda71c5be8aec25747.png",
+      "inputKey": "note/covers/a-final-energy-consumption-per-capita/inputs/ce56bddaaede91efbb2c5e8ad94cdd67b98d9685a9681b05f6cfb48416c86e76.json",
+      "year": "2022",
+      "winners": [
+        "大分県"
+      ],
+      "fixedCopyCreated": false,
+      "unitRepaired": true,
+      "textNodes": 7,
+      "status": "pass"
+    }
+  ],
+  "adminVerification": {
+    "checkedAt": "2026-10-02T08:23:40.457Z",
+    "status": "pass",
+    "total": 90,
+    "approved": 90,
+    "samples": [
+      {
+        "key": "a-agricultural-output",
+        "image": {
+          "url": "/note-cover/a-agricultural-output?revision=a3ea6632950ada141e4af43accf04e289555ec39a52fc58b98617e79ee982c57",
+          "width": 1280,
+          "height": 670
+        }
+      },
+      {
+        "key": "recovered-n4e1e67f70686",
+        "image": {
+          "url": "/note-cover/recovered-n4e1e67f70686?revision=f876b4209bdd2eeb1f033b405f7c6eed2868a0bc256a25e430973a72fc8b4a08",
+          "width": 1280,
+          "height": 670
+        }
+      },
+      {
+        "key": "a-final-energy-consumption-per-capita",
+        "image": {
+          "url": "/note-cover/a-final-energy-consumption-per-capita?revision=f986f9fbb180ba550c04b3e6c13c50de7db4eb11e10e1ffda71c5be8aec25747",
+          "width": 1280,
+          "height": 670
+        }
+      }
+    ],
+    "pageErrors": []
+  },
+  "verification": {
+    "typeCheck": {
+      "packages": 25,
+      "scriptProjects": 8,
+      "status": "pass"
+    },
+    "tests": {
+      "assetAndData": 25,
+      "publicationContracts": 20,
+      "admin": 11,
+      "total": 180,
+      "status": "pass",
+      "imagePipeline": 101,
+      "workflowAndGalleryContracts": 23
+    },
+    "lint": {
+      "status": "pass",
+      "target": "apps/web/scripts/lib/note-cover-render.ts"
+    },
+    "docs": {
+      "status": "pass",
+      "errors": 0,
+      "existingWarnings": 12
+    },
+    "build": {
+      "status": "skipped",
+      "reason": "Generator and private asset update only; no production application release"
+    },
+    "security": {
+      "status": "pass",
+      "secretsPersisted": false
+    },
+    "diff": {
+      "status": "pass"
+    }
+  },
+  "temporaryCleanup": {
+    "status": "blocked",
+    "reason": "Automatic approval review rejected removal of the owned temporary work directory as blocked by policy."
+  }
+}

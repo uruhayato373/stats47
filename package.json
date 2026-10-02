@@ -89,7 +89,7 @@
     "note:covers:audit": "node .claude/scripts/note/audit-note-covers.mjs",
     "note:assets": "node .claude/scripts/note/cover-assets.mjs",
     "note:assets:validate": "node .claude/scripts/note/cover-assets.mjs validate",
-    "note:assets:test": "node --test .claude/scripts/note/__tests__/cover-assets.test.mjs",
+    "note:assets:test": "node --test .claude/scripts/note/__tests__/cover-assets.test.mjs .claude/scripts/note/__tests__/question-cover-data.test.mjs",
     "note:images:audit": "node .claude/scripts/note/audit-note-image-assets.mjs",
     "note:images:regen": "node .claude/scripts/note/regen-derived-png.mjs",
     "note:images:test": "node --test .claude/scripts/note/__tests__/image-assets-audit.test.mjs .claude/scripts/note/__tests__/image-assets-tools.test.mjs",

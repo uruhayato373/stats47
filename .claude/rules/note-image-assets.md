@@ -24,6 +24,9 @@ paths:
 
 カバーの正本は `data/note/cover-assets.json`、形の契約は `cover-assets.schema.json`。
 実体は `stats47-private:note/covers/<articleKey>/revisions/<sha256>.png` に不変保存する。
+制作根拠のJSONも同じprivate R2の `note/covers/<articleKey>/inputs/<sha256>.json` に不変保存し、
+台帳の `provenance.input` と `quality.evidenceSha256` を同じSHAで結ぶ。`verify` は画像と入力の両方を照合する。
+入力には使った47県分の固定値・単位・対象年・出典URL/SHA・文字組み・配色・地理データ/renderer/fontのSHAを残す。
 `cover-assets.mjs` の専用writerは保存後に読み戻したSHA/bytesを検査してから台帳を更新する。
 記事集合・口座・公開URL・版参照・レビューを `npm run note:assets:validate` で検査し、
 実体は `npm run note:assets -- verify` で検査する。別PCはgit台帳とR2認証だけで同じ版を表示できる。
@@ -33,6 +36,8 @@ paths:
 - 制作入力は `prepare --keys key1,key2 --output /tmp/<task>` で一時領域へ取得し、
   `node --import tsx .claude/scripts/note/generate-cover-refresh.ts --output /tmp/<task> --version <version>` で生成する。
   文字境界/重なりを検査し、画像のremote保管と照合後に一時領域を削除する。日付だけの版上書きはしない。
+  問い型など本文を制作入力に使わないカバーは `prepare --source ledger` で保存済み公開版を比較元にできる。
+  公開URLと版IDの一致・remote SHAを確認し、公開サイトへの新規反映を意味する観測として扱わない。
 - 旧manifestは `import --manifest <path>` で取り込む。ローカル絶対パスは入力だけに使い、台帳には残さない。
   旧レビューを自動継承せず未判定で登録する。回収できない旧版は `missingVersions` に残す。
 - 縮小表示確認後に `review --keys <key> --revision <sha> --status pass|needs-revision --reason <理由>`。
@@ -47,6 +52,17 @@ paths:
 - 週次監査は完全取得した観測だけを台帳へ反映し、developへ限定commitする。失敗・不明で直前の画像を消さない。
 - 汎用 `generate-ogp-images.ts --type note-covers` は書込開始前に停止する。既存のSVG/Remotion等は制作入力用の旧rendererであり、
   保存・採用・公開の正典ではない。本文チャートの再生成契約は以下に残す。
+
+### 問い型ランキングのカバー
+
+分類SSOTの `ranking-question` 全記事は同じ `question-ranking-note-cover-v1` rendererを使う。
+淡い背景・大きな問い・答え・対象年・薄い日本地図を配置し、カバーに凡例・単位・数値範囲を載せない。
+地図はD3 `interpolateYlOrRd` と連続線形スケールで実際の値を塗り分け、本文チャートの順位配色とは区別する。
+長い主題は資格条件や助詞を失わず2行にし、同率1位は全て表示する。
+既存 `chart-data.json` は全47県・年・値を照合して使用する。単位欠落は一致を確認した元データから補う。
+固定コピーが無い回収記事もカタログの `stats47Targets` から対象ランキングと記事の年を明示解決し、
+private R2の制作入力に固定する。最新年への自動切替・公開原稿一式の無断上書きは行わない。
+文字検査はSatoriの `textContent` を読む。空の検査結果をPASSにせず、境界・重なりを検査してから登録する。
 
 note 記事の画像は、記事で使ったデータと設定から作り直せる**派生物**である。派生物を git に置くと
 リポジトリが肥大する (2026-09-29 の実測: `docs/31_note記事原稿/` の追跡 PNG 682 枚で約 153MB。
