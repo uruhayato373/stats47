@@ -1,0 +1,10 @@
+machine|https://stats47.jp/ranking/abandoned-cultivated-land-area|unit_symbol_mixing
+machine|https://stats47.jp/ranking/academic-achievement-test-average-rate|unit_symbol_mixing
+machine|https://stats47.jp/ranking/accidental-deaths-per-100k|unit_symbol_mixing
+machine|https://stats47.jp/ranking/accountant-annual-income|unit_symbol_mixing
+machine|https://stats47.jp/ranking/active-job-opening-ratio|unit_symbol_mixing
+machine|https://stats47.jp/ranking/actual-income-worker-households-per-month|unit_symbol_mixing
+machine|https://stats47.jp/ranking/adult-class-lecture-count-per-million|unit_symbol_mixing
+machine|https://stats47.jp/ranking/adult-sandals-consumption-expenditure|unit_symbol_mixing
+machine|https://stats47.jp/ranking/aging-index|unit_symbol_mixing
+machine|https://stats47.jp/ranking/agricultural-employment-population|unit_symbol_mixing

@@ -1,0 +1,2 @@
+machine|https://stats47.jp/blog|unit_symbol_mixing
+agent|blog

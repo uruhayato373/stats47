@@ -1,0 +1,6 @@
+machine|https://stats47.jp/category/administrativefinancial|unit_symbol_mixing
+machine|https://stats47.jp/category/construction|unit_symbol_mixing
+machine|https://stats47.jp/category/energy|unit_symbol_mixing
+machine|https://stats47.jp/category/ict|unit_symbol_mixing
+machine|https://stats47.jp/category/infrastructure|unit_symbol_mixing
+machine|https://stats47.jp/category/laborwage|unit_symbol_mixing

@@ -1,0 +1,10 @@
+machine|https://stats47.jp/japan/healthcare|unit_symbol_mixing
+machine|https://stats47.jp/municipalities/ranking/commuter-ratio-from-other-municipalities|unit_symbol_mixing
+machine|https://stats47.jp/municipalities/ranking/commuter-ratio-to-other-municipalities|unit_symbol_mixing
+machine|https://stats47.jp/municipalities/ranking/current-balance-ratio-city|unit_symbol_mixing
+machine|https://stats47.jp/municipalities/ranking/day-time-population-ratio|unit_symbol_mixing
+machine|https://stats47.jp/municipalities/ranking/densely-populated-area-change-rate|unit_symbol_mixing
+machine|https://stats47.jp/municipalities/ranking/elderly-couple-only-household-ratio|unit_symbol_mixing
+machine|https://stats47.jp/municipalities/ranking/elderly-population-ratio|unit_symbol_mixing
+machine|https://stats47.jp/municipalities/ranking/elderly-workers-ratio|unit_symbol_mixing
+machine|https://stats47.jp/municipalities/ranking/employed-people-ratio-primary|unit_symbol_mixing

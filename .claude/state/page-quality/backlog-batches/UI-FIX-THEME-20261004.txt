@@ -1,0 +1,8 @@
+machine|https://stats47.jp/themes/aging-society|unit_symbol_mixing
+machine|https://stats47.jp/themes/climate|internal_jargon_terms
+machine|https://stats47.jp/themes/environmental-quality|unit_symbol_mixing
+machine|https://stats47.jp/themes/geographic-access|internal_jargon_terms
+machine|https://stats47.jp/themes/landslide-exposure|internal_jargon_terms
+machine|https://stats47.jp/themes/local-economy|unit_symbol_mixing
+machine|https://stats47.jp/themes/railway|internal_jargon_terms
+machine|https://stats47.jp/themes/tsunami-exposure|internal_jargon_terms

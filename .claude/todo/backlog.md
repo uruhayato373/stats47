@@ -207,6 +207,228 @@ updated: 2026-09-29
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [UI-FIX-THEME-20261004] UI 是正: theme の週次 UI 検査の指摘 8 件を直す
+
+タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled .claude/state/page-quality/backlog-batches/UI-FIX-THEME-20261004.txt] [起票:2026-10-04] [領域:サイト]
+
+- **自動起票**: 週次のページ品質監査 (`page-quality-audit-weekly.yml`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `.claude/state/page-quality/backlog-batches/UI-FIX-THEME-20261004.txt`、状態は `.claude/state/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
+- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/theme-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/theme-desktop-1440.png)。検査の詳細は `.claude/state/metrics/page-quality/LATEST.md`。
+- **対象**:
+  - `machine|https://stats47.jp/themes/aging-society|unit_symbol_mixing` — unit_symbol_mixing = 1 (閾値 <= 0)
+  - `machine|https://stats47.jp/themes/climate|internal_jargon_terms` — internal_jargon_terms = 1 (閾値 <= 0)
+  - `machine|https://stats47.jp/themes/environmental-quality|unit_symbol_mixing` — unit_symbol_mixing = 1 (閾値 <= 0)
+  - `machine|https://stats47.jp/themes/geographic-access|internal_jargon_terms` — internal_jargon_terms = 1 (閾値 <= 0)
+  - `machine|https://stats47.jp/themes/landslide-exposure|internal_jargon_terms` — internal_jargon_terms = 1 (閾値 <= 0)
+  - `machine|https://stats47.jp/themes/local-economy|unit_symbol_mixing` — unit_symbol_mixing = 1 (閾値 <= 0)
+  - `machine|https://stats47.jp/themes/railway|internal_jargon_terms` — internal_jargon_terms = 1 (閾値 <= 0)
+  - `machine|https://stats47.jp/themes/tsunami-exposure|internal_jargon_terms` — internal_jargon_terms = 1 (閾値 <= 0)
+- **表示の意味 (定義単位で直す)**: 語・文字列・店名などの具体的な箇所は `LATEST.md` / 週次 `latest.json` の `ui_findings` にある。同じ指摘が同じテンプレートの多数の URL に出ていれば、ページではなく生成元 (テンプレート・カタログ・共通部品・AI 解説の生成) を直す。内部用語は読者向けの言い換えに、`NaN`/`undefined` は値が無いときの表示 (「—」等) に、`%`/`％` はそのページの多数派に揃える。`title_changed` は選定入力が変わっていないのに title が変わった場合だけ直す (選び方を決定的にする)。文字の小ささ・ページ高さはテンプレート別の予算 (`page-quality-budgets.json`) との差で、予算を上げて閉じない。
+- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。
+- **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@.claude/state/page-quality/backlog-batches/UI-FIX-THEME-20261004.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
+- **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
+- **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
+
+### [UI-FIX-SURVEY-20261004] UI 是正: survey の週次 UI 検査の指摘 10 件を直す
+
+タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled .claude/state/page-quality/backlog-batches/UI-FIX-SURVEY-20261004.txt] [起票:2026-10-04] [領域:サイト]
+
+- **自動起票**: 週次のページ品質監査 (`page-quality-audit-weekly.yml`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `.claude/state/page-quality/backlog-batches/UI-FIX-SURVEY-20261004.txt`、状態は `.claude/state/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
+- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/survey-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/survey-desktop-1440.png)。検査の詳細は `.claude/state/metrics/page-quality/LATEST.md`。
+- **対象**:
+  - `machine|https://stats47.jp/survey/accommodation-survey|unit_symbol_mixing` — unit_symbol_mixing = 1 (閾値 <= 0)
+  - `machine|https://stats47.jp/survey/city-planning-survey|unit_symbol_mixing` — unit_symbol_mixing = 2 (閾値 <= 0)
+  - `machine|https://stats47.jp/survey/cpi-annual|unit_symbol_mixing` — unit_symbol_mixing = 4 (閾値 <= 0)
+  - `machine|https://stats47.jp/survey/economic-census-basic|unit_symbol_mixing` — unit_symbol_mixing = 2 (閾値 <= 0)
+  - `machine|https://stats47.jp/survey/employment-structure-survey|unit_symbol_mixing` — unit_symbol_mixing = 2 (閾値 <= 0)
+  - `machine|https://stats47.jp/survey/gas-business-statistics|unit_symbol_mixing` — unit_symbol_mixing = 2 (閾値 <= 0)
+  - `machine|https://stats47.jp/survey/hospital-report|unit_symbol_mixing` — unit_symbol_mixing = 3 (閾値 <= 0)
+  - `machine|https://stats47.jp/survey/housing-starts-statistics|unit_symbol_mixing` — unit_symbol_mixing = 2 (閾値 <= 0)
+  - `machine|https://stats47.jp/survey/local-election-results|unit_symbol_mixing` — unit_symbol_mixing = 2 (閾値 <= 0)
+  - `machine|https://stats47.jp/survey/local-finance|internal_jargon_terms` — internal_jargon_terms = 1 (閾値 <= 0)
+- **表示の意味 (定義単位で直す)**: 語・文字列・店名などの具体的な箇所は `LATEST.md` / 週次 `latest.json` の `ui_findings` にある。同じ指摘が同じテンプレートの多数の URL に出ていれば、ページではなく生成元 (テンプレート・カタログ・共通部品・AI 解説の生成) を直す。内部用語は読者向けの言い換えに、`NaN`/`undefined` は値が無いときの表示 (「—」等) に、`%`/`％` はそのページの多数派に揃える。`title_changed` は選定入力が変わっていないのに title が変わった場合だけ直す (選び方を決定的にする)。文字の小ささ・ページ高さはテンプレート別の予算 (`page-quality-budgets.json`) との差で、予算を上げて閉じない。
+- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。
+- **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@.claude/state/page-quality/backlog-batches/UI-FIX-SURVEY-20261004.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
+- **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
+- **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
+
+### [UI-FIX-RANKING-LONG-TITLE-20261004] UI 是正: ranking--long-title の週次 UI 検査の指摘 1 件を直す
+
+タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled .claude/state/page-quality/backlog-batches/UI-FIX-RANKING-LONG-TITLE-20261004.txt] [起票:2026-10-04] [領域:サイト]
+
+- **自動起票**: 週次のページ品質監査 (`page-quality-audit-weekly.yml`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `.claude/state/page-quality/backlog-batches/UI-FIX-RANKING-LONG-TITLE-20261004.txt`、状態は `.claude/state/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
+- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/ranking--long-title-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/ranking--long-title-desktop-1440.png)。検査の詳細は `.claude/state/metrics/page-quality/LATEST.md`。
+- **対象**:
+  - `agent|ranking--long-title` (Claude の確認)
+    - [mobile-390/medium] スマホ1枚目、「地図」タブ内の日本地図(「2021年度」セレクトの下): 地図の外側にハバロフスク・上海・ソウルなど海外の地名が多数出て、日本の都道府県の色分けより目立つ。地図の枠が地図本体とずれ、左と下に余白の帯が見え、画面下まで地図が広がって凡例が切れている → 海外の地名ラベルを消すか薄くし、地図の枠と表示範囲を日本列島に合わせる
+    - [mobile-390/low] スマホ1枚目上部、パンくず最後の項目とその下のH1: パンくずの最後に長いタイトルがH1と同じ文言で全文入っている。3行に折り返し、H1の前に同じ長文が2回続く → パンくずの最後の項目は短縮するか省き、カテゴリ名までにする
+- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。
+- **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@.claude/state/page-quality/backlog-batches/UI-FIX-RANKING-LONG-TITLE-20261004.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
+- **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
+- **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
+
+### [UI-FIX-RANKING-20261004] UI 是正: ranking の週次 UI 検査の指摘 10 件を直す
+
+タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled .claude/state/page-quality/backlog-batches/UI-FIX-RANKING-20261004.txt] [起票:2026-10-04] [領域:サイト]
+
+- **自動起票**: 週次のページ品質監査 (`page-quality-audit-weekly.yml`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `.claude/state/page-quality/backlog-batches/UI-FIX-RANKING-20261004.txt`、状態は `.claude/state/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
+- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/ranking-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/ranking-desktop-1440.png)。検査の詳細は `.claude/state/metrics/page-quality/LATEST.md`。
+- **対象**:
+  - `machine|https://stats47.jp/ranking/abandoned-cultivated-land-area|unit_symbol_mixing` — unit_symbol_mixing = 2 (閾値 <= 0)
+  - `machine|https://stats47.jp/ranking/academic-achievement-test-average-rate|unit_symbol_mixing` — unit_symbol_mixing = 15 (閾値 <= 0)
+  - `machine|https://stats47.jp/ranking/accidental-deaths-per-100k|unit_symbol_mixing` — unit_symbol_mixing = 1 (閾値 <= 0)
+  - `machine|https://stats47.jp/ranking/accountant-annual-income|unit_symbol_mixing` — unit_symbol_mixing = 1 (閾値 <= 0)
+  - `machine|https://stats47.jp/ranking/active-job-opening-ratio|unit_symbol_mixing` — unit_symbol_mixing = 1 (閾値 <= 0)
+  - `machine|https://stats47.jp/ranking/actual-income-worker-households-per-month|unit_symbol_mixing` — unit_symbol_mixing = 2 (閾値 <= 0)
+  - `machine|https://stats47.jp/ranking/adult-class-lecture-count-per-million|unit_symbol_mixing` — unit_symbol_mixing = 1 (閾値 <= 0)
+  - `machine|https://stats47.jp/ranking/adult-sandals-consumption-expenditure|unit_symbol_mixing` — unit_symbol_mixing = 2 (閾値 <= 0)
+  - `machine|https://stats47.jp/ranking/aging-index|unit_symbol_mixing` — unit_symbol_mixing = 2 (閾値 <= 0)
+  - `machine|https://stats47.jp/ranking/agricultural-employment-population|unit_symbol_mixing` — unit_symbol_mixing = 1 (閾値 <= 0)
+- **表示の意味 (定義単位で直す)**: 語・文字列・店名などの具体的な箇所は `LATEST.md` / 週次 `latest.json` の `ui_findings` にある。同じ指摘が同じテンプレートの多数の URL に出ていれば、ページではなく生成元 (テンプレート・カタログ・共通部品・AI 解説の生成) を直す。内部用語は読者向けの言い換えに、`NaN`/`undefined` は値が無いときの表示 (「—」等) に、`%`/`％` はそのページの多数派に揃える。`title_changed` は選定入力が変わっていないのに title が変わった場合だけ直す (選び方を決定的にする)。文字の小ささ・ページ高さはテンプレート別の予算 (`page-quality-budgets.json`) との差で、予算を上げて閉じない。
+- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。
+- **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@.claude/state/page-quality/backlog-batches/UI-FIX-RANKING-20261004.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
+- **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
+- **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
+
+### [UI-FIX-PREFECTURE-DETAIL-THEME-GEO-20261004] UI 是正: prefecture-detail--theme-geo の週次 UI 検査の指摘 1 件を直す
+
+タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled .claude/state/page-quality/backlog-batches/UI-FIX-PREFECTURE-DETAIL-THEME-GEO-20261004.txt] [起票:2026-10-04] [領域:サイト]
+
+- **自動起票**: 週次のページ品質監査 (`page-quality-audit-weekly.yml`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `.claude/state/page-quality/backlog-batches/UI-FIX-PREFECTURE-DETAIL-THEME-GEO-20261004.txt`、状態は `.claude/state/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
+- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/prefecture-detail--theme-geo-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/prefecture-detail--theme-geo-desktop-1440.png)。検査の詳細は `.claude/state/metrics/page-quality/LATEST.md`。
+- **対象**:
+  - `agent|prefecture-detail--theme-geo` (Claude の確認)
+    - [mobile-390/medium] スマホ1枚目の中ほど、青い案内バナー「青森県の視点 — 47都道府県チャートで青森県をハイライト表示しています」: 狭い幅で文章と右端の「青森県プロフィールへ →」が3列に分かれて詰まり、文が1〜2文字ずつ折り返して読みにくい。リンクも小さく折り返されて見つけにくい → スマホではバナーを縦積みにして文章を全幅で出し、リンクは次の行に独立して置く
+    - [mobile-390/low] スマホ1枚目、「ページ内」ボックス: 「ページ内」の目次に項目が1つ(「土砂災害を都道府県別に見る」)だけで、すぐ下に「全指標・出典調査」の開閉行が続き、同じ種類の枠が重なって主要データが下に押される → 項目が1つだけの目次は出さないか、開閉行とまとめて1つにする
+- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。
+- **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@.claude/state/page-quality/backlog-batches/UI-FIX-PREFECTURE-DETAIL-THEME-GEO-20261004.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
+- **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
+- **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
+
+### [UI-FIX-OTHER-20261004] UI 是正: other の週次 UI 検査の指摘 10 件を直す
+
+タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled .claude/state/page-quality/backlog-batches/UI-FIX-OTHER-20261004.txt] [起票:2026-10-04] [領域:サイト]
+
+- **自動起票**: 週次のページ品質監査 (`page-quality-audit-weekly.yml`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `.claude/state/page-quality/backlog-batches/UI-FIX-OTHER-20261004.txt`、状態は `.claude/state/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
+- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/other-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/other-desktop-1440.png)。検査の詳細は `.claude/state/metrics/page-quality/LATEST.md`。
+- **対象**:
+  - `machine|https://stats47.jp/japan/healthcare|unit_symbol_mixing` — unit_symbol_mixing = 1 (閾値 <= 0)
+  - `machine|https://stats47.jp/municipalities/ranking/commuter-ratio-from-other-municipalities|unit_symbol_mixing` — unit_symbol_mixing = 3 (閾値 <= 0)
+  - `machine|https://stats47.jp/municipalities/ranking/commuter-ratio-to-other-municipalities|unit_symbol_mixing` — unit_symbol_mixing = 3 (閾値 <= 0)
+  - `machine|https://stats47.jp/municipalities/ranking/current-balance-ratio-city|unit_symbol_mixing` — unit_symbol_mixing = 3 (閾値 <= 0)
+  - `machine|https://stats47.jp/municipalities/ranking/day-time-population-ratio|unit_symbol_mixing` — unit_symbol_mixing = 3 (閾値 <= 0)
+  - `machine|https://stats47.jp/municipalities/ranking/densely-populated-area-change-rate|unit_symbol_mixing` — unit_symbol_mixing = 3 (閾値 <= 0)
+  - `machine|https://stats47.jp/municipalities/ranking/elderly-couple-only-household-ratio|unit_symbol_mixing` — unit_symbol_mixing = 3 (閾値 <= 0)
+  - `machine|https://stats47.jp/municipalities/ranking/elderly-population-ratio|unit_symbol_mixing` — unit_symbol_mixing = 3 (閾値 <= 0)
+  - `machine|https://stats47.jp/municipalities/ranking/elderly-workers-ratio|unit_symbol_mixing` — unit_symbol_mixing = 3 (閾値 <= 0)
+  - `machine|https://stats47.jp/municipalities/ranking/employed-people-ratio-primary|unit_symbol_mixing` — unit_symbol_mixing = 3 (閾値 <= 0)
+- **表示の意味 (定義単位で直す)**: 語・文字列・店名などの具体的な箇所は `LATEST.md` / 週次 `latest.json` の `ui_findings` にある。同じ指摘が同じテンプレートの多数の URL に出ていれば、ページではなく生成元 (テンプレート・カタログ・共通部品・AI 解説の生成) を直す。内部用語は読者向けの言い換えに、`NaN`/`undefined` は値が無いときの表示 (「—」等) に、`%`/`％` はそのページの多数派に揃える。`title_changed` は選定入力が変わっていないのに title が変わった場合だけ直す (選び方を決定的にする)。文字の小ささ・ページ高さはテンプレート別の予算 (`page-quality-budgets.json`) との差で、予算を上げて閉じない。
+- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。
+- **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@.claude/state/page-quality/backlog-batches/UI-FIX-OTHER-20261004.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
+- **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
+- **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
+
+### [UI-FIX-MUNICIPALITY-VILLAGE-20261004] UI 是正: municipality--village の週次 UI 検査の指摘 1 件を直す
+
+タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled .claude/state/page-quality/backlog-batches/UI-FIX-MUNICIPALITY-VILLAGE-20261004.txt] [起票:2026-10-04] [領域:サイト]
+
+- **自動起票**: 週次のページ品質監査 (`page-quality-audit-weekly.yml`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `.claude/state/page-quality/backlog-batches/UI-FIX-MUNICIPALITY-VILLAGE-20261004.txt`、状態は `.claude/state/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
+- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/municipality--village-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/municipality--village-desktop-1440.png)。検査の詳細は `.claude/state/metrics/page-quality/LATEST.md`。
+- **対象**:
+  - `agent|municipality--village` (Claude の確認)
+    - [mobile-390/high] スマホ1枚目、「田原本町の特徴(県内ランキング上位)」カードの各行(身体障害者更生援護施設設定員数など)。デスクトップ1枚目の同カードも同じ: 値が「0人(2011年度)」「0施設」の指標が「3位」「4位」「5位」と上位として並び、読者は特徴や強みと誤読する。同率0の順位で、見出しの「上位」と内容が合わない → 値が0の指標は特徴リストから外すか、「0(同率)」と明示し、上位表示は意味のある値のある指標だけにする
+    - [mobile-390/medium] スマホ1枚目、H1直下の小見出し「奈良県 奈良県 田原本町」と、下の市区町村一覧の「奈良県 奈良市」などの表記。デスクトップ1枚目も同じ: 県名が二重に表示され、一覧の各リンクにも毎回「奈良県」が付いていて冗長で読みにくい。カード見出しと説明文にも「奈良県 田原本町」が繰り返される → 小見出しの県名重複を直し、同じ県内の一覧では市区町村名だけを表示する
+- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。
+- **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@.claude/state/page-quality/backlog-batches/UI-FIX-MUNICIPALITY-VILLAGE-20261004.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
+- **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
+- **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
+
+### [UI-FIX-HOME-20261004] UI 是正: home の週次 UI 検査の指摘 1 件を直す
+
+タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled .claude/state/page-quality/backlog-batches/UI-FIX-HOME-20261004.txt] [起票:2026-10-04] [領域:サイト]
+
+- **自動起票**: 週次のページ品質監査 (`page-quality-audit-weekly.yml`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `.claude/state/page-quality/backlog-batches/UI-FIX-HOME-20261004.txt`、状態は `.claude/state/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
+- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/home-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/home-desktop-1440.png)。検査の詳細は `.claude/state/metrics/page-quality/LATEST.md`。
+- **対象**:
+  - `agent|home` (Claude の確認)
+    - [mobile-390/medium] スマホ1枚目下部、「注目のランキング」カードと「新着ブログ」カード: カード右端が切れた横スクロールで、2枚目のタイトルと値(「公衆…」「東…」「10,7…」)が途中で見切れ、スクロールできることが「>」ボタン以外に分かりにくい。ランキングカードの値の左に大きな空白があり、地図が小さく情報量が少ない → 2枚目のカードが見える幅を残していることを示す余白かフェードを付け、カードの地図と値の配置を詰める
+    - [mobile-390/low] スマホ2枚目、「都道府県から探す」のタイル地図: 北海道・東北が右端に寄り、左上に大きな空白があり、九州の右端付近は画面外に切れそうに見える。10px級の都道府県名が縦書きで折り返されて読みにくい → タイル地図の列幅を幅に合わせて詰め、県名は折り返さず略称か横書きで表示する
+- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。
+- **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@.claude/state/page-quality/backlog-batches/UI-FIX-HOME-20261004.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
+- **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
+- **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
+
+### [UI-FIX-GEO-ANALYSIS-20261004] UI 是正: geo-analysis の週次 UI 検査の指摘 10 件を直す
+
+タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled .claude/state/page-quality/backlog-batches/UI-FIX-GEO-ANALYSIS-20261004.txt] [起票:2026-10-04] [領域:サイト]
+
+- **自動起票**: 週次のページ品質監査 (`page-quality-audit-weekly.yml`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `.claude/state/page-quality/backlog-batches/UI-FIX-GEO-ANALYSIS-20261004.txt`、状態は `.claude/state/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
+- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/geo-analysis-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/geo-analysis-desktop-1440.png)。検査の詳細は `.claude/state/metrics/page-quality/LATEST.md`。
+- **対象**:
+  - `machine|https://stats47.jp/geo/population-flood-risk/01/overlap|internal_jargon_terms` — internal_jargon_terms = 4 (閾値 <= 0)
+  - `machine|https://stats47.jp/geo/population-flood-risk/13/overlap|internal_jargon_terms` — internal_jargon_terms = 4 (閾値 <= 0)
+  - `machine|https://stats47.jp/geo/population-flood-risk/15/overlap|internal_jargon_terms` — internal_jargon_terms = 4 (閾値 <= 0)
+  - `machine|https://stats47.jp/geo/population-flood-risk|internal_jargon_terms` — internal_jargon_terms = 4 (閾値 <= 0)
+  - `machine|https://stats47.jp/geo/population-land-price/27/overlap|internal_jargon_terms` — internal_jargon_terms = 4 (閾値 <= 0)
+  - `machine|https://stats47.jp/geo/population-land-price/47/overlap|internal_jargon_terms` — internal_jargon_terms = 4 (閾値 <= 0)
+  - `machine|https://stats47.jp/geo/population-land-price|internal_jargon_terms` — internal_jargon_terms = 4 (閾値 <= 0)
+  - `machine|https://stats47.jp/geo/population-landslide-exposure|internal_jargon_terms` — internal_jargon_terms = 7 (閾値 <= 0)
+  - `machine|https://stats47.jp/geo/population-public-facility-access|internal_jargon_terms` — internal_jargon_terms = 6 (閾値 <= 0)
+  - `machine|https://stats47.jp/geo/population-snow-designation|internal_jargon_terms` — internal_jargon_terms = 7 (閾値 <= 0)
+- **表示の意味 (定義単位で直す)**: 語・文字列・店名などの具体的な箇所は `LATEST.md` / 週次 `latest.json` の `ui_findings` にある。同じ指摘が同じテンプレートの多数の URL に出ていれば、ページではなく生成元 (テンプレート・カタログ・共通部品・AI 解説の生成) を直す。内部用語は読者向けの言い換えに、`NaN`/`undefined` は値が無いときの表示 (「—」等) に、`%`/`％` はそのページの多数派に揃える。`title_changed` は選定入力が変わっていないのに title が変わった場合だけ直す (選び方を決定的にする)。文字の小ささ・ページ高さはテンプレート別の予算 (`page-quality-budgets.json`) との差で、予算を上げて閉じない。
+- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。
+- **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@.claude/state/page-quality/backlog-batches/UI-FIX-GEO-ANALYSIS-20261004.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
+- **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
+- **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
+
+### [UI-FIX-CATEGORY-20261004] UI 是正: category の週次 UI 検査の指摘 6 件を直す
+
+タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled .claude/state/page-quality/backlog-batches/UI-FIX-CATEGORY-20261004.txt] [起票:2026-10-04] [領域:サイト]
+
+- **自動起票**: 週次のページ品質監査 (`page-quality-audit-weekly.yml`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `.claude/state/page-quality/backlog-batches/UI-FIX-CATEGORY-20261004.txt`、状態は `.claude/state/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
+- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/category-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/category-desktop-1440.png)。検査の詳細は `.claude/state/metrics/page-quality/LATEST.md`。
+- **対象**:
+  - `machine|https://stats47.jp/category/administrativefinancial|unit_symbol_mixing` — unit_symbol_mixing = 1 (閾値 <= 0)
+  - `machine|https://stats47.jp/category/construction|unit_symbol_mixing` — unit_symbol_mixing = 1 (閾値 <= 0)
+  - `machine|https://stats47.jp/category/energy|unit_symbol_mixing` — unit_symbol_mixing = 1 (閾値 <= 0)
+  - `machine|https://stats47.jp/category/ict|unit_symbol_mixing` — unit_symbol_mixing = 2 (閾値 <= 0)
+  - `machine|https://stats47.jp/category/infrastructure|unit_symbol_mixing` — unit_symbol_mixing = 2 (閾値 <= 0)
+  - `machine|https://stats47.jp/category/laborwage|unit_symbol_mixing` — unit_symbol_mixing = 1 (閾値 <= 0)
+- **表示の意味 (定義単位で直す)**: 語・文字列・店名などの具体的な箇所は `LATEST.md` / 週次 `latest.json` の `ui_findings` にある。同じ指摘が同じテンプレートの多数の URL に出ていれば、ページではなく生成元 (テンプレート・カタログ・共通部品・AI 解説の生成) を直す。内部用語は読者向けの言い換えに、`NaN`/`undefined` は値が無いときの表示 (「—」等) に、`%`/`％` はそのページの多数派に揃える。`title_changed` は選定入力が変わっていないのに title が変わった場合だけ直す (選び方を決定的にする)。文字の小ささ・ページ高さはテンプレート別の予算 (`page-quality-budgets.json`) との差で、予算を上げて閉じない。
+- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。
+- **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@.claude/state/page-quality/backlog-batches/UI-FIX-CATEGORY-20261004.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
+- **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
+- **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
+
+### [UI-FIX-BLOG-ARTICLE-CHARTS-20261004] UI 是正: blog-article--charts の週次 UI 検査の指摘 1 件を直す
+
+タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled .claude/state/page-quality/backlog-batches/UI-FIX-BLOG-ARTICLE-CHARTS-20261004.txt] [起票:2026-10-04] [領域:サイト]
+
+- **自動起票**: 週次のページ品質監査 (`page-quality-audit-weekly.yml`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `.claude/state/page-quality/backlog-batches/UI-FIX-BLOG-ARTICLE-CHARTS-20261004.txt`、状態は `.claude/state/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
+- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/blog-article--charts-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/blog-article--charts-desktop-1440.png)。検査の詳細は `.claude/state/metrics/page-quality/LATEST.md`。
+- **対象**:
+  - `agent|blog-article--charts` (Claude の確認)
+    - [mobile-390/low] スマホ1枚目、パンくずとH1の間の「ホーム > ブログ」帯と、その下の「stats47 データジャーナル / 統計で読む地域ニュース / PR を含む場合があります」の行: パンくずが灰色の帯に入って記事の導入前に2層の見出し行が続き、「PRを含む場合があります」が細かい文字で他の肩書きと並び、意味の違う3項目が区切りの / だけでつながって読みにくい → PR表記は独立した行にして肩書きと分け、パンくず帯と肩書き行の余白を詰める
+- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。
+- **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@.claude/state/page-quality/backlog-batches/UI-FIX-BLOG-ARTICLE-CHARTS-20261004.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
+- **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
+- **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
+
+### [UI-FIX-BLOG-20261004] UI 是正: blog の週次 UI 検査の指摘 2 件を直す
+
+タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled .claude/state/page-quality/backlog-batches/UI-FIX-BLOG-20261004.txt] [起票:2026-10-04] [領域:サイト]
+
+- **自動起票**: 週次のページ品質監査 (`page-quality-audit-weekly.yml`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `.claude/state/page-quality/backlog-batches/UI-FIX-BLOG-20261004.txt`、状態は `.claude/state/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
+- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/blog-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/blog-desktop-1440.png)。検査の詳細は `.claude/state/metrics/page-quality/LATEST.md`。
+- **対象**:
+  - `machine|https://stats47.jp/blog|unit_symbol_mixing` — unit_symbol_mixing = 7 (閾値 <= 0)
+  - `agent|blog` (Claude の確認)
+    - [mobile-390/low] スマホ1枚目、「人気のタグ」のチップ列: タグの件数(169など)が10pxで小さく、右端のチップが切れてスクロールできることが分かりにくい。同じ先頭画面でCookieバナーがボタン領域を覆って記事一覧を隠す → 件数の文字を大きくし、チップ列の右端に切れを示すフェードを付ける
+- **表示の意味 (定義単位で直す)**: 語・文字列・店名などの具体的な箇所は `LATEST.md` / 週次 `latest.json` の `ui_findings` にある。同じ指摘が同じテンプレートの多数の URL に出ていれば、ページではなく生成元 (テンプレート・カタログ・共通部品・AI 解説の生成) を直す。内部用語は読者向けの言い換えに、`NaN`/`undefined` は値が無いときの表示 (「—」等) に、`%`/`％` はそのページの多数派に揃える。`title_changed` は選定入力が変わっていないのに title が変わった場合だけ直す (選び方を決定的にする)。文字の小ささ・ページ高さはテンプレート別の予算 (`page-quality-budgets.json`) との差で、予算を上げて閉じない。
+- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。
+- **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@.claude/state/page-quality/backlog-batches/UI-FIX-BLOG-20261004.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
+- **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
+- **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
+
 ### [GEO-QGIS-DEMAND-01] QGIS の使い方ブログ 3 本で需要を測り、note「国土数値情報をQGISで扱う」を作るか決める
 タグ: [収益化] [種類:制作] [実行:対話] [起票:2026-10-03] [領域:サイト]
 
