@@ -4,7 +4,6 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { COVER_ROOT, readCoverLedger, updateCoverLedger, recordCoverObservation, coverUrlPath } from './lib/cover-assets.mjs';
 import { readStoredCover, createCoverStore, fetchNoteDetail } from './lib/cover-storage.mjs';
-import { contentFingerprint } from './lib/cover-update.mjs';
 
 const args = process.argv.slice(2);
 if (args.length && (args.length !== 2 || args[0] !== '--keys' || !args[1]))
@@ -34,12 +33,9 @@ await Promise.all(Array.from({ length: Math.min(4, selected.length) }, async () 
       if (coverUrlPath(detail.eyecatch) !== coverUrlPath(row.published?.url)) throw Error('public cover changed since last observation');
       if (row.approvedRevisionId && row.approvedRevisionId !== row.published?.revisionId) throw Error('approved revision not published');
       const operation = journals.find((a) => a.key === row.articleKey && a.sourceSha256 === row.published?.revisionId && a.status === 'verified');
-      if (operation) {
-        if (coverUrlPath(operation.publicUrl) !== coverUrlPath(detail.eyecatch)) throw Error('public cover differs from verified upload');
-        const fingerprint = contentFingerprint(detail);
-        if (Object.keys(operation.contentFingerprint).some((field) => operation.contentFingerprint[field] !== fingerprint[field]))
-          throw Error('article changed since cover-only update');
-      }
+      // Content preservation is proven inside each update run (before/after); later article edits are not cover drift.
+      if (operation && coverUrlPath(operation.publicUrl) !== coverUrlPath(detail.eyecatch))
+        throw Error('public cover differs from verified upload');
       checks.push({ key: row.articleKey, status: 'pass', publicCover: detail.eyecatch, observedAt });
     } catch (error) { checks.push({ key: row.articleKey, status: 'fail', reason: error.message }); }
   }

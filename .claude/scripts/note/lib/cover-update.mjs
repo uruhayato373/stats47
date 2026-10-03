@@ -40,12 +40,17 @@ const preservedFields = [
   'is_limited',
 ];
 
+/** note returns tags created in the same second in no fixed order; compare the tag names as a set. */
+const fingerprintValue = (key, value) => key === 'hashtag_notes' && Array.isArray(value)
+  ? [...new Set(value.map((tag) => tag?.hashtag?.name))].sort()
+  : value ?? null;
+
 /** Public content hashes only: never persist paid text or send article updates. */
 export function contentFingerprint(detail) {
   return Object.fromEntries(
     preservedFields.map((key) => [
       key,
-      sha256(JSON.stringify(detail[key] ?? null)),
+      sha256(JSON.stringify(fingerprintValue(key, detail[key]))),
     ])
   );
 }

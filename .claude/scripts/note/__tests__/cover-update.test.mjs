@@ -67,7 +67,7 @@ const note = {
   body: 'Published preview',
   separator: 5,
   price: 500,
-  hashtag_notes: ['data'],
+  hashtag_notes: [{ id: 1, created_at: 't', hashtag: { name: '#統計' } }, { id: 2, created_at: 't', hashtag: { name: '#家計' } }],
   has_draft: false,
 };
 const article = { noteId: 'nabc', noteUrl: 'https://note.com/stats47/n/nabc' };
@@ -102,6 +102,13 @@ test('cover may change; article body, title, price, paid boundary and tags must 
       () => assertPreserved(note, { ...note, [field]: 'changed' }),
       new RegExp(field)
     );
+});
+test('tags compare as a set of names: note reorders tags created in the same second', () => {
+  const reordered = { ...note, hashtag_notes: [{ id: 9, created_at: 'u', hashtag: { name: '#家計' } }, { id: 8, created_at: 'u', hashtag: { name: '#統計' } }] };
+  assert.doesNotThrow(() => assertPreserved(note, reordered));
+  const replaced = { ...note, hashtag_notes: [{ id: 1, created_at: 't', hashtag: { name: '#統計' } }, { id: 3, created_at: 't', hashtag: { name: '#毎日note' } }] };
+  assert.throws(() => assertPreserved(note, replaced), /hashtag_notes/);
+  assert.throws(() => assertPreserved(note, { ...note, hashtag_notes: note.hashtag_notes.slice(0, 1) }), /hashtag_notes/);
 });
 test('hashes preserve evidence without storing public or paid body text', () => {
   const fingerprint = assertPreserved(note, note);
