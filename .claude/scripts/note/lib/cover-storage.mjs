@@ -28,8 +28,27 @@ async function renewWranglerSession() {
     await runFile(process.execPath, [path.join(COVER_ROOT, 'node_modules/wrangler/bin/wrangler.js'), 'whoami'], {
       env, cwd: COVER_ROOT, timeout: 30000, maxBuffer: 1e6, windowsHide: true,
     });
-  } catch { throw Error('private R2 session renewal failed; run wrangler login'); }
+  } catch (error) {
+    // Only this fixed version notice leaves the process; wrangler output may contain credentials.
+    const required = /requires at least Node\.js (v\d+)/.exec(String(error?.stderr ?? ''))?.[1];
+    if (required) throw Object.assign(Error(`private R2 session renewal failed; wrangler requires Node.js ${required}+ (admin runs ${process.version})`), { safe: true });
+    throw Error('private R2 session renewal failed; run wrangler login');
+  }
   finally { if (directory) fs.rmSync(directory, { recursive: true, force: true }); }
+}
+
+/**
+ * Wrangler's own login file location (getGlobalConfigPath + xdg-app-paths in wrangler):
+ * a ~/.wrangler directory in the home folder wins, otherwise the per-OS config directory.
+ */
+export function wranglerConfigFile({ platform = process.platform, env = process.env, home = os.homedir(),
+  isDirectory = (dir) => fs.statSync(dir, { throwIfNoEntry: false })?.isDirectory() ?? false } = {}) {
+  const homeDir = path.join(home, '.wrangler');
+  const base = isDirectory(homeDir) ? homeDir : path.join(env.XDG_CONFIG_HOME
+    ?? (platform === 'darwin' ? path.join(home, 'Library/Preferences')
+      : platform === 'win32' ? path.join(env.APPDATA ?? path.join(home, 'AppData/Roaming'), 'xdg.config')
+      : path.join(home, '.config')), '.wrangler');
+  return path.join(base, 'config/default.toml');
 }
 
 /** Renew only the existing session, non-interactively. Concurrent image reads share one renewal. */
@@ -50,7 +69,9 @@ export function wranglerTokenProvider(config, renew = renewWranglerSession) {
         pending = Promise.resolve().then(renew).finally(() => pendingRefreshes.delete(config));
         pendingRefreshes.set(config, pending);
       }
-      try { await pending; } catch { throw Error('private R2 session renewal failed; run wrangler login'); }
+      try { await pending; } catch (error) {
+        throw Error(error?.safe ? error.message : 'private R2 session renewal failed; run wrangler login');
+      }
       const refreshed = credential();
       if (refreshed.expired) throw Error('private R2 session expired; run wrangler login');
       return refreshed.token;
@@ -156,8 +177,7 @@ export function createCoverStore() {
       },
     };
   }
-  const config = path.join(process.platform === 'win32' ? path.join(process.env.APPDATA ?? '', 'xdg.config')
-    : process.env.XDG_CONFIG_HOME ?? path.join(os.homedir(), '.config'), '.wrangler/config/default.toml');
+  const config = wranglerConfigFile();
   if (!fs.existsSync(config)) throw Error('private R2 authentication unavailable (S3 or wrangler login required)');
   const token = wranglerTokenProvider(config);
   // Authorization is confined to the Cloudflare API; never persisted in the ledger or returned to the UI.

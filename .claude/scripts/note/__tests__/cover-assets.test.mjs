@@ -5,7 +5,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { validateCoverLedger, emptyCoverArticle, coverSha, coverAssetKey, addCoverRevision, reviewCoverRevision,
   recordCoverObservation, applyCoverAudit, coverDisplayState, updateCoverLedger, readCoverLedger, adoptedCoverRevision, approvedCoverRevision } from '../lib/cover-assets.mjs';
-import { storeCoverBytes, readStoredCover, storeCoverInput, readStoredCoverInput, fetchCoverSource, wranglerTokenProvider, retryCoverRead } from '../lib/cover-storage.mjs';
+import { storeCoverBytes, readStoredCover, storeCoverInput, readStoredCoverInput, fetchCoverSource, wranglerTokenProvider, wranglerConfigFile, retryCoverRead } from '../lib/cover-storage.mjs';
 import { buildTab } from '../../lib/gallery-collectors.mjs';
 import { COVER_ROOT, assertCoverGenerationType } from '../lib/cover-assets.mjs';
 
@@ -146,6 +146,16 @@ test('expired remote sessions renew once for concurrent image reads and reload r
     fs.writeFileSync(config, 'api_token = "rotated-test-token"\n');
     assert.equal(await readers[0](), 'rotated-test-token'); assert.equal(renewals, 1);
   } finally { fs.rmSync(directory, { recursive: true, force: true }); }
+});
+
+test('wrangler login file follows wrangler per OS, so macOS reads ~/Library/Preferences', () => {
+  const at = (platform, env = {}, legacy = false) => wranglerConfigFile({ platform, env, home: '/h', isDirectory: () => legacy })
+    .split(path.sep).join('/');
+  assert.equal(at('darwin'), '/h/Library/Preferences/.wrangler/config/default.toml');
+  assert.equal(at('linux'), '/h/.config/.wrangler/config/default.toml');
+  assert.equal(at('win32', { APPDATA: '/h/AppData/Roaming' }), '/h/AppData/Roaming/xdg.config/.wrangler/config/default.toml');
+  assert.equal(at('darwin', { XDG_CONFIG_HOME: '/x' }), '/x/.wrangler/config/default.toml');
+  assert.equal(at('darwin', {}, true), '/h/.wrangler/config/default.toml');
 });
 
 test('failed session renewal stops reads and does not expose credential errors', async () => {

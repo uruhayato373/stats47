@@ -21,7 +21,9 @@ export async function GET(request: Request, { params }: { params: Promise<{ key:
       'content-type': 'image/png', 'content-length': String(bytes.length),
       'cache-control': 'no-store', 'x-content-type-options': 'nosniff',
     } });
-  } catch {
-    return Response.json({ error: '画像を取得できません。ストレージの接続と台帳を確認してください。' }, { status: 502 });
+  } catch (error) {
+    // cover-storage のエラー文は認証情報を含まない固定文なので、理由として画面へ返す。
+    const reason = error instanceof Error ? error.message : String(error);
+    return Response.json({ error: `画像を取得できません: ${reason}` }, { status: 502 });
   }
 }
