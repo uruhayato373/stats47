@@ -1,16 +1,16 @@
 # e-Stat 年カバレッジ監査 (LATEST)
 
-- 生成: 2026-09-26T22:38:05.201Z
-- 対象母集団: 単年設定の active e-Stat metric 581 件 (今回確認 100 件)
+- 生成: 2026-10-03T22:50:20.906Z
+- 対象母集団: 単年設定の active e-Stat metric 582 件 (今回確認 100 件)
 - 判定: 都道府県1件 (北海道) をサンプルに `getStatsData` を実測し、値が non-null な年の件数を
   config の `years` と比較する。全 47 都道府県の精査ではなく代表 1 件によるスクリーニング
 
 ## サマリ
 
-- **要拡張候補 (extend-candidate)**: 159 件
-- 単年で確定 (confirmed-single-year): 41 件
+- **要拡張候補 (extend-candidate)**: 193 件
+- 単年で確定 (confirmed-single-year): 105 件
 - 取得失敗 (fetch-failed・次回再試行): 0 件
-- 未確認 (次回以降のバッチで確認): 381 件
+- 未確認 (次回以降のバッチで確認): 284 件
 
 ## 要拡張候補 (config の years を広げて再取り込みする)
 
@@ -40,7 +40,6 @@
 - `annual-precipitation` — config 1年 → e-Stat実在 50年 (1975-2024)
 - `annual-precipitation-days` — config 1年 → e-Stat実在 50年 (1975-2024)
 - `annual-snow-days` — config 1年 → e-Stat実在 46年 (1975-2020)
-- `annual-sunshine-duration` — config 1年 → e-Stat実在 50年 (1975-2024)
 - `apartment-ratio` — config 1年 → e-Stat実在 10年 (1978-2023)
 - `apparel-retail-store-count-per-1000` — config 1年 → e-Stat実在 8年 (1975-2006)
 - `area-ratio-of-total` — config 1年 → e-Stat実在 50年 (1975-2024)
@@ -77,7 +76,6 @@
 - `avg-daily-inpatients-psychiatric-hospital-per-100k` — config 1年 → e-Stat実在 49年 (1975-2023)
 - `avg-daily-outpatients-general-hospital-per-100k` — config 1年 → e-Stat実在 49年 (1975-2023)
 - `avg-daily-outpatients-psychiatric-hospital-per-100k` — config 1年 → e-Stat実在 49年 (1975-2023)
-- `avg-height-high-school-2nd-male` — config 1年 → e-Stat実在 47年 (1975-2023)
 - `avg-propensity-to-consume-worker-households` — config 1年 → e-Stat実在 50年 (1975-2024)
 - `avg-savings-rate-worker-households` — config 1年 → e-Stat実在 50年 (1975-2024)
 - `bamboo-production` — config 1年 → e-Stat実在 22年 (1975-2002)
@@ -134,7 +132,9 @@
 - `consumer-price-difference-index-food` — config 1年 → e-Stat実在 12年 (2013-2024)
 - `consumer-price-difference-index-furniture-household` — config 1年 → e-Stat実在 12年 (2013-2024)
 - `consumer-price-difference-index-healthcare` — config 1年 → e-Stat実在 12年 (2013-2024)
-- … 他 39 件 (全件は queue.json)
+- `consumer-price-difference-index-housing` — config 1年 → e-Stat実在 12年 (2013-2024)
+- `consumer-price-difference-index-miscellaneous` — config 1年 → e-Stat実在 12年 (2013-2024)
+- … 他 73 件 (全件は queue.json)
 
 ## 直し方
 
