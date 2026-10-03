@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 
 /**
- * note.com/stats47 の公開済み記事を、本文・価格・有料境界を保ったまま
- * 95個以上（既定99個）のハッシュタグへ更新する。
+ * note.com/stats47 の公開済み記事のハッシュタグを、本文・価格・有料境界を保ったまま
+ * data/note/hashtags/<slug>.json の承認済み99個へ置き換える (propose-note-hashtags.mjs が作る)。
+ * 公開中のタグの集合が承認済みの集合と一致する記事は対応済みとして飛ばす。
  *
  * Usage:
  *   node .claude/scripts/note/update-published-hashtags.mjs --slug <slug>
@@ -24,7 +25,7 @@ import {
 import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { detectSeries, generateHashtags } from './generate-note-hashtags.mjs';
+import { readApprovedHashtags } from './lib/note-hashtags.mjs';
 
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = resolve(SCRIPT_DIR, '../../..');
@@ -47,20 +48,14 @@ function parseArgs(argv) {
   };
   const slug = valueAfter('--slug');
   const all = argv.includes('--all');
-  if ((slug ? 1 : 0) + (all ? 1 : 0) !== 1) {
-    throw new Error('`--slug <slug>` または `--all` のどちらか1つを指定してください');
+  if ((slug ? 1 : 0) + (all ? 1 : 0) + (argv.includes('--slugs') ? 1 : 0) !== 1) {
+    throw new Error('`--slug <slug>`、`--slugs a,b`、`--all` のどれか1つを指定してください');
   }
-  const minimum = Number(valueAfter('--minimum') || 95);
-  const target = Number(valueAfter('--target') || 99);
   const max = valueAfter('--max') ? Number(valueAfter('--max')) : Infinity;
-  if (!Number.isInteger(minimum) || !Number.isInteger(target) || minimum < 1 || minimum > target || target > 99) {
-    throw new Error('tag count は 1 <= minimum <= target <= 99 で指定してください');
-  }
   return {
     all,
     slug,
-    minimum,
-    target,
+    slugs: valueAfter('--slugs')?.split(',').filter(Boolean),
     max,
     auditOnly: argv.includes('--audit-only'),
     includePaid: argv.includes('--include-paid'),
@@ -105,6 +100,12 @@ async function fetchNote(key, attempts = 4) {
   throw lastError;
 }
 
+function tagSet(note) {
+  return [...new Set((note.hashtag_notes || []).map((tag) => tag?.hashtag?.name))].sort().join('\n');
+}
+
+const sameTags = (snapshot, tags) => snapshot.hashtagSet === [...tags].sort().join('\n');
+
 function noteSnapshot(note) {
   return {
     status: note.status,
@@ -112,6 +113,7 @@ function noteSnapshot(note) {
     separator: note.separator || null,
     bodySignature: fnv1a(note.body || ''),
     hashtagCount: Array.isArray(note.hashtag_notes) ? note.hashtag_notes.length : 0,
+    hashtagSet: tagSet(note),
     account: note.user?.urlname || '',
     hasDraft: Boolean(note.has_draft),
   };
@@ -223,18 +225,9 @@ async function accountGate() {
   throw new Error('Profile 5 のnoteアカウントを stats47 と照合できません');
 }
 
-function generatedTags(slug, article, target) {
-  const tags = generateHashtags(article.vertical, detectSeries(slug), article.title || slug);
-  const valid = tags.filter((tag) => /^#[^#\s-]+$/.test(tag) && !/^#\d+$/.test(tag));
-  const unique = [...new Set(valid)];
-  if (unique.length < target) throw new Error(`有効タグプールが不足しています: ${unique.length}/${target}`);
-  return unique.slice(0, target);
-}
-
-function installTagPatch(tags, target, before) {
+function installTagPatch(tags, before) {
   const code = `(()=>{
     const pool=${JSON.stringify(tags)};
-    const target=${target};
     const expected=${JSON.stringify({
       price: before.price,
       separator: before.separator,
@@ -259,16 +252,7 @@ function installTagPatch(tags, target, before) {
         const freeBodySignature=signature(body.free_body);
         if(freeBodySignature!==expected.bodySignature)throw new Error('published free body changed before update');
         const before=Array.isArray(body.hashtags)?body.hashtags:[];
-        const output=[];
-        const seen=new Set();
-        for(const raw of [...before,...pool]){
-          const tag=String(raw).trim();
-          if(!/^#[^#\\s-]+$/.test(tag)||/^#\\d+$/.test(tag)||seen.has(tag))continue;
-          seen.add(tag);
-          output.push(tag);
-          if(output.length===target)break;
-        }
-        if(output.length<95)throw new Error('hashtag pool insufficient: '+output.length);
+        const output=pool.slice();
         body.hashtags=output;
         init={...init,body:JSON.stringify(body)};
         window.__stats47TagPatch={
@@ -295,10 +279,10 @@ function installTagPatch(tags, target, before) {
     return JSON.stringify(window.__stats47TagPatch);
   })()`;
   const installed = parseEvalJson(bu(['eval', code]));
-  if (!installed.installed || installed.pool < target) throw new Error('タグ送信パッチの初期化に失敗しました');
+  if (!installed.installed || installed.pool !== tags.length) throw new Error('タグ送信パッチの初期化に失敗しました');
 }
 
-async function updateArticle(slug, article, before, options) {
+async function updateArticle(slug, article, before, tags) {
   const key = noteKeyFromUrl(article.url);
   const current = noteSnapshot(await fetchNote(key));
   if (current.hasDraft) {
@@ -368,7 +352,7 @@ async function updateArticle(slug, article, before, options) {
     }
   }
 
-  installTagPatch(generatedTags(slug, article, options.target), options.target, before);
+  installTagPatch(tags, before);
   const clickResult = bu(['eval', `(()=>{
     const buttons=[];
     const walk=root=>root.querySelectorAll('*').forEach(element=>{
@@ -395,13 +379,13 @@ async function updateArticle(slug, article, before, options) {
   let afterNote;
   for (let attempt = 0; attempt < 5; attempt += 1) {
     afterNote = await fetchNote(key);
-    if ((afterNote.hashtag_notes?.length || 0) >= options.minimum) break;
+    if (sameTags(noteSnapshot(afterNote), tags)) break;
     await sleep(1_200);
   }
   const after = noteSnapshot(afterNote);
   if (after.account !== 'stats47' || after.status !== 'published') throw new Error('更新後の記事帰属または公開状態が不正です');
-  if (after.hashtagCount < options.minimum || after.hashtagCount > 99) {
-    throw new Error(`更新後タグ数が不正です: ${after.hashtagCount}; response=${publishResult.patch.responseText || ''}`);
+  if (!sameTags(after, tags)) {
+    throw new Error(`更新後のタグが承認済みと一致しません (${after.hashtagCount}個); response=${publishResult.patch.responseText || ''}`);
   }
   if (after.price !== before.price) throw new Error(`価格が変化しました: ${before.price} -> ${after.price}`);
   if (paid && after.separator !== before.separator) throw new Error('有料境界が変化しました');
@@ -422,16 +406,14 @@ async function main() {
   if (!existsSync(PUBLISHED_INDEX)) throw new Error(`公開済み記事インデックスがありません: ${PUBLISHED_INDEX}`);
   const index = JSON.parse(readFileSync(PUBLISHED_INDEX, 'utf8'));
   const sourceEntries = Object.entries(index.articles || {}).filter(([slug]) => !slug.startsWith('_'));
-  const selected = options.slug
-    ? sourceEntries.filter(([slug]) => slug === options.slug)
-    : sourceEntries;
+  const wanted = options.slug ? [options.slug] : options.slugs;
+  const selected = wanted ? sourceEntries.filter(([slug]) => wanted.includes(slug)) : sourceEntries;
+  if (wanted && selected.length !== wanted.length) throw new Error(`対象記事が見つかりません: ${wanted.join(',')}`);
   if (selected.length === 0) throw new Error(`対象記事が見つかりません: ${options.slug}`);
 
   const report = {
     generated_at: new Date().toISOString(),
     account: 'stats47',
-    minimum: options.minimum,
-    target: options.target,
     audit_only: options.auditOnly,
     total_indexed: sourceEntries.length,
     selected: selected.length,
@@ -448,7 +430,8 @@ async function main() {
       if (before.account !== 'stats47' || before.status !== 'published') {
         throw new Error(`記事帰属または公開状態が不正です: ${before.account}/${before.status}`);
       }
-      if (before.hashtagCount >= options.minimum) {
+      const tags = readApprovedHashtags(PROJECT_ROOT, slug, { noteUrl: article.url });
+      if (sameTags(before, tags)) {
         report.summary.compliant += 1;
         report.articles.push({ slug, key, status: 'compliant', count: before.hashtagCount, paid: before.price > 0 });
       } else if (before.hasDraft) {
@@ -466,7 +449,7 @@ async function main() {
         report.articles.push({ slug, key, status: 'skipped_paid', count: before.hashtagCount, paid: true });
       } else {
         report.summary.pending += 1;
-        pending.push({ slug, article, before });
+        pending.push({ slug, article, before, tags });
       }
     } catch (error) {
       report.summary.failed += 1;
@@ -486,7 +469,7 @@ async function main() {
     const position = report.summary.updated + report.summary.failed + 1;
     process.stdout.write(`[${position}/${Math.min(pending.length, options.max)}] ${item.slug} ... `);
     try {
-      const result = await updateArticle(item.slug, item.article, item.before, options);
+      const result = await updateArticle(item.slug, item.article, item.before, item.tags);
       report.summary.updated += 1;
       report.summary.pending -= 1;
       report.articles.push({ slug: item.slug, status: 'updated', ...result });

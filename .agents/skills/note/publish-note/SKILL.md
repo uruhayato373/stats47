@@ -282,22 +282,28 @@ browser-use --headed --profile "Profile 5" state 2>&1 > /tmp/note-acct.txt
 
 ### 公開済み記事のハッシュタグ専用更新
 
-本文の差し替えを行わず、公開済み記事を 95〜99 タグに揃えるときは専用スクリプトを使う。
+本文の差し替えを行わず、公開済み記事のタグを記事に合う 99 個へ置き換えるときは、提案と反映の 2 段で行う。
+タグの正本は `data/note/hashtags/<slug>.json` (git)。穴埋め用の汎用タグ (`#毎日note` `#スキしてみて` 等) は使わない。
 
 ```bash
-# 棚卸しのみ
+# 1. タイトルと公開本文から Claude がタグ 99 個を提案し、検査 (lib/note-hashtags.mjs) を通ったものだけ保存する
+#    (headless `claude` CLI のログインが必要。本文が変わっていない記事は飛ばす)
+node .claude/scripts/note/propose-note-hashtags.mjs --slugs <slug1,slug2>
+
+# 2. 棚卸しのみ (公開中のタグが承認済みの集合と一致するか)
 node .claude/scripts/note/update-published-hashtags.mjs --all --audit-only
 
-# 無料・有料を含む全公開記事（95未満のみ更新）
-node .claude/scripts/note/update-published-hashtags.mjs --all --include-paid
+# 3. 反映 (承認済みの集合と違う記事だけ置き換える。有料記事は --include-paid)
+node .claude/scripts/note/update-published-hashtags.mjs --slugs <slug1,slug2> --include-paid
 ```
 
 - Phase 1 の `stats47` アカウント照合は省略しない
-- 元のタグを優先し、数値のみのタグと note が受理しないハイフン入りタグを除外して 99 個まで補完する
+- 検査は、ちょうど 99 個・重複なし・形式 (`#` 1 つ、空白/ハイフンなし、数字だけでない、25 文字以内)・汎用タグなし・記事に出てこない年のタグなし・タイトルの県名タグありを見る
+- 今のタグは残さず、承認済みの 99 個に置き換える。承認ファイルが無い記事は fail-closed で止める
 - 公開版の再編集 URL（`?draft_reedit=true`）から開き、送信前の無料本文が現在の公開版と一致することを検証する
-- 95 タグ未満の記事に未公開下書きがある場合は fail-closed で停止し、下書きを公開・破棄しない
+- 未公開下書きがある記事は fail-closed で停止し、下書きを公開・破棄しない
 - 有料記事は既存境界が選択済みであることを検証し、`/tmp/stats47-note-hashtag-boundaries/` に screenshot を保存する
-- 更新前後で価格・有料境界・note が送信した無料本文を照合し、更新後の公開 API が 95 タグ未満なら失敗とする
+- 更新前後で価格・有料境界・note が送信した無料本文を照合し、更新後の公開タグの集合が承認済みと一致しなければ失敗とする
 
 ### Phase 8 後: 公開 URL をフロントマターに記録（★真実源への書き込み）
 
