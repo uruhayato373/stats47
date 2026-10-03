@@ -1,28 +1,38 @@
 {
-  "generatedAt": "2026-09-26T21:48:05.686Z",
+  "generatedAt": "2026-10-03T21:57:42.325Z",
   "origin": "https://stats47.jp",
   "mode": "per-route:10",
   "pagesCrawled": 141,
-  "pagesKnown": 7314,
-  "uniqueTargets": 4208,
+  "pagesKnown": 7325,
+  "uniqueTargets": 4223,
   "statusCount": {
-    "200": 4145,
+    "200": 4159,
     "301": 62,
-    "503": 1
+    "410": 2
   },
-  "brokenCount": 1,
+  "brokenCount": 2,
   "brokenByRoute": {
-    "/ranking/[k]": 1
+    "/ranking/[k]": 2
   },
   "broken": [
     {
-      "target": "/ranking/municipal-bonds-outstanding",
-      "status": 503,
-      "kind": "http-503",
+      "target": "/ranking/auto-insurance-penetration-bodily-injury-actual",
+      "status": 410,
+      "kind": "gone",
       "title": "",
       "refCount": 1,
       "from": [
-        "/category/administrativefinancial"
+        "/ranking/housing-land-liabilities-ratio-multi-person-households"
+      ]
+    },
+    {
+      "target": "/ranking/fresh-vegetables-consumption-expenditure",
+      "status": 410,
+      "kind": "gone",
+      "title": "",
+      "refCount": 1,
+      "from": [
+        "/ranking/tofu-consumption-expenditure"
       ]
     }
   ],
