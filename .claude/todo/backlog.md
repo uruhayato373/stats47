@@ -310,6 +310,16 @@ updated: 2026-09-29
 - **実行順**: ①未制作・未採用の残る149件は旧版の実体と入力を回収し `note:assets import` で保管する。回収不能は分類別の根拠から別版として作り直す。②公開画像と比較し、ランキングの上位県と値、配色の色見本、Geo/データセット・解説の固有図版を維持した上で、画像SHAを指定してレビュー・採用・dry-run・公開後検証を通す。
 - **停止条件**: 9/28版を回収済みと扱わず、旧レビューや新生成を公開済みに読み替えない。未判定/要修正を一括差し替えしない。記事対応・画像SHA・認証口座が不一致、POST応答不明、本文/タイトル/価格/有料境界が変化した場合は停止する。
 - **完了条件**: 全286件の採用版が分類別レビューを通り、差し替え後の `verify-cover-refresh.mjs` が公開カバーの対応と記事内容の不変を確認する。
+### [NOTE-HASHTAG-ROLLOUT-20261003] note公開記事のハッシュタグを承認済みの99個へ置き換える
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-03] [領域:商品]
+
+- **正典**: 記事ごとの承認済みタグは `data/note/hashtags/<slug>.json` (git・全286件そろい済み)。作成は `propose-note-hashtags.mjs`、反映は `update-published-hashtags.mjs`、検査は `lib/note-hashtags.mjs`。反映済みかどうかは台帳に持たず、毎回 `--audit-only` で note から取り直す。
+- **現状 (2026-10-03 停止時点)**: 承認済みと一致 94 件、未反映 190 件、下書きで停止 2 件。棚卸し: `node .claude/scripts/note/update-published-hashtags.mjs --all --include-paid --audit-only`
+- **下書きで停止**: `a-late-elderly-medical-expense-per-insured` は一括反映を途中で止めたときに残った下書き (無料記事なので `--slugs a-late-elderly-medical-expense-per-insured --allow-free-draft` で片付く)。`paid-nfe2c65e669a8` (有料) は以前からの下書きで、内容を確認してから扱いを決める。
+- **実行**: `node .claude/scripts/note/update-published-hashtags.mjs --all --include-paid` (承認済みと一致する記事は飛ばすので、途中で止めても再実行でよい)。headless `claude` と note のログイン (browser-use Profile 5) が必要。1 件 約40秒。
+- **停止条件**: 3 件連続の失敗、本文・価格・有料/試し読み境界の変化、更新後のタグ集合が承認済みと一致しない場合はその記事で止まる。note は大文字小文字を既存タグに合わせて書き換え、ギリシャ文字などは黙って落とす (検査で除外済み)。
+- **完了条件**: `--audit-only` で 286 件すべてが compliant。
+
 ### [AREA-PROFILE-JSON-RETIRE-01] 県の profile.json の生成をやめる (読み手 0 になったため)
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-09-28] [領域:データ]
 
