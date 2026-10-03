@@ -32,3 +32,7 @@ test('tags that differ only in case are duplicates, because note merges them', (
   list[97] = '#kakei';
   assert.match(validateHashtags(list, { title, text }).errors.join('\n'), /duplicate: #KAKEI/);
 });
+test('characters note drops are rejected before publishing', () => {
+  assert.match(validateHashtags(tags(['#αモデル']), { title, text }).errors.join('\n'), /characters note drops: #αモデル/);
+  assert.equal(validateHashtags(tags(['#ClaudeCode', '#e_Stat', '#生成AI']), { title, text }).ok, true);
+});

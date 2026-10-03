@@ -7,6 +7,8 @@ export const HASHTAG_COUNT = 99;
 export const HASHTAG_MODEL = 'claude-sonnet-5-5';
 export const HASHTAG_DIR = 'data/note/hashtags';
 const MAX_LENGTH = 25;
+// note silently drops tags with other scripts (2026-10-03: #αモデル vanished after a successful update).
+const ACCEPTED = /^#[0-9A-Za-z\u3041-\u3096\u30A1-\u30FA\u30FC\u30FB\u4E00-\u9FFF\u3005\uFF10-\uFF19\uFF21-\uFF3A\uFF41-\uFF5A_]+$/u;
 
 /** Tags that describe note itself or ask for engagement, not the article's subject. */
 export const GENERIC_HASHTAGS = new Set([
@@ -43,6 +45,7 @@ export function validateHashtags(tags, { title, text }) {
   const seen = new Set();
   for (const tag of tags) {
     if (typeof tag !== 'string' || !/^#[^#\s\-]+$/.test(tag)) errors.push(`format: ${tag}`);
+    else if (!ACCEPTED.test(tag)) errors.push(`characters note drops: ${tag}`);
     else if (/^#\d+$/.test(tag)) errors.push(`numbers only: ${tag}`);
     else if ([...tag].length > MAX_LENGTH) errors.push(`too long: ${tag}`);
     else if (GENERIC_HASHTAGS.has(tag)) errors.push(`generic: ${tag}`);
