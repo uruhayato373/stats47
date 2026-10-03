@@ -19062,9 +19062,9 @@
     },
     {
       "id": 993,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:18.014Z",
-      "updated_at": "2026-09-23T08:59:05.658Z",
+      "updated_at": "2026-10-03T18:23:41.174Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "ranking",
@@ -19074,13 +19074,15 @@
       "utm_url": "https://stats47.jp/ranking/department-supermarket-count-per-100k?utm_source=threads&utm_medium=social&utm_campaign=department-supermarket-count-per-100k&utm_content=versus",
       "template": "versus",
       "metric_keys": "department-supermarket-count-per-100k",
-      "scheduled_at": "2026-10-03T01:50:00.000Z"
+      "scheduled_at": "2026-10-03T01:50:00.000Z",
+      "post_url": "https://www.threads.com/@stats47jp/post/DeA632nDEv6",
+      "posted_at": "2026-10-03T01:50:57.000Z"
     },
     {
       "id": 994,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:18.019Z",
-      "updated_at": "2026-09-23T08:59:18.023Z",
+      "updated_at": "2026-10-03T18:23:41.194Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "area",
@@ -19090,7 +19092,9 @@
       "utm_url": "https://stats47.jp/areas/10000?utm_source=threads&utm_medium=social&utm_campaign=area-10000&utm_content=area-profile",
       "template": "area-profile",
       "metric_keys": null,
-      "scheduled_at": "2026-10-03T08:40:00.000Z"
+      "scheduled_at": "2026-10-03T08:40:00.000Z",
+      "post_url": "https://www.threads.com/@stats47jp/post/DeBptQSEXl5",
+      "posted_at": "2026-10-03T08:40:12.000Z"
     },
     {
       "id": 995,

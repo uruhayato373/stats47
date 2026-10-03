@@ -3,10 +3,14 @@
 投稿済み全件。`posted_at` 降順。
 スクリプトで自動生成 — 手編集しない (`sns-posts-store.cjs` が `insert()`/`updateById()` のたびに再生成)。
 
-**588 件** (最終更新: 2026-10-02)
+**592 件** (最終更新: 2026-10-03)
 
 | 日付 | 媒体 | コンテンツ | キャプション | URL |
 |---|---|---|---|---|
+| 2026-10-03 | 📸 Instagram | area-carousel/13000 |  | [🔗](https://www.instagram.com/p/DeCTBEBG519/) |
+| 2026-10-03 | 🧵 Threads | area/area-10000-profile | 群馬を数字と地域文化の両方から見る。 県鳥ヤマドリ、特産ギンヒカリ、全国順位をまとめた県別ページです。 続きは👇 ht… | [🔗](https://www.threads.com/@stats47jp/post/DeBptQSEXl5) |
+| 2026-10-03 | 📸 Instagram | compare-carousel/11000-vs-12000 |  | [🔗](https://www.instagram.com/p/DeA7D-ZFZsp/) |
+| 2026-10-03 | 🧵 Threads | ranking/department-supermarket-count-per-100k | 百貨店・総合スーパー数、人口10万人あたりで見ると景色が変わります。  沖縄県 1.7店 vs 山形県 0.28店 その… | [🔗](https://www.threads.com/@stats47jp/post/DeA632nDEv6) |
 | 2026-10-02 | 🧵 Threads | area/area-09000-profile | あなたの知る栃木は、データでも同じ姿ですか？ トチノキやイチゴから、人口・経済・暮らしまで横断できます。 続きは👇 h… | [🔗](https://www.threads.com/@stats47jp/post/Dd_CsQeCAmr) |
 | 2026-10-02 | 🧵 Threads | ranking/spouse-income | 勤労者世帯の「配偶者の収入」が最も多い県は？  1位山形15万9,360円、2位新潟15万6,286円、3位茨城15万6… | [🔗](https://www.threads.com/@stats47jp/post/Dd-U4sKgSJm) |
 | 2026-10-01 | 📸 Instagram | ranking-quiz/sake-consumption-expenditure |  | [🔗](https://www.instagram.com/p/Dd9ZXGRGjvL/) |
