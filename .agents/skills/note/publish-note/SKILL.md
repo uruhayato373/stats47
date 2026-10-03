@@ -143,6 +143,7 @@ node .claude/scripts/note/generate-note-hashtags.mjs --slug <slug>
   アップロードは PNG を使う。汎用版 (`generate-note-covers.mjs`) は SVG のみなので、その場合は
   `rsvg-convert`/`inkscape`/`svg-to-png.cjs` で PNG 化してからアップロードする（note は SVG を受け付けない場合がある）。
 - ハッシュタグ: `docs/31_note記事原稿/[vertical/]<slug>/hashtags.txt` に 1 行 1 タグで 99 個。Phase 7 でタグ入力時に使う。
+  draft.md のタイトルと本文から Claude が提案し、`lib/note-hashtags.mjs` の検査 (汎用タグ禁止・99 個・形式・年・県名) を通ったものだけを書く。headless `claude` CLI のログインが必要 (`~/.local/bin/claude auth status`)。
 
 ## 前提条件
 

@@ -59,6 +59,8 @@ function parseArgs(argv) {
     max,
     auditOnly: argv.includes('--audit-only'),
     includePaid: argv.includes('--include-paid'),
+    // Free articles only: the PUT guard still rejects a draft whose free body differs from the published one.
+    allowFreeDraft: argv.includes('--allow-free-draft'),
     reportPath: resolve(valueAfter('--report') || DEFAULT_REPORT),
   };
 }
@@ -100,11 +102,15 @@ async function fetchNote(key, attempts = 4) {
   throw lastError;
 }
 
+// note rewrites a tag to the casing of the existing hashtag (#CLI -> #cli), so compare case-insensitively.
+const tagKey = (name) => String(name).normalize('NFKC').toLowerCase();
+const keySet = (names) => [...new Set(names.map(tagKey))].sort().join('\n');
+
 function tagSet(note) {
-  return [...new Set((note.hashtag_notes || []).map((tag) => tag?.hashtag?.name))].sort().join('\n');
+  return keySet((note.hashtag_notes || []).map((tag) => tag?.hashtag?.name));
 }
 
-const sameTags = (snapshot, tags) => snapshot.hashtagSet === [...tags].sort().join('\n');
+const sameTags = (snapshot, tags) => snapshot.hashtagSet === keySet(tags);
 
 function noteSnapshot(note) {
   return {
@@ -112,6 +118,7 @@ function noteSnapshot(note) {
     price: Number(note.price || 0),
     separator: note.separator || null,
     bodySignature: fnv1a(note.body || ''),
+    bodyLength: (note.body || '').length,
     hashtagCount: Array.isArray(note.hashtag_notes) ? note.hashtag_notes.length : 0,
     hashtagSet: tagSet(note),
     account: note.user?.urlname || '',
@@ -232,6 +239,8 @@ function installTagPatch(tags, before) {
       price: before.price,
       separator: before.separator,
       bodySignature: before.bodySignature,
+      // A free article with a members-only line sends its whole text; only the part up to the line is public.
+      publicLength: before.price === 0 && before.separator ? before.bodyLength : null,
     })};
     const signature=value=>{
       let hash=0x811c9dc5;
@@ -241,15 +250,21 @@ function installTagPatch(tags, before) {
     };
     const original=window.fetch.bind(window);
     window.__stats47TagPatch={installed:true,pool:pool.length};
+    window.__stats47Requests=[];
+    const openXhr=XMLHttpRequest.prototype.open;
+    XMLHttpRequest.prototype.open=function(method,url,...rest){window.__stats47Requests.push('xhr '+method+' '+String(url).slice(0,120));return openXhr.call(this,method,url,...rest);};
     window.fetch=(input,init)=>{
       const url=String(input);
+      window.__stats47Requests.push('fetch '+String(init?.method||'GET')+' '+url.slice(0,120));
       if(url.includes('/api/v1/text_notes/')&&String(init?.method).toUpperCase()==='PUT'){
+        try{
         const body=JSON.parse(init.body);
         if(Number(body.price||0)!==expected.price)throw new Error('price changed before update');
-        if(expected.price>0&&body.separator!==expected.separator)throw new Error('paid separator changed before update');
+        if(expected.separator&&body.separator!==expected.separator)throw new Error('separator changed before update');
         if(typeof body.free_body!=='string')throw new Error('free body is missing');
         if(expected.price>0&&typeof body.pay_body!=='string')throw new Error('paid body is missing');
-        const freeBodySignature=signature(body.free_body);
+        const publicPart=expected.publicLength===null?body.free_body:body.free_body.slice(0,expected.publicLength);
+        const freeBodySignature=signature(publicPart);
         if(freeBodySignature!==expected.bodySignature)throw new Error('published free body changed before update');
         const before=Array.isArray(body.hashtags)?body.hashtags:[];
         const output=pool.slice();
@@ -266,6 +281,11 @@ function installTagPatch(tags, before) {
           price:Number(body.price||0),
           separator:body.separator||null
         };
+        }catch(error){
+          window.__stats47TagPatch={...window.__stats47TagPatch,status:'blocked',error:String(error.message)};
+          try{const sent=JSON.parse(init.body).free_body||'';window.__stats47SentBody=sent;}catch{}
+          throw error;
+        }
         return original(input,init).then(response=>{
           window.__stats47TagPatch.status=response.status;
           response.clone().text().then(text=>{
@@ -282,10 +302,10 @@ function installTagPatch(tags, before) {
   if (!installed.installed || installed.pool !== tags.length) throw new Error('タグ送信パッチの初期化に失敗しました');
 }
 
-async function updateArticle(slug, article, before, tags) {
+async function updateArticle(slug, article, before, tags, options) {
   const key = noteKeyFromUrl(article.url);
   const current = noteSnapshot(await fetchNote(key));
-  if (current.hasDraft) {
+  if (current.hasDraft && !(options.allowFreeDraft && current.price === 0)) {
     throw new Error('未公開下書きがあるため、下書き保全のためタグ更新を停止しました');
   }
   // `draft_reedit=true` がないと未公開下書きが存在する記事では、その本文まで
@@ -306,10 +326,12 @@ async function updateArticle(slug, article, before, tags) {
     throw new Error('公開設定画面のハッシュタグ入力欄が見つかりません');
   }
   const paid = before.price > 0;
+  // Paid articles and free articles with a members-only trial line keep their current line.
+  const keepBoundary = paid || Boolean(before.separator);
   const areaLabel = paid ? '有料エリア設定' : '試し読みエリアを設定';
   const areaIndex = findButtonIndex(state, areaLabel);
 
-  if (paid) {
+  if (keepBoundary) {
     if (!areaIndex) throw new Error(`\`${areaLabel}\` ボタンが見つかりません`);
     bu(['click', areaIndex]);
     await sleep(2_500);
@@ -360,20 +382,38 @@ async function updateArticle(slug, article, before, tags) {
       if(element.shadowRoot)walk(element.shadowRoot);
     });
     walk(document);
-    const button=buttons.find(element=>(element.textContent||'').trim()==='更新する');
+    // Several screens keep their own hidden "更新する"; press the one the user can see.
+    const visible=element=>{const box=element.getBoundingClientRect();return box.width>0&&box.height>0&&getComputedStyle(element).visibility!=='hidden';};
+    const button=buttons.filter(element=>(element.textContent||'').trim()==='更新する'&&visible(element)).at(-1);
     if(!button)return 'not-found';
     button.click();
     return 'clicked';
   })()`]);
   if (!clickResult.includes('clicked')) throw new Error('`更新する` ボタンの押下に失敗しました');
-  await sleep(4_500);
-
-  const publishResult = parseEvalJson(bu(['eval', `JSON.stringify({
-    patch:window.__stats47TagPatch||null,
-    published:document.body.innerText.includes('記事が公開されました')
-  })`]));
+  // The PUT can start several seconds after the click; wait for the patched fetch to record a status.
+  let publishResult;
+  for (let attempt = 0; attempt < 20; attempt += 1) {
+    await sleep(1_000);
+    publishResult = parseEvalJson(bu(['eval', `JSON.stringify({
+      patch:window.__stats47TagPatch||null,
+      published:document.body.innerText.includes('記事が公開されました')
+    })`]));
+    if (typeof publishResult.patch?.status === 'number') break;
+  }
   if (publishResult.patch?.status !== 200) {
-    throw new Error(`note更新APIが成功していません: ${JSON.stringify(publishResult.patch)}`);
+    const screen = join('/tmp', 'stats47-note-hashtag-boundaries', `${slug}-failed.png`);
+    mkdirSync(dirname(screen), { recursive: true });
+    bu(['screenshot', screen], { allowFailure: true });
+    const visible = parseEvalJson(bu(['eval', `JSON.stringify({requests:(window.__stats47Requests||[]).slice(-15),text:(document.querySelector('[role=dialog]')||document.body).innerText.slice(0,200)})`]));
+    const sent = parseEvalJson(bu(['eval', 'JSON.stringify(window.__stats47SentBody||null)']));
+    if (sent) {
+      const published = (await fetchNote(key)).body || '';
+      let at = 0;
+      while (at < sent.length && sent[at] === published[at]) at += 1;
+      visible.bodyDiff = { sentLength: sent.length, publishedLength: published.length, at,
+        sent: sent.slice(Math.max(0, at - 80), at + 160), published: published.slice(Math.max(0, at - 80), at + 160) };
+    }
+    throw new Error(`note更新APIが成功していません: ${JSON.stringify(publishResult.patch)} screen=${screen} text=${JSON.stringify(visible)}`);
   }
 
   let afterNote;
@@ -388,7 +428,7 @@ async function updateArticle(slug, article, before, tags) {
     throw new Error(`更新後のタグが承認済みと一致しません (${after.hashtagCount}個); response=${publishResult.patch.responseText || ''}`);
   }
   if (after.price !== before.price) throw new Error(`価格が変化しました: ${before.price} -> ${after.price}`);
-  if (paid && after.separator !== before.separator) throw new Error('有料境界が変化しました');
+  if (keepBoundary && after.separator !== before.separator) throw new Error('有料・試し読み境界が変化しました');
   if (after.bodySignature !== publishResult.patch.freeBodySignature) {
     throw new Error('noteが送信した無料本文と更新後の公開本文が一致しません');
   }
@@ -434,7 +474,7 @@ async function main() {
       if (sameTags(before, tags)) {
         report.summary.compliant += 1;
         report.articles.push({ slug, key, status: 'compliant', count: before.hashtagCount, paid: before.price > 0 });
-      } else if (before.hasDraft) {
+      } else if (before.hasDraft && !(options.allowFreeDraft && before.price === 0)) {
         report.summary.failed += 1;
         report.articles.push({
           slug,
@@ -469,7 +509,7 @@ async function main() {
     const position = report.summary.updated + report.summary.failed + 1;
     process.stdout.write(`[${position}/${Math.min(pending.length, options.max)}] ${item.slug} ... `);
     try {
-      const result = await updateArticle(item.slug, item.article, item.before, item.tags);
+      const result = await updateArticle(item.slug, item.article, item.before, item.tags, options);
       report.summary.updated += 1;
       report.summary.pending -= 1;
       report.articles.push({ slug: item.slug, status: 'updated', ...result });

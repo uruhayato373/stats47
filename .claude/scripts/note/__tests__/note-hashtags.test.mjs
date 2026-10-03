@@ -27,3 +27,8 @@ test('a prefecture in the title must have its own tag', () => {
   const withoutRegion = Array.from({ length: HASHTAG_COUNT }, (_, i) => `#家計項目${i}`);
   assert.match(validateHashtags(withoutRegion, { title, text }).errors.join('\n'), /missing title region: #鳥取県/);
 });
+test('tags that differ only in case are duplicates, because note merges them', () => {
+  const list = [...tags().slice(0, 98), '#家計項目0'.replace('家計項目0', 'KAKEI'), ];
+  list[97] = '#kakei';
+  assert.match(validateHashtags(list, { title, text }).errors.join('\n'), /duplicate: #KAKEI/);
+});

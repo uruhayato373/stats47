@@ -4,6 +4,7 @@ import path from 'node:path';
 import { createHash } from 'node:crypto';
 
 export const HASHTAG_COUNT = 99;
+export const HASHTAG_MODEL = 'claude-sonnet-5-5';
 export const HASHTAG_DIR = 'data/note/hashtags';
 const MAX_LENGTH = 25;
 
@@ -46,11 +47,13 @@ export function validateHashtags(tags, { title, text }) {
     else if ([...tag].length > MAX_LENGTH) errors.push(`too long: ${tag}`);
     else if (GENERIC_HASHTAGS.has(tag)) errors.push(`generic: ${tag}`);
     else if (text != null && /^#(19|20)\d{2}年/.test(tag) && !`${title} ${text}`.includes(tag.slice(1, 6))) errors.push(`year not in article: ${tag}`);
-    if (seen.has(tag)) errors.push(`duplicate: ${tag}`);
-    seen.add(tag);
+    // note treats #CLI and #cli as one tag.
+    const key = String(tag).normalize('NFKC').toLowerCase();
+    if (seen.has(key)) errors.push(`duplicate: ${tag}`);
+    seen.add(key);
   }
   if (tags.length !== HASHTAG_COUNT) errors.push(`count ${tags.length} != ${HASHTAG_COUNT}`);
-  for (const tag of requiredHashtags(title)) if (!seen.has(tag)) errors.push(`missing title region: ${tag}`);
+  for (const tag of requiredHashtags(title)) if (!seen.has(tag.normalize('NFKC').toLowerCase())) errors.push(`missing title region: ${tag}`);
   return { ok: errors.length === 0, errors };
 }
 
