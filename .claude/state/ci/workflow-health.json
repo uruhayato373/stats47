@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-03T03:53:40.763Z",
+  "generatedAt": "2026-10-04T04:25:18.031Z",
   "minStreak": 2,
   "perPage": 12,
   "checked": 49,
@@ -10,7 +10,7 @@
       "unhealthy": false,
       "failureStreak": 0,
       "lastSuccessAt": "2026-09-27T15:57:51Z",
-      "daysSinceSuccess": 5,
+      "daysSinceSuccess": 6,
       "everSucceeded": true,
       "recentFailures": [],
       "runsInspected": 12,
@@ -21,7 +21,7 @@
       "unhealthy": true,
       "failureStreak": 3,
       "lastSuccessAt": "2026-09-20T16:45:42Z",
-      "daysSinceSuccess": 12,
+      "daysSinceSuccess": 13,
       "everSucceeded": true,
       "recentFailures": [
         {
@@ -48,7 +48,7 @@
       "unhealthy": false,
       "failureStreak": 0,
       "lastSuccessAt": "2026-09-28T00:31:33Z",
-      "daysSinceSuccess": 5,
+      "daysSinceSuccess": 6,
       "everSucceeded": true,
       "recentFailures": [],
       "runsInspected": 12,
@@ -63,6 +63,11 @@
       "everSucceeded": false,
       "recentFailures": [
         {
+          "id": 37165435290,
+          "at": "2026-10-04T00:35:53Z",
+          "conclusion": "failure"
+        },
+        {
           "id": 37085100503,
           "at": "2026-10-03T01:10:56Z",
           "conclusion": "failure"
@@ -71,11 +76,6 @@
           "id": 36952096000,
           "at": "2026-10-02T01:40:56Z",
           "conclusion": "failure"
-        },
-        {
-          "id": 36800333972,
-          "at": "2026-10-01T01:16:50Z",
-          "conclusion": "failure"
         }
       ],
       "runsInspected": 12,
@@ -83,34 +83,18 @@
     },
     {
       "workflow": "authenticated-measurement.yml",
-      "unhealthy": true,
-      "failureStreak": 5,
-      "lastSuccessAt": "2026-09-27T14:42:10Z",
-      "daysSinceSuccess": 5,
+      "unhealthy": false,
+      "failureStreak": 0,
+      "lastSuccessAt": "2026-10-03T14:19:01Z",
+      "daysSinceSuccess": 0,
       "everSucceeded": true,
-      "recentFailures": [
-        {
-          "id": 37029731008,
-          "at": "2026-10-02T15:49:57Z",
-          "conclusion": "failure"
-        },
-        {
-          "id": 36892112294,
-          "at": "2026-10-01T16:27:19Z",
-          "conclusion": "failure"
-        },
-        {
-          "id": 36740420727,
-          "at": "2026-09-30T15:55:35Z",
-          "conclusion": "failure"
-        }
-      ],
+      "recentFailures": [],
       "runsInspected": 12,
       "schedule": {
         "code": null,
-        "expectedAt": "2026-10-02T09:20:00.000Z",
-        "deadlineAt": "2026-10-02T15:20:00.000Z",
-        "lastRunAt": "2026-10-02T15:49:57.000Z",
+        "expectedAt": "2026-10-03T09:20:00.000Z",
+        "deadlineAt": "2026-10-03T15:20:00.000Z",
+        "lastRunAt": "2026-10-03T14:18:52.000Z",
         "graceHours": 6
       }
     },
@@ -119,7 +103,7 @@
       "unhealthy": false,
       "failureStreak": 0,
       "lastSuccessAt": "2026-09-27T23:58:19Z",
-      "daysSinceSuccess": 5,
+      "daysSinceSuccess": 6,
       "everSucceeded": true,
       "recentFailures": [],
       "runsInspected": 5,
@@ -129,7 +113,7 @@
       "workflow": "blog-remediation-daily.yml",
       "unhealthy": false,
       "failureStreak": 0,
-      "lastSuccessAt": "2026-10-03T01:39:31Z",
+      "lastSuccessAt": "2026-10-04T02:20:34Z",
       "daysSinceSuccess": 0,
       "everSucceeded": true,
       "recentFailures": [],
@@ -141,7 +125,7 @@
       "unhealthy": false,
       "failureStreak": 0,
       "lastSuccessAt": "2026-09-27T23:39:16Z",
-      "daysSinceSuccess": 5,
+      "daysSinceSuccess": 6,
       "everSucceeded": true,
       "recentFailures": [],
       "runsInspected": 2,
@@ -151,8 +135,8 @@
       "workflow": "cleanup-r2-sns-videos.yml",
       "unhealthy": false,
       "failureStreak": 0,
-      "lastSuccessAt": "2026-09-26T22:08:05Z",
-      "daysSinceSuccess": 6,
+      "lastSuccessAt": "2026-10-03T22:20:59Z",
+      "daysSinceSuccess": 0,
       "everSucceeded": true,
       "recentFailures": [],
       "runsInspected": 12,
@@ -163,7 +147,7 @@
       "unhealthy": false,
       "failureStreak": 0,
       "lastSuccessAt": "2026-09-15T04:03:18Z",
-      "daysSinceSuccess": 17,
+      "daysSinceSuccess": 19,
       "everSucceeded": true,
       "recentFailures": [],
       "runsInspected": 4,
@@ -173,7 +157,7 @@
       "workflow": "cloudflare-usage-daily.yml",
       "unhealthy": false,
       "failureStreak": 0,
-      "lastSuccessAt": "2026-10-02T21:26:53Z",
+      "lastSuccessAt": "2026-10-03T20:06:01Z",
       "daysSinceSuccess": 0,
       "everSucceeded": true,
       "recentFailures": [],
@@ -184,11 +168,11 @@
       "workflow": "correlation-refresh.yml",
       "unhealthy": false,
       "failureStreak": 0,
-      "lastSuccessAt": "2026-10-02T22:36:14Z",
+      "lastSuccessAt": "2026-10-03T21:48:42Z",
       "daysSinceSuccess": 0,
       "everSucceeded": true,
       "recentFailures": [],
-      "runsInspected": 10,
+      "runsInspected": 11,
       "schedule": null
     },
     {
@@ -196,7 +180,7 @@
       "unhealthy": false,
       "failureStreak": 0,
       "lastSuccessAt": "2026-09-05T01:38:38Z",
-      "daysSinceSuccess": 28,
+      "daysSinceSuccess": 29,
       "everSucceeded": true,
       "recentFailures": [],
       "runsInspected": 4,
@@ -207,7 +191,7 @@
       "unhealthy": false,
       "failureStreak": 0,
       "lastSuccessAt": "2026-09-05T09:00:03Z",
-      "daysSinceSuccess": 27,
+      "daysSinceSuccess": 28,
       "everSucceeded": true,
       "recentFailures": [],
       "runsInspected": 3,
@@ -218,7 +202,7 @@
       "unhealthy": false,
       "failureStreak": 0,
       "lastSuccessAt": "2026-10-02T22:41:04Z",
-      "daysSinceSuccess": 0,
+      "daysSinceSuccess": 1,
       "everSucceeded": true,
       "recentFailures": [],
       "runsInspected": 1,
@@ -228,22 +212,22 @@
       "workflow": "estat-ssds-enum.yml",
       "unhealthy": false,
       "failureStreak": 0,
-      "lastSuccessAt": "2026-09-26T23:05:23Z",
-      "daysSinceSuccess": 6,
+      "lastSuccessAt": "2026-10-03T23:15:23Z",
+      "daysSinceSuccess": 0,
       "everSucceeded": true,
       "recentFailures": [],
-      "runsInspected": 2,
+      "runsInspected": 3,
       "schedule": null
     },
     {
       "workflow": "estat-year-coverage-audit-weekly.yml",
       "unhealthy": false,
       "failureStreak": 0,
-      "lastSuccessAt": "2026-09-26T22:38:10Z",
-      "daysSinceSuccess": 6,
+      "lastSuccessAt": "2026-10-03T22:50:26Z",
+      "daysSinceSuccess": 0,
       "everSucceeded": true,
       "recentFailures": [],
-      "runsInspected": 2,
+      "runsInspected": 3,
       "schedule": null
     },
     {
@@ -251,7 +235,7 @@
       "unhealthy": false,
       "failureStreak": 0,
       "lastSuccessAt": "2026-09-27T15:38:34Z",
-      "daysSinceSuccess": 5,
+      "daysSinceSuccess": 6,
       "everSucceeded": true,
       "recentFailures": [],
       "runsInspected": 12,
@@ -262,7 +246,7 @@
       "unhealthy": false,
       "failureStreak": 0,
       "lastSuccessAt": "2026-09-27T22:40:58Z",
-      "daysSinceSuccess": 5,
+      "daysSinceSuccess": 6,
       "everSucceeded": true,
       "recentFailures": [],
       "runsInspected": 9,
@@ -273,7 +257,7 @@
       "unhealthy": false,
       "failureStreak": 0,
       "lastSuccessAt": "2026-09-28T18:40:45Z",
-      "daysSinceSuccess": 4,
+      "daysSinceSuccess": 5,
       "everSucceeded": true,
       "recentFailures": [],
       "runsInspected": 6,
@@ -283,7 +267,7 @@
       "workflow": "gsc-url-inspection-daily.yml",
       "unhealthy": false,
       "failureStreak": 0,
-      "lastSuccessAt": "2026-10-03T01:17:58Z",
+      "lastSuccessAt": "2026-10-04T00:40:33Z",
       "daysSinceSuccess": 0,
       "everSucceeded": true,
       "recentFailures": [],
@@ -295,7 +279,7 @@
       "unhealthy": false,
       "failureStreak": 0,
       "lastSuccessAt": "2026-09-27T23:50:12Z",
-      "daysSinceSuccess": 5,
+      "daysSinceSuccess": 6,
       "everSucceeded": true,
       "recentFailures": [],
       "runsInspected": 1,
@@ -306,7 +290,7 @@
       "unhealthy": false,
       "failureStreak": 0,
       "lastSuccessAt": "2026-09-29T21:46:36Z",
-      "daysSinceSuccess": 3,
+      "daysSinceSuccess": 4,
       "everSucceeded": true,
       "recentFailures": [],
       "runsInspected": 12,
@@ -316,11 +300,11 @@
       "workflow": "internal-link-audit-weekly.yml",
       "unhealthy": false,
       "failureStreak": 0,
-      "lastSuccessAt": "2026-09-26T21:48:14Z",
-      "daysSinceSuccess": 6,
+      "lastSuccessAt": "2026-10-03T21:57:49Z",
+      "daysSinceSuccess": 0,
       "everSucceeded": true,
       "recentFailures": [],
-      "runsInspected": 10,
+      "runsInspected": 11,
       "schedule": null
     },
     {
@@ -328,7 +312,7 @@
       "unhealthy": false,
       "failureStreak": 0,
       "lastSuccessAt": "2026-10-01T22:30:56Z",
-      "daysSinceSuccess": 1,
+      "daysSinceSuccess": 2,
       "everSucceeded": true,
       "recentFailures": [],
       "runsInspected": 5,
@@ -337,11 +321,16 @@
     {
       "workflow": "note-circulation-audit-weekly.yml",
       "unhealthy": true,
-      "failureStreak": 3,
+      "failureStreak": 4,
       "lastSuccessAt": null,
       "daysSinceSuccess": null,
       "everSucceeded": false,
       "recentFailures": [
+        {
+          "id": 37160611864,
+          "at": "2026-10-03T23:05:19Z",
+          "conclusion": "cancelled"
+        },
         {
           "id": 36277651742,
           "at": "2026-09-26T22:52:06Z",
@@ -351,10 +340,22 @@
           "id": 35473012521,
           "at": "2026-09-19T22:19:47Z",
           "conclusion": "failure"
-        },
+        }
+      ],
+      "runsInspected": 4,
+      "schedule": null
+    },
+    {
+      "workflow": "note-product-card-audit-weekly.yml",
+      "unhealthy": false,
+      "failureStreak": 1,
+      "lastSuccessAt": "2026-09-26T22:58:01Z",
+      "daysSinceSuccess": 7,
+      "everSucceeded": true,
+      "recentFailures": [
         {
-          "id": 34722399008,
-          "at": "2026-09-12T22:18:49Z",
+          "id": 37160712762,
+          "at": "2026-10-03T23:07:05Z",
           "conclusion": "failure"
         }
       ],
@@ -362,24 +363,18 @@
       "schedule": null
     },
     {
-      "workflow": "note-product-card-audit-weekly.yml",
-      "unhealthy": false,
-      "failureStreak": 0,
-      "lastSuccessAt": "2026-09-26T22:58:01Z",
-      "daysSinceSuccess": 6,
-      "everSucceeded": true,
-      "recentFailures": [],
-      "runsInspected": 2,
-      "schedule": null
-    },
-    {
       "workflow": "ogp-image-audit-weekly.yml",
       "unhealthy": true,
-      "failureStreak": 9,
+      "failureStreak": 10,
       "lastSuccessAt": "2026-07-25T19:25:48Z",
-      "daysSinceSuccess": 69,
+      "daysSinceSuccess": 70,
       "everSucceeded": true,
       "recentFailures": [
+        {
+          "id": 37153147851,
+          "at": "2026-10-03T20:53:23Z",
+          "conclusion": "failure"
+        },
         {
           "id": 36271137465,
           "at": "2026-09-26T20:54:49Z",
@@ -388,11 +383,6 @@
         {
           "id": 35467246216,
           "at": "2026-09-19T20:23:37Z",
-          "conclusion": "failure"
-        },
-        {
-          "id": 34717006675,
-          "at": "2026-09-12T20:24:39Z",
           "conclusion": "failure"
         }
       ],
@@ -403,16 +393,16 @@
       "workflow": "page-quality-audit-weekly.yml",
       "unhealthy": false,
       "failureStreak": 0,
-      "lastSuccessAt": "2026-09-26T21:39:25Z",
-      "daysSinceSuccess": 6,
+      "lastSuccessAt": "2026-10-03T21:11:15Z",
+      "daysSinceSuccess": 0,
       "everSucceeded": true,
       "recentFailures": [],
-      "runsInspected": 2,
+      "runsInspected": 3,
       "schedule": {
         "code": null,
-        "expectedAt": "2026-09-26T18:00:00.000Z",
-        "deadlineAt": "2026-09-27T00:00:00.000Z",
-        "lastRunAt": "2026-09-26T20:37:46.000Z",
+        "expectedAt": "2026-10-03T18:00:00.000Z",
+        "deadlineAt": "2026-10-04T00:00:00.000Z",
+        "lastRunAt": "2026-10-03T20:34:42.000Z",
         "graceHours": 6
       }
     },
@@ -420,7 +410,7 @@
       "workflow": "post-instagram-scheduled.yml",
       "unhealthy": false,
       "failureStreak": 0,
-      "lastSuccessAt": "2026-10-03T01:52:55Z",
+      "lastSuccessAt": "2026-10-04T02:31:47Z",
       "daysSinceSuccess": 0,
       "everSucceeded": true,
       "recentFailures": [],
@@ -430,11 +420,16 @@
     {
       "workflow": "provenance-audit-weekly.yml",
       "unhealthy": true,
-      "failureStreak": 5,
+      "failureStreak": 6,
       "lastSuccessAt": "2026-08-22T19:17:07Z",
-      "daysSinceSuccess": 41,
+      "daysSinceSuccess": 42,
       "everSucceeded": true,
       "recentFailures": [
+        {
+          "id": 37156569145,
+          "at": "2026-10-03T21:53:27Z",
+          "conclusion": "failure"
+        },
         {
           "id": 36273837449,
           "at": "2026-09-26T21:42:09Z",
@@ -444,21 +439,16 @@
           "id": 35469596086,
           "at": "2026-09-19T21:10:16Z",
           "conclusion": "failure"
-        },
-        {
-          "id": 34718968690,
-          "at": "2026-09-12T21:05:47Z",
-          "conclusion": "failure"
         }
       ],
-      "runsInspected": 10,
+      "runsInspected": 11,
       "schedule": null
     },
     {
       "workflow": "psi-audit-daily.yml",
       "unhealthy": false,
       "failureStreak": 0,
-      "lastSuccessAt": "2026-10-02T21:28:27Z",
+      "lastSuccessAt": "2026-10-03T19:56:03Z",
       "daysSinceSuccess": 0,
       "everSucceeded": true,
       "recentFailures": [],
@@ -467,29 +457,18 @@
     },
     {
       "workflow": "quality-suite-weekly.yml",
-      "unhealthy": true,
-      "failureStreak": 2,
-      "lastSuccessAt": null,
-      "daysSinceSuccess": null,
-      "everSucceeded": false,
-      "recentFailures": [
-        {
-          "id": 36283529103,
-          "at": "2026-09-27T00:46:50Z",
-          "conclusion": "failure"
-        },
-        {
-          "id": 35478303347,
-          "at": "2026-09-20T00:15:47Z",
-          "conclusion": "failure"
-        }
-      ],
-      "runsInspected": 2,
+      "unhealthy": false,
+      "failureStreak": 0,
+      "lastSuccessAt": "2026-10-04T02:00:22Z",
+      "daysSinceSuccess": 0,
+      "everSucceeded": true,
+      "recentFailures": [],
+      "runsInspected": 3,
       "schedule": {
         "code": null,
         "expectedAt": "2026-09-26T22:30:00.000Z",
         "deadlineAt": "2026-09-27T04:30:00.000Z",
-        "lastRunAt": "2026-09-27T00:46:50.000Z",
+        "lastRunAt": "2026-10-04T01:50:10.000Z",
         "graceHours": 6
       }
     },
@@ -498,32 +477,32 @@
       "unhealthy": false,
       "failureStreak": 0,
       "lastSuccessAt": "2026-09-05T20:39:23Z",
-      "daysSinceSuccess": 27,
+      "daysSinceSuccess": 28,
       "everSucceeded": true,
       "recentFailures": [],
-      "runsInspected": 9,
+      "runsInspected": 10,
       "schedule": null
     },
     {
       "workflow": "ranking-integrity-audit-weekly.yml",
       "unhealthy": false,
       "failureStreak": 0,
-      "lastSuccessAt": "2026-09-26T22:22:41Z",
-      "daysSinceSuccess": 6,
+      "lastSuccessAt": "2026-10-03T22:34:30Z",
+      "daysSinceSuccess": 0,
       "everSucceeded": true,
       "recentFailures": [],
-      "runsInspected": 9,
+      "runsInspected": 10,
       "schedule": null
     },
     {
       "workflow": "review-cadence-guard.yml",
       "unhealthy": false,
       "failureStreak": 0,
-      "lastSuccessAt": "2026-10-03T02:09:38Z",
+      "lastSuccessAt": "2026-10-04T02:47:35Z",
       "daysSinceSuccess": 0,
       "everSucceeded": true,
       "recentFailures": [],
-      "runsInspected": 2,
+      "runsInspected": 3,
       "schedule": null
     },
     {
@@ -531,7 +510,7 @@
       "unhealthy": false,
       "failureStreak": 0,
       "lastSuccessAt": "2026-09-27T17:10:22Z",
-      "daysSinceSuccess": 5,
+      "daysSinceSuccess": 6,
       "everSucceeded": true,
       "recentFailures": [],
       "runsInspected": 10,
@@ -540,22 +519,34 @@
     {
       "workflow": "security-scan.yml",
       "unhealthy": false,
-      "failureStreak": 0,
+      "failureStreak": 1,
       "lastSuccessAt": "2026-08-02T03:02:11Z",
-      "daysSinceSuccess": 62,
+      "daysSinceSuccess": 63,
       "everSucceeded": true,
-      "recentFailures": [],
+      "recentFailures": [
+        {
+          "id": 37172812353,
+          "at": "2026-10-04T03:01:07Z",
+          "conclusion": "failure"
+        }
+      ],
       "runsInspected": 12,
       "schedule": null
     },
     {
       "workflow": "seo-keyword-cycle-daily.yml",
       "unhealthy": false,
-      "failureStreak": 0,
+      "failureStreak": 1,
       "lastSuccessAt": "2026-10-02T07:02:32Z",
-      "daysSinceSuccess": 0,
+      "daysSinceSuccess": 1,
       "everSucceeded": true,
-      "recentFailures": [],
+      "recentFailures": [
+        {
+          "id": 37103400062,
+          "at": "2026-10-03T06:32:28Z",
+          "conclusion": "failure"
+        }
+      ],
       "runsInspected": 12,
       "schedule": null
     },
@@ -564,7 +555,7 @@
       "unhealthy": false,
       "failureStreak": 0,
       "lastSuccessAt": "2026-09-27T15:46:36Z",
-      "daysSinceSuccess": 5,
+      "daysSinceSuccess": 6,
       "everSucceeded": true,
       "recentFailures": [],
       "runsInspected": 12,
@@ -574,7 +565,7 @@
       "workflow": "sns-port-bubble-daily.yml",
       "unhealthy": false,
       "failureStreak": 0,
-      "lastSuccessAt": "2026-10-03T02:54:19Z",
+      "lastSuccessAt": "2026-10-04T03:23:18Z",
       "daysSinceSuccess": 0,
       "everSucceeded": true,
       "recentFailures": [],
@@ -585,11 +576,11 @@
       "workflow": "sns-verify-threads-posted.yml",
       "unhealthy": false,
       "failureStreak": 0,
-      "lastSuccessAt": "2026-10-02T19:37:14Z",
+      "lastSuccessAt": "2026-10-03T18:23:47Z",
       "daysSinceSuccess": 0,
       "everSucceeded": true,
       "recentFailures": [],
-      "runsInspected": 10,
+      "runsInspected": 11,
       "schedule": null
     },
     {
@@ -597,7 +588,7 @@
       "unhealthy": false,
       "failureStreak": 0,
       "lastSuccessAt": "2026-09-27T16:05:02Z",
-      "daysSinceSuccess": 5,
+      "daysSinceSuccess": 6,
       "everSucceeded": true,
       "recentFailures": [],
       "runsInspected": 12,
@@ -608,7 +599,7 @@
       "unhealthy": false,
       "failureStreak": 0,
       "lastSuccessAt": "2026-09-27T19:14:40Z",
-      "daysSinceSuccess": 5,
+      "daysSinceSuccess": 6,
       "everSucceeded": true,
       "recentFailures": [],
       "runsInspected": 5,
@@ -618,7 +609,7 @@
       "workflow": "sync-rakuten-catalog.yml",
       "unhealthy": false,
       "failureStreak": 0,
-      "lastSuccessAt": "2026-10-02T23:00:16Z",
+      "lastSuccessAt": "2026-10-03T22:17:21Z",
       "daysSinceSuccess": 0,
       "everSucceeded": true,
       "recentFailures": [],
@@ -629,8 +620,8 @@
       "workflow": "theme-chart-audit-weekly.yml",
       "unhealthy": false,
       "failureStreak": 0,
-      "lastSuccessAt": "2026-10-02T04:21:25Z",
-      "daysSinceSuccess": 0,
+      "lastSuccessAt": "2026-10-03T04:03:15Z",
+      "daysSinceSuccess": 1,
       "everSucceeded": true,
       "recentFailures": [],
       "runsInspected": 12,
@@ -640,11 +631,11 @@
       "workflow": "visualization-render-weekly.yml",
       "unhealthy": false,
       "failureStreak": 0,
-      "lastSuccessAt": "2026-09-26T23:48:33Z",
-      "daysSinceSuccess": 6,
+      "lastSuccessAt": "2026-10-04T00:00:54Z",
+      "daysSinceSuccess": 0,
       "everSucceeded": true,
       "recentFailures": [],
-      "runsInspected": 5,
+      "runsInspected": 6,
       "schedule": null
     },
     {
@@ -652,7 +643,7 @@
       "unhealthy": false,
       "failureStreak": 0,
       "lastSuccessAt": "2026-09-28T03:23:22Z",
-      "daysSinceSuccess": 5,
+      "daysSinceSuccess": 6,
       "everSucceeded": true,
       "recentFailures": [],
       "runsInspected": 12,
@@ -667,6 +658,11 @@
       "everSucceeded": false,
       "recentFailures": [
         {
+          "id": 37094652230,
+          "at": "2026-10-03T03:52:47Z",
+          "conclusion": "failure"
+        },
+        {
           "id": 36963353319,
           "at": "2026-10-02T04:10:08Z",
           "conclusion": "failure"
@@ -674,11 +670,6 @@
         {
           "id": 36814382693,
           "at": "2026-10-01T04:17:03Z",
-          "conclusion": "failure"
-        },
-        {
-          "id": 36667281361,
-          "at": "2026-09-30T04:05:07Z",
           "conclusion": "failure"
         }
       ],
