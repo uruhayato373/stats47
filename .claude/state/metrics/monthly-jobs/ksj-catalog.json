@@ -4,19 +4,6 @@
   "runs": [
     {
       "job": "ksj-catalog",
-      "month": "2026-10",
-      "status": "ok",
-      "ranAt": "2026-10-01T22:30:51.816Z",
-      "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/36935472577",
-      "fields": {
-        "total": "126",
-        "added": "0",
-        "removed": "0"
-      },
-      "summary": "## KSJ Catalog Diff\n\n- Total: 126 datasets\n- 追加: 0 件\n- 削除: 0 件\n"
-    },
-    {
-      "job": "ksj-catalog",
       "month": "2026-09",
       "status": "ok",
       "ranAt": "2026-09-01T20:49:58Z",

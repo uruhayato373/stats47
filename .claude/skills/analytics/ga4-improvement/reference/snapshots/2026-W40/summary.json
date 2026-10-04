@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 2,
+  "source": "ga4",
+  "weekId": "2026-W40",
+  "anchor": "2026-10-04",
+  "delayDays": 1,
+  "generatedAt": "2026-10-04T15:37:30.206Z",
+  "jpFinalized7d": {
+    "periodStart": "2026-09-27",
+    "periodEnd": "2026-10-03",
+    "windowDays": 7,
+    "isFinalized": true,
+    "generatedAt": "2026-10-04T15:37:30.206Z",
+    "source": "ga4",
+    "limitations": [
+      "取得遅延 1 日を考慮 (anchor=2026-10-04)",
+      "KPI は country=Japan の clean slice。raw (無フィルタ) は pollution 監視専用で KPI へ混ぜない",
+      "activeUsers は期間内 user dedup 値 (日別行の合算ではない)"
+    ],
+    "kpis": {
+      "activeUsers": 4872,
+      "sessions": 5651,
+      "engagedSessions": 4021,
+      "pageviews": 10783,
+      "engagementRate": 0.7115554769067421
+    },
+    "coverage": {
+      "status": "complete",
+      "missingDates": [],
+      "presentCount": 7,
+      "expectedCount": 7
+    }
+  },
+  "jpPrevious7d": {
+    "periodStart": "2026-09-20",
+    "periodEnd": "2026-09-26",
+    "windowDays": 7,
+    "isFinalized": true,
+    "generatedAt": "2026-10-04T15:37:30.206Z",
+    "source": "ga4",
+    "limitations": [
+      "取得遅延 1 日を考慮 (anchor=2026-10-04)",
+      "KPI は country=Japan の clean slice。raw (無フィルタ) は pollution 監視専用で KPI へ混ぜない",
+      "activeUsers は期間内 user dedup 値 (日別行の合算ではない)"
+    ],
+    "kpis": {
+      "activeUsers": 3836,
+      "sessions": 4393,
+      "engagedSessions": 2924,
+      "pageviews": 9489,
+      "engagementRate": 0.6656043705895743
+    },
+    "coverage": {
+      "status": "complete",
+      "missingDates": [],
+      "presentCount": 7,
+      "expectedCount": 7
+    }
+  },
+  "pollution": {
+    "periodStart": "2026-09-27",
+    "periodEnd": "2026-10-03",
+    "windowDays": 7,
+    "isFinalized": true,
+    "generatedAt": "2026-10-04T15:37:30.206Z",
+    "source": "ga4",
+    "limitations": [
+      "raw (無フィルタ) − Japan-only の残余 = overseas/(not set) 汚染量の推定"
+    ],
+    "rawSessions": 6812,
+    "jpSessions": 5651,
+    "pollutedSessions": 1161,
+    "pollutedPct": 17
+  },
+  "wow": {
+    "activeUsers": {
+      "delta": 1036,
+      "pct": 27
+    },
+    "sessions": {
+      "delta": 1258,
+      "pct": 28.6
+    },
+    "engagedSessions": {
+      "delta": 1097,
+      "pct": 37.5
+    },
+    "pageviews": {
+      "delta": 1294,
+      "pct": 13.6
+    },
+    "engagementRate": {
+      "delta": 0.046,
+      "pct": 6.9
+    }
+  },
+  "wowBlockedReason": null
+}

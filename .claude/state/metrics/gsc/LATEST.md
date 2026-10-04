@@ -1,26 +1,19 @@
-# GSC Latest — 2026-W39
+# GSC Latest — 2026-W40
 
 ## 確定7日 KPI (finalized7d — WoW・フェーズゲートはここだけ)
 
-期間: 2026-09-18 〜 2026-09-24（直前7日: 2026-09-11 〜 2026-09-17・重複なし）
-
-| Metric | 確定7日 | 直前7日 | WoW |
-|---|---|---|---|
-| Clicks | 2610 | 2958 | -348 (-11.8%) |
-| Impressions | 85159 | 77443 | +7716 (+10%) |
-| CTR | 3.06% | 3.82% | |
-| Avg Position | 6.83 | 6.84 | |
+⚠️ insufficient-data — insufficient-data: finalized7d=partial (missing 2026-09-30,2026-10-01) / previous7d=complete (missing -)。WoW・ゲート判定は停止する。
 
 ## ローリング28日 (rolling28d — 機会発見用。前週比を出さない)
 
 | Metric | ローリング28日 |
 |---|---|
-| Clicks | 9947 |
-| Impressions | 298194 |
-| CTR | 3.34% |
-| Avg Position | 6.96 |
-| Queries rows | 9420 |
-| Pages rows | 5568 |
+| Clicks | 10018 |
+| Impressions | 294095 |
+| CTR | 3.41% |
+| Avg Position | 6.85 |
+| Queries rows | 9971 |
+| Pages rows | 5491 |
 
 > 28日窓は前回 snapshot と 21 日重複する。この表の週次差分を WoW と呼ばない。
 
