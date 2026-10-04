@@ -1,4 +1,4 @@
-# GSC カバレッジ是正 — 2026-W39 (2026-10-03)
+# GSC カバレッジ是正 — 2026-W39 (2026-10-04)
 
 > SSOT: `.claude/state/gsc/coverage-remediation-queue.json` / 正典: `.claude/skills/analytics/gsc-coverage-remediation/SKILL.md`
 > 入力観測日: 2026-09-27 / 入力週齢: 1 週
