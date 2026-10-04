@@ -3,10 +3,13 @@
 投稿済み全件。`posted_at` 降順。
 スクリプトで自動生成 — 手編集しない (`sns-posts-store.cjs` が `insert()`/`updateById()` のたびに再生成)。
 
-**592 件** (最終更新: 2026-10-03)
+**595 件** (最終更新: 2026-10-04)
 
 | 日付 | 媒体 | コンテンツ | キャプション | URL |
 |---|---|---|---|---|
+| 2026-10-04 | 📸 Instagram | map-carousel/natto-consumption-expenditure |  | [🔗](https://www.instagram.com/p/DeE7_A3FvHO/) |
+| 2026-10-04 | 🧵 Threads | area/area-11000-profile | 旅先では見えにくい埼玉の輪郭。 県木ケヤキと特産狭山茶、暮らしの統計を同じページで確認できます。 続きは👇 https… | [🔗](https://www.threads.com/@stats47jp/post/DeELHKuiRO4) |
+| 2026-10-04 | 🧵 Threads | ranking/other-mushroom-consumption-quantity | きのこの秋。しいたけ以外の「他のきのこ」を最も多く買うのは山形です。  1世帯あたり4,367g。2位秋田、3位富山。 … | [🔗](https://www.threads.com/@stats47jp/post/DeDdUOREi-L) |
 | 2026-10-03 | 📸 Instagram | area-carousel/13000 |  | [🔗](https://www.instagram.com/p/DeCTBEBG519/) |
 | 2026-10-03 | 🧵 Threads | area/area-10000-profile | 群馬を数字と地域文化の両方から見る。 県鳥ヤマドリ、特産ギンヒカリ、全国順位をまとめた県別ページです。 続きは👇 ht… | [🔗](https://www.threads.com/@stats47jp/post/DeBptQSEXl5) |
 | 2026-10-03 | 📸 Instagram | compare-carousel/11000-vs-12000 |  | [🔗](https://www.instagram.com/p/DeA7D-ZFZsp/) |

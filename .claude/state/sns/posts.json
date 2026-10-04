@@ -19098,9 +19098,9 @@
     },
     {
       "id": 995,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:18.024Z",
-      "updated_at": "2026-09-23T08:59:30.671Z",
+      "updated_at": "2026-10-04T18:27:48.869Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "ranking",
@@ -19110,13 +19110,15 @@
       "utm_url": "https://stats47.jp/ranking/other-mushroom-consumption-quantity?utm_source=threads&utm_medium=social&utm_campaign=other-mushroom-consumption-quantity&utm_content=angle-experience",
       "template": "angle-experience",
       "metric_keys": "other-mushroom-consumption-quantity",
-      "scheduled_at": "2026-10-04T01:30:00.000Z"
+      "scheduled_at": "2026-10-04T01:30:00.000Z",
+      "post_url": "https://www.threads.com/@stats47jp/post/DeDdUOREi-L",
+      "posted_at": "2026-10-04T01:30:24.000Z"
     },
     {
       "id": 996,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:18.030Z",
-      "updated_at": "2026-09-23T08:59:46.442Z",
+      "updated_at": "2026-10-04T18:27:48.891Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "area",
@@ -19126,7 +19128,9 @@
       "utm_url": "https://stats47.jp/areas/11000?utm_source=threads&utm_medium=social&utm_campaign=area-11000&utm_content=area-profile",
       "template": "area-profile",
       "metric_keys": null,
-      "scheduled_at": "2026-10-04T08:10:00.000Z"
+      "scheduled_at": "2026-10-04T08:10:00.000Z",
+      "post_url": "https://www.threads.com/@stats47jp/post/DeELHKuiRO4",
+      "posted_at": "2026-10-04T08:10:35.000Z"
     },
     {
       "id": 997,
