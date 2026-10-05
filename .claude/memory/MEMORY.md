@@ -20,6 +20,7 @@
 - [project_note_product_rollout.md](project_note_product_rollout.md) — 現行パックからnote variantを導出。_delivery固定SHAで非公開revisionを生成し、薄い準備原稿と販売準備完了を区別
 - [feedback_periodic_progress_reports.md](feedback_periodic_progress_reports.md) — 長時間のsubagent/workflow中は聞かれる前に約4-5分間隔で実測ベース進捗報告を自発的に(2026-07-17指摘)
 - [feedback_exit_code_not_via_pipe.md](feedback_exit_code_not_via_pipe.md) — 検証exit codeを`| tail`越しで測ると常に0(全PASS誤認)。直接実行orPIPESTATUS。全PASSなら1件壊して検証器を検証
+- [feedback_ci_foreign_tree_overlay.md](feedback_ci_foreign_tree_overlay.md) — CIがmainで生成し/tmp経由でdevelopへコピーするとmainの遅れ分のstateを巻き戻す(2026-10-04 W40で15ファイル、psi日次は55日分)。blobがrunのheadShaと一致するかで判定。契約=findForeignTreeRestore
 - [feedback_hand_synced_duplication.md](feedback_hand_synced_duplication.md) — 「追加時は両方を更新」のコメントで担保する二重管理は必ずドリフトする。件数/idは単一ソースから導出。2026-08-20にsitemap indexでcities1080URLが2か月未提出
 - [feedback_page_semantic_dedup_contract.md](feedback_page_semantic_dedup_contract.md) — 同じ意味のUIを別部品が描画すると単体テストは両方通る。ページ合成のcanonical ownerを1つにし、feature全体のrenderer数を契約テストで固定する
 - [feedback_mutation_test_passes_wrongly.md](feedback_mutation_test_passes_wrongly.md) — ミューテーションでも「間違った理由で赤/緑」になる。probeが除外語彙に当たっていないか・赤の理由がクラッシュでないかを毎回読む

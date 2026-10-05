@@ -23,6 +23,13 @@ updated: 2026-09-29
 
 並び順が着手順 (2026-09-27 オーナー判断: 計測・記録・改善とデータ品質を優先する)。上限 10 枚 (DG081)。
 
+### [STATE-OVERLAY-MAIN-01] 計測 workflow の「develop を直接 checkout する」修正を main へ反映し、次の run で state が巻き戻らないことを確かめる
+タグ: [インフラ・計測] [種類:不具合] [実行:ユーザー] [起票:2026-10-05] [期日:2026-10-11] [領域:管理]
+
+- **経緯**: 週次の `fetch-metrics-weekly` は main を checkout して計測し、`.claude/state/metrics/` 全体を develop へ上書きコピーしていた。2026-10-04 の W40 コミット e45f5a0ee は、main に未マージだった 15 ファイル (page-quality 週次監査・KSJ / e-Stat 月次記録・psi / cloudflare / URL Inspection の履歴など) を main の古い版へ戻した。`psi-audit-daily` と `cloudflare-usage-daily` も同じ形で、main が遅れている間は前日以前の行を毎日失っていた (psi は 4 月以降の 55 日分)。`deploy-workers` の improvement-log の書き戻しも同じ形だった。2026-10-05 に develop で 4 本を直し、消えた行を git 履歴から戻した。今後の再発は `workflow-commit-back.test.cjs` の `findForeignTreeRestore` が止める。
+- **残り (オーナー判断)**: schedule は main 上の workflow 定義で動くので、develop→main をマージするまで修正は効かない。それまでの psi / cloudflare 日次 run は、main の history に当日分を足した版で develop を上書きし続け、戻した行がまた消える。W41 の週次 run (2026-10-11 20:00 JST) の前にマージする。
+- **完了条件**: マージ後の最初の psi 日次・cloudflare 日次・W41 週次の各コミットで、`git diff <commit>^ <commit> -- .claude/state/metrics/psi/history.csv .claude/state/metrics/cloudflare/history.csv` に削除行が無い (cloudflare は保持 30 日を超えた古い行の削除だけ許す)。週次コミットが `.claude/state/metrics/{page-quality,monthly-jobs,authenticated}` を変えていない。マージ前に行が再び消えていたら、2026-10-05 の復元コミットと同じ方法 (develop 上の全版の和集合) で戻す。
+
 ### [AUTH-CREDENTIAL-REGISTER-01] 残りの資格情報 (Mac 全サービス・ココナラ) を登録する
 タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [起票:2026-10-01] [領域:管理]
 

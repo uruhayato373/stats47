@@ -1,23 +1,23 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-01T21:02:44.293Z",
-  "runId": "36922869472",
+  "generatedAt": "2026-10-04T08:35:59.887Z",
+  "runId": "37189180335",
   "sources": [
     {
       "source": "moshimo",
       "capability": "outcomes",
-      "observedAt": "2026-10-01T20:39:54.810Z",
+      "observedAt": "2026-10-04T08:34:05.210Z",
       "activated": true,
       "status": "pass",
       "code": null,
-      "runId": "36922869472",
+      "runId": "37189180335",
       "runAttempt": 1,
       "metricsAvailable": true,
       "inventoryAvailable": false,
       "collectionAttempted": true,
       "recovery": null,
       "evidence": {
-        "sha256": "d6e83f99ee25c22d5d9a4223b68ec7f2a50bc2e5752bff6b3509dee05788034c",
+        "sha256": "4f718d573f6a2ecc24c0ca69ca2e10908d5de2b18553b05a2413b0ce8977e6e7",
         "bytes": 24044
       },
       "quality": null,
@@ -27,19 +27,19 @@
     {
       "source": "a8",
       "capability": "site-outcomes",
-      "observedAt": "2026-10-01T20:39:11.783Z",
+      "observedAt": "2026-10-04T08:34:01.970Z",
       "activated": true,
       "status": "pass",
       "code": null,
-      "runId": "36922869472",
+      "runId": "37189180335",
       "runAttempt": 1,
       "metricsAvailable": true,
       "inventoryAvailable": false,
       "collectionAttempted": true,
       "recovery": null,
       "evidence": {
-        "sha256": "7d153436bf966370e291152056fdd21f72d7b44a7e249996821b36dada0d20c7",
-        "bytes": 210026
+        "sha256": "85334f0c68de7cc12d8de1b2e2a0beede0f3ef046c815570c3f31b8bd84f1609",
+        "bytes": 210094
       },
       "quality": null,
       "knownIncomplete": null,
@@ -48,18 +48,18 @@
     {
       "source": "afb",
       "capability": "site-conversion-outcomes",
-      "observedAt": "2026-10-01T20:39:37.393Z",
+      "observedAt": "2026-10-04T08:33:39.859Z",
       "activated": true,
       "status": "pass",
       "code": null,
-      "runId": "36922869472",
+      "runId": "37189180335",
       "runAttempt": 1,
       "metricsAvailable": true,
       "inventoryAvailable": false,
       "collectionAttempted": true,
       "recovery": null,
       "evidence": {
-        "sha256": "0e58cc7e7b421d76ae7024816be3abd2f2fe9343a03e54c7072a0af20d99fc0f",
+        "sha256": "1464a8d8297fa9cfb012d293e7e12b55f940eb634b5e1430354298235a04b373",
         "bytes": 1409
       },
       "quality": {
@@ -73,19 +73,19 @@
     {
       "source": "note",
       "capability": "dashboard-metrics",
-      "observedAt": "2026-10-01T20:40:05.975Z",
+      "observedAt": "2026-10-04T08:34:08.924Z",
       "activated": true,
       "status": "pass",
       "code": null,
-      "runId": "36922869472",
+      "runId": "37189180335",
       "runAttempt": 1,
       "metricsAvailable": true,
       "inventoryAvailable": true,
       "collectionAttempted": true,
       "recovery": null,
       "evidence": {
-        "sha256": "ebb179e0b48a3dc13449701438eb4b3ab947c48b7fa24da1e714e70a93f6fe44",
-        "bytes": 1701802
+        "sha256": "b907086822216b222e6a6a4ca35d9d657cf87c5992df6aba2100fa1e791742bf",
+        "bytes": 1701354
       },
       "quality": {
         "expectedRows": 286,
@@ -102,17 +102,20 @@
     {
       "source": "gsc",
       "capability": "verified-coverage-export",
-      "observedAt": null,
+      "observedAt": "2026-10-04T08:34:21.492Z",
       "activated": true,
-      "status": "failed",
-      "code": "runner_failed",
-      "runId": "36922869472",
-      "runAttempt": null,
-      "metricsAvailable": false,
+      "status": "pass",
+      "code": null,
+      "runId": "37189180335",
+      "runAttempt": 1,
+      "metricsAvailable": true,
       "inventoryAvailable": false,
-      "collectionAttempted": null,
+      "collectionAttempted": true,
       "recovery": null,
-      "evidence": null,
+      "evidence": {
+        "sha256": "69e4bccae7b1a60778edb99e3d16e991e252d51de9f5d04cda7bbc9711a613ee",
+        "bytes": 2682692
+      },
       "quality": null,
       "knownIncomplete": null,
       "remaining": null
@@ -120,11 +123,11 @@
     {
       "source": "kdp",
       "capability": "publication-daily-and-monthly-royalties",
-      "observedAt": "2026-10-01T20:39:53.975Z",
+      "observedAt": "2026-10-04T08:34:03.155Z",
       "activated": true,
       "status": "failed",
       "code": "auth_required",
-      "runId": "36922869472",
+      "runId": "37189180335",
       "runAttempt": 1,
       "metricsAvailable": false,
       "inventoryAvailable": false,
@@ -134,7 +137,7 @@
         "blockedSince": "2026-09-30T08:35:08.183Z"
       },
       "evidence": {
-        "sha256": "fe7c365a38ed0cd63567530d431abb79c0c32870943f5604a11f6e88ca25a4ea",
+        "sha256": "6dc697fb951cefc16aa59d3d47d01109e9aab0fff4f9bfedb2c6f6564852051e",
         "bytes": 159
       },
       "quality": null,
@@ -144,18 +147,18 @@
     {
       "source": "rakuten",
       "capability": "monthly-outcomes",
-      "observedAt": "2026-10-01T20:39:43.061Z",
+      "observedAt": "2026-10-04T08:34:10.751Z",
       "activated": true,
       "status": "pass",
       "code": null,
-      "runId": "36922869472",
+      "runId": "37189180335",
       "runAttempt": 1,
       "metricsAvailable": true,
       "inventoryAvailable": false,
       "collectionAttempted": true,
       "recovery": null,
       "evidence": {
-        "sha256": "68adfb5b58ebc615249b9a5232cb2e66c42f67f5844ef00145c028f3105722a4",
+        "sha256": "61c8025579bd884616845301fc7d4776f6dbf154b49b4246baabf08e39aef102",
         "bytes": 1062
       },
       "quality": null,
@@ -165,11 +168,11 @@
     {
       "source": "coconala",
       "capability": "marketplace-metrics",
-      "observedAt": "2026-10-01T20:39:37.619Z",
+      "observedAt": "2026-10-04T08:34:18.759Z",
       "activated": true,
       "status": "failed",
       "code": "auth_required",
-      "runId": "36922869472",
+      "runId": "37189180335",
       "runAttempt": 1,
       "metricsAvailable": false,
       "inventoryAvailable": false,
@@ -179,7 +182,7 @@
         "blockedSince": "2026-10-01T12:39:06.962Z"
       },
       "evidence": {
-        "sha256": "80b53d17147a7ab3422f6e701a953d999454d94c7e9860e5b8385ed28b0f6c27",
+        "sha256": "e0b1a065e5f97bf1b70d9d911d28b41b1374f7be84137a4feb6f1eb88d16a1a8",
         "bytes": 164
       },
       "quality": null,
