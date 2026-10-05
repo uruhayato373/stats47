@@ -312,6 +312,11 @@ updated: 2026-09-29
 - **期日の理由**: `improvement-cycle-weekly.yml` のゲート修正 (Issue #1068 の再発防止) は main の定義で動く。10-12 (月) 06:00 JST の週次 run より前に main へ入れる。
   マージ後は Issue #1068 が次の成功 run で自動で閉じることを確かめる。同じ PR に `9ba6e57a2` (計測 workflow が main の古い state で develop を上書きしない修正) も入っている。
 - **完了条件**: PR #1070 が全 check green でマージされ、本番デプロイが成功している。
+- **2026-10-06 追記 (SSOT 集約リファクタ側の調査)**: 上の「注意」のリファクタは `77ba6e36a`・`eef2a0a1a`・`0098430a1` として develop にコミットした (push はまだ)。
+  この時点でローカルの `npm run type-check` は exit 0。admin unit の失敗のうち `apps/admin/tests/unit/note-covers.test.ts`「取得失敗を画像なしと偽らず、認証情報も返さない」は
+  `14ce8d97f` (502 応答に error.message を含めた変更) 由来で、リファクタ前の版でも再現した。`npm run preflight:pr` で落ちたのは checker-wiring 2 件
+  (`check-repo-hygiene.cjs` の MISSING_GATE_TRIGGER・`metrics/check-docs-delta.mjs` の UNDECLARED_CRITICAL_CHECKER) と、W40 の GSC snapshot で古くなった
+  `ranking-prominence.generated.ts` (`npm run generate:ranking-prominence --workspace apps/web` で再生成) の 2 ゲートで、どちらもリファクタの対象外。
 
 ### [GSC-COVERAGE-DEPLOY-01] カバレッジ是正と入力鮮度ガードを本番反映する
 
@@ -2816,6 +2821,22 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - **完了条件**: 2022 年度以降が 47 県そろって R2 に入り、provenance が監査 (`/audit-provenance`) を通り、ランキングページの最新年が更新されている。
 
 ## 🟢 低 — 時期未定・条件付き (trigger は本文に)
+
+### [SSOT-CONSOLIDATION-REST-01] 2026-10-06 の定数集約で見送った重複を、挙動の差を解消してから寄せる
+
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-06] [領域:管理]
+
+- **背景**: `77ba6e36a`・`eef2a0a1a`・`0098430a1` で、サイト識別子 (正本 `packages/types/src/site.json`)・都道府県コード (`@stats47/area`)・e-Stat URL などの直書き約 470 ファイルを正本参照へ置き換えた。
+  置換は値と意味が完全一致する箇所に限ったので、箇所ごとに挙動が違う重複は残っている。再発止めは `check-maintenance-debt.cjs` の SITE_IDENTITY_LITERAL。
+- **候補 (上ほど優先)**:
+  1. Windows で別の Playwright profile を読む可能性がある絶対パス直書き: `.claude/skills/sns/publish-x/check-x-scheduled.ts`・`.claude/skills/sns/update-x-profile/update-x-profile.cjs` (publish-x と profile を共有するため見送った)。
+  2. 県名の短縮処理 9 か所 (data-configs `seo-meta-facts.ts`・`area-axis.ts`、product-factory、svg-builder、remotion)。北海道を「北海」にする箇所としない箇所が混在するので、`@stats47/area` に意図を引数で選べる関数を作ってから寄せる。
+  3. スクリプトの小さな重複ヘルパー: ISO 週計算 16 ファイル (月曜始まり・日曜締め・UTC/JST が混在)、JST 変換 27、getArg 52、fetchText 20、dotenv 読み込み 27、ブラウザ起動引数 16。挙動の差を一覧にしてから共通化するか決める。
+  4. データ表の重複: `apps/ges/scripts/data/ports.json` と `packages/area/src/data/ports.json` (キー形式・精度差)、県庁所在地の座標 3 か所 (精度差)、`databook-xlsx.ts` のカテゴリ名 (CATEGORIES と名称がずれており、寄せると Excel のシート名が変わる)、migration-flow の theme、8・10 区分の地方区分。
+  5. remotion の一部・svg-builder・product-factory・ges・migration-flow は `@stats47/area` などを依存に持たず県リスト等を再定義している。依存を足すか (package-lock の更新を伴う) を決める。
+- **trigger**: 上のどれかを触る改修が入るとき、または同じ値の不一致で不具合が出たとき。
+- **停止条件**: 寄せると出力 (表示文言・ファイル名・URL・画像ハッシュ) が変わるものは、変えてよいとオーナーが決めるまで寄せない。
+- **完了条件**: 候補ごとに「正本へ寄せた」か「寄せない理由を正本の近くに書いた」かが決まっている。
 
 ### [CHART-SOURCE-DERIVE-01] 図ごとの出典 (ブログの `<data-source>` タグ・機能別 ChartFooter の固定値) をデータから導出する
 
