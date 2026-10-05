@@ -19134,9 +19134,9 @@
     },
     {
       "id": 997,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:18.035Z",
-      "updated_at": "2026-09-23T08:59:58.552Z",
+      "updated_at": "2026-10-05T21:44:49.546Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "ranking",
@@ -19146,13 +19146,15 @@
       "utm_url": "https://stats47.jp/ranking/autolock-apartment-rate?utm_source=threads&utm_medium=social&utm_campaign=autolock-apartment-rate&utm_content=versus",
       "template": "versus",
       "metric_keys": "autolock-apartment-rate",
-      "scheduled_at": "2026-10-05T01:45:00.000Z"
+      "scheduled_at": "2026-10-05T01:45:00.000Z",
+      "post_url": "https://www.threads.com/@stats47jp/post/DeGD4xgiJFv",
+      "posted_at": "2026-10-05T01:45:56.000Z"
     },
     {
       "id": 998,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:18.039Z",
-      "updated_at": "2026-09-23T09:00:11.607Z",
+      "updated_at": "2026-10-05T21:44:49.566Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "area",
@@ -19162,7 +19164,9 @@
       "utm_url": "https://stats47.jp/areas/12000?utm_source=threads&utm_medium=social&utm_campaign=area-12000&utm_content=area-profile",
       "template": "area-profile",
       "metric_keys": null,
-      "scheduled_at": "2026-10-05T08:30:00.000Z"
+      "scheduled_at": "2026-10-05T08:30:00.000Z",
+      "post_url": "https://www.threads.com/@stats47jp/post/DeGyI5Mktx1",
+      "posted_at": "2026-10-05T08:30:05.000Z"
     },
     {
       "id": 999,

@@ -3,10 +3,13 @@
 投稿済み全件。`posted_at` 降順。
 スクリプトで自動生成 — 手編集しない (`sns-posts-store.cjs` が `insert()`/`updateById()` のたびに再生成)。
 
-**595 件** (最終更新: 2026-10-04)
+**598 件** (最終更新: 2026-10-05)
 
 | 日付 | 媒体 | コンテンツ | キャプション | URL |
 |---|---|---|---|---|
+| 2026-10-05 | 📸 Instagram | ranking-quiz/hamburger-consumption-expenditure |  | [🔗](https://www.instagram.com/p/DeG8ypxmz-j/) |
+| 2026-10-05 | 🧵 Threads | area/area-12000-profile | 千葉のデータブックを公開中。 ホオジロと落花生、房州ビワを入口に、人口・産業・消費の数字を県別に深掘り。 続きは👇 h… | [🔗](https://www.threads.com/@stats47jp/post/DeGyI5Mktx1) |
+| 2026-10-05 | 🧵 Threads | ranking/autolock-apartment-rate | マンションのオートロック率、1位は東京ではなく福岡。  福岡55.5％、東京54.5％、京都51.8％。 最も低い鳥取は… | [🔗](https://www.threads.com/@stats47jp/post/DeGD4xgiJFv) |
 | 2026-10-04 | 📸 Instagram | map-carousel/natto-consumption-expenditure |  | [🔗](https://www.instagram.com/p/DeE7_A3FvHO/) |
 | 2026-10-04 | 🧵 Threads | area/area-11000-profile | 旅先では見えにくい埼玉の輪郭。 県木ケヤキと特産狭山茶、暮らしの統計を同じページで確認できます。 続きは👇 https… | [🔗](https://www.threads.com/@stats47jp/post/DeELHKuiRO4) |
 | 2026-10-04 | 🧵 Threads | ranking/other-mushroom-consumption-quantity | きのこの秋。しいたけ以外の「他のきのこ」を最も多く買うのは山形です。  1世帯あたり4,367g。2位秋田、3位富山。 … | [🔗](https://www.threads.com/@stats47jp/post/DeDdUOREi-L) |
