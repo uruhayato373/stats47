@@ -10,6 +10,7 @@ import {
   observeFindings,
   chartFixGuide,
   planUiCards,
+  SAMPLE_URL_COUNT,
   staleBatchFiles,
   syncFindings,
 } from "../lib/ui-findings.ts";
@@ -80,6 +81,52 @@ test("UI の機械検出だけを取り込み、Claude の指摘はページの�
   const geo = observed.find((o) => o.key === "agent|geo-analysis");
   assert.equal(geo.severity, "high");
   assert.equal(geo.detail.split("\n").length, 2);
+});
+
+// 全URLの意味検査を URL ごとに積むと 1 回の週次で数千件になり、キューがリポジトリ衛生の 1MB 上限を超える
+// (2026-10-04 に 3,312 件・1.96MB)。生成元を直す指摘なので、ページの種類 × 検査項目で 1 件にまとめる。
+test("全URLの意味検査はページの種類 × 検査項目で 1 件にまとめ、件数・最大値・URL の例を残す", () => {
+  const mixing = Array.from({ length: 2000 }, (_, i) =>
+    violation({ url: `https://stats47.jp/ranking/m${String(i).padStart(4, "0")}`, template: "ranking", metric_key: "unit_symbol_mixing", actual: i === 7 ? 16 : 1 }),
+  );
+  const observed = observeFindings(
+    {
+      violations: [
+        ...mixing,
+        violation({ url: "https://stats47.jp/areas/13000", template: "prefecture-detail", metric_key: "unit_symbol_mixing", actual: 2 }),
+        violation({ url: "https://stats47.jp/areas/13000", template: "prefecture-detail", metric_key: "internal_jargon_terms" }),
+        violation({ url: "https://stats47.jp/blog/beer", template: "blog-article", metric_key: "blog_svg_text_issues" }),
+      ],
+    },
+    [],
+  );
+  assert.deepEqual(observed.map((o) => o.key).sort(), [
+    "machine|https://stats47.jp/blog/beer|blog_svg_text_issues",
+    "machine|prefecture-detail|internal_jargon_terms",
+    "machine|prefecture-detail|unit_symbol_mixing",
+    "machine|ranking|unit_symbol_mixing",
+  ]);
+  const ranking = observed.find((o) => o.key === "machine|ranking|unit_symbol_mixing");
+  assert.equal(ranking.url, null);
+  assert.equal(ranking.template, "ranking");
+  assert.equal(ranking.metric_key, "unit_symbol_mixing");
+  assert.match(ranking.detail, /^unit_symbol_mixing: 2000 URL \(最大 16、閾値 <= 0\)。例: /);
+  assert.equal(ranking.detail.split(" / ").length, SAMPLE_URL_COUNT);
+  // 記事チャート SVG は記事ごとに作り直すので URL 単位のまま (plan-svg-text-fix.ts が key から URL を読む)
+  assert.equal(observed.find((o) => o.metric_key === "blog_svg_text_issues").url, "https://stats47.jp/blog/beer");
+});
+
+test("まとめた指摘は該当 URL が減っても同じ key で追跡し、全 URL で消えたときだけ done にする", () => {
+  const run = (urls) => ({
+    violations: urls.map((url) => violation({ url, template: "ranking", metric_key: "unit_symbol_mixing", actual: 1 })),
+  });
+  const key = "machine|ranking|unit_symbol_mixing";
+  const first = syncFindings([], observeFindings(run(["https://stats47.jp/ranking/a", "https://stats47.jp/ranking/b"]), []), ctx());
+  const fewer = syncFindings(first.queue, observeFindings(run(["https://stats47.jp/ranking/b"]), []), ctx({ today: "2026-10-11" }));
+  assert.equal(statusOf(fewer.queue, key), "pending");
+  assert.match(fewer.queue.find((f) => f.key === key).detail, /1 URL/);
+  const gone = syncFindings(fewer.queue, observeFindings(run([]), []), ctx({ today: "2026-10-18" }));
+  assert.equal(statusOf(gone.queue, key), "done");
 });
 
 test("新規は pending、今週消えた pending は done (not-observed)", () => {
@@ -227,6 +274,8 @@ test("週次監査が同期と起票を行い、週次と backlog-loop の両方
   assert.match(weekly, /ARGS=\(--sync /);
   assert.match(weekly, /--main-deployed-at/);
   assert.match(weekly, /git add \.claude\/state\/page-quality\/ \.claude\/todo\/backlog\.md/);
+  // ボットのコミットは pre-commit を通らないので、同じ衛生検査を commit 前に掛ける (1MB 超のキューを push させない)
+  assert.match(weekly, /git add \.claude\/state\/page-quality\/[^\n]*\n(?:\s*#[^\n]*\n)*\s*node \.claude\/scripts\/lib\/check-repo-hygiene\.cjs --staged --baseline/);
   const loop = readFileSync(new URL(".github/workflows/backlog-loop-daily.yml", root), "utf8");
   assert.match(loop, /git add -- [^\n]*\.claude\/state\/page-quality/);
 });

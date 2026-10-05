@@ -101,7 +101,7 @@ test("表示の意味の違反は UI 指摘キューに machine の指摘とし�
     severity: "warning",
   };
   const observed = observeFindings({ violations: [violation, { ...violation, metric_key: "html_bytes" }] }, []);
-  assert.deepEqual(observed.map((f) => f.key), ["machine|https://stats47.jp/areas/13000|internal_jargon_terms"]);
+  assert.deepEqual(observed.map((f) => f.key), ["machine|prefecture-detail|internal_jargon_terms"]);
   const { queue } = syncFindings([], observed, {
     today: "2026-10-04",
     auditAt: "2026-10-04T00:00:00Z",

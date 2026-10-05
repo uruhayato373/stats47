@@ -1,10 +1,1 @@
-machine|https://stats47.jp/geo/population-flood-risk/01/overlap|internal_jargon_terms
-machine|https://stats47.jp/geo/population-flood-risk/13/overlap|internal_jargon_terms
-machine|https://stats47.jp/geo/population-flood-risk/15/overlap|internal_jargon_terms
-machine|https://stats47.jp/geo/population-flood-risk|internal_jargon_terms
-machine|https://stats47.jp/geo/population-land-price/27/overlap|internal_jargon_terms
-machine|https://stats47.jp/geo/population-land-price/47/overlap|internal_jargon_terms
-machine|https://stats47.jp/geo/population-land-price|internal_jargon_terms
-machine|https://stats47.jp/geo/population-landslide-exposure|internal_jargon_terms
-machine|https://stats47.jp/geo/population-public-facility-access|internal_jargon_terms
-machine|https://stats47.jp/geo/population-snow-designation|internal_jargon_terms
+machine|geo-analysis|internal_jargon_terms

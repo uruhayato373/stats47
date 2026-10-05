@@ -1,10 +1,2 @@
-machine|https://stats47.jp/survey/accommodation-survey|unit_symbol_mixing
-machine|https://stats47.jp/survey/city-planning-survey|unit_symbol_mixing
-machine|https://stats47.jp/survey/cpi-annual|unit_symbol_mixing
-machine|https://stats47.jp/survey/economic-census-basic|unit_symbol_mixing
-machine|https://stats47.jp/survey/employment-structure-survey|unit_symbol_mixing
-machine|https://stats47.jp/survey/gas-business-statistics|unit_symbol_mixing
-machine|https://stats47.jp/survey/hospital-report|unit_symbol_mixing
-machine|https://stats47.jp/survey/housing-starts-statistics|unit_symbol_mixing
-machine|https://stats47.jp/survey/local-election-results|unit_symbol_mixing
-machine|https://stats47.jp/survey/local-finance|internal_jargon_terms
+machine|survey|internal_jargon_terms
+machine|survey|unit_symbol_mixing
