@@ -21,7 +21,7 @@ updated: 2026-09-29
 
 ## 🔴 高 — 今月中に着手したい
 
-並び順が着手順 (2026-09-27 オーナー判断: 計測・記録・改善とデータ品質を優先する)。上限 10 枚 (DG081)。
+並び順が着手順 (2026-09-27 オーナー判断: 計測・記録・改善とデータ品質を優先する。2026-10-05 の月次計画で 10 月の重点「管理」「データ」に合わせて付け替え)。上限 10 枚 (DG081)。
 
 ### [STATE-OVERLAY-MAIN-01] 計測 workflow の「develop を直接 checkout する」修正を main へ反映し、次の run で state が巻き戻らないことを確かめる
 タグ: [インフラ・計測] [種類:不具合] [実行:ユーザー] [起票:2026-10-05] [期日:2026-10-11] [領域:管理]
@@ -30,15 +30,35 @@ updated: 2026-09-29
 - **残り (オーナー判断)**: schedule は main 上の workflow 定義で動くので、develop→main をマージするまで修正は効かない。それまでの psi / cloudflare 日次 run は、main の history に当日分を足した版で develop を上書きし続け、戻した行がまた消える。W41 の週次 run (2026-10-11 20:00 JST) の前にマージする。
 - **完了条件**: マージ後の最初の psi 日次・cloudflare 日次・W41 週次の各コミットで、`git diff <commit>^ <commit> -- .claude/state/metrics/psi/history.csv .claude/state/metrics/cloudflare/history.csv` に削除行が無い (cloudflare は保持 30 日を超えた古い行の削除だけ許す)。週次コミットが `.claude/state/metrics/{page-quality,monthly-jobs,authenticated}` を変えていない。マージ前に行が再び消えていたら、2026-10-05 の復元コミットと同じ方法 (develop 上の全版の和集合) で戻す。
 
-### [AUTH-CREDENTIAL-REGISTER-01] 残りの資格情報 (Mac 全サービス・ココナラ) を登録する
-タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [起票:2026-10-01] [領域:管理]
+### [A8-CROSSCHECK-EXCEED-01] A8 の 9 月検算で専用案件のクリックがサイト別合計を超える原因を確定する
+タグ: [収益化] [種類:不具合] [実行:対話] [検証:node .claude/scripts/ads/check-a8-outcome-gate.mjs] [起票:2026-09-27] [期日:2026-10-05] [領域:管理]
 
-- **経緯**: 2026-10-01 に資格情報の正本 `.claude/config/auth-credentials.json` (9 サービス) と管理画面 `/ops/auth` を作り、note・ココナラ・KDP は CI でセッション切れを入り直す。同日 Windows PC と CI に 8 サービスを登録済み (A8・もしも・afb・楽天・note・KDP・X・Google。ID と登録先は `/ops/auth` で確認)。
-- **2026-10-01 済**: ログイン ID を正本の `loginId` に記録 (9 サービス・オーナー判断で公開リポジトリに記載。`/ops/auth` が表示し、ストアの ID と違えば「ID 不一致」)。Mac に全 9 サービスを登録、ココナラの CI Secrets を登録。Mac の `refresh-session.mjs --headed` で note はキーチェーンの ID/PW で自動ログイン成功、A8・もしも・ココナラは既存セッションで ok (パスワード経路は未検証)。
-- **残り (オーナーのみ・パスワードは対話入力)**:
-  1. **Windows のココナラ**: `cmdkey /generic:stats47-measurement-coconala /user:stats47jp@gmail.com /pass` (コマンドは Windows の `/ops/auth` にも出る)
-  2. **パスワード経路の実証 (セッションが切れたとき)**: 2026-10-01 に A8・もしも・楽天の有効セッションを Mac から CI へ渡した (Secrets 更新済み)。楽天は送信を Enter に、送信後の着地がログイン済みでなければ checkUrl を開き直して判定するよう直した (ログインできているのに login_failed と判定された)。ココナラは 2026-10-02 に自動ログインの対象から外した (自動操作のブラウザは見えない reCAPTCHA に「認証できませんでした」で拒否され、普通の Chrome では同じ ID/PW で入れた。セッション切れは普通の Chrome で専用プロファイルにログインし `bootstrap-session.mjs coconala --from-profile --publish`)。A8・もしも・楽天のパスワードでの自動ログインは未実証で、セッション切れ時に `refresh-session.mjs <source> --headed` で確かめる。KDP は `.local/authenticated-measurement/kdp.autologin-failed` で停止中で、本棚は有効だが Reports 認証で止まる (CI の入り直しが本棚しか見ない)
-- **完了条件**: Mac と Windows の両方で `/ops/auth` の「この PC」が全行「済」、CI 欄が「済」か「保管」。その後の authenticated-measurement で note・ココナラ・KDP の状態ファイルの `relogin` が `session_valid` か `relogged` になる (CI での再ログインは未実証)。
+- **事象**: 2026-09-27 に 9 月の A8 案件別明細を取り込んだ後、成果ゲートが `a8-cross-check-exceeded` で blocked。stats47 専用案件のクリック 157 がサイト別集計 141 を超える (`.claude/state/metrics/affiliate/a8-report-log.json` の crossCheck)。週次 `affiliate-ga4-weekly.yml` の計測ゲートもこれで落ちる。
+- **[仮説]** 取得時刻のずれ。サイト別は 09-26 22:47 JST (CI)、明細は 09-27 17:17 JST (ローカル) で約 18.5 時間ずれている。ただし 9 月平均は 1 日約 5 クリックで、差 16 を全部は説明しきれない。対抗仮説は、doboku-note 側の対応表も手同期で古く、両サイトが配信する案件を共用として登録できていないこと (a8mat の案件コード照合では未検出)。
+- **次**: 09-27 18:20 JST 以降の CI 収集でサイト別が明細より新しくなる。09-28 に `check-a8-outcome-gate.mjs` を実行し、超過が消えていれば時刻ずれで確定しカードを削除する。残れば doboku-note の programIdMap も広告定義から再生成 (本リポジトリの `build-a8-program-id-map.ts` と同じ方式) して共用案件を洗い出す。
+- **2026-09-28 検証結果**: サイト別を明細より後 (09-27 19:26 JST・155) に取り直しても専用 157 > サイト別 155 のまま → **時刻ずれ仮説はほぼ棄却**。
+  doboku-note と照合した「共用の登録漏れ」候補は `s00000025671001` (イオン九州・9 月 21 クリック) の 1 件だけで、doboku-note の広告定義
+  (`src/config/affiliate-creatives.ts`・5 案件) にも対応表にも無く、口座共通の案件カタログにあるだけ → **共用漏れ仮説も棄却** (停止条件どおり共用登録はしない)。
+  残る差 2 クリック (1.3%) の原因は未確定。
+- **次 (更新)**: A8 の「サイト別 × プログラム別」の明細で stats47 サイト行の案件別クリックを取り、専用 157 のどの案件がサイト別に入っていないかを特定する。
+  取れない場合は、差が 2 クリックに留まるかを 10 月初めの確定値で再確認し、許容差の導入はオーナー判断に回す。
+- **関連**: ローカルでサイト別集計を `--month 2026-09` で取ると download-failed になる (CI では成功)。debug artifact は `.local/playwright-a8-debug/2026-09-27T08-24-42Z`。
+- **2026-09-28 W40 Must 2 の調査結果 (原因は未確定・オーナー判断へ)**:
+  - 「サイト別 × プログラム別」の明細は **A8 に存在しない**。`.claude/config/a8-report-automation.json` の `_isolationNote` に実機確認の記録
+    (`/report/program/detail` はサイト列なし・素材 ID でも分離不可)。上の「次 (更新)」はこの経路では実行できない。
+  - a8mat のトークンの意味は公式に文書化されておらず、手元のリンクからは発行サイトを判別できない。
+  - [仮説] 専用案件のリンクの一部が doboku-note 側の名義で発行された、またはサイトの外で使われている。サイトの外の使用は
+    `.claude/scripts/note/editor-helpers.sh` の note 記事用 A8 リンク 3 件 (L116〜118) が該当しうる。A8 の公式ヘルプ
+    (`https://support.a8.net/as/supportguide/support/pg04.php`、2026-09-28 取得) にサイト別の計上規則の記載は無く、未検証。
+  - **オーナーに決めてほしいこと (どちらか)**: ① A8 管理画面で note 用 3 リンクの発行サイトを確かめる (発行時のサイト選択が
+    doboku-note なら差の説明になる)。② 差 2 クリック (1.3%) を許容差として計測ゲートに入れる (例: exclusive − site ≤ max(3, site×2%))。
+    10 月初めの確定値で差が 2 に留まるかも併せて見る。
+  - **2026-09-28 オーナー判断で ② を採用**: `crossCheckAgainstSite` (`.claude/scripts/ads/lib/a8-report-csv.mjs`) にクリックだけの許容差
+    max(3, ceil(サイト別×2%)) を入れた。件数・金額は従来どおり 1 でも超えたら超過。9 月の記録値 (157−155=2、許容差 4) は内側。
+    `a8-report-log.json` は次回の A8 収集・正規化で再計算される (状態ファイルは手で書き換えない)。**残り**: 次回の収集後に
+    検証コマンドが `a8-cross-check-exceeded` を出さないこと、Issue #1007 の計測ゲートが success になることを確かめてカードを閉じる。
+- **停止条件**: 共用案件の振り分けを推測で決めない。根拠 (両サイトの広告定義) が無い ID は unmapped のまま残す。
+- **完了条件**: 検証コマンドが `a8-cross-check-exceeded` を出さず、原因 (時刻ずれか共用漏れか) が本カードの削除コミットに書かれている。
 
 ### [DATA-QUALITY-LOOP-01] 全指標のデータ品質を機械チェックし、「誤り・古さ・終了・薄さ」の 4 基準で継続的に直すループを作る
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-09-25] [領域:データ]
@@ -79,6 +99,16 @@ updated: 2026-09-29
 - **完了条件**: 週次の監査が全指標の古さ・表記を検出してキューへ積み、キューの処置状況が管理画面か週次レビューで見え、
   4 週続けて「新規検出 ≤ 処置件数」で残件が減っている。
 
+### [AUTH-CREDENTIAL-REGISTER-01] 残りの資格情報 (Mac 全サービス・ココナラ) を登録する
+タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [起票:2026-10-01] [領域:管理]
+
+- **経緯**: 2026-10-01 に資格情報の正本 `.claude/config/auth-credentials.json` (9 サービス) と管理画面 `/ops/auth` を作り、note・ココナラ・KDP は CI でセッション切れを入り直す。同日 Windows PC と CI に 8 サービスを登録済み (A8・もしも・afb・楽天・note・KDP・X・Google。ID と登録先は `/ops/auth` で確認)。
+- **2026-10-01 済**: ログイン ID を正本の `loginId` に記録 (9 サービス・オーナー判断で公開リポジトリに記載。`/ops/auth` が表示し、ストアの ID と違えば「ID 不一致」)。Mac に全 9 サービスを登録、ココナラの CI Secrets を登録。Mac の `refresh-session.mjs --headed` で note はキーチェーンの ID/PW で自動ログイン成功、A8・もしも・ココナラは既存セッションで ok (パスワード経路は未検証)。
+- **残り (オーナーのみ・パスワードは対話入力)**:
+  1. **Windows のココナラ**: `cmdkey /generic:stats47-measurement-coconala /user:stats47jp@gmail.com /pass` (コマンドは Windows の `/ops/auth` にも出る)
+  2. **パスワード経路の実証 (セッションが切れたとき)**: 2026-10-01 に A8・もしも・楽天の有効セッションを Mac から CI へ渡した (Secrets 更新済み)。楽天は送信を Enter に、送信後の着地がログイン済みでなければ checkUrl を開き直して判定するよう直した (ログインできているのに login_failed と判定された)。ココナラは 2026-10-02 に自動ログインの対象から外した (自動操作のブラウザは見えない reCAPTCHA に「認証できませんでした」で拒否され、普通の Chrome では同じ ID/PW で入れた。セッション切れは普通の Chrome で専用プロファイルにログインし `bootstrap-session.mjs coconala --from-profile --publish`)。A8・もしも・楽天のパスワードでの自動ログインは未実証で、セッション切れ時に `refresh-session.mjs <source> --headed` で確かめる。KDP は `.local/authenticated-measurement/kdp.autologin-failed` で停止中で、本棚は有効だが Reports 認証で止まる (CI の入り直しが本棚しか見ない)
+- **完了条件**: Mac と Windows の両方で `/ops/auth` の「この PC」が全行「済」、CI 欄が「済」か「保管」。その後の authenticated-measurement で note・ココナラ・KDP の状態ファイルの `relogin` が `session_valid` か `relogged` になる (CI での再ログインは未実証)。
+
 ### [AUTHENTICATED-MEASUREMENT-ACTIVATION-01] 認証付きCIの日次継続運用を実証する
 
 タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [検証:npm run measurement:status -- --check] [起票:2026-09-21] [領域:管理]
@@ -109,46 +139,97 @@ updated: 2026-09-29
 - **完了条件**: 全collectorの実データ取得・private R2 read-back・git記録の整合・認証付き計測Issueの復旧closeが成立し、本人の再認証を挟まない別日付のmain scheduleで連続2回以上確認する（恒久的な無人保証とはしない）。noteの欠落は不完全のまま原因を区別し、カタログ削除/0埋めで通さない。サイト全体の放置運用判定は、このカードだけでなく横断監視Issue #763の別系統異常の解消も必要。
 - **停止条件**: 2FA/CAPTCHA/規約同意を自動化しない。Cookie/APIキーをgit/ログ/artifactへ出さない。KDPの速報売上/KENPを確定ロイヤリティや週次純収益へ代入しない。afbの発生日/確定日系列を合算せず、API報酬を純収益・入金へ代入しない。出版/提携状態の成功を全計測完了と言わない。自動投稿/申請/振込/商品変更は範囲外。
 
-### [A8-CROSSCHECK-EXCEED-01] A8 の 9 月検算で専用案件のクリックがサイト別合計を超える原因を確定する
-タグ: [収益化] [種類:不具合] [実行:対話] [検証:node .claude/scripts/ads/check-a8-outcome-gate.mjs] [起票:2026-09-27] [期日:2026-10-05] [領域:管理]
+### [EFFECT-TARGET-MARKERS-01] 効果判定エンジンが GSC 施策 10 件を 1 件も判定できない状態を解消する
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-09-25] [領域:管理]
 
-- **事象**: 2026-09-27 に 9 月の A8 案件別明細を取り込んだ後、成果ゲートが `a8-cross-check-exceeded` で blocked。stats47 専用案件のクリック 157 がサイト別集計 141 を超える (`.claude/state/metrics/affiliate/a8-report-log.json` の crossCheck)。週次 `affiliate-ga4-weekly.yml` の計測ゲートもこれで落ちる。
-- **[仮説]** 取得時刻のずれ。サイト別は 09-26 22:47 JST (CI)、明細は 09-27 17:17 JST (ローカル) で約 18.5 時間ずれている。ただし 9 月平均は 1 日約 5 クリックで、差 16 を全部は説明しきれない。対抗仮説は、doboku-note 側の対応表も手同期で古く、両サイトが配信する案件を共用として登録できていないこと (a8mat の案件コード照合では未検出)。
-- **次**: 09-27 18:20 JST 以降の CI 収集でサイト別が明細より新しくなる。09-28 に `check-a8-outcome-gate.mjs` を実行し、超過が消えていれば時刻ずれで確定しカードを削除する。残れば doboku-note の programIdMap も広告定義から再生成 (本リポジトリの `build-a8-program-id-map.ts` と同じ方式) して共用案件を洗い出す。
-- **2026-09-28 検証結果**: サイト別を明細より後 (09-27 19:26 JST・155) に取り直しても専用 157 > サイト別 155 のまま → **時刻ずれ仮説はほぼ棄却**。
-  doboku-note と照合した「共用の登録漏れ」候補は `s00000025671001` (イオン九州・9 月 21 クリック) の 1 件だけで、doboku-note の広告定義
-  (`src/config/affiliate-creatives.ts`・5 案件) にも対応表にも無く、口座共通の案件カタログにあるだけ → **共用漏れ仮説も棄却** (停止条件どおり共用登録はしない)。
-  残る差 2 クリック (1.3%) の原因は未確定。
-- **次 (更新)**: A8 の「サイト別 × プログラム別」の明細で stats47 サイト行の案件別クリックを取り、専用 157 のどの案件がサイト別に入っていないかを特定する。
-  取れない場合は、差が 2 クリックに留まるかを 10 月初めの確定値で再確認し、許容差の導入はオーナー判断に回す。
-- **関連**: ローカルでサイト別集計を `--month 2026-09` で取ると download-failed になる (CI では成功)。debug artifact は `.local/playwright-a8-debug/2026-09-27T08-24-42Z`。
-- **2026-09-28 W40 Must 2 の調査結果 (原因は未確定・オーナー判断へ)**:
-  - 「サイト別 × プログラム別」の明細は **A8 に存在しない**。`.claude/config/a8-report-automation.json` の `_isolationNote` に実機確認の記録
-    (`/report/program/detail` はサイト列なし・素材 ID でも分離不可)。上の「次 (更新)」はこの経路では実行できない。
-  - a8mat のトークンの意味は公式に文書化されておらず、手元のリンクからは発行サイトを判別できない。
-  - [仮説] 専用案件のリンクの一部が doboku-note 側の名義で発行された、またはサイトの外で使われている。サイトの外の使用は
-    `.claude/scripts/note/editor-helpers.sh` の note 記事用 A8 リンク 3 件 (L116〜118) が該当しうる。A8 の公式ヘルプ
-    (`https://support.a8.net/as/supportguide/support/pg04.php`、2026-09-28 取得) にサイト別の計上規則の記載は無く、未検証。
-  - **オーナーに決めてほしいこと (どちらか)**: ① A8 管理画面で note 用 3 リンクの発行サイトを確かめる (発行時のサイト選択が
-    doboku-note なら差の説明になる)。② 差 2 クリック (1.3%) を許容差として計測ゲートに入れる (例: exclusive − site ≤ max(3, site×2%))。
-    10 月初めの確定値で差が 2 に留まるかも併せて見る。
-  - **2026-09-28 オーナー判断で ② を採用**: `crossCheckAgainstSite` (`.claude/scripts/ads/lib/a8-report-csv.mjs`) にクリックだけの許容差
-    max(3, ceil(サイト別×2%)) を入れた。件数・金額は従来どおり 1 でも超えたら超過。9 月の記録値 (157−155=2、許容差 4) は内側。
-    `a8-report-log.json` は次回の A8 収集・正規化で再計算される (状態ファイルは手で書き換えない)。**残り**: 次回の収集後に
-    検証コマンドが `a8-cross-check-exceeded` を出さないこと、Issue #1007 の計測ゲートが success になることを確かめてカードを閉じる。
-- **停止条件**: 共用案件の振り分けを推測で決めない。根拠 (両サイトの広告定義) が無い ID は unmapped のまま残す。
-- **完了条件**: 検証コマンドが `a8-cross-check-exceeded` を出さず、原因 (時刻ずれか共用漏れか) が本カードの削除コミットに書かれている。
+- **根拠 (2026-W38 の計測サイクル)**: `improvements.md` の GSC 施策 10 件 (`SEARCH-GROWTH-CYCLE-01` / `COVERAGE-LOOP-01` /
+  `RANKING-REINDEX-01` / `BLOG-SEO-TYPES-01` / `BLOG-SEO-QUEUE-01` / `BLOG-SEO-PACE-01` / `BLOG-LINKROT-01` / `SITE-LINKROT-01` /
+  `THEME-EXPANSION-EFFECT-01` / `STP-AI-WATCH-01`) は、機械判定の目印 (`[gsc-page: /path]`・デプロイ済日・`[target: …]`) が欠けていて
+  機械判定 0 件。測っても判定まで閉じないので、改善サイクルの「記録 → 改善」が回っていない。
+- **次**: improvement-triage (improvements.md の排他 writer) が 1 行ずつ、根拠のある目印を足すか、目標値を後付けせず終了または
+  事前 target 付きの新規計測へ移すかを決める (`evidence-based-judgment.md` 状況 4: 根拠のない想定値を書かない)。
+- **一次処理 済 (2026-09-26・未コミット・improvement-triage)**: 10 行のうち 4 行を理由付きで終了した。
+  内訳は `SEARCH-GROWTH-CYCLE-01` (承認の運用でページ効果ではない)、`BLOG-SEO-PACE-01` (公開ペースの規律でGSC効果ではない)、
+  `SITE-LINKROT-01` (`BLOG-LINKROT-01` と同じ監査の重複で統合)、`COVERAGE-LOOP-01` (9/24 に終了済み)。
+  残る 6 行は、根拠のある目標値を今は書けない。理由は、単一ページで測れないコホート比較 (BLOG-SEO-TYPES/QUEUE)、対象 56 キーが未特定 (RANKING-REINDEX)、
+  是正デプロイ前 (BLOG-LINKROT)、独自の d7/d28/d56 計測体系 (THEME-EXPANSION-EFFECT・STP-AI-WATCH)。
+  目標値の後付けはしていない。`cli.mjs --dry-run` は exit 0 で、存在しないページが判定対象に紛れ込んでいないことも確認済み。
+- **次 (残り)**: ① `BLOG-LINKROT-01` は是正デプロイ後に対象ページと事前 target を付ける。② RANKING-REINDEX は 56 キーを特定してから目印を付ける。
+  ③ 済 (2026-09-26・オーナー判断): コホート比較 (BLOG-SEO-TYPES/QUEUE) と独自計測 (THEME-EXPANSION-EFFECT・STP-AI-WATCH) の 4 行は
+  improvements.md に「効果判定エンジン対象外」と代わりの判定手順を明記した (dry-run で subject に現れないことを確認)。
+- **完了条件**: 計測サイクルの「GSC 施策 N 件中、機械判定できるのは M 件」で、残る行がすべて理由付きで終了または目印付きになる。
 
-### [GSC-COVERAGE-DEPLOY-01] カバレッジ是正と入力鮮度ガードを本番反映する
+### [DATA-WAGE-TABLE-YEARS-01] 賃金構造基本統計の表を使う 40 指標が 2022 年しか配信していない原因を CI で確かめて直す
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [領域:データ] [起票:2026-09-28]
 
-タグ: [インフラ・計測] [種類:不具合] [実行:ユーザー] [検証:node .claude/scripts/gsc/build-coverage-queue.mjs --no-probe] [起票:2026-09-07] [期日:2026-09-28] [進行中] [領域:サイト]
+- **事象 (2026-09-28 実測)**: `statsDataId: "0003445758"` を使う metric は 40 件。代表の `school-teacher-annual-income` /
+  `nurse-annual-income` / `nursery-teacher-annual-income` / `doctor-annual-income` は R2 `app/stats/<key>/values.json` が
+  すべて `2022` の 47 行だけ。config の years は `{from: 2010, to: 2023}`。e-Stat カタログでは表名が
+  「令和２年以降 一般_都道府県別_職種（特掲）DB」で、複数年を持つ表のはず。データ品質キューでは `school-teacher-annual-income` が
+  「最新 2022 年・2 周期遅れ (推定)」、GSC 表示 916 で需要順 4 位 (`DATA-QUALITY-LOOP-01` の第1週で切り出し)。
+- **[仮説]** ① `cdTab` 08×12 + 12 の組み合わせが 2022 年だけに存在し、他の年は別の表章項目コード (memory
+  `reference_estat_wage_survey` は tab 40 / 44 と記録) ② 表が年ごとに更新され、取り込み時点で 2022 年分しか無かった
+  ③ config の years (〜2023) より新しい 2024・2025 年が表にあり、範囲外で落ちている。
+- **次**: e-Stat の取得は CI 専用 (ローカルに API キーが無い)。CI で `0003445758` の `getMetaInfo` の time / tab と、
+  `cdCat01=01, cdCat02=1192` で年ごとの non-null 県数を出す (data-refresh の dryRun は年別の件数を出さないので、
+  出力を足すか調査用の workflow_dispatch を使う)。原因に合わせて 40 件の config を直し、data-refresh で再取り込みする。
+- **停止条件**: 年によって表章項目の定義 (所定内給与か、きまって支給する給与か) が違う場合は、同じ系列として並べない。
+  R2 反映はオーナー承認。40 件を推測で一括変更しない (代表 1 件で年別の値を確かめてから広げる)。
+- **完了条件**: 40 件が e-Stat に実在する全年を配信し、`school-teacher-annual-income` の最新年が公表済みの最新年と一致している。
+  年ごとに定義が違って並べられない場合は、その理由と採った年の範囲が本カードの削除コミットに書かれている。
+### [NAV-CLICK-COVERAGE-01] サイト内リンクのクリックを既定で全件計測し、名前の無い導線を週次で減らす
 
-- **owner**: オーナー（GSC UI export）／Claude Code（取込・効果判定）
-- **現状**: 2026-09-07にPR #939（main `5d05cd6e1`）で本番反映済み。PR CI、Cloudflare deploy、post-deploy smoke、R2 ISR GC、CDN全体パージはすべて成功した。Googlebot UA実測で旧市区町村カテゴリsoft404 5件は全件301、親プロフィール200、未知カテゴリ410 + noindex。sitemapは旧カテゴリ0件 / 市区町村プロフィール360件、自治体Datasetは`description` / `license` / `distribution.contentUrl`を本番HTMLで確認した。
-- **①は確認済 (2026-09-18)**: `fetch-metrics-weekly.yml` は 2026-09-13 run が success、`coverage-alert` Issue は 0 件。
-- **残り (オーナー)**: ②デプロイ (09-07) 後の GSC UI export がまだ無い (最新の coverage-drilldown は `2026-W36`、export 日 2026-09-04・soft-404 450)。次回 export で市区町村カテゴリ soft404 5→0 と全体件数差を測定し、`COVERAGE-LOOP-01` へ効果観測を引き渡す。
-- **停止条件**: 古いW32入力を当週データとして再生成しない。通常ページへGoogle Indexing APIを送らない。デプロイ前のURLを同一観測窓へ混ぜず、Google再クロール前の件数不変だけでeffect/noneにしない。
-- **完了条件**: develop→mainのCIがgreenで、上記の本番HTTP・構造化データ・sitemap検証がすべて合格する。失敗時の`coverage-alert`起票と、回復時の自動closeを少なくとも一方はGitHub Actionsで実測し、デプロイ後exportで市区町村カテゴリsoft404が0になる。
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-09-25] [期日:2026-10-23] [領域:管理]
+
+- **背景 (2026-09-25 実測)**: 2026-08-23〜09-19 の 28 日 (国内) で、サイト内のページ移動は 11,319 件
+  (`internal-transitions.csv`) なのに、部品単位で記録されたクリックは最大 2,124 件 (`nav_click` 1,770 / `rail_click` 310 /
+  `home_featured_click` 41 / `cta_click` 3、`event-volume.csv`) で約 2 割にとどまる。計測は部品ごとの手動追加で、
+  `next/link` を使う 52 ファイルのうち計測呼び出しを持つのは 15 ファイルしかない。ブログ本文の `<source-link>` は
+  2026-09-25 まで無計測だった。外部リンク (GA4 拡張計測の `click` 234 件) とアフィリエイト (`affiliate_click` /
+  `affiliate_impression`) は記録済みなので、欠けているのは「サイト内のどの部品から移動したか」だけ。
+- **方針**: 計測の既定を「全部送る」に反転する。ルートレイアウトに共通のクリック監視を 1 つ置き (capture 登録。
+  Next.js の Link が既定動作を止めるため)、サイト内リンクのクリックを既存の `nav_click` で送る。導線名は外側の
+  `data-nav-surface`、ラベルは `data-nav-label` (無ければページ種別名。URL は `nav_href` が持つ) から取り、
+  導線名が無ければ `unlabeled` で送る。GA4 側の登録作業は不要 (登録済み dimension の値追加)。
+- **次 (実行順)**:
+  1. **P1**: 共通監視、型付き属性関数 (`NavSurface` で縛る)、既存 `trackNavClick` のうちリンクを送る箇所の属性化
+     (導線名・ラベルの値は変えない)。`rail_click` / `cta_click` / `home_featured_click` / `affiliate_click` は専用処理を残し、
+     領域に `data-click-owner` を付けて共通監視から除外する。リンク以外の操作 (チェックボックス・セレクト) は現状維持。
+     未コミットのブログカード (`RankingLinkCard` / `/api/ranking-card`) も属性方式にそろえる。
+     `UI-CARD-HEADER-SIMPLIFY-01` が同じレール部品 (`SurfaceCard.tsx` の `RailCard` 等) のクラスを変えるので、同じコミットに混ぜない
+     (P1 は属性の追加だけ、見出しの見た目は同カードで変える)。
+  2. **P2**: 全ページに出る共通領域 (ヘッダー・フッター・パンくず・ページ送り・タグ・ブログ本文リンク) に導線名を付ける。
+     目標の名前なし割合は代表 URL で実測してから決める。
+  3. **P3**: `page-quality` の全 URL 静的解析に「名前の無いサイト内リンク数」「計測担当の無い広告リンク数」を追加し、
+     テンプレート別に縮小専用の基準線を置いて、違反を既存の UI 指摘キュー (`UI-FIX-*` 起票) に流す。
+     描画後に出るリンクは代表 URL のブラウザ検査で数える。
+     **衝突注意**: `UI-CHART-TEXT-LOOP-01` (途中成果はブランチ `wip/ui-chart-text-loop-01`) と `SITE-DISPLAY-SEMANTICS-AUDIT-01` も同じファイル群
+     (`.claude/scripts/page-quality/lib/ui-report.ts` の `UI_METRIC_KEYS`・`types.ts`・`page-quality-budgets.json`・`measure-static.ts`) に
+     指標を足す。並行して実装せず、後から入る側が先行分を取り込んでから足す。
+  4. **P4**: `fetch-ga4-snapshot.mjs` の `nav_click` 集計から「テンプレート別の `unlabeled` クリック上位」と
+     「導線名付きクリック ÷ サイト内ページ移動」を計測サイクルと週次レビューに出す。台帳
+     (`.claude/rules/analytics-event-standards.md`) に値追加とデプロイ日の件数不連続を書く。
+- **停止条件・禁止**: クリックを止める処理 (`preventDefault` / `stopPropagation`) を入れない。見た目・マークアップ構造・
+  クラスを変えない。タブ切替・スクロール等の画面内操作とアフィリエイトの表示回数計測は対象外。本番デプロイは P1 と P2 を
+  まとめて 1 回、オーナー承認の上で行う。デプロイ後に `nav_click` が 2 倍近く跳ねたら二重送信を疑い、先に原因を特定する。
+- **完了条件**: ① 単体テストが「1 クリック 1 件」「広告・`data-click-owner` 付きは送らない」「送信時に遷移を止めない」を
+  固定し、localhost の代表 7 種ページで実クリック 1 回につき送信 1 件を確認済み。② 本番デプロイ後の週次 page-quality に
+  新指標が出て、違反を 1 件注入すると検知されることを確認済み。③ 週次の計測サイクル出力に被覆率と `unlabeled` 上位が
+  出ている。
+- **P1 済 (2026-09-26・未コミット・未デプロイ)**: `apps/web/src/lib/analytics/components/NavClickTracker.tsx` をルートレイアウトに置いた。
+  既存の `trackNavClick` 32 か所は書き換えず、同じクリックで部品側が送ったら共通の監視は送らない方式にした (値を変えない・二重送信しない)。
+  `rail_click` / `cta_click` / `home_featured_click` の 4 部品に `data-click-owner`。ブログの目次は `blog_toc` + 見出しのラベル。
+  単体テスト 6 件 (1 クリック 1 件・専用領域と外部は送らない・部品側と重ならない・遷移を止めない)。二重送信防止を外すと red。
+  localhost で実クリック: トップ (ヘッダー=部品の 1 件 / フッター・本文=unlabeled 1 件 / 注目ランキング=0 件)、ランキング
+  (右レール=rail_click のみ / パンくず 1 件)、ブログ目次 (blog_toc 1 件)。代表 7 種のうち、カテゴリ・県・テーマ・調査は開発サーバーの
+  メモリ不足で未確認。台帳 (`analytics-event-standards.md`) に値追加とデプロイ前後の不連続を記録済み。
+- **P2 済 (2026-09-26・未コミット)**: フッター `footer`・パンくず `breadcrumb` (共通部品とブログ)・タグ `tag` (ラベル=tagKey)・
+  ブログ本文のサイト内リンク `blog_body` に導線名。localhost のブログで各 1 クリック 1 件・導線名付きを確認。ページ送りの共通部品は無かった。
+- **P4 済 (2026-09-26・未コミット)**: `fetch-ga4-snapshot.mjs` が `nav-click-surfaces.csv` (nav_click を導線名×ラベル別・Japan-only・28日) を取り、
+  計測サイクル (`summarizeNavCoverage`) が「導線名付きクリック ÷ サイト内の移動」の被覆率と導線名なしの上位を LATEST.md に出す。
+  CSV が無い週 (デプロイ前) は節を出さない。metrics:test 127 件 PASS。**実データでの確認はデプロイ後の最初の日曜計測**。
+- **次**: デプロイ後の週次で被覆率を読み、導線名なし上位から名前を付ける。P3 (page-quality の静的解析に名前の無いリンク数) は `UI-CHART-TEXT-LOOP-01` と
+  同じファイル群を触るので、あちらの取り込み後。
 
 ### [CF-CPU-SURGE-01] 2026-09-11 以降の Workers CPU 時間の増加原因を特定し、差分 purge とブログ広告変更の効果を測る
 
@@ -191,6 +272,19 @@ updated: 2026-09-29
 - **停止条件**: 単発の PSI 値で改善と判定しない (日次計測はばらつくため 3 週以上の推移で見る)。デプロイはオーナーの明示承認まで行わない。ベースライン 9,347ms は 2026-08-04 の実測値で、これを更新して達成扱いにしない。
 - **完了条件**: `ranking/total-population,mobile` の LCP が 3 週連続でベースライン 9,347ms を下回る。悪化要因が topology fetch でなかった場合は、実測で特定した真因と対策を本カードへ記録してから閉じる。
 
+## 🟡 中 — 2〜3ヶ月以内
+
+### [GSC-COVERAGE-DEPLOY-01] カバレッジ是正と入力鮮度ガードを本番反映する
+
+タグ: [インフラ・計測] [種類:不具合] [実行:ユーザー] [検証:node .claude/scripts/gsc/build-coverage-queue.mjs --no-probe] [起票:2026-09-07] [期日:2026-09-28] [進行中] [領域:サイト]
+
+- **owner**: オーナー（GSC UI export）／Claude Code（取込・効果判定）
+- **現状**: 2026-09-07にPR #939（main `5d05cd6e1`）で本番反映済み。PR CI、Cloudflare deploy、post-deploy smoke、R2 ISR GC、CDN全体パージはすべて成功した。Googlebot UA実測で旧市区町村カテゴリsoft404 5件は全件301、親プロフィール200、未知カテゴリ410 + noindex。sitemapは旧カテゴリ0件 / 市区町村プロフィール360件、自治体Datasetは`description` / `license` / `distribution.contentUrl`を本番HTMLで確認した。
+- **①は確認済 (2026-09-18)**: `fetch-metrics-weekly.yml` は 2026-09-13 run が success、`coverage-alert` Issue は 0 件。
+- **残り (オーナー)**: ②デプロイ (09-07) 後の GSC UI export がまだ無い (最新の coverage-drilldown は `2026-W36`、export 日 2026-09-04・soft-404 450)。次回 export で市区町村カテゴリ soft404 5→0 と全体件数差を測定し、`COVERAGE-LOOP-01` へ効果観測を引き渡す。
+- **停止条件**: 古いW32入力を当週データとして再生成しない。通常ページへGoogle Indexing APIを送らない。デプロイ前のURLを同一観測窓へ混ぜず、Google再クロール前の件数不変だけでeffect/noneにしない。
+- **完了条件**: develop→mainのCIがgreenで、上記の本番HTTP・構造化データ・sitemap検証がすべて合格する。失敗時の`coverage-alert`起票と、回復時の自動closeを少なくとも一方はGitHub Actionsで実測し、デプロイ後exportで市区町村カテゴリsoft404が0になる。
+
 ### [NOTE-FISCAL-PEER-PUBLISH-01] 財政指標の同規模比較 note 2 本 (#12 コード版 / #13 コードなし版) を Mac から公開する
 
 タグ: [収益化] [種類:制作] [実行:別環境] [起票:2026-09-29] [期日:2026-10-06] [領域:商品]
@@ -211,8 +305,6 @@ updated: 2026-09-29
 - **禁止**: 有料境界を目視せずに確定しない (有料部分が無料で見える)。予約・即時の別はオーナーが決める。
 - **停止条件**: Phase 1 のアカウント照合で `stats47` と一致しなければ 1 本も投稿しない。
 - **完了条件**: 2 本が note で公開され、`note-published-urls.json` に 2 件の URL があり、無料部分と有料部分の境界が意図どおりであることを screenshot で確認済み。公開日から 4 週間後 (公開日 + 28 日) に 2 本の売上を note ダッシュボードで比べる予定を `improvements.md` 側へ引き渡す。
-
-## 🟡 中 — 2〜3ヶ月以内
 
 ### [UI-FIX-THEME-20261004] UI 是正: theme の週次 UI 検査の指摘 2 件を直す
 
@@ -477,24 +569,6 @@ updated: 2026-09-29
 - **停止条件**: 旧アカウントと並行して新規アカウントを作らない (重複アカウント扱い)。組織タイプを選ばない。承認前に広告コードを入れない。
 - **完了条件**: 新アカウントの審査が承認され、stats47.jp に手動枠の広告が表示され、収益化戦略とメモリの記述が「維持費の相殺として再開」に改訂されている。
 
-### [DATA-WAGE-TABLE-YEARS-01] 賃金構造基本統計の表を使う 40 指標が 2022 年しか配信していない原因を CI で確かめて直す
-タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [領域:データ] [起票:2026-09-28]
-
-- **事象 (2026-09-28 実測)**: `statsDataId: "0003445758"` を使う metric は 40 件。代表の `school-teacher-annual-income` /
-  `nurse-annual-income` / `nursery-teacher-annual-income` / `doctor-annual-income` は R2 `app/stats/<key>/values.json` が
-  すべて `2022` の 47 行だけ。config の years は `{from: 2010, to: 2023}`。e-Stat カタログでは表名が
-  「令和２年以降 一般_都道府県別_職種（特掲）DB」で、複数年を持つ表のはず。データ品質キューでは `school-teacher-annual-income` が
-  「最新 2022 年・2 周期遅れ (推定)」、GSC 表示 916 で需要順 4 位 (`DATA-QUALITY-LOOP-01` の第1週で切り出し)。
-- **[仮説]** ① `cdTab` 08×12 + 12 の組み合わせが 2022 年だけに存在し、他の年は別の表章項目コード (memory
-  `reference_estat_wage_survey` は tab 40 / 44 と記録) ② 表が年ごとに更新され、取り込み時点で 2022 年分しか無かった
-  ③ config の years (〜2023) より新しい 2024・2025 年が表にあり、範囲外で落ちている。
-- **次**: e-Stat の取得は CI 専用 (ローカルに API キーが無い)。CI で `0003445758` の `getMetaInfo` の time / tab と、
-  `cdCat01=01, cdCat02=1192` で年ごとの non-null 県数を出す (data-refresh の dryRun は年別の件数を出さないので、
-  出力を足すか調査用の workflow_dispatch を使う)。原因に合わせて 40 件の config を直し、data-refresh で再取り込みする。
-- **停止条件**: 年によって表章項目の定義 (所定内給与か、きまって支給する給与か) が違う場合は、同じ系列として並べない。
-  R2 反映はオーナー承認。40 件を推測で一括変更しない (代表 1 件で年別の値を確かめてから広げる)。
-- **完了条件**: 40 件が e-Stat に実在する全年を配信し、`school-teacher-annual-income` の最新年が公表済みの最新年と一致している。
-  年ごとに定義が違って並べられない場合は、その理由と採った年の範囲が本カードの削除コミットに書かれている。
 ### [NOTE-COVER-ROLLOUT-20260928] noteカバーの未回収版を回収し、分類別にレビューして公開する
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-09-28] [領域:商品]
 
@@ -611,60 +685,6 @@ updated: 2026-09-29
   ② 検出器ごとに「指摘 → カード」の結び方を決める (自動起票か、週次レビューでの手動起票か)。③ `/weekly-review` と `/weekly-plan` に
   「2 週連続未達は分割か降格」「完了済み ID を計画に残さない」を入れる。
 - **完了条件**: 週次メトリクス Issue に 6 信号が 4 週続けて出て、検出 → 起票の未結び件数と Due 超過が減り、Must の連続未達が 2 週以内に解消されている。
-
-### [NAV-CLICK-COVERAGE-01] サイト内リンクのクリックを既定で全件計測し、名前の無い導線を週次で減らす
-
-タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-09-25] [期日:2026-10-23] [領域:管理]
-
-- **背景 (2026-09-25 実測)**: 2026-08-23〜09-19 の 28 日 (国内) で、サイト内のページ移動は 11,319 件
-  (`internal-transitions.csv`) なのに、部品単位で記録されたクリックは最大 2,124 件 (`nav_click` 1,770 / `rail_click` 310 /
-  `home_featured_click` 41 / `cta_click` 3、`event-volume.csv`) で約 2 割にとどまる。計測は部品ごとの手動追加で、
-  `next/link` を使う 52 ファイルのうち計測呼び出しを持つのは 15 ファイルしかない。ブログ本文の `<source-link>` は
-  2026-09-25 まで無計測だった。外部リンク (GA4 拡張計測の `click` 234 件) とアフィリエイト (`affiliate_click` /
-  `affiliate_impression`) は記録済みなので、欠けているのは「サイト内のどの部品から移動したか」だけ。
-- **方針**: 計測の既定を「全部送る」に反転する。ルートレイアウトに共通のクリック監視を 1 つ置き (capture 登録。
-  Next.js の Link が既定動作を止めるため)、サイト内リンクのクリックを既存の `nav_click` で送る。導線名は外側の
-  `data-nav-surface`、ラベルは `data-nav-label` (無ければページ種別名。URL は `nav_href` が持つ) から取り、
-  導線名が無ければ `unlabeled` で送る。GA4 側の登録作業は不要 (登録済み dimension の値追加)。
-- **次 (実行順)**:
-  1. **P1**: 共通監視、型付き属性関数 (`NavSurface` で縛る)、既存 `trackNavClick` のうちリンクを送る箇所の属性化
-     (導線名・ラベルの値は変えない)。`rail_click` / `cta_click` / `home_featured_click` / `affiliate_click` は専用処理を残し、
-     領域に `data-click-owner` を付けて共通監視から除外する。リンク以外の操作 (チェックボックス・セレクト) は現状維持。
-     未コミットのブログカード (`RankingLinkCard` / `/api/ranking-card`) も属性方式にそろえる。
-     `UI-CARD-HEADER-SIMPLIFY-01` が同じレール部品 (`SurfaceCard.tsx` の `RailCard` 等) のクラスを変えるので、同じコミットに混ぜない
-     (P1 は属性の追加だけ、見出しの見た目は同カードで変える)。
-  2. **P2**: 全ページに出る共通領域 (ヘッダー・フッター・パンくず・ページ送り・タグ・ブログ本文リンク) に導線名を付ける。
-     目標の名前なし割合は代表 URL で実測してから決める。
-  3. **P3**: `page-quality` の全 URL 静的解析に「名前の無いサイト内リンク数」「計測担当の無い広告リンク数」を追加し、
-     テンプレート別に縮小専用の基準線を置いて、違反を既存の UI 指摘キュー (`UI-FIX-*` 起票) に流す。
-     描画後に出るリンクは代表 URL のブラウザ検査で数える。
-     **衝突注意**: `UI-CHART-TEXT-LOOP-01` (途中成果はブランチ `wip/ui-chart-text-loop-01`) と `SITE-DISPLAY-SEMANTICS-AUDIT-01` も同じファイル群
-     (`.claude/scripts/page-quality/lib/ui-report.ts` の `UI_METRIC_KEYS`・`types.ts`・`page-quality-budgets.json`・`measure-static.ts`) に
-     指標を足す。並行して実装せず、後から入る側が先行分を取り込んでから足す。
-  4. **P4**: `fetch-ga4-snapshot.mjs` の `nav_click` 集計から「テンプレート別の `unlabeled` クリック上位」と
-     「導線名付きクリック ÷ サイト内ページ移動」を計測サイクルと週次レビューに出す。台帳
-     (`.claude/rules/analytics-event-standards.md`) に値追加とデプロイ日の件数不連続を書く。
-- **停止条件・禁止**: クリックを止める処理 (`preventDefault` / `stopPropagation`) を入れない。見た目・マークアップ構造・
-  クラスを変えない。タブ切替・スクロール等の画面内操作とアフィリエイトの表示回数計測は対象外。本番デプロイは P1 と P2 を
-  まとめて 1 回、オーナー承認の上で行う。デプロイ後に `nav_click` が 2 倍近く跳ねたら二重送信を疑い、先に原因を特定する。
-- **完了条件**: ① 単体テストが「1 クリック 1 件」「広告・`data-click-owner` 付きは送らない」「送信時に遷移を止めない」を
-  固定し、localhost の代表 7 種ページで実クリック 1 回につき送信 1 件を確認済み。② 本番デプロイ後の週次 page-quality に
-  新指標が出て、違反を 1 件注入すると検知されることを確認済み。③ 週次の計測サイクル出力に被覆率と `unlabeled` 上位が
-  出ている。
-- **P1 済 (2026-09-26・未コミット・未デプロイ)**: `apps/web/src/lib/analytics/components/NavClickTracker.tsx` をルートレイアウトに置いた。
-  既存の `trackNavClick` 32 か所は書き換えず、同じクリックで部品側が送ったら共通の監視は送らない方式にした (値を変えない・二重送信しない)。
-  `rail_click` / `cta_click` / `home_featured_click` の 4 部品に `data-click-owner`。ブログの目次は `blog_toc` + 見出しのラベル。
-  単体テスト 6 件 (1 クリック 1 件・専用領域と外部は送らない・部品側と重ならない・遷移を止めない)。二重送信防止を外すと red。
-  localhost で実クリック: トップ (ヘッダー=部品の 1 件 / フッター・本文=unlabeled 1 件 / 注目ランキング=0 件)、ランキング
-  (右レール=rail_click のみ / パンくず 1 件)、ブログ目次 (blog_toc 1 件)。代表 7 種のうち、カテゴリ・県・テーマ・調査は開発サーバーの
-  メモリ不足で未確認。台帳 (`analytics-event-standards.md`) に値追加とデプロイ前後の不連続を記録済み。
-- **P2 済 (2026-09-26・未コミット)**: フッター `footer`・パンくず `breadcrumb` (共通部品とブログ)・タグ `tag` (ラベル=tagKey)・
-  ブログ本文のサイト内リンク `blog_body` に導線名。localhost のブログで各 1 クリック 1 件・導線名付きを確認。ページ送りの共通部品は無かった。
-- **P4 済 (2026-09-26・未コミット)**: `fetch-ga4-snapshot.mjs` が `nav-click-surfaces.csv` (nav_click を導線名×ラベル別・Japan-only・28日) を取り、
-  計測サイクル (`summarizeNavCoverage`) が「導線名付きクリック ÷ サイト内の移動」の被覆率と導線名なしの上位を LATEST.md に出す。
-  CSV が無い週 (デプロイ前) は節を出さない。metrics:test 127 件 PASS。**実データでの確認はデプロイ後の最初の日曜計測**。
-- **次**: デプロイ後の週次で被覆率を読み、導線名なし上位から名前を付ける。P3 (page-quality の静的解析に名前の無いリンク数) は `UI-CHART-TEXT-LOOP-01` と
-  同じファイル群を触るので、あちらの取り込み後。
 
 ### [NOTE-CARD-REPAIR-01] note公開記事の空白リンクカードを段階的に是正する
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npm run note:cards:audit -- --browser-verify] [起票:2026-09-27]
@@ -1396,21 +1416,6 @@ updated: 2026-09-29
   ② F-3 は「DB レスへ移った経緯」の記事に作り替えるか、企画から外すかをオーナーが決める。③ 手順書は git TS → R2 の現行経路に直す。
 - **完了条件**: `grep -rnE "(^|[^A-Za-z0-9])D1([^0-9A-Za-z]|$)" docs/30_note記事企画` の結果が、経緯として「旧」「廃止」を明記した行だけになる。
 
-### [STRATEGY-FOCUS-2026-10-01] 10月の重点を「計測・データ品質・UI・回遊」の3レーンにし、週次 Must を各レーン1件に絞る
-タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-09-25] [期日:2026-10-01] [領域:管理]
-
-- **結論 (2026-09-25 壁打ち・オーナー合意)**: 最優先は計測 (測る → 記録 → 改善のサイクル)。データ品質と UI も 10 月に進める。行政資料 pilot は重点から外し、`ADMIN-STAT-PILOT-01` の聞き取りはオーナー主導で期日管理だけ続ける。
-- **根拠**: 週次収益 (NSM) をまだ数字で言えない (A8 確定成果は 2026-09-21 から `auth_required`、GA4 カスタムディメンション 4 項目は未登録)。計測の残作業は A8 再ログインと GA4 登録というオーナー作業が中心で、Claude の作業枠は UI とデータ品質へ回せる。データ品質の `DATA-ESTAT-FETCH-01` / `DATA-MANUAL-RESTORE-01` は 2 か月未着手。
-- **リスクと歯止め**: `weekly.md` (W39) で Must は 5 週連続未達。重点を 3 つに増やして各レーンから複数件入れると同じ形になるため、**週次 Must は各レーン 1 件 (合計 3 件)** に制限し、総量を増やさない。
-- **やること**:
-  1. 収益化戦略 §5 のレーン表で「UI・回遊」を「攻める」へ変える。狙いは「計測で効果を判定できる UI 改善に限る」とする。
-  2. 10 月の `monthly.md` の `focus_lanes` を 3 レーンにする。
-  3. 重点の上限 (1〜2 レーン) を 3 へ緩める代わりに「週次 Must は各重点レーン 1 件まで」の規則を `strategy-lanes.cjs`・`/monthly-plan`・`/weekly-plan` に入れる。
-- **UI の順番**: `NAV-CLICK-COVERAGE-01` (回遊を測る土台) → 不具合 (`SITEWIDE-DUPLICATE-LINK-RATIO-01` / `RANKING-MAP-TABLE-CARD-01` / `AREA-DATABOOK-CHART-FIX-01`) → `UI-CARD-TYPOGRAPHY-UNIFY-01` の検証完了 → 判断待ち 3 件 (`LAYOUT-MAX-WIDTH-DECISION-01` / `AREA-TOC-MOBILE-01` / `RANKING-SOURCE-TRIPLE-01`)。検索集客の主面であるランキングページを優先する。
-- **データ品質の範囲 (2026-09-25 更新)**: 25 + 12 指標の欠損は実測で解消済みだったため、全指標の機械チェックと 4 基準の継続ループ
-  (`DATA-QUALITY-LOOP-01`) と、誤りの早急な修正 (`DATA-VALUE-ERRORS-01`) に置き換える。週 5 指標ずつ進める。
-- **未検証**: UI の改善が回遊・収益に効くか。これは UI・回遊レーンの「構えを変える条件」そのもので、`NAV-CLICK-COVERAGE-01` 完了後に計測で判定する。
-- **完了条件**: レーン表の更新、10 月 `monthly.md` への `focus_lanes` 反映、`npm run docs:check` で DG076 が出ず、週次 Must が各レーン 1 件以下であることを検査が確かめる。
 
 ### [RANKING-FIRST-VIEW-RELEASE-01] ランキングページを「最初の画面で答えを出す」形に改修し、既存 3 件とまとめて 1 回のリリースで測る
 タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-09-25] [領域:サイト]
@@ -1558,26 +1563,6 @@ updated: 2026-09-29
 - **Phase 6**: `fetch-ga4-bigquery.mjs` で週次集計 (journeys / search-terms / unregistered-params / session-depth)。課金の有無を確認し、クエリに `maximumBytesBilled`。
 - **旧カード統合**: `GA4-DIMENSION-PRIORITY-01` (home_featured 3 項目の登録) は Phase 4 に吸収した。
 - **完了条件**: `npm run google-admin:audit-api` で Phase 4 の全件が confirmed-registered、key events 4 件、BigQuery link 1 件、拡張計測の二重 page_view 警告なし。次の日曜 snapshot に Phase 5・6 の新ファイルが出る。
-
-### [EFFECT-TARGET-MARKERS-01] 効果判定エンジンが GSC 施策 10 件を 1 件も判定できない状態を解消する
-タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-09-25] [領域:管理]
-
-- **根拠 (2026-W38 の計測サイクル)**: `improvements.md` の GSC 施策 10 件 (`SEARCH-GROWTH-CYCLE-01` / `COVERAGE-LOOP-01` /
-  `RANKING-REINDEX-01` / `BLOG-SEO-TYPES-01` / `BLOG-SEO-QUEUE-01` / `BLOG-SEO-PACE-01` / `BLOG-LINKROT-01` / `SITE-LINKROT-01` /
-  `THEME-EXPANSION-EFFECT-01` / `STP-AI-WATCH-01`) は、機械判定の目印 (`[gsc-page: /path]`・デプロイ済日・`[target: …]`) が欠けていて
-  機械判定 0 件。測っても判定まで閉じないので、改善サイクルの「記録 → 改善」が回っていない。
-- **次**: improvement-triage (improvements.md の排他 writer) が 1 行ずつ、根拠のある目印を足すか、目標値を後付けせず終了または
-  事前 target 付きの新規計測へ移すかを決める (`evidence-based-judgment.md` 状況 4: 根拠のない想定値を書かない)。
-- **一次処理 済 (2026-09-26・未コミット・improvement-triage)**: 10 行のうち 4 行を理由付きで終了した。
-  内訳は `SEARCH-GROWTH-CYCLE-01` (承認の運用でページ効果ではない)、`BLOG-SEO-PACE-01` (公開ペースの規律でGSC効果ではない)、
-  `SITE-LINKROT-01` (`BLOG-LINKROT-01` と同じ監査の重複で統合)、`COVERAGE-LOOP-01` (9/24 に終了済み)。
-  残る 6 行は、根拠のある目標値を今は書けない。理由は、単一ページで測れないコホート比較 (BLOG-SEO-TYPES/QUEUE)、対象 56 キーが未特定 (RANKING-REINDEX)、
-  是正デプロイ前 (BLOG-LINKROT)、独自の d7/d28/d56 計測体系 (THEME-EXPANSION-EFFECT・STP-AI-WATCH)。
-  目標値の後付けはしていない。`cli.mjs --dry-run` は exit 0 で、存在しないページが判定対象に紛れ込んでいないことも確認済み。
-- **次 (残り)**: ① `BLOG-LINKROT-01` は是正デプロイ後に対象ページと事前 target を付ける。② RANKING-REINDEX は 56 キーを特定してから目印を付ける。
-  ③ 済 (2026-09-26・オーナー判断): コホート比較 (BLOG-SEO-TYPES/QUEUE) と独自計測 (THEME-EXPANSION-EFFECT・STP-AI-WATCH) の 4 行は
-  improvements.md に「効果判定エンジン対象外」と代わりの判定手順を明記した (dry-run で subject に現れないことを確認)。
-- **完了条件**: 計測サイクルの「GSC 施策 N 件中、機械判定できるのは M 件」で、残る行がすべて理由付きで終了または目印付きになる。
 
 ### [AREA-DATABOOK-CHART-FIX-01] 県データブックの「推移」グラフの点数不足と、スマホで読めない文字・単位なしの軸を直す
 
@@ -2679,6 +2664,104 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - **次**: git 内の `.claude/state/estat/ssds-candidates.json` を catalog の `index/tables/` から再生成する形に置き換え、
   find-metrics に「未登録の候補」を引ける索引を足す。読み手を `git grep ssds-candidates` で洗い出してから進める。
 - **完了条件**: `ssds-candidates.json` が catalog 派生の生成物になり (手編集の入口が無い)、find-metrics で未登録候補が 1 件以上引ける。
+
+### [AFF-RANKING-RAKUTEN-NATIVE-01] 家計調査系 ranking の本文 A8 を外し、中段を楽天カード (モバイル rakuten-native / デスクトップ furusato-native) へ置換する
+
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-05] [領域:アフィリエイト]
+
+- 2026-10 月次計画で improvements から降格。再開条件: まとまりのデプロイでオーナーが本番反映を決めた時。反映後 4 週で `node .claude/scripts/ads/fetch-affiliate-ga4.cjs 28` を link_position 別に before/after (AFF-RESOLUTION-EFFECT-01 と窓が重なるため guard: confounded)。改善行を戻すときは `[kpi: affiliate-yield]` を付ける。
+- ローカル実装済み・未デプロイ。baseline (GA4 28日 〜2026-08-28): 楽天商品カード右レール 424 imp / 0 click、中段 native A8 等 2,545 imp / 1 click。[target: rakuten-native+furusato-native 合計 imp ≥ 2,000/28日 かつ click ≥ 1]。
+
+### [RANKING-REINDEX-01] 復帰 56 ranking (5 週連続 GSC imp 0) の coverageState を URL Inspection で確定し、未収録なら sitemap 再送信する
+
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-05] [領域:サイト]
+
+- 2026-10 月次計画で improvements から降格。再開条件: 56 キーを明示指定した一回限りの URL Inspection を実行できる時。再送信のデプロイ日が確定したら 56 キーを列挙した `[gsc-page:]` と target を付けて improvements に戻す (`[kpi: search-clicks]`)。
+- 2026-09-07 実測: 日次 URL Inspection の 251 キーに復帰 56 キーが 1 件も含まれない (500 件/日ローテーションが当たっていない)。
+
+### [BLOG-SEO-TYPES-01] D2/F/G を含む記事型ポートフォリオの 4 週効果を既存 A 型と比較する
+
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-05] [領域:サイト]
+
+- 2026-10 月次計画で improvements から降格。再開条件: 公開 4 週以上の記事が各型 5 本以上になった時。topic-queue 経由で `gsc-query.mjs` の型別コホート比較で判定し、結果を gsc-improvement log へ記録する (`[kpi: search-clicks]`)。
+- 2026-09-07 時点 topic-queue done 81 件 (A:29/B:12/D2:23/F:7/G:10)。大半が 4 週齢未満で比較は延期。効果判定エンジン対象外 (型別コホート比較)。
+
+### [BLOG-SEO-QUEUE-01] topic queue 起点の記事が需要候補を正しく選び、公開後に検索表示を得たか確認する
+
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-05] [領域:サイト]
+
+- 2026-10 月次計画で improvements から降格。再開条件: BLOG-SEO-TYPES-01 と同時に、公開 4 週以上経過分で `gsc-query.mjs` のコホート比較を行う時 (`[kpi: search-clicks]`)。
+- 2026-09-07 時点で queue done 81 件、BLOG-QUEUE-TRACK-01 の状態ずれは解消。効果判定エンジン対象外 (queue コホート集計)。
+
+### [SURVEY-LINKAGE-02] 未分類 241 件から provenance 辞書で確実に回収できる 50 statsDataId を追加する
+
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-05] [領域:データ]
+
+- 2026-10 月次計画で improvements から降格。再開条件: データ領域の重点枠で survey-curator を回せる時。`/audit-survey-linkage` で現況を再取得してから続ける (`[kpi: search-clicks]`)。
+- 2026-09-07 実測 (`.claude/state/surveys/portfolio.json`): unresolved 214 件 (external 23 / estat-uncovered 78 / ssds-synthetic-only 113)、27 件回収済 (目標 50 の 54%)。残り 23 件。
+
+### [TOKEN-AICONTENT-01] Claude 自動生成の API 課金 (5 件 run $79〜$90) を課金無効 project の Gemini 日次へ移行する
+
+タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [起票:2026-10-05] [領域:管理]
+
+- 2026-10 月次計画で improvements から降格。再開条件: Issue #763 が解消し日次 CI が PASS>0 を記録し始めた時。7 run の PASS 率・request/token・cost_usd を照合して費用 0 を判定する (`[kpi: operating-cost]`)。
+- [target: API 課金 -100% ($0)]。2026-09-24 実測: Gemini 日次 CI 21 run は PASS 0・preflight_status が billing → bad-request、cost_usd $0 は生成 0 件のため。横断監視 Issue #763 (Gemini HTTP402) で追跡中、重複起票しない。
+
+### [FUNNEL-CTA-01] ranking 末尾 CTA の click と遷移後行動を判定する
+
+タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [起票:2026-10-05] [領域:サイト]
+
+- 2026-10 月次計画で improvements から降格。再開条件: オーナーが 4 項目を登録し、登録後 4 週で標本が蓄積した時 (`[kpi: site-circulation-rate]`)。
+- ブロッカー: GA4 カスタムディメンション `cta_id`/`content_id`/`target_type`/`target_key` が未登録 (2026-09-24 `npm run google-admin:audit-api`: confirmed-absent)。cta_click 自体が 28 日で 3 件 (insufficient-sample)。
+
+### [AFF-BLOG-TEXTLINK-01] 本文内 text link と sidebar の CTR を比較する
+
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-05] [領域:アフィリエイト]
+
+- 2026-10 月次計画で improvements から降格。再開条件: 2026-11-18 以降に比較期間を 8 週以上へ延ばして再判定できる時 (`[kpi: affiliate-yield]`)。
+- 2026-09-24 実測 (GA4 28日・Japan): article-inline 4,761 imp/7 click (0.147%)、blog-sidebar 2,493/2 (0.080%)、article-end 764/1。全 position の click が 9 件で insufficient-sample。furusato 在庫欠損の懸念は解消済み。[target] 未設定。
+
+### [AFF-A8-REGISTER-01] 追加 18 件のうち配信された案件を A8 確定成果と CTR で 4 週判定する
+
+タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [起票:2026-10-05] [領域:アフィリエイト]
+
+- 2026-10 月次計画で improvements から降格。再開条件: オーナーが A8 に再ログインした時。確定成果レポート取得後に 4 週判定する (`[kpi: affiliate-yield]`)。
+- ブロッカー: A8 確定成果レポートの認証が 2026-09-21 から `auth_required` (`.claude/state/metrics/authenticated/latest.json`)。`AUTHENTICATED-MEASUREMENT-ACTIVATION-01` と同一ブロッカー。
+
+### [BLOG-LINKROT-01] 内部リンク是正後の coverage とブログ→ranking 回遊を判定する (SITE-LINKROT-01 統合済み)
+
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-05] [領域:サイト]
+
+- 2026-10 月次計画で improvements から降格。再開条件: 是正デプロイ後に `internal-link-audit-weekly.yml` 最新 run で壊れ 0 を確認できた時。手順: soft 404 タイトル込みで壊れ 0 を検証 → STRICT smoke 200 → GSC coverage を前後比較 → 壊れは本文・生成設定・live 描画の三層に分類 (`[kpi: search-clicks, site-circulation-rate]`)。
+- 2026-09-07 実測 (`.claude/state/site/link-audit.json`): 壊れリンク 6 件 (旧 key `academic-achievement-test-average-rate` 等)。`broken-link-remap.json` に置換先を追記して是正・デプロイが先。
+
+### [STP-MESSAGE-ROLLOUT-01] ポジショニング文言を SNS プロフィール・OGP・サイト説明・note 導線へ展開し、例外を明示する
+
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-05] [領域:サイト]
+
+- 2026-10 月次計画で improvements から降格。再開条件: サイト領域の重点枠で着手できる時。外部プロフィール変更と本番反映はユーザー承認まで実行しない (`[kpi: search-clicks]`)。
+- 実行記録なし (着手痕跡なし)。`docs/00_プロジェクト管理/03_マーケティング戦略.md` のポジショニングと照合して対象ごとに変更・維持・対象外を決める。UI の DOM・配置・色・余白は変えない。
+
+### [ASSET-POLICY-BURNDOWN-01] baseline 27 件の既存画像を、ユーザーが承認した範囲だけ圧縮・重複削除・再エンコードで削減する
+
+タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [起票:2026-10-05] [領域:サイト]
+
+- 2026-10 月次計画で improvements から降格。再開条件: オーナーが圧縮・再エンコードの範囲を承認した時 (`[kpi: site-health]`)。
+- 2026-09-27 時点でユーザー承認の記録なし、進捗 0 件。
+
+### [RANK-THIN-01] thin metric (観測年 1 年など) の noindex 基準を URL Inspection 実測から決める
+
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-05] [領域:サイト]
+
+- 2026-10 月次計画で improvements から降格。再開条件: 検索系の重点枠で着手できる時。実測が揃ったら基準を決めて improvements に target 付きで戻す (`[kpi: search-clicks]`)。
+- 日次 URL Inspection (500 件/日) は稼働中だが、thin metric 抽出と基準検討は未着手 (2026-09-27 確認)。
+
+### [STP-AI-WATCH-01] AI Overviews による雑学系流入の侵食を四半期で定点観測する
+
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-05] [領域:サイト]
+
+- 2026-10 月次計画で improvements から降格。再開条件: 2026-10 の四半期観測枠。手順: S1 代表クエリを GSC finalized 期間で固定 → 重複しない期間の clicks/impressions/CTR/position を比較 → AI Overviews 表示有無が取れなければ「S1 CTR 低下の観測」に限定 → 対照群と比較し持続的低下のみ次候補を最大 3 件 (`[kpi: search-clicks]`)。
+- 効果判定エンジン対象外 (S1 代表クエリ群と S2・S3 対照群の query 集合比較)。
 
 ## 🟢 低 — 時期未定・条件付き (trigger は本文に)
 
