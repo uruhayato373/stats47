@@ -1,48 +1,66 @@
 {
   "schemaVersion": 1,
-  "date": "2026-10-02",
+  "date": "2026-10-05",
   "period": {
-    "periodStart": "2026-09-23",
-    "periodEnd": "2026-09-29",
+    "periodStart": "2026-09-26",
+    "periodEnd": "2026-10-02",
     "windowDays": 7
   },
-  "inputHash": "86fc6433fee83564acf65216141f073bf93e20d396d868a60b25d9909d076a3b",
+  "inputHash": "437334754d7a98e14a534fee71fff1f5f1dbc12e4dd9efcb4449c92c1d17d784",
   "movements": [
     {
-      "keyword": "任意保険 加入率",
-      "targetPath": "/ranking/voluntary-car-insurance-rate-bodily-injury",
-      "before": 78.875,
-      "after": 35.714285714285715,
-      "beforeImpressions": 8,
-      "impressions": 7,
-      "change": 43.160714285714285
+      "keyword": "ふるさと納税 募集費用",
+      "targetPath": "/ranking/furusato-fundraising-cost-prefecture",
+      "before": 66,
+      "after": 6.333333333333333,
+      "beforeImpressions": 2,
+      "impressions": 6,
+      "change": 59.666666666666664
     },
     {
       "keyword": "任意保険 加入 率",
       "targetPath": "/ranking/voluntary-car-insurance-rate-bodily-injury",
-      "before": 76.6,
-      "after": 35,
-      "beforeImpressions": 5,
+      "before": 75.5,
+      "after": 34.666666666666664,
+      "beforeImpressions": 2,
+      "impressions": 3,
+      "change": 40.833333333333336
+    },
+    {
+      "keyword": "教員 年収ランキング",
+      "targetPath": "/ranking/school-teacher-annual-income",
+      "before": 48.25,
+      "after": 8,
+      "beforeImpressions": 4,
       "impressions": 2,
-      "change": 41.599999999999994
+      "change": 40.25
     },
     {
-      "keyword": "ふるさと納税 募集費用",
-      "targetPath": "/ranking/furusato-fundraising-cost-prefecture",
-      "before": 62,
-      "after": 23.428571428571427,
-      "beforeImpressions": 1,
-      "impressions": 7,
-      "change": 38.57142857142857
+      "keyword": "任意保険 加入率",
+      "targetPath": "/ranking/voluntary-car-insurance-rate-bodily-injury",
+      "before": 76,
+      "after": 35.81818181818182,
+      "beforeImpressions": 4,
+      "impressions": 11,
+      "change": 40.18181818181818
     },
     {
-      "keyword": "site:stats47.jp",
-      "targetPath": "/areas/15000",
-      "before": 43.05952380952381,
-      "after": 6.25,
-      "beforeImpressions": 84,
-      "impressions": 4,
-      "change": 36.80952380952381
+      "keyword": "うどん消費量ランキング",
+      "targetPath": "/ranking/soba-udon-dining-consumption-expenditure",
+      "before": 11,
+      "after": 50,
+      "beforeImpressions": 2,
+      "impressions": 1,
+      "change": -39
+    },
+    {
+      "keyword": "高校 教員 年収",
+      "targetPath": "/blog/high-school-teacher-salary-prefecture-gap",
+      "before": 46.2,
+      "after": 10.666666666666666,
+      "beforeImpressions": 5,
+      "impressions": 6,
+      "change": 35.53333333333334
     },
     {
       "keyword": "高校の先生 給料",
@@ -54,49 +72,31 @@
       "change": 35
     },
     {
-      "keyword": "site:stats47.jp",
-      "targetPath": "/ranking/engel-coefficient",
-      "before": 52.054054054054056,
-      "after": 18,
-      "beforeImpressions": 74,
-      "impressions": 1,
-      "change": 34.054054054054056
-    },
-    {
-      "keyword": "site:stats47.jp",
-      "targetPath": "/ranking/railway-passengers",
-      "before": 42.734177215189874,
-      "after": 9.857142857142858,
-      "beforeImpressions": 79,
-      "impressions": 7,
-      "change": 32.87703435804701
-    },
-    {
-      "keyword": "site:stats47.jp",
-      "targetPath": "/areas/14000/innovation-patents",
-      "before": 61,
-      "after": 30.333333333333332,
-      "beforeImpressions": 57,
-      "impressions": 3,
-      "change": 30.666666666666668
-    },
-    {
-      "keyword": "site:stats47.jp",
-      "targetPath": "/areas/42000/cities/42205",
-      "before": 63.47826086956522,
-      "after": 94,
-      "beforeImpressions": 23,
-      "impressions": 1,
-      "change": -30.52173913043478
-    },
-    {
       "keyword": "自動車保険 加入率",
       "targetPath": "/ranking/voluntary-car-insurance-rate-bodily-injury",
-      "before": 58,
-      "after": 29,
-      "beforeImpressions": 3,
+      "before": 52.5,
+      "after": 19.285714285714285,
+      "beforeImpressions": 4,
       "impressions": 7,
-      "change": 29
+      "change": 33.214285714285715
+    },
+    {
+      "keyword": "任意保険 加入 率",
+      "targetPath": "/ranking/voluntary-car-insurance-rate-vehicle",
+      "before": 36.2,
+      "after": 69,
+      "beforeImpressions": 5,
+      "impressions": 1,
+      "change": -32.8
+    },
+    {
+      "keyword": "警察 官 年収 ランキング",
+      "targetPath": "/blog/avg-salary-police-prefecture-prefecture-gap",
+      "before": 42,
+      "after": 9.5,
+      "beforeImpressions": 1,
+      "impressions": 2,
+      "change": 32.5
     }
   ],
   "verdicts": [
@@ -109,8 +109,8 @@
   "selected": {
     "keyword": "山形県 コンビニ 店舗数",
     "targetPath": "/blog/convenience-store-density-map",
-    "rank": 11.745928338762216,
-    "impressions": 307,
+    "rank": 11.75223880597015,
+    "impressions": 335,
     "clicks": 0,
     "group": 5,
     "previousMethod": null,
