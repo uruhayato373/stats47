@@ -31,10 +31,12 @@ import fs from "node:fs";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
+import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { PREF_NAMES } from "../lib/prefectures.cjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
-const R2 = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
+const R2 = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
 const STAGE_REL = ".local/r2/app/blog";
 const STAGE_ABS = path.join(PROJECT_ROOT, STAGE_REL);
 const VERIFY_MIN = 0.95;
@@ -48,7 +50,7 @@ const BASE_ARG = getArg("--base");
 const PROBE_ONLY = args.includes("--probe-only");
 
 // ---------- 都道府県 ----------
-const PREFS = ["北海道","青森県","岩手県","宮城県","秋田県","山形県","福島県","茨城県","栃木県","群馬県","埼玉県","千葉県","東京都","神奈川県","新潟県","富山県","石川県","福井県","山梨県","長野県","岐阜県","静岡県","愛知県","三重県","滋賀県","京都府","大阪府","兵庫県","奈良県","和歌山県","鳥取県","島根県","岡山県","広島県","山口県","徳島県","香川県","愛媛県","高知県","福岡県","佐賀県","長崎県","熊本県","大分県","宮崎県","鹿児島県","沖縄県"];
+const PREFS = PREF_NAMES;
 const normPref = (s) => String(s || "").replace(/[都道府県]$/, "").replace(/^北海$/, "北海道").trim();
 // 正規化名 (県/府/都 を除いたもの) → フル名。SVG は省略名 (岩手・徳島・大阪) を使うことが多い。
 // 長い名前を先に並べて、短い名前の誤一致 (例「京都」⊃「京」) を避ける。

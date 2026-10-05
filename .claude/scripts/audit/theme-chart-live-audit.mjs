@@ -43,6 +43,8 @@ import {
   parseDependencyMirror,
   summarizeAudit,
 } from "./theme-chart-live-audit-core.mjs";
+import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { ESTAT_STATS_DATA_URL } from "../lib/estat-catalog/endpoints.cjs";
 
 export { classifyNational, isFiniteEstatValue } from "./theme-chart-live-audit-core.mjs";
 
@@ -51,8 +53,7 @@ const DEPENDENCY_MIRROR = path.join(
   import.meta.dirname,
   "theme-chart-dependencies.generated.json",
 );
-const ESTAT_ENDPOINT =
-  "https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData";
+const ESTAT_ENDPOINT = ESTAT_STATS_DATA_URL;
 
 /**
  * 会社ネットワーク等、直接の外向き通信が遮断され明示 CONNECT だけが通る環境向け。
@@ -129,7 +130,7 @@ function resolveR2PublicBase() {
   } catch {
     // 公開配信URLは非secret。環境ファイルが無いCIでも既定値でread-only監査を続ける。
   }
-  return "https://storage.stats47.jp";
+  return R2_PUBLIC_BASE_URL;
 }
 
 /**

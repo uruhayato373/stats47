@@ -29,6 +29,7 @@ import {
 } from "../../../packages/data-configs/src/theme-catalog/types.ts";
 import { METRICS_REGISTRY } from "../../../packages/data-configs/src/registry.ts";
 import { loadPulled } from "../lib/estat-catalog/pulled.mjs";
+import { SITE_ORIGIN } from "../lib/site-config.cjs";
 
 const __filename = fileURLToPath(import.meta.url);
 export const PROJECT_ROOT = path.resolve(path.dirname(__filename), "..", "..", "..");
@@ -370,7 +371,7 @@ export function pdfToText(bytes) {
  * (`.claude/scripts/audit/theme-chart-live-audit.mjs` の resolveDispatcher と同じ)。
  * 返り値: { ok, status, finalUrl, contentType, isPdf, text (html は本文テキスト / pdf は pdftotext があれば本文、無ければ null) }
  */
-export function createFetcher({ timeoutMs = 25_000, userAgent = "stats47-selection-backfill/1.0 (+https://stats47.jp)" } = {}) {
+export function createFetcher({ timeoutMs = 25_000, userAgent = `stats47-selection-backfill/1.0 (+${SITE_ORIGIN})` } = {}) {
   let dispatcher;
   const proxy = process.env.HTTPS_PROXY ?? process.env.https_proxy ?? process.env.HTTP_PROXY;
   if (proxy) {

@@ -10,9 +10,10 @@
  */
 
 import { AFFILIATE_ADS } from "./affiliate-ads-data";
+import { SITE } from "@stats47/types";
 
 const PUBLIC_URL =
-  process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp";
+  process.env.R2_PUBLIC_FETCH_URL ?? SITE.r2PublicBaseUrl;
 const KEY = "app/affiliate-ads/all.json";
 
 async function main() {

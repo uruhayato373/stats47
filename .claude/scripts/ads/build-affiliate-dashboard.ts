@@ -14,16 +14,9 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 
+import { CATEGORY_KEYS } from "@stats47/data-configs";
 import { AFFILIATE_ADS } from "../../../apps/web/scripts/affiliate-ads-data";
 import { buildAffiliatePortfolioViewModel } from "../../../apps/admin/lib/server/affiliate-portfolio-view";
-
-// SSOT: packages/data-configs/src/types.ts の CATEGORY_KEYS (17 軸)
-const CATEGORY_KEYS = [
-  "landweather", "population", "laborwage", "agriculture", "miningindustry",
-  "commercial", "economy", "construction", "energy", "tourism",
-  "educationsports", "administrativefinancial", "safetyenvironment",
-  "socialsecurity", "international", "infrastructure", "ict",
-] as const;
 
 function esc(s: unknown): string {
   return String(s ?? "")

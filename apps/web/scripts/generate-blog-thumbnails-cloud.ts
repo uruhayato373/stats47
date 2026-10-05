@@ -61,11 +61,12 @@ import {
   type ImageGenerationStatus,
 } from './lib/image-generation-manifest';
 import { createImageGenerationInspector } from './lib/image-generation-r2-inspector';
+import { SITE } from '@stats47/types';
 
 dotenv.config({ path: '.env.local' });
 
 const PUBLIC_URL =
-  process.env.R2_PUBLIC_FETCH_URL ?? 'https://storage.stats47.jp';
+  process.env.R2_PUBLIC_FETCH_URL ?? SITE.r2PublicBaseUrl;
 const PROJECT_ROOT = join(import.meta.dirname ?? __dirname, '../../..');
 const CONCURRENCY = 8;
 

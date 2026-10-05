@@ -6,11 +6,9 @@ import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
 import { parseArgs } from 'node:util';
 import { SOURCES, EXPECTED_CONFIGS } from './population-core-pins.mjs';
+import { PREF_AREA_CODES } from '../lib/prefectures.cjs';
 export { SOURCES, EXPECTED_CONFIGS };
-export const PREFS = Array.from(
-  { length: 47 },
-  (_, i) => String(i + 1).padStart(2, '0') + '000'
-);
+export const PREFS = [...PREF_AREA_CODES];
 const AREAS = ['00000', ...PREFS],
   SEXES = ['0', '1', '2'],
   FLOW_SEXES = ['1', '2'];

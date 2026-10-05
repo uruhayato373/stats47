@@ -15,6 +15,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { readCoverLedger, coverDisplayState } from '../note/lib/cover-assets.mjs';
+import { PREF_AREA_CODES } from './prefectures.cjs';
 
 export const DEFAULT_CONCURRENCY = 12;
 export const RANKING_SAMPLE = 30;
@@ -294,7 +295,7 @@ export async function buildTab(tab, opts) {
     case "areas-ogp": {
       let codes = await enumerateFromSitemap(site, /stats47\.jp\/areas\/([0-9]{5})$/);
       if (codes.length === 0)
-        codes = Array.from({ length: 47 }, (_, i) => String(i + 1).padStart(2, "0") + "000");
+        codes = PREF_AREA_CODES;
       if (limit) codes = codes.slice(0, limit);
       return {
         source: "r2-static",
@@ -342,7 +343,7 @@ export async function buildTab(tab, opts) {
     }
     case "pref-silhouette": {
       // 県シルエットカード素材 (47県 × 5比率 × blue/dark)。areas OGP と同デザイン系。
-      let codes = Array.from({ length: 47 }, (_, i) => String(i + 1).padStart(2, "0"));
+      let codes = PREF_AREA_CODES.map((code) => code.slice(0, 2));
       if (limit) codes = codes.slice(0, limit);
       return {
         source: "r2-static",

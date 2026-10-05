@@ -15,9 +15,10 @@
  */
 import * as fs from "fs";
 import * as path from "path";
+import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 
 const ROOT = path.resolve(__dirname, "..", "..", "..");
-const R2_BASE = (process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp").replace(/\/+$/, "");
+const R2_BASE = (process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL).replace(/\/+$/, "");
 const TABLE = path.join(ROOT, ".claude/scripts/blog/data/display-sources-backfill.json");
 const WORK_DIR = path.join(ROOT, ".local/blog-datasource-fix");
 const APPLY = process.argv.includes("--apply");

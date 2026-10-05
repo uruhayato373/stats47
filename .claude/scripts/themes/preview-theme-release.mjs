@@ -3,6 +3,7 @@ import { readFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
 import { parseArgs } from 'node:util';
+import { R2_PUBLIC_BASE_URL } from '../lib/site-config.cjs';
 
 // A localhost read-only gateway lets the real R2 readers preview an exact release manifest.
 const { values: options } = parseArgs({ options: {
@@ -38,7 +39,7 @@ const server = http.createServer(async (req, res) => {
       res.end(req.method === 'HEAD' ? undefined : bytes);
       return;
     }
-    const upstream = await fetch(`https://storage.stats47.jp/${key}`, { method: req.method, signal: AbortSignal.timeout(20000) });
+    const upstream = await fetch(`${R2_PUBLIC_BASE_URL}/${key}`, { method: req.method, signal: AbortSignal.timeout(20000) });
     const body = req.method === 'HEAD' ? undefined : Buffer.from(await upstream.arrayBuffer());
     res.writeHead(upstream.status, { 'Content-Type': upstream.headers.get('content-type') ?? 'application/json', 'X-Theme-Preview-Source': 'public' });
     res.end(body);

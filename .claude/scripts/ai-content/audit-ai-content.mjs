@@ -42,8 +42,9 @@ import {
   findOutOfRangeNumbers,
   findPrefectureMismatches,
 } from "./lib/number-audit.mjs";
+import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 
-const R2_PUBLIC = process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp";
+const R2_PUBLIC = process.env.R2_PUBLIC_FETCH_URL ?? R2_PUBLIC_BASE_URL;
 
 // --- ルール定数 (プロンプトと同期。変更時は ranking-content-prompt.ts も確認) ---
 const NG_WORDS = ["ワースト", "ベスト", "激減", "急増", "衝撃"];

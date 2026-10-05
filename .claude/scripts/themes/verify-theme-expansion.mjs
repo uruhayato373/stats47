@@ -5,6 +5,7 @@ import { createHash } from 'node:crypto';
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
 import { explicitIndicatorCodes, summarizeSeries, validateDecisions, validateImplementationPlan, PREFECTURES, numericValue } from './theme-expansion-core.mjs';
+import { ESTAT_API_BASE_URL } from '../lib/estat-catalog/endpoints.cjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');
 const require = createRequire(import.meta.url);
@@ -46,7 +47,7 @@ if (process.argv.includes('--check')) {
     series: [], responses: [], failures: [], registryComparisons: [],
   };
   async function request(endpoint, parameters, artifactName) {
-    const url = new URL(`https://api.e-stat.go.jp/rest/3.0/app/json/${endpoint}`);
+    const url = new URL(`${ESTAT_API_BASE_URL}/${endpoint}`);
     for (const [key, value] of Object.entries({ appId, lang: 'J', ...parameters })) url.searchParams.set(key, String(value));
     let lastError;
     for (let attempt = 0; attempt < 3; attempt++) {

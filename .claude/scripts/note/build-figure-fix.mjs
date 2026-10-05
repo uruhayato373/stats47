@@ -1,10 +1,13 @@
 // 1 記事分の「是正後の本文 HTML」を作り /tmp へ置く。不変量を満たさなければ非0で終了する。
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { rebuild, misplacedFigures } from "./lib/figure-split.mjs";
 const slug = process.argv[2];
 if (!slug) { console.error("usage: build-figure-fix.mjs <slug>"); process.exit(2); }
-const DOCS = "/Users/minamidaisuke/stats47/docs/31_note記事原稿";
+// .claude/scripts/note/ → 3 階層上がリポジトリ root
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
+const DOCS = path.join(ROOT, "docs/31_note記事原稿");
 const md = fs.readFileSync(path.join(DOCS, slug, "draft.md"), "utf8");
 const fm = (md.match(/^---\n([\s\S]*?)\n---/) || [])[1] || "";
 const url = (fm.match(/^note_url:\s*(?:"(.+?)"|(.+?))\s*$/m) || []).slice(1).find(Boolean) || "";

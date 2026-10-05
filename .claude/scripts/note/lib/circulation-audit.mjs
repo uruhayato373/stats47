@@ -1,4 +1,5 @@
 import { inspectNoteCover } from "./cover-audit.mjs";
+import { SITE_ORIGIN } from "../../lib/site-config.cjs";
 
 const TRACKING_PARAMETER = /^(?:utm_.+|link)$/i;
 
@@ -47,7 +48,7 @@ export function isStats47SiteUrl(value) {
 
 export function normalizedSitePath(value) {
   try {
-    const url = new URL(value, "https://stats47.jp");
+    const url = new URL(value, SITE_ORIGIN);
     if (url.hostname !== "stats47.jp" && url.hostname !== "www.stats47.jp") return null;
     return url.pathname.replace(/\/$/, "") || "/";
   } catch {

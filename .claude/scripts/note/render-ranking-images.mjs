@@ -18,6 +18,7 @@ import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { NOTE_RANKING_IMAGES, buildRenderProps, buildRenderSpec, validateRenderSpec } from "./lib/note-render-spec.mjs";
 import { isRankingArticleSlug } from "./lib/image-assets-audit.mjs";
+import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
 const DOCS31 = join(ROOT, "docs", "31_note記事原稿");
@@ -60,7 +61,7 @@ function specErrors(slug) {
   return validateRenderSpec(slug, JSON.parse(readFileSync(specPath, "utf8")), chartText);
 }
 
-const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
+const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
 
 /**
  * 生成 AI の背景 (render-spec.json の background) を取得して SHA を検証し data URI にする。

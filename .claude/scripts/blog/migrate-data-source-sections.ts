@@ -32,6 +32,7 @@ import * as path from "path";
 
 import { migrateLegacyDataSourceSection } from "../../../apps/web/src/features/blog/components/md-preprocessor";
 import { KINDLE_BOOKS } from "../../../packages/product-factory/src/channels/kindle/book-catalog";
+import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 
 /** Kindle 書籍の章として本文を使う blog slug。本文を変えると書籍の校正指示が外れる。 */
 const KINDLE_PINNED_SLUGS = new Set(
@@ -39,7 +40,7 @@ const KINDLE_PINNED_SLUGS = new Set(
 );
 
 const ROOT = path.resolve(__dirname, "..", "..", "..");
-const R2_BASE = (process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp").replace(/\/+$/, "");
+const R2_BASE = (process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL).replace(/\/+$/, "");
 const WORK_DIR = path.join(ROOT, ".local/blog-datasource-fix");
 const OUTBOX_DIR = path.join(ROOT, "docs/21_ブログ記事原稿");
 const CONCURRENCY = 8;

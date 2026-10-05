@@ -24,6 +24,7 @@ import {
 import { NOTE_ARTICLES } from './catalog';
 import { noteCoverCategory } from './catalog/cover-categories';
 import { freezeQuestionRankingData, questionRankingIdentity, questionRankingCopy } from './lib/question-cover-data.mjs';
+import { R2_PUBLIC_BASE_URL } from '../lib/site-config.cjs';
 async function main() {
   const { fetchCoverSource, createCoverStore } = await import('./lib/cover-storage.mjs');
   const { registerCoverCandidate } = await import('./lib/cover-ingest.mjs');
@@ -241,10 +242,10 @@ async function main() {
   }
   async function questionRanking(article: (typeof NOTE_ARTICLES)[number]) {
     const { rankingKey, year } = questionRankingIdentity(article);
-    const valuesSource = `https://storage.stats47.jp/app/ranking/${rankingKey}/values.json`;
+    const valuesSource = `${R2_PUBLIC_BASE_URL}/app/ranking/${rankingKey}/values.json`;
     const sourceName = `ranking-${rankingKey}.json`;
     const source = await jsonSource(valuesSource, sourceName);
-    const fixedChartUrl = `https://storage.stats47.jp/${article.r2Path}/chart-data.json`;
+    const fixedChartUrl = `${R2_PUBLIC_BASE_URL}/${article.r2Path}/chart-data.json`;
     const captured = capturedSources?.articles?.[article.key];
     if (capturedSources && (!captured || !Number.isFinite(Date.parse(capturedSources.observedAt)) ||
       captured.valuesSource !== valuesSource || captured.fixedChartSource !== fixedChartUrl ||
@@ -316,7 +317,7 @@ async function main() {
     const chart = fs.existsSync(local)
       ? JSON.parse(fs.readFileSync(local, 'utf8'))
       : await jsonSource(
-          `https://storage.stats47.jp/note/stats47-note/${slug}/chart-data.json`,
+          `${R2_PUBLIC_BASE_URL}/note/stats47-note/${slug}/chart-data.json`,
           `${slug}.json`
         );
     if (
@@ -348,7 +349,7 @@ async function main() {
       cached.set(
         metric,
         await jsonSource(
-          `https://storage.stats47.jp/app/stats/${metric}/values.json`,
+          `${R2_PUBLIC_BASE_URL}/app/stats/${metric}/values.json`,
           metric + '.json'
         )
       );
@@ -430,7 +431,7 @@ async function main() {
         mean,
         ratio,
         reference: '47都市の単純平均',
-        valuesSource: `https://storage.stats47.jp/app/stats/${metric}/values.json`,
+        valuesSource: `${R2_PUBLIC_BASE_URL}/app/stats/${metric}/values.json`,
         valuesSha256: sha(
           fs.readFileSync(path.join(OUT, 'sources', metric + '.json'))
         ),

@@ -12,8 +12,9 @@ import {
   type ContractFetch,
   type PublicDataContractInput,
 } from './lib/public-data-contract';
+import { SITE } from '@stats47/types';
 
-const DEFAULT_BASE_URL = 'https://storage.stats47.jp';
+const DEFAULT_BASE_URL = SITE.r2PublicBaseUrl;
 const DEFAULT_CONCURRENCY = 16;
 const RETRY_ATTEMPTS = 3;
 const REQUEST_TIMEOUT_MS = 30_000;

@@ -33,11 +33,12 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { OGP_TABS, buildTab, esc, pMap, probe } from "../lib/gallery-collectors.mjs";
+import { R2_PUBLIC_BASE_URL, SITE_ORIGIN } from "../lib/site-config.cjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
-const SITE = process.env.SITE_ORIGIN || "https://stats47.jp";
-const R2 = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
+const SITE = process.env.SITE_ORIGIN || SITE_ORIGIN;
+const R2 = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
 
 // ─── 引数 ─────────────────────────────────────────────
 const argv = process.argv.slice(2);

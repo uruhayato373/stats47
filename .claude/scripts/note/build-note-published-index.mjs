@@ -18,6 +18,7 @@
 import { readFileSync, writeFileSync } from 'fs'
 import { resolve, join, dirname } from 'path'
 import { fileURLToPath } from 'url'
+import { R2_PUBLIC_BASE_URL } from '../lib/site-config.cjs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const ROOT = resolve(__dirname, '../../..')
@@ -25,7 +26,7 @@ const ROOT = resolve(__dirname, '../../..')
 const DRY_RUN = process.argv.includes('--dry-run')
 if (DRY_RUN) console.log('[dry-run] ファイル書き込みはスキップ')
 
-const R2_PUBLIC = 'https://storage.stats47.jp'
+const R2_PUBLIC = R2_PUBLIC_BASE_URL
 const OUT_FILE = join(ROOT, '.claude/state/note-published-urls.json')
 
 // ============================================================

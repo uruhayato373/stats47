@@ -16,6 +16,7 @@
 
 const path = require("node:path");
 const fs = require("node:fs");
+const { ESTAT_STATS_DATA_URL } = require("../lib/estat-catalog/endpoints.cjs");
 require("dotenv").config({
   path: path.resolve(__dirname, "../../../.env.local"),
 });
@@ -73,7 +74,7 @@ async function fetchAllYears(statsDataId, cdCat01) {
     lvArea: "2",
     limit: "100000",
   });
-  const url = `https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData?${sp}`;
+  const url = `${ESTAT_STATS_DATA_URL}?${sp}`;
   const res = await fetch(url);
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   const json = await res.json();

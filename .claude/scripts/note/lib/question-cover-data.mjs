@@ -1,5 +1,7 @@
 /** Freeze the article's year and 47 values; never silently use the latest partition. */
-const PREFECTURE_CODES = new Set(Array.from({ length: 47 }, (_,i) => `${String(i + 1).padStart(2, '0')}000`));
+import { PREF_AREA_CODES } from "../../lib/prefectures.cjs";
+
+const PREFECTURE_CODES = new Set(PREF_AREA_CODES);
 
 export function questionRankingIdentity(article) {
   const targets = article.stats47Targets?.filter(t => t.startsWith('/ranking/')) ?? [];

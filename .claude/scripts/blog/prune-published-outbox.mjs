@@ -37,11 +37,12 @@ import {
   getPublished,
   normalizeBody,
 } from "./lib/outbox-r2.mjs";
+import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 
 const PROJECT_ROOT = resolve(import.meta.dirname, "../../..");
 const OUTBOX_REL = "docs/21_ブログ記事原稿";
 const OUTBOX = join(PROJECT_ROOT, OUTBOX_REL);
-const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
+const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
 const APPLY = process.argv.includes("--apply");
 const CHECK = process.argv.includes("--check"); // 検出のみ・削除しない・取り残しがあれば exit 1 (deploy/publish ガード用)
 const CONCURRENCY = 6;

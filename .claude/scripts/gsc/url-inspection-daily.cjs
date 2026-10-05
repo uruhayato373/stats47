@@ -33,10 +33,11 @@
 const path = require("node:path");
 const fs = require("node:fs");
 const { google } = require("googleapis");
+const { GSC_PROPERTY, SITE_ORIGIN } = require("../lib/site-config.cjs");
+const { PREF_AREA_CODES } = require("../lib/prefectures.cjs");
 
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
-const SITE_URL = "sc-domain:stats47.jp";
-const SITE_ORIGIN = "https://stats47.jp";
+const SITE_URL = GSC_PROPERTY;
 const KEY_CANDIDATES = [
   "stats47-f6b5dae19196.json",
   "stats47-31b18ee67144.json",
@@ -316,8 +317,7 @@ function buildUrlList(maxUrls = MAX_URLS) {
   for (const u of staticPages) ordered.push(u);
 
   // Priority 4: 47 都道府県 /areas/{prefCode} (47)
-  for (let i = 1; i <= 47; i++) {
-    const code = String(i).padStart(2, "0") + "000";
+  for (const code of PREF_AREA_CODES) {
     ordered.push(`${SITE_ORIGIN}/areas/${code}`);
   }
 

@@ -45,6 +45,8 @@ import {
   extractChartSourceReferences,
   inspectChartSourceManifest,
 } from '../lib/chart-provenance.mjs';
+import { R2_PUBLIC_BASE_URL } from '../lib/site-config.cjs';
+import { ESTAT_META_INFO_URL } from '../lib/estat-catalog/endpoints.cjs';
 
 const PROJECT_ROOT = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -52,7 +54,7 @@ const PROJECT_ROOT = path.resolve(
   '..',
   '..'
 );
-const R2 = process.env.R2_PUBLIC_FETCH_URL || 'https://storage.stats47.jp';
+const R2 = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
 const STATE_DIR = path.join(PROJECT_ROOT, '.claude/state/blog');
 const QUEUE_IN = path.join(STATE_DIR, 'svg-lineage-queue.json');
 const CONC = 24;
@@ -110,7 +112,7 @@ async function exists(url) {
 }
 async function eStatTableExists(statsDataId) {
   if (!ESTAT_APP_ID) return true;
-  const url = new URL('https://api.e-stat.go.jp/rest/3.0/app/json/getMetaInfo');
+  const url = new URL(ESTAT_META_INFO_URL);
   url.searchParams.set('appId', ESTAT_APP_ID);
   url.searchParams.set('statsDataId', statsDataId);
   url.searchParams.set('lang', 'J');

@@ -19,9 +19,10 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import { R2_PUBLIC_BASE_URL, SITE_ORIGIN } from "../lib/site-config.cjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
-const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
+const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
 const REMAP_FILE = path.join(ROOT, ".claude/scripts/blog/data/broken-link-remap.json");
 const SRC_CACHE = path.join(ROOT, ".local/blog-linkfix/_src");
 const OUT_DIR = path.join(ROOT, ".local/blog-linkfix/out");
@@ -121,7 +122,7 @@ async function fetchArticle(slug) {
  * (例: fiscal-strength-index)、オフラインの集合判定では不十分。--apply の前に必ず通す。
  */
 async function verifyTargets() {
-  const SITE = process.env.SITE_ORIGIN || "https://stats47.jp";
+  const SITE = process.env.SITE_ORIGIN || SITE_ORIGIN;
   const UA = "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)";
   const targets = [...new Set(TARGETS.map((k) => REMAP[k].to).filter(Boolean))];
   const bad = [];

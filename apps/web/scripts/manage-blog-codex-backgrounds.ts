@@ -14,10 +14,11 @@ import {
   ingestArticleBackgroundAsset,
   parseBlogArticleImageContext,
 } from './lib/blog-article-background';
+import { SITE } from '@stats47/types';
 
 const PROJECT_ROOT = join(import.meta.dirname ?? __dirname, '../../..');
 const PUBLIC_URL =
-  process.env.R2_PUBLIC_FETCH_URL ?? 'https://storage.stats47.jp';
+  process.env.R2_PUBLIC_FETCH_URL ?? SITE.r2PublicBaseUrl;
 
 function stringArg(args: string[], flag: string): string | null {
   const index = args.indexOf(flag);

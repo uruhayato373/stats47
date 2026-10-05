@@ -16,8 +16,9 @@
 import { google } from "googleapis";
 import { resolveServiceAccountKeyFile, toCsv } from "./lib/auth.mjs";
 import { buildQuery } from "./lib/ga4-query.mjs";
+import { GA4_PROPERTY_ID } from "../lib/site-config.cjs";
 
-const DEFAULT_PROPERTY_ID = "463218070";
+const DEFAULT_PROPERTY_ID = GA4_PROPERTY_ID;
 
 const SCOPES = ["https://www.googleapis.com/auth/analytics.readonly"];
 

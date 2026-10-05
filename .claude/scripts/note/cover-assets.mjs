@@ -10,6 +10,7 @@ import { COVER_ROOT, readCoverLedger, validateCoverLedger, emptyCoverArticle, up
 import { createCoverStore, fetchCoverSource, fetchNoteDetail, storeCoverBytes, readStoredCover, readStoredCoverInput } from './lib/cover-storage.mjs';
 import { registerCoverCandidate } from './lib/cover-ingest.mjs';
 import { enumerateNoteBodies } from '../lib/gallery-collectors.mjs';
+import { R2_PUBLIC_BASE_URL } from '../lib/site-config.cjs';
 
 const command = process.argv[2];
 const options = {};
@@ -109,7 +110,7 @@ if (command === 'seed') {
   for (const article of selected) {
     const body = bodies.get(article.key);
     if (!body) throw Error(`legacy R2 identity missing: ${article.key}`);
-    const sourceUrl = `https://storage.stats47.jp/${body.r2Path}/images/cover-1280x670.png`;
+    const sourceUrl = `${R2_PUBLIC_BASE_URL}/${body.r2Path}/images/cover-1280x670.png`;
     let original;
     try { original = await fetchCoverSource(sourceUrl); }
     catch (error) { if (error.message === 'cover source HTTP 404') { console.log(`No legacy R2 cover: ${article.key}`); continue; } throw error; }

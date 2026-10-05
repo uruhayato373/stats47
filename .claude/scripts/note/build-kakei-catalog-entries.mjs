@@ -2,7 +2,9 @@
 // stats47-note.ts へ追記する。タイトルは draft.md を唯一の真実源にする (validator が一致を要求)。
 import fs from "node:fs";
 import path from "node:path";
-const ROOT = "/Users/minamidaisuke/stats47";
+import { fileURLToPath } from "node:url";
+// .claude/scripts/note/ → 3 階層上がリポジトリ root
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
 const DOCS = path.join(ROOT, "docs/31_note記事原稿");
 const CAT = path.join(ROOT, ".claude/scripts/note/catalog/data/stats47-note.ts");
 

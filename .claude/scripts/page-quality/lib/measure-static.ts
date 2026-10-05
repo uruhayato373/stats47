@@ -2,6 +2,7 @@ import * as cheerio from "cheerio";
 
 import type { MetricKey, MetricValue } from "../types";
 import { resolveDispatcher } from "./http-dispatcher";
+import { R2_PUBLIC_BASE_URL } from "../../lib/site-config.cjs";
 
 export interface StaticMeasurement {
   http_status: number;
@@ -153,7 +154,7 @@ const unmeasured = (reason: string): MetricValue => ({ value: null, reason });
 
 // 画像切れ検査の対象は自サイトと R2 公開 URL の画像だけ。ASP の計測ピクセルを取得すると
 // 広告の表示回数を水増しするので、外部ホストの画像は検査しない。
-const R2_PUBLIC_HOST = new URL(process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp").host;
+const R2_PUBLIC_HOST = new URL(process.env.R2_PUBLIC_FETCH_URL ?? R2_PUBLIC_BASE_URL).host;
 
 function firstPartyImageUrl(raw: string, baseUrl: string): string | null {
   const trimmed = raw.trim();

@@ -6,18 +6,13 @@ import { mkdtempSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "nod
 import { tmpdir } from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { PREF_NAMES, PREF_AREA_CODES } from "../lib/prefectures.cjs";
 
 const PDF_URL = "https://www.mext.go.jp/content/20260525-mxt_kyokoku-000049811_03.pdf";
 const EXPECTED_SHA256 = "c94028f6385bfa735095d796c70adf85804a7e342b64d1d57e1aa84e06f4bedc";
 const EXPECTED_TOTALS = { foreign: 73_313, japanese: 11_446, combined: 84_759 };
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
-const PREFECTURES = [
-  "北海道", "青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県", "茨城県", "栃木県", "群馬県",
-  "埼玉県", "千葉県", "東京都", "神奈川県", "新潟県", "富山県", "石川県", "福井県", "山梨県", "長野県",
-  "岐阜県", "静岡県", "愛知県", "三重県", "滋賀県", "京都府", "大阪府", "兵庫県", "奈良県", "和歌山県",
-  "鳥取県", "島根県", "岡山県", "広島県", "山口県", "徳島県", "香川県", "愛媛県", "高知県", "福岡県",
-  "佐賀県", "長崎県", "熊本県", "大分県", "宮崎県", "鹿児島県", "沖縄県",
-];
+const PREFECTURES = PREF_NAMES;
 
 export function parsePrefectureTotals(text) {
   const rows = new Map();
@@ -40,7 +35,7 @@ export function parsePrefectureTotals(text) {
 
 export function buildRows(foreign, japanese) {
   return PREFECTURES.map((areaName, index) => ({
-    areaCode: `${String(index + 1).padStart(2, "0")}000`,
+    areaCode: PREF_AREA_CODES[index],
     areaName,
     yearCode: "2025",
     yearName: "2025",

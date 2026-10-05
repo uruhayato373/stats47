@@ -2,18 +2,19 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { addDays, jstDateOf, resolvePeriods } from '../../metrics/lib/periods.mjs';
+import { GSC_PROPERTY, SITE_ORIGIN } from '../../lib/site-config.cjs';
 
 export const METHODS = ['title', 'description', 'intro', 'faq', 'content', 'internal-links', 'data'];
 export const hash = value => createHash('sha256').update(typeof value === 'string' ? value : JSON.stringify(value)).digest('hex');
 export const pairKey = row => JSON.stringify([row.keyword, row.targetPath]);
 export function sitePath(value) {
-  const url = new URL(value, 'https://stats47.jp');
-  assert.equal(url.origin, 'https://stats47.jp', 'foreign site');
+  const url = new URL(value, SITE_ORIGIN);
+  assert.equal(url.origin, SITE_ORIGIN, 'foreign site');
   assert.ok(!url.search && !url.hash && !url.username && !url.password, 'canonical URL required');
   return url.pathname;
 }
 export function validateSnapshot(snapshot, today = jstDateOf()) {
-  assert.equal(snapshot.siteUrl, 'sc-domain:stats47.jp');
+  assert.equal(snapshot.siteUrl, GSC_PROPERTY);
   assert.equal(snapshot.asOf, today, 'stale GSC snapshot');
   const periods = resolvePeriods({ source: 'gsc', asOf: today, now: today + 'T03:00:00Z' });
   for (const key of ['current', 'previous']) {

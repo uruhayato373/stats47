@@ -24,15 +24,15 @@ import path from "node:path";
 import { resolvePeriods, DATA_DELAY_DAYS } from "../metrics/lib/periods.mjs";
 import { assessDailyCoverage } from "../metrics/lib/periods.mjs";
 import { pathToFileURL } from "node:url";
+import { GA4_PROPERTY_ID, GSC_PROPERTY, SITE_ORIGIN } from "./site-config.cjs";
 
 const REPO_ROOT = process.cwd();
 const KEY_CANDIDATES = [
   "stats47-f6b5dae19196.json",
   "stats47-31b18ee67144.json",
 ];
-const GA4_PROPERTY_ID = "463218070";
-const GSC_SITE_URL = "sc-domain:stats47.jp";
-const PSI_TARGET_URL = "https://stats47.jp/";
+const GSC_SITE_URL = GSC_PROPERTY;
+const PSI_TARGET_URL = `${SITE_ORIGIN}/`;
 
 const GA4_JAPAN_FILTER = {
   filter: {

@@ -60,6 +60,7 @@ import {
   sitemapKey,
   summarizeCoverageQueue,
 } from "./lib/coverage-queue-state.mjs";
+import { SITE_ORIGIN } from "../lib/site-config.cjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -506,7 +507,7 @@ async function fetchSitemapKeys() {
       clearTimeout(t);
     }
   };
-  const root = await get("https://stats47.jp/sitemap.xml");
+  const root = await get(`${SITE_ORIGIN}/sitemap.xml`);
   if (root === null) return null;
   const pages = /<sitemapindex/i.test(root) ? [] : [root];
   if (!pages.length) {

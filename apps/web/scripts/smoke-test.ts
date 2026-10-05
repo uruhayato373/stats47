@@ -12,7 +12,9 @@
  * npx tsx apps/web/scripts/smoke-test.ts --base-url http://localhost:3000
  */
 
-const DEFAULT_BASE_URL = "https://stats47.jp";
+import { SITE } from "@stats47/types";
+
+const DEFAULT_BASE_URL = SITE.origin;
 
 interface SmokeTestCase {
   /** テスト名 */

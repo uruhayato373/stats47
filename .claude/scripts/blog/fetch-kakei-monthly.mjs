@@ -30,6 +30,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { ESTAT_STATS_DATA_URL } from "../lib/estat-catalog/endpoints.cjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
@@ -102,7 +103,7 @@ async function fetchItem(src, code) {
     return JSON.parse(fs.readFileSync(cache, "utf8"));
   }
   const params = new URLSearchParams({ appId: appId(), statsDataId: src.statsDataId, cdCat01: code, metaGetFlg: "N", cntGetFlg: "N", ...src.fixed });
-  const url = `https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData?${params}`;
+  const url = `${ESTAT_STATS_DATA_URL}?${params}`;
   const res = await fetch(url);
   if (!res.ok) throw new Error(`e-Stat HTTP ${res.status}`);
   const json = await res.json();

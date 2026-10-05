@@ -23,8 +23,9 @@ import { promisify } from "node:util";
 import { lintConsecutiveCallouts, lintSourceLinkPlacement } from "../lib/article-structure-lint.mjs";
 import { lintInternalLinks } from "../lib/internal-link-lint.mjs";
 import { lintParenNumbers } from "../lib/paren-number-lint.mjs";
+import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 
-const BASE_URL = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
+const BASE_URL = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
 const CONCURRENCY = 8;
 const execFile = promisify(execFileCallback);
 

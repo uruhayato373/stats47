@@ -29,6 +29,7 @@ import {
   type ReviewItem,
   validateAgentReview,
 } from "./lib/sns-image-review";
+import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 
 const { MAX_WEIGHTED_LENGTH, weightedLength } = require("../lib/x-weighted-length.cjs") as {
   MAX_WEIGHTED_LENGTH: number;
@@ -36,7 +37,7 @@ const { MAX_WEIGHTED_LENGTH, weightedLength } = require("../lib/x-weighted-lengt
 };
 
 const PROJECT_ROOT = resolve(__dirname, "..", "..", "..");
-const PUBLIC_BASE = process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp";
+const PUBLIC_BASE = process.env.R2_PUBLIC_FETCH_URL ?? R2_PUBLIC_BASE_URL;
 const OUT_DIR = join(PROJECT_ROOT, ".local/sns-review");
 const PROMPT = join(PROJECT_ROOT, ".claude/prompts/local/sns-image-review.md");
 const SCHEMA = JSON.stringify({

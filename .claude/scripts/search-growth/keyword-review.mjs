@@ -8,6 +8,7 @@ import { fileURLToPath } from 'node:url';
 import { hash, METHODS } from './lib/keyword-cycle.mjs';
 import { editableFile, readJson, writeJson } from './keyword-cycle.mjs';
 import { validatePageEvidence } from './keyword-page.mjs';
+import { SITE_ORIGIN } from '../lib/site-config.cjs';
 
 const COPY_PROPERTIES = new Set(['seoTitle', 'seoDescription', 'title', 'description', 'intro', 'summary', 'question', 'answer']);
 const PROPERTY_METHOD = { seoTitle: 'title', title: 'title', seoDescription: 'description', description: 'description', intro: 'intro', summary: 'content', question: 'faq', answer: 'faq' };
@@ -35,7 +36,7 @@ export function validateReview(entries, selection, targetEvidence = null) {
     assert.ok(uses.some(u => u.name === 'WebFetch' && u.input?.url === competitor.url), 'competitor not read');
   }
   if (targetEvidence) assert.ok(uses.some(u => u.name === 'Read' && (u.input?.file_path === targetEvidence.textFile || u.input?.file_path?.endsWith('/' + targetEvidence.textFile))), 'verified public page capture not read');
-  else assert.ok(uses.some(u => u.name === 'WebFetch' && u.input?.url === `https://stats47.jp${selection.targetPath}`), 'target page not read');
+  else assert.ok(uses.some(u => u.name === 'WebFetch' && u.input?.url === `${SITE_ORIGIN}${selection.targetPath}`), 'target page not read');
   assert.ok(Array.isArray(report.patches) && report.patches.length <= 3);
   if (report.status === 'proposed') {
     assert.ok(METHODS.includes(report.method));

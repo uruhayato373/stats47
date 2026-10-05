@@ -28,6 +28,8 @@ import path from "path";
 import fs from "fs";
 import { ProxyAgent } from "undici";
 import BetterSqlite3 from "better-sqlite3";
+import { ESTAT_STATS_DATA_URL, ESTAT_META_INFO_URL } from "../lib/estat-catalog/endpoints.cjs";
+import { PREF_NAMES } from "../lib/prefectures.cjs";
 
 const PROJECT_ROOT = path.resolve(import.meta.dirname, "../../..");
 config({ path: path.resolve(PROJECT_ROOT, ".env.local") });
@@ -48,16 +50,6 @@ const D1_PATH = path.join(
 
 const MAX_YEAR_AGE = 5;
 const NOW_YEAR = new Date().getFullYear();
-
-const PREF_NAMES = [
-  "北海道","青森県","岩手県","宮城県","秋田県","山形県","福島県",
-  "茨城県","栃木県","群馬県","埼玉県","千葉県","東京都","神奈川県",
-  "新潟県","富山県","石川県","福井県","山梨県","長野県","岐阜県",
-  "静岡県","愛知県","三重県","滋賀県","京都府","大阪府","兵庫県",
-  "奈良県","和歌山県","鳥取県","島根県","岡山県","広島県","山口県",
-  "徳島県","香川県","愛媛県","高知県","福岡県","佐賀県","長崎県",
-  "熊本県","大分県","宮崎県","鹿児島県","沖縄県",
-];
 
 function pseudoCodeToAreaCode(code) {
   const n = parseInt(code, 10);
@@ -83,7 +75,7 @@ function parseArgs(argv) {
 
 async function fetchData(params) {
   const sp = new URLSearchParams({ appId: APP_ID, lang: "J", ...params });
-  const url = `https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData?${sp}`;
+  const url = `${ESTAT_STATS_DATA_URL}?${sp}`;
   const res = await fetch(url, fetchOpts);
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   const json = await res.json();
@@ -95,7 +87,7 @@ async function fetchData(params) {
 }
 
 async function getAreaMap(statsDataId) {
-  const url = `https://api.e-stat.go.jp/rest/3.0/app/json/getMetaInfo?appId=${APP_ID}&lang=J&statsDataId=${statsDataId}`;
+  const url = `${ESTAT_META_INFO_URL}?appId=${APP_ID}&lang=J&statsDataId=${statsDataId}`;
   const r = await fetch(url, fetchOpts);
   const j = await r.json();
   const co = [].concat(j.GET_META_INFO?.METADATA_INF?.CLASS_INF?.CLASS_OBJ || []);

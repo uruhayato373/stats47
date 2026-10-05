@@ -14,6 +14,7 @@
  * (README「denylist」)。ALLOWED_ACTIONS は Playwright residual の 2 action だけ。
  */
 import { createHash } from "node:crypto";
+import { GSC_PROPERTY, SITE_DOMAIN } from "../lib/site-config.cjs";
 
 /**
  * ローカル Playwright で実行してよい action。README「allowlist」(ローカル Playwright) と 1:1。
@@ -420,7 +421,7 @@ export async function applyCreateScLink(page, { screenshotDir, gotoScLinks, prop
   // アカウントを選択 → sc-domain:stats47.jp を選ぶ
   const choose = await clickByText(page, ["アカウントを選択", "Choose accounts", "アカウントの選択"]);
   if (choose) await page.waitForTimeout(2500);
-  const propRow = await clickByText(page, ["sc-domain:stats47.jp", "stats47.jp"]);
+  const propRow = await clickByText(page, [GSC_PROPERTY, SITE_DOMAIN]);
   if (!propRow) return { status: "selector-drift", step: "gsc-property-row" };
   await clickButton(page, ["確認", "確定", "Confirm"]);
   await page.waitForTimeout(1500);

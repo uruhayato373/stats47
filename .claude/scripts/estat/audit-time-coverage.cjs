@@ -14,6 +14,7 @@
  */
 const fs = require("node:fs");
 const path = require("node:path");
+const { ESTAT_STATS_DATA_URL } = require("../lib/estat-catalog/endpoints.cjs");
 require("dotenv").config({
   path: path.resolve(__dirname, "../../../.env.local"),
 });
@@ -50,7 +51,7 @@ const TARGETS = [
 
 async function getStatsData(params) {
   const sp = new URLSearchParams({ appId: APP_ID, lang: "J", ...params });
-  const url = `https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData?${sp}`;
+  const url = `${ESTAT_STATS_DATA_URL}?${sp}`;
   const res = await fetch(url);
   return res.json();
 }

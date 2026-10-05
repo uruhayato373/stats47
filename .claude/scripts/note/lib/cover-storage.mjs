@@ -9,8 +9,9 @@ import { promisify } from 'node:util';
 import { HttpsProxyAgent } from 'https-proxy-agent';
 import { S3Client, GetObjectCommand, PutObjectCommand } from '@aws-sdk/client-s3';
 import { COVER_ROOT, coverSha, coverAssetKey, coverInputKey } from './cover-assets.mjs';
+import { R2_PRIVATE_BUCKET } from '../../lib/site-config.cjs';
 
-const BUCKET = 'stats47-private';
+const BUCKET = R2_PRIVATE_BUCKET;
 const LIMIT = 16 * 1024 * 1024;
 const pendingRefreshes = new Map();
 const runFile = promisify(execFile);

@@ -7,6 +7,7 @@ import {createRequire} from 'node:module';
 import {resolve,dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {parseArgs} from 'node:util';
+import { ESTAT_STATS_DATA_URL } from '../lib/estat-catalog/endpoints.cjs';
 const require=createRequire(import.meta.url);
 const ExcelJS=require('exceljs');
 const prefectures=require('../../../packages/area/src/data/prefectures.json');
@@ -110,7 +111,7 @@ export function specializationSnapshot(est,generatedAt){
 async function loadFile(source,dir,isApi){
  const path=resolve(dir,source.filename);let bytes;
  try{bytes=await readFile(path);}catch(e){if(e.code!=='ENOENT')throw e;
-  let url;if(isApi){assert.ok(process.env.NEXT_PUBLIC_ESTAT_APP_ID||process.env.ESTAT_APP_ID,'e-Stat appId required');url=new URL('https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData');url.search=new URLSearchParams({appId:process.env.NEXT_PUBLIC_ESTAT_APP_ID||process.env.ESTAT_APP_ID,lang:'J',...source.parameters});}else url=source.url;
+  let url;if(isApi){assert.ok(process.env.NEXT_PUBLIC_ESTAT_APP_ID||process.env.ESTAT_APP_ID,'e-Stat appId required');url=new URL(ESTAT_STATS_DATA_URL);url.search=new URLSearchParams({appId:process.env.NEXT_PUBLIC_ESTAT_APP_ID||process.env.ESTAT_APP_ID,lang:'J',...source.parameters});}else url=source.url;
   let r;try{r=await fetch(url,{signal:AbortSignal.timeout(60000)});}catch{throw Error('source fetch failed '+source.filename);}assert.ok(r.ok,'source HTTP '+r.status);bytes=Buffer.from(await r.arrayBuffer());
  }
  if(isApi)assertHash(JSON.stringify(JSON.parse(bytes).GET_STATS_DATA?.STATISTICAL_DATA),source.statisticalDataSha256);else assertHash(bytes,source.sha256);

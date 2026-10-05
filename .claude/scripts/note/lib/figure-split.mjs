@@ -11,7 +11,10 @@
 // 文字は一切変えない: 分断された <p> の innerHTML を連結し、<figure> は verbatim で再配置する。
 import fs from "node:fs";
 import path from "node:path";
-const DOCS = "/Users/minamidaisuke/stats47/docs/31_note記事原稿";
+import { fileURLToPath } from "node:url";
+// .claude/scripts/note/lib/ → 4 階層上がリポジトリ root
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../../..");
+const DOCS = path.join(ROOT, "docs/31_note記事原稿");
 
 export const plain = (h) => h.replace(/<br\s*\/?>/g, "").replace(/<[^>]+>/g, "")
   .replace(/&nbsp;/g, " ").replace(/&amp;/g, "&").replace(/&lt;/g, "<")

@@ -5,13 +5,14 @@ import { config } from "dotenv";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { GetObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import { R2_BUCKET } from "../site-config.cjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const PROJECT_ROOT = path.resolve(path.dirname(__filename), "..", "..", "..", "..");
 
 config({ path: path.join(PROJECT_ROOT, ".env.local") });
 
-const BUCKET = process.env.CLOUDFLARE_R2_BUCKET_NAME || "stats47";
+const BUCKET = process.env.CLOUDFLARE_R2_BUCKET_NAME || R2_BUCKET;
 
 function client() {
   const endpoint = process.env.R2_S3_ENDPOINT;

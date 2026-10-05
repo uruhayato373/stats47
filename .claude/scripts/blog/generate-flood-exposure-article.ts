@@ -6,6 +6,7 @@ import { createHash } from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { generateChoroplethSvg } from '../../../packages/svg-builder/src/charts/choropleth.ts';
 import { svgThemeStyle } from '../../../packages/svg-builder/src/shared/theme.ts';
+import { R2_PUBLIC_BASE_URL } from '../lib/site-config.cjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');
 const dir = path.join(root, 'docs/21_ブログ記事原稿/2050-population-flood-exposure/data');
@@ -18,7 +19,7 @@ const write = (name: string, value: unknown) => fs.writeFileSync(path.join(dir, 
 function read(name: string) {
   const bytes = fs.readFileSync(path.join(inputRoot, prefix, name));
   const sha256 = createHash('sha256').update(bytes).digest('hex');
-  sources.push({ url: `https://storage.stats47.jp/${prefix}/${name}`, key: `${prefix}/${name}`, sha256, bytes: bytes.length });
+  sources.push({ url: `${R2_PUBLIC_BASE_URL}/${prefix}/${name}`, key: `${prefix}/${name}`, sha256, bytes: bytes.length });
   fs.writeFileSync(path.join(dir, `geo-${name.replaceAll('/', '-')}`), bytes);
   return JSON.parse(bytes.toString());
 }

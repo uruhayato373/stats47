@@ -7,7 +7,9 @@
  * （trailing slash / query / fragment / canonical / domain）。
  */
 
-export const SITE_ORIGIN = "https://stats47.jp";
+import { SITE_ORIGIN } from "../../lib/site-config.cjs";
+
+export { SITE_ORIGIN };
 const SITE_HOSTS = new Set(["stats47.jp", "www.stats47.jp"]);
 
 /** UTM / クリック ID など、結合キーで無視する query パラメータ。 */

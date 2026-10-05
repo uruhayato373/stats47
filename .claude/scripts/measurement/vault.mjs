@@ -1,7 +1,8 @@
 import { createCipheriv, createDecipheriv, createHash, randomBytes } from 'node:crypto';
 import { S3Client, GetObjectCommand, PutObjectCommand } from '@aws-sdk/client-s3';
+import { R2_PRIVATE_BUCKET } from '../lib/site-config.cjs';
 
-export const BUCKET = 'stats47-private';
+export const BUCKET = R2_PRIVATE_BUCKET;
 const PREFIX = 'operations/authenticated-measurement';
 
 function encryptionKey() {

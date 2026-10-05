@@ -33,11 +33,12 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { isAnchorRow } from "../gsc/analyze-ctr-seesaw.mjs";
+import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
-const R2 = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
+const R2 = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
 
 const args = process.argv.slice(2);
 const getArg = (flag, def) => {

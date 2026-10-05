@@ -2,6 +2,7 @@ import { randomUUID } from "node:crypto";
 import { readFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { SITE_ORIGIN } from "../../lib/site-config.cjs";
 
 const LIB_DIR = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(LIB_DIR, "../../../..");
@@ -35,7 +36,7 @@ export function buildNoteProductCardUrl(productTarget, noteUrl) {
   const noteKey = source.pathname.match(/\/n\/(n[0-9a-f]+)$/i)?.[1];
   if (!noteKey) throw new Error(`note keyを抽出できません: ${noteUrl}`);
   return assertCleanCardUrl(
-    `https://stats47.jp${productTarget}/from/note/${noteKey}`,
+    `${SITE_ORIGIN}${productTarget}/from/note/${noteKey}`,
     "stats47.jp",
   );
 }
@@ -68,7 +69,7 @@ export function resolveProductCardText(productTarget) {
 }
 
 export function normalizeLegacyStats47Links(body) {
-  return String(body).replace(/http:\/\/(?:www\.)?stats47\.jp/gi, "https://stats47.jp");
+  return String(body).replace(/http:\/\/(?:www\.)?stats47\.jp/gi, SITE_ORIGIN);
 }
 
 /** note が自動再生成するカード文言・属性だけを除き、執筆本文の同一性を比較できる形にする。 */

@@ -5,14 +5,18 @@ import { config } from "dotenv";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { ProxyAgent } from "undici";
+import { ESTAT_STATS_LIST_URL, ESTAT_META_INFO_URL, ESTAT_STATS_DATA_URL } from "./endpoints.cjs";
+
+// URL 定数の正本は endpoints.cjs (副作用なし)。api.mjs 経由でも読めるよう再 export する。
+export { ESTAT_STATS_LIST_URL, ESTAT_META_INFO_URL, ESTAT_STATS_DATA_URL };
 
 const __filename = fileURLToPath(import.meta.url);
 const PROJECT_ROOT = path.resolve(path.dirname(__filename), "..", "..", "..", "..");
 
 config({ path: path.join(PROJECT_ROOT, ".env.local") });
 
-const LIST_URL = "https://api.e-stat.go.jp/rest/3.0/app/json/getStatsList";
-const META_URL = "https://api.e-stat.go.jp/rest/3.0/app/json/getMetaInfo";
+const LIST_URL = ESTAT_STATS_LIST_URL;
+const META_URL = ESTAT_META_INFO_URL;
 const LIST_BATCH_SIZE = 10000;
 const RETRY_COUNT = 3;
 const RETRY_BASE_DELAY_MS = 1000;

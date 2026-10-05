@@ -36,9 +36,10 @@ import {
   toAreaCarouselItem,
   validateGroup,
 } from "./lib/ig-area-props.ts";
+import { R2_PUBLIC_BASE_URL, SITE_ORIGIN } from "../lib/site-config.cjs";
 
 const PROJECT_ROOT = join(import.meta.dirname ?? __dirname, "../../..");
-const PUBLIC_URL = process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp";
+const PUBLIC_URL = process.env.R2_PUBLIC_FETCH_URL ?? R2_PUBLIC_BASE_URL;
 const DEFAULT_TOP = 5;
 const TOP_GROUP_TITLE = "全国トップクラス";
 const BOTTOM_GROUP_TITLE = "全国では下位";
@@ -118,7 +119,7 @@ async function main() {
     areaName,
     coverHook: buildCoverHook(areaName),
     teaser: buildCoverTeaser(topGroup.items),
-    canonicalUrl: `https://stats47.jp/areas/${pref5}`,
+    canonicalUrl: `${SITE_ORIGIN}/areas/${pref5}`,
     groups: [topGroup, bottomGroup],
     generatedAt: new Date().toISOString(),
     sourceKeys: [sourceKey],

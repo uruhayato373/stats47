@@ -33,9 +33,10 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { R2_PUBLIC_BASE_URL, SITE_ORIGIN } from "../lib/site-config.cjs";
 
-const ORIGIN = (process.env.SITE_ORIGIN ?? "https://stats47.jp").replace(/\/$/, "");
-const R2_PUBLIC = (process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp").replace(/\/$/, "");
+const ORIGIN = (process.env.SITE_ORIGIN ?? SITE_ORIGIN).replace(/\/$/, "");
+const R2_PUBLIC = (process.env.R2_PUBLIC_FETCH_URL ?? R2_PUBLIC_BASE_URL).replace(/\/$/, "");
 const UA = "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)";
 const NOT_FOUND_TITLE = /(見つかりません|ページが存在しません|not found)/i;
 const CONCURRENCY = 8;

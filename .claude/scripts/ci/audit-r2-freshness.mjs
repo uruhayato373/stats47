@@ -16,11 +16,12 @@ import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
 import { evaluateFreshness, formatFreshnessReport } from "../lib/r2-freshness-core.mjs";
+import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, "..", "..", "..");
 const STATE_DIR = path.join(ROOT, ".claude/state/ci");
-const BASE = process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp";
+const BASE = process.env.R2_PUBLIC_FETCH_URL ?? R2_PUBLIC_BASE_URL;
 
 /**
  * 監視対象。**書き手が既知の cron で、更新頻度が分かっているものだけ**を入れる。

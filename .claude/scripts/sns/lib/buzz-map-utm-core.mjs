@@ -10,6 +10,7 @@
  */
 
 import { createRequire } from "node:module";
+import { SITE_ORIGIN } from "../../lib/site-config.cjs";
 
 const require = createRequire(import.meta.url);
 const snsUtm = require("../../lib/sns-utm.cjs");
@@ -42,7 +43,7 @@ export function validateAttributionContract({ utmUrl, ideaId, platform, attribut
 
   let url;
   try {
-    url = new URL(utmUrl, "https://stats47.jp");
+    url = new URL(utmUrl, SITE_ORIGIN);
   } catch {
     return { valid: false, reasons: ["utm_url が不正"] };
   }

@@ -20,6 +20,7 @@ import {
   S3Client,
 } from '@aws-sdk/client-s3';
 import { assertR2WriteAllowed } from '../../../packages/r2-storage/src/scripts/_assert-ci-write';
+import { R2_BUCKET, R2_PRIVATE_BUCKET } from '../lib/site-config.cjs';
 
 interface PublishedArticle {
   vertical: string;
@@ -37,8 +38,8 @@ const args = process.argv.slice(2);
 const commit = args.includes('--commit');
 const migrateExisting = args.includes('--migrate-existing');
 const requested = args.filter((value) => !value.startsWith('--'));
-const publicBucket = process.env.CLOUDFLARE_R2_BUCKET_NAME ?? 'stats47';
-const privateBucket = process.env.R2_PRIVATE_BUCKET_NAME ?? 'stats47-private';
+const publicBucket = process.env.CLOUDFLARE_R2_BUCKET_NAME ?? R2_BUCKET;
+const privateBucket = process.env.R2_PRIVATE_BUCKET_NAME ?? R2_PRIVATE_BUCKET;
 const endpoint = process.env.R2_S3_ENDPOINT;
 const accessKeyId = process.env.R2_ACCESS_KEY_ID;
 const secretAccessKey = process.env.R2_SECRET_ACCESS_KEY;

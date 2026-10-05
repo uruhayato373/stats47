@@ -18,7 +18,9 @@
 
 "use strict";
 
-const BASE = "https://stats47.jp";
+const { SITE_ORIGIN } = require("./site-config.cjs");
+
+const BASE = SITE_ORIGIN;
 const VALID_SOURCES = new Set(["x", "instagram", "youtube", "threads"]);
 
 /** campaign 名をドメイン別に決定 (§4)。返り値は utm_campaign にそのまま入れる。 */

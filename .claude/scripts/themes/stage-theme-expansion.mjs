@@ -10,6 +10,7 @@ import {
   explicitIndicatorCodes,
   inspectLocalMetricCoverage,
 } from './theme-expansion-core.mjs';
+import { R2_PUBLIC_BASE_URL } from '../lib/site-config.cjs';
 
 // Local preparation only: canonical builders produce the release files; no upload capability.
 const require = createRequire(import.meta.url);
@@ -159,7 +160,7 @@ for (const response of artifacts.filter(
   }
 }
 async function publicJson(key) {
-  const response = await fetch(`https://storage.stats47.jp/${key}`, {
+  const response = await fetch(`${R2_PUBLIC_BASE_URL}/${key}`, {
     signal: AbortSignal.timeout(30000),
   });
   if (!response.ok) throw new Error(`Public ${key}: HTTP ${response.status}`);

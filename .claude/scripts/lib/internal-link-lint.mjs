@@ -23,6 +23,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { PREF_AREA_CODES } from "./prefectures.cjs";
 
 /**
  * リポジトリルートを上方向に探索して決める。
@@ -105,9 +106,7 @@ function loadKeySets() {
     [...catBlock[1].matchAll(/["']([a-z]+)["']/g)].map((m) => m[1]),
   );
 
-  const areaCodes = new Set(
-    Array.from({ length: 47 }, (_, i) => `${String(i + 1).padStart(2, "0")}000`),
-  );
+  const areaCodes = new Set(PREF_AREA_CODES);
 
   // ThemeCatalog が生成した JSON リテラルを読む。定数名や spread の名前から slug を推定しない。
   const themes = new Set();

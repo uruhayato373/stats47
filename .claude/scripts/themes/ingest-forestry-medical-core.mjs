@@ -7,6 +7,7 @@ import { createRequire } from 'node:module';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
+import { ESTAT_STATS_DATA_URL } from '../lib/estat-catalog/endpoints.cjs';
 const require = createRequire(import.meta.url);
 const ExcelJS = require('exceljs'),
   { parse: parseCsv } = require('csv-parse/sync');
@@ -1077,7 +1078,7 @@ async function sourceBytes(src, dir, isApi = false) {
     let url = src.url;
     if (isApi) {
       assert.ok(process.env.NEXT_PUBLIC_ESTAT_APP_ID, 'e-Stat appId required');
-      url = new URL('https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData');
+      url = new URL(ESTAT_STATS_DATA_URL);
       url.search = new URLSearchParams({
         appId: process.env.NEXT_PUBLIC_ESTAT_APP_ID,
         lang: 'J',

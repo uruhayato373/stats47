@@ -8,8 +8,9 @@ import { google } from "googleapis";
 import { mkdirSync, renameSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { PROJECT_ROOT, resolveServiceAccountKeyFile } from "../metrics/lib/auth.mjs";
+import { GA4_PROPERTY_ID } from "../lib/site-config.cjs";
 
-const PROPERTY_ID = process.env.GA4_PROPERTY_ID || "463218070";
+const PROPERTY_ID = process.env.GA4_PROPERTY_ID || GA4_PROPERTY_ID;
 const args = process.argv.slice(2);
 
 function option(name) {

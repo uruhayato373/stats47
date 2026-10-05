@@ -11,6 +11,7 @@ import { fileURLToPath } from "node:url";
 import { changedFilesSince } from "../../../.claude/scripts/page-quality/lib/git-diff";
 import { affectedTemplates } from "../../../.claude/scripts/page-quality/templates";
 import { classifyPrQualityPaths } from "../../../.claude/scripts/lib/plan-pr-quality.mjs";
+import { SITE } from "@stats47/types";
 
 const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url));
 const APP_ROOT = path.resolve(SCRIPT_DIR, "..");
@@ -284,8 +285,8 @@ async function runRelease(diffBase: string): Promise<void> {
       ...process.env,
       NODE_ENV: "production",
       NEXT_DIST_DIR: RELEASE_DIST_DIR,
-      NEXT_PUBLIC_R2_PUBLIC_URL: "https://storage.stats47.jp",
-      R2_PUBLIC_FETCH_URL: "https://storage.stats47.jp",
+      NEXT_PUBLIC_R2_PUBLIC_URL: SITE.r2PublicBaseUrl,
+      R2_PUBLIC_FETCH_URL: SITE.r2PublicBaseUrl,
     },
     stdio: "inherit",
     windowsHide: true,

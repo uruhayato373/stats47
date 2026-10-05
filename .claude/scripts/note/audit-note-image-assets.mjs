@@ -15,6 +15,7 @@ import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from "no
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { DOCS31, auditBackgroundPresence, auditImageAssets, auditR2BodyPresence } from "./lib/image-assets-audit.mjs";
+import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 
 const ROOT = process.env.CLAUDE_PROJECT_DIR || resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
 const BUDGET_PATH = resolve(ROOT, ".claude/config/note-image-assets-budget.json");
@@ -54,7 +55,7 @@ const readText = (file) => {
 const budget = readJson(".claude/config/note-image-assets-budget.json");
 const { findings, summary } = auditImageAssets({ tracked, ignoredUntracked, pngBytes, readJson, readText, budget });
 
-const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
+const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
 let r2Unknown = [];
 let r2Checked = 0;
 if (args.has("--verify-r2")) {

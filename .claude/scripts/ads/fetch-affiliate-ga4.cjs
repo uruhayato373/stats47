@@ -33,9 +33,10 @@ const {
   pivot,
   shortName,
 } = require("./lib/affiliate-ga4-reports-core.cjs");
+const { GA4_PROPERTY_ID } = require("../lib/site-config.cjs");
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
-const PROPERTY_ID = process.env.GA4_PROPERTY_ID || "463218070";
+const PROPERTY_ID = process.env.GA4_PROPERTY_ID || GA4_PROPERTY_ID;
 const KEY_CANDIDATES = ["stats47-f6b5dae19196.json", "stats47-31b18ee67144.json"];
 // ★ 2026-07-28 に impression イベントを `ad_impression` → `affiliate_impression` へ改名した。
 //   旧名は GA4 の AdSense 連携が自動生成する名前と同じで、取得しても AdSense 分しか返らず

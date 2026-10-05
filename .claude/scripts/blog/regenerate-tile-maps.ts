@@ -31,10 +31,11 @@ import { fileURLToPath } from "node:url";
 import { generateChoroplethSvg } from "../../../packages/svg-builder/src/charts/index.ts";
 import { toShortColorScheme } from "../../../packages/types/src/color-scheme.ts";
 import { matchRate, parseMapDisplay } from "../lib/map-value-match.mjs";
+import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
-const R2_PUBLIC = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
+const R2_PUBLIC = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
 const R2 = `${R2_PUBLIC}/app/blog`;
 const RANK = `${R2_PUBLIC}/app/ranking`;
 const STAGE_ARG_INDEX = process.argv.indexOf("--stage");
