@@ -341,11 +341,15 @@ git checkout -- AGENTS.md .claude/design-system/SSOT.md
   gitignore 済みの `.claude/settings.local.json` に置く。
 - **Mac の実測 (2026-10-05・arm64 / Node v20.19.0)**: memory link と Codex mirror の `--check` はどちらも exit 0、
   `core.hooksPath=.husky`・`~/tmp` あり・`gh auth status` は keyring で認証済み (会社 PC と違いプロキシの罠は無い)。
-  一方 `~/dotfiles` は未 clone で、`~/.claude/settings.json` は symlink ではなく通常ファイルのまま。
+  2026-10-06 に dotfiles を適用した (`link.mjs --host mac` → `~/.claude/settings.json` が symlink、`env/mac.zsh` を `~/.zshrc` から source、
+  `mcp-user.zsh` で user スコープの filesystem MCP が Connected)。罠は 2 つ: ① `codex/host.mac.toml` のパスが仮置きの `/Users/kazu/` だった
+  (dotfiles PR #1 で実ホームへ修正)。② `link.mjs` は `base.toml` の `model` / `model_reasoning_effort` を毎回 `~/.codex/config.toml` へ上書きするので、
+  Mac で Codex デスクトップが選んだモデル (`gpt-6.1-sol` / xhigh) が `gpt-6-astra` / medium に戻る。どちらに揃えるかは未決 (`MAC-FIRST-RUN-01`)。
+  また dotfiles は stats47 の `pre-bash-safety` フックが `main` への直 push を止めるので、ブランチ + PR で更新する。
   launchd には `com.stats47.*` の個別ジョブ 6 本 (scout-asp-weekly / x-verify-posted / measurement-session-refresh /
   threads-topup / fetch-note-metrics / sns-image-review) があるが、`local-resources.sh install` の掃除ジョブは未登録。
   Mac の `claude mcp list` は cloudflare-docs / chrome-devtools / seo-observability / codex (+ claude.ai コネクタ)。
-  dotfiles の手順を通すまでは Windows との名前集合の一致は確認できない (`MAC-FIRST-RUN-01`)。
+  dotfiles 適用後は user スコープに filesystem が加わった。Windows 側との名前集合の突合は未実施 (`MAC-FIRST-RUN-01`)。
 
 ## dev サーバー起動 — ルート `npm run dev` を使わない
 
