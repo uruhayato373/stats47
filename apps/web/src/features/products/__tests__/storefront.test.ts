@@ -1,27 +1,52 @@
 import { describe, expect, it } from "vitest";
 
 import { generateMetadata as generateNoteReferralMetadata } from "../../../app/products/[slug]/from/note/[noteKey]/page";
-import {
-  buildNoteProductDestination,
-  isValidNoteKey,
-} from "../note-referral";
+import { buildNoteProductDestination, isValidNoteKey } from "../note-referral";
 import {
   STOREFRONT_PRODUCTS,
   findKindleProductForBlog,
   findStorefrontProduct,
+  findDataProductForBlog,
+  findFiscalCompanionProduct,
 } from "../storefront";
 
 describe("product storefront", () => {
+  it("財政記事だけに既存P-04を案内し、書籍とデータ集を混同しない", () => {
+    expect(
+      findDataProductForBlog("local-government-debt-burden")
+    ).toMatchObject({
+      id: "P-04",
+      channel: "coconala",
+      priceYen: 6000,
+      externalUrl: "https://coconala.com/services/4324057",
+    });
+    expect(findDataProductForBlog("other")).toBeNull();
+    expect(findFiscalCompanionProduct("kindle-k-s1-06")?.id).toBe("P-04");
+    expect(findFiscalCompanionProduct("data-p-04")?.id).toBe("K-S1-06");
+    expect(findFiscalCompanionProduct("data-p-10")).toBeNull();
+  });
   it("公開URLが確定した商品だけを出す", () => {
-    const kindle = STOREFRONT_PRODUCTS.filter((product) => product.channel === "kindle");
+    const kindle = STOREFRONT_PRODUCTS.filter(
+      (product) => product.channel === "kindle"
+    );
     const coconala = STOREFRONT_PRODUCTS.filter(
-      (product) => product.channel === "coconala",
+      (product) => product.channel === "coconala"
     );
 
     expect(kindle.length).toBeGreaterThan(0);
     expect(coconala.length).toBeGreaterThan(0);
-    expect(kindle.every((product) => /^https:\/\/www\.amazon\.co\.jp\/dp\/[A-Z0-9]+$/.test(product.externalUrl))).toBe(true);
-    expect(coconala.every((product) => /^https:\/\/coconala\.com\/services\/\d+$/.test(product.externalUrl))).toBe(true);
+    expect(
+      kindle.every((product) =>
+        /^https:\/\/www\.amazon\.co\.jp\/dp\/[A-Z0-9]+$/.test(
+          product.externalUrl
+        )
+      )
+    ).toBe(true);
+    expect(
+      coconala.every((product) =>
+        /^https:\/\/coconala\.com\/services\/\d+$/.test(product.externalUrl)
+      )
+    ).toBe(true);
   });
 
   it("slug・外部URLが重複せず、価格が正数である", () => {
@@ -30,11 +55,15 @@ describe("product storefront", () => {
 
     expect(new Set(slugs).size).toBe(slugs.length);
     expect(new Set(urls).size).toBe(urls.length);
-    expect(STOREFRONT_PRODUCTS.every((product) => product.priceYen > 0)).toBe(true);
+    expect(STOREFRONT_PRODUCTS.every((product) => product.priceYen > 0)).toBe(
+      true
+    );
   });
 
   it("ブログには実際に収録した販売中のKindle本だけを対応させる", () => {
-    expect(findKindleProductForBlog("fiscal-health-50years-trend")).toMatchObject({
+    expect(
+      findKindleProductForBlog("fiscal-health-50years-trend")
+    ).toMatchObject({
       id: "K-S1-06",
       channel: "kindle",
     });
@@ -53,16 +82,17 @@ describe("product storefront", () => {
   it("note記事IDをGA4標準UTMへ決定的に変換する", () => {
     expect(isValidNoteKey("n68f5e09c8d62")).toBe(true);
     expect(isValidNoteKey("../invalid")).toBe(false);
-    expect(
-      buildNoteProductDestination("kindle-k-s1-02", "n68f5e09c8d62"),
-    ).toBe(
-      "/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n68f5e09c8d62",
+    expect(buildNoteProductDestination("kindle-k-s1-02", "n68f5e09c8d62")).toBe(
+      "/products/kindle-k-s1-02?utm_source=note&utm_medium=referral&utm_campaign=note_product&utm_content=n68f5e09c8d62"
     );
   });
 
   it("note向けclean URLを検索結果には載せず、転送先への巡回を許可する", async () => {
     const metadata = await generateNoteReferralMetadata({
-      params: Promise.resolve({ slug: "kindle-k-s1-06", noteKey: "n68f5e09c8d62" }),
+      params: Promise.resolve({
+        slug: "kindle-k-s1-06",
+        noteKey: "n68f5e09c8d62",
+      }),
     });
     expect(metadata.robots).toMatchObject({
       index: false,
@@ -72,7 +102,10 @@ describe("product storefront", () => {
 
   it("note向けclean URLは転送先を待たず、この URL 自身に商品のOGPを持つ (noteのカード解決用)", async () => {
     const metadata = await generateNoteReferralMetadata({
-      params: Promise.resolve({ slug: "kindle-k-s1-06", noteKey: "n68f5e09c8d62" }),
+      params: Promise.resolve({
+        slug: "kindle-k-s1-06",
+        noteKey: "n68f5e09c8d62",
+      }),
     });
     const product = findStorefrontProduct("kindle-k-s1-06");
     expect(product).not.toBeNull();
