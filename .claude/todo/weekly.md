@@ -94,11 +94,11 @@ KPI は確定7日と重複しない前週だけで比べる。rolling 28日（cl
 
 ## 前週からの持ち越し
 
-- [ ] **重点 KPI `measurement-freshness` の施策起票** — 元 W40 Should 2。Should 2 に再掲
+- [x] **重点 KPI `measurement-freshness` の施策起票** — 元 W40 Should 2。Should 2 に再掲
 - [ ] **ブログ是正1本** — 元 W40 Should 3。見送り（`BLOG-REMEDIATION-PROOF-01`、11 月に再判断）
 - [ ] **GSC coverage first wave の分類** — 元 W40 Should 4。見送り（サイト維持。`GSC-COVERAGE-DEPLOY-01` のオーナー export 待ち）
 - [ ] **CTR 分解** — 元 W40 Could 1。見送り（`GSC-CTR-DECOMPOSE-01`、W42 Should）
-- [ ] **search-growth 承認済み 1 件の終端** — 元 W40 Could 2。Could 1 に再掲
+- [x] **search-growth 承認済み 1 件の終端** — 元 W40 Could 2。Could 1 に再掲
 - [ ] **KDP S1 の販売数/KENP** — 元 W40 Could 3。見送り（KDP 再認証待ち）
 
 ## 改善ログ pending（今週着手対象）
@@ -114,12 +114,12 @@ KPI は確定7日と重複しない前週だけで比べる。rolling 28日（cl
 
 ### Must（絶対達成、2件）
 
-- [ ] **データ品質キューの第 2 週 5 指標を処置する** [M] — `DATA-QUALITY-LOOP-01`（🔴 3 番目・データ領域・KPI `data-quality-pass-rate`）。
+- [x] **データ品質キューの第 2 週 5 指標を処置する** [M] — `DATA-QUALITY-LOOP-01`（🔴 3 番目・データ領域・KPI `data-quality-pass-rate`）。
   `.claude/state/data/data-quality/LATEST.md` の「2 更新」で、W40 に処置した 5 指標を除いた GSC 表示の多い順から 5 指標を取る
   (`average-height-primary-school-fifth-grade-male` から)。各指標で公式の最新公表を一次資料で確かめてから基準 1〜4 のどれかに決める。
   5 指標すべてに処置と根拠が backlog カードに記録され、更新するものは config 変更と data-refresh の dryRun まで済んでいれば完了。
   R2 反映はオーナー承認で別に行う。使用: `/inspect-estat-meta`、data-ingester
-- [ ] **A8 成果ゲートの残りの blocked 理由を片付けて `A8-CROSSCHECK-EXCEED-01` を閉じる** [S] — `A8-CROSSCHECK-EXCEED-01`（🔴 2 番目・管理領域・不具合・KPI `measurement-freshness`）。
+- [x] **A8 成果ゲートの残りの blocked 理由を片付けて `A8-CROSSCHECK-EXCEED-01` を閉じる** [S] — `A8-CROSSCHECK-EXCEED-01`（🔴 2 番目・管理領域・不具合・KPI `measurement-freshness`）。
   10-05 の `node .claude/scripts/ads/check-a8-outcome-gate.mjs` は `a8-cross-check-exceeded` を出さなくなったが、`a8-cross-check-shortfall`
   (10 月のサイト別 57 クリックに対し案件別明細 0) と `a8-results-month-missing`（202610）で blocked。10 月の案件別明細が取り込まれた後に
   検証コマンドを再実行し、exceeded と shortfall が出なければ原因 (取得時刻のずれ・共用漏れの両仮説の棄却と許容差の導入) をカードに書いて
@@ -127,20 +127,20 @@ KPI は確定7日と重複しない前週だけで比べる。rolling 28日（cl
 
 ### Should（できればやる、4件）
 
-- [ ] **無人 triage の失敗の原因を確定して直す** [S] — #1068（管理領域）。run 37245377864 のログで、失敗が docs:check か push かを確定し、
+- [x] **無人 triage の失敗の原因を確定して直す** [S] — #1068（管理領域）。run 37245377864 のログで、失敗が docs:check か push かを確定し、
   permission 拒否 5 件が原因に関わるかを確かめる。10-12 の週次 run 前に修正がコミットされていれば完了。直せない場合は原因と次の手を Issue に書く。
-- [ ] **重点 KPI `measurement-freshness` を動かす施策を 1 件起票する** [S] — `AUTHENTICATED-MEASUREMENT-ACTIVATION-01`（管理領域）。
+- [x] **重点 KPI `measurement-freshness` を動かす施策を 1 件起票する** [S] — `AUTHENTICATED-MEASUREMENT-ACTIVATION-01`（管理領域）。
   KDP・ココナラの `auth_required` 解消後に 14 源中の pass 数がいくつになるかを根拠に `[target:]` を書き、improvement-triage に起票させる。
   active は 9 件で上限 10 件の内側。根拠のある target が書けなければ書けない理由を記録して完了。
-- [ ] **BLOG-WAVE 7 件の終端の判断材料を整理する** [S] — `EFFECT-TARGET-MARKERS-01`（🔴 6 番目・管理領域）。7 件それぞれの before imp・
+- [x] **BLOG-WAVE 7 件の終端の判断材料を整理する** [S] — `EFFECT-TARGET-MARKERS-01`（🔴 6 番目・管理領域）。7 件それぞれの before imp・
   経過日数・ガードを `verdicts-2026-W40.json` から表にし、「終了」と「事前 target つき再計測」の選択肢をオーナーに提示する。判断は W42 Must。
-- [ ] **`AFF-RESOLUTION-EFFECT-01` の 4 週判定** [S] — `AFF-RESOLUTION-EFFECT-01`（アフィリエイト領域・維持。効果判定は維持で許される）。
+- [x] **`AFF-RESOLUTION-EFFECT-01` の 4 週判定** [S] — `AFF-RESOLUTION-EFFECT-01`（アフィリエイト領域・維持。効果判定は維持で許される）。
   Due 10-08。`node .claude/scripts/ads/fetch-affiliate-ga4.cjs 28` を vertical 別・position 別に読み、[target: furusato imp +20,000/28日、全体 CTR ≥ 0.10%] と比べる。
   `AFF-IMPRESSION-ROUTING-01` と窓が重なるので guard: confounded を記録し、条件が揃わなければ effect/pending の保留理由と次の判定日を書く。使用: `/affiliate-improvement`
 
 ### Could（余力があれば、2件）
 
-- [ ] **承認済み search-growth 1件を終端する** [S] — `soft-404-risk::/ranking/barber-beautician-annual-income`（定常の候補審査）。
+- [x] **承認済み search-growth 1件を終端する** [S] — `soft-404-risk::/ranking/barber-beautician-annual-income`（定常の候補審査）。
   R2 の観測年数・データ点数・描画を実測し、補強 / noindex / dismiss を記録するか WIP から外す。W41 の search-growth 判断 (最低 1 件) をこれで満たす。使用: `/search-growth`
 - [ ] **effort 提案 4 件の採否を決める** [S] — `MODEL-OPT-APPLY-01`（管理領域）。`.claude/state/metrics/model-usage/latest.json` の canary pass を確かめ、
   frontmatter の effort を変えるかを agent ごとに決める。変える場合は canary の結果ファイルを根拠に書く。
