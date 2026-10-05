@@ -2685,6 +2685,7 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 
 - 2026-10 月次計画で improvements から降格。再開条件: 公開 4 週以上の記事が各型 5 本以上になった時。topic-queue 経由で `gsc-query.mjs` の型別コホート比較で判定し、結果を gsc-improvement log へ記録する (`[kpi: search-clicks]`)。
 - 2026-09-07 時点 topic-queue done 81 件 (A:29/B:12/D2:23/F:7/G:10)。大半が 4 週齢未満で比較は延期。効果判定エンジン対象外 (型別コホート比較)。
+- **2026-10-04 の実測 (W40 の無人 triage が書いたが、Issue #1068 で push されず 10-05 に書き戻した)**: **2026-10-04実測**: `.claude/state/blog/topic-queue.json` (generatedAt 2026-10-04、gscWeek 2026-W40) の done は81件で、2026-09-06生成時の81件から増えていない。したがって done 81件はすべて公開から4週(28日)以上経過し、09-07時点の延期理由は解消した。ただしこのrunではGSC照会を実行していないため、型別のclicks・impressionsは未取得で、効果は判定していない。次: 2026-10-11までに done 81件のslugを型ごとに分け、`.claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W40/pages.csv` のclicks・impressionsを型別に集計して比較する (型ごとの記事数が7〜29件と偏るため、合計だけでなく中央値とimp 0の記事数を併記する)。2026-10-11に比較できなければ、取得できなかった理由と再実行条件を詳細ログへ書く。**効果判定エンジン対象外**: 単一ページではなく型ポートフォリオのコホート比較のため、判定は上記の型別コホート比較で行う
 
 ### [BLOG-SEO-QUEUE-01] topic queue 起点の記事が需要候補を正しく選び、公開後に検索表示を得たか確認する
 
@@ -2692,13 +2693,8 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 
 - 2026-10 月次計画で improvements から降格。再開条件: BLOG-SEO-TYPES-01 と同時に、公開 4 週以上経過分で `gsc-query.mjs` のコホート比較を行う時 (`[kpi: search-clicks]`)。
 - 2026-09-07 時点で queue done 81 件、BLOG-QUEUE-TRACK-01 の状態ずれは解消。効果判定エンジン対象外 (queue コホート集計)。
+- **2026-10-04 の実測 (W40 の無人 triage が書いたが、Issue #1068 で push されず 10-05 に書き戻した)**: **2026-10-04実測**: `.claude/state/blog/topic-queue.json` (generatedAt 2026-10-04、gscWeek 2026-W40) の done は81件で、2026-09-06生成時から増えておらず、81件すべてが公開から4週(28日)以上経過した。標本・期間の条件は満たしたが、このrunではGSC照会を実行していないため、検索表示を得たかは未判定。次: 2026-10-11までに done 81件それぞれについて、`.claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W40/pages.csv` のimpressionsが0か1以上かを数え、1以上の記事の割合とclicks合計を出す。選定時の `evidence.gscImp` (queueに保存されている需要側の値) と公開後impressionsを並べ、需要候補の選定が当たったかを見る。2026-10-11に比較できなければ、取得できなかった理由と再実行条件を詳細ログへ書く。**効果判定エンジン対象外**: 単一ページ前後比較ではなくqueue由来コホートの集計判定のため、判定は上記のコホート集計で行う
 
-### [SURVEY-LINKAGE-02] 未分類 241 件から provenance 辞書で確実に回収できる 50 statsDataId を追加する
-
-タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-05] [領域:データ]
-
-- 2026-10 月次計画で improvements から降格。再開条件: データ領域の重点枠で survey-curator を回せる時。`/audit-survey-linkage` で現況を再取得してから続ける (`[kpi: search-clicks]`)。
-- 2026-09-07 実測 (`.claude/state/surveys/portfolio.json`): unresolved 214 件 (external 23 / estat-uncovered 78 / ssds-synthetic-only 113)、27 件回収済 (目標 50 の 54%)。残り 23 件。
 
 ### [TOKEN-AICONTENT-01] Claude 自動生成の API 課金 (5 件 run $79〜$90) を課金無効 project の Gemini 日次へ移行する
 
@@ -2706,6 +2702,7 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 
 - 2026-10 月次計画で improvements から降格。再開条件: Issue #763 が解消し日次 CI が PASS>0 を記録し始めた時。7 run の PASS 率・request/token・cost_usd を照合して費用 0 を判定する (`[kpi: operating-cost]`)。
 - [target: API 課金 -100% ($0)]。2026-09-24 実測: Gemini 日次 CI 21 run は PASS 0・preflight_status が billing → bad-request、cost_usd $0 は生成 0 件のため。横断監視 Issue #763 (Gemini HTTP402) で追跡中、重複起票しない。
+- **2026-10-04 の実測 (W40 の無人 triage が書いたが、Issue #1068 で push されず 10-05 に書き戻した)**: **2026-10-04実測**: 同csvの最新行は2026-10-01で、2026-09-22〜10-01の10 runはすべてtargets 3・passed 0・skipped 3・preflight_status `bad-request`・cost_usd 0であり、2026-09-24の所見から変化していない (PASS>0のrunは0件のため、7 run分の判定条件はまだ満たされない)。次: Issue #763でGemini preflightのbad-request原因が解消し日次CIがPASS>0を記録し始めた時点で、7 run分のPASS率・request/token・cost_usdを照合して費用0かを判定する。2026-10-15時点でもPASS>0のrunが0件なら、効果判定を続けず、Gemini日次を止めるか生成経路を変えるかの意思決定カード (🟣) を `.claude/todo/backlog.md` へ起票し、このカードは削除する。
 
 ### [FUNNEL-CTA-01] ranking 末尾 CTA の click と遷移後行動を判定する
 
@@ -2741,6 +2738,7 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 
 - 2026-10 月次計画で improvements から降格。再開条件: サイト領域の重点枠で着手できる時。外部プロフィール変更と本番反映はユーザー承認まで実行しない (`[kpi: search-clicks]`)。
 - 実行記録なし (着手痕跡なし)。`docs/00_プロジェクト管理/03_マーケティング戦略.md` のポジショニングと照合して対象ごとに変更・維持・対象外を決める。UI の DOM・配置・色・余白は変えない。
+- **2026-10-04 の実測 (W40 の無人 triage が書いたが、Issue #1068 で push されず 10-05 に書き戻した)**: **2026-10-04: 期日2026-09-21を13日超過した時点でも、`.claude/todo/` 配下でこのIDが現れるのは本行と実行手順節だけで、backlog・weekly・monthlyに着手の記録は無い** (Grepで確認、git履歴は未確認)。次: 実行手順1 (現在文言と更新方法の一覧化。読み取りだけで完結する) を2026-10-18までに行う。2026-10-18に手順1の結果が残っていなければ、このカードを判断待ちに回す。手順3のとおり外部プロフィール変更と本番反映はユーザー承認まで実行しない (改善施策からの降格は 10-05 の月次計画で済んでいる)
 
 ### [ASSET-POLICY-BURNDOWN-01] baseline 27 件の既存画像を、ユーザーが承認した範囲だけ圧縮・重複削除・再エンコードで削減する
 

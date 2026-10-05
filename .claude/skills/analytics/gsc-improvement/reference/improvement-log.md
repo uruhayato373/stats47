@@ -837,3 +837,10 @@ clicks 930 は期間最高。週次計画の「CTR -0.42pp」はこのピーク�
 比較窓は2026-09-04〜10-01（before）と2026-10-03〜10-30（after）。公開日10-02を除く直前28日と直後28日。両窓は重ねず、GSC確定値の反映を3日以上待つ。GSCはcanonical URLを固定し、fragment行を除いてclicks・impressions・CTR・positionを国とdevice別に取得する。GA4はJapan/organicの対象landing sessions、engaged sessions、商品ページ遷移session数と率、既存product_clickの内訳を同じ期間条件で取得する。外部販売リンクclickを購入と扱わず、Coconala/KDPの実購入件数・売上は別途オーナー提供の実データで確認する。新しいイベント・外部送信先・カスタムディメンションは追加しない。
 
 既存W39 GSCは2026-08-28〜09-24のrolling28日で461click/3,863impression、CTR11.93%、平均position4.78。既存GA4の2026-08-30〜09-26ではJapanの対象landing610sessions、494engaged sessions、file_download2events。窓とチャネルが一致しないため今回のbeforeには流用しない。購入、導線別率、公開後値は欠測。必要項目未取得や標本不足なら判定不能とする。CTR変化はpositionとquery構成の変化を併記し、順位変動・季節性・同時施策を因果効果から区別する。28日後、実購入と記事→商品の率をbeforeと比較し、増加・減少・判定不能を報告し、数値閾値を後付けしない。
+
+### [SURVEY-LINKAGE-02] 未分類241件の回収が完了したため行を削除 (2026-10-04)
+
+- 判定: 行に書かれた完了条件「未分類241件のうち、provenance辞書で確実に回収できる50 statsDataIdを追加する」を、保存済みの監査値が満たしている。unresolvedは0件で、目標の50件を上回る。
+- 根拠データ: `.claude/state/surveys/portfolio.json` の `linkage` (auditedAt 2026-09-27) は metrics 2563 / resolved 2476 / unresolved 0 / coveragePct 100 / uncoveredStatsDataIds 0 / orphanSurveys 0 / badOverrides 0。2026-09-06監査では unresolved 214 (当初241から27件回収済) だった。2026-09-06から2026-09-27の3週間で残り214件が0件になった。
+- 未確認の点: これは保存済みの監査結果を読んだ判定で、09-07〜09-27の個別の回収コミットは確認していない。metrics 2563 と resolved 2476 の差 87件が、unresolved に数えられていない理由も未確認。検索クリックへの効果は別軸の話で、effect/* ラベルは付けない。
+- 再現コマンド: `node -e "console.log(JSON.parse(require('fs').readFileSync('.claude/state/surveys/portfolio.json','utf8')).linkage)"` (保存値の表示)。再監査は skill `/audit-survey-linkage`。

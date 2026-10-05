@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-05T07:36:54.833Z",
+  "updatedAt": "2026-10-05T08:26:23.668Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -5700,6 +5700,39 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-10-05T07:36:54.833Z"
+    },
+    "SURVEY-LINKAGE-02": {
+      "class": "misconception-close",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-05T08:26:23.668Z",
+          "runId": null,
+          "model": "claude-opus-5-5",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx packages/ranking/src/scripts/audit-survey-linkage.ts --json"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-10-05 08:26Z 監査: metrics 2566 / applicable 2479 / resolved 2479 / unresolved 0 / coverage 100 / uncoveredStatsDataIds 0 / orphanSurveys 0 / badOverrides 0。目標 (50 statsDataId 回収) は未分類 0 で上回る。metrics と resolved の差 87 は notApplicable。W40 無人 triage の削除提案 (Issue #1068 で未反映) と一致",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-05T08:26:23.668Z"
     }
   }
 }
