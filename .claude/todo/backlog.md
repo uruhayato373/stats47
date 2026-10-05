@@ -59,6 +59,7 @@ updated: 2026-09-29
     検証コマンドが `a8-cross-check-exceeded` を出さないこと、Issue #1007 の計測ゲートが success になることを確かめてカードを閉じる。
 - **停止条件**: 共用案件の振り分けを推測で決めない。根拠 (両サイトの広告定義) が無い ID は unmapped のまま残す。
 - **完了条件**: 検証コマンドが `a8-cross-check-exceeded` を出さず、原因 (時刻ずれか共用漏れか) が本カードの削除コミットに書かれている。
+- **2026-10-05 確認 (W41 Must 2・affiliate-manager)**: blocked (`a8-cross-check-shortfall` / `a8-results-month-missing`) の原因は、10 月分の案件別明細 (program-detail) を一度も取得していないこと。2026-10-04T08:34Z の収集はサイト別 (site-summary) だけで (`a8-ui-last-run.json` は 1/1 unit)、`a8-report-log.json` の `programPeriod` と `a8-results.json` に 202610 が無い (site=57 clicks・picked=0・delta=-57・許容 3)。収集は CI ではなくローカルの手動運用で、`affiliate-ga4-weekly.yml` は取得済み state の restore だけ (直近 5 run の failure はこの blocked による計測ゲート)。次: 10-11 以降に A8 ログイン済みのプロファイルで `node .claude/scripts/ads/fetch-a8-ui-csv.mjs --reports program-detail --month 2026-10` を取得し、`node .claude/scripts/ads/check-a8-outcome-gate.mjs` が ready (exceeded なし・shortfall なし) になれば閉じる。10-11 に 202610 が無ければ「収集未実施の継続」として残す。program-detail は doboku-note との共用口座分を含むので `programIdMap` の allowlist で絞る運用を変えない。
 
 ### [DATA-QUALITY-LOOP-01] 全指標のデータ品質を機械チェックし、「誤り・古さ・終了・薄さ」の 4 基準で継続的に直すループを作る
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-09-25] [領域:データ]
@@ -98,6 +99,7 @@ updated: 2026-09-29
     CI で年別の non-null を観測する必要がある (e-Stat の取得は CI 専用)。
 - **完了条件**: 週次の監査が全指標の古さ・表記を検出してキューへ積み、キューの処置状況が管理画面か週次レビューで見え、
   4 週続けて「新規検出 ≤ 処置件数」で残件が減っている。
+- **2026-10-05 ③ 第2週 (需要順 3〜5 位に当たる 5 指標・W41 Must 1)**: 公式の範囲は SSDS 掲載年次一覧 (`kiso_ken.xlsx` / `shihyou_ken.xlsx`、2026-06-30 更新分) で確認した。`average-height-primary-school-fifth-grade-male` は years を 2023 のみから 1975〜2023 (1977・1978 は取得不可で除く) に、`national-treasury-disbursement-prefecture` は 2008〜2021 の穴を埋めて 1975〜2022 に広げた。`validate:config` と `validate:years` は exit 0。data-refresh の dryRun は `data/data-refresh-requests.json` (dryRun: true) を develop へ push して CI で実行する (ローカルに e-Stat キーが無いため。合格条件は ok=2・empty=0。R2 反映はその後オーナー承認で dryRun: false)。`fishery-workers` (漁業センサス 5 年周期・2023 が最新) と `treatment-rate-hypertension-outpatient` (患者調査 3 年周期・2023 が最新。公式サイトでの最新公表の照会は未実施) は誤検出で処置なし。`food-self-sufficiency-rate-calorie` は農水省が令和 6 年度 (概算) まで公表済みだが SSDS は 2021 年度止まりなので、取得元の切り替えを `DATA-FOOD-SELF-SUFFICIENCY-MAFF-01` へ切り出した。
 
 ### [AUTH-CREDENTIAL-REGISTER-01] 残りの資格情報 (Mac 全サービス・ココナラ) を登録する
 タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [起票:2026-10-01] [領域:管理]
@@ -158,6 +160,26 @@ updated: 2026-09-29
   ③ 済 (2026-09-26・オーナー判断): コホート比較 (BLOG-SEO-TYPES/QUEUE) と独自計測 (THEME-EXPANSION-EFFECT・STP-AI-WATCH) の 4 行は
   improvements.md に「効果判定エンジン対象外」と代わりの判定手順を明記した (dry-run で subject に現れないことを確認)。
 - **完了条件**: 計測サイクルの「GSC 施策 N 件中、機械判定できるのは M 件」で、残る行がすべて理由付きで終了または目印付きになる。
+- **BLOG-WAVE 7 件の判断材料 (2026-10-05・W41 Should 3。判断は W42 Must でオーナーが行う)**: 判定エンジンを 10-05 に取り直した
+  W40 の GSC (`693877eaf`、直近 28 日の合計) で再実行した値。7 件とも `insufficient-target` で effect/pending のまま。
+
+  | wave | ページ数 | before (週) clicks / imp | after (W40) clicks / imp | clicks の伸び | 経過週 | ガード |
+  |---|---|---|---|---|---|---|
+  | 05-23-manual | 10 | W20: 89 / 7,141 | 78 / 10,135 | 0.88 倍 | 19 | insufficient-target |
+  | 05-25-auto | 53 | W21: 127 / 11,300 | 597 / 52,549 | 4.7 倍 | 18 | insufficient-target |
+  | 05-29-auto | 4 | W21: 7 / 1,258 | 34 / 8,075 | 4.9 倍 | 18 | insufficient-target |
+  | 06-07-manual | 3 | W22: 0 / 207 | 38 / 1,933 | (before 0) | 17 | insufficient-target |
+  | 06-07-manual-2 | 3 | W22: 69 / 2,614 | 614 / 13,937 | 8.9 倍 | 17 | insufficient-target |
+  | 06-07-manual-3 | 3 | W22: 26 / 889 | 288 / 12,918 | 11.1 倍 | 17 | insufficient-target |
+  | 06-10-manual | 6 | W23: 0 / 37 | 67 / 5,226 | (before 0) | 16 | insufficient-target, insufficient-sample |
+
+  同じ期間のサイト全体の直近 28 日クリック (`.claude/state/metrics/gsc/history.csv`) は W20 832 → W40 11,023 (13.2 倍)、
+  W21 1,110 (9.9 倍)、W22 1,309 (8.4 倍)、W23 1,349 (8.2 倍)。どの wave の伸びもサイト全体の伸び以下なので、
+  この before/after からは wave の効果を切り分けられない。再現: `node .claude/scripts/lib/effect-verdict/cli.mjs --dry-run`。
+  選択肢は 2 つ: **(a) 終了** — 16〜19 週が経ち、サイト全体の成長と分離できず、目標値の後付けは状況 4 で書けないので、
+  7 件を「判定不能のまま終了」として理由付きで閉じる。**(b) 事前 target つき再計測** — 対照群 (同時期の非 wave 記事) を
+  決めてから target を書き、W42 から新しい窓で測り直す。推奨は (a)。(b) は対照群の定義から作る必要があり、
+  得られるのは 5〜6 月公開分の効果で、今後の公開判断には効きにくい。
 
 ### [DATA-WAGE-TABLE-YEARS-01] 賃金構造基本統計の表を使う 40 指標が 2022 年しか配信していない原因を CI で確かめて直す
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [領域:データ] [起票:2026-09-28]
@@ -755,7 +777,7 @@ updated: 2026-09-29
 
 ### [BLOG-SVG-LINEAGE-RESTORE-01] ブログSVG系譜キューの継続消化
 
-タグ: [進行中] [起票:2026-07-22] [領域:データ]
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-07-22] [進行中] [領域:データ]
 
 - **owner**: Claude Code
 - **現況**: 全`article.md`参照から期待asset集合を作る公開契約監査へ拡張済み。公開434記事・本文参照
@@ -2760,6 +2782,17 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 
 - 2026-10 月次計画で improvements から降格。再開条件: 2026-10 の四半期観測枠。手順: S1 代表クエリを GSC finalized 期間で固定 → 重複しない期間の clicks/impressions/CTR/position を比較 → AI Overviews 表示有無が取れなければ「S1 CTR 低下の観測」に限定 → 対照群と比較し持続的低下のみ次候補を最大 3 件 (`[kpi: search-clicks]`)。
 - 効果判定エンジン対象外 (S1 代表クエリ群と S2・S3 対照群の query 集合比較)。
+
+### [DATA-FOOD-SELF-SUFFICIENCY-MAFF-01] 都道府県別食料自給率 (カロリーベース) を農水省の公表値から取り込み、2022 年度以降を足す
+
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-05] [領域:データ]
+
+- **経緯**: `DATA-QUALITY-LOOP-01` 第 2 週 (2026-10-05) で切り出した。`food-self-sufficiency-rate-calorie` は SSDS `I3301` 経由で 2008〜2021 年度だけを持つ (config・R2 とも各年 47 県で一致)。
+  農水省「都道府県別食料自給率」(https://www.maff.go.jp/j/zyukyu/zikyu_ritu/zikyu_10.html) は令和 5 年度 (確定)・令和 6 年度 (概算) まで公表済みで、
+  長期推移 xlsx (`attach/xls/zikyu_10-7.xlsx`) が 1998〜2024 年度を収録する。北海道 2008 年度の 210 は R2 と一致した (2026-10-05 確認)。
+- **次**: 取得元を農水省の xlsx に切り替える (`fetcherKey: "manual"` か新しい取得経路)。`.claude/rules/data-provenance-standards.md` の provenance 9 点セットを先に書き、
+  概算値と確定値の区別を年ごとに保持する。SSDS 由来の 2008〜2021 年度と重なる年は値の一致を検査してから置き換える。
+- **完了条件**: 2022 年度以降が 47 県そろって R2 に入り、provenance が監査 (`/audit-provenance`) を通り、ランキングページの最新年が更新されている。
 
 ## 🟢 低 — 時期未定・条件付き (trigger は本文に)
 
