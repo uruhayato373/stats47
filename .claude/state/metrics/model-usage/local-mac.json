@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-01T19:41:15.102Z",
+  "generatedAt": "2026-10-03T01:10:55.902Z",
   "platform": "mac",
   "pricing": {
     "source": "https://platform.claude.com/docs/en/about-claude/pricing",
@@ -8,7 +8,7 @@
   },
   "scan": {
     "dirs": 3,
-    "transcripts": 296,
+    "transcripts": 302,
     "skipped": 0,
     "weeks": [
       "2026-W29",
@@ -1168,16 +1168,16 @@
       "agentType": "(main)",
       "model": "claude-opus-5-5",
       "effort": "medium",
-      "runs": 3,
-      "calls": 392,
+      "runs": 6,
+      "calls": 936,
       "tokens": {
-        "input": 784,
-        "output": 216014,
+        "input": 1872,
+        "output": 562105,
         "cacheWrite5m": 0,
-        "cacheWrite1h": 1391044,
-        "cacheRead": 86059305
+        "cacheWrite1h": 3067327,
+        "cacheRead": 304071644
       },
-      "costUsd": 32.6636
+      "costUsd": 96.6025
     },
     {
       "week": "2026-W40",
@@ -1195,6 +1195,40 @@
         "cacheRead": 267356242
       },
       "costUsd": 62.6904
+    },
+    {
+      "week": "2026-W40",
+      "scope": "sub",
+      "agentType": "article-writer",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "runs": 1,
+      "calls": 12,
+      "tokens": {
+        "input": 26,
+        "output": 160,
+        "cacheWrite5m": 141891,
+        "cacheWrite1h": 0,
+        "cacheRead": 1346031
+      },
+      "costUsd": 0.6256
+    },
+    {
+      "week": "2026-W40",
+      "scope": "sub",
+      "agentType": "blog-critic",
+      "model": "claude-sonnet-5-5",
+      "effort": "medium",
+      "runs": 1,
+      "calls": 8,
+      "tokens": {
+        "input": 18,
+        "output": 218,
+        "cacheWrite5m": 97402,
+        "cacheWrite1h": 0,
+        "cacheRead": 831665
+      },
+      "costUsd": 0.4121
     },
     {
       "week": "2026-W40",
@@ -1229,6 +1263,40 @@
         "cacheRead": 6893038
       },
       "costUsd": 4.132
+    },
+    {
+      "week": "2026-W40",
+      "scope": "sub",
+      "agentType": "general-purpose",
+      "model": "claude-opus-5-5",
+      "effort": "medium",
+      "runs": 1,
+      "calls": 43,
+      "tokens": {
+        "input": 86,
+        "output": 3729,
+        "cacheWrite5m": 139679,
+        "cacheWrite1h": 0,
+        "cacheRead": 4964899
+      },
+      "costUsd": 1.7663
+    },
+    {
+      "week": "2026-W40",
+      "scope": "sub",
+      "agentType": "strategy-advisor",
+      "model": "claude-opus-5-5",
+      "effort": "medium",
+      "runs": 1,
+      "calls": 42,
+      "tokens": {
+        "input": 84,
+        "output": 4363,
+        "cacheWrite5m": 234926,
+        "cacheWrite1h": 0,
+        "cacheRead": 6678469
+      },
+      "costUsd": 2.5979
     }
   ]
 }

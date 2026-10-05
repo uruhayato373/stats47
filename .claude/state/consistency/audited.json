@@ -1,7 +1,9 @@
 {
-  "hash": "fb92be88be9766af385739d54f317e6593bafb3fa04fa846f8833089eb902eb9",
-  "audited_at": "2026-10-01T20:18:52",
+  "hash": "32c93da420ce7e698581d96ae6997c09870fcaace0e873042c0609c13ed88a0e",
+  "audited_at": "2026-10-03T03:49:02",
   "files": [
-    ".claude/agents/code-reviewer.md"
+    ".claude/scripts/note/__tests__/note-hashtags.test.mjs",
+    ".claude/scripts/note/lib/note-hashtags-propose.mjs",
+    ".claude/scripts/note/lib/note-hashtags.mjs"
   ]
 }
