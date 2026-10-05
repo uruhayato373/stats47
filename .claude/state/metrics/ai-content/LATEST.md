@@ -1,7 +1,7 @@
 # Ranking AI content / latest run
 
-- 更新日: 2026-10-01
-- run: 36800333972-1 (GitHub Actions run id、またはローカル batch の local-<date>-<time>)
+- 更新日: 2026-10-05
+- run: 37249299101-1 (GitHub Actions run id、またはローカル batch の local-<date>-<time>)
 - モデル: gemini-3.7-flash
 - 対象: 3 / PASS: 0 / REJECT: 0 / FAIL: 0 / SKIP: 3
 - 通過率: 0.0%
