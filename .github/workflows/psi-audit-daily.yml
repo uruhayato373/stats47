@@ -18,10 +18,13 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
-      - name: 🧰 Checkout main
+      # 計測も develop の上で行う。以前は main で計測して .claude/state/metrics/psi/ を develop へ上書きコピーしており、
+      # main が develop より遅れている間は前日までの history 行と prune の削除を毎日失っていた
+      # (2026-10-05 発見。消えた行は git 履歴から復元済み)。契約: workflow-commit-back-core.cjs の findForeignTreeRestore。
+      - name: 🧰 Checkout develop
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          ref: main
+          ref: develop
           fetch-depth: 0
 
       - name: 🟢 Setup Node.js
@@ -66,27 +69,10 @@ jobs:
             echo "PSI report not generated" >> "$GITHUB_STEP_SUMMARY"
           fi
 
-      - name: 📦 Stage metrics outputs
-        run: |
-          mkdir -p /tmp/psi-publish
-          cp -r .claude/state/metrics/psi/* /tmp/psi-publish/ 2>/dev/null || true
-          ls -la /tmp/psi-publish
-
       - name: 📤 Publish to develop branch
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-          # working tree の変更は /tmp/psi-publish に退避済。branch 切替前にリセット。
-          git reset --hard HEAD
-          git clean -fd
-
-          git fetch origin develop
-          git checkout develop
-          git pull --rebase origin develop
-
-          mkdir -p .claude/state/metrics/psi
-          cp -r /tmp/psi-publish/* .claude/state/metrics/psi/ 2>/dev/null || true
 
           git add .claude/state/metrics/psi
           if git diff --cached --quiet; then
@@ -95,6 +81,8 @@ jobs:
           fi
 
           git commit -m "chore(metrics): psi daily audit $(date -u +%Y-%m-%dT%H:%MZ) [skip ci]"
+          # 計測の間に develop が進みうるので push の直前で取り直す
+          git pull --rebase --autostash origin develop
           git push origin develop
 
       - name: 🔍 Suggest CWV candidates for violated URLs
