@@ -1,4 +1,4 @@
-import { lookupArea } from '@stats47/area';
+import { lookupArea, NATIONAL_OR_PREFECTURE_AREA_CODE_RE } from '@stats47/area';
 import { GRADUATION_PATHS_SOURCE } from '@stats47/data-configs/theme-catalog';
 import { z } from 'zod';
 
@@ -7,7 +7,7 @@ const count = z.number().int().nonnegative().max(Number.MAX_SAFE_INTEGER);
 const category = z.object({ key: z.string(), count }).strict();
 const row = z
   .object({
-    areaCode: z.string().regex(/^(00|0[1-9]|[1-3][0-9]|4[0-7])000$/),
+    areaCode: z.string().regex(NATIONAL_OR_PREFECTURE_AREA_CODE_RE),
     areaName: z.string().min(1),
     total: count.positive(),
     categories: z.array(category).length(definition.categories.length),

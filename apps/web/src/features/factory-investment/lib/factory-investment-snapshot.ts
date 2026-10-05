@@ -1,11 +1,11 @@
-import { lookupArea } from '@stats47/area';
+import { lookupArea, PREFECTURE_AREA_CODE_RE } from '@stats47/area';
 import { FACTORY_INVESTMENT_SOURCE } from '@stats47/data-configs/theme-catalog';
 import { z } from 'zod';
 
 const source = FACTORY_INVESTMENT_SOURCE;
 const point = z
   .object({
-    areaCode: z.string().regex(/^(0[1-9]|[1-3][0-9]|4[0-7])000$/),
+    areaCode: z.string().regex(PREFECTURE_AREA_CODE_RE),
     areaName: z.string(),
     value: z.number().finite().nonnegative().nullable(),
     status: z.enum(['published', 'suppressed']),

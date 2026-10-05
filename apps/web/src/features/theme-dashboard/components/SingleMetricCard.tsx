@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react';
 
+import { NATIONAL_AREA_CODE } from '@stats47/area';
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
@@ -14,8 +15,6 @@ import { fetchMetricTimeseriesBatched } from '../lib/batched-metric-timeseries';
 import { nationalSeriesName } from './MetricSwitcherPanel';
 
 import type { MetricKpi } from './metric-kpi';
-
-const NATIONAL_CODE = '00000';
 
 interface SingleMetricCardProps {
   /** SSRとクライアントで同じ見出しIDを使うための固定キー */
@@ -63,7 +62,7 @@ export function SingleMetricCard({
 }: SingleMetricCardProps) {
   const label = tabLabels[metric.metricKey] ?? metric.title;
   const heading = title ?? label;
-  const areaCode = selectedPrefectureCode ?? NATIONAL_CODE;
+  const areaCode = selectedPrefectureCode ?? NATIONAL_AREA_CODE;
   const wantsTrend = !!selectedPrefectureCode && !summaryOnly;
 
   const [series, setSeries] = useState<
@@ -73,7 +72,7 @@ export function SingleMetricCard({
   // 県選択時だけ、この指標の自地域 + 全国を未取得なら取る (取得済みは再取得しない)。
   useEffect(() => {
     if (!wantsTrend) return;
-    const missing = [areaCode, NATIONAL_CODE].filter((code) => !(code in series));
+    const missing = [areaCode, NATIONAL_AREA_CODE].filter((code) => !(code in series));
     if (missing.length === 0) return;
     let cancelled = false;
     void Promise.all(
@@ -100,7 +99,7 @@ export function SingleMetricCard({
   const trend: Trend = useMemo(() => {
     if (!wantsTrend) return { kind: 'none' };
     const areaResult = series[areaCode];
-    const nationalResult = series[NATIONAL_CODE];
+    const nationalResult = series[NATIONAL_AREA_CODE];
     if (!areaResult || !nationalResult) return { kind: 'none' };
 
     let points = areaResult.points;

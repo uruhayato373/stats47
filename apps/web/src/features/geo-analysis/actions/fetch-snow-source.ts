@@ -1,4 +1,5 @@
 'use server';
+import { PREFECTURE_CODE_2DIGIT_RE, to5DigitPrefCode } from '@stats47/area';
 import { fetchFromR2AsJson } from '@stats47/r2-storage/server';
 
 import {
@@ -16,7 +17,7 @@ export async function fetchGeoSnowSourceAction(
   if (
     typeof pref !== 'string' ||
     pref.length !== 2 ||
-    !/^(0[1-9]|[1-3][0-9]|4[0-7])$/.test(pref) ||
+    !PREFECTURE_CODE_2DIGIT_RE.test(pref) ||
     !expected ||
     !isTimestamp(expected.generatedAt) ||
     typeof expected.sha256 !== 'string' ||
@@ -27,7 +28,7 @@ export async function fetchGeoSnowSourceAction(
   const manifest = await loadGeoAnalysisManifest('population-snow-designation');
   const artifact = manifest?.stages
     .find((s) => s.id === 'snow-designation-polygons')
-    ?.outputs.find((o) => o.areaCode === `${pref}000`);
+    ?.outputs.find((o) => o.areaCode === to5DigitPrefCode(pref));
   if (
     !manifest ||
     !artifact ||
@@ -40,7 +41,7 @@ export async function fetchGeoSnowSourceAction(
     if (
       !isRecord(value) ||
       value.slug !== 'population-snow-designation' ||
-      value.areaCode !== `${pref}000` ||
+      value.areaCode !== to5DigitPrefCode(pref) ||
       value.generatedAt !== expected.generatedAt ||
       value.displayOnly !== true ||
       !Array.isArray(value.features) ||

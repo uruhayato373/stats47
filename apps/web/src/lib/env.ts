@@ -9,11 +9,13 @@
 
 import { logger } from "@/lib/logger";
 
+import { SITE_ORIGIN } from "@/config/site";
+
 /**
  * 環境別のデフォルトベースURL
  */
 const DEFAULT_BASE_URLS = {
-  production: "https://stats47.jp",
+  production: SITE_ORIGIN,
   development: "http://localhost:3000",
 } as const;
 

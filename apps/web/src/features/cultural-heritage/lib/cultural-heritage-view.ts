@@ -1,4 +1,4 @@
-import { lookupArea } from '@stats47/area';
+import { lookupArea, PREFECTURE_AREA_CODE_RE } from '@stats47/area';
 import { CULTURAL_HERITAGE_SOURCE as definition } from '@stats47/data-configs/theme-catalog';
 
 import type {
@@ -14,7 +14,7 @@ export function selectCulturalHeritageView(
   const national = areaCode === null || areaCode === '00000';
   if (
     !national &&
-    (!/^(0[1-9]|[1-3][0-9]|4[0-7])000$/.test(areaCode) || !lookupArea(areaCode))
+    (!PREFECTURE_AREA_CODE_RE.test(areaCode) || !lookupArea(areaCode))
   )
     return null;
   const areaRows = national

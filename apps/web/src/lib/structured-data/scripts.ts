@@ -5,6 +5,8 @@
  * JSON-LD script タグ文字列を返す。
  */
 
+import { SITE_ALTERNATE_NAME, SITE_NAME, SITE_TAGLINE } from "@/config/site";
+
 import { OPERATOR_SOCIAL_URLS } from "./person";
 
 /** ロゴ URL（publisher Organization で共通参照） */
@@ -20,11 +22,11 @@ export function buildOrganizationSchema(baseUrl: string) {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "統計で見る都道府県",
-    alternateName: "Stats47",
+    name: SITE_NAME,
+    alternateName: SITE_ALTERNATE_NAME,
     url: baseUrl,
     logo: logoImageObject(baseUrl),
-    description: "あなたの県は何位？1,800以上の統計で47都道府県をランキング・比較・分析",
+    description: SITE_TAGLINE,
     sameAs: [...OPERATOR_SOCIAL_URLS],
   };
 }
@@ -33,7 +35,7 @@ export function buildOrganizationSchema(baseUrl: string) {
 export function buildPublisherOrganization(baseUrl: string) {
   return {
     "@type": "Organization",
-    name: "統計で見る都道府県",
+    name: SITE_NAME,
     url: baseUrl,
     logo: logoImageObject(baseUrl),
   };
@@ -46,9 +48,9 @@ export function generateWebSiteStructuredDataScripts(baseUrl: string): string {
   const webSiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: "統計で見る都道府県",
+    name: SITE_NAME,
     url: baseUrl,
-    description: "あなたの県は何位？1,800以上の統計で47都道府県をランキング・比較・分析",
+    description: SITE_TAGLINE,
     inLanguage: "ja",
     potentialAction: {
       "@type": "SearchAction",

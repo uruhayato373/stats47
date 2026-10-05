@@ -17,7 +17,7 @@ import {
   type CsvDownloadPurpose,
 } from "@/lib/analytics/events";
 
-const CONTACT_FORM_URL = "https://forms.gle/ZYi7Rmk4Kt9qZCXB8";
+import { CONTACT_FORM_URL } from "@/config/site";
 
 const PURPOSE_OPTIONS: ReadonlyArray<{ value: CsvDownloadPurpose; label: string }> = [
   { value: "work", label: "業務の資料" },

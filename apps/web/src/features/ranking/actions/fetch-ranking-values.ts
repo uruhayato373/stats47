@@ -1,5 +1,6 @@
 "use server";
 
+import { to2DigitPrefCode, type AreaType } from "@stats47/area";
 import {
   computeNormalization,
   fetchRankingValuesOnDemand,
@@ -11,7 +12,6 @@ import { err, isOk, ok, type Result } from "@stats47/types";
 
 import { sanitizeNormalizationType } from "./normalization-types";
 
-import type { AreaType } from "@stats47/area";
 import type { RankingValue } from "@stats47/ranking";
 
 /**
@@ -68,7 +68,7 @@ export async function fetchRankingValuesAction(
 
     // 都道府県内フィルタ
     if (parentAreaCode) {
-      const prefPrefix = parentAreaCode.slice(0, 2);
+      const prefPrefix = to2DigitPrefCode(parentAreaCode);
       values = values.filter((v) => v.areaCode.startsWith(prefPrefix));
       values.sort((a, b) => (b.value ?? 0) - (a.value ?? 0));
       values = values.map((v, i) => ({ ...v, rank: i + 1 }));

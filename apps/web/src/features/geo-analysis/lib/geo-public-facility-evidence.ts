@@ -1,3 +1,4 @@
+import { PREFECTURE_AREA_CODE_RE } from '@stats47/area';
 import {
   validatePublicFacilityDetail,
   type GeoAnalysisSnapshotRow,
@@ -33,7 +34,7 @@ export function parseGeoPublicFacilityPrefDetail(
     detail.schemaVersion !== 1 ||
     detail.slug !== 'population-public-facility-access' ||
     detail.areaCode !== expectedAreaCode ||
-    !/^(0[1-9]|[1-3][0-9]|4[0-7])000$/.test(expectedAreaCode) ||
+    !PREFECTURE_AREA_CODE_RE.test(expectedAreaCode) ||
     typeof detail.generatedAt !== 'string' ||
     !/^\d{4}-\d{2}-\d{2}T/.test(detail.generatedAt) ||
     !Number.isFinite(Date.parse(detail.generatedAt))

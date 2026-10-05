@@ -1,5 +1,6 @@
 import Link from 'next/link';
 
+import { to2DigitPrefCode } from '@stats47/area';
 import { BUSINESS_PLAN_GEO_CONTENT_LIFECYCLE } from '@stats47/data-configs/business-plan';
 
 import { SectionHeader } from '@/components/section';
@@ -15,7 +16,7 @@ interface Props {
 }
 
 export async function AreaGeoInsightsSection({ areaCode, areaName }: Props) {
-  const prefCode2 = areaCode.slice(0, 2);
+  const prefCode2 = to2DigitPrefCode(areaCode);
   const candidates = BUSINESS_PLAN_GEO_CONTENT_LIFECYCLE.filter((item) =>
     isGeoCrossAnalysisSlug(item.analysisSlug)
   );

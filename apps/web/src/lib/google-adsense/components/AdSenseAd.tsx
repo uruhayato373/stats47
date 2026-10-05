@@ -21,6 +21,8 @@ import {
 } from "./ad-frame";
 import { AdSensePlaceholder } from "./AdSensePlaceholder";
 
+import { MEDIA_QUERIES } from "@/constants/breakpoints";
+
 /**
  * lazy-load 発火閾値のデバイス別デフォルト（ADSENSE-LAZYLOAD-02, 2026-07-12）
  *
@@ -31,7 +33,7 @@ import { AdSensePlaceholder } from "./AdSensePlaceholder";
  */
 const DESKTOP_ROOT_MARGIN_PX = 600;
 const MOBILE_ROOT_MARGIN_PX = 250;
-const MOBILE_MEDIA_QUERY = "(max-width: 767px)";
+const MOBILE_MEDIA_QUERY = MEDIA_QUERIES.mobile;
 
 /**
  * AdSense広告コンポーネント

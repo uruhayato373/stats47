@@ -1,5 +1,6 @@
-const DEFAULT_SITE_URL = 'https://stats47.jp';
-const DEFAULT_R2_PUBLIC_URL = 'https://storage.stats47.jp';
+import { R2_PUBLIC_BASE_URL, SITE_NAME, SITE_ORIGIN } from "@/config/site";
+const DEFAULT_SITE_URL = SITE_ORIGIN;
+const DEFAULT_R2_PUBLIC_URL = R2_PUBLIC_BASE_URL;
 const GOVERNMENT_STANDARD_TERMS_URL =
   'https://www.digital.go.jp/resources/open_data';
 
@@ -69,7 +70,7 @@ export function buildMunicipalityDatasetStructuredData({
     },
     publisher: {
       '@type': 'Organization',
-      name: '統計で見る都道府県',
+      name: SITE_NAME,
       url: siteUrl.replace(/\/$/, ''),
     },
     isBasedOn: {

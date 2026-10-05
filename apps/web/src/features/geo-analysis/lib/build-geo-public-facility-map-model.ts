@@ -1,3 +1,4 @@
+import { to2DigitPrefCode } from '@stats47/area';
 import {
   mesh1000BoundsFromCode,
   type GeoPublicFacilityPrefDetail,
@@ -40,7 +41,7 @@ export function buildGeoPublicFacilityMapModel(
           distanceMeters: mesh[index + 1],
           band: mesh[index + 2],
           outsidePrefecture: facility
-            ? facility[2].slice(0, 2) !== detail.areaCode.slice(0, 2)
+            ? to2DigitPrefCode(facility[2]) !== to2DigitPrefCode(detail.areaCode)
             : false,
         },
         geometry: {
@@ -79,7 +80,7 @@ export function buildGeoPublicFacilityMapModel(
     bounds,
     sourceFacilities: detail.facilities.filter(
       (point) =>
-        point[2].slice(0, 2) === detail.areaCode.slice(0, 2) &&
+        to2DigitPrefCode(point[2]) === to2DigitPrefCode(detail.areaCode) &&
         belongsToGroup(point)
     ),
     nearestFacilities: detail.facilities.filter((point) =>

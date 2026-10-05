@@ -6,6 +6,8 @@ import Image from "next/image";
 
 import { resolveMobileChartSource } from "../lib/responsive-chart";
 
+import { MEDIA_QUERIES } from "@/constants/breakpoints";
+
 interface ResponsiveArticleImageProps {
   src: string;
   alt: string;
@@ -22,7 +24,7 @@ export function ResponsiveArticleImage({ src, alt }: ResponsiveArticleImageProps
 
   return (
     <picture className={mobileSrc ? "block max-sm:aspect-[2/3]" : "block"}>
-      {mobileSrc && <source media="(max-width: 639px)" srcSet={mobileSrc} />}
+      {mobileSrc && <source media={MEDIA_QUERIES.belowSm} srcSet={mobileSrc} />}
       <Image
         src={src}
         alt={alt}
@@ -31,7 +33,7 @@ export function ResponsiveArticleImage({ src, alt }: ResponsiveArticleImageProps
         className={mobileSrc
           ? "h-auto w-full rounded-lg max-sm:h-full max-sm:object-contain"
           : "h-auto w-full rounded-lg"}
-        sizes="(max-width: 639px) 100vw, 672px"
+        sizes={`${MEDIA_QUERIES.belowSm} 100vw, 672px`}
         decoding="async"
         loading="lazy"
         unoptimized

@@ -3,13 +3,15 @@ import { feature as topoFeature } from "topojson-client";
 
 import { SurfaceCard } from "@/components/surface";
 
+import { R2_PUBLIC_BASE_URL } from "@/config/site";
+
 import type { GeometryCollection, Topology } from "topojson-specification";
 
 const R2_HIGHWAY_TOPOJSON =
-  "https://storage.stats47.jp/app/highway-history/highway-sections.topojson";
+  `${R2_PUBLIC_BASE_URL}/app/highway-history/highway-sections.topojson`;
 const R2_PREFECTURE_TOPOJSON =
-  "https://storage.stats47.jp/gis/mlit/20240101/prefecture.topojson";
-const R2_STATS_JSON = "https://storage.stats47.jp/app/highway-history/stats.json";
+  `${R2_PUBLIC_BASE_URL}/gis/mlit/20240101/prefecture.topojson`;
+const R2_STATS_JSON = `${R2_PUBLIC_BASE_URL}/app/highway-history/stats.json`;
 
 interface HighwayStats {
   yearStart: number;

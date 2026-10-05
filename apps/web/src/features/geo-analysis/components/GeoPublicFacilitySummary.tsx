@@ -3,6 +3,7 @@ import { useMemo, useState } from 'react';
 
 import Link from 'next/link';
 
+import { to2DigitPrefCode } from '@stats47/area';
 import { Button } from '@stats47/components/atoms/ui/button';
 import {
   Select,
@@ -182,7 +183,7 @@ export function GeoPublicFacilitySummary({
                   ) : (
                     <Link
                       className="inline-flex min-h-11 items-center text-primary underline"
-                      href={`/geo/${slug}/${row.areaCode.slice(0, 2)}/overlap`}
+                      href={`/geo/${slug}/${to2DigitPrefCode(row.areaCode)}/overlap`}
                     >
                       {row.areaName}
                     </Link>
@@ -203,7 +204,7 @@ export function GeoPublicFacilitySummary({
                 <TableCell className="whitespace-nowrap">
                   <Link
                     className="inline-flex min-h-11 items-center text-primary underline"
-                    href={`/geo/data/${slug}/${row.areaCode.slice(0, 2)}`}
+                    href={`/geo/data/${slug}/${to2DigitPrefCode(row.areaCode)}`}
                   >
                     地点・検算
                   </Link>

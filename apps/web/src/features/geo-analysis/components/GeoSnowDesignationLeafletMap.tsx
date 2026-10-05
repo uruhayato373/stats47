@@ -2,6 +2,7 @@
 import 'leaflet/dist/leaflet.css';
 import { useEffect, useMemo, useState } from 'react';
 
+import { to2DigitPrefCode } from '@stats47/area';
 import { Button } from '@stats47/components/atoms/ui/button';
 import { GeoJSON, MapContainer, TileLayer, useMap } from 'react-leaflet';
 
@@ -62,7 +63,7 @@ export function GeoSnowDesignationLeafletMap({
     if (view !== 'overlap' || !showSource) return;
     void (
       artifact
-        ? fetchGeoSnowSourceAction(detail.areaCode.slice(0, 2), {
+        ? fetchGeoSnowSourceAction(to2DigitPrefCode(detail.areaCode), {
             generatedAt: manifest.generatedAt,
             sha256: artifact.sha256,
           })

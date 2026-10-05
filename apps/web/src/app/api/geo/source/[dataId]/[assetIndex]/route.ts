@@ -4,6 +4,8 @@ import { loadGeoSourceItem } from '@/features/geo-analysis';
 
 import { NO_STORE_CACHE_HEADERS } from '@/lib/cache-policy';
 
+import { R2_PUBLIC_BASE_URL } from '@/config/site';
+
 export async function GET(
   _request: Request,
   { params }: { params: Promise<{ dataId: string; assetIndex: string }> }
@@ -36,7 +38,7 @@ export async function GET(
   const base =
     process.env.R2_PUBLIC_FETCH_URL ??
     process.env.NEXT_PUBLIC_R2_PUBLIC_URL ??
-    'https://storage.stats47.jp';
+    R2_PUBLIC_BASE_URL;
   let response: Response;
   try {
     response = await fetch(`${base.replace(/\/$/, '')}/${asset.key}`, {

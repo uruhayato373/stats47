@@ -31,6 +31,7 @@ import { FeaturedRankings } from '@/features/ranking/featured.server';
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
 
 import { KNOWN_RANKING_KEYS } from '@/config/known-ranking-keys';
+import { DEFAULT_OGP_IMAGE_PATH } from '@/config/site';
 
 import type { Metadata } from 'next';
 
@@ -52,7 +53,7 @@ export function generateMetadata(): Metadata {
     title,
     description,
     alternates: { canonical: '/ranking' },
-    ...generateOGMetadata({ title, description, imageUrl: '/og-image.jpg' }),
+    ...generateOGMetadata({ title, description, imageUrl: DEFAULT_OGP_IMAGE_PATH }),
   };
 }
 

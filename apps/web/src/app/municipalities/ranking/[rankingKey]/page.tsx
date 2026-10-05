@@ -44,6 +44,8 @@ import { MunicipalityRankingMapSection } from '@/features/municipalities/server'
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
 import { UrlPolicy } from '@/lib/url-policy';
 
+import { DEFAULT_OGP_IMAGE_PATH } from '@/config/site';
+
 import type { Metadata } from 'next';
 
 interface Params {
@@ -97,7 +99,7 @@ export async function generateMetadata({
     title,
     description,
     alternates: { canonical: `/municipalities/ranking/${item.rankingKey}` },
-    ...generateOGMetadata({ title, description, imageUrl: '/og-image.jpg' }),
+    ...generateOGMetadata({ title, description, imageUrl: DEFAULT_OGP_IMAGE_PATH }),
   };
 }
 

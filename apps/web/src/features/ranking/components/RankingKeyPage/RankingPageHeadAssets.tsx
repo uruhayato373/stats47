@@ -1,3 +1,4 @@
+import { MEDIA_QUERIES } from "@/constants/breakpoints";
 interface RankingPageHeadAssetsProps {
   structuredData: object;
   breadcrumbStructuredData: object;
@@ -40,7 +41,7 @@ export function RankingPageHeadAssets({
             as="image"
             href={url}
             fetchPriority={isLcpTile ? "high" : "auto"}
-            media={isLcpTile ? undefined : "(min-width: 1024px)"}
+            media={isLcpTile ? undefined : MEDIA_QUERIES.aboveLg}
           />
         );
       })}

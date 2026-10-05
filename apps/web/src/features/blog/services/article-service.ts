@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 
+import { blogR2Key } from "../r2-key";
 import { readArticleBySlugFromR2 as findArticleBySlug } from "../repositories/blog-snapshot-reader";
 import { type Article } from "../types";
 
@@ -8,7 +9,7 @@ const LOCAL_CONTENT_DIR = path.resolve(process.cwd(), "../../.local/r2/app/blog"
 
 function resolveR2Key(slug: string, format: string): string {
   const filename = format === "mdx" ? "article.mdx" : "article.md";
-  return `app/blog/${slug}/${filename}`;
+  return blogR2Key(slug, filename);
 }
 
 type R2StringFetcher = (key: string) => Promise<string | null>;

@@ -1,4 +1,5 @@
 import { defineConfig, devices } from "@playwright/test";
+import { SITE } from "@stats47/types";
 
 /**
  * 本番スモークテスト用 Playwright 設定
@@ -22,7 +23,7 @@ export default defineConfig({
   reporter: [["list"], ["html", { outputFolder: "playwright-smoke-report" }]],
 
   use: {
-    baseURL: process.env.PLAYWRIGHT_TEST_BASE_URL || "https://stats47.jp",
+    baseURL: process.env.PLAYWRIGHT_TEST_BASE_URL || SITE.origin,
     trace: "on-first-retry",
     screenshot: "only-on-failure",
   },

@@ -1,5 +1,6 @@
 'use server';
 
+import { to5DigitPrefCode } from '@stats47/area';
 import { GEO_PREF_CODES } from '@stats47/data-configs/business-plan';
 
 import { GEO_CROSS_ANALYSIS_SLUGS } from '../lib/geo-cross-analysis';
@@ -25,7 +26,7 @@ export async function fetchGeoDetailAction(
   const bundle = await loadGeoAnalysisPrefBundle(canonicalSlug, canonicalPrefCode);
   const artifact = bundle?.manifest.stages
     .find((stage) => stage.id === 'population-mesh')
-    ?.outputs.find((output) => output.areaCode === `${canonicalPrefCode}000`);
+    ?.outputs.find((output) => output.areaCode === to5DigitPrefCode(canonicalPrefCode));
   if (
     !bundle ||
     bundle.manifest.generatedAt !== expected.generatedAt ||

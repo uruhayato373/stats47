@@ -1,9 +1,9 @@
-import { lookupArea } from '@stats47/area';
+import { lookupArea, PREFECTURE_AREA_CODE_RE } from '@stats47/area';
 import { WATER_QUALITY_SOURCE } from '@stats47/data-configs/theme-catalog';
 import { z } from 'zod';
 const source = WATER_QUALITY_SOURCE;
 export const waterKinds = ['river', 'lake', 'sea'] as const;
-const areaCode = z.string().regex(/^(0[1-9]|[1-3][0-9]|4[0-7])000$/);
+const areaCode = z.string().regex(PREFECTURE_AREA_CODE_RE);
 const concentration = z.string().regex(/^<?\d+(\.\d+)?$/);
 const thresholds: Record<string, Record<string, number>> = {
   river: { AA: 1, A: 2, B: 3, C: 5, D: 8, E: 10 },

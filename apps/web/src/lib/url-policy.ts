@@ -16,7 +16,7 @@
  *   リダイレクト先が unknown なら直接 410（301→410 チェーン回避）
  */
 
-import { lookupArea } from '@stats47/area';
+import { lookupArea, PREFECTURE_AREA_CODE_RE } from '@stats47/area';
 import {
   KNOWN_MUNICIPALITY_RANKING_KEYS,
   KNOWN_MUNICIPALITY_THEME_SLUGS,
@@ -102,10 +102,7 @@ function prefectureCodeForCity(cityCode: string): string | null {
  * 5 桁数字かつ prefNum 01〜47、末尾 `000` のみ有効。
  */
 export function isValidPrefCode(code: string): boolean {
-  if (!/^\d{5}$/.test(code)) return false;
-  const prefNum = parseInt(code.slice(0, 2), 10);
-  const suffix = code.slice(2);
-  return prefNum >= 1 && prefNum <= 47 && suffix === '000';
+  return PREFECTURE_AREA_CODE_RE.test(code);
 }
 
 export const UrlPolicy = {

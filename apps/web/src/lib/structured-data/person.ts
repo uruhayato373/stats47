@@ -9,6 +9,7 @@ import {
   OPERATOR_PROFILE,
   OPERATOR_SOCIAL_URLS,
 } from '@/config/operator-profile';
+import { SITE_NAME } from "@/config/site";
 
 export { OPERATOR_SOCIAL_URLS };
 
@@ -33,7 +34,7 @@ export function buildOperatorPersonSchema(baseUrl: string) {
     knowsAbout: [...OPERATOR_PROFILE.expertise],
     worksFor: {
       '@type': 'Organization',
-      name: '統計で見る都道府県',
+      name: SITE_NAME,
       url: baseUrl,
     },
     sameAs: [...OPERATOR_SOCIAL_URLS],
@@ -53,7 +54,7 @@ export function buildPersonAsAuthor(baseUrl: string) {
     jobTitle: OPERATOR_PROFILE.role,
     worksFor: {
       '@type': 'Organization',
-      name: '統計で見る都道府県',
+      name: SITE_NAME,
       url: baseUrl,
     },
   };

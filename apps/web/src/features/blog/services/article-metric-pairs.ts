@@ -2,6 +2,8 @@ import "server-only";
 
 import { fetchFromR2AsJson } from "@stats47/r2-storage/server";
 
+import { blogR2Key } from "../r2-key";
+
 import { extractArticleChartBases } from "./article-survey-taxonomy";
 
 type SourceFetcher = (key: string) => Promise<unknown | null>;
@@ -45,7 +47,7 @@ export async function resolveArticleMetricPairs(
   const pairs = await Promise.all(
     extractArticleChartBases(input.content).map(async (base) =>
       extractChartMetricPair(
-        await fetchSource(`app/blog/${input.slug}/data/${base}.source.json`),
+        await fetchSource(blogR2Key(input.slug, `data/${base}.source.json`)),
       ),
     ),
   );

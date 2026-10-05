@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic';
 
 // 型サブパスから読む。registry (index) を値 import すると 20 テーマ分のカタログが
 // client bundle に載る (types.ts は型 import しか持たないので何も引き連れない)
+import { NATIONAL_AREA_CODE } from '@stats47/area';
 import { normalizeUnitForAxis } from '@stats47/data-configs/theme-catalog/types';
 import { classifyUnitComparability, formatUnitForDisplay } from '@stats47/data-configs/unit';
 import { Check } from 'lucide-react';
@@ -36,7 +37,6 @@ const LineChartClient = dynamic(
   { ssr: false, loading: () => <ChartLoading height={CHART_HEIGHT} /> }
 );
 
-const NATIONAL_CODE = '00000';
 /** 比較系列 (全国) の線種。主系列と色だけで区別しないための破線 */
 const COMPARISON_DASH = '6,4';
 
@@ -209,7 +209,7 @@ export function MetricSwitcherPanel({
   areaName,
   defaultCheckedKeys,
 }: MetricSwitcherPanelProps) {
-  const areaCode = selectedPrefectureCode ?? NATIONAL_CODE;
+  const areaCode = selectedPrefectureCode ?? NATIONAL_AREA_CODE;
   const Tile = summaryOnly ? "div" : "button";
 
   const [checkedKeys, setCheckedKeys] = useState<string[]>(() => {
@@ -267,7 +267,7 @@ export function MetricSwitcherPanel({
     if (!selectedPrefectureCode || summaryOnly) return;
     const keys = checkedKeysKey ? checkedKeysKey.split(',') : [];
     if (keys.length === 0) return;
-    const wanted = [areaCode, NATIONAL_CODE];
+    const wanted = [areaCode, NATIONAL_AREA_CODE];
     const missing: Array<[string, string]> = [];
     for (const key of keys) {
       for (const code of wanted) {
@@ -354,7 +354,7 @@ export function MetricSwitcherPanel({
       const key = metric.metricKey;
       const label = tabLabels[key] ?? metric.title;
       const areaResult = seriesCache[cacheKey(key, areaCode)];
-      const nationalResult = seriesCache[cacheKey(key, NATIONAL_CODE)];
+      const nationalResult = seriesCache[cacheKey(key, NATIONAL_AREA_CODE)];
       const areaPoints = areaResult?.points ?? [];
 
       /** この系列の実データと凡例名。県系列が空なら全国 → R2 47 県平均へ退避する */
@@ -410,7 +410,7 @@ export function MetricSwitcherPanel({
     if (single && selectedPrefectureCode) {
       const areaResult = seriesCache[cacheKey(single.metricKey, areaCode)];
       const nationalResult =
-        seriesCache[cacheKey(single.metricKey, NATIONAL_CODE)];
+        seriesCache[cacheKey(single.metricKey, NATIONAL_AREA_CODE)];
       if (
         (areaResult?.points.length ?? 0) > 0 &&
         nationalResult &&

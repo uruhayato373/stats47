@@ -10,6 +10,8 @@ import {
 
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
+import { DEFAULT_OGP_IMAGE_PATH } from "@/config/site";
+
 import type { Metadata } from "next";
 
 /**
@@ -43,7 +45,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title,
     description,
     alternates: { canonical: `/areas/${areaCode}/${themeSlug}` },
-    ...generateOGMetadata({ title, description, imageUrl: "/og-image.jpg" }),
+    ...generateOGMetadata({ title, description, imageUrl: DEFAULT_OGP_IMAGE_PATH }),
   };
 }
 

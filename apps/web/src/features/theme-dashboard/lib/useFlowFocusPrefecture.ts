@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 
-import { PREFECTURE_LIST_2DIGIT } from "@stats47/area";
+import { PREFECTURE_LIST_2DIGIT, to2DigitPrefCode } from "@stats47/area";
 
 import { useThemePrefecture } from "../components/ThemePrefectureContext";
 
@@ -41,7 +41,7 @@ export interface ManualFocus {
 
 /** ページ側 5 桁コード → フロー用 2 桁コード (全国 / 不正値は null) */
 export function toFlowCode(pageCode: string | null): string | null {
-  return pageCode && /^\d{5}$/.test(pageCode) ? pageCode.slice(0, 2) : null;
+  return pageCode && /^\d{5}$/.test(pageCode) ? to2DigitPrefCode(pageCode) : null;
 }
 
 /**

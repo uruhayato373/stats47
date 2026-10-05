@@ -8,10 +8,12 @@ import { useThemedLeafletTile } from "@/features/map-visualization/client";
 
 import { useTheme } from "@/hooks/useTheme";
 
+import { R2_PUBLIC_BASE_URL } from "@/config/site";
+
 import { SUNSHINE_MAP_RASTER_PATH, type SunshineMapMeta } from "../lib/types";
 
 const R2_PUBLIC_URL =
-  process.env.NEXT_PUBLIC_R2_PUBLIC_URL || "https://storage.stats47.jp";
+  process.env.NEXT_PUBLIC_R2_PUBLIC_URL || R2_PUBLIC_BASE_URL;
 
 interface Props {
   meta: SunshineMapMeta;

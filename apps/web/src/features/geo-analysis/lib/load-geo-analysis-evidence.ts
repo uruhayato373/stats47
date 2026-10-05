@@ -1,5 +1,6 @@
 import 'server-only';
 
+import { PREFECTURE_AREA_CODE_RE, PREFECTURE_CODE_2DIGIT_RE, to2DigitPrefCode, to5DigitPrefCode } from '@stats47/area';
 import {
   assertPublicFacilityConservation,
   assertGeoSnowConservation,
@@ -15,6 +16,8 @@ import {
   type GeoAnalysisSnapshotRow,
 } from '@stats47/gis';
 import { fetchFromR2AsJson } from '@stats47/r2-storage/server';
+
+import { R2_PUBLIC_BASE_URL } from '@/config/site';
 
 import { parseGeoPublicFacilityPrefDetail } from './geo-public-facility-evidence';
 import {
@@ -42,7 +45,7 @@ export function parseGeoAnalysisPrefDetail(
   expectedSlug: GeoCrossAnalysisSlug,
   expectedAreaCode: string
 ): GeoAnalysisPrefDetail | null {
-  if (!/^(0[1-9]|[1-3][0-9]|4[0-7])000$/.test(expectedAreaCode)) return null;
+  if (!PREFECTURE_AREA_CODE_RE.test(expectedAreaCode)) return null;
   if (!isRecord(value) || !isTimestamp(value.generatedAt)) return null;
   if (typeof value.areaName !== 'string' || value.areaName.trim().length === 0)
     return null;
@@ -53,7 +56,7 @@ export function parseGeoAnalysisPrefDetail(
   if (expectedSlug === 'population-station-access') {
     const detail = parseGeoStationAccessPrefDetail(
       value,
-      expectedAreaCode.slice(0, 2)
+      to2DigitPrefCode(expectedAreaCode)
     );
     if (
       !detail ||
@@ -238,8 +241,8 @@ export async function loadGeoAnalysisPrefBundle(
   detail: GeoAnalysisPrefDetail;
   manifest: GeoAnalysisEvidenceManifest;
 } | null> {
-  if (!/^(0[1-9]|[1-3][0-9]|4[0-7])$/.test(prefCode2)) return null;
-  const areaCode = `${prefCode2}000`;
+  if (!PREFECTURE_CODE_2DIGIT_RE.test(prefCode2)) return null;
+  const areaCode = to5DigitPrefCode(prefCode2);
   try {
     const value = await fetchFromR2AsJson<unknown>(
       geoAnalysisPrefKey(slug, prefCode2)
@@ -284,7 +287,7 @@ export async function loadGeoAnalysisPrefBundle(
         return null;
       const expectedFacilities = new Map(
         detail.facilities
-          .filter((point) => point[2].slice(0, 2) === prefCode2)
+          .filter((point) => to2DigitPrefCode(point[2]) === prefCode2)
           .map((point) => [point[0], JSON.stringify(point)])
       );
       if (
@@ -333,6 +336,6 @@ export async function loadGeoAnalysisPrefDetail(
 
 export function geoAnalysisPublicDataUrl(key: string): string {
   const base =
-    process.env.NEXT_PUBLIC_R2_PUBLIC_URL ?? 'https://storage.stats47.jp';
+    process.env.NEXT_PUBLIC_R2_PUBLIC_URL ?? R2_PUBLIC_BASE_URL;
   return `${base.replace(/\/+$/, '')}/${key}`;
 }

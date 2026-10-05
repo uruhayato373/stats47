@@ -17,6 +17,8 @@ import { listAllTagsWithCount } from "@/features/blog/server";
 
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
+import { DEFAULT_OGP_IMAGE_PATH, SITE_ORIGIN } from "@/config/site";
+
 import type { Metadata } from "next";
 
 const TAGS_TITLE = "タグ一覧 | ブログ | stats47";
@@ -32,8 +34,8 @@ export const metadata: Metadata = {
     ...generateOGMetadata({
         title: TAGS_TITLE,
         description: TAGS_DESCRIPTION,
-        imageUrl: "/og-image.jpg",
-        url: "https://stats47.jp/blog/tags",
+        imageUrl: DEFAULT_OGP_IMAGE_PATH,
+        url: `${SITE_ORIGIN}/blog/tags`,
     }),
 };
 

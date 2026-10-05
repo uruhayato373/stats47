@@ -14,6 +14,8 @@ import { ALL_THEMES } from '@/features/theme-dashboard/listing.server';
 
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
 
+import { DEFAULT_OGP_IMAGE_PATH, SITE_ORIGIN } from '@/config/site';
+
 import type { Metadata } from 'next';
 
 export const revalidate = 86400;
@@ -45,8 +47,8 @@ export const metadata: Metadata = {
   ...generateOGMetadata({
     title: BLOG_INDEX_TITLE,
     description: BLOG_INDEX_DESCRIPTION,
-    imageUrl: '/og-image.jpg',
-    url: 'https://stats47.jp/blog',
+    imageUrl: DEFAULT_OGP_IMAGE_PATH,
+    url: `${SITE_ORIGIN}/blog`,
   }),
 };
 

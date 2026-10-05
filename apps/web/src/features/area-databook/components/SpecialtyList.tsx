@@ -1,12 +1,14 @@
 import { getSurfaceCardClassName } from "@/components/surface";
 
+import { R2_PUBLIC_BASE_URL } from "@/config/site";
+
 import { SpecialtyImage } from "./SpecialtyImage";
 
 import type { AreaEditorial } from "@stats47/data-configs";
 
 /** R2 公開 URL のベース (イラスト解決用)。特産品イラストは常にここから解決を試み、
  *  未生成の県は SpecialtyImage 内の onError でイニシャルに degrade する。 */
-const R2_PUBLIC_BASE = "https://storage.stats47.jp";
+const R2_PUBLIC_BASE = R2_PUBLIC_BASE_URL;
 
 interface Props {
   editorial: AreaEditorial | null;

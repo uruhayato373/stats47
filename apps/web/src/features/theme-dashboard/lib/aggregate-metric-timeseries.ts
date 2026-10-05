@@ -1,4 +1,4 @@
-import { NATIONAL_AREA_CODE } from "./select-national-series";
+import { NATIONAL_AREA_CODE } from "@stats47/area";
 
 /** 年次系列の 1 点 */
 export interface MetricTimeseriesPoint {

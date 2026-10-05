@@ -1,10 +1,6 @@
+import { NATIONAL_AREA_CODE, PREFECTURE_AREA_CODE_RE } from "@stats47/area";
+
 import type { StatsSchema } from "@stats47/types";
-
-/** e-Stat の全国行の地域コード */
-export const NATIONAL_AREA_CODE = "00000";
-
-/** 都道府県コード (01000〜47000) */
-const PREFECTURE_CODE_RE = /^(0[1-9]|[1-3][0-9]|4[0-7])000$/;
 
 /**
  * 「全国」として描画すべき系列を選ぶ。
@@ -23,7 +19,7 @@ export function selectNationalSeries(allData: StatsSchema[]): StatsSchema[] | nu
   const nationalData = allData.filter((d) => d.areaCode === NATIONAL_AREA_CODE);
   if (nationalData.length > 0) return nationalData;
 
-  const prefData = allData.filter((d) => PREFECTURE_CODE_RE.test(d.areaCode));
+  const prefData = allData.filter((d) => PREFECTURE_AREA_CODE_RE.test(d.areaCode));
 
   const byYear = new Map<
     string,

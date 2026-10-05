@@ -2,6 +2,7 @@ import { cookies } from 'next/headers';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
+import { to5DigitPrefCode } from '@stats47/area';
 import { THEME_CATALOGS } from '@stats47/data-configs/theme-catalog';
 
 import { LEFT_RAIL_NARROW_ONLY_CLASS, PageShell } from '@/components/layout';
@@ -30,6 +31,8 @@ import {
 import { HUB_INCONTENT, THEMES_CONTENT } from '@/lib/google-adsense';
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
 
+import { R2_PUBLIC_BASE_URL } from '@/config/site';
+
 import { LocalFinanceThemeClient } from './LocalFinanceThemeClient';
 
 import type { Metadata } from 'next';
@@ -41,7 +44,7 @@ const { dedicated, supplementary } = splitLocalFinanceSections(sections);
 const supplementaryGroups = THEME_CATALOGS['local-finance'].metricGroups ?? [];
 const supplementaryKeys = new Set(supplementaryGroups.flatMap((group) => group.rankingKeys));
 
-const R2_BASE = 'https://storage.stats47.jp';
+const R2_BASE = R2_PUBLIC_BASE_URL;
 
 // 財政フロー(R2 public URL fetch) を runtime で確実に読むため force-dynamic。
 // 本ページは bespoke LocalFinanceDashboard を使い、汎用 loadThemeData は経由しない。
@@ -100,7 +103,7 @@ export default async function LocalFinanceThemePage({
   // Existing shared links used two-digit codes before all theme routes adopted five digits.
   const initialPrefecture = resolveInitialThemePrefecture({
     urlPreference:
-      rawPref && /^\d{2}$/.test(rawPref) ? `${rawPref}000` : rawPref,
+      rawPref && /^\d{2}$/.test(rawPref) ? to5DigitPrefCode(rawPref) : rawPref,
     cookiePreference: cookieStore.get(THEME_PREFECTURE_COOKIE_NAME)?.value,
   });
   const initialFinanceFlow = await loadInitialFinanceFlow(

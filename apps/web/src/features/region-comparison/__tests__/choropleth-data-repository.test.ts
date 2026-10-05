@@ -1,19 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { areaCodeToPrefCode, PREF_CODE_TO_ROMAJI } from "../repositories/choropleth-data-repository";
-
-describe("areaCodeToPrefCode", () => {
-  it("5桁エリアコードから先頭2桁を抽出する", () => {
-    expect(areaCodeToPrefCode("13000")).toBe("13");
-    expect(areaCodeToPrefCode("01000")).toBe("01");
-    expect(areaCodeToPrefCode("47000")).toBe("47");
-  });
-
-  it("市区町村コードでも先頭2桁を返す", () => {
-    expect(areaCodeToPrefCode("13101")).toBe("13");
-    expect(areaCodeToPrefCode("27128")).toBe("27");
-  });
-});
+import { PREF_CODE_TO_ROMAJI } from "../repositories/choropleth-data-repository";
 
 describe("PREF_CODE_TO_ROMAJI", () => {
   it("全47都道府県のマッピングが存在する", () => {

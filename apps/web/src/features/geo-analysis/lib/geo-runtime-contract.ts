@@ -1,3 +1,4 @@
+import { PREFECTURE_AREA_CODES, to2DigitPrefCode } from '@stats47/area';
 import {
   assertFloodArchiveKeys,
   parseGeoSnowManifest,
@@ -10,10 +11,7 @@ import type { GeoCrossAnalysisSlug } from './geo-cross-analysis';
 
 // Same limit as the canonical Geo bundle generator.
 export const GEO_DETAIL_MAX_BYTES = 5_000_000;
-export const GEO_AREA_CODES = Array.from(
-  { length: 47 },
-  (_, i) => `${String(i + 1).padStart(2, '0')}000`
-);
+export const GEO_AREA_CODES = [...PREFECTURE_AREA_CODES];
 export const isRecord = (value: unknown): value is Record<string, unknown> =>
   typeof value === 'object' && value !== null && !Array.isArray(value);
 export const isText = (value: unknown): value is string =>
@@ -227,15 +225,15 @@ export function validateGeoManifest(
     }
     if (layer === 'ipss-population-mesh-1km')
       expectedKeys = GEO_AREA_CODES.map(
-        (code) => `gis/mlit-ksj/mesh1000r6/24/${code.slice(0, 2)}.topojson`
+        (code) => `gis/mlit-ksj/mesh1000r6/24/${to2DigitPrefCode(code)}.topojson`
       );
     else if (layer === 'ksj-p05-public-facility-point')
       expectedKeys = GEO_AREA_CODES.map(
-        (code) => `gis/mlit-ksj/P05/22/${code.slice(0, 2)}.geojson`
+        (code) => `gis/mlit-ksj/P05/22/${to2DigitPrefCode(code)}.geojson`
       );
     else if (layer === 'ksj-s12-passenger-context')
       expectedKeys = GEO_AREA_CODES.map(
-        (code) => `app/station-passengers/${code.slice(0, 2)}/stations.json`
+        (code) => `app/station-passengers/${to2DigitPrefCode(code)}/stations.json`
       );
     else
       expectedKeys = [

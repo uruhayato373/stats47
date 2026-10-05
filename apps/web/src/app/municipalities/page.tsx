@@ -26,6 +26,8 @@ import { SurfaceLinkCard, SurfaceSection } from '@/components/surface';
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
 
 
+import { DEFAULT_OGP_IMAGE_PATH } from '@/config/site';
+
 import type { Metadata } from 'next';
 
 const MUNICIPALITY_STARTER_THEMES = [
@@ -61,7 +63,7 @@ export function generateMetadata(): Metadata {
     title,
     description,
     alternates: { canonical: '/municipalities' },
-    ...generateOGMetadata({ title, description, imageUrl: '/og-image.jpg' }),
+    ...generateOGMetadata({ title, description, imageUrl: DEFAULT_OGP_IMAGE_PATH }),
   };
 }
 

@@ -20,6 +20,8 @@ import { fetchChoroplethMapData } from "@/features/region-comparison/server";
 
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
+import { DEFAULT_OGP_IMAGE_PATH } from "@/config/site";
+
 
 /** areas パラメータを検証・パースする（5桁数字のカンマ区切り、最大2件） */
 function parseAreaCodes(areas: string | undefined): string[] {
@@ -65,7 +67,7 @@ export async function generateMetadata({
             description,
             alternates: { canonical },
             robots: "noindex, follow",
-            ...generateOGMetadata({ title, description, imageUrl: "/og-image.jpg" }),
+            ...generateOGMetadata({ title, description, imageUrl: DEFAULT_OGP_IMAGE_PATH }),
         };
     }
 
@@ -82,7 +84,7 @@ export async function generateMetadata({
         description,
         alternates: { canonical },
         robots: "noindex, follow",
-        ...generateOGMetadata({ title, description, imageUrl: "/og-image.jpg" }),
+        ...generateOGMetadata({ title, description, imageUrl: DEFAULT_OGP_IMAGE_PATH }),
     };
 }
 

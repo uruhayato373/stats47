@@ -10,8 +10,12 @@
  *        `apps/web/scripts/generate-blog-thumbnails-cloud.ts` (blog、`ogp/ogp.png`)。
  */
 
+import { blogR2Key } from "@/features/blog/r2-key";
+
+import { R2_PUBLIC_BASE_URL } from "@/config/site";
+
 const R2_PUBLIC_URL =
-  process.env.NEXT_PUBLIC_R2_PUBLIC_URL || "https://storage.stats47.jp";
+  process.env.NEXT_PUBLIC_R2_PUBLIC_URL || R2_PUBLIC_BASE_URL;
 
 /** サイト内ブログサムネイルの表示比率。生成契約は640×336（40:21）。 */
 export const BLOG_THUMBNAIL_ASPECT_CLASS = "aspect-[40/21]";
@@ -28,12 +32,12 @@ export function blogThumbnailUrl(
   slug: string,
   variant: "light" | "dark",
 ): string {
-  const key = `app/blog/${slug}/thumbnail-${variant}.webp`;
+  const key = blogR2Key(slug, `thumbnail-${variant}.webp`);
   return `${ogpImageUrl(key)}?v=${BLOG_THUMBNAIL_CACHE_VERSION}`;
 }
 
 export const ogpImageKeys = {
-  blog: (slug: string) => `app/blog/${slug}/ogp/ogp.png`,
+  blog: (slug: string) => blogR2Key(slug, "ogp/ogp.png"),
   ranking: (rankingKey: string) => `app/ranking/${rankingKey}/ogp/ogp.png`,
   area: (areaCode: string) => `app/areas/${areaCode}/ogp/ogp.png`,
   product: (slug: string) => `app/products/${slug}/ogp/ogp.png`,

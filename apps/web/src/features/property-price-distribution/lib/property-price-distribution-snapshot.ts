@@ -1,4 +1,4 @@
-import { fetchPrefectures } from '@stats47/area';
+import { fetchPrefectures, PREFECTURE_AREA_CODE_RE } from '@stats47/area';
 import { PROPERTY_PRICE_DISTRIBUTION_SOURCE as SOURCE } from '@stats47/data-configs/theme-catalog';
 import { z } from 'zod';
 
@@ -38,7 +38,7 @@ const schema = z.object({
   }).strict(),
   national:z.object({transactions:distribution,officialLandPrice:distribution}).strict(),
   areas:z.array(z.object({
-    areaCode:z.string().regex(/^(?:0[1-9]|[1-3][0-9]|4[0-7])000$/),
+    areaCode:z.string().regex(PREFECTURE_AREA_CODE_RE),
     areaName:z.string().min(2),
     transactions:transactionDistribution,
     officialLandPrice:countyBase,

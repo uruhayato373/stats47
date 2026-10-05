@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
+import { PREFECTURE_CODE_2DIGIT_RE } from '@stats47/area';
 import { findGeoLayer } from '@stats47/data-configs/business-plan';
 
 import {
@@ -45,7 +46,7 @@ export default async function GeoLayerPage({ params, searchParams }: Props) {
   const query = await searchParams;
   const pref =
     typeof query.pref === 'string' &&
-    /^(0[1-9]|[1-3][0-9]|4[0-7])$/.test(query.pref)
+    PREFECTURE_CODE_2DIGIT_RE.test(query.pref)
       ? query.pref
       : GEO_DEFAULT_PREF_CODE;
   const [bundle, snapshot] = await Promise.all([

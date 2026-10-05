@@ -1,3 +1,5 @@
+import { PREFECTURE_AREA_CODES } from "@stats47/area";
+
 import { getFurusatoNozeiLink } from "../constants/furusato-nozei";
 import { isRakutenAffiliateUrl } from "../constants/rakuten-links";
 
@@ -14,8 +16,8 @@ export interface RakutenQualityItem {
 export type FurusatoRegionEvidence = "shop" | "legacy-title" | "unknown" | "mismatch";
 export type FurusatoContext = "regional" | "food";
 
-const PREF_NAMES = Array.from({ length: 47 }, (_, i) =>
-  getFurusatoNozeiLink(`${String(i + 1).padStart(2, "0")}000`)?.prefName,
+const PREF_NAMES = PREFECTURE_AREA_CODES.map((code) =>
+  getFurusatoNozeiLink(code)?.prefName,
 ).filter((name): name is string => Boolean(name));
 
 const normalize = (value: string) => value.normalize("NFKC").toLowerCase()

@@ -9,6 +9,7 @@
  * SEGMENTS の順序を変えると URL（数字 id）が変わるため、追加時は末尾に追記すること。
  */
 
+import { PREFECTURE_AREA_CODES } from '@stats47/area';
 import { readCategoriesFromR2 } from '@stats47/category/server';
 import { CATEGORY_KEYS } from '@stats47/data-configs';
 import { GEO_INDEXABLE_ROUTES } from '@stats47/data-configs/business-plan';
@@ -37,6 +38,7 @@ import { themeHref } from '@/features/theme-dashboard/config/theme-urls';
 import { MIN_INDEXABLE_TAG_ARTICLES, UrlPolicy } from '@/lib/url-policy';
 
 import { BLOG_SLUG_REDIRECTS } from '@/config/blog-redirects';
+import { SITE_ORIGIN } from '@/config/site';
 import {
   SITEMAP_BLOG_ENTRIES,
   SITEMAP_SURVEY_IDS,
@@ -52,12 +54,7 @@ import type { MetadataRoute } from 'next';
 // ISR 24h: Googlebot が sitemap を取得するたびの D1 全テーブルスキャンを防ぐ
 export const revalidate = 86400;
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://stats47.jp';
-
-const PREFECTURE_CODES = Array.from(
-  { length: 47 },
-  (_, i) => String(i + 1).padStart(2, '0') + '000'
-);
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || SITE_ORIGIN;
 
 /** Type A テーマ（都道府県単位で集計できるもの）— ports/railway/roads は除外 */
 const TYPE_A_THEME_SLUGS = [...AREA_THEME_SLUGS];
@@ -149,13 +146,13 @@ const MUNICIPALITY_PAGES: MetadataRoute.Sitemap = [
 ];
 
 const AREA_PAGES: MetadataRoute.Sitemap = [
-  ...PREFECTURE_CODES.map((code) => ({
+  ...PREFECTURE_AREA_CODES.map((code) => ({
     url: `${BASE_URL}/areas/${code}`,
     changeFrequency: 'weekly' as const,
     priority: 0.8,
   })),
   // /areas/[code]/[themeSlug] — Type A テーマ（都道府県単位）× 47 県
-  ...PREFECTURE_CODES.flatMap((code) =>
+  ...PREFECTURE_AREA_CODES.flatMap((code) =>
     TYPE_A_THEME_SLUGS.map((slug) => ({
       url: `${BASE_URL}/areas/${code}/${slug}`,
       changeFrequency: 'weekly' as const,

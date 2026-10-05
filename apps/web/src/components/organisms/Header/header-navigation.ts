@@ -7,6 +7,25 @@ export type HeaderNavKey =
   | 'geo'
   | 'blog';
 
+/**
+ * デスクトップヘッダーとモバイルドロワーが共有する主要ナビ (表示順・ラベル)。
+ * ラベルは surface 間で nav_label が割れないよう 1 か所で定義する。
+ * アイコン・色などの表示固有の値は各コンポーネント側に置く。
+ */
+export const PRIMARY_NAV_ITEMS = [
+  { key: 'ranking', href: '/ranking', label: 'ランキング' },
+  { key: 'areas', href: '/areas', label: '都道府県' },
+  { key: 'municipalities', href: '/municipalities', label: '市区町村' },
+  { key: 'geo', href: '/geo', label: '地域分析' },
+  { key: 'blog', href: '/blog', label: '統計ブログ' },
+] as const satisfies ReadonlyArray<{
+  key: HeaderNavKey;
+  href: `/${string}`;
+  label: string;
+}>;
+
+export type PrimaryNavKey = (typeof PRIMARY_NAV_ITEMS)[number]['key'];
+
 const ROUTES: ReadonlyArray<{
   key: HeaderNavKey;
   root: `/${string}`;

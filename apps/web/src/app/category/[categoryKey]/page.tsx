@@ -58,6 +58,7 @@ import {
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
 
 import { CATEGORY_BLOG_TAG_KEYS } from '@/config/category-blog-tag-keys';
+import { DEFAULT_OGP_IMAGE_PATH } from '@/config/site';
 
 import type { Metadata } from 'next';
 
@@ -125,7 +126,7 @@ export async function generateMetadata({
       alternates: {
         canonical: `/category/${categoryKey}`,
       },
-      ...generateOGMetadata({ title, description, imageUrl: '/og-image.jpg' }),
+      ...generateOGMetadata({ title, description, imageUrl: DEFAULT_OGP_IMAGE_PATH }),
     };
   } catch {
     return { title: 'ランキング一覧' };

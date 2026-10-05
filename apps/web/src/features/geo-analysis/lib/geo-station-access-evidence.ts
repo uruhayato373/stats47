@@ -1,3 +1,5 @@
+import { to5DigitPrefCode } from "@stats47/area";
+
 import type {
   GeoAnalysisEvidenceManifest,
   GeoStationAccessMeshCell,
@@ -72,7 +74,7 @@ export function parseGeoStationAccessPrefDetail(
   if (
     value.schemaVersion !== 1 ||
     value.slug !== 'population-station-access' ||
-    value.areaCode !== `${expectedPrefCode2}000` ||
+    value.areaCode !== to5DigitPrefCode(expectedPrefCode2) ||
     typeof value.areaName !== 'string' ||
     typeof value.generatedAt !== 'string' ||
     value.accessRadiusMeters !== 800 ||

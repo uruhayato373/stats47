@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
+import { to2DigitPrefCode } from '@stats47/area';
 import {
   Table,
   TableBody,
@@ -196,7 +197,7 @@ export async function GeoCrossAnalysisArticle({
                       <TableCell className="font-medium">
                         <Link
                           className="text-primary underline"
-                          href={`/geo/${slug}/${row.areaCode.slice(0, 2)}/overlap`}
+                          href={`/geo/${slug}/${to2DigitPrefCode(row.areaCode)}/overlap`}
                         >
                           {row.areaName}の地図
                         </Link>

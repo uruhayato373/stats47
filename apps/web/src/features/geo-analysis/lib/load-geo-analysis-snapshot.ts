@@ -1,5 +1,6 @@
 import 'server-only';
 
+import { PREFECTURE_AREA_CODE_RE } from '@stats47/area';
 import { SNOW_DESIGNATION_SOURCE } from '@stats47/data-configs/theme-catalog';
 import { FLOOD_ARCHIVES, parseGeoLandslideSnapshot, type GeoAnalysisEvidenceManifest } from '@stats47/gis';
 import { fetchFromR2AsJson } from '@stats47/r2-storage/server';
@@ -78,7 +79,7 @@ export function parseGeoAnalysisSnapshot(
     if (
       !isRecord(row) ||
       typeof row.areaCode !== 'string' ||
-      !/^(0[1-9]|[1-3][0-9]|4[0-7])000$/.test(row.areaCode) ||
+      !PREFECTURE_AREA_CODE_RE.test(row.areaCode) ||
       typeof row.areaName !== 'string' ||
       typeof row.rank !== 'number' ||
       !Number.isInteger(row.rank) ||

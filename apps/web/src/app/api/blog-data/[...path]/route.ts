@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
+import { blogR2Key } from "@/features/blog/r2-key";
+
 import { NO_STORE_CACHE_HEADERS, PUBLIC_DATA_CACHE_HEADERS } from "@/lib/cache-policy";
 
 const isDev = process.env.NODE_ENV === "development";
@@ -49,7 +51,7 @@ function toBlogDataKey(segments: string[]): string | null {
   if (!/^[\w.-]+\.(?:json|svg)$/.test(file)) return null;
   if (file.includes("..")) return null;
 
-  return `app/blog/${slug}/data/${file}`;
+  return blogR2Key(slug, `data/${file}`);
 }
 
 function getContentType(key: string): string {
