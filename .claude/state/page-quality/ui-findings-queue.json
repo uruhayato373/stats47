@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-05T06:36:10.907Z",
+  "generatedAt": "2026-10-05T07:26:52.705Z",
   "auditAt": "2026-10-03T20:37:21.080Z",
   "findings": [
     {
@@ -384,14 +384,14 @@
       "metric_key": "a11y_violations",
       "severity": "warning",
       "detail": "a11y_violations = 1 (閾値 <= 0)",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-09-27",
       "last_seen": "2026-10-04",
-      "fixed_at": null,
+      "fixed_at": "2026-10-05T07:26:52.698Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "GeoLandslideAudit の 2 表に Table scrollRegion を付与 (axe scrollable-region-focusable)。localhost 390/1280px で axe 違反 0 を確認"
     },
     {
       "key": "machine|https://stats47.jp/areas/07000|degraded_images",

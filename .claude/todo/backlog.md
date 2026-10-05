@@ -412,15 +412,6 @@ updated: 2026-09-29
 - **禁止・停止条件**: 入力データと背景地図は `geo-analysis-standards.md` の商用公開 Gate と `license-policy.ts` で商用可を確かめたものだけ使う (Google マップ等は使わない)。公開はサイト領域の月 15〜20 本の上限内で行う。基準を下回ったら note は作らず、このカードを削除する。
 - **完了条件**: 3 本が公開され、判定日に基準との比較結果と note 制作の Go / Stop がこのカードか月次レビューに記録されている。
 
-### [REVIEW-ROUTE-IMPROVEMENTS-IDS-01] レビューの申し送り検査が improvements.md の施策 ID を実在 ID と認識しない
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:node .claude/scripts/management/check-review-cadence.mjs] [起票:2026-10-02] [領域:管理]
-
-- **経緯 (2026-10-02 実測)**: 2026-09 の月次レビュー作成時に `loadIdIndex` (`.claude/scripts/management/lib/review-cadence.mjs`) を直接呼んで確かめたところ、
-  backlog の `### [ID]` 見出しは認識するが、improvements.md の表行の ID (`AFF-IMPRESSION-ROUTING-01` / `DATA-ESTAT-FETCH-01` / `R2-STORAGE-01` など) は false だった。
-  monthly-review / weekly-review の SKILL は「カード ID は backlog / improvements に実在するもの」と書いているので、手順と検査が食い違っている。
-- **影響**: 改善施策へ申し送りを結ぶと `unknown-id` で error になるため、レビューは施策 ID を避けて `定常` や近いカードへ迂回させている (2026-09 の月次レビューで実際に迂回した)。
-- **次**: `parseBacklog` とは別に improvements.md の表の 1 列目を ID として読む。テストに「表行の ID は ok・存在しない ID は unknown-id」の 2 例を足す。
-- **完了条件**: improvements.md の表行 ID を申し送りの行き先に書いたレビューで `check-review-cadence.mjs` が exit 0 になり、存在しない ID は従来どおり error になる。
 
 ### [BLOG-REMEDIATION-PROOF-01] ブログ品質是正キューで 1 本をゲートと critic まで通すか、是正を計画から外すかを決める
 タグ: [コンテンツ品質] [種類:意思決定] [実行:対話] [起票:2026-10-02] [領域:サイト]
@@ -525,13 +516,6 @@ updated: 2026-09-29
 - **停止条件**: 3 件連続の失敗、本文・価格・有料/試し読み境界の変化、更新後のタグ集合が承認済みと一致しない場合はその記事で止まる。note は大文字小文字を既存タグに合わせて書き換え、ギリシャ文字などは黙って落とす (検査で除外済み)。
 - **完了条件**: `--audit-only` で 286 件すべてが compliant。
 
-### [AREA-PROFILE-JSON-RETIRE-01] 県の profile.json の生成をやめる (読み手 0 になったため)
-タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-09-28] [領域:データ]
-
-- **経緯**: `AREA-HIGHLIGHTS-SSOT-01` (2026-09-28 完了・本番で東京都の「特徴」と総人口 14,178,000 を確認) で Web と SNS は `databook.json` (schemaVersion 2) と共通の選定関数へ移った。
-  `app/areas/<code>/profile.json` はオーナー判断で「読み手移行後に廃止」とした。あわせて市区町村の「特徴」一覧は極性情報が無く色がすべて中立。
-- **次**: `git grep -n "profile.json\|areaProfileKeyPath"` で読み手 0 を確認してから生成 (`packages/area-profile/src/exporters/area-profile-snapshot.ts`) と sync-snapshots の task を外す。
-- **完了条件**: profile.json の生成と読み手が 0 件、sync-snapshots の area-profile task が短くなる。
 
 ### [KDP-K-S1-08-REUPLOAD-01] 公開中のKindle S1全12冊へ承認済みポップ表紙を反映する
 タグ: [収益化] [種類:制作] [実行:ユーザー] [起票:2026-09-28] [領域:商品]
@@ -736,42 +720,7 @@ updated: 2026-09-29
 - 生データ: `.claude/state/metrics/page-quality/{latest.json,LATEST.md,snapshots/2026-09-15.json}`、
   管理画面 `/quality/page-audit`。
 
-### [GSC-COVERAGE-AUTOMATION-VERIFY-01] 是正キューの自動観測と登録済み件数の記録が本番 CI で動くことを確認する
 
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:node -e "const q=require('./.claude/state/gsc/coverage-remediation-queue.json');process.exit(q.queue.some(e=>e.inspection)?0:1)"] [起票:2026-09-24] [期日:2026-10-05] [領域:サイト]
-
-- **背景 (2026-09-23 実測)**: CI の URL Inspection (`--limit 500`) は検索実績上位 500 件だけで枠が埋まり、是正キュー
-  pending 1,133 件を 7 日間 1 件も検査していなかった。キューは毎週 export から作り直すため登録された URL は記録なく消え、
-  `done` は 0 件。登録済み件数は export の概要グラフにしか無いのに ingest が読まず、`coverage-totals-history.csv` の
-  `indexed-submitted` 列は 4 週とも空。search-growth は最新ファイルを mtime で選び、CI checkout で 09-15 の古い CSV を掴んで
-  月曜の GSC 運用サイクル監査を FAIL にしていた。4 点を修正した (枠の割合配分・`--sync-inspection`・概要グラフ取込・名前順選択)。
-- **次**: ① workflow 変更は main 反映後の schedule から効く。反映後の日次 CSV で是正キュー URL が約 250 件/日含まれること。
-  ② 次の週次 (日曜) 後に `coverage-totals-history.csv` の `indexed-submitted` が埋まること。空なら ingest の警告
-  「概要グラフに登録済み件数が無い」をログで確認し、実 export の概要 ZIP の列名を `INDEXED_HEADERS` に足す。
-  ③ 月曜の `gsc-operations-cycle-weekly` で `search-growth-sources` が PASS になること。
-  ④ 判断が要る pending が `GSC-COV-*` カードとして自動起票され、`backlog-loop-daily` が gate
-  (`build-coverage-queue.mjs --assert-handled`) を通して閉じ、是正キューの該当 URL が pending でなくなること。
-  main 反映前はワークフローの変更が効かないので、このカードはループに拾わせない (`[実行:対話]`)。
-- **停止条件**: 検査枠を増やすために API quota (2,000/日) の 75% を超えない。Indexing API は使わない。
-- **完了条件**: 上の検証コマンドが exit 0、`indexed-submitted` が 1 週以上記録され、運用サイクル監査の `search-growth-sources` が PASS。
-
-### [UI-REVIEW-LOOP-VERIFY-01] 週次 UI 検査のループが修正と本番確認まで CI で一巡することを確かめる
-
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:node -e "const q=require('./.claude/state/page-quality/ui-findings-queue.json');process.exit(q.findings.some(f=>f.status==='fixed'||f.resolved_by==='weekly-audit')?0:1)"] [起票:2026-09-24] [期日:2026-10-12] [領域:サイト]
-
-- **背景**: 2026-09-24 に検査 → 起票 → 修正 → 本番確認のループを入れた (`.claude/rules/page-quality-standards.md`「UI 指摘のループ」)。
-  同日の週次 (run 35966300757) で `UI-FIX-THEME` / `UI-FIX-PREFECTURE-DETAIL` / `UI-FIX-OTHER` の 3 枚が起票され、
-  キューと backlog が develop に commit された (`03a02d016`)。起票までは CI で確認済み。
-- **次**: ① `backlog-loop-daily` が UI-FIX カードを処理し、`ui-findings-queue.json` への `--mark-*` が develop に commit
-  されること (1 run 2 件・先行する sweep カードがあるため数日かかる)。② 直した指摘がリリース後の週次で done
-  (`resolved_by: weekly-audit`) になるか、残れば pending に戻って再起票されること。
-- **停止条件**: 本番 deploy はオーナー承認まで行わない。
-- **注意 (2026-09-24)**: 対話セッションで `CAROUSEL-ARROW-OVERLAP-01` / `THEME-MAP-ATTRIBUTION-CLIP-01` / `A11Y-SERIOUS-01` 担当の machine 指摘を `--mark-fixed` にした。検証コマンドの `status==='fixed'` はこれでも真になるので、2026-09-24 分の `UI-FIX-*` 3 枚も、ループが 9/23・9/24 の 2 晩とも verify で落ちて処理できなかったため対話で直して閉じた (原因は verify が過去の completed を見て「削除し忘れ」と誤判定していたこと。2026-09-25 に最新 attempt だけを見るよう修正)。ループの実証は次の週次 UI 検査が起票する `UI-FIX-*` で行う。
-- **完了条件**: 検証コマンドが exit 0 (fixed か週次で確認済みの指摘が 1 件以上)、かつループの commit に `.claude/state/page-quality` が含まれている。
-- **2026-09-27 の週次から対象を拡大 (2026-09-25)**: ブラウザ検査・撮影が代表URL 12 件 + データの型の違い 32 件の 44 ページになり、
-  Claude の目視は約 20 ページ (variants は 4 週で 1 巡)。初回 run で確認すること: ① 44 ページ × 7 幅の撮影が制限時間 (120 分) 内に終わる
-  ② review step が 30 分・200 ターン内で終わり、`ui-review-latest.json` に `reviewedPages` が入る ③ variants の指摘が
-  `UI-FIX-<種類>-<違い>-<日付>` で起票される。
 
 
 ### [AFF-STOCKTAKE-RECONCILE-01] 提携棚卸しの不明案件と既存在庫の不一致を再照合する
@@ -987,6 +936,9 @@ updated: 2026-09-29
 - **要確認 (未実測)**: `codex/host.mac.toml` の filesystem / notebooklm パスは仮置き (`/Users/kazu/...`)。
   `local-resources.mjs` の darwin `ps` 分岐と `assertNoLinks` の `/private/tmp` realpath は実機未検証。
   `.claude/settings.local.json` の seed (`stats47.local.mac.json`) の許可リストも初回で調整する。
+- **現在地 (2026-10-05 Mac 実測)**: 検証コマンド 2 本は exit 0、memory / hooksPath / `~/tmp` / gh 認証は済み。
+  残りは dotfiles の clone と `link.mjs --host mac`、`local-resources.sh install`、Windows 側との MCP 名の突合。
+  実測は `local-environment.md`「2 台で同じ形にする手順」に追記済み。
 - **完了条件**: Mac 側の `claude mcp list` / `codex mcp list` の名前集合が Windows と一致し、
   `local-environment.md` に Mac 節の実測が 1 つ以上追記されている。
 
@@ -1366,21 +1318,6 @@ updated: 2026-09-29
 - **完了条件**: 上記がコミット済みで本番デプロイされ、本番のブログ記事でランキングカード (地図 + 上位 3 県) と新しい callout が表示され、
   GA4 に `nav_surface=blog_ranking_card` の `nav_click` が届いている。
 
-### [UI-FIX-PREFECTURE-DETAIL-20260927] UI 是正: prefecture-detail の週次 UI 検査の指摘 4 件を直す
-
-タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled .claude/state/page-quality/backlog-batches/UI-FIX-PREFECTURE-DETAIL-20260927.txt] [起票:2026-09-27] [領域:サイト]
-
-- **自動起票**: 週次のページ品質監査 (`page-quality-audit-weekly.yml`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `.claude/state/page-quality/backlog-batches/UI-FIX-PREFECTURE-DETAIL-20260927.txt`、状態は `.claude/state/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
-- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/prefecture-detail-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/prefecture-detail-desktop-1440.png)。検査の詳細は `.claude/state/metrics/page-quality/LATEST.md`。
-- **対象**:
-  - `machine|https://stats47.jp/areas/01000|a11y_violations` — a11y_violations = 1 (閾値 <= 0)
-  - `machine|https://stats47.jp/areas/02000/landslide-exposure|a11y_violations` — a11y_violations = 1 (閾値 <= 0)
-  - `machine|https://stats47.jp/areas/13000|a11y_violations` — a11y_violations = 1 (閾値 <= 0)
-  - `machine|https://stats47.jp/areas/47000|a11y_violations` — a11y_violations = 1 (閾値 <= 0)
-- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。
-- **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@.claude/state/page-quality/backlog-batches/UI-FIX-PREFECTURE-DETAIL-20260927.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
-- **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
-- **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
 
 ### [UI-FIX-BLOG-ARTICLE-20260927] UI 是正: blog-article の週次 UI 検査の指摘 10 件を直す
 
@@ -2026,23 +1963,6 @@ updated: 2026-09-29
 - **次**: 週次結果から欠落の全リストを出し、`editorial/<code>.ts` の特産品と照合して画像を用意するか、画像を持たない表示に統一する。
 - **完了条件**: 週次監査の `degraded_images` が 0、または画像を出さない設計に決めて代替表示を正式化している。
 
-### [METRIC-ACUPUNCTURIST-RATE-UNIT-01] 「人口10万対はり師数」の値が実数になっている
-
-タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-09-23] [領域:データ]
-
-- **owner**: data-ingester
-- **実測 (2026-09-23)**: `acupuncturist-rate` は title が「人口10万対はり師数」、unit が「人」だが、R2 `app/ranking/acupuncturist-rate/values.json` (2020) の値は東京都 22,314・大阪府 16,049・鳥取県 277 で、人口 10 万人あたりではなく実数。config は `statsDataId: 0004026940` / `cdCat01: 100` / `conversionFactor: 1` で、`normalizationOptions` に「人/10万人」があるのに基底値は正規化されていない。ランキングページもこの名前で実数を並べている。IG 地域カルーセルの試作で東京の「全国 1 位」として拾われて発覚した。
-- **同種 (2026-09-23 追記)**: `intellectual-crime-per-100k` (知能犯認知件数) も key は 10 万人あたりだが、R2 の 2023 年値は東京都 7,336・大阪府 5,391・福井県 130 で実数の桁。X 投稿の候補選定で発覚し、投稿からは外した。 → 2026-09-25 確認: config の title は「知能犯認知件数」・unit「件」で実数と一致し、画面表示は正しい。key 名だけが per-100k で、変えると URL が変わるため本カードの対象外 (X 投稿で「10 万人あたり」と書かないことだけ注意)。
-- **原因と config 修正 (2026-09-24)**: 0004026940 で config が指していた cdTab=0120 は「はり師数」の実数 (東京都 22,314人)。人口10万対の率は cdTab=0160 (東京都 158.8、1位大阪府 181.6)。同じ誤りが柔道整復師数 (0140→0180) と看護師数 0004026841 (0270→0310) にもあった。3 config を率の列へ直し、二重割りを防ぐため「人口10万人あたり」の換算オプションを外し、seoTitle から古い順位の数値を外した。犯罪 3 件・火災死亡者数は title が実数名で値と一致しているので対象外。`validate:config` / `validate:years` / type-check / vitest 971 件 exit 0。
-- **進捗 (2026-09-25 07:15 JST 時点・別 PC で続きをやる人向け)**:
-  - 済: config を率の列へ修正 (main 反映済み、PR #1024) / R2 再取り込み (data-refresh run 36056848146 success。はり師 1位大阪府 181.6・柔道整復師 1位大阪府 105.5・看護師 1位高知県 1,623.4、東京都の看護師 854.6 は商品パック値と一致) / seoTitle・seoDescription を新しい値で再作成 (PR #1025 で main 反映、item 再生成 run 36063161344 success、本番 title で確認) / ランキング AI 解説を 3 件再生成 (audit blocker 0・critic PASS、publish-ai-content run 36061846323 success)。
-  - 実行中: `sync-snapshots.yml` only=master (run 36063838343、06:49 JST 開始)。他ページの「関連ランキング」カードが読む `app/category/<key>/items.json` の `top1` がまだ旧実数 (例: 柔道整復師・看護師ページに「1位 東京都 22,314人」) なので、その再生成と、同じ run 内の「変更があった ranking の OGP / カード画像」再生成・known/sitemap 再生成を待っている。
-- **次 (別 PC で再開したら)**:
-  1. `gh run view 36063838343` で success を確認する。failure / cancelled なら `gh workflow run sync-snapshots.yml --ref main -f only=master -f dry_run=false` を再実行する (r2-write の同時実行グループで待機中の run は後続に取り消されるので、他の R2 書き込み workflow と同時に投げない)。
-  2. この run が「keys changed」で PR を作っていたら中身を確認してマージする。
-  3. 確認: `curl -s "https://storage.stats47.jp/app/category/socialsecurity/items.json" | grep -o '"rankingKey":"acupuncturist-rate"[^}]*top1[^}]*}'` が大阪府 181.6 を返し、`curl -s https://stats47.jp/ranking/judo-therapist-rate | grep -c '22,314'` と `.../nurses-per-100k-population` が 0 になること。3 指標の OGP (`https://storage.stats47.jp/app/ranking/<key>/ogp/ogp.png`) も新しい順位で描かれていること。
-  4. すべて満たしたらこのカードを削除する。
-- **完了条件**: title・unit・値の意味が一致し、ランキングページと seoTitle が正しい。
 
 ### [METRIC-YEARFORMAT-KAKEI-01] 家計調査由来 metric の yearFormat (暦年/年度) と surveyId を揃える
 
@@ -2118,35 +2038,6 @@ updated: 2026-09-29
 - **禁止**: 候補270件を機械判定だけで一括変更しない。テスト契約を弱めない。ユーザー承認なしにdeploy・R2 write・note公開を実行しない。
 - **完了条件**: ブログのPC/mobile画像が全対象で生成・目視・公開確認済み、note既存画像の差替えと監査が完了、関連性候補が全件レビュー済み、今回変更に属するwebテストがgreenである。
 
-### [ESTAT-CATALOG-01] e-Statメタデータ完全カタログの初回バックフィルと旧発見スクリプトの退役
-
-タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:node --import tsx .claude/scripts/estat/catalog.mjs search 人口] [起票:2026-09-16] [領域:データ]
-
-- **owner**: estat-researcher (catalog検索の消費側配線) / r2-publisher (初回backfillのdispatch)
-- 2026-09-16、`.claude/scripts/estat/catalog.mjs` (run/pull/search) + `estat-catalog-monthly.yml`
-  (月次cron・専用ブランチpushトリガー) を実装済み。R2 `estat-catalog/` へ全国/都道府県/市区町村の
-  statsDataId一覧とgetMetaInfo要約 (年次・エリア種別・47県判定) を月次で保有する。
-  設計: `docs/02_実装計画/48_e-Statカタログ実装仕様.md`。単体テスト19件 (`npm run estat:catalog:test`) PASS。
-  **未実施**: 実e-Stat APIに対する初回runとR2 push (APP_IDはCI専任のためローカル未検証)。
-- **次 (実行順)**:
-  1. `estat-catalog-run` ブランチへpushしCIで初回run (`--dry-run`でL1件数を先に確認 → 全国の実件数を見て
-     `meta-scope`に1を足すか判断)
-  2. 時間予算150分では1回で終わらない (県+市区町村≈12,000表)。pendingが0になるまで3〜4回push
-  3. `curl https://storage.stats47.jp/estat-catalog/manifest.json` で反映を実測
-  4. `.claude/skills/estat/{search-estat,inspect-estat-meta}/SKILL.md` と
-     `.claude/agents/{estat-researcher,theme-researcher,survey-curator}.md` にcatalog検索を先に引く1行を追記
-  5. 上記が安定稼働したら旧発見スクリプト3系統を退役: `discover-prefecture-candidates.mjs` +
-     `discover-estat-candidates.yml` + git内 `prefecture-candidates.json` (3.1MB・LARGE_FILE例外) /
-     `estat-fetch-meta.yml` / `estat-city-discovery.json` (いずれもcatalogの`index/tables/`から導出可能)
-     → 2026-09-16 にオーナー指示で 1ヶ月待ちを前倒しし退役済み (manifest metaPending 0 を実測): `estat-fetch-meta.yml` +
-     branch `estat-meta-run` + `proof-batch-statsids.json`、`discover-estat-candidates.yml` + branch `estat-discovery-run` +
-     `discover-prefecture-candidates.mjs` + `prefecture-candidates.json` (読み手ゼロ)、`estat-city-discovery.json`
-     (読み手 2 件のうち estat-researcher は `search --collect-area 3` へ配線、estimate-city-data-size.mjs は D1 前提のため同日削除)。手順5 は完了
-  6. `ssds-candidates.json`をcatalog派生に置換、find-metricsに未登録候補の索引を追加
-- **完了条件**: manifestの`collectAreas.{2,3}.metaPending`が0、consumer 3件の配線完了、旧スクリプト退役
-  (旧スクリプトの退役は新カタログが最低1ヶ月安定稼働してから)
-- **禁止**: 全国(collectArea=1)の一律`--meta-scope 1`実行 (推定20万表超・時間予算超過のリスク。
-  必ず実測件数を見てから判断)
 
 ### [THEME-SELECTION-BACKFILL-01] ThemeCatalogの選定根拠(selection)未記入540件を夜間の無人バッチで白書・公式統計から裏付ける
 
@@ -2778,6 +2669,16 @@ API で取れる指標と画面でしか見られない指標を分け、自動�
 タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-09-27]
 
 doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-09-25 の手書きメモ・vault dairy/2026-09-25）
+
+### [ESTAT-CATALOG-SSDS-DERIVE-01] `ssds-candidates.json` を e-Stat カタログから導出し、find-metrics に未登録候補の索引を足す
+
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:node --import tsx .claude/scripts/estat/catalog.mjs search 人口] [起票:2026-10-05] [領域:データ]
+
+- **経緯**: `ESTAT-CATALOG-01` の完了時 (2026-10-05) に残した手順 6。カタログは R2 `estat-catalog/manifest.json` で
+  都道府県 5,884 表・市区町村 3,968 表の `metaPending` が 0、消費側 5 ファイルの配線と旧発見スクリプトの退役は済んでいる。
+- **次**: git 内の `.claude/state/estat/ssds-candidates.json` を catalog の `index/tables/` から再生成する形に置き換え、
+  find-metrics に「未登録の候補」を引ける索引を足す。読み手を `git grep ssds-candidates` で洗い出してから進める。
+- **完了条件**: `ssds-candidates.json` が catalog 派生の生成物になり (手編集の入口が無い)、find-metrics で未登録候補が 1 件以上引ける。
 
 ## 🟢 低 — 時期未定・条件付き (trigger は本文に)
 

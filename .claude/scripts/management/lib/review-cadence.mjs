@@ -27,7 +27,9 @@ export const WIRING_PATH = ".claude/config/review-wiring.json";
 export const LOOKBACK_WEEKS = 10;
 export const LOOKBACK_MONTHS = 3;
 const TODO_FILES = [".claude/todo/backlog.md", ".claude/todo/improvements.md"];
+const IMPROVEMENTS = ".claude/todo/improvements.md";
 const EXPERIMENTS = ".claude/state/experiments.json";
+const BACKLOG_LEDGER = ".claude/state/backlog-loop/ledger.json";
 
 const CARD_ID = /^[A-Z][A-Z0-9]*(?:-[A-Z0-9]+)+$/;
 const EXP_ID = /^EXP-\d+$/;
@@ -101,6 +103,16 @@ export function listReviews(root, conf) {
 export function loadIdIndex(root) {
   const ids = new Set();
   for (const rel of TODO_FILES) for (const c of parseBacklog(readText(root, rel) ?? "")) if (c.id) ids.add(c.id);
+  // improvements.md の施策は `### [ID]` 見出しではなく表の 1 列目に ID を持つ
+  for (const line of (readText(root, IMPROVEMENTS) ?? "").split("\n")) {
+    const m = line.match(/^\|\s*([A-Z0-9]+(?:-[A-Z0-9]+)+)\s*\|/);
+    if (m) ids.add(m[1]);
+  }
+  // 完了して backlog から消えたカードも行き先として有効 (ゲート証拠付きで閉じた ID は架空の ID ではない)
+  const ledger = readText(root, BACKLOG_LEDGER);
+  if (ledger) {
+    for (const [id, item] of Object.entries(JSON.parse(ledger).items ?? {})) if (item?.status === "completed") ids.add(id);
+  }
   const exp = readText(root, EXPERIMENTS);
   if (exp) {
     const parsed = JSON.parse(exp);

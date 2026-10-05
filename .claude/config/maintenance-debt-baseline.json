@@ -70,7 +70,6 @@
     "UNBOUNDED_LEGACY:apps/web/src/middleware.ts:* SSOT は `@/config/legacy-category-keys` に集約し、data-configs CATEGORIES との一致は": 1,
     "UNBOUNDED_LEGACY:apps/web/src/middleware.ts:// /dashboard/* (legacy redirect でカバーされない亜種を捕捉)": 1,
     "UNBOUNDED_LEGACY:packages/ai-content/src/types/snapshot.ts:/** @deprecated aiContentKeyPath を使用してください */": 2,
-    "UNBOUNDED_LEGACY:packages/area-profile/src/types/snapshot.ts:/** @deprecated areaProfileKeyPath を使用してください */": 2,
     "UNBOUNDED_LEGACY:packages/category/README.md:### Legacy Tables (Deprecated)": 1,
     "UNBOUNDED_LEGACY:packages/data-configs/scripts/generate-theme-catalog.ts:* 未登録テーマ (legacy) は触らない。": 1,
     "UNBOUNDED_LEGACY:packages/data-configs/src/types.ts:/** legacy: display にも normalizationOptions が入っている metric あり */": 1,

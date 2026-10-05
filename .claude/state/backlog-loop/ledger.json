@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-01T20:13:03.008Z",
+  "updatedAt": "2026-10-05T07:29:43.393Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -5427,6 +5427,246 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-10-01T20:13:03.008Z"
+    },
+    "REVIEW-ROUTE-IMPROVEMENTS-IDS-01": {
+      "class": "test-fix",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-05T07:29:43.246Z",
+          "runId": null,
+          "model": "claude-opus-5-5",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/management/__tests__/review-cadence.test.mjs"
+            ],
+            "pass": true
+          },
+          "evidence": "新テスト(improvements.md表行ID=ok/不在ID=unknown-id)は修正前red(13 pass/1 fail)・修正後14 pass。実ファイルでAFF-IMPRESSION-ROUTING-01/DATA-ESTAT-FETCH-01/R2-STORAGE-01=true、NOPE-99=false",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-05T07:29:43.246Z"
+    },
+    "AREA-PROFILE-JSON-RETIRE-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-05T07:29:43.271Z",
+          "runId": null,
+          "model": "claude-opus-5-5",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx turbo run type-check --filter=web --filter=@stats47/area-profile",
+              "npx vitest run --root packages/area-profile",
+              "npx vitest run --root packages/r2-storage src/lib/operations/__tests__/r2-reader-contracts.test.ts",
+              "node .claude/scripts/lib/check-maintenance-debt.cjs --ratchet-check"
+            ],
+            "pass": true
+          },
+          "evidence": "読み手0を契約テスト(Web は県の profile.json を読まない)とgit grepで確認。exporter/reader/types/snapshot.ts削除、export-snapshot.tsはdatabookのみ、r2-reader-contractsからarea-profile除去、debt baseline -1",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-05T07:29:43.271Z"
+    },
+    "GSC-COVERAGE-AUTOMATION-VERIFY-01": {
+      "class": "misconception-close",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-05T07:29:43.295Z",
+          "runId": null,
+          "model": "claude-opus-5-5",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node -e coverage-remediation-queue some(e=>e.inspection)"
+            ],
+            "pass": true
+          },
+          "evidence": "検証コマンドexit 0。coverage-totals-history.csvのindexed-submittedがW39/W40に6469。operations-cycle-LATEST(2026-W39)でsearch-growth-sources PASS",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-05T07:29:43.295Z"
+    },
+    "UI-REVIEW-LOOP-VERIFY-01": {
+      "class": "misconception-close",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-05T07:29:43.319Z",
+          "runId": null,
+          "model": "claude-opus-5-5",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node -e ui-findings-queue some(status fixed|resolved_by weekly-audit)"
+            ],
+            "pass": true
+          },
+          "evidence": "検証コマンドexit 0。queueにdone/weekly-audit 11件。週次commit a652a09d1(10-03)/0d7103bbd(09-26)が.claude/state/page-qualityを含む",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-05T07:29:43.319Z"
+    },
+    "METRIC-ACUPUNCTURIST-RATE-UNIT-01": {
+      "class": "misconception-close",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-05T07:29:43.344Z",
+          "runId": null,
+          "model": "claude-opus-5-5",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "curl stats47.jp/ranking/{acupuncturist-rate",
+              "judo-therapist-rate",
+              "nurses-per-100k-population} | grep -c 22",
+              "314"
+            ],
+            "pass": true
+          },
+          "evidence": "本番3ページで22,314は0件、titleは1位大阪府181.6人/大阪府105.5人/高知県1,623.4人。category/socialsecurity items.jsonのtop1は率。OGPは10-01〜10-03に再生成(200)",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-05T07:29:43.344Z"
+    },
+    "ESTAT-CATALOG-01": {
+      "class": "misconception-close",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-05T07:29:43.369Z",
+          "runId": null,
+          "model": "claude-opus-5-5",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --import tsx .claude/scripts/estat/catalog.mjs search 人口",
+              "curl storage.stats47.jp/estat-catalog/manifest.json"
+            ],
+            "pass": true
+          },
+          "evidence": "manifest collectAreas.2/3 metaPending=0(5884/3968表)。consumer 5ファイルにcatalog配線済み。旧発見スクリプト退役済み",
+          "failReason": null,
+          "followUps": [
+            "ESTAT-CATALOG-SSDS-DERIVE-01"
+          ]
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-05T07:29:43.369Z"
+    },
+    "UI-FIX-PREFECTURE-DETAIL-20260927": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-05T07:29:43.393Z",
+          "runId": null,
+          "model": "claude-opus-5-5",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled .claude/state/page-quality/backlog-batches/UI-FIX-PREFECTURE-DETAIL-20260927.txt"
+            ],
+            "pass": true
+          },
+          "evidence": "残1件はaxe scrollable-region-focusable(390px)。GeoLandslideAuditの2表にTable scrollRegion付与、localhost 390/1280pxでaxe違反0・region tabIndex=0を確認。4件すべて処理済み",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-05T07:29:43.393Z"
     }
   }
 }

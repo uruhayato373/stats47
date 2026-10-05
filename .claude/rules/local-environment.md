@@ -339,7 +339,13 @@ git checkout -- AGENTS.md .claude/design-system/SSOT.md
   `codex/base.toml` + `host.<os>.toml` を**セクション単位でマージ** (Codex デスクトップが書く
   `[projects.*]` / `[plugins.*]` / runtime パスを壊さない)。マシン固有の許可と `additionalDirectories` は
   gitignore 済みの `.claude/settings.local.json` に置く。
-- Mac 固有の罠はまだ実測が無い。最初に Mac で動かしたときに本節へ追記する。
+- **Mac の実測 (2026-10-05・arm64 / Node v20.19.0)**: memory link と Codex mirror の `--check` はどちらも exit 0、
+  `core.hooksPath=.husky`・`~/tmp` あり・`gh auth status` は keyring で認証済み (会社 PC と違いプロキシの罠は無い)。
+  一方 `~/dotfiles` は未 clone で、`~/.claude/settings.json` は symlink ではなく通常ファイルのまま。
+  launchd には `com.stats47.*` の個別ジョブ 6 本 (scout-asp-weekly / x-verify-posted / measurement-session-refresh /
+  threads-topup / fetch-note-metrics / sns-image-review) があるが、`local-resources.sh install` の掃除ジョブは未登録。
+  Mac の `claude mcp list` は cloudflare-docs / chrome-devtools / seo-observability / codex (+ claude.ai コネクタ)。
+  dotfiles の手順を通すまでは Windows との名前集合の一致は確認できない (`MAC-FIRST-RUN-01`)。
 
 ## dev サーバー起動 — ルート `npm run dev` を使わない
 

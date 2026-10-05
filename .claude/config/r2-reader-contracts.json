@@ -47,15 +47,6 @@
       "owner": "ranking-ui-manager"
     },
     {
-      "id": "area-profile",
-      "sourceFiles": ["packages/area-profile/src/repositories/read-area-profile-snapshot.ts"],
-      "criticality": "high",
-      "runtimeParsers": ["parseAreaProfileData"],
-      "missingBehavior": "no-data",
-      "fallback": "null on 404; throw on corrupt/source unavailable",
-      "owner": "area-curator"
-    },
-    {
       "id": "area-databook",
       "sourceFiles": ["packages/area-profile/src/repositories/read-area-databook-snapshot.ts"],
       "criticality": "high",

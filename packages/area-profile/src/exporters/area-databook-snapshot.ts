@@ -150,7 +150,7 @@ function buildHighlightBase(
 /**
  * 県データブック snapshot を R2 `app/areas/{areaCode}/databook.json` に保存する。
  *
- * 完全DBレス (area-profile-snapshot と同一パターン)。ページはこの 1 ファイルを 1 read するだけで
+ * 完全DBレス (R2 直接計算・使い捨て)。ページはこの 1 ファイルを 1 read するだけで
  * ranked-kpi / gender-paired グリッドを描画できる (estatParams ライブ取得は推移チャートのみ)。
  */
 export async function exportAreaDatabookSnapshot(): Promise<ExportAreaDatabookSnapshotResult> {

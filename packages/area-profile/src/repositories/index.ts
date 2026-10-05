@@ -1,3 +1,3 @@
 // 完全DBレス (Phase F): D1 area_profiles の repository は全削除。
-// R2 リーダ readAreaProfileFromR2 は server.ts から直接 export している。
+// 県の profile.json リーダは廃止済み (AREA-PROFILE-JSON-RETIRE-01)。
 export {};
