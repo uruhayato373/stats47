@@ -43,7 +43,7 @@ npm run search-growth:status        # source freshness + candidate 件数
 npm run search-growth:next -- --limit 20      # 次にやる候補 (score 降順・決定的)
 npm run search-growth:triage        # 週次レビュー用の最大3件 (technical/content/measurement 各1)
 npm run search-growth:approve -- --candidate <id>   # 人間承認 (pending→approved。週2件・WIP≤5 を機械強制)
-npm run search-growth:dismiss -- --candidate <id> --reason "..."   # 却下 (理由を記録)
+npm run search-growth:dismiss -- --candidate <id> --reason "..."   # 却下 (理由を記録)。approved / in-progress (WIP) も理由必須で閉じられる
 npm run search-growth:measure -- --candidate <id>   # 候補の evidence + 14/28/56 日判定スケジュール
 npm run search-growth:all           # collect→normalize→analyze→report を順に
 npm run search-growth:test          # 全テスト (compliance / foundation / candidate / pipeline / mcp / triage)
