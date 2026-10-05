@@ -134,3 +134,5 @@
 - [feedback_note_draft_index_r2_path.md](feedback_note_draft_index_r2_path.md) — note-draft-index の r2_path は移送済みの印。有料ドラフトはそもそも公開R2へ移らず、派生PNG参照がMISSING_REFERENCEになるのでbaseline仮登録
 - [feedback_reply_in_japanese.md](feedback_reply_in_japanese.md) — 返答は常に日本語。長い作業の途中で英語に切り替わり何度も言い直させた (2026-09-30)
 - [feedback_note_hashtag_api_quirks.md](feedback_note_hashtag_api_quirks.md) — noteタグ: 同一秒タグは順不同(集合で照合)・大小文字を既存タグに書換・α等は黙って削除・限定公開無料記事はPUT本文が全文でライン位置が公開範囲
+- [feedback_workflow_policy_comment_import.md](feedback_workflow_policy_comment_import.md) — audit-workflow-policy はコメント内の `from "x"` も依存と数え SCRIPT_RUN_WITHOUT_INSTALL を誤検出する。共通モジュールの使用例は散文で書く
+- [feedback_help_flag_runs_script.md](feedback_help_flag_runs_script.md) — 自作スクリプトの多くは --help を無視して本処理を実行する (2026-10-06 に blog outbox を誤生成)。確認は node --check / tsc / import のみの 1 行で
