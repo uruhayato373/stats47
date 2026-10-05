@@ -6,9 +6,10 @@ import { fileURLToPath } from "node:url";
 import sharp from "sharp";
 
 import type { KindleBook, KindleCoverBackgroundAsset } from "./types";
+import { SITE } from "@stats47/data-configs";
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../../..");
-const DEFAULT_R2_BASE = "https://storage.stats47.jp";
+const DEFAULT_R2_BASE = SITE.r2PublicBaseUrl;
 
 function sha256(body: Buffer): string {
   return createHash("sha256").update(body).digest("hex");

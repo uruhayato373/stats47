@@ -1,4 +1,6 @@
 export * from "./types";
+// サイト識別子 SSOT の再 export (@stats47/types を直接依存に持たない product-factory 等向け)
+export { SITE } from "@stats47/types";
 export { resolveMetricSource } from "./source-for-entity";
 export { createMetric, type CreateMetricInput } from "./create-metric";
 export { METRICS_REGISTRY, getMetricConfig, listAllMetrics } from "./registry";

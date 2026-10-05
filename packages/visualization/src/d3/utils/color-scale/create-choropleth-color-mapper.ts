@@ -10,6 +10,7 @@ import { mapConfigToColorOptions } from '../convert-map-config';
 
 import type { ColorScaleOptions, VisualizationDataPoint } from "../../types";
 import type { MapVisualizationConfig } from '../../types/map-chart';
+import { DEFAULT_PREFECTURE_MAP_PROPS } from '../../constants/map-constants';
 
 /**
  * 地域コードから色を取得する関数を生成
@@ -23,7 +24,7 @@ export async function createChoroplethColorMapper(
   data: VisualizationDataPoint[]
 ) {
   const colorOptions = mapConfigToColorOptions(config, data);
-  const { noDataColor = "#e0e0e0" } = colorOptions;
+  const { noDataColor = DEFAULT_PREFECTURE_MAP_PROPS.noDataFillColor } = colorOptions;
 
   const dataMap = new Map((data as VisualizationDataPoint[]).map((d) => [d.areaCode, d.value]));
   const colorScale = await createColorScale(colorOptions);

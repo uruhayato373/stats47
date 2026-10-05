@@ -2,10 +2,12 @@ import React, { useMemo } from "react";
 import { AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
 import { scaleSequential } from "d3-scale";
 import { interpolateBlues, interpolateYlOrRd, interpolateGreens, interpolatePurples, interpolateOranges } from "d3-scale-chromatic";
-import { TILE_GRID_LAYOUT, type TileGridCell } from "@stats47/visualization";
+import type { TileGridCell } from "@stats47/visualization";
 import type { BarChartRaceFrame } from "@stats47/visualization/d3/BarChartRace";
 
 import { BRAND, COLOR_SCHEMES, FONT, type ThemeName } from "@/shared";
+import { SITE } from "@stats47/types";
+import { PORTRAIT_TILE_LAYOUT } from "../../utils/video-tile-layout";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -34,16 +36,8 @@ export interface BarChartRaceIntroProps {
 // Layout constants (1080x1920 portrait)
 // ---------------------------------------------------------------------------
 
-const REGION_OFFSETS: Record<number, { dx: number; dy: number }> = Object.fromEntries([
-  ...[36, 37, 38, 39].map((id) => [id, { dx: 1, dy: 1 }]),
-  ...[40, 41, 42, 43, 44, 45, 46, 47].map((id) => [id, { dx: 1, dy: 1 }]),
-]);
-
-const VIDEO_TILE_LAYOUT = TILE_GRID_LAYOUT.map((cell) => {
-  const offset = REGION_OFFSETS[cell.id];
-  if (!offset) return cell;
-  return { ...cell, x: cell.x + offset.dx, y: cell.y + offset.dy };
-});
+/** 動画用オフセット適用済みレイアウト (正典: src/shared/utils/video-tile-layout.ts) */
+const VIDEO_TILE_LAYOUT = PORTRAIT_TILE_LAYOUT;
 
 const GRID_MIN_X = Math.min(...VIDEO_TILE_LAYOUT.map((c) => c.x));
 const GRID_MAX_X = Math.max(...VIDEO_TILE_LAYOUT.map((c) => c.x + (c.w ?? 1)));
@@ -238,7 +232,7 @@ export const BarChartRaceIntro: React.FC<BarChartRaceIntroProps> = ({
             color: colors.muted,
             letterSpacing: 2,
           }}>
-            統計で見る都道府県
+            {SITE.name}
           </div>
         </div>
 

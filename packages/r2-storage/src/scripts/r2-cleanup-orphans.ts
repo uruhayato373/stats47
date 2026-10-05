@@ -11,10 +11,11 @@ import {
 } from "@aws-sdk/client-s3";
 
 import { assertR2WriteAllowed } from "./_assert-ci-write";
+import { SITE } from "@stats47/types";
 
 config({ path: path.resolve(__dirname, "../../../..", ".env.local") });
 
-const BUCKET = process.env.CLOUDFLARE_R2_BUCKET_NAME || "stats47";
+const BUCKET = process.env.CLOUDFLARE_R2_BUCKET_NAME || SITE.r2Bucket;
 const MANIFEST_PATH = path.resolve(__dirname, "../../../..", ".local/r2-manifest/_all.json");
 const DRY_RUN = process.argv.includes("--dry-run");
 

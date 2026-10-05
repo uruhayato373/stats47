@@ -7,6 +7,7 @@ import satori from "satori";
 import sharp from "sharp";
 import { notoSansJpBytes } from "../../generators/jp-font";
 import type { BookSeries, KindleCoverDesign, KindleCoverPalette } from "./types";
+import { SITE } from "@stats47/data-configs";
 
 /**
  * シリーズ別のカバー色。
@@ -324,7 +325,7 @@ async function buildPopCoverPng(
         },
         [
           node("div", { fontSize: "52px", fontWeight: 700 }, input.author),
-          node("div", { fontSize: "42px", fontWeight: 700 }, "統計で見る都道府県"),
+          node("div", { fontSize: "42px", fontWeight: 700 }, SITE.name),
         ],
       ),
     ],
@@ -436,7 +437,7 @@ export async function buildCoverPng(input: CoverInput): Promise<Buffer> {
             { display: "flex", flexDirection: "row", alignItems: "flex-end", justifyContent: "space-between", marginTop: "auto" },
             [
               node("div", { fontSize: "52px", fontWeight: 700, color: c.ink }, input.author),
-              node("div", { fontSize: "32px", color: c.meta }, "統計で見る都道府県"),
+              node("div", { fontSize: "32px", color: c.meta }, SITE.name),
             ],
           ),
         ],

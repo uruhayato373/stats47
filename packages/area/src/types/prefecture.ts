@@ -6,4 +6,6 @@ export interface Prefecture {
   prefCode: string;
   /** 都道府県名 */
   prefName: string;
+  /** 小文字ローマ字 (例: "hokkaido")。楽天のエリア slug・IPSS のファイル名と同じ表記 */
+  romaji: string;
 }

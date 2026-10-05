@@ -2,10 +2,12 @@ import React, { useMemo } from "react";
 import { AbsoluteFill } from "remotion";
 import { scaleSequential } from "d3-scale";
 import * as chromatic from "d3-scale-chromatic";
-import { TILE_GRID_LAYOUT, type TileGridCell } from "@stats47/visualization";
+import type { TileGridCell } from "@stats47/visualization";
 
 import { BRAND, COLOR_SCHEMES, FONT, type ThemeName } from "@/shared/themes/brand";
 import type { RankingEntry } from "@/shared/types/ranking";
+import { SITE } from "@stats47/types";
+import { LANDSCAPE_TILE_LAYOUT } from "../../shared/utils/video-tile-layout";
 
 // ---------------------------------------------------------------------------
 // Props
@@ -27,22 +29,8 @@ export interface ThumbHookMapProps {
 // Tile Grid Constants — RankingNormal と同じ横長 (16:9) 用レイアウト
 // ---------------------------------------------------------------------------
 
-/**
- * 横長用オフセット (RankingNormal.tsx と同一)
- * 四国: オフセットなし、九州: -1左 -2上、沖縄: -1左 -3上
- * → 14列 × 14行 のコンパクトなグリッド
- */
-const REGION_OFFSETS: Record<number, { dx: number; dy: number }> = Object.fromEntries([
-  ...[36, 37, 38, 39].map((id) => [id, { dx: 0, dy: 0 }]),
-  ...[40, 41, 42, 43, 44, 45, 46].map((id) => [id, { dx: -1, dy: -2 }]),
-  [47, { dx: -1, dy: -3 }],
-]);
-
-const VIDEO_TILE_LAYOUT = TILE_GRID_LAYOUT.map((cell) => {
-  const offset = REGION_OFFSETS[cell.id];
-  if (!offset) return cell;
-  return { ...cell, x: cell.x + offset.dx, y: cell.y + offset.dy };
-});
+/** 動画用オフセット適用済みレイアウト (正典: src/shared/utils/video-tile-layout.ts) */
+const VIDEO_TILE_LAYOUT = LANDSCAPE_TILE_LAYOUT;
 
 const GRID_MIN_X = Math.min(...VIDEO_TILE_LAYOUT.map((c) => c.x));
 const GRID_MAX_X = Math.max(...VIDEO_TILE_LAYOUT.map((c) => c.x + (c.w ?? 1)));
@@ -241,7 +229,7 @@ export const ThumbHookMap: React.FC<ThumbHookMapProps> = ({
               letterSpacing: 1,
             }}
           >
-            統計で見る都道府県
+            {SITE.name}
           </span>
         </div>
 

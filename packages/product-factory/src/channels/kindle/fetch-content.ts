@@ -6,8 +6,9 @@
 import sharp from "sharp";
 import { correctBookArticle } from "./editorial-corrections";
 import { correctBookFigure } from "./figure-corrections";
+import { SITE } from "@stats47/data-configs";
 
-const R2_BASE = process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp";
+const R2_BASE = process.env.R2_PUBLIC_FETCH_URL ?? SITE.r2PublicBaseUrl;
 
 export interface FetchedImage {
   /** EPUB 内のファイル名 (images/<name>.png)。 */

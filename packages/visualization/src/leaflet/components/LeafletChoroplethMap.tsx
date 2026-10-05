@@ -19,6 +19,7 @@ import {
   JAPAN_MIN_ZOOM,
   JAPAN_MAX_ZOOM,
 } from "../constants/tile-providers";
+import { to5DigitPrefCode } from "@stats47/area";
 
 export interface LeafletChoroplethMapProps {
   /** 都道府県 TopoJSON */
@@ -88,7 +89,7 @@ function extractPrefCode(feature: Feature<Geometry>): string {
   const props = feature.properties ?? {};
   if (props.prefCode) return String(props.prefCode);
   const raw = String(props.N03_007 ?? props.code ?? "").padStart(2, "0");
-  return raw.length <= 2 ? raw + "000" : raw;
+  return raw.length <= 2 ? to5DigitPrefCode(raw) : raw;
 }
 
 /** Feature から都道府県名を抽出 */

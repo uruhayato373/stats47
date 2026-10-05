@@ -27,6 +27,7 @@ import { buildRecipe, parseRecipe } from "../src/recipe";
 import { mergeOfficialRows, parseAgriculturalHistory } from "../src/provenance/official-release-staging";
 import { AGRICULTURAL_OUTPUT_RELEASE, HEALTHY_LIFE_RELEASE } from "../src/provenance/official-theme-releases";
 import type { YearSpec } from "../src/types";
+import { SITE } from "@stats47/types";
 
 // CLI-only runtime dependency: the ranking package's public type barrel also loads
 // visualization JSX types, which do not belong in data-configs' non-UI compilation.
@@ -105,7 +106,7 @@ async function main(): Promise<void> {
   for (const metric of METRICS) {
     const stagedPath = join(stageDir, "app/stats", metric.key, "values.json");
     const path = existsSync(stagedPath) ? stagedPath : (await acquire(
-      `https://storage.stats47.jp/app/stats/${metric.key}/values.json`, `${metric.key}-existing.json`,
+      `${SITE.r2PublicBaseUrl}/app/stats/${metric.key}/values.json`, `${metric.key}-existing.json`,
     )).path;
     const existing = parseStatsValuesPayload(JSON.parse(await readFile(path, "utf8")));
     if (existing.metricKey !== metric.key || existing.entityKind !== "prefecture") throw new Error("Existing stats identity mismatch");

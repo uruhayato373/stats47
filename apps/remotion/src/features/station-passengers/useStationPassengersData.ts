@@ -4,6 +4,7 @@ import { continueRender, delayRender, staticFile } from "remotion";
 import type { Topology } from "topojson-specification";
 
 import type { StationPassengerData } from "@stats47/station-passengers";
+import { PREFECTURE_TOPOJSON_FILE } from "../../shared/utils/static-files";
 
 export interface StationPassengersDataResult {
   topology: Topology | null;
@@ -50,7 +51,7 @@ export function useStationPassengersData(
     async function load() {
       try {
         const [topology, data, railLines] = await Promise.all([
-          fetchJson<Topology>(staticFile("prefecture.topojson")),
+          fetchJson<Topology>(staticFile(PREFECTURE_TOPOJSON_FILE)),
           fetchJson<StationPassengerData>(
             staticFile(`station-passengers/${code}.json`),
           ),

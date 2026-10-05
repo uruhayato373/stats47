@@ -10,6 +10,7 @@ import { RankingThumbnail } from "../RankingThumbnail";
 import React, { useEffect, useState } from "react";
 import { continueRender, delayRender, staticFile } from "remotion";
 import type { Topology } from "topojson-specification";
+import { PREFECTURE_TOPOJSON_FILE } from "../../../shared/utils/static-files";
 interface RankingThumbnailPreviewProps {
   theme?: ThemeName;
   meta?: RankingMeta;
@@ -32,7 +33,7 @@ export const RankingThumbnailPreview: React.FC<RankingThumbnailPreviewProps> = (
 
     async function loadMap() {
       try {
-        const url = staticFile("prefecture.topojson");
+        const url = staticFile(PREFECTURE_TOPOJSON_FILE);
         const res = await fetch(url);
         const topology = (await res.json()) as Topology;
 

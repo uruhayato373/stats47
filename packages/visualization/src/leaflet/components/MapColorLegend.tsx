@@ -6,6 +6,7 @@ import L from "leaflet";
 
 import { createChoroplethColorMapper } from "../../d3/utils/color-scale/create-choropleth-color-mapper";
 import type { MapVisualizationConfig, MapDataPoint } from "../../d3/types/map-chart";
+import { DEFAULT_PREFECTURE_MAP_PROPS } from "../../d3/constants/map-constants";
 
 interface MapColorLegendProps {
   colorConfig: MapVisualizationConfig;
@@ -85,7 +86,7 @@ export function MapColorLegend({
         const gradientBar = `<div style="height:10px;border-radius:3px;background:linear-gradient(to right,${gradientParts.join(",")});margin:2px 0;"></div>`;
         const labels = `<div style="display:flex;justify-content:space-between;color:#64748b;"><span>${fmtMin}</span><span>${fmtMax}${displayUnit ? ` ${displayUnit}` : ""}</span></div>`;
         const noDataEntry = showNoDataLabel
-          ? `<div style="display:flex;align-items:center;gap:4px;margin-top:4px;color:#64748b;"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#e0e0e0;"></span><span>データなし</span></div>`
+          ? `<div style="display:flex;align-items:center;gap:4px;margin-top:4px;color:#64748b;"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:${DEFAULT_PREFECTURE_MAP_PROPS.noDataFillColor};"></span><span>データなし</span></div>`
           : "";
 
         div.innerHTML = gradientBar + labels + noDataEntry;

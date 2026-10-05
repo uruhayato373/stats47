@@ -41,8 +41,9 @@ import {
   type ValueVerificationResult,
 } from "../src/value-verification.js";
 import { VERIFIED_VALUE_PROFILES } from "../src/verified-value-profiles.js";
+import { SITE } from "@stats47/types";
 
-const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
+const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || SITE.r2PublicBaseUrl;
 
 interface Args {
   json?: string;

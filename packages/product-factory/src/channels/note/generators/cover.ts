@@ -6,6 +6,7 @@
 import type { NoteArticlePlan } from "../types";
 import { NOTE_SERIES_REGISTRY } from "../series";
 import { BRAND } from "../../../design/tokens";
+import { SITE } from "@stats47/data-configs";
 
 const W = 1280;
 const H = 670;
@@ -101,7 +102,7 @@ export function renderCoverSvg(article: NoteArticlePlan): string {
   <rect width="${W}" height="${H}" fill="#f8fafc"/>
   <rect x="0" y="0" width="20" height="${H}" fill="${accent}"/>
   <rect x="${W - 340}" y="0" width="340" height="${H}" fill="${accent}" opacity="0.07"/>
-  <text x="80" y="86" font-family="${BRAND.fontFamily}" font-size="26" font-weight="700" fill="${accent}">統計で見る都道府県</text>
+  <text x="80" y="86" font-family="${BRAND.fontFamily}" font-size="26" font-weight="700" fill="${accent}">${SITE.name}</text>
   <text x="80" y="120" font-family="${BRAND.fontFamily}" font-size="22" fill="${BRAND.subtext}">${esc(BRAND.domain)}</text>
   <rect x="80" y="150" rx="18" ry="18" width="${Math.min(560, 40 + [...seriesName].length * 24)}" height="40" fill="${accent}"/>
   <text x="102" y="177" font-family="${BRAND.fontFamily}" font-size="22" font-weight="700" fill="#ffffff">${esc(seriesName)}</text>

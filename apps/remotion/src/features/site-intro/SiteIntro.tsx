@@ -17,6 +17,7 @@ import {
   useVideoConfig,
 } from "remotion";
 import { BRAND, COLOR_SCHEMES, FONT, SPACING } from "@/shared/themes/brand";
+import { SITE } from "@stats47/types";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -49,7 +50,7 @@ export interface SiteIntroProps {
 const DEFAULT_SCENES: Scene[] = [
   {
     image: "images/site-intro/01-top.png",
-    title: "統計で見る都道府県",
+    title: SITE.name,
     subtitle: "800+の統計指標で47都道府県を可視化",
     zoom: "in",
     pan: "none",
@@ -282,7 +283,7 @@ const TitleScene: React.FC = () => {
           transform: `translateY(${interpolate(subtitleSpring, [0, 1], [20, 0])}px)`,
         }}
       >
-        統計で見る都道府県
+        {SITE.name}
       </div>
     </AbsoluteFill>
   );
@@ -337,7 +338,7 @@ const CTAScene: React.FC = () => {
           transform: `scale(${interpolate(urlSpring, [0, 1], [0.9, 1])})`,
         }}
       >
-        stats47.jp
+        {SITE.domain}
       </div>
     </AbsoluteFill>
   );

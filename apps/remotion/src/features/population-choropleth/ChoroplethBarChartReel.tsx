@@ -15,6 +15,7 @@ import {
   type ThemeName,
 } from "@/shared/themes/brand";
 import type { CityPathInfo, PopulationRecord } from "./types";
+import { SITE } from "@stats47/types";
 
 interface ChoroplethBarChartReelProps {
   tokyoData: PopulationRecord[];
@@ -410,7 +411,7 @@ export const ChoroplethBarChartReel: React.FC<ChoroplethBarChartReelProps> = ({
               color: BRAND.primary,
             }}
           >
-            stats47.jp
+            {SITE.domain}
           </div>
           <div
             style={{
@@ -419,7 +420,7 @@ export const ChoroplethBarChartReel: React.FC<ChoroplethBarChartReelProps> = ({
               marginTop: 8,
             }}
           >
-            統計で見る都道府県
+            {SITE.name}
           </div>
         </AbsoluteFill>
       </Sequence>

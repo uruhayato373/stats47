@@ -79,8 +79,9 @@ import surveysMaster from "../data/surveys.json";
 
 import { expectedCalculatedYears } from "./lib/calculated-stats-core";
 import { checkFixtureGates, type FixtureViolation } from "./lib/normalized-fixtures";
+import { SITE } from "@stats47/types";
 
-const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
+const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || SITE.r2PublicBaseUrl;
 
 const CATEGORY_KEYS = [
   "landweather",

@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import JSZip from 'jszip';
+import { SITE } from '@stats47/data-configs';
 
 interface PipelineItem {
   contentId: string;
@@ -53,7 +54,7 @@ const archiveDate = new Date('1980-01-01T00:00:00.000Z');
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../../../..');
 const pipelinePath = path.join(repoRoot, '.local/geo-content-pipeline/items.json');
 const outputRoot = path.join(repoRoot, '.local/geo-products');
-const remoteBase = process.env.R2_PUBLIC_FETCH_URL ?? 'https://storage.stats47.jp';
+const remoteBase = process.env.R2_PUBLIC_FETCH_URL ?? SITE.r2PublicBaseUrl;
 const args = process.argv.slice(2);
 const command = args[0] ?? 'plan';
 const gitRevision = execFileSync('git', ['rev-parse', 'HEAD'], { cwd: repoRoot, encoding: 'utf8' }).trim();
@@ -191,7 +192,7 @@ function readme(item: PipelineItem, aggregate: Record<string, unknown>): string 
   return `# ${item.title} 再現・記事制作パック\n\n` +
     `販売予定価格: ${item.paid.priceYen.toLocaleString('ja-JP')}円\n\n` +
     `## このパックでできること\n\n${item.paid.readerOutcome}\n\n` +
-    `## 無料で確認できる結論\n\n- https://stats47.jp${item.free.canonicalPath}\n- https://stats47.jp${item.free.methodPath}\n\n` +
+    `## 無料で確認できる結論\n\n- ${SITE.origin}${item.free.canonicalPath}\n- ${SITE.origin}${item.free.methodPath}\n\n` +
     `## 同梱物\n\n- analysis.csv: 47都道府県の加工済み集計\n- analysis.json: 集計の機械可読版\n- DATA-DICTIONARY.md: 指標・入力・演算の辞書\n- MANIFEST.json: 他の同梱4ファイルのSHA-256と参照元\n\n` +
     `## 入力レイヤー\n\n${layers}\n\n` +
     stationCountExplanation(item, aggregate) +
@@ -356,7 +357,7 @@ function dictionary(item: PipelineItem, aggregate: Record<string, unknown>, veri
     `## 空間演算\n\n${item.spatialOperations.length > 0 ? item.spatialOperations.map((op) => `- ${op}`).join('\n') : '- 単一指標の都道府県集計（空間横断ではありません）'}\n\n` +
     stationCountExplanation(item, aggregate) +
     reproduction +
-    `## 検証経路\n\n- canonical: https://stats47.jp${item.free.canonicalPath}\n- method: https://stats47.jp${item.free.methodPath}\n${evidenceLines}\n`;
+    `## 検証経路\n\n- canonical: ${SITE.origin}${item.free.canonicalPath}\n- method: ${SITE.origin}${item.free.methodPath}\n${evidenceLines}\n`;
 }
 
 async function generate(item: PipelineItem): Promise<ProductManifest> {

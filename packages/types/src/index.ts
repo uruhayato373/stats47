@@ -6,6 +6,9 @@
 
 export type { AreaType } from './area';
 export type { StatsSchema } from './stats-schema';
+
+// サイト識別子 SSOT (値の正本は site.json)
+export { SITE } from './site';
 export { type YearFormat, formatYearName } from './year-format';
 
 // コロプレス配色の語彙 SSOT (data-configs / visualization / svg-builder が共有)

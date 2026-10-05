@@ -16,6 +16,7 @@ import {
 } from "@/shared/themes/brand";
 import { DivergingColorLegend } from "./DivergingColorLegend";
 import type { CityPathInfo } from "./types";
+import { SITE } from "@stats47/types";
 
 interface ChoroplethProgressiveReelProps {
   tokyoPaths: CityPathInfo[];
@@ -352,7 +353,7 @@ export const ChoroplethProgressiveReel: React.FC<ChoroplethProgressiveReelProps>
               color: BRAND.primary,
             }}
           >
-            stats47.jp
+            {SITE.domain}
           </div>
           <div
             style={{
@@ -361,7 +362,7 @@ export const ChoroplethProgressiveReel: React.FC<ChoroplethProgressiveReelProps>
               marginTop: 8,
             }}
           >
-            統計で見る都道府県
+            {SITE.name}
           </div>
         </AbsoluteFill>
       </Sequence>

@@ -51,11 +51,12 @@ import {
   summarizeReingest,
   type ReingestAssessment,
 } from "../src/reingest-need";
+import { SITE } from "@stats47/types";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
 const STATE_DIR = path.join(PROJECT_ROOT, ".claude/state/data");
-const R2 = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
+const R2 = process.env.R2_PUBLIC_FETCH_URL || SITE.r2PublicBaseUrl;
 
 const args = process.argv.slice(2);
 const AS_JSON = args.includes("--json");

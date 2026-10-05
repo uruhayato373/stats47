@@ -6,6 +6,7 @@ import { getS3Client } from "../clients/get-s3-client";
 import { detectEnvironment } from "../utils/detect-environment";
 import { findLocalR2Root } from "../utils/find-local-r2-root";
 import { listFromR2 } from "./list";
+import { SITE } from "@stats47/types";
 
 function deleteFromLocalFs(key: string): void {
   // eslint-disable-next-line @typescript-eslint/no-require-imports
@@ -21,7 +22,7 @@ async function deleteMultipleFromS3(keys: string[]): Promise<{
   deleted: string[];
   errors: Array<{ key: string; code: string; message: string }>;
 }> {
-  const bucketName = process.env.CLOUDFLARE_R2_BUCKET_NAME || "stats47";
+  const bucketName = process.env.CLOUDFLARE_R2_BUCKET_NAME || SITE.r2Bucket;
   const s3 = getS3Client();
   const deleted: string[] = [];
   const errors: Array<{ key: string; code: string; message: string }> = [];
@@ -55,7 +56,7 @@ export async function deleteFromR2(
   options?: { async?: boolean }
 ): Promise<void> {
   const env = detectEnvironment();
-  const bucketName = process.env.CLOUDFLARE_R2_BUCKET_NAME || "stats47";
+  const bucketName = process.env.CLOUDFLARE_R2_BUCKET_NAME || SITE.r2Bucket;
 
   if (env.isDevelopment) {
     deleteFromLocalFs(key);

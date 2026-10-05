@@ -30,11 +30,12 @@ import {
 } from "@aws-sdk/client-s3";
 
 import { assertR2WriteAllowed } from "./_assert-ci-write";
+import { SITE } from "@stats47/types";
 
 config({ path: path.resolve(__dirname, "..", "..", "..", "..", ".env.local") });
 
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..", "..");
-const BUCKET = process.env.CLOUDFLARE_R2_BUCKET_NAME || "stats47";
+const BUCKET = process.env.CLOUDFLARE_R2_BUCKET_NAME || SITE.r2Bucket;
 
 // R2 キー (URL 非対応のインフラデータなので app/ 配下ではなくルート直下 database/)
 const DB_KEY = "database/stats47.sqlite";

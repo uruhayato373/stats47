@@ -26,8 +26,9 @@ import { findLocalR2Root } from "../lib/utils/find-local-r2-root";
 import { assertR2WriteAllowed } from "./_assert-ci-write";
 import { assertKsjPublicAssetsAllowed } from "./lib/ksj-publication-guard";
 import { assertBlogPublicAssetsAllowed, BLOG_INDEX_KEY } from './lib/blog-publication-guard';
+import { SITE } from "@stats47/types";
 
-const BUCKET = process.env.CLOUDFLARE_R2_BUCKET_NAME || "stats47";
+const BUCKET = process.env.CLOUDFLARE_R2_BUCKET_NAME || SITE.r2Bucket;
 
 function listFilesRecursive(root: string, rel = ""): string[] {
   const out: string[] = [];

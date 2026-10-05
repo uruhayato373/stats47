@@ -23,9 +23,10 @@ import {
   FLOOD_SOURCE_PAGE,
 } from '../../geo-analysis/flood-inputs';
 import { readFeatureJson } from '../../geo-analysis/read-feature-json';
+import { SITE } from '@stats47/types';
 
 async function main() {
-  const base = process.env.R2_PUBLIC_FETCH_URL ?? 'https://storage.stats47.jp';
+  const base = process.env.R2_PUBLIC_FETCH_URL ?? SITE.r2PublicBaseUrl;
   const meta = GIS_DATASETS_BY_ID.get('A31b');
   if (
     meta?.latestVersion !== '25' ||

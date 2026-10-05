@@ -34,10 +34,12 @@ import {
   buildDerivedAdditiveJapanSeriesRows,
   buildJapanSeriesRows,
   getJapanDerivedMetricDecision,
+  JAPAN_NATIONAL_AREA_CODE,
 } from "@stats47/data-configs/geo-scope";
 import type { BuildJapanSeriesResult } from "@stats47/data-configs/geo-scope";
-import { convertToStatsSchema, formatStatsData } from "@stats47/estat-api";
+import { convertToStatsSchema, ESTAT_API, formatStatsData } from "@stats47/estat-api";
 import type { EstatStatsDataResponse } from "@stats47/estat-api";
+import { SITE } from "@stats47/types";
 
 import { R2_LOCAL_DIR, REPO_ROOT } from "./_lib";
 import { parseStatsValuesPayload } from "../schemas";
@@ -122,7 +124,7 @@ async function fetchEstatRaw(
     limit: "1000",
     ...axes,
   });
-  const url = `https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData?${query}`;
+  const url = `${ESTAT_API.BASE_URL}/app/json/getStatsData?${query}`;
   const fetchOptions: RequestInit & { dispatcher?: unknown } = {
     signal: AbortSignal.timeout(30_000),
   };
@@ -137,8 +139,7 @@ async function fetchEstatRaw(
   return body;
 }
 
-const NATIONAL_AREA_CODE = "00000";
-const PUBLIC_R2 = process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp";
+const PUBLIC_R2 = process.env.R2_PUBLIC_FETCH_URL ?? SITE.r2PublicBaseUrl;
 
 export type GenerateOneResult =
   | { ok: true; metricKey: string; rows: number; rangeFrom: string; rangeTo: string; latestValue: number; latestUnit: string; outPath: string; artifact: JapanSeriesArtifact }
@@ -205,7 +206,7 @@ export async function generateOneMetric(
       .map(convertToStatsSchema)
       .filter((row): row is NonNullable<typeof row> => row !== undefined);
     const nationalRaw = schema
-      .filter((row) => row.areaCode === NATIONAL_AREA_CODE)
+      .filter((row) => row.areaCode === JAPAN_NATIONAL_AREA_CODE)
       .map((row) => ({
         yearCode: row.yearCode,
         yearName: row.yearName,
@@ -213,7 +214,7 @@ export async function generateOneMetric(
         unit: row.unit,
       }));
     built = buildJapanSeriesRows(nationalRaw, config.unit);
-    recipeHashInput = { statsDataId, axes, areaCode: NATIONAL_AREA_CODE };
+    recipeHashInput = { statsDataId, axes, areaCode: JAPAN_NATIONAL_AREA_CODE };
     sourceId = statsDataId;
   } else if (sourceMode === "derived-additive") {
     const decision = getJapanDerivedMetricDecision(metricKey);

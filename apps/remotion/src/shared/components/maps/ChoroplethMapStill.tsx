@@ -13,6 +13,7 @@ import { formatValueWithPrecision } from "@stats47/utils";
 import type { RankingEntry, RankingMeta } from "../../types/ranking";
 import type { ChoroplethPathInfo } from "../../utils/choropleth";
 import { ChoroplethMapSvg } from "./ChoroplethMapSvg";
+import { SITE } from "@stats47/types";
 
 interface ChoroplethMapStillProps {
   meta: RankingMeta;
@@ -418,7 +419,7 @@ export const ChoroplethMapStill: React.FC<ChoroplethMapStillProps> = ({
             letterSpacing: 1,
           }}
         >
-          stats47.jp
+          {SITE.domain}
         </div>
         <div style={{ width: 1, height: 16, backgroundColor: colors.border }} />
         <div
@@ -429,7 +430,7 @@ export const ChoroplethMapStill: React.FC<ChoroplethMapStillProps> = ({
             letterSpacing: 1,
           }}
         >
-          統計で見る都道府県
+          {SITE.name}
         </div>
       </div>
     </AbsoluteFill>

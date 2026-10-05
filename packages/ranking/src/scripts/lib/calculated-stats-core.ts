@@ -24,9 +24,7 @@ import type { SingleEntityRow, StatsValuesPayload } from "@stats47/stats-r2";
 
 import { periodScales, roundToPlaces } from "../../utils/period-align";
 import type { CalculationConfig } from "../../types/ranking-item";
-
-/** 全国行。県ランキングには入れない (page-data-batch も 47 県だけを書く) */
-const NATIONAL_AREA_CODE = "00000";
+import { NATIONAL_AREA_CODE } from "@stats47/area";
 
 export interface DeriveInput {
   config: MetricConfig;

@@ -9,6 +9,7 @@ import {
   type ThemeName,
 } from "@/shared/themes/brand";
 import type { AreaProfileIndicator } from "@/shared";
+import { SITE } from "@stats47/types";
 
 interface AreaProfileCoverSlideProps {
   areaName: string;
@@ -278,7 +279,7 @@ export const AreaProfileCoverSlide: React.FC<AreaProfileCoverSlideProps> = ({
             letterSpacing: 1,
           }}
         >
-          stats47.jp
+          {SITE.domain}
         </div>
         <div style={{ width: 1, height: 16, backgroundColor: colors.border }} />
         <div
@@ -289,7 +290,7 @@ export const AreaProfileCoverSlide: React.FC<AreaProfileCoverSlideProps> = ({
             letterSpacing: 1,
           }}
         >
-          統計で見る都道府県
+          {SITE.name}
         </div>
       </div>
     </AbsoluteFill>

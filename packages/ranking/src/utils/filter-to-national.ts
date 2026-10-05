@@ -1,3 +1,5 @@
+import { NATIONAL_AREA_CODE } from "@stats47/area";
+
 /**
  * 全国データのみを抽出
  *
@@ -10,5 +12,5 @@
 export function filterToNational<T extends { areaCode: string }>(
   data: T[]
 ): T[] {
-  return data.filter((item) => item.areaCode === "00000");
+  return data.filter((item) => item.areaCode === NATIONAL_AREA_CODE);
 }

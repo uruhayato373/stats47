@@ -1,3 +1,5 @@
+import { SITE } from '@stats47/types';
+
 /** Verified original source pins. J-SHIS bodies stay private; only county-band population is distributable. */
 export const EARTHQUAKE_EXPOSURE_SOURCE = {
   slug: 'earthquake-population-exposure',
@@ -12,7 +14,7 @@ export const EARTHQUAKE_EXPOSURE_SOURCE = {
   r2Root: 'app/geo/earthquake-population-exposure',
   canonicalPath: '/themes/earthquake-exposure#earthquake-population',
   sectionKey: 'earthquake-population',
-  publicBaseUrl: 'https://storage.stats47.jp',
+  publicBaseUrl: SITE.r2PublicBaseUrl,
   algorithm: 'exact-quarter-mesh-join-and-intensity-band-population-v1',
   hazard: {
     id: 'jshis-Y2024-all',

@@ -13,6 +13,7 @@ import {
 } from "../../shared/themes/brand";
 import type { RankingEntry, RankingMeta } from "../../shared/types/ranking";
 import { SafetyZoneOverlay } from "../../shared/components/utils/SafetyZoneOverlay";
+import { SITE } from "@stats47/types";
 
 const MEDAL_EMOJI: Record<number, string> = { 1: "🥇", 2: "🥈", 3: "🥉" };
 const TOP_N = 15;
@@ -151,7 +152,7 @@ export const StaticRanking: React.FC<StaticRankingProps> = ({
             letterSpacing: 2,
           }}
         >
-          stats47.jp
+          {SITE.domain}
         </span>
       </div>
 

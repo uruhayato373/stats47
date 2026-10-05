@@ -26,7 +26,7 @@
  * ```
  */
 
-import { FONT_FAMILY } from "../shared/color";
+import { FONT_FAMILY, SERIES_COLORS as STACKED_COLORS } from "../shared/color";
 import { niceTicks, linearScale, formatTick } from "../shared/axis";
 import { makePlotArea, px } from "../shared/layout";
 import { svgThemeStyle } from "../shared/theme";
@@ -36,16 +36,6 @@ import {
   uniqueDimension,
   buildValueMap,
 } from "../shared/stats-schema";
-
-/** 積み上げ棒グラフのカラーセット */
-const STACKED_COLORS = [
-  "#1e88e5", // blue
-  "#e53935", // red
-  "#43a047", // green
-  "#fb8c00", // orange
-  "#8e24aa", // purple
-  "#00897b", // teal
-];
 
 export interface StackedBarOptions {
   /** チャートタイトル */

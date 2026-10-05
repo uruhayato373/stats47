@@ -15,6 +15,7 @@ import { buildRankingSections, type RankingSource } from "./ranking-databook";
 import { buildEpub, type EpubChapterDoc, type EpubImage } from "../../generators/epub";
 import sharp from "sharp";
 import { authoredBookSha256, chapterEvidence, revisionEditorIds } from "./revision-evidence";
+import { SITE } from "@stats47/data-configs";
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../../..");
 /** product-factory ルート (freshFile のパス解決基点)。 */
@@ -55,7 +56,7 @@ function countChars(md: string): number {
   return md.replace(/\s/g, "").length;
 }
 
-const R2_SITE = "https://stats47.jp";
+const R2_SITE = SITE.origin;
 
 export interface BuildBookOptions {
   readonly outRoot?: string;
@@ -132,8 +133,8 @@ function sourcesPage(sources: readonly { slug: string; title: string; published:
   const items = sources
     .map((s) =>
       s.published
-        ? `<p>「${escapeText(s.title)}」— ${R2_SITE}/blog/${escapeText(s.slug)}（統計で見る都道府県）</p>`
-        : `<p>「${escapeText(s.title)}」— 統計で見る都道府県（元記事は現在非公開。本書の章として収録）</p>`,
+        ? `<p>「${escapeText(s.title)}」— ${R2_SITE}/blog/${escapeText(s.slug)}（${SITE.name}）</p>`
+        : `<p>「${escapeText(s.title)}」— ${SITE.name}（元記事は現在非公開。本書の章として収録）</p>`,
     )
     .join("\n");
   const publishedCount = sources.filter((s) => s.published).length;
@@ -170,7 +171,7 @@ function stripLeadingHeading(md: string): string {
 function figureGuideMd(opts: { hasFullTable: boolean; hasCorrelation: boolean; hasPartialCorrelation: boolean }): string {
   return `本書の多くの章には、都道府県を比べる図を添えています。ランキングの図は、四十七都道府県すべてを一枚に詰め込むのではなく、上位と下位の県だけを抜き出して左右に並べる形にしています。両端を並べると、その指標で「もっとも高い県」と「もっとも低い県」の落差が一目で伝わるからです。
 
-${opts.hasFullTable ? "全県表が付いた章では、中位の県や同順位の県も表で確認できます。" : ""}単一指標の大小順であり、住みやすさや個人の状態を順位付けしたものではありません。図や表の対象年は章ごとに確認してください。姉妹サイト stats47.jp の更新後の値が、本書の固定版と同じとは限りません。
+${opts.hasFullTable ? "全県表が付いた章では、中位の県や同順位の県も表で確認できます。" : ""}単一指標の大小順であり、住みやすさや個人の状態を順位付けしたものではありません。図や表の対象年は章ごとに確認してください。姉妹サイト ${SITE.domain} の更新後の値が、本書の固定版と同じとは限りません。
 
 
 図で地域差を見つけたら、対象・分母・年次を確認します。差が見えることと、その原因が分かることは別です。世帯調査の平均を全住民の実態としたり、施設数を利用しやすさと読み替えたりしないよう注意してください。
@@ -192,7 +193,7 @@ function autoSourcesChapterMd(book: KindleBook, bodyText: string): string {
 
 ## データの基準年について
 
-本書のデータは基準年を固定した「買い切り」の内容です。収録年は指標ごとに異なります。${/将来推計|推計人口|推計値/.test(bodyText) ? "推計を扱う章では観測値と区別し、推計の基準時点や仮定を確認してください。" : ""}本書が参照した stats47 の保存データ（生成時点）から取得しており、原典で公表された最新値と一致する保証はありません。比較前に各指標の収録年・対象地域・分母・原典を確認してください。関連する指標は姉妹サイト stats47.jp（統計で見る都道府県）でも確認できます。
+本書のデータは基準年を固定した「買い切り」の内容です。収録年は指標ごとに異なります。${/将来推計|推計人口|推計値/.test(bodyText) ? "推計を扱う章では観測値と区別し、推計の基準時点や仮定を確認してください。" : ""}本書が参照した stats47 の保存データ（生成時点）から取得しており、原典で公表された最新値と一致する保証はありません。比較前に各指標の収録年・対象地域・分母・原典を確認してください。関連する指標は姉妹サイト ${SITE.domain}（${SITE.name}）でも確認できます。
 
 ## 再現性について
 

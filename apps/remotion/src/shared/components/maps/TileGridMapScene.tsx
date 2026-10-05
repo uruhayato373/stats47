@@ -2,12 +2,14 @@ import React, { useMemo } from "react";
 import { AbsoluteFill, OffthreadVideo, Sequence, interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
 import { scaleDiverging, scaleSequential } from "d3-scale";
 import * as chromatic from "d3-scale-chromatic";
-import { TILE_GRID_LAYOUT, type TileGridCell } from "@stats47/visualization";
+import type { TileGridCell } from "@stats47/visualization";
 import { formatValueWithPrecision } from "@stats47/utils";
 
 import { BRAND, COLOR_SCHEMES, FONT, RADIUS, type ColorScheme, type ThemeName } from "@/shared/themes/brand";
 import type { RankingEntry, RankingMeta } from "@/shared/types/ranking";
 import { getGesVideoPath } from "@/features/ranking-youtube-ges/get-ges-video-path";
+import { SITE } from "@stats47/types";
+import { PORTRAIT_TILE_LAYOUT } from "../../utils/video-tile-layout";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -47,23 +49,8 @@ export interface TileGridMapSceneProps {
 // Constants
 // ---------------------------------------------------------------------------
 
-/**
- * 動画用レイアウト調整: 九州・四国を +1右 +1下 にずらして
- * グリッドを 13列 × 17行 に圧縮し、セルサイズを拡大する
- */
-const REGION_OFFSETS: Record<number, { dx: number; dy: number }> = Object.fromEntries([
-  // 四国 (id: 36-39)
-  ...[36, 37, 38, 39].map((id) => [id, { dx: 1, dy: 1 }]),
-  // 九州・沖縄 (id: 40-47)
-  ...[40, 41, 42, 43, 44, 45, 46, 47].map((id) => [id, { dx: 1, dy: 1 }]),
-]);
-
-/** オフセット適用済みのレイアウトを構築 */
-const VIDEO_TILE_LAYOUT = TILE_GRID_LAYOUT.map((cell) => {
-  const offset = REGION_OFFSETS[cell.id];
-  if (!offset) return cell;
-  return { ...cell, x: cell.x + offset.dx, y: cell.y + offset.dy };
-});
+/** 動画用オフセット適用済みレイアウト (正典: src/shared/utils/video-tile-layout.ts) */
+const VIDEO_TILE_LAYOUT = PORTRAIT_TILE_LAYOUT;
 
 // オフセット適用後の実際の使用範囲からグリッドサイズを算出
 const GRID_MIN_X = Math.min(...VIDEO_TILE_LAYOUT.map((c) => c.x));
@@ -564,7 +551,7 @@ export const TileGridMapScene: React.FC<TileGridMapSceneProps> = ({
                 textShadow: gesHeaderShadow,
               }}
             >
-              統計で見る都道府県
+              {SITE.name}
             </div>
           </div>
 

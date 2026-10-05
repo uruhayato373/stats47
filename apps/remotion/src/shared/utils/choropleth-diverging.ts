@@ -5,6 +5,7 @@ import type { Feature, FeatureCollection } from "geojson";
 import { feature } from "topojson-client";
 import type { GeometryCollection, Topology } from "topojson-specification";
 import type { CityPathInfo, PopulationRecord } from "../../features/population-choropleth/types";
+import { DEFAULT_PREFECTURE_MAP_PROPS } from "@stats47/visualization";
 
 export interface DivergingChoroplethOptions {
   width?: number;
@@ -32,7 +33,7 @@ export function computeDivergingChoroplethPaths(
   const {
     width = 1000,
     height = 1000,
-    noDataColor = "#e0e0e0",
+    noDataColor = DEFAULT_PREFECTURE_MAP_PROPS.noDataFillColor,
     padding = 20,
     excludeCodes = new Set<string>(),
   } = options;
@@ -137,7 +138,7 @@ export function computeDivergingPathsWithScale(
   const {
     width = 1000,
     height = 1000,
-    noDataColor = "#e0e0e0",
+    noDataColor = DEFAULT_PREFECTURE_MAP_PROPS.noDataFillColor,
     padding = 20,
     excludeCodes = new Set<string>(),
   } = options;

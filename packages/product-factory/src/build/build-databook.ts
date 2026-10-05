@@ -25,6 +25,7 @@ import { buildDatabookPptx } from "../generators/databook-pptx";
 import { LICENSE_REGISTRY, type LicenseId } from "../catalog/licenses";
 import { buildInputHash, sha256, type ProductManifest, type ManifestFile } from "../generators/manifest";
 import { reserveProductVersion, type ProductBuildOptions, type ProductBuildResult } from "./build-product";
+import { SITE } from "@stats47/data-configs";
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../..");
 const OUT_ROOT_DEFAULT = resolve(REPO_ROOT, ".local/coconala-products");
@@ -136,7 +137,7 @@ export async function buildDatabook(
   const svg = renderChoroplethSvg(geo, choropleth, {
     width: 620,
     title: `${primary.indicator}（${primary.year}）`,
-    footer: `出典：${primary.source.surveyName}／stats47.jp`,
+    footer: `出典：${primary.source.surveyName}／${SITE.domain}`,
   });
   const previewPng = await sharp(Buffer.from(svg)).resize(620, 620, { fit: "contain", background: "#ffffff" }).png().toBuffer();
   writeFileSync(join(outDir, "preview", "thumbnail-620x620.png"), previewPng);

@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import * as topojson from "topojson-client";
 import type { FeatureCollection, Geometry } from "geojson";
 import type { TopoJSONTopology } from "@stats47/types";
+import { to5DigitPrefCode } from "@stats47/area";
 
 /**
  * TopoJSON を GeoJSON FeatureCollection に変換（メモ化）
@@ -32,7 +33,7 @@ export function useTopoJsonToGeoJson(
       // 都道府県コード
       if (props.N03_007 && !props.prefCode) {
         const raw = String(props.N03_007).padStart(2, "0");
-        props.prefCode = raw.length <= 2 ? raw + "000" : raw;
+        props.prefCode = raw.length <= 2 ? to5DigitPrefCode(raw) : raw;
       }
 
       // 都道府県名

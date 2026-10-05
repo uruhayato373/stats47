@@ -22,6 +22,7 @@ import { buildProductPptx } from "../generators/pptx";
 import { buildProductXlsx } from "../generators/xlsx";
 import { buildManualPdf } from "../generators/manual";
 import { buildInputHash, sha256, type ProductManifest, type ManifestFile } from "../generators/manifest";
+import { SITE } from "@stats47/data-configs";
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../..");
 const OUT_ROOT_DEFAULT = resolve(REPO_ROOT, ".local/coconala-products");
@@ -83,7 +84,7 @@ export async function buildProduct(
   files.push("data.csv");
 
   const choropleth = classifyChoropleth(ds, { classes: 5, paletteId: "blues-sequential" });
-  const footer = ds.isSample ? "架空サンプル／stats47.jp" : `出典：${ds.source.surveyName}／stats47.jp`;
+  const footer = ds.isSample ? `架空サンプル／${SITE.domain}` : `出典：${ds.source.surveyName}／${SITE.domain}`;
   const svg = renderChoroplethSvg(geo, choropleth, { width: 620, title: `${ds.indicator}（${ds.year}）`, footer });
   const previewPng = await sharp(Buffer.from(svg)).resize(620, 620, { fit: "contain", background: "#ffffff" }).png().toBuffer();
   writeFileSync(join(outDir, "preview", "thumbnail-620x620.png"), previewPng);

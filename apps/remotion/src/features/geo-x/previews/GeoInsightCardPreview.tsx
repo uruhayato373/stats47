@@ -4,6 +4,7 @@ import type { Topology } from 'topojson-specification';
 
 import { computeBuzzMapGeo, type BuzzMapGeo } from '@/features/buzz-map/geo';
 import { GeoInsightCard, type GeoInsightCardProps } from '../GeoInsightCard';
+import { PREFECTURE_TOPOJSON_FILE } from '../../../shared/utils/static-files';
 
 export const GeoInsightCardPreview: React.FC<GeoInsightCardProps> = (props) => {
   const [handle] = useState(() => delayRender('Loading prefecture TopoJSON'));
@@ -13,7 +14,7 @@ export const GeoInsightCardPreview: React.FC<GeoInsightCardProps> = (props) => {
     let cancelled = false;
     async function loadMap() {
       try {
-        const response = await fetch(staticFile('prefecture.topojson'));
+        const response = await fetch(staticFile(PREFECTURE_TOPOJSON_FILE));
         const topology = (await response.json()) as Topology;
         if (cancelled) return;
         setMapGeo(

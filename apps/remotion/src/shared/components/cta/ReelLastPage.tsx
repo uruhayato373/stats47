@@ -2,6 +2,7 @@ import React from "react";
 import { AbsoluteFill } from "remotion";
 
 import { BRAND, COLOR_SCHEMES, FONT, SPACING, type ThemeName } from "../../themes/brand";
+import { SITE } from "@stats47/types";
 
 interface ReelLastPageProps {
   /** メインの呼びかけテキスト */
@@ -24,7 +25,7 @@ interface ReelLastPageProps {
 export const ReelLastPage: React.FC<ReelLastPageProps> = ({
   headline,
   subtext,
-  siteUrl = "stats47.jp",
+  siteUrl = SITE.domain,
   theme = "dark",
   variant = "youtube",
 }) => {

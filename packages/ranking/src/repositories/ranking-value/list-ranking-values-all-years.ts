@@ -5,6 +5,7 @@ import { readStatsValues } from "@stats47/stats-r2";
 import { err, ok, type Result } from "@stats47/types";
 import type { AreaType } from "@stats47/types";
 import type { RankingValue } from "../../types";
+import { NATIONAL_AREA_CODE } from "@stats47/area";
 
 /**
  * 全年分の RankingValue を R2 から一括取得 (Bar Chart Race 用)。
@@ -21,7 +22,7 @@ export async function listRankingValuesAllYears(
     if (!payload) return ok([]);
 
     const values: RankingValue[] = payload.rows
-      .filter((r) => r.areaCode !== "00000" && r.value !== null)
+      .filter((r) => r.areaCode !== NATIONAL_AREA_CODE && r.value !== null)
       .map((row) => ({
         areaType,
         areaCode: row.areaCode,

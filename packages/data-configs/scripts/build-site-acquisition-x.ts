@@ -16,6 +16,7 @@ import { fileURLToPath } from "node:url";
 import { PREFECTURES } from "../src/area-axis";
 import { AREA_EDITORIALS } from "../src/area-databook/editorial";
 import { THEME_CATALOGS } from "../src/theme-catalog";
+import { SITE } from "@stats47/types";
 
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
 const LOCAL_SNS_ROOT = path.join(PROJECT_ROOT, ".local/r2/sns");
@@ -116,11 +117,11 @@ function buildDrafts(): Draft[] {
         template: "theme-lens",
         imageKind: "theme-overview-card",
         caption: themeCaption(index, theme.title, theme.description, metricLabels, theme.metrics.length),
-        canonicalUrl: `https://stats47.jp/themes/${theme.key}`,
+        canonicalUrl: `${SITE.origin}/themes/${theme.key}`,
         campaign: `theme-${theme.key}`,
         mediaPath: `.local/r2/sns/theme/${theme.key}/x/stills/${theme.key}.png`,
         metricKeys: theme.metrics.map((metric) => metric.rankingKey),
-        sourceUrl: `https://stats47.jp/themes/${theme.key}/opengraph-image`,
+        sourceUrl: `${SITE.origin}/themes/${theme.key}/opengraph-image`,
       };
     });
 
@@ -141,11 +142,11 @@ function buildDrafts(): Draft[] {
         editorial.specialties[0]?.name ?? "地域の特産",
         editorial.specialties[1]?.name ?? "地域の特産",
       ),
-      canonicalUrl: `https://stats47.jp/areas/${prefecture.code}`,
+      canonicalUrl: `${SITE.origin}/areas/${prefecture.code}`,
       campaign: `area-${prefecture.code}`,
       mediaPath: `.local/r2/sns/area/${prefecture.code}/x/stills/${prefecture.code}.png`,
       metricKeys: [],
-      sourceUrl: `https://storage.stats47.jp/app/areas/${prefecture.code}/ogp/ogp.png`,
+      sourceUrl: `${SITE.r2PublicBaseUrl}/app/areas/${prefecture.code}/ogp/ogp.png`,
     };
   });
 
@@ -216,7 +217,7 @@ async function audit(drafts: Draft[]): Promise<void> {
     if (keys.has(draft.key)) errors.push(`content key重複: ${draft.key}`);
     keys.add(draft.key);
     if (!draft.caption.includes("{{url}}")) errors.push(`URL tokenなし: ${draft.key}`);
-    if (!draft.canonicalUrl.startsWith("https://stats47.jp/")) {
+    if (!draft.canonicalUrl.startsWith(`${SITE.origin}/`)) {
       errors.push(`canonical不正: ${draft.key}`);
     }
     try {

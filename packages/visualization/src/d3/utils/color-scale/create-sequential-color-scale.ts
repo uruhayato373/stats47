@@ -7,6 +7,7 @@
 
 import type { SequentialColorScaleOptions } from "../../types";
 import { resolveColorInterpolator } from './create-color-schemes';
+import { DEFAULT_PREFECTURE_MAP_PROPS } from "../../constants/map-constants";
 
 /**
  * 順序カラースケールを生成
@@ -22,7 +23,7 @@ export async function createSequentialColorScale(
     colorScheme = "interpolateBlues",
     isReversed = false,
     minValueType = 'data-min',
-    noDataColor = "#e0e0e0",
+    noDataColor = DEFAULT_PREFECTURE_MAP_PROPS.noDataFillColor,
     d3: providedD3,
   } = options;
 

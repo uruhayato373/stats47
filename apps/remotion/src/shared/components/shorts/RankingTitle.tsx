@@ -1,6 +1,7 @@
 import React from "react";
 import { AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
 import { BRAND, COLOR_SCHEMES, FONT, SPACING, type ThemeName } from "@/shared";
+import { SITE } from "@stats47/types";
 
 interface RankingTitleProps {
     titleMain: string;
@@ -97,7 +98,7 @@ export const RankingTitle: React.FC<RankingTitleProps> = ({
                     color: colors.muted,
                     letterSpacing: 2,
                 }}>
-                    統計で見る都道府県
+                    {SITE.name}
                 </div>
             </div>
 

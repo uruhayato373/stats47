@@ -15,6 +15,8 @@ import type {
   PopulationRecord,
 } from "../population-choropleth/types";
 import { computeDivergingPathsWithScale } from "../../shared/utils/choropleth-diverging";
+import { SITE } from "@stats47/types";
+import { PREFECTURE_TOPOJSON_FILE } from "../../shared/utils/static-files";
 interface PrefMigration {
   code: string;
   name: string;
@@ -64,7 +66,7 @@ export const MigrationIntro: React.FC<{ theme?: ThemeName }> = ({
   useEffect(() => {
     let cancelled = false;
     Promise.all([
-      fetch(staticFile("prefecture.topojson")).then((r) => r.json()),
+      fetch(staticFile(PREFECTURE_TOPOJSON_FILE)).then((r) => r.json()),
       fetch(staticFile("migration-flow/pref-net-2025.json")).then(
         (r) => r.json() as Promise<{ entries: PrefMigration[] }>,
       ),
@@ -246,7 +248,7 @@ export const MigrationIntro: React.FC<{ theme?: ThemeName }> = ({
           color: colors.muted,
         }}
       >
-        データ出典: 総務省統計局「住民基本台帳人口移動報告」2025年（e-Stat）　｜　stats47.jp
+        データ出典: 総務省統計局「住民基本台帳人口移動報告」2025年（e-Stat）　｜　{SITE.domain}
       </div>
     </AbsoluteFill>
   );

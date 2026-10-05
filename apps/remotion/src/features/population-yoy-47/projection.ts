@@ -6,6 +6,7 @@ import { feature } from "topojson-client";
 import type { GeometryCollection, Topology } from "topojson-specification";
 import type { CityPathInfo } from "../population-choropleth/types";
 import type { YoyRecord } from "./types";
+import { DEFAULT_PREFECTURE_MAP_PROPS } from "@stats47/visualization";
 
 export interface ProjectionConfig {
   width: number;
@@ -77,7 +78,7 @@ export function computeYearPaths(
     const code: string = feat.properties?.N03_007 || "";
     const name: string = feat.properties?.N03_001 || "";
     const rec = dataMap.get(code);
-    const fill = rec ? colorScale(rec.ratio) : "#e0e0e0";
+    const fill = rec ? colorScale(rec.ratio) : DEFAULT_PREFECTURE_MAP_PROPS.noDataFillColor;
     const pathString = pathGenerator(feat) || "";
     return {
       path: pathString,

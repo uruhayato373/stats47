@@ -5,6 +5,8 @@
  * `JapanAvailability` の実装。metric が日本全国値をどう扱えるかを判別可能 union で表す。
  * 自由記述の真偽値 (例: `hasNational: boolean`) を増やさず、この型だけを正とする。
  */
+import { NATIONAL_AREA_CODE, PREFECTURE_AREA_CODE_RE } from '@stats47/area';
+
 export type JapanAvailability =
   | { status: 'official' }
   | { status: 'derived-additive'; recipeKey: string }
@@ -38,12 +40,12 @@ export function isMunicipalityStatisticsScope(
   return scope.kind === 'municipality-set' || scope.kind === 'municipality';
 }
 
-/** e-Stat の全国行 areaCode。 */
-export const JAPAN_NATIONAL_AREA_CODE = '00000';
+/** e-Stat の全国行 areaCode。値の正本は @stats47/area の NATIONAL_AREA_CODE。 */
+export const JAPAN_NATIONAL_AREA_CODE = NATIONAL_AREA_CODE;
 
 /** 47都道府県が完全に揃う年だけを加算する全国値recipe。 */
 export const JAPAN_DERIVED_ADDITIVE_RECIPE_KEY =
   'sum-complete-prefecture-series-v1';
 
-/** 都道府県コード (01000〜47000)。 */
-export const PREFECTURE_AREA_CODE_RE = /^(0[1-9]|[1-3][0-9]|4[0-7])000$/;
+/** 都道府県コード (01000〜47000)。値の正本は @stats47/area。 */
+export { PREFECTURE_AREA_CODE_RE };

@@ -24,10 +24,11 @@ import { config } from "dotenv";
 import fs from "fs";
 import path from "path";
 import yaml from "js-yaml";
+import { SITE } from "@stats47/types";
 
 config({ path: path.resolve(__dirname, "..", "..", "..", ".env.local") });
 
-const BUCKET = process.env.CLOUDFLARE_R2_BUCKET_NAME || "stats47";
+const BUCKET = process.env.CLOUDFLARE_R2_BUCKET_NAME || SITE.r2Bucket;
 const BLOG_PREFIX = "app/blog/";
 const OUT_PATH = path.resolve(__dirname, "..", "seed", "articles.json");
 

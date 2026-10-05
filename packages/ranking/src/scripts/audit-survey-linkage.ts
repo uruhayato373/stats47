@@ -38,6 +38,7 @@ import {
 
 import surveysMaster from '../data/surveys.json';
 import { resolveSurveyLinkage } from '../builders/build-ranking-item-from-metric';
+import { SITE } from '@stats47/types';
 
 type UnresolvedReason =
   | 'ssds-synthetic-only' // SSDS だが原典が合成 id (ssds-src:) のみ = 辞書の originalSurveys がマスタ未登録
@@ -61,7 +62,7 @@ function unresolvedReason(
   return 'no-source';
 }
 
-const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || 'https://storage.stats47.jp';
+const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || SITE.r2PublicBaseUrl;
 
 function isActiveConfig(m: MetricConfig): boolean {
   return m.isActive !== false;

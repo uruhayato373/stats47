@@ -1,26 +1,18 @@
 import React, { useMemo } from "react";
 import { AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
-import { TILE_GRID_LAYOUT } from "@stats47/visualization";
 import { scaleSequential } from "d3-scale";
 import { interpolateBlues } from "d3-scale-chromatic";
 
 import { BRAND, COLOR_SCHEMES, FONT, type RankingEntry, type ThemeName } from "@/shared";
+import { SITE } from "@stats47/types";
+import { LANDSCAPE_TILE_LAYOUT } from "../../shared/utils/video-tile-layout";
 
 // ---------------------------------------------------------------------------
 // Tile grid layout for 16:9 intro
 // ---------------------------------------------------------------------------
 
-const INTRO_OFFSETS: Record<number, { dx: number; dy: number }> = Object.fromEntries([
-  ...[36, 37, 38, 39].map((id) => [id, { dx: 0, dy: 0 }]),
-  ...[40, 41, 42, 43, 44, 45, 46].map((id) => [id, { dx: -1, dy: -2 }]),
-  [47, { dx: -1, dy: -3 }],
-]);
-
-const INTRO_TILE_LAYOUT = TILE_GRID_LAYOUT.map((cell) => {
-  const offset = INTRO_OFFSETS[cell.id];
-  if (!offset) return cell;
-  return { ...cell, x: cell.x + offset.dx, y: cell.y + offset.dy };
-});
+/** 動画用オフセット適用済みレイアウト (正典: src/shared/utils/video-tile-layout.ts) */
+const INTRO_TILE_LAYOUT = LANDSCAPE_TILE_LAYOUT;
 
 const GRID_MIN_X = Math.min(...INTRO_TILE_LAYOUT.map((c) => c.x));
 const GRID_MAX_X = Math.max(...INTRO_TILE_LAYOUT.map((c) => c.x + (c.w ?? 1)));
@@ -285,7 +277,7 @@ export const NormalIntro: React.FC<NormalIntroProps> = ({
         }}>
           stats47
         </div>
-        <span style={{ fontSize: 16, color: colors.muted }}>統計で見る都道府県</span>
+        <span style={{ fontSize: 16, color: colors.muted }}>{SITE.name}</span>
       </div>
     </AbsoluteFill>
   );

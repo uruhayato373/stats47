@@ -1,6 +1,6 @@
 "use client";
 
-import { REGIONS } from "@stats47/area";
+import { NATIONAL_AREA_CODE, REGIONS } from "@stats47/area";
 import { cn } from "@stats47/components";
 import { select, ascending, min, max, quantile, scaleBand, scaleLinear, axisLeft, axisBottom } from "d3";
 import { useEffect, useRef } from "react";
@@ -80,7 +80,7 @@ export function BoxplotChart({
     const TEXT_MUTED = colors.textMuted;
     const BORDER = colors.border;
 
-    const filteredData = data.filter((d) => d.areaCode !== "00000");
+    const filteredData = data.filter((d) => d.areaCode !== NATIONAL_AREA_CODE);
 
     const scale = width / 1200;
     const margin = {
@@ -95,7 +95,7 @@ export function BoxplotChart({
     select(svgEl).selectAll("*").remove();
 
     const svg = select(svgEl)
-      .style("font-family", "'Hiragino Kaku Gothic ProN', 'Hiragino Kaku Gothic Pro', Meiryo, 'Helvetica Neue', Helvetica, Arial, sans-serif");
+      .style("font-family", CHART_STYLES.font.family);
 
     const g = svg.append("g").attr("transform", `translate(${margin.left},${margin.top})`);
 

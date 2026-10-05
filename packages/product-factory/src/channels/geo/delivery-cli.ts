@@ -7,6 +7,7 @@ import type { GeoAnalysisEvidenceManifest, GeoAnalysisSnapshot, GeoLandPricePref
 import { GIS_DATASETS_BY_ID, assertKsjPublicStructuredOutputAllowed } from '@stats47/gis/mlit-ksj';
 import { assertDeliveryDetail, buildDelivery, digest } from './delivery';
 import { GEO_SERVICE_OFFER as offer } from './service-offer';
+import { SITE } from '@stats47/data-configs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../../../..');
 const r2 = path.join(root, '.local/r2');
@@ -39,7 +40,7 @@ async function main(): Promise<void> {
   const manifest: GeoAnalysisEvidenceManifest = JSON.parse(manifestBytes.toString());
   validateManifestInputs(manifest);
   // 配信中のmanifestとローカル入力が同一のときだけ納品見本を作る。
-  const response = await fetch(`https://storage.stats47.jp/${base}/manifest.json`, { signal: AbortSignal.timeout(30_000) });
+  const response = await fetch(`${SITE.r2PublicBaseUrl}/${base}/manifest.json`, { signal: AbortSignal.timeout(30_000) });
   if (!response.ok || digest(Buffer.from(await response.arrayBuffer())) !== digest(manifestBytes)) throw new Error('live/local manifest mismatch');
   const aggregate: GeoAnalysisSnapshot = JSON.parse(readEvidence(manifest.aggregate.key, manifest.aggregate.sha256, manifest.aggregate.bytes).toString());
   if (aggregate.rows.length !== 47 || JSON.stringify(aggregate.rows.map(r => r.areaCode).sort()) !== JSON.stringify(prefCodes.map(p => `${p}000`))) throw new Error('aggregate prefecture set mismatch');

@@ -13,6 +13,7 @@ import type {
   RankingValuesKeySnapshot,
 } from "../../types/snapshot";
 import type { RankingValue } from "../../types";
+import { NATIONAL_AREA_CODE } from "@stats47/area";
 
 /** 分母 1 年分 (areaCode → 値) */
 export type DenominatorYearMap = ReadonlyMap<string, number | null>;
@@ -130,7 +131,7 @@ export function buildNationalTrendSeries(
     let yearName = partition.yearCode;
 
     for (const v of partition.values as RankingValue[]) {
-      if (v.areaCode === "00000") continue;
+      if (v.areaCode === NATIONAL_AREA_CODE) continue;
       if (v.value === null || !Number.isFinite(v.value)) continue;
       total += v.value;
       count++;

@@ -74,9 +74,10 @@ import {
   type FloodRiverClass,
 } from "../../geo-analysis/flood-inputs";
 import { assertKsjPublicStructuredOutputAllowed } from "../license-policy";
+import { SITE } from "@stats47/types";
 
 const R2_PUBLIC_BASE = (
-  process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp"
+  process.env.R2_PUBLIC_FETCH_URL ?? SITE.r2PublicBaseUrl
 ).replace(/\/+$/, "");
 const POPULATION_VERSION = "24";
 const LAND_PRICE_VERSION = "26";

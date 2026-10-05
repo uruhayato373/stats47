@@ -7,6 +7,7 @@ import { formatValueWithPrecision, resolveValuePrecision } from "@stats47/utils"
 import { computeFontSize } from "../../../shared/layout";
 import { useD3Tooltip } from "../../hooks/useD3Tooltip";
 import type { DonutChartDataNode, DonutChartProps } from "./types";
+import { FONT } from "../../constants/chart-styles";
 
 /**
  * DonutChart - 構成比を円環状に表示する D3 チャート
@@ -102,7 +103,7 @@ export function DonutChart({
         g.append("g")
             .attr(
                 "font-family",
-                "'Hiragino Kaku Gothic ProN', 'Hiragino Kaku Gothic Pro', Meiryo, 'Helvetica Neue', Helvetica, Arial, sans-serif",
+                FONT.family,
             )
             .attr("font-size", baseFontSize)
             .attr("text-anchor", "middle")

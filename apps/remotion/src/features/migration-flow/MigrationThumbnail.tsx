@@ -11,6 +11,7 @@ import { feature } from "topojson-client";
 import type { Feature, FeatureCollection } from "geojson";
 import type { GeometryCollection, Topology } from "topojson-specification";
 import { FONT } from "@stats47/migration-flow";
+import { PREFECTURE_TOPOJSON_FILE } from "../../shared/utils/static-files";
 
 interface PrefMigration {
   code: string;
@@ -61,7 +62,7 @@ export const MigrationThumbnail: React.FC = () => {
   useEffect(() => {
     let cancelled = false;
     Promise.all([
-      fetch(staticFile("prefecture.topojson")).then((r) => r.json()),
+      fetch(staticFile(PREFECTURE_TOPOJSON_FILE)).then((r) => r.json()),
       fetch(staticFile("migration-flow/pref-net-2025.json")).then(
         (r) => r.json() as Promise<{ entries: PrefMigration[] }>,
       ),

@@ -21,6 +21,8 @@ export const FONT = {
   sizeRatioCompact: 0.022,
   /** 最小フォントサイズ（px） */
   minFontSize: 12,
+  /** 日本語フォント指定（BoxplotChart / DonutChart / ツールチップ共通） */
+  family: "'Hiragino Kaku Gothic ProN', 'Hiragino Kaku Gothic Pro', Meiryo, 'Helvetica Neue', Helvetica, Arial, sans-serif",
 } as const;
 
 /**

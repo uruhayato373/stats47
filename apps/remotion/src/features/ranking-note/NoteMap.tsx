@@ -4,6 +4,7 @@ import { AbsoluteFill } from "remotion";
 import { BRAND, FONT } from "@/shared/themes/brand";
 import { ChoroplethMapSvg } from "@/shared/components/maps/ChoroplethMapSvg";
 import { NoteLegend, formatNoteValue, resolveNoteData, useNoteMapPaths, type NoteImageProps } from "./note-common";
+import { SITE } from "@stats47/types";
 
 const MAP_BOX = { width: 1000, height: 560 };
 
@@ -54,9 +55,9 @@ export const NoteMap: React.FC<NoteImageProps> = (props) => {
       </div>
 
       <div style={{ position: "absolute", left: 0, right: 0, bottom: 0, height: 56, backgroundColor: "#EEF2F7", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22, color: "#475569" }}>
-        <span style={{ fontWeight: FONT.weight.black, color: BRAND.primary }}>stats47.jp</span>
+        <span style={{ fontWeight: FONT.weight.black, color: BRAND.primary }}>{SITE.domain}</span>
         <span style={{ margin: "0 12px", opacity: 0.4 }}>|</span>
-        <span>統計で見る都道府県</span>
+        <span>{SITE.name}</span>
       </div>
     </AbsoluteFill>
   );
