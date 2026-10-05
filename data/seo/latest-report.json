@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "date": "2026-10-05",
+  "date": "2026-10-06",
   "period": {
-    "periodStart": "2026-09-26",
-    "periodEnd": "2026-10-02",
+    "periodStart": "2026-09-27",
+    "periodEnd": "2026-10-03",
     "windowDays": 7
   },
-  "inputHash": "437334754d7a98e14a534fee71fff1f5f1dbc12e4dd9efcb4449c92c1d17d784",
+  "inputHash": "e0d53312027e1b080baceb75dbb96a8e3fe03c79d8db5bd4c9bde8726e6d60c2",
   "movements": [
     {
       "keyword": "ふるさと納税 募集費用",
@@ -18,49 +18,49 @@
       "change": 59.666666666666664
     },
     {
+      "keyword": "うどん消費量ランキング",
+      "targetPath": "/blog/udon-soba-food-culture-prefecture-map",
+      "before": 3,
+      "after": 61,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": -58
+    },
+    {
+      "keyword": "地方 債 利率 ランキング",
+      "targetPath": "/blog/local-government-debt-burden",
+      "before": 49,
+      "after": 3,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": 46
+    },
+    {
       "keyword": "任意保険 加入 率",
       "targetPath": "/ranking/voluntary-car-insurance-rate-bodily-injury",
       "before": 75.5,
-      "after": 34.666666666666664,
+      "after": 32.25,
       "beforeImpressions": 2,
-      "impressions": 3,
-      "change": 40.833333333333336
-    },
-    {
-      "keyword": "教員 年収ランキング",
-      "targetPath": "/ranking/school-teacher-annual-income",
-      "before": 48.25,
-      "after": 8,
-      "beforeImpressions": 4,
-      "impressions": 2,
-      "change": 40.25
-    },
-    {
-      "keyword": "任意保険 加入率",
-      "targetPath": "/ranking/voluntary-car-insurance-rate-bodily-injury",
-      "before": 76,
-      "after": 35.81818181818182,
-      "beforeImpressions": 4,
-      "impressions": 11,
-      "change": 40.18181818181818
+      "impressions": 4,
+      "change": 43.25
     },
     {
       "keyword": "うどん消費量ランキング",
       "targetPath": "/ranking/soba-udon-dining-consumption-expenditure",
       "before": 11,
       "after": 50,
-      "beforeImpressions": 2,
+      "beforeImpressions": 1,
       "impressions": 1,
       "change": -39
     },
     {
       "keyword": "高校 教員 年収",
       "targetPath": "/blog/high-school-teacher-salary-prefecture-gap",
-      "before": 46.2,
+      "before": 46.25,
       "after": 10.666666666666666,
-      "beforeImpressions": 5,
+      "beforeImpressions": 4,
       "impressions": 6,
-      "change": 35.53333333333334
+      "change": 35.583333333333336
     },
     {
       "keyword": "高校の先生 給料",
@@ -72,31 +72,31 @@
       "change": 35
     },
     {
-      "keyword": "自動車保険 加入率",
-      "targetPath": "/ranking/voluntary-car-insurance-rate-bodily-injury",
-      "before": 52.5,
-      "after": 19.285714285714285,
-      "beforeImpressions": 4,
-      "impressions": 7,
-      "change": 33.214285714285715
-    },
-    {
-      "keyword": "任意保険 加入 率",
-      "targetPath": "/ranking/voluntary-car-insurance-rate-vehicle",
-      "before": 36.2,
-      "after": 69,
-      "beforeImpressions": 5,
-      "impressions": 1,
-      "change": -32.8
-    },
-    {
       "keyword": "警察 官 年収 ランキング",
       "targetPath": "/blog/avg-salary-police-prefecture-prefecture-gap",
       "before": 42,
-      "after": 9.5,
+      "after": 10,
       "beforeImpressions": 1,
-      "impressions": 2,
-      "change": 32.5
+      "impressions": 3,
+      "change": 32
+    },
+    {
+      "keyword": "高校教諭 年収",
+      "targetPath": "/blog/high-school-teacher-salary-prefecture-gap",
+      "before": 42,
+      "after": 11,
+      "beforeImpressions": 1,
+      "impressions": 4,
+      "change": 31
+    },
+    {
+      "keyword": "任意保険 加入率",
+      "targetPath": "/ranking/voluntary-car-insurance-rate-bodily-injury",
+      "before": 63,
+      "after": 33.53333333333333,
+      "beforeImpressions": 3,
+      "impressions": 15,
+      "change": 29.46666666666667
     }
   ],
   "verdicts": [
@@ -109,8 +109,8 @@
   "selected": {
     "keyword": "山形県 コンビニ 店舗数",
     "targetPath": "/blog/convenience-store-density-map",
-    "rank": 11.75223880597015,
-    "impressions": 335,
+    "rank": 11.75811209439528,
+    "impressions": 339,
     "clicks": 0,
     "group": 5,
     "previousMethod": null,
