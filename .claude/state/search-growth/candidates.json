@@ -73319,7 +73319,7 @@
       "id": "soft-404-risk::/ranking/barber-beautician-annual-income",
       "url": "/ranking/barber-beautician-annual-income",
       "type": "soft-404-risk",
-      "status": "approved",
+      "status": "dismissed",
       "score": 0.0583,
       "scoreBreakdown": {
         "impact": 0.5,
@@ -73358,7 +73358,9 @@
       "externalActionFlag": false,
       "approvedAt": "2026-08-24T11:08:38.393Z",
       "approvedWeek": "2026-W35",
-      "carriedForward": true
+      "carriedForward": true,
+      "dismissedAt": "2026-10-05T13:20:56.931Z",
+      "dismissReason": "2026-10-05 実測: R2 values.json は 2022 年の 38 県だけで薄い。原因は賃金構造基本統計 0003445758 を使う 40 指標が 2022 年しか配信していない共通問題で、個別ページの noindex ではなく DATA-WAGE-TABLE-YEARS-01 の再取り込みで補強する。本番は 200・noindex なし。3 週連続で再検出されていない"
     }
   ]
 }
