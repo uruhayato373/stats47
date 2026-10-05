@@ -297,6 +297,22 @@ updated: 2026-09-29
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [PR-1070-CI-FIX-01] develop → main の PR #1070 の CI 失敗 4 ゲートを直してマージする
+
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:gh pr checks 1070] [起票:2026-10-06] [期日:2026-10-11] [領域:管理]
+
+- **経緯**: 2026-10-05 に PR [#1070](https://github.com/uruhayato373/stats47/pull/1070) (develop → main、113 commit) を作成した。オーナー指示は「CI が通ったらマージ」だが、
+  `pr-quality-check.yml` の run 37316669276 (head `89a6d7585`) が失敗し、未マージ。失敗は static-gates (Checker Wiring Regression Guard: `✗ checker wiring regression: 2`)・
+  contract-tests (Agent / Skill Prompt Contract Guard)・type-check (Type Check)・test (Admin Unit Tests。ログに `R2 unreachable` と `getCloudflareContext` のエラー) の 4 job。
+  その後 develop の先頭が `[skip ci]` の commit (`1872a9980`) になったため、PR の check は再実行されていない (branch-workflow.md「`[skip ci]` の commit-back がヘッドになると PR に check が 1 つも付かない」)。
+- **注意**: 2026-10-05 夜時点で別セッションが同じ作業ツリーで「ハードコード定数/データの SSOT 集約リファクタ」(未コミット 451 ファイル) を進めていた。失敗が develop にある変更由来か、
+  そのリファクタの取り込み後に変わるかを、`npm run agent:session -- --status` で並行作業を確かめてから調べる。
+- **次**: ① 4 job のログを読み、それぞれ develop 上で再現する (`npm run type-check`・`npm run preflight:pr` など)。② 直したら develop に skip ci でない commit を push して PR の check を走らせる。
+  ③ 全 check が green になったらマージする (オーナー指示済み)。
+- **期日の理由**: `improvement-cycle-weekly.yml` のゲート修正 (Issue #1068 の再発防止) は main の定義で動く。10-12 (月) 06:00 JST の週次 run より前に main へ入れる。
+  マージ後は Issue #1068 が次の成功 run で自動で閉じることを確かめる。同じ PR に `9ba6e57a2` (計測 workflow が main の古い state で develop を上書きしない修正) も入っている。
+- **完了条件**: PR #1070 が全 check green でマージされ、本番デプロイが成功している。
+
 ### [GSC-COVERAGE-DEPLOY-01] カバレッジ是正と入力鮮度ガードを本番反映する
 
 タグ: [インフラ・計測] [種類:不具合] [実行:ユーザー] [検証:node .claude/scripts/gsc/build-coverage-queue.mjs --no-probe] [起票:2026-09-07] [期日:2026-09-28] [進行中] [領域:サイト]
@@ -555,6 +571,7 @@ updated: 2026-09-29
   2. `set-effort` 4 件は 2026-10-02 に canary 済みで全件合格 (Sonnet 5.5 の xhigh → high、各 3 回)。recall はすべて 1.0 → 1.0、1 回の費用は article-writer 10%・blog-critic 15%・open-data-curator 6%・sns-renderer 5% 減。frontmatter に `effort: high` を書くかはオーナー判断待ち。課題は合成の 1 題ずつなので、書いたら 2 週の実運用で品質を見る
   3. 費用の大半はメインセッション (4 週 $1,231・Opus 5 / 5.5 の xhigh が中心)。対話の既定 effort を下げるかはオーナーの使い方次第なので、`/ops/agents` の「メインセッション」を週次で見る
 - **完了条件**: 合格した 4 体の frontmatter に effort を書き (またはオーナーが見送りを決め)、次の `npm run model-usage:report` で `set-effort` 提案が消えている。
+- **2026-10-05 推奨 (W41 Could 2・オーナー判断待ち)**: 4 体 (open-data-curator / sns-renderer / article-writer / blog-critic) の frontmatter に `effort: high` を書く。根拠は canary 4 件とも recall 1.0 → 1.0、1 回の費用 5〜15% 減 (`.claude/state/metrics/model-usage/latest.json` の canary)。課題は合成 1 題ずつなので、書いたら 2 週の実運用で見落とし・差し戻しの増加を見て、増えたら外す。
 
 ### [ADMIN-MCP-STATUS-01] 管理画面で、この PC が使う MCP の一覧と接続状況を見られるようにする
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-09-28] [領域:管理]
