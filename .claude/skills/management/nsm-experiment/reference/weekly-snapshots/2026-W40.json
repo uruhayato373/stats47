@@ -2,7 +2,7 @@
   "week_id": "2026-W40",
   "year": 2026,
   "week": 40,
-  "generated_at": "2026-10-04T15:37:32.304Z",
+  "generated_at": "2026-10-05T07:46:26.701Z",
   "schemaVersion": 2,
   "weekId": "2026-W40",
   "anchor": "2026-10-04",
@@ -61,30 +61,32 @@
       "periodEnd": "2026-10-01",
       "windowDays": 7,
       "isFinalized": true,
-      "generatedAt": "2026-10-04T15:37:32.304Z",
+      "generatedAt": "2026-10-05T07:46:26.701Z",
       "source": "gsc",
       "limitations": [
         "取得遅延 3 日 (anchor=2026-10-04)"
       ],
-      "kpis": null,
+      "kpis": {
+        "clicks": 3074,
+        "impressions": 85491,
+        "ctr": 0.03595700132177656,
+        "position": 6.851551625317285
+      },
       "coverage": {
-        "status": "partial",
-        "missingDates": [
-          "2026-09-30",
-          "2026-10-01"
-        ],
-        "presentCount": 5,
+        "status": "complete",
+        "missingDates": [],
+        "presentCount": 7,
         "expectedCount": 7
       },
-      "status": "insufficient-data",
-      "insufficientReason": "insufficient-data: finalized7d=partial (missing 2026-09-30,2026-10-01) / previous7d=complete (missing -)"
+      "status": "complete",
+      "insufficientReason": null
     },
     "ga4": {
       "periodStart": "2026-09-27",
       "periodEnd": "2026-10-03",
       "windowDays": 7,
       "isFinalized": true,
-      "generatedAt": "2026-10-04T15:37:32.304Z",
+      "generatedAt": "2026-10-05T07:46:26.701Z",
       "source": "ga4",
       "limitations": [
         "取得遅延 1 日 (anchor=2026-10-04)",
@@ -109,26 +111,31 @@
       "periodEnd": "2026-09-24",
       "windowDays": 7,
       "isFinalized": true,
-      "generatedAt": "2026-10-04T15:37:32.304Z",
+      "generatedAt": "2026-10-05T07:46:26.701Z",
       "source": "gsc",
       "limitations": [
         "取得遅延 3 日 (anchor=2026-10-04)"
       ],
-      "kpis": null,
+      "kpis": {
+        "clicks": 2610,
+        "impressions": 85159,
+        "ctr": 0.030648551533014715,
+        "position": 6.829788982961285
+      },
       "coverage": {
         "status": "complete",
         "missingDates": [],
         "presentCount": 7,
         "expectedCount": 7
       },
-      "status": "insufficient-data"
+      "status": "complete"
     },
     "ga4": {
       "periodStart": "2026-09-20",
       "periodEnd": "2026-09-26",
       "windowDays": 7,
       "isFinalized": true,
-      "generatedAt": "2026-10-04T15:37:32.304Z",
+      "generatedAt": "2026-10-05T07:46:26.701Z",
       "source": "ga4",
       "limitations": [
         "取得遅延 1 日 (anchor=2026-10-04)",
@@ -251,12 +258,9 @@
   "gsc": {
     "coverage": {
       "finalized7d": {
-        "status": "partial",
-        "missingDates": [
-          "2026-09-30",
-          "2026-10-01"
-        ],
-        "presentCount": 5,
+        "status": "complete",
+        "missingDates": [],
+        "presentCount": 7,
         "expectedCount": 7
       },
       "previous7d": {
@@ -266,91 +270,91 @@
         "expectedCount": 7
       }
     },
-    "kpiComplete": false,
-    "insufficientReason": "insufficient-data: finalized7d=partial (missing 2026-09-30,2026-10-01) / previous7d=complete (missing -)",
+    "kpiComplete": true,
+    "insufficientReason": null,
     "total": {
-      "thisClicks": 2069,
+      "thisClicks": 3074,
       "prevClicks": 2610,
-      "clickDelta": -541,
-      "clickDeltaPct": -20.727969348659002,
-      "thisImpressions": 57730,
+      "clickDelta": 464,
+      "clickDeltaPct": 17.77777777777778,
+      "thisImpressions": 85491,
       "prevImpressions": 85159,
-      "impressionDelta": -27429,
-      "thisCtr": 0.03583925168889659,
+      "impressionDelta": 332,
+      "thisCtr": 0.03595700132177656,
       "prevCtr": 0.030648551533014715,
-      "thisPosition": 6.880027715226053,
+      "thisPosition": 6.851551625317285,
       "prevPosition": 6.829788982961285
     },
     "topQueries": [
       {
         "query": "外国人",
-        "clicks": 29,
-        "impressions": 199,
-        "ctr": 0.1457286432160804,
-        "position": 2.708542713567839
+        "clicks": 39,
+        "impressions": 260,
+        "ctr": 0.15,
+        "position": 2.7846153846153845
       },
       {
         "query": "子育てしやすい県ランキング",
-        "clicks": 15,
-        "impressions": 32,
-        "ctr": 0.46875,
-        "position": 1.1875
+        "clicks": 26,
+        "impressions": 47,
+        "ctr": 0.5531914893617021,
+        "position": 1.1702127659574468
+      },
+      {
+        "query": "全国学力テストの地域別結果と都道府県ごとの格差について詳しく教えて",
+        "clicks": 20,
+        "impressions": 87,
+        "ctr": 0.22988505747126436,
+        "position": 5.252873563218391
       },
       {
         "query": "製造品出荷額 ランキング 市町村",
-        "clicks": 12,
-        "impressions": 23,
-        "ctr": 0.5217391304347826,
-        "position": 1.391304347826087
-      },
-      {
-        "query": "うどん 消費量 ランキング",
-        "clicks": 11,
-        "impressions": 32,
-        "ctr": 0.34375,
-        "position": 1.84375
+        "clicks": 16,
+        "impressions": 35,
+        "ctr": 0.45714285714285713,
+        "position": 1.457142857142857
       },
       {
         "query": "うどん消費量ランキング",
-        "clicks": 11,
-        "impressions": 36,
-        "ctr": 0.3055555555555556,
-        "position": 2.0277777777777777
+        "clicks": 15,
+        "impressions": 49,
+        "ctr": 0.30612244897959184,
+        "position": 2.163265306122449
+      },
+      {
+        "query": "全国学力テスト 順位",
+        "clicks": 13,
+        "impressions": 150,
+        "ctr": 0.08666666666666667,
+        "position": 8.986666666666666
+      },
+      {
+        "query": "うどん 消費量 ランキング",
+        "clicks": 12,
+        "impressions": 39,
+        "ctr": 0.3076923076923077,
+        "position": 1.8461538461538463
       },
       {
         "query": "住みやすい県ランキング",
-        "clicks": 7,
-        "impressions": 348,
-        "ctr": 0.020114942528735632,
-        "position": 6.068965517241379
+        "clicks": 12,
+        "impressions": 495,
+        "ctr": 0.024242424242424242,
+        "position": 6.1313131313131315
       },
       {
-        "query": "日本 日照時間 ランキング",
-        "clicks": 5,
-        "impressions": 35,
-        "ctr": 0.14285714285714285,
-        "position": 3.5428571428571427
+        "query": "全国学力学習状況調査 順位",
+        "clicks": 8,
+        "impressions": 53,
+        "ctr": 0.1509433962264151,
+        "position": 6.339622641509434
       },
       {
-        "query": "納豆消費量 ランキング 2026",
-        "clicks": 5,
-        "impressions": 22,
-        "ctr": 0.22727272727272727,
-        "position": 1.6363636363636362
-      },
-      {
-        "query": "stats47",
-        "clicks": 4,
-        "impressions": 6,
-        "ctr": 0.6666666666666666,
-        "position": 1
-      },
-      {
-        "query": "うどん消費量ランキング 最新",
-        "clicks": 4,
-        "impressions": 12,
-        "ctr": 0.3333333333333333,
-        "position": 1
+        "query": "日照時間 ランキング",
+        "clicks": 8,
+        "impressions": 204,
+        "ctr": 0.0392156862745098,
+        "position": 5.921568627450981
       }
     ]
   },

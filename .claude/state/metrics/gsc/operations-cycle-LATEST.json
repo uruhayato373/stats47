@@ -1,23 +1,23 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-05T07:36:09.361Z",
+  "generatedAt": "2026-10-05T07:53:32.224Z",
   "stage": "monthly",
-  "status": "fail",
+  "status": "warn",
   "measurementWeek": "2026-W40",
   "expectedCompletedWeek": "2026-W40",
   "expectedPlanWeek": "2026-W41",
   "currentMonth": "2026-10",
   "summary": {
-    "pass": 9,
+    "pass": 11,
     "warn": 1,
-    "fail": 2
+    "fail": 0
   },
   "checks": [
     {
       "code": "snapshot-period",
-      "level": "fail",
-      "detail": "2026-W40 summary が missing/partial",
-      "action": "npm run fetch-gsc-snapshot -- 2026-W40"
+      "level": "pass",
+      "detail": "2026-W40 finalized7d coverage complete",
+      "action": null
     },
     {
       "code": "snapshot-freshness",
@@ -69,9 +69,9 @@
     },
     {
       "code": "weekly-review",
-      "level": "fail",
-      "detail": "2026-W40 review が無い",
-      "action": "/weekly-review 2026-W40"
+      "level": "pass",
+      "detail": "2026-W40 review の search-growth 節=あり",
+      "action": null
     },
     {
       "code": "monthly-plan",
@@ -82,7 +82,7 @@
     {
       "code": "monthly-review-coverage",
       "level": "pass",
-      "detail": "直近4週レビュー 3/4（必要 3以上）",
+      "detail": "直近4週レビュー 4/4（必要 3以上）",
       "action": null
     }
   ]
