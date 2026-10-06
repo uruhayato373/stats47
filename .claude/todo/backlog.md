@@ -2815,11 +2815,10 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
   `note.hashtags` (→ `config/`) と `improvement.budgets` (→ `.claude/config/`) も同じ手順で動かす。
 - **停止条件**: 定期実行は main の workflow 定義で動くので、パスを変えた取得元は main へ反映して定期実行で確かめるまで、
   次の取得元へ進まない (旧パスへ書き続けて記録が割れる)。本番 deploy は毎回オーナーの承認を取る。
-- **進捗 (2026-10-06)**: 基盤 (`datasetPath` / `datasetDir`・旧置き場の検査 `RETIRED`) は develop に入れた。1 つ目の PSI は
-  ブランチ `feature/20261006-psi-move` (`3bb6f5220`) にコミット済みで、develop には未投入。PR #1070 は 2026-10-06 に
-  マージ済みで、main の `psi-audit-daily` は develop を checkout する定義になった。10-07 02:00 JST の PSI 日次で巻き戻りが無いこと
-  (`STATE-OVERLAY-MAIN-01`) を確かめる。確かめたら同じ日の日中にこのブランチを develop へ入れて main まで反映し
-  (PSI 日次は JST 02:00)、翌朝の run が `data/psi/` に書いたことを確かめてから次の取得元へ進む。
+- **進捗 (2026-10-06)**: 基盤 (`datasetPath` / `datasetDir`・旧置き場の検査 `RETIRED`) は develop に入れた。1 つ目の PSI
+  (`3bb6f5220`) は、オーナー判断で 10-07 の巻き戻り確認 (`STATE-OVERLAY-MAIN-01`) を待たずに 2026-10-06 に develop へ
+  マージし (`f197151f0`)、PR #1077 で main まで反映する。**次**: 10-07 02:00 JST の PSI 日次の run が `data/psi/` に書き、
+  旧置き場 `.claude/state/metrics/psi` に書いていないこと、既存の history 行が巻き戻っていないことを確かめてから次の取得元 (GSC) へ進む。
 - **完了条件**: `npm run check-datasets -- --moves` が 0 行。関係する workflow の次回の定期実行が新しい置き場へ書いている。
 
 ## 🟢 低 — 時期未定・条件付き (trigger は本文に)
