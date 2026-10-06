@@ -362,7 +362,7 @@ test('[mutation] 旧 fetch-metrics-weekly の退避→切替→上書きコピ�
 test('[mutation] 切替と復元が別 step でも検出する (退避先が $RUNNER_TEMP でも同じ)', () => {
   const found = findForeignTreeRestore([
     'git checkout develop\ngit pull --rebase origin develop\n',
-    'cp -r "$RUNNER_TEMP/psi-publish/"* .claude/state/metrics/psi/\n',
+    'cp -r "$RUNNER_TEMP/psi-publish/"* data/psi/\n',
   ]);
   assert.equal(found.length, 1);
   assert.equal(found[0].stepIndex, 1);
@@ -380,7 +380,7 @@ test('[mutation] 旧 deploy-workers の improvement-log 書き戻しを検出す
 });
 
 test('[mutation] develop を checkout して生成する形は違反にしない', () => {
-  const run = 'npm run psi-audit:digest\ngit add .claude/state/metrics/psi\ngit commit -m x\ngit pull --rebase --autostash origin develop\ngit push origin develop\n';
+  const run = 'npm run psi-audit:digest\ngit add data/psi\ngit commit -m x\ngit pull --rebase --autostash origin develop\ngit push origin develop\n';
   assert.deepEqual(findForeignTreeRestore([run]), []);
 });
 

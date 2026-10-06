@@ -2,8 +2,8 @@
  * PSI 日次 digest 更新スクリプト
  *
  * 最新の psi-batch-*.json を読み、以下を更新する:
- *   - .claude/state/metrics/psi/history.csv    : append-only の日次履歴（URL × strategy × 日）
- *   - .claude/state/metrics/psi/LATEST.md      : 人間向け最新レポート（前日比矢印 + 閾値違反強調）
+ *   - data/psi/history.csv    : append-only の日次履歴（URL × strategy × 日）
+ *   - data/psi/LATEST.md      : 人間向け最新レポート（前日比矢印 + 閾値違反強調）
  *
  * CI では fetch-psi-audit.mjs → psi-threshold-check.mjs → psi-update-digest.mjs の順で呼ぶ。
  * psi-update-digest.mjs は threshold-check の結果を引数で受け取らず、自分で再計算する
@@ -16,15 +16,16 @@
 import { readFileSync, readdirSync, writeFileSync, existsSync, appendFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 const PROJECT_ROOT = resolve(fileURLToPath(import.meta.url), "..", "..", "..", "..");
 const BUDGETS_PATH = join(
   PROJECT_ROOT,
   ".claude/skills/analytics/performance-improvement/budgets.json"
 );
-const STATE_DIR = join(PROJECT_ROOT, ".claude/state/metrics/psi");
-const HISTORY_CSV = join(STATE_DIR, "history.csv");
-const LATEST_MD = join(STATE_DIR, "LATEST.md");
+const STATE_DIR = join(PROJECT_ROOT, datasetDir("psi.batch"));
+const HISTORY_CSV = join(PROJECT_ROOT, datasetPath("psi.history"));
+const LATEST_MD = join(PROJECT_ROOT, datasetPath("psi.latest"));
 
 const HISTORY_HEADER =
   "date,url,strategy,page_type,score_performance,lcp_ms,cls,tbt_ms,fcp_ms,ttfb_ms,violations_error,violations_warning";

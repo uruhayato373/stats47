@@ -23,6 +23,7 @@ import {
 import { judgeability } from "./lib/gsc-improvements-adapter.mjs";
 import { parseDimensionLedger } from "../google-admin/dimension-ledger.mjs";
 import { parseBacklog } from "../lib/scan-pending-improvements.mjs";
+import { datasetPath } from "../../../config/datasets.mjs";
 
 const strategyLanes = createRequire(import.meta.url)("../lib/strategy-lanes.cjs");
 
@@ -92,7 +93,7 @@ const liveProductCountOf = (kdp) =>
  * SNS は sns-weekly-report.mjs と同じ sns-metrics-store.readByRange。
  */
 function buildOperations(week, asOf, pending) {
-  const psiRows = readCsvIfExists(join(PROJECT_ROOT, ".claude/state/metrics/psi/history.csv"));
+  const psiRows = readCsvIfExists(join(PROJECT_ROOT, datasetPath("psi.history")));
   const cfDir = join(PROJECT_ROOT, ".claude/state/metrics/cloudflare");
   const cfRows = readCsvIfExists(join(cfDir, "history.csv"));
   const rules = JSON.parse(readFileSync(join(PROJECT_ROOT, ".claude/skills/analytics/cloudflare-cost-improvement/reference/budgets-daily.json"), "utf8")).rules;

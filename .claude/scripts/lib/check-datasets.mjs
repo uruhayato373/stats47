@@ -114,7 +114,8 @@ function retiredHits() {
     .split("\n")
     .map((row) => row.match(/^([^:]+):(\d+):(.*)$/))
     .filter(Boolean)
-    .map((m) => ({ file: m[1], line: Number(m[2]), text: m[3] }));
+    .map((m) => ({ file: m[1], line: Number(m[2]), text: m[3] }))
+    .filter((hit) => hit.file !== "config/datasets.mjs"); // 旧置き場を宣言する台帳自身は除く
 }
 
 function trackedFiles() {
