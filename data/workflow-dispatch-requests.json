@@ -1,0 +1,7 @@
+{
+  "workflow": "purge-cdn.yml",
+  "inputs": {},
+  "ref": "main",
+  "reason": "PR #1086 のデプロイ中に Workers Cache に入った / の HTML が削除済みの CSS (d69590e93db400ea.css, 404) を参照し、本番ホームが CSS なしで表示されている。Workers Cache を全パージする",
+  "requestedAt": "2026-10-06T22:11:44Z"
+}
