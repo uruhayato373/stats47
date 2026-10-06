@@ -1,9 +1,0 @@
-{
-  "metric": "national-medical-expense-per-person,turnover-rate,job-change-rate,single-person-household-ratio,jr-passenger-transport,road-total-length-with-expressway,road-expressway-length,gender-wage-gap,consumer-price-difference-index-housing,consumer-price-difference-index-food,building-fire-count-per-100-thousand-people,air-passenger-transport",
-  "since": "",
-  "dryRun": false,
-  "migrateLegacyRecipes": false,
-  "snapshotScope": "ranking",
-  "reason": "THEME-CHART-TEMPORAL-MISMATCH-01 (折れ線の単年指標 12 件の years 拡張) の R2 反映",
-  "requestedAt": "2026-10-06T05:23:16.132Z"
-}
