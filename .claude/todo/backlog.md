@@ -333,14 +333,6 @@ updated: 2026-10-06
 - **次**: 3 記事を `/brushup-blog --target article` で是正し、critic PASS 後に公開する。記事詳細は prerender なので本文の反映には再デプロイが要る (`nextjs-ssg-preservation.md`)。
 - **完了条件**: 3 記事の本番本文に上記の食い違いが無く、`quality-gate.mjs` が blocker 0。
 
-### [SHARE-BUTTON-CONTRAST-01] ブログの共有ボタン (LINE・はてな) と強調文字の色のコントラスト不足をどう直すか決める
-タグ: [UI・UX] [種類:不具合] [実行:対話] [起票:2026-10-06] [領域:サイト]
-
-- **事象 (2026-10-06 axe 実測・`/blog/beer-peak-month-july-to-december`・390px)**: `color-contrast` (serious) が 3 か所。LINE ボタン (`bg-[#06C755]` に白文字) とはてなボタン (`bg-[#00A4DE]` に白文字) と、`text-positive` の小見出し (`mb-1 flex … text-xs font-bold text-positive`)。週次 page-quality の `a11y_violations` に出ている。
-- **実装済み (2026-10-06・未デプロイ)**: オーナー承認のうえ、共有ボタンはブランドの地色のまま文字を濃紺 `#0f172a` にした (LINE 7.91:1 / はてな 6.26:1)。小見出しは callout のラベル行で、文字を `text-foreground` にし種類の色はアイコンだけに残した (`Callout.tsx`・5 種共通)。`--positive` トークンは変えていない。
-- **次**: 次の本番デプロイ後に同じ URL を axe で測る。
-- **完了条件**: 同じ URL の axe `color-contrast` が 0 件。
-
 ### [GEO-QGIS-DEMAND-01] QGIS の使い方ブログ 3 本で需要を測り、note「国土数値情報をQGISで扱う」を作るか決める
 タグ: [収益化] [種類:制作] [実行:対話] [起票:2026-10-03] [領域:サイト]
 
@@ -2515,26 +2507,25 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
   概算値と確定値の区別を年ごとに保持する。SSDS 由来の 2008〜2021 年度と重なる年は値の一致を検査してから置き換える。
 - **完了条件**: 2022 年度以降が 47 県そろって R2 に入り、provenance が監査 (`/audit-provenance`) を通り、ランキングページの最新年が更新されている。
 
-### [DATA-LAYOUT-MOVE-01] 計測・記録・改善のデータを `.claude/` から `data/<取得元>/` へ移す
+### [DATA-LAYOUT-MOVE-01] 置き場を data/<取得元>/ へ移した後、定期実行が新しい置き場へ書くことを確かめ、残る直書きを台帳の id に替える
 
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run check-datasets] [起票:2026-10-06] [進行中] [領域:管理]
 
-- **経緯**: 2026-10-06 に台帳 `config/datasets.mjs` と検査 `npm run check-datasets` を入れた (手順 1・ファイルは動かしていない)。
-  台帳で本来の置き場 (`target`) と現在地が食い違う行が 68 行・1,155 件あり、ほぼすべてが `data/` への移行対象。
-  一覧は `npm run check-datasets -- --moves`。区分は `.claude/rules/data-storage.md`、手本は doboku-note の `data/<取得元>/`。
-- **次**: 取得元ごとに 1 回ずつ移す。順の目安は GSC → GA4 → PSI → Cloudflare → アフィリエイト (`.claude/state/ads` と
-  `metrics/affiliate`) → 商品の販売台帳 → SNS 投稿台帳 → 改善ログと週次スナップショット → 週次・月次レビューと NSM。
-  1 回の中身: 台帳の `path` を `data/<取得元>/` へ書き換え、コードは台帳の id からパスを引く (`datasetPath(id)` を足し、
-  `config-paths.test.ts` と同じ直書き検査を data/ にも広げる) → `git mv` → workflow の commit-back の `git add` と
-  `RETENTION_POLICIES` の `directory` を同じ差分で変える → develop → main まで反映 → 次の定期実行が新しい置き場に書いたことを確かめる。
-  `note.hashtags` (→ `config/`) と `improvement.budgets` (→ `.claude/config/`) も同じ手順で動かす。
-- **停止条件**: 定期実行は main の workflow 定義で動くので、パスを変えた取得元は main へ反映して定期実行で確かめるまで、
-  次の取得元へ進まない (旧パスへ書き続けて記録が割れる)。本番 deploy は毎回オーナーの承認を取る。
-- **進捗 (2026-10-06)**: 基盤 (`datasetPath` / `datasetDir`・旧置き場の検査 `RETIRED`) は develop に入れた。1 つ目の PSI
-  (`3bb6f5220`) は、オーナー判断で 10-07 の巻き戻り確認 (`STATE-OVERLAY-MAIN-01`) を待たずに 2026-10-06 に develop へ
-  マージし (`f197151f0`)、PR #1077 で main まで反映する。**次**: 10-07 02:00 JST の PSI 日次の run が `data/psi/` に書き、
-  旧置き場 `.claude/state/metrics/psi` に書いていないこと、既存の history 行が巻き戻っていないことを確かめてから次の取得元 (GSC) へ進む。
-- **完了条件**: `npm run check-datasets -- --moves` が 0 行。関係する workflow の次回の定期実行が新しい置き場へ書いている。
+- **済み (2026-10-06)**: 移動は 2 段階とも main まで反映した (`npm run check-datasets -- --moves` が 0 行)。第 1 段階は PR #1086、
+  第 2 段階 (`.claude/state/` をエージェント運用の状態だけに絞る) は PR #1088。置き場の区分・`.claude/state/` の許可リスト
+  `AGENT_STATE`・移す手順は `.claude/rules/data-storage.md`。第 1 段階は develop から main まで 12 時間空き、Instagram・Threads・
+  認証付き計測の 3 run が記録を落とした (前 2 つは run のログから補った。認証付き計測の 15:57 UTC の 1 回分は欠けたまま)。
+- **確認済みの書き込み**: PSI 日次 (`data/psi`)・Cloudflare 日次 (`data/cloudflare`、保持期間の削除も)・SEO キーワード (`data/seo`)・
+  認証付き計測 (`data/authenticated`)。
+- **次**: 次の定期実行が新しい置き場に書き、旧置き場に書いていないことを、run の commit-back の差分で確かめる。
+  日次: GSC URL 検査 (`data/gsc/coverage-remediation`・`data/gsc/url-inspection`)・Instagram 投稿 (`data/sns/ig-posted-log.jsonl`・
+  `data/sns/posts.json`)・Threads 確認・AI 解説 (`data/ai-content`)・workflow 健全性 (`data/ci`)・backlog-loop (`data/gsc`・`data/page-quality`)。
+  週次: 土曜の page-quality・内部リンク・出典・ランキング整合・e-Stat 年カバレッジ、日曜の `fetch-metrics-weekly` (`data/` 全体) と
+  search-growth・affiliate GA4、月曜の improvement-cycle。
+  あわせて、コードに残る `data/...` の直書きを `datasetPath(id)` / `datasetDir(id)` へ替える (`config-paths.test.ts` と同じ直書き検査を
+  `data/` にも広げる)。オーナーの Mac / Windows の launchd ジョブ (SNS・A8) は `git pull` 後に新しい置き場へ書く。
+- **未決**: SEO の日次系列 (`data/seo/rank-history/`・`selections/`) の保持期間 (`prune-state-snapshots.test.mjs` に「保持期間は未決」で宣言)。
+- **完了条件**: 上の日次・週次の定期実行がすべて新しい置き場へ書いた (期日 2026-10-13)。`data/` の直書きの検査が CI で通る。
 
 ## 🟢 低 — 時期未定・条件付き (trigger は本文に)
 
