@@ -4,7 +4,7 @@ import { Readable } from "node:stream";
 
 import { localKindleBooksDir, localKindleCoverDraftsDir, projectRoot } from "@/lib/server/project-root";
 import { mimeFor, resolveSafe } from "@/lib/server/safe-local-file";
-import { KDP_LISTINGS } from "../../../../../packages/product-factory/src/ledger-paths.mjs";
+import { KDP_LISTINGS } from "../../../../../config/paths.mjs";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";

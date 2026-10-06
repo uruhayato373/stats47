@@ -28,7 +28,7 @@ import {
   readCatalog, readListings, writeBackCatalog, resolveImagePath,
 } from './lib/coconala-session.mjs';
 import { fillServiceForm, submitForm, dismissModal, uploadImage } from './lib/coconala-form.mjs';
-import { COCONALA_ASSETS_DIR, COCONALA_LISTINGS } from '../../../packages/product-factory/src/ledger-paths.mjs';
+import { COCONALA_ASSETS_DIR, COCONALA_LISTINGS } from '../../../config/paths.mjs';
 
 const argv = process.argv.slice(2);
 const getArg = (n) => { const i = argv.indexOf(n); return i >= 0 ? argv[i + 1] : null; };

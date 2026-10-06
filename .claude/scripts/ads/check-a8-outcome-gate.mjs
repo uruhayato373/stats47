@@ -5,10 +5,11 @@ import { join } from "node:path";
 
 import { evaluateA8OutcomeGate } from "./lib/a8-report-period-core.mjs";
 import { repoRoot } from "./lib/asp-browser-base.mjs";
+import { A8_REPORT_AUTOMATION } from "../../../config/paths.mjs";
 
 const root = repoRoot();
 const affiliateDir = join(root, ".claude/state/metrics/affiliate");
-const configPath = join(root, ".claude/config/a8-report-automation.json");
+const configPath = join(root, A8_REPORT_AUTOMATION);
 
 const readJson = (path) => (existsSync(path) ? JSON.parse(readFileSync(path, "utf8")) : null);
 const cfg = readJson(configPath);

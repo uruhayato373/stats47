@@ -44,7 +44,7 @@ updated: 2026-09-29
   取れない場合は、差が 2 クリックに留まるかを 10 月初めの確定値で再確認し、許容差の導入はオーナー判断に回す。
 - **関連**: ローカルでサイト別集計を `--month 2026-09` で取ると download-failed になる (CI では成功)。debug artifact は `.local/playwright-a8-debug/2026-09-27T08-24-42Z`。
 - **2026-09-28 W40 Must 2 の調査結果 (原因は未確定・オーナー判断へ)**:
-  - 「サイト別 × プログラム別」の明細は **A8 に存在しない**。`.claude/config/a8-report-automation.json` の `_isolationNote` に実機確認の記録
+  - 「サイト別 × プログラム別」の明細は **A8 に存在しない**。`config/a8-report-automation.json` の `_isolationNote` に実機確認の記録
     (`/report/program/detail` はサイト列なし・素材 ID でも分離不可)。上の「次 (更新)」はこの経路では実行できない。
   - a8mat のトークンの意味は公式に文書化されておらず、手元のリンクからは発行サイトを判別できない。
   - [仮説] 専用案件のリンクの一部が doboku-note 側の名義で発行された、またはサイトの外で使われている。サイトの外の使用は
@@ -2819,20 +2819,6 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - **次**: 取得元を農水省の xlsx に切り替える (`fetcherKey: "manual"` か新しい取得経路)。`.claude/rules/data-provenance-standards.md` の provenance 9 点セットを先に書き、
   概算値と確定値の区別を年ごとに保持する。SSDS 由来の 2008〜2021 年度と重なる年は値の一致を検査してから置き換える。
 - **完了条件**: 2022 年度以降が 47 県そろって R2 に入り、provenance が監査 (`/audit-provenance`) を通り、ランキングページの最新年が更新されている。
-
-### [CONFIG-LAYOUT-02] `.claude/config/` に残る事業設定 7 件をルート `config/` へ移す
-
-タグ: [エージェント・SSOT] [種類:改善] [実行:sweep] [起票:2026-10-06] [領域:管理]
-
-- **対象**: `affiliate-asp.json`、`a8-report-automation.json`、`domains.json`、`psi-urls.txt`、`local-resources.json`、
-  `source-vault.json`、`yoy-batch.json`。どれも品質ゲートの基準ではなく、スクリプトや CI の接続先・対象の設定である
-  (区分は `.claude/rules/data-storage.md`「リポジトリ直下 `config/` `data/` と `.claude/` の区分」)。
-- **次**: 2026-10-06 の販売台帳の移行と同じ順で進める。先にパス定数へ寄せてテストを通し、その後 `git mv` と定数の変更を
-  同じ差分で行う。CI workflow・rules の `paths:`・skill の記述も同じ差分で変える。定数を `ledger-paths.mjs` に足すか、
-  別モジュールにするかはこのカードで決める。
-- **停止条件**: workflow が読むファイルは、workflow 側の参照を同じ差分で変えないかぎり動かさない。本番 deploy・R2 push はしない。
-- **完了条件**: 7 件が `config/` にあり、`git grep -n -E "\.claude/config/(affiliate-asp|a8-report-automation|domains|psi-urls|local-resources|source-vault|yoy-batch)"`
-  が日付付きの履歴記録以外で 0 件。関係するテストと `npm run type-check` が通る。
 
 ## 🟢 低 — 時期未定・条件付き (trigger は本文に)
 

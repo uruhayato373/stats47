@@ -1,7 +1,7 @@
 ---
 paths:
   - ".claude/{scripts/source-vault,skills/db/process-reference-source,state/source-inventory}/**"
-  - ".claude/config/source-vault.json"
+  - "config/source-vault.json"
   - "docs/02_実装計画/**"
   - ".claude/agents/{area-curator,area-databook-designer,open-data-curator}.md"
 ---
@@ -37,7 +37,7 @@ stats47 で調査・企画・実装に使う書籍、PDF、白書、報告書そ
 ```
 
 - `stats47` と全子孫は `shared:false` を維持し、公開リンク、組織共有、公開 R2 への複製を禁止する。
-- `.claude/config/source-vault.json` の `driveRootFolder` は `stats47`、`driveCollectionFolder` は `参考文献` に固定する。
+- `config/source-vault.json` の `driveRootFolder` は `stats47`、`driveCollectionFolder` は `参考文献` に固定する。
   各 profile の `driveSourceFolderName` と `driveEditionFolderName` から、人が読むDrive論理パスを決定する。
 - Driveのfolder名は正式な日本語名称を優先する。`stats47`、`sourceKey`、`edition`、manifestのfile名は、
   ブランド名または決定的な機械処理識別子なので英数字を維持する。
@@ -77,7 +77,7 @@ $TMPDIR/stats47-source-vault/
 
 ### 利用時の共通手順
 
-1. `.claude/config/source-vault.json` のprofileとGit manifestから、Drive論理パス、版、revisionを確定する。
+1. `config/source-vault.json` のprofileとGit manifestから、Drive論理パス、版、revisionを確定する。
 2. `npm run source-vault -- vault-root --profile <profile>` でローカルマウントを解決し、版 folder を manifest と照合する。
 3. 次の共通CLIで vault の全構成fileを検証して `work/` 配下へ複製する (複製後にも sha256 で照合する)。
 
@@ -178,7 +178,7 @@ Drive への保全だけでは stats47 への採用を意味しない。OCR、in
 - 保存先の分類: `.claude/rules/data-storage.md`
 - 観測値の出典: `.claude/rules/data-provenance-standards.md`
 - 文書配置: `.claude/rules/docs-vs-issues.md`
-- source vault 設定: `.claude/config/source-vault.json`
+- source vault 設定: `config/source-vault.json`
 - source vault CLI: `.claude/scripts/source-vault/source-vault.mjs`
 - OCR / page / crop / stage CLI: `.claude/scripts/source-vault/source-processing.mjs`
 - 段階運用 skill: `.claude/skills/db/process-reference-source/SKILL.md` (`/process-reference-source`、owner `open-data-curator`)

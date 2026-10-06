@@ -11,7 +11,7 @@
  *   - ensureTargetSite              : **サイト帰属の確定。失敗は例外** (asp-site-guard に判定を委譲)
  *
  * 由来: doboku-note `scripts/lib/asp-browser.mjs`。stats47 では対象サイトが stats47 側になる
- * (config `.claude/config/affiliate-asp.json` の targetSiteName / forbiddenSiteText で反転)。
+ * (config `config/affiliate-asp.json` の targetSiteName / forbiddenSiteText で反転)。
  */
 import { readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
@@ -32,6 +32,7 @@ import {
 } from "./asp-browser-base.mjs";
 import { assertSiteOrThrow, extractSiteId, SiteAttributionError } from "./asp-site-guard.mjs";
 import { unattended } from '../../measurement/browser-session.mjs';
+import { AFFILIATE_ASP } from "../../../../config/paths.mjs";
 
 export {
   launchContext,
@@ -49,7 +50,7 @@ export {
   SiteAttributionError,
 };
 
-export const ASP_CONFIG_PATH = join(repoRoot(), ".claude/config/affiliate-asp.json");
+export const ASP_CONFIG_PATH = join(repoRoot(), AFFILIATE_ASP);
 
 export function loadAspConfig() {
   const cfg = JSON.parse(readFileSync(ASP_CONFIG_PATH, "utf-8"));

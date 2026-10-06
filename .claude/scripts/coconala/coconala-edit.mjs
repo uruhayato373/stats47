@@ -24,7 +24,7 @@ import {
 } from './lib/coconala-session.mjs';
 import { fillServiceForm, submitForm, uploadImage } from './lib/coconala-form.mjs';
 import { inspectPack } from './lib/pack-evidence.mjs';
-import { COCONALA_ASSETS_DIR } from '../../../packages/product-factory/src/ledger-paths.mjs';
+import { COCONALA_ASSETS_DIR } from '../../../config/paths.mjs';
 
 const argv = process.argv.slice(2);
 const getArg = (n) => { const i = argv.indexOf(n); return i >= 0 ? argv[i + 1] : null; };

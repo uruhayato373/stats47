@@ -291,7 +291,7 @@
       ]
     },
     "_otherSiteProgramIds": {
-      "_note": "同一口座で **doboku-note のみ**が配信している A8 プログラム。account-wide レポートに現れるが stats47 の広告ではないため、unmapped 警告のノイズから除外する (「取りこぼし」ではなく「他サイト分」と分類する)。出所: doboku-note の .claude/config/a8-report-automation.json の programIdMap のうち、stats47 の affiliate-ads-data.ts に mid= が無かったもの。",
+      "_note": "同一口座で **doboku-note のみ**が配信している A8 プログラム。account-wide レポートに現れるが stats47 の広告ではないため、unmapped 警告のノイズから除外する (「取りこぼし」ではなく「他サイト分」と分類する)。出所: doboku-note の config/a8-report-automation.json の programIdMap のうち、stats47 の affiliate-ads-data.ts に mid= が無かったもの。",
       "ids": [
         "s00000022413004"
       ]
@@ -306,6 +306,6 @@
     "timeoutMs": 30000,
     "statusIntervalMs": 120000,
     "loginMaxWaitMs": 900000,
-    "_profileNote": "★ .claude/config/affiliate-asp.json の asps.a8.browser と同じ profileDir/stateFile/debugDir を意図的に使っている（scout-asp の A8 ログインセッションをそのまま共有するため）。別パスにすると Chrome プロファイルが分裂し、A8 に二重ログインが必要になる。"
+    "_profileNote": "★ config/affiliate-asp.json の asps.a8.browser と同じ profileDir/stateFile/debugDir を意図的に使っている（scout-asp の A8 ログインセッションをそのまま共有するため）。別パスにすると Chrome プロファイルが分裂し、A8 に二重ログインが必要になる。"
   }
 }

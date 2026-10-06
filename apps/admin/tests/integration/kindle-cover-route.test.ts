@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { cleanupFixtureRoot, makeFixtureRoot } from "../helpers/fixture-root";
-import { KDP_LISTINGS } from "../../../../packages/product-factory/src/ledger-paths.mjs";
+import { KDP_LISTINGS } from "../../../../config/paths.mjs";
 
 describe("kindle cover route", () => {
   let root: string;

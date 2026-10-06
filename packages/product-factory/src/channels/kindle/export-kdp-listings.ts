@@ -14,7 +14,7 @@ import { kdpCategoriesFor } from "./kdp-category";
 import { KDP_AI_DISCLOSURE, KDP_APPLY_DRM } from "./kdp-publishing-policy";
 import { assertBookVersion } from "./build-book";
 import { authoredBookSha256 } from "./revision-evidence";
-import { KDP_LISTINGS } from "../../ledger-paths.mjs";
+import { KDP_LISTINGS } from "../../../../../config/paths.mjs";
 import { SITE } from "@stats47/data-configs";
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../../..");

@@ -10,7 +10,7 @@ import { ALL_PRODUCTS } from "../src/catalog/products";
 import { notoSansJpBytes } from "../src/generators/jp-font";
 import { CANONICAL_ARTICLES } from "../src/channels/note/article-plan";
 import { buildNoteRevision, validateNoteRevision } from "../src/channels/note/build/build-revision";
-import { COCONALA_LISTINGS } from "../src/ledger-paths.mjs";
+import { COCONALA_LISTINGS } from "../../../config/paths.mjs";
 
 const roots: string[] = [];
 afterEach(() => { for (const root of roots.splice(0)) rmSync(root, { recursive: true, force: true }); });

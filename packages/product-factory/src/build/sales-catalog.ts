@@ -9,7 +9,7 @@ import { CANONICAL_ARTICLES } from "../channels/note/article-plan";
 import { GEO_SERVICE_OFFER } from "../channels/geo/service-offer";
 import { authoredBookSha256, semanticReviewErrors, revisionEditorIds, type ReviewedChapter } from "../channels/kindle/revision-evidence";
 import { FREE_SAMPLE_STATE, readFreeSampleDelivery } from "./free-sample-delivery";
-import { COCONALA_LISTINGS, KDP_LISTINGS } from "../ledger-paths.mjs";
+import { COCONALA_LISTINGS, KDP_LISTINGS } from "../../../../config/paths.mjs";
 
 type Obj = Record<string, unknown>;
 const obj = (v: unknown): Obj => v !== null && typeof v === "object" && !Array.isArray(v) ? v as Obj : {};

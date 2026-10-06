@@ -6,8 +6,9 @@ import yaml from 'js-yaml';
 import { afbPeriod, afbRequest, parseAfbOutcomes, collectAfbOutcomes } from '../afb-outcomes.mjs';
 import { SOURCES, failureCode } from '../sources.mjs';
 import { consumerPath, validateAttempt } from '../consumer-paths.mjs';
+import { AFFILIATE_ASP } from '../../../../config/paths.mjs';
 
-const config = JSON.parse(readFileSync('.claude/config/affiliate-asp.json', 'utf8'));
+const config = JSON.parse(readFileSync(AFFILIATE_ASP, 'utf8'));
 const now = new Date('2026-09-21T04:00:00Z');
 const period = { start: '2026-08-24', end: '2026-09-20' };
 const request = afbRequest(config, period, 'occurrence', now);

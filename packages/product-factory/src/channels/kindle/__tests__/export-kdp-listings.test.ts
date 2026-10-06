@@ -14,7 +14,7 @@ import { readFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
-import { KDP_LISTINGS } from "../../../ledger-paths.mjs";
+import { KDP_LISTINGS } from "../../../../../../config/paths.mjs";
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../../../..");
 const LISTINGS = join(REPO_ROOT, KDP_LISTINGS);

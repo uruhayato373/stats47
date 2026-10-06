@@ -17,7 +17,7 @@
  *     --output apps/web/public/themes/population-dynamics/yoy-total-fertility-rate.json
  *
  *   # バッチ
- *   node build-yoy-timeseries.cjs --batch .claude/config/yoy-batch.json
+ *   node build-yoy-timeseries.cjs --batch config/yoy-batch.json
  */
 const fs = require("node:fs");
 const path = require("node:path");

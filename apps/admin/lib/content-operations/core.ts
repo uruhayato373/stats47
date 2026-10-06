@@ -10,7 +10,7 @@ import type {
 } from "../contracts/types";
 import { channelById } from "../channel-registry";
 import { buildReferenceContentPortfolio } from "./reference";
-import { KDP_LISTINGS } from "../../../../packages/product-factory/src/ledger-paths.mjs";
+import { KDP_LISTINGS } from "../../../../config/paths.mjs";
 
 export interface SourceSocialPost {
   platform: string;

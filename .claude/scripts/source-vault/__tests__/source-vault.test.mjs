@@ -11,10 +11,11 @@ import {
   contentSha256,
   resolveVaultRoot,
 } from '../source-vault.mjs';
+import { SOURCE_VAULT } from '../../../../config/paths.mjs';
 
 const execFileAsync = promisify(execFile);
 const PROJECT_ROOT = path.resolve(import.meta.dirname, '../../../..');
-const CONFIG = path.join(PROJECT_ROOT, '.claude/config/source-vault.json');
+const CONFIG = path.join(PROJECT_ROOT, SOURCE_VAULT);
 const SCRIPT = path.join(
   PROJECT_ROOT,
   '.claude/scripts/source-vault/source-vault.mjs'

@@ -19,6 +19,7 @@
 const fs = require('node:fs');
 const path = require('node:path');
 const backlogLib = require('./backlog-lib.cjs');
+const { DOMAINS } = require('../../../config/paths.mjs');
 
 const STRATEGY_DOC = 'docs/00_プロジェクト管理/02_収益化戦略.md';
 const STANCES = ['攻める', '維持', '凍結'];
@@ -28,7 +29,7 @@ const START = '<!-- strategy-lanes:start -->';
 const END = '<!-- strategy-lanes:end -->';
 const COLUMNS = ['順', '領域', '構え', '今の狙い', '構えを変える条件', '改善Metric', 'KPI'];
 const KPI_TREE = '.claude/state/business-plan/kpi-tree.json';
-const DOMAINS_JSON = '.claude/config/domains.json';
+const DOMAINS_JSON = DOMAINS;
 /**
  * 同時に判定まで回す active 施策の上限。超えている間は新しい施策を足さず、月次計画で削る。
  * 2026-09-27 に active 29 件・判定済み 5 件 (improvements.md) だった実測から、一人運用で週次に判定を回せる量として置いた運用方針値。

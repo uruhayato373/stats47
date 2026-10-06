@@ -1,10 +1,10 @@
 /**
  * 左サイドメニューの唯一の定義 (SSOT) と、現在地の判定。React に依存しない純モジュール
  * (Nav の表示部品と、ルート実在を確かめるテストの両方が import する。doboku-note admin-app の channel-registry と同じ考え方)。
- * グループと並びは領域の正本 (.claude/config/domains.json) から作る。URL を変えたら tests/unit/nav-registry.test.ts が「ルートが実在するか」で止める。
+ * グループと並びは領域の正本 (config/domains.json) から作る。URL を変えたら tests/unit/nav-registry.test.ts が「ルートが実在するか」で止める。
  */
 
-import domainsConfig from "../../../.claude/config/domains.json";
+import domainsConfig from "../../../config/domains.json";
 
 import { channelsOf, type ChannelGroup } from "./channel-registry";
 
@@ -27,7 +27,7 @@ type DomainNavEntry = { label: string; kind: string } & ({ href: string } | { ch
 type Domain = { id: string; label: string; role: string; nav: readonly DomainNavEntry[] };
 
 /**
- * グループ = 領域。並び・見出し・項目は領域の正本 `.claude/config/domains.json` から作り、ここに直書きしない
+ * グループ = 領域。並び・見出し・項目は領域の正本 `config/domains.json` から作り、ここに直書きしない
  * (役割の順: 決める → 売る → 集める → つくる → 支える。検査は `npm run check-domains`)。
  * チャネルは最上位に並べず、商品・SNS の「チャネル別」の枝に入れる。
  */

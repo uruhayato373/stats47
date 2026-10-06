@@ -4,7 +4,7 @@ paths:
   - "turbo.json"
   - "apps/*/package.json"
   - "apps/web/scripts/{dev-server.ts,r2-dev-gateway.ps1,r2-dev-cache.ps1}"
-  - ".claude/config/local-resources.json"
+  - "config/local-resources.json"
   - ".claude/scripts/lib/local-resource*"
   - "scripts/scheduled/local-resources.ps1"
   - ".claude/agents/{db-schema-manager,data-ingester,r2-publisher,devops-runner}.md"
@@ -438,7 +438,7 @@ page-quality (週次 `page-quality-audit-weekly.yml`) / PSI (日次 `psi-audit-d
 
 ## ローカル資源の予算と保持
 
-端末の予算・掃除対象・保持日数の機械契約は `.claude/config/local-resources.json`。
+端末の予算・掃除対象・保持日数の機械契約は `config/local-resources.json`。
 計測は非常駐、`.local/resource-health/` に最新値と日別30件、容量監査2世代だけを保存する。全体走査は月次とし、
 通常の開発前チェックではディレクトリを再帰走査しない。容量はファイル長合計で、junctionは辿らず、
 hardlinkの重複は除かない。回収量はドライブ空き容量の前後も合わせて判断する。

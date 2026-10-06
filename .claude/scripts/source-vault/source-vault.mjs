@@ -33,16 +33,12 @@ import {
 import { homedir, tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { SOURCE_VAULT } from '../../../config/paths.mjs';
 
 const SCRIPT_PATH = fileURLToPath(import.meta.url);
 const SCRIPT_DIR = path.dirname(SCRIPT_PATH);
 const PROJECT_ROOT = path.resolve(SCRIPT_DIR, '../../..');
-const PROFILE_CONFIG_PATH = path.join(
-  PROJECT_ROOT,
-  '.claude',
-  'config',
-  'source-vault.json'
-);
+const PROFILE_CONFIG_PATH = path.join(PROJECT_ROOT, SOURCE_VAULT);
 export const VAULT_ROOT_ENV = 'STATS47_SOURCE_VAULT_ROOT';
 const MANIFEST_SCHEMA_VERSION = 2;
 // vault directory に置くが manifest の files[] には含めない補助 file
@@ -225,7 +221,7 @@ function usage() {
   node .claude/scripts/source-vault/source-vault.mjs check-local
 
 create options:
-  --profile <name>     Source profile from .claude/config/source-vault.json (default: ${PROFILE_NAME})
+  --profile <name>     Source profile from ${SOURCE_VAULT} (default: ${PROFILE_NAME})
   --source <dir>       Source directory (default: ${DEFAULT_SOURCE})
   --manifest <file>    Manifest output (default: ${DEFAULT_OUTPUT_DIR}/${MANIFEST_FILE_NAME})
   --force              Replace an existing manifest

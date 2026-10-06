@@ -15,11 +15,12 @@ import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawn } from 'node:child_process';
+import { SOURCE_VAULT } from '../../../config/paths.mjs';
 
 const SCRIPT_PATH = fileURLToPath(import.meta.url);
 const SCRIPT_DIR = path.dirname(SCRIPT_PATH);
 const PROJECT_ROOT = path.resolve(SCRIPT_DIR, '../../..');
-const CONFIG_PATH = path.join(PROJECT_ROOT, '.claude/config/source-vault.json');
+const CONFIG_PATH = path.join(PROJECT_ROOT, SOURCE_VAULT);
 const VAULT_SCRIPT = path.join(SCRIPT_DIR, 'source-vault.mjs');
 const TEMP_VAULT_ROOT = path.join(tmpdir(), 'stats47-source-vault');
 const BOOLEAN_OPTIONS = new Set(['force', 'contract-only', 'allow-all-pages', 'check']);
@@ -1296,7 +1297,7 @@ async function stage(options) {
     throw new Error(`--revision must be an integer greater than the processed revision r${workspace.revision}`);
   }
   if (profile.revision !== revision) {
-    throw new Error(`Set profiles.${workspace.profile}.revision to ${revision} in .claude/config/source-vault.json before staging`);
+    throw new Error(`Set profiles.${workspace.profile}.revision to ${revision} in ${SOURCE_VAULT} before staging`);
   }
   const sourceRoot = assertOutsideRepository(workspace.sourceRoot, 'Source root');
   const single = workspace.documents.length === 1;

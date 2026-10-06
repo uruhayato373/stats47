@@ -10,7 +10,7 @@ import { chromium } from "playwright";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { readFileSync, rmSync } from "node:fs";
-import { NOTE_ACCOUNT } from "../../../../packages/product-factory/src/ledger-paths.mjs";
+import { NOTE_ACCOUNT } from "../../../../config/paths.mjs";
 
 export const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "..", "..");
 export const PROFILE = join(ROOT, ".local/playwright-note-profile");
