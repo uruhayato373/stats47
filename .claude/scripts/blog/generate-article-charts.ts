@@ -333,6 +333,9 @@ function genLineChartSvg(data) {
   const subtitle = (Array.isArray(data) ? null : data.subtitle) ?? undefined;
 
   let series = data.series;
+  // 指標コードをキーにした取得結果の控え ({series: {A4101: {...}, ...}}) は図の入力ではない。
+  // 単位の違う指標を 1 枚に重ねることになるので描かずに飛ばす (2026-10-06 birth-death で CI が停止)
+  if (series != null && !Array.isArray(series)) return null;
   if (!series && Array.isArray(data.data))
     series = [{ label: data.label || '値', data: data.data }];
   if (!series && Array.isArray(data)) series = [{ label: '値', data }];
@@ -772,6 +775,10 @@ for (const { file, type, parsed } of jsonMeta) {
     svg = genTileGridMapSvg(parsed);
   } else if (type === 'line') {
     svg = genLineChartSvg(parsed);
+    if (svg === null) {
+      warn(`${file}: series が配列でない (取得結果の控え) — チャート入力ではないので skip`);
+      continue;
+    }
   } else if (type === 'scatter') {
     svg = genScatterChartSvg(parsed);
   } else if (type === 'summary') {
