@@ -2,7 +2,7 @@
 title: バックログ (タスクマスタ)
 type: backlog
 status: active
-updated: 2026-09-29
+updated: 2026-10-06
 ---
 
 # バックログ (タスクマスタ)
@@ -297,6 +297,16 @@ updated: 2026-09-29
 - **完了条件**: `ranking/total-population,mobile` の LCP が 3 週連続でベースライン 9,347ms を下回る。悪化要因が topology fetch でなかった場合は、実測で特定した真因と対策を本カードへ記録してから閉じる。
 
 ## 🟡 中 — 2〜3ヶ月以内
+
+### [DEPS-TAILWIND4-01] apps/web を tailwindcss 4 へ移行し、braces を runtime 依存から外す
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:npm audit --omit=dev --audit-level=low] [起票:2026-10-06] [領域:管理]
+
+- **事象**: Security Scan の 2 ゲート (`npm audit --audit-level=high` と `npm audit --omit=dev --audit-level=low`) が braces (GHSA-vfj7-8cjw-p6xm, high) で失敗する。braces は `<=3.0.3` が該当で、最新 3.0.3 も脆弱なため override では直せない (2026-10-06 時点で修正版は未公開)。katex と postcss-selector-parser は同日に root の `overrides` で解消済み。
+- **runtime 側の経路**: apps/web の `dependencies` にある `@tailwindcss/container-queries` が tailwindcss 3 を peer で要求するため、tailwindcss 3.4.19 → chokidar / fast-glob → micromatch → braces が runtime 扱いになる。`npm audit fix --force` が提案するのは tailwindcss 4.3.3 へのメジャー更新。
+- **影響範囲**: `apps/web/tailwind.config.ts` (121 行、typography と container-queries の 2 plugin) を v4 の CSS 設定 (`@theme` / `@plugin`) へ移す。`apps/web/postcss.config.mjs` は `@tailwindcss/postcss` へ置き換える。`apps/web/src/app/globals.css` (487 行、`@apply` 18 箇所) を書き換える。container-queries は v4 本体に入っているので依存から外す。`@tailwindcss/typography` は v4 対応版へ上げる。v4 で名前や既定値が変わったユーティリティ (shadow / rounded / ring の段階名など) は全 tsx を走査して置き換える。apps/admin は既に v4.3.3 なので設定の参照例になる。
+- **手順**: ①`npx @tailwindcss/upgrade` を作業ブランチで実行して差分を確認する ②移行前後で代表 URL のスクリーンショットを比較する (`.claude/rules/page-quality-standards.md` の代表 URL) ③`npm run build --workspace=web`・`npm run type-check`・`npm audit --omit=dev --audit-level=low` を通す。
+- **停止条件**: 見た目の差分が意図せず出た状態で本番デプロイしない。デプロイはオーナー確認後にまとめて 1 回だけ行う。
+- **完了条件**: `npm audit --omit=dev --audit-level=low` が exit 0 になり、代表 URL の表示差分が無いか意図どおりである。dev 側に残る経路は [DEPS-BRACES-GATE-01] が扱う。
 
 ### [GSC-COVERAGE-DEPLOY-01] カバレッジ是正と入力鮮度ガードを本番反映する
 
@@ -3008,6 +3018,14 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - **制約**: 約4,000件の未使用項目や約17万metric相当を一括投入しない。1バッチ最大20件、公開後4週の実測を次バッチのgateにする。
 
 ## 🟣 判断待ち — やるかどうかの意思決定が未了
+
+### [DEPS-BRACES-GATE-01] 修正版が無い braces 脆弱性で落ち続ける Security Scan の high ゲートをどう扱うか決める
+タグ: [インフラ・計測] [種類:意思決定] [実行:ユーザー] [検証:npm audit --audit-level=high] [起票:2026-10-06] [領域:管理]
+
+- **論点**: braces (GHSA-vfj7-8cjw-p6xm) は `<=3.0.3` が該当し、2026-10-06 時点で修正版が無い。knip の経路は 2026-10-06 に knip 6 へ更新して外した。[DEPS-TAILWIND4-01] で tailwindcss 3 を外しても、`eslint-config-next` / `@next/eslint-plugin-next` 16.3.8 (最新) が `fast-glob` 3.3.1 を固定している dev 依存の経路が残り、上流に修正が無い。このため main への push と全 PR で `npm audit --audit-level=high` が失敗し続け、他の新しい high を見落とす。
+- **選択肢**: (a) braces または Next.js の eslint plugin の上流修正を待つ。待つ間はゲートが赤のままになる。(b) dev 依存に限り、この GHSA だけを期限付きの例外として扱う。例えば `npm audit --json` の結果からこの ID を除いて判定するスクリプトにし、`test:dependency-security` に例外の期限と理由を固定する。runtime ゲート (`--omit=dev --audit-level=low`) は例外にしない。
+- **停止条件**: runtime 依存の脆弱性を例外にしない。期限と再評価日の無い例外を入れない。
+- **完了条件**: 採否が決まり、採った方針で Security Scan が green になる。または待つと決めたなら、再評価日 (braces の新版公開の確認) を本カードに書く。
 
 ### [DOMAIN-SHARED-POLICY-01] 管理の枠組み (5 役割・画面の種類・サイドメニューの規則) を共通事業方針に載せるか決める
 タグ: [エージェント・SSOT] [種類:意思決定] [実行:ユーザー] [起票:2026-09-27] [領域:戦略]
