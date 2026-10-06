@@ -44,6 +44,14 @@ paths:
   `packages/product-factory/tests/config-paths.test.ts` が検査する。静的な JSON import だけは定数を使えないが、
   import 先の誤りは型検査で落ちる。
 - 新しい事業の台帳・設定は `config/` に置き、`config/paths.mjs` と `config/paths.d.mts` に定数を足す。
+- どのファイルが何のデータで、本来どこに置くかは台帳 `config/datasets.mjs` が持つ (1 行 1 データセット・種類・領域・本来の置き場)。
+  `npm run check-datasets` (PR CI) が、対象範囲 (`config/`・`data/`・`.claude/state` の計測と記録・skills の改善ログと計測
+  スナップショット・週次/月次レビュー) の追跡ファイルが台帳のちょうど 1 行に当たり、どの行も空でないことを検査する。
+  新しい記録は先に台帳へ 1 行足す。日付付きファイルの寿命は `prune-state-snapshots.mjs` の `RETENTION_POLICIES` だけが
+  数値を持ち、台帳は名前で参照する。
+- 計測・記録・改善のデータ (GSC・GA4・PSI・Cloudflare・アフィリエイト・売上と投稿の台帳・改善ログ・レビュー) は、
+  2026-10-06 時点でまだ `.claude/` にある。本来の置き場は `data/` で、台帳で現在地と食い違う行が移行対象
+  (`npm run check-datasets -- --moves`)。移行は backlog `DATA-LAYOUT-MOVE-01`。
 
 ## アプリが読むデータ (git TS が SSOT → R2 配信) — 「設定 + 運用エンティティ」
 

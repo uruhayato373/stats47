@@ -120,12 +120,14 @@ jobs:
         run: |
           node --test \
             .claude/scripts/lib/__tests__/check-domains.test.cjs \
+            .claude/scripts/lib/__tests__/check-datasets.test.mjs \
             .claude/scripts/sns/__tests__/x-direct-ledger.test.cjs \
             .claude/scripts/lib/__tests__/check-money-unit-audit.test.cjs \
             .claude/scripts/lib/__tests__/check-quality-exceptions.test.cjs \
             .claude/scripts/lib/__tests__/check-quality-warning-ratchet.test.cjs \
             .claude/scripts/lib/__tests__/check-render-ci-contract.test.cjs \
             .claude/scripts/lib/__tests__/scheduled-audit-propagation.test.cjs
+          node .claude/scripts/lib/check-datasets.mjs
           node .claude/scripts/lib/check-money-unit-audit.cjs --base origin/main
           node .claude/scripts/lib/check-quality-exceptions.cjs --base origin/main
           node .claude/scripts/lib/check-quality-warning-ratchet.cjs --base origin/main
