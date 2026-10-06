@@ -62,7 +62,7 @@ FAIL項目はレビュー本文の`Blockers`へ転記する。レビュー作成
 | ページUI週次確認 | `.claude/state/metrics/page-quality/ui-review-latest.json` (`page-quality-audit-weekly` が毎週日曜に更新)。`auditGeneratedAt` が当週か、`reviewStatus`、`readCoverage` の読んだ切り出し / 読むべき枚数、agent 指摘件数 (`findings`)、新規の機械検出件数 (`newViolationCount`) を書く。監査が当週に無い・`reviewStatus` が `not-run`/`blocked`・読み残し (`readCoverage.unreadScreens`) がある週は Blockers へ。読み残したページは確認済みに数えない。正典 `.claude/rules/page-quality-standards.md` |
 | 事業計画 | `.claude/state/business-plan/latest.json` + `packages/data-configs/src/business-plan/` |
 | モデル使用量 | `npm run model-usage:collect && npm run model-usage:report` → `.claude/state/metrics/model-usage/latest.json` の `proposals` / `canary`。提案は採否だけ決め、frontmatter・workflow は canary 合格を見てから変える (`.claude/rules/model-prompting.md`「継続最適化サイクル」)。canary 未実施で費用の大きい提案は今週の Should に 1 件まで |
-| Kindle | `.claude/config/kdp-listings.json` + `.claude/state/products/{sales-ledger,kdp-weekly-publication}.json` |
+| Kindle | `config/kdp-listings.json` + `.claude/state/products/{sales-ledger,kdp-weekly-publication}.json` |
 
 各snapshotの期間、取得日、freshnessを保持する。行が無い場合を推測の0へ変換せず、
 `not-measured` / `not-instrumented` / `insufficient-data`を区別する。

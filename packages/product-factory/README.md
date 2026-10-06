@@ -17,7 +17,7 @@ PDF、画像、EPUB は `.local/` 配下の派生物であり、git や公開 R2
   `sourceIds` に由来情報として残す。
 - `src/build/` と `src/generators/` に PPTX / XLSX / CSV / SVG / PNG / PDF / 販売文 /
   manifest / readiness の生成器を実装済み。
-- 設計statusは `packs.ts`、外部公開実績は `.claude/config/{coconala,kdp}-listings.json`。
+- 設計statusは `packs.ts`、外部公開実績は `config/{coconala,kdp}-listings.json`。
   生成・公開・販売品質を同じstatusで代用しない。横断一覧は `products:report` で再生成する。
 - PowerPoint / Excel の構造検証と自動テストは実装済み。Windows/Mac Office実機での表示、
   再着色、再計算は人間が `READINESS.md` に沿って確認する。
@@ -113,7 +113,7 @@ Noto JPのPDFはフォント全体を埋め込む。subsetでは文字抽出が�
 
 ### 公開済み定型パックの納品物照合
 
-販売文の件数・形式は `.claude/config/coconala-listings.json` の `_delivery` で、実際の
+販売文の件数・形式は `config/coconala-listings.json` の `_delivery` で、実際の
 manifest SHA・CSVの47地域・出典行数・PowerPoint抜粋数と照合する。
 `node .claude/scripts/coconala/render-pack-previews.mjs` が読み取り検査、`--render` がCSV見本画像生成。
 見本はExcelのスクリーンショットを装わず、実数値と出典・対象範囲を表示する。

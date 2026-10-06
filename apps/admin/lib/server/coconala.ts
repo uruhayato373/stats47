@@ -1,16 +1,17 @@
 import "server-only";
 
 import { ALL_PRODUCTS } from "../../../../packages/product-factory/src/catalog/products";
+import { COCONALA_LISTINGS } from "../../../../packages/product-factory/src/ledger-paths.mjs";
 import { readProductSales } from "./revenue";
 import { cached, fileExists, hasError, readJson, TTL, wrap, type Wrapped } from "./state-io";
 
 /**
  * ココナラの出品状況 (読み取り専用)。
- * 公開状態の真実源は .claude/config/coconala-listings.json、商品設計の上流は product-factory のカタログ。
+ * 公開状態の真実源は config/coconala-listings.json、商品設計の上流は product-factory のカタログ。
  * 両者を突き合わせ、カタログにあって出品台帳に無い商品を「未出品」として出す。
  */
 
-const LISTINGS = ".claude/config/coconala-listings.json";
+const LISTINGS = COCONALA_LISTINGS;
 /**
  * 閲覧数・お気に入り数。CI の authenticated-measurement.yml (marketplace-status.mjs) が毎日「サービス別分析」を読み、
  * 暗号化 private R2 に置く。ローカルへは `npm run measurement:restore -- coconala` (要 MEASUREMENT_VAULT_KEY) で復元する。

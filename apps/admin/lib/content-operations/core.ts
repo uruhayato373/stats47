@@ -10,6 +10,7 @@ import type {
 } from "../contracts/types";
 import { channelById } from "../channel-registry";
 import { buildReferenceContentPortfolio } from "./reference";
+import { KDP_LISTINGS } from "../../../../packages/product-factory/src/ledger-paths.mjs";
 
 export interface SourceSocialPost {
   platform: string;
@@ -103,7 +104,7 @@ const SOURCES: Record<ContentChannelDTO, string> = {
   instagram: ".claude/state/sns/posts.json",
   note: ".claude/scripts/note/catalog/ (git TS) + R2本文",
   kindle:
-    "packages/product-factory/src/channels/kindle/book-catalog.ts + .claude/config/kdp-listings.json",
+    `packages/product-factory/src/channels/kindle/book-catalog.ts + ${KDP_LISTINGS}`,
 };
 
 const KDP_BLOCKED_ACTIONS = new Map([
@@ -364,7 +365,7 @@ export function buildContentOperations(
       nextAction,
       sourcePaths: [
         "packages/product-factory/src/channels/kindle/book-catalog.ts",
-        `.claude/config/kdp-listings.json#${listing.id}`,
+        `${KDP_LISTINGS}#${listing.id}`,
         `packages/product-factory/src/channels/kindle/manuscripts/${listing.id}/`,
       ],
     };

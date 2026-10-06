@@ -3,7 +3,7 @@ name: coconala-publish
 domain: product
 description: >
   ココナラ出品サービスを Playwright で「新規出品」「内容修正」するスキル (stats47)。出品内容の
-  真実源 .claude/config/coconala-listings.json (title/価格/カテゴリ/本文/ジャンル/納期) を product id で
+  真実源 config/coconala-listings.json (title/価格/カテゴリ/本文/ジャンル/納期) を product id で
   引き、ログイン済みプロファイルで出品フォームへ流し込む。安全弁 = account assert (coconala-account.json の
   sellerName・★dobokunote と取り違えない) / 既定は「下書きで保存」で実公開は --commit 必須 / 価格・カテゴリの
   充填 warning があれば公開せず下書き退避。公開成功時は listings JSON へ status:'listed'+serviceUrl+listedAt を
@@ -34,7 +34,7 @@ node .claude/scripts/coconala/coconala-delete-draft.mjs --id <n>               #
 ## 前提（最重要・★アカウント分離）
 
 - **実行はローカルのみ**（ログイン済みプロファイル `.local/playwright-coconala-profile` があるマシン）。初回は headed で **stats47 のココナラアカウント**に手動ログイン（プロファイルに保持）。dobokunote ではない。
-- **account assert**: 期待IDは`.claude/config/coconala-account.json`のみを参照し、`/mypage/user`の本人プロフィール「表示を確認する」リンクと照合する。ダッシュボード全体の最初の`/users/NNNN`はおすすめ出品者を拾うため禁止。ID未設定・取得不能・複数・不一致では停止し、表示名で代替しない。アカウント変更はオーナー承認後にconfigへ記録する。
+- **account assert**: 期待IDは`config/coconala-account.json`のみを参照し、`/mypage/user`の本人プロフィール「表示を確認する」リンクと照合する。ダッシュボード全体の最初の`/users/NNNN`はおすすめ出品者を拾うため禁止。ID未設定・取得不能・複数・不一致では停止し、表示名で代替しない。アカウント変更はオーナー承認後にconfigへ記録する。
 - **規約リスク**: ココナラ利用規約に「出品者が自分の出品をブラウザ自動化することを禁じる明示条項」は doboku 側調査 (2026-07-18) では未確認だが、**bot 検知の運用リスクは残る**ため低頻度（出品時・価格改定時）に限る。
 - **実公開 (`--commit`) はオーナー承認を要する** — outward-facing・不可逆寄り。既定の下書き検証まではエージェントが進めてよいが、`--commit` は明示承認後に実行する（`.claude/rules/coconala-product-standards.md §6`）。
 
@@ -83,14 +83,14 @@ node .claude/scripts/coconala/coconala-delete-draft.mjs --id <n>               #
 
 ### プロフィール整備
 
-- 公開文面は `.claude/config/coconala-profile.ts`、ブランド素材は同configの参照先、実測は `.claude/state/products/coconala-profile-2026-09-06.json` を参照する。
+- 公開文面は `config/coconala-profile.ts`、ブランド素材は同configの参照先、実測は `.claude/state/products/coconala-profile-2026-09-06.json` を参照する。
 - プロフィールの各「保存する」は保存後に消え、残りのボタンのindexが変わる。セクションを限定して保存し、再読込で内容一致を確認する。アイコンの更新直後に別ページへ移動すると送信を中断しうるため、公開プロフィールへの遷移完了を待つ。
 - カバーはアップロード後のトリミング画面で「決定」が必要。商品画像は案内イメージと実データの見本を区別し、見本を受注実績と表示しない。
 - 本人確認・NDA・規約同意・税務情報は人間工程。技術欄の経験年数・資格・稼働時間を推測して埋めない。
 - 文面ゲート: `node --import tsx --test .claude/scripts/coconala/__tests__/profile.test.ts`。
 
 - スクリプト: `.claude/scripts/coconala/{coconala-publish,coconala-edit,coconala-delete-draft}.mjs` + `lib/coconala-{session,form}.mjs`
-- SoT: `.claude/config/coconala-listings.json`（出品内容・公開状態）/ `coconala-account.json`（アカウント）/ `packages/product-factory`（商品設計）
+- SoT: `config/coconala-listings.json`（出品内容・公開状態）/ `coconala-account.json`（アカウント）/ `packages/product-factory`（商品設計）
 - 規約: `.claude/rules/coconala-product-standards.md`（§6 出品規律）
 - agent: `.claude/agents/coconala-operator.md`（出品オーケストレーター）/ `coconala-product-manager.md`（商品生成・カタログ）
 - 認証プロファイル: `docs/01_技術設計/07_Playwright認証プロファイル.md`

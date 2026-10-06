@@ -16,7 +16,7 @@
  *     オーナー承認時のみ。KDP 公開は outward-facing・取り下げに時間がかかるため特に慎重に。
  *
  * SSOT: 出品内容 (title/description/keywords/price/epubPath 等) と公開状態 (status/asin) は
- *   .claude/config/kdp-listings.json。書籍設計 SSOT は packages/product-factory の KINDLE_BOOKS。
+ *   config/kdp-listings.json。書籍設計 SSOT は packages/product-factory の KINDLE_BOOKS。
  * ---------------------------------------------------------------------------
  */
 import { chromium } from "playwright";
@@ -26,6 +26,7 @@ import { join, dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { mergeKdpOperationalState } from "./kdp-status.mjs";
 import { advancePublicationStage } from "./kdp-publication-stage.mjs";
+import { KDP_ACCOUNT, KDP_LISTINGS } from "../../../../packages/product-factory/src/ledger-paths.mjs";
 
 // このファイル: .claude/scripts/kdp/lib/kdp-session.mjs → repo root は 4 つ上。
 export const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "..", "..");
@@ -36,8 +37,8 @@ const PROFILE_ROOT = process.env.KDP_PROFILE_ROOT
   : ROOT;
 export const PROFILE = join(PROFILE_ROOT, ".local/playwright-kdp-profile");
 
-export const ACCOUNT_PATH = join(ROOT, ".claude/config/kdp-account.json");
-export const LISTINGS_PATH = join(ROOT, ".claude/config/kdp-listings.json");
+export const ACCOUNT_PATH = join(ROOT, KDP_ACCOUNT);
+export const LISTINGS_PATH = join(ROOT, KDP_LISTINGS);
 export const DEBUG_DIR = join(ROOT, ".local/kdp-debug");
 const PROXY = process.env.HTTPS_PROXY || process.env.HTTP_PROXY || "";
 
@@ -47,7 +48,7 @@ export const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
  * kdp-account.json を読む (無ければ空)。
  *
  * ★メールアドレスは git 管理外に置く (2026-08-12)
- *   このリポジトリは **public** なので、`.claude/config/kdp-account.json` に
+ *   このリポジトリは **public** なので、`config/kdp-account.json` に
  *   accountEmail を書くと公開される。誤アカウント防止の assert には実際の文字列が要るため、
  *   `.local/kdp-account.local.json` (gitignore 済) を**上書きとして重ねる**。
  *   共有してよい設定 (marketplace 等) は従来どおり config 側に置く。

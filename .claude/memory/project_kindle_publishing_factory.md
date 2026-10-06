@@ -35,8 +35,8 @@ S1論点読み物12 + S2テーマ別データブック11 + S3地域別8 + S4ラ�
 ## ★KDP出品自動化 (2026-07-23・coconala-operatorから移植)
 旧「KDPは自動化しない」を撤回し、コナラと同じPlaywright自動化を移植。agent `kdp-operator` / skill `/kdp-publish` /
 `.claude/scripts/kdp/`(`{login,capture-account,kdp-publish}.mjs`+`lib/kdp-{session,form}.mjs`)。出品内容SoT=
-`.claude/config/kdp-listings.json`(`products:kindle:kdp-listings --apply`でKINDLE_BOOKSから生成・32冊)、
-アカウント=`.claude/config/kdp-account.json`(accountEmail要記入)、プロファイル=`.local/playwright-kdp-profile`。
+`config/kdp-listings.json`(`products:kindle:kdp-listings --apply`でKINDLE_BOOKSから生成・32冊)、
+アカウント=`config/kdp-account.json`(accountEmail要記入)、プロファイル=`.local/playwright-kdp-profile`。
 - **安全境界(人間工程・維持)**: ログイン/2FA・税務(Tax interview)・銀行口座は代行しない。account assert(別アカウント防止)。
   draft-first + `--commit`(実公開)はオーナー承認。偽成功を報告しない。KU既定未登録。
 - **★KDPはReact SPAでDOM可変** → 初回`kdp-publish --id <id> --probe`で`.local/kdp-debug/probe-*.json`に構造dumpし
@@ -73,7 +73,7 @@ S1論点読み物12 + S2テーマ別データブック11 + S3地域別8 + S4ラ�
 - **表紙 (2026-09-19)**: 帯絵は `codex exec --sandbox workspace-write` に `$imagegen` を使わせて横長 1536×1024 で作り (MCP が繋がらない時も CLI で通る。`codex login status` が ChatGPT なら可)、`ingest-cover-background.mts --band` で下 42% に置く。プロンプトはシリーズ共通の型 (紺地 + 琥珀の paper-cut 風・大きなモチーフ 2〜3 個・文字/数字/地図/顔なし) を Drive の `stats47/Kindle表紙/_imagegen-tooling/build-prompts.mjs` に持つ (元画像・プロンプトは `Kindle表紙/<id>/candidates/`。2026-09-30 に .local から移した)。縦長を cover-fit すると主題が文字面に隠れるので横長で描かせる。
 - **投稿可否の機械証跡**: `verify-publishable.mts` は review.md ではなく `review.json` (受領証・`revision-evidence.ts` の契約) と `kindle-<版>-verification.json` (`verify-epub --report`、同じ版名の冊は `report[]` にマージ) を見る。受領証は `scripts/write-review-receipt.mts` が PASS の review.md から作る。残る blocker = R2 暗号化保全 (鍵) / Previewer 確認 / 権利・AI 申告・価格・最終承認 = オーナー工程。
 - **critic の修正案も検算する**: K-S1-12 r1 の修正案「順位相関 0.70 / 0.19」は Pearson 値で、R2 から Spearman を再計算すると 0.65 / 0.13 だった (delta critic が捕捉)。書き下ろしで分布を書くときは R2 `values.json` から中央値・例外県 (埼玉は女性のメディア時間が男性より長い唯一の県) まで確かめてから書く。
-- **S2/S3/S4 の 20 冊は取り下げ**: 販売中 10 冊に `withdrawal`、未作成 10 冊は `blocked-design` (`.claude/config/kdp-listings.json`)。理由 = ランキング章がサイト AI 解説の転載で編集設計が無い。再設計は backlog `KDP-EXPANSION-01`。
+- **S2/S3/S4 の 20 冊は取り下げ**: 販売中 10 冊に `withdrawal`、未作成 10 冊は `blocked-design` (`config/kdp-listings.json`)。理由 = ランキング章がサイト AI 解説の転載で編集設計が無い。再設計は backlog `KDP-EXPANSION-01`。
 - **S2/S3/S4 の販売中 10 冊は 2026-09-19 にオーナー指示で出版停止済み** (`.claude/scripts/kdp/kdp-unpublish.mjs`: `--probe` で確認モーダルまで採取してから `--commit`。本棚 read-back「下書き」10/10、listing は `status: "withdrawn"`)。本棚の DOM の癖は kdp-operator.md / kdp-publish SKILL 8b に記載。
 - **オーナー工程 (未実施)**: R2 暗号化保全 (鍵) → `kdp-publish --update` (12 冊) → `--commit` 承認 / kdpreports の冊別 export / ブログ側の同一誤り是正。
 

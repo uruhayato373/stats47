@@ -6,9 +6,10 @@ import { parse } from 'csv-parse/sync';
 import ExcelJS from 'exceljs';
 import JSZip from 'jszip';
 import { inspectPack } from './lib/pack-evidence.mjs';
+import { COCONALA_LISTINGS } from '../../../packages/product-factory/src/ledger-paths.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
-const listings = JSON.parse(readFileSync(resolve(root, '.claude/config/coconala-listings.json'))).listings;
+const listings = JSON.parse(readFileSync(resolve(root, COCONALA_LISTINGS))).listings;
 for (const [id, listing] of Object.entries(listings)) {
   if (!id.startsWith('P-')) continue;
   if (!listing._delivery.labelRevision) throw new Error(`${id}: no label revision`);

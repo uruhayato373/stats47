@@ -43,9 +43,9 @@
       "status": "listed",
       "serviceUrl": "https://coconala.com/services/4387096",
       "draftId": "4387096",
-      "_thumbnail": ".claude/config/coconala/assets/geo-main.png",
+      "_thumbnail": "config/coconala/assets/geo-main.png",
       "_images": [
-        ".claude/config/coconala/assets/geo-main.png",
+        "config/coconala/assets/geo-main.png",
         ".local/coconala-products/GEO-SERVICE-01/pref-14-draft-tHcZsk/sample-map.png",
         ".local/coconala-profile/2026-09-06/report-evidence.png"
       ],

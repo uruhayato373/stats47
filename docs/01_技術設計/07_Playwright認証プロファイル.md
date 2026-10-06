@@ -155,9 +155,9 @@ MCP が有用なのは**セレクタ確定の探索工程**である。実機を
 | `playwright-a8-profile/` + `playwright-a8-state.json` | A8.net               | `.claude/skills/ads/scout-asp/scripts/`、`.claude/scripts/ads/`         | storage state の再注入を併用                            |
 | `playwright-moshimo-profile/`                         | もしもアフィリエイト | `.claude/scripts/ads/`                                                  | `.claude/config/affiliate-asp.json` の site ID を照合   |
 | `playwright-afb-profile/`                             | afb                  | `.claude/scripts/ads/`                                                  | login から完了まで同一 headed process                   |
-| `playwright-coconala-profile/`                        | ココナラ             | `.claude/scripts/coconala/`                                             | `.claude/config/coconala-account.json` の seller を照合 |
-| `playwright-kdp-profile/`                             | Amazon KDP           | `.claude/scripts/kdp/`                                                  | `.claude/config/kdp-account.json` の account を照合     |
-| `playwright-note-profile/`                            | note                 | `.claude/scripts/note/`                                                 | `.claude/config/note-account.json` の account を照合    |
+| `playwright-coconala-profile/`                        | ココナラ             | `.claude/scripts/coconala/`                                             | `config/coconala-account.json` の seller を照合 |
+| `playwright-kdp-profile/`                             | Amazon KDP           | `.claude/scripts/kdp/`                                                  | `config/kdp-account.json` の account を照合     |
+| `playwright-note-profile/`                            | note                 | `.claude/scripts/note/`                                                 | `config/note-account.json` の account を照合    |
 | `playwright-google-admin-profile/`                    | Google Admin         | `.claude/scripts/google-admin/`                                         | GSC link / GA4 Library のAPI非提供操作だけに使う         |
 
 archive skill だけが参照する profile は Active 一覧へ含めない。復活させる場合は script、profile、account assertion、cleanup を再監査してから追加する。

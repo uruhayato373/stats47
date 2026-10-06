@@ -31,7 +31,7 @@
         "Office実機の表示・編集確認（未確認と明示して出品中）"
       ],
       "evidencePaths": [
-        ".claude/config/coconala-listings.json",
+        "config/coconala-listings.json",
         ".claude/state/products/coconala-packs-2026-09-06.json",
         ".local/note-products-revisions/v3-20260906-r1/report.json",
         ".local/note-products-revisions/v3-20260906-r1/prefecture-population-household-pack/readiness.json"
@@ -97,7 +97,7 @@
         "Office実機の表示・編集確認（未確認と明示して出品中）"
       ],
       "evidencePaths": [
-        ".claude/config/coconala-listings.json",
+        "config/coconala-listings.json",
         ".claude/state/products/coconala-packs-2026-09-06.json",
         ".local/note-products-revisions/v3-20260906-r1/report.json",
         ".local/note-products-revisions/v3-20260906-r1/prefecture-income-wage-hiring-pack/readiness.json"
@@ -163,7 +163,7 @@
         "Office実機の表示・編集確認（未確認と明示して出品中）"
       ],
       "evidencePaths": [
-        ".claude/config/coconala-listings.json",
+        "config/coconala-listings.json",
         ".claude/state/products/coconala-packs-2026-09-06.json",
         ".local/note-products-revisions/v3-20260906-r1/report.json",
         ".local/note-products-revisions/v3-20260906-r1/prefecture-tourism-lodging-pack/readiness.json"
@@ -229,7 +229,7 @@
         "Office実機の表示・編集確認（未確認と明示して出品中）"
       ],
       "evidencePaths": [
-        ".claude/config/coconala-listings.json",
+        "config/coconala-listings.json",
         ".claude/state/products/coconala-packs-2026-09-06.json",
         ".local/note-products-revisions/v3-20260906-r1/report.json",
         ".local/note-products-revisions/v3-20260906-r1/prefecture-municipal-finance-pack/readiness.json"
@@ -295,7 +295,7 @@
         "Office実機の表示・編集確認（未確認と明示して出品中）"
       ],
       "evidencePaths": [
-        ".claude/config/coconala-listings.json",
+        "config/coconala-listings.json",
         ".claude/state/products/coconala-packs-2026-09-06.json",
         ".local/note-products-revisions/v3-20260906-r1/report.json",
         ".local/note-products-revisions/v3-20260906-r1/prefecture-healthcare-nursing-pack/readiness.json"
@@ -363,7 +363,7 @@
         "Office実機の表示・編集確認（未確認と明示して出品中）"
       ],
       "evidencePaths": [
-        ".claude/config/coconala-listings.json",
+        "config/coconala-listings.json",
         ".claude/state/products/coconala-packs-2026-09-06.json",
         ".local/note-products-revisions/v3-20260906-r1/report.json",
         ".local/note-products-revisions/v3-20260906-r1/prefecture-education-childcare-pack/readiness.json"
@@ -429,7 +429,7 @@
         "Office実機の表示・編集確認（未確認と明示して出品中）"
       ],
       "evidencePaths": [
-        ".claude/config/coconala-listings.json",
+        "config/coconala-listings.json",
         ".claude/state/products/coconala-packs-2026-09-06.json",
         ".local/note-products-revisions/v3-20260906-r1/report.json",
         ".local/note-products-revisions/v3-20260906-r1/prefecture-migration-living-pack/readiness.json"
@@ -495,7 +495,7 @@
         "Office実機の表示・編集確認（未確認と明示して出品中）"
       ],
       "evidencePaths": [
-        ".claude/config/coconala-listings.json",
+        "config/coconala-listings.json",
         ".claude/state/products/coconala-packs-2026-09-06.json",
         ".local/note-products-revisions/v3-20260906-r1/report.json",
         ".local/note-products-revisions/v3-20260906-r1/prefecture-retail-trade-area-pack/readiness.json"
@@ -561,7 +561,7 @@
         "Office実機の表示・編集確認（未確認と明示して出品中）"
       ],
       "evidencePaths": [
-        ".claude/config/coconala-listings.json",
+        "config/coconala-listings.json",
         ".claude/state/products/coconala-packs-2026-09-06.json",
         ".local/note-products-revisions/v3-20260906-r1/report.json",
         ".local/note-products-revisions/v3-20260906-r1/prefecture-industry-economy-pack/readiness.json"
@@ -627,7 +627,7 @@
         "Office実機の表示・編集確認（未確認と明示して出品中）"
       ],
       "evidencePaths": [
-        ".claude/config/coconala-listings.json",
+        "config/coconala-listings.json",
         ".claude/state/products/coconala-packs-2026-09-06.json",
         ".local/note-products-revisions/v3-20260906-r1/report.json",
         ".local/note-products-revisions/v3-20260906-r1/prefecture-disaster-infrastructure-pack/readiness.json"
@@ -693,7 +693,7 @@
         "Office実機の表示・編集確認（未確認と明示して出品中）"
       ],
       "evidencePaths": [
-        ".claude/config/coconala-listings.json",
+        "config/coconala-listings.json",
         ".claude/state/products/coconala-packs-2026-09-06.json",
         ".local/note-products-revisions/v3-20260906-r1/report.json",
         ".local/note-products-revisions/v3-20260906-r1/prefecture-map-chart-assets-pack/readiness.json"
@@ -761,7 +761,7 @@
         "Office実機の表示・編集確認（未確認と明示して出品中）"
       ],
       "evidencePaths": [
-        ".claude/config/coconala-listings.json",
+        "config/coconala-listings.json",
         ".claude/state/products/coconala-packs-2026-09-06.json",
         ".local/note-products-revisions/v3-20260906-r1/report.json",
         ".local/note-products-revisions/v3-20260906-r1/prefecture-all-in-one-pack/readiness.json"
@@ -827,7 +827,7 @@
         "無料サンプルの配布承認"
       ],
       "evidencePaths": [
-        ".claude/config/coconala-listings.json",
+        "config/coconala-listings.json",
         ".claude/state/products/coconala-packs-2026-09-06.json",
         ".claude/state/products/free-sample-delivery.json",
         ".local/note-products-revisions/v3-20260906-r1/report.json",
@@ -893,7 +893,7 @@
         "Office実機の表示・編集確認（未確認と明示して出品中）"
       ],
       "evidencePaths": [
-        ".claude/config/coconala-listings.json",
+        "config/coconala-listings.json",
         ".claude/state/products/coconala-packs-2026-09-06.json",
         ".local/note-products-revisions/v3-20260906-r1/report.json",
         ".local/note-products-revisions/v3-20260906-r1/prefecture-household-consumption-pack/readiness.json"
@@ -960,7 +960,7 @@
       "ownerGates": [],
       "evidencePaths": [
         ".claude/state/products/geo-service-readiness-2026-09-06.json",
-        ".claude/config/coconala-listings.json"
+        "config/coconala-listings.json"
       ],
       "channels": [
         {
@@ -1001,7 +1001,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        ".claude/config/kdp-listings.json",
+        "config/kdp-listings.json",
         ".claude/state/products/kindle-archives.json",
         ".local/kindle-books/K-S1-01/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S1-01/v3-20260906-r4/READINESS.md",
@@ -1060,7 +1060,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        ".claude/config/kdp-listings.json",
+        "config/kdp-listings.json",
         ".claude/state/products/kindle-archives.json",
         ".local/kindle-books/K-S1-02/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S1-02/v3-20260906-r4/READINESS.md",
@@ -1119,7 +1119,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        ".claude/config/kdp-listings.json",
+        "config/kdp-listings.json",
         ".claude/state/products/kindle-archives.json",
         ".local/kindle-books/K-S1-03/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S1-03/v3-20260906-r4/READINESS.md",
@@ -1177,7 +1177,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        ".claude/config/kdp-listings.json",
+        "config/kdp-listings.json",
         ".claude/state/products/kindle-archives.json",
         ".local/kindle-books/K-S1-04/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S1-04/v3-20260906-r4/READINESS.md",
@@ -1237,7 +1237,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        ".claude/config/kdp-listings.json",
+        "config/kdp-listings.json",
         ".claude/state/products/kindle-archives.json",
         ".local/kindle-books/K-S1-05/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S1-05/v3-20260906-r4/READINESS.md",
@@ -1297,7 +1297,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        ".claude/config/kdp-listings.json",
+        "config/kdp-listings.json",
         ".claude/state/products/kindle-archives.json",
         ".local/kindle-books/K-S1-06/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S1-06/v3-20260906-r4/READINESS.md",
@@ -1355,7 +1355,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        ".claude/config/kdp-listings.json",
+        "config/kdp-listings.json",
         ".claude/state/products/kindle-archives.json",
         ".local/kindle-books/K-S1-07/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S1-07/v3-20260906-r4/READINESS.md",
@@ -1415,7 +1415,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        ".claude/config/kdp-listings.json",
+        "config/kdp-listings.json",
         ".claude/state/products/kindle-archives.json",
         ".local/kindle-books/K-S1-08/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S1-08/v3-20260906-r4/READINESS.md",
@@ -1478,7 +1478,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        ".claude/config/kdp-listings.json",
+        "config/kdp-listings.json",
         ".claude/state/products/kindle-archives.json",
         ".local/kindle-books/K-S1-09/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S1-09/v3-20260906-r4/READINESS.md",
@@ -1541,7 +1541,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        ".claude/config/kdp-listings.json",
+        "config/kdp-listings.json",
         ".claude/state/products/kindle-archives.json",
         ".local/kindle-books/K-S1-10/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S1-10/v3-20260906-r4/READINESS.md",
@@ -1603,7 +1603,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        ".claude/config/kdp-listings.json",
+        "config/kdp-listings.json",
         ".claude/state/products/kindle-archives.json",
         ".local/kindle-books/K-S1-11/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S1-11/v3-20260906-r4/READINESS.md",
@@ -1663,7 +1663,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        ".claude/config/kdp-listings.json",
+        "config/kdp-listings.json",
         ".claude/state/products/kindle-archives.json",
         ".local/kindle-books/K-S1-12/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S1-12/v3-20260906-r4/READINESS.md",
@@ -1720,7 +1720,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        ".claude/config/kdp-listings.json",
+        "config/kdp-listings.json",
         ".claude/state/products/kindle-archives.json",
         ".local/kindle-books/K-S2-01/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S2-01/v3-20260906-r4/READINESS.md",
@@ -1777,7 +1777,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        ".claude/config/kdp-listings.json",
+        "config/kdp-listings.json",
         ".claude/state/products/kindle-archives.json",
         ".local/kindle-books/K-S2-02/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S2-02/v3-20260906-r4/READINESS.md",
@@ -1835,7 +1835,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        ".claude/config/kdp-listings.json",
+        "config/kdp-listings.json",
         ".claude/state/products/kindle-archives.json",
         ".local/kindle-books/K-S2-03/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S2-03/v3-20260906-r4/READINESS.md",
@@ -1893,7 +1893,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        ".claude/config/kdp-listings.json",
+        "config/kdp-listings.json",
         ".claude/state/products/kindle-archives.json",
         ".local/kindle-books/K-S2-04/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S2-04/v3-20260906-r4/READINESS.md",
@@ -1951,7 +1951,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        ".claude/config/kdp-listings.json",
+        "config/kdp-listings.json",
         ".claude/state/products/kindle-archives.json",
         ".local/kindle-books/K-S2-05/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S2-05/v3-20260906-r4/READINESS.md",
@@ -2009,7 +2009,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        ".claude/config/kdp-listings.json",
+        "config/kdp-listings.json",
         ".claude/state/products/kindle-archives.json",
         ".local/kindle-books/K-S2-06/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S2-06/v3-20260906-r4/READINESS.md",
@@ -2067,7 +2067,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        ".claude/config/kdp-listings.json",
+        "config/kdp-listings.json",
         ".claude/state/products/kindle-archives.json",
         ".local/kindle-books/K-S2-07/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S2-07/v3-20260906-r4/READINESS.md",
@@ -2125,7 +2125,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        ".claude/config/kdp-listings.json",
+        "config/kdp-listings.json",
         ".claude/state/products/kindle-archives.json",
         ".local/kindle-books/K-S2-08/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S2-08/v3-20260906-r4/READINESS.md",
@@ -2183,7 +2183,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        ".claude/config/kdp-listings.json",
+        "config/kdp-listings.json",
         ".claude/state/products/kindle-archives.json",
         ".local/kindle-books/K-S2-09/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S2-09/v3-20260906-r4/READINESS.md",
@@ -2241,7 +2241,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        ".claude/config/kdp-listings.json",
+        "config/kdp-listings.json",
         ".claude/state/products/kindle-archives.json",
         ".local/kindle-books/K-S2-10/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S2-10/v3-20260906-r4/READINESS.md",
@@ -2299,7 +2299,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        ".claude/config/kdp-listings.json",
+        "config/kdp-listings.json",
         ".claude/state/products/kindle-archives.json",
         ".local/kindle-books/K-S2-11/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S2-11/v3-20260906-r4/READINESS.md",
@@ -2359,7 +2359,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        ".claude/config/kdp-listings.json",
+        "config/kdp-listings.json",
         ".claude/state/products/kindle-archives.json",
         ".local/kindle-books/K-S3-01/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S3-01/v3-20260906-r4/READINESS.md",
@@ -2421,7 +2421,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        ".claude/config/kdp-listings.json",
+        "config/kdp-listings.json",
         ".claude/state/products/kindle-archives.json",
         ".local/kindle-books/K-S3-02/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S3-02/v3-20260906-r4/READINESS.md",
@@ -2483,7 +2483,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        ".claude/config/kdp-listings.json",
+        "config/kdp-listings.json",
         ".claude/state/products/kindle-archives.json",
         ".local/kindle-books/K-S3-03/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S3-03/v3-20260906-r4/READINESS.md",
@@ -2545,7 +2545,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        ".claude/config/kdp-listings.json",
+        "config/kdp-listings.json",
         ".claude/state/products/kindle-archives.json",
         ".local/kindle-books/K-S3-04/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S3-04/v3-20260906-r4/READINESS.md",
@@ -2607,7 +2607,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        ".claude/config/kdp-listings.json",
+        "config/kdp-listings.json",
         ".claude/state/products/kindle-archives.json",
         ".local/kindle-books/K-S3-05/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S3-05/v3-20260906-r4/READINESS.md",
@@ -2669,7 +2669,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        ".claude/config/kdp-listings.json",
+        "config/kdp-listings.json",
         ".claude/state/products/kindle-archives.json",
         ".local/kindle-books/K-S3-06/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S3-06/v3-20260906-r4/READINESS.md",
@@ -2731,7 +2731,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        ".claude/config/kdp-listings.json",
+        "config/kdp-listings.json",
         ".claude/state/products/kindle-archives.json",
         ".local/kindle-books/K-S3-07/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S3-07/v3-20260906-r4/READINESS.md",
@@ -2793,7 +2793,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        ".claude/config/kdp-listings.json",
+        "config/kdp-listings.json",
         ".claude/state/products/kindle-archives.json",
         ".local/kindle-books/K-S3-08/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S3-08/v3-20260906-r4/READINESS.md",
@@ -2853,7 +2853,7 @@
         "権利・AI生成申告・価格/印税条件・最終公開承認"
       ],
       "evidencePaths": [
-        ".claude/config/kdp-listings.json",
+        "config/kdp-listings.json",
         ".claude/state/products/kindle-archives.json",
         ".local/kindle-books/K-S4-01/v3-20260906-r4/metadata.json",
         ".local/kindle-books/K-S4-01/v3-20260906-r4/READINESS.md",

@@ -1,7 +1,7 @@
 ---
 name: kdp-publish
 domain: product
-description: stats47 の Kindle 電子書籍 (EPUB) を Amazon KDP へ Playwright で出品・修正する。出品内容 SoT = .claude/config/kdp-listings.json を書籍 id で引き、ログイン済みプロファイルで KDP の出品フォーム (Details/Content/Pricing) へ流し込む。Use when user says [KDPに出品, Kindle出版, 電子書籍を公開, /kdp-publish]. ログイン・税務/銀行情報は人間工程、実公開は --commit + オーナー承認。
+description: stats47 の Kindle 電子書籍 (EPUB) を Amazon KDP へ Playwright で出品・修正する。出品内容 SoT = config/kdp-listings.json を書籍 id で引き、ログイン済みプロファイルで KDP の出品フォーム (Details/Content/Pricing) へ流し込む。Use when user says [KDPに出品, Kindle出版, 電子書籍を公開, /kdp-publish]. ログイン・税務/銀行情報は人間工程、実公開は --commit + オーナー承認。
 disable-model-invocation: true
 primary_agent: kdp-operator
 co_agents: [kindle-publisher]
@@ -46,7 +46,7 @@ npm run kdp:weekly-publish -- --week 2026-W41 --id <ID> --owner-approved <ID> --
   照合できなければ中断し、素通しにはしない。
 - **個人情報は git 管理外**: このリポジトリは **public**。`accountEmail` / `knownAsin` は
   `.local/kdp-account.local.json` (gitignore 済) に置く。`readAccount()` が公開側の
-  `.claude/config/kdp-account.json` に上書きとして重ねる。
+  `config/kdp-account.json` に上書きとして重ねる。
 - **ドメインは `kdp.amazon.co.jp`**: `.com` のサインインでは同じメールでも「アカウントが見つからない」になる
   (Amazon のアカウントは .com と .co.jp で別登録)。UI も `ja_JP` — フォームのセレクタが日本語ラベルのため。
 - **実公開 (`--commit`) はオーナー承認を要する** — outward-facing・取り下げに時間がかかる。既定の下書き検証まではエージェントが進めてよい。
@@ -109,5 +109,5 @@ npm run kdp:weekly-publish -- --week 2026-W41 --id <ID> --owner-approved <ID> --
 ## 関連
 
 - 規約: `.claude/rules/coconala-product-standards.md §8`
-- スクリプト: `.claude/scripts/kdp/` / SoT: `.claude/config/kdp-listings.json` / アカウント: `.claude/config/kdp-account.json`
+- スクリプト: `.claude/scripts/kdp/` / SoT: `config/kdp-listings.json` / アカウント: `config/kdp-account.json`
 - agent: `.claude/agents/kdp-operator.md` / 認証プロファイル: `docs/01_技術設計/07_Playwright認証プロファイル.md`

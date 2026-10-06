@@ -1,6 +1,6 @@
 /**
  * KINDLE_BOOKS と検証対象の版から、未公開の入稿提案を生成する。
- * 公開台帳 (.claude/config/kdp-listings.json) は参照のみ。過去の公開記録を提案内に保持する。
+ * 公開台帳 (config/kdp-listings.json) は参照のみ。過去の公開記録を提案内に保持する。
  *
  * CLI: npm run products:kindle:kdp-listings --workspace=@stats47/product-factory -- --version <版> [--id K-S1-01]
  * .local/kindle-listing-revisions/<版>.json (--id 指定時は <版>.<id>.json) を上書き禁止で作成する。--apply は禁止。
@@ -14,10 +14,11 @@ import { kdpCategoriesFor } from "./kdp-category";
 import { KDP_AI_DISCLOSURE, KDP_APPLY_DRM } from "./kdp-publishing-policy";
 import { assertBookVersion } from "./build-book";
 import { authoredBookSha256 } from "./revision-evidence";
+import { KDP_LISTINGS } from "../../ledger-paths.mjs";
 import { SITE } from "@stats47/data-configs";
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../../..");
-const OUT = join(REPO_ROOT, ".claude/config/kdp-listings.json");
+const OUT = join(REPO_ROOT, KDP_LISTINGS);
 const BOOKS_ROOT = join(REPO_ROOT, ".local/kindle-books");
 
 interface KdpListing {
