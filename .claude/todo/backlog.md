@@ -2822,7 +2822,7 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 
 ### [DATA-LAYOUT-MOVE-01] 計測・記録・改善のデータを `.claude/` から `data/<取得元>/` へ移す
 
-タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run check-datasets] [起票:2026-10-06] [領域:管理]
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run check-datasets] [起票:2026-10-06] [進行中] [領域:管理]
 
 - **経緯**: 2026-10-06 に台帳 `config/datasets.mjs` と検査 `npm run check-datasets` を入れた (手順 1・ファイルは動かしていない)。
   台帳で本来の置き場 (`target`) と現在地が食い違う行が 68 行・1,155 件あり、ほぼすべてが `data/` への移行対象。
@@ -2835,6 +2835,11 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
   `note.hashtags` (→ `config/`) と `improvement.budgets` (→ `.claude/config/`) も同じ手順で動かす。
 - **停止条件**: 定期実行は main の workflow 定義で動くので、パスを変えた取得元は main へ反映して定期実行で確かめるまで、
   次の取得元へ進まない (旧パスへ書き続けて記録が割れる)。本番 deploy は毎回オーナーの承認を取る。
+- **進捗 (2026-10-06)**: 基盤 (`datasetPath` / `datasetDir`・旧置き場の検査 `RETIRED`) は develop に入れた。1 つ目の PSI は
+  ブランチ `feature/20261006-psi-move` (`3bb6f5220`) にコミット済みで、develop には未投入。main の `psi-audit-daily` がまだ
+  「main で計測して develop へ上書きコピーする」古い定義のため、先に PR #1070 をマージし (`PR-1070-CI-FIX-01`)、その後の PSI 日次で
+  巻き戻りが無いこと (`STATE-OVERLAY-MAIN-01`) を確かめる。確かめたら同じ日の日中にこのブランチを develop へ入れて main まで反映し
+  (PSI 日次は JST 02:00)、翌朝の run が `data/psi/` に書いたことを確かめてから次の取得元へ進む。
 - **完了条件**: `npm run check-datasets -- --moves` が 0 行。関係する workflow の次回の定期実行が新しい置き場へ書いている。
 
 ## 🟢 低 — 時期未定・条件付き (trigger は本文に)
