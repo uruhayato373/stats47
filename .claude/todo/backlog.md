@@ -290,6 +290,12 @@ updated: 2026-10-06
 - **[仮説]** デプロイの切り替え中に旧版の Worker が `/` を描画して Workers Cache に入れ、旧版の CSS は新版の静的資産から消えた。
   CSS のハッシュが変わるデプロイのたびに起こりうる。検証: 次に CSS が変わるデプロイの直後に `curl -sI https://stats47.jp/` の
   `age` と CSS の参照先を見る。
+- **関連 (2026-10-06 22:13 UTC)**: 全パージ (22:12) の直後に PR #1088 をデプロイした (77acdfb2)。ウォームアップで 5 件、
+  本番ルート確認で 1 件が 503 を返し、`deploy-workers` は失敗扱いで post-deploy-smoke は skip された。新版は反映済みで
+  (Version ID `1a737ebb`)、数分後には同じ 6 ルートが 200 (描画 5〜8 秒) を返した。22:25 に本番へ smoke-test.ts 11/11・
+  Playwright smoke 48/48 が通った。**[仮説]** キャッシュが空の状態で、データの多いテーマページの初回描画が間に合わなかった。
+  検証: 全パージをしていないデプロイで同じ 503 が出るかを見る。出なければ「全パージはデプロイの直前に行わない」を
+  `.claude/rules/branch-workflow.md` に足す。
 - **次**: どちらかで止める。(a) `deploy-workers` の最後に `purge-worker-cache.ts --all` を足す (デプロイ完了後に古い HTML を消す)。
   (b) 1 つ前のデプロイの `_next/static` を残す。(a) の方が小さい。post-deploy-smoke はこの事故を検出できているので、検査は足さない。
 - **完了条件**: CSS のハッシュが変わるデプロイの後に、`/` を含む代表 URL が新しい CSS を参照し、post-deploy-smoke が通る。
