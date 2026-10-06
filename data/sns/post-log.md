@@ -3,11 +3,13 @@
 投稿済み全件。`posted_at` 降順。
 スクリプトで自動生成 — 手編集しない (`sns-posts-store.cjs` が `insert()`/`updateById()` のたびに再生成)。
 
-**599 件** (最終更新: 2026-10-06)
+**601 件** (最終更新: 2026-10-06)
 
 | 日付 | 媒体 | コンテンツ | キャプション | URL |
 |---|---|---|---|---|
 | 2026-10-06 | 📸 Instagram | area-carousel/39000 |  | [🔗](https://www.instagram.com/p/DeKPMIvIDIO/) |
+| 2026-10-06 | 🧵 Threads | area/area-13000-profile | 東京を1位・47位だけで語らない。 県木はイチョウ、県鳥はユリカモメ。人口・産業・暮らしの県データブックへ。 続きは👇… | [🔗](https://www.threads.com/@stats47jp/post/DeJYr_lke_Q) |
+| 2026-10-06 | 🧵 Threads | ranking/propane-gas-consumption-expenditure | プロパンガス代、高知と兵庫で129倍差。  高知 4万6,453円 兵庫 360円  2位岩手、3位島根も3万9千円台。… | [🔗](https://www.threads.com/@stats47jp/post/DeIqVKliDsU) |
 | 2026-10-05 | 📸 Instagram | ranking-quiz/hamburger-consumption-expenditure |  | [🔗](https://www.instagram.com/p/DeG8ypxmz-j/) |
 | 2026-10-05 | 🧵 Threads | area/area-12000-profile | 千葉のデータブックを公開中。 ホオジロと落花生、房州ビワを入口に、人口・産業・消費の数字を県別に深掘り。 続きは👇 h… | [🔗](https://www.threads.com/@stats47jp/post/DeGyI5Mktx1) |
 | 2026-10-05 | 🧵 Threads | ranking/autolock-apartment-rate | マンションのオートロック率、1位は東京ではなく福岡。  福岡55.5％、東京54.5％、京都51.8％。 最も低い鳥取は… | [🔗](https://www.threads.com/@stats47jp/post/DeGD4xgiJFv) |
