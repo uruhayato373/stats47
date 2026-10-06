@@ -199,3 +199,31 @@ export const DATASETS = [
   d("business.weekly-reviews", ".claude/skills/management/weekly-review/reference/reviews/{week}.md", "report", "strategy", "data", "週次レビュー"),
   d("business.monthly-reviews", ".claude/skills/management/monthly-review/reference/reviews/{month}.md", "report", "strategy", "data", "月次レビュー"),
 ];
+
+/**
+ * 移した旧置き場 ({ from, to, since })。コード・workflow・package.json に from が残っていたら check-datasets が止める
+ * (旧パスを読んで黙って空になる・旧パスへ書き続けて記録が割れるのを防ぐ)。履歴の記録 (json の出典・md) は対象外。
+ */
+export const RETIRED = [];
+
+const BY_ID = new Map(DATASETS.map((ds) => [ds.id, ds]));
+const lookup = (id) => {
+  const ds = BY_ID.get(id);
+  if (!ds) throw new Error(`台帳に無いデータセット: ${id}`);
+  return ds;
+};
+
+/** 可変部分の無いデータセットの repo 相対パス。コードは置き場を直書きせずこれで引く */
+export function datasetPath(id) {
+  const ds = lookup(id);
+  if (ds.path.includes("{")) throw new Error(`${id} は可変部分を持つので datasetDir を使う: ${ds.path}`);
+  return ds.path;
+}
+
+/** データセットが置かれるディレクトリ (可変部分より前・末尾の / なし) */
+export function datasetDir(id) {
+  const { path } = lookup(id);
+  const i = path.indexOf("{");
+  const fixed = i < 0 ? path : path.slice(0, i);
+  return fixed.slice(0, fixed.lastIndexOf("/"));
+}

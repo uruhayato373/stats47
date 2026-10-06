@@ -1,8 +1,7 @@
 {
-  "hash": "3676a10797f56dee9fa33ec7b6efd7b61642876823bbeabffc0faca4cdd3485f",
-  "audited_at": "2026-10-06T01:42:35",
+  "hash": "6f8f18bb310cd937ad9f49e9ffdb5099a3e7b7216685aaca8990adc17d8b71a8",
+  "audited_at": "2026-10-06T02:08:52",
   "files": [
-    ".claude/rules/data-storage.md",
     ".claude/scripts/lib/__tests__/check-datasets.test.mjs",
     ".claude/scripts/lib/check-datasets.mjs"
   ]

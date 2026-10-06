@@ -6,6 +6,7 @@
  *   - 台帳の行の不備 (id 重複・語彙外の kind / target / domain・寿命の名前が RETENTION_POLICIES に無い、または置き場が食い違う)
  *   - GOVERNED に当たる追跡ファイルが、台帳のどの行にも当たらない (未宣言) / 2 行以上に当たる (重なり)
  *   - どのファイルにも当たらない行 (planned を除く)
+ *   - 移した旧置き場 (RETIRED の from) がコード・workflow・package.json に残っている (コメント行は除く)
  * 出すだけのもの: target の置き場と現在地が違う行 (data/ への移行対象) の件数と一覧。
  *
  *   npm run check-datasets             # 検査 (error があれば exit 1)
@@ -16,7 +17,7 @@ import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { DATASETS, GOVERNED, IGNORED_NAMES, KINDS, SLOTS, TARGETS } from "../../../config/datasets.mjs";
+import { DATASETS, GOVERNED, IGNORED_NAMES, KINDS, RETIRED, SLOTS, TARGETS } from "../../../config/datasets.mjs";
 import { DOMAINS } from "../../../config/paths.mjs";
 import { RETENTION_POLICIES } from "./prune-state-snapshots.mjs";
 
@@ -84,6 +85,38 @@ export function checkDatasets({ datasets, files, governed, ignoredNames, kinds, 
   return { errors, governedCount: governedFiles.length, datasetCount: datasets.length, moves };
 }
 
+const COMMENT_LINE = /^\s*(?:\/\/|\/?\*|#)/;
+export const RETIRED_SCAN_GLOBS = ["*.mjs", "*.cjs", "*.js", "*.ts", "*.tsx", "*.mts", "*.cts", "*.sh", "*.ps1", "*.py", "*.yml", "*.yaml", "package.json"];
+
+/** 旧置き場を含む行 ({ file, line, text }) のうち、コメント行を除いたものを error にする */
+export function findRetiredReferences(retired, hits) {
+  const errors = [];
+  for (const { file, line, text } of hits) {
+    if (COMMENT_LINE.test(text)) continue;
+    for (const r of retired) {
+      if (text.includes(r.from)) errors.push(`旧置き場の参照: ${file}:${line} (${r.from} → ${r.to})`);
+    }
+  }
+  return errors;
+}
+
+function retiredHits() {
+  if (RETIRED.length === 0) return [];
+  const args = ["-C", ROOT, "grep", "-n", "-F", ...RETIRED.flatMap((r) => ["-e", r.from]), "--", ...RETIRED_SCAN_GLOBS];
+  let out;
+  try {
+    out = execFileSync("git", args, { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
+  } catch (e) {
+    if (e.status === 1) return []; // 一致なし
+    throw e;
+  }
+  return out
+    .split("\n")
+    .map((row) => row.match(/^([^:]+):(\d+):(.*)$/))
+    .filter(Boolean)
+    .map((m) => ({ file: m[1], line: Number(m[2]), text: m[3] }));
+}
+
 function trackedFiles() {
   return execFileSync("git", ["-C", ROOT, "ls-files", "-z"], { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 })
     .split("\0")
@@ -102,6 +135,7 @@ function main() {
     domainIds,
     retention: RETENTION_POLICIES,
   });
+  result.errors.push(...findRetiredReferences(RETIRED, retiredHits()));
   for (const e of result.errors) console.error(`✗ ${e}`);
   const moveFiles = result.moves.reduce((n, m) => n + m.files, 0);
   if (process.argv.includes("--moves")) {

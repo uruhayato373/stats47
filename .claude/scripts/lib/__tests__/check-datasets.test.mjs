@@ -10,9 +10,9 @@ import { resolve } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 
-import { DATASETS, GOVERNED, IGNORED_NAMES, KINDS, TARGETS } from "../../../../config/datasets.mjs";
+import { DATASETS, GOVERNED, IGNORED_NAMES, KINDS, TARGETS, datasetDir, datasetPath } from "../../../../config/datasets.mjs";
 import { DOMAINS } from "../../../../config/paths.mjs";
-import { checkDatasets, patternToRegExp } from "../check-datasets.mjs";
+import { checkDatasets, findRetiredReferences, patternToRegExp } from "../check-datasets.mjs";
 import { RETENTION_POLICIES } from "../prune-state-snapshots.mjs";
 
 const ROOT = resolve(fileURLToPath(new URL("../../../..", import.meta.url)));
@@ -24,7 +24,7 @@ const base = {
   kinds: KINDS,
   targets: TARGETS,
   domainIds: new Set(["site"]),
-  retention: { psi: { directory: ".claude/state/metrics/psi" } },
+  retention: { foo: { directory: ".claude/state/metrics/foo" } },
 };
 const ds = (id, path, opts = {}) => ({ id, path, kind: "series", domain: "site", target: "data", description: id, ...opts });
 const run = (datasets, files) => checkDatasets({ ...base, datasets, files });
@@ -55,13 +55,13 @@ test("可変部分は決めた形だけに当たる", () => {
 });
 
 test("台帳に無いファイルは未宣言で落ちる (対象範囲外と .gitkeep は見ない)", () => {
-  const r = run([ds("psi.batch", ".claude/state/metrics/psi/{date}.json")], [
-    ".claude/state/metrics/psi/2026-10-06.json",
-    ".claude/state/metrics/psi/latest.json",
-    ".claude/state/metrics/psi/.gitkeep",
+  const r = run([ds("foo.batch", ".claude/state/metrics/foo/{date}.json")], [
+    ".claude/state/metrics/foo/2026-10-06.json",
+    ".claude/state/metrics/foo/latest.json",
+    ".claude/state/metrics/foo/.gitkeep",
     ".claude/state/other/x.json",
   ]);
-  assert.deepEqual(r.errors, ["未宣言: .claude/state/metrics/psi/latest.json"]);
+  assert.deepEqual(r.errors, ["未宣言: .claude/state/metrics/foo/latest.json"]);
 });
 
 test("2 行に当たるファイルは重なりで落ちる", () => {
@@ -84,16 +84,39 @@ test("語彙外の kind / target / 領域と id の重複は落ちる", () => {
 });
 
 test("寿命は RETENTION_POLICIES に実在し、置き場が一致しなければ落ちる", () => {
-  const files = [".claude/state/metrics/psi/2026-10-06.json", "data/psi/2026-10-06.json"];
-  assert.deepEqual(run([ds("a", ".claude/state/metrics/psi/{date}.json", { retain: "psi" }), ds("b", "data/psi/{date}.json")], files).errors, []);
-  assert.match(run([ds("a", ".claude/state/metrics/psi/{date}.json", { retain: "nope" }), ds("b", "data/psi/{date}.json")], files).errors.join(), /RETENTION_POLICIES に無い寿命/);
-  assert.match(run([ds("a", ".claude/state/metrics/psi/{date}.json"), ds("b", "data/psi/{date}.json", { retain: "psi" })], files).errors.join(), /置き場 .* と path が食い違う/);
+  const files = [".claude/state/metrics/foo/2026-10-06.json", "data/foo/2026-10-06.json"];
+  assert.deepEqual(run([ds("a", ".claude/state/metrics/foo/{date}.json", { retain: "foo" }), ds("b", "data/foo/{date}.json")], files).errors, []);
+  assert.match(run([ds("a", ".claude/state/metrics/foo/{date}.json", { retain: "nope" }), ds("b", "data/foo/{date}.json")], files).errors.join(), /RETENTION_POLICIES に無い寿命/);
+  assert.match(run([ds("a", ".claude/state/metrics/foo/{date}.json"), ds("b", "data/foo/{date}.json", { retain: "foo" })], files).errors.join(), /置き場 .* と path が食い違う/);
 });
 
 test("本来の置き場と現在地が違う行だけを移行対象に数える", () => {
-  const r = run([ds("a", ".claude/state/metrics/psi/{date}.json"), ds("b", "data/psi/{date}.json")], [
-    ".claude/state/metrics/psi/2026-10-06.json",
-    "data/psi/2026-10-06.json",
+  const r = run([ds("a", ".claude/state/metrics/foo/{date}.json"), ds("b", "data/foo/{date}.json")], [
+    ".claude/state/metrics/foo/2026-10-06.json",
+    "data/foo/2026-10-06.json",
   ]);
-  assert.deepEqual(r.moves, [{ id: "a", path: ".claude/state/metrics/psi/{date}.json", target: "data", files: 1 }]);
+  assert.deepEqual(r.moves, [{ id: "a", path: ".claude/state/metrics/foo/{date}.json", target: "data", files: 1 }]);
+});
+
+test("移した旧置き場がコードに残っていれば落ち、コメント行は通す", () => {
+  const retired = [{ from: ".claude/state/metrics/foo/", to: "data/foo/", since: "2026-10-06" }];
+  const errors = findRetiredReferences(retired, [
+    { file: "a.mjs", line: 3, text: 'const DIR = ".claude/state/metrics/foo/";' },
+    { file: "b.mjs", line: 1, text: " * 旧置き場は .claude/state/metrics/foo/ だった" },
+    { file: "c.yml", line: 9, text: "  # git add .claude/state/metrics/foo/" },
+    { file: "d.yml", line: 10, text: "git add .claude/state/metrics/foo/" },
+  ]);
+  assert.deepEqual(errors, [
+    "旧置き場の参照: a.mjs:3 (.claude/state/metrics/foo/ → data/foo/)",
+    "旧置き場の参照: d.yml:10 (.claude/state/metrics/foo/ → data/foo/)",
+  ]);
+});
+
+test("datasetPath は可変部分の無い行だけ、datasetDir は可変部分より前のディレクトリを返す", () => {
+  const fixed = DATASETS.find((x) => !x.path.includes("{"));
+  const slotted = DATASETS.find((x) => x.path.includes("/{date}"));
+  assert.equal(datasetPath(fixed.id), fixed.path);
+  assert.throws(() => datasetPath(slotted.id), /datasetDir を使う/);
+  assert.equal(datasetDir(slotted.id), slotted.path.slice(0, slotted.path.indexOf("/{date}")));
+  assert.throws(() => datasetPath("no.such-dataset"), /台帳に無いデータセット/);
 });
