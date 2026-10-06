@@ -13,7 +13,7 @@ import { assertAccount, launchContext, UA } from "./lib/note-session.mjs";
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(SCRIPT_DIR, "../../..");
 const RUN_DATE = new Date().toISOString().slice(0, 10);
-const ASSET_DIR = join(SCRIPT_DIR, "assets/brand-headers/generated");
+const ASSET_DIR = join(ROOT, "assets/note/brand-headers/generated");
 const REPORT_PATH = join(ROOT, ".claude/state/metrics", `note-branding-update-${RUN_DATE}.json`);
 const COMMIT = process.argv.includes("--commit");
 const DEFAULT_COVER = /\/assets\/default\/default_magazine_header/;

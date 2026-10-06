@@ -13,7 +13,7 @@ import sharp from "sharp";
 
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(SCRIPT_DIR, "../../..");
-const ASSET_DIR = join(SCRIPT_DIR, "assets/brand-headers");
+const ASSET_DIR = join(ROOT, "assets/note/brand-headers");
 const BACKGROUND = join(ASSET_DIR, "stats47-header-bg.png");
 const OUTPUT_DIR = join(ASSET_DIR, "generated");
 const WIDTH = 1920;

@@ -48,8 +48,8 @@ Google Search Console の専任 agent。 fetch (週次 snapshot)、 inspect (URL
 
 - `.claude/state/metrics/gsc/` — GSC 週次 history (CRUD)
 - `.claude/state/metrics/gsc/operations-cycle-LATEST.{json,md}` — 運用サイクル監査結果 (CRUD)
-- `.claude/skills/analytics/gsc-improvement/reference/snapshots/` — 週次 snapshot CSV (CRUD)
-- `.claude/skills/analytics/gsc-improvement/reference/improvement-log.md` — agent 用詳細層 (CRUD)
+- `data/gsc/snapshots/` — 週次 snapshot CSV (CRUD)
+- `data/improvement/gsc-improvement/improvement-log.md` — agent 用詳細層 (CRUD)
 - `.claude/todo/improvements.md` — read only (improvement-triage が排他 write)
 
 ## File Boundary (並行衝突回避)

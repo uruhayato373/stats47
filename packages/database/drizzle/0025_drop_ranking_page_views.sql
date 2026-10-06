@@ -2,7 +2,7 @@
 --
 -- GA4 PV データの D1 キャッシュとして 2026-03 に作成したが、
 -- - production app は同テーブルを読まない (R2 snapshot 経由のみ)
--- - GA4 履歴は `.claude/skills/analytics/ga4-improvement/reference/snapshots/<week>/pages.csv` に集約済み
+-- - GA4 履歴は `data/ga4/snapshots/<week>/pages.csv` に集約済み
 -- - update-featured-rankings は in-memory 集計に変更
 -- - lighthouse-check --top-pv は pages.csv 直読みに変更
 --

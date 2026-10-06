@@ -13,7 +13,7 @@ metadata:
 
 - **`.claude/rules/sns-content-standards.md`** = SNS 実行規約の正典 (chart-component-standards 方式)。チャネル戦略・
   頻度リミット・投稿雛形カタログ・UTM 規則・禁止事項。docs/10_SNS戦略 は人間向け読み物 (rules が優先)。
-- **投稿台帳 SSOT = `.claude/state/sns/posts.json`** (`sns-posts-store.cjs`)。旧 D1 `sns_posts` は完全DBレスで廃止。
+- **投稿台帳 SSOT = `data/sns/posts.json`** (`sns-posts-store.cjs`)。旧 D1 `sns_posts` は完全DBレスで廃止。
   `data-storage.md` の記述も修正済 (git TS 行から sns_posts を外し posts.json に移記)。
 
 ## チャネル方針 (2026-07)

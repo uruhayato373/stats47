@@ -350,13 +350,13 @@ export function summarizePaidPurchases({ ledger, liveProductCount, weekStart, we
  * @param {Array<{id,label,tier,measurementStatus,unit}>|null} input.nodes kpi-tree.json の nodes
  * @param {string} input.week
  * @param {string} input.asOf
- * @param {Array<object>|null} input.gscHistory .claude/state/metrics/gsc/history.csv
+ * @param {Array<object>|null} input.gscHistory data/gsc/history.csv
  * @param {Array<object>|null} input.cycleHistory measurement-cycle/history.csv (今週の行を除く過去分)
  * @param {object|null} input.journey summarizeJourney の結果
  * @param {object|null} input.workContext summarizeWorkContext の結果
- * @param {Array<object>|null} input.affiliateRows .claude/state/ads/ga4-affiliate-history.csv
+ * @param {Array<object>|null} input.affiliateRows data/affiliate/ga4-affiliate-history.csv
  * @param {object|null} input.operations buildOperations の結果
- * @param {object|null} input.authenticated .claude/state/metrics/authenticated/latest.json (ASP・note・KDP 等の認証付き収集)
+ * @param {object|null} input.authenticated data/authenticated/latest.json (ASP・note・KDP 等の認証付き収集)
  * @param {Array<{id:string, kpis:string[]|null}>} input.improvementRows strategy-lanes.parseImprovementRows
  * @param {string[]} input.focusKpis 今月の重点レーンの KPI id
  * @param {number} input.maxActive active 施策の上限

@@ -5,7 +5,7 @@
  * 公務員 × Claude Code バーティカル専用のメトリクス集計スクリプト。
  *
  * 入力:
- *   1. fetch-note-metrics 出力: .claude/state/metrics/note/note-YYYY-MM-DD.json
+ *   1. fetch-note-metrics 出力: data/note/metrics/note-YYYY-MM-DD.json
  *      (新形式 snapshots/YYYY-MM-DD.json にも追従)
  *   2. docs/31_note記事原稿/koumuin-claude-code/<NN-slug>/draft.md の YAML frontmatter
  *
@@ -33,7 +33,7 @@ const path = require("path");
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
 const DEFAULT_METRICS_DIR = path.join(
   PROJECT_ROOT,
-  ".claude/state/metrics/note"
+  "data/note/metrics"
 );
 const DEFAULT_DOCS_ROOT = path.join(PROJECT_ROOT, "docs/31_note記事原稿");
 const DEFAULT_VERTICAL = "koumuin-claude-code";
@@ -106,7 +106,7 @@ function printHelp() {
       "  --until YYYY-MM-DD     集計終了日 (この日以前の snapshot を採用)",
       "  --vertical <name>      対象バーティカル (default: koumuin-claude-code)",
       "  --output <path>        Markdown レポート出力先 (.csv は同階層に併存)",
-      "  --metrics-dir <path>   fetch-note-metrics の保存先 (default: .claude/state/metrics/note)",
+      "  --metrics-dir <path>   fetch-note-metrics の保存先 (default: data/note/metrics)",
       "  --docs-root <path>     note 原稿のルート (default: docs/31_note記事原稿)",
       "  --self-test            内蔵テストを実行して終了",
       "  -h, --help             本ヘルプを表示",

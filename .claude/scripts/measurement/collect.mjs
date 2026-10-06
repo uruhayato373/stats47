@@ -126,11 +126,11 @@ try {
   if (name === 'moshimo') {
     await command('.claude/scripts/ads/moshimo-report.mjs');
     await command('.claude/scripts/ads/moshimo-report.mjs', ['--check']);
-    capture('.claude/state/metrics/affiliate/moshimo-results.json');
+    capture('data/affiliate/moshimo-results.json');
   } else if (name === 'a8') {
     const yesterday = new Date(Date.now() + 9 * 3600000 - 86400000).toISOString().slice(0, 10);
     await command('.claude/scripts/ads/fetch-a8-ui-csv.mjs', ['--reports', 'site-summary', '--month', yesterday.slice(0, 7)]);
-    const marker = JSON.parse(readFileSync(join(ROOT, '.claude/state/metrics/affiliate/a8-ui-last-run.json')));
+    const marker = JSON.parse(readFileSync(join(ROOT, 'data/affiliate/a8-ui-last-run.json')));
     if (marker.status !== 'ok' || marker.downloadedUnits !== 1 || marker.collectedAt < now) throw new Error('collection_incomplete');
     await command('.claude/scripts/ads/normalize-a8-csv.mjs', ['--run', marker.lastRun]);
     const normalized = join(ROOT, '.local/a8-ui', marker.lastRun, 'normalized');
@@ -138,10 +138,10 @@ try {
       if (JSON.parse(readFileSync(join(normalized, file))).length) throw new Error('reject_rows');
     }
     capture(`.local/a8-ui/${marker.lastRun}`);
-    for (const file of ['a8-ui-last-run.json', 'a8-results.json', 'a8-report-log.json']) capture(`.claude/state/metrics/affiliate/${file}`);
+    for (const file of ['a8-ui-last-run.json', 'a8-results.json', 'a8-report-log.json']) capture(`data/affiliate/${file}`);
   } else if (name === 'rakuten') {
     await command('.claude/scripts/ads/rakuten-report.mjs');
-    capture('.claude/state/metrics/affiliate/rakuten-results.json');
+    capture('data/affiliate/rakuten-results.json');
   } else if (name === 'afb') {
     const config = JSON.parse(readFileSync(join(ROOT, AFFILIATE_ASP), 'utf8'));
     const outcomes = await collectAfbOutcomes({ config, apiKey: process.env.AFB_API_KEY, now: new Date(now) });
@@ -180,7 +180,7 @@ try {
     capture(`.local/authenticated-measurement/${name}-${runId}/coverage`);
     const { stdout, stderr } = await run('python3', ['.claude/scripts/gsc/ingest-gsc-export.py', '--src', dest, '--require-actionable'], { cwd: ROOT, timeout: 60000 });
     logs += stdout + stderr;
-    capture('.claude/state/metrics/gsc/coverage-drilldown');
+    capture('data/gsc/coverage-drilldown');
   } else {
     await command('.claude/scripts/measurement/marketplace-status.mjs', [name, join(work, 'status.json')], 900000);
     capture(`.local/authenticated-measurement/${name}-${runId}/status.json`);

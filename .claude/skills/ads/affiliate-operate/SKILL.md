@@ -11,7 +11,7 @@ co_agents: [affiliate-manager]
 Mac / Windows 双方で動く。
 
 > **正典は `.claude/rules/affiliate-ads-standards.md` §11**。本 skill は手順のみ。
-> 接続設定は `config/affiliate-asp.json`、提携台帳は `.claude/state/ads/affiliate-catalog.json`、
+> 接続設定は `config/affiliate-asp.json`、提携台帳は `data/affiliate/affiliate-catalog.json`、
 > サイト帰属の判定は `.claude/scripts/ads/lib/asp-site-guard.mjs` が SSOT。
 > A8 の**案件開拓**は `/scout-asp`、A8 の**成果取込**は `/a8-report` が担当 (役割が違う)。
 
@@ -28,7 +28,7 @@ Mac / Windows 双方で動く。
 | `harvest` (afb) | `node .claude/scripts/ads/afb-harvest.mjs --id <PID[,PID]>` | なし (原稿を `.local/affiliate-harvest/afb/` に保存。SSOT 登録・公開は別工程) |
 | `harvest` (もしも) | `node .claude/scripts/ads/moshimo-harvest.mjs --id <promotion_id[,promotion_id]>` | なし (原稿を `.local/affiliate-harvest/moshimo/` に保存。SSOT 登録・公開は別工程) |
 | `inspect-offer` (もしも) | `node .claude/scripts/ads/moshimo-inspect-offer.mjs --id <promotion_id[,promotion_id]>` | なし (成果・掲載条件を `.local/affiliate-offer-inspect/moshimo/` に証拠保全) |
-| `report` (もしも) | `node .claude/scripts/ads/moshimo-report.mjs [--from YYYY-MM-DD --to YYYY-MM-DD]` | `.claude/state/metrics/affiliate/moshimo-results.json` を更新 (stats47サイト別・最大93日) |
+| `report` (もしも) | `node .claude/scripts/ads/moshimo-report.mjs [--from YYYY-MM-DD --to YYYY-MM-DD]` | `data/affiliate/moshimo-results.json` を更新 (stats47サイト別・最大93日) |
 | `budget` | `node .claude/scripts/ads/check-asp-apply-budget.cjs --asp <moshimo\|afb>` | なし (週の残枠を表示) |
 
 ## 手順
@@ -131,8 +131,8 @@ git で運ばれるもの / 運ばれないものを取り違えると、重複�
 
 | 引き継がれる (git) | 引き継がれない (マシン固有) |
 |---|---|
-| 提携台帳 `.claude/state/ads/affiliate-catalog.json` (申請履歴・週上限の入力) | **Playwright 永続プロファイル `.local/playwright-*-profile`** (gitignore) |
-| A8 カタログ `.claude/state/ads/a8-catalog.json` (状態機械・承認待ち) | セッション state `.local/playwright-*-state.json` |
+| 提携台帳 `data/affiliate/affiliate-catalog.json` (申請履歴・週上限の入力) | **Playwright 永続プロファイル `.local/playwright-*-profile`** (gitignore) |
+| A8 カタログ `data/affiliate/a8-catalog.json` (状態機械・承認待ち) | セッション state `.local/playwright-*-state.json` |
 | 接続設定 `config/affiliate-asp.json` (URL / ラベル / 週上限) | 走査結果 `.local/playwright-*-debug/` (再実行すれば作れる) |
 | 広告 SSOT `apps/web/scripts/affiliate-ads-data.ts` | — |
 
@@ -187,7 +187,7 @@ afb は承認追跡と広告原稿のローカル取得まで実装済み、も�
 ## 関連
 
 - 規約: `.claude/rules/affiliate-ads-standards.md` (§0 意図軸 / §11 3 ASP 提携運用)
-- 設定: `config/affiliate-asp.json` / 台帳: `.claude/state/ads/affiliate-catalog.json`
+- 設定: `config/affiliate-asp.json` / 台帳: `data/affiliate/affiliate-catalog.json`
 - コア: `.claude/scripts/ads/lib/{asp-browser-base,asp-browser,asp-site-guard}.mjs` (+ `__tests__/`)
 - agent: `.claude/agents/affiliate-operator.md`
 - 隣接 skill: `/scout-asp` (A8 案件開拓) / `/a8-report` (A8 成果取込) / `/register-affiliate-banner` (SSOT 登録)

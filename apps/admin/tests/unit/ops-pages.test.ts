@@ -89,7 +89,7 @@ describe("ads server", () => {
       stateFiles: {
         ".claude/state/ads/affiliate-operations-latest.json": OPERATIONS,
         ".claude/state/ads/inventory-latest.json": INVENTORY,
-        ".claude/state/ads/ga4-affiliate-2026-08-16.json": GA4,
+        "data/affiliate/ga4-affiliate-2026-08-16.json": GA4,
       },
     });
     const { adsSummary } = await load(root, "@/lib/server/ads");
@@ -116,8 +116,8 @@ describe("ads server", () => {
       stateFiles: {
         ".claude/state/ads/affiliate-operations-latest.json": OPERATIONS,
         ".claude/state/ads/inventory-latest.json": INVENTORY,
-        ".claude/state/ads/ga4-affiliate-2026-08-16.json": GA4,
-        ".claude/state/ads/a8-catalog.json": A8_CATALOG,
+        "data/affiliate/ga4-affiliate-2026-08-16.json": GA4,
+        "data/affiliate/a8-catalog.json": A8_CATALOG,
       },
     });
     const { adsSummary } = await load(root, "@/lib/server/ads");
@@ -155,7 +155,7 @@ describe("revenue server", () => {
 
   it("週次 CSV を新しい順に返す", async () => {
     root = makeFixtureRoot({
-      stateFiles: { ".claude/state/metrics/adsense/history.csv": HISTORY },
+      stateFiles: { "data/adsense/history.csv": HISTORY },
     });
     const { revenueSummary } = await load(root, "@/lib/server/revenue");
     const d = revenueSummary();

@@ -8,7 +8,7 @@
  * → 次の build-expansion-queue が categoryTraffic に集計し、流入が付いたカテゴリの pending を優先する。
  *
  * 真実源: .claude/state/estat/expansion-queue.json (gsc を upsert)
- * 入力  : .claude/skills/analytics/gsc-improvement/reference/snapshots/<week>/pages.csv (最新週)
+ * 入力  : data/gsc/snapshots/<week>/pages.csv (最新週)
  *
  * Usage:
  *   node .claude/scripts/estat/measure-expansion-impact.mjs            # 最新週で計測
@@ -21,7 +21,7 @@ import { fileURLToPath } from "node:url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..", "..", "..");
 const QUEUE_FILE = path.join(ROOT, ".claude/state/estat/expansion-queue.json");
-const SNAP_DIR = path.join(ROOT, ".claude/skills/analytics/gsc-improvement/reference/snapshots");
+const SNAP_DIR = path.join(ROOT, "data/gsc/snapshots");
 
 const args = process.argv.slice(2);
 const weekArg = args.includes("--week") ? args[args.indexOf("--week") + 1] : null;

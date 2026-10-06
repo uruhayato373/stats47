@@ -2,7 +2,7 @@
  * 商品の週次実売 (純関数)。週次 Issue の NSM 節 (nsm-revenue-lines.mjs) と KPI ツリーの「有料購入」
  * (measurement-cycle.mjs) が同じ計算を使う。
  *
- * 入力 `revenueHistory` は認証付き収集が毎日足す `.claude/state/metrics/authenticated/revenue-history.json`
+ * 入力 `revenueHistory` は認証付き収集が毎日足す `data/authenticated/revenue-history.json`
  * (summarize.mjs が書く)。チャネルごとに意味が違うので、足し方もチャネルごとに固定する。
  * - coconala … 売上管理の「累積売上」(手数料控除後・取引完了時点で計上)。単調増加なので
  *              週の実売 = 週末時点の累積 − 週初め前の累積

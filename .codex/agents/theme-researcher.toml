@@ -123,6 +123,6 @@ chart 候補は `Candidate | componentType | relatedRankingKeys | annotation can
 - 白書は NotebookLM に置き**引用付き回答だけ**受け取る (PDF 全文をコンテキストに載せない)
 - Stage 1 は同一セッションの並列tool callで収集し、収集専用subagentは起動しない
 - 公式ダッシュボードは研究カタログをテーマで絞り、未収録・partial・古い記録だけ再調査する
-- GSC は既存 snapshot CSV (`.claude/skills/analytics/gsc-improvement/reference/snapshots/`) を grep — API 呼ばない
+- GSC は既存 snapshot CSV (`data/gsc/snapshots/`) を grep — API 呼ばない
 - deep-research (system skill) は白書カバレッジが無いテーマのみ・質問を絞って使う
 - 提案採否・カタログ設計の最終判断は呼び出し元 (メインセッション / 上位モデル) に委ねる'''

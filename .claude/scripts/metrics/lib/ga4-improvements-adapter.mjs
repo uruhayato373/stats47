@@ -115,7 +115,7 @@ export function createGa4ImprovementsAdapter({ entries, availableWeeks, loadPage
 
 /** repo の improvements.md と GA4 週次 snapshot から adapter を組み立てる (effect-verdict/cli.mjs が使う)。 */
 export function loadGa4ImprovementsAdapter({ root = PROJECT_ROOT, minWeeks = DEFAULT_THRESHOLDS.window.minWeeks } = {}) {
-  const snapshotDir = path.join(root, ".claude/skills/analytics/ga4-improvement/reference/snapshots");
+  const snapshotDir = path.join(root, "data/ga4/snapshots");
   const availableWeeks = fs.existsSync(snapshotDir)
     ? fs.readdirSync(snapshotDir).filter((d) => /^\d{4}-W\d{2}$/.test(d) && fs.existsSync(path.join(snapshotDir, d, "pages-clean.csv"))).sort()
     : [];
@@ -133,6 +133,6 @@ export function loadGa4ImprovementsAdapter({ root = PROJECT_ROOT, minWeeks = DEF
     availableWeeks,
     loadPages,
     minWeeks,
-    logPath: path.join(root, ".claude/skills/analytics/ga4-improvement/reference/improvement-log.md"),
+    logPath: path.join(root, "data/improvement/ga4-improvement/improvement-log.md"),
   });
 }

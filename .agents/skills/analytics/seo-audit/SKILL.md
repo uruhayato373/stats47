@@ -397,7 +397,7 @@ focus: "all | technical | content | keywords | programmatic"
 ```bash
 # カバレッジ指標の推移（GSC state。旧 seo_tracking の代替）
 cat .claude/state/gsc/LATEST.md                                  # 最新サマリ
-cat .claude/state/metrics/gsc/history.csv | tail -10             # 時系列（直近10件）
+cat data/gsc/history.csv | tail -10             # 時系列（直近10件）
 # 未完了の SEO 施策（改善バックログ。旧 seo_actions の代替）
 grep -nE "status:\s*(pending|in.progress)" .claude/todo/improvements.md
 ```
@@ -454,7 +454,7 @@ Phase 1以降へ自動的に進めない。
 - `apps/web/src/lib/structured-data/` — 構造化データ実装
 - `apps/web/src/middleware.ts` — リダイレクト設定
 - `apps/web/tests/e2e/seo/` — SEO 関連 E2E テスト
-- `.claude/state/gsc/LATEST.md` / `.claude/state/metrics/gsc/history.csv` — SEO カバレッジ指標の数値推移（旧 D1 `seo_tracking` の代替）
+- `.claude/state/gsc/LATEST.md` / `data/gsc/history.csv` — SEO カバレッジ指標の数値推移（旧 D1 `seo_tracking` の代替）
 - `.claude/todo/improvements.md` — SEO 改善施策の管理（pending → in_progress → done。旧 D1 `seo_actions` の代替）
 - `reference/site-navigation-graph.md` — `KAIYU-HUB-01`のサイト横断回遊グラフ・レコメンド実装詳細
 - `reference/verification-commands.md` — GSC / GA4 / PSI / HTTP / 公式ドキュメントの実証コマンド (`evidence-based-judgment.md` の根拠取得)

@@ -51,7 +51,7 @@ developer_instructions = '''
 schema と判定規律の正典: `.claude/state/themes/README.md`。
 
 1. **状態リコンサイル (read-only)**: portfolio.json を読み、ThemeCatalog (metrics/charts/selection) ・
-   最新 GSC/GA4 snapshot (`.claude/skills/analytics/{gsc,ga4}-improvement/reference/snapshots/<週>/pages.csv`
+   最新 GSC/GA4 snapshot (`data/{gsc,ga4}/snapshots/<週>/pages.csv`
    の `/themes/<key>` 行) ・レビュー文書 (`.claude/skills/theme/manage-theme-portfolio/reference/reviews/*-theme-*.md`) と突合して更新する。
    更新後は必ず `node .claude/scripts/themes/validate-theme-state.mjs` を通す。
 2. **ライフサイクル判定**: `.claude/skills/theme/manage-theme-portfolio/reference/theme-taxonomy-reorganization.md`

@@ -66,7 +66,7 @@ function fixture({ weeks = {}, months = {}, weeklyPlan = "2026-W41", monthlyPlan
   write(root, ".claude/todo/backlog.md", "## 🔴 高\n\n### [LIVE-CARD-01] 生きているカード\nタグ: [収益化]\n\n本文\n");
   write(root, ".claude/todo/improvements.md", improvements);
   if (ledger) write(root, ".claude/state/backlog-loop/ledger.json", JSON.stringify(ledger));
-  write(root, ".claude/state/experiments.json", JSON.stringify([{ id: "EXP-007" }]));
+  write(root, "data/business/experiments.json", JSON.stringify([{ id: "EXP-007" }]));
   write(root, "package.json", JSON.stringify({ scripts: {} }));
   write(root, "tools/check.mjs", "");
   write(root, "skills/weekly/SKILL.md", skillText ?? "node tools/check.mjs");

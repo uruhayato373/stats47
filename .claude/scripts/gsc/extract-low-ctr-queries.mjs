@@ -9,7 +9,7 @@
  *   node .claude/scripts/gsc/extract-low-ctr-queries.mjs [--input <path>] [--format markdown|json] [--max N]
  *
  * Defaults:
- *   --input  最新 snapshot (.claude/skills/analytics/gsc-improvement/reference/snapshots/<YYYY-Www>/queries.csv)
+ *   --input  最新 snapshot (data/gsc/snapshots/<YYYY-Www>/queries.csv)
  *   --format markdown
  *   --max    10
  *
@@ -47,7 +47,7 @@ const INDUSTRY_AVG = {
 
 const SNAPSHOTS_DIR = path.join(
   PROJECT_ROOT,
-  ".claude/skills/analytics/gsc-improvement/reference/snapshots",
+  "data/gsc/snapshots",
 );
 
 // ---- snapshot 解決 ----

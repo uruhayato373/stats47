@@ -7,7 +7,7 @@
  * 約 338 URL に削減する。残りは middleware で 200 を返すが
  * sitemap で発見させない（クロール予算節約）。
  *
- * 生成元: .claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W17/pages.csv
+ * 生成元: data/gsc/snapshots/2026-W17/pages.csv
  * 元データ週: 2026-W17
  * 生成日: 2026-04-25
  * 閾値: Impressions ≥ 1（過去 28 日）

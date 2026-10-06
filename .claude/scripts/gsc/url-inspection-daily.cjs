@@ -7,14 +7,14 @@
  * 以下を出力:
  *
  * 1. URL 単位の生データ:
- *    .claude/state/metrics/gsc/url-inspection/YYYY-MM-DD.csv
+ *    data/gsc/url-inspection/YYYY-MM-DD.csv
  * 2. coverageState 別集計（Coverage Drilldown 相当）:
- *    .claude/state/metrics/gsc/coverage-drilldown/YYYY-Www/{category}-urls.csv
- *    .claude/state/metrics/gsc/coverage-drilldown/LATEST.md
- *    .claude/state/metrics/gsc/coverage-drilldown/history.csv
+ *    data/gsc/coverage-drilldown/YYYY-Www/{category}-urls.csv
+ *    data/gsc/coverage-drilldown/LATEST.md
+ *    data/gsc/coverage-drilldown/history.csv
  * 3. 全体サマリ:
- *    .claude/state/metrics/gsc/url-inspection/LATEST.md
- *    .claude/state/metrics/gsc/url-inspection/history.csv
+ *    data/gsc/url-inspection/LATEST.md
+ *    data/gsc/url-inspection/history.csv
  *
  * 親 issue #115。Phase 2 (観測短サイクル化) + Phase 8 (Coverage Drilldown API 自動化)。
  *
@@ -141,7 +141,7 @@ function readCsv(filePath) {
 function getLatestSnapshotDir() {
   const dir = path.join(
     PROJECT_ROOT,
-    ".claude/skills/analytics/gsc-improvement/reference/snapshots",
+    "data/gsc/snapshots",
   );
   if (!fs.existsSync(dir)) return null;
   const weeks = fs
@@ -465,7 +465,7 @@ function writeLatest(dateStr, summary, prevSummary) {
   }
   lines.push("");
   lines.push(
-    `_詳細 CSV: \`.claude/state/metrics/gsc/url-inspection/${dateStr}.csv\`_`,
+    `_詳細 CSV: \`data/gsc/url-inspection/${dateStr}.csv\`_`,
   );
   lines.push("");
   return lines.join("\n");
@@ -475,7 +475,7 @@ async function main() {
   const dateStr = todayInTokyo();
   const outDir = path.join(
     PROJECT_ROOT,
-    ".claude/state/metrics/gsc/url-inspection",
+    "data/gsc/url-inspection",
   );
   fs.mkdirSync(outDir, { recursive: true });
 
@@ -587,15 +587,15 @@ async function main() {
  *
  * 入力: URL Inspection の rows (url, coverageState, lastCrawlTime, ...)
  * 出力:
- *   .claude/state/metrics/gsc/coverage-drilldown/YYYY-Www/{category}-urls.csv
- *   .claude/state/metrics/gsc/coverage-drilldown/LATEST.md
- *   .claude/state/metrics/gsc/coverage-drilldown/history.csv
+ *   data/gsc/coverage-drilldown/YYYY-Www/{category}-urls.csv
+ *   data/gsc/coverage-drilldown/LATEST.md
+ *   data/gsc/coverage-drilldown/history.csv
  */
 function writeCoverageDrilldown(rows, dateStr) {
   const week = isoWeek(new Date(dateStr));
   const drilldownBase = path.join(
     PROJECT_ROOT,
-    ".claude/state/metrics/gsc/coverage-drilldown",
+    "data/gsc/coverage-drilldown",
   );
   const weekDir = path.join(drilldownBase, week);
   fs.mkdirSync(weekDir, { recursive: true });

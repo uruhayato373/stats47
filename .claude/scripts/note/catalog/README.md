@@ -47,7 +47,7 @@ v3記事詳細APIで確認し、一覧サムネイルに代用された本文画
 カバー状態をカタログに手入力して同期しない。終了コードは0=合格、1=未設定/集合差分、2=不完全。
 
 カバーと新しいインプレッション/PVの突合は`npm run note:metrics:fetch`を使う。
-`.claude/state/metrics/note/dashboard/cover-metrics-latest.{json,csv}`へ公開記事の棚卸しを出力する。
+`data/note/dashboard/cover-metrics-latest.{json,csv}`へ公開記事の棚卸しを出力する。
 期間内に一覧行がない記事は指標nullで残し、全体をincompleteとする。旧viewsへ変換しない。
 収集契約・期間指定は[fetch-note-metrics](../../../skills/analytics/fetch-note-metrics/SKILL.md)を参照する。
 

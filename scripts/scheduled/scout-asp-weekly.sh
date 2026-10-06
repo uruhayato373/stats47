@@ -91,7 +91,7 @@ run_pipeline() {
   echo "--- catalog サマリ ---"
   # パスは argv で渡す (process.env を使うと env registry guard に引っかかる)
   if node -e '
-    const c = require(process.argv[1] + "/.claude/state/ads/a8-catalog.json");
+    const c = require(process.argv[1] + "/data/affiliate/a8-catalog.json");
     const by = {};
     for (const e of Object.values(c.entries)) by[e.status] = (by[e.status] || 0) + 1;
     console.log("catalog:", JSON.stringify(by));

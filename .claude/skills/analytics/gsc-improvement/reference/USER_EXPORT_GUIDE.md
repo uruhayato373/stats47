@@ -83,7 +83,7 @@ macOS Safari でダウンロードすると NFD 形式になる場合がある�
 ## 参照
 
 - スキル: `.claude/skills/analytics/gsc-improvement/SKILL.md`
-- 改善ログ: `.claude/skills/analytics/gsc-improvement/reference/improvement-log.md`
+- 改善ログ: `data/improvement/gsc-improvement/improvement-log.md`
 - 取り込みロジック: `.claude/skills/analytics/fetch-gsc-data/SKILL.md`
 - URL 空間差分スクリプト: `.claude/skills/analytics/gsc-improvement/scripts/analyze-url-space.cjs`
 - 週次フロー: `.claude/skills/management/weekly-review/SKILL.md`

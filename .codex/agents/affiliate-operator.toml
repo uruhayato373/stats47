@@ -52,7 +52,7 @@ developer_instructions = '''
 - **成果条件の観測** — ASPの案件詳細から成果条件、個人情報、電話・面談、支払い、確認URL、確認日を
   read-onlyで取得する。取得結果は`programRef`付きでaffiliate-managerへ渡し、本agentは
   `affiliate-offer-profiles-data.ts`へ書かない。条件が読めない案件は`unknown`とし、低ハードルへ推測分類しない。
-- **カタログ保守** — `.claude/state/ads/affiliate-catalog.json` (3 ASP 横断の提携台帳)。
+- **カタログ保守** — `data/affiliate/affiliate-catalog.json` (3 ASP 横断の提携台帳)。
 
 ## 担当外 (委譲)
 

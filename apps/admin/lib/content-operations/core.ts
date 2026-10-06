@@ -100,8 +100,8 @@ export interface ContentOperationsInput {
 }
 
 const SOURCES: Record<ContentChannelDTO, string> = {
-  x: ".claude/state/sns/posts.json",
-  instagram: ".claude/state/sns/posts.json",
+  x: "data/sns/posts.json",
+  instagram: "data/sns/posts.json",
   note: ".claude/scripts/note/catalog/ (git TS) + R2本文",
   kindle:
     `packages/product-factory/src/channels/kindle/book-catalog.ts + ${KDP_LISTINGS}`,

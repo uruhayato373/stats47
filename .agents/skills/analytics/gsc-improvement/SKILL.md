@@ -14,9 +14,9 @@ active 一覧と append-only の詳細ログに責務分離して追跡するス
 
 | データ | 保管先 | 理由 |
 |---|---|---|
-| 生メトリクス CSV | git: `.claude/skills/analytics/gsc-improvement/reference/snapshots/YYYY-Www/` | immutable、diff 比較、オフライン可 |
-| 目標しきい値設定 | git: `.claude/skills/analytics/gsc-improvement/reference/budgets.json` | プロジェクト設定 |
-| 詳細ログ (agent 用) | git: `.claude/skills/analytics/gsc-improvement/reference/improvement-log.md` | 過去判定の根拠・検証コマンド・仮説を含む詳細 |
+| 生メトリクス CSV | git: `data/gsc/snapshots/YYYY-Www/` | immutable、diff 比較、オフライン可 |
+| 目標しきい値設定 | git: `.claude/config/budgets/gsc-improvement/budgets.json` | プロジェクト設定 |
+| 詳細ログ (agent 用) | git: `data/improvement/gsc-improvement/improvement-log.md` | 過去判定の根拠・検証コマンド・仮説を含む詳細 |
 | 要約 (人間向け) | git: `.claude/todo/improvements.md` | active 施策の ID・要約・status・期日を俯瞰 |
 | 週次スナップショット | `.claude/state/metrics/gsc/{history.csv,LATEST.md}` | GitHub Actions が日曜 JST 20:00 に自動更新 |
 | 運用サイクル監査 | `.claude/state/metrics/gsc/operations-cycle-LATEST.{json,md}` | 計測→review→候補判断→plan→月次集約の接続状態 |
@@ -38,8 +38,8 @@ $ARGUMENTS — [mode]
 
 GSC メトリクス取得の優先順:
 
-1. **`/fetch-gsc-data` スキル** — API 経由で `reference/snapshots/YYYY-Www/` に CSV を保存
-2. **`reference/snapshots/` 配下の既存 CSV** — 既に取得済みの週次データ
+1. **`/fetch-gsc-data` スキル** — API 経由で `data/gsc/snapshots/YYYY-Www/` に CSV を保存
+2. **`data/gsc/snapshots/` 配下の既存 CSV** — 既に取得済みの週次データ
 3. **GSC 画面からの手動エクスポート** — API で取れない index-coverage 詳細等
 
 ### Step 2: mode 別の処理
@@ -48,10 +48,10 @@ GSC メトリクス取得の優先順:
 
 ```
 以下を並列に実行して要約:
-1. reference/snapshots/ 配下の最新 YYYY-Www ディレクトリの CSV を Read
+1. data/gsc/snapshots/ 配下の最新 YYYY-Www ディレクトリの CSV を Read
 2. .claude/todo/improvements.md の6列表から status: pending / in-progress / effect-pending の行を抽出
-3. reference/improvement-log.md を Read し未判定の検証コマンド一覧を抽出
-4. .claude/state/metrics/gsc/LATEST.md を Read し週次推移を取得
+3. data/improvement/gsc-improvement/improvement-log.md を Read し未判定の検証コマンド一覧を抽出
+4. data/gsc/LATEST.md を Read し週次推移を取得
 5. `node .claude/scripts/gsc/audit-operations-cycle.mjs --stage monitor` を実行し、未接続工程を取得
 
 出力:
@@ -64,7 +64,7 @@ GSC メトリクス取得の優先順:
 
 ```
 1. データ取得:
-   a. /fetch-gsc-data snapshot <YYYY-Www> を呼び reference/snapshots/YYYY-Www/ に CSV 保存
+   a. /fetch-gsc-data snapshot <YYYY-Www> を呼び data/gsc/snapshots/YYYY-Www/ に CSV 保存
    b. 既に存在するなら既存 CSV を読む
    c. 手動エクスポートが必要な index-coverage 詳細はユーザーに依頼
 
@@ -81,8 +81,8 @@ GSC メトリクス取得の優先順:
    - alerts 配列に記録
 
 4. 前週 snapshot との前週比を計算:
-   - reference/snapshots/ の直近 2 週分を比較
-   - .claude/state/metrics/gsc/history.csv から取得しても可
+   - data/gsc/snapshots/ の直近 2 週分を比較
+   - data/gsc/history.csv から取得しても可
 
 5. 進行中施策の効果判定（最重要）:
    ```bash
@@ -120,7 +120,7 @@ GSC メトリクス取得の優先順:
 
 3. front-matter の `updated:` を本日日付に更新。
 4. target metric、対象、baseline、想定効果、deployed_at、PR、検証コマンドは
-   reference/improvement-log.md に appendする。想定効果は必ず `[target: +N clicks]`、
+   data/improvement/gsc-improvement/improvement-log.md に appendする。想定効果は必ず `[target: +N clicks]`、
    `[target: -N errors]` の機械可読記法を併記し、欠落時は action を完了しない。
 5. 次の観測日（デプロイ + 14 / 28 日）を計算して提示。
 ```
@@ -128,8 +128,8 @@ GSC メトリクス取得の優先順:
 #### mode = next
 
 ```
-1. .claude/todo/improvements.md のactive行と、reference/improvement-log.md の過去判定から派生候補を抽出
-2. reference/improvement-log.md の「次の候補」「仮説」セクションから未着手を拾う
+1. .claude/todo/improvements.md のactive行と、data/improvement/gsc-improvement/improvement-log.md の過去判定から派生候補を抽出
+2. data/improvement/gsc-improvement/improvement-log.md の「次の候補」「仮説」セクションから未着手を拾う
 3. 最新 snapshot の「次のアクション」候補も合わせる
 
 優先度: tier-1 > tier-2 > tier-3
@@ -145,20 +145,20 @@ GSC メトリクス取得の優先順:
 - **施策は 1 PR 1 ID** — 複数目的の PR は分割
 - **想定効果値はデプロイ前に書く** — 後付けバイアス防止
 - **週次の正典** — 日曜 `fetch-metrics-weekly` がsnapshot+effect verdictを生成し、`/weekly-review`が候補判断を記録、月曜20:30の`gsc-operations-cycle-weekly`が接続を監査する
-- **責務を分離する** — `.claude/todo/improvements.md` はactive一覧、reference/improvement-log.md は判定履歴
+- **責務を分離する** — `.claude/todo/improvements.md` はactive一覧、data/improvement/gsc-improvement/improvement-log.md は判定履歴
 
 ## 参照パターン
 
 ```bash
 # 直近スナップショット
-ls -t .claude/skills/analytics/gsc-improvement/reference/snapshots/ | head -3
-cat .claude/state/metrics/gsc/LATEST.md
+ls -t data/gsc/snapshots/ | head -3
+cat data/gsc/LATEST.md
 
 # 進行中施策
 node .claude/scripts/lib/scan-pending-improvements.mjs --format markdown
 
 # 効果測定済み施策・詳細ログ
-cat .claude/skills/analytics/gsc-improvement/reference/improvement-log.md
+cat data/improvement/gsc-improvement/improvement-log.md
 
 # 「表示は伸びたのにクリックが伸びない」を面別に切り分ける
 #   pages.csv を素で集計してはならない: アンカー行 (#見出し 付き URL) が page 次元 imp の
@@ -214,6 +214,6 @@ node --test .claude/scripts/gsc/__tests__/audit-operations-cycle.test.mjs
 ## 前提
 
 - `.claude/todo/improvements.md` が存在（front-matter `type: improvement-log` / `metric: gsc`）
-- `reference/budgets.json` / `reference/snapshots/` / `reference/improvement-log.md` 初期化済
+- `.claude/config/budgets/gsc-improvement/budgets.json` / `data/gsc/snapshots/` / `data/improvement/gsc-improvement/improvement-log.md` 初期化済
 - GSC プロパティ: `sc-domain:stats47.jp`
 - 本番 URL: `https://stats47.jp`

@@ -83,7 +83,7 @@ const PROJECT_ROOT = join(import.meta.dirname ?? __dirname, "../../..");
 const STATE_PATH = join(PROJECT_ROOT, ".claude/state/sns/buzz-map-catalog.json");
 const GSC_SNAPSHOTS = join(
   PROJECT_ROOT,
-  ".claude/skills/analytics/gsc-improvement/reference/snapshots",
+  "data/gsc/snapshots",
 );
 
 type Lane = "muni" | "pref" | "ksj" | "mlit-dpf" | "gsi" | "curated";
@@ -669,7 +669,7 @@ function loadMeasuredFeedback(): Map<
   { landingSessions: number; deepClickRate: number | null; outcomeScore: number }
 > {
   const out = new Map<string, { landingSessions: number; deepClickRate: number | null; outcomeScore: number }>();
-  const p = join(PROJECT_ROOT, ".claude/state/sns/buzz-map-attribution-latest.json");
+  const p = join(PROJECT_ROOT, "data/sns/buzz-map-attribution-latest.json");
   if (!existsSync(p)) return out;
   try {
     const json = JSON.parse(readFileSync(p, "utf8")) as {

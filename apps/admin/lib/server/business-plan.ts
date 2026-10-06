@@ -246,7 +246,7 @@ export function businessPlanAdminData(): BusinessPlanAdminData {
     BUSINESS_PLAN_2026.m1.xPosts.map((post) => post.contentKey)
   );
   const x = wrap(() => {
-    const posts = readJson<SocialPostState>(".claude/state/sns/posts.json").posts.filter(
+    const posts = readJson<SocialPostState>("data/sns/posts.json").posts.filter(
       (post) =>
         post.platform === "x" &&
         post.content_key !== null &&

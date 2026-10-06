@@ -320,5 +320,5 @@ If verdict needs justification, add a Reason column with ≤ 8 words.
 - `.claude/rules/evidence-based-judgment.md` — 実証ベース判定ルール
 - `.claude/rules/agent-output-contract.md` — Agent 出力契約
 - `.claude/skills/management/knowledge/SKILL.md` — 教訓の蓄積
-- `.claude/skills/analytics/performance-improvement/reference/improvement-log.md` — PSI 改善履歴(連携例)
+- `data/improvement/performance-improvement/improvement-log.md` — PSI 改善履歴(連携例)
 - 本スキルの設計プラン（承認済）— Git 履歴の goal skill 設計

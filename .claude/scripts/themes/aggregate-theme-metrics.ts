@@ -33,8 +33,8 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
 const STATE_DIR = process.env.STATE_DIR || path.join(PROJECT_ROOT, ".claude/state/themes");
 const PORTFOLIO = path.join(STATE_DIR, "portfolio.json");
-const GSC_SNAP = process.env.GSC_SNAPSHOT_DIR || path.join(PROJECT_ROOT, ".claude/skills/analytics/gsc-improvement/reference/snapshots");
-const GA4_SNAP = process.env.GA4_SNAPSHOT_DIR || path.join(PROJECT_ROOT, ".claude/skills/analytics/ga4-improvement/reference/snapshots");
+const GSC_SNAP = process.env.GSC_SNAPSHOT_DIR || path.join(PROJECT_ROOT, "data/gsc/snapshots");
+const GA4_SNAP = process.env.GA4_SNAPSHOT_DIR || path.join(PROJECT_ROOT, "data/ga4/snapshots");
 
 const AGE_REVIEW_YEARS = 5; // 公表周期を確認する候補。年齢だけでは未更新と断定しない
 
@@ -116,8 +116,8 @@ async function main() {
       ga4: summarizeThemeTraffic(select(ga428d, "pagePath"), "ga4", ga4Window28d),
       internalNav: summarizeThemeNavigation(select(nav28d, "pagePath"), navWindow28d),
     };
-    t.gscSnapshotRef = gscWindows ? `.claude/skills/analytics/gsc-improvement/reference/snapshots/${gscWindows[0].week}/pages.csv` : null;
-    t.ga4SnapshotRef = ga4Windows ? `.claude/skills/analytics/ga4-improvement/reference/snapshots/${ga4Windows[0].week}/pages-clean.csv` : null;
+    t.gscSnapshotRef = gscWindows ? `data/gsc/snapshots/${gscWindows[0].week}/pages.csv` : null;
+    t.ga4SnapshotRef = ga4Windows ? `data/ga4/snapshots/${ga4Windows[0].week}/pages-clean.csv` : null;
 
     // ── R2 データ品質 ──
     const keys = themeKeys(t.themeKey);

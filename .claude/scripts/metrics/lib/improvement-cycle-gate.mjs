@@ -15,7 +15,7 @@
 export const ALLOWED_PATHS = [
   /^\.claude\/todo\/improvements\.md$/,
   /^\.claude\/todo\/backlog\.md$/,
-  /^\.claude\/skills\/analytics\/[a-z0-9-]+-improvement\/reference\/improvement-log\.md$/,
+  /^data\/improvement\/[a-z0-9-]+-improvement\/improvement-log\.md$/,
 ];
 export const MAX_NEW_BACKLOG_CARDS = 2;
 const WRITE_TOOLS = new Set(["Write", "Edit", "MultiEdit", "NotebookEdit"]);

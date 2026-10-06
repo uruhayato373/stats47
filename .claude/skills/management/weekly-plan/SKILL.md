@@ -41,7 +41,7 @@ primary_agent: strategy-advisor
 
 ```
 調査項目:
-- 投稿台帳 `.claude/state/sns/posts.json` からステータス別集計 (完全DBレス。旧 D1 sns_posts は廃止):
+- 投稿台帳 `data/sns/posts.json` からステータス別集計 (完全DBレス。旧 D1 sns_posts は廃止):
   ```bash
   node -e 'const s=require("./.claude/scripts/lib/sns-posts-store.cjs");const by={};for(const p of s.loadAll()){const k=(p.domain||"?")+"/"+(p.platform||"?")+"/"+(p.status||"?");by[k]=(by[k]||0)+1}console.log(JSON.stringify(by,null,2))'
   ```
@@ -62,7 +62,7 @@ primary_agent: strategy-advisor
   curl -s "https://storage.stats47.jp/app/blog/all.json" | jq '.articles | length'
   ```
 
-- SNS 投稿実績（投稿台帳 `.claude/state/sns/posts.json` から集計。旧 D1 sns_posts は廃止）
+- SNS 投稿実績（投稿台帳 `data/sns/posts.json` から集計。旧 D1 sns_posts は廃止）
   ```bash
   node -e 'const s=require("./.claude/scripts/lib/sns-posts-store.cjs");const by={};for(const p of s.loadAll()){const k=(p.platform||"?")+"/"+(p.status||"?");by[k]=(by[k]||0)+1}console.log(JSON.stringify(by,null,2))'
   ```
@@ -73,17 +73,17 @@ primary_agent: strategy-advisor
     ```bash
     node -e 'const s=require("./.claude/scripts/lib/sns-posts-store.cjs");const acc={};for(const p of s.query(x=>x.status==="posted")){const a=acc[p.platform]||={posted:0,impressions:0,likes:0,replies:0};a.posted++;a.impressions+=p.impressions||0;a.likes+=p.likes||0;a.replies+=p.replies||0}console.log(JSON.stringify(acc,null,2))'
     ```
-  - **時系列履歴**: `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv`（`sns-metrics-store.cjs` の `readByRange` で集約）
+  - **時系列履歴**: `data/sns/metric-snapshots/YYYY-MM-DD/metrics.csv`（`sns-metrics-store.cjs` の `readByRange` で集約）
 
 - GA4/GSC メトリクス
-  → KPI・WoW・フェーズゲートは`.claude/skills/management/nsm-experiment/reference/weekly-snapshots/YYYY-Www.json`の
+  → KPI・WoW・フェーズゲートは`data/nsm/weekly-snapshots/YYYY-Www.json`の
     `finalized7d`と、その直前で重複しない`previous7d`を参照する
-  → `.claude/skills/analytics/{ga4,gsc}-improvement/reference/snapshots/YYYY-Www/`の28日
+  → `data/{ga4,gsc}/snapshots/YYYY-Www/`の28日
     overview/pages/queries/devicesは機会発見にだけ使い、前回snapshotとの差をWoWと呼ばない
   → GA4 KPIはJapan-only clean slice。rawはpollution監視に限定する
   → snapshot が存在しない場合は「計測データなし」と報告
 
-- NSM 実験進捗（`.claude/state/experiments.json` から active 実験を取得）
+- NSM 実験進捗（`data/business/experiments.json` から active 実験を取得）
   ```bash
   node .claude/scripts/lib/experiments-state.mjs active
   node .claude/scripts/lib/experiments-state.mjs pending
@@ -91,12 +91,12 @@ primary_agent: strategy-advisor
   → running / measuring 中の実験と、pending_user_actions を把握
   → 次週の計画に「continue 実験」「measure 実行予定」を組み込む準備
 
-- NSM 週次 snapshot JSON（`.claude/skills/management/nsm-experiment/reference/weekly-snapshots/YYYY-Www.json`）
+- NSM 週次 snapshot JSON（`data/nsm/weekly-snapshots/YYYY-Www.json`）
   → weekly-review の Phase 0 で生成されたサマリ。engagedSessions / clicks / position 等の前週比
 
 - SEO カバレッジ指標（完全DBレス。旧 D1 `seo_tracking` / `seo_actions` テーブルは廃止）
   → GSCカバレッジ推移: `.claude/state/gsc/LATEST.md`
-  → `.claude/state/metrics/gsc/history.csv`はローリング28日系列（列名`*_rolling28d`・機会発見用）。
+  → `data/gsc/history.csv`はローリング28日系列（列名`*_rolling28d`・機会発見用）。
     週次ゲートは`history-finalized7d.csv`と`LATEST.md`上段の確定7日KPIを使う
     （`.claude/skills/analytics/search-growth/reference/weekly-cycle-contract.md`）
   → 未完了 SEO 施策: `.claude/todo/improvements.md`（status != done の行）
@@ -208,7 +208,7 @@ primary_agent: strategy-advisor
 
 - 前週のレビュー + 現在計画の残タスク自動抽出
   cat .claude/todo/weekly.md 2>/dev/null
-  ls -t .claude/skills/management/weekly-review/reference/reviews/*.md 2>/dev/null | head -1
+  ls -t data/reviews/weekly/*.md 2>/dev/null | head -1
   → 上書き前の current-week と前週レビューを取得
   → 計画 vs 実績の差分と「来週への申し送り」を抽出。各項目末尾の「→ 振り分け: <行き先>」(2026-W40 から必須) のカード ID を今週の Must / Should の候補に必ず載せ、載せない ID は「前週の申し送り」節に見送り理由を書く
   → **前週計画の `- [ ] xxx` (未チェック) を抽出** し、Phase 3 の「前週からの持ち越し」セクションに自動転載:
@@ -250,7 +250,7 @@ primary_agent: strategy-advisor
 
 5エージェントの結果を統合し、以下を分析する:
 
-1. **KPI との距離**: `.claude/state/metrics/measurement-cycle/LATEST.md` の「KPI ツリー」節（正典: 収益化戦略 §1.1）で、
+1. **KPI との距離**: `data/measurement-cycle/LATEST.md` の「KPI ツリー」節（正典: 収益化戦略 §1.1）で、
    今月の重点領域の KPI（★）の今週値と 4 週前（窓が重ならない週）との差、ガードレールの悪化、判定不能の KPI を確認する。
    PV・記事数そのものは KPI ではなく、どの駆動 KPI を動かすかで評価する
 2. **ギャップ**: 計画と実行の乖離。特に繰り返し未達のタスク
@@ -263,7 +263,7 @@ primary_agent: strategy-advisor
 
 `/nsm-experiment propose` を呼んで、現状メトリクスから新規実験候補 3-5 件を rubric 付きで取得する。
 
-- 入力: `.claude/skills/management/nsm-experiment/reference/weekly-snapshots/YYYY-Www.json` + `.claude/skills/management/nsm-experiment/references/playbook.md`
+- 入力: `data/nsm/weekly-snapshots/YYYY-Www.json` + `.claude/skills/management/nsm-experiment/references/playbook.md`
 - 出力: 候補リスト（impact / effort / learning / certainty の加重合計順）
 - 候補は Phase 3 の Must / Should の選択肢として検討する
 
@@ -430,7 +430,7 @@ tags: []
 ## 関連ドキュメント・施策
 
 <!-- 改善/機能backlog ID、Pre-Mortem、NSM実験、snapshot期間を列挙 -->
-- 前週レビュー: `.claude/skills/management/weekly-review/reference/reviews/YYYY-W(n-1).md`
+- 前週レビュー: `data/reviews/weekly/YYYY-W(n-1).md`
 - 前月Pre-Mortem由来のTODO ID（該当時）
 - 関連改善施策: `SEARCH-GROWTH-CYCLE-01`（該当ID）
 
@@ -463,7 +463,7 @@ npm run kdp:weekly-publish -- --week [YYYY-Www] --id <KINDLE_ID> --owner-approve
 ## 保存先
 
 - 本スキル出力: `.claude/todo/weekly.md`
-- ペアの週次レビュー: `.claude/skills/management/weekly-review/reference/reviews/YYYY-Www.md`
+- ペアの週次レビュー: `data/reviews/weekly/YYYY-Www.md`
 - Phase 4 では `.claude/todo/` のレビュー由来項目と対象SSOTのGit履歴を参照する
 
 ## 参照
@@ -471,7 +471,7 @@ npm run kdp:weekly-publish -- --week [YYYY-Www] --id <KINDLE_ID> --owner-approve
 - `docs/02_実装計画/00_INDEX.md` — 実装計画の現在地
 - `docs/00_プロジェクト管理/02_収益化戦略.md` — NSM・収益レーン・意思決定ゲート
 - `gh issue list --state open --label enhancement` — 未解決の機能改善 Issue（残存ラベル）
-- `.claude/todo/weekly.md` / `.claude/skills/management/weekly-review/reference/reviews/` — 現在計画と過去レビュー
-- 投稿台帳 `.claude/state/sns/posts.json`（`sns-posts-store.cjs` 経由）+ `.claude/skills/analytics/sns-metrics-improvement/snapshots/` — SNS コンテンツ状況・メトリクス
+- `.claude/todo/weekly.md` / `data/reviews/weekly/` — 現在計画と過去レビュー
+- 投稿台帳 `data/sns/posts.json`（`sns-posts-store.cjs` 経由）+ `data/sns/metric-snapshots/` — SNS コンテンツ状況・メトリクス
 - `.claude/skills/management/critical-review/SKILL.md` — 批判的レビューの精神
 - `.claude/skills/blog/discover-trends/SKILL.md` — フルトレンドスキャン（Track E で不足時に提案、`--source all` で全 6 ソース統合）

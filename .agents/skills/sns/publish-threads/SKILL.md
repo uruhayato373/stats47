@@ -79,5 +79,5 @@ npx tsx .claude/skills/sns/publish-threads/publish-threads.ts --from-queue
 
 ## 関連
 
-- 台帳: `.claude/state/sns/posts.json` (platform=threads)。書き込みは `sns-posts-store.cjs` 経由のみ
+- 台帳: `data/sns/posts.json` (platform=threads)。書き込みは `sns-posts-store.cjs` 経由のみ
 - API 方式 (`post-threads-scheduled.yml` / `threads-core.cjs`) は Meta のトークン登録後の代替経路として残す (定期実行は止めてある)

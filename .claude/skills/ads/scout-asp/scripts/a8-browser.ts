@@ -69,7 +69,7 @@ function pickTargetSiteOption(options: string[]): string | null {
 }
 const DEBUG_DIR = path.join(PROJECT_ROOT, ".local/playwright-a8-debug");
 const OFFER_INSPECT_DIR = path.join(PROJECT_ROOT, ".local/a8-offer-inspect");
-const CATALOG_PATH = path.join(PROJECT_ROOT, ".claude/state/ads/a8-catalog.json");
+const CATALOG_PATH = path.join(PROJECT_ROOT, "data/affiliate/a8-catalog.json");
 const INVENTORY_PATH = path.join(PROJECT_ROOT, ".claude/state/ads/inventory-latest.json");
 const ADS_DATA_PATH = path.join(PROJECT_ROOT, "apps/web/scripts/affiliate-ads-data.ts");
 

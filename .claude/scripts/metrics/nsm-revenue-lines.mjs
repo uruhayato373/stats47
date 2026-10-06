@@ -5,9 +5,9 @@
  * 週次 Issue は GA4 の表示・クリックしか出さず、ASP の成果を読んでいなかった (2026-09-25 NSM-ASP-REVENUE-01)。
  *
  * 入力と意味:
- * - `authLatest`  … 認証付き収集の最新結果 (`.claude/state/metrics/authenticated/latest.json`)。
+ * - `authLatest`  … 認証付き収集の最新結果 (`data/authenticated/latest.json`)。
  *                   ASP ごとの成否・認証切れ・観測日時の正典
- * - `a8Results`   … A8 の月別記録 (`.claude/state/metrics/affiliate/a8-results.json`)。
+ * - `a8Results`   … A8 の月別記録 (`data/affiliate/a8-results.json`)。
  *                   件数は発生 (`conversions`)・確定 (`approved`)、金額は確定額 (`revenueYen`) だけを持つ
  * - `moshimoResults` … もしもの期間記録 (`moshimo-results.json`)。発生額 `grossRevenueYen`・確定額 `revenueYen`
  * - afb の金額は非公開の証拠保管にしか無く、`authLatest` は件数だけを持つ。件数 0 の成功なら ¥0 と確定できる
@@ -117,7 +117,7 @@ export function rakutenLine(rakutenResults, asOf) {
 }
 
 /**
- * 商品の実売の行。実売台帳 (`.claude/state/products/sales-ledger.json`) は CLI で証拠付きの記録を足す形で、
+ * 商品の実売の行。実売台帳 (`data/products/sales-ledger.json`) は CLI で証拠付きの記録を足す形で、
  * KDP・ココナラの売上を自動で取り込む経路はまだ無い。よって台帳が空でも、販売中の商品があれば ¥0 ではなく未計測。
  * 以前は台帳が空なら「¥0」と書き、記録があっても存在しない `date` / `amountYen` を読んで常に ¥0 になっていた (2026-09-25)。
  *

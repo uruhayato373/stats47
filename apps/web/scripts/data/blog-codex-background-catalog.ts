@@ -10,7 +10,7 @@ export const BLOG_CODEX_BACKGROUND_LEGACY_PROMPT_VERSION =
   'blog-codex-minimal-v1';
 export const BLOG_CODEX_BACKGROUND_PROMPT_VERSION = 'blog-codex-minimal-v2';
 export const BLOG_CODEX_BACKGROUND_ASSET_DIR =
-  'apps/web/scripts/lib/assets/blog-codex-backgrounds';
+  'assets/blog/codex-backgrounds';
 
 export interface BlogCodexBackgroundDef {
   assetId: string;

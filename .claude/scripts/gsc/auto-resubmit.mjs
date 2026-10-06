@@ -14,7 +14,7 @@
  *   2. URL Inspection API で coverageState / lastCrawlTime の遷移を「観測」
  *      → node .claude/scripts/gsc/url-inspection-daily.cjs --limit 50
  *
- * 過去の送信履歴 (.claude/state/metrics/gsc/resubmit-history.json) は証拠として保持する
+ * 過去の送信履歴 (data/gsc/resubmit-history.json) は証拠として保持する
  * (このスクリプトは書き込まない)。正典:
  * .claude/skills/analytics/search-growth/reference/platform-contract.md /
  * .claude/skills/analytics/gsc-coverage-remediation/SKILL.md。

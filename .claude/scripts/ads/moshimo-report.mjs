@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * もしものstats47サイト別・プロモーション別成果をread-onlyで取得する。
- * `.claude/state/metrics/affiliate/moshimo-results.json` は生成物で、手編集しない。
+ * `data/affiliate/moshimo-results.json` は生成物で、手編集しない。
  *
  * usage:
  *   node .claude/scripts/ads/moshimo-report.mjs
@@ -29,11 +29,11 @@ import {
 
 const OUTPUT_PATH = join(
   repoRoot(),
-  '.claude/state/metrics/affiliate/moshimo-results.json'
+  'data/affiliate/moshimo-results.json'
 );
 const CATALOG_PATH = join(
   repoRoot(),
-  '.claude/state/ads/affiliate-catalog.json'
+  'data/affiliate/affiliate-catalog.json'
 );
 
 function isoDate(value) {

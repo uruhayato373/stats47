@@ -185,7 +185,7 @@ export const JAPAN_ZUE_MASTER_CONTENT = {
     },
     registration: {
       status: "not-registered-no-slot",
-      postsSsot: ".claude/state/sns/posts.json",
+      postsSsot: "data/sns/posts.json",
       utmPolicy: ".claude/scripts/lib/sns-utm.cjs",
     },
     targetDurationMinutes: 8,

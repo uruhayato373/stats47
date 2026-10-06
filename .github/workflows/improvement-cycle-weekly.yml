@@ -68,12 +68,12 @@ jobs:
             echo "::error::week は YYYY-Www: $WEEK"
             exit 1
           fi
-          STATE=.claude/state/metrics/measurement-cycle/latest.json
+          STATE=data/measurement-cycle/latest.json
           if [ ! -f "$STATE" ]; then
             echo "::error::計測 state が無い ($STATE)。日曜の fetch-metrics-weekly を確認する"
             exit 1
           fi
-          GOT=$(node -e 'process.stdout.write(require("./.claude/state/metrics/measurement-cycle/latest.json").week)')
+          GOT=$(node -e 'process.stdout.write(require("./data/measurement-cycle/latest.json").week)')
           if [ "$GOT" != "$WEEK" ]; then
             echo "::error::計測 state の週 ($GOT) が対象週 ($WEEK) と違う。日曜の取得が失敗したまま記録すると古い計測で判定してしまう"
             exit 1
@@ -94,11 +94,11 @@ jobs:
           bash .claude/scripts/metrics/refresh-measurement-cycle.sh "$WEEK"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .claude/state/metrics/measurement-cycle
+          git add data/measurement-cycle
           if ! git diff --cached --quiet; then
             git commit -q -m "chore(metrics): refresh measurement cycle state ${WEEK} [skip ci]"
           fi
-          cat .claude/state/metrics/measurement-cycle/LATEST.md >> "$GITHUB_STEP_SUMMARY"
+          cat data/measurement-cycle/LATEST.md >> "$GITHUB_STEP_SUMMARY"
           echo "base=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
           mkdir -p .local/ci/improvement-cycle # Claude が提案を書く場所 (gitignore 済み・保護パス外)
 
@@ -202,7 +202,7 @@ jobs:
           path: |
             .local/ci/improvement-cycle/
             .local/ci/claude-diagnosis.txt
-            .claude/state/metrics/measurement-cycle/triage-latest.json
+            data/measurement-cycle/triage-latest.json
           include-hidden-files: true
           retention-days: 30
 
@@ -214,7 +214,7 @@ jobs:
           set -euo pipefail
           git add -- .claude/todo/improvements.md .claude/todo/backlog.md \
             .claude/skills/analytics/*-improvement/reference/improvement-log.md \
-            .claude/state/metrics/measurement-cycle/triage-latest.json
+            data/measurement-cycle/triage-latest.json
           if ! git diff --cached --quiet; then
             git commit -q -m "chore(improvements): weekly measurement cycle ${WEEK} [skip ci]"
           fi
@@ -241,7 +241,7 @@ jobs:
           CLAUDE_EXECUTION_FILE: ${{ steps.claude.outputs.execution_file }}
         run: |
           # items = この run が削除または更新した施策の数 (ゲート結果から。ゲート前に落ちたら 0)
-          ITEMS=$(node -e 'try{const i=require("./.claude/state/metrics/measurement-cycle/triage-latest.json").improvements;process.stdout.write(String(i.deleted.length+i.updated.length))}catch{process.stdout.write("0")}')
+          ITEMS=$(node -e 'try{const i=require("./data/measurement-cycle/triage-latest.json").improvements;process.stdout.write(String(i.deleted.length+i.updated.length))}catch{process.stdout.write("0")}')
           bash .claude/scripts/lib/record-claude-usage-ci.sh "$CLAUDE_EXECUTION_FILE" improvement-cycle 8 "$ITEMS" "$CLAUDE_EFFORT"
 
       - name: 🚨 Upsert failure issue
@@ -254,8 +254,8 @@ jobs:
         run: |
           TITLE="🚨 Improvement cycle failed"
           PROBLEMS="(ゲート結果なし: 入力検査か Claude step で止まった)"
-          if [ -s .claude/state/metrics/measurement-cycle/triage-latest.json ]; then
-            PROBLEMS=$(node -e 'const j=require("./.claude/state/metrics/measurement-cycle/triage-latest.json");process.stdout.write((j.problems||[]).map(p=>"- "+p).join("\n")||"(ゲートは通過。提案の適用で増えた文書 error か、文書リンク / コード参照の検査か、push で失敗)")')
+          if [ -s data/measurement-cycle/triage-latest.json ]; then
+            PROBLEMS=$(node -e 'const j=require("./data/measurement-cycle/triage-latest.json");process.stdout.write((j.problems||[]).map(p=>"- "+p).join("\n")||"(ゲートは通過。提案の適用で増えた文書 error か、文書リンク / コード参照の検査か、push で失敗)")')
           fi
           DIAG="(診断なし)"
           if [ -s .local/ci/claude-diagnosis.txt ]; then DIAG=$(cat .local/ci/claude-diagnosis.txt); fi

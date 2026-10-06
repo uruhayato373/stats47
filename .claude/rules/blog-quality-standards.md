@@ -525,7 +525,7 @@ GSC スナップショットで以下に該当する記事は brushup 候補:
 
 ```bash
 awk -F',' 'NR>1 && $1 ~ /\/blog\// && $3 >= 200 && ($4+0) < 0.02 && ($4+0) > 0 {print $0}' \
-  .claude/skills/analytics/gsc-improvement/reference/snapshots/<week>/pages.csv | \
+  data/gsc/snapshots/<week>/pages.csv | \
   sort -t',' -k3 -rn | head -20
 ```
 

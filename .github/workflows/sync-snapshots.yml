@@ -129,7 +129,7 @@ jobs:
         run: |
           shopt -s nullglob
           count=0
-          for d in apps/web/scripts/data/area-specialty/*/; do
+          for d in assets/area-specialty/*/; do
             code=$(basename "$d")
             mkdir -p ".local/r2/app/areas/$code/specialty"
             for f in "$d"*.webp; do

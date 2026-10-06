@@ -41,7 +41,7 @@ developer_instructions = '''
 
 1. **状態リコンサイル (read-only)**: seo-strategy.json を読み、各施策 ID の effect/status を
    `.claude/todo/improvements.md` から、消化状況を topic-queue.json / expansion-queue.json から、
-   KPI を `.claude/state/metrics/gsc/LATEST.md` から突合して台帳を更新する (effect ラベル自体は書き換えない)。
+   KPI を `data/gsc/LATEST.md` から突合して台帳を更新する (effect ラベル自体は書き換えない)。
 2. **週次消化の払い出し**: `/plan-article-queue` (topic-queue の must-write 上位) を起点に、今月の型配分
    (下記) に沿って `trend-scout` → `article-writer` に記事生産を委譲。ランキング拡充が必要なら `ranking-expander` に委譲。
 3. **型配分の決定 (この agent の中核判断)**: seo-strategy.json の `typeMix` が今月配分の SSOT。
@@ -136,7 +136,7 @@ queue の done へ記録し、`/analyze-winning-patterns` の型別実測で四�
 - 本ファイル `.claude/agents/blog-seo-strategist.md` §戦略コンテキスト — 戦略の全文 SSOT (旧 doc 15)。四半期改訂時に編集
 - `.claude/state/blog/topic-queue.json` / `.claude/state/estat/expansion-queue.json` — read only (委譲先の消化状況)
 - `.claude/todo/improvements.md` — **read only** (effect/status の突合。書込は improvement-triage のみ)
-- `.claude/state/metrics/gsc/LATEST.md` / `.claude/state/blog/winning-patterns.json` — read only (KPI・再学習根拠)
+- `data/gsc/LATEST.md` / `.claude/state/blog/winning-patterns.json` — read only (KPI・再学習根拠)
 
 ## File Boundary (並行衝突回避)
 - write は `.claude/state/blog/seo-strategy.json` と (四半期のみ) doc 15 に限定。他はすべて read only。

@@ -1,6 +1,6 @@
 # TikTok メトリクス取得手順（アーカイブ・非稼働）
 
-> **⚠️ アーカイブ**: TikTok は撤退（恒久・投稿しない）が確定したため、`update-sns-metrics` の配線から除去してここへ移した（正典: `.claude/rules/sns-content-standards.md` §0）。以下の手順は履歴として残すのみで、稼働フローからは呼ばれない。SQL 例は旧 D1 sns_posts 前提の未更新版（投稿台帳は現在 `.claude/state/sns/posts.json` = `sns-posts-store.cjs`）。
+> **⚠️ アーカイブ**: TikTok は撤退（恒久・投稿しない）が確定したため、`update-sns-metrics` の配線から除去してここへ移した（正典: `.claude/rules/sns-content-standards.md` §0）。以下の手順は履歴として残すのみで、稼働フローからは呼ばれない。SQL 例は旧 D1 sns_posts 前提の未更新版（投稿台帳は現在 `data/sns/posts.json` = `sns-posts-store.cjs`）。
 
 TikTok プロフィールページ（`https://www.tiktok.com/@stats47jp`）からメトリクスを取得する。
 

@@ -22,7 +22,7 @@ import {
 
 export type ProductOgpChannel = 'kindle' | 'coconala';
 
-const BRAND_BACKGROUND_RELATIVE_PATH = 'apps/web/scripts/lib/assets/ogp-bg-brand-light.jpg';
+const BRAND_BACKGROUND_RELATIVE_PATH = 'assets/ogp/ogp-bg-brand-light.jpg';
 const DEFAULT_R2_BASE = 'https://storage.stats47.jp';
 
 export interface ResolveProductBackgroundInput {

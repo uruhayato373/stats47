@@ -30,17 +30,17 @@ test(`${files[1]}はgit書き戻しを週次集約CSVとASP成果に限定し、
   assert.match(source, /upload-artifact/);
   const staged = [...source.matchAll(/^\s*git add (.+)$/gm)].map((m) => m[1].trim());
   assert.deepEqual(staged, [
-    ".claude/state/ads/ga4-affiliate-history.csv .claude/state/ads/affiliate-experiment-history.csv",
+    "data/affiliate/ga4-affiliate-history.csv data/affiliate/affiliate-experiment-history.csv",
     '-- "${FILES[@]}"',
   ]);
   const outcomeBlock = source.match(/FILES=\(\n([\s\S]*?)\n\s*\)/);
   assert.ok(outcomeBlock, "ASP 成果の書き戻し対象 FILES=( … ) が無い");
   assert.deepEqual(outcomeBlock[1].split("\n").map((l) => l.trim()).filter(Boolean), [
-    ".claude/state/metrics/affiliate/a8-results.json",
-    ".claude/state/metrics/affiliate/a8-report-log.json",
-    ".claude/state/metrics/affiliate/a8-ui-last-run.json",
-    ".claude/state/metrics/affiliate/moshimo-results.json",
-    ".claude/state/metrics/affiliate/rakuten-results.json",
+    "data/affiliate/a8-results.json",
+    "data/affiliate/a8-report-log.json",
+    "data/affiliate/a8-ui-last-run.json",
+    "data/affiliate/moshimo-results.json",
+    "data/affiliate/rakuten-results.json",
   ]);
   // 書き戻す成果は restore (consumer-paths の許可リスト) が書くものに限る。生 snapshot は含めない
   assert.doesNotMatch(outcomeBlock[1], /ga4-affiliate-\d|\.local\//);
@@ -66,7 +66,7 @@ test("GA4週次は固定期間を受け取り、過去期間で latest を巻き
   assert.match(source, /--start-date "\$START_DATE" --end-date "\$END_DATE"/);
   assert.match(source, /snapshot_file=\$SNAPSHOT_FILE/);
   assert.match(source, /steps\.ga4\.outputs\.snapshot_file/);
-  assert.doesNotMatch(source, /find \.claude\/state\/ads[^\n]+ga4-affiliate/);
+  assert.doesNotMatch(source, /find data\/affiliate[^\n]+ga4-affiliate/);
   assert.match(source, /historical backfill: latest\.json/);
   assert.match(source, /\[\[ "\$LATEST_DATE" > "\$DATE" \]\]/);
 });
@@ -84,7 +84,7 @@ test("GA4週次はR2とdevelop履歴行をread-backし、全step outcomeを最�
   assert.match(source, /cmp -s "\$FILE" \/tmp\/affiliate-readback\.json/);
   assert.match(source, /cmp -s "\$STAGE\/latest\.json" \/tmp\/affiliate-latest-readback\.json/);
   assert.match(source, /affiliate-index-readback\.json/);
-  assert.match(source, /git show FETCH_HEAD:\.claude\/state\/ads\/ga4-affiliate-history\.csv/);
+  assert.match(source, /git show FETCH_HEAD:data\/affiliate\/ga4-affiliate-history\.csv/);
   assert.match(source, /line\.startsWith\(date \+ ",7,_all,_all,"\)/);
   for (const id of ["ga4", "publish", "history", "operations"]) {
     assert.match(source, new RegExp(`"${id}=\\$\\{\\{ steps\\.${id}\\.outcome \\}\\}"`));

@@ -25,7 +25,7 @@ Geo企画を一度きりの作業にせず、git TSカタログから無料閲�
 - 分析入力、演算、canonical: `packages/data-configs/src/business-plan/m1.ts`
 - Geo証拠: `.local/r2/app/geo/<slug>/{item,manifest,pref/<NN>}.json`
 - ブログoutbox: `docs/21_ブログ記事原稿/<slug>/`
-- X draft台帳: `.claude/state/sns/posts.json`
+- X draft台帳: `data/sns/posts.json`
 - 商品成果物: `.local/geo-products/<product-id>/`
 - note商品企画: `.claude/scripts/note/catalog/data/stats47-note.ts`
 

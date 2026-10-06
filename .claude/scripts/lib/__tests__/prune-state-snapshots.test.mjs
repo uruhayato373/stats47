@@ -76,23 +76,32 @@ test("ディレクトリ scope はディレクトリごと消し、存在しな�
 });
 
 // 日付名で増え続ける state は「どの policy が消すか」を宣言していなければ追跡させない。
-// 例外は (a) 人手 export で再生成できない恒久記録、(b) check-repo-hygiene.cjs の baseline に
+// 例外は (a) 人手 export で再生成できない恒久記録と、消さずに残す事業の記録 (data/)、(b) check-repo-hygiene.cjs の baseline に
 // 載っている既存の直下ファイル (DATED_STATE_ARTIFACT)。新しい置き場を足すときはここか policy を更新する。
 const PERMANENT_DATED_DIRS = [
-  ".claude/state/metrics/gsc/coverage-drilldown", // GSC UI の手動 export (再取得不能)
-  ".claude/state/metrics/note/dashboard", // note ダッシュボードの baseline
+  "data/gsc/coverage-drilldown", // GSC UI の手動 export (再取得不能)
+  "data/note/dashboard", // note ダッシュボードの baseline
   ".claude/state/metrics/themes", // テーマ品質の週次証拠 (theme-chart-audit が参照)
   ".claude/state/metrics/prompt-evals",
-  ".claude/skills/analytics/cloudflare-cost-improvement/reference/weekly-snapshots",
-  ".claude/skills/analytics/ga4-improvement/reference/archive",
-  ".claude/skills/analytics/gsc-improvement/reference/archive",
+  "data/cloudflare/weekly-snapshots",
+  "data/improvement/ga4-improvement/archive",
+  "data/improvement/gsc-improvement/archive",
+  // 以下は 2026-10-06 に data/ へ移した事業の記録。消さずに残す (data/ 全体を検査範囲にしたので宣言する)
+  "data/affiliate", // GA4 アフィリエイト実測の 2026-08-28 までの追跡済み履歴 (以降は R2 state/ads/ga4-affiliate/)
+  "data/effect-verdict", // 改善施策の効果判定の台帳
+  "data/nsm/weekly-snapshots", // 週次収益 (NSM) の記録
+  "data/products", // 商品の公開・準備の受領記録
+  "data/reviews/weekly", // 週次レビュー
+  "data/sns", // バズマップ投稿の流入計測
+  "data/seo/rank-history", // キーワード改善サイクルの日次観測。保持期間は未決 (SEO サイクル側で決める)
+  "data/seo/selections", // 同上の週ごとの対象選定。保持期間は未決
 ];
 
 test("追跡中の日付名 state は必ず寿命 (policy / 恒久宣言 / baseline) を持つ", () => {
   const root = resolve(fileURLToPath(new URL("../../../..", import.meta.url)));
   const tracked = execFileSync(
     "git",
-    ["ls-files", "-z", ".claude/state/metrics", ".claude/state/business-plan", ".claude/state/search-growth", ".claude/skills/analytics"],
+    ["ls-files", "-z", ".claude/state/metrics", ".claude/state/business-plan", ".claude/state/search-growth", ".claude/skills/analytics", "data"],
     { cwd: root, encoding: "utf8" },
   )
     .split("\0")

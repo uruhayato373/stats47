@@ -56,7 +56,7 @@ PV/インプレッションをカバーCTRにしない。流入元別PV・記事
 
 ## 出力
 
-`.claude/state/metrics/note/dashboard/`へatomic保存する。
+`data/note/dashboard/`へatomic保存する。
 
 | ファイル | 内容 |
 |---|---|

@@ -120,7 +120,7 @@ ranking と統計調査の**紐付けメタデータ + survey ハブの編集コ
   `apps/web/src/features/survey/survey-editorial.ts` (survey 編集情報 git TS SSOT) /
   `.claude/state/surveys/*` (builder スクリプト経由) /
   `.claude/skills/survey/manage-survey-portfolio/reference/**` (運用設計・reviews・audits) / 自分の監査レポート出力
-- **読み取り専用**: builder / exporter / UI コード / GSC・GA4 snapshot (`.claude/skills/analytics/{gsc,ga4}-improvement/reference/snapshots/`) /
+- **読み取り専用**: builder / exporter / UI コード / GSC・GA4 snapshot (`data/{gsc,ga4}/snapshots/`) /
   `.claude/todo/improvements.md` (変更が必要なら main セッションか担当 agent に返す)
 
 ## 検証コマンド

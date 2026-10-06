@@ -7,7 +7,7 @@ import { KDP_LISTINGS } from "../../../../../config/paths.mjs";
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../../..");
 const LISTINGS_PATH = resolve(REPO_ROOT, KDP_LISTINGS);
-const LEDGER_PATH = resolve(REPO_ROOT, ".claude/state/products/sales-ledger.json");
+const LEDGER_PATH = resolve(REPO_ROOT, "data/products/sales-ledger.json");
 const OUT_PATH = resolve(REPO_ROOT, ".claude/state/products/kdp-weekly-publication.json");
 
 function arg(name: string): string | null {

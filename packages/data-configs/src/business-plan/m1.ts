@@ -783,7 +783,7 @@ export const BUSINESS_PLAN_M1: BusinessPlanM1ExecutionPlan = {
       title: '初回15投稿をX投稿台帳へdraft登録',
       status: 'ready',
       owner: 'x-strategist',
-      deliverablePath: '.claude/state/sns/posts.json',
+      deliverablePath: 'data/sns/posts.json',
       doneWhen:
         '15件すべてlint PASSし、content_keyとscheduled_at付きdraftとして存在する',
     },

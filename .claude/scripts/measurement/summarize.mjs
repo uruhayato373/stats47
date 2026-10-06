@@ -4,7 +4,7 @@ import { join, dirname } from 'node:path';
 import { SOURCES } from './sources.mjs';
 
 const input = process.argv[2] || '.local/authenticated-ci-public';
-const output = '.claude/state/metrics/authenticated/latest.json';
+const output = 'data/authenticated/latest.json';
 const previous = existsSync(output) ? JSON.parse(readFileSync(output, 'utf8')) : { sources: [] };
 const filenames = existsSync(input) ? readdirSync(input) : [];
 const sources = Object.entries(SOURCES).map(([source, config]) => {
@@ -50,7 +50,7 @@ const state = { schemaVersion: 1, generatedAt: new Date().toISOString(), runId: 
 mkdirSync(dirname(output), { recursive: true });
 writeFileSync(output, JSON.stringify(state, null, 2) + '\n');
 // 商品の週次実売の入力 (metrics/lib/product-revenue.mjs)。成功した取得元の quality.revenue だけを日付単位で足す。
-const historyPath = '.claude/state/metrics/authenticated/revenue-history.json';
+const historyPath = 'data/authenticated/revenue-history.json';
 const history = existsSync(historyPath) ? JSON.parse(readFileSync(historyPath, 'utf8')) : { schemaVersion: 1, entries: [] };
 for (const s of sources) {
   const revenue = s.status === 'pass' ? s.quality?.revenue : null;

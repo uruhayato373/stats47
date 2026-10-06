@@ -90,7 +90,7 @@ Claude Codeが生成要求JSONを組み立て直さず、
 4. `npm run check:blog-images` と画像pipeline testを通す。
 
 意味仕様とpromptのSSOTは `apps/web/scripts/data/blog-codex-background-catalog.ts`、
-exact bytesのSSOTは `apps/web/scripts/lib/assets/blog-codex-backgrounds/*.jpg`。
+exact bytesのSSOTは `assets/blog/codex-backgrounds/*.jpg`。
 MCP prompt、自由入力prompt、生成済み画像をskill/ruleへ複製しない。Codex MCPが使えない場合に
 Geminiへ暗黙fallbackしない。R2 push / deployはCodexへ委譲しない。
 

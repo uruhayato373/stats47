@@ -167,7 +167,7 @@ for (const r of audit.results || []) {
 
 // 2. GSC レーン: 最新 snapshot の pages.csv を読む (無ければ GSC スコア 0 で続行)
 function findLatestSnapshot() {
-  const dir = path.join(PROJECT_ROOT, ".claude/skills/analytics/gsc-improvement/reference/snapshots");
+  const dir = path.join(PROJECT_ROOT, "data/gsc/snapshots");
   if (!fs.existsSync(dir)) return null;
   const weeks = fs.readdirSync(dir).filter((d) => /^\d{4}-W\d{2}$/.test(d));
   if (!weeks.length) return null;
@@ -179,7 +179,7 @@ const gscBySlug = new Map();
 if (week) {
   const pagesCsv = path.join(
     PROJECT_ROOT,
-    ".claude/skills/analytics/gsc-improvement/reference/snapshots",
+    "data/gsc/snapshots",
     week,
     "pages.csv",
   );

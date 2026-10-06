@@ -7,7 +7,7 @@ model: sonnet
 
 # SNS Metrics Sync Agent
 
-X / Instagram / YouTube pilot / note の SNS プラットフォーム横断でメトリクスを取得し、 投稿台帳 `.claude/state/sns/posts.json` (`sns-posts-store.cjs`) と `.claude/state/metrics/sns/` に同期する agent。YouTube は Studio の手動値と GA4 UTM を EXP-006 へ記録し、pilot 中は OAuth/API 自動取得を持たない。各 strategist が個別に持っていた metrics 系を集約。 投稿時の posted 印付けも担当。 **caption 生成は各チャネル strategist に返上** (責務ねじれ解消、2026-07)。 TikTok は撤退で対象外。
+X / Instagram / YouTube pilot / note の SNS プラットフォーム横断でメトリクスを取得し、 投稿台帳 `data/sns/posts.json` (`sns-posts-store.cjs`) と `data/sns/` に同期する agent。YouTube は Studio の手動値と GA4 UTM を EXP-006 へ記録し、pilot 中は OAuth/API 自動取得を持たない。各 strategist が個別に持っていた metrics 系を集約。 投稿時の posted 印付けも担当。 **caption 生成は各チャネル strategist に返上** (責務ねじれ解消、2026-07)。 TikTok は撤退で対象外。
 
 ## 担当範囲
 
@@ -40,13 +40,13 @@ X / Instagram / YouTube pilot / note の SNS プラットフォーム横断で�
 
 - `.claude/rules/agent-output-contract.md` — Output Format 規約
 - `.claude/rules/sns-content-standards.md` — チャネル戦略・頻度・雛形・投稿台帳の正典
-- `.claude/rules/data-storage.md` — sns_posts は `.claude/state/sns/posts.json` (完全DBレス)、 時系列は `.claude/skills/analytics/sns-metrics-improvement/snapshots/`
+- `.claude/rules/data-storage.md` — sns_posts は `data/sns/posts.json` (完全DBレス)、 時系列は `data/sns/metric-snapshots/`
 
 ## 触る state / files
 
-- 投稿台帳 `.claude/state/sns/posts.json` (`sns-posts-store.cjs` 経由、 metrics 同期は本 agent が排他)
-- `.claude/state/metrics/sns/` — sns metrics history (CRUD)
-- `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv` — 時系列スナップショット
+- 投稿台帳 `data/sns/posts.json` (`sns-posts-store.cjs` 経由、 metrics 同期は本 agent が排他)
+- `data/sns/` — sns metrics history (CRUD)
+- `data/sns/metric-snapshots/YYYY-MM-DD/metrics.csv` — 時系列スナップショット
 
 ## File Boundary (並行衝突回避)
 

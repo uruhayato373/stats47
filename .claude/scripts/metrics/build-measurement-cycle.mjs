@@ -5,7 +5,7 @@
  * Usage:
  *   node .claude/scripts/metrics/build-measurement-cycle.mjs --week 2026-W38 [--admin-audit /tmp/api-latest.json]
  *
- * 出力: .claude/state/metrics/measurement-cycle/{latest.json,LATEST.md,history.csv}
+ * 出力: data/measurement-cycle/{latest.json,LATEST.md,history.csv}
  * 呼び出し元: fetch-metrics-weekly.yml (日曜) → improvement-cycle-weekly.yml (月曜の無人 triage) と
  *            generate-weekly-metrics-issue.mjs (月曜の週次 Issue) が読む。
  * --admin-audit は google-admin audit-api の api-latest.json。README の規約で監査 state 自体は commit しないため、
@@ -27,7 +27,7 @@ import { datasetPath } from "../../../config/datasets.mjs";
 
 const strategyLanes = createRequire(import.meta.url)("../lib/strategy-lanes.cjs");
 
-const AUTHENTICATED_LATEST = ".claude/state/metrics/authenticated/latest.json";
+const AUTHENTICATED_LATEST = "data/authenticated/latest.json";
 const ACTIVE_STATUSES = new Set(["pending", "in-progress", "effect/pending"]);
 const HISTORY_COLUMNS = [
   "week", "periodStart", "periodEnd", "blogToRankingRate", "themesToRankingRate",
@@ -94,9 +94,9 @@ const liveProductCountOf = (kdp) =>
  */
 function buildOperations(week, asOf, pending) {
   const psiRows = readCsvIfExists(join(PROJECT_ROOT, datasetPath("psi.history")));
-  const cfDir = join(PROJECT_ROOT, ".claude/state/metrics/cloudflare");
+  const cfDir = join(PROJECT_ROOT, "data/cloudflare");
   const cfRows = readCsvIfExists(join(cfDir, "history.csv"));
-  const rules = JSON.parse(readFileSync(join(PROJECT_ROOT, ".claude/skills/analytics/cloudflare-cost-improvement/reference/budgets-daily.json"), "utf8")).rules;
+  const rules = JSON.parse(readFileSync(join(PROJECT_ROOT, ".claude/config/budgets/cloudflare-cost-improvement/budgets-daily.json"), "utf8")).rules;
   const snapshotsDir = join(cfDir, "snapshots");
   const evaluated = existsSync(snapshotsDir)
     ? readdirSync(snapshotsDir).filter((f) => /^\d{4}-\d{2}-\d{2}\.json$/.test(f)).map((f) => ({
@@ -118,8 +118,8 @@ function main() {
   const week = arg("--week");
   if (!/^\d{4}-W\d{2}$/.test(week ?? "")) throw new Error("--week YYYY-Www が必要");
   const asOf = isoWeekToDateRange(week).endDate;
-  const snapshotDir = join(PROJECT_ROOT, ".claude/skills/analytics/ga4-improvement/reference/snapshots", week);
-  const outDir = join(PROJECT_ROOT, ".claude/state/metrics/measurement-cycle");
+  const snapshotDir = join(PROJECT_ROOT, "data/ga4/snapshots", week);
+  const outDir = join(PROJECT_ROOT, "data/measurement-cycle");
 
   const transitions = readSlice(snapshotDir, "internal-transitions");
   const landing = readSlice(snapshotDir, "landing-context");
@@ -150,7 +150,7 @@ function main() {
   const ledgerEntries = parseDimensionLedger(readFileSync(join(PROJECT_ROOT, ".claude/rules/analytics-event-standards.md"), "utf8"));
   const pending = parseBacklog(join(PROJECT_ROOT, ".claude/todo/improvements.md"), new Date(`${asOf}T00:00:00Z`))
     .filter((e) => ACTIVE_STATUSES.has(e.status));
-  const verdictsPath = join(PROJECT_ROOT, ".claude/state/effect-verdict", `verdicts-${week}.json`);
+  const verdictsPath = join(PROJECT_ROOT, "data/effect-verdict", `verdicts-${week}.json`);
   const verdicts = existsSync(verdictsPath) ? JSON.parse(readFileSync(verdictsPath, "utf8")) : null;
   const gscRows = pending.filter((e) => /gsc/i.test(e.target_metric ?? "")).map(judgeability);
 
@@ -163,20 +163,20 @@ function main() {
     ...readKpiInputs(),
     week,
     asOf,
-    gscHistory: readCsvIfExists(join(PROJECT_ROOT, ".claude/state/metrics/gsc/history.csv")),
+    gscHistory: readCsvIfExists(join(PROJECT_ROOT, "data/gsc/history.csv")),
     cycleHistory: history,
     journey,
     workContext,
-    affiliateRows: readCsvIfExists(join(PROJECT_ROOT, ".claude/state/ads/ga4-affiliate-history.csv")),
+    affiliateRows: readCsvIfExists(join(PROJECT_ROOT, "data/affiliate/ga4-affiliate-history.csv")),
     operations,
     authenticated: readJsonIfExists(AUTHENTICATED_LATEST),
     dataQuality: summarizeDataQuality(readJsonIfExists(".claude/state/ranking/integrity-audit.json")),
     paidPurchases: summarizePaidPurchases({
-      ledger: readJsonIfExists(".claude/state/products/sales-ledger.json"),
+      ledger: readJsonIfExists("data/products/sales-ledger.json"),
       liveProductCount: liveProductCountOf(readJsonIfExists(".claude/state/products/kdp-weekly-publication.json")),
       weekStart: isoWeekToDateRange(week).startDate,
       weekEnd: asOf,
-      revenueHistory: readJsonIfExists(".claude/state/metrics/authenticated/revenue-history.json"),
+      revenueHistory: readJsonIfExists("data/authenticated/revenue-history.json"),
     }),
   });
 

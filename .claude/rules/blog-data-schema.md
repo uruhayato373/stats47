@@ -404,7 +404,7 @@ YYYY-MM-DD-<method>[-<batch>]
 | ----------------------------------------------------------------------- | -------------------------------------------------- | ------------------------------ |
 | `.claude/todo/improvements.md`                                        | wave section の真実源 (status / effect / 判定基準) | wave deploy 時 + effect 計測時 |
 | `.claude/todo/weekly.md`                                            | 現在の週次 TODO                                    | 週次 (月曜・上書き)            |
-| `.claude/skills/management/weekly-review/reference/reviews/YYYY-Www.md` | agent用週次振り返り                                | 週次 (日曜)                    |
+| `data/reviews/weekly/YYYY-Www.md` | agent用週次振り返り                                | 週次 (日曜)                    |
 | `.claude/todo/backlog.md`                                        | 大規模 session の未完了機能・自動化を直接追記      | session 終了時                 |
 
 ### Memory (auto memory)

@@ -206,9 +206,9 @@ test('public failure codes cannot contain raw authentication diagnostics', () =>
 });
 
 test('restore permits canonical reports only and rejects failed, stale or future attempts', () => {
-  assert.equal(consumerPath('note', '.local/authenticated-measurement/note-123/note/latest.json'), '.claude/state/metrics/note/dashboard/latest.json');
+  assert.equal(consumerPath('note', '.local/authenticated-measurement/note-123/note/latest.json'), 'data/note/dashboard/latest.json');
   for (const path of ['../../.env.local', '.local/authenticated-measurement/note-123/state.json', '.local/authenticated-measurement/note-123/note/../../note/latest.json']) assert.equal(consumerPath('note', path), null);
-  assert.equal(consumerPath('moshimo', '.claude/state/metrics/affiliate/a8-results.json'), null);
+  assert.equal(consumerPath('moshimo', 'data/affiliate/a8-results.json'), null);
   const now = Date.parse('2026-09-21T00:00:00Z');
   validateAttempt({status:'pass',observedAt:'2026-09-20T00:00:00Z'},now);
   const gsc = { source: 'gsc', capability: SOURCES.gsc.capability, status: 'pass', observedAt: '2026-09-20T00:00:00Z' };
@@ -260,7 +260,7 @@ test('missing jobs remain failed and activated consumers never silently fall bac
     const observation = { source: 'note', capability: SOURCES.note.capability, status: 'pass', metricsAvailable: true, observedAt: new Date().toISOString(), runId: process.env.GITHUB_RUN_ID };
     writeFileSync(join(input, 'note.json'), JSON.stringify(observation));
     execFileSync(process.execPath, [script, input], { cwd: temp });
-    const path = join(temp, '.claude/state/metrics/authenticated/latest.json');
+    const path = join(temp, 'data/authenticated/latest.json');
     const first = JSON.parse(readFileSync(path));
     assert.equal(first.sources.length, Object.keys(SOURCES).length);
     assert.equal(first.status, 'action_required');
@@ -299,7 +299,7 @@ test('rerun artifacts select the latest attempt and never resurrect an older suc
     writeFileSync(join(input, 'afb-4.json'), JSON.stringify(observation));
     const read = () => {
       execFileSync(process.execPath, [script, input], { cwd: temp, env: { ...process.env, GITHUB_RUN_ID: 'current-run', GITHUB_RUN_ATTEMPT: '5' } });
-      return JSON.parse(readFileSync(join(temp, '.claude/state/metrics/authenticated/latest.json'))).sources.find(s => s.source === 'afb');
+      return JSON.parse(readFileSync(join(temp, 'data/authenticated/latest.json'))).sources.find(s => s.source === 'afb');
     };
     assert.equal(read().status, 'pass');
     assert.equal(read().runAttempt, 4);
@@ -329,7 +329,7 @@ test('KDP auth recovery requires human Reports login instead of re-exporting sta
     assert.match(summary, /再ログインを反復せず停止/);
     // CI 再ログインの結果 (Reports で 2FA を求められた等) は CI ログだけでなく state に残す。
     // 再ログインしなかった source は null で、結果を推測で埋めない
-    const sources = JSON.parse(readFileSync(join(temp, '.claude/state/metrics/authenticated/latest.json'))).sources;
+    const sources = JSON.parse(readFileSync(join(temp, 'data/authenticated/latest.json'))).sources;
     assert.equal(sources.find(s => s.source === 'kdp').relogin, 'human_required');
     assert.equal(sources.find(s => s.source === 'a8').relogin, null);
   } finally { rmSync(temp, { recursive: true, force: true }); }

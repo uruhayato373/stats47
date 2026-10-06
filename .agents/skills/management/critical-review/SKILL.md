@@ -47,7 +47,7 @@ $ARGUMENTS — レビュー対象のファイルパス（例: `docs/10_SNS戦略
    - 計画書やロードマップに書かれた数値を「事実」として使わない
    - 実際のファイル・DB・ディレクトリを自分で確認して裏を取る
    - 例: 「公開記事数」→ `curl -s https://storage.stats47.jp/app/blog/all.json` の件数と公開状態
-   - 例: 「SNS 投稿数」→ 投稿台帳 `.claude/state/sns/posts.json` の status 別件数
+   - 例: 「SNS 投稿数」→ 投稿台帳 `data/sns/posts.json` の status 別件数
    - ロードマップの進捗欄は古い可能性が高いため、ソースオブトゥルースとして扱わない
 4. 上記の構造・観点に従いレビューを作成
 5. 確定した恒久判断は対象の戦略文書・rules・READMEへ直接反映する
