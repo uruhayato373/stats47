@@ -30,48 +30,29 @@ import { useTheme } from '@/hooks/useTheme';
 
 import { useSidebarStore } from '@/store/sidebar-store';
 
-import { getActiveHeaderNav, type HeaderNavKey } from './header-navigation';
+import {
+  getActiveHeaderNav,
+  PRIMARY_NAV_ITEMS,
+  type PrimaryNavKey,
+} from './header-navigation';
 
-type NavItem = {
-  key: HeaderNavKey;
-  href: string;
-  label: string;
-};
+type NavItem = (typeof PRIMARY_NAV_ITEMS)[number];
 
 // nav 並び順は情報設計 (docs/01_技術設計/07) + ベンチマーク §3.1 に沿う:
 // ランキング → 都道府県 → 市区町村 → (テーマ dropdown) → 地域分析 → 統計ブログ。
 // 「都道府県」は stats47 固有価値なので primary nav の上位に置く。
 // テーマ dropdown は下の render で 都道府県 と 統計ブログ の間に挿入する。
-const NAV_ITEMS_BEFORE_THEME: NavItem[] = [
-  {
-    key: 'ranking',
-    href: '/ranking',
-    label: 'ランキング',
-  },
-  {
-    key: 'areas',
-    href: '/areas',
-    label: '都道府県',
-  },
-  {
-    key: 'municipalities',
-    href: '/municipalities',
-    label: '市区町村',
-  },
-];
-
-const NAV_ITEMS_AFTER_THEME: NavItem[] = [
-  {
-    key: 'geo',
-    href: '/geo',
-    label: '地域分析',
-  },
-  {
-    key: 'blog',
-    href: '/blog',
-    label: '統計ブログ',
-  },
-];
+const NAV_KEYS_BEFORE_THEME: ReadonlySet<PrimaryNavKey> = new Set([
+  'ranking',
+  'areas',
+  'municipalities',
+]);
+const NAV_ITEMS_BEFORE_THEME: NavItem[] = PRIMARY_NAV_ITEMS.filter((item) =>
+  NAV_KEYS_BEFORE_THEME.has(item.key)
+);
+const NAV_ITEMS_AFTER_THEME: NavItem[] = PRIMARY_NAV_ITEMS.filter(
+  (item) => !NAV_KEYS_BEFORE_THEME.has(item.key)
+);
 
 /** メガメニューに出す curated テーマの最小ナビ情報。 */
 interface ThemeNavItem {

@@ -12,6 +12,7 @@
 
 import { config } from "dotenv";
 import path from "path";
+import { SITE } from "@stats47/types";
 
 config({ path: path.resolve(__dirname, "..", "..", "..", "..", ".env.local") });
 
@@ -19,7 +20,7 @@ const CLOUDFLARE_API_TOKEN = process.env.CLOUDFLARE_API_TOKEN;
 const CLOUDFLARE_ZONE_ID = process.env.CLOUDFLARE_ZONE_ID;
 // キャッシュパージは Cloudflare CDN 経由のカスタムドメインに対して行う
 // r2.dev URL は CDN を経由しないためパージ不要
-const R2_PUBLIC_URL = "https://storage.stats47.jp";
+const R2_PUBLIC_URL = SITE.r2PublicBaseUrl;
 
 if (!CLOUDFLARE_API_TOKEN || !CLOUDFLARE_ZONE_ID) {
   console.error(

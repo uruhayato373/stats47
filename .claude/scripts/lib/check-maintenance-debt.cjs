@@ -83,6 +83,18 @@ function sectionHasCondition(lines, lineIndex) {
   return false;
 }
 
+// サイト識別子 (R2 公開 URL・本番 origin・GSC プロパティ・GA4 プロパティ ID) の直書き (2026-10-06)。
+// 値の正本は packages/types/src/site.json。TS は @stats47/types の SITE、Node スクリプトは
+// .claude/scripts/lib/site-config.cjs から読む。散在していた 200 箇所超を寄せた後の再発止め。
+// パスを付けない URL / ID そのものの文字列リテラルだけを数え、"https://stats47.jp/ranking/x" の
+// ようなパス付き URL・コメント・文書・設定ファイル (toml/yml/sh) は対象外にする。
+const SITE_IDENTITY_LITERAL_RE = /(["'`])(?:https:\/\/storage\.stats47\.jp|https:\/\/stats47\.jp|sc-domain:stats47\.jp|463218070)\1/;
+// 正本を参照できない理由がある箇所。理由のない追加はしない。
+const SITE_IDENTITY_ALLOWED = new Map([
+  ["apps/web/scripts/lib/product-ogp-render.ts", "画像生成器の rendererSources に含まれ、編集すると描画ハッシュが変わって既存画像が全て再生成対象になる"],
+  ["apps/web/scripts/generate-geo-source-thumbnails.ts", "画像生成器の rendererSources に含まれ、編集すると描画ハッシュが変わって既存画像が全て再生成対象になる"],
+]);
+
 function inspect(file) {
   const results = [];
   const relative = rel(file);
@@ -163,6 +175,11 @@ function inspect(file) {
     if (!isTest && !relative.startsWith(".github/workflows/") && !relative.endsWith("CLAUDE.md") && !relative.endsWith("AGENTS.md") &&
         /\bwrangler\s+d1\b|\bgetDrizzle\s*\(|@stats47\/database\/server/.test(line))
       results.push(finding("D1_RUNTIME_RETURN", file, number, "廃止済みの永続D1 runtime操作候補", line));
+
+    if (!isTest && /\.[cm]?[jt]sx?$/.test(relative) && !SITE_IDENTITY_ALLOWED.has(relative) &&
+        !/^\s*(?:\/\/|\/\*|\*)/.test(line) && SITE_IDENTITY_LITERAL_RE.test(line))
+      results.push(finding("SITE_IDENTITY_LITERAL", file, number,
+        "サイト識別子の直書き。@stats47/types の SITE か .claude/scripts/lib/site-config.cjs を参照する", line));
   });
   return results;
 }
@@ -171,10 +188,13 @@ function inspect(file) {
 // 会社 Windows では 7,959 本を毎 commit 読む I/O が 31 秒。findings は内容と相対パスだけで決まるので
 // (size, mtimeMs) が同じファイルは前回の結果を使う。置き場は gitignore 済み .local/。壊れていれば作り直す。
 const STAT_CACHE = process.env.MAINTENANCE_DEBT_CACHE || path.join(ROOT, ".local", "maintenance-debt-cache.json");
+// ルールを変えたら古い結果を使わない (未変更ファイルに新ルールが当たらなくなるため)。
+// チェッカー自身の内容ハッシュが一致するキャッシュだけを使う (2026-10-06 SITE_IDENTITY_LITERAL 追加時に修正)。
+const CHECKER_HASH = require("node:crypto").createHash("sha256").update(fs.readFileSync(__filename)).digest("hex").slice(0, 16);
 function loadStatCache() {
   try {
     const parsed = JSON.parse(fs.readFileSync(STAT_CACHE, "utf8"));
-    if (parsed && parsed.version === 1 && parsed.entries) return parsed.entries;
+    if (parsed && parsed.version === 1 && parsed.checker === CHECKER_HASH && parsed.entries) return parsed.entries;
   } catch { /* fall through */ }
   return {};
 }
@@ -193,7 +213,7 @@ function collect() {
   }
   try {
     fs.mkdirSync(path.dirname(STAT_CACHE), { recursive: true });
-    fs.writeFileSync(STAT_CACHE, JSON.stringify({ version: 1, entries: next }));
+    fs.writeFileSync(STAT_CACHE, JSON.stringify({ version: 1, checker: CHECKER_HASH, entries: next }));
   } catch { /* cache は任意 */ }
   return { files: files.length, findings };
 }

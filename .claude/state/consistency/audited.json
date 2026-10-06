@@ -1,7 +1,8 @@
 {
-  "hash": "fb92be88be9766af385739d54f317e6593bafb3fa04fa846f8833089eb902eb9",
-  "audited_at": "2026-10-01T20:18:52",
+  "hash": "6f8f18bb310cd937ad9f49e9ffdb5099a3e7b7216685aaca8990adc17d8b71a8",
+  "audited_at": "2026-10-06T02:08:52",
   "files": [
-    ".claude/agents/code-reviewer.md"
+    ".claude/scripts/lib/__tests__/check-datasets.test.mjs",
+    ".claude/scripts/lib/check-datasets.mjs"
   ]
 }

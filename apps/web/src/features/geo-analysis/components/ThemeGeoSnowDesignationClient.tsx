@@ -1,4 +1,6 @@
 'use client';
+import { to2DigitPrefCode } from '@stats47/area';
+
 import { useThemePrefecture } from '@/features/theme-dashboard';
 
 import { GeoSnowDesignationSummary } from './GeoSnowDesignationSummary';
@@ -30,7 +32,7 @@ export function ThemeGeoSnowDesignationClient({
           slug="population-snow-designation"
           analysisId={analysisId}
           dataVersion={snapshot.dataVersion}
-          initialPrefCode={selectedPrefectureCode.slice(0, 2)}
+          initialPrefCode={to2DigitPrefCode(selectedPrefectureCode)}
           initialView="overlap"
           manifest={manifest}
           fixedPrefecture

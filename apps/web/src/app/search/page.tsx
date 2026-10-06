@@ -12,6 +12,8 @@ import { getSearchIndexMeta, searchDocumentsServer } from "@/features/search/ser
 
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
+import { DEFAULT_OGP_IMAGE_PATH } from "@/config/site";
+
 import type { Metadata } from "next";
 
 /** 検索結果数の summary 表示 */
@@ -36,7 +38,7 @@ export const metadata: Metadata = {
   description: searchDescription,
   alternates: { canonical: "/search" },
   robots: { index: false, follow: true },
-  ...generateOGMetadata({ title: searchTitle, description: searchDescription, imageUrl: "/og-image.jpg" }),
+  ...generateOGMetadata({ title: searchTitle, description: searchDescription, imageUrl: DEFAULT_OGP_IMAGE_PATH }),
 };
 
 interface PageProps {

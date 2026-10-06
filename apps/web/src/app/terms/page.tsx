@@ -12,6 +12,8 @@ import { SurfaceCard } from "@/components/surface";
 
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
+import { DEFAULT_OGP_IMAGE_PATH, CONTACT_FORM_URL } from "@/config/site";
+
 import type { Metadata } from "next";
 
 function TermsArticle({
@@ -41,7 +43,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/terms",
   },
-  ...generateOGMetadata({ title, description, imageUrl: "/og-image.jpg" }),
+  ...generateOGMetadata({ title, description, imageUrl: DEFAULT_OGP_IMAGE_PATH }),
 };
 
 /**
@@ -263,7 +265,7 @@ export default function TermsPage() {
           </p>
           <p>
             <a
-              href="https://forms.gle/ZYi7Rmk4Kt9qZCXB8"
+              href={CONTACT_FORM_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="text-primary hover:underline font-medium text-sm"

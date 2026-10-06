@@ -372,3 +372,10 @@ agent 用詳細ログ。施策一覧 (簡易表) は `.claude/todo/improvements.
 - 判定: A8 scoutの週次cron運用で、未解決vertical・重複・cron失敗の再発は観測されなかった。行を削除する
 - 根拠データ: `.claude/state/ads/a8-catalog.json` (2026-09-27時点) は256プログラムを保持し、`status: pending-vertical` は0件だった。`status: error` は14件あるが、確認した全件が2026-07-19の初期ブートストラップ時のapply失敗で、いずれも同日中に `reconcile-detail-2026-07-20` ノート付きで approved→applied へ復旧済みだった(例: programId `s00000023687001` のhistory)。2026-09-25T13:46〜14:20Z にcandidate→applied遷移が複数件記録されており、直近の週次cron (`scripts/scheduled/scout-asp-weekly.sh`) が正常に稼働していることを確認した
 - 再現コマンド: `grep -c '"status": "pending-vertical"' .claude/state/ads/a8-catalog.json` (0件を確認) / `grep -n '"status": "error"' .claude/state/ads/a8-catalog.json` で該当行の直前history `at` を確認し全件2026-07-19付けであることを確認
+
+### [AFF-IMPRESSION-ROUTING-01] 単独判定を中止し ranking 面の枠構成全体の観測へ切り替え (2026-10-04)
+
+- 判定: 判定不能のまま。effect/* ラベルは付けない。2026-09-28のT14d比較が判定不能とした理由 (境界が成立しない・after窓に同時変更が重なる・click 2週で11件) はいずれも解消していない。status は in-progress から effect/pending へ移し、期日を2026-10-25に改めた。
+- 根拠データ: `.claude/state/ads/ga4-affiliate-history.csv` の `ranking-incontent` の7日窓は、2026-09-26週が economy 128・education 97・energy 25・furusato 106・housing 24・labor 26・mobility 52・travel 27 の計485 imp、2026-10-03週が economy 134・education 120・energy 14・furusato 116・housing 26・labor 58・mobility 64・travel 38 の計570 imp。clickはどちらの週も全verticalで0。
+- 再現コマンド: `awk -F, '$1=="2026-09-26" || $1=="2026-10-03"' .claude/state/ads/ga4-affiliate-history.csv | grep ranking-incontent`
+- 次の検証: 期日2026-10-25に、2026-10-10・10-17・10-24週の7日窓を加えた4週分で、ranking系position (`ranking-incontent` / `ranking-native` / `ranking-sidebar` / `rakuten-native`) の週次imp合計の水準とclick累計を確認する。集計は上の再現コマンドの grep を `grep -E 'ranking-|rakuten-native'` に替え、列5 (impressions) と列6 (clicks) を週ごとに合算する。click累計が10件未満ならinsufficient-sampleとして扱い、枠の継続可否は意思決定カードへ回す。

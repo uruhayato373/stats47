@@ -1,3 +1,5 @@
+import { SITE } from '@stats47/types';
+
 /** File-specific approved inputs; A40 remains partially licensed globally. */
 export const TSUNAMI_EXPOSURE_SOURCE = {
   slug: 'tsunami-scenario-exposure',
@@ -8,7 +10,7 @@ export const TSUNAMI_EXPOSURE_SOURCE = {
   canonicalPath: '/themes/tsunami-exposure#tsunami-scenario-exposure',
   publicationContract: 'licensed-subset-scenario-exposure',
   populationScale: 10000,
-  publicBaseUrl: 'https://storage.stats47.jp',
+  publicBaseUrl: SITE.r2PublicBaseUrl,
   bands: [
     {
       key: 'd001-03',

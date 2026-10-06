@@ -35,6 +35,7 @@ import {
   correlationTitle,
   spuriousReasons,
 } from "./lib/topic-queue-spurious-core.mjs";
+import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -54,7 +55,7 @@ const GEO_CONTENT_PIPELINE_PATH = path.join(
   PROJECT_ROOT,
   ".local/geo-content-pipeline/items.json",
 );
-const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
+const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
 
 const MUST_WRITE_IMP = 300; // 週 imp がこれ以上ある未記事化テーマは must-write
 const MIN_GAP_IMP = 50; // gsc-gap 候補の下限 imp

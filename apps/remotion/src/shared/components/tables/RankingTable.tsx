@@ -6,6 +6,7 @@ import { formatValueWithPrecision, getMaxDecimalPlaces } from "@stats47/utils";
 import { BRAND, COLOR_SCHEMES, FONT, RADIUS, SPACING, type ThemeName } from "../../themes/brand";
 import type { RankingEntry, RankingMeta } from "../../types/ranking";
 import { SafetyZoneOverlay } from "../utils/SafetyZoneOverlay";
+import { SITE } from "@stats47/types";
 
 /** テーブルの表示スタイル */
 type TableStyle = "standard" | "neon";
@@ -241,7 +242,7 @@ const WatermarkRow: React.FC<WatermarkRowProps> = ({ isNeon, isDark, themeColors
         color: isDark ? "rgba(71, 85, 105, 0.7)" : "rgba(148, 163, 184, 0.8)",
         letterSpacing: 2,
       }}>
-        stats47.jp
+        {SITE.domain}
       </span>
     </div>
   );

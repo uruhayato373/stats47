@@ -14,7 +14,7 @@
  *   - doboku: カタログ src/lib/coconala-services.ts + listings JSON の二層。
  *   - stats47: 商品設計 SSOT は packages/product-factory (ProductDefinition・serviceUrl
  *     フィールドを持たない)。ここでは coconala 出品用の内容 (title/price/category/body 等) と
- *     公開状態 (status/serviceUrl/listedAt) を .claude/config/coconala-listings.json に
+ *     公開状態 (status/serviceUrl/listedAt) を config/coconala-listings.json に
  *     一元化する。product-factory の型は歪めない (出品状態を product TS に書き戻さない)。
  *
  * 安全弁 (収益アカウントのため note/doboku と同思想):
@@ -30,6 +30,7 @@ import { chromium } from 'playwright';
 import { readFileSync, existsSync, writeFileSync, mkdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { COCONALA_ACCOUNT, COCONALA_LISTINGS, COCONALA_ASSETS_DIR } from '../../../../config/paths.mjs';
 
 // このファイル: .claude/scripts/coconala/lib/coconala-session.mjs → repo root は 4 つ上。
 export const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..', '..', '..');
@@ -39,9 +40,9 @@ export const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..', '.
 const PROFILE_ROOT = '/Users/minamidaisuke/stats47';
 export const PROFILE = join(PROFILE_ROOT, '.local/playwright-coconala-profile');
 
-export const ACCOUNT_PATH = join(ROOT, '.claude/config/coconala-account.json');
-export const LISTINGS_PATH = join(ROOT, '.claude/config/coconala-listings.json');
-export const ASSETS_DIR = join(ROOT, '.claude/config/coconala/assets');
+export const ACCOUNT_PATH = join(ROOT, COCONALA_ACCOUNT);
+export const LISTINGS_PATH = join(ROOT, COCONALA_LISTINGS);
+export const ASSETS_DIR = join(ROOT, COCONALA_ASSETS_DIR);
 export const DEBUG_DIR = join(ROOT, '.local/coconala-debug');
 const PROXY = process.env.HTTPS_PROXY || process.env.HTTP_PROXY || '';
 
@@ -58,7 +59,7 @@ export function readAccount() {
 
 /**
  * --image の値を絶対パスへ解決する。bare 名 (スラッシュ無し) は商品画像の既定ディレクトリ
- * `.claude/config/coconala/assets/` に解決する (cwd 相対で ENOENT → 下書き作成後にクラッシュ →
+ * `config/coconala/assets/` に解決する (cwd 相対で ENOENT → 下書き作成後にクラッシュ →
  * orphan draft が残る事故を防ぐため。ブラウザ操作より前に呼ぶ)。
  * @returns {{ok:boolean, abs?:string, reason?:string}}
  */

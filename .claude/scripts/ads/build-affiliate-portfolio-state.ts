@@ -15,6 +15,7 @@ import {
 } from "./lib/affiliate-portfolio-core.mjs";
 import { evaluateMeasurementGate } from "./lib/affiliate-operations-core.mjs";
 import { evaluateMoshimoOutcomeGate } from "./lib/moshimo-report-core.mjs";
+import { A8_REPORT_AUTOMATION } from "../../../config/paths.mjs";
 
 const ROOT = resolve(fileURLToPath(new URL(".", import.meta.url)), "../../..");
 const STATE_DIR = resolve(ROOT, ".claude/state/ads");
@@ -78,7 +79,7 @@ function main(): void {
   const requiresMoshimoOutcomes = AFFILIATE_ADS.some(
     (ad) => ad.isActive === true && ad.programRef?.startsWith("moshimo:"),
   );
-  const config = readJson(resolve(ROOT, ".claude/config/a8-report-automation.json"));
+  const config = readJson(resolve(ROOT, A8_REPORT_AUTOMATION));
   const outcomeGate = evaluateA8OutcomeGate({
     reportLog,
     results: a8Results,

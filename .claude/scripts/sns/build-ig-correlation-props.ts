@@ -66,9 +66,10 @@ import {
   type JoinableValue,
   type JoinRow,
 } from "./lib/correlation-carousel-core.ts";
+import { R2_PUBLIC_BASE_URL, SITE_ORIGIN } from "../lib/site-config.cjs";
 
 const PROJECT_ROOT = join(import.meta.dirname ?? __dirname, "../../..");
-const PUBLIC_URL = process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp";
+const PUBLIC_URL = process.env.R2_PUBLIC_FETCH_URL ?? R2_PUBLIC_BASE_URL;
 const TOTAL_POPULATION_KEY = "total-population";
 /** by-key correlation snapshot を読みに行く指標数の上限 (ネットワーク fetch を抑える)。 */
 const BY_KEY_SOURCE_LIMIT = 120;
@@ -502,7 +503,7 @@ async function findBlogUrlForPair(xKey: string, yKey: string): Promise<string | 
   if (!all) return undefined;
   const candidates = new Set([`${xKey}-vs-${yKey}`, `${yKey}-vs-${xKey}`]);
   const hit = all.articles.find((a) => a.published && candidates.has(a.slug));
-  return hit ? `https://stats47.jp/blog/${hit.slug}` : undefined;
+  return hit ? `${SITE_ORIGIN}/blog/${hit.slug}` : undefined;
 }
 
 async function buildProps(
@@ -594,8 +595,8 @@ async function buildProps(
     caution,
     blogUrl,
     canonicalUrl: {
-      x: `https://stats47.jp/ranking/${xKey}`,
-      y: `https://stats47.jp/ranking/${yKey}`,
+      x: `${SITE_ORIGIN}/ranking/${xKey}`,
+      y: `${SITE_ORIGIN}/ranking/${yKey}`,
     },
     provenance,
   };

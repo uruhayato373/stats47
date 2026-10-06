@@ -1,5 +1,7 @@
 import "server-only";
 
+import { SITE } from "@stats47/types";
+
 import type { Category } from "../types";
 
 /**
@@ -9,5 +11,5 @@ import type { Category } from "../types";
  * @returns ページタイトル
  */
 export function generateTitleFromCategory(category: Category): string {
-  return `${category.categoryName} | 統計で見る都道府県`;
+  return `${category.categoryName} | ${SITE.name}`;
 }

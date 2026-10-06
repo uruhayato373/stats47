@@ -7,6 +7,7 @@ import {
   SPACING,
   type ThemeName,
 } from "@/shared/themes/brand";
+import { SITE } from "@stats47/types";
 
 interface OutroCardProps {
   theme?: ThemeName;
@@ -63,7 +64,7 @@ export const OutroCard: React.FC<OutroCardProps> = ({
             color: BRAND.primaryLight,
           }}
         >
-          stats47.jp
+          {SITE.domain}
         </div>
         <div
           style={{
@@ -72,7 +73,7 @@ export const OutroCard: React.FC<OutroCardProps> = ({
             fontWeight: FONT.weight.bold,
           }}
         >
-          統計で見る都道府県
+          {SITE.name}
         </div>
         <div
           style={{

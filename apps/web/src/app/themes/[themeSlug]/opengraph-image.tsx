@@ -1,6 +1,9 @@
 import { ImageResponse } from "next/og";
 
+import { BRAND } from "@/features/ogp/brand";
 import { ALL_THEMES } from "@/features/theme-dashboard/config/all-themes";
+
+import { SITE_NAME } from "@/config/site";
 
 export const alt = "テーマダッシュボード";
 export const size = { width: 1200, height: 630 };
@@ -35,7 +38,7 @@ export default async function OGImage({
           justifyContent: "center",
           alignItems: "center",
           background: "linear-gradient(135deg, #1e293b 0%, #0f172a 100%)",
-          color: "#fff",
+          color: BRAND.white,
           fontFamily: "sans-serif",
           padding: "60px",
         }}
@@ -61,7 +64,7 @@ export default async function OGImage({
           <div
             style={{
               fontSize: "28px",
-              color: "#94a3b8",
+              color: BRAND.mutedLight,
               fontWeight: 400,
               textAlign: "center",
               maxWidth: "900px",
@@ -76,7 +79,7 @@ export default async function OGImage({
               marginTop: "16px",
             }}
           >
-            統計で見る都道府県
+            {SITE_NAME}
           </div>
         </div>
       </div>

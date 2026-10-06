@@ -44,11 +44,12 @@ import {
   signKindleArchiveManifest,
   verifyKindleArchiveManifest,
 } from "./lib/kindle-archive";
+import { SITE } from "@stats47/types";
 
 const PROJECT_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../..");
 config({ path: join(PROJECT_ROOT, ".env.local") });
 
-const BUCKET = process.env.KINDLE_ARCHIVE_BUCKET || process.env.CLOUDFLARE_R2_BUCKET_NAME || "stats47";
+const BUCKET = process.env.KINDLE_ARCHIVE_BUCKET || process.env.CLOUDFLARE_R2_BUCKET_NAME || SITE.r2Bucket;
 const ARCHIVE_PREFIX = "archive/kindle-encrypted";
 const LOCAL_ROOT = join(PROJECT_ROOT, ".local/kindle-books");
 const STATE_PATH = join(PROJECT_ROOT, ".claude/state/products/kindle-archives.json");

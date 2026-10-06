@@ -3,7 +3,7 @@ import { spawnSync } from "node:child_process";
 import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import { tmpdir } from "node:os";
-import { dirname, join, resolve } from "node:path";
+import { basename, dirname, join, resolve } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 import { referencedPngs, missingImages } from "../ensure-note-images.mjs";
@@ -41,8 +41,8 @@ test("再生成の対象は『Markdown が PNG として参照し、PNG がま�
     for (const name of ["used.svg", "unused.svg", "done.svg"]) writeFileSync(join(dir, "images", name), "<svg/>");
     writeFileSync(join(dir, "images/done.png"), "x");
     writeFileSync(join(dir, "draft.md"), "![u](images/used.png)\n![d](images/done.png)\n");
-    assert.deepEqual(pendingSvgs(dir).map((f) => f.split("/").pop()), ["used.svg"]);
-    assert.deepEqual(pendingSvgs(dir, { force: true }).map((f) => f.split("/").pop()).sort(), ["done.svg", "used.svg"]);
+    assert.deepEqual(pendingSvgs(dir).map((f) => basename(f)), ["used.svg"]);
+    assert.deepEqual(pendingSvgs(dir, { force: true }).map((f) => basename(f)).sort(), ["done.svg", "used.svg"]);
   } finally {
     rmSync(dir, { recursive: true, force: true });
   }

@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 import { JSDOM } from 'jsdom';
 import { hash } from './lib/keyword-cycle.mjs';
 import { readJson, writeJson } from './keyword-cycle.mjs';
+import { SITE_ORIGIN } from '../lib/site-config.cjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');
 const DIR = '.local/seo-rank-watch';
@@ -22,7 +23,7 @@ export function pageText(html) {
 }
 export async function capturePage(repo, input, request = fetch) {
   assert.ok(input.selected, 'no selected keyword');
-  const url = `https://stats47.jp${input.selected.targetPath}`;
+  const url = `${SITE_ORIGIN}${input.selected.targetPath}`;
   const response = await request(url, { redirect: 'error', signal: AbortSignal.timeout(30000) });
   assert.equal(response.status, 200, 'selected public page unavailable');
   assert.match(response.headers.get('content-type') ?? '', /text\/html/i);
@@ -35,7 +36,7 @@ export async function capturePage(repo, input, request = fetch) {
 }
 export function validatePageEvidence(repo, input) {
   const record = readJson(repo, `${DIR}/target-page.json`);
-  assert.equal(record.url, `https://stats47.jp${input.selected.targetPath}`); assert.equal(record.status, 200);
+  assert.equal(record.url, `${SITE_ORIGIN}${input.selected.targetPath}`); assert.equal(record.status, 200);
   assert.equal(record.inputHash, input.inputHash, 'target capture belongs to another selection');
   assert.equal(record.htmlFile, `${DIR}/target-page.html`); assert.equal(record.textFile, `${DIR}/target-page.txt`);
   const html = fs.readFileSync(path.join(repo, record.htmlFile), 'utf8');

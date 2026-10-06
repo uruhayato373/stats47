@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react';
 
 import Link from 'next/link';
 
+import { to2DigitPrefCode } from '@stats47/area';
 import {
   Select,
   SelectContent,
@@ -83,7 +84,7 @@ export function GeoDecisionExplorer({
       question: '地価上昇と周囲の人口減少が重なるか',
       value: selected.risingDecliningPointShare === null ? '算出不可' : percent(selected.risingDecliningPointShare),
       detail: `比較可能な住宅地点 ${selected.comparablePointCount.toLocaleString('ja-JP')}地点のうち`,
-      href: `/geo/population-land-price/${selectedCode.slice(0, 2)}/overlap`,
+      href: `/geo/population-land-price/${to2DigitPrefCode(selectedCode)}/overlap`,
       linkLabel: 'この県の地点の重なりを見る →',
     },
     {
@@ -91,7 +92,7 @@ export function GeoDecisionExplorer({
       question: '浸水想定区域に何人暮らすか',
       value: integer(selected.floodExposurePopulation),
       detail: `2050年県人口の ${percent(selected.floodExposureShare)}`,
-      href: `/geo/population-flood-risk/${selectedCode.slice(0, 2)}/overlap`,
+      href: `/geo/population-flood-risk/${to2DigitPrefCode(selectedCode)}/overlap`,
       linkLabel: '空間分析を見る →',
     },
     {
@@ -99,7 +100,7 @@ export function GeoDecisionExplorer({
       question: '駅の近くに何人残るか',
       value: integer(selected.stationAccessPopulation),
       detail: `2050年県人口の ${percent(selected.stationAccessShare)}`,
-      href: `/geo/population-station-access/${selectedCode.slice(0, 2)}/overlap`,
+      href: `/geo/population-station-access/${to2DigitPrefCode(selectedCode)}/overlap`,
       linkLabel: '空間分析を見る →',
     },
   ] as const;

@@ -24,6 +24,7 @@ import { METRICS_REGISTRY } from "@stats47/data-configs/registry";
 import type { MetricConfig } from "@stats47/data-configs";
 
 import { classifyQueueEntry, resolveSources, sortQueue, type CdcatEntry, type QueueEntry } from "./lib/data-quality-queue";
+import { SITE } from "@stats47/types";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..", "..", "..", "..");
@@ -32,7 +33,7 @@ const YEAR_COVERAGE = path.join(ROOT, ".claude/state/data/estat-year-coverage/qu
 const CDCAT01 = path.join(ROOT, "packages/data-configs/src/ssds/cdcat01-sources.generated.json");
 const SEARCH_GROWTH = path.join(ROOT, ".claude/state/search-growth/candidates.json");
 const OUT_DIR = path.join(ROOT, ".claude/state/data/data-quality");
-const R2_BASE = process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp";
+const R2_BASE = process.env.R2_PUBLIC_FETCH_URL ?? SITE.r2PublicBaseUrl;
 
 const args = process.argv.slice(2);
 const FETCH_MISSING = args.includes("--fetch-missing");

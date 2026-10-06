@@ -1,7 +1,7 @@
 import React from "react";
 import { AbsoluteFill } from "remotion";
 
-import { REGIONS } from "@stats47/area";
+import { REGIONS, NATIONAL_AREA_CODE } from "@stats47/area";
 import { computeAxisDomain } from "@stats47/ranking/utils";
 import { formatValueWithPrecision } from "@stats47/utils";
 import { BRAND, COLOR_SCHEMES, FONT, RADIUS, SPACING, type ThemeName } from "@/shared/themes/brand";
@@ -101,7 +101,7 @@ export const RankingBoxplot: React.FC<RankingBoxplotProps> = ({
   const attrText = attrParts.join("・");
 
   // 全国データを除外
-  const filtered = entries.filter((e) => e.areaCode !== "00000");
+  const filtered = entries.filter((e) => e.areaCode !== NATIONAL_AREA_CODE);
   if (filtered.length === 0) return null;
 
   // 地域別グルーピング・統計量

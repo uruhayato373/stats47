@@ -1,6 +1,7 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { cleanupFixtureRoot, makeFixtureRoot } from "../helpers/fixture-root";
+import { KDP_LISTINGS } from "../../../../config/paths.mjs";
 
 describe("kindle cover route", () => {
   let root: string;
@@ -13,7 +14,7 @@ describe("kindle cover route", () => {
   async function setup(withDraft = false) {
     root = makeFixtureRoot({
       stateFiles: {
-        ".claude/config/kdp-listings.json": JSON.stringify({
+        [KDP_LISTINGS]: JSON.stringify({
           listings: {
             "K-S1-01": {
               coverPath: ".local/kindle-books/K-S1-01/v4-current/cover.jpg",

@@ -40,6 +40,8 @@ import { fetchCityTopologyAction } from "../../actions/fetch-city-topology";
 import type { RankingItem, RankingValue } from "@stats47/ranking";
 import type { StatsSchema, TopoJSONTopology } from "@stats47/types";
 
+import { PREFECTURE_TOPOJSON_PATH } from "@/constants/static-assets";
+
 const LeafletChoroplethMap = dynamic(
   () => import("@stats47/visualization/leaflet").then((mod) => mod.LeafletChoroplethMap),
   { ssr: false, loading: () => <Skeleton className="h-[500px] w-full rounded-md" /> }
@@ -49,9 +51,6 @@ const TileSwitcher = dynamic(
   () => import("@stats47/visualization/leaflet").then((mod) => mod.TileSwitcher),
   { ssr: false }
 );
-
-/** 同一 origin の静的アセット (apps/web/public/prefecture.topojson) */
-const PREFECTURE_TOPOJSON_URL = "/prefecture.topojson";
 
 /**
  * RankingMapCardのProps型定義
@@ -112,7 +111,7 @@ export function RankingMapChartClient({
   useEffect(() => {
     if (prefTopology || prefTopologyError) return;
     let cancelled = false;
-    fetch(PREFECTURE_TOPOJSON_URL)
+    fetch(PREFECTURE_TOPOJSON_PATH)
       .then((response) => {
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         return response.json() as Promise<TopoJSONTopology>;

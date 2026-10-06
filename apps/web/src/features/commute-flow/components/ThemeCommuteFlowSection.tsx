@@ -1,3 +1,5 @@
+import { R2_PUBLIC_BASE_URL } from "@/config/site";
+
 import { CommuteFlowSectionClient } from "./CommuteFlowSectionClient";
 
 import type { CommuteFlowData } from "../lib/types";
@@ -12,7 +14,7 @@ import type { CommuteFlowData } from "../lib/types";
  * ページの都道府県選択に追従し、全国時は代表県 + バッジ、パネル内の手動選択のみ `?flow=NN`
  * (ページ側 `?pref=` とは別名前空間)。切替時のデータは /api/flow/commute/[code] で取得する。
  */
-const R2_BASE = "https://storage.stats47.jp";
+const R2_BASE = R2_PUBLIC_BASE_URL;
 
 export async function ThemeCommuteFlowSection() {
   let initialData: CommuteFlowData | undefined;

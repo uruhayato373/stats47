@@ -49,6 +49,8 @@ import { generateRootMetadata } from "@/lib/metadata/root-metadata";
 import { TopLoaderWrapper } from "@/lib/next-top-loader/TopLoaderWrapper";
 import { generateWebSiteStructuredDataScripts } from "@/lib/structured-data/scripts";
 
+import { R2_PUBLIC_BASE_URL } from "@/config/site";
+
 import { ThemeProvider } from "@/providers/theme-provider";
 
 /**
@@ -99,7 +101,7 @@ export default function RootLayout({
         {/* R2 storage への preconnect（ブログ記事内の SVG/PNG） */}
         <link
           rel="preconnect"
-          href="https://storage.stats47.jp"
+          href={R2_PUBLIC_BASE_URL}
           crossOrigin="anonymous"
         />
         {ADSENSE_DISPLAY_ENABLED && (

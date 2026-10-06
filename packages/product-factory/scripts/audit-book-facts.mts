@@ -41,7 +41,7 @@
 import { existsSync, readFileSync, readdirSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { METRICS_REGISTRY } from "@stats47/data-configs";
+import { METRICS_REGISTRY, SITE } from "@stats47/data-configs";
 import { KINDLE_BOOKS } from "../src/channels/kindle/book-catalog";
 import {
   extractFactClaims,
@@ -53,7 +53,7 @@ import { extractKanjiClaims } from "../src/text/kanji-numeral";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const PF_ROOT = resolve(HERE, "..");
-const R2 = process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp";
+const R2 = process.env.R2_PUBLIC_FETCH_URL ?? SITE.r2PublicBaseUrl;
 
 function arg(name: string): string | undefined {
   const i = process.argv.indexOf(`--${name}`);

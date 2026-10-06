@@ -3,6 +3,7 @@ import { continueRender, delayRender, staticFile } from "remotion";
 import type { Topology } from "topojson-specification";
 
 import type { MigrationFlowData, MunicipalityData } from "@stats47/migration-flow";
+import { PREFECTURE_TOPOJSON_FILE } from "../../shared/utils/static-files";
 
 export interface MigrationFlowDataResult {
   topology: Topology | null;
@@ -55,7 +56,7 @@ export function useMigrationFlowData(
       try {
         const [topology, data, cityTopology, municipalities] =
           await Promise.all([
-            fetchJson<Topology>(staticFile("prefecture.topojson")),
+            fetchJson<Topology>(staticFile(PREFECTURE_TOPOJSON_FILE)),
             fetchJson<MigrationFlowData>(
               staticFile(`migration-flow/${code}.json`),
             ),

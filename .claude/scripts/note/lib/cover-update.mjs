@@ -4,6 +4,21 @@ export const sha256 = (value) =>
   createHash('sha256').update(value).digest('hex');
 export const assetPath = (url) =>
   url ? new URL(url).origin + new URL(url).pathname : null;
+
+/** Include already delivered revisions so a partial batch keeps the same journal. */
+export const coverOperationVersion = (articles) =>
+  `ledger-${sha256(articles.map((a) => `${a.key}:${a.sha256}`).sort().join('\n')).slice(0, 16)}`;
+
+/** Changing a CLI selection must not conceal an earlier uncertain image POST. */
+export function findCoverOperation(journals, article) {
+  const operations = journals.flatMap((journal) => {
+    if (journal.account !== 'stats47') throw Error('journal account mismatch');
+    return journal.articles.filter((a) => a.key === article.key
+      && (a.sourceSha256 === article.sha256 || a.status !== 'verified'));
+  });
+  if (operations.length > 1) throw Error('multiple cover operations require inspection ' + article.key);
+  return operations[0] ?? null;
+}
 const preservedFields = [
   'id',
   'key',
@@ -25,12 +40,17 @@ const preservedFields = [
   'is_limited',
 ];
 
+/** note returns tags created in the same second in no fixed order; compare the tag names as a set. */
+const fingerprintValue = (key, value) => key === 'hashtag_notes' && Array.isArray(value)
+  ? [...new Set(value.map((tag) => tag?.hashtag?.name))].sort()
+  : value ?? null;
+
 /** Public content hashes only: never persist paid text or send article updates. */
 export function contentFingerprint(detail) {
   return Object.fromEntries(
     preservedFields.map((key) => [
       key,
-      sha256(JSON.stringify(detail[key] ?? null)),
+      sha256(JSON.stringify(fingerprintValue(key, detail[key]))),
     ])
   );
 }

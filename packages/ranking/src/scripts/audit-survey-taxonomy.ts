@@ -29,6 +29,7 @@ import {
   resolveThemeSurveyTaxonomy,
   type SurveySurfaceStatus,
 } from '../survey/survey-taxonomy';
+import { SITE } from '@stats47/types';
 
 interface BlogSnapshotArticle {
   slug: string;
@@ -101,7 +102,7 @@ const RATCHET_PATH = path.join(
   '.claude/config/survey-taxonomy-ratchet.json'
 );
 const R2 = (
-  process.env.R2_PUBLIC_FETCH_URL || 'https://storage.stats47.jp'
+  process.env.R2_PUBLIC_FETCH_URL || SITE.r2PublicBaseUrl
 ).replace(/\/+$/, '');
 const args = process.argv.slice(2);
 const offline = args.includes('--offline');

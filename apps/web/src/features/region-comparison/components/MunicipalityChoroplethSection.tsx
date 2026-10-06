@@ -10,14 +10,10 @@ import { ChartPanel } from "@/components/charts/ChartPanel";
 import type { ComparisonRegion } from "../types";
 import type { TopoJSONTopology } from "@stats47/types";
 
+import { TOKYO_ISLAND_EXCLUDE_CODES } from "@/constants/tokyo-islands";
+
 /** 東京島嶼部の除外コード */
-const TOKYO_ISLAND_CODES = new Set([
-  "13000",
-  "13361", "13362", "13363", "13364",
-  "13381", "13382",
-  "13401", "13402",
-  "13421",
-]);
+const TOKYO_ISLAND_CODES = new Set<string>(TOKYO_ISLAND_EXCLUDE_CODES);
 
 /** 人口増減率データ */
 export interface PopulationRatioEntry {

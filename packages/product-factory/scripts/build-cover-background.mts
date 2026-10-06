@@ -25,11 +25,12 @@ import {
   loadPrefectureGeometry,
   type PrefectureShape,
 } from "../src/maps/prefecture-geometry";
+import { SITE } from "@stats47/data-configs";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const PF_ROOT = resolve(HERE, "..");
 const REPO_ROOT = resolve(PF_ROOT, "../..");
-const R2 = process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp";
+const R2 = process.env.R2_PUBLIC_FETCH_URL ?? SITE.r2PublicBaseUrl;
 
 /** カバーの実寸 (cover.ts の W/H と一致させる)。 */
 const W = 1600;

@@ -7,7 +7,9 @@
  */
 import { LONG_LIVED_DATA_CACHE_HEADERS, NO_STORE_CACHE_HEADERS } from "@/lib/cache-policy";
 
-const R2_BASE = "https://storage.stats47.jp/app/themes";
+import { R2_PUBLIC_BASE_URL } from "@/config/site";
+
+const R2_BASE = `${R2_PUBLIC_BASE_URL}/app/themes`;
 
 export const revalidate = 86400;
 

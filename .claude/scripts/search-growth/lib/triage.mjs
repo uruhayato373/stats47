@@ -127,14 +127,20 @@ export function applyApproval(candidates, candidateId, { now = new Date().toISOS
 }
 
 /**
- * 却下 (pending→dismissed) を適用する。
+ * 却下 (pending / WIP → dismissed) を適用する。
+ * WIP (approved / in-progress) の却下は承認の判断を覆すので理由を必須にする。WIP 上限のエラーが
+ * 「measured/dismissed にしてから承認する」と案内する出口がこれ (2026-10-05 まで WIP を閉じる手段が無かった)。
  */
 export function applyDismiss(candidates, candidateId, { reason = null, now = new Date().toISOString() } = {}) {
   const idx = candidates.findIndex((c) => c.id === candidateId);
   if (idx < 0) throw new Error(`candidate not found: ${candidateId}`);
   const c = candidates[idx];
-  if (c.status !== "pending") {
-    throw new Error(`candidate is not pending (status=${c.status}): ${candidateId}`);
+  const isWip = WIP_STATUSES.includes(c.status);
+  if (c.status !== "pending" && !isWip) {
+    throw new Error(`candidate is not pending or WIP (status=${c.status}): ${candidateId}`);
+  }
+  if (isWip && !reason?.trim()) {
+    throw new Error(`WIP (status=${c.status}) の却下には --reason が要る: ${candidateId}`);
   }
   const dismissed = { ...c, status: "dismissed", dismissedAt: now, dismissReason: reason };
   const next = candidates.slice();

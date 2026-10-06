@@ -85,10 +85,12 @@ import { resolveRankingOgpSource } from './lib/ranking-ogp-source';
 import { STOREFRONT_PRODUCTS } from '../src/features/products/storefront';
 
 import type { StorefrontProduct } from '../src/features/products/types';
+import { assertCoverGenerationType } from '../../../.claude/scripts/note/lib/cover-assets.mjs';
+import { SITE as SITE_IDENTITY } from '@stats47/types';
 
 const PUBLIC_URL =
-  process.env.R2_PUBLIC_FETCH_URL ?? 'https://storage.stats47.jp';
-const SITE = process.env.SITE_ORIGIN ?? 'https://stats47.jp';
+  process.env.R2_PUBLIC_FETCH_URL ?? SITE_IDENTITY.r2PublicBaseUrl;
+const SITE = process.env.SITE_ORIGIN ?? SITE_IDENTITY.origin;
 const PROJECT_ROOT = join(import.meta.dirname ?? __dirname, '../../..');
 const CONCURRENCY = 6;
 loadEnv({ path: join(PROJECT_ROOT, '.env.local') });
@@ -434,6 +436,7 @@ function parseTitle(md: string): string | null {
 
 async function main() {
   const opts = parseArgs();
+  assertCoverGenerationType(opts.type);
   if (opts.force && !opts.keys) {
     throw new Error(
       '--force は全件指定できません。必ず --key で対象を明示してください。'

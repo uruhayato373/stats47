@@ -22,7 +22,7 @@ function review(sections, handoffHeading, handoffLines) {
     .join("\n");
 }
 
-function fixture({ weeks = {}, months = {}, weeklyPlan = "2026-W41", monthlyPlan = "2026-10", skillText } = {}) {
+function fixture({ weeks = {}, months = {}, weeklyPlan = "2026-W41", monthlyPlan = "2026-10", skillText, improvements = "", ledger } = {}) {
   const root = mkdtempSync(join(tmpdir(), "review-cadence-"));
   write(
     root,
@@ -64,7 +64,8 @@ function fixture({ weeks = {}, months = {}, weeklyPlan = "2026-W41", monthlyPlan
     }),
   );
   write(root, ".claude/todo/backlog.md", "## 🔴 高\n\n### [LIVE-CARD-01] 生きているカード\nタグ: [収益化]\n\n本文\n");
-  write(root, ".claude/todo/improvements.md", "");
+  write(root, ".claude/todo/improvements.md", improvements);
+  if (ledger) write(root, ".claude/state/backlog-loop/ledger.json", JSON.stringify(ledger));
   write(root, ".claude/state/experiments.json", JSON.stringify([{ id: "EXP-007" }]));
   write(root, "package.json", JSON.stringify({ scripts: {} }));
   write(root, "tools/check.mjs", "");
@@ -136,6 +137,24 @@ test("申し送りの行き先が無い・実在しないカード ID は最新�
   const ghost = okWeek(["GONE-CARD-01"]);
   const r2 = reviewCadence(fixture({ weeks: { "2026-W40": ghost } }), at("2026-10-06"));
   assert.match(r2.findings.find((f) => f.code === "handoff-unrouted").items[0], /unknown-id:GONE-CARD-01/);
+});
+
+test("improvements.md の表行の施策 ID は実在 ID として行き先に使える", () => {
+  const improvements = ["| ID | タイトル | Status |", "|---|---|---|", "| IMP-ROW-01 | 施策 | pending |", ""].join("\n");
+  const ok = reviewCadence(fixture({ weeks: { "2026-W40": okWeek(["IMP-ROW-01"]) }, improvements }), at("2026-10-06"));
+  assert.deepEqual(codes(ok).filter((c) => c === "handoff-unrouted"), []);
+
+  const ghost = reviewCadence(fixture({ weeks: { "2026-W40": okWeek(["IMP-GONE-01"]) }, improvements }), at("2026-10-06"));
+  assert.match(ghost.findings.find((f) => f.code === "handoff-unrouted").items[0], /unknown-id:IMP-GONE-01/);
+});
+
+test("ledger で completed のカードは backlog から消えていても行き先として有効、未完了は unknown-id", () => {
+  const ledger = { version: 1, items: { "DONE-CARD-01": { status: "completed" }, "FAILED-CARD-01": { status: "failed" } } };
+  const done = reviewCadence(fixture({ weeks: { "2026-W40": okWeek(["DONE-CARD-01"]) }, ledger }), at("2026-10-06"));
+  assert.deepEqual(codes(done).filter((c) => c === "handoff-unrouted"), []);
+
+  const failed = reviewCadence(fixture({ weeks: { "2026-W40": okWeek(["FAILED-CARD-01"]) }, ledger }), at("2026-10-06"));
+  assert.match(failed.findings.find((f) => f.code === "handoff-unrouted").items[0], /unknown-id:FAILED-CARD-01/);
 });
 
 test("古いレビューの行き先は完了して消えていてよい (実在の検査は最新だけ)", () => {

@@ -8,6 +8,7 @@ import { calculateMidpoint } from './calculate-midpoint';
 import { resolveColorInterpolator } from './create-color-schemes';
 
 import type { DivergingColorScaleOptions } from "../../types";
+import { DEFAULT_PREFECTURE_MAP_PROPS } from '../../constants/map-constants';
 
 /**
  * 発散カラースケールを生成
@@ -25,7 +26,7 @@ export async function createDivergingColorScale(
     divergingMidpoint,
     divergingMidpointValue,
     isSymmetrized = false,
-    noDataColor = "#e0e0e0",
+    noDataColor = DEFAULT_PREFECTURE_MAP_PROPS.noDataFillColor,
     d3: providedD3,
   } = options;
 

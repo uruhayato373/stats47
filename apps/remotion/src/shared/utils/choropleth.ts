@@ -4,6 +4,7 @@ import * as chromatic from "d3-scale-chromatic";
 import type { Feature, FeatureCollection } from "geojson";
 import { feature } from "topojson-client";
 import type { GeometryCollection, Topology } from "topojson-specification";
+import { DEFAULT_PREFECTURE_MAP_PROPS } from "@stats47/visualization";
 
 // ---------------------------------------------------------
 // 型定義
@@ -203,7 +204,7 @@ export function computeChoroplethPaths(
     colorScheme = "interpolateBlues",
     colorSchemeType = "sequential",
     divergingMidpointValue,
-    noDataColor = "#e0e0e0",
+    noDataColor = DEFAULT_PREFECTURE_MAP_PROPS.noDataFillColor,
     padding = 10,
     offsetY = 0,
     offsetX = 0,

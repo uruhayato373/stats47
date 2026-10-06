@@ -1,4 +1,4 @@
-import { lookupArea } from '@stats47/area';
+import { lookupArea, PREFECTURE_AREA_CODE_RE } from '@stats47/area';
 import { CULTURAL_HERITAGE_SOURCE as definition } from '@stats47/data-configs/theme-catalog';
 import { z } from 'zod';
 
@@ -18,7 +18,7 @@ const record = z
     location: text.nullable(),
     geography: z.enum(['prefecture', 'multi-prefecture', 'unspecified']),
     prefectureCodes: z
-      .array(z.string().regex(/^(0[1-9]|[1-3][0-9]|4[0-7])000$/))
+      .array(z.string().regex(PREFECTURE_AREA_CODE_RE))
       .max(47),
     officialUrl: z.string().url(),
     evidence: z

@@ -1,3 +1,4 @@
+import { NATIONAL_AREA_CODE } from "@stats47/area";
 import { formatValueWithPrecision } from "@stats47/utils";
 
 import type { RankingValue } from "@stats47/ranking";
@@ -21,9 +22,6 @@ export interface RankingHeaderStats {
   count: number;
 }
 
-/** 全国行。ランキングの母数に含めない */
-const NATIONAL_AREA_CODE = "00000";
-
 const TOP_COUNT = 3;
 
 /**
@@ -38,6 +36,7 @@ export function computeRankingHeaderStats(
 ): RankingHeaderStats {
   const entries: RankingHeaderEntry[] = [];
   for (const v of values) {
+    // 全国行はランキングの母数に含めない
     if (v.areaCode === NATIONAL_AREA_CODE) continue;
     if (typeof v.value !== "number" || !Number.isFinite(v.value)) continue;
     entries.push({

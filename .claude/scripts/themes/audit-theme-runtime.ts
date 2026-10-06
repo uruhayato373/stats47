@@ -10,6 +10,7 @@ import {
   expectedSectionPanels,
   withinDeadline,
 } from './theme-followup-core.mjs';
+import { SITE_ORIGIN } from '../lib/site-config.cjs';
 
 async function main() {
   const ROOT = path.resolve(
@@ -18,13 +19,13 @@ async function main() {
   );
   const { values: cli } = parseArgs({
     options: {
-      url: { type: 'string', default: 'https://stats47.jp' },
+      url: { type: 'string', default: SITE_ORIGIN },
       themes: { type: 'string' },
     },
   });
   const base = new URL(cli.url!);
   if (
-    base.origin !== 'https://stats47.jp' &&
+    base.origin !== SITE_ORIGIN &&
     !['localhost', '127.0.0.1', '[::1]'].includes(base.hostname)
   )
     throw new Error('Unsupported audit origin');

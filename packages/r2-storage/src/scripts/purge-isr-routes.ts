@@ -37,10 +37,11 @@ import * as fs from "fs";
 import * as path from "path";
 
 import { assertR2WriteAllowed } from "./_assert-ci-write";
+import { SITE } from "@stats47/types";
 
 config({ path: path.resolve(__dirname, "..", "..", "..", "..", ".env.local") });
 
-const BUCKET = process.env.CLOUDFLARE_R2_BUCKET_NAME || "stats47";
+const BUCKET = process.env.CLOUDFLARE_R2_BUCKET_NAME || SITE.r2Bucket;
 const CACHE_PREFIX = "incremental-cache";
 const CONCURRENCY = 12;
 

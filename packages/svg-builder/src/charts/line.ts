@@ -15,7 +15,7 @@
  * ```
  */
 
-import { FONT_FAMILY } from "../shared/color";
+import { FONT_FAMILY, SERIES_COLORS as LINE_COLORS } from "../shared/color";
 import { niceTicks, linearScale, formatTick } from "../shared/axis";
 import { makePlotArea, px } from "../shared/layout";
 import { svgThemeStyle } from "../shared/theme";
@@ -25,16 +25,6 @@ import {
   uniqueDimension,
   buildValueMap,
 } from "../shared/stats-schema";
-
-/** 多系列折れ線グラフのカラーセット */
-const LINE_COLORS = [
-  "#1e88e5", // blue
-  "#e53935", // red
-  "#43a047", // green
-  "#fb8c00", // orange
-  "#8e24aa", // purple
-  "#00897b", // teal
-];
 
 export interface LineChartOptions {
   /** チャートタイトル */
@@ -93,6 +83,11 @@ export function generateLineSvg(data: StatsSchema[], options: LineChartOptions):
   while (yTicks[yTicks.length - 1] < yHi) {
     const step = yTicks.length >= 2 ? yTicks[1] - yTicks[0] : yHi;
     yTicks.push(parseFloat((yTicks[yTicks.length - 1] + step).toFixed(10)));
+  }
+  // 負の値: niceTicks は lo を切り上げて始まるため、最小値が最下段の目盛りより下に出る
+  while (yTicks[0] > yLo) {
+    const step = yTicks.length >= 2 ? yTicks[1] - yTicks[0] : Math.abs(yLo);
+    yTicks.unshift(parseFloat((yTicks[0] - step).toFixed(10)));
   }
   const yScaleLo = yTicks[0];
   const yScaleHi = yTicks[yTicks.length - 1];
@@ -159,7 +154,8 @@ export function generateLineSvg(data: StatsSchema[], options: LineChartOptions):
       const itemWidth = 90;
       const totalW = series.length * itemWidth;
       const startX = (W - totalW) / 2;
-      const ly = plot.bottom + 18;
+      // 斜めの X 軸ラベルは下へ約 30px はみ出すので、その下に置く
+      const ly = plot.bottom + (rotateTick ? 50 : 18);
       return series
         .map((s, si) => {
           const color = LINE_COLORS[si % LINE_COLORS.length];

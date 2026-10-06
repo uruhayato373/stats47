@@ -114,6 +114,15 @@ test("applyApproval: freshness=missing / 非 pending は拒否する", () => {
   );
 });
 
+test("applyDismiss: approved (WIP) も理由付きなら dismissed にでき、理由なしと measured は拒否する", () => {
+  const approved = cand("w", "soft-404-risk", 0.5, { status: "approved", approvedWeek: "2026-W35" });
+  const { dismissed } = applyDismiss([approved], "w", { reason: "共通原因のカードで補強する", now: NOW });
+  assert.equal(dismissed.status, "dismissed");
+  assert.equal(dismissed.approvedWeek, "2026-W35");
+  assert.throws(() => applyDismiss([approved], "w", { reason: "  " }), /--reason/);
+  assert.throws(() => applyDismiss([cand("m", "soft-404-risk", 0.5, { status: "measured" })], "m", { reason: "x" }), /not pending or WIP/);
+});
+
 test("applyDismiss: 理由付きで dismissed にする", () => {
   const { candidates, dismissed } = applyDismiss([cand("a", "ctr-opportunity", 0.5)], "a", {
     reason: "past effect/none と同型",

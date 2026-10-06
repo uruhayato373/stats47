@@ -4,8 +4,11 @@
 // 使い方: node audit-note-figure-split.mjs [slug-prefix]   (既定: a-/b-/d-kakei)
 import fs from "node:fs";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import { misplacedFigures, publishedBlocks } from "./lib/figure-split.mjs";
-const DOCS = "/Users/minamidaisuke/stats47/docs/31_note記事原稿";
+// .claude/scripts/note/ → 3 階層上がリポジトリ root
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
+const DOCS = path.join(ROOT, "docs/31_note記事原稿");
 const prefix = process.argv[2] || "^[abd]-kakei-";
 const re = new RegExp(prefix);
 const slugs = fs.readdirSync(DOCS).filter((d) => re.test(d)).sort();

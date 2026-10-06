@@ -8,7 +8,9 @@
  */
 import { LONG_LIVED_DATA_CACHE_HEADERS, NO_STORE_CACHE_HEADERS } from "@/lib/cache-policy";
 
-const R2_BASE = "https://storage.stats47.jp/gis/mlit/20240101";
+import { R2_PUBLIC_BASE_URL } from "@/config/site";
+
+const R2_BASE = `${R2_PUBLIC_BASE_URL}/gis/mlit/20240101`;
 
 export const revalidate = 86400;
 

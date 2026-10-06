@@ -3,6 +3,7 @@ import { dirname, join } from "node:path";
 
 import type { AuditRun, MetricKey, PageAuditResult, Violation } from "../types";
 import { PROJECT_ROOT } from "./thresholds";
+import { R2_PUBLIC_BASE_URL } from "../../lib/site-config.cjs";
 
 export const STATE_DIR = join(PROJECT_ROOT, ".claude/state/metrics/page-quality");
 export const HISTORY_CSV = join(STATE_DIR, "history.csv");
@@ -148,7 +149,7 @@ async function fetchText(url: string): Promise<string | null> {
  * 週次全件監査の前回結果 (latest.json / history.csv) を R2 公開 URL から stage へ取得する。
  * 取得できなければ初回扱い (前回比の判定と新規 UI 違反の比較をしない)。
  */
-export async function pullFullState(publicBase = process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp"): Promise<AuditRun | null> {
+export async function pullFullState(publicBase = process.env.R2_PUBLIC_FETCH_URL ?? R2_PUBLIC_BASE_URL): Promise<AuditRun | null> {
   mkdirSync(R2_STAGE_DIR, { recursive: true });
   const [latest, history] = await Promise.all([
     fetchText(`${publicBase}/${R2_STATE_PREFIX}/latest.json`),
@@ -265,7 +266,7 @@ export function writeLatestMarkdown(run: AuditRun): void {
 
   const withShots = run.results.filter((r) => (r.screenshots ?? []).length > 0);
   if (withShots.length > 0) {
-    const base = process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp";
+    const base = process.env.R2_PUBLIC_FETCH_URL ?? R2_PUBLIC_BASE_URL;
     lines.push("## 代表URLのスクショ (先週比の変化)");
     lines.push("");
     lines.push("| テンプレート | 端末 | 先週比 | スクショ |");

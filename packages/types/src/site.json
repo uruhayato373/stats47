@@ -1,0 +1,12 @@
+{
+  "description": "stats47 のサイト識別子の SSOT。TS は @stats47/types の SITE、Node スクリプトは .claude/scripts/lib/site-config.cjs から読む。秘密値は置かない。",
+  "name": "統計で見る都道府県",
+  "alternateName": "Stats47",
+  "domain": "stats47.jp",
+  "origin": "https://stats47.jp",
+  "r2PublicBaseUrl": "https://storage.stats47.jp",
+  "r2Bucket": "stats47",
+  "r2PrivateBucket": "stats47-private",
+  "gscProperty": "sc-domain:stats47.jp",
+  "ga4PropertyId": "463218070"
+}

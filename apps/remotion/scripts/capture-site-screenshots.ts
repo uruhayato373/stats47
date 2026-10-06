@@ -12,8 +12,9 @@
 import { chromium } from "playwright";
 import path from "node:path";
 import fs from "node:fs";
+import { SITE } from "@stats47/types";
 
-const BASE_URL = process.env.BASE_URL || "https://stats47.jp";
+const BASE_URL = process.env.BASE_URL || SITE.origin;
 const OUT_DIR = path.resolve(__dirname, "../public/images/site-intro");
 
 interface ScreenCapture {

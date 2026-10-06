@@ -16,8 +16,9 @@
 import fs from "node:fs";
 
 import { CATALOGS, classify, inspectSvg } from "../lib/svg-classify.mjs";
+import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 
-const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
+const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
 const args = process.argv.slice(2);
 function flag(name, def) {
   const i = args.indexOf(`--${name}`);

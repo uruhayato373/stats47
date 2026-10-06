@@ -11,6 +11,8 @@ import {
   geoThumbnailKey,
 } from '../lib/geo-source-thumbnail';
 
+import { MEDIA_QUERIES } from '@/constants/breakpoints';
+
 /** Both variants refit the same geographic excerpt; CSS never crops the map. */
 export function GeoSourceThumbnail({
   dataId,
@@ -41,7 +43,7 @@ export function GeoSourceThumbnail({
     <picture className="block">
       {!compact && (
         <source
-          media="(min-width: 640px)"
+          media={MEDIA_QUERIES.aboveSm}
           srcSet={url('wide')}
           width={640}
           height={360}

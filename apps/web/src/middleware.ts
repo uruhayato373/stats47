@@ -1,6 +1,7 @@
 import { type NextRequest, NextResponse } from 'next/server';
 
 import { resolveGeoStageRoute } from '@stats47/data-configs/business-plan';
+import { SITE } from '@stats47/types';
 
 import { AREA_THEME_SLUGS } from '@/features/theme-dashboard/config/area-theme-slugs';
 
@@ -427,7 +428,7 @@ export default function middleware(req: NextRequest) {
   // --- ホスト正規化: www → 非 www（301）---
   const host = req.headers.get('host') || '';
   if (host.startsWith('www.')) {
-    const url = new URL(pathname, 'https://stats47.jp');
+    const url = new URL(pathname, SITE.origin);
     url.search = req.nextUrl.search;
     return NextResponse.redirect(url, { status: 301 });
   }

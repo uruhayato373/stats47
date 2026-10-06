@@ -4,6 +4,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 import { summarizeSalesLedger, validateSalesLedger } from "./ledger";
+import { COCONALA_LISTINGS, KDP_LISTINGS } from "../../../../config/paths.mjs";
 
 import type { SalesChannel, SalesLedger, SalesObservation } from "./types";
 
@@ -49,7 +50,7 @@ function resolveEvidence(relativePath: string): { path: string; sha256: string }
 
 function assertPublishedProduct(channel: SalesChannel, productId: string): void {
   if (channel === "kdp") {
-    const file = JSON.parse(fs.readFileSync(path.join(ROOT, ".claude/config/kdp-listings.json"), "utf8")) as {
+    const file = JSON.parse(fs.readFileSync(path.join(ROOT, KDP_LISTINGS), "utf8")) as {
       listings: Record<string, { kdpStatus?: string; asin?: string | null }>;
     };
     const listing = file.listings[productId];
@@ -59,7 +60,7 @@ function assertPublishedProduct(channel: SalesChannel, productId: string): void 
     return;
   }
 
-  const file = JSON.parse(fs.readFileSync(path.join(ROOT, ".claude/config/coconala-listings.json"), "utf8")) as {
+  const file = JSON.parse(fs.readFileSync(path.join(ROOT, COCONALA_LISTINGS), "utf8")) as {
     listings: Record<string, { status?: string; serviceUrl?: string | null }>;
   };
   const listing = file.listings[productId];

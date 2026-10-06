@@ -1,5 +1,7 @@
 import { getRequiredBaseUrl } from "@/lib/env";
 
+import { SITE_NAME } from "@/config/site";
+
 import type { ThemeConfig } from "../types";
 
 export function generateThemeBreadcrumbStructuredData(theme: ThemeConfig): object {
@@ -27,7 +29,7 @@ export function generateThemePageStructuredData(theme: ThemeConfig): object {
     keywords: theme.keywords.join(", "),
     creator: {
       "@type": "Organization",
-      name: "統計で見る都道府県",
+      name: SITE_NAME,
       url: baseUrl,
     },
     about: {

@@ -25,6 +25,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { generateScatterSvg } from '../../../packages/svg-builder/src/charts/scatter.ts';
 import { inspectChartSourceManifest } from '../lib/chart-provenance.mjs';
+import { R2_PUBLIC_BASE_URL } from '../lib/site-config.cjs';
 import { stripProvenance, withProvenance } from '../lib/svg-provenance.mjs';
 import {
   lintScatterData,
@@ -38,7 +39,7 @@ const PROJECT_ROOT = path.resolve(
   '..',
   '..'
 );
-const R2 = process.env.R2_PUBLIC_FETCH_URL || 'https://storage.stats47.jp';
+const R2 = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
 const STAGE = path.join(PROJECT_ROOT, '.local/r2/app/blog');
 
 // provenance の扱いは lib に一本化 (テスト付き: __tests__/svg-provenance.test.mjs)。

@@ -3,6 +3,8 @@ import { resolve } from "node:path";
 
 import { describe, expect, it } from "vitest";
 
+import { PREFECTURE_TOPOJSON_PATH } from "@/constants/static-assets";
+
 const PROJECT_ROOT = resolve(import.meta.dirname, "../../../../../..");
 
 function source(path: string): string {
@@ -68,8 +70,9 @@ describe("ranking map base tile contract", () => {
   });
 
   it("loads the prefecture topology from a same-origin static asset", () => {
-    const mapClient = source(RANKING_MAP);
-    expect(mapClient).toContain('"/prefecture.topojson"');
+    // パスは constants/static-assets.ts が単一ソース。地図はその定数を fetch する
+    expect(source(RANKING_MAP)).toContain("fetch(PREFECTURE_TOPOJSON_PATH)");
+    expect(PREFECTURE_TOPOJSON_PATH).toBe("/prefecture.topojson");
     expect(existsSync(resolve(PROJECT_ROOT, PUBLIC_TOPOJSON))).toBe(true);
   });
 

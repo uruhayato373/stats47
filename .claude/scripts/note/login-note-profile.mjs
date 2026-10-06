@@ -3,7 +3,7 @@
  *
  * coconala-operator と同型: 専用の永続プロファイル (.local/playwright-note-profile) を使い、
  * ログイン状態を跨いで保持する。headed Chrome を開き、ユーザーが stats47 でログインするのを待つ。
- * current_user の urlname==stats47 を検知したら .claude/config/note-account.json を書き、終了する。
+ * current_user の urlname==stats47 を検知したら config/note-account.json を書き、終了する。
  *
  * 別アカウント (dobokunote 等) でのログインは検知して警告する (取り違え防止)。
  *
@@ -13,10 +13,12 @@ import { chromium } from "playwright";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { mkdirSync, writeFileSync } from "node:fs";
+import { currentUrlname } from './lib/note-session.mjs';
+import { NOTE_ACCOUNT } from '../../../config/paths.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 const PROFILE = join(ROOT, ".local/playwright-note-profile");
-const ACCOUNT_PATH = join(ROOT, ".claude/config/note-account.json");
+const ACCOUNT_PATH = join(ROOT, NOTE_ACCOUNT);
 const EXPECTED = "stats47";
 const UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Safari/537.36";
 const TIMEOUT_MS = 10 * 60 * 1000;
@@ -34,18 +36,6 @@ async function launch() {
     return await chromium.launchPersistentContext(PROFILE, { ...opts, channel: "chrome" });
   } catch {
     return await chromium.launchPersistentContext(PROFILE, opts);
-  }
-}
-
-async function currentUrlname(ctx) {
-  try {
-    const r = await ctx.request.get("https://note.com/api/v2/current_user", {
-      headers: { "User-Agent": UA },
-    });
-    const d = (await r.json())?.data;
-    return d && typeof d === "object" ? d.urlname ?? null : null;
-  } catch {
-    return null;
   }
 }
 

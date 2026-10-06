@@ -4,6 +4,7 @@ import { AbsoluteFill } from "remotion";
 import { formatValueWithPrecision } from "@stats47/utils";
 import { BRAND, COLOR_SCHEMES, FONT, RADIUS, SPACING, type ThemeName } from "../../themes/brand";
 import type { RankingEntry, RankingMeta } from "../../types/ranking";
+import { SITE } from "@stats47/types";
 
 interface RankingTableSlideProps {
   meta: RankingMeta;
@@ -207,7 +208,7 @@ export const RankingTableSlide: React.FC<RankingTableSlideProps> = ({
             letterSpacing: 1,
           }}
         >
-          stats47.jp
+          {SITE.domain}
         </div>
         <div style={{ width: 1, height: 16, backgroundColor: colors.border }} />
         <div
@@ -218,7 +219,7 @@ export const RankingTableSlide: React.FC<RankingTableSlideProps> = ({
             letterSpacing: 1,
           }}
         >
-          統計で見る都道府県
+          {SITE.name}
         </div>
       </div>
     </AbsoluteFill>

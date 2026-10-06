@@ -12,6 +12,8 @@
 
 import { getRequiredBaseUrl } from "@/lib/env";
 
+import { DEFAULT_OGP_IMAGE_PATH, SITE_DESCRIPTION, SITE_NAME, SITE_TAGLINE } from "@/config/site";
+
 import { generateOGMetadata } from "./og-generator";
 
 import type { Metadata } from "next";
@@ -27,12 +29,10 @@ export function generateRootMetadata(): Metadata {
   return {
     metadataBase: new URL(baseUrl),
     title: {
-      template: "%s | 統計で見る都道府県",
-      default:
-        "統計で見る都道府県 - 日本の都道府県統計データ可視化プラットフォーム",
+      template: `%s | ${SITE_NAME}`,
+      default: `${SITE_NAME} - 日本の都道府県統計データ可視化プラットフォーム`,
     },
-    description:
-      "あなたの県は何位？年収・人口・消費量から教育・医療まで、1,800以上の統計で47都道府県をランキング。地図やグラフで地域の特徴をわかりやすく可視化します。",
+    description: SITE_DESCRIPTION,
     keywords: [
       "統計",
       "都道府県",
@@ -43,9 +43,9 @@ export function generateRootMetadata(): Metadata {
       "ダッシュボード",
       "日本",
     ],
-    authors: [{ name: "統計で見る都道府県" }],
-    creator: "統計で見る都道府県",
-    publisher: "統計で見る都道府県",
+    authors: [{ name: SITE_NAME }],
+    creator: SITE_NAME,
+    publisher: SITE_NAME,
     icons: {
       icon: [
         { url: "/favicon.svg", type: "image/svg+xml" },
@@ -59,9 +59,9 @@ export function generateRootMetadata(): Metadata {
       telephone: false,
     },
     ...generateOGMetadata({
-      title: "統計で見る都道府県",
-      description: "あなたの県は何位？1,800以上の統計で47都道府県をランキング・比較・分析",
-      imageUrl: "/og-image.jpg",
+      title: SITE_NAME,
+      description: SITE_TAGLINE,
+      imageUrl: DEFAULT_OGP_IMAGE_PATH,
     }),
     robots: {
       index: true,

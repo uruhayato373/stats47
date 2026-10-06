@@ -1,6 +1,7 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { cleanupFixtureRoot, makeFixtureRoot } from "../helpers/fixture-root";
+import { KDP_LISTINGS } from "../../../../config/paths.mjs";
 
 describe("GET /api/content", () => {
   let root: string;
@@ -17,7 +18,7 @@ describe("GET /api/content", () => {
         { id: 2, platform: "instagram", status: "posted" },
       ],
       stateFiles: {
-        ".claude/config/kdp-listings.json": JSON.stringify({
+        [KDP_LISTINGS]: JSON.stringify({
           listings: {
             "K-S1-01": {
               id: "K-S1-01",

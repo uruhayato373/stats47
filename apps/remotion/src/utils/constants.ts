@@ -31,27 +31,3 @@ export const TRANSITION_DURATION = {
   fadeOut: 20,
   slideIn: 30,
 } as const;
-
-/**
- * カラースキーム
- */
-export const COLOR_SCHEMES = {
-  default: {
-    primary: '#3B82F6',
-    secondary: '#8B5CF6',
-    background: '#0F172A',
-    text: '#F1F5F9',
-  },
-  warm: {
-    primary: '#F59E0B',
-    secondary: '#EF4444',
-    background: '#1C1917',
-    text: '#FAF5F0',
-  },
-  cool: {
-    primary: '#06B6D4',
-    secondary: '#8B5CF6',
-    background: '#0C4A6E',
-    text: '#E0F2FE',
-  },
-} as const;

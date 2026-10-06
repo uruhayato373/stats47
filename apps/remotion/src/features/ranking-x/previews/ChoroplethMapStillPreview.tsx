@@ -10,6 +10,8 @@ import {
 import React, { useEffect, useState } from "react";
 import { continueRender, delayRender, staticFile } from "remotion";
 import type { Topology } from "topojson-specification";
+import { PREFECTURE_TOPOJSON_FILE } from "../../../shared/utils/static-files";
+import { DEFAULT_PREFECTURE_MAP_PROPS } from "@stats47/visualization";
 interface ChoroplethMapStillPreviewProps {
   theme?: ThemeName;
   meta?: RankingMeta;
@@ -40,7 +42,7 @@ export const ChoroplethMapStillPreview: React.FC<ChoroplethMapStillPreviewProps>
 
     async function loadMap() {
       try {
-        const url = staticFile("prefecture.topojson");
+        const url = staticFile(PREFECTURE_TOPOJSON_FILE);
         const res = await fetch(url);
         const topology = (await res.json()) as Topology;
 
@@ -50,7 +52,7 @@ export const ChoroplethMapStillPreview: React.FC<ChoroplethMapStillPreviewProps>
           colorScheme,
           colorSchemeType,
           divergingMidpointValue,
-          noDataColor: theme === "dark" ? "#1E293B" : "#e0e0e0",
+          noDataColor: theme === "dark" ? "#1E293B" : DEFAULT_PREFECTURE_MAP_PROPS.noDataFillColor,
           padding: 60,
         });
 

@@ -24,6 +24,7 @@ import type { MapVisualizationConfig } from "../../types/map-chart";
 import { useD3Tooltip } from "../../hooks/useD3Tooltip";
 
 import type { Feature, FeatureCollection } from "geojson";
+import { DEFAULT_PREFECTURE_MAP_PROPS } from "../../constants/map-constants";
 
 /** viewBox の固定サイズ */
 const VIEWBOX_WIDTH = 600;
@@ -225,7 +226,7 @@ export function CityMapChart({
       .append("path")
       .attr("d", pathGenerator as (d: CityFeature) => string)
       .attr("fill", (d) => {
-        return colorMapper?.(d.properties.cityCode) ?? "#e0e0e0";
+        return colorMapper?.(d.properties.cityCode) ?? DEFAULT_PREFECTURE_MAP_PROPS.noDataFillColor;
       })
       .attr("stroke", (d) =>
         d.properties.cityCode === selectedCityCode ? "#3b82f6" : "#94a3b8"

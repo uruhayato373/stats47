@@ -21,6 +21,7 @@ import {
 import { inspectR2ImageGeneration } from './lib/image-generation-r2-inspector';
 
 import type { ImageGenerationManifest } from '@stats47/types';
+import { SITE } from '@stats47/types';
 
 const stageRoot = '.local/image-staging/geo-thumbnails';
 const planPath = '.local/image-generation-publish-plan-geo-thumbnails.json';
@@ -244,7 +245,7 @@ async function main() {
         if (!remote || sha256(remote.body) !== expectedSha)
           throw new Error(key + ': R2 bytes differ');
         const response = await fetch(
-          'https://storage.stats47.jp/' + key + '?verify=' + expectedSha,
+          SITE.r2PublicBaseUrl + '/' + key + '?verify=' + expectedSha,
           { signal: AbortSignal.timeout(30000) }
         );
         if (

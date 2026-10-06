@@ -22,6 +22,8 @@ import {
   type RankingEntry,
   type RankingMeta,
 } from "@/shared";
+import { SITE } from "@stats47/types";
+import { TILE_GRID_LAYOUT } from "@stats47/visualization";
 
 // ---------------------------------------------------------------------------
 // Constants – 1920 × 1080 横型レイアウト
@@ -668,35 +670,6 @@ const MigrationLineChart: React.FC<{
 // IntroSlide
 // ---------------------------------------------------------------------------
 
-// Tile grid layout (inline to avoid cross-package import in Remotion)
-const INTRO_TILES: { id: number; name: string; x: number; y: number; w?: number; h?: number }[] = [
-  { id: 1, name: "北海道", x: 12, y: 0, w: 2, h: 2 },
-  { id: 2, name: "青森", x: 12, y: 3, w: 2 }, { id: 3, name: "岩手", x: 13, y: 4 },
-  { id: 5, name: "秋田", x: 12, y: 4 }, { id: 4, name: "宮城", x: 13, y: 5 },
-  { id: 6, name: "山形", x: 12, y: 5 }, { id: 7, name: "福島", x: 12, y: 6, w: 2 },
-  { id: 15, name: "新潟", x: 10, y: 6, w: 2 }, { id: 16, name: "富山", x: 9, y: 6 },
-  { id: 17, name: "石川", x: 8, y: 6 }, { id: 18, name: "福井", x: 8, y: 7 },
-  { id: 21, name: "岐阜", x: 9, y: 7, h: 2 }, { id: 20, name: "長野", x: 10, y: 7, h: 2 },
-  { id: 10, name: "群馬", x: 11, y: 7 }, { id: 9, name: "栃木", x: 12, y: 7 },
-  { id: 8, name: "茨城", x: 13, y: 7 }, { id: 19, name: "山梨", x: 11, y: 8 },
-  { id: 11, name: "埼玉", x: 12, y: 8 }, { id: 12, name: "千葉", x: 13, y: 8, h: 2 },
-  { id: 13, name: "東京", x: 12, y: 9 }, { id: 14, name: "神奈川", x: 12, y: 10 },
-  { id: 22, name: "静岡", x: 10, y: 9, w: 2 }, { id: 23, name: "愛知", x: 9, y: 9 },
-  { id: 25, name: "滋賀", x: 8, y: 8 }, { id: 24, name: "三重", x: 8, y: 9, h: 2 },
-  { id: 26, name: "京都", x: 6, y: 8, w: 2 }, { id: 28, name: "兵庫", x: 5, y: 8, h: 2 },
-  { id: 27, name: "大阪", x: 6, y: 9 }, { id: 29, name: "奈良", x: 7, y: 9 },
-  { id: 30, name: "和歌山", x: 6, y: 10, w: 2 },
-  { id: 31, name: "鳥取", x: 4, y: 8 }, { id: 33, name: "岡山", x: 4, y: 9 },
-  { id: 32, name: "島根", x: 3, y: 8 }, { id: 34, name: "広島", x: 3, y: 9 },
-  { id: 35, name: "山口", x: 2, y: 8, h: 2 },
-  { id: 38, name: "愛媛", x: 3, y: 11 }, { id: 37, name: "香川", x: 4, y: 11 },
-  { id: 39, name: "高知", x: 3, y: 12 }, { id: 36, name: "徳島", x: 4, y: 12 },
-  { id: 40, name: "福岡", x: 1, y: 10 }, { id: 41, name: "佐賀", x: 0, y: 10 },
-  { id: 44, name: "大分", x: 1, y: 11 }, { id: 42, name: "長崎", x: 0, y: 11 },
-  { id: 45, name: "宮崎", x: 1, y: 12 }, { id: 43, name: "熊本", x: 0, y: 12 },
-  { id: 46, name: "鹿児島", x: 0, y: 13, w: 2 }, { id: 47, name: "沖縄", x: 0, y: 15 },
-];
-
 const IntroSlide: React.FC<{
   title: string;
   entries: RankingEntry[];
@@ -803,7 +776,7 @@ const IntroSlide: React.FC<{
         }}
       >
         <svg width={mapW} height={mapH} viewBox={`0 0 ${mapW} ${mapH}`}>
-          {INTRO_TILES.map((tile, idx) => {
+          {TILE_GRID_LAYOUT.map((tile, idx) => {
             const tileSpring = spring({
               frame: frame - 5 - idx * 0.6,
               from: 0,
@@ -890,7 +863,7 @@ const IntroSlide: React.FC<{
               color: colors.muted,
             }}
           >
-            統計で見る都道府県
+            {SITE.name}
           </span>
         </div>
 
@@ -1092,7 +1065,7 @@ export const RankingMigration: React.FC<RankingMigrationProps> = ({
                 color: colors.muted,
               }}
             >
-              統計で見る都道府県
+              {SITE.name}
             </span>
           </div>
 

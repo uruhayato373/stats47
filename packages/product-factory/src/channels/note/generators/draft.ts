@@ -13,6 +13,7 @@ import type { ProductDefinition } from "../../../catalog/types";
 import type { NoteAttachment } from "./attachments";
 import type { ProductProvenance } from "./manifest";
 import { LICENSE_REGISTRY, type LicenseId } from "../../../catalog/licenses";
+import { SITE } from "@stats47/data-configs";
 
 function yen(n: number): string {
   return n.toLocaleString("ja-JP");
@@ -44,9 +45,9 @@ function memberList(article: NoteArticlePlan, byId: Map<string, ProductDefinitio
 
 function stats47LinksBlock(article: NoteArticlePlan): string[] {
   const links = article.stats47Targets.map(
-    (t) => `- 無料で見られる関連データ: [stats47.jp${t}](https://stats47.jp${t})`,
+    (t) => `- 無料で見られる関連データ: [${SITE.domain}${t}](${SITE.origin}${t})`,
   );
-  return links.length > 0 ? links : ["- 無料で見られる関連データ: [stats47.jp](https://stats47.jp)"];
+  return links.length > 0 ? links : [`- 無料で見られる関連データ: [${SITE.domain}](${SITE.origin})`];
 }
 
 function provenanceBlock(provenance: readonly ProductProvenance[]): string[] {

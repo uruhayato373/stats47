@@ -17,7 +17,7 @@ primary_agent: open-data-curator
 - 既に S1 まである資料に Markdown 文字起こし (S2) や図クロップ (S3) を足したい
 
 ## 前提
-- profile が `.claude/config/source-vault.json` にあり、`processing.pageImage` (dpi / format / quality / `contentCrop`) を
+- profile が `config/source-vault.json` にあり、`processing.pageImage` (dpi / format / quality / `contentCrop`) を
   宣言している。Kindle 画面スキャンのように UI 枠があるものは `contentCrop` (`WxH+X+Y`、render 後 pixel) を必ず置く。
   同じ資料でウィンドウ寸法が違う分冊が混ざるときは `{"<render後W>x<H>": "WxH+X+Y", ...}` の map で宣言し、
   extract が実際の render 寸法で引く (該当なしは停止)。
@@ -33,7 +33,7 @@ npm run source-vault:process -- stage-status --profile <profile>
 `stages.s0Preserved … s4Inventory` が manifest の `componentCounts` から出る。ここで止まっている段階から始める。
 
 ### S0 保全 (初回だけ)
-`.claude/config/source-vault.json` に profile を追加し、source root (`$TMPDIR/stats47-source-vault/work/<sourceKey>/<edition>/<sourceRootName>/`) に PDF を置いて
+`config/source-vault.json` に profile を追加し、source root (`$TMPDIR/stats47-source-vault/work/<sourceKey>/<edition>/<sourceRootName>/`) に PDF を置いて
 ```bash
 npm run source-vault -- create --profile <profile> --manifest .claude/state/source-inventory/<sourceKey>/<edition>/source-bundle-manifest.json
 npm run source-vault -- upload --profile <profile> --manifest <git-manifest>
@@ -81,7 +81,7 @@ npm run source-vault:process -- crop --workspace <derived-dir> --spec <derived-d
 `crops/<id>.png` (page-image 空間では pages/ と同じ形式、例 `.jpg`) と `crop-manifest.json` ができる。S2 の md の `figures[]` に crop id を書き、`md-check --check` を再実行する。
 
 ### Drive の版 folder へ足す (revision を上げる)
-1. `.claude/config/source-vault.json` の `profiles.<profile>.revision` を N+1 にする。
+1. `config/source-vault.json` の `profiles.<profile>.revision` を N+1 にする。
 2. derived の成果物を規約名で source root へ配置し、manifest を作り直して Drive へ差分複製する。
 ```bash
 npm run source-vault:process -- stage --workspace <derived-dir> --revision <N+1>

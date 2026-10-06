@@ -10,6 +10,7 @@ import { RankCard } from "../RankCard";
 import React, { useEffect, useState } from "react";
 import { continueRender, delayRender, staticFile } from "remotion";
 import type { Topology } from "topojson-specification";
+import { PREFECTURE_TOPOJSON_FILE } from "../../../utils/static-files";
 
 interface RankCardPreviewProps {
   title?: string;
@@ -44,7 +45,7 @@ export const RankCardPreview: React.FC<RankCardPreviewProps> = ({
 
     async function load() {
       try {
-        const url = staticFile("prefecture.topojson");
+        const url = staticFile(PREFECTURE_TOPOJSON_FILE);
         const res = await fetch(url);
         const topology = (await res.json()) as Topology;
 

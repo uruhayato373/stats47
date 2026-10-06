@@ -9,7 +9,9 @@
  */
 import { LONG_LIVED_DATA_CACHE_HEADERS, NO_STORE_CACHE_HEADERS } from "@/lib/cache-policy";
 
-const R2_BASE = "https://storage.stats47.jp";
+import { R2_PUBLIC_BASE_URL } from "@/config/site";
+
+const R2_BASE = R2_PUBLIC_BASE_URL;
 
 /** feature → R2 key（許可リスト） */
 const KEY_BUILDERS: Record<string, (code: string) => string> = {

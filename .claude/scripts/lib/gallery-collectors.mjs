@@ -1,5 +1,5 @@
 /**
- * メディア資産の列挙 collector (共有ライブラリ・依存ゼロ)
+ * メディア資産の列挙 collector (共有ライブラリ)
  *
  * OGP / リンクカード / note カバー / note 記事内画像 / 動画 master などの資産を、
  * R2 は list 不可という制約下で SSOT (sitemap / all.json / note state / archive-manifest)
@@ -14,6 +14,8 @@
  */
 import fs from "node:fs";
 import path from "node:path";
+import { readCoverLedger, coverDisplayState } from '../note/lib/cover-assets.mjs';
+import { PREF_AREA_CODES } from './prefectures.cjs';
 
 export const DEFAULT_CONCURRENCY = 12;
 export const RANKING_SAMPLE = 30;
@@ -177,22 +179,20 @@ export async function enumerateBlogSlugs(r2) {
 }
 
 /**
- * note カバー: state の draft-index + published-urls から集約。
- * note カバーは R2 に archive されず公開時に note.com へ直接アップロードされる ephemeral
- * (2026-07-06 確認)。published は note.com リンクを提示、r2Path から archive パスを組む。
- */
-/**
- * 公開 R2 に汎用カバー (cover-1280x670.png) を持たない note シリーズ。専用デザインのカバーを note.com に直接上げるのが正典
- * (.claude/scripts/note/generate-koumuin-covers.cjs)。生成側 apps/web/scripts/generate-ogp-images.ts の
- * BESPOKE_COVER_VERTICALS と同じ集合 (gallery-collectors.test.mjs が一致を固定する)。
+ * 本文画像の旧public R2対象から除く専用デザインのシリーズ。
+ * カバーの対象集合・実体は、この除外を使わず共通台帳とprivate R2から解決する。
  */
 export const BESPOKE_COVER_VERTICALS = Object.freeze(["koumuin-claude-code", "koumuin-estat-claude-code"]);
 
 /**
- * 公開 R2 にカバーがあるべき note 記事。有料記事 (r2_access: private) と専用デザインのシリーズは除く
- * (どちらも公開 R2 に無いのが正しい。2026-09 に 79 件の有料記事を「欠落」と数え、OGP の週次監査が毎回落ちていた)。
+ * 全note記事のカバーを共通台帳から列挙する。有料・専用デザイン・下書きも同じ保存契約。
  */
 export function enumerateNoteCovers(projectRoot) {
+  return readCoverLedger(projectRoot).articles.map((a) => ({ slug: a.articleKey, status: a.noteUrl ? 'published' : 'draft', noteUrl: a.noteUrl, record: a }));
+}
+
+/** Article bodies retain their catalog-derived R2 paths, independently of the cover ledger. */
+export function enumerateNoteBodies(projectRoot) {
   const out = new Map(); // slug -> { slug, status, noteUrl, r2Path }
   const inScope = (v) => v?.r2_path && v.r2_access !== "private" && !BESPOKE_COVER_VERTICALS.includes(v.vertical);
   const draft = readJsonSafe(path.join(projectRoot, ".claude/state/note-draft-index.json"));
@@ -244,7 +244,7 @@ export function r2OgpEntry(key, r2Key, pageUrl, r2) {
  * 返り値 = { source, aspect, r2KeyPattern, entries:[{key,label,pageUrl,images:[{variant,url}]}] }
  */
 export async function buildTab(tab, opts) {
-  const { limit = null, all = false, site, r2, rankingSample = RANKING_SAMPLE, projectRoot } = opts;
+  const { limit = null, all = false, site, r2, rankingSample = RANKING_SAMPLE, projectRoot, privateNoteCovers = false } = opts;
   switch (tab) {
     case "blog-ogp": {
       let slugs = await enumerateBlogSlugs(r2);
@@ -295,7 +295,7 @@ export async function buildTab(tab, opts) {
     case "areas-ogp": {
       let codes = await enumerateFromSitemap(site, /stats47\.jp\/areas\/([0-9]{5})$/);
       if (codes.length === 0)
-        codes = Array.from({ length: 47 }, (_, i) => String(i + 1).padStart(2, "0") + "000");
+        codes = PREF_AREA_CODES;
       if (limit) codes = codes.slice(0, limit);
       return {
         source: "r2-static",
@@ -343,7 +343,7 @@ export async function buildTab(tab, opts) {
     }
     case "pref-silhouette": {
       // 県シルエットカード素材 (47県 × 5比率 × blue/dark)。areas OGP と同デザイン系。
-      let codes = Array.from({ length: 47 }, (_, i) => String(i + 1).padStart(2, "0"));
+      let codes = PREF_AREA_CODES.map((code) => code.slice(0, 2));
       if (limit) codes = codes.slice(0, limit);
       return {
         source: "r2-static",
@@ -364,14 +364,19 @@ export async function buildTab(tab, opts) {
       let covers = enumerateNoteCovers(projectRoot);
       if (limit) covers = covers.slice(0, limit);
       return {
-        source: "r2-static",
+        source: "data/note/cover-assets.json",
         aspect: "1.91:1",
-        r2KeyPattern: `note/<vertical>/<slug>/images/cover-1280x670.png`,
+        r2KeyPattern: `stats47-private: note/covers/<article>/revisions/<sha256>.png`,
         entries: covers.map((c) => ({
           key: c.slug,
-          label: `${c.slug} [${c.status}]`,
+          label: `${c.slug} [${coverDisplayState(c.record).review}]`,
           pageUrl: c.noteUrl,
-          images: [{ variant: "single", url: `${r2}/${c.r2Path}/images/cover-1280x670.png` }],
+          images: [
+            { variant: '公開画像', url: privateNoteCovers && c.record.published?.revisionId
+              ? `/note-cover/${encodeURIComponent(c.slug)}?revision=${c.record.published.revisionId}` : c.record.published?.url ?? null },
+            ...(privateNoteCovers && c.record.candidateRevisionId
+              ? [{ variant: '生成候補', url: `/note-cover/${encodeURIComponent(c.slug)}?revision=${c.record.candidateRevisionId}` }] : []),
+          ],
         })),
       };
     }
@@ -388,7 +393,7 @@ export async function buildTab(tab, opts) {
  */
 export async function enumerateNoteImages(projectRoot, r2, opts = {}) {
   const { limit = null, concurrency = 8 } = opts;
-  let covers = enumerateNoteCovers(projectRoot);
+  let covers = enumerateNoteBodies(projectRoot);
   if (limit) covers = covers.slice(0, limit);
   const groups = await pMap(
     covers,

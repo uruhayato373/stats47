@@ -25,10 +25,11 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 const STATS = path.join(ROOT, ".local/r2/app/stats");
-const R2 = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
+const R2 = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
 
 /** ローカルミラー優先、無ければ R2 公開 URL (GET のみ・認証不要)。 */
 async function fetchValues(key) {

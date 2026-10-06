@@ -32,10 +32,11 @@
 
 const fs = require("node:fs");
 const path = require("node:path");
+const { R2_PUBLIC_BASE_URL } = require("../lib/site-config.cjs");
 
 const TOKEN = process.env.INSTAGRAM_ACCESS_TOKEN;
 const IG_USER_ID = process.env.INSTAGRAM_BUSINESS_ACCOUNT_ID;
-const PUBLIC_R2_BASE = process.env.IG_PUBLIC_R2_BASE || "https://storage.stats47.jp";
+const PUBLIC_R2_BASE = process.env.IG_PUBLIC_R2_BASE || R2_PUBLIC_BASE_URL;
 const STATE_DIR = path.resolve(__dirname, "../../state");
 const FORCE_DATE = process.env.IG_FORCE_DATE; // YYYY-MM-DD
 

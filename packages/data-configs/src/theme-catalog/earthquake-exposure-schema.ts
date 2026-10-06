@@ -1,4 +1,5 @@
 import { EARTHQUAKE_EXPOSURE_SOURCE as source } from './earthquake-exposure-source';
+import { NATIONAL_AREA_CODE } from '@stats47/area';
 
 export type EarthquakeBandKey = (typeof source.bands)[number]['key'];
 export interface EarthquakePopulationCounts {
@@ -109,7 +110,7 @@ const timestamp = (v: unknown): v is string =>
 const close = (a: number, b: number) => Math.abs(a - b) <= 0.0001;
 const countKeys = ['records', 'population2020', 'population2050'] as const;
 const areaName = (code: string) =>
-  code === '00000'
+  code === NATIONAL_AREA_CODE
     ? '全国'
     : source.populationSources.find((s) => s.areaCode === code)?.areaName;
 function counts(v: Record<string, unknown>) {
@@ -221,14 +222,14 @@ export function assertEarthquakePopulationSnapshot(
   for (const row of value.rows) {
     assertEarthquakePopulationRow(row);
     requireCondition(
-      row.areaCode !== '00000' && !codes.has(row.areaCode),
+      row.areaCode !== NATIONAL_AREA_CODE && !codes.has(row.areaCode),
       'Duplicate or national prefecture'
     );
     codes.add(row.areaCode);
   }
   assertEarthquakePopulationRow(value.national);
   requireCondition(
-    value.national.areaCode === '00000',
+    value.national.areaCode === NATIONAL_AREA_CODE,
     'Missing national total'
   );
   const snapshot = value as unknown as EarthquakePopulationSnapshot;
@@ -280,7 +281,7 @@ export function assertEarthquakePrefArtifact(
   header(value);
   assertEarthquakePopulationRow(value.row);
   requireCondition(
-    value.row.areaCode === code && code !== '00000',
+    value.row.areaCode === code && code !== NATIONAL_AREA_CODE,
     'Wrong intermediate area'
   );
 }
@@ -382,7 +383,7 @@ export function assertEarthquakeManifest(
     object(ref, ['areaCode', 'key', 'sha256', 'bytes']);
     requireCondition(
       typeof ref.areaCode === 'string' &&
-        ref.areaCode !== '00000' &&
+        ref.areaCode !== NATIONAL_AREA_CODE &&
         areaName(ref.areaCode) &&
         !areas.has(ref.areaCode),
       'Duplicate intermediate'

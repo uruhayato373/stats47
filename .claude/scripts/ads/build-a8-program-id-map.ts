@@ -15,14 +15,15 @@
  *   取り込み (normalize-a8-csv.mjs → crossCheckAgainstSite / toResultsRecords) は共用 ID も対応表で拾ったうえで
  *   「両サイト合算」として別扱いにするので、対応表から外すとサイト合計との突き合わせが崩れる。
  *   2 つの一覧は doboku-note 側の定義を見て人が決める (別リポジトリなので CI から自動で読めない)。
- * 出力: .claude/config/a8-report-automation.json の a8.programIdMap。値は広告 ID を名前順に "+" でつないだもの。
+ * 出力: config/a8-report-automation.json の a8.programIdMap。値は広告 ID を名前順に "+" でつないだもの。
  *   ファイル全体を整形し直さないよう、programIdMap の節だけを差し替える。
  */
 import { readFileSync, writeFileSync } from "node:fs";
 
 import { AFFILIATE_ADS } from "../../../apps/web/scripts/affiliate-ads-data";
+import { A8_REPORT_AUTOMATION } from "../../../config/paths.mjs";
 
-const CONFIG = ".claude/config/a8-report-automation.json";
+const CONFIG = A8_REPORT_AUTOMATION;
 const MID = /mid=(s\d{14})/g;
 const A8_REF = /^a8:(s\d{14})$/;
 

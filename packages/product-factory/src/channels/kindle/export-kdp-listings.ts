@@ -1,6 +1,6 @@
 /**
  * KINDLE_BOOKS と検証対象の版から、未公開の入稿提案を生成する。
- * 公開台帳 (.claude/config/kdp-listings.json) は参照のみ。過去の公開記録を提案内に保持する。
+ * 公開台帳 (config/kdp-listings.json) は参照のみ。過去の公開記録を提案内に保持する。
  *
  * CLI: npm run products:kindle:kdp-listings --workspace=@stats47/product-factory -- --version <版> [--id K-S1-01]
  * .local/kindle-listing-revisions/<版>.json (--id 指定時は <版>.<id>.json) を上書き禁止で作成する。--apply は禁止。
@@ -14,9 +14,11 @@ import { kdpCategoriesFor } from "./kdp-category";
 import { KDP_AI_DISCLOSURE, KDP_APPLY_DRM } from "./kdp-publishing-policy";
 import { assertBookVersion } from "./build-book";
 import { authoredBookSha256 } from "./revision-evidence";
+import { KDP_LISTINGS } from "../../../../../config/paths.mjs";
+import { SITE } from "@stats47/data-configs";
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../../..");
-const OUT = join(REPO_ROOT, ".claude/config/kdp-listings.json");
+const OUT = join(REPO_ROOT, KDP_LISTINGS);
 const BOOKS_ROOT = join(REPO_ROOT, ".local/kindle-books");
 
 interface KdpListing {
@@ -138,7 +140,7 @@ function buildDescription(concept: string): string {
     `統計の比較を図表と解説でたどり、値の違いを読むために対象地域・分母・収録年を確認します。県別の概況を個人の属性や地域内の状況と混同せず、データだけでは断定できないことも整理しています。\n\n` +
     `【データについて】\n` +
     `e-Stat（政府統計の総合窓口）などの公的データをもとに編集しています。収録年・母集団・集計方法は指標ごとに異なり、将来推計や過去の観測値を含みます。国・府省・自治体や e-Stat の公認・推奨を示すものではありません。\n\n` +
-    `基準年固定の内容で、自動更新や最新値の保証はありません。出典を確認するための情報を巻末にまとめています。関連指標は姉妹サイト stats47.jp（統計で見る都道府県）でもご覧いただけます。`
+    `基準年固定の内容で、自動更新や最新値の保証はありません。出典を確認するための情報を巻末にまとめています。関連指標は姉妹サイト ${SITE.domain}（${SITE.name}）でもご覧いただけます。`
   );
 }
 

@@ -21,6 +21,7 @@ import path from "node:path";
 import fs from "node:fs";
 import { fileURLToPath } from "node:url";
 import { ProxyAgent } from "undici";
+import { ESTAT_META_INFO_URL } from "../lib/estat-catalog/endpoints.cjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const PROJECT_ROOT = path.resolve(path.dirname(__filename), "..", "..", "..");
@@ -56,7 +57,7 @@ if (listPath) {
 const proxyUrl = process.env.HTTPS_PROXY || process.env.HTTP_PROXY;
 const fetchOpts = proxyUrl ? { dispatcher: new ProxyAgent(proxyUrl) } : {};
 
-const BASE_URL = "https://api.e-stat.go.jp/rest/3.0/app/json/getMetaInfo";
+const BASE_URL = ESTAT_META_INFO_URL;
 const OUT_DIR = path.join(PROJECT_ROOT, ".claude/state/estat/meta");
 const DELAY_MS = 500;
 

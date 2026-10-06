@@ -10,6 +10,7 @@ import {
   type EventLabel,
   type InterpolatedBarItem,
 } from "../../utils/bar-chart-race";
+import { SITE } from "@stats47/types";
 
 // ---------------------------------------------------------------------------
 // Types
@@ -196,7 +197,7 @@ export const BarChartRaceScene: React.FC<BarChartRaceSceneProps> = ({
               letterSpacing: 2,
             }}
           >
-            統計で見る都道府県
+            {SITE.name}
           </div>
         </div>
 

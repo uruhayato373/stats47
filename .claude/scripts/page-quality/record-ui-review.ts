@@ -24,6 +24,7 @@ import {
   validateReview,
 } from "./lib/ui-report";
 import type { Violation } from "./types";
+import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 
 const CI_DIR = ".local/ci/page-quality";
 
@@ -95,7 +96,7 @@ function main() {
     reviewError,
     coverageGap,
     input,
-    screenshotBaseUrl: process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp",
+    screenshotBaseUrl: process.env.R2_PUBLIC_FETCH_URL ?? R2_PUBLIC_BASE_URL,
     keyOf: (template, device) => `${SCREENSHOT_PREFIX}/${date}/${template}-${device}.webp`,
   });
   const alertOut = arg("--alert-out") ?? "/tmp/ui-review-alert.md";

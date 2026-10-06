@@ -35,6 +35,7 @@ import {
 import { buildOrganizationSchema } from "@/lib/structured-data/scripts";
 
 import { OPERATOR_PROFILE } from "@/config/operator-profile";
+import { CONTACT_FORM_URL, DEFAULT_OGP_IMAGE_PATH, SITE_NAME, SITE_ORIGIN } from "@/config/site";
 
 import type { Metadata } from "next";
 
@@ -56,7 +57,7 @@ function AboutSection({ title, children }: AboutSectionProps) {
 
 const EXTERNAL_LINKS = {
   eStat: "https://www.e-stat.go.jp/",
-  contactForm: "https://forms.gle/ZYi7Rmk4Kt9qZCXB8",
+  contactForm: CONTACT_FORM_URL,
 } as const;
 
 const TEXT_STYLE = "text-xs leading-relaxed md:text-sm";
@@ -74,9 +75,9 @@ export const metadata: Metadata = {
     description:
       "元県庁職員が AI を独学し、転職・独立して運営する統計可視化サイト。公的統計を正確・中立に届ける編集方針。",
     type: "website",
-    url: "https://stats47.jp/about",
+    url: `${SITE_ORIGIN}/about`,
     // og:image を静的 /og-image.jpg で明示 (未指定だと og:image 欠落 = SNS カード無画像)。
-    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "このサイトについて" }],
+    images: [{ url: DEFAULT_OGP_IMAGE_PATH, width: 1200, height: 630, alt: "このサイトについて" }],
   },
 };
 
@@ -98,7 +99,7 @@ export default function AboutPage() {
     },
     about: {
       "@type": "Organization",
-      name: "統計で見る都道府県",
+      name: SITE_NAME,
       url: baseUrl,
     },
     inLanguage: "ja",

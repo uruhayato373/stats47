@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 // 全ブログ SVG を取得し構造シグネチャで分類する（共通化候補の発見）
-const R2 = "https://storage.stats47.jp";
+import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+
+const R2 = R2_PUBLIC_BASE_URL;
 
 async function fetchText(u){const r=await fetch(u);if(!r.ok)throw new Error(`${r.status} ${u}`);return r.text();}
 async function pMap(items,fn,c){const out=[];let i=0;async function w(){while(i<items.length){const k=i++;try{out[k]=await fn(items[k]);}catch(e){out[k]={error:String(e.message)};}}}await Promise.all(Array.from({length:Math.min(c,items.length)},w));return out;}

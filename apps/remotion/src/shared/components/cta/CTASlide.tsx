@@ -2,6 +2,7 @@ import React from "react";
 import { AbsoluteFill } from "remotion";
 
 import { BRAND, COLOR_SCHEMES, FONT, SPACING, type ThemeName } from "../../themes/brand";
+import { SITE } from "@stats47/types";
 
 interface CTASlideProps {
   /** メインの呼びかけテキスト */
@@ -21,7 +22,7 @@ interface CTASlideProps {
 export const CTASlide: React.FC<CTASlideProps> = ({
   headline = "もっと詳しく知りたい方は",
   subtext = "47都道府県の統計データを\nわかりやすく比較・分析",
-  siteUrl = "stats47.jp",
+  siteUrl = SITE.domain,
   theme = "dark",
 }) => {
   const colors = COLOR_SCHEMES[theme];

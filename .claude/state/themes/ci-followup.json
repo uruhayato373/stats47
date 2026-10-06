@@ -1,14 +1,24 @@
 {
   "schemaVersion": 1,
-  "observedAt": "2026-10-01",
-  "status": "pass",
+  "observedAt": "2026-10-05",
+  "status": "fail",
   "themeCount": 55,
   "runtime": {
     "expected": 110,
     "checked": 110,
-    "failed": 0
+    "failed": 1
   },
-  "problems": [],
+  "problems": [
+    "consumer-prices/1440:TimeoutError: locator.waitFor: Timeout 15000ms exceeded.\nCall log:\n  - waiting for locator('h1').first() to be visible\n",
+    "consumer-prices/1440:http:503",
+    "consumer-prices/1440:incomplete-html",
+    "consumer-prices/1440:invalid-heading",
+    "consumer-prices/1440:missing-chart:theme-cpi-heatmap",
+    "consumer-prices/1440:missing-chart:theme-cpi-profile",
+    "consumer-prices/1440:network:503",
+    "consumer-prices/1440:prefecture-selector",
+    "runtime-process:1"
+  ],
   "checkpoints": [
     {
       "experimentId": "THEME-EXP-001",
@@ -674,8 +684,8 @@
       "verdict": "pending"
     }
   ],
-  "alertBody": "# テーマ継続確認\n\n結果: `.claude/state/themes/ci-followup.json`。HTML・応答・cf-ray・スクリーンショットは実行runのtheme-followup-evidence artifactを参照。\n再現: `node --import tsx .claude/scripts/themes/audit-theme-runtime.ts` と `npm run theme:portfolio:audit`。\n",
-  "reviewInputSha256": "d254b8f4029e23b72c595713d45f5bacd87ddd5a893c4ba18ba277ac33a3ca61",
+  "alertBody": "# テーマ継続確認\n- consumer-prices/1440:TimeoutError: locator.waitFor: Timeout 15000ms exceeded.\nCall log:\n  - waiting for locator('h1').first() to be visible\n\n- consumer-prices/1440:http:503\n- consumer-prices/1440:incomplete-html\n- consumer-prices/1440:invalid-heading\n- consumer-prices/1440:missing-chart:theme-cpi-heatmap\n- consumer-prices/1440:missing-chart:theme-cpi-profile\n- consumer-prices/1440:network:503\n- consumer-prices/1440:prefecture-selector\n- runtime-process:1\n\n結果: `.claude/state/themes/ci-followup.json`。HTML・応答・cf-ray・スクリーンショットは実行runのtheme-followup-evidence artifactを参照。\n再現: `node --import tsx .claude/scripts/themes/audit-theme-runtime.ts` と `npm run theme:portfolio:audit`。\n",
+  "reviewInputSha256": "a784c316f76fcfcee8853b5b4a8c019507ae01e38b536a33f9cb05e85999978e",
   "reviewRequired": true,
-  "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/36815276766"
+  "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/37263232400"
 }

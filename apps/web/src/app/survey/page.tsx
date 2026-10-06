@@ -17,6 +17,8 @@ import { FooterAdSlot } from "@/features/ads";
 
 import { generateOGMetadata } from "@/lib/metadata/og-generator";
 
+import { DEFAULT_OGP_IMAGE_PATH } from "@/config/site";
+
 import type { Metadata } from "next";
 
 
@@ -37,7 +39,7 @@ export function generateMetadata(): Metadata {
     title,
     description,
     alternates: { canonical: "/survey" },
-    ...generateOGMetadata({ title, description, imageUrl: "/og-image.jpg" }),
+    ...generateOGMetadata({ title, description, imageUrl: DEFAULT_OGP_IMAGE_PATH }),
   };
 }
 

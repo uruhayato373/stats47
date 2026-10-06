@@ -1,6 +1,7 @@
 import React from "react";
 
 import { IG_FONT, IG_SERIES, type IgSeriesId } from "./tokens";
+import { SITE } from "@stats47/types";
 
 interface IgSeriesFooterProps {
   series: IgSeriesId;
@@ -39,7 +40,7 @@ export const IgSeriesFooter: React.FC<IgSeriesFooterProps> = ({
         color: palette.inkSmall,
       }}
     >
-      <span>{"stats47.jp　統計で見る都道府県"}</span>
+      <span>{`${SITE.domain}　${SITE.name}`}</span>
       <span>出典: {sourceLabel}</span>
     </div>
   );

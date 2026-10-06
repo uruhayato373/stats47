@@ -14,7 +14,7 @@ metadata:
 - agent `coconala-operator` / skill `/coconala-publish` / scripts `.claude/scripts/coconala/`
   (`login.mjs`→初回手動ログイン / `capture-account.mjs`→userId取得 / `discover-categories.mjs`→カテゴリ実value取得 /
   `coconala-{publish,edit,delete-draft}.mjs` + `lib/coconala-{session,form}.mjs`)
-- 出品内容SoT=`.claude/config/coconala-listings.json`(product id別)、アカウント=`coconala-account.json`
+- 出品内容SoT=`config/coconala-listings.json`(product id別)、アカウント=`coconala-account.json`
   (期待ID・表示名は同configのみを参照 / profile=`.local/playwright-coconala-profile`)。
 - 商品設計の上流SSOT=`packages/product-factory`(174商品)。規約=`.claude/rules/coconala-product-standards.md §6`
   (2026-07-23に「出品自動化しない」→「フォーム入力は自動化・実公開`--commit`とログインは人間工程」へ改訂)。

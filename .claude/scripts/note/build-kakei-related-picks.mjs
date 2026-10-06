@@ -26,11 +26,12 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 const DOCS = path.join(ROOT, "docs/31_note記事原稿");
 const CATALOG_PATH = path.join(ROOT, ".claude/scripts/note/catalog/data/stats47-note.ts");
-const R2 = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
+const R2 = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
 
 const BLOCK_RE = /\{\n(?:[^{}]*\n)*?\s*key: "(a-kakei-[a-z]+)",[\s\S]*?\n  \},/g;
 

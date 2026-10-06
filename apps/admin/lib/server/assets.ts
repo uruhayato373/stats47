@@ -94,7 +94,7 @@ export async function getAssetTab(
   const meta = ASSET_TABS.find((t) => t.id === tab);
   if (!meta) throw new Error(`unknown asset tab: ${tab}`);
   const root = projectRoot();
-  const base = { limit, all, site: SITE, r2: R2_BASE, projectRoot: root };
+  const base = { limit, all, site: SITE, r2: R2_BASE, projectRoot: root, privateNoteCovers: true };
   if (meta.kind === "local-pilot") return { tab, label: meta.label, ...enumeratePilot() };
   if (meta.kind === "ogp") return { tab, label: meta.label, ...(await buildTab(tab, base)) };
   if (meta.kind === "note-image") {
@@ -151,7 +151,7 @@ export async function checkAssets(
   ];
   const result: Record<string, unknown> = {};
   await pMap(urls, async (u) => {
-    result[u] = await probe(u);
+    result[u] = await probe(u.startsWith('/note-cover/') ? `http://127.0.0.1:${process.env.PORT ?? '4747'}${u}` : u);
   });
   return { checked: urls.length, result };
 }

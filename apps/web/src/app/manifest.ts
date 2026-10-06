@@ -19,6 +19,10 @@
 
 import { MetadataRoute } from "next";
 
+import { BRAND } from "@/features/ogp/brand";
+
+import { SITE_DESCRIPTION, SITE_NAME } from "@/config/site";
+
 /**
  * PWAマニフェスト生成関数
  *
@@ -26,14 +30,13 @@ import { MetadataRoute } from "next";
  */
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "統計で見る都道府県",
+    name: SITE_NAME,
     short_name: "統計都道府県",
-    description:
-      "あなたの県は何位？年収・人口・消費量から教育・医療まで、1,800以上の統計で47都道府県をランキング。地図やグラフで地域の特徴をわかりやすく可視化します。",
+    description: SITE_DESCRIPTION,
     start_url: "/",
     display: "standalone",
     background_color: "#ffffff",
-    theme_color: "#304BC6",
+    theme_color: BRAND.primary,
     icons: [
       {
         src: "/favicon.svg",

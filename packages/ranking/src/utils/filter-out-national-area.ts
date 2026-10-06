@@ -1,3 +1,5 @@
+import { NATIONAL_AREA_CODE } from "@stats47/area";
+
 /**
  * 全国データと市区町村データを除外し、都道府県データのみ残す
  *
@@ -17,7 +19,7 @@ export function filterOutNationalArea<T extends { areaCode: string }>(data: T[])
     }
     // 後方互換: 5桁で XX000 形式の場合も都道府県として扱う
     if (/^\d{2}000$/.test(code)) {
-      return code !== "00000";
+      return code !== NATIONAL_AREA_CODE;
     }
     return false;
   });

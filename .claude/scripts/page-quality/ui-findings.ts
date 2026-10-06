@@ -30,6 +30,7 @@ import {
   type UiFinding,
   type UiFindingStatus,
 } from "./lib/ui-findings";
+import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 
 const require = createRequire(join(PROJECT_ROOT, "package.json"));
 const { parseBacklog } = require("./.claude/scripts/lib/backlog-lib.cjs") as {
@@ -38,7 +39,7 @@ const { parseBacklog } = require("./.claude/scripts/lib/backlog-lib.cjs") as {
 
 const QUEUE_PATH = join(PROJECT_ROOT, ".claude/state/page-quality/ui-findings-queue.json");
 const BACKLOG_PATH = join(PROJECT_ROOT, ".claude/todo/backlog.md");
-const SCREENSHOT_BASE_URL = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
+const SCREENSHOT_BASE_URL = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
 
 interface QueueFile {
   generatedAt: string;

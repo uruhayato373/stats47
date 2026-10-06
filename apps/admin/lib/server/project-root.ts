@@ -3,6 +3,8 @@ import "server-only";
 import fs from "node:fs";
 import path from "node:path";
 
+import { SITE as SITE_CONFIG } from "@stats47/types";
+
 /**
  * モノレポルートの解決 (旧 server.mjs の PROJECT_ROOT = path.resolve(__dirname, "../../..") 相当)。
  *
@@ -69,7 +71,7 @@ export function galleryStatePath(): string {
 
 /** R2 公開ベース URL (旧 R2_BASE)。 */
 export const R2_BASE =
-  process.env.SNS_R2_BASE || process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
+  process.env.SNS_R2_BASE || process.env.R2_PUBLIC_FETCH_URL || SITE_CONFIG.r2PublicBaseUrl;
 
 /** 本番サイト origin (旧 SITE)。 */
-export const SITE = process.env.SITE_ORIGIN || "https://stats47.jp";
+export const SITE = process.env.SITE_ORIGIN || SITE_CONFIG.origin;

@@ -4,7 +4,7 @@ import { createHash } from 'node:crypto';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 
-import { fetchPrefectures } from '@stats47/area';
+import { fetchPrefectures, to5DigitPrefCode } from '@stats47/area';
 import {
   FLOOD_ARCHIVES,
   assertFloodArchiveKeys,
@@ -349,7 +349,7 @@ function auditPublicFacility(): void {
     assertArtifactEvidence(evidence, sourceBody);
     if (
       source.slug !== slug ||
-      source.areaCode !== `${pin.pref}000` ||
+      source.areaCode !== to5DigitPrefCode(pin.pref) ||
       source.facilities.length !== evidence.recordCount ||
       source.facilities.some((point) => !point[2].startsWith(pin.pref))
     )

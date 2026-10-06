@@ -15,8 +15,9 @@
 import { google } from "googleapis";
 import { resolveServiceAccountKeyFile, toCsv } from "./lib/auth.mjs";
 import { buildGscQuery } from "./lib/gsc-query.mjs";
+import { GSC_PROPERTY } from "../lib/site-config.cjs";
 
-const SITE_URL = "sc-domain:stats47.jp";
+const SITE_URL = GSC_PROPERTY;
 const SCOPES = ["https://www.googleapis.com/auth/webmasters.readonly"];
 const METRICS = ["clicks", "impressions", "ctr", "position"];
 

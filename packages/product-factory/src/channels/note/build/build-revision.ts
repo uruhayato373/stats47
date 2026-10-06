@@ -7,6 +7,8 @@ import { CANONICAL_ARTICLES } from '../article-plan';
 import type { NoteArticlePlan } from '../types';
 import { scanText } from '../validators/claims';
 import { readFreeSampleDelivery } from '../../../build/free-sample-delivery';
+import { COCONALA_LISTINGS } from '../../../../../../config/paths.mjs';
+import { SITE } from '@stats47/data-configs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../../../../../..');
 const hash = (bytes: Buffer | string): string => createHash('sha256').update(bytes).digest('hex');
@@ -23,7 +25,7 @@ interface PackEvidence {
 }
 
 function preparationListings(root: string): Record<string, Listing> {
-  const listings = JSON.parse(readFileSync(join(root, '.claude/config/coconala-listings.json'), 'utf8')) as { listings: Record<string, Listing> };
+  const listings = JSON.parse(readFileSync(join(root, COCONALA_LISTINGS), 'utf8')) as { listings: Record<string, Listing> };
   const free = readFreeSampleDelivery(root);
   return { ...listings.listings, ...(free ? { 'P-13': free } : {}) };
 }
@@ -92,7 +94,7 @@ function renderPreparation(article: NoteArticlePlan, listing: Listing | undefine
       'CSVを編集してもPDF・PNGや他の同梱ファイルが自動更新される機能はありません。Officeファイルの有無は上記の納品範囲を確認してください。', '',
       '## 収録指標の表記例', ...evidence.rows[0].slice(2, 7).map(header => `- ${header}`));
   }
-  lines.push('', '## 関連する無料データ', ...article.stats47Targets.map(target => `- [stats47 ${target}](https://stats47.jp${target})`));
+  lines.push('', '## 関連する無料データ', ...article.stats47Targets.map(target => `- [stats47 ${target}](${SITE.origin}${target})`));
   if (article.access === 'paid') lines.push('', '<!-- paid:start -->', '', '## 添付候補と検証経路',
     'attachments.jsonには固定納品版の参照パス・SHA-256・容量を記録しています。未検証の添付は公開しません。',
     'source-manifest.jsonには同じ版のSOURCES.csv全行とファイル検証記録を保存しています。');

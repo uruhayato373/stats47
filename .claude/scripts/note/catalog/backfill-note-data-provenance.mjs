@@ -25,10 +25,11 @@ import { readFileSync, writeFileSync, mkdirSync } from "fs";
 import { resolve, join, dirname } from "path";
 import { fileURLToPath } from "url";
 import { tmpdir } from "os";
+import { R2_PUBLIC_BASE_URL } from "../../lib/site-config.cjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "../../../..");
-const R2 = "https://storage.stats47.jp";
+const R2 = R2_PUBLIC_BASE_URL;
 const STAGE = join(ROOT, ".local/r2");
 const REPORT = join(process.env.SCRATCHPAD || tmpdir(), "note-provenance-backfill.json");
 

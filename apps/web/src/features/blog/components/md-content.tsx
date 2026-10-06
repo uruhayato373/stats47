@@ -30,7 +30,10 @@ import {
     BLOG_ARTICLE_INLINE,
 } from "@/lib/google-adsense";
 
+import { R2_PUBLIC_BASE_URL } from "@/config/site";
+
 import { buildHeadingSlug } from "../lib/heading-slug";
+import { blogR2Key } from "../r2-key";
 import { type InlineAffiliateBanner } from "../utils";
 
 import { Callout } from "./Callout";
@@ -141,7 +144,7 @@ function makeMdComponents(
             const altText = typeof alt === "string" ? alt : "";
             const resolvedSrc =
                 slug && !src.startsWith("http") && !src.startsWith("/")
-                    ? `https://storage.stats47.jp/app/blog/${slug}/${src}`
+                    ? `${R2_PUBLIC_BASE_URL}/${blogR2Key(slug, src)}`
                     : src;
             const isSvg = resolvedSrc.endsWith(".svg");
             return (

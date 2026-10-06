@@ -2,6 +2,7 @@ import { ListObjectsV2Command } from '@aws-sdk/client-s3';
 
 import { getS3Client } from '../../lib/clients/get-s3-client';
 import inventory from './license-retention-20260905.json';
+import { SITE } from '@stats47/types';
 
 export interface RetentionObject {
   key: string;
@@ -36,7 +37,7 @@ export async function listLicenseRetentionObjects(prefixes: readonly string[]): 
     let cursor: string | undefined;
     do {
       const response = await client.send(new ListObjectsV2Command({
-        Bucket: 'stats47', Prefix: prefix, ContinuationToken: cursor,
+        Bucket: SITE.r2Bucket, Prefix: prefix, ContinuationToken: cursor,
       }));
       for (const object of response.Contents ?? []) {
         if (!object.Key || object.Size === undefined || !object.ETag) {

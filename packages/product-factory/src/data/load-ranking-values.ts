@@ -7,8 +7,9 @@
  */
 import { PREFECTURE_CODES5, toCode5 } from "./prefectures";
 import { pathToFileURL } from "node:url";
+import { SITE } from "@stats47/data-configs";
 
-const R2_BASE = process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp";
+const R2_BASE = process.env.R2_PUBLIC_FETCH_URL ?? SITE.r2PublicBaseUrl;
 
 interface RankingValueRecord {
   readonly areaCode: string;

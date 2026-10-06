@@ -2,10 +2,11 @@ import { GONE_RANKING_KEYS } from "@stats47/ranking/config";
 
 import type { BlogSnapshot, SnapshotArticle } from "../../src/features/blog/types/snapshot";
 import { excludeGoneBlogArticles } from "../../src/features/blog/utils/exclude-gone-blog-articles";
+import { SITE } from "@stats47/types";
 
 type MutableEnvironment = Record<string, string | undefined>;
 
-const PUBLIC_R2_BASE_URL = "https://storage.stats47.jp";
+const PUBLIC_R2_BASE_URL = SITE.r2PublicBaseUrl;
 
 /**
  * deploy prebuildの子processだけで、GitHub secret名をR2 readerの正規名へ写す。

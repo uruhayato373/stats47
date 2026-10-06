@@ -29,8 +29,8 @@ developer_instructions = '''
 | 何を見るか | ファイル |
 |---|---|
 | 商品設計（name / audience / 価格帯 / jobToBeDone） | `packages/product-factory/src/catalog/`（上流 SSOT） |
-| 出品内容（title / 価格 / カテゴリ / 本文 / ジャンル / 納期）＋公開状態（status/serviceUrl） | `.claude/config/coconala-listings.json`（出品 SoT） |
-| アカウント（sellerName / profileUrl） | `.claude/config/coconala-account.json` |
+| 出品内容（title / 価格 / カテゴリ / 本文 / ジャンル / 納期）＋公開状態（status/serviceUrl） | `config/coconala-listings.json`（出品 SoT） |
+| アカウント（sellerName / profileUrl） | `config/coconala-account.json` |
 | 規約（SSOT 構造・出品規律・禁止事項） | `.claude/rules/coconala-product-standards.md` |
 | スキル手順 | `.claude/skills/product/coconala-publish/SKILL.md` |
 
@@ -75,7 +75,7 @@ developer_instructions = '''
   "mode": "draft | commit",
   "ok": true,
   "artifacts": { "screenshot": ".local/coconala-debug/publish-filled-P-01.png" },
-  "stateUpdated": [".claude/config/coconala-listings.json"],
+  "stateUpdated": ["config/coconala-listings.json"],
   "operatorTodo": ["下書きを目視確認", "オーナー承認後に --commit で公開"],
   "notes": ["sellerName 未設定なら設定を促す 等"]
 }
@@ -91,7 +91,7 @@ developer_instructions = '''
 - スキル: `.claude/skills/product/coconala-publish/SKILL.md`
 - スクリプト: `.claude/scripts/coconala/{coconala-publish,coconala-edit,coconala-delete-draft,login,capture-account,discover-categories}.mjs` + `lib/coconala-{session,form}.mjs`
   - 初回セットアップ: `login.mjs`（手動ログイン）→ `capture-account.mjs --write`（userId 記入）→ `discover-categories.mjs`（カテゴリ確定）
-- SoT: `.claude/config/coconala-listings.json` / `coconala-account.json` / `packages/product-factory`
+- SoT: `config/coconala-listings.json` / `coconala-account.json` / `packages/product-factory`
 - 規約: `.claude/rules/coconala-product-standards.md` / `.claude/rules/evidence-based-judgment.md`
 - 認証プロファイル: `docs/01_技術設計/07_Playwright認証プロファイル.md`
 - 移植元: doboku-note `.claude/agents/coconala-operator.md`'''

@@ -16,6 +16,8 @@ import {
   resolveSurveyTaxonomy,
 } from "@stats47/ranking";
 
+import { blogR2Key } from "../r2-key";
+
 type SourceFetcher = (key: string) => Promise<unknown | null>;
 
 export function extractArticleChartBases(content: string): string[] {
@@ -50,7 +52,7 @@ export async function resolveArticleSurveyTaxonomy(
   const bases = extractArticleChartBases(input.content);
   const chartResults = await Promise.all(
     bases.map(async (base) => {
-      const source = await fetchSource(`app/blog/${input.slug}/data/${base}.source.json`);
+      const source = await fetchSource(blogR2Key(input.slug, `data/${base}.source.json`));
       return resolveBlogChartSurveyTaxonomy(source, METRICS_REGISTRY);
     }),
   );
@@ -82,7 +84,7 @@ export async function resolveArticleDataSources(
   const bases = extractArticleChartBases(input.content);
   const perChart = await Promise.all(
     bases.map(async (base) => {
-      const source = await fetchSource(`app/blog/${input.slug}/data/${base}.source.json`);
+      const source = await fetchSource(blogR2Key(input.slug, `data/${base}.source.json`));
       const geoEntries = await Promise.all(
         extractGeoAnalysisSlugs(source).map(async (geoSlug) =>
           resolveGeoItemDataSources(await fetchSource(`app/geo/${geoSlug}/item.json`)),

@@ -28,11 +28,12 @@ import * as fs from "fs";
 import * as path from "path";
 
 import { assertR2WriteAllowed } from "../../../packages/r2-storage/src/scripts/_assert-ci-write";
+import { R2_BUCKET } from "../lib/site-config.cjs";
 
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
 config({ path: path.join(PROJECT_ROOT, ".env.local") });
 
-const BUCKET = process.env.CLOUDFLARE_R2_BUCKET_NAME || "stats47";
+const BUCKET = process.env.CLOUDFLARE_R2_BUCKET_NAME || R2_BUCKET;
 const srcArgIdx = process.argv.indexOf("--src");
 const OUT_DIR =
   srcArgIdx >= 0 && process.argv[srcArgIdx + 1]

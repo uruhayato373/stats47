@@ -4,6 +4,7 @@ import type { Feature, Geometry } from "geojson";
 
 import { createChoroplethColorMapper } from "../../d3/utils/color-scale/create-choropleth-color-mapper";
 import type { MapVisualizationConfig, MapDataPoint } from "../../d3/types/map-chart";
+import { DEFAULT_PREFECTURE_MAP_PROPS } from "../../d3/constants/map-constants";
 
 /**
  * 既存の createChoroplethColorMapper を Leaflet GeoJSON の style 関数に変換
@@ -36,7 +37,7 @@ export function useChoroplethStyle(
         if (cancelled) return;
         setStyleFactory(() => (feature?: Feature<Geometry>): PathOptions => {
           if (!feature) {
-            return { fillColor: "#e0e0e0", fillOpacity: 0.95, color: borderColor, weight: 0.5 };
+            return { fillColor: DEFAULT_PREFECTURE_MAP_PROPS.noDataFillColor, fillOpacity: 0.95, color: borderColor, weight: 0.5 };
           }
           const code = codeExtractor(feature);
           return {

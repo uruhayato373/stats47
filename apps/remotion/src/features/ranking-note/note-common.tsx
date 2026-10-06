@@ -10,6 +10,7 @@ import {
   type RankingEntry,
   type RankingMeta,
 } from "@/shared";
+import { PREFECTURE_TOPOJSON_FILE } from "../../shared/utils/static-files";
 
 /**
  * note ランキング記事の画像 4 枚 (cover / map / chart / boxplot) が共有する定義。
@@ -95,7 +96,7 @@ export function useNoteMapPaths(
     let cancelled = false;
     (async () => {
       try {
-        const res = await fetch(staticFile("prefecture.topojson"));
+        const res = await fetch(staticFile(PREFECTURE_TOPOJSON_FILE));
         const topology = (await res.json()) as Topology;
         if (cancelled) return;
         setPaths(

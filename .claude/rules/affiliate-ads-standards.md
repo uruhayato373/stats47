@@ -508,7 +508,7 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
 
 | 役割 | 場所 |
 |---|---|
-| 接続設定 (URL / セレクタ / サイト ID / timeout) | `.claude/config/affiliate-asp.json` |
+| 接続設定 (URL / セレクタ / サイト ID / timeout) | `config/affiliate-asp.json` |
 | サイト帰属の判定 (純関数・例外) | `.claude/scripts/ads/lib/asp-site-guard.mjs` (+ `__tests__/`) |
 | ブラウザ共通基盤 (永続 context / dump / mask) | `.claude/scripts/ads/lib/asp-browser-base.mjs` |
 | ASP 共通操作 (openAsp / ensureTargetSite) | `.claude/scripts/ads/lib/asp-browser.mjs` |
@@ -771,7 +771,7 @@ metric config (git TS SSOT) の title から機械導出する — 家計調査�
   cron `scripts/scheduled/scout-asp-weekly.sh` + `com.stats47.scout-asp-weekly.plist` /
   追記ゲート `.claude/scripts/ads/append-affiliate-ads.ts` / 申請上限 `.claude/scripts/ads/check-a8-apply-budget.cjs`
 - 3 ASP 提携運用 (§11): skill `.claude/skills/ads/affiliate-operate/SKILL.md` / agent `.claude/agents/affiliate-operator.md` /
-  設定 `.claude/config/affiliate-asp.json` / 台帳 `.claude/state/ads/affiliate-catalog.json` /
+  設定 `config/affiliate-asp.json` / 台帳 `.claude/state/ads/affiliate-catalog.json` /
   コア `.claude/scripts/ads/lib/{asp-browser-base,asp-browser,asp-site-guard}.mjs` (+ `__tests__/`) /
   実行 `.claude/scripts/ads/{affiliate-status,affiliate-apply,afb-scan}.mjs` /
   移植元 doboku-note `scripts/{lib/asp-*.mjs,affiliate-status.mjs,affiliate-apply.mjs,afb-scan.mjs}` (2026-07-28 移植)

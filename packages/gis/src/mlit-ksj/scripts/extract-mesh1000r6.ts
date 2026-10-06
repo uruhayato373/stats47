@@ -21,6 +21,7 @@ import * as os from "node:os";
 import unzipper from "unzipper";
 import { convertGeoJsonToTopoJson, saveTopoJson } from "../converter";
 import { buildMlitKsjLocalPath } from "../r2-path";
+import { PREFECTURE_AREA_CODES, to2DigitPrefCode } from "@stats47/area";
 
 interface UnzipperFile {
   path: string;
@@ -163,7 +164,7 @@ async function main() {
 
   const prefs = singlePref
     ? [singlePref.padStart(2, "0")]
-    : Array.from({ length: 47 }, (_, i) => String(i + 1).padStart(2, "0"));
+    : PREFECTURE_AREA_CODES.map(to2DigitPrefCode);
 
   const results: Array<{
     prefCode: string;

@@ -1,5 +1,7 @@
 ---
 paths:
+  - "data/note*/**"
+  - "config/**"
   - ".claude/{skills,state,todo,config}/**"
   - "docs/**"
   - "apps/web/scripts/export-*.ts"
@@ -15,6 +17,41 @@ paths:
 データの性質で保存先を厳格に分ける。**スキル実装・エージェントは以下の分類に従うこと**。
 
 判定軸: (a) 誰が読むか (app / agent / 人間)、(b) 何のために (CRUD / 振り返り / 計測ログ)。
+
+**note画像の運用台帳は例外として `data/note/` のgit管理JSON + JSON Schemaを採用する
+(2026-10-02 オーナー決定)。** 生成版・採用版・公開版と共有ストレージの所在を一元管理する。
+記事メタTSや監査履歴と二重に書かず、専用validatorとwriter/readerの切替を一組で実装する。
+詳細と移行状況は [note-image-assets.md](note-image-assets.md)。画像バイナリは台帳へ埋め込まない。
+
+## リポジトリ直下 `config/` `data/` と `.claude/` の区分 (2026-10-06)
+
+`.claude/` はエージェント運用の置き場であり、事業の台帳を置かない。git で管理するファイルは次の 4 つに分ける
+(doboku-note と同じ区分)。アプリが読む配信データは従来どおり git TS → R2 で、この 4 つとは別である。
+
+| 置き場 | 置くもの | 例 |
+|---|---|---|
+| `config/` | 事業の台帳と設定。人またはオペレーター用スクリプトが判断して変える値 | 販売チャネルの出品台帳とアカウント (`coconala-listings.json` / `kdp-listings.json` / `{coconala,kdp,note}-account.json`)、ココナラのプロフィール文面と画像 (`coconala-profile.ts` / `coconala/assets/`)、ASP の接続設定 (`affiliate-asp.json` / `a8-report-automation.json`)、管理画面の領域 (`domains.json`)、PSI の計測対象 (`psi-urls.txt`)、端末資源 (`local-resources.json`)、参考文献 vault (`source-vault.json`)、前年比バッチ (`yoy-batch.json`) |
+| `data/` | 事業の記録と、CI との受け渡し | `data/note/` (note 画像台帳)、`data/seo/` (キーワード改善サイクルの対象と記録)、`data/ai-content-staging/` (AI 解説の公開待ち) |
+| `.claude/state/` | エージェントと自動化の作業状態、計測の蓄積 | 下の「`.claude/` 配下のファイルに置くもの」の表 |
+| `.claude/config/` | 品質ゲートの基準・許可リスト・閾値、エージェント運用の方針、認証と環境変数の許可リスト | `*-baseline.json`、`quality-gates.json`、`backlog-routing-policy.json`、`auth-credentials.json` |
+
+- `.claude/config/` を `.claude/` の下に残すのは、そこが Claude Code の保護パスだからである。無人 run
+  (`--permission-mode dontAsk`) の Claude は `.claude/` に書き込めないので、エージェントが自分の品質ゲートを
+  黙って緩められない (2026-09-24 に計測サイクルの無人 run で書き込み拒否を実測)。
+- `config/` のファイルのパスは `config/paths.mjs` だけが持ち、コードは定数を import する (`.cjs` は require する)。
+  置き場を移したときに直書きが旧パスに残ると、読めずに黙って空を返すためである。直書き (部品に分けた
+  `path.join(".claude", "config", "x.json")` の形も含む) と定数の実在は
+  `packages/product-factory/tests/config-paths.test.ts` が検査する。静的な JSON import だけは定数を使えないが、
+  import 先の誤りは型検査で落ちる。
+- 新しい事業の台帳・設定は `config/` に置き、`config/paths.mjs` と `config/paths.d.mts` に定数を足す。
+- どのファイルが何のデータで、本来どこに置くかは台帳 `config/datasets.mjs` が持つ (1 行 1 データセット・種類・領域・本来の置き場)。
+  `npm run check-datasets` (PR CI) が、対象範囲 (`config/`・`data/`・`.claude/state` の計測と記録・skills の改善ログと計測
+  スナップショット・週次/月次レビュー) の追跡ファイルが台帳のちょうど 1 行に当たり、どの行も空でないことを検査する。
+  新しい記録は先に台帳へ 1 行足す。日付付きファイルの寿命は `prune-state-snapshots.mjs` の `RETENTION_POLICIES` だけが
+  数値を持ち、台帳は名前で参照する。
+- 計測・記録・改善のデータ (GSC・GA4・PSI・Cloudflare・アフィリエイト・売上と投稿の台帳・改善ログ・レビュー) は、
+  2026-10-06 時点でまだ `.claude/` にある。本来の置き場は `data/` で、台帳で現在地と食い違う行が移行対象
+  (`npm run check-datasets -- --moves`)。移行は backlog `DATA-LAYOUT-MOVE-01`。
 
 ## アプリが読むデータ (git TS が SSOT → R2 配信) — 「設定 + 運用エンティティ」
 
@@ -98,7 +135,7 @@ git TS 化し永続 D1 を全廃した。アプリが読む各データの真実
 | GSC カバレッジ是正キュー (404/soft404/5xx の A/B 分類・状態保持) | `.claude/state/gsc/{coverage-remediation-queue.json,LATEST.md,coverage-totals-history.csv}`（`build-coverage-queue.mjs` が生成。生 export は `coverage-drilldown/YYYY-Www/{category}-drilldown.csv`。正典 `.claude/skills/analytics/gsc-coverage-remediation/SKILL.md`、skill `/gsc-coverage-remediation`） |
 | e-Stat 年カバレッジ監査キュー (単年設定 metric の拡張候補) | `.claude/state/data/estat-year-coverage/{queue.json,LATEST.md}`（`estat-year-coverage-audit-weekly.yml` が週次で少しずつ巡回生成。正典 `.claude/rules/metric-config-standards.md`「years は最新年だけに絞らない」） |
 | 整合性監査マーカー (agent/skill/script ドリフトの監査済み記録) | `.claude/state/consistency/audited.json`（`check-agent-skill-consistency.cjs --mark-audited` が記録。Stop hook `check-consistency-on-stop.js` がこのハッシュと現在の変更を比較してゲート判定。skill `/audit-consistency`） |
-| PSI 日次計測（19 URL × mobile/desktop） | `.claude/state/metrics/psi/psi-batch-*.json`（最新1件を保持。長期履歴は `history.csv`、過去の生JSONはGit履歴から復元。GitHub Actions 日次 JST 02:00、閾値違反時 `[PSI Alert]` Issues 起票）/ URL リスト: `.claude/config/psi-urls.txt` / 閾値: `.claude/skills/analytics/performance-improvement/budgets.json` |
+| PSI 日次計測（19 URL × mobile/desktop） | `.claude/state/metrics/psi/psi-batch-*.json`（最新1件を保持。長期履歴は `history.csv`、過去の生JSONはGit履歴から復元。GitHub Actions 日次 JST 02:00、閾値違反時 `[PSI Alert]` Issues 起票）/ URL リスト: `config/psi-urls.txt` / 閾値: `.claude/skills/analytics/performance-improvement/budgets.json` |
 | Cloudflare 月次 snapshot JSON + budget 閾値・要約 | `.claude/skills/analytics/cloudflare-cost-improvement/reference/`（施策一覧は `.claude/todo/improvements.md`） |
 | GSC URL Inspection 日次詳細 | `.claude/state/metrics/gsc/url-inspection/YYYY-MM-DD.csv`（最新7件を保持。長期集計は同ディレクトリの `history.csv`） |
 | Cloudflare 日次 usage（D1/Workers/R2） | `.claude/state/metrics/cloudflare/{snapshots/YYYY-MM-DD.json,history.csv,LATEST.md}`（生JSONは最新30件を保持。GitHub Actions 日次 JST 02:30、閾値違反時 `[Cloudflare Alert]` Issues 起票）/ 閾値: `.claude/skills/analytics/cloudflare-cost-improvement/reference/budgets-daily.json` |

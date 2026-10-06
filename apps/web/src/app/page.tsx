@@ -26,6 +26,8 @@ import { FeaturedRankings } from '@/features/ranking/featured.server';
 
 import { ADSENSE_DISPLAY_ENABLED, RAIL_RECT } from '@/lib/google-adsense';
 
+import { DEFAULT_OGP_IMAGE_PATH, SITE_ALTERNATE_NAME, SITE_DESCRIPTION, SITE_NAME, SITE_ORIGIN } from '@/config/site';
+
 /**
  * 動的レンダリング（ランタイム SSR）を強制する。
  *
@@ -45,13 +47,12 @@ export const dynamic = 'force-dynamic';
  * - 各セクションは代表項目 + 「もっと見る」に抑え、home へ全件を詰めない。
  */
 export async function generateMetadata(): Promise<Metadata> {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://stats47.jp';
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || SITE_ORIGIN;
 
   const title = {
-    absolute: '統計で見る都道府県 | 47都道府県ランキング・データ比較',
+    absolute: `${SITE_NAME} | 47都道府県ランキング・データ比較`,
   };
-  const description =
-    'あなたの県は何位？年収・人口・消費量から教育・医療まで、1,800以上の統計で47都道府県をランキング。地図やグラフで地域の特徴をわかりやすく可視化します。';
+  const description = SITE_DESCRIPTION;
 
   return {
     title,
@@ -74,10 +75,10 @@ export async function generateMetadata(): Promise<Metadata> {
       description,
       type: 'website',
       url: baseUrl,
-      siteName: 'Stats47',
+      siteName: SITE_ALTERNATE_NAME,
       images: [
         {
-          url: `${baseUrl}/og-image.jpg`,
+          url: `${baseUrl}${DEFAULT_OGP_IMAGE_PATH}`,
           width: 1200,
           height: 630,
           alt: 'stats47 - 日本の地域データを探す・比べる・分析する',
@@ -89,7 +90,7 @@ export async function generateMetadata(): Promise<Metadata> {
       card: 'summary_large_image',
       title,
       description,
-      images: [`${baseUrl}/og-image.jpg`],
+      images: [`${baseUrl}${DEFAULT_OGP_IMAGE_PATH}`],
     },
     alternates: {
       canonical: '/',

@@ -83,6 +83,16 @@ export function colorByIndex(
   );
 }
 
+/** 多系列チャート (折れ線・積み上げ棒) のカラーセット。系列 index で循環させる */
+export const SERIES_COLORS: readonly string[] = [
+  "#1e88e5", // blue
+  "#e53935", // red
+  "#43a047", // green
+  "#fb8c00", // orange
+  "#8e24aa", // purple
+  "#00897b", // teal
+];
+
 /** 散布図のドット色（全県均一・地域差を意味づけないニュートラル色） */
 export const SCATTER_COLORS = {
   mid: { fill: '#64748b', stroke: '#475569' },

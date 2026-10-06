@@ -21,6 +21,7 @@ dotenvConfig({ path: path.resolve(__dirname, "../../../../.env.local") });
 const { ProxyAgent, fetch: undiciFetch } = require("undici");
 
 import type { GetStatsDataParams } from "../stats-data/types";
+import { SITE } from "@stats47/types";
 
 const DB_PATH = path.resolve(
   __dirname,
@@ -44,7 +45,7 @@ function parseArgs() {
 function getApiConfig() {
   const accountId = process.env.CLOUDFLARE_ACCOUNT_ID;
   const apiToken = process.env.CLOUDFLARE_API_TOKEN;
-  const bucket = process.env.CLOUDFLARE_R2_BUCKET_NAME || "stats47";
+  const bucket = process.env.CLOUDFLARE_R2_BUCKET_NAME || SITE.r2Bucket;
 
   if (!accountId || !apiToken) {
     throw new Error("環境変数が不足: CLOUDFLARE_ACCOUNT_ID, CLOUDFLARE_API_TOKEN");

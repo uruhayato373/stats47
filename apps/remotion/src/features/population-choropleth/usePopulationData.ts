@@ -7,8 +7,9 @@ import {
   computeSharedDomain,
   createSharedColorScale,
 } from "../../shared/utils/choropleth-diverging";
+import { SITE } from "@stats47/types";
 
-const R2_BASE = "https://storage.stats47.jp";
+const R2_BASE = SITE.r2PublicBaseUrl;
 
 const R2_URLS = {
   tokyoTopo: `${R2_BASE}/gis/mlit/20240101/13/13_city_dc.topojson`,

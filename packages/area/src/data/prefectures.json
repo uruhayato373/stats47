@@ -1,190 +1,237 @@
 [
   {
     "prefCode": "01000",
-    "prefName": "北海道"
+    "prefName": "北海道",
+    "romaji": "hokkaido"
   },
   {
     "prefCode": "02000",
-    "prefName": "青森県"
+    "prefName": "青森県",
+    "romaji": "aomori"
   },
   {
     "prefCode": "03000",
-    "prefName": "岩手県"
+    "prefName": "岩手県",
+    "romaji": "iwate"
   },
   {
     "prefCode": "04000",
-    "prefName": "宮城県"
+    "prefName": "宮城県",
+    "romaji": "miyagi"
   },
   {
     "prefCode": "05000",
-    "prefName": "秋田県"
+    "prefName": "秋田県",
+    "romaji": "akita"
   },
   {
     "prefCode": "06000",
-    "prefName": "山形県"
+    "prefName": "山形県",
+    "romaji": "yamagata"
   },
   {
     "prefCode": "07000",
-    "prefName": "福島県"
+    "prefName": "福島県",
+    "romaji": "fukushima"
   },
   {
     "prefCode": "08000",
-    "prefName": "茨城県"
+    "prefName": "茨城県",
+    "romaji": "ibaraki"
   },
   {
     "prefCode": "09000",
-    "prefName": "栃木県"
+    "prefName": "栃木県",
+    "romaji": "tochigi"
   },
   {
     "prefCode": "10000",
-    "prefName": "群馬県"
+    "prefName": "群馬県",
+    "romaji": "gunma"
   },
   {
     "prefCode": "11000",
-    "prefName": "埼玉県"
+    "prefName": "埼玉県",
+    "romaji": "saitama"
   },
   {
     "prefCode": "12000",
-    "prefName": "千葉県"
+    "prefName": "千葉県",
+    "romaji": "chiba"
   },
   {
     "prefCode": "13000",
-    "prefName": "東京都"
+    "prefName": "東京都",
+    "romaji": "tokyo"
   },
   {
     "prefCode": "14000",
-    "prefName": "神奈川県"
+    "prefName": "神奈川県",
+    "romaji": "kanagawa"
   },
   {
     "prefCode": "15000",
-    "prefName": "新潟県"
+    "prefName": "新潟県",
+    "romaji": "niigata"
   },
   {
     "prefCode": "16000",
-    "prefName": "富山県"
+    "prefName": "富山県",
+    "romaji": "toyama"
   },
   {
     "prefCode": "17000",
-    "prefName": "石川県"
+    "prefName": "石川県",
+    "romaji": "ishikawa"
   },
   {
     "prefCode": "18000",
-    "prefName": "福井県"
+    "prefName": "福井県",
+    "romaji": "fukui"
   },
   {
     "prefCode": "19000",
-    "prefName": "山梨県"
+    "prefName": "山梨県",
+    "romaji": "yamanashi"
   },
   {
     "prefCode": "20000",
-    "prefName": "長野県"
+    "prefName": "長野県",
+    "romaji": "nagano"
   },
   {
     "prefCode": "21000",
-    "prefName": "岐阜県"
+    "prefName": "岐阜県",
+    "romaji": "gifu"
   },
   {
     "prefCode": "22000",
-    "prefName": "静岡県"
+    "prefName": "静岡県",
+    "romaji": "shizuoka"
   },
   {
     "prefCode": "23000",
-    "prefName": "愛知県"
+    "prefName": "愛知県",
+    "romaji": "aichi"
   },
   {
     "prefCode": "24000",
-    "prefName": "三重県"
+    "prefName": "三重県",
+    "romaji": "mie"
   },
   {
     "prefCode": "25000",
-    "prefName": "滋賀県"
+    "prefName": "滋賀県",
+    "romaji": "shiga"
   },
   {
     "prefCode": "26000",
-    "prefName": "京都府"
+    "prefName": "京都府",
+    "romaji": "kyoto"
   },
   {
     "prefCode": "27000",
-    "prefName": "大阪府"
+    "prefName": "大阪府",
+    "romaji": "osaka"
   },
   {
     "prefCode": "28000",
-    "prefName": "兵庫県"
+    "prefName": "兵庫県",
+    "romaji": "hyogo"
   },
   {
     "prefCode": "29000",
-    "prefName": "奈良県"
+    "prefName": "奈良県",
+    "romaji": "nara"
   },
   {
     "prefCode": "30000",
-    "prefName": "和歌山県"
+    "prefName": "和歌山県",
+    "romaji": "wakayama"
   },
   {
     "prefCode": "31000",
-    "prefName": "鳥取県"
+    "prefName": "鳥取県",
+    "romaji": "tottori"
   },
   {
     "prefCode": "32000",
-    "prefName": "島根県"
+    "prefName": "島根県",
+    "romaji": "shimane"
   },
   {
     "prefCode": "33000",
-    "prefName": "岡山県"
+    "prefName": "岡山県",
+    "romaji": "okayama"
   },
   {
     "prefCode": "34000",
-    "prefName": "広島県"
+    "prefName": "広島県",
+    "romaji": "hiroshima"
   },
   {
     "prefCode": "35000",
-    "prefName": "山口県"
+    "prefName": "山口県",
+    "romaji": "yamaguchi"
   },
   {
     "prefCode": "36000",
-    "prefName": "徳島県"
+    "prefName": "徳島県",
+    "romaji": "tokushima"
   },
   {
     "prefCode": "37000",
-    "prefName": "香川県"
+    "prefName": "香川県",
+    "romaji": "kagawa"
   },
   {
     "prefCode": "38000",
-    "prefName": "愛媛県"
+    "prefName": "愛媛県",
+    "romaji": "ehime"
   },
   {
     "prefCode": "39000",
-    "prefName": "高知県"
+    "prefName": "高知県",
+    "romaji": "kochi"
   },
   {
     "prefCode": "40000",
-    "prefName": "福岡県"
+    "prefName": "福岡県",
+    "romaji": "fukuoka"
   },
   {
     "prefCode": "41000",
-    "prefName": "佐賀県"
+    "prefName": "佐賀県",
+    "romaji": "saga"
   },
   {
     "prefCode": "42000",
-    "prefName": "長崎県"
+    "prefName": "長崎県",
+    "romaji": "nagasaki"
   },
   {
     "prefCode": "43000",
-    "prefName": "熊本県"
+    "prefName": "熊本県",
+    "romaji": "kumamoto"
   },
   {
     "prefCode": "44000",
-    "prefName": "大分県"
+    "prefName": "大分県",
+    "romaji": "oita"
   },
   {
     "prefCode": "45000",
-    "prefName": "宮崎県"
+    "prefName": "宮崎県",
+    "romaji": "miyazaki"
   },
   {
     "prefCode": "46000",
-    "prefName": "鹿児島県"
+    "prefName": "鹿児島県",
+    "romaji": "kagoshima"
   },
   {
     "prefCode": "47000",
-    "prefName": "沖縄県"
+    "prefName": "沖縄県",
+    "romaji": "okinawa"
   }
 ]

@@ -12,9 +12,10 @@
 import { existsSync, readFileSync, renameSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { KDP_LISTINGS } from "../../../../../config/paths.mjs";
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../../..");
-const LEDGER_PATH = join(REPO_ROOT, ".claude/config/kdp-listings.json");
+const LEDGER_PATH = join(REPO_ROOT, KDP_LISTINGS);
 const PROPOSALS_ROOT = join(REPO_ROOT, ".local/kindle-listing-revisions");
 const BOOK_ID = /^K-S[1-4]-\d{2}$/;
 const VERSION = /^[a-zA-Z0-9][a-zA-Z0-9._-]{0,63}$/;

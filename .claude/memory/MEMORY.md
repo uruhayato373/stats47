@@ -1,6 +1,6 @@
 # Memory Index
 
-- [project_note_image_assets_contract.md](project_note_image_assets_contract.md) — note原稿(docs/31)の画像契約。派生PNGはgit非追跡・ランキング記事はchart-data.jsonでデータ復元・catalogのr2_bodyは実在確認要(a-*14本がR2に無い)
+- [project_note_image_assets_contract.md](project_note_image_assets_contract.md) — note画像契約。カバーはdata/noteのJSON+Schema・private R2のSHA版で生成/採用/公開/両管理画面を統一。派生PNGはgit非追跡・r2Bodyは実在確認要・Windows復元/TLSの注意点
 
 - [project_model_usage_cycle.md](project_model_usage_cycle.md) — モデル/effort最適化サイクル。agentはeffort未指定でセッションのxhighを継承、別名sonnet/opusの解決先はCLI版次第(2.1.280未満はOpus 5.5不可)、canaryは採点器ごと検証
 - [feedback_gsc_export_false_positive.md](feedback_gsc_export_false_positive.md) — GSC理由行の非表示クリック失敗は概要ZIPの偽成功を生む。概要+5詳細の内容・件数・帰属とcapabilityを照合
@@ -20,6 +20,7 @@
 - [project_note_product_rollout.md](project_note_product_rollout.md) — 現行パックからnote variantを導出。_delivery固定SHAで非公開revisionを生成し、薄い準備原稿と販売準備完了を区別
 - [feedback_periodic_progress_reports.md](feedback_periodic_progress_reports.md) — 長時間のsubagent/workflow中は聞かれる前に約4-5分間隔で実測ベース進捗報告を自発的に(2026-07-17指摘)
 - [feedback_exit_code_not_via_pipe.md](feedback_exit_code_not_via_pipe.md) — 検証exit codeを`| tail`越しで測ると常に0(全PASS誤認)。直接実行orPIPESTATUS。全PASSなら1件壊して検証器を検証
+- [feedback_ci_foreign_tree_overlay.md](feedback_ci_foreign_tree_overlay.md) — CIがmainで生成し/tmp経由でdevelopへコピーするとmainの遅れ分のstateを巻き戻す(2026-10-04 W40で15ファイル、psi日次は55日分)。blobがrunのheadShaと一致するかで判定。契約=findForeignTreeRestore
 - [feedback_hand_synced_duplication.md](feedback_hand_synced_duplication.md) — 「追加時は両方を更新」のコメントで担保する二重管理は必ずドリフトする。件数/idは単一ソースから導出。2026-08-20にsitemap indexでcities1080URLが2か月未提出
 - [feedback_page_semantic_dedup_contract.md](feedback_page_semantic_dedup_contract.md) — 同じ意味のUIを別部品が描画すると単体テストは両方通る。ページ合成のcanonical ownerを1つにし、feature全体のrenderer数を契約テストで固定する
 - [feedback_mutation_test_passes_wrongly.md](feedback_mutation_test_passes_wrongly.md) — ミューテーションでも「間違った理由で赤/緑」になる。probeが除外語彙に当たっていないか・赤の理由がクラッシュでないかを毎回読む
@@ -132,3 +133,6 @@
 - [feedback_backlog_card_move_fence_aware.md](feedback_backlog_card_move_fence_aware.md) — backlog カード移動は正規表現の「\n## 」で切るとフェンス内見出しで途中切断。フェンス対応の分割+本文一致検証
 - [feedback_note_draft_index_r2_path.md](feedback_note_draft_index_r2_path.md) — note-draft-index の r2_path は移送済みの印。有料ドラフトはそもそも公開R2へ移らず、派生PNG参照がMISSING_REFERENCEになるのでbaseline仮登録
 - [feedback_reply_in_japanese.md](feedback_reply_in_japanese.md) — 返答は常に日本語。長い作業の途中で英語に切り替わり何度も言い直させた (2026-09-30)
+- [feedback_note_hashtag_api_quirks.md](feedback_note_hashtag_api_quirks.md) — noteタグ: 同一秒タグは順不同(集合で照合)・大小文字を既存タグに書換・α等は黙って削除・限定公開無料記事はPUT本文が全文でライン位置が公開範囲
+- [feedback_workflow_policy_comment_import.md](feedback_workflow_policy_comment_import.md) — audit-workflow-policy はコメント内の `from "x"` も依存と数え SCRIPT_RUN_WITHOUT_INSTALL を誤検出する。共通モジュールの使用例は散文で書く
+- [feedback_help_flag_runs_script.md](feedback_help_flag_runs_script.md) — 自作スクリプトの多くは --help を無視して本処理を実行する (2026-10-06 に blog outbox を誤生成)。確認は node --check / tsc / import のみの 1 行で

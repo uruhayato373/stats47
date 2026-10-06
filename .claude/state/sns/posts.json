@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "SNS 投稿台帳 (完全DBレス doc12 Phase E)。SQLite から移行。書込専用運用ログ。store: .claude/scripts/lib/sns-posts-store.cjs",
-    "count": 882,
-    "nextId": 1068
+    "count": 886,
+    "nextId": 1072
   },
   "posts": [
     {
@@ -19026,9 +19026,9 @@
     },
     {
       "id": 991,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:18.004Z",
-      "updated_at": "2026-09-23T08:58:39.130Z",
+      "updated_at": "2026-10-02T19:37:08.275Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "ranking",
@@ -19038,13 +19038,15 @@
       "utm_url": "https://stats47.jp/ranking/spouse-income?utm_source=threads&utm_medium=social&utm_campaign=spouse-income&utm_content=question",
       "template": "question",
       "metric_keys": "spouse-income",
-      "scheduled_at": "2026-10-02T01:40:00.000Z"
+      "scheduled_at": "2026-10-02T01:40:00.000Z",
+      "post_url": "https://www.threads.com/@stats47jp/post/Dd-U4sKgSJm",
+      "posted_at": "2026-10-02T01:40:32.000Z"
     },
     {
       "id": 992,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:18.008Z",
-      "updated_at": "2026-09-23T08:58:50.870Z",
+      "updated_at": "2026-10-02T19:37:08.383Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "area",
@@ -19054,13 +19056,15 @@
       "utm_url": "https://stats47.jp/areas/09000?utm_source=threads&utm_medium=social&utm_campaign=area-09000&utm_content=area-profile",
       "template": "area-profile",
       "metric_keys": null,
-      "scheduled_at": "2026-10-02T08:20:00.000Z"
+      "scheduled_at": "2026-10-02T08:20:00.000Z",
+      "post_url": "https://www.threads.com/@stats47jp/post/Dd_CsQeCAmr",
+      "posted_at": "2026-10-02T08:20:48.000Z"
     },
     {
       "id": 993,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:18.014Z",
-      "updated_at": "2026-09-23T08:59:05.658Z",
+      "updated_at": "2026-10-03T18:23:41.174Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "ranking",
@@ -19070,13 +19074,15 @@
       "utm_url": "https://stats47.jp/ranking/department-supermarket-count-per-100k?utm_source=threads&utm_medium=social&utm_campaign=department-supermarket-count-per-100k&utm_content=versus",
       "template": "versus",
       "metric_keys": "department-supermarket-count-per-100k",
-      "scheduled_at": "2026-10-03T01:50:00.000Z"
+      "scheduled_at": "2026-10-03T01:50:00.000Z",
+      "post_url": "https://www.threads.com/@stats47jp/post/DeA632nDEv6",
+      "posted_at": "2026-10-03T01:50:57.000Z"
     },
     {
       "id": 994,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:18.019Z",
-      "updated_at": "2026-09-23T08:59:18.023Z",
+      "updated_at": "2026-10-03T18:23:41.194Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "area",
@@ -19086,13 +19092,15 @@
       "utm_url": "https://stats47.jp/areas/10000?utm_source=threads&utm_medium=social&utm_campaign=area-10000&utm_content=area-profile",
       "template": "area-profile",
       "metric_keys": null,
-      "scheduled_at": "2026-10-03T08:40:00.000Z"
+      "scheduled_at": "2026-10-03T08:40:00.000Z",
+      "post_url": "https://www.threads.com/@stats47jp/post/DeBptQSEXl5",
+      "posted_at": "2026-10-03T08:40:12.000Z"
     },
     {
       "id": 995,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:18.024Z",
-      "updated_at": "2026-09-23T08:59:30.671Z",
+      "updated_at": "2026-10-04T18:27:48.869Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "ranking",
@@ -19102,13 +19110,15 @@
       "utm_url": "https://stats47.jp/ranking/other-mushroom-consumption-quantity?utm_source=threads&utm_medium=social&utm_campaign=other-mushroom-consumption-quantity&utm_content=angle-experience",
       "template": "angle-experience",
       "metric_keys": "other-mushroom-consumption-quantity",
-      "scheduled_at": "2026-10-04T01:30:00.000Z"
+      "scheduled_at": "2026-10-04T01:30:00.000Z",
+      "post_url": "https://www.threads.com/@stats47jp/post/DeDdUOREi-L",
+      "posted_at": "2026-10-04T01:30:24.000Z"
     },
     {
       "id": 996,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:18.030Z",
-      "updated_at": "2026-09-23T08:59:46.442Z",
+      "updated_at": "2026-10-04T18:27:48.891Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "area",
@@ -19118,13 +19128,15 @@
       "utm_url": "https://stats47.jp/areas/11000?utm_source=threads&utm_medium=social&utm_campaign=area-11000&utm_content=area-profile",
       "template": "area-profile",
       "metric_keys": null,
-      "scheduled_at": "2026-10-04T08:10:00.000Z"
+      "scheduled_at": "2026-10-04T08:10:00.000Z",
+      "post_url": "https://www.threads.com/@stats47jp/post/DeELHKuiRO4",
+      "posted_at": "2026-10-04T08:10:35.000Z"
     },
     {
       "id": 997,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:18.035Z",
-      "updated_at": "2026-09-23T08:59:58.552Z",
+      "updated_at": "2026-10-05T21:44:49.546Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "ranking",
@@ -19134,13 +19146,15 @@
       "utm_url": "https://stats47.jp/ranking/autolock-apartment-rate?utm_source=threads&utm_medium=social&utm_campaign=autolock-apartment-rate&utm_content=versus",
       "template": "versus",
       "metric_keys": "autolock-apartment-rate",
-      "scheduled_at": "2026-10-05T01:45:00.000Z"
+      "scheduled_at": "2026-10-05T01:45:00.000Z",
+      "post_url": "https://www.threads.com/@stats47jp/post/DeGD4xgiJFv",
+      "posted_at": "2026-10-05T01:45:56.000Z"
     },
     {
       "id": 998,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:18.039Z",
-      "updated_at": "2026-09-23T09:00:11.607Z",
+      "updated_at": "2026-10-05T21:44:49.566Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "area",
@@ -19150,7 +19164,9 @@
       "utm_url": "https://stats47.jp/areas/12000?utm_source=threads&utm_medium=social&utm_campaign=area-12000&utm_content=area-profile",
       "template": "area-profile",
       "metric_keys": null,
-      "scheduled_at": "2026-10-05T08:30:00.000Z"
+      "scheduled_at": "2026-10-05T08:30:00.000Z",
+      "post_url": "https://www.threads.com/@stats47jp/post/DeGyI5Mktx1",
+      "posted_at": "2026-10-05T08:30:05.000Z"
     },
     {
       "id": 999,
@@ -20229,6 +20245,54 @@
       "content_key": "sake-consumption-expenditure",
       "post_url": "https://www.instagram.com/p/Dd9ZXGRGjvL/",
       "posted_at": "2026-10-01T17:00:37Z"
+    },
+    {
+      "id": 1068,
+      "status": "posted",
+      "created_at": "2026-10-03T01:52:50.110Z",
+      "updated_at": "2026-10-03T01:52:50.110Z",
+      "platform": "instagram",
+      "post_type": "carousel",
+      "domain": "compare-carousel",
+      "content_key": "11000-vs-12000",
+      "post_url": "https://www.instagram.com/p/DeA7D-ZFZsp/",
+      "posted_at": "2026-10-03T01:52:50Z"
+    },
+    {
+      "id": 1069,
+      "status": "posted",
+      "created_at": "2026-10-03T14:41:22.781Z",
+      "updated_at": "2026-10-03T14:41:22.781Z",
+      "platform": "instagram",
+      "post_type": "carousel",
+      "domain": "area-carousel",
+      "content_key": "13000",
+      "post_url": "https://www.instagram.com/p/DeCTBEBG519/",
+      "posted_at": "2026-10-03T14:41:22Z"
+    },
+    {
+      "id": 1070,
+      "status": "posted",
+      "created_at": "2026-10-04T15:17:49.622Z",
+      "updated_at": "2026-10-04T15:17:49.622Z",
+      "platform": "instagram",
+      "post_type": "carousel",
+      "domain": "map-carousel",
+      "content_key": "natto-consumption-expenditure",
+      "post_url": "https://www.instagram.com/p/DeE7_A3FvHO/",
+      "posted_at": "2026-10-04T15:17:49Z"
+    },
+    {
+      "id": 1071,
+      "status": "posted",
+      "created_at": "2026-10-05T10:03:23.715Z",
+      "updated_at": "2026-10-05T10:03:23.715Z",
+      "platform": "instagram",
+      "post_type": "carousel",
+      "domain": "ranking-quiz",
+      "content_key": "hamburger-consumption-expenditure",
+      "post_url": "https://www.instagram.com/p/DeG8ypxmz-j/",
+      "posted_at": "2026-10-05T10:03:23Z"
     }
   ],
   "nextId": 580,

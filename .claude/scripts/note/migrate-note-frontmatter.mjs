@@ -20,6 +20,7 @@ import { readFileSync } from 'fs'
 import { resolve, join, dirname } from 'path'
 import { fileURLToPath } from 'url'
 import { createRequire } from 'module'
+import { R2_PUBLIC_BASE_URL, R2_BUCKET } from '../lib/site-config.cjs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const ROOT = resolve(__dirname, '../../..')
@@ -49,7 +50,7 @@ const { Readable } = await import('stream')
 const R2_ACCESS_KEY_ID = process.env.R2_ACCESS_KEY_ID
 const R2_SECRET_ACCESS_KEY = process.env.R2_SECRET_ACCESS_KEY
 const R2_S3_ENDPOINT = process.env.R2_S3_ENDPOINT
-const BUCKET = process.env.CLOUDFLARE_R2_BUCKET_NAME || 'stats47'
+const BUCKET = process.env.CLOUDFLARE_R2_BUCKET_NAME || R2_BUCKET
 
 if (!DRY_RUN && (!R2_ACCESS_KEY_ID || !R2_SECRET_ACCESS_KEY || !R2_S3_ENDPOINT)) {
   console.error('ERROR: R2 credentials 未設定 (.env.local を確認)')
@@ -141,7 +142,7 @@ async function processSingle(slug, info) {
   // R2 から draft.md を取得（dry-run は公開URLで取得）
   let content
   if (DRY_RUN) {
-    const publicUrl = `https://storage.stats47.jp/${r2Key}`
+    const publicUrl = `${R2_PUBLIC_BASE_URL}/${r2Key}`
     const res = await fetch(publicUrl)
     if (!res.ok) {
       console.log(`  SKIP (R2 fetch 失敗 ${res.status}): ${slug}`)

@@ -1,29 +1,35 @@
-import fs from 'node:fs';
-import { Readable } from 'node:stream';
+import { NOTE_ARTICLES } from '../../../../../.claude/scripts/note/catalog';
+import { readCoverLedger, validateCoverLedger } from '../../../../../.claude/scripts/note/lib/cover-assets.mjs';
+import { readStoredCover } from '../../../../../.claude/scripts/note/lib/cover-storage.mjs';
+import { projectRoot } from '@/lib/server/project-root';
 
-import { publishedArticles } from '../../../../../.claude/scripts/note/catalog';
-import { noteCoverDirectory } from '@/lib/server/note-covers';
-import { resolveSafe } from '@/lib/server/safe-local-file';
+/** cover-storage.mjs の固定文 (認証情報を含まない) の形。ここに当たらない文は理由として返さない */
+const SAFE_REASON =
+  /^(?:private R2 [^\n]+|private cover (?:missing or SHA mismatch|storage unavailable|read HTTP \d{3})|Wrangler session expired or account access unavailable; run wrangler whoami|CLOUDFLARE_ACCOUNT_ID is required for multiple accounts|Windows trusted root certificates unavailable)$/;
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
-/** 監査用のローカル候補画像。公開済み記事の key のみ許可する。 */
-export async function GET(_request: Request, { params }: { params: Promise<{ key: string }> }) {
+/** Read-only proxy for exact ledger-owned private revisions. No persistent image cache. */
+export async function GET(request: Request, { params }: { params: Promise<{ key: string }> }) {
   const { key } = await params;
-  if (!publishedArticles().some((article) => article.key === key)) {
+  const id = new URL(request.url).searchParams.get('revision');
+  if (!id || !/^[a-f0-9]{64}$/.test(id) || !NOTE_ARTICLES.some((a) => a.key === key))
     return Response.json({ error: 'not found' }, { status: 404 });
+  try {
+    const ledger = validateCoverLedger(readCoverLedger(projectRoot()), NOTE_ARTICLES);
+    const revision = ledger.articles.find((a) => a.articleKey === key)?.revisions.find((r) => r.id === id);
+    if (!revision) return Response.json({ error: 'not found' }, { status: 404 });
+    const bytes = await readStoredCover(revision);
+    return new Response(new Uint8Array(bytes), { headers: {
+      'content-type': 'image/png', 'content-length': String(bytes.length),
+      'cache-control': 'no-store', 'x-content-type-options': 'nosniff',
+    } });
+  } catch (error) {
+    // 理由として画面へ返すのは cover-storage が投げる固定文の形だけ。下位ライブラリ (fetch・S3・fs) の例外は
+    // URL や認証情報を含みうるので返さない。
+    const message = error instanceof Error ? error.message : '';
+    const reason = SAFE_REASON.test(message) ? message : 'ストレージの接続と台帳を確認してください。';
+    return Response.json({ error: `画像を取得できません: ${reason}` }, { status: 502 });
   }
-  const resolved = resolveSafe(noteCoverDirectory(), ['after', `${key}.png`]);
-  if ('error' in resolved) return Response.json({ error: 'not found' }, { status: 404 });
-  const size = fs.statSync(resolved.file).size;
-  const stream = Readable.toWeb(fs.createReadStream(resolved.file)) as ReadableStream<Uint8Array>;
-  return new Response(stream, {
-    headers: {
-      'content-type': 'image/png',
-      'content-length': String(size),
-      'cache-control': 'no-store',
-      'x-content-type-options': 'nosniff',
-    },
-  });
 }

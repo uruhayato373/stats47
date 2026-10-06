@@ -6,6 +6,7 @@ import { getR2Client } from "../clients/get-r2-client";
 import { getS3Client } from "../clients/get-s3-client";
 import { detectEnvironment } from "../utils/detect-environment";
 import { shouldSkipRemoteR2Read } from "../utils/should-skip-remote-r2-read";
+import { SITE } from "@stats47/types";
 
 /**
  * R2 オブジェクトキーの安全性を検証する（defense-in-depth）。
@@ -40,7 +41,7 @@ function isSafeR2Key(key: string): boolean {
 }
 
 async function fetchFromS3(key: string): Promise<Buffer | null> {
-  const bucketName = process.env.CLOUDFLARE_R2_BUCKET_NAME || "stats47";
+  const bucketName = process.env.CLOUDFLARE_R2_BUCKET_NAME || SITE.r2Bucket;
   const s3 = getS3Client();
   try {
     const response = await s3.send(new GetObjectCommand({ Bucket: bucketName, Key: key }));

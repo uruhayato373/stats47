@@ -34,8 +34,9 @@ import {
   waitForLogin,
   isLoginUrl,
 } from "../google-admin/browser-context.mjs";
+import { GSC_PROPERTY } from "../lib/site-config.cjs";
 
-const PROPERTY = "sc-domain:stats47.jp";
+const PROPERTY = GSC_PROPERTY;
 const INDEX_URL = `https://search.google.com/search-console/index?resource_id=${encodeURIComponent(PROPERTY)}`;
 
 /** 既定の export 対象。actionable (転換可能) を優先し、意図的カテゴリは既定で採らない。 */

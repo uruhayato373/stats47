@@ -22,10 +22,11 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 import { createRequire } from "node:module";
 
 import { METRICS_REGISTRY } from "@stats47/data-configs/registry";
+import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
 const OUT_DIR = join(REPO_ROOT, ".claude/state/municipalities");
-const R2_BASE = process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp";
+const R2_BASE = process.env.R2_PUBLIC_FETCH_URL ?? R2_PUBLIC_BASE_URL;
 
 /** 社内プロキシ配下では Node の素の fetch が外に出られない (local-environment.md)。 */
 function resolveDispatcher() {

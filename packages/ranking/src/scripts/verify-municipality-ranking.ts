@@ -12,8 +12,9 @@ import {
   municipalityRankingItemKeyPath,
   municipalityRankingValuesKeyPath,
 } from '../types/municipality-snapshot';
+import { SITE } from '@stats47/types';
 
-const DEFAULT_BASE_URL = 'https://storage.stats47.jp';
+const DEFAULT_BASE_URL = SITE.r2PublicBaseUrl;
 
 async function fetchJson(baseUrl: string, key: string): Promise<unknown> {
   const response = await fetch(`${baseUrl}/${key}`, { cache: 'no-store' });

@@ -11,6 +11,8 @@ import {
 
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
 
+import { DEFAULT_OGP_IMAGE_PATH, SITE_ORIGIN } from '@/config/site';
+
 import type { Metadata } from 'next';
 
 const title = '都道府県から統計を見る | Stats47';
@@ -23,7 +25,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/areas',
   },
-  ...generateOGMetadata({ title, description, imageUrl: '/og-image.jpg' }),
+  ...generateOGMetadata({ title, description, imageUrl: DEFAULT_OGP_IMAGE_PATH }),
 };
 
 export default function AreasPage() {
@@ -33,7 +35,7 @@ export default function AreasPage() {
     regionName,
   }));
 
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://stats47.jp';
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || SITE_ORIGIN;
   const structuredData = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',

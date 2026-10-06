@@ -66,7 +66,7 @@ jobs:
         run: |
           TSC="apps/web/scripts/tsconfig.ogp.json"
           SC="apps/web/scripts/generate-ogp-images.ts"
-          for TYPE in ranking ranking-cards areas note-covers pref-silhouette; do
+          for TYPE in ranking ranking-cards areas pref-silhouette; do
             echo "=== self-heal $TYPE ==="
             npx tsx --tsconfig "$TSC" "$SC" --type "$TYPE" --limit "$MAX_GENERATE" --max-generate "$MAX_GENERATE"
             PLAN=".local/image-generation-publish-plan-${TYPE}.json"
@@ -91,7 +91,7 @@ jobs:
           STATUS=0
           TSC="apps/web/scripts/tsconfig.ogp.json"
           SC="apps/web/scripts/generate-ogp-images.ts"
-          for TYPE in ranking ranking-cards areas note-covers pref-silhouette; do
+          for TYPE in ranking ranking-cards areas pref-silhouette; do
             npx tsx --tsconfig "$TSC" "$SC" --type "$TYPE" --audit \
               2>&1 | tee -a /tmp/ogp-freshness-audit.log
             [ "${PIPESTATUS[0]}" -eq 0 ] || STATUS=1

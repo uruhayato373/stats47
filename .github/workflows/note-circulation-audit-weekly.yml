@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   actions: read
   issues: write
 
@@ -55,6 +55,10 @@ jobs:
           npm run note:circulation:test 2>&1 | tee /tmp/note-tests.log
           [ "${PIPESTATUS[0]}" -eq 0 ] || STATUS=1
           npm run note:covers:test 2>&1 | tee /tmp/note-cover-tests.log
+          [ "${PIPESTATUS[0]}" -eq 0 ] || STATUS=1
+          npm run note:assets:test 2>&1 | tee /tmp/note-cover-assets-tests.log
+          [ "${PIPESTATUS[0]}" -eq 0 ] || STATUS=1
+          npm run note:assets:validate 2>&1 | tee /tmp/note-cover-assets-validate.log
           [ "${PIPESTATUS[0]}" -eq 0 ] || STATUS=1
           npm run note:images:test 2>&1 | tee /tmp/note-image-assets-tests.log
           [ "${PIPESTATUS[0]}" -eq 0 ] || STATUS=1
@@ -122,6 +126,9 @@ jobs:
           path: |
             .claude/state/metrics/note-circulation-audit-*.json
             .claude/state/metrics/note-cover-audit-latest.json
+            data/note/cover-assets.json
+            /tmp/note-cover-assets-tests.log
+            /tmp/note-cover-assets-validate.log
             /tmp/note-catalog.log
             /tmp/note-tests.log
             /tmp/note-image-assets.json
@@ -198,6 +205,19 @@ jobs:
               gh issue close "$NUMBER" --reason completed \
                 --comment "noteの公開記事・タグ・導線・マガジン・プロフィール監査がすべて正常へ復旧したため自動Closeします。"
             done
+
+      - name: Persist complete cover observations for the management console
+        if: always()
+        run: |
+          node -e 'const r=require("./.claude/state/metrics/note-cover-audit-latest.json"); process.exit(r.coverage?.complete && Date.parse(r.completedAt)>Date.now()-3600000 ? 0 : 1)' || exit 0
+          npm run note:assets:validate
+          if git diff --quiet -- data/note/cover-assets.json; then exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -- data/note/cover-assets.json
+          git commit -m 'chore(note): refresh cover observations [skip ci]'
+          git pull --rebase origin develop
+          git push origin HEAD:develop
 
       - name: ❌ Fail on unresolved note circulation drift
         if: always() && steps.audit.outputs.exit_code != '0'

@@ -13,6 +13,7 @@ import { runKsjPipeline } from "../pipeline";
 import { GIS_DATASETS, GIS_DATASETS_BY_ID } from "../datasets";
 import { discoverMeshCodes } from "../mesh-discovery";
 import type { KsjPipelineResult } from "../types";
+import { PREFECTURE_AREA_CODES, to2DigitPrefCode } from "@stats47/area";
 
 interface DatasetMeta {
   dataId: string;
@@ -170,8 +171,7 @@ async function runAllPrefs(dataId: string, version: string | undefined, skipDown
   const results: KsjPipelineResult[] = [];
   const errors: Array<{ prefCode: string; error: string }> = [];
 
-  for (let i = 1; i <= 47; i++) {
-    const prefCode = String(i).padStart(2, "0");
+  for (const prefCode of PREFECTURE_AREA_CODES.map(to2DigitPrefCode)) {
     try {
       const result = await runKsjPipeline({
         dataId,

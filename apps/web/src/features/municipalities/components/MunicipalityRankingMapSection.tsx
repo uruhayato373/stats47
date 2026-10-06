@@ -1,4 +1,4 @@
-import { lookupArea } from '@stats47/area';
+import { lookupArea, to2DigitPrefCode } from '@stats47/area';
 import { getMetricConfig, resolveColorScheme } from '@stats47/data-configs';
 import { fetchMunicipalityTopology } from '@stats47/gis/server';
 
@@ -14,6 +14,8 @@ import { MunicipalityCityMapClient } from './MunicipalityCityMapClient';
 import type { MunicipalityRankingValue } from '@stats47/ranking/types';
 import type { TopoJSONTopology } from '@stats47/types';
 
+import { TOKYO_ISLAND_EXCLUDE_CODES } from '@/constants/tokyo-islands';
+
 interface Props {
   rankingKey: string;
   unit: string;
@@ -28,19 +30,8 @@ const MIDPOINT_VALUES = ['zero', 'mean', 'median'] as const;
 // 極小になる。fit 計算からだけ外し、描画とランキング表からは外さない
 // (region-comparison の TOKYO_ISLAND_CODES はデータごと除外する別用途)。
 const FIT_EXCLUDE_BY_PREF: Readonly<Record<string, readonly string[]>> = {
-  '13000': [
-    // 都全域の集約 shape (島嶼を含む MultiPolygon)。これを外さないと island 除外が無効化される
-    '13000',
-    '13361',
-    '13362',
-    '13363',
-    '13364',
-    '13381',
-    '13382',
-    '13401',
-    '13402',
-    '13421',
-  ],
+  // 都全域の集約 shape 13000 (島嶼を含む MultiPolygon) も含む。外さないと island 除外が無効化される
+  '13000': TOKYO_ISLAND_EXCLUDE_CODES,
 };
 
 function resolveDivergingMidpoint(
@@ -68,7 +59,7 @@ export async function MunicipalityRankingMapSection({
   const rows = values.filter((v) => v.prefectureCode === prefectureCode);
   if (rows.length === 0) return null;
 
-  const pref2 = prefectureCode.slice(0, 2);
+  const pref2 = to2DigitPrefCode(prefectureCode);
   const topology = await fetchMunicipalityTopology(pref2, 'merged').catch(
     () => null as TopoJSONTopology | null
   );

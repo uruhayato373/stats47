@@ -7,6 +7,7 @@ import { getS3Client } from "../clients/get-s3-client";
 import { detectEnvironment } from "../utils/detect-environment";
 import { findLocalR2Root } from "../utils/find-local-r2-root";
 import { shouldSkipRemoteR2Read } from "../utils/should-skip-remote-r2-read";
+import { SITE } from "@stats47/types";
 
 export interface R2ListedObject {
   key: string;
@@ -44,7 +45,7 @@ function listFromLocalFs(prefix?: string): R2ListedObject[] {
 }
 
 async function listFromS3(prefix?: string): Promise<R2ListedObject[]> {
-  const bucketName = process.env.CLOUDFLARE_R2_BUCKET_NAME || "stats47";
+  const bucketName = process.env.CLOUDFLARE_R2_BUCKET_NAME || SITE.r2Bucket;
   const s3 = getS3Client();
   const allObjects: R2ListedObject[] = [];
   let continuationToken: string | undefined;

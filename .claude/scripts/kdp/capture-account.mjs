@@ -5,7 +5,7 @@
  *   node .claude/scripts/kdp/capture-account.mjs --write    # .local/kdp-account.local.json に書き込み
  *
  * ★書き込み先は git 管理外。このリポジトリは public なので、公開側の
- *   .claude/config/kdp-account.json には個人情報を書かない (2026-08-12)。
+ *   config/kdp-account.json には個人情報を書かない (2026-08-12)。
  * ★KDP はメールを本棚に出さず、アカウントページは 2FA を再要求するため、実測では
  *   自動取得できなかった。その場合は knownAsin (この口座で公開済みの本の ASIN) で照合する。
  */
@@ -35,7 +35,7 @@ try {
   console.log("   ※ KDP の DOM は変わるため、正しいメール/名前を目視確認してから記入してください。");
   if (WRITE) {
     // ★書き込み先は git 管理外 (.local/)。**公開リポジトリにメールアドレスを書かない** (2026-08-12)。
-    //   stats47 は public なので、`.claude/config/kdp-account.json` に入れると GitHub に載る。
+    //   stats47 は public なので、`config/kdp-account.json` に入れると GitHub に載る。
     //   readAccount() が .local を上書きとして重ねるので、assert には問題なく効く。
     let acct = {};
     try {

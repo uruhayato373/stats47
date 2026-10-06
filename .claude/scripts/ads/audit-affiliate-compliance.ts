@@ -25,10 +25,11 @@ import {
   lintDirectPlacementSizes,
   validateDirectPlacementsStructure,
 } from "./lib/affiliate-compliance-core.mjs";
+import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = resolve(__dirname, "../../..");
-const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
+const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
 
 interface FetchedContent {
   found: boolean;

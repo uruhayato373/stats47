@@ -14,6 +14,8 @@
  * 00000 行を持つものは 0 件だった。現状は全ページが単純平均の分岐になる。
  */
 
+import { NATIONAL_AREA_CODE } from "@stats47/area";
+
 /** 全国の基準値の種類 */
 export type NationalFigureKind = "national-total" | "national-value" | "simple-mean";
 
@@ -39,13 +41,13 @@ const TOTAL_MATCH_TOLERANCE = 0.005;
 
 /** 全国行か (5 桁 00000 と 2 桁正規化後の 00) */
 export function isNationalAreaCode(code: string): boolean {
-  return code === "00000" || code === "00";
+  return code === NATIONAL_AREA_CODE || code === "00";
 }
 
 /** 都道府県行か (2 桁 01-47 または XX000) */
 function isPrefectureAreaCode(code: string): boolean {
   if (/^\d{2}$/.test(code)) return code !== "00";
-  if (/^\d{2}000$/.test(code)) return code !== "00000";
+  if (/^\d{2}000$/.test(code)) return code !== NATIONAL_AREA_CODE;
   return false;
 }
 

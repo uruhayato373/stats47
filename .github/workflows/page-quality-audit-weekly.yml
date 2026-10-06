@@ -140,6 +140,9 @@ jobs:
           git add .claude/state/metrics/page-quality/
           # UI 指摘キューと起票したカード (live/ は .gitignore 済み)
           git add .claude/state/page-quality/ .claude/todo/backlog.md
+          # ボットのコミットは pre-commit を通らない。1MB 超のファイルが develop に入ると全員のコミットが止まる
+          # (2026-10-04 に ui-findings-queue.json 1.96MB で発生)。stage したファイルだけを同じ検査に掛ける
+          node .claude/scripts/lib/check-repo-hygiene.cjs --staged --baseline
           if git diff --cached --quiet; then
             echo "No audit changes"
             exit 0

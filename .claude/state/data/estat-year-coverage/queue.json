@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-26T22:38:05.201Z",
+  "generatedAt": "2026-10-03T22:50:20.906Z",
   "results": {
     "abandoned-cultivated-land-area": {
       "key": "abandoned-cultivated-land-area",
@@ -1222,66 +1222,6 @@
       ],
       "verdict": "extend-candidate",
       "checkedAt": "2026-09-19T22:18:28.639Z"
-    },
-    "annual-sunshine-duration": {
-      "key": "annual-sunshine-duration",
-      "statsDataId": "0000010102",
-      "configYears": 1,
-      "estatNonNullYears": 50,
-      "availableYearCodes": [
-        "1975",
-        "1976",
-        "1977",
-        "1978",
-        "1979",
-        "1980",
-        "1981",
-        "1982",
-        "1983",
-        "1984",
-        "1985",
-        "1986",
-        "1987",
-        "1988",
-        "1989",
-        "1990",
-        "1991",
-        "1992",
-        "1993",
-        "1994",
-        "1995",
-        "1996",
-        "1997",
-        "1998",
-        "1999",
-        "2000",
-        "2001",
-        "2002",
-        "2003",
-        "2004",
-        "2005",
-        "2006",
-        "2007",
-        "2008",
-        "2009",
-        "2010",
-        "2011",
-        "2012",
-        "2013",
-        "2014",
-        "2015",
-        "2016",
-        "2017",
-        "2018",
-        "2019",
-        "2020",
-        "2021",
-        "2022",
-        "2023",
-        "2024"
-      ],
-      "verdict": "extend-candidate",
-      "checkedAt": "2026-09-19T22:18:29.710Z"
     },
     "apartment-ratio": {
       "key": "apartment-ratio",
@@ -2933,63 +2873,6 @@
       ],
       "verdict": "extend-candidate",
       "checkedAt": "2026-09-19T22:19:10.218Z"
-    },
-    "avg-height-high-school-2nd-male": {
-      "key": "avg-height-high-school-2nd-male",
-      "statsDataId": "0000010209",
-      "configYears": 1,
-      "estatNonNullYears": 47,
-      "availableYearCodes": [
-        "1975",
-        "1976",
-        "1979",
-        "1980",
-        "1981",
-        "1982",
-        "1983",
-        "1984",
-        "1985",
-        "1986",
-        "1987",
-        "1988",
-        "1989",
-        "1990",
-        "1991",
-        "1992",
-        "1993",
-        "1994",
-        "1995",
-        "1996",
-        "1997",
-        "1998",
-        "1999",
-        "2000",
-        "2001",
-        "2002",
-        "2003",
-        "2004",
-        "2005",
-        "2006",
-        "2007",
-        "2008",
-        "2009",
-        "2010",
-        "2011",
-        "2012",
-        "2013",
-        "2014",
-        "2015",
-        "2016",
-        "2017",
-        "2018",
-        "2019",
-        "2020",
-        "2021",
-        "2022",
-        "2023"
-      ],
-      "verdict": "extend-candidate",
-      "checkedAt": "2026-09-19T22:19:11.160Z"
     },
     "avg-propensity-to-consume-worker-households": {
       "key": "avg-propensity-to-consume-worker-households",
@@ -6363,6 +6246,1503 @@
       ],
       "verdict": "confirmed-single-year",
       "checkedAt": "2026-09-26T22:38:04.901Z"
+    },
+    "census-household-change-rate-5y": {
+      "key": "census-household-change-rate-5y",
+      "statsDataId": "0004065882",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2025"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:48:27.982Z"
+    },
+    "census-population-change-5y": {
+      "key": "census-population-change-5y",
+      "statsDataId": "0004065882",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2025"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:48:28.696Z"
+    },
+    "census-population-change-rate-5y": {
+      "key": "census-population-change-rate-5y",
+      "statsDataId": "0004065882",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2025"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:48:29.334Z"
+    },
+    "financial-debt-balance": {
+      "key": "financial-debt-balance",
+      "statsDataId": "0000010112",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2019"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:48:31.332Z"
+    },
+    "fire-dispatch-for-building-fire-count-per-100k": {
+      "key": "fire-dispatch-for-building-fire-count-per-100k",
+      "statsDataId": "0000010211",
+      "configYears": 1,
+      "estatNonNullYears": 47,
+      "availableYearCodes": [
+        "1975",
+        "1976",
+        "1977",
+        "1978",
+        "1979",
+        "1980",
+        "1981",
+        "1982",
+        "1983",
+        "1984",
+        "1985",
+        "1986",
+        "1987",
+        "1988",
+        "1989",
+        "1990",
+        "1991",
+        "1992",
+        "1993",
+        "1994",
+        "1995",
+        "1996",
+        "1997",
+        "1998",
+        "1999",
+        "2000",
+        "2001",
+        "2002",
+        "2003",
+        "2004",
+        "2005",
+        "2006",
+        "2007",
+        "2008",
+        "2009",
+        "2010",
+        "2011",
+        "2012",
+        "2013",
+        "2014",
+        "2015",
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021"
+      ],
+      "verdict": "extend-candidate",
+      "checkedAt": "2026-10-03T22:48:32.702Z"
+    },
+    "fire-insurance-amount-received-per-contract": {
+      "key": "fire-insurance-amount-received-per-contract",
+      "statsDataId": "0000010211",
+      "configYears": 1,
+      "estatNonNullYears": 42,
+      "availableYearCodes": [
+        "1975",
+        "1976",
+        "1977",
+        "1978",
+        "1979",
+        "1980",
+        "1981",
+        "1982",
+        "1983",
+        "1984",
+        "1985",
+        "1986",
+        "1987",
+        "1988",
+        "1989",
+        "1990",
+        "1991",
+        "1992",
+        "1993",
+        "1994",
+        "1995",
+        "1996",
+        "1997",
+        "1998",
+        "1999",
+        "2000",
+        "2001",
+        "2002",
+        "2003",
+        "2004",
+        "2005",
+        "2006",
+        "2007",
+        "2008",
+        "2009",
+        "2010",
+        "2011",
+        "2012",
+        "2013",
+        "2014",
+        "2015",
+        "2016"
+      ],
+      "verdict": "extend-candidate",
+      "checkedAt": "2026-10-03T22:48:33.703Z"
+    },
+    "firefighting-expenditure-ratio-pref-municipal": {
+      "key": "firefighting-expenditure-ratio-pref-municipal",
+      "statsDataId": "0000010204",
+      "configYears": 1,
+      "estatNonNullYears": 13,
+      "availableYearCodes": [
+        "2010",
+        "2011",
+        "2012",
+        "2013",
+        "2014",
+        "2015",
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022"
+      ],
+      "verdict": "extend-candidate",
+      "checkedAt": "2026-10-03T22:48:35.065Z"
+    },
+    "firefighting-expenses-prefecture": {
+      "key": "firefighting-expenses-prefecture",
+      "statsDataId": "0000010104",
+      "configYears": 1,
+      "estatNonNullYears": 13,
+      "availableYearCodes": [
+        "2010",
+        "2011",
+        "2012",
+        "2013",
+        "2014",
+        "2015",
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022"
+      ],
+      "verdict": "extend-candidate",
+      "checkedAt": "2026-10-03T22:48:37.981Z"
+    },
+    "fishery-household-sex-age": {
+      "key": "fishery-household-sex-age",
+      "statsDataId": "0003262280",
+      "configYears": 1,
+      "estatNonNullYears": 0,
+      "availableYearCodes": [],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:48:38.715Z"
+    },
+    "fishery-management-orgs": {
+      "key": "fishery-management-orgs",
+      "statsDataId": "0003262285",
+      "configYears": 1,
+      "estatNonNullYears": 0,
+      "availableYearCodes": [],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:48:40.152Z"
+    },
+    "fishery-workers-coastal-offshore": {
+      "key": "fishery-workers-coastal-offshore",
+      "statsDataId": "0003262278",
+      "configYears": 1,
+      "estatNonNullYears": 0,
+      "availableYearCodes": [],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:48:40.996Z"
+    },
+    "fishing-port-count-by-type": {
+      "key": "fishing-port-count-by-type",
+      "statsDataId": "0003262291",
+      "configYears": 1,
+      "estatNonNullYears": 0,
+      "availableYearCodes": [],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:48:41.901Z"
+    },
+    "fishing-vessel-crew": {
+      "key": "fishing-vessel-crew",
+      "statsDataId": "0003262282",
+      "configYears": 1,
+      "estatNonNullYears": 0,
+      "availableYearCodes": [],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:48:42.837Z"
+    },
+    "fishing-vessel-tonnage-class": {
+      "key": "fishing-vessel-tonnage-class",
+      "statsDataId": "0003262281",
+      "configYears": 1,
+      "estatNonNullYears": 0,
+      "availableYearCodes": [],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:48:43.667Z"
+    },
+    "five-year-residence-other-prefecture": {
+      "key": "five-year-residence-other-prefecture",
+      "statsDataId": "0003447398",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2020"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:48:44.907Z"
+    },
+    "five-year-residence-same-address": {
+      "key": "five-year-residence-same-address",
+      "statsDataId": "0003447398",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2020"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:48:46.097Z"
+    },
+    "flood-affected-municipalities": {
+      "key": "flood-affected-municipalities",
+      "statsDataId": "0003155647",
+      "configYears": 1,
+      "estatNonNullYears": 9,
+      "availableYearCodes": [
+        "2006",
+        "2007",
+        "2008",
+        "2009",
+        "2010",
+        "2011",
+        "2012",
+        "2013",
+        "2014"
+      ],
+      "verdict": "extend-candidate",
+      "checkedAt": "2026-10-03T22:48:47.314Z"
+    },
+    "flood-affected-rivers": {
+      "key": "flood-affected-rivers",
+      "statsDataId": "0003155647",
+      "configYears": 1,
+      "estatNonNullYears": 9,
+      "availableYearCodes": [
+        "2006",
+        "2007",
+        "2008",
+        "2009",
+        "2010",
+        "2011",
+        "2012",
+        "2013",
+        "2014"
+      ],
+      "verdict": "extend-candidate",
+      "checkedAt": "2026-10-03T22:48:48.822Z"
+    },
+    "flood-casualties-total": {
+      "key": "flood-casualties-total",
+      "statsDataId": "0003155647",
+      "configYears": 1,
+      "estatNonNullYears": 6,
+      "availableYearCodes": [
+        "2006",
+        "2007",
+        "2009",
+        "2010",
+        "2013",
+        "2014"
+      ],
+      "verdict": "extend-candidate",
+      "checkedAt": "2026-10-03T22:48:49.757Z"
+    },
+    "flood-damage-bridge": {
+      "key": "flood-damage-bridge",
+      "statsDataId": "0003155647",
+      "configYears": 1,
+      "estatNonNullYears": 9,
+      "availableYearCodes": [
+        "2006",
+        "2007",
+        "2008",
+        "2009",
+        "2010",
+        "2011",
+        "2012",
+        "2013",
+        "2014"
+      ],
+      "verdict": "extend-candidate",
+      "checkedAt": "2026-10-03T22:48:50.625Z"
+    },
+    "flood-damage-general-assets": {
+      "key": "flood-damage-general-assets",
+      "statsDataId": "0003155647",
+      "configYears": 1,
+      "estatNonNullYears": 9,
+      "availableYearCodes": [
+        "2006",
+        "2007",
+        "2008",
+        "2009",
+        "2010",
+        "2011",
+        "2012",
+        "2013",
+        "2014"
+      ],
+      "verdict": "extend-candidate",
+      "checkedAt": "2026-10-03T22:48:51.414Z"
+    },
+    "flood-damage-public-infrastructure": {
+      "key": "flood-damage-public-infrastructure",
+      "statsDataId": "0003155647",
+      "configYears": 1,
+      "estatNonNullYears": 9,
+      "availableYearCodes": [
+        "2006",
+        "2007",
+        "2008",
+        "2009",
+        "2010",
+        "2011",
+        "2012",
+        "2013",
+        "2014"
+      ],
+      "verdict": "extend-candidate",
+      "checkedAt": "2026-10-03T22:48:52.157Z"
+    },
+    "flood-damage-road": {
+      "key": "flood-damage-road",
+      "statsDataId": "0003155647",
+      "configYears": 1,
+      "estatNonNullYears": 9,
+      "availableYearCodes": [
+        "2006",
+        "2007",
+        "2008",
+        "2009",
+        "2010",
+        "2011",
+        "2012",
+        "2013",
+        "2014"
+      ],
+      "verdict": "extend-candidate",
+      "checkedAt": "2026-10-03T22:48:52.883Z"
+    },
+    "flood-damage-total": {
+      "key": "flood-damage-total",
+      "statsDataId": "0003155647",
+      "configYears": 1,
+      "estatNonNullYears": 9,
+      "availableYearCodes": [
+        "2006",
+        "2007",
+        "2008",
+        "2009",
+        "2010",
+        "2011",
+        "2012",
+        "2013",
+        "2014"
+      ],
+      "verdict": "extend-candidate",
+      "checkedAt": "2026-10-03T22:48:53.849Z"
+    },
+    "flood-deaths": {
+      "key": "flood-deaths",
+      "statsDataId": "0003155647",
+      "configYears": 1,
+      "estatNonNullYears": 3,
+      "availableYearCodes": [
+        "2010",
+        "2013",
+        "2014"
+      ],
+      "verdict": "extend-candidate",
+      "checkedAt": "2026-10-03T22:48:54.701Z"
+    },
+    "food-business-establishments": {
+      "key": "food-business-establishments",
+      "statsDataId": "0004027019",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2020"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:48:55.691Z"
+    },
+    "food-sanitation-inspection": {
+      "key": "food-sanitation-inspection",
+      "statsDataId": "0004026844",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2020"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:48:56.438Z"
+    },
+    "foreign-resident-count-usa-per-100k": {
+      "key": "foreign-resident-count-usa-per-100k",
+      "statsDataId": "0000010201",
+      "configYears": 1,
+      "estatNonNullYears": 9,
+      "availableYearCodes": [
+        "1980",
+        "1985",
+        "1990",
+        "1995",
+        "2000",
+        "2005",
+        "2010",
+        "2015",
+        "2020"
+      ],
+      "verdict": "extend-candidate",
+      "checkedAt": "2026-10-03T22:48:57.600Z"
+    },
+    "forest-area": {
+      "key": "forest-area",
+      "statsDataId": "0000010102",
+      "configYears": 1,
+      "estatNonNullYears": 7,
+      "availableYearCodes": [
+        "1980",
+        "1984",
+        "1990",
+        "2000",
+        "2009",
+        "2014",
+        "2019"
+      ],
+      "verdict": "extend-candidate",
+      "checkedAt": "2026-10-03T22:48:58.649Z"
+    },
+    "forest-area-ratio": {
+      "key": "forest-area-ratio",
+      "statsDataId": "0000010202",
+      "configYears": 1,
+      "estatNonNullYears": 7,
+      "availableYearCodes": [
+        "1980",
+        "1984",
+        "1990",
+        "2000",
+        "2009",
+        "2014",
+        "2019"
+      ],
+      "verdict": "extend-candidate",
+      "checkedAt": "2026-10-03T22:48:59.978Z"
+    },
+    "freelance-count": {
+      "key": "freelance-count",
+      "statsDataId": "0004008516",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2022"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:49:01.163Z"
+    },
+    "fulltime-physicians-general-hospital-per-100beds": {
+      "key": "fulltime-physicians-general-hospital-per-100beds",
+      "statsDataId": "0000010209",
+      "configYears": 1,
+      "estatNonNullYears": 3,
+      "availableYearCodes": [
+        "2017",
+        "2020",
+        "2023"
+      ],
+      "verdict": "extend-candidate",
+      "checkedAt": "2026-10-03T22:49:02.829Z"
+    },
+    "future-burden-ratio": {
+      "key": "future-burden-ratio",
+      "statsDataId": "0000010104",
+      "configYears": 1,
+      "estatNonNullYears": 12,
+      "availableYearCodes": [
+        "2011",
+        "2012",
+        "2013",
+        "2014",
+        "2015",
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022"
+      ],
+      "verdict": "extend-candidate",
+      "checkedAt": "2026-10-03T22:49:04.139Z"
+    },
+    "gdp-growth-rate-pref-h23": {
+      "key": "gdp-growth-rate-pref-h23",
+      "statsDataId": "0000010203",
+      "configYears": 1,
+      "estatNonNullYears": 12,
+      "availableYearCodes": [
+        "2007",
+        "2008",
+        "2009",
+        "2010",
+        "2011",
+        "2012",
+        "2013",
+        "2014",
+        "2015",
+        "2016",
+        "2017",
+        "2018"
+      ],
+      "verdict": "extend-candidate",
+      "checkedAt": "2026-10-03T22:49:05.396Z"
+    },
+    "gender-wage-gap": {
+      "key": "gender-wage-gap",
+      "statsDataId": "0003426933",
+      "configYears": 1,
+      "estatNonNullYears": 2,
+      "availableYearCodes": [
+        "2021",
+        "2022"
+      ],
+      "verdict": "extend-candidate",
+      "checkedAt": "2026-10-03T22:49:07.845Z"
+    },
+    "general-affairs-expenses-prefecture": {
+      "key": "general-affairs-expenses-prefecture",
+      "statsDataId": "0000010104",
+      "configYears": 1,
+      "estatNonNullYears": 13,
+      "availableYearCodes": [
+        "2010",
+        "2011",
+        "2012",
+        "2013",
+        "2014",
+        "2015",
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022"
+      ],
+      "verdict": "extend-candidate",
+      "checkedAt": "2026-10-03T22:49:09.041Z"
+    },
+    "gini-coefficient-disposable-income": {
+      "key": "gini-coefficient-disposable-income",
+      "statsDataId": "0003440743",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2019"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:49:10.091Z"
+    },
+    "gini-coefficient-financial-assets": {
+      "key": "gini-coefficient-financial-assets",
+      "statsDataId": "0003440696",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2019"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:49:11.018Z"
+    },
+    "goods-inventory-wholesale-retail": {
+      "key": "goods-inventory-wholesale-retail",
+      "statsDataId": "0000010103",
+      "configYears": 1,
+      "estatNonNullYears": 11,
+      "availableYearCodes": [
+        "1976",
+        "1979",
+        "1982",
+        "1985",
+        "1988",
+        "1991",
+        "1994",
+        "1997",
+        "2002",
+        "2007",
+        "2011"
+      ],
+      "verdict": "extend-candidate",
+      "checkedAt": "2026-10-03T22:49:13.012Z"
+    },
+    "health-checkup-recipients": {
+      "key": "health-checkup-recipients",
+      "statsDataId": "0004027740",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2020"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:49:14.064Z"
+    },
+    "health-physical-education-expenses-prefecture": {
+      "key": "health-physical-education-expenses-prefecture",
+      "statsDataId": "0000010104",
+      "configYears": 1,
+      "estatNonNullYears": 13,
+      "availableYearCodes": [
+        "2010",
+        "2011",
+        "2012",
+        "2013",
+        "2014",
+        "2015",
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022"
+      ],
+      "verdict": "extend-candidate",
+      "checkedAt": "2026-10-03T22:49:15.083Z"
+    },
+    "history-museum-count": {
+      "key": "history-museum-count",
+      "statsDataId": "0003348770",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2015"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:49:16.098Z"
+    },
+    "hobby-activity-by-couple": {
+      "key": "hobby-activity-by-couple",
+      "statsDataId": "0003455918",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2021"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:49:17.037Z"
+    },
+    "hobby-activity-singleperson": {
+      "key": "hobby-activity-singleperson",
+      "statsDataId": "0003455926",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2021"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:49:18.185Z"
+    },
+    "hobby-participation-rate-art-appreciation": {
+      "key": "hobby-participation-rate-art-appreciation",
+      "statsDataId": "0003456573",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2021"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:49:19.226Z"
+    },
+    "hobby-participation-rate-calligraphy": {
+      "key": "hobby-participation-rate-calligraphy",
+      "statsDataId": "0003456573",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2021"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:49:20.199Z"
+    },
+    "hobby-participation-rate-camping": {
+      "key": "hobby-participation-rate-camping",
+      "statsDataId": "0003456573",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2021"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:49:21.287Z"
+    },
+    "hobby-participation-rate-chorus": {
+      "key": "hobby-participation-rate-chorus",
+      "statsDataId": "0003456573",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2021"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:49:22.306Z"
+    },
+    "hobby-participation-rate-cinema": {
+      "key": "hobby-participation-rate-cinema",
+      "statsDataId": "0003456573",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2021"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:49:23.350Z"
+    },
+    "hobby-participation-rate-classical-music": {
+      "key": "hobby-participation-rate-classical-music",
+      "statsDataId": "0003456573",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2021"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:49:24.369Z"
+    },
+    "hobby-participation-rate-cooking": {
+      "key": "hobby-participation-rate-cooking",
+      "statsDataId": "0003456573",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2021"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:49:25.465Z"
+    },
+    "hobby-participation-rate-diy": {
+      "key": "hobby-participation-rate-diy",
+      "statsDataId": "0003456573",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2021"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:49:26.658Z"
+    },
+    "hobby-participation-rate-flower-arrangement": {
+      "key": "hobby-participation-rate-flower-arrangement",
+      "statsDataId": "0003456573",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2021"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:49:27.661Z"
+    },
+    "hobby-participation-rate-gardening": {
+      "key": "hobby-participation-rate-gardening",
+      "statsDataId": "0003456573",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2021"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:49:28.685Z"
+    },
+    "hobby-participation-rate-go": {
+      "key": "hobby-participation-rate-go",
+      "statsDataId": "0003456573",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2021"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:49:29.697Z"
+    },
+    "hobby-participation-rate-home-movie": {
+      "key": "hobby-participation-rate-home-movie",
+      "statsDataId": "0003456573",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2021"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:49:30.784Z"
+    },
+    "hobby-participation-rate-instrument": {
+      "key": "hobby-participation-rate-instrument",
+      "statsDataId": "0003456573",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2021"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:49:31.913Z"
+    },
+    "hobby-participation-rate-japanese-dance": {
+      "key": "hobby-participation-rate-japanese-dance",
+      "statsDataId": "0003456573",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2021"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:49:32.936Z"
+    },
+    "hobby-participation-rate-japanese-music": {
+      "key": "hobby-participation-rate-japanese-music",
+      "statsDataId": "0003456573",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2021"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:49:34.531Z"
+    },
+    "hobby-participation-rate-karaoke": {
+      "key": "hobby-participation-rate-karaoke",
+      "statsDataId": "0003456573",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2021"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:49:35.380Z"
+    },
+    "hobby-participation-rate-knitting": {
+      "key": "hobby-participation-rate-knitting",
+      "statsDataId": "0003456573",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2021"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:49:36.359Z"
+    },
+    "hobby-participation-rate-manga": {
+      "key": "hobby-participation-rate-manga",
+      "statsDataId": "0003456573",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2021"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:49:37.298Z"
+    },
+    "hobby-participation-rate-music-listening": {
+      "key": "hobby-participation-rate-music-listening",
+      "statsDataId": "0003456573",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2021"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:49:38.372Z"
+    },
+    "hobby-participation-rate-pachinko": {
+      "key": "hobby-participation-rate-pachinko",
+      "statsDataId": "0003456573",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2021"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:49:39.280Z"
+    },
+    "hobby-participation-rate-painting": {
+      "key": "hobby-participation-rate-painting",
+      "statsDataId": "0003456573",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2021"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:49:40.256Z"
+    },
+    "hobby-participation-rate-photography": {
+      "key": "hobby-participation-rate-photography",
+      "statsDataId": "0003456573",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2021"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:49:41.270Z"
+    },
+    "hobby-participation-rate-popular-music": {
+      "key": "hobby-participation-rate-popular-music",
+      "statsDataId": "0003456573",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2021"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:49:42.358Z"
+    },
+    "hobby-participation-rate-pottery": {
+      "key": "hobby-participation-rate-pottery",
+      "statsDataId": "0003456573",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2021"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:49:43.317Z"
+    },
+    "hobby-participation-rate-reading": {
+      "key": "hobby-participation-rate-reading",
+      "statsDataId": "0003456573",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2021"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:49:44.309Z"
+    },
+    "hobby-participation-rate-sewing": {
+      "key": "hobby-participation-rate-sewing",
+      "statsDataId": "0003456573",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2021"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:49:45.309Z"
+    },
+    "hobby-participation-rate-shogi": {
+      "key": "hobby-participation-rate-shogi",
+      "statsDataId": "0003456573",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2021"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:49:46.310Z"
+    },
+    "hobby-participation-rate-sports-spectating": {
+      "key": "hobby-participation-rate-sports-spectating",
+      "statsDataId": "0003456573",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2021"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:49:47.273Z"
+    },
+    "hobby-participation-rate-tea-ceremony": {
+      "key": "hobby-participation-rate-tea-ceremony",
+      "statsDataId": "0003456573",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2021"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:49:48.394Z"
+    },
+    "hobby-participation-rate-theater": {
+      "key": "hobby-participation-rate-theater",
+      "statsDataId": "0003456573",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2021"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:49:49.365Z"
+    },
+    "hobby-participation-rate-theme-parks": {
+      "key": "hobby-participation-rate-theme-parks",
+      "statsDataId": "0003456573",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2021"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:49:50.442Z"
+    },
+    "hobby-participation-rate-video-games": {
+      "key": "hobby-participation-rate-video-games",
+      "statsDataId": "0003456573",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2021"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:49:51.417Z"
+    },
+    "hobby-participation-rate-western-dance": {
+      "key": "hobby-participation-rate-western-dance",
+      "statsDataId": "0003456573",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2021"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:49:52.481Z"
+    },
+    "hobby-participation-rate-writing": {
+      "key": "hobby-participation-rate-writing",
+      "statsDataId": "0003456573",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2021"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:49:53.436Z"
+    },
+    "home-helper-count-per-100k": {
+      "key": "home-helper-count-per-100k",
+      "statsDataId": "0000010210",
+      "configYears": 1,
+      "estatNonNullYears": 3,
+      "availableYearCodes": [
+        "2000",
+        "2001",
+        "2002"
+      ],
+      "verdict": "extend-candidate",
+      "checkedAt": "2026-10-03T22:49:55.005Z"
+    },
+    "home-helper-users-per-office": {
+      "key": "home-helper-users-per-office",
+      "statsDataId": "0000010210",
+      "configYears": 1,
+      "estatNonNullYears": 24,
+      "availableYearCodes": [
+        "2000",
+        "2001",
+        "2002",
+        "2003",
+        "2004",
+        "2005",
+        "2006",
+        "2007",
+        "2008",
+        "2009",
+        "2010",
+        "2011",
+        "2012",
+        "2013",
+        "2014",
+        "2015",
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023"
+      ],
+      "verdict": "extend-candidate",
+      "checkedAt": "2026-10-03T22:49:55.834Z"
+    },
+    "hospital-bed-count": {
+      "key": "hospital-bed-count",
+      "statsDataId": "0004045406",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2024"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:49:56.700Z"
+    },
+    "hospital-staff-by-occupation": {
+      "key": "hospital-staff-by-occupation",
+      "statsDataId": "0004027744",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2020"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:49:57.608Z"
+    },
+    "household-head-annual-income-per-household": {
+      "key": "household-head-annual-income-per-household",
+      "statsDataId": "0000010212",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2019"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:49:58.862Z"
+    },
+    "household-income-by-type": {
+      "key": "household-income-by-type",
+      "statsDataId": "0003355488",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2018"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:49:59.944Z"
+    },
+    "household-ratio-main-earner-employee-commute-90min": {
+      "key": "household-ratio-main-earner-employee-commute-90min",
+      "statsDataId": "0000010208",
+      "configYears": 1,
+      "estatNonNullYears": 9,
+      "availableYearCodes": [
+        "1978",
+        "1983",
+        "1988",
+        "1993",
+        "1998",
+        "2003",
+        "2008",
+        "2013",
+        "2018"
+      ],
+      "verdict": "extend-candidate",
+      "checkedAt": "2026-10-03T22:50:01.082Z"
+    },
+    "household-types-by-area": {
+      "key": "household-types-by-area",
+      "statsDataId": "0003355518",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2018"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:50:02.594Z"
+    },
+    "households-on-public-assistance-per-1000": {
+      "key": "households-on-public-assistance-per-1000",
+      "statsDataId": "0000010210",
+      "configYears": 1,
+      "estatNonNullYears": 28,
+      "availableYearCodes": [
+        "1980",
+        "1985",
+        "1990",
+        "1995",
+        "2000",
+        "2001",
+        "2002",
+        "2003",
+        "2004",
+        "2005",
+        "2006",
+        "2007",
+        "2008",
+        "2009",
+        "2010",
+        "2011",
+        "2012",
+        "2013",
+        "2014",
+        "2015",
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023"
+      ],
+      "verdict": "extend-candidate",
+      "checkedAt": "2026-10-03T22:50:03.597Z"
+    },
+    "housing-land-debt-per-household": {
+      "key": "housing-land-debt-per-household",
+      "statsDataId": "0003426532",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2019"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:50:04.675Z"
+    },
+    "housing-land-liabilities-ratio-multi-person-households": {
+      "key": "housing-land-liabilities-ratio-multi-person-households",
+      "statsDataId": "0000010212",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2019"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:50:05.698Z"
+    },
+    "husband-childcare-rate": {
+      "key": "husband-childcare-rate",
+      "statsDataId": "0004008627",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2022"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:50:07.016Z"
+    },
+    "in-prefecture-employed-people-ratio": {
+      "key": "in-prefecture-employed-people-ratio",
+      "statsDataId": "0000010206",
+      "configYears": 1,
+      "estatNonNullYears": 10,
+      "availableYearCodes": [
+        "1975",
+        "1980",
+        "1985",
+        "1990",
+        "1995",
+        "2000",
+        "2005",
+        "2010",
+        "2015",
+        "2020"
+      ],
+      "verdict": "extend-candidate",
+      "checkedAt": "2026-10-03T22:50:08.125Z"
+    },
+    "industrial-land-price": {
+      "key": "industrial-land-price",
+      "statsDataId": "0000010103",
+      "configYears": 1,
+      "estatNonNullYears": 49,
+      "availableYearCodes": [
+        "1976",
+        "1977",
+        "1978",
+        "1979",
+        "1980",
+        "1981",
+        "1982",
+        "1983",
+        "1984",
+        "1985",
+        "1986",
+        "1987",
+        "1988",
+        "1989",
+        "1990",
+        "1991",
+        "1992",
+        "1993",
+        "1994",
+        "1995",
+        "1996",
+        "1997",
+        "1998",
+        "1999",
+        "2000",
+        "2001",
+        "2002",
+        "2003",
+        "2004",
+        "2005",
+        "2006",
+        "2007",
+        "2008",
+        "2009",
+        "2010",
+        "2011",
+        "2012",
+        "2013",
+        "2014",
+        "2015",
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "verdict": "extend-candidate",
+      "checkedAt": "2026-10-03T22:50:09.446Z"
+    },
+    "inflow-population-ratio": {
+      "key": "inflow-population-ratio",
+      "statsDataId": "0000010201",
+      "configYears": 1,
+      "estatNonNullYears": 10,
+      "availableYearCodes": [
+        "1975",
+        "1980",
+        "1985",
+        "1990",
+        "1995",
+        "2000",
+        "2005",
+        "2010",
+        "2015",
+        "2020"
+      ],
+      "verdict": "extend-candidate",
+      "checkedAt": "2026-10-03T22:50:10.668Z"
+    },
+    "information-private-employees": {
+      "key": "information-private-employees",
+      "statsDataId": "0000010103",
+      "configYears": 1,
+      "estatNonNullYears": 4,
+      "availableYearCodes": [
+        "2011",
+        "2014",
+        "2016",
+        "2021"
+      ],
+      "verdict": "extend-candidate",
+      "checkedAt": "2026-10-03T22:50:11.693Z"
+    },
+    "information-private-establishments": {
+      "key": "information-private-establishments",
+      "statsDataId": "0000010103",
+      "configYears": 1,
+      "estatNonNullYears": 4,
+      "availableYearCodes": [
+        "2011",
+        "2014",
+        "2016",
+        "2021"
+      ],
+      "verdict": "extend-candidate",
+      "checkedAt": "2026-10-03T22:50:14.029Z"
+    },
+    "inpatient-rate-per-100k": {
+      "key": "inpatient-rate-per-100k",
+      "statsDataId": "0004026104",
+      "configYears": 1,
+      "estatNonNullYears": 0,
+      "availableYearCodes": [],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:50:15.181Z"
+    },
+    "inpatients-per-fulltime-physician-per-day": {
+      "key": "inpatients-per-fulltime-physician-per-day",
+      "statsDataId": "0000010209",
+      "configYears": 1,
+      "estatNonNullYears": 7,
+      "availableYearCodes": [
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023"
+      ],
+      "verdict": "extend-candidate",
+      "checkedAt": "2026-10-03T22:50:16.445Z"
+    },
+    "inpatients-per-nurse-per-day": {
+      "key": "inpatients-per-nurse-per-day",
+      "statsDataId": "0000010209",
+      "configYears": 1,
+      "estatNonNullYears": 7,
+      "availableYearCodes": [
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023"
+      ],
+      "verdict": "extend-candidate",
+      "checkedAt": "2026-10-03T22:50:18.631Z"
+    },
+    "intellectual-disability-support-facility-staff-per-100k": {
+      "key": "intellectual-disability-support-facility-staff-per-100k",
+      "statsDataId": "0000010210",
+      "configYears": 1,
+      "estatNonNullYears": 10,
+      "availableYearCodes": [
+        "2002",
+        "2003",
+        "2004",
+        "2005",
+        "2006",
+        "2007",
+        "2008",
+        "2009",
+        "2010",
+        "2011"
+      ],
+      "verdict": "extend-candidate",
+      "checkedAt": "2026-10-03T22:50:19.521Z"
+    },
+    "interprefecture-net-migration-age15to24": {
+      "key": "interprefecture-net-migration-age15to24",
+      "statsDataId": "0003419944",
+      "configYears": 1,
+      "estatNonNullYears": 6,
+      "availableYearCodes": [
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024",
+        "2025"
+      ],
+      "verdict": "extend-candidate",
+      "checkedAt": "2026-10-03T22:50:20.605Z"
     }
   }
 }

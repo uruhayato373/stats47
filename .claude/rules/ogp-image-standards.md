@@ -69,7 +69,7 @@ staging・fingerprint・exact publisherは§5.0を共有し、ローカルプレ
 | カード: blog (light/dark)      | 640×336 WebP (40:21、画像内テキストなし)                                     | `apps/web/scripts/generate-blog-thumbnails-cloud.ts` (Satori/Sharp、OGPとは別renderer)                                                                                                                                                                                                                                                                                                                                                                             | R2 `app/blog/<slug>/thumbnail-{light,dark}.webp`                   | `ThemeAwareImage` (blog-article-grid)           | blog-editor                                                      |
 | カード: ranking (light/dark)   | 640×360 WebP                                                                 | 共通地理地図 renderer → R2                                                                                                                                                                                                                                                                                                                                                                                                                                        | `app/ranking/<key>/thumbnail-{light,dark}.webp`                    | `generate-ogp-images.ts --type ranking-cards`   | ranking-publisher                                                |
 | カード: theme / category       | —                                                                            | **なし (要否は §3 で判断)**                                                                                                                                                                                                                                                                                                                                                                                                                                       | —                                                                  | (共有 SVG タイルマップ or blog サムネ流用)      | —                                                                |
-| note カバー                    | 1280×670 (≒1.91:1)                                                           | **系統併存 (既知課題)**: (A) Remotion `apps/remotion/src/features/ranking-note/NoteCover.tsx` → R2 `sns/` / (B) `.claude/scripts/note/generate-note-covers.mjs` (SVG→PNG、stats47-note 汎用) / **(C) `.claude/scripts/note/generate-koumuin-covers.cjs`** (koumuin-\* 専用の正典。共通背景 `assets/koumuin-cover-bg.png` + カテゴリトーン + 中央ボックス、frontmatter 駆動、sharp で背景 bitmap に前景 SVG を合成し PNG 直出力。無ければダーク背景フォールバック) | docs/31 `images/cover-1280x670.png` → note.com アップロード        | note-manager                                    |
+| note カバー | 1280×670 (≒1.91:1) | cover-designs.ts + generate-cover-refresh.ts / shared editorial renderer | private R2のSHA付き版 + data/note/cover-assets.json | 共通画像台帳・GET proxy | note-manager |
 
 ### OGP コンポーネントの実体
 
@@ -153,7 +153,7 @@ node .claude/scripts/ogp/build-image-gallery.mjs --audit
 | 外部 AI / 背景素材用の画像プロンプト生成                      | `image-prompt-curator` (skill `/image-prompt`)     |
 | ranking リンクカード供給 (R2 生成)                            | `ranking-publisher` + `snapshot-exporter`          |
 | blog OGP / サムネ                                             | `blog-editor`                                      |
-| note カバー                                                   | `note-manager`                                     |
+| note カバー | 1280×670 (≒1.91:1) | cover-designs.ts + generate-cover-refresh.ts / shared editorial renderer | private R2のSHA付き版 + data/note/cover-assets.json | 共通画像台帳・GET proxy | note-manager |
 | R2 push                                                       | CI / `r2-publisher`                                |
 | 改善施策の status 管理                                        | `improvement-triage` (バックログ書き込みは排他)    |
 
@@ -253,7 +253,7 @@ fingerprint  = SHA-256(inputHash + rendererHash + generator/entity + output cont
   共通fingerprint/asset契約と、metadataとしてversion / rankingKey / geographicLayout / year /
   入力R2キー / config / topologyを記録する。
   WebPやmanifestを手編集せず、`generate-ogp-images.ts --type ranking-cards` で再生成する。
-- **note カバー**: `note/<vertical>/<slug>/images/cover-1280x670.png` に事前生成 archive (Satori 統一デザイン)。
+- **note カバー**: 正本はgit `data/note/cover-assets.json` + JSON Schema、実体は非公開R2の版別SHA付きkey。
   note上の設定有無は`npm run note:covers:audit`でv3記事詳細の`data.eyecatch`を全件検査する。
   一覧サムネイルは本文画像を代用する場合があり、R2保存画像やHTTP 200も設定済みの根拠にならない。
   取得失敗・フィールド欠損は`unknown`、全量取得できない場合は`incomplete`として合格させない。
@@ -264,14 +264,11 @@ fingerprint  = SHA-256(inputHash + rendererHash + generator/entity + output cont
   全件の文字境界・重なり・縮小表示を検査する。ユーザーが依頼した公開変更は画像専用
   `update-note-covers.mjs`で行い、記事内容の保全hash・画像SHA・変更時刻・配信結果を記録する。
   手順と入力契約は[カタログREADME](../scripts/note/catalog/README.md#公開カバーの制作と差し替え)。
-  - **★koumuin-claude-code / koumuin-estat-claude-code は Satori 系の対象外 (二重 SSOT 回避・2026-07-09)**。
-    この 2 シリーズは bespoke カバーが正典 = `.claude/scripts/note/generate-koumuin-covers.cjs`
-    (共通背景 `assets/koumuin-cover-bg.png` + カテゴリトーン + 中央ボックス、frontmatter 駆動、sharp 合成)
-    → `docs/31 images/cover-1280x670.png` → publish-note が note.com へアップロード。
-    `generate-ogp-images.ts --type note-covers` はこの 2 vertical を `BESPOKE_COVER_VERTICALS` で除外する
-    (Satori で R2 に別デザインを焼かない)。**カバーは派生物**で SSOT 入力は
-    「frontmatter (title/is_paid/category) + 背景アセット + 生成器」= すべて git。docs/31・R2 のカバー PNG は再生成可能。
-    `koumuin-gis` / `stats47-note` は従来どおり Satori 系対象。
+  全verticalで保存・採用・公開は同じ台帳を使う。旧SVG/Remotion/bespoke rendererは制作入力として残すが、
+  ローカルPNGを採用版として直接公開しない。`generate-ogp-images.ts --type note-covers` は書込前に停止し、
+  週次汎用OGP自動修復の対象から除外する。新規記事の公開も採用済みremote版を一時復元して使う。
+  旧public R2の画像は移行元であり、note公開版とは別に未採用の保管版として管理する。
+  台帳・制作・移行・レビュー・表示・鮮度の契約は [note-image-assets.md](./note-image-assets.md) に一本化する。
 - **theme のみ例外**: `generateStaticParams` でビルド時 prerender され稼働するため、当面ランタイム route を残す。
   **home/category は既存の静的 `public/og-image.jpg`** を使う。
 

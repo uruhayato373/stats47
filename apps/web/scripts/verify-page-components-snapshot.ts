@@ -10,8 +10,9 @@
 
 import { readdirSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
+import { SITE } from "@stats47/types";
 
-const PUBLIC_URL = process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp";
+const PUBLIC_URL = process.env.R2_PUBLIC_FETCH_URL ?? SITE.r2PublicBaseUrl;
 const DATA_ROOT = resolve(__dirname, "data/page-components");
 const CONCURRENCY = 24;
 const VERIFY_TOKEN = Date.now();

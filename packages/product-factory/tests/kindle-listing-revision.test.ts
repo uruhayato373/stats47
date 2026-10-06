@@ -4,10 +4,11 @@ import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 import { prepareNewEdition, prepareUpdate } from "../src/channels/kindle/promote-kdp-listing";
+import { KDP_LISTINGS } from "../../../config/paths.mjs";
 
 const root = fileURLToPath(new URL("../../../", import.meta.url));
 const entry = resolve(root, "packages/product-factory/src/channels/kindle/export-kdp-listings.ts");
-const publication = resolve(root, ".claude/config/kdp-listings.json");
+const publication = resolve(root, KDP_LISTINGS);
 const CLI_TIMEOUT_MS = 60_000;
 
 describe("KDP revision preparation cannot overwrite publication history", () => {

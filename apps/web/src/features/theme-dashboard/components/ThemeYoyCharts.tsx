@@ -1,5 +1,7 @@
 "use client";
 
+import { to2DigitPrefCode } from "@stats47/area";
+
 import { MetricYoyChoroplethSection } from "./MetricYoyChoroplethSection";
 
 /**
@@ -123,7 +125,7 @@ export function ThemeYoyCharts({
           title={c.title}
           subtitle={c.subtitle}
           colorClamp={c.colorClamp}
-          highlightAreaCode={highlightAreaCode ? highlightAreaCode.slice(0, 2) : undefined}
+          highlightAreaCode={highlightAreaCode ? to2DigitPrefCode(highlightAreaCode) : undefined}
         />
       ))}
     </div>

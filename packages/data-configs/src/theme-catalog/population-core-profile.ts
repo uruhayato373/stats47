@@ -1,4 +1,5 @@
 /** Population profiles: direct official cells, distinct populations/years, no imputed unknowns. */
+import { NATIONAL_AREA_CODE, PREFECTURE_AREA_CODES } from '@stats47/area';
 type ClassLabel = { code: string; label: string };
 type SourcePin = {
   tableId: string;
@@ -59,10 +60,7 @@ export type PopulationCoreProfile =
   | MigrationDemographicsProfile
   | SingleHouseholdsProfile
   | FiveYearResidenceProfile;
-const PREFS = Array.from(
-  { length: 47 },
-  (_, i) => String(i + 1).padStart(2, '0') + '000'
-);
+const PREFS = PREFECTURE_AREA_CODES;
 function insist(value: unknown, message: string): asserts value {
   if (!value) throw Error('population profile: ' + message);
 }
@@ -206,7 +204,7 @@ function areaNames(value: unknown, national: unknown) {
     '47 ordered unique prefectures'
   );
   for (const r of rows) text(object(r).areaName);
-  same(object(national).areaCode, '00000', 'national identity');
+  same(object(national).areaCode, NATIONAL_AREA_CODE, 'national identity');
   same(object(national).areaName, '全国', 'national name');
 }
 export function parsePopulationCoreProfile(

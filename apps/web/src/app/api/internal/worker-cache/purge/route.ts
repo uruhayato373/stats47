@@ -7,6 +7,8 @@ import {
   DATA_CACHE_TAG,
 } from "@/lib/cache-policy";
 
+import { SITE_ORIGIN } from "@/config/site";
+
 const MAX_URLS_PER_REQUEST = 100;
 
 interface PurgeRequestBody {
@@ -65,7 +67,7 @@ async function hasValidBearerToken(request: Request, expectedToken: string): Pro
 }
 
 function resolveAllowedOrigin(): string {
-  return new URL(process.env.NEXT_PUBLIC_BASE_URL ?? "https://stats47.jp").origin;
+  return new URL(process.env.NEXT_PUBLIC_BASE_URL ?? SITE_ORIGIN).origin;
 }
 
 function parsePagePathnames(urls: unknown): string[] | null {

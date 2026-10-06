@@ -17,6 +17,7 @@ import { resolveRankingData } from "@/shared/utils/mock-data";
 import { TileGridMapScene } from "../maps/TileGridMapScene";
 import { RankCard } from "./RankCard";
 import { RankingTitle } from "./RankingTitle";
+import { PREFECTURE_TOPOJSON_FILE } from "../../utils/static-files";
 
 /**
  * ショート動作用 Props — React コンポーネントを直接レンダリング
@@ -220,7 +221,7 @@ export const RankingShort: React.FC<RankingShortProps> = ({
 
     async function loadSilhouettes() {
       try {
-        const url = staticFile("prefecture.topojson");
+        const url = staticFile(PREFECTURE_TOPOJSON_FILE);
         const res = await fetch(url);
         const topology = (await res.json()) as Topology;
 

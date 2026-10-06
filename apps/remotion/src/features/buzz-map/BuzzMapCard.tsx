@@ -9,6 +9,7 @@ import {
   type BuzzMapRatio,
 } from "./tokens";
 import type { BuzzMapSpec } from "./types";
+import { SITE } from "@stats47/types";
 
 export interface BuzzMapSummaryEntry {
   label: string;
@@ -382,8 +383,8 @@ export const BuzzMapCard: React.FC<BuzzMapCardProps> = ({
           gap: 12 * s,
         }}
       >
-        <span style={{ fontWeight: 700, color: C.ink }}>stats47.jp</span>
-        <span style={{ fontSize: 20 * s }}>統計で見る都道府県</span>
+        <span style={{ fontWeight: 700, color: C.ink }}>{SITE.domain}</span>
+        <span style={{ fontSize: 20 * s }}>{SITE.name}</span>
       </div>
     </AbsoluteFill>
   );

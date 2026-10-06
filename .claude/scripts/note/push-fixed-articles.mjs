@@ -7,6 +7,7 @@
 import { readFileSync, existsSync } from 'fs'
 import { resolve, join, dirname } from 'path'
 import { fileURLToPath } from 'url'
+import { R2_BUCKET } from '../lib/site-config.cjs'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const ROOT = resolve(__dirname, '../../..')
@@ -25,7 +26,7 @@ if (DRY_RUN) console.log('[dry-run] R2 書き込みはスキップ')
 
 const { S3Client, PutObjectCommand } = await import('@aws-sdk/client-s3')
 
-const BUCKET = process.env.CLOUDFLARE_R2_BUCKET_NAME || 'stats47'
+const BUCKET = process.env.CLOUDFLARE_R2_BUCKET_NAME || R2_BUCKET
 const s3 = DRY_RUN ? null : new S3Client({
   region: 'auto',
   endpoint: process.env.R2_S3_ENDPOINT,

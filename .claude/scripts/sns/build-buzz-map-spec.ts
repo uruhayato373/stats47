@@ -31,9 +31,10 @@ import { dirname, join } from "node:path";
 import { getMetricConfig } from "@stats47/data-configs";
 
 import { toBuzzMapAreaCode } from "./lib/buzz-map-area-code";
+import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 
 const PROJECT_ROOT = join(import.meta.dirname ?? __dirname, "../../..");
-const PUBLIC_URL = process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp";
+const PUBLIC_URL = process.env.R2_PUBLIC_FETCH_URL ?? R2_PUBLIC_BASE_URL;
 const SPECS_DIR = join(PROJECT_ROOT, "apps/remotion/src/features/buzz-map/specs");
 const MUNI_TOPOJSON = join(PROJECT_ROOT, "apps/remotion/public/buzz-map/municipalities.topojson");
 

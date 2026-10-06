@@ -46,13 +46,14 @@ import {
   suggestMissingPrograms,
 } from "./lib/a8-report-csv.mjs";
 import { repoRoot } from "./lib/asp-browser-base.mjs";
+import { A8_REPORT_AUTOMATION } from "../../../config/paths.mjs";
 
 const REPO_ROOT = repoRoot();
 const RAW_STATE_DIR = join(REPO_ROOT, ".local/a8-ui");
 const AFF_DIR = join(REPO_ROOT, ".claude/state/metrics/affiliate");
 const REPORT_LOG = join(AFF_DIR, "a8-report-log.json");
 const RESULTS = join(AFF_DIR, "a8-results.json");
-const CONFIG_PATH = join(REPO_ROOT, ".claude/config/a8-report-automation.json");
+const CONFIG_PATH = join(REPO_ROOT, A8_REPORT_AUTOMATION);
 
 /** reportKey → a8-report-log.json 内の配列名とキー関数。 */
 const BUCKET = {

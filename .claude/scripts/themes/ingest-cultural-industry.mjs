@@ -5,6 +5,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
+import { ESTAT_STATS_DATA_URL } from '../lib/estat-catalog/endpoints.cjs';
 const require = createRequire(import.meta.url);
 const prefectures = require('../../../packages/area/src/data/prefectures.json');
 const { METRICS_REGISTRY } = require('../../../packages/data-configs/src/registry.ts');
@@ -179,7 +180,7 @@ async function fetchSource(source, dir) {
     if (error.code !== 'ENOENT') throw error;
     const appId = process.env.NEXT_PUBLIC_ESTAT_APP_ID || process.env.ESTAT_APP_ID;
     assert.ok(appId, 'e-Stat key required for uncached source');
-    const url = new URL('https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData');
+    const url = new URL(ESTAT_STATS_DATA_URL);
     url.search = new URLSearchParams({ appId, lang: 'J', ...source.parameters }).toString();
     let response; try { response = await fetch(url, { signal: AbortSignal.timeout(60000) }); } catch { throw new Error(`e-Stat failed: ${source.id}`); }
     assert.ok(response.ok, `e-Stat HTTP ${response.status}`); bytes = Buffer.from(await response.arrayBuffer());

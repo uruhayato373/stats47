@@ -22,6 +22,7 @@ import {
   MapPin,
   Search,
   TrendingUp,
+  type LucideIcon,
 } from 'lucide-react';
 
 import { trackNavClick } from '@/lib/analytics/events';
@@ -29,6 +30,11 @@ import { trackNavClick } from '@/lib/analytics/events';
 import { useBreakpoint } from '@/hooks/useBreakpoint';
 
 import { useSidebarStore } from '@/store/sidebar-store';
+
+import {
+  PRIMARY_NAV_ITEMS,
+  type PrimaryNavKey,
+} from '../Header/header-navigation';
 
 import { NAV_ACCENT_PALETTE } from './nav-accent.palette';
 
@@ -42,6 +48,18 @@ interface MobileNavDrawerClientProps {
   themes: ThemeNavItem[];
 }
 
+/** 共有の主要ナビ項目に付けるドロワー固有のアイコン・色。 */
+const PRIMARY_NAV_DECOR: Record<
+  PrimaryNavKey,
+  { icon: LucideIcon; color: string }
+> = {
+  ranking: { icon: TrendingUp, color: NAV_ACCENT_PALETTE.ranking },
+  areas: { icon: MapPin, color: NAV_ACCENT_PALETTE.areas },
+  municipalities: { icon: Building2, color: NAV_ACCENT_PALETTE.municipalities },
+  geo: { icon: Map, color: NAV_ACCENT_PALETTE.geo },
+  blog: { icon: BookOpen, color: NAV_ACCENT_PALETTE.blog },
+};
+
 // 並び順・ラベルは desktop ヘッダー (HeaderClient) に揃える:
 // ホーム → ランキング → 都道府県 → 市区町村 → 地域分析 → 統計ブログ → 地域間比較 → 検索。
 // ラベルは surface 間で nav_label が割れないよう desktop と一致させる
@@ -53,36 +71,11 @@ const NAV_LINKS = [
     icon: Home,
     color: NAV_ACCENT_PALETTE.home,
   },
-  {
-    href: '/ranking',
-    label: 'ランキング',
-    icon: TrendingUp,
-    color: NAV_ACCENT_PALETTE.ranking,
-  },
-  {
-    href: '/areas',
-    label: '都道府県',
-    icon: MapPin,
-    color: NAV_ACCENT_PALETTE.areas,
-  },
-  {
-    href: '/municipalities',
-    label: '市区町村',
-    icon: Building2,
-    color: NAV_ACCENT_PALETTE.municipalities,
-  },
-  {
-    href: '/geo',
-    label: '地域分析',
-    icon: Map,
-    color: NAV_ACCENT_PALETTE.geo,
-  },
-  {
-    href: '/blog',
-    label: '統計ブログ',
-    icon: BookOpen,
-    color: NAV_ACCENT_PALETTE.blog,
-  },
+  ...PRIMARY_NAV_ITEMS.map(({ key, href, label }) => ({
+    href,
+    label,
+    ...PRIMARY_NAV_DECOR[key],
+  })),
   {
     href: '/category/population/compare',
     label: '地域間比較',
@@ -95,7 +88,7 @@ const NAV_LINKS = [
     icon: Search,
     color: NAV_ACCENT_PALETTE.search,
   },
-] as const;
+];
 
 /**
  * モバイル専用ナビゲーションドロワー（Sheet）

@@ -1,5 +1,6 @@
 import { CITIES, PREFECTURES } from "../data";
 import { NATIONAL_AREA } from "../constants/national";
+import { NATIONAL_AREA_CODE } from "../constants/prefecture-codes";
 import type { Area } from "../types/area";
 import type { Prefecture } from "../types/prefecture";
 
@@ -34,7 +35,7 @@ export function lookupArea(areaCode: string): Area | null {
   }
 
   // 全国
-  if (areaCode === "00000") {
+  if (areaCode === NATIONAL_AREA_CODE) {
     return NATIONAL_AREA;
   }
 

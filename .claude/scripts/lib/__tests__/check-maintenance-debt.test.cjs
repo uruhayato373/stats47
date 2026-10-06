@@ -127,3 +127,31 @@ test("「縮小専用」を伴わない対象語の行は引き続き検出す�
   const codes = JSON.parse(result.stdout).newFindings.map((item) => item.code);
   assert.ok(codes.includes("UNBOUNDED_LEGACY"));
 });
+// サイト識別子のリテラルはこのテスト自身が自己走査で検出されないよう連結して作る (__tests__ は対象外だが念のため)。
+const SITE_R2 = "https://" + "storage.stats47.jp";
+test("サイト識別子の完全一致リテラルを SITE_IDENTITY_LITERAL として検出する (2026-10-06 SSOT 集約の再発止め)", (t) => {
+  const root = fixture(`const R2 = process.env.R2_PUBLIC_URL || "${SITE_R2}";\nconst ID = '463218070';\n`);
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  const result = run(root); assert.equal(result.status, 1, result.stdout + result.stderr);
+  const found = JSON.parse(result.stdout).newFindings.filter((item) => item.code === "SITE_IDENTITY_LITERAL");
+  assert.equal(found.length, 2);
+});
+test("パス付き URL・コメント・テストファイルのサイト識別子は検出しない", (t) => {
+  const root = fixture(`const url = "${SITE_R2}/app/blog/all.json";\n/` + `/ 既定は ${SITE_R2}\n`);
+  fs.mkdirSync(path.join(root, "apps/web/src/__tests__"), { recursive: true });
+  fs.writeFileSync(path.join(root, "apps/web/src/__tests__/sample.test.ts"), `expect(base).toBe("${SITE_R2}");\n`);
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  const result = run(root); assert.equal(result.status, 0, result.stdout + result.stderr);
+});
+test("チェッカーが変わったらローカルの stat キャッシュを使わない (新ルールが未変更ファイルにも当たる)", (t) => {
+  const root = fixture(`const R2 = "${SITE_R2}";\n`);
+  const cache = path.join(root, ".local/maintenance-debt-cache.json");
+  fs.mkdirSync(path.dirname(cache), { recursive: true });
+  const st = fs.statSync(path.join(root, "apps/web/src/sample.ts"));
+  // 旧チェッカーで「問題なし」と記録されたキャッシュを置く
+  fs.writeFileSync(cache, JSON.stringify({ version: 1, checker: "old", entries: { "apps/web/src/sample.ts": { size: st.size, mtimeMs: st.mtimeMs, results: [] } } }));
+  t.after(() => fs.rmSync(root, { recursive: true, force: true }));
+  const result = spawnSync(process.execPath, [CHECKER, "--json"], { encoding: "utf8", env: { ...process.env, CLAUDE_PROJECT_DIR: root, MAINTENANCE_DEBT_CACHE: cache } });
+  assert.equal(result.status, 1, result.stdout + result.stderr);
+  assert.ok(JSON.parse(result.stdout).newFindings.some((item) => item.code === "SITE_IDENTITY_LITERAL"));
+});

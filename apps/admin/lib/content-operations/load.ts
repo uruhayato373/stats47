@@ -16,6 +16,7 @@ import {
   KINDLE_SERIES_LABELS,
 } from '../../../../packages/product-factory/src/channels/kindle/cover-design';
 import { KDP_PORTFOLIO_POLICY } from '../../../../packages/product-factory/src/channels/kindle/kdp-publishing-policy';
+import { KDP_LISTINGS } from '../../../../config/paths.mjs';
 import surveysMaster from '../../../../packages/ranking/src/data/surveys.json';
 
 import {
@@ -330,7 +331,7 @@ export function loadContentOperations(
     readJson(root, '.claude/state/sns/posts.json')
   );
   const kdp = ContentKdpListingsState.parse(
-    readJson(root, '.claude/config/kdp-listings.json')
+    readJson(root, KDP_LISTINGS)
   );
   const kindleBuild = ContentKindleBuildState.parse(
     readJson(root, '.claude/state/products/kindle-status.json')

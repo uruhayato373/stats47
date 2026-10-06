@@ -17,9 +17,10 @@
  */
 import fs from "fs";
 import path from "path";
+import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 
 const PROJECT_ROOT = path.resolve(import.meta.dirname, "../../..");
-const R2_PUBLIC_BASE = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
+const R2_PUBLIC_BASE = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
 
 function metricTitle(metricKey) {
   const f = path.join(PROJECT_ROOT, "packages/data-configs/src/metrics", `${metricKey}.ts`);

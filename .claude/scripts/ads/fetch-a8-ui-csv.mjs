@@ -59,6 +59,7 @@ import {
 } from "./lib/a8-report-browser.mjs";
 import { decodeCsvBuffer, parsePeriodFromFilename, parseCsv } from "./lib/a8-report-csv.mjs";
 import { buildA8PeriodContract, compareA8Period, currentJstDate } from "./lib/a8-report-period-core.mjs";
+import { A8_REPORT_AUTOMATION } from "../../../config/paths.mjs";
 
 const REPO_ROOT = repoRoot();
 // raw CSV / manifest（再取得可能な一次データ）は git 管理外のステージング領域へ
@@ -483,7 +484,7 @@ async function main() {
         for (const b of pp.buttons.filter((b) => b.visible)) console.log(`    ${JSON.stringify(b)}`);
       }
       manifest.periodFormProbe = probes;
-      console.log("  → この出力を見て .claude/config/a8-report-automation.json の a8.periodForm を確定する");
+      console.log(`  → この出力を見て ${A8_REPORT_AUTOMATION} の a8.periodForm を確定する`);
       console.log("     （月レンジと日レンジで同名 input が 2 組ある。どちらを操作するかは推測しない）");
     }
 

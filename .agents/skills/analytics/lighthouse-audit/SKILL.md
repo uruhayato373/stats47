@@ -18,11 +18,11 @@ stats47.jp の各ページの Core Web Vitals を計測し、`.claude/state/metr
 > `performance-improvement/snapshots/*/metrics.csv` に蓄積していたが、当該スクリプトは完全DBレス移行で削除され、
 > その CSV を書く writer が無くなっていた。CWV 監視は **PSI 日次ワークフロー**（`.claude/scripts/psi/*` +
 > `.claude/state/metrics/psi/` + `psi-audit-daily.yml`）に一本化済（Lighthouse Lab data は廃止）。本スキルは
-> その PSI ツールを手動実行する薄いラッパー。計測対象 URL は `.claude/config/psi-urls.txt`（19 URL × mobile/desktop）。
+> その PSI ツールを手動実行する薄いラッパー。計測対象 URL は `config/psi-urls.txt`（19 URL × mobile/desktop）。
 
 ## 計測対象
 
-`.claude/config/psi-urls.txt` に列挙された URL（homepage / theme / ranking / area / blog の代表ページ）。
+`config/psi-urls.txt` に列挙された URL（homepage / theme / ranking / area / blog の代表ページ）。
 対象を変えたいときは同ファイルを編集するか `--file <urls.txt>` で別リストを渡す。
 
 ## 実行（PSI 日次と同じ 3 ステップ）
@@ -80,7 +80,7 @@ CI（`.github/workflows/psi-audit-daily.yml`、JST 02:00）は上記を fetch �
 ## 参照
 
 - `.claude/scripts/psi/{fetch-psi-audit,psi-update-digest,psi-threshold-check}.mjs` — PSI ツール本体
-- `.claude/config/psi-urls.txt` — 計測対象 URL リスト
+- `config/psi-urls.txt` — 計測対象 URL リスト
 - `.claude/skills/analytics/performance-improvement/budgets.json` — バジェット閾値（SSOT）
 - `.claude/state/metrics/psi/{LATEST.md,history.csv}` — 蓄積データ
 - `.claude/skills/analytics/performance-report/SKILL.md` — トレンド総合レポート

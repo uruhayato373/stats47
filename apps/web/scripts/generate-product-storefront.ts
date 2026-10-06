@@ -3,7 +3,7 @@
  *
  * 真実源:
  * - 商品内容: packages/product-factory の型付きカタログ
- * - 公開状態・販売 URL: .claude/config/{kdp,coconala}-listings.json
+ * - 公開状態・販売 URL: config/{kdp,coconala}-listings.json
  *
  * 下書き・審査中・ASIN/URL 未確定の商品は fail-closed で出力しない。
  */
@@ -13,13 +13,14 @@ import path from "node:path";
 import { ALL_PRODUCTS } from "../../../packages/product-factory/src/catalog/products";
 import { GEO_SERVICE_OFFER } from "../../../packages/product-factory/src/channels/geo/service-offer";
 import { KINDLE_BOOKS } from "../../../packages/product-factory/src/channels/kindle/book-catalog";
+import { COCONALA_LISTINGS, KDP_LISTINGS } from "../../../config/paths.mjs";
 
 import type { StorefrontProduct } from "../src/features/products/types";
 import { selectLiveKindleEdition, type KindleStorefrontListing } from "./lib/kindle-storefront";
 
 const ROOT = path.resolve(__dirname, "../../..");
-const KDP_LISTINGS_PATH = path.join(ROOT, ".claude/config/kdp-listings.json");
-const COCONALA_LISTINGS_PATH = path.join(ROOT, ".claude/config/coconala-listings.json");
+const KDP_LISTINGS_PATH = path.join(ROOT, KDP_LISTINGS);
+const COCONALA_LISTINGS_PATH = path.join(ROOT, COCONALA_LISTINGS);
 const OUTPUT_PATH = path.join(
   ROOT,
   "apps/web/src/features/products/storefront.generated.ts",

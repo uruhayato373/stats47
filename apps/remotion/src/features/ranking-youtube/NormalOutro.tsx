@@ -2,6 +2,7 @@ import React from "react";
 import { AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
 
 import { BRAND, COLOR_SCHEMES, FONT, type ThemeName } from "@/shared";
+import { SITE } from "@stats47/types";
 
 interface NormalOutroProps {
   theme?: ThemeName;
@@ -148,7 +149,7 @@ export const NormalOutro: React.FC<NormalOutroProps> = ({
             color: BRAND.primaryLight,
             letterSpacing: 2,
           }}>
-            stats47.jp
+            {SITE.domain}
           </div>
         </div>
       </div>

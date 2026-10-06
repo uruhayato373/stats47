@@ -183,8 +183,16 @@ jobs:
             ARGS+=(--proposal .local/ci/improvement-cycle/proposal.json
               --execution-file "${CLAUDE_EXECUTION_FILE:-/home/runner/work/_temp/claude-execution-output.json}")
           fi
+          # 文書検査は「提案の適用で増えた error」だけで止める。適用前からある error (別 workflow の state が
+          # 原因など) で triage の結果を捨てない (2026-10-05 Issue #1068: W40 の提案が DG084 で失われた)
+          mkdir -p .local/ci/improvement-cycle
+          node .claude/scripts/lib/check-docs-governance.cjs --json > .local/ci/improvement-cycle/docs-before.json || true
           node .claude/scripts/metrics/verify-improvement-cycle-run.mjs "${ARGS[@]}"
-          npm run docs:check
+          node .claude/scripts/lib/check-docs-governance.cjs --json > .local/ci/improvement-cycle/docs-after.json || true
+          node .claude/scripts/metrics/check-docs-delta.mjs \
+            --before .local/ci/improvement-cycle/docs-before.json --after .local/ci/improvement-cycle/docs-after.json
+          node .claude/scripts/lib/check-docs-links.cjs --baseline
+          node .claude/scripts/lib/check-docs-code-refs.cjs
 
       - name: 🗂️ Preserve proposal and final message
         if: ${{ always() && steps.claude.outcome != 'skipped' }}
@@ -241,12 +249,13 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          RUN_ID: ${{ github.run_id }}
           WEEK: ${{ steps.week.outputs.week || 'unknown' }}
         run: |
           TITLE="🚨 Improvement cycle failed"
           PROBLEMS="(ゲート結果なし: 入力検査か Claude step で止まった)"
           if [ -s .claude/state/metrics/measurement-cycle/triage-latest.json ]; then
-            PROBLEMS=$(node -e 'const j=require("./.claude/state/metrics/measurement-cycle/triage-latest.json");process.stdout.write((j.problems||[]).map(p=>"- "+p).join("\n")||"(ゲートは通過。docs:check か push で失敗)")')
+            PROBLEMS=$(node -e 'const j=require("./.claude/state/metrics/measurement-cycle/triage-latest.json");process.stdout.write((j.problems||[]).map(p=>"- "+p).join("\n")||"(ゲートは通過。提案の適用で増えた文書 error か、文書リンク / コード参照の検査か、push で失敗)")')
           fi
           DIAG="(診断なし)"
           if [ -s .local/ci/claude-diagnosis.txt ]; then DIAG=$(cat .local/ci/claude-diagnosis.txt); fi
@@ -255,6 +264,15 @@ jobs:
           Run: ${RUN_URL}
 
           ${PROBLEMS}
+
+          提案は artifact \`improvement-cycle-evidence\` (30 日保持) に残っている。原因を直したあと、develop 上で再適用できる:
+
+          \`\`\`bash
+          gh run download ${RUN_ID} -n improvement-cycle-evidence -D /tmp/improvement-cycle-${RUN_ID}
+          node .claude/scripts/metrics/verify-improvement-cycle-run.mjs --base HEAD --week ${WEEK} --proposal /tmp/improvement-cycle-${RUN_ID}/.local/ci/improvement-cycle/proposal.json
+          \`\`\`
+
+          台帳が提案後に動いていて適用できない行は、上のコマンドが違反として列挙する (その行は手で書き戻す)。
 
           <details><summary>Claude 実行の診断</summary>
 

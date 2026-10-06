@@ -10,7 +10,7 @@ co_agents: [a8-csv-auditor, affiliate-operator]
 A8 の**成果 (発生・確定・EPC)** を実測して取り込む。提携運用 (`/affiliate-operate`) や
 案件開拓 (`/scout-asp`) とは役割が違う。ローカル限定 (Playwright 永続プロファイル)。
 
-> **正典は `.claude/rules/affiliate-ads-standards.md` §11**。設定は `.claude/config/a8-report-automation.json`、
+> **正典は `.claude/rules/affiliate-ads-standards.md` §11**。設定は `config/a8-report-automation.json`、
 > 成果 SSOT は `.claude/state/metrics/affiliate/{a8-results.json,a8-report-log.json}`。
 > A8 ログインは `/scout-asp` と**同じ永続プロファイルを共有**する (別パスにすると二重ログインになる)。
 
@@ -88,7 +88,7 @@ node .claude/scripts/ads/normalize-a8-csv.mjs --latest
 ## 関連
 
 - 規約: `.claude/rules/affiliate-ads-standards.md` §11 / 実証判定: `.claude/rules/evidence-based-judgment.md`
-- 設定: `.claude/config/a8-report-automation.json`
+- 設定: `config/a8-report-automation.json`
 - コア: `.claude/scripts/ads/lib/{a8-report-browser,a8-report-csv}.mjs`
 - 実行: `.claude/scripts/ads/{fetch-a8-ui-csv,normalize-a8-csv,check-a8-report-due}.mjs`
 - 成果 SSOT: `.claude/state/metrics/affiliate/{a8-results.json,a8-report-log.json}`

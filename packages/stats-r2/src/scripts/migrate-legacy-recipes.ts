@@ -14,9 +14,10 @@ import {
   LEGACY_RECIPE_ROW_HASHES,
   migrateLegacyRecipe,
 } from "./lib/legacy-recipe-migration";
+import { SITE } from "@stats47/types";
 
 const REPO_ROOT = resolve(__dirname, "..", "..", "..", "..");
-const R2_BASE = (process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp").replace(
+const R2_BASE = (process.env.R2_PUBLIC_FETCH_URL ?? SITE.r2PublicBaseUrl).replace(
   /\/+$/,
   "",
 );

@@ -1,5 +1,8 @@
 export * from "./utils/index";
 
+// e-Stat API のベース URL 等 (server-only を含まない定数。素の tsx スクリプトからも参照する)
+export { ESTAT_API } from "./core/config/index";
+
 export { ESTAT_STATS_DEFINITIONS } from "./meta-info/constants/definitions";
 export type { StatsDataFormValues } from "./stats-data/schemas/stats-data-form.schema";
 export {

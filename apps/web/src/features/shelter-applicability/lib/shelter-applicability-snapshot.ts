@@ -1,4 +1,4 @@
-import { lookupArea } from '@stats47/area';
+import { lookupArea, PREFECTURE_AREA_CODES } from '@stats47/area';
 import { SHELTER_APPLICABILITY_SOURCE as source } from '@stats47/data-configs/theme-catalog';
 import { z } from 'zod';
 const count = z.number().int().min(0).max(Number.MAX_SAFE_INTEGER);
@@ -113,12 +113,7 @@ export const shelterApplicabilitySnapshotSchema = z
     const codes = v.rows.map((r) => r.areaCode);
     if (
       JSON.stringify(codes) !==
-      JSON.stringify(
-        Array.from(
-          { length: 47 },
-          (_, i) => String(i + 1).padStart(2, '0') + '000'
-        )
-      )
+      JSON.stringify(PREFECTURE_AREA_CODES)
     )
       fail('47 unique prefectures');
     for (const r of v.rows)

@@ -9,6 +9,7 @@ import sharp from "sharp";
 import type { ScreenshotRecord } from "../types";
 import { resolveDispatcher } from "./http-dispatcher";
 import { evaluateLayoutIssues, scrollThroughPage } from "./ui-probe";
+import { R2_PUBLIC_BASE_URL } from "../../lib/site-config.cjs";
 
 /** R2 上の保存先。`latest/` は全幅の最新版 (翌週の比較元)、`<date>/` は agent が確認した幅の履歴。 */
 export const SCREENSHOT_PREFIX = "state/page-quality/screenshots";
@@ -144,7 +145,7 @@ export async function createScreenshotSession(options: {
   publicBaseUrl?: string;
 }): Promise<ScreenshotSession> {
   const stageRoot = options.stageRoot ?? join(".local/r2", SCREENSHOT_PREFIX);
-  const publicBaseUrl = options.publicBaseUrl ?? process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp";
+  const publicBaseUrl = options.publicBaseUrl ?? process.env.R2_PUBLIC_FETCH_URL ?? R2_PUBLIC_BASE_URL;
   const browser = await chromium.launch({ headless: true });
 
   const write = (path: string, data: Buffer) => {

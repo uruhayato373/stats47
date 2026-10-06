@@ -11,12 +11,13 @@
 
 import { NextResponse } from "next/server";
 
+import { SITE_ORIGIN } from "@/config/site";
 import { SITEMAP_SEGMENTS } from "@/config/sitemap-segments";
 
 // ISR 24h: index 自体は変わらないため。segment 内容は各 sitemap が個別に ISR 管理。
 export const revalidate = 86400;
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "https://stats47.jp";
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || SITE_ORIGIN;
 
 // ★件数をハードコードしない。以前は `const SEGMENT_COUNT = 8` と手書きし
 // 「追加時は両方を更新」というコメントだけで同期を担保していたが、実際には

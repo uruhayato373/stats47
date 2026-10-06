@@ -21,6 +21,11 @@ browser-use CLI（Chrome プロファイル経由）で note.com エディタを
 `docs/31_note記事原稿/<vertical>/<slug>/` または `docs/31_note記事原稿/<slug>/` で管理。git が SSOT。
 
 ### 画像 (PNG) の扱い
+カバーの保存・採用は `data/note/cover-assets.json` を正本とする。新規記事も `note:assets prepare` →
+`generate-cover-refresh.ts` → `note:assets review` で確認済みのremote候補を用意してから公開する。
+`editor-helpers.sh` は `materialize-cover.mjs <articleKey>` でSHA検証済みの採用版を一時領域へ復元し、アップロード後に削除する。
+公開後はTSカタログへURLを記録し `note:assets seed` → `note:assets archive --keys <articleKey>` で公開画像との対応を確認する。
+以下のPNG再生成は本文画像の準備であり、カバー採用の代用にしない。正典は `.claude/rules/note-image-assets.md`。
 SVG から作れる PNG は git に載せない (`docs/31` の家計・公務員シリーズ)。clone 直後や公開・更新の前に PNG が無ければ
 `npm run note:images:regen -- --slug <slug>` で復元する。ランキング記事 (a-<rankingKey>) の 4 枚は
 `node .claude/scripts/note/render-ranking-images.mjs <rankingKey>` で `chart-data.json` から作り直す。契約と機械検査は `.claude/rules/note-image-assets.md`。
@@ -45,22 +50,32 @@ SVG から作れる PNG は git に載せない (`docs/31` の家計・公務員
 
 本文更新の`--update`とは別に、`.claude/scripts/note/update-note-covers.mjs`を使う。
 制作判断は`catalog/cover-designs.ts`、制作は`generate-cover-refresh.ts`と共有Satori rendererに置く。
-今回の全件改修入力は`.local/note-cover-refresh/2026-09-28/`の公開前スナップショットとproduction manifest。
+画像はprivate R2、候補・採用・公開の対応は `data/note/cover-assets.json` を読む。旧9/28版は未回収として記録し、
+過去のレビューを現在の候補へ引き継がない。旧manifestを回収した場合も `note:assets import` で未判定版として登録する。
 制作・保存の契約は[カタログREADME](../../../scripts/note/catalog/README.md#公開カバーの制作と差し替え)を参照する。
 
 ```bash
-node --import tsx .claude/scripts/note/generate-cover-refresh.ts
-# 全画像を目視し、manifestのvisualReviewをpassにしてからローカル検査
-node .claude/scripts/note/update-note-covers.mjs --manifest .local/note-cover-refresh/2026-09-28/production-manifest.json
+npm run note:assets -- prepare --keys <key> --output /tmp/<task>
+node --import tsx .claude/scripts/note/generate-cover-refresh.ts --output /tmp/<task> --version <version>
+# 共通台帳の画像を縮小表示で確認し、正確な候補SHAをレビュー・採用してから検査
+npm run note:assets -- review --keys <key> --revision <sha> --status pass --reason <理由>
+node .claude/scripts/note/update-note-covers.mjs --keys <key>
 # ユーザーが依頼した公開カバー変更を反映（--keys / --limit で限定可能）
-node .claude/scripts/note/update-note-covers.mjs --manifest .local/note-cover-refresh/2026-09-28/production-manifest.json --commit
-node .claude/scripts/note/verify-cover-refresh.mjs --manifest .local/note-cover-refresh/2026-09-28/production-manifest.json
+node .claude/scripts/note/update-note-covers.mjs --keys <key> --commit
+node .claude/scripts/note/verify-cover-refresh.mjs --keys <key>
 ```
 
 **画像の保存だけで公開カバーに即時反映される**（2026-09-12 UI実測）。「更新する」を押す必要はない。
 実際のUIで観測した画像専用POSTを認証済みProfile 5で実行し、本文・タイトル・価格・有料境界・タグ・公開日時のhashを照合する。
+Windowsのカバー専用CLIは既存の`note-session.mjs`と`.local/playwright-note-profile`を使う。
+未ログインなら`node .claude/scripts/note/login-note-profile.mjs`で人がログインし、`current_user.urlname === stats47`を確認してから再実行する。
+PCごとにChromeのProfile番号が違うため、Windowsでは番号を投稿先の証拠にしない。
+`MEASUREMENT_BROWSER_SOURCE=note`指定時は計測基盤のサービス別一時セッションを使い、同じアカウント照合を通す。
+終了時は所有するPlaywright contextとChromeを閉じる。画像の正本と採用は引き続きprivate R2と共通台帳に置く。
 通常の本文編集・再公開は行わない。独自の一意sessionを使い、終了時はそのdaemon・Chrome・一時profileだけを片付ける。
 応答不明のPOSTは再送せず、journalと記事詳細・配信画像を調べてから復旧する。
+途中で止まったバッチは同じ`--keys`で再開する。公開済みの採用版を含めてjournalの識別子を計算し、完了した行は送信しない。
+選択範囲を変えて未確認の操作を隠すことはできない。journalの`scope`と元の選択範囲を照合する。
 最終検証は全公開記事を再取得し、維持したカバーの不変・新カバーのURL一致・記事内容のhash一致を確認する。
 
 カンマ区切りで複数記事を指定可能:
@@ -128,6 +143,7 @@ node .claude/scripts/note/generate-note-hashtags.mjs --slug <slug>
   アップロードは PNG を使う。汎用版 (`generate-note-covers.mjs`) は SVG のみなので、その場合は
   `rsvg-convert`/`inkscape`/`svg-to-png.cjs` で PNG 化してからアップロードする（note は SVG を受け付けない場合がある）。
 - ハッシュタグ: `docs/31_note記事原稿/[vertical/]<slug>/hashtags.txt` に 1 行 1 タグで 99 個。Phase 7 でタグ入力時に使う。
+  draft.md のタイトルと本文から Claude が提案し、`lib/note-hashtags.mjs` の検査 (汎用タグ禁止・99 個・形式・年・県名) を通ったものだけを書く。headless `claude` CLI のログインが必要 (`~/.local/bin/claude auth status`)。
 
 ## 前提条件
 
@@ -267,22 +283,28 @@ browser-use --headed --profile "Profile 5" state 2>&1 > /tmp/note-acct.txt
 
 ### 公開済み記事のハッシュタグ専用更新
 
-本文の差し替えを行わず、公開済み記事を 95〜99 タグに揃えるときは専用スクリプトを使う。
+本文の差し替えを行わず、公開済み記事のタグを記事に合う 99 個へ置き換えるときは、提案と反映の 2 段で行う。
+タグの正本は `data/note/hashtags/<slug>.json` (git)。穴埋め用の汎用タグ (`#毎日note` `#スキしてみて` 等) は使わない。
 
 ```bash
-# 棚卸しのみ
+# 1. タイトルと公開本文から Claude がタグ 99 個を提案し、検査 (lib/note-hashtags.mjs) を通ったものだけ保存する
+#    (headless `claude` CLI のログインが必要。本文が変わっていない記事は飛ばす)
+node .claude/scripts/note/propose-note-hashtags.mjs --slugs <slug1,slug2>
+
+# 2. 棚卸しのみ (公開中のタグが承認済みの集合と一致するか)
 node .claude/scripts/note/update-published-hashtags.mjs --all --audit-only
 
-# 無料・有料を含む全公開記事（95未満のみ更新）
-node .claude/scripts/note/update-published-hashtags.mjs --all --include-paid
+# 3. 反映 (承認済みの集合と違う記事だけ置き換える。有料記事は --include-paid)
+node .claude/scripts/note/update-published-hashtags.mjs --slugs <slug1,slug2> --include-paid
 ```
 
 - Phase 1 の `stats47` アカウント照合は省略しない
-- 元のタグを優先し、数値のみのタグと note が受理しないハイフン入りタグを除外して 99 個まで補完する
+- 検査は、ちょうど 99 個・重複なし・形式 (`#` 1 つ、空白/ハイフンなし、数字だけでない、25 文字以内)・汎用タグなし・記事に出てこない年のタグなし・タイトルの県名タグありを見る
+- 今のタグは残さず、承認済みの 99 個に置き換える。承認ファイルが無い記事は fail-closed で止める
 - 公開版の再編集 URL（`?draft_reedit=true`）から開き、送信前の無料本文が現在の公開版と一致することを検証する
-- 95 タグ未満の記事に未公開下書きがある場合は fail-closed で停止し、下書きを公開・破棄しない
+- 未公開下書きがある記事は fail-closed で停止し、下書きを公開・破棄しない
 - 有料記事は既存境界が選択済みであることを検証し、`/tmp/stats47-note-hashtag-boundaries/` に screenshot を保存する
-- 更新前後で価格・有料境界・note が送信した無料本文を照合し、更新後の公開 API が 95 タグ未満なら失敗とする
+- 更新前後で価格・有料境界・note が送信した無料本文を照合し、更新後の公開タグの集合が承認済みと一致しなければ失敗とする
 
 ### Phase 8 後: 公開 URL をフロントマターに記録（★真実源への書き込み）
 

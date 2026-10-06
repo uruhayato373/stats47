@@ -10,7 +10,7 @@ import {
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
-import { TILE_GRID_LAYOUT, type TileGridCell } from "@stats47/visualization";
+import type { TileGridCell } from "@stats47/visualization";
 import { formatValueWithPrecision } from "@stats47/utils";
 import { scaleSequential } from "d3-scale";
 import * as chromatic from "d3-scale-chromatic";
@@ -29,6 +29,8 @@ import {
   type RankingEntry,
   type RankingMeta,
 } from "@/shared";
+import { SITE } from "@stats47/types";
+import { LANDSCAPE_TILE_LAYOUT } from "../../shared/utils/video-tile-layout";
 
 // ---------------------------------------------------------------------------
 // Constants – 1920 × 1080 横型レイアウト専用
@@ -63,24 +65,8 @@ const CONTENT_H = 1080 - HEADER_H; // 960
 // 結果: 14列 × 14行 のグリッド（セル約61px）
 // ---------------------------------------------------------------------------
 
-/** 横長用オフセットテーブル (元 TILE_GRID_LAYOUT からの差分) */
-const HORIZONTAL_OFFSETS: Record<number, { dx: number; dy: number }> =
-  Object.fromEntries([
-    // 北海道 (id:1): オフセットなし → y:0-1
-    // 東北〜中国 (id:2〜35): オフセットなし → 北海道との自然なギャップ (y:2) を維持
-    // 四国 (id:36〜39): オフセットなし → 元の位置を維持（中国地方と2行ギャップ）
-    ...[36, 37, 38, 39].map((id) => [id, { dx: 0, dy: 0 }]),
-    // 九州 (id:40〜46): 1マス左・2段上へ → 山口のすぐ左下に位置
-    ...[40, 41, 42, 43, 44, 45, 46].map((id) => [id, { dx: -1, dy: -2 }]),
-    // 沖縄 (id:47): 3段上・1マス左へ → 九州との間に1行ギャップ確保
-    [47, { dx: -1, dy: -3 }],
-  ]);
-
-const VIDEO_TILE_LAYOUT = TILE_GRID_LAYOUT.map((cell) => {
-  const offset = HORIZONTAL_OFFSETS[cell.id];
-  if (!offset) return cell;
-  return { ...cell, x: cell.x + offset.dx, y: cell.y + offset.dy };
-});
+/** 動画用オフセット適用済みレイアウト (正典: src/shared/utils/video-tile-layout.ts) */
+const VIDEO_TILE_LAYOUT = LANDSCAPE_TILE_LAYOUT;
 
 const GRID_MIN_X = Math.min(...VIDEO_TILE_LAYOUT.map((c) => c.x));
 const GRID_MAX_X = Math.max(
@@ -668,7 +654,7 @@ const RankingMainBody: React.FC<RankingMainBodyProps> = ({
               color: colors.muted,
             }}
           >
-            統計で見る都道府県
+            {SITE.name}
           </span>
         </div>
 

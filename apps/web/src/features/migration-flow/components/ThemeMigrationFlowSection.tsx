@@ -1,3 +1,5 @@
+import { R2_PUBLIC_BASE_URL } from "@/config/site";
+
 import { MigrationFlowSectionClient } from "./MigrationFlowSectionClient";
 
 import type { MigrationFlowData } from "@stats47/migration-flow";
@@ -14,7 +16,7 @@ import type { MigrationFlowData } from "@stats47/migration-flow";
  * (ページ側 `?pref=` とは別名前空間)。切替時のデータは /api/flow/migration/[code] で取得する。
  * 粒子アニメ地図は details で折りたたみ、開いた時に遅延ロードする。
  */
-const R2_BASE = "https://storage.stats47.jp";
+const R2_BASE = R2_PUBLIC_BASE_URL;
 
 export async function ThemeMigrationFlowSection() {
   let initialData: MigrationFlowData | undefined;

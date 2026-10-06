@@ -15,9 +15,10 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
-const R2 = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
+const R2 = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
 const STAGE = path.join(PROJECT_ROOT, ".local/r2/app/blog");
 
 // axis: { field, key }            → SSOT key を値照合して採用

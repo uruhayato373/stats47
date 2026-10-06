@@ -26,7 +26,6 @@ const REQUIRED = [
   "ranking-values",
   "page-components",
   "categories",
-  "area-profile",
   "area-databook",
   "correlations",
   "geo-analysis",

@@ -40,3 +40,35 @@ describe('generateLineSvg の X 軸ラベル間引き', () => {
     expect((svg.match(/<circle/g) || []).length).toBe(25);
   });
 });
+
+describe('generateLineSvg の負の値と凡例の位置', () => {
+  const twoSeries = (values: number[]): StatsSchema[] =>
+    values.flatMap((v, i) =>
+      ['01', '02'].map((code, si) => ({
+        metricKey: 'value',
+        areaCode: code,
+        areaName: `系列${si + 1}`,
+        yearCode: `${2000 + i}`,
+        yearName: `${2000 + i}`,
+        value: v - si,
+        unit: 'ポイント',
+      })),
+    );
+  const tickValues = (svg: string) =>
+    [...svg.matchAll(/text-anchor="end" font-size="8.5" class="svg-tick">(-?[\d.]+)</g)].map((m) => Number(m[1]));
+  const circleYs = (svg: string) => [...svg.matchAll(/<circle cx="[\d.]+" cy="([\d.]+)"/g)].map((m) => Number(m[1]));
+
+  it('最小値が負なら最下段の目盛りは最小値以下になり、点がプロット枠の外に出ない', () => {
+    // 2020 年 4-6 月期の中小企業 DI (▲66.7) のような急落を含む系列
+    const svg = generateLineSvg(twoSeries([-18, -12, -66.7, -20, -10]), { title: 't', xKey: 'yearCode', seriesKey: 'areaCode' });
+    expect(Math.min(...tickValues(svg))).toBeLessThanOrEqual(-67.7);
+    const plotBottom = 420 - (60 + 22);
+    for (const y of circleYs(svg)) expect(y).toBeLessThanOrEqual(plotBottom + 0.1);
+  });
+
+  it('X 軸ラベルが斜めになる 8 点以上では、凡例をラベルより下に置く', () => {
+    const svg = generateLineSvg(twoSeries([1, 2, 3, 4, 5, 6, 7, 8]), { title: 't', xKey: 'yearCode', seriesKey: 'areaCode' });
+    const legendY = Number(svg.match(/<text x="[\d.]+" y="([\d.]+)" font-size="9" class="svg-axis">系列1</)?.[1]);
+    expect(legendY).toBeGreaterThanOrEqual(420 - (60 + 22) + 50);
+  });
+});

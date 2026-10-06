@@ -29,6 +29,7 @@ import {
   resolveProductCardText,
 } from "./lib/navigation-footer.mjs";
 import { assertAccount, launchContext, UA } from "./lib/note-session.mjs";
+import { SITE_ORIGIN } from "../lib/site-config.cjs";
 
 // --force-regenerate-cards の一回限りの適用フラグ。main() が options から設定する
 // (関数シグネチャを全呼び出し経路で書き換えるより、この 1 スクリプト内では読みやすい)。
@@ -322,7 +323,7 @@ export function buildPlans(source, views, options) {
           && candidate.toUrl === repair.toUrl,
       ) === index);
       const target = article.stats47Targets?.[0];
-      const siteUrl = target ? `https://stats47.jp${target}` : "https://stats47.jp";
+      const siteUrl = target ? `${SITE_ORIGIN}${target}` : SITE_ORIGIN;
       return {
         article,
         next,

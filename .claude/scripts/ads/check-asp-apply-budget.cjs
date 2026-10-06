@@ -5,7 +5,7 @@
  *   (2026-07-28 に判明)。同じ口座に doboku-note が同居しており、短時間に大量申請すると
  *   アカウント全体のリスクになる。ASP ごとに週上限を機械強制する。
  *
- * 上限は config `.claude/config/affiliate-asp.json` の `asps.<name>.weeklyApplyMax` を読む
+ * 上限は config `config/affiliate-asp.json` の `asps.<name>.weeklyApplyMax` を読む
  * (ハードコードしない)。未設定なら既定 10。**これは各 ASP が公表している数字ではなく、
  * 自動操作のリスクを見て自分たちで置いた値**。緩めるなら実績を見てから。
  *
@@ -25,10 +25,11 @@
 
 const fs = require("node:fs");
 const path = require("node:path");
+const { AFFILIATE_ASP } = require("../../../config/paths.mjs");
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
 const CATALOG_PATH = path.join(PROJECT_ROOT, ".claude/state/ads/affiliate-catalog.json");
-const CONFIG_PATH = path.join(PROJECT_ROOT, ".claude/config/affiliate-asp.json");
+const CONFIG_PATH = path.join(PROJECT_ROOT, AFFILIATE_ASP);
 const DEFAULT_MAX = 10;
 
 function loadCatalog() {

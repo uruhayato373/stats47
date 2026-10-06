@@ -28,6 +28,7 @@ PORT=5000 npm run admin    # ポート上書き
 | `/content` | X / Instagram / note / Kindle の制作・公開状態・次アクション・SSOT監査の横断サマリ |
 | `/content/x` `/content/instagram` | 投稿台帳をチャネル別に初期絞り込み。XはGeo role・分析ID・claim metricも表示 |
 | `/content/note` | note catalog (git TS)・R2本文所在・公開URL・公開準備状態の読み取り専用ミラー |
+| `/content/note/covers` | 共通台帳から画像付き一覧・カバー比較を表示。右側で分類/確認状態/note反映を絞り込み、検索・列見出しの並べ替え・ページ送り・Sheetで拡大比較。画像はprivate R2からGET proxyでSHA確認し配信 |
 | `/content/kindle` | Kindle catalog・manuscript・ローカルEPUB/表紙・R2暗号化archive・KDPの下書き/審査中/販売中・価格/ロイヤリティ/KUの読み取り専用ミラー |
 | `/content/references` | 解決済みinventoryをranking・survey・theme・area・japan・world・blog・note・Kindle・YouTube・Instagram・Xへ突合した全展開ポートフォリオ。context-onlyは公式資料単位の補強プールとして別表示 |
 | `/sns` | 投稿台帳 (X/IG と YouTube 過去実績/pilot 記録)・素材再生・caption・投稿状態・残枠・IG 整合性警告の読み取りビュー |
@@ -46,6 +47,7 @@ app/            管理画面 + api/** (Route Handler) + media/ pilot/ (ローカ
 components/     共有 (console-nav / async-state / media-preview) + ページ別
 components/ui/  shadcn/ui 公式 (new-york-v4) の部品。公式のままにする (差は check-shadcn-parity が止める)
 components/admin-ui/  組み立て部品 (TableFrame / DataTable / PanelCard / StatCard / StatusBadge / LinkCard)。layout-primitives.tsx は Stack / Grid / Section
+components/content/note-covers-browser.tsx  shadcn Table + 既存のTanStack Table v8で検索/並べ替え。表示条件はURLに保持し、画像/公開台帳には書き込まない
 lib/nav-registry.ts  左メニューの定義 (SSOT) と現在地判定。表示は公式 Sidebar (components/console-nav*.tsx)
 lib/client/     fetch wrapper (SWR 等は使わない)
 lib/contracts/  読み取りAPI DTO + Zod schema
@@ -66,7 +68,7 @@ tests/          unit + integration (Vitest) / e2e (Playwright)
 |---|---|---|
 | SNS 投稿台帳 | `.claude/state/sns/posts.json` | adminは`loadAll/query`だけを公開。書込はadmin外のagent/skillがstore経由で実行 |
 | note編集メタ / 本文 | `.claude/scripts/note/catalog/` (git TS) / R2 `note/<vertical>/<slug>/` | `/content/note` は正規化表示のみ。`note-published-urls.json` は派生で手編集しない |
-| Kindle設計 / 原稿 / 出品 | `book-catalog.ts` / `manuscripts/<id>/` / `.claude/config/kdp-listings.json` / `.claude/state/products/kindle-archives.json` | `/content/kindle` は突合表示のみ。ローカル成果物とR2 revision、KDP状態を別々に表示 |
+| Kindle設計 / 原稿 / 出品 | `book-catalog.ts` / `manuscripts/<id>/` / `config/kdp-listings.json` / `.claude/state/products/kindle-archives.json` | `/content/kindle` は突合表示のみ。ローカル成果物とR2 revision、KDP状態を別々に表示 |
 | 参考文献展開 | `.claude/state/source-inventory/` + Theme/Japan/survey/blog/note/Kindle/SNSの既存SSOT + `docs/{21_ブログ記事原稿,31_note記事原稿}/` | `/content/references` は制作単位×12チャネルを実行時に重複排除し、context-onlyも全件集約する。原本・OCR・crop・Drive IDは読まない |
 | IG 予約 | `.claude/state/instagram-w*-schedule.json` | adminはposts.jsonとの差分表示だけ。予約agentが更新 |
 | ローカル素材 | `.local/r2/sns` / `.local/ogp-pilot` | `/media` `/pilot` で配信 (読み取り) |

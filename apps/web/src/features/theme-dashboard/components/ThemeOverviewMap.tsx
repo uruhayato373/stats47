@@ -9,6 +9,8 @@ import { Button } from '@stats47/components/atoms/ui/button';
 import type { ThemeIndicatorData } from '../types';
 import type { TopoJSONTopology } from '@stats47/types';
 
+import { PREFECTURE_TOPOJSON_PATH } from '@/constants/static-assets';
+
 const ThemeLeafletMap = dynamic(
   () => import('./ThemeLeafletMap').then((module) => module.ThemeLeafletMap),
   {
@@ -35,7 +37,7 @@ export function ThemeOverviewMap({
   const [attempt, setAttempt] = useState(0);
   useEffect(() => {
     const controller = new AbortController();
-    fetch('/prefecture.topojson', { signal: controller.signal })
+    fetch(PREFECTURE_TOPOJSON_PATH, { signal: controller.signal })
       .then(async (response) => {
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         const result: TopoJSONTopology = await response.json();

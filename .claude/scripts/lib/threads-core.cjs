@@ -1,5 +1,7 @@
 "use strict";
 
+const { R2_PUBLIC_BASE_URL } = require("./site-config.cjs");
+
 /**
  * Threads 予約投稿の判定ロジック (純粋関数)。IO は .claude/scripts/threads/post-from-schedule.cjs が持つ。
  *
@@ -43,7 +45,7 @@ const MAX_LATENESS_MINUTES = 360;
 /** 投稿前の重複確認で見る自アカウントの直近投稿の範囲 */
 const REMOTE_DUPLICATE_WINDOW_HOURS = 48;
 /** 画像は R2 公開ドメインの URL だけを許す */
-const R2_PUBLIC_BASE = "https://storage.stats47.jp/";
+const R2_PUBLIC_BASE = `${R2_PUBLIC_BASE_URL}/`;
 
 const ENTRY_TYPES = new Set(["text", "image"]);
 const DATE_PATTERN = /^\d{4}-\d{2}-\d{2}$/;

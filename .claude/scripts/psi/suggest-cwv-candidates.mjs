@@ -17,6 +17,7 @@ import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { SITE_ORIGIN } from "../lib/site-config.cjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -47,7 +48,7 @@ if (urls.length === 0) {
 function urlToCandidateRoots(url) {
   let pathname;
   try {
-    pathname = new URL(url, "https://stats47.jp").pathname;
+    pathname = new URL(url, SITE_ORIGIN).pathname;
   } catch {
     pathname = url.startsWith("/") ? url : `/${url}`;
   }

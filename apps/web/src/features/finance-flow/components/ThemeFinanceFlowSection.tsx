@@ -1,3 +1,5 @@
+import { R2_PUBLIC_BASE_URL } from "@/config/site";
+
 import { FinanceFlowSectionClient } from "./FinanceFlowSectionClient";
 
 import type { FinanceFlowData } from "../lib/types";
@@ -9,7 +11,7 @@ import type { FinanceFlowData } from "../lib/types";
  * server-only モジュールを使わない plain fetch にすることで、barrel の client 取り込みを汚さない。
  * 県セレクタ切替・?pref ディープリンクは client が /api/flow/finance/[code] で取得する。
  */
-const R2_BASE = "https://storage.stats47.jp";
+const R2_BASE = R2_PUBLIC_BASE_URL;
 
 export async function ThemeFinanceFlowSection() {
   let initialData: FinanceFlowData | undefined;

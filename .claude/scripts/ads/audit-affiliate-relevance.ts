@@ -21,6 +21,7 @@ import {
   auditBlogAffiliatePolicyCatalog,
   auditBlogAffiliateRelevance,
 } from "./lib/affiliate-relevance-core.mjs";
+import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 
 const args = new Set(process.argv.slice(2));
 const live = args.has("--live");
@@ -43,7 +44,7 @@ async function main() {
   }
 
   if (live) {
-    const base = process.env.R2_PUBLIC_FETCH_URL ?? process.env.NEXT_PUBLIC_R2_PUBLIC_URL ?? "https://storage.stats47.jp";
+    const base = process.env.R2_PUBLIC_FETCH_URL ?? process.env.NEXT_PUBLIC_R2_PUBLIC_URL ?? R2_PUBLIC_BASE_URL;
     const response = await fetch(`${base.replace(/\/$/, "")}/app/blog/all.json`);
     if (!response.ok) throw new Error(`blog snapshot fetch failed: HTTP ${response.status}`);
     const snapshot = await response.json() as { articles?: unknown[] };

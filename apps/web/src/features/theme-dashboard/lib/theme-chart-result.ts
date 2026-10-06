@@ -1,3 +1,4 @@
+import { NATIONAL_AREA_CODE } from "@stats47/area";
 import { parseStatSeriesRefs } from "@stats47/data-configs/theme-catalog";
 
 import type { PageComponent } from "@/components/stat-charts";
@@ -9,7 +10,6 @@ import {
   type ThemeDbChartResult,
 } from "../actions";
 
-import { NATIONAL_AREA_CODE } from "./select-national-series";
 
 export type ThemeChartResult =
   | NonNullable<ThemeDbChartResult>

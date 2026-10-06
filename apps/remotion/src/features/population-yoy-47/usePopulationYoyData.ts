@@ -8,6 +8,7 @@ import {
   createSharedColorScale,
   getProjection,
 } from "./projection";
+import { PREFECTURE_TOPOJSON_FILE } from "../../shared/utils/static-files";
 
 export interface YearFrame {
   year: number;
@@ -48,7 +49,7 @@ export function usePopulationYoyData({
     async function load() {
       try {
         const [topoRes, dataRes] = await Promise.all([
-          fetch(staticFile("prefecture.topojson")),
+          fetch(staticFile(PREFECTURE_TOPOJSON_FILE)),
           fetch(staticFile("population-yoy-47/timeseries.json")),
         ]);
         const [topology, timeseries] = await Promise.all([

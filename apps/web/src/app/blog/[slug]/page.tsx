@@ -29,6 +29,7 @@ import { applyBlogAffiliatePolicy, resolveBlogBannerInput } from "@/features/ads
 import { resolveBlogRakutenPlacement } from "@/features/ads/constants/blog-rakuten-placement";
 import { FurusatoNozeiCard, RakutenItemsCard, resolveAffiliateBannersByCategory, resolveAffiliateBannersForContent, resolveAffiliateTextAdsForContent } from "@/features/ads/server";
 import { BLOG_IN_BODY_BANNER_COUNT, TagBadge, ArticleRenderer, ArticleTableOfContents, generateBlogMetadata, migrateLegacyDataSourceSection, type Article } from "@/features/blog";
+import { blogR2Key } from "@/features/blog/r2-key";
 import {
     RelatedRankingsSection,
     listLatestArticles,
@@ -49,6 +50,8 @@ import { blogThumbnailUrl } from "@/lib/metadata/ogp-image";
 import { buildPersonAsAuthor } from "@/lib/structured-data/person";
 import { buildPublisherOrganization } from "@/lib/structured-data/scripts";
 
+
+import { R2_PUBLIC_BASE_URL } from "@/config/site";
 
 import type { Metadata } from "next";
 
@@ -203,7 +206,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     const relatedArticles = await getRelatedArticles(tagKeys, slug);
 
     const baseUrl = getRequiredBaseUrl();
-    const R2_PUBLIC_URL = process.env.NEXT_PUBLIC_R2_PUBLIC_URL || "https://storage.stats47.jp";
+    const R2_PUBLIC_URL = process.env.NEXT_PUBLIC_R2_PUBLIC_URL || R2_PUBLIC_BASE_URL;
     // E-E-A-T 強化（#76）: author を Person に変更、publisher に logo 追加。
     // frontmatter.author / reviewedBy で記事ごとの上書きも可能。
     const articleJsonLd = {
@@ -211,7 +214,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         "@type": "Article",
         headline: article.title,
         description: article.frontmatter.description ?? "",
-        image: `${R2_PUBLIC_URL}/app/blog/${slug}/ogp/ogp.png`,
+        image: `${R2_PUBLIC_URL}/${blogR2Key(slug, "ogp/ogp.png")}`,
         url: `${baseUrl}/blog/${slug}`,
         datePublished: article.publishedAt ?? undefined,
         dateModified: article.updatedAt ?? article.publishedAt ?? undefined,

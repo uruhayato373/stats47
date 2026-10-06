@@ -6,6 +6,7 @@ import type { TopoJSONTopology } from "@stats47/types";
 import * as fs from "fs";
 import * as path from "path";
 import { getPrefectureTopojsonPath } from "../server";
+import { NATIONAL_AREA_CODE, to5DigitPrefCode } from "@stats47/area";
 
 /**
  * ロガーインターフェース（呼び出し側からオプションで渡す）
@@ -48,7 +49,7 @@ export async function mergeTopoJson(
     inputTopoJsonPath,
     outputTopoJsonPath,
     data,
-    nationalAreaCode = "00000",
+    nationalAreaCode = NATIONAL_AREA_CODE,
     objectKey = "pref",
     fieldMapping,
     logger,
@@ -137,7 +138,7 @@ export async function mergeTopoJson(
       } else {
         // TopoJSONのgeometry順序からareaCodeを生成（1-47を2桁の文字列に変換して"000"を追加）
         const prefCode = String(index + 1).padStart(2, "0");
-        areaCode = `${prefCode}000`;
+        areaCode = to5DigitPrefCode(prefCode);
       }
 
       // データを取得

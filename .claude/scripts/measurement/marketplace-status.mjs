@@ -5,6 +5,7 @@ import { readBookshelfState } from '../kdp/lib/kdp-flow.mjs';
 import { assertAccount as assertCoconala } from '../coconala/lib/coconala-session.mjs';
 import { collectKdpReport, openKdpReports } from './kdp-reports.mjs';
 import { collectKdpMonthlyReport } from './kdp-monthly-reports.mjs';
+import { COCONALA_LISTINGS, KDP_LISTINGS } from '../../../config/paths.mjs';
 
 const source = process.argv[2];
 const output = process.argv[3];
@@ -24,7 +25,7 @@ try {
     const identity = await readBookshelfState(page, '__identity__', expected);
     if (/signin|\/ap\//.test(page.url())) throw new Error('auth_required');
     if (!identity.found || identity.asin !== expected.asin) throw new Error('account_mismatch');
-    const { listings } = JSON.parse(readFileSync('.claude/config/kdp-listings.json', 'utf8'));
+    const { listings } = JSON.parse(readFileSync(KDP_LISTINGS, 'utf8'));
     // Bookshelf and Reports have distinct authentication. Never persist a
     // bookshelf-only refresh, or spend a full catalog scan before detecting it.
     await openKdpReports(page);
@@ -46,7 +47,7 @@ try {
     if (/login|auth/.test(page.url())) throw new Error('auth_required');
     await page.getByText('全出品サービス累計', { exact: true }).waitFor({ timeout: 30000 });
     analytics = parseCoconalaAnalytics(await page.locator('body').innerText());
-    const { listings } = JSON.parse(readFileSync('.claude/config/coconala-listings.json', 'utf8'));
+    const { listings } = JSON.parse(readFileSync(COCONALA_LISTINGS, 'utf8'));
     for (const [id, entry] of Object.entries(listings)) {
       if (entry.status !== 'listed') continue;
       const serviceId = /^https:\/\/coconala\.com\/services\/(\d+)$/.exec(entry.serviceUrl)?.[1];

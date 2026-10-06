@@ -6,7 +6,7 @@
  */
 import sharp from "sharp";
 import { generateBarChartSvg, type BarItem } from "@stats47/svg-builder";
-import { METRICS_REGISTRY } from "@stats47/data-configs";
+import { METRICS_REGISTRY, SITE } from "@stats47/data-configs";
 import { fetchRankingValues } from "../../data/load-ranking-values";
 import { productIndicatorLabel } from "../../data/product-indicator-label";
 import { PREFECTURE_BY_CODE5 } from "../../data/prefectures";
@@ -173,7 +173,7 @@ export async function buildRankingSection(
       `| ${r.rank} | ${r.areaName} | ${r.value.toLocaleString("ja-JP", { maximumFractionDigits: 20 })} |`,
     ).join("\n"),
     ...(n < 47 ? [`欠測: ${fetched.values.filter(v => v.value === null).map(v => nameOf(v.code5)).join("、")}。欠測をゼロや最下位として扱いません。`] : []),
-    `[指標の出典・定義を確認する](https://stats47.jp/ranking/${rankingKey})。単一時点の地域差だけでは、個人の行動や差の原因は判定できません。`,
+    `[指標の出典・定義を確認する](${SITE.origin}/ranking/${rankingKey})。単一時点の地域差だけでは、個人の行動や差の原因は判定できません。`,
   ].join("\n\n");
   const body = [`![${title}](images/${fileName})`, 考察, table].join("\n\n");
 
@@ -185,8 +185,8 @@ export async function buildRankingSection(
       title,
       year: fetched.year,
       unit,
-      rawUrl: `${process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp"}/app/ranking/${rankingKey}/values.json`,
-      canonicalUrl: `https://stats47.jp/ranking/${rankingKey}`,
+      rawUrl: `${process.env.R2_PUBLIC_FETCH_URL ?? SITE.r2PublicBaseUrl}/app/ranking/${rankingKey}/values.json`,
+      canonicalUrl: `${SITE.origin}/ranking/${rankingKey}`,
       source: (cfg.source ?? {}) as Record<string, unknown>,
       observedAreas: n,
       missingAreas: fetched.values.length - n,

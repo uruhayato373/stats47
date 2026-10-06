@@ -1,8 +1,9 @@
 import { createRequire } from 'node:module';
+import { PREF_AREA_CODES } from '../lib/prefectures.cjs';
 
 const require = createRequire(import.meta.url);
 const { extractYearCode } = require('../../../packages/estat-api/src/stats-data/utils/extract-year-code.ts');
-export const PREFECTURES = Array.from({ length: 47 }, (_, index) => String(index + 1).padStart(2, '0') + '000');
+export const PREFECTURES = [...PREF_AREA_CODES];
 const PREFECTURE_SET = new Set(PREFECTURES);
 
 /** A declared non-applicable prefecture is null, not a zero or an omitted source row. */

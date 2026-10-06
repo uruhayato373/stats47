@@ -52,6 +52,8 @@ import {
 import { HUB_INCONTENT } from '@/lib/google-adsense';
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
 
+import { DEFAULT_OGP_IMAGE_PATH } from '@/config/site';
+
 import type { CategoryRankingItem } from '@stats47/ranking/types';
 import type { Metadata } from 'next';
 
@@ -123,7 +125,7 @@ export async function generateMetadata({
       alternates: {
         canonical: `/survey/${surveyKey}`,
       },
-      ...generateOGMetadata({ title, description, imageUrl: '/og-image.jpg' }),
+      ...generateOGMetadata({ title, description, imageUrl: DEFAULT_OGP_IMAGE_PATH }),
     };
   } catch {
     return { title: '調査別ランキング一覧' };

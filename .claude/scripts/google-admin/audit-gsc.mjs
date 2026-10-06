@@ -8,8 +8,9 @@
  */
 import { google } from "googleapis";
 import { resolveServiceAccountKeyFile } from "../metrics/lib/auth.mjs";
+import { GSC_PROPERTY } from "../lib/site-config.cjs";
 
-export const GSC_PROPERTY = "sc-domain:stats47.jp";
+export { GSC_PROPERTY };
 
 /** sites.list (read-only) で property の存在と permissionLevel を返す。 */
 export async function auditGscProperty() {

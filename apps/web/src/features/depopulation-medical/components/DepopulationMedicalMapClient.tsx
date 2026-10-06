@@ -4,6 +4,7 @@ import { useCallback, useMemo, useRef, useState, useTransition } from "react";
 
 import dynamic from "next/dynamic";
 
+import { to2DigitPrefCode } from "@stats47/area";
 import { Skeleton } from "@stats47/components/atoms/ui/skeleton";
 import {
   Table,
@@ -81,7 +82,7 @@ export function DepopulationMedicalMapClient({ summary, topology }: Props) {
   );
 
   const selectPrefecture = useCallback((code5: string) => {
-    const code2 = code5.slice(0, 2);
+    const code2 = to2DigitPrefCode(code5);
     setSelectedPrefCode5(code5);
 
     const cached = detailCache.current.get(code2);

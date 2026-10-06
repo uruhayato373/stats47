@@ -8,6 +8,8 @@ import { SurfaceCard, SurfaceSection } from "@/components/surface";
 
 import type { Topology } from "topojson-specification";
 
+import { PREFECTURE_TOPOJSON_PATH } from "@/constants/static-assets";
+
 interface YoyRecord {
   areaCode: string;
   areaName: string;
@@ -21,8 +23,6 @@ interface YoyTimeseries {
   prefectureCodes: string[];
   frames: Array<{ year: number; yoy: YoyRecord[] }>;
 }
-
-const TOPO_URL = "/prefecture.topojson";
 
 interface MetricYoyChoroplethSectionProps {
   /** YoY タイムシリーズ JSON への URL */
@@ -56,7 +56,7 @@ export function MetricYoyChoroplethSection({
   useEffect(() => {
     let cancelled = false;
     Promise.all([
-      fetch(TOPO_URL).then((r) => r.json()) as Promise<Topology>,
+      fetch(PREFECTURE_TOPOJSON_PATH).then((r) => r.json()) as Promise<Topology>,
       fetch(dataUrl).then((r) => r.json()) as Promise<YoyTimeseries>,
     ])
       .then(([t, d]) => {

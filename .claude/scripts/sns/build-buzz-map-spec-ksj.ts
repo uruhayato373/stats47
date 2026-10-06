@@ -43,9 +43,10 @@ import type { Feature, Geometry, Position } from "geojson";
 import { feature } from "topojson-client";
 import type { Topology, GeometryCollection } from "topojson-specification";
 import { assertKsjPublicKeysAllowed } from "../../../packages/r2-storage/src/scripts/lib/ksj-publication-guard";
+import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 
 const PROJECT_ROOT = join(import.meta.dirname ?? __dirname, "../../..");
-const PUBLIC_URL = process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp";
+const PUBLIC_URL = process.env.R2_PUBLIC_FETCH_URL ?? R2_PUBLIC_BASE_URL;
 const SPECS_DIR = join(PROJECT_ROOT, "apps/remotion/src/features/buzz-map/specs");
 const ASSETS_DIR = join(PROJECT_ROOT, "apps/remotion/public/buzz-map/assets");
 const MUNI_TOPOJSON = join(PROJECT_ROOT, "apps/remotion/public/buzz-map/municipalities.topojson");

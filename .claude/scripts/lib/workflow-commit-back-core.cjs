@@ -208,6 +208,64 @@ function auditWorkflowPrGuards(workflow) {
   return out;
 }
 
+/**
+ * develop へ切り替えた後に、一時ディレクトリへ退避したファイルをリポジトリへコピーする形を検出する。
+ *
+ * 2026-10-04 実害 (e45f5a0ee): fetch-metrics-weekly が main を checkout して計測し、`.claude/state/metrics/`
+ * 全体を /tmp へ退避 → develop へ切り替えて丸ごと上書きコピーしていた。main に未マージの他 workflow の
+ * state (page-quality 週次監査・KSJ 月次記録・psi/cloudflare 日次など 15 ファイル) が main の古い版へ戻った。
+ * 同じ形の psi-audit-daily / cloudflare-usage-daily は、main が遅れている間は前日までの history 行を毎日失い、
+ * psi の history は 4 月以降 55 日分が欠けていた。どの run も success で、コピーは何も警告しない。
+ *
+ * 退避元の作業ツリーは develop ではないので、このコピーは「別 ref の版で develop を上書きする」ことになる。
+ * develop を checkout してその上で生成するか、develop へ切り替えてから生成し直す。
+ * 作業ツリーを持ったまま `git checkout develop` する形 (sns-metrics-weekly) は、衝突すると git が止めるので対象外。
+ *
+ * 入力は 1 job の run script を step 順に並べた配列。切り替えと復元が別 step に分かれていても拾う。
+ */
+const SWITCH_TO_DEVELOP = /\bgit\s+(?:checkout|switch)\s+(?:-[bBcC]\s+)?develop\b(?!\s+--)/;
+const TEMP_PATH = /^["']?(?:\/tmp\/|\$\{?RUNNER_TEMP\b|\$\{\{\s*runner\.temp\s*\}\})/;
+
+/** `cp` / `rsync` / `mv` の最初の非オプション引数 (= コピー元) を返す。 */
+function copySource(line) {
+  const m = line.match(/(?:^|[;&|]\s*|\s)(?:cp|rsync|mv)\s+(.*)$/);
+  if (!m) return null;
+  return m[1].split(/\s+/).find((token) => token && !token.startsWith('-')) ?? null;
+}
+
+function findForeignTreeRestore(runScripts) {
+  const violations = [];
+  let switched = false;
+  (runScripts || []).forEach((script, stepIndex) => {
+    if (typeof script !== 'string') return;
+    script.split('\n').forEach((line, index) => {
+      if (/^\s*#/.test(line)) return;
+      if (SWITCH_TO_DEVELOP.test(line)) {
+        switched = true;
+        return;
+      }
+      const source = switched ? copySource(line.trim()) : null;
+      if (source && TEMP_PATH.test(source)) {
+        violations.push({ stepIndex, line: index + 1, text: line.trim() });
+      }
+    });
+  });
+  return violations;
+}
+
+/** workflow 全体を走査して、develop へ切り替えた後の一時ディレクトリからの復元を集める。 */
+function auditWorkflowForeignTreeRestores(workflow) {
+  const out = [];
+  const jobs = (workflow && workflow.jobs) || {};
+  for (const [jobName, job] of Object.entries(jobs)) {
+    const steps = ((job && job.steps) || []).filter((s) => s && typeof s.run === 'string');
+    for (const v of findForeignTreeRestore(steps.map((s) => s.run))) {
+      out.push({ job: jobName, step: steps[v.stepIndex].name || '(unnamed)', line: v.line, text: v.text });
+    }
+  }
+  return out;
+}
+
 module.exports = {
   findPushWithoutPull,
   findPushToMain,
@@ -216,4 +274,6 @@ module.exports = {
   auditRatchetCommitContract,
   findStalePrExistenceGuard,
   auditWorkflowPrGuards,
+  findForeignTreeRestore,
+  auditWorkflowForeignTreeRestores,
 };

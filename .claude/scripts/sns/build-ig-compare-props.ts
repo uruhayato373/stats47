@@ -44,9 +44,10 @@ import {
   MAX_DUEL_ITEMS,
   MIN_DUEL_ITEMS,
 } from "./lib/ig-compare-props.ts";
+import { R2_PUBLIC_BASE_URL, SITE_ORIGIN } from "../lib/site-config.cjs";
 
 const PROJECT_ROOT = join(import.meta.dirname ?? __dirname, "../../..");
-const PUBLIC_URL = process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp";
+const PUBLIC_URL = process.env.R2_PUBLIC_FETCH_URL ?? R2_PUBLIC_BASE_URL;
 const DEFAULT_COUNT = 6;
 const DEFAULT_MIN_YEAR = 2019;
 
@@ -268,7 +269,7 @@ async function main() {
     coverQuestion: buildCoverQuestion(areaAName, areaBName),
     items,
     summary,
-    canonicalUrl: `https://stats47.jp/compare?areas=${prefA5},${prefB5}`,
+    canonicalUrl: `${SITE_ORIGIN}/compare?areas=${prefA5},${prefB5}`,
     generatedAt: new Date().toISOString(),
     sourceKeys: [...sourceKeys].sort(),
   };

@@ -4,7 +4,7 @@ paths:
   - "turbo.json"
   - "apps/*/package.json"
   - "apps/web/scripts/{dev-server.ts,r2-dev-gateway.ps1,r2-dev-cache.ps1}"
-  - ".claude/config/local-resources.json"
+  - "config/local-resources.json"
   - ".claude/scripts/lib/local-resource*"
   - "scripts/scheduled/local-resources.ps1"
   - ".claude/agents/{db-schema-manager,data-ingester,r2-publisher,devops-runner}.md"
@@ -339,7 +339,17 @@ git checkout -- AGENTS.md .claude/design-system/SSOT.md
   `codex/base.toml` + `host.<os>.toml` を**セクション単位でマージ** (Codex デスクトップが書く
   `[projects.*]` / `[plugins.*]` / runtime パスを壊さない)。マシン固有の許可と `additionalDirectories` は
   gitignore 済みの `.claude/settings.local.json` に置く。
-- Mac 固有の罠はまだ実測が無い。最初に Mac で動かしたときに本節へ追記する。
+- **Mac の実測 (2026-10-05・arm64 / Node v20.19.0)**: memory link と Codex mirror の `--check` はどちらも exit 0、
+  `core.hooksPath=.husky`・`~/tmp` あり・`gh auth status` は keyring で認証済み (会社 PC と違いプロキシの罠は無い)。
+  2026-10-06 に dotfiles を適用した (`link.mjs --host mac` → `~/.claude/settings.json` が symlink、`env/mac.zsh` を `~/.zshrc` から source、
+  `mcp-user.zsh` で user スコープの filesystem MCP が Connected)。罠は 2 つ: ① `codex/host.mac.toml` のパスが仮置きの `/Users/kazu/` だった
+  (dotfiles PR #1 で実ホームへ修正)。② `link.mjs` は `base.toml` の `model` / `model_reasoning_effort` を毎回 `~/.codex/config.toml` へ上書きするので、
+  Mac で Codex デスクトップが選んだモデル (`gpt-6.1-sol` / xhigh) が `gpt-6-astra` / medium に戻る。どちらに揃えるかは未決 (`MAC-FIRST-RUN-01`)。
+  また dotfiles は stats47 の `pre-bash-safety` フックが `main` への直 push を止めるので、ブランチ + PR で更新する。
+  launchd には `com.stats47.*` の個別ジョブ 6 本 (scout-asp-weekly / x-verify-posted / measurement-session-refresh /
+  threads-topup / fetch-note-metrics / sns-image-review) があるが、`local-resources.sh install` の掃除ジョブは未登録。
+  Mac の `claude mcp list` は cloudflare-docs / chrome-devtools / seo-observability / codex (+ claude.ai コネクタ)。
+  dotfiles 適用後は user スコープに filesystem が加わった。Windows 側との名前集合の突合は未実施 (`MAC-FIRST-RUN-01`)。
 
 ## dev サーバー起動 — ルート `npm run dev` を使わない
 
@@ -428,7 +438,7 @@ page-quality (週次 `page-quality-audit-weekly.yml`) / PSI (日次 `psi-audit-d
 
 ## ローカル資源の予算と保持
 
-端末の予算・掃除対象・保持日数の機械契約は `.claude/config/local-resources.json`。
+端末の予算・掃除対象・保持日数の機械契約は `config/local-resources.json`。
 計測は非常駐、`.local/resource-health/` に最新値と日別30件、容量監査2世代だけを保存する。全体走査は月次とし、
 通常の開発前チェックではディレクトリを再帰走査しない。容量はファイル長合計で、junctionは辿らず、
 hardlinkの重複は除かない。回収量はドライブ空き容量の前後も合わせて判断する。

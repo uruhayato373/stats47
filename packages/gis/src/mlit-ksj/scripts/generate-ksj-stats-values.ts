@@ -52,8 +52,9 @@ import {
   createPrefectureLocator,
   type PrefectureLocator,
 } from "../prefecture-assign";
+import { SITE } from "@stats47/types";
 
-const PUBLIC_R2 = process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp";
+const PUBLIC_R2 = process.env.R2_PUBLIC_FETCH_URL ?? SITE.r2PublicBaseUrl;
 const PREF_TOPOJSON = "packages/gis/data/geoshape/prefecture.topojson";
 
 interface Target {

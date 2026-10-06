@@ -4,6 +4,7 @@ import { Readable } from "node:stream";
 
 import { localKindleBooksDir, localKindleCoverDraftsDir, projectRoot } from "@/lib/server/project-root";
 import { mimeFor, resolveSafe } from "@/lib/server/safe-local-file";
+import { KDP_LISTINGS } from "../../../../../config/paths.mjs";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -17,7 +18,7 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 function currentCoverSegments(id: string): string[] | null {
   try {
     const raw: unknown = JSON.parse(
-      fs.readFileSync(path.join(projectRoot(), ".claude/config/kdp-listings.json"), "utf8"),
+      fs.readFileSync(path.join(projectRoot(), KDP_LISTINGS), "utf8"),
     );
     if (!isRecord(raw) || !isRecord(raw.listings)) return null;
     const listing = raw.listings[id];

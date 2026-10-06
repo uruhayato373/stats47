@@ -17,9 +17,7 @@ export type {
 export { extractStrengthsAndWeaknesses } from "./utils";
 
 // 完全DBレス (Phase F): D1 area_profiles の repository / run-batch service は削除済。
-// runtime は R2 profile.json (readAreaProfileFromR2) のみ、生成は exportAreaProfileSnapshot (R2直接計算)。
-export { readAreaProfileFromR2 } from "./repositories/read-area-profile-snapshot";
-export { exportAreaProfileSnapshot } from "./exporters/area-profile-snapshot";
+// 県の profile.json は読み手 0 になったため生成ごと廃止 (AREA-PROFILE-JSON-RETIRE-01)。県は databook.json を使う。
 export { exportCityProfileSnapshot } from "./exporters/city-profile-snapshot";
 export { readCityProfileFromR2 } from "./repositories/read-city-profile-snapshot";
 export { cityProfileKeyPath, type CityProfileData } from "./types/city-profile";

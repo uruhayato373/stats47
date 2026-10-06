@@ -9,6 +9,12 @@ paths:
 
 ## 設計原則
 
+**画像の実体は共有ストレージを正本にする (2026-10-02 オーナー決定)。** ローカルは生成・検証・転送の
+一時領域とし、画像やそのレビュー台帳を特定PCだけに保持しない。public R2は公開配信用、private R2は
+未公開・運用用の固定版、Driveは既存契約に沿う制作元画像・人向け保管に使う。採用した画像の実体は
+再生成可能でも版とSHAを固定して残す。noteの画像台帳は `data/note/` のschema付きJSONへ移行する
+(契約: [note-image-assets.md](note-image-assets.md))。既存画像の削除は移行先の実体・SHA検証後に限る。
+
 **Web アプリのページデータはすべて `app/` 名前空間に格納する。**
 
 - `app/` 以下: Web アプリが fetch するスナップショット・コンテンツ（URL に対応したパス構造）
@@ -55,7 +61,7 @@ paths:
 | `/ranking/[rankingKey]`                   | `app/ranking/[key]/thumbnail-{light,dark}.webp` + `thumbnail.json`              | 再利用可能なランキングサムネイル + 生成manifest                                                                                                                                                                 |
 | `/category/[categoryKey]`                 | `app/category/[key]/items.json`                                                 | カテゴリ内 RankingItem 一覧                                                                                                                                                                                     |
 | `/compare/[categoryKey]`                  | `app/category/[key]/items.json`                                                 | 同上（compare と共用）                                                                                                                                                                                          |
-| `/areas/[areaCode]`                       | `app/areas/[code]/profile.json`                                                 | 都道府県プロフィール                                                                                                                                                                                            |
+| `/areas/[areaCode]`                       | `app/areas/[code]/databook.json`                                                | 県データブック (指標値 + 全国順位)。県の `profile.json` は読み手 0 のため 2026-10-05 に生成を廃止 (AREA-PROFILE-JSON-RETIRE-01) |
 | `/themes/tourism` | `app/themes/tourism/seasonality.json` | 確定版の月別延べ宿泊者数。年月を独立に保持し、47県と公式全国を分離。 |
 | `/themes/health-checkups` | `app/themes/health-checkups/nutrition.json` | 国民健康・栄養調査の平均・95%信頼区間・人数。47県と公式全国を分離し、年齢調整条件・原典SHAを保持。 |
 | `/themes/local-economy` | `app/themes/local-economy/specialization.json` | 2021年経済センサスの18業種。47県と全国の従業者・割合・特化係数。分類残差も公式分母に保持。 |

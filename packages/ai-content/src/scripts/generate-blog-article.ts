@@ -58,12 +58,14 @@ import {
   type BlogArchetype,
   type GroundTruthMetric,
 } from "../services/prompts/blog-article-prompt";
+// @stats47/types を依存に持たないため、サイト識別子の正本 JSON を直接読む
+import SITE from "../../../types/src/site.json";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..", "..");
 const OUTBOX = path.join(PROJECT_ROOT, "docs/21_ブログ記事原稿");
 const QUEUE = path.join(PROJECT_ROOT, ".claude/state/blog/topic-queue.json");
-const R2 = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
+const R2 = process.env.R2_PUBLIC_FETCH_URL || SITE.r2PublicBaseUrl;
 
 // ---------- CLI ----------
 const args = process.argv.slice(2);

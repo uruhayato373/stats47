@@ -18,9 +18,10 @@ const fs = require("fs");
 const path = require("path");
 const https = require("https");
 const { URL } = require("url");
+const { SITE_ORIGIN } = require("../../../../scripts/lib/site-config.cjs");
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../../../..");
-const SITE_URL = "https://stats47.jp";
+const SITE_URL = SITE_ORIGIN;
 const SITEMAP_URL = `${SITE_URL}/sitemap.xml`;
 
 // 引数から YYYY-Www を取得、省略時は reference/snapshots/ 配下の最新を採用

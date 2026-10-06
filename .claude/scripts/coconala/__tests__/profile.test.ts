@@ -2,13 +2,14 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { COCONALA_PROFILE as profile } from '../../../config/coconala-profile';
+import { COCONALA_PROFILE as profile } from '../../../../config/coconala-profile';
 import { GEO_SERVICE_OFFER } from '../../../../packages/product-factory/src/channels/geo/service-offer';
+import { COCONALA_ACCOUNT } from '../../../../config/paths.mjs';
 
 const root = resolve(import.meta.dirname, '../../../..');
 
 test('profile belongs to the configured seller and respects form limits', () => {
-  const account = JSON.parse(readFileSync(resolve(root, '.claude/config/coconala-account.json'), 'utf8'));
+  const account = JSON.parse(readFileSync(resolve(root, COCONALA_ACCOUNT), 'utf8'));
   assert.equal(profile.userId, account.userId);
   for (const [text, limit] of [[profile.occupation, 20], [profile.headline, 50], [profile.introduction, 1300], [profile.schedule, 600]] as const) {
     assert.ok(text.length > 0 && text.length <= limit);

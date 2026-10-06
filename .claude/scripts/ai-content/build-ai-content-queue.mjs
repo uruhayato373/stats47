@@ -55,10 +55,11 @@ import { auditRow } from "./audit-ai-content.mjs";
 import { checkValueHealth, latestPartition } from "./lib/value-health.mjs";
 import { loadFailureState, quarantinedKeys } from "./record-generation-outcome.mjs";
 import { isAnchorRow } from "../gsc/analyze-ctr-seesaw.mjs";
+import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..", "..", "..");
-const R2_PUBLIC = process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp";
+const R2_PUBLIC = process.env.R2_PUBLIC_FETCH_URL ?? R2_PUBLIC_BASE_URL;
 const GSC_SNAP_DIR = join(ROOT, ".claude/skills/analytics/gsc-improvement/reference/snapshots");
 const STATE_DIR = join(ROOT, ".claude/state/ai-content");
 const QUEUE_JSON = join(STATE_DIR, "remediation-queue.json");

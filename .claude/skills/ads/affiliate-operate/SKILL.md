@@ -11,7 +11,7 @@ co_agents: [affiliate-manager]
 Mac / Windows 双方で動く。
 
 > **正典は `.claude/rules/affiliate-ads-standards.md` §11**。本 skill は手順のみ。
-> 接続設定は `.claude/config/affiliate-asp.json`、提携台帳は `.claude/state/ads/affiliate-catalog.json`、
+> 接続設定は `config/affiliate-asp.json`、提携台帳は `.claude/state/ads/affiliate-catalog.json`、
 > サイト帰属の判定は `.claude/scripts/ads/lib/asp-site-guard.mjs` が SSOT。
 > A8 の**案件開拓**は `/scout-asp`、A8 の**成果取込**は `/a8-report` が担当 (役割が違う)。
 
@@ -133,7 +133,7 @@ git で運ばれるもの / 運ばれないものを取り違えると、重複�
 |---|---|
 | 提携台帳 `.claude/state/ads/affiliate-catalog.json` (申請履歴・週上限の入力) | **Playwright 永続プロファイル `.local/playwright-*-profile`** (gitignore) |
 | A8 カタログ `.claude/state/ads/a8-catalog.json` (状態機械・承認待ち) | セッション state `.local/playwright-*-state.json` |
-| 接続設定 `.claude/config/affiliate-asp.json` (URL / ラベル / 週上限) | 走査結果 `.local/playwright-*-debug/` (再実行すれば作れる) |
+| 接続設定 `config/affiliate-asp.json` (URL / ラベル / 週上限) | 走査結果 `.local/playwright-*-debug/` (再実行すれば作れる) |
 | 広告 SSOT `apps/web/scripts/affiliate-ads-data.ts` | — |
 
 - **初回は各 ASP へ人間が手動ログインする**。認証情報は config にも env にも置かない規約なので、
@@ -181,13 +181,13 @@ afb は承認追跡と広告原稿のローカル取得まで実装済み、も�
 - 回避する引数・環境変数は用意していない。作らない。
 - afb の切替が効かない場合は debug artifact (`.local/playwright-afb-debug/<runId>/`) の
   スクリーンショットと visible-text.txt を読み、Chosen ウィジェットの selector 変化を診断する。
-- 期待 ID そのものが違う可能性もある (config `.claude/config/affiliate-asp.json` の `sites`)。
+- 期待 ID そのものが違う可能性もある (config `config/affiliate-asp.json` の `sites`)。
   実機の表示を確認してから config を直す。**推測で書き換えない。**
 
 ## 関連
 
 - 規約: `.claude/rules/affiliate-ads-standards.md` (§0 意図軸 / §11 3 ASP 提携運用)
-- 設定: `.claude/config/affiliate-asp.json` / 台帳: `.claude/state/ads/affiliate-catalog.json`
+- 設定: `config/affiliate-asp.json` / 台帳: `.claude/state/ads/affiliate-catalog.json`
 - コア: `.claude/scripts/ads/lib/{asp-browser-base,asp-browser,asp-site-guard}.mjs` (+ `__tests__/`)
 - agent: `.claude/agents/affiliate-operator.md`
 - 隣接 skill: `/scout-asp` (A8 案件開拓) / `/a8-report` (A8 成果取込) / `/register-affiliate-banner` (SSOT 登録)

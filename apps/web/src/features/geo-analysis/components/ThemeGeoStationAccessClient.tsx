@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 
+import { to2DigitPrefCode } from '@stats47/area';
 import { Button } from '@stats47/components/atoms/ui/button';
 import {
   Table,
@@ -63,7 +64,7 @@ export function ThemeGeoStationAccessClient({
           slug={slug}
           analysisId={analysisId}
           dataVersion={snapshot.dataVersion}
-          initialPrefCode={selectedRow.areaCode.slice(0, 2)}
+          initialPrefCode={to2DigitPrefCode(selectedRow.areaCode)}
           initialView="overlap"
           manifest={manifest}
           fixedPrefecture
@@ -124,7 +125,7 @@ export function ThemeGeoStationAccessClient({
                 <TableCell className="whitespace-nowrap">
                   <Link
                     className="inline-flex min-h-11 items-center text-primary underline"
-                    href={`/geo/data/${slug}/${row.areaCode.slice(0, 2)}`}
+                    href={`/geo/data/${slug}/${to2DigitPrefCode(row.areaCode)}`}
                     aria-label={`${row.areaName}の地点・検算データ`}
                   >
                     地点・検算データ

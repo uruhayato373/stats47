@@ -4,6 +4,7 @@ import path from 'node:path';
 import crypto from 'node:crypto';
 import { spawnSync } from 'node:child_process';
 import { pathToFileURL } from 'node:url';
+import { PREF_AREA_CODES } from '../lib/prefectures.cjs';
 
 const args = process.argv.slice(2),
   flag = (key) => args.includes(key),
@@ -71,7 +72,7 @@ const clone = (a, b) => {
 assert.equal(S.populationSources.length, 47);
 assert.deepEqual(
   S.populationSources.map((p) => p.areaCode),
-  Array.from({ length: 47 }, (_, i) => String(i + 1).padStart(2, '0') + '000')
+  PREF_AREA_CODES
 );
 assert.deepEqual(
   S.snowSources.map((p) => p.areaCode.slice(0, 2)),

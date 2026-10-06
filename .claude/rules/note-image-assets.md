@@ -1,11 +1,68 @@
 ---
 paths:
+  - "data/note/**"
+  - "apps/admin/lib/server/note-covers.ts"
   - "docs/31_note記事原稿/**"
   - ".claude/scripts/note/**"
   - ".claude/skills/note/**"
   - ".claude/agents/note-manager.md"
 ---
 # note 原稿の画像・データ資産の置き場 (2026-09-29)
+
+## 正本の保管と画像台帳 (2026-10-02 オーナー決定)
+
+**画像をローカルだけで管理しない。** 生成・確認・アップロード時の一時ファイルは許容するが、
+`.local/` や特定PCのディレクトリを画像・レビュー・manifestの唯一の保存先にしない。
+「再生成できる」はレビューした版を保存しなくてよい理由にしない。
+
+- noteカバーの生成候補・採用版・noteに登録した実体は、版ごとに非公開R2へ保存する。公開サイトが直接読む画像だけpublic R2へ配信する。生成AIの元画像・候補をDriveへ置く既存契約は維持し、同じ画像の正本を複数持たない。
+- 画像台帳とJSON Schemaは **`data/note/`** に置き、gitで共有・レビューする。記事メタの既存TSカタログとは記事keyで結び、タイトル・分類を二重管理しない。`.claude/state/` の監査履歴を画像台帳の代用にしない。
+- 台帳は画像の版ID、storage/providerと相対key、SHA-256、bytes、寸法、生成日時、生成元・テンプレート版、レビュー状態、候補版・採用版の参照、note公開URL・公開画像URL・最終確認日時・対応版を持つ。公開画像だけ観測でき、版を照合できない場合は対応版をnullとする。
+- JSON Schemaで形・語彙・必須項目を検査し、専用validatorで記事key・版参照・承認状態・保存実体とSHAを検査する。ローカル絶対パス、署名付きURL、認証情報を台帳へ保存しない。
+- 生成・レビュー・公開・監査・両管理画面は同じ台帳を参照する。版を上書きせず、採用版の切替を明示する。端末に画像がなくても共有ストレージから表示し、「未取得」「未生成」「未承認」「未公開」「確認が古い」を区別する。
+- 保存実体とSHAを確認して台帳を切り替えるまで旧画像を削除しない。入力のSVG・コード・生成設定はgitで共有可。ローカルのPNGと作業用manifestは正本への保管確認後に一時ファイルとして扱う。
+
+カバーの正本は `data/note/cover-assets.json`、形の契約は `cover-assets.schema.json`。
+実体は `stats47-private:note/covers/<articleKey>/revisions/<sha256>.png` に不変保存する。
+制作根拠のJSONも同じprivate R2の `note/covers/<articleKey>/inputs/<sha256>.json` に不変保存し、
+台帳の `provenance.input` と `quality.evidenceSha256` を同じSHAで結ぶ。`verify` は画像と入力の両方を照合する。
+入力には使った47県分の固定値・単位・対象年・出典URL/SHA・文字組み・配色・地理データ/renderer/fontのSHAを残す。
+`cover-assets.mjs` の専用writerは保存後に読み戻したSHA/bytesを検査してから台帳を更新する。
+記事集合・口座・公開URL・版参照・レビューを `npm run note:assets:validate` で検査し、
+実体は `npm run note:assets -- verify` で検査する。別PCはgit台帳とR2認証だけで同じ版を表示できる。
+
+- 既存の公開画像の保全・最新確認: `npm run note:assets -- archive [--keys key1,key2]`。
+- 旧public R2保管画像の移行: `archive-r2 --keys key1,key2`。候補・採用・公開ポインタを変更しない。
+- 制作入力は `prepare --keys key1,key2 --output /tmp/<task>` で一時領域へ取得し、
+  `node --import tsx .claude/scripts/note/generate-cover-refresh.ts --output /tmp/<task> --version <version>` で生成する。
+  文字境界/重なりを検査し、画像のremote保管と照合後に一時領域を削除する。日付だけの版上書きはしない。
+  問い型など本文を制作入力に使わないカバーは `prepare --source ledger` で保存済み公開版を比較元にできる。
+  公開URLと版IDの一致・remote SHAを確認し、公開サイトへの新規反映を意味する観測として扱わない。
+- 旧manifestは `import --manifest <path>` で取り込む。ローカル絶対パスは入力だけに使い、台帳には残さない。
+  旧レビューを自動継承せず未判定で登録する。回収できない旧版は `missingVersions` に残す。
+- 縮小表示確認後に `review --keys <key> --revision <sha> --status pass|needs-revision --reason <理由>`。
+  採用は現在の候補の正確なSHAに対してだけ行う。新しい候補に古い承認を引き継がない。
+- `update-note-covers.mjs [--keys ...] [--commit]` は台帳の採用済みremote版だけを読み、
+  画像専用更新と本文/価格/境界の保全・配信検証後に公開ポインタを更新する。
+  `verify-cover-refresh.mjs [--keys ...]` も台帳起点で検査する。管理画面はGET専用のまま。
+- `/content/note/covers` と `/assets` は同じ台帳を読む。非公開画像はlocalhostのGET proxyでSHAを照合して表示し、
+  ローカル画像キャッシュを永続化しない。取得失敗・旧版未回収・未判定・未反映・観測の鮮度を表示する。
+- Wrangler OAuthの期限切れは、既存sessionを非対話で更新し、同時画像取得は1回の更新を共有する。
+  更新後の認証を読み直し、子プロセスもTLSを検証する。失効などで更新不能なら接続案内を表示して停止する。
+- 週次監査は完全取得した観測だけを台帳へ反映し、developへ限定commitする。失敗・不明で直前の画像を消さない。
+- 汎用 `generate-ogp-images.ts --type note-covers` は書込開始前に停止する。既存のSVG/Remotion等は制作入力用の旧rendererであり、
+  保存・採用・公開の正典ではない。本文チャートの再生成契約は以下に残す。
+
+### 問い型ランキングのカバー
+
+分類SSOTの `ranking-question` 全記事は同じ `question-ranking-note-cover-v1` rendererを使う。
+淡い背景・大きな問い・答え・対象年・薄い日本地図を配置し、カバーに凡例・単位・数値範囲を載せない。
+地図はD3 `interpolateYlOrRd` と連続線形スケールで実際の値を塗り分け、本文チャートの順位配色とは区別する。
+長い主題は資格条件や助詞を失わず2行にし、同率1位は全て表示する。
+既存 `chart-data.json` は全47県・年・値を照合して使用する。単位欠落は一致を確認した元データから補う。
+固定コピーが無い回収記事もカタログの `stats47Targets` から対象ランキングと記事の年を明示解決し、
+private R2の制作入力に固定する。最新年への自動切替・公開原稿一式の無断上書きは行わない。
+文字検査はSatoriの `textContent` を読む。空の検査結果をPASSにせず、境界・重なりを検査してから登録する。
 
 note 記事の画像は、記事で使ったデータと設定から作り直せる**派生物**である。派生物を git に置くと
 リポジトリが肥大する (2026-09-29 の実測: `docs/31_note記事原稿/` の追跡 PNG 682 枚で約 153MB。
@@ -88,6 +145,5 @@ note 記事の画像は、記事で使ったデータと設定から作り直せ
 - props 欠落時は別指標のモックに落ちず例外にする (他記事のデータで画像が焼かれる事故を防ぐ)。
 - **見た目を変えたら** `.claude/scripts/note/lib/note-render-spec.mjs` の `NOTE_RENDER_TEMPLATE_VERSION` を上げ、
   `render-ranking-images.mjs --stale` で全記事を作り直す。上げ忘れても、古い spec は `RENDER_SPEC_INVALID` で止まる。
-- カバー (1280x670) の正典は、新規記事の公開時に使うこの Remotion 版。公開済み記事のカバー一括差し替えは
-  `NOTE-COVER-ROLLOUT-20260928` (Satori 版・別系統) が持ち、`production-manifest` が実際に note へ載せる画像を決める。
-
+- Remotionのカバー出力も制作入力であり、画像の保存・採用の正典は共通画像台帳。公開済み記事のカバー一括差し替えは
+  `NOTE-COVER-ROLLOUT-20260928` が持ち、共通画像台帳の現在の候補SHAに対する採用ポインタが実際に note へ載せる画像を決める。

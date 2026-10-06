@@ -8,6 +8,7 @@ import {
   SPACING,
   type ThemeName,
 } from "@/shared/themes/brand";
+import { SITE } from "@stats47/types";
 
 interface ComparisonCoverSlideProps {
   areaNameA: string;
@@ -182,7 +183,7 @@ export const ComparisonCoverSlide: React.FC<ComparisonCoverSlideProps> = ({
             letterSpacing: 1,
           }}
         >
-          stats47.jp
+          {SITE.domain}
         </div>
         <div style={{ width: 1, height: 16, backgroundColor: colors.border }} />
         <div
@@ -193,7 +194,7 @@ export const ComparisonCoverSlide: React.FC<ComparisonCoverSlideProps> = ({
             letterSpacing: 1,
           }}
         >
-          統計で見る都道府県
+          {SITE.name}
         </div>
       </div>
     </AbsoluteFill>

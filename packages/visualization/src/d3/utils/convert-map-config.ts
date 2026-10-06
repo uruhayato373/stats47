@@ -6,6 +6,7 @@ import { DEFAULT_DIVERGING_SCHEME, DEFAULT_SEQUENTIAL_SCHEME } from "@stats47/ty
 import type { ColorScaleOptions, VisualizationDataPoint } from "../types";
 import type { MapVisualizationConfig } from "../types/map-chart";
 import { normalizeColorScheme } from "./color-scale/normalize-color-scheme";
+import { DEFAULT_PREFECTURE_MAP_PROPS } from "../constants/map-constants";
 
 function normalizeSequentialScheme(colorScheme: string | undefined): string {
   return normalizeColorScheme(colorScheme || DEFAULT_SEQUENTIAL_SCHEME);
@@ -34,7 +35,7 @@ export function mapConfigToColorOptions(
         colorScheme: normalizeSequentialScheme(colorConfig.colorScheme),
         minValueType: colorConfig.minValueType,
         isReversed: colorConfig.isReversed,
-        noDataColor: colorConfig.noDataColor || "#e0e0e0",
+        noDataColor: colorConfig.noDataColor || DEFAULT_PREFECTURE_MAP_PROPS.noDataFillColor,
       };
 
     case "diverging":
@@ -46,7 +47,7 @@ export function mapConfigToColorOptions(
         divergingMidpointValue: colorConfig.divergingMidpointValue,
         isSymmetrized: colorConfig.isSymmetrized,
         isReversed: colorConfig.isReversed,
-        noDataColor: colorConfig.noDataColor || "#e0e0e0",
+        noDataColor: colorConfig.noDataColor || DEFAULT_PREFECTURE_MAP_PROPS.noDataFillColor,
       };
 
     case "categorical":
@@ -55,7 +56,7 @@ export function mapConfigToColorOptions(
         data,
         colorScheme: colorConfig.colorScheme || DEFAULT_SEQUENTIAL_SCHEME,
         isReversed: colorConfig.isReversed,
-        noDataColor: colorConfig.noDataColor || "#e0e0e0",
+        noDataColor: colorConfig.noDataColor || DEFAULT_PREFECTURE_MAP_PROPS.noDataFillColor,
       };
 
     default:
@@ -63,7 +64,7 @@ export function mapConfigToColorOptions(
         type: "sequential",
         data,
         colorScheme: DEFAULT_SEQUENTIAL_SCHEME,
-        noDataColor: "#e0e0e0",
+        noDataColor: DEFAULT_PREFECTURE_MAP_PROPS.noDataFillColor,
       };
   }
 }

@@ -11,6 +11,7 @@ import { collectAfbOutcomes } from './afb-outcomes.mjs';
 import { kdpMonthlyVaultKey } from './kdp-monthly-reports.mjs';
 import { authenticationPause, rejectedAuthentication } from './auth-recovery.mjs';
 import { acceptedNoteGap, noteInventoryAvailable } from './note-inventory.mjs';
+import { AFFILIATE_ASP } from '../../../config/paths.mjs';
 
 const run = promisify(execFile);
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
@@ -142,7 +143,7 @@ try {
     await command('.claude/scripts/ads/rakuten-report.mjs');
     capture('.claude/state/metrics/affiliate/rakuten-results.json');
   } else if (name === 'afb') {
-    const config = JSON.parse(readFileSync(join(ROOT, '.claude/config/affiliate-asp.json'), 'utf8'));
+    const config = JSON.parse(readFileSync(join(ROOT, AFFILIATE_ASP), 'utf8'));
     const outcomes = await collectAfbOutcomes({ config, apiKey: process.env.AFB_API_KEY, now: new Date(now) });
     for (const [file, value] of Object.entries({ 'outcomes.json': outcomes.report, 'raw.json': outcomes.raw })) {
       writeFileSync(join(work, file), JSON.stringify(value), { mode: 0o600 });

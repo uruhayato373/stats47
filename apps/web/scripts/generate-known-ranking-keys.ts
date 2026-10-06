@@ -22,8 +22,9 @@ import path from "node:path";
 import { listAllMetrics } from "@stats47/data-configs";
 
 import { checkPresence, type Presence } from "./lib/r2-presence";
+import { SITE } from "@stats47/types";
 
-const R2_PUBLIC = process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp";
+const R2_PUBLIC = process.env.R2_PUBLIC_FETCH_URL ?? SITE.r2PublicBaseUrl;
 const OUT_PATH = path.resolve(
   __dirname,
   "../../../packages/ranking/src/config/known-ranking-keys.ts",

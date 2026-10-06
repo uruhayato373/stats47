@@ -30,6 +30,7 @@ import {
 import { PUBLIC_KSJ_EXPECTED_ARCHIVE_COUNTS } from '../official-policy';
 import { getCodeConfig } from '../registry';
 import { getKsjLicensePolicy } from '../license-policy';
+import { PREFECTURE_AREA_CODES, to2DigitPrefCode } from '@stats47/area';
 
 const sha = (bytes: Buffer) => createHash('sha256').update(bytes).digest('hex');
 export const SOURCE_REPAIR_VERSIONS: Readonly<Record<string, string>> = {
@@ -280,7 +281,7 @@ export async function rebuildSourcePageData(options: {
   } else {
     const scopes =
       id === 'P04'
-        ? Array.from({ length: 47 }, (_, i) => String(i + 1).padStart(2, '0'))
+        ? PREFECTURE_AREA_CODES.map(to2DigitPrefCode)
         : ['national'];
     archives = scopes.map((scope) => {
       const filename = `${id}-${version}${scope === 'national' ? '' : `_${scope}`}_GML.zip`;

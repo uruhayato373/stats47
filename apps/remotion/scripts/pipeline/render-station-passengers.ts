@@ -23,6 +23,7 @@ import {
 } from "@remotion/renderer";
 import fs from "fs/promises";
 import path from "path";
+import { PREFECTURE_AREA_CODES, to2DigitPrefCode } from "@stats47/area";
 
 type Format = "landscape" | "portrait" | "square";
 
@@ -33,9 +34,7 @@ const COMPOSITION_ID: Record<Format, string> = {
 };
 
 const ALL_FORMATS: Format[] = ["landscape", "portrait", "square"];
-const ALL_PREFS = Array.from({ length: 47 }, (_, i) =>
-  String(i + 1).padStart(2, "0"),
-);
+const ALL_PREFS = PREFECTURE_AREA_CODES.map(to2DigitPrefCode);
 /** Chrome を定期再起動する間隔（動画レンダーはメモリを食う） */
 const BROWSER_RESTART_INTERVAL = 5;
 

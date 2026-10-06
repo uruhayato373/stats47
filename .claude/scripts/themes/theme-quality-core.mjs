@@ -1,5 +1,7 @@
 /** Pure observations and comparison rules for the theme quality audit. */
-const PREFECTURE_CODES = Array.from({ length: 47 }, (_, i) => `${String(i + 1).padStart(2, "0")}000`);
+import { PREF_AREA_CODES } from "../lib/prefectures.cjs";
+
+const PREFECTURE_CODES = PREF_AREA_CODES;
 const PREFECTURES = new Set(PREFECTURE_CODES);
 const normalized = (v) => String(v ?? "").normalize("NFKC").trim();
 

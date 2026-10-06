@@ -27,6 +27,7 @@ import { createRequire } from "node:module";
 import { require as tsxRequire } from "tsx/cjs/api";
 
 import { isAnchorRow } from "../gsc/analyze-ctr-seesaw.mjs";
+import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 
 const require = createRequire(import.meta.url);
 const core = require("./lib/placement-map-core.mjs");
@@ -146,7 +147,7 @@ export function loadInventory(maps = loadAffiliateMaps(), today) {
 
 /** 明示ローカルsnapshot、無指定なら公開R2。取得不能はsource/errorに残す。 */
 async function loadSnapshot(path, key) {
-  const base = process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp";
+  const base = process.env.R2_PUBLIC_FETCH_URL ?? R2_PUBLIC_BASE_URL;
   try {
     if (path) return { data: JSON.parse(readFileSync(path, "utf8")), source: path };
     // 会社ネットワーク (透過型 TLS 傍受) では素の fetch が届かず、

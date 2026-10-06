@@ -4,6 +4,17 @@
   "runs": [
     {
       "job": "ctr-improvement",
+      "month": "2026-10",
+      "status": "ok",
+      "ranAt": "2026-10-05T02:38:30.260Z",
+      "runUrl": "https://github.com/uruhayato373/stats47/actions/runs/37256161222",
+      "fields": {
+        "max": "10"
+      },
+      "summary": "## CTR 改善候補 (期間: 2026-W40, 抽出: 10 件 / 候補 154 件)\n\nsource: `.claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W40/queries.csv`\n\n| Query | Position | Impr | CTR (%) | Industry Avg (%) | 期待 +Clicks/month |\n|---|---|---|---|---|---|\n| 全国の公衆電話の数 | 7 | 1773 | 0.11 | 3.9 | +67.2 |\n| 公衆電話 全国 数 | 7 | 897 | 0.11 | 3.9 | +34.0 |\n| 住みやすい県ランキング | 6 | 1587 | 2.77 | 4.9 | +33.8 |\n| 高校2年生 平均身長 | 7 | 769 | 0.13 | 3.9 | +29.0 |\n| 道の駅多い県 | 8 | 685 | 0.15 | 3.3 | +21.6 |\n| 道の駅 多い県 | 9 | 708 | 0.00 | 2.7 | +19.1 |\n| 日本にある公衆電話の数 | 7 | 385 | 0.00 | 3.9 | +15.0 |\n| 高二男子 平均身長 | 8 | 400 | 0.00 | 3.3 | +13.2 |\n| 全国 公衆電話 台数 | 6 | 267 | 0.00 | 4.9 | +13.1 |\n| 高校二年生 平均身長 | 7 | 296 | 0.00 | 3.9 | +11.5 |\n\n### 改善提案\n- 上位 3 クエリは `/brushup-blog --target article <slug>` で seoTitle/description 改訂を検討\n- position 5-10 帯は CTR 倍増効果が大きい (industry avg 比 3-7x の改善余地)\n- 業界平均値の出典: Backlinko 2023 (https://backlinko.com/google-ctr-stats)\n"
+    },
+    {
+      "job": "ctr-improvement",
       "month": "2026-09",
       "status": "ok",
       "ranAt": "2026-09-05T01:38:13Z",

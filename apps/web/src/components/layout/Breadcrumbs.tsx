@@ -11,6 +11,8 @@ import {
   BreadcrumbSeparator,
 } from "@stats47/components/atoms/ui/breadcrumb";
 
+import { SITE_ORIGIN } from "@/config/site";
+
 export interface BreadcrumbTrailItem {
   /** 表示ラベル */
   label: string;
@@ -27,8 +29,6 @@ interface BreadcrumbsProps {
   items: BreadcrumbTrailItem[];
   className?: string;
 }
-
-const SITE_ORIGIN = "https://stats47.jp";
 
 /** 現在地の項目 (と直前の区切り) は sm 以上だけ出す */
 export const CURRENT_ITEM_CLASS = "hidden sm:inline-flex";

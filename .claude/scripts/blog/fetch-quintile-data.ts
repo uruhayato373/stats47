@@ -20,6 +20,7 @@
 import * as fs from "node:fs";
 import * as path from "node:path";
 import { generateBarChartSvg, generateLineSvg } from "../../../packages/svg-builder/src/charts/index.ts";
+import { ESTAT_STATS_DATA_URL, ESTAT_META_INFO_URL } from "../lib/estat-catalog/endpoints.cjs";
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
 const STATS_DATA_ID_AMOUNT = "0003348240"; // 品目分類2020年改定・年間収入五分位・金額
@@ -53,7 +54,7 @@ function flag(name: string): boolean {
 
 async function estat(params: Record<string, string>): Promise<any> {
   const qs = new URLSearchParams({ appId: APP_ID, ...params }).toString();
-  const url = `https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData?${qs}`;
+  const url = `${ESTAT_STATS_DATA_URL}?${qs}`;
   const r = await fetch(url);
   if (!r.ok) throw new Error(`e-Stat HTTP ${r.status}`);
   const j = await r.json();
@@ -203,7 +204,7 @@ async function runLine() {
 async function runScan() {
   const year = arg("year", "2024")!;
   // メタから品目名（L3-4のみ）を取得
-  const metaUrl = `https://api.e-stat.go.jp/rest/3.0/app/json/getMetaInfo?appId=${APP_ID}&statsDataId=${STATS_DATA_ID_AMOUNT}`;
+  const metaUrl = `${ESTAT_META_INFO_URL}?appId=${APP_ID}&statsDataId=${STATS_DATA_ID_AMOUNT}`;
   const meta = await (await fetch(metaUrl)).json();
   const cat01 = meta.GET_META_INFO.METADATA_INF.CLASS_INF.CLASS_OBJ.find((o: any) => o["@id"] === "cat01");
   const nameByCode: Record<string, { name: string; level: string }> = {};

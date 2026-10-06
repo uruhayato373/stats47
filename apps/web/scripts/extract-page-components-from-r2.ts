@@ -16,8 +16,9 @@ import { resolve } from "node:path";
 import { CATEGORIES } from "../../../packages/data-configs/src/categories";
 import { THEME_INDICATOR_SETS } from "../../../packages/types/src/indicator-sets/registry";
 import { KNOWN_RANKING_KEYS } from "../../../packages/ranking/src/config/known-ranking-keys";
+import { SITE } from "@stats47/types";
 
-const PUBLIC_URL = process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp";
+const PUBLIC_URL = process.env.R2_PUBLIC_FETCH_URL ?? SITE.r2PublicBaseUrl;
 const DATA_ROOT = resolve(__dirname, "data/page-components");
 const CONCURRENCY = 32;
 

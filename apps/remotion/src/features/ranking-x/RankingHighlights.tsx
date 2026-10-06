@@ -13,6 +13,7 @@ import {
 import type { RankingEntry, RankingMeta } from "@/shared/types/ranking";
 import type { ChoroplethPathInfo } from "@/shared/utils/choropleth";
 import { ChoroplethMapSvg } from "@/shared/components/maps/ChoroplethMapSvg";
+import { SITE } from "@stats47/types";
 
 interface RankingHighlightsProps {
   meta: RankingMeta;
@@ -188,7 +189,7 @@ export const RankingHighlights: React.FC<RankingHighlightsProps> = ({
             letterSpacing: 1,
           }}
         >
-          stats47.jp
+          {SITE.domain}
         </div>
         <div style={{ width: 1, height: 14, backgroundColor: colors.border }} />
         <div
@@ -199,7 +200,7 @@ export const RankingHighlights: React.FC<RankingHighlightsProps> = ({
             letterSpacing: 1,
           }}
         >
-          統計で見る都道府県
+          {SITE.name}
         </div>
       </div>
     </AbsoluteFill>

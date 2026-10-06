@@ -1,12 +1,11 @@
 import { BUSINESS_PLAN_M1_X_POSTS } from './m1';
 import { GEO_ANALYSES } from './geo-analyses';
 import { GEO_LAYERS } from './geo-layers';
+import { PREFECTURE_AREA_CODES, to2DigitPrefCode } from '@stats47/area';
 
 /** Geoの公開・索引・リダイレクトを同じ集合から決定する。 */
 export const GEO_STAGES = ['population', 'overlap', 'audit'] as const;
-export const GEO_PREF_CODES = Array.from({ length: 47 }, (_, i) =>
-  String(i + 1).padStart(2, '0')
-);
+export const GEO_PREF_CODES = PREFECTURE_AREA_CODES.map(to2DigitPrefCode);
 export const GEO_ANALYSIS_SLUGS = GEO_ANALYSES.map((a) => a.slug);
 export const GEO_STAGE_LANDINGS = [
   ...new Set(

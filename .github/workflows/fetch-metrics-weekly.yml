@@ -23,10 +23,14 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
-      - name: 🧰 Checkout main
+      # 計測も develop の上で行う。以前は main で計測し `.claude/state/metrics/` 全体を develop へ
+      # 上書きコピーしていたため、main に未マージの他 workflow の state (page-quality 週次監査・
+      # KSJ 月次記録・psi/cloudflare 日次など 15 ファイル) を main の古い版へ巻き戻した (2026-10-04 e45f5a0ee)。
+      # 契約: workflow-commit-back-core.cjs の findForeignTreeRestore。
+      - name: 🧰 Checkout develop
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          ref: main
+          ref: develop
           fetch-depth: 0
 
       - name: 🟢 Setup Node.js
@@ -108,41 +112,6 @@ jobs:
               } >> "$GITHUB_STEP_SUMMARY"
             fi
           done
-
-      - name: 📦 Stage metrics outputs
-        run: |
-          mkdir -p /tmp/metrics-publish/snapshots /tmp/metrics-publish/state /tmp/metrics-publish/nsm
-          cp -r .claude/skills/analytics/gsc-improvement/reference/snapshots/. /tmp/metrics-publish/snapshots/gsc 2>/dev/null || true
-          cp -r .claude/skills/analytics/ga4-improvement/reference/snapshots/. /tmp/metrics-publish/snapshots/ga4 2>/dev/null || true
-          cp -r .claude/skills/analytics/adsense-improvement/reference/snapshots/. /tmp/metrics-publish/snapshots/adsense 2>/dev/null || true
-          cp -r .claude/state/metrics/. /tmp/metrics-publish/state 2>/dev/null || true
-          cp -r .claude/skills/management/nsm-experiment/reference/weekly-snapshots/. /tmp/metrics-publish/nsm 2>/dev/null || true
-          find /tmp/metrics-publish -maxdepth 4 -type f | head -40
-
-      - name: 🔀 Switch to develop & restore metrics
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-          # working tree の変更は /tmp/metrics-publish に退避済。branch 切替前にリセット。
-          git reset --hard HEAD
-          git clean -fd
-
-          git fetch origin develop
-          git checkout develop
-          git pull --rebase origin develop
-
-          mkdir -p .claude/skills/analytics/gsc-improvement/reference/snapshots
-          mkdir -p .claude/skills/analytics/ga4-improvement/reference/snapshots
-          mkdir -p .claude/skills/analytics/adsense-improvement/reference/snapshots
-          mkdir -p .claude/state/metrics
-
-          cp -r /tmp/metrics-publish/snapshots/gsc/. .claude/skills/analytics/gsc-improvement/reference/snapshots/ 2>/dev/null || true
-          cp -r /tmp/metrics-publish/snapshots/ga4/. .claude/skills/analytics/ga4-improvement/reference/snapshots/ 2>/dev/null || true
-          cp -r /tmp/metrics-publish/snapshots/adsense/. .claude/skills/analytics/adsense-improvement/reference/snapshots/ 2>/dev/null || true
-          cp -r /tmp/metrics-publish/state/. .claude/state/metrics/ 2>/dev/null || true
-          mkdir -p .claude/skills/management/nsm-experiment/reference/weekly-snapshots
-          cp -r /tmp/metrics-publish/nsm/. .claude/skills/management/nsm-experiment/reference/weekly-snapshots/ 2>/dev/null || true
 
       # 是正ループの自動化 (.claude/skills/blog/brushup-blog/reference/blog-remediation-loop.md)。
       # develop の最新 history + 今 fetch した GSC snapshot + 公開 R2 audit を入力に
@@ -310,6 +279,9 @@ jobs:
 
       - name: 📤 Commit & push to develop
         run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
           # 生成先は packages/data-configs 側 (apps/web と packages/ranking の両方が読むため)。
           # ここを取り違えると再生成しても commit されず、次の PR で --check だけが落ちる。
           git add packages/data-configs/src/prominence/ranking-prominence.generated.ts

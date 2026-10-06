@@ -28,6 +28,7 @@ import { writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { resolveProductCardText } from "./lib/navigation-footer.mjs";
+import { SITE_ORIGIN } from "../lib/site-config.cjs";
 
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(SCRIPT_DIR, "../../..");
@@ -158,7 +159,7 @@ function extractExternalArticleFigures(body) {
  * (本文には site カード・マガジンカードなど他の external-article figure も同居しうる)。
  */
 function extractProductCardText(body, productTarget) {
-  const prefix = `https://stats47.jp${productTarget}`;
+  const prefix = `${SITE_ORIGIN}${productTarget}`;
   const figure = extractExternalArticleFigures(body).find((f) => f.dataSrc && f.dataSrc.startsWith(prefix));
   if (!figure) return { found: false, dataSrc: null, title: null, description: null };
   const title = (figure.inner.match(/<strong>([\s\S]*?)<\/strong>/) || [])[1] ?? null;

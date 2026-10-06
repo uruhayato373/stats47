@@ -23,6 +23,8 @@
 
 import { MetadataRoute } from "next";
 
+import { SITE_ORIGIN } from "@/config/site";
+
 /**
  * robots.txt生成関数
  *
@@ -30,7 +32,7 @@ import { MetadataRoute } from "next";
  */
 export default function robots(): MetadataRoute.Robots {
   const baseUrl =
-    process.env.NEXT_PUBLIC_BASE_URL || "https://stats47.jp";
+    process.env.NEXT_PUBLIC_BASE_URL || SITE_ORIGIN;
 
   return {
     rules: [

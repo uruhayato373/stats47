@@ -1,10 +1,10 @@
-import { lookupArea } from '@stats47/area';
+import { lookupArea, PREFECTURE_AREA_CODE_RE } from '@stats47/area';
 import { FREIGHT_OD_SOURCE } from '@stats47/data-configs/theme-catalog';
 import { z } from 'zod';
 
 const source = FREIGHT_OD_SOURCE;
 const count = z.number().int().nonnegative().max(Number.MAX_SAFE_INTEGER);
-const areaCode = z.string().regex(/^(0[1-9]|[1-3][0-9]|4[0-7])000$/);
+const areaCode = z.string().regex(PREFECTURE_AREA_CODE_RE);
 const margin = z.object({ areaCode, value: count }).strict();
 export const freightOdSnapshotSchema = z
   .object({

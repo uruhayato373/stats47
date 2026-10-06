@@ -5,6 +5,7 @@
  */
 
 import type { CategoricalColorScaleOptions } from "../../types";
+import { DEFAULT_PREFECTURE_MAP_PROPS } from "../../constants/map-constants";
 
 /**
  * カテゴリカラースケールを生成
@@ -18,7 +19,7 @@ export async function createCategoricalColorScale(
   const {
     data,
     categories = 10,
-    noDataColor = "#e0e0e0",
+    noDataColor = DEFAULT_PREFECTURE_MAP_PROPS.noDataFillColor,
     d3: providedD3,
   } = options;
 

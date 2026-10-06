@@ -1,26 +1,26 @@
 {
-  "generatedAt": "2026-09-27T11:58:53.837Z",
-  "today": "2026-09-27",
+  "generatedAt": "2026-10-03T22:34:20.371Z",
+  "today": "2026-10-03",
   "inputs": {
-    "integrityAudit": "2026-09-27T11:58:49.471Z",
+    "integrityAudit": "2026-10-03T22:24:02.767Z",
     "integrityHasDeliveredYears": true,
     "fetchedFromR2": 0,
     "estatYearCoverage": true,
-    "demandSource": "search-growth/candidates.json (2026-09-20T16:25:08.386Z) GSC impressions"
+    "demandSource": "search-growth/candidates.json (2026-09-27T17:10:15.058Z) GSC impressions"
   },
   "basis": "1=確認済み時点統計の yearFormat 誤り / 2・3=配信年から推定した周期遅れ (公式最新公表は未照会) / 4=観測1〜2年かつ需要未観測または≤10",
   "summary": {
-    "activeMetrics": 2449,
-    "withDeliveredYears": 2408,
+    "activeMetrics": 2452,
+    "withDeliveredYears": 2423,
     "treatment1": 0,
-    "treatment2": 1072,
+    "treatment2": 1079,
     "treatment3": 126,
-    "treatment4": 189,
-    "noAction": 1062,
+    "treatment4": 173,
+    "noAction": 1074,
     "yearLabelError": 0,
-    "yearLabelOk": 192,
+    "yearLabelOk": 195,
     "yearLabelUnknown": 2257,
-    "freshnessUnknown": 41
+    "freshnessUnknown": 29
   },
   "entries": [
     {
@@ -34,10 +34,10 @@
       ],
       "freshness": "stale",
       "latestYear": 2023,
-      "observedYears": 1,
+      "observedYears": 47,
       "cadence": 1,
       "estatExtendCandidate": true,
-      "demand": 6607
+      "demand": 7258
     },
     {
       "key": "annual-sunshine-duration",
@@ -50,103 +50,10 @@
       ],
       "freshness": "fresh",
       "latestYear": 2024,
-      "observedYears": 1,
+      "observedYears": 50,
       "cadence": 1,
       "estatExtendCandidate": true,
-      "demand": 1200
-    },
-    {
-      "key": "local-allocation-tax-prefecture",
-      "treatment": 2,
-      "reason": "最新 2022 年・推定周期 1 年に対し 2 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": [
-        "地方財政統計年報",
-        "都道府県決算状況調"
-      ],
-      "freshness": "stale",
-      "latestYear": 2022,
-      "observedYears": 34,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": 1092
-    },
-    {
-      "key": "school-teacher-annual-income",
-      "treatment": 2,
-      "reason": "最新 2022 年・推定周期 1 年に対し 2 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "calendar",
-      "sources": null,
-      "freshness": "stale",
-      "latestYear": 2022,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": 916
-    },
-    {
-      "key": "voluntary-car-insurance-rate-vehicle",
-      "treatment": 2,
-      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": [
-        "損害保険料率算出機構統計集"
-      ],
-      "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 49,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": 746
-    },
-    {
-      "key": "designated-difficult-disease",
-      "treatment": 2,
-      "reason": "最新 2020 年・推定周期 1 年に対し 4 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": null,
-      "freshness": "stale",
-      "latestYear": 2020,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": 702
-    },
-    {
-      "key": "fishery-workers",
-      "treatment": 2,
-      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": [
-        "漁業センサス"
-      ],
-      "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 33,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": 689
-    },
-    {
-      "key": "voluntary-car-insurance-rate-bodily-injury",
-      "treatment": 2,
-      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": [
-        "損害保険料率算出機構統計集"
-      ],
-      "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 49,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": 649
+      "demand": 2216
     },
     {
       "key": "average-height-primary-school-fifth-grade-male",
@@ -162,7 +69,38 @@
       "observedYears": 1,
       "cadence": 1,
       "estatExtendCandidate": true,
-      "demand": 634
+      "demand": 1091
+    },
+    {
+      "key": "local-allocation-tax-prefecture",
+      "treatment": 2,
+      "reason": "最新 2022 年・推定周期 1 年に対し 2 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "fiscal",
+      "sources": [
+        "地方財政統計年報",
+        "都道府県決算状況調"
+      ],
+      "freshness": "stale",
+      "latestYear": 2022,
+      "observedYears": 48,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": 1089
+    },
+    {
+      "key": "school-teacher-annual-income",
+      "treatment": 2,
+      "reason": "最新 2022 年・推定周期 1 年に対し 2 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "calendar",
+      "sources": null,
+      "freshness": "stale",
+      "latestYear": 2022,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": 991
     },
     {
       "key": "food-self-sufficiency-rate-calorie",
@@ -178,21 +116,23 @@
       "observedYears": 14,
       "cadence": 1,
       "estatExtendCandidate": false,
-      "demand": 634
+      "demand": 970
     },
     {
-      "key": "treatment-rate-hypertension-outpatient",
+      "key": "fishery-workers",
       "treatment": 2,
       "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
       "yearLabel": "unknown",
       "yearFormat": "fiscal",
-      "sources": null,
+      "sources": [
+        "漁業センサス"
+      ],
       "freshness": "stale",
       "latestYear": 2023,
-      "observedYears": 1,
+      "observedYears": 33,
       "cadence": 1,
       "estatExtendCandidate": false,
-      "demand": 630
+      "demand": 779
     },
     {
       "key": "national-treasury-disbursement-prefecture",
@@ -209,115 +149,51 @@
       "observedYears": 34,
       "cadence": 1,
       "estatExtendCandidate": false,
-      "demand": 629
+      "demand": 750
     },
     {
-      "key": "fishery-species-catch-sardine",
+      "key": "treatment-rate-hypertension-outpatient",
       "treatment": 2,
-      "reason": "最新 2015 年・推定周期 1 年に対し 9 周期遅れ (推定)",
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
       "yearLabel": "unknown",
-      "yearFormat": "calendar",
+      "yearFormat": "fiscal",
       "sources": null,
-      "freshness": "stale",
-      "latestYear": 2015,
-      "observedYears": 60,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": 599
-    },
-    {
-      "key": "library-books",
-      "treatment": 2,
-      "reason": "最新 2021 年・推定周期 3 年に対し 1 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": [
-        "社会教育調査報告書"
-      ],
-      "freshness": "stale",
-      "latestYear": 2021,
-      "observedYears": 6,
-      "cadence": 3,
-      "estatExtendCandidate": false,
-      "demand": 564
-    },
-    {
-      "key": "stillbirths-after-22-weeks",
-      "treatment": 2,
-      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
-      "yearLabel": "ok",
-      "yearFormat": "calendar",
-      "sources": [
-        "人口動態統計"
-      ],
-      "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 12,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": 556
-    },
-    {
-      "key": "road-expressway-length",
-      "treatment": 2,
-      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": [
-        "道路施設現況調査（道路統計年報）"
-      ],
       "freshness": "stale",
       "latestYear": 2023,
       "observedYears": 1,
       "cadence": 1,
       "estatExtendCandidate": false,
-      "demand": 553
+      "demand": 710
     },
     {
-      "key": "fishery-species-catch-pacific-saury",
+      "key": "designated-difficult-disease",
       "treatment": 2,
-      "reason": "最新 2015 年・推定周期 1 年に対し 9 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "calendar",
-      "sources": null,
-      "freshness": "stale",
-      "latestYear": 2015,
-      "observedYears": 60,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": 495
-    },
-    {
-      "key": "retail-store-count",
-      "treatment": 2,
-      "reason": "最新 2021 年・推定周期 2 年に対し 1 周期遅れ (推定)",
+      "reason": "最新 2020 年・推定周期 1 年に対し 4 周期遅れ (推定)",
       "yearLabel": "unknown",
       "yearFormat": "fiscal",
-      "sources": [
-        "経済センサス-活動調査"
-      ],
+      "sources": null,
       "freshness": "stale",
-      "latestYear": 2021,
-      "observedYears": 5,
-      "cadence": 2,
+      "latestYear": 2020,
+      "observedYears": 1,
+      "cadence": 1,
       "estatExtendCandidate": false,
-      "demand": 494
+      "demand": 681
     },
     {
-      "key": "sewage-treatment-coverage-rate",
+      "key": "voluntary-car-insurance-rate-bodily-injury",
       "treatment": 2,
       "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
       "yearLabel": "unknown",
       "yearFormat": "fiscal",
       "sources": [
-        "汚水処理人口普及状況"
+        "損害保険料率算出機構統計集"
       ],
       "freshness": "stale",
       "latestYear": 2023,
-      "observedYears": 1,
+      "observedYears": 49,
       "cadence": 1,
       "estatExtendCandidate": false,
-      "demand": 493
+      "demand": 669
     },
     {
       "key": "physical-disability-certificates-issued",
@@ -333,7 +209,99 @@
       "observedYears": 49,
       "cadence": 1,
       "estatExtendCandidate": false,
-      "demand": 484
+      "demand": 621
+    },
+    {
+      "key": "road-expressway-length",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "fiscal",
+      "sources": [
+        "道路施設現況調査（道路統計年報）"
+      ],
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": 618
+    },
+    {
+      "key": "stillbirths-after-22-weeks",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "人口動態統計"
+      ],
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 12,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": 572
+    },
+    {
+      "key": "fishery-species-catch-sardine",
+      "treatment": 2,
+      "reason": "最新 2015 年・推定周期 1 年に対し 9 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "calendar",
+      "sources": null,
+      "freshness": "stale",
+      "latestYear": 2015,
+      "observedYears": 60,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": 564
+    },
+    {
+      "key": "fishery-species-catch-pacific-saury",
+      "treatment": 2,
+      "reason": "最新 2015 年・推定周期 1 年に対し 9 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "calendar",
+      "sources": null,
+      "freshness": "stale",
+      "latestYear": 2015,
+      "observedYears": 60,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": 531
+    },
+    {
+      "key": "early-neonatal-deaths",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "人口動態統計"
+      ],
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 13,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": 509
+    },
+    {
+      "key": "voluntary-car-insurance-rate-vehicle",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "fiscal",
+      "sources": [
+        "損害保険料率算出機構統計集"
+      ],
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 49,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": 493
     },
     {
       "key": "voter-turnout-governor",
@@ -349,21 +317,71 @@
       "observedYears": 4,
       "cadence": 4,
       "estatExtendCandidate": false,
-      "demand": 475
+      "demand": 488
     },
     {
-      "key": "abortion-rate",
+      "key": "psychiatric-bed-count",
       "treatment": 2,
-      "reason": "最新 2020 年・推定周期 1 年に対し 4 周期遅れ (推定)",
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
       "yearLabel": "unknown",
-      "yearFormat": "calendar",
-      "sources": null,
+      "yearFormat": "fiscal",
+      "sources": [
+        "医療施設調査・病院報告"
+      ],
       "freshness": "stale",
-      "latestYear": 2020,
-      "observedYears": 8,
+      "latestYear": 2023,
+      "observedYears": 49,
       "cadence": 1,
       "estatExtendCandidate": false,
-      "demand": 458
+      "demand": 481
+    },
+    {
+      "key": "retail-store-count",
+      "treatment": 2,
+      "reason": "最新 2021 年・推定周期 2 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "fiscal",
+      "sources": [
+        "経済センサス-活動調査"
+      ],
+      "freshness": "stale",
+      "latestYear": 2021,
+      "observedYears": 5,
+      "cadence": 2,
+      "estatExtendCandidate": false,
+      "demand": 473
+    },
+    {
+      "key": "library-books",
+      "treatment": 2,
+      "reason": "最新 2021 年・推定周期 3 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "fiscal",
+      "sources": [
+        "社会教育調査報告書"
+      ],
+      "freshness": "stale",
+      "latestYear": 2021,
+      "observedYears": 6,
+      "cadence": 3,
+      "estatExtendCandidate": false,
+      "demand": 470
+    },
+    {
+      "key": "sewage-treatment-coverage-rate",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "fiscal",
+      "sources": [
+        "汚水処理人口普及状況"
+      ],
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": 464
     },
     {
       "key": "local-tax-prefecture",
@@ -380,23 +398,21 @@
       "observedYears": 24,
       "cadence": 1,
       "estatExtendCandidate": false,
-      "demand": 438
+      "demand": 458
     },
     {
-      "key": "psychiatric-bed-count",
+      "key": "abortion-rate",
       "treatment": 2,
-      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "reason": "最新 2020 年・推定周期 1 年に対し 4 周期遅れ (推定)",
       "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": [
-        "医療施設調査・病院報告"
-      ],
+      "yearFormat": "calendar",
+      "sources": null,
       "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 49,
+      "latestYear": 2020,
+      "observedYears": 8,
       "cadence": 1,
       "estatExtendCandidate": false,
-      "demand": 433
+      "demand": 434
     },
     {
       "key": "treatment-rate-schizophrenia-inpatient",
@@ -410,7 +426,7 @@
       "observedYears": 1,
       "cadence": 1,
       "estatExtendCandidate": false,
-      "demand": 347
+      "demand": 353
     },
     {
       "key": "densely-populated-area",
@@ -426,7 +442,7 @@
       "observedYears": 1,
       "cadence": 1,
       "estatExtendCandidate": true,
-      "demand": 326
+      "demand": 337
     },
     {
       "key": "road-length-per-km2",
@@ -444,7 +460,35 @@
       "observedYears": 34,
       "cadence": 1,
       "estatExtendCandidate": false,
-      "demand": 322
+      "demand": 328
+    },
+    {
+      "key": "railway-passengers",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "fiscal",
+      "sources": null,
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 5,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": 300
+    },
+    {
+      "key": "high-school-teacher-annual-income",
+      "treatment": 2,
+      "reason": "最新 2022 年・推定周期 1 年に対し 2 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "calendar",
+      "sources": null,
+      "freshness": "stale",
+      "latestYear": 2022,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": 295
     },
     {
       "key": "road-total-length",
@@ -460,26 +504,10 @@
       "observedYears": 1,
       "cadence": 1,
       "estatExtendCandidate": false,
-      "demand": 263
+      "demand": 282
     },
     {
-      "key": "swimming-pool-public",
-      "treatment": 2,
-      "reason": "最新 2021 年・推定周期 1 年に対し 3 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": [
-        "社会教育調査報告書"
-      ],
-      "freshness": "stale",
-      "latestYear": 2021,
-      "observedYears": 28,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": 253
-    },
-    {
-      "key": "new-hire-count",
+      "key": "sports-participation-rate-swimming",
       "treatment": 2,
       "reason": "最新 2021 年・推定周期 1 年に対し 3 周期遅れ (推定)",
       "yearLabel": "unknown",
@@ -490,23 +518,21 @@
       "observedYears": 1,
       "cadence": 1,
       "estatExtendCandidate": false,
-      "demand": 245
+      "demand": 272
     },
     {
-      "key": "main-road-paving-rate",
+      "key": "aquarium-count",
       "treatment": 2,
-      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "reason": "最新 2015 年・推定周期 1 年に対し 9 周期遅れ (推定)",
       "yearLabel": "unknown",
       "yearFormat": "fiscal",
-      "sources": [
-        "道路施設現況調査（道路統計年報）"
-      ],
+      "sources": null,
       "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 34,
+      "latestYear": 2015,
+      "observedYears": 1,
       "cadence": 1,
       "estatExtendCandidate": false,
-      "demand": 240
+      "demand": 261
     },
     {
       "key": "library-lending-books",
@@ -522,23 +548,21 @@
       "observedYears": 5,
       "cadence": 3,
       "estatExtendCandidate": false,
-      "demand": 234
+      "demand": 254
     },
     {
-      "key": "theft-offenses-recognized",
+      "key": "new-hire-count",
       "treatment": 2,
-      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "reason": "最新 2021 年・推定周期 1 年に対し 3 周期遅れ (推定)",
       "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": [
-        "犯罪統計書"
-      ],
+      "yearFormat": "calendar",
+      "sources": null,
       "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 49,
+      "latestYear": 2021,
+      "observedYears": 1,
       "cadence": 1,
       "estatExtendCandidate": false,
-      "demand": 226
+      "demand": 254
     },
     {
       "key": "subsidy-expenses-prefecture",
@@ -555,24 +579,10 @@
       "observedYears": 13,
       "cadence": 1,
       "estatExtendCandidate": false,
-      "demand": 221
+      "demand": 246
     },
     {
-      "key": "vacant-housing-rate",
-      "treatment": 2,
-      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "calendar",
-      "sources": null,
-      "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": 218
-    },
-    {
-      "key": "road-municipal-length",
+      "key": "main-road-paving-rate",
       "treatment": 2,
       "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
       "yearLabel": "unknown",
@@ -582,38 +592,54 @@
       ],
       "freshness": "stale",
       "latestYear": 2023,
-      "observedYears": 1,
+      "observedYears": 34,
       "cadence": 1,
       "estatExtendCandidate": false,
-      "demand": 217
+      "demand": 241
     },
     {
-      "key": "aquarium-count",
-      "treatment": 2,
-      "reason": "最新 2015 年・推定周期 1 年に対し 9 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": null,
-      "freshness": "stale",
-      "latestYear": 2015,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": 212
-    },
-    {
-      "key": "sports-participation-rate-swimming",
+      "key": "retail-sales-amount-by-prefecture",
       "treatment": 2,
       "reason": "最新 2021 年・推定周期 1 年に対し 3 周期遅れ (推定)",
       "yearLabel": "unknown",
-      "yearFormat": "calendar",
+      "yearFormat": "fiscal",
       "sources": null,
       "freshness": "stale",
       "latestYear": 2021,
       "observedYears": 1,
       "cadence": 1,
       "estatExtendCandidate": false,
-      "demand": 206
+      "demand": 229
+    },
+    {
+      "key": "fishery-species-catch-mackerel",
+      "treatment": 2,
+      "reason": "最新 2015 年・推定周期 1 年に対し 9 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "calendar",
+      "sources": null,
+      "freshness": "stale",
+      "latestYear": 2015,
+      "observedYears": 60,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": 226
+    },
+    {
+      "key": "swimming-pool-public",
+      "treatment": 2,
+      "reason": "最新 2021 年・推定周期 1 年に対し 3 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "fiscal",
+      "sources": [
+        "社会教育調査報告書"
+      ],
+      "freshness": "stale",
+      "latestYear": 2021,
+      "observedYears": 28,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": 221
     },
     {
       "key": "per-capita-fixed-asset-tax-pref-municipal",
@@ -633,77 +659,21 @@
       "observedYears": 1,
       "cadence": 1,
       "estatExtendCandidate": false,
-      "demand": 198
+      "demand": 216
     },
     {
-      "key": "railway-passengers",
+      "key": "daytime-population-ratio",
       "treatment": 2,
-      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": null,
-      "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 5,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": 198
-    },
-    {
-      "key": "high-school-teacher-annual-income",
-      "treatment": 2,
-      "reason": "最新 2022 年・推定周期 1 年に対し 2 周期遅れ (推定)",
+      "reason": "最新 2020 年・推定周期 1 年に対し 4 周期遅れ (推定)",
       "yearLabel": "unknown",
       "yearFormat": "calendar",
       "sources": null,
       "freshness": "stale",
-      "latestYear": 2022,
+      "latestYear": 2020,
       "observedYears": 1,
       "cadence": 1,
       "estatExtendCandidate": false,
-      "demand": 194
-    },
-    {
-      "key": "fishery-species-catch-mackerel",
-      "treatment": 2,
-      "reason": "最新 2015 年・推定周期 1 年に対し 9 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "calendar",
-      "sources": null,
-      "freshness": "stale",
-      "latestYear": 2015,
-      "observedYears": 60,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": 192
-    },
-    {
-      "key": "retail-sales-amount-by-prefecture",
-      "treatment": 2,
-      "reason": "最新 2021 年・推定周期 1 年に対し 3 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": null,
-      "freshness": "stale",
-      "latestYear": 2021,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": 192
-    },
-    {
-      "key": "treatment-rate-mental-disorder-inpatient",
-      "treatment": 2,
-      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": null,
-      "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": 187
+      "demand": 213
     },
     {
       "key": "crude-birth-rate",
@@ -721,7 +691,7 @@
       "observedYears": 44,
       "cadence": 1,
       "estatExtendCandidate": false,
-      "demand": 183
+      "demand": 211
     },
     {
       "key": "fishery-species-catch-tuna",
@@ -735,24 +705,26 @@
       "observedYears": 60,
       "cadence": 1,
       "estatExtendCandidate": false,
-      "demand": 165
+      "demand": 210
     },
     {
-      "key": "hobby-participation-rate-reading",
+      "key": "road-municipal-length",
       "treatment": 2,
-      "reason": "最新 2021 年・推定周期 1 年に対し 3 周期遅れ (推定)",
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
       "yearLabel": "unknown",
-      "yearFormat": "calendar",
-      "sources": null,
+      "yearFormat": "fiscal",
+      "sources": [
+        "道路施設現況調査（道路統計年報）"
+      ],
       "freshness": "stale",
-      "latestYear": 2021,
+      "latestYear": 2023,
       "observedYears": 1,
       "cadence": 1,
       "estatExtendCandidate": false,
-      "demand": 165
+      "demand": 206
     },
     {
-      "key": "treatment-rate-mood-disorder-outpatient",
+      "key": "treatment-rate-mental-disorder-inpatient",
       "treatment": 2,
       "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
       "yearLabel": "unknown",
@@ -763,21 +735,7 @@
       "observedYears": 1,
       "cadence": 1,
       "estatExtendCandidate": false,
-      "demand": 164
-    },
-    {
-      "key": "convenience-store-sales-monthly",
-      "treatment": 2,
-      "reason": "e-Stat に config より多くの年が実在 (estat-year-coverage)",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": null,
-      "freshness": "fresh",
-      "latestYear": 2024,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": true,
-      "demand": 162
+      "demand": 205
     },
     {
       "key": "psychiatric-hospital-avg-length-of-stay",
@@ -793,21 +751,51 @@
       "observedYears": 34,
       "cadence": 1,
       "estatExtendCandidate": false,
-      "demand": 161
+      "demand": 203
     },
     {
-      "key": "non-regular-employment-rate",
+      "key": "factory-location-area-annual",
       "treatment": 2,
-      "reason": "最新 2022 年・推定周期 1 年に対し 2 周期遅れ (推定)",
+      "reason": "e-Stat に config より多くの年が実在 (estat-year-coverage)",
+      "yearLabel": "unknown",
+      "yearFormat": "fiscal",
+      "sources": null,
+      "freshness": "stale",
+      "latestYear": 2020,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": true,
+      "demand": 197
+    },
+    {
+      "key": "theft-offenses-recognized",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "fiscal",
+      "sources": [
+        "犯罪統計書"
+      ],
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 49,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": 196
+    },
+    {
+      "key": "vacant-housing-rate",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
       "yearLabel": "unknown",
       "yearFormat": "calendar",
       "sources": null,
       "freshness": "stale",
-      "latestYear": 2022,
+      "latestYear": 2023,
       "observedYears": 1,
       "cadence": 1,
       "estatExtendCandidate": false,
-      "demand": 157
+      "demand": 195
     },
     {
       "key": "ordinary-construction-expenses-prefecture",
@@ -824,110 +812,7 @@
       "observedYears": 36,
       "cadence": 1,
       "estatExtendCandidate": false,
-      "demand": 157
-    },
-    {
-      "key": "daytime-population-ratio",
-      "treatment": 2,
-      "reason": "最新 2020 年・推定周期 1 年に対し 4 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "calendar",
-      "sources": null,
-      "freshness": "stale",
-      "latestYear": 2020,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": 152
-    },
-    {
-      "key": "factory-location-area-annual",
-      "treatment": 2,
-      "reason": "e-Stat に config より多くの年が実在 (estat-year-coverage)",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": null,
-      "freshness": "stale",
-      "latestYear": 2020,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": true,
-      "demand": 152
-    },
-    {
-      "key": "water-supply-population",
-      "treatment": 2,
-      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": [
-        "水道統計"
-      ],
-      "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": 152
-    },
-    {
-      "key": "vaccination-recipients-disease",
-      "treatment": 2,
-      "reason": "最新 2020 年・推定周期 1 年に対し 4 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": null,
-      "freshness": "stale",
-      "latestYear": 2020,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": 150
-    },
-    {
-      "key": "physical-therapist-annual-income",
-      "treatment": 2,
-      "reason": "最新 2022 年・推定周期 1 年に対し 2 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "calendar",
-      "sources": null,
-      "freshness": "stale",
-      "latestYear": 2022,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": 145
-    },
-    {
-      "key": "fishery-species-catch-scallop",
-      "treatment": 2,
-      "reason": "最新 2015 年・推定周期 1 年に対し 9 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "calendar",
-      "sources": null,
-      "freshness": "stale",
-      "latestYear": 2015,
-      "observedYears": 60,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": 143
-    },
-    {
-      "key": "manufacturing-industry-added-value",
-      "treatment": 2,
-      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": [
-        "経済センサス-活動調査",
-        "経済構造実態調査"
-      ],
-      "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 24,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": 139
+      "demand": 188
     },
     {
       "key": "per-capita-police-expenditure-pref-municipal",
@@ -946,7 +831,128 @@
       "observedYears": 34,
       "cadence": 1,
       "estatExtendCandidate": false,
-      "demand": 136
+      "demand": 186
+    },
+    {
+      "key": "golf-course-public",
+      "treatment": 2,
+      "reason": "最新 2021 年・推定周期 3 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "fiscal",
+      "sources": [
+        "社会教育調査報告書"
+      ],
+      "freshness": "stale",
+      "latestYear": 2021,
+      "observedYears": 9,
+      "cadence": 3,
+      "estatExtendCandidate": false,
+      "demand": 175
+    },
+    {
+      "key": "vaccination-recipients-disease",
+      "treatment": 2,
+      "reason": "最新 2020 年・推定周期 1 年に対し 4 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "fiscal",
+      "sources": null,
+      "freshness": "stale",
+      "latestYear": 2020,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": 164
+    },
+    {
+      "key": "water-supply-population",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "fiscal",
+      "sources": [
+        "水道統計"
+      ],
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": 155
+    },
+    {
+      "key": "hobby-participation-rate-reading",
+      "treatment": 2,
+      "reason": "最新 2021 年・推定周期 1 年に対し 3 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "calendar",
+      "sources": null,
+      "freshness": "stale",
+      "latestYear": 2021,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": 149
+    },
+    {
+      "key": "manufacturing-industry-added-value",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "fiscal",
+      "sources": [
+        "経済センサス-活動調査",
+        "経済構造実態調査"
+      ],
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 24,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": 145
+    },
+    {
+      "key": "convenience-store-sales-monthly",
+      "treatment": 2,
+      "reason": "e-Stat に config より多くの年が実在 (estat-year-coverage)",
+      "yearLabel": "unknown",
+      "yearFormat": "fiscal",
+      "sources": null,
+      "freshness": "fresh",
+      "latestYear": 2024,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": true,
+      "demand": 140
+    },
+    {
+      "key": "tennis-court-public",
+      "treatment": 2,
+      "reason": "最新 2021 年・推定周期 3 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "fiscal",
+      "sources": [
+        "社会教育調査報告書"
+      ],
+      "freshness": "stale",
+      "latestYear": 2021,
+      "observedYears": 9,
+      "cadence": 3,
+      "estatExtendCandidate": false,
+      "demand": 140
+    },
+    {
+      "key": "treatment-rate-mood-disorder-outpatient",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "fiscal",
+      "sources": null,
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": 137
     },
     {
       "key": "pharmaceutical-sales-count",
@@ -959,6 +965,20 @@
       ],
       "freshness": "stale",
       "latestYear": 2023,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": 132
+    },
+    {
+      "key": "non-regular-employment-rate",
+      "treatment": 2,
+      "reason": "最新 2022 年・推定周期 1 年に対し 2 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "calendar",
+      "sources": null,
+      "freshness": "stale",
+      "latestYear": 2022,
       "observedYears": 1,
       "cadence": 1,
       "estatExtendCandidate": false,
@@ -976,7 +996,49 @@
       "observedYears": 60,
       "cadence": 1,
       "estatExtendCandidate": false,
-      "demand": 127
+      "demand": 126
+    },
+    {
+      "key": "physical-therapist-annual-income",
+      "treatment": 2,
+      "reason": "最新 2022 年・推定周期 1 年に対し 2 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "calendar",
+      "sources": null,
+      "freshness": "stale",
+      "latestYear": 2022,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": 125
+    },
+    {
+      "key": "hobby-participation-rate-pachinko",
+      "treatment": 2,
+      "reason": "最新 2021 年・推定周期 1 年に対し 3 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "calendar",
+      "sources": null,
+      "freshness": "stale",
+      "latestYear": 2021,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": 117
+    },
+    {
+      "key": "fishery-species-catch-scallop",
+      "treatment": 2,
+      "reason": "最新 2015 年・推定周期 1 年に対し 9 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "calendar",
+      "sources": null,
+      "freshness": "stale",
+      "latestYear": 2015,
+      "observedYears": 60,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": 112
     },
     {
       "key": "hobby-participation-rate-tea-ceremony",
@@ -990,10 +1052,10 @@
       "observedYears": 1,
       "cadence": 1,
       "estatExtendCandidate": false,
-      "demand": 116
+      "demand": 111
     },
     {
-      "key": "golf-course-public",
+      "key": "campsite-public",
       "treatment": 2,
       "reason": "最新 2021 年・推定周期 3 年に対し 1 周期遅れ (推定)",
       "yearLabel": "unknown",
@@ -1006,23 +1068,7 @@
       "observedYears": 9,
       "cadence": 3,
       "estatExtendCandidate": false,
-      "demand": 114
-    },
-    {
-      "key": "tennis-court-public",
-      "treatment": 2,
-      "reason": "最新 2021 年・推定周期 3 年に対し 1 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": [
-        "社会教育調査報告書"
-      ],
-      "freshness": "stale",
-      "latestYear": 2021,
-      "observedYears": 9,
-      "cadence": 3,
-      "estatExtendCandidate": false,
-      "demand": 109
+      "demand": 108
     },
     {
       "key": "national-medical-expense-total",
@@ -1052,23 +1098,21 @@
       "observedYears": 1,
       "cadence": 1,
       "estatExtendCandidate": false,
-      "demand": 100
+      "demand": 101
     },
     {
-      "key": "sewerage-coverage-rate",
+      "key": "treatment-rate-diabetes-outpatient",
       "treatment": 2,
       "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
       "yearLabel": "unknown",
       "yearFormat": "fiscal",
-      "sources": [
-        "汚水処理人口普及状況"
-      ],
+      "sources": null,
       "freshness": "stale",
       "latestYear": 2023,
       "observedYears": 1,
       "cadence": 1,
       "estatExtendCandidate": false,
-      "demand": 99
+      "demand": 98
     },
     {
       "key": "garbage-total-output",
@@ -1084,7 +1128,158 @@
       "observedYears": 2,
       "cadence": 1,
       "estatExtendCandidate": false,
-      "demand": 96
+      "demand": 92
+    },
+    {
+      "key": "pharmacy-count-by-prefecture",
+      "treatment": 2,
+      "reason": "最新 2020 年・推定周期 1 年に対し 4 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "fiscal",
+      "sources": null,
+      "freshness": "stale",
+      "latestYear": 2020,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": 87
+    },
+    {
+      "key": "education-expenditure-ratio-multi-person-households",
+      "treatment": 2,
+      "reason": "e-Stat に config より多くの年が実在 (estat-year-coverage)",
+      "yearLabel": "unknown",
+      "yearFormat": "fiscal",
+      "sources": [
+        "家計調査"
+      ],
+      "freshness": "fresh",
+      "latestYear": 2024,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": true,
+      "demand": 86
+    },
+    {
+      "key": "marine-fishery-aquaculture-output-value",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "fiscal",
+      "sources": [
+        "漁業・養殖業生産統計年報"
+      ],
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 7,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": 86
+    },
+    {
+      "key": "port-inbound-ships",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "fiscal",
+      "sources": null,
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 19,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": 84
+    },
+    {
+      "key": "garbage-final-disposal",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "fiscal",
+      "sources": [
+        "一般廃棄物処理事業実態調査"
+      ],
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 2,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": 83
+    },
+    {
+      "key": "hobby-activity-singleperson",
+      "treatment": 2,
+      "reason": "最新 2021 年・推定周期 1 年に対し 3 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "fiscal",
+      "sources": null,
+      "freshness": "stale",
+      "latestYear": 2021,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": 83
+    },
+    {
+      "key": "sewerage-coverage-rate",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "fiscal",
+      "sources": [
+        "汚水処理人口普及状況"
+      ],
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": 80
+    },
+    {
+      "key": "zoo-count",
+      "treatment": 2,
+      "reason": "最新 2015 年・推定周期 1 年に対し 9 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "fiscal",
+      "sources": null,
+      "freshness": "stale",
+      "latestYear": 2015,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": 78
+    },
+    {
+      "key": "gini-coefficient-disposable-income",
+      "treatment": 2,
+      "reason": "最新 2019 年・推定周期 1 年に対し 5 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "calendar",
+      "sources": null,
+      "freshness": "stale",
+      "latestYear": 2019,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": 75
+    },
+    {
+      "key": "business-tax",
+      "treatment": 2,
+      "reason": "e-Stat に config より多くの年が実在 (estat-year-coverage)",
+      "yearLabel": "unknown",
+      "yearFormat": "fiscal",
+      "sources": [
+        "地方財政統計年報",
+        "都道府県決算状況調"
+      ],
+      "freshness": "stale",
+      "latestYear": 2022,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": true,
+      "demand": 74
     },
     {
       "key": "local-allocation-tax-ratio-pref-finance",
@@ -1101,129 +1296,7 @@
       "observedYears": 44,
       "cadence": 1,
       "estatExtendCandidate": false,
-      "demand": 93
-    },
-    {
-      "key": "marine-fishery-aquaculture-output-value",
-      "treatment": 2,
-      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": [
-        "漁業・養殖業生産統計年報"
-      ],
-      "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 7,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": 92
-    },
-    {
-      "key": "hobby-participation-rate-pachinko",
-      "treatment": 2,
-      "reason": "最新 2021 年・推定周期 1 年に対し 3 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "calendar",
-      "sources": null,
-      "freshness": "stale",
-      "latestYear": 2021,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": 91
-    },
-    {
-      "key": "education-expenditure-ratio-multi-person-households",
-      "treatment": 2,
-      "reason": "e-Stat に config より多くの年が実在 (estat-year-coverage)",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": [
-        "家計調査"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2024,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": true,
-      "demand": 82
-    },
-    {
-      "key": "treatment-rate-diabetes-outpatient",
-      "treatment": 2,
-      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": null,
-      "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": 81
-    },
-    {
-      "key": "port-inbound-ships",
-      "treatment": 2,
-      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": null,
-      "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 19,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": 79
-    },
-    {
-      "key": "garbage-final-disposal",
-      "treatment": 2,
-      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": [
-        "一般廃棄物処理事業実態調査"
-      ],
-      "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 2,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": 77
-    },
-    {
-      "key": "campsite-public",
-      "treatment": 2,
-      "reason": "最新 2021 年・推定周期 3 年に対し 1 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": [
-        "社会教育調査報告書"
-      ],
-      "freshness": "stale",
-      "latestYear": 2021,
-      "observedYears": 9,
-      "cadence": 3,
-      "estatExtendCandidate": false,
-      "demand": 71
-    },
-    {
-      "key": "paved-road-total-length",
-      "treatment": 2,
-      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": [
-        "道路施設現況調査（道路統計年報）"
-      ],
-      "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": 71
+      "demand": 72
     },
     {
       "key": "fire-department-pump-car-count-per-100-thousand-people",
@@ -1241,38 +1314,7 @@
       "observedYears": 39,
       "cadence": 1,
       "estatExtendCandidate": false,
-      "demand": 68
-    },
-    {
-      "key": "business-tax",
-      "treatment": 2,
-      "reason": "e-Stat に config より多くの年が実在 (estat-year-coverage)",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": [
-        "地方財政統計年報",
-        "都道府県決算状況調"
-      ],
-      "freshness": "stale",
-      "latestYear": 2022,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": true,
-      "demand": 67
-    },
-    {
-      "key": "autolock-apartment-rate",
-      "treatment": 2,
-      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "calendar",
-      "sources": null,
-      "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": 64
+      "demand": 71
     },
     {
       "key": "consumer-price-difference-index-utilities",
@@ -1288,111 +1330,37 @@
       "observedYears": 1,
       "cadence": 1,
       "estatExtendCandidate": true,
-      "demand": 64
+      "demand": 68
     },
     {
-      "key": "hobby-activity-singleperson",
+      "key": "deaths-hypertensive-diseases",
       "treatment": 2,
-      "reason": "最新 2021 年・推定周期 1 年に対し 3 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": null,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "人口動態統計"
+      ],
       "freshness": "stale",
-      "latestYear": 2021,
-      "observedYears": 1,
+      "latestYear": 2023,
+      "observedYears": 49,
       "cadence": 1,
       "estatExtendCandidate": false,
-      "demand": 63
+      "demand": 67
     },
     {
-      "key": "national-pension-payment-rate",
+      "key": "architect-annual-income",
       "treatment": 2,
       "reason": "最新 2022 年・推定周期 1 年に対し 2 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": [
-        "厚生年金保険・国民年金事業年報"
-      ],
-      "freshness": "stale",
-      "latestYear": 2022,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": 61
-    },
-    {
-      "key": "pharmacy-count-by-prefecture",
-      "treatment": 2,
-      "reason": "最新 2020 年・推定周期 1 年に対し 4 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": null,
-      "freshness": "stale",
-      "latestYear": 2020,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": 60
-    },
-    {
-      "key": "gpp-public-service",
-      "treatment": 2,
-      "reason": "最新 2018 年・推定周期 1 年に対し 6 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": [
-        "県民経済計算年報"
-      ],
-      "freshness": "stale",
-      "latestYear": 2018,
-      "observedYears": 13,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": 58
-    },
-    {
-      "key": "hobby-participation-rate-instrument",
-      "treatment": 2,
-      "reason": "最新 2021 年・推定周期 1 年に対し 3 周期遅れ (推定)",
       "yearLabel": "unknown",
       "yearFormat": "calendar",
       "sources": null,
       "freshness": "stale",
-      "latestYear": 2021,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": 58
-    },
-    {
-      "key": "nurse-count",
-      "treatment": 2,
-      "reason": "最新 2022 年・推定周期 1 年に対し 2 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": [
-        "衛生行政報告例"
-      ],
-      "freshness": "stale",
       "latestYear": 2022,
-      "observedYears": 18,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": 58
-    },
-    {
-      "key": "public-hall-count",
-      "treatment": 2,
-      "reason": "最新 2015 年・推定周期 1 年に対し 9 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": null,
-      "freshness": "stale",
-      "latestYear": 2015,
       "observedYears": 1,
       "cadence": 1,
       "estatExtendCandidate": false,
-      "demand": 58
+      "demand": 64
     },
     {
       "key": "total-fertility-rate",
@@ -1408,10 +1376,116 @@
       "observedYears": 40,
       "cadence": 1,
       "estatExtendCandidate": false,
+      "demand": 64
+    },
+    {
+      "key": "dental-clinic-count",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "fiscal",
+      "sources": [
+        "医療施設調査・病院報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 2,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": 62
+    },
+    {
+      "key": "gpp-public-service",
+      "treatment": 2,
+      "reason": "最新 2018 年・推定周期 1 年に対し 6 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "fiscal",
+      "sources": [
+        "県民経済計算年報"
+      ],
+      "freshness": "stale",
+      "latestYear": 2018,
+      "observedYears": 13,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": 60
+    },
+    {
+      "key": "national-pension-payment-rate",
+      "treatment": 2,
+      "reason": "最新 2022 年・推定周期 1 年に対し 2 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "fiscal",
+      "sources": [
+        "厚生年金保険・国民年金事業年報"
+      ],
+      "freshness": "stale",
+      "latestYear": 2022,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": 59
+    },
+    {
+      "key": "paved-road-total-length",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "fiscal",
+      "sources": [
+        "道路施設現況調査（道路統計年報）"
+      ],
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": 59
+    },
+    {
+      "key": "autolock-apartment-rate",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "calendar",
+      "sources": null,
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
       "demand": 56
     },
     {
-      "key": "sports-participation-rate-hiking",
+      "key": "sports-participation-rate-basketball",
+      "treatment": 2,
+      "reason": "最新 2021 年・推定周期 1 年に対し 3 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "calendar",
+      "sources": null,
+      "freshness": "stale",
+      "latestYear": 2021,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": 54
+    },
+    {
+      "key": "public-hall-count",
+      "treatment": 2,
+      "reason": "最新 2015 年・推定周期 1 年に対し 9 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "fiscal",
+      "sources": null,
+      "freshness": "stale",
+      "latestYear": 2015,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": 53
+    },
+    {
+      "key": "hobby-participation-rate-instrument",
       "treatment": 2,
       "reason": "最新 2021 年・推定周期 1 年に対し 3 周期遅れ (推定)",
       "yearLabel": "unknown",
@@ -1425,49 +1499,52 @@
       "demand": 52
     },
     {
-      "key": "architect-annual-income",
-      "treatment": 2,
-      "reason": "最新 2022 年・推定周期 1 年に対し 2 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "calendar",
-      "sources": null,
-      "freshness": "stale",
-      "latestYear": 2022,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": 51
-    },
-    {
-      "key": "agricultural-employment-population",
+      "key": "culture-recreation-expenditure-ratio-multi-person-households",
       "treatment": 2,
       "reason": "e-Stat に config より多くの年が実在 (estat-year-coverage)",
       "yearLabel": "unknown",
       "yearFormat": "fiscal",
       "sources": [
-        "農林業センサス",
-        "農業センサス"
+        "家計調査"
       ],
-      "freshness": "ended-candidate",
-      "latestYear": 2014,
+      "freshness": "fresh",
+      "latestYear": 2024,
       "observedYears": 1,
       "cadence": 1,
       "estatExtendCandidate": true,
       "demand": 50
     },
     {
-      "key": "gini-coefficient-disposable-income",
+      "key": "ordinary-tax-local",
       "treatment": 2,
-      "reason": "最新 2019 年・推定周期 1 年に対し 5 周期遅れ (推定)",
+      "reason": "最新 2022 年・推定周期 1 年に対し 2 周期遅れ (推定)",
       "yearLabel": "unknown",
-      "yearFormat": "calendar",
-      "sources": null,
+      "yearFormat": "fiscal",
+      "sources": [
+        "地方財政統計年報"
+      ],
       "freshness": "stale",
-      "latestYear": 2019,
+      "latestYear": 2022,
+      "observedYears": 29,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": 50
+    },
+    {
+      "key": "retail-employees",
+      "treatment": 2,
+      "reason": "最新 2021 年・推定周期 1 年に対し 3 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "fiscal",
+      "sources": [
+        "経済センサス-活動調査"
+      ],
+      "freshness": "stale",
+      "latestYear": 2021,
       "observedYears": 1,
       "cadence": 1,
       "estatExtendCandidate": false,
-      "demand": 49
+      "demand": 48
     },
     {
       "key": "fishery-species-catch-sea-bream",
@@ -1484,6 +1561,36 @@
       "demand": 47
     },
     {
+      "key": "midwife-count",
+      "treatment": 2,
+      "reason": "最新 2022 年・推定周期 1 年に対し 2 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "fiscal",
+      "sources": [
+        "衛生行政報告例"
+      ],
+      "freshness": "stale",
+      "latestYear": 2022,
+      "observedYears": 22,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": 47
+    },
+    {
+      "key": "hospital-staff-by-occupation",
+      "treatment": 2,
+      "reason": "最新 2020 年・推定周期 1 年に対し 4 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "fiscal",
+      "sources": null,
+      "freshness": "stale",
+      "latestYear": 2020,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": 46
+    },
+    {
       "key": "starting-salary-highschool",
       "treatment": 2,
       "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
@@ -1498,7 +1605,7 @@
       "demand": 46
     },
     {
-      "key": "midwife-count",
+      "key": "nurse-count",
       "treatment": 2,
       "reason": "最新 2022 年・推定周期 1 年に対し 2 周期遅れ (推定)",
       "yearLabel": "unknown",
@@ -1508,29 +1615,13 @@
       ],
       "freshness": "stale",
       "latestYear": 2022,
-      "observedYears": 22,
+      "observedYears": 18,
       "cadence": 1,
       "estatExtendCandidate": false,
-      "demand": 43
+      "demand": 45
     },
     {
-      "key": "public-health-nurse-count",
-      "treatment": 2,
-      "reason": "最新 2022 年・推定周期 1 年に対し 2 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": [
-        "衛生行政報告例"
-      ],
-      "freshness": "stale",
-      "latestYear": 2022,
-      "observedYears": 23,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": 43
-    },
-    {
-      "key": "sports-participation-rate-tennis",
+      "key": "sports-participation-rate-hiking",
       "treatment": 2,
       "reason": "最新 2021 年・推定周期 1 年に対し 3 周期遅れ (推定)",
       "yearLabel": "unknown",
@@ -1541,7 +1632,7 @@
       "observedYears": 1,
       "cadence": 1,
       "estatExtendCandidate": false,
-      "demand": 42
+      "demand": 45
     },
     {
       "key": "barber-beauty-salon-count",
@@ -1557,97 +1648,7 @@
       "observedYears": 49,
       "cadence": 1,
       "estatExtendCandidate": false,
-      "demand": 40
-    },
-    {
-      "key": "zoo-count",
-      "treatment": 2,
-      "reason": "最新 2015 年・推定周期 1 年に対し 9 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": null,
-      "freshness": "stale",
-      "latestYear": 2015,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": 40
-    },
-    {
-      "key": "gender-wage-gap",
-      "treatment": 2,
-      "reason": "最新 2022 年・推定周期 1 年に対し 2 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "calendar",
-      "sources": null,
-      "freshness": "stale",
-      "latestYear": 2022,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": 37
-    },
-    {
-      "key": "hobby-participation-rate-cinema",
-      "treatment": 2,
-      "reason": "最新 2021 年・推定周期 1 年に対し 3 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "calendar",
-      "sources": null,
-      "freshness": "stale",
-      "latestYear": 2021,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": 37
-    },
-    {
-      "key": "ordinary-tax-local",
-      "treatment": 2,
-      "reason": "最新 2022 年・推定周期 1 年に対し 2 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": [
-        "地方財政統計年報"
-      ],
-      "freshness": "stale",
-      "latestYear": 2022,
-      "observedYears": 29,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": 37
-    },
-    {
-      "key": "road-national-route-length",
-      "treatment": 2,
-      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": [
-        "道路施設現況調査（道路統計年報）"
-      ],
-      "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": 37
-    },
-    {
-      "key": "culture-recreation-expenditure-ratio-multi-person-households",
-      "treatment": 2,
-      "reason": "e-Stat に config より多くの年が実在 (estat-year-coverage)",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": [
-        "家計調査"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2024,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": true,
-      "demand": 36
+      "demand": 42
     },
     {
       "key": "per-capita-national-tax-collected",
@@ -1665,7 +1666,99 @@
       "observedYears": 23,
       "cadence": 1,
       "estatExtendCandidate": false,
-      "demand": 36
+      "demand": 41
+    },
+    {
+      "key": "food-manufacturing-shipment-amount",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "calendar",
+      "sources": null,
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": 40
+    },
+    {
+      "key": "hobby-participation-rate-cinema",
+      "treatment": 2,
+      "reason": "最新 2021 年・推定周期 1 年に対し 3 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "calendar",
+      "sources": null,
+      "freshness": "stale",
+      "latestYear": 2021,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": 39
+    },
+    {
+      "key": "museum-count-per-million",
+      "treatment": 2,
+      "reason": "最新 2021 年・推定周期 3 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "fiscal",
+      "sources": [
+        "人口推計",
+        "国勢調査報告",
+        "社会教育調査報告書"
+      ],
+      "freshness": "stale",
+      "latestYear": 2021,
+      "observedYears": 14,
+      "cadence": 3,
+      "estatExtendCandidate": false,
+      "demand": 37
+    },
+    {
+      "key": "sports-participation-rate-tennis",
+      "treatment": 2,
+      "reason": "最新 2021 年・推定周期 1 年に対し 3 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "calendar",
+      "sources": null,
+      "freshness": "stale",
+      "latestYear": 2021,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": 37
+    },
+    {
+      "key": "high-school-advancement-rate",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "fiscal",
+      "sources": [
+        "学校基本調査報告書"
+      ],
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 12,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": 35
+    },
+    {
+      "key": "road-general-prefectural-length",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "fiscal",
+      "sources": [
+        "道路施設現況調査（道路統計年報）"
+      ],
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": 35
     },
     {
       "key": "physical-disability-certificates-issued-per-1000",
@@ -1683,21 +1776,35 @@
       "observedYears": 34,
       "cadence": 1,
       "estatExtendCandidate": false,
-      "demand": 35
+      "demand": 34
     },
     {
-      "key": "sports-participation-rate-badminton",
+      "key": "pneumonia-death-rate",
       "treatment": 2,
-      "reason": "最新 2021 年・推定周期 1 年に対し 3 周期遅れ (推定)",
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
       "yearLabel": "unknown",
       "yearFormat": "calendar",
       "sources": null,
       "freshness": "stale",
-      "latestYear": 2021,
+      "latestYear": 2023,
       "observedYears": 1,
       "cadence": 1,
       "estatExtendCandidate": false,
-      "demand": 35
+      "demand": 34
+    },
+    {
+      "key": "starting-salary-university",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "calendar",
+      "sources": null,
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": 34
     },
     {
       "key": "average-weight-middle-school-second-grade-male",
@@ -1716,37 +1823,6 @@
       "demand": 33
     },
     {
-      "key": "manufacturing-shipment-amount-per-establishment",
-      "treatment": 2,
-      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": [
-        "経済センサス-活動調査",
-        "経済構造実態調査"
-      ],
-      "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 34,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": 33
-    },
-    {
-      "key": "dental-hygienist-annual-income",
-      "treatment": 2,
-      "reason": "最新 2022 年・推定周期 1 年に対し 2 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "calendar",
-      "sources": null,
-      "freshness": "stale",
-      "latestYear": 2022,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": 32
-    },
-    {
       "key": "environmental-sanitation-expenses-prefecture",
       "treatment": 2,
       "reason": "最新 2022 年・推定周期 1 年に対し 2 周期遅れ (推定)",
@@ -1759,6 +1835,20 @@
       "freshness": "stale",
       "latestYear": 2022,
       "observedYears": 9,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": 33
+    },
+    {
+      "key": "doctor-annual-income",
+      "treatment": 2,
+      "reason": "最新 2022 年・推定周期 1 年に対し 2 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "calendar",
+      "sources": null,
+      "freshness": "stale",
+      "latestYear": 2022,
+      "observedYears": 1,
       "cadence": 1,
       "estatExtendCandidate": false,
       "demand": 32
@@ -1778,7 +1868,7 @@
       "demand": 32
     },
     {
-      "key": "road-general-prefectural-length",
+      "key": "road-national-route-length",
       "treatment": 2,
       "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
       "yearLabel": "unknown",
@@ -1794,46 +1884,31 @@
       "demand": 32
     },
     {
-      "key": "sports-participation-rate-judo",
+      "key": "agricultural-employment-population",
       "treatment": 2,
-      "reason": "最新 2021 年・推定周期 1 年に対し 3 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "calendar",
-      "sources": null,
-      "freshness": "stale",
-      "latestYear": 2021,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": 31
-    },
-    {
-      "key": "national-pension-enrollees-type1-per-1000-20-59",
-      "treatment": 2,
-      "reason": "最新 2022 年・推定周期 1 年に対し 2 周期遅れ (推定)",
+      "reason": "e-Stat に config より多くの年が実在 (estat-year-coverage)",
       "yearLabel": "unknown",
       "yearFormat": "fiscal",
       "sources": [
-        "人口推計",
-        "厚生年金保険・国民年金事業年報",
-        "国勢調査報告"
+        "農林業センサス",
+        "農業センサス"
       ],
-      "freshness": "stale",
-      "latestYear": 2022,
-      "observedYears": 34,
+      "freshness": "ended-candidate",
+      "latestYear": 2014,
+      "observedYears": 1,
       "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": 30
+      "estatExtendCandidate": true,
+      "demand": 31
     },
     {
-      "key": "pneumonia-death-rate",
+      "key": "history-museum-count",
       "treatment": 2,
-      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "reason": "最新 2015 年・推定周期 1 年に対し 9 周期遅れ (推定)",
       "yearLabel": "unknown",
-      "yearFormat": "calendar",
+      "yearFormat": "fiscal",
       "sources": null,
       "freshness": "stale",
-      "latestYear": 2023,
+      "latestYear": 2015,
       "observedYears": 1,
       "cadence": 1,
       "estatExtendCandidate": false,
@@ -2597,6 +2672,38 @@
       "freshness": "stale",
       "latestYear": 2022,
       "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
+      "key": "auto-insurance-penetration-bodily-injury-actual",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "fiscal",
+      "sources": [
+        "損害保険料率算出機構統計集"
+      ],
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 2,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
+      "key": "auto-insurance-penetration-bodily-injury-fixed",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "fiscal",
+      "sources": [
+        "損害保険料率算出機構統計集"
+      ],
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 2,
       "cadence": 1,
       "estatExtendCandidate": false,
       "demand": null
@@ -3718,6 +3825,22 @@
       "demand": null
     },
     {
+      "key": "child-abuse-consultation-cases",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "fiscal",
+      "sources": [
+        "福祉行政報告例"
+      ],
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 14,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
       "key": "child-consultation-center-cases",
       "treatment": 2,
       "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
@@ -4543,6 +4666,20 @@
       "demand": null
     },
     {
+      "key": "cram-school-establishment-count",
+      "treatment": 2,
+      "reason": "最新 2021 年・推定周期 1 年に対し 3 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "calendar",
+      "sources": null,
+      "freshness": "stale",
+      "latestYear": 2021,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
       "key": "criminal-arrest-rate",
       "treatment": 2,
       "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
@@ -4872,22 +5009,6 @@
       "demand": null
     },
     {
-      "key": "deaths-hypertensive-diseases",
-      "treatment": 2,
-      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
-      "yearLabel": "ok",
-      "yearFormat": "calendar",
-      "sources": [
-        "人口動態統計"
-      ],
-      "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 49,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
       "key": "deaths-hypertensive-diseases-per-100k",
       "treatment": 2,
       "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
@@ -5068,22 +5189,6 @@
       "demand": null
     },
     {
-      "key": "dental-clinic-count",
-      "treatment": 2,
-      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": [
-        "医療施設調査・病院報告"
-      ],
-      "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 2,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
       "key": "dental-clinic-count-per-100k",
       "treatment": 2,
       "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
@@ -5151,6 +5256,20 @@
       "observedYears": 1,
       "cadence": 1,
       "estatExtendCandidate": true,
+      "demand": null
+    },
+    {
+      "key": "dental-hygienist-annual-income",
+      "treatment": 2,
+      "reason": "最新 2022 年・推定周期 1 年に対し 2 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "calendar",
+      "sources": null,
+      "freshness": "stale",
+      "latestYear": 2022,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
       "demand": null
     },
     {
@@ -5540,20 +5659,6 @@
       "demand": null
     },
     {
-      "key": "doctor-annual-income",
-      "treatment": 2,
-      "reason": "最新 2022 年・推定周期 1 年に対し 2 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "calendar",
-      "sources": null,
-      "freshness": "stale",
-      "latestYear": 2022,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
       "key": "dog-registration-count",
       "treatment": 2,
       "reason": "最新 2020 年・推定周期 1 年に対し 4 周期遅れ (推定)",
@@ -5614,22 +5719,6 @@
       "freshness": "stale",
       "latestYear": 2023,
       "observedYears": 42,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "early-neonatal-deaths",
-      "treatment": 2,
-      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
-      "yearLabel": "ok",
-      "yearFormat": "calendar",
-      "sources": [
-        "人口動態統計"
-      ],
-      "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 13,
       "cadence": 1,
       "estatExtendCandidate": false,
       "demand": null
@@ -6591,6 +6680,38 @@
       "demand": null
     },
     {
+      "key": "fire-affected-persons-count",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "fiscal",
+      "sources": [
+        "火災年報"
+      ],
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 49,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
+      "key": "fire-damage-amount",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "fiscal",
+      "sources": [
+        "火災年報"
+      ],
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 19,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
       "key": "fire-damage-casualties-per-accident",
       "treatment": 2,
       "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
@@ -7008,20 +7129,6 @@
       "demand": null
     },
     {
-      "key": "food-manufacturing-shipment-amount",
-      "treatment": 2,
-      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "calendar",
-      "sources": null,
-      "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
       "key": "food-sanitation-inspection",
       "treatment": 2,
       "reason": "最新 2020 年・推定周期 1 年に対し 4 周期遅れ (推定)",
@@ -7256,6 +7363,20 @@
       ],
       "freshness": "stale",
       "latestYear": 2018,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
+      "key": "gender-wage-gap",
+      "treatment": 2,
+      "reason": "最新 2022 年・推定周期 1 年に対し 2 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "calendar",
+      "sources": null,
+      "freshness": "stale",
+      "latestYear": 2022,
       "observedYears": 1,
       "cadence": 1,
       "estatExtendCandidate": false,
@@ -7653,22 +7774,6 @@
       "demand": null
     },
     {
-      "key": "high-school-advancement-rate",
-      "treatment": 2,
-      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": [
-        "学校基本調査報告書"
-      ],
-      "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 12,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
       "key": "high-school-education-cost-fulltime-per-student",
       "treatment": 2,
       "reason": "最新 2022 年・推定周期 1 年に対し 2 周期遅れ (推定)",
@@ -7761,20 +7866,6 @@
       "freshness": "stale",
       "latestYear": 2023,
       "observedYears": 45,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "history-museum-count",
-      "treatment": 2,
-      "reason": "最新 2015 年・推定周期 1 年に対し 9 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": null,
-      "freshness": "stale",
-      "latestYear": 2015,
-      "observedYears": 1,
       "cadence": 1,
       "estatExtendCandidate": false,
       "demand": null
@@ -8238,20 +8329,6 @@
       "sources": null,
       "freshness": "stale",
       "latestYear": 2023,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "hospital-staff-by-occupation",
-      "treatment": 2,
-      "reason": "最新 2020 年・推定周期 1 年に対し 4 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": null,
-      "freshness": "stale",
-      "latestYear": 2020,
       "observedYears": 1,
       "cadence": 1,
       "estatExtendCandidate": false,
@@ -9693,6 +9770,23 @@
       "demand": null
     },
     {
+      "key": "manufacturing-shipment-amount-per-establishment",
+      "treatment": 2,
+      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "fiscal",
+      "sources": [
+        "経済センサス-活動調査",
+        "経済構造実態調査"
+      ],
+      "freshness": "stale",
+      "latestYear": 2023,
+      "observedYears": 34,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
       "key": "marine-aquaculture-harvest",
       "treatment": 2,
       "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
@@ -10151,24 +10245,6 @@
       "demand": null
     },
     {
-      "key": "museum-count-per-million",
-      "treatment": 2,
-      "reason": "最新 2021 年・推定周期 3 年に対し 1 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": [
-        "人口推計",
-        "国勢調査報告",
-        "社会教育調査報告書"
-      ],
-      "freshness": "stale",
-      "latestYear": 2021,
-      "observedYears": 14,
-      "cadence": 3,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
       "key": "museum-like-facility-visitors",
       "treatment": 2,
       "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
@@ -10276,6 +10352,24 @@
       "freshness": "stale",
       "latestYear": 2022,
       "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
+      "key": "national-pension-enrollees-type1-per-1000-20-59",
+      "treatment": 2,
+      "reason": "最新 2022 年・推定周期 1 年に対し 2 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "fiscal",
+      "sources": [
+        "人口推計",
+        "厚生年金保険・国民年金事業年報",
+        "国勢調査報告"
+      ],
+      "freshness": "stale",
+      "latestYear": 2022,
+      "observedYears": 34,
       "cadence": 1,
       "estatExtendCandidate": false,
       "demand": null
@@ -12990,6 +13084,22 @@
       "demand": null
     },
     {
+      "key": "public-health-nurse-count",
+      "treatment": 2,
+      "reason": "最新 2022 年・推定周期 1 年に対し 2 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "fiscal",
+      "sources": [
+        "衛生行政報告例"
+      ],
+      "freshness": "stale",
+      "latestYear": 2022,
+      "observedYears": 23,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
       "key": "public-health-nurse-count-per-100k",
       "treatment": 2,
       "reason": "最新 2022 年・推定周期 1 年に対し 2 周期遅れ (推定)",
@@ -13497,22 +13607,6 @@
       "freshness": "stale",
       "latestYear": 2023,
       "observedYears": 33,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "retail-employees",
-      "treatment": 2,
-      "reason": "最新 2021 年・推定周期 1 年に対し 3 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": [
-        "経済センサス-活動調査"
-      ],
-      "freshness": "stale",
-      "latestYear": 2021,
-      "observedYears": 1,
       "cadence": 1,
       "estatExtendCandidate": false,
       "demand": null
@@ -14548,7 +14642,7 @@
       "demand": null
     },
     {
-      "key": "sports-participation-rate-baseball",
+      "key": "sports-participation-rate-badminton",
       "treatment": 2,
       "reason": "最新 2021 年・推定周期 1 年に対し 3 周期遅れ (推定)",
       "yearLabel": "unknown",
@@ -14562,7 +14656,7 @@
       "demand": null
     },
     {
-      "key": "sports-participation-rate-basketball",
+      "key": "sports-participation-rate-baseball",
       "treatment": 2,
       "reason": "最新 2021 年・推定周期 1 年に対し 3 周期遅れ (推定)",
       "yearLabel": "unknown",
@@ -14661,6 +14755,20 @@
     },
     {
       "key": "sports-participation-rate-jogging",
+      "treatment": 2,
+      "reason": "最新 2021 年・推定周期 1 年に対し 3 周期遅れ (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "calendar",
+      "sources": null,
+      "freshness": "stale",
+      "latestYear": 2021,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
+      "key": "sports-participation-rate-judo",
       "treatment": 2,
       "reason": "最新 2021 年・推定周期 1 年に対し 3 周期遅れ (推定)",
       "yearLabel": "unknown",
@@ -14863,20 +14971,6 @@
       "freshness": "stale",
       "latestYear": 2022,
       "observedYears": 35,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "starting-salary-university",
-      "treatment": 2,
-      "reason": "最新 2023 年・推定周期 1 年に対し 1 周期遅れ (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "calendar",
-      "sources": null,
-      "freshness": "stale",
-      "latestYear": 2023,
-      "observedYears": 1,
       "cadence": 1,
       "estatExtendCandidate": false,
       "demand": null
@@ -15287,6 +15381,20 @@
       "freshness": "stale",
       "latestYear": 2023,
       "observedYears": 34,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
+      "key": "three-generation-household-members",
+      "treatment": 2,
+      "reason": "最新 2020 年・推定周期 1 年に対し 4 周期遅れ (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": null,
+      "freshness": "stale",
+      "latestYear": 2020,
+      "observedYears": 1,
       "cadence": 1,
       "estatExtendCandidate": false,
       "demand": null
@@ -17018,23 +17126,7 @@
       "observedYears": 1,
       "cadence": 1,
       "estatExtendCandidate": false,
-      "demand": 490
-    },
-    {
-      "key": "national-pension-full-exemption-rate",
-      "treatment": 3,
-      "reason": "最新 2006 年で 18 周期遅れ。調査終了か要確認 (推定)",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": [
-        "事業年報"
-      ],
-      "freshness": "ended-candidate",
-      "latestYear": 2006,
-      "observedYears": 2,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": 172
+      "demand": 659
     },
     {
       "key": "airport-count",
@@ -17048,7 +17140,7 @@
       "observedYears": 1,
       "cadence": 1,
       "estatExtendCandidate": false,
-      "demand": 167
+      "demand": 145
     },
     {
       "key": "fishery-workers-coastal-offshore",
@@ -17062,7 +17154,7 @@
       "observedYears": 1,
       "cadence": 1,
       "estatExtendCandidate": false,
-      "demand": 98
+      "demand": 114
     },
     {
       "key": "culture-recreation-cost-all-households",
@@ -17078,7 +17170,23 @@
       "observedYears": 33,
       "cadence": 1,
       "estatExtendCandidate": false,
-      "demand": 66
+      "demand": 92
+    },
+    {
+      "key": "elderly-single-person-households",
+      "treatment": 3,
+      "reason": "最新 2005 年で 3 周期遅れ。調査終了か要確認 (推定)",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": [
+        "国勢調査報告"
+      ],
+      "freshness": "ended-candidate",
+      "latestYear": 2005,
+      "observedYears": 6,
+      "cadence": 5,
+      "estatExtendCandidate": false,
+      "demand": 31
     },
     {
       "key": "book-magazine-retail-annual-sales",
@@ -17258,22 +17366,6 @@
       "latestYear": 2007,
       "observedYears": 33,
       "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "elderly-single-person-households",
-      "treatment": 3,
-      "reason": "最新 2005 年で 3 周期遅れ。調査終了か要確認 (推定)",
-      "yearLabel": "ok",
-      "yearFormat": "calendar",
-      "sources": [
-        "国勢調査報告"
-      ],
-      "freshness": "ended-candidate",
-      "latestYear": 2005,
-      "observedYears": 6,
-      "cadence": 5,
       "estatExtendCandidate": false,
       "demand": null
     },
@@ -18162,6 +18254,22 @@
       "demand": null
     },
     {
+      "key": "national-pension-full-exemption-rate",
+      "treatment": 3,
+      "reason": "最新 2006 年で 18 周期遅れ。調査終了か要確認 (推定)",
+      "yearLabel": "unknown",
+      "yearFormat": "fiscal",
+      "sources": [
+        "事業年報"
+      ],
+      "freshness": "ended-candidate",
+      "latestYear": 2006,
+      "observedYears": 2,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
       "key": "national-pension-partial-exemption-rate",
       "treatment": 3,
       "reason": "最新 2006 年で 18 周期遅れ。調査終了か要確認 (推定)",
@@ -19039,20 +19147,6 @@
       "demand": null
     },
     {
-      "key": "academic-achievement-test-average-rate",
-      "treatment": 4,
-      "reason": "観測 1 年・GSC 表示 未観測",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": null,
-      "freshness": "fresh",
-      "latestYear": 2025,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
       "key": "ambulance-hospital-arrival-time",
       "treatment": 4,
       "reason": "観測 1 年・GSC 表示 未観測",
@@ -19165,7 +19259,7 @@
       "demand": null
     },
     {
-      "key": "beef-cattle-count",
+      "key": "buried-cultural-property-specialist-count",
       "treatment": 4,
       "reason": "観測 1 年・GSC 表示 未観測",
       "yearLabel": "unknown",
@@ -19179,10 +19273,38 @@
       "demand": null
     },
     {
-      "key": "buried-cultural-property-specialist-count",
+      "key": "census-household-change-rate-5y",
       "treatment": 4,
       "reason": "観測 1 年・GSC 表示 未観測",
-      "yearLabel": "unknown",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": null,
+      "freshness": "fresh",
+      "latestYear": 2025,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
+      "key": "census-population-change-5y",
+      "treatment": 4,
+      "reason": "観測 1 年・GSC 表示 未観測",
+      "yearLabel": "ok",
+      "yearFormat": "calendar",
+      "sources": null,
+      "freshness": "fresh",
+      "latestYear": 2025,
+      "observedYears": 1,
+      "cadence": 1,
+      "estatExtendCandidate": false,
+      "demand": null
+    },
+    {
+      "key": "census-population-change-rate-5y",
+      "treatment": 4,
+      "reason": "観測 1 年・GSC 表示 未観測",
+      "yearLabel": "ok",
       "yearFormat": "calendar",
       "sources": null,
       "freshness": "fresh",
@@ -19385,20 +19507,6 @@
       "demand": null
     },
     {
-      "key": "domestic-travel-consumption-by-destination",
-      "treatment": 4,
-      "reason": "観測 1 年・GSC 表示 未観測",
-      "yearLabel": "unknown",
-      "yearFormat": "calendar",
-      "sources": null,
-      "freshness": "fresh",
-      "latestYear": 2025,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
       "key": "elementary-school-count",
       "treatment": 4,
       "reason": "観測 2 年・GSC 表示 未観測",
@@ -19571,20 +19679,6 @@
       "demand": null
     },
     {
-      "key": "food-manufacturing-establishments",
-      "treatment": 4,
-      "reason": "観測 1 年・GSC 表示 未観測",
-      "yearLabel": "unknown",
-      "yearFormat": "calendar",
-      "sources": null,
-      "freshness": "fresh",
-      "latestYear": 2024,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
       "key": "foreign-employing-establishment-count",
       "treatment": 4,
       "reason": "観測 1 年・GSC 表示 未観測",
@@ -19635,20 +19729,6 @@
       "sources": null,
       "freshness": "fresh",
       "latestYear": 2025,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "forestry-timber-output-value",
-      "treatment": 4,
-      "reason": "観測 1 年・GSC 表示 未観測",
-      "yearLabel": "unknown",
-      "yearFormat": "calendar",
-      "sources": null,
-      "freshness": "fresh",
-      "latestYear": 2024,
       "observedYears": 1,
       "cadence": 1,
       "estatExtendCandidate": false,
@@ -19744,20 +19824,6 @@
       "reason": "観測 1 年・GSC 表示 未観測",
       "yearLabel": "unknown",
       "yearFormat": "fiscal",
-      "sources": null,
-      "freshness": "fresh",
-      "latestYear": 2026,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "general-perinatal-center-count",
-      "treatment": 4,
-      "reason": "観測 1 年・GSC 表示 未観測",
-      "yearLabel": "unknown",
-      "yearFormat": "calendar",
       "sources": null,
       "freshness": "fresh",
       "latestYear": 2026,
@@ -20043,20 +20109,6 @@
       "demand": null
     },
     {
-      "key": "inbound-visitors-by-destination",
-      "treatment": 4,
-      "reason": "観測 1 年・GSC 表示 未観測",
-      "yearLabel": "unknown",
-      "yearFormat": "calendar",
-      "sources": null,
-      "freshness": "fresh",
-      "latestYear": 2025,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
       "key": "individual-evacuation-plan-coverage-rate",
       "treatment": 4,
       "reason": "観測 1 年・GSC 表示 未観測",
@@ -20170,20 +20222,6 @@
     },
     {
       "key": "junior-high-club-per100-kendo",
-      "treatment": 4,
-      "reason": "観測 1 年・GSC 表示 未観測",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": null,
-      "freshness": "fresh",
-      "latestYear": 2025,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "junior-high-club-per100-soccer",
       "treatment": 4,
       "reason": "観測 1 年・GSC 表示 未観測",
       "yearLabel": "unknown",
@@ -20341,20 +20379,6 @@
       "demand": null
     },
     {
-      "key": "layer-hen-count",
-      "treatment": 4,
-      "reason": "観測 1 年・GSC 表示 未観測",
-      "yearLabel": "unknown",
-      "yearFormat": "calendar",
-      "sources": null,
-      "freshness": "fresh",
-      "latestYear": 2024,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
       "key": "long-term-care-certified-persons",
       "treatment": 4,
       "reason": "観測 1 年・GSC 表示 未観測",
@@ -20430,34 +20454,6 @@
     },
     {
       "key": "medical-physicians-emergency-medicine",
-      "treatment": 4,
-      "reason": "観測 1 年・GSC 表示 未観測",
-      "yearLabel": "unknown",
-      "yearFormat": "calendar",
-      "sources": null,
-      "freshness": "fresh",
-      "latestYear": 2024,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "medical-physicians-obstetrics-gynecology",
-      "treatment": 4,
-      "reason": "観測 1 年・GSC 表示 未観測",
-      "yearLabel": "unknown",
-      "yearFormat": "calendar",
-      "sources": null,
-      "freshness": "fresh",
-      "latestYear": 2024,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "medical-physicians-pediatrics",
       "treatment": 4,
       "reason": "観測 1 年・GSC 表示 未観測",
       "yearLabel": "unknown",
@@ -20615,20 +20611,6 @@
       "demand": null
     },
     {
-      "key": "national-quasi-national-park-visits",
-      "treatment": 4,
-      "reason": "観測 1 年・GSC 表示 未観測",
-      "yearLabel": "unknown",
-      "yearFormat": "calendar",
-      "sources": null,
-      "freshness": "fresh",
-      "latestYear": 2024,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
       "key": "natural-disaster-deaths",
       "treatment": 4,
       "reason": "観測 1 年・GSC 表示 未観測",
@@ -20672,20 +20654,6 @@
     },
     {
       "key": "natural-disaster-injured-persons",
-      "treatment": 4,
-      "reason": "観測 1 年・GSC 表示 未観測",
-      "yearLabel": "unknown",
-      "yearFormat": "calendar",
-      "sources": null,
-      "freshness": "fresh",
-      "latestYear": 2024,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "natural-disaster-missing-persons",
       "treatment": 4,
       "reason": "観測 1 年・GSC 表示 未観測",
       "yearLabel": "unknown",
@@ -20904,20 +20872,6 @@
       "demand": null
     },
     {
-      "key": "pig-count",
-      "treatment": 4,
-      "reason": "観測 1 年・GSC 表示 未観測",
-      "yearLabel": "unknown",
-      "yearFormat": "calendar",
-      "sources": null,
-      "freshness": "fresh",
-      "latestYear": 2024,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
       "key": "population-growth-rate",
       "treatment": 4,
       "reason": "観測 1 年・GSC 表示 未観測",
@@ -21018,52 +20972,7 @@
       "demand": null
     },
     {
-      "key": "production-age-population-ratio",
-      "treatment": 4,
-      "reason": "観測 2 年・GSC 表示 未観測",
-      "yearLabel": "ok",
-      "yearFormat": "calendar",
-      "sources": [
-        "人口推計",
-        "国勢調査報告"
-      ],
-      "freshness": "fresh",
-      "latestYear": 2024,
-      "observedYears": 2,
-      "cadence": 4,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "public-school-closures-cumulative",
-      "treatment": 4,
-      "reason": "観測 1 年・GSC 表示 未観測",
-      "yearLabel": "unknown",
-      "yearFormat": "calendar",
-      "sources": null,
-      "freshness": "fresh",
-      "latestYear": 2024,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
       "key": "public-water-aged-pipe-length",
-      "treatment": 4,
-      "reason": "観測 1 年・GSC 表示 未観測",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": null,
-      "freshness": "fresh",
-      "latestYear": 2024,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "public-water-pipe-aging-rate",
       "treatment": 4,
       "reason": "観測 1 年・GSC 表示 未観測",
       "yearLabel": "unknown",
@@ -21533,20 +21442,6 @@
       "demand": null
     },
     {
-      "key": "sawmill-count",
-      "treatment": 4,
-      "reason": "観測 1 年・GSC 表示 未観測",
-      "yearLabel": "unknown",
-      "yearFormat": "calendar",
-      "sources": null,
-      "freshness": "fresh",
-      "latestYear": 2024,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
       "key": "sawnwood-shipment-volume",
       "treatment": 4,
       "reason": "観測 1 年・GSC 表示 未観測",
@@ -21649,20 +21544,6 @@
       "sources": null,
       "freshness": "fresh",
       "latestYear": 2025,
-      "observedYears": 1,
-      "cadence": 1,
-      "estatExtendCandidate": false,
-      "demand": null
-    },
-    {
-      "key": "specific-health-checkup-participation-rate",
-      "treatment": 4,
-      "reason": "観測 1 年・GSC 表示 未観測",
-      "yearLabel": "unknown",
-      "yearFormat": "fiscal",
-      "sources": null,
-      "freshness": "fresh",
-      "latestYear": 2024,
       "observedYears": 1,
       "cadence": 1,
       "estatExtendCandidate": false,

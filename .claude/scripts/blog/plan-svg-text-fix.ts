@@ -26,9 +26,10 @@ import path from "node:path";
 
 import { findChartTextIssues } from "../lib/svg-lint.mjs";
 import { resolveDispatcher } from "../page-quality/lib/http-dispatcher";
+import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
-const R2_BASE = (process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp").replace(/\/$/, "");
+const R2_BASE = (process.env.R2_PUBLIC_FETCH_URL ?? R2_PUBLIC_BASE_URL).replace(/\/$/, "");
 const SVG_REF = /data\/([A-Za-z0-9_.-]+)\.svg/g;
 
 export type Verdict = "regen-fixes" | "generator-fix" | "no-data" | "clean" | "unverified";

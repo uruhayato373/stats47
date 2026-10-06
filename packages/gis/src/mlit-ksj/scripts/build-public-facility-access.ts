@@ -2,7 +2,7 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve, dirname } from 'node:path';
 import { createHash } from 'node:crypto';
 import { parseArgs } from 'node:util';
-import { fetchPrefectures } from '@stats47/area';
+import { fetchPrefectures, to5DigitPrefCode } from '@stats47/area';
 import { GEO_ANALYSES } from '@stats47/data-configs/business-plan';
 import { feature } from 'topojson-client';
 import type { Topology, GeometryObject } from 'topojson-specification';
@@ -39,6 +39,7 @@ import type {
 } from '../../geo-analysis/snapshot';
 import { GIS_DATASETS_BY_ID } from '../datasets';
 import { assertKsjPublicStructuredOutputAllowed } from '../license-policy';
+import { SITE } from '@stats47/types';
 
 async function main() {
   const { values: options } = parseArgs({
@@ -155,7 +156,7 @@ async function main() {
             continue;
           } catch {}
           const bytes = await fetchBytes(
-            `https://storage.stats47.jp/gis/mlit-ksj/mesh1000r6/24/${input.pref}.topojson`
+            `${SITE.r2PublicBaseUrl}/gis/mlit-ksj/mesh1000r6/24/${input.pref}.topojson`
           );
           ensure(
             bytes.length === input.population.bytes &&
@@ -234,11 +235,11 @@ async function main() {
           schemaVersion: 1,
           slug,
           generatedAt,
-          areaCode: `${input.pref}000`,
+          areaCode: to5DigitPrefCode(input.pref),
           facilities: local,
         },
         local.length,
-        `${input.pref}000`
+        to5DigitPrefCode(input.pref)
       )
     );
   }
@@ -321,7 +322,7 @@ async function main() {
       }
     }
     const facilities = points.filter((p) => used.has(p[0])),
-      areaCode = `${input.pref}000`,
+      areaCode = to5DigitPrefCode(input.pref),
       pref = fetchPrefectures().find((p) => p.prefCode === areaCode);
     ensure(pref, 'Unknown county');
     const detail: GeoPublicFacilityPrefDetail = {
@@ -506,7 +507,7 @@ async function main() {
         url:
           i.datasetId === 'P05'
             ? PUBLIC_FACILITY_SOURCE_URL
-            : `https://storage.stats47.jp/${i.key}`,
+            : `${SITE.r2PublicBaseUrl}/${i.key}`,
         acquiredAt:
           acquisition[
             `${i.datasetId}/${i.key.split('/').slice(-1)[0].slice(0, 2)}`

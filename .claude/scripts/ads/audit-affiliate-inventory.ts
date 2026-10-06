@@ -21,6 +21,7 @@ import {
   AFFILIATE_VERTICALS,
   adVertical,
 } from "../../../apps/web/src/features/ads/constants/affiliate-category";
+import { CATEGORY_KEYS } from "@stats47/data-configs";
 import { AFFILIATE_ADS } from "../../../apps/web/scripts/affiliate-ads-data";
 import { isAffiliateActive } from "../../../apps/web/src/features/ads/constants/affiliate-delivery-policy";
 
@@ -56,28 +57,6 @@ function lintSizes(): SizeViolation[] {
   }
   return violations;
 }
-
-// SSOT: packages/data-configs/src/types.ts の CATEGORY_KEYS (17 軸)。
-// e-Stat 機械分類の backbone。ここを直 import すると重い依存を引くため複製 (ズレたら lint で気付く)。
-const CATEGORY_KEYS = [
-  "landweather",
-  "population",
-  "laborwage",
-  "agriculture",
-  "miningindustry",
-  "commercial",
-  "economy",
-  "construction",
-  "energy",
-  "tourism",
-  "educationsports",
-  "administrativefinancial",
-  "safetyenvironment",
-  "socialsecurity",
-  "international",
-  "infrastructure",
-  "ict",
-] as const;
 
 function tally<T extends string>(values: T[]): Record<string, number> {
   const out: Record<string, number> = {};

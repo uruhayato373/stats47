@@ -3,6 +3,7 @@ import { resolve, relative, isAbsolute } from 'node:path';
 import { createHash } from 'node:crypto';
 import { parse } from 'csv-parse/sync';
 import JSZip from 'jszip';
+import { PREF_AREA_CODES } from '../../lib/prefectures.cjs';
 
 export const sha256 = bytes => createHash('sha256').update(bytes).digest('hex');
 
@@ -23,7 +24,7 @@ export async function inspectPack(root, listing) {
   }
   const rows = parse(readFileSync(resolve(dir, 'data.csv')), { bom: true });
   const sources = parse(readFileSync(resolve(dir, 'SOURCES.csv')), { bom: true, columns: true });
-  const codes = Array.from({ length: 47 }, (_, i) => `${String(i + 1).padStart(2, '0')}000`);
+  const codes = PREF_AREA_CODES;
   if (rows.length !== 48 || rows.slice(1).some((r, i) => r[0] !== codes[i] || r.length !== rows[0].length)) throw new Error('47 ordered prefecture codes required');
   const count = rows[0].length - 3; // code, name, missing-value notes
   if (sources.length !== count || count !== contract.indicatorCount) throw new Error('indicator count mismatch');

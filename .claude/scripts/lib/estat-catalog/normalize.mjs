@@ -1,11 +1,10 @@
 // e-Stat カタログの純粋関数群 (getStatsList / getMetaInfo 生レスポンス → 索引行)。
 // ネットワーク・fs に触れない。テスト: .claude/scripts/lib/__tests__/estat-catalog.test.mjs
 import { extractYearCode } from "../../../../packages/estat-api/src/stats-data/utils/extract-year-code.ts";
+import { PREF_AREA_CODES } from "../prefectures.cjs";
 
 /** 都道府県 5 桁コード (01000〜47000)。estat-api.md の地域コード規約に準拠 */
-export const PREFECTURE_CODES = Array.from({ length: 47 }, (_, i) =>
-  String(i + 1).padStart(2, "0") + "000",
-);
+export const PREFECTURE_CODES = [...PREF_AREA_CODES];
 const PREFECTURE_CODE_SET = new Set(PREFECTURE_CODES);
 
 /** 都道府県一致とみなす下限 (欠測県が数県あっても都道府県軸と判定する) */

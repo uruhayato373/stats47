@@ -7,6 +7,7 @@ import { createRequire } from 'node:module';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
+import { ESTAT_STATS_DATA_URL } from '../lib/estat-catalog/endpoints.cjs';
 const root = process.cwd(),
   requireRepo = createRequire(resolve(root, 'package.json'));
 const prefs = requireRepo('./packages/area/src/data/prefectures.json');
@@ -1033,9 +1034,7 @@ async function acquireApi(source, directory) {
     const appId =
       process.env.NEXT_PUBLIC_ESTAT_APP_ID ?? process.env.ESTAT_APP_ID;
     assert.ok(appId, 'e-Stat credential required');
-    const url = new URL(
-      'https://api.e-stat.go.jp/rest/3.0/app/json/getStatsData'
-    );
+    const url = new URL(ESTAT_STATS_DATA_URL);
     url.search = new URLSearchParams({
       appId,
       lang: 'J',

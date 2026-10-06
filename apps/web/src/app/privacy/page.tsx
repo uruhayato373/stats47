@@ -33,6 +33,7 @@ import { ArticleShell, PageHeader } from "@/components/layout";
 import { SurfaceCard } from "@/components/surface";
 
 import { OPERATOR_PROFILE } from "@/config/operator-profile";
+import { CONTACT_FORM_URL, DEFAULT_OGP_IMAGE_PATH, SITE_ORIGIN } from "@/config/site";
 
 interface LegalSectionProps {
   /** セクション番号（例: "1", "第1条"） */
@@ -71,7 +72,7 @@ const LAST_UPDATED_DATE = new Date("2026-05-21");
 const EXTERNAL_LINKS = {
   googlePrivacyPolicy: "https://policies.google.com/privacy",
   googleAdSettings: "https://www.google.com/settings/ads",
-  contactForm: "https://forms.gle/ZYi7Rmk4Kt9qZCXB8",
+  contactForm: CONTACT_FORM_URL,
 } as const;
 
 // 共通テキストスタイルクラス
@@ -94,8 +95,8 @@ export const metadata = {
     description:
       "統計で見る都道府県（stats47）のプライバシーポリシー。個人情報の取り扱い、Cookie使用、広告配信に関する方針を説明します。",
     type: "website",
-    url: "https://stats47.jp/privacy",
-    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "プライバシーポリシー" }],
+    url: `${SITE_ORIGIN}/privacy`,
+    images: [{ url: DEFAULT_OGP_IMAGE_PATH, width: 1200, height: 630, alt: "プライバシーポリシー" }],
   },
 };
 

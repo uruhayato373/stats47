@@ -12,6 +12,7 @@ import { classifyChoropleth, rankingBarSpec, rankItems } from "../charts/chart-s
 import { PREFECTURE_BY_CODE5, REGIONS } from "../data/prefectures";
 import { BRAND } from "../design/tokens";
 import { SEMANTIC_COLORS } from "../design/tokens";
+import { SITE } from "@stats47/data-configs";
 
 type PptxPoint = { x: number; y: number; moveTo?: boolean } | { close: true };
 
@@ -69,8 +70,8 @@ function addTitle(slide: PptxGenJS.Slide, title: string, subtitle?: string): voi
 
 function footerText(ds: Dataset): string {
   return ds.isSample
-    ? "架空サンプル（実データではありません）／ stats47.jp"
-    : `出典：${ds.source.surveyName}（${ds.year}）／ stats47.jp`;
+    ? `架空サンプル（実データではありません）／ ${SITE.domain}`
+    : `出典：${ds.source.surveyName}（${ds.year}）／ ${SITE.domain}`;
 }
 
 function addFooter(slide: PptxGenJS.Slide, ds: Dataset): void {
@@ -195,7 +196,7 @@ export async function buildProductPptx(
   cover.addText(coverTitle, { x: 0.8, y: 2.4, w: 11.7, h: 1.4, fontSize: 30, bold: true, color: "ffffff", fontFace: JP_FONT });
   cover.addText("地図・ランキング・グラフがすぐ使える PowerPoint 素材集", { x: 0.8, y: 3.5, w: 11.7, h: 0.6, fontSize: 16, color: "cbd5e1", fontFace: JP_FONT });
   cover.addText(
-    `stats47.jp ／ ${ds.isSample ? "架空サンプル・実データではありません" : `収録データ：${ds.indicator}（${ds.year}）`}`,
+    `${SITE.domain} ／ ${ds.isSample ? "架空サンプル・実データではありません" : `収録データ：${ds.indicator}（${ds.year}）`}`,
     { x: 0.8, y: 6.6, w: 11.7, h: 0.4, fontSize: 12, color: "94a3b8", fontFace: JP_FONT },
   );
 
@@ -305,7 +306,7 @@ export async function buildDatabookPptx(
   cover.background = { color: "0b1f3a" };
   cover.addText(coverTitle, { x: 0.8, y: 2.4, w: 11.7, h: 1.4, fontSize: 30, bold: true, color: "ffffff", fontFace: JP_FONT });
   cover.addText(`${datasets.length} 指標 × 47 都道府県（地図・ランキング・一覧）`, { x: 0.8, y: 3.5, w: 11.7, h: 0.6, fontSize: 16, color: "cbd5e1", fontFace: JP_FONT });
-  cover.addText(`stats47.jp ／ 収録指標：${indicatorSummary}`, { x: 0.8, y: 6.6, w: 11.7, h: 0.4, fontSize: 12, color: "94a3b8", fontFace: JP_FONT });
+  cover.addText(`${SITE.domain} ／ 収録指標：${indicatorSummary}`, { x: 0.8, y: 6.6, w: 11.7, h: 0.4, fontSize: 12, color: "94a3b8", fontFace: JP_FONT });
 
   // 2. 概要
   addTextSlide(pptx, "このデータブックについて", [

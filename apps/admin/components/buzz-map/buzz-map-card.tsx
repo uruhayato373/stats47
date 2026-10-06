@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 
+import { SITE } from "@stats47/types";
+
 import { cn } from "@/lib/cn";
 import { Badge } from "@/components/ui/badge";
 
@@ -53,7 +55,7 @@ export function BuzzMapCard({
   const primaryUrl = entry.primaryUrl
     ? entry.primaryUrl.startsWith("http")
       ? entry.primaryUrl
-      : `https://stats47.jp${entry.primaryUrl}`
+      : `${SITE.origin}${entry.primaryUrl}`
     : null;
 
   return (

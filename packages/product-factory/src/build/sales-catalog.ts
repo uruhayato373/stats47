@@ -9,6 +9,7 @@ import { CANONICAL_ARTICLES } from "../channels/note/article-plan";
 import { GEO_SERVICE_OFFER } from "../channels/geo/service-offer";
 import { authoredBookSha256, semanticReviewErrors, revisionEditorIds, type ReviewedChapter } from "../channels/kindle/revision-evidence";
 import { FREE_SAMPLE_STATE, readFreeSampleDelivery } from "./free-sample-delivery";
+import { COCONALA_LISTINGS, KDP_LISTINGS } from "../../../../config/paths.mjs";
 
 type Obj = Record<string, unknown>;
 const obj = (v: unknown): Obj => v !== null && typeof v === "object" && !Array.isArray(v) ? v as Obj : {};
@@ -65,7 +66,7 @@ export function buildSalesCatalog(root: string, checkedAt: string, kindleVersion
     try { return obj(JSON.parse(readFileSync(localPath(root, path), "utf8"))); }
     catch { warnings.push(`Missing or invalid evidence: ${path}`); return {}; }
   };
-  const cp = ".claude/config/coconala-listings.json", kp = ".claude/config/kdp-listings.json";
+  const cp = COCONALA_LISTINGS, kp = KDP_LISTINGS;
   const ap = ".claude/state/products/kindle-archives.json", np = ".claude/state/note-published-urls.json";
   const pp = ".claude/state/products/coconala-packs-2026-09-06.json", gp = ".claude/state/products/geo-service-readiness-2026-09-06.json";
   const coco = obj(read(cp).listings), kdp = obj(read(kp).listings), archives = obj(read(ap).books);

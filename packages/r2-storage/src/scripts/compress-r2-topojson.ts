@@ -7,6 +7,7 @@ import { resolve } from 'node:path';
 import { createS3ImageObjectStore } from '../image-pipeline';
 import { assertR2WriteAllowed } from './_assert-ci-write';
 import { compressR2TopoJsonObject } from './compress-r2-topojson-core';
+import { SITE } from '@stats47/types';
 
 const PROJECT_ROOT = resolve(__dirname, '..', '..', '..', '..');
 config({ path: resolve(PROJECT_ROOT, '.env.local') });
@@ -68,7 +69,7 @@ async function main(): Promise<void> {
   if (!endpoint || !accessKeyId || !secretAccessKey) {
     throw new Error('R2_S3_ENDPOINT, R2_ACCESS_KEY_ID, R2_SECRET_ACCESS_KEY が必要です');
   }
-  const bucket = process.env.CLOUDFLARE_R2_BUCKET_NAME ?? 'stats47';
+  const bucket = process.env.CLOUDFLARE_R2_BUCKET_NAME ?? SITE.r2Bucket;
   const client = new S3Client({
     region: 'auto',
     endpoint,

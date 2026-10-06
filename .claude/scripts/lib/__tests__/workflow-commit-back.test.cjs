@@ -16,6 +16,8 @@ const {
   auditRatchetCommitContract,
   findStalePrExistenceGuard,
   auditWorkflowPrGuards,
+  findForeignTreeRestore,
+  auditWorkflowForeignTreeRestores,
 } = require('../workflow-commit-back-core.cjs');
 
 const ROOT = path.resolve(__dirname, '..', '..', '..', '..');
@@ -305,6 +307,97 @@ test('[mutation] コメント内の gh pr view は検出しない', () => {
 test('[mutation] 読み取り目的の gh pr view (代入) は検出しない', () => {
   const run = 'NUM=$(gh pr view "$BRANCH" --json number -q .number)';
   assert.deepEqual(findStalePrExistenceGuard(run), []);
+});
+
+// ── 別 ref の作業ツリーで develop を上書きしない (2026-10-04 e45f5a0ee) ─────────
+
+test('develop へ切り替えた後に、退避した別 ref のファイルをコピーで戻さない', () => {
+  const offenders = [];
+  for (const { file, doc } of loadWorkflows()) {
+    for (const v of auditWorkflowForeignTreeRestores(doc)) {
+      offenders.push(`${file}: ${v.step} — ${v.text}`);
+    }
+  }
+  assert.deepEqual(
+    offenders,
+    [],
+    `退避元は develop ではない作業ツリーなので、develop に先行する他 workflow の更新を古い版で巻き戻す。\n` +
+      `develop を checkout してその上で生成する:\n${offenders.join('\n')}`
+  );
+});
+
+test('共有 state を書く計測 workflow は develop を checkout して、その上で生成する', () => {
+  for (const file of ['fetch-metrics-weekly.yml', 'psi-audit-daily.yml', 'cloudflare-usage-daily.yml']) {
+    const doc = yaml.load(fs.readFileSync(path.join(WORKFLOW_DIR, file), 'utf8'));
+    const refs = Object.values(doc.jobs).flatMap((job) =>
+      (job.steps || [])
+        .filter((s) => String(s.uses || '').startsWith('actions/checkout@'))
+        .map((s) => s.with && s.with.ref)
+    );
+    assert.deepEqual(refs, ['develop'], `${file}: checkout ref が develop ではない`);
+  }
+});
+
+// 2026-10-04 まで fetch-metrics-weekly にあった形 (退避 step と切替 step が別)。
+const LEGACY_FETCH_METRICS = [
+  'mkdir -p /tmp/metrics-publish/state\ncp -r .claude/state/metrics/. /tmp/metrics-publish/state 2>/dev/null || true\n',
+  [
+    'git reset --hard HEAD',
+    'git clean -fd',
+    'git fetch origin develop',
+    'git checkout develop',
+    'git pull --rebase origin develop',
+    'mkdir -p .claude/state/metrics',
+    'cp -r /tmp/metrics-publish/state/. .claude/state/metrics/ 2>/dev/null || true',
+  ].join('\n'),
+];
+
+test('[mutation] 旧 fetch-metrics-weekly の退避→切替→上書きコピーを検出する', () => {
+  const found = findForeignTreeRestore(LEGACY_FETCH_METRICS);
+  assert.equal(found.length, 1);
+  assert.equal(found[0].stepIndex, 1);
+  assert.match(found[0].text, /\/tmp\/metrics-publish\/state/);
+});
+
+test('[mutation] 切替と復元が別 step でも検出する (退避先が $RUNNER_TEMP でも同じ)', () => {
+  const found = findForeignTreeRestore([
+    'git checkout develop\ngit pull --rebase origin develop\n',
+    'cp -r "$RUNNER_TEMP/psi-publish/"* .claude/state/metrics/psi/\n',
+  ]);
+  assert.equal(found.length, 1);
+  assert.equal(found[0].stepIndex, 1);
+});
+
+test('[mutation] 旧 deploy-workers の improvement-log 書き戻しを検出する', () => {
+  const run = [
+    'cp "$f" "/tmp/improvement-log-stash/$f"',
+    'git checkout -- .claude/skills/analytics/',
+    'git fetch origin develop',
+    'git checkout develop',
+    'cp -r /tmp/improvement-log-stash/.claude/* .claude/ 2>/dev/null || true',
+  ].join('\n');
+  assert.equal(findForeignTreeRestore([run]).length, 1);
+});
+
+test('[mutation] develop を checkout して生成する形は違反にしない', () => {
+  const run = 'npm run psi-audit:digest\ngit add .claude/state/metrics/psi\ngit commit -m x\ngit pull --rebase --autostash origin develop\ngit push origin develop\n';
+  assert.deepEqual(findForeignTreeRestore([run]), []);
+});
+
+test('[mutation] 作業ツリーを持ったまま切り替える形 (sns-metrics-weekly) は違反にしない', () => {
+  const run = 'git fetch origin develop\ngit checkout develop\ngit pull --rebase origin develop\ngit add "$SNAPSHOT_DIR"\n';
+  assert.deepEqual(findForeignTreeRestore([run]), []);
+});
+
+test('[mutation] 切替後に /tmp へ書き出すコピーと、切替前の復元は違反にしない', () => {
+  assert.deepEqual(findForeignTreeRestore(['git checkout develop\ncp report.md /tmp/report/\n']), []);
+  assert.deepEqual(findForeignTreeRestore(['cp -r /tmp/cache/. .local/\ngit checkout develop\n']), []);
+});
+
+test('[mutation] パス単位の checkout とコメント行は切替と見なさない', () => {
+  assert.deepEqual(findForeignTreeRestore(['git checkout develop -- package.json\ncp /tmp/x/a .claude/a\n']), []);
+  assert.deepEqual(findForeignTreeRestore(['# git checkout develop\ncp /tmp/x/a .claude/a\n']), []);
+  assert.equal(findForeignTreeRestore(['git checkout develop\n# cp /tmp/x/a .claude/a\ncp /tmp/x/a .claude/a\n']).length, 1);
 });
 
 // CI artifact は「読み手が要る間だけ」置く。retention 未指定は GitHub 既定の 90 日で、

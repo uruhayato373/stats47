@@ -3,11 +3,12 @@ import { spawn, spawnSync, type ChildProcess } from 'node:child_process';
 import { createRequire } from 'node:module';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { SITE } from '@stats47/types';
 
 const DEFAULT_NEXT_PORT = 3000;
 const DEFAULT_GATEWAY_CACHE_SECONDS = 300;
 const DEFAULT_GATEWAY_PORT = 4777;
-const DEFAULT_R2_UPSTREAM = 'https://storage.stats47.jp';
+const DEFAULT_R2_UPSTREAM = SITE.r2PublicBaseUrl;
 const GATEWAY_START_ATTEMPTS = 60;
 const GATEWAY_START_INTERVAL_MS = 250;
 

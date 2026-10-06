@@ -1,6 +1,7 @@
 'use client';
 import Link from 'next/link';
 
+import { to2DigitPrefCode } from '@stats47/area';
 import { Button } from '@stats47/components/atoms/ui/button';
 import {
   Table,
@@ -134,7 +135,7 @@ export function GeoSnowDesignationSummary({
       <p className="text-sm">
         <Link
           className="underline underline-offset-2"
-          href={`/geo/population-snow-designation${selected ? `?pref=${selected.areaCode.slice(0, 2)}` : ''}`}
+          href={`/geo/population-snow-designation${selected ? `?pref=${to2DigitPrefCode(selected.areaCode)}` : ''}`}
         >
           指定区域・人口メッシュ・計算の根拠を見る
         </Link>

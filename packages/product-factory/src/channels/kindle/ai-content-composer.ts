@@ -22,8 +22,9 @@ import {
   findOutOfRangeNumbers,
 } from "../../../../../.claude/scripts/ai-content/lib/number-audit.mjs";
 import { convertKanjiNumerals, extractKanjiClaims } from "../../text/kanji-numeral";
+import { SITE } from "@stats47/data-configs";
 
-const R2 = process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp";
+const R2 = process.env.R2_PUBLIC_FETCH_URL ?? SITE.r2PublicBaseUrl;
 
 /** ai-content.json の生の形 (faq / prefectureCommentary は **JSON 文字列**で入っている)。 */
 interface RawAiContent {

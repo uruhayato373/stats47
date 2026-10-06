@@ -1,6 +1,6 @@
 'use server';
 
-import { lookupArea } from '@stats47/area';
+import { lookupArea, NATIONAL_AREA_CODE } from '@stats47/area';
 import {
   resolveChartColorHex,
   type StatSeriesRef,
@@ -20,7 +20,6 @@ import type {
 } from '@/components/stat-charts/types/visualization';
 
 import { aggregateMetricTimeseries } from '../lib/aggregate-metric-timeseries';
-import { NATIONAL_AREA_CODE } from '../lib/select-national-series';
 
 import {
   parseThemeDbChartComponentProps,

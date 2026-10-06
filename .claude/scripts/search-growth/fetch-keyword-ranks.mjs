@@ -8,11 +8,12 @@ import assert from 'node:assert/strict';
 import { resolveServiceAccountKeyFile } from '../metrics/lib/auth.mjs';
 import { resolvePeriods, assessDailyCoverage } from '../metrics/lib/periods.mjs';
 import { sitePath, validateSnapshot } from './lib/keyword-cycle.mjs';
+import { GSC_PROPERTY } from '../lib/site-config.cjs';
 
 export async function fetchRows(client, period, dimensions) {
   const rows = [];
   for (let startRow = 0; startRow < 250000; startRow += 25000) {
-    const { data } = await client.searchanalytics.query({ siteUrl: 'sc-domain:stats47.jp', requestBody: {
+    const { data } = await client.searchanalytics.query({ siteUrl: GSC_PROPERTY, requestBody: {
       startDate: period.periodStart, endDate: period.periodEnd, dimensions,
       dataState: 'final', type: 'web', rowLimit: 25000, startRow,
     } }, { timeout: 60000 });
@@ -23,7 +24,7 @@ export async function fetchRows(client, period, dimensions) {
 }
 export async function fetchSnapshot(client, now = new Date()) {
   const periods = resolvePeriods({ source: 'gsc', now });
-  const snapshot = { schemaVersion: 1, siteUrl: 'sc-domain:stats47.jp', asOf: periods.anchor,
+  const snapshot = { schemaVersion: 1, siteUrl: GSC_PROPERTY, asOf: periods.anchor,
     generatedAt: now.toISOString(), limitations: ['GSC reports average position, not a universal SERP rank.',
       'Anonymous and omitted query rows are unknown, never rank zero.'], current: null, previous: null };
   for (const [key, period] of [['current', periods.finalized7d], ['previous', periods.previous7d]]) {

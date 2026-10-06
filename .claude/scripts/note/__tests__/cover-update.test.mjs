@@ -7,7 +7,54 @@ import {
   assertProduction,
   sha256,
   uploadInBrowser,
+  coverOperationVersion,
+  findCoverOperation,
 } from '../lib/cover-update.mjs';
+import fs from 'node:fs';
+import { currentUrlname, assertAccount } from '../lib/note-session.mjs';
+
+test('browser-authenticated account remains usable when the separate request transport cannot connect', async () => {
+  const requests = [];
+  let account = 'stats47';
+  const ctx = { pages: () => [{ url: () => 'https://note.com/settings/account', evaluate: async (fn) =>
+    new Function('fetch', 'location', `return (${fn.toString()})()`)(async (url, options) => {
+      requests.push({ url, options });
+      return { ok: true, json: async () => ({ data: { urlname: account } }) };
+    }, { origin: 'https://note.com' }) }], request: { get: () => { throw Error('separate transport unavailable'); } } };
+  assert.equal(await assertAccount(ctx), 'stats47');
+  assert.deepEqual(requests[0], { url: '/api/v2/current_user', options: { credentials: 'include' } });
+  account = 'dobokunote';
+  await assert.rejects(assertAccount(ctx), /別アカウント/);
+  account = null;
+  assert.equal(await currentUrlname(ctx), null);
+  await assert.rejects(assertAccount(ctx), /未ログイン/);
+});
+
+test('batch identity keeps already delivered revisions when resuming a partial publication', () => {
+  const scope = [{ key: 'a-kakei-aichi', sha256: 'first' }, { key: 'a-kakei-akita', sha256: 'second' }];
+  assert.equal(coverOperationVersion(scope), coverOperationVersion([...scope].reverse()));
+  assert.notEqual(coverOperationVersion(scope), coverOperationVersion(scope.slice(1)));
+  assert.notEqual(coverOperationVersion(scope), coverOperationVersion([{ ...scope[0], sha256: 'replaced' }, scope[1]]));
+});
+test('changing the selected batch cannot hide an uncertain cover upload', () => {
+  const article = { key: 'a-kakei-aichi', sha256: 'reviewed' };
+  const operation = { key: article.key, sourceSha256: article.sha256, status: 'uploading' };
+  const journal = { account: 'stats47', articles: [operation] };
+  assert.equal(findCoverOperation([journal], article), operation);
+  assert.equal(findCoverOperation([journal], { ...article, sha256: 'different' }), operation);
+  assert.equal(findCoverOperation([{ ...journal, articles: [{ ...operation, status: 'verified' }] }], { ...article, sha256: 'different' }), null);
+  assert.throws(() => findCoverOperation([{ ...journal, account: 'dobokunote' }], article), /account/);
+  assert.throws(() => findCoverOperation([journal, journal], article), /multiple/);
+});
+test('Windows uses the dedicated authenticated browser and closes it without a POSIX daemon lookup', () => {
+  const source = fs.readFileSync(new URL('../update-note-covers.mjs', import.meta.url), 'utf8');
+  assert.match(source, /process\.platform === 'win32' \|\| unattended\(\)/);
+  assert.match(source, /await assertAccount\(playwrightContext\)/);
+  const cleanup = source.slice(source.indexOf('async function cleanup()'));
+  assert.ok(cleanup.indexOf('await playwrightContext?.close()') < cleanup.indexOf('const before = processes()'));
+  assert.match(cleanup, /pruneProfileCaches\(\);\s*return;/);
+  assert.match(source, /const prior = findCoverOperation\(previousJournals, a\)/);
+});
 
 const note = {
   id: 123,
@@ -20,7 +67,7 @@ const note = {
   body: 'Published preview',
   separator: 5,
   price: 500,
-  hashtag_notes: ['data'],
+  hashtag_notes: [{ id: 1, created_at: 't', hashtag: { name: '#統計' } }, { id: 2, created_at: 't', hashtag: { name: '#家計' } }],
   has_draft: false,
 };
 const article = { noteId: 'nabc', noteUrl: 'https://note.com/stats47/n/nabc' };
@@ -55,6 +102,13 @@ test('cover may change; article body, title, price, paid boundary and tags must 
       () => assertPreserved(note, { ...note, [field]: 'changed' }),
       new RegExp(field)
     );
+});
+test('tags compare as a set of names: note reorders tags created in the same second', () => {
+  const reordered = { ...note, hashtag_notes: [{ id: 9, created_at: 'u', hashtag: { name: '#家計' } }, { id: 8, created_at: 'u', hashtag: { name: '#統計' } }] };
+  assert.doesNotThrow(() => assertPreserved(note, reordered));
+  const replaced = { ...note, hashtag_notes: [{ id: 1, created_at: 't', hashtag: { name: '#統計' } }, { id: 3, created_at: 't', hashtag: { name: '#毎日note' } }] };
+  assert.throws(() => assertPreserved(note, replaced), /hashtag_notes/);
+  assert.throws(() => assertPreserved(note, { ...note, hashtag_notes: note.hashtag_notes.slice(0, 1) }), /hashtag_notes/);
 });
 test('hashes preserve evidence without storing public or paid body text', () => {
   const fingerprint = assertPreserved(note, note);

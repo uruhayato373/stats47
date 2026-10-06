@@ -102,7 +102,7 @@ editor-operations.md Phase 2 と同じ手順で、既存アイキャッチを `i
 
 ## 更新モードで「触らないもの」
 
-- ハッシュタグ（本文更新と同時には触らない。タグだけを95個以上へ揃える場合は `update-published-hashtags.mjs` を使う）
+- ハッシュタグ（本文更新と同時には触らない。タグだけを記事に合う99個へ置き換える場合は `propose-note-hashtags.mjs` → `update-published-hashtags.mjs` を使う）
 - 販売価格（既存のまま。価格変更は note のペイウォール設定で行う別オペレーション）
 
 本文・本文中画像・（カバー更新時の）アイキャッチを差し替えるのが update モードの責務。

@@ -1,5 +1,6 @@
 import "server-only";
 
+import { PREFECTURE_AREA_CODES } from "@stats47/area";
 import { createSnapshotReader } from "@stats47/r2-storage/server";
 
 /**
@@ -127,7 +128,7 @@ export function toSnapshotItems(items: RakutenApiItemLike[]): RakutenSnapshotIte
 
 /** 47 都道府県コード ("01000".."47000")。取得スクリプトの対象列挙に使う。 */
 export function allPrefCodes(): string[] {
-  return Array.from({ length: 47 }, (_, i) => `${String(i + 1).padStart(2, "0")}000`);
+  return [...PREFECTURE_AREA_CODES];
 }
 
 /**

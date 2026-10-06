@@ -19,6 +19,8 @@ import { resolveAffiliateBannersByVertical } from '@/features/ads/server';
 
 import { generateOGMetadata } from '@/lib/metadata/og-generator';
 
+import { DEFAULT_OGP_IMAGE_PATH } from '@/config/site';
+
 import { JapanMetricChart } from './JapanMetricChart';
 
 import type { Metadata } from 'next';
@@ -43,7 +45,7 @@ export function generateMetadata({ params }: { params: Params }): Metadata {
     ...generateOGMetadata({
       title,
       description: theme.description,
-      imageUrl: '/og-image.jpg',
+      imageUrl: DEFAULT_OGP_IMAGE_PATH,
     }),
   };
 }

@@ -312,19 +312,20 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          # main ブランチに居る — 改変を退避して develop に切り替え
-          mkdir -p /tmp/improvement-log-stash
-          git diff --name-only .claude/skills/analytics/ | while read -r f; do
-            mkdir -p "/tmp/improvement-log-stash/$(dirname "$f")"
-            cp "$f" "/tmp/improvement-log-stash/$f"
-          done
+          # main ブランチに居る。main の improvement-log に追記した版を develop へコピーすると、
+          # develop にだけある追記 (fetch-metrics-weekly の効果判定など) を main の古い版で巻き戻す。
+          # main 側の追記は「stub が要るか」の判定にだけ使って捨て、develop へ切り替えてから追記し直す。
+          # 契約: workflow-commit-back-core.cjs の findForeignTreeRestore。
           git checkout -- .claude/skills/analytics/
 
           git fetch origin develop
           git checkout develop
           git pull --rebase origin develop
 
-          cp -r /tmp/improvement-log-stash/.claude/* .claude/ 2>/dev/null || true
+          node .claude/scripts/lib/append-improvement-log.mjs \
+            --message "$(git log -1 --pretty=%s%n%n%b "$GITHUB_SHA")" \
+            --sha "${GITHUB_SHA:0:7}" \
+            --date "$(date -u +%Y-%m-%d)"
           git add .claude/skills/analytics/
 
           if git diff --cached --quiet; then

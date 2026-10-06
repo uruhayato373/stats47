@@ -11,6 +11,7 @@ import type { TopoJSONTopology } from "@stats47/types";
 import type { Feature, FeatureCollection, MultiPolygon, Polygon } from "geojson";
 import * as iconv from "iconv-lite";
 import { JSDOM } from "jsdom";
+import { NATIONAL_AREA_CODE } from "@stats47/area";
 /**
  * D3.jsカラースキーム型
  * @stats47/visualization から複製（JSX依存を避けるため）
@@ -361,7 +362,7 @@ export async function exportTopoJsonToKml(
     const prefectureFeatures = geoJson.features.filter((feature) => {
       const props = feature.properties || {};
       const areaCode = props.areaCode || "";
-      return areaCode !== "00000";
+      return areaCode !== NATIONAL_AREA_CODE;
     });
 
     // 都道府県データの値のみを取得
@@ -723,7 +724,7 @@ export async function exportDataToCsv(
 
   // 偏差値計算用：全国データ（areaCode: "00000"）を除外
   const prefectureData = data.filter(
-    (item) => item[areaCodeField] !== "00000"
+    (item) => item[areaCodeField] !== NATIONAL_AREA_CODE
   );
 
   // 平均値と標準偏差を計算
@@ -804,7 +805,7 @@ export async function exportDataToCsv(
         ? item[valueField]
         : parseFloat(String(item[valueField])) || 0;
     const deviationValue =
-      areaCode === "00000" ? "" : calculateDeviationValue(numericValue);
+      areaCode === NATIONAL_AREA_CODE ? "" : calculateDeviationValue(numericValue);
 
     const row: string[] = [
       escapeCsv(areaCode),

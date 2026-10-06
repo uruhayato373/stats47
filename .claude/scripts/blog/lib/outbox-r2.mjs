@@ -20,8 +20,9 @@
  */
 
 import { readFileSync } from "node:fs";
+import { R2_PUBLIC_BASE_URL } from "../../lib/site-config.cjs";
 
-export const DEFAULT_R2_BASE = "https://storage.stats47.jp";
+export const DEFAULT_R2_BASE = R2_PUBLIC_BASE_URL;
 
 /** frontmatter の published を読む。true/false/null(不明・読めない) */
 export function getPublished(articlePath) {

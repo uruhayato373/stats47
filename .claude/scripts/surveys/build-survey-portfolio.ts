@@ -30,6 +30,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { getSurveyEditorialContent } from "../../../apps/web/src/features/survey/survey-editorial";
+import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
@@ -42,7 +43,7 @@ const PORTFOLIO = path.join(STATE_DIR, "portfolio.json");
 const EXPERIMENTS = path.join(STATE_DIR, "experiments.json");
 const SURVEYS_JSON = path.join(PROJECT_ROOT, "packages/ranking/src/data/surveys.json");
 const AUDIT_SCRIPT = "packages/ranking/src/scripts/audit-survey-linkage.ts";
-const R2_ALL_URL = "https://storage.stats47.jp/app/survey/all.json";
+const R2_ALL_URL = `${R2_PUBLIC_BASE_URL}/app/survey/all.json`;
 
 interface SurveyMaster {
   id: string;

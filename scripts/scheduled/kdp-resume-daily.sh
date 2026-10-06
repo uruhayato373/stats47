@@ -29,10 +29,11 @@ mkdir -p "$LOG_DIR"
 LOG="$LOG_DIR/resume-$(date +%Y%m%d-%H%M).log"
 
 # 全冊 listed なら何もしない (ジョブの役目が終わっている)
-REMAIN=$(python3 -c "
-import json
-d = json.load(open('.claude/config/kdp-listings.json'))['listings']
-print(sum(1 for v in d.values() if v['status'] != 'listed'))" 2>/dev/null || echo "?")
+REMAIN=$(node --input-type=module -e "
+import { readFileSync } from 'node:fs';
+import { KDP_LISTINGS } from './config/paths.mjs';
+const listings = JSON.parse(readFileSync(KDP_LISTINGS, 'utf8')).listings;
+console.log(Object.values(listings).filter((v) => v.status !== 'listed').length);" 2>/dev/null || echo "?")
 if [ "$REMAIN" = "0" ]; then
   echo "[resume] 全冊 listed — 役目終了。launchctl bootout gui/\$UID/com.stats47.kdp-resume-daily で解除してよい" | tee -a "$LOG"
   exit 0

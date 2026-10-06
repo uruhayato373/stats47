@@ -1,5 +1,6 @@
 'use client';
 
+import { to2DigitPrefCode } from '@stats47/area';
 import {
   Table,
   TableBody,
@@ -165,7 +166,7 @@ export function ThemeEarthquakeExposureClient({
               {selectedPrefectureCode && (
                 <a
                   className="underline underline-offset-2"
-                  href={`${evidenceRoot}/pref/${selectedPrefectureCode.slice(0, 2)}.json`}
+                  href={`${evidenceRoot}/pref/${to2DigitPrefCode(selectedPrefectureCode)}.json`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >

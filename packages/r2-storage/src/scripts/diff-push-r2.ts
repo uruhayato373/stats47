@@ -20,10 +20,11 @@ import { assertDiffPushComplete } from "./lib/diff-push-result";
 import { assertKsjPublicAssetsAllowed } from "./lib/ksj-publication-guard";
 import { assertBlogPublicAssetsAllowed, BLOG_INDEX_KEY, blogSnapshotWriteCondition } from './lib/blog-publication-guard';
 import { createS3ImageObjectStore } from '../image-pipeline';
+import { SITE } from "@stats47/types";
 
 config({ path: path.resolve(__dirname, "..", "..", "..", "..", ".env.local") });
 
-const BUCKET = process.env.CLOUDFLARE_R2_BUCKET_NAME || "stats47";
+const BUCKET = process.env.CLOUDFLARE_R2_BUCKET_NAME || SITE.r2Bucket;
 const OUTPUT_BASE = ".local/r2";
 const MANIFEST_DIR = ".local/r2-manifest";
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..", "..");

@@ -11,6 +11,8 @@ import {
   SelectValue,
 } from "@stats47/components/atoms/ui/select";
 
+import { DEFAULT_FLOW_FOCUS } from "@/features/theme-dashboard";
+
 import { FinanceSankey } from "./FinanceSankey";
 
 import type { FinanceFlowData } from "../lib/types";
@@ -23,7 +25,7 @@ interface Props {
 const VALID_CODES = new Set(PREFECTURES.map((p) => p.code));
 
 export function FinanceFlowSectionClient({ initialData }: Props) {
-  const [prefCode, setPrefCode] = useState(initialData?.focusCode ?? "13");
+  const [prefCode, setPrefCode] = useState(initialData?.focusCode ?? DEFAULT_FLOW_FOCUS);
 
   // ?pref=NN をクライアントで読み取り初期焦点県に反映（useSearchParams 不使用で SSG 保全）。
   useEffect(() => {

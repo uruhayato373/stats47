@@ -1,10 +1,10 @@
-import { lookupArea } from '@stats47/area';
+import { lookupArea, NATIONAL_OR_PREFECTURE_AREA_CODE_RE } from '@stats47/area';
 import { NUTRITION_SOURCE } from '@stats47/data-configs/theme-catalog';
 import { z } from 'zod';
 
 const definition = NUTRITION_SOURCE;
 const point = z.object({
-  areaCode: z.string().regex(/^(00|0[1-9]|[1-3][0-9]|4[0-7])000$/),
+  areaCode: z.string().regex(NATIONAL_OR_PREFECTURE_AREA_CODE_RE),
   areaName: z.string().min(1),
   metricKey: z.string(),
   mean: z.number().finite().nonnegative(),

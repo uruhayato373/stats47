@@ -1,4 +1,4 @@
-import { lookupArea } from '@stats47/area';
+import { lookupArea, PREFECTURE_AREA_CODE_RE } from '@stats47/area';
 import { TOURISM_SEASONALITY_SOURCE } from '@stats47/data-configs/theme-catalog';
 import { z } from 'zod';
 
@@ -9,7 +9,6 @@ export const TOURISM_SEASONALITY_SNAPSHOT_KEY =
 
 const MONTHS_PER_YEAR = 12;
 const PREFECTURE_COUNT = 47;
-const PREFECTURE_CODE = /^(0[1-9]|[1-3][0-9]|4[0-7])000$/;
 const MONTH_PERIOD = /^\d{4}-(0[1-9]|1[0-2])$/;
 
 const monthlyPointShape = {
@@ -33,7 +32,7 @@ const monthlyPointSchema = z.object(monthlyPointShape).refine(
 
 const prefecturePointSchema = z.object({
   ...monthlyPointShape,
-  areaCode: z.string().regex(PREFECTURE_CODE),
+  areaCode: z.string().regex(PREFECTURE_AREA_CODE_RE),
   areaName: z.string().min(1),
 }).refine(hasExplicitMissingReason, {
   message: '欠測はnullと理由、観測された0は数値0で記録する',

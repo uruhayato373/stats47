@@ -10,6 +10,7 @@
 import { readFileSync, readdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, resolve } from "node:path";
+import { R2_PUBLIC_BASE_URL } from "../../lib/site-config.cjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -25,7 +26,7 @@ const THEME_CATALOG_INDEX_PATH = resolve(
   "packages/data-configs/src/theme-catalog/index.ts",
 );
 const THEMES_APP_DIR = resolve(PROJECT_ROOT, "apps/web/src/app/themes");
-const BLOG_ALL_JSON_URL = "https://storage.stats47.jp/app/blog/all.json";
+const BLOG_ALL_JSON_URL = `${R2_PUBLIC_BASE_URL}/app/blog/all.json`;
 
 // ---------------------------------------------------------------------------
 // 純粋関数

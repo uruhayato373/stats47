@@ -78,6 +78,10 @@ agent の「問題なし」は自己申告なので、execution file の `Read` 
 
 1. **検査**: 機械検出 (`UI_METRIC_KEYS` の違反。key は `machine|<url>|<metric>`) と agent の指摘 (ページの種類ごとに
    1 件にまとめる。key は `agent|<template>`。表現が週ごとに変わるので文面では同一性を取らない) を取り込む。
+   全URLの意味検査 (`TEMPLATE_LEVEL_METRICS`) は生成元を直す指摘なので、ページの種類 × 検査項目で 1 件
+   (`machine|<template>|<metric>`・件数・最大値・URL の例 3 件) にまとめる。URL ごとに積んだ 2026-10-04 の週次で
+   3,312 件・1.96MB になり、リポジトリ衛生の 1MB 上限を超えて全員のコミットが止まった。週次ボットのコミットは
+   pre-commit を通らないので、commit 前に `check-repo-hygiene.cjs --staged --baseline` を掛けている。
 2. **起票**: pending をページの種類ごとに 1 枚の `UI-FIX-<種類>-<日付>` カード (`[実行:sweep]`・10 件まで) にする。
    その種類のカードが開いている間は次を出さない。対象は `.claude/state/page-quality/backlog-batches/<ID>.txt`。
 3. **修正**: 対話セッションで優先順位を見て選んだときに直し (2026-09-27 に日次の自動処理を停止)、`--mark-fixed` / `--mark-by-design` / `--mark-owner` で印を付ける。

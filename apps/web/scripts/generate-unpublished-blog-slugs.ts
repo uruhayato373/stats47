@@ -21,8 +21,9 @@ import fs from "node:fs";
 import path from "node:path";
 
 import { GONE_BLOG_SLUGS } from "../src/config/gone-blog-slugs";
+import { SITE } from "@stats47/types";
 
-const R2_PUBLIC = process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp";
+const R2_PUBLIC = process.env.R2_PUBLIC_FETCH_URL ?? SITE.r2PublicBaseUrl;
 const OUT_PATH = path.resolve(__dirname, "../src/config/unpublished-blog-slugs.ts");
 const CHECK_ONLY = process.argv.includes("--check");
 

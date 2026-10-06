@@ -1,4 +1,5 @@
 import type { StatsSchema } from '@stats47/types';
+import { NATIONAL_AREA_CODE } from '@stats47/area';
 
 export type BlogChartType =
   | "bar"
@@ -53,7 +54,7 @@ export function convertToBarData(stats: StatsSchema[]): BarDataNode[] {
   const latestYear = getLatestYear(stats);
   if (!latestYear) return [];
   return stats
-    .filter(s => s.yearCode === latestYear && s.areaCode !== '00000' && s.value !== null)
+    .filter(s => s.yearCode === latestYear && s.areaCode !== NATIONAL_AREA_CODE && s.value !== null)
     .map(s => ({ name: s.areaName, value: s.value as number, code: s.areaCode }));
 }
 
@@ -63,7 +64,7 @@ export function convertToBarData(stats: StatsSchema[]): BarDataNode[] {
  * 年度昇順で返す。
  */
 export function convertToLineData(stats: StatsSchema[]): LineDataNode[] {
-  const national = stats.filter(s => s.areaCode === '00000');
+  const national = stats.filter(s => s.areaCode === NATIONAL_AREA_CODE);
   const source = national.length > 0 ? national : stats;
   const years = [...new Set(source.map(s => s.yearCode))].sort();
   return years.map(yc => {
@@ -105,7 +106,7 @@ export function convertToChoroplethData(stats: StatsSchema[]): ChoroplethDataNod
   const latestYear = getLatestYear(stats);
   if (!latestYear) return [];
   return stats
-    .filter(s => s.yearCode === latestYear && s.areaCode !== '00000' && s.value !== null)
+    .filter(s => s.yearCode === latestYear && s.areaCode !== NATIONAL_AREA_CODE && s.value !== null)
     .map(s => ({ areaCode: s.areaCode, value: s.value as number }));
 }
 
@@ -117,10 +118,10 @@ export function convertToLineDataAuto(
   stats: StatsSchema[]
 ): LineDataNode[] | MultiAreaLineDataNode[] {
   const areaCodes = [...new Set(
-    stats.filter(s => s.areaCode !== '00000').map(s => s.areaCode)
+    stats.filter(s => s.areaCode !== NATIONAL_AREA_CODE).map(s => s.areaCode)
   )];
   if (areaCodes.length >= 2) {
-    return convertToMultiAreaLineData(stats.filter(s => s.areaCode !== '00000'));
+    return convertToMultiAreaLineData(stats.filter(s => s.areaCode !== NATIONAL_AREA_CODE));
   }
   return convertToLineData(stats);
 }

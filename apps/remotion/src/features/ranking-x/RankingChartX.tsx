@@ -12,6 +12,7 @@ import {
 } from "@/shared/themes/brand";
 import { formatValueWithPrecision } from "@stats47/utils";
 import type { RankingEntry, RankingMeta } from "@/shared/types/ranking";
+import { SITE } from "@stats47/types";
 
 interface RankingChartXProps {
   meta: RankingMeta;
@@ -173,7 +174,7 @@ export const RankingChartX: React.FC<RankingChartXProps> = ({
             letterSpacing: 1,
           }}
         >
-          stats47.jp
+          {SITE.domain}
         </div>
         <div style={{ width: 1, height: 14, backgroundColor: colors.border }} />
         <div
@@ -184,7 +185,7 @@ export const RankingChartX: React.FC<RankingChartXProps> = ({
             letterSpacing: 1,
           }}
         >
-          統計で見る都道府県
+          {SITE.name}
         </div>
       </div>
     </AbsoluteFill>

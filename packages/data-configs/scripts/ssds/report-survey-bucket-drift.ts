@@ -11,8 +11,9 @@
 
 import { METRICS_REGISTRY } from "../../src/registry";
 import { resolveMetricProvenance } from "../../src/provenance/resolve-metric-provenance";
+import { SITE } from "@stats47/types";
 
-const BASE = process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp";
+const BASE = process.env.R2_PUBLIC_FETCH_URL ?? SITE.r2PublicBaseUrl;
 const SSDS = "社会・人口統計体系";
 
 async function getJson<T>(path: string): Promise<T | null> {

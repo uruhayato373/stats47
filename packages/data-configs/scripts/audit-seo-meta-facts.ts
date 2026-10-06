@@ -39,11 +39,12 @@ import {
   type SeoFactFinding,
 } from "../src/seo-meta-facts.js";
 import type { MetricConfig } from "../src/types.js";
+import { SITE } from "@stats47/types";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(__dirname, "../../..");
 const BASELINE = resolve(REPO_ROOT, ".claude/state/data/seo-meta-facts-baseline.json");
-const R2 = process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp";
+const R2 = process.env.R2_PUBLIC_FETCH_URL ?? SITE.r2PublicBaseUrl;
 const CONCURRENCY = 16;
 
 interface StatsRow {

@@ -20,9 +20,10 @@ import {
   resolveRakutenPurgePaths,
   type BlogIndexEntry,
 } from "./lib/rakuten-purge-targets";
+import { SITE } from "@stats47/types";
 
-const SITE_ORIGIN = "https://stats47.jp";
-const R2_PUBLIC_URL = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
+const SITE_ORIGIN = SITE.origin;
+const R2_PUBLIC_URL = process.env.R2_PUBLIC_FETCH_URL || SITE.r2PublicBaseUrl;
 const FETCH_CONCURRENCY = 16;
 
 const argv = process.argv.slice(2);

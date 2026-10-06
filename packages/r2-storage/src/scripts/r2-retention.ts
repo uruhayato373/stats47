@@ -25,6 +25,7 @@ import {
   assertUnchangedRetentionInventory,
   listLicenseRetentionObjects,
 } from "./lib/license-retention";
+import { SITE } from "@stats47/types";
 
 config({ path: path.resolve(__dirname, "../../../..", ".env.local") });
 
@@ -254,7 +255,7 @@ async function main(): Promise<void> {
   const exactTarget = LICENSE_RETENTION_TARGETS.find((target) => target.id === targetId);
   if (exactTarget) {
     if (process.env.NODE_ENV === "development" ||
-      (process.env.CLOUDFLARE_R2_BUCKET_NAME && process.env.CLOUDFLARE_R2_BUCKET_NAME !== "stats47")) {
+      (process.env.CLOUDFLARE_R2_BUCKET_NAME && process.env.CLOUDFLARE_R2_BUCKET_NAME !== SITE.r2Bucket)) {
       throw new Error("License retention requires remote stats47 bucket, not local/other-site data");
     }
     const actual = await listLicenseRetentionObjects(exactTarget.prefixes);

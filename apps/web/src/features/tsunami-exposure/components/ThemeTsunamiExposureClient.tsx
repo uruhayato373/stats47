@@ -1,4 +1,5 @@
 'use client';
+import { to2DigitPrefCode } from '@stats47/area';
 import { Button } from '@stats47/components/atoms/ui/button';
 import {
   Table,
@@ -203,7 +204,7 @@ export function ThemeTsunamiExposureClient({
               {row && (
                 <a
                   className="underline underline-offset-2"
-                  href={`${evidence}/pref/${row.areaCode.slice(0, 2)}.json`}
+                  href={`${evidence}/pref/${to2DigitPrefCode(row.areaCode)}.json`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >

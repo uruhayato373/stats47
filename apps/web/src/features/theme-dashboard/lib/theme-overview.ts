@@ -1,3 +1,5 @@
+import { PREFECTURE_AREA_CODE_RE } from '@stats47/area';
+
 import type { ThemeConfig, ThemeIndicatorData } from '../types';
 import type { CatalogMetricGroup } from '@stats47/data-configs/theme-catalog';
 import type { RankingValue } from '@stats47/ranking';
@@ -11,8 +13,7 @@ export function getOverviewValues(
   if (!year) return [];
   const byArea = new Map<string, RankingValue>();
   for (const row of data.rankingValues) {
-    const pref = Number(row.areaCode.slice(0, 2));
-    if (!/^\d{2}000$/.test(row.areaCode) || pref < 1 || pref > 47) continue;
+    if (!PREFECTURE_AREA_CODE_RE.test(row.areaCode)) continue;
     if (comparisonPeriod(String(row.yearCode)) !== year) continue;
     if (typeof row.value !== 'number' || !Number.isFinite(row.value)) continue;
     byArea.set(row.areaCode, row);

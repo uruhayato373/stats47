@@ -1,0 +1,96 @@
+{
+  "kind": "manual",
+  "sourceName": "中小企業景況調査",
+  "source": "https://www.smrj.go.jp/research_case/survey/fbrion0000002oup-att/185_30_report_appendix.pdf",
+  "url": "https://www.smrj.go.jp/research_case/survey/",
+  "table": "第185回 中小企業景況調査 資料編 第11-(1)表 地域別DIの動向（業況・前年同期比）",
+  "surveyScope": "not-applicable",
+  "surveyScopeReason": "中小企業景況調査は調査マスタ未登録。公表は全国と経済産業局管内の8地域のみで、都道府県別はない",
+  "displaySources": [
+    {
+      "label": "中小企業庁・中小機構『中小企業景況調査』（第185回・2026年7-9月期）",
+      "url": "https://www.smrj.go.jp/research_case/survey/"
+    }
+  ],
+  "regionDefinition": "経済産業局管内による区分。関東は新潟・長野・山梨・静岡を含む。中部は富山・石川を含む（愛知・岐阜・三重と合わせ5県）。近畿は福井を含む。九州・沖縄は九州各県と沖縄県",
+  "fetchedAt": "2026-10-02",
+  "restore": "資料編PDFを pdftotext -layout で抽出し第11-(1)表の▲値を読む（2026-10-02に264値を機械照合済み）",
+  "label": "業況判断DI（製造業・前年同期比）",
+  "year": "2026年7-9月期",
+  "unit": "ポイント",
+  "transform": "8地域の2026年7-9月期の値をそのまま抽出",
+  "context": {
+    "respondents2026Q3": {
+      "source": "https://www.smrj.go.jp/research_case/survey/ の各地域ページ 185_7x_<地域>_data.xlsx シート『業況（前期比原数値）』2026年3期の企業数列",
+      "byRegion": {
+        "北海道": {
+          "全産業": 717,
+          "製造業": 150,
+          "非製造業": 567
+        },
+        "東北": {
+          "全産業": 1787,
+          "製造業": 402,
+          "非製造業": 1385
+        },
+        "関東": {
+          "全産業": 4757,
+          "製造業": 1207,
+          "非製造業": 3550
+        },
+        "中部": {
+          "全産業": 2259,
+          "製造業": 592,
+          "非製造業": 1667
+        },
+        "近畿": {
+          "全産業": 2460,
+          "製造業": 633,
+          "非製造業": 1827
+        },
+        "中国": {
+          "全産業": 1620,
+          "製造業": 391,
+          "非製造業": 1229
+        },
+        "四国": {
+          "全産業": 1263,
+          "製造業": 315,
+          "非製造業": 948
+        },
+        "九州・沖縄": {
+          "全産業": 2710,
+          "製造業": 595,
+          "非製造業": 2115
+        }
+      }
+    },
+    "reportStatements": [
+      {
+        "statement": "地域別の業況判断DI（全産業・前年同期比）は北海道、中国、東北、関東、四国、近畿、中部でマイナス幅が縮小し、九州・沖縄でマイナス幅が拡大した",
+        "source": "https://www.smrj.go.jp/research_case/survey/fbrion0000002oup-att/185_20_report_summary_Official.pdf",
+        "page": "p.7 6.地域別業況判断DI"
+      },
+      {
+        "statement": "令和8年熊本地震が発生した九州・沖縄地域は2.9ポイント減（▲19.2）と低下",
+        "source": "https://www.smrj.go.jp/research_case/survey/fbrion0000002oup-att/185_10_point.pdf",
+        "page": "3.業況判断DIは九州・沖縄地域で低下、他地域で上昇"
+      },
+      {
+        "statement": "製造業の企業コメント例: 設備投資はAI関連や自動化需要を背景に堅調、半導体・データセンター向け投資や工作機械受注も好調［機械器具 新潟］",
+        "source": "https://www.smrj.go.jp/research_case/survey/fbrion0000002oup-att/185_20_report_summary_Official.pdf",
+        "page": "(2) 製造業（参考）調査対象企業のコメント（例）"
+      },
+      {
+        "statement": "非製造業の企業コメント例: 受注は増えたが材料費・借入金利の上昇と人手不足［建設業 香川］、インバウンドが戻ったが食材・リネン・燃料などのコスト上昇［宿泊業 滋賀］",
+        "source": "https://www.smrj.go.jp/research_case/survey/fbrion0000002oup-att/185_20_report_summary_Official.pdf",
+        "page": "(3) 非製造業（参考）調査対象企業のコメント（例）"
+      },
+      {
+        "statement": "調査時点2026年9月1日、調査対象企業数18,829、有効回答企業数17,902",
+        "source": "https://www.smrj.go.jp/research_case/survey/fbrion0000002oup-att/185_10_point.pdf",
+        "page": "調査概要"
+      }
+    ]
+  }
+}

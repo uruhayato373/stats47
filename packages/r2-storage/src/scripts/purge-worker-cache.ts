@@ -11,6 +11,7 @@
 import { config } from "dotenv";
 import { pathToFileURL } from "node:url";
 import path from "node:path";
+import { SITE } from "@stats47/types";
 
 // ★`import.meta.dirname` 単独は使わない。r2-storage は package.json に "type": "module" が無く
 // tsx が CJS として実行するため undefined になり、path.resolve が ERR_INVALID_ARG_TYPE で落ちる
@@ -19,7 +20,7 @@ import path from "node:path";
 const HERE = import.meta.dirname ?? __dirname;
 config({ path: path.resolve(HERE, "..", "..", "..", "..", ".env.local") });
 
-const DEFAULT_PURGE_URL = "https://stats47.jp/api/internal/worker-cache/purge";
+const DEFAULT_PURGE_URL = `${SITE.origin}/api/internal/worker-cache/purge`;
 const MAX_URLS_PER_REQUEST = 100;
 
 interface PurgeWorkerCacheOptions {

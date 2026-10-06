@@ -21,7 +21,7 @@ import { UI_METRIC_KEYS } from "./ui-report";
 export type UiFindingStatus = "pending" | "fixed" | "done" | "by-design" | "owner";
 
 export interface ObservedFinding {
-  /** machine: `machine|<url>|<metric>` / agent: `agent|<template>` */
+  /** machine: `machine|<url>|<metric>` (TEMPLATE_LEVEL_METRICS は `machine|<template>|<metric>`) / agent: `agent|<template>` */
   key: string;
   source: "machine" | "agent";
   template: string;
@@ -62,11 +62,32 @@ export const DONE_RETENTION_DAYS = 84;
 export const DEPLOY_LAG_MINUTES = 30;
 
 const SEVERITY_RANK: Record<string, number> = { high: 3, error: 3, medium: 2, warning: 2, low: 1 };
+const highestSeverity = (severities: readonly string[]) =>
+  [...severities].sort((a, b) => (SEVERITY_RANK[b] ?? 0) - (SEVERITY_RANK[a] ?? 0))[0];
+
+/**
+ * 全URLを静的に見る表示の意味の検査。生成元 (テンプレート・カタログ・共通部品) を直せば全 URL が直るので、
+ * URL ごとではなくページの種類 × 検査項目で 1 件にまとめる。URL ごとに積むと、初めて全件に掛けた
+ * 2026-10-04 の週次で 3,312 件 (unit_symbol_mixing だけで 2,568 URL) になり、キューが 1.96MB に膨らんで
+ * リポジトリ衛生の 1MB 上限を超えた。カードも 1,919 URL のうち 10 URL を抜き出すだけになっていた。
+ */
+export const TEMPLATE_LEVEL_METRICS = [
+  "internal_jargon_terms",
+  "unit_symbol_mixing",
+  "abnormal_value_strings",
+  "same_shop_ad_duplicates",
+  "title_changed",
+] as const;
+/** まとめた指摘の detail に載せる URL の例の数。全件は週次 latest.json (R2) にある */
+export const SAMPLE_URL_COUNT = 3;
+
+const isTemplateLevel = (metric: string) => (TEMPLATE_LEVEL_METRICS as readonly string[]).includes(metric);
 
 /** 週次の結果から、今週観測された UI の指摘を作る。Claude の指摘はページの種類ごとに 1 件へまとめる。 */
 export function observeFindings(run: Pick<AuditRun, "violations">, agentFindings: readonly AgentFinding[]): ObservedFinding[] {
-  const machine = run.violations
-    .filter((v) => UI_METRIC_KEYS.includes(v.metric_key))
+  const ui = run.violations.filter((v) => UI_METRIC_KEYS.includes(v.metric_key));
+  const perUrl = ui
+    .filter((v) => !isTemplateLevel(v.metric_key))
     .map<ObservedFinding>((v) => ({
       key: `machine|${v.url}|${v.metric_key}`,
       source: "machine",
@@ -77,6 +98,27 @@ export function observeFindings(run: Pick<AuditRun, "violations">, agentFindings
       detail: `${v.metric_key} = ${v.actual} (閾値 ${v.operator} ${v.threshold})`,
     }));
 
+  const groups = new Map<string, AuditRun["violations"]>();
+  for (const v of ui.filter((x) => isTemplateLevel(x.metric_key))) {
+    const key = `machine|${v.template}|${v.metric_key}`;
+    groups.set(key, [...(groups.get(key) ?? []), v]);
+  }
+  const perTemplate = [...groups].map<ObservedFinding>(([key, items]) => {
+    const [first] = items;
+    const urls = items.map((v) => v.url).sort();
+    const max = Math.max(...items.map((v) => v.actual));
+    return {
+      key,
+      source: "machine",
+      template: first.template,
+      url: null,
+      metric_key: first.metric_key,
+      severity: highestSeverity(items.map((v) => v.severity)),
+      detail: `${first.metric_key}: ${urls.length} URL (最大 ${max}、閾値 ${first.operator} ${first.threshold})。例: ${urls.slice(0, SAMPLE_URL_COUNT).join(" / ")}`,
+    };
+  });
+  const machine = [...perUrl, ...perTemplate];
+
   const byTemplate = new Map<string, AgentFinding[]>();
   for (const f of agentFindings) byTemplate.set(f.template, [...(byTemplate.get(f.template) ?? []), f]);
   const agent = [...byTemplate].map<ObservedFinding>(([template, items]) => ({
@@ -85,7 +127,7 @@ export function observeFindings(run: Pick<AuditRun, "violations">, agentFindings
     template,
     url: null,
     metric_key: null,
-    severity: items.map((f) => f.severity).sort((a, b) => (SEVERITY_RANK[b] ?? 0) - (SEVERITY_RANK[a] ?? 0))[0],
+    severity: highestSeverity(items.map((f) => f.severity)),
     detail: items.map((f) => `[${f.device}/${f.severity}] ${f.location}: ${f.issue} → ${f.suggestion}`).join("\n"),
   }));
 
@@ -273,20 +315,13 @@ export function chartFixGuide(findings: readonly UiFinding[], batchFile: string)
 }
 
 /** 表示の意味の指摘 (SITE-DISPLAY-SEMANTICS-AUDIT-01)。定義単位で直すことをカード本文に書く。 */
-const SEMANTIC_METRICS = [
-  "internal_jargon_terms",
-  "unit_symbol_mixing",
-  "abnormal_value_strings",
-  "same_shop_ad_duplicates",
-  "title_changed",
-  "small_text_count",
-  "mobile_page_height",
-] as const;
+const SEMANTIC_METRICS = [...TEMPLATE_LEVEL_METRICS, "small_text_count", "mobile_page_height"] as const;
 
 export function semanticFixGuide(findings: readonly UiFinding[]): string[] {
   if (!SEMANTIC_METRICS.some((m) => hasMetric(findings, m))) return [];
   return [
     "- **表示の意味 (定義単位で直す)**: 語・文字列・店名などの具体的な箇所は `LATEST.md` / 週次 `latest.json` の `ui_findings` にある。" +
+      "全URLの検査はページの種類ごとに 1 件へまとめてあり、該当 URL の全件は週次 `latest.json` (`npm run state:pull -- page-quality` で `.claude/state/page-quality/live/` に取得) の `violations` にある。" +
       "同じ指摘が同じテンプレートの多数の URL に出ていれば、ページではなく生成元 (テンプレート・カタログ・共通部品・AI 解説の生成) を直す。" +
       "内部用語は読者向けの言い換えに、`NaN`/`undefined` は値が無いときの表示 (「—」等) に、`%`/`％` はそのページの多数派に揃える。" +
       "`title_changed` は選定入力が変わっていないのに title が変わった場合だけ直す (選び方を決定的にする)。" +

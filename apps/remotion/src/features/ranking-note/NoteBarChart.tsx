@@ -3,6 +3,7 @@ import { AbsoluteFill } from "remotion";
 
 import { BRAND, FONT } from "@/shared/themes/brand";
 import { formatNoteValue, rankColor, resolveNoteData, shortPrefName, type NoteImageProps } from "./note-common";
+import { SITE } from "@stats47/types";
 
 const W = 1200;
 const H = 630;
@@ -67,9 +68,9 @@ export const NoteBarChart: React.FC<NoteImageProps> = (props) => {
       </svg>
 
       <div style={{ position: "absolute", left: 0, right: 0, bottom: 10, textAlign: "center", fontSize: 18, color: "#64748B" }}>
-        <span style={{ fontWeight: FONT.weight.black, color: BRAND.primary }}>stats47.jp</span>
+        <span style={{ fontWeight: FONT.weight.black, color: BRAND.primary }}>{SITE.domain}</span>
         <span style={{ margin: "0 10px", opacity: 0.4 }}>|</span>
-        <span>統計で見る都道府県 ・ 単位: {meta.unit || "—"} ・ 1位 → 47位</span>
+        <span>{SITE.name} ・ 単位: {meta.unit || "—"} ・ 1位 → 47位</span>
       </div>
     </AbsoluteFill>
   );

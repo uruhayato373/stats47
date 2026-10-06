@@ -13,7 +13,7 @@ Amazon KDP の**出品・修正の実操作**を決定的スクリプトで行�
   アカウント**へ手動ログインし、永続プロファイル `.local/playwright-kdp-profile` に保持する。
 - **税務情報 (Tax interview)・銀行口座・支払情報の入力は人間工程**。エージェントは一切触らない
   (これらが未完了だと KDP は公開させない。人間が事前に完了させる)。
-- **account assert 必須**: `.claude/config/kdp-account.json` の `accountEmail`/`accountName` が KDP の
+- **account assert 必須**: `config/kdp-account.json` の `accountEmail`/`accountName` が KDP の
   アカウント表示と一致することを確認してから操作する。別アカウントは即中断。
 - **draft-first + `--commit` gate + オーナー承認**: 既定は「下書き保存」。**実公開 (`--commit`) は
   outward-facing・取り下げに時間がかかるため、オーナーが明示承認したときだけ**実行する。バリデーション
@@ -24,7 +24,7 @@ Amazon KDP の**出品・修正の実操作**を決定的スクリプトで行�
 ## スコープ
 
 含む: 出品フォーム操作 (Details/Content/Pricing の充填・EPUB/カバーのアップロード・下書き保存・公開)、
-出品内容 SoT (`.claude/config/kdp-listings.json`) の反映、公開状態の書き戻し (status/asin)。
+出品内容 SoT (`config/kdp-listings.json`) の反映、公開状態の書き戻し (status/asin)。
 含まない (委譲):
 - 書籍の生成 (EPUB)・書籍カタログ (KINDLE_BOOKS) の管理 = `kindle-publisher`
 - 書き下ろしの起草・意味レビュー = `article-writer` / `blog-critic`
@@ -84,7 +84,7 @@ BEHAVIOR CONTRACT (命令): 結論先行。進捗の実証 (下書き保存/公�
 
 - 規約: `.claude/rules/coconala-product-standards.md §8` / skill: `.claude/skills/product/kdp-publish/SKILL.md`
 - スクリプト: `.claude/scripts/kdp/{login,capture-account,kdp-publish}.mjs` + `lib/kdp-{session,form}.mjs`
-- 出品 SoT: `.claude/config/kdp-listings.json` / アカウント: `.claude/config/kdp-account.json`
+- 出品 SoT: `config/kdp-listings.json` / アカウント: `config/kdp-account.json`
 - 運用ミラー: `http://127.0.0.1:4747/content/kindle` / 横断監査: `npm run audit:content-operations`
 - 認証プロファイル: `docs/01_技術設計/07_Playwright認証プロファイル.md` (`playwright-kdp-profile`)
 - 書籍生成・カタログ: `kindle-publisher` / 移植元: `coconala-operator`'''

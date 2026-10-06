@@ -21,12 +21,13 @@
  */
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
 import { join } from "node:path";
+import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 
 const PROJECT_ROOT = join(import.meta.dirname ?? __dirname, "../../..");
 const SPECS_DIR = join(PROJECT_ROOT, "apps/remotion/src/features/buzz-map/specs");
 const DEFAULT_INPUT = join(PROJECT_ROOT, ".local/gsi-pni/points.json");
 // ローカル未取得のセッション (クラウド等) でも量産できるよう R2 公開データにフォールバック
-const PUBLIC_URL = process.env.R2_PUBLIC_FETCH_URL ?? "https://storage.stats47.jp";
+const PUBLIC_URL = process.env.R2_PUBLIC_FETCH_URL ?? R2_PUBLIC_BASE_URL;
 const R2_FALLBACK = `${PUBLIC_URL}/gis/gsi-pni/points.json`;
 
 interface PlacePoint {

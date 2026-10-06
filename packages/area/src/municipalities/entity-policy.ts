@@ -1,3 +1,4 @@
+import { PREFECTURE_AREA_CODE_RE } from '../constants/prefecture-codes';
 import { fetchCities } from '../repositories/fetch-cities';
 
 import type { City } from '../types/city';
@@ -11,7 +12,6 @@ import type {
 export const STANDARD_MUNICIPALITY_ENTITY_POLICY_KEY =
   'standard-municipality-v1';
 
-const PREFECTURE_CODE_RE = /^(0[1-9]|[1-3][0-9]|4[0-7])000$/;
 const AREA_CODE_RE = /^\d{5}$/;
 
 function leafName(cityName: string): string {
@@ -61,7 +61,7 @@ export function buildMunicipalityEntityPolicy(
           `administrative ward parent is missing: ${city.cityCode} -> ${city.prefCode}`
         );
       }
-      if (!PREFECTURE_CODE_RE.test(parent.prefCode)) {
+      if (!PREFECTURE_AREA_CODE_RE.test(parent.prefCode)) {
         throw new Error(
           `administrative ward parent prefecture is invalid: ${city.cityCode} -> ${parent.prefCode}`
         );
@@ -82,7 +82,7 @@ export function buildMunicipalityEntityPolicy(
       };
     }
 
-    if (!PREFECTURE_CODE_RE.test(city.prefCode)) {
+    if (!PREFECTURE_AREA_CODE_RE.test(city.prefCode)) {
       throw new Error(
         `municipality prefecture code is invalid: ${city.cityCode} -> ${city.prefCode}`
       );

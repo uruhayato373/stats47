@@ -1,4 +1,6 @@
 'use client';
+import { to2DigitPrefCode } from '@stats47/area';
+
 import { useThemePrefecture } from '@/features/theme-dashboard';
 
 import { GeoPublicFacilitySummary } from './GeoPublicFacilitySummary';
@@ -28,7 +30,7 @@ export function ThemeGeoPublicFacilityAccessClient({
           slug="population-public-facility-access"
           analysisId={analysisId}
           dataVersion={snapshot.dataVersion}
-          initialPrefCode={selected.areaCode.slice(0, 2)}
+          initialPrefCode={to2DigitPrefCode(selected.areaCode)}
           initialView="overlap"
           manifest={manifest}
           fixedPrefecture

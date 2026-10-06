@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-02T06:48:33.577Z",
+  "status": "pass",
+  "scope": "localhost note cover browser UI",
+  "url": "http://127.0.0.1:4747/content/note/covers?category=household&view=complete",
+  "source": "data/note/cover-assets.json",
+  "table": "shadcn Table with existing TanStack Table v8",
+  "features": [
+    "right-side category and state filters",
+    "title and article ID search including full-width characters",
+    "column sorting",
+    "page size and pagination",
+    "URL-preserved conditions",
+    "gallery view",
+    "cover comparison and archive images in Sheet",
+    "mobile filter Sheet"
+  ],
+  "validation": {
+    "focusedUnitTests": 15,
+    "browserTests": {
+      "passed": 4,
+      "failed": 0,
+      "devices": [
+        "desktop",
+        "mobile"
+      ],
+      "privateImageTransport": "stubbed in E2E; real remote images verified separately"
+    },
+    "typeCheck": "25 packages and 8 script projects passed; latest admin workspace passed",
+    "lint": "pass",
+    "shadcnParity": "pass",
+    "adminUiDebt": "zero",
+    "docs": "0 errors; 12 pre-existing warnings",
+    "manualBrowser": {
+      "light": "pass",
+      "dark": "pass",
+      "mobileOverflow": false,
+      "pageErrors": 0,
+      "realPrivateCoverImages": "1280x670 in comparison Sheet verified"
+    }
+  },
+  "contentWrites": false
+}

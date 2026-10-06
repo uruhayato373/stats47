@@ -5,6 +5,7 @@ import {
   PutObjectCommand,
   S3Client,
 } from '@aws-sdk/client-s3';
+import { SITE } from '@stats47/types';
 
 export interface StoredImageObject {
   body: Buffer;
@@ -118,7 +119,7 @@ export function createS3ImageObjectStoreFromEnv(): ImageObjectStore | null {
   const accessKeyId = process.env.R2_ACCESS_KEY_ID;
   const secretAccessKey = process.env.R2_SECRET_ACCESS_KEY;
   if (!endpoint || !accessKeyId || !secretAccessKey) return null;
-  const bucket = process.env.CLOUDFLARE_R2_BUCKET_NAME ?? 'stats47';
+  const bucket = process.env.CLOUDFLARE_R2_BUCKET_NAME ?? SITE.r2Bucket;
   const client = new S3Client({
     region: 'auto',
     endpoint,

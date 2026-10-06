@@ -28,11 +28,12 @@ import {
   computeKpis,
   buildScoreFeedback,
 } from "./lib/buzz-map-attribution-core.mjs";
+import { GA4_PROPERTY_ID } from "../lib/site-config.cjs";
 
 const require = createRequire(import.meta.url);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
-const PROPERTY_ID = process.env.GA4_PROPERTY_ID || "463218070";
+const PROPERTY_ID = process.env.GA4_PROPERTY_ID || GA4_PROPERTY_ID;
 const KEY_CANDIDATES = ["stats47-f6b5dae19196.json", "stats47-31b18ee67144.json"];
 const STATE_DIR = path.join(PROJECT_ROOT, ".claude/state/sns");
 

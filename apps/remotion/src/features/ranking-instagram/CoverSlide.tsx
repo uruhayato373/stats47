@@ -13,6 +13,7 @@ import {
   type ThemeName,
 } from "@/shared/themes/brand";
 import type { RankingEntry, RankingMeta } from "@/shared/types/ranking";
+import { SITE } from "@stats47/types";
 
 /** D3 の interpolator 関数名から関数を取得 */
 function getInterpolator(name: string): (t: number) => string {
@@ -339,7 +340,7 @@ export const CoverSlide: React.FC<CoverSlideProps> = ({
             letterSpacing: 1,
           }}
         >
-          stats47.jp
+          {SITE.domain}
         </div>
         <div style={{ width: 1, height: 16, backgroundColor: colors.border }} />
         <div
@@ -350,7 +351,7 @@ export const CoverSlide: React.FC<CoverSlideProps> = ({
             letterSpacing: 1,
           }}
         >
-          統計で見る都道府県
+          {SITE.name}
         </div>
       </div>
     </AbsoluteFill>

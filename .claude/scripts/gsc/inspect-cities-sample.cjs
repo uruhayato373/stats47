@@ -20,10 +20,10 @@
 const fs = require("fs");
 const path = require("path");
 const { google } = require("googleapis");
+const { GSC_PROPERTY, SITE_ORIGIN } = require("../lib/site-config.cjs");
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
-const SITE_URL = "sc-domain:stats47.jp";
-const SITE_ORIGIN = "https://stats47.jp";
+const SITE_URL = GSC_PROPERTY;
 const KEY_CANDIDATES = ["stats47-f6b5dae19196.json", "stats47-31b18ee67144.json"];
 
 const SAMPLE_SIZE = 50;

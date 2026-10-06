@@ -22,9 +22,10 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { generateBarChartSvg } from "../../../packages/svg-builder/src/charts/bar-chart.ts";
+import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
-const R2 = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
+const R2 = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
 const STAGE = path.join(PROJECT_ROOT, ".local/r2/app/blog");
 const args = process.argv.slice(2);
 const PROBE_ONLY = args.includes("--probe-only");

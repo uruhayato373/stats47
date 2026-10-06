@@ -3,6 +3,7 @@ import { Series } from "remotion";
 import { FullScreen, RankingTable, RankingTitle, type ThemeName } from "@/shared";
 import { RankCardGes } from "./RankCardGes";
 import { SCENE_DURATION } from "@/utils/constants";
+import { SITE } from "@stats47/types";
 
 interface RankingShortGesProps {
     meta: {
@@ -85,7 +86,7 @@ export const RankingShortGes: React.FC<RankingShortGesProps> = ({
                         titleMain="フォローしてね！"
                         titleSub="もっと知りたい？"
                         catchphrase1="最新の統計をお届け"
-                        catchphrase2="stats47.jp"
+                        catchphrase2={SITE.domain}
                         theme={theme}
                     />
                 </Series.Sequence>

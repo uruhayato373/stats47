@@ -7,6 +7,7 @@ import assert from 'node:assert/strict';
 import ts from 'typescript';
 import { jstDateOf } from '../metrics/lib/periods.mjs';
 import { hash, validateSnapshot, validateLog, reviewDue, selectKeyword, rankingMovements, recordDeployment } from './lib/keyword-cycle.mjs';
+import { SITE_ORIGIN } from '../lib/site-config.cjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');
 export function readJson(repo, file) { return JSON.parse(fs.readFileSync(path.join(repo, file), 'utf8')); }
@@ -98,7 +99,7 @@ async function confirmDeployment(repo, snapshot, args) {
       const publishedProposal = JSON.parse(execFileSync('git', ['show', `${run.head_sha}:data/seo/proposals/${proposal.id}.json`], { cwd: repo, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }));
       assert.deepEqual(publishedProposal, proposal);
       for (const file of proposal.files) assert.equal(hash(execFileSync('git', ['show', `${run.head_sha}:${file.path}`], { cwd: repo, encoding: 'utf8' })), file.sha256);
-      const response = await fetch(`https://stats47.jp${proposal.targetPath}`, { signal: AbortSignal.timeout(30000) });
+      const response = await fetch(`${SITE_ORIGIN}${proposal.targetPath}`, { signal: AbortSignal.timeout(30000) });
       assert.equal(response.status, 200); const html = await response.text(); assert.match(html, /<\/html>/i);
       const escaped = text => text.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#x27;');
       for (const patch of proposal.patches) assert.ok(html.includes(patch.newText) || html.includes(escaped(patch.newText)), 'published copy not confirmed');

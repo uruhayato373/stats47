@@ -1,15 +1,15 @@
 {
   "schemaVersion": 1,
-  "updatedAt": "2026-09-27T10:27:44.924Z",
+  "updatedAt": "2026-10-04T08:34:29.424Z",
   "source": {
     "asp": "moshimo",
     "site": "stats47",
     "siteId": "638943",
-    "url": "https://af.moshimo.com/af/shop/report/kpi/promotion?from_date=2026%2F08%2F24&to_date=2026%2F09%2F27&terminal_type=0&order=result_price_d&shop_site_id=638943"
+    "url": "https://af.moshimo.com/af/shop/report/kpi/promotion?from_date=2026%2F08%2F31&to_date=2026%2F10%2F04&terminal_type=0&order=result_price_d&shop_site_id=638943"
   },
   "period": {
-    "from": "2026-08-24",
-    "to": "2026-09-27",
+    "from": "2026-08-31",
+    "to": "2026-10-04",
     "days": 35
   },
   "coverage": {
@@ -36,7 +36,7 @@
       "programId": "55",
       "programRef": "moshimo:55",
       "programName": "楽天トラベルの予約申込 / 楽天グループ株式会社",
-      "impressions": 10,
+      "impressions": 38,
       "clicks": 1,
       "clickRevenueYen": 0,
       "conversions": 0,
@@ -478,7 +478,7 @@
       "programId": "7494",
       "programRef": "moshimo:7494",
       "programName": "AI鬼管理｜Claude Code活用の業務自動化トレーニングの無料申込完了",
-      "impressions": 11,
+      "impressions": 15,
       "clicks": 0,
       "clickRevenueYen": 0,
       "conversions": 0,

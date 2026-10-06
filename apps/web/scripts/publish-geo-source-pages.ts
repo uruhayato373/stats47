@@ -41,12 +41,13 @@ import {
   writeGeoSourceCatalog,
   type SourceInventoryRow,
 } from './export-geo-source-catalog';
+import { SITE } from '@stats47/types';
 
 const root = path.resolve('.local/r2');
 const evidence = path.resolve('.local/verification/geo-source-publish');
 const planPath = path.join(evidence, 'plan.json');
 const publicBase =
-  process.env.R2_PUBLIC_FETCH_URL ?? 'https://storage.stats47.jp';
+  process.env.R2_PUBLIC_FETCH_URL ?? SITE.r2PublicBaseUrl;
 const args = process.argv.slice(2);
 const command = args[0];
 const idsIndex = args.indexOf('--ids');
@@ -68,8 +69,8 @@ if (
   (args.includes('--canonical') && command !== 'verify')
 )
   throw Error('Invalid command/flag combination');
-if (publicBase !== 'https://storage.stats47.jp')
-  throw Error('This release targets https://storage.stats47.jp only');
+if (publicBase !== SITE.r2PublicBaseUrl)
+  throw Error(`This release targets ${SITE.r2PublicBaseUrl} only`);
 if (process.env.NODE_ENV === 'development')
   throw Error('Remote inventory cannot use development filesystem fallback');
 const store = createS3ImageObjectStoreFromEnv();

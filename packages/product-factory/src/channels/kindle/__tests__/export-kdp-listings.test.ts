@@ -1,5 +1,5 @@
 /**
- * KDP 出品内容 (`.claude/config/kdp-listings.json`) の不変量。
+ * KDP 出品内容 (`config/kdp-listings.json`) の不変量。
  *
  * ★守りたいのは 1 つ: **読者が読む文章に社内の言葉を出さない**。
  *   2026-08-12 に実測したところ、紹介文が `concept` + `newContentNote` の素の連結で、
@@ -14,9 +14,10 @@ import { readFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
+import { KDP_LISTINGS } from "../../../../../../config/paths.mjs";
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../../../..");
-const LISTINGS = join(REPO_ROOT, ".claude/config/kdp-listings.json");
+const LISTINGS = join(REPO_ROOT, KDP_LISTINGS);
 
 interface Listing {
   readonly id: string;

@@ -23,9 +23,10 @@ import fs from "node:fs";
 import path from "node:path";
 
 import { extractInternalLinks } from "../lib/internal-link-lint.mjs";
+import { R2_PUBLIC_BASE_URL, SITE_ORIGIN } from "../lib/site-config.cjs";
 
-const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || "https://storage.stats47.jp";
-const SITE_BASE = process.env.SITE_ORIGIN || "https://stats47.jp";
+const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
+const SITE_BASE = process.env.SITE_ORIGIN || SITE_ORIGIN;
 const UA = "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)";
 const ARTICLE_CONCURRENCY = 8;
 const LINK_CONCURRENCY = 6;

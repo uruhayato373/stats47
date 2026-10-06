@@ -27,6 +27,7 @@ import { bundle } from "@remotion/bundler";
 import { openBrowser, renderMedia, selectComposition } from "@remotion/renderer";
 import fs from "fs/promises";
 import path from "path";
+import { PREFECTURE_AREA_CODES, to2DigitPrefCode } from "@stats47/area";
 
 type Format = "landscape" | "portrait";
 
@@ -35,9 +36,7 @@ const COMPOSITION_ID: Record<Format, string> = {
   portrait: "MigrationFlow-Reel-Portrait",
 };
 
-const ALL_PREFS = Array.from({ length: 47 }, (_, i) =>
-  String(i + 1).padStart(2, "0"),
-);
+const ALL_PREFS = PREFECTURE_AREA_CODES.map(to2DigitPrefCode);
 /** Chrome を定期再起動する間隔 (動画レンダーはメモリを食う) */
 const BROWSER_RESTART_INTERVAL = 5;
 
