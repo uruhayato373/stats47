@@ -73,10 +73,10 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
   ```
 - .local/r2/sns/ 配下の新規生成コンテンツ
 
-- ブログ新規記事キュー（`.claude/state/blog/topic-queue.json`）の消化状況:
+- ブログ新規記事キュー（`data/blog/topic-queue.json`）の消化状況:
   ```bash
   # pending / must-write / in-progress の件数と型ミックス、今週 done になった件数
-  node -e 'const q=require("./.claude/state/blog/topic-queue.json");
+  node -e 'const q=require("./data/blog/topic-queue.json");
     const c=(f)=>q.queue.filter(f).length; const by=(s)=>{const o={};for(const e of q.queue.filter(x=>x.status===s))o[e.archetype]=(o[e.archetype]||0)+1;return o};
     console.log(JSON.stringify({pending:c(x=>x.status==="pending"),must_write:c(x=>x.status==="pending"&&x.lane==="must-write"),in_progress:c(x=>x.status==="in-progress"),done:c(x=>x.status==="done"),pending型内訳:by("pending")},null,2))'
   ```
@@ -159,10 +159,10 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
    正典: `.claude/skills/analytics/gsc-coverage-remediation/SKILL.md` / 実行: `/gsc-coverage-remediation`。
    - 取り込み: `python3 .claude/scripts/gsc/ingest-gsc-export.py`（~/Downloads の cp932 zip を自動正規化 → `coverage-drilldown/YYYY-Www/{category}-drilldown.csv`）
    - 構築: `node .claude/scripts/gsc/build-coverage-queue.mjs`（本番 HTTP 実測で A/B 分類）
-   - レビューに埋め込む: **`.claude/state/gsc/LATEST.md`**（要対応 action 別件数・カテゴリ総件数）と
+   - レビューに埋め込む: **`data/gsc/coverage-remediation/LATEST.md`**（要対応 action 別件数・カテゴリ総件数）と
      `data/gsc/coverage-totals-history.csv`（404/soft404 件数の前週比トレンド）
    - effect 判定は再送信 URL の coverageState 遷移を実測してから（`evidence-based-judgment.md`）。
-     真実源は `.claude/state/gsc/coverage-remediation-queue.json`。今週実行する場合だけ
+     真実源は `data/gsc/coverage-remediation/coverage-remediation-queue.json`。今週実行する場合だけ
      `.claude/todo/weekly.md` から参照し、完了済みの旧改善IDをTODOへ戻さない。
 
 4.5. AdSense snapshot 取得
@@ -177,7 +177,7 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
    `.claude/skills/analytics/adsense-improvement/reference/` に凍結記録として残す。
 
    **アフィリエイトの週次観測**: `data/affiliate/ga4-affiliate-history.csv` と
-   `.claude/state/ads/affiliate-operations-latest.json` を見る。評価の主指標は
+   `data/affiliate/affiliate-operations-latest.json` を見る。評価の主指標は
    確定収益 / 1,000 viewable impression で、クリック数だけで勝敗を決めない。
 
    **計測の健全性は機械が判定する**。`node .claude/scripts/metrics/check-revenue-guards.mjs`
@@ -480,7 +480,7 @@ snapshot CSV: `data/gsc/snapshots/YYYY-Www/`
 `snapshots/YYYY-Www/index-coverage.csv` が存在する場合は以下を 1 行で:
 - 404 / 5xx / ソフト404 / クロール済み未登録 / 検出未登録 / 登録済みの前週差
 
-**GSC運用サイクル**: `.claude/state/metrics/gsc/operations-cycle-LATEST.md` と対象週の
+**GSC運用サイクル**: `data/gsc/operations-cycle-LATEST.md` と対象週の
 `data/effect-verdict/verdicts-YYYY-Www.json`を参照し、FAIL/WARNと次アクションを記載する。
 review作成前の入力検査は次で実行する:
 
@@ -499,10 +499,10 @@ effect-verdictがこの週に判定変化を起こした施策のみを列挙。
 - 着手待ち（`effect/pending` かつ経過日数 < 14）の Tier 1 施策は下部に「待機中」として別枠で列挙
 - gsc/coverage/inspectionがfreshで候補がある場合、最大3件を審査し、approve/dismissを最低1件記録する。採用0件ならdismiss理由を残す
 
-**ブログ品質是正キューの進捗** (`.claude/state/blog/remediation-queue.json` の `summary` を Read):
+**ブログ品質是正キューの進捗** (`data/blog/remediation-queue.json` の `summary` を Read):
 
 ```bash
-node -e 'const q=require("./.claude/state/blog/remediation-queue.json");console.log(q.summary)'
+node -e 'const q=require("./data/blog/remediation-queue.json");console.log(q.summary)'
 ```
 
 - 「pending N (must-fix M) / done D」を 1 行で記載し、**前週比で pending がいくつ減ったか**を明記する (順次品質向上の進捗指標)。
@@ -549,7 +549,7 @@ node .claude/scripts/blog/analyze-winning-patterns.mjs   # CTR×構造特徴→f
 
 ### KDP公開ゲート
 
-`.claude/state/products/kdp-weekly-publication.json`を参照し、推測で補完しない。
+`data/products/kdp-weekly-publication.json`を参照し、推測で補完しない。
 
 | 項目 | 実測 |
 |---|---|

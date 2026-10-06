@@ -35,10 +35,10 @@ SSDS (社会・人口統計体系) 由来の未使用指標を**継続的にラ�
 
 ## 拡充ループ (計測ゲート付き)
 
-真実源: `.claude/state/estat/expansion-queue.json` (build-expansion-queue.mjs が構築・状態保持)。
+真実源: `data/estat/expansion-queue.json` (build-expansion-queue.mjs が構築・状態保持)。
 
 1. **キュー最新化**: `node .claude/scripts/estat/build-expansion-queue.mjs`
-   (候補プール `.claude/state/estat/ssds-candidates.json` × 既存 config を突合、需要スコア + 状態 upsert)
+   (候補プール `data/estat/ssds-candidates.json` × 既存 config を突合、需要スコア + 状態 upsert)
 2. **次バッチ選定**: `--next N` で pending 上位を取得 (score 降順・細分除外)。**計測後は categoryTraffic が
    高いカテゴリの pending が自動で上位に来る** = 流入が付いた系統を深掘り。
    - ★初回は「まず ~46 本の公開・計測が先」。**流入実測が出るまで大量生成しない** (thin-content 回避)。
@@ -62,11 +62,11 @@ SSDS (社会・人口統計体系) 由来の未使用指標を**継続的にラ�
 | 候補プールを手編集 | enumerate-ssds-indicators.mjs (CI) で再生成 |
 
 ## 関連
-- 状態SSOT: `.claude/state/estat/expansion-queue.json`
+- 状態SSOT: `data/estat/expansion-queue.json`
 - スクリプト: `.claude/scripts/estat/{build-expansion-queue,gen-ssds-configs,measure-expansion-impact,enumerate-ssds-indicators}.mjs`
 - スキル: `.claude/skills/management/expand-rankings/SKILL.md`
 - 知見: memory `project_estat_expansion_pipeline_2026_07` / `project_competitor_indicator_benchmark`
-- 状態SSOT: `.claude/state/estat/expansion-queue.json`
+- 状態SSOT: `data/estat/expansion-queue.json`
 - 正典: `.claude/rules/metric-config-standards.md` (isActive≠公開) / `.claude/rules/estat-api.md`
 
 ## Output Contract

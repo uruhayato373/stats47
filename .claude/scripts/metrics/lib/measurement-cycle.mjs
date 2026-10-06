@@ -288,7 +288,7 @@ const keyOf = (v) => (typeof v === "string" ? v : v?.key ?? v?.rankingKey ?? v?.
 /**
  * データ品質ゲート通過率 = 週次のランキング整合性監査で、どの検査にも引っかからなかった公開指標の割合。
  * 検査の定義は ranking-integrity-audit (週次 CI) が持ち、ここは一覧を数えるだけ。
- * @param {object|null} audit .claude/state/ranking/integrity-audit.json
+ * @param {object|null} audit data/ranking/integrity-audit.json
  */
 export function summarizeDataQuality(audit) {
   const active = Number(audit?.totals?.activeKeys);
@@ -466,7 +466,7 @@ const TIER_LABEL = { nsm: "NSM", driver: "駆動", guardrail: "守り" };
 
 function renderKpiTree(k) {
   const lines = [];
-  lines.push(`**KPI ツリー**（正典: 事業計画 catalog → \`.claude/state/business-plan/kpi-tree.json\`。比較は ${KPI_COMPARE_WEEKS_BACK} 週前 ${k.compareWeek} = 窓が重ならない値。★ = 今月の重点レーンの KPI）`);
+  lines.push(`**KPI ツリー**（正典: 事業計画 catalog → \`data/business-plan/kpi-tree.json\`。比較は ${KPI_COMPARE_WEEKS_BACK} 週前 ${k.compareWeek} = 窓が重ならない値。★ = 今月の重点レーンの KPI）`);
   lines.push("");
   lines.push("| 階層 | KPI | 今週 | 比較 | 目標 | 状態 | 施策 |");
   lines.push("|---|---|---|---|---|---|---|");

@@ -104,6 +104,8 @@ function articleIntroduction(markdown: string): string {
         .replace(/^#{1,6}\s+.*$/gm, '')
         .replace(/^!\[[^\]]*\]\([^)]*\)$/gm, '')
         .replace(/<[^>]+>/g, '')
+        // タグを除いた後に残る山括弧も消す (入れ子や閉じ忘れで `<script` が残らないように)
+        .replace(/[<>]/g, '')
         .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
         .replace(/[*_`>#]/g, '')
         .replace(/\s+/g, ' ')

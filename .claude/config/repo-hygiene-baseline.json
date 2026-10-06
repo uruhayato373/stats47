@@ -6,81 +6,81 @@
     {
       "code": "DATED_STATE_ARTIFACT",
       "file": "data/affiliate/affiliate-placement-baseline-2026-09-08.json",
-      "message": "dated state file outside a retention scope (use .claude/state/metrics/releases/ or a pruned directory)"
+      "message": "dated state file outside a retention scope (use data/releases/ or a pruned directory)"
     },
     {
       "code": "DATED_STATE_ARTIFACT",
-      "file": ".claude/state/metrics/content-release-2026-09-08.json",
-      "message": "dated state file outside a retention scope (use .claude/state/metrics/releases/ or a pruned directory)"
+      "file": "data/content-operations/content-release-2026-09-08.json",
+      "message": "dated state file outside a retention scope (use data/releases/ or a pruned directory)"
     },
     {
       "code": "DATED_STATE_ARTIFACT",
-      "file": ".claude/state/metrics/geo-flood-repair-2026-09-05.json",
-      "message": "dated state file outside a retention scope (use .claude/state/metrics/releases/ or a pruned directory)"
+      "file": "data/geo/evidence/geo-flood-repair-2026-09-05.json",
+      "message": "dated state file outside a retention scope (use data/releases/ or a pruned directory)"
     },
     {
       "code": "DATED_STATE_ARTIFACT",
-      "file": ".claude/state/metrics/geo-page-audit-2026-09-05.json",
-      "message": "dated state file outside a retention scope (use .claude/state/metrics/releases/ or a pruned directory)"
+      "file": "data/geo/evidence/geo-page-audit-2026-09-05.json",
+      "message": "dated state file outside a retention scope (use data/releases/ or a pruned directory)"
     },
     {
       "code": "DATED_STATE_ARTIFACT",
-      "file": ".claude/state/metrics/geo-release-publication-2026-09-05.json",
-      "message": "dated state file outside a retention scope (use .claude/state/metrics/releases/ or a pruned directory)"
+      "file": "data/geo/evidence/geo-release-publication-2026-09-05.json",
+      "message": "dated state file outside a retention scope (use data/releases/ or a pruned directory)"
     },
     {
       "code": "DATED_STATE_ARTIFACT",
-      "file": ".claude/state/metrics/note-branding-update-2026-09-06.json",
-      "message": "dated state file outside a retention scope (use .claude/state/metrics/releases/ or a pruned directory)"
+      "file": "data/note/evidence/note-branding-update-2026-09-06.json",
+      "message": "dated state file outside a retention scope (use data/releases/ or a pruned directory)"
     },
     {
       "code": "DATED_STATE_ARTIFACT",
-      "file": ".claude/state/metrics/note-circulation-audit-2026-09-06.json",
-      "message": "dated state file outside a retention scope (use .claude/state/metrics/releases/ or a pruned directory)"
+      "file": "data/note/evidence/note-circulation-audit-2026-09-06.json",
+      "message": "dated state file outside a retention scope (use data/releases/ or a pruned directory)"
     },
     {
       "code": "DATED_STATE_ARTIFACT",
-      "file": ".claude/state/metrics/note-cover-audit-2026-09-12-v1-after.json",
-      "message": "dated state file outside a retention scope (use .claude/state/metrics/releases/ or a pruned directory)"
+      "file": "data/note/evidence/note-cover-audit-2026-09-12-v1-after.json",
+      "message": "dated state file outside a retention scope (use data/releases/ or a pruned directory)"
     },
     {
       "code": "DATED_STATE_ARTIFACT",
-      "file": ".claude/state/metrics/note-cover-audit-2026-09-12.json",
-      "message": "dated state file outside a retention scope (use .claude/state/metrics/releases/ or a pruned directory)"
+      "file": "data/note/evidence/note-cover-audit-2026-09-12.json",
+      "message": "dated state file outside a retention scope (use data/releases/ or a pruned directory)"
     },
     {
       "code": "DATED_STATE_ARTIFACT",
-      "file": ".claude/state/metrics/note-cover-production-2026-09-12-v1.json",
-      "message": "dated state file outside a retention scope (use .claude/state/metrics/releases/ or a pruned directory)"
+      "file": "data/note/evidence/note-cover-production-2026-09-12-v1.json",
+      "message": "dated state file outside a retention scope (use data/releases/ or a pruned directory)"
     },
     {
       "code": "DATED_STATE_ARTIFACT",
-      "file": ".claude/state/metrics/note-cover-refresh-2026-09-12-v1-verification.json",
-      "message": "dated state file outside a retention scope (use .claude/state/metrics/releases/ or a pruned directory)"
+      "file": "data/note/evidence/note-cover-refresh-2026-09-12-v1-verification.json",
+      "message": "dated state file outside a retention scope (use data/releases/ or a pruned directory)"
     },
     {
       "code": "DATED_STATE_ARTIFACT",
-      "file": ".claude/state/metrics/note-cover-refresh-2026-09-12-v1.json",
-      "message": "dated state file outside a retention scope (use .claude/state/metrics/releases/ or a pruned directory)"
+      "file": "data/note/evidence/note-cover-refresh-2026-09-12-v1.json",
+      "message": "dated state file outside a retention scope (use data/releases/ or a pruned directory)"
     },
     {
       "code": "DATED_STATE_ARTIFACT",
-      "file": ".claude/state/metrics/note-hashtag-audit-2026-09-06.json",
-      "message": "dated state file outside a retention scope (use .claude/state/metrics/releases/ or a pruned directory)"
+      "file": "data/note/evidence/note-hashtag-audit-2026-09-06.json",
+      "message": "dated state file outside a retention scope (use data/releases/ or a pruned directory)"
     },
     {
       "code": "DATED_STATE_ARTIFACT",
-      "file": ".claude/state/metrics/note-magazine-expansion-2026-09-06.json",
-      "message": "dated state file outside a retention scope (use .claude/state/metrics/releases/ or a pruned directory)"
+      "file": "data/note/evidence/note-magazine-expansion-2026-09-06.json",
+      "message": "dated state file outside a retention scope (use data/releases/ or a pruned directory)"
     },
     {
       "code": "DATED_STATE_ARTIFACT",
-      "file": ".claude/state/metrics/note-referrals-2026-09-06.json",
-      "message": "dated state file outside a retention scope (use .claude/state/metrics/releases/ or a pruned directory)"
+      "file": "data/note/evidence/note-referrals-2026-09-06.json",
+      "message": "dated state file outside a retention scope (use data/releases/ or a pruned directory)"
     },
     {
       "code": "FORBIDDEN_ARTIFACT",
-      "file": ".claude/state/blog/auto-brushup-skipped.log",
+      "file": "data/blog/auto-brushup-skipped.log",
       "message": "temporary/build/database artifact is tracked"
     },
     {
@@ -90,12 +90,12 @@
     },
     {
       "code": "LARGE_FILE",
-      "file": ".claude/state/estat/expansion-queue.json",
+      "file": "data/estat/expansion-queue.json",
       "message": "1399387 bytes exceeds 1048576 bytes"
     },
     {
       "code": "LARGE_FILE",
-      "file": ".claude/state/gsc/coverage-remediation-queue.json",
+      "file": "data/gsc/coverage-remediation/coverage-remediation-queue.json",
       "message": "1600441 bytes exceeds 1048576 bytes"
     },
     {
@@ -105,7 +105,7 @@
     },
     {
       "code": "LARGE_FILE",
-      "file": ".claude/state/search-growth/candidates.json",
+      "file": "data/search-growth/candidates.json",
       "message": "1601463 bytes exceeds 1048576 bytes"
     },
     {

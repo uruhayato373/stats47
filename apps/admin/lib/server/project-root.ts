@@ -59,9 +59,9 @@ export function localKindleCoverDraftsDir(): string {
   return path.join(projectRoot(), ".local/kindle-cover-drafts");
 }
 
-/** .claude/state ディレクトリ (旧 STATE_DIR)。 */
-export function stateDir(): string {
-  return path.join(projectRoot(), ".claude/state");
+/** SNS の記録ディレクトリ (Instagram の予約表 instagram-w<N>-schedule.json の置き場)。 */
+export function snsDataDir(): string {
+  return path.join(projectRoot(), "data/sns");
 }
 
 /** gallery 固有の永続 state (旧 GALLERY_STATE)。 */

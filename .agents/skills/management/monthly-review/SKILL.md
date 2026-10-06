@@ -40,13 +40,13 @@ node .claude/scripts/management/check-review-cadence.mjs
 | 前月の月次計画 | `.claude/todo/monthly.md`。既に今月分へ上書きされていれば `git log -1 --format=%H --before=<今月>-01 -- .claude/todo/monthly.md` の版を `git show <sha>:.claude/todo/monthly.md` で読む |
 | 計測サイクルの週次履歴 | `data/measurement-cycle/history.csv` の対象月の週。KPI の値はここを正典にし、週次レビュー本文の数値を再集計しない |
 | 効果判定 | `data/effect-verdict` の対象月の週の `verdicts-YYYY-Www.json`。判定と `guards` をそのまま使う |
-| KPI ツリー | `.claude/state/business-plan/kpi-tree.json` (重点レーンの駆動 KPI とガードレール) |
+| KPI ツリー | `data/business-plan/kpi-tree.json` (重点レーンの駆動 KPI とガードレール) |
 | 楽天アフィリエイト成果 | `data/affiliate/rakuten-results.json` の対象月の行。`observedAt` が月をまたいだ後なら確定として扱う。収集が止まっていれば判定不能と書く |
 | 改善施策 | `.claude/todo/improvements.md` の active 施策と上限 |
 | 収益 (楽天以外) | `data/affiliate/a8-results.json`・`data/affiliate/moshimo-results.json` (afb は認証付き計測の `afb`)、商品は `data/products/sales-ledger.json`、KDP は月次レポート (`kdp-monthly-reports.mjs` の出力)。各週の合計は `node .claude/scripts/metrics/generate-weekly-metrics-issue.mjs --week <YYYY-Www>` の「週次収益 (NSM)」節 |
 | NSM 改善実験 | `data/business/experiments.json` の `status` と `next_check_date`。対象月までに期日が来た running / proposed |
-| 事業計画 | `.claude/state/business-plan/latest.json` の `nextActions` と開始ゲート |
-| 月次の自動処理 | `.claude/state/metrics/monthly-jobs` の各ジョブ (`ksj-catalog`・`estat-catalog`・`ctr-improvement`・`cloudflare-snapshot`) の対象月の記録。`status` (ok / skipped / failed)・`runUrl`・`summary` (CTR は改善候補の本文) を読む。Cloudflare の費用の中身は `data/cloudflare/monthly-snapshots` (請求サイクル開始月の名前) |
+| 事業計画 | `data/business-plan/latest.json` の `nextActions` と開始ゲート |
+| 月次の自動処理 | `data/ci/monthly-jobs` の各ジョブ (`ksj-catalog`・`estat-catalog`・`ctr-improvement`・`cloudflare-snapshot`) の対象月の記録。`status` (ok / skipped / failed)・`runUrl`・`summary` (CTR は改善候補の本文) を読む。Cloudflare の費用の中身は `data/cloudflare/monthly-snapshots` (請求サイクル開始月の名前) |
 | 月次の定点観測 | `/competitor-scan` の `.claude/skills/sns/competitor-scan/reference/reports` (対象月の日付のレポート)、X の勝ちパターンの月次レポート |
 | 開いているアラート | `gh issue list --label auto-generated --state open` (横断監視 #763 を含む) |
 | GSC の月次接続 | `node .claude/scripts/gsc/audit-operations-cycle.mjs --stage monthly` |

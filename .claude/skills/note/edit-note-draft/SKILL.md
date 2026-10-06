@@ -150,7 +150,7 @@ note 記事（B/C/D シリーズ）の原稿をチェックし、修正理由付
 
 ### 1. メタデータ（完全DBレス: DB 登録はしない）
 
-> 記事の状態は **draft.md の frontmatter** と **`.claude/state/note-published-urls.json`** で表す。
+> 記事の状態は **draft.md の frontmatter** と **`data/note/note-published-urls.json`** で表す。
 
 編集完了したら draft.md の frontmatter を整える（`title` / `is_paid` / `price_jpy` / `published: false`）。
 ハッシュタグは同ディレクトリ `hashtags.txt`。DB への登録・INSERT は一切不要。
@@ -174,7 +174,7 @@ note 記事（B/C/D シリーズ）の原稿をチェックし、修正理由付
 1. `node .claude/scripts/note/prepare-article.cjs <slug>` → `build-body.cjs <slug>` で Phase 0 を生成
 2. `editor-helpers.sh` を `source` し、新規は `new_post_*` 系、既存更新は `process_article <slug> <noteId> <vertical>` → screenshot 目視 → `do_update`
 3. `images/` の画像は `ins_img` が再挿入（`.svg` は同名 `.png` に置換）。表は `images/table-N.png` で画像化（markdown 表は note でリテラルパイプ表示になる）
-4. 公開後は **`.claude/state/note-published-urls.json`** に slug→URL / is_paid / published_at（update なら updated_at）を記録（**D1 更新は無い**）
+4. 公開後は **`data/note/note-published-urls.json`** に slug→URL / is_paid / published_at（update なら updated_at）を記録（**D1 更新は無い**）
 5. note 戦略の進捗があれば `docs/30_note記事企画/` 配下を更新
 
 ## 参照

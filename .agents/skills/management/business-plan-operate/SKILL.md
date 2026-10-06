@@ -19,7 +19,7 @@ primary_agent: strategy-advisor
 
 1. `npm run business-plan:check` で章・企画数・owner・skill・文書・metric参照を検証する。
 2. `npm run business-plan:build-state` で管理画面用
-   `.claude/state/business-plan/latest.json` を再生成する。
+   `data/business-plan/latest.json` を再生成する。
 3. `npm run business-plan:build-state -- --snapshot` は週次レビュー時だけ実行し、
    同日のsnapshotを上書きする。
 4. 管理画面 `npm run admin` → `http://127.0.0.1:4747/strategy` で、
@@ -57,7 +57,7 @@ primary_agent: strategy-advisor
 ## 書き込み境界
 
 - authored SSOT: `packages/data-configs/src/business-plan/**`
-- derived state: `.claude/state/business-plan/**`（generator以外で手編集しない）
+- derived state: `data/business-plan/**`（generator以外で手編集しない）
 - 恒久方針: 既存 `docs/00_プロジェクト管理/**`・`docs/01_技術設計/**`
 - 一時レビュー文書を新設しない。未完了作業だけを既存TODOへ統合する。
 - 管理画面、公開、外部投稿、販売、デプロイは勝手に実行しない。

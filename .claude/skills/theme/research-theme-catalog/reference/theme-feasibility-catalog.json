@@ -3,7 +3,7 @@
   "owner": "theme-designer",
   "purpose": "128候補の採否・範囲と初回実装仕様。配信定義はThemeCatalog TS、観測値はR2へ別工程で反映する。",
   "backlogRef": ".claude/todo/backlog.md",
-  "verificationRef": ".claude/state/estat/theme-expansion-verification.json",
+  "verificationRef": "data/estat/theme-expansion-verification.json",
   "reviewPolicy": "採択前に公式資料の更新・全県値・重複を再確認する。採否完了後は採択先への参照を残し、不要になった候補記録を見直す。",
   "limitations": [
     "採否は問い・範囲の判断であり、全採択指標の投入完了や公開可能性を保証しない。",
@@ -71,7 +71,7 @@
           "packages/data-configs/src/theme-catalog/index.ts",
           "https://www.e-stat.go.jp/stat-search/database?statdisp_id=0000010103",
           "https://www.e-stat.go.jp/stat-search/database?statdisp_id=0004016774",
-          ".claude/state/estat/theme-expansion-verification.json"
+          "data/estat/theme-expansion-verification.json"
         ],
         "targetThemeKey": "construction-industry",
         "implementationStatus": "catalog-wired-data-validation-pending",
@@ -83,7 +83,7 @@
             "C3305",
             "C3306"
           ],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -152,7 +152,7 @@
           "https://www.e-stat.go.jp/stat-search/database?statdisp_id=0000010106",
           "https://www.e-stat.go.jp/stat-search/file-download?fileKind=2&statInfId=000032088970",
           "https://www.e-stat.go.jp/stat-search/database?statdisp_id=0003445758",
-          ".claude/state/estat/theme-expansion-verification.json"
+          "data/estat/theme-expansion-verification.json"
         ],
         "targetCandidateId": 1,
         "implementationStatus": "merged-into-target-data-validation-pending",
@@ -161,7 +161,7 @@
             "F2337",
             "F2622"
           ],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -228,7 +228,7 @@
         "resumeWhen": "同一職種・年度の単価と経費範囲の原表、51職種を検索できる専用表示契約を揃え、occupation-salaryとは異なる用途で採択する。",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -285,7 +285,7 @@
           "packages/data-configs/src/theme-catalog/index.ts",
           "https://www.e-stat.go.jp/stat-search/database?statdisp_id=0000010103",
           "https://www.mlit.go.jp/report/press/joho04_hh_001315.html",
-          ".claude/state/estat/theme-expansion-verification.json"
+          "data/estat/theme-expansion-verification.json"
         ],
         "targetCandidateId": 1,
         "implementationStatus": "merged-into-target-data-validation-pending",
@@ -295,7 +295,7 @@
             "C3307",
             "C3308"
           ],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -357,7 +357,7 @@
           "packages/data-configs/src/theme-catalog/living-housing.ts",
           "https://www.e-stat.go.jp/stat-search/database?statdisp_id=0000010108",
           "https://www.e-stat.go.jp/stat-search?layout=normal&page=1&survey=1&toukei=00600120",
-          ".claude/state/estat/theme-expansion-verification.json"
+          "data/estat/theme-expansion-verification.json"
         ],
         "targetThemeKey": "living-housing",
         "implementationStatus": "catalog-section-wired-data-validation-pending",
@@ -367,7 +367,7 @@
             "H2600",
             "H4320"
           ],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -456,7 +456,7 @@
           "https://www.e-stat.go.jp/stat-search/database?statdisp_id=0004025522",
           "https://www.e-stat.go.jp/stat-search/database?statdisp_id=0000010108",
           "https://www.mlit.go.jp/statistics/details/t-other-2_tk_000220.html",
-          ".claude/state/estat/theme-expansion-verification.json"
+          "data/estat/theme-expansion-verification.json"
         ],
         "targetThemeKey": "living-housing",
         "implementationStatus": "catalog-section-wired-data-validation-pending",
@@ -464,7 +464,7 @@
           "explicitCodes": [
             "H227006"
           ],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -549,7 +549,7 @@
         "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -618,7 +618,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -712,7 +712,7 @@
           "https://www.maff.go.jp/j/tokei/kekka_gaiyou/seisan_shotoku/r6_betsu/index.html",
           "https://www.e-stat.go.jp/stat-search?layout=dataset&page=1&toukei=00500206",
           "https://www.maff.go.jp/j/tokei/census/afc/2025/",
-          ".claude/state/estat/theme-expansion-verification.json"
+          "data/estat/theme-expansion-verification.json"
         ],
         "targetThemeKey": "agriculture-production",
         "implementationStatus": "catalog-wired-data-validation-pending",
@@ -720,7 +720,7 @@
           "explicitCodes": [
             "C3101"
           ],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -793,7 +793,7 @@
         "implementationStatus": "merged-into-target-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -871,7 +871,7 @@
         "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -945,7 +945,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -1045,7 +1045,7 @@
         "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -1068,7 +1068,7 @@
           "evidence": ".local/verification/themes/retail-employment-source/ingest-proof.json",
           "browserEvidence": ".local/verification/themes/2026-09-11-browser-253-surveys/summary.json",
           "publishedAt": "2026-09-11",
-          "publicationEvidence": ".claude/state/metrics/themes/2026-09-10-all-expansion.json#validation.next253Surveys.production"
+          "publicationEvidence": "data/themes/evidence/2026-09-10-all-expansion.json#validation.next253Surveys.production"
         }
       }
     },
@@ -1130,7 +1130,7 @@
         "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -1193,7 +1193,7 @@
           "packages/data-configs/src/theme-catalog/index.ts",
           "https://www.e-stat.go.jp/stat-search/database?statdisp_id=0000010103",
           "https://www.e-stat.go.jp/stat-search/database?statdisp_id=0004006333",
-          ".claude/state/estat/theme-expansion-verification.json"
+          "data/estat/theme-expansion-verification.json"
         ],
         "targetThemeKey": "information-industry",
         "implementationStatus": "catalog-wired-data-validation-pending",
@@ -1205,7 +1205,7 @@
             "C610109",
             "C620109"
           ],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -1280,7 +1280,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -1364,7 +1364,7 @@
         "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -1434,7 +1434,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -1519,7 +1519,7 @@
         "implementationStatus": "merged-into-target-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -1584,7 +1584,7 @@
         "resumeWhen": "民間原典の利用条件と同年・同定義の47県系列、または支援相談実績の県別網羅性を確定する。",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -1645,7 +1645,7 @@
         "resumeWhen": "倒産原典の再利用条件・継続取得方法を確定する。DIだけに縮小する場合はbusiness-demographyへの章統合を再判定する。",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -1702,7 +1702,7 @@
         "implementationStatus": "source-verified-profile-build-browser-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -1745,7 +1745,7 @@
           "evidence": ".local/verification/themes/factory-investment-source.json",
           "browserEvidence": ".local/verification/themes/2026-09-11-browser-252/checkpoint-252.json",
           "publishedAt": "2026-09-11",
-          "publicationEvidence": ".claude/state/metrics/themes/2026-09-10-all-expansion.json#validation.next253Surveys.production"
+          "publicationEvidence": "data/themes/evidence/2026-09-10-all-expansion.json#validation.next253Surveys.production"
         }
       }
     },
@@ -1802,7 +1802,7 @@
         "resumeWhen": "モデルの版・基礎データの再配布条件と域内外取引の保存則を確認し、県別推計の再現手順を用意する。",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -1863,7 +1863,7 @@
         "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -1931,7 +1931,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -2020,7 +2020,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -2115,7 +2115,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -2191,7 +2191,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -2279,7 +2279,7 @@
         "resumeWhen": "自治体原表を同年・同定義で揃え、対応県集合と対象外県を明示できることを確認する。",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -2347,7 +2347,7 @@
         "implementationStatus": "merged-into-target-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -2371,7 +2371,7 @@
           "evidence": ".local/verification/themes/cultural-heritage-source/reproduced/verification.json",
           "browserEvidence": ".local/verification/themes/2026-09-11-browser-253-surveys/summary.json",
           "publishedAt": "2026-09-11",
-          "publicationEvidence": ".claude/state/metrics/themes/2026-09-10-all-expansion.json#validation.next253Surveys.production"
+          "publicationEvidence": "data/themes/evidence/2026-09-10-all-expansion.json#validation.next253Surveys.production"
         }
       }
     },
@@ -2426,7 +2426,7 @@
         "implementationStatus": "merged-into-target-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -2499,7 +2499,7 @@
         "resumeWhen": "採用観光地ごとの時間帯別滞留と同時間帯の受入容量を、利用許諾付きで確保する。",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -2562,7 +2562,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -2665,7 +2665,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -2752,7 +2752,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -2846,7 +2846,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -2938,7 +2938,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -3041,7 +3041,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -3146,7 +3146,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -3236,7 +3236,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -3316,7 +3316,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -3410,7 +3410,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -3494,7 +3494,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -3581,7 +3581,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -3669,7 +3669,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -3754,7 +3754,7 @@
         "implementationStatus": "merged-into-target-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -3822,7 +3822,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -3915,7 +3915,7 @@
         "implementationStatus": "source-verified-profile-build-browser-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -3962,7 +3962,7 @@
           "original47PrefectureCoreFulfilled": false,
           "evidence": ".local/verification/themes/depopulated-settlements-source/adoption-summary.json",
           "publishedAt": "2026-09-11",
-          "publicationEvidence": ".claude/state/metrics/themes/2026-09-10-all-expansion.json#validation.next253Surveys.production"
+          "publicationEvidence": "data/themes/evidence/2026-09-10-all-expansion.json#validation.next253Surveys.production"
         }
       }
     },
@@ -4024,7 +4024,7 @@
         "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -4098,7 +4098,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -4187,7 +4187,7 @@
         "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -4268,7 +4268,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -4352,7 +4352,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -4442,7 +4442,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -4537,7 +4537,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -4626,7 +4626,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -4716,7 +4716,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -4815,7 +4815,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -4926,7 +4926,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -5038,7 +5038,7 @@
         "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -5125,7 +5125,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -5229,7 +5229,7 @@
         "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -5303,7 +5303,7 @@
         "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -5378,7 +5378,7 @@
         "resumeWhen": "制度別対象者・地域帰属・年の対応表を完成し、総額や純負担を作らない比較図に縮小する。",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -5447,7 +5447,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -5557,7 +5557,7 @@
         "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -5631,7 +5631,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -5743,7 +5743,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -5846,7 +5846,7 @@
         "implementationStatus": "merged-into-target-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -5918,7 +5918,7 @@
         "implementationStatus": "merged-into-target-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -5985,7 +5985,7 @@
         "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -6058,7 +6058,7 @@
         "implementationStatus": "merged-into-target-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -6134,7 +6134,7 @@
           "https://www.e-stat.go.jp/dbview?sid=0000010112",
           "https://www.e-stat.go.jp/dbview?sid=0000010103",
           "https://www.stat.go.jp/data/kouri/kouzou/gaiyou.html",
-          ".claude/state/estat/theme-expansion-verification.json"
+          "data/estat/theme-expansion-verification.json"
         ],
         "targetThemeKey": "real-income",
         "implementationStatus": "catalog-section-wired-data-validation-pending",
@@ -6146,7 +6146,7 @@
             "L7211",
             "L7212"
           ],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -6235,7 +6235,7 @@
           "https://www.e-stat.go.jp/dbview?sid=0000010112",
           "https://www.e-stat.go.jp/dbview?sid=0000010103",
           "https://www.jhf.go.jp/about/research/loan/flat35/",
-          ".claude/state/estat/theme-expansion-verification.json"
+          "data/estat/theme-expansion-verification.json"
         ],
         "targetThemeKey": "living-housing",
         "implementationStatus": "catalog-section-wired-data-validation-pending",
@@ -6245,7 +6245,7 @@
             "L720102",
             "L740102"
           ],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -6341,7 +6341,7 @@
           "https://www.e-stat.go.jp/dbview?sid=0000010103",
           "https://www.e-stat.go.jp/dbview?sid=0000010102",
           "https://www.data.jma.go.jp/risk/obsdl/index.php",
-          ".claude/state/estat/theme-expansion-verification.json"
+          "data/estat/theme-expansion-verification.json"
         ],
         "targetThemeKey": "consumer-prices",
         "implementationStatus": "catalog-section-wired-data-validation-pending",
@@ -6352,7 +6352,7 @@
             "C5705",
             "L720103"
           ],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": [
             "B4107"
@@ -6448,7 +6448,7 @@
           "https://www.e-stat.go.jp/dbview?sid=0000010112",
           "https://www.e-stat.go.jp/dbview?sid=0000010103",
           "https://www.stat.go.jp/data/kouri/kouzou/gaiyou.html",
-          ".claude/state/estat/theme-expansion-verification.json"
+          "data/estat/theme-expansion-verification.json"
         ],
         "targetThemeKey": "consumer-prices",
         "implementationStatus": "catalog-section-wired-data-validation-pending",
@@ -6458,7 +6458,7 @@
             "L7201",
             "L720101"
           ],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -6541,7 +6541,7 @@
           "packages/data-configs/src/theme-catalog/real-income.ts",
           "https://www.e-stat.go.jp/dbview?sid=0000010112",
           "https://www.stat.go.jp/data/zenkokukakei/2019/pdf/kekkahyou.pdf",
-          ".claude/state/estat/theme-expansion-verification.json"
+          "data/estat/theme-expansion-verification.json"
         ],
         "targetThemeKey": "real-income",
         "implementationStatus": "catalog-section-wired-data-validation-pending",
@@ -6555,7 +6555,7 @@
             "L720108",
             "L720109"
           ],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -6644,7 +6644,7 @@
           "https://www.e-stat.go.jp/dbview?sid=0000010112",
           "https://www.e-stat.go.jp/dbview?sid=0000010112",
           "https://www.stat.go.jp/data/zenkokukakei/2019/pdf/kekkahyou.pdf",
-          ".claude/state/estat/theme-expansion-verification.json"
+          "data/estat/theme-expansion-verification.json"
         ],
         "targetThemeKey": "household-assets-debt",
         "implementationStatus": "catalog-wired-data-validation-pending",
@@ -6657,7 +6657,7 @@
             "L740101",
             "L740102"
           ],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -6726,7 +6726,7 @@
           "https://www.e-stat.go.jp/dbview?sid=0000010108",
           "https://www.e-stat.go.jp/dbview?sid=0000010112",
           "https://www.mlit.go.jp/statistics/details/sample03_2_00026.html",
-          ".claude/state/estat/theme-expansion-verification.json"
+          "data/estat/theme-expansion-verification.json"
         ],
         "targetCandidateId": 83,
         "implementationStatus": "merged-into-target-data-validation-pending",
@@ -6736,7 +6736,7 @@
             "H730105",
             "L720107"
           ],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -6812,7 +6812,7 @@
           "https://www.e-stat.go.jp/dbview?sid=0000010112",
           "https://www.e-stat.go.jp/dbview?sid=0000010110",
           "https://www.stat.go.jp/data/zenkokukakei/2019/pdf/kekkahyou.pdf",
-          ".claude/state/estat/theme-expansion-verification.json"
+          "data/estat/theme-expansion-verification.json"
         ],
         "targetThemeKey": "real-income",
         "implementationStatus": "catalog-section-wired-data-validation-pending",
@@ -6823,7 +6823,7 @@
             "L7502",
             "L7610"
           ],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -6910,7 +6910,7 @@
           "https://www.e-stat.go.jp/dbview?sid=0000010103",
           "https://www.mlit.go.jp/statistics/details/sample03_2_00035.html",
           "https://www.mlit.go.jp/k-toukei/jidousya202003.html",
-          ".claude/state/estat/theme-expansion-verification.json"
+          "data/estat/theme-expansion-verification.json"
         ],
         "targetThemeKey": "freight-logistics",
         "implementationStatus": "catalog-wired-data-validation-pending",
@@ -6919,7 +6919,7 @@
             "C3702",
             "C370701"
           ],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": [
             "C370701"
@@ -7008,7 +7008,7 @@
           "https://www.e-stat.go.jp/dbview?sid=0000010108",
           "https://www.mlit.go.jp/k-toukei/jidousya202003.html",
           "https://www.e-stat.go.jp/stat-search/database?cycle=0&layout=datalist&page=1&statdisp_id=0003454515&tclass1=000001136469&toukei=00200521&tstat=000001136464",
-          ".claude/state/estat/theme-expansion-verification.json"
+          "data/estat/theme-expansion-verification.json"
         ],
         "targetCandidateId": 83,
         "implementationStatus": "merged-into-target-data-validation-pending",
@@ -7018,7 +7018,7 @@
             "C3714",
             "H730103"
           ],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -7086,7 +7086,7 @@
         "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -7149,7 +7149,7 @@
           "packages/data-configs/src/theme-catalog/labor-mobility.ts",
           "https://www.e-stat.go.jp/dbview?sid=0000010101",
           "https://www.stat.go.jp/data/kokusei/2020/kekka.html",
-          ".claude/state/estat/theme-expansion-verification.json"
+          "data/estat/theme-expansion-verification.json"
         ],
         "targetThemeKey": "labor-mobility",
         "implementationStatus": "catalog-section-wired-data-validation-pending",
@@ -7161,7 +7161,7 @@
             "A6107",
             "A6108"
           ],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -7263,7 +7263,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -7353,7 +7353,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -7433,7 +7433,7 @@
         "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -7494,7 +7494,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -7570,7 +7570,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -7609,7 +7609,7 @@
           "evidence": ".local/verification/themes/bridge-inspection-age-source/reproduced/bridge-source-proof.json",
           "browserEvidence": ".local/verification/themes/2026-09-11-browser-253-surveys/summary.json",
           "publishedAt": "2026-09-11",
-          "publicationEvidence": ".claude/state/metrics/themes/2026-09-10-all-expansion.json#validation.next253Surveys.production"
+          "publicationEvidence": "data/themes/evidence/2026-09-10-all-expansion.json#validation.next253Surveys.production"
         }
       }
     },
@@ -7671,7 +7671,7 @@
         "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -7733,7 +7733,7 @@
           "packages/data-configs/src/theme-catalog/index.ts",
           "https://www.e-stat.go.jp/dbview?sid=0000010108",
           "https://www.mlit.go.jp/mizukokudo/sewerage/crd_sewerage_tk_000104.html",
-          ".claude/state/estat/theme-expansion-verification.json"
+          "data/estat/theme-expansion-verification.json"
         ],
         "targetCandidateId": 90,
         "implementationStatus": "merged-into-target-data-validation-pending",
@@ -7744,7 +7744,7 @@
             "H5410",
             "H5411"
           ],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -7806,7 +7806,7 @@
           "packages/data-configs/src/theme-catalog/local-finance.ts",
           "https://www.e-stat.go.jp/dbview?sid=0000010104",
           "https://www.e-stat.go.jp/index.php/stat-search/files?kikan=00200&layout=dataset&page=1&stat_infid=000040171215&toukei=00200252",
-          ".claude/state/estat/theme-expansion-verification.json"
+          "data/estat/theme-expansion-verification.json"
         ],
         "targetThemeKey": "local-finance",
         "implementationStatus": "catalog-section-wired-data-validation-pending",
@@ -7817,7 +7817,7 @@
             "D320403",
             "D320406"
           ],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -7901,7 +7901,7 @@
           "https://www.e-stat.go.jp/dbview?sid=0000010102",
           "https://www.stat.go.jp/data/kokusei/2020/kekka.html",
           "https://www.mlit.go.jp/toshi/tosiko/toshi_tosiko_tk_000217.html",
-          ".claude/state/estat/theme-expansion-verification.json"
+          "data/estat/theme-expansion-verification.json"
         ],
         "targetThemeKey": "living-housing",
         "implementationStatus": "catalog-section-wired-data-validation-pending",
@@ -7909,7 +7909,7 @@
           "explicitCodes": [
             "B1103"
           ],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -7990,7 +7990,7 @@
           "packages/data-configs/src/theme-catalog/living-housing.ts",
           "https://www.e-stat.go.jp/dbview?sid=0000010108",
           "https://www.mlit.go.jp/toshi/park/toshi_parkgreen_tk_000156.html",
-          ".claude/state/estat/theme-expansion-verification.json"
+          "data/estat/theme-expansion-verification.json"
         ],
         "targetThemeKey": "living-housing",
         "implementationStatus": "catalog-section-wired-data-validation-pending",
@@ -7999,7 +7999,7 @@
             "H9101",
             "H9201"
           ],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -8080,7 +8080,7 @@
           "packages/data-configs/src/theme-catalog/index.ts",
           "https://www.e-stat.go.jp/dbview?sid=0000010108",
           "https://www.e-stat.go.jp/stat-search/files?collect_area=000&cycle=0&layout=dataset&page=1&tclass1=000001228813&tclass2val=0&toukei=00200356&tstat=000001228811",
-          ".claude/state/estat/theme-expansion-verification.json"
+          "data/estat/theme-expansion-verification.json"
         ],
         "implementationStatus": "catalog-wired-data-validation-pending",
         "targetThemeKey": "communication-access",
@@ -8089,7 +8089,7 @@
             "H7703",
             "H7704"
           ],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -8158,7 +8158,7 @@
           "https://www.e-stat.go.jp/dbview?sid=0000010102",
           "https://www.mlit.go.jp/kokudoseisaku/chisei/crd_chisei_tk_000010.html",
           "https://www.data.jma.go.jp/risk/obsdl/index.php",
-          ".claude/state/estat/theme-expansion-verification.json"
+          "data/estat/theme-expansion-verification.json"
         ],
         "targetThemeKey": "climate",
         "implementationStatus": "catalog-section-wired-data-validation-pending",
@@ -8167,7 +8167,7 @@
             "B4107",
             "B4110"
           ],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": [
             "B4107"
@@ -8217,7 +8217,7 @@
           "evidence": ".local/verification/themes/snow-designation-source/ingester-proof.json",
           "browserEvidence": ".local/verification/themes/2026-09-11-browser-253-surveys/summary.json",
           "publishedAt": "2026-09-11",
-          "publicationEvidence": ".claude/state/metrics/themes/2026-09-10-all-expansion.json#validation.next253Surveys.production"
+          "publicationEvidence": "data/themes/evidence/2026-09-10-all-expansion.json#validation.next253Surveys.production"
         }
       }
     },
@@ -8272,7 +8272,7 @@
         "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -8333,7 +8333,7 @@
         "implementationStatus": "merged-into-target-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -8399,7 +8399,7 @@
         "implementationStatus": "merged-into-target-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -8461,7 +8461,7 @@
           "packages/data-configs/src/theme-catalog/index.ts",
           "https://www.e-stat.go.jp/dbview?sid=0000010108",
           "https://www.env.go.jp/recycle/waste_tech/ippan/",
-          ".claude/state/estat/theme-expansion-verification.json"
+          "data/estat/theme-expansion-verification.json"
         ],
         "targetThemeKey": "waste-recycling",
         "implementationStatus": "catalog-wired-data-validation-pending",
@@ -8474,7 +8474,7 @@
             "H5614",
             "H5615"
           ],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -8535,7 +8535,7 @@
         "resumeWhen": "同季節・同対象・同推計法の自治体原表を揃え、47県比較か事例限定かの表示契約を定める。",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -8596,7 +8596,7 @@
         "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -8619,7 +8619,7 @@
           "evidence": ".local/verification/themes/water-quality-source.json",
           "browserEvidence": ".local/verification/themes/2026-09-11-browser-253-surveys/summary.json",
           "publishedAt": "2026-09-11",
-          "publicationEvidence": ".claude/state/metrics/themes/2026-09-10-all-expansion.json#validation.next253Surveys.production"
+          "publicationEvidence": "data/themes/evidence/2026-09-10-all-expansion.json#validation.next253Surveys.production"
         }
       }
     },
@@ -8669,7 +8669,7 @@
           "packages/data-configs/src/theme-catalog/index.ts",
           "https://www.e-stat.go.jp/dbview?sid=0000010102",
           "https://www.rinya.maff.go.jp/j/keikaku/genkyou/r4/1.html",
-          ".claude/state/estat/theme-expansion-verification.json"
+          "data/estat/theme-expansion-verification.json"
         ],
         "targetThemeKey": "natural-environment",
         "implementationStatus": "catalog-wired-data-validation-pending",
@@ -8679,7 +8679,7 @@
             "B1108",
             "B2101"
           ],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -8746,7 +8746,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -8837,7 +8837,7 @@
         "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -8903,7 +8903,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -8977,7 +8977,7 @@
         "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -9001,7 +9001,7 @@
           "evidence": ".local/verification/themes/landslide-exposure-source/reproduced/ingester-proof.json",
           "browserEvidence": ".local/verification/themes/2026-09-11-browser-253-surveys/summary.json",
           "publishedAt": "2026-09-11",
-          "publicationEvidence": ".claude/state/metrics/themes/2026-09-10-all-expansion.json#validation.next253Surveys.production"
+          "publicationEvidence": "data/themes/evidence/2026-09-10-all-expansion.json#validation.next253Surveys.production"
         }
       }
     },
@@ -9054,7 +9054,7 @@
         "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -9090,7 +9090,7 @@
           },
           "browserEvidence": ".local/verification/themes/2026-09-11-browser-253-surveys/summary.json",
           "publishedAt": "2026-09-11",
-          "publicationEvidence": ".claude/state/metrics/themes/2026-09-10-all-expansion.json#validation.next253Surveys.production"
+          "publicationEvidence": "data/themes/evidence/2026-09-10-all-expansion.json#validation.next253Surveys.production"
         }
       }
     },
@@ -9152,7 +9152,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -9235,7 +9235,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -9316,7 +9316,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -9354,7 +9354,7 @@
           "evidence": ".local/verification/themes/shelter-applicability-source/reproduced/ingester-proof.json",
           "browserEvidence": ".local/verification/themes/2026-09-11-browser-253-surveys/summary.json",
           "publishedAt": "2026-09-11",
-          "publicationEvidence": ".claude/state/metrics/themes/2026-09-10-all-expansion.json#validation.next253Surveys.production"
+          "publicationEvidence": "data/themes/evidence/2026-09-10-all-expansion.json#validation.next253Surveys.production"
         }
       }
     },
@@ -9410,7 +9410,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -9493,7 +9493,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -9575,7 +9575,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -9657,7 +9657,7 @@
         "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -9729,7 +9729,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -9811,7 +9811,7 @@
         "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -9882,7 +9882,7 @@
         "implementationStatus": "merged-into-target-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -9955,7 +9955,7 @@
         "implementationStatus": "merged-into-target-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -10028,7 +10028,7 @@
         "implementationStatus": "merged-into-target-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -10095,7 +10095,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -10185,7 +10185,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -10268,7 +10268,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -10342,7 +10342,7 @@
         "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -10408,7 +10408,7 @@
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -10497,7 +10497,7 @@
         "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -10564,7 +10564,7 @@
         "implementationStatus": "catalog-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -10636,7 +10636,7 @@
         "implementationStatus": "merged-into-target-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
-          "reportRef": ".claude/state/estat/theme-expansion-verification.json",
+          "reportRef": "data/estat/theme-expansion-verification.json",
           "scope": "コード明記分のみ。コードのない指標・原典ファイルは未実測。",
           "latestIncompleteCodes": []
         },
@@ -10666,7 +10666,7 @@
     "uncodedIndicators": "候補にコードが明記されていない指標は82コードの検証対象に含まれず、後続取り込み時に実在と値を確認する。",
     "geoPolicy": "地理演算を伴う候補は既存Geo canonical、入力版、県別途中artifact、保存則へ接続する。"
   },
-  "priorVerificationRef": ".claude/state/estat/theme-feasibility-verification.json",
+  "priorVerificationRef": "data/estat/theme-feasibility-verification.json",
   "firstBatch": [
     {
       "candidateId": 1,
@@ -10688,7 +10688,7 @@
           "visualization": "47県の比較表と棒グラフ",
           "definitionSource": "https://www.e-stat.go.jp/koumoku/koumoku_teigi/C",
           "timeSeriesPolicy": "1975〜2023年の数値は取得済み。推計手法の変更と遡及改定を原表で確認するまで連続線は作らない。登録yearsの欠落は別途補完する。",
-          "evidenceRef": ".claude/state/estat/theme-expansion-verification.json",
+          "evidenceRef": "data/estat/theme-expansion-verification.json",
           "evidenceCode": "C3304",
           "owner": "data-ingester",
           "numericPrefectures": 47,
@@ -10706,7 +10706,7 @@
           "visualization": "47県の比較表・棒グラフ",
           "definitionSource": "https://www.e-stat.go.jp/koumoku/koumoku_teigi/C",
           "timeSeriesPolicy": "2000〜2023年の数値取得済み。公開登録は2023年のみ。時系列を出す場合は許可業者の対象と推計変更を確認して取り込む。",
-          "evidenceRef": ".claude/state/estat/theme-expansion-verification.json",
+          "evidenceRef": "data/estat/theme-expansion-verification.json",
           "evidenceCode": "C3306",
           "owner": "data-ingester",
           "numericPrefectures": 47,
@@ -10724,7 +10724,7 @@
           "visualization": "元請と分けた比較表",
           "definitionSource": "https://www.e-stat.go.jp/koumoku/koumoku_teigi/C",
           "timeSeriesPolicy": "1975〜2023年の数値取得済み。元請と同じく方法変更の確認前は連続線にしない。",
-          "evidenceRef": ".claude/state/estat/theme-expansion-verification.json",
+          "evidenceRef": "data/estat/theme-expansion-verification.json",
           "evidenceCode": "C3305",
           "owner": "data-ingester",
           "numericPrefectures": 47,
@@ -10742,7 +10742,7 @@
           "visualization": "2021年と明記した棒グラフ",
           "definitionSource": "https://www.e-stat.go.jp/koumoku/koumoku_teigi/C",
           "timeSeriesPolicy": "2011・2014・2016・2021年のみ。2021年の名簿拡張があるため点・表表示とし、年次補間や単純成長率は作らない。",
-          "evidenceRef": ".claude/state/estat/theme-expansion-verification.json",
+          "evidenceRef": "data/estat/theme-expansion-verification.json",
           "evidenceCode": "C220836",
           "owner": "data-ingester",
           "numericPrefectures": 47,
@@ -10819,7 +10819,7 @@
           "visualization": "47県の比較表と棒グラフ",
           "definitionSource": "https://www.e-stat.go.jp/koumoku/koumoku_teigi/H",
           "timeSeriesPolicy": "1999〜2023年の数値取得済み。2010年以前の災害廃棄物取扱いの違いを注記し、初回は2022〜2023年度の表から始める。",
-          "evidenceRef": ".claude/state/estat/theme-expansion-verification.json",
+          "evidenceRef": "data/estat/theme-expansion-verification.json",
           "evidenceCode": "H5609",
           "owner": "data-ingester",
           "numericPrefectures": 47,
@@ -10837,7 +10837,7 @@
           "visualization": "47県の率の地図と表",
           "definitionSource": "https://www.e-stat.go.jp/koumoku/koumoku_teigi/H",
           "timeSeriesPolicy": "2023年の既存#H055031との47県値・単位一致をregistryComparisonsで検証。別年は同値と推定せず再照合する。",
-          "evidenceRef": ".claude/state/estat/theme-expansion-verification.json",
+          "evidenceRef": "data/estat/theme-expansion-verification.json",
           "evidenceCode": "H5614",
           "owner": "data-ingester",
           "numericPrefectures": 47,
@@ -10855,7 +10855,7 @@
           "visualization": "排出量と分けた比較表・棒グラフ",
           "definitionSource": "https://www.e-stat.go.jp/koumoku/koumoku_teigi/H",
           "timeSeriesPolicy": "1999〜2023年の数値取得済み。初回は既存登録2022〜2023年度に限定し、定義変更をまたぐ補間をしない。",
-          "evidenceRef": ".claude/state/estat/theme-expansion-verification.json",
+          "evidenceRef": "data/estat/theme-expansion-verification.json",
           "evidenceCode": "H5615",
           "owner": "data-ingester",
           "numericPrefectures": 47,
@@ -10959,7 +10959,7 @@
           "visualization": "47県の比較表・棒グラフ",
           "definitionSource": "https://www.e-stat.go.jp/koumoku/koumoku_teigi/C",
           "timeSeriesPolicy": "2011・2014・2016・2021年のみ。2021年は対象名簿拡張あり。初回は2021年比較、過年度は注記付き点・表とし年次補間をしない。",
-          "evidenceRef": ".claude/state/estat/theme-expansion-verification.json",
+          "evidenceRef": "data/estat/theme-expansion-verification.json",
           "evidenceCode": "C210839",
           "owner": "data-ingester",
           "numericPrefectures": 47,
@@ -10978,7 +10978,7 @@
           "visualization": "47県の比較表・棒グラフ",
           "definitionSource": "https://www.e-stat.go.jp/koumoku/koumoku_teigi/C",
           "timeSeriesPolicy": "事業所数と同じ調査年・定義で揃える。企業数・居住人口を分母とする生産性は計算しない。",
-          "evidenceRef": ".claude/state/estat/theme-expansion-verification.json",
+          "evidenceRef": "data/estat/theme-expansion-verification.json",
           "evidenceCode": "C220839",
           "owner": "data-ingester",
           "numericPrefectures": 47,
@@ -11336,7 +11336,7 @@
     "dataValidationGate": "pending-per-metric-and-source",
     "latestRelease": {
       "status": "55-themes-published-and-verified",
-      "record": ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
+      "record": "data/themes/evidence/2026-09-10-all-expansion.json",
       "buildId": "DPaW5i_gnBuIKcU6veJqI",
       "scopeAssessment": "114 minimum core met; 5 limited; 1 core unfulfilled; 8 hold",
       "measurement": "THEME-EXPANSION-EFFECT-01"

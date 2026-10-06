@@ -58,7 +58,7 @@ planSummary: "2指標の関係を検証する"
       fs.readFileSync(
         path.join(
           root,
-          '.claude/state/source-inventory/japan-zue/2025-26/inventory.json'
+          'data/source-inventory/japan-zue/2025-26/inventory.json'
         ),
         'utf8'
       )

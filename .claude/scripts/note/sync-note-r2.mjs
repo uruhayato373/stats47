@@ -15,7 +15,7 @@ import { resolve, join, relative } from 'path'
 import { execSync } from 'child_process'
 
 const ROOT = resolve(import.meta.dirname, '../../..')
-const URLS_FILE = join(ROOT, '.claude/state/note-published-urls.json')
+const URLS_FILE = join(ROOT, 'data/note/note-published-urls.json')
 const DOCS31 = join(ROOT, 'docs/31_note記事原稿')
 const LOCAL_R2 = join(ROOT, '.local/r2')
 

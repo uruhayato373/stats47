@@ -13,7 +13,7 @@ import { readThemeQualityState, writeThemeQualityState } from "./theme-quality-s
 import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
-const DEFAULT_OUTPUT = path.join(ROOT, ".claude/state/themes/quality.json");
+const DEFAULT_OUTPUT = path.join(ROOT, "data/themes/quality.json");
 const argv = process.argv.slice(2);
 const { values: cli } = parseArgs({ args: argv, options: {
   json: { type: "string" }, previous: { type: "string" },

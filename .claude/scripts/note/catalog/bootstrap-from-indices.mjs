@@ -3,8 +3,8 @@
  * note-catalog を既存の真実源からブートストラップする一回限りの移行スクリプト。
  *
  * 入力 (既存の真実源・捏造しない):
- *   .claude/state/note-published-urls.json  (公開済み 203 件: vertical/title/url/is_paid/published_at/r2_path/price_jpy)
- *   .claude/state/note-draft-index.json      (未公開ドラフト 37 件: vertical/r2_path/status)
+ *   data/note/note-published-urls.json  (公開済み 203 件: vertical/title/url/is_paid/published_at/r2_path/price_jpy)
+ *   data/note/note-draft-index.json      (未公開ドラフト 37 件: vertical/r2_path/status)
  * 出力:
  *   .claude/scripts/note/catalog/data/<vertical>.ts  (NoteArticle[] の git TS。以後これが SSOT)
  *
@@ -22,10 +22,10 @@ const ROOT = resolve(__dirname, "../../../..");
 const DRY = process.argv.includes("--dry-run");
 
 const pub = JSON.parse(
-  readFileSync(join(ROOT, ".claude/state/note-published-urls.json"), "utf8"),
+  readFileSync(join(ROOT, "data/note/note-published-urls.json"), "utf8"),
 );
 const drafts = JSON.parse(
-  readFileSync(join(ROOT, ".claude/state/note-draft-index.json"), "utf8"),
+  readFileSync(join(ROOT, "data/note/note-draft-index.json"), "utf8"),
 );
 
 /** vertical → 既定マガジン (koumuin 系は既存フッター運用でシリーズ = 1 マガジン) */

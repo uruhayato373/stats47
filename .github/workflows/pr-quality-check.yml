@@ -655,7 +655,7 @@ jobs:
       - name: 🗂️ Theme Portfolio State Guard
         # テーマポートフォリオ state の schema + 判定規律 (根拠なし merge/retire 禁止・
         # 重複実験防止・推測値/標本不足比率の混入防止・THEME_CATALOGS 整合) を検証。
-        # 読み取り専用で破壊的変更なし。正典: .claude/state/themes/README.md
+        # 読み取り専用で破壊的変更なし。正典: data/themes/README.md
         run: |
           node .claude/scripts/themes/validate-theme-state.mjs
           npm run theme:quality:test
@@ -677,7 +677,7 @@ jobs:
         # survey ポートフォリオ state の schema + 判定規律 (surveys.json 双方向一致・
         # survey-editorial.ts との drift・orphan/linkage 整合・根拠なし merge/retire 禁止・
         # 重複実験防止・推測値混入防止) を検証。読み取り専用で破壊的変更なし
-        # (本文生成・R2 push・deploy は行わない)。正典: .claude/state/surveys/README.md
+        # (本文生成・R2 push・deploy は行わない)。正典: data/surveys/README.md
         run: npx tsx .claude/scripts/surveys/validate-survey-portfolio.ts
         continue-on-error: false
 

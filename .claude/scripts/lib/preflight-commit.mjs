@@ -285,7 +285,7 @@ export const PR_GATES = [
     name: "Survey Taxonomy",
     why: "active metric 数が変わると taxonomy state が drift する",
     run: () => tryRun("npx", ["tsx", "packages/ranking/src/scripts/audit-survey-taxonomy.ts", "--offline", "--check"]),
-    hint: "npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --json .claude/state/surveys/taxonomy.json",
+    hint: "npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --json data/surveys/taxonomy.json",
   },
   {
     name: "Sitemap / Tag Keys",
@@ -331,7 +331,7 @@ export const PR_GATES = [
       if (!fetched.ok) return { ok: true, output: "origin へ到達できないので判定を見送る", skipped: true };
       // commit 数ではなく**内容の差分**で判定する。
       // main には cron が state を書き戻すので、commit 数だけ見ると毎回赤くなり無視される。
-      // 実際に PR を壊すのは code / rules / docs の乖離なので、.claude/state 配下は除く。
+      // 実際に PR を壊すのは code / rules / docs の乖離なので、記録 (data/) と作業状態 (.claude/state/) は除く。
       const { ok, output } = await tryRun("git", [
         "diff",
         "--name-only",
@@ -340,9 +340,9 @@ export const PR_GATES = [
       ]);
       if (!ok) return { ok: true, output: "比較できないので見送る", skipped: true };
       const files = output.split(/\r?\n/).filter(Boolean);
-      const substantive = files.filter((f) => !f.startsWith(".claude/state/"));
+      const substantive = files.filter((f) => !f.startsWith(".claude/state/") && !f.startsWith("data/"));
       if (substantive.length === 0) {
-        const note = files.length === 0 ? "main 由来の未同期変更なし" : `main 側は cron の state 書き戻し ${files.length} 件のみ`;
+        const note = files.length === 0 ? "main 由来の未同期変更なし" : `main 側は cron の記録の書き戻し ${files.length} 件のみ`;
         return { ok: true, output: note };
       }
       return {

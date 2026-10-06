@@ -165,7 +165,9 @@ function inspect(file) {
         // `'legacy'` / `"legacy"` は状態名リテラル (`"deprecated"` を除外しているのと同じ enum 値扱い)。
         // `legacy` と `current`/`manifest` が近接する行は image pipeline の manifest 形式名としての用法
         // (例: 「初回manifest移行だけは legacyを安全にcurrent扱いできない」) で廃止予定コードではない。
-        !/catalogStatus|LEGACY_SETS|IndicatorSet|indicator-sets|ThemeCatalog|THEME_CATALOGS|legacy ?テーマ|legacy ?catalog|legacy\/別経路|legacy ?\(未登録\)|未登録 ?\(legacy\)|\(legacy\) ?テーマ|カタログ駆動|legacy 2\b|"deprecated"|deprecated source|VerificationStatus|VERIFICATION_STATUSES|['"]legacy['"]|legacy[^\n]{0,20}(?:current|manifest)|(?:current|manifest)[^\n]{0,20}legacy/i.test(line) &&
+        // `canonical` と `legacy` が並ぶ行はアフィリエイトのバナーサイズの区分名 (canonical 4 種 / legacy 一点物。
+        // affiliate-ads-standards.md §3) で、廃止予定コードではない (2026-10-06 ルール精緻化)。
+        !/canonical[^\n]{0,40}legacy|catalogStatus|LEGACY_SETS|IndicatorSet|indicator-sets|ThemeCatalog|THEME_CATALOGS|legacy ?テーマ|legacy ?catalog|legacy\/別経路|legacy ?\(未登録\)|未登録 ?\(legacy\)|\(legacy\) ?テーマ|カタログ駆動|legacy 2\b|"deprecated"|deprecated source|VerificationStatus|VERIFICATION_STATUSES|['"]legacy['"]|legacy[^\n]{0,20}(?:current|manifest)|(?:current|manifest)[^\n]{0,20}legacy/i.test(line) &&
         // ブロック単位の除外 (2026-08-19): 同一行に条件が無くても、Markdown の同一見出しブロック
         // (backlog.md の `### [ID]` カード等) の他行にまとめて期限・削除条件・停止条件が
         // 書かれていれば、そのブロック内の個別行は unbounded ではない。

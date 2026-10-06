@@ -27,7 +27,7 @@ const MAGS = [
 // catalog の noteUrl -> {catalogKey, magazine, isPaid} を索引 (突合用)
 const idx = new Map();
 try {
-  const pub = JSON.parse(readFileSync(join(ROOT, ".claude/state/note-published-urls.json"), "utf8")).articles;
+  const pub = JSON.parse(readFileSync(join(ROOT, "data/note/note-published-urls.json"), "utf8")).articles;
   for (const [k, a] of Object.entries(pub)) {
     if (a.url) {
       const noteId = a.url.split("/n/")[1];

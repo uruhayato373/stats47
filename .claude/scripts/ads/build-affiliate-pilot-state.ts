@@ -17,7 +17,7 @@ import {
 import { datasetPath } from "../../../config/datasets.mjs";
 
 const ROOT = resolve(fileURLToPath(new URL(".", import.meta.url)), "../../..");
-const STATE_DIR = resolve(ROOT, ".claude/state/ads");
+const STATE_DIR = resolve(ROOT, "data/affiliate");
 const OUT_PATH = resolve(STATE_DIR, "affiliate-pilot-readiness-latest.json");
 
 function readJson(path: string): any | null {

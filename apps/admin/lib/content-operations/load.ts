@@ -245,7 +245,7 @@ function loadNoteOutbox(root: string) {
 }
 
 function loadNoteGenerationBlockers(root: string) {
-  const rel = '.claude/state/content-operations/note-generation-blockers.json';
+  const rel = 'data/content-operations/note-generation-blockers.json';
   const raw = readOptionalJson(root, rel) as {
     blockers?: Record<
       string,
@@ -334,7 +334,7 @@ export function loadContentOperations(
     readJson(root, KDP_LISTINGS)
   );
   const kindleBuild = ContentKindleBuildState.parse(
-    readJson(root, '.claude/state/products/kindle-status.json')
+    readJson(root, 'data/products/kindle-status.json')
   );
   const kindleArchivesRaw = readOptionalJson(
     root,
@@ -344,7 +344,7 @@ export function loadContentOperations(
     ? ContentKindleArchiveState.parse(kindleArchivesRaw)
     : null;
   const noteDraftIndex = ContentNoteDraftIndex.parse(
-    readJson(root, '.claude/state/note-draft-index.json')
+    readJson(root, 'data/note/note-draft-index.json')
   );
   const inventories = REFERENCE_SOURCE_POLICIES.flatMap((policy) => {
     const raw = readOptionalJson(root, policy.statePath);

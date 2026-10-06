@@ -60,7 +60,7 @@ carry over) → weekly-review が `triage` の最大3件を審査 → 人間が 
   read-only GET なので実行され **live 実測**する (blocker 候補 + control を probe。sitemap.xml から inSitemap 判定)。
 - **crux (CrUX/History)・GSC Sitemaps API メタ・lighthouse** は creds/ツールが要り、無ければ `skipped` =
   **live 未検証** と明示する (既存 fetcher を subprocess 実行するのは creds がある source のみ)。
-- partial/missing を成功・0 件にしない。live snapshot は `.claude/state/search-growth/live/` (gitignore・ephemeral)。
+- partial/missing を成功・0 件にしない。live snapshot は `data/search-growth/live/` (gitignore・ephemeral)。
 
 ## MCP (read-only・任意)
 
@@ -112,7 +112,7 @@ observe-after-fix (sitemap/内部リンク/canonical/content 修正 + URL Inspec
 - pipeline: `.claude/scripts/search-growth/{collect,normalize,analyze,report,cli}.mjs`
 - lib: `.claude/scripts/search-growth/lib/{contracts,freshness,redaction,join-url,scoring,sources,service,state}.mjs`
 - MCP: `.claude/scripts/search-growth/mcp/server.mjs`
-- state: `.claude/state/search-growth/{latest,candidates,health,past-effects}.json` + `manifests/`
+- state: `data/search-growth/{latest,candidates,health,past-effects}.json` + `manifests/`
 - CI: `.github/workflows/search-growth-weekly.yml` (weekly candidate rebuild・committed snapshot 再利用)
 - test: `.claude/scripts/search-growth/__tests__/*.test.mjs`
 

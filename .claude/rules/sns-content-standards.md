@@ -1,6 +1,7 @@
 ---
 paths:
-  - ".claude/{scripts/sns,scripts/instagram,skills/sns,state/sns}/**"
+  - ".claude/{scripts/sns,scripts/instagram,skills/sns}/**"
+  - "data/sns/**"
   - "apps/{remotion,admin}/**"
   - "docs/10_SNS戦略/**"
   - ".claude/agents/{x-strategist,instagram-strategist,sns-*,trend-scout}.md"
@@ -534,7 +535,7 @@ localhost 専用・127.0.0.1 bind 固定。2026-07-16 に旧 node:http 実装か
 - **X 量産カタログ API**: `.claude/scripts/lib/x-catalog.cjs` (§1 quota / §2-0 templates / §2-8 affinity / §2-9 imagekinds をパース)
 - **X 量産スキル**: `.claude/skills/sns/post-x-batch/` (候補選定 `select-candidates.cjs` / lint `lint-x-captions.cjs` / 登録 `register-drafts.cjs`)
 - **X 頻度ガード**: `.claude/scripts/sns/check-x-post-budget.cjs`
-- **X 勝ちパターン**: `.claude/scripts/sns/analyze-x-winning-patterns.mjs` → `.claude/state/sns/x-winning-patterns.json`
+- **X 勝ちパターン**: `.claude/scripts/sns/analyze-x-winning-patterns.mjs` → `data/sns/x-winning-patterns.json`
 - **X 画像最短経路**: `.claude/scripts/sns/quick-still.ts` / SVG→PNG `.claude/scripts/lib/svg-to-png.cjs`
 - **バズ地図カード (日本地図×統計)**: 規約 `.claude/rules/buzz-map-standards.md` / スキル `.claude/skills/sns/buzz-map/SKILL.md` / Remotion feature `apps/remotion/src/features/buzz-map/` (owner: sns-renderer、co: X配信=x-strategist / IG配信=instagram-strategist / 地理データ=gis-curator)
 - メトリクス時系列: `.claude/skills/analytics/sns-metrics-improvement/`

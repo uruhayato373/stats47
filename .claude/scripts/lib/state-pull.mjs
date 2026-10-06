@@ -8,7 +8,8 @@
  * 置き場の規約 (docs/01_技術設計/02_データアーキテクチャ.md・.claude/rules/data-storage.md 2026-09-14):
  *   - 書き手は CI だけ (S3 creds は GitHub Actions secrets)。ローカルは公開 URL で読むだけ。
  *   - `state/<domain>/index.json` は CI が維持する object 一覧 (公開 R2 は list できないため)。
- *   - ローカル保存先は `.claude/state/<top>/live/<rest>/…`。`live/` は各 domain の .gitignore で除外する
+ *   - ローカル保存先は `data/<置き場>/live/<rest>/…` (R2 の ads は data/affiliate、それ以外は同名)。`live/` は各置き場の
+ *     .gitignore で除外する
  *     (search-growth の live/ と同じ形)。読み手は「git 追跡の集約 → 無ければ live/」の順で読む。
  *
  * 会社 PC のプロキシは HTTPS_PROXY を undici の ProxyAgent で通す (theme-chart-live-audit.mjs と同じ手本)。
@@ -33,10 +34,13 @@ function resolveDispatcher() {
   }
 }
 
+/** R2 の state/<top>/ と、手元の置き場 (data/ 配下) で名前が違うものだけ書く */
+const LOCAL_DIR_BY_TOP = { ads: "affiliate" };
+
 export function localDirFor(domain, root = ROOT) {
   const [top, ...rest] = domain.split("/").filter(Boolean);
   if (!top) throw new Error(`domain が空: ${domain}`);
-  return path.join(root, ".claude", "state", top, "live", ...rest);
+  return path.join(root, "data", LOCAL_DIR_BY_TOP[top] ?? top, "live", ...rest);
 }
 
 async function fetchJson(url, dispatcher) {

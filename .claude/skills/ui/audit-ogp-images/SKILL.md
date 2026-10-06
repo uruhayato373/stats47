@@ -28,7 +28,7 @@ npm run note:covers:test
 - 判定元は詳細の`data.eyecatch`のみ。一覧の`eyecatch`には本文先頭画像が入る場合があるため、設定済みの根拠にしない。
 - `configured` / `missing` / `unknown`を分ける。取得失敗・フィールド欠損・帰属不一致は`unknown`、一覧の件数不一致・途中失敗は`incomplete`にする。
 - 終了コード: `0`=全件設定済み・カタログ集合一致、`1`=未設定または集合差分、`2`=取得失敗・不完全。`--report-only`による成功扱いは用意しない。
-- 出力は`.claude/state/metrics/note-cover-audit-latest.json`（毎回置換、時刻・完全性・記事別URL・根拠・都道府県別家計調査の集計付き）。`--output /tmp/note-cover.json`で保存先を指定できる。
+- 出力は`data/note/evidence/note-cover-audit-latest.json`（毎回置換、時刻・完全性・記事別URL・根拠・都道府県別家計調査の集計付き）。`--output /tmp/note-cover.json`で保存先を指定できる。
 - 公開前の下書き・画像の見た目・画像URLの到達性・R2保存状況はこの判定に含めない。画像の保存状況は下記ギャラリーで別途確認する。
 - 既存`note-circulation-audit-weekly.yml`にも接続し、失敗を既存アラートとartifactへ渡す。外部公開・画像生成はしない。
 
@@ -44,7 +44,7 @@ node .claude/scripts/ogp/build-image-gallery.mjs --tabs blog-ogp,blog-card --lim
 # 欠落を GET で確定 (stdout に tab: entries/images/ok/missing 集計 + missing 一覧)
 node .claude/scripts/ogp/build-image-gallery.mjs --tabs ranking-card --check
 
-# 全種別を棚卸し → .claude/state/ogp/inventory.json (既定サンプリング、全量は --all 併用)
+# 全種別を棚卸し → data/ogp/inventory.json (既定サンプリング、全量は --all 併用)
 node .claude/scripts/ogp/build-image-gallery.mjs --audit
 ```
 
@@ -89,7 +89,7 @@ Cell content: ≤ 10 words each.
 ## File Boundary
 
 - 読み取り専用 (本番 URL・R2 公開 URL・state JSON の read のみ)。
-- 書き込みは自分の成果物のみ: 生成 HTML (`/tmp/`) と `.claude/state/ogp/inventory.json` (`--audit` 時)、note専用監査の`.claude/state/metrics/note-cover-audit-latest.json`。
+- 書き込みは自分の成果物のみ: 生成 HTML (`/tmp/`) と `data/ogp/inventory.json` (`--audit` 時)、note専用監査の`data/note/evidence/note-cover-audit-latest.json`。
 
 ## 自動化との関係
 
@@ -102,5 +102,5 @@ Cell content: ≤ 10 words each.
 
 - 基準 SSOT: `.claude/rules/ogp-image-standards.md`
 - スクリプト: `.claude/scripts/ogp/build-image-gallery.mjs`
-- 棚卸し state: `.claude/state/ogp/inventory.json`
+- 棚卸し state: `data/ogp/inventory.json`
 - OGP コンポーネント: `apps/web/src/features/ogp/`

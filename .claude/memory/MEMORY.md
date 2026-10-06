@@ -96,7 +96,7 @@
 - [feedback_backlog_ranking_key_audit.md](feedback_backlog_ranking_key_audit.md) — backlogのranking_keyはAI生成名で実在metricと乖離。実行前にmetrics.key実在チェック
 - [feedback_bulk_blog_publish_isr_404.md](feedback_bulk_blog_publish_isr_404.md) — sync-snapshots --only blogの順序でISR 404キャッシュ。連続curlで復活、残りはCloudflare手動パージ
 - [reference_scan_pending_improvements.md](reference_scan_pending_improvements.md) — scan-pending-improvements.mjs(改善ログからpending抽出、weekly-plan/triage共用)
-- [project_note_internal_link_breaks_on_publish.md](project_note_internal_link_breaks_on_publish.md) — note記事の../slug/draft.md内部リンクは公開後切れる。note URL化必要、対応表=.claude/state/note-published-urls.json
+- [project_note_internal_link_breaks_on_publish.md](project_note_internal_link_breaks_on_publish.md) — note記事の../slug/draft.md内部リンクは公開後切れる。note URL化必要、対応表=data/note/note-published-urls.json
 - [feedback_ga4_history_unreliable_wow.md](feedback_ga4_history_unreliable_wow.md) — GA4 history.csvのpageviewsはlast28d/bot混入。WoWはGSC clicksを使う
 - [feedback_ga4_journey_referrer_over_navclick.md](feedback_ga4_journey_referrer_over_navclick.md) — 回遊はnav_clickでなく週次internal-transitions.csv(referrer)で読む(theme→ranking実44/nav3)。GSC 0の流入増はBingを疑う
 - [project_measurement_cycle_ci.md](project_measurement_cycle_ci.md) — 計測→記録→改善サイクルのCI化(2026-09-24)。日曜計測→月曜06:00無人triage(ゲート付き)→09:00週次Issue。schedule/取得段はmain定義で動く。無人ClaudeはdontAskで.claude/を書けない→提案JSONを決定的適用

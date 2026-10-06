@@ -31,7 +31,7 @@
  *   node .claude/scripts/blog/restore-scatter-from-svg.mjs --base s/x       # 指定 slug/base のみ
  *   node .claude/scripts/blog/restore-scatter-from-svg.mjs --apply          # staging 書込 (人間レビュー後)
  *
- * 正典: .claude/rules/blog-data-schema.md §1.5/§1.6/§1.7、手法: .claude/state/blog/neither-restore-method.md
+ * 正典: .claude/rules/blog-data-schema.md §1.5/§1.6/§1.7、手法: data/blog/neither-restore-method.md
  */
 
 import fs from "node:fs";
@@ -383,7 +383,7 @@ async function assignLinksByRange(linkKeys, xRange, yRange) {
 
 // ---------- queue から neither scatter を取得 ----------
 function loadTargets() {
-  const q = JSON.parse(fs.readFileSync(path.join(PROJECT_ROOT, ".claude/state/blog/svg-lineage-queue.json"), "utf8"));
+  const q = JSON.parse(fs.readFileSync(path.join(PROJECT_ROOT, "data/blog/svg-lineage-queue.json"), "utf8"));
   let entries = q.entries.filter((e) => e.status === "neither" && e.chartType === "scatter").map((e) => ({ slug: e.slug, base: e.base }));
   if (BASE_ARG) { const [s, b] = BASE_ARG.split("/"); entries = entries.filter((e) => e.slug === s && e.base === b); }
   else if (SLUGS_ARG) { const want = new Set(SLUGS_ARG.split(",").map((s) => s.trim())); entries = entries.filter((e) => want.has(e.slug)); }

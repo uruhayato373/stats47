@@ -29,11 +29,11 @@ A8.net 等アフィリエイト広告の **意図軸 (vertical)・案件profile�
 - **compliance 監査** (`/audit-affiliate-compliance`) — 孤立配置・本文タグ不一致・PR 表記 (景表法) 漏れ・台帳未登録タグ・canonical サイズを決定的スクリプトで監査。記事本文の是正は blog-editor / article-writer に委譲。
 - **関連性監査** (`/audit-affiliate-relevance`) — 公開全記事の明示policyと survey/tag 競合を決定的に抽出する。自動修正せず、記事意図を確認した例外だけ `blog-affiliate-policy.ts` に理由付きで記録する。
 - **配置マップの所有** (rules §12) — 「どのページ種別にどの枠で何を出すか」の正典と、需要×供給の突合 state
-  `.claude/state/ads/placement-map-latest.json` (`build-placement-map.mjs` が週次 cron で生成) を維持する。
+  `data/affiliate/placement-map-latest.json` (`build-placement-map.mjs` が週次 cron で生成) を維持する。
   propose は**この state を読む** (GSC×在庫×EPC の目視 JOIN は禁止 — 再現性が無く見落とすため)。
   `reverseCandidates` の `shared: true` は doboku-note と同一 A8 口座の共用案件で、EPC は口座横断の実績。
   stats47 単独の実力として扱わない。`suggestedRankingKeys` は候補であって適用ではない (ブランド適合は意味判断)。
-- **在庫整理・監査・dashboard** (`/affiliate-improvement`) — vertical カバレッジ / 在庫ゼロ軸 / サイズ逸脱 / 意図ミスマッチの検出と是正。ゼロ/手薄軸は `.claude/state/ads/inventory-latest.json` の `coverage` から読む (固定値を持たない)。
+- **在庫整理・監査・dashboard** (`/affiliate-improvement`) — vertical カバレッジ / 在庫ゼロ軸 / サイズ逸脱 / 意図ミスマッチの検出と是正。ゼロ/手薄軸は `data/affiliate/inventory-latest.json` の `coverage` から読む (固定値を持たない)。
 - **楽天カタログ同期の所有** (`sync-rakuten-catalog.yml` 日次 cron) — 楽天の商品・返礼品を R2
   (`app/rakuten/`) に焼く。**実行時に楽天 API を叩かない** (Expected QPS=1 に対し deploy 後の
   warm-cache が sitemap 全 URL を叩くためバーストする)。失敗すると `rakuten-alert` ラベルの
@@ -41,8 +41,8 @@ A8.net 等アフィリエイト広告の **意図軸 (vertical)・案件profile�
   — Issue が唯一の検知手段。原因の確認順は楽天アプリの有効期限 (2027-03-07) → Ichiba スコープ →
   Allowed IP (`0.0.0.0/0` から変えない) → Secrets。正典: rules §12。
 - **規約 enforcement** — サイズ (`audit --check-size` + pre-commit) / vertical∈10軸 (export validation) / priority (意図適合) の遵守。legacy 一点物サイズの段階移行。
-- **計測ゲート・運用状態** — 集約 state `.claude/state/ads/affiliate-operations-latest.json` と
-  `.claude/state/ads/affiliate-portfolio-latest.json` を現在地の入口にする。portfolioは
+- **計測ゲート・運用状態** — 集約 state `data/affiliate/affiliate-operations-latest.json` と
+  `data/affiliate/affiliate-portfolio-latest.json` を現在地の入口にする。portfolioは
   discovery/decisionを分離し、確定収益欠損を0扱いせず、recommendedActionを常に1件だけ返す。
   `measurementGate` が blocked なら rules §6 の登録手順を案内する。freshness・coverage・pilot可否は
   決定的スクリプトが判定し、モデルは期限・sample・勝者を判断しない。
@@ -88,7 +88,7 @@ A8.net 等アフィリエイト広告の **意図軸 (vertical)・案件profile�
 
 - **ルール (SSOT)**: `.claude/rules/affiliate-ads-standards.md`
 - データ: `apps/web/scripts/affiliate-ads-data.ts` (自動配置) / `apps/web/scripts/affiliate-direct-placements-data.ts` (直接配置)
-- 機械状態: `.claude/state/ads/{affiliate-operations-latest,affiliate-portfolio-latest,affiliate-pilot-readiness-latest,inventory-latest,compliance-latest}.json` / 実験台帳 `data/affiliate/experiments.json`
+- 機械状態: `data/affiliate/{affiliate-operations-latest,affiliate-portfolio-latest,affiliate-pilot-readiness-latest,inventory-latest,compliance-latest}.json` / 実験台帳 `data/affiliate/experiments.json`
 - 配信: `apps/web/src/features/ads/`
 - 実装規約: `.claude/rules/affiliate-ads-standards.md` / 戦略: `docs/00_プロジェクト管理/02_収益化戦略.md` §3-6
 - ASP継続運用: `docs/02_実装計画/42_アフィリエイトPlaywright継続運用・安全化実装仕様.md` /

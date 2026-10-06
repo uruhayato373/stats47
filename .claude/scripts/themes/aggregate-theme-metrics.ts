@@ -5,7 +5,7 @@
  * endDate-27 で取得) のため、単純合算は最大 4 倍の二重計上になる。
  * 56 日 = **非重複 2 窓 (最新週 + その 4 週前)** の合算で構成する。
  *
- * 集計規約 (schema 正典: .claude/state/themes/README.md):
+ * 集計規約 (schema 正典: data/themes/README.md):
  *   - GSC: clicks/impressions = 2 窓合算, ctr = 合算比, avgPosition = impressions 加重平均
  *   - GA4: pageViews = 2 窓合算 (加算可能)。activeUsers は週横断で加算不能のため
  *     最新窓の値のみ activeUsersLast28d として保存。engagementRate / avgSessionDuration は
@@ -31,7 +31,7 @@ import { readThemeQualityState } from "./theme-quality-state.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
-const STATE_DIR = process.env.STATE_DIR || path.join(PROJECT_ROOT, ".claude/state/themes");
+const STATE_DIR = process.env.STATE_DIR || path.join(PROJECT_ROOT, "data/themes");
 const PORTFOLIO = path.join(STATE_DIR, "portfolio.json");
 const GSC_SNAP = process.env.GSC_SNAPSHOT_DIR || path.join(PROJECT_ROOT, "data/gsc/snapshots");
 const GA4_SNAP = process.env.GA4_SNAPSHOT_DIR || path.join(PROJECT_ROOT, "data/ga4/snapshots");

@@ -15,7 +15,7 @@
  *   --base <dir>  記事ルート。デフォルト: .local/r2/app/blog (R2 pull 後)
  *                 ドラフト監査なら --base docs/21_ブログ記事原稿
  *   --json        機械可読 JSON を stdout
- *   --out <path>  保存先。デフォルト: .claude/state/blog/structure-audit.json
+ *   --out <path>  保存先。デフォルト: data/blog/structure-audit.json
  *
  * 注: 再配置は意味判断 (どの図にどのリンク) のため agent (brushup) が行う。
  *   本スクリプトは検出のみ。select-brushup-candidates.mjs が本 JSON を読む。
@@ -41,7 +41,7 @@ const BASE = path.resolve(PROJECT_ROOT, getArg("--base", ".local/r2/app/blog"));
 const JSON_OUT = args.includes("--json");
 const OUT_PATH = path.resolve(
   PROJECT_ROOT,
-  getArg("--out", ".claude/state/blog/structure-audit.json"),
+  getArg("--out", "data/blog/structure-audit.json"),
 );
 
 const log = (m) => !JSON_OUT && console.log(m);

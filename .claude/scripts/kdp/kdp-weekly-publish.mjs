@@ -31,7 +31,7 @@ execFileSync(
   { cwd: ROOT, stdio: "inherit" },
 );
 
-const decision = JSON.parse(readFileSync(join(ROOT, ".claude/state/products/kdp-weekly-publication.json"), "utf8"));
+const decision = JSON.parse(readFileSync(join(ROOT, "data/products/kdp-weekly-publication.json"), "utf8"));
 const approval = validateWeeklyApproval(decision, { week, id, ownerApproved, commit });
 if (!approval.ok) {
   console.error(`ABORT: ${approval.errors.join(" / ")}`);

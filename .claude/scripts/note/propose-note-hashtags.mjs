@@ -27,7 +27,7 @@ if (Boolean(all) === Boolean(slugs?.length)) throw Error('`--slugs a,b` か `--a
 const force = argv.includes('--force');
 const CONCURRENCY = Number(value('--concurrency') || 3);
 
-const index = JSON.parse(fs.readFileSync(path.join(ROOT, '.claude/state/note-published-urls.json'), 'utf8')).articles;
+const index = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/note/note-published-urls.json'), 'utf8')).articles;
 const targets = Object.entries(index).filter(([slug]) => !slug.startsWith('_') && (all || slugs.includes(slug)));
 if (slugs && targets.length !== slugs.length) throw Error('unknown slug in --slugs');
 

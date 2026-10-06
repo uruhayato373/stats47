@@ -44,7 +44,7 @@ stats47.jp の `/blog/{slug}` 記事を新規作成または brushup する際�
 - **critic は full / delta の二相で起動する (トークン節約)**: 初回審査は `full` (正典全観点 + 記事全文)、REVISE 後の再審査は `delta` (前回指摘 + 変更 hunk のみ、正典 465行と記事全文を再読しない。床は `quality-gate.mjs` が毎回フル実行するため落ちない)。GSC 流入上位 30 記事の初回 critic は opus、他は sonnet に傾斜する (`build-remediation-queue.mjs` の `reviewTier`。モデル規律は `.claude/rules/model-prompting.md`)。
 
 > **既存記事を計画的に順次是正するには (★どのセッションからでも開始可)**: 「次にどの記事を直すか」は
-> 状態付き是正キュー `.claude/state/blog/remediation-queue.json` が真実源 (GSC流入×品質blockerの統合スコア)。
+> 状態付き是正キュー `data/blog/remediation-queue.json` が真実源 (GSC流入×品質blockerの統合スコア)。
 > ```bash
 > node .claude/scripts/blog/build-remediation-queue.mjs   # コミット済み履歴+公開R2+GSCから再構築 (どこでも可)
 > ```
@@ -115,7 +115,7 @@ date: YYYY-MM-DD
 
 ### 実測補正: 短タイトル + gap は 1 要素まで
 
-勝ちパターン分析 (`.claude/state/blog/winning-patterns.json`、117 記事 winner/loser 各 39、robust 判定) の実測で、curiosity gap は「必須」だが**過剰は逆効果**と確定した (winner の gap 語彙使用率 28.2% vs loser 48.7%)。BLOG-WAVE-2026-05-25-auto (53 記事 gap 改修) が effect/none だった一因でもある。
+勝ちパターン分析 (`data/blog/winning-patterns.json`、117 記事 winner/loser 各 39、robust 判定) の実測で、curiosity gap は「必須」だが**過剰は逆効果**と確定した (winner の gap 語彙使用率 28.2% vs loser 48.7%)。BLOG-WAVE-2026-05-25-auto (53 記事 gap 改修) が effect/none だった一因でもある。
 
 - **title は短く ~17 字目標** (winner 中央値 17 字 vs loser 33 字)。`{主要fact+gap}｜{補足}` の補足部 (年・対象数) は **seoTitle 側に寄せ**、title 本体を軽くする。
 - **curiosity gap 要素はタイトルに 1 個まで**。疑問形 or 逆説 or 倍率のどれか 1 つで十分。「衝撃」「意外すぎる」等の煽り語の重ね掛けは禁止。
@@ -453,12 +453,12 @@ npx tsx .claude/scripts/blog/push-article-md-r2.ts --apply --src .local/blog-lin
 
 ### 型ポートフォリオ (月次ミックス・2026-07-05 改訂)
 
-月 15-20 本ペースでの型配分。**配分比率の SSOT は `.claude/state/blog/seo-strategy.json` の `typeMix`**
+月 15-20 本ペースでの型配分。**配分比率の SSOT は `data/blog/seo-strategy.json` の `typeMix`**
 (blog-seo-strategist が winning-patterns 実測で四半期ごとに見直す)。人間向け戦略・入力データは
 `.claude/agents/blog-seo-strategist.md` §戦略コンテキスト。**比率の数値はここに再掲しない** (二重管理=ドリフトの元)。
 このルールは各型の「どう書くか」(下記の記事アーキタイプ) を持ち、「何本ずつ張るか」は上記 SSOT が持つ。
 
-- どの記事を書くかは topic-queue (`.claude/state/blog/topic-queue.json`、`build-topic-queue.mjs` が生成) の
+- どの記事を書くかは topic-queue (`data/blog/topic-queue.json`、`build-topic-queue.mjs` が生成) の
   pending 上位から払い出す (`/plan-article-queue`)
 
 ### 各型の章構成テンプレ
@@ -558,7 +558,7 @@ BLOG-CTR-03 / 04 で 10 記事を curiosity gap 改修:
 > 日次ループは対話セッションと同じ Pro/Max 利用枠を食う。ai-content 側の歩留まりが
 > 08-19 に 0/5 ($87.31)、08-20 に 1/5 ($21.33) まで落ちたのを受け、生成の量と時期は
 > **月次計画が目標を持ち、週次計画が「今週 N 本」を Must として割り当てる**運用へ移した。
-> 月間本数の SSOT は既存の `.claude/state/blog/seo-strategy.json` の `typeMix.perMonth`
+> 月間本数の SSOT は既存の `data/blog/seo-strategy.json` の `typeMix.perMonth`
 > (月 17-19 本)。新しい数値を作らない。
 
 ```
@@ -700,7 +700,7 @@ node .claude/scripts/blog/audit-chart-quality.mjs
 node .claude/scripts/blog/audit-published-blog.mjs
 ```
 
-公開記事の品質是正キュー (真実源): `.claude/state/blog/remediation-queue.json` (build-remediation-queue.mjs が R2+GSC から再構築)。
+公開記事の品質是正キュー (真実源): `data/blog/remediation-queue.json` (build-remediation-queue.mjs が R2+GSC から再構築)。
 週次是正ループ (GSC 優先で blocker 記事を /brushup-blog → critic PASS) は同ファイル参照。
 
 ### enforce される箇所 (2026-06-02〜 / 公開前ブロック)

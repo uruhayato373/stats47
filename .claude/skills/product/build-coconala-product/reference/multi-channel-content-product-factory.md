@@ -520,7 +520,7 @@ Excel/PPT: 作業を即時短縮
 |---|---|
 | 商品定義・offer・権利・AI方針 | git TS `packages/product-factory/` |
 | 生成物 | `.local/content-products/`、必要に応じ既存R2/outboxへ昇格 |
-| catalog status | `.claude/state/products/catalog-status.json`（生成） |
+| catalog status | `data/products/catalog-status.json`（生成） |
 | 販売実績 | `data/products/sales-ledger.json`（既存拡張） |
 | 実験 | `data/business/experiments.json`参照、product experiment state |
 | 月次判断 | 未完了策は `.claude/todo/backlog.md`、実測履歴はproduct state |
@@ -892,7 +892,7 @@ MODEL ROUTING:
 - .claude/rules/{data-storage,docs-vs-issues,agent-output-contract,evidence-based-judgment,branch-workflow}.md
 - .claude/agents/README.md
 - packages/product-factory/ の既存実装・package scripts・tests
-- .claude/state/products/ と data/business/experiments.json
+- data/products/ と data/business/experiments.json
 
 Phase 0 task:
 1. git statusで所有者不明変更を記録し、編集対象から除外する。

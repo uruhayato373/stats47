@@ -33,7 +33,7 @@ co_agents: [estat-researcher]
 npx tsx packages/data-configs/scripts/scan-stats-shape.ts --verification-queue > /tmp/vq.json
 
 # または週次監査の成果物から
-cat .claude/state/ranking/integrity-audit.json | jq '.valueVerification'
+cat data/ranking/integrity-audit.json | jq '.valueVerification'
 ```
 
 `profileViolated` があれば**そちらを先に**見る。未検証より深刻で、「検証時に書いた予測をデータが

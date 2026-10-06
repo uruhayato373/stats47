@@ -71,7 +71,7 @@ Stage 2: 実在確認 — **自分で inline に調べる** (estat-researcher �
      `node --import tsx .claude/scripts/estat/catalog.mjs search <語>` (初回のみ先に`pull`。月次更新の
      e-Statメタデータ完全カタログ。全国/都道府県/市区町村の全statsDataId+年次+エリア種別。
      `docs/02_実装計画/48_e-Statカタログ実装仕様.md`) と
-     `.claude/state/estat/ssds-candidates.json` (週次自動更新、SSDS都道府県指標の未使用cdCat01一覧。
+     `data/estat/ssds-candidates.json` (週次自動更新、SSDS都道府県指標の未使用cdCat01一覧。
      `.github/workflows/estat-ssds-enum.yml`) に該当が無いか確認し、無ければ自分で e-Stat を
      WebFetch/検索して **statsDataId+cdCat01 を突き止める**。解決できない候補は提案へ混ぜず`unknown`として不採用記録へ送る。
      (AI 生成 key は実在 metric と乖離しがち。memory: feedback_backlog_ranking_key_audit)

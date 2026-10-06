@@ -27,7 +27,8 @@ const fs = require("node:fs");
 const path = require("node:path");
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
-const STATE_DIR = path.join(PROJECT_ROOT, ".claude/state/metrics");
+// トークンの更新日と期限 (本体は置かない) は data/sns/instagram-token.json
+const STATE_DIR = path.join(PROJECT_ROOT, "data/sns");
 const STATE_FILE = path.join(STATE_DIR, "instagram-token.json");
 
 const DRY_RUN = process.argv.includes("--dry-run");

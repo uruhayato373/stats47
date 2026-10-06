@@ -15,7 +15,7 @@ note コーパス全体 (公開済み + ドラフト) の **editorial メタの�
 | カバー画像・候補/採用/公開の対応 | private R2 + `data/note/cover-assets.json` (JSON Schema付き) | 管理画面・画像一覧 |
 | editorial メタ (vertical/series/**magazine**/isPaid/priceJpy/status/noteUrl/publishedAt/r2Path/**r2Body**/**stats47Targets**) | **`catalog/data/<vertical>.ts`** | — |
 | マガジン定義 (名称/有料無料/束ねる vertical/URL/商品導線) | **`catalog/magazines.ts`** | 商品導線は記事別 clean path に変換し、サイト到着時だけGA4標準UTMへ転送 |
-| 公開済みインデックス | (派生) | `.claude/state/note-published-urls.json` ← `generate-note-catalog.ts` |
+| 公開済みインデックス | (派生) | `data/note/note-published-urls.json` ← `generate-note-catalog.ts` |
 
 ## ファイル
 
@@ -43,7 +43,7 @@ npx tsx .claude/scripts/note/catalog/generate-note-catalog.ts [--apply]
 
 公開記事のカバー状態は`npm run note:covers:audit`で測定する。カタログと公開一覧の和集合を
 v3記事詳細APIで確認し、一覧サムネイルに代用された本文画像を設定済みと誤認しない。
-`.claude/state/metrics/note-cover-audit-latest.json`が最新の観測結果（時刻・完全性付き）であり、
+`data/note/evidence/note-cover-audit-latest.json`が最新の観測結果（時刻・完全性付き）であり、
 カバー状態をカタログに手入力して同期しない。終了コードは0=合格、1=未設定/集合差分、2=不完全。
 
 カバーと新しいインプレッション/PVの突合は`npm run note:metrics:fetch`を使う。
@@ -70,7 +70,7 @@ Satoriは文字をpath化するため、SVGの`text`要素検索だけで合格�
 `note_id`はv3詳細の数値`id`であり、`n...`形式のkeyではない。FormDataはnote_id/file/width/heightの4項目、
 `X-Requested-With: XMLHttpRequest`が必要。note側のPNG減色を許容し、取得した配信画像も1280×670へ正規化して画素差を照合する。
 
-履歴は`.claude/state/metrics/note-cover-refresh-<version>.json`。本文自体を保存せず、前後の保全項目hash・
+履歴は`data/note/evidence/note-cover-refresh-<version>.json`。本文自体を保存せず、前後の保全項目hash・
 旧新URL・制作画像SHA・変更時刻・配信検証結果を記録する。確定済みは再送しない。応答不明は停止して照合する。
 仕上げに`../verify-cover-refresh.mjs [--keys <key>]`で共通画像台帳からカバー監査と前後照合を実行する。
 改修は`cover-remediation`として記録し、KPI改善の実験成功とは区別する。
@@ -136,7 +136,7 @@ Satoriは文字をpath化するため、SVGの`text`要素検索だけで合格�
 - **派生インデックス `note-published-urls.json`** は `r2Body===false` を `status: "note_only"` +
   `r2_body: false` で出力する。R2 に本体があるものだけ `status: "r2_ready"`
   (旧 `generate-note-catalog.ts` は全公開記事を無条件 `r2_ready` にし、404 の r2Path を「保存済み」と偽っていた)。
-- **一覧 (要本文復元)**: `.claude/state/note/r2-missing-inventory.md` (カタログから再生成する派生物)。
+- **一覧 (要本文復元)**: `data/note/r2-missing-inventory.md` (カタログから再生成する派生物)。
   実測 2026-07-15: 165 件 (stats47-note 159 / koumuin 6, 有料 50)。
 - **復元手順**: note.com からの本文取得は browser-use + note ログイン (有料は所有者アカウント) が必要で、
   creds/ブラウザを持つローカルセッションで実施する。復元 (note.com → R2 push) 後に該当エントリを

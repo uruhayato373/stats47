@@ -29,8 +29,8 @@ model: sonnet
 | `regenerate-ranking-cards.mjs` | 既存記事のランキングを一括カード化（SSOT再取得→横長+縦長再生成、dry-run=staging） |
 | `regenerate-tile-maps.ts` | タイルマップを SSOT から統一デザイン再生成（`--mapping`/trusted/Derived・自己検算）。正典 §1.6/§1.7 |
 | `rerender-ranking-columns.mts` | **ranking のサイズ統一**: 既存検証済み json から 960×404 columns を直接再描画（値不変・サイズのみ正規化）。非正規サイズ（760×532 等）の是正用 |
-| `restore-{ranking,scatter,findings}-from-svg.mjs` | neither（json消失=絵だけ）の SSOT 再生成。旧SVG値↔SSOT照合（捏造防止）。手法 `.claude/state/blog/neither-restore-method.md` |
-| `build-lineage-queue.mjs` | 全SVGのデータ系譜を棚卸し→復元キュー生成（`.claude/state/blog/svg-lineage-queue.json`）。系譜整備の真実源 |
+| `restore-{ranking,scatter,findings}-from-svg.mjs` | neither（json消失=絵だけ）の SSOT 再生成。旧SVG値↔SSOT照合（捏造防止）。手法 `data/blog/neither-restore-method.md` |
+| `build-lineage-queue.mjs` | 全SVGのデータ系譜を棚卸し→復元キュー生成（`data/blog/svg-lineage-queue.json`）。系譜整備の真実源 |
 
 > **★アスペクト比統一（再発防止）**: チャート生成・是正後は **カタログ別の正規 viewBox 幅**（§5）を守ること。
 > `quality-gate.mjs` / `audit-chart-quality.mjs` の `lintSvgSize` が ranking=960/680・tilemap=720・scatter=720・findings=960 を
@@ -61,7 +61,7 @@ model: sonnet
 | `packages/svg-builder/src/` | CRUD（新規チャートタイプ実装） |
 | `.claude/rules/blog-svg-chart-standards.md` | カタログ更新（新チャートタイプ追加時に必ず更新） |
 | `.local/r2/app/blog/<slug>/data/` | CRUD（生成チャート SVG・data JSON・source.json 3点セット） |
-| `.claude/state/blog/svg-lineage-queue.json` | run/read（系譜復元キュー、`build-lineage-queue.mjs` が生成） |
+| `data/blog/svg-lineage-queue.json` | run/read（系譜復元キュー、`build-lineage-queue.mjs` が生成） |
 | `docs/21_ブログ記事原稿/<slug>/` | read 主体（chart 参照） |
 | `docs/31_note記事原稿/<slug>/` | CRUD（note 原稿。ephemeral outbox: 存在しない場合は `restore-from-r2.sh <slug>` 先行必須） |
 | `.claude/scripts/blog/generate-article-charts.ts` | read / 軽微修正（CLI ディスパッチ追加時） |

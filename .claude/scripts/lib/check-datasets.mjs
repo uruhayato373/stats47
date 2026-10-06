@@ -9,6 +9,7 @@
  *   - 移した旧置き場 (RETIRED の from) がコード・workflow・package.json と、agent の手順書 (SKILL.md・agents・rules・
  *     CLAUDE.md・Codex 用ミラー) に残っている。コードのコメント行と、手順書で「旧置き場」「旧パス」と書いた経緯の行は除く
  *   - 画像が IMAGE_ROOTS の外にある (素材の原本は assets/、配信用はアプリの public/ へ)
+ *   - `.claude/state/` を指す行が AGENT_STATE (エージェント運用の状態の許可リスト) に無い / 許可リストに台帳に無い id がある
  * 出すだけのもの: target の置き場と現在地が違う行 (data/ への移行対象) の件数と一覧。
  *
  *   npm run check-datasets             # 検査 (error があれば exit 1)
@@ -19,7 +20,7 @@ import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { DATASETS, GOVERNED, IGNORED_NAMES, IMAGE_EXT, IMAGE_ROOTS, KINDS, RETIRED, SLOTS, TARGETS } from "../../../config/datasets.mjs";
+import { AGENT_STATE, DATASETS, GOVERNED, IGNORED_NAMES, IMAGE_EXT, IMAGE_ROOTS, KINDS, RETIRED, SLOTS, TARGETS } from "../../../config/datasets.mjs";
 import { DOMAINS } from "../../../config/paths.mjs";
 import { RETENTION_POLICIES } from "./prune-state-snapshots.mjs";
 
@@ -46,7 +47,9 @@ export function fixedPrefix(path) {
   return i < 0 ? path : path.slice(0, i);
 }
 
-export function checkDatasets({ datasets, files, governed, ignoredNames, kinds, targets, domainIds, retention, imageRoots = [], imageExt = null }) {
+const AGENT_STATE_DIR = ".claude/state/";
+
+export function checkDatasets({ datasets, files, governed, ignoredNames, kinds, targets, domainIds, retention, imageRoots = [], imageExt = null, agentState = null }) {
   const errors = [];
   if (imageExt) {
     for (const file of files) {
@@ -63,6 +66,9 @@ export function checkDatasets({ datasets, files, governed, ignoredNames, kinds, 
     if (!kinds[ds.kind]) errors.push(`${ds.id}: 語彙外の kind "${ds.kind}"`);
     if (!targets[ds.target]) errors.push(`${ds.id}: 語彙外の target "${ds.target}"`);
     if (!domainIds.has(ds.domain)) errors.push(`${ds.id}: ${DOMAINS} に無い領域 "${ds.domain}"`);
+    if (agentState && fixedPrefix(ds.path).startsWith(AGENT_STATE_DIR) && !agentState[ds.id]) {
+      errors.push(`${ds.id}: ${AGENT_STATE_DIR} はエージェント運用の状態だけを置く (事業の記録は data/ へ。置くなら AGENT_STATE に理由付きで足す)`);
+    }
     if (ds.retain !== undefined) {
       const policy = retention[ds.retain];
       if (!policy) errors.push(`${ds.id}: RETENTION_POLICIES に無い寿命 "${ds.retain}"`);
@@ -75,6 +81,10 @@ export function checkDatasets({ datasets, files, governed, ignoredNames, kinds, 
     } catch (e) {
       errors.push(`${ds.id}: ${e.message}`);
     }
+  }
+
+  for (const id of Object.keys(agentState ?? {})) {
+    if (!ids.has(id)) errors.push(`AGENT_STATE に台帳に無い id: ${id}`);
   }
 
   const governedFiles = files.filter((f) => governed.some((re) => re.test(f)) && !ignoredNames.has(f.split("/").pop()));
@@ -161,6 +171,7 @@ function main() {
     retention: RETENTION_POLICIES,
     imageRoots: IMAGE_ROOTS,
     imageExt: IMAGE_EXT,
+    agentState: AGENT_STATE,
   });
   result.errors.push(...findRetiredReferences(RETIRED, retiredHits()));
   for (const e of result.errors) console.error(`✗ ${e}`);

@@ -347,7 +347,7 @@ test("state 組立: schema validate を通り、blocked 時は recommendedAction
   const state = buildOperationsState({
     nowIso: NOW,
     inventory: freshInventory({ coverage: { gapVerticals: ["education"], thinVerticals: [] } }),
-    inventoryPath: ".claude/state/ads/inventory-latest.json",
+    inventoryPath: "data/affiliate/inventory-latest.json",
     ga4: null,
     ga4Path: null,
     compliance: { directPlacements: { total: 2, orphaned: [], missingDisclosure: [] } },

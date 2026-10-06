@@ -24,7 +24,7 @@ model: sonnet
 - カタログ (`src/catalog/products/packs.ts`) の CRUD と検証（`products:catalog --check`：ID 一意・`EXPECTED_PACK_IDS` 集合一致・価格整合/刻み・参照存在・approved/listed パックの `datasets` 実在=誇大表示防止）。
 - ジェネレータ（`src/generators/` : pptx/xlsx/csv/svg/png/pdf/listing/manifest/readiness）と汎用ビルダー
   （`src/build/build-product.ts` / `build-all.ts`）の保守。
-- 生成（`products:generate --id/--all`）・リリース台帳（`products:report` → `.claude/state/products/catalog-status.json`）。
+- 生成（`products:generate --id/--all`）・リリース台帳（`products:report` → `data/products/catalog-status.json`）。
 - 実データスナップショットの更新（`src/data/load-ranking-values.ts` で R2 取得 → `src/data/datasets/<key>.ts`）と
   商品→テーマ写像（`resolveDataset`）の拡張。
 - 出品前チェック（各商品 `.local/.../READINESS.md`）の整備とオーナーへの受け渡し。
@@ -45,7 +45,7 @@ model: sonnet
 
 ## File Boundary
 
-- 触ってよい: `packages/product-factory/`、`.claude/state/products/`、`.local/coconala-products/`（生成先）、
+- 触ってよい: `packages/product-factory/`、`data/products/`、`.local/coconala-products/`（生成先）、
   `.claude/todo/`（バックログ）。
 - 触らない: 公開 R2、永続 D1、本番 web、他ドメインの SSOT。commit/push/deploy は明示指示があるときだけ。
 

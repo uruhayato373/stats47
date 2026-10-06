@@ -69,7 +69,7 @@ async function main() {
   const allMode = args.includes('--all');
   const draftRoot = path.join(PROJECT_ROOT, 'docs/31_note記事原稿');
 
-  const indexPath = path.join(PROJECT_ROOT, '.claude/state/note-draft-index.json');
+  const indexPath = path.join(PROJECT_ROOT, 'data/note/note-draft-index.json');
   const indexData = JSON.parse(fs.readFileSync(indexPath, 'utf8'));
   const drafts = indexData.drafts || {};
 

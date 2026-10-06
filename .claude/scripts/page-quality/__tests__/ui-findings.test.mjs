@@ -259,7 +259,7 @@ test("起票したカードはバックログのパーサーで ID・sweep 実�
   const parsed = parseBacklog(text).find((c) => c.id === card.id);
   assert.ok(parsed, "カードがパースされない");
   assert.equal(parsed.executor, "sweep");
-  assert.match(parsed.verify, /ui-findings\.ts --assert-handled \.claude\/state\/page-quality\/backlog-batches\/UI-FIX-HOME-20261004\.txt/);
+  assert.match(parsed.verify, /ui-findings\.ts --assert-handled data\/page-quality\/backlog-batches\/UI-FIX-HOME-20261004\.txt/);
   assert.deepEqual(staleBatchFiles(["UI-FIX-HOME-20261004.txt", "UI-FIX-THEME-20260927.txt", "README.md"], [card.id]), [
     "UI-FIX-THEME-20260927.txt",
   ]);
@@ -273,11 +273,11 @@ test("週次監査が同期と起票を行い、週次と backlog-loop の両方
   assert.match(weekly, /ui-findings\.ts "\$\{ARGS\[@\]\}"/);
   assert.match(weekly, /ARGS=\(--sync /);
   assert.match(weekly, /--main-deployed-at/);
-  assert.match(weekly, /git add \.claude\/state\/page-quality\/ \.claude\/todo\/backlog\.md/);
+  assert.match(weekly, /git add data\/page-quality\/ \.claude\/todo\/backlog\.md/);
   // ボットのコミットは pre-commit を通らないので、同じ衛生検査を commit 前に掛ける (1MB 超のキューを push させない)
-  assert.match(weekly, /git add \.claude\/state\/page-quality\/[^\n]*\n(?:\s*#[^\n]*\n)*\s*node \.claude\/scripts\/lib\/check-repo-hygiene\.cjs --staged --baseline/);
+  assert.match(weekly, /git add data\/page-quality\/[^\n]*\n(?:\s*#[^\n]*\n)*\s*node \.claude\/scripts\/lib\/check-repo-hygiene\.cjs --staged --baseline/);
   const loop = readFileSync(new URL(".github/workflows/backlog-loop-daily.yml", root), "utf8");
-  assert.match(loop, /git add -- [^\n]*\.claude\/state\/page-quality/);
+  assert.match(loop, /git add -- [^\n]*data\/page-quality/);
 });
 
 // チャートの文字の指摘は直し方が分かれる (部品を直す agent / 作り直すだけのスクリプト)。
@@ -286,7 +286,7 @@ test("チャートの文字の指摘を含むカードには、種類ごとの�
   const blog = finding({ key: "machine|https://stats47.jp/blog/beer|blog_svg_text_issues", metric_key: "blog_svg_text_issues", template: "blog-detail" });
   const d3 = finding({ key: "machine|https://stats47.jp/areas/13000|chart_text_issues", metric_key: "chart_text_issues", template: "area" });
   const [blogCard] = planUiCards({ queue: [blog], openIds: [], today: "2026-10-04", screenshotBaseUrl: "https://storage.stats47.jp" });
-  assert.match(blogCard.markdown, /plan-svg-text-fix\.ts @\.claude\/state\/page-quality\/backlog-batches\/UI-FIX-BLOG-DETAIL-20261004\.txt/);
+  assert.match(blogCard.markdown, /plan-svg-text-fix\.ts @data\/page-quality\/backlog-batches\/UI-FIX-BLOG-DETAIL-20261004\.txt/);
   assert.match(blogCard.markdown, /regen-fixes.*オーナー承認.*\[実行:ユーザー\]/);
   assert.match(blogCard.markdown, /generator-fix.*packages\/svg-builder/);
   const [areaCard] = planUiCards({ queue: [d3], openIds: [], today: "2026-10-04", screenshotBaseUrl: "https://storage.stats47.jp" });

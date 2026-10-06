@@ -34,7 +34,7 @@ stats47 の統計データを Amazon KDP 向け電子書籍 (EPUB3) として量
   series 整合・価格・manuscript 以降の fresh 章/blogSlug）。
 - EPUB 生成器 (`src/generators/epub.ts`) と kindle チャネル (`fetch-content` / `md-to-xhtml` / `cover` / `build-book`) の保守。
 - 生成（`products:kindle:generate`）・書き下ろし比率の確認（30% 規定）・台帳（`products:kindle:report` →
-  `.claude/state/products/kindle-status.json`）。
+  `data/products/kindle-status.json`）。
 - 書き下ろし章（freshFile）の配線と、企画の manuscript 昇格（需要ファースト＝1 冊ずつ）。
 - **生成物の検証（`products:kindle:verify-epub`）を生成のたびに実行する**。EPUB は `.local` にしか
   無く CI で検証できないため、これは**公開前のローカルゲート**であり自動では走らない。
@@ -75,7 +75,7 @@ BEHAVIOR CONTRACT（命令）:
 ## File Boundary
 
 - 触れてよい: `packages/product-factory/src/channels/kindle/**`・`src/generators/epub.ts`・`manuscripts/**`・
-  `.local/kindle-books/**`・`.claude/state/products/kindle-status.json`。
+  `.local/kindle-books/**`・`data/products/kindle-status.json`。
 - 触れない: R2 配信物、KDP、ブログ本文の SSOT（R2 記事＝`blog-editor` の領域）、ココナラ商品（`coconala-*`）。
 
 ## 関連

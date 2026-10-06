@@ -14,7 +14,7 @@ GSC「ページ」インデックスカバレッジ (404/soft404/5xx/crawled-not
 **パイプライン** (どこからでも再現可):
 1. ユーザー GSC UI export → ~/Downloads に cp932 zip
 2. `python3 .claude/scripts/gsc/ingest-gsc-export.py` → `coverage-drilldown/<週>/<cat>-drilldown.csv` + `category-totals.json` + `coverage-trend.csv` (cp932 ファイル名は NFC 正規化 + zip内容で分類)
-3. `node .claude/scripts/gsc/build-coverage-queue.mjs` → 本番 HTTP を Googlebot UA で実測し A/B 分類 → SSOT `.claude/state/gsc/coverage-remediation-queue.json` (状態 upsert 保持) + `LATEST.md` + `coverage-totals-history.csv` (経過観測) + curated `coverage-live-resubmit-urls.csv`
+3. `node .claude/scripts/gsc/build-coverage-queue.mjs` → 本番 HTTP を Googlebot UA で実測し A/B 分類 → SSOT `data/gsc/coverage-remediation/coverage-remediation-queue.json` (状態 upsert 保持) + `LATEST.md` + `coverage-totals-history.csv` (経過観測) + curated `coverage-live-resubmit-urls.csv`
 4. CLI: `--next N` / `--mark-done <url> --wave-id` / `--no-probe` (キャッシュ再利用)
 
 **命名規約 (重要)**: `auto-resubmit.mjs` は `coverage-drilldown/**/*-urls.csv` を全て Indexing API 送信対象にする。死んだ404を送ると quota(200/日)浪費 → 生 drilldown は `-drilldown.csv` (拾われない)、build が live だけ curated `coverage-live-resubmit-urls.csv` に出す。content-check(soft404) は薄いまま再送信すると再フラグされるので resubmit 格上げまで送らない。

@@ -33,8 +33,8 @@
  *   done でも接地が不健全な key は `dataBlockers` を付けて可視化する (公開済みの是正対象)。
  *
  * 出力:
- *   .claude/state/ai-content/remediation-queue.json  (機械可読・per-key status + impressions + reason + checkedAt)
- *   .claude/state/ai-content/LATEST.md               (人間向けサマリ)
+ *   data/ai-content/remediation/remediation-queue.json  (機械可読・per-key status + impressions + reason + checkedAt)
+ *   data/ai-content/remediation/LATEST.md               (人間向けサマリ)
  *
  * Usage:
  *   node .claude/scripts/ai-content/build-ai-content-queue.mjs            # 再構築 (GSC 流入スコープ)
@@ -61,7 +61,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..", "..", "..");
 const R2_PUBLIC = process.env.R2_PUBLIC_FETCH_URL ?? R2_PUBLIC_BASE_URL;
 const GSC_SNAP_DIR = join(ROOT, "data/gsc/snapshots");
-const STATE_DIR = join(ROOT, ".claude/state/ai-content");
+const STATE_DIR = join(ROOT, "data/ai-content/remediation");
 const QUEUE_JSON = join(STATE_DIR, "remediation-queue.json");
 const LATEST_MD = join(STATE_DIR, "LATEST.md");
 const HISTORY_CSV = join(STATE_DIR, "progress-history.csv");

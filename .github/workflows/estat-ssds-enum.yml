@@ -4,7 +4,7 @@ name: 🧮 Enumerate SSDS Indicators (weekly)
 # 未使用 cdCat01 = クリーンに追加できるランキング候補を洗い出す。read-only (R2/D1 非書込)。
 # e-Stat APP_ID は CI 専任。
 #
-# 2026-07-27 に一度手動で生成した .claude/state/estat/ssds-candidates.json (4,114 件) が
+# 2026-07-27 に一度手動で生成した data/estat/ssds-candidates.json (4,114 件) が
 # 更新の仕組みを持たず陳腐化していたため、週次 cron で自動更新するようにした。
 # 「データを取得するか」とは独立に「どんな指標が存在するか」を安く俯瞰するための発見カタログで、
 # ranking-expander 等の候補選定インプットになる (実データ投入は data-ingester に委譲)。
@@ -53,7 +53,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .claude/state/estat/ssds-candidates*.json
+          git add data/estat/ssds-candidates*.json
           if git diff --cached --quiet; then
             echo "No catalog changes"
             exit 0

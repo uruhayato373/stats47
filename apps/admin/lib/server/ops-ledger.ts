@@ -65,7 +65,7 @@ export interface OpsSummary {
 
 function readCi(): OpsSummary["ci"] {
   return wrap(() => {
-    const d = readJson<Record<string, any>>(".claude/state/ci/workflow-health.json");
+    const d = readJson<Record<string, any>>("data/ci/workflow-health.json");
     const workflows: WorkflowHealth[] = (d.results ?? []).map((r: any) => ({
       workflow: r.workflow,
       unhealthy: Boolean(r.unhealthy),
@@ -91,7 +91,7 @@ function readCi(): OpsSummary["ci"] {
 
 function readR2Freshness(): OpsSummary["r2Freshness"] {
   return wrap(() => {
-    const d = readJson<Record<string, any>>(".claude/state/ci/r2-freshness.json");
+    const d = readJson<Record<string, any>>("data/ci/r2-freshness.json");
     return (d.results ?? []).map((r: any) => ({
       key: r.key,
       status: r.status ?? (r.error ? "error" : "unknown"),

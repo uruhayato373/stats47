@@ -22,7 +22,7 @@ const require = createRequire(import.meta.url);
 const { parseBacklog } = require("../lib/backlog-lib.cjs");
 
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
-const QUEUE_PATH = path.join(PROJECT_ROOT, ".claude/state/data/estat-year-coverage/queue.json");
+const QUEUE_PATH = path.join(PROJECT_ROOT, "data/estat/year-coverage/queue.json");
 const BACKLOG_PATH = path.join(PROJECT_ROOT, ".claude/todo/backlog.md");
 const args = process.argv.slice(2);
 const today = new Intl.DateTimeFormat("sv-SE", { timeZone: "Asia/Tokyo", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date());

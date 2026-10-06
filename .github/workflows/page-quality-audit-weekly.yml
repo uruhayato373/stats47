@@ -128,7 +128,7 @@ jobs:
         run: |
           git fetch --quiet --depth=1 origin main
           ARGS=(--sync --run .local/r2/state/page-quality/latest.json)
-          ARGS+=(--review .claude/state/metrics/page-quality/ui-review-latest.json)
+          ARGS+=(--review data/page-quality/metrics/ui-review-latest.json)
           ARGS+=(--main-deployed-at "$(git log -1 --format=%cI origin/main)")
           npx tsx .claude/scripts/page-quality/ui-findings.ts "${ARGS[@]}"
 
@@ -137,9 +137,9 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .claude/state/metrics/page-quality/
+          git add data/page-quality/metrics/
           # UI 指摘キューと起票したカード (live/ は .gitignore 済み)
-          git add .claude/state/page-quality/ .claude/todo/backlog.md
+          git add data/page-quality/ .claude/todo/backlog.md
           # ボットのコミットは pre-commit を通らない。1MB 超のファイルが develop に入ると全員のコミットが止まる
           # (2026-10-04 に ui-findings-queue.json 1.96MB で発生)。stage したファイルだけを同じ検査に掛ける
           node .claude/scripts/lib/check-repo-hygiene.cjs --staged --baseline

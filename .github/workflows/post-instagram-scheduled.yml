@@ -2,7 +2,7 @@ name: 📸 Instagram scheduled post (daily)
 
 # Phase 9 後続 (2026-04-26): IG Graph API は scheduled_publish_time 非対応のため、
 # GitHub Actions cron で post-instagram (即時 API) を発火する形で予約投稿を代替。
-# 投稿対象は .claude/state/instagram-w*-schedule.json (当日を含む週ファイルを自動選択) の
+# 投稿対象は data/sns/instagram-w*-schedule.json (当日を含む週ファイルを自動選択) の
 # today (JST) エントリ。1 日複数本対応 (2026-07-11〜): cron を 3 回発火し、各実行が
 # 「time <= 現在時刻 かつ未投稿」の最早 1 件だけを投稿する (ig-posted-log で二重投稿防止)。
 # 該当なしなら exit 0 で何もしない。投稿成功時は #127 に結果コメント投稿。
@@ -81,7 +81,7 @@ jobs:
         run: |
           POSTED_AT="$(date -u +%Y-%m-%dT%H:%M:%SZ)"
           echo "{\"date\":\"${{ steps.post.outputs.post_date }}\",\"domain\":\"${{ steps.post.outputs.domain }}\",\"content_key\":\"${{ steps.post.outputs.content_key }}\",\"permalink\":\"${{ steps.post.outputs.permalink }}\",\"post_type\":\"${{ steps.post.outputs.post_type }}\",\"posted_at\":\"${POSTED_AT}\"}" \
-            >> .claude/state/ig-posted-log.jsonl
+            >> data/sns/ig-posted-log.jsonl
           # 台帳への書き込みは sns-posts-store.cjs 経由のみ (rules §3)。
           # scheduled 行があれば昇格、既に posted なら no-op で冪等。
           node .claude/scripts/instagram/record-posted.cjs \
@@ -92,7 +92,7 @@ jobs:
             --posted-at "${POSTED_AT}"
           git config user.email "actions@github.com"
           git config user.name "GitHub Actions"
-          git add .claude/state/ig-posted-log.jsonl data/sns/posts.json
+          git add data/sns/ig-posted-log.jsonl data/sns/posts.json
           git commit -m "chore(ig): mark ${{ steps.post.outputs.content_key }} as posted [skip ci]"
           # 投稿台帳は develop へ commit-back する (main 直推しは branch-workflow 違反・
           # 投稿のたびに main/develop が分岐する。main へは次の PR で乗る。2026-08-16 是正)

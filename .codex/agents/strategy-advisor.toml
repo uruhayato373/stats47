@@ -68,7 +68,7 @@ developer_instructions = '''
 ## 出力先
 
 - `packages/data-configs/src/business-plan/` — 事業計画のauthored SSOT
-- `.claude/state/business-plan/` — generatorが作る管理画面・週次運用state
+- `data/business-plan/` — generatorが作る管理画面・週次運用state
 - `.claude/todo/{weekly,monthly}.md` — 実行中の計画
 
 ## Output Contract

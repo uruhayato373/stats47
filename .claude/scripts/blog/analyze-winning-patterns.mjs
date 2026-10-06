@@ -16,7 +16,7 @@
  *
  * 出力:
  *   .claude/skills/blog/analyze-winning-patterns/reference/reports/<date>.md
- *   .claude/state/blog/winning-patterns.json                   機械向け (featureSignals + perArticleConformance)
+ *   data/blog/winning-patterns.json                   機械向け (featureSignals + perArticleConformance)
  *
  * 主指標 = CTR (同 impression 条件での "魅力") + 掲載順位 (position)。
  * 生クリック数は検索需要の母数に交絡するため補助。滞在 (GA4) は将来拡張 (per-page snapshot が要る)。
@@ -46,7 +46,7 @@ const getArg = (flag, def) => {
   return i >= 0 ? args[i + 1] : def;
 };
 const MIN_IMP = parseInt(getArg("--min-imp", "15"), 10); // 評価対象にする最低 impression
-const JSON_OUT = getArg("--json", path.join(PROJECT_ROOT, ".claude/state/blog/winning-patterns.json"));
+const JSON_OUT = getArg("--json", path.join(PROJECT_ROOT, "data/blog/winning-patterns.json"));
 const CONCURRENCY = 8;
 
 // ── 1. GSC 最新 snapshot ─────────────────────────────────────────────

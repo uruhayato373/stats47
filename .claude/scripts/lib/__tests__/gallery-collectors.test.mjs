@@ -60,14 +60,14 @@ test('note 本文画像の監査対象は有料記事と専用デザインのシ
   const { fileURLToPath } = await import('node:url');
   const { enumerateNoteBodies, BESPOKE_COVER_VERTICALS } = await import('../gallery-collectors.mjs');
   const root = mkdtempSync(join(tmpdir(), 'note-bodies-'));
-  mkdirSync(join(root, '.claude/state'), { recursive: true });
-  writeFileSync(join(root, '.claude/state/note-draft-index.json'), JSON.stringify({ drafts: {
+  mkdirSync(join(root, 'data/note'), { recursive: true });
+  writeFileSync(join(root, 'data/note/note-draft-index.json'), JSON.stringify({ drafts: {
     pub: { r2_path: 'note/stats47-note/pub', vertical: 'stats47-note' },
     paid: { r2_path: 'note/stats47-note/paid', vertical: 'stats47-note', r2_access: 'private' },
     bespoke: { r2_path: 'note/koumuin-claude-code/bespoke', vertical: 'koumuin-claude-code' },
     'became-paid': { r2_path: 'note/stats47-note/became-paid', vertical: 'stats47-note' },
   } }));
-  writeFileSync(join(root, '.claude/state/note-published-urls.json'), JSON.stringify({ articles: {
+  writeFileSync(join(root, 'data/note/note-published-urls.json'), JSON.stringify({ articles: {
     'became-paid': { r2_path: 'note/stats47-note/became-paid', vertical: 'stats47-note', r2_access: 'private' },
   } }));
   assert.deepEqual(enumerateNoteBodies(root).map((c) => c.slug), ['pub']);

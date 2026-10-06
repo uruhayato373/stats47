@@ -81,7 +81,7 @@ test("ディレクトリ scope はディレクトリごと消し、存在しな�
 const PERMANENT_DATED_DIRS = [
   "data/gsc/coverage-drilldown", // GSC UI の手動 export (再取得不能)
   "data/note/dashboard", // note ダッシュボードの baseline
-  ".claude/state/metrics/themes", // テーマ品質の週次証拠 (theme-chart-audit が参照)
+  "data/themes/evidence", // テーマ品質の週次証拠 (theme-chart-audit が参照)
   ".claude/state/metrics/prompt-evals",
   "data/cloudflare/weekly-snapshots",
   "data/improvement/ga4-improvement/archive",
@@ -101,7 +101,7 @@ test("追跡中の日付名 state は必ず寿命 (policy / 恒久宣言 / basel
   const root = resolve(fileURLToPath(new URL("../../../..", import.meta.url)));
   const tracked = execFileSync(
     "git",
-    ["ls-files", "-z", ".claude/state/metrics", ".claude/state/business-plan", ".claude/state/search-growth", ".claude/skills/analytics", "data"],
+    ["ls-files", "-z", ".claude/state/metrics", "data/business-plan", "data/search-growth", ".claude/skills/analytics", "data"],
     { cwd: root, encoding: "utf8" },
   )
     .split("\0")

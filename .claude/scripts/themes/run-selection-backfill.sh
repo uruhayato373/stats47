@@ -195,7 +195,7 @@ if [ "$NO_COMMIT" = 1 ]; then
 fi
 git add -- packages/data-configs/src/theme-catalog .claude/config/quality-warning-baseline.json \
   .claude/skills/theme/manage-theme-portfolio/reference/audits \
-  .claude/state/theme/role-review-queue.json .claude/state/theme/LATEST.md
+  data/themes/role-review/role-review-queue.json data/themes/role-review/LATEST.md
 if git diff --cached --quiet; then
   log "commit 対象なし (通過 0 件)"
   exit "$RUN_STATUS"

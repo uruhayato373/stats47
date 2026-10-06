@@ -7,7 +7,7 @@
  * ここに統合する。
  *
  * 派生物 (手編集しない):
- *   - .claude/state/note-published-urls.json  ← generate-note-catalog.ts が生成
+ *   - data/note/note-published-urls.json  ← generate-note-catalog.ts が生成
  *   - マガジン割当 / フッター注入の入力        ← (次段) downstream 移行で接続
  *
  * 正典ルール: .claude/scripts/note/catalog/README.md

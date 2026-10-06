@@ -3,7 +3,7 @@
  *
  * Usage:
  *   tsx .claude/scripts/page-quality/validate-schema.ts [path]
- *   (省略時は .claude/state/metrics/page-quality/latest.json)
+ *   (省略時は data/page-quality/metrics/latest.json)
  *
  * Exit code: 0 = valid / 1 = invalid
  */

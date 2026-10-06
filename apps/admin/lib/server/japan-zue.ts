@@ -35,7 +35,7 @@ export type JapanZueResearchData =
   | { error: string; source: string };
 
 export function japanZueResearchData(root = projectRoot()): JapanZueResearchData {
-  const relative = ".claude/state/source-inventory/japan-zue/2025-26/evidence-summary.json";
+  const relative = "data/source-inventory/japan-zue/2025-26/evidence-summary.json";
   const source = path.join(root, relative);
   try {
     const summary = JSON.parse(fs.readFileSync(source, "utf8")) as JapanZueInventorySummary;

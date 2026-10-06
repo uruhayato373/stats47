@@ -6,7 +6,7 @@
  * 56 日 = **非重複 2 窓 (最新週 + その 4 週前)** の合算で構成する
  * (2026-07-11 survey ポートフォリオ監査の訂正記録で実証済みの失敗パターンの再発防止)。
  *
- * 集計規約 (schema 正典: .claude/state/surveys/README.md):
+ * 集計規約 (schema 正典: data/surveys/README.md):
  *   - GSC: impressions/clicks = 2 窓合算。ctr = 合算比、averagePosition = impressions 加重平均
  *     — いずれも measured (impressions >= 100/56d) のみ保存。measured-low はカウント値のみ
  *   - GA4: landingPageViews = screenPageViews の 2 窓合算 (加算可能)。engagedSessions は
@@ -31,7 +31,7 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
-const PORTFOLIO = path.join(PROJECT_ROOT, ".claude/state/surveys/portfolio.json");
+const PORTFOLIO = path.join(PROJECT_ROOT, "data/surveys/portfolio.json");
 const GSC_SNAP = path.join(PROJECT_ROOT, "data/gsc/snapshots");
 const GA4_SNAP = path.join(PROJECT_ROOT, "data/ga4/snapshots");
 

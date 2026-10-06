@@ -13,7 +13,7 @@
  *   - lane "opportunity": blocker 無しだが CTR 改善余地 (expectedLift>0) がある記事 → 次レーン。
  *   - clean (blocker 無し・改善余地無し) はキューに入れない。
  *
- * 真実源: .claude/state/blog/remediation-queue.json (git tracked, 状態を保持)
+ * 真実源: data/blog/remediation-queue.json (git tracked, 状態を保持)
  *
  * Usage:
  *   # 構築/更新 (audit を fresh 取得 → GSC とマージ → 状態を保ったまま upsert)
@@ -47,8 +47,8 @@ const getArg = (flag, fallback) => {
 };
 const hasFlag = (flag) => args.includes(flag);
 
-const QUEUE_PATH = path.join(PROJECT_ROOT, ".claude/state/blog/remediation-queue.json");
-const HISTORY_PATH = path.join(PROJECT_ROOT, ".claude/state/blog/auto-brushup-history.json");
+const QUEUE_PATH = path.join(PROJECT_ROOT, "data/blog/remediation-queue.json");
+const HISTORY_PATH = path.join(PROJECT_ROOT, "data/blog/auto-brushup-history.json");
 
 // CTR 改善余地スコア (select-brushup-candidates.mjs と同じ Backlinko 2023 業界平均 CTR)
 const INDUSTRY_AVG_CTR = {
@@ -216,7 +216,7 @@ const dedupCutoff = nowMs - DEDUP_DAYS * 24 * 60 * 60 * 1000;
 // 3.5 勝ちパターン適合度 (analyze-winning-patterns.mjs の出力があれば取り込む)。
 // 床(blocker)是正に加え、流入はあるが勝ちプロファイルから外れた記事を opportunity で優先する。
 const conformanceBySlug = new Map();
-const wpPath = path.join(__dirname, "..", "..", "state", "blog", "winning-patterns.json");
+const wpPath = path.join(__dirname, "..", "..", "..", "data", "blog", "winning-patterns.json");
 if (fs.existsSync(wpPath)) {
   try {
     const wp = JSON.parse(fs.readFileSync(wpPath, "utf8"));

@@ -5,7 +5,7 @@
  * 規約: .claude/rules/buzz-map-standards.md / .claude/rules/sns-content-standards.md
  *
  * このファイルは企画の唯一の authored source。build-buzz-map-catalog.ts が machine lane と
- * このファイルを統合し、重複を解消して state JSON (.claude/state/sns/buzz-map-catalog.json) を生成する。
+ * このファイルを統合し、重複を解消して state JSON (data/sns/buzz-map-catalog.json) を生成する。
  * state JSON を直接編集しない。ここだけを編集する。
  *
  * 各エントリの metricKeys は「実在確認済みの key のみ」を持つ (packages/data-configs/src/metrics/<key>.ts
