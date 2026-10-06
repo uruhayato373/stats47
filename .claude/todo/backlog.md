@@ -322,7 +322,7 @@ updated: 2026-10-06
 - **完了条件**: 2 本が note で公開され、`note-published-urls.json` に 2 件の URL があり、無料部分と有料部分の境界が意図どおりであることを screenshot で確認済み。公開日から 4 週間後 (公開日 + 28 日) に 2 本の売上を note ダッシュボードで比べる予定を `improvements.md` 側へ引き渡す。
 
 ### [BLOG-TEXT-CHART-CONFLICT-20261006] 図を一次資料から作り直した 3 記事で、図と食い違う本文を直して再公開する
-タグ: [コンテンツ] [種類:不具合] [実行:対話] [起票:2026-10-06] [領域:サイト]
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-06] [領域:サイト]
 
 - **経緯 (2026-10-06)**: `alcohol-prefecture-map` / `automotive-industry-transformation-map` / `birth-death-gap-decline` の図を R2・国税庁「酒のしおり」から作り直し、図だけ R2 に反映した (`regenerate-blog-svgs.yml` の source-repair → all)。blog-critic の差分審査で、図と同じ節の本文に図と食い違う記述が見つかった。本文は旧来のゲート負債 (下記) で再公開できず、まだ直っていない。
 - **直す本文 (critic BLOCK/MAJOR・数値は確認済み)**:
@@ -332,13 +332,6 @@ updated: 2026-10-06
 - **再公開を止めている負債 (`quality-gate.mjs`)**: automotive = 手書きの「データ出典」節・県名直後の括弧数値 12 件・他 4 図の data JSON 欠落 / alcohol = 内部リンク 0・括弧数値 1 件・他 3 図の data JSON 欠落 / birth-death = 合計特殊出生率の図の data JSON 欠落。
 - **次**: 3 記事を `/brushup-blog --target article` で是正し、critic PASS 後に公開する。記事詳細は prerender なので本文の反映には再デプロイが要る (`nextjs-ssg-preservation.md`)。
 - **完了条件**: 3 記事の本番本文に上記の食い違いが無く、`quality-gate.mjs` が blocker 0。
-
-### [BLOG-SVG-NODATA-20261006] 元データが無く作り直せないブログ SVG 3 枚の文字はみ出し・重なりを手で直す
-タグ: [UI・UX] [種類:不具合] [実行:対話] [起票:2026-10-06] [領域:サイト]
-
-- **対象** (`plan-svg-text-fix.ts` の判定 `no-data`): `alcohol-prefecture-map/data/liquor-type-breakdown.svg` (「2,760 （33.5%）」が右に 35px はみ出す) / `automotive-industry-transformation-map/data/chart5-line.svg` (系列ラベル「静岡」「神奈川」「大阪」「兵庫」が重なる) / `birth-death-gap-decline/data/inline-chart-1.svg` (「▲15.6（千人当たり）」が右に 48px はみ出す。無意味名 `inline-chart-N` で型も判別できない)。
-- **次**: data JSON を一次資料から作り直して svg-builder で再生成するか、SVG を手で直すかを記事ごとに決める。SVG の絵から値を逆復元しない (`blog-svg-chart-standards.md`)。
-- **完了条件**: 3 枚が `findChartTextIssues` で 0 件。
 
 ### [SHARE-BUTTON-CONTRAST-01] ブログの共有ボタン (LINE・はてな) と強調文字の色のコントラスト不足をどう直すか決める
 タグ: [UI・UX] [種類:不具合] [実行:対話] [起票:2026-10-06] [領域:サイト]
