@@ -277,6 +277,23 @@ updated: 2026-10-06
 - **停止条件**: 単発の PSI 値で改善と判定しない (日次計測はばらつくため 3 週以上の推移で見る)。デプロイはオーナーの明示承認まで行わない。ベースライン 9,347ms は 2026-08-04 の実測値で、これを更新して達成扱いにしない。
 - **完了条件**: `ranking/total-population,mobile` の LCP が 3 週連続でベースライン 9,347ms を下回る。悪化要因が topology fetch でなかった場合は、実測で特定した真因と対策を本カードへ記録してから閉じる。
 
+### [DEPLOY-WORKER-CACHE-STALE-CSS-01] デプロイ中に Workers Cache に入った HTML が消えた CSS を参照し、ホームが CSS なしで表示される事故を止める
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-06] [領域:サイト]
+
+- **事象 (2026-10-06)**: PR #1086 のデプロイ (`deploy-workers` 21:39–21:50 UTC) の後、本番 `/` が CSS なしで表示され、
+  post-deploy-smoke の 375px で横スクロール 273px になった (Issue #1089)。`/` の HTML は `/_next/static/css/d69590e93db400ea.css`
+  を参照していたが、この CSS はデプロイで消えて 404 だった。応答は `cf-cache-status: HIT`・`age: 1544` (22:10:22 UTC 時点。
+  21:44 ごろ、つまりデプロイ中にキャッシュされた)。ほかのページと `/?nocache=…` は新しい `d4949ee3e21c581b.css` (200) を参照していた。
+- **切り分け**: zone の URL purge (`purge-cache.ts --urls https://stats47.jp/`) では直らず、`age` は増え続けた。`purge-cdn.yml`
+  (Workers Cache の `--all` を含む) を実行すると 1 分で新しい CSS を参照するようになった。したがって古い HTML は Workers Cache に残っていた。
+  `deploy-workers.yml` はデプロイ後に Workers Cache を消していない。
+- **[仮説]** デプロイの切り替え中に旧版の Worker が `/` を描画して Workers Cache に入れ、旧版の CSS は新版の静的資産から消えた。
+  CSS のハッシュが変わるデプロイのたびに起こりうる。検証: 次に CSS が変わるデプロイの直後に `curl -sI https://stats47.jp/` の
+  `age` と CSS の参照先を見る。
+- **次**: どちらかで止める。(a) `deploy-workers` の最後に `purge-worker-cache.ts --all` を足す (デプロイ完了後に古い HTML を消す)。
+  (b) 1 つ前のデプロイの `_next/static` を残す。(a) の方が小さい。post-deploy-smoke はこの事故を検出できているので、検査は足さない。
+- **完了条件**: CSS のハッシュが変わるデプロイの後に、`/` を含む代表 URL が新しい CSS を参照し、post-deploy-smoke が通る。
+
 ## 🟡 中 — 2〜3ヶ月以内
 
 ### [DEPS-TAILWIND4-01] apps/web を tailwindcss 4 へ移行し、braces を runtime 依存から外す
