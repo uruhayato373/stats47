@@ -3,10 +3,10 @@
  * adsense-diagnostics-run — 週次 AdSense 候補生成 (最大3件・決定的)。
  *
  * 診断正典: ./lib/adsense-diagnostics.mjs。運用正典: /adsense-improvement。
- * 入力: .claude/state/metrics/adsense/{history,history-devices,history-placements,history-formats}.csv
+ * 入力: data/adsense/{history,history-devices,history-placements,history-formats}.csv
  *       + snapshot manifest.json (job status)
- *       + .claude/state/metrics/adsense/past-effects.json (任意・effect/none|adverse 台帳)
- * 出力: .claude/state/metrics/adsense/candidates-latest.json (提示まで。バックログ追加・
+ *       + data/adsense/past-effects.json (任意・effect/none|adverse 台帳)
+ * 出力: data/adsense/candidates-latest.json (提示まで。バックログ追加・
  *       配置変更・deploy は人間承認)
  *
  *   node .claude/scripts/metrics/adsense-diagnostics-run.mjs [YYYY-Www]
@@ -19,8 +19,8 @@ import { resolvePeriods } from "./lib/periods.mjs";
 import { buildAdsenseCandidates, MAX_CANDIDATES, ADSENSE_ACTIVE_WIP_LIMIT, ADSENSE_WEEKLY_ADOPTION_LIMIT } from "./lib/adsense-diagnostics.mjs";
 import { MANIFEST_FILE } from "./lib/adsense-report-contract.mjs";
 
-const STATE_DIR = join(PROJECT_ROOT, ".claude/state/metrics/adsense");
-const SNAP_DIR = join(PROJECT_ROOT, ".claude/skills/analytics/adsense-improvement/reference/snapshots");
+const STATE_DIR = join(PROJECT_ROOT, "data/adsense");
+const SNAP_DIR = join(PROJECT_ROOT, "data/adsense/snapshots");
 
 const num = (v) => {
   if (v === undefined || v === null || v === "") return null;
@@ -164,7 +164,7 @@ function main() {
     console.log(`  [${c.rule}] ${c.key} score=${c.score} confidence=${c.confidence}`);
     console.log(`      判定: 14日=${c.judgment.day14} / 28日=${c.judgment.day28}  lever=${c.expectedLever}`);
   }
-  console.log(`wrote .claude/state/metrics/adsense/candidates-latest.json`);
+  console.log(`wrote data/adsense/candidates-latest.json`);
 }
 
 main();

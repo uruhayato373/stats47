@@ -52,7 +52,7 @@ jobs:
           git checkout develop
           git pull --rebase origin develop
 
-          SNAPSHOT_DIR=".claude/skills/analytics/sns-metrics-improvement/snapshots"
+          SNAPSHOT_DIR="data/sns/metric-snapshots"
           git add "$SNAPSHOT_DIR"
 
           if git diff --cached --quiet; then
@@ -68,7 +68,7 @@ jobs:
         if: always()
         run: |
           DATE=$(date -u +%Y-%m-%d)
-          SNAPSHOT=".claude/skills/analytics/sns-metrics-improvement/snapshots/${DATE}/metrics.csv"
+          SNAPSHOT="data/sns/metric-snapshots/${DATE}/metrics.csv"
           {
             echo "# SNS Metrics Weekly — ${DATE}"
             echo ""

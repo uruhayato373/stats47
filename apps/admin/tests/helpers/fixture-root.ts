@@ -9,7 +9,7 @@ import path from "node:path";
  * project-root.ts は `<root>/package.json` の name === "stats47-monorepo" を検証し、
  * posts-store.ts は `<root>/.claude/scripts/lib/sns-posts-store.cjs` を実行時 require する。
  * → fixture root にこの 2 つを用意すれば、全ての読み書きが fixture 配下に閉じ、
- *   実 SSOT (.claude/state/sns/posts.json 等) には一切触れない。
+ *   実 SSOT (data/sns/posts.json 等) には一切触れない。
  *
  * 使い方 (テスト側):
  *   const root = makeFixtureRoot();          // beforeEach
@@ -82,7 +82,7 @@ export function makeFixtureRoot(opts: FixtureOptions = {}): string {
   fs.copyFileSync(REAL_STORE, path.join(libDir, "sns-posts-store.cjs"));
 
   // 3) posts.json seed
-  const snsStateDir = path.join(root, ".claude/state/sns");
+  const snsStateDir = path.join(root, "data/sns");
   fs.mkdirSync(snsStateDir, { recursive: true });
   const posts = opts.posts ?? [];
   const nextId = posts.reduce((m, p) => Math.max(m, p.id || 0), 0) + 1;
@@ -93,6 +93,7 @@ export function makeFixtureRoot(opts: FixtureOptions = {}): string {
 
   // 4) IG schedule ファイル群 (.claude/state 直下)
   const stateDir = path.join(root, ".claude/state");
+  fs.mkdirSync(stateDir, { recursive: true });
   for (const [name, entries] of Object.entries(opts.igSchedules ?? {})) {
     fs.writeFileSync(
       path.join(stateDir, name),
@@ -152,7 +153,7 @@ export function cleanupFixtureRoot(root: string): void {
 /** fixture の posts.json を読み返す (書込検証用)。 */
 export function readPosts(root: string): SeedPost[] {
   const raw = fs.readFileSync(
-    path.join(root, ".claude/state/sns/posts.json"),
+    path.join(root, "data/sns/posts.json"),
     "utf-8",
   );
   return JSON.parse(raw).posts as SeedPost[];
@@ -181,7 +182,7 @@ export function readGalleryState(root: string): Record<string, unknown> {
 export function assertNoRealSsotDiff(): void {
   const repoRoot = path.resolve(__dirname, "../../../..");
   const out = execSync(
-    "git status --short .claude/state .local 2>/dev/null || true",
+    "git status --short .claude/state data/sns .local 2>/dev/null || true",
     { cwd: repoRoot, encoding: "utf-8" },
   );
   if (out.trim() !== "") {

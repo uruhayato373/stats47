@@ -23,7 +23,7 @@
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { pathToFileURL } from 'node:url';
 
-const SNAP = '.claude/skills/analytics/gsc-improvement/reference/snapshots';
+const SNAP = 'data/gsc/snapshots';
 
 function readCsv(path) {
   const [head, ...rest] = readFileSync(path, 'utf8').trim().split(/\r?\n/);

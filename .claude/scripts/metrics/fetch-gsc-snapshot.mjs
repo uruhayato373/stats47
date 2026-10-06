@@ -4,7 +4,7 @@
  * 引数:
  *   YYYY-Www (省略時は今日 JST の ISO 週。未来週は失敗する)
  *
- * 出力先: .claude/skills/analytics/gsc-improvement/reference/snapshots/<YYYY-Www>/
+ * 出力先: data/gsc/snapshots/<YYYY-Www>/
  *   - queries/pages/devices/countries/daily.csv … ローリング28日 (機会発見用)
  *   - summary.json … 確定7日 KPI (finalized7d/previous7d) + rolling28d の期間 metadata 付き summary
  * 認証: GOOGLE_SERVICE_ACCOUNT_KEY_JSON env または stats47-*.json
@@ -73,7 +73,7 @@ async function main() {
   const periods = resolvePeriods({ source: "gsc", week });
   const { periodStart: startDate, periodEnd: endDate } = periods.rolling28d;
 
-  const outDir = join(PROJECT_ROOT, ".claude/skills/analytics/gsc-improvement/reference/snapshots", week);
+  const outDir = join(PROJECT_ROOT, "data/gsc/snapshots", week);
   mkdirSync(outDir, { recursive: true });
 
   const auth = new google.auth.GoogleAuth({ keyFile, scopes: SCOPES });

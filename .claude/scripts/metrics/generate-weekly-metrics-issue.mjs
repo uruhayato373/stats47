@@ -9,9 +9,9 @@
  *   - stdout に markdown body を出力（frontmatter は呼び出し元 workflow が付与）
  *
  * 入力:
- *   - .claude/state/metrics/{psi,gsc,ga4,adsense}/history.csv
- *   - .claude/state/ads/ga4-affiliate-history.csv (アフィリエイト観測)
- *   - .claude/state/products/sales-ledger.json (商品の実売)
+ *   - data/{psi,gsc,ga4,adsense}/history.csv
+ *   - data/affiliate/ga4-affiliate-history.csv (アフィリエイト観測)
+ *   - data/products/sales-ledger.json (商品の実売)
  *   - .claude/todo/improvements.md の status: pending|in-progress を抽出（pending 施策一覧）
  *   - gh issue list --label auto-generated (残存アラート Issue 集計)
  */
@@ -142,8 +142,8 @@ function ghIssueList(argv) {
 
 function gsSection(week) {
   // KPI/WoW は確定7日 (非重複) 系列だけを使う。rolling28d は文脈の単一値のみ。
-  const fin = readCsv(".claude/state/metrics/gsc/history-finalized7d.csv");
-  const rolling = readCsv(".claude/state/metrics/gsc/history.csv");
+  const fin = readCsv("data/gsc/history-finalized7d.csv");
+  const rolling = readCsv("data/gsc/history.csv");
   const lines = [];
   const target = fin?.rows.find((r) => r.week === week);
   if (target) {
@@ -166,7 +166,7 @@ function gsSection(week) {
 
 function ga4Section(week) {
   // KPI/WoW は Japan-only 確定7日 (非重複) を優先する。
-  const fin = readCsv(".claude/state/metrics/ga4/history-finalized7d.csv");
+  const fin = readCsv("data/ga4/history-finalized7d.csv");
   const target = fin?.rows.find((r) => r.week === week);
   if (target) {
     const idx = fin.rows.indexOf(target);
@@ -180,7 +180,7 @@ function ga4Section(week) {
     return lines.join("\n") + "\n";
   }
   // fallback: 後方互換の legacy 系列 (基盤混在)。同一 basis の直前行とだけ比較する。
-  const hist = readCsv(".claude/state/metrics/ga4/history.csv");
+  const hist = readCsv("data/ga4/history.csv");
   if (!hist) return "_GA4: history が存在しません_\n";
   const t = hist.rows.find((r) => r.week === week);
   if (!t) return `_GA4: ${week} の行が見つかりません_\n`;
@@ -230,7 +230,7 @@ function revenueSection(week) {
   lines.push("- AdSense: **¥0**（2026-08-29 に恒久停止。再開前提の枠・スクリプトは撤去済み）");
 
   // --- アフィリエイト: 発生額は ASP 管理画面にしかないため、ここでは観測の鮮度だけを判定する。
-  const aff = readCsv(".claude/state/ads/ga4-affiliate-history.csv");
+  const aff = readCsv("data/affiliate/ga4-affiliate-history.csv");
   const affRows = aff?.rows.filter((r) => r.affiliate_vertical === "_all" && r.link_position === "_all") ?? [];
   const latestAff = affRows.length > 0 ? affRows[affRows.length - 1] : null;
   if (!latestAff) {
@@ -258,10 +258,10 @@ function revenueSection(week) {
   // --- ASP 別の発生・確定。認証切れ・古い観測は 0 円にせず「判定不能」と書く (nsm-revenue-lines.mjs)。
   lines.push(
     ...aspRevenueLines({
-      authLatest: readJsonOrNull(".claude/state/metrics/authenticated/latest.json"),
-      a8Results: readJsonOrNull(".claude/state/metrics/affiliate/a8-results.json"),
-      moshimoResults: readJsonOrNull(".claude/state/metrics/affiliate/moshimo-results.json"),
-      rakutenResults: readJsonOrNull(".claude/state/metrics/affiliate/rakuten-results.json"),
+      authLatest: readJsonOrNull("data/authenticated/latest.json"),
+      a8Results: readJsonOrNull("data/affiliate/a8-results.json"),
+      moshimoResults: readJsonOrNull("data/affiliate/moshimo-results.json"),
+      rakutenResults: readJsonOrNull("data/affiliate/rakuten-results.json"),
       asOf: weekSun,
     }).map((line) => `  ${line}`),
   );
@@ -275,11 +275,11 @@ function revenueSection(week) {
       : null;
   lines.push(
     productRevenueLine({
-      ledger: readJsonOrNull(".claude/state/products/sales-ledger.json"),
+      ledger: readJsonOrNull("data/products/sales-ledger.json"),
       liveProductCount,
       weekStart: weekMon.toISOString().slice(0, 10),
       weekEnd: sundayStr,
-      revenueHistory: readJsonOrNull(".claude/state/metrics/authenticated/revenue-history.json"),
+      revenueHistory: readJsonOrNull("data/authenticated/revenue-history.json"),
     }),
   );
 
@@ -373,7 +373,7 @@ function alertsSection(week) {
  * 週がずれた state を今週の結果として見せない。
  */
 function cycleSection(week) {
-  const dir = join(PROJECT_ROOT, ".claude/state/metrics/measurement-cycle");
+  const dir = join(PROJECT_ROOT, "data/measurement-cycle");
   const lines = [];
   let cycle = null;
   try {
@@ -465,11 +465,11 @@ function main() {
   lines.push("");
   lines.push(`生データ:`);
   lines.push(`- [PSI history.csv](../blob/develop/${datasetPath("psi.history")}) / [LATEST.md](../blob/develop/${datasetPath("psi.latest")})`);
-  lines.push(`- [GSC history.csv](../blob/develop/.claude/state/metrics/gsc/history.csv) / [LATEST.md](../blob/develop/.claude/state/metrics/gsc/LATEST.md)`);
-  lines.push(`- [GA4 history.csv](../blob/develop/.claude/state/metrics/ga4/history.csv) / [LATEST.md](../blob/develop/.claude/state/metrics/ga4/LATEST.md)`);
-  lines.push(`- [アフィリエイト観測 ga4-affiliate-history.csv](../blob/develop/.claude/state/ads/ga4-affiliate-history.csv)`);
-  lines.push(`- [商品販売台帳 sales-ledger.json](../blob/develop/.claude/state/products/sales-ledger.json)`);
-  lines.push(`- AdSense は 2026-08-29 に恒久停止。過去分は [history.csv](../blob/develop/.claude/state/metrics/adsense/history.csv) に凍結`);
+  lines.push(`- [GSC history.csv](../blob/develop/data/gsc/history.csv) / [LATEST.md](../blob/develop/data/gsc/LATEST.md)`);
+  lines.push(`- [GA4 history.csv](../blob/develop/data/ga4/history.csv) / [LATEST.md](../blob/develop/data/ga4/LATEST.md)`);
+  lines.push(`- [アフィリエイト観測 ga4-affiliate-history.csv](../blob/develop/data/affiliate/ga4-affiliate-history.csv)`);
+  lines.push(`- [商品販売台帳 sales-ledger.json](../blob/develop/data/products/sales-ledger.json)`);
+  lines.push(`- AdSense は 2026-08-29 に恒久停止。過去分は [history.csv](../blob/develop/data/adsense/history.csv) に凍結`);
   lines.push("");
 
   process.stdout.write(lines.join("\n"));

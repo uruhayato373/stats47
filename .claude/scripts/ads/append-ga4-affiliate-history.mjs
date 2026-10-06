@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 /**
  * GA4 アフィリエイト実測の生 snapshot (fetch-affiliate-ga4.cjs の出力) から、git に残す週次集約だけを
- * `.claude/state/ads/ga4-affiliate-history.csv` へ追記する。
+ * `data/affiliate/ga4-affiliate-history.csv` へ追記する。
  *
- *   node .claude/scripts/ads/append-ga4-affiliate-history.mjs .claude/state/ads/ga4-affiliate-2026-09-14.json
+ *   node .claude/scripts/ads/append-ga4-affiliate-history.mjs data/affiliate/ga4-affiliate-2026-09-14.json
  *
  * 行 = periodEnd(date) × affiliate_vertical × link_position (overview / 旧 rows を合算)
  * + `_all,_all` の合計行。同じ periodEnd の行は置き換える (再実行で二重計上しない)。
@@ -15,9 +15,11 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { datasetPath } from "../../../config/datasets.mjs";
+
 const ROOT = process.env.CLAUDE_PROJECT_DIR || path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
-const HISTORY = path.join(ROOT, ".claude", "state", "ads", "ga4-affiliate-history.csv");
-const EXPERIMENT_HISTORY = path.join(ROOT, ".claude", "state", "ads", "affiliate-experiment-history.csv");
+const HISTORY = path.join(ROOT, datasetPath("ga4.affiliate-history"));
+const EXPERIMENT_HISTORY = path.join(ROOT, datasetPath("affiliate.experiment-history"));
 export const HEADER = "date,days,affiliate_vertical,link_position,impressions,clicks,ctr";
 export const EXPERIMENT_HEADER = "date,days,experiment_id,variant_id,impressions,clicks,ctr";
 

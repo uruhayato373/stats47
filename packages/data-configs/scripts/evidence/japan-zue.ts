@@ -61,8 +61,8 @@ const ITEM_SHARD_PATHS = Array.from({ length: ITEM_SHARD_COUNT }, (_, index) =>
   ),
 );
 const SURVEYS_PATH = path.join(PROJECT_ROOT, "packages/ranking/src/data/surveys.json");
-const EXPERIMENTS_PATH = path.join(PROJECT_ROOT, ".claude/state/experiments.json");
-const SNS_POSTS_PATH = path.join(PROJECT_ROOT, ".claude/state/sns/posts.json");
+const EXPERIMENTS_PATH = path.join(PROJECT_ROOT, "data/business/experiments.json");
+const SNS_POSTS_PATH = path.join(PROJECT_ROOT, "data/sns/posts.json");
 const SNS_UTM_POLICY_PATH = path.join(PROJECT_ROOT, ".claude/scripts/lib/sns-utm.cjs");
 
 type EvidenceKind = JapanZueCandidate["source"]["kind"];

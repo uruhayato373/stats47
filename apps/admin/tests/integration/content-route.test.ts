@@ -34,7 +34,7 @@ describe("GET /api/content", () => {
           generatedAt: "2026-08-27T00:00:00.000Z",
           books: [{ id: "K-S1-01", status: "generated" }],
         }),
-        ".claude/state/products/kindle-archives.json": JSON.stringify({
+        "data/products/kindle-archives.json": JSON.stringify({
           schemaVersion: 1,
           archiveFormat: "aes-256-gcm-v1",
           bucket: "stats47",

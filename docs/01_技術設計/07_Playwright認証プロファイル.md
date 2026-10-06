@@ -81,7 +81,7 @@ product code、対応format、scope、必要roleまで確認する。
 vault keyはR2 credentialsとは別Secret。初回端末の`.local/authenticated-measurement/vault-key`を保持し、
 紛失時に無断でrotateしない。認証・生データの漏洩時は本書のSecurity incidentに従う。
 
-gitに残すのは`.claude/state/metrics/authenticated/latest.json`の対象別成否・時刻・固定理由・証跡hashだけ。
+gitに残すのは`data/authenticated/latest.json`の対象別成否・時刻・固定理由・証跡hashだけ。
 失敗は固定`authenticated-measurement-alert`へupsertし全対象復旧でcloseする。別系統の`workflow-health-daily.yml`
 も48時間の鮮度を確認する。週次summary/reviewもこの状態を読み、古い成功や未取得を実測0にしない。
 さらに同監視は認証付き計測の初回未発火・古いscheduleを予定時刻から6時間の猶予で検知する（GitHubの起動時刻保証ではなく運用上の検知猶予）。push/manualの成功でschedule異常を消さない。翌朝の既存health実行で、期限超過かつ同期間のrun・進行中runが無い場合だけ固定workflowをmainへcatch-up dispatchする。`.claude/state/ci/authenticated-catchup.json`の予定枠をContents APIのSHA比較で先に予約し、API一覧への反映遅延やPOST応答喪失でも同じ枠を再送しない。予約/dispatch失敗は監視Issueへ残し、成功した補完起動もschedule成功とは呼ばない。GitHub全体の停止は同じ基盤の監視では解消できず、外部監視は別の承認・設計が必要。

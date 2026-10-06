@@ -26,7 +26,7 @@ import { parseMoshimoCode } from './lib/moshimo-code-core.mjs';
 
 const CATALOG_PATH = join(
   repoRoot(),
-  '.claude/state/ads/affiliate-catalog.json'
+  'data/affiliate/affiliate-catalog.json'
 );
 const OUTPUT_DIR = join(repoRoot(), '.local/affiliate-harvest/moshimo');
 

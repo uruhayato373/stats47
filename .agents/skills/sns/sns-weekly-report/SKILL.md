@@ -2,14 +2,14 @@
 name: sns-weekly-report
 domain: sns
 description: >-
-  .claude/skills/analytics/sns-metrics-improvement/snapshots の週次 CSV
+  data/sns/metric-snapshots の週次 CSV
   スナップショットから SNS パフォーマンスレポートを Markdown で生成する。Use when user
   says "SNSレポート", "週次レポート", "SNS分析". プラットフォーム横断で集計.
 disable-model-invocation: true
 primary_agent: sns-metrics-sync
 ---
 
-`.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv`（`/update-sns-metrics` が蓄積）を集計し、週次レポートを Markdown で生成する。
+`data/sns/metric-snapshots/YYYY-MM-DD/metrics.csv`（`/update-sns-metrics` が蓄積）を集計し、週次レポートを Markdown で生成する。
 
 **記録先の統一原則（.claude/rules/data-storage.md）**: SNS メトリクスの時系列履歴は `.claude/` 配下のファイル。旧 D1 `sns_metrics` テーブルは 2026-04-17 に廃止済み。
 
@@ -23,7 +23,7 @@ primary_agent: sns-metrics-sync
 
 ## 前提
 
-- `.claude/skills/analytics/sns-metrics-improvement/snapshots/` に `/update-sns-metrics` でデータが蓄積済み
+- `data/sns/metric-snapshots/` に `/update-sns-metrics` でデータが蓄積済み
 - ヘルパ: `.claude/scripts/lib/sns-metrics-store.cjs`（`readByRange(start, end)` / `readByDate(date)` / `countAll()` / `maxFetchedAt()`）
 
 ## 手順
@@ -83,7 +83,7 @@ status: active
 ---
 ```
 
-同週の Weekly Review（`.claude/skills/management/weekly-review/reference/reviews/{YYYY-Www}.md`）がある場合、対象週を相互に明記する。
+同週の Weekly Review（`data/reviews/weekly/{YYYY-Www}.md`）がある場合、対象週を相互に明記する。
 
 過去のレポートは `ls -t .claude/skills/sns/sns-weekly-report/reference/reports/*.md | head -5`
 で参照する。未完了の改善だけを `.claude/todo/improvements.md` へ具体化する。
@@ -101,5 +101,5 @@ status: active
 
 - `.claude/scripts/lib/sns-metrics-store.cjs` — CSV スナップショット I/O ヘルパ
 - `.claude/skills/analytics/sns-metrics-improvement/` — スナップショット + improvement-log
-- `.claude/state/sns/posts.json`（`.claude/scripts/lib/sns-posts-store.cjs` 経由）— 投稿台帳 SSOT。投稿実績・メトリクスキャッシュはここから集計（完全DBレス。旧 D1 sns_posts は廃止）
+- `data/sns/posts.json`（`.claude/scripts/lib/sns-posts-store.cjs` 経由）— 投稿台帳 SSOT。投稿実績・メトリクスキャッシュはここから集計（完全DBレス。旧 D1 sns_posts は廃止）
 - `packages/database/src/schema/sns_posts.ts` — レコードの型ソース（カラム名の参照用。配信 R2・投稿台帳には影響しない残置）

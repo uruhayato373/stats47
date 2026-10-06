@@ -5,7 +5,7 @@
  *   YYYY-Www (省略時は今日 JST の ISO 週。未来週は失敗する)
  *   --dry-run (API を呼ばず、job 契約・期間・出力先だけを表示する)
  *
- * 出力先: .claude/skills/analytics/adsense-improvement/reference/snapshots/<YYYY-Www>/
+ * 出力先: data/adsense/snapshots/<YYYY-Www>/
  *   - overview/daily/devices/units/formats-platforms/placements-platforms/
  *     bid-types-platforms/traffic-sources/countries/pages.csv
  *   - manifest.json … job 別の期間 metadata・status・limitations
@@ -147,7 +147,7 @@ async function main() {
 
   // 期間は week から決定的に導出 (SSOT: periods.mjs)。未来週はここで throw する。
   const periods = resolvePeriods({ source: "adsense", week });
-  const outDir = join(PROJECT_ROOT, ".claude/skills/analytics/adsense-improvement/reference/snapshots", week);
+  const outDir = join(PROJECT_ROOT, "data/adsense/snapshots", week);
 
   if (dryRun) {
     console.log(`[adsense-snapshot] DRY-RUN week=${week} anchor=${periods.anchor} (遅延 ${periods.delayDays} 日)`);

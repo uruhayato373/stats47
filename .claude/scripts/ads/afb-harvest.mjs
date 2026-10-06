@@ -31,7 +31,7 @@ import {
 } from "./lib/asp-browser.mjs";
 import { parseAfbCode } from "./lib/afb-code-core.mjs";
 
-const CATALOG_PATH = join(repoRoot(), ".claude/state/ads/affiliate-catalog.json");
+const CATALOG_PATH = join(repoRoot(), "data/affiliate/affiliate-catalog.json");
 const OUTPUT_DIR = join(repoRoot(), ".local/affiliate-harvest/afb");
 const CONTROL_SELECTOR = 'a,button,input[type="button"],input[type="submit"],input[type="image"],[role="button"],[onclick]';
 

@@ -2,7 +2,7 @@
  * SNS Metrics Store（ファイルベース）
  *
  * 旧 D1 テーブル `sns_metrics` を置き換えるファイル永続化レイヤ。
- * 保存先: .claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv
+ * 保存先: data/sns/metric-snapshots/YYYY-MM-DD/metrics.csv
  *
  * 記録先の統一原則（.claude/rules/data-storage.md）:
  *   計測蓄積は .claude/ 配下のファイル。`sns_posts` テーブルのキャッシュカラム
@@ -29,7 +29,7 @@ const path = require("node:path");
 const REPO_ROOT = process.env.SNS_METRICS_REPO_ROOT || process.cwd();
 const BASE_DIR = path.join(
   REPO_ROOT,
-  ".claude/skills/analytics/sns-metrics-improvement/snapshots",
+  "data/sns/metric-snapshots",
 );
 
 const COLUMNS = [

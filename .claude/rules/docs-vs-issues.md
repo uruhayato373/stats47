@@ -56,7 +56,7 @@ skill、agent、prompt、READMEへ複製しない。
 | 戦略・要件・ペルソナ・ロードマップ | `docs/00_プロジェクト管理/` `docs/02_実装計画/` |
 | 技術設計・アーキテクチャ | `docs/01_技術設計/` |
 | 現在の月次・週次計画 | `.claude/todo/{monthly,weekly}.md`（上書き。履歴はgit） |
-| agent用週次レビュー | `.claude/skills/management/weekly-review/reference/reviews/YYYY-Www.md` |
+| agent用週次レビュー | `data/reviews/weekly/YYYY-Www.md` |
 | 週次メトリクス | `.claude/state/metrics/`（機械状態。人手Markdownを複製しない） |
 | 批判的レビュー・事前検死・監査の未完了策 | `.claude/todo/{improvements,backlog}.md`。優先度・実行順・停止条件・完了条件を付ける |
 | 定期レポート・比較用履歴 | 対応skillの `reference/`。機械値だけなら `.claude/state/`。人間向け全文をdocsへ複製しない |
@@ -65,7 +65,7 @@ skill、agent、prompt、READMEへ複製しない。
 | セッション残タスク | `.claude/todo/backlog.md` へカード起票 (改善施策のみ improvements.md。2026-07-22 に一時ハンドオフ文書を廃止) |
 | **テーマ関連のレビュー・監査・運用設計** | `.claude/skills/theme/manage-theme-portfolio/reference/{reviews,audits}/` + `テーマポートフォリオ運用.md`。最新状態はstate、未完了策はTODO |
 | **survey 関連のレビュー・監査・運用設計** | `.claude/skills/survey/manage-survey-portfolio/reference/{reviews,audits}/` + `surveyポートフォリオ運用.md`。最新状態は `.claude/state/surveys/portfolio.json`、未完了策はTODO |
-| **アフィリエイト運用の台帳・監査・実験仕様 (例外)** | 広告在庫・直接配置 = git TS (`apps/web/scripts/affiliate-{ads,direct-placements}-data.ts`)、規約 = `.claude/rules/affiliate-ads-standards.md`、手順 = `.claude/skills/ads/*/SKILL.md`、機械状態 = `.claude/state/ads/*.json`、詳細履歴 = `.claude/skills/analytics/affiliate-improvement/reference/` — agent (affiliate-manager) 主導のため docs に置かない (2026-07-15 オーナー判断。旧 `docs/40_アフィリエイト管理/` は廃止済み、移行履歴はgitに保持) |
+| **アフィリエイト運用の台帳・監査・実験仕様 (例外)** | 広告在庫・直接配置 = git TS (`apps/web/scripts/affiliate-{ads,direct-placements}-data.ts`)、規約 = `.claude/rules/affiliate-ads-standards.md`、手順 = `.claude/skills/ads/*/SKILL.md`、機械状態 = `.claude/state/ads/*.json`、詳細履歴 = `data/improvement/affiliate-improvement/` — agent (affiliate-manager) 主導のため docs に置かない (2026-07-15 オーナー判断。旧 `docs/40_アフィリエイト管理/` は廃止済み、移行履歴はgitに保持) |
 | **商品ポートフォリオの実装・運用詳細 (例外)** | 進捗 = `.claude/todo/backlog.md`、商品生成規約 = `.claude/rules/coconala-product-standards.md`、横断チャネル詳細 = `.claude/skills/product/build-coconala-product/reference/multi-channel-content-product-factory.md` — Claude Code／商品管理agent向けの実行情報を実装計画へ重複させない (2026-07-29 オーナー判断で実装計画から移設) |
 | **SNS競合リサーチ運用 (例外)** | X投稿単位 = `.claude/skills/sns/x-viral-research/SKILL.md`、X/Instagramのアカウント単位 = `.claude/skills/sns/competitor-scan/SKILL.md` — 未採択の専用Playwright collector仕様を実装計画へ保持せず、既存skillを運用SSOTにする。Instagram投稿単位collectorが必要なら同skillの拡張として再提案する (2026-07-29 オーナー判断) |
 | **サイト回遊グラフ・レコメンド実装詳細 (例外)** | 進捗 = `.claude/todo/backlog.md`の`KAIYU-HUB-01`、詳細 = `.claude/skills/analytics/seo-audit/reference/site-navigation-graph.md`、監査入口 = `/seo-audit --focus content` — ページ横断の内部リンク監査・実装契約をagent参照へ一本化する (2026-07-29 オーナー判断で実装計画から移設) |

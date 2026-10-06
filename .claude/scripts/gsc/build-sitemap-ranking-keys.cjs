@@ -28,7 +28,7 @@ const path = require("path");
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
 const SNAPSHOTS_DIR = path.join(
   PROJECT_ROOT,
-  ".claude/skills/analytics/gsc-improvement/reference/snapshots",
+  "data/gsc/snapshots",
 );
 const OUT_FILE = path.join(
   PROJECT_ROOT,

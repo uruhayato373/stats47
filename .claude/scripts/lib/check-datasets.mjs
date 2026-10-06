@@ -6,7 +6,9 @@
  *   - 台帳の行の不備 (id 重複・語彙外の kind / target / domain・寿命の名前が RETENTION_POLICIES に無い、または置き場が食い違う)
  *   - GOVERNED に当たる追跡ファイルが、台帳のどの行にも当たらない (未宣言) / 2 行以上に当たる (重なり)
  *   - どのファイルにも当たらない行 (planned を除く)
- *   - 移した旧置き場 (RETIRED の from) がコード・workflow・package.json に残っている (コメント行は除く)
+ *   - 移した旧置き場 (RETIRED の from) がコード・workflow・package.json と、agent の手順書 (SKILL.md・agents・rules・
+ *     CLAUDE.md・Codex 用ミラー) に残っている。コードのコメント行と、手順書で「旧置き場」「旧パス」と書いた経緯の行は除く
+ *   - 画像が IMAGE_ROOTS の外にある (素材の原本は assets/、配信用はアプリの public/ へ)
  * 出すだけのもの: target の置き場と現在地が違う行 (data/ への移行対象) の件数と一覧。
  *
  *   npm run check-datasets             # 検査 (error があれば exit 1)
@@ -17,7 +19,7 @@ import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { DATASETS, GOVERNED, IGNORED_NAMES, KINDS, RETIRED, SLOTS, TARGETS } from "../../../config/datasets.mjs";
+import { DATASETS, GOVERNED, IGNORED_NAMES, IMAGE_EXT, IMAGE_ROOTS, KINDS, RETIRED, SLOTS, TARGETS } from "../../../config/datasets.mjs";
 import { DOMAINS } from "../../../config/paths.mjs";
 import { RETENTION_POLICIES } from "./prune-state-snapshots.mjs";
 
@@ -44,8 +46,15 @@ export function fixedPrefix(path) {
   return i < 0 ? path : path.slice(0, i);
 }
 
-export function checkDatasets({ datasets, files, governed, ignoredNames, kinds, targets, domainIds, retention }) {
+export function checkDatasets({ datasets, files, governed, ignoredNames, kinds, targets, domainIds, retention, imageRoots = [], imageExt = null }) {
   const errors = [];
+  if (imageExt) {
+    for (const file of files) {
+      if (imageExt.test(file) && !imageRoots.some((re) => re.test(file))) {
+        errors.push(`画像の置き場違反: ${file} (素材の原本は assets/、配信用はアプリの public/ へ。置き場は .claude/rules/data-storage.md)`);
+      }
+    }
+  }
   const ids = new Set();
   const compiled = [];
   for (const ds of datasets) {
@@ -87,12 +96,27 @@ export function checkDatasets({ datasets, files, governed, ignoredNames, kinds, 
 
 const COMMENT_LINE = /^\s*(?:\/\/|\/?\*|#)/;
 export const RETIRED_SCAN_GLOBS = ["*.mjs", "*.cjs", "*.js", "*.ts", "*.tsx", "*.mts", "*.cts", "*.sh", "*.ps1", "*.py", "*.yml", "*.yaml", "package.json"];
+/**
+ * agent が手順として読む文書。ここに旧パスが残ると、agent が旧置き場を読んで空と判断したり旧置き場へ書いたりする。
+ * 履歴の記録 (改善ログ・レビュー・state の json) は当時のパスのままにするので対象外。
+ */
+export const RETIRED_SCAN_DOC_GLOBS = [
+  ":(glob).claude/skills/**/SKILL.md",
+  ":(glob).agents/skills/**/SKILL.md",
+  ":(glob).claude/agents/*.md",
+  ":(glob).codex/agents/*.toml",
+  ":(glob).claude/rules/*.md",
+  "CLAUDE.md",
+];
+const DOC_FILE = /(?:\/SKILL\.md|^\.claude\/(?:agents|rules)\/[^/]+\.md|^\.codex\/agents\/[^/]+\.toml|^CLAUDE\.md)$/;
+/** 手順書の中で経緯として旧パスに触れる行の印 */
+const HISTORY_MARK = /旧置き場|旧パス/;
 
-/** 旧置き場を含む行 ({ file, line, text }) のうち、コメント行を除いたものを error にする */
+/** 旧置き場を含む行 ({ file, line, text }) のうち、コードのコメント行と手順書の経緯の行を除いたものを error にする */
 export function findRetiredReferences(retired, hits) {
   const errors = [];
   for (const { file, line, text } of hits) {
-    if (COMMENT_LINE.test(text)) continue;
+    if (DOC_FILE.test(file) ? HISTORY_MARK.test(text) : COMMENT_LINE.test(text)) continue;
     for (const r of retired) {
       if (text.includes(r.from)) errors.push(`旧置き場の参照: ${file}:${line} (${r.from} → ${r.to})`);
     }
@@ -102,7 +126,7 @@ export function findRetiredReferences(retired, hits) {
 
 function retiredHits() {
   if (RETIRED.length === 0) return [];
-  const args = ["-C", ROOT, "grep", "-n", "-F", ...RETIRED.flatMap((r) => ["-e", r.from]), "--", ...RETIRED_SCAN_GLOBS];
+  const args = ["-C", ROOT, "grep", "-n", "-F", ...RETIRED.flatMap((r) => ["-e", r.from]), "--", ...RETIRED_SCAN_GLOBS, ...RETIRED_SCAN_DOC_GLOBS];
   let out;
   try {
     out = execFileSync("git", args, { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
@@ -135,6 +159,8 @@ function main() {
     targets: TARGETS,
     domainIds,
     retention: RETENTION_POLICIES,
+    imageRoots: IMAGE_ROOTS,
+    imageExt: IMAGE_EXT,
   });
   result.errors.push(...findRetiredReferences(RETIRED, retiredHits()));
   for (const e of result.errors) console.error(`✗ ${e}`);

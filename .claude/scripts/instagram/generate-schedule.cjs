@@ -59,7 +59,7 @@ const toDate = get("--to") || defaultTo.toISOString().slice(0, 10);
 function loadPostedSet() {
   const posted = new Set(); // "domain::content_key"
 
-  // 1. sns_posts ストア (.claude/state/sns/posts.json)
+  // 1. sns_posts ストア (data/sns/posts.json)
   try {
     const rows = store
       .query((p) => p.platform === "instagram" && p.status === "posted")

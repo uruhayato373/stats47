@@ -11,7 +11,7 @@
  *   node .claude/skills/analytics/gsc-improvement/scripts/analyze-url-space.cjs [YYYY-Www]
  *
  * 出力:
- *   .claude/skills/analytics/gsc-improvement/reference/snapshots/<YYYY-Www>/url-space-diff.csv
+ *   data/gsc/snapshots/<YYYY-Www>/url-space-diff.csv
  */
 
 const fs = require("fs");
@@ -24,13 +24,13 @@ const PROJECT_ROOT = path.resolve(__dirname, "../../../../..");
 const SITE_URL = SITE_ORIGIN;
 const SITEMAP_URL = `${SITE_URL}/sitemap.xml`;
 
-// 引数から YYYY-Www を取得、省略時は reference/snapshots/ 配下の最新を採用
+// 引数から YYYY-Www を取得、省略時は data/gsc/snapshots/ 配下の最新を採用
 function resolveWeekArg() {
   const arg = process.argv[2];
   if (arg && /^\d{4}-W\d{2}$/.test(arg)) return arg;
   const snapDir = path.join(
     PROJECT_ROOT,
-    ".claude/skills/analytics/gsc-improvement/reference/snapshots"
+    "data/gsc/snapshots"
   );
   if (!fs.existsSync(snapDir)) throw new Error(`snapshots directory not found: ${snapDir}`);
   const weeks = fs.readdirSync(snapDir)
@@ -148,7 +148,7 @@ async function main() {
 
   const snapDir = path.join(
     PROJECT_ROOT,
-    ".claude/skills/analytics/gsc-improvement/reference/snapshots",
+    "data/gsc/snapshots",
     week
   );
   const pagesCsv = path.join(snapDir, "pages.csv");

@@ -97,7 +97,7 @@ jobs:
         run: |
           WEEK_OF_YEAR=$(date -u -d '+9 hours' +%V)
           YEAR=$(date -u -d '+9 hours' +%Y)
-          LOG=".claude/state/metrics/sns/instagram-publish-log.csv"
+          LOG="data/sns/instagram-publish-log.csv"
           TAG="weekly-${YEAR}-W${WEEK_OF_YEAR}-${{ steps.pick.outputs.slug }}"
           if [ -f "$LOG" ] && grep -q ",${TAG}," "$LOG"; then
             echo "[skip] ${TAG} already posted"
@@ -138,7 +138,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add .claude/state/metrics/sns/instagram-publish-log.csv
+          git add data/sns/instagram-publish-log.csv
           if git diff --staged --quiet; then
             echo "No changes"
           else

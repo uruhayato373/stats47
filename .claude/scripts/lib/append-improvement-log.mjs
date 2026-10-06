@@ -71,11 +71,11 @@ function categorize(msg) {
 }
 
 const CATEGORY_TO_FILE = {
-  performance: ".claude/skills/analytics/performance-improvement/reference/improvement-log.md",
-  gsc: ".claude/skills/analytics/gsc-improvement/reference/improvement-log.md",
-  sns: ".claude/skills/analytics/sns-metrics-improvement/reference/improvement-log.md",
-  ga4: ".claude/skills/analytics/ga4-improvement/reference/improvement-log.md",
-  adsense: ".claude/skills/analytics/adsense-improvement/reference/improvement-log.md",
+  performance: "data/improvement/performance-improvement/improvement-log.md",
+  gsc: "data/improvement/gsc-improvement/improvement-log.md",
+  sns: "data/improvement/sns-metrics-improvement/improvement-log.md",
+  ga4: "data/improvement/ga4-improvement/improvement-log.md",
+  adsense: "data/improvement/adsense-improvement/improvement-log.md",
 };
 
 const category = categorize(message);

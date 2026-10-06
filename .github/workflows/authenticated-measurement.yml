@@ -38,15 +38,15 @@ jobs:
         with:
           ref: develop
           persist-credentials: false
-          sparse-checkout: .claude/state/metrics/authenticated
+          sparse-checkout: data/authenticated
       - id: check
         env:
           EVENT: ${{ github.event_name }}
         run: |
           SKIP=false
-          if [ "$EVENT" = 'schedule' ] && [ -f .claude/state/metrics/authenticated/latest.json ]; then
+          if [ "$EVENT" = 'schedule' ] && [ -f data/authenticated/latest.json ]; then
             SKIP=$(node -e '
-              const s = require("./.claude/state/metrics/authenticated/latest.json");
+              const s = require("./data/authenticated/latest.json");
               const jst = (t) => new Date(Date.parse(t) + 9 * 3600000).toISOString().slice(0, 10);
               process.stdout.write(String(Boolean(s.generatedAt) && jst(s.generatedAt) === jst(new Date().toISOString())));
             ')
@@ -137,7 +137,7 @@ jobs:
           cat /tmp/authenticated-measurement-summary.md >> "$GITHUB_STEP_SUMMARY"
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add .claude/state/metrics/authenticated/latest.json .claude/state/metrics/authenticated/revenue-history.json
+          git add data/authenticated/latest.json data/authenticated/revenue-history.json
           if ! git diff --cached --quiet; then
             git commit -m 'chore(metrics): authenticated measurement status [skip ci]'
             for attempt in 1 2 3; do
@@ -155,7 +155,7 @@ jobs:
           TITLE='認証付き計測に要対応の取得元がある'
           gh label create authenticated-measurement-alert --description 'Authenticated measurement collection or session failure' --color b60205 --force
           EXISTING=$(gh issue list --state open --label authenticated-measurement-alert --limit 1 --json number --jq '.[0].number // empty')
-          if [ '${{ needs.collect.result }}' = 'success' ] && [ '${{ steps.record.outcome }}' = 'success' ] && [ '${{ steps.artifacts.outcome }}' = 'success' ] && jq -e --arg run "$GITHUB_RUN_ID" '.runId == $run and .status == "pass"' .claude/state/metrics/authenticated/latest.json >/dev/null; then
+          if [ '${{ needs.collect.result }}' = 'success' ] && [ '${{ steps.record.outcome }}' = 'success' ] && [ '${{ steps.artifacts.outcome }}' = 'success' ] && jq -e --arg run "$GITHUB_RUN_ID" '.runId == $run and .status == "pass"' data/authenticated/latest.json >/dev/null; then
             if [ -n "$EXISTING" ]; then gh issue close "$EXISTING" --comment "取得経路が復旧しました: $RUN_URL"; fi
           else
             if [ ! -f /tmp/authenticated-measurement-summary.md ]; then printf '収集または記録ジョブが完了しませんでした。\n' > /tmp/authenticated-measurement-summary.md; fi

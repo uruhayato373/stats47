@@ -18,7 +18,7 @@ co_agents: [blog-critic, trend-scout]
 
 ## 前提
 
-- GSC 週次 snapshot が必要: `.claude/skills/analytics/gsc-improvement/reference/snapshots/<week>/pages.csv`
+- GSC 週次 snapshot が必要: `data/gsc/snapshots/<week>/pages.csv`
   (無ければ先に `/fetch-gsc-data last28d page snapshot <week>`)。
 - R2 公開 URL から公開記事 (`app/blog/all.json` + `app/blog/<slug>/article.md`) を読む (認証不要)。
 

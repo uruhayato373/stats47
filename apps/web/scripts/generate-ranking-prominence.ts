@@ -55,7 +55,7 @@ const OUT_PATH = path.resolve(
 );
 const GSC_SNAPSHOT_DIR = path.resolve(
   __dirname,
-  "../../../.claude/skills/analytics/gsc-improvement/reference/snapshots",
+  "../../../data/gsc/snapshots",
 );
 
 /** 索引 (/ranking のカテゴリ別ブロック) が 1 カテゴリあたり出す代表数。 */

@@ -240,7 +240,7 @@ Cloudflare Dashboard → **Security** → **Events**:
 | 既存 | 関係 |
 |---|---|
 | `.claude/skills/analytics/performance-improvement/` | PSI 計測と継続改善ログ。Speed Insights と併用 |
-| `.claude/skills/analytics/gsc-improvement/reference/improvement-log.md` | 施策 ID ベースの PDCA。T1-OBS-* として追跡 |
+| `data/improvement/gsc-improvement/improvement-log.md` | 施策 ID ベースの PDCA。T1-OBS-* として追跡 |
 | `apps/web/wrangler.toml` | observability + analytics_engine binding 設定 |
 
 ## J. 追加コスト試算
@@ -269,7 +269,7 @@ Cloudflare Dashboard → **Security** → **Events**:
 ## 参照
 
 - `apps/web/wrangler.toml` — observability / analytics_engine 設定
-- `.claude/skills/analytics/gsc-improvement/reference/improvement-log.md` — T1-OBS-01 デプロイ記録
+- `data/improvement/gsc-improvement/improvement-log.md` — T1-OBS-01 デプロイ記録
 - [Cloudflare Workers Observability](https://developers.cloudflare.com/workers/observability/)
 - [Cloudflare Analytics Engine](https://developers.cloudflare.com/analytics/analytics-engine/)
 - [Cloudflare Web Analytics](https://developers.cloudflare.com/web-analytics/)

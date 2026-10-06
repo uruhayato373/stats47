@@ -27,8 +27,8 @@ Claude Code と Playwright で継続運用するための実装仕様である�
 | A8 ブラウザ操作        | `.claude/agents/asp-scout.md` + `.claude/skills/ads/scout-asp/`                  |
 | 3 ASP 横断操作         | `.claude/agents/affiliate-operator.md` + `.claude/skills/ads/affiliate-operate/` |
 | 配信 SSOT・配置        | `.claude/agents/affiliate-manager.md` + `apps/web/scripts/affiliate-ads-data.ts` |
-| A8 状態機械            | `.claude/state/ads/a8-catalog.json`                                              |
-| 3 ASP 横断台帳         | `.claude/state/ads/affiliate-catalog.json`                                       |
+| A8 状態機械            | `data/affiliate/a8-catalog.json`                                              |
+| 3 ASP 横断台帳         | `data/affiliate/affiliate-catalog.json`                                       |
 | 配信時の広告データ     | git TS → R2 snapshot                                                             |
 | 未完了状態             | `.claude/todo/backlog.md` `ASP-CONTINUITY-01`                             |
 

@@ -1,1 +1,0 @@
-../../../../../.claude/skills/analytics/gsc-improvement/reference/improvement-log.md

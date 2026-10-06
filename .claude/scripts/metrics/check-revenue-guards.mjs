@@ -25,7 +25,7 @@ import { join } from "node:path";
 import { PROJECT_ROOT } from "./lib/auth.mjs";
 
 const CONFIG_PATH = ".claude/config/revenue-guards.json";
-const AFFILIATE_HISTORY = ".claude/state/ads/ga4-affiliate-history.csv";
+const AFFILIATE_HISTORY = "data/affiliate/ga4-affiliate-history.csv";
 
 function parseArgs(argv) {
   const opts = { asof: null };

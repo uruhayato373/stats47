@@ -28,7 +28,7 @@ export const LOOKBACK_WEEKS = 10;
 export const LOOKBACK_MONTHS = 3;
 const TODO_FILES = [".claude/todo/backlog.md", ".claude/todo/improvements.md"];
 const IMPROVEMENTS = ".claude/todo/improvements.md";
-const EXPERIMENTS = ".claude/state/experiments.json";
+const EXPERIMENTS = "data/business/experiments.json";
 const BACKLOG_LEDGER = ".claude/state/backlog-loop/ledger.json";
 
 const CARD_ID = /^[A-Z][A-Z0-9]*(?:-[A-Z0-9]+)+$/;
@@ -435,8 +435,8 @@ export function handoffSummary(result, cadence = "weekly") {
 
 // ---------- 回ごとの実施状況 (管理画面の週次・月次ページ) ----------
 
-const MEASUREMENT_HISTORY = ".claude/state/metrics/measurement-cycle/history.csv";
-const VERDICT_DIR = ".claude/state/effect-verdict";
+const MEASUREMENT_HISTORY = "data/measurement-cycle/history.csv";
+const VERDICT_DIR = "data/effect-verdict";
 const COMPETITOR_REPORTS = ".claude/skills/sns/competitor-scan/reference/reports";
 
 /** ISO 週 YYYY-Www の月曜〜日曜 */

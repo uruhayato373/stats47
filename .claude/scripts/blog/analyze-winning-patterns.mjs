@@ -51,7 +51,7 @@ const CONCURRENCY = 8;
 
 // ── 1. GSC 最新 snapshot ─────────────────────────────────────────────
 function findLatestGscSnapshot() {
-  const dir = path.join(PROJECT_ROOT, ".claude/skills/analytics/gsc-improvement/reference/snapshots");
+  const dir = path.join(PROJECT_ROOT, "data/gsc/snapshots");
   if (!fs.existsSync(dir)) return null;
   const weeks = fs.readdirSync(dir).filter((d) => /^\d{4}-W\d{2}$/.test(d)).sort();
   for (let i = weeks.length - 1; i >= 0; i--) {
@@ -354,7 +354,7 @@ async function main() {
   process.stderr.write(`勝ち要因解析: GSC 読み込み中...\n`);
   const gsc = loadGsc();
   if (!gsc.bySlug.size) {
-    console.error("[error] GSC snapshot が見つからない (.claude/skills/analytics/gsc-improvement/reference/snapshots/)");
+    console.error("[error] GSC snapshot が見つからない (data/gsc/snapshots/)");
     process.exit(1);
   }
   const published = await loadPublishedSlugs();

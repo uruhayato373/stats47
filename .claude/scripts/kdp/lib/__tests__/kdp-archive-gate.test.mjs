@@ -15,14 +15,14 @@ test("ローカル完成物がR2 archive台帳と一致する場合だけ通す"
     const bytes = Buffer.from("epub");
     const listing = { epubPath: ".local/kindle-books/K-S1-01/v1/book.epub", coverPath: ".local/kindle-books/K-S1-01/v1/cover.jpg" };
     mkdirSync(join(root, ".local/kindle-books/K-S1-01/v1"), { recursive: true });
-    mkdirSync(join(root, ".claude/state/products"), { recursive: true });
+    mkdirSync(join(root, "data/products"), { recursive: true });
     writeFileSync(join(root, ".local/kindle-books/K-S1-01/v1/book.epub"), bytes);
     const files = ["book.epub", "cover.jpg", "cover.png", "metadata.json", "READINESS.md"].map(name => {
       writeFileSync(join(root, ".local/kindle-books/K-S1-01/v1", name), bytes);
       return { name, plainSize: bytes.length, plainSha256: sha256(bytes) };
     });
     writeFileSync(
-      join(root, ".claude/state/products/kindle-archives.json"),
+      join(root, "data/products/kindle-archives.json"),
       JSON.stringify({
         books: {
           "K-S1-01": {
@@ -46,7 +46,7 @@ test("ローカル完成物がR2 archive台帳と一致する場合だけ通す"
     assert.deepEqual(upload.epub.buffer, bytes, "captured upload bytes remain immutable after a path edit");
     assert.throws(() => captureKindleUpload(root, listing, archived), /資産が変化/);
     writeFileSync(join(root, listing.epubPath), bytes);
-    const statePath = join(root, ".claude/state/products/kindle-archives.json");
+    const statePath = join(root, "data/products/kindle-archives.json");
     const baseline = JSON.parse(readFileSync(statePath, "utf8"));
     for (const mutation of [
       null,

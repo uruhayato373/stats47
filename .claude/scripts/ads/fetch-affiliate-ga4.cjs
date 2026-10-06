@@ -20,7 +20,7 @@
  *   weekly-finalized: 直近の日曜〜土曜。日曜/翌月曜の再実行でも同じ確定7日を返す。
  *   固定期間: before / after 比較や過去期間の再取得用。両端を含む。
  *
- * 出力: 標準出力に Markdown テーブル + .claude/state/ads/ga4-affiliate-<date>.json
+ * 出力: 標準出力に Markdown テーブル + data/affiliate/ga4-affiliate-<date>.json
  */
 const fs = require("fs");
 const path = require("path");
@@ -324,7 +324,7 @@ async function main() {
     ),
   };
 
-  const dir = path.join(PROJECT_ROOT, ".claude/state/ads");
+  const dir = path.join(PROJECT_ROOT, "data/affiliate");
   fs.mkdirSync(dir, { recursive: true });
   fs.writeFileSync(
     path.join(dir, `ga4-affiliate-${date}.json`),
@@ -389,7 +389,7 @@ async function main() {
 
   process.stdout.write(out.join("\n") + "\n");
   process.stderr.write(
-    `\n[ga4] snapshot → .claude/state/ads/ga4-affiliate-${date}.json (dims: ${valueDimNames.join(",") || "none"})\n`,
+    `\n[ga4] snapshot → data/affiliate/ga4-affiliate-${date}.json (dims: ${valueDimNames.join(",") || "none"})\n`,
   );
 }
 

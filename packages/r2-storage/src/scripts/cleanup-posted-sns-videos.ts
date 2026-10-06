@@ -28,7 +28,7 @@ import { assertR2WriteAllowed } from "./_assert-ci-write";
 config({ path: path.resolve(__dirname, "..", "..", "..", "..", ".env.local") });
 
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..", "..");
-const POSTS_PATH = path.join(PROJECT_ROOT, ".claude/state/sns/posts.json");
+const POSTS_PATH = path.join(PROJECT_ROOT, "data/sns/posts.json");
 
 const args = process.argv.slice(2);
 const EXECUTE = args.includes("--execute");

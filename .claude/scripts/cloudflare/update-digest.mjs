@@ -1,10 +1,10 @@
 /**
  * Cloudflare 日次 digest 更新スクリプト
  *
- * .claude/state/metrics/cloudflare/snapshots/YYYY-MM-DD.json を読み、
+ * data/cloudflare/snapshots/YYYY-MM-DD.json を読み、
  * 以下を更新する:
- *   - .claude/state/metrics/cloudflare/history.csv : 日次 append-only 履歴
- *   - .claude/state/metrics/cloudflare/LATEST.md   : 人間向け最新サマリ + 前日比
+ *   - data/cloudflare/history.csv : 日次 append-only 履歴
+ *   - data/cloudflare/LATEST.md   : 人間向け最新サマリ + 前日比
  *
  * Usage:
  *   node .claude/scripts/cloudflare/update-digest.mjs
@@ -15,7 +15,7 @@ import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const PROJECT_ROOT = resolve(fileURLToPath(import.meta.url), "..", "..", "..", "..");
-const STATE_DIR = join(PROJECT_ROOT, ".claude/state/metrics/cloudflare");
+const STATE_DIR = join(PROJECT_ROOT, "data/cloudflare");
 const SNAPSHOTS_DIR = join(STATE_DIR, "snapshots");
 const HISTORY_CSV = join(STATE_DIR, "history.csv");
 const LATEST_MD = join(STATE_DIR, "LATEST.md");
@@ -162,7 +162,7 @@ function writeLatest() {
 
   lines.push("## History");
   lines.push("");
-  lines.push("Last 7 days (`.claude/state/metrics/cloudflare/history.csv`):");
+  lines.push("Last 7 days (`data/cloudflare/history.csv`):");
   lines.push("");
   lines.push("```");
   const hist = loadHistory();

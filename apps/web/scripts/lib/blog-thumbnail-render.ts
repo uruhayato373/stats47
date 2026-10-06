@@ -41,7 +41,8 @@ function brandBackground(dark: boolean): string {
   return bgLightCache;
 }
 function readBrandBg(file: string): string {
-  const p = join(import.meta.dirname ?? __dirname, 'assets', file);
+  // 背景の原本はリポジトリ直下 assets/ogp/ (このファイルは apps/web/scripts/lib/ にある)
+  const p = join(import.meta.dirname ?? __dirname, '..', '..', '..', '..', 'assets', 'ogp', file);
   return `data:image/jpeg;base64,${readFileSync(p).toString('base64')}`;
 }
 

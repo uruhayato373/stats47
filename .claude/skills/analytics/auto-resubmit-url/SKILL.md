@@ -25,9 +25,9 @@ $ARGUMENTS — [flags...]
 
 ## 動作
 
-1. **入力 CSV 特定**: `--input` 指定なしなら `.claude/state/metrics/gsc/coverage-drilldown/{YYYY-Www}/{category}-urls.csv` の最新ファイル (mtime 最新) を選択。`indexed-submitted-urls.csv` は INDEXED 済のため対象外
+1. **入力 CSV 特定**: `--input` 指定なしなら `data/gsc/coverage-drilldown/{YYYY-Www}/{category}-urls.csv` の最新ファイル (mtime 最新) を選択。`indexed-submitted-urls.csv` は INDEXED 済のため対象外
 2. **URL 抽出**: CSV 1 列目 (URL) を抽出。ファイル名から coverageState 相当のカテゴリを推定 (例: `crawled-not-indexed-urls.csv` → `crawled-not-indexed`)
-3. **履歴 dedup**: `.claude/state/metrics/gsc/resubmit-history.json` を読み、各 URL の最終 success 再送信日が 7 日以内なら除外
+3. **履歴 dedup**: `data/gsc/resubmit-history.json` を読み、各 URL の最終 success 再送信日が 7 日以内なら除外
 4. **quota 計算**: 当日 JST の `status=success` 件数を集計 → `min(filtered, 200-todayCount, --max)` が今日の送信件数
 5. **dry-run 出力**: `URL | coverageState | last_resubmit | will_send` 形式の表
 6. **実送信**: `google.indexing({version:'v3'}).urlNotifications.publish({url, type:'URL_UPDATED'})` を 1 件ずつ呼び出し、間に 200ms 待機。結果を `resubmit-history.json` に append
@@ -47,7 +47,7 @@ node .claude/scripts/gsc/auto-resubmit.mjs --execute --max 50
 
 # 任意 CSV を入力に
 node .claude/scripts/gsc/auto-resubmit.mjs \
-  --input .claude/state/metrics/gsc/coverage-drilldown/2026-W20/crawled-not-indexed-urls.csv \
+  --input data/gsc/coverage-drilldown/2026-W20/crawled-not-indexed-urls.csv \
   --dry-run
 ```
 
@@ -61,8 +61,8 @@ node .claude/scripts/gsc/auto-resubmit.mjs \
 
 ## 入出力
 
-- 入力: `.claude/state/metrics/gsc/coverage-drilldown/{YYYY-Www}/{category}-urls.csv`
-- 履歴: `.claude/state/metrics/gsc/resubmit-history.json`
+- 入力: `data/gsc/coverage-drilldown/{YYYY-Www}/{category}-urls.csv`
+- 履歴: `data/gsc/resubmit-history.json`
   - 形式: `[{ timestamp, url, status: "success"|"error", coverageState, error? }]`
 - ログ: stdout (再送信成功 / 失敗 / 残 quota)
 
@@ -78,4 +78,4 @@ node .claude/scripts/gsc/auto-resubmit.mjs \
 
 - 認証実装の参考: `.claude/scripts/gsc/url-inspection-daily.cjs`
 - 既存類似スキル: `.claude/skills/analytics/indexing-api-submit/SKILL.md` (手動 1 件 / batch 用、本スキルは drilldown 全件自動)
-- 改善ログ記入先: `.claude/todo/improvements.md` + `.claude/skills/analytics/gsc-improvement/reference/improvement-log.md`
+- 改善ログ記入先: `.claude/todo/improvements.md` + `data/improvement/gsc-improvement/improvement-log.md`

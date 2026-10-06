@@ -13,7 +13,7 @@
 - **対策**: オーナー判断 (2026-09-20) で恒久停止。`ADSENSE_DISPLAY_ENABLED`
   (`apps/web/src/lib/google-adsense/constants.ts`) は false 固定。再開を前提とした配置原則・
   週次計測手順・改善ループは撤去する。
-- **証拠**: `.claude/state/metrics/adsense/history.csv` の 2026-W33 / W34 行。本番反映は
+- **証拠**: `data/adsense/history.csv` の 2026-W33 / W34 行。本番反映は
   2026-08-29 (PR #849)。
 
 ## 2. NSM は週次収益であって PV ではない
@@ -23,7 +23,7 @@
   残していなかった。誰も見ない state ファイルの中でだけ止まっていたため 3 週間気づかなかった。
 - **対策**: 週次メトリクス Issue に「週次収益 (NSM)」節を出し、欠測は 0 円ではなく
   「判定不能」と印字する。PV は先行指標であって NSM ではない。
-- **証拠**: `.claude/state/ads/ga4-affiliate-history.csv`、`docs/00_プロジェクト管理/02_収益化戦略.md` §1。
+- **証拠**: `data/affiliate/ga4-affiliate-history.csv`、`docs/00_プロジェクト管理/02_収益化戦略.md` §1。
 
 ## 3. アフィリエイトの評価は確定収益 / 1,000 viewable impression
 
@@ -34,8 +34,8 @@
 - **対策**: 在庫を増やさず表示量を減らし、意図が解決しない面では配信しない。評価はクリック数では
   なく確定収益 / 1,000 viewable impression。priority は期待収益順 (A8 の `epcYen × confirmRatePct`
   は初期値で、自サイトの確定収益が溜まったら置き換える)。
-- **証拠**: `.claude/state/metrics/affiliate-placement-baseline-2026-09-08.json`、
-  `.claude/state/ads/a8-catalog.json` (登録済み 120 件中 118 件に epcYen と confirmRatePct)。
+- **証拠**: `data/affiliate/affiliate-placement-baseline-2026-09-08.json`、
+  `data/affiliate/a8-catalog.json` (登録済み 120 件中 118 件に epcYen と confirmRatePct)。
 
 ## 4. GA4 の `affiliate_vertical` は広告自身の vertical を送る
 

@@ -67,10 +67,10 @@ describe("affiliateResults", () => {
   it("A8 は最新月の案件を収益順に並べ、名前は取込メモから引く", async () => {
     root = makeFixtureRoot({
       stateFiles: {
-        ".claude/state/metrics/affiliate/a8-results.json": A8_RESULTS,
-        ".claude/state/metrics/affiliate/a8-report-log.json": REPORT_LOG,
-        ".claude/state/metrics/authenticated/latest.json": AUTH,
-        ".claude/state/ads/ga4-affiliate-history.csv": HISTORY,
+        "data/affiliate/a8-results.json": A8_RESULTS,
+        "data/affiliate/a8-report-log.json": REPORT_LOG,
+        "data/authenticated/latest.json": AUTH,
+        "data/affiliate/ga4-affiliate-history.csv": HISTORY,
       },
     });
     const r = ok((await load(root)).affiliateResults());
@@ -84,7 +84,7 @@ describe("affiliateResults", () => {
   });
 
   it("掲載位置は最新日の行を位置ごとに足し、全体行と合計が一致する。表示 1000 以上でクリック 0 を強調する", async () => {
-    root = makeFixtureRoot({ stateFiles: { ".claude/state/ads/ga4-affiliate-history.csv": HISTORY } });
+    root = makeFixtureRoot({ stateFiles: { "data/affiliate/ga4-affiliate-history.csv": HISTORY } });
     const r = ok((await load(root)).affiliateResults());
     const positions = r.positions;
     if (!positions) throw new Error("掲載位置の表が作られていない");
@@ -97,7 +97,7 @@ describe("affiliateResults", () => {
   });
 
   it("取得できていない ASP は 0 円ではなく取得状態と理由を返す。state が無ければ未取得として返す", async () => {
-    root = makeFixtureRoot({ stateFiles: { ".claude/state/metrics/authenticated/latest.json": AUTH } });
+    root = makeFixtureRoot({ stateFiles: { "data/authenticated/latest.json": AUTH } });
     const r = ok((await load(root)).affiliateResults());
     expect(r.collections).toEqual([
       expect.objectContaining({ asp: "a8", status: "pass" }),
@@ -127,12 +127,12 @@ describe("affiliatePlacements / affiliatePrograms (配信と同じ広告定義�
   it("案件は配信中を先頭に並べ、配信中の案件は広告定義に同じ programRef の配信中広告がある", async () => {
     root = makeFixtureRoot({
       stateFiles: {
-        ".claude/state/ads/a8-catalog.json": JSON.stringify({
+        "data/affiliate/a8-catalog.json": JSON.stringify({
           entries: {
             none: { programId: "s00000000000000", name: "配信なし案件", status: "applied", rewardYen: 100 },
           },
         }),
-        ".claude/state/ads/affiliate-catalog.json": JSON.stringify({
+        "data/affiliate/affiliate-catalog.json": JSON.stringify({
           programs: { "afb-1": { name: "afb 案件", vertical: "furusato", asps: { afb: { promotionId: "1", status: "applying", rewardYen: 295 } } } },
         }),
       },

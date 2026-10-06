@@ -23,7 +23,7 @@ export function measurementHealth(state, now = Date.now()) {
 }
 
 export function readMeasurementHealth(root = '.', now = Date.now()) {
-  const path = `${root}/.claude/state/metrics/authenticated/latest.json`;
+  const path = `${root}/data/authenticated/latest.json`;
   let state = null;
   try { if (existsSync(path)) state = JSON.parse(readFileSync(path, 'utf8')); } catch { /* malformed is missing, never healthy */ }
   return measurementHealth(state, now);

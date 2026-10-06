@@ -71,7 +71,7 @@ node .claude/scripts/sns/promote-scheduled-x.cjs --apply                        
 
 ### Step 6: 消化チェック
 
-- 投稿台帳 `.claude/state/sns/posts.json` の `status='scheduled'` 残と、前週 `posted` 漏れを表示
+- 投稿台帳 `data/sns/posts.json` の `status='scheduled'` 残と、前週 `posted` 漏れを表示
 - 予約が枠数に満たなければ Step 3-4 に戻る
 
 ## 完了報告

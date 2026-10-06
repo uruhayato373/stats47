@@ -14,7 +14,7 @@ GA4 実測で止まっていた判定待ちを処理した手順 (計測→impro
 `[target: +N clicks]` が揃ったものだけ機械判定される。2026-W38 時点は 10 件中 0 件 (全件目印なし)。
 
 - 計測: 日曜 20:00 JST `fetch-metrics-weekly.yml` が GA4 snapshot (internal-transitions / landing-context / event-volume) と
-  `refresh-measurement-cycle.sh` → `build-measurement-cycle.mjs` → `.claude/state/metrics/measurement-cycle/{latest.json,LATEST.md,history.csv}`。
+  `refresh-measurement-cycle.sh` → `build-measurement-cycle.mjs` → `data/measurement-cycle/{latest.json,LATEST.md,history.csv}`。
   PSI / Cloudflare / SNS も同じ state に入る (閾値は各 source の既存判定を再利用: PSI は history.csv の violations_*、
   Cloudflare は threshold-check.mjs の evaluateRules、SNS は sns-metrics-store.readByRange)。
   **月曜 06:00 にも作り直す**: sns-metrics-weekly は fetch-metrics-weekly より後に終わる (2026-09-20: 14:33Z → 14:47Z) ため。

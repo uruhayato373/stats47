@@ -36,7 +36,7 @@ SNS 投稿を企画・生成・投稿・計測する agent / skill / 人間は�
 - 1 本ごとにランキング / ブログ / テーマの根拠 URL、使用 metric、`surveyId` / provenance を台本と説明欄へ引き継ぐ。出典確認なしで公開しない
 - Shorts-first、Bar Chart Race の横流し、47県分割、同一動画の自動量産は pilot 対象外
 - 編集・事実確認・Studio 投稿は人間承認。OAuth / 自動アップロード / 定期 cron は pilot 成功判定後まで再実装しない
-- pilot の企画・基準・結果は `.claude/state/experiments.json` の `EXP-006`、投稿実績は `posts.json` を SSOT とする
+- pilot の企画・基準・結果は `data/business/experiments.json` の `EXP-006`、投稿実績は `posts.json` を SSOT とする
 
 ### 差別化軸
 
@@ -243,7 +243,7 @@ X 投稿の「型」は下表を単一ソースとする。各投稿は `templat
 1 トレンド/1 metric から複数キャプションを作る際の切り口。IG は `/post-ig-6angles` が主力、X は手動時に利用可。
 
 > **実測 (2026-09-23)**: X の 2026-07-11〜09-22 投稿 82 件で、型ごとの表示回数の中央値は 62〜88 に収まり、
-> いいねは型を問わず 1 件あたり 0〜1 だった (`.claude/skills/analytics/sns-metrics-improvement/snapshots/2026-09-23/metrics.csv`)。
+> いいねは型を問わず 1 件あたり 0〜1 だった (`data/sns/metric-snapshots/2026-09-23/metrics.csv`)。
 > 型のラベルを変えても本文が「1 位と最下位の数字」のままなら反応は変わらない。型は本文の中身
 > (悩みへの答え・意外な 1 位・暮らしへの影響) が伴うときだけ使い、同じ指標を型違いで量産しない
 
@@ -368,7 +368,7 @@ X 投稿に添付できる画像種を単一ソース化する。`.claude/script
 
 ## 3. 投稿台帳 (posts.json への記録は必須)
 
-全チャネルの投稿は `.claude/state/sns/posts.json` に記録する。**これが投稿履歴の SSOT** (完全DBレス。
+全チャネルの投稿は `data/sns/posts.json` に記録する。**これが投稿履歴の SSOT** (完全DBレス。
 永続 D1 は使わない)。
 
 - 書込口は `sns-posts-store.cjs` / `/mark-sns-posted` のみ。直接 JSON を手編集しない
@@ -384,7 +384,7 @@ X 投稿に添付できる画像種を単一ソース化する。`.claude/script
   master と同じ `content_key` を持ち、`parent_post_id=<YouTube row id>` と `source_timecode=<開始>-<終了>` を記録する。
   使用した調査と出典は全行で `survey_ids` / `provenance_urls` を引き継ぐ
 - メトリクスは投稿後に `/update-sns-metrics` が UPDATE。時系列 snapshot は
-  `.claude/skills/analytics/sns-metrics-improvement/snapshots/` が SSOT
+  `data/sns/metric-snapshots/` が SSOT
 
 ---
 

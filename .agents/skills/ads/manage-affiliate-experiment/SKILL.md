@@ -1,7 +1,7 @@
 ---
 name: manage-affiliate-experiment
 domain: affiliate
-description: アフィリエイト クリエイティブ A/B 実験のライフサイクル管理 (plan/start/observe/decide/close)。実験 registry (.claude/state/ads/experiments.json) と SSOT の variant エントリを整合させ、判定は決定的スクリプトに委ねる。Use when user says "アフィリエイトABテスト", "クリエイティブ実験", "variant 実験", "実験を開始/判定/終了".
+description: アフィリエイト クリエイティブ A/B 実験のライフサイクル管理 (plan/start/observe/decide/close)。実験 registry (data/affiliate/experiments.json) と SSOT の variant エントリを整合させ、判定は決定的スクリプトに委ねる。Use when user says "アフィリエイトABテスト", "クリエイティブ実験", "variant 実験", "実験を開始/判定/終了".
 primary_agent: affiliate-manager
 co_agents: [improvement-triage, ga4-analyst]
 ---
@@ -9,7 +9,7 @@ co_agents: [improvement-triage, ga4-analyst]
 アフィリエイト広告の **クリエイティブ A/B 実験を registry ベースで運用**する。
 配分・計測の技術仕様は `reference/creative-ab-testing.md` (AFF-05 framework、実装済) を参照。
 
-- **実験 registry (SSOT)**: `.claude/state/ads/experiments.json` — 書込はこの skill のみ
+- **実験 registry (SSOT)**: `data/affiliate/experiments.json` — 書込はこの skill のみ
 - **variant 実体**: 下記 2 種類 (`kind` で区別する)
 
 ### 実験の 2 種類 (★2026-08-04 に `kind: "code"` を新設)
@@ -49,7 +49,7 @@ co_agents: [improvement-triage, ga4-analyst]
 
 1. `apps/web/scripts/affiliate-ads-data.ts` に同一 `experimentId`・別 `variantId` のエントリを 2〜3 件
    追加 (`/register-affiliate-banner` の Step 4 と同じ形式 + experiment フィールド)。
-2. `.claude/state/ads/experiments.json` の `experiments[]` に registry エントリを追加:
+2. `data/affiliate/experiments.json` の `experiments[]` に registry エントリを追加:
    ```json
    {
      "experimentId": "ranking-sidebar-economy",
@@ -74,7 +74,7 @@ co_agents: [improvement-triage, ga4-analyst]
 `affiliate-operations-latest.json` の `experiments` を読む (週次 CI が自動更新)。手動更新は
 `node .claude/scripts/ads/fetch-affiliate-ga4.cjs 28` (要 GA4 鍵) → `build-affiliate-operations-state.ts`。
 
-`portfolioPilot: true` の実験は `.claude/state/ads/affiliate-experiment-history.csv` に
+`portfolioPilot: true` の実験は `data/affiliate/affiliate-experiment-history.csv` に
 非重複の確定7日 variant値を蓄積し、`affiliate-pilot-readiness-latest.json` が開始日以後を累積する。
 最新7日 snapshot だけを合算値とみなさない。sample・最短期間に到達したら、勝者を決めず次の露出停止へ進む。
 
@@ -96,7 +96,7 @@ co_agents: [improvement-triage, ga4-analyst]
 2. `decisionGuards`、CTR、相対差を添えて **ユーザーに判断を仰ぐ** (自動採用しない)。
    `measurement-gate-blocked` / `confounded` があれば判定不能のままにする。
 3. 効果の記録は `.claude/rules/evidence-based-judgment.md` のテンプレで
-   `reference/improvement-log.md` (affiliate-improvement) に書き、status 更新は improvement-triage へ。
+   `data/improvement/affiliate-improvement/improvement-log.md` (affiliate-improvement) に書き、status 更新は improvement-triage へ。
 
 ### close — 実験を終了する
 
@@ -112,7 +112,7 @@ co_agents: [improvement-triage, ga4-analyst]
 | ファイル | 役割 |
 |---|---|
 | `reference/creative-ab-testing.md` | 配分方式 (client 加重ランダム + sticky)・GA4 計測・停止ルールの現行仕様 |
-| `.claude/state/ads/experiments.json` | 実験 registry (SSOT) |
+| `data/affiliate/experiments.json` | 実験 registry (SSOT) |
 | `.claude/scripts/ads/build-affiliate-operations-state.ts` | 決定的判定 + 集約 state 生成 |
 | `.claude/scripts/ads/lib/affiliate-operations-core.mjs` | 判定コア (純粋関数・`node --test` 対象) |
 | `.claude/scripts/ads/__tests__/affiliate-operations-core.test.mjs` | 判定コアの fixture テスト (gate/実験 status/state validate) |

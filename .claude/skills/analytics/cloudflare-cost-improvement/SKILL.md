@@ -13,22 +13,22 @@ Cloudflare の請求は月次（前月 15 日〜当月 14 日集計、翌 15 日
 
 | データ | 保管先 | 理由 |
 |---|---|---|
-| 月次 snapshot・請求書 | git: `reference/monthly-snapshots/{YYYY-MM.json,YYYY-MM.md}` | immutable、diff 比較、オフライン可 |
-| 日次 usage snapshot（自動） | git: `.claude/state/metrics/cloudflare/{snapshots/YYYY-MM-DD.json,history.csv,LATEST.md}` | `.github/workflows/cloudflare-usage-daily.yml` が日次 02:30 JST 自動更新 |
-| budget しきい値（月次） | git: `reference/budgets.json` | 月次レビュー用 |
-| budget しきい値（日次） | git: `reference/budgets-daily.json` | 日次自動アラート用、cloudflare-usage-daily.yml が参照 |
+| 月次 snapshot・請求書 | git: `data/cloudflare/monthly-snapshots/{YYYY-MM.json,YYYY-MM.md}` | immutable、diff 比較、オフライン可 |
+| 日次 usage snapshot（自動） | git: `data/cloudflare/{snapshots/YYYY-MM-DD.json,history.csv,LATEST.md}` | `.github/workflows/cloudflare-usage-daily.yml` が日次 02:30 JST 自動更新 |
+| budget しきい値（月次） | git: `.claude/config/budgets/cloudflare-cost-improvement/budgets.json` | 月次レビュー用 |
+| budget しきい値（日次） | git: `.claude/config/budgets/cloudflare-cost-improvement/budgets-daily.json` | 日次自動アラート用、cloudflare-usage-daily.yml が参照 |
 | 施策（1施策1行、人間向け要約） | `.claude/todo/improvements.md` | active 施策を優先度・期日で絞り込み可能 |
-| 詳細ログ（agent 用、検証コマンド・仮説） | `reference/improvement-log.md` | append-only、agent が深掘り参照 |
-| 月次スナップショット（要約） | `reference/monthly-snapshots/YYYY-MM.md` | `.claude/scripts/cloudflare/monthly-snapshot.mjs` が自動書き出し |
+| 詳細ログ（agent 用、検証コマンド・仮説） | `data/improvement/cloudflare-cost-improvement/improvement-log.md` | append-only、agent が深掘り参照 |
+| 月次スナップショット（要約） | `data/cloudflare/monthly-snapshots/YYYY-MM.md` | `.claude/scripts/cloudflare/monthly-snapshot.mjs` が自動書き出し |
 | 日次アラート（自動起票） | GitHub Issues ラベル `cloudflare-alert,auto-generated` タイトル `[Cloudflare Alert] ...` | 閾値違反時のみ起票・解決後 close で運用 |
 
-→ **責務分離**: `.claude/todo/improvements.md` はactive一覧、agent 用詳細は `.claude/skills/analytics/cloudflare-cost-improvement/reference/improvement-log.md`。日次アラートのみ Issues に残す（PSI/Cloudflare daily アラート方針）。
+→ **責務分離**: `.claude/todo/improvements.md` はactive一覧、agent 用詳細は `data/improvement/cloudflare-cost-improvement/improvement-log.md`。日次アラートのみ Issues に残す（PSI/Cloudflare daily アラート方針）。
 
 ## TODO行の契約
 
 `.claude/todo/improvements.md` の6列
 `ID | タイトル | Status | Due | Owner | Metric` を使う。baseline、deployed_at、
-検証コマンド、判定根拠は `reference/improvement-log.md` に置き、TODOへ複製しない。
+検証コマンド、判定根拠は `data/improvement/cloudflare-cost-improvement/improvement-log.md` に置き、TODOへ複製しない。
 
 ## 引数
 
@@ -48,7 +48,7 @@ $ARGUMENTS — [mode]
 
 Cloudflare メトリクス取得の優先順:
 
-1. **日次 snapshot** — `.claude/state/metrics/cloudflare/snapshots/YYYY-MM-DD.json`（CI が `.claude/scripts/cloudflare/fetch-usage.mjs` で GraphQL Analytics API から取得。Workers の requests・CPU / wall p50・p99、R2 操作・容量、D1）
+1. **日次 snapshot** — `data/cloudflare/snapshots/YYYY-MM-DD.json`（CI が `.claude/scripts/cloudflare/fetch-usage.mjs` で GraphQL Analytics API から取得。Workers の requests・CPU / wall p50・p99、R2 操作・容量、D1）
 2. **Cloudflare Dashboard（ユーザー手動共有）** — route 別の CPU 時間・Workers のエラーログなど snapshot に無い内訳
 3. **月次請求書 PDF** — `~/Downloads/*.pdf` 内、`invoice` モードで処理
 
@@ -58,10 +58,10 @@ Cloudflare メトリクス取得の優先順:
 
 ```
 以下を並列に実行して要約:
-1. reference/weekly-snapshots/ 配下の最新 YYYY-Www.json を Read
+1. data/cloudflare/weekly-snapshots/ 配下の最新 YYYY-Www.json を Read
 2. .claude/todo/improvements.md の6列表から active 行を抽出
-3. reference/improvement-log.md を Read し未判定の検証コマンド一覧を抽出
-4. .claude/state/metrics/cloudflare/LATEST.md を Read し日次推移を取得
+3. data/improvement/cloudflare-cost-improvement/improvement-log.md を Read し未判定の検証コマンド一覧を抽出
+4. data/cloudflare/LATEST.md を Read し日次推移を取得
 
 出力:
 - 最新 snapshot の合計額 + budget 超過メトリクス
@@ -77,7 +77,7 @@ Cloudflare メトリクス取得の優先順:
    b. snapshot に無い内訳が要るときはユーザーに Dashboard スクショ or CSV を依頼
    c. 請求書が手元にあるなら invoice モードへ誘導
 
-2. reference/weekly-snapshots/YYYY-Www.json として JSON 保存:
+2. data/cloudflare/weekly-snapshots/YYYY-Www.json として JSON 保存:
    - 命名: ISO Week（2026-W20 等）
    - source: "Cloudflare GraphQL API via MCP" or "manual entry"
    - period_start / period_end 必須
@@ -88,8 +88,8 @@ Cloudflare メトリクス取得の優先順:
    - alerts 配列に記録
 
 4. 前週 snapshot との前週比を計算:
-   - reference/weekly-snapshots/ の直近 2 週分を比較
-   - .claude/state/metrics/cloudflare/history.csv から取得しても可
+   - data/cloudflare/weekly-snapshots/ の直近 2 週分を比較
+   - data/cloudflare/history.csv から取得しても可
 
 5. 進行中施策の効果判定（最重要）:
    .claude/todo/improvements.md のCloudflare対象行を抽出。
@@ -98,7 +98,7 @@ Cloudflare メトリクス取得の優先順:
    - 実測 delta = 最新値 - デプロイ時点の値（前月 snapshot から読む）
    - 期日前または証拠不足なら active 行を維持し、必要なら Due と次アクションを更新する。
    - 判定可能なら full / partial / none / adverse を実測値・snapshot・判定日とともに
-     reference/improvement-log.md へ追記し、TODOから該当行を削除する。
+     data/improvement/cloudflare-cost-improvement/improvement-log.md へ追記し、TODOから該当行を削除する。
    - adverse の是正は別IDで追加し、確定済み行を履歴として残さない。
 
 6. 出力:
@@ -127,15 +127,15 @@ Cloudflare メトリクス取得の優先順:
 
 3. front-matter の `updated:` を本日日付に更新。
 4. target metric、baseline、想定効果、deployed_at、PR、検証コマンドは
-   reference/improvement-log.md に appendする。
+   data/improvement/cloudflare-cost-improvement/improvement-log.md に appendする。
 5. 次の観測日（デプロイ + 14 / 28 日、次回請求日）を計算して提示。
 ```
 
 #### mode = next
 
 ```
-1. .claude/todo/improvements.md のactive行と、reference/improvement-log.md の過去判定から派生候補を抽出
-2. reference/improvement-log.md の「次の候補」「仮説」セクションから未着手を拾う
+1. .claude/todo/improvements.md のactive行と、data/improvement/cloudflare-cost-improvement/improvement-log.md の過去判定から派生候補を抽出
+2. data/improvement/cloudflare-cost-improvement/improvement-log.md の「次の候補」「仮説」セクションから未着手を拾う
 3. 最新 snapshot の「次のアクション」候補も合わせる
 
 優先度: tier-1 > tier-2 > tier-3
@@ -151,12 +151,12 @@ Cloudflare メトリクス取得の優先順:
    - Period (Mar 15 – Apr 14, 2026 等)
    - 各 line item の Qty（超過量）と Amount
    - Total / Tax / Total JPY（Tax Addendum ページ）
-3. reference/weekly-snapshots/YYYY-Www.json として git 保存
+3. data/cloudflare/weekly-snapshots/YYYY-Www.json として git 保存
 4. budgets.json 判定
-5. `reference/monthly-snapshots/YYYY-MM.md` を Write（frontmatter `type: cloudflare-cost-snapshot` / `month: YYYY-MM` / `invoice_id: IN-XXXXXXXX`）:
+5. `data/cloudflare/monthly-snapshots/YYYY-MM.md` を Write（frontmatter `type: cloudflare-cost-snapshot` / `month: YYYY-MM` / `invoice_id: IN-XXXXXXXX`）:
    - metrics 表
    - budget 判定
-   - 前月比（前月の `reference/monthly-snapshots/YYYY-MM.md` を Read して比較）
+   - 前月比（前月の `data/cloudflare/monthly-snapshots/YYYY-MM.md` を Read して比較）
    - 進行中施策の status 一覧（.claude/todo/improvements.md から抽出）
 6. Step 2-observe-5 と同じ施策効果判定を実行
 7. 合計額・超過指標をユーザーに報告
@@ -171,21 +171,21 @@ Cloudflare メトリクス取得の優先順:
 - **施策は 1 PR 1 ID** — 複数目的の PR は分割
 - **想定効果値はデプロイ前に書く** — 後付けバイアス防止
 - **月次請求到着時は必ず invoice モード実行** — この記録を起点に効果判定
-- **責務を分離する** — `.claude/todo/improvements.md` はactive一覧、reference/improvement-log.md は判定履歴
+- **責務を分離する** — `.claude/todo/improvements.md` はactive一覧、data/improvement/cloudflare-cost-improvement/improvement-log.md は判定履歴
 
 ## 参照パターン
 
 ```bash
 # 直近スナップショット
-ls -t .claude/skills/analytics/cloudflare-cost-improvement/reference/weekly-snapshots/ | head -3
-ls -t .claude/skills/analytics/cloudflare-cost-improvement/reference/monthly-snapshots/*.md | head -3
-cat .claude/state/metrics/cloudflare/LATEST.md
+ls -t data/cloudflare/weekly-snapshots/ | head -3
+ls -t data/cloudflare/monthly-snapshots/*.md | head -3
+cat data/cloudflare/LATEST.md
 
 # 進行中施策
 node .claude/scripts/lib/scan-pending-improvements.mjs --format markdown
 
 # 効果測定済み施策・詳細ログ
-cat .claude/skills/analytics/cloudflare-cost-improvement/reference/improvement-log.md
+cat data/improvement/cloudflare-cost-improvement/improvement-log.md
 
 # 日次アラート（Issues に残る運用）
 gh issue list --label cloudflare-alert --state open
@@ -198,7 +198,7 @@ snapshot に無い集計が繰り返し必要になったら、`fetch-usage.mjs`
 参照: `.claude/rules/evidence-based-judgment.md`
 
 - [ ] 検証コマンドを実行したか:
-  - Cloudflare 月次実測: `/cloudflare-cost-improvement observe` で snapshot 取得 → reference/weekly-snapshots/ に保存
+  - Cloudflare 月次実測: `/cloudflare-cost-improvement observe` で snapshot 取得 → data/cloudflare/weekly-snapshots/ に保存
   - GraphQL Analytics API: workers / R2 / D1 別の利用量を直接クエリ
 - [ ] Cloudflare 仕様（Workers CPU/メモリ制限・R2 操作課金）を主張するなら公式ドキュメント URL を引用したか（`developers.cloudflare.com/...`）
 - [ ] 比較対象（before / after / baseline）が明確か
@@ -220,4 +220,4 @@ snapshot に無い集計が繰り返し必要になったら、`fetch-usage.mjs`
 ## 前提
 
 - `.claude/todo/improvements.md` が存在すること（施策 ID は `CF-*` 等）
-- `reference/budgets.json` / `reference/weekly-snapshots/` 初期化済
+- `.claude/config/budgets/cloudflare-cost-improvement/budgets.json` / `data/cloudflare/weekly-snapshots/` 初期化済

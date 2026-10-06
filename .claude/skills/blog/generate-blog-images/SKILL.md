@@ -123,7 +123,7 @@ npm run blog-images:codex -- ingest \
 ```
 
 ingestは入力を1200×630 JPEGへ決定的に正規化し、
-`apps/web/scripts/lib/assets/blog-codex-backgrounds/<assetId>.jpg` だけを更新する。
+`assets/blog/codex-backgrounds/<assetId>.jpg` だけを更新する。
 prompt hashが現在のcatalogと違う場合は取り込まず、requestからやり直す。
 
 ### Phase 4: gateを通す

@@ -47,7 +47,7 @@
 
 - 配信用の透過WebPは`apps/web/public/images/home/use-cases/`に置く。UIと同じリリースで
   変更する少数の静的素材なのでR2へ分離しない
-- imagegenの元PNGは`docs/assets/home-use-case-<id>.png`に残す
+- imagegenの元PNGは`assets/page-heroes/home-use-case-<id>.png`に残す
 - 共通スタイル・主題・プロンプトは`home-use-case-image-catalog.ts`で管理する
 - 元PNGを差し替えた後は
   `npx tsx apps/web/scripts/process-home-use-case-images.ts --only <id>`で、右側トリミング・

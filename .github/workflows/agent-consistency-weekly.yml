@@ -325,7 +325,7 @@ jobs:
           EXISTING=$(gh issue list --label "auto-generated" --state open \
             --search "IG 投稿が投稿台帳 in:title" --json number --jq '.[0].number // empty')
           {
-            echo "\`ig-posted-log.jsonl\` にあって \`.claude/state/sns/posts.json\` に無い投稿があります。"
+            echo "\`ig-posted-log.jsonl\` にあって \`data/sns/posts.json\` に無い投稿があります。"
             echo "台帳に無い投稿は \`/update-sns-metrics\` の対象外になり、リーチ・保存率が計測できません。"
             echo ""
             echo "対処: \`node .claude/scripts/instagram/record-posted.cjs --from-log\` で回収し、"

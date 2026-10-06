@@ -24,12 +24,12 @@ export const RETENTION_POLICIES = Object.freeze({
     keep: 1,
   },
   gsc: {
-    directory: ".claude/state/metrics/gsc/url-inspection",
+    directory: "data/gsc/url-inspection",
     pattern: /^\d{4}-\d{2}-\d{2}\.csv$/,
     keep: 7,
   },
   cloudflare: {
-    directory: ".claude/state/metrics/cloudflare/snapshots",
+    directory: "data/cloudflare/snapshots",
     pattern: /^\d{4}-\d{2}-\d{2}\.json$/,
     keep: 30,
   },
@@ -39,12 +39,12 @@ export const RETENTION_POLICIES = Object.freeze({
     keep: 8,
   },
   note: {
-    directory: ".claude/state/metrics/note",
+    directory: "data/note/metrics",
     pattern: /^note-\d{4}-\d{2}-\d{2}\.json$/,
     keep: 4,
   },
   "note-navigation": {
-    directory: ".claude/state/metrics/note/navigation",
+    directory: "data/note/navigation",
     pattern: /^note-navigation-pilot-\d{4}-\d{2}-\d{2}\.json$/,
     keep: 8,
   },
@@ -72,17 +72,17 @@ export const RETENTION_POLICIES = Object.freeze({
   },
   // analytics の週次 snapshot ディレクトリ。wave 判定が before 週を参照するため 26 週残す。
   "analytics-gsc": {
-    directory: ".claude/skills/analytics/gsc-improvement/reference/snapshots",
+    directory: "data/gsc/snapshots",
     pattern: /^\d{4}-W\d{2}$/,
     keep: 26,
   },
   "analytics-ga4": {
-    directory: ".claude/skills/analytics/ga4-improvement/reference/snapshots",
+    directory: "data/ga4/snapshots",
     pattern: /^\d{4}-W\d{2}$/,
     keep: 26,
   },
   "analytics-adsense": {
-    directory: ".claude/skills/analytics/adsense-improvement/reference/snapshots",
+    directory: "data/adsense/snapshots",
     pattern: /^\d{4}-W\d{2}$/,
     keep: 26,
   },
