@@ -28,7 +28,7 @@ describe("RankedKpiGrid", () => {
     expect(html).toContain("人口");
     expect(html).toContain("1,157,000");
     expect(html).toContain("31位");
-    expect(html.match(/shadow-sm/g)).toHaveLength(1);
+    expect(html.match(/shadow-xs/g)).toHaveLength(1);
     expect(html).toContain("grid-cols-1");
     expect(html).not.toContain("@md:grid-cols-4");
   });

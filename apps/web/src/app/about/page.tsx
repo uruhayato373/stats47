@@ -48,7 +48,7 @@ function AboutSection({ title, children }: AboutSectionProps) {
   return (
     <SurfaceCard className="h-full">
       <div className="p-4 md:p-6 flex flex-row items-center gap-2 space-y-0 border-b border-border">
-        <h2 className="text-base font-semibold leading-none text-lg md:text-xl">{title}</h2>
+        <h2 className="text-base font-semibold leading-none text-lg md:text-xl md:leading-7">{title}</h2>
       </div>
       <div className="p-4 md:p-6 pt-3">{children}</div>
     </SurfaceCard>
@@ -60,8 +60,8 @@ const EXTERNAL_LINKS = {
   contactForm: CONTACT_FORM_URL,
 } as const;
 
-const TEXT_STYLE = "text-xs leading-relaxed md:text-sm";
-const TEXT_STYLE_WITH_MARGIN = "text-xs leading-relaxed mb-4 md:text-sm";
+const TEXT_STYLE = "text-xs leading-relaxed md:text-sm md:leading-5";
+const TEXT_STYLE_WITH_MARGIN = "text-xs leading-relaxed mb-4 md:text-sm md:leading-5";
 
 export const metadata: Metadata = {
   title: "このサイトについて",
@@ -148,7 +148,7 @@ export default function AboutPage() {
               alt={OPERATOR_PROFILE.avatarAlt}
               width={56}
               height={56}
-              className="w-14 h-14 rounded-full object-cover flex-shrink-0"
+              className="w-14 h-14 rounded-full object-cover shrink-0"
             />
             <div>
               <p className="font-semibold text-base">
@@ -223,7 +223,7 @@ export default function AboutPage() {
         {/* 2. ミッション・ビジョン */}
         <AboutSection title="ミッション">
           <div className="flex items-start gap-2 mb-4">
-            <Target className="h-4 w-4 text-primary mt-1 flex-shrink-0" />
+            <Target className="h-4 w-4 text-primary mt-1 shrink-0" />
             <p className={`${TEXT_STYLE} font-semibold`}>
               統計をもっと身近に。探す手間、加工する苦労をなくし、誰もがデータを「使える」社会をつくる。
             </p>
@@ -243,7 +243,7 @@ export default function AboutPage() {
         {/* 3. データソース・編集方針 */}
         <AboutSection title="データソース・編集方針">
           <div className="flex items-start gap-2 mb-4">
-            <Briefcase className="h-4 w-4 text-primary mt-1 flex-shrink-0" />
+            <Briefcase className="h-4 w-4 text-primary mt-1 shrink-0" />
             <div>
               <p className="text-sm font-semibold mb-1">一次統計データのみ使用</p>
               <p className="text-xs text-muted-foreground">
@@ -253,7 +253,7 @@ export default function AboutPage() {
           </div>
           <div className="mb-4 space-y-2">
             <div className="flex items-center gap-2">
-              <span className="text-xs text-muted-foreground w-24 flex-shrink-0">主要データソース</span>
+              <span className="text-xs text-muted-foreground w-24 shrink-0">主要データソース</span>
               <a
                 href={EXTERNAL_LINKS.eStat}
                 target="_blank"
@@ -267,13 +267,13 @@ export default function AboutPage() {
               </a>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-xs text-muted-foreground w-24 flex-shrink-0">データ鮮度</span>
+              <span className="text-xs text-muted-foreground w-24 shrink-0">データ鮮度</span>
               <Badge variant="outline" className="text-xs font-normal">
                 公開後 24 時間以内に反映（自動化）
               </Badge>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-xs text-muted-foreground w-24 flex-shrink-0">出典明示</span>
+              <span className="text-xs text-muted-foreground w-24 shrink-0">出典明示</span>
               <Badge variant="outline" className="text-xs font-normal">
                 全記事末尾に一次情報リンク
               </Badge>

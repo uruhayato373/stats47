@@ -74,7 +74,7 @@ function SlidePlayer({ slides, aspectRatio }: { slides: SlideData[]; aspectRatio
               >
                 {slide.category}
               </span>
-              <h2 className="text-2xl sm:text-3xl font-black text-foreground mt-3 leading-tight">
+              <h2 className="text-2xl sm:text-3xl sm:leading-9 font-black text-foreground mt-3 leading-tight">
                 {slide.title}
               </h2>
               <p className="text-muted-foreground font-medium text-sm mt-1">

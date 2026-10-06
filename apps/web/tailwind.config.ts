@@ -13,42 +13,16 @@ const coconalaFontFamily = [
 const config: Config = {
   darkMode: ["class"],
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/features/**/*.{js,ts,jsx,tsx,mdx}",
+    // src/lib などにもクラス文字列がある (BLOG_THUMBNAIL_ASPECT_CLASS・CookieConsentBanner)。
+    // v3 ではほかのファイルに同じクラスがあったため偶然生成されていた
+    "./src/**/*.{js,ts,jsx,tsx,mdx}",
     "../../packages/components/src/**/*.{js,ts,jsx,tsx,mdx}",
     "../../packages/visualization/src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  // 動的に生成されるクラス名をパージから除外
-  safelist: [
-    // グリッド列幅クラス（DashboardGridLayout で動的生成）
-    {
-      pattern: /^col-span-(1|2|3|4|5|6|7|8|9|10|11|12)$/,
-      variants: ["sm", "md", "lg", "xl", "@sm", "@md", "@lg", "@xl"],
-    },
-  ],
+  // safelist (col-span-N の動的生成)・コンテナクエリ幅 (@sm 30rem / @md 48rem / @lg 64rem)・
+  // container ユーティリティ (中央寄せ・2xl で最大 1700px) は v4 の JS 設定では効かないため
+  // src/app/globals.css 側で定義する
   theme: {
-    /** コンテナクエリのブレイクポイント（@sm, @md, @lg） */
-    containers: {
-      sm: "30rem",   // 480px — KPI 2列化
-      md: "48rem",   // 768px — チャート類の切り替え
-      lg: "64rem",   // 1024px — KPI 4列化
-    },
-    /** Tailwind の `container` ユーティリティ最大幅を 1700px に拡張
-     *  (旧 max-w-screen-2xl = 1536px → 1920px+ で左右余白が大きすぎる問題を解消)
-     *  全 page.tsx の `container mx-auto px-4` 利用が自動的に 1700px max に */
-    container: {
-      center: true,
-      padding: "1rem",
-      screens: {
-        sm: "640px",
-        md: "768px",
-        lg: "1024px",
-        xl: "1280px",
-        "2xl": "1700px",
-      },
-    },
     extend: {
       fontFamily: {
         sans: coconalaFontFamily,
@@ -115,7 +89,7 @@ const config: Config = {
       },
     },
   },
-  plugins: [require("@tailwindcss/typography"), require("@tailwindcss/container-queries")],
+  plugins: [require("@tailwindcss/typography")],
 };
 
 export default config;

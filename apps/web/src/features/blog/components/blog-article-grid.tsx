@@ -47,7 +47,7 @@ export function BlogArticleGrid({ articles }: BlogArticleGridProps) {
             <SurfaceLinkCard
               key={article.slug}
               href={`/blog/${article.slug}`}
-              className="group flex min-h-80 flex-col overflow-hidden p-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="group flex min-h-80 flex-col overflow-hidden p-0 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
             >
               <div
                 className={`relative ${BLOG_THUMBNAIL_ASPECT_CLASS} w-full overflow-hidden border-b border-border bg-muted`}

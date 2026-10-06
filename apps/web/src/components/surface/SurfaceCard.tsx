@@ -31,7 +31,7 @@ export const PORTAL_CARD_TITLE_CLASS =
 
 /** タイトル下に置く短い説明。カード本文なので12px未満にしない。 */
 export const PORTAL_CARD_DESCRIPTION_CLASS =
-  "relative z-10 line-clamp-2 text-[13px] leading-[1.5] text-muted-foreground";
+  "relative z-10 line-clamp-2 text-[13px] leading-normal text-muted-foreground";
 
 interface SurfaceClassNameOptions {
   interactive?: boolean;
@@ -184,7 +184,7 @@ function HeaderedSurfaceCard({
             className={cn(
               HEADER_CLASS,
               "min-h-12 cursor-pointer list-none [&::-webkit-details-marker]:hidden",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring",
+              "focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring",
             )}
           >
             <div className="flex min-w-0 items-center gap-2">
@@ -283,7 +283,7 @@ export function railNavRowClassName({
 } = {}) {
   return cn(
     "group flex w-full items-center justify-between gap-2 px-2 text-left text-foreground transition-colors",
-    "hover:bg-accent/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring",
+    "hover:bg-accent/50 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring",
     density === "compact"
       ? "min-h-11 py-1.5 text-sm sm:min-h-9"
       : "min-h-11 py-2 text-[15px] sm:min-h-10",

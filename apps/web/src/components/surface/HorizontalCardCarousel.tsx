@@ -21,7 +21,7 @@ const SCROLL_EDGE_TOLERANCE = 2;
 // 矢印はカード列の上の行に置く。カードに重ねると 1 位の値を隠し、
 // タップがカードのリンクへ抜ける (2026-09-23 週次 UI 検査で全 7 幅に重なりを検出)。
 const NAVIGATION_BUTTON_CLASS =
-  'relative h-9 w-9 rounded-md bg-background shadow-sm transition-opacity sm:h-8 sm:w-8';
+  'relative h-9 w-9 rounded-md bg-background shadow-xs transition-opacity sm:h-8 sm:w-8';
 
 /**
  * ポータルカード共通の1行カルーセル。
@@ -127,7 +127,7 @@ export function HorizontalCardCarousel({
           event.preventDefault();
           scroll(event.key === 'ArrowLeft' ? 'left' : 'right');
         }}
-        className={`grid snap-x snap-mandatory grid-flow-col auto-cols-[85%] gap-3 overflow-x-auto overscroll-x-contain motion-safe:scroll-smooth [scrollbar-width:none] [&>*]:snap-start [&::-webkit-scrollbar]:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 sm:auto-cols-[calc((100%_-_0.75rem)/2)] lg:auto-cols-[calc((100%_-_1.5rem)/3)] xl:auto-cols-[calc((100%_-_2.25rem)/4)] ${className}`}
+        className={`grid snap-x snap-mandatory grid-flow-col auto-cols-[85%] gap-3 overflow-x-auto overscroll-x-contain motion-safe:scroll-smooth scrollbar-none *:snap-start [&::-webkit-scrollbar]:hidden focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 sm:auto-cols-[calc((100%-0.75rem)/2)] lg:auto-cols-[calc((100%-1.5rem)/3)] xl:auto-cols-[calc((100%-2.25rem)/4)] ${className}`}
       >
         {children}
       </div>

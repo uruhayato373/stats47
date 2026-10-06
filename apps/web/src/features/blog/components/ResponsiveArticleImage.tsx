@@ -23,7 +23,7 @@ export function ResponsiveArticleImage({ src, alt }: ResponsiveArticleImageProps
   const isResponsiveChart = resolveMobileChartSource(src) !== null;
 
   return (
-    <picture className={mobileSrc ? "block max-sm:aspect-[2/3]" : "block"}>
+    <picture className={mobileSrc ? "block max-sm:aspect-2/3" : "block"}>
       {mobileSrc && <source media={MEDIA_QUERIES.belowSm} srcSet={mobileSrc} />}
       <Image
         src={src}

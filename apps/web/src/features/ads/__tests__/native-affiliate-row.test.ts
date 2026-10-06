@@ -62,7 +62,7 @@ describe("NativeAffiliateRow の構造契約", () => {
   it("カード装飾や固定アスペクト枠を使わず、バナーの原寸比を保つ", () => {
     expect(src).not.toContain("<SurfaceCard");
     expect(src).not.toContain("getSurfaceCardClassName");
-    expect(src).not.toContain("aspect-[4/3]");
+    expect(src).not.toContain("aspect-4/3");
     expect(src).not.toContain("rounded-md");
     expect(src).not.toContain("bg-muted");
     expect(src).not.toContain("group-hover");

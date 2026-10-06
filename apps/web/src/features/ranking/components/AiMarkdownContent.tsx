@@ -6,7 +6,7 @@ import remarkGfm from "remark-gfm";
 
 import { addLineBreaksAfterPeriod } from "../utils";
 
-const proseClasses = "prose prose-sm dark:prose-invert max-w-none text-muted-foreground prose-headings:text-foreground prose-h2:text-[15px] prose-h2:font-semibold prose-h2:mt-5 prose-h2:mb-1 prose-h3:text-sm prose-h3:font-semibold prose-h3:mt-4 prose-h3:mb-1 prose-p:my-2 prose-p:leading-relaxed prose-a:text-primary prose-a:underline-offset-2 hover:prose-a:underline";
+const proseClasses = "prose prose-sm dark:prose-invert max-w-none text-muted-foreground prose-headings:text-foreground prose-h2:text-[15px] prose-h2:font-semibold prose-h2:mt-5 prose-h2:mb-1 prose-h3:text-sm prose-h3:font-semibold prose-h3:mt-4 prose-h3:mb-1 prose-p:my-2 prose-p:leading-relaxed prose-a:text-primary prose-a:underline-offset-2 prose-a:hover:underline";
 
 /** 内部 (同一オリジン) リンク判定 */
 function isInternalHref(href: string | undefined): boolean {

@@ -67,7 +67,7 @@ export function RankingLinkCard({ href, children }: RankingLinkCardProps) {
                 <span className="mb-3 flex items-center gap-3 sm:gap-4">
                     <span
                         aria-hidden="true"
-                        className={`block aspect-[320/190] w-32 shrink-0 sm:w-48 [&>svg]:h-full [&>svg]:w-full ${data ? "" : "animate-pulse bg-background"}`}
+                        className={`block aspect-320/190 w-32 shrink-0 sm:w-48 [&>svg]:h-full [&>svg]:w-full ${data ? "" : "animate-pulse bg-background"}`}
                         dangerouslySetInnerHTML={data ? { __html: data.mapSvg } : undefined}
                     />
                     {/* 値を県名から離しすぎない (広い画面で右端へ飛ばすと1行として読めない) */}

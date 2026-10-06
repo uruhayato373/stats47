@@ -452,7 +452,9 @@ export function ThemeMetricsDashboard({
   return (
     <section
       id="theme-indicators"
-      className="@container space-y-6 scroll-mt-24"
+      // pt-6: 先頭の sr-only 見出しは絶対配置で、v4 の space-y (下側の余白) が効かない。
+      // v3 で 2 番目の子に付いていた上の余白をここで保つ
+      className="@container space-y-6 scroll-mt-24 pt-6"
     >
       <h2 className="sr-only">{areaName}の主要指標</h2>
       {selectedPrefectureCode && (

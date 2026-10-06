@@ -580,7 +580,7 @@ export function MetricSwitcherPanel({
                           : // タイル幅に収まらないラベルを hover で読めるようにする
                             label
                     }
-                    className={`snap-start flex w-36 min-w-36 shrink-0 grow flex-col items-start gap-1 rounded-none border-0 border-b-2 bg-transparent px-3 py-2 text-left transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary/50 ${
+                    className={`snap-start flex w-36 min-w-36 shrink-0 grow flex-col items-start gap-1 rounded-none border-0 border-b-2 bg-transparent px-3 py-2 text-left transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary/50 ${
                       checked
                         ? 'bg-accent/40'
                         : 'border-b-border hover:bg-accent/30'
@@ -604,7 +604,7 @@ export function MetricSwitcherPanel({
                           ) : null}
                         </span>
                       )}
-                      <span className="min-h-8 whitespace-normal break-words text-[11px] leading-4 text-muted-foreground">
+                      <span className="min-h-8 whitespace-normal wrap-break-word text-[11px] leading-4 text-muted-foreground">
                         {label}
                       </span>
                     </span>

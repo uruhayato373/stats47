@@ -141,7 +141,7 @@ export function HeaderClient({ themes, categories }: HeaderClientProps) {
 
   return (
     <header
-      className="portal-header sticky top-0 z-[200] h-14 border-b bg-card lg:h-[52px]"
+      className="portal-header sticky top-0 z-200 h-14 border-b bg-card lg:h-[52px]"
       suppressHydrationWarning
     >
       <div className="flex h-full w-full items-center gap-4 px-4 sm:px-6 lg:px-8">
@@ -169,7 +169,7 @@ export function HeaderClient({ themes, categories }: HeaderClientProps) {
               height={24}
               className="size-5 shrink-0 transition-transform group-hover:-translate-y-0.5 lg:size-6"
             />
-            <span className="whitespace-nowrap text-lg font-bold leading-none tracking-tight text-foreground lg:text-xl">
+            <span className="whitespace-nowrap text-lg font-bold leading-none tracking-tight text-foreground lg:text-xl lg:leading-7">
               stats<span className="text-primary">47</span>
             </span>
           </Link>
@@ -184,7 +184,7 @@ export function HeaderClient({ themes, categories }: HeaderClientProps) {
               <DropdownMenuTrigger asChild>
                 <button
                   className={cn(
-                    'flex h-full items-center gap-1 whitespace-nowrap border-b-2 px-3 text-[13px] font-semibold transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary/50',
+                    'flex h-full items-center gap-1 whitespace-nowrap border-b-2 px-3 text-[13px] font-semibold transition-colors outline-hidden focus-visible:ring-2 focus-visible:ring-primary/50',
                     activeNav === 'category'
                       ? 'border-primary text-foreground'
                       : 'border-transparent text-foreground/80 hover:text-foreground'
@@ -305,7 +305,7 @@ export function HeaderClient({ themes, categories }: HeaderClientProps) {
               <DropdownMenuTrigger asChild>
                 <button
                   className={cn(
-                    'flex h-full items-center gap-1 whitespace-nowrap border-b-2 px-3 text-[13px] font-semibold transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary/50',
+                    'flex h-full items-center gap-1 whitespace-nowrap border-b-2 px-3 text-[13px] font-semibold transition-colors outline-hidden focus-visible:ring-2 focus-visible:ring-primary/50',
                     activeNav === 'themes'
                       ? 'border-primary text-foreground'
                       : 'border-transparent text-foreground/80 hover:text-foreground'
@@ -320,7 +320,7 @@ export function HeaderClient({ themes, categories }: HeaderClientProps) {
               <DropdownMenuContent
                 align="start"
                 sideOffset={8}
-                className="max-h-[var(--radix-dropdown-menu-content-available-height)] w-[min(92vw,560px)] overflow-y-auto p-3"
+                className="max-h-(--radix-dropdown-menu-content-available-height) w-[min(92vw,560px)] overflow-y-auto p-3"
               >
                 <div className="grid grid-cols-2 gap-1">
                   {themes.map((theme) => {

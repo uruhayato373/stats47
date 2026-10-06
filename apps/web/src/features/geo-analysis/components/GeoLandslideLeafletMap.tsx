@@ -35,7 +35,7 @@ function Source({ manifest }: { manifest: GeoAnalysisEvidenceManifest }) {
   return <SourceViewport key={`${revision}:${manifest.generatedAt}`} bounds={bounds} generatedAt={manifest.generatedAt} />;
 }
 function SourceStatus({children}:{children:ReactNode}) {
-  return <div className="leaflet-bottom leaflet-left z-[500] m-2 bg-background p-2 text-xs" role="status">{children}</div>;
+  return <div className="leaflet-bottom leaflet-left z-500 m-2 bg-background p-2 text-xs" role="status">{children}</div>;
 }
 function SourceViewport({bounds,generatedAt}:{bounds:readonly [number,number,number,number];generatedAt:string}) {
   const [source, setSource] = useState<FeatureCollection<Polygon> | null>(null);

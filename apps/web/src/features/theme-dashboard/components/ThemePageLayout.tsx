@@ -291,7 +291,7 @@ export async function ThemePageLayout({
                   <ThemeChapterLinks
                     links={pageLinks}
                     themeKey={theme.themeKey}
-                    className="shrink-0 py-2 text-sm font-medium text-foreground hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                    className="shrink-0 py-2 text-sm font-medium text-foreground hover:text-primary focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/50"
                   />
                 </nav>
               </RailCard>

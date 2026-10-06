@@ -14,7 +14,7 @@ export function SectionIndexLink({ href, label }: SectionIndexLinkProps) {
     <Link
       href={href}
       aria-label={label}
-      className="inline-flex items-center gap-1 font-semibold text-primary underline-offset-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+      className="inline-flex items-center gap-1 font-semibold text-primary underline-offset-2 hover:underline focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/50"
     >
       <span>一覧</span>
       <ArrowRight className="size-4" aria-hidden />

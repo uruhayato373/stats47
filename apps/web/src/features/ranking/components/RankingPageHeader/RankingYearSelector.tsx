@@ -65,7 +65,7 @@ function RankingYearSelectorComponent({
         >
           <SelectValue placeholder="年度を選択" />
         </SelectTrigger>
-        <SelectContent className="[&_*]:text-xs">
+        <SelectContent className="**:text-xs">
           {sortedTimes.map((year) => (
             <SelectItem key={year.yearCode} value={year.yearCode}>
               {year.yearName}

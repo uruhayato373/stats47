@@ -90,7 +90,7 @@ export function GeoSourceNavigationList({
                       }
                       data-geo-source={item.dataId}
                       className={cn(
-                        'flex min-h-11 items-center gap-2 px-2 py-2 text-sm leading-snug transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring xl:min-h-8 xl:py-1.5',
+                        'flex min-h-11 items-center gap-2 px-2 py-2 text-sm leading-snug transition-colors hover:bg-accent focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring xl:min-h-8 xl:py-1.5',
                         item.dataId === currentDataId &&
                           'bg-accent font-semibold text-primary'
                       )}
@@ -101,7 +101,7 @@ export function GeoSourceNavigationList({
                       >
                         {String(item.position).padStart(2, '0')}
                       </span>
-                      <span className="min-w-0 flex-1 break-words">
+                      <span className="min-w-0 flex-1 wrap-break-word">
                         {item.name}
                         {item.dataId === currentDataId && (
                           <span className="ml-1.5 inline-block text-xs">

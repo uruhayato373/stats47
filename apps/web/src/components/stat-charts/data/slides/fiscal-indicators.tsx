@@ -23,7 +23,7 @@ export const fiscalIndicatorsSlides: SlideData[] = [
     subtitle: "地方公共団体の財政の健全化に関する法律",
     content: (
       <div className="space-y-6">
-        <div className="bg-info-soft p-6 rounded-card border border-info/20 shadow-sm">
+        <div className="bg-info-soft p-6 rounded-card border border-info/20 shadow-xs">
           <p className="text-info leading-relaxed text-lg font-medium">
             「隠れた借金」を可視化し、早期に財政悪化を食い止めるための法律です。
           </p>
@@ -60,7 +60,7 @@ export const fiscalIndicatorsSlides: SlideData[] = [
           { label: "将来負担比率", icon: <BarChart3 className="h-5 w-5" />, desc: "将来払う負債", color: FISCAL_INDICATOR_ICON_COLOR.futureBurden },
         ].map((item) => (
           <div key={item.label} className="flex items-center gap-4 p-4 bg-muted rounded-sm border border-border">
-            <div className={`${item.color} p-2 bg-card rounded-lg shadow-sm`}>{item.icon}</div>
+            <div className={`${item.color} p-2 bg-card rounded-lg shadow-xs`}>{item.icon}</div>
             <div>
               <div className="font-bold text-sm">{item.label}</div>
               <div className="text-[10px] text-muted-foreground">{item.desc}</div>
@@ -79,7 +79,7 @@ export const fiscalIndicatorsSlides: SlideData[] = [
     content: (
       <div className="space-y-4">
         <div className="relative p-5 bg-warning-soft border-2 border-warning/30 rounded-card flex gap-4">
-          <div className="shrink-0 flex items-center justify-center w-12 h-12 bg-warning text-white rounded-full font-black italic shadow-sm">
+          <div className="shrink-0 flex items-center justify-center w-12 h-12 bg-warning text-white rounded-full font-black italic shadow-xs">
             !
           </div>
           <div>
@@ -92,7 +92,7 @@ export const fiscalIndicatorsSlides: SlideData[] = [
           </div>
         </div>
         <div className="relative p-5 bg-negative-soft border-2 border-negative/30 rounded-card flex gap-4">
-          <div className="shrink-0 flex items-center justify-center w-12 h-12 bg-negative text-white rounded-full font-black italic shadow-sm">
+          <div className="shrink-0 flex items-center justify-center w-12 h-12 bg-negative text-white rounded-full font-black italic shadow-xs">
             !!
           </div>
           <div>
@@ -115,7 +115,7 @@ export const fiscalIndicatorsSlides: SlideData[] = [
     subtitle: "水道・病院などの「事業」を守る指標",
     content: (
       <div className="flex flex-col items-center justify-center h-full space-y-4">
-        <div className={`w-full ${FISCAL_PUBLIC_ENTERPRISE_CARD.surface} p-6 rounded-card shadow-sm text-center relative overflow-hidden`}>
+        <div className={`w-full ${FISCAL_PUBLIC_ENTERPRISE_CARD.surface} p-6 rounded-card shadow-xs text-center relative overflow-hidden`}>
           <div className="absolute top-0 right-0 p-2 opacity-20">
             <BarChart3 size={80} />
           </div>
@@ -149,7 +149,7 @@ export const fiscalIndicatorsSlides: SlideData[] = [
           { step: "実行", desc: "毎年の実施状況を公表し、改善されるまで継続。" },
         ].map((item, i) => (
           <div key={item.step} className="relative">
-            <div className="absolute -left-[30px] w-6 h-6 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-[10px] font-bold shadow-md">
+            <div className="absolute left-[-30px] w-6 h-6 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-[10px] font-bold shadow-md">
               {i + 1}
             </div>
             <div className="font-bold text-foreground">{item.step}</div>

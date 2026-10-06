@@ -61,7 +61,7 @@ export function HeroBanner({
               {eyebrow}
             </p>
           )}
-          <h1 className="text-2xl font-bold leading-tight text-foreground sm:text-3xl">
+          <h1 className="text-2xl font-bold leading-tight text-foreground sm:text-3xl sm:leading-9">
             {title}
           </h1>
           <p className="max-w-xl text-sm leading-relaxed text-muted-foreground">

@@ -22,7 +22,7 @@ export function GeoSourceLinkCard({
       prefetch={false}
       href={`/geo/datasets/${dataId}`}
       data-geo-source-card={dataId}
-      className={`group flex h-full min-w-0 overflow-hidden p-0 focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary ${compact ? '' : 'sm:flex-col'}`}
+      className={`group flex h-full min-w-0 overflow-hidden p-0 focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-primary ${compact ? '' : 'sm:flex-col'}`}
     >
       {label && (
         <div

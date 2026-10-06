@@ -98,7 +98,7 @@ export function ThemeEvidenceTopicsSection({ themeKey }: { themeKey: string }) {
                           href={href}
                           trackingLabel={`${topic.key}:ranking:${ranking.key}`}
                           surface="theme_evidence"
-                          className="text-sm text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                          className="text-sm text-primary hover:underline focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/50"
                         >
                           {ranking.title}
                         </TrackedThemeLink>
@@ -122,7 +122,7 @@ export function ThemeEvidenceTopicsSection({ themeKey }: { themeKey: string }) {
                           href={href}
                           trackingLabel={`${topic.key}:theme:${theme.key}`}
                           surface="theme_evidence"
-                          className="text-sm text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                          className="text-sm text-primary hover:underline focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/50"
                         >
                           {theme.title}
                         </TrackedThemeLink>
@@ -146,7 +146,7 @@ export function ThemeEvidenceTopicsSection({ themeKey }: { themeKey: string }) {
                           href={href}
                           trackingLabel={`${topic.key}:tag:${tagKey}`}
                           surface="theme_evidence"
-                          className="text-sm text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                          className="text-sm text-primary hover:underline focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/50"
                         >
                           #{tagKey}
                         </TrackedThemeLink>
@@ -170,7 +170,7 @@ export function ThemeEvidenceTopicsSection({ themeKey }: { themeKey: string }) {
                         href={source.sourceUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="hover:text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                        className="hover:text-primary hover:underline focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/50"
                       >
                         {source.title}
                       </a>

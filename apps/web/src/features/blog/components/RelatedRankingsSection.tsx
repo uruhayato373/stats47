@@ -69,7 +69,7 @@ export async function RelatedRankingsSection({
             <Link
               key={ranking.rankingKey}
               href={`/ranking/${ranking.rankingKey}`}
-              className="group block border-b border-border py-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+              className="group block border-b border-border py-3 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
             >
               <p className="line-clamp-2 text-sm font-medium group-hover:text-primary">
                 {ranking.title}

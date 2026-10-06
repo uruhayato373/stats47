@@ -335,7 +335,7 @@ export function PrefectureMapChart({
         <button
           type="button"
           onClick={() => setIsShifted((prev) => !prev)}
-          className="absolute top-2 right-2 z-10 bg-background/80 backdrop-blur-sm border border-border rounded-md px-2 py-1 text-xs text-muted-foreground hover:text-foreground hover:bg-background transition-colors"
+          className="absolute top-2 right-2 z-10 bg-background/80 backdrop-blur-xs border border-border rounded-md px-2 py-1 text-xs text-muted-foreground hover:text-foreground hover:bg-background transition-colors"
           title={isShifted ? "通常表示に戻す" : "北海道/沖縄をシフト"}
         >
           {isShifted ? "通常表示" : "シフト表示"}

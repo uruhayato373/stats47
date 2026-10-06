@@ -50,7 +50,7 @@ export function StatisticsScopeNav({
             href={item.href}
             aria-current={item.key === current ? 'page' : undefined}
             className={cn(
-              'text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50',
+              'text-sm transition-colors focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/50',
               isRail
                 ? 'flex min-h-10 items-center px-2'
                 : 'shrink-0 border-b-2 px-1 py-3 font-medium',

@@ -34,7 +34,7 @@ export function OperatorProfileCard({
           alt={OPERATOR_PROFILE.avatarAlt}
           width={44}
           height={44}
-          className="h-11 w-11 flex-shrink-0 rounded-full object-cover"
+          className="h-11 w-11 shrink-0 rounded-full object-cover"
         />
         <div className="min-w-0">
           <p className="text-sm font-semibold text-foreground">
