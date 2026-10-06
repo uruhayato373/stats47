@@ -24,10 +24,11 @@ updated: 2026-09-29
 並び順が着手順 (2026-09-27 オーナー判断: 計測・記録・改善とデータ品質を優先する。2026-10-05 の月次計画で 10 月の重点「管理」「データ」に合わせて付け替え)。上限 10 枚 (DG081)。
 
 ### [STATE-OVERLAY-MAIN-01] 計測 workflow の「develop を直接 checkout する」修正を main へ反映し、次の run で state が巻き戻らないことを確かめる
-タグ: [インフラ・計測] [種類:不具合] [実行:ユーザー] [起票:2026-10-05] [期日:2026-10-11] [領域:管理]
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-05] [期日:2026-10-11] [領域:管理]
 
 - **経緯**: 週次の `fetch-metrics-weekly` は main を checkout して計測し、`.claude/state/metrics/` 全体を develop へ上書きコピーしていた。2026-10-04 の W40 コミット e45f5a0ee は、main に未マージだった 15 ファイル (page-quality 週次監査・KSJ / e-Stat 月次記録・psi / cloudflare / URL Inspection の履歴など) を main の古い版へ戻した。`psi-audit-daily` と `cloudflare-usage-daily` も同じ形で、main が遅れている間は前日以前の行を毎日失っていた (psi は 4 月以降の 55 日分)。`deploy-workers` の improvement-log の書き戻しも同じ形だった。2026-10-05 に develop で 4 本を直し、消えた行を git 履歴から戻した。今後の再発は `workflow-commit-back.test.cjs` の `findForeignTreeRestore` が止める。
-- **残り (オーナー判断)**: schedule は main 上の workflow 定義で動くので、develop→main をマージするまで修正は効かない。それまでの psi / cloudflare 日次 run は、main の history に当日分を足した版で develop を上書きし続け、戻した行がまた消える。W41 の週次 run (2026-10-11 20:00 JST) の前にマージする。
+- **マージ済み (2026-10-06 11:34 JST)**: PR #1070 (main `881505c2e`) で main へ入り、本番デプロイと post-deploy smoke は成功した。
+  main の `psi-audit-daily` は `ref: develop` の新しい定義になっている。残りは下の完了条件の確認だけ (psi 日次 10-07 02:00 JST・cloudflare 日次 02:30 JST・W41 週次 10-11 20:00 JST)。
 - **完了条件**: マージ後の最初の psi 日次・cloudflare 日次・W41 週次の各コミットで、`git diff <commit>^ <commit> -- .claude/state/metrics/psi/history.csv .claude/state/metrics/cloudflare/history.csv` に削除行が無い (cloudflare は保持 30 日を超えた古い行の削除だけ許す)。週次コミットが `.claude/state/metrics/{page-quality,monthly-jobs,authenticated}` を変えていない。マージ前に行が再び消えていたら、2026-10-05 の復元コミットと同じ方法 (develop 上の全版の和集合) で戻す。
 
 ### [A8-CROSSCHECK-EXCEED-01] A8 の 9 月検算で専用案件のクリックがサイト別合計を超える原因を確定する
@@ -296,27 +297,6 @@ updated: 2026-09-29
 - **完了条件**: `ranking/total-population,mobile` の LCP が 3 週連続でベースライン 9,347ms を下回る。悪化要因が topology fetch でなかった場合は、実測で特定した真因と対策を本カードへ記録してから閉じる。
 
 ## 🟡 中 — 2〜3ヶ月以内
-
-### [PR-1070-CI-FIX-01] develop → main の PR #1070 の CI 失敗 4 ゲートを直してマージする
-
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:gh pr checks 1070] [起票:2026-10-06] [期日:2026-10-11] [領域:管理]
-
-- **経緯**: 2026-10-05 に PR [#1070](https://github.com/uruhayato373/stats47/pull/1070) (develop → main、113 commit) を作成した。オーナー指示は「CI が通ったらマージ」だが、
-  `pr-quality-check.yml` の run 37316669276 (head `89a6d7585`) が失敗し、未マージ。失敗は static-gates (Checker Wiring Regression Guard: `✗ checker wiring regression: 2`)・
-  contract-tests (Agent / Skill Prompt Contract Guard)・type-check (Type Check)・test (Admin Unit Tests。ログに `R2 unreachable` と `getCloudflareContext` のエラー) の 4 job。
-  その後 develop の先頭が `[skip ci]` の commit (`1872a9980`) になったため、PR の check は再実行されていない (branch-workflow.md「`[skip ci]` の commit-back がヘッドになると PR に check が 1 つも付かない」)。
-- **注意**: 2026-10-05 夜時点で別セッションが同じ作業ツリーで「ハードコード定数/データの SSOT 集約リファクタ」(未コミット 451 ファイル) を進めていた。失敗が develop にある変更由来か、
-  そのリファクタの取り込み後に変わるかを、`npm run agent:session -- --status` で並行作業を確かめてから調べる。
-- **次**: ① 4 job のログを読み、それぞれ develop 上で再現する (`npm run type-check`・`npm run preflight:pr` など)。② 直したら develop に skip ci でない commit を push して PR の check を走らせる。
-  ③ 全 check が green になったらマージする (オーナー指示済み)。
-- **期日の理由**: `improvement-cycle-weekly.yml` のゲート修正 (Issue #1068 の再発防止) は main の定義で動く。10-12 (月) 06:00 JST の週次 run より前に main へ入れる。
-  マージ後は Issue #1068 が次の成功 run で自動で閉じることを確かめる。同じ PR に `9ba6e57a2` (計測 workflow が main の古い state で develop を上書きしない修正) も入っている。
-- **完了条件**: PR #1070 が全 check green でマージされ、本番デプロイが成功している。
-- **2026-10-06 追記 (SSOT 集約リファクタ側の調査)**: 上の「注意」のリファクタは `77ba6e36a`・`eef2a0a1a`・`0098430a1` として develop にコミットした (push はまだ)。
-  この時点でローカルの `npm run type-check` は exit 0。admin unit の失敗のうち `apps/admin/tests/unit/note-covers.test.ts`「取得失敗を画像なしと偽らず、認証情報も返さない」は
-  `14ce8d97f` (502 応答に error.message を含めた変更) 由来で、リファクタ前の版でも再現した。`npm run preflight:pr` で落ちたのは checker-wiring 2 件
-  (`check-repo-hygiene.cjs` の MISSING_GATE_TRIGGER・`metrics/check-docs-delta.mjs` の UNDECLARED_CRITICAL_CHECKER) と、W40 の GSC snapshot で古くなった
-  `ranking-prominence.generated.ts` (`npm run generate:ranking-prominence --workspace apps/web` で再生成) の 2 ゲートで、どちらもリファクタの対象外。
 
 ### [GSC-COVERAGE-DEPLOY-01] カバレッジ是正と入力鮮度ガードを本番反映する
 
@@ -2836,9 +2816,9 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - **停止条件**: 定期実行は main の workflow 定義で動くので、パスを変えた取得元は main へ反映して定期実行で確かめるまで、
   次の取得元へ進まない (旧パスへ書き続けて記録が割れる)。本番 deploy は毎回オーナーの承認を取る。
 - **進捗 (2026-10-06)**: 基盤 (`datasetPath` / `datasetDir`・旧置き場の検査 `RETIRED`) は develop に入れた。1 つ目の PSI は
-  ブランチ `feature/20261006-psi-move` (`3bb6f5220`) にコミット済みで、develop には未投入。main の `psi-audit-daily` がまだ
-  「main で計測して develop へ上書きコピーする」古い定義のため、先に PR #1070 をマージし (`PR-1070-CI-FIX-01`)、その後の PSI 日次で
-  巻き戻りが無いこと (`STATE-OVERLAY-MAIN-01`) を確かめる。確かめたら同じ日の日中にこのブランチを develop へ入れて main まで反映し
+  ブランチ `feature/20261006-psi-move` (`3bb6f5220`) にコミット済みで、develop には未投入。PR #1070 は 2026-10-06 に
+  マージ済みで、main の `psi-audit-daily` は develop を checkout する定義になった。10-07 02:00 JST の PSI 日次で巻き戻りが無いこと
+  (`STATE-OVERLAY-MAIN-01`) を確かめる。確かめたら同じ日の日中にこのブランチを develop へ入れて main まで反映し
   (PSI 日次は JST 02:00)、翌朝の run が `data/psi/` に書いたことを確かめてから次の取得元へ進む。
 - **完了条件**: `npm run check-datasets -- --moves` が 0 行。関係する workflow の次回の定期実行が新しい置き場へ書いている。
 
