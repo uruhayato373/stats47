@@ -29,7 +29,7 @@ describe("local-economy evidence topics", () => {
   it("preserves denominator, coverage, and comparability caveats", () => {
     const [industry, establishments] = LOCAL_ECONOMY_CATALOG.evidenceTopics ?? [];
     expect(industry?.summary).toContain("産業分類不能");
-    expect(industry?.summary).toContain("100％");
+    expect(industry?.summary).toContain("100%");
     expect(establishments?.summary).toContain("人口10万人当たり");
     expect(establishments?.summary).toContain("農林漁家");
     expect(establishments?.summary).toContain("2009年と2014年");

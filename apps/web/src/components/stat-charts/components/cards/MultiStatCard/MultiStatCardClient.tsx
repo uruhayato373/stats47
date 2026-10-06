@@ -2,6 +2,8 @@
 
 import React from "react";
 
+import { formatUnitForDisplay } from "@stats47/data-configs/unit";
+
 import { SurfaceCard } from "@/components/surface";
 
 interface StatResultItem {
@@ -53,7 +55,7 @@ export const MultiStatCardClient: React.FC<MultiStatCardClientProps> = ({
               {r.value !== null ? r.value.toLocaleString() : "---"}
               {r.unit && (
                 <span className="text-sm font-normal text-muted-foreground ml-1">
-                  {r.unit}
+                  {formatUnitForDisplay(r.unit)}
                 </span>
               )}
             </span>
@@ -69,7 +71,7 @@ export const MultiStatCardClient: React.FC<MultiStatCardClientProps> = ({
             {totalValue.toLocaleString()}
             {results[0]?.unit && (
               <span className="text-sm font-normal text-muted-foreground ml-1">
-                {results[0].unit}
+                {formatUnitForDisplay(results[0].unit)}
               </span>
             )}
           </span>

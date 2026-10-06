@@ -4,6 +4,7 @@ import { type ReactNode, useEffect, useState } from "react";
 
 import Link from "next/link";
 
+import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { ArrowRight } from "lucide-react";
 
 import { trackNavClick } from "@/lib/analytics/events";
@@ -91,7 +92,7 @@ export function RankingLinkCard({ href, children }: RankingLinkCardProps) {
                                           <span className="ml-auto shrink-0 font-mono text-sm font-bold tabular-nums text-foreground">
                                               {row.value}
                                               <span className="ml-0.5 font-sans text-[11px] font-medium text-muted-foreground">
-                                                  {data.unit}
+                                                  {formatUnitForDisplay(data.unit)}
                                               </span>
                                           </span>
                                       </span>

@@ -178,7 +178,8 @@ function RailLinks({
       className={cn(
         'flex flex-wrap gap-1.5',
         horizontalOnMobile &&
-          '-mx-1 flex-nowrap snap-x overflow-x-auto overscroll-x-contain px-1 pb-1 scrollbar-none [&::-webkit-scrollbar]:hidden'
+          // 右端を薄くして「続きがある」ことを示す (スクロールバーを隠すため。2026-10-04 週次 UI 検査)
+          '-mx-1 flex-nowrap snap-x overflow-x-auto overscroll-x-contain px-1 pb-1 scrollbar-none [&::-webkit-scrollbar]:hidden [mask-image:linear-gradient(to_right,black_85%,transparent)]'
       )}
       aria-label="カード内リンク"
     >
@@ -194,7 +195,7 @@ function RailLinks({
           {item.count !== undefined && (
             <span
               aria-hidden="true"
-              className="text-[10px] tabular-nums text-muted-foreground"
+              className="text-xs tabular-nums text-muted-foreground"
             >
               {item.count}
             </span>

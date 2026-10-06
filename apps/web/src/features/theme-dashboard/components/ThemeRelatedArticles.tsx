@@ -1,5 +1,6 @@
 import "server-only";
 
+import { normalizePercentInText } from "@stats47/data-configs/unit";
 import { Newspaper } from "lucide-react";
 
 import { SectionCard } from "@/components/surface";
@@ -49,7 +50,7 @@ export async function ThemeRelatedArticles({
             </p>
             {article.description && (
               <p className="mt-1.5 text-xs text-muted-foreground line-clamp-2">
-                {article.description}
+                {normalizePercentInText(article.description)}
               </p>
             )}
           </TrackedThemeLink>

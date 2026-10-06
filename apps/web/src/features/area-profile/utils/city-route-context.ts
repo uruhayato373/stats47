@@ -2,6 +2,8 @@ import { lookupArea } from "@stats47/area";
 
 import { UrlPolicy } from "@/lib/url-policy";
 
+import { stripPrefectureName } from "./strip-prefecture-name";
+
 export function getCityRouteContext(areaCode: string, cityCode: string) {
   const city = lookupArea(cityCode);
   if (
@@ -20,6 +22,8 @@ export function getCityRouteContext(areaCode: string, cityCode: string) {
   return {
     city,
     pref,
+    /** 県名を外した市区町村名 (県が文脈で分かる見出し・一覧用) */
+    cityShortName: stripPrefectureName(city.areaName, pref.areaName),
     cityBasePath: `/areas/${areaCode}/cities/${cityCode}`,
   };
 }

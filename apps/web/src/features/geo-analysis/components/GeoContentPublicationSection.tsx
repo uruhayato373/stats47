@@ -10,9 +10,9 @@ import { ExternalAnchor } from "@/components/atoms/ExternalAnchor";
 import { SectionHeader } from '@/components/section';
 import { SurfaceCard } from '@/components/surface';
 
+import { toGeoReaderTerms, type GeoCrossAnalysisSlug } from '../lib/geo-cross-analysis';
 import { geoAnalysisPublicDataUrl } from '../lib/load-geo-analysis-evidence';
 
-import type { GeoCrossAnalysisSlug } from '../lib/geo-cross-analysis';
 
 interface Props {
   slug: GeoCrossAnalysisSlug;
@@ -33,7 +33,7 @@ export function GeoContentPublicationSection({
     <section id="article-data" className="mt-6 scroll-mt-24">
       <SectionHeader
         title="再現・検証データ"
-        description="結論だけでなく、入力、空間処理、県別途中データ、保存則を同じ分析の証拠として公開しています。"
+        description="結論だけでなく、入力、空間処理、県別途中データ、合計の検算を同じ分析の証拠として公開しています。"
         hideRule
       />
 
@@ -43,7 +43,7 @@ export function GeoContentPublicationSection({
             入力から結論まで
           </p>
           <p className="mt-1 text-lg font-bold">
-            47県・保存則 {manifest.quality.conservationChecks}/47
+            47県・合計の検算 {manifest.quality.conservationChecks}/47
           </p>
           <p className="mt-1 text-xs text-muted-foreground">
             {new Set(manifest.inputs.map(input => input.layerId)).size}レイヤー・{manifest.inputs.length}入力ファイル / {manifest.stages.length}段階 / 最大
@@ -127,7 +127,7 @@ export function GeoContentPublicationSection({
           <ol className="mt-2 space-y-2 text-sm text-muted-foreground">
             <li>1. manifestで入力キー・版・SHA-256を確認</li>
             <li>2. 選択県の途中artifactで空間判定を確認</li>
-            <li>3. 保存則と47県coverageを確認</li>
+            <li>3. 県別の合計が全国と一致し、47県がそろっているかを確認</li>
             <li>4. 最終集計JSONと画面の値を照合</li>
           </ol>
         </div>
@@ -135,14 +135,14 @@ export function GeoContentPublicationSection({
 
       <details className="mt-5 border-t pt-4">
         <summary className="cursor-pointer text-sm font-bold">
-          lineageの全段階を見る
+          処理の全段階を見る
         </summary>
         <ol className="mt-3 space-y-2 text-sm text-muted-foreground">
           {manifest.stages.map((stage, index) => (
             <li key={stage.id}>
               {index + 1}.{' '}
-              <strong className="text-foreground">{stage.label}</strong> —{' '}
-              {stage.operation}（{stage.outputs.length}出力）
+              <strong className="text-foreground">{toGeoReaderTerms(stage.label)}</strong> —{' '}
+              {toGeoReaderTerms(stage.operation)}（{stage.outputs.length}出力）
             </li>
           ))}
         </ol>

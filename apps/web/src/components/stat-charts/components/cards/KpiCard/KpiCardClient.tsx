@@ -4,6 +4,7 @@ import React from "react";
 
 import { cn } from "@stats47/components";
 import { Badge } from "@stats47/components/atoms/ui/badge";
+import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { formatValueWithPrecision, resolveValuePrecision } from "@stats47/utils";
 import { TrendingDown, TrendingUp } from "lucide-react";
 
@@ -68,7 +69,7 @@ export const KpiCardClient: React.FC<KpiCardClientProps> = ({
           {formattedValue}
           {unit && (
             <span className="text-sm font-normal text-muted-foreground ml-1">
-              {unit}
+              {formatUnitForDisplay(unit)}
             </span>
           )}
         </div>

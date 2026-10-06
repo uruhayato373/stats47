@@ -42,14 +42,6 @@
       "expiresAt": "2026-10-31"
     },
     {
-      "source": "theme-catalog",
-      "code": "chart-temporal-fit",
-      "count": 13,
-      "owner": "theme-component-builder",
-      "reason": "line-chart series with a single observed year need chart-type reconsideration; kept as warn per theme-catalog-standards.md (no false positives, not yet triaged)",
-      "expiresAt": "2026-10-31"
-    },
-    {
       "source": "polarity",
       "code": "polarity-unassigned",
       "count": 2284,

@@ -16,8 +16,8 @@ export const carpenterAnnualIncome: MetricConfig = {
     "cdCat01": "01",
     "cdCat02": "1661",
     "tabCombination": [
-      { "cdTab": "08", "factor": 12 },
-      { "cdTab": "12", "factor": 1 },
+      { "cdTab": "08,40", "factor": 12 },
+      { "cdTab": "12,44", "factor": 1 },
     ],
     "displayName": "賃金構造基本統計調査",
     "url": "https://www.mhlw.go.jp/toukei/itiran/roudou/chingin/kouzou/",
@@ -58,7 +58,7 @@ export const carpenterAnnualIncome: MetricConfig = {
       },
     ],
   },
-  "seoTitle": "大工の平均年収 都道府県ランキング【2022年】｜1位大阪府（787.4万円）",
-  "seoDescription": "2022年の大工の平均年収を都道府県別に比較。1位は大阪府（787.4万円）、最下位は福岡県（217.5万円）、最大と最小の差は3.6倍です。地図やグラフで47都道府県の違いを確認できます。",
+  "seoTitle": "大工の平均年収 都道府県ランキング【2023年】｜1位広島県（682.3万円）",
+  "seoDescription": "2023年の大工の平均年収を都道府県別に比較。1位は広島県（682.3万円）、最下位は茨城県（288.0万円）、最大と最小の差は2.4倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

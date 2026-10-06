@@ -98,7 +98,7 @@ export default async function CityPage({ params }: PageProps) {
       />
       <PageHeader
         title={`${context.city.areaName}の統計データ`}
-        description={`${context.pref.areaName} ${context.city.areaName}`}
+        description={`${context.pref.areaName}の市区町村`}
       />
 
       <main className="min-w-0 space-y-10">
@@ -107,16 +107,16 @@ export default async function CityPage({ params }: PageProps) {
             href={`/municipalities/ranking/elderly-population-ratio?q=${encodeURIComponent(context.city.areaName)}`}
             className="font-medium text-primary hover:underline"
           >
-            {context.city.areaName}を全国の市区町村ランキングで見る →
+            {context.cityShortName}を全国の市区町村ランキングで見る →
           </Link>
         </p>
         {validStrengths.length > 0 ? (
           <SurfaceSection className="p-6">
             <h2 className="text-lg font-bold text-foreground">
-              {context.city.areaName}の特徴 (県内ランキング上位)
+              {context.cityShortName}の特徴 (県内ランキング上位)
             </h2>
             <p className="mt-1 text-xs text-muted-foreground">
-              {context.pref.areaName}内で {context.city.areaName} の順位が上位の指標
+              {context.pref.areaName}内で {context.cityShortName} の順位が上位の指標 (値が 0 の指標は除く)
             </p>
             <div className="mt-4">
               {/* 市区町村の指標は極性を焼き込んでいないので色を付けない (neutral) */}

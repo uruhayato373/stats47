@@ -13,8 +13,8 @@ export const publicHealthNurseAnnualIncome: MetricConfig = {
     // 宣言しないと 千円 の値に 万円 のラベルが付いたまま配信される。
     "valueScale": 0.1,
     "tabCombination": [
-      { "cdTab": "08", "factor": 12 },
-      { "cdTab": "12", "factor": 1 },
+      { "cdTab": "08,40", "factor": 12 },
+      { "cdTab": "12,44", "factor": 1 },
     ],
     "cdCat01": "01",
     "cdCat02": "1131",
@@ -50,7 +50,7 @@ export const publicHealthNurseAnnualIncome: MetricConfig = {
     ],
     "isCalculated": false,
   },
-  "seoTitle": "保健師の平均年収 都道府県ランキング【2022年】｜1位千葉県（876.1万円）",
-  "seoDescription": "2022年の保健師の平均年収を都道府県別に比較。1位は千葉県（876.1万円）、最下位は高知県（267.5万円）、最大と最小の差は3.3倍です。地図やグラフで47都道府県の違いを確認できます。",
+  "seoTitle": "保健師の平均年収 都道府県ランキング【2023年】｜1位大阪府（630.5万円）",
+  "seoDescription": "2023年の保健師の平均年収を都道府県別に比較。1位は大阪府（630.5万円）、最下位は長崎県（340.4万円）、最大と最小の差は1.9倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

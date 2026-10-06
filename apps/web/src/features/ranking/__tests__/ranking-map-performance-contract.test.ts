@@ -47,7 +47,8 @@ describe("ranking map base tile contract", () => {
     // optional (`tileUrl?:`) に戻すと、引数を落とす変更が型検査を通ってしまう
     expect(sharedMap).toContain("tileUrl: string;");
     expect(sharedMap).not.toContain("tileUrl?: string;");
-    expect(sharedMap).toContain("<TileLayer url={tileUrl} attribution={attribution} />");
+    // 背景の不透明度など他の属性は足してよい。tileUrl を url に渡していることだけを固定する
+    expect(sharedMap).toMatch(/<TileLayer url=\{tileUrl\} attribution=\{attribution\}[^>]*\/>/);
   });
 
   /**

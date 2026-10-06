@@ -6,6 +6,7 @@ import {
   TableHeader,
   TableRow,
 } from '@stats47/components/atoms/ui/table';
+import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
 import type { LineChartData } from '@/components/stat-charts/types/visualization';
 
@@ -79,7 +80,7 @@ export function SingleYearSeriesTable({
                 {(row[item.dataKey] as number).toLocaleString('ja-JP', {
                   maximumFractionDigits: 2,
                 })}
-                {item.unit && ` ${item.unit}`}
+                {item.unit && ` ${formatUnitForDisplay(item.unit)}`}
               </TableCell>
             </TableRow>
           );

@@ -33,7 +33,7 @@
     {
       "metricKey": "barber-beautician-annual-income",
       "expectedUnit": "万円",
-      "expectedConfigHash": "3f9ea064e0c2e297",
+      "expectedConfigHash": "1684e28e68ac51e9",
       "themeKey": "occupation-salary",
       "componentKey": "theme-occ-service-trend",
       "componentType": "line-chart"
@@ -57,7 +57,7 @@
     {
       "metricKey": "care-worker-annual-income",
       "expectedUnit": "万円",
-      "expectedConfigHash": "795ce29e3d70b0dd",
+      "expectedConfigHash": "bce0f0808dd7357b",
       "themeKey": "occupation-salary",
       "componentKey": "theme-occ-medical-trend",
       "componentType": "line-chart"
@@ -65,7 +65,7 @@
     {
       "metricKey": "carpenter-annual-income",
       "expectedUnit": "万円",
-      "expectedConfigHash": "3e6c94316671b4e6",
+      "expectedConfigHash": "a9acb4835081e684",
       "themeKey": "occupation-salary",
       "componentKey": "theme-occ-transport-trend",
       "componentType": "line-chart"
@@ -169,7 +169,7 @@
     {
       "metricKey": "cook-annual-income",
       "expectedUnit": "万円",
-      "expectedConfigHash": "9e77b9e1afc69ab2",
+      "expectedConfigHash": "c3c7a6b30d94262c",
       "themeKey": "occupation-salary",
       "componentKey": "theme-occ-service-trend",
       "componentType": "line-chart"
@@ -233,7 +233,7 @@
     {
       "metricKey": "doctor-annual-income",
       "expectedUnit": "万円",
-      "expectedConfigHash": "d11dc074a749be07",
+      "expectedConfigHash": "32ba461e0bd6e029",
       "themeKey": "occupation-salary",
       "componentKey": "theme-occ-medical-trend",
       "componentType": "line-chart"
@@ -665,7 +665,7 @@
     {
       "metricKey": "nurse-annual-income",
       "expectedUnit": "万円",
-      "expectedConfigHash": "824b85e3e2326f98",
+      "expectedConfigHash": "44bfc11557830ac6",
       "themeKey": "occupation-salary",
       "componentKey": "theme-occ-medical-trend",
       "componentType": "line-chart"
@@ -673,7 +673,7 @@
     {
       "metricKey": "nursery-teacher-annual-income",
       "expectedUnit": "万円",
-      "expectedConfigHash": "43928f1e45d9f55d",
+      "expectedConfigHash": "7b0539006210bcdb",
       "themeKey": "occupation-salary",
       "componentKey": "theme-occ-edu-trend",
       "componentType": "line-chart"
@@ -745,7 +745,7 @@
     {
       "metricKey": "school-teacher-annual-income",
       "expectedUnit": "万円",
-      "expectedConfigHash": "9bfbb5ba5cf23515",
+      "expectedConfigHash": "031c0244cf12f5f7",
       "themeKey": "occupation-salary",
       "componentKey": "theme-occ-edu-trend",
       "componentType": "line-chart"
@@ -753,7 +753,7 @@
     {
       "metricKey": "security-guard-annual-income",
       "expectedUnit": "万円",
-      "expectedConfigHash": "cc7f92befd50b951",
+      "expectedConfigHash": "c45db1200eee616b",
       "themeKey": "occupation-salary",
       "componentKey": "theme-occ-service-trend",
       "componentType": "line-chart"
@@ -833,7 +833,7 @@
     {
       "metricKey": "software-engineer-annual-income",
       "expectedUnit": "万円",
-      "expectedConfigHash": "d3c9773954978432",
+      "expectedConfigHash": "f00643aba840e510",
       "themeKey": "occupation-salary",
       "componentKey": "theme-occ-it-trend",
       "componentType": "line-chart"
@@ -841,7 +841,7 @@
     {
       "metricKey": "system-consultant-annual-income",
       "expectedUnit": "万円",
-      "expectedConfigHash": "25efc992827d75c9",
+      "expectedConfigHash": "a96fb1fc940918e7",
       "themeKey": "occupation-salary",
       "componentKey": "theme-occ-it-trend",
       "componentType": "line-chart"
@@ -849,7 +849,7 @@
     {
       "metricKey": "taxi-driver-annual-income",
       "expectedUnit": "万円",
-      "expectedConfigHash": "ed675903b65e10dc",
+      "expectedConfigHash": "1e0920b525c46dda",
       "themeKey": "occupation-salary",
       "componentKey": "theme-occ-transport-trend",
       "componentType": "line-chart"
@@ -1209,7 +1209,7 @@
     {
       "metricKey": "truck-driver-annual-income",
       "expectedUnit": "万円",
-      "expectedConfigHash": "c955c2d5cdb92b8e",
+      "expectedConfigHash": "8b54916f2f34d7a0",
       "themeKey": "occupation-salary",
       "componentKey": "theme-occ-transport-trend",
       "componentType": "line-chart"
@@ -1225,7 +1225,7 @@
     {
       "metricKey": "university-professor-annual-income",
       "expectedUnit": "万円",
-      "expectedConfigHash": "182b6366df799319",
+      "expectedConfigHash": "b65036a86a06863b",
       "themeKey": "occupation-salary",
       "componentKey": "theme-occ-edu-trend",
       "componentType": "line-chart"

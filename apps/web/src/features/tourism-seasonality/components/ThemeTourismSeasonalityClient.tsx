@@ -11,6 +11,7 @@ import {
   TableHeader,
   TableRow,
 } from '@stats47/components/atoms/ui/table';
+import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
 import { getChartColor } from '@/components/charts/ChartPalette';
@@ -82,7 +83,7 @@ export function ThemeTourismSeasonalityClient({ snapshot, notes }: Props) {
     >
       <ChartPanel
         title="月別の延べ宿泊者数"
-        description={`${snapshot.year}年の確定値 · ${areaLabel} · ${snapshot.unit}`}
+        description={`${snapshot.year}年の確定値 · ${areaLabel} · ${formatUnitForDisplay(snapshot.unit)}`}
         className="min-w-0"
         contentClassName="min-w-0 space-y-4"
         footer={

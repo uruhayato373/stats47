@@ -91,7 +91,7 @@ describe('landslide summary scope', () => {
     );
     expect(
       screen
-        .getByRole('link', { name: '計算入力・県別途中データ・保存則を確認' })
+        .getByRole('link', { name: '計算入力・県別途中データ・合計の検算を確認' })
         .getAttribute('href')
     ).toBe('/geo/population-landslide-exposure');
     expect(

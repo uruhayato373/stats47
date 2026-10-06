@@ -18,8 +18,19 @@ export const turnoverRate: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2022,
-    "to": 2022,
+    "years": [
+      1977,
+      1979,
+      1982,
+      1987,
+      1992,
+      1997,
+      2002,
+      2007,
+      2012,
+      2017,
+      2022
+    ],
   },
   "yearFormat": "fiscal",
   "visualization": {

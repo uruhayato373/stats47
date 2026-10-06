@@ -115,7 +115,9 @@ if (!SLUG) {
   process.exit(1);
 }
 
-const ARTICLE_DIR = path.join(PROJECT_ROOT, BASE, SLUG);
+// 絶対パスの --base はそのまま使う。path.join だと /tmp/x が <repo>/tmp/x に化け、
+// plan-svg-text-fix.ts (OS 一時領域で再生成する) が全件 unverified になっていた (2026-10-06)
+const ARTICLE_DIR = path.resolve(PROJECT_ROOT, BASE, SLUG);
 const DATA_DIR = path.join(ARTICLE_DIR, 'data');
 const ARTICLE_MD = path.join(ARTICLE_DIR, 'article.md');
 
@@ -331,6 +333,9 @@ function genLineChartSvg(data) {
   const subtitle = (Array.isArray(data) ? null : data.subtitle) ?? undefined;
 
   let series = data.series;
+  // 指標コードをキーにした取得結果の控え ({series: {A4101: {...}, ...}}) は図の入力ではない。
+  // 単位の違う指標を 1 枚に重ねることになるので描かずに飛ばす (2026-10-06 birth-death で CI が停止)
+  if (series != null && !Array.isArray(series)) return null;
   if (!series && Array.isArray(data.data))
     series = [{ label: data.label || '値', data: data.data }];
   if (!series && Array.isArray(data)) series = [{ label: '値', data }];
@@ -361,8 +366,41 @@ function genLineChartSvg(data) {
     unit,
     xKey: 'yearCode',
     seriesKey: 'areaCode',
-    yLabel: unit ? `${title}（${unit}）` : title,
+    yLabel: data.yLabel ?? (unit ? `${title}（${unit}）` : title),
     legendPosition: series.length > 1 ? 'bottom' : 'bottom',
+  });
+}
+
+/**
+ * stacked-bar: { title, subtitle?, unit?, normalized?, horizontal?, series:[{label, data:[{year, value}]}] }
+ * → svg-builder generateStackedBarSvg。series = 積み上げる区分、data[].year = 棒 (グループ)。
+ * line と同じ series 形式なので、時系列の内訳をそのまま渡せる。
+ */
+function genStackedBarSvg(data) {
+  const series = (data.series || []).filter(
+    (s) => Array.isArray(s.data) && s.data.length
+  );
+  if (!series.length) return `<!-- empty stacked data -->`;
+  const unit = data.unit ?? '';
+  const statsData = series.flatMap((s, si) =>
+    s.data.map((pt) => ({
+      metricKey: 'value',
+      areaCode: String(si + 1).padStart(2, '0'),
+      areaName: s.label || `区分${si + 1}`,
+      yearCode: String(pt.year ?? pt.x ?? ''),
+      yearName: String(pt.year ?? pt.x ?? ''),
+      value: typeof pt.value === 'number' ? pt.value : null,
+      unit,
+    }))
+  );
+  return generateStackedBarSvg(statsData, {
+    title: data.title ?? '内訳',
+    subtitle: data.subtitle,
+    unit,
+    xKey: 'yearCode',
+    seriesKey: 'areaCode',
+    normalized: data.normalized === true,
+    horizontal: data.horizontal === true,
   });
 }
 
@@ -737,10 +775,16 @@ for (const { file, type, parsed } of jsonMeta) {
     svg = genTileGridMapSvg(parsed);
   } else if (type === 'line') {
     svg = genLineChartSvg(parsed);
+    if (svg === null) {
+      warn(`${file}: series が配列でない (取得結果の控え) — チャート入力ではないので skip`);
+      continue;
+    }
   } else if (type === 'scatter') {
     svg = genScatterChartSvg(parsed);
   } else if (type === 'summary') {
     svg = genFindingsCardSvg(parsed);
+  } else if (type === 'stacked-bar') {
+    svg = genStackedBarSvg(parsed);
   } else if (type) {
     warn(
       `chart type "${type}" not implemented for ${file} — emitting stub SVG`

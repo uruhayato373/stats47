@@ -1,3 +1,4 @@
+import { normalizePercentInText } from "@stats47/data-configs/unit";
 import { ArrowRight } from 'lucide-react';
 
 import { ThemeAwareImage } from '@/components/atoms/ThemeAwareImage';
@@ -70,7 +71,7 @@ export function BlogArticleGrid({ articles }: BlogArticleGridProps) {
 
                 {article.description && (
                   <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-muted-foreground">
-                    {article.description}
+                    {normalizePercentInText(article.description)}
                   </p>
                 )}
 

@@ -58,7 +58,7 @@ export function AreaTileMap({
               gridRow: `${tile.y + 1} / span ${tile.h}`,
             }}
             className={cn(
-              "flex items-center justify-center rounded-none px-0.5 text-center text-[11px] font-medium leading-none transition-colors",
+              "flex items-center justify-center overflow-hidden whitespace-nowrap rounded-none px-0.5 text-center text-[11px] font-medium leading-none transition-colors",
               regionStyle(tile.regionCode).tile,
               FOCUS_RING,
             )}

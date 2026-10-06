@@ -140,7 +140,7 @@ describe("generateBarChartSvg: 大きな値・長い県名", () => {
     focusNote: "神奈川県: 4位 1,329,620,686 千円（全国平均の約 2.1 倍、前年度から 3.2% 増）",
   };
   for (const layout of ["columns", "mobile", "portrait", "single"] as const) {
-    (layout === "columns" ? itKnown : it)(`layout=${layout}`, () => {
+    it(`layout=${layout}`, () => {
       expectClean(generateBarChartSvg(items, { ...base, layout, showAxis: layout === "single" }));
     });
   }

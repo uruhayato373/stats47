@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-05T08:26:23.668Z",
+  "updatedAt": "2026-10-06T08:32:16.695Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -5733,6 +5733,728 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-10-05T08:26:23.668Z"
+    },
+    "UI-FIX-THEME-20261004": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-06T04:53:37.498Z",
+          "runId": null,
+          "model": "none",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled .claude/state/page-quality/backlog-batches/UI-FIX-THEME-20261004.txt",
+              "npm run type-check",
+              "npm run design-system:check -w apps/web",
+              "apps/web vitest run"
+            ],
+            "pass": true
+          },
+          "evidence": "対話セッションで修正し全指摘を ui-findings に --mark-fixed (理由 note 付き)。assert-handled ok。localhost で内部用語・%/％混在を実測し 0 件。本番確認は次の週次監査",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-06T04:53:37.498Z"
+    },
+    "UI-FIX-SURVEY-20261004": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-06T04:53:37.612Z",
+          "runId": null,
+          "model": "none",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled .claude/state/page-quality/backlog-batches/UI-FIX-SURVEY-20261004.txt",
+              "npm run type-check",
+              "npm run design-system:check -w apps/web",
+              "apps/web vitest run"
+            ],
+            "pass": true
+          },
+          "evidence": "対話セッションで修正し全指摘を ui-findings に --mark-fixed (理由 note 付き)。assert-handled ok。localhost で内部用語・%/％混在を実測し 0 件。本番確認は次の週次監査",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-06T04:53:37.612Z"
+    },
+    "UI-FIX-RANKING-20261004": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-06T04:53:37.719Z",
+          "runId": null,
+          "model": "none",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled .claude/state/page-quality/backlog-batches/UI-FIX-RANKING-20261004.txt",
+              "npm run type-check",
+              "npm run design-system:check -w apps/web",
+              "apps/web vitest run"
+            ],
+            "pass": true
+          },
+          "evidence": "対話セッションで修正し全指摘を ui-findings に --mark-fixed (理由 note 付き)。assert-handled ok。localhost で内部用語・%/％混在を実測し 0 件。本番確認は次の週次監査",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-06T04:53:37.719Z"
+    },
+    "UI-FIX-OTHER-20261004": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-06T04:53:37.839Z",
+          "runId": null,
+          "model": "none",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled .claude/state/page-quality/backlog-batches/UI-FIX-OTHER-20261004.txt",
+              "npm run type-check",
+              "npm run design-system:check -w apps/web",
+              "apps/web vitest run"
+            ],
+            "pass": true
+          },
+          "evidence": "対話セッションで修正し全指摘を ui-findings に --mark-fixed (理由 note 付き)。assert-handled ok。localhost で内部用語・%/％混在を実測し 0 件。本番確認は次の週次監査",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-06T04:53:37.839Z"
+    },
+    "UI-FIX-GEO-ANALYSIS-20261004": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-06T04:53:37.933Z",
+          "runId": null,
+          "model": "none",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled .claude/state/page-quality/backlog-batches/UI-FIX-GEO-ANALYSIS-20261004.txt",
+              "npm run type-check",
+              "npm run design-system:check -w apps/web",
+              "apps/web vitest run"
+            ],
+            "pass": true
+          },
+          "evidence": "対話セッションで修正し全指摘を ui-findings に --mark-fixed (理由 note 付き)。assert-handled ok。localhost で内部用語・%/％混在を実測し 0 件。本番確認は次の週次監査",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-06T04:53:37.933Z"
+    },
+    "UI-FIX-CATEGORY-20261004": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-06T04:53:38.014Z",
+          "runId": null,
+          "model": "none",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled .claude/state/page-quality/backlog-batches/UI-FIX-CATEGORY-20261004.txt",
+              "npm run type-check",
+              "npm run design-system:check -w apps/web",
+              "apps/web vitest run"
+            ],
+            "pass": true
+          },
+          "evidence": "対話セッションで修正し全指摘を ui-findings に --mark-fixed (理由 note 付き)。assert-handled ok。localhost で内部用語・%/％混在を実測し 0 件。本番確認は次の週次監査",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-06T04:53:38.014Z"
+    },
+    "UI-FIX-BLOG-20261004": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-06T04:53:38.102Z",
+          "runId": null,
+          "model": "none",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled .claude/state/page-quality/backlog-batches/UI-FIX-BLOG-20261004.txt",
+              "npm run type-check",
+              "npm run design-system:check -w apps/web",
+              "apps/web vitest run"
+            ],
+            "pass": true
+          },
+          "evidence": "対話セッションで修正し全指摘を ui-findings に --mark-fixed (理由 note 付き)。assert-handled ok。localhost で内部用語・%/％混在を実測し 0 件。本番確認は次の週次監査",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-06T04:53:38.102Z"
+    },
+    "UI-FIX-RANKING-LONG-TITLE-20261004": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-06T04:53:38.178Z",
+          "runId": null,
+          "model": "none",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled .claude/state/page-quality/backlog-batches/UI-FIX-RANKING-LONG-TITLE-20261004.txt",
+              "npm run type-check",
+              "npm run design-system:check -w apps/web",
+              "apps/web vitest run"
+            ],
+            "pass": true
+          },
+          "evidence": "対話セッションで修正し全指摘を ui-findings に --mark-fixed (理由 note 付き)。assert-handled ok。localhost で内部用語・%/％混在を実測し 0 件。本番確認は次の週次監査",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-06T04:53:38.178Z"
+    },
+    "UI-FIX-PREFECTURE-DETAIL-THEME-GEO-20261004": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-06T04:53:38.318Z",
+          "runId": null,
+          "model": "none",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled .claude/state/page-quality/backlog-batches/UI-FIX-PREFECTURE-DETAIL-THEME-GEO-20261004.txt",
+              "npm run type-check",
+              "npm run design-system:check -w apps/web",
+              "apps/web vitest run"
+            ],
+            "pass": true
+          },
+          "evidence": "対話セッションで修正し全指摘を ui-findings に --mark-fixed (理由 note 付き)。assert-handled ok。localhost で内部用語・%/％混在を実測し 0 件。本番確認は次の週次監査",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-06T04:53:38.318Z"
+    },
+    "UI-FIX-MUNICIPALITY-VILLAGE-20261004": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-06T04:53:38.417Z",
+          "runId": null,
+          "model": "none",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled .claude/state/page-quality/backlog-batches/UI-FIX-MUNICIPALITY-VILLAGE-20261004.txt",
+              "npm run type-check",
+              "npm run design-system:check -w apps/web",
+              "apps/web vitest run"
+            ],
+            "pass": true
+          },
+          "evidence": "対話セッションで修正し全指摘を ui-findings に --mark-fixed (理由 note 付き)。assert-handled ok。localhost で内部用語・%/％混在を実測し 0 件。本番確認は次の週次監査",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-06T04:53:38.417Z"
+    },
+    "UI-FIX-HOME-20261004": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-06T04:53:38.521Z",
+          "runId": null,
+          "model": "none",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled .claude/state/page-quality/backlog-batches/UI-FIX-HOME-20261004.txt",
+              "npm run type-check",
+              "npm run design-system:check -w apps/web",
+              "apps/web vitest run"
+            ],
+            "pass": true
+          },
+          "evidence": "対話セッションで修正し全指摘を ui-findings に --mark-fixed (理由 note 付き)。assert-handled ok。localhost で内部用語・%/％混在を実測し 0 件。本番確認は次の週次監査",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-06T04:53:38.521Z"
+    },
+    "UI-FIX-BLOG-ARTICLE-CHARTS-20261004": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-06T04:53:38.629Z",
+          "runId": null,
+          "model": "none",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled .claude/state/page-quality/backlog-batches/UI-FIX-BLOG-ARTICLE-CHARTS-20261004.txt",
+              "npm run type-check",
+              "npm run design-system:check -w apps/web",
+              "apps/web vitest run"
+            ],
+            "pass": true
+          },
+          "evidence": "対話セッションで修正し全指摘を ui-findings に --mark-fixed (理由 note 付き)。assert-handled ok。localhost で内部用語・%/％混在を実測し 0 件。本番確認は次の週次監査",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-06T04:53:38.629Z"
+    },
+    "UI-FIX-BLOG-ARTICLE-20260927": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-06T04:53:38.753Z",
+          "runId": null,
+          "model": "none",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/blog/plan-svg-text-fix.ts @.claude/state/page-quality/backlog-batches/UI-FIX-BLOG-ARTICLE-20260927.txt",
+              "npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled .claude/state/page-quality/backlog-batches/UI-FIX-BLOG-ARTICLE-20260927.txt",
+              "packages/svg-builder vitest run"
+            ],
+            "pass": true
+          },
+          "evidence": "plan の --base 解決誤りを直して unverified 8→0。棒グラフ columns の値を県名の空きに収め generator-fix 4→0 (既知欠陥テストを通常テストへ)。regen 8 枚・no-data 3 枚・a11y 1 件を owner カードへ紐付け",
+          "failReason": null,
+          "followUps": [
+            "BLOG-SVG-REGEN-20261006",
+            "BLOG-SVG-NODATA-20261006",
+            "SHARE-BUTTON-CONTRAST-01"
+          ]
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-06T04:53:38.753Z"
+    },
+    "YEAR-COV-20260926": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-06T04:53:38.855Z",
+          "runId": null,
+          "model": "none",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx .claude/scripts/data/assert-year-coverage-batch.ts .claude/state/data/estat-year-coverage/backlog-batches/YEAR-COV-20260926.txt",
+              "npm run validate:config",
+              "npm run validate:years",
+              "page-data-batch --dry-run x9"
+            ],
+            "pass": true
+          },
+          "evidence": "9 件の years を 1975-2024 へ (annual-sunshine-duration は既に 1975-2024)。dry-run 9 件とも pref=2350 (47県x50年)。R2 投入は data-refresh の次回実行",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-06T04:53:38.855Z"
+    },
+    "AFF-PLACEMENT-MAP-CORE-01": {
+      "class": "misconception-close",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-06T04:53:38.960Z",
+          "runId": null,
+          "model": "none",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test .claude/scripts/ads/__tests__/placement-map-core.test.mjs",
+              "R2_PUBLIC_FETCH_URL=https://storage.stats47.jp node .claude/scripts/ads/build-placement-map.mjs"
+            ],
+            "pass": true
+          },
+          "evidence": "実装は develop に取り込み済み (調査→タグ→カテゴリの共有 resolver・no-intent)。ローカルで builder を W40 入力で実行: 家計調査 ranking 492 中 489 が furusato、身長体重 10 中 9 が no-intent。出力は artifact 扱いでコミットしない",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-06T04:53:38.960Z"
+    },
+    "THEME-CHART-TEMPORAL-MISMATCH-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-06T05:06:57.639Z",
+          "runId": null,
+          "model": "none",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx packages/data-configs/scripts/validate-theme-catalog.ts",
+              "npm run validate:config",
+              "npm run validate:years",
+              "page-data-batch --dry-run x12"
+            ],
+            "pass": true
+          },
+          "evidence": "12 件の years を e-Stat の 47 県そろいの年へ (5 年おき等は列挙、actual-income は YEAR-COV で済)。chart-temporal-fit warn 0 件。dry-run 12 件とも複数年。R2 投入は data-refresh の次回実行",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-06T05:06:57.639Z"
+    },
+    "SUBTITLE-DROP-SITEWIDE-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-06T05:06:57.711Z",
+          "runId": null,
+          "model": "none",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "apps/web vitest run src/__tests__/metric-name-contract.test.ts src/features/ranking src/features/theme-dashboard",
+              "packages/ranking vitest run",
+              "npm run type-check -w apps/web",
+              "generate-ranking-prominence --check"
+            ],
+            "pass": true
+          },
+          "evidence": "@stats47/ranking に metricDisplayName / metricShortName / isCaveatNote を置き、13 か所の readerLabel ?? を寄せた。代表ランキングの生成データに subtitle を焼いた。契約テストで直書き 0 件を固定",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-06T05:06:57.711Z"
+    },
+    "DATA-WAGE-TABLE-YEARS-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-06T05:23:59.293Z",
+          "runId": null,
+          "model": "none",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "e-Stat getMetaInfo/getStatsData 0003445758",
+              "page-data-batch --dry-run x40",
+              "npm run validate:config",
+              "npm run validate:years",
+              "data-refresh run 37417259424 (観測値 push 成功)",
+              "curl storage.stats47.jp app/stats/<key>/values.json x40"
+            ],
+            "pass": true
+          },
+          "evidence": "原因は表章項目コードの年代差 (2022=01-13 / 他年=33-45)。cdTab を 08,40 / 12,44 / 10,42 に。R2 で 40 件とも 2020-2023 年を配信、school-teacher の最新年 2023 = e-Stat 掲載の最新年",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-06T05:23:59.293Z"
+    },
+    "BLOG-SVG-REGEN-20261006": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-06T05:55:54.518Z",
+          "runId": null,
+          "model": "none",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "regenerate-blog-svgs run 37417288024 (success)",
+              "purge-cache.ts --files 24 件",
+              "npx tsx .claude/scripts/blog/plan-svg-text-fix.ts @UI-FIX-BLOG-ARTICLE-20260927.txt"
+            ],
+            "pass": true
+          },
+          "evidence": "対象 8 枚が clean (regen-fixes 0)。no-data 3 枚は BLOG-SVG-NODATA-20261006 で継続",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-06T05:55:54.518Z"
+    },
+    "BLOG-SVG-NODATA-20261006": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-06T08:32:16.695Z",
+          "runId": null,
+          "model": "none",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "regenerate-blog-svgs run 37429556197 source-repair (success)",
+              "regenerate-blog-svgs run 37435395042 all (success)",
+              "purge-cache.ts --urls 8 件",
+              "findChartTextIssues on production SVG 8 件"
+            ],
+            "pass": true
+          },
+          "evidence": "本番 SVG 8 枚 (3 図の本文/mobile/ig + 同記事の合計特殊出生率) が 2026-10-06T08:28 生成版で overflow 0 / overlap 0 / lint error 0。図と食い違う本文は BLOG-TEXT-CHART-CONFLICT-20261006 で継続",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-06T08:32:16.695Z"
     }
   }
 }

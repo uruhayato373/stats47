@@ -13,8 +13,8 @@ export const accountantAnnualIncome: MetricConfig = {
     "valueScale": 0.1,
     "cdCat01": "01",
     "tabCombination": [
-      { "cdTab": "08", "factor": 12 },
-      { "cdTab": "12", "factor": 1 },
+      { "cdTab": "08,40", "factor": 12 },
+      { "cdTab": "12,44", "factor": 1 },
     ],
     "cdCat02": "1181",
     "displayName": "賃金構造基本統計調査",
@@ -56,7 +56,7 @@ export const accountantAnnualIncome: MetricConfig = {
       },
     ],
   },
-  "seoTitle": "公認会計士・税理士の平均年収 都道府県ランキング【2022年】｜1位和歌山県（1,215.2万円）",
-  "seoDescription": "2022年の公認会計士・税理士の平均年収を都道府県別に比較。1位は和歌山県（1,215.2万円）、最下位は岩手県（338.6万円）、最大と最小の差は3.6倍です。地図やグラフで47都道府県の違いを確認できます。",
+  "seoTitle": "公認会計士・税理士の平均年収 都道府県ランキング【2023年】｜1位山梨県（1,532.6万円）",
+  "seoDescription": "2023年の公認会計士・税理士の平均年収を都道府県別に比較。1位は山梨県（1,532.6万円）、最下位は和歌山県（326.2万円）、最大と最小の差は4.7倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

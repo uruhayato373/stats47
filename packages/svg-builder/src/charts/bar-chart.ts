@@ -128,6 +128,10 @@ const BAR_DX = 211.68;     // 値バー開始の X オフセット
 const BAR_H_CARD = 14;     // 値バーの高さ
 const CARD_BAR_AREA_W = 200; // 値バー最大幅
 const BOTTOM_PAD = 60;     // 末尾余白
+const NAME_FONT = 13;      // 県名の文字サイズ
+const VALUE_FONT_MAX = 14; // 値の文字サイズ (空きが足りないときだけ縮める)
+const VALUE_FONT_MIN = 9;
+const NAME_VALUE_GAP = 8;  // 県名と値の最小の間隔
 
 /** カード型2列ランキングのカラーテーマ（header=濃 / bar=中 / cardAlt=極薄背景） */
 interface CardTheme {
@@ -230,12 +234,17 @@ function renderCardColumn(
       const highlightAttrs = isHighlightedItem(d, highlightName)
         ? ` stroke="${HIGHLIGHT_STROKE}" stroke-width="${HIGHLIGHT_STROKE_WIDTH}"`
         : "";
+      // 値は県名の右端から値の右端までの空きに収める。「656,171,677 千円」のような桁の多い値が
+      // 14px のままだと県名に重なった (2026-09-27 週次 UI 検査 blog_svg_text_issues)
+      const valueRightX = showBars ? VALUE_DX : CARD_W - 20;
+      const valueAvailW = valueRightX - (NAME_DX + measureUnits(name) * NAME_FONT + NAME_VALUE_GAP);
+      const valueFont = fitFontSize(valStr, valueAvailW, VALUE_FONT_MAX, VALUE_FONT_MIN);
       return [
         `  <rect x="${colX}" y="${rowY}" width="${CARD_W}" height="${CARD_H}" rx="6" fill="${cardBg}"${highlightAttrs}/>`,
         `  <circle cx="${colX + BADGE_DX}" cy="${cy}" r="${BADGE_R}" fill="${theme.header}"/>`,
         `  <text x="${colX + BADGE_DX}" y="${cy + 4.3}" text-anchor="middle" font-size="12" font-weight="bold" fill="#ffffff">${rank}</text>`,
-        `  <text x="${colX + NAME_DX}" y="${cy + 4.7}" font-size="13" font-weight="bold" fill="#1f2937">${name}</text>`,
-        `  <text x="${colX + (showBars ? VALUE_DX : CARD_W - 20)}" y="${cy + 4.3}" text-anchor="end" font-size="14" font-weight="700" fill="${theme.badgeText}">${valStr}</text>`,
+        `  <text x="${colX + NAME_DX}" y="${cy + 4.7}" font-size="${NAME_FONT}" font-weight="bold" fill="#1f2937">${name}</text>`,
+        `  <text x="${colX + valueRightX}" y="${cy + 4.3}" text-anchor="end" font-size="${valueFont}" font-weight="700" fill="${theme.badgeText}">${valStr}</text>`,
         ...(showBars ? [`  <rect x="${colX + BAR_DX}" y="${rowY + 15}" width="${w}" height="${BAR_H_CARD}" rx="4" fill="${theme.bar}" opacity="0.8"/>`] : []),
       ].join("\n");
     })

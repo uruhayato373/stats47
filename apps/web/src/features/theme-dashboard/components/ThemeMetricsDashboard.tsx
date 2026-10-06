@@ -6,6 +6,7 @@ import Link from 'next/link';
 
 import { lookupArea } from '@stats47/area';
 import { readSourceConfigRef } from '@stats47/data-configs/data-source';
+import { metricDisplayName } from "@stats47/ranking";
 import { ArrowRight } from 'lucide-react';
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
@@ -162,7 +163,7 @@ export function ThemeMetricsDashboard({
       if (selectedPrefectureCode) {
         return {
           metricKey: key,
-          title: d.rankingItem.readerLabel ?? d.rankingItem.title,
+          title: metricDisplayName(d.rankingItem),
           unit: target?.unit || d.rankingItem.unit || '',
           yearName: target?.yearName ?? d.rankingItem.latestYear?.yearName,
           value: typeof target?.value === 'number' ? target.value : null,
@@ -191,7 +192,7 @@ export function ThemeMetricsDashboard({
 
       return {
         metricKey: key,
-        title: d.rankingItem.readerLabel ?? d.rankingItem.title,
+        title: metricDisplayName(d.rankingItem),
         unit: top1?.unit || d.rankingItem.unit || '',
         yearName: top1?.yearName ?? d.rankingItem.latestYear?.yearName,
         value: null,

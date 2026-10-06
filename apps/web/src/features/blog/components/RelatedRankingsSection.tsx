@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { metricDisplayName } from "@stats47/ranking";
 import { getRankingTitle, readRelatedRankingItemsByTagKeysFromR2 } from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
 import { BarChart3 } from "lucide-react";
@@ -33,7 +34,7 @@ export async function RelatedRankingsSection({
       seen.add(item.rankingKey);
       rankings.push({
         rankingKey: item.rankingKey,
-        title: item.readerLabel ?? getRankingTitle(item),
+        title: metricDisplayName({ title: getRankingTitle(item), readerLabel: item.readerLabel, subtitle: item.subtitle }),
       });
     }
   }

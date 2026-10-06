@@ -146,6 +146,10 @@ function generateVertical(
     let posTop = zeroY;
     let negBottom = zeroY;
 
+    // 100% 積み上げは縦軸が構成比なので、棒の中も構成比で示す (生値だと軸と単位が食い違う)
+    const segmentLabel = (raw: number, v: number) =>
+      normalized ? `${v.toFixed(1)}%` : formatTick(Math.abs(raw));
+
     series.forEach((s, si) => {
       const raw = valueMap.get(x.code)?.get(s.code) ?? 0;
       const v = normalized ? (raw / totalPos) * 100 : raw;
@@ -162,7 +166,7 @@ function generateVertical(
         );
         if (h > 12) {
           bars.push(
-            `  <text x="${cx.toFixed(1)}" y="${(top + h / 2 + 3.5).toFixed(1)}" text-anchor="middle" font-size="7.5" fill="#fff">${formatTick(Math.abs(raw))}</text>`,
+            `  <text x="${cx.toFixed(1)}" y="${(top + h / 2 + 3.5).toFixed(1)}" text-anchor="middle" font-size="7.5" fill="#fff">${segmentLabel(raw, v)}</text>`,
           );
         }
         posTop = top;
@@ -176,7 +180,7 @@ function generateVertical(
         );
         if (h > 12) {
           bars.push(
-            `  <text x="${cx.toFixed(1)}" y="${(negBottom + h / 2 + 3.5).toFixed(1)}" text-anchor="middle" font-size="7.5" fill="#fff">${formatTick(Math.abs(raw))}</text>`,
+            `  <text x="${cx.toFixed(1)}" y="${(negBottom + h / 2 + 3.5).toFixed(1)}" text-anchor="middle" font-size="7.5" fill="#fff">${segmentLabel(raw, v)}</text>`,
           );
         }
         negBottom = bottom;

@@ -18,8 +18,8 @@ describe("CROSS-PAGE-DATA-SSOT-01 normalized salary migration", () => {
         expect(config.source.cdCat01, metricKey).toBe("01");
         expect(config.source.valueScale, metricKey).toBe(0.1);
         expect(config.source.tabCombination, metricKey).toEqual([
-          { cdTab: "08", factor: 12 },
-          { cdTab: "12", factor: 1 },
+          { cdTab: "08,40", factor: 12 },
+          { cdTab: "12,44", factor: 1 },
         ]);
         expect(config.unit, metricKey).toBe("万円");
       });

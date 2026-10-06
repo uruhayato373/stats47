@@ -1,5 +1,6 @@
 import { lookupArea, to2DigitPrefCode } from '@stats47/area';
 import { getMetricConfig, resolveColorScheme } from '@stats47/data-configs';
+import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { fetchMunicipalityTopology } from '@stats47/gis/server';
 
 
@@ -95,7 +96,7 @@ export async function MunicipalityRankingMapSection({
             value: row.value,
             rank: row.rank,
           }))}
-          unit={unit}
+          unit={formatUnitForDisplay(unit)}
           colorScheme={decision.scheme}
           colorSchemeType={isDiverging ? 'diverging' : 'sequential'}
           divergingMidpoint={

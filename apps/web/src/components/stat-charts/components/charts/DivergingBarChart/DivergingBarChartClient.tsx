@@ -4,6 +4,8 @@ import React from "react";
 
 import dynamic from "next/dynamic";
 
+import { formatUnitForDisplay } from "@stats47/data-configs/unit";
+
 import { ChartSkeleton } from "../../shared/ChartSkeleton";
 
 const DivergingBarChart = dynamic(
@@ -63,7 +65,7 @@ export const DivergingBarChartClient: React.FC<DivergingBarChartClientProps> = (
               </div>
               <div className="tabular-nums">
                 <span className="text-lg font-bold">{latestValues.positive.toLocaleString()}</span>
-                <span className="text-xs font-normal text-muted-foreground ml-0.5">{latestValues.unit}</span>
+                <span className="text-xs font-normal text-muted-foreground ml-0.5">{formatUnitForDisplay(latestValues.unit)}</span>
               </div>
               {latestValues.positiveRate != null && (
                 <span className="text-xs text-muted-foreground">{latestValues.positiveRateLabel ?? ""} {latestValues.positiveRate}%</span>
@@ -76,7 +78,7 @@ export const DivergingBarChartClient: React.FC<DivergingBarChartClientProps> = (
               </div>
               <div className="tabular-nums">
                 <span className="text-lg font-bold">{latestValues.negative.toLocaleString()}</span>
-                <span className="text-xs font-normal text-muted-foreground ml-0.5">{latestValues.unit}</span>
+                <span className="text-xs font-normal text-muted-foreground ml-0.5">{formatUnitForDisplay(latestValues.unit)}</span>
               </div>
               {latestValues.negativeRate != null && (
                 <span className="text-xs text-muted-foreground">{latestValues.negativeRateLabel ?? ""} {latestValues.negativeRate}%</span>

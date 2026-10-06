@@ -2,6 +2,8 @@
 
 import dynamic from "next/dynamic";
 
+import { formatUnitForDisplay } from "@stats47/data-configs/unit";
+
 import type { LineChartData } from "@/components/stat-charts/types/visualization";
 
 const LineChartClient = dynamic(
@@ -30,7 +32,7 @@ export function JapanMetricChart({ title, unit, points }: Props) {
     xAxisKey: "year",
     data: points.map((p) => ({ year: p.yearName, value: p.value })),
     lines: [{ dataKey: "value", name: title, color: "hsl(var(--primary))" }],
-    unit,
+    unit: formatUnitForDisplay(unit),
   };
 
   return <LineChartClient chartData={chartData} />;

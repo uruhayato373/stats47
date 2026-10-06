@@ -13,8 +13,8 @@ export const dentistAnnualIncome: MetricConfig = {
     "valueScale": 0.1,
     "cdCat01": "01",
     "tabCombination": [
-      { "cdTab": "08", "factor": 12 },
-      { "cdTab": "12", "factor": 1 },
+      { "cdTab": "08,40", "factor": 12 },
+      { "cdTab": "12,44", "factor": 1 },
     ],
     "cdCat02": "1122",
     "displayName": "賃金構造基本統計調査",
@@ -56,7 +56,7 @@ export const dentistAnnualIncome: MetricConfig = {
       },
     ],
   },
-  "seoTitle": "歯科医師の平均年収 都道府県ランキング【2022年】｜1位大分県（1,462.1万円）",
-  "seoDescription": "2022年の歯科医師の平均年収を都道府県別に比較。1位は大分県（1,462.1万円）、最下位は福島県（208.7万円）、最大と最小の差は7.0倍です。地図やグラフで47都道府県の違いを確認できます。",
+  "seoTitle": "歯科医師の平均年収 都道府県ランキング【2023年】｜1位三重県（4,118.9万円）",
+  "seoDescription": "2023年の歯科医師の平均年収を都道府県別に比較。1位は三重県（4,118.9万円）、最下位は岐阜県（175.6万円）、最大と最小の差は23.5倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

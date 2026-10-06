@@ -9,6 +9,8 @@ import {
   BreadcrumbSeparator,
 } from "@stats47/components/atoms/ui/breadcrumb";
 
+import { CURRENT_ITEM_CLASS } from "@/components/layout/Breadcrumbs";
+
 interface RankingPageBreadcrumbsProps {
   rankingName: string;
   category?: { key: string; name: string } | null;
@@ -43,8 +45,10 @@ export function RankingPageBreadcrumbs({
             </BreadcrumbItem>
           </>
         )}
-        <BreadcrumbSeparator />
-        <BreadcrumbItem>
+        {/* 狭い画面では現在地 (= H1 と同じ文言) を出さない。長い指標名が 3 行折り返して H1 と二重に並ぶため
+            (2026-10-04 週次 UI 検査。Breadcrumbs / ブログ詳細と同じ扱い) */}
+        <BreadcrumbSeparator className={CURRENT_ITEM_CLASS} />
+        <BreadcrumbItem className={CURRENT_ITEM_CLASS}>
           <BreadcrumbPage>{rankingName}</BreadcrumbPage>
         </BreadcrumbItem>
       </BreadcrumbList>

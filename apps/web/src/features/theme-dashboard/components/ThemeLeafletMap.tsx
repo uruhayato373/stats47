@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic';
 
 import { lookupArea } from '@stats47/area';
 import { Skeleton } from '@stats47/components/atoms/ui/skeleton';
+import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { useTopoJsonToGeoJson } from '@stats47/visualization/leaflet/hooks/useTopoJsonToGeoJson';
 
 const TileSwitcher = dynamic(
@@ -188,7 +189,7 @@ export function ThemeLeafletMap({
         colorConfig={colorConfig}
         tileUrl={currentTile.url}
         attribution={currentTile.attribution}
-        unit={rankingItem.unit}
+        unit={formatUnitForDisplay(rankingItem.unit)}
         onPrefectureClick={handlePrefectureClick}
         selectedPrefectureCode={selectedPrefectureCode}
         fitToPrefectures={!enableDrilldown}

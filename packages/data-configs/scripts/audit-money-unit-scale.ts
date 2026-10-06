@@ -194,11 +194,15 @@ function evaluate(config: MetricConfig, meta: MetaDump | null): Row | null {
   // 金額 unit の metric だけが対象。族外は判定材料がない
   if (moneyUnitExponent(config.unit) === null) return null;
 
-  const tabs = s.tabCombination?.length
-    ? s.tabCombination.map((t) => t.cdTab)
-    : s.cdTab
-      ? [s.cdTab]
-      : [];
+  // cdTab はカンマ区切りで年代違いのコードを並べられる (page-data-batch の tab 合成と同じ。
+  // 賃金構造基本統計は 2022 年だけ 08/12、他の年は 40/44)。各コードの単位を個別に照合する
+  const tabs = (
+    s.tabCombination?.length
+      ? s.tabCombination.map((t) => t.cdTab)
+      : s.cdTab
+        ? [s.cdTab]
+        : []
+  ).flatMap((t) => t.split(",").map((c) => c.trim()).filter(Boolean));
 
   const base = {
     key: config.key,

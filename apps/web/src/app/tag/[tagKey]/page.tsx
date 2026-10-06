@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
+import { normalizePercentInText } from "@stats47/data-configs/unit";
+
 import { PageShell, PageHeader, Breadcrumbs } from '@/components/layout';
 import { SurfaceCard } from '@/components/surface';
 
@@ -118,13 +120,14 @@ export default async function TagArticlesPage({ params }: PageProps) {
             className="group block h-full"
           >
             <SurfaceCard className="flex h-full flex-col transition-colors hover:border-primary/50 hover:shadow-md">
-              <div className="py-3 px-4 pb-3 flex flex-col items-start gap-2 space-y-0 border-b border-border">
-                <h3 className="text-base font-semibold leading-none text-lg transition-colors group-hover:text-primary">
+              {/* カード下部に続く情報が無いので区切り線は引かない (2026-10-04 週次 UI 検査) */}
+              <div className="flex flex-col items-start gap-2 px-4 py-3">
+                <h3 className="text-lg font-semibold leading-snug transition-colors group-hover:text-primary">
                   {article.title}
                 </h3>
                 {article.description && (
                   <p className="text-sm text-muted-foreground line-clamp-2">
-                    {article.description}
+                    {normalizePercentInText(article.description)}
                   </p>
                 )}
               </div>

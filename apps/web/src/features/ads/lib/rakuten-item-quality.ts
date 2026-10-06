@@ -85,12 +85,37 @@ export function furusatoQualityReasons(
   return reasons;
 }
 
-/** Keep API order; do not repeat an identical issued URL within a card. */
+/**
+ * 商品の「店」。shopName があればそれ、無ければ商品 URL (アフィリエイト URL の pc パラメータを含む) の
+ * item.rakuten.co.jp/<店>/ から取る。取れなければ null (店での重複判定をしない)。
+ */
+export function rakutenShopKey(item: Pick<RakutenQualityItem, "url" | "shopName">): string | null {
+  if (item.shopName) return `name:${item.shopName}`;
+  try {
+    const u = new URL(item.url);
+    const target = u.hostname === "item.rakuten.co.jp" ? u : new URL(u.searchParams.get("pc") ?? "");
+    if (target.hostname !== "item.rakuten.co.jp") return null;
+    const shop = target.pathname.split("/")[1];
+    return shop ? `path:${shop}` : null;
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Keep API order; do not repeat an identical issued URL or the same shop within a card.
+ * 同じ店の商品が 1 枚に並ぶと選択肢が増えず広告だけが増える (2026-10-04 週次 page-quality
+ * same_shop_ad_duplicates: ranking 309 URL)。
+ */
 export function selectQualityItems<T extends RakutenQualityItem>(items: T[], reasons: (item: T) => string[], limit = 4): T[] {
   const seen = new Set<string>();
+  const seenShops = new Set<string>();
   return items.filter((item) => {
     if (reasons(item).length || seen.has(item.url)) return false;
+    const shop = rakutenShopKey(item);
+    if (shop && seenShops.has(shop)) return false;
     seen.add(item.url);
+    if (shop) seenShops.add(shop);
     return true;
   }).slice(0, limit);
 }

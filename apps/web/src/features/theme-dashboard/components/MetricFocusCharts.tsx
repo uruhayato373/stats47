@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 
 import { lookupArea } from "@stats47/area";
+import { metricDisplayName, type RankingItem, type RankingValue } from "@stats47/ranking";
 import { TrendingUp, MapPin, ArrowDownUp } from "lucide-react";
 
 import { ChartPanel } from "@/components/charts/ChartPanel";
@@ -19,7 +20,6 @@ import { fetchMetricTimeseriesBatched } from "../lib/batched-metric-timeseries";
 
 import { ChartEmptyState, ChartLoading } from "./ChartState";
 
-import type { RankingItem, RankingValue } from "@stats47/ranking";
 
 const LineChartClient = dynamic(
   () => import("@/components/stat-charts/components/charts/LineChart/LineChartClient").then((mod) => mod.LineChartClient),
@@ -55,7 +55,7 @@ export function MetricFocusCharts({
 }: Props) {
   const [timeseries, setTimeseries] = useState<MetricTimeseriesPoint[]>([]);
   const [isPending, startTransition] = useTransition();
-  const displayTitle = rankingItem?.readerLabel ?? rankingItem?.title ?? "値";
+  const displayTitle = rankingItem ? metricDisplayName(rankingItem) : "値";
 
   const areaName = useMemo(() => {
     if (!selectedPrefectureCode) return null;

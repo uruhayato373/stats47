@@ -83,7 +83,7 @@ export function ThemeWaterQualityClient({
         </Select>
         <p className="text-sm" data-national-kind={kind}>
           全国の公式集計：{f(national.compliant)} / {f(national.total)}
-          水域が達成（{f((national.compliant / national.total) * 100)}％）
+          水域が達成（{f((national.compliant / national.total) * 100)}%）
         </p>
         <Table
           aria-label={`${WATER_QUALITY_SOURCE.kinds[kind]}の県別掲載行と達成割合`}
@@ -120,7 +120,7 @@ export function ThemeWaterQualityClient({
                     {s.total ? `${f(s.compliant)} / ${f(s.total)}` : '掲載なし'}
                   </TableCell>
                   <TableCell className="text-right tabular-nums">
-                    {s.rate === null ? '—' : `${f(s.rate)}％`}
+                    {s.rate === null ? '—' : `${f(s.rate)}%`}
                   </TableCell>
                 </TableRow>
               );
@@ -133,7 +133,7 @@ export function ThemeWaterQualityClient({
           >
             <TableCaption>
               {rows.length
-                ? `濃度の単位はmg/Lです。原表の平均値と75％値の最大値を分けて示します。`
+                ? `濃度の単位はmg/Lです。原表の平均値と75%値の最大値を分けて示します。`
                 : 'この県欄には選択した種類の水域が掲載されていません。'}
             </TableCaption>
             <TableHeader>
@@ -144,7 +144,7 @@ export function ThemeWaterQualityClient({
                   基準値
                 </TableHead>
                 <TableHead scope="col" className="text-right">
-                  75％値の最大値
+                  75%値の最大値
                 </TableHead>
                 <TableHead scope="col" className="text-right">
                   平均値

@@ -3,6 +3,7 @@
 import Link from "next/link";
 
 import { DataTable } from "@stats47/components";
+import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
 import type { ColumnDef } from "@tanstack/react-table";
 
@@ -44,7 +45,7 @@ const columns: ColumnDef<CategoryRankingListItem>[] = [
   {
     accessorKey: "unit",
     header: "単位",
-    cell: ({ getValue }) => getValue<string>(),
+    cell: ({ getValue }) => formatUnitForDisplay(getValue<string>()),
     meta: { width: "80px" },
   },
 ];

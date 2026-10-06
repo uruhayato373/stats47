@@ -18,6 +18,7 @@
 import Link from 'next/link';
 
 import { RANKING_PROMINENCE_CATEGORIES } from '@stats47/data-configs/ranking-prominence';
+import { metricDisplayName } from "@stats47/ranking";
 import { ChevronRight } from 'lucide-react';
 
 import { PageShell, PageHeader, Breadcrumbs } from '@/components/layout';
@@ -152,7 +153,7 @@ export default function RankingIndexPage() {
                         href={`/ranking/${representative.rankingKey}`}
                         className="hover:text-primary hover:underline"
                       >
-                        {representative.readerLabel ?? representative.title}
+                        {metricDisplayName(representative)}
                       </Link>
                     </li>
                   ))}

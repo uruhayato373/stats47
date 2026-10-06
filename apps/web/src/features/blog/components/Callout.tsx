@@ -28,8 +28,10 @@ export function Callout({ type, children }: { type: CalloutType; children: React
             className={`my-6 rounded-content px-4 py-3 text-[15px] leading-[1.8] text-foreground ${surfaceClass} [&>div>ol]:my-1 [&>div>p+p]:mt-2 [&>div>p]:my-0 [&>div>p]:leading-[1.8] [&>div>ul]:my-1`}
         >
             {/* 段落ではないので <p> にしない (記事本文の段落余白が効いてしまう) */}
-            <div className={`mb-1 flex items-center gap-1.5 text-xs font-bold leading-5 ${accentClass}`}>
-                <Icon className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+            {/* ラベルの文字は本文色にし、種類の色はアイコンだけに持たせる。12px の太字を種類の色で書くと
+                淡い地の上で 4.5:1 に届かない (2026-10-06 axe color-contrast・TIP の text-positive) */}
+            <div className="mb-1 flex items-center gap-1.5 text-xs font-bold leading-5 text-foreground">
+                <Icon className={`h-3.5 w-3.5 shrink-0 ${accentClass}`} aria-hidden="true" />
                 {label}
             </div>
             <div>{children}</div>

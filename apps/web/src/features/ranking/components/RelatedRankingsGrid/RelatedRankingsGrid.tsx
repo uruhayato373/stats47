@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
+import { metricShortName } from "@stats47/ranking";
 import { isOk, type AreaType } from "@stats47/types";
 import { ArrowRight, ListOrdered } from "lucide-react";
 
@@ -66,7 +67,7 @@ export async function RelatedRankingsGrid({
     >
       <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3">
         {items.map((item) => {
-          const readerLabel = item.readerLabel ?? item.title;
+          const readerLabel = metricShortName(item);
           const detail = getSidebarDetail(item);
           return (
             <Link

@@ -179,6 +179,9 @@ interface EstatFetchResult {
  * `@tab` が返る保証を前提にするうえ limit 打ち切りの risk があるので採らない。
  * どれか 1 つでも欠測なら "-" (欠測) として返す。部分和を配信すると
  * 「賞与だけの年収」のような無意味な値になるため。
+ *
+ * 1 つの項目の cdTab にはカンマ区切りで複数コードを書ける (e-Stat API の仕様)。表章項目コードが
+ * 年によって違う表で、同じ定義の項目を年代ごとにつなぐために使う。同じ年に 2 つ値が来たら停止する。
  */
 async function fetchEstatCombination(
   appId: string,
@@ -198,6 +201,11 @@ async function fetchEstatCombination(
     const byKey = new Map<string, string>();
     for (const v of part.values) {
       const key = `${v["@area"]}|${v["@time"]}`;
+      // cdTab に年代違いのコードを並べる表 (賃金構造基本統計 0003445758 は 2022 年だけ 08/12、
+      // 他の年は 40/44) では、同じ (area, time) に 2 つ値が来たら定義が重なっている。黙って上書きしない
+      if (byKey.has(key)) {
+        throw new Error(`tabCombination の cdTab "${cdTab}" が ${key} に複数の値を返した (年代違いのコードが同じ年に重なっている)`);
+      }
       byKey.set(key, v.$);
       if (!meta.has(key)) {
         meta.set(key, { area: v["@area"], time: v["@time"] });

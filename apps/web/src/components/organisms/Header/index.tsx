@@ -8,6 +8,7 @@
  * 設計仕様: docs/01_技術設計/04_デザインシステム.md
  */
 import { RANKING_PROMINENCE_CATEGORIES } from "@stats47/data-configs/ranking-prominence";
+import { metricDisplayName } from "@stats47/ranking";
 
 import { NAV_THEMES } from "@/features/theme-dashboard/config/theme-urls";
 
@@ -28,7 +29,7 @@ export default function Header() {
     count: category.count,
     rankings: category.representatives.slice(0, 4).map((representative) => ({
       rankingKey: representative.rankingKey,
-      title: representative.readerLabel ?? representative.title,
+      title: metricDisplayName(representative),
     })),
   }));
 
