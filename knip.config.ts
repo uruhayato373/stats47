@@ -21,6 +21,16 @@ const config: KnipConfig = {
       entry: "src/index.{ts,tsx}!",
       project: ["src/**/*.{ts,tsx}"],
       ignore: ["**/__tests__/**", "**/*.test.{ts,tsx}"],
+    },
+    // vitest.config.integration.ts は @cloudflare/vitest-pool-workers 0.22 で消えた
+    // "./config" を import しており読み込めない。knip 6 は対象外の workspace でも
+    // test:integration script 経由でこの設定を読んで exit 2 になるため、vitest
+    // プラグインを止める (副作用: alias 専用の src/testing/server-only-mock.ts が未使用扱い)。
+    "packages/database": {
+      entry: "src/index.{ts,tsx}!",
+      project: ["src/**/*.{ts,tsx}"],
+      ignore: ["**/__tests__/**", "**/*.test.{ts,tsx}"],
+      vitest: false,
     }
   },
   ignoreDependencies: [

@@ -3022,8 +3022,8 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 ### [DEPS-BRACES-GATE-01] 修正版が無い braces 脆弱性で落ち続ける Security Scan の high ゲートをどう扱うか決める
 タグ: [インフラ・計測] [種類:意思決定] [実行:ユーザー] [検証:npm audit --audit-level=high] [起票:2026-10-06] [領域:管理]
 
-- **論点**: braces (GHSA-vfj7-8cjw-p6xm) は `<=3.0.3` が該当し、2026-10-06 時点で修正版が無い。[DEPS-TAILWIND4-01] で tailwindcss 3 を外しても、dev 依存の 2 経路が残る。1 つ目は `eslint-config-next` / `@next/eslint-plugin-next` 16.3.8 (最新) が `fast-glob` 3.3.1 を固定している経路で、上流に修正が無い。2 つ目は `knip` 5 系が `fast-glob` を使う経路で、knip 6 (tinyglobby に移行済み) へのメジャー更新で外れる。このため main への push と全 PR で `npm audit --audit-level=high` が失敗し続け、他の新しい high を見落とす。
-- **選択肢**: (a) braces または Next.js の eslint plugin の上流修正を待つ。待つ間はゲートが赤のままになる。(b) dev 依存に限り、この GHSA だけを期限付きの例外として扱う。例えば `npm audit --json` の結果からこの ID を除いて判定するスクリプトにし、`test:dependency-security` に例外の期限と理由を固定する。runtime ゲート (`--omit=dev --audit-level=low`) は例外にしない。(c) knip 6 への更新だけを先に行い、経路を eslint-config-next の 1 本に減らす。(c) は (a)・(b) のどちらとも組み合わせられる。
+- **論点**: braces (GHSA-vfj7-8cjw-p6xm) は `<=3.0.3` が該当し、2026-10-06 時点で修正版が無い。knip の経路は 2026-10-06 に knip 6 へ更新して外した。[DEPS-TAILWIND4-01] で tailwindcss 3 を外しても、`eslint-config-next` / `@next/eslint-plugin-next` 16.3.8 (最新) が `fast-glob` 3.3.1 を固定している dev 依存の経路が残り、上流に修正が無い。このため main への push と全 PR で `npm audit --audit-level=high` が失敗し続け、他の新しい high を見落とす。
+- **選択肢**: (a) braces または Next.js の eslint plugin の上流修正を待つ。待つ間はゲートが赤のままになる。(b) dev 依存に限り、この GHSA だけを期限付きの例外として扱う。例えば `npm audit --json` の結果からこの ID を除いて判定するスクリプトにし、`test:dependency-security` に例外の期限と理由を固定する。runtime ゲート (`--omit=dev --audit-level=low`) は例外にしない。
 - **停止条件**: runtime 依存の脆弱性を例外にしない。期限と再評価日の無い例外を入れない。
 - **完了条件**: 採否が決まり、採った方針で Security Scan が green になる。または待つと決めたなら、再評価日 (braces の新版公開の確認) を本カードに書く。
 
