@@ -1,4 +1,4 @@
-# GSC カバレッジ是正 — 2026-W40 (2026-10-05)
+# GSC カバレッジ是正 — 2026-W40 (2026-10-06)
 
 > SSOT: `.claude/state/gsc/coverage-remediation-queue.json` / 正典: `.claude/skills/analytics/gsc-coverage-remediation/SKILL.md`
 > 入力観測日: 2026-10-04 / 入力週齢: 1 週
@@ -24,17 +24,17 @@
 
 ## 是正キュー (本番 HTTP 実測ベース)
 
-- 追跡 URL: **3417** / 要対応 pending: **1185**
-- URL Inspection で登録を確認して done にした URL: **90** (`--sync-inspection` が日次で更新。再び未登録と観測されたら pending に戻る)
+- 追跡 URL: **3417** / 要対応 pending: **1183**
+- URL Inspection で登録を確認して done にした URL: **92** (`--sync-inspection` が日次で更新。再び未登録と観測されたら pending に戻る)
 
 | action | 分類総数 | pending | 意味 |
 |---|---:|---:|---|
-| observe-after-fix | 1274 | 1185 | 404/5xx→現在200=生きてる→sitemap/内部リンク整備後 URL Inspection で観測 |
+| observe-after-fix | 1274 | 1183 | 404/5xx→現在200=生きてる→sitemap/内部リンク整備後 URL Inspection で観測 |
 | content-check | 4 | 0 | soft404→現在200=薄さ/描画 未判定 |
 | enrich | 12 | 0 | 全国テンプレ重複(area×cat)/未公開md→県別補強・公開 |
 | none | 2127 | 0 | 意図的/解消済=放置 |
 
-- observe-after-fix CSV: `<週>/coverage-live-observe-urls.csv` (**1185 URL**) → 修正後に url-inspection-daily.cjs で観測
+- observe-after-fix CSV: `<週>/coverage-live-observe-urls.csv` (**1183 URL**) → 修正後に url-inspection-daily.cjs で観測
 
 ## 次サイクル
 
