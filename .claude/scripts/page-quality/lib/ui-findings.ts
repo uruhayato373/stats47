@@ -52,7 +52,7 @@ export interface AgentFinding {
 }
 
 export const CARD_PREFIX = "UI-FIX";
-export const BATCH_DIR = ".claude/state/page-quality/backlog-batches";
+export const BATCH_DIR = "data/page-quality/backlog-batches";
 export const BATCH_SIZE = 10;
 /** Claude の指摘は表現が週ごとに変わり同一性を判定できないので、by-design は期限付きにする */
 export const AGENT_BY_DESIGN_TTL_DAYS = 28;
@@ -321,7 +321,7 @@ export function semanticFixGuide(findings: readonly UiFinding[]): string[] {
   if (!SEMANTIC_METRICS.some((m) => hasMetric(findings, m))) return [];
   return [
     "- **表示の意味 (定義単位で直す)**: 語・文字列・店名などの具体的な箇所は `LATEST.md` / 週次 `latest.json` の `ui_findings` にある。" +
-      "全URLの検査はページの種類ごとに 1 件へまとめてあり、該当 URL の全件は週次 `latest.json` (`npm run state:pull -- page-quality` で `.claude/state/page-quality/live/` に取得) の `violations` にある。" +
+      "全URLの検査はページの種類ごとに 1 件へまとめてあり、該当 URL の全件は週次 `latest.json` (`npm run state:pull -- page-quality` で `data/page-quality/live/` に取得) の `violations` にある。" +
       "同じ指摘が同じテンプレートの多数の URL に出ていれば、ページではなく生成元 (テンプレート・カタログ・共通部品・AI 解説の生成) を直す。" +
       "内部用語は読者向けの言い換えに、`NaN`/`undefined` は値が無いときの表示 (「—」等) に、`%`/`％` はそのページの多数派に揃える。" +
       "`title_changed` は選定入力が変わっていないのに title が変わった場合だけ直す (選び方を決定的にする)。" +
@@ -345,8 +345,8 @@ function renderCard(id: string, template: string, findings: UiFinding[], today: 
     "",
     `タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:${CLI} --assert-handled ${file}] [起票:${today}] [領域:サイト]`,
     "",
-    `- **自動起票**: 週次のページ品質監査 (\`page-quality-audit-weekly.yml\`) の結果から \`ui-findings.ts --sync\` が作った。対象の一覧は \`${file}\`、状態は \`.claude/state/page-quality/ui-findings-queue.json\`。正典は \`.claude/rules/page-quality-standards.md\`「UI 指摘のループ」。`,
-    `- **スクショ (最新の週次)**: ${shots}。検査の詳細は \`.claude/state/metrics/page-quality/LATEST.md\`。`,
+    `- **自動起票**: 週次のページ品質監査 (\`page-quality-audit-weekly.yml\`) の結果から \`ui-findings.ts --sync\` が作った。対象の一覧は \`${file}\`、状態は \`data/page-quality/ui-findings-queue.json\`。正典は \`.claude/rules/page-quality-standards.md\`「UI 指摘のループ」。`,
+    `- **スクショ (最新の週次)**: ${shots}。検査の詳細は \`data/page-quality/metrics/LATEST.md\`。`,
     "- **対象**:",
     ...findings.flatMap(target),
     ...chartFixGuide(findings, file),

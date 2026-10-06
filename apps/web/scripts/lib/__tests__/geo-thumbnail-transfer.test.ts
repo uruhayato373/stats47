@@ -82,7 +82,7 @@ function fixture() {
     })),
     metadata: { sourceUrl: input.sourceUrl, inputs: input.inputs },
   };
-  const stateDir = join(root, '.claude/state/geo');
+  const stateDir = join(root, 'data/geo');
   mkdirSync(stateDir, { recursive: true });
   writeFileSync(
     join(stateDir, 'source-thumbnails.json'),

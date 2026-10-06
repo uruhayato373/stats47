@@ -285,7 +285,7 @@ async function main() {
       2
     )
   );
-  const statePath = join(root, '.claude/state/geo/source-thumbnails.json');
+  const statePath = join(root, 'data/geo/source-thumbnails.json');
   const previous = existsSync(statePath)
     ? (readJson(statePath) as { items: Record<string, unknown> })
     : { items: {} };

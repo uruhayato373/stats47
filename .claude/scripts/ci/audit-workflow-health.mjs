@@ -28,7 +28,7 @@ import { evaluateAll, formatReport, isScheduled } from "../lib/workflow-health-c
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, "..", "..", "..");
 const WORKFLOW_DIR = path.join(ROOT, ".github/workflows");
-const STATE_DIR = path.join(ROOT, ".claude/state/ci");
+const STATE_DIR = path.join(ROOT, "data/ci");
 
 function arg(name, fallback) {
   const i = process.argv.indexOf(`--${name}`);

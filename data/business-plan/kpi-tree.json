@@ -9,7 +9,7 @@
       "cadence": "weekly",
       "measurementStatus": "partially-measured",
       "unit": "円/月換算",
-      "source": ".claude/state/metrics/"
+      "source": "data/"
     },
     {
       "id": "paid-purchases",
@@ -27,7 +27,7 @@
       "cadence": "weekly",
       "measurementStatus": "measured",
       "unit": "クリック/28日",
-      "source": ".claude/state/metrics/gsc/history.csv",
+      "source": "data/gsc/history.csv",
       "target": {
         "value": 20000,
         "dueWeek": "2026-W52",
@@ -68,7 +68,7 @@
       "cadence": "weekly",
       "measurementStatus": "partially-measured",
       "unit": "%",
-      "source": ".claude/state/ranking/integrity-audit.json"
+      "source": "data/ranking/integrity-audit.json"
     },
     {
       "id": "site-health",
@@ -77,7 +77,7 @@
       "cadence": "weekly",
       "measurementStatus": "measured",
       "unit": "PSIモバイル中央値 / Workersエラー率",
-      "source": ".claude/state/metrics/{psi,cloudflare}/history.csv"
+      "source": "data/{psi,cloudflare}/history.csv"
     },
     {
       "id": "operating-cost",
@@ -86,7 +86,7 @@
       "cadence": "weekly",
       "measurementStatus": "partially-measured",
       "unit": "閾値違反数 / R2保存GB",
-      "source": ".claude/state/metrics/cloudflare/ + claude-usage/history.csv"
+      "source": "data/cloudflare/ + claude-usage/history.csv"
     },
     {
       "id": "measurement-freshness",
@@ -95,7 +95,7 @@
       "cadence": "weekly",
       "measurementStatus": "measured",
       "unit": "鮮度okの計測源 / 全計測源",
-      "source": ".claude/state/metrics/measurement-cycle/latest.json"
+      "source": "data/measurement-cycle/latest.json"
     }
   ]
 }

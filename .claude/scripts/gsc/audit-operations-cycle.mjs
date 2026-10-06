@@ -218,7 +218,7 @@ export function auditOperationsCycle({
     ),
     weeklyPlan: path.join(root, '.claude/todo/weekly.md'),
     monthlyPlan: path.join(root, '.claude/todo/monthly.md'),
-    candidates: path.join(root, '.claude/state/search-growth/candidates.json'),
+    candidates: path.join(root, 'data/search-growth/candidates.json'),
     inspectionLatest: path.join(
       root,
       'data/gsc/url-inspection/LATEST.md'
@@ -549,7 +549,7 @@ function main() {
   const markdown = renderMarkdown(result);
 
   if (args.includes('--write')) {
-    const outDir = path.join(root, '.claude/state/metrics/gsc');
+    const outDir = path.join(root, 'data/gsc');
     fs.mkdirSync(outDir, { recursive: true });
     fs.writeFileSync(
       path.join(outDir, 'operations-cycle-LATEST.json'),

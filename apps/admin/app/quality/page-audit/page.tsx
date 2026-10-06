@@ -45,7 +45,7 @@ export default async function PageQualityAuditPage({
       <div className="space-y-4">
         <PageHeading
           title="ページ品質監査"
-          source=".claude/state/metrics/page-quality/latest.json"
+          source="data/page-quality/metrics/latest.json"
         />
         <ErrorNote error={summary.error ?? "unknown error"} />
         <p className="text-sm text-console-muted">
@@ -81,7 +81,7 @@ export default async function PageQualityAuditPage({
     <div className="space-y-8">
       <PageHeading
         title="ページ品質監査"
-        source=".claude/state/metrics/page-quality/latest.json"
+        source="data/page-quality/metrics/latest.json"
       >
         <div className="flex flex-wrap items-center gap-2 pt-1">
           <StatusBadge tone="info">{summary.mode}</StatusBadge>

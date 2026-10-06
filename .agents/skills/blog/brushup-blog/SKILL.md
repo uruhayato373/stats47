@@ -29,7 +29,7 @@ primary_agent: article-writer
 
 ## --target queue: 計画的是正 (★推奨・週次バッチの実行エンジン)
 
-`build-remediation-queue.mjs` が作る**状態付き是正キュー** (`.claude/state/blog/remediation-queue.json`) を消費し、
+`build-remediation-queue.mjs` が作る**状態付き是正キュー** (`data/blog/remediation-queue.json`) を消費し、
 pending 上位 N 件を順に是正する。GSC 流入 (expectedLift) × 品質 blocker severity を**統合スコア**で序列化し、
 publish-blocker を持つ記事 (**must-fix レーン**) を最上位に置く。「次に何を直すか」「何本消化したか」「効いたか」を
 キューが追跡するので、**週次で少しずつ品質を底上げ**できる。正典: `.claude/skills/blog/brushup-blog/reference/blog-remediation-loop.md`。
@@ -71,7 +71,7 @@ node .claude/scripts/blog/build-remediation-queue.mjs --next 5   # pending 上�
 
 ### Step 4: wave を記録 (history + 改善ログ)
 
-- `.claude/state/blog/auto-brushup-history.json` に通過記事を追記 (wave_id 一致、`.claude/rules/blog-data-schema.md` の命名規則)。
+- `data/blog/auto-brushup-history.json` に通過記事を追記 (wave_id 一致、`.claude/rules/blog-data-schema.md` の命名規則)。
 - `.claude/todo/improvements.md` に `## [BLOG-WAVE-<wave_id>]` section を追加 (frontmatter `status: pending` / `due: <+28日>` / `wave_id`)。
 - 公開は CI (`publish-blog.yml` / develop push)。`quality-gate.mjs` が公開前に再 enforce する。
 
@@ -145,7 +145,7 @@ GSC データは実測値。
 
 #### Step 4: brushup-queue.md 出力
 
-`.claude/state/blog/remediation-queue.json` に以下の形式で書き出す:
+`data/blog/remediation-queue.json` に以下の形式で書き出す:
 
 ```markdown
 # ブログ改善優先度キュー
@@ -349,7 +349,7 @@ GSC で改善余地の大きい blog 記事を優先度順に選び、`--target 
 
 - **1 回最大 5 記事** (`--count` > 5 は 5 にクランプ)
 - **全件 skip 日は commit せず終了**
-- **90 日以内に brushup した記事は dedup** (`.claude/state/blog/auto-brushup-history.json`)
+- **90 日以内に brushup した記事は dedup** (`data/blog/auto-brushup-history.json`)
 - **NotebookLM 不使用** (バッチは CTR-reframe focus 固定。エキスパート視点追加は対話実行のみ)
 
 ### Step 1: 候補選定
@@ -391,21 +391,21 @@ gh pr create --base main --head develop \
 
 ### Step 4: history 更新
 
-`.claude/state/blog/auto-brushup-history.json` に通過記事を追記:
+`data/blog/auto-brushup-history.json` に通過記事を追記:
 
 ```jsonc
 { "date": "YYYY-MM-DD", "wave_id": "YYYY-MM-DD-auto", "slug": "...", "framing": "...", "expectedLift": N }
 ```
 
 - `wave_id` は `YYYY-MM-DD-auto`。同日再実行は `-2`, `-3` と連番化し、既存 `2026-05-25-auto` 等と衝突させない (`.claude/rules/blog-data-schema.md` の wave 命名規則)。
-- skip した記事は `.claude/state/blog/auto-brushup-skipped.log` に記録 (週次レビューで prompt 改善の手がかり)。
+- skip した記事は `data/blog/auto-brushup-skipped.log` に記録 (週次レビューで prompt 改善の手がかり)。
 
 ---
 
 ## 参照
 
 - **記事品質の正典: `.claude/rules/blog-quality-standards.md`** (curiosity gap / callout / 内部リンク / source-link 配置の単一ソース)
-- 優先度キュー: `.claude/state/blog/remediation-queue.json` (`--target priority` で生成)
+- 優先度キュー: `data/blog/remediation-queue.json` (`--target priority` で生成)
 - 品質確認: `/blog-review --mode proofread` で最終チェック
 - factual + 形式の防壁: `node .claude/scripts/blog/quality-gate.mjs <slug>` (内部で `article-factual-check.mjs` を呼ぶ)
 - 失敗事例 ledger: `.claude/skills/blog/SHARED-failure-cases.md`

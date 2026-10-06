@@ -80,7 +80,7 @@ jobs:
           JAPAN_ZUE_RC="${PIPESTATUS[0]}"
           if [ "$JAPAN_ZUE_RC" -ne 0 ]; then ERROR_COUNT=$((ERROR_COUNT + 1)); fi
           # D クラス件数を state から拾う
-          DCLASS=$(node -e "const d=require('./.claude/state/provenance/queue.json'); console.log((d.byClass&&d.byClass.D)||0)")
+          DCLASS=$(node -e "const d=require('./data/provenance/queue.json'); console.log((d.byClass&&d.byClass.D)||0)")
           echo "dclass=$DCLASS" >> "$GITHUB_OUTPUT"
           echo "error_count=$ERROR_COUNT" >> "$GITHUB_OUTPUT"
 
@@ -88,7 +88,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .claude/state/provenance/queue.json .claude/state/provenance/LATEST.md
+          git add data/provenance/queue.json data/provenance/LATEST.md
           if git diff --cached --quiet; then
             echo "No provenance state changes"
             exit 0
@@ -115,7 +115,7 @@ jobs:
             echo '```'
             echo ""
             echo "是正: /audit-provenance skill / 正典 .claude/rules/data-provenance-standards.md"
-            echo "現況: .claude/state/provenance/LATEST.md (D クラス ${{ steps.check.outputs.dclass }} 件)"
+            echo "現況: data/provenance/LATEST.md (D クラス ${{ steps.check.outputs.dclass }} 件)"
           } > /tmp/prov-issue.md
           gh label create provenance-alert --description "出典・再現性 lint の error (週次監査)" --color "d93f0b" --force 2>/dev/null || true
           EXISTING=$(gh issue list --state open --label provenance-alert --search "\"[Provenance Alert]\" in:title" --json number --jq '.[0].number // empty')

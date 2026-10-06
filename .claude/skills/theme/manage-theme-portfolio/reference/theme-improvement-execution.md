@@ -78,8 +78,8 @@ selection-backfill.md` の「role の推奨」表に出す (夜間バッチ自�
 これは本契約の proposal と同じ採択ゲートに入る**追加の入力源**であり、別フローではない。
 
 - 横断集約・進捗管理: `node --import tsx .claude/scripts/themes/build-role-review-queue.mjs` が
-  全 audit report の推奨を `.claude/state/theme/role-review-queue.json` + 人間向け
-  `.claude/state/theme/LATEST.md` に集約する (夜間 run が自動で再構築する)。
+  全 audit report の推奨を `data/themes/role-review/role-review-queue.json` + 人間向け
+  `data/themes/role-review/LATEST.md` に集約する (夜間 run が自動で再構築する)。
   「反映済み (`applied`)」は手動フラグではなく、実際の `THEME_CATALOGS` の role が
   recommended と一致したかで自動判定する。
 - 採択・却下は `node --import tsx .claude/scripts/themes/build-role-review-queue.mjs decide

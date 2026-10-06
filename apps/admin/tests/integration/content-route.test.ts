@@ -30,7 +30,7 @@ describe("GET /api/content", () => {
             },
           },
         }),
-        ".claude/state/products/kindle-status.json": JSON.stringify({
+        "data/products/kindle-status.json": JSON.stringify({
           generatedAt: "2026-08-27T00:00:00.000Z",
           books: [{ id: "K-S1-01", status: "generated" }],
         }),
@@ -56,7 +56,7 @@ describe("GET /api/content", () => {
             },
           },
         }),
-        ".claude/state/note-draft-index.json": JSON.stringify({ drafts: {} }),
+        "data/note/note-draft-index.json": JSON.stringify({ drafts: {} }),
       },
     });
     process.env.STATS47_PROJECT_ROOT = root;

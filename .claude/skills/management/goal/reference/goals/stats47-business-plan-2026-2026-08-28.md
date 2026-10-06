@@ -50,7 +50,7 @@
 | 想定効果 | 原案と実装の差を可視化し、開始ゲートを守って次の実装へ送れる |
 | 状態 | judged / effect/full |
 | 実装証拠 | commit `4674d21cbe842d79b1f21fb0a8216194813dfa15` |
-| 計測証拠 | `.claude/state/business-plan/history/2026-08-28.json` |
+| 計測証拠 | `data/business-plan/history/2026-08-28.json` |
 | 結果 | 25判断・100企画・X30案・note15商品・4 pilot specを検証。data-configs 762 tests、admin 166 tests、全25 workspace type-check、admin build、文書・CI・consistency gate PASS |
 | 次 | H5の市場仮説は最初の4系列を需要ゲート順に実行し、別の週次・月次計測で判定 |
 

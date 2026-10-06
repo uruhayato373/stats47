@@ -114,7 +114,7 @@ function deriveSourceFromJson(json, dataFile, chartType) {
 }
 
 async function main() {
-  const q = JSON.parse(fs.readFileSync(path.join(PROJECT_ROOT, ".claude/state/blog/svg-lineage-queue.json"), "utf8"));
+  const q = JSON.parse(fs.readFileSync(path.join(PROJECT_ROOT, "data/blog/svg-lineage-queue.json"), "utf8"));
   let targets = q.entries.filter((e) => e.restoreMethod === "source-backfill");
   if (LIMIT) targets = targets.slice(0, LIMIT);
   console.error(`[backfill] source-backfill: ${targets.length} 枚 (全 chartType)`);

@@ -13,7 +13,7 @@ if (args.includes("--help")) {
   console.log("Usage: npm run note:covers:audit -- [--output <file>]\nExit: 0=全件設定済み・集合一致 / 1=未設定またはカタログ差分 / 2=取得失敗・不完全\n公開記事だけをGETで確認。画像生成・note更新・R2書き込みなし。");
   process.exit(0);
 }
-let output = resolve(ROOT, ".claude/state/metrics/note-cover-audit-latest.json");
+let output = resolve(ROOT, "data/note/evidence/note-cover-audit-latest.json");
 if (args.length) {
   if (args.length !== 2 || args[0] !== "--output" || !args[1] || args[1].startsWith("--")) {
     console.error("Invalid arguments. Use --help.");
@@ -59,7 +59,7 @@ mkdirSync(dirname(output), { recursive: true });
 const temporaryOutput = `${output}.${process.pid}.tmp`;
 writeFileSync(temporaryOutput, `${JSON.stringify(report, null, 2)}\n`);
 renameSync(temporaryOutput, output);
-if (report.coverage?.complete && output === resolve(ROOT, '.claude/state/metrics/note-cover-audit-latest.json'))
+if (report.coverage?.complete && output === resolve(ROOT, 'data/note/evidence/note-cover-audit-latest.json'))
   await updateCoverLedger((ledger) => applyCoverAudit(ledger, report));
 console.log(`[note-cover] ${report.status.toUpperCase()}`);
 if (report.summary) {

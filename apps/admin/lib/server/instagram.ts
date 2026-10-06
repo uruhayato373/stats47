@@ -3,12 +3,12 @@ import "server-only";
 import fs from "node:fs";
 import path from "node:path";
 
-import { stateDir } from "./project-root";
+import { snsDataDir } from "./project-root";
 import { jstDateStr } from "./time";
 import { query } from "./posts-store";
 
 /**
- * Instagram の schedule JSON (.claude/state/instagram-w*-schedule.json) を読み取り、
+ * Instagram の schedule JSON (data/sns/instagram-w*-schedule.json) を読み取り、
  * 投稿台帳との整合性を表示する。管理画面は読み取り専用であり、予約登録は行わない。
  */
 export interface IgScheduleEntry {
@@ -24,10 +24,10 @@ export interface IgScheduleEntry {
 /** instagram-w<N>-schedule.json を名前順で返す (絶対パス配列)。 */
 export function igScheduleFiles(): string[] {
   return fs
-    .readdirSync(stateDir())
+    .readdirSync(snsDataDir())
     .filter((f) => /^instagram-w\d+-schedule\.json$/.test(f))
     .sort()
-    .map((f) => path.join(stateDir(), f));
+    .map((f) => path.join(snsDataDir(), f));
 }
 
 /** 全 schedule ファイルの entry を _file 付きで平坦化して返す。 */

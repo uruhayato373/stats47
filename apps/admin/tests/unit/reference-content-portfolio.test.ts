@@ -14,7 +14,7 @@ function fixture(
       {
         sourceKey: 'book-a',
         edition: '2026',
-        sourcePath: '.claude/state/source-inventory/book-a/2026/inventory.json',
+        sourcePath: 'data/source-inventory/book-a/2026/inventory.json',
         items: [
           {
             id: 'metric-evidence',
@@ -48,7 +48,7 @@ function fixture(
       {
         sourceKey: 'book-b',
         edition: '2025',
-        sourcePath: '.claude/state/source-inventory/book-b/2025/inventory.json',
+        sourcePath: 'data/source-inventory/book-b/2025/inventory.json',
         items: [
           {
             id: 'area-evidence',
@@ -195,7 +195,7 @@ describe('reference content portfolio', () => {
             code: 'ZERO_DENOMINATOR',
             message: '最下位値が0のため倍率を計算できません',
             sourcePath:
-              '.claude/state/content-operations/note-generation-blockers.json',
+              'data/content-operations/note-generation-blockers.json',
           },
         ],
       })

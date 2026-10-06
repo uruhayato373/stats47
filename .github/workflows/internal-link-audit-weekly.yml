@@ -56,9 +56,9 @@ jobs:
         id: check
         run: |
           set +e
-          mkdir -p .claude/state/blog
+          mkdir -p data/blog
           node .claude/scripts/blog/audit-internal-links.mjs \
-            --json .claude/state/blog/internal-link-audit.json 2>&1 | tee /tmp/link-audit.log
+            --json data/blog/internal-link-audit.json 2>&1 | tee /tmp/link-audit.log
           echo "exit_code=${PIPESTATUS[0]}" >> "$GITHUB_OUTPUT"
 
       # ページ側コンポーネントが生成するリンク (タグ・サイドバー・KPI グリッド等) を拾う。
@@ -67,16 +67,16 @@ jobs:
         id: check_site
         run: |
           set +e
-          mkdir -p .claude/state/site
+          mkdir -p data/site
           node .claude/scripts/site/audit-site-links.mjs --per-route 10 \
-            --json .claude/state/site/link-audit.json 2>&1 | tee /tmp/site-link-audit.log
+            --json data/site/link-audit.json 2>&1 | tee /tmp/site-link-audit.log
           echo "exit_code=${PIPESTATUS[0]}" >> "$GITHUB_OUTPUT"
 
       - name: 📤 Commit audit result to develop
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .claude/state/blog/internal-link-audit.json .claude/state/site/link-audit.json
+          git add data/blog/internal-link-audit.json data/site/link-audit.json
           if git diff --cached --quiet; then
             echo "No audit changes"
             exit 0

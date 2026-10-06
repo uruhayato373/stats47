@@ -5,6 +5,6 @@
 **根拠**: 2026-10-02のnote家計カバー更新では、長崎の台帳保存と和歌山のjournal保存がそれぞれ失敗した。いずれも外部アップロードは成功しており、保存した返却URLと公開画像を照合して再POSTなしで復旧できた。ファイルが一時的に置換できない原因自体は未特定。
 **確信度**: 0.9（2件の実操作で確認）
 **発見日**: 2026-10-02
-**関連**: `.claude/scripts/note/update-note-covers.mjs` / `.claude/scripts/note/lib/cover-assets.mjs` / `.claude/state/metrics/note-cover-refresh-ledger-91214c55dafc1456.json`
+**関連**: `.claude/scripts/note/update-note-covers.mjs` / `.claude/scripts/note/lib/cover-assets.mjs` / `data/note/evidence/note-cover-refresh-ledger-91214c55dafc1456.json`
 
 owner: knowledge-curator。外部操作の復旧判断を共有するための記録。操作契約の変更時に見直す。

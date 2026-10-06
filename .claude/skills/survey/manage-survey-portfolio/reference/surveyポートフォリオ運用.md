@@ -11,7 +11,7 @@ tags: [survey, portfolio, agent, governance]
 検索需要 (GSC)・流入 (GA4)・ランキング在庫・編集品質を継続計測し、編集ハブ化する survey の選別と
 実験の効果測定を回す**ための運用設計書。**新規 agent は作らず、既存 `survey-curator` を survey
 ポートフォリオの単一オーナーへ拡張する** (オーナー指示 2026-07-13)。state
-`.claude/state/surveys/{portfolio,experiments}.json` を新設する。
+`data/surveys/{portfolio,experiments}.json` を新設する。
 
 > **正典の役割分担**: ranking↔survey **紐付け**の SSOT 構造・導出優先順位・禁止事項は
 > `.claude/rules/survey-linkage-standards.md`、survey ハブの**編集文法**・構成・横展開判定は
@@ -100,8 +100,8 @@ tags: [survey, portfolio, agent, governance]
 packages/ranking/src/data/surveys.json               ← 調査マスタ SSOT (linkage-standards §1・不変)
 survey-linkage-standards.md + provenance 辞書        ← 紐付け SSOT (resolveSurveyLinkage に一本化・不変)
 apps/web/src/features/survey/survey-editorial.ts     ← 編集本文 SSOT (content-standards・不変)
-.claude/state/surveys/portfolio.json                 ← survey 別評価 (派生・再構築可能・手編集禁止)
-.claude/state/surveys/experiments.json               ← 改善実験台帳 (baseline / 期日 / verdict)
+data/surveys/portfolio.json                 ← survey 別評価 (派生・再構築可能・手編集禁止)
+data/surveys/experiments.json               ← 改善実験台帳 (baseline / 期日 / verdict)
   ↑ 書き込み: survey-curator が builder スクリプト経由でのみ
 .claude/skills/survey/manage-survey-portfolio/reference/  ← 運用設計 (本書) + reviews/ + audits/ (日付付き証跡)
 .claude/todo/improvements.md                       ← 書き込みは improvement-triage のみ (不変)
@@ -124,7 +124,7 @@ apps/web/src/features/survey/survey-editorial.ts     ← 編集本文 SSOT (cont
 | 改善バックログへの登録・effect/* 判定 | **improvement-triage (排他 writer)** | 所定形式で引き渡すのみ |
 | 編集本文の執筆・紐付け是正 | survey-curator (従来責務) | 本人 (ポートフォリオ評価と同一 agent だが、効果判定は実測 + validator + triage が拘束) |
 
-## 3. 判定規律 (state README `.claude/state/surveys/README.md` が schema 正典)
+## 3. 判定規律 (state README `data/surveys/README.md` が schema 正典)
 
 - 観測期間: **7 日 = インデックス/canonical/404/計測異常の検知のみ** (効果判定に使わない) /
   **28 日 = 暫定判定** / **56 日 = 基本判定**。
@@ -183,7 +183,7 @@ orphan survey / linkage 未解決が多い / ranking 在庫がほぼない (item
 - [ ] survey-editorial.ts との drift を validator が検出できる
 - [ ] GSC・GA4 の参照元 snapshot を追跡できる (gscSnapshotRef / ga4SnapshotRef)
 - [ ] 同一 survey の重複実験を防止できる (surveyId × changeType の pending 一意)
-- [ ] 最新状態は `.claude/state/surveys/` から確認でき、docs は履歴・証跡として扱われる
+- [ ] 最新状態は `data/surveys/` から確認でき、docs は履歴・証跡として扱われる
 - [ ] audit-survey-linkage / validator / 対象テストが通る
 - [ ] R2 push・deploy を行っていない
 
@@ -191,7 +191,7 @@ orphan survey / linkage 未解決が多い / ranking 在庫がほぼない (item
 
 - 紐付け正典: `.claude/rules/survey-linkage-standards.md` / 編集正典: `.claude/rules/survey-content-standards.md`
 - agent: `.claude/agents/survey-curator.md` / skill: `.claude/skills/survey/manage-survey-portfolio/SKILL.md`
-- state schema: `.claude/state/surveys/README.md`
+- state schema: `data/surveys/README.md`
 - builder: `.claude/scripts/surveys/build-survey-portfolio.ts` / validator: `.claude/scripts/surveys/validate-survey-portfolio.ts`
 - 紐付け監査 skill: `.claude/skills/db/audit-survey-linkage/SKILL.md` (紐付け層の是正はそちら)
 - 前例パターン: theme-portfolio-manager (`.claude/skills/theme/manage-theme-portfolio/`)

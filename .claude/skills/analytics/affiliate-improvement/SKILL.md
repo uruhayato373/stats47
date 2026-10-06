@@ -22,9 +22,9 @@ co_agents: [improvement-triage]
 |---|---|---|
 | 施策一覧 | `.claude/todo/improvements.md` | AFF-NN 行の追加・status 更新 |
 | agent 用詳細 | `data/improvement/affiliate-improvement/improvement-log.md` | 検証コマンド・仮説・実測値・GA4 クエリ結果 |
-| **集約状態 (機械・★入口)** | `.claude/state/ads/affiliate-operations-latest.json` | 計測ゲート・freshness・coverage・直接配置・実験・推奨アクションの現在地 (`build-affiliate-operations-state.ts` が生成、週次 CI 自動更新) |
-| 在庫 snapshot (機械) | `.claude/state/ads/inventory-*.json` | audit script が生成、ループの入力 |
-| compliance snapshot (機械) | `.claude/state/ads/compliance-latest.json` | 直接配置の孤立・PR 表記監査 (`/audit-affiliate-compliance`) |
+| **集約状態 (機械・★入口)** | `data/affiliate/affiliate-operations-latest.json` | 計測ゲート・freshness・coverage・直接配置・実験・推奨アクションの現在地 (`build-affiliate-operations-state.ts` が生成、週次 CI 自動更新) |
+| 在庫 snapshot (機械) | `data/affiliate/inventory-*.json` | audit script が生成、ループの入力 |
+| compliance snapshot (機械) | `data/affiliate/compliance-latest.json` | 直接配置の孤立・PR 表記監査 (`/audit-affiliate-compliance`) |
 
 > **status モードはまず集約状態を読む**: `affiliate-operations-latest.json` の `measurementGate` /
 > `coverage` / `recommendedActions` が現在地。**在庫ゼロ軸や gap は SKILL に固定記載しない** — 必ず
@@ -86,7 +86,7 @@ npx tsx .claude/scripts/ads/audit-affiliate-inventory.ts
 - **sizeViolations** — canonical(300×250/250×250/320×100/text) 以外。`error` tier は新規混入 (要是正)
 - **配置偏り** — blog-bottom に集中していないか、高トラフィック page type に枠があるか
 
-JSON は `.claude/state/ads/inventory-latest.json` (`byVertical` / `coverage.gapVerticals` / `sizeViolations` を含む)。`--json` で stdout に JSON のみ。`--check-size` で非 canonical・非 legacy があれば exit 1 (pre-commit ゲート)。
+JSON は `data/affiliate/inventory-latest.json` (`byVertical` / `coverage.gapVerticals` / `sizeViolations` を含む)。`--json` で stdout に JSON のみ。`--check-size` で非 canonical・非 legacy があれば exit 1 (pre-commit ゲート)。
 
 ### Step 2: GA4 実績取得 (observe モードのみ)
 
@@ -113,7 +113,7 @@ node .claude/scripts/ads/fetch-affiliate-ga4.cjs \
 >    (`<date>.json` / `latest.json` / `index.json`) へ push、git には週次集約
 >    `data/affiliate/ga4-affiliate-history.csv` (`append-ga4-affiliate-history.mjs`) だけを commit-back する**。
 >    ローカルで生 snapshot が要るときは `npm run state:pull -- ads/ga4-affiliate` (公開 URL・認証不要) で
->    `.claude/state/ads/live/ga4-affiliate/` に取得する (gitignore 済み)。CIの運用経路は確定7日だけを受理し、
+>    `data/affiliate/live/ga4-affiliate/` に取得する (gitignore 済み)。CIの運用経路は確定7日だけを受理し、
 >    日曜22:00 JSTに本実行、月曜22:00 JSTに同じ窓を自動再取得する。T14d / T28d はhistory.csvの
 >    非重複2週 / 4週で判定する。R2 object/indexのread-back、develop上の確定7日履歴行、measurementGateを全て検証し、
 >    schedule失敗は即時Issueへupsert、月曜の復旧成功で自動closeする。

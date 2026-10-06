@@ -1,16 +1,16 @@
 ---
 name: manage-survey-portfolio
 domain: data
-description: 75 survey のポートフォリオを評価・更新する。surveys.json × 紐付け監査 × R2 all.json × survey-editorial.ts × GSC/GA4 snapshot を突合して .claude/state/surveys/portfolio.json を再構築し、編集ハブ化候補の選別・lifecycle 判定・実験の baseline/効果測定を管理する。survey-curator が実行。Use when user says "surveyポートフォリオ", "survey棚卸し", "survey評価", "manage-survey-portfolio".
+description: 75 survey のポートフォリオを評価・更新する。surveys.json × 紐付け監査 × R2 all.json × survey-editorial.ts × GSC/GA4 snapshot を突合して data/surveys/portfolio.json を再構築し、編集ハブ化候補の選別・lifecycle 判定・実験の baseline/効果測定を管理する。survey-curator が実行。Use when user says "surveyポートフォリオ", "survey棚卸し", "survey評価", "manage-survey-portfolio".
 allowed-tools: Read, Grep, Glob, Bash
 primary_agent: survey-curator
 ---
 
 # manage-survey-portfolio
 
-survey ポートフォリオ (`.claude/state/surveys/`) の継続評価サイクルを回す。
+survey ポートフォリオ (`data/surveys/`) の継続評価サイクルを回す。
 運用設計の正典: `.claude/skills/survey/manage-survey-portfolio/reference/surveyポートフォリオ運用.md`。
-schema・判定規律の正典: `.claude/state/surveys/README.md`。
+schema・判定規律の正典: `data/surveys/README.md`。
 
 > **役割分離 (`/audit-survey-linkage` と重複しない)**: **紐付け層** (未分類回収・辞書追記・orphan
 > 物理削除・config.surveyId 是正) は従来どおり `/audit-survey-linkage` が実行エンジン。本スキルは

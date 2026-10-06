@@ -57,7 +57,7 @@ C28/07のDBFはCP932。N08/21では公式GeoJSONとDBFの備考1件が途中で�
 同梱UTF-8 GMLの関係ID・設置期間・変遷IDを照合して復元する。ZIPのSHAが変われば停止する。
 一般の再デコードや名称からの推測では修復しない。
 
-単体ページの確認状況は `.claude/state/geo/source-pages.json`、残作業は
+単体ページの確認状況は `data/geo/source-pages.json`、残作業は
 `.claude/todo/backlog.md` の `GEO-SOURCE-PAGES-01` を参照する。
 
 ### 単体GISのカード画像
@@ -66,7 +66,7 @@ C28/07のDBFはCP932。N08/21では公式GeoJSONとDBFの備考1件が途中で�
 入力はローカルの公開catalog/itemと原典GIS（ローカル優先、無ければR2）。
 `R2_PUBLIC_FETCH_URL` はWindowsの開発gatewayなどの読み込み先を指定できる。
 `--ids L01,N02` で対象を限定できる。出力は `.local/image-staging/geo-thumbnails/`、
-機械進捗は `.claude/state/geo/source-thumbnails.json`。元データは変更しない。
+機械進捗は `data/geo/source-thumbnails.json`。元データは変更しない。
 
 表示範囲・版・配布ファイル・表示例ラベルの正典は
 `apps/web/src/features/geo-analysis/lib/geo-source-thumbnail.ts`。
@@ -82,7 +82,7 @@ C28/07のDBFはCP932。N08/21では公式GeoJSONとDBFの備考1件が途中で�
 `node --import tsx apps/web/scripts/audit-geo-source-thumbnails.ts --browser` で全画像の寸法・SHA・
 版/入力系譜・色の付いた画素を確認し、320/390/768/1280/1440pxのカード・検索・リンクを検査する。
 画像見本とスクリーンショットは `.local/geo-source-thumbnails/`、検証結果は
-`.claude/state/geo/source-thumbnails-audit.json`。本番公開とは別のローカル検証である。
+`data/geo/source-thumbnails-audit.json`。本番公開とは別のローカル検証である。
 本番反映時は生成に `--plan` を付けてremoteを照合し、
 `packages/r2-storage/src/scripts/push-generated-image-set.ts --plan .local/image-generation-publish-plan-geo-thumbnails.json`
 へ渡す（2時間有効の共通plan）。既定のローカル生成はアップロード可能なplanを作らない。
@@ -100,7 +100,7 @@ C28/07のDBFはCP932。N08/21では公式GeoJSONとDBFの備考1件が途中で�
    `apply=true` を指定する。CIは対象・SHA検証→S3照合→共通publisher dry-run→反映→
    全画像・manifestのS3/public GETによるSHA照合を行う。サイト本体はデプロイしない。
 4. artifact `geo-thumbnail-publication` のJSONを
-   `.claude/state/geo/source-thumbnails-publication.json` へ取り込み、一時draft releaseを削除する。
+   `data/geo/source-thumbnails-publication.json` へ取り込み、一時draft releaseを削除する。
    反映失敗時は未完了として残し、再実行時はremote照合からやり直す。
 
 受け渡しでは生成したPCのrendererHashをGitの生成記録で固定し、別OSで再描画しない。

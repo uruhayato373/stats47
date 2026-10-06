@@ -4,7 +4,7 @@
  *
  * ★対象 metric 以外を書かない (doc 43 §7 WP3 step 3)。1 回の実行 = 1 metric。
  * ★sourceMode は呼び出し側が明示する (このスクリプトは official/derived を推測しない)。
- *   判定根拠は `.claude/state/geo-scope/wp0-inventory-*.json` を参照すること。
+ *   判定根拠は `data/geo/scope/wp0-inventory-*.json` を参照すること。
  * ★derived-additive は `JAPAN_DERIVED_METRIC_DECISIONS` で採用済みのmetricだけを扱う。
  *   derived-ratio は分子・分母の全国artifactが揃うまで拒否する。
  * ★既定は local write のみ (`.local/r2/app/japan/...`)。remote R2 push は別スクリプト

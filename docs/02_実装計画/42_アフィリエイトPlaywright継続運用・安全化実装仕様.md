@@ -71,11 +71,11 @@ Claude Code と Playwright で継続運用するための実装仕様である�
 
 | 観測                                                       | 根拠                                                   | 判断                                      |
 | ---------------------------------------------------------- | ------------------------------------------------------ | ----------------------------------------- |
-| active 広告 260 件、広告主 160 社、10 vertical に gap なし | `.claude/state/ads/inventory-latest.json`              | 新規申請数は現在の制約ではない            |
+| active 広告 260 件、広告主 160 社、10 vertical に gap なし | `data/affiliate/inventory-latest.json`              | 新規申請数は現在の制約ではない            |
 | A8 の新規 scout / apply は `APPLY_NEW=0`                   | `scripts/scheduled/scout-asp-weekly.sh`                | 計測復旧まで維持                          |
 | もしも / afb は apply 後の承認追跡・harvest が未実装       | `/affiliate-operate`                                   | `ASP-CONTINUITY-01` の主対象              |
-| GA4 operations state が旧データでも `ready`                | `.claude/state/ads/affiliate-operations-latest.json`   | event schema gate が必要                  |
-| 直接配置 2 件に PR 表記不足                                | `.claude/state/ads/compliance-latest.json`             | 公開前 fail gate が必要                   |
+| GA4 operations state が旧データでも `ready`                | `data/affiliate/affiliate-operations-latest.json`   | event schema gate が必要                  |
+| 直接配置 2 件に PR 表記不足                                | `data/affiliate/compliance-latest.json`             | 公開前 fail gate が必要                   |
 | A8 `check-approval` の全ページ走査は実装済 (2026-08-04)    | `a8-browser.ts` `collectPartneredProgramIds`           | 残りは上限到達の `partial` 表現 (§8.1)    |
 | cron は各失敗を echo 後に継続して握り潰す                  | `scout-asp-weekly.sh`                                  | partial / failed を exit と health に反映 |
 | append の失敗復元が `git checkout --`                      | `append-affiliate-ads.ts`                              | 既存未コミット変更を消し得る              |

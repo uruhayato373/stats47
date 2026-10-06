@@ -105,7 +105,7 @@ async function resolveImage(source: string, mediaDir: string): Promise<{ source:
 }
 
 function loadIgSchedules(): Array<Parameters<typeof itemsFromIgSchedule>[0][number]> {
-  const dir = join(PROJECT_ROOT, ".claude/state");
+  const dir = join(PROJECT_ROOT, "data/sns");
   return readdirSync(dir)
     .filter((f) => /^instagram-w\d+-schedule\.json$/.test(f))
     .flatMap((f) => {

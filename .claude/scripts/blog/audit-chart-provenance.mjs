@@ -32,8 +32,8 @@
  * Usage:
  *   node .claude/scripts/blog/audit-chart-provenance.mjs [--limit N] [--json] [--staged]
  *
- * 出力: .claude/state/blog/chart-provenance-queue.json (機械用)
- *       .claude/state/blog/chart-provenance-LATEST.md  (人間用)
+ * 出力: data/blog/chart-provenance-queue.json (機械用)
+ *       data/blog/chart-provenance-LATEST.md  (人間用)
  * exit: 欠陥 0 → 0 / 欠陥あり → 3 (CI は件数ラチェットで判定する)
  *
  * 正典: .claude/rules/blog-data-schema.md §1.5 / §1.7
@@ -55,7 +55,7 @@ const PROJECT_ROOT = path.resolve(
   '..'
 );
 const R2 = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
-const STATE_DIR = path.join(PROJECT_ROOT, '.claude/state/blog');
+const STATE_DIR = path.join(PROJECT_ROOT, 'data/blog');
 const QUEUE_IN = path.join(STATE_DIR, 'svg-lineage-queue.json');
 const CONC = 24;
 const args = process.argv.slice(2);
@@ -368,7 +368,7 @@ ${byVerdict.map(([v, n]) => `- \`${v}\`: **${n}**${DEFECTS.has(v) ? ' ← 欠陥
 ## 欠陥一覧
 ${defects.length === 0 ? 'なし' : defects.map((d) => `- \`${d.verdict}\` ${d.slug}/${d.base} (kind=${d.kind}) — ${String(d.detail).slice(0, 100)}`).join('\n')}
 
-真実源: \`.claude/state/blog/chart-provenance-queue.json\` / 正典: \`.claude/rules/blog-data-schema.md §1.5\`
+真実源: \`data/blog/chart-provenance-queue.json\` / 正典: \`.claude/rules/blog-data-schema.md §1.5\`
 `;
 fs.writeFileSync(path.join(STATE_DIR, 'chart-provenance-LATEST.md'), md);
 
@@ -379,7 +379,7 @@ if (JSON_OUT) {
   for (const [v, n] of byVerdict)
     log(`  ${String(n).padStart(4)}  ${v}${DEFECTS.has(v) ? '  ← 欠陥' : ''}`);
   log(
-    `\n[provenance] 欠陥 ${defects.length} 件 / 書込: .claude/state/blog/chart-provenance-{queue.json,LATEST.md}`
+    `\n[provenance] 欠陥 ${defects.length} 件 / 書込: data/blog/chart-provenance-{queue.json,LATEST.md}`
   );
 }
 process.exit(defects.length > 0 ? 3 : 0);

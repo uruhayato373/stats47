@@ -10,7 +10,7 @@ import { query as queryPosts } from "./posts-store";
  * buzz-map カタログの読み取り + 表示用 decorate。
  *
  * 正典: .claude/rules/buzz-map-standards.md §4-5。
- * SSOT は .claude/state/sns/buzz-map-catalog.json (builder = build-buzz-map-catalog.ts が生成)。
+ * SSOT は data/sns/buzz-map-catalog.json (builder = build-buzz-map-catalog.ts が生成)。
  * この module は read-only (catalog を書き換えない、書込は builder CLI 経由のみ)。
  *
  * decorate は「ローカル素材の有無」「posts.json の draft/scheduled/posted 状態」を
@@ -56,7 +56,7 @@ interface CatalogFile {
 }
 
 function catalogPath(): string {
-  return path.join(projectRoot(), ".claude/state/sns/buzz-map-catalog.json");
+  return path.join(projectRoot(), "data/sns/buzz-map-catalog.json");
 }
 
 function loadCatalog(): CatalogFile {

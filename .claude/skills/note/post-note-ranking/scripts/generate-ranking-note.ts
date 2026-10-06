@@ -8,7 +8,7 @@ const PROJECT_ROOT = path.resolve(__dirname, '../../../../..');
 const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
 const BLOCKER_STATE_PATH = path.join(
   PROJECT_ROOT,
-  '.claude/state/content-operations/note-generation-blockers.json'
+  'data/content-operations/note-generation-blockers.json'
 );
 
 class GenerationBlockedError extends Error {

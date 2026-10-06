@@ -20,7 +20,7 @@ primary_agent: x-strategist
 指標発見索引はローカルの再生成可能キャッシュ (DBレス互換)。指標を追加/改名したら再生成する:
 
 ```bash
-npx tsx .claude/scripts/sns/build-discovery-index.ts   # → .claude/state/sns/metric-discovery-index.json (2211件)
+npx tsx .claude/scripts/sns/build-discovery-index.ts   # → data/sns/metric-discovery-index.json (2211件)
 ```
 
 ## フロー

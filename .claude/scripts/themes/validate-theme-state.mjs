@@ -2,8 +2,8 @@
 /**
  * validate-theme-state.mjs — テーマポートフォリオ state の決定的 lint
  *
- * 対象: .claude/state/themes/{portfolio,experiments}.json
- * schema・判定規律の正典: .claude/state/themes/README.md
+ * 対象: data/themes/{portfolio,experiments}.json
+ * schema・判定規律の正典: data/themes/README.md
  * 運用設計: .claude/skills/theme/manage-theme-portfolio/reference/テーマポートフォリオ運用.md
  *
  * enforce する規律 (根拠なし判定・重複実験を機械的に禁止する):
@@ -36,7 +36,7 @@ import { experimentIssues, assessCheckpoint, latestObservation } from "./evaluat
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
-const STATE_DIR = process.env.STATE_DIR || path.join(PROJECT_ROOT, ".claude/state/themes");
+const STATE_DIR = process.env.STATE_DIR || path.join(PROJECT_ROOT, "data/themes");
 const CATALOG_INDEX =
   process.env.CATALOG_INDEX || path.join(PROJECT_ROOT, "packages/data-configs/src/theme-catalog/index.ts");
 const jsonMode = process.argv.includes("--json");

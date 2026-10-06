@@ -279,7 +279,7 @@ async function listNoteEntries(): Promise<NoteEntry[]> {
     }
   };
   const out = new Map<string, NoteEntry>();
-  const draft = readJson('.claude/state/note-draft-index.json') as {
+  const draft = readJson('data/note/note-draft-index.json') as {
     drafts?: Record<string, { vertical?: string; r2_path?: string; r2_access?: string }>;
   } | null;
   for (const [slug, v] of Object.entries(draft?.drafts ?? {})) {
@@ -302,7 +302,7 @@ async function listNoteEntries(): Promise<NoteEntry[]> {
       });
     }
   }
-  const pub = readJson('.claude/state/note-published-urls.json') as {
+  const pub = readJson('data/note/note-published-urls.json') as {
     articles?: Record<string, { vertical?: string; r2_path?: string; r2_access?: string }>;
   } | null;
   for (const [slug, v] of Object.entries(pub?.articles ?? {})) {

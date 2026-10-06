@@ -60,7 +60,7 @@ variants を key 順に 4 つへ分けたうちの 1 組 (ISO 週番号で決め
 `<種類>--<id>`) を使う。縦長の全体像は縮小されて文字が
 読めないので、画面 1 枚分ずつ切り出した画像 (`tilePaths`、R2 には上げない) を読ませる。
 **記録と通知の判断はスクリプトが行う** (`record-ui-review.ts`): 撮影していない画面を指す指摘や形の崩れた
-指摘は捨て、結果を `.claude/state/metrics/page-quality/ui-review-latest.json` に残す。
+指摘は捨て、結果を `data/page-quality/metrics/ui-review-latest.json` に残す。
 agent の「問題なし」は自己申告なので、execution file の `Read` 呼び出しから実際に読んだ切り出しを数え
 (`readCoverage()`・失敗した Read は数えない)、`readCoverage` に枚数を残す。1 枚でも読み残したページは
 `reviewedPages` に入れず (その週は過去の指摘を閉じない)、読み残しがあれば指摘 0 件でも通知する (2026-10-02)。
@@ -73,7 +73,7 @@ agent の「問題なし」は自己申告なので、execution file の `Read` 
 
 以前は Issue に載るだけで、カードは人が手で起こしていた (2026-09-23 の agent の指摘 6 件のうち 4 件はカードに
 ならなかった)。今は週次監査の中で `ui-findings.ts --sync` が指摘を **UI 指摘キュー**
-(`.claude/state/page-quality/ui-findings-queue.json`) に記録し、未対応のものをカードにする。形は GSC カバレッジ
+(`data/page-quality/ui-findings-queue.json`) に記録し、未対応のものをカードにする。形は GSC カバレッジ
 是正キュー (`gsc-coverage-remediation` の Phase 4) と同じ。判定は `lib/ui-findings.ts` の純粋関数。
 
 1. **検査**: 機械検出 (`UI_METRIC_KEYS` の違反。key は `machine|<url>|<metric>`) と agent の指摘 (ページの種類ごとに
@@ -83,7 +83,7 @@ agent の「問題なし」は自己申告なので、execution file の `Read` 
    3,312 件・1.96MB になり、リポジトリ衛生の 1MB 上限を超えて全員のコミットが止まった。週次ボットのコミットは
    pre-commit を通らないので、commit 前に `check-repo-hygiene.cjs --staged --baseline` を掛けている。
 2. **起票**: pending をページの種類ごとに 1 枚の `UI-FIX-<種類>-<日付>` カード (`[実行:sweep]`・10 件まで) にする。
-   その種類のカードが開いている間は次を出さない。対象は `.claude/state/page-quality/backlog-batches/<ID>.txt`。
+   その種類のカードが開いている間は次を出さない。対象は `data/page-quality/backlog-batches/<ID>.txt`。
 3. **修正**: 対話セッションで優先順位を見て選んだときに直し (2026-09-27 に日次の自動処理を停止)、`--mark-fixed` / `--mark-by-design` / `--mark-owner` で印を付ける。
    completion gate は `ui-findings.ts --assert-handled <batch>` (全件が pending でなく、done 以外は理由 note 付き)。
    オーナー判断が要るもの (デザイン方針・画像制作・外部契約) は `[実行:対話]` のカードを起票し `--card` で紐付ける。
@@ -160,7 +160,7 @@ agent の「問題なし」は自己申告なので、execution file の `Read` 
 
 閾値SSOTは `.claude/skills/analytics/performance-improvement/page-quality-budgets.json`
 (既存のPSI用`budgets.json`とは別ファイル・別スキーマ)。`comparison: absolute`は単発閾値、
-`delta_pct`は直近履歴 (`.claude/state/metrics/page-quality/history.csv`) からの増加率(%)を見る
+`delta_pct`は直近履歴 (`data/page-quality/metrics/history.csv`) からの増加率(%)を見る
 (初回計測はdelta判定をskipし、退行扱いにしない)。取得不能な指標 (Playwright timeout等) は
 `{value: null, reason}` で保存し、推測値で埋めない。閾値を変えるときは
 `npm run page-quality:aggregate`で保存済みスナップショットを再クロールせず再評価できる。
@@ -169,10 +169,10 @@ agent の「問題なし」は自己申告なので、execution file の `Read` 
 
 - **週次全件の生データは R2 `state/page-quality/`** (`latest.json` 約 10MB・URL ごとの `history.csv` は直近 84 日・
   `index.json`・`screenshots/`)。書き手は CI だけ。ローカルは `npm run state:pull -- page-quality` で
-  `.claude/state/page-quality/live/` (gitignore) に取得し、管理画面と `page-quality:aggregate` は live/ を先に読む。
+  `data/page-quality/live/` (gitignore) に取得し、管理画面と `page-quality:aggregate` は live/ を先に読む。
   git に置かないのは、2026-09-23 に初めて全件が完了したとき 6,229 URL の結果 (10MB) と同じ内容の snapshot (10MB) が
   git に書き戻され、リポジトリ衛生の 1MB 上限を超えたため。週次の実行開始時に前回分を R2 から読んで前回比に使う
-- **git (`.claude/state/metrics/page-quality/`)** は集約だけ: `LATEST.md` (違反は上位 100 件まで)・
+- **git (`data/page-quality/metrics/`)** は集約だけ: `LATEST.md` (違反は上位 100 件まで)・
   `weekly-summary.csv` (テンプレート別の週次件数)・`ui-review-latest.json`。代表URL検査 (`page-quality:check`) の
   `latest.json` / `history.csv` はこれまでどおり git 側に書く
 

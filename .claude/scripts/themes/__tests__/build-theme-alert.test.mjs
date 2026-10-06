@@ -22,9 +22,9 @@ function run(
   const cwd = fs.mkdtempSync(path.join(os.tmpdir(), 'theme-alert-'));
   t.after(() => fs.rmSync(cwd, { recursive: true, force: true }));
   for (const [file, value] of [
-    ['.claude/state/themes/quality.json', quality],
-    ['.claude/state/theme-charts/live-audit.json', live],
-    ['.claude/state/themes/ci-followup.json', followup],
+    ['data/themes/quality.json', quality],
+    ['data/themes/charts/live-audit.json', live],
+    ['data/themes/ci-followup.json', followup],
   ]) {
     if (value) {
       const filename = path.join(cwd, file);

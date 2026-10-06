@@ -18,7 +18,7 @@
  *
  * ## 段階導入 (縮小専用ラチェット)
  *
- * 既存違反は baseline (`.claude/state/data/seo-meta-facts-baseline.json`) に固定し、
+ * 既存違反は baseline (`data/data-quality/seo-meta-facts-baseline.json`) に固定し、
  * **新規混入だけ**を止める。全件を一度に直そうとすると恒久的に赤いゲートになり、
  * 運用で無効化される (`check-value-format.cjs` と同じ方針)。baseline は縮小専用で、
  * 是正のたびに `--update-baseline` で減らす。
@@ -43,7 +43,7 @@ import { SITE } from "@stats47/types";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(__dirname, "../../..");
-const BASELINE = resolve(REPO_ROOT, ".claude/state/data/seo-meta-facts-baseline.json");
+const BASELINE = resolve(REPO_ROOT, "data/data-quality/seo-meta-facts-baseline.json");
 const R2 = process.env.R2_PUBLIC_FETCH_URL ?? SITE.r2PublicBaseUrl;
 const CONCURRENCY = 16;
 

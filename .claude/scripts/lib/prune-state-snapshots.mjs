@@ -34,7 +34,7 @@ export const RETENTION_POLICIES = Object.freeze({
     keep: 30,
   },
   "page-quality": {
-    directory: ".claude/state/metrics/page-quality/snapshots",
+    directory: "data/page-quality/metrics/snapshots",
     pattern: /^\d{4}-\d{2}-\d{2}\.json$/,
     keep: 8,
   },
@@ -49,7 +49,7 @@ export const RETENTION_POLICIES = Object.freeze({
     keep: 8,
   },
   releases: {
-    directory: ".claude/state/metrics/releases",
+    directory: "data/releases",
     pattern: /^\d{4}-\d{2}-\d{2}-.+\.json$/,
     keep: 8,
   },
@@ -61,12 +61,12 @@ export const RETENTION_POLICIES = Object.freeze({
     keep: 20,
   },
   "business-plan": {
-    directory: ".claude/state/business-plan/history",
+    directory: "data/business-plan/history",
     pattern: /^\d{4}-\d{2}-\d{2}\.json$/,
     keep: 12,
   },
   "search-growth-manifests": {
-    directory: ".claude/state/search-growth/manifests",
+    directory: "data/search-growth/manifests",
     pattern: /^\d{4}-W\d{2}\.json$/,
     keep: 8,
   },

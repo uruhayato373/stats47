@@ -12,8 +12,8 @@
  *   node .claude/scripts/estat/fetch-estat-meta.mjs --list <statsids.json>
  *   node .claude/scripts/estat/fetch-estat-meta.mjs --ids 0003355476,0003355295
  *
- * 出力: .claude/state/estat/meta/<statsDataId>.json (次元構造の要約)
- *       .claude/state/estat/meta-summary.json        (全テーブルの次元サマリ)
+ * 出力: data/estat/meta/<statsDataId>.json (次元構造の要約)
+ *       data/estat/meta-summary.json        (全テーブルの次元サマリ)
  */
 
 import { config } from "dotenv";
@@ -58,7 +58,7 @@ const proxyUrl = process.env.HTTPS_PROXY || process.env.HTTP_PROXY;
 const fetchOpts = proxyUrl ? { dispatcher: new ProxyAgent(proxyUrl) } : {};
 
 const BASE_URL = ESTAT_META_INFO_URL;
-const OUT_DIR = path.join(PROJECT_ROOT, ".claude/state/estat/meta");
+const OUT_DIR = path.join(PROJECT_ROOT, "data/estat/meta");
 const DELAY_MS = 500;
 
 function pickString(v) {
@@ -144,11 +144,11 @@ async function main() {
     await new Promise((r) => setTimeout(r, DELAY_MS));
   }
   fs.writeFileSync(
-    path.join(PROJECT_ROOT, ".claude/state/estat/meta-summary.json"),
+    path.join(PROJECT_ROOT, "data/estat/meta-summary.json"),
     JSON.stringify(summaries, null, 2),
   );
-  console.log(`\n  → .claude/state/estat/meta/*.json (${statsDataIds.length} 件)`);
-  console.log(`  → .claude/state/estat/meta-summary.json`);
+  console.log(`\n  → data/estat/meta/*.json (${statsDataIds.length} 件)`);
+  console.log(`  → data/estat/meta-summary.json`);
 }
 
 main().catch((e) => {

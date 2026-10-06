@@ -63,7 +63,7 @@ function parseFindings(svg) {
 }
 
 function loadTargets() {
-  const q = JSON.parse(fs.readFileSync(path.join(PROJECT_ROOT, ".claude/state/blog/svg-lineage-queue.json"), "utf8"));
+  const q = JSON.parse(fs.readFileSync(path.join(PROJECT_ROOT, "data/blog/svg-lineage-queue.json"), "utf8"));
   let entries = q.entries.filter((e) => e.status === "neither" && e.chartType === "findings").map((e) => ({ slug: e.slug, base: e.base }));
   if (BASE_ARG) { const [s, b] = BASE_ARG.split("/"); entries = entries.filter((e) => e.slug === s && e.base === b); }
   return entries;

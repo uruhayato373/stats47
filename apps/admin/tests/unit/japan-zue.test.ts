@@ -2,7 +2,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { cleanupFixtureRoot, makeFixtureRoot } from "../helpers/fixture-root";
 
-const REL = ".claude/state/source-inventory/japan-zue/2025-26/evidence-summary.json";
+const REL = "data/source-inventory/japan-zue/2025-26/evidence-summary.json";
 const SUMMARY = JSON.stringify({
   sourceKey: "japan-zue",
   edition: "2025-26",

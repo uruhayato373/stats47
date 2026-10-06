@@ -10,7 +10,7 @@
  * 紐付けの導出ロジックは書かない: itemCount 等は audit-survey-linkage.ts (--json) の実測値を転記する
  * (resolveSurveyLinkage への一本化 — survey-linkage-standards.md §5)。
  *
- * schema・判定規律の正典: .claude/state/surveys/README.md
+ * schema・判定規律の正典: data/surveys/README.md
  * 運用設計: .claude/skills/survey/manage-survey-portfolio/reference/surveyポートフォリオ運用.md
  *
  * Usage:
@@ -34,7 +34,7 @@ import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
-const STATE_DIR = path.join(PROJECT_ROOT, ".claude/state/surveys");
+const STATE_DIR = path.join(PROJECT_ROOT, "data/surveys");
 const REVIEW_DIR = path.join(
   PROJECT_ROOT,
   ".claude/skills/survey/manage-survey-portfolio/reference/reviews",

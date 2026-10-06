@@ -190,14 +190,14 @@ for (const metric of BUSINESS_PLAN_2026.metrics) {
     errors.push('KPI ツリー: kpiTier=nsm の metric はちょうど1つにする');
   }
   // 施策・レーン表・計測サイクルはこの写しを読む。catalog だけ直して再生成を忘れると参照検査が古い id 集合で走る
-  const kpiTreePath = path.join(repoRoot, '.claude/state/business-plan/kpi-tree.json');
+  const kpiTreePath = path.join(repoRoot, 'data/business-plan/kpi-tree.json');
   const expected = JSON.stringify(kpiTree);
   const actual = fs.existsSync(kpiTreePath)
     ? JSON.stringify(JSON.parse(fs.readFileSync(kpiTreePath, 'utf8')).nodes)
     : null;
   if (actual !== expected) {
     errors.push(
-      'KPI ツリー: .claude/state/business-plan/kpi-tree.json が catalog とずれている。`npm run business-plan:build-state` で再生成する'
+      'KPI ツリー: data/business-plan/kpi-tree.json が catalog とずれている。`npm run business-plan:build-state` で再生成する'
     );
   }
 }

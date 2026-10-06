@@ -11,7 +11,7 @@ primary_agent: theme-component-builder
 # テーマの継続改善
 
 `manage-theme-portfolio/reference/テーマポートフォリオ運用.md` と
-`.claude/state/themes/README.md` を正典とする。
+`data/themes/README.md` を正典とする。
 定期実行は `theme-chart-audit-weekly.yml` のCIが担う（毎日期日判定、週次/期日全量検査、月次原典確認、検証付きdraft PR）。ローカル定期処理を重複登録しない。
 
 1. `npm run theme:portfolio:audit` を実行し、全現行テーマの構成、公開値、前回退行、

@@ -4,7 +4,7 @@
 /**
  * Threads 予約投稿 (GitHub Actions cron 用)。
  *
- * `.claude/state/threads-schedule.json` の中から「予定時刻 (JST) を過ぎ、遅れが 6 時間以内で、
+ * `data/sns/threads-schedule.json` の中から「予定時刻 (JST) を過ぎ、遅れが 6 時間以内で、
  * 台帳 (posts.json) に posted が無い」最早の 1 件だけを Threads API で公開し、台帳へ
  * platform="threads" で記録する。Threads API にも予約公開のパラメータが無いため
  * (https://developers.facebook.com/docs/threads/reference/publishing/ ・アクセス日 2026-09-23)、
@@ -49,7 +49,7 @@ const store = require("../lib/sns-posts-store.cjs");
 const core = require("../lib/threads-core.cjs");
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
-const DEFAULT_SCHEDULE = path.join(PROJECT_ROOT, ".claude/state/threads-schedule.json");
+const DEFAULT_SCHEDULE = path.join(PROJECT_ROOT, "data/sns/threads-schedule.json");
 const GRAPH = "https://graph.threads.net/v1.0";
 
 /** 公開前待ち (公式推奨: 平均 30 秒)。https://developers.facebook.com/docs/threads/posts */

@@ -9,7 +9,7 @@ metadata:
 
 ブログ品質「是正ループ」(2026-06-06 構築)。公開252記事の「SVGはあるが薄い/callout定型」を週次で順次底上げする閉ループ。
 
-**「次にどのブログを直すか」の真実源 = `.claude/state/blog/remediation-queue.json`** (状態付き・GSC流入×品質blockerの統合スコア・must-fixレーン最上位)。「ブログ品質を上げたい/記事を直したい」と言われたらまずこのキューを見る。
+**「次にどのブログを直すか」の真実源 = `data/blog/remediation-queue.json`** (状態付き・GSC流入×品質blockerの統合スコア・must-fixレーン最上位)。「ブログ品質を上げたい/記事を直したい」と言われたらまずこのキューを見る。
 
 - 仕組みの正典: `.claude/skills/blog/brushup-blog/reference/blog-remediation-loop.md`
 - 品質基準の正典: `.claude/rules/blog-quality-standards.md` (記事アーキタイプ A-E / 図あたりprose字数の床 350・550 / callout)

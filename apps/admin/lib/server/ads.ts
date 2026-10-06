@@ -16,7 +16,7 @@ import {
 import { buildAffiliatePortfolioViewModel, type AffiliatePortfolioViewModel } from "./affiliate-portfolio-view";
 
 /**
- * アフィリエイト運用の state (`.claude/state/ads/`) を読む。読み取り専用。
+ * アフィリエイト運用の state (`data/affiliate/`) を読む。読み取り専用。
  *
  * ★巨大 JSON はここで畳んで件数と内訳だけ返す。a8-catalog は 342KB、
  *   affiliate-catalog は 125KB、placement-map は 38KB あり、raw のまま
@@ -24,7 +24,7 @@ import { buildAffiliatePortfolioViewModel, type AffiliatePortfolioViewModel } fr
  *   「今どういう状態か」であって全件ではない。
  */
 
-const DIR = ".claude/state/ads";
+const DIR = "data/affiliate";
 /** GA4 実測の追跡済み snapshot と提携台帳は記録なので data/affiliate/ */
 const DATA_DIR = datasetDir("affiliate.catalog");
 

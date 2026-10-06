@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-06T08:32:16.695Z",
+  "updatedAt": "2026-10-06T21:55:18.729Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -6455,6 +6455,41 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-10-06T08:32:16.695Z"
+    },
+    "SHARE-BUTTON-CONTRAST-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-06T21:55:18.729Z",
+          "runId": null,
+          "model": "none",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "deploy-workers run 37535439478 (success)",
+              "axe color-contrast on https://stats47.jp/blog/beer-peak-month-july-to-december at 390px (0 violations)",
+              "curl HTML grep bg-[#06C755] text-[#0f172a]"
+            ],
+            "pass": true
+          },
+          "evidence": "af50280e を PR #1086 で本番反映 (a3b9944d)。同じ URL・390px の axe color-contrast が 0 件 (修正前 3 件)",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-06T21:55:18.729Z"
     }
   }
 }

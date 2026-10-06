@@ -12,7 +12,7 @@ export default function OpsPage() {
 
   return (
     <div className="space-y-8">
-      <PageHeading title="CI・台帳" source=".claude/state/ci/ ・ .claude/memory/" />
+      <PageHeading title="CI・台帳" source="data/ci/ ・ .claude/memory/" />
 
       {/* CI 健全性 */}
       <Section title="workflow の健全性">

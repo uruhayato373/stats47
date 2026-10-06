@@ -53,14 +53,14 @@ node .claude/scripts/blog/build-remediation-queue.mjs
 
 | 役割 | ファイル | 書く / 読む |
 |---|---|---|
-| 状態付き是正キュー (機械) | `.claude/state/blog/remediation-queue.json` | 書: build-remediation-queue.mjs / 読: brushup-blog・weekly-plan・weekly-review |
+| 状態付き是正キュー (機械) | `data/blog/remediation-queue.json` | 書: build-remediation-queue.mjs / 読: brushup-blog・weekly-plan・weekly-review |
 | キュー builder | `.claude/scripts/blog/build-remediation-queue.mjs` | — |
 | 品質棚卸し (入力) | `audit-published-blog.mjs` → `/tmp/published-blog-audit.json` | builder が fresh 取得 |
 | GSC 流入 (入力) | `data/gsc/snapshots/<週>/pages.csv` | builder が読む |
-| brushup 履歴 (wave_id) | `.claude/state/blog/auto-brushup-history.json` | done シード + dedup |
+| brushup 履歴 (wave_id) | `data/blog/auto-brushup-history.json` | done シード + dedup |
 | wave 人間向け (effect) | `.claude/todo/improvements.md` の `## [BLOG-WAVE-<wave_id>]` | brushup deploy 時に追記 / weekly-review が判定 |
 | 品質基準 (正典) | `.claude/rules/blog-quality-standards.md` | article-writer・blog-critic・quality-gate |
-| 内部リンク実在の live 監査 | `.claude/state/blog/internal-link-audit.json` (`internal-link-audit-weekly.yml`) | 日曜 04:00 JST。壊れは `link-alert` Issue + オフライン分は audit-published-blog 経由でキューにも流れる |
+| 内部リンク実在の live 監査 | `data/blog/internal-link-audit.json` (`internal-link-audit-weekly.yml`) | 日曜 04:00 JST。壊れは `link-alert` Issue + オフライン分は audit-published-blog 経由でキューにも流れる |
 
 ## キューのスコアリング (統合スコア + must-fix レーン)
 
@@ -72,7 +72,7 @@ lane = blockers>0 ? "must-fix" : expectedLift>0 ? "opportunity" : "clean"(キュ
 
 - **must-fix レーン最上位**: publish-blocker を持つ記事を必ず先に消す。レーン内は高流入×blocker が最優先、低流入 blocker も残り順次消化。
 - **opportunity レーン**: blocker は無いが CTR 改善余地 (expectedLift) がある記事 (CTR-reframe 対象)。
-- **conformance tiebreaker (天井ループ連携)**: `.claude/state/blog/winning-patterns.json` (`analyze-winning-patterns.mjs` の出力) があれば各記事に勝ちパターン適合度 (`conformance`) を付与し、同スコア時は **適合度が低い (=改善余地が大きい) 記事を先に**取り出す。天井ループ: `.claude/rules/blog-quality-standards.md` §継続品質ループ。
+- **conformance tiebreaker (天井ループ連携)**: `data/blog/winning-patterns.json` (`analyze-winning-patterns.mjs` の出力) があれば各記事に勝ちパターン適合度 (`conformance`) を付与し、同スコア時は **適合度が低い (=改善余地が大きい) 記事を先に**取り出す。天井ループ: `.claude/rules/blog-quality-standards.md` §継続品質ループ。
 
 ## 状態機械 (upsert で進捗を保持)
 
@@ -128,7 +128,7 @@ CI で Claude を動かさず (APIコストゼロ)、リライト本体は人間
 > **blog-critic の PASS (読者価値の意味判断) のみ意図的に人手ゲート**として残す
 > (「書いた本人が自己採点して公開」を構造的に不能にする設計)。
 
-現在の pending/done 件数は `.claude/state/blog/remediation-queue.json` が真実源。
+現在の pending/done 件数は `data/blog/remediation-queue.json` が真実源。
 
 ## Workflow による順次バッチリライト (2026-06-21 確立)
 

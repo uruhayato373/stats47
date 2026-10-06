@@ -17,7 +17,7 @@ import { validateKindleCatalog } from "./validator";
 import { buildBook, assertBookVersion } from "./build-book";
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../../..");
-const STATUS_PATH = resolve(REPO_ROOT, ".claude/state/products/kindle-status.json");
+const STATUS_PATH = resolve(REPO_ROOT, "data/products/kindle-status.json");
 
 const argv = process.argv.slice(2);
 const sub = argv[0] ?? "";

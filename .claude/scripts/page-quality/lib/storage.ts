@@ -5,7 +5,7 @@ import type { AuditRun, MetricKey, PageAuditResult, Violation } from "../types";
 import { PROJECT_ROOT } from "./thresholds";
 import { R2_PUBLIC_BASE_URL } from "../../lib/site-config.cjs";
 
-export const STATE_DIR = join(PROJECT_ROOT, ".claude/state/metrics/page-quality");
+export const STATE_DIR = join(PROJECT_ROOT, "data/page-quality/metrics");
 export const HISTORY_CSV = join(STATE_DIR, "history.csv");
 export const LATEST_JSON = join(STATE_DIR, "latest.json");
 export const LATEST_MD = join(STATE_DIR, "LATEST.md");
@@ -15,11 +15,11 @@ export const WEEKLY_SUMMARY_CSV = join(STATE_DIR, "weekly-summary.csv");
 /**
  * 週次全件監査の生データの置き場 (R2 `state/page-quality/`)。全 6,000 URL 超の結果は 10MB になり、
  * git に置くとリポジトリ衛生の 1MB 上限を超えて毎週膨らむ (2026-09-23 の初回完了で発覚)。
- * 書き手は CI だけ。ローカルで読むときは `npm run state:pull -- page-quality` → `.claude/state/page-quality/live/`。
+ * 書き手は CI だけ。ローカルで読むときは `npm run state:pull -- page-quality` → `data/page-quality/live/`。
  */
 export const R2_STATE_PREFIX = "state/page-quality";
 export const R2_STAGE_DIR = join(PROJECT_ROOT, ".local/r2", R2_STATE_PREFIX);
-export const LIVE_DIR = join(PROJECT_ROOT, ".claude/state/page-quality/live");
+export const LIVE_DIR = join(PROJECT_ROOT, "data/page-quality/live");
 /** R2 の URL ごとの履歴は直近この日数だけ残す (delta_pct 判定は直前の値しか使わない)。 */
 const FULL_HISTORY_KEEP_DAYS = 84;
 

@@ -160,7 +160,7 @@ test("stale-source: 固定入力 (health.json の coverage = 2026-06-16) で必�
 
 test("stale-source: 実 health.json を渡した freshness が classifyAge と一致する", () => {
   const health = JSON.parse(
-    fs.readFileSync(path.join(PROJECT_ROOT, ".claude/state/search-growth/health.json"), "utf8"),
+    fs.readFileSync(path.join(PROJECT_ROOT, "data/search-growth/health.json"), "utf8"),
   );
   const cov = health.sources?.coverage;
   assert.ok(cov, "health.json に coverage source が無い (契約変更)");

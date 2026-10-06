@@ -127,7 +127,7 @@ jobs:
         # job の赤は最終の Ratchet verdict step が outcome を見て付け直す。
         continue-on-error: true
         run: |
-          Q=".claude/state/blog/svg-lineage-queue.json"
+          Q="data/blog/svg-lineage-queue.json"
           test -f "$Q" || { echo "queue が無い (rebuild 失敗) → スキップ"; exit 0; }
           # byStatus.neither が集計値 (build-lineage-queue.mjs が書く)。
           # entries[].status からも数えられるが、集計値を使う方がスキーマ変更に強い。
@@ -154,7 +154,7 @@ jobs:
         id: value_ratchet
         continue-on-error: true # 理由は lineage_ratchet と同じ
         run: |
-          Q=".claude/state/blog/remediation-queue.json"
+          Q="data/blog/remediation-queue.json"
           test -f "$Q" || { echo "queue が無い (rebuild 失敗) → スキップ"; exit 0; }
           COUNT='const q=require(process.argv[1]);const n=q.summary&&q.summary.valueMismatchArticles;if(typeof n!=="number"){console.error("summary.valueMismatchArticles が無い — スキーマ変更?");process.exit(2)}console.log(n)'
           NEW=$(node -e "$COUNT" "$PWD/$Q") || { echo "::error::queue のスキーマが想定と違います (ラチェットが空振りするので失敗させます)"; exit 1; }
@@ -174,7 +174,7 @@ jobs:
         id: provenance_ratchet
         continue-on-error: true # 理由は lineage_ratchet と同じ
         run: |
-          Q=".claude/state/blog/chart-provenance-queue.json"
+          Q="data/blog/chart-provenance-queue.json"
           test -f "$Q" || { echo "queue が無い (audit 失敗) → スキップ"; exit 0; }
           COUNT='const q=require(process.argv[1]);if(typeof q.defectCount!=="number"){console.error("defectCount が無い — スキーマ変更?");process.exit(2)}console.log(q.defectCount)'
           NEW=$(node -e "$COUNT" "$PWD/$Q") || { echo "::error::queue のスキーマが想定と違います (ラチェットが空振りするので失敗させます)"; exit 1; }
@@ -184,7 +184,7 @@ jobs:
           OLD=$(node -e "$COUNT" /tmp/prov-prev.json) || { echo "前回 queue のスキーマが古い → 比較をスキップ"; exit 0; }
           echo "再取得できない出典: 前回 $OLD → 今回 $NEW"
           if [ "$NEW" -gt "$OLD" ]; then
-            echo "::error::再取得できない source.json が $OLD → $NEW に増えました。詳細: .claude/state/blog/chart-provenance-LATEST.md / 正典: .claude/rules/blog-data-schema.md §1.5"
+            echo "::error::再取得できない source.json が $OLD → $NEW に増えました。詳細: data/blog/chart-provenance-LATEST.md / 正典: .claude/rules/blog-data-schema.md §1.5"
             exit 1
           fi
           echo "✓ 増えていません (縮小専用ラチェット OK)"
@@ -223,13 +223,13 @@ jobs:
           git add -A "docs/21_ブログ記事原稿/"
 
           # remediation-queue.json は value ラチェットの baseline (summary.valueMismatchArticles)
-          stage_or_restore "$VALUE_OUTCOME" "value" .claude/state/blog/remediation-queue.json
+          stage_or_restore "$VALUE_OUTCOME" "value" data/blog/remediation-queue.json
           # svg-lineage-queue.json は lineage ラチェットの baseline (byStatus.neither)
           stage_or_restore "$LINEAGE_OUTCOME" "lineage" \
-            .claude/state/blog/svg-lineage-queue.json .claude/state/blog/svg-lineage-LATEST.md
+            data/blog/svg-lineage-queue.json data/blog/svg-lineage-LATEST.md
           # chart-provenance-queue.json は provenance ラチェットの baseline (defectCount)
           stage_or_restore "$PROVENANCE_OUTCOME" "provenance" \
-            .claude/state/blog/chart-provenance-queue.json .claude/state/blog/chart-provenance-LATEST.md
+            data/blog/chart-provenance-queue.json data/blog/chart-provenance-LATEST.md
 
           if git diff --cached --quiet; then
             echo "No queue / outbox change to commit"
@@ -255,7 +255,7 @@ jobs:
           [ "$VALUE_OUTCOME" = "failure" ] && failed="$failed value"
           [ "$PROVENANCE_OUTCOME" = "failure" ] && failed="$failed provenance"
           if [ -n "$failed" ]; then
-            echo "::error::ラチェット失敗:$failed — 該当 queue の baseline だけを据え置きました。他の queue と docs/21 outbox は反映済みなので日次ループは回っています。詳細は .claude/state/blog/*-LATEST.md"
+            echo "::error::ラチェット失敗:$failed — 該当 queue の baseline だけを据え置きました。他の queue と docs/21 outbox は反映済みなので日次ループは回っています。詳細は data/blog/*-LATEST.md"
             exit 1
           fi
           echo "✓ ラチェット 3 種すべて OK"

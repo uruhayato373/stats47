@@ -75,7 +75,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/gsc/url-inspection/
-          git add .claude/state/gsc/
+          git add data/gsc/coverage-remediation/
           git add .claude/todo/backlog.md
           git add data/gsc/coverage-drilldown/*/coverage-live-observe-urls.csv 2>/dev/null || true
           if git diff --staged --quiet; then

@@ -35,7 +35,7 @@ npm run source-vault:process -- stage-status --profile <profile>
 ### S0 保全 (初回だけ)
 `config/source-vault.json` に profile を追加し、source root (`$TMPDIR/stats47-source-vault/work/<sourceKey>/<edition>/<sourceRootName>/`) に PDF を置いて
 ```bash
-npm run source-vault -- create --profile <profile> --manifest .claude/state/source-inventory/<sourceKey>/<edition>/source-bundle-manifest.json
+npm run source-vault -- create --profile <profile> --manifest data/source-inventory/<sourceKey>/<edition>/source-bundle-manifest.json
 npm run source-vault -- upload --profile <profile> --manifest <git-manifest>
 ```
 `upload` が Drive `stats47/参考文献/<資料名>/<版>/` へ複製し、readback で sha256 を照合する。

@@ -47,7 +47,7 @@ async function main(): Promise<void> {
   if (verdict !== "PASS") throw new Error(`review.md の verdict が PASS ではない (${verdict ?? "無し"})`);
   const reviewedAt = /^date:\s*(\S+)/m.exec(reviewMd)?.[1] ?? new Date().toISOString().slice(0, 10);
 
-  const reportPath = join(ROOT, ".claude/state/products", `kindle-${version}-verification.json`);
+  const reportPath = join(ROOT, "data/products", `kindle-${version}-verification.json`);
   if (!existsSync(reportPath)) throw new Error(`検証レポートが無い: ${reportPath} (verify-epub.mts --report で作る)`);
   const verification = JSON.parse(readFileSync(reportPath, "utf8")) as {
     epubcheckExecuted?: boolean;

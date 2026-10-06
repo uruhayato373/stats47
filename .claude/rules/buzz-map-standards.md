@@ -89,7 +89,7 @@ paths:
 
 status: `案` → `spec作成` → `生成済` → `投稿済`（投稿記録の正本は posts.json。ここは企画側の一覧）。
 
-> **候補の供給源（棚卸しの真実源）は `.claude/state/sns/buzz-map-catalog.json`**
+> **候補の供給源（棚卸しの真実源）は `data/sns/buzz-map-catalog.json`**
 > （builder `.claude/scripts/sns/build-buzz-map-catalog.ts` が全供給源をスコアリング・status upsert 保持）。
 > **5 レーン**で「利用できるものすべて」を採録する。うち `curated` が SNS 企画の主レーン
 > （人が選定した企画 SSOT）、`muni`〜`mlit-dpf` は機械採録の素材レーン:
@@ -116,7 +116,7 @@ status: `案` → `spec作成` → `生成済` → `投稿済`（投稿記録の
 > builder の `--mark-*` で更新し、台帳表にも 1 行足す。型A spec は `build-buzz-map-spec.ts`（e-Stat）、
 > 型C/点→自治体 spec は `build-buzz-map-spec-ksj.ts`（KSJ/DPF）で自動生成する。
 
-> **組み合わせ（掛け合わせ・型E）は別カタログ** `.claude/state/sns/buzz-map-combo-catalog.json`
+> **組み合わせ（掛け合わせ・型E）は別カタログ** `data/sns/buzz-map-combo-catalog.json`
 > （builder `build-buzz-map-combo-catalog.ts`）。単品カタログのエントリを部品 (`parts`) に参照し、
 > 「ベース塗り × オーバーレイ（点/線）」を 2 層で列挙する: **signature combos**（物語つき定番・
 > `story` 必須・~8 本）＋ **機械候補**（e-Stat塗り×KSJ線 / e-Stat塗り×KSJ点 / KSJ指定地域×KSJ点 を
@@ -257,7 +257,7 @@ builder が `renderClass`（KSJ/DPF）または `lane`（e-Stat）から機械�
 - **2026-07-15 配色検証**: sea/land/accent×2/ランプ7段を dataviz 検証器で確認（CVD ΔE 13.4・
   海色上 social 2.98:1 → 凡例件数ラベル必須を型仕様に固定）
 - **2026-07-16 ネタカタログ + spec ヘルパー**: SNS 計画展開のため、e-Stat 由来 metric registry を一次ソースに
-  した候補カタログ（`build-buzz-map-catalog.ts` → `.claude/state/sns/buzz-map-catalog.json`、muni 210 全量 +
+  した候補カタログ（`build-buzz-map-catalog.ts` → `data/sns/buzz-map-catalog.json`、muni 210 全量 +
   pref 機械フィルタ ≤400、status upsert 保持）と型A spec 自動生成ヘルパー（`build-buzz-map-spec.ts`、R2 観測値
   → 二値化 → spec、muni は topojson N03_007 集合と join）を新設。実証 = `migration-inflow-muni`（転入超過率）。
 - **2026-07-16 型C 点プロット + KSJ/DPF レーン**: まちの計量舎の駅プロット系に対応するため **型C**（白地図＋点。

@@ -9,7 +9,7 @@
  * 選定根拠 (どの白書・調査に基づくか) も selection として保持する。
  *
  * 実体は `data/themes/catalogs/<key>.json` (2026-10-06 に TS から移した)。この型が JSON の形の正典で、
- * `data/themes/theme-catalog.schema.json` はこの型に合わせる (項目を足すときは両方を同じ差分で変える)。
+ * `data/themes/schema/theme-catalog.schema.json` はこの型に合わせる (項目を足すときは両方を同じ差分で変える)。
  *
  * カタログは生成の SSOT で、以下 2 つは生成物 (手編集禁止):
  *   - IndicatorSet TS  (`packages/types/src/indicator-sets/<theme>.ts`) … codegen

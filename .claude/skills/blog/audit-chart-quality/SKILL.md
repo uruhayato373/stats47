@@ -49,7 +49,7 @@ node .claude/scripts/blog/audit-chart-quality.mjs --base docs/21_ブログ記事
 
 出力:
 - 人間向け: 優先度順サマリ (errors → dark mode 非対応 → theme 色 inline)
-- 機械向け: `.claude/state/blog/chart-audit.json` (常に保存)
+- 機械向け: `data/blog/chart-audit.json` (常に保存)
 
 exit code: 構造 ERROR がある記事が 1 件でもあれば 3、なければ 0。
 

@@ -14,7 +14,7 @@ metadata:
 - `quality-gate.mjs`: source.json欠落を **blocker**(公開ブロック)。generator通過で新規は揃う/既存負債は復元してから公開。
 - `fetch-ranking-data-r2.mjs` はSSOT確定版を出力。
 
-**復元(段階的)**: 真実源=`.claude/state/blog/svg-lineage-queue.json`(`build-lineage-queue.mjs`生成、人間用`svg-lineage-LATEST.md`)。`restoreMethod`別に軽い順:
+**復元(段階的)**: 真実源=`data/blog/svg-lineage-queue.json`(`build-lineage-queue.mjs`生成、人間用`svg-lineage-LATEST.md`)。`restoreMethod`別に軽い順:
 - `source-backfill`: 既存json→SSOT照合(`backfill-source.mjs`)。ranking47 + line/derived3 = verified 50枚。line は series最新年値で **n>=3** 照合(一部県の時系列)。incomplete(出自不明: scatter2軸/unknown/記事リンク無)は **量産せず agent特定へ**(ユーザー方針)。
 - `ssot-restore`: ranking ambiguous + tilemap → `regenerate-tile-maps.ts`/`regenerate-ranking-cards.mjs`(SSOT照合・`--mapping`/trusted/Derived計算・自己検算)。タイルマップ62枚反映済。
 - `ssot-restore-new`: scatter(2軸metric)/line/findings消失 → 手法を新規実装(agent特定)。

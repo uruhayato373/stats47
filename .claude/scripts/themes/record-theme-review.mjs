@@ -51,8 +51,8 @@ if (
     '../../..'
   );
   const read = (file) => JSON.parse(fs.readFileSync(path.join(root, file), 'utf8'));
-  const previousPath = '.claude/state/themes/ci-review.json';
-  const input = read('.claude/state/themes/ci-followup.json');
+  const previousPath = 'data/themes/ci-review.json';
+  const input = read('data/themes/ci-followup.json');
   let report;
   if (process.argv[2] === '--replay') {
     report = JSON.parse(fs.readFileSync(process.argv[3], 'utf8'));
@@ -62,13 +62,13 @@ if (
     report = extractReview(
       JSON.parse(fs.readFileSync(process.argv[2], 'utf8')),
       input,
-      read('.claude/state/themes/experiments.json').experiments.map(e => e.themeKey),
+      read('data/themes/experiments.json').experiments.map(e => e.themeKey),
       fs.existsSync(path.join(root, previousPath)) ? read(previousPath) : null
     );
   }
   // The following check-theme-review step enforces schema, evidence, changed paths and immutable observations.
   fs.writeFileSync(
-    path.join(root, '.claude/state/themes/ci-review.json'),
+    path.join(root, 'data/themes/ci-review.json'),
     JSON.stringify(report, null, 2) + '\n'
   );
 }

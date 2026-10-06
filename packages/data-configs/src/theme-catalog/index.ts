@@ -3,7 +3,7 @@
  *
  * テーマの定義 (指標・チャート・章・選定根拠) の SSOT は `data/themes/catalogs/<key>.json`。
  * ここは JSON を読んで型を付けるだけで、合成や既定値の補完はしない (JSON の中身がそのまま表示に使われる)。
- * 形は `data/themes/theme-catalog.schema.json`、意味は `validate-theme-catalog.ts` が検査する。
+ * 形は `data/themes/schema/theme-catalog.schema.json`、意味は `validate-theme-catalog.ts` が検査する。
  * 登録テーマの IndicatorSet TS + page-components JSON は生成物であり手編集しない。
  * 新規登録: `data/themes/catalogs/<key>.json` を追加 → `./catalogs/index.ts` に import を足す → generate:catalog → commit。
  * 一覧と `data/themes/catalogs/` の一致は `__tests__/theme-catalog-json.test.ts` が検査する。

@@ -77,7 +77,7 @@ jobs:
           node .claude/scripts/metrics/record-monthly-job.mjs --job cloudflare-snapshot --status "$STATUS"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .claude/state/metrics/monthly-jobs/cloudflare-snapshot.json
+          git add data/ci/monthly-jobs/cloudflare-snapshot.json
           if git diff --cached --quiet; then exit 0; fi
           git commit -m "chore(metrics): monthly job cloudflare-snapshot $STATUS [skip ci]"
           git pull --rebase origin develop

@@ -43,7 +43,7 @@ jobs:
         run: |
           set +e
           npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts \
-            --json .claude/state/surveys/taxonomy.json --tighten-ratchet \
+            --json data/surveys/taxonomy.json --tighten-ratchet \
             2>&1 | tee /tmp/survey-taxonomy.log
           BUILD_RC="${PIPESTATUS[0]}"
           npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts \
@@ -77,9 +77,9 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .claude/state/surveys/taxonomy.json \
-            .claude/state/surveys/portfolio.json \
-            .claude/state/surveys/experiments.json \
+          git add data/surveys/taxonomy.json \
+            data/surveys/portfolio.json \
+            data/surveys/experiments.json \
             .claude/config/survey-taxonomy-ratchet.json
           if git diff --cached --quiet; then
             echo "No survey state changes"
@@ -112,7 +112,7 @@ jobs:
             echo '```'
             echo ""
             echo "正典: \`.claude/rules/survey-linkage-standards.md\`"
-            echo "state: \`.claude/state/surveys/{taxonomy,portfolio,experiments}.json\`"
+            echo "state: \`data/surveys/{taxonomy,portfolio,experiments}.json\`"
           } > /tmp/survey-taxonomy-issue.md
 
           gh label create survey-taxonomy-alert \

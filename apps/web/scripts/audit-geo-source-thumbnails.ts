@@ -299,7 +299,7 @@ async function main() {
     productionVerified: false,
   };
   writeFileSync(
-    join(root, '.claude/state/geo/source-thumbnails-audit.json'),
+    join(root, 'data/geo/source-thumbnails-audit.json'),
     JSON.stringify(result, null, 2) + '\n'
   );
   console.log(

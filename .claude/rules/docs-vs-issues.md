@@ -28,7 +28,7 @@ skill、agent、prompt、READMEへ複製しない。
 2. 未完了の行動なら`.claude/todo/`の固定バックログへ追加する。
 3. コードに密結合する仕様なら対象コード近傍の`README.md`へ置く。
 4. agentの実行規約・手順なら`.claude/rules/`または`.claude/skills/`へ置く。
-5. 機械状態・再生成可能値なら`.claude/state/`へ置く。
+5. 計測・監査・是正キューなど機械が書く記録なら`data/<取得元>/`へ、エージェント運用の状態なら`.claude/state/`へ置く (判断は`data-storage.md`)。
 6. 比較用の定期履歴なら対応skillの`reference/`へ置く。
 7. 上記に統合できず、人が継続的に意思決定へ使う独立した責務がある場合だけ新規作成する。
 
@@ -57,15 +57,15 @@ skill、agent、prompt、READMEへ複製しない。
 | 技術設計・アーキテクチャ | `docs/01_技術設計/` |
 | 現在の月次・週次計画 | `.claude/todo/{monthly,weekly}.md`（上書き。履歴はgit） |
 | agent用週次レビュー | `data/reviews/weekly/YYYY-Www.md` |
-| 週次メトリクス | `.claude/state/metrics/`（機械状態。人手Markdownを複製しない） |
+| 週次メトリクス | `data/<取得元>/`（機械が書く記録。人手Markdownを複製しない） |
 | 批判的レビュー・事前検死・監査の未完了策 | `.claude/todo/{improvements,backlog}.md`。優先度・実行順・停止条件・完了条件を付ける |
-| 定期レポート・比較用履歴 | 対応skillの `reference/`。機械値だけなら `.claude/state/`。人間向け全文をdocsへ複製しない |
+| 定期レポート・比較用履歴 | 対応skillの `reference/`。機械値だけなら `data/<取得元>/`。人間向け全文をdocsへ複製しない |
 | 改善施策の一覧・TODO (gsc / ga4 / adsense / psi / affiliate / cloudflare-cost 等) | `.claude/todo/improvements.md` |
 | 未分類の思いつき TODO | `.claude/todo/backlog.md` へカード起票 (タグ無し = 分類待ちとして検査が集計 → `.claude/rules/todo-standards.md`) |
 | セッション残タスク | `.claude/todo/backlog.md` へカード起票 (改善施策のみ improvements.md。2026-07-22 に一時ハンドオフ文書を廃止) |
 | **テーマ関連のレビュー・監査・運用設計** | `.claude/skills/theme/manage-theme-portfolio/reference/{reviews,audits}/` + `テーマポートフォリオ運用.md`。最新状態はstate、未完了策はTODO |
-| **survey 関連のレビュー・監査・運用設計** | `.claude/skills/survey/manage-survey-portfolio/reference/{reviews,audits}/` + `surveyポートフォリオ運用.md`。最新状態は `.claude/state/surveys/portfolio.json`、未完了策はTODO |
-| **アフィリエイト運用の台帳・監査・実験仕様 (例外)** | 広告在庫・直接配置 = git TS (`apps/web/scripts/affiliate-{ads,direct-placements}-data.ts`)、規約 = `.claude/rules/affiliate-ads-standards.md`、手順 = `.claude/skills/ads/*/SKILL.md`、機械状態 = `.claude/state/ads/*.json`、詳細履歴 = `data/improvement/affiliate-improvement/` — agent (affiliate-manager) 主導のため docs に置かない (2026-07-15 オーナー判断。旧 `docs/40_アフィリエイト管理/` は廃止済み、移行履歴はgitに保持) |
+| **survey 関連のレビュー・監査・運用設計** | `.claude/skills/survey/manage-survey-portfolio/reference/{reviews,audits}/` + `surveyポートフォリオ運用.md`。最新状態は `data/surveys/portfolio.json`、未完了策はTODO |
+| **アフィリエイト運用の台帳・監査・実験仕様 (例外)** | 広告在庫・直接配置 = git TS (`apps/web/scripts/affiliate-{ads,direct-placements}-data.ts`)、規約 = `.claude/rules/affiliate-ads-standards.md`、手順 = `.claude/skills/ads/*/SKILL.md`、機械状態 = `data/affiliate/*.json`、詳細履歴 = `data/improvement/affiliate-improvement/` — agent (affiliate-manager) 主導のため docs に置かない (2026-07-15 オーナー判断。旧 `docs/40_アフィリエイト管理/` は廃止済み、移行履歴はgitに保持) |
 | **商品ポートフォリオの実装・運用詳細 (例外)** | 進捗 = `.claude/todo/backlog.md`、商品生成規約 = `.claude/rules/coconala-product-standards.md`、横断チャネル詳細 = `.claude/skills/product/build-coconala-product/reference/multi-channel-content-product-factory.md` — Claude Code／商品管理agent向けの実行情報を実装計画へ重複させない (2026-07-29 オーナー判断で実装計画から移設) |
 | **SNS競合リサーチ運用 (例外)** | X投稿単位 = `.claude/skills/sns/x-viral-research/SKILL.md`、X/Instagramのアカウント単位 = `.claude/skills/sns/competitor-scan/SKILL.md` — 未採択の専用Playwright collector仕様を実装計画へ保持せず、既存skillを運用SSOTにする。Instagram投稿単位collectorが必要なら同skillの拡張として再提案する (2026-07-29 オーナー判断) |
 | **サイト回遊グラフ・レコメンド実装詳細 (例外)** | 進捗 = `.claude/todo/backlog.md`の`KAIYU-HUB-01`、詳細 = `.claude/skills/analytics/seo-audit/reference/site-navigation-graph.md`、監査入口 = `/seo-audit --focus content` — ページ横断の内部リンク監査・実装契約をagent参照へ一本化する (2026-07-29 オーナー判断で実装計画から移設) |
@@ -139,7 +139,7 @@ improvement 系スキル (gsc / ga4 / adsense / affiliate / cloudflare-cost / ps
 | `backlog.md` | 一度だけ実行し、決定的な gate で完了を判定できる実装・不具合是正・移行・意思決定 | gate が通ったらカードを削除する。公開後の効果観測が必要なら、削除と同じ作業単位で `improvements.md` の別 ID へ引き渡す |
 | `improvements.md` | 仮説、対象、baseline、指標、観測期限を持つ active 施策。実装前は `pending`、実行中は `in-progress`、変更が完了して観測だけなら `effect/pending` | 証拠に基づく効果判定を詳細ログへ残し、active 行を削除する |
 | `monthly.md` / `weekly.md` | その月・週に扱う既存 ID、重点、容量配分 | 毎回上書きする計画ビュー。カード本文、status、完了条件を複製しない |
-| workflow / skill + `.claude/state/` | 週次・月次・四半期の取得、監査、再計算と最新の機械状態 | 正常時は TODO を作らない。失敗・閾値違反・人の判断が必要な時だけ Issue または TODO を起票する |
+| workflow / skill + `data/<取得元>/` | 週次・月次・四半期の取得、監査、再計算と最新の機械状態 | 正常時は TODO を作らない。失敗・閾値違反・人の判断が必要な時だけ Issue または TODO を起票する |
 
 判断の境界は次のとおり。
 

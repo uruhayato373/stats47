@@ -2,9 +2,9 @@
  * build-data-quality-queue — 既存の週次監査の結果を全 active metric のデータ品質キューへまとめる。
  * DATA-QUALITY-LOOP-01 ①②。新しい監査ではなく、次の 2 つの監査の出力を読むだけの集約器。
  *
- *   - ranking-integrity-audit-weekly → `.claude/state/ranking/integrity-audit.json` の `deliveredYears`
+ *   - ranking-integrity-audit-weekly → `data/ranking/integrity-audit.json` の `deliveredYears`
  *     (配信 values.json の実在年。`years: "all"` の metric もここで最新年が分かる)
- *   - estat-year-coverage-audit-weekly → `.claude/state/data/estat-year-coverage/queue.json`
+ *   - estat-year-coverage-audit-weekly → `data/estat/year-coverage/queue.json`
  *
  * 年表記は SSDS 原典 (cdcat01-sources.generated.json) と config の yearFormat で判定する。
  * 需要は search-growth の GSC 表示 (候補集合に含まれる URL だけ。無ければ null = 未観測)。
@@ -12,7 +12,7 @@
  *   npx tsx packages/ranking/src/scripts/build-data-quality-queue.ts [--fetch-missing] [--today YYYY-MM-DD]
  *
  * `--fetch-missing`: deliveredYears に無い key を R2 公開 item.json (availableYears) から読む (read-only)。
- * 出力: .claude/state/data/data-quality/{queue.json,LATEST.md}
+ * 出力: data/data-quality/checks/{queue.json,LATEST.md}
  * 判定の SSOT: packages/ranking/src/scripts/lib/data-quality-queue.ts
  */
 
@@ -28,11 +28,11 @@ import { SITE } from "@stats47/types";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..", "..", "..", "..");
-const INTEGRITY = path.join(ROOT, ".claude/state/ranking/integrity-audit.json");
-const YEAR_COVERAGE = path.join(ROOT, ".claude/state/data/estat-year-coverage/queue.json");
+const INTEGRITY = path.join(ROOT, "data/ranking/integrity-audit.json");
+const YEAR_COVERAGE = path.join(ROOT, "data/estat/year-coverage/queue.json");
 const CDCAT01 = path.join(ROOT, "packages/data-configs/src/ssds/cdcat01-sources.generated.json");
-const SEARCH_GROWTH = path.join(ROOT, ".claude/state/search-growth/candidates.json");
-const OUT_DIR = path.join(ROOT, ".claude/state/data/data-quality");
+const SEARCH_GROWTH = path.join(ROOT, "data/search-growth/candidates.json");
+const OUT_DIR = path.join(ROOT, "data/data-quality/checks");
 const R2_BASE = process.env.R2_PUBLIC_FETCH_URL ?? SITE.r2PublicBaseUrl;
 
 const args = process.argv.slice(2);

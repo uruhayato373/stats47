@@ -6,7 +6,7 @@ primary_agent: trend-scout
 ---
 
 新規記事のネタ選定エンジン。「どの記事を直すか」の是正キュー (`/brushup-blog --target queue`) の**新規版**。
-何を書くかの真実源は **`.claude/state/blog/topic-queue.json`** (`build-topic-queue.mjs` が生成)。
+何を書くかの真実源は **`data/blog/topic-queue.json`** (`build-topic-queue.mjs` が生成)。
 
 **本スキルは実コードを書かない。** `build-topic-queue.mjs` を呼び、候補をレポートし、生産スキルへ橋渡しするだけ。
 
@@ -73,7 +73,7 @@ node .claude/scripts/blog/build-topic-queue.mjs --mark-done <topicKey> --slug <p
 ## 参照
 
 - スコアラ: `.claude/scripts/blog/build-topic-queue.mjs`
-- 真実源: `.claude/state/blog/topic-queue.json`
+- 真実源: `data/blog/topic-queue.json`
 - 季節性テーブル: `.claude/scripts/blog/data/seasonality-table.json` (品目×月・手動保守)
 - 戦略正典: `.claude/agents/blog-seo-strategist.md` §戦略コンテキスト
 - 型定義: `.claude/rules/blog-quality-standards.md` §記事アーキタイプ

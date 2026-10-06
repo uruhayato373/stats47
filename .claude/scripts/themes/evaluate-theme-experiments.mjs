@@ -7,7 +7,7 @@
  * 旧 result.dNN を保存したまま、窓不足等の再観測は result.rechecks.dNN に追記する。
  * baselineScopes / baselineStatuses が不明な旧 baseline は effect 確定に使わない。
  * verdict の確定は本スクリプトの --verdict 経由でのみ行う
- * (手編集禁止)。規律 (schema 正典 .claude/state/themes/README.md):
+ * (手編集禁止)。規律 (schema 正典 data/themes/README.md):
  *   - d7 は異常検知のみ (verdict 確定不可)
  *   - d28 = 28 日窓で暫定 (effect 確定不可) / d56 = 公開後 56 日で基本判定
  *   - effect/* 確定は result + evidenceRefs 必須 (validator E3 が enforce)
@@ -33,7 +33,7 @@ import { addDays, jstDateOf } from "../metrics/lib/periods.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
-const STATE_DIR = process.env.STATE_DIR || path.join(PROJECT_ROOT, ".claude/state/themes");
+const STATE_DIR = process.env.STATE_DIR || path.join(PROJECT_ROOT, "data/themes");
 const PORTFOLIO = path.join(STATE_DIR, "portfolio.json");
 const EXPERIMENTS = path.join(STATE_DIR, "experiments.json");
 
@@ -191,7 +191,7 @@ export function launchBaselineCandidate(experiment, observation) {
   const candidate = {
     sourceExperimentId: experiment.experimentId, sourceObservedAt: observation.observedAt,
     baselinePeriod: { from: primary.periodStart, to: primary.periodEnd }, baseline: {}, baselineScopes: {}, baselineStatuses: {},
-    evidenceRefs: [`.claude/state/themes/experiments.json#${experiment.experimentId}/d56/${observation.observedAt}`],
+    evidenceRefs: [`data/themes/experiments.json#${experiment.experimentId}/d56/${observation.observedAt}`],
   };
   for (const [kpi, value] of Object.entries(observation.values)) {
     if (measurementLimits(value, kpi, experiment, 56, observation.observedAt, true).length

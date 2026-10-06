@@ -79,8 +79,8 @@ stats47 (47 都道府県統計サイト) 開発で使い込んだ既存スキル
 このファイル (INDEX.md) と MAGAZINE.md は `.claude/skills/note/koumuin-estat-claude-code/` に移動済み。
 
 - 記事編集: `bash .claude/scripts/note/restore-from-r2.sh <slug>` → docs/31 に展開 → push → CI 削除
-- ドラフト一覧: `.claude/state/note-draft-index.json`
-- 公開済み一覧: `.claude/state/note-published-urls.json`
+- ドラフト一覧: `data/note/note-draft-index.json`
+- 公開済み一覧: `data/note/note-published-urls.json`
 
 ## ディレクトリ構成 (R2 上)
 

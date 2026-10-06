@@ -2,7 +2,7 @@
 /**
  * GitHub Actions 用 IG 予約投稿スクリプト
  *
- * `.claude/state/instagram-w*-schedule.json` を読み、前日・今日 (JST) の未投稿
+ * `data/sns/instagram-w*-schedule.json` を読み、前日・今日 (JST) の未投稿
  * エントリがあれば Instagram Graph API で投稿する。
  *
  * 設計:
@@ -14,7 +14,7 @@
  *   INSTAGRAM_ACCESS_TOKEN
  *   INSTAGRAM_BUSINESS_ACCOUNT_ID
  *   IG_PUBLIC_R2_BASE (default: https://storage.stats47.jp)
- *   IG_SCHEDULE_FILE (明示指定。未指定なら .claude/state/instagram-w*-schedule.json から
+ *   IG_SCHEDULE_FILE (明示指定。未指定なら data/sns/instagram-w*-schedule.json から
  *                     当日エントリを含む週ファイルを自動選択 — 週替わりの手編集忘れ防止)
  *   IG_FORCE_DATE (test 用: JST 日付を強制指定 YYYY-MM-DD)
  *   IG_FORCE_TIME (test 用: JST 時刻を強制指定 HH:MM)
@@ -37,7 +37,8 @@ const { R2_PUBLIC_BASE_URL } = require("../lib/site-config.cjs");
 const TOKEN = process.env.INSTAGRAM_ACCESS_TOKEN;
 const IG_USER_ID = process.env.INSTAGRAM_BUSINESS_ACCOUNT_ID;
 const PUBLIC_R2_BASE = process.env.IG_PUBLIC_R2_BASE || R2_PUBLIC_BASE_URL;
-const STATE_DIR = path.resolve(__dirname, "../../state");
+// 予約表 (instagram-wNN-schedule.json) と投稿済みログ (二重投稿の防止) は data/sns/
+const STATE_DIR = path.resolve(__dirname, "../../../data/sns");
 const FORCE_DATE = process.env.IG_FORCE_DATE; // YYYY-MM-DD
 
 // トークン検証は「当日エントリあり」確定後 (main 内) に行う。

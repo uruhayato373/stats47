@@ -29,8 +29,8 @@ import { readApprovedHashtags } from './lib/note-hashtags.mjs';
 
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = resolve(SCRIPT_DIR, '../../..');
-const PUBLISHED_INDEX = join(PROJECT_ROOT, '.claude/state/note-published-urls.json');
-const REPORT_DIR = join(PROJECT_ROOT, '.claude/state/metrics');
+const PUBLISHED_INDEX = join(PROJECT_ROOT, 'data/note/note-published-urls.json');
+const REPORT_DIR = join(PROJECT_ROOT, 'data/note/evidence');
 const RUN_DATE = new Date().toISOString().slice(0, 10);
 const DEFAULT_REPORT = join(REPORT_DIR, `note-hashtag-audit-${RUN_DATE}.json`);
 const PROFILE_LOCK = join(tmpdir(), 'stats47-note-profile5.lock');

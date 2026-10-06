@@ -158,8 +158,8 @@ async function loadDrafts(docsRoot, vertical) {
   if (!fs.existsSync(verticalDir)) {
     // ephemeral outbox 化以降は docs/31 が存在しない場合がある
     // note-published-urls.json / note-draft-index.json を参照してスラッグ一覧を返す
-    const pubFile = path.join(PROJECT_ROOT, ".claude/state/note-published-urls.json");
-    const dftFile = path.join(PROJECT_ROOT, ".claude/state/note-draft-index.json");
+    const pubFile = path.join(PROJECT_ROOT, "data/note/note-published-urls.json");
+    const dftFile = path.join(PROJECT_ROOT, "data/note/note-draft-index.json");
     const slugs = [];
     if (fs.existsSync(pubFile)) {
       const pub = JSON.parse(fs.readFileSync(pubFile, "utf8"));

@@ -267,7 +267,7 @@ function revenueSection(week) {
   );
 
   // --- 商品: 実売の台帳。販売中の商品があるのに記録 0 件なら ¥0 ではなく判定不能 (nsm-revenue-lines.mjs)。
-  const kdpPublication = readJsonOrNull(".claude/state/products/kdp-weekly-publication.json");
+  const kdpPublication = readJsonOrNull("data/products/kdp-weekly-publication.json");
   const portfolio = kdpPublication?.portfolio;
   const liveProductCount =
     Number.isInteger(portfolio?.s1Live) && Number.isInteger(portfolio?.pilotLive)

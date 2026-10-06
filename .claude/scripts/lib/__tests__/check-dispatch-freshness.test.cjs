@@ -108,8 +108,8 @@ test('state / docs だけの乖離では鳴らない (実測の通常状態)', (
     request: INCIDENT_REQUEST,
     mainPinned: true,
     divergedPaths: [
-      '.claude/state/ai-content/queue.json',
-      '.claude/state/ai-content/LATEST.md',
+      'data/ai-content/remediation/queue.json',
+      'data/ai-content/remediation/LATEST.md',
       '.claude/state/metrics/claude-usage/history.csv',
       '.claude/todo/backlog.md',
       '.github/workflows/sync-snapshots.yml',
@@ -162,7 +162,7 @@ test('isRelevantPath: 生成入力とそれ以外を分ける', () => {
   }
   for (const p of [
     '.claude/todo/backlog.md',
-    '.claude/state/ai-content/queue.json',
+    'data/ai-content/remediation/queue.json',
     '.github/workflows/sync-snapshots.yml',
     'data/workflow-dispatch-requests.json',
     'packages/ranking/src/__tests__/x.test.ts',
