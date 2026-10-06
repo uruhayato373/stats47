@@ -2533,7 +2533,7 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - **背景**: 2026-10-06 承認の提案 (`.claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-10-06-theme-{aging-society,fishery-marine,local-economy}.md`)
   を branch `claude/theme-catalog-optimization` (PR #1085) に実装した (3 テーマの指標・章・カード、
   読み方章の末尾移動 8 テーマ、カード見出しの章名除去 258 件)。local-economy は県内総生産額と 1人当たり県民所得の
-  metric config の `years` も広げた (2011〜2021 年・2012〜2021 年)。変更した 29 テーマはすべて `.claude/state/themes/experiments.json` に
+  metric config の `years` も広げた (2011〜2021 年・2012〜2021 年)。変更した 29 テーマはすべて `data/themes/experiments.json` に
   `THEME-STRUCTURE-20260908-*` / `THEME-LAUNCH-*` の pending 実験 (d28 = 2026-10-09、d56 = 2026-11-06) を持つ。
   先に出すと d56 の観測にこの変更が混ざる。同じテーマ × changeType の pending は 1 件までなので、3 テーマの新しい実験も今は登録できない。
 - **次**: 2026-11-06 の d56 観測が `experiments.json` に記録されたのを確かめてから、オーナーの承認を取って
