@@ -38,7 +38,7 @@
  *   unexplained        未指定軸なし → 別要因 (area コード形式・calculation 等) を個別調査
  *   meta-missing       メタ未取得 → --fetch するか fetch-estat-meta.mjs を先に走らせる
  *
- * メタは `.claude/state/estat/meta/<statsDataId>.json` を再利用する
+ * メタは `data/estat/meta/<statsDataId>.json` を再利用する
  * (`.claude/scripts/estat/fetch-estat-meta.mjs --ids <...> --full` が生成)。
  * `--fetch` を付ければ本スクリプトが未取得ぶんを取りに行く (要 NEXT_PUBLIC_ESTAT_APP_ID)。
  *
@@ -68,7 +68,7 @@ import type { MetricConfig, SourceConfig } from "../src/types.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(__dirname, "../../..");
-const META_DIR = resolve(REPO_ROOT, ".claude/state/estat/meta");
+const META_DIR = resolve(REPO_ROOT, "data/estat/meta");
 
 /** `.claude/scripts/estat/fetch-estat-meta.mjs` が書く形 */
 interface MetaDump {

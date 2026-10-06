@@ -52,7 +52,7 @@ npx tsx packages/product-factory/src/data/load-ranking-values.ts <rankingKey>   
 
 ### E. リリース台帳を再生成する
 ```bash
-npm run products:report --workspace=@stats47/product-factory   # .claude/state/products/catalog-status.json
+npm run products:report --workspace=@stats47/product-factory   # data/products/catalog-status.json
 ```
 
 同コマンドは横断販売カタログ `.local/product-portfolio/catalog.{html,csv}` も生成する。

@@ -19,7 +19,7 @@ import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 import { A8_REPORT_AUTOMATION } from "../../../config/paths.mjs";
 
 const ROOT = resolve(fileURLToPath(new URL(".", import.meta.url)), "../../..");
-const STATE_DIR = resolve(ROOT, ".claude/state/ads");
+const STATE_DIR = resolve(ROOT, "data/affiliate");
 // GA4 実測の追跡済み snapshot と実験台帳は記録なので data/affiliate/ (台帳 id で引く)
 const GA4_SNAPSHOT_DIR = datasetDir("ga4.affiliate-snapshots");
 const AFFILIATE_METRICS_DIR = resolve(ROOT, "data/affiliate");
@@ -39,7 +39,7 @@ function latestGa4(): { data: any; path: string } | null {
   if (existsSync(liveDir)) {
     for (const name of readdirSync(liveDir)) {
       const match = /^(\d{4}-\d{2}-\d{2})\.json$/.exec(name);
-      if (match) candidates.push({ date: match[1], path: `.claude/state/ads/live/ga4-affiliate/${name}`, absolute: resolve(liveDir, name) });
+      if (match) candidates.push({ date: match[1], path: `data/affiliate/live/ga4-affiliate/${name}`, absolute: resolve(liveDir, name) });
     }
   }
   const latest = candidates.sort((left, right) => left.date.localeCompare(right.date)).at(-1);

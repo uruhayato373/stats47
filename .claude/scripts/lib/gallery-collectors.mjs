@@ -195,12 +195,12 @@ export function enumerateNoteCovers(projectRoot) {
 export function enumerateNoteBodies(projectRoot) {
   const out = new Map(); // slug -> { slug, status, noteUrl, r2Path }
   const inScope = (v) => v?.r2_path && v.r2_access !== "private" && !BESPOKE_COVER_VERTICALS.includes(v.vertical);
-  const draft = readJsonSafe(path.join(projectRoot, ".claude/state/note-draft-index.json"));
+  const draft = readJsonSafe(path.join(projectRoot, "data/note/note-draft-index.json"));
   for (const [slug, v] of Object.entries(draft?.drafts || {})) {
     if (!inScope(v)) continue;
     out.set(slug, { slug, status: v?.status || "draft", noteUrl: null, r2Path: v.r2_path });
   }
-  const pub = readJsonSafe(path.join(projectRoot, ".claude/state/note-published-urls.json"));
+  const pub = readJsonSafe(path.join(projectRoot, "data/note/note-published-urls.json"));
   for (const [slug, v] of Object.entries(pub?.articles || {})) {
     if (slug.startsWith("_")) continue;
     if (!inScope(v)) {

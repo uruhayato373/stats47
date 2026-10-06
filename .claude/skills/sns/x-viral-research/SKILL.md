@@ -102,7 +102,7 @@ Chrome タブクローズ) を必ず仕込む。
 
 ### Phase 3: 台帳へ upsert (機械 state)
 
-`.claude/state/sns/x-viral-posts.json` に post_url キーで upsert (既存エントリの metrics は
+`data/sns/x-viral-posts.json` に post_url キーで upsert (既存エントリの metrics は
 取得日付きで追記し、履歴を潰さない):
 
 ```jsonc

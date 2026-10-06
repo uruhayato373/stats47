@@ -81,6 +81,6 @@ ranking cardが404で、デプロイ後のroute smokeが失敗した。
   新規9件・追加AI3件・既存2件の全14ページをGooglebotで確認した。家計11件のoriginal/all-bases/
   人口・面積API/両normクエリは66/66検査PASS。18年×47地点の原観測は変更していない。
 - master同期時の画像は候補11・更新0・現行11件となり、無関係な再生成が無いことも確認した。
-  公開後証跡は `.claude/state/metrics/content-release-2026-09-08.json`、障害管理はIssue #931。
+  公開後証跡は `data/content-operations/content-release-2026-09-08.json`、障害管理はIssue #931。
 
 [[project_dbless_migration_2026_05_29]] [[feedback_check_why_removed_before_reviving]]

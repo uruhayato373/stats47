@@ -4,7 +4,7 @@
  *
  * DB は使わない。metric config SSOT (packages/data-configs/src/metrics/*.ts) を
  * registry 経由で読み、索引に使えるフィールドだけを抽出して R2 から再生成できる
- * ローカルキャッシュ (.claude/state/sns/metric-discovery-index.json) に書き出す。
+ * ローカルキャッシュ (data/sns/metric-discovery-index.json) に書き出す。
  *
  * 実行: npx tsx .claude/scripts/sns/build-discovery-index.ts
  *
@@ -21,7 +21,7 @@ import {
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
 const OUTPUT_PATH = path.join(
   PROJECT_ROOT,
-  ".claude/state/sns/metric-discovery-index.json",
+  "data/sns/metric-discovery-index.json",
 );
 
 interface DiscoveryEntry {

@@ -1,6 +1,6 @@
 /**
  * note 展開のリリース台帳 (機械状態)。
- * `.claude/state/products/note-catalog-status.json` に再生成する。draft の有無・添付・未検証を集約する。
+ * `data/products/note-catalog-status.json` に再生成する。draft の有無・添付・未検証を集約する。
  * 購入者情報は保存しない。
  */
 import { mkdirSync, writeFileSync, existsSync } from "node:fs";
@@ -11,7 +11,7 @@ import { NOTE_PRODUCT_MAPPINGS } from "../product-note-mapping";
 import { validateNoteChannel } from "../validators";
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../../../..");
-const STATE_PATH_DEFAULT = resolve(REPO_ROOT, ".claude/state/products/note-catalog-status.json");
+const STATE_PATH_DEFAULT = resolve(REPO_ROOT, "data/products/note-catalog-status.json");
 const NOTE_OUT_ROOT = resolve(REPO_ROOT, ".local/note-products");
 
 export function writeNoteReport(statePath: string = STATE_PATH_DEFAULT): string {

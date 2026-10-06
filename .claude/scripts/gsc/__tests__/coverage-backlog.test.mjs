@@ -86,7 +86,7 @@ test("差し込んだカードは backlog-lib が読めて、CI ループが拾�
     assert.equal(card.executor, "sweep");
     assert.ok(EXECUTORS.includes(card.executor));
     assert.ok(KINDS.includes(card.kind));
-    assert.match(card.verify, /--assert-handled \.claude\/state\/gsc\/backlog-batches\/GSC-COV-/);
+    assert.match(card.verify, /--assert-handled data\/gsc\/coverage-remediation\/backlog-batches\/GSC-COV-/);
     assert.equal(card.unknownKeys.length, 0);
   }
   assert.equal(parsed.find((c) => c.id === "GSC-COV-5XX-20260924").tier, parsed.find((c) => c.id === "EXISTING-01").tier);

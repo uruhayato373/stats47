@@ -24,10 +24,11 @@ const { hasPassingGate, latestAttemptPassedGate, declaredFollowUps } = require('
 /** ループが触ってよいパス。ここに無いものを触ったら commit させない */
 const ALLOWED_PATH_PATTERNS = [
   /^\.claude\/todo\/backlog\.md$/,
-  // state 全体を許す。バックログを 1 件閉じると、その領域の state (SEO baseline・
-  // 整合性 audit・是正キュー等) が同じ作業の成果物として動くため。危険なものは
-  // FORBIDDEN 側 (memory / learned / routing policy) が個別に弾く — `.claude/config/` を
-  // 許しつつ routing policy だけ禁止しているのと同じ形。
+  // 記録 (data/) と state 全体を許す。バックログを 1 件閉じると、その領域の記録 (SEO baseline・
+  // 是正キュー・監査結果 = 2026-10-06 から data/) と整合性 audit (.claude/state/) が同じ作業の
+  // 成果物として動くため。危険なものは FORBIDDEN 側 (memory / learned / routing policy) が
+  // 個別に弾く — `.claude/config/` を許しつつ routing policy だけ禁止しているのと同じ形。
+  /^data\//,
   /^\.claude\/state\//,
   /^\.claude\/scripts\//,
   /^\.claude\/rules\//,

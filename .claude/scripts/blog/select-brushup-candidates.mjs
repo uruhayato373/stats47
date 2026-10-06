@@ -80,7 +80,7 @@ if (!fs.existsSync(pagesCsv)) {
 // dedup history (auto-brushup-history.json で管理)
 const historyPath = path.join(
   PROJECT_ROOT,
-  ".claude/state/blog/auto-brushup-history.json"
+  "data/blog/auto-brushup-history.json"
 );
 function loadHistory() {
   if (!fs.existsSync(historyPath)) return { entries: [] };
@@ -91,7 +91,7 @@ const history = loadHistory();
 // チャート品質監査 (audit-chart-quality.mjs の出力) を読み込む。
 // 各 candidate に chartIssues を付与し、brushup agent が「ついでにチャート再生成」
 // すべき記事を判断できるようにする。GSC スコアは歪めず、同点時の tiebreaker にのみ使う。
-const chartAuditPath = path.join(PROJECT_ROOT, ".claude/state/blog/chart-audit.json");
+const chartAuditPath = path.join(PROJECT_ROOT, "data/blog/chart-audit.json");
 const chartAudit = new Map();
 if (fs.existsSync(chartAuditPath)) {
   try {
@@ -110,7 +110,7 @@ if (fs.existsSync(chartAuditPath)) {
 
 // 記事構造監査 (audit-article-structure.mjs の出力) を読み込む。
 // source-link 末尾集約の違反を candidate に付与し、brushup 時に再配置させる。
-const structureAuditPath = path.join(PROJECT_ROOT, ".claude/state/blog/structure-audit.json");
+const structureAuditPath = path.join(PROJECT_ROOT, "data/blog/structure-audit.json");
 const structureAudit = new Map();
 if (fs.existsSync(structureAuditPath)) {
   try {

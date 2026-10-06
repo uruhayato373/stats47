@@ -36,7 +36,7 @@ co_agents: [improvement-triage, ga4-analyst]
 
 ### plan — 実験を設計する (registry 追加はまだしない)
 
-1. 対象枠 (locationCode) と vertical を決め、`.claude/state/ads/affiliate-operations-latest.json` の
+1. 対象枠 (locationCode) と vertical を決め、`data/affiliate/affiliate-operations-latest.json` の
    `measurementGate` が `ready` で `ga4Snapshot` に variant dimension があることを確認
    (blocked のまま実験を始めない)。
 2. **停止条件を事前固定**する: `minSamplePerVariant` (既定 1,000 imp) / `minDurationDays` (既定 28) /

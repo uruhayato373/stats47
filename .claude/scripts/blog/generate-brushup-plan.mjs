@@ -8,8 +8,8 @@
  * 全 blog 記事を採点し、30 日 (or 任意期間) の brushup plan を生成する。
  *
  * Output:
- *   1. .claude/state/blog/auto-brushup-plan.json (routine が参照する schedule)
- *   2. .claude/state/blog/brushup-plan.md (再生成可能な運用state)
+ *   1. data/blog/auto-brushup-plan.json (routine が参照する schedule)
+ *   2. data/blog/brushup-plan.md (再生成可能な運用state)
  *
  * Score 計算:
  *   improvement_score = impressions × max(0, industry_avg_CTR(position) - current_CTR)
@@ -204,7 +204,7 @@ const totalExpectedLift = scheduled.reduce((sum, s) => sum + s.expectedLift, 0);
 
 if (!REPORT_ONLY) {
   // JSON output for routine consumption
-  const planPath = path.join(PROJECT_ROOT, ".claude/state/blog/auto-brushup-plan.json");
+  const planPath = path.join(PROJECT_ROOT, "data/blog/auto-brushup-plan.json");
   fs.mkdirSync(path.dirname(planPath), { recursive: true });
   fs.writeFileSync(planPath, JSON.stringify(plan, null, 2));
   console.log(`✅ Plan saved: ${planPath}`);
@@ -269,7 +269,7 @@ for (const day of plan.days) {
 
 const reportPath = path.join(
   PROJECT_ROOT,
-  ".claude/state/blog/brushup-plan.md"
+  "data/blog/brushup-plan.md"
 );
 fs.mkdirSync(path.dirname(reportPath), { recursive: true });
 fs.writeFileSync(reportPath, reportLines.join("\n"));

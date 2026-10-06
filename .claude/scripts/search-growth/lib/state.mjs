@@ -7,7 +7,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { PROJECT_ROOT } from "./sources.mjs";
 
-export const STATE_DIR = path.join(PROJECT_ROOT, ".claude/state/search-growth");
+export const STATE_DIR = path.join(PROJECT_ROOT, "data/search-growth");
 export const PATHS = {
   latest: path.join(STATE_DIR, "latest.json"),
   candidates: path.join(STATE_DIR, "candidates.json"),

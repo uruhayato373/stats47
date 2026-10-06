@@ -12,7 +12,7 @@ import { cached, fileExists, readJson, TTL, wrap, type Wrapped } from "./state-i
  */
 
 const CYCLE = "data/measurement-cycle/latest.json";
-const TREE = ".claude/state/business-plan/kpi-tree.json";
+const TREE = "data/business-plan/kpi-tree.json";
 const REVENUE_HISTORY = "data/authenticated/revenue-history.json";
 
 export interface KpiTarget {

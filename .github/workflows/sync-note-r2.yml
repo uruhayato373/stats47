@@ -24,8 +24,8 @@ on:
   push:
     branches: [develop]
     paths:
-      - '.claude/state/note-published-urls.json'
-      - '.claude/state/note-draft-index.json'
+      - 'data/note/note-published-urls.json'
+      - 'data/note/note-draft-index.json'
   workflow_dispatch:
     inputs:
       dry_run:
@@ -74,8 +74,8 @@ jobs:
           DRY_RUN=true node .claude/scripts/note/sync-drafts-r2.mjs
           node -e "
             const fs=require('fs');
-            const pub=JSON.parse(fs.readFileSync('.claude/state/note-published-urls.json','utf8'));
-            const dft=JSON.parse(fs.readFileSync('.claude/state/note-draft-index.json','utf8'));
+            const pub=JSON.parse(fs.readFileSync('data/note/note-published-urls.json','utf8'));
+            const dft=JSON.parse(fs.readFileSync('data/note/note-draft-index.json','utf8'));
             const pubPending=Object.entries(pub.articles).filter(([k,v])=>!k.startsWith('_')&&v.r2_body===false&&(
               fs.existsSync('docs/31_note記事原稿/'+v.vertical+'/'+k)||
               fs.existsSync('docs/31_note記事原稿/'+k)
@@ -160,7 +160,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .claude/state/note-published-urls.json .claude/state/note-draft-index.json
+          git add data/note/note-published-urls.json data/note/note-draft-index.json
           git diff --cached --quiet && { echo "変更なし (スキップ)"; exit 0; }
           COUNT=$(git diff --cached --name-only | wc -l | tr -d ' ')
           git commit -q -m "chore(note): sync all articles to R2, remove from docs/31 [skip ci]"

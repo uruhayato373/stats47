@@ -171,8 +171,8 @@ jobs:
             if [ "${{ steps.coverage_queue.outcome }}" != "success" ]; then
               echo ""
               echo "⚠️ 再構築に失敗しました (outcome=${{ steps.coverage_queue.outcome }})。"
-            elif [ -f .claude/state/gsc/LATEST.md ]; then
-              sed -n '/## 是正キュー/,/^## /p' .claude/state/gsc/LATEST.md | head -20
+            elif [ -f data/gsc/coverage-remediation/LATEST.md ]; then
+              sed -n '/## 是正キュー/,/^## /p' data/gsc/coverage-remediation/LATEST.md | head -20
             else
               echo ""
               echo "LATEST.md がありません。"
@@ -296,21 +296,21 @@ jobs:
             data/authenticated data/blog data/ai-content data/affiliate 2>/dev/null || true
           git add data/nsm/weekly-snapshots
           # state:snapshots:prune の削除分 (週次 append する state の古い世代)
-          git add .claude/state/business-plan/history 2>/dev/null || true
-          git add .claude/state/search-growth/manifests 2>/dev/null || true
+          git add data/business-plan/history 2>/dev/null || true
+          git add data/search-growth/manifests 2>/dev/null || true
           # 是正ループの自動再構築物
-          git add .claude/state/blog/remediation-queue.json 2>/dev/null || true
-          git add .claude/state/blog/topic-queue.json 2>/dev/null || true
+          git add data/blog/remediation-queue.json 2>/dev/null || true
+          git add data/blog/topic-queue.json 2>/dev/null || true
           # ランキング拡充ループ (計測ゲート付き需要ファースト) の状態SSOT
-          git add .claude/state/estat/expansion-queue.json 2>/dev/null || true
+          git add data/estat/expansion-queue.json 2>/dev/null || true
           # GSC カバレッジ是正キュー (再実測で verdict が最新化される) + 判断が要る分のバックログカード
-          git add .claude/state/gsc 2>/dev/null || true
+          git add data/gsc/coverage-remediation 2>/dev/null || true
           git add .claude/todo/backlog.md 2>/dev/null || true
           git add data/gsc/coverage-drilldown 2>/dev/null || true
           git add data/improvement/gsc-improvement/improvement-log.md 2>/dev/null || true
           # 効果判定ループの成果物 (verdict JSON + 抑制台帳 + 新規 improvement-log)
           git add data/effect-verdict 2>/dev/null || true
-          git add .claude/state/search-growth/past-effects.json 2>/dev/null || true
+          git add data/search-growth/past-effects.json 2>/dev/null || true
           git add data/adsense/past-effects.json 2>/dev/null || true
           git add data/improvement/ga4-improvement/improvement-log.md 2>/dev/null || true
           git add data/improvement/cloudflare-cost-improvement/improvement-log.md 2>/dev/null || true
@@ -398,7 +398,7 @@ jobs:
             echo ""
             echo "## 影響"
             echo ""
-            echo "是正キュー (\`.claude/state/gsc/coverage-remediation-queue.json\`) が最新化されません。"
+            echo "是正キュー (\`data/gsc/coverage-remediation/coverage-remediation-queue.json\`) が最新化されません。"
             echo "古い verdict のまま作業すると誤った優先度で動きます"
             echo "(2026-08-06 に 7 週間前のキューで \`fix-5xx\` 誤検知を掴んだ実例あり)。"
             echo ""

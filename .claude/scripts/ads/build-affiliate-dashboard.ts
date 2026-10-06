@@ -46,7 +46,7 @@ function main(): void {
   const gaps = CATEGORY_KEYS.filter((k) => !(byCat[k] ?? 0));
   const advertisers = new Set(active.map((a) => a.title)).size;
   const generatedAt = new Date().toISOString().slice(0, 19).replace("T", " ");
-  const portfolioPath = resolve(process.cwd(), ".claude/state/ads/affiliate-portfolio-latest.json");
+  const portfolioPath = resolve(process.cwd(), "data/affiliate/affiliate-portfolio-latest.json");
   const portfolio = buildAffiliatePortfolioViewModel(
     existsSync(portfolioPath) ? JSON.parse(readFileSync(portfolioPath, "utf8")) : {},
   );

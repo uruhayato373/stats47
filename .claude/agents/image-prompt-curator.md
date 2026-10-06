@@ -51,7 +51,7 @@ model: sonnet
 - `assets/blog/article-backgrounds/<slug>.jpg` — 記事固有背景のexact bytes SSOT
 - `apps/web/scripts/data/blog-codex-background-catalog.ts` — 記事固有背景の意味仕様・prompt SSOT
 - `assets/blog/codex-backgrounds/*.jpg` — ブログ背景のexact bytes SSOT
-- `.claude/state/ogp/inventory.json` — 画像資産の棚卸し結果 (write。`/audit-ogp-images --audit` が生成)
+- `data/ogp/inventory.json` — 画像資産の棚卸し結果 (write。`/audit-ogp-images --audit` が生成)
 - `docs/31_note記事原稿/<slug>/header.png` — note 表紙 (write。ephemeral outbox: 存在しない場合は先に `bash .claude/scripts/note/restore-from-r2.sh <slug>` で復元)
 - `.local/image-staging/<type>/` — 生成画像 bundle の staging (write。exact plan 経由で反映。旧 `.local/r2/app/blog/<slug>/og-*.png` 直接 write 経路は廃止)
 - `.local/r2/sns/` — manifest を持たない SNS 静止素材 (write。`push-exact-r2-assets.ts` 経由)

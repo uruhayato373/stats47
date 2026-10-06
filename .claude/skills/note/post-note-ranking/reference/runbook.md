@@ -447,14 +447,14 @@ node .claude/scripts/note/render-ranking-images.mjs <RANKING_KEY>   # 約 15 秒
 # 1. note-draft-index.json に slug を追記 (vertical は stats47-note)
 node -e "
 const fs=require('fs');
-const f='.claude/state/note-draft-index.json';
+const f='data/note/note-draft-index.json';
 const d=JSON.parse(fs.readFileSync(f,'utf8'));
 d.drafts['a-<RANKING_KEY>']={vertical:'stats47-note',r2_path:null};
 fs.writeFileSync(f,JSON.stringify(d,null,2)+'\n');
 console.log('追記完了');
 "
 # 2. develop に push → sync-note-r2.yml が R2 同期 + docs/31 削除
-git add .claude/state/note-draft-index.json docs/31_note記事原稿/a-<RANKING_KEY>
+git add data/note/note-draft-index.json docs/31_note記事原稿/a-<RANKING_KEY>
 git commit -m "note: a-<RANKING_KEY> ドラフト生成 + R2 同期キュー"
 git push origin develop
 ```

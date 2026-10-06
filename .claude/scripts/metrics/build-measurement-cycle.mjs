@@ -170,10 +170,10 @@ function main() {
     affiliateRows: readCsvIfExists(join(PROJECT_ROOT, "data/affiliate/ga4-affiliate-history.csv")),
     operations,
     authenticated: readJsonIfExists(AUTHENTICATED_LATEST),
-    dataQuality: summarizeDataQuality(readJsonIfExists(".claude/state/ranking/integrity-audit.json")),
+    dataQuality: summarizeDataQuality(readJsonIfExists("data/ranking/integrity-audit.json")),
     paidPurchases: summarizePaidPurchases({
       ledger: readJsonIfExists("data/products/sales-ledger.json"),
-      liveProductCount: liveProductCountOf(readJsonIfExists(".claude/state/products/kdp-weekly-publication.json")),
+      liveProductCount: liveProductCountOf(readJsonIfExists("data/products/kdp-weekly-publication.json")),
       weekStart: isoWeekToDateRange(week).startDate,
       weekEnd: asOf,
       revenueHistory: readJsonIfExists("data/authenticated/revenue-history.json"),
@@ -231,7 +231,7 @@ function main() {
     activeImprovements: kpiTree?.improvements.active ?? "",
     kpiUnlinked: kpiTree?.improvements.unlinked.length ?? "",
     measurementFreshOk: kpiValue("measurement-freshness")?.value ?? "",
-    dataQualityPassRate: summarizeDataQuality(readJsonIfExists(".claude/state/ranking/integrity-audit.json"))?.passRate ?? "",
+    dataQualityPassRate: summarizeDataQuality(readJsonIfExists("data/ranking/integrity-audit.json"))?.passRate ?? "",
   });
   history.sort((a, b) => a.week.localeCompare(b.week));
   writeFileSync(historyPath, toCsv(history, HISTORY_COLUMNS));

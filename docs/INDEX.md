@@ -45,7 +45,7 @@
 | `10_SNS戦略/`          | SNS コンテンツ設計 (実行規約の正典は `.claude/rules/sns-content-standards.md`)                                                                  | 内容更新が中心                                                                                      |
 | `21_ブログ記事原稿/`   | ブログ記事の下書き (R2 が正典・publish 後は CI が自動削除する ephemeral outbox)                                                                 | 蓄積しない                                                                                          |
 | `30_note記事企画/`     | note 記事の企画・戦略 (+ backlog)。チャート無しのアイデア段階                                                                                   | 蓄積                                                                                                |
-| `31_note記事原稿/`     | note 記事ソースの**単一管理**（下書き〜公開済み）。公開しても移動しない。状態は frontmatter `status` + `.claude/state/note-published-urls.json` | 蓄積                                                                                                |
+| `31_note記事原稿/`     | note 記事ソースの**単一管理**（下書き〜公開済み）。公開しても移動しない。状態は frontmatter `status` + `data/note/note-published-urls.json` | 蓄積                                                                                                |
 
 ## 00\_プロジェクト管理/ の固定構成
 

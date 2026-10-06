@@ -17,7 +17,7 @@
  *   - must-write:   queryGap の生 imp >= MUST_WRITE_IMP (検索需要実証済)
  *   - opportunity:  それ以外
  *
- * 真実源: .claude/state/blog/topic-queue.json (git tracked、status を upsert で保持)
+ * 真実源: data/blog/topic-queue.json (git tracked、status を upsert で保持)
  *
  * Usage:
  *   node .claude/scripts/blog/build-topic-queue.mjs                       # 構築/更新
@@ -47,7 +47,7 @@ const getArg = (flag, fallback) => {
   return i >= 0 && args[i + 1] ? args[i + 1] : fallback;
 };
 
-const QUEUE_PATH = path.join(PROJECT_ROOT, ".claude/state/blog/topic-queue.json");
+const QUEUE_PATH = path.join(PROJECT_ROOT, "data/blog/topic-queue.json");
 const SEASONALITY_PATH = path.join(__dirname, "data", "seasonality-table.json");
 const METRICS_DIR = path.join(PROJECT_ROOT, "packages/data-configs/src/metrics");
 const PREFS_PATH = path.join(PROJECT_ROOT, "packages/area/src/data/prefectures.json");

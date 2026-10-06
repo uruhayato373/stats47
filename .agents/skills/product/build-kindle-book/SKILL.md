@@ -30,7 +30,7 @@ npm run products:kindle:generate  --workspace=@stats47/product-factory -- --id K
 npm run products:kindle:generate  --workspace=@stats47/product-factory -- --all-manuscript --version <NEW_VERSION>
 npm run products:kindle:verify-epub --workspace=@stats47/product-factory -- --version <VERSION> --report <NEW_JSON_PATH>
 npm run products:report --workspace=@stats47/product-factory -- --kindle-version <VERSION>
-npm run products:kindle:report    --workspace=@stats47/product-factory              # 台帳 .claude/state/products/kindle-status.json
+npm run products:kindle:report    --workspace=@stats47/product-factory              # 台帳 data/products/kindle-status.json
 ```
 
 ## フロー（1 冊を出品可能にする）
@@ -55,7 +55,7 @@ npm run products:kindle:report    --workspace=@stats47/product-factory          
 4. **構造検証**: EPUB を unzip し、mimetype 先頭 STORE / 全 XHTML・OPF が整形式 / 画像参照が manifest 整合 を確認。
    vitest（`tests/kindle-channel.test.ts`）で回帰も見る。
 4b. **検証レポートと受領証** (`verify-publishable` / `kdp-release-gate` が見る機械証跡・2026-09-19):
-   `npx tsx packages/product-factory/scripts/verify-epub.mts --book <id> --version <VERSION> --report .claude/state/products/kindle-<VERSION>-verification.json`
+   `npx tsx packages/product-factory/scripts/verify-epub.mts --book <id> --version <VERSION> --report data/products/kindle-<VERSION>-verification.json`
    (同じ版名の冊が複数あるときはファイルが既にあるので、一時ファイルへ出して `report[]` にマージする) →
    `npx tsx packages/product-factory/scripts/write-review-receipt.mts --book <id> --version <VERSION> --reviewer /agents/blog-critic`
    が review.md の PASS を実 EPUB の章 SHA・authoredSha256 に結び付けた `review.json` を書く (PASS でない版・再生成が要る版には書けない)。
@@ -89,7 +89,7 @@ npm run products:kindle:validate --workspace=@stats47/product-factory
 
 - 規約: `.claude/rules/coconala-product-standards.md §8`
 - SSOT: `packages/product-factory/src/channels/kindle/book-catalog.ts` / EPUB 生成器 `src/generators/epub.ts`
-- 台帳: `.claude/state/products/kindle-status.json`
+- 台帳: `data/products/kindle-status.json`
 - 企画・市場判断: `.claude/rules/coconala-product-standards.md §8` / `packages/product-factory/src/channels/kindle/book-catalog.ts`
 - agent: `.claude/agents/kindle-publisher.md`
 - 品質ゲート（書き下ろし）: `.claude/rules/blog-quality-standards.md`（ですます調・critic PASS）

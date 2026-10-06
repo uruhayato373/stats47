@@ -5,7 +5,7 @@
  *   - categoryKey 別の枠数 (17 軸の欠落カテゴリ = impression 機会損失) を可視化
  *   - locationCode / adType 別の偏り
  *   - ページ種別 → 描画 location のカバレッジ
- * を Markdown でレポートし、JSON snapshot を .claude/state/ads/ に書き出す。
+ * を Markdown でレポートし、JSON snapshot を data/affiliate/ に書き出す。
  *
  * 実行: npx tsx .claude/scripts/ads/audit-affiliate-inventory.ts
  *   (JSON のみ: --json / 特定日付スナップショット名: --date YYYY-MM-DD)
@@ -153,8 +153,8 @@ function main(): void {
     sizeViolations,
   };
 
-  // JSON snapshot を .claude/state/ads/ に書き出す (機械向け / ループの入力)
-  const stateDir = resolve(PROJECT_ROOT, ".claude/state/ads");
+  // JSON snapshot を data/affiliate/ に書き出す (機械向け / ループの入力)
+  const stateDir = resolve(PROJECT_ROOT, "data/affiliate");
   mkdirSync(stateDir, { recursive: true });
   for (const name of [`inventory-${date}.json`, "inventory-latest.json"]) {
     writeFileSync(resolve(stateDir, name), JSON.stringify(snapshot, null, 2));
@@ -261,7 +261,7 @@ function main(): void {
 
   process.stdout.write(lines.join("\n") + "\n");
   process.stderr.write(
-    `\n[audit] JSON snapshot → .claude/state/ads/inventory-${date}.json (+ latest)\n`,
+    `\n[audit] JSON snapshot → data/affiliate/inventory-${date}.json (+ latest)\n`,
   );
 
   // pre-commit / CI ゲート: --check-size 指定時は非 canonical・非 legacy サイズがあれば exit 1。

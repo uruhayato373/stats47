@@ -10,7 +10,7 @@
  * 更新日: 2026-06-16（COVERAGE-DEACT-01。GSC カバレッジ是正ループで「config も R2 データも無いのに
  *   stale prerender で 200 を返す空 ranking」32 件を特定し追加。Google が soft404 判定していた発生源。
  *   middleware 410 で stale ページより前段で短絡し即時除去を促す。将来データ投入時は本 Set から削除して復帰可。
- *   一覧の真実源: .claude/state/gsc/coverage-remediation-queue.json の content_verdict=deactivate）
+ *   一覧の真実源: data/gsc/coverage-remediation/coverage-remediation-queue.json の content_verdict=deactivate）
  * 更新日: 2026-07-03（誤検知 3 件を active 復帰で削除: marine-aquaculture-harvest /
  *   marine-fishery-catch / marine-fishery-output-value。いずれも KNOWN_RANKING_KEYS 登録済・
  *   config isActive:true・R2 item.json/values.json に実データあり（COVERAGE-DEACT-01 の

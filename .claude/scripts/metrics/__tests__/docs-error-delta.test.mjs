@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import { diffDocsErrors } from '../lib/docs-error-delta.mjs';
 
 const err = (code, file, message) => ({ level: 'error', code, file, message });
-const ksj = err('DG084', '.claude/state/metrics/monthly-jobs/ksj-catalog.json', '2026-10 分の記録が無い');
+const ksj = err('DG084', 'data/ci/monthly-jobs/ksj-catalog.json', '2026-10 分の記録が無い');
 
 test('適用前からある error は止めない (別 workflow の state が原因の DG084 で triage を捨てない)', () => {
   const r = diffDocsErrors({ errors: [ksj] }, { errors: [ksj] });

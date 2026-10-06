@@ -11,6 +11,7 @@ export interface Dataset {
 export declare const KINDS: Record<string, string>;
 export declare const TARGETS: Record<string, { dir: string; label: string }>;
 export declare const GOVERNED: RegExp[];
+export declare const AGENT_STATE: Record<string, string>;
 export declare const IGNORED_NAMES: Set<string>;
 export declare const SLOTS: Record<string, string>;
 export declare const IMAGE_ROOTS: RegExp[];

@@ -6,8 +6,8 @@
  */
 export const CARD_PREFIX = "YEAR-COV";
 export const BATCH_SIZE = 10;
-export const BATCH_DIR = ".claude/state/data/estat-year-coverage/backlog-batches";
-export const BY_DESIGN_PATH = ".claude/state/data/estat-year-coverage/by-design.json";
+export const BATCH_DIR = "data/estat/year-coverage/backlog-batches";
+export const BY_DESIGN_PATH = "data/estat/year-coverage/by-design.json";
 
 const GATE = "npx tsx .claude/scripts/data/assert-year-coverage-batch.ts";
 const SYNC = "node .claude/scripts/data/sync-year-coverage-backlog.mjs";
@@ -37,7 +37,7 @@ function renderCard({ id, rows, today }) {
     "",
     `タグ: [コンテンツ品質] [種類:改善] [実行:sweep] [検証:${GATE} ${file}] [起票:${today}] [領域:データ]`,
     "",
-    `- **自動起票**: \`sync-year-coverage-backlog.mjs\` が週次の年カバレッジ監査 (\`.claude/state/data/estat-year-coverage/queue.json\`) の要拡張候補から作った。対象 key の一覧は \`${file}\`。規約の正典は \`.claude/rules/metric-config-standards.md\`「\`years\` は最新年だけに絞らない」。`,
+    `- **自動起票**: \`sync-year-coverage-backlog.mjs\` が週次の年カバレッジ監査 (\`data/estat/year-coverage/queue.json\`) の要拡張候補から作った。対象 key の一覧は \`${file}\`。規約の正典は \`.claude/rules/metric-config-standards.md\`「\`years\` は最新年だけに絞らない」。`,
     "- **対象** (config の年数 → e-Stat に値がある年):",
     ...rows.map((r) => `  - \`${r.key}\` (statsDataId ${r.statsDataId}): ${r.configYears ?? "?"} 年 → ${years(r.availableYearCodes)}`),
     "- **次**: 各 key の metric config の `years` を上の「e-Stat に値がある年」の範囲へ広げる (監査が `getStatsData` で実測した年。北海道 1 件の判定なので、他県で欠ける年は再投入後の `audit-reingest-queue.ts` と ranking-integrity 監査が拾う)。同じ statsDataId の中で系列の定義や単位が年ごとに変わる key は広げず by-design に記録する。",

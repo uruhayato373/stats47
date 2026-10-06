@@ -101,7 +101,7 @@ if (!opts.commit || !articles.length) process.exit(0);
 
 const journalPath = path.join(
   ROOT,
-  '.claude/state/metrics',
+  'data/note/evidence',
   `note-cover-refresh-${manifest.version}.json`
 );
 const journal = fs.existsSync(journalPath)

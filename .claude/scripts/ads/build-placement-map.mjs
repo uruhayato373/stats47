@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * build-placement-map.mjs — 「検索需要 (GSC検索表示/クリック) × 供給 (広告在庫/EPC)」を突合して
- * `.claude/state/ads/placement-map-latest.json` を生成する (決定的・ネットワーク任意)。
+ * `data/affiliate/placement-map-latest.json` を生成する (決定的・ネットワーク任意)。
  *
  * ★ なぜ要るか: これまで「次にどの案件を仕入れ、どのページに当てるか」を決める propose は
  *   手順書レベルで、GSC のページ別実測と在庫・EPC を突き合わせる機械が存在しなかった
@@ -35,7 +35,7 @@ const scoutCore = require("./lib/a8-scout-core.mjs");
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
 const SNAP_DIR = join(ROOT, "data/gsc/snapshots");
-const OUT = join(ROOT, ".claude/state/ads/placement-map-latest.json");
+const OUT = join(ROOT, "data/affiliate/placement-map-latest.json");
 
 const args = process.argv.slice(2);
 const DRY = args.includes("--dry-run");

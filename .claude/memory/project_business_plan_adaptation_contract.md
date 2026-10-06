@@ -10,4 +10,4 @@ type: project
 
 **対策**: `packages/data-configs/src/business-plan/` に25章の `adopted/adapted/deferred/rejected`、100企画、owner/skill、KPI、開始ゲートを型付きSSOTとして置く。`npm run business-plan:check` で参照とDBレス逆行を拒否し、derived stateを週次生成する。管理画面 `/strategy`、strategy-advisor、weekly-plan/review、PR/週次CIは同じcatalogを読む。売上・アクセス目標は仮説、未計測は0でないと表示する。
 
-**証拠**: commit `4674d21cbe842d79b1f21fb0a8216194813dfa15` / `.claude/state/business-plan/history/2026-08-28.json` / 2026-08-28
+**証拠**: commit `4674d21cbe842d79b1f21fb0a8216194813dfa15` / `data/business-plan/history/2026-08-28.json` / 2026-08-28

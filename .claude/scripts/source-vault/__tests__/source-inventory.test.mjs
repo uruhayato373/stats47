@@ -13,7 +13,7 @@ const SCRIPT = path.join(
 );
 const STATE_ROOT = path.join(
   PROJECT_ROOT,
-  '.claude/state/source-inventory'
+  'data/source-inventory'
 );
 
 test('all reference inventories have 100% resolution coverage', async () => {

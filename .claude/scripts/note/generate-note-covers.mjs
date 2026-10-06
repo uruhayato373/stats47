@@ -298,7 +298,7 @@ if (!allMode && !targetSlug) {
   process.exit(0);
 }
 
-const indexPath = path.join(PROJECT_ROOT, '.claude/state/note-draft-index.json');
+const indexPath = path.join(PROJECT_ROOT, 'data/note/note-draft-index.json');
 const indexData = JSON.parse(fs.readFileSync(indexPath, 'utf8'));
 const drafts = indexData.drafts || {};
 const draftRoot = path.join(PROJECT_ROOT, 'docs/31_note記事原稿');

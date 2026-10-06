@@ -50,7 +50,7 @@ e-Stat API (政府統計) と MLIT データプラットフォーム の統計�
 ## File Boundary (並行衝突回避)
 
 - D1 への write 一切なし (本 agent は read-only on DB)
-- `.claude/state/estat-*` への append は同 statsDataId に対しては逐次、別 statsDataId は並列可
+- `data/estat/` への append は同 statsDataId に対しては逐次、別 statsDataId は並列可
 - 並行起動可能 agent: data-ingester (本 agent の結果を消費)、 db-schema-manager (schema 操作)
 
 ## Output Contract

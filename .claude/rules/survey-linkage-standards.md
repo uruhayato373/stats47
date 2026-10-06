@@ -33,7 +33,7 @@ chart source.json) を共通 resolver が surveys.json へ解決する。
 | **テーマ chart lineage** | `data/themes/catalogs/<key>.json` の `relatedRankingKeys` / `rankingLink` / `estatParams` | git JSON | `resolveThemeSurveyTaxonomy` が直接解決。surveyId を重複記録しない |
 | **テーマ指標カード lineage** | ThemeCatalog の `metricGroups[].rankingKeys` | git JSON | 固定年比較・時系列カードも監査する。追加図とは別の母数・coverageを保持し、一部未解決を成功にしない |
 | **ブログ chart lineage** | R2 `app/blog/<slug>/data/<base>.source.json` | R2 JSON | rankingKey / statsDataId、または手動取得統計の `sourceName` を共通原典辞書で解決。記事単位の派生 `surveyIds[]` は `app/blog/all.json` へ焼く |
-| **横断監査 state** | `.claude/state/surveys/taxonomy.json` | 派生 JSON | ranking/theme/blog 全量 + survey→各面の逆引き。手編集禁止 |
+| **横断監査 state** | `data/surveys/taxonomy.json` | 派生 JSON | ranking/theme/blog 全量 + survey→各面の逆引き。手編集禁止 |
 | **悪化防止 ratchet** | `.claude/config/survey-taxonomy-ratchet.json` | git JSON | 週次監査が改善方向だけに tighten。PR は offline check |
 
 **ranking 紐付け解決の唯一の実装**: `packages/ranking/src/builders/build-ranking-item-from-metric.ts` の
@@ -105,7 +105,7 @@ ratchet の `maxLegacyDataSourceSectionArticles` / `maxSourcelessChartArticles` 
   ポートフォリオ監査 (`/manage-survey-portfolio`) で実行する (ネットワーク必須のため PR CI には
   入れない)。初回全件実測 2026-07-14: active 2,159 件 一致 100%・欠落 0・調査集合一致。
 - **横断層**: `audit-survey-taxonomy.ts` が ranking / ThemeCatalog 全 chart / 公開 blog 全 SVG を
-  同じ core で監査し、`.claude/state/surveys/taxonomy.json` に逆引き索引も保存する。配信中 blog snapshot の
+  同じ core で監査し、`data/surveys/taxonomy.json` に逆引き索引も保存する。配信中 blog snapshot の
   `surveyIds` と `surveyArticleIndex` が同じ導出結果を含むことも検査し、古い snapshot による片方向リンクを
   失敗として扱う。PR は
   `--offline --check` で git drift・10日 freshness・ratchet を検査し、週次 workflow が R2 blog を

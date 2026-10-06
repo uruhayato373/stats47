@@ -738,7 +738,7 @@ function renderScatter(data: any): string {
 function loadTargets(): { slug: string; base: string }[] {
   const q = JSON.parse(
     fs.readFileSync(
-      path.join(PROJECT_ROOT, '.claude/state/blog/svg-lineage-queue.json'),
+      path.join(PROJECT_ROOT, 'data/blog/svg-lineage-queue.json'),
       'utf8'
     )
   );

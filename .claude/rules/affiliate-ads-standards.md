@@ -2,7 +2,8 @@
 paths:
   - "apps/web/scripts/affiliate-*.ts"
   - "apps/web/src/{features/ads,lib/a8net,lib/google-adsense}/**"
-  - ".claude/{scripts/ads,skills/ads,skills/analytics/affiliate-improvement,state/ads}/**"
+  - ".claude/{scripts/ads,skills/ads,skills/analytics/affiliate-improvement}/**"
+  - "data/affiliate/**"
   - ".claude/agents/{affiliate-*,asp-scout,a8-*}.md"
 ---
 # アフィリエイト広告 標準 (SSOT + 意図ハブ + 共通ルール)
@@ -107,8 +108,8 @@ apps/web/scripts/affiliate-ads-data.ts (AFFILIATE_ADS = git TS SSOT・広告は 
 |---|---|
 | authored成果条件・lane・friction | `apps/web/scripts/affiliate-offer-profiles-data.ts`（affiliate-manager排他writer） |
 | creative / placement | `apps/web/scripts/affiliate-ads-data.ts`（`programRef`でprofile参照） |
-| 変動するGA4・ASP成果・候補 | `.claude/state/ads/affiliate-portfolio-latest.json`（派生・手編集禁止） |
-| pilot開始可否・必要母数・verdict | `.claude/state/ads/affiliate-pilot-readiness-latest.json`（派生・勝者を持たない） |
+| 変動するGA4・ASP成果・候補 | `data/affiliate/affiliate-portfolio-latest.json`（派生・手編集禁止） |
+| pilot開始可否・必要母数・verdict | `data/affiliate/affiliate-pilot-readiness-latest.json`（派生・勝者を持たない） |
 
 active広告の新規登録は、参照先profileが存在し、未分類/blocked/pausedでなく、verticalが許可済みの場合だけ通す。
 案件名から行動負担を推測してprofile/stateを書き換えない。公開pilotはmeasurement・outcome・profile・実現可能性・
@@ -129,7 +130,7 @@ state と二重 SSOT になり、**表側が実態から乖離した** (2026-08-
 実機照合の頻度に追いつけないため、ステータスは state に一本化し表は設計指針に縮退させた。
 
 - `/register-affiliate-banner status` は上記 2 つの state を読む (本表は読まない)。
-- **在庫数・ゼロ/手薄軸も本表に書かない** (変動値)。`.claude/state/ads/inventory-latest.json` の
+- **在庫数・ゼロ/手薄軸も本表に書かない** (変動値)。`data/affiliate/inventory-latest.json` の
   `coverage.gapVerticals` / `thinVerticals` (または集約 `affiliate-operations-latest.json`) から読む。
 - 本表に書くのは**変わりにくいもの**だけ (軸の意味・送客先ページ)。個別プログラム名は
   入れ替わるため書かない。
@@ -220,7 +221,7 @@ state と二重 SSOT になり、**表側が実態から乖離した** (2026-08-
   別 vertical への推測フォールバックを禁止する。通常記事は従来の自動解決を維持する。
 - `audit-affiliate-relevance.ts --check` は policy の slug・vertical・理由をPRで検証する。
   `--live` は公開全記事の survey/tag 競合、surveyだけで決まる記事、複数verticalタグを
-  `.claude/state/ads/relevance-latest.json` へ出し、週次CIで更新する。
+  `data/affiliate/relevance-latest.json` へ出し、週次CIで更新する。
 - 監査結果はレビュー候補であり、自動修正しない。`affiliate-manager` が記事意図を確認し、必要な記事だけ
   明示policyへ追加する。広告の有無や vertical をモデルの推測で一括変更しない。
 - **出典調査だけで決まる furusato の決定的規則 (2026-09-24 オーナー判断)**: 家計調査の品目記事 (ビール・エアコン・
@@ -307,7 +308,7 @@ state と二重 SSOT になり、**表側が実態から乖離した** (2026-08-
 
 `affiliate-manager` がユーザーと 1 件ずつ対話しながら在庫を増やす。mode: `propose`(既定) / `register` / `direct` / `status`。
 
-- **`propose`**: **`.claude/state/ads/placement-map-latest.json` を読む** (§12)。目視で JOIN しない。
+- **`propose`**: **`data/affiliate/placement-map-latest.json` を読む** (§12)。目視で JOIN しない。
   `unmapped.byReason` (広告が出ていない imp) → `gaps[].kinds` (在庫欠落) → `reverseCandidates` の順に見て、
   「在庫ゼロ/手薄 × 高トラフィック」の vertical を特定 → §2 表と照合し **次に提携すべき 1 プログラム**を根拠
   (想定 imp 機会・単価帯・送客ページ) つきで提示 → ユーザーが ASP (A8 等) で提携申請。**1 回 1 件**。
@@ -465,7 +466,7 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
     (`hasVariantBreakdown: false`) で、クリエイティブ A/B の判定にはまだ使えない。
   - **`other` を未写像ページ数として扱わない**。固定ハウスバナーなど vertical 非依存の枠も
     `other` を意図的に送るため、未写像と固定枠の合成値である。写像漏れは `other` の比率から推測せず、
-    `.claude/state/ads/placement-map-latest.json` の `unmapped.byReason` と ad_id / position 内訳で判定する。
+    `data/affiliate/placement-map-latest.json` の `unmapped.byReason` と ad_id / position 内訳で判定する。
 - **週次改善**: imp>500 かつ CTR が vertical 中央値の 1/2 未満 → priority 1 バンド降格 (次点繰り上げ)。
   比較は experiment registry (weight 50/50) で。**週次 1 vertical 1 変更まで** (配信急変防止)。effect 判定は
   evidence-based (improvement-triage)。
@@ -751,7 +752,7 @@ metric config (git TS SSOT) の title から機械導出する — 家計調査�
 ### 需要 × 供給の突合は機械が行う
 
 `.claude/scripts/ads/build-placement-map.mjs` が GSC ページ別実測 × 在庫 × 確定EPC を突合し
-`.claude/state/ads/placement-map-latest.json` を生成する (週次 cron `affiliate-dashboard-refresh.yml`)。
+`data/affiliate/placement-map-latest.json` を生成する (週次 cron `affiliate-dashboard-refresh.yml`)。
 **目視 JOIN で propose しない** — 再現性が無く見落とすため。判定は `lib/placement-map-core.mjs` (テスト付き)。
 
 出力の読み方:
@@ -783,10 +784,10 @@ metric config (git TS SSOT) の title から機械導出する — 家計調査�
 - 監査/lint: `.claude/scripts/ads/audit-affiliate-inventory.ts` (vertical カバレッジ + `--check-size`) /
   `.claude/scripts/ads/audit-affiliate-compliance.ts` (直接配置・PR 表記)
 - 配置マップ (§12): `.claude/scripts/ads/build-placement-map.mjs` + `lib/placement-map-core.mjs` (+ `__tests__/`)
-  → `.claude/state/ads/placement-map-latest.json` (週次 `affiliate-dashboard-refresh.yml`)
+  → `data/affiliate/placement-map-latest.json` (週次 `affiliate-dashboard-refresh.yml`)
 - 楽天動的 (§12): `apps/web/src/features/ads/lib/rakuten-api.ts` /
   `constants/{furusato-nozei,product-keywords}.ts` / `components/{FurusatoNozeiCard,RakutenItemsCard}.tsx`
-- 機械状態: `.claude/state/ads/{affiliate-operations-latest,inventory-latest,compliance-latest}.json` / 実験台帳 `data/affiliate/experiments.json`
+- 機械状態: `data/affiliate/{affiliate-operations-latest,inventory-latest,compliance-latest}.json` / 実験台帳 `data/affiliate/experiments.json`
   (生成: `build-affiliate-operations-state.ts` + 週次 CI。**在庫数・gap は state から読む — 文書に固定しない**)
 - GA4 計測: `.claude/scripts/ads/fetch-affiliate-ga4.cjs` / `apps/web/src/lib/analytics/events.ts`
 - agent: `.claude/agents/affiliate-manager.md` / `.claude/agents/affiliate-operator.md` (§11)

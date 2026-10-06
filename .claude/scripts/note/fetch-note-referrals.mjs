@@ -104,7 +104,7 @@ const report = {
   raw,
   japan,
 };
-const output = join(PROJECT_ROOT, ".claude/state/metrics", `note-referrals-${isoInJst()}.json`);
+const output = join(PROJECT_ROOT, "data/note/evidence", `note-referrals-${isoInJst()}.json`);
 mkdirSync(dirname(output), { recursive: true });
 writeFileSync(`${output}.tmp`, `${JSON.stringify(report, null, 2)}\n`, "utf8");
 renameSync(`${output}.tmp`, output);

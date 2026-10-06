@@ -12,7 +12,7 @@ primary_agent: article-writer
 本文と critic を対話セッションが回す。
 
 > **★件数を決めるのは週次計画** (`.claude/todo/weekly.md` の Must)。月間本数の SSOT は
-> `.claude/state/blog/seo-strategy.json` の `typeMix.perMonth` (月 17-19 本) で、
+> `data/blog/seo-strategy.json` の `typeMix.perMonth` (月 17-19 本) で、
 > `.claude/todo/monthly.md` がそれを重点として持つ。日次 CI (`blog-generate-daily.yml`) は
 > 2026-08-21 に削除した — 対話セッションと同じ Pro/Max 利用枠を食うため。
 > 正典: `.claude/rules/blog-quality-standards.md` / `.claude/rules/blog-data-schema.md` §0

@@ -21,7 +21,7 @@ primary_agent: open-data-curator
 ```bash
 npx tsx .claude/scripts/provenance/audit-provenance-queue.ts
 ```
-→ `.claude/state/provenance/{queue.json,LATEST.md}` を再生成。クラス分布 (A/A'/B/C/D) と是正対象 (C欠落+D) を表示。
+→ `data/provenance/{queue.json,LATEST.md}` を再生成。クラス分布 (A/A'/B/C/D) と是正対象 (C欠落+D) を表示。
 `LATEST.md` の「是正対象」リストが worklist。
 
 ### 2. lint で床を確認
@@ -64,6 +64,6 @@ npx tsx .claude/scripts/provenance/audit-provenance-queue.ts # 是正対象が�
 ## 関連
 - 正典: `.claude/rules/data-provenance-standards.md`
 - lint: `packages/data-configs/scripts/validate-metric-config.ts`
-- queue: `.claude/scripts/provenance/audit-provenance-queue.ts` → `.claude/state/provenance/`
+- queue: `.claude/scripts/provenance/audit-provenance-queue.ts` → `data/provenance/`
 - cron: `.github/workflows/provenance-audit-weekly.yml`
 - 手本 (blog): `.claude/scripts/blog/build-lineage-queue.mjs`

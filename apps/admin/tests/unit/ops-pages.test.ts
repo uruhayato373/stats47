@@ -87,8 +87,8 @@ describe("ads server", () => {
   it("集約 state・在庫・GA4 を読み、実験を bucket 付きで平坦化する", async () => {
     root = makeFixtureRoot({
       stateFiles: {
-        ".claude/state/ads/affiliate-operations-latest.json": OPERATIONS,
-        ".claude/state/ads/inventory-latest.json": INVENTORY,
+        "data/affiliate/affiliate-operations-latest.json": OPERATIONS,
+        "data/affiliate/inventory-latest.json": INVENTORY,
         "data/affiliate/ga4-affiliate-2026-08-16.json": GA4,
       },
     });
@@ -114,8 +114,8 @@ describe("ads server", () => {
   it("★巨大カタログは件数と status 内訳だけ返す (raw entries を渡さない)", async () => {
     root = makeFixtureRoot({
       stateFiles: {
-        ".claude/state/ads/affiliate-operations-latest.json": OPERATIONS,
-        ".claude/state/ads/inventory-latest.json": INVENTORY,
+        "data/affiliate/affiliate-operations-latest.json": OPERATIONS,
+        "data/affiliate/inventory-latest.json": INVENTORY,
         "data/affiliate/ga4-affiliate-2026-08-16.json": GA4,
         "data/affiliate/a8-catalog.json": A8_CATALOG,
       },
@@ -184,7 +184,7 @@ describe("quality server", () => {
   it("キューごとに欠陥数と鮮度を出し、未生成は exists:false で返す", async () => {
     root = makeFixtureRoot({
       stateFiles: {
-        ".claude/state/blog/svg-lineage-queue.json": JSON.stringify({
+        "data/blog/svg-lineage-queue.json": JSON.stringify({
           generatedAt: "2026-08-10T00:00:00.000Z",
           total: 1080,
           byStatus: { both: 974, jsonOnly: 0, neither: 106 },
@@ -211,7 +211,7 @@ describe("ops-ledger server", () => {
   it("不健全な workflow を先頭に並べ、台帳は frontmatter だけ読む", async () => {
     root = makeFixtureRoot({
       stateFiles: {
-        ".claude/state/ci/workflow-health.json": JSON.stringify({
+        "data/ci/workflow-health.json": JSON.stringify({
           generatedAt: "2026-08-18T00:00:00.000Z",
           checked: 3,
           results: [

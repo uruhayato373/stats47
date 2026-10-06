@@ -1,5 +1,5 @@
 /**
- * アフィリエイト運用 集約状態 (.claude/state/ads/affiliate-operations-latest.json) の決定的コア。
+ * アフィリエイト運用 集約状態 (data/affiliate/affiliate-operations-latest.json) の決定的コア。
  *
  * 純粋関数のみ (I/O なし)。CLI (.claude/scripts/ads/build-affiliate-operations-state.ts) が
  * snapshot 群 (inventory / GA4 / compliance / experiments registry / AFFILIATE_ADS) を渡す。

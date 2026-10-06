@@ -2,7 +2,7 @@
  * build-wp0-inventory — 市区町村スコープ分離 WP0 の read-only 棚卸し (doc 44 §WP0)
  * ---------------------------------------------------------------------------
  * コード・R2・URL を一切変更しない。事実だけを集めて
- * `.claude/state/municipalities/wp0-inventory.json` と `LATEST.md` に出す。
+ * `data/municipalities/wp0-inventory.json` と `LATEST.md` に出す。
  *
  * 集めるもの:
  *   1. active MetricConfig の entity 分類 (pref-only / city-only / both / other)
@@ -25,7 +25,7 @@ import { METRICS_REGISTRY } from "@stats47/data-configs/registry";
 import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
-const OUT_DIR = join(REPO_ROOT, ".claude/state/municipalities");
+const OUT_DIR = join(REPO_ROOT, "data/municipalities");
 const R2_BASE = process.env.R2_PUBLIC_FETCH_URL ?? R2_PUBLIC_BASE_URL;
 
 /** 社内プロキシ配下では Node の素の fetch が外に出られない (local-environment.md)。 */

@@ -94,8 +94,8 @@ export function readCycleHealth(root, today) {
     const items = JSON.parse(ledgerText).items ?? {};
     completedIds = new Set(Object.entries(items).filter(([, v]) => v.status === "completed").map(([id]) => id));
   }
-  const yearText = readText(root, ".claude/state/data/estat-year-coverage/queue.json");
-  const gscText = readText(root, ".claude/state/gsc/coverage-remediation-queue.json");
+  const yearText = readText(root, "data/estat/year-coverage/queue.json");
+  const gscText = readText(root, "data/gsc/coverage-remediation/coverage-remediation-queue.json");
   const detectors = summarizeDetectors({
     yearResults: yearText ? JSON.parse(yearText).results : null,
     yearByDesign: JSON.parse(readText(root, YEAR_BY_DESIGN) ?? "{}"),

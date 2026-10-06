@@ -382,7 +382,7 @@ function validateProcessingContract(profileName, profile) {
   }
   if (
     typeof profile.manifestPath !== 'string' ||
-    !profile.manifestPath.startsWith('.claude/state/source-inventory/')
+    !profile.manifestPath.startsWith('data/source-inventory/')
   ) {
     throw new Error(`Invalid manifestPath: ${profileName}`);
   }

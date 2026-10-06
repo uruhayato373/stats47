@@ -9,7 +9,8 @@ paths:
   - "apps/web/src/{app/geo,features/geo-analysis}/**"
   - "apps/remotion/src/features/geo-x/**"
   - "packages/gis/src/geo-analysis/**"
-  - ".claude/{skills/gis,state/geo-scope,skills/sns/operate-geo-content}/**"
+  - ".claude/{skills/gis,skills/sns/operate-geo-content}/**"
+  - "data/geo/**"
   - ".claude/agents/geo-analysis-curator.md"
 ---
 # Geo分析コンテンツ標準
@@ -112,7 +113,7 @@ source.scenariosに登録し原典検証した県途中artifactと承認済み�
 
 GIS一覧と単体ページは `GeoSourceNavigation` を共有する。右レールには公開対象の全データを分野別の連番リストで掲載し、現在のGISと地図準備中を区別する。狭い画面では本文上部の開閉式一覧に置き換え、本文末尾に重複表示しない。データ取得失敗を「準備中」と誤表示しない。個別ページのURLを先に用意し、表示データが検証できたものから同じURLで地図を提供する。
 
-単体GISの読み方・対象時点・範囲・注意点・属性の単位は `packages/data-configs/src/business-plan/geo-source-pages.ts` を版付き正典とする。進捗は `node --import tsx apps/web/scripts/audit-geo-source-pages.ts --ids <カンマ区切りID>` で `.claude/state/geo/source-pages.json` に記録し、人向け一覧を `.local/geo-source-pages/progress.html` に生成する。代表ファイルの応答・地物数・文字化け・属性・320/1440pxの描画と横はみ出しを検証し、内容や描画コードの変更後は古い確認済み判定を無効化する。ローカル確認は全区画保証や本番確認と扱わない。次の着手順と未完了条件は backlog の `GEO-SOURCE-PAGES-01` に置き、50件の状態をMarkdownへ複製しない。
+単体GISの読み方・対象時点・範囲・注意点・属性の単位は `packages/data-configs/src/business-plan/geo-source-pages.ts` を版付き正典とする。進捗は `node --import tsx apps/web/scripts/audit-geo-source-pages.ts --ids <カンマ区切りID>` で `data/geo/source-pages.json` に記録し、人向け一覧を `.local/geo-source-pages/progress.html` に生成する。代表ファイルの応答・地物数・文字化け・属性・320/1440pxの描画と横はみ出しを検証し、内容や描画コードの変更後は古い確認済み判定を無効化する。ローカル確認は全区画保証や本番確認と扱わない。次の着手順と未完了条件は backlog の `GEO-SOURCE-PAGES-01` に置き、50件の状態をMarkdownへ複製しない。
 
 `/geo/layers` は単体GISの入口。閲覧可能な表現は `packages/data-configs/src/business-plan/geo-layers.ts` が正典で、`/geo/layers/<layerSlug>` から県・属性・出典を確認し、同じ県の重ね合わせ分析へ進む。人口・住宅地抽出・駅代表点は検証済み県bundleから必要な項目だけを投影し、重ね合わせ判定を混入させない。登録メタ一覧は閲覧可能・商用公開可能を意味しない。洪水メッシュ判定を原典の浸水区域ポリゴンの代用として単体公開しない。
 

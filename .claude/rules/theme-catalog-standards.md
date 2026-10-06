@@ -3,7 +3,8 @@ paths:
   - "data/themes/**"
   - "packages/data-configs/src/theme-catalog/**"
   - "apps/web/src/{features/theme-dashboard,app/themes}/**"
-  - ".claude/{skills/theme,scripts/themes,state/themes}/**"
+  - ".claude/{skills/theme,scripts/themes}/**"
+  - "data/themes/**"
   - ".claude/agents/theme-*.md"
 ---
 # テーマ指標×チャート統合カタログ標準 (ThemeCatalog SSOT)
@@ -29,7 +30,7 @@ paths:
 | 層                      | 場所                                                                  | 役割                                                                   |
 | ----------------------- | --------------------------------------------------------------------- | ---------------------------------------------------------------------- |
 | **SSOT**                | `data/themes/catalogs/<key>.json` (`ThemeCatalog`)                    | 指標選定 + チャート割当 + 章 + 選定根拠 (selection)。**ここだけを編集する**。表示される最終形そのもので、合成や既定値の補完はない |
-| 形の検査                | `data/themes/theme-catalog.schema.json` (JSON Schema)                 | 項目名・型・列挙値。`theme-catalog-json.test.ts` が全ファイルに適用し、整形 (2 スペース・末尾改行) も検査する |
+| 形の検査                | `data/themes/schema/theme-catalog.schema.json` (JSON Schema)                 | 項目名・型・列挙値。`theme-catalog-json.test.ts` が全ファイルに適用し、整形 (2 スペース・末尾改行) も検査する |
 | 登録簿                  | `packages/data-configs/src/theme-catalog/catalogs/index.ts` (`THEME_CATALOGS`) | JSON を import して型を付けるだけ。登録されたテーマだけ生成対象。一覧と `data/themes/catalogs/` のファイルの一致はテストが検査する。barrel `theme-catalog/index.ts` は再 export だけ |
 | 型                      | `packages/data-configs/src/theme-catalog/types.ts`                    | `ThemeCatalog` / `CatalogMetric` / `CatalogChart` / `MetricSelection`。schema はこの型に合わせる |
 | **生成物** (手編集禁止) | `packages/types/src/indicator-sets/<key>.ts`                          | IndicatorSet codegen (`// AUTO-GENERATED — DO NOT EDIT`)               |
@@ -441,7 +442,7 @@ export 済み関数を再利用する (判定ロジックを admin 側へ複製�
 
 ## 関連
 
-- SSOT: `data/themes/catalogs/` (schema `data/themes/theme-catalog.schema.json`)
+- SSOT: `data/themes/catalogs/` (schema `data/themes/schema/theme-catalog.schema.json`)
 - 型・登録簿: `packages/data-configs/src/theme-catalog/`
 - generator: `packages/data-configs/scripts/generate-theme-catalog.ts`
 - validator: `packages/data-configs/scripts/validate-theme-catalog.ts`

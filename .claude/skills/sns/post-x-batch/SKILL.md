@@ -90,7 +90,7 @@ node -e 'const c=require("./.local/r2/sns/_queue/candidates.json"); c.filter(x=>
 - **URL は書かず `{{url}}` トークンを 1 個だけ置く** (register が §4 の UTM URL に決定的置換する。URL を
   LLM が書くと捏造・UTM 不整合になる)。
 - **ハッシュタグ 3-5 個**。本文 (URL・改行除く) は `charMax` 以下。
-- **勝ちパターンを反映**: `.claude/state/sns/x-winning-patterns.json` があれば、confidence hi/mid の
+- **勝ちパターンを反映**: `data/sns/x-winning-patterns.json` があれば、confidence hi/mid の
   featureSignal (効く template / フック) を優先する (無ければ §2-8 相性の既定でよい)。
 - 既存・同バッチと似すぎない (④の類似度ゲートで弾かれる)。
 
@@ -145,5 +145,5 @@ npx tsx .claude/skills/sns/publish-x/publish-x.ts --from-queue             # 予
 - カタログ API: `.claude/scripts/lib/x-catalog.cjs`
 - 画像最短経路: `.claude/scripts/sns/quick-still.ts`
 - 投稿 (ローカル): `.claude/skills/sns/publish-x/`
-- 勝ちパターン: `.claude/scripts/sns/analyze-x-winning-patterns.mjs` → `.claude/state/sns/x-winning-patterns.json`
+- 勝ちパターン: `.claude/scripts/sns/analyze-x-winning-patterns.mjs` → `data/sns/x-winning-patterns.json`
 - オーナー agent: `.claude/agents/x-strategist.md`

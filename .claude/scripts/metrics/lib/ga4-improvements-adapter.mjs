@@ -23,7 +23,7 @@ import { PROJECT_ROOT } from "./auth.mjs";
 const ACTIVE_STATUSES = new Set(["pending", "in-progress", "effect/pending"]);
 const PAGE_MARKER = /\[ga4-page:\s*([^\]\s]+)\s*\]/g;
 
-/** 計測の不連続点 (`.claude/state/metrics/releases/2026-09-26-ga4-measurement-v2.json`)。 */
+/** 計測の不連続点 (`data/releases/2026-09-26-ga4-measurement-v2.json`)。 */
 export const GA4_MEASUREMENT_DISCONTINUITY_WEEK = isoWeekOf("2026-09-26");
 
 export function extractGa4Pages(text) {

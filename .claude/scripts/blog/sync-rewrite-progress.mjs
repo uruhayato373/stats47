@@ -30,7 +30,7 @@ import path from "node:path";
 
 const PROJECT_ROOT = path.resolve(import.meta.dirname, "..", "..", "..");
 const DOCS = path.join(PROJECT_ROOT, "docs/21_ブログ記事原稿");
-const QUEUE = path.join(PROJECT_ROOT, ".claude/state/blog/remediation-queue.json");
+const QUEUE = path.join(PROJECT_ROOT, "data/blog/remediation-queue.json");
 
 const args = process.argv.slice(2);
 const getArg = (k, d) => {

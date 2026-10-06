@@ -69,14 +69,14 @@ tests/          unit + integration (Vitest) / e2e (Playwright)
 | SNS 投稿台帳 | `data/sns/posts.json` | adminは`loadAll/query`だけを公開。書込はadmin外のagent/skillがstore経由で実行 |
 | note編集メタ / 本文 | `.claude/scripts/note/catalog/` (git TS) / R2 `note/<vertical>/<slug>/` | `/content/note` は正規化表示のみ。`note-published-urls.json` は派生で手編集しない |
 | Kindle設計 / 原稿 / 出品 | `book-catalog.ts` / `manuscripts/<id>/` / `config/kdp-listings.json` / `data/products/kindle-archives.json` | `/content/kindle` は突合表示のみ。ローカル成果物とR2 revision、KDP状態を別々に表示 |
-| 参考文献展開 | `.claude/state/source-inventory/` + Theme/Japan/survey/blog/note/Kindle/SNSの既存SSOT + `docs/{21_ブログ記事原稿,31_note記事原稿}/` | `/content/references` は制作単位×12チャネルを実行時に重複排除し、context-onlyも全件集約する。原本・OCR・crop・Drive IDは読まない |
-| IG 予約 | `.claude/state/instagram-w*-schedule.json` | adminはposts.jsonとの差分表示だけ。予約agentが更新 |
+| 参考文献展開 | `data/source-inventory/` + Theme/Japan/survey/blog/note/Kindle/SNSの既存SSOT + `docs/{21_ブログ記事原稿,31_note記事原稿}/` | `/content/references` は制作単位×12チャネルを実行時に重複排除し、context-onlyも全件集約する。原本・OCR・crop・Drive IDは読まない |
+| IG 予約 | `data/sns/instagram-w*-schedule.json` | adminはposts.jsonとの差分表示だけ。予約agentが更新 |
 | ローカル素材 | `.local/r2/sns` / `.local/ogp-pilot` | `/media` `/pilot` で配信 (読み取り) |
 | X 成功時刻 | `.local/sns-gallery-state.json` | 投稿agentが更新し、adminは残枠表示のために読む |
 | 配信素材 | R2 (`storage.stats47.jp`) | 公開 URL で読む。list しない |
 | dashboard | state JSON / metrics CSV / docs md | 読み取り専用ミラー (`lib/server/dashboard.ts`) |
 | 調査カタログ | `.claude/skills/theme/research-theme-catalog/reference/public-dashboard-catalog.json` | 読み取り専用ミラー (`lib/server/dashboard-catalog.ts`) |
-| 事業計画 | `packages/data-configs/src/business-plan/` + `.claude/state/business-plan/latest.json` | authored SSOTとderived運用stateの読み取り専用ミラー (`lib/server/business-plan.ts`) |
+| 事業計画 | `packages/data-configs/src/business-plan/` + `data/business-plan/latest.json` | authored SSOTとderived運用stateの読み取り専用ミラー (`lib/server/business-plan.ts`) |
 | 資産列挙 | `.claude/scripts/lib/gallery-collectors.mjs` + `svg-classify.mjs` | **CI 静的ギャラリーと共有 — 削除禁止**。`lib/server/collectors.ts` (+ .d.ts) 経由で import |
 
 ## 安全ガード

@@ -16,7 +16,7 @@ const catalogFiles = readdirSync(CATALOGS_DIR)
   .sort();
 
 const validate = new Ajv({ allErrors: true }).compile(
-  JSON.parse(readFileSync(path.join(THEMES_DIR, "theme-catalog.schema.json"), "utf8")),
+  JSON.parse(readFileSync(path.join(THEMES_DIR, "schema", "theme-catalog.schema.json"), "utf8")),
 );
 
 function readCatalog(name: string): { raw: string; data: Record<string, unknown> } {

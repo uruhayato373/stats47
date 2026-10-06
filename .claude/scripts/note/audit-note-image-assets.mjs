@@ -59,7 +59,7 @@ const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
 let r2Unknown = [];
 let r2Checked = 0;
 if (args.has("--verify-r2")) {
-  const articles = readJson(".claude/state/note-published-urls.json")?.articles ?? {};
+  const articles = readJson("data/note/note-published-urls.json")?.articles ?? {};
   const statusByPath = new Map();
   await Promise.all(
     Object.values(articles)

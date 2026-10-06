@@ -170,6 +170,7 @@ test("--pr は registry に無い手書き生成物ゲートについて PR CI (
     "generate-ranking-prominence.ts",
     "audit-affiliate-compliance.ts",
     "audit-affiliate-relevance.ts",
+    "business-plan:check",
   ];
   for (const command of shared) {
     assert.ok(src.includes(command), `preflight --pr が ${command} を失っている`);

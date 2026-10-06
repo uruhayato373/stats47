@@ -1,22 +1,13 @@
 {
   "schemaVersion": 1,
-  "date": "2026-10-06",
+  "date": "2026-10-07",
   "period": {
-    "periodStart": "2026-09-27",
-    "periodEnd": "2026-10-03",
+    "periodStart": "2026-09-28",
+    "periodEnd": "2026-10-04",
     "windowDays": 7
   },
-  "inputHash": "d34e287bf16e2930fbcfcdee1a6bbf3b4e3d382af18f88a118ad23042e129b8b",
+  "inputHash": "461d128070c3a76f050c0eb33b84c9cd1fb132ea5d7cb9dfb0fb201f05565a76",
   "movements": [
-    {
-      "keyword": "ふるさと納税 募集費用",
-      "targetPath": "/ranking/furusato-fundraising-cost-prefecture",
-      "before": 66,
-      "after": 6.333333333333333,
-      "beforeImpressions": 2,
-      "impressions": 6,
-      "change": 59.666666666666664
-    },
     {
       "keyword": "うどん消費量ランキング",
       "targetPath": "/blog/udon-soba-food-culture-prefecture-map",
@@ -25,6 +16,33 @@
       "beforeImpressions": 1,
       "impressions": 1,
       "change": -58
+    },
+    {
+      "keyword": "かつお 産地",
+      "targetPath": "/blog/bonito-catch-prefecture",
+      "before": 1,
+      "after": 56,
+      "beforeImpressions": 2,
+      "impressions": 1,
+      "change": -55
+    },
+    {
+      "keyword": "任意保険 加入 率",
+      "targetPath": "/ranking/voluntary-car-insurance-rate-bodily-injury",
+      "before": 75,
+      "after": 23.142857142857142,
+      "beforeImpressions": 1,
+      "impressions": 7,
+      "change": 51.85714285714286
+    },
+    {
+      "keyword": "カツオ 漁獲量",
+      "targetPath": "/ranking/fishery-species-catch-bonito",
+      "before": 9,
+      "after": 56,
+      "beforeImpressions": 2,
+      "impressions": 1,
+      "change": -47
     },
     {
       "keyword": "地方 債 利率 ランキング",
@@ -36,39 +54,12 @@
       "change": 46
     },
     {
-      "keyword": "任意保険 加入 率",
-      "targetPath": "/ranking/voluntary-car-insurance-rate-bodily-injury",
-      "before": 75.5,
-      "after": 32.25,
-      "beforeImpressions": 2,
-      "impressions": 4,
-      "change": 43.25
-    },
-    {
-      "keyword": "うどん消費量ランキング",
-      "targetPath": "/ranking/soba-udon-dining-consumption-expenditure",
-      "before": 11,
-      "after": 50,
-      "beforeImpressions": 1,
-      "impressions": 1,
-      "change": -39
-    },
-    {
       "keyword": "高校 教員 年収",
       "targetPath": "/blog/high-school-teacher-salary-prefecture-gap",
-      "before": 46.25,
+      "before": 45.666666666666664,
       "after": 10.666666666666666,
-      "beforeImpressions": 4,
+      "beforeImpressions": 3,
       "impressions": 6,
-      "change": 35.583333333333336
-    },
-    {
-      "keyword": "高校の先生 給料",
-      "targetPath": "/blog/high-school-teacher-salary-prefecture-gap",
-      "before": 47,
-      "after": 12,
-      "beforeImpressions": 1,
-      "impressions": 2,
       "change": 35
     },
     {
@@ -81,22 +72,31 @@
       "change": 32
     },
     {
-      "keyword": "高校教諭 年収",
-      "targetPath": "/blog/high-school-teacher-salary-prefecture-gap",
-      "before": 42,
+      "keyword": "和歌山 最低賃金 推移",
+      "targetPath": "/areas/30000/labor-wages",
+      "before": 39,
       "after": 11,
       "beforeImpressions": 1,
-      "impressions": 4,
-      "change": 31
+      "impressions": 1,
+      "change": 28
     },
     {
-      "keyword": "任意保険 加入率",
-      "targetPath": "/ranking/voluntary-car-insurance-rate-bodily-injury",
-      "before": 63,
-      "after": 33.53333333333333,
+      "keyword": "生活保護 大阪",
+      "targetPath": "/areas/27000/public-assistance",
+      "before": 28.6,
+      "after": 56,
+      "beforeImpressions": 5,
+      "impressions": 1,
+      "change": -27.4
+    },
+    {
+      "keyword": "教員 年収ランキング",
+      "targetPath": "/ranking/school-teacher-annual-income",
+      "before": 34.666666666666664,
+      "after": 7.5,
       "beforeImpressions": 3,
-      "impressions": 15,
-      "change": 29.46666666666667
+      "impressions": 2,
+      "change": 27.166666666666664
     }
   ],
   "verdicts": [
@@ -107,14 +107,14 @@
     }
   ],
   "selected": {
-    "keyword": "山形県 コンビニ 店舗数",
-    "targetPath": "/blog/convenience-store-density-map",
-    "rank": 11.75811209439528,
-    "impressions": 339,
-    "clicks": 0,
+    "keyword": "日照時間 ランキング",
+    "targetPath": "/ranking/annual-sunshine-duration",
+    "rank": 5.402843601895735,
+    "impressions": 211,
+    "clicks": 11,
     "group": 5,
     "previousMethod": null,
-    "editableFile": null
+    "editableFile": "packages/data-configs/src/metrics/annual-sunshine-duration.ts"
   },
   "observing": [
     {

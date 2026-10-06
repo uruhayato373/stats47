@@ -32,7 +32,7 @@
  *   node .claude/scripts/blog/find-chart-metric.mjs --min-rate 0.95
  *
  * 前提: /tmp/metric-registry.json (key/title/unit/isActive) — 無ければ作り方を案内する
- * 出力: .claude/state/blog/chart-metric-mapping.json
+ * 出力: data/blog/chart-metric-mapping.json
  *
  * 正典: .claude/rules/blog-data-schema.md §1.6 / §1.7
  */
@@ -43,7 +43,7 @@ import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 const R2 = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
-const STATE_DIR = path.join(PROJECT_ROOT, ".claude/state/blog");
+const STATE_DIR = path.join(PROJECT_ROOT, "data/blog");
 const REGISTRY = "/tmp/metric-registry.json";
 const argv = process.argv.slice(2);
 const num = (flag, def) => (argv.includes(flag) ? Number(argv[argv.indexOf(flag) + 1]) : def);
@@ -344,8 +344,8 @@ fs.writeFileSync(
 );
 console.error(
   `\n[find-metric] 特定 ${found.length} / 未特定 ${results.length - found.length} (計 ${results.length})\n` +
-    `  mapping (フラット): .claude/state/blog/chart-metric-mapping.json\n` +
-    `  詳細レポート      : .claude/state/blog/chart-metric-mapping-report.json\n` +
-    `  復元: npx tsx .claude/scripts/blog/regenerate-tile-maps.ts --mapping .claude/state/blog/chart-metric-mapping.json`,
+    `  mapping (フラット): data/blog/chart-metric-mapping.json\n` +
+    `  詳細レポート      : data/blog/chart-metric-mapping-report.json\n` +
+    `  復元: npx tsx .claude/scripts/blog/regenerate-tile-maps.ts --mapping data/blog/chart-metric-mapping.json`,
 );
 process.exit(found.length > 0 ? 0 : 3);

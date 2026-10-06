@@ -33,7 +33,7 @@ paths:
 
 書籍の**指標選定・章立て (アイデア/事実) は参照可**。レイアウト・図案・文言・写真の**複製は禁止**。
 source bundle manifestは
-`.claude/state/source-inventory/prefecture-databook/2021/source-bundle-manifest.json`を正典とする。
+`data/source-inventory/prefecture-databook/2021/source-bundle-manifest.json`を正典とする。
 
 ---
 

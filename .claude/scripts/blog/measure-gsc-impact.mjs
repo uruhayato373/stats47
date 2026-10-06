@@ -3,7 +3,7 @@
  * measure-gsc-impact.mjs — ブログ是正 wave の GSC 効果計測 (wave_id 駆動)
  *
  * 是正ループ ④ の自動化 (.claude/skills/blog/brushup-blog/reference/blog-remediation-loop.md)。
- * `.claude/state/blog/auto-brushup-history.json` の wave_id を真実源に、
+ * `data/blog/auto-brushup-history.json` の wave_id を真実源に、
  * due (是正から min-weeks 以上経過) に達した各 wave の before/after を週次 GSC snapshot で
  * 自動 diff し、`improvement-log.md` の `## [BLOG-WAVE-<wave_id>]` section を upsert する。
  *
@@ -19,7 +19,7 @@
  *   node .claude/scripts/blog/measure-gsc-impact.mjs --dry-run        # ログ書き込みせず stdout のみ
  *
  * 入力:
- *   - .claude/state/blog/auto-brushup-history.json   (wave_id → slug + date)
+ *   - data/blog/auto-brushup-history.json   (wave_id → slug + date)
  *   - data/gsc/snapshots/<YYYY-Www>/pages.csv
  * 出力:
  *   - data/improvement/gsc-improvement/improvement-log.md (section upsert)
@@ -51,7 +51,7 @@ const LOG_PATH = path.join(
 );
 const HISTORY_PATH = path.join(
   PROJECT_ROOT,
-  ".claude/state/blog/auto-brushup-history.json",
+  "data/blog/auto-brushup-history.json",
 );
 
 // ====== 利用可能 snapshot 週 ======

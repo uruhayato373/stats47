@@ -222,7 +222,7 @@ function rotateDaily(
 function loadRemediationUrls() {
   const p = path.join(
     PROJECT_ROOT,
-    ".claude/state/gsc/coverage-remediation-queue.json",
+    "data/gsc/coverage-remediation/coverage-remediation-queue.json",
   );
   if (!fs.existsSync(p)) return [];
   try {

@@ -179,7 +179,7 @@ source failureが他sourceを巻き込まないようにし、日次・週次・
 - pipeline: `.claude/scripts/search-growth/{collect,normalize,analyze,report,cli}.mjs`
 - core: `.claude/scripts/search-growth/lib/`
 - MCP: `.claude/scripts/search-growth/mcp/server.mjs`
-- state: `.claude/state/search-growth/`
+- state: `data/search-growth/`
 - CI: `.github/workflows/search-growth-weekly.yml`
 - tests: `.claude/scripts/search-growth/__tests__/`
 

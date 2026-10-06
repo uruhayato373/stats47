@@ -27,7 +27,7 @@ const args = new Set(process.argv.slice(2));
 const live = args.has("--live");
 const check = args.has("--check");
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
-const statePath = path.join(root, ".claude/state/ads/relevance-latest.json");
+const statePath = path.join(root, "data/affiliate/relevance-latest.json");
 
 async function main() {
   const catalogErrors = auditBlogAffiliatePolicyCatalog(

@@ -19,7 +19,7 @@ import { datasetDir } from "../../../../config/datasets.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..", "..");
-const LIVE_DIR = path.join(PROJECT_ROOT, ".claude/state/search-growth/live");
+const LIVE_DIR = path.join(PROJECT_ROOT, "data/search-growth/live");
 
 // ── CSV / week helpers ────────────────────────────────────────────────
 
@@ -216,7 +216,7 @@ const COVERAGE = {
   staleAfterDays: 14,
   api: "repo:coverage-remediation-queue",
   normalize(root, now) {
-    const file = path.join(root, ".claude/state/gsc/coverage-remediation-queue.json");
+    const file = path.join(root, "data/gsc/coverage-remediation/coverage-remediation-queue.json");
     if (!fs.existsSync(file)) return { observedAt: null };
     const j = JSON.parse(fs.readFileSync(file, "utf8"));
     const generatedAt = j.generated_at ?? fs.statSync(file).mtime.toISOString();
@@ -331,7 +331,7 @@ const CLOUDFLARE = {
 function defaultProbeUrls(root, sampleSize) {
   const controls = ["/", "/ranking/taxable-income-per-capita", "/areas/13000", "/blog"];
   let picks = [];
-  const candFile = path.join(root, ".claude/state/search-growth/candidates.json");
+  const candFile = path.join(root, "data/search-growth/candidates.json");
   if (fs.existsSync(candFile)) {
     try {
       const j = JSON.parse(fs.readFileSync(candFile, "utf8"));
@@ -356,7 +356,7 @@ const SITEMAP = {
     return { source: "sitemap", status: r.ok ? (r.truncated ? "partial" : "success") : "failed", count: r.pathKeys.length, file: rel(file), error: r.error };
   },
   normalize(root, now) {
-    const file = path.join(root, ".claude/state/search-growth/live/sitemap.json");
+    const file = path.join(root, "data/search-growth/live/sitemap.json");
     if (!fs.existsSync(file)) return { observedAt: null };
     const j = JSON.parse(fs.readFileSync(file, "utf8"));
     if (!j.ok) return { observedAt: j.observedAt, observations: [] };
@@ -364,7 +364,7 @@ const SITEMAP = {
     const freshness = freshnessForSource({ status: j.truncated ? "partial" : "success", observedAt, now, staleAfterDays: this.staleAfterDays });
     const set = new Set(j.pathKeys);
     // inSitemap は probe 済み URL 分だけ emit して肥大を防ぐ (indexability-conflict に必要な範囲)。
-    const httpFile = path.join(root, ".claude/state/search-growth/live/http.json");
+    const httpFile = path.join(root, "data/search-growth/live/http.json");
     let probed = [];
     if (fs.existsSync(httpFile)) {
       try { probed = (JSON.parse(fs.readFileSync(httpFile, "utf8")).probes ?? []).map((p) => toPathKey(p.url)).filter(Boolean); } catch { /* */ }
@@ -397,7 +397,7 @@ const HTTP_LIVE = {
     return { source: "http", status: failed === probes.length ? "failed" : failed ? "partial" : "success", count: probes.length, file: rel(file) };
   },
   normalize(root, now) {
-    const file = path.join(root, ".claude/state/search-growth/live/http.json");
+    const file = path.join(root, "data/search-growth/live/http.json");
     if (!fs.existsSync(file)) return { observedAt: null };
     const j = JSON.parse(fs.readFileSync(file, "utf8"));
     const observedAt = j.observedAt;

@@ -31,7 +31,7 @@ const report = {
   unreviewedThemes: ['test-theme'],
   tests: [],
 };
-const record = '.claude/state/themes/ci-review.json';
+const record = 'data/themes/ci-review.json';
 test('review-only record does not imply a code change or PR', () => {
   assert.deepEqual(validateReview(report, input, [record], before, before), {
     codeChanged: false,
@@ -55,7 +55,7 @@ test('code and experiment decisions are reviewable proposals', () => {
     validateReview(
       { ...report, reviewedAt: '2026-11-06', month: '2026-11' },
       { ...input, observedAt: '2026-11-06' },
-      [record, '.claude/state/themes/experiments.json'],
+      [record, 'data/themes/experiments.json'],
       before,
       after
     ),
@@ -122,7 +122,7 @@ test('d7 low sample cannot close an experiment before d28 and d56 measurement', 
       validateReview(
         report,
         input,
-        [record, '.claude/state/themes/experiments.json'],
+        [record, 'data/themes/experiments.json'],
         before,
         after
       ),
@@ -143,5 +143,5 @@ test('placeholder evidence and unsupported complete source coverage are rejected
 test('file evidence supports line numbers without treating them as a filename', () => {
   assert.equal(evidenceFilePath('.local/ci/theme-followup/runtime.json:7492-7650'), '.local/ci/theme-followup/runtime.json');
   assert.equal(evidenceFilePath('packages/config.ts#L12-L18'), 'packages/config.ts');
-  assert.equal(evidenceFilePath('.claude/state/themes/quality.json'), '.claude/state/themes/quality.json');
+  assert.equal(evidenceFilePath('data/themes/quality.json'), 'data/themes/quality.json');
 });

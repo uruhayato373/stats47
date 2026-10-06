@@ -55,7 +55,7 @@ const snsPostsStore = require('../lib/sns-posts-store.cjs') as {
 const PROJECT_ROOT = join(import.meta.dirname ?? __dirname, '../../..');
 const STATE_PATH = join(
   PROJECT_ROOT,
-  '.claude/state/sns/buzz-map-catalog.json'
+  'data/sns/buzz-map-catalog.json'
 );
 const SPEC_DIR = join(
   PROJECT_ROOT,

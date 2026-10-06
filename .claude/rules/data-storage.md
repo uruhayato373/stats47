@@ -36,24 +36,43 @@ paths:
 | 置き場 | 置くもの | 判断の目安 |
 |---|---|---|
 | `config/` | 事業の台帳と設定。人またはオペレーター用スクリプトが判断して変える値 | 出品台帳とアカウント、ASP の接続設定、管理画面の領域 (`domains.json`)、PSI の計測対象、端末資源、参考文献 vault、note の承認済みハッシュタグ (`note-hashtags/`)、ココナラのプロフィール文面と画像 (`coconala/assets/`) |
-| `data/<取得元>/` | 事業の記録 — 計測の生データと集約、追記で増える台帳、改善ログ、レビュー | 取得元ごとに 1 ディレクトリ (下の表)。CI が書き戻すのもここ |
+| `data/<取得元>/` | 事業の記録 — 計測の生データと集約、追記で増える台帳、改善ログ、レビュー、監査・是正のキューと最新の検査結果 | エージェントの運用をやめても事業として見返すもの。取得元・対象ごとに 1 ディレクトリ (下の表)。CI が書き戻すのもここ |
 | `assets/<用途>/` | 画像などの素材の原本 — 生成の入力・出力の原本と、その生成の説明・マニフェスト | ブログ・OGP の背景、特産品イラスト、ヒーロー画像の原本、note の背景・見出し・表紙、バナー |
-| `.claude/state/` | エージェントと自動化の作業状態 (上書きされる最新状態・キュー・検査結果) | 是正キュー、`*-latest.json`、検査の結果、一回きりの作業の根拠 |
+| `.claude/state/` | エージェント運用の状態だけ (下の「`.claude/state/` に置いてよいもの」の許可リスト) | エージェントの運用をやめたら不要になるもの。バックログ自動処理の台帳、整合性監査の印、Claude のトークン実績・モデル使用量・プロンプト評価、RemoteTrigger の記録 |
 | `.claude/config/` | 品質ゲートの基準・許可リスト・閾値、エージェント運用の方針 | `*-baseline.json`、`quality-gates.json`、計測値の警告閾値 (`budgets/<施策>/`) |
 
-`data/` の中は取得元で分ける (2026-10-06 に `.claude/state/metrics`・`.claude/state/{ads,products,sns,effect-verdict}`・
+`data/` の中は取得元・対象で分ける (2026-10-06 に `.claude/state/` の計測・記録・キュー・監査の結果と、
 各分析スキルの `reference/` から移した)。
 
 | ディレクトリ | 中身 |
 |---|---|
-| `data/gsc/` `data/ga4/` `data/psi/` `data/cloudflare/` `data/adsense/` | 各取得元の週次生 CSV (`snapshots/<週>/`)・集約 (`history*.csv`)・要約 (`LATEST.md`)。AdSense は 2026-09-20 停止後の凍結記録 |
-| `data/affiliate/` | A8・もしも・楽天の成果、提携台帳、アフィリエイト実験の台帳と推移、GA4 のアフィリエイト実測 |
-| `data/sns/` `data/note/` `data/products/` | 投稿台帳 (`posts.json`)・投稿の指標、note のダッシュボード指標とカバー台帳、商品の販売台帳と受領記録 |
+| `data/gsc/` `data/ga4/` `data/psi/` `data/cloudflare/` `data/adsense/` | 各取得元の週次生 CSV (`snapshots/<週>/`)・集約 (`history*.csv`)・要約 (`LATEST.md`)。GSC はカバレッジ是正キュー (`coverage-remediation/`) と運用サイクルの監査も持つ。AdSense は 2026-09-20 停止後の凍結記録 |
+| `data/affiliate/` | A8・もしも・楽天の成果、提携台帳、アフィリエイト実験の台帳と推移、GA4 のアフィリエイト実測、在庫・compliance の監査結果 |
+| `data/sns/` `data/note/` `data/products/` | 投稿台帳 (`posts.json`)・投稿の指標・Instagram の予約表と二重投稿防止ログ、note のダッシュボード指標・カバー台帳・下書き索引・運用の証跡 (`evidence/`)、商品の販売台帳・受領記録と生成・販売準備の状態 |
 | `data/measurement-cycle/` `data/authenticated/` `data/nsm/` | 週次の計測→記録→改善のまとめ、認証付き CI の売上計測、週次収益 (NSM) |
 | `data/improvement/<施策>/` `data/effect-verdict/` `data/business/` | 改善施策の詳細ログ、効果判定、実験 (PDCA) の台帳 |
 | `data/reviews/{weekly,monthly}/` | 週次・月次レビュー |
-| `data/seo/` `data/blog/` `data/ai-content/` `data/ai-content-staging/` | キーワード改善サイクル、ブログ・AI 解説の推移、AI 解説の公開待ち |
-| `data/themes/` | テーマページの指標・チャート定義 (`catalogs/<key>.json` + JSON Schema)。記録ではなくアプリが読む定義で、上の例外 |
+| `data/seo/` `data/search-growth/` `data/blog/` `data/ai-content/` `data/ai-content-staging/` | キーワード改善サイクル、検索成長の候補と計測、ブログの監査・是正キューと推移、AI 解説の推移と是正キュー (`remediation/`)、AI 解説の公開待ち |
+| `data/ranking/` `data/provenance/` `data/page-quality/` `data/site/` `data/ogp/` | ランキングの整合監査、出典の是正キュー、ページ品質の週次監査 (`metrics/`) と UI 指摘キュー、サイト内リンク監査、OGP 画像の在庫 |
+| `data/estat/` `data/data-quality/` `data/surveys/` `data/themes/` `data/geo/` `data/municipalities/` `data/source-inventory/` | e-Stat の探索結果と年カバレッジ監査 (`year-coverage/`)、データ品質の検査、調査・テーマ・Geo のポートフォリオと監査 (テーマはアプリが読む指標・チャート定義 `catalogs/<key>.json` + JSON Schema も持つ。上の例外)、市区町村の拡充調査、参考文献の解決台帳 |
+| `data/ci/` `data/releases/` `data/content-operations/` | workflow の健全性・R2 の鮮度・月次ジョブ、リリースの検証証跡、コンテンツ公開の運用記録 |
+| `data/business-plan/` `data/goals/` | 事業計画の状態と KPI ツリー、目標の進捗 |
+
+### `.claude/state/` に置いてよいもの (許可リスト)
+
+判断の基準は「**エージェントの運用をやめたら不要になるか**」。是正キューや監査の結果は、エージェントが作って読むものでも、
+エージェントをやめたあとも事業として見返すので `data/` に置く (2026-10-06 オーナー決定)。
+
+| データ | 置き場 | 台帳 id |
+|---|---|---|
+| バックログ自動処理の実行台帳 (completion gate の証拠) | `.claude/state/backlog-loop/ledger.json` | `agent.backlog-loop` |
+| 整合性監査の印 (Stop hook が読む) | `.claude/state/consistency/audited.json` | `agent.consistency` |
+| RemoteTrigger の記録 | `.claude/state/triggers.json` | `agent.triggers` |
+| Claude routine のトークン実績・モデル使用量と canary・プロンプト評価 | `.claude/state/metrics/{claude-usage,model-usage,prompt-evals}/` | `claude.*` |
+| (git 管理外) セッションロック・実行間隔の記録 | `.claude/state/{session-locks,cadence}/` | — |
+
+許可リストの正本は台帳 `config/datasets.mjs` の `AGENT_STATE` (id → 置く理由)。`.claude/state/` を指す台帳の行が
+`AGENT_STATE` に無いと `npm run check-datasets` が止める。足すときは上の基準を満たす理由を書く。
 
 ### 画像の置き場
 
@@ -75,11 +94,12 @@ paths:
 
 - どのファイルが何のデータで、どこに置くかは台帳 `config/datasets.mjs` が持つ (1 行 1 データセット・種類・領域・本来の置き場)。
   `npm run check-datasets` (pre-commit・PR CI) が次を止める。
-  - 対象範囲 (`config/`・`data/`・`assets/`・`.claude/state` の計測と記録・`.claude/config/budgets/`、および旧置き場) の追跡ファイルが、
+  - 対象範囲 (`config/`・`data/`・`assets/`・`.claude/state/`・`.claude/config/budgets/`、および旧置き場) の追跡ファイルが、
     台帳のちょうど 1 行に当たらない (未宣言・重なり)。どの行にも当たらない台帳の行
   - 移した旧置き場 (`RETIRED`) がコード・workflow・package.json と、agent の手順書 (SKILL.md・agents・rules・CLAUDE.md・
     Codex 用ミラー) に残っている。コードのコメント行と、手順書で「旧置き場」「旧パス」と書いた経緯の行は除く
   - 画像が `IMAGE_ROOTS` の外にある
+  - `.claude/state/` を指す行が許可リスト `AGENT_STATE` に無い
 - 新しい記録・素材は、先に台帳へ 1 行足してから書く。日付付きファイルの寿命は `prune-state-snapshots.mjs` の
   `RETENTION_POLICIES` だけが数値を持ち、台帳は名前で参照する。
 - コードは置き場を直書きせず、台帳の id で引く (`datasetPath(id)` / `datasetDir(id)`)。`config/` の設定は
@@ -97,10 +117,16 @@ paths:
    部品に分けた形 (`path.join(ROOT, "state", "ads", ...)`・`resolve(STATE_DIR, "x.json")`) と、スキルの場所を基準にした
    相対パス (`reference/improvement-log.md`) は検査に掛からないので、別に探して直す。
 3. workflow の書き戻し (`git add`)・`RETENTION_POLICIES` の `directory`・品質検査の baseline のパスを同じ差分で変える。
-4. **develop と main に同じ日のうちに入れる。** 定期実行は main の workflow 定義で動き、中で develop を checkout して
-   develop のスクリプトを使う。develop だけ先に変わると、新しい置き場に書いた記録を main の定義が `git add` せず、
-   その run の記録が失われる。反映は、移したファイルに書く定期実行が無い時間帯に行い、反映後に workflow を
-   手動起動して新しい置き場へ書くことを確かめる。
+4. **develop への push から main のマージまでを数十分に収める。** 定期実行は main の workflow 定義で動き、中で develop を
+   checkout して develop のスクリプトを使う。develop だけ先に変わると、新しい置き場に書いた記録を main の定義が
+   `git add` せず (旧パスが無ければ `fatal: pathspec` で step ごと落ち、差分で判定する workflow は「変更なし」と黙って抜ける)、
+   その run の記録が失われる。GitHub の cron は数時間遅れて発火するので「定期実行が無い時間帯」は当てにできない。
+   - push の前に `npm run preflight:pr` とローカルの検査を通し、push したら PR の CI が通り次第すぐマージする。
+   - マージ後、push からマージまでの間に動いた run を一覧し (`/actions/runs?created=>=<push 時刻>`)、記録の欠落を
+     run のログから補う。最後に workflow を手動起動して新しい置き場へ書くことを確かめる。
+   - 実例 (2026-10-06): develop に入れてから main のマージまで約 12 時間空き、Instagram の投稿記録 (投稿は出たが
+     投稿台帳と二重投稿防止ログが残らず、次の run が同じ投稿を繰り返す状態になった)・Threads の投稿確認・
+     認証付き計測の 3 run が記録を落とした。
 5. 改善ログ・レビュー・state の json など、当時のパスを記録した履歴は書き換えない。
 
 ## アプリが読むデータ (git TS が SSOT → R2 配信) — 「設定 + 運用エンティティ」
@@ -172,28 +198,28 @@ git TS 化し永続 D1 を全廃した。アプリが読む各データの真実
 
 ## 記録と作業状態の一覧 — `data/` と `.claude/state/`
 
-**判定軸**: アプリは読まない。`data/` は事業の記録 (計測・台帳・改善ログ・レビュー)、`.claude/state/` はエージェントと自動化の
-作業状態 (上書きされる最新状態・キュー・検査結果)。人間は基本的に要約 (`LATEST.md`) だけを読む。
+**判定軸**: アプリは読まない。`data/` は事業の記録 (計測・台帳・改善ログ・レビュー・監査と是正のキュー)、`.claude/state/` は
+エージェント運用の状態だけ (上の許可リスト)。人間は基本的に要約 (`LATEST.md`) だけを読む。
 1 行 1 データセットの正本は台帳 `config/datasets.mjs` で、この表は主なものの案内である。
 
-**寿命を宣言せずに日付名で増やさない (2026-09-14)**: git に置く生 snapshot は `.claude/scripts/lib/prune-state-snapshots.mjs` の `RETENTION_POLICIES` に置き場と keep 件数を持つものだけ (週次 `fetch-metrics-weekly.yml` が commit 直前に削除する)。release の検証証跡は `.claude/state/metrics/releases/<date>-<name>.json` (keep 8)、実行時の生 artifact は `.local/verification/` (30 日でローカル掃除) か CI artifact (≤30 日)。`.claude/state/metrics` 直下の日付名 JSON は `check-repo-hygiene.cjs` の `DATED_STATE_ARTIFACT` が止め、`prune-state-snapshots.test.mjs` が「追跡中の日付名 state は policy / 恒久宣言 / baseline のどれかに属する」ことを固定する。
+**寿命を宣言せずに日付名で増やさない (2026-09-14)**: git に置く生 snapshot は `.claude/scripts/lib/prune-state-snapshots.mjs` の `RETENTION_POLICIES` に置き場と keep 件数を持つものだけ (週次 `fetch-metrics-weekly.yml` が commit 直前に削除する)。release の検証証跡は `data/releases/<date>-<name>.json` (keep 8)、実行時の生 artifact は `.local/verification/` (30 日でローカル掃除) か CI artifact (≤30 日)。`.claude/state/metrics` 直下の日付名 JSON は `check-repo-hygiene.cjs` の `DATED_STATE_ARTIFACT` が止め、`prune-state-snapshots.test.mjs` が「追跡中の日付名 state は policy / 恒久宣言 / baseline のどれかに属する」ことを固定する。
 
 | データ | 保存先 |
 |---|---|
 | GSC / GA4 週次 snapshot (生 CSV) | `data/{gsc,ga4}/snapshots/<YYYY-Www>/`（GitHub Actions が日曜 JST 20:00 に自動更新。26 週を保持）。`data/adsense/snapshots/` は 2026-09-20 の恒久停止に伴う凍結記録 |
 | GSC / GA4 の週次集約と要約 | `data/{gsc,ga4}/{history.csv,history-finalized7d.csv,LATEST.md}`（人間は LATEST.md を見れば 10 秒で把握） |
-| GSC カバレッジ | ドリルダウン `data/gsc/coverage-drilldown/<YYYY-Www>/`、件数推移 `data/gsc/coverage-totals-history.csv`、URL Inspection `data/gsc/url-inspection/`（日次 7 件を保持）。是正キュー (状態) は `.claude/state/gsc/{coverage-remediation-queue.json,LATEST.md}`（`build-coverage-queue.mjs` が生成。正典 `/gsc-coverage-remediation`） |
+| GSC カバレッジ | ドリルダウン `data/gsc/coverage-drilldown/<YYYY-Www>/`、件数推移 `data/gsc/coverage-totals-history.csv`、URL Inspection `data/gsc/url-inspection/`（日次 7 件を保持）。是正キュー (状態) は `data/gsc/coverage-remediation/{coverage-remediation-queue.json,LATEST.md}`（`build-coverage-queue.mjs` が生成。正典 `/gsc-coverage-remediation`） |
 | PSI 日次計測（19 URL × mobile/desktop） | `data/psi/{psi-batch-*.json,history.csv,LATEST.md}`（生 JSON は最新 1 件。日次 JST 02:00、閾値違反時 `[PSI Alert]` Issue）/ URL リスト `config/psi-urls.txt` / 閾値 `.claude/skills/analytics/performance-improvement/budgets.json` |
 | Cloudflare 日次 usage と月次・週次コスト | `data/cloudflare/{snapshots/YYYY-MM-DD.json,history.csv,LATEST.md}`（生 JSON は 30 件。日次 JST 02:30、閾値違反時 `[Cloudflare Alert]` Issue）、`data/cloudflare/{monthly,weekly}-snapshots/` / 閾値 `.claude/config/budgets/cloudflare-cost-improvement/` |
 | （凍結記録）AdSense | `data/adsense/`。2026-09-20 の恒久停止で更新されない。週次収益は NSM（`generate-weekly-metrics-issue.mjs` の「週次収益 (NSM)」節）を見る |
-| アフィリエイトの成果・提携・実験 | `data/affiliate/`（A8・もしも・楽天の成果、提携台帳 `{a8,affiliate}-catalog.json`、実験台帳 `experiments.json` (書込は `/manage-affiliate-experiment` のみ)、GA4 実測の週次集約 `ga4-affiliate-history.csv`）。GA4 実測の生 snapshot は 2026-09-14 から R2 `state/ads/ga4-affiliate/` (ローカルは `npm run state:pull -- ads/ga4-affiliate`)。在庫棚卸し・compliance などの最新状態は `.claude/state/ads/{inventory-*,*-latest}.json` |
+| アフィリエイトの成果・提携・実験 | `data/affiliate/`（A8・もしも・楽天の成果、提携台帳 `{a8,affiliate}-catalog.json`、実験台帳 `experiments.json` (書込は `/manage-affiliate-experiment` のみ)、GA4 実測の週次集約 `ga4-affiliate-history.csv`）。GA4 実測の生 snapshot は 2026-09-14 から R2 `state/ads/ga4-affiliate/` (ローカルは `npm run state:pull -- ads/ga4-affiliate`)。在庫棚卸し・compliance などの最新状態は `data/affiliate/{inventory-*,*-latest}.json` |
 | **SNS 投稿台帳 (投稿履歴の SSOT)** | `data/sns/posts.json`（書き込み: `.claude/scripts/lib/sns-posts-store.cjs` / `/mark-sns-posted` / IG cron は `.claude/scripts/instagram/record-posted.cjs`（内部で store を呼ぶ）。全 SNS 自動化スクリプトはこのストア経由。`ig-posted-log.jsonl` は二重投稿防止用で SSOT ではない） |
 | SNS 投稿メトリクス時系列 | `data/sns/metric-snapshots/YYYY-MM-DD/metrics.csv`（書き込み: `.claude/scripts/lib/sns-metrics-store.cjs`） |
-| 商品の販売台帳・受領記録 | `data/products/`（生成・販売準備の状態 `*-status.json` は `.claude/state/products/`） |
+| 商品の販売台帳・受領記録・生成と販売準備の状態 | `data/products/`（状態は `*-status.json`） |
 | 計測→記録→改善サイクルの週次まとめ | `data/measurement-cycle/{latest.json,LATEST.md,history.csv,triage-latest.json}`（`build-measurement-cycle.mjs` が日曜の `fetch-metrics-weekly.yml` と月曜の `improvement-cycle-weekly.yml` で作る。週次メトリクス Issue と `/weekly-review` が読む） |
 | 改善施策の詳細ログ・効果判定・実験 | `data/improvement/<施策>/improvement-log.md`、`data/effect-verdict/verdicts-<week>.json`、`data/business/experiments.json` |
 | NSM 週次 JSON snapshot・レビュー | `data/nsm/weekly-snapshots/YYYY-Www.json`、`data/reviews/{weekly,monthly}/` |
-| e-Stat 年カバレッジ監査キュー | `.claude/state/data/estat-year-coverage/{queue.json,LATEST.md}`（`estat-year-coverage-audit-weekly.yml` が週次で巡回生成） |
+| e-Stat 年カバレッジ監査キュー | `data/estat/year-coverage/{queue.json,LATEST.md}`（`estat-year-coverage-audit-weekly.yml` が週次で巡回生成） |
 | 整合性監査マーカー | `.claude/state/consistency/audited.json`（`check-agent-skill-consistency.cjs --mark-audited` が記録。Stop hook がこのハッシュと現在の変更を比較） |
 | **Claude routine のトークン実績** (日次生成 1 run 1 行) | `.claude/state/metrics/claude-usage/history.csv`（書込: `.claude/scripts/lib/record-claude-usage.mjs` のみ・追記専用。**4 種を合計しない** — cache_read は割引されるため。`token_source=none` は 0 ではなく未取得。読み方は同ディレクトリの README） |
 | **モデル使用量と最適化提案** | `.claude/state/metrics/model-usage/{local-<platform>.json,latest.json,canary/*.json}`（`local-*` は transcript から集計した値だけで prompt・本文は書かない。正典 `.claude/rules/model-prompting.md`「継続最適化サイクル」） |
@@ -215,9 +241,9 @@ git TS 化し永続 D1 を全廃した。アプリが読む各データの真実
   ├─ 観測値から計算できる集計 (Derived)              → エフェメラル計算 → R2 (永続しない)
   ├─ 現在の計画・未完了タスク                        → .claude/todo/
   ├─ 恒久的な戦略・要件                             → docs/ の既存固定SSOT
-  ├─ 計測・台帳・改善ログ・レビューなど事業の記録     → data/<取得元>/ (台帳に 1 行足してから)
+  ├─ 計測・台帳・改善ログ・レビュー・監査と是正のキュー → data/<取得元>/ (台帳に 1 行足してから)
   ├─ 画像などの素材の原本                           → assets/<用途>/
-  ├─ エージェントの作業状態 (上書きされる最新・キュー) → .claude/state/
+  ├─ エージェントの運用をやめたら不要になる状態だけ   → .claude/state/ (AGENT_STATE に理由を足してから)
   └─ PR/Issue 連携が本質                            → GitHub Issues (enhancement/bug)
 ```
 

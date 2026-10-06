@@ -72,7 +72,7 @@ npm run test:run   --workspace=@stats47/product-factory
 ### 横断販売カタログ
 
 `src/build/sales-catalog.ts` は既存の商品・書籍・Geo企画TSと出品証跡を結合する読み取り専用の派生器。
-`products:report` は `.claude/state/products/catalog-status.json` と
+`products:report` は `data/products/catalog-status.json` と
 `.local/product-portfolio/catalog.{html,csv}` を生成する。HTMLは商品ID・販売先・残工程で検索できる。
 商品IDを販売先ごとに増殖させず、無料サンプル・未制作企画も区別する。
 既定の改訂候補は`CURRENT_SALES_REVISIONS`（git TS）で固定する。ディレクトリ名順で実験版を採用したり、通常の再集計でnote原稿が旧版へ戻ったりしない。明示フラグによる別版の監査は可能だが、公開記録は変更しない。

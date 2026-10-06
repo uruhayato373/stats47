@@ -64,7 +64,7 @@ function viewBoxOf(svg: string): string {
 }
 
 function loadTargets(): { slug: string; base: string }[] {
-  const q = JSON.parse(fs.readFileSync(path.join(PROJECT_ROOT, ".claude/state/blog/svg-lineage-queue.json"), "utf8"));
+  const q = JSON.parse(fs.readFileSync(path.join(PROJECT_ROOT, "data/blog/svg-lineage-queue.json"), "utf8"));
   let entries = q.entries.filter((e: any) => e.status === "both" && e.chartType === "ranking").map((e: any) => ({ slug: e.slug, base: e.base }));
   if (BASE_ARG) { const [s, b] = BASE_ARG.split("/"); entries = entries.filter((e: any) => e.slug === s && e.base === b); }
   return entries;
