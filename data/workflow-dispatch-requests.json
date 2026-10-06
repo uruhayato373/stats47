@@ -1,0 +1,11 @@
+{
+  "workflow": "regenerate-blog-svgs.yml",
+  "inputs": {
+    "mode": "all",
+    "slugs": "birth-death-gap-decline",
+    "dry_run": "true"
+  },
+  "ref": "develop",
+  "reason": "BLOG-SVG-NODATA-20261006: birth-death の再生成失敗の原因を dry-run で確認する",
+  "requestedAt": "2026-10-06T07:55:46.633Z"
+}
