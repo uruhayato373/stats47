@@ -2,6 +2,8 @@ import "server-only";
 
 import fs from "node:fs";
 
+import { COCONALA_LISTINGS, KDP_LISTINGS } from "../../../../packages/product-factory/src/ledger-paths.mjs";
+
 import {
   cached,
   fileExists,
@@ -172,10 +174,10 @@ export function readProductSales(): RevenueSummary["productSales"] {
 function readPublishedCounts(): { kindle: number; coconala: number } {
   const kdp = readJson<{
     listings: Record<string, { kdpStatus?: string; asin?: string | null }>;
-  }>(".claude/config/kdp-listings.json");
+  }>(KDP_LISTINGS);
   const coconala = readJson<{
     listings: Record<string, { status?: string; serviceUrl?: string | null }>;
-  }>(".claude/config/coconala-listings.json");
+  }>(COCONALA_LISTINGS);
   return {
     kindle: Object.values(kdp.listings).filter(
       (row) => row.kdpStatus === "live" && Boolean(row.asin),

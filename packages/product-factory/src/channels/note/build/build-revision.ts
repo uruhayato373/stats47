@@ -7,6 +7,7 @@ import { CANONICAL_ARTICLES } from '../article-plan';
 import type { NoteArticlePlan } from '../types';
 import { scanText } from '../validators/claims';
 import { readFreeSampleDelivery } from '../../../build/free-sample-delivery';
+import { COCONALA_LISTINGS } from '../../../ledger-paths.mjs';
 import { SITE } from '@stats47/data-configs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../../../../../..');
@@ -24,7 +25,7 @@ interface PackEvidence {
 }
 
 function preparationListings(root: string): Record<string, Listing> {
-  const listings = JSON.parse(readFileSync(join(root, '.claude/config/coconala-listings.json'), 'utf8')) as { listings: Record<string, Listing> };
+  const listings = JSON.parse(readFileSync(join(root, COCONALA_LISTINGS), 'utf8')) as { listings: Record<string, Listing> };
   const free = readFreeSampleDelivery(root);
   return { ...listings.listings, ...(free ? { 'P-13': free } : {}) };
 }

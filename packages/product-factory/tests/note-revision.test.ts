@@ -1,20 +1,21 @@
 import { createHash } from 'node:crypto';
 import { mkdtempSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
+import { dirname, join } from 'node:path';
 import JSZip from 'jszip';
 import { describe, expect, it } from 'vitest';
 import { CANONICAL_ARTICLES } from '../src/channels/note/article-plan';
 import { buildNoteRevision, validateNoteRevision } from '../src/channels/note/build/build-revision';
 import { buildNoteArticle } from '../src/channels/note/build/build-note';
 import { promoteAllNoteArticles, promoteNoteArticle } from '../src/channels/note/build/promote-note';
+import { COCONALA_LISTINGS } from '../src/ledger-paths.mjs';
 
 const sha = (value: Buffer | string) => createHash('sha256').update(value).digest('hex');
 async function fixture() {
   const root = mkdtempSync(join(tmpdir(), 'note-revision-'));
   const dir = join(root, '.local/coconala-products/P-01/v2-test');
   mkdirSync(dir, { recursive: true });
-  mkdirSync(join(root, '.claude/config'), { recursive: true });
+  mkdirSync(join(root, dirname(COCONALA_LISTINGS)), { recursive: true });
   const zip = new JSZip();
   for (let i = 1; i <= 9; i++) zip.file(`ppt/slides/slide${i}.xml`, '<slide/>');
   const contents: Record<string, Buffer | string> = {
@@ -31,7 +32,7 @@ async function fixture() {
     artifactDirectory: '.local/coconala-products/P-01/v2-test', manifestSha256: sha(bytes),
     indicatorCount: 1, pptxIndicatorCount: 1, hasXlsx: false, officeValidation: 'owner-pending',
   } };
-  writeFileSync(join(root, '.claude/config/coconala-listings.json'), JSON.stringify({ listings: { 'P-01': listing } }));
+  writeFileSync(join(root, COCONALA_LISTINGS), JSON.stringify({ listings: { 'P-01': listing } }));
   return { root, dir, listing };
 }
 
@@ -84,7 +85,7 @@ describe('note private revisions', () => {
   it('refuses an unpinned manifest and traversal revision', async () => {
     const { root, listing } = await fixture();
     listing._delivery.manifestSha256 = '';
-    writeFileSync(join(root, '.claude/config/coconala-listings.json'), JSON.stringify({ listings: { 'P-01': listing } }));
+    writeFileSync(join(root, COCONALA_LISTINGS), JSON.stringify({ listings: { 'P-01': listing } }));
     const report = await buildNoteRevision({ root, revision: 'r4', articles: [CANONICAL_ARTICLES[0]] });
     expect(report.items[0].validationErrors).toContain('pinned delivery contract missing');
     await expect(buildNoteRevision({ root, revision: '../escape' })).rejects.toThrow('invalid revision');

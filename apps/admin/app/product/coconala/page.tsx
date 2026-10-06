@@ -3,6 +3,7 @@ import { Grid, Section } from "@/components/layout-primitives";
 import { ErrorNote, PageHeading } from "@/components/ops/primitives";
 import { coconalaSummary, type CoconalaRow } from "@/lib/server/coconala";
 import { hasError } from "@/lib/server/state-io";
+import { COCONALA_LISTINGS } from "../../../../../packages/product-factory/src/ledger-paths.mjs";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "ココナラ — stats47 admin" };
@@ -20,7 +21,7 @@ export default function CoconalaPage() {
   if (hasError(data)) {
     return (
       <div className="space-y-4">
-        <PageHeading title="ココナラ" source=".claude/config/coconala-listings.json" />
+        <PageHeading title="ココナラ" source={COCONALA_LISTINGS} />
         <ErrorNote error={data.error} />
       </div>
     );

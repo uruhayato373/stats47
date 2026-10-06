@@ -10,10 +10,11 @@ import { chromium } from "playwright";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { readFileSync, rmSync } from "node:fs";
+import { NOTE_ACCOUNT } from "../../../../packages/product-factory/src/ledger-paths.mjs";
 
 export const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "..", "..");
 export const PROFILE = join(ROOT, ".local/playwright-note-profile");
-export const ACCOUNT_PATH = join(ROOT, ".claude/config/note-account.json");
+export const ACCOUNT_PATH = join(ROOT, NOTE_ACCOUNT);
 export const UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Safari/537.36";
 
 export function readAccount() {

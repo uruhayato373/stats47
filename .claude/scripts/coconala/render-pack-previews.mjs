@@ -3,9 +3,10 @@ import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright';
 import { inspectPack, selectPreview } from './lib/pack-evidence.mjs';
+import { COCONALA_LISTINGS } from '../../../packages/product-factory/src/ledger-paths.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
-const listings = JSON.parse(readFileSync(resolve(root, '.claude/config/coconala-listings.json'))).listings;
+const listings = JSON.parse(readFileSync(resolve(root, COCONALA_LISTINGS))).listings;
 const render = process.argv.includes('--render');
 const browser = render ? await chromium.launch({ headless: true }) : null;
 const page = browser ? await browser.newPage({ viewport: { width: 1220, height: 1020 } }) : null;

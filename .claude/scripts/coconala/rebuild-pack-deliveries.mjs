@@ -3,6 +3,7 @@ import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
 import { inspectPack, sha256 } from './lib/pack-evidence.mjs';
+import { COCONALA_LISTINGS } from '../../../packages/product-factory/src/ledger-paths.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
 const require = createRequire(resolve(root, 'package.json'));
@@ -14,7 +15,7 @@ const { productIndicatorLabel } = require(resolve(root, 'packages/product-factor
 const argv = process.argv.slice(2);
 const id = argv[argv.indexOf('--id') + 1];
 if (!argv.includes('--id') || !/^P-\d\d$/.test(id)) throw new Error('--id P-XX required');
-const listing = JSON.parse(readFileSync(resolve(root, '.claude/config/coconala-listings.json'))).listings[id];
+const listing = JSON.parse(readFileSync(resolve(root, COCONALA_LISTINGS))).listings[id];
 const product = PACKS.find(p => p.id === id);
 if (!product || !listing) throw new Error('Unknown pack');
 const originalContract = { ...listing, _delivery: { ...listing._delivery,

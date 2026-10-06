@@ -1,3 +1,5 @@
+import { COCONALA_ASSETS_DIR } from '../packages/product-factory/src/ledger-paths.mjs';
+
 /** 公開プロフィールの文面。経歴は apps/web/src/config/operator-profile.ts、商品条件は各商品契約に基づく。 */
 export const COCONALA_PROFILE = {
   userId: '6198620',
@@ -28,7 +30,7 @@ export const COCONALA_PROFILE = {
 不動産鑑定、将来価格の予測、投資判断、安全性・収益の保証は行いません。商用利用・出典表記・再配布の条件は、商品ごとの利用許諾をご確認ください。個人情報・機密資料は、事前確認なく送らないようお願いいたします。`,
   schedule: 'ご相談はココナラ内のメッセージで承ります。用途・対象地域・希望納品日をお知らせください。対応可否と納期は、ご依頼内容を確認してからご案内します。即時返信・即日納品はお約束していません。Geo資料化サービスの納期・修正・サポートは、当該サービスページの条件に従います。',
   iconSource: 'apps/web/public/icon-512.png',
-  coverSource: '.claude/config/coconala/assets/profile-cover.png',
+  coverSource: `${COCONALA_ASSETS_DIR}/profile-cover.png`,
   specialty: {
     category: '13',
     name: '地価×将来人口の県別Geo資料化',

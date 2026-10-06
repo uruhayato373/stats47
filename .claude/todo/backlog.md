@@ -2431,7 +2431,7 @@ updated: 2026-09-29
 - **済 (Phase 1)**: `magazines.ts` を e-Stat 17 カテゴリ + 行動者率クラスタ = 18 マガジンに細分化。`assign-magazines-by-title.mjs` (タイトル分類・決定的) で公開済み 159 件中 143 件 (90%) を `s47-*` マガジンへ割当。validator pass・派生インデックス再生成済。
 - **残り**:
   1. **note-operator 自動化を新設** (coconala-operator 相当・Playwright)。マガジン作成 + 記事割当を note.com へ反映する。**note ログインは人手** (初回・所有者アカウント)、実反映は draft-first + 承認境界。まず 1 マガジン (件数最多 = `s47-sports-culture`) で実証してから横展開。
-     - 実装済: `.claude/scripts/note/login-note-profile.mjs` (永続プロファイル `.local/playwright-note-profile` への対話ログイン + account assert `.claude/config/note-account.json`)。
+     - 実装済: `.claude/scripts/note/login-note-profile.mjs` (永続プロファイル `.local/playwright-note-profile` への対話ログイン + account assert `config/note-account.json`)。
      - 実装済: `.claude/scripts/note/probe-magazine-ui.mjs` / `fetch-note-magazines.mjs` (read-only。既存マガジンを API 取得)。
      - **★probe で判明した実態 (2026-08-03)**: note.com には既に**有料マガジン3つ**が稼働中 — 公務員×Claude Code (¥1,980・key m512ad7023815) / e-Stat×Claude Code (¥1,480・m1b836e4c8dce) / D3.js配色完全ガイド (¥500・mfe0fab2606eb) + デフォルト「あとで読む」。**ランキング系マガジンはまだ note.com に無い**。
      - **済 (Track A・照合取り込み)**: 既存3マガジンの noteUrl + isPaid を magazines.ts に反映。product-d3-colors 新設 + D3 全6章を帰属 (第2-6章=stats47-note / 配色理論=koumuin-gis)。validator error 0。
@@ -2819,6 +2819,20 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - **次**: 取得元を農水省の xlsx に切り替える (`fetcherKey: "manual"` か新しい取得経路)。`.claude/rules/data-provenance-standards.md` の provenance 9 点セットを先に書き、
   概算値と確定値の区別を年ごとに保持する。SSDS 由来の 2008〜2021 年度と重なる年は値の一致を検査してから置き換える。
 - **完了条件**: 2022 年度以降が 47 県そろって R2 に入り、provenance が監査 (`/audit-provenance`) を通り、ランキングページの最新年が更新されている。
+
+### [CONFIG-LAYOUT-02] `.claude/config/` に残る事業設定 7 件をルート `config/` へ移す
+
+タグ: [エージェント・SSOT] [種類:改善] [実行:sweep] [起票:2026-10-06] [領域:管理]
+
+- **対象**: `affiliate-asp.json`、`a8-report-automation.json`、`domains.json`、`psi-urls.txt`、`local-resources.json`、
+  `source-vault.json`、`yoy-batch.json`。どれも品質ゲートの基準ではなく、スクリプトや CI の接続先・対象の設定である
+  (区分は `.claude/rules/data-storage.md`「リポジトリ直下 `config/` `data/` と `.claude/` の区分」)。
+- **次**: 2026-10-06 の販売台帳の移行と同じ順で進める。先にパス定数へ寄せてテストを通し、その後 `git mv` と定数の変更を
+  同じ差分で行う。CI workflow・rules の `paths:`・skill の記述も同じ差分で変える。定数を `ledger-paths.mjs` に足すか、
+  別モジュールにするかはこのカードで決める。
+- **停止条件**: workflow が読むファイルは、workflow 側の参照を同じ差分で変えないかぎり動かさない。本番 deploy・R2 push はしない。
+- **完了条件**: 7 件が `config/` にあり、`git grep -n -E "\.claude/config/(affiliate-asp|a8-report-automation|domains|psi-urls|local-resources|source-vault|yoy-batch)"`
+  が日付付きの履歴記録以外で 0 件。関係するテストと `npm run type-check` が通る。
 
 ## 🟢 低 — 時期未定・条件付き (trigger は本文に)
 

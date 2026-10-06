@@ -3,6 +3,7 @@ import { createHash } from "node:crypto";
 import { mkdtempSync, mkdirSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
+import { KDP_LISTINGS } from "../src/ledger-paths.mjs";
 import { buildSalesCatalog, CURRENT_SALES_REVISIONS, csvCell, escapeHtml, localPath, renderSalesCsv, renderSalesHtml, verifyManifest } from "../src/build/sales-catalog";
 
 const roots: string[] = [];
@@ -30,7 +31,7 @@ describe("sales readiness does not conflate generation and publication", () => {
   });
   it("shows historical live state independently of a missing working revision", () => {
     const root = fixture();
-    json(root, ".claude/config/kdp-listings.json", { listings: { "K-S1-01": { kdpStatus: "live", kdpStatusCheckedAt: "2026-08-30", asin: "B0TEST" } } });
+    json(root, KDP_LISTINGS, { listings: { "K-S1-01": { kdpStatus: "live", kdpStatusCheckedAt: "2026-08-30", asin: "B0TEST" } } });
     json(root, ".local/kindle-books/K-S1-01/v1/metadata.json", { freshRatioOk: true });
     writeFileSync(join(root, ".local/kindle-books/K-S1-01/v1/book.epub"), "old");
     const o = buildSalesCatalog(root, "2026-09-06", "v2-test").offers.find(o => o.id === "K-S1-01")!;

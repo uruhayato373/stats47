@@ -1,6 +1,7 @@
 ---
 paths:
   - "data/note*/**"
+  - "config/**"
   - ".claude/{skills,state,todo,config}/**"
   - "docs/**"
   - "apps/web/scripts/export-*.ts"
@@ -21,6 +22,27 @@ paths:
 (2026-10-02 オーナー決定)。** 生成版・採用版・公開版と共有ストレージの所在を一元管理する。
 記事メタTSや監査履歴と二重に書かず、専用validatorとwriter/readerの切替を一組で実装する。
 詳細と移行状況は [note-image-assets.md](note-image-assets.md)。画像バイナリは台帳へ埋め込まない。
+
+## リポジトリ直下 `config/` `data/` と `.claude/` の区分 (2026-10-06)
+
+`.claude/` はエージェント運用の置き場であり、事業の台帳を置かない。git で管理するファイルは次の 4 つに分ける
+(doboku-note と同じ区分)。アプリが読む配信データは従来どおり git TS → R2 で、この 4 つとは別である。
+
+| 置き場 | 置くもの | 例 |
+|---|---|---|
+| `config/` | 事業の台帳と設定。人またはオペレーター用スクリプトが判断して変える値 | 販売チャネルの出品台帳とアカウント (`coconala-listings.json` / `kdp-listings.json` / `{coconala,kdp,note}-account.json`)、ココナラのプロフィール文面と画像 (`coconala-profile.ts` / `coconala/assets/`) |
+| `data/` | 事業の記録と、CI との受け渡し | `data/note/` (note 画像台帳)、`data/seo/` (キーワード改善サイクルの対象と記録)、`data/ai-content-staging/` (AI 解説の公開待ち) |
+| `.claude/state/` | エージェントと自動化の作業状態、計測の蓄積 | 下の「`.claude/` 配下のファイルに置くもの」の表 |
+| `.claude/config/` | 品質ゲートの基準・許可リスト・閾値、エージェント運用の方針、認証と環境変数の許可リスト | `*-baseline.json`、`quality-gates.json`、`backlog-routing-policy.json`、`auth-credentials.json` |
+
+- `.claude/config/` を `.claude/` の下に残すのは、そこが Claude Code の保護パスだからである。無人 run
+  (`--permission-mode dontAsk`) の Claude は `.claude/` に書き込めないので、エージェントが自分の品質ゲートを
+  黙って緩められない (2026-09-24 に計測サイクルの無人 run で書き込み拒否を実測)。
+- 販売チャネルの台帳のパスは `packages/product-factory/src/ledger-paths.mjs` だけが持ち、コードは定数を import する。
+  置き場を移したときに直書きが旧パスに残ると、読めずに黙って空を返すためである。直書きと定数の実在は
+  `packages/product-factory/tests/ledger-paths.test.ts` が検査する。
+- 新しい事業の台帳・設定は `config/` に置く。`.claude/config/` に残っている事業設定 (ASP の接続設定など) の
+  移行は backlog `CONFIG-LAYOUT-02`。
 
 ## アプリが読むデータ (git TS が SSOT → R2 配信) — 「設定 + 運用エンティティ」
 
