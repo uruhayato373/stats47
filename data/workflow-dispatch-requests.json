@@ -1,0 +1,11 @@
+{
+  "workflow": "regenerate-blog-svgs.yml",
+  "inputs": {
+    "mode": "all",
+    "slugs": "alcohol-prefecture-map automotive-industry-transformation-map birth-death-gap-decline",
+    "dry_run": "false"
+  },
+  "ref": "develop",
+  "reason": "BLOG-SVG-NODATA-20261006: source-repair で R2 に置いた data JSON から 3 図を再生成する",
+  "requestedAt": "2026-10-06T07:41:51.289Z"
+}
