@@ -68,7 +68,7 @@
       "cadence": "weekly",
       "measurementStatus": "partially-measured",
       "unit": "%",
-      "source": ".claude/state/ranking/integrity-audit.json"
+      "source": "data/ranking/integrity-audit.json"
     },
     {
       "id": "site-health",

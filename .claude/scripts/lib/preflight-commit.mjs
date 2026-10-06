@@ -315,6 +315,12 @@ export const PR_GATES = [
       return { ok: true, output: "affiliate compliance / relevance OK" };
     },
   },
+  {
+    name: "Business Plan",
+    why: "カタログの source・KPI を変えると生成物 data/business-plan/kpi-tree.json が古くなる (2026-10-06 に 2 回 CI で落ちた)",
+    run: () => tryRun("npm", ["run", "business-plan:check"]),
+    hint: "npm run business-plan:build-state (生成物のうち kpi-tree.json だけを commit する)",
+  },
   // registry (.claude/config/quality-gates.json) の trigger:pull_request かつ
   // networkOrSecrets:none な blocking gate を全件含める (CI-SPEED-PREFLIGHT-PR-REGISTRY-01 恒久案)。
   // Card Census / Ad Placement / Static Accessibility / Repo Hygiene / Quality Gate Ratchet 4種 /
