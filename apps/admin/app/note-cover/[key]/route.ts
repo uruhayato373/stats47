@@ -3,6 +3,10 @@ import { readCoverLedger, validateCoverLedger } from '../../../../../.claude/scr
 import { readStoredCover } from '../../../../../.claude/scripts/note/lib/cover-storage.mjs';
 import { projectRoot } from '@/lib/server/project-root';
 
+/** cover-storage.mjs の固定文 (認証情報を含まない) の形。ここに当たらない文は理由として返さない */
+const SAFE_REASON =
+  /^(?:private R2 [^\n]+|private cover (?:missing or SHA mismatch|storage unavailable|read HTTP \d{3})|Wrangler session expired or account access unavailable; run wrangler whoami|CLOUDFLARE_ACCOUNT_ID is required for multiple accounts|Windows trusted root certificates unavailable)$/;
+
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
@@ -22,8 +26,10 @@ export async function GET(request: Request, { params }: { params: Promise<{ key:
       'cache-control': 'no-store', 'x-content-type-options': 'nosniff',
     } });
   } catch (error) {
-    // cover-storage のエラー文は認証情報を含まない固定文なので、理由として画面へ返す。
-    const reason = error instanceof Error ? error.message : String(error);
+    // 理由として画面へ返すのは cover-storage が投げる固定文の形だけ。下位ライブラリ (fetch・S3・fs) の例外は
+    // URL や認証情報を含みうるので返さない。
+    const message = error instanceof Error ? error.message : '';
+    const reason = SAFE_REASON.test(message) ? message : 'ストレージの接続と台帳を確認してください。';
     return Response.json({ error: `画像を取得できません: ${reason}` }, { status: 502 });
   }
 }
