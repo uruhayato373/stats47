@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-06T05:23:59.293Z",
+  "updatedAt": "2026-10-06T05:55:54.518Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -6384,6 +6384,41 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-10-06T05:23:59.293Z"
+    },
+    "BLOG-SVG-REGEN-20261006": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-06T05:55:54.518Z",
+          "runId": null,
+          "model": "none",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "regenerate-blog-svgs run 37417288024 (success)",
+              "purge-cache.ts --files 24 件",
+              "npx tsx .claude/scripts/blog/plan-svg-text-fix.ts @UI-FIX-BLOG-ARTICLE-20260927.txt"
+            ],
+            "pass": true
+          },
+          "evidence": "対象 8 枚が clean (regen-fixes 0)。no-data 3 枚は BLOG-SVG-NODATA-20261006 で継続",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-06T05:55:54.518Z"
     }
   }
 }

@@ -321,13 +321,6 @@ updated: 2026-10-06
 - **停止条件**: Phase 1 のアカウント照合で `stats47` と一致しなければ 1 本も投稿しない。
 - **完了条件**: 2 本が note で公開され、`note-published-urls.json` に 2 件の URL があり、無料部分と有料部分の境界が意図どおりであることを screenshot で確認済み。公開日から 4 週間後 (公開日 + 28 日) に 2 本の売上を note ダッシュボードで比べる予定を `improvements.md` 側へ引き渡す。
 
-### [BLOG-SVG-REGEN-20261006] 文字が重なるブログ SVG 8 枚を R2 で作り直す (再生成コマンドの実行)
-タグ: [UI・UX] [種類:不具合] [実行:ユーザー] [起票:2026-10-06] [領域:サイト]
-
-- **経緯**: `UI-FIX-BLOG-ARTICLE-20260927` の 9 記事のうち 6 記事 8 枚は、生成器が正しく直っていて R2 の SVG を作り直すだけで直る (`plan-svg-text-fix.ts` の判定 `regen-fixes`)。うち棒グラフ 4 枚は 2026-10-06 に `packages/svg-builder/src/charts/bar-chart.ts` で値の文字を県名の後ろの空きに収めるよう直した。振り分けスクリプトは生成器の `--base` の解決誤りで全件「判定不能」になっていたのも同日に直した。
-- **次**: develop→main 反映後に `gh workflow run regenerate-blog-svgs.yml -f slugs="allocation-tax-area beer-peak-month-july-to-december cc-estat-07-birthrate-line cc-estat-08-bar-chart-race cc-estat-14-energy-area-chart cc-estat-16-commerce-bubble" -f dry_run=true` でギャラリーを確かめ、問題が無ければ `dry_run=false` で R2 へ反映する。ブログ詳細は prerender なので本番反映には再デプロイも要る (`nextjs-ssg-preservation.md`)。
-- **完了条件**: `npx tsx .claude/scripts/blog/plan-svg-text-fix.ts @.claude/state/page-quality/backlog-batches/UI-FIX-BLOG-ARTICLE-20260927.txt` の対象 8 枚が `clean` になる。
-
 ### [BLOG-SVG-NODATA-20261006] 元データが無く作り直せないブログ SVG 3 枚の文字はみ出し・重なりを手で直す
 タグ: [UI・UX] [種類:不具合] [実行:対話] [起票:2026-10-06] [領域:サイト]
 
