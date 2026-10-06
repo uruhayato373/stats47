@@ -495,15 +495,6 @@ updated: 2026-10-06
 - **完了条件**: 週次 page-quality の %/％ 混在が 0 ページ。値の換算はしない (表示の整形だけ)。
 - **2026-10-06 実装済み (本番未確認)**: 単位を直接描画する約 40 か所と受け側部品 (FeaturedRankingCard・RankingSidebar・CategoryRankingList・KPI/Line/Composition/AttributeMatrix・BlogStatsHighlight 等) を `formatUnitForDisplay` に通した。生成文 (AI 解説・ブログ説明文) は R2 を書き換えず、表示時に数字直後の「％」だけ半角にする `normalizePercentInText` (`packages/data-configs/src/unit/unit-display.ts`) を足した。OGP 画像 (RankingOgp) は再生成判定の入力が変わるため対象外にした。localhost で ranking / theme / category / survey / japan / blog / 市区町村ランキングの代表ページは全角 ％ 0 件。完了条件 (週次 page-quality の混在 0 ページ) は本番反映後の週次で確かめる。
 
-### [SUBTITLE-DROP-SITEWIDE-01] 指標名を出す部品が subtitle (分母・内訳) を落とさないようにする
-タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-09-27] [領域:データ]
-
-- **経緯**: 2026-09-27 に `/category/*` のトピック一覧と `/japan/*` の見出しで subtitle を落としていたのを直した (「図書館数 27館」が人口100万人当たりだった)。
-  同じ形 (`readerLabel ?? title`) が `RelatedRankingsGrid` など他の部品にも残っている (`git grep -n "readerLabel ?? " -- apps/web/src`)。
-  分母は unit ではなく subtitle が持つ規約 (`unit-semantics-standards.md` §4) なので、subtitle を落とすと人口当たりの値が総数に見える。
-- **次**: 指標名 + subtitle を組み立てる関数を 1 つ用意し、指標名を出す部品をそれに寄せる。契約テストで `readerLabel ?? title` の直書きを 0 にする。
-- **完了条件**: subtitle を持つ指標の名前を出す全部品が subtitle を含めて表示し、直書きが 0 件。
-
 ### [AD-SAME-SHOP-DEDUP-01] 1 ページに同じ店の楽天商品が並ぶのを抑える
 タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-09-27] [領域:アフィリエイト]
 
@@ -1935,43 +1926,6 @@ updated: 2026-10-06
 - **禁止**: 承認前の R2 push、`experiments.json` への baseline 登録なしの本番反映
 - **参照**: `.claude/skills/theme/manage-theme-portfolio/reference/theme-improvement-execution.md`
   (採択ゲート・実装契約・視覚QAの正典)
-
-### [THEME-CHART-TEMPORAL-MISMATCH-01] line-chartが単年設定の13指標を再取り込みして年範囲を拡張する
-
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-09-15] [領域:データ]
-
-- **owner**: data-ingester (年範囲拡張・再取り込み。判断待ちなし、以下は全件データ存在確認済み)
-- `npm run validate:catalog` の `[chart-temporal-fit]` warn (2026-09-15新設) が機械的に検出。
-  対象10テーマ13指標の line-chart が、`years: {from,to}` が単年 (from===to) の指標を参照しており
-  推移を描けない状態だった (componentKeyに「trend」を含むものも複数: `theme-health-expense-trend`
-  `railway-passenger-trend-jr` `roads-length-trend` 等)。
-- **2026-09-15 e-Stat実データで確認済み (getStatsData実測、値がnullでない年のみ集計)**:
-  全13指標とも**e-Statに複数年の実データが存在する**(config側の年範囲設定が不足していただけ)。
-  チャート型変更は不要、年範囲拡張が正解。
-
-  | metric key | statsDataId | config年数 | e-Stat実在年数 | 実在年 |
-  |---|---|---:|---:|---|
-  | national-medical-expense-per-person | 0000010209 | 1 | 14 | 1999-2022 (隔年等) |
-  | turnover-rate | 0000010206 | 1 | 11 | 1977-2022 (5年おき) |
-  | job-change-rate | 0000010206 | 1 | 11 | 1977-2022 (5年おき) |
-  | gender-wage-gap | 0003426933 | 1 | 2 | 2021-2022 |
-  | single-person-household-ratio | 0000010201 | 1 | 9 | 1980-2020 (5年おき) |
-  | jr-passenger-transport | 0000010103 | 1 | 19 | 2005-2023 |
-  | consumer-price-difference-index-housing | 0000010212 | 1 | 12 | 2013-2024 |
-  | consumer-price-difference-index-food | 0000010212 | 1 | 12 | 2013-2024 |
-  | actual-income-worker-households-per-month | 0000010212 | 1 | 50 | 1975-2024 |
-  | road-total-length-with-expressway | 0000010108 | 1 | 19 | 2005-2023 |
-  | road-expressway-length | 0000010108 | 1 | 19 | 2005-2023 |
-  | building-fire-count-per-100-thousand-people | 0000010211 | 1 | 49 | 1975-2023 |
-  | air-passenger-transport | 0000010103 | 1 | 49 | 1975-2023 |
-
-- **次 (実行順)**: ①各 `packages/data-configs/src/metrics/<key>.ts` の `years` を上表の実在年範囲へ
-  拡張 (5年おき等の指標は `{years:[...]}` 形式、連続年は `{from,to}`) ②`validate:years`/`validate:config`
-  ③`page-data-batch --metric <key>` で再取り込み ④`npm run validate:catalog` で
-  `chart-temporal-fit` warn 解消を確認。gender-wage-gap は2年のみのため折れ線でなく2点比較の
-  表示 (mixed-chart等) が妥当か theme-designer が判断してもよい。
-- **完了条件**: 対象13件で `chart-temporal-fit` warn が解消 (ラチェットは新規追加時の再発防止)。
-- **検証**: `npx tsx packages/data-configs/scripts/validate-theme-catalog.ts`
 
 ### [LOCAL-RESOURCE-BUDGET-01] 資料の復元経路と再起動後のメモリ削減効果を確認する
 

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-06T04:53:38.960Z",
+  "updatedAt": "2026-10-06T05:06:57.711Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -6274,6 +6274,78 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-10-06T04:53:38.960Z"
+    },
+    "THEME-CHART-TEMPORAL-MISMATCH-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-06T05:06:57.639Z",
+          "runId": null,
+          "model": "none",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsx packages/data-configs/scripts/validate-theme-catalog.ts",
+              "npm run validate:config",
+              "npm run validate:years",
+              "page-data-batch --dry-run x12"
+            ],
+            "pass": true
+          },
+          "evidence": "12 件の years を e-Stat の 47 県そろいの年へ (5 年おき等は列挙、actual-income は YEAR-COV で済)。chart-temporal-fit warn 0 件。dry-run 12 件とも複数年。R2 投入は data-refresh の次回実行",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-06T05:06:57.639Z"
+    },
+    "SUBTITLE-DROP-SITEWIDE-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-06T05:06:57.711Z",
+          "runId": null,
+          "model": "none",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "apps/web vitest run src/__tests__/metric-name-contract.test.ts src/features/ranking src/features/theme-dashboard",
+              "packages/ranking vitest run",
+              "npm run type-check -w apps/web",
+              "generate-ranking-prominence --check"
+            ],
+            "pass": true
+          },
+          "evidence": "@stats47/ranking に metricDisplayName / metricShortName / isCaveatNote を置き、13 か所の readerLabel ?? を寄せた。代表ランキングの生成データに subtitle を焼いた。契約テストで直書き 0 件を固定",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-06T05:06:57.711Z"
     }
   }
 }
