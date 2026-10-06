@@ -23,7 +23,7 @@ export const FISHERY_MARINE_SET: IndicatorSet = {
     {
       "rankingKey": "inland-fishery-catch",
       "shortLabel": "内水面漁獲量",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "fishing-port-count-ksj",
@@ -47,7 +47,7 @@ export const FISHERY_MARINE_SET: IndicatorSet = {
     },
     {
       "rankingKey": "marine-fishery-aquaculture-output-value",
-      "shortLabel": "産出額（新）",
+      "shortLabel": "海面漁業・養殖業産出額",
       "role": "primary"
     },
     {
@@ -57,7 +57,7 @@ export const FISHERY_MARINE_SET: IndicatorSet = {
     },
     {
       "rankingKey": "fishery-output-value",
-      "shortLabel": "産出額（旧）",
+      "shortLabel": "漁業産出額（2016年まで）",
       "role": "context"
     },
     {

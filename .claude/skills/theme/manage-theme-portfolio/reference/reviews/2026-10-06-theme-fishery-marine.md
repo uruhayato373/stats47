@@ -1,7 +1,7 @@
 ---
 type: theme-catalog-review
 date: 2026-10-06
-status: proposal-ready
+status: implemented-pending-release
 theme: fishery-marine
 supersedes: 2026-07-13-theme-fishery-marine.md
 tags: [theme-catalog, fishery, aquaculture, metrics, charts, sections]
@@ -113,7 +113,7 @@ UI はこの参照を読まない。
 | 漁獲量と就業者を 1 枚の図に重ねる | 単位と桁が違う (7 月版と同じ判断) | — |
 | 産出額の 2016 年までと 2017 年からを 1 本につなぐ | 対象 (海面養殖を含むか) が違う (7 月版と同じ判断) | 同じ対象の系列が 1975 年から取れたとき |
 
-rankingKey が実在する 4 件は、実装時に catalog の `rejectedCandidates` にも記録する。
+rankingKey が実在する 4 件は catalog の `rejectedCandidates` にも記録した。
 
 ## 想定実装差分と検証
 
@@ -129,7 +129,10 @@ rankingKey が実在する 4 件は、実装時に catalog の `rejectedCandidat
 
 ## 採用決定
 
-**現状: ユーザー承認待ち。** 承認前に catalog を編集しない。判断が要る点は次の 2 つ。
+**2026-10-06 ユーザーが全項目を承認し、同日 branch `claude/theme-catalog-optimization` (PR #1085) に実装した (未デプロイ)。**
 
-1. 表 1〜3 の変更 (特に、図 5 枚のうち 4 枚を外し、量のカードを合計・海・川と湖の 3 枚にすること)
-2. 魚種別データを 2023 年まで更新する作業を backlog に起こすこと (データ投入。テーマの変更とは別の PR)
+- 表 1〜3 のとおり実装した。primary・secondary 8 件の selection は backfill の gate を通して書いた
+  (出典: 海面漁業生産統計調査・内水面漁業生産統計調査の概要、漁業センサスの概要、水産白書 参考資料 2-5)。
+  fishery-marine の `[no-adoption-criteria]` warning は 7 件から 0 件になり、warning の基準値を 275 → 268 に下げた。
+- 外した 4 図はどれも調査と紐付いた図なので、調査の紐付けの ratchet の下限を 59 → 55 にし、`themeBaselineFollowUps` に記録した。
+- 魚種別データの更新は backlog `FISHERY-SPECIES-REFRESH-01`。デプロイは aging-society と一緒に `THEME-CATALOG-OPT-RELEASE-01`。

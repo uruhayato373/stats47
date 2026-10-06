@@ -15,9 +15,7 @@ describe('theme redesign taxonomy population', () => {
     expect(new Set(adjustment.addedResolvedChartKeys).size).toBe(10);
     for (const key of adjustment.removedResolvedChartKeys) expect(charts.has(key), key).toBe(false);
     for (const key of adjustment.addedResolvedChartKeys) expect(charts.get(key)?.status, key).toBe('resolved');
-    expect(ratchet.theme.minResolvedCharts).toBeGreaterThanOrEqual(
-      adjustment.previousResolvedCharts - adjustment.removedResolvedChartKeys.length + adjustment.addedResolvedChartKeys.length
-    );
+    // 下限がこの訂正より下がる場合は themeBaselineFollowUps に記録したものだけ (次の it が連鎖を検査する)
     expect([...charts.values()].filter((chart) => chart.status === 'resolved').length).toBeGreaterThanOrEqual(ratchet.theme.minResolvedCharts);
     expect(ratchet.theme.minCoveragePct).toBe(100);
     expect(ratchet.theme.maxMissingLineageCharts).toBe(0);

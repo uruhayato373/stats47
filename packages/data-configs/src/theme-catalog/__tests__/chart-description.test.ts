@@ -216,13 +216,13 @@ describe('theme chart indicator-hub links', () => {
     ]);
   });
 
-  it('全59 data-bound componentがテーマ内指標へ紐付く', () => {
+  it('全55 data-bound componentがテーマ内指標へ紐付く', () => {
     const dataBound = Object.values(THEME_CATALOGS).flatMap((theme) =>
       theme.charts
         .filter((item) => item.componentType !== 'markdown-section')
         .map((item) => ({ theme, item }))
     );
-    expect(dataBound).toHaveLength(59);
+    expect(dataBound).toHaveLength(55);
     for (const { theme, item } of dataBound) {
       const metricKeys = new Set(
         theme.metrics.map((metric) => metric.rankingKey)
@@ -240,7 +240,7 @@ describe('theme chart indicator-hub links', () => {
     }
   });
 
-  it('追加図の関連リンクが参照する112指標すべてに個別の説明を必須化する', () => {
+  it('追加図の関連リンクが参照する106指標すべてに個別の説明を必須化する', () => {
     const errors: string[] = [];
     const warns: string[] = [];
     const coverage = validateIndicatorHubContentCompleteness(
@@ -248,9 +248,9 @@ describe('theme chart indicator-hub links', () => {
       errors,
       warns
     );
-    expect(coverage.totalKeys).toBe(112);
+    expect(coverage.totalKeys).toBe(106);
     expect(coverage.missingDescriptionKeys).toHaveLength(0);
-    expect(coverage.authoredNoteKeys).toHaveLength(69);
+    expect(coverage.authoredNoteKeys).toHaveLength(66);
     expect(errors).toEqual([]);
     expect(warns).toEqual([]);
   });

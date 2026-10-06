@@ -3,8 +3,8 @@
   "totalRequests": 0,
   "distinctRequests": 0,
   "requests": [],
-  "totalMetricRefs": 156,
-  "distinctMetricRefs": 152,
+  "totalMetricRefs": 150,
+  "distinctMetricRefs": 146,
   "metrics": [
     {
       "metricKey": "actual-income-worker-households-per-month",
@@ -287,22 +287,6 @@
       "componentType": "donut-chart"
     },
     {
-      "metricKey": "fish-catch",
-      "expectedUnit": "トン",
-      "expectedConfigHash": "9ec0eeb2651a7c5d",
-      "themeKey": "fishery-marine",
-      "componentKey": "theme-fishery-catch-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "metricKey": "fishery-workers",
-      "expectedUnit": "人",
-      "expectedConfigHash": "67c3c256eb5631e1",
-      "themeKey": "fishery-marine",
-      "componentKey": "theme-fishery-half-century",
-      "componentType": "line-chart"
-    },
-    {
       "metricKey": "floor-area-per-dwelling-owner",
       "expectedUnit": "ｍ2",
       "expectedConfigHash": "9dbea6949a6615f7",
@@ -447,14 +431,6 @@
       "componentType": "line-chart"
     },
     {
-      "metricKey": "inland-aquaculture-harvest",
-      "expectedUnit": "トン",
-      "expectedConfigHash": "f61941b77919bfc8",
-      "themeKey": "fishery-marine",
-      "componentKey": "theme-fishery-aquaculture-mix",
-      "componentType": "mixed-chart"
-    },
-    {
       "metricKey": "intellectual-crime-per-100k",
       "expectedUnit": "件",
       "expectedConfigHash": "434c56d9679fd2fa",
@@ -548,30 +524,6 @@
       "expectedConfigHash": "8d6d6e1903f8b88e",
       "themeKey": "manufacturing",
       "componentKey": "theme-manufacturing-labor-productivity-establishment",
-      "componentType": "line-chart"
-    },
-    {
-      "metricKey": "marine-aquaculture-harvest",
-      "expectedUnit": "トン",
-      "expectedConfigHash": "c62045e02d31862b",
-      "themeKey": "fishery-marine",
-      "componentKey": "theme-fishery-aquaculture-mix",
-      "componentType": "mixed-chart"
-    },
-    {
-      "metricKey": "marine-fishery-aquaculture-output-value",
-      "expectedUnit": "百万円",
-      "expectedConfigHash": "2c235b988e656953",
-      "themeKey": "fishery-marine",
-      "componentKey": "theme-fishery-output-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "metricKey": "marine-fishery-catch",
-      "expectedUnit": "トン",
-      "expectedConfigHash": "b231a49f2d4b35d0",
-      "themeKey": "fishery-marine",
-      "componentKey": "theme-fishery-catch-trend",
       "componentType": "line-chart"
     },
     {

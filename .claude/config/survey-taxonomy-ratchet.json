@@ -30,7 +30,7 @@
     "minResolvedMetricGroups": 447,
     "minMetricGroupCoveragePct": 100,
     "maxMissingLineageMetricGroups": 0,
-    "minResolvedCharts": 59,
+    "minResolvedCharts": 55,
     "minCoveragePct": 100,
     "maxMissingLineageCharts": 0
   },
@@ -105,6 +105,18 @@
       "previousResolvedCharts": 60,
       "removedResolvedChartKeys": [
         "aging-society/cmp-pop-elderly-household"
+      ],
+      "addedResolvedChartKeys": []
+    },
+    {
+      "date": "2026-10-06",
+      "reason": "Owner-approved fishery-marine review (2026-10-06-theme-fishery-marine.md) removed four charts that redrew the metric-group cards directly above them. Every removed series stays resolved through those cards; coverage stays 100% with zero missing lineage.",
+      "previousResolvedCharts": 59,
+      "removedResolvedChartKeys": [
+        "fishery-marine/theme-fishery-catch-trend",
+        "fishery-marine/theme-fishery-aquaculture-mix",
+        "fishery-marine/theme-fishery-output-trend",
+        "fishery-marine/theme-fishery-half-century"
       ],
       "addedResolvedChartKeys": []
     }

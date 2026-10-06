@@ -2530,21 +2530,37 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
   旧置き場 `.claude/state/metrics/psi` に書いていないこと、既存の history 行が巻き戻っていないことを確かめてから次の取得元 (GSC) へ進む。
 - **完了条件**: `npm run check-datasets -- --moves` が 0 行。関係する workflow の次回の定期実行が新しい置き場へ書いている。
 
-### [THEME-CATALOG-OPT-RELEASE-01] aging-society の改善と章順・カード見出しの横断修正を、9 月の実験の d56 観測後に本番へ出す
+### [THEME-CATALOG-OPT-RELEASE-01] aging-society・fishery-marine の改善と章順・カード見出しの横断修正を、9 月の実験の d56 観測後に本番へ出す
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:node .claude/scripts/themes/validate-theme-state.mjs] [起票:2026-10-06] [期日:2026-11-13] [領域:データ]
 
-- **背景**: 2026-10-06 承認の提案 (`.claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-10-06-theme-aging-society.md`)
-  を branch `claude/theme-catalog-optimization` に実装した (aging-society の指標・章・カード、読み方章の末尾移動 8 テーマ、
-  カード見出しの章名除去 258 件)。変更した 28 テーマはすべて `.claude/state/themes/experiments.json` に
+- **背景**: 2026-10-06 承認の提案 (`.claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-10-06-theme-{aging-society,fishery-marine}.md`)
+  を branch `claude/theme-catalog-optimization` (PR #1085) に実装した (aging-society と fishery-marine の指標・章・カード、
+  読み方章の末尾移動 8 テーマ、カード見出しの章名除去 258 件)。変更した 29 テーマはすべて `.claude/state/themes/experiments.json` に
   `THEME-STRUCTURE-20260908-*` / `THEME-LAUNCH-*` の pending 実験 (d28 = 2026-10-09、d56 = 2026-11-06) を持つ。
-  先に出すと d56 の観測にこの変更が混ざる。同じテーマ × changeType の pending は 1 件までなので、aging-society の新しい実験も今は登録できない。
+  先に出すと d56 の観測にこの変更が混ざる。同じテーマ × changeType の pending は 1 件までなので、2 テーマの新しい実験も今は登録できない。
 - **次**: 2026-11-06 の d56 観測が `experiments.json` に記録されたのを確かめてから、オーナーの承認を取って
-  ① R2 の page-components 反映 (`sync-snapshots.yml` を `only=page-components` で実行。aging-society の
-  `page-components/theme/aging-society.json` が変わる。反映せずにアプリだけ出すと、外した「高齢世帯の推移」が R2 から読まれ、
-  ページ末尾に章外の図として残る) → ② develop → main のデプロイ → ③ aging-society の実験を
+  ① R2 の page-components 反映 (`sync-snapshots.yml` を `only=page-components` で実行。2 テーマの
+  `page-components/theme/<key>.json` が変わる。反映せずにアプリだけ出すと、外した図 (高齢世帯の推移・漁業の 4 図) が R2 から読まれ、
+  ページ末尾に章外の図として残る) → ② develop → main のデプロイ → ③ 2 テーマの実験を
   `evaluate-theme-experiments.mjs --register` で baseline 付きで登録し `--schedule <デプロイ日>`。
 - **完了条件**: 本番 `/themes/aging-society` で「年齢構造と支え手の比率」章にカードが出て、「高齢世帯の推移」が無く、
-  8 テーマで読み方章が末尾にある。aging-society の実験が登録され d7/d28/d56 が入っている。
+  `/themes/fishery-marine` で図が「海面漁業産出額の長期推移」1 枚になり「漁業の担い手」章がある。8 テーマで読み方章が末尾にある。
+  2 テーマの実験が登録され d7/d28/d56 が入っている。
+
+### [FISHERY-SPECIES-REFRESH-01] 魚種別漁獲量 12 指標を 2015 年から 2023 年まで延ばし、fishery-marine に「主な魚種」の章を作る
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run validate:config --workspace=@stats47/data-configs] [起票:2026-10-06] [領域:データ]
+
+- **背景**: `fishery-species-catch-*` 12 指標は累年統計 `0003238633` (1956〜2015 年) だけを読み、2015 年で止まっている。
+  検索需要は魚種に集まっている (GSC 2026-W40・28 日: カツオ関連 121 クエリ計 2,077 表示、着地は 2015 年データのブログ
+  `blog/bonito-catch-prefecture` 5,880 表示。魚種ランキングはサンマ 612・イワシ 530・サバ 426・カツオ 214・マグロ 202・スケトウダラ 149 表示)。
+  e-Stat には海面漁業生産統計調査「海面漁業の部 大海区都道府県振興局別統計 魚種別漁獲量」の年ごとの表がある
+  (2026-10-06 に `getStatsList` で確認: 2017 年 `0003322129`、2023 年 `0004043248`。2018〜2022 年は同じ検索の上限 200 件で切れたため未確認)。
+- **次**: ① 2016〜2023 年の各年の statsDataId と魚種の分類コードを e-Stat で解決する。表の地域軸は「大海区・都道府県・振興局」が混在するので、
+  都道府県の行だけを使い、北海道は振興局を足さずに道の行を使う。② 累年統計 (〜2015) と年次表 (2016〜) の値が重なる年で一致するかを確かめ、
+  1 本の系列としてつなげるかを決める (定義が違えば別 key)。③ metric config と R2 観測値を更新する (data-ingester)。
+  ④ fishery-marine に「主な魚種」の章を提案する (選んだ県の魚種構成。提案 → 承認 → catalog 編集の順)。⑤ ブログ `bonito-catch-prefecture` の更新を blog 側へ渡す。
+- **禁止**: 2015 年の値を最新値として見せない。海のない県の対象外を 0 として順位に入れない。
+- **完了条件**: 12 指標の `years.to` が 2023 になり、`/ranking/fishery-species-catch-bonito` が 2023 年の値を表示する。
 
 ### [THEME-AGING-LIVING-ALONE-METRIC-01] 65歳以上人口に占める一人暮らしの割合 (高齢者の独居率) を指標に足す
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run validate:config --workspace=@stats47/data-configs] [起票:2026-10-06] [領域:データ]

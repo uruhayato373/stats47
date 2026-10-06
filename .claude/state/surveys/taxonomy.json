@@ -257,9 +257,9 @@
   "theme": {
     "themes": 55,
     "metricGroups": {
-      "total": 533,
+      "total": 534,
       "byStatus": {
-        "resolved": 447,
+        "resolved": 448,
         "unresolved": 0,
         "not-applicable": 86,
         "missing-lineage": 0
@@ -267,10 +267,10 @@
       "coveragePct": 100,
       "unresolved": []
     },
-    "charts": 75,
-    "applicableCharts": 59,
+    "charts": 71,
+    "applicableCharts": 55,
     "byStatus": {
-      "resolved": 59,
+      "resolved": 55,
       "unresolved": 0,
       "not-applicable": 16,
       "missing-lineage": 0

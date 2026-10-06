@@ -28,68 +28,6 @@
     ]
   },
   {
-    "themeKey": "fishery-marine",
-    "componentKey": "theme-fishery-catch-trend",
-    "componentType": "line-chart",
-    "rawRequestKeys": [
-      "0000010103?cdCat01=C3121",
-      "0000010103?cdCat01=C312101"
-    ],
-    "metricKeys": [
-      "fish-catch",
-      "marine-fishery-catch"
-    ],
-    "units": [
-      "トン",
-      "トン"
-    ]
-  },
-  {
-    "themeKey": "fishery-marine",
-    "componentKey": "theme-fishery-aquaculture-mix",
-    "componentType": "mixed-chart",
-    "rawRequestKeys": [
-      "0000010103?cdCat01=C312201",
-      "0000010103?cdCat01=C312202"
-    ],
-    "metricKeys": [
-      "marine-aquaculture-harvest",
-      "inland-aquaculture-harvest"
-    ],
-    "units": [
-      "トン",
-      "トン"
-    ]
-  },
-  {
-    "themeKey": "fishery-marine",
-    "componentKey": "theme-fishery-output-trend",
-    "componentType": "line-chart",
-    "rawRequestKeys": [
-      "0000010103?cdCat01=C31201"
-    ],
-    "metricKeys": [
-      "marine-fishery-aquaculture-output-value"
-    ],
-    "units": [
-      "百万円"
-    ]
-  },
-  {
-    "themeKey": "fishery-marine",
-    "componentKey": "theme-fishery-half-century",
-    "componentType": "line-chart",
-    "rawRequestKeys": [
-      "0000010103?cdCat01=C3125"
-    ],
-    "metricKeys": [
-      "fishery-workers"
-    ],
-    "units": [
-      "人"
-    ]
-  },
-  {
     "themeKey": "foreign-residents",
     "componentKey": "theme-foreign-total-trend",
     "componentType": "line-chart",

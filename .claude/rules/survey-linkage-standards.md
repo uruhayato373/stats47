@@ -119,6 +119,7 @@ ratchet の `maxLegacyDataSourceSectionArticles` / `maxSourcelessChartArticles` 
   resolved 88を下限とする。両枠ともcoverage 100%・missing-lineage 0を維持する。
   2026-10-06のaging-society改善で高齢世帯の折れ線1図を外した分は`themeBaselineFollowUps`に記録し、
   追加図の下限を60→59にした (後続の訂正も同じ配列へ足し、回帰テストが連鎖を検査する)。
+  同日のfishery-marine改善でカードと重複する4図を外した分も同じ配列に足し、下限を59→55にした。
 
 ### 新しい調査を追加する
 1. `packages/ranking/src/data/surveys.json` にエントリ追加 (id は kebab-case)
