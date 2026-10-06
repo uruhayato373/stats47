@@ -344,7 +344,8 @@ updated: 2026-10-06
 タグ: [UI・UX] [種類:不具合] [実行:対話] [起票:2026-10-06] [領域:サイト]
 
 - **事象 (2026-10-06 axe 実測・`/blog/beer-peak-month-july-to-december`・390px)**: `color-contrast` (serious) が 3 か所。LINE ボタン (`bg-[#06C755]` に白文字) とはてなボタン (`bg-[#00A4DE]` に白文字) と、`text-positive` の小見出し (`mb-1 flex … text-xs font-bold text-positive`)。週次 page-quality の `a11y_violations` に出ている。
-- **決めてほしいこと**: 共有ボタンはブランド色のまま文字だけ濃くするか、ボタンを枠線型にするか。`--positive` トークンを濃くするとサイト全体の配色が変わる。
+- **実装済み (2026-10-06・未デプロイ)**: オーナー承認のうえ、共有ボタンはブランドの地色のまま文字を濃紺 `#0f172a` にした (LINE 7.91:1 / はてな 6.26:1)。小見出しは callout のラベル行で、文字を `text-foreground` にし種類の色はアイコンだけに残した (`Callout.tsx`・5 種共通)。`--positive` トークンは変えていない。
+- **次**: 次の本番デプロイ後に同じ URL を axe で測る。
 - **完了条件**: 同じ URL の axe `color-contrast` が 0 件。
 
 ### [GEO-QGIS-DEMAND-01] QGIS の使い方ブログ 3 本で需要を測り、note「国土数値情報をQGISで扱う」を作るか決める
