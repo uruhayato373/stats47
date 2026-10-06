@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-06T05:06:57.711Z",
+  "updatedAt": "2026-10-06T05:23:59.293Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -6346,6 +6346,44 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-10-06T05:06:57.711Z"
+    },
+    "DATA-WAGE-TABLE-YEARS-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-06T05:23:59.293Z",
+          "runId": null,
+          "model": "none",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "e-Stat getMetaInfo/getStatsData 0003445758",
+              "page-data-batch --dry-run x40",
+              "npm run validate:config",
+              "npm run validate:years",
+              "data-refresh run 37417259424 (観測値 push 成功)",
+              "curl storage.stats47.jp app/stats/<key>/values.json x40"
+            ],
+            "pass": true
+          },
+          "evidence": "原因は表章項目コードの年代差 (2022=01-13 / 他年=33-45)。cdTab を 08,40 / 12,44 / 10,42 に。R2 で 40 件とも 2020-2023 年を配信、school-teacher の最新年 2023 = e-Stat 掲載の最新年",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-06T05:23:59.293Z"
     }
   }
 }
