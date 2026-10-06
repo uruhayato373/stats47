@@ -13,8 +13,8 @@ export const pharmacistAnnualIncome: MetricConfig = {
     "valueScale": 0.1,
     "cdCat01": "01",
     "tabCombination": [
-      { "cdTab": "08", "factor": 12 },
-      { "cdTab": "12", "factor": 1 },
+      { "cdTab": "08,40", "factor": 12 },
+      { "cdTab": "12,44", "factor": 1 },
     ],
     "cdCat02": "1124",
     "displayName": "賃金構造基本統計調査",
@@ -56,7 +56,7 @@ export const pharmacistAnnualIncome: MetricConfig = {
       },
     ],
   },
-  "seoTitle": "薬剤師の平均年収 都道府県ランキング【2022年】｜1位宮崎県（717.7万円）",
-  "seoDescription": "2022年の薬剤師の平均年収を都道府県別に比較。1位は宮崎県（717.7万円）、最下位は三重県（491.2万円）、最大と最小の差は1.5倍です。地図やグラフで47都道府県の違いを確認できます。",
+  "seoTitle": "薬剤師の平均年収 都道府県ランキング【2023年】｜1位広島県（706.0万円）",
+  "seoDescription": "2023年の薬剤師の平均年収を都道府県別に比較。1位は広島県（706.0万円）、最下位は徳島県（463.7万円）、最大と最小の差は1.5倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

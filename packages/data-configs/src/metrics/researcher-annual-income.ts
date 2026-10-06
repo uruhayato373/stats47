@@ -13,8 +13,8 @@ export const researcherAnnualIncome: MetricConfig = {
     // 宣言しないと 千円 の値に 万円 のラベルが付いたまま配信される。
     "valueScale": 0.1,
     "tabCombination": [
-      { "cdTab": "08", "factor": 12 },
-      { "cdTab": "12", "factor": 1 },
+      { "cdTab": "08,40", "factor": 12 },
+      { "cdTab": "12,44", "factor": 1 },
     ],
     "cdCat01": "01",
     "cdCat02": "1051",
@@ -50,7 +50,7 @@ export const researcherAnnualIncome: MetricConfig = {
     ],
     "isCalculated": false,
   },
-  "seoTitle": "研究者の平均年収 都道府県ランキング【2022年】｜1位山梨県（889.0万円）",
-  "seoDescription": "2022年の研究者の平均年収を都道府県別に比較。1位は山梨県（889.0万円）、最下位は山形県（380.3万円）、最大と最小の差は2.3倍です。地図やグラフで47都道府県の違いを確認できます。",
+  "seoTitle": "研究者の平均年収 都道府県ランキング【2023年】｜1位山梨県（1,178.3万円）",
+  "seoDescription": "2023年の研究者の平均年収を都道府県別に比較。1位は山梨県（1,178.3万円）、最下位は鳥取県（435.7万円）、最大と最小の差は2.7倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

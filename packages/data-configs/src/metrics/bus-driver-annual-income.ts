@@ -13,8 +13,8 @@ export const busDriverAnnualIncome: MetricConfig = {
     "valueScale": 0.1,
     "cdCat01": "01",
     "tabCombination": [
-      { "cdTab": "08", "factor": 12 },
-      { "cdTab": "12", "factor": 1 },
+      { "cdTab": "08,40", "factor": 12 },
+      { "cdTab": "12,44", "factor": 1 },
     ],
     "cdCat02": "1611",
     "displayName": "賃金構造基本統計調査",
@@ -56,7 +56,7 @@ export const busDriverAnnualIncome: MetricConfig = {
       },
     ],
   },
-  "seoTitle": "バス運転者の平均年収 都道府県ランキング【2022年】｜1位神奈川県（501.7万円）",
-  "seoDescription": "2022年のバス運転者の平均年収を都道府県別に比較。1位は神奈川県（501.7万円）、最下位は秋田県（278.7万円）、最大と最小の差は1.8倍です。地図やグラフで47都道府県の違いを確認できます。",
+  "seoTitle": "バス運転者の平均年収 都道府県ランキング【2023年】｜1位東京都（570.7万円）",
+  "seoDescription": "2023年のバス運転者の平均年収を都道府県別に比較。1位は東京都（570.7万円）、最下位は大分県（283.2万円）、最大と最小の差は2.0倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

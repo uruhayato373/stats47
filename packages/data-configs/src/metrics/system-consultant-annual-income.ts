@@ -15,8 +15,8 @@ export const systemConsultantAnnualIncome: MetricConfig = {
     "valueScale": 0.1,
     "cdCat01": "01",
     "tabCombination": [
-      { "cdTab": "08", "factor": 12 },
-      { "cdTab": "12", "factor": 1 },
+      { "cdTab": "08,40", "factor": 12 },
+      { "cdTab": "12,44", "factor": 1 },
     ],
     "cdCat02": "1101",
     "displayName": "賃金構造基本統計調査",
@@ -58,7 +58,7 @@ export const systemConsultantAnnualIncome: MetricConfig = {
       },
     ],
   },
-  "seoTitle": "システムコンサルタントの平均年収 都道府県ランキング【2022年】｜1位兵庫県（794.1万円）",
-  "seoDescription": "2022年のシステムコンサルタントの平均年収を都道府県別に比較。1位は兵庫県（794.1万円）、最下位は群馬県（360.3万円）、最大と最小の差は2.2倍です。地図やグラフで47都道府県の違いを確認できます。",
+  "seoTitle": "システムコンサルタントの平均年収 都道府県ランキング【2023年】｜1位秋田県（952.5万円）",
+  "seoDescription": "2023年のシステムコンサルタントの平均年収を都道府県別に比較。1位は秋田県（952.5万円）、最下位は沖縄県（359.1万円）、最大と最小の差は2.7倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

@@ -13,8 +13,8 @@ export const physicalTherapistAnnualIncome: MetricConfig = {
     "valueScale": 0.1,
     "cdCat01": "01",
     "tabCombination": [
-      { "cdTab": "08", "factor": 12 },
-      { "cdTab": "12", "factor": 1 },
+      { "cdTab": "08,40", "factor": 12 },
+      { "cdTab": "12,44", "factor": 1 },
     ],
     "cdCat02": "1144",
     "displayName": "賃金構造基本統計調査",
@@ -56,7 +56,7 @@ export const physicalTherapistAnnualIncome: MetricConfig = {
       },
     ],
   },
-  "seoTitle": "理学療法士等の平均年収 都道府県ランキング【2022年】｜1位東京都（475.8万円）",
-  "seoDescription": "2022年の理学療法士等の平均年収を都道府県別に比較。1位は東京都（475.8万円）、最下位は秋田県（347.2万円）、最大と最小の差は1.4倍です。地図やグラフで47都道府県の違いを確認できます。",
+  "seoTitle": "理学療法士等の平均年収 都道府県ランキング【2023年】｜1位滋賀県（473.3万円）",
+  "seoDescription": "2023年の理学療法士等の平均年収を都道府県別に比較。1位は滋賀県（473.3万円）、最下位は長崎県（373.4万円）、最大と最小の差は1.3倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

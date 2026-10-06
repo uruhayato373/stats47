@@ -10,7 +10,7 @@ export const nurseSalary: MetricConfig = {
   "source": {
     "kind": "estat",
     "statsDataId": "0003445758",
-    "cdTab": "10",
+    "cdTab": "10,42",
     "cdCat01": "01",
     "cdCat02": "1133",
     "displayName": "賃金構造基本統計調査",
@@ -20,8 +20,8 @@ export const nurseSalary: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2022,
-    "to": 2022,
+    "from": 2020,
+    "to": 2023,
   },
   "yearFormat": "calendar",
   "visualization": {

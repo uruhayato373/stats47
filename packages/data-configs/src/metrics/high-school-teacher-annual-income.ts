@@ -13,8 +13,8 @@ export const highSchoolTeacherAnnualIncome: MetricConfig = {
     // 宣言しないと 千円 の値に 万円 のラベルが付いたまま配信される。
     "valueScale": 0.1,
     "tabCombination": [
-      { "cdTab": "08", "factor": 12 },
-      { "cdTab": "12", "factor": 1 },
+      { "cdTab": "08,40", "factor": 12 },
+      { "cdTab": "12,44", "factor": 1 },
     ],
     "cdCat01": "01",
     "cdCat02": "1194",
@@ -50,7 +50,7 @@ export const highSchoolTeacherAnnualIncome: MetricConfig = {
     ],
     "isCalculated": false,
   },
-  "seoTitle": "高等学校教員の平均年収 都道府県ランキング【2022年】｜1位東京都（837.8万円）",
-  "seoDescription": "2022年の高等学校教員の平均年収を都道府県別に比較。1位は東京都（837.8万円）、最下位は秋田県（437.2万円）、最大と最小の差は1.9倍です。地図やグラフで47都道府県の違いを確認できます。",
+  "seoTitle": "高等学校教員の平均年収 都道府県ランキング【2023年】｜1位和歌山県（894.2万円）",
+  "seoDescription": "2023年の高等学校教員の平均年収を都道府県別に比較。1位は和歌山県（894.2万円）、最下位は秋田県（369.5万円）、最大と最小の差は2.4倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

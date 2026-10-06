@@ -13,8 +13,8 @@ export const pilotAnnualIncome: MetricConfig = {
     "valueScale": 0.1,
     "cdCat01": "01",
     "tabCombination": [
-      { "cdTab": "08", "factor": 12 },
-      { "cdTab": "12", "factor": 1 },
+      { "cdTab": "08,40", "factor": 12 },
+      { "cdTab": "12,44", "factor": 1 },
     ],
     "cdCat02": "1624",
     "displayName": "賃金構造基本統計調査",
@@ -56,7 +56,7 @@ export const pilotAnnualIncome: MetricConfig = {
       },
     ],
   },
-  "seoTitle": "航空機操縦士の平均年収 都道府県ランキング【2022年】｜1位東京都（1,727.3万円）",
-  "seoDescription": "2022年の航空機操縦士の平均年収を都道府県別に比較。1位は東京都（1,727.3万円）、最下位は佐賀県（388.7万円）、最大と最小の差は4.4倍です。地図やグラフで47都道府県の違いを確認できます。",
+  "seoTitle": "航空機操縦士の平均年収 都道府県ランキング【2023年】｜1位東京都（1,964.1万円）",
+  "seoDescription": "2023年の航空機操縦士の平均年収を都道府県別に比較。1位は東京都（1,964.1万円）、最下位は埼玉県（367.3万円）、最大と最小の差は5.3倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

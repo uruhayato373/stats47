@@ -13,8 +13,8 @@ export const homeCareWorkerAnnualIncome: MetricConfig = {
     // 宣言しないと 千円 の値に 万円 のラベルが付いたまま配信される。
     "valueScale": 0.1,
     "tabCombination": [
-      { "cdTab": "08", "factor": 12 },
-      { "cdTab": "12", "factor": 1 },
+      { "cdTab": "08,40", "factor": 12 },
+      { "cdTab": "12,44", "factor": 1 },
     ],
     "cdCat01": "01",
     "cdCat02": "1362",
@@ -50,7 +50,7 @@ export const homeCareWorkerAnnualIncome: MetricConfig = {
     ],
     "isCalculated": false,
   },
-  "seoTitle": "訪問介護従事者の平均年収 都道府県ランキング【2022年】｜1位島根県（467.0万円）",
-  "seoDescription": "2022年の訪問介護従事者の平均年収を都道府県別に比較。1位は島根県（467.0万円）、最下位は宮城県（241.4万円）、最大と最小の差は1.9倍です。地図やグラフで47都道府県の違いを確認できます。",
+  "seoTitle": "訪問介護従事者の平均年収 都道府県ランキング【2023年】｜1位鹿児島県（478.5万円）",
+  "seoDescription": "2023年の訪問介護従事者の平均年収を都道府県別に比較。1位は鹿児島県（478.5万円）、最下位は静岡県（263.5万円）、最大と最小の差は1.8倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };
