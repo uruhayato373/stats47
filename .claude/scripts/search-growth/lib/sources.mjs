@@ -15,6 +15,7 @@ import { createObservation } from "./contracts.mjs";
 import { freshnessForSource, FRESHNESS_STALE_DEFAULT_DAYS } from "./freshness.mjs";
 import { toPathKey, SITE_ORIGIN } from "./join-url.mjs";
 import { redactString } from "./redaction.mjs";
+import { datasetDir } from "../../../../config/datasets.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..", "..");
@@ -175,7 +176,7 @@ const PSI = {
   secretName: "PSI_API_KEY",
   liveScript: ".claude/scripts/psi/fetch-psi-audit.mjs",
   normalize(root, now) {
-    const dir = path.join(root, ".claude/state/metrics/psi");
+    const dir = path.join(root, datasetDir("psi.batch"));
     const file = newestFile(dir, /^psi-batch-.*\.json$/);
     if (!file) return { observedAt: null };
     const j = JSON.parse(fs.readFileSync(file, "utf8"));

@@ -15,7 +15,7 @@
  *
  *   # 計測完了
  *   node update-cycle.cjs --slug psi-mobile-lcp-2500 --action measure \
- *     --measurement-path ".claude/state/metrics/psi/psi-batch-2026-05-23T...json" \
+ *     --measurement-path "data/psi/psi-batch-2026-05-23T...json" \
  *     --measured-value "Mobile LCP 平均 4,200ms / Performance 平均 72"
  *
  *   # 判定確定

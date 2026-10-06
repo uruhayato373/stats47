@@ -1,8 +1,27 @@
 {
-  "hash": "6f8f18bb310cd937ad9f49e9ffdb5099a3e7b7216685aaca8990adc17d8b71a8",
-  "audited_at": "2026-10-06T02:08:52",
+  "hash": "8d8e1b537cbb6346e3d0c679441355252622697ea24ad77502c76ec1bf636ca2",
+  "audited_at": "2026-10-06T02:15:45",
   "files": [
-    ".claude/scripts/lib/__tests__/check-datasets.test.mjs",
-    ".claude/scripts/lib/check-datasets.mjs"
+    ".agents/skills/analytics/lighthouse-audit/SKILL.md",
+    ".agents/skills/analytics/performance-improvement/SKILL.md",
+    ".agents/skills/analytics/performance-report/SKILL.md",
+    ".claude/agents/performance-auditor.md",
+    ".claude/rules/data-storage.md",
+    ".claude/scripts/lib/__tests__/workflow-commit-back.test.cjs",
+    ".claude/scripts/lib/check-datasets.mjs",
+    ".claude/scripts/lib/prune-state-snapshots.mjs",
+    ".claude/scripts/metrics/build-measurement-cycle.mjs",
+    ".claude/scripts/metrics/generate-weekly-metrics-issue.mjs",
+    ".claude/scripts/psi/fetch-psi-audit.mjs",
+    ".claude/scripts/psi/psi-threshold-check.mjs",
+    ".claude/scripts/psi/psi-update-digest.mjs",
+    ".claude/scripts/search-growth/lib/sources.mjs",
+    ".claude/skills/analytics/lighthouse-audit/SKILL.md",
+    ".claude/skills/analytics/performance-improvement/SKILL.md",
+    ".claude/skills/analytics/performance-report/SKILL.md",
+    ".claude/skills/management/goal/reference/metric-adapters.md",
+    ".claude/skills/management/goal/scripts/create-goal.cjs",
+    ".claude/skills/management/goal/scripts/update-cycle.cjs",
+    ".claude/skills/management/weekly-review/reference/runbook.md"
   ]
 }

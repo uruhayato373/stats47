@@ -19,7 +19,7 @@ const PROJECT_ROOT = resolve(fileURLToPath(new URL("../../..", import.meta.url))
 
 export const RETENTION_POLICIES = Object.freeze({
   psi: {
-    directory: ".claude/state/metrics/psi",
+    directory: "data/psi",
     pattern: /^psi-batch-\d{4}-\d{2}-\d{2}T[\d-]+\.json$/,
     keep: 1,
   },

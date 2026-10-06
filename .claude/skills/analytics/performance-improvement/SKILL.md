@@ -20,7 +20,7 @@ PSI、Chrome DevTools、Cloudflare Workers の実測値からボトルネック�
 | 改善施策ログ（append-only） | `reference/improvement-log.md` |
 | 未完了の施策 | `.claude/todo/improvements.md` |
 | PSI Alert（自動起票） | GitHub Issues ラベル `psi-alert,auto-generated` |
-| 週次集約 | `.claude/state/metrics/psi/{history.csv,LATEST.md}` |
+| 週次集約 | `data/psi/{history.csv,LATEST.md}` |
 | Cloudflare機械メトリクス | `.claude/state/metrics/cloudflare/` |
 
 レビュー全文や一時ハンドオフ文書を新規作成しない。未完了策は改善バックログ、実測・実装履歴は本 skill の `reference/improvement-log.md`、再生成可能な機械値は `.claude/state/metrics/` に保存する。
@@ -201,7 +201,7 @@ TopoJSON生成に触れない段階ではGIS / visualizationのfull testは省�
 curl "https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://stats47.jp/<path>&strategy=mobile&key=$PSI_API_KEY"
 
 # 週次 LATEST 確認
-cat .claude/state/metrics/psi/LATEST.md
+cat data/psi/LATEST.md
 ```
 
 参照: `.claude/rules/evidence-based-judgment.md`

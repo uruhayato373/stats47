@@ -631,7 +631,7 @@ node .claude/scripts/blog/analyze-winning-patterns.mjs   # CTR×構造特徴→f
 - [ ] **observe フェーズの実証コマンドを必ず実行したか**:
   - GSC URL Inspection: `node .claude/scripts/gsc/url-inspection-daily.cjs --limit 20`（日次のデルタを history.csv で比較）
   - GA4 / AdSense: `/fetch-ga4-data last7d`、`/fetch-adsense-data last7d` で前週比を取得
-  - PSI: `.claude/state/metrics/psi/LATEST.md` を読み、変化があれば実測 URL を再 PSI
+  - PSI: `data/psi/LATEST.md` を読み、変化があれば実測 URL を再 PSI
 - [ ] 各改善施策（`effect/pending`）に「経過 N 日 / 想定 X / 実測 Y」を必ず書いたか
 - [ ] effect/*変更の根拠コマンドを改善ログまたはバックログに残したか（後追い検証可能）
 - [ ] NG ワード（「のはず」「と思われる」「兆候」「浸透待ち」）を週次レビュー本文で使っていないか
