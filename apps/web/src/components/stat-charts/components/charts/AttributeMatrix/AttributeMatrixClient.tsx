@@ -18,7 +18,8 @@ interface AttributeMatrixClientProps {
 export const AttributeMatrixClient: React.FC<AttributeMatrixClientProps> = ({
   data,
 }) => {
-  const { columns, rows, unit } = data;
+  const { columns, rows } = data;
+  const unit = formatUnitForDisplay(data.unit);
 
   // Compute min/max for color intensity
   const allValues = rows.flatMap((r) => r.values).filter((v): v is number => v !== null);
@@ -63,7 +64,7 @@ export const AttributeMatrixClient: React.FC<AttributeMatrixClientProps> = ({
                 style={value !== null ? { backgroundColor: getCellBg(value) } : undefined}
               >
                 {value !== null
-                  ? `${value.toLocaleString()}${unit ? ` ${formatUnitForDisplay(unit)}` : ""}`
+                  ? `${value.toLocaleString()}${unit ? ` ${unit}` : ""}`
                   : "-"}
               </TableCell>
             ))}
