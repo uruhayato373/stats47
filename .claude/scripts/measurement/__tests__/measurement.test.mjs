@@ -318,7 +318,8 @@ test('KDP auth recovery requires human Reports login instead of re-exporting sta
   try {
     const input = join(temp, 'input'); mkdirSync(input);
     writeFileSync(join(input, 'kdp-2.json'), JSON.stringify({ source: 'kdp', capability: SOURCES.kdp.capability,
-      observedAt: new Date().toISOString(), status: 'failed', code: 'auth_required', runId: 'kdp-recovery', runAttempt: 2 }));
+      observedAt: new Date().toISOString(), status: 'failed', code: 'auth_required', runId: 'kdp-recovery', runAttempt: 2,
+      relogin: 'human_required' }));
     execFileSync(process.execPath, [resolve('.claude/scripts/measurement/summarize.mjs'), input], {
       cwd: temp, env: { ...process.env, GITHUB_RUN_ID: 'kdp-recovery', GITHUB_RUN_ATTEMPT: '2' },
     });
@@ -326,6 +327,11 @@ test('KDP auth recovery requires human Reports login instead of re-exporting sta
     assert.match(summary, /bootstrap-session\.mjs kdp --login --reports --publish/);
     assert.doesNotMatch(summary, /bootstrap-session\.mjs kdp --publish/);
     assert.match(summary, /再ログインを反復せず停止/);
+    // CI 再ログインの結果 (Reports で 2FA を求められた等) は CI ログだけでなく state に残す。
+    // 再ログインしなかった source は null で、結果を推測で埋めない
+    const sources = JSON.parse(readFileSync(join(temp, '.claude/state/metrics/authenticated/latest.json'))).sources;
+    assert.equal(sources.find(s => s.source === 'kdp').relogin, 'human_required');
+    assert.equal(sources.find(s => s.source === 'a8').relogin, null);
   } finally { rmSync(temp, { recursive: true, force: true }); }
 });
 

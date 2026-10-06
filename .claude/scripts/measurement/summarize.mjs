@@ -34,6 +34,9 @@ const sources = Object.entries(SOURCES).map(([source, config]) => {
     inventoryAvailable: source === 'note' && value.inventoryAvailable === true
       && (value.status === 'pass' || (value.status === 'failed' && value.code === 'report_incomplete')),
     collectionAttempted: value.collectionAttempted ?? null,
+    // CI 再ログインの結果コード (relogged / session_valid / human_required 等)。CI ログにしか残らず、
+    // KDP が本棚だけ有効で止まり続けた理由を state から読めなかった (2026-10-06)
+    relogin: value.relogin ?? null,
     recovery: value.recovery?.state === 'awaiting_reauthentication'
       ? { state: 'awaiting_reauthentication', blockedSince: value.recovery.blockedSince } : null,
     evidence: value.evidence ?? null,

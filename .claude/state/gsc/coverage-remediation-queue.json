@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-05",
+  "generated_at": "2026-10-06",
   "week": "2026-W40",
   "source_observed_at": "2026-10-04",
   "source_age_weeks": 1,
@@ -22,7 +22,7 @@
   },
   "summary": {
     "tracked_urls": 3417,
-    "pending_actionable": 1185,
+    "pending_actionable": 1183,
     "by_action": {
       "observe-after-fix": 1274,
       "enrich": 12,
@@ -30,14 +30,14 @@
       "content-check": 4
     },
     "by_status": {
-      "done": 90,
+      "done": 92,
       "resolved-by-design": 2127,
-      "pending": 1185,
+      "pending": 1183,
       "in-progress": 15
     },
-    "indexed_by_inspection": 90,
+    "indexed_by_inspection": 92,
     "pending_by_action": {
-      "observe-after-fix": 1185
+      "observe-after-fix": 1183
     },
     "by_verdict": {
       "live-misflagged": 1274,
@@ -17936,7 +17936,7 @@
       "resolved_at": "2026-09-25",
       "resolved_by": "url-inspection",
       "inspection": {
-        "observed_at": "2026-10-05",
+        "observed_at": "2026-10-06",
         "verdict": "PASS",
         "coverage_state": "送信して登録されました",
         "last_crawl": "2026-09-30T10:42:49Z"
@@ -21227,7 +21227,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -21249,7 +21254,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -21271,7 +21281,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -21293,7 +21308,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -21315,7 +21335,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -21337,7 +21362,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -21359,7 +21389,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "URL が Google に認識されていません",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -21381,7 +21416,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -21403,7 +21443,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -21425,7 +21470,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -21447,7 +21497,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -21469,7 +21524,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -21491,7 +21551,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "URL が Google に認識されていません",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -21513,7 +21578,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "URL が Google に認識されていません",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -21535,7 +21605,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -21557,7 +21632,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "URL が Google に認識されていません",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -21579,7 +21659,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -21601,7 +21686,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -21623,7 +21713,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -21645,7 +21740,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -21667,7 +21767,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -21689,7 +21794,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -21711,7 +21821,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -21733,7 +21848,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -21755,7 +21875,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "URL が Google に認識されていません",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -21777,7 +21902,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -21799,7 +21929,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -21821,7 +21956,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -21843,7 +21983,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -21865,7 +22010,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -21887,7 +22037,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "URL が Google に認識されていません",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -21909,7 +22064,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -21931,7 +22091,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "URL が Google に認識されていません",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -21953,7 +22118,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -21975,7 +22145,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -21997,7 +22172,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -22019,7 +22199,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -22041,7 +22226,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "URL が Google に認識されていません",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -22063,7 +22253,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -22085,7 +22280,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -22107,7 +22307,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -22129,7 +22334,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -22151,7 +22361,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -22173,7 +22388,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "URL が Google に認識されていません",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -22195,7 +22415,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -22217,7 +22442,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -22239,7 +22469,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -22261,7 +22496,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "URL が Google に認識されていません",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -22283,7 +22523,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -22305,7 +22550,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -22327,7 +22577,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -22349,7 +22604,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -22371,7 +22631,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -22393,7 +22658,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -22415,7 +22685,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -22437,7 +22712,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -22459,7 +22739,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -22481,7 +22766,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -22503,7 +22793,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -22525,7 +22820,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -22547,7 +22847,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -22569,7 +22874,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -22591,7 +22901,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -22613,7 +22928,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -22635,7 +22955,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -22657,7 +22982,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -22679,7 +23009,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "URL が Google に認識されていません",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -22701,7 +23036,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -22723,7 +23063,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -22745,7 +23090,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "URL が Google に認識されていません",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -22767,7 +23117,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -22789,7 +23144,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "URL が Google に認識されていません",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -22811,7 +23171,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "URL が Google に認識されていません",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -22833,7 +23198,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -22855,7 +23225,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -22877,7 +23252,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -22899,7 +23279,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -22916,12 +23301,17 @@
       "canonical_url": "https://stats47.jp/areas/11000/community-participation",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-10-05",
-      "resolved_at": null,
-      "resolved_by": null,
-      "inspection": null,
+      "resolved_at": "2026-10-06",
+      "resolved_by": "url-inspection",
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-09-29T23:16:15Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -22943,7 +23333,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -22965,7 +23360,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "URL が Google に認識されていません",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -22987,7 +23387,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -23009,7 +23414,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -23031,7 +23441,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -23053,7 +23468,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -23075,7 +23495,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -23097,7 +23522,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -23119,7 +23549,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -23136,12 +23571,17 @@
       "canonical_url": "https://stats47.jp/areas/12000/community-participation",
       "verdict": "live-misflagged",
       "action": "observe-after-fix",
-      "status": "pending",
+      "status": "done",
       "first_seen": "2026-09-28",
       "last_checked": "2026-10-05",
-      "resolved_at": null,
-      "resolved_by": null,
-      "inspection": null,
+      "resolved_at": "2026-10-06",
+      "resolved_by": "url-inspection",
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "PASS",
+        "coverage_state": "送信して登録されました",
+        "last_crawl": "2026-09-30T12:51:30Z"
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -23163,7 +23603,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -23185,7 +23630,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -23207,7 +23657,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "URL が Google に認識されていません",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -23229,7 +23684,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -23251,7 +23711,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -23273,7 +23738,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -23295,7 +23765,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -23317,7 +23792,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -23339,7 +23819,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -23361,7 +23846,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -23383,7 +23873,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -23405,7 +23900,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -23427,7 +23927,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "検出 - インデックス未登録",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -23449,7 +23954,12 @@
       "last_checked": "2026-10-05",
       "resolved_at": null,
       "resolved_by": null,
-      "inspection": null,
+      "inspection": {
+        "observed_at": "2026-10-06",
+        "verdict": "NEUTRAL",
+        "coverage_state": "URL が Google に認識されていません",
+        "last_crawl": null
+      },
       "wave_id": null,
       "content_verdict": null,
       "content_signal": null,
@@ -23472,7 +23982,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-30",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -23499,7 +24009,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-30",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -23526,7 +24036,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-30",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -23553,7 +24063,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-30",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -23580,7 +24090,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-30",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -23607,7 +24117,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-30",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -23634,7 +24144,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-30",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -23661,7 +24171,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-30",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -23688,7 +24198,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-30",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -23715,7 +24225,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-30",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -23742,7 +24252,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-30",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "URL が Google に認識されていません",
         "last_crawl": null
@@ -23769,7 +24279,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-30",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -23796,7 +24306,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-30",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -23823,7 +24333,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-30",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -23850,9 +24360,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-30",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
+        "coverage_state": "URL が Google に認識されていません",
         "last_crawl": null
       },
       "wave_id": null,
@@ -23877,7 +24387,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-09-30",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -23904,9 +24414,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
+        "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
       },
       "wave_id": null,
@@ -23931,7 +24441,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -23958,7 +24468,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -23985,7 +24495,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -24012,9 +24522,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
+        "coverage_state": "URL が Google に認識されていません",
         "last_crawl": null
       },
       "wave_id": null,
@@ -24039,7 +24549,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -24093,7 +24603,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -24120,7 +24630,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -24147,7 +24657,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -24174,7 +24684,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -24201,7 +24711,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -24228,7 +24738,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -24255,7 +24765,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -24282,7 +24792,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -24309,9 +24819,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
+        "coverage_state": "URL が Google に認識されていません",
         "last_crawl": null
       },
       "wave_id": null,
@@ -24336,7 +24846,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -24363,9 +24873,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
+        "coverage_state": "URL が Google に認識されていません",
         "last_crawl": null
       },
       "wave_id": null,
@@ -24390,9 +24900,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
+        "coverage_state": "URL が Google に認識されていません",
         "last_crawl": null
       },
       "wave_id": null,
@@ -24417,7 +24927,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -24444,9 +24954,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
+        "coverage_state": "URL が Google に認識されていません",
         "last_crawl": null
       },
       "wave_id": null,
@@ -24471,9 +24981,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
+        "coverage_state": "URL が Google に認識されていません",
         "last_crawl": null
       },
       "wave_id": null,
@@ -24498,7 +25008,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -24525,7 +25035,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -24552,7 +25062,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -24579,7 +25089,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -24606,7 +25116,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -24633,9 +25143,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
+        "coverage_state": "URL が Google に認識されていません",
         "last_crawl": null
       },
       "wave_id": null,
@@ -24660,9 +25170,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
+        "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
       },
       "wave_id": null,
@@ -24687,9 +25197,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
+        "coverage_state": "URL が Google に認識されていません",
         "last_crawl": null
       },
       "wave_id": null,
@@ -24714,7 +25224,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "URL が Google に認識されていません",
         "last_crawl": null
@@ -24741,7 +25251,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -24768,7 +25278,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -24795,7 +25305,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -24822,7 +25332,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -24849,9 +25359,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
+        "coverage_state": "URL が Google に認識されていません",
         "last_crawl": null
       },
       "wave_id": null,
@@ -24876,7 +25386,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -24903,9 +25413,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
+        "coverage_state": "URL が Google に認識されていません",
         "last_crawl": null
       },
       "wave_id": null,
@@ -24930,7 +25440,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -24957,9 +25467,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
+        "coverage_state": "URL が Google に認識されていません",
         "last_crawl": null
       },
       "wave_id": null,
@@ -24984,7 +25494,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -25011,7 +25521,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -25038,7 +25548,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -25065,9 +25575,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
+        "coverage_state": "URL が Google に認識されていません",
         "last_crawl": null
       },
       "wave_id": null,
@@ -25092,7 +25602,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -25119,7 +25629,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -25146,7 +25656,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -25173,7 +25683,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -25200,9 +25710,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
+        "coverage_state": "URL が Google に認識されていません",
         "last_crawl": null
       },
       "wave_id": null,
@@ -25227,7 +25737,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -25254,9 +25764,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
+        "coverage_state": "URL が Google に認識されていません",
         "last_crawl": null
       },
       "wave_id": null,
@@ -25281,9 +25791,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
+        "coverage_state": "URL が Google に認識されていません",
         "last_crawl": null
       },
       "wave_id": null,
@@ -25308,7 +25818,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -25335,7 +25845,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -25362,7 +25872,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -25389,7 +25899,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -25416,7 +25926,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -25443,7 +25953,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -25470,7 +25980,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -25497,7 +26007,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -25524,9 +26034,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
+        "coverage_state": "URL が Google に認識されていません",
         "last_crawl": null
       },
       "wave_id": null,
@@ -25551,7 +26061,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -25578,7 +26088,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -25605,7 +26115,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -25632,7 +26142,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -25659,7 +26169,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -25686,7 +26196,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -25713,7 +26223,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "URL が Google に認識されていません",
         "last_crawl": null
@@ -25740,7 +26250,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -25767,7 +26277,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -25794,7 +26304,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -25821,7 +26331,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -25848,9 +26358,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
+        "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
       },
       "wave_id": null,
@@ -25875,7 +26385,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -25902,7 +26412,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -25929,7 +26439,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -25956,7 +26466,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -25983,7 +26493,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -26010,7 +26520,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -26037,7 +26547,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -26064,7 +26574,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -26091,7 +26601,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -26118,7 +26628,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -26145,7 +26655,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -26172,7 +26682,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -26199,7 +26709,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -26226,7 +26736,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -26253,7 +26763,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -26280,7 +26790,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -26307,7 +26817,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -26334,9 +26844,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
+        "coverage_state": "URL が Google に認識されていません",
         "last_crawl": null
       },
       "wave_id": null,
@@ -26361,7 +26871,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -26388,7 +26898,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -26415,7 +26925,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -26442,7 +26952,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -26496,7 +27006,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -26523,7 +27033,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -26550,7 +27060,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -26577,7 +27087,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -26604,9 +27114,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
+        "coverage_state": "URL が Google に認識されていません",
         "last_crawl": null
       },
       "wave_id": null,
@@ -26631,9 +27141,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
+        "coverage_state": "URL が Google に認識されていません",
         "last_crawl": null
       },
       "wave_id": null,
@@ -26658,7 +27168,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -26685,7 +27195,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -26712,7 +27222,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -26739,7 +27249,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -26766,7 +27276,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -26793,7 +27303,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -26820,9 +27330,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
+        "coverage_state": "URL が Google に認識されていません",
         "last_crawl": null
       },
       "wave_id": null,
@@ -26847,9 +27357,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
+        "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
       },
       "wave_id": null,
@@ -26874,7 +27384,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -26901,7 +27411,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -26928,7 +27438,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -26955,7 +27465,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -27009,9 +27519,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
+        "coverage_state": "URL が Google に認識されていません",
         "last_crawl": null
       },
       "wave_id": null,
@@ -27036,9 +27546,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
+        "coverage_state": "URL が Google に認識されていません",
         "last_crawl": null
       },
       "wave_id": null,
@@ -27063,9 +27573,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
+        "coverage_state": "URL が Google に認識されていません",
         "last_crawl": null
       },
       "wave_id": null,
@@ -27090,7 +27600,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -27117,7 +27627,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -27171,7 +27681,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -27198,7 +27708,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -27225,7 +27735,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -27252,9 +27762,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
-        "coverage_state": "URL が Google に認識されていません",
+        "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
       },
       "wave_id": null,
@@ -27279,7 +27789,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -27306,7 +27816,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -27333,7 +27843,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -27360,7 +27870,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -27387,7 +27897,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -27414,7 +27924,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -27441,7 +27951,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -27468,9 +27978,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
+        "coverage_state": "URL が Google に認識されていません",
         "last_crawl": null
       },
       "wave_id": null,
@@ -27495,9 +28005,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
+        "coverage_state": "URL が Google に認識されていません",
         "last_crawl": null
       },
       "wave_id": null,
@@ -27522,7 +28032,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null
@@ -27549,9 +28059,9 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-04",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
-        "coverage_state": "検出 - インデックス未登録",
+        "coverage_state": "URL が Google に認識されていません",
         "last_crawl": null
       },
       "wave_id": null,
@@ -47487,7 +47997,7 @@
       "resolved_at": null,
       "resolved_by": null,
       "inspection": {
-        "observed_at": "2026-10-05",
+        "observed_at": "2026-10-06",
         "verdict": "NEUTRAL",
         "coverage_state": "検出 - インデックス未登録",
         "last_crawl": null

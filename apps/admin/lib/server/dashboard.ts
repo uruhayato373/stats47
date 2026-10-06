@@ -4,6 +4,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 import { projectRoot } from "./project-root";
+import { datasetPath } from "../../../../config/datasets.mjs";
 import {
   cached,
   mdTableAfter,
@@ -230,7 +231,7 @@ function readCsvOrNull(p: string) {
 
 export function parsePsiLatest(root: string) {
   return wrap(() => {
-    const md = fs.readFileSync(path.join(root, ".claude/state/metrics/psi/LATEST.md"), "utf8");
+    const md = fs.readFileSync(path.join(root, datasetPath("psi.latest")), "utf8");
     const date = md.match(/# PSI Latest — ([\d-]+)/)?.[1] ?? null;
     const m = md.match(/しきい値違反: error (\d+) \/ warning (\d+)/);
     return { date, errors: m ? Number(m[1]) : null, warnings: m ? Number(m[2]) : null };

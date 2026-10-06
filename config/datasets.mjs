@@ -67,7 +67,7 @@ const SM = ".claude/state/metrics";
 export const DATASETS = [
   // ── config/ : 事業の台帳と設定 ──
   d("config.paths", "config/paths.{name}", "config", "ops", "config", "config/ の置き場の定数 (コードが import する)"),
-  d("config.datasets", "config/datasets.mjs", "config", "ops", "config", "この台帳"),
+  d("config.datasets", "config/datasets.{name}", "config", "ops", "config", "この台帳"),
   d("coconala.listings", P.COCONALA_LISTINGS, "config", "product", "config", "ココナラの出品内容と公開状態"),
   d("coconala.account", P.COCONALA_ACCOUNT, "config", "product", "config", "ココナラの期待アカウント (account assert)"),
   d("coconala.profile", P.COCONALA_PROFILE, "config", "product", "config", "ココナラの公開プロフィール文面"),
@@ -113,9 +113,9 @@ export const DATASETS = [
   d("ga4.history", `${SM}/ga4/history.csv`, "series", "site", "data", "GA4 の週次集約"),
   d("ga4.history-finalized", `${SM}/ga4/history-finalized7d.csv`, "series", "site", "data", "GA4 の確定 7 日集約"),
   d("ga4.latest", `${SM}/ga4/LATEST.md`, "report", "site", "data", "GA4 の前週比の要約"),
-  d("psi.batch", `${SM}/psi/psi-batch-{ts}.json`, "series", "site", "data", "PSI 日次計測の生 JSON", { retain: "psi" }),
-  d("psi.history", `${SM}/psi/history.csv`, "series", "site", "data", "PSI の長期履歴"),
-  d("psi.latest", `${SM}/psi/LATEST.md`, "report", "site", "data", "PSI の最新要約"),
+  d("psi.batch", "data/psi/psi-batch-{ts}.json", "series", "site", "data", "PSI 日次計測の生 JSON", { retain: "psi" }),
+  d("psi.history", "data/psi/history.csv", "series", "site", "data", "PSI の長期履歴"),
+  d("psi.latest", "data/psi/LATEST.md", "report", "site", "data", "PSI の最新要約"),
   d("cloudflare.snapshots", `${SM}/cloudflare/snapshots/{date}.json`, "series", "ops", "data", "Cloudflare 日次 usage", { retain: "cloudflare" }),
   d("cloudflare.history", `${SM}/cloudflare/history.csv`, "series", "ops", "data", "Cloudflare usage の推移"),
   d("cloudflare.latest", `${SM}/cloudflare/LATEST.md`, "report", "ops", "data", "Cloudflare usage の最新要約"),
@@ -204,7 +204,9 @@ export const DATASETS = [
  * 移した旧置き場 ({ from, to, since })。コード・workflow・package.json に from が残っていたら check-datasets が止める
  * (旧パスを読んで黙って空になる・旧パスへ書き続けて記録が割れるのを防ぐ)。履歴の記録 (json の出典・md) は対象外。
  */
-export const RETIRED = [];
+export const RETIRED = [
+  { from: ".claude/state/metrics/psi", to: "data/psi", since: "2026-10-06" },
+];
 
 const BY_ID = new Map(DATASETS.map((ds) => [ds.id, ds]));
 const lookup = (id) => {

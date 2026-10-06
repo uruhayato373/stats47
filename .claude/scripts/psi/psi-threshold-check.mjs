@@ -1,7 +1,7 @@
 /**
  * PSI しきい値チェック
  *
- * .claude/state/metrics/psi/psi-batch-*.json の最新を読み、
+ * data/psi/psi-batch-*.json の最新を読み、
  * .claude/skills/analytics/performance-improvement/budgets.json と比較して violations を出す。
  *
  * Usage:
@@ -17,13 +17,14 @@
 import { readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const PROJECT_ROOT = resolve(fileURLToPath(import.meta.url), "..", "..", "..", "..");
 const BUDGETS_PATH = join(
   PROJECT_ROOT,
   ".claude/skills/analytics/performance-improvement/budgets.json"
 );
-const STATE_DIR = join(PROJECT_ROOT, ".claude/state/metrics/psi");
+const STATE_DIR = join(PROJECT_ROOT, datasetDir("psi.batch"));
 
 function parseArgs() {
   const args = process.argv.slice(2);

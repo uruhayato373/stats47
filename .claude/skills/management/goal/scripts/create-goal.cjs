@@ -11,7 +11,7 @@
  *     --success-criteria "全 19 URL で Mobile LCP < 2,500ms かつ Performance >= 80" \
  *     --abort-criteria "6 cycles or 累計 40h 経過で未達" \
  *     --max-cycles 6 \
- *     --baseline-source ".claude/state/metrics/psi/psi-batch-2026-05-09T17-40-53.json" \
+ *     --baseline-source "data/psi/psi-batch-2026-05-09T17-40-53.json" \
  *     --baseline-value "Mobile LCP 平均 10,500ms / Performance 平均 49" \
  *     --baseline-date "2026-05-09" \
  *     --hypothesis-pool "A1: Cookie banner SSR 化,B1: AdSense chunk 分離,B5: 広告密度削減" \

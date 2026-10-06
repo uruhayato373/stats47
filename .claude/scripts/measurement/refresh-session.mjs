@@ -206,6 +206,7 @@ export async function passTotpIfOffered(page, conf, cred) {
 /**
  * KDP だけの後段: 既知 ASIN で口座を照合し (別口座のセッションを CI へ渡さない)、Reports の認証も通す。
  * Reports で再ログインを求められたら同じ資格情報で 1 回だけ送信し、それでも通らなければ止める。
+ * 送信して通ったときだけ reauthenticated: true を返す (呼び側はそれを新しい世代として扱う)。
  */
 async function afterKdpLogin(page, cred) {
   const { assertAccount } = await import('../kdp/lib/kdp-session.mjs');
@@ -223,7 +224,7 @@ async function afterKdpLogin(page, cred) {
   if (LOGIN.kdp.challengeUrl.test(page.url()) || (await pageSignals(page)).hasChallenge) return { status: 'human_required', reason: 'Reports で 2FA/CAPTCHA 等の人の確認が必要' };
   try {
     await openKdpReports(page);
-    return { status: 'ok' };
+    return { status: 'ok', reauthenticated: true };
   } catch {
     return { status: 'login_failed', reason: 'Reports の再ログインが通らなかった' };
   }
@@ -319,6 +320,7 @@ async function refresh(source, { root, publish, headed, waitHuman }) {
 
 /**
  * CI 専用 (--ci): 復元した state でログイン済みか確かめ、切れていたら Secrets の ID/PW で 1 回だけ入り直す。
+ * KDP は本棚がログイン済みでも Reports まで確かめ、Reports で求められたときだけ入り直す。
  * 入り直せたときだけ outPath へ state を書く (relogged: true)。2FA/CAPTCHA は突破せず human_required を返す。
  * 失敗後の再試行抑止は呼び側 (collect.mjs) が vault の auth-recovery に記録して行う。
  */
@@ -335,19 +337,27 @@ export async function ciRelogin(source, { statePath, outPath }) {
     const page = await context.newPage();
     await page.goto(conf.checkUrl, { waitUntil: 'domcontentloaded', timeout: 60000 }).catch(() => {});
     await page.waitForTimeout(3000);
-    if (conf.loggedIn(page.url()) && !(await pageSignals(page)).hasPassword) return { source, status: 'ok', relogged: false };
-    await page.goto(conf.loginUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
-    await submitCredential(page, conf, cred);
-    await passTotpIfOffered(page, conf, cred);
-    await settleOnCheckUrl(page, conf);
-    const signals = await pageSignals(page);
-    const url = page.url();
-    const status = conf.loggedIn(url) && !signals.hasPassword ? 'ok'
-      : signals.hasChallenge || conf.challengeUrl?.test(url) ? 'human_required' : 'login_failed';
-    if (status !== 'ok') return { source, status };
-    if (source === 'kdp') {
-      const after = await afterKdpLogin(page, cred);
-      if (after.status !== 'ok') return { source, status: after.status };
+    if (conf.loggedIn(page.url()) && !(await pageSignals(page)).hasPassword) {
+      if (source !== 'kdp') return { source, status: 'ok', relogged: false };
+      // KDP は本棚と Reports の認証が別。本棚だけ見て session_valid を返していたため、Reports で拒否された世代の
+      // 停止が解けず、2026-09-30 から毎回入り直さずにスキップしていた。Reports まで開き、求められたら 1 回だけ入り直す
+      const reports = await afterKdpLogin(page, cred);
+      if (reports.status !== 'ok') return { source, status: reports.status };
+      if (!reports.reauthenticated) return { source, status: 'ok', relogged: false };
+    } else {
+      await page.goto(conf.loginUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
+      await submitCredential(page, conf, cred);
+      await passTotpIfOffered(page, conf, cred);
+      await settleOnCheckUrl(page, conf);
+      const signals = await pageSignals(page);
+      const url = page.url();
+      const status = conf.loggedIn(url) && !signals.hasPassword ? 'ok'
+        : signals.hasChallenge || conf.challengeUrl?.test(url) ? 'human_required' : 'login_failed';
+      if (status !== 'ok') return { source, status };
+      if (source === 'kdp') {
+        const after = await afterKdpLogin(page, cred);
+        if (after.status !== 'ok') return { source, status: after.status };
+      }
     }
     writeFileSync(outPath, JSON.stringify(scopedState(source, await context.storageState({ indexedDB: true }))), { mode: 0o600 });
     return { source, status: 'ok', relogged: true };

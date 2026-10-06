@@ -1,7 +1,7 @@
 ---
 name: lighthouse-audit
 domain: site
-description: PageSpeed Insights API で stats47.jp の CWV を計測し .claude/state/metrics/psi に蓄積する。Use when user says "Lighthouse実行", "パフォーマンス測定", "CWV計測", "PSI計測". mobile/desktop 一括計測+閾値チェック.
+description: PageSpeed Insights API で stats47.jp の CWV を計測し data/psi に蓄積する。Use when user says "Lighthouse実行", "パフォーマンス測定", "CWV計測", "PSI計測". mobile/desktop 一括計測+閾値チェック.
 disable-model-invocation: true
 argument-hint: "[--strategy mobile|desktop] [--file urls.txt]"
 allowed-tools: Read, Bash, Grep
@@ -11,13 +11,13 @@ co_agents: [gsc-analyst]
 
 # /lighthouse-audit — CWV 計測（PSI に統合済）
 
-stats47.jp の各ページの Core Web Vitals を計測し、`.claude/state/metrics/psi/` に蓄積する。
+stats47.jp の各ページの Core Web Vitals を計測し、`data/psi/` に蓄積する。
 閾値は `.claude/skills/analytics/performance-improvement/budgets.json` を参照。
 
 > **2026-06-21 PSI 統合**。旧版は Lighthouse CLI（`packages/database/scripts/lighthouse-check.ts`）で計測し
 > `performance-improvement/snapshots/*/metrics.csv` に蓄積していたが、当該スクリプトは完全DBレス移行で削除され、
 > その CSV を書く writer が無くなっていた。CWV 監視は **PSI 日次ワークフロー**（`.claude/scripts/psi/*` +
-> `.claude/state/metrics/psi/` + `psi-audit-daily.yml`）に一本化済（Lighthouse Lab data は廃止）。本スキルは
+> `data/psi/` + `psi-audit-daily.yml`）に一本化済（Lighthouse Lab data は廃止）。本スキルは
 > その PSI ツールを手動実行する薄いラッパー。計測対象 URL は `config/psi-urls.txt`（19 URL × mobile/desktop）。
 
 ## 計測対象
@@ -28,7 +28,7 @@ stats47.jp の各ページの Core Web Vitals を計測し、`.claude/state/metr
 ## 実行（PSI 日次と同じ 3 ステップ）
 
 ```bash
-# 1) 計測 → .claude/state/metrics/psi/psi-batch-<ISO>.json
+# 1) 計測 → data/psi/psi-batch-<ISO>.json
 npm run fetch-psi-audit                 # = node .claude/scripts/psi/fetch-psi-audit.mjs
 #    オプション: --strategy mobile / --strategy desktop / --file custom-urls.txt
 #    PSI_API_KEY があれば quota が上がる（.env.local / CI secret）。無くても動く（レート制限注意）
@@ -59,9 +59,9 @@ CI（`.github/workflows/psi-audit-daily.yml`、JST 02:00）は上記を fetch �
 
 ## 出力の見方
 
-- **最新サマリ（人間向け）**: `.claude/state/metrics/psi/LATEST.md`（前日比矢印 + 閾値違反強調）
-- **日次履歴（トレンド分析用）**: `.claude/state/metrics/psi/history.csv`（`date,url,strategy,page_type,score_performance,lcp_ms,cls,tbt_ms,fcp_ms,ttfb_ms,violations_error,violations_warning`）
-- **生バッチ**: `.claude/state/metrics/psi/psi-batch-<ISO>.json`
+- **最新サマリ（人間向け）**: `data/psi/LATEST.md`（前日比矢印 + 閾値違反強調）
+- **日次履歴（トレンド分析用）**: `data/psi/history.csv`（`date,url,strategy,page_type,score_performance,lcp_ms,cls,tbt_ms,fcp_ms,ttfb_ms,violations_error,violations_warning`）
+- **生バッチ**: `data/psi/psi-batch-<ISO>.json`
 - トレンド・期間比較・改善提案のレポート化は `/performance-report`。
 
 ## 注意事項
@@ -82,7 +82,7 @@ CI（`.github/workflows/psi-audit-daily.yml`、JST 02:00）は上記を fetch �
 - `.claude/scripts/psi/{fetch-psi-audit,psi-update-digest,psi-threshold-check}.mjs` — PSI ツール本体
 - `config/psi-urls.txt` — 計測対象 URL リスト
 - `.claude/skills/analytics/performance-improvement/budgets.json` — バジェット閾値（SSOT）
-- `.claude/state/metrics/psi/{LATEST.md,history.csv}` — 蓄積データ
+- `data/psi/{LATEST.md,history.csv}` — 蓄積データ
 - `.claude/skills/analytics/performance-report/SKILL.md` — トレンド総合レポート
 - `.github/workflows/psi-audit-daily.yml` — 日次自動計測
 - PageSpeed Insights API: https://developers.google.com/speed/docs/insights/v5/get-started

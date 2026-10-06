@@ -2,7 +2,7 @@
  * PageSpeed Insights API 取得スクリプト
  *
  * config/psi-urls.txt を読み、mobile + desktop 両方で PSI を計測し、
- * .claude/state/metrics/psi/psi-batch-<ISO>.json に結果を保存する。
+ * data/psi/psi-batch-<ISO>.json に結果を保存する。
  *
  * 認証:
  *   PSI API v5 は公開エンドポイントだが、quota を上げるため PSI_API_KEY を使う。
@@ -18,10 +18,11 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { PSI_URLS } from "../../../config/paths.mjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const PROJECT_ROOT = resolve(fileURLToPath(import.meta.url), "..", "..", "..", "..");
 const DEFAULT_URL_FILE = join(PROJECT_ROOT, PSI_URLS);
-const OUTPUT_DIR = join(PROJECT_ROOT, ".claude/state/metrics/psi");
+const OUTPUT_DIR = join(PROJECT_ROOT, datasetDir("psi.batch"));
 const CATEGORIES = ["performance", "accessibility", "best-practices", "seo"];
 const DEFAULT_STRATEGIES = ["mobile", "desktop"];
 

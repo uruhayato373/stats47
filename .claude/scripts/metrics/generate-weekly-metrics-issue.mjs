@@ -23,6 +23,7 @@ import { PROJECT_ROOT, toIsoWeek } from "./lib/auth.mjs";
 import { readMeasurementHealth, formatMeasurementHealth } from '../measurement/health.mjs';
 import { aspRevenueLines, productRevenueLine } from './nsm-revenue-lines.mjs';
 import { formatCycleHealth, readCycleHealth } from './lib/cycle-health.mjs';
+import { datasetPath } from '../../../config/datasets.mjs';
 
 function parseArgs() {
   const args = process.argv.slice(2);
@@ -293,7 +294,7 @@ function revenueSection(week) {
 
 // PSI は日次。直近 7 日の URL × strategy × day を集約
 function psiSection(week) {
-  const hist = readCsv(".claude/state/metrics/psi/history.csv");
+  const hist = readCsv(datasetPath("psi.history"));
   if (!hist) return "_PSI: history.csv が存在しません（日次 CI 未実行？）_\n";
 
   const weekMon = monOfWeek(week);
@@ -463,7 +464,7 @@ function main() {
   lines.push("---");
   lines.push("");
   lines.push(`生データ:`);
-  lines.push(`- [PSI history.csv](../blob/develop/.claude/state/metrics/psi/history.csv) / [LATEST.md](../blob/develop/.claude/state/metrics/psi/LATEST.md)`);
+  lines.push(`- [PSI history.csv](../blob/develop/${datasetPath("psi.history")}) / [LATEST.md](../blob/develop/${datasetPath("psi.latest")})`);
   lines.push(`- [GSC history.csv](../blob/develop/.claude/state/metrics/gsc/history.csv) / [LATEST.md](../blob/develop/.claude/state/metrics/gsc/LATEST.md)`);
   lines.push(`- [GA4 history.csv](../blob/develop/.claude/state/metrics/ga4/history.csv) / [LATEST.md](../blob/develop/.claude/state/metrics/ga4/LATEST.md)`);
   lines.push(`- [アフィリエイト観測 ga4-affiliate-history.csv](../blob/develop/.claude/state/ads/ga4-affiliate-history.csv)`);
