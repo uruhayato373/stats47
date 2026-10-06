@@ -1,3 +1,5 @@
+import { metricDisplayName } from "@stats47/ranking";
+
 interface AreaThemeHighlightSource {
   indicatorDataMap: Record<
     string,
@@ -5,6 +7,7 @@ interface AreaThemeHighlightSource {
       rankingItem: {
         title: string;
         readerLabel?: string;
+        subtitle?: string | null;
         unit: string;
       };
       rankingValues: Array<{
@@ -42,7 +45,7 @@ export function getAreaThemeHighlights(
     if (target?.value === null || target?.value === undefined) continue;
     highlights.push({
       key,
-      title: indicator.rankingItem.readerLabel ?? indicator.rankingItem.title,
+      title: metricDisplayName(indicator.rankingItem),
       value: target.value,
       unit: target.unit || indicator.rankingItem.unit,
       yearName: target.yearName,

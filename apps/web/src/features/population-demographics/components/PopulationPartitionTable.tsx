@@ -8,6 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from '@stats47/components/atoms/ui/table';
+import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
 import { formatPopulationCount as format } from '../lib/population-profile-view';
 
@@ -33,14 +34,14 @@ export function PopulationPartitionTable({
     >
       <TableCaption>
         構成割合の分母は、選択した地域・男女の総数{format(total)}
-        {unit}
+        {formatUnitForDisplay(unit)}
         です。不詳を含めた全区分を表示し、割合は小数第2位まで丸めています。
       </TableCaption>
       <TableHeader>
         <TableRow>
           <TableHead scope="col">{category}</TableHead>
           <TableHead scope="col" className="text-right">
-            {unit === '世帯' ? '世帯数' : '人口'}（{unit}）
+            {unit === '世帯' ? '世帯数' : '人口'}（{formatUnitForDisplay(unit)}）
           </TableHead>
           <TableHead scope="col" className="text-right">
             構成割合（%）

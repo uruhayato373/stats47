@@ -15,6 +15,7 @@ import {
   TableRow,
 } from '@stats47/components/atoms/ui/table';
 import { LOCAL_FINANCE_RATIO_METRICS } from '@stats47/data-configs/theme-catalog';
+import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
 import { ChartCard } from '@/components/charts/ChartCard';
 import { ChartFooter } from '@/components/charts/ChartFooter';
@@ -228,7 +229,7 @@ export function LocalFinanceDashboard({
                   value={
                     latestVal == null
                       ? '—'
-                      : `${latestVal.toFixed(meta.decimals)}${meta.unit}`
+                      : `${latestVal.toFixed(meta.decimals)}${formatUnitForDisplay(meta.unit)}`
                   }
                   chart={<MiniLineChart points={points} unit={meta.unit} />}
                 />
@@ -242,7 +243,7 @@ export function LocalFinanceDashboard({
         </div>
     ) : comparisonTable(RATIO_METRICS.map((metric) => ({
       label: metric.label,
-      format: (record) => `${record[metric.key].toFixed(metric.decimals)}${metric.unit}`,
+      format: (record) => `${record[metric.key].toFixed(metric.decimals)}${formatUnitForDisplay(metric.unit)}`,
     }))),
     'finance-flow': prefCode ? (
       <>

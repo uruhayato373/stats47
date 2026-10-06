@@ -62,14 +62,16 @@ jobs:
 
       - name: 🔍 Pick this week's prefecture
         id: pick
+        env:
+          INPUT_PREF_CODE: ${{ inputs.pref_code }}
         run: |
           # Week-of-year % 47 で県を決定 (UTC + 9h = JST)
           WEEK_OF_YEAR=$(date -u -d '+9 hours' +%V)
           PREF_INDEX=$(( ( ${WEEK_OF_YEAR#0} - 1 ) % 47 + 1 ))
           PREF_CODE=$(printf "%02d" $PREF_INDEX)
           # 入力指定があれば優先
-          if [ -n "${{ inputs.pref_code }}" ]; then
-            PREF_CODE="${{ inputs.pref_code }}"
+          if [ -n "$INPUT_PREF_CODE" ]; then
+            PREF_CODE="$INPUT_PREF_CODE"
           fi
           # slug 取得 (簡易マッピング、Phase 4 で外部化)
           declare -A SLUG_MAP=(

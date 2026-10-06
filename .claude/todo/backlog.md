@@ -2,7 +2,7 @@
 title: バックログ (タスクマスタ)
 type: backlog
 status: active
-updated: 2026-09-29
+updated: 2026-10-06
 ---
 
 # バックログ (タスクマスタ)
@@ -182,25 +182,6 @@ updated: 2026-09-29
   決めてから target を書き、W42 から新しい窓で測り直す。推奨は (a)。(b) は対照群の定義から作る必要があり、
   得られるのは 5〜6 月公開分の効果で、今後の公開判断には効きにくい。
 
-### [DATA-WAGE-TABLE-YEARS-01] 賃金構造基本統計の表を使う 40 指標が 2022 年しか配信していない原因を CI で確かめて直す
-タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [領域:データ] [起票:2026-09-28]
-
-- **事象 (2026-09-28 実測)**: `statsDataId: "0003445758"` を使う metric は 40 件。代表の `school-teacher-annual-income` /
-  `nurse-annual-income` / `nursery-teacher-annual-income` / `doctor-annual-income` は R2 `app/stats/<key>/values.json` が
-  すべて `2022` の 47 行だけ。config の years は `{from: 2010, to: 2023}`。e-Stat カタログでは表名が
-  「令和２年以降 一般_都道府県別_職種（特掲）DB」で、複数年を持つ表のはず。データ品質キューでは `school-teacher-annual-income` が
-  「最新 2022 年・2 周期遅れ (推定)」、GSC 表示 916 で需要順 4 位 (`DATA-QUALITY-LOOP-01` の第1週で切り出し)。
-- **[仮説]** ① `cdTab` 08×12 + 12 の組み合わせが 2022 年だけに存在し、他の年は別の表章項目コード (memory
-  `reference_estat_wage_survey` は tab 40 / 44 と記録) ② 表が年ごとに更新され、取り込み時点で 2022 年分しか無かった
-  ③ config の years (〜2023) より新しい 2024・2025 年が表にあり、範囲外で落ちている。
-- **次**: e-Stat の取得は CI 専用 (ローカルに API キーが無い)。CI で `0003445758` の `getMetaInfo` の time / tab と、
-  `cdCat01=01, cdCat02=1192` で年ごとの non-null 県数を出す (data-refresh の dryRun は年別の件数を出さないので、
-  出力を足すか調査用の workflow_dispatch を使う)。原因に合わせて 40 件の config を直し、data-refresh で再取り込みする。
-- **停止条件**: 年によって表章項目の定義 (所定内給与か、きまって支給する給与か) が違う場合は、同じ系列として並べない。
-  R2 反映はオーナー承認。40 件を推測で一括変更しない (代表 1 件で年別の値を確かめてから広げる)。
-- **完了条件**: 40 件が e-Stat に実在する全年を配信し、`school-teacher-annual-income` の最新年が公表済みの最新年と一致している。
-  年ごとに定義が違って並べられない場合は、その理由と採った年の範囲が本カードの削除コミットに書かれている。
-- **2026-10-05 追記**: `/ranking/barber-beautician-annual-income` (同じ表・`cdCat02: 1381`) は R2 が 2022 年の 38 県だけで、search-growth の soft-404 リスク候補になっていた。個別の noindex ではなく本カードの再取り込みで補強すると決め、候補は dismiss した (WIP 枠を空けるため)。
 ### [NAV-CLICK-COVERAGE-01] サイト内リンクのクリックを既定で全件計測し、名前の無い導線を週次で減らす
 
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-09-25] [期日:2026-10-23] [領域:管理]
@@ -298,6 +279,16 @@ updated: 2026-09-29
 
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [DEPS-TAILWIND4-01] apps/web を tailwindcss 4 へ移行し、braces を runtime 依存から外す
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:npm audit --omit=dev --audit-level=low] [起票:2026-10-06] [領域:管理]
+
+- **事象**: Security Scan の 2 ゲート (`npm audit --audit-level=high` と `npm audit --omit=dev --audit-level=low`) が braces (GHSA-vfj7-8cjw-p6xm, high) で失敗する。braces は `<=3.0.3` が該当で、最新 3.0.3 も脆弱なため override では直せない (2026-10-06 時点で修正版は未公開)。katex と postcss-selector-parser は同日に root の `overrides` で解消済み。
+- **runtime 側の経路**: apps/web の `dependencies` にある `@tailwindcss/container-queries` が tailwindcss 3 を peer で要求するため、tailwindcss 3.4.19 → chokidar / fast-glob → micromatch → braces が runtime 扱いになる。`npm audit fix --force` が提案するのは tailwindcss 4.3.3 へのメジャー更新。
+- **影響範囲**: `apps/web/tailwind.config.ts` (121 行、typography と container-queries の 2 plugin) を v4 の CSS 設定 (`@theme` / `@plugin`) へ移す。`apps/web/postcss.config.mjs` は `@tailwindcss/postcss` へ置き換える。`apps/web/src/app/globals.css` (487 行、`@apply` 18 箇所) を書き換える。container-queries は v4 本体に入っているので依存から外す。`@tailwindcss/typography` は v4 対応版へ上げる。v4 で名前や既定値が変わったユーティリティ (shadow / rounded / ring の段階名など) は全 tsx を走査して置き換える。apps/admin は既に v4.3.3 なので設定の参照例になる。
+- **手順**: ①`npx @tailwindcss/upgrade` を作業ブランチで実行して差分を確認する ②移行前後で代表 URL のスクリーンショットを比較する (`.claude/rules/page-quality-standards.md` の代表 URL) ③`npm run build --workspace=web`・`npm run type-check`・`npm audit --omit=dev --audit-level=low` を通す。
+- **停止条件**: 見た目の差分が意図せず出た状態で本番デプロイしない。デプロイはオーナー確認後にまとめて 1 回だけ行う。
+- **完了条件**: `npm audit --omit=dev --audit-level=low` が exit 0 になり、代表 URL の表示差分が無いか意図どおりである。dev 側に残る経路は [DEPS-BRACES-GATE-01] が扱う。
+
 ### [GSC-COVERAGE-DEPLOY-01] カバレッジ是正と入力鮮度ガードを本番反映する
 
 タグ: [インフラ・計測] [種類:不具合] [実行:ユーザー] [検証:node .claude/scripts/gsc/build-coverage-queue.mjs --no-probe] [起票:2026-09-07] [期日:2026-09-28] [進行中] [領域:サイト]
@@ -330,185 +321,19 @@ updated: 2026-09-29
 - **停止条件**: Phase 1 のアカウント照合で `stats47` と一致しなければ 1 本も投稿しない。
 - **完了条件**: 2 本が note で公開され、`note-published-urls.json` に 2 件の URL があり、無料部分と有料部分の境界が意図どおりであることを screenshot で確認済み。公開日から 4 週間後 (公開日 + 28 日) に 2 本の売上を note ダッシュボードで比べる予定を `improvements.md` 側へ引き渡す。
 
-### [UI-FIX-THEME-20261004] UI 是正: theme の週次 UI 検査の指摘 2 件を直す
+### [BLOG-SVG-NODATA-20261006] 元データが無く作り直せないブログ SVG 3 枚の文字はみ出し・重なりを手で直す
+タグ: [UI・UX] [種類:不具合] [実行:対話] [起票:2026-10-06] [領域:サイト]
 
-タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled .claude/state/page-quality/backlog-batches/UI-FIX-THEME-20261004.txt] [起票:2026-10-04] [領域:サイト]
+- **対象** (`plan-svg-text-fix.ts` の判定 `no-data`): `alcohol-prefecture-map/data/liquor-type-breakdown.svg` (「2,760 （33.5%）」が右に 35px はみ出す) / `automotive-industry-transformation-map/data/chart5-line.svg` (系列ラベル「静岡」「神奈川」「大阪」「兵庫」が重なる) / `birth-death-gap-decline/data/inline-chart-1.svg` (「▲15.6（千人当たり）」が右に 48px はみ出す。無意味名 `inline-chart-N` で型も判別できない)。
+- **次**: data JSON を一次資料から作り直して svg-builder で再生成するか、SVG を手で直すかを記事ごとに決める。SVG の絵から値を逆復元しない (`blog-svg-chart-standards.md`)。
+- **完了条件**: 3 枚が `findChartTextIssues` で 0 件。
 
-- **自動起票**: 週次のページ品質監査 (`page-quality-audit-weekly.yml`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `.claude/state/page-quality/backlog-batches/UI-FIX-THEME-20261004.txt`、状態は `.claude/state/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
-- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/theme-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/theme-desktop-1440.png)。検査の詳細は `.claude/state/metrics/page-quality/LATEST.md`。
-- **対象**:
-  - `machine|theme|internal_jargon_terms` — internal_jargon_terms: 5 URL (最大 1、閾値 <= 0)。例: https://stats47.jp/themes/climate / https://stats47.jp/themes/geographic-access / https://stats47.jp/themes/landslide-exposure
-  - `machine|theme|unit_symbol_mixing` — unit_symbol_mixing: 3 URL (最大 1、閾値 <= 0)。例: https://stats47.jp/themes/aging-society / https://stats47.jp/themes/environmental-quality / https://stats47.jp/themes/local-economy
-- **表示の意味 (定義単位で直す)**: 語・文字列・店名などの具体的な箇所は `LATEST.md` / 週次 `latest.json` の `ui_findings` にある。全URLの検査はページの種類ごとに 1 件へまとめてあり、該当 URL の全件は週次 `latest.json` (`npm run state:pull -- page-quality` で `.claude/state/page-quality/live/` に取得) の `violations` にある。同じ指摘が同じテンプレートの多数の URL に出ていれば、ページではなく生成元 (テンプレート・カタログ・共通部品・AI 解説の生成) を直す。内部用語は読者向けの言い換えに、`NaN`/`undefined` は値が無いときの表示 (「—」等) に、`%`/`％` はそのページの多数派に揃える。`title_changed` は選定入力が変わっていないのに title が変わった場合だけ直す (選び方を決定的にする)。文字の小ささ・ページ高さはテンプレート別の予算 (`page-quality-budgets.json`) との差で、予算を上げて閉じない。
-- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。
-- **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@.claude/state/page-quality/backlog-batches/UI-FIX-THEME-20261004.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
-- **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
-- **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
+### [SHARE-BUTTON-CONTRAST-01] ブログの共有ボタン (LINE・はてな) と強調文字の色のコントラスト不足をどう直すか決める
+タグ: [UI・UX] [種類:不具合] [実行:対話] [起票:2026-10-06] [領域:サイト]
 
-### [UI-FIX-SURVEY-20261004] UI 是正: survey の週次 UI 検査の指摘 2 件を直す
-
-タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled .claude/state/page-quality/backlog-batches/UI-FIX-SURVEY-20261004.txt] [起票:2026-10-04] [領域:サイト]
-
-- **自動起票**: 週次のページ品質監査 (`page-quality-audit-weekly.yml`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `.claude/state/page-quality/backlog-batches/UI-FIX-SURVEY-20261004.txt`、状態は `.claude/state/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
-- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/survey-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/survey-desktop-1440.png)。検査の詳細は `.claude/state/metrics/page-quality/LATEST.md`。
-- **対象**:
-  - `machine|survey|internal_jargon_terms` — internal_jargon_terms: 1 URL (最大 1、閾値 <= 0)。例: https://stats47.jp/survey/local-finance
-  - `machine|survey|unit_symbol_mixing` — unit_symbol_mixing: 14 URL (最大 5、閾値 <= 0)。例: https://stats47.jp/survey/accommodation-survey / https://stats47.jp/survey/city-planning-survey / https://stats47.jp/survey/cpi-annual
-- **表示の意味 (定義単位で直す)**: 語・文字列・店名などの具体的な箇所は `LATEST.md` / 週次 `latest.json` の `ui_findings` にある。全URLの検査はページの種類ごとに 1 件へまとめてあり、該当 URL の全件は週次 `latest.json` (`npm run state:pull -- page-quality` で `.claude/state/page-quality/live/` に取得) の `violations` にある。同じ指摘が同じテンプレートの多数の URL に出ていれば、ページではなく生成元 (テンプレート・カタログ・共通部品・AI 解説の生成) を直す。内部用語は読者向けの言い換えに、`NaN`/`undefined` は値が無いときの表示 (「—」等) に、`%`/`％` はそのページの多数派に揃える。`title_changed` は選定入力が変わっていないのに title が変わった場合だけ直す (選び方を決定的にする)。文字の小ささ・ページ高さはテンプレート別の予算 (`page-quality-budgets.json`) との差で、予算を上げて閉じない。
-- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。
-- **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@.claude/state/page-quality/backlog-batches/UI-FIX-SURVEY-20261004.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
-- **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
-- **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
-
-### [UI-FIX-RANKING-20261004] UI 是正: ranking の週次 UI 検査の指摘 2 件を直す
-
-タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled .claude/state/page-quality/backlog-batches/UI-FIX-RANKING-20261004.txt] [起票:2026-10-04] [領域:サイト]
-
-- **自動起票**: 週次のページ品質監査 (`page-quality-audit-weekly.yml`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `.claude/state/page-quality/backlog-batches/UI-FIX-RANKING-20261004.txt`、状態は `.claude/state/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
-- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/ranking-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/ranking-desktop-1440.png)。検査の詳細は `.claude/state/metrics/page-quality/LATEST.md`。
-- **対象**:
-  - `machine|ranking|same_shop_ad_duplicates` — same_shop_ad_duplicates: 309 URL (最大 3、閾値 <= 0)。例: https://stats47.jp/ranking/agricultural-land-conversion-area / https://stats47.jp/ranking/apartment-ratio / https://stats47.jp/ranking/apple-consumption-expenditure
-  - `machine|ranking|unit_symbol_mixing` — unit_symbol_mixing: 1610 URL (最大 21、閾値 <= 0)。例: https://stats47.jp/ranking/abandoned-cultivated-land-area / https://stats47.jp/ranking/academic-achievement-test-average-rate / https://stats47.jp/ranking/accidental-deaths-per-100k
-- **表示の意味 (定義単位で直す)**: 語・文字列・店名などの具体的な箇所は `LATEST.md` / 週次 `latest.json` の `ui_findings` にある。全URLの検査はページの種類ごとに 1 件へまとめてあり、該当 URL の全件は週次 `latest.json` (`npm run state:pull -- page-quality` で `.claude/state/page-quality/live/` に取得) の `violations` にある。同じ指摘が同じテンプレートの多数の URL に出ていれば、ページではなく生成元 (テンプレート・カタログ・共通部品・AI 解説の生成) を直す。内部用語は読者向けの言い換えに、`NaN`/`undefined` は値が無いときの表示 (「—」等) に、`%`/`％` はそのページの多数派に揃える。`title_changed` は選定入力が変わっていないのに title が変わった場合だけ直す (選び方を決定的にする)。文字の小ささ・ページ高さはテンプレート別の予算 (`page-quality-budgets.json`) との差で、予算を上げて閉じない。
-- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。
-- **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@.claude/state/page-quality/backlog-batches/UI-FIX-RANKING-20261004.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
-- **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
-- **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
-
-### [UI-FIX-OTHER-20261004] UI 是正: other の週次 UI 検査の指摘 2 件を直す
-
-タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled .claude/state/page-quality/backlog-batches/UI-FIX-OTHER-20261004.txt] [起票:2026-10-04] [領域:サイト]
-
-- **自動起票**: 週次のページ品質監査 (`page-quality-audit-weekly.yml`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `.claude/state/page-quality/backlog-batches/UI-FIX-OTHER-20261004.txt`、状態は `.claude/state/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
-- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/other-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/other-desktop-1440.png)。検査の詳細は `.claude/state/metrics/page-quality/LATEST.md`。
-- **対象**:
-  - `machine|other|unit_symbol_mixing` — unit_symbol_mixing: 38 URL (最大 4、閾値 <= 0)。例: https://stats47.jp/japan/healthcare / https://stats47.jp/municipalities/ranking/commuter-ratio-from-other-municipalities / https://stats47.jp/municipalities/ranking/commuter-ratio-to-other-municipalities
-  - `agent|other` (Claude の確認)
-    - [mobile-390/low] スマホ1枚目、タグ一覧の各記事カード(「一般世帯数の県差は何を映すのか」など): タイトルと抜粋のあとにカード内で区切り線が引かれているが、その下に何も続かず、空の領域が見える。タイトルが左に寄ったカードの左右余白と線の位置がそろっていない → カード下部の使われていない区切り線を消すか、そこに更新日などの情報を置く
-    - 経緯: 再発 (2026-10-04 の週次で再検出)
-- **表示の意味 (定義単位で直す)**: 語・文字列・店名などの具体的な箇所は `LATEST.md` / 週次 `latest.json` の `ui_findings` にある。全URLの検査はページの種類ごとに 1 件へまとめてあり、該当 URL の全件は週次 `latest.json` (`npm run state:pull -- page-quality` で `.claude/state/page-quality/live/` に取得) の `violations` にある。同じ指摘が同じテンプレートの多数の URL に出ていれば、ページではなく生成元 (テンプレート・カタログ・共通部品・AI 解説の生成) を直す。内部用語は読者向けの言い換えに、`NaN`/`undefined` は値が無いときの表示 (「—」等) に、`%`/`％` はそのページの多数派に揃える。`title_changed` は選定入力が変わっていないのに title が変わった場合だけ直す (選び方を決定的にする)。文字の小ささ・ページ高さはテンプレート別の予算 (`page-quality-budgets.json`) との差で、予算を上げて閉じない。
-- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。
-- **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@.claude/state/page-quality/backlog-batches/UI-FIX-OTHER-20261004.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
-- **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
-- **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
-
-### [UI-FIX-GEO-ANALYSIS-20261004] UI 是正: geo-analysis の週次 UI 検査の指摘 1 件を直す
-
-タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled .claude/state/page-quality/backlog-batches/UI-FIX-GEO-ANALYSIS-20261004.txt] [起票:2026-10-04] [領域:サイト]
-
-- **自動起票**: 週次のページ品質監査 (`page-quality-audit-weekly.yml`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `.claude/state/page-quality/backlog-batches/UI-FIX-GEO-ANALYSIS-20261004.txt`、状態は `.claude/state/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
-- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/geo-analysis-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/geo-analysis-desktop-1440.png)。検査の詳細は `.claude/state/metrics/page-quality/LATEST.md`。
-- **対象**:
-  - `machine|geo-analysis|internal_jargon_terms` — internal_jargon_terms: 13 URL (最大 7、閾値 <= 0)。例: https://stats47.jp/geo/population-flood-risk / https://stats47.jp/geo/population-flood-risk/01/overlap / https://stats47.jp/geo/population-flood-risk/13/overlap
-- **表示の意味 (定義単位で直す)**: 語・文字列・店名などの具体的な箇所は `LATEST.md` / 週次 `latest.json` の `ui_findings` にある。全URLの検査はページの種類ごとに 1 件へまとめてあり、該当 URL の全件は週次 `latest.json` (`npm run state:pull -- page-quality` で `.claude/state/page-quality/live/` に取得) の `violations` にある。同じ指摘が同じテンプレートの多数の URL に出ていれば、ページではなく生成元 (テンプレート・カタログ・共通部品・AI 解説の生成) を直す。内部用語は読者向けの言い換えに、`NaN`/`undefined` は値が無いときの表示 (「—」等) に、`%`/`％` はそのページの多数派に揃える。`title_changed` は選定入力が変わっていないのに title が変わった場合だけ直す (選び方を決定的にする)。文字の小ささ・ページ高さはテンプレート別の予算 (`page-quality-budgets.json`) との差で、予算を上げて閉じない。
-- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。
-- **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@.claude/state/page-quality/backlog-batches/UI-FIX-GEO-ANALYSIS-20261004.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
-- **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
-- **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
-
-### [UI-FIX-CATEGORY-20261004] UI 是正: category の週次 UI 検査の指摘 1 件を直す
-
-タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled .claude/state/page-quality/backlog-batches/UI-FIX-CATEGORY-20261004.txt] [起票:2026-10-04] [領域:サイト]
-
-- **自動起票**: 週次のページ品質監査 (`page-quality-audit-weekly.yml`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `.claude/state/page-quality/backlog-batches/UI-FIX-CATEGORY-20261004.txt`、状態は `.claude/state/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
-- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/category-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/category-desktop-1440.png)。検査の詳細は `.claude/state/metrics/page-quality/LATEST.md`。
-- **対象**:
-  - `machine|category|unit_symbol_mixing` — unit_symbol_mixing: 6 URL (最大 2、閾値 <= 0)。例: https://stats47.jp/category/administrativefinancial / https://stats47.jp/category/construction / https://stats47.jp/category/energy
-- **表示の意味 (定義単位で直す)**: 語・文字列・店名などの具体的な箇所は `LATEST.md` / 週次 `latest.json` の `ui_findings` にある。全URLの検査はページの種類ごとに 1 件へまとめてあり、該当 URL の全件は週次 `latest.json` (`npm run state:pull -- page-quality` で `.claude/state/page-quality/live/` に取得) の `violations` にある。同じ指摘が同じテンプレートの多数の URL に出ていれば、ページではなく生成元 (テンプレート・カタログ・共通部品・AI 解説の生成) を直す。内部用語は読者向けの言い換えに、`NaN`/`undefined` は値が無いときの表示 (「—」等) に、`%`/`％` はそのページの多数派に揃える。`title_changed` は選定入力が変わっていないのに title が変わった場合だけ直す (選び方を決定的にする)。文字の小ささ・ページ高さはテンプレート別の予算 (`page-quality-budgets.json`) との差で、予算を上げて閉じない。
-- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。
-- **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@.claude/state/page-quality/backlog-batches/UI-FIX-CATEGORY-20261004.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
-- **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
-- **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
-
-### [UI-FIX-BLOG-20261004] UI 是正: blog の週次 UI 検査の指摘 2 件を直す
-
-タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled .claude/state/page-quality/backlog-batches/UI-FIX-BLOG-20261004.txt] [起票:2026-10-04] [領域:サイト]
-
-- **自動起票**: 週次のページ品質監査 (`page-quality-audit-weekly.yml`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `.claude/state/page-quality/backlog-batches/UI-FIX-BLOG-20261004.txt`、状態は `.claude/state/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
-- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/blog-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/blog-desktop-1440.png)。検査の詳細は `.claude/state/metrics/page-quality/LATEST.md`。
-- **対象**:
-  - `machine|blog|unit_symbol_mixing` — unit_symbol_mixing: 1 URL (最大 7、閾値 <= 0)。例: https://stats47.jp/blog
-  - `agent|blog` (Claude の確認)
-    - [mobile-390/low] スマホ1枚目、「人気のタグ」のチップ列: タグの件数(169など)が10pxで小さく、右端のチップが切れてスクロールできることが分かりにくい。同じ先頭画面でCookieバナーがボタン領域を覆って記事一覧を隠す → 件数の文字を大きくし、チップ列の右端に切れを示すフェードを付ける
-- **表示の意味 (定義単位で直す)**: 語・文字列・店名などの具体的な箇所は `LATEST.md` / 週次 `latest.json` の `ui_findings` にある。全URLの検査はページの種類ごとに 1 件へまとめてあり、該当 URL の全件は週次 `latest.json` (`npm run state:pull -- page-quality` で `.claude/state/page-quality/live/` に取得) の `violations` にある。同じ指摘が同じテンプレートの多数の URL に出ていれば、ページではなく生成元 (テンプレート・カタログ・共通部品・AI 解説の生成) を直す。内部用語は読者向けの言い換えに、`NaN`/`undefined` は値が無いときの表示 (「—」等) に、`%`/`％` はそのページの多数派に揃える。`title_changed` は選定入力が変わっていないのに title が変わった場合だけ直す (選び方を決定的にする)。文字の小ささ・ページ高さはテンプレート別の予算 (`page-quality-budgets.json`) との差で、予算を上げて閉じない。
-- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。
-- **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@.claude/state/page-quality/backlog-batches/UI-FIX-BLOG-20261004.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
-- **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
-- **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
-
-### [UI-FIX-RANKING-LONG-TITLE-20261004] UI 是正: ranking--long-title の週次 UI 検査の指摘 1 件を直す
-
-タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled .claude/state/page-quality/backlog-batches/UI-FIX-RANKING-LONG-TITLE-20261004.txt] [起票:2026-10-04] [領域:サイト]
-
-- **自動起票**: 週次のページ品質監査 (`page-quality-audit-weekly.yml`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `.claude/state/page-quality/backlog-batches/UI-FIX-RANKING-LONG-TITLE-20261004.txt`、状態は `.claude/state/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
-- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/ranking--long-title-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/ranking--long-title-desktop-1440.png)。検査の詳細は `.claude/state/metrics/page-quality/LATEST.md`。
-- **対象**:
-  - `agent|ranking--long-title` (Claude の確認)
-    - [mobile-390/medium] スマホ1枚目、「地図」タブ内の日本地図(「2021年度」セレクトの下): 地図の外側にハバロフスク・上海・ソウルなど海外の地名が多数出て、日本の都道府県の色分けより目立つ。地図の枠が地図本体とずれ、左と下に余白の帯が見え、画面下まで地図が広がって凡例が切れている → 海外の地名ラベルを消すか薄くし、地図の枠と表示範囲を日本列島に合わせる
-    - [mobile-390/low] スマホ1枚目上部、パンくず最後の項目とその下のH1: パンくずの最後に長いタイトルがH1と同じ文言で全文入っている。3行に折り返し、H1の前に同じ長文が2回続く → パンくずの最後の項目は短縮するか省き、カテゴリ名までにする
-- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。
-- **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@.claude/state/page-quality/backlog-batches/UI-FIX-RANKING-LONG-TITLE-20261004.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
-- **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
-- **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
-
-### [UI-FIX-PREFECTURE-DETAIL-THEME-GEO-20261004] UI 是正: prefecture-detail--theme-geo の週次 UI 検査の指摘 1 件を直す
-
-タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled .claude/state/page-quality/backlog-batches/UI-FIX-PREFECTURE-DETAIL-THEME-GEO-20261004.txt] [起票:2026-10-04] [領域:サイト]
-
-- **自動起票**: 週次のページ品質監査 (`page-quality-audit-weekly.yml`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `.claude/state/page-quality/backlog-batches/UI-FIX-PREFECTURE-DETAIL-THEME-GEO-20261004.txt`、状態は `.claude/state/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
-- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/prefecture-detail--theme-geo-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/prefecture-detail--theme-geo-desktop-1440.png)。検査の詳細は `.claude/state/metrics/page-quality/LATEST.md`。
-- **対象**:
-  - `agent|prefecture-detail--theme-geo` (Claude の確認)
-    - [mobile-390/medium] スマホ1枚目の中ほど、青い案内バナー「青森県の視点 — 47都道府県チャートで青森県をハイライト表示しています」: 狭い幅で文章と右端の「青森県プロフィールへ →」が3列に分かれて詰まり、文が1〜2文字ずつ折り返して読みにくい。リンクも小さく折り返されて見つけにくい → スマホではバナーを縦積みにして文章を全幅で出し、リンクは次の行に独立して置く
-    - [mobile-390/low] スマホ1枚目、「ページ内」ボックス: 「ページ内」の目次に項目が1つ(「土砂災害を都道府県別に見る」)だけで、すぐ下に「全指標・出典調査」の開閉行が続き、同じ種類の枠が重なって主要データが下に押される → 項目が1つだけの目次は出さないか、開閉行とまとめて1つにする
-- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。
-- **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@.claude/state/page-quality/backlog-batches/UI-FIX-PREFECTURE-DETAIL-THEME-GEO-20261004.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
-- **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
-- **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
-
-### [UI-FIX-MUNICIPALITY-VILLAGE-20261004] UI 是正: municipality--village の週次 UI 検査の指摘 1 件を直す
-
-タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled .claude/state/page-quality/backlog-batches/UI-FIX-MUNICIPALITY-VILLAGE-20261004.txt] [起票:2026-10-04] [領域:サイト]
-
-- **自動起票**: 週次のページ品質監査 (`page-quality-audit-weekly.yml`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `.claude/state/page-quality/backlog-batches/UI-FIX-MUNICIPALITY-VILLAGE-20261004.txt`、状態は `.claude/state/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
-- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/municipality--village-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/municipality--village-desktop-1440.png)。検査の詳細は `.claude/state/metrics/page-quality/LATEST.md`。
-- **対象**:
-  - `agent|municipality--village` (Claude の確認)
-    - [mobile-390/high] スマホ1枚目、「田原本町の特徴(県内ランキング上位)」カードの各行(身体障害者更生援護施設設定員数など)。デスクトップ1枚目の同カードも同じ: 値が「0人(2011年度)」「0施設」の指標が「3位」「4位」「5位」と上位として並び、読者は特徴や強みと誤読する。同率0の順位で、見出しの「上位」と内容が合わない → 値が0の指標は特徴リストから外すか、「0(同率)」と明示し、上位表示は意味のある値のある指標だけにする
-    - [mobile-390/medium] スマホ1枚目、H1直下の小見出し「奈良県 奈良県 田原本町」と、下の市区町村一覧の「奈良県 奈良市」などの表記。デスクトップ1枚目も同じ: 県名が二重に表示され、一覧の各リンクにも毎回「奈良県」が付いていて冗長で読みにくい。カード見出しと説明文にも「奈良県 田原本町」が繰り返される → 小見出しの県名重複を直し、同じ県内の一覧では市区町村名だけを表示する
-- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。
-- **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@.claude/state/page-quality/backlog-batches/UI-FIX-MUNICIPALITY-VILLAGE-20261004.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
-- **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
-- **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
-
-### [UI-FIX-HOME-20261004] UI 是正: home の週次 UI 検査の指摘 1 件を直す
-
-タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled .claude/state/page-quality/backlog-batches/UI-FIX-HOME-20261004.txt] [起票:2026-10-04] [領域:サイト]
-
-- **自動起票**: 週次のページ品質監査 (`page-quality-audit-weekly.yml`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `.claude/state/page-quality/backlog-batches/UI-FIX-HOME-20261004.txt`、状態は `.claude/state/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
-- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/home-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/home-desktop-1440.png)。検査の詳細は `.claude/state/metrics/page-quality/LATEST.md`。
-- **対象**:
-  - `agent|home` (Claude の確認)
-    - [mobile-390/medium] スマホ1枚目下部、「注目のランキング」カードと「新着ブログ」カード: カード右端が切れた横スクロールで、2枚目のタイトルと値(「公衆…」「東…」「10,7…」)が途中で見切れ、スクロールできることが「>」ボタン以外に分かりにくい。ランキングカードの値の左に大きな空白があり、地図が小さく情報量が少ない → 2枚目のカードが見える幅を残していることを示す余白かフェードを付け、カードの地図と値の配置を詰める
-    - [mobile-390/low] スマホ2枚目、「都道府県から探す」のタイル地図: 北海道・東北が右端に寄り、左上に大きな空白があり、九州の右端付近は画面外に切れそうに見える。10px級の都道府県名が縦書きで折り返されて読みにくい → タイル地図の列幅を幅に合わせて詰め、県名は折り返さず略称か横書きで表示する
-- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。
-- **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@.claude/state/page-quality/backlog-batches/UI-FIX-HOME-20261004.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
-- **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
-- **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
-
-### [UI-FIX-BLOG-ARTICLE-CHARTS-20261004] UI 是正: blog-article--charts の週次 UI 検査の指摘 1 件を直す
-
-タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled .claude/state/page-quality/backlog-batches/UI-FIX-BLOG-ARTICLE-CHARTS-20261004.txt] [起票:2026-10-04] [領域:サイト]
-
-- **自動起票**: 週次のページ品質監査 (`page-quality-audit-weekly.yml`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `.claude/state/page-quality/backlog-batches/UI-FIX-BLOG-ARTICLE-CHARTS-20261004.txt`、状態は `.claude/state/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
-- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/blog-article--charts-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/blog-article--charts-desktop-1440.png)。検査の詳細は `.claude/state/metrics/page-quality/LATEST.md`。
-- **対象**:
-  - `agent|blog-article--charts` (Claude の確認)
-    - [mobile-390/low] スマホ1枚目、パンくずとH1の間の「ホーム > ブログ」帯と、その下の「stats47 データジャーナル / 統計で読む地域ニュース / PR を含む場合があります」の行: パンくずが灰色の帯に入って記事の導入前に2層の見出し行が続き、「PRを含む場合があります」が細かい文字で他の肩書きと並び、意味の違う3項目が区切りの / だけでつながって読みにくい → PR表記は独立した行にして肩書きと分け、パンくず帯と肩書き行の余白を詰める
-- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。
-- **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@.claude/state/page-quality/backlog-batches/UI-FIX-BLOG-ARTICLE-CHARTS-20261004.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
-- **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
-- **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
+- **事象 (2026-10-06 axe 実測・`/blog/beer-peak-month-july-to-december`・390px)**: `color-contrast` (serious) が 3 か所。LINE ボタン (`bg-[#06C755]` に白文字) とはてなボタン (`bg-[#00A4DE]` に白文字) と、`text-positive` の小見出し (`mb-1 flex … text-xs font-bold text-positive`)。週次 page-quality の `a11y_violations` に出ている。
+- **決めてほしいこと**: 共有ボタンはブランド色のまま文字だけ濃くするか、ボタンを枠線型にするか。`--positive` トークンを濃くするとサイト全体の配色が変わる。
+- **完了条件**: 同じ URL の axe `color-contrast` が 0 件。
 
 ### [GEO-QGIS-DEMAND-01] QGIS の使い方ブログ 3 本で需要を測り、note「国土数値情報をQGISで扱う」を作るか決める
 タグ: [収益化] [種類:制作] [実行:対話] [起票:2026-10-03] [領域:サイト]
@@ -527,7 +352,6 @@ updated: 2026-09-29
   4. 判定日に基準と比べ、note の制作へ進むか止めるかを決める。
 - **禁止・停止条件**: 入力データと背景地図は `geo-analysis-standards.md` の商用公開 Gate と `license-policy.ts` で商用可を確かめたものだけ使う (Google マップ等は使わない)。公開はサイト領域の月 15〜20 本の上限内で行う。基準を下回ったら note は作らず、このカードを削除する。
 - **完了条件**: 3 本が公開され、判定日に基準との比較結果と note 制作の Go / Stop がこのカードか月次レビューに記録されている。
-
 
 ### [BLOG-REMEDIATION-PROOF-01] ブログ品質是正キューで 1 本をゲートと critic まで通すか、是正を計画から外すかを決める
 タグ: [コンテンツ品質] [種類:意思決定] [実行:対話] [起票:2026-10-02] [領域:サイト]
@@ -615,7 +439,6 @@ updated: 2026-09-29
 - **停止条件**: 3 件連続の失敗、本文・価格・有料/試し読み境界の変化、更新後のタグ集合が承認済みと一致しない場合はその記事で止まる。note は大文字小文字を既存タグに合わせて書き換え、ギリシャ文字などは黙って落とす (検査で除外済み)。
 - **完了条件**: `--audit-only` で 286 件すべてが compliant。
 
-
 ### [KDP-K-S1-08-REUPLOAD-01] 公開中のKindle S1全12冊へ承認済みポップ表紙を反映する
 タグ: [収益化] [種類:制作] [実行:ユーザー] [起票:2026-09-28] [領域:商品]
 
@@ -641,15 +464,7 @@ updated: 2026-09-29
 - **対象**: `git grep -nE "\{[a-zA-Z0-9_.?]*\.unit\}" -- 'apps/web/src/**/*.tsx' ':!*test*' | grep -v formatUnitForDisplay` の 38 か所
   (JSX の本文・テンプレート文字列。`unit=` で部品に渡すものは受け側で整形されているかを確認する) と関連ランキング一覧。
 - **完了条件**: 週次 page-quality の %/％ 混在が 0 ページ。値の換算はしない (表示の整形だけ)。
-
-### [SUBTITLE-DROP-SITEWIDE-01] 指標名を出す部品が subtitle (分母・内訳) を落とさないようにする
-タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-09-27] [領域:データ]
-
-- **経緯**: 2026-09-27 に `/category/*` のトピック一覧と `/japan/*` の見出しで subtitle を落としていたのを直した (「図書館数 27館」が人口100万人当たりだった)。
-  同じ形 (`readerLabel ?? title`) が `RelatedRankingsGrid` など他の部品にも残っている (`git grep -n "readerLabel ?? " -- apps/web/src`)。
-  分母は unit ではなく subtitle が持つ規約 (`unit-semantics-standards.md` §4) なので、subtitle を落とすと人口当たりの値が総数に見える。
-- **次**: 指標名 + subtitle を組み立てる関数を 1 つ用意し、指標名を出す部品をそれに寄せる。契約テストで `readerLabel ?? title` の直書きを 0 にする。
-- **完了条件**: subtitle を持つ指標の名前を出す全部品が subtitle を含めて表示し、直書きが 0 件。
+- **2026-10-06 実装済み (本番未確認)**: 単位を直接描画する約 40 か所と受け側部品 (FeaturedRankingCard・RankingSidebar・CategoryRankingList・KPI/Line/Composition/AttributeMatrix・BlogStatsHighlight 等) を `formatUnitForDisplay` に通した。生成文 (AI 解説・ブログ説明文) は R2 を書き換えず、表示時に数字直後の「％」だけ半角にする `normalizePercentInText` (`packages/data-configs/src/unit/unit-display.ts`) を足した。OGP 画像 (RankingOgp) は再生成判定の入力が変わるため対象外にした。localhost で ranking / theme / category / survey / japan / blog / 市区町村ランキングの代表ページは全角 ％ 0 件。完了条件 (週次 page-quality の混在 0 ページ) は本番反映後の週次で確かめる。
 
 ### [AD-SAME-SHOP-DEDUP-01] 1 ページに同じ店の楽天商品が並ぶのを抑える
 タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-09-27] [領域:アフィリエイト]
@@ -657,6 +472,7 @@ updated: 2026-09-29
 - **経緯**: 全 URL 検査の初回 (2026-09-27) で 262 ページに同じ店の広告の重複。多くは楽天の 1 店舗から複数商品 (例: `/ranking/green-pepper-consumption-quantity` に rakuten:book から 9 件)。
 - **次**: 楽天商品カードの選定に「1 ページ 1 店舗あたり上限」を入れる。上限値は現状の分布を測ってから決める。
 - **完了条件**: 週次 page-quality の同一店舗重複が 0 ページ。広告のクリック計測 (`affiliate_vertical`) を壊さない。
+- **2026-10-06 実装済み (本番未確認)**: `selectQualityItems` で同じ店 (shopName、無ければ商品 URL の `item.rakuten.co.jp/<店>/`) を 1 枚 1 件までにした (`rakutenShopKey` + テスト)。ふるさと納税カードにも効く。別のカードどうしで同じ店が並ぶ場合は未対処で、本番反映後の週次 `same_shop_ad_duplicates` で残りを測る。
 
 ### [PREF-PAGE-SMALL-TEXT-01] 県ページの 11px 未満の文字 56 か所を減らす
 タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-09-27] [領域:サイト]
@@ -764,9 +580,6 @@ updated: 2026-09-29
 - **完了条件**: 週次監査の error 件数が縮小傾向 (ラチェット化は別途検討)。
 - 生データ: `.claude/state/metrics/page-quality/{latest.json,LATEST.md,snapshots/2026-09-15.json}`、
   管理画面 `/quality/page-audit`。
-
-
-
 
 ### [AFF-STOCKTAKE-RECONCILE-01] 提携棚卸しの不明案件と既存在庫の不一致を再照合する
 
@@ -1366,30 +1179,6 @@ updated: 2026-09-29
 - **完了条件**: 上記がコミット済みで本番デプロイされ、本番のブログ記事でランキングカード (地図 + 上位 3 県) と新しい callout が表示され、
   GA4 に `nav_surface=blog_ranking_card` の `nav_click` が届いている。
 
-
-### [UI-FIX-BLOG-ARTICLE-20260927] UI 是正: blog-article の週次 UI 検査の指摘 10 件を直す
-
-タグ: [UI・UX] [種類:不具合] [実行:sweep] [検証:npx tsx .claude/scripts/page-quality/ui-findings.ts --assert-handled .claude/state/page-quality/backlog-batches/UI-FIX-BLOG-ARTICLE-20260927.txt] [起票:2026-09-27] [領域:サイト]
-
-- **自動起票**: 週次のページ品質監査 (`page-quality-audit-weekly.yml`) の結果から `ui-findings.ts --sync` が作った。対象の一覧は `.claude/state/page-quality/backlog-batches/UI-FIX-BLOG-ARTICLE-20260927.txt`、状態は `.claude/state/page-quality/ui-findings-queue.json`。正典は `.claude/rules/page-quality-standards.md`「UI 指摘のループ」。
-- **スクショ (最新の週次)**: [mobile-390](https://storage.stats47.jp/state/page-quality/screenshots/latest/blog-article-mobile-390.png) / [desktop-1440](https://storage.stats47.jp/state/page-quality/screenshots/latest/blog-article-desktop-1440.png)。検査の詳細は `.claude/state/metrics/page-quality/LATEST.md`。
-- **対象**:
-  - `machine|https://stats47.jp/blog/alcohol-prefecture-map|blog_svg_text_issues` — blog_svg_text_issues = 1 (閾値 <= 0)
-  - `machine|https://stats47.jp/blog/allocation-tax-area|blog_svg_text_issues` — blog_svg_text_issues = 1 (閾値 <= 0)
-  - `machine|https://stats47.jp/blog/automotive-industry-transformation-map|blog_svg_text_issues` — blog_svg_text_issues = 1 (閾値 <= 0)
-  - `machine|https://stats47.jp/blog/beer-peak-month-july-to-december|a11y_violations` — a11y_violations = 1 (閾値 <= 0)
-  - `machine|https://stats47.jp/blog/beer-peak-month-july-to-december|blog_svg_text_issues` — blog_svg_text_issues = 3 (閾値 <= 0)
-  - `machine|https://stats47.jp/blog/birth-death-gap-decline|blog_svg_text_issues` — blog_svg_text_issues = 1 (閾値 <= 0)
-  - `machine|https://stats47.jp/blog/cc-estat-07-birthrate-line|blog_svg_text_issues` — blog_svg_text_issues = 1 (閾値 <= 0)
-  - `machine|https://stats47.jp/blog/cc-estat-08-bar-chart-race|blog_svg_text_issues` — blog_svg_text_issues = 1 (閾値 <= 0)
-  - `machine|https://stats47.jp/blog/cc-estat-14-energy-area-chart|blog_svg_text_issues` — blog_svg_text_issues = 1 (閾値 <= 0)
-  - `machine|https://stats47.jp/blog/cc-estat-16-commerce-bubble|blog_svg_text_issues` — blog_svg_text_issues = 1 (閾値 <= 0)
-- **記事チャート SVG (振り分けてから直す)**: まず `npx tsx .claude/scripts/blog/plan-svg-text-fix.ts @.claude/state/page-quality/backlog-batches/UI-FIX-BLOG-ARTICLE-20260927.txt` を実行する。`regen-fixes` は生成器が既に正しく、R2 の SVG を作り直すだけで直る (コード変更なし)。R2 への反映はオーナー承認が要るので、出力された `gh workflow run regenerate-blog-svgs.yml …` を書いた `[実行:ユーザー]` カードを起票し、対象を `--mark-owner` で紐付ける。`generator-fix` は `packages/svg-builder` の該当チャートを直し、長いラベルの fixture テストを足してから再実行して `regen-fixes` になることを確かめる (以降は同じ手順)。`no-data` は data JSON が無く作り直せないので、手作業の brushup を依頼するカードを起票して `--mark-owner`。`clean` は既に直っているので `--mark-fixed`。
-- **次**: 原因をコードから特定して直し、関係する unit test と `npm run design-system:check -w apps/web` を通す。Claude の指摘は描画前の撮影による誤検知もありうるので、その場合は撮影側 (`.claude/scripts/page-quality/lib/screenshots.ts`) を直すか by-design にする。
-- **記録**: 直した指摘は `npx tsx .claude/scripts/page-quality/ui-findings.ts --mark-fixed <key> --note "<何を変えたか>"`、直さないと判断した指摘は `--mark-by-design <key> --note "<理由>"`。デザイン方針・画像制作・外部契約などオーナー判断が要る指摘は、決めてほしいことを書いた `[実行:対話]` のカードを backlog に起票してから `--mark-owner <key> --card <そのカード ID> --note "<何を決めてほしいか>"` (カードが閉じた後も残っていれば pending に戻る)。まとめて付けるときは `@.claude/state/page-quality/backlog-batches/UI-FIX-BLOG-ARTICLE-20260927.txt`。本番確認は release 後の週次監査が行い、再検出されたら pending に戻って再起票される。
-- **停止条件**: 本番 deploy・R2 push をしない。判断できない指摘は pending のまま残し、このカードを消さない。
-- **完了条件**: 検証コマンドが exit 0 (全対象が pending でなく、done 以外は理由 note 付き)。
-
 ### [CSV-DL-INTENT-SURVEY-01] CSV ダウンロード後に用途 1 問と任意の連絡口を置き、実務利用者を見つける
 
 タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-09-26] [領域:商品]
@@ -1411,27 +1200,6 @@ updated: 2026-09-29
 - **前提**: A8・もしもの再ログインで確定成果の計測が戻っていること (現在 `auth_required`)。計測できない期間の入れ替えは結果が残らないので始めない。`AFF-INTENT-FALLBACK-STOP-01` / `AFF-SLOT-REDUCTION-01` のデプロイと同じ週に重ねない。
 - **完了条件**: 3 案件以上を各 2 週間回し、案件ごとの imp・click・確定収益を表にして、残す案件と外す案件を決める。
 
-### [YEAR-COV-20260926] 年カバレッジ: 最新 1 年だけに絞っている e-Stat 指標 10 件の years を広げる
-
-タグ: [コンテンツ品質] [種類:改善] [実行:sweep] [検証:npx tsx .claude/scripts/data/assert-year-coverage-batch.ts .claude/state/data/estat-year-coverage/backlog-batches/YEAR-COV-20260926.txt] [起票:2026-09-26] [領域:データ]
-
-- **自動起票**: `sync-year-coverage-backlog.mjs` が週次の年カバレッジ監査 (`.claude/state/data/estat-year-coverage/queue.json`) の要拡張候補から作った。対象 key の一覧は `.claude/state/data/estat-year-coverage/backlog-batches/YEAR-COV-20260926.txt`。規約の正典は `.claude/rules/metric-config-standards.md`「`years` は最新年だけに絞らない」。
-- **対象** (config の年数 → e-Stat に値がある年):
-  - `actual-income-worker-households-per-month` (statsDataId 0000010212): 1 年 → 1975〜2024 の 50 年
-  - `annual-precipitation` (statsDataId 0000010102): 1 年 → 1975〜2024 の 50 年
-  - `annual-precipitation-days` (statsDataId 0000010102): 1 年 → 1975〜2024 の 50 年
-  - `annual-sunshine-duration` (statsDataId 0000010102): 1 年 → 1975〜2024 の 50 年
-  - `area-ratio-of-total` (statsDataId 0000010202): 1 年 → 1975〜2024 の 50 年
-  - `average-relative-humidity` (statsDataId 0000010102): 1 年 → 1975〜2024 の 50 年
-  - `average-temperature` (statsDataId 0000010102): 1 年 → 1975〜2024 の 50 年
-  - `avg-propensity-to-consume-worker-households` (statsDataId 0000010212): 1 年 → 1975〜2024 の 50 年
-  - `avg-savings-rate-worker-households` (statsDataId 0000010212): 1 年 → 1975〜2024 の 50 年
-  - `bank-deposit-balance-per-person` (statsDataId 0000010203): 1 年 → 1975〜2024 の 50 年
-- **次**: 各 key の metric config の `years` を上の「e-Stat に値がある年」の範囲へ広げる (監査が `getStatsData` で実測した年。北海道 1 件の判定なので、他県で欠ける年は再投入後の `audit-reingest-queue.ts` と ranking-integrity 監査が拾う)。同じ statsDataId の中で系列の定義や単位が年ごとに変わる key は広げず by-design に記録する。
-- **記録**: 広げない key は `node .claude/scripts/data/sync-year-coverage-backlog.mjs --mark-by-design <key> --note "<理由>"` で記録する (以後の起票から外れる)。
-- **停止条件**: R2 への再投入・本番 deploy をしない (config を直した後の再投入は `audit-reingest-queue.ts` が検出し、data-ingester が行う)。判断できない key はそのまま残し、このカードを消さない。
-- **完了条件**: 検証コマンドが exit 0 (全 key が config で複数年になったか、理由付きで by-design に記録された)。
-
 ### [NOTE-PLAN-DBLESS-01] note 企画 (docs/30) に残る「D1 にデータがある」前提を現行の R2 に直し、F-3 記事の扱いを決める
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-09-25] [領域:商品]
 
@@ -1443,7 +1211,6 @@ updated: 2026-09-29
 - **次**: ① A/C/D は各指標の R2 `app/stats/<key>/values.json` と年数を確かめてから置き場の記述を直す (年数は検証せずに書き写さない)。
   ② F-3 は「DB レスへ移った経緯」の記事に作り替えるか、企画から外すかをオーナーが決める。③ 手順書は git TS → R2 の現行経路に直す。
 - **完了条件**: `grep -rnE "(^|[^A-Za-z0-9])D1([^0-9A-Za-z]|$)" docs/30_note記事企画` の結果が、経緯として「旧」「廃止」を明記した行だけになる。
-
 
 ### [RANKING-FIRST-VIEW-RELEASE-01] ランキングページを「最初の画面で答えを出す」形に改修し、既存 3 件とまとめて 1 回のリリースで測る
 タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-09-25] [領域:サイト]
@@ -1976,7 +1743,6 @@ updated: 2026-09-29
 - **次**: 週次結果から欠落の全リストを出し、`editorial/<code>.ts` の特産品と照合して画像を用意するか、画像を持たない表示に統一する。
 - **完了条件**: 週次監査の `degraded_images` が 0、または画像を出さない設計に決めて代替表示を正式化している。
 
-
 ### [METRIC-YEARFORMAT-KAKEI-01] 家計調査由来 metric の yearFormat (暦年/年度) と surveyId を揃える
 
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npx tsx .claude/scripts/blog/build-metric-definition-sheet.ts --slug real-disposable-income-reversal] [起票:2026-09-19] [期日:2026-10-17] [領域:データ]
@@ -1989,7 +1755,6 @@ updated: 2026-09-29
 - **完了条件**: 家計調査由来 metric の yearFormat が出典と一致し、S1-01 の 9 slug で定義シートの「期間の型」が本文と一致する。
 - **画面への影響 (2026-09-25 追記)**: 県データブックの数値カードに年を出したため (`AREA-DATABOOK-LABEL-INTEGRITY-01`)、
   「消費」節の家計調査 5 指標が「2024年度」と表示されるようになった。yearFormat を直すとここも暦年表記に揃う。
-
 
 ### [CI-SPEED-STATIC-GATES-HEAVY-STEPS-01] Static Gates の重い step (Commit-back Contract 115 秒 / SEO Meta Factual 46 秒) を軽くするか scheduled へ寄せる
 
@@ -2050,7 +1815,6 @@ updated: 2026-09-29
 - **次（実行順）**: ①develop→main反映後、`regenerate-blog-svgs` workflowをdry-runし、全ブログのmobile画像生成結果とギャラリーを目視する。②承認後、対象を限定してR2へexact publishし、PC/mobileの切替を代表記事で確認する。③`.claude/state/ads/relevance-latest.json`の270候補を意味レビューし、必要な記事だけ理由付きで`BLOG_AFFILIATE_POLICY`へ追加する。④既存note画像をmobile方針で再生成・差替えし、note本文の視認性を監査する。⑤web全テストを再実行し、survey timeout 1件・product OGP 2件・right-rail contract 1件が再現する場合は今回の変更と分離して起票する。
 - **禁止**: 候補270件を機械判定だけで一括変更しない。テスト契約を弱めない。ユーザー承認なしにdeploy・R2 write・note公開を実行しない。
 - **完了条件**: ブログのPC/mobile画像が全対象で生成・目視・公開確認済み、note既存画像の差替えと監査が完了、関連性候補が全件レビュー済み、今回変更に属するwebテストがgreenである。
-
 
 ### [THEME-SELECTION-BACKFILL-01] ThemeCatalogの選定根拠(selection)未記入540件を夜間の無人バッチで白書・公式統計から裏付ける
 
@@ -2134,43 +1898,6 @@ updated: 2026-09-29
 - **参照**: `.claude/skills/theme/manage-theme-portfolio/reference/theme-improvement-execution.md`
   (採択ゲート・実装契約・視覚QAの正典)
 
-### [THEME-CHART-TEMPORAL-MISMATCH-01] line-chartが単年設定の13指標を再取り込みして年範囲を拡張する
-
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-09-15] [領域:データ]
-
-- **owner**: data-ingester (年範囲拡張・再取り込み。判断待ちなし、以下は全件データ存在確認済み)
-- `npm run validate:catalog` の `[chart-temporal-fit]` warn (2026-09-15新設) が機械的に検出。
-  対象10テーマ13指標の line-chart が、`years: {from,to}` が単年 (from===to) の指標を参照しており
-  推移を描けない状態だった (componentKeyに「trend」を含むものも複数: `theme-health-expense-trend`
-  `railway-passenger-trend-jr` `roads-length-trend` 等)。
-- **2026-09-15 e-Stat実データで確認済み (getStatsData実測、値がnullでない年のみ集計)**:
-  全13指標とも**e-Statに複数年の実データが存在する**(config側の年範囲設定が不足していただけ)。
-  チャート型変更は不要、年範囲拡張が正解。
-
-  | metric key | statsDataId | config年数 | e-Stat実在年数 | 実在年 |
-  |---|---|---:|---:|---|
-  | national-medical-expense-per-person | 0000010209 | 1 | 14 | 1999-2022 (隔年等) |
-  | turnover-rate | 0000010206 | 1 | 11 | 1977-2022 (5年おき) |
-  | job-change-rate | 0000010206 | 1 | 11 | 1977-2022 (5年おき) |
-  | gender-wage-gap | 0003426933 | 1 | 2 | 2021-2022 |
-  | single-person-household-ratio | 0000010201 | 1 | 9 | 1980-2020 (5年おき) |
-  | jr-passenger-transport | 0000010103 | 1 | 19 | 2005-2023 |
-  | consumer-price-difference-index-housing | 0000010212 | 1 | 12 | 2013-2024 |
-  | consumer-price-difference-index-food | 0000010212 | 1 | 12 | 2013-2024 |
-  | actual-income-worker-households-per-month | 0000010212 | 1 | 50 | 1975-2024 |
-  | road-total-length-with-expressway | 0000010108 | 1 | 19 | 2005-2023 |
-  | road-expressway-length | 0000010108 | 1 | 19 | 2005-2023 |
-  | building-fire-count-per-100-thousand-people | 0000010211 | 1 | 49 | 1975-2023 |
-  | air-passenger-transport | 0000010103 | 1 | 49 | 1975-2023 |
-
-- **次 (実行順)**: ①各 `packages/data-configs/src/metrics/<key>.ts` の `years` を上表の実在年範囲へ
-  拡張 (5年おき等の指標は `{years:[...]}` 形式、連続年は `{from,to}`) ②`validate:years`/`validate:config`
-  ③`page-data-batch --metric <key>` で再取り込み ④`npm run validate:catalog` で
-  `chart-temporal-fit` warn 解消を確認。gender-wage-gap は2年のみのため折れ線でなく2点比較の
-  表示 (mixed-chart等) が妥当か theme-designer が判断してもよい。
-- **完了条件**: 対象13件で `chart-temporal-fit` warn が解消 (ラチェットは新規追加時の再発防止)。
-- **検証**: `npx tsx packages/data-configs/scripts/validate-theme-catalog.ts`
-
 ### [LOCAL-RESOURCE-BUDGET-01] 資料の復元経路と再起動後のメモリ削減効果を確認する
 
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-09-10] [領域:管理]
@@ -2217,24 +1944,6 @@ updated: 2026-09-29
   ブロックリスト該当案件、クリックを促す表現は禁止。note 記事の更新は outward-facing なので実行前にオーナー承認を得る。
 - **完了条件**: ①の結果を証拠付きで記録する。分離できる場合はパイロット 1 本が公開済みで観測 ID が起票されていること、
   分離できない場合は不採用の判断を `docs/00_プロジェクト管理/02_収益化戦略.md` へ 1 行で反映していること。
-
-### [AFF-PLACEMENT-MAP-CORE-01] placement-map-core を「出典調査 → タグ → カテゴリ」に追従させ、survey の stale 判定を直す
-
-タグ: [インフラ・計測] [種類:不具合] [実行:sweep] [検証:node --test .claude/scripts/ads/__tests__/placement-map-core.test.mjs] [起票:2026-09-03] [期日:2026-09-30] [領域:アフィリエイト]
-
-- **owner**: affiliate-manager
-- **症状**: `.claude/scripts/ads/lib/placement-map-core.mjs` はブログを tags → vertical だけで判定し、
-  ranking を categoryKey だけで判定する。#913 以降の実装は出典調査を最上位に見るので、
-  `placement-map-latest.json` の `unmapped.byReason.tags-unmapped` と `demand.byVertical` が
-  実態と食い違う (家計調査ページが economy に計上され続ける)。`survey-hardcoded-tags` の理由コードも
-  2026-07-28 に survey ページが categoryKey 最頻値へ変わった時点で stale。
-- **現在地**: `codex/affiliate-optimization` で実際のTS resolverを共有し、R2の調査メタを入力化。
-  ローカル回帰テストと公開R2を読むdry-runを検証し、取り込み後の週次出力確認を残す。
-- **次**: builder の入力に surveyIds (R2 `app/ranking/<key>/item.json` / `app/blog/all.json`) を足し、
-  `resolveContentVertical` と同じ順で判定する。判定は純関数のまま (`placement-map-core.test.mjs` に
-  「調査 null → 広告なし」「調査あり → カテゴリより優先」のケースを追加)。
-- **完了条件**: 週次 `affiliate-dashboard-refresh.yml` の出力で家計調査ページが furusato に、
-  学校保健統計ページが `no-intent` (新理由コード) に計上される。
 
 ### [AFF-VERTICAL-FIT-02] population / health / education 軸の上位在庫を主題に合わせて入れ替える
 
@@ -2476,6 +2185,7 @@ updated: 2026-09-29
 - **次**: 各 step に `env:` ブロックを足し、`run:` はシェル変数だけを参照する形へ書き換える (`data-refresh.yml` が手本)。併せて `languages` に `actions` を足すか判断する (足すと 11 件が一斉に critical で出るため、書き換えを先に済ませる)
 - **完了条件**: 上記走査で 0 件、かつ actionlint exit=0
 - **制約**: 1 PR で全 workflow を書き換えない (デプロイ経路の workflow が多く、壊すと配信が止まる)。3-4 本ずつに分け、変更した workflow は実際に 1 回発火させて確認する
+- **2026-10-06 第 1 弾 (4 本・未発火)**: `fetch-metrics-weekly` / `migration-flow-weekly` / `sns-weekly-report` / `blog-remediation-daily` の `run:` 内の `${{ inputs.* }}` を step の `env:` 経由に書き換えた (計 6 か所)。actionlint 1.7.7 で exit 0。クラウドからは dispatch できないので、制約どおり各 workflow を 1 回発火させて確認するのは未実施。残りは `blog-auto-publish` / `publish-ai-content` / `sync-snapshots` (run 内 1 か所。他は既に env) の 3 本。
 
 ### [CHART-LINEAGE-RESIDUAL-01] 元データ喪失図表の手動系譜残件
 
@@ -2722,7 +2432,6 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - 2026-10 月次計画で improvements から降格。再開条件: BLOG-SEO-TYPES-01 と同時に、公開 4 週以上経過分で `gsc-query.mjs` のコホート比較を行う時 (`[kpi: search-clicks]`)。
 - 2026-09-07 時点で queue done 81 件、BLOG-QUEUE-TRACK-01 の状態ずれは解消。効果判定エンジン対象外 (queue コホート集計)。
 - **2026-10-04 の実測 (W40 の無人 triage が書いたが、Issue #1068 で push されず 10-05 に書き戻した)**: **2026-10-04実測**: `.claude/state/blog/topic-queue.json` (generatedAt 2026-10-04、gscWeek 2026-W40) の done は81件で、2026-09-06生成時から増えておらず、81件すべてが公開から4週(28日)以上経過した。標本・期間の条件は満たしたが、このrunではGSC照会を実行していないため、検索表示を得たかは未判定。次: 2026-10-11までに done 81件それぞれについて、`.claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W40/pages.csv` のimpressionsが0か1以上かを数え、1以上の記事の割合とclicks合計を出す。選定時の `evidence.gscImp` (queueに保存されている需要側の値) と公開後impressionsを並べ、需要候補の選定が当たったかを見る。2026-10-11に比較できなければ、取得できなかった理由と再実行条件を詳細ログへ書く。**効果判定エンジン対象外**: 単一ページ前後比較ではなくqueue由来コホートの集計判定のため、判定は上記のコホート集計で行う
-
 
 ### [TOKEN-AICONTENT-01] Claude 自動生成の API 課金 (5 件 run $79〜$90) を課金無効 project の Gemini 日次へ移行する
 
@@ -3008,6 +2717,14 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - **制約**: 約4,000件の未使用項目や約17万metric相当を一括投入しない。1バッチ最大20件、公開後4週の実測を次バッチのgateにする。
 
 ## 🟣 判断待ち — やるかどうかの意思決定が未了
+
+### [DEPS-BRACES-GATE-01] 修正版が無い braces 脆弱性で落ち続ける Security Scan の high ゲートをどう扱うか決める
+タグ: [インフラ・計測] [種類:意思決定] [実行:ユーザー] [検証:npm audit --audit-level=high] [起票:2026-10-06] [領域:管理]
+
+- **論点**: braces (GHSA-vfj7-8cjw-p6xm) は `<=3.0.3` が該当し、2026-10-06 時点で修正版が無い。knip の経路は 2026-10-06 に knip 6 へ更新して外した。[DEPS-TAILWIND4-01] で tailwindcss 3 を外しても、`eslint-config-next` / `@next/eslint-plugin-next` 16.3.8 (最新) が `fast-glob` 3.3.1 を固定している dev 依存の経路が残り、上流に修正が無い。このため main への push と全 PR で `npm audit --audit-level=high` が失敗し続け、他の新しい high を見落とす。
+- **選択肢**: (a) braces または Next.js の eslint plugin の上流修正を待つ。待つ間はゲートが赤のままになる。(b) dev 依存に限り、この GHSA だけを期限付きの例外として扱う。例えば `npm audit --json` の結果からこの ID を除いて判定するスクリプトにし、`test:dependency-security` に例外の期限と理由を固定する。runtime ゲート (`--omit=dev --audit-level=low`) は例外にしない。
+- **停止条件**: runtime 依存の脆弱性を例外にしない。期限と再評価日の無い例外を入れない。
+- **完了条件**: 採否が決まり、採った方針で Security Scan が green になる。または待つと決めたなら、再評価日 (braces の新版公開の確認) を本カードに書く。
 
 ### [DOMAIN-SHARED-POLICY-01] 管理の枠組み (5 役割・画面の種類・サイドメニューの規則) を共通事業方針に載せるか決める
 タグ: [エージェント・SSOT] [種類:意思決定] [実行:ユーザー] [起票:2026-09-27] [領域:戦略]

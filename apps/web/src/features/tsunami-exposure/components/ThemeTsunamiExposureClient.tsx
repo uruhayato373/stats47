@@ -199,7 +199,7 @@ export function ThemeTsunamiExposureClient({
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                保存則の検算（JSON）
+                合計の検算（JSON）
               </a>
               {row && (
                 <a

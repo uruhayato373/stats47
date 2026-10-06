@@ -75,6 +75,7 @@ interface MetricLike {
   key: string;
   title: string;
   unit?: string;
+  subtitle?: string | null;
   category: string;
   isActive?: boolean;
   entities?: readonly string[];
@@ -157,6 +158,15 @@ function buildInputs(impressions: Map<string, number>): ProminenceInput[] {
 }
 
 /** hook 解決に必要な unit を引くための索引。 */
+/** 名前に添える分母・内訳 (subtitle)。索引の名前が総数に見えないよう代表にも焼く (SUBTITLE-DROP-SITEWIDE-01) */
+function buildSubtitleIndex(): Map<string, string> {
+  return new Map(
+    (listAllMetrics() as unknown as MetricLike[])
+      .filter((metric) => metric.subtitle?.trim())
+      .map((metric) => [metric.key, metric.subtitle!.trim()]),
+  );
+}
+
 function buildUnitIndex(): Map<string, string> {
   return new Map(
     (listAllMetrics() as unknown as MetricLike[]).map((metric) => [
@@ -188,7 +198,9 @@ function resolveReferenceYear(inputs: readonly ProminenceInput[]): number {
 function toRepresentative(
   result: ProminenceResult,
   units: Map<string, string>,
-): { rankingKey: string; title: string; readerLabel: string; hook: string } {
+  subtitles: Map<string, string>,
+): { rankingKey: string; title: string; readerLabel: string; subtitle?: string; hook: string } {
+  const subtitle = subtitles.get(result.rankingKey);
   return {
     rankingKey: result.rankingKey,
     title: result.title,
@@ -196,6 +208,7 @@ function toRepresentative(
       rankingKey: result.rankingKey,
       title: result.title,
     }),
+    ...(subtitle ? { subtitle } : {}),
     hook: resolveRankingHook({
       rankingKey: result.rankingKey,
       title: result.title,
@@ -212,6 +225,7 @@ function build(): string {
 
   const inputs = buildInputs(impressions);
   const units = buildUnitIndex();
+  const subtitles = buildSubtitleIndex();
   const results = computeProminenceScores(inputs, {
     currentYear: resolveReferenceYear(inputs),
   });
@@ -232,7 +246,7 @@ function build(): string {
       representatives: selectRepresentatives(
         inCategory,
         REPRESENTATIVES_PER_CATEGORY,
-      ).map((result) => toRepresentative(result, units)),
+      ).map((result) => toRepresentative(result, units, subtitles)),
     };
   });
 
@@ -240,7 +254,7 @@ function build(): string {
     limit: HOME_FEATURED_LIMIT,
     maxPerCategory: HOME_FEATURED_MAX_PER_CATEGORY,
   }).map((result, index) => ({
-    ...toRepresentative(result, units),
+    ...toRepresentative(result, units, subtitles),
     categoryKey: result.categoryKey,
     order: index + 1,
   }));
@@ -280,6 +294,8 @@ export interface RankingRepresentative {
   title: string;
   /** 読者向けの平易な指標名。正準名から決定規則で導出 */
   readerLabel?: string;
+  /** 分母・内訳 (config の subtitle)。名前は metricDisplayName で組み立てる */
+  subtitle?: string;
   /** 問いかけコピー。導出規則 + override で確定したもの */
   hook: string;
 }

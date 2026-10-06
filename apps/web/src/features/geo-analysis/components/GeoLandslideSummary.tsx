@@ -166,7 +166,7 @@ export function GeoLandslideSummary({
           </a>
         ))}
         <Link href={`/geo/${S.slug}`} className="text-primary underline">
-          計算入力・県別途中データ・保存則を確認
+          計算入力・県別途中データ・合計の検算を確認
         </Link>
       </div>
       <div className="mt-4 space-y-2 text-xs text-muted-foreground">

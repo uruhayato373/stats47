@@ -13,6 +13,7 @@ import {
   TableRow,
 } from '@stats47/components/atoms/ui/table';
 import { SNOW_DESIGNATION_SOURCE } from '@stats47/data-configs/theme-catalog';
+import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
 import { ExternalAnchor } from "@/components/atoms/ExternalAnchor";
 import { ChartFooter } from '@/components/charts/ChartFooter';
@@ -88,7 +89,7 @@ export function GeoSnowDesignationSummary({
                 scope="col"
                 className="text-right whitespace-nowrap"
               >
-                {m.label}（{m.unit}）
+                {m.label}（{formatUnitForDisplay(m.unit)}）
               </TableHead>
             ))}
           </TableRow>

@@ -21,6 +21,9 @@ import {
 } from "../constants/tile-providers";
 import { to5DigitPrefCode } from "@stats47/area";
 
+/** 背景タイルの不透明度。色分け (塗り) を主役にし、地名は読める程度に残す。 */
+const BASEMAP_OPACITY = 0.55;
+
 export interface LeafletChoroplethMapProps {
   /** 都道府県 TopoJSON */
   topology: TopoJSONTopology | null;
@@ -200,7 +203,9 @@ export function LeafletChoroplethMap({
         scrollWheelZoom
         style={{ height: "100%", width: "100%", borderRadius: "0.375rem" }}
       >
-        <TileLayer url={tileUrl} attribution={attribution} />
+        {/* 背景タイルは位置の手がかりだけなので薄く敷く。狭い幅では日本の外側の地名 (ソウル・上海等) が
+            色分けより目立った (2026-10-04 週次 UI 検査) */}
+        <TileLayer url={tileUrl} attribution={attribution} opacity={BASEMAP_OPACITY} />
         {fitToPrefectures && prefGeojson && <FitPrefectureBounds geojson={prefGeojson} />}
 
         {/* 都道府県レイヤー（topology 到着後に重ねる） */}

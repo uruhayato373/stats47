@@ -44,8 +44,9 @@ jobs:
 
       - name: 📅 Resolve target week
         id: week
+        env:
+          INPUT_WEEK: ${{ inputs.week }}
         run: |
-          INPUT_WEEK="${{ inputs.week }}"
           if [ -n "$INPUT_WEEK" ]; then
             echo "week=$INPUT_WEEK" >> "$GITHUB_OUTPUT"
           else

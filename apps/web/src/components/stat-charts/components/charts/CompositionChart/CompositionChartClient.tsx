@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@stats47/components";
+import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { compactAxisFormat, useD3Tooltip } from "@stats47/visualization/d3";
 
 import type { CompositionChartData } from "../../../adapters/toCompositionChartData";
@@ -147,7 +148,7 @@ function DonutChart({ chartData }: { chartData: CompositionChartData }) {
                 <span className="text-foreground/80">{s.label}</span>
                 <span className="ml-auto tabular-nums font-semibold">
                   {value.toLocaleString()}
-                  {unit ? <span className="text-xs font-normal text-muted-foreground ml-0.5">{unit}</span> : null}
+                  {unit ? <span className="text-xs font-normal text-muted-foreground ml-0.5">{formatUnitForDisplay(unit)}</span> : null}
                 </span>
                 <span className="text-muted-foreground tabular-nums w-14 text-right">
                   {pct}%
@@ -323,7 +324,7 @@ function VerticalStacked({
                     <span className="text-foreground/80">{s.label}</span>
                     <span className="ml-auto tabular-nums font-semibold">
                       {value.toLocaleString()}
-                      {unit ? <span className="text-xs font-normal text-muted-foreground ml-0.5">{unit}</span> : null}
+                      {unit ? <span className="text-xs font-normal text-muted-foreground ml-0.5">{formatUnitForDisplay(unit)}</span> : null}
                     </span>
                     <span className="text-muted-foreground tabular-nums w-14 text-right">
                       {pct}%

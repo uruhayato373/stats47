@@ -6,6 +6,7 @@ import {
   getJapanCatalogTheme,
   listJapanCatalogThemes,
 } from '@stats47/data-configs/geo-scope';
+import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { readJapanSeries } from '@stats47/stats-r2/readers';
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
@@ -141,7 +142,7 @@ export default async function JapanThemePage({ params }: { params: Params }) {
                     <span className="mt-1 block font-medium text-foreground">
                       最新: {m.latest.yearName}{' '}
                       {m.latest.value.toLocaleString('ja-JP')}
-                      {m.unit}
+                      {formatUnitForDisplay(m.unit)}
                     </span>
                   )}
                 </>

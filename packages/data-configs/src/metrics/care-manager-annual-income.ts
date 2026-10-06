@@ -13,8 +13,8 @@ export const careManagerAnnualIncome: MetricConfig = {
     // 宣言しないと 千円 の値に 万円 のラベルが付いたまま配信される。
     "valueScale": 0.1,
     "tabCombination": [
-      { "cdTab": "08", "factor": 12 },
-      { "cdTab": "12", "factor": 1 },
+      { "cdTab": "08,40", "factor": 12 },
+      { "cdTab": "12,44", "factor": 1 },
     ],
     "cdCat01": "01",
     "cdCat02": "1168",
@@ -50,7 +50,7 @@ export const careManagerAnnualIncome: MetricConfig = {
     ],
     "isCalculated": false,
   },
-  "seoTitle": "ケアマネージャーの平均年収 都道府県ランキング【2022年】｜1位山形県（483.7万円）",
-  "seoDescription": "2022年のケアマネージャーの平均年収を都道府県別に比較。1位は山形県（483.7万円）、最下位は大分県（308.8万円）、最大と最小の差は1.6倍です。地図やグラフで47都道府県の違いを確認できます。",
+  "seoTitle": "ケアマネージャーの平均年収 都道府県ランキング【2023年】｜1位山口県（503.2万円）",
+  "seoDescription": "2023年のケアマネージャーの平均年収を都道府県別に比較。1位は山口県（503.2万円）、最下位は佐賀県（340.5万円）、最大と最小の差は1.5倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

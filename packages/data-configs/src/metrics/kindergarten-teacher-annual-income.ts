@@ -13,8 +13,8 @@ export const kindergartenTeacherAnnualIncome: MetricConfig = {
     // 宣言しないと 千円 の値に 万円 のラベルが付いたまま配信される。
     "valueScale": 0.1,
     "tabCombination": [
-      { "cdTab": "08", "factor": 12 },
-      { "cdTab": "12", "factor": 1 },
+      { "cdTab": "08,40", "factor": 12 },
+      { "cdTab": "12,44", "factor": 1 },
     ],
     "cdCat01": "01",
     "cdCat02": "1191",
@@ -50,7 +50,7 @@ export const kindergartenTeacherAnnualIncome: MetricConfig = {
     ],
     "isCalculated": false,
   },
-  "seoTitle": "幼稚園教員・保育教諭の平均年収 都道府県ランキング【2022年】｜1位東京都（449.1万円）",
-  "seoDescription": "2022年の幼稚園教員・保育教諭の平均年収を都道府県別に比較。1位は東京都（449.1万円）、最下位は秋田県（334.5万円）、最大と最小の差は1.3倍です。地図やグラフで47都道府県の違いを確認できます。",
+  "seoTitle": "幼稚園教員・保育教諭の平均年収 都道府県ランキング【2023年】｜1位茨城県（451.6万円）",
+  "seoDescription": "2023年の幼稚園教員・保育教諭の平均年収を都道府県別に比較。1位は茨城県（451.6万円）、最下位は福島県（347.6万円）、最大と最小の差は1.3倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

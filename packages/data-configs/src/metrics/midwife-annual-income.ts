@@ -13,8 +13,8 @@ export const midwifeAnnualIncome: MetricConfig = {
     "valueScale": 0.1,
     "cdCat01": "01",
     "tabCombination": [
-      { "cdTab": "08", "factor": 12 },
-      { "cdTab": "12", "factor": 1 },
+      { "cdTab": "08,40", "factor": 12 },
+      { "cdTab": "12,44", "factor": 1 },
     ],
     "cdCat02": "1132",
     "displayName": "賃金構造基本統計調査",
@@ -56,7 +56,7 @@ export const midwifeAnnualIncome: MetricConfig = {
       },
     ],
   },
-  "seoTitle": "助産師の平均年収 都道府県ランキング【2022年】｜1位鳥取県（710.7万円）",
-  "seoDescription": "2022年の助産師の平均年収を都道府県別に比較。1位は鳥取県（710.7万円）、最下位は福井県（434.9万円）、最大と最小の差は1.6倍です。地図やグラフで47都道府県の違いを確認できます。",
+  "seoTitle": "助産師の平均年収 都道府県ランキング【2023年】｜1位岡山県（825.8万円）",
+  "seoDescription": "2023年の助産師の平均年収を都道府県別に比較。1位は岡山県（825.8万円）、最下位は徳島県（376.6万円）、最大と最小の差は2.2倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

@@ -19,6 +19,8 @@ import {
   TabsList,
   TabsTrigger,
 } from "@stats47/components/atoms/ui/tabs";
+import { formatUnitForDisplay } from "@stats47/data-configs/unit";
+import { metricDisplayName, type RankingValue } from "@stats47/ranking";
 import { Map as MapIcon, Table as TableIcon, BarChart3, MapPin } from "lucide-react";
 
 import { SurfaceLinkCard, getSurfaceCardClassName } from "@/components/surface";
@@ -37,7 +39,6 @@ import { ScrollableTabsList } from "./ScrollableTabsList";
 import { ThemeMetricsDashboard } from "./ThemeMetricsDashboard";
 import { useThemePrefecture } from "./ThemePrefectureContext";
 
-import type { RankingValue } from "@stats47/ranking";
 
 function chartLoading(props: { height?: number; className?: string }) {
   const ChartLoadingFallback = () => <ChartLoading {...props} />;
@@ -404,13 +405,13 @@ function IndicatorGrid({
                 className="block p-3"
               >
                 <div className="text-sm font-medium mb-2 line-clamp-2">
-                  {data.rankingItem.readerLabel ?? data.rankingItem.title}
+                  {metricDisplayName(data.rankingItem)}
                 </div>
                 {top1 && top1Name && (
                   <div className="text-xs text-muted-foreground">
                     1位: {top1Name}
                     <span className="ml-1">
-                      ({top1.value?.toLocaleString()} {data.rankingItem.unit})
+                      ({top1.value?.toLocaleString()} {formatUnitForDisplay(data.rankingItem.unit)})
                     </span>
                   </div>
                 )}

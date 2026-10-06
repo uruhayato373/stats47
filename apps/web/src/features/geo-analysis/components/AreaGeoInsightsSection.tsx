@@ -49,7 +49,7 @@ export async function AreaGeoInsightsSection({ areaCode, areaName }: Props) {
         {items.map(({ item, row, metric, manifest }) => (
           <SurfaceCard key={item.contentId}>
             <p className="text-xs text-muted-foreground">
-              保存則 {manifest.quality.conservationChecks}/47
+              合計の検算 {manifest.quality.conservationChecks}/47県
             </p>
             <h3 className="mt-1 font-bold">{metric.label}</h3>
             <p className="mt-3 text-lg font-bold tabular-nums">

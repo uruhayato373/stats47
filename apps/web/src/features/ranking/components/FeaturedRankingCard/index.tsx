@@ -1,3 +1,5 @@
+import { formatUnitForDisplay } from "@stats47/data-configs/unit";
+
 import {
   PORTAL_CARD_ASPECT_CLASS,
   PORTAL_CARD_PADDING_CLASS,
@@ -56,7 +58,7 @@ export function FeaturedRankingCard({
           <p className="mt-1 font-mono text-base font-bold leading-none tabular-nums text-primary">
             {model.top.value}
             <span className="ml-0.5 font-sans text-[10px] font-medium text-muted-foreground">
-              {unit}
+              {formatUnitForDisplay(unit)}
             </span>
           </p>
         </div>

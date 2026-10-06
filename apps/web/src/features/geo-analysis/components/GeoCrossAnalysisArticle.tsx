@@ -13,6 +13,7 @@ import {
   TableRow,
 } from '@stats47/components/atoms/ui/table';
 import { GEO_ANALYSES, GEO_LAYERS } from '@stats47/data-configs/business-plan';
+import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
 import { Breadcrumbs, PageHeader, PageShell } from '@/components/layout';
 import { SectionHeader } from '@/components/section';
@@ -22,6 +23,7 @@ import {
   formatGeoValue,
   GEO_CROSS_ANALYSIS_CONFIGS,
   type GeoCrossAnalysisSlug,
+  toGeoReaderTerms,
 } from '../lib/geo-cross-analysis';
 import { GEO_DEFAULT_PREF_CODE } from '../lib/geo-default-prefecture';
 import { loadGeoAnalysisBundle } from '../lib/load-geo-analysis-snapshot';
@@ -99,7 +101,7 @@ export async function GeoCrossAnalysisArticle({
         eyebrow={config.eyebrow}
         title={snapshot.title}
         description={snapshot.question}
-        stats={`${snapshot.rows.length}都道府県 ・ ${snapshot.dataVersion} ・ ${primaryMetric.unit}`}
+        stats={`${snapshot.rows.length}都道府県 ・ ${snapshot.dataVersion} ・ ${formatUnitForDisplay(primaryMetric.unit)}`}
         meta={`データ生成 ${generatedDate} ・ coverage ${snapshot.dataQuality.actualAreas}/${snapshot.dataQuality.expectedAreas}`}
       />
 
@@ -254,7 +256,7 @@ export async function GeoCrossAnalysisArticle({
         <ol className="mt-3 space-y-2 text-sm leading-relaxed text-muted-foreground">
           {snapshot.method.map((step, index) => (
             <li key={step}>
-              {index + 1}. {step}
+              {index + 1}. {toGeoReaderTerms(step)}
             </li>
           ))}
         </ol>
@@ -264,7 +266,7 @@ export async function GeoCrossAnalysisArticle({
           {snapshot.metrics.map((metric) => (
             <div key={metric.key}>
               <dt className="font-medium">
-                {metric.label}（{metric.unit}）
+                {metric.label}（{formatUnitForDisplay(metric.unit)}）
               </dt>
               <dd className="mt-0.5 text-muted-foreground">
                 {metric.description}

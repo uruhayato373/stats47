@@ -100,8 +100,9 @@ jobs:
 
       - name: 📝 Compose today's rewrite issue body
         id: compose
+        env:
+          NEXT: ${{ inputs.next || '10' }}
         run: |
-          NEXT="${{ inputs.next || '10' }}"
           mkdir -p /tmp/blog-remediation
           node .claude/scripts/blog/compose-daily-rewrite-issue.mjs --next "$NEXT" \
             > /tmp/blog-remediation/issue.md

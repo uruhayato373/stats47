@@ -12,6 +12,7 @@ import {
 } from '@stats47/components/atoms/ui/breadcrumb';
 import { METRICS_REGISTRY } from '@stats47/data-configs';
 import { THEME_CATALOGS } from '@stats47/data-configs/theme-catalog';
+import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import {
   getSurveyTaxonomyEntries,
   resolveThemeSurveyTaxonomy,
@@ -283,18 +284,21 @@ export async function ThemePageLayout({
 
           <div className={`mb-4 ${LEFT_RAIL_NARROW_ONLY_CLASS}`}>
             <RailStack>
-              <RailCard title="ページ内" bodyClassName="px-4 pb-3 pt-0">
-                <nav
-                  aria-label="このページの内容"
-                  className="flex items-center gap-x-5 gap-y-2 overflow-x-auto"
-                >
-                  <ThemeChapterLinks
-                    links={pageLinks}
-                    themeKey={theme.themeKey}
-                    className="shrink-0 py-2 text-sm font-medium text-foreground hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
-                  />
-                </nav>
-              </RailCard>
+              {/* 項目が 1 つの目次は役に立たず主要データを押し下げるだけなので出さない (2026-10-04 週次 UI 検査) */}
+              {pageLinks.length > 1 && (
+                <RailCard title="ページ内" bodyClassName="px-4 pb-3 pt-0">
+                  <nav
+                    aria-label="このページの内容"
+                    className="flex items-center gap-x-5 gap-y-2 overflow-x-auto"
+                  >
+                    <ThemeChapterLinks
+                      links={pageLinks}
+                      themeKey={theme.themeKey}
+                      className="shrink-0 py-2 text-sm font-medium text-foreground hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+                    />
+                  </nav>
+                </RailCard>
+              )}
 
               {(themeMetrics.length > 0 || themeSurveys.length > 0) && (
                 <RailCard title="全指標・出典調査" collapsible bodyClassName="p-0">
@@ -352,7 +356,8 @@ export async function ThemePageLayout({
 
           {/* エリアページ経由時の視点バナー */}
           {areaContext && (
-            <div className="mb-4 flex items-center gap-2 rounded-md border border-primary/30 bg-primary/5 px-4 py-2 text-sm">
+            // 狭い幅では文と導線を縦に積む (横並びだと 1〜2 文字ずつ折り返す。2026-10-04 週次 UI 検査)
+            <div className="mb-4 flex flex-col gap-1 rounded-md border border-primary/30 bg-primary/5 px-4 py-2 text-sm sm:flex-row sm:items-center sm:gap-2">
               <span className="font-medium text-primary">
                 {areaContext.areaName}の視点
               </span>
@@ -362,7 +367,7 @@ export async function ThemePageLayout({
               </span>
               <Link
                 href={`/areas/${areaContext.areaCode}`}
-                className="ml-auto text-xs text-primary hover:underline"
+                className="text-sm text-primary hover:underline sm:ml-auto sm:shrink-0 sm:text-xs"
               >
                 {areaContext.areaName}プロフィールへ →
               </Link>
@@ -390,7 +395,7 @@ export async function ThemePageLayout({
                       {highlight.title}
                     </dt>
                     <dd className="mt-0.5 font-mono text-base font-semibold tabular-nums">
-                      {highlight.value.toLocaleString('ja-JP')} {highlight.unit}
+                      {highlight.value.toLocaleString('ja-JP')} {formatUnitForDisplay(highlight.unit)}
                     </dd>
                     <dd className="text-xs text-muted-foreground">
                       {highlight.yearName}

@@ -20,3 +20,4 @@ export * from "./ranking-display-formatter";
 export * from "./source-config";
 export * from "./to-bar-chart-race-frames";
 export * from "./to-display-entry";
+export * from "./format-metric-name";

@@ -2,6 +2,8 @@ import { fetchCities } from "@stats47/area";
 
 import { RailNavRow, SectionCard } from "@/components/surface";
 
+import { stripPrefectureName } from "../utils";
+
 interface CitiesNavCardProps {
   areaCode: string;
   areaName: string;
@@ -48,7 +50,7 @@ export function CitiesNavCard({
               active={isActive}
               chevron={false}
             >
-              {city.cityName}
+              {stripPrefectureName(city.cityName, areaName)}
             </RailNavRow>
           );
         })}

@@ -14,11 +14,11 @@ export const nurseAnnualIncome: MetricConfig = {
     "cdCat01": "01",
     "tabCombination": [
       {
-        "cdTab": "08",
+        "cdTab": "08,40",
         "factor": 12
       },
       {
-        "cdTab": "12",
+        "cdTab": "12,44",
         "factor": 1
       }
     ],
@@ -46,7 +46,7 @@ export const nurseAnnualIncome: MetricConfig = {
   "calculation": {
     "isCalculated": false
   },
-  "seoTitle": "看護師の平均年収 都道府県ランキング【2022年】｜1位東京都（564.1万円）",
-  "seoDescription": "2022年の看護師の平均年収を都道府県別に比較。1位は東京都（564.1万円）、最下位は鹿児島県（396.4万円）、最大と最小の差は1.4倍です。地図やグラフで47都道府県の違いを確認できます。",
+  "seoTitle": "看護師の平均年収 都道府県ランキング【2023年】｜1位大阪府（568.1万円）",
+  "seoDescription": "2023年の看護師の平均年収を都道府県別に比較。1位は大阪府（568.1万円）、最下位は宮崎県（416.3万円）、最大と最小の差は1.4倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true
 };

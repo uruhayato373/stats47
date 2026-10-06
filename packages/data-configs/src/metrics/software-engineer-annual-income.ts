@@ -14,11 +14,11 @@ export const softwareEngineerAnnualIncome: MetricConfig = {
     "cdCat01": "01",
     "tabCombination": [
       {
-        "cdTab": "08",
+        "cdTab": "08,40",
         "factor": 12
       },
       {
-        "cdTab": "12",
+        "cdTab": "12,44",
         "factor": 1
       }
     ],
@@ -46,7 +46,7 @@ export const softwareEngineerAnnualIncome: MetricConfig = {
   "calculation": {
     "isCalculated": false
   },
-  "seoTitle": "ソフトウェア作成者の平均年収 都道府県ランキング【2022年】｜1位兵庫県（606.2万円）",
-  "seoDescription": "2022年のソフトウェア作成者の平均年収を都道府県別に比較。1位は兵庫県（606.2万円）、最下位は鳥取県（354.4万円）、最大と最小の差は1.7倍です。地図やグラフで47都道府県の違いを確認できます。",
+  "seoTitle": "ソフトウェア作成者の平均年収 都道府県ランキング【2023年】｜1位京都府（608.4万円）",
+  "seoDescription": "2023年のソフトウェア作成者の平均年収を都道府県別に比較。1位は京都府（608.4万円）、最下位は沖縄県（402.6万円）、最大と最小の差は1.5倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true
 };

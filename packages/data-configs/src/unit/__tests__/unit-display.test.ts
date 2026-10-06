@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { formatUnitForDisplay } from "../unit-display";
+import { formatUnitForDisplay, normalizePercentInText } from "../unit-display";
 
 // 2026-09-25 UI 全面点検: 全角の単位が「h a」「k g」と離れて見え、％と%・m2 と m² が混在していた
 describe("formatUnitForDisplay", () => {
@@ -25,5 +25,13 @@ describe("formatUnitForDisplay", () => {
   it("日本語の単位と空はそのまま", () => {
     expect(formatUnitForDisplay("人（人口10万対）")).toBe("人(人口10万対)");
     expect(formatUnitForDisplay(null)).toBe("");
+  });
+});
+
+describe("normalizePercentInText", () => {
+  it("数字の直後の全角％だけを半角にし、ほかの全角文字は残す", () => {
+    expect(normalizePercentInText("全体の約14.35％です（推計）")).toBe("全体の約14.35%です（推計）");
+    expect(normalizePercentInText("100 ％になる")).toBe("100%になる");
+    expect(normalizePercentInText("％の表記")).toBe("％の表記");
   });
 });

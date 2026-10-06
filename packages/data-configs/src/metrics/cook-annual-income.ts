@@ -15,8 +15,8 @@ export const cookAnnualIncome: MetricConfig = {
     "valueScale": 0.1,
     "cdCat01": "01",
     "tabCombination": [
-      { "cdTab": "08", "factor": 12 },
-      { "cdTab": "12", "factor": 1 },
+      { "cdTab": "08,40", "factor": 12 },
+      { "cdTab": "12,44", "factor": 1 },
     ],
     "cdCat02": "1391",
     "displayName": "賃金構造基本統計調査",
@@ -58,7 +58,7 @@ export const cookAnnualIncome: MetricConfig = {
       },
     ],
   },
-  "seoTitle": "飲食物調理従事者の平均年収 都道府県ランキング【2022年】｜1位東京都（415.4万円）",
-  "seoDescription": "2022年の飲食物調理従事者の平均年収を都道府県別に比較。1位は東京都（415.4万円）、最下位は秋田県（267.8万円）、最大と最小の差は1.6倍です。地図やグラフで47都道府県の違いを確認できます。",
+  "seoTitle": "飲食物調理従事者の平均年収 都道府県ランキング【2023年】｜1位東京都（423.6万円）",
+  "seoDescription": "2023年の飲食物調理従事者の平均年収を都道府県別に比較。1位は東京都（423.6万円）、最下位は長崎県（273.5万円）、最大と最小の差は1.5倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

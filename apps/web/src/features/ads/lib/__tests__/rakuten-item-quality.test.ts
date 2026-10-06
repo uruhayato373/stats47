@@ -55,7 +55,17 @@ describe("furusatoQualityReasons", () => {
     expect(furusatoQualityReasons({ ...gift, name: "【ふるさと納税】北海道 レザー財布" }, "北海道", { context: "food" })).toContain("product-kind-mismatch");
   });
   it("重複は除き、良品でだけ上限を満たす", () => {
-    const selected = selectQualityItems([gift, gift, { ...gift, url: item.url + '/2' }], i => furusatoQualityReasons(i, "北海道"));
+    const selected = selectQualityItems([gift, gift, { ...gift, url: item.url + '/2', shopName: "北海道別の町" }], i => furusatoQualityReasons(i, "北海道"));
     expect(selected).toHaveLength(2);
+  });
+  it("同じ店の商品は 1 枚に 1 件まで (店名か商品 URL の店で判定)", () => {
+    const shopUrl = (shop: string, id: string) =>
+      `https://hb.afl.rakuten.co.jp/hgc/x/?pc=${encodeURIComponent(`https://item.rakuten.co.jp/${shop}/${id}/`)}`;
+    const a1 = { ...item, url: shopUrl("ultra-taste", "ringo_01") };
+    const a2 = { ...item, url: shopUrl("ultra-taste", "ringo_02") };
+    const b1 = { ...item, url: shopUrl("other-shop", "ringo_01") };
+    expect(selectQualityItems([a1, a2, b1], () => []).map((i) => i.url)).toEqual([a1.url, b1.url]);
+    const named = [{ ...gift, url: item.url + "/1" }, { ...gift, url: item.url + "/2" }];
+    expect(selectQualityItems(named, () => [])).toHaveLength(1);
   });
 });

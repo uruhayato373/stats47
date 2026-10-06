@@ -378,6 +378,8 @@ export interface CityHighlightSource {
  * 市区町村の「特徴」(県内 CITY_TOP_BAND 位以内) を選ぶ。市区町村は databook が無いため
  * 候補は profile.json の strengths。順位の極端さ → rankingKey の順で並べ、同じ表示名は 1 件にする。
  * 市区町村の指標は極性の焼き込みが無いので tone は付けない (呼び出し側で neutral に描く)。
+ * 値が 0 の指標は除く。小さな町村では「0 施設」が同率で上位の順位を得るため、特徴に見えてしまう
+ * (2026-10-04 週次 UI 検査: 田原本町で「0人」「0施設」が 3〜5 位として並んだ)。
  */
 export function selectCityHighlights<T extends CityHighlightSource>(
   strengths: readonly T[] | null | undefined,
@@ -386,7 +388,7 @@ export function selectCityHighlights<T extends CityHighlightSource>(
   const seen = new Set<string>();
   const picked: T[] = [];
   const ordered = [...(strengths ?? [])]
-    .filter((s) => s.rank >= 1 && s.rank <= CITY_TOP_BAND)
+    .filter((s) => s.rank >= 1 && s.rank <= CITY_TOP_BAND && s.value !== 0)
     .sort((a, b) => a.rank - b.rank || a.rankingKey.localeCompare(b.rankingKey));
   for (const item of ordered) {
     if (picked.length >= options.limit) break;

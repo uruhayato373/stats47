@@ -36,9 +36,11 @@ jobs:
           node-version: "20"
 
       - name: 📰 Generate SNS weekly report
+        env:
+          INPUT_WEEK: ${{ inputs.week }}
         run: |
-          if [ -n "${{ inputs.week }}" ]; then
-            node .claude/scripts/sns/sns-weekly-report.mjs "${{ inputs.week }}"
+          if [ -n "$INPUT_WEEK" ]; then
+            node .claude/scripts/sns/sns-weekly-report.mjs "$INPUT_WEEK"
           else
             node .claude/scripts/sns/sns-weekly-report.mjs
           fi

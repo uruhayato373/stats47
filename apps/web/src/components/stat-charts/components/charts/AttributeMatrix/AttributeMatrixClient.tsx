@@ -3,6 +3,7 @@
 import React from "react";
 
 import { cn, Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@stats47/components";
+import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
 import type { AttributeMatrixData } from "../../../types/visualization";
 
@@ -17,7 +18,8 @@ interface AttributeMatrixClientProps {
 export const AttributeMatrixClient: React.FC<AttributeMatrixClientProps> = ({
   data,
 }) => {
-  const { columns, rows, unit } = data;
+  const { columns, rows } = data;
+  const unit = formatUnitForDisplay(data.unit);
 
   // Compute min/max for color intensity
   const allValues = rows.flatMap((r) => r.values).filter((v): v is number => v !== null);

@@ -15,6 +15,7 @@ import {
 } from '@stats47/components/atoms/ui/table';
 import { getMetricConfig } from '@stats47/data-configs';
 import { KNOWN_MUNICIPALITY_RANKING_KEYS } from '@stats47/data-configs/geo-scope';
+import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import {
   readMunicipalityRankingItem,
   readMunicipalityRankingValues,
@@ -220,7 +221,7 @@ export default async function MunicipalityRankingPage({
             <p className="mt-1 text-lg font-semibold tabular-nums">
               {typeof value === 'number' ? formatValue(value) : '—'}
               <span className="ml-0.5 text-xs font-normal text-muted-foreground">
-                {snapshot.unit}
+                {formatUnitForDisplay(snapshot.unit)}
               </span>
             </p>
           </div>
@@ -368,7 +369,7 @@ export default async function MunicipalityRankingPage({
                     )}
                   </TableCell>
                   <TableCell className="text-right tabular-nums">
-                    {formatValue(row.value)} {snapshot.unit}
+                    {formatValue(row.value)} {formatUnitForDisplay(snapshot.unit)}
                   </TableCell>
                 </TableRow>
               );

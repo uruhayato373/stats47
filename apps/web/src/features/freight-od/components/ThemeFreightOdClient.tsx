@@ -14,6 +14,7 @@ import {
   TableRow,
 } from '@stats47/components/atoms/ui/table';
 import { FREIGHT_OD_SOURCE } from '@stats47/data-configs/theme-catalog';
+import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
 import { ChartFooter } from '@/components/charts/ChartFooter';
 import { ChartPanel } from '@/components/charts/ChartPanel';
@@ -64,7 +65,7 @@ export function ThemeFreightOdClient({
     >
       <ChartPanel
         title="貨物の発地と着地"
-        description={`${period} · ${mode.label} · ${area} · 単位：${mode.unit}`}
+        description={`${period} · ${mode.label} · ${area} · 単位：${formatUnitForDisplay(mode.unit)}`}
         contentClassName="min-w-0 space-y-4"
         footer={
           <ChartFooter
@@ -132,7 +133,7 @@ export function ThemeFreightOdClient({
             containerClassName="min-w-0 max-w-full max-h-96"
           >
             <TableCaption>
-              {period}・{mode.label}。単位は{mode.unit}
+              {period}・{mode.label}。単位は{formatUnitForDisplay(mode.unit)}
               。輸送機関をまたいだ合計・構成比は計算しません。
             </TableCaption>
             <TableHeader>
@@ -145,7 +146,7 @@ export function ThemeFreightOdClient({
                       : '到着県'}
                 </TableHead>
                 <TableHead scope="col" className="text-right">
-                  輸送量（{mode.unit}）
+                  輸送量（{formatUnitForDisplay(mode.unit)}）
                 </TableHead>
               </TableRow>
             </TableHeader>
