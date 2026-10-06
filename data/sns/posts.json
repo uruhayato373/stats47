@@ -1,8 +1,8 @@
 {
   "_meta": {
     "description": "SNS 投稿台帳 (完全DBレス doc12 Phase E)。SQLite から移行。書込専用運用ログ。store: .claude/scripts/lib/sns-posts-store.cjs",
-    "count": 886,
-    "nextId": 1072
+    "count": 887,
+    "nextId": 1073
   },
   "posts": [
     {
@@ -20293,6 +20293,18 @@
       "content_key": "hamburger-consumption-expenditure",
       "post_url": "https://www.instagram.com/p/DeG8ypxmz-j/",
       "posted_at": "2026-10-05T10:03:23Z"
+    },
+    {
+      "id": 1072,
+      "status": "posted",
+      "created_at": "2026-10-06T21:27:39.276Z",
+      "updated_at": "2026-10-06T21:27:39.276Z",
+      "platform": "instagram",
+      "post_type": "carousel",
+      "domain": "area-carousel",
+      "content_key": "39000",
+      "post_url": "https://www.instagram.com/p/DeKPMIvIDIO/",
+      "posted_at": "2026-10-06T16:41:55Z"
     }
   ],
   "nextId": 580,
