@@ -1,4 +1,4 @@
-import { COCONALA_ASSETS_DIR } from '../packages/product-factory/src/ledger-paths.mjs';
+import { COCONALA_ASSETS_DIR } from './paths.mjs';
 
 /** 公開プロフィールの文面。経歴は apps/web/src/config/operator-profile.ts、商品条件は各商品契約に基づく。 */
 export const COCONALA_PROFILE = {

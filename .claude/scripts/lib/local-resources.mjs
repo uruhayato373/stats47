@@ -3,6 +3,7 @@ import os from 'node:os';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+import { LOCAL_RESOURCES } from '../../../config/paths.mjs';
 
 const ROOT = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -10,7 +11,7 @@ const ROOT = path.resolve(
 );
 const CONFIG = JSON.parse(
   fs.readFileSync(
-    path.join(ROOT, '.claude/config/local-resources.json'),
+    path.join(ROOT, LOCAL_RESOURCES),
     'utf8'
   )
 );

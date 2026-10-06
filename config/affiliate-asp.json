@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "_note": "3 ASP (A8 / もしも / afb) の**提携運用**レイヤの接続設定。値は doboku-note 側で 2026-07-27 に実機確定したものを移植し、stats47 を対象サイトへ反転させたもの。A8 の**成果取込**は別ファイル `.claude/config/a8-report-automation.json` が担当し、こちらとは役割が違う。運用 SSOT → .claude/rules/affiliate-ads-standards.md",
+  "_note": "3 ASP (A8 / もしも / afb) の**提携運用**レイヤの接続設定。値は doboku-note 側で 2026-07-27 に実機確定したものを移植し、stats47 を対象サイトへ反転させたもの。A8 の**成果取込**は別ファイル `config/a8-report-automation.json` が担当し、こちらとは役割が違う。運用 SSOT → .claude/rules/affiliate-ads-standards.md",
   "_siteAttributionNote": "**3 ASP すべてで stats47 (統計で見る都道府県) と doboku-note が同一口座に同居している**。切り替えずに読むと他サイトのデータを自分のものと誤認する。doboku-note 側では afb の走査で SID 不一致を警告して続行し、別サイトの一覧を「建設系 0 件」と誤報告した事故が起きた。判定は .claude/scripts/ads/lib/asp-site-guard.mjs に集約し、不一致は例外で落とす (警告して続行できないようにする)。",
   "targetSiteName": "stats47",
   "targetSiteLabel": "統計で見る都道府県",

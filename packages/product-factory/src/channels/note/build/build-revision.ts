@@ -7,7 +7,7 @@ import { CANONICAL_ARTICLES } from '../article-plan';
 import type { NoteArticlePlan } from '../types';
 import { scanText } from '../validators/claims';
 import { readFreeSampleDelivery } from '../../../build/free-sample-delivery';
-import { COCONALA_LISTINGS } from '../../../ledger-paths.mjs';
+import { COCONALA_LISTINGS } from '../../../../../../config/paths.mjs';
 import { SITE } from '@stats47/data-configs';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../../../../../..');

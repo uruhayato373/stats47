@@ -2,6 +2,7 @@ const test = require("node:test");
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
+const { DOMAINS } = require("../../../../config/paths.mjs");
 
 const { checkDomains, checkOwners, checkDocuments, documentDomain, frontmatterDomain } = require("../check-domains.cjs");
 
@@ -11,7 +12,7 @@ const kinds = { navKinds: { actions: "要対応", results: "成果" } };
 const domain = (over = {}) => ({ id: "plan", label: "計画", role: "決める", nav: [{ label: "今週", href: "/todo?f=weekly", kind: "actions" }], ...over });
 
 test("正本の domains.json は error 0 で、全領域とメニュー項目を検査する", () => {
-  const cfg = JSON.parse(fs.readFileSync(path.join(ROOT, ".claude/config/domains.json"), "utf8"));
+  const cfg = JSON.parse(fs.readFileSync(path.join(ROOT, DOMAINS), "utf8"));
   const result = checkDomains(cfg, {
     pageExists: (href) => {
       const route = href.split("?")[0];

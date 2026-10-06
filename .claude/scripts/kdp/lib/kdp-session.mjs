@@ -26,7 +26,7 @@ import { join, dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { mergeKdpOperationalState } from "./kdp-status.mjs";
 import { advancePublicationStage } from "./kdp-publication-stage.mjs";
-import { KDP_ACCOUNT, KDP_LISTINGS } from "../../../../packages/product-factory/src/ledger-paths.mjs";
+import { KDP_ACCOUNT, KDP_LISTINGS } from "../../../../config/paths.mjs";
 
 // このファイル: .claude/scripts/kdp/lib/kdp-session.mjs → repo root は 4 つ上。
 export const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "..", "..");

@@ -1,7 +1,7 @@
 /**
  * PageSpeed Insights API 取得スクリプト
  *
- * .claude/config/psi-urls.txt を読み、mobile + desktop 両方で PSI を計測し、
+ * config/psi-urls.txt を読み、mobile + desktop 両方で PSI を計測し、
  * .claude/state/metrics/psi/psi-batch-<ISO>.json に結果を保存する。
  *
  * 認証:
@@ -17,9 +17,10 @@
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import { PSI_URLS } from "../../../config/paths.mjs";
 
 const PROJECT_ROOT = resolve(fileURLToPath(import.meta.url), "..", "..", "..", "..");
-const DEFAULT_URL_FILE = join(PROJECT_ROOT, ".claude/config/psi-urls.txt");
+const DEFAULT_URL_FILE = join(PROJECT_ROOT, PSI_URLS);
 const OUTPUT_DIR = join(PROJECT_ROOT, ".claude/state/metrics/psi");
 const CATEGORIES = ["performance", "accessibility", "best-practices", "seo"];
 const DEFAULT_STRATEGIES = ["mobile", "desktop"];

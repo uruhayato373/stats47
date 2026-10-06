@@ -2,7 +2,7 @@ import "server-only";
 
 import fs from "node:fs";
 
-import { COCONALA_LISTINGS, KDP_LISTINGS } from "../../../../packages/product-factory/src/ledger-paths.mjs";
+import { COCONALA_LISTINGS, KDP_LISTINGS } from "../../../../config/paths.mjs";
 
 import {
   cached,

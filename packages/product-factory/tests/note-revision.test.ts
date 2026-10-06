@@ -8,7 +8,7 @@ import { CANONICAL_ARTICLES } from '../src/channels/note/article-plan';
 import { buildNoteRevision, validateNoteRevision } from '../src/channels/note/build/build-revision';
 import { buildNoteArticle } from '../src/channels/note/build/build-note';
 import { promoteAllNoteArticles, promoteNoteArticle } from '../src/channels/note/build/promote-note';
-import { COCONALA_LISTINGS } from '../src/ledger-paths.mjs';
+import { COCONALA_LISTINGS } from '../../../config/paths.mjs';
 
 const sha = (value: Buffer | string) => createHash('sha256').update(value).digest('hex');
 async function fixture() {

@@ -3,7 +3,7 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { validateSalesLedger } from "../../sales/ledger";
 import { buildKdpWeeklyDecision, type KdpWeeklyListing } from "./kdp-weekly-publication";
-import { KDP_LISTINGS } from "../../ledger-paths.mjs";
+import { KDP_LISTINGS } from "../../../../../config/paths.mjs";
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../../..");
 const LISTINGS_PATH = resolve(REPO_ROOT, KDP_LISTINGS);

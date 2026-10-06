@@ -4,7 +4,7 @@ import { readFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { COCONALA_PROFILE as profile } from '../../../../config/coconala-profile';
 import { GEO_SERVICE_OFFER } from '../../../../packages/product-factory/src/channels/geo/service-offer';
-import { COCONALA_ACCOUNT } from '../../../../packages/product-factory/src/ledger-paths.mjs';
+import { COCONALA_ACCOUNT } from '../../../../config/paths.mjs';
 
 const root = resolve(import.meta.dirname, '../../../..');
 

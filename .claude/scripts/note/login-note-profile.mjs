@@ -14,7 +14,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { mkdirSync, writeFileSync } from "node:fs";
 import { currentUrlname } from './lib/note-session.mjs';
-import { NOTE_ACCOUNT } from '../../../packages/product-factory/src/ledger-paths.mjs';
+import { NOTE_ACCOUNT } from '../../../config/paths.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 const PROFILE = join(ROOT, ".local/playwright-note-profile");

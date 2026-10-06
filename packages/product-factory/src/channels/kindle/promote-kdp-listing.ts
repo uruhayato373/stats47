@@ -12,7 +12,7 @@
 import { existsSync, readFileSync, renameSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { KDP_LISTINGS } from "../../ledger-paths.mjs";
+import { KDP_LISTINGS } from "../../../../../config/paths.mjs";
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../../..");
 const LEDGER_PATH = join(REPO_ROOT, KDP_LISTINGS);

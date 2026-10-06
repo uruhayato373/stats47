@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * 領域の正本 `.claude/config/domains.json` の整合検査 (DOMAIN-CONFIG-01)。
+ * 領域の正本 `config/domains.json` の整合検査 (DOMAIN-CONFIG-01)。
  *
  *   node .claude/scripts/lib/check-domains.cjs     # npm run check-domains
  *
@@ -13,6 +13,7 @@
  */
 const fs = require("node:fs");
 const path = require("node:path");
+const { DOMAINS } = require("../../../config/paths.mjs");
 
 const ROLES = ["決める", "売る", "集める", "つくる", "支える"];
 const CHANNEL_GROUPS = ["product", "sns"];
@@ -163,7 +164,7 @@ function collectOwners(root) {
 
 function main() {
   const root = path.resolve(__dirname, "../../..");
-  const cfg = JSON.parse(fs.readFileSync(path.join(root, ".claude/config/domains.json"), "utf8"));
+  const cfg = JSON.parse(fs.readFileSync(path.join(root, DOMAINS), "utf8"));
   const appDir = path.join(root, "apps/admin/app");
   const result = checkDomains(cfg, {
     pageExists: (href) => {

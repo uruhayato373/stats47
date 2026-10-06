@@ -30,7 +30,7 @@ import { chromium } from 'playwright';
 import { readFileSync, existsSync, writeFileSync, mkdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { COCONALA_ACCOUNT, COCONALA_LISTINGS, COCONALA_ASSETS_DIR } from '../../../../packages/product-factory/src/ledger-paths.mjs';
+import { COCONALA_ACCOUNT, COCONALA_LISTINGS, COCONALA_ASSETS_DIR } from '../../../../config/paths.mjs';
 
 // このファイル: .claude/scripts/coconala/lib/coconala-session.mjs → repo root は 4 つ上。
 export const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..', '..', '..');

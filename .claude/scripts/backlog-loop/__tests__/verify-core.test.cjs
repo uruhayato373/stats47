@@ -255,7 +255,7 @@ test('★ループが自分の権限・予算を広げるパスは弾く (workfl
   for (const v of r.violations) assert.match(v.reason, /禁止パス/);
 
   const allowed = verifyChangedPaths([
-    '.claude/config/psi-urls.txt', // routing policy 以外の config は通す
+    '.claude/config/quality-gates.json', // routing policy 以外の config は通す
     '.claude/skills/management/process-backlog/SKILL.md',
     '.agents/skills/management/process-backlog/SKILL.md',
     '.claude/agents/backlog-processor.md',

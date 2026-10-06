@@ -5,7 +5,7 @@ import { readBookshelfState } from '../kdp/lib/kdp-flow.mjs';
 import { assertAccount as assertCoconala } from '../coconala/lib/coconala-session.mjs';
 import { collectKdpReport, openKdpReports } from './kdp-reports.mjs';
 import { collectKdpMonthlyReport } from './kdp-monthly-reports.mjs';
-import { COCONALA_LISTINGS, KDP_LISTINGS } from '../../../packages/product-factory/src/ledger-paths.mjs';
+import { COCONALA_LISTINGS, KDP_LISTINGS } from '../../../config/paths.mjs';
 
 const source = process.argv[2];
 const output = process.argv[3];

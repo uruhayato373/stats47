@@ -4,7 +4,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 import { summarizeSalesLedger, validateSalesLedger } from "./ledger";
-import { COCONALA_LISTINGS, KDP_LISTINGS } from "../ledger-paths.mjs";
+import { COCONALA_LISTINGS, KDP_LISTINGS } from "../../../../config/paths.mjs";
 
 import type { SalesChannel, SalesLedger, SalesObservation } from "./types";
 

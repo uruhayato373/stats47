@@ -3,7 +3,7 @@ import { createHash } from "node:crypto";
 import { mkdtempSync, mkdirSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { KDP_LISTINGS } from "../src/ledger-paths.mjs";
+import { KDP_LISTINGS } from "../../../config/paths.mjs";
 import { buildSalesCatalog, CURRENT_SALES_REVISIONS, csvCell, escapeHtml, localPath, renderSalesCsv, renderSalesHtml, verifyManifest } from "../src/build/sales-catalog";
 
 const roots: string[] = [];

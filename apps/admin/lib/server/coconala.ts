@@ -1,7 +1,7 @@
 import "server-only";
 
 import { ALL_PRODUCTS } from "../../../../packages/product-factory/src/catalog/products";
-import { COCONALA_LISTINGS } from "../../../../packages/product-factory/src/ledger-paths.mjs";
+import { COCONALA_LISTINGS } from "../../../../config/paths.mjs";
 import { readProductSales } from "./revenue";
 import { cached, fileExists, hasError, readJson, TTL, wrap, type Wrapped } from "./state-io";
 

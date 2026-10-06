@@ -13,7 +13,7 @@ import path from "node:path";
 import { ALL_PRODUCTS } from "../../../packages/product-factory/src/catalog/products";
 import { GEO_SERVICE_OFFER } from "../../../packages/product-factory/src/channels/geo/service-offer";
 import { KINDLE_BOOKS } from "../../../packages/product-factory/src/channels/kindle/book-catalog";
-import { COCONALA_LISTINGS, KDP_LISTINGS } from "../../../packages/product-factory/src/ledger-paths.mjs";
+import { COCONALA_LISTINGS, KDP_LISTINGS } from "../../../config/paths.mjs";
 
 import type { StorefrontProduct } from "../src/features/products/types";
 import { selectLiveKindleEdition, type KindleStorefrontListing } from "./lib/kindle-storefront";

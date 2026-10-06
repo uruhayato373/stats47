@@ -3,7 +3,7 @@ import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
 import { inspectPack, sha256 } from './lib/pack-evidence.mjs';
-import { COCONALA_LISTINGS } from '../../../packages/product-factory/src/ledger-paths.mjs';
+import { COCONALA_LISTINGS } from '../../../config/paths.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
 const require = createRequire(resolve(root, 'package.json'));

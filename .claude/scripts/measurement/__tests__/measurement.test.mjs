@@ -11,6 +11,7 @@ import { encrypt, decrypt, BUCKET } from '../vault.mjs';
 import { consumerPath, validateAttempt } from '../consumer-paths.mjs';
 import { measurementHealth } from '../health.mjs';
 import { parseCoconalaAnalytics, validateCoconalaCoverage } from '../report-parsers.mjs';
+import { AFFILIATE_ASP } from '../../../../config/paths.mjs';
 import ExcelJS from 'exceljs';
 import { kdpAsinMap, parseKdpReport, openKdpReports } from '../kdp-reports.mjs';
 import { openCoverageReason } from '../../gsc/export-coverage-playwright.mjs';
@@ -167,7 +168,7 @@ test('KDP rejects malformed, wrong-day, unmapped, duplicate and foreign observat
 });
 
 test('moshimo human login opens the same home as the collector', () => {
-  const config = JSON.parse(readFileSync(resolve('.claude/config/affiliate-asp.json'), 'utf8')).asps.moshimo;
+  const config = JSON.parse(readFileSync(resolve(AFFILIATE_ASP), 'utf8')).asps.moshimo;
   const bootstrap = readFileSync(resolve('.claude/scripts/measurement/bootstrap-session.mjs'), 'utf8');
   assert.ok(bootstrap.includes(`moshimo: '${config.baseUrl}${config.homePath}'`));
 });

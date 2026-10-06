@@ -14,7 +14,7 @@
  *     asp-browser-base.mjs が Mac/Windows 両対応の `profileRoot()` を既に提供しているため、
  *     それをそのまま使う。
  *
- * config の `browser` ブロックのキー名は `.claude/config/affiliate-asp.json`（scout-asp が使う
+ * config の `browser` ブロックのキー名は `config/affiliate-asp.json`（scout-asp が使う
  * ASP 共通設定）の a8 ブロックと揃えてあり、実際に **同じ profileDir/stateFile を指す**（A8 の
  * ログインセッションを scout-asp と共有するため。別パスにすると Chrome プロファイルが分裂し
  * 二重ログインが必要になる）。
@@ -30,6 +30,7 @@
 import { readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { unattended } from '../../measurement/browser-session.mjs';
+import { A8_REPORT_AUTOMATION } from "../../../../config/paths.mjs";
 
 import {
   launchContext,
@@ -63,7 +64,7 @@ export {
   startStatusTicker,
 };
 
-export const A8_CONFIG_PATH = join(repoRoot(), ".claude/config/a8-report-automation.json");
+export const A8_CONFIG_PATH = join(repoRoot(), A8_REPORT_AUTOMATION);
 
 export function loadA8Config() {
   const cfg = JSON.parse(readFileSync(A8_CONFIG_PATH, "utf-8"));

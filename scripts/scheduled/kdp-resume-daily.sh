@@ -31,7 +31,7 @@ LOG="$LOG_DIR/resume-$(date +%Y%m%d-%H%M).log"
 # 全冊 listed なら何もしない (ジョブの役目が終わっている)
 REMAIN=$(node --input-type=module -e "
 import { readFileSync } from 'node:fs';
-import { KDP_LISTINGS } from './packages/product-factory/src/ledger-paths.mjs';
+import { KDP_LISTINGS } from './config/paths.mjs';
 const listings = JSON.parse(readFileSync(KDP_LISTINGS, 'utf8')).listings;
 console.log(Object.values(listings).filter((v) => v.status !== 'listed').length);" 2>/dev/null || echo "?")
 if [ "$REMAIN" = "0" ]; then
