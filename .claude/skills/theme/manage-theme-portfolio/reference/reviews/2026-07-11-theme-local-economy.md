@@ -1,7 +1,7 @@
 ---
 type: theme-catalog-review
 date: 2026-07-11
-status: blocked-by-core-metric-audit
+status: superseded
 theme: local-economy
 tags: [theme-catalog, regional-economy, prefectural-accounts, industry]
 ---
@@ -162,3 +162,5 @@ npm run test:run --workspace apps/web
 ## 採用決定
 
 **県内総生産等のコア指標が確保されるまで実装をブロックする。現行の雇用・賃金・財政指標による代用は解消する。**
+
+**2026-10-06 追記: 2026-10-06 版に置き換え。** 章の導入と 2026-09-09 の章追加を前提にした提案は `2026-10-06-theme-local-economy.md`。本書の主問と「GDP がコアに無い」という指摘はそちらへ引き継いだ。
