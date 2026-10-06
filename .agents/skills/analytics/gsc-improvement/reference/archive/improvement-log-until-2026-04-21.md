@@ -1,1 +1,0 @@
-../../../../../../.claude/skills/analytics/gsc-improvement/reference/archive/improvement-log-until-2026-04-21.md

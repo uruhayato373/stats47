@@ -5,7 +5,7 @@ description: >
   NSM（週間エンゲージドセッション数）改善の実験ライフサイクルを管理する。
   propose（候補提案）→ start（実行開始）→ measure（前後比較）→ close（学び記録）の
   PDCA ループを回す。セッション間で継続作業を持越す場合は pending/resume で復帰可能。
-  .claude/state/experiments.json を状態保存先に使い、playbook + rubric で意思決定を支援する。
+  data/business/experiments.json を状態保存先に使い、playbook + rubric で意思決定を支援する。
   Use when user asks to [NSM 実験, 仮説検証, /nsm-experiment, 実験提案, 効果測定,
   PDCA サイクル, 作業継続, 残作業確認, pending 作業, GSC インデックスリクエスト].
 primary_agent: strategy-advisor
@@ -105,7 +105,7 @@ abandoned  abandoned  running (re-measure)
 5. 各候補を rubric で採点（インパクト 40% / 工数 30% / 学習価値 20% / 確実性 10%）
 6. 加重合計降順で上位 3-5 件を表示
 7. ユーザーに「どれを experiments.json に追加するか」尋ねる
-8. 採用する候補を Write/Edit で `.claude/state/experiments.json` に追加。id は `EXP-NNN` 形式で連番（`experiments-state.mjs` の `addExperiment` を使うか、JSON を直接編集）
+8. 採用する候補を Write/Edit で `data/business/experiments.json` に追加。id は `EXP-NNN` 形式で連番（`experiments-state.mjs` の `addExperiment` を使うか、JSON を直接編集）
 
 **出力例**:
 ```
@@ -127,7 +127,7 @@ abandoned  abandoned  running (re-measure)
 1. `getExperiment(id)` で取得、存在確認
 2. status が `proposed` であることを確認
 3. **baseline を確定**: この時点のメトリクスを取得して experiment.baseline に保存（`metrics-reader.mjs --json` の出力の該当部分）
-4. `transitionStatus(id, 'running')` で遷移（= `.claude/state/experiments.json` を更新）
+4. `transitionStatus(id, 'running')` で遷移（= `data/business/experiments.json` を更新）
 5. 実行アクションリスト（experiment.actions）を表示
 6. ユーザーに「実際の編集作業」を促す
 

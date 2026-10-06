@@ -1,6 +1,6 @@
 ---
 name: GSC Coverage Drilldown 継続記録（Phase 8 自動化）
-description: URL Inspection API (1,500 URL/day) で coverageState を毎日取得・集計し .claude/state/metrics/gsc/coverage-drilldown/ に継続保存。Phase 7 (手動 zip export) は完全代替・廃止。
+description: URL Inspection API (1,500 URL/day) で coverageState を毎日取得・集計し data/gsc/coverage-drilldown/ に継続保存。Phase 7 (手動 zip export) は完全代替・廃止。
 type: project
 originSessionId: c8f7304c-235d-4e27-ad61-b3075b33f5a5
 ---
@@ -21,13 +21,13 @@ originSessionId: c8f7304c-235d-4e27-ad61-b3075b33f5a5
 
 | 用途 | パス |
 |---|---|
-| URL 単位生データ | `.claude/state/metrics/gsc/url-inspection/YYYY-MM-DD.csv` |
-| URL Inspection LATEST | `.claude/state/metrics/gsc/url-inspection/LATEST.md` |
-| URL Inspection history | `.claude/state/metrics/gsc/url-inspection/history.csv` |
-| Drilldown カテゴリ別 URL | `.claude/state/metrics/gsc/coverage-drilldown/YYYY-Www/{category}-urls.csv` |
-| Drilldown 週次サマリ | `.claude/state/metrics/gsc/coverage-drilldown/YYYY-Www/summary.json` |
-| Drilldown LATEST | `.claude/state/metrics/gsc/coverage-drilldown/LATEST.md` |
-| Drilldown 時系列 | `.claude/state/metrics/gsc/coverage-drilldown/history.csv` |
+| URL 単位生データ | `data/gsc/url-inspection/YYYY-MM-DD.csv` |
+| URL Inspection LATEST | `data/gsc/url-inspection/LATEST.md` |
+| URL Inspection history | `data/gsc/url-inspection/history.csv` |
+| Drilldown カテゴリ別 URL | `data/gsc/coverage-drilldown/YYYY-Www/{category}-urls.csv` |
+| Drilldown 週次サマリ | `data/gsc/coverage-drilldown/YYYY-Www/summary.json` |
+| Drilldown LATEST | `data/gsc/coverage-drilldown/LATEST.md` |
+| Drilldown 時系列 | `data/gsc/coverage-drilldown/history.csv` |
 
 ## カテゴリ ID（内部）↔ coverageState（GSC API 日本語）
 
@@ -73,4 +73,4 @@ originSessionId: c8f7304c-235d-4e27-ad61-b3075b33f5a5
 
 - 削除済み: `.claude/scripts/gsc/parse-coverage-drilldown.cjs`
 - 残置: `gcsエラー/` は `.gitignore` 済み（誤って配置されても git noise を出さない）
-- 残置: `.claude/state/metrics/gsc/coverage-drilldown/2026-W17/` （Phase 7 で救済した baseline、Phase 8 が同じ場所に上書き）
+- 残置: `data/gsc/coverage-drilldown/2026-W17/` （Phase 7 で救済した baseline、Phase 8 が同じ場所に上書き）

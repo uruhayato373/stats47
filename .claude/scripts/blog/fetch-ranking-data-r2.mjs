@@ -60,7 +60,7 @@ if (!SLUG) {
   process.exit(1);
 }
 
-const articleDir = path.join(PROJECT_ROOT, BASE, SLUG);
+const articleDir = path.resolve(PROJECT_ROOT, BASE, SLUG);
 const articlePath = fs.existsSync(path.join(articleDir, "article.md"))
   ? path.join(articleDir, "article.md")
   : path.join(articleDir, "article.mdx");

@@ -60,7 +60,7 @@ import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..", "..", "..");
 const R2_PUBLIC = process.env.R2_PUBLIC_FETCH_URL ?? R2_PUBLIC_BASE_URL;
-const GSC_SNAP_DIR = join(ROOT, ".claude/skills/analytics/gsc-improvement/reference/snapshots");
+const GSC_SNAP_DIR = join(ROOT, "data/gsc/snapshots");
 const STATE_DIR = join(ROOT, ".claude/state/ai-content");
 const QUEUE_JSON = join(STATE_DIR, "remediation-queue.json");
 const LATEST_MD = join(STATE_DIR, "LATEST.md");

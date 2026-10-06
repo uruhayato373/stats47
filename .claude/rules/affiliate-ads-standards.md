@@ -120,8 +120,8 @@ active広告の新規登録は、参照先profileが存在し、未分類/blocke
 
 | ASP | 真実源 | 更新手段 |
 |---|---|---|
-| もしも / afb | `.claude/state/ads/affiliate-catalog.json` | `affiliate-status.mjs --write` (実機照合) |
-| A8 | `.claude/state/ads/a8-catalog.json` | `a8-browser.ts check-approval` / `import-partnered` |
+| もしも / afb | `data/affiliate/affiliate-catalog.json` | `affiliate-status.mjs --write` (実機照合) |
+| A8 | `data/affiliate/a8-catalog.json` | `a8-browser.ts check-approval` / `import-partnered` |
 
 以前は本表の「提携」列 (✅ / 一部✅ / 要提携) を真実源としていたが、実機照合で更新される
 state と二重 SSOT になり、**表側が実態から乖離した** (2026-08-04 の照合で承認 37 件が判明した
@@ -450,7 +450,7 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
     同じ予約名の `file_download` は自前パラメータごと正常に届いている)。
   - **過去に報告された「CTR 0.079%」等は affiliate の click を AdSense の impression で割った無意味な値**。
     採用してはならない (`evidence-based-judgment.md`)。
-  - **✅ 確認済 (2026-08-02 実測)**: snapshot `.claude/state/ads/ga4-affiliate-2026-08-02.json` で
+  - **✅ 確認済 (2026-08-02 実測)**: snapshot `data/affiliate/ga4-affiliate-2026-08-02.json` で
     `affiliate_impression` **3,400 imp / clicks 5 / CTR 0.147%**、`unsetVerticalRatio: 0`、
     `hasVerticalBreakdown: true`、dimension は `ad_id` / `affiliate_vertical` / `link_position` の
     3 種が引けた。**canonical 10 vertical すべてに実データがある**。
@@ -520,7 +520,7 @@ text 2 しか出ないため**全登録は無意味** (`select-for-register.mjs`
 | afb 承認済み案件の広告原稿取得 | `.claude/scripts/ads/afb-harvest.mjs --id <PID[,PID]>` |
 | もしも未提携案件の走査 | `.claude/scripts/ads/moshimo-scan.mjs` (stats47 で新規作成・移植元に無い) |
 | 走査の vertical 抽出語 (afb / もしも共通) | `.claude/scripts/ads/lib/asp-vertical-keywords.mjs` |
-| 3 ASP 横断の提携台帳 | `.claude/state/ads/affiliate-catalog.json` |
+| 3 ASP 横断の提携台帳 | `data/affiliate/affiliate-catalog.json` |
 
 **`a8-catalog.json` とはマージしない。** あちらは A8 scout の状態機械、こちらは ASP 横断の運用判断。
 広告そのものの SSOT は `apps/web/scripts/affiliate-ads-data.ts` (git TS) で、いずれも配信データではない。
@@ -767,11 +767,11 @@ metric config (git TS SSOT) の title から機械導出する — 家計調査�
 - 自動 scout: skill `.claude/skills/ads/scout-asp/SKILL.md` / agent `.claude/agents/asp-scout.md` /
   コア `.claude/scripts/ads/lib/{a8-scout-core,a8-code-core,a8-append-core}.mjs` (+ `__tests__/`) /
   ブラウザ `.claude/skills/ads/scout-asp/scripts/{a8-browser.ts,login.mjs}` /
-  カタログ `.claude/state/ads/a8-catalog.json` / curated `.claude/scripts/ads/data/a8-curated.json` /
+  カタログ `data/affiliate/a8-catalog.json` / curated `.claude/scripts/ads/data/a8-curated.json` /
   cron `scripts/scheduled/scout-asp-weekly.sh` + `com.stats47.scout-asp-weekly.plist` /
   追記ゲート `.claude/scripts/ads/append-affiliate-ads.ts` / 申請上限 `.claude/scripts/ads/check-a8-apply-budget.cjs`
 - 3 ASP 提携運用 (§11): skill `.claude/skills/ads/affiliate-operate/SKILL.md` / agent `.claude/agents/affiliate-operator.md` /
-  設定 `config/affiliate-asp.json` / 台帳 `.claude/state/ads/affiliate-catalog.json` /
+  設定 `config/affiliate-asp.json` / 台帳 `data/affiliate/affiliate-catalog.json` /
   コア `.claude/scripts/ads/lib/{asp-browser-base,asp-browser,asp-site-guard}.mjs` (+ `__tests__/`) /
   実行 `.claude/scripts/ads/{affiliate-status,affiliate-apply,afb-scan}.mjs` /
   移植元 doboku-note `scripts/{lib/asp-*.mjs,affiliate-status.mjs,affiliate-apply.mjs,afb-scan.mjs}` (2026-07-28 移植)
@@ -786,7 +786,7 @@ metric config (git TS SSOT) の title から機械導出する — 家計調査�
   → `.claude/state/ads/placement-map-latest.json` (週次 `affiliate-dashboard-refresh.yml`)
 - 楽天動的 (§12): `apps/web/src/features/ads/lib/rakuten-api.ts` /
   `constants/{furusato-nozei,product-keywords}.ts` / `components/{FurusatoNozeiCard,RakutenItemsCard}.tsx`
-- 機械状態: `.claude/state/ads/{affiliate-operations-latest,inventory-latest,compliance-latest,experiments}.json`
+- 機械状態: `.claude/state/ads/{affiliate-operations-latest,inventory-latest,compliance-latest}.json` / 実験台帳 `data/affiliate/experiments.json`
   (生成: `build-affiliate-operations-state.ts` + 週次 CI。**在庫数・gap は state から読む — 文書に固定しない**)
 - GA4 計測: `.claude/scripts/ads/fetch-affiliate-ga4.cjs` / `apps/web/src/lib/analytics/events.ts`
 - agent: `.claude/agents/affiliate-manager.md` / `.claude/agents/affiliate-operator.md` (§11)

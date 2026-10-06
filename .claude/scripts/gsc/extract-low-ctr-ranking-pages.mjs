@@ -9,7 +9,7 @@
  *   node .claude/scripts/gsc/extract-low-ctr-ranking-pages.mjs [--input <path>] [--format markdown|json] [--max N] [--filter-key <key>]
  *
  * Defaults:
- *   --input       最新 snapshot (.claude/skills/analytics/gsc-improvement/reference/snapshots/<YYYY-Www>/pages.csv)
+ *   --input       最新 snapshot (data/gsc/snapshots/<YYYY-Www>/pages.csv)
  *   --format      markdown
  *   --max         10
  *   --filter-key  なし (指定時はその ranking_key のみ抽出、効果検証用)
@@ -52,7 +52,7 @@ const CTR_THRESHOLD_RATIO = 0.8;
 
 const SNAPSHOTS_DIR = path.join(
   PROJECT_ROOT,
-  ".claude/skills/analytics/gsc-improvement/reference/snapshots",
+  "data/gsc/snapshots",
 );
 
 function resolveInput() {

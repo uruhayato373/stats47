@@ -199,7 +199,7 @@ if [ "$NO_PUSH" = 1 ]; then
   exit 0
 fi
 
-git add -- data/ai-content-staging .claude/state/ai-content .claude/state/metrics/ai-content
+git add -- data/ai-content-staging .claude/state/ai-content data/ai-content
 if git diff --cached --quiet; then
   log "commit 対象なし"
   exit 0

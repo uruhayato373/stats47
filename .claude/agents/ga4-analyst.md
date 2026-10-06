@@ -43,15 +43,15 @@ Google Analytics 4 の専任 agent。 fetch (週次 snapshot)、 改善施策計
 
 ## 触る state / files
 
-- `.claude/state/metrics/ga4/` — GA4 週次 history (CRUD)
-- `.claude/skills/analytics/ga4-improvement/reference/snapshots/` — 週次 snapshot CSV (CRUD)
-- `.claude/skills/analytics/ga4-improvement/reference/improvement-log.md` — agent 用詳細層 (CRUD)
+- `data/ga4/` — GA4 週次 history (CRUD)
+- `data/ga4/snapshots/` — 週次 snapshot CSV (CRUD)
+- `data/improvement/ga4-improvement/improvement-log.md` — agent 用詳細層 (CRUD)
 - `.claude/todo/improvements.md` — read only (improvement-triage 経由)
 
 ## File Boundary (並行衝突回避)
 
 - `.claude/todo/improvements.md` への write 一切なし (improvement-triage 経由)
-- `.claude/state/metrics/ga4/` への write は本 agent が排他
+- `data/ga4/` への write は本 agent が排他
 - 並行起動可能 agent: gsc-analyst / performance-auditor (state は別)、 improvement-triage (本 agent の state を read)
 - 並行起動 NG: 同期間 fetch-ga4-data の ga4-analyst 2 体同時
 

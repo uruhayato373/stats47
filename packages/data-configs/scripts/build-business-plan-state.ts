@@ -32,11 +32,11 @@ function newestMtime(rel: string): string | null {
 }
 
 const sourceFreshness: Record<string, string | null> = {
-  ga4: newestMtime('.claude/state/metrics/ga4'),
-  x: newestMtime('.claude/state/metrics/sns'),
-  note: newestMtime('.claude/state/metrics/note'),
-  affiliate: newestMtime('.claude/state/metrics/affiliate'),
-  products: newestMtime('.claude/state/products'),
+  ga4: newestMtime('data/ga4'),
+  x: newestMtime('data/sns'),
+  note: newestMtime('data/note'),
+  affiliate: newestMtime('data/affiliate'),
+  products: newestMtime('data/products'),
   ci: newestMtime('.claude/state/ci'),
 };
 

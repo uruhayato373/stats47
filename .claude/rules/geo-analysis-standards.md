@@ -188,7 +188,7 @@ Xは必ず該当stageを示す`/geo/<slug>/<NN>/<stage>`へ着地させる。ペ
 - 最終集計: `app/geo/<slug>/item.json`
 - lineage: `app/geo/<slug>/manifest.json`
 - 県別途中artifact: `app/geo/<slug>/pref/<NN>.json`
-- 投稿台帳: `.claude/state/sns/posts.json`（store/agent経由のみ）
+- 投稿台帳: `data/sns/posts.json`（store/agent経由のみ）
 
 manifestは入力key・版・SHA・bytes、stage、出力SHA・件数、coverage、保存則結果を持つ。
 手編集JSON、永続D1、管理画面独自stateをSSOTにしない。

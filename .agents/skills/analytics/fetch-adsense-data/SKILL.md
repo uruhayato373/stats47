@@ -171,7 +171,7 @@ main().catch(e => { console.error(e); process.exit(1); });
 
 ## snapshot モード
 
-週次レビュー時に全ディメンションを全件取得し、`.claude/skills/analytics/adsense-improvement/reference/snapshots/<YYYY-Www>/` 配下に CSV として保存する。
+週次レビュー時に全ディメンションを全件取得し、`data/adsense/snapshots/<YYYY-Www>/` 配下に CSV として保存する。
 
 ### 呼び出し例
 
@@ -201,7 +201,7 @@ npm run fetch-adsense-snapshot -- <YYYY-Www> --dry-run   # API を呼ばず期�
 
 ### 保存後の挙動
 
-- 保存先ディレクトリ: `.claude/skills/analytics/adsense-improvement/reference/snapshots/<YYYY-Www>/`
+- 保存先ディレクトリ: `data/adsense/snapshots/<YYYY-Www>/`
 - 各ファイルの行数
 - 期間 / 合計収益サマリー
 

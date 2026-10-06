@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * 公開済み note 記事のハッシュタグ99個を、記事のタイトルと公開本文から Claude に提案させ、
- * 決定的な検査 (lib/note-hashtags.mjs) を通ったものだけを data/note/hashtags/<slug>.json に書く。
+ * 決定的な検査 (lib/note-hashtags.mjs) を通ったものだけを config/note-hashtags/<slug>.json に書く。
  * note には書き込まない。反映は update-published-hashtags.mjs が行う。
  *
  * Usage (--concurrency N で並列数、既定 3):

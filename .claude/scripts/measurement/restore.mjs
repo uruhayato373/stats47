@@ -11,7 +11,7 @@ import { validateNoteInventory } from './note-inventory.mjs';
 const source = process.argv[2];
 const config = sourceFor(source);
 if (process.argv.includes('--if-activated')) {
-  const path = '.claude/state/metrics/authenticated/latest.json';
+  const path = 'data/authenticated/latest.json';
   const activated = existsSync(path) && JSON.parse(readFileSync(path, 'utf8')).sources?.some(s => s.source === source && s.activated === true);
   if (!activated) {
     console.log(JSON.stringify({ source, status: 'not_activated', reason: 'First successful cloud collection required; existing consumer freshness gates remain active.' }));

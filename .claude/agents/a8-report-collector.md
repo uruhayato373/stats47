@@ -32,7 +32,7 @@ A8.net の**成果レポート CSV 収集**を単一所有する agent。提携�
 - **dry-run / probe** — `--dry-run` で DOM 検出のみ。`--probe-isolation` / `--probe-period` で
   サイト分離と期間フォームの実機観察 (ダウンロードしない)。
 - **normalize** — `normalize-a8-csv.mjs`。決定的・ネットワーク不要。
-  `.claude/state/metrics/affiliate/{a8-results.json,a8-report-log.json}` へ upsert する。
+  `data/affiliate/{a8-results.json,a8-report-log.json}` へ upsert する。
 - **due 確認** — `check-a8-report-due.mjs`。前回取り込みからの経過を surface する (cron は作らない)。
 - **失敗診断** — UI 変更時に `.local/playwright-a8-debug/<runId>/` を読み、config の調整案を出す。
 

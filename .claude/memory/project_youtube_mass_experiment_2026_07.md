@@ -46,6 +46,6 @@ metadata:
 
 ## How to apply (旧・参考)
 - 実験終了・本命運用に戻すなら `youtube-experiment.json` を削除。
-- 陳腐化注意: 2026-04 メモリの `sns_posts` D1 記述は完全DBレス化で古い。投稿台帳 SSOT は `.claude/state/sns/posts.json` ([[project_sns_reorg_2026_07]])。
+- 陳腐化注意: 2026-04 メモリの `sns_posts` D1 記述は完全DBレス化で古い。投稿台帳 SSOT は `data/sns/posts.json` ([[project_sns_reorg_2026_07]])。
 
 関連: [[project_youtube_shadowban_recovery_2026_04]] / [[project_sns_reorg_2026_07]] / [[project_env_local_ci_consolidation]]

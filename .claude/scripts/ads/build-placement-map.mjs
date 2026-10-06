@@ -10,11 +10,11 @@
  * 判定ロジックは `lib/placement-map-core.mjs` (純関数・テスト付き)。本ファイルは入出力のみ。
  *
  * 入力 (ローカル設定 + 配信snapshot。欠けたら理由を記録して続行する):
- *   - GSC pages.csv  .claude/skills/analytics/gsc-improvement/reference/snapshots/<最新週>/pages.csv
+ *   - GSC pages.csv  data/gsc/snapshots/<最新週>/pages.csv
  *   - metric config   packages/data-configs/src/metrics/*.ts       (rankingKey → category)
  *   - 意図ハブ        apps/web/src/features/ads/constants/affiliate-category.ts (共有resolver/maps)
  *   - 在庫            apps/web/scripts/affiliate-ads-data.ts        (vertical × adType)
- *   - A8 カタログ     .claude/state/ads/a8-catalog.json             (確定EPC)
+ *   - A8 カタログ     data/affiliate/a8-catalog.json             (確定EPC)
  *   - ranking/blog/調査メタ R2 snapshots (取得不能は未解決として明示。広告表示回数は推定しない)
  *
  * usage:
@@ -34,7 +34,7 @@ const core = require("./lib/placement-map-core.mjs");
 const scoutCore = require("./lib/a8-scout-core.mjs");
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
-const SNAP_DIR = join(ROOT, ".claude/skills/analytics/gsc-improvement/reference/snapshots");
+const SNAP_DIR = join(ROOT, "data/gsc/snapshots");
 const OUT = join(ROOT, ".claude/state/ads/placement-map-latest.json");
 
 const args = process.argv.slice(2);
@@ -217,7 +217,7 @@ async function main() {
   });
 
   // reverse: 高EPC の案件と当て先 suggest
-  const catalog = JSON.parse(readFileSync(join(ROOT, ".claude/state/ads/a8-catalog.json"), "utf8"));
+  const catalog = JSON.parse(readFileSync(join(ROOT, "data/affiliate/a8-catalog.json"), "utf8"));
   const entries = Object.values(catalog.entries ?? {});
   // 共用案件 = doboku-note も配信している A8 プログラム。EPC は口座横断で stats47 単独ではない。
   const sharedProgramIds = ["s00000024757004", "s00000023057002", "s00000022176005"];

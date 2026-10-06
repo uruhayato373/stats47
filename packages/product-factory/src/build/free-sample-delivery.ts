@@ -4,7 +4,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join, relative, resolve } from "node:path";
 import { ALL_PRODUCTS } from "../catalog/products";
 
-export const FREE_SAMPLE_STATE = ".claude/state/products/free-sample-delivery.json";
+export const FREE_SAMPLE_STATE = "data/products/free-sample-delivery.json";
 export interface FreeSampleDelivery {
   title: string;
   _delivery: { artifactDirectory: string; manifestSha256: string; indicatorCount: number; pptxIndicatorCount: number; hasXlsx: boolean; officeValidation: string };

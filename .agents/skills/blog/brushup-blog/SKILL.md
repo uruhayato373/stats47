@@ -108,7 +108,7 @@ GSC の impressions × CTR と D1 の article メタデータを掛け合わせ�
 
 | データ | 場所 |
 |---|---|
-| GSC ページ別週次 | `.claude/skills/analytics/gsc-improvement/reference/snapshots/<最新週>/pages.csv` |
+| GSC ページ別週次 | `data/gsc/snapshots/<最新週>/pages.csv` |
 | ブログ記事 (公開) | R2 `app/blog/all.json` (`.articles`。旧 D1 articles テーブルは廃止) |
 
 ### 実行フロー (priority)
@@ -117,10 +117,10 @@ GSC の impressions × CTR と D1 の article メタデータを掛け合わせ�
 
 ```bash
 # 最新週を特定
-ls .claude/skills/analytics/gsc-improvement/reference/snapshots/ | sort | tail -1
+ls data/gsc/snapshots/ | sort | tail -1
 ```
 
-`.claude/skills/analytics/gsc-improvement/reference/snapshots/<最新週>/pages.csv` を Read する。
+`data/gsc/snapshots/<最新週>/pages.csv` を Read する。
 `/blog/` を含む行のみを抽出し、 slug を `https://stats47.jp/blog/` 以降の文字列として取得する。
 
 #### Step 2: R2 blog snapshot から記事メタデータ取得

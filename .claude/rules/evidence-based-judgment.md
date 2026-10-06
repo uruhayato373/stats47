@@ -28,7 +28,7 @@ effect ラベルは、下記 3 条件を**すべて**満たす場合に限り機
 
 1. **境界が SSOT にある** — 判定に使う数値は `.claude/scripts/lib/effect-verdict/thresholds.mjs`
    だけに置く。engine 側にリテラルを書かない（テストが直書きを検出して落ちる）
-2. **根拠が残る** — `.claude/state/effect-verdict/verdicts-<week>.json` に `before` / `after` /
+2. **根拠が残る** — `data/effect-verdict/verdicts-<week>.json` に `before` / `after` /
    `target` / `attainment` / `sources[{name,observedAt,freshness}]` / `guards` /
    `thresholdsVersion` を記録し、improvement-log の `### 判定` に判定・根拠データ・閾値 SSOT・
    ガード・再現コマンドの 5 項目を出す
@@ -223,7 +223,7 @@ NG ワードの検出スクリプト（CI で走らせるか手動レビュー�
 ```bash
 NG="のはず\|と思われる\|Google の仕様\|クロール予算枯渇\|壊滅\|兆候\|浸透待ち\|だろう\|と考えられる"
 grep -rn "$NG" \
-  .claude/skills/analytics/{gsc,ga4,performance,sns-metrics,cloudflare-cost,adsense,affiliate}-improvement/reference/ \
+  data/improvement/{gsc,ga4,performance,sns-metrics,cloudflare-cost,adsense,affiliate}-improvement/ \
   .claude/skills/analytics/seo-audit/SKILL.md \
   .claude/skills/management/{weekly-review,critical-review,nsm-experiment}/SKILL.md \
   | grep -v "evidence-based-judgment\|archive/" \

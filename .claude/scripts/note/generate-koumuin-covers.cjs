@@ -4,7 +4,7 @@
  * cover を一括生成する。**共通のキャッチーな背景 + 中央ボックスにタイトルを重ねる**新デザイン。
  *
  * 設計 (2026-07-09 再設計):
- *   - 背景  : `.claude/scripts/note/assets/koumuin-cover-bg.png` (Codex 作の共通ダーク背景)。
+ *   - 背景  : `assets/note/koumuin-cover-bg.png` (Codex 作の共通ダーク背景。再生成は `node .claude/scripts/note/build-koumuin-bg.mjs`)。
  *             無い場合はプログラム生成のダークグラデ背景にフォールバックする。
  *   - トーン: 記事の category ごとにアクセント色を変える (グロー + ピル + ディバイダ + ボックス枠)。
  *   - 前景  : 中央の半透明ボックスに [番号・カテゴリ] / タイトル(中央) / シリーズ・フッター /
@@ -30,16 +30,16 @@ const path = require("path");
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
 const DRAFT_ROOT = path.join(PROJECT_ROOT, "docs/31_note記事原稿");
-const BG_PATH = path.join(__dirname, "assets/koumuin-cover-bg.png");
-const MAG_BG_PATH = path.join(__dirname, "assets/koumuin-magazine-bg.png"); // マガジン用の別背景
+const BG_PATH = path.join(PROJECT_ROOT, "assets/note/koumuin-cover-bg.png");
+const MAG_BG_PATH = path.join(PROJECT_ROOT, "assets/note/koumuin-magazine-bg.png"); // マガジン用の別背景
 
 const VERTICALS = ["koumuin-claude-code", "koumuin-estat-claude-code"];
 
 // マガジン表紙 (シリーズ 1 枚) の定義。記事カバーと同デザイン言語 (中央ボックス) + 別背景。
-// 出力: .claude/skills/note/<vertical>/magazine-cover-1280x670.{svg,png}
+// 出力: assets/note/magazine-covers/<vertical>/magazine-cover-1280x670.{svg,png}
 const MAGAZINES = {
   "koumuin-claude-code": {
-    outDir: path.resolve(PROJECT_ROOT, ".claude/skills/note/koumuin-claude-code"),
+    outDir: path.resolve(PROJECT_ROOT, "assets/note/magazine-covers/koumuin-claude-code"),
     eyebrow: "JICHITAI × AI SERIES",
     title: "公務員 × Claude Code 実務活用ガイド",
     tagline: "環境構築・議事録・議会答弁・セキュリティ・データ活用・組織導入まで",
@@ -49,7 +49,7 @@ const MAGAZINES = {
     accent: "#fbbf24", // gold (flagship)
   },
   "koumuin-estat-claude-code": {
-    outDir: path.resolve(PROJECT_ROOT, ".claude/skills/note/koumuin-estat-claude-code"),
+    outDir: path.resolve(PROJECT_ROOT, "assets/note/magazine-covers/koumuin-estat-claude-code"),
     eyebrow: "JICHITAI × STATISTICS × AI",
     title: "公務員 × e-Stat × Claude Code 実務ガイド",
     tagline: "47 都道府県データを 1 コマンドで取得・整形・出力",

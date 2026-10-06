@@ -278,7 +278,7 @@ co_agents: [strategy-advisor]
 
 **原因**: Google のインデックスは **sitemap から消したというシグナルだけでは除去トリガーにならない**。既にインデックスに入っている URL は、Googlebot が該当 URL を再クロールして 404 / 410 / noindex を受領することで初めて除去候補になる。sitemap は「新規 URL の発見」の案内であり、既存 URL の削除指示ではない。
 
-**対策**: インデックス残骸の systematically な除去には **middleware で明示的に 410 Gone を返す**のが最も強いシグナル。404 でも除去されるが 410 の方が早い。2026-04-18 の Fix 7（`/themes/<unknown>` 410）/ Fix 8（`/areas/{pref}/<non-indexable-sub>` 410）がこの対応例。観測は `.claude/skills/analytics/gsc-improvement/reference/improvement-log.md` の T0-THEME-01 / T0-AREA-SUB-01 を参照。
+**対策**: インデックス残骸の systematically な除去には **middleware で明示的に 410 Gone を返す**のが最も強いシグナル。404 でも除去されるが 410 の方が早い。2026-04-18 の Fix 7（`/themes/<unknown>` 410）/ Fix 8（`/areas/{pref}/<non-indexable-sub>` 410）がこの対応例。観測は `data/improvement/gsc-improvement/improvement-log.md` の T0-THEME-01 / T0-AREA-SUB-01 を参照。
 
 ---
 
@@ -298,7 +298,7 @@ co_agents: [strategy-advisor]
 **関連ファイル**:
 - `.claude/skills/sns/publish-x/publish-x.ts` L220-260（fail-safe 予約モード検出）
 - `.claude/skills/sns/publish-x/SKILL.md`（初回 `--dry-run` 必須手順）
-- `.claude/skills/analytics/gsc-improvement/reference/improvement-log.md` T3-SNS-01 Day 2-5 の投稿実時刻記録
+- `data/improvement/gsc-improvement/improvement-log.md` T3-SNS-01 Day 2-5 の投稿実時刻記録
 
 ---
 
@@ -353,7 +353,7 @@ mobile の throttled 環境では HTML 削減のメリット（~数百 ms）よ�
 
 **関連**:
 - Issue #74, PR #75 (ranking 誤った LCP 改善), #86 (themes 同じ誤り), **#96 revert**
-- EXP-002 (`.claude/state/experiments.json`、ADVERSE close)
+- EXP-002 (`data/business/experiments.json`、ADVERSE close)
 
 
 ---

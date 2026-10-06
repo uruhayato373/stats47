@@ -53,7 +53,7 @@ const HIGH_TIER_TOP_N = 3;
 const OWNER_EXECUTOR = 'ユーザー';
 /** 分割して 1 週で届く大きさにした持ち越し Must に付ける目印 */
 const SPLIT_MARKER = '[分割]';
-const REVIEWS_DIR = '.claude/skills/management/weekly-review/reference/reviews';
+const REVIEWS_DIR = 'data/reviews/weekly';
 const KPI_MARKER = /\[kpi:\s*([^\]]+)\]/;
 const TARGET_MARKER = /\[target:\s*[^\]]+\]/;
 const PLAN_SECTIONS = ['Must', 'Should', 'Could'];

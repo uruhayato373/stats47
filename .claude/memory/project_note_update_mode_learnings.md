@@ -69,7 +69,7 @@ DOM fallback / WARN 緩和。edit 版アイキャッチ差替も editor-operatio
 
 - **問題**: 旧collectorの列位置・views・期間固定は、2026-09-08に変更されたnoteの新dashboardと一致しない。
 - **原因**: 旧ビューと新インプレッション/PVは別指標。一覧の「もっとみる」はロード中に一時消失する。またカスタム期間によって公開記事の行が出ない実例がある。
-- **対策**: `npm run note:metrics:fetch`でラベル・期間・時刻・全ページ・合計を検証する。再表示された「もっとみる」は続けて開く。カタログ欠落だけなら他の検証済み行を残し、欠落行はnull、全体はincomplete。新schemaVersion 2は`.claude/state/metrics/note/dashboard/`に保存する。PV/表示回数をCTRにしない。
+- **対策**: `npm run note:metrics:fetch`でラベル・期間・時刻・全ページ・合計を検証する。再表示された「もっとみる」は続けて開く。カタログ欠落だけなら他の検証済み行を残し、欠落行はnull、全体はincomplete。新schemaVersion 2は`data/note/dashboard/`に保存する。PV/表示回数をCTRにしない。
 - **証拠**: 同ディレクトリの2026-08-15〜09-11履歴は285記事、合計一致、`n99561600d4fe`だけ欠落。2021-05-01からの拡張期間では286記事すべて表示され、同記事も確認できた。短い期間の値を0と推測しない。
 - **終了処理**: `browser-use sessions`が0でも検査用daemonとChromeがOS上に残った。新collectorは一意sessionのPID/子プロセス/複製profileを追跡して停止・削除する。他taskへglobal pkillしない。
 - **欠測集合の再発防止（2026-09-21）**: カバー監査の残余行だけをplaceholder元にすると、後発のカタログ記事が期間一覧とカバー監査の両方に無い場合に欠測自体が消える。`coverage.missingFromDashboard`全件を起点にnull行を保持し、カバー未確認はunknown/investigateにする。`dashboard-metrics.test.mjs`の集合差fixtureと、measurementの用途限定restoreによる証跡SHA・集合・null検査で固定する。
@@ -82,7 +82,7 @@ DOM fallback / WARN 緩和。edit 版アイキャッチ差替も editor-operatio
 自動保存で`has_draft`が立つため、カバーだけならエディタを開かず専用CLIを使う。
 note配信PNGは減色される（初回API試験は画素平均絶対誤差0.66/255）ので、配信バイトSHAの完全一致は要求しない。
 
-カバーは**派生物**。SSOT = frontmatter(title/is_paid/category) + 背景アセット(`.claude/scripts/note/assets/koumuin-cover-bg.png` / magazine 別背景) + 生成器 `generate-koumuin-covers.cjs`(`--magazine` 有)。全て **commit `32176c1b` / branch `feature/koumuin-note-cover-redesign`(develop 未マージ)**。Satori 汎用 note-cover から koumuin 2シリーズは除外済(二重SSOT回避、正典 `ogp-image-standards.md` §5)。関連 [[project_note_publish_flow_2026_06]] / [[feedback_note_publish_automation]] / [[feedback_shared_working_copy_git_race]]。
+カバーは**派生物**。SSOT = frontmatter(title/is_paid/category) + 背景アセット(`assets/note/koumuin-cover-bg.png` / magazine 別背景) + 生成器 `generate-koumuin-covers.cjs`(`--magazine` 有)。全て **commit `32176c1b` / branch `feature/koumuin-note-cover-redesign`(develop 未マージ)**。Satori 汎用 note-cover から koumuin 2シリーズは除外済(二重SSOT回避、正典 `ogp-image-standards.md` §5)。関連 [[project_note_publish_flow_2026_06]] / [[feedback_note_publish_automation]] / [[feedback_shared_working_copy_git_race]]。
 
 ## 2026-09-15 追記: 公開済み記事の本文差し替えは draft_reedit 経路でしか本番に乗らない
 `/notes/<id>/edit` で編集して `/notes/<id>/publish/` へ URL 遷移し「更新する」を押すと、PUT 200 と

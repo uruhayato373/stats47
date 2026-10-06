@@ -56,7 +56,7 @@ node .claude/scripts/blog/build-remediation-queue.mjs
 | 状態付き是正キュー (機械) | `.claude/state/blog/remediation-queue.json` | 書: build-remediation-queue.mjs / 読: brushup-blog・weekly-plan・weekly-review |
 | キュー builder | `.claude/scripts/blog/build-remediation-queue.mjs` | — |
 | 品質棚卸し (入力) | `audit-published-blog.mjs` → `/tmp/published-blog-audit.json` | builder が fresh 取得 |
-| GSC 流入 (入力) | `.claude/skills/analytics/gsc-improvement/reference/snapshots/<週>/pages.csv` | builder が読む |
+| GSC 流入 (入力) | `data/gsc/snapshots/<週>/pages.csv` | builder が読む |
 | brushup 履歴 (wave_id) | `.claude/state/blog/auto-brushup-history.json` | done シード + dedup |
 | wave 人間向け (effect) | `.claude/todo/improvements.md` の `## [BLOG-WAVE-<wave_id>]` | brushup deploy 時に追記 / weekly-review が判定 |
 | 品質基準 (正典) | `.claude/rules/blog-quality-standards.md` | article-writer・blog-critic・quality-gate |

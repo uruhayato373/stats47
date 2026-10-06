@@ -32,8 +32,8 @@ import { fileURLToPath } from "node:url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
 const PORTFOLIO = path.join(PROJECT_ROOT, ".claude/state/surveys/portfolio.json");
-const GSC_SNAP = path.join(PROJECT_ROOT, ".claude/skills/analytics/gsc-improvement/reference/snapshots");
-const GA4_SNAP = path.join(PROJECT_ROOT, ".claude/skills/analytics/ga4-improvement/reference/snapshots");
+const GSC_SNAP = path.join(PROJECT_ROOT, "data/gsc/snapshots");
+const GA4_SNAP = path.join(PROJECT_ROOT, "data/ga4/snapshots");
 
 const MIN_GSC_IMPRESSIONS = 100; // per 56d (README 判定規律 3: imp<100 は CTR を確定しない)
 const MIN_GA4_PAGEVIEWS = 100;
@@ -186,8 +186,8 @@ function main() {
         rankingOutboundClicks,
       };
     }
-    s.gscSnapshotRef = `.claude/skills/analytics/gsc-improvement/reference/snapshots/${weeks[0]}/pages.csv`;
-    s.ga4SnapshotRef = `.claude/skills/analytics/ga4-improvement/reference/snapshots/${weeks[0]}/pages.csv`;
+    s.gscSnapshotRef = `data/gsc/snapshots/${weeks[0]}/pages.csv`;
+    s.ga4SnapshotRef = `data/ga4/snapshots/${weeks[0]}/pages.csv`;
 
     if ((s.metrics.gsc.impressions ?? 0) > 0 || (s.metrics.ga4.landingPageViews ?? 0) > 0) {
       withDemand.push([

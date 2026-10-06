@@ -92,7 +92,7 @@ jobs:
             --posted-at "${POSTED_AT}"
           git config user.email "actions@github.com"
           git config user.name "GitHub Actions"
-          git add .claude/state/ig-posted-log.jsonl .claude/state/sns/posts.json
+          git add .claude/state/ig-posted-log.jsonl data/sns/posts.json
           git commit -m "chore(ig): mark ${{ steps.post.outputs.content_key }} as posted [skip ci]"
           # 投稿台帳は develop へ commit-back する (main 直推しは branch-workflow 違反・
           # 投稿のたびに main/develop が分岐する。main へは次の PR で乗る。2026-08-16 是正)

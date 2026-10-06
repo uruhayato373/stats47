@@ -67,8 +67,8 @@ export function buildSalesCatalog(root: string, checkedAt: string, kindleVersion
     catch { warnings.push(`Missing or invalid evidence: ${path}`); return {}; }
   };
   const cp = COCONALA_LISTINGS, kp = KDP_LISTINGS;
-  const ap = ".claude/state/products/kindle-archives.json", np = ".claude/state/note-published-urls.json";
-  const pp = ".claude/state/products/coconala-packs-2026-09-06.json", gp = ".claude/state/products/geo-service-readiness-2026-09-06.json";
+  const ap = "data/products/kindle-archives.json", np = ".claude/state/note-published-urls.json";
+  const pp = "data/products/coconala-packs-2026-09-06.json", gp = "data/products/geo-service-readiness-2026-09-06.json";
   const coco = obj(read(cp).listings), kdp = obj(read(kp).listings), archives = obj(read(ap).books);
   const ni = read(np), notes = obj(ni.articles), packs = read(pp), geo = read(gp);
   const nrp = `.local/note-products-revisions/${noteRevision}/report.json`;

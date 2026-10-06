@@ -82,8 +82,8 @@ test("symlinkが混在しても本物の重複は引き続き検出する", asyn
 
 test("未参照画像はwarningでblockしない", async (t) => {
   const f = await fixture(); t.after(() => fs.rmSync(f.root, { recursive: true, force: true }));
-  fs.mkdirSync(path.join(f.root, "docs/assets"), { recursive: true });
-  await sharp({ create: { width: 8, height: 8, channels: 3, background: "green" } }).png().toFile(path.join(f.root, "docs/assets/orphan-xyz.png"));
+  fs.mkdirSync(path.join(f.root, "assets/page-heroes"), { recursive: true });
+  await sharp({ create: { width: 8, height: 8, channels: 3, background: "green" } }).png().toFile(path.join(f.root, "assets/page-heroes/orphan-xyz.png"));
   const parsed = JSON.parse(run(f).stdout);
   assert.equal(parsed.newFindings.filter((x) => x.file.includes("orphan-xyz")).length, 0);
   assert.ok(parsed.warnings.some((w) => w.code === "UNREFERENCED_IMAGE" && w.file.includes("orphan-xyz")));

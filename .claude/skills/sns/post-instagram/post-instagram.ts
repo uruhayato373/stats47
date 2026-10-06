@@ -31,7 +31,7 @@ const LOCAL_R2_ROOT = path.join(PROJECT_ROOT, ".local/r2");
 const PUBLIC_R2_BASE = R2_PUBLIC_BASE_URL;
 const PUBLISH_LOG = path.join(
   PROJECT_ROOT,
-  ".claude/state/metrics/sns/instagram-publish-log.csv"
+  "data/sns/instagram-publish-log.csv"
 );
 
 const TOKEN = process.env.INSTAGRAM_ACCESS_TOKEN;
@@ -267,7 +267,7 @@ function recordPublish(spec: PostSpec, mediaId: string, permalink: string): void
   );
   console.log(`  📝 log: ${PUBLISH_LOG}`);
 
-  // sns_posts ストアへ記録 (完全DBレス: .claude/state/sns/posts.json 経由)
+  // sns_posts ストアへ記録 (完全DBレス: data/sns/posts.json 経由)
   try {
     const postType = spec.type === "reels" ? "reel" : spec.type === "carousel" ? "carousel" : "original";
 

@@ -21,7 +21,7 @@ co_agents: [improvement-triage]
 | 層 | 場所 | 用途 |
 |---|---|---|
 | 施策一覧 | `.claude/todo/improvements.md` | AFF-NN 行の追加・status 更新 |
-| agent 用詳細 | `.claude/skills/analytics/affiliate-improvement/reference/improvement-log.md` | 検証コマンド・仮説・実測値・GA4 クエリ結果 |
+| agent 用詳細 | `data/improvement/affiliate-improvement/improvement-log.md` | 検証コマンド・仮説・実測値・GA4 クエリ結果 |
 | **集約状態 (機械・★入口)** | `.claude/state/ads/affiliate-operations-latest.json` | 計測ゲート・freshness・coverage・直接配置・実験・推奨アクションの現在地 (`build-affiliate-operations-state.ts` が生成、週次 CI 自動更新) |
 | 在庫 snapshot (機械) | `.claude/state/ads/inventory-*.json` | audit script が生成、ループの入力 |
 | compliance snapshot (機械) | `.claude/state/ads/compliance-latest.json` | 直接配置の孤立・PR 表記監査 (`/audit-affiliate-compliance`) |
@@ -111,7 +111,7 @@ node .claude/scripts/ads/fetch-affiliate-ga4.cjs \
 >    (週次 cron + `workflow_dispatch`)。シークレット `GOOGLE_SERVICE_ACCOUNT_KEY_JSON` を鍵ファイルに
 >    復元して `fetch-affiliate-ga4.cjs` を実行し、**生 snapshot は R2 `state/ads/ga4-affiliate/`
 >    (`<date>.json` / `latest.json` / `index.json`) へ push、git には週次集約
->    `.claude/state/ads/ga4-affiliate-history.csv` (`append-ga4-affiliate-history.mjs`) だけを commit-back する**。
+>    `data/affiliate/ga4-affiliate-history.csv` (`append-ga4-affiliate-history.mjs`) だけを commit-back する**。
 >    ローカルで生 snapshot が要るときは `npm run state:pull -- ads/ga4-affiliate` (公開 URL・認証不要) で
 >    `.claude/state/ads/live/ga4-affiliate/` に取得する (gitignore 済み)。CIの運用経路は確定7日だけを受理し、
 >    日曜22:00 JSTに本実行、月曜22:00 JSTに同じ窓を自動再取得する。T14d / T28d はhistory.csvの
@@ -158,7 +158,7 @@ baseline / 中央値は実測から決め、根拠を improvement-log に書く 
 ```
 
 target metric、deployed_at、関連PR、詳細 (仮説 / 検証コマンド / 想定値の根拠 / 実測) は
-`reference/improvement-log.md` に
+`data/improvement/affiliate-improvement/improvement-log.md` に
 `.claude/rules/evidence-based-judgment.md` の記入テンプレで書く。
 
 ### Step 5: 効果判定 (observe モードで before/after)
@@ -173,7 +173,7 @@ target metric、deployed_at、関連PR、詳細 (仮説 / 検証コマンド / �
 > **実質的に比較可能なのは 2026-08-04 以降どうし**だけ。
 
 施策デプロイから 1〜4 週後に GA4 を再取得し、impression / CTR の before/after を比較。
-実証チェックリストを通し、判定結果を `reference/improvement-log.md` に追記してから
+実証チェックリストを通し、判定結果を `data/improvement/affiliate-improvement/improvement-log.md` に追記してから
 `.claude/todo/improvements.md` の該当行を削除する。是正が必要なら別IDを追加する。
 TODOのwriteは排他的 writer の `improvement-triage` に委譲してもよい。
 
@@ -191,7 +191,7 @@ TODOのwriteは排他的 writer の `improvement-triage` に委譲してもよ�
 |---|---|
 | `.claude/scripts/ads/audit-affiliate-inventory.ts` | 在庫棚卸し (決定的) |
 | `.claude/todo/improvements.md` | 人間向けactive施策一覧 (AFF-NN) |
-| `reference/improvement-log.md` | agent 用詳細ログ |
+| `data/improvement/affiliate-improvement/improvement-log.md` | agent 用詳細ログ |
 | `apps/web/scripts/affiliate-ads-data.ts` | 在庫 SSOT |
 | `apps/web/src/lib/analytics/events.ts` | GA4 計測イベント定義 |
 | `apps/web/src/features/ads/` | 描画コンポーネント |

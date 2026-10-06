@@ -31,7 +31,7 @@ test('mentioning effect/full in the title is allowed; setting it in the Status c
 test('files outside the triage scope are rejected', () => {
   const result = evaluateRun({ ...base, changedFiles: ['.claude/todo/improvements.md', 'apps/web/src/app/page.tsx'], afterImprovements: base.beforeImprovements });
   assert.deepEqual(result.problems, ['許可外のファイルを変更: apps/web/src/app/page.tsx']);
-  const log = evaluateRun({ ...base, changedFiles: ['.claude/skills/analytics/ga4-improvement/reference/improvement-log.md'], afterImprovements: base.beforeImprovements });
+  const log = evaluateRun({ ...base, changedFiles: ['data/improvement/ga4-improvement/improvement-log.md'], afterImprovements: base.beforeImprovements });
   assert.deepEqual(log.problems, []);
 });
 
@@ -46,7 +46,7 @@ test('backlog cards may be added up to the cap but never removed', () => {
 test('a service account key written into an allowed log blocks the push', () => {
   // run は GA4 の鍵を env に持ち、結果は公開 repo へ push される。改善ログは許可パスなので形で止める
   const diffText = [
-    '+++ b/.claude/skills/analytics/ga4-improvement/reference/improvement-log.md',
+    '+++ b/data/improvement/ga4-improvement/improvement-log.md',
     '+- 実測: blog→ranking 7.6%',
     '+"private_key": "-----BEGIN PRIVATE KEY-----\\nMIIE"',
   ].join('\n');

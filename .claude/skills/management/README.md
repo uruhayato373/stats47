@@ -145,7 +145,7 @@
 - `/weekly-review`: 5観点のsnapshot / scriptを同一セッションで並列収集し、計画との差分を分析
 - `/weekly-plan`: 5観点の決定的データ収集 → 戦略分析 → 批判的レビュー → 計画出力
 
-**保存先**: 計画は `.claude/todo/weekly.md`（毎週上書き）、レビューは `.claude/skills/management/weekly-review/reference/reviews/YYYY-Www.md`（agent用履歴）
+**保存先**: 計画は `.claude/todo/weekly.md`（毎週上書き）、レビューは `data/reviews/weekly/YYYY-Www.md`（agent用履歴）
 
 ### `/critical-review`
 
@@ -190,7 +190,7 @@ npm run docs:check
 |---|---|---|
 | `/monthly-plan` | `.claude/todo/monthly.md` | `monthly-plan` |
 | `/weekly-plan` | `.claude/todo/weekly.md` | `weekly-plan` |
-| `/weekly-review` | `.claude/skills/management/weekly-review/reference/reviews/YYYY-Www.md` | `weekly-review` |
+| `/weekly-review` | `data/reviews/weekly/YYYY-Www.md` | `weekly-review` |
 | `/critical-review` | 対象SSOT + `.claude/todo/` | 全文はセッション出力 |
 | `/north-star-metric` | `02_収益化戦略.md` + 改善バックログ | 週次値はsnapshot |
 | `/growth-loops` | 戦略SSOT + 改善バックログ | 全文はセッション出力 |

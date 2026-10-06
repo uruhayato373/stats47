@@ -91,6 +91,9 @@ export const SERIES_COLORS: readonly string[] = [
   "#fb8c00", // orange
   "#8e24aa", // purple
   "#00897b", // teal
+  // 7 系列以上で先頭の色に戻ると、凡例で別々の系列が同じ色になる (2026-10-06 酒類 8 区分の内訳図)
+  "#6d4c41", // brown
+  "#546e7a", // blue grey
 ];
 
 /** 散布図のドット色（全県均一・地域差を意味づけないニュートラル色） */

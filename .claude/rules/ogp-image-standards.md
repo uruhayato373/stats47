@@ -283,7 +283,7 @@ Codex built-in imagegenで固有背景を生成してから画像bundleを作る
 
 - **新規 Codex 背景のコード SSOT**:
   `apps/web/scripts/data/blog-codex-background-catalog.ts` (slug → 単一 motif / prompt / asset) +
-  `apps/web/scripts/lib/assets/blog-codex-backgrounds/*.jpg` (1200×630 JPEG)。共通構図は
+  `assets/blog/codex-backgrounds/*.jpg` (1200×630 JPEG)。共通構図は
   **左 62% をタイトル安全域として完全に空け、右 35% に主役を 1 つだけ置く**。同じ主題
   (例: まぐろ 2 記事) は背景を共有し、Satori のタイトル合成で区別する。自由入力プロンプトを記事本文へ持たせない。
   実行入口は `/generate-blog-images`、決定的request/ingest/checkは
@@ -292,7 +292,7 @@ Codex built-in imagegenで固有背景を生成してから画像bundleを作る
   model / promptVersionはasset定義へ固定し、既存v1 assetのprovenanceを新規versionで上書きしない。
 - **記事固有背景のコード SSOT (既定経路)**:
   `apps/web/scripts/lib/blog-article-background.ts` (本文context parser / prompt builder / hash / ingest) +
-  `apps/web/scripts/lib/assets/blog-article-backgrounds/<slug>.jpg` (各1200×630 JPEG)。requestはタイトル・description・
+  `assets/blog/article-backgrounds/<slug>.jpg` (各1200×630 JPEG)。requestはタイトル・description・
   導入文から決定的に作り、左55%をOGP文字安全域、右42%をカード用モチーフ領域にする。地理が主題でない記事へ
   汎用日本地図を使わず、比較記事では2つの具体物を描き分ける。
 - **既存 Gemini のコード SSOT (既存背景再利用 / 未移行記事 fallback)**:
@@ -413,7 +413,7 @@ OGP・カード・note カバーとは別の種別で、**ページ本文の先�
 | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **SSOT (設定 + プロベナンス)** | `apps/web/src/components/layout/page-heroes.ts` (`THEME_HEROES` / `CATEGORY_HEROES` = git TS)。型は `PageHeroDef` / 画像は `HeroImageAsset` (1 枚を複数ページで参照共有可)                              |
 | 配信画像                       | `apps/web/public/images/<name>.webp` (静的アセット。R2 ではない)                                                                                                                                        |
-| 元画像                         | `docs/assets/<name>.png` (外部 AI 生成の PNG。再生成の入力)                                                                                                                                             |
+| 元画像                         | `assets/page-heroes/<name>.png` (外部 AI 生成の PNG。再生成の入力)                                                                                                                                             |
 | サイズ・比率                   | 生成 **3:2 (1536×1024)** → `HeroBanner` が左=テキスト / 右=画像の side-by-side で表示 (画像は object-cover)                                                                                             |
 | 生成方式                       | 外部 AI 画像生成 (Codex / Imagen 等) で **文字なし背景**を生成 → Sharp で webp 化。見出し・タグラインは**実 DOM テキスト**で重ねる (OGP と同じ家ルール: AI 画像に日本語・数字を焼き込まない)            |
 | プロベナンス                   | 各 `HeroImageAsset` に `prompt` / `aspectRatio` / `regenerate` (webp 再生成コマンド) / `sourceImage` を記録。タグラインの数値は `taglineFacts` に出典 (R2 + 年度) を明記 (`evidence-based-judgment.md`) |
@@ -451,7 +451,7 @@ homeの「知りたいことから探す」に使う、文字なしの装飾イ�
 | --- | --- |
 | 設定 | `packages/data-configs/src/home-portal.ts`の`imageSrc` |
 | 生成仕様 | `apps/web/scripts/data/home-use-case-image-catalog.ts` |
-| 元画像 | `docs/assets/home-use-case-<id>.png` (Codex built-in imagegen) |
+| 元画像 | `assets/page-heroes/home-use-case-<id>.png` (Codex built-in imagegen) |
 | 配信画像 | `apps/web/public/images/home/use-cases/<id>.webp` (透過・静的) |
 | 後処理 | `npx tsx apps/web/scripts/process-home-use-case-images.ts --all` |
 | 描画 | `PortalNavCard`の右側に装飾画像として配置し、`alt=""`。文言はDOMテキスト |

@@ -15,15 +15,15 @@ PSI、Chrome DevTools、Cloudflare Workers の実測値からボトルネック�
 
 | データ | 保管先 |
 |---|---|
-| 生メトリクス CSV | `reference/snapshots/YYYY-MM-DD/metrics.csv` |
+| 生メトリクス CSV | `data/psi/metric-snapshots/YYYY-MM-DD/metrics.csv` |
 | 目標しきい値設定 | `budgets.json` |
-| 改善施策ログ（append-only） | `reference/improvement-log.md` |
+| 改善施策ログ（append-only） | `data/improvement/performance-improvement/improvement-log.md` |
 | 未完了の施策 | `.claude/todo/improvements.md` |
 | PSI Alert（自動起票） | GitHub Issues ラベル `psi-alert,auto-generated` |
 | 週次集約 | `data/psi/{history.csv,LATEST.md}` |
-| Cloudflare機械メトリクス | `.claude/state/metrics/cloudflare/` |
+| Cloudflare機械メトリクス | `data/cloudflare/` |
 
-レビュー全文や一時ハンドオフ文書を新規作成しない。未完了策は改善バックログ、実測・実装履歴は本 skill の `reference/improvement-log.md`、再生成可能な機械値は `.claude/state/metrics/` に保存する。
+レビュー全文や一時ハンドオフ文書を新規作成しない。未完了策は改善バックログ、実測・実装履歴は本 skill の `data/improvement/performance-improvement/improvement-log.md`、再生成可能な機械値は `.claude/state/metrics/` に保存する。
 
 ## MCP前提
 
@@ -34,7 +34,7 @@ Claude Code の `/mcp` で次を確認する。
 | `chrome-devtools` | Performance trace、Network、DOM、Lighthouse | connected |
 | `cloudflare-docs` | 現行仕様の確認 | connected |
 
-Workers の CPU・wall time・request の集計は日次 snapshot（`.claude/state/metrics/cloudflare/snapshots/`、CI の `fetch-usage.mjs` が取得）を読む。route 別の内訳・trace・エラーログは Cloudflare Dashboard の Workers Observability でオーナーが確認する。
+Workers の CPU・wall time・request の集計は日次 snapshot（`data/cloudflare/snapshots/`、CI の `fetch-usage.mjs` が取得）を読む。route 別の内訳・trace・エラーログは Cloudflare Dashboard の Workers Observability でオーナーが確認する。
 
 ## 標準監査条件
 
@@ -51,7 +51,7 @@ Chrome DevTools MCP のモバイル再現条件を固定する。
 
 ## 2026-08-05 MCP監査からの実装手順
 
-詳細なbefore値と根拠は `reference/improvement-log.md` の `[MCP-PERF-2026-08-05]` を参照する。実装は次の順序を守り、各段階で再計測する。
+詳細なbefore値と根拠は `data/improvement/performance-improvement/improvement-log.md` の `[MCP-PERF-2026-08-05]` を参照する。実装は次の順序を守り、各段階で再計測する。
 
 ### 0. 作業前
 
@@ -221,7 +221,7 @@ deploy直後の1回だけで `effect/full` にしない。変更を `effect/pend
 
 SSOT:
 - .claude/skills/analytics/performance-improvement/SKILL.md
-- .claude/skills/analytics/performance-improvement/reference/improvement-log.md の [MCP-PERF-2026-08-05]
+- data/improvement/performance-improvement/improvement-log.md の [MCP-PERF-2026-08-05]
 - .claude/todo/improvements.md
 
 最初に /mcp で chrome-devtools と cloudflare-docs の接続を確認してください。Workers の route 別内訳が必要な作業は、Dashboard の確認をオーナーへ依頼し、Chrome/ローカルで進められる作業は止めないでください。

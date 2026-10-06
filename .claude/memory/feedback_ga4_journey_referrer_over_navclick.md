@@ -18,7 +18,7 @@ metadata:
 (着地別の PC 比率・平日 9–18 時比率) を追加した (コミット 3ea0fece3)。
 
 **How to apply:**
-- 回遊の判定は `.claude/skills/analytics/ga4-improvement/reference/snapshots/<YYYY-Www>/internal-transitions.csv` を読む。
+- 回遊の判定は `data/ga4/snapshots/<YYYY-Www>/internal-transitions.csv` を読む。
 - 「GSC clicks 0 なのに流入が増えた」ページは Bing の自然検索を疑い、GA4 の `sessionSourceMedium` で確かめる
   (local-finance の W34 急増は bing/organic 189/204 PV で、「organic 起因ではない」という旧判断は誤りだった)。
 - この Mac にはサービスアカウント鍵 `stats47-f6b5dae19196.json` があり、Data API も Admin API の読み取りも使える。

@@ -123,13 +123,16 @@ jobs:
             if [ ! -d "$DIR" ] || [ -z "$(ls -A "$DIR"/*.json 2>/dev/null)" ]; then
               SKIP=$((SKIP+1)); continue
             fi
+            # 失敗時だけ末尾を出す (以前は出力を捨てていて、失敗理由がログに残らなかった)
             if npx tsx .claude/scripts/blog/generate-article-charts.ts \
-                 --base .local/r2/app/blog --slug "$SLUG" > /dev/null 2>&1; then
+                 --base .local/r2/app/blog --slug "$SLUG" > ".local/regen-$SLUG.log" 2>&1; then
               OK=$((OK+1))
               find ".local/r2/app/blog/$SLUG" -type f -name '*.svg' -print \
                 | sed 's#^\.local/r2/##' >> .local/generated-blog-svg-keys.txt
             else
               FAIL=$((FAIL+1)); echo "  ⚠️ regen failed: $SLUG"
+              tail -n 30 ".local/regen-$SLUG.log"
+              ls -la "$DIR"
             fi
           done
           sort -u -o .local/generated-blog-svg-keys.txt .local/generated-blog-svg-keys.txt

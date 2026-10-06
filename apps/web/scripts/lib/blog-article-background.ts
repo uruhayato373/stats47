@@ -20,7 +20,7 @@ export const BLOG_ARTICLE_BACKGROUND_MODEL = 'gpt-image-2';
 export const BLOG_ARTICLE_BACKGROUND_PROMPT_VERSION =
   'blog-article-context-v1';
 export const BLOG_ARTICLE_BACKGROUND_ASSET_DIR =
-  'apps/web/scripts/lib/assets/blog-article-backgrounds';
+  'assets/blog/article-backgrounds';
 
 export interface BlogArticleImageContext {
   slug: string;

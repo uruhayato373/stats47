@@ -12,7 +12,7 @@
  *   2. cta_click custom dimension (content_id / target_type) 登録済みなら deep-click も取れる。未登録は session のみ。
  *
  * 実行: node .claude/scripts/sns/buzz-map-attribution.mjs [days]   (既定 28)
- * 出力: stdout に集計 JSON サマリ + .claude/state/sns/buzz-map-attribution-latest.json
+ * 出力: stdout に集計 JSON サマリ + data/sns/buzz-map-attribution-latest.json
  *       (+ 日付版 buzz-map-attribution-<date>.json)。投稿 0 の現在は campaign 0 件 = 正常 (異常終了しない)。
  * 鍵が無い環境では exit 0 で skipped と表示し state を書かない (CI/cloud を止めない)。
  */
@@ -35,7 +35,6 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
 const PROPERTY_ID = process.env.GA4_PROPERTY_ID || GA4_PROPERTY_ID;
 const KEY_CANDIDATES = ["stats47-f6b5dae19196.json", "stats47-31b18ee67144.json"];
-const STATE_DIR = path.join(PROJECT_ROOT, ".claude/state/sns");
 
 const store = require(path.join(PROJECT_ROOT, ".claude/scripts/lib/sns-posts-store.cjs"));
 
@@ -112,13 +111,15 @@ async function main() {
     kpisByIdea,
     feedback,
   };
-  fs.mkdirSync(STATE_DIR, { recursive: true });
+  // 流入の計測は記録なので data/sns/ (台帳 id は sns.buzz-map-attribution)
+  const outDir = path.join(PROJECT_ROOT, "data/sns");
+  fs.mkdirSync(outDir, { recursive: true });
   const date = new Date().toISOString().slice(0, 10);
-  fs.writeFileSync(path.join(STATE_DIR, `buzz-map-attribution-${date}.json`), JSON.stringify(payload, null, 2) + "\n");
-  fs.writeFileSync(path.join(STATE_DIR, "buzz-map-attribution-latest.json"), JSON.stringify(payload, null, 2) + "\n");
+  fs.writeFileSync(path.join(outDir, `buzz-map-attribution-${date}.json`), JSON.stringify(payload, null, 2) + "\n");
+  fs.writeFileSync(path.join(outDir, "buzz-map-attribution-latest.json"), JSON.stringify(payload, null, 2) + "\n");
 
   console.log(JSON.stringify({ ideaCount: payload.ideaCount, ctaMeasured, kpisByIdea, feedback }, null, 2));
-  console.log(`\nstate: ${path.join(STATE_DIR, "buzz-map-attribution-latest.json")}`);
+  console.log(`\nstate: ${path.join(outDir, "buzz-map-attribution-latest.json")}`);
 }
 
 async function runSessionReport(analyticsdata, days) {

@@ -5,7 +5,7 @@ import test from "node:test";
 import { evaluateRules, flatten } from "../../cloudflare/threshold-check.mjs";
 
 const budgets = JSON.parse(readFileSync(new URL(
-  "../../../skills/analytics/cloudflare-cost-improvement/reference/budgets-daily.json",
+  "../../../config/budgets/cloudflare-cost-improvement/budgets-daily.json",
   import.meta.url,
 ), "utf-8"));
 

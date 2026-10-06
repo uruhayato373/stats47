@@ -1,6 +1,9 @@
 /**
  * SNS シェアボタンのブランド識別色（見分けるための配色）。
  * 意味を持つ状態色ではないため、生パレットはこのモジュールにだけ置く。
+ *
+ * LINE とはてなの地色は明るく、白文字では 4.5:1 に届かない (2.26 / 2.85)。ブランドの地色は変えず、
+ * 文字を濃紺にする (7.91 / 6.26。2026-10-06 axe color-contrast)。
  */
 export const SHARE_BRAND_PALETTE = {
   x: {
@@ -13,10 +16,10 @@ export const SHARE_BRAND_PALETTE = {
   },
   line: {
     hover: "hover:text-green-500 hover:bg-green-500/10",
-    prominent: "bg-[#06C755] text-white hover:bg-[#06C755]/90",
+    prominent: "bg-[#06C755] text-[#0f172a] hover:bg-[#06C755]/90",
   },
   hatena: {
     hover: "hover:text-blue-500 hover:bg-blue-500/10",
-    prominent: "bg-[#00A4DE] text-white hover:bg-[#00A4DE]/90",
+    prominent: "bg-[#00A4DE] text-[#0f172a] hover:bg-[#00A4DE]/90",
   },
 } as const satisfies Record<string, { hover: string; prominent: string }>;

@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      # 計測も develop の上で行う。以前は main で計測して .claude/state/metrics/cloudflare/ を develop へ上書きコピーしており、
+      # 計測も develop の上で行う。以前は main で計測して data/cloudflare/ を develop へ上書きコピーしており、
       # main が develop より遅れている間は前日までの history 行と prune の削除を毎日失っていた
       # (2026-10-05 発見。消えた行は git 履歴から復元済み)。契約: workflow-commit-back-core.cjs の findForeignTreeRestore。
       - name: 🧰 Checkout develop
@@ -71,7 +71,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add .claude/state/metrics/cloudflare
+          git add data/cloudflare
           if git diff --cached --quiet; then
             echo "No Cloudflare changes to publish"
             exit 0

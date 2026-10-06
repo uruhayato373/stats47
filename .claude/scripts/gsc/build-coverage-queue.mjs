@@ -81,12 +81,13 @@ const todayInTokyo = () =>
     day: "2-digit",
   }).format(new Date());
 
-const DRILLDOWN_DIR = path.join(PROJECT_ROOT, ".claude/state/metrics/gsc/coverage-drilldown");
+const DRILLDOWN_DIR = path.join(PROJECT_ROOT, "data/gsc/coverage-drilldown");
 const STATE_DIR = path.join(PROJECT_ROOT, ".claude/state/gsc");
 const QUEUE_PATH = path.join(STATE_DIR, "coverage-remediation-queue.json");
 const LATEST_PATH = path.join(STATE_DIR, "LATEST.md");
-const TOTALS_HISTORY = path.join(STATE_DIR, "coverage-totals-history.csv");
-const INSPECTION_DIR = path.join(PROJECT_ROOT, ".claude/state/metrics/gsc/url-inspection");
+// 件数の推移は記録なので data/gsc/ (キューと要約は作業状態なので .claude/state/gsc/)
+const TOTALS_HISTORY = path.join(PROJECT_ROOT, "data/gsc/coverage-totals-history.csv");
+const INSPECTION_DIR = path.join(PROJECT_ROOT, "data/gsc/url-inspection");
 const INSPECTION_WINDOW_DAYS = 14;
 
 const GOOGLEBOT_UA =

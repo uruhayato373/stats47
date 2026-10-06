@@ -105,7 +105,7 @@ jobs:
         run: |
           echo "# Weekly Metrics Snapshot — ${{ steps.week.outputs.week }}" >> "$GITHUB_STEP_SUMMARY"
           for src in gsc ga4 adsense; do
-            LATEST=".claude/state/metrics/$src/LATEST.md"
+            LATEST="data/$src/LATEST.md"
             if [ -f "$LATEST" ]; then
               {
                 echo ""
@@ -214,7 +214,7 @@ jobs:
           GA4_PROPERTY_ID: ${{ vars.GA4_PROPERTY_ID }}
         run: |
           if bash .claude/scripts/metrics/refresh-measurement-cycle.sh "${{ steps.week.outputs.week }}"; then
-            cat .claude/state/metrics/measurement-cycle/LATEST.md >> "$GITHUB_STEP_SUMMARY"
+            cat data/measurement-cycle/LATEST.md >> "$GITHUB_STEP_SUMMARY"
           else
             echo "::warning::build-measurement-cycle が失敗した (月曜の improvement-cycle-weekly が週の不一致で止まり alert を出す)"
           fi
@@ -286,11 +286,15 @@ jobs:
           # 生成先は packages/data-configs 側 (apps/web と packages/ranking の両方が読むため)。
           # ここを取り違えると再生成しても commit されず、次の PR で --check だけが落ちる。
           git add packages/data-configs/src/prominence/ranking-prominence.generated.ts
-          git add .claude/skills/analytics/gsc-improvement/reference/snapshots
-          git add .claude/skills/analytics/ga4-improvement/reference/snapshots
-          git add .claude/skills/analytics/adsense-improvement/reference/snapshots
+          git add data/gsc/snapshots
+          git add data/ga4/snapshots
+          git add data/adsense/snapshots
           git add .claude/state/metrics
-          git add .claude/skills/management/nsm-experiment/reference/weekly-snapshots
+          # 2026-10-06 に .claude/state/metrics から data/<取得元>/ へ移した集約・要約・時系列 (旧来は上の 1 行で拾っていた)。
+          # ディレクトリごと add するので、保持期間で消した古い世代の削除も拾う
+          git add data/gsc data/ga4 data/adsense data/cloudflare data/psi data/note data/sns data/measurement-cycle \
+            data/authenticated data/blog data/ai-content data/affiliate 2>/dev/null || true
+          git add data/nsm/weekly-snapshots
           # state:snapshots:prune の削除分 (週次 append する state の古い世代)
           git add .claude/state/business-plan/history 2>/dev/null || true
           git add .claude/state/search-growth/manifests 2>/dev/null || true
@@ -302,14 +306,14 @@ jobs:
           # GSC カバレッジ是正キュー (再実測で verdict が最新化される) + 判断が要る分のバックログカード
           git add .claude/state/gsc 2>/dev/null || true
           git add .claude/todo/backlog.md 2>/dev/null || true
-          git add .claude/state/metrics/gsc/coverage-drilldown 2>/dev/null || true
-          git add .claude/skills/analytics/gsc-improvement/reference/improvement-log.md 2>/dev/null || true
+          git add data/gsc/coverage-drilldown 2>/dev/null || true
+          git add data/improvement/gsc-improvement/improvement-log.md 2>/dev/null || true
           # 効果判定ループの成果物 (verdict JSON + 抑制台帳 + 新規 improvement-log)
-          git add .claude/state/effect-verdict 2>/dev/null || true
+          git add data/effect-verdict 2>/dev/null || true
           git add .claude/state/search-growth/past-effects.json 2>/dev/null || true
-          git add .claude/state/metrics/adsense/past-effects.json 2>/dev/null || true
-          git add .claude/skills/analytics/ga4-improvement/reference/improvement-log.md 2>/dev/null || true
-          git add .claude/skills/analytics/cloudflare-cost-improvement/reference/improvement-log.md 2>/dev/null || true
+          git add data/adsense/past-effects.json 2>/dev/null || true
+          git add data/improvement/ga4-improvement/improvement-log.md 2>/dev/null || true
+          git add data/improvement/cloudflare-cost-improvement/improvement-log.md 2>/dev/null || true
 
           if git diff --cached --quiet; then
             echo "No metrics changes to publish"

@@ -19,7 +19,7 @@ import { fileURLToPath } from "node:url";
 const require = createRequire(import.meta.url);
 const core = require("./lib/a8-scout-core.mjs");
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
-const CATALOG = path.join(PROJECT_ROOT, ".claude/state/ads/a8-catalog.json");
+const CATALOG = path.join(PROJECT_ROOT, "data/affiliate/a8-catalog.json");
 const INVENTORY = path.join(PROJECT_ROOT, ".claude/state/ads/inventory-latest.json");
 
 const args = process.argv.slice(2);

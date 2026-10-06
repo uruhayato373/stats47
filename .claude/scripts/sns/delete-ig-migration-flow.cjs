@@ -3,7 +3,7 @@
  * IG migration-flow 投稿 (古い city コロプレスなし版) を Graph API で削除する。
  *
  * 流れ:
- * 1. sns_posts ストア (.claude/state/sns/posts.json) から domain='migration-flow' AND platform='instagram' AND status='posted' を取得 (post_url 含む)
+ * 1. sns_posts ストア (data/sns/posts.json) から domain='migration-flow' AND platform='instagram' AND status='posted' を取得 (post_url 含む)
  * 2. Graph API /{IG_USER_ID}/media?fields=id,permalink で最近の投稿一覧を fetch (paging)
  * 3. permalink が ストアの post_url とマッチする media-id を解決
  * 4. DELETE /{media-id} を実行

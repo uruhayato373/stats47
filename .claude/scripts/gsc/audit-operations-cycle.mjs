@@ -209,19 +209,19 @@ export function auditOperationsCycle({
   const paths = {
     snapshots: path.join(
       root,
-      '.claude/skills/analytics/gsc-improvement/reference/snapshots'
+      'data/gsc/snapshots'
     ),
-    verdicts: path.join(root, '.claude/state/effect-verdict'),
+    verdicts: path.join(root, 'data/effect-verdict'),
     reviews: path.join(
       root,
-      '.claude/skills/management/weekly-review/reference/reviews'
+      'data/reviews/weekly'
     ),
     weeklyPlan: path.join(root, '.claude/todo/weekly.md'),
     monthlyPlan: path.join(root, '.claude/todo/monthly.md'),
     candidates: path.join(root, '.claude/state/search-growth/candidates.json'),
     inspectionLatest: path.join(
       root,
-      '.claude/state/metrics/gsc/url-inspection/LATEST.md'
+      'data/gsc/url-inspection/LATEST.md'
     ),
     improvements: path.join(root, '.claude/todo/improvements.md'),
   };

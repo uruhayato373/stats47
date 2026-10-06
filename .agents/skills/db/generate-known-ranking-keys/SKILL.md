@@ -60,4 +60,4 @@ cd apps/web && npx tsx scripts/generate-known-ranking-keys.ts
 - 出力先: `apps/web/src/config/known-ranking-keys.ts`
 - middleware 参照箇所: `apps/web/src/middleware.ts` の Fix 6
 - 関連スキル: `/sync-metrics-cache`, `/page-data-batch`, `/deploy`
-- 背景・v1/v2 失敗の教訓: `.claude/skills/analytics/gsc-improvement/reference/improvement-log.md` T0-RKG-200-01-v3
+- 背景・v1/v2 失敗の教訓: `data/improvement/gsc-improvement/improvement-log.md` T0-RKG-200-01-v3

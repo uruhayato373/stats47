@@ -8,7 +8,7 @@ import { repoRoot } from "./lib/asp-browser-base.mjs";
 import { A8_REPORT_AUTOMATION } from "../../../config/paths.mjs";
 
 const root = repoRoot();
-const affiliateDir = join(root, ".claude/state/metrics/affiliate");
+const affiliateDir = join(root, "data/affiliate");
 const configPath = join(root, A8_REPORT_AUTOMATION);
 
 const readJson = (path) => (existsSync(path) ? JSON.parse(readFileSync(path, "utf8")) : null);

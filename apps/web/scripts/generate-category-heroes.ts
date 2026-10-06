@@ -3,7 +3,7 @@
  *
  *   # dry-run (API を叩かない。件数 / 最大費用 / キー有無を表示)
  *   npx tsx apps/web/scripts/generate-category-heroes.ts
- *   # 本番生成 (Gemini 呼び出し → docs/assets の PNG + public/images の webp)
+ *   # 本番生成 (Gemini 呼び出し → assets/page-heroes の PNG + public/images の webp)
  *   npx tsx apps/web/scripts/generate-category-heroes.ts --apply [--only population,tourism] [--force] [--budget-usd 1]
  *
  * - プロンプトは apps/web/scripts/data/category-hero-catalog.ts (SSOT) から決定的に生成 (文字なし)。
@@ -33,7 +33,7 @@ import { generateBackgroundImage } from "./lib/gemini-image-client";
 dotenv.config({ path: ".env.local" });
 
 const PROJECT_ROOT = resolve(__dirname, "../../..");
-const ASSETS_DIR = resolve(PROJECT_ROOT, "docs/assets");
+const ASSETS_DIR = resolve(PROJECT_ROOT, "assets/page-heroes");
 const PUBLIC_IMAGES_DIR = resolve(PROJECT_ROOT, "apps/web/public/images");
 
 /** economy は local-economy 画像を共有するため生成対象外。 */
@@ -61,7 +61,7 @@ console.log(`GEMINI_API_KEY present: ${keyPresent ? "yes" : "no"}`);
 console.log(`targets (${targets.length}): ${targets.join(", ")}`);
 console.log(`max cost: $${maxCost.toFixed(3)} (${targets.length} × $${OGP_PRICE_PER_IMAGE_USD})`);
 console.log(`budget cap: $${budgetUsd.toFixed(2)}`);
-console.log(`output: docs/assets/category-<key>-hero.jpg + apps/web/public/images/category-<key>-hero.webp`);
+console.log(`output: assets/page-heroes/category-<key>-hero.jpg + apps/web/public/images/category-<key>-hero.webp`);
 
 if (!apply) {
   console.log("\n[dry-run] --apply を付けると生成します (API 課金あり)。");

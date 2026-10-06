@@ -41,6 +41,6 @@ W21-W26 にかけての SEO 向上 × TODO 一元化 × 自動化拡張プラン
 - GSC CTR: 2.50% → 3.8% by W25
 - 新規公開記事: 12 本 (内トレンド 4 本) by W26
 
-**W22 (2026-05-25-31) 動作検証宿題**（`.claude/skills/analytics/ga4-improvement/reference/improvement-log.md` の GA4-CLEAN-01 残作業 #3）:
+**W22 (2026-05-25-31) 動作検証宿題**（`data/improvement/ga4-improvement/improvement-log.md` の GA4-CLEAN-01 残作業 #3）:
 - 自動 snapshot で `overview-clean.csv` / `channels-clean.csv` / `pollution-summary.csv` 生成確認
 - W20 6d 想定値 (sessions 911, engaged 513) と整合確認

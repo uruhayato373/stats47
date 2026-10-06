@@ -266,7 +266,7 @@ function renderMarkdown(results) {
     lines.push("### 改善提案ポインタ");
     lines.push("- LCP/CLS 過去施策: `.claude/todo/improvements.md`");
     lines.push(
-      "- 詳細ログ: `.claude/skills/analytics/performance-improvement/reference/improvement-log.md`"
+      "- 詳細ログ: `data/improvement/performance-improvement/improvement-log.md`"
     );
     lines.push(
       `- 検証コマンド: \`curl "https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://stats47.jp${r.pathname}&strategy=mobile"\``

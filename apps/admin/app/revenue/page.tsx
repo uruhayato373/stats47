@@ -28,7 +28,7 @@ export default function RevenuePage() {
     <div className="space-y-8">
       <PageHeading
         title="収益"
-        source=".claude/state/metrics/authenticated/revenue-history.json + .claude/state/products/sales-ledger.json + .claude/state/metrics/adsense/"
+        source="data/authenticated/revenue-history.json + data/products/sales-ledger.json + data/adsense/"
       />
 
       {/* ★計測範囲。0 と「未計測」を混同させないために必ず出す */}

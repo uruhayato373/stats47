@@ -7,7 +7,7 @@ const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
 /** KDP送信対象の全ファイルが、R2へ検証済みの最新revisionと一致することを確認する。 */
 export function assertKindleAssetsArchived(root, id, listing) {
   if (!/^K-S[1-4]-\d{2}$/.test(id)) return { ok: false, reason: "不正なbook id" };
-  const statePath = join(root, ".claude/state/products/kindle-archives.json");
+  const statePath = join(root, "data/products/kindle-archives.json");
   if (!existsSync(statePath)) return { ok: false, reason: "Kindle archive台帳がありません" };
   let state;
   try {

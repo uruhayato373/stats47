@@ -6,12 +6,12 @@
 
 | metric | 連携 improvement skill | 計測コマンド | improvement-log パス | budget ファイル | metrics state | min_wait_days |
 |---|---|---|---|---|---|---|
-| psi | performance-improvement | `node .claude/scripts/psi/fetch-psi-audit.mjs --urls <comma-separated> --strategy mobile --out <path>` | `.claude/skills/analytics/performance-improvement/reference/improvement-log.md` | `.claude/skills/analytics/performance-improvement/budgets.json` | `data/psi/` | 1 |
-| gsc | gsc-improvement | `/fetch-gsc-data last28d page snapshot YYYY-Www` | `.claude/skills/analytics/gsc-improvement/reference/improvement-log.md` | `.claude/skills/analytics/gsc-improvement/reference/budgets.json` | `.claude/state/metrics/gsc/` | 7 |
-| ga4 | ga4-improvement | `/fetch-ga4-data last28d eventName,pagePath` | (skill 内に未整備、必要なら新設) | `.claude/skills/analytics/ga4-improvement/reference/budgets.json` | `.claude/state/metrics/ga4/` | 7 |
-| adsense | adsense-improvement | (skill 内既存スクリプト経由) | (skill 内に未整備、必要なら新設) | `.claude/skills/analytics/adsense-improvement/reference/budgets.json` | `.claude/state/metrics/adsense/` | 7 |
-| sns | sns-metrics-improvement | (skill 内既存スクリプト経由) | `.claude/skills/analytics/sns-metrics-improvement/reference/improvement-log.md` | (未設定) | `.claude/state/metrics/sns/` | 7 |
-| cost | cloudflare-cost-improvement | (skill 内既存スクリプト経由) | (skill 内に未整備、必要なら新設) | `.claude/skills/analytics/cloudflare-cost-improvement/reference/budgets-daily.json` | `.claude/state/metrics/cloudflare/` | 30 |
+| psi | performance-improvement | `node .claude/scripts/psi/fetch-psi-audit.mjs --urls <comma-separated> --strategy mobile --out <path>` | `data/improvement/performance-improvement/improvement-log.md` | `.claude/skills/analytics/performance-improvement/budgets.json` | `data/psi/` | 1 |
+| gsc | gsc-improvement | `/fetch-gsc-data last28d page snapshot YYYY-Www` | `data/improvement/gsc-improvement/improvement-log.md` | `.claude/config/budgets/gsc-improvement/budgets.json` | `.claude/state/metrics/gsc/` | 7 |
+| ga4 | ga4-improvement | `/fetch-ga4-data last28d eventName,pagePath` | (skill 内に未整備、必要なら新設) | `.claude/config/budgets/ga4-improvement/budgets.json` | `data/ga4/` | 7 |
+| adsense | adsense-improvement | (skill 内既存スクリプト経由) | (skill 内に未整備、必要なら新設) | `.claude/config/budgets/adsense-improvement/budgets.json` | `data/adsense/` | 7 |
+| sns | sns-metrics-improvement | (skill 内既存スクリプト経由) | `data/improvement/sns-metrics-improvement/improvement-log.md` | (未設定) | `data/sns/` | 7 |
+| cost | cloudflare-cost-improvement | (skill 内既存スクリプト経由) | (skill 内に未整備、必要なら新設) | `.claude/config/budgets/cloudflare-cost-improvement/budgets-daily.json` | `data/cloudflare/` | 30 |
 | custom | (任意) | 引数で指定 | 任意 | 任意 | 任意 | (任意) |
 
 ## カラムの意味

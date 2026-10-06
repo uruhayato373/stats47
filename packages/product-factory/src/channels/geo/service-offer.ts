@@ -9,7 +9,7 @@ export const GEO_SERVICE_OFFER = {
   scope: '1都道府県・地価2026年（前年比2025→2026）・人口2020→2050年・既存の包含結合条件固定',
   priceYen: 5000,
   termsApprovedAt: '2026-09-06',
-  approvalRecord: '.claude/state/products/geo-service-readiness-2026-09-06.json#ownerApproval',
+  approvalRecord: 'data/products/geo-service-readiness-2026-09-06.json#ownerApproval',
   priceBasis: '指定県の資料化・説明対応への対価。5,000円への変更はオーナー承認済み。需要・手数料控除後利益は未検証。',
   deliveryBusinessDays: 5,
   revisions: 1,

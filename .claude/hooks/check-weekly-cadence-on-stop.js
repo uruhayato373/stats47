@@ -76,7 +76,7 @@ function main() {
     `⚠️ レビューが ${missing.length} 件未作成です (期限を過ぎた振り返り漏れ)。`,
     list,
     "",
-    "実測メトリクスは NSM snapshot と .claude/state/metrics/*/history.csv に残っています",
+    "実測メトリクスは NSM snapshot と data/<取得元>/history.csv に残っています",
     "(後追いでも実証ベースで書けます)。埋めない場合は「後で」と伝えてください (本日は再通知しません)。",
   ].join("\n");
 
