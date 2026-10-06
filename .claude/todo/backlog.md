@@ -277,29 +277,36 @@ updated: 2026-10-06
 - **停止条件**: 単発の PSI 値で改善と判定しない (日次計測はばらつくため 3 週以上の推移で見る)。デプロイはオーナーの明示承認まで行わない。ベースライン 9,347ms は 2026-08-04 の実測値で、これを更新して達成扱いにしない。
 - **完了条件**: `ranking/total-population,mobile` の LCP が 3 週連続でベースライン 9,347ms を下回る。悪化要因が topology fetch でなかった場合は、実測で特定した真因と対策を本カードへ記録してから閉じる。
 
-### [DEPLOY-WORKER-CACHE-STALE-CSS-01] デプロイ中に Workers Cache に入った HTML が消えた CSS を参照し、ホームが CSS なしで表示される事故を止める
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-06] [領域:サイト]
+### [DEPLOY-WORKER-CACHE-STALE-CSS-01] デプロイ後に古い HTML が消えた CSS を参照し、ホームが CSS なしで表示される事故を止める
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-06] [進行中] [領域:サイト]
 
-- **事象 (2026-10-06)**: PR #1086 のデプロイ (`deploy-workers` 21:39–21:50 UTC) の後、本番 `/` が CSS なしで表示され、
-  post-deploy-smoke の 375px で横スクロール 273px になった (Issue #1089)。`/` の HTML は `/_next/static/css/d69590e93db400ea.css`
-  を参照していたが、この CSS はデプロイで消えて 404 だった。応答は `cf-cache-status: HIT`・`age: 1544` (22:10:22 UTC 時点。
-  21:44 ごろ、つまりデプロイ中にキャッシュされた)。ほかのページと `/?nocache=…` は新しい `d4949ee3e21c581b.css` (200) を参照していた。
-- **切り分け**: zone の URL purge (`purge-cache.ts --urls https://stats47.jp/`) では直らず、`age` は増え続けた。`purge-cdn.yml`
-  (Workers Cache の `--all` を含む) を実行すると 1 分で新しい CSS を参照するようになった。したがって古い HTML は Workers Cache に残っていた。
-  `deploy-workers.yml` はデプロイ後に Workers Cache を消していない。
-- **[仮説]** デプロイの切り替え中に旧版の Worker が `/` を描画して Workers Cache に入れ、旧版の CSS は新版の静的資産から消えた。
-  CSS のハッシュが変わるデプロイのたびに起こりうる。検証: 次に CSS が変わるデプロイの直後に `curl -sI https://stats47.jp/` の
-  `age` と CSS の参照先を見る。
+- **事象 (2026-10-06)**: PR #1086 のデプロイ後、本番 `/` が CSS なしで表示され、post-deploy-smoke の 375px で横スクロール 273px
+  になった (Issue #1089・確認を書いて閉じた)。`/` の HTML はデプロイで消えた `/_next/static/css/d69590e93db400ea.css` (404) を参照し、
+  `cf-cache-status: HIT`・`age: 1544` (22:10:22 UTC)。逆算したキャッシュ時刻 21:44:38 は、`wrangler deploy` 完了 (21:44:23) の
+  10 秒後に始まる warm-cache が `/` を叩いた時刻と一致した。zone の URL purge では消えず、`purge-cdn.yml` (zone の全パージと
+  Workers Cache の `--all`) で消えた。
+- **経路は未確定**: 公式ドキュメントでは、Workers Cache は既定で Worker の版がキャッシュキーに含まれ、新しい版は空のキャッシュから
+  始まり、段階的な切り替え中も旧版へのリクエストはキャッシュされない
+  ([Configuration](https://developers.cloudflare.com/workers/cache/configuration/)、2026-10-06 確認。`cross_version_cache` は未設定)。
+  `/` は `force-dynamic` で毎回描画するので、新しい版が古い CSS を出す経路も見つかっていない。観測とドキュメントが合わないため、
+  経路を特定せずに次の 2 つで防ぐ。
+- **実装済み・未デプロイ (2026-10-06)**:
+  - `deploy-workers.yml` に `reset-worker-cache-after-deploy.sh` を足した。デプロイ後、本番 `/` (毎回別キーの probe URL) が
+    今回のビルドの CSS だけを参照するまで最大 2 分待ち、Workers Cache を全パージしてからウォームする。新しい版は空のキャッシュから
+    始まる仕様なので、この purge で失うものはない
+  - `smoke-test-routes.sh` に、HTML が参照する `/_next/static/` の CSS・JS が 200 を返すかの検査 (`[stale asset]`) を足した。
+    今日 404 だった CSS を渡すと検出し、現在の本番では 16/16 通ることを確かめた
+  - 順序 (デプロイ → 全パージ → ウォーム) と検査の存在は `apps/web/src/__tests__/workers-cache-contract.test.ts` が固定する
+    (全パージをウォームの後へ動かすと落ちることを確認)
 - **関連 (2026-10-06 22:13 UTC)**: 全パージ (22:12) の直後に PR #1088 をデプロイした (77acdfb2)。ウォームアップで 5 件、
   本番ルート確認で 1 件が 503 を返し、`deploy-workers` は失敗扱いで post-deploy-smoke は skip された。新版は反映済みで
-  (Version ID `1a737ebb`)、数分後には同じ 6 ルートが 200 (描画 5〜8 秒) を返した。22:25 に本番へ smoke-test.ts 11/11・
+  (Version ID `1a737ebb`)、数分後には同じ 6 ルートが 200 (描画 5〜8 秒) を返し、22:25 に本番へ smoke-test.ts 11/11・
   Playwright smoke 48/48 が通った。**[仮説]** キャッシュが空の状態で、データの多いテーマページの初回描画が間に合わなかった。
-  検証: 全パージをしていないデプロイで同じ 503 が出るかを見る。出なければ「全パージはデプロイの直前に行わない」を
-  `.claude/rules/branch-workflow.md` に足す。
-- **次**: どちらかで止める。(a) `deploy-workers` の最後に `purge-worker-cache.ts --all` を足す (デプロイ完了後に古い HTML を消す)。
-  (b) 1 つ前のデプロイの `_next/static` を残す。(a) の方が小さい。post-deploy-smoke はこの事故を検出できているので、検査は足さない。
-- **完了条件**: CSS のハッシュが変わるデプロイの後に、`/` を含む代表 URL が新しい CSS を参照し、post-deploy-smoke が通る。
-
+  この対策もデプロイ直後に Workers Cache を空にするので、次のデプロイで同じ 503 が出るかを見る。
+- **次**: 次の本番デプロイの `deploy-workers` のログで、(1) reset step が新しい CSS を確認してから全パージしたこと、
+  (2) smoke の `[stale asset]` が 0 件であることを確かめる。ウォームや smoke で 503 が出たら、ウォームの間隔・再試行を見直す
+  (ほかの検査を緩めない)。
+- **完了条件**: 次の本番デプロイで reset step と smoke が通り、post-deploy-smoke (Playwright) も通る。
 ## 🟡 中 — 2〜3ヶ月以内
 
 ### [DEPS-TAILWIND4-01] apps/web を tailwindcss 4 へ移行し、braces を runtime 依存から外す

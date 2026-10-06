@@ -261,6 +261,14 @@ jobs:
           workingDirectory: apps/web
           command: deploy --env production
 
+      # ウォームの前に、本番が今回のビルドを返し始めたのを確かめてから Workers Cache を全部消す。
+      # 2026-10-06: デプロイ後に / の HTML が消えた CSS (404) を参照したまま Workers Cache に残り、
+      # ホームが CSS なしで表示された (Issue #1089)。経緯と根拠は script 冒頭。
+      - name: 🧹 Reset Workers Cache after deploy
+        env:
+          WORKER_CACHE_PURGE_SECRET: ${{ secrets.WORKER_CACHE_PURGE_SECRET }}
+        run: bash .github/scripts/reset-worker-cache-after-deploy.sh https://stats47.jp apps/web/.open-next/assets
+
       # デプロイ直後にウォームして Worker + D1 接続を初期化する（コールドスタート対策）。
       - name: Warm cache (Production)
         continue-on-error: true
