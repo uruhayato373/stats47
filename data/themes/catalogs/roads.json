@@ -414,7 +414,7 @@
     },
     {
       "key": "candidate-89-1",
-      "title": "道路橋の架設年度と橋梁・トンネルの健全性｜道路橋の診断済総数",
+      "title": "道路橋の診断済総数",
       "rankingKeys": [
         "road-bridge-diagnosed-count"
       ],
@@ -424,7 +424,7 @@
     },
     {
       "key": "candidate-89-2",
-      "title": "道路橋の架設年度と橋梁・トンネルの健全性｜道路橋の早期措置段階（Ⅲ）",
+      "title": "道路橋の早期措置段階（Ⅲ）",
       "rankingKeys": [
         "road-bridge-condition-iii-count"
       ],
@@ -434,7 +434,7 @@
     },
     {
       "key": "candidate-89-3",
-      "title": "道路橋の架設年度と橋梁・トンネルの健全性｜道路橋の緊急措置段階（Ⅳ）",
+      "title": "道路橋の緊急措置段階（Ⅳ）",
       "rankingKeys": [
         "road-bridge-condition-iv-count"
       ],
@@ -444,7 +444,7 @@
     },
     {
       "key": "candidate-89-4",
-      "title": "道路橋の架設年度と橋梁・トンネルの健全性｜トンネルの診断済総数",
+      "title": "トンネルの診断済総数",
       "rankingKeys": [
         "road-tunnel-diagnosed-count"
       ],
@@ -454,7 +454,7 @@
     },
     {
       "key": "candidate-89-5",
-      "title": "道路橋の架設年度と橋梁・トンネルの健全性｜トンネルの早期措置段階（Ⅲ）",
+      "title": "トンネルの早期措置段階（Ⅲ）",
       "rankingKeys": [
         "road-tunnel-condition-iii-count"
       ],
@@ -464,7 +464,7 @@
     },
     {
       "key": "candidate-89-6",
-      "title": "道路橋の架設年度と橋梁・トンネルの健全性｜トンネルの緊急措置段階（Ⅳ）",
+      "title": "トンネルの緊急措置段階（Ⅳ）",
       "rankingKeys": [
         "road-tunnel-condition-iv-count"
       ],

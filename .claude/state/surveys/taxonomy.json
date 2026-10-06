@@ -267,10 +267,10 @@
       "coveragePct": 100,
       "unresolved": []
     },
-    "charts": 76,
-    "applicableCharts": 60,
+    "charts": 75,
+    "applicableCharts": 59,
     "byStatus": {
-      "resolved": 60,
+      "resolved": 59,
       "unresolved": 0,
       "not-applicable": 16,
       "missing-lineage": 0
@@ -565,9 +565,6 @@
       "patient-survey": [
         "healthcare"
       ],
-      "pension-insurance-annual-report": [
-        "aging-society"
-      ],
       "physician-survey": [
         "healthcare"
       ],
@@ -657,7 +654,6 @@
         "sports-participation"
       ],
       "social-life-basic-survey": [
-        "aging-society",
         "community-participation",
         "cultural-participation",
         "daily-time-use",
@@ -3624,9 +3620,7 @@
     {
       "surveyId": "pension-insurance-annual-report",
       "rankingCount": 6,
-      "themeKeys": [
-        "aging-society"
-      ],
+      "themeKeys": [],
       "blogSlugs": [
         "national-pension-full-exemption-rate-prefecture-gap",
         "national-pension-payment-rate-prefecture-gap"
@@ -4127,7 +4121,6 @@
       "surveyId": "social-life-basic-survey",
       "rankingCount": 113,
       "themeKeys": [
-        "aging-society",
         "community-participation",
         "cultural-participation",
         "daily-time-use",

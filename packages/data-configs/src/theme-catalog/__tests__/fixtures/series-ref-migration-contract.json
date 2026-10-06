@@ -14,26 +14,6 @@
     ]
   },
   {
-    "themeKey": "aging-society",
-    "componentKey": "cmp-pop-elderly-household",
-    "componentType": "line-chart",
-    "rawRequestKeys": [
-      "0000010201?cdCat01=#A06301",
-      "0000010201?cdCat01=#A06304",
-      "0000010201?cdCat01=#A06302"
-    ],
-    "metricKeys": [
-      "household-ratio-with-65plus",
-      "single-person-household-old-population-ratio",
-      "elderly-couple-only-household-ratio"
-    ],
-    "units": [
-      "％",
-      "％",
-      "％"
-    ]
-  },
-  {
     "themeKey": "education-culture",
     "componentKey": "theme-edu-higher-education-trend",
     "componentType": "line-chart",

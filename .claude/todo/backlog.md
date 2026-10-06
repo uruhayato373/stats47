@@ -1868,7 +1868,7 @@ updated: 2026-10-06
 
 タグ: [エージェント・SSOT] [種類:意思決定] [実行:対話] [検証:npm run validate:catalog --workspace=@stats47/data-configs] [起票:2026-09-17] [領域:データ]
 
-- **owner**: theme-designer (採否判断・`<theme>.ts` 編集) / 最終承認はユーザー
+- **owner**: theme-designer (採否判断・`data/themes/catalogs/<theme>.json` 編集) / 最終承認はユーザー
 - **背景**: `THEME-SELECTION-BACKFILL-01` の調査は selection の裏付けだけでなく、副産物として
   「今の role (primary/secondary/context) は適切か」の判定も出す。これは selection と違い
   **採用すればサイト表示 (指標カードの並び) が変わる**唯一の出力。ただし夜間バッチは role を
@@ -1881,7 +1881,7 @@ updated: 2026-10-06
 - **サイトへの展開経路 (実行順)**:
   1. `.claude/state/theme/LATEST.md` で pending 一覧を確認
   2. 1 件ずつ採否判断し記録: `node --import tsx .claude/scripts/themes/build-role-review-queue.mjs decide --theme <theme> --key <rankingKey> --decision accept|reject --note "..."`
-  3. accept した分を対象 `<theme>.ts` (または `expanded.ts` の tuple 第3要素) の role へ反映
+  3. accept した分を `data/themes/catalogs/<theme>.json` の該当指標の role へ反映
   4. `npm run generate:catalog --workspace=@stats47/data-configs && npm run validate:catalog --workspace=@stats47/data-configs && npm run type-check --workspace=@stats47/data-configs`
   5. localhost で視覚 QA (`theme-improvement-execution.md` の QA チェックリスト)
   6. commit → develop へ push
@@ -2529,6 +2529,46 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
   マージし (`f197151f0`)、PR #1077 で main まで反映する。**次**: 10-07 02:00 JST の PSI 日次の run が `data/psi/` に書き、
   旧置き場 `.claude/state/metrics/psi` に書いていないこと、既存の history 行が巻き戻っていないことを確かめてから次の取得元 (GSC) へ進む。
 - **完了条件**: `npm run check-datasets -- --moves` が 0 行。関係する workflow の次回の定期実行が新しい置き場へ書いている。
+
+### [THEME-CATALOG-OPT-RELEASE-01] aging-society の改善と章順・カード見出しの横断修正を、9 月の実験の d56 観測後に本番へ出す
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:node .claude/scripts/themes/validate-theme-state.mjs] [起票:2026-10-06] [期日:2026-11-13] [領域:データ]
+
+- **背景**: 2026-10-06 承認の提案 (`.claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-10-06-theme-aging-society.md`)
+  を branch `claude/theme-catalog-optimization` に実装した (aging-society の指標・章・カード、読み方章の末尾移動 8 テーマ、
+  カード見出しの章名除去 258 件)。変更した 28 テーマはすべて `.claude/state/themes/experiments.json` に
+  `THEME-STRUCTURE-20260908-*` / `THEME-LAUNCH-*` の pending 実験 (d28 = 2026-10-09、d56 = 2026-11-06) を持つ。
+  先に出すと d56 の観測にこの変更が混ざる。同じテーマ × changeType の pending は 1 件までなので、aging-society の新しい実験も今は登録できない。
+- **次**: 2026-11-06 の d56 観測が `experiments.json` に記録されたのを確かめてから、オーナーの承認を取って
+  ① R2 の page-components 反映 (`sync-snapshots.yml` を `only=page-components` で実行。aging-society の
+  `page-components/theme/aging-society.json` が変わる。反映せずにアプリだけ出すと、外した「高齢世帯の推移」が R2 から読まれ、
+  ページ末尾に章外の図として残る) → ② develop → main のデプロイ → ③ aging-society の実験を
+  `evaluate-theme-experiments.mjs --register` で baseline 付きで登録し `--schedule <デプロイ日>`。
+- **完了条件**: 本番 `/themes/aging-society` で「年齢構造と支え手の比率」章にカードが出て、「高齢世帯の推移」が無く、
+  8 テーマで読み方章が末尾にある。aging-society の実験が登録され d7/d28/d56 が入っている。
+
+### [THEME-AGING-LIVING-ALONE-METRIC-01] 65歳以上人口に占める一人暮らしの割合 (高齢者の独居率) を指標に足す
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run validate:config --workspace=@stats47/data-configs] [起票:2026-10-06] [領域:データ]
+
+- **背景**: GSC 2026-W40 (28 日) で「高齢者 一人暮らし 割合」系の 5 クエリが計 293 表示。現行の
+  `single-person-household-old-population-ratio` は一般世帯が分母で、高齢者本人の独居率ではない (aging-society の章注記どおり)。
+  既存の `single-households-age65plus-male/female` は 2020 年の世帯数だけ。
+- **次**: 国勢調査の表で、47 都道府県の「65 歳以上の単独世帯人員」と「65 歳以上人口」を複数回分 (2010・2015・2020 等)
+  解決できるかを e-Stat で確かめる (statsDataId と分類コードを記録)。解決できたら metric config を作り観測値を R2 へ入れ、
+  aging-society の「高齢者はどの世帯で暮らすか」章に secondary として足す (提案 → 承認 → catalog 編集の順)。
+- **禁止**: 一般世帯を分母にした既存指標を独居率と言い換えて表示しない。
+
+### [THEME-DUP-METRIC-CARD-01] 同じ指標のカードが 2 つの章に出ている 4 テーマを、どちらか 1 か所に整理する
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run validate:catalog --workspace=@stats47/data-configs] [起票:2026-10-06] [領域:データ]
+
+- **背景**: カード見出しから章名の繰り返しを外したとき (2026-10-06)、次の 5 枚は見出しが同じ章内の別カードと同じになり
+  `[group-dup-title]` に当たったため、章名付きの見出しを残した。どれも同じ rankingKey のカードが 2 つの章に出ている。
+  climate `annual-snow-days` (降水と雪 / 雪国の暮らしと除雪)、labor-mobility `active-job-opening-ratio`
+  (求人・求職と職業紹介 / 人手不足と求人)、living-housing `households` (空き家の用途と住宅ストック / 世帯構成の変化)、
+  real-income `disposable-income-worker-households` (控除前後の月収 / 可処分所得と生活費)。
+- **次**: テーマごとに、どちらの章の問いにそのカードが要るかを提案し、承認後に片方を外す。後から足された章 (`candidate-<id>`)
+  の唯一のカードを外す場合は、`npm run theme:expansion:check` がその章を未配線と判定するので、判断台帳
+  (`theme-feasibility-catalog.json`) の扱いも同じ変更で決める。
+- **完了条件**: 4 テーマで同じ rankingKey のカードが 1 か所だけになり、見出しに「章名｜」が残っていない。
 
 ## 🟢 低 — 時期未定・条件付き (trigger は本文に)
 

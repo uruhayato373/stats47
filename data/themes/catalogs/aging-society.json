@@ -168,7 +168,7 @@
     {
       "rankingKey": "divorces-per-total-population",
       "shortLabel": "離婚率（人口千人）",
-      "role": "secondary",
+      "role": "context",
       "selection": {
         "proposedBy": "人口動態統計 令和6年（2024）確定数 報道発表（厚生労働省）／社会生活統計指標 #A06602",
         "sourceUrl": "https://www.mhlw.go.jp/toukei/saikin/hw/jinkou/kakutei24/dl/14_houdouR06.pdf",
@@ -263,47 +263,37 @@
       }
     },
     {
-      "rankingKey": "pension-benefit-total",
-      "shortLabel": "厚生年金受給権者年金総額",
-      "role": "context",
-      "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
-        "surveyedAt": "2026-09-08",
-        "rationale": "厚生年金受給権者年金総額は対象範囲・構造の関連指標として詳細索引に保持し、冒頭の要約へ重ねない。"
-      }
-    },
-    {
-      "rankingKey": "volunteer-activity-annual-participation-rate-15plus",
-      "shortLabel": "ボランティア活動の年間行動者率",
-      "role": "context",
-      "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
-        "surveyedAt": "2026-09-08",
-        "rationale": "15歳以上の一般的社会参加であり高齢者固有の参加率ではない。 主表示は「教育・文化」へ集約する。関連指標としての導線は保持する。"
-      }
-    },
-    {
       "rankingKey": "young-population-index",
       "shortLabel": "年少人口指数（15～64歳人口100人当たり）",
-      "role": "context",
+      "role": "secondary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
-        "surveyedAt": "2026-09-08",
-        "rationale": "年少人口指数は「年齢構造はどう変わるか」の補足として詳細索引に保持し、冒頭の要約へ重ねない。"
+        "proposedBy": "統計FAQ 02A-Q11「年齢3区分別人口」（総務省統計局）",
+        "sourceUrl": "https://www.stat.go.jp/library/faq/faq02/faq02a11.html",
+        "surveyedAt": "2026-10-06",
+        "rationale": "総務省統計局は、年少人口指数を年齢3区分別人口から求める年齢構造指数の一つとし、15歳未満人口の15～64歳人口に対する比率と定義している。老年人口指数と分母が同じなので、2つを並べると、現役世代に対する子どもと高齢者の比率の変化を同じ尺度で読める。「年齢構造と支え手の比率」の章で老年人口指数と対にして置く。",
+        "adoptionCriteria": [
+          "comparability",
+          "complementarity"
+        ],
+        "readerQuestion": "この県では、現役世代100人に対する子どもの数がどう変わってきたか。",
+        "targetReaderOrDecision": "子育て環境や地域の将来の担い手を比べたい読者。"
       }
     },
     {
       "rankingKey": "old-population-index",
       "shortLabel": "老年人口指数（15～64歳人口100人当たり）",
-      "role": "context",
+      "role": "secondary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
-        "surveyedAt": "2026-09-08",
-        "rationale": "老年人口指数は「年齢構造はどう変わるか」の補足として詳細索引に保持し、冒頭の要約へ重ねない。"
+        "proposedBy": "令和7年版 高齢社会白書 第1章第1節1「高齢化の現状と将来像」（内閣府）",
+        "sourceUrl": "https://www8.cao.go.jp/kourei/whitepaper/w-2025/html/zenbun/s1_1_1.html",
+        "surveyedAt": "2026-10-06",
+        "rationale": "内閣府の高齢社会白書は、65歳以上人口と15～64歳人口の比率を高齢化の現状を示す見方として掲げ、昭和25年に現役世代12.1人だった比率が令和6年には2.0人まで下がったことを示している。老年人口指数はこの比率を15～64歳人口100人当たりの65歳以上人口で表した指標で、都道府県ごとの支え手の状況を同じ基準で比べられる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability"
+        ],
+        "readerQuestion": "この県では、現役世代100人に対して65歳以上の人が何人いるか。",
+        "targetReaderOrDecision": "地域の働き手や社会保障の担い手の状況を知りたい読者、自治体の計画を読む読者。"
       }
     },
     {
@@ -372,7 +362,7 @@
       "gridColumnSpanSm": null,
       "dataSource": "estat",
       "section": "elderly-care",
-      "sortOrder": 10
+      "sortOrder": 30
     },
     {
       "componentKey": "theme-age-composition",
@@ -407,7 +397,7 @@
       "gridColumnSpanSm": null,
       "dataSource": "ranking",
       "section": "age-structure",
-      "sortOrder": 20
+      "sortOrder": 10
     },
     {
       "componentKey": "theme-population-pyramid",
@@ -597,7 +587,7 @@
       "gridColumnSpanSm": null,
       "dataSource": "ranking",
       "section": "age-structure",
-      "sortOrder": 30
+      "sortOrder": 20
     },
     {
       "componentKey": "md-aging-discussion",
@@ -616,45 +606,6 @@
       "sortOrder": 40
     },
     {
-      "componentKey": "cmp-pop-elderly-household",
-      "componentType": "line-chart",
-      "title": "高齢世帯の推移",
-      "componentProps": {
-        "seriesRefs": [
-          {
-            "metricKey": "household-ratio-with-65plus"
-          },
-          {
-            "metricKey": "single-person-household-old-population-ratio"
-          },
-          {
-            "metricKey": "elderly-couple-only-household-ratio"
-          }
-        ],
-        "labels": [
-          "65歳以上世帯員のいる世帯",
-          "65歳以上単独世帯",
-          "高齢夫婦のみ世帯"
-        ],
-        "yAxisConfig": {
-          "mode": "sync"
-        }
-      },
-      "relatedRankingKeys": [
-        "household-ratio-with-65plus",
-        "single-person-household-old-population-ratio",
-        "elderly-couple-only-household-ratio"
-      ],
-      "sourceName": null,
-      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "gridColumnSpan": 6,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "elderly-households",
-      "sortOrder": 50
-    },
-    {
       "componentKey": "md-aging-faq",
       "componentType": "markdown-section",
       "title": "よくある質問",
@@ -669,7 +620,7 @@
       "gridColumnSpanSm": null,
       "dataSource": "ranking",
       "section": "reading",
-      "sortOrder": 60
+      "sortOrder": 50
     }
   ],
   "evidenceTopics": [
@@ -702,9 +653,6 @@
         "household-ratio-with-65plus",
         "single-person-household-old-population-ratio",
         "elderly-couple-only-household-ratio"
-      ],
-      "relatedChartKeys": [
-        "cmp-pop-elderly-household"
       ]
     }
   ],
@@ -729,13 +677,23 @@
     },
     {
       "key": "age-structure",
-      "title": "年齢構造はどう変わるか",
-      "description": "人数の構成と男女・年齢階級の分布から、高齢化の背景を確認します。",
-      "metricGroupKeys": [],
+      "title": "年齢構造と支え手の比率",
+      "description": "年齢3区分の構成と男女・年齢階級の分布で人口の形を見ます。老年人口指数は15～64歳人口100人に対する65歳以上人口、年少人口指数は同じく0～14歳人口です。分母が同じなので、2本の線が交わる年に子どもと高齢者の人数が逆転します。",
+      "metricGroupKeys": [
+        "support-ratio"
+      ],
       "chartKeys": [
         "theme-age-composition",
         "theme-population-pyramid"
       ]
+    },
+    {
+      "key": "candidate-42",
+      "title": "婚姻と家族形成",
+      "metricGroupKeys": [
+        "candidate-42-1"
+      ],
+      "description": "婚姻率は総人口千人当たりの件数です。結婚の多い年齢層の人口が少ない県ほど低く出るため、年齢構成の違いと合わせて読みます。"
     },
     {
       "key": "elderly-households",
@@ -744,13 +702,19 @@
       "metricGroupKeys": [
         "elderly-households"
       ],
-      "chartKeys": [
-        "cmp-pop-elderly-household"
+      "chartKeys": []
+    },
+    {
+      "key": "candidate-36",
+      "title": "高齢者の就業",
+      "description": "高齢就業者割合を掲載します。65～69歳など年齢階級別の有業率は含みません。",
+      "metricGroupKeys": [
+        "candidate-36-1"
       ]
     },
     {
       "key": "elderly-care",
-      "title": "医療アクセスと費用",
+      "title": "医療・介護の受け皿と費用",
       "description": "老人ホーム定員は65歳以上人口千人当たりです。空き定員や入所需要の充足率を表すものではありません。医療費とアクセスは別の側面として確認します。",
       "metricGroupKeys": [
         "elderly-care"
@@ -763,6 +727,15 @@
       ]
     },
     {
+      "key": "candidate-48",
+      "title": "過疎地域等の集落と高齢化",
+      "description": "2024年4月1日時点の調査対象78,485集落について、住民に占める65歳以上割合の7区分を全国・10地方ブロックで示します。県を選択した場合も、その県に対応する地方ブロック全体の集計です。北海道・沖縄県を除く県別内訳は本表に公表されていません。無回答と内数を保持します。県全体の高齢化率とは対象を分けて読みます。",
+      "metricGroupKeys": [],
+      "embeddedSectionKeys": [
+        "depopulated-settlements"
+      ]
+    },
+    {
       "key": "reading",
       "title": "読み方",
       "description": "出生・高齢化・世帯構成は、それぞれ対象者と分母を確認して読みます。",
@@ -770,31 +743,6 @@
       "chartKeys": [
         "md-aging-discussion",
         "md-aging-faq"
-      ]
-    },
-    {
-      "key": "candidate-36",
-      "title": "高齢者の就業",
-      "description": "高齢就業者割合を掲載します。65～69歳など年齢階級別の有業率は含みません。",
-      "metricGroupKeys": [
-        "candidate-36-1"
-      ]
-    },
-    {
-      "key": "candidate-42",
-      "title": "婚姻と家族形成",
-      "metricGroupKeys": [
-        "candidate-42-1",
-        "candidate-42-2"
-      ]
-    },
-    {
-      "key": "candidate-48",
-      "title": "過疎地域等の集落と高齢化",
-      "description": "2024年4月1日時点の調査対象78,485集落について、住民に占める65歳以上割合の7区分を全国・10地方ブロックで示します。県を選択した場合も、その県に対応する地方ブロック全体の集計です。北海道・沖縄県を除く県別内訳は本表に公表されていません。無回答と内数を保持します。県全体の高齢化率とは対象を分けて読みます。",
-      "metricGroupKeys": [],
-      "embeddedSectionKeys": [
-        "depopulated-settlements"
       ]
     }
   ],
@@ -820,6 +768,28 @@
       ]
     },
     {
+      "key": "support-ratio",
+      "title": "子ども・高齢者と現役世代の比率",
+      "rankingKeys": [
+        "old-population-index",
+        "young-population-index"
+      ],
+      "defaultCheckedKeys": [
+        "old-population-index",
+        "young-population-index"
+      ]
+    },
+    {
+      "key": "candidate-42-1",
+      "title": "婚姻率",
+      "rankingKeys": [
+        "marriages-per-total-population"
+      ],
+      "defaultCheckedKeys": [
+        "marriages-per-total-population"
+      ]
+    },
+    {
       "key": "elderly-households",
       "title": "高齢者はどの世帯で暮らすか",
       "rankingKeys": [
@@ -833,18 +803,8 @@
       ]
     },
     {
-      "key": "elderly-care",
-      "title": "医療アクセスと費用",
-      "rankingKeys": [
-        "nursing-home-capacity-per-1000-65plus"
-      ],
-      "defaultCheckedKeys": [
-        "nursing-home-capacity-per-1000-65plus"
-      ]
-    },
-    {
       "key": "candidate-36-1",
-      "title": "高齢者の就業｜高齢就業者割合",
+      "title": "高齢就業者割合",
       "rankingKeys": [
         "elderly-workers-ratio"
       ],
@@ -853,24 +813,28 @@
       ]
     },
     {
-      "key": "candidate-42-1",
-      "title": "婚姻と家族形成｜婚姻率",
+      "key": "elderly-care",
+      "title": "老人ホームの定員",
       "rankingKeys": [
-        "marriages-per-total-population"
+        "nursing-home-capacity-per-1000-65plus"
       ],
       "defaultCheckedKeys": [
-        "marriages-per-total-population"
+        "nursing-home-capacity-per-1000-65plus"
       ]
+    }
+  ],
+  "rejectedCandidates": [
+    {
+      "rankingKey": "pension-benefit-total",
+      "reason": "厚生年金受給権者の年金総額で、人口規模にほぼ比例するため地域差の比較に向かない。登録年も2022年の1年だけ。受給者1人当たりなど比率の指標ができたら再検討する。"
     },
     {
-      "key": "candidate-42-2",
-      "title": "婚姻と家族形成｜離婚率",
-      "rankingKeys": [
-        "divorces-per-total-population"
-      ],
-      "defaultCheckedKeys": [
-        "divorces-per-total-population"
-      ]
+      "rankingKey": "volunteer-activity-annual-participation-rate-15plus",
+      "reason": "15歳以上全体の行動者率で、高齢者の社会参加を表さない。65歳以上に限った行動者率が登録されたら再検討する。"
+    },
+    {
+      "rankingKey": "production-age-population-ratio",
+      "reason": "登録年が2020〜2025年の3年分だけで、年齢3区分人口構成の図と同じ事実を示す。長期の系列が登録されたら再検討する。"
     }
   ]
 }

@@ -225,7 +225,7 @@
     },
     {
       "key": "candidate-69-1",
-      "title": "対象を分けて見る食習慣と栄養｜就寝前2時間以内の夕食が週3回以上",
+      "title": "就寝前2時間以内の夕食が週3回以上",
       "rankingKeys": [
         "health-checkup-late-dinner-rate"
       ],
@@ -235,7 +235,7 @@
     },
     {
       "key": "candidate-69-2",
-      "title": "対象を分けて見る食習慣と栄養｜朝食を抜くことが週3回以上",
+      "title": "朝食を抜くことが週3回以上",
       "rankingKeys": [
         "health-checkup-breakfast-skipping-rate"
       ],
@@ -245,7 +245,7 @@
     },
     {
       "key": "candidate-69-3",
-      "title": "対象を分けて見る食習慣と栄養｜男性の野菜摂取量（年齢調整）",
+      "title": "男性の野菜摂取量（年齢調整）",
       "rankingKeys": [
         "vegetable-intake-male-age-adjusted"
       ],
@@ -255,7 +255,7 @@
     },
     {
       "key": "candidate-69-4",
-      "title": "対象を分けて見る食習慣と栄養｜女性の野菜摂取量（年齢調整）",
+      "title": "女性の野菜摂取量（年齢調整）",
       "rankingKeys": [
         "vegetable-intake-female-age-adjusted"
       ],
@@ -265,7 +265,7 @@
     },
     {
       "key": "candidate-69-5",
-      "title": "対象を分けて見る食習慣と栄養｜男性の食塩摂取量（年齢調整）",
+      "title": "男性の食塩摂取量（年齢調整）",
       "rankingKeys": [
         "salt-intake-male-age-adjusted"
       ],
@@ -275,7 +275,7 @@
     },
     {
       "key": "candidate-69-6",
-      "title": "対象を分けて見る食習慣と栄養｜女性の食塩摂取量（年齢調整）",
+      "title": "女性の食塩摂取量（年齢調整）",
       "rankingKeys": [
         "salt-intake-female-age-adjusted"
       ],

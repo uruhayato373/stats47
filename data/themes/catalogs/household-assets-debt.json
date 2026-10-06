@@ -110,7 +110,7 @@
     },
     {
       "key": "candidate-78-1",
-      "title": "金融資産と負債の構成｜預貯金が金融資産に占める割合",
+      "title": "預貯金が金融資産に占める割合",
       "rankingKeys": [
         "current-deposit-balance-ratio-multi-person-households"
       ],
@@ -120,7 +120,7 @@
     },
     {
       "key": "candidate-78-2",
-      "title": "金融資産と負債の構成｜生命保険などが金融資産に占める割合",
+      "title": "生命保険などが金融資産に占める割合",
       "rankingKeys": [
         "current-life-insurance-balance-ratio-multi-person-households"
       ],
@@ -130,7 +130,7 @@
     },
     {
       "key": "candidate-78-3",
-      "title": "金融資産と負債の構成｜有価証券が金融資産に占める割合",
+      "title": "有価証券が金融資産に占める割合",
       "rankingKeys": [
         "current-securities-balance-ratio-multi-person-households"
       ],
@@ -140,7 +140,7 @@
     },
     {
       "key": "candidate-78-4",
-      "title": "金融資産と負債の構成｜住宅・土地負債が金融負債に占める割合",
+      "title": "住宅・土地負債が金融負債に占める割合",
       "rankingKeys": [
         "housing-land-liabilities-ratio-multi-person-households"
       ],

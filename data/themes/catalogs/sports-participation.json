@@ -248,7 +248,7 @@
     },
     {
       "key": "candidate-70-1",
-      "title": "成人の身体活動と歩数｜男性の歩数（20〜64歳・年齢調整）",
+      "title": "男性の歩数（20〜64歳・年齢調整）",
       "rankingKeys": [
         "daily-steps-male-20to64-age-adjusted"
       ],
@@ -258,7 +258,7 @@
     },
     {
       "key": "candidate-70-2",
-      "title": "成人の身体活動と歩数｜女性の歩数（20〜64歳・年齢調整）",
+      "title": "女性の歩数（20〜64歳・年齢調整）",
       "rankingKeys": [
         "daily-steps-female-20to64-age-adjusted"
       ],
@@ -268,7 +268,7 @@
     },
     {
       "key": "candidate-118-1",
-      "title": "子どもの体力・運動習慣と学校体育館｜小学校体育館設置箇所数",
+      "title": "小学校体育館設置箇所数",
       "rankingKeys": [
         "elementary-school-gymnasium-count"
       ],
@@ -278,7 +278,7 @@
     },
     {
       "key": "candidate-118-2",
-      "title": "子どもの体力・運動習慣と学校体育館｜中学校体育館設置箇所数",
+      "title": "中学校体育館設置箇所数",
       "rankingKeys": [
         "junior-high-school-gymnasium-count"
       ],
@@ -288,7 +288,7 @@
     },
     {
       "key": "candidate-118-3",
-      "title": "子どもの体力・運動習慣と学校体育館｜小学5年男子の体力合計点",
+      "title": "小学5年男子の体力合計点",
       "rankingKeys": [
         "elementary5-fitness-score-male"
       ],
@@ -298,7 +298,7 @@
     },
     {
       "key": "candidate-118-4",
-      "title": "子どもの体力・運動習慣と学校体育館｜小学5年女子の体力合計点",
+      "title": "小学5年女子の体力合計点",
       "rankingKeys": [
         "elementary5-fitness-score-female"
       ],
@@ -308,7 +308,7 @@
     },
     {
       "key": "candidate-118-5",
-      "title": "子どもの体力・運動習慣と学校体育館｜小学5年男子の週420分以上運動割合",
+      "title": "小学5年男子の週420分以上運動割合",
       "rankingKeys": [
         "elementary5-weekly-exercise-420min-rate-male"
       ],
@@ -318,7 +318,7 @@
     },
     {
       "key": "candidate-118-6",
-      "title": "子どもの体力・運動習慣と学校体育館｜小学5年女子の週420分以上運動割合",
+      "title": "小学5年女子の週420分以上運動割合",
       "rankingKeys": [
         "elementary5-weekly-exercise-420min-rate-female"
       ],

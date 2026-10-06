@@ -436,7 +436,7 @@
     },
     {
       "key": "candidate-12-1",
-      "title": "食料品製造の生産と雇用｜食料品製造業の事業所数",
+      "title": "食料品製造業の事業所数",
       "rankingKeys": [
         "food-manufacturing-establishments"
       ],
@@ -446,7 +446,7 @@
     },
     {
       "key": "candidate-12-2",
-      "title": "食料品製造の生産と雇用｜食料品製造業の従業者数",
+      "title": "食料品製造業の従業者数",
       "rankingKeys": [
         "food-manufacturing-employees"
       ],
@@ -456,7 +456,7 @@
     },
     {
       "key": "candidate-12-3",
-      "title": "食料品製造の生産と雇用｜食料品製造業の出荷額等",
+      "title": "食料品製造業の出荷額等",
       "rankingKeys": [
         "food-manufacturing-shipment-amount"
       ],
@@ -466,7 +466,7 @@
     },
     {
       "key": "candidate-22-1",
-      "title": "企業立地と工場投資｜工場立地敷地面積（年次）",
+      "title": "工場立地敷地面積（年次）",
       "rankingKeys": [
         "factory-location-area-annual"
       ],

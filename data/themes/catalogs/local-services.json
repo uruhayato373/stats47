@@ -342,7 +342,7 @@
     },
     {
       "key": "candidate-120-1",
-      "title": "映像制作・娯楽関連産業の事業活動｜映像・音声・文字情報制作業の事業所数",
+      "title": "映像・音声・文字情報制作業の事業所数",
       "rankingKeys": [
         "media-production-establishments"
       ],
@@ -352,7 +352,7 @@
     },
     {
       "key": "candidate-120-2",
-      "title": "映像制作・娯楽関連産業の事業活動｜映像・音声・文字情報制作業の従業者数",
+      "title": "映像・音声・文字情報制作業の従業者数",
       "rankingKeys": [
         "media-production-employees"
       ],
@@ -362,7 +362,7 @@
     },
     {
       "key": "candidate-120-3",
-      "title": "映像制作・娯楽関連産業の事業活動｜映像・音声・文字情報制作業の企業売上高",
+      "title": "映像・音声・文字情報制作業の企業売上高",
       "rankingKeys": [
         "media-production-revenue"
       ],
@@ -372,7 +372,7 @@
     },
     {
       "key": "candidate-120-4",
-      "title": "映像制作・娯楽関連産業の事業活動｜映像・音声・文字情報制作業の企業純付加価値額",
+      "title": "映像・音声・文字情報制作業の企業純付加価値額",
       "rankingKeys": [
         "media-production-net-value-added"
       ],
@@ -382,7 +382,7 @@
     },
     {
       "key": "candidate-120-5",
-      "title": "映像制作・娯楽関連産業の事業活動｜娯楽業の事業所数",
+      "title": "娯楽業の事業所数",
       "rankingKeys": [
         "amusement-industry-establishments"
       ],
@@ -392,7 +392,7 @@
     },
     {
       "key": "candidate-120-6",
-      "title": "映像制作・娯楽関連産業の事業活動｜娯楽業の従業者数",
+      "title": "娯楽業の従業者数",
       "rankingKeys": [
         "amusement-industry-employees"
       ],
@@ -402,7 +402,7 @@
     },
     {
       "key": "candidate-120-7",
-      "title": "映像制作・娯楽関連産業の事業活動｜娯楽業の企業売上高",
+      "title": "娯楽業の企業売上高",
       "rankingKeys": [
         "amusement-industry-revenue"
       ],
@@ -412,7 +412,7 @@
     },
     {
       "key": "candidate-120-8",
-      "title": "映像制作・娯楽関連産業の事業活動｜娯楽業の企業純付加価値額",
+      "title": "娯楽業の企業純付加価値額",
       "rankingKeys": [
         "amusement-industry-net-value-added"
       ],

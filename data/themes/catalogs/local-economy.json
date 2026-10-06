@@ -471,16 +471,6 @@
       ]
     },
     {
-      "key": "reading",
-      "title": "読み方と関連する仕事・財政",
-      "description": "賃金・雇用環境・家計・財政は関連テーマで詳しく確認できます。",
-      "metricGroupKeys": [],
-      "chartKeys": [
-        "md-local-economy-discussion",
-        "md-local-economy-faq"
-      ]
-    },
-    {
       "key": "candidate-16",
       "title": "産業別の雇用構成と特化係数",
       "description": "2021年6月1日の同一統計を使い、県の産業別従業者割合を全国と比べます。特化係数1は全国と同じ構成比です。公務、農林漁業の個人経営、外国会社・法人でない団体等を除き、事業所所在地別に集計しています。公式全産業の分母には大分類へ分かれない上位集計の差分を含めます。",
@@ -500,6 +490,16 @@
       "metricGroupKeys": [
         "candidate-18-1",
         "candidate-18-2"
+      ]
+    },
+    {
+      "key": "reading",
+      "title": "読み方と関連する仕事・財政",
+      "description": "賃金・雇用環境・家計・財政は関連テーマで詳しく確認できます。",
+      "metricGroupKeys": [],
+      "chartKeys": [
+        "md-local-economy-discussion",
+        "md-local-economy-faq"
       ]
     }
   ],
@@ -549,7 +549,7 @@
     },
     {
       "key": "candidate-16-1",
-      "title": "産業別の雇用構成と特化係数｜製造業の従業者特化係数",
+      "title": "製造業の従業者特化係数",
       "rankingKeys": [
         "employment-location-quotient-manufacturing"
       ],
@@ -559,7 +559,7 @@
     },
     {
       "key": "candidate-16-2",
-      "title": "産業別の雇用構成と特化係数｜情報通信業の従業者特化係数",
+      "title": "情報通信業の従業者特化係数",
       "rankingKeys": [
         "employment-location-quotient-information-communication"
       ],
@@ -569,7 +569,7 @@
     },
     {
       "key": "candidate-16-3",
-      "title": "産業別の雇用構成と特化係数｜医療・福祉の従業者特化係数",
+      "title": "医療・福祉の従業者特化係数",
       "rankingKeys": [
         "employment-location-quotient-health-welfare"
       ],
@@ -579,7 +579,7 @@
     },
     {
       "key": "candidate-18-1",
-      "title": "企業の付加価値と地域への配分｜全産業の企業純付加価値（本所県）",
+      "title": "全産業の企業純付加価値（本所県）",
       "rankingKeys": [
         "enterprise-net-value-added-all-industries"
       ],
@@ -589,7 +589,7 @@
     },
     {
       "key": "candidate-18-2",
-      "title": "企業の付加価値と地域への配分｜民営事業所の純付加価値（所在地へ按分）",
+      "title": "民営事業所の純付加価値（所在地へ按分）",
       "rankingKeys": [
         "private-establishment-net-value-added"
       ],

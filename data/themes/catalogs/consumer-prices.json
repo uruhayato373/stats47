@@ -395,16 +395,6 @@
       ]
     },
     {
-      "key": "reading",
-      "title": "読み方と実質収入",
-      "description": "物価の水準差と家計が実際に支払う額は区別します。",
-      "metricGroupKeys": [],
-      "chartKeys": [
-        "md-cpi-discussion",
-        "md-cpi-faq"
-      ]
-    },
-    {
       "key": "candidate-75",
       "title": "光熱価格・家計支出と気温",
       "description": "家計支出は県全域の二人以上世帯について、2019・2024年の10〜11月を平均した月額です。気温は代表観測地点の年間平均であり、県全域の気温や通年の光熱費ではありません。物価指数・支出額・気温はそれぞれ別の指標です。",
@@ -421,6 +411,16 @@
       "metricGroupKeys": [
         "candidate-76-1",
         "candidate-76-2"
+      ]
+    },
+    {
+      "key": "reading",
+      "title": "読み方と実質収入",
+      "description": "物価の水準差と家計が実際に支払う額は区別します。",
+      "metricGroupKeys": [],
+      "chartKeys": [
+        "md-cpi-discussion",
+        "md-cpi-faq"
       ]
     }
   ],
@@ -452,7 +452,7 @@
     },
     {
       "key": "candidate-75-1",
-      "title": "光熱価格・家計支出と気温｜光熱・水道物価地域差指数",
+      "title": "光熱・水道物価地域差指数",
       "rankingKeys": [
         "consumer-price-difference-index-utilities"
       ],
@@ -462,7 +462,7 @@
     },
     {
       "key": "candidate-75-2",
-      "title": "光熱価格・家計支出と気温｜光熱・水道支出（二人以上世帯・10〜11月の月平均）",
+      "title": "光熱・水道支出（二人以上世帯・10〜11月の月平均）",
       "rankingKeys": [
         "household-survey-utilities-expenditure"
       ],
@@ -472,7 +472,7 @@
     },
     {
       "key": "candidate-75-3",
-      "title": "光熱価格・家計支出と気温｜年平均気温（代表観測地点）",
+      "title": "年平均気温（代表観測地点）",
       "rankingKeys": [
         "average-temperature"
       ],
@@ -482,7 +482,7 @@
     },
     {
       "key": "candidate-76-1",
-      "title": "食料価格と家計の食料支出｜食料物価地域差指数",
+      "title": "食料物価地域差指数",
       "rankingKeys": [
         "consumer-price-difference-index-food"
       ],
@@ -492,7 +492,7 @@
     },
     {
       "key": "candidate-76-2",
-      "title": "食料価格と家計の食料支出｜食料支出（二人以上世帯・10〜11月の月平均）",
+      "title": "食料支出（二人以上世帯・10〜11月の月平均）",
       "rankingKeys": [
         "household-survey-food-expenditure"
       ],

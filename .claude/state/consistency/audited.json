@@ -1,8 +1,9 @@
 {
-  "hash": "4d233c1280bd2db40ca053cc3417ec55afb582589bcfc60fad0d0b91247c04f0",
-  "audited_at": "2026-10-06T08:18:01",
+  "hash": "e83c886a19bb325622e0f9bd59f23ef399c645e794492a18d49e0cb52d99181f",
+  "audited_at": "2026-10-06T09:13:42",
   "files": [
-    ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-11-theme-aging-society.md",
+    ".claude/rules/survey-linkage-standards.md",
+    ".claude/scripts/audit/theme-chart-dependencies.generated.json",
     ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-10-06-theme-aging-society.md"
   ]
 }

@@ -73,7 +73,7 @@ export const AGING_SOCIETY_SET: IndicatorSet = {
     {
       "rankingKey": "divorces-per-total-population",
       "shortLabel": "離婚率（人口千人）",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "births",
@@ -106,24 +106,14 @@ export const AGING_SOCIETY_SET: IndicatorSet = {
       "role": "secondary"
     },
     {
-      "rankingKey": "pension-benefit-total",
-      "shortLabel": "厚生年金受給権者年金総額",
-      "role": "context"
-    },
-    {
-      "rankingKey": "volunteer-activity-annual-participation-rate-15plus",
-      "shortLabel": "ボランティア活動の年間行動者率",
-      "role": "context"
-    },
-    {
       "rankingKey": "young-population-index",
       "shortLabel": "年少人口指数（15～64歳人口100人当たり）",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "old-population-index",
       "shortLabel": "老年人口指数（15～64歳人口100人当たり）",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "nursing-home-capacity-per-1000-65plus",

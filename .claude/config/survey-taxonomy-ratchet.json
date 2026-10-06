@@ -30,7 +30,7 @@
     "minResolvedMetricGroups": 447,
     "minMetricGroupCoveragePct": 100,
     "maxMissingLineageMetricGroups": 0,
-    "minResolvedCharts": 60,
+    "minResolvedCharts": 59,
     "minCoveragePct": 100,
     "maxMissingLineageCharts": 0
   },
@@ -97,5 +97,16 @@
       "real-income/real-income-cpi-breakdown-expenses",
       "safety/fire-emergency-trend-fire"
     ]
-  }
+  },
+  "themeBaselineFollowUps": [
+    {
+      "date": "2026-10-06",
+      "reason": "Owner-approved aging-society review (2026-10-06-theme-aging-society.md) removed the elderly-household line chart because the metric-group card above it draws the same three series. The three metrics stay resolved through that card; coverage stays 100% with zero missing lineage.",
+      "previousResolvedCharts": 60,
+      "removedResolvedChartKeys": [
+        "aging-society/cmp-pop-elderly-household"
+      ],
+      "addedResolvedChartKeys": []
+    }
+  ]
 }

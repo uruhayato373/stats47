@@ -789,16 +789,6 @@
       ]
     },
     {
-      "key": "reading",
-      "title": "読み方",
-      "description": "住まいの広さと世帯の形を、地域人口の背景と合わせて読みます。",
-      "metricGroupKeys": [],
-      "chartKeys": [
-        "md-living-housing-discussion",
-        "md-living-housing-faq"
-      ]
-    },
-    {
       "key": "candidate-5",
       "title": "住宅着工の利用関係別比較",
       "description": "2023・2024年度の新設住宅を持家・貸家・分譲住宅に分けて比較します。給与住宅はこの3分類に含まれないため、3つの合計を新設住宅全体とは扱いません。",
@@ -878,6 +868,16 @@
         "candidate-94-1",
         "candidate-94-2"
       ]
+    },
+    {
+      "key": "reading",
+      "title": "読み方",
+      "description": "住まいの広さと世帯の形を、地域人口の背景と合わせて読みます。",
+      "metricGroupKeys": [],
+      "chartKeys": [
+        "md-living-housing-discussion",
+        "md-living-housing-faq"
+      ]
     }
   ],
   "metricGroups": [
@@ -929,7 +929,7 @@
     },
     {
       "key": "candidate-5-1",
-      "title": "住宅着工の利用関係別比較｜着工新設住宅戸数",
+      "title": "着工新設住宅戸数",
       "rankingKeys": [
         "new-housing-starts"
       ],
@@ -939,7 +939,7 @@
     },
     {
       "key": "candidate-5-2",
-      "title": "住宅着工の利用関係別比較｜持家の新設着工戸数",
+      "title": "持家の新設着工戸数",
       "rankingKeys": [
         "new-owner-occupied-starts"
       ],
@@ -949,7 +949,7 @@
     },
     {
       "key": "candidate-5-3",
-      "title": "住宅着工の利用関係別比較｜貸家の新設着工戸数",
+      "title": "貸家の新設着工戸数",
       "rankingKeys": [
         "new-rental-starts"
       ],
@@ -959,7 +959,7 @@
     },
     {
       "key": "candidate-5-4",
-      "title": "住宅着工の利用関係別比較｜分譲住宅の新設着工戸数",
+      "title": "分譲住宅の新設着工戸数",
       "rankingKeys": [
         "new-condo-starts"
       ],
@@ -969,7 +969,7 @@
     },
     {
       "key": "candidate-6-1",
-      "title": "改修・リフォーム需要｜リフォーム工事実施率",
+      "title": "リフォーム工事実施率",
       "rankingKeys": [
         "renovation-rate"
       ],
@@ -979,7 +979,7 @@
     },
     {
       "key": "candidate-6-2",
-      "title": "改修・リフォーム需要｜耐震改修工事実施率",
+      "title": "耐震改修工事実施率",
       "rankingKeys": [
         "earthquake-renovation-rate"
       ],
@@ -989,7 +989,7 @@
     },
     {
       "key": "candidate-8-1",
-      "title": "空き家の用途と住宅ストック｜空き家率",
+      "title": "空き家率",
       "rankingKeys": [
         "vacant-housing-rate"
       ],
@@ -1009,7 +1009,7 @@
     },
     {
       "key": "candidate-8-3",
-      "title": "空き家の用途と住宅ストック｜賃貸・売却用及び二次的住宅を除く空き家",
+      "title": "賃貸・売却用及び二次的住宅を除く空き家",
       "rankingKeys": [
         "vacant-housing-excluding-rental-sale-secondary"
       ],
@@ -1019,7 +1019,7 @@
     },
     {
       "key": "candidate-8-4",
-      "title": "空き家の用途と住宅ストック｜賃貸用の空き家",
+      "title": "賃貸用の空き家",
       "rankingKeys": [
         "vacant-housing-for-rent"
       ],
@@ -1029,7 +1029,7 @@
     },
     {
       "key": "candidate-8-5",
-      "title": "空き家の用途と住宅ストック｜売却用の空き家",
+      "title": "売却用の空き家",
       "rankingKeys": [
         "vacant-housing-for-sale"
       ],
@@ -1039,7 +1039,7 @@
     },
     {
       "key": "candidate-8-6",
-      "title": "空き家の用途と住宅ストック｜二次的住宅",
+      "title": "二次的住宅",
       "rankingKeys": [
         "vacant-housing-secondary-residences"
       ],
@@ -1049,7 +1049,7 @@
     },
     {
       "key": "candidate-44-1",
-      "title": "単身化と一人暮らし｜65歳以上の男性単独世帯数",
+      "title": "65歳以上の男性単独世帯数",
       "rankingKeys": [
         "single-households-age65plus-male"
       ],
@@ -1059,7 +1059,7 @@
     },
     {
       "key": "candidate-44-2",
-      "title": "単身化と一人暮らし｜65歳以上の女性単独世帯数",
+      "title": "65歳以上の女性単独世帯数",
       "rankingKeys": [
         "single-households-age65plus-female"
       ],
@@ -1069,7 +1069,7 @@
     },
     {
       "key": "candidate-44-3",
-      "title": "単身化と一人暮らし｜単独世帯割合",
+      "title": "単独世帯割合",
       "rankingKeys": [
         "single-person-household-ratio"
       ],
@@ -1089,7 +1089,7 @@
     },
     {
       "key": "candidate-45-2",
-      "title": "世帯構成の変化｜一般世帯の平均人員",
+      "title": "一般世帯の平均人員",
       "rankingKeys": [
         "average-persons-per-general-household"
       ],
@@ -1099,7 +1099,7 @@
     },
     {
       "key": "candidate-74-1",
-      "title": "住居費と住宅取得の負債｜住宅・土地のための負債（総世帯平均）",
+      "title": "住宅・土地のための負債（総世帯平均）",
       "rankingKeys": [
         "housing-land-debt-per-household"
       ],
@@ -1109,7 +1109,7 @@
     },
     {
       "key": "candidate-74-2",
-      "title": "住居費と住宅取得の負債｜家賃支出",
+      "title": "家賃支出",
       "rankingKeys": [
         "private-rent-consumption-expenditure"
       ],
@@ -1119,7 +1119,7 @@
     },
     {
       "key": "candidate-74-3",
-      "title": "住居費と住宅取得の負債｜負債現在高",
+      "title": "負債現在高",
       "rankingKeys": [
         "current-liabilities-balance-multi-person-households-per-household"
       ],
@@ -1129,7 +1129,7 @@
     },
     {
       "key": "candidate-93-1",
-      "title": "都市の人口集積と計画上の区域｜人口集中地区人口密度",
+      "title": "人口集中地区人口密度",
       "rankingKeys": [
         "densely-inhabited-district-population-density"
       ],
@@ -1139,7 +1139,7 @@
     },
     {
       "key": "candidate-93-2",
-      "title": "都市の人口集積と計画上の区域｜都市計画区域の指定面積",
+      "title": "都市計画区域の指定面積",
       "rankingKeys": [
         "urban-planning-area"
       ],
@@ -1149,7 +1149,7 @@
     },
     {
       "key": "candidate-93-3",
-      "title": "都市の人口集積と計画上の区域｜都市計画区域に占める市街化調整区域の割合",
+      "title": "都市計画区域に占める市街化調整区域の割合",
       "rankingKeys": [
         "urbanization-control-area-ratio"
       ],
@@ -1159,7 +1159,7 @@
     },
     {
       "key": "candidate-94-1",
-      "title": "公園と都市緑地｜都市公園数",
+      "title": "都市公園数",
       "rankingKeys": [
         "urban-parks"
       ],
@@ -1169,7 +1169,7 @@
     },
     {
       "key": "candidate-94-2",
-      "title": "公園と都市緑地｜都市公園面積",
+      "title": "都市公園面積",
       "rankingKeys": [
         "urban-parks-area"
       ],

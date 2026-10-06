@@ -3,8 +3,8 @@
   "totalRequests": 0,
   "distinctRequests": 0,
   "requests": [],
-  "totalMetricRefs": 159,
-  "distinctMetricRefs": 155,
+  "totalMetricRefs": 156,
+  "distinctMetricRefs": 152,
   "metrics": [
     {
       "metricKey": "actual-income-worker-households-per-month",
@@ -239,14 +239,6 @@
       "componentType": "line-chart"
     },
     {
-      "metricKey": "elderly-couple-only-household-ratio",
-      "expectedUnit": "％",
-      "expectedConfigHash": "2262a0deb852b045",
-      "themeKey": "aging-society",
-      "componentKey": "cmp-pop-elderly-household",
-      "componentType": "line-chart"
-    },
-    {
       "metricKey": "employed-people-ratio-primary",
       "expectedUnit": "％",
       "expectedConfigHash": "bfe416412473b0c2",
@@ -364,14 +356,6 @@
       "expectedConfigHash": "d7f892596eeb8a82",
       "themeKey": "healthcare",
       "componentKey": "theme-health-supply-trend-hospitals",
-      "componentType": "line-chart"
-    },
-    {
-      "metricKey": "household-ratio-with-65plus",
-      "expectedUnit": "％",
-      "expectedConfigHash": "e37748499b83820a",
-      "themeKey": "aging-society",
-      "componentKey": "cmp-pop-elderly-household",
       "componentType": "line-chart"
     },
     {
@@ -813,14 +797,6 @@
       "themeKey": "single-parent-households",
       "componentKey": "single-parent-income-composition",
       "componentType": "composition-chart"
-    },
-    {
-      "metricKey": "single-person-household-old-population-ratio",
-      "expectedUnit": "％",
-      "expectedConfigHash": "3a62c7049e888577",
-      "themeKey": "aging-society",
-      "componentKey": "cmp-pop-elderly-household",
-      "componentType": "line-chart"
     },
     {
       "metricKey": "single-person-household-ratio",

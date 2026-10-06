@@ -23,6 +23,17 @@ describe('theme redesign taxonomy population', () => {
     expect(ratchet.theme.maxMissingLineageCharts).toBe(0);
   });
 
+  it('lowers the chart baseline after 2026-09-09 only by the recorded follow-up removals', () => {
+    let expected = adjustment.previousResolvedCharts - adjustment.removedResolvedChartKeys.length + adjustment.addedResolvedChartKeys.length;
+    for (const followUp of ratchet.themeBaselineFollowUps) {
+      expect(followUp.previousResolvedCharts, followUp.date).toBeGreaterThanOrEqual(expected);
+      for (const key of followUp.removedResolvedChartKeys) expect(charts.has(key), key).toBe(false);
+      for (const key of followUp.addedResolvedChartKeys) expect(charts.get(key)?.status, key).toBe('resolved');
+      expected = followUp.previousResolvedCharts - followUp.removedResolvedChartKeys.length + followUp.addedResolvedChartKeys.length;
+    }
+    expect(ratchet.theme.minResolvedCharts).toBe(expected);
+  });
+
   it('protects source coverage on metric-group graphs including all three launch themes', () => {
     const groups = results.flatMap((result) => result.metricGroups);
     expect(groups.filter((group) => group.status === 'resolved').length).toBeGreaterThanOrEqual(ratchet.theme.minResolvedMetricGroups);
