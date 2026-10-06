@@ -29,7 +29,7 @@ const store = require("../lib/sns-posts-store.cjs");
 const { decideLedgerAction, parsePostedLog } = require("../lib/ig-ledger-core.cjs");
 
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
-const LOG_PATH = path.join(PROJECT_ROOT, ".claude/state/ig-posted-log.jsonl");
+const LOG_PATH = path.join(PROJECT_ROOT, "data/sns/ig-posted-log.jsonl");
 
 function arg(name, fallback = undefined) {
   const i = process.argv.indexOf(`--${name}`);

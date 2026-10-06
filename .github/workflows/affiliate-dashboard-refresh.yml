@@ -100,11 +100,11 @@ jobs:
         with:
           name: affiliate-audit-state
           path: |
-            .claude/state/ads/inventory-latest.json
-            .claude/state/ads/compliance-latest.json
-            .claude/state/ads/relevance-latest.json
-            .claude/state/ads/placement-map-latest.json
-            .claude/state/ads/affiliate-portfolio-latest.json
+            data/affiliate/inventory-latest.json
+            data/affiliate/compliance-latest.json
+            data/affiliate/relevance-latest.json
+            data/affiliate/placement-map-latest.json
+            data/affiliate/affiliate-portfolio-latest.json
           retention-days: 30
 
       - name: 📝 Job summary (compliance findings のみ)

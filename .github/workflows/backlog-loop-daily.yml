@@ -215,10 +215,10 @@ jobs:
           if [ "$EVENT_NAME" = "push" ]; then
             git rm -q --ignore-unmatch data/backlog-loop-requests.json || true
           fi
-          # .claude/state/gsc: GSC 是正カード (GSC-COV-*) は是正キューへの --mark-* が成果物。
+          # data/gsc/coverage-remediation: GSC 是正カード (GSC-COV-*) は是正キューへの --mark-* が成果物。
           # ここを commit しないと gate を通って行が消えたのにキューが pending のまま残り、翌日同じ URL が再起票される。
-          # .claude/state/page-quality: UI 是正カード (UI-FIX-*) も同じ。UI 指摘キューへの --mark-* が成果物。
-          git add -- .claude/todo .claude/state/backlog-loop .claude/state/gsc .claude/state/page-quality .claude/scripts \
+          # data/page-quality: UI 是正カード (UI-FIX-*) も同じ。UI 指摘キューへの --mark-* が成果物。
+          git add -- .claude/todo .claude/state/backlog-loop data/gsc/coverage-remediation data/page-quality .claude/scripts \
             .claude/rules .claude/skills .claude/agents packages apps || true
           if git diff --cached --quiet; then
             echo "変更なし (処理対象 ${TARGET_COUNT} 件・すべて skipped か failed)"

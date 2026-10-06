@@ -50,7 +50,7 @@ function readCsv(fp: string): Array<Record<string, string | number>> {
 export function readBlogQueue(root: string) {
   return wrap(() => {
     const q = readJson(
-      path.join(root, ".claude/state/blog/remediation-queue.json"),
+      path.join(root, "data/blog/remediation-queue.json"),
     ) as {
       queue: Array<Record<string, unknown>>;
       generatedAt?: string;
@@ -78,7 +78,7 @@ export function readBlogQueue(root: string) {
 export function readAiContentQueue(root: string) {
   return wrap(() => {
     const q = readJson(
-      path.join(root, ".claude/state/ai-content/remediation-queue.json"),
+      path.join(root, "data/ai-content/remediation/remediation-queue.json"),
     ) as { entries: Array<Record<string, unknown>>; generatedAt?: string; summary?: unknown };
     const top = q.entries
       .filter((e) => e.status !== "done")
@@ -107,7 +107,7 @@ export function readAiContentQueue(root: string) {
 
 export function readTopicQueue(root: string) {
   return wrap(() => {
-    const q = readJson(path.join(root, ".claude/state/blog/topic-queue.json")) as {
+    const q = readJson(path.join(root, "data/blog/topic-queue.json")) as {
       queue: Array<Record<string, unknown>>;
       generatedAt?: string;
       summary?: unknown;
@@ -126,7 +126,7 @@ export function readTopicQueue(root: string) {
 
 export function readWinningPatterns(root: string) {
   return wrap(() => {
-    const w = readJson(path.join(root, ".claude/state/blog/winning-patterns.json")) as {
+    const w = readJson(path.join(root, "data/blog/winning-patterns.json")) as {
       generatedAt?: string;
       gscWeek?: string;
       sample?: unknown;
@@ -241,7 +241,7 @@ export function parsePsiLatest(root: string) {
 export function readGscCoverage(root: string) {
   return wrap(() => {
     const q = readJson(
-      path.join(root, ".claude/state/gsc/coverage-remediation-queue.json"),
+      path.join(root, "data/gsc/coverage-remediation/coverage-remediation-queue.json"),
     ) as {
       week?: string;
       generated_at?: string;

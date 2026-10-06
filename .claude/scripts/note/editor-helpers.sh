@@ -211,7 +211,7 @@ do_update(){
 import json,os
 from datetime import date
 slug=os.environ['SLUG']
-p='.claude/state/note-published-urls.json'
+p='data/note/note-published-urls.json'
 d=json.load(open(p))
 if slug in d['articles']:
     d['articles'][slug]['updated_at']=date.today().isoformat()

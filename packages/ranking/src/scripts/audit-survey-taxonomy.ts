@@ -10,8 +10,8 @@
  *
  * Usage:
  *   npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts
- *   npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --json .claude/state/surveys/taxonomy.json
- *   npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --json .claude/state/surveys/taxonomy.json --tighten-ratchet
+ *   npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --json data/surveys/taxonomy.json
+ *   npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --json data/surveys/taxonomy.json --tighten-ratchet
  *   npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --offline --check
  *   npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --local-r2
  */
@@ -96,7 +96,7 @@ const ROOT = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
   '../../../..'
 );
-const STATE_PATH = path.join(ROOT, '.claude/state/surveys/taxonomy.json');
+const STATE_PATH = path.join(ROOT, 'data/surveys/taxonomy.json');
 const RATCHET_PATH = path.join(
   ROOT,
   '.claude/config/survey-taxonomy-ratchet.json'

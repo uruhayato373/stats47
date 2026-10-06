@@ -33,7 +33,7 @@ const secretAccessKey = process.env.R2_SECRET_ACCESS_KEY;
 if (!endpoint || !accessKeyId || !secretAccessKey) throw new Error('R2 S3 credentials are required');
 const bucket = process.env.R2_PRIVATE_BUCKET_NAME ?? R2_PRIVATE_BUCKET;
 const client = new S3Client({ region: 'auto', endpoint, credentials: { accessKeyId, secretAccessKey } });
-const state = JSON.parse(fs.readFileSync(path.join(repoRoot, '.claude/state/note-published-urls.json'), 'utf8')) as {
+const state = JSON.parse(fs.readFileSync(path.join(repoRoot, 'data/note/note-published-urls.json'), 'utf8')) as {
   articles: Record<string, Article>;
 };
 const article = state.articles[slug];

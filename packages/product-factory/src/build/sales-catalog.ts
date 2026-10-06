@@ -67,7 +67,7 @@ export function buildSalesCatalog(root: string, checkedAt: string, kindleVersion
     catch { warnings.push(`Missing or invalid evidence: ${path}`); return {}; }
   };
   const cp = COCONALA_LISTINGS, kp = KDP_LISTINGS;
-  const ap = "data/products/kindle-archives.json", np = ".claude/state/note-published-urls.json";
+  const ap = "data/products/kindle-archives.json", np = "data/note/note-published-urls.json";
   const pp = "data/products/coconala-packs-2026-09-06.json", gp = "data/products/geo-service-readiness-2026-09-06.json";
   const coco = obj(read(cp).listings), kdp = obj(read(kp).listings), archives = obj(read(ap).books);
   const ni = read(np), notes = obj(ni.articles), packs = read(pp), geo = read(gp);
@@ -121,7 +121,7 @@ export function buildSalesCatalog(root: string, checkedAt: string, kindleVersion
     const version = kindleVersion, dir = `.local/kindle-books/${b.id}/${version}`;
     const m = dir && existsSync(join(root, dir, "metadata.json")) ? read(`${dir}/metadata.json`) : {};
     const present = !!dir && existsSync(join(root, dir, "book.epub"));
-    const verificationPath = version ? `.claude/state/products/kindle-${version}-verification.json` : null;
+    const verificationPath = version ? `data/products/kindle-${version}-verification.json` : null;
     const verification = verificationPath && existsSync(join(root, verificationPath)) ? read(verificationPath) : {};
     const o: SalesOffer = { id: b.id, title: b.title, kind: "book", catalogStatus: b.status, scope: b.concept, free: false, candidate: false,
       buildStatus: present ? "generated" : "missing", artifactDirectory: dir,

@@ -7,7 +7,7 @@
  *
  * 入力:
  *   - 候補ユニバース: 公開済み ranking キー (packages/ranking KNOWN_RANKING_KEYS) ∩ metric 索引
- *   - metric 索引: .claude/state/sns/metric-discovery-index.json (無ければ build-discovery-index.ts で生成)
+ *   - metric 索引: data/sns/metric-discovery-index.json (無ければ build-discovery-index.ts で生成)
  *   - 台帳 posts.json: dedup (同 key×template 90日除外 / 同 key 30日除外) と category ローテ
  *   - 季節性: 当月テーマ語 (本ファイル MONTH_THEMES) に一致する title/category を加点
  *   - 頻度上限: x-catalog の quota (§1) — 1 日 X_DAILY_MAX 本で scheduled_at を割り付け。
@@ -38,7 +38,7 @@ const store = require(
 
 const INDEX_PATH = path.join(
   PROJECT_ROOT,
-  ".claude/state/sns/metric-discovery-index.json",
+  "data/sns/metric-discovery-index.json",
 );
 const KNOWN_KEYS_PATH = path.join(
   PROJECT_ROOT,

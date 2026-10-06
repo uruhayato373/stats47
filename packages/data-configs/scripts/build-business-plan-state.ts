@@ -10,10 +10,10 @@ const repoRoot = path.resolve(
 );
 const outputPath = path.join(
   repoRoot,
-  '.claude/state/business-plan/latest.json'
+  'data/business-plan/latest.json'
 );
 const snapshot = process.argv.includes('--snapshot');
-const KPI_TREE_PATH = '.claude/state/business-plan/kpi-tree.json';
+const KPI_TREE_PATH = 'data/business-plan/kpi-tree.json';
 
 function newestMtime(rel: string): string | null {
   const full = path.join(repoRoot, rel);
@@ -37,7 +37,7 @@ const sourceFreshness: Record<string, string | null> = {
   note: newestMtime('data/note'),
   affiliate: newestMtime('data/affiliate'),
   products: newestMtime('data/products'),
-  ci: newestMtime('.claude/state/ci'),
+  ci: newestMtime('data/ci'),
 };
 
 const statusCounts = BUSINESS_PLAN_2026.decisions.reduce<
@@ -105,7 +105,7 @@ if (snapshot) {
   const day = state.generatedAt.slice(0, 10);
   const snapshotPath = path.join(
     repoRoot,
-    `.claude/state/business-plan/history/${day}.json`
+    `data/business-plan/history/${day}.json`
   );
   fs.mkdirSync(path.dirname(snapshotPath), { recursive: true });
   fs.writeFileSync(snapshotPath, `${JSON.stringify(state, null, 2)}\n`, 'utf8');

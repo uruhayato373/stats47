@@ -12,7 +12,7 @@ export const REFERENCE_SOURCE_POLICIES = [
     sourceKey: "japan-zue",
     edition: "2025-26",
     statePath:
-      ".claude/state/source-inventory/japan-zue/2025-26/inventory.json",
+      "data/source-inventory/japan-zue/2025-26/inventory.json",
     inputUnit: "quantitative-item",
     fallbackResolution: "primary-source-unavailable",
     fallbackReason: "直接出典を機械的に特定できないため公開候補へ進めない",
@@ -22,7 +22,7 @@ export const REFERENCE_SOURCE_POLICIES = [
     sourceKey: "prefecture-databook",
     edition: "2021",
     statePath:
-      ".claude/state/source-inventory/prefecture-databook/2021/inventory.json",
+      "data/source-inventory/prefecture-databook/2021/inventory.json",
     inputUnit: "page",
     fallbackResolution: "not-applicable",
     fallbackReason: "表紙・目次・広告・重複スキャン等で公開候補ではない",
@@ -32,7 +32,7 @@ export const REFERENCE_SOURCE_POLICIES = [
     sourceKey: "prefecture-deviation",
     edition: "2018",
     statePath:
-      ".claude/state/source-inventory/prefecture-deviation/2018/inventory.json",
+      "data/source-inventory/prefecture-deviation/2018/inventory.json",
     inputUnit: "page",
     fallbackResolution: "not-applicable",
     fallbackReason: "章扉・図版のみ等で、分析・論点に属さないページ",
@@ -42,7 +42,7 @@ export const REFERENCE_SOURCE_POLICIES = [
     sourceKey: "claude-skills-guide",
     edition: "2026",
     statePath:
-      ".claude/state/source-inventory/claude-skills-guide/2026/inventory.json",
+      "data/source-inventory/claude-skills-guide/2026/inventory.json",
     inputUnit: "page",
     fallbackResolution: "not-applicable",
     fallbackReason: "公開統計の根拠には使わず、採択した内部運用原則だけを統合する",
@@ -52,7 +52,7 @@ export const REFERENCE_SOURCE_POLICIES = [
     sourceKey: "kakei-marketing",
     edition: "2015",
     statePath:
-      ".claude/state/source-inventory/kakei-marketing/2015/inventory.json",
+      "data/source-inventory/kakei-marketing/2015/inventory.json",
     inputUnit: "page",
     fallbackResolution: "not-applicable",
     fallbackReason: "表紙・目次・Kindle操作画面等で、分析・論点に属さないページ",

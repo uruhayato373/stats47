@@ -53,7 +53,7 @@ const AUDIT = !!flag("audit", false);
 const CHECK = AUDIT || !!flag("check", false); // --audit は --check を含む
 const LIMIT = flag("limit", null) ? Number(flag("limit", null)) : null;
 const OUT = flag("out", "/tmp/ogp-image-gallery.html");
-const INVENTORY_OUT = path.join(PROJECT_ROOT, ".claude/state/ogp/inventory.json");
+const INVENTORY_OUT = path.join(PROJECT_ROOT, "data/ogp/inventory.json");
 
 const ALL_TABS = OGP_TABS;
 const REQ_TABS = flag("tabs", null);

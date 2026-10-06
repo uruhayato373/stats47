@@ -1,7 +1,8 @@
 ---
 paths:
   - "packages/data-configs/src/{metrics,provenance}/**"
-  - ".claude/{scripts/provenance,state/provenance,skills/db/audit-provenance}/**"
+  - ".claude/{scripts/provenance,skills/db/audit-provenance}/**"
+  - "data/provenance/**"
   - ".github/workflows/provenance-audit-weekly.yml"
   - ".claude/agents/{data-ingester,open-data-curator,geo-analysis-curator,kindle-publisher}.md"
 ---
@@ -93,7 +94,7 @@ stats47 の全データ (metric / blog / theme / area / open-data) について�
 ## 6. 監査体制
 
 - **入口 (投入時)**: lint error が新規の provenance 欠落をブロック (`data-ingester` は非 e-Stat 投入時に本 rules を必読)。
-- **定期 (週次)**: `provenance-audit-weekly.yml` が全量を機械監査 → `.claude/state/provenance/{queue.json,LATEST.md}`
+- **定期 (週次)**: `provenance-audit-weekly.yml` が全量を機械監査 → `data/provenance/{queue.json,LATEST.md}`
   を commit-back → error 増加 or D クラス検出時だけ `auto-generated` Issue (手本 = `ogp-image-audit-weekly.yml`)。
 - **是正**: `/audit-provenance` skill が queue を提示 → fetcher コードから出典復元 → config backfill → lint 再実行。
   意味判断 (出典が本当に正しいか) だけ `open-data-curator` / 人間。
@@ -104,7 +105,7 @@ stats47 の全データ (metric / blog / theme / area / open-data) について�
 
 - 型: `packages/data-configs/src/types.ts` (`SourceProvenance` / `KNOWN_FETCHER_KEYS` / `ExternalSource`)
 - lint: `packages/data-configs/scripts/validate-metric-config.ts`
-- queue: `.claude/scripts/provenance/audit-provenance-queue.mjs` → `.claude/state/provenance/`
+- queue: `.claude/scripts/provenance/audit-provenance-queue.mjs` → `data/provenance/`
 - skill: `.claude/skills/db/audit-provenance/SKILL.md`
 - cron: `.github/workflows/provenance-audit-weekly.yml`
 - 手本 (blog lineage): `.claude/scripts/blog/build-lineage-queue.mjs` / `.claude/rules/blog-data-schema.md` §1.5/1.7

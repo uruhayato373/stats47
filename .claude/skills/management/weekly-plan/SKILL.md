@@ -95,7 +95,7 @@ primary_agent: strategy-advisor
   → weekly-review の Phase 0 で生成されたサマリ。engagedSessions / clicks / position 等の前週比
 
 - SEO カバレッジ指標（完全DBレス。旧 D1 `seo_tracking` / `seo_actions` テーブルは廃止）
-  → GSCカバレッジ推移: `.claude/state/gsc/LATEST.md`
+  → GSCカバレッジ推移: `data/gsc/coverage-remediation/LATEST.md`
   → `data/gsc/history.csv`はローリング28日系列（列名`*_rolling28d`・機会発見用）。
     週次ゲートは`history-finalized7d.csv`と`LATEST.md`上段の確定7日KPIを使う
     （`.claude/skills/analytics/search-growth/reference/weekly-cycle-contract.md`）
@@ -117,7 +117,7 @@ primary_agent: strategy-advisor
 ```
 調査項目:
 - **事業計画の実行state**: 先に `npm run business-plan:check` と
-  `npm run business-plan:build-state` を実行し、`.claude/state/business-plan/latest.json` の
+  `npm run business-plan:build-state` を実行し、`data/business-plan/latest.json` の
   `nextActions`・`sourceFreshness`・`eventCounts` を読む。`ready` / `in-progress` だけを候補にし、
   `gated` をMustへ入れる場合はreadinessGateを満たす証拠を明記する。未計測は0へ変換しない。
 - **今月の月次計画（重点テーマ）**: `.claude/todo/monthly.md` の frontmatter `focus_themes` と「構成タスク」を Read
@@ -137,7 +137,7 @@ primary_agent: strategy-advisor
 - **KDP週次公開ゲート**: APIやブラウザは呼ばず、weekly-reviewが同期した状態から決定的stateを再生成して読む。
   ```bash
   npm run kdp:weekly -- --week [YYYY-Www] --write
-  jq '{status,portfolio,nextPilot,candidate,cohortMeasurement,blockers,nextAction}' .claude/state/products/kdp-weekly-publication.json
+  jq '{status,portfolio,nextPilot,candidate,cohortMeasurement,blockers,nextAction}' data/products/kdp-weekly-publication.json
   ```
   → `hold|measure|observe|stop-no-demand`は出版タスクを作らず、計測・審査待ち・停止理由だけを計画へ反映する。
   → `prepare-one`は`KDP-EXPANSION-01`を参照し、候補を**1冊だけ**設計・生成・全章review・Previewer確認へ進める。
@@ -159,7 +159,7 @@ primary_agent: strategy-advisor
   npm run search-growth:status
   npm run search-growth:triage      # レビュー対象の最大3件 (technical/content/measurement 各1)
   # 人間承認済み (status=approved) の一覧 — weekly-plan が採用してよいのはここだけ
-  jq '[.candidates[] | select(.status=="approved")]' .claude/state/search-growth/candidates.json
+  jq '[.candidates[] | select(.status=="approved")]' data/search-growth/candidates.json
   ```
   → weekly-reviewで証拠確認・人間承認（`npm run search-growth:approve -- --candidate <ID>`で機械記録。
     週2件・全active WIP≤5をCLIが機械強制）された`status=approved`の候補だけを対象にする。
@@ -168,7 +168,7 @@ primary_agent: strategy-advisor
   → CTR候補はpage×query・現行title/content・past effectを確認し、一括title書換えを計画しない。
   → 効果判定日は`npm run search-growth:measure -- --candidate <ID>`（14/28/56日）。
 
-- アフィリエイト収益密度candidate（`.claude/state/ads/affiliate-portfolio-latest.json`・運用正典 `/affiliate-improvement`）
+- アフィリエイト収益密度candidate（`data/affiliate/affiliate-portfolio-latest.json`・運用正典 `/affiliate-improvement`）
   → 週次レビューで審査したもののうち、**人間承認済みを最大1件/週だけ**採用する。アフィリエイト active WIP≤2。
   → 1実験1レバー（枠数・意図軸の解決・priority・クリエイティブを同時に変えない）。rollback・guardrail
     （確定収益/1,000 viewable imp・GA4 sessions・LCP/CLS）・14/28日判定日を計画に明記する。
@@ -176,7 +176,7 @@ primary_agent: strategy-advisor
   → 計測が不完全な間（`ga4-affiliate-history.csv` が10日以上古い間）は広告枠を増やさない。
   → **AdSenseのcandidateは採用しない。2026-09-20に恒久停止（`docs/00_プロジェクト管理/02_収益化戦略.md` §3.1）。**
 
-- ブログ品質是正キュー（**既存記事を計画的に順次品質向上**・真実源: `.claude/state/blog/remediation-queue.json`）
+- ブログ品質是正キュー（**既存記事を計画的に順次品質向上**・真実源: `data/blog/remediation-queue.json`）
   ```bash
   # 最新化 (audit fresh + GSC マージ、状態保持の upsert) → 次の 3 件を取り出す
   node .claude/scripts/blog/build-remediation-queue.mjs
@@ -186,7 +186,7 @@ primary_agent: strategy-advisor
   → 実行は `/brushup-blog --target queue --next 3` (article-writer が archetype + 図あたり字数で是正 → blog-critic PASS → publish)。
   → これは毎週の**定常 Must**。少しずつ消化しキュー pending を減らす。仕組み: `.claude/skills/blog/brushup-blog/reference/blog-remediation-loop.md`。
 
-- ブログ新規記事キュー（**新規記事を継続拡充**・真実源: `.claude/state/blog/topic-queue.json`）
+- ブログ新規記事キュー（**新規記事を継続拡充**・真実源: `data/blog/topic-queue.json`）
   ```bash
   # 週次 cron (fetch-metrics-weekly.yml) で再生成済だが、当日最新化して次の 4-5 件を取り出す
   node .claude/scripts/blog/build-topic-queue.mjs
@@ -416,7 +416,7 @@ tags: []
 
 ## KDP公開ゲート
 
-- **判定**: `<status>`（`.claude/state/products/kdp-weekly-publication.json`）
+- **判定**: `<status>`（`data/products/kdp-weekly-publication.json`）
 - **候補**: `<ID またはなし>`（最大1冊）
 - **需要証拠**: `<販売数/KENPの4週実測、未計測、または計測済み0>`
 - **停止条件**: `<blockers>`

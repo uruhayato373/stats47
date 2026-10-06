@@ -8,7 +8,7 @@
  *       ここに領域名の写しを持たない (手で二重管理すると必ずずれる)。
  *
  * KPI: 領域表の KPI 列と improvements.md の `[kpi: id]` は、事業計画 catalog の KPI ツリー
- *      (`.claude/state/business-plan/kpi-tree.json`、`npm run business-plan:build-state` が生成) の id だけを参照できる。
+ *      (`data/business-plan/kpi-tree.json`、`npm run business-plan:build-state` が生成) の id だけを参照できる。
  *
  * 計画の規律: 🔴 の上限と鮮度 (DG081)、連続未達 Must の再掲禁止 (DG082)、週次 Must と 🔴 上位の接続 (DG083)。
  *
@@ -28,7 +28,7 @@ const FROZEN = '凍結';
 const START = '<!-- strategy-lanes:start -->';
 const END = '<!-- strategy-lanes:end -->';
 const COLUMNS = ['順', '領域', '構え', '今の狙い', '構えを変える条件', '改善Metric', 'KPI'];
-const KPI_TREE = '.claude/state/business-plan/kpi-tree.json';
+const KPI_TREE = 'data/business-plan/kpi-tree.json';
 const DOMAINS_JSON = DOMAINS;
 /**
  * 同時に判定まで回す active 施策の上限。超えている間は新しい施策を足さず、月次計画で削る。

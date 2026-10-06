@@ -14,4 +14,4 @@ GA4 の拡張計測「ブラウザの履歴イベントに基づくページの�
 **How to apply:** GA4 の計測を変えるときは本番で `/g/collect` を傍受して件数と参照元を実測する。
 監査 `npm run google-admin:audit-api` は拡張計測を読み、ON なら `page-changes-double-count` を警告する
 (週次 measurement-cycle の `ga4Settings`)。2026-09-26 は PV・回遊の不連続点
-(`.claude/state/metrics/releases/2026-09-26-ga4-measurement-v2.json`)。関連: [[project_ga4_setup]]
+(`data/releases/2026-09-26-ga4-measurement-v2.json`)。関連: [[project_ga4_setup]]

@@ -10,7 +10,7 @@ import { resolve } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 
-import { DATASETS, GOVERNED, IGNORED_NAMES, IMAGE_EXT, IMAGE_ROOTS, KINDS, TARGETS, datasetDir, datasetPath } from "../../../../config/datasets.mjs";
+import { AGENT_STATE, DATASETS, GOVERNED, IGNORED_NAMES, IMAGE_EXT, IMAGE_ROOTS, KINDS, TARGETS, datasetDir, datasetPath } from "../../../../config/datasets.mjs";
 import { DOMAINS } from "../../../../config/paths.mjs";
 import { checkDatasets, findRetiredReferences, patternToRegExp } from "../check-datasets.mjs";
 import { RETENTION_POLICIES } from "../prune-state-snapshots.mjs";
@@ -44,6 +44,7 @@ test("実リポジトリの追跡ファイルは台帳と矛盾しない", () =>
     retention: RETENTION_POLICIES,
     imageRoots: IMAGE_ROOTS,
     imageExt: IMAGE_EXT,
+    agentState: AGENT_STATE,
   });
   assert.deepEqual(result.errors, []);
 });
@@ -163,4 +164,24 @@ test("手順書 (SKILL.md・rules・agents) の旧パスは落ち、旧置き場
     "旧置き場の参照: .claude/rules/y.md:7 (.claude/state/metrics/foo → data/foo)",
     "旧置き場の参照: .codex/agents/z.toml:2 (.claude/state/metrics/foo → data/foo)",
   ]);
+});
+
+// 2026-10-06 に .claude/state/ をエージェント運用の状態だけへ絞った。事業の記録を黙って戻すと、
+// 「エージェントをやめたら消してよい置き場」に事業の記録が混ざり、置き場の判断基準が崩れる
+test(".claude/state/ を指す行は AGENT_STATE の許可リストに無ければ落ちる", () => {
+  const datasets = [
+    ds("agent.ok", ".claude/state/ok/ledger.json", { target: "state" }),
+    ds("biz.queue", ".claude/state/sales-queue/queue.json", { target: "state" }),
+    ds("biz.mislabeled", ".claude/state/metrics/foo/{date}.json"),
+    ds("biz.data", "data/sales-queue/queue.json"),
+  ];
+  const r = checkDatasets({ ...base, datasets, files: [], agentState: { "agent.ok": "理由", "agent.gone": "理由" } });
+  assert.deepEqual(
+    r.errors.filter((e) => !e.startsWith("どのファイルにも")).map((e) => e.replace(/ \(.*$/, "")),
+    [
+      "biz.queue: .claude/state/ はエージェント運用の状態だけを置く",
+      "biz.mislabeled: .claude/state/ はエージェント運用の状態だけを置く",
+      "AGENT_STATE に台帳に無い id: agent.gone",
+    ],
+  );
 });

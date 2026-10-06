@@ -41,7 +41,7 @@ plan.handoff = {
   dataValidationGate: 'pending-per-metric-and-source',
 };
 await writeFile(planPath, JSON.stringify(plan, null, 2) + '\n');
-const statePath = resolve(root, `.claude/state/metrics/themes/${day}-all-expansion.json`);
+const statePath = resolve(root, `data/themes/evidence/${day}-all-expansion.json`);
 await mkdir(dirname(statePath), { recursive: true });
 const previous = await readFile(statePath, 'utf8').then(JSON.parse).catch((error) => {
   if (error.code !== 'ENOENT') throw error;

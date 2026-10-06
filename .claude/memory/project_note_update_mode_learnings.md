@@ -62,8 +62,8 @@ DOM fallback / WARN 緩和。edit 版アイキャッチ差替も editor-operatio
 
 - **問題**: creator 一覧の `eyecatch` が非空ならカバー設定済みと判定し、未設定を13件と誤報した。
 - **原因**: 一覧の `eyecatch` は本文先頭画像のURLを返すことがある。全286件の詳細を取得すると、一覧画像あり・詳細カバーなしが70件あり、全件で一覧URLが本文先頭画像と一致した。家計調査 `a-kakei-*` 47件もこの状態だった。
-- **対策**: `npm run note:covers:audit`を使う。公開一覧・カタログの和集合を `GET https://note.com/api/v3/notes/{noteKey}` で取得し、`user.urlname`・公開状態・`eyecatch` フィールドの存在を確認して、詳細の `data.eyecatch` だけで設定有無を判定する。一覧サムネイル・本文画像・画像URLのHTTP 200はカバー設定の証拠にしない。最新結果は`.claude/state/metrics/note-cover-audit-latest.json`。不明・不完全はexit 2、未設定・集合差分はexit 1。
-- **証拠**: `.claude/state/metrics/note-cover-audit-2026-09-12.json`。例: `nda72a0bed2c4` は詳細 `eyecatch:null`、一覧画像は本文の最初の図表。比較対象 `n455ec72c5d62` は詳細カバーあり・1280×670。
+- **対策**: `npm run note:covers:audit`を使う。公開一覧・カタログの和集合を `GET https://note.com/api/v3/notes/{noteKey}` で取得し、`user.urlname`・公開状態・`eyecatch` フィールドの存在を確認して、詳細の `data.eyecatch` だけで設定有無を判定する。一覧サムネイル・本文画像・画像URLのHTTP 200はカバー設定の証拠にしない。最新結果は`data/note/evidence/note-cover-audit-latest.json`。不明・不完全はexit 2、未設定・集合差分はexit 1。
+- **証拠**: `data/note/evidence/note-cover-audit-2026-09-12.json`。例: `nda72a0bed2c4` は詳細 `eyecatch:null`、一覧画像は本文の最初の図表。比較対象 `n455ec72c5d62` は詳細カバーあり・1280×670。
 
 ## 新dashboardの計測と欠測（2026-09-12）
 

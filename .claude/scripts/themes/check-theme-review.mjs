@@ -10,8 +10,8 @@ const ROOT = path.resolve(
 );
 const git = (...args) =>
   execFileSync('git', args, { cwd: ROOT, encoding: 'utf8' });
-const reportPath = '.claude/state/themes/ci-review.json';
-const experimentsPath = '.claude/state/themes/experiments.json';
+const reportPath = 'data/themes/ci-review.json';
+const experimentsPath = 'data/themes/experiments.json';
 const meaningful = text => typeof text === 'string' && text.trim() && !/^(test|todo|tbd|placeholder|sample|テスト|仮|未記入)[.!。]*$/i.test(text.trim());
 const evidenceRef = ref => typeof ref === 'string' && (/^https:\/\/[^/\s]+\/[^\s]+$/.test(ref) || /^(\.claude|\.local|apps|packages)\/[^\s]+$/.test(ref)) && !ref.split('/').includes('..');
 export function evidenceFilePath(ref) {
@@ -129,7 +129,7 @@ if (
   }
   const { codeChanged, proposalChanges } = validateReview(
     read(reportPath),
-    read('.claude/state/themes/ci-followup.json'),
+    read('data/themes/ci-followup.json'),
     files,
     JSON.parse(git('show', `HEAD:${experimentsPath}`)),
     read(experimentsPath)
@@ -143,7 +143,7 @@ if (
   fs.writeFileSync(
     path.join(evidenceDir, 'review-body.md'),
     read(reportPath).summary +
-      '\n\n検証と根拠: `.claude/state/themes/ci-review.json`。\n'
+      '\n\n検証と根拠: `data/themes/ci-review.json`。\n'
   );
   if (process.env.GITHUB_OUTPUT)
     fs.appendFileSync(

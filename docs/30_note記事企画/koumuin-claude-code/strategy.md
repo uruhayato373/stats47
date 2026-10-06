@@ -264,4 +264,4 @@ node .claude/scripts/note/aggregate-koumuin-metrics.cjs \
 - 画像: `docs/31_note記事原稿/koumuin-claude-code/<NN>-<slug>/images/*.svg`
 - 月次判定: `/fetch-note-metrics` のreference履歴 + `.claude/todo/improvements.md` (M1 / M3 / M6)
 - 既存スキル: `.claude/skills/note/{publish-note,write-note-section,design-note-structure,edit-note-draft}/`
-- メトリクス: `.claude/state/metrics/note/` (`/fetch-note-metrics` で更新)
+- メトリクス: `data/note/` (`/fetch-note-metrics` で更新)

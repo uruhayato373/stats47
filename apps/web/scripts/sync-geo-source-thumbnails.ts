@@ -62,7 +62,7 @@ export function readStagedGeoThumbnails(
   const state = stateSchema.parse(
     JSON.parse(
       readFileSync(
-        join(root, '.claude/state/geo/source-thumbnails.json'),
+        join(root, 'data/geo/source-thumbnails.json'),
         'utf8'
       )
     )
@@ -258,7 +258,7 @@ async function main() {
         verified.push({ key, sha256: expectedSha, bytes: local.length });
       }
       save(
-        join(root, '.claude/state/geo/source-thumbnails-publication.json'),
+        join(root, 'data/geo/source-thumbnails-publication.json'),
         JSON.stringify(
           {
             schemaVersion: 1,

@@ -237,7 +237,7 @@ export function businessPlanAdminData(): BusinessPlanAdminData {
     })
   );
   const state = wrap(() =>
-    readJson<BusinessPlanState>(".claude/state/business-plan/latest.json")
+    readJson<BusinessPlanState>("data/business-plan/latest.json")
   );
   const gisCatalog = wrap(() =>
     readJson<GisCatalogState>(".local/r2/app/geo/data-catalog/items.json")

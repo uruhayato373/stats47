@@ -52,7 +52,7 @@ const client = new S3Client({
   credentials: { accessKeyId, secretAccessKey },
 });
 const state = JSON.parse(
-  fs.readFileSync(path.join(repoRoot, '.claude/state/note-published-urls.json'), 'utf8'),
+  fs.readFileSync(path.join(repoRoot, 'data/note/note-published-urls.json'), 'utf8'),
 ) as { articles: Record<string, PublishedArticle> };
 
 function sha256(body: Uint8Array | string): string {

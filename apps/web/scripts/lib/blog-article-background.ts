@@ -95,15 +95,27 @@ function frontmatterScalar(markdown: string, key: string): string {
   return value;
 }
 
+/** HTML タグを除く。1 回の置換では `<scr<b>ipt>` のような入れ子から新しいタグが組み上がるので、変化がなくなるまで繰り返す */
+function stripHtmlTags(text: string): string {
+  let current = text;
+  let previous: string;
+  do {
+    previous = current;
+    current = current.replace(/<[^>]+>/g, '');
+  } while (current !== previous);
+  return current;
+}
+
 function articleIntroduction(markdown: string): string {
   const body = markdown.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n?/, '');
   const paragraphs = body
     .split(/\r?\n\s*\r?\n/)
     .map((paragraph) =>
-      paragraph
-        .replace(/^#{1,6}\s+.*$/gm, '')
-        .replace(/^!\[[^\]]*\]\([^)]*\)$/gm, '')
-        .replace(/<[^>]+>/g, '')
+      stripHtmlTags(
+        paragraph
+          .replace(/^#{1,6}\s+.*$/gm, '')
+          .replace(/^!\[[^\]]*\]\([^)]*\)$/gm, '')
+      )
         .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
         .replace(/[*_`>#]/g, '')
         .replace(/\s+/g, ' ')

@@ -12,7 +12,7 @@ const require = createRequire(import.meta.url);
 const { METRICS_REGISTRY } = require('../../../packages/data-configs/src/registry.ts');
 const { THEME_CATALOGS } = require('../../../packages/data-configs/src/theme-catalog/index.ts');
 const catalogPath = path.join(ROOT, '.claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json');
-const reportPath = path.join(ROOT, '.claude/state/estat/theme-expansion-verification.json');
+const reportPath = path.join(ROOT, 'data/estat/theme-expansion-verification.json');
 const catalog = JSON.parse(fs.readFileSync(catalogPath, 'utf8'));
 const sha256 = (content) => createHash('sha256').update(content).digest('hex');
 const array = (value) => value == null ? [] : Array.isArray(value) ? value : [value];

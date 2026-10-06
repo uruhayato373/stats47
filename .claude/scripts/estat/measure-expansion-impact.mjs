@@ -7,7 +7,7 @@
  * /ranking/<key> の impressions/clicks を拾って gsc フィールドに書き込む。
  * → 次の build-expansion-queue が categoryTraffic に集計し、流入が付いたカテゴリの pending を優先する。
  *
- * 真実源: .claude/state/estat/expansion-queue.json (gsc を upsert)
+ * 真実源: data/estat/expansion-queue.json (gsc を upsert)
  * 入力  : data/gsc/snapshots/<week>/pages.csv (最新週)
  *
  * Usage:
@@ -20,7 +20,7 @@ import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..", "..", "..");
-const QUEUE_FILE = path.join(ROOT, ".claude/state/estat/expansion-queue.json");
+const QUEUE_FILE = path.join(ROOT, "data/estat/expansion-queue.json");
 const SNAP_DIR = path.join(ROOT, "data/gsc/snapshots");
 
 const args = process.argv.slice(2);

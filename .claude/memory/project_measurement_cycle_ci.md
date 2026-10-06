@@ -44,7 +44,7 @@ GA4 実測で止まっていた判定待ちを処理した手順 (計測→impro
 - 自動化できないオーナー作業: custom dimension 登録 (今は home_featured の card_variant/slot/experiment_variant だけが発火量十分)、ASP/KDP 再ログイン、本番デプロイ承認。
 
 **KPI ツリー配線 (2026-09-27)**: KPI の正典は事業計画 catalog の `kpiTier` (nsm / driver / guardrail) で、
-`business-plan:build-state` が `.claude/state/business-plan/kpi-tree.json` を書き `business-plan:check` がずれを拒否する
+`business-plan:build-state` が `data/business-plan/kpi-tree.json` を書き `business-plan:check` がずれを拒否する
 (.mjs/.cjs は TS を import できないためこの写しを読む)。施策は `[kpi: id]` 必須 (docs:check DG079 error)、
 `[target:]` なし・active 上限 10 超過は DG080 warning、無人 run のゲートは新規行の目印欠落と上限超過中の追加を拒否する。
 計測サイクルは KPI ごとに今週値・4週前 (rolling28d の非重複窓) 比較・ぶら下がる施策を出し、認証付き収集の認証切れも

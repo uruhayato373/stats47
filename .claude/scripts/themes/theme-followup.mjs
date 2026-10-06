@@ -27,7 +27,7 @@ const { values: cli } = parseArgs({
 const read = (p) => JSON.parse(fs.readFileSync(path.join(ROOT, p), 'utf8'));
 const dir = path.join(ROOT, '.local/ci/theme-followup');
 fs.mkdirSync(dir, { recursive: true });
-const experiments = read('.claude/state/themes/experiments.json').experiments;
+const experiments = read('data/themes/experiments.json').experiments;
 const today = cli.today ?? jstDateOf();
 if (cli.plan) {
   const plan = planFollowup(experiments, today, cli.force ?? false);
@@ -57,7 +57,7 @@ if (cli.plan) {
   };
   const result = summarizeFollowup({
     experiments,
-    quality: optional('.claude/state/themes/quality.json'),
+    quality: optional('data/themes/quality.json'),
     runtime: optional('.local/ci/theme-followup/runtime.json'),
     codes,
     today,
@@ -72,13 +72,13 @@ if (cli.plan) {
       })
     )
     .digest('hex');
-  const priorReview = optional('.claude/state/themes/ci-review.json');
+  const priorReview = optional('data/themes/ci-review.json');
   result.reviewRequired = needsEvidenceReview(result, priorReview);
   result.runUrl = process.env.GITHUB_RUN_ID
     ? `${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}`
     : null;
   fs.writeFileSync(
-    path.join(ROOT, '.claude/state/themes/ci-followup.json'),
+    path.join(ROOT, 'data/themes/ci-followup.json'),
     JSON.stringify(result, null, 2) + '\n'
   );
   fs.writeFileSync(path.join(dir, 'alert.md'), result.alertBody);

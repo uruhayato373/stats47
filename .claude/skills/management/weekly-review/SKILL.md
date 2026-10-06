@@ -27,7 +27,7 @@ npm run business-plan:check
 npm run business-plan:build-state -- --snapshot
 ```
 
-`.claude/state/business-plan/latest.json` の `sourceFreshness`、`eventCounts`、`nextActions` を読み、
+`data/business-plan/latest.json` の `sourceFreshness`、`eventCounts`、`nextActions` を読み、
 未計測を0にせず、開始ゲート未達の施策を実行済みと扱わない。
 
 既存snapshotがあれば再生成しない。上書きが必要な根拠がある時だけ`--force`を使う。
@@ -55,14 +55,14 @@ FAIL項目はレビュー本文の`Blockers`へ転記する。レビュー作成
 | 楽天アフィリエイト成果 | 認証付き収集の `rakuten` (毎日。`rakuten-report.mjs` が管理画面の JSON から当月・前月の発生と確定を読み `data/affiliate/rakuten-results.json` へ) を週次 Issue の「週次収益 (NSM)」の楽天行で確認する。収集が失敗・10 日超なら判定不能として Blockers へ。**収集が止まっている週だけ**、オーナーに管理画面の成果レポートを見てもらい `npm run rakuten:record -- --month <YYYY-MM> --orders <件> --estimated-yen <円> [--confirmed-yen <円>]` で記録する。値を推測で入れない |
 | 認証付き計測 | `npm run measurement:status` + `data/authenticated/latest.json`。48時間超・取得失敗・status-only・成果未取得をBlockersへ分離する。生データはprivate R2、現在の収集状態を過去週の実測にしない |
 | 計測→記録→改善サイクル | `data/measurement-cycle/{LATEST.md,triage-latest.json}`（週次メトリクス Issue の「🔁」節と同じ。GA4 回遊・GSC 判定目印・PSI / Cloudflare / SNS の週次要約を含む）。state の週が当週と違う・ゲート fail・無人記録の未実行は Blockers、未登録 custom dimension の登録と再ログインはオーナー作業として申し送る。個別の再照会は `node .claude/scripts/metrics/ga4-query.mjs` |
-| データ品質キュー | `.claude/state/data/data-quality/{LATEST.md,queue.json}`（`ranking-integrity-audit-weekly` が毎週生成。`npx tsx packages/ranking/src/scripts/build-data-quality-queue.ts` で再生成）。処置 1 誤り〜4 noindex 候補の件数を前週と比べ、「新規検出 ≤ 処置件数」かを書く (DATA-QUALITY-LOOP-01)。2〜4 は配信年からの推定候補で、公式の最新公表は未照会 |
+| データ品質キュー | `data/data-quality/checks/{LATEST.md,queue.json}`（`ranking-integrity-audit-weekly` が毎週生成。`npx tsx packages/ranking/src/scripts/build-data-quality-queue.ts` で再生成）。処置 1 誤り〜4 noindex 候補の件数を前週と比べ、「新規検出 ≤ 処置件数」かを書く (DATA-QUALITY-LOOP-01)。2〜4 は配信年からの推定候補で、公式の最新公表は未照会 |
 | 計画差分 | `.claude/todo/weekly.md` |
 | note画像資産 | `npm run note:images:audit -- --json` の `summary` (追跡PNG枚数・容量、再生成元なしの内訳、ランキング記事のデータ契約違反数)。`findings` が1件でもあれば原因を `.claude/rules/note-image-assets.md` の契約番号で示す。追跡PNGが前週より増えていれば理由を確認する(予算は縮小専用)。週次CIの結果は `note-circulation-audit` artifact の `note-image-assets.json` |
-| noteカード表示 | `npm run note:cards:audit -- --browser-verify --previous .claude/state/metrics/note/card-visibility-latest.json --output .claude/state/metrics/note/card-visibility-latest.json` の `summary`。公開HTMLで空の候補はブラウザ描画で確定し、カード前の余分な空段落も検出。ブラウザ検証失敗があれば `--retry-unknown-from <直前report> --output <同report>` で失敗記事だけ再確認。取得・検証失敗は0件扱いしない。スクショは異常時だけ `--screenshots /tmp/note-card-screenshots --max-screenshots 3` で一時取得 |
-| ページUI週次確認 | `.claude/state/metrics/page-quality/ui-review-latest.json` (`page-quality-audit-weekly` が毎週日曜に更新)。`auditGeneratedAt` が当週か、`reviewStatus`、`readCoverage` の読んだ切り出し / 読むべき枚数、agent 指摘件数 (`findings`)、新規の機械検出件数 (`newViolationCount`) を書く。監査が当週に無い・`reviewStatus` が `not-run`/`blocked`・読み残し (`readCoverage.unreadScreens`) がある週は Blockers へ。読み残したページは確認済みに数えない。正典 `.claude/rules/page-quality-standards.md` |
-| 事業計画 | `.claude/state/business-plan/latest.json` + `packages/data-configs/src/business-plan/` |
+| noteカード表示 | `npm run note:cards:audit -- --browser-verify --previous data/note/card-visibility-latest.json --output data/note/card-visibility-latest.json` の `summary`。公開HTMLで空の候補はブラウザ描画で確定し、カード前の余分な空段落も検出。ブラウザ検証失敗があれば `--retry-unknown-from <直前report> --output <同report>` で失敗記事だけ再確認。取得・検証失敗は0件扱いしない。スクショは異常時だけ `--screenshots /tmp/note-card-screenshots --max-screenshots 3` で一時取得 |
+| ページUI週次確認 | `data/page-quality/metrics/ui-review-latest.json` (`page-quality-audit-weekly` が毎週日曜に更新)。`auditGeneratedAt` が当週か、`reviewStatus`、`readCoverage` の読んだ切り出し / 読むべき枚数、agent 指摘件数 (`findings`)、新規の機械検出件数 (`newViolationCount`) を書く。監査が当週に無い・`reviewStatus` が `not-run`/`blocked`・読み残し (`readCoverage.unreadScreens`) がある週は Blockers へ。読み残したページは確認済みに数えない。正典 `.claude/rules/page-quality-standards.md` |
+| 事業計画 | `data/business-plan/latest.json` + `packages/data-configs/src/business-plan/` |
 | モデル使用量 | `npm run model-usage:collect && npm run model-usage:report` → `.claude/state/metrics/model-usage/latest.json` の `proposals` / `canary`。提案は採否だけ決め、frontmatter・workflow は canary 合格を見てから変える (`.claude/rules/model-prompting.md`「継続最適化サイクル」)。canary 未実施で費用の大きい提案は今週の Should に 1 件まで |
-| Kindle | `config/kdp-listings.json` + `data/products/sales-ledger.json` + `.claude/state/products/kdp-weekly-publication.json` |
+| Kindle | `config/kdp-listings.json` + `data/products/sales-ledger.json` + `data/products/kdp-weekly-publication.json` |
 
 各snapshotの期間、取得日、freshnessを保持する。行が無い場合を推測の0へ変換せず、
 `not-measured` / `not-instrumented` / `insufficient-data`を区別する。
@@ -86,7 +86,7 @@ npm run kdp:weekly -- --week [YYYY-Www] --write
 ```
 
 本棚同期がログイン・2FA・UI変更で失敗した場合は、古い状態をfreshとみなさず`Blockers`へ記録する。
-`.claude/state/products/kdp-weekly-publication.json`の`status`をレビューに転載し、未計測を0需要へ変換しない。
+`data/products/kdp-weekly-publication.json`の`status`をレビューに転載し、未計測を0需要へ変換しない。
 `ready-for-owner-approval`でもレビュー単独では公開しない。公開はPhase 4で週次計画まで依頼され、かつ対象IDを
 オーナーがその場で明示承認した場合だけ`/weekly-plan`の公開工程へ渡す。
 
@@ -124,8 +124,8 @@ npm run kdp:weekly -- --week [YYYY-Www] --write
 - 事業計画のready/in-progress、開始ゲート、計測欠損、Go/Pivot/Stop判断
 - KDP公開ゲート（S1 live数、4週販売/KENP計測、需要シグナル、当週候補、停止理由）
 - note画像資産（追跡PNGの枚数・容量と前週差、再生成元を持たない追跡PNGの内訳、ランキング記事のデータ契約違反数。違反があれば契約番号と該当記事を示す。正典 `.claude/rules/note-image-assets.md`）
-- noteカード表示（検査記事数・ブラウザで確定した空白カード数・余分な空段落数・未確認カード数・影響記事数・取得/ブラウザ検証失敗数・新規/継続/解消。検証失敗があれば解消数は判定不能として扱う。詳細は `.claude/state/metrics/note/card-visibility-latest.json`）
-- ページUI週次確認（監査日、レビュー状態、読んだ切り出し / 読むべき枚数と読み残し画面、agent 指摘件数、新規の機械検出件数。詳細は `.claude/state/metrics/page-quality/ui-review-latest.json`）
+- noteカード表示（検査記事数・ブラウザで確定した空白カード数・余分な空段落数・未確認カード数・影響記事数・取得/ブラウザ検証失敗数・新規/継続/解消。検証失敗があれば解消数は判定不能として扱う。詳細は `data/note/card-visibility-latest.json`）
+- ページUI週次確認（監査日、レビュー状態、読んだ切り出し / 読むべき枚数と読み残し画面、agent 指摘件数、新規の機械検出件数。詳細は `data/page-quality/metrics/ui-review-latest.json`）
 
 恒久的な失敗知見だけを`/knowledge`へ渡す。改善施策statusの更新は`improvement-triage`へ渡す。
 `.claude/todo/weekly.md`はレビュー中に書き換えない。

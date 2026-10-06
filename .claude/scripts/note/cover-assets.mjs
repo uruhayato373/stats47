@@ -58,9 +58,10 @@ async function boundedMap(items, work) {
 }
 
 if (command === 'seed') {
-  const directory = path.join(COVER_ROOT, '.claude/state/metrics');
+  // note の監査・カバー更新の記録は data/note/evidence/、release の検証証跡は data/releases/
+  const directory = path.join(COVER_ROOT, 'data/note/evidence');
   const files = [path.join(directory, 'note-cover-audit-latest.json')];
-  for (const dir of [directory, path.join(directory, 'releases')]) {
+  for (const dir of [directory, path.join(COVER_ROOT, 'data/releases')]) {
     if (fs.existsSync(dir)) files.push(...fs.readdirSync(dir).filter((name) => /note-cover-refresh.*verification\.json$/.test(name)).map((name) => path.join(dir, name)));
   }
   const imported = files.filter((file) => fs.existsSync(file)).flatMap((file) => observations(JSON.parse(fs.readFileSync(file, 'utf8'))));

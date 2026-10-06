@@ -83,7 +83,7 @@ developer_instructions = '''
 
 - `docs/21_ブログ記事原稿/<slug>/article.md` + `data/` — **read only** (記事本文・data は触らない)
 - `.local/r2/app/blog/<slug>/` — read only (data JSON)
-- `.claude/state/blog/SHARED-failure-cases.md` — read (failure ledger 参照)
+- `data/blog/SHARED-failure-cases.md` — read (failure ledger 参照)
 - `docs/21_ブログ記事原稿/<slug>/review.md` — **write (本 agent の唯一の書き込み先)**
 
 ## File Boundary (並行衝突回避)

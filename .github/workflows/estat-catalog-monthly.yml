@@ -9,7 +9,7 @@ name: 📚 e-Stat Catalog (monthly)
 #   2. diff-push-r2 --prefix estat-catalog: R2 へ push
 #
 # カタログ本体の git commit-back はしない (状態は R2 の manifest.json)。実行結果だけを
-# .claude/state/metrics/monthly-jobs/estat-catalog.json に残す (月次レビューが読む)。
+# data/ci/monthly-jobs/estat-catalog.json に残す (月次レビューが読む)。
 # concurrency は estat-catalog 専用 group とし、r2-write (data-refresh / sync-snapshots) と
 # 直列化しない — このプレフィックスは本 workflow が専有し app 配信に触れないため、
 # 30〜150 分の crawl 中に他の R2 反映を塞ぐ必要がない。
@@ -105,7 +105,7 @@ jobs:
             --field trigger="${{ github.event_name }}"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .claude/state/metrics/monthly-jobs/estat-catalog.json
+          git add data/ci/monthly-jobs/estat-catalog.json
           if git diff --cached --quiet; then exit 0; fi
           git commit -m "chore(metrics): monthly job estat-catalog $STATUS [skip ci]"
           git pull --rebase origin develop

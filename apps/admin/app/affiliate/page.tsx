@@ -28,7 +28,7 @@ export default function AffiliateResultsPage() {
 
   return (
     <div className="space-y-8">
-      <PageHeading title="アフィリエイト 成果" source="data/affiliate/ + .claude/state/ads/" />
+      <PageHeading title="アフィリエイト 成果" source="data/affiliate/ + data/affiliate/" />
 
       {hasError(r) ? (
         <ErrorNote error={r.error} />

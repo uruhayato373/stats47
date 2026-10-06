@@ -23,8 +23,8 @@ primary_agent: ranking-expander
 
 ## 真実源
 
-- 状態SSOT: `.claude/state/estat/expansion-queue.json` (candidate/generated/published/measured + categoryTraffic)
-- 候補プール: `.claude/state/estat/ssds-candidates.json` (enumerate-ssds-indicators.mjs → CI で再生成)
+- 状態SSOT: `data/estat/expansion-queue.json` (candidate/generated/published/measured + categoryTraffic)
+- 候補プール: `data/estat/ssds-candidates.json` (enumerate-ssds-indicators.mjs → CI で再生成)
 
 ## 使い方
 
@@ -59,6 +59,6 @@ node .claude/scripts/estat/measure-expansion-impact.mjs [--week YYYY-Www]
 
 - エージェント: `.claude/agents/ranking-expander.md` (キュレーション判断のオーナー)
 - スクリプト: `.claude/scripts/estat/{build-expansion-queue,gen-ssds-configs,measure-expansion-impact,enumerate-ssds-indicators,fetch-estat-meta}.mjs`
-- 知見/状態: memory `project_estat_expansion_pipeline_2026_07` / `.claude/state/estat/expansion-queue.json`
+- 知見/状態: memory `project_estat_expansion_pipeline_2026_07` / `data/estat/expansion-queue.json`
 - 正典: `.claude/rules/metric-config-standards.md` / `.claude/rules/estat-api.md` / 現在計画は `.claude/todo/weekly.md`
 - 対比: `.claude/skills/blog/brushup-blog/reference/blog-remediation-loop.md` (同型の型)

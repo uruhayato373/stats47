@@ -9,7 +9,7 @@
 
 export const CARD_PREFIX = "GSC-COV";
 export const BATCH_SIZE = 10;
-export const BATCH_DIR = ".claude/state/gsc/backlog-batches";
+export const BATCH_DIR = "data/gsc/coverage-remediation/backlog-batches";
 
 const QUEUE_CLI = "node .claude/scripts/gsc/build-coverage-queue.mjs";
 const RUNBOOK = ".claude/skills/analytics/gsc-coverage-remediation/SKILL.md";
@@ -118,7 +118,7 @@ function renderCard({ id, def, urls, queue, today }) {
     "",
     `タグ: [インフラ・計測] [種類:${def.kind}] [実行:sweep] [検証:${QUEUE_CLI} --assert-handled ${file}] [起票:${today}] [領域:サイト]`,
     "",
-    `- **自動起票**: \`sync-coverage-backlog.mjs\` が是正キュー (\`.claude/state/gsc/coverage-remediation-queue.json\`) の pending から作った。対象 URL の一覧は \`${file}\`。手順の正典は \`${RUNBOOK}\` Phase 4。`,
+    `- **自動起票**: \`sync-coverage-backlog.mjs\` が是正キュー (\`data/gsc/coverage-remediation/coverage-remediation-queue.json\`) の pending から作った。対象 URL の一覧は \`${file}\`。手順の正典は \`${RUNBOOK}\` Phase 4。`,
     "- **対象**:",
     ...urls.map((url) => `  - ${url} (${describe(byUrl.get(url) ?? {})})`),
     `- **次**: ${def.next}`,

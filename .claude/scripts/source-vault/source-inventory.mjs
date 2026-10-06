@@ -10,7 +10,7 @@ import { SOURCE_VAULT } from '../../../config/paths.mjs';
 const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(SCRIPT_DIR, '../../..');
 const CONFIG_PATH = path.join(PROJECT_ROOT, SOURCE_VAULT);
-const STATE_ROOT = path.join(PROJECT_ROOT, '.claude/state/source-inventory');
+const STATE_ROOT = path.join(PROJECT_ROOT, 'data/source-inventory');
 const TEMP_VAULT_ROOT = path.join(tmpdir(), 'stats47-source-vault');
 const ACTIONABLE_RESOLUTIONS = new Set([
   'reuse-existing-metric',

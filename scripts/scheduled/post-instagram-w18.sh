@@ -1,11 +1,11 @@
 #!/bin/bash
 # launchd 用 IG 予約投稿ラッパー (W18 用)
-# 毎日 09:00 JST に発火し、.claude/state/instagram-w18-schedule.json から今日分を読んで投稿。
+# 毎日 09:00 JST に発火し、data/sns/instagram-w18-schedule.json から今日分を読んで投稿。
 # 該当日付なし → 黙って exit 0（その日は投稿なし）。
 
 source "$(dirname "$0")/_common.sh"
 
-SCHEDULE_FILE="$PROJECT_DIR/.claude/state/instagram-w18-schedule.json"
+SCHEDULE_FILE="$PROJECT_DIR/data/sns/instagram-w18-schedule.json"
 TODAY=$(TZ=Asia/Tokyo date +%Y-%m-%d)
 
 if [ ! -f "$SCHEDULE_FILE" ]; then

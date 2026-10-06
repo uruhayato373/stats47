@@ -20,7 +20,7 @@ import { fileURLToPath } from "node:url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
-const QUEUE_PATH = path.join(PROJECT_ROOT, ".claude/state/blog/remediation-queue.json");
+const QUEUE_PATH = path.join(PROJECT_ROOT, "data/blog/remediation-queue.json");
 
 const args = process.argv.slice(2);
 const getArg = (flag, fallback) => {

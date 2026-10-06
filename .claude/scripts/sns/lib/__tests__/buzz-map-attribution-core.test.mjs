@@ -155,7 +155,7 @@ test("buildScoreFeedback: 高 session ほど score 単調増加 (log スケー�
 test("canonical 不変条件: catalog の primaryUrl に UTM/query が付いていない", () => {
   const catalog = JSON.parse(
     readFileSync(
-      new URL("../../../../state/sns/buzz-map-catalog.json", import.meta.url),
+      new URL("../../../../../data/sns/buzz-map-catalog.json", import.meta.url),
       "utf8",
     ),
   );

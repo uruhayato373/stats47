@@ -62,7 +62,7 @@ export interface FixtureOptions {
   localSnsFiles?: string[];
   /** .claude/todo 配下に作る { ファイル名: 内容 }。指定時は parse-backlog-core.cjs も実物をコピーする */
   todoFiles?: Record<string, string>;
-  /** repo root 相対パス → 内容。`.claude/state/**` などを任意に撒く */
+  /** repo root 相対パス → 内容。`data/**` などを任意に撒く */
   stateFiles?: Record<string, string>;
 }
 
@@ -91,12 +91,10 @@ export function makeFixtureRoot(opts: FixtureOptions = {}): string {
     JSON.stringify({ _meta: { nextId, count: posts.length }, posts }, null, 2),
   );
 
-  // 4) IG schedule ファイル群 (.claude/state 直下)
-  const stateDir = path.join(root, ".claude/state");
-  fs.mkdirSync(stateDir, { recursive: true });
+  // 4) IG schedule ファイル群 (data/sns 直下)
   for (const [name, entries] of Object.entries(opts.igSchedules ?? {})) {
     fs.writeFileSync(
-      path.join(stateDir, name),
+      path.join(snsStateDir, name),
       JSON.stringify(entries, null, 2) + "\n",
     );
   }
@@ -161,7 +159,7 @@ export function readPosts(root: string): SeedPost[] {
 
 /** fixture の IG schedule を読み返す。 */
 export function readIgSchedule(root: string, name: string): unknown[] {
-  const raw = fs.readFileSync(path.join(root, ".claude/state", name), "utf-8");
+  const raw = fs.readFileSync(path.join(root, "data/sns", name), "utf-8");
   return JSON.parse(raw);
 }
 
@@ -182,7 +180,7 @@ export function readGalleryState(root: string): Record<string, unknown> {
 export function assertNoRealSsotDiff(): void {
   const repoRoot = path.resolve(__dirname, "../../../..");
   const out = execSync(
-    "git status --short .claude/state data/sns .local 2>/dev/null || true",
+    "git status --short data/sns .local 2>/dev/null || true",
     { cwd: repoRoot, encoding: "utf-8" },
   );
   if (out.trim() !== "") {

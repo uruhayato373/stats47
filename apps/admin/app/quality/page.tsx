@@ -12,7 +12,7 @@ export default function QualityPage() {
 
   return (
     <div className="space-y-8">
-      <PageHeading title="品質" source=".claude/state/ (各監査キュー)" />
+      <PageHeading title="品質" source="data/ (各監査キュー)" />
 
       <Section title="概況">
         <div className="grid gap-2 sm:grid-cols-3">

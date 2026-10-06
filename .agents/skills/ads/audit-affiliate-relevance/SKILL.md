@@ -12,7 +12,7 @@ co_agents: [blog-editor]
 - **明示policy SSOT**: `apps/web/src/features/ads/constants/blog-affiliate-policy.ts`
 - **自動解決 SSOT**: `apps/web/src/features/ads/constants/affiliate-category.ts`
 - **判定コア**: `.claude/scripts/ads/lib/affiliate-relevance-core.mjs`
-- **state**: `.claude/state/ads/relevance-latest.json`（派生物・手編集禁止）
+- **state**: `data/affiliate/relevance-latest.json`（派生物・手編集禁止）
 
 ## 実行
 

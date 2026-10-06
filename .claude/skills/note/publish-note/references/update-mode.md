@@ -14,7 +14,7 @@
 
 ## 対象の制約
 
-- **公開済みの記事のみ**。`.claude/state/note-published-urls.json` の `articles` に
+- **公開済みの記事のみ**。`data/note/note-published-urls.json` の `articles` に
   該当 slug が無ければ「未公開のため更新不可」で中断する
 - **無料記事は全自動**。有料記事の更新は本文差し替え後に有料エリア境界（`ここから先は有料部分:`）の
   再設定が絡むため、Phase 7-Boundary で境界を自動設定するが、**誤露出防止で最終投稿は screenshot 確認後に

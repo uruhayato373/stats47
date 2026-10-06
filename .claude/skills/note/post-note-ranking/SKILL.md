@@ -43,7 +43,7 @@ npx tsx .claude/skills/note/post-note-ranking/scripts/generate-ranking-note.ts <
 （人口・経済規模がそのまま出る「予想どおり」の記事を量産しないため。読者にとって意外な理由がある場合だけ
 `--allow-tokyo-leader "<理由>"`で通す）。通過すると`chart-data.json`、`draft.md`、
 `data-provenance.json`、`tags.txt`と既存Remotion用の`.local/r2/sns/ranking/<key>/`入力を作る。
-決定的ゲートで停止した場合は`.claude/state/content-operations/note-generation-blockers.json`へ
+決定的ゲートで停止した場合は`data/content-operations/note-generation-blockers.json`へ
 理由を機械記録し、管理画面`/content/references`では`blocked`として表示する。成功時は同keyの記録を自動解除する。
 
 次のpublic snapshotを取得し、HTTP statusとschemaを確認する。

@@ -3,7 +3,7 @@
  * audit-provenance-queue.ts — データ出典・再現性 (provenance) の横断棚卸しキュー。
  *
  * 全 metric を再現性クラス A/A'/B/C/D (`.claude/rules/data-provenance-standards.md` §1) に分類し、
- * blog SVG lineage の集計と併せて `.claude/state/provenance/{queue.json,LATEST.md}` を出力する。
+ * blog SVG lineage の集計と併せて `data/provenance/{queue.json,LATEST.md}` を出力する。
  * lint (validate-metric-config.ts) が「投入時の床」、本 script が「定期監査の全量棚卸し」を担う。
  *
  * 名前に "audit" を含むため check-checker-wiring の自動配線監視対象になる。
@@ -19,7 +19,7 @@ import { METRICS_REGISTRY } from "@stats47/data-configs/registry";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "../../..");
-const STATE_DIR = resolve(ROOT, ".claude/state/provenance");
+const STATE_DIR = resolve(ROOT, "data/provenance");
 const CHECK = process.argv.includes("--check");
 
 type Klass = "A" | "A'" | "B" | "C" | "D";
@@ -132,7 +132,7 @@ function classify(key: string, cfg: unknown): Entry {
 
 function readBlogLineage(): { total: number; byStatus: Record<string, number> } | null {
   try {
-    const p = resolve(ROOT, ".claude/state/blog/svg-lineage-queue.json");
+    const p = resolve(ROOT, "data/blog/svg-lineage-queue.json");
     const d = JSON.parse(readFileSync(p, "utf8"));
     return { total: d.total, byStatus: d.byStatus };
   } catch {
@@ -200,7 +200,7 @@ function main() {
 
   console.log(`provenance 棚卸し: metric ${entries.length} 件`);
   console.log(`  クラス分布: ${Object.entries(byClass).map(([k, v]) => `${k}=${v}`).join(" ")}`);
-  console.log(`  是正対象 (C欠落+D): ${needsWork.length} 件 → .claude/state/provenance/LATEST.md`);
+  console.log(`  是正対象 (C欠落+D): ${needsWork.length} 件 → data/provenance/LATEST.md`);
 
   if (CHECK && needsWork.filter((e) => e.klass === "D").length > 0) {
     console.error(`\n❌ D クラス (出典不明) が ${needsWork.filter((e) => e.klass === "D").length} 件`);

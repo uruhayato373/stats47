@@ -40,7 +40,7 @@ const ROOT = resolve(SCRIPT_DIR, "../../..");
 const RUN_DATE = new Date().toISOString().slice(0, 10);
 const REPORT_PATH = join(ROOT, "data/note/navigation", `note-navigation-pilot-${RUN_DATE}.json`);
 const METRICS_PATH = join(ROOT, "data/note/metrics", `note-${RUN_DATE}.json`);
-const CIRCULATION_AUDIT_PATH = join(ROOT, ".claude/state/metrics", `note-circulation-audit-${RUN_DATE}.json`);
+const CIRCULATION_AUDIT_PATH = join(ROOT, "data/note/evidence", `note-circulation-audit-${RUN_DATE}.json`);
 
 function parseArgs(argv) {
   const slugIndex = argv.indexOf("--slug");

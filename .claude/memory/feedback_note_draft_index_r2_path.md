@@ -8,7 +8,7 @@ metadata:
   modified: 2026-09-29T08:19:32.302Z
 ---
 
-新規 note ドラフトを `.claude/state/note-draft-index.json` に登録する際、既存エントリを真似て `r2_path` を入れると、`sync-note-r2.yml` の pending 判定 (`!v.r2_path && docs/31 に実在`) から外れ、R2 へ移送されず docs/31 に残る。run は success・pending 0 で終わるので失敗に見えない (2026-09-29、財政 note #12/#13 で発生。R2 は 404)。
+新規 note ドラフトを `data/note/note-draft-index.json` に登録する際、既存エントリを真似て `r2_path` を入れると、`sync-note-r2.yml` の pending 判定 (`!v.r2_path && docs/31 に実在`) から外れ、R2 へ移送されず docs/31 に残る。run は success・pending 0 で終わるので失敗に見えない (2026-09-29、財政 note #12/#13 で発生。R2 は 404)。
 
 **Why:** `r2_path` は「R2 に移送済み」の印として sync が使っている。登録時に書くと未移送なのに移送済み扱いになる。
 

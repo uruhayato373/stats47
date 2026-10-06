@@ -5,7 +5,8 @@ paths:
   - "apps/web/scripts/*geo-source-thumbnails.ts"
   - "apps/web/scripts/lib/geo-source-thumbnail-render.ts"
   - "apps/web/scripts/{generate-ogp-images,generate-blog-thumbnails*,manage-blog-codex-backgrounds,process-home-use-case-images}.ts"
-  - ".claude/{scripts/ogp,state/ogp,skills/ui/audit-ogp-images,skills/image-prompt,skills/blog/generate-blog-images}/**"
+  - ".claude/{scripts/ogp,skills/ui/audit-ogp-images,skills/image-prompt,skills/blog/generate-blog-images}/**"
+  - "data/ogp/**"
   - ".claude/agents/{image-prompt-curator,blog-editor,site-ux-manager,r2-publisher}.md"
 ---
 # OGP・カバー・リンクカード画像標準 (画像資産カタログ SSOT)
@@ -96,7 +97,7 @@ note全記事のカバー制作方針・KPI・比較実験の契約は
 node .claude/scripts/ogp/build-image-gallery.mjs --tabs blog-ogp,blog-card --limit 20
 # 欠落を HEAD/GET で確定 (stdout に tab: expected/ok/missing 集計)
 node .claude/scripts/ogp/build-image-gallery.mjs --tabs ranking-card --check
-# 全種別を棚卸し → .claude/state/ogp/inventory.json
+# 全種別を棚卸し → data/ogp/inventory.json
 node .claude/scripts/ogp/build-image-gallery.mjs --audit
 ```
 
@@ -115,7 +116,7 @@ node .claude/scripts/ogp/build-image-gallery.mjs --audit
 - **サンプリング**: ranking 系タブは既定 30 件 (先頭 10 + 等間隔 20)、`--all` で全量。他タブは全量。`--audit` も既定はサンプリング (全量は `--audit --all`)。
 - **真実を映す**: OGP タブは各ページの `og:image` meta から**実際に配信されている URL**を解決する。静的フォールバック (home/category の `/og-image.jpg`)・ハッシュ付き URL・ランタイム 500 をそのまま反映する。
 - **欠落検出**: 常時 `img onerror` バッジ (目視) + `--check`/`--audit` 時に GET でステータス + content-type を確定 (機械)。
-- **棚卸し出力** `.claude/state/ogp/inventory.json`: 種別 × 比率 × 供給状態 (`satori-route` /
+- **棚卸し出力** `data/ogp/inventory.json`: 種別 × 比率 × 供給状態 (`satori-route` /
   `r2-static` / `none`) × entries / expected / ok / missing。tag/survey/cities の「専用なし」も記録。
 
 ---
@@ -463,7 +464,7 @@ homeの「知りたいことから探す」に使う、文字なしの装飾イ�
 
 - ギャラリー生成: `.claude/scripts/ogp/build-image-gallery.mjs`
 - 監査スキル: `.claude/skills/ui/audit-ogp-images/SKILL.md`
-- 棚卸し state: `.claude/state/ogp/inventory.json`
+- 棚卸し state: `data/ogp/inventory.json`
 - **県シルエットカード (§5.7)**: トークン SSOT `apps/web/scripts/data/pref-silhouette-tokens.ts` /
   レンダラー `apps/web/scripts/lib/pref-silhouette-render.ts` / 生成 `generate-ogp-images.ts --type areas|pref-silhouette`
 - **ブログ OGP AI 背景 (§5)**: カタログ SSOT `apps/web/scripts/data/blog-ogp-visual-catalog.ts` / 解決・hash

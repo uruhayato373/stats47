@@ -14,7 +14,7 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
 const run = promisify(execFile);
 const pause = ms => new Promise(r => setTimeout(r, ms));
 const options = { ...defaultPeriod(), outputDir: join(ROOT, "data/note/dashboard"),
-  coverAudit: join(ROOT, ".claude/state/metrics/note-cover-audit-latest.json"), profile: "Profile 5" };
+  coverAudit: join(ROOT, "data/note/evidence/note-cover-audit-latest.json"), profile: "Profile 5" };
 const flags = { "--start": "start", "--end": "end", "--output-dir": "outputDir", "--cover-audit": "coverAudit", "--profile": "profile" };
 for (let i = 2; i < process.argv.length; i++) {
   if (process.argv[i] === "--help") {

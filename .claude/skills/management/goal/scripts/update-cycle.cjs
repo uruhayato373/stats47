@@ -29,7 +29,7 @@ const fs = require("node:fs");
 const path = require("node:path");
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../../../..");
-const GOALS_STATE_DIR = path.join(PROJECT_ROOT, ".claude/state/goals");
+const GOALS_STATE_DIR = path.join(PROJECT_ROOT, "data/goals");
 
 function parseArgs(argv) {
   const args = {};

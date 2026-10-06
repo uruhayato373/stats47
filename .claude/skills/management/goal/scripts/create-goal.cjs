@@ -36,7 +36,7 @@ const GOALS_DOC_DIR = path.join(
   PROJECT_ROOT,
   ".claude/skills/management/goal/reference/goals"
 );
-const GOALS_STATE_DIR = path.join(PROJECT_ROOT, ".claude/state/goals");
+const GOALS_STATE_DIR = path.join(PROJECT_ROOT, "data/goals");
 
 function parseArgs(argv) {
   const args = {};

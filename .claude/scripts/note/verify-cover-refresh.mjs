@@ -13,7 +13,7 @@ const ledger = readCoverLedger();
 if ([...keys].some((key) => !ledger.articles.some((a) => a.articleKey === key))) throw Error('unknown article key');
 const selected = ledger.articles.filter((a) => a.noteUrl && (!keys.size || keys.has(a.articleKey)));
 const store = createCoverStore();
-const state = path.join(COVER_ROOT, '.claude/state/metrics');
+const state = path.join(COVER_ROOT, 'data/note/evidence');
 const journals = fs.readdirSync(state).filter((name) => /^note-cover-refresh-ledger-[a-f0-9]+\.json$/.test(name))
   .flatMap((name) => {
     const journal = JSON.parse(fs.readFileSync(path.join(state, name), 'utf8'));

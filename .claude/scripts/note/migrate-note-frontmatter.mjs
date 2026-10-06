@@ -64,7 +64,7 @@ const s3 = DRY_RUN ? null : new S3Client({
 })
 
 // note-published-urls.json 読み込み
-const publishedPath = join(ROOT, '.claude/state/note-published-urls.json')
+const publishedPath = join(ROOT, 'data/note/note-published-urls.json')
 const publishedData = JSON.parse(readFileSync(publishedPath, 'utf8'))
 const articles = publishedData.articles || {}
 

@@ -75,7 +75,7 @@ if (!options['api-artifact-dir'])
 const stage = resolve(root, options['stage-dir']);
 const planPath =
   '.claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json';
-const evidencePath = '.claude/state/estat/theme-expansion-verification.json';
+const evidencePath = 'data/estat/theme-expansion-verification.json';
 const plan = JSON.parse(await readFile(resolve(root, planPath), 'utf8'));
 const evidence = JSON.parse(
   await readFile(resolve(root, evidencePath), 'utf8')

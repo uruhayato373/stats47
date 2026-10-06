@@ -15,8 +15,8 @@ note.com 記事公開の現行像（2026-06-16 確立、2026-06-19 R2 ephemeral 
 
 > ⚠️ **2026-07-11 訂正**: docs/31 は「完全削除」ではない。公務員向けシリーズ (koumuin-claude-code / koumuin-estat、106 記事 + カバー画像) は **git 管理の SSOT として docs/31 に現役で存在**する (docs/INDEX.md「note 記事ソースの単一管理・公開しても移動しない」)。下記の R2 ephemeral 運用は旧 vertical (A-D シリーズ等) にのみ適用。
 - **全記事 (公開済み + ドラフト)** → R2 `note/<vertical>/<slug>/` が SSOT
-  - 公開済み: `.claude/state/note-published-urls.json` (slug→url/r2_path/is_paid)
-  - ドラフト: `.claude/state/note-draft-index.json` (slug→vertical/r2_path)
+  - 公開済み: `data/note/note-published-urls.json` (slug→url/r2_path/is_paid)
+  - ドラフト: `data/note/note-draft-index.json` (slug→vertical/r2_path)
   - コンテナメタ (MAGAZINE.md / INDEX.md / カバー画像) → `.claude/skills/note/<vertical>/`
 - **docs/31 は ephemeral outbox** (編集時のみ存在、push 後 CI 自動削除)
   - 同期 CI: `sync-note-r2.yml` が note-published-urls.json / note-draft-index.json の push で発火

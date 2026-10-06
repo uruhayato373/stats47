@@ -308,7 +308,7 @@ async function main() {
   };
   const outPath = JSON_OUT
     ? path.resolve(JSON_OUT)
-    : path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../state/site/link-audit.json");
+    : path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../../data/site/link-audit.json");
   fs.mkdirSync(path.dirname(outPath), { recursive: true });
   fs.writeFileSync(outPath, JSON.stringify(report, null, 2) + "\n", "utf8");
   console.log(`\n📄 ${outPath}`);

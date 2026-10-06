@@ -65,7 +65,7 @@ jobs:
         id: check
         run: |
           set +e
-          timeout --kill-after=20s 300s node .claude/scripts/audit/theme-chart-live-audit.mjs --json .claude/state/theme-charts/live-audit.json 2>&1 | tee /tmp/theme-live.log
+          timeout --kill-after=20s 300s node .claude/scripts/audit/theme-chart-live-audit.mjs --json data/themes/charts/live-audit.json 2>&1 | tee /tmp/theme-live.log
           live_code=${PIPESTATUS[0]}
           timeout --kill-after=20s 480s npm run theme:portfolio:audit 2>&1 | tee /tmp/theme-quality.log
           quality_code=${PIPESTATUS[0]}
@@ -90,7 +90,7 @@ jobs:
           name: theme-followup-evidence
           path: |
             .local/ci/theme-followup/
-            .claude/state/themes/ci-followup.json
+            data/themes/ci-followup.json
             /tmp/theme-live.log
             /tmp/theme-quality.log
             /tmp/theme-alert.md
@@ -102,7 +102,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          for observation in .claude/state/theme-charts/live-audit.json .claude/state/themes/quality.json .claude/state/themes/quality.definitions.json .claude/state/themes/quality.observations.json .claude/state/themes/quality.lastGoodObservations.json .claude/state/themes/portfolio.json .claude/state/themes/experiments.json .claude/state/themes/ci-followup.json; do
+          for observation in data/themes/charts/live-audit.json data/themes/quality.json data/themes/quality.definitions.json data/themes/quality.observations.json data/themes/quality.lastGoodObservations.json data/themes/portfolio.json data/themes/experiments.json data/themes/ci-followup.json; do
             if [ -f "$observation" ]; then git add -- "$observation"; fi
           done
           if git diff --cached --quiet; then exit 0; fi
@@ -182,7 +182,7 @@ jobs:
           test "$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$REVIEW_RUN_ID" --jq .path)" = .github/workflows/theme-chart-audit-weekly.yml
           gh run download "$REVIEW_RUN_ID" -n theme-followup-evidence -D /tmp/theme-replay-followup
           gh run download "$REVIEW_RUN_ID" -n theme-review-evidence -D /tmp/theme-replay-review
-          node .claude/scripts/themes/record-theme-review.mjs --replay /tmp/theme-replay-review/.claude/state/themes/ci-review.json "/tmp/theme-replay-followup/${GITHUB_WORKSPACE#/}/.local/ci/theme-followup" "$REVIEW_RUN_ID"
+          node .claude/scripts/themes/record-theme-review.mjs --replay /tmp/theme-replay-review/data/themes/ci-review.json "/tmp/theme-replay-followup/${GITHUB_WORKSPACE#/}/.local/ci/theme-followup" "$REVIEW_RUN_ID"
       - name: Verify review and changed files
         id: review_check
         if: always() && (steps.review.outcome == 'success' || steps.replay.outcome == 'success')
@@ -222,7 +222,7 @@ jobs:
             git push origin "HEAD:$branch"
             gh pr create --draft --base develop --head "$branch" --label theme-improvement --title "テーマ計測に基づく改善案" --body-file .local/ci/theme-followup/review-body.md
           else
-            git add -- .claude/state/themes/ci-review.json
+            git add -- data/themes/ci-review.json
             if git diff --cached --quiet; then exit 0; fi
             git commit -m "chore(theme): record evidence review [skip ci]"
             git pull --rebase origin develop
@@ -235,7 +235,7 @@ jobs:
           name: theme-review-evidence
           path: |
             .local/ci/theme-followup/review*
-            .claude/state/themes/ci-review.json
+            data/themes/ci-review.json
           include-hidden-files: true
           retention-days: 30
       - name: Propagate audit failures

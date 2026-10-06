@@ -6,7 +6,7 @@ name: SNS Port Bubble Daily (Instagram)
 #
 # 関連:
 #   - 動画/caption: .local/r2/sns/port/<key>/instagram/ (R2 push 済)
-#   - caption テンプレ: .claude/state/sns-port-bubble-captions/<key>-instagram.txt (git 管理)
+#   - caption テンプレ: data/sns/port-bubble-captions/<key>-instagram.txt (git 管理)
 #   - 投稿スクリプト: .claude/skills/sns/post-instagram/post-instagram.ts
 #   - 仕様: docs/01_技術設計/06_自動化インベントリ.md / .claude/rules/sns-content-standards.md
 
@@ -72,7 +72,7 @@ jobs:
           mkdir -p "$DST_DIR"
 
           # caption: git 管理テンプレから stage
-          CAPTION_SRC=".claude/state/sns-port-bubble-captions/${METRIC}-instagram.txt"
+          CAPTION_SRC="data/sns/port-bubble-captions/${METRIC}-instagram.txt"
           if [ ! -f "$CAPTION_SRC" ]; then
             echo "ERROR: caption not found: $CAPTION_SRC"
             exit 1

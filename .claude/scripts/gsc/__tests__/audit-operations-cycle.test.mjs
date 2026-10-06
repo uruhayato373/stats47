@@ -103,7 +103,7 @@ function fixture({
         : []),
     ],
   });
-  write(root, '.claude/state/search-growth/candidates.json', {
+  write(root, 'data/search-growth/candidates.json', {
     generatedAt: '2026-08-23T13:00:00.000Z',
     week: '2026-W34',
     sourceHealth: {
@@ -248,11 +248,11 @@ test('前週候補の月曜レビューは有効、過去週の判断は無効�
   t.after(() => fs.rmSync(root, { recursive: true, force: true }));
   const candidatesPath = path.join(
     root,
-    '.claude/state/search-growth/candidates.json'
+    'data/search-growth/candidates.json'
   );
   const candidates = JSON.parse(fs.readFileSync(candidatesPath, 'utf8'));
   candidates.candidates[0].dismissedAt = '2026-08-16T01:00:00.000Z';
-  write(root, '.claude/state/search-growth/candidates.json', candidates);
+  write(root, 'data/search-growth/candidates.json', candidates);
   const result = auditOperationsCycle({
     root,
     now: NOW,

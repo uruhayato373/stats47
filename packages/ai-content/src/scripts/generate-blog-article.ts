@@ -64,7 +64,7 @@ import SITE from "../../../types/src/site.json";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..", "..");
 const OUTBOX = path.join(PROJECT_ROOT, "docs/21_ブログ記事原稿");
-const QUEUE = path.join(PROJECT_ROOT, ".claude/state/blog/topic-queue.json");
+const QUEUE = path.join(PROJECT_ROOT, "data/blog/topic-queue.json");
 const R2 = process.env.R2_PUBLIC_FETCH_URL || SITE.r2PublicBaseUrl;
 
 // ---------- CLI ----------

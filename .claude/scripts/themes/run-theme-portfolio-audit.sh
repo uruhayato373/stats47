@@ -29,10 +29,10 @@ echo "── 6/6 drift (git HEAD との差分) ──"
 node --input-type=module <<'EOF'
 import { execFileSync } from "node:child_process";
 import fs from "node:fs";
-const cur = JSON.parse(fs.readFileSync(".claude/state/themes/portfolio.json", "utf8"));
+const cur = JSON.parse(fs.readFileSync("data/themes/portfolio.json", "utf8"));
 let prev;
 try {
-  prev = JSON.parse(execFileSync("git", ["show", "HEAD:.claude/state/themes/portfolio.json"], { encoding: "utf8" }));
+  prev = JSON.parse(execFileSync("git", ["show", "HEAD:data/themes/portfolio.json"], { encoding: "utf8" }));
 } catch {
   console.log("HEAD に portfolio.json 無し (初回) — drift 比較 skip");
   process.exit(0);

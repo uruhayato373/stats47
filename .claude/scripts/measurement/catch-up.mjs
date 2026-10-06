@@ -33,7 +33,7 @@ export function runCatchUp({ dispatch = false, api = gh, env = process.env, now 
     || !['refs/heads/main', 'refs/heads/develop'].includes(env.GITHUB_REF)) throw new Error('catchup_dispatch_ci_only');
   // Reserve the slot before POST, using Contents API's blob SHA as a compare-and-swap.
   // A lost POST response consumes the reservation too: no blind repeat while run listing catches up.
-  const claimEndpoint = `repos/${REPO}/contents/.claude/state/ci/authenticated-catchup.json`;
+  const claimEndpoint = `repos/${REPO}/contents/data/ci/authenticated-catchup.json`;
   const file = JSON.parse(api(`${claimEndpoint}?ref=develop`));
   const previous = JSON.parse(Buffer.from(file.content, 'base64').toString('utf8'));
   if (!file.sha || previous.schemaVersion !== 1 || (previous.expectedAt !== null && !Number.isFinite(Date.parse(previous.expectedAt)))) {

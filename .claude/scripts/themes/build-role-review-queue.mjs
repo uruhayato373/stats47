@@ -13,8 +13,8 @@
 //     --theme healthcare --key life-expectancy-0-male --decision accept --note "..."
 //
 // 出力:
-//   .claude/state/theme/role-review-queue.json  — 機械可読 (status: pending/accepted/rejected/applied)
-//   .claude/state/theme/LATEST.md               — 人間向けサマリ (件数 + pending 一覧)
+//   data/themes/role-review/role-review-queue.json  — 機械可読 (status: pending/accepted/rejected/applied)
+//   data/themes/role-review/LATEST.md               — 人間向けサマリ (件数 + pending 一覧)
 //
 // status の決め方 (優先順):
 //   1. THEME_CATALOGS の現在の role === recommended → applied (実測。手動フラグより優先)
@@ -38,7 +38,7 @@ const AUDITS_DIR = path.join(
   ROOT,
   ".claude/skills/theme/manage-theme-portfolio/reference/audits",
 );
-const STATE_DIR = path.join(ROOT, ".claude/state/theme");
+const STATE_DIR = path.join(ROOT, "data/themes/role-review");
 const QUEUE_FILE = path.join(STATE_DIR, "role-review-queue.json");
 const LATEST_FILE = path.join(STATE_DIR, "LATEST.md");
 const DECISIONS_FILE = path.join(STATE_DIR, "role-review-decisions.json");
