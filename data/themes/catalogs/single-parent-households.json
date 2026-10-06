@@ -1,0 +1,272 @@
+{
+  "key": "single-parent-households",
+  "title": "ひとり親家庭の生活",
+  "description": "母子・父子世帯の就業、母子世帯の所得構成、公的支援の利用を別々に比較します。就業は子20歳未満、所得は子18歳未満の世帯が対象です。生活保護は年度平均世帯数、児童扶養手当は年度末受給者数で、同じ母数の率ではありません。",
+  "category": "demographics",
+  "usage": "theme",
+  "metrics": [
+    {
+      "rankingKey": "single-mother-employment-rate",
+      "shortLabel": "母子世帯の母の就業割合（労働状態不詳を除く）",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "母子世帯の母の就業割合（労働状態不詳を除く）を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "single-father-employment-rate",
+      "shortLabel": "父子世帯の父の就業割合（労働状態不詳を除く）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "父子世帯の父の就業割合（労働状態不詳を除く）を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "single-mother-households",
+      "shortLabel": "母子世帯数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "母子世帯数を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "single-father-households",
+      "shortLabel": "父子世帯数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "父子世帯数を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "single-mother-public-assistance-households",
+      "shortLabel": "生活保護を受ける母子世帯数（年度平均）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "生活保護を受ける母子世帯数（年度平均）を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "child-rearing-allowance-recipients",
+      "shortLabel": "児童扶養手当受給者数（年度末）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "児童扶養手当受給者数（年度末）を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "single-mother-households-income-under100",
+      "shortLabel": "母子世帯の所得100万円未満",
+      "role": "context",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "母子世帯の所得100万円未満を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "single-mother-households-income-100to199",
+      "shortLabel": "母子世帯の所得100〜199万円",
+      "role": "context",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "母子世帯の所得100〜199万円を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "single-mother-households-income-200to299",
+      "shortLabel": "母子世帯の所得200〜299万円",
+      "role": "context",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "母子世帯の所得200〜299万円を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "single-mother-households-income-300to399",
+      "shortLabel": "母子世帯の所得300〜399万円",
+      "role": "context",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "母子世帯の所得300〜399万円を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "single-mother-households-income-400to499",
+      "shortLabel": "母子世帯の所得400〜499万円",
+      "role": "context",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "母子世帯の所得400〜499万円を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "single-mother-households-income-500plus",
+      "shortLabel": "母子世帯の所得500万円以上",
+      "role": "context",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "母子世帯の所得500万円以上を都道府県別の実値として比較する。"
+      }
+    }
+  ],
+  "charts": [
+    {
+      "componentKey": "single-parent-income-composition",
+      "componentType": "composition-chart",
+      "title": "母子世帯の年間所得階級別構成",
+      "annotation": "2022年就業構造基本調査。配偶者のいない母と18歳未満の子から成る世帯で、父子世帯や他の同居者がいる世帯は含みません。所得は2021年10月〜2022年9月の税込み年間収入です。構成比は表示した6階級の合計を分母とし、不詳込みの母子世帯総数との差は丸めを含むため不詳人数とは扱いません。平均所得や貧困率ではありません。",
+      "componentProps": {
+        "seriesRefs": [
+          {
+            "metricKey": "single-mother-households-income-under100",
+            "label": "母子世帯の所得100万円未満",
+            "colorRole": "series-1"
+          },
+          {
+            "metricKey": "single-mother-households-income-100to199",
+            "label": "母子世帯の所得100〜199万円",
+            "colorRole": "series-2"
+          },
+          {
+            "metricKey": "single-mother-households-income-200to299",
+            "label": "母子世帯の所得200〜299万円",
+            "colorRole": "series-3"
+          },
+          {
+            "metricKey": "single-mother-households-income-300to399",
+            "label": "母子世帯の所得300〜399万円",
+            "colorRole": "series-4"
+          },
+          {
+            "metricKey": "single-mother-households-income-400to499",
+            "label": "母子世帯の所得400〜499万円",
+            "colorRole": "series-5"
+          },
+          {
+            "metricKey": "single-mother-households-income-500plus",
+            "label": "母子世帯の所得500万円以上",
+            "colorRole": "series-6"
+          }
+        ]
+      },
+      "relatedRankingKeys": [
+        "single-mother-households-income-under100",
+        "single-mother-households-income-100to199",
+        "single-mother-households-income-200to299",
+        "single-mother-households-income-300to399",
+        "single-mother-households-income-400to499",
+        "single-mother-households-income-500plus"
+      ],
+      "sourceName": "就業構造基本調査",
+      "sourceLink": "https://www.e-stat.go.jp/dbview?sid=0004008606",
+      "dataSource": "ranking",
+      "gridColumnSpan": 12,
+      "section": "single-parent-households-overview",
+      "sortOrder": 10
+    }
+  ],
+  "metricGroups": [
+    {
+      "key": "single-parent-households-indicator-1",
+      "title": "母子世帯の母の就業割合（労働状態不詳を除く）",
+      "rankingKeys": [
+        "single-mother-employment-rate"
+      ],
+      "defaultCheckedKeys": [
+        "single-mother-employment-rate"
+      ]
+    },
+    {
+      "key": "single-parent-households-indicator-2",
+      "title": "父子世帯の父の就業割合（労働状態不詳を除く）",
+      "rankingKeys": [
+        "single-father-employment-rate"
+      ],
+      "defaultCheckedKeys": [
+        "single-father-employment-rate"
+      ]
+    },
+    {
+      "key": "single-parent-households-indicator-3",
+      "title": "母子世帯数",
+      "rankingKeys": [
+        "single-mother-households"
+      ],
+      "defaultCheckedKeys": [
+        "single-mother-households"
+      ]
+    },
+    {
+      "key": "single-parent-households-indicator-4",
+      "title": "父子世帯数",
+      "rankingKeys": [
+        "single-father-households"
+      ],
+      "defaultCheckedKeys": [
+        "single-father-households"
+      ]
+    },
+    {
+      "key": "single-parent-households-indicator-5",
+      "title": "生活保護を受ける母子世帯数（年度平均）",
+      "rankingKeys": [
+        "single-mother-public-assistance-households"
+      ],
+      "defaultCheckedKeys": [
+        "single-mother-public-assistance-households"
+      ]
+    },
+    {
+      "key": "single-parent-households-indicator-6",
+      "title": "児童扶養手当受給者数（年度末）",
+      "rankingKeys": [
+        "child-rearing-allowance-recipients"
+      ],
+      "defaultCheckedKeys": [
+        "child-rearing-allowance-recipients"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "key": "single-parent-households-overview",
+      "title": "ひとり親家庭の生活を都道府県別に見る",
+      "description": "母子・父子世帯の就業、母子世帯の所得構成、公的支援の利用を別々に比較します。就業は子20歳未満、所得は子18歳未満の世帯が対象です。生活保護は年度平均世帯数、児童扶養手当は年度末受給者数で、同じ母数の率ではありません。",
+      "metricGroupKeys": [
+        "single-parent-households-indicator-1",
+        "single-parent-households-indicator-2",
+        "single-parent-households-indicator-3",
+        "single-parent-households-indicator-4",
+        "single-parent-households-indicator-5",
+        "single-parent-households-indicator-6"
+      ],
+      "chartKeys": [
+        "single-parent-income-composition"
+      ]
+    }
+  ],
+  "keywords": [
+    "ひとり親",
+    "母子世帯",
+    "父子世帯",
+    "所得",
+    "就業"
+  ]
+}

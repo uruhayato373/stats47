@@ -85,8 +85,8 @@ DATE_TAG="$(date +%Y-%m-%d)"
 if [ "$IN_PLACE" = 1 ]; then
   ROOT="$MAIN_ROOT"
   cd "$ROOT"
-  if [ "$DRY_RUN" = 0 ] && [ -n "$(git status --porcelain -- packages/data-configs/src/theme-catalog .claude/config/quality-warning-baseline.json)" ]; then
-    die "--in-place: theme-catalog / baseline に未コミットの変更がある。先に片付ける (前 run の残骸を今回の commit に混ぜない)"
+  if [ "$DRY_RUN" = 0 ] && [ -n "$(git status --porcelain -- data/themes .claude/config/quality-warning-baseline.json)" ]; then
+    die "--in-place: data/themes / baseline に未コミットの変更がある。先に片付ける (前 run の残骸を今回の commit に混ぜない)"
   fi
   BRANCH="$(git rev-parse --abbrev-ref HEAD)"
   log "in-place: $ROOT (branch $BRANCH)"
@@ -193,7 +193,7 @@ if [ "$NO_COMMIT" = 1 ]; then
   log "--no-commit: 変更は作業ツリーに残す ($ROOT)"
   exit "$RUN_STATUS"
 fi
-git add -- packages/data-configs/src/theme-catalog .claude/config/quality-warning-baseline.json \
+git add -- data/themes .claude/config/quality-warning-baseline.json \
   .claude/skills/theme/manage-theme-portfolio/reference/audits \
   .claude/state/theme/role-review-queue.json .claude/state/theme/LATEST.md
 if git diff --cached --quiet; then

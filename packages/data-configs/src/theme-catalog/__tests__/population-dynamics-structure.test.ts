@@ -1,6 +1,8 @@
 import { describe, expect, it } from 'vitest';
+import { THEME_CATALOGS } from '..';
 
-import { POPULATION_DYNAMICS_CATALOG } from '../population-dynamics';
+const POPULATION_DYNAMICS_CATALOG = THEME_CATALOGS['population-dynamics'];
+
 
 describe('人口動態テーマの可視化構成', () => {
   it('人口の規模と増減を見せ、古い社会増減を最新の主要指標に混ぜない', () => {

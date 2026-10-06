@@ -24,7 +24,7 @@ tags: [theme-catalog, definitions, caveats, ui]
 
 実装は以下に統一する。
 
-- 内容SSOT: `packages/data-configs/src/theme-catalog/<key>.ts`
+- 内容SSOT: `data/themes/catalogs/<key>.json`
 - 共通UI: `apps/web/src/features/theme-dashboard/components/ThemeGuidanceCards.tsx`
 - 掲載位置: `ThemeAreaHeader` の直後、`ThemeDashboardClient` の直前
 - 表示: 「指標の定義」と「比較時の注意」の2枚

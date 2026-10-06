@@ -1,6 +1,6 @@
 ---
 name: project_theme_selection_backfill_pipeline
-description: ThemeCatalog selection の夜間 backfill (THEME-SELECTION-BACKFILL-01)。モデルは JSON を返すだけ・決定的 gate が書く。expanded.ts 由来は selection-evidence.ts。headless claude はこのMacのセッション内でも認証できた
+description: ThemeCatalog selection の夜間 backfill (THEME-SELECTION-BACKFILL-01)。モデルは JSON を返すだけ・決定的 gate が書く。書き先は data/themes/catalogs/<key>.json。headless claude はこのMacのセッション内でも認証できた
 metadata: 
   node_type: memory
   type: project
@@ -11,7 +11,7 @@ metadata:
 ThemeCatalog の選定根拠 (selection) 540 件を一次資料で埋める夜間バッチを 2026-09-16 に実装 (skill `/backfill-theme-selection`、driver `.claude/scripts/themes/run-selection-backfill.sh`、正典 `.claude/rules/theme-catalog-standards.md` §4「置き場」「機械検査」)。
 
 **Why:**
-- 55 テーマ中 31 テーマ + 既存テーマ拡張 67 章は `expanded.ts` の tuple 定義で per-metric の selection 欄が無い。inline に書けないので `selection-evidence.ts` (JSON 形式 TS・writer が丸ごと再生成) を置き場にした。writer は「`<theme>.ts` に rankingKey があるか」で inline patch / evidence file を機械判定する
+- 当初 (2026-09-16) は 31 テーマ + 章追加 67 章が `expanded.ts` の tuple 定義で selection 欄が無く、`selection-evidence.ts` に別置きしていた。2026-10-06 にテーマ定義を `data/themes/catalogs/<key>.json` へ移し、書き先はその JSON の各 metric の `selection` 1 か所になった (`applySelections`)
 - 2026-09-16 の Agent tool 経路 (aging-society) で researcher が統計指標コードを 7 件中 2 件誤記した → モデルにファイルを触らせず JSON を返させ、gate (引用の逐語照合・https 到達・定型文・cdCat01 一致・基準語彙) を通った分だけ書く設計に変えた
 - `adoptionCriteria` あり = 「一次資料で裏付けた」の主張。proposedBy が内部監査名 (「全テーマ構成監査」) のまま criteria が付いた 3 件は主張として不成立なので外した (定型文で埋めるより未記入が正しい)
 

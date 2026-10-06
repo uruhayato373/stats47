@@ -123,12 +123,18 @@ export function validateDecisions(catalog, existingThemes) {
   return errors;
 }
 
-/** Observe actual destinations; registered metrics alone do not establish a rendered chapter. */
-export function inspectExpansionWiring(plan, catalogs, extensions = {}) {
+/**
+ * Observe actual destinations; registered metrics alone do not establish a rendered chapter.
+ * A candidate reusing an existing chapter names it in decision.targetSectionKey / targetMetricKeys;
+ * otherwise its chapter is `candidate-<id>` in data/themes/catalogs/<targetThemeKey>.json.
+ */
+export function inspectExpansionWiring(plan, catalogs) {
   const rows = plan.themes.map((candidate) => {
     const decision = candidate.decision;
     const catalog = catalogs[decision.targetThemeKey];
-    const extension = extensions[decision.targetThemeKey]?.find((entry) => entry.candidateId === candidate.id);
+    const extension = decision.targetSectionKey
+      ? { existingSectionKey: decision.targetSectionKey, metrics: (decision.targetMetricKeys ?? []).map((key) => [key]) }
+      : undefined;
     const chapterKey = extension?.existingSectionKey ?? `candidate-${candidate.id}`;
     const chapter = catalog?.sections?.find((section) => section.key === chapterKey);
     const groups = new Map((catalog?.metricGroups ?? []).map((group) => [group.key, group]));

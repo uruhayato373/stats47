@@ -1,0 +1,364 @@
+{
+  "key": "construction-industry",
+  "title": "建設業",
+  "description": "建設業の完成工事高・許可業者数と、民営事業所で働く従業者数を都道府県別に比較します。工事の取引段階と統計の対象年を分けて確認できます。",
+  "category": "economy",
+  "usage": "theme",
+  "metrics": [
+    {
+      "rankingKey": "prime-contractor-completed-construction",
+      "shortLabel": "元請完成工事高",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "e-Stat 政府統計の総合窓口「建設工事受注動態統計調査 建設工事施工統計調査 調査結果表（時系列、第1表～第13表）第2表 業種別－完成工事高、元請完成工事高、元請比率、下請完成工事高」（総務省統計局／国土交通省）",
+        "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0003126303",
+        "surveyedAt": "2026-09-16",
+        "rationale": "この統計表は建設工事施工統計調査の結果を業種別に完成工事高・元請完成工事高・元請比率・下請完成工事高として区分して公表しており、元請完成工事高が完成工事高全体から下請分を除いた元請段階の取引金額であることを示す。テーマが「工事の取引段階と統計の対象年を分けて確認する」ことを掲げるため、この指標は事業規模を元請段階でそろえて都道府県比較する代表的な指標となる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability"
+        ],
+        "readerQuestion": "自分の都道府県の建設業者は元請としてどれだけの工事を受注しているか。",
+        "targetReaderOrDecision": "都道府県の建設業の事業規模を把握したい行政・業界関係者。"
+      }
+    },
+    {
+      "rankingKey": "construction-industry-count",
+      "shortLabel": "許可業者数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "建設業許可業者数調査の結果について－建設業許可業者の現況（令和5年3月末現在）－（国土交通省 不動産・建設経済局 建設業課、令和5年5月24日公表、報道発表資料）",
+        "sourceUrl": "https://www.mlit.go.jp/report/press/tochi_fudousan_kensetsugyo13_hh_000001_00239.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "国土交通省が毎年公表する建設業許可業者数調査は、建設業の担い手（許可業者）の増減を全国・都道府県別・業種別に示す唯一の全国調査であり、令和5年度末時点で479,383業者という全国値が公表されている。テーマ「建設業の担い手はどこに多いか」を検証する上で、この許可業者数は都道府県間の担い手規模を比較する基礎データとなる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "dataQuality"
+        ],
+        "readerQuestion": "自分の都道府県には建設業許可業者が何社あり、増減の傾向はどうか。",
+        "targetReaderOrDecision": "地域の建設業の担い手数の推移を確認したい自治体・業界団体。"
+      }
+    },
+    {
+      "rankingKey": "subcontractor-completed-construction",
+      "shortLabel": "下請完成工事高",
+      "role": "context",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・初回実装",
+        "sourceUrl": "https://www.e-stat.go.jp/koumoku/koumoku_teigi/C",
+        "surveyedAt": "2026-09-09",
+        "rationale": "元請とは取引段階が異なり重複するため、合算せず切り替えて比較する。"
+      }
+    },
+    {
+      "rankingKey": "construction-private-employees",
+      "shortLabel": "従業者数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "政府統計コード定義集「従業者数（民営）」（e-Stat 項目定義）",
+        "sourceUrl": "https://www.e-stat.go.jp/koumoku/koumoku_teigi/C",
+        "surveyedAt": "2026-09-16",
+        "rationale": "この定義集は、経済センサスに基づく「従業者数（民営）」が民営事業所に限定した従業者数であり、休職者・長期欠勤者を除く点を明示している。建設業に分類される民営事業所の従業者数を都道府県別に見ることで、許可業者数（事業者の数）とは異なる角度から「建設業で働く人はどこに多いか」という章の問いに事業所単位で直接答える補完的な指標となる。",
+        "adoptionCriteria": [
+          "complementarity",
+          "dataQuality"
+        ],
+        "readerQuestion": "建設業の民営事業所で実際に働いている人はどの都道府県に多いか。",
+        "targetReaderOrDecision": "地域の建設業雇用規模を事業所単位で把握したい研究者・自治体職員。"
+      }
+    },
+    {
+      "rankingKey": "construction-employed-residents",
+      "shortLabel": "建設業就業者総数（常住地別）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
+        "surveyedAt": "2026-09-09",
+        "rationale": "建設業就業者総数（常住地別）を既存テーマの独立章へ追加する。"
+      }
+    },
+    {
+      "rankingKey": "construction-employed-under30",
+      "shortLabel": "30歳未満の建設業就業者",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和7年版 国土交通白書 第1部第1章第1節「直面する課題」（国土交通省）",
+        "sourceUrl": "https://www.mlit.go.jp/hakusyo/mlit/r06/hakusho/r07/html/n1111000.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "国土交通白書は建設業就業者の29歳以下の割合が全産業平均より低く、高齢化が深刻化していると明記している。若年層の入職状況が建設業の担い手確保の中心課題であることを示しており、テーマの章「建設業の担い手構成と職種別待遇」を都道府県別に検証する際、この年齢層の就業者数は将来の担い手確保力を測る代表的な指標になる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "readerValue"
+        ],
+        "readerQuestion": "自分の都道府県では建設業に29歳以下の若い就業者がどれだけいるか。",
+        "targetReaderOrDecision": "建設業の将来の担い手確保策を検討する自治体・業界団体。"
+      }
+    },
+    {
+      "rankingKey": "construction-employed-age30to54",
+      "shortLabel": "30〜54歳の建設業就業者",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
+        "surveyedAt": "2026-09-09",
+        "rationale": "30〜54歳の建設業就業者を既存テーマの独立章へ追加する。"
+      }
+    },
+    {
+      "rankingKey": "construction-employed-age55plus",
+      "shortLabel": "55歳以上の建設業就業者",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和7年版 国土交通白書 第1部第1章第1節「直面する課題」③国土交通分野における担い手不足（国土交通省）",
+        "sourceUrl": "https://www.mlit.go.jp/hakusyo/mlit/r06/hakusho/r07/html/n1111000.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "国土交通白書は建設業を担い手不足が特に深刻な産業として名指しし、55歳以上就業者比率が全産業平均を上回る一方29歳以下が下回るという年齢構成の偏りを、担い手確保という政策課題を裏付ける中心指標として提示している。都道府県別に55歳以上就業者数を見ることは、この高齢化がどの地域でより深刻かを把握し、担い手不足対策の優先地域を検討する読者の問いに直接応える。",
+        "adoptionCriteria": [
+          "representativeness",
+          "readerValue"
+        ],
+        "readerQuestion": "建設業の高齢化はどの都道府県で特に進んでいるか。",
+        "targetReaderOrDecision": "地域の建設業担い手確保策を検討する自治体・業界団体の担当者。"
+      }
+    },
+    {
+      "rankingKey": "construction-employed-female",
+      "shortLabel": "女性の建設業就業者",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "国土交通省「建設産業における女性の定着促進に向けた取組について」（国土交通省 不動産・建設経済局建設業課）",
+        "sourceUrl": "https://www.mlit.go.jp/totikensangyo/const/totikensangyo_const_tk1_000088.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "国土交通省は女性技術者・技能者の就業者数の増加傾向を担い手多様化の成果指標としつつ、定着が不十分であるという課題を示しており、都道府県別の女性就業者数はこの全国的な傾向が地域ごとにどの程度実現しているかを確認する材料になる。担い手の多様性という切り口で55歳以上就業者数とは異なる角度からテーマを補完する。",
+        "adoptionCriteria": [
+          "complementarity",
+          "readerValue"
+        ],
+        "readerQuestion": "建設業の女性就業者はどの都道府県で多いか。",
+        "targetReaderOrDecision": "建設業の担い手多様化施策を検討する行政・企業の人事担当者。"
+      }
+    },
+    {
+      "rankingKey": "architect-annual-income",
+      "shortLabel": "建築技術者の推計年収（2022年）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "厚生労働省「賃金構造基本統計調査」一般_都道府県別_職種（特掲）DB 統計表・グラフ表示（政府統計の総合窓口 e-Stat）",
+        "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0003445758",
+        "surveyedAt": "2026-09-16",
+        "rationale": "この調査は職種別・都道府県別に賃金実態を明らかにする厚生労働省の基幹統計であり、建築技術者という職種区分を含んでいる。建設業の担い手を論じる章立てにおいて、就業者数だけでなく処遇（年収）水準を都道府県別に示すことで、待遇面から担い手確保の課題を読み解く読者の問いを補完する。",
+        "adoptionCriteria": [
+          "complementarity",
+          "dataQuality"
+        ],
+        "readerQuestion": "建築技術者の年収はどの都道府県で高いか。",
+        "targetReaderOrDecision": "建設業への就職・転職先を検討する求職者や処遇改善策を検討する事業者。"
+      }
+    },
+    {
+      "rankingKey": "public-construction-contract-count",
+      "shortLabel": "公共工事の請負契約件数（施工地別）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "政府統計の総合窓口 e-Stat「項目定義（C：産業）」建設工事受注動態統計調査に基づく項目定義（総務省）",
+        "sourceUrl": "https://www.e-stat.go.jp/koumoku/koumoku_teigi/C",
+        "surveyedAt": "2026-09-16",
+        "rationale": "この定義は公共工事の請負契約件数が建設工事受注動態統計調査に基づく施工都道府県別の集計値であり、1件500万円以上という対象基準が明確にされていることを示している。テーマの章立てにある「施工地別の公共工事受注」を都道府県間で比較する際、件数は契約額とは異なる案件数の多寡という角度から地域の公共工事受注動向を捉える指標になる。",
+        "adoptionCriteria": [
+          "comparability",
+          "complementarity"
+        ],
+        "readerQuestion": "公共工事の受注件数はどの都道府県で多いか。",
+        "targetReaderOrDecision": "地域の公共工事市場規模を把握したい建設業者や地方議会関係者。"
+      }
+    },
+    {
+      "rankingKey": "public-construction-contract-amount",
+      "shortLabel": "公共工事の請負契約額（施工地別）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "政府統計の総合窓口 e-Stat「項目定義（C：産業）」建設工事受注動態統計調査に基づく項目定義（総務省）",
+        "sourceUrl": "https://www.e-stat.go.jp/koumoku/koumoku_teigi/C",
+        "surveyedAt": "2026-09-16",
+        "rationale": "同一の項目定義において請負契約額は件数と対をなす指標として定義されており、1件当たりの規模の違いを踏まえた金額ベースでの公共工事受注規模を都道府県別に把握できる。件数のみでは捉えられない大型工事の集中度合いなどを補完し、施工地別の公共工事受注の実態を多面的に示す。",
+        "adoptionCriteria": [
+          "comparability",
+          "complementarity"
+        ],
+        "readerQuestion": "公共工事の受注額はどの都道府県で大きいか。",
+        "targetReaderOrDecision": "地域の公共工事市場規模を金額面から把握したい建設業者や財政担当者。"
+      }
+    }
+  ],
+  "charts": [],
+  "metricGroups": [
+    {
+      "key": "completed-construction",
+      "title": "完成工事高",
+      "rankingKeys": [
+        "prime-contractor-completed-construction",
+        "subcontractor-completed-construction"
+      ],
+      "defaultCheckedKeys": [
+        "prime-contractor-completed-construction"
+      ],
+      "comparisonYear": "2023"
+    },
+    {
+      "key": "contractors",
+      "title": "建設業の許可業者",
+      "rankingKeys": [
+        "construction-industry-count"
+      ],
+      "defaultCheckedKeys": [
+        "construction-industry-count"
+      ],
+      "comparisonYear": "2023"
+    },
+    {
+      "key": "construction-employment",
+      "title": "建設業の従業者",
+      "rankingKeys": [
+        "construction-private-employees"
+      ],
+      "defaultCheckedKeys": [
+        "construction-private-employees"
+      ],
+      "comparisonYear": "2021"
+    },
+    {
+      "key": "candidate-2-1",
+      "title": "建設業の担い手構成と職種別待遇｜建設業就業者総数（常住地別）",
+      "rankingKeys": [
+        "construction-employed-residents"
+      ],
+      "defaultCheckedKeys": [
+        "construction-employed-residents"
+      ]
+    },
+    {
+      "key": "candidate-2-2",
+      "title": "建設業の担い手構成と職種別待遇｜30歳未満の建設業就業者",
+      "rankingKeys": [
+        "construction-employed-under30"
+      ],
+      "defaultCheckedKeys": [
+        "construction-employed-under30"
+      ]
+    },
+    {
+      "key": "candidate-2-3",
+      "title": "建設業の担い手構成と職種別待遇｜30〜54歳の建設業就業者",
+      "rankingKeys": [
+        "construction-employed-age30to54"
+      ],
+      "defaultCheckedKeys": [
+        "construction-employed-age30to54"
+      ]
+    },
+    {
+      "key": "candidate-2-4",
+      "title": "建設業の担い手構成と職種別待遇｜55歳以上の建設業就業者",
+      "rankingKeys": [
+        "construction-employed-age55plus"
+      ],
+      "defaultCheckedKeys": [
+        "construction-employed-age55plus"
+      ]
+    },
+    {
+      "key": "candidate-2-5",
+      "title": "建設業の担い手構成と職種別待遇｜女性の建設業就業者",
+      "rankingKeys": [
+        "construction-employed-female"
+      ],
+      "defaultCheckedKeys": [
+        "construction-employed-female"
+      ]
+    },
+    {
+      "key": "candidate-2-6",
+      "title": "建設業の担い手構成と職種別待遇｜建築技術者の推計年収（2022年）",
+      "rankingKeys": [
+        "architect-annual-income"
+      ],
+      "defaultCheckedKeys": [
+        "architect-annual-income"
+      ]
+    },
+    {
+      "key": "candidate-4-1",
+      "title": "施工地別の公共工事受注｜公共工事の請負契約件数（施工地別）",
+      "rankingKeys": [
+        "public-construction-contract-count"
+      ],
+      "defaultCheckedKeys": [
+        "public-construction-contract-count"
+      ]
+    },
+    {
+      "key": "candidate-4-2",
+      "title": "施工地別の公共工事受注｜公共工事の請負契約額（施工地別）",
+      "rankingKeys": [
+        "public-construction-contract-amount"
+      ],
+      "defaultCheckedKeys": [
+        "public-construction-contract-amount"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "key": "construction-output",
+      "title": "建設業の事業規模はどこで大きいか",
+      "description": "完成工事高は建設業者の所在地に帰属し、工事を施工した県の金額ではありません。元請と下請には取引の重複があるため、合算して建設投資額とはみなしません。",
+      "metricGroupKeys": [
+        "completed-construction"
+      ]
+    },
+    {
+      "key": "construction-businesses",
+      "title": "建設業の担い手はどこに多いか",
+      "description": "2023年度の許可業者数を比較します。複数の業種で許可を受けていても1業者として数えます。",
+      "metricGroupKeys": [
+        "contractors"
+      ]
+    },
+    {
+      "key": "construction-workers",
+      "title": "建設業で働く人はどこに多いか",
+      "description": "2021年の民営事業所の従業者数です。2021年調査では対象名簿が拡充されているため過去年との単純な増減比較を避け、2023年度の完成工事高や許可業者数との比率は算出しません。",
+      "metricGroupKeys": [
+        "construction-employment"
+      ]
+    },
+    {
+      "key": "candidate-2",
+      "title": "建設業の担い手構成と職種別待遇",
+      "description": "2020年国勢調査の常住地別の15歳以上就業者です。30歳未満・30〜54歳・55歳以上は重ならない年齢区分で、女性は各区分に含まれます。事業所所在地別の従業者数とは別集計で、年齢だけから技能継承の成否を判断しません。建築技術者の推計年収は2022年の一般労働者・男女計で、6月の月例給与を12倍し前年の賞与等を加えた額です。就業者数と給与の母集団・年を分けて読みます。",
+      "metricGroupKeys": [
+        "candidate-2-1",
+        "candidate-2-2",
+        "candidate-2-3",
+        "candidate-2-4",
+        "candidate-2-5",
+        "candidate-2-6"
+      ]
+    },
+    {
+      "key": "candidate-4",
+      "title": "施工地別の公共工事受注",
+      "description": "公共機関から受注した1件500万円以上の工事の年度計です。施工地別に集計しており、上の業者所在地別の完成工事高とは合算しません。",
+      "metricGroupKeys": [
+        "candidate-4-1",
+        "candidate-4-2"
+      ]
+    }
+  ],
+  "keywords": [
+    "建設業",
+    "完成工事高",
+    "許可業者数",
+    "従業者数"
+  ]
+}

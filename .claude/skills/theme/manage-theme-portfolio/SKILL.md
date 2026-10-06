@@ -37,7 +37,7 @@ schema・判定規律の正典: `.claude/state/themes/README.md`。
 「テーマ <key> を改善候補として監査」の定型。**まだ実装しない** (変更案と実装契約の提示まで)。
 
 必須入力 (すべて既存基盤から取得):
-1. **ThemeCatalog**: `packages/data-configs/src/theme-catalog/<key>.ts` (legacy は indicator-sets)
+1. **ThemeCatalog**: `data/themes/catalogs/<key>.json` (legacy は indicator-sets)
 2. **最新テーマレビュー**: `reference/reviews/*-theme-<key>.md` (公式根拠セクション含む。不足時は theme-researcher へ調査委譲)
 3. **GSC 直近28日 vs 前28日**: snapshots `<最新週>/pages.csv` vs `<4週前>/pages.csv` (各週 = last-28d 窓。合算しない)
 4. **GA4 同**: Japan-only `pages-clean.csv` と成功/期間/国条件のmeta.jsonを持つ、実期間が連続した非重複窓ペア

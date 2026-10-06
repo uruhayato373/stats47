@@ -1,7 +1,9 @@
 import { describe, expect, it } from "vitest";
 
 import { EVIDENCE_SOURCE_CATALOG } from "../theme-catalog/evidence-lenses";
-import { TOURISM_CATALOG } from "../theme-catalog/tourism";
+import { THEME_CATALOGS } from "../theme-catalog";
+
+const TOURISM_CATALOG = THEME_CATALOGS["tourism"];
 
 describe("tourism evidence topics", () => {
   it("総宿泊需要と外国人宿泊需要を分けて扱う", () => {

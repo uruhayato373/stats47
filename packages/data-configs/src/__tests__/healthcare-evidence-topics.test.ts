@@ -1,7 +1,9 @@
 import { describe, expect, it } from "vitest";
 
 import { EVIDENCE_SOURCE_CATALOG } from "../theme-catalog/evidence-lenses";
-import { HEALTHCARE_CATALOG } from "../theme-catalog/healthcare";
+import { THEME_CATALOGS } from "../theme-catalog";
+
+const HEALTHCARE_CATALOG = THEME_CATALOGS["healthcare"];
 
 describe("healthcare evidence topics", () => {
   it("医療供給と病床利用を重複しない論点に分ける", () => {

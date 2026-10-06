@@ -2,8 +2,10 @@ import { describe, expect, it } from "vitest";
 
 import { METRICS_REGISTRY } from "../registry";
 
-import { CONSUMER_PRICES_CATALOG } from "../theme-catalog/consumer-prices";
 import { EVIDENCE_SOURCE_CATALOG } from "../theme-catalog/evidence-lenses";
+import { THEME_CATALOGS } from "../theme-catalog";
+
+const CONSUMER_PRICES_CATALOG = THEME_CATALOGS["consumer-prices"];
 
 describe("consumer-prices evidence topics", () => {
   it("総合指数と費目別価格構造を別の論点として扱う", () => {

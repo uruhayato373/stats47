@@ -1,5 +1,6 @@
 ---
 paths:
+  - "data/themes/**"
   - "packages/data-configs/src/theme-catalog/**"
   - "apps/web/src/{features/theme-dashboard,app/themes}/**"
   - ".claude/{skills/theme,scripts/themes,state/themes}/**"
@@ -15,6 +16,9 @@ paths:
 > (b) チャート定義 = `apps/web/scripts/data/page-components/theme/<key>.json` が独立編集され、
 > 突合の仕組みが無くドリフト可能だった。選定根拠 (どの白書・調査に基づくか) の記録場所も無かった。
 > 2026-07-04 に両者を 1 ファイルの `ThemeCatalog` に統合し、指標・チャート・選定根拠を一元管理する。
+> 2026-10-06 にオーナー判断で、定義の置き場を git TS (`packages/data-configs/src/theme-catalog/<key>.ts`) から
+> `data/themes/catalogs/<key>.json` へ移した。TS では 3 か所 (手書き 24 テーマ・表から合成する 31 テーマ・既存テーマへの
+> 章追加と選定根拠の別表) に分かれ、表示される最終形を 1 か所で読めなかったため。JSON はその最終形をそのまま持つ。
 > 方式は `chart-component-standards.md` / `blog-quality-standards.md` と同じ「rules に規約 1 ファイル、
 > agent/skill は参照のみ」パターン。
 
@@ -24,15 +28,15 @@ paths:
 
 | 層                      | 場所                                                                  | 役割                                                                   |
 | ----------------------- | --------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| **SSOT**                | `packages/data-configs/src/theme-catalog/<key>.ts` (`ThemeCatalog`)   | 指標選定 + チャート割当 + 選定根拠 (selection)。**ここだけを編集する** |
-| SSOT (expanded 由来の selection) | `packages/data-configs/src/theme-catalog/selection-evidence.ts` | `expanded.ts` の tuple で定義された指標の selection (§4「置き場」)。backfill writer が再生成 |
-| 登録簿                  | `packages/data-configs/src/theme-catalog/index.ts` (`THEME_CATALOGS`) | カタログ駆動テーマの入口。ここに登録されたテーマだけ生成対象           |
-| 型                      | `packages/data-configs/src/theme-catalog/types.ts`                    | `ThemeCatalog` / `CatalogMetric` / `CatalogChart` / `MetricSelection`  |
+| **SSOT**                | `data/themes/catalogs/<key>.json` (`ThemeCatalog`)                    | 指標選定 + チャート割当 + 章 + 選定根拠 (selection)。**ここだけを編集する**。表示される最終形そのもので、合成や既定値の補完はない |
+| 形の検査                | `data/themes/theme-catalog.schema.json` (JSON Schema)                 | 項目名・型・列挙値。`theme-catalog-json.test.ts` が全ファイルに適用し、整形 (2 スペース・末尾改行) も検査する |
+| 登録簿                  | `packages/data-configs/src/theme-catalog/catalogs/index.ts` (`THEME_CATALOGS`) | JSON を import して型を付けるだけ。登録されたテーマだけ生成対象。一覧と `data/themes/catalogs/` のファイルの一致はテストが検査する。barrel `theme-catalog/index.ts` は再 export だけ |
+| 型                      | `packages/data-configs/src/theme-catalog/types.ts`                    | `ThemeCatalog` / `CatalogMetric` / `CatalogChart` / `MetricSelection`。schema はこの型に合わせる |
 | **生成物** (手編集禁止) | `packages/types/src/indicator-sets/<key>.ts`                          | IndicatorSet codegen (`// AUTO-GENERATED — DO NOT EDIT`)               |
 | **生成物** (手編集禁止) | `apps/web/scripts/data/page-components/theme/<key>.json`              | page-components (R2 verbatim export 用・byte 一致)                     |
 
 ```
-ThemeCatalog (SSOT, git TS)
+ThemeCatalog (SSOT, data/themes/catalogs/<key>.json)
   │  npm run generate:catalog --workspace=@stats47/data-configs
   ├─▶ packages/types/src/indicator-sets/<key>.ts        (IndicatorSet codegen)
   └─▶ apps/web/scripts/data/page-components/theme/<key>.json
@@ -41,14 +45,19 @@ ThemeCatalog (SSOT, git TS)
 ```
 
 - 登録テーマの一覧は `THEME_CATALOGS` が正典。登録テーマの生成物を直接編集しない。
-- bespoke / 未登録 route をカタログ化する場合は catalog TS 作成と registry 登録を同じ変更で行い、golden diff を確認する。
+- bespoke / 未登録 route をカタログ化する場合は `data/themes/catalogs/<key>.json` の作成と `index.ts` への import 追加を同じ変更で行い、golden diff を確認する。
+- `data/themes/` は `config/datasets.mjs` の台帳行 `themes.catalogs` / `themes.catalog-schema` に載っている (`npm run check-datasets`)。
+- **JSON の import は `theme-catalog/catalogs/` に閉じる**。このディレクトリは `package.json` の `sideEffects: false` で
+  副作用なしと宣言してあり、GIS 原典の定数や型だけを barrel から import するクライアント部品では webpack がカタログごと外す。
+  barrel (`index.ts`) に JSON の import を書くと、55 テーマ分が `JSON.parse` としてクライアントに埋め込まれ、圧縮でも消えない
+  (2026-10-06 実測: `/themes/*` の初回 JS が 564kB → 713kB)。`theme-catalog-json.test.ts` が検査する。
 
 ---
 
 ## 2. 編集フロー (カタログ駆動テーマ)
 
 ```
-1. packages/data-configs/src/theme-catalog/<key>.ts を編集 (指標追加・チャート変更・selection 記入)
+1. data/themes/catalogs/<key>.json を編集 (指標追加・チャート変更・selection 記入)。整形は 2 スペース・末尾改行
 2. npm run generate:catalog  --workspace=@stats47/data-configs   # 生成物を再生成
 3. npm run validate:catalog  --workspace=@stats47/data-configs   # 整合チェック
 4. npx tsc --noEmit -p apps/web/tsconfig.json                    # 型 (componentProps / drift guard)
@@ -168,15 +177,11 @@ Markdown 見出しを再解析しない。空回答・不正見出し・重複�
 - **`readerQuestion` / `targetReaderOrDecision` は任意**。section/evidenceTopics の問いより
   指標 1 件に絞った粒度で書く。読者向け本文にそのまま露出しない (内部の判断根拠)。
 
-#### selection の置き場 (2026-09-16 新設 — 混在させない)
+#### selection の置き場
 
-| 指標の定義場所 | selection を書く場所 |
-|---|---|
-| `<theme>.ts` の `metrics[]` にインライン (24 テーマ) | その metric の `selection` (従来どおり) |
-| `expanded.ts` の spec tuple (31 テーマ) / 既存テーマ拡張 tuple (67 章) | `selection-evidence.ts` の `SELECTION_EVIDENCE[themeKey][rankingKey]` — tuple には欄が無い。`makeCatalog` / `extensionMetric` が定型文より優先して読む |
-
-`selection-evidence.ts` は JSON 形式の TS で、`selection-backfill.mjs apply` が丸ごと再生成する (手書きも同じ形を保つ)。
-どちらに書くかは writer が「`<theme>.ts` に rankingKey があるか」で機械判定する (`isInlineMetric`)。
+selection は `data/themes/catalogs/<key>.json` の各 metric の `selection` に直接書く (全テーマ共通)。
+2026-10-06 までは定義の作り方で置き場が 2 つに分かれていた (`<theme>.ts` のインラインと `selection-evidence.ts`)。
+JSON 化で 1 か所になった。夜間 backfill の writer (`selection-backfill-core.mjs` の `applySelections`) も同じ場所に書く。
 
 #### 「一次資料で裏付けた」と主張する selection の機械検査 (adoptionCriteria あり = 主張)
 
@@ -358,14 +363,14 @@ harmRelevance: [
 
 | NG                                                                                            | OK                                                                                                                                                                                                                                  |
 | --------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `indicator-sets/<key>.ts` や `page-components/theme/<key>.json` を手編集 (カタログ駆動テーマ) | カタログ TS を編集 → `generate:catalog`                                                                                                                                                                                             |
+| `indicator-sets/<key>.ts` や `page-components/theme/<key>.json` を手編集 (カタログ駆動テーマ) | `data/themes/catalogs/<key>.json` を編集 → `generate:catalog`                                                                                                                                                                                             |
 | カタログ外の componentType 文字列を使う                                                       | `CATALOG_COMPONENT_TYPES` の 18 種から選ぶ                                                                                                                                                                                          |
 | 出典なしで selection.proposedBy に「白書」と書く                                              | sourceUrl + surveyedAt を併記 (evidence-based)                                                                                                                                                                                      |
 | 実在しない rankingKey を metrics に入れる                                                     | METRICS_REGISTRY 実在キーのみ (validator が弾く)                                                                                                                                                                                    |
 | `isActive:false` のキーを metrics / `relatedRankingKeys` に置く                               | isActive:true のキーのみ。inactive は `/ranking/<key>` が 410 か空ページになる (validator `[metric-inactive]` が error。2026-07-24 に `dwelling-per-floor-area` が `/themes/living-housing` で 410 を返していた)                |
 | componentType だけから「確認できます」等の説明を生成する                                      | title・凡例・軸に委ね、誤読防止に不可欠な条件だけ `charts.annotation` に記述                                                                                                                                                        |
 | 指標の定義・算出方法を Theme chart ごとに複製する                                             | `/ranking/[key]` を指標ハブとし、`relatedRankingKeys` で接続                                                                                                                                                                        |
-| 未登録 route の JSON を暗黙に generator 対象へ混ぜる                                          | ThemeCatalog 作成と `THEME_CATALOGS` 登録を同じ変更で行う                                                                                                                                                                           |
+| 未登録 route の JSON を暗黙に generator 対象へ混ぜる                                          | `data/themes/catalogs/<key>.json` 作成と `index.ts` への登録を同じ変更で行う                                                                                                                                                                           |
 
 ---
 
@@ -376,7 +381,7 @@ harmRelevance: [
 | 指標×チャート候補の**調査・提案** (白書/Web/競合/GSC)               | `theme-researcher` (app/config read-only、提案を `.claude/todo/backlog.md` へ) |
 | 公式ダッシュボードの**問い・指標・可視化研究**                      | `theme-researcher` (`public-dashboard-catalog.json` を公式一次資料で保守) |
 | 白書からの**論点レンズ候補抽出** (NotebookLM + 公式資料照合)        | `theme-researcher` (read-only、候補を theme-designer へ返す)        |
-| 提案の**採否判断・カタログ設計** (role/チャート構成/evidenceTopics) | `theme-designer` (採択分を catalog TS 化)                           |
+| 提案の**採否判断・カタログ設計** (role/チャート構成/evidenceTopics) | `theme-designer` (採択分を `data/themes/catalogs/<key>.json` へ反映) |
 | チャート **componentProps 詳細化・監査**                            | `theme-component-builder` (`relatedChartKeys` との整合も確認)       |
 | チャートコンポーネント自体の新設                                    | `chart-component-builder` (`chart-component-standards.md`)          |
 | 観測値投入 (e-Stat → R2)                                            | `data-ingester`                                                     |
@@ -436,7 +441,8 @@ export 済み関数を再利用する (判定ロジックを admin 側へ複製�
 
 ## 関連
 
-- 型・SSOT: `packages/data-configs/src/theme-catalog/`
+- SSOT: `data/themes/catalogs/` (schema `data/themes/theme-catalog.schema.json`)
+- 型・登録簿: `packages/data-configs/src/theme-catalog/`
 - generator: `packages/data-configs/scripts/generate-theme-catalog.ts`
 - validator: `packages/data-configs/scripts/validate-theme-catalog.ts`
 - drift guard: `apps/web/src/features/theme-dashboard/actions/theme-chart-props.ts` 末尾 (`_ThemeChartTypeDriftGuard`)

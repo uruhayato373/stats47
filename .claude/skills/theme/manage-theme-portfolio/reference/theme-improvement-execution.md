@@ -84,7 +84,7 @@ selection-backfill.md` の「role の推奨」表に出す (夜間バッチ自�
   recommended と一致したかで自動判定する。
 - 採択・却下は `node --import tsx .claude/scripts/themes/build-role-review-queue.mjs decide
   --theme <theme> --key <rankingKey> --decision accept|reject --note "..."` で記録してから、
-  下記「Claude Code実装契約」どおり `<theme>.ts` を編集する。
+  下記「Claude Code実装契約」どおり `data/themes/catalogs/<theme>.json` を編集する。
 - 進捗の正典 backlog: `THEME-ROLE-REVIEW-01`。
 
 ## Claude Code実装契約
@@ -92,7 +92,7 @@ selection-backfill.md` の「role の推奨」表に出す (夜間バッチ自�
 ```text
 対象: <theme-key>
 採択根拠: <review-or-audit-path>
-編集先: packages/data-configs/src/theme-catalog/<key>.ts
+編集先: data/themes/catalogs/<key>.json
 禁止: indicator-sets/*.ts / page-components/*.json の手編集
 要件:
 - metrics の role/selection を採択どおり反映

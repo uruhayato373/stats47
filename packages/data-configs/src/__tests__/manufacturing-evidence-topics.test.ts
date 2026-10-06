@@ -1,7 +1,9 @@
 import { describe, expect, it } from "vitest";
 
 import { EVIDENCE_SOURCE_CATALOG } from "../theme-catalog/evidence-lenses";
-import { MANUFACTURING_CATALOG } from "../theme-catalog/manufacturing";
+import { THEME_CATALOGS } from "../theme-catalog";
+
+const MANUFACTURING_CATALOG = THEME_CATALOGS["manufacturing"];
 
 describe("manufacturing evidence topics", () => {
   it("生産基盤と人員あたり出荷規模を別の論点として扱う", () => {

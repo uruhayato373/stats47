@@ -23,6 +23,10 @@ paths:
 記事メタTSや監査履歴と二重に書かず、専用validatorとwriter/readerの切替を一組で実装する。
 詳細と移行状況は [note-image-assets.md](note-image-assets.md)。画像バイナリは台帳へ埋め込まない。
 
+**テーマの指標・チャート定義 (ThemeCatalog) も例外として `data/themes/catalogs/<key>.json` のgit管理JSON + JSON Schema
+を正本とする (2026-10-06 オーナー決定)。** アプリは `@stats47/data-configs` 経由でこの JSON を読む。
+規約は [theme-catalog-standards.md](theme-catalog-standards.md) §1。
+
 ## リポジトリ直下 `config/` `data/` と `.claude/` の区分 (2026-10-06)
 
 `.claude/` はエージェント運用の置き場であり、事業の台帳を置かない。git で管理するファイルは次の 4 つに分ける
@@ -31,7 +35,7 @@ paths:
 | 置き場 | 置くもの | 例 |
 |---|---|---|
 | `config/` | 事業の台帳と設定。人またはオペレーター用スクリプトが判断して変える値 | 販売チャネルの出品台帳とアカウント (`coconala-listings.json` / `kdp-listings.json` / `{coconala,kdp,note}-account.json`)、ココナラのプロフィール文面と画像 (`coconala-profile.ts` / `coconala/assets/`)、ASP の接続設定 (`affiliate-asp.json` / `a8-report-automation.json`)、管理画面の領域 (`domains.json`)、PSI の計測対象 (`psi-urls.txt`)、端末資源 (`local-resources.json`)、参考文献 vault (`source-vault.json`)、前年比バッチ (`yoy-batch.json`) |
-| `data/` | 事業の記録と、CI との受け渡し | `data/note/` (note 画像台帳)、`data/seo/` (キーワード改善サイクルの対象と記録)、`data/ai-content-staging/` (AI 解説の公開待ち) |
+| `data/` | 事業の記録と、CI との受け渡し | `data/note/` (note 画像台帳)、`data/themes/` (テーマの指標・チャート定義。上の例外)、`data/seo/` (キーワード改善サイクルの対象と記録)、`data/ai-content-staging/` (AI 解説の公開待ち) |
 | `.claude/state/` | エージェントと自動化の作業状態、計測の蓄積 | 下の「`.claude/` 配下のファイルに置くもの」の表 |
 | `.claude/config/` | 品質ゲートの基準・許可リスト・閾値、エージェント運用の方針、認証と環境変数の許可リスト | `*-baseline.json`、`quality-gates.json`、`backlog-routing-policy.json`、`auth-credentials.json` |
 
@@ -64,7 +68,7 @@ git TS 化し永続 D1 を全廃した。アプリが読む各データの真実
 
 ### Authored / 設定 (git TS が SSOT → 生成スクリプトで R2)
 - metric メタ — **SSOT は `packages/data-configs/src/metrics/<key>.ts`**
-- テーマのチャート定義など各種カタログ定義 — git TS → R2 反映 (冪等スクリプト)
+- 各種カタログ定義 — git TS → R2 反映 (冪等スクリプト)。テーマの指標・チャート定義だけは上の例外で `data/themes/catalogs/` の JSON
 
 ### Authored / 運用 (git TS 定義が SSOT → 生成スクリプトで R2 JSON)
 - `page_components` / `theme_metrics` / `categories` / `themes` / `surveys`

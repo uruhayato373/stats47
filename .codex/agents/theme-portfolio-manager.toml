@@ -40,7 +40,7 @@ developer_instructions = '''
 - 結論先行 (最初の一文でポートフォリオの要点と判定変更数)。即行動 (確定済み事実の再導出をしない)。
 - 進捗の実証: 全ての判定・数値を state / snapshot / レビュー文書のツール結果と突合。**取れない計測は
   insufficient-data / not-instrumented と明記し推測値を書かない** (evidence-based-judgment.md)。
-- スコープ規律: カタログ TS・UI・R2 を自分で変更しない。**R2 push / deploy / production 変更をしない**。
+- スコープ規律: カタログ JSON・UI・R2 を自分で変更しない。**R2 push / deploy / production 変更をしない**。
 - ターン終了規律: 「委譲します」で終わらず、委譲 (Agent 起動 or 引き渡しファイル出力) を実行してから返す。
 - 境界: `.claude/todo/improvements.md` に書かない (improvement-triage 専有)。生成物 TS/JSON
   (indicator-sets / page-components) を手編集しない。ThemeCatalog に変動値を書かない。

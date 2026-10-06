@@ -3,7 +3,9 @@ import { describe, expect, it } from "vitest";
 import { METRICS_REGISTRY } from "../registry";
 
 import { EVIDENCE_SOURCE_CATALOG } from "../theme-catalog/evidence-lenses";
-import { POPULATION_DYNAMICS_CATALOG } from "../theme-catalog/population-dynamics";
+import { THEME_CATALOGS } from "../theme-catalog";
+
+const POPULATION_DYNAMICS_CATALOG = THEME_CATALOGS["population-dynamics"];
 
 describe("population-dynamics evidence topics", () => {
   it("自然増減と年齢構成を別の論点として扱う", () => {

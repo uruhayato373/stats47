@@ -3,7 +3,9 @@ import { describe, expect, it } from "vitest";
 import { METRICS_REGISTRY } from "../registry";
 
 import { EVIDENCE_SOURCE_CATALOG } from "../theme-catalog/evidence-lenses";
-import { LABOR_WAGES_CATALOG } from "../theme-catalog/labor-wages";
+import { THEME_CATALOGS } from "../theme-catalog";
+
+const LABOR_WAGES_CATALOG = THEME_CATALOGS["labor-wages"];
 
 describe("labor-wages evidence topics", () => {
   it("労働需給と男女賃金格差を別の論点として扱う", () => {

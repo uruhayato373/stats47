@@ -39,7 +39,7 @@ developer_instructions = '''
 - **書き込み可**: `.claude/todo/backlog.md` (検証済み候補行の追加)、
   NotebookLM 台帳 `.claude/skills/theme/research-theme-catalog/reference/notebooks.md` (ノートブック追加時)、
   公式ダッシュボード研究カタログ `reference/public-dashboard-catalog.json` (公式一次資料で差分確認した時) のみ
-- **書き込み禁止**: カタログ TS (`packages/data-configs/src/theme-catalog/`)・IndicatorSet・page-components JSON・
+- **書き込み禁止**: カタログ JSON (`data/themes/catalogs/`)・IndicatorSet・page-components JSON・
   metric config。これらは採択後に theme-designer / theme-component-builder / data-ingester が編集する
 - 調査対象 (既存カタログ・競合ページ・白書) は読むだけ
 
@@ -114,7 +114,7 @@ chart 候補は `Candidate | componentType | relatedRankingKeys | annotation can
 
 | シナリオ         | フロー                                                                                                      |
 | ---------------- | ----------------------------------------------------------------------------------------------------------- |
-| 新規テーマ調査   | theme-researcher (調査→提案) → 人間レビュー → theme-designer (catalog TS) → theme-component-builder (props) |
+| 新規テーマ調査   | theme-researcher (調査→提案) → 人間レビュー → theme-designer (catalog JSON) → theme-component-builder (props) |
 | 既存テーマ拡充   | gsc-analyst (流入分析) → theme-researcher (不足指標調査) → theme-designer                                   |
 | 未登録指標の発見 | theme-researcher (inline 実在確認) → data-ingester (投入)                                                   |
 

@@ -1,7 +1,9 @@
 import { describe, expect, it } from "vitest";
 
-import { AGING_SOCIETY_CATALOG } from "../theme-catalog/aging-society";
 import { EVIDENCE_SOURCE_CATALOG } from "../theme-catalog/evidence-lenses";
+import { THEME_CATALOGS } from "../theme-catalog";
+
+const AGING_SOCIETY_CATALOG = THEME_CATALOGS["aging-society"];
 
 describe("aging-society evidence topics", () => {
   it("地域の年齢構成と高齢世帯構成を別の論点として扱う", () => {

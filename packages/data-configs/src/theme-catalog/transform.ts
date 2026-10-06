@@ -113,7 +113,7 @@ export function catalogToIndicatorSetSource(catalog: ThemeCatalog): string {
   const body = JSON.stringify(set, null, 2);
   return (
     `// AUTO-GENERATED — DO NOT EDIT.\n` +
-    `// Source of truth: packages/data-configs/src/theme-catalog/${catalog.key}.ts\n` +
+    `// Source of truth: data/themes/catalogs/${catalog.key}.json\n` +
     `// Regenerate: npm run generate:catalog --workspace=@stats47/data-configs\n` +
     `import type { IndicatorSet } from "../indicator-set";\n\n` +
     `export const ${constName}: IndicatorSet = ${body};\n`

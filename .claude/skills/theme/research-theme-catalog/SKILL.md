@@ -31,7 +31,7 @@ allowed-tools: Read, Grep, Glob, Bash, WebSearch, WebFetch
 
 ```bash
 # 既存カタログ / IndicatorSet の現状を把握 (何が既に載っているか)
-cat packages/data-configs/src/theme-catalog/<theme>.ts 2>/dev/null \
+cat data/themes/catalogs/<theme>.json 2>/dev/null \
   || cat packages/types/src/indicator-sets/<theme>.ts   # legacy テーマ
 # 既存チャート
 cat apps/web/scripts/data/page-components/theme/<theme>.json
@@ -135,7 +135,7 @@ theme-researcher を Agent tool で呼ぶ場合、呼び元は報告が指す一
 ```
 提案 (backlog.md)
   → 人間レビューで採否決定
-  → theme-designer が採択分を catalog TS 化 (packages/data-configs/src/theme-catalog/<theme>.ts)
+  → theme-designer が採択分を catalog JSON 化 (data/themes/catalogs/<theme>.json)
      + THEME_CATALOGS 登録 + npm run generate:catalog + validate:catalog
   → theme-component-builder が componentProps (estatParams 等) を詳細化
   → data-ingester が未登録指標を e-Stat → R2 投入

@@ -7,14 +7,13 @@ import { inspectExpansionWiring } from './theme-expansion-core.mjs';
 
 const require = createRequire(import.meta.url);
 const { THEME_CATALOGS } = require('../../../packages/data-configs/src/theme-catalog/index.ts');
-const { EXISTING_THEME_SECTION_EXTENSIONS } = require('../../../packages/data-configs/src/theme-catalog/expanded.ts');
 const root = resolve(import.meta.dirname, '../../..');
 const planRef = '.claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json';
 const planPath = resolve(root, planRef);
 const plan = JSON.parse(await readFile(planPath, 'utf8'));
 const recordedAt = new Date().toISOString();
 const day = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Tokyo' }).format(new Date(recordedAt));
-const wiring = inspectExpansionWiring(plan, THEME_CATALOGS, EXISTING_THEME_SECTION_EXTENSIONS);
+const wiring = inspectExpansionWiring(plan, THEME_CATALOGS);
 for (const row of wiring.candidates) {
   const candidate = plan.themes.find((theme) => theme.id === row.candidateId);
   const decision = candidate.decision;
@@ -27,7 +26,7 @@ for (const row of wiring.candidates) {
     delete candidate.implementedThemeKey;
   }
   decision.implementationEvidence = row.themeKey ? [
-    'packages/data-configs/src/theme-catalog/index.ts',
+    `data/themes/catalogs/${row.themeKey}.json`,
     `packages/types/src/indicator-sets/${row.themeKey}.ts`,
     ...(row.sectionKey ? [`theme:${row.themeKey}#${row.sectionKey}`] : []),
   ] : [];

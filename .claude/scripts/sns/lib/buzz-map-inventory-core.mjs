@@ -21,10 +21,8 @@ const KNOWN_RANKING_KEYS_PATH = resolve(
   PROJECT_ROOT,
   "packages/ranking/src/config/known-ranking-keys.ts",
 );
-const THEME_CATALOG_INDEX_PATH = resolve(
-  PROJECT_ROOT,
-  "packages/data-configs/src/theme-catalog/index.ts",
-);
+/** テーマ定義 (1 テーマ 1 ファイル `<slug>.json`)。規約: .claude/rules/theme-catalog-standards.md §1 */
+const THEMES_DATA_DIR = resolve(PROJECT_ROOT, "data/themes/catalogs");
 const THEMES_APP_DIR = resolve(PROJECT_ROOT, "apps/web/src/app/themes");
 const BLOG_ALL_JSON_URL = `${R2_PUBLIC_BASE_URL}/app/blog/all.json`;
 
@@ -145,20 +143,22 @@ export async function loadPublishedBlogs(fetchImpl = globalThis.fetch) {
 }
 
 /**
- * theme-catalog index + apps/web/src/app/themes/ のディレクトリから実在 theme slug を集める。
+ * data/themes/catalogs の定義ファイル + apps/web/src/app/themes/ のディレクトリから実在 theme slug を集める。
  * @param {(path: string, opts?: object) => import("node:fs").Dirent[]} [readdirImpl]
- * @param {(path: string, enc: string) => string} [readFileImpl]
  * @returns {string[]}
  */
-export function loadThemeSlugs(readdirImpl = defaultReaddir, readFileImpl = defaultReadFile) {
+export function loadThemeSlugs(readdirImpl = defaultReaddir) {
   const slugs = new Set();
 
-  // theme-catalog index の THEME_CATALOGS キー
+  // data/themes/catalogs/<slug>.json (カタログ駆動テーマ)
   try {
-    const source = readFileImpl(THEME_CATALOG_INDEX_PATH, "utf8");
-    for (const key of extractThemeCatalogKeys(source)) slugs.add(key);
+    for (const ent of readdirImpl(THEMES_DATA_DIR, { withFileTypes: true })) {
+      if (ent.isFile() && ent.name.endsWith(".json")) {
+        slugs.add(ent.name.slice(0, -".json".length));
+      }
+    }
   } catch (err) {
-    warn(`loadThemeSlugs: ${THEME_CATALOG_INDEX_PATH} を読めません`, err);
+    warn(`loadThemeSlugs: ${THEMES_DATA_DIR} を読めません`, err);
   }
 
   // apps/web/src/app/themes/ の実ディレクトリ (bespoke 含む)
@@ -186,7 +186,7 @@ export function loadThemeSlugs(readdirImpl = defaultReaddir, readFileImpl = defa
 export async function loadInventory({ readFileImpl, fetchImpl, readdirImpl } = {}) {
   const rankingKeys = loadRankingKeysFromSource(readFileImpl);
   const { slugs: blogSlugs, tagsBySlug: blogTagsByslug } = await loadPublishedBlogs(fetchImpl);
-  const themeSlugs = loadThemeSlugs(readdirImpl, readFileImpl);
+  const themeSlugs = loadThemeSlugs(readdirImpl);
   return buildInventory({ rankingKeys, blogSlugs, blogTagsByslug, themeSlugs });
 }
 
@@ -217,29 +217,6 @@ function extractQuotedArrayKeys(source) {
   const body = start >= 0 && end > start ? source.slice(start, end + 1) : source;
   const keys = [];
   const re = /["'`]([^"'`\n]+)["'`]/g;
-  let m;
-  while ((m = re.exec(body)) !== null) {
-    keys.push(m[1]);
-  }
-  return keys;
-}
-
-/**
- * theme-catalog index.ts の THEME_CATALOGS オブジェクトからキー (theme slug) を抽出する。
- * `"aging-society": AGING_SOCIETY_CATALOG,` の左辺クォート文字列を拾う。
- * @param {string} source
- * @returns {string[]}
- */
-function extractThemeCatalogKeys(source) {
-  const marker = "THEME_CATALOGS";
-  const markerIdx = source.indexOf(marker);
-  const region = markerIdx >= 0 ? source.slice(markerIdx) : source;
-  const start = region.indexOf("{");
-  const end = region.indexOf("}", start);
-  const body = start >= 0 && end > start ? region.slice(start, end + 1) : region;
-  const keys = [];
-  // 行頭寄りの `"key":` / `'key':` を拾う (値側の識別子は : が付かないので誤検出しない)
-  const re = /["'`]([a-z0-9-]+)["'`]\s*:/g;
   let m;
   while ((m = re.exec(body)) !== null) {
     keys.push(m[1]);

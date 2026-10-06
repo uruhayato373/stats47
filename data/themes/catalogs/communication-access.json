@@ -1,0 +1,111 @@
+{
+  "key": "communication-access",
+  "title": "通信環境とデジタル基盤",
+  "description": "ブロードバンド契約数と携帯電話の契約・保有を比較します。ブロードバンドはBWAを含み、携帯電話アクセスを含む旧系列と除く系列を別々に表示します。契約数は世帯普及率や通信速度とは異なります。",
+  "category": "industry",
+  "usage": "theme",
+  "metrics": [
+    {
+      "rankingKey": "broadband-contract-count-excluding-39-4g",
+      "shortLabel": "ブロードバンド契約数（3.9〜4世代携帯電話アクセスを除く）",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "ブロードバンド契約数（3.9〜4世代携帯電話アクセスを除く）を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "broadband-service-contract-count",
+      "shortLabel": "ブロードバンド契約数（携帯電話アクセスを含む旧系列）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "ブロードバンド契約数（携帯電話アクセスを含む旧系列）を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "mobile-phone-contract-count-per-1000",
+      "shortLabel": "携帯電話契約数（人口千人当たり）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "携帯電話契約数（人口千人当たり）を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "mobile-phone-ownership-multi-person-households-per-1000",
+      "shortLabel": "携帯電話所有数量（二人以上世帯千世帯当たり）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "携帯電話所有数量（二人以上世帯千世帯当たり）を都道府県別の実値として比較する。"
+      }
+    }
+  ],
+  "charts": [],
+  "metricGroups": [
+    {
+      "key": "communication-access-indicator-1",
+      "title": "ブロードバンド契約数（3.9〜4世代携帯電話アクセスを除く）",
+      "rankingKeys": [
+        "broadband-contract-count-excluding-39-4g"
+      ],
+      "defaultCheckedKeys": [
+        "broadband-contract-count-excluding-39-4g"
+      ]
+    },
+    {
+      "key": "communication-access-indicator-2",
+      "title": "ブロードバンド契約数（携帯電話アクセスを含む旧系列）",
+      "rankingKeys": [
+        "broadband-service-contract-count"
+      ],
+      "defaultCheckedKeys": [
+        "broadband-service-contract-count"
+      ]
+    },
+    {
+      "key": "communication-access-indicator-3",
+      "title": "携帯電話契約数（人口千人当たり）",
+      "rankingKeys": [
+        "mobile-phone-contract-count-per-1000"
+      ],
+      "defaultCheckedKeys": [
+        "mobile-phone-contract-count-per-1000"
+      ]
+    },
+    {
+      "key": "communication-access-indicator-4",
+      "title": "携帯電話所有数量（二人以上世帯千世帯当たり）",
+      "rankingKeys": [
+        "mobile-phone-ownership-multi-person-households-per-1000"
+      ],
+      "defaultCheckedKeys": [
+        "mobile-phone-ownership-multi-person-households-per-1000"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "key": "communication-access-overview",
+      "title": "通信環境とデジタル基盤を都道府県別に見る",
+      "description": "ブロードバンド契約数と携帯電話の契約・保有を比較します。ブロードバンドはBWAを含み、携帯電話アクセスを含む旧系列と除く系列を別々に表示します。契約数は世帯普及率や通信速度とは異なります。",
+      "metricGroupKeys": [
+        "communication-access-indicator-1",
+        "communication-access-indicator-2",
+        "communication-access-indicator-3",
+        "communication-access-indicator-4"
+      ]
+    }
+  ],
+  "keywords": [
+    "通信",
+    "ブロードバンド",
+    "携帯電話",
+    "インターネット"
+  ]
+}

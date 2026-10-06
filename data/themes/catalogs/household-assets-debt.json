@@ -1,0 +1,180 @@
+{
+  "key": "household-assets-debt",
+  "title": "貯蓄と負債",
+  "description": "二人以上世帯の貯蓄現在高と金融負債残高、貯蓄率を別々に比較します。世帯属性や調査年の違いを補正した推計は行いません。",
+  "category": "economy",
+  "usage": "theme",
+  "metrics": [
+    {
+      "rankingKey": "financial-assets-balance-multi-person-households",
+      "shortLabel": "金融資産残高（貯蓄現在高・二人以上世帯1世帯当たり）",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "金融資産残高（貯蓄現在高・二人以上世帯1世帯当たり）を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "financial-debt-balance",
+      "shortLabel": "金融負債残高（二人以上世帯）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "金融負債残高（二人以上世帯）を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "avg-savings-rate-worker-households",
+      "shortLabel": "平均貯蓄率（勤労者世帯）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "平均貯蓄率（勤労者世帯）を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "current-deposit-balance-ratio-multi-person-households",
+      "shortLabel": "預貯金が金融資産に占める割合",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
+        "surveyedAt": "2026-09-09",
+        "rationale": "預貯金が金融資産に占める割合を既存テーマの独立章へ追加する。"
+      }
+    },
+    {
+      "rankingKey": "current-life-insurance-balance-ratio-multi-person-households",
+      "shortLabel": "生命保険などが金融資産に占める割合",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
+        "surveyedAt": "2026-09-09",
+        "rationale": "生命保険などが金融資産に占める割合を既存テーマの独立章へ追加する。"
+      }
+    },
+    {
+      "rankingKey": "current-securities-balance-ratio-multi-person-households",
+      "shortLabel": "有価証券が金融資産に占める割合",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
+        "surveyedAt": "2026-09-09",
+        "rationale": "有価証券が金融資産に占める割合を既存テーマの独立章へ追加する。"
+      }
+    },
+    {
+      "rankingKey": "housing-land-liabilities-ratio-multi-person-households",
+      "shortLabel": "住宅・土地負債が金融負債に占める割合",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
+        "surveyedAt": "2026-09-09",
+        "rationale": "住宅・土地負債が金融負債に占める割合を既存テーマの独立章へ追加する。"
+      }
+    }
+  ],
+  "charts": [],
+  "metricGroups": [
+    {
+      "key": "household-assets-debt-indicator-1",
+      "title": "金融資産残高（貯蓄現在高・二人以上世帯1世帯当たり）",
+      "rankingKeys": [
+        "financial-assets-balance-multi-person-households"
+      ],
+      "defaultCheckedKeys": [
+        "financial-assets-balance-multi-person-households"
+      ]
+    },
+    {
+      "key": "household-assets-debt-indicator-2",
+      "title": "金融負債残高（二人以上世帯）",
+      "rankingKeys": [
+        "financial-debt-balance"
+      ],
+      "defaultCheckedKeys": [
+        "financial-debt-balance"
+      ]
+    },
+    {
+      "key": "household-assets-debt-indicator-3",
+      "title": "平均貯蓄率（勤労者世帯）",
+      "rankingKeys": [
+        "avg-savings-rate-worker-households"
+      ],
+      "defaultCheckedKeys": [
+        "avg-savings-rate-worker-households"
+      ]
+    },
+    {
+      "key": "candidate-78-1",
+      "title": "金融資産と負債の構成｜預貯金が金融資産に占める割合",
+      "rankingKeys": [
+        "current-deposit-balance-ratio-multi-person-households"
+      ],
+      "defaultCheckedKeys": [
+        "current-deposit-balance-ratio-multi-person-households"
+      ]
+    },
+    {
+      "key": "candidate-78-2",
+      "title": "金融資産と負債の構成｜生命保険などが金融資産に占める割合",
+      "rankingKeys": [
+        "current-life-insurance-balance-ratio-multi-person-households"
+      ],
+      "defaultCheckedKeys": [
+        "current-life-insurance-balance-ratio-multi-person-households"
+      ]
+    },
+    {
+      "key": "candidate-78-3",
+      "title": "金融資産と負債の構成｜有価証券が金融資産に占める割合",
+      "rankingKeys": [
+        "current-securities-balance-ratio-multi-person-households"
+      ],
+      "defaultCheckedKeys": [
+        "current-securities-balance-ratio-multi-person-households"
+      ]
+    },
+    {
+      "key": "candidate-78-4",
+      "title": "金融資産と負債の構成｜住宅・土地負債が金融負債に占める割合",
+      "rankingKeys": [
+        "housing-land-liabilities-ratio-multi-person-households"
+      ],
+      "defaultCheckedKeys": [
+        "housing-land-liabilities-ratio-multi-person-households"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "key": "household-assets-debt-overview",
+      "title": "貯蓄と負債を都道府県別に見る",
+      "description": "二人以上世帯の貯蓄現在高と金融負債残高、貯蓄率を別々に比較します。世帯属性や調査年の違いを補正した推計は行いません。",
+      "metricGroupKeys": [
+        "household-assets-debt-indicator-1",
+        "household-assets-debt-indicator-2",
+        "household-assets-debt-indicator-3"
+      ]
+    },
+    {
+      "key": "candidate-78",
+      "title": "金融資産と負債の構成",
+      "description": "2019年10月末の二人以上世帯の構成割合です。預貯金・生命保険など・有価証券は金融資産を、住宅・土地負債は金融負債を分母にしています。資産にはその他の貯蓄もあるため、掲載3区分を合計100%に直しません。",
+      "metricGroupKeys": [
+        "candidate-78-1",
+        "candidate-78-2",
+        "candidate-78-3",
+        "candidate-78-4"
+      ]
+    }
+  ],
+  "keywords": [
+    "貯蓄",
+    "負債",
+    "家計"
+  ]
+}

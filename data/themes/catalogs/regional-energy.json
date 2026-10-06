@@ -1,0 +1,493 @@
+{
+  "key": "regional-energy",
+  "title": "エネルギー消費",
+  "description": "最終エネルギー消費量と1人当たり消費、電力需要、住宅の太陽光設備率を規模と普及に分けて比較します。電源構成は別統計として扱います。2023年度・暫定値の直接利用分（TJ）。非エネルギー利用を含みます。産業は農林水産鉱建設業と製造業の合計です。運輸は家庭乗用車に限り、営業用輸送等を含みません。電力・熱の寄与損失配分後総量やCO₂排出量、別年度の設備容量とは分けて比較します。",
+  "category": "industry",
+  "usage": "theme",
+  "metrics": [
+    {
+      "rankingKey": "final-energy-consumption",
+      "shortLabel": "最終エネルギー消費量",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "社会・人口統計体系 都道府県データ「Ｈ　居住」統計表（総務省統計局）",
+        "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0000010108",
+        "surveyedAt": "2026-09-16",
+        "rationale": "この統計表は都道府県別に「H5701_最終エネルギー消費量」を単位TJで収録しており、47都道府県が同一基準・同一時点で並ぶため、地域間のエネルギー消費規模を直接比較できる。テーマ冒頭で最終エネルギー消費量を規模の中心指標として扱う際、この一次資料が定義と単位の根拠になる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability"
+        ],
+        "readerQuestion": "自分の都道府県はエネルギーをどれだけ消費しているのか、他県と比べて多いのか少ないのか。",
+        "targetReaderOrDecision": "都道府県のエネルギー政策担当者や地域比較を行う分析者。"
+      }
+    },
+    {
+      "rankingKey": "final-energy-consumption-per-capita",
+      "shortLabel": "1人当たり最終エネルギー消費量",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "社会・人口統計体系 都道府県データ「Ｈ　居住」統計表（総務省統計局）",
+        "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0000010108",
+        "surveyedAt": "2026-09-16",
+        "rationale": "同じ統計表に「H5702_1人当たり最終エネルギー消費量」が単位GJで人口規模の異なる都道府県間でも比較できる形で収録されている。規模指標である最終エネルギー消費量だけでは人口の多い県が常に上位になるため、1人当たり指標を並置することで規模と普及の両面から地域差を捉えられる。",
+        "adoptionCriteria": [
+          "comparability",
+          "complementarity"
+        ],
+        "readerQuestion": "人口規模を調整すると、どの都道府県が住民1人あたり多くエネルギーを使っているのか。",
+        "targetReaderOrDecision": "人口差を除いた実質的なエネルギー効率を比較したい読者。"
+      }
+    },
+    {
+      "rankingKey": "electricity-demand",
+      "shortLabel": "電力需要量",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "社会・人口統計体系 都道府県データ「Ｈ　居住」統計表（総務省統計局）",
+        "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0000010208",
+        "surveyedAt": "2026-09-16",
+        "rationale": "この統計表には都道府県別の「#H05107_電力需要量」が単位Ｍｗｈで収録されており、最終エネルギー消費量（TJ、全エネルギー種を含む）とは異なり電力という単一エネルギー種のみに着目した需要規模を示す。テーマが電源構成を別統計として扱う方針である以上、電力需要そのものの地域差を確認する補完的な指標として位置付けられる。",
+        "adoptionCriteria": [
+          "complementarity",
+          "comparability"
+        ],
+        "readerQuestion": "電力だけに着目すると、どの都道府県の需要が大きいのか。",
+        "targetReaderOrDecision": "電力需給や再エネ導入計画を検討する読者。"
+      }
+    },
+    {
+      "rankingKey": "solar-panel-housing-rate",
+      "shortLabel": "太陽光発電機のある住宅率",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "統計局ホームページ 統計トピックス「省エネルギー設備等の住宅への普及について」（総務省統計局、住宅・土地統計調査）",
+        "sourceUrl": "https://www.stat.go.jp/data/jyutaku/topics/topi863.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "住宅・土地統計調査は「太陽光を利用した発電機器あり」の住宅数・普及率を持ち家・借家別に集計しており、太陽光発電の普及を世帯・住宅という単位で捉える一次資料である。FIT/FIPの導入設備容量（事業者側の規模）とは異なり、住宅単位での普及度という角度から都道府県間の差を補完的に示せる。",
+        "adoptionCriteria": [
+          "complementarity",
+          "readerValue"
+        ],
+        "readerQuestion": "自分の住む都道府県では、どれくらいの住宅が太陽光発電を導入しているのか。",
+        "targetReaderOrDecision": "住宅の再エネ導入状況に関心を持つ一般読者や地域政策担当者。"
+      }
+    },
+    {
+      "rankingKey": "regional-industry-final-energy-consumption",
+      "shortLabel": "産業部門の最終エネルギー消費量",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "産業部門の最終エネルギー消費量を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "regional-business-final-energy-consumption",
+      "shortLabel": "業務他部門の最終エネルギー消費量",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "業務他部門の最終エネルギー消費量を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "regional-household-final-energy-consumption",
+      "shortLabel": "家庭部門の最終エネルギー消費量",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "都道府県別エネルギー消費統計 統計表ファイル一覧ページ（資源エネルギー庁・e-Stat）",
+        "sourceUrl": "https://www.e-stat.go.jp/stat-search/files?toukei=00551006",
+        "surveyedAt": "2026-09-16",
+        "rationale": "この統計は企業・事業所他部門、家庭部門、運輸（家庭）の3区分で都道府県別のエネルギー消費量を推計しており、家庭部門はそのうち家計のエネルギー使用実態を都道府県間で比較できる中心的な区分として明示されている。テーマが規模と普及を都道府県別に比較する構成であることから、家庭部門の消費量は生活面の消費規模を示す代表的な指標として位置付けられる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability"
+        ]
+      }
+    },
+    {
+      "rankingKey": "regional-household-car-final-energy-consumption",
+      "shortLabel": "家庭乗用車の最終エネルギー消費量",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "都道府県別エネルギー消費統計 統計表ファイル一覧ページ（資源エネルギー庁・e-Stat）",
+        "sourceUrl": "https://www.e-stat.go.jp/stat-search/files?toukei=00551006",
+        "surveyedAt": "2026-09-16",
+        "rationale": "同統計は運輸部門のうち家庭（家計）の乗用車利用に限定して都道府県別のエネルギー消費量を推計しており、営業用輸送等は対象外であることが区分の定義から読み取れる。このため家庭乗用車の消費量は、家庭部門の消費とは異なる移動面の消費実態を捉える補完的な指標として都道府県間比較に用いることができる。",
+        "adoptionCriteria": [
+          "comparability",
+          "complementarity"
+        ]
+      }
+    },
+    {
+      "rankingKey": "fit-fip-installed-capacity",
+      "shortLabel": "FIT・FIP導入設備容量の合計",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "再生可能エネルギー電子申請 事業計画認定情報 情報公表ページ（資源エネルギー庁）",
+        "sourceUrl": "https://www.fit-portal.go.jp/publicinfosummary",
+        "surveyedAt": "2026-09-16",
+        "rationale": "資源エネルギー庁はA表として都道府県別の認定量・導入量を公表しており、これは新規認定分と移行認定分を合わせた累積の導入設備容量を都道府県間で比較するための一次資料となっている。テーマの章立てにある「FIT・FIPの再エネ導入設備容量」を都道府県別に把握する上で、この合計値は規模を示す代表的な指標である。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability",
+          "dataQuality"
+        ]
+      }
+    },
+    {
+      "rankingKey": "fit-fip-new-approved-installed-capacity",
+      "shortLabel": "制度開始後の新規認定分の導入容量",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "再生可能エネルギー電子申請 事業計画認定情報 情報公表ページ（資源エネルギー庁）",
+        "sourceUrl": "https://www.fit-portal.go.jp/publicinfosummary",
+        "surveyedAt": "2026-09-16",
+        "rationale": "情報公表ページは新規認定分を「本制度開始後に新たに認定を受けた設備」と明確に定義しており、旧制度からの移行分と区別して集計されている。この定義に基づき新規認定分は、FIT・FIP制度開始以降に都道府県でどれだけ新たな再エネ導入が進んだかを示す指標として、合計の導入設備容量とは異なる政策効果の角度を提供する。",
+        "adoptionCriteria": [
+          "complementarity",
+          "dataQuality"
+        ]
+      }
+    },
+    {
+      "rankingKey": "fit-transition-installed-capacity",
+      "shortLabel": "旧制度から移行した設備の導入容量",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "再生可能エネルギー電子申請 事業計画認定情報 情報公表ページ（資源エネルギー庁）",
+        "sourceUrl": "https://www.fit-portal.go.jp/publicinfosummary",
+        "surveyedAt": "2026-09-16",
+        "rationale": "情報公表ページは移行認定分を、法施行日時点で既に発電を開始していた設備や旧余剰電力買取制度からの特例太陽光発電設備が本制度へ移行したものと定義しており、新規認定分とは発生時期・制度的性格が異なることが示されている。このため移行認定分は、制度開始前からの既存導入分を都道府県別に切り分けて把握するための、新規認定分を補完する指標として扱われる。",
+        "adoptionCriteria": [
+          "complementarity",
+          "dataQuality"
+        ]
+      }
+    },
+    {
+      "rankingKey": "regional-co2-emissions-estimate",
+      "shortLabel": "地域のCO₂排出量推計・合計",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "部門別CO2排出量の現況推計 都道府県別・部門別CO2排出量の現況推計ページ（環境省 脱炭素地域づくり支援サイト）",
+        "sourceUrl": "https://policies.env.go.jp/policy/roadmap/local_keikaku/kuiki/suikei.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "環境省は地方公共団体実行計画の算定手法編マニュアルに基づき、全市区町村・都道府県の部門別CO2排出量を標準的手法で現況推計しており、これは都道府県別エネルギー消費統計等の公表データを基に作成された全国共通基準の推計値である。テーマの章立てにある「地域のCO2排出量推計」の合計値は、エネルギー消費の規模を排出量という別角度から都道府県間で比較するための指標として位置付けられる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability",
+          "complementarity"
+        ]
+      }
+    },
+    {
+      "rankingKey": "regional-industry-co2-emissions-estimate",
+      "shortLabel": "産業部門のCO₂推計",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "都道府県別・部門別CO2排出量の現況推計（2023年度版）（環境省 脱炭素地域づくり支援サイト）",
+        "sourceUrl": "https://policies.env.go.jp/policy/roadmap/local_keikaku/kuiki/suikei.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "本ページは産業部門を含む部門別CO2排出量を全市区町村・都道府県単位で共通の算定手法に基づき推計し公表するもので、地方公共団体実行計画の策定根拠として用いられています。産業部門は製造業等の集積度が高い都道府県ほど排出量が大きくなりやすく、エネルギー消費規模の都道府県差を裏付ける補完的な指標として位置付けられます。",
+        "adoptionCriteria": [
+          "comparability",
+          "complementarity"
+        ],
+        "readerQuestion": "自分の都道府県の産業部門からのCO2排出量は全国でどの位置にあるか。",
+        "targetReaderOrDecision": "地方公共団体の脱炭素計画担当者や産業立地とエネルギー消費の関係を調べたい読者。"
+      }
+    },
+    {
+      "rankingKey": "regional-business-co2-emissions-estimate",
+      "shortLabel": "業務その他部門のCO₂推計",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "都道府県別・部門別CO2排出量の現況推計（2023年度版）（環境省 脱炭素地域づくり支援サイト）",
+        "sourceUrl": "https://policies.env.go.jp/policy/roadmap/local_keikaku/kuiki/suikei.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "業務その他部門は標準的手法に基づく活動量按分により全都道府県で同一の算定手法により推計されており、オフィス・商業施設など第三次産業の集積がエネルギー消費と排出量に与える影響を比較する補完的な視点を提供します。産業部門・家庭部門とは異なる活動主体を捉える点でテーマの都道府県比較に寄与します。",
+        "adoptionCriteria": [
+          "comparability",
+          "complementarity"
+        ],
+        "readerQuestion": "オフィスや商業施設が集積する都道府県は業務部門のCO2排出量も多いのか。",
+        "targetReaderOrDecision": "都市部のエネルギー消費構造を分析したい自治体職員や研究者。"
+      }
+    },
+    {
+      "rankingKey": "regional-household-co2-emissions-estimate",
+      "shortLabel": "家庭部門のCO₂推計",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "都道府県別・部門別CO2排出量の現況推計（2023年度版）（環境省 脱炭素地域づくり支援サイト）",
+        "sourceUrl": "https://policies.env.go.jp/policy/roadmap/local_keikaku/kuiki/suikei.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "家庭部門のCO2排出量推計は世帯を単位として全都道府県で統一手法により算出され、テーマが扱う1人当たりエネルギー消費や住宅太陽光普及と並べて、家庭のエネルギー利用が地域の排出量にどう反映されるかを補完的に示す指標になります。",
+        "adoptionCriteria": [
+          "comparability",
+          "complementarity"
+        ],
+        "readerQuestion": "住宅の太陽光設備率が高い都道府県は家庭部門のCO2排出量が低い傾向にあるか。",
+        "targetReaderOrDecision": "家庭のエネルギー消費とCO2排出の関係を確認したい読者。"
+      }
+    },
+    {
+      "rankingKey": "regional-transport-co2-emissions-estimate",
+      "shortLabel": "運輸部門のCO₂推計（航空を除く）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "運輸部門（自動車）CO2排出量推計データ（環境省 脱炭素地域づくり支援サイト）",
+        "sourceUrl": "https://policies.env.go.jp/policy/roadmap/local_keikaku/kuiki/car.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "環境省の運輸部門推計は自動車の保有・利用状況に基づき算出されており、テーマの説明が「運輸は家庭乗用車に限り、営業用輸送等を含みません」と明記する自動車中心の定義と対応します。既存統計とは異なる推計手法で都道府県別に運輸由来の排出量を示す点で、エネルギー消費量とは別角度から地域の自動車利用実態を補完します。",
+        "adoptionCriteria": [
+          "comparability",
+          "complementarity"
+        ],
+        "readerQuestion": "自動車利用が多い都道府県は運輸部門のCO2排出量も多いのか。",
+        "targetReaderOrDecision": "自動車依存度と地域の排出量の関係を確認したい自治体・研究者。"
+      }
+    },
+    {
+      "rankingKey": "regional-waste-co2-emissions-estimate",
+      "shortLabel": "一般廃棄物焼却のCO₂推計",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "都道府県別・部門別CO2排出量の現況推計（2023年度版）（環境省 脱炭素地域づくり支援サイト）",
+        "sourceUrl": "https://policies.env.go.jp/policy/roadmap/local_keikaku/kuiki/suikei.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "この注記は、現況推計が非エネルギー起源CO2のうち一般廃棄物の焼却分だけを特別に算出対象としていることを明示しており、他の産業・業務・家庭・運輸の各部門とは異なるプラスチックごみ焼却由来という固有の発生源を捉える指標であることを裏付けます。エネルギー消費統計だけでは見えない廃棄物処理起源の排出量を補完する役割を持ちます。",
+        "adoptionCriteria": [
+          "complementarity",
+          "dataQuality"
+        ],
+        "readerQuestion": "一般廃棄物の焼却によるCO2排出量は都道府県でどれくらい差があるか。",
+        "targetReaderOrDecision": "廃棄物処理由来の排出を含めた地域の脱炭素対策を検討する自治体担当者。"
+      }
+    }
+  ],
+  "charts": [],
+  "metricGroups": [
+    {
+      "key": "regional-energy-indicator-1",
+      "title": "最終エネルギー消費量",
+      "rankingKeys": [
+        "final-energy-consumption"
+      ],
+      "defaultCheckedKeys": [
+        "final-energy-consumption"
+      ]
+    },
+    {
+      "key": "regional-energy-indicator-2",
+      "title": "1人当たり最終エネルギー消費量",
+      "rankingKeys": [
+        "final-energy-consumption-per-capita"
+      ],
+      "defaultCheckedKeys": [
+        "final-energy-consumption-per-capita"
+      ]
+    },
+    {
+      "key": "regional-energy-indicator-3",
+      "title": "電力需要量",
+      "rankingKeys": [
+        "electricity-demand"
+      ],
+      "defaultCheckedKeys": [
+        "electricity-demand"
+      ]
+    },
+    {
+      "key": "regional-energy-indicator-4",
+      "title": "太陽光発電機のある住宅率",
+      "rankingKeys": [
+        "solar-panel-housing-rate"
+      ],
+      "defaultCheckedKeys": [
+        "solar-panel-housing-rate"
+      ]
+    },
+    {
+      "key": "regional-energy-indicator-5",
+      "title": "産業部門の最終エネルギー消費量",
+      "rankingKeys": [
+        "regional-industry-final-energy-consumption"
+      ],
+      "defaultCheckedKeys": [
+        "regional-industry-final-energy-consumption"
+      ]
+    },
+    {
+      "key": "regional-energy-indicator-6",
+      "title": "業務他部門の最終エネルギー消費量",
+      "rankingKeys": [
+        "regional-business-final-energy-consumption"
+      ],
+      "defaultCheckedKeys": [
+        "regional-business-final-energy-consumption"
+      ]
+    },
+    {
+      "key": "regional-energy-indicator-7",
+      "title": "家庭部門の最終エネルギー消費量",
+      "rankingKeys": [
+        "regional-household-final-energy-consumption"
+      ],
+      "defaultCheckedKeys": [
+        "regional-household-final-energy-consumption"
+      ]
+    },
+    {
+      "key": "regional-energy-indicator-8",
+      "title": "家庭乗用車の最終エネルギー消費量",
+      "rankingKeys": [
+        "regional-household-car-final-energy-consumption"
+      ],
+      "defaultCheckedKeys": [
+        "regional-household-car-final-energy-consumption"
+      ]
+    },
+    {
+      "key": "candidate-98-1",
+      "title": "FIT・FIPの再エネ導入設備容量｜FIT・FIP導入設備容量の合計",
+      "rankingKeys": [
+        "fit-fip-installed-capacity"
+      ],
+      "defaultCheckedKeys": [
+        "fit-fip-installed-capacity"
+      ]
+    },
+    {
+      "key": "candidate-98-2",
+      "title": "FIT・FIPの再エネ導入設備容量｜制度開始後の新規認定分の導入容量",
+      "rankingKeys": [
+        "fit-fip-new-approved-installed-capacity"
+      ],
+      "defaultCheckedKeys": [
+        "fit-fip-new-approved-installed-capacity"
+      ]
+    },
+    {
+      "key": "candidate-98-3",
+      "title": "FIT・FIPの再エネ導入設備容量｜旧制度から移行した設備の導入容量",
+      "rankingKeys": [
+        "fit-transition-installed-capacity"
+      ],
+      "defaultCheckedKeys": [
+        "fit-transition-installed-capacity"
+      ]
+    },
+    {
+      "key": "candidate-99-1",
+      "title": "地域のCO₂排出量推計｜地域のCO₂排出量推計・合計",
+      "rankingKeys": [
+        "regional-co2-emissions-estimate"
+      ],
+      "defaultCheckedKeys": [
+        "regional-co2-emissions-estimate"
+      ]
+    },
+    {
+      "key": "candidate-99-2",
+      "title": "地域のCO₂排出量推計｜産業部門のCO₂推計",
+      "rankingKeys": [
+        "regional-industry-co2-emissions-estimate"
+      ],
+      "defaultCheckedKeys": [
+        "regional-industry-co2-emissions-estimate"
+      ]
+    },
+    {
+      "key": "candidate-99-3",
+      "title": "地域のCO₂排出量推計｜業務その他部門のCO₂推計",
+      "rankingKeys": [
+        "regional-business-co2-emissions-estimate"
+      ],
+      "defaultCheckedKeys": [
+        "regional-business-co2-emissions-estimate"
+      ]
+    },
+    {
+      "key": "candidate-99-4",
+      "title": "地域のCO₂排出量推計｜家庭部門のCO₂推計",
+      "rankingKeys": [
+        "regional-household-co2-emissions-estimate"
+      ],
+      "defaultCheckedKeys": [
+        "regional-household-co2-emissions-estimate"
+      ]
+    },
+    {
+      "key": "candidate-99-5",
+      "title": "地域のCO₂排出量推計｜運輸部門のCO₂推計（航空を除く）",
+      "rankingKeys": [
+        "regional-transport-co2-emissions-estimate"
+      ],
+      "defaultCheckedKeys": [
+        "regional-transport-co2-emissions-estimate"
+      ]
+    },
+    {
+      "key": "candidate-99-6",
+      "title": "地域のCO₂排出量推計｜一般廃棄物焼却のCO₂推計",
+      "rankingKeys": [
+        "regional-waste-co2-emissions-estimate"
+      ],
+      "defaultCheckedKeys": [
+        "regional-waste-co2-emissions-estimate"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "key": "regional-energy-overview",
+      "title": "エネルギー消費を都道府県別に見る",
+      "description": "最終エネルギー消費量と1人当たり消費、電力需要、住宅の太陽光設備率を規模と普及に分けて比較します。電源構成は別統計として扱います。2023年度・暫定値の直接利用分（TJ）。非エネルギー利用を含みます。産業は農林水産鉱建設業と製造業の合計です。運輸は家庭乗用車に限り、営業用輸送等を含みません。電力・熱の寄与損失配分後総量やCO₂排出量、別年度の設備容量とは分けて比較します。",
+      "metricGroupKeys": [
+        "regional-energy-indicator-1",
+        "regional-energy-indicator-2",
+        "regional-energy-indicator-3",
+        "regional-energy-indicator-4",
+        "regional-energy-indicator-5",
+        "regional-energy-indicator-6",
+        "regional-energy-indicator-7",
+        "regional-energy-indicator-8"
+      ]
+    },
+    {
+      "key": "candidate-98",
+      "title": "FIT・FIPの再エネ導入設備容量",
+      "description": "2026年3月31日時点に買取が始まっている設備の累積容量です。新規認定分は制度開始後の認定設備で、当年の増設分ではありません。旧制度移行分は制度開始前の設備等を指し、FITからFIPへの移行とは異なります。容量は発電量やCO₂削減量ではありません。",
+      "metricGroupKeys": [
+        "candidate-98-1",
+        "candidate-98-2",
+        "candidate-98-3"
+      ]
+    },
+    {
+      "key": "candidate-99",
+      "title": "地域のCO₂排出量推計",
+      "description": "2023年度の1,741市区町村の推計を県別に集計しています。エネルギー起源と一般廃棄物焼却のCO₂が対象で、森林吸収・航空・その他の温室効果ガスを含みません。活動量による按分推計で、直接測定した排出量や国の排出インベントリとは異なります。原推計で製造品出荷額の秘匿をゼロ扱いする影響も含みます。",
+      "metricGroupKeys": [
+        "candidate-99-1",
+        "candidate-99-2",
+        "candidate-99-3",
+        "candidate-99-4",
+        "candidate-99-5",
+        "candidate-99-6"
+      ]
+    }
+  ],
+  "keywords": [
+    "エネルギー",
+    "電力",
+    "太陽光",
+    "消費"
+  ]
+}

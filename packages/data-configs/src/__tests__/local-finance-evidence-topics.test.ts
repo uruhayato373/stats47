@@ -3,7 +3,9 @@ import { describe, expect, it } from "vitest";
 import { METRICS_REGISTRY } from "../registry";
 
 import { EVIDENCE_SOURCE_CATALOG } from "../theme-catalog/evidence-lenses";
-import { LOCAL_FINANCE_CATALOG } from "../theme-catalog/local-finance";
+import { THEME_CATALOGS } from "../theme-catalog";
+
+const LOCAL_FINANCE_CATALOG = THEME_CATALOGS["local-finance"];
 
 describe("local-finance evidence topics", () => {
   it("歳入基盤と債務負担を別の論点として扱う", () => {

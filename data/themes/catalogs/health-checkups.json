@@ -1,0 +1,323 @@
+{
+  "key": "health-checkups",
+  "title": "生活習慣と健診",
+  "description": "40〜74歳の特定健診受診率、保健指導の実施率、受診者のメタボ該当割合を比較します。受診率の分母は県人口に基づく対象者の推計で、県民全体の健康状態を示す値ではありません。歯科健診は別の対象・分母で表示します。",
+  "category": "welfare",
+  "usage": "theme",
+  "metrics": [
+    {
+      "rankingKey": "specific-health-checkup-participation-rate",
+      "shortLabel": "特定健診受診率（県別推計対象者が分母）",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "厚生労働省「特定健康診査・特定保健指導に関するデータ」ページ 都道府県別一覧 見出し「特定健康診査（対象者数・受診者数・実施率）」",
+        "sourceUrl": "https://www.mhlw.go.jp/stf/newpage_03092.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "厚生労働省はこのページで都道府県別一覧のデータを「特定健康診査（対象者数・受診者数・実施率）」という見出しで整理しており、対象者数と受診者数から実施率（受診率）を都道府県ごとに算出する構造になっている。これはテーマの中心的な問い「40〜74歳の特定健診受診率を都道府県間で比較する」に直接対応する代表指標であり、同一の医療保険者報告データに基づくため都道府県間・年度間の比較可能性も担保されている。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability"
+        ]
+      }
+    },
+    {
+      "rankingKey": "specific-health-guidance-completion-rate",
+      "shortLabel": "特定保健指導実施率",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "厚生労働省「特定健康診査・特定保健指導に関するデータ」ページ 都道府県別一覧 見出し「特定保健指導（対象者数・終了者数・実施率）」",
+        "sourceUrl": "https://www.mhlw.go.jp/stf/newpage_03092.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "同じ都道府県別一覧の中で「特定保健指導（対象者数・終了者数・実施率）」という別見出しが設けられており、受診率（特定健診）とは分母・分子の異なる別の実施率として区別して集計されている。受診後に保健指導まで終了した割合を都道府県別に示すため、受診率だけでは見えない「指導の実行段階」を補う指標として、健診受診率と組み合わせて読む価値がある。",
+        "adoptionCriteria": [
+          "comparability",
+          "complementarity"
+        ]
+      }
+    },
+    {
+      "rankingKey": "metabolic-syndrome-prevalence-among-checkup-recipients",
+      "shortLabel": "特定健診受診者のメタボ該当割合",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "厚生労働省「特定健康診査・特定保健指導に関するデータ」ページ 都道府県別一覧 見出し「メタボリックシンドローム（該当者数・予備群者数・割合）」",
+        "sourceUrl": "https://www.mhlw.go.jp/stf/newpage_03092.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "同ページの都道府県別一覧には受診率・実施率とは別に「メタボリックシンドローム（該当者数・予備群者数・割合）」という項目が設けられており、健診を受診した人の中でメタボ該当者・予備群がどれだけいるかを分けて集計している。これは受診率とは異なり「受診者の健康状態」を映す指標であり、受診率が高い県ほど健康というわけではない点を補足する複合性のある指標である。",
+        "adoptionCriteria": [
+          "complementarity",
+          "comparability"
+        ]
+      }
+    },
+    {
+      "rankingKey": "health-checkup-recipients",
+      "shortLabel": "生活習慣病健康診断受診延人員",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "総務省統計局「地域保健・健康増進事業報告（地域保健・老人保健事業報告）令和２年度地域保健・健康増進事業報告 地域保健編 第１章 総括編」第1表 保健所及び市区町村が実施した健康診断受診延人員",
+        "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0004027740",
+        "surveyedAt": "2026-09-16",
+        "rationale": "この統計は保健所・市区町村が実施する健康診断（生活習慣病health checkupを含む）の受診延人員を都道府県別に把握し、地方自治体の保健施策を評価するための基礎資料とすることを目的として整理されている。特定健診（医療保険者ベース）とは別に、自治体が独自に実施する健診の利用実績を示すため、特定健診受診率を補完する角度からの指標として位置付けられる。",
+        "adoptionCriteria": [
+          "complementarity",
+          "dataQuality"
+        ]
+      }
+    },
+    {
+      "rankingKey": "dental-checkup-persons-per-1000",
+      "shortLabel": "歯科健診受診延人員（人口千人当たり）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "歯科健診受診延人員（人口千人当たり）を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "health-checkup-late-dinner-rate",
+      "shortLabel": "就寝前2時間以内の夕食が週3回以上",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "厚生労働省「第11回NDBオープンデータ」特定健診（質問票）データセット 「標準的な質問票（質問項目１～22）都道府県別性年齢階級別分布」",
+        "sourceUrl": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/0000177221_00017.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "NDBオープンデータは特定健診の標準的な質問票（22項目）の回答結果を都道府県別・性・年齢階級別に集計して公表しており、就寝前2時間以内の夕食といった生活習慣に関する回答もこの枠組みの一部として都道府県比較が可能になっている。これは健診の受診率やメタボ該当割合とは異なり、健診受診者の生活習慣そのものを都道府県別に映す指標であり、章立て「食習慣と栄養」を都道府県別の生活習慣データで補完する役割を持つ。",
+        "adoptionCriteria": [
+          "complementarity",
+          "comparability"
+        ]
+      }
+    },
+    {
+      "rankingKey": "health-checkup-breakfast-skipping-rate",
+      "shortLabel": "朝食を抜くことが週3回以上",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "厚生労働省「標準的な質問票」（別紙３、特定健康診査の質問票）",
+        "sourceUrl": "https://www.mhlw.go.jp/content/10900000/001081581.pdf",
+        "surveyedAt": "2026-09-16",
+        "rationale": "この資料は特定健診の全国共通「標準的な質問票」の質問17として、朝食欠食の定義文言と「はい・いいえ」の二択形式を定めている。NDBオープンデータの朝食欠食割合はこの質問17への回答を都道府県別に集計したものであり、健診受診率やメタボ該当割合と同じ質問票に基づくため、生活習慣と健診の関係を都道府県間で比較する上で他の健診系指標と並ぶ補完的な生活習慣指標になる。",
+        "adoptionCriteria": [
+          "comparability",
+          "complementarity",
+          "dataQuality"
+        ]
+      }
+    },
+    {
+      "rankingKey": "vegetable-intake-male-age-adjusted",
+      "shortLabel": "男性の野菜摂取量（年齢調整）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和6年国民健康・栄養調査結果の概要 第1章「体格及び生活習慣に関する都道府県の状況」（厚生労働省）",
+        "sourceUrl": "https://www.mhlw.go.jp/content/10900000/001603146.pdf",
+        "surveyedAt": "2026-09-16",
+        "rationale": "厚生労働省の結果概要は野菜摂取量を男女別に集計・公表しており、同資料は都道府県別に年齢調整した値で上位群・下位群の間に有意な差があるとしている。男性の値を女性と分けて示すことで、対象を分けて見る食習慣の章で性差の実態を都道府県間比較できる代表的な栄養指標として位置付けられる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability",
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "vegetable-intake-female-age-adjusted",
+      "shortLabel": "女性の野菜摂取量（年齢調整）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和6年国民健康・栄養調査結果の概要 第1章「体格及び生活習慣に関する都道府県の状況」（厚生労働省）",
+        "sourceUrl": "https://www.mhlw.go.jp/content/10900000/001603146.pdf",
+        "surveyedAt": "2026-09-16",
+        "rationale": "同資料は野菜摂取量を男性268.6g、女性250.3gと男女別に明示しており、女性の値は男性より約18g少ない。都道府県別の年齢調整比較でも上位群・下位群に有意差があると述べられており、対象を分けて見る食習慣の章で女性の摂取実態を独立して比較する根拠になる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability",
+          "complementarity"
+        ]
+      }
+    },
+    {
+      "rankingKey": "salt-intake-male-age-adjusted",
+      "shortLabel": "男性の食塩摂取量（年齢調整）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和6年国民健康・栄養調査結果の概要 第1章「体格及び生活習慣に関する都道府県の状況」（厚生労働省）",
+        "sourceUrl": "https://www.mhlw.go.jp/content/10900000/001603146.pdf",
+        "surveyedAt": "2026-09-16",
+        "rationale": "同資料は食塩摂取量の全国平均が男性10.5g、女性8.9gと男女で1.6g以上の差があることを示し、都道府県別の年齢調整比較でも上位群・下位群に有意差があるとしている。男性の食塩摂取量は生活習慣病リスクに直結する指標であり、対象を分けて見る食習慣の章で男女別の地域差を読者に示す根拠になる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability",
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "salt-intake-female-age-adjusted",
+      "shortLabel": "女性の食塩摂取量（年齢調整）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和6年国民健康・栄養調査結果の概要 第1章「体格及び生活習慣に関する都道府県の状況」（厚生労働省）",
+        "sourceUrl": "https://www.mhlw.go.jp/content/10900000/001603146.pdf",
+        "surveyedAt": "2026-09-16",
+        "rationale": "同資料は食塩摂取量の男女別平均（男性10.5g、女性8.9g）を示し、健康日本21（第三次）の目標値7gにはいずれも達していないと位置付けている。女性の値を男性と分けて集計することで、対象を分けて見る食習慣の章で性別ごとの目標未達状況を都道府県間で比較できる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability",
+          "complementarity"
+        ]
+      }
+    }
+  ],
+  "charts": [],
+  "metricGroups": [
+    {
+      "key": "health-checkups-indicator-1",
+      "title": "特定健診受診率（県別推計対象者が分母）",
+      "rankingKeys": [
+        "specific-health-checkup-participation-rate"
+      ],
+      "defaultCheckedKeys": [
+        "specific-health-checkup-participation-rate"
+      ]
+    },
+    {
+      "key": "health-checkups-indicator-2",
+      "title": "特定保健指導実施率",
+      "rankingKeys": [
+        "specific-health-guidance-completion-rate"
+      ],
+      "defaultCheckedKeys": [
+        "specific-health-guidance-completion-rate"
+      ]
+    },
+    {
+      "key": "health-checkups-indicator-3",
+      "title": "特定健診受診者のメタボ該当割合",
+      "rankingKeys": [
+        "metabolic-syndrome-prevalence-among-checkup-recipients"
+      ],
+      "defaultCheckedKeys": [
+        "metabolic-syndrome-prevalence-among-checkup-recipients"
+      ]
+    },
+    {
+      "key": "health-checkups-indicator-4",
+      "title": "生活習慣病健康診断受診延人員",
+      "rankingKeys": [
+        "health-checkup-recipients"
+      ],
+      "defaultCheckedKeys": [
+        "health-checkup-recipients"
+      ]
+    },
+    {
+      "key": "health-checkups-indicator-5",
+      "title": "歯科健診受診延人員（人口千人当たり）",
+      "rankingKeys": [
+        "dental-checkup-persons-per-1000"
+      ],
+      "defaultCheckedKeys": [
+        "dental-checkup-persons-per-1000"
+      ]
+    },
+    {
+      "key": "candidate-69-1",
+      "title": "対象を分けて見る食習慣と栄養｜就寝前2時間以内の夕食が週3回以上",
+      "rankingKeys": [
+        "health-checkup-late-dinner-rate"
+      ],
+      "defaultCheckedKeys": [
+        "health-checkup-late-dinner-rate"
+      ]
+    },
+    {
+      "key": "candidate-69-2",
+      "title": "対象を分けて見る食習慣と栄養｜朝食を抜くことが週3回以上",
+      "rankingKeys": [
+        "health-checkup-breakfast-skipping-rate"
+      ],
+      "defaultCheckedKeys": [
+        "health-checkup-breakfast-skipping-rate"
+      ]
+    },
+    {
+      "key": "candidate-69-3",
+      "title": "対象を分けて見る食習慣と栄養｜男性の野菜摂取量（年齢調整）",
+      "rankingKeys": [
+        "vegetable-intake-male-age-adjusted"
+      ],
+      "defaultCheckedKeys": [
+        "vegetable-intake-male-age-adjusted"
+      ]
+    },
+    {
+      "key": "candidate-69-4",
+      "title": "対象を分けて見る食習慣と栄養｜女性の野菜摂取量（年齢調整）",
+      "rankingKeys": [
+        "vegetable-intake-female-age-adjusted"
+      ],
+      "defaultCheckedKeys": [
+        "vegetable-intake-female-age-adjusted"
+      ]
+    },
+    {
+      "key": "candidate-69-5",
+      "title": "対象を分けて見る食習慣と栄養｜男性の食塩摂取量（年齢調整）",
+      "rankingKeys": [
+        "salt-intake-male-age-adjusted"
+      ],
+      "defaultCheckedKeys": [
+        "salt-intake-male-age-adjusted"
+      ]
+    },
+    {
+      "key": "candidate-69-6",
+      "title": "対象を分けて見る食習慣と栄養｜女性の食塩摂取量（年齢調整）",
+      "rankingKeys": [
+        "salt-intake-female-age-adjusted"
+      ],
+      "defaultCheckedKeys": [
+        "salt-intake-female-age-adjusted"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "key": "health-checkups-overview",
+      "title": "生活習慣と健診を都道府県別に見る",
+      "description": "40〜74歳の特定健診受診率、保健指導の実施率、受診者のメタボ該当割合を比較します。受診率の分母は県人口に基づく対象者の推計で、県民全体の健康状態を示す値ではありません。歯科健診は別の対象・分母で表示します。",
+      "metricGroupKeys": [
+        "health-checkups-indicator-1",
+        "health-checkups-indicator-2",
+        "health-checkups-indicator-3",
+        "health-checkups-indicator-4",
+        "health-checkups-indicator-5"
+      ]
+    },
+    {
+      "key": "candidate-69",
+      "title": "対象を分けて見る食習慣と栄養",
+      "description": "夕食・朝食の割合は2023年度の40〜74歳の健診受診者で、有効回答者が分母です。栄養摂取量は2024年の20歳以上の標本調査を59歳に年齢調整した値で、下の表に95%信頼区間と集計人数を示します。対象の違う両調査の値から因果関係や県民全体の食習慣を判断しません。",
+      "metricGroupKeys": [
+        "candidate-69-1",
+        "candidate-69-2",
+        "candidate-69-3",
+        "candidate-69-4",
+        "candidate-69-5",
+        "candidate-69-6"
+      ],
+      "embeddedSectionKeys": [
+        "nutrition"
+      ]
+    }
+  ],
+  "keywords": [
+    "健診",
+    "生活習慣病",
+    "保健指導",
+    "歯科健診"
+  ]
+}

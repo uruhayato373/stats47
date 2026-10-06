@@ -8,8 +8,7 @@
  *   listTargets   … adoptionCriteria 未記入の非 context 指標と、その metric config の事実 (出典・コード・年)
  *   buildPrompt   … モデルに渡す指示。**モデルはファイルを触らず JSON を返すだけ** (tools は WebFetch/WebSearch のみ)
  *   gateEntries   … 決定的検査 (対象内 / 定型文 / https 到達 / 引用の実在 / コード一致 / 基準の語彙)
- *   applySelections … 通過分だけ書く。インライン定義は <theme>.ts の selection を置換、
- *                    expanded.ts 由来 (tuple) は selection-evidence.ts を丸ごと再生成
+ *   applySelections … 通過分だけ data/themes/catalogs/<theme>.json の該当指標の selection に書く
  *
  * 禁止 (カードの規定): role 変更・rejectedCandidates への追加・gate 未通過の書き込み。
  * role の推奨は report に出すだけで書かない。
@@ -33,8 +32,8 @@ import { SITE_ORIGIN } from "../lib/site-config.cjs";
 
 const __filename = fileURLToPath(import.meta.url);
 export const PROJECT_ROOT = path.resolve(path.dirname(__filename), "..", "..", "..");
-export const CATALOG_DIR = path.join(PROJECT_ROOT, "packages/data-configs/src/theme-catalog");
-export const EVIDENCE_FILE = path.join(CATALOG_DIR, "selection-evidence.ts");
+// テーマ定義の SSOT。1 テーマ 1 ファイル (`<themeKey>.json`)。規約: .claude/rules/theme-catalog-standards.md §1
+export const THEMES_DIR = path.join(PROJECT_ROOT, "data/themes/catalogs");
 export const ESTAT_PULL_DIR = path.join(PROJECT_ROOT, ".local/estat-catalog");
 
 const CRITERIA_LABELS = {
@@ -550,154 +549,23 @@ function orderedSelection(sel) {
   return out;
 }
 
-/** 文字列リテラルを飛ばしながら `{`/`[` の対応する閉じ位置を返す (開き位置 open を含む index)。 */
-export function matchBracket(text, open) {
-  const pairs = { "{": "}", "[": "]" };
-  const close = pairs[text[open]];
-  if (!close) throw new Error(`matchBracket: text[${open}] は括弧でない`);
-  let depth = 0;
-  let quote = null;
-  for (let i = open; i < text.length; i++) {
-    const ch = text[i];
-    if (quote) {
-      if (ch === "\\") i++;
-      else if (ch === quote) quote = null;
-      continue;
-    }
-    if (ch === '"' || ch === "'" || ch === "`") {
-      quote = ch;
-      continue;
-    }
-    if (ch === "{" || ch === "[") depth++;
-    else if (ch === "}" || ch === "]") {
-      depth--;
-      if (depth === 0) return i;
-    }
-  }
-  throw new Error("matchBracket: 閉じ括弧が無い");
-}
-
-function findMetricObject(text, rankingKey) {
-  const re = new RegExp(`(["']?)rankingKey\\1\\s*:\\s*(["'])${rankingKey.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\2`);
-  const m = re.exec(text);
-  if (!m) return null;
-  // metrics[] の要素オブジェクトの開始 `{` を後方に探す (rankingKey は要素の先頭キーなので直前の `{`)
-  const start = text.lastIndexOf("{", m.index);
-  if (start < 0) return null;
-  const end = matchBracket(text, start);
-  return { start, end, keyIndex: m.index, quoted: m[1] === '"' };
-}
-
-function serializeSelection(sel, indent, quoted) {
-  const inner = indent + "  ";
-  const q = (s) => (quoted ? JSON.stringify(s) : `'${String(s).replace(/\\/g, "\\\\").replace(/'/g, "\\'")}'`);
-  const k = (key) => (quoted ? `"${key}"` : key);
-  const lines = [];
-  for (const [key, value] of Object.entries(orderedSelection(sel))) {
-    const v = Array.isArray(value) ? `[${value.map(q).join(", ")}]` : q(value);
-    lines.push(`${inner}${k(key)}: ${v}`);
-  }
-  return `{\n${lines.join(",\n")}\n${indent}}`;
-}
-
 /**
- * `<theme>.ts` のインライン定義の selection を置換する (無ければ role の後に挿入)。
- * 返り値: 新しいテキスト。rankingKey が無ければ null。
+ * 通過した selection を `data/themes/catalogs/<themeKey>.json` の該当指標へ書く (既存の selection は置き換える)。
+ * 整形は 2 スペース・末尾改行 (theme-catalog-json.test.ts が同じ形を要求する)。
+ * dryRun なら書かずに、書く予定の rankingKey だけ返す。テーマに無い rankingKey は書かずに例外にする。
  */
-export function patchInlineSelection(text, rankingKey, selection) {
-  const obj = findMetricObject(text, rankingKey);
-  if (!obj) return null;
-  const body = text.slice(obj.start, obj.end + 1);
-  const selRe = /(\n([ \t]*))(["']?)selection\3\s*:\s*\{/;
-  const sm = selRe.exec(body);
-  if (sm) {
-    const braceAt = obj.start + sm.index + sm[0].length - 1;
-    const closeAt = matchBracket(text, braceAt);
-    const indent = sm[2];
-    return text.slice(0, braceAt) + serializeSelection(selection, indent, obj.quoted) + text.slice(closeAt + 1);
-  }
-  // selection 無し: role 行の直後に挿入 (role が最後のプロパティなら selection を最後にし、末尾カンマは足さない)
-  const roleRe = /(\n([ \t]*))(["']?)role\3\s*:\s*(["'])(primary|secondary|context)\4(,?)/;
-  const rm = roleRe.exec(body);
-  if (!rm) throw new Error(`${rankingKey}: role 行が見つからず selection を挿入できない`);
-  const indent = rm[2];
-  const hadComma = rm[6] === ",";
-  const insertAt = obj.start + rm.index + rm[0].length;
-  const inserted =
-    `${rm[0]}${hadComma ? "" : ","}\n${indent}${obj.quoted ? '"selection"' : "selection"}: ${serializeSelection(selection, indent, obj.quoted)}${hadComma ? "," : ""}`;
-  return text.slice(0, obj.start + rm.index) + inserted + text.slice(insertAt);
-}
-
-const EVIDENCE_HEADER = `import type { MetricSelection } from "./types";
-
-/**
- * 一次資料で裏付けた選定根拠 (selection) の置き場 — \`expanded.ts\` 由来の指標専用。
- *
- * どこに書くかの規則 (混在させない):
- * - 指標が \`packages/data-configs/src/theme-catalog/<theme>.ts\` の \`metrics[]\` に**インラインで**
- *   定義されている → その \`selection\` を直接書く (このファイルには書かない)
- * - 指標が \`expanded.ts\` の spec tuple (31 テーマ) / 既存テーマ拡張 tuple (67 章) で定義されている
- *   → tuple に selection の欄が無いので **ここ** に \`[themeKey][rankingKey]\` で書く。
- *   \`makeCatalog\` / \`extensionMetric\` が定型 selection より優先して読む
- *
- * ★このファイルは \`.claude/scripts/themes/selection-backfill.mjs apply\` が丸ごと再生成する
- *   (JSON 形式の TS)。手で書く場合も同じ形を保つ。規約: \`.claude/rules/theme-catalog-standards.md\` §4
- */
-export const SELECTION_EVIDENCE: Record<string, Record<string, MetricSelection>> = `;
-
-/** selection-evidence.ts を JSON として読む (生成物なので `= {…};` の形を前提にする)。 */
-export function readEvidenceFile(file = EVIDENCE_FILE) {
-  if (!fs.existsSync(file)) return {};
-  const text = fs.readFileSync(file, "utf8");
-  const m = /=\s*(\{[\s\S]*\});\s*$/.exec(text);
-  if (!m) throw new Error(`${file}: 生成形式 (= {…};) でない。手編集で壊れている`);
-  return JSON.parse(m[1]);
-}
-
-export function serializeEvidenceFile(evidence) {
-  const sorted = {};
-  for (const theme of Object.keys(evidence).sort()) {
-    sorted[theme] = {};
-    for (const key of Object.keys(evidence[theme]).sort()) sorted[theme][key] = orderedSelection(evidence[theme][key]);
-  }
-  return `${EVIDENCE_HEADER}${JSON.stringify(sorted, null, 2)};\n`;
-}
-
-/** インライン定義か (= <theme>.ts に rankingKey がある) の判定。 */
-export function isInlineMetric(themeKey, rankingKey, catalogDir = CATALOG_DIR) {
-  const file = path.join(catalogDir, `${themeKey}.ts`);
-  if (!fs.existsSync(file)) return false;
-  return findMetricObject(fs.readFileSync(file, "utf8"), rankingKey) !== null;
-}
-
-/**
- * 通過した selection を書く。インラインは <theme>.ts を置換、それ以外は selection-evidence.ts を再生成。
- * dryRun なら書かずに配置先だけ返す。
- */
-export function applySelections(themeKey, selections, { catalogDir = CATALOG_DIR, dryRun = false } = {}) {
-  const inline = [];
-  const evidence = [];
-  const themeFile = path.join(catalogDir, `${themeKey}.ts`);
-  let themeText = fs.existsSync(themeFile) ? fs.readFileSync(themeFile, "utf8") : null;
-  const evidenceFile = path.join(catalogDir, "selection-evidence.ts");
-  const evidenceMap = readEvidenceFile(evidenceFile);
-
+export function applySelections(themeKey, selections, { themesDir = THEMES_DIR, dryRun = false } = {}) {
+  const file = path.join(themesDir, `${themeKey}.json`);
+  const catalog = JSON.parse(fs.readFileSync(file, "utf8"));
+  const written = [];
   for (const [rankingKey, selection] of Object.entries(selections)) {
-    const patched = themeText ? patchInlineSelection(themeText, rankingKey, selection) : null;
-    if (patched) {
-      themeText = patched;
-      inline.push(rankingKey);
-    } else {
-      evidenceMap[themeKey] ??= {};
-      evidenceMap[themeKey][rankingKey] = orderedSelection(selection);
-      evidence.push(rankingKey);
-    }
+    const metric = catalog.metrics.find((entry) => entry.rankingKey === rankingKey);
+    if (!metric) throw new Error(`${themeKey}: ${rankingKey} は data/themes/catalogs/${themeKey}.json の metrics に無い`);
+    metric.selection = orderedSelection(selection);
+    written.push(rankingKey);
   }
-  if (!dryRun) {
-    if (inline.length > 0) fs.writeFileSync(themeFile, themeText);
-    if (evidence.length > 0) fs.writeFileSync(evidenceFile, serializeEvidenceFile(evidenceMap));
-  }
-  return { inline, evidence };
+  if (!dryRun && written.length > 0) fs.writeFileSync(file, `${JSON.stringify(catalog, null, 2)}\n`);
+  return written;
 }
 
 // ---------------------------------------------------------------------------

@@ -3,8 +3,7 @@
 //
 // 固定したいこと:
 //   1. gate は「捏造 (引用不在)・定型文・コード誤記・全基準列挙・対象外・重複」を落とし、通過分だけ返す
-//   2. writer はインライン定義の selection だけを置換し、他のフィールド (role 等) を触らない
-//   3. expanded.ts 由来は selection-evidence.ts の生成形式で読み書きできる (round-trip)
+//   2. writer は data/themes/catalogs/<theme>.json の該当指標の selection だけを書き、他のフィールド (role 等) を触らない
 //   4. prompt に metric の事実 (statsDataId / cdCat01 / 分類名) と禁止定型文が載る
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
@@ -16,10 +15,7 @@ import {
   htmlToText,
   listTargets,
   normalizeForQuote,
-  patchInlineSelection,
   quoteMatch,
-  readEvidenceFile,
-  serializeEvidenceFile,
 } from "../selection-backfill-core.mjs";
 import fs from "node:fs";
 import os from "node:os";
@@ -187,37 +183,32 @@ describe("normalizeForQuote", () => {
   });
 });
 
-const INLINE_FIXTURE = `import type { ThemeCatalog } from "./types";
-
-export const TEST_CATALOG: ThemeCatalog = {
-  "key": "test-theme",
-  "metrics": [
+// data/themes/catalogs/<theme>.json と同じ形 (2 スペース・末尾改行)
+const THEME_FIXTURE = {
+  key: "test-theme",
+  metrics: [
     {
-      "rankingKey": "ratio-65-plus",
-      "shortLabel": "高齢化率",
-      "role": "primary",
-      "selection": {
-        "proposedBy": "全テーマ構成監査",
-        "surveyedAt": "2026-09-08",
-        "rationale": "高齢化率は主問に直接答える見出し指標として残す。"
-      }
+      rankingKey: "ratio-65-plus",
+      shortLabel: "高齢化率",
+      role: "primary",
+      selection: {
+        proposedBy: "全テーマ構成監査",
+        surveyedAt: "2026-09-08",
+        rationale: "高齢化率は主問に直接答える見出し指標として残す。",
+      },
     },
-    {
-      "rankingKey": "no-selection-yet",
-      "shortLabel": "未記入",
-      "role": "secondary"
-    },
-    {
-      "rankingKey": "aging-index",
-      "shortLabel": "老年化指数",
-      "role": "context",
-      "selection": { "proposedBy": "x", "surveyedAt": "2026-09-08", "rationale": "括弧 } を含む文字列 { でも壊れない" }
-    }
+    { rankingKey: "no-selection-yet", shortLabel: "未記入", role: "secondary" },
+    { rankingKey: "aging-index", shortLabel: "老年化指数", role: "context" },
   ],
-  "charts": [],
-  "rejectedCandidates": [{ "rankingKey": "zzz", "reason": "r" }]
+  charts: [],
+  rejectedCandidates: [{ rankingKey: "zzz", reason: "r" }],
 };
-`;
+
+function writeFixture() {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "sel-apply-"));
+  fs.writeFileSync(path.join(dir, "test-theme.json"), `${JSON.stringify(THEME_FIXTURE, null, 2)}\n`);
+  return dir;
+}
 
 const SEL = {
   proposedBy: "令和7年版 高齢社会白書",
@@ -227,64 +218,40 @@ const SEL = {
   adoptionCriteria: ["representativeness"],
 };
 
-describe("patchInlineSelection", () => {
-  it("該当 metric の selection だけを置換し、role / 他 metric / rejectedCandidates は不変", () => {
-    const out = patchInlineSelection(INLINE_FIXTURE, "ratio-65-plus", SEL);
-    assert.match(out, /"rankingKey": "ratio-65-plus",\n\s+"shortLabel": "高齢化率",\n\s+"role": "primary",\n\s+"selection": \{\n\s+"proposedBy": "令和7年版 高齢社会白書",\n\s+"sourceUrl"/);
-    assert.ok(out.includes('"adoptionCriteria": ["representativeness"]'));
-    assert.ok(!out.includes("全テーマ構成監査"));
-    // 触っていない部分は byte 一致
-    const tail = (s) => s.slice(s.indexOf('"rankingKey": "no-selection-yet"'));
-    assert.equal(tail(out), tail(INLINE_FIXTURE));
-    assert.equal(out.indexOf("rejectedCandidates") > 0, true);
+describe("applySelections (data/themes/catalogs の JSON へ書く)", () => {
+  it("該当指標の selection だけを置換し、role・他の指標・rejectedCandidates は変えない", () => {
+    const dir = writeFixture();
+    const written = applySelections("test-theme", { "ratio-65-plus": SEL }, { themesDir: dir });
+    assert.deepEqual(written, ["ratio-65-plus"]);
+    const raw = fs.readFileSync(path.join(dir, "test-theme.json"), "utf8");
+    const out = JSON.parse(raw);
+    assert.deepEqual(out.metrics[0], { rankingKey: "ratio-65-plus", shortLabel: "高齢化率", role: "primary", selection: SEL });
+    assert.deepEqual(out.metrics.slice(1), THEME_FIXTURE.metrics.slice(1));
+    assert.deepEqual(out.rejectedCandidates, THEME_FIXTURE.rejectedCandidates);
+    assert.equal(raw, `${JSON.stringify(out, null, 2)}\n`, "整形は 2 スペース・末尾改行");
   });
 
-  it("selection が無い metric には role の直後に挿入する", () => {
-    const out = patchInlineSelection(INLINE_FIXTURE, "no-selection-yet", SEL);
-    assert.match(out, /"role": "secondary",\n\s+"selection": \{\n\s+"proposedBy": "令和7年版 高齢社会白書"/);
-    assert.ok(out.includes('"rationale": "高齢化率は主問に直接答える見出し指標として残す。"'), "他 metric の selection は不変");
+  it("selection が無い指標には足し、項目は決まった順に並べる", () => {
+    const dir = writeFixture();
+    const shuffled = { adoptionCriteria: SEL.adoptionCriteria, rationale: SEL.rationale, proposedBy: SEL.proposedBy, surveyedAt: SEL.surveyedAt, sourceUrl: SEL.sourceUrl };
+    applySelections("test-theme", { "no-selection-yet": shuffled }, { themesDir: dir });
+    const out = JSON.parse(fs.readFileSync(path.join(dir, "test-theme.json"), "utf8"));
+    assert.deepEqual(Object.keys(out.metrics[1].selection), ["proposedBy", "sourceUrl", "surveyedAt", "rationale", "adoptionCriteria"]);
+    assert.equal(out.metrics[0].selection.proposedBy, "全テーマ構成監査", "他の指標の selection は不変");
   });
 
-  it("文字列内の括弧に惑わされず context 指標も置換できる", () => {
-    const out = patchInlineSelection(INLINE_FIXTURE, "aging-index", SEL);
-    assert.ok(!out.includes("括弧 } を含む"));
-    assert.ok(out.includes('"rejectedCandidates": [{ "rankingKey": "zzz", "reason": "r" }]'));
-  });
-
-  it("存在しない rankingKey は null", () => {
-    assert.equal(patchInlineSelection(INLINE_FIXTURE, "nope", SEL), null);
-  });
-});
-
-describe("selection-evidence.ts の生成形式", () => {
-  it("serialize → read で round-trip し、テーマ・キーは sort される", () => {
-    const text = serializeEvidenceFile({ "b-theme": { "k2": SEL, "k1": { ...SEL, readerQuestion: "q" } }, "a-theme": { x: SEL } });
-    const dir = fs.mkdtempSync(path.join(os.tmpdir(), "sel-ev-"));
-    const file = path.join(dir, "selection-evidence.ts");
-    fs.writeFileSync(file, text);
-    const back = readEvidenceFile(file);
-    assert.deepEqual(Object.keys(back), ["a-theme", "b-theme"]);
-    assert.deepEqual(Object.keys(back["b-theme"]), ["k1", "k2"]);
-    assert.equal(back["b-theme"].k1.readerQuestion, "q");
-    assert.ok(text.startsWith('import type { MetricSelection } from "./types";'));
-  });
-
-  it("applySelections はインラインがあれば <theme>.ts、無ければ selection-evidence.ts に振り分ける", () => {
-    const dir = fs.mkdtempSync(path.join(os.tmpdir(), "sel-apply-"));
-    fs.writeFileSync(path.join(dir, "test-theme.ts"), INLINE_FIXTURE);
-    fs.writeFileSync(path.join(dir, "selection-evidence.ts"), serializeEvidenceFile({}));
-    const written = applySelections("test-theme", { "ratio-65-plus": SEL, "from-expanded-tuple": SEL }, { catalogDir: dir });
-    assert.deepEqual(written, { inline: ["ratio-65-plus"], evidence: ["from-expanded-tuple"] });
-    assert.ok(fs.readFileSync(path.join(dir, "test-theme.ts"), "utf8").includes("令和7年版 高齢社会白書"));
-    assert.deepEqual(Object.keys(readEvidenceFile(path.join(dir, "selection-evidence.ts"))["test-theme"]), ["from-expanded-tuple"]);
+  it("テーマに無い rankingKey は書かずに例外にする", () => {
+    const dir = writeFixture();
+    const before = fs.readFileSync(path.join(dir, "test-theme.json"), "utf8");
+    assert.throws(() => applySelections("test-theme", { nope: SEL }, { themesDir: dir }), /nope/);
+    assert.equal(fs.readFileSync(path.join(dir, "test-theme.json"), "utf8"), before);
   });
 
   it("dryRun は書かない", () => {
-    const dir = fs.mkdtempSync(path.join(os.tmpdir(), "sel-dry-"));
-    fs.writeFileSync(path.join(dir, "test-theme.ts"), INLINE_FIXTURE);
-    applySelections("test-theme", { "ratio-65-plus": SEL }, { catalogDir: dir, dryRun: true });
-    assert.equal(fs.readFileSync(path.join(dir, "test-theme.ts"), "utf8"), INLINE_FIXTURE);
-    assert.equal(fs.existsSync(path.join(dir, "selection-evidence.ts")), false);
+    const dir = writeFixture();
+    const before = fs.readFileSync(path.join(dir, "test-theme.json"), "utf8");
+    assert.deepEqual(applySelections("test-theme", { "ratio-65-plus": SEL }, { themesDir: dir, dryRun: true }), ["ratio-65-plus"]);
+    assert.equal(fs.readFileSync(path.join(dir, "test-theme.json"), "utf8"), before);
   });
 });
 

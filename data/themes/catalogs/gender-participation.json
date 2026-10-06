@@ -1,0 +1,195 @@
+{
+  "key": "gender-participation",
+  "title": "地域の男女共同参画",
+  "description": "男女の賃金・労働力人口比率に加え、15歳以上の男女の家事時間を比較します。家事時間は行わなかった人を含む1日当たりの総平均で、夫婦に限定した値ではありません。管理職は原則2025年4月1日、県議会議員は2024年12月31日現在。管理職は都道府県職員の部局長・次長・課長相当職で、教職員を除きます。議員の分母は定数ではなく現員数です。政令市・市区町村は両系列から除き、各対象の公表割合を比較します。",
+  "category": "economy",
+  "usage": "theme",
+  "metrics": [
+    {
+      "rankingKey": "gender-wage-gap",
+      "shortLabel": "男女間賃金比（女性／男性）",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "男女間賃金比（女性／男性）を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "labor-force-population-ratio-woman",
+      "shortLabel": "女性労働力人口比率",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "女性労働力人口比率を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "labor-force-population-ratio-man",
+      "shortLabel": "男性労働力人口比率",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "男性労働力人口比率を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "housework-avg-time-female",
+      "shortLabel": "女性の家事時間（15歳以上・1日平均）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "女性の家事時間（15歳以上・1日平均）を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "housework-avg-time-male",
+      "shortLabel": "男性の家事時間（15歳以上・1日平均）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "男性の家事時間（15歳以上・1日平均）を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "female-part-time-hourly-wage",
+      "shortLabel": "女性パートタイム時給",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "女性パートタイム時給を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "prefectural-manager-female-share",
+      "shortLabel": "都道府県の管理職に占める女性の割合",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "都道府県の管理職に占める女性の割合を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "prefectural-assembly-female-share",
+      "shortLabel": "都道府県議会議員に占める女性の割合",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "都道府県議会議員に占める女性の割合を都道府県別の実値として比較する。"
+      }
+    }
+  ],
+  "charts": [],
+  "metricGroups": [
+    {
+      "key": "gender-participation-indicator-1",
+      "title": "男女間賃金比（女性／男性）",
+      "rankingKeys": [
+        "gender-wage-gap"
+      ],
+      "defaultCheckedKeys": [
+        "gender-wage-gap"
+      ]
+    },
+    {
+      "key": "gender-participation-indicator-2",
+      "title": "女性労働力人口比率",
+      "rankingKeys": [
+        "labor-force-population-ratio-woman"
+      ],
+      "defaultCheckedKeys": [
+        "labor-force-population-ratio-woman"
+      ]
+    },
+    {
+      "key": "gender-participation-indicator-3",
+      "title": "男性労働力人口比率",
+      "rankingKeys": [
+        "labor-force-population-ratio-man"
+      ],
+      "defaultCheckedKeys": [
+        "labor-force-population-ratio-man"
+      ]
+    },
+    {
+      "key": "gender-participation-indicator-4",
+      "title": "女性の家事時間（15歳以上・1日平均）",
+      "rankingKeys": [
+        "housework-avg-time-female"
+      ],
+      "defaultCheckedKeys": [
+        "housework-avg-time-female"
+      ]
+    },
+    {
+      "key": "gender-participation-indicator-5",
+      "title": "男性の家事時間（15歳以上・1日平均）",
+      "rankingKeys": [
+        "housework-avg-time-male"
+      ],
+      "defaultCheckedKeys": [
+        "housework-avg-time-male"
+      ]
+    },
+    {
+      "key": "gender-participation-indicator-6",
+      "title": "女性パートタイム時給",
+      "rankingKeys": [
+        "female-part-time-hourly-wage"
+      ],
+      "defaultCheckedKeys": [
+        "female-part-time-hourly-wage"
+      ]
+    },
+    {
+      "key": "gender-participation-indicator-7",
+      "title": "都道府県の管理職に占める女性の割合",
+      "rankingKeys": [
+        "prefectural-manager-female-share"
+      ],
+      "defaultCheckedKeys": [
+        "prefectural-manager-female-share"
+      ]
+    },
+    {
+      "key": "gender-participation-indicator-8",
+      "title": "都道府県議会議員に占める女性の割合",
+      "rankingKeys": [
+        "prefectural-assembly-female-share"
+      ],
+      "defaultCheckedKeys": [
+        "prefectural-assembly-female-share"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "key": "gender-participation-overview",
+      "title": "地域の男女共同参画を都道府県別に見る",
+      "description": "男女の賃金・労働力人口比率に加え、15歳以上の男女の家事時間を比較します。家事時間は行わなかった人を含む1日当たりの総平均で、夫婦に限定した値ではありません。管理職は原則2025年4月1日、県議会議員は2024年12月31日現在。管理職は都道府県職員の部局長・次長・課長相当職で、教職員を除きます。議員の分母は定数ではなく現員数です。政令市・市区町村は両系列から除き、各対象の公表割合を比較します。",
+      "metricGroupKeys": [
+        "gender-participation-indicator-1",
+        "gender-participation-indicator-2",
+        "gender-participation-indicator-3",
+        "gender-participation-indicator-4",
+        "gender-participation-indicator-5",
+        "gender-participation-indicator-6",
+        "gender-participation-indicator-7",
+        "gender-participation-indicator-8"
+      ]
+    }
+  ],
+  "keywords": [
+    "男女共同参画",
+    "女性就業",
+    "賃金格差",
+    "家事時間"
+  ]
+}

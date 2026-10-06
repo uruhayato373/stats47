@@ -28,11 +28,13 @@ export function classifyPrQualityPaths(inputPaths) {
       CODE_EXTENSION.test(path) &&
       !matchesAny(path, [/^docs\//, /^\.claude\/(?:state|todo)\//])
   );
-  const packageSource = paths.some((path) => /^packages\/[^/]+\//.test(path));
+  // data/themes は @stats47/data-configs が import するテーマ定義 (表示の SSOT) なので、data-configs の変更と同じ扱いにする
+  const themeDefinitions = paths.some((path) => /^data\/themes\//.test(path));
+  const packageSource = themeDefinitions || paths.some((path) => /^packages\/[^/]+\//.test(path));
   const webSource = paths.some((path) => /^apps\/web\//.test(path));
   const adminSource = paths.some((path) => /^apps\/admin\//.test(path));
   const remotionSource = paths.some((path) => /^apps\/remotion\//.test(path));
-  const sharedAdmin = paths.some((path) =>
+  const sharedAdmin = themeDefinitions || paths.some((path) =>
     /^packages\/(?:components|data-configs|types)\//.test(path)
   );
   const sharedRemotion = paths.some((path) =>

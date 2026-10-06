@@ -1,0 +1,374 @@
+{
+  "key": "sports-participation",
+  "title": "スポーツ施設と利用",
+  "description": "スポーツの年間行動者率・観覧率と社会体育施設数を参加と供給に分けて比較します。施設数から利用者数は推計しません。",
+  "category": "education",
+  "usage": "theme",
+  "metrics": [
+    {
+      "rankingKey": "sports-annual-participation-rate-10plus",
+      "shortLabel": "スポーツ年間行動者率（10歳以上）",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "令和3年社会生活基本調査 生活行動に関する結果（茨城県版）第3節「スポーツ」（茨城県企画部統計課）",
+        "sourceUrl": "https://www.pref.ibaraki.jp/kikaku/tokei/fukyu/tokei/betsu/syakai/syakaichor3/kodo.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "総務省の社会生活基本調査を基に都道府県（茨城県）が公表したこの資料は、過去1年間にスポーツを行った人の割合を5年前の調査と比較する形で示しており、参加率が全国共通の設問・周期で継続測定される代表指標であることを裏付けている。この定義と経年比較の枠組みは、テーマが問う「スポーツ参加の都道府県差」を数値で捉える土台になる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability",
+          "dataQuality"
+        ],
+        "readerQuestion": "自分の都道府県では何割の人が実際にスポーツをしているか、全国や過去と比べて増えているか減っているか。",
+        "targetReaderOrDecision": "都道府県のスポーツ振興計画担当者や、地域のスポーツ参加状況を把握したい読者。"
+      }
+    },
+    {
+      "rankingKey": "hobby-participation-rate-sports-spectating",
+      "shortLabel": "スポーツ観覧の行動者率",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和3年社会生活基本調査 生活行動に関する結果（茨城県版）第4節「趣味・娯楽」スポーツ観覧の項（茨城県企画部統計課）",
+        "sourceUrl": "https://www.pref.ibaraki.jp/kikaku/tokei/fukyu/tokei/betsu/syakai/syakaichor3/kodo.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "この資料はスポーツ観覧をテレビ・スマートフォン・パソコンでの視聴を除いた「会場での観戦」に限定して定義しており、自らプレーする「行う」スポーツとは異なる需要側の行動を捉えている。この定義の違いにより、施設利用の別側面（観戦需要）を「行う」参加率と切り分けて比較できる。",
+        "adoptionCriteria": [
+          "complementarity",
+          "dataQuality"
+        ],
+        "readerQuestion": "自分の都道府県では、スポーツを会場で観戦する人はどれくらいいるか。",
+        "targetReaderOrDecision": "スタジアムやアリーナ整備を検討する地域スポーツ行政担当者。"
+      }
+    },
+    {
+      "rankingKey": "community-sports-facility-count-per-million",
+      "shortLabel": "社会体育施設数（人口100万人当たり）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "体育・スポーツ施設現況調査 調査の概要（スポーツ庁）",
+        "sourceUrl": "https://www.mext.go.jp/sports/b_menu/toukei/chousa04/shisetsu/gaiyou/1368164.htm",
+        "surveyedAt": "2026-09-16",
+        "rationale": "スポーツ庁のこの調査は、社会体育施設を含む体育・スポーツ施設の設置者別現在数を明らかにし、スポーツ振興施策の基礎データとすることを目的として掲げており、社会体育施設数は都道府県のスポーツ供給基盤を示す代表的な行政データである。テーマが「施設数から利用者数は推計しない」と明示する中で、この指標は参加率と対にして供給側だけを比較する役割を担う。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability",
+          "dataQuality"
+        ],
+        "readerQuestion": "自分の都道府県には人口当たりどれくらい社会体育施設があるか。",
+        "targetReaderOrDecision": "地域のスポーツ施設整備計画を検討する自治体職員。"
+      }
+    },
+    {
+      "rankingKey": "sports-park-count",
+      "shortLabel": "運動公園数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "公園とみどり：都市公園の種類（国土交通省都市局）",
+        "sourceUrl": "https://www.mlit.go.jp/toshi/park/toshi_parkgreen_tk_000138.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "国土交通省のこの解説は、運動公園を都市公園法上の都市基幹公園の一種として、主に運動利用を目的に一定の面積規模で配置される公園と定義しており、社会体育施設（屋内外の体育施設）とは所管・分類が異なる屋外の大規模運動空間であることを示している。この定義の違いにより、同じ供給側指標でも社会体育施設数とは別角度の施設整備状況を比較できる。",
+        "adoptionCriteria": [
+          "complementarity",
+          "dataQuality"
+        ],
+        "readerQuestion": "自分の都道府県にはどれくらい運動公園があるか、社会体育施設とは何が違うか。",
+        "targetReaderOrDecision": "都市公園整備・緑地行政を担当する自治体職員。"
+      }
+    },
+    {
+      "rankingKey": "daily-steps-male-20to64-age-adjusted",
+      "shortLabel": "男性の歩数（20〜64歳・年齢調整）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
+        "surveyedAt": "2026-09-09",
+        "rationale": "男性の歩数（20〜64歳・年齢調整）を既存テーマの独立章へ追加する。"
+      }
+    },
+    {
+      "rankingKey": "daily-steps-female-20to64-age-adjusted",
+      "shortLabel": "女性の歩数（20〜64歳・年齢調整）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
+        "surveyedAt": "2026-09-09",
+        "rationale": "女性の歩数（20〜64歳・年齢調整）を既存テーマの独立章へ追加する。"
+      }
+    },
+    {
+      "rankingKey": "elementary-school-gymnasium-count",
+      "shortLabel": "小学校体育館設置箇所数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "体育・スポーツ施設現況調査（令和6年度）調査の概要（スポーツ庁）",
+        "sourceUrl": "https://www.e-stat.go.jp/stat-search/files?page=1&toukei=00402101&tstat=000001088795",
+        "surveyedAt": "2026-09-16",
+        "rationale": "本調査はスポーツ振興施策の基礎資料として学校体育施設の設置者別現在数を3年周期・都道府県単位で把握することを目的としており、小学校体育館設置箇所数は供給側の代表指標として都道府県間で同一基準の比較が可能である。テーマが「参加と供給を分けて比較する」方針を取る中で、施設数は行動者率・観覧率という参加指標に対する供給側の裏付けとなる。",
+        "adoptionCriteria": [
+          "comparability",
+          "complementarity",
+          "dataQuality"
+        ],
+        "readerQuestion": "自分の住む都道府県には小学校の体育館がどれだけ整備されているか。",
+        "targetReaderOrDecision": "都道府県のスポーツ施設整備状況を把握したい住民・自治体担当者"
+      }
+    },
+    {
+      "rankingKey": "junior-high-school-gymnasium-count",
+      "shortLabel": "中学校体育館設置箇所数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "体育・スポーツ施設現況調査（令和6年度）調査の概要（スポーツ庁）",
+        "sourceUrl": "https://www.e-stat.go.jp/stat-search/files?page=1&toukei=00402101&tstat=000001088795",
+        "surveyedAt": "2026-09-16",
+        "rationale": "同調査は学校段階別に施設の設置数を把握しており、中学校体育館設置箇所数は小学校分と並べることで学校段階間の施設整備差を都道府県別に比較できる。テーマの章立てにある「子どもの体力・運動習慣と学校体育館」において、小学校指標を補完する対の指標として機能する。",
+        "adoptionCriteria": [
+          "comparability",
+          "complementarity",
+          "dataQuality"
+        ],
+        "readerQuestion": "中学校の体育館整備は小学校と比べてどの程度進んでいるか。",
+        "targetReaderOrDecision": "学校施設整備の地域差を確認したい教育委員会・保護者"
+      }
+    },
+    {
+      "rankingKey": "elementary5-fitness-score-male",
+      "shortLabel": "小学5年男子の体力合計点",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和7年度 全国体力・運動能力、運動習慣等調査の結果について（概要）（スポーツ庁）",
+        "sourceUrl": "https://www.mext.go.jp/sports/content/20251217-spt_sseisaku02-000046317_000101.pdf",
+        "surveyedAt": "2026-09-16",
+        "rationale": "スポーツ庁の概要資料は体力合計点を性別・学校段階別に前年度比・コロナ前水準比で継続的に追跡する中心指標として扱っており、悉皆調査であるため都道府県別の比較にも耐えるデータ品質を持つ。テーマの「子どもの体力・運動習慣と学校体育館」の章で、施設整備や運動時間と並べて子どもの体力状況そのものを示す代表指標となる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability",
+          "dataQuality"
+        ],
+        "readerQuestion": "自分の県の小学5年男子の体力は全国的に見てどの水準か。",
+        "targetReaderOrDecision": "子どもの体力向上施策を検討する教育関係者・保護者"
+      }
+    },
+    {
+      "rankingKey": "elementary5-fitness-score-female",
+      "shortLabel": "小学5年女子の体力合計点",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和7年度 全国体力・運動能力、運動習慣等調査の結果について（概要）（スポーツ庁）",
+        "sourceUrl": "https://www.mext.go.jp/sports/content/20251217-spt_sseisaku02-000046317_000101.pdf",
+        "surveyedAt": "2026-09-16",
+        "rationale": "同資料は体力合計点の傾向を男女別に示しており、女子の値を男子と並置することで性別による体力差や地域差を同一基準で比較できる。悉皆調査に基づくため欠損が少なく、テーマの子どもの体力章において男子指標を補完する対の指標として機能する。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability",
+          "complementarity"
+        ],
+        "readerQuestion": "自分の県の小学5年女子の体力は男子と比べてどう違うか。",
+        "targetReaderOrDecision": "男女別の体力差を確認したい学校体育担当者"
+      }
+    },
+    {
+      "rankingKey": "elementary5-weekly-exercise-420min-rate-male",
+      "shortLabel": "小学5年男子の週420分以上運動割合",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和7年度全国体力・運動能力、運動習慣等調査 都道府県別集計（小学校児童）（スポーツ庁）",
+        "sourceUrl": "https://www.mext.go.jp/sports/content/20260113-spt_sseisaku02-000046317_0000001.pdf",
+        "surveyedAt": "2026-09-16",
+        "rationale": "この都道府県別集計は小学校男子について1週間の総運動時間を60分未満・60分以上420分未満・420分以上のカテゴリで都道府県別に集計しており、420分以上の割合は運動習慣が十分に形成されているかを示す行動指標となる。体力合計点が結果指標であるのに対し、本指標は運動習慣という行動面を補完し、テーマの「成人の身体活動と歩数」に対応する子ども版の参加指標として位置付けられる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability",
+          "complementarity"
+        ],
+        "readerQuestion": "自分の県の小学5年男子はどれくらいの割合で週420分以上運動しているか。",
+        "targetReaderOrDecision": "子どもの運動習慣づくり施策を検討する自治体・学校"
+      }
+    },
+    {
+      "rankingKey": "elementary5-weekly-exercise-420min-rate-female",
+      "shortLabel": "小学5年女子の週420分以上運動割合",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和7年度全国体力・運動能力、運動習慣等調査 都道府県別集計（小学校児童）（スポーツ庁）",
+        "sourceUrl": "https://www.mext.go.jp/sports/content/20260113-spt_sseisaku02-000046317_0000001.pdf",
+        "surveyedAt": "2026-09-16",
+        "rationale": "同集計は小学校女子についても男子と同一基準で週420分以上運動する割合を都道府県別に示しており、男子指標と対にすることで性別による運動習慣差を比較できる。体力合計点という結果指標と運動時間という行動を結び付ける補完的な指標として、子どもの体力章で機能する。",
+        "adoptionCriteria": [
+          "comparability",
+          "complementarity",
+          "readerValue"
+        ],
+        "readerQuestion": "自分の県の小学5年女子は男子と比べてどれだけ運動しているか。",
+        "targetReaderOrDecision": "男女別の運動習慣差を把握したい保護者・学校関係者"
+      }
+    }
+  ],
+  "charts": [],
+  "metricGroups": [
+    {
+      "key": "sports-participation-indicator-1",
+      "title": "スポーツ年間行動者率（10歳以上）",
+      "rankingKeys": [
+        "sports-annual-participation-rate-10plus"
+      ],
+      "defaultCheckedKeys": [
+        "sports-annual-participation-rate-10plus"
+      ]
+    },
+    {
+      "key": "sports-participation-indicator-2",
+      "title": "スポーツ観覧の行動者率",
+      "rankingKeys": [
+        "hobby-participation-rate-sports-spectating"
+      ],
+      "defaultCheckedKeys": [
+        "hobby-participation-rate-sports-spectating"
+      ]
+    },
+    {
+      "key": "sports-participation-indicator-3",
+      "title": "社会体育施設数（人口100万人当たり）",
+      "rankingKeys": [
+        "community-sports-facility-count-per-million"
+      ],
+      "defaultCheckedKeys": [
+        "community-sports-facility-count-per-million"
+      ]
+    },
+    {
+      "key": "sports-participation-indicator-4",
+      "title": "運動公園数",
+      "rankingKeys": [
+        "sports-park-count"
+      ],
+      "defaultCheckedKeys": [
+        "sports-park-count"
+      ]
+    },
+    {
+      "key": "candidate-70-1",
+      "title": "成人の身体活動と歩数｜男性の歩数（20〜64歳・年齢調整）",
+      "rankingKeys": [
+        "daily-steps-male-20to64-age-adjusted"
+      ],
+      "defaultCheckedKeys": [
+        "daily-steps-male-20to64-age-adjusted"
+      ]
+    },
+    {
+      "key": "candidate-70-2",
+      "title": "成人の身体活動と歩数｜女性の歩数（20〜64歳・年齢調整）",
+      "rankingKeys": [
+        "daily-steps-female-20to64-age-adjusted"
+      ],
+      "defaultCheckedKeys": [
+        "daily-steps-female-20to64-age-adjusted"
+      ]
+    },
+    {
+      "key": "candidate-118-1",
+      "title": "子どもの体力・運動習慣と学校体育館｜小学校体育館設置箇所数",
+      "rankingKeys": [
+        "elementary-school-gymnasium-count"
+      ],
+      "defaultCheckedKeys": [
+        "elementary-school-gymnasium-count"
+      ]
+    },
+    {
+      "key": "candidate-118-2",
+      "title": "子どもの体力・運動習慣と学校体育館｜中学校体育館設置箇所数",
+      "rankingKeys": [
+        "junior-high-school-gymnasium-count"
+      ],
+      "defaultCheckedKeys": [
+        "junior-high-school-gymnasium-count"
+      ]
+    },
+    {
+      "key": "candidate-118-3",
+      "title": "子どもの体力・運動習慣と学校体育館｜小学5年男子の体力合計点",
+      "rankingKeys": [
+        "elementary5-fitness-score-male"
+      ],
+      "defaultCheckedKeys": [
+        "elementary5-fitness-score-male"
+      ]
+    },
+    {
+      "key": "candidate-118-4",
+      "title": "子どもの体力・運動習慣と学校体育館｜小学5年女子の体力合計点",
+      "rankingKeys": [
+        "elementary5-fitness-score-female"
+      ],
+      "defaultCheckedKeys": [
+        "elementary5-fitness-score-female"
+      ]
+    },
+    {
+      "key": "candidate-118-5",
+      "title": "子どもの体力・運動習慣と学校体育館｜小学5年男子の週420分以上運動割合",
+      "rankingKeys": [
+        "elementary5-weekly-exercise-420min-rate-male"
+      ],
+      "defaultCheckedKeys": [
+        "elementary5-weekly-exercise-420min-rate-male"
+      ]
+    },
+    {
+      "key": "candidate-118-6",
+      "title": "子どもの体力・運動習慣と学校体育館｜小学5年女子の週420分以上運動割合",
+      "rankingKeys": [
+        "elementary5-weekly-exercise-420min-rate-female"
+      ],
+      "defaultCheckedKeys": [
+        "elementary5-weekly-exercise-420min-rate-female"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "key": "sports-participation-overview",
+      "title": "スポーツ施設と利用を都道府県別に見る",
+      "description": "スポーツの年間行動者率・観覧率と社会体育施設数を参加と供給に分けて比較します。施設数から利用者数は推計しません。",
+      "metricGroupKeys": [
+        "sports-participation-indicator-1",
+        "sports-participation-indicator-2",
+        "sports-participation-indicator-3",
+        "sports-participation-indicator-4"
+      ]
+    },
+    {
+      "key": "candidate-70",
+      "title": "成人の身体活動と歩数",
+      "description": "2024年国民健康・栄養調査の20〜64歳の1日歩数を、男女とも46歳に年齢調整して比較します。95%信頼区間と集計人数を併記し、順位差を有意差とみなしません。石川県は能登半島地震の影響で8地区です。10歳以上の年間運動参加率や公立小学5年生の体力とは母集団を分けて読みます。",
+      "metricGroupKeys": [
+        "candidate-70-1",
+        "candidate-70-2"
+      ],
+      "embeddedSectionKeys": [
+        "physical-activity"
+      ]
+    },
+    {
+      "key": "candidate-118",
+      "title": "子どもの体力・運動習慣と学校体育館",
+      "description": "公立小学5年生の体力・運動習慣に加え、2024年10月1日現在の小中学校の体育館設置箇所数を比較します。施設は公私立の学校が対象で国立大学附属学校を除き、公立小5の体力調査とは対象・時点が異なります。保有学校数や整備率ではなく、回答施設の設置箇所数です。市町村教育委員会の回答率は97.5%で、未回答は補完していません。",
+      "metricGroupKeys": [
+        "candidate-118-1",
+        "candidate-118-2",
+        "candidate-118-3",
+        "candidate-118-4",
+        "candidate-118-5",
+        "candidate-118-6"
+      ]
+    }
+  ],
+  "keywords": [
+    "スポーツ",
+    "施設",
+    "運動",
+    "観覧"
+  ]
+}
