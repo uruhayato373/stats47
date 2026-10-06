@@ -1,7 +1,7 @@
 ---
 type: theme-catalog-review
 date: 2026-07-13
-status: ready-after-scope-series-and-coverage-audit
+status: superseded
 theme: fishery-marine
 tags: [theme-catalog, fishery, aquaculture, inland-fishery, fishery-census, fishing-ports]
 ---
@@ -247,3 +247,5 @@ npm run test:run --workspace apps/web
 ## 採用決定
 
 **PR-0のscope・系列・coverage監査後に実装可能。海面漁業、海面養殖、内水面を分離し、生産量・産出額・担い手・基盤の順に構成する。合計と内数、旧系列と新系列、対象外と0を厳密に区別し、2015年魚種データと2006年漁港GISは長期・空間contextへ限定する。**
+
+**2026-10-06 追記: 2026-10-06 版に置き換え。** 章とカードの導入後の構成を前提にした提案は `2026-10-06-theme-fishery-marine.md`。本書の対象範囲の論点はそちらへ引き継いだ。
