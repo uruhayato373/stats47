@@ -363,8 +363,41 @@ function genLineChartSvg(data) {
     unit,
     xKey: 'yearCode',
     seriesKey: 'areaCode',
-    yLabel: unit ? `${title}（${unit}）` : title,
+    yLabel: data.yLabel ?? (unit ? `${title}（${unit}）` : title),
     legendPosition: series.length > 1 ? 'bottom' : 'bottom',
+  });
+}
+
+/**
+ * stacked-bar: { title, subtitle?, unit?, normalized?, horizontal?, series:[{label, data:[{year, value}]}] }
+ * → svg-builder generateStackedBarSvg。series = 積み上げる区分、data[].year = 棒 (グループ)。
+ * line と同じ series 形式なので、時系列の内訳をそのまま渡せる。
+ */
+function genStackedBarSvg(data) {
+  const series = (data.series || []).filter(
+    (s) => Array.isArray(s.data) && s.data.length
+  );
+  if (!series.length) return `<!-- empty stacked data -->`;
+  const unit = data.unit ?? '';
+  const statsData = series.flatMap((s, si) =>
+    s.data.map((pt) => ({
+      metricKey: 'value',
+      areaCode: String(si + 1).padStart(2, '0'),
+      areaName: s.label || `区分${si + 1}`,
+      yearCode: String(pt.year ?? pt.x ?? ''),
+      yearName: String(pt.year ?? pt.x ?? ''),
+      value: typeof pt.value === 'number' ? pt.value : null,
+      unit,
+    }))
+  );
+  return generateStackedBarSvg(statsData, {
+    title: data.title ?? '内訳',
+    subtitle: data.subtitle,
+    unit,
+    xKey: 'yearCode',
+    seriesKey: 'areaCode',
+    normalized: data.normalized === true,
+    horizontal: data.horizontal === true,
   });
 }
 
@@ -743,6 +776,8 @@ for (const { file, type, parsed } of jsonMeta) {
     svg = genScatterChartSvg(parsed);
   } else if (type === 'summary') {
     svg = genFindingsCardSvg(parsed);
+  } else if (type === 'stacked-bar') {
+    svg = genStackedBarSvg(parsed);
   } else if (type) {
     warn(
       `chart type "${type}" not implemented for ${file} — emitting stub SVG`

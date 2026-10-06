@@ -321,6 +321,18 @@ updated: 2026-10-06
 - **停止条件**: Phase 1 のアカウント照合で `stats47` と一致しなければ 1 本も投稿しない。
 - **完了条件**: 2 本が note で公開され、`note-published-urls.json` に 2 件の URL があり、無料部分と有料部分の境界が意図どおりであることを screenshot で確認済み。公開日から 4 週間後 (公開日 + 28 日) に 2 本の売上を note ダッシュボードで比べる予定を `improvements.md` 側へ引き渡す。
 
+### [BLOG-TEXT-CHART-CONFLICT-20261006] 図を一次資料から作り直した 3 記事で、図と食い違う本文を直して再公開する
+タグ: [コンテンツ] [種類:不具合] [実行:対話] [起票:2026-10-06] [領域:サイト]
+
+- **経緯 (2026-10-06)**: `alcohol-prefecture-map` / `automotive-industry-transformation-map` / `birth-death-gap-decline` の図を R2・国税庁「酒のしおり」から作り直し、図だけ R2 に反映した (`regenerate-blog-svgs.yml` の source-repair → all)。blog-critic の差分審査で、図と同じ節の本文に図と食い違う記述が見つかった。本文は旧来のゲート負債 (下記) で再公開できず、まだ直っていない。
+- **直す本文 (critic BLOCK/MAJOR・数値は確認済み)**:
+  - automotive「愛知県だけが他県の3倍近い水準にある構図は、2005年以降一貫して変わっていません」→ 2 位との比は 2005 年度 2.0 倍・2023 年度 2.9 倍。「差は広がっている」に直す。NOTE の「構成比が約40%」は散布図の時点の値であり、2023 年度の 58 兆円には当てはまらないと書く。年と年度の表記を「年度」にそろえる。
+  - birth-death「東京都は微増〜横ばい」→ 2024 年は −3.7‰ の自然減 (沖縄に次いで 2 番目に小さい)。「転入超過が補う」は社会増減と自然増減の取り違え。図は 2024 年なので節の年もそろえる。
+  - alcohol「焼酎9.4%」→ 一次資料からの計算は 9.45% で 9.5% (minor)。
+- **再公開を止めている負債 (`quality-gate.mjs`)**: automotive = 手書きの「データ出典」節・県名直後の括弧数値 12 件・他 4 図の data JSON 欠落 / alcohol = 内部リンク 0・括弧数値 1 件・他 3 図の data JSON 欠落 / birth-death = 合計特殊出生率の図の data JSON 欠落。
+- **次**: 3 記事を `/brushup-blog --target article` で是正し、critic PASS 後に公開する。記事詳細は prerender なので本文の反映には再デプロイが要る (`nextjs-ssg-preservation.md`)。
+- **完了条件**: 3 記事の本番本文に上記の食い違いが無く、`quality-gate.mjs` が blocker 0。
+
 ### [BLOG-SVG-NODATA-20261006] 元データが無く作り直せないブログ SVG 3 枚の文字はみ出し・重なりを手で直す
 タグ: [UI・UX] [種類:不具合] [実行:対話] [起票:2026-10-06] [領域:サイト]
 
