@@ -5,10 +5,10 @@
  *   YYYY-Www（対象週。省略時は今日 JST の週）
  *   --source gsc|ga4|adsense|all（デフォルト: all）
  *
- * 入力: .claude/skills/analytics/{gsc,ga4,adsense}-improvement/reference/snapshots/<YYYY-Www>/*
- * 出力: .claude/state/metrics/{gsc,ga4,adsense}/history.csv
- *       .claude/state/metrics/{gsc,ga4}/history-finalized7d.csv （確定7日 KPI・非重複系列）
- *       .claude/state/metrics/{gsc,ga4,adsense}/LATEST.md
+ * 入力: data/{gsc,ga4,adsense}/snapshots/<YYYY-Www>/*
+ * 出力: data/{gsc,ga4,adsense}/history.csv
+ *       data/{gsc,ga4}/history-finalized7d.csv （確定7日 KPI・非重複系列）
+ *       data/{gsc,ga4,adsense}/LATEST.md
  *
  * 期間契約 (.claude/skills/analytics/search-growth/reference/weekly-cycle-contract.md):
  * - KPI/WoW は summary.json (finalized7d + 直前の重複しない previous7d) だけを使う。
@@ -55,14 +55,14 @@ import { loadCodeAdSlots } from "./lib/code-ad-slots.mjs";
 import { pathToFileURL } from "node:url";
 
 const SNAPSHOT_DIRS = {
-  gsc: ".claude/skills/analytics/gsc-improvement/reference/snapshots",
-  ga4: ".claude/skills/analytics/ga4-improvement/reference/snapshots",
-  adsense: ".claude/skills/analytics/adsense-improvement/reference/snapshots",
+  gsc: "data/gsc/snapshots",
+  ga4: "data/ga4/snapshots",
+  adsense: "data/adsense/snapshots",
 };
 const STATE_DIRS = {
-  gsc: ".claude/state/metrics/gsc",
-  ga4: ".claude/state/metrics/ga4",
-  adsense: ".claude/state/metrics/adsense",
+  gsc: "data/gsc",
+  ga4: "data/ga4",
+  adsense: "data/adsense",
 };
 
 function parseCsvLine(line) {

@@ -37,9 +37,9 @@ note.com でマガジンを作成する際の設定値とコピー。Profile 5�
 
 ## カバー画像
 
-専用カバー作成済み: `magazine-cover-1280x670.png`（このディレクトリ直下、1280×670）
+専用カバー作成済み: `assets/note/magazine-covers/koumuin-claude-code/magazine-cover-1280x670.png` (1280×670)
 
-記事カバーと同デザイン言語（中央ボックス）＋専用の別背景（`assets/koumuin-magazine-bg.png`・flagship ゴールド）。再生成:
+記事カバーと同デザイン言語（中央ボックス）＋専用の別背景（`assets/note/koumuin-magazine-bg.png`・flagship ゴールド）。再生成:
 
 ```bash
 node .claude/scripts/note/generate-koumuin-covers.cjs --magazine

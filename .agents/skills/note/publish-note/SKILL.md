@@ -139,7 +139,7 @@ node .claude/scripts/note/generate-note-hashtags.mjs --slug <slug>
 
 - カバー: `docs/31_note記事原稿/[vertical/]<slug>/images/cover-1280x670.{svg,png}`
   **koumuin シリーズは `generate-koumuin-covers.cjs` が PNG まで生成する**（背景 bitmap は
-  `.claude/scripts/note/assets/koumuin-cover-bg.png`、無ければプログラム生成のダーク背景にフォールバック）。
+  `assets/note/koumuin-cover-bg.png`、無ければプログラム生成のダーク背景にフォールバック）。
   アップロードは PNG を使う。汎用版 (`generate-note-covers.mjs`) は SVG のみなので、その場合は
   `rsvg-convert`/`inkscape`/`svg-to-png.cjs` で PNG 化してからアップロードする（note は SVG を受け付けない場合がある）。
 - ハッシュタグ: `docs/31_note記事原稿/[vertical/]<slug>/hashtags.txt` に 1 行 1 タグで 99 個。Phase 7 でタグ入力時に使う。
@@ -284,7 +284,7 @@ browser-use --headed --profile "Profile 5" state 2>&1 > /tmp/note-acct.txt
 ### 公開済み記事のハッシュタグ専用更新
 
 本文の差し替えを行わず、公開済み記事のタグを記事に合う 99 個へ置き換えるときは、提案と反映の 2 段で行う。
-タグの正本は `data/note/hashtags/<slug>.json` (git)。穴埋め用の汎用タグ (`#毎日note` `#スキしてみて` 等) は使わない。
+タグの正本は `config/note-hashtags/<slug>.json` (git)。穴埋め用の汎用タグ (`#毎日note` `#スキしてみて` 等) は使わない。
 
 ```bash
 # 1. タイトルと公開本文から Claude がタグ 99 個を提案し、検査 (lib/note-hashtags.mjs) を通ったものだけ保存する

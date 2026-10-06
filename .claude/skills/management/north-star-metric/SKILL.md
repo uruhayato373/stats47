@@ -69,9 +69,9 @@ stats47 はコンテンツメディアとして主に **Attention ゲーム** �
 
 - 公開記事数: `curl -s "https://storage.stats47.jp/app/blog/all.json" | jq '.articles | length'`
 - ランキング数: `curl -s "https://storage.stats47.jp/app/ranking-items/all.json" | jq '.count'`
-- SNS 指標（最新値）: 投稿台帳 `.claude/state/sns/posts.json` から集計（旧 D1 sns_posts は廃止）:
+- SNS 指標（最新値）: 投稿台帳 `data/sns/posts.json` から集計（旧 D1 sns_posts は廃止）:
   `node -e 'const s=require("./.claude/scripts/lib/sns-posts-store.cjs");const acc={};for(const p of s.query(x=>x.status==="posted")){const a=acc[p.platform]||={impressions:0,likes:0};a.impressions+=p.impressions||0;a.likes+=p.likes||0}console.log(JSON.stringify(acc,null,2))'`
-- SNS 指標（時系列）: `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv`（`sns-metrics-store.cjs` 経由）
+- SNS 指標（時系列）: `data/sns/metric-snapshots/YYYY-MM-DD/metrics.csv`（`sns-metrics-store.cjs` 経由）
 ```
 
 現在の週次計画（`.claude/todo/weekly.md`）から追跡中の KPI を確認する。
@@ -165,7 +165,7 @@ NSM を駆動する 3-5 の Input Metrics を定義する。各 Input Metric は
 
 NSM定義・Input Metrics・意思決定ゲートは `docs/00_プロジェクト管理/02_収益化戦略.md` へ直接反映する。
 未完了の計測・改善だけを `.claude/todo/improvements.md` へ具体化する。レビュー全文は保存しない。
-週次snapshotは `.claude/skills/management/nsm-experiment/reference/weekly-snapshots/{YYYY-Www}.json` を継続使用する。
+週次snapshotは `data/nsm/weekly-snapshots/{YYYY-Www}.json` を継続使用する。
 
 ### Step 7: 変遷を確認する
 

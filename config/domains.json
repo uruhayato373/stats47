@@ -111,7 +111,7 @@
     "docs/31_note記事原稿/": "product",
     ".claude/todo/": "plan",
     "docs/INDEX.md": "ops",
-    "docs/assets/": "ops"
+    "assets/page-heroes/": "ops"
   },
   "navKinds": {
     "inventory": "品揃え・一覧（何があり何が足りないか）",

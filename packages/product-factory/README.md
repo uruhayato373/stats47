@@ -106,7 +106,7 @@ KDPの単発・バッチは共有flowで送信版と保全済み必須5ファイ
 画面の既存「アップロード済み」だけを現行版の証拠にしない。同じセッションで検証済みEPUB/表紙の固定bytesを送信し、処理完了と最終read-backを確認する。公開直前に版とSHAを再照合し、送信証拠がなければ再投入する。これはPreviewer・本人による申告/公開承認を代替しない。
 
 無料P-13は総人口2024のPDF・PNG・CSV見本（Office非同梱）。生成時の固定先は
-`.claude/state/products/free-sample-delivery.json`に記録し、Coconalaの公開記録へ混ぜない。
+`data/products/free-sample-delivery.json`に記録し、Coconalaの公開記録へ混ぜない。
 note無料原稿はこのpinだけを参照し、有料パックの添付を露出しない。
 Noto JPのPDFはフォント全体を埋め込む。subsetでは文字抽出が成功しても描画文字が欠けるため、
 `tests/free-sample.test.ts`で埋め込みバイトを検査し、生成後にはページ画像も確認する。

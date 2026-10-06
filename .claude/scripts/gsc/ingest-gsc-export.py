@@ -4,7 +4,7 @@
 GSC UI (インデックス作成 > ページ) の export は:
   - ファイル名が cp932 (`unzip` が Illegal byte sequence で失敗する)
   - カテゴリ別 drilldown zip / 集計 zip / 推移 zip が混在する
-を、カテゴリ判定して正準ファイル名で `.claude/state/metrics/gsc/coverage-drilldown/<週>/` に展開する。
+を、カテゴリ判定して正準ファイル名で `data/gsc/coverage-drilldown/<週>/` に展開する。
 出力は auto-resubmit.mjs / build-coverage-queue.mjs が読む形式 (`<category>-urls.csv` = `URL,前回のクロール`)。
 
 使い方:
@@ -26,7 +26,7 @@ import zipfile
 from urllib.parse import urlparse
 
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..", ".."))
-DRILLDOWN_DIR = os.path.join(PROJECT_ROOT, ".claude/state/metrics/gsc/coverage-drilldown")
+DRILLDOWN_DIR = os.path.join(PROJECT_ROOT, "data/gsc/coverage-drilldown")
 
 # GSC 「理由」(問題) → 正準 category slug。auto-resubmit.mjs は `*-urls.csv` を全て未INDEXED扱いするので、
 # 意図的カテゴリ(redirect/robots/noindex/alt-canonical/duplicate)も別名で保存し build 側で分類する。

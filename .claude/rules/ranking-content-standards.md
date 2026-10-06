@@ -252,7 +252,7 @@ quarantine は持たない。
 3. author は response schema で FAQ 5 件・観測地域全件を固定する。既存の決定的監査に落ちた候補は公開しない。
 4. 生成と別の Gemini リクエストが意味品質を `PASS | REVISE` で審査する。`REVISE` は指摘付きで最大 1 回だけ全体再生成する。
 5. PASS 分だけ outbox へ書き、develop へコミットする。CI からの push は後続 workflow を発火しないため、`publish-ai-content.yml` を明示 dispatch し、run 成功まで待つ。
-6. 件数・通過率・author/critic リクエスト数・トークン数を `.claude/state/metrics/ai-content/` へ記録する。生成本文と prompt は記録しない。
+6. 件数・通過率・author/critic リクエスト数・トークン数を `data/ai-content/` へ記録する。生成本文と prompt は記録しない。
 
 **無料運用のゲート**: `GEMINI_API_KEY` は課金を有効化していない専用 Google AI Studio
 project から発行する。API は認証・quota/billing エラーを返すが、キーの project で

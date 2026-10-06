@@ -81,7 +81,7 @@
 - [project_instagram_graph_api_setup.md](project_instagram_graph_api_setup.md) — Instagram Graph APIセットアップ完了(2026-04-25)。stats47jp・トークン60日・business_discovery不可
 - [feedback_lcp_optimization.md](feedback_lcp_optimization.md) — LCP改善はLCP要素の特定が先。HTML削減もpreloadもJS描画依存要素には効かない(EXP-002/003)
 - [feedback_browser_use_cleanup.md](feedback_browser_use_cleanup.md) — browser-useの`close`はpageだけ。daemonは`pkill -KILL -f "browser_use.skill_cli.daemon"`必須
-- [project_gsc_coverage_drilldown.md](project_gsc_coverage_drilldown.md) — GSC 6種別Coverage Drilldown CSVを週次で.claude/state/metrics/gsc/coverage-drilldown/に集約
+- [project_gsc_coverage_drilldown.md](project_gsc_coverage_drilldown.md) — GSC 6種別Coverage Drilldown CSVを週次でdata/gsc/coverage-drilldown/に集約
 - [project_cloudflare_token_consolidated.md](project_cloudflare_token_consolidated.md) — Cloudflare API tokenは「stats47」1個に集約(D1/R2/Pages/Account Settings)
 - [feedback_github_actions_pr_creation.md](feedback_github_actions_pr_creation.md) — ActionsがPR作成するにはrepo permission設定必要(gh APIで設定可)
 - [feedback_cloud_github_api_mcp_only.md](feedback_cloud_github_api_mcp_only.md) — クラウドは`gh`無し。`curl`+$GITHUB_TOKENはHTTP 200で"GitHub access is not enabled"を返し無言失敗(background agentでは空ファイル)。GitHub操作は`mcp__github__*`のみ

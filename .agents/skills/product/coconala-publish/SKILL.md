@@ -83,7 +83,7 @@ node .claude/scripts/coconala/coconala-delete-draft.mjs --id <n>               #
 
 ### プロフィール整備
 
-- 公開文面は `config/coconala-profile.ts`、ブランド素材は同configの参照先、実測は `.claude/state/products/coconala-profile-2026-09-06.json` を参照する。
+- 公開文面は `config/coconala-profile.ts`、ブランド素材は同configの参照先、実測は `data/products/coconala-profile-2026-09-06.json` を参照する。
 - プロフィールの各「保存する」は保存後に消え、残りのボタンのindexが変わる。セクションを限定して保存し、再読込で内容一致を確認する。アイコンの更新直後に別ページへ移動すると送信を中断しうるため、公開プロフィールへの遷移完了を待つ。
 - カバーはアップロード後のトリミング画面で「決定」が必要。商品画像は案内イメージと実データの見本を区別し、見本を受注実績と表示しない。
 - 本人確認・NDA・規約同意・税務情報は人間工程。技術欄の経験年数・資格・稼働時間を推測して埋めない。

@@ -104,7 +104,7 @@ const GSC = {
   secretName: "GOOGLE_SERVICE_ACCOUNT_KEY_JSON",
   liveScript: ".claude/scripts/metrics/fetch-gsc-snapshot.mjs",
   normalize(root, now) {
-    const dir = path.join(root, ".claude/skills/analytics/gsc-improvement/reference/snapshots");
+    const dir = path.join(root, "data/gsc/snapshots");
     const week = latestWeekDir(dir);
     if (!week) return { observedAt: null };
     const file = path.join(dir, week, "pages.csv");
@@ -139,7 +139,7 @@ const GA4 = {
   secretName: "GA4_PROPERTY_ID",
   liveScript: ".claude/scripts/metrics/fetch-ga4-snapshot.mjs",
   normalize(root, now) {
-    const dir = path.join(root, ".claude/skills/analytics/ga4-improvement/reference/snapshots");
+    const dir = path.join(root, "data/ga4/snapshots");
     const week = latestWeekDir(dir);
     if (!week) return { observedAt: null };
     const file = path.join(dir, week, "pages.csv");
@@ -261,7 +261,7 @@ const INSPECTION = {
   secretName: "GOOGLE_SERVICE_ACCOUNT_KEY_JSON",
   liveScript: ".claude/scripts/gsc/url-inspection-daily.cjs",
   normalize(root, now) {
-    const dir = path.join(root, ".claude/state/metrics/gsc/url-inspection");
+    const dir = path.join(root, "data/gsc/url-inspection");
     const file = newestFile(dir, /^\d{4}-\d{2}-\d{2}\.csv$/);
     if (!file) return { observedAt: null };
     const { header, rows } = parseCsv(fs.readFileSync(file, "utf8"));
@@ -307,7 +307,7 @@ const CLOUDFLARE = {
   secretName: "CLOUDFLARE_API_TOKEN",
   liveScript: ".claude/scripts/cloudflare/fetch-usage.mjs",
   normalize(root, now) {
-    const dir = path.join(root, ".claude/state/metrics/cloudflare/snapshots");
+    const dir = path.join(root, "data/cloudflare/snapshots");
     const file = newestFile(dir, /^\d{4}-\d{2}-\d{2}\.json$/);
     if (!file) return { observedAt: null };
     const j = JSON.parse(fs.readFileSync(file, "utf8"));

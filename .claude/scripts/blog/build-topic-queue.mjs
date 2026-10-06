@@ -184,7 +184,7 @@ function stemOf(title) {
 
 // 2. GSC snapshot
 function findLatestSnapshot() {
-  const dir = path.join(PROJECT_ROOT, ".claude/skills/analytics/gsc-improvement/reference/snapshots");
+  const dir = path.join(PROJECT_ROOT, "data/gsc/snapshots");
   if (!fs.existsSync(dir)) return null;
   const weeks = fs.readdirSync(dir).filter((d) => /^\d{4}-W\d{2}$/.test(d));
   return weeks.sort().reverse()[0] || null;
@@ -195,7 +195,7 @@ function loadPagesCsv(week) {
   if (!week) return { ranking, areas };
   const csv = path.join(
     PROJECT_ROOT,
-    ".claude/skills/analytics/gsc-improvement/reference/snapshots",
+    "data/gsc/snapshots",
     week,
     "pages.csv",
   );

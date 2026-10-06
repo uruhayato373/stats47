@@ -328,7 +328,7 @@ export function loadContentOperations(
   generatedAt = new Date().toISOString()
 ): ContentOperationsResponse {
   const social = ContentSocialPostsState.parse(
-    readJson(root, '.claude/state/sns/posts.json')
+    readJson(root, 'data/sns/posts.json')
   );
   const kdp = ContentKdpListingsState.parse(
     readJson(root, KDP_LISTINGS)
@@ -338,7 +338,7 @@ export function loadContentOperations(
   );
   const kindleArchivesRaw = readOptionalJson(
     root,
-    '.claude/state/products/kindle-archives.json'
+    'data/products/kindle-archives.json'
   );
   const kindleArchives = kindleArchivesRaw
     ? ContentKindleArchiveState.parse(kindleArchivesRaw)

@@ -2,7 +2,7 @@
 
 /**
  * note.com/stats47 の公開済み記事のハッシュタグを、本文・価格・有料境界を保ったまま
- * data/note/hashtags/<slug>.json の承認済み99個へ置き換える (propose-note-hashtags.mjs が作る)。
+ * config/note-hashtags/<slug>.json の承認済み99個へ置き換える (propose-note-hashtags.mjs が作る)。
  * 公開中のタグの集合が承認済みの集合と一致する記事は対応済みとして飛ばす。
  *
  * Usage:

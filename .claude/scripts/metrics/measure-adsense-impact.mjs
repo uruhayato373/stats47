@@ -30,8 +30,8 @@
  *
  * 入力:
  *   - .claude/todo/improvements.md              （施策 → deploy 日）
- *   - .claude/state/metrics/adsense/history.csv         （週次アカウント）
- *   - .claude/state/metrics/adsense/history-devices.csv （週次デバイス別）
+ *   - data/adsense/history.csv         （週次アカウント）
+ *   - data/adsense/history-devices.csv （週次デバイス別）
  * 出力: 標準出力（+ `--out` / `--upsert-log` 指定時のみファイル）
  */
 
@@ -54,11 +54,11 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const PROJECT_ROOT = join(__dirname, "..", "..", "..");
 const BACKLOG = join(PROJECT_ROOT, ".claude/todo/improvements.md");
-const HISTORY = join(PROJECT_ROOT, ".claude/state/metrics/adsense/history.csv");
-const DEVICE_HISTORY = join(PROJECT_ROOT, ".claude/state/metrics/adsense/history-devices.csv");
+const HISTORY = join(PROJECT_ROOT, "data/adsense/history.csv");
+const DEVICE_HISTORY = join(PROJECT_ROOT, "data/adsense/history-devices.csv");
 const LOG_PATH = join(
   PROJECT_ROOT,
-  ".claude/skills/analytics/adsense-improvement/reference/improvement-log.md",
+  "data/improvement/adsense-improvement/improvement-log.md",
 );
 
 const args = process.argv.slice(2);
@@ -256,7 +256,7 @@ export function createAdsenseAdapter(opts = {}) {
 
     sourcesOf(subject, window) {
       return window.afterWeek
-        ? [{ name: "adsense:state/metrics/adsense/history.csv", observedAt: isoWeekEnd(window.afterWeek) }]
+        ? [{ name: "adsense:data/adsense/history.csv", observedAt: isoWeekEnd(window.afterWeek) }]
         : [{ name: "adsense:history.csv", observedAt: null }];
     },
 

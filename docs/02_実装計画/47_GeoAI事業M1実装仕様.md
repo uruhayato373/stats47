@@ -27,7 +27,7 @@ tags: [geo, gis, population, x, note, analytics, admin]
 | ------ | -------------------------------------------------------------------------------------- | --------------------------------------------------- |
 | サイト | `/geo` と3空間分析を実装し、単一指標の基準値はランキングへ分離する                     | `apps/web` test / type-check / build                |
 | 分析   | 3空間分析が入力地図、重ね合わせ、保存則、最終集計、県比較、出典、限界を1画面に持つ     | `geo-analysis` test + artifact audit + ローカル表示 |
-| X      | 15投稿がlintを通り、投稿の主張と一致する固有Geo画像・予定日時つきdraftとして台帳に存在 | `.claude/state/sns/posts.json`                      |
+| X      | 15投稿がlintを通り、投稿の主張と一致する固有Geo画像・予定日時つきdraftとして台帳に存在 | `data/sns/posts.json`                      |
 | note   | 15商品が価格・記事key・本文有無・公開条件つきでカタログに存在                          | note catalog validate                               |
 | 計測   | 閲覧、地図操作、県選択、比較追加を別イベントとして送る                                 | analytics unit test + GA4台帳                       |
 | 管理   | 計画数と実登録数の差、本文有無、GA4登録待ち、公開ゲートを表示                          | `http://127.0.0.1:4747/strategy`                    |
@@ -123,7 +123,7 @@ M1
 Geo公開集合`BUSINESS_PLAN_M1_GEO_ANALYSES`はspatial-crossだけを保持し、計算入力2層以上、細粒度geometry、
 R2 snapshot・manifest・県別artifactの欠落をvalidatorとunit testが拒否する。
 
-Authored設定はgit TS、ランキング観測値はR2、X投稿実績は`.claude/state/sns/posts.json`、
+Authored設定はgit TS、ランキング観測値はR2、X投稿実績は`data/sns/posts.json`、
 note本文はR2という既存境界を維持する。管理画面用の第三の台帳や永続DBは作らない。
 
 ## 4. X初回15投稿

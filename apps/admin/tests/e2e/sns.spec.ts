@@ -3,7 +3,7 @@ import path from "node:path";
 
 import { expect, test } from "@playwright/test";
 
-const LEDGER_PATH = path.resolve(__dirname, "../../../..", ".claude/state/sns/posts.json");
+const LEDGER_PATH = path.resolve(__dirname, "../../../..", "data/sns/posts.json");
 /** 画面の status ボタンがある状態 (sns-view.tsx の STATUSES)。deleted は絞り込めない。 */
 const FILTERABLE_STATUSES = ["draft", "scheduled", "posted"];
 

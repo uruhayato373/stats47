@@ -10,7 +10,7 @@ import { resolve } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 
-import { DATASETS, GOVERNED, IGNORED_NAMES, KINDS, TARGETS, datasetDir, datasetPath } from "../../../../config/datasets.mjs";
+import { DATASETS, GOVERNED, IGNORED_NAMES, IMAGE_EXT, IMAGE_ROOTS, KINDS, TARGETS, datasetDir, datasetPath } from "../../../../config/datasets.mjs";
 import { DOMAINS } from "../../../../config/paths.mjs";
 import { checkDatasets, findRetiredReferences, patternToRegExp } from "../check-datasets.mjs";
 import { RETENTION_POLICIES } from "../prune-state-snapshots.mjs";
@@ -42,6 +42,8 @@ test("実リポジトリの追跡ファイルは台帳と矛盾しない", () =>
     targets: TARGETS,
     domainIds,
     retention: RETENTION_POLICIES,
+    imageRoots: IMAGE_ROOTS,
+    imageExt: IMAGE_EXT,
   });
   assert.deepEqual(result.errors, []);
 });
@@ -119,4 +121,46 @@ test("datasetPath は可変部分の無い行だけ、datasetDir は可変部分
   assert.throws(() => datasetPath(slotted.id), /datasetDir を使う/);
   assert.equal(datasetDir(slotted.id), slotted.path.slice(0, slotted.path.indexOf("/{date}")));
   assert.throws(() => datasetPath("no.such-dataset"), /台帳に無いデータセット/);
+});
+
+test("画像は IMAGE_ROOTS の外にあれば置き場違反で落ちる", () => {
+  const r = checkDatasets({
+    ...base,
+    datasets: [],
+    files: [
+      "assets/blog/article-backgrounds/a.webp",
+      "apps/web/public/images/b.png",
+      "packages/gis/data/geoshape/svg/01_北海道.svg",
+      ".claude/skills/note/x/examples/cover.svg",
+      "apps/web/scripts/lib/legacy-images/c.jpg",
+      ".claude/skills/note/x/magazine-cover.png",
+      "docs/legacy-images/d.png",
+      "README.md",
+    ],
+    imageRoots: IMAGE_ROOTS,
+    imageExt: IMAGE_EXT,
+  });
+  assert.deepEqual(
+    r.errors.map((e) => e.replace(/ \(.*$/, "")),
+    [
+      "画像の置き場違反: apps/web/scripts/lib/legacy-images/c.jpg",
+      "画像の置き場違反: .claude/skills/note/x/magazine-cover.png",
+      "画像の置き場違反: docs/legacy-images/d.png",
+    ],
+  );
+});
+
+test("手順書 (SKILL.md・rules・agents) の旧パスは落ち、旧置き場と書いた経緯の行だけ通す", () => {
+  const retired = [{ from: ".claude/state/metrics/foo", to: "data/foo", since: "2026-10-06" }];
+  const errors = findRetiredReferences(retired, [
+    { file: ".claude/skills/x/SKILL.md", line: 5, text: "1. `.claude/state/metrics/foo/LATEST.md` を Read" },
+    { file: ".claude/rules/y.md", line: 7, text: "# 出力は .claude/state/metrics/foo/ へ" },
+    { file: ".claude/agents/z.md", line: 9, text: "(旧置き場 `.claude/state/metrics/foo/` は 2026-10-06 に data/foo/ へ移した)" },
+    { file: ".codex/agents/z.toml", line: 2, text: "read .claude/state/metrics/foo/history.csv" },
+  ]);
+  assert.deepEqual(errors, [
+    "旧置き場の参照: .claude/skills/x/SKILL.md:5 (.claude/state/metrics/foo → data/foo)",
+    "旧置き場の参照: .claude/rules/y.md:7 (.claude/state/metrics/foo → data/foo)",
+    "旧置き場の参照: .codex/agents/z.toml:2 (.claude/state/metrics/foo → data/foo)",
+  ]);
 });

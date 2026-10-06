@@ -288,7 +288,7 @@ function calcRange(period) {
 
 ## snapshots 記録
 
-取得結果は `.claude/skills/analytics/fetch-instagram-data/reference/snapshots/YYYY-MM-DD/` に JSON/CSV で保存すると後日の比較ができる。`update-sns-metrics` スキルと記録先を揃える場合は `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv` に追記する。
+取得結果は `.claude/skills/analytics/fetch-instagram-data/reference/snapshots/YYYY-MM-DD/` に JSON/CSV で保存すると後日の比較ができる。`update-sns-metrics` スキルと記録先を揃える場合は `data/sns/metric-snapshots/YYYY-MM-DD/metrics.csv` に追記する。
 
 ## 参照
 

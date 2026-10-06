@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-06T05:55:54.518Z",
+  "updatedAt": "2026-10-06T08:32:16.695Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -6419,6 +6419,42 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-10-06T05:55:54.518Z"
+    },
+    "BLOG-SVG-NODATA-20261006": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-06T08:32:16.695Z",
+          "runId": null,
+          "model": "none",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "regenerate-blog-svgs run 37429556197 source-repair (success)",
+              "regenerate-blog-svgs run 37435395042 all (success)",
+              "purge-cache.ts --urls 8 件",
+              "findChartTextIssues on production SVG 8 件"
+            ],
+            "pass": true
+          },
+          "evidence": "本番 SVG 8 枚 (3 図の本文/mobile/ig + 同記事の合計特殊出生率) が 2026-10-06T08:28 生成版で overflow 0 / overlap 0 / lint error 0。図と食い違う本文は BLOG-TEXT-CHART-CONFLICT-20261006 で継続",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-06T08:32:16.695Z"
     }
   }
 }

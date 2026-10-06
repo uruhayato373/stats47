@@ -84,7 +84,7 @@ stats47 へ採用する前に Stage 2 の e-Stat / metric SSOT 照合を必ず�
 ```bash
 # 既存 snapshot CSV からテーマ関連クエリの impressions/CTR を grep
 grep -iE "<theme 関連キーワード>" \
-  .claude/skills/analytics/gsc-improvement/reference/snapshots/*/queries.csv | sort -t',' -k3 -rn | head -20
+  data/gsc/snapshots/*/queries.csv | sort -t',' -k3 -rn | head -20
 ```
 
 ## Stage 2: 実在確認 (必須・inline。estat-researcher サブ agent を spawn しない)

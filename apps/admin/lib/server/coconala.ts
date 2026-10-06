@@ -107,7 +107,7 @@ export function coconalaSummary(): Wrapped<CoconalaSummary> {
         viewsTotal: measured
           ? { views: measured.analytics.views, start: measured.analytics.period.start, end: measured.analytics.period.end, observedAt: measured.generatedAt }
           : null,
-        source: `${LISTINGS} + packages/product-factory/src/catalog/products + .claude/state/products/sales-ledger.json + ${RESTORED}`,
+        source: `${LISTINGS} + packages/product-factory/src/catalog/products + data/products/sales-ledger.json + ${RESTORED}`,
       };
     }),
   );

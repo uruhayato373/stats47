@@ -81,7 +81,7 @@ A8.net の高単価案件を **scout → 申請 → コード取得 → SSOT 登
 
 - **(5) の 4 ゲートが 1 つでも fail すると SSOT は実行前の byte 列で自動復元**され register は止まる (SSOT 破壊防止。2026-07-29 に git checkout 復元を廃止 — 未コミット変更を消さないため。doc 42 §9.2)。
 - **(6) の commit/push は affiliate-manager (SSOT 排他 writer) の役割**。register で SSOT + catalog が
-  更新された後、`apps/web/scripts/affiliate-ads-data.ts` と `.claude/state/ads/a8-catalog.json` を
+  更新された後、`apps/web/scripts/affiliate-ads-data.ts` と `data/affiliate/a8-catalog.json` を
   同一 commit で develop に push する (outward-facing なので実行前に確認)。公開後、次回 run 冒頭で
   R2 `app/affiliate-ads/all.json` に id 存在を確認して catalog を published に昇格。
 
@@ -138,6 +138,6 @@ node .claude/scripts/ads/check-a8-apply-budget.cjs                # 今週の申
 - 正典ルール: `.claude/rules/affiliate-ads-standards.md` §10
 - コア: `.claude/scripts/ads/lib/{a8-scout-core,a8-code-core,a8-append-core}.mjs` + `__tests__/`
 - ブラウザ: `.claude/skills/ads/scout-asp/scripts/{a8-browser.ts,login.mjs}`
-- カタログ: `.claude/state/ads/a8-catalog.json` (状態機械) / curated: `.claude/scripts/ads/data/a8-curated.json`
+- カタログ: `data/affiliate/a8-catalog.json` (状態機械) / curated: `.claude/scripts/ads/data/a8-curated.json`
 - 手動登録: `/register-affiliate-banner` / agent: `asp-scout` (ブラウザ) + `affiliate-manager` (SSOT 排他 writer)
 - 認証方式: `docs/01_技術設計/07_Playwright認証プロファイル.md`

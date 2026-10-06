@@ -58,7 +58,7 @@ R2 読み取り env（認証不要）: `NODE_OPTIONS='--conditions react-server'
 ## クイックスタート
 
 > **現在の日次正典**: `.github/workflows/ai-content-gemini-daily.yml` (07:15 JST、既定3件)。
-> 件数は `.claude/state/metrics/ai-content/history.csv` で 7 run 以上を観測した後だけ見直す。
+> 件数は `data/ai-content/history.csv` で 7 run 以上を観測した後だけ見直す。
 
 > Claude Code の Bash から `generate-parallel.ts` の claude CLI 子プロセスを起動しない。
 > 大きい stdin が詰まるため、対話セッションでは agent 生成、端末では CLI、日次は workflow と経路を混在させない。

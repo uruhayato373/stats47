@@ -14,7 +14,7 @@ X / YouTube / Instagram の投稿メトリクス（impressions / views / likes /
 | データ | 保管先 |
 |---|---|
 | 週次メトリクス CSV | `snapshots/YYYY-MM-DD/metrics.csv` |
-| 改善施策ログ（append-only） | `reference/improvement-log.md` |
+| 改善施策ログ（append-only） | `data/improvement/sns-metrics-improvement/improvement-log.md` |
 | 書き込みスクリプト | `.claude/scripts/lib/sns-metrics-store.cjs` |
 
 ## スナップショット収集
@@ -26,7 +26,7 @@ X / YouTube / Instagram の投稿メトリクス（impressions / views / likes /
 /fetch-instagram-data
 ```
 
-収集後は `snapshots/YYYY-MM-DD/metrics.csv` に保存し、`reference/improvement-log.md` に実測値を追記する。
+収集後は `snapshots/YYYY-MM-DD/metrics.csv` に保存し、`data/improvement/sns-metrics-improvement/improvement-log.md` に実測値を追記する。
 
 ## 実証チェックリスト（effect/* ラベルを付ける前に必須）
 

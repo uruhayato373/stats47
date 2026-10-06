@@ -78,7 +78,7 @@ sitemap 掲載・内部リンク・canonical を整えた上で `url-inspection-
 ## 実行手順
 
 ### Phase 0 — 前提確認
-- まず`.claude/state/metrics/authenticated/latest.json`のGSC成否・鮮度を確認する。CIはprivate R2の最新成功を復元する。
+- まず`data/authenticated/latest.json`のGSC成否・鮮度を確認する。CIはprivate R2の最新成功を復元する。
   認証未有効化/期限切れなら`docs/01_技術設計/07_Playwright認証プロファイル.md`の通常Chromeログイン→専用profile exportで復旧する。
   手動exportを使う場合だけ`USER_EXPORT_GUIDE.md` Step 2/3を案内する。古い成功へ黙ってfallbackしない。
 - export 不要で「キュー状態だけ見たい」なら Phase 3 の `--no-probe` か `--next` だけ実行。
@@ -174,10 +174,10 @@ TASK: 以下の soft404→現在200 の URL 群が「薄い/空」か判定。R2
 |---|---|---|
 | **状態付きキュー (SSOT・機械)** | `.claude/state/gsc/coverage-remediation-queue.json` | build が書く / skill・agent が読む |
 | 人間向け要約 | `.claude/state/gsc/LATEST.md` | build が書く / 人間が読む |
-| 経過観測 (週次件数) | `.claude/state/gsc/coverage-totals-history.csv` | build が追記 |
-| 取り込み済 drilldown | `.claude/state/metrics/gsc/coverage-drilldown/<週>/*-drilldown.csv` | ingest が書く |
-| observe-after-fix 対象 | `.claude/state/metrics/gsc/coverage-drilldown/<週>/coverage-live-observe-urls.csv` | build が書く / url-inspection で観測 |
-| agent 用詳細ログ | `.claude/skills/analytics/gsc-improvement/reference/improvement-log.md` `[COVERAGE-LOOP-01]` | skill/agent |
+| 経過観測 (週次件数) | `data/gsc/coverage-totals-history.csv` | build が追記 |
+| 取り込み済 drilldown | `data/gsc/coverage-drilldown/<週>/*-drilldown.csv` | ingest が書く |
+| observe-after-fix 対象 | `data/gsc/coverage-drilldown/<週>/coverage-live-observe-urls.csv` | build が書く / url-inspection で観測 |
+| agent 用詳細ログ | `data/improvement/gsc-improvement/improvement-log.md` `[COVERAGE-LOOP-01]` | skill/agent |
 | TODO 真実源 | `.claude/todo/improvements.md` `COVERAGE-LOOP-01` | improvement-triage |
 
 ## cadence (週次)

@@ -100,7 +100,7 @@ co_agents: [gsc-analyst]
 ## 出力
 
 週次数値は `data/psi/`、詳細な施策履歴は
-`.claude/skills/analytics/performance-improvement/reference/improvement-log.md` を使う。
+`data/improvement/performance-improvement/improvement-log.md` を使う。
 未完了の改善だけを `.claude/todo/improvements.md` へID・対象ページ・実行手順・budget・完了条件付きで統合し、
 レポート全文は保存しない。
 
@@ -124,4 +124,4 @@ co_agents: [gsc-analyst]
 - `data/psi/{history.csv,LATEST.md}` — 計測履歴（入力 SSOT）
 - `.claude/scripts/psi/psi-threshold-check.mjs` — 閾値違反の取得（`npm run psi-audit:check`）
 - `.claude/skills/analytics/performance-improvement/budgets.json` — 閾値設定
-- `.claude/skills/analytics/performance-improvement/reference/improvement-log.md` — 改善施策ログ
+- `data/improvement/performance-improvement/improvement-log.md` — 改善施策ログ

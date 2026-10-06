@@ -12,7 +12,7 @@
  * 取り込み時期」を思い出させる。新規 cron は作らない（doboku-note 側の check-gsc-ui-due.mjs と
  * 同じ思想・同じ形）。
  *
- * 判定: `.claude/state/metrics/affiliate/a8-ui-last-run.json`（committed マーカー）の
+ * 判定: `data/affiliate/a8-ui-last-run.json`（committed マーカー）の
  *       collectedAt から経過日数 >= しきい値で DUE。マーカー無ければ DUE(初回/未実施)。
  *
  * 追加で surface するもの（A8 固有・放置すると静かに壊れる）:
@@ -20,8 +20,8 @@
  *   - `crossCheck.exceeded` が true＝doboku-note 混入の疑いが未解消
  *
  * stats47 での適応:
- *   - マーカーの置き場を `.claude/state/metrics/affiliate/a8-ui/last-run.json`（doboku-note の
- *     raw run ディレクトリ配下）から `.claude/state/metrics/affiliate/a8-ui-last-run.json`
+ *   - マーカーの置き場を `data/affiliate/a8-ui/last-run.json`（doboku-note の
+ *     raw run ディレクトリ配下）から `data/affiliate/a8-ui-last-run.json`
  *     （フラット）へ変更した。stats47 では raw run が git 管理外 `.local/a8-ui/` に移ったため。
  *   - repo root の解決を `__dirname` からの相対ディレクトリ数え上げ（由来はスクリプトが
  *     `scripts/` 直下にある前提で `join(__dirname, "..")` だった）ではなく、
@@ -47,8 +47,8 @@ import { join } from "node:path";
 import { repoRoot } from "./lib/asp-browser-base.mjs";
 
 const REPO_ROOT = repoRoot();
-const MARKER = join(REPO_ROOT, ".claude/state/metrics/affiliate/a8-ui-last-run.json");
-const LOG = join(REPO_ROOT, ".claude/state/metrics/affiliate/a8-report-log.json");
+const MARKER = join(REPO_ROOT, "data/affiliate/a8-ui-last-run.json");
+const LOG = join(REPO_ROOT, "data/affiliate/a8-report-log.json");
 const REVIEW =
   "node .claude/scripts/ads/fetch-a8-ui-csv.mjs --reports all --month YYYY-MM && node .claude/scripts/ads/normalize-a8-csv.mjs --latest（ローカル・要 A8 ログイン）";
 

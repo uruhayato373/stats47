@@ -46,7 +46,7 @@ A8.net 等アフィリエイト広告の **意図軸 (vertical)・案件profile�
   discovery/decisionを分離し、確定収益欠損を0扱いせず、recommendedActionを常に1件だけ返す。
   `measurementGate` が blocked なら rules §6 の登録手順を案内する。freshness・coverage・pilot可否は
   決定的スクリプトが判定し、モデルは期限・sample・勝者を判断しない。
-- **実験管理** (`/manage-affiliate-experiment`) — A/B の plan/start/observe/decide/close。registry (`.claude/state/ads/experiments.json`) に停止条件を事前固定し、判定 (collecting / ready-to-decide / inconclusive / invalid) はスクリプトに委ねる。**勝者の自動反映は禁止** (decide は人間へ提示まで)。
+- **実験管理** (`/manage-affiliate-experiment`) — A/B の plan/start/observe/decide/close。registry (`data/affiliate/experiments.json`) に停止条件を事前固定し、判定 (collecting / ready-to-decide / inconclusive / invalid) はスクリプトに委ねる。**勝者の自動反映は禁止** (decide は人間へ提示まで)。
   - `kind: "creative"` — variant 実体は `affiliate-ads-data.ts` (weight)。**本 agent が排他 writer**。
   - `kind: "code"` — variant 実体は**コード側の分岐** (どう出すか。例 `blog-inbody-format`)。
     **実装は web 側の担当** (本 agent は実装しない)。本 agent は registry への登録と停止条件の管理、
@@ -88,7 +88,7 @@ A8.net 等アフィリエイト広告の **意図軸 (vertical)・案件profile�
 
 - **ルール (SSOT)**: `.claude/rules/affiliate-ads-standards.md`
 - データ: `apps/web/scripts/affiliate-ads-data.ts` (自動配置) / `apps/web/scripts/affiliate-direct-placements-data.ts` (直接配置)
-- 機械状態: `.claude/state/ads/{affiliate-operations-latest,affiliate-portfolio-latest,affiliate-pilot-readiness-latest,inventory-latest,compliance-latest,experiments}.json`
+- 機械状態: `.claude/state/ads/{affiliate-operations-latest,affiliate-portfolio-latest,affiliate-pilot-readiness-latest,inventory-latest,compliance-latest}.json` / 実験台帳 `data/affiliate/experiments.json`
 - 配信: `apps/web/src/features/ads/`
 - 実装規約: `.claude/rules/affiliate-ads-standards.md` / 戦略: `docs/00_プロジェクト管理/02_収益化戦略.md` §3-6
 - ASP継続運用: `docs/02_実装計画/42_アフィリエイトPlaywright継続運用・安全化実装仕様.md` /

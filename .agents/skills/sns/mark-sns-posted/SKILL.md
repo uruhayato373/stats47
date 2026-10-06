@@ -7,8 +7,8 @@ primary_agent: sns-metrics-sync
 co_agents: [instagram-strategist, x-strategist]
 ---
 
-手動投稿後に `sns-posts-store.cjs` 経由で `.claude/state/sns/posts.json` に記録し、メディアファイルを削除する。
-記録と同時に `.claude/state/sns/post-log.md` が自動再生成される（視覚確認用）。
+手動投稿後に `sns-posts-store.cjs` 経由で `data/sns/posts.json` に記録し、メディアファイルを削除する。
+記録と同時に `data/sns/post-log.md` が自動再生成される（視覚確認用）。
 
 > **SQLite / D1 は使わない。** SSOT は `posts.json` のみ (完全DBレス doc12)。
 
@@ -107,10 +107,10 @@ find .local/r2/sns/<contentType>/<contentKey> -type d -empty -delete
 
 ### 6. post-log.md で視覚確認
 
-記録後、`.claude/state/sns/post-log.md` の先頭行に今投稿した内容が追加されているか確認する。
+記録後、`data/sns/post-log.md` の先頭行に今投稿した内容が追加されているか確認する。
 
 ```bash
-head -20 .claude/state/sns/post-log.md
+head -20 data/sns/post-log.md
 ```
 
 ### 7. 結果報告
@@ -128,7 +128,7 @@ head -20 .claude/state/sns/post-log.md
 
 ## 参照
 
-- SSOT: `.claude/state/sns/posts.json`
-- 視覚確認: `.claude/state/sns/post-log.md`（自動生成）
+- SSOT: `data/sns/posts.json`
+- 視覚確認: `data/sns/post-log.md`（自動生成）
 - ストア: `.claude/scripts/lib/sns-posts-store.cjs`
 - R2 削除: `packages/r2-storage/src/scripts/delete-r2-prefix.ts`

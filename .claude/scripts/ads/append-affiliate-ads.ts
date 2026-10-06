@@ -29,7 +29,7 @@ const appendCore = require("./lib/a8-append-core.mjs");
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
 const ADS_DATA = path.join(PROJECT_ROOT, "apps/web/scripts/affiliate-ads-data.ts");
-const CATALOG_PATH = path.join(PROJECT_ROOT, ".claude/state/ads/a8-catalog.json");
+const CATALOG_PATH = path.join(PROJECT_ROOT, "data/affiliate/a8-catalog.json");
 
 const APPLY = process.argv.includes("--apply");
 

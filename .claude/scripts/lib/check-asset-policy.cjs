@@ -85,7 +85,7 @@ function trackedFiles() {
     const files = out.split("\0").filter(Boolean);
     if (files.length) return files.map((f) => path.join(ROOT, f));
   } catch { /* fall through */ }
-  const dirs = ["apps/web/public", "docs", "packages", "apps/remotion/public", "apps/web/scripts", ".claude"]
+  const dirs = ["apps/web/public", "docs", "packages", "apps/remotion/public", "apps/web/scripts", ".claude", "assets", "config"]
     .map((d) => path.join(ROOT, d));
   return dirs.flatMap(walk);
 }

@@ -1,1 +1,0 @@
-../../../../../.claude/skills/analytics/adsense-improvement/reference/improvement-log.md

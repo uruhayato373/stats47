@@ -99,7 +99,7 @@ paths:
 | `video/`     | web 埋め込み用 master 動画 + メタ    | `/archive-remotion-output` で集約    |
 | `media/kindle-cover-assets/` | KDP表紙の背景・完成PNG/JPEGを商品ID×不変revisionで保持 | Git肥大化を避ける画像SSOT。GitはR2 key/SHA/byte/寸法だけ、未承認draftは`.local` |
 | `media/note-backgrounds/` | note ランキング記事のカバーに使う生成AI背景 (`<slug>/<sha12>/background.jpg`・1280x670 JPEG)。作り直せない入力なので承認した最終版だけを保持 | GitはSHA・R2 key・モデル・指示文だけ (`render-spec.json`)。候補・元画像はDrive (`note-image-assets.md` 契約7) |
-| `archive/kindle-encrypted/` | KDPへ送信したEPUB・表紙・metadata・reviewの版別AES-256-GCM暗号化bundle | 配信用URLに対応しない別PC復元・rollback用。平文禁止、Git台帳=`.claude/state/products/kindle-archives.json` |
+| `archive/kindle-encrypted/` | KDPへ送信したEPUB・表紙・metadata・reviewの版別AES-256-GCM暗号化bundle | 配信用URLに対応しない別PC復元・rollback用。平文禁止、Git台帳=`data/products/kindle-archives.json` |
 | `estat-catalog/` | e-Stat メタデータ完全カタログ (statsDataId一覧・getMetaInfo要約・分類コード)。テーマ/相関/全国/市区町村展開の共通発見基盤 | 配信 snapshot ではなく再取得可能な API 由来カタログ。writer は `estat-catalog-monthly.yml` のみ (月次 cron + 専用ブランチ push)。詳細 `docs/02_実装計画/48_e-Statカタログ実装仕様.md` |
 
 ## 生成画像の差分反映契約
@@ -202,7 +202,7 @@ A33/A40の全体partial-licenseは変更せず、Geo原典SSOTのexact key/SHA�
 再増加は日次Cloudflare usageで二段階に検知する。アカウント合計は18GB超、stats47 bucketは
 12.5GB超でalertし、原因判定では必ずbucket別にsiteScopeを分離する。ISR cacheは容量閾値とは別に
 `r2-isr-gc.yml`の`--assert-max 4`で世代数をfail-closedに検査する。閾値のSSOTは
-`.claude/skills/analytics/cloudflare-cost-improvement/reference/budgets-daily.json`。
+`.claude/config/budgets/cloudflare-cost-improvement/budgets-daily.json`。
 
 ### 2026-07-27 の実績 (根本原因と是正)
 

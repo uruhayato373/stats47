@@ -25,7 +25,7 @@ co_agents: [devops-runner]
 1. 在庫を棚卸し: `npx tsx .claude/scripts/ads/audit-affiliate-inventory.ts` → **vertical カバレッジ** (10 軸)
    の在庫ゼロ/手薄軸を特定。**ゼロ/手薄の軸は固定文でなく audit 出力
    (`.claude/state/ads/inventory-latest.json` の `coverage.gapVerticals` / `thinVerticals`) から読む**。
-2. トラフィックと突合: `.claude/state/ads/ga4-affiliate-*.json` (GA4) + GSC の高トラフィックページ種別を見て、
+2. トラフィックと突合: `data/affiliate/ga4-affiliate-*.json` (GA4) + GSC の高トラフィックページ種別を見て、
    「トラフィックはあるが在庫ゼロ/手薄」の vertical を優先度づけ。
 3. `rules §2 利用プログラム表` と照合し、その vertical の **要提携プログラムを 1 件**、根拠つきで提示:
    - Output: `Vertical | 提携先候補 | 根拠 (想定 imp 機会 / 単価帯 / 送客ページ) | ASP`。
@@ -125,8 +125,8 @@ outward-facing なので push はユーザーに確認。反映後、対象 vert
 
 | ASP | 読む先 |
 |---|---|
-| もしも / afb | `.claude/state/ads/affiliate-catalog.json` の `programs[].asps[].status` |
-| A8 | `.claude/state/ads/a8-catalog.json` の `entries[].status` |
+| もしも / afb | `data/affiliate/affiliate-catalog.json` の `programs[].asps[].status` |
+| A8 | `data/affiliate/a8-catalog.json` の `entries[].status` |
 
 vertical 別に `approved` / `applying` を集計して一覧する。**固定文を持たない** —
 数えるたびに実態が変わるため、必ず state を読んで数える。

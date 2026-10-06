@@ -33,7 +33,7 @@ export default function AffiliateProgramsPage() {
 
   return (
     <div className="space-y-8">
-      <PageHeading title="アフィリエイト 提携・案件" source=".claude/state/ads/{a8-catalog,affiliate-catalog}.json" />
+      <PageHeading title="アフィリエイト 提携・案件" source="data/affiliate/{a8-catalog,affiliate-catalog}.json" />
 
       <Section title="案件ポートフォリオ">
         {hasError(d.portfolio) ? (

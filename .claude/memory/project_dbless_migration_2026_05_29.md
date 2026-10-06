@@ -1,6 +1,6 @@
 ---
 name: project_dbless_migration_2026_05_29
-description: 完全DBレス移行 (正典=doc19) **全Phase A-F 完了 + 本番デプロイ済** (2026-05-30, origin/main 1cbe1f83, PR #380 merge)。Phase E=page_components/themes/affiliate_ads/categories を git TS SSOT 化 (data/page-components/, byte一致検証済) + sns_posts は .claude/state/sns/posts.json + sns-posts-store.cjs に移行 (運用ログのため git TS でなく state)。公開R2 URL storage.stats47.jp が認証不要読みの鍵
+description: 完全DBレス移行 (正典=doc19) **全Phase A-F 完了 + 本番デプロイ済** (2026-05-30, origin/main 1cbe1f83, PR #380 merge)。Phase E=page_components/themes/affiliate_ads/categories を git TS SSOT 化 (data/page-components/, byte一致検証済) + sns_posts は data/sns/posts.json + sns-posts-store.cjs に移行 (運用ログのため git TS でなく state)。公開R2 URL storage.stats47.jp が認証不要読みの鍵
 metadata: 
   node_type: memory
   type: project
@@ -18,7 +18,7 @@ metadata:
 - 削除: seed-theme-page-components / seed-local-finance-page-components / theme-page-component-additions / sync-theme-additions-to-r2 (scripts) + skills/db/{populate-component-data,verify-component-data} (内容は data/page-components/ に captured)。
 - doc19 §5 標準フロー = 実装に更新。adversarial verify workflow で run.sh の ai-content phantom task 等も修正。
 
-**sns_posts 完了 (2026-05-30)**: 書込専用ログ (publish-x が投稿毎 append、配信 reader 無し) のため git TS でなく `.claude/state/sns/posts.json` (549件移行) + 共有ストア `.claude/scripts/lib/sns-posts-store.cjs` (loadAll/query/insert/updateById, 原子的書込) に移行。SNS スクリプト9本を SQLite/sqlite3 CLI/旧 miniflare → ストア経由に置換 (store==SQLite 等価検証済)。**副次効果: CI(GitHub Actions, DB 不在)でも SNS スクリプトが動くようになった** (git-tracked JSON を読むため)。別 scope の残 D1 依存: `export-fishing-ports-snapshot.ts` 等 master data exporter。
+**sns_posts 完了 (2026-05-30)**: 書込専用ログ (publish-x が投稿毎 append、配信 reader 無し) のため git TS でなく `data/sns/posts.json` (549件移行) + 共有ストア `.claude/scripts/lib/sns-posts-store.cjs` (loadAll/query/insert/updateById, 原子的書込) に移行。SNS スクリプト9本を SQLite/sqlite3 CLI/旧 miniflare → ストア経由に置換 (store==SQLite 等価検証済)。**副次効果: CI(GitHub Actions, DB 不在)でも SNS スクリプトが動くようになった** (git-tracked JSON を読むため)。別 scope の残 D1 依存: `export-fishing-ports-snapshot.ts` 等 master data exporter。
 
 **多セッション衝突の教訓 (2026-05-30)**: 別セッション (claude/confident-cray) が同じ page_components git SSOT 移行を**別実装 (大きな TS 定義ファイル) + 新規22チャート**で並行実施。**だが衝突は実質ゼロだった**: confident-cray が cloud R2 に push 済み → 本セッションが cloud から reverse-extract したため、私の `data/page-components/` に既に彼らの内容が入っていた (materialize で byte 一致確認)。**教訓: R2 配信エンティティを2セッションが独立に git SSOT 化しても、一方が R2 push・他方が cloud 抽出なら内容は既に統一されている可能性。競合と決めつけず byte 等価を先に確認せよ。** SSOT 形式 (TS vs JSON) と app-src 改善のみ統合判断が要る。[[feedback_shared_working_copy_git_race]]
 

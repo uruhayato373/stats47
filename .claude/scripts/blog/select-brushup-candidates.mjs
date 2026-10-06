@@ -51,7 +51,7 @@ function industryAvgCtr(position) {
 function findLatestSnapshot() {
   const snapshotDir = path.join(
     PROJECT_ROOT,
-    ".claude/skills/analytics/gsc-improvement/reference/snapshots"
+    "data/gsc/snapshots"
   );
   if (!fs.existsSync(snapshotDir)) return null;
   const weeks = fs.readdirSync(snapshotDir).filter((d) => /^\d{4}-W\d{2}$/.test(d));
@@ -68,7 +68,7 @@ if (!week) {
 
 const pagesCsv = path.join(
   PROJECT_ROOT,
-  ".claude/skills/analytics/gsc-improvement/reference/snapshots",
+  "data/gsc/snapshots",
   week,
   "pages.csv"
 );

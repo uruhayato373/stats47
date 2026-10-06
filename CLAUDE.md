@@ -61,10 +61,10 @@
 | バグ修正の教訓 | `/knowledge` |
 | 同じエラー 2 回目 | `/continuous-learning` でパターン化 |
 | **改善施策の TODO 真実源** (status / tier / 期日) | `.claude/todo/improvements.md` |
-| 改善施策デプロイ (agent 用詳細) | `.claude/skills/analytics/{gsc,ga4,adsense,affiliate,sns-metrics,cloudflare-cost,performance}-improvement/reference/improvement-log.md` |
+| 改善施策デプロイ (agent 用詳細) | `data/improvement/{gsc,ga4,adsense,affiliate,sns-metrics,cloudflare-cost,performance}-improvement/improvement-log.md` |
 | **月次の重点 1-2 テーマ** (今月どこに張るか・Pro 予算配分) | `.claude/todo/monthly.md` (`/monthly-plan` で月初上書き。週次が分割消化) |
 | 週次計画進捗 | `.claude/todo/weekly.md` の TODO チェックボックスを Edit |
-| 週次振り返り | `.claude/skills/management/weekly-review/reference/reviews/YYYY-Www.md` |
+| 週次振り返り | `data/reviews/weekly/YYYY-Www.md` |
 | 批判的レビュー / 事前検死 | 全文はセッション内で提示。未完了策を `.claude/todo/{improvements,backlog}.md`、恒久判断を既存SSOTへ直接反映 |
 | **セッション残タスク** | `.claude/todo/backlog.md` へカード起票 (改善施策のみ improvements.md = improvement-triage 経由。一時ハンドオフ文書は作らない) |
 | 未分類の思いつき TODO | `.claude/todo/backlog.md` へカード起票 (迷ったら 🟡・タグは後から todo-curator が付与 → `.claude/rules/todo-standards.md`) |

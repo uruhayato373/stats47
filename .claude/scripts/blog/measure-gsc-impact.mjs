@@ -20,9 +20,9 @@
  *
  * 入力:
  *   - .claude/state/blog/auto-brushup-history.json   (wave_id → slug + date)
- *   - .claude/skills/analytics/gsc-improvement/reference/snapshots/<YYYY-Www>/pages.csv
+ *   - data/gsc/snapshots/<YYYY-Www>/pages.csv
  * 出力:
- *   - .claude/skills/analytics/gsc-improvement/reference/improvement-log.md (section upsert)
+ *   - data/improvement/gsc-improvement/improvement-log.md (section upsert)
  *
  * 判定は閾値エンジンが行う。想定効果値 (target) が機械可読な形で無い wave は
  * `insufficient-target` ガードで effect/pending に留まる (数値を推測しない)。
@@ -43,11 +43,11 @@ const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
 
 const SNAPSHOT_DIR = path.join(
   PROJECT_ROOT,
-  ".claude/skills/analytics/gsc-improvement/reference/snapshots",
+  "data/gsc/snapshots",
 );
 const LOG_PATH = path.join(
   PROJECT_ROOT,
-  ".claude/skills/analytics/gsc-improvement/reference/improvement-log.md",
+  "data/improvement/gsc-improvement/improvement-log.md",
 );
 const HISTORY_PATH = path.join(
   PROJECT_ROOT,

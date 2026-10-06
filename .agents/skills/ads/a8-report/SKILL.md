@@ -11,7 +11,7 @@ A8 の**成果 (発生・確定・EPC)** を実測して取り込む。提携運
 案件開拓 (`/scout-asp`) とは役割が違う。ローカル限定 (Playwright 永続プロファイル)。
 
 > **正典は `.claude/rules/affiliate-ads-standards.md` §11**。設定は `config/a8-report-automation.json`、
-> 成果 SSOT は `.claude/state/metrics/affiliate/{a8-results.json,a8-report-log.json}`。
+> 成果 SSOT は `data/affiliate/{a8-results.json,a8-report-log.json}`。
 > A8 ログインは `/scout-asp` と**同じ永続プロファイルを共有**する (別パスにすると二重ログインになる)。
 
 ## ★数値を扱うときの不変条件
@@ -64,7 +64,7 @@ node .claude/scripts/ads/normalize-a8-csv.mjs --latest
 ```
 
 - `<runDir>/normalized/<reportKey>.json` (+ `.rejects.json`) を書き、
-  `.claude/state/metrics/affiliate/{a8-report-log.json,a8-results.json}` へ upsert する。
+  `data/affiliate/{a8-report-log.json,a8-results.json}` へ upsert する。
 - raw CSV と manifest は書き換えない (append-only・監査可能性のため)。
 - `programIdMap` に無い programId は **unmapped として報告される** (黙って捨てない)。
   `programIdMap` は手で編集せず、広告定義 (mid= と案件プロファイルの programRef) から
@@ -91,6 +91,6 @@ node .claude/scripts/ads/normalize-a8-csv.mjs --latest
 - 設定: `config/a8-report-automation.json`
 - コア: `.claude/scripts/ads/lib/{a8-report-browser,a8-report-csv}.mjs`
 - 実行: `.claude/scripts/ads/{fetch-a8-ui-csv,normalize-a8-csv,check-a8-report-due}.mjs`
-- 成果 SSOT: `.claude/state/metrics/affiliate/{a8-results.json,a8-report-log.json}`
+- 成果 SSOT: `data/affiliate/{a8-results.json,a8-report-log.json}`
 - agent: `.claude/agents/{a8-report-collector,a8-csv-auditor}.md`
 - 隣接 skill: `/affiliate-operate` (提携運用) / `/scout-asp` (案件開拓)

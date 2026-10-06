@@ -51,8 +51,8 @@
 検証コマンド:
 ```bash
 node .claude/scripts/gsc/url-inspection-daily.cjs --limit 20
-diff <(head -2 .claude/state/metrics/gsc/url-inspection/history.csv) \
-     <(tail -1 .claude/state/metrics/gsc/url-inspection/history.csv)
+diff <(head -2 data/gsc/url-inspection/history.csv) \
+     <(tail -1 data/gsc/url-inspection/history.csv)
 ```
 
 ## 関連

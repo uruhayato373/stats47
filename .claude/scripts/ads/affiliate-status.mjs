@@ -2,7 +2,7 @@
 /**
  * affiliate-status.mjs — 3 ASP の提携状態を実機と突合する (read-only)
  * ---------------------------------------------------------------------------
- * `.claude/state/ads/affiliate-catalog.json` (自社がどの案件をどの ASP で運用するか) を
+ * `data/affiliate/affiliate-catalog.json` (自社がどの案件をどの ASP で運用するか) を
  * 実機の提携中/申請中一覧と突合し、**ドリフト**を報告する。
  *
  * 安全弁:
@@ -44,7 +44,7 @@ import {
   zipNamesWithIds,
 } from "./lib/affiliate-status-core.mjs";
 
-const CATALOG = join(repoRoot(), ".claude/state/ads/affiliate-catalog.json");
+const CATALOG = join(repoRoot(), "data/affiliate/affiliate-catalog.json");
 
 /**
  * 指定 ASP について、台帳が既に持っている「ID → name」を返す。
