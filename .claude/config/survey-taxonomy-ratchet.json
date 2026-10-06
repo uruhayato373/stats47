@@ -27,10 +27,10 @@
     ]
   },
   "theme": {
-    "minResolvedMetricGroups": 447,
+    "minResolvedMetricGroups": 446,
     "minMetricGroupCoveragePct": 100,
     "maxMissingLineageMetricGroups": 0,
-    "minResolvedCharts": 55,
+    "minResolvedCharts": 53,
     "minCoveragePct": 100,
     "maxMissingLineageCharts": 0
   },
@@ -119,6 +119,25 @@
         "fishery-marine/theme-fishery-half-century"
       ],
       "addedResolvedChartKeys": []
+    },
+    {
+      "date": "2026-10-06",
+      "reason": "Owner-approved local-economy review (2026-10-06-theme-local-economy.md) removed the industry-ratio line chart that redrew the card above it and the two-point establishments line chart whose chapter was dropped (the discussion markdown it also removed is not a data chart). It merged five single-year cards into two fixed-year comparison cards and added a gross-prefectural-product card, so resolved metric groups go 448 -> 446. Every metric of the removed groups stays resolved inside the merged cards; coverage stays 100% with zero missing lineage on both surfaces.",
+      "previousResolvedCharts": 55,
+      "removedResolvedChartKeys": [
+        "local-economy/theme-industry-structure",
+        "local-economy/theme-le-establishments-trend"
+      ],
+      "addedResolvedChartKeys": [],
+      "previousResolvedMetricGroups": 448,
+      "removedResolvedMetricGroupKeys": [
+        "local-economy/candidate-16-2",
+        "local-economy/candidate-16-3",
+        "local-economy/candidate-18-2"
+      ],
+      "addedResolvedMetricGroupKeys": [
+        "local-economy/gdp"
+      ]
     }
   ]
 }

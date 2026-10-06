@@ -120,6 +120,8 @@ ratchet の `maxLegacyDataSourceSectionArticles` / `maxSourcelessChartArticles` 
   2026-10-06のaging-society改善で高齢世帯の折れ線1図を外した分は`themeBaselineFollowUps`に記録し、
   追加図の下限を60→59にした (後続の訂正も同じ配列へ足し、回帰テストが連鎖を検査する)。
   同日のfishery-marine改善でカードと重複する4図を外した分も同じ配列に足し、下限を59→55にした。
+  同日のlocal-economy改善では2図を外して下限を55→53にし、単年カード5枚を年固定の比較カード2枚へまとめて
+  県内総生産額のカードを足した分で、指標カードの下限も447→446にした (同じ配列にカードのkeyも記録し、回帰テストが検査する)。
 
 ### 新しい調査を追加する
 1. `packages/ranking/src/data/surveys.json` にエントリ追加 (id は kebab-case)

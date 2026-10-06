@@ -16,8 +16,10 @@ export const totalProductionInThePrefecture: MetricConfig = {
   "entities": [
     "prefecture",
   ],
+  // 2026-10-06: getStatsData (cdCat01=C1121) で 2011〜2021 年度に 48 地域 (47 都道府県 + 全国) の値があることを確認し、
+  // 単年から広げた。分類名は全年度「県内総生産額（平成27年基準）」で同じ系列 (local-economy テーマの主指標)。
   "years": {
-    "from": 2021,
+    "from": 2011,
     "to": 2021,
   },
   "yearFormat": "fiscal",

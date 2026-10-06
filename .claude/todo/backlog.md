@@ -2536,22 +2536,27 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
   旧置き場 `.claude/state/metrics/psi` に書いていないこと、既存の history 行が巻き戻っていないことを確かめてから次の取得元 (GSC) へ進む。
 - **完了条件**: `npm run check-datasets -- --moves` が 0 行。関係する workflow の次回の定期実行が新しい置き場へ書いている。
 
-### [THEME-CATALOG-OPT-RELEASE-01] aging-society・fishery-marine の改善と章順・カード見出しの横断修正を、9 月の実験の d56 観測後に本番へ出す
+### [THEME-CATALOG-OPT-RELEASE-01] aging-society・fishery-marine・local-economy の改善と章順・カード見出しの横断修正を、9 月の実験の d56 観測後に本番へ出す
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:node .claude/scripts/themes/validate-theme-state.mjs] [起票:2026-10-06] [期日:2026-11-13] [領域:データ]
 
-- **背景**: 2026-10-06 承認の提案 (`.claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-10-06-theme-{aging-society,fishery-marine}.md`)
-  を branch `claude/theme-catalog-optimization` (PR #1085) に実装した (aging-society と fishery-marine の指標・章・カード、
-  読み方章の末尾移動 8 テーマ、カード見出しの章名除去 258 件)。変更した 29 テーマはすべて `.claude/state/themes/experiments.json` に
+- **背景**: 2026-10-06 承認の提案 (`.claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-10-06-theme-{aging-society,fishery-marine,local-economy}.md`)
+  を branch `claude/theme-catalog-optimization` (PR #1085) に実装した (3 テーマの指標・章・カード、
+  読み方章の末尾移動 8 テーマ、カード見出しの章名除去 258 件)。local-economy は県内総生産額と 1人当たり県民所得の
+  metric config の `years` も広げた (2011〜2021 年・2012〜2021 年)。変更した 29 テーマはすべて `.claude/state/themes/experiments.json` に
   `THEME-STRUCTURE-20260908-*` / `THEME-LAUNCH-*` の pending 実験 (d28 = 2026-10-09、d56 = 2026-11-06) を持つ。
-  先に出すと d56 の観測にこの変更が混ざる。同じテーマ × changeType の pending は 1 件までなので、2 テーマの新しい実験も今は登録できない。
+  先に出すと d56 の観測にこの変更が混ざる。同じテーマ × changeType の pending は 1 件までなので、3 テーマの新しい実験も今は登録できない。
 - **次**: 2026-11-06 の d56 観測が `experiments.json` に記録されたのを確かめてから、オーナーの承認を取って
-  ① R2 の page-components 反映 (`sync-snapshots.yml` を `only=page-components` で実行。2 テーマの
-  `page-components/theme/<key>.json` が変わる。反映せずにアプリだけ出すと、外した図 (高齢世帯の推移・漁業の 4 図) が R2 から読まれ、
-  ページ末尾に章外の図として残る) → ② develop → main のデプロイ → ③ 2 テーマの実験を
+  ① R2 の page-components 反映 (`sync-snapshots.yml` を `only=page-components` で実行。3 テーマの
+  `page-components/theme/<key>.json` が変わる。反映せずにアプリだけ出すと、外した図 (高齢世帯の推移・漁業の 4 図・地域経済の 3 図) が R2 から読まれ、
+  ページ末尾に章外の図として残る) → ①' 年を広げた 2 指標の観測値の再取得 (`data-refresh.yml` を
+  `metric=total-production-in-the-prefecture,per-capita-prefectural-income-h27` で、まず `dryRun: true` で件数を見てから実 push。
+  反映まではカードが登録済みの年 (県内総生産額は 2021 年の 1 点) だけを描く) → ② develop → main のデプロイ → ③ 3 テーマの実験を
   `evaluate-theme-experiments.mjs --register` で baseline 付きで登録し `--schedule <デプロイ日>`。
 - **完了条件**: 本番 `/themes/aging-society` で「年齢構造と支え手の比率」章にカードが出て、「高齢世帯の推移」が無く、
-  `/themes/fishery-marine` で図が「海面漁業産出額の長期推移」1 枚になり「漁業の担い手」章がある。8 テーマで読み方章が末尾にある。
-  2 テーマの実験が登録され d7/d28/d56 が入っている。
+  `/themes/fishery-marine` で図が「海面漁業産出額の長期推移」1 枚になり「漁業の担い手」章がある。
+  `/themes/local-economy` の先頭章「経済の規模と所得の水準」で県内総生産額のカードが 2011〜2021 年、1人当たり県民所得が 2012〜2021 年の推移を描き、
+  事業所数の章と「数値を比較するときの注意」が無い。8 テーマで読み方章が末尾にある。
+  3 テーマの実験が登録され d7/d28/d56 が入っている。
 
 ### [FISHERY-SPECIES-REFRESH-01] 魚種別漁獲量 12 指標を 2015 年から 2023 年まで延ばし、fishery-marine に「主な魚種」の章を作る
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run validate:config --workspace=@stats47/data-configs] [起票:2026-10-06] [領域:データ]

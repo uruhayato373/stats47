@@ -152,40 +152,6 @@
     ]
   },
   {
-    "themeKey": "local-economy",
-    "componentKey": "theme-industry-structure",
-    "componentType": "donut-chart",
-    "rawRequestKeys": [
-      "0000010206?cdCat01=#F01201",
-      "0000010206?cdCat01=#F01202",
-      "0000010206?cdCat01=#F01203"
-    ],
-    "metricKeys": [
-      "employed-people-ratio-primary",
-      "employed-people-ratio-secondary",
-      "employed-people-ratio-tertiary"
-    ],
-    "units": [
-      "％",
-      "％",
-      "％"
-    ]
-  },
-  {
-    "themeKey": "local-economy",
-    "componentKey": "theme-le-establishments-trend",
-    "componentType": "line-chart",
-    "rawRequestKeys": [
-      "0000010103?cdCat01=C2107"
-    ],
-    "metricKeys": [
-      "number-of-establishments-economic-census-basic-survey"
-    ],
-    "units": [
-      "事業所"
-    ]
-  },
-  {
     "themeKey": "manufacturing",
     "componentKey": "manufacturing-establishments-employees-trend",
     "componentType": "line-chart",

@@ -257,9 +257,9 @@
   "theme": {
     "themes": 55,
     "metricGroups": {
-      "total": 534,
+      "total": 532,
       "byStatus": {
-        "resolved": 448,
+        "resolved": 446,
         "unresolved": 0,
         "not-applicable": 86,
         "missing-lineage": 0
@@ -267,12 +267,12 @@
       "coveragePct": 100,
       "unresolved": []
     },
-    "charts": 71,
-    "applicableCharts": 55,
+    "charts": 68,
+    "applicableCharts": 53,
     "byStatus": {
-      "resolved": 55,
+      "resolved": 53,
       "unresolved": 0,
-      "not-applicable": 16,
+      "not-applicable": 15,
       "missing-lineage": 0
     },
     "coveragePct": 100,
@@ -421,7 +421,6 @@
       ],
       "household-survey": [
         "household-assets-debt",
-        "local-economy",
         "real-income"
       ],
       "housing-land-survey": [
@@ -441,8 +440,7 @@
       "job-placement-statistics": [
         "disability-support",
         "labor-mobility",
-        "labor-wages",
-        "local-economy"
+        "labor-wages"
       ],
       "kakei-chousa": [
         "earthquake-exposure",
@@ -452,8 +450,7 @@
       ],
       "labor-market-annual": [
         "labor-mobility",
-        "labor-wages",
-        "local-economy"
+        "labor-wages"
       ],
       "late-elderly-medical-annual-report": [
         "aging-society"
@@ -477,7 +474,6 @@
         "community-participation"
       ],
       "local-finance": [
-        "local-economy",
         "local-finance",
         "public-assistance",
         "safety"
@@ -509,8 +505,7 @@
         "agriculture-production"
       ],
       "minimum-wage": [
-        "labor-wages",
-        "local-economy"
+        "labor-wages"
       ],
       "mlit-ksj": [
         "geographic-access",
@@ -613,7 +608,6 @@
         "manufacturing"
       ],
       "prefectural-settlement-survey": [
-        "local-economy",
         "local-finance",
         "public-assistance",
         "safety"
@@ -2772,7 +2766,6 @@
       "rankingCount": 25,
       "themeKeys": [
         "household-assets-debt",
-        "local-economy",
         "real-income"
       ],
       "blogSlugs": [
@@ -2902,8 +2895,7 @@
       "themeKeys": [
         "disability-support",
         "labor-mobility",
-        "labor-wages",
-        "local-economy"
+        "labor-wages"
       ],
       "blogSlugs": [
         "minimum-wage-1000yen-breakthrough",
@@ -3163,8 +3155,7 @@
       "rankingCount": 9,
       "themeKeys": [
         "labor-mobility",
-        "labor-wages",
-        "local-economy"
+        "labor-wages"
       ],
       "blogSlugs": [
         "minimum-wage-1000yen-breakthrough",
@@ -3261,7 +3252,6 @@
       "surveyId": "local-finance",
       "rankingCount": 132,
       "themeKeys": [
-        "local-economy",
         "local-finance",
         "public-assistance",
         "safety"
@@ -3406,8 +3396,7 @@
       "surveyId": "minimum-wage",
       "rankingCount": 1,
       "themeKeys": [
-        "labor-wages",
-        "local-economy"
+        "labor-wages"
       ],
       "blogSlugs": [
         "minimum-wage-1000yen-breakthrough",
@@ -3872,7 +3861,6 @@
       "surveyId": "prefectural-settlement-survey",
       "rankingCount": 121,
       "themeKeys": [
-        "local-economy",
         "local-finance",
         "public-assistance",
         "safety"

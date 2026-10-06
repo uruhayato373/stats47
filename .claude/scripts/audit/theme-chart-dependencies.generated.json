@@ -3,8 +3,8 @@
   "totalRequests": 0,
   "distinctRequests": 0,
   "requests": [],
-  "totalMetricRefs": 150,
-  "distinctMetricRefs": 146,
+  "totalMetricRefs": 146,
+  "distinctMetricRefs": 142,
   "metrics": [
     {
       "metricKey": "actual-income-worker-households-per-month",
@@ -236,30 +236,6 @@
       "expectedConfigHash": "32ba461e0bd6e029",
       "themeKey": "occupation-salary",
       "componentKey": "theme-occ-medical-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "metricKey": "employed-people-ratio-primary",
-      "expectedUnit": "％",
-      "expectedConfigHash": "bfe416412473b0c2",
-      "themeKey": "local-economy",
-      "componentKey": "theme-industry-structure",
-      "componentType": "line-chart"
-    },
-    {
-      "metricKey": "employed-people-ratio-secondary",
-      "expectedUnit": "％",
-      "expectedConfigHash": "6043c40a971e363d",
-      "themeKey": "local-economy",
-      "componentKey": "theme-industry-structure",
-      "componentType": "line-chart"
-    },
-    {
-      "metricKey": "employed-people-ratio-tertiary",
-      "expectedUnit": "％",
-      "expectedConfigHash": "c3cd05630b85cad4",
-      "themeKey": "local-economy",
-      "componentKey": "theme-industry-structure",
       "componentType": "line-chart"
     },
     {
@@ -572,14 +548,6 @@
       "expectedConfigHash": "3160916f2a09ea34",
       "themeKey": "living-housing",
       "componentKey": "lh-household-structure-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "metricKey": "number-of-establishments-economic-census-basic-survey",
-      "expectedUnit": "事業所",
-      "expectedConfigHash": "f353befd6b013e56",
-      "themeKey": "local-economy",
-      "componentKey": "theme-le-establishments-trend",
       "componentType": "line-chart"
     },
     {

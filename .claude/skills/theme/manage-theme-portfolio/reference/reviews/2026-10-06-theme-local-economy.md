@@ -1,7 +1,7 @@
 ---
 type: theme-catalog-review
 date: 2026-10-06
-status: proposal-ready
+status: implemented-pending-release
 theme: local-economy
 supersedes: 2026-07-11-theme-local-economy.md
 tags: [theme-catalog, regional-economy, prefectural-accounts, industry]
@@ -126,7 +126,13 @@ rankingKey が実在する候補は、実装時に catalog の `rejectedCandidat
 
 ## 採用決定
 
-**現状: ユーザー承認待ち。** 承認前に catalog と metric config を編集しない。判断が要る点は次の 2 つ。
+**2026-10-06 ユーザーが全項目を承認し、同日 branch `claude/theme-catalog-optimization` (PR #1085) に実装した (未デプロイ)。**
 
-1. 表 1〜3 の変更 (特に、県内総生産額を primary に加えること、雇用・財政などの 5 指標を外すこと、事業所数の章と重複図を外すこと)
-2. 県内総生産額と 1人当たり県民所得の `years` を広げる metric config の変更を、この PR に含めること (値の R2 反映はデプロイ時)
+- 表 1〜3 のとおり実装した。県内総生産額と第1次産業就業者比率の selection は backfill の gate を通して書いた
+  (出典: 県民経済計算「統計の目的」、平成12年国勢調査 産業 (大分類) 別就業者数)。local-economy の
+  `[no-adoption-criteria]` warning は 1 件から 0 件になり、warning の基準値を 268 → 267 に下げた。
+- 就業者比率の図にあった「3 区分の合計は 100% にならない」という注記は、図と一緒に消えないよう「どの産業で働いているか」章の説明へ移した。
+- 外した 2 図 (就業者比率・事業所数) は調査と紐付いた図なので、調査の紐付けの ratchet の下限を 55 → 53 にした。
+  単年カード 5 枚を 2 枚にまとめて県内総生産額のカードを足したので、指標カードの下限も 447 → 446 にし、どちらも `themeBaselineFollowUps` に記録した。
+- 県内総生産額 (2011〜2021 年) と 1人当たり県民所得 (2012〜2021 年) の `years` を広げた。R2 の観測値の再取得はデプロイと同じ承認で行う
+  (`THEME-CATALOG-OPT-RELEASE-01`)。

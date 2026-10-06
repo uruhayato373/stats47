@@ -32,6 +32,26 @@ describe('theme redesign taxonomy population', () => {
     expect(ratchet.theme.minResolvedCharts).toBe(expected);
   });
 
+  it('lowers the metric-group baseline only by the recorded follow-up card merges', () => {
+    const groups = new Map<string, ThemeChartSurveyTaxonomy>(results.flatMap((result) => result.metricGroups.map((group) => [`${result.themeKey}/${group.componentKey}`, group] as const)));
+    const withGroups = ratchet.themeBaselineFollowUps.flatMap((followUp) =>
+      followUp.previousResolvedMetricGroups === undefined
+        ? []
+        : [{
+            previous: followUp.previousResolvedMetricGroups,
+            removed: followUp.removedResolvedMetricGroupKeys ?? [],
+            added: followUp.addedResolvedMetricGroupKeys ?? [],
+          }],
+    );
+    expect(withGroups.length).toBeGreaterThan(0);
+    for (const followUp of withGroups) {
+      for (const key of followUp.removed) expect(groups.has(key), key).toBe(false);
+      for (const key of followUp.added) expect(groups.get(key)?.status, key).toBe('resolved');
+    }
+    const last = withGroups[withGroups.length - 1]!;
+    expect(ratchet.theme.minResolvedMetricGroups).toBe(last.previous - last.removed.length + last.added.length);
+  });
+
   it('protects source coverage on metric-group graphs including all three launch themes', () => {
     const groups = results.flatMap((result) => result.metricGroups);
     expect(groups.filter((group) => group.status === 'resolved').length).toBeGreaterThanOrEqual(ratchet.theme.minResolvedMetricGroups);

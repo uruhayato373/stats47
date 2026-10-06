@@ -39,30 +39,23 @@ describe('テーマ比較と既存章の統合', () => {
     ).toBe(false);
   });
 
+  // 2026-10-06: 同じ3指標の折れ線 (theme-industry-structure) はカードと重複するため外した。
+  // 図の注記にあった「合計は100%にならない」は、カードを置く章の説明へ移している。
   it('合計が100%でない産業割合を再正規化せず元の系列として渡す', () => {
-    const chart = catalog('local-economy').charts.find(
-      (item) => item.componentKey === 'theme-industry-structure'
-    )!;
-    expect(chart.componentType).toBe('line-chart');
-    expect(chart.componentProps.seriesRefs).toEqual([
-      {
-        metricKey: 'employed-people-ratio-primary',
-        label: '第1次産業就業者比率',
-        colorRole: 'improve',
-      },
-      {
-        metricKey: 'employed-people-ratio-secondary',
-        label: '第2次産業就業者比率',
-        colorRole: 'population',
-      },
-      {
-        metricKey: 'employed-people-ratio-tertiary',
-        label: '第3次産業就業者比率',
-        colorRole: 'series-12',
-      },
+    const economy = catalog('local-economy');
+    expect(
+      economy.metricGroups?.find((group) => group.key === 'industry-1')
+        ?.rankingKeys
+    ).toEqual([
+      'employed-people-ratio-primary',
+      'employed-people-ratio-secondary',
+      'employed-people-ratio-tertiary',
     ]);
-    expect(chart.sourceLink).toBe('https://www.stat.go.jp/data/ssds/index.htm');
-    expect(chart.annotation).toContain('100%');
+    const industry = economy.sections?.find(
+      (section) => section.key === 'industry'
+    );
+    expect(industry?.metricGroupKeys).toContain('industry-1');
+    expect(industry?.description).toContain('合計は100%になりません');
   });
 
   it('総合物価と費目系列を分け、住宅面積の疎な系列も失わない', () => {

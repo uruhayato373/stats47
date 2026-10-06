@@ -1035,7 +1035,7 @@ export const AREA_HIGHLIGHT_PROMINENCE: Readonly<Record<string, number>> =
   "museum-count-per-million": 0.7324,
   "owner-occupied-housing-ratio": 0.7779,
   "penal-code-offenses-recognized-per-1000": 0.5925,
-  "per-capita-prefectural-income-h27": 0.49,
+  "per-capita-prefectural-income-h27": 0.5975,
   "physicians-in-medical-facilities-per-100k": 0.48,
   "police-officer-count-per-population": 0.4459,
   "population-density-per-km2-total-area": 0.7188,
