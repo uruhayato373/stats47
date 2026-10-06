@@ -1,7 +1,0 @@
-{
-  "workflow": "workflow-health-daily.yml",
-  "inputs": {},
-  "ref": "main",
-  "reason": "置き場の集約 第 2 段階 (PR #1088) の反映後、workflow 健全性の記録が新しい置き場 data/ci/ へ書かれることを確かめる",
-  "requestedAt": "2026-10-06T22:13:42Z"
-}
