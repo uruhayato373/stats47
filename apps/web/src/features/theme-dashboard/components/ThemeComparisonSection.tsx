@@ -23,6 +23,7 @@ import {
   TableRow,
 } from '@stats47/components/atoms/ui/table';
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
+import { metricDisplayName } from "@stats47/ranking";
 
 import { ChartPanel } from '@/components/charts/ChartPanel';
 import { SurfaceCard } from '@/components/surface';
@@ -154,9 +155,7 @@ export function ThemeComparisonSection({
               <SelectContent>
                 {mapSummaries.map(({ key, data }) => (
                   <SelectItem key={key} value={key}>
-                    {overviewLabels[key] ??
-                      data.rankingItem.readerLabel ??
-                      data.rankingItem.title}
+                    {overviewLabels[key] ?? metricDisplayName(data.rankingItem)}
                   </SelectItem>
                 ))}
               </SelectContent>

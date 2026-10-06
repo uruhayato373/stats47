@@ -3,6 +3,7 @@
 import { useState } from "react";
 
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
+import { metricShortName } from "@stats47/ranking";
 
 import { RailCard, RailLinkList, RailNavRow } from "@/components/surface";
 
@@ -78,7 +79,7 @@ export function RankingSidebarClient({
                         <RailNavRow
                             key={`${item.rankingKey}-${item.areaType}`}
                             href={`${linkPrefix}/${item.rankingKey}`}
-                            title={item.readerLabel ?? item.title}
+                            title={metricShortName(item)}
                             chevron={false}
                             onClick={() =>
                                 trackRailClick({
@@ -91,7 +92,7 @@ export function RankingSidebarClient({
                         >
                             <span className="flex min-w-0 flex-col gap-0.5">
                                 <span className="line-clamp-1 leading-snug">
-                                    {item.readerLabel ?? item.title}
+                                    {metricShortName(item)}
                                     {(() => {
                                         const detail = getSidebarDetail(item);
                                         return detail ? (

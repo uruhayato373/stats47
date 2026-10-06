@@ -10,18 +10,10 @@
  *   それまでの暫定として、既存 item.json の subtitle を文面から判定する。
  */
 
-/** subtitle がデータ注釈 (※系) かどうかを文面から判定する。 */
-export function isCaveatNote(text: string | null | undefined): boolean {
-  if (!text) return false;
-  const t = text.trim();
-  return (
-    t.startsWith("※") ||
-    t.startsWith("注") ||
-    t.includes("調査対象外") ||
-    t.includes("value=0") ||
-    t.includes("対象外")
-  );
-}
+import { isCaveatNote } from "@stats47/ranking";
+
+/** subtitle がデータ注釈 (※系) かどうか。判定は名前の組み立て (`@stats47/ranking` の format-metric-name) と共有する。 */
+export { isCaveatNote };
 
 interface ClassifiedSubtitle {
   /** 定義補足 (h1 直下に控えめ表示)。注釈だった場合は null。 */

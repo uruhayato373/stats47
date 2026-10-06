@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
+import { metricDisplayName, metricShortName } from "@stats47/ranking";
 
 import { SurfaceCard } from "@/components/surface";
 
@@ -50,8 +51,10 @@ function TopicRow({ row }: { row: CollapsedRow }) {
   const primary = row.variants.find((v) => !v.subtitle) ?? row.variants[0];
   const hasVariants = row.variants.length > 1;
   // 分母・内訳は subtitle が持つ (unit-semantics-standards §4)。落とすと「道路実延長 12.46km」のように実数に見える
-  const readerLabel =
-    primary.readerLabel ?? (!hasVariants && primary.subtitle ? `${row.title}（${primary.subtitle}）` : row.title);
+  // 内訳が複数ある行は内訳を値の横に出すので、名前には付けない
+  const readerLabel = hasVariants
+    ? metricShortName({ title: row.title, readerLabel: primary.readerLabel })
+    : metricDisplayName({ title: row.title, readerLabel: primary.readerLabel, subtitle: primary.subtitle });
 
   return (
     <li className="border-b border-border last:border-b-0">

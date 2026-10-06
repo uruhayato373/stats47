@@ -3,6 +3,7 @@
 import { useMemo } from "react";
 
 import { lookupArea } from "@stats47/area";
+import { metricDisplayName } from "@stats47/ranking";
 
 import { ScatterChartGrid } from "./ScatterChartGrid";
 
@@ -96,8 +97,8 @@ export function PopulationScatterSection({
         id: config.id,
         title: config.title,
         points,
-        xLabel: xData.rankingItem.readerLabel ?? xData.rankingItem.title,
-        yLabel: yData.rankingItem.readerLabel ?? yData.rankingItem.title,
+        xLabel: metricDisplayName(xData.rankingItem),
+        yLabel: metricDisplayName(yData.rankingItem),
         xUnit: xData.rankingItem.unit,
         yUnit: yData.rankingItem.unit,
         diagonalLine: config.diagonalLine,
