@@ -1,0 +1,9 @@
+{
+  "metric": "accountant-annual-income,architect-annual-income,associate-professor-annual-income,auto-mechanic-annual-income,barber-beautician-annual-income,bus-driver-annual-income,care-manager-annual-income,care-worker-annual-income,carpenter-annual-income,cleaning-worker-annual-income,cook-annual-income,dental-hygienist-annual-income,dentist-annual-income,designer-annual-income,dietitian-annual-income,doctor-annual-income,electrician-annual-income,high-school-teacher-annual-income,home-care-worker-annual-income,kindergarten-teacher-annual-income,manager-annual-income,midwife-annual-income,nurse-annual-income,nurse-salary,nursery-teacher-annual-income,nursing-assistant-annual-income,pharmacist-annual-income,physical-therapist-annual-income,pilot-annual-income,practical-nurse-annual-income,public-health-nurse-annual-income,researcher-annual-income,sales-clerk-annual-income,school-teacher-annual-income,security-guard-annual-income,software-engineer-annual-income,system-consultant-annual-income,taxi-driver-annual-income,truck-driver-annual-income,university-professor-annual-income,actual-income-worker-households-per-month,annual-precipitation,annual-precipitation-days,area-ratio-of-total,average-relative-humidity,average-temperature,avg-propensity-to-consume-worker-households,avg-savings-rate-worker-households,bank-deposit-balance-per-person",
+  "since": "",
+  "dryRun": false,
+  "migrateLegacyRecipes": false,
+  "snapshotScope": "ranking",
+  "reason": "DATA-WAGE-TABLE-YEARS-01 (tab 年代別コード) + YEAR-COV-20260926 (years 拡張) の R2 反映",
+  "requestedAt": "2026-10-06T05:10:41.693Z"
+}
