@@ -3,6 +3,7 @@
 import React from "react";
 
 import { cn, Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@stats47/components";
+import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
 import type { AttributeMatrixData } from "../../../types/visualization";
 
@@ -62,7 +63,7 @@ export const AttributeMatrixClient: React.FC<AttributeMatrixClientProps> = ({
                 style={value !== null ? { backgroundColor: getCellBg(value) } : undefined}
               >
                 {value !== null
-                  ? `${value.toLocaleString()}${unit ? ` ${unit}` : ""}`
+                  ? `${value.toLocaleString()}${unit ? ` ${formatUnitForDisplay(unit)}` : ""}`
                   : "-"}
               </TableCell>
             ))}

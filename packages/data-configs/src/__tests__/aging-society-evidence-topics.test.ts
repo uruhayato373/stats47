@@ -53,6 +53,6 @@ describe("aging-society evidence topics", () => {
     expect(aging?.summary).toContain("65歳以上人口を総人口で割った割合");
     expect(aging?.summary).toContain("絶対数ではありません");
     expect(households?.summary).toContain("一般世帯数で割った割合");
-    expect(households?.summary).toContain("100％になるとは限りません");
+    expect(households?.summary).toContain("100%になるとは限りません");
   });
 });

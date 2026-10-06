@@ -19,6 +19,7 @@ import {
   TabsList,
   TabsTrigger,
 } from "@stats47/components/atoms/ui/tabs";
+import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { Map as MapIcon, Table as TableIcon, BarChart3, MapPin } from "lucide-react";
 
 import { SurfaceLinkCard, getSurfaceCardClassName } from "@/components/surface";
@@ -410,7 +411,7 @@ function IndicatorGrid({
                   <div className="text-xs text-muted-foreground">
                     1位: {top1Name}
                     <span className="ml-1">
-                      ({top1.value?.toLocaleString()} {data.rankingItem.unit})
+                      ({top1.value?.toLocaleString()} {formatUnitForDisplay(data.rankingItem.unit)})
                     </span>
                   </div>
                 )}

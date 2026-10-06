@@ -2,6 +2,7 @@
 
 import { useMemo } from "react";
 
+import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { TrendingUp, BarChart3 } from "lucide-react";
 
 import { ChartPanel } from "@/components/charts/ChartPanel";
@@ -122,7 +123,7 @@ export function BlogStatsHighlight(props: StatsHighlightConfig) {
                   </span>
                   {unit && (
                     <span className="text-sm font-normal text-muted-foreground ml-1">
-                      {unit}
+                      {formatUnitForDisplay(unit)}
                     </span>
                   )}
                 </div>
@@ -145,7 +146,7 @@ export function BlogStatsHighlight(props: StatsHighlightConfig) {
                 {stats.total}
                 {unit && (
                   <span className="text-xs font-normal text-muted-foreground ml-1">
-                    {unit}
+                    {formatUnitForDisplay(unit)}
                   </span>
                 )}
               </div>
@@ -171,7 +172,7 @@ export function BlogStatsHighlight(props: StatsHighlightConfig) {
                 {stats.mean}
                 {unit && (
                   <span className="text-xs font-normal text-muted-foreground ml-1">
-                    {unit}
+                    {formatUnitForDisplay(unit)}
                   </span>
                 )}
               </div>
@@ -185,7 +186,7 @@ export function BlogStatsHighlight(props: StatsHighlightConfig) {
                 {stats.median}
                 {unit && (
                   <span className="text-xs font-normal text-muted-foreground ml-1">
-                    {unit}
+                    {formatUnitForDisplay(unit)}
                   </span>
                 )}
               </div>
@@ -199,7 +200,7 @@ export function BlogStatsHighlight(props: StatsHighlightConfig) {
                 {stats.max.value}
                 {unit && (
                   <span className="text-xs font-normal text-muted-foreground ml-1">
-                    {unit}
+                    {formatUnitForDisplay(unit)}
                   </span>
                 )}
               </div>
@@ -216,7 +217,7 @@ export function BlogStatsHighlight(props: StatsHighlightConfig) {
                 {stats.min.value}
                 {unit && (
                   <span className="text-xs font-normal text-muted-foreground ml-1">
-                    {unit}
+                    {formatUnitForDisplay(unit)}
                   </span>
                 )}
               </div>

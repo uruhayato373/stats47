@@ -2,6 +2,8 @@
 
 import { useEffect, useState, useTransition } from 'react';
 
+import { formatUnitForDisplay } from "@stats47/data-configs/unit";
+
 import { ChartErrorState } from '@/components/charts/ChartState';
 import type { PageComponent } from '@/components/stat-charts';
 
@@ -138,7 +140,7 @@ export function ThemeDbChartRenderer({ chart, prefCode, prefName }: Props) {
             ? '全国'
             : prefName}
         {result.contract.year ? ` · ${observationPeriod(result)}` : ''}
-        {result.contract.unit ? ` · ${result.contract.unit}` : ''}
+        {result.contract.unit ? ` · ${formatUnitForDisplay(result.contract.unit)}` : ''}
       </p>
       <ThemeChartResultRenderer chartResult={result} />
       {'scopeLabel' in result.contract &&

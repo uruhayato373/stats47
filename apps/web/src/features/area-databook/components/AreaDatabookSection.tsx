@@ -1,3 +1,4 @@
+import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { BookOpen } from "lucide-react";
 
 import { DashboardComponentRenderer } from "@/components/stat-charts/server";
@@ -97,7 +98,7 @@ function renderBlock(
                 </span>
                 <span className="font-bold tabular-nums">
                   {it.value.toLocaleString("ja-JP")}
-                  <span className="ml-0.5 text-[11px] text-muted-foreground">{it.unit}</span>
+                  <span className="ml-0.5 text-[11px] text-muted-foreground">{formatUnitForDisplay(it.unit)}</span>
                 </span>
               </li>
             ))}

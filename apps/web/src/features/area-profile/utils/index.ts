@@ -13,3 +13,4 @@ export {
   type AreaRegionGroup,
 } from "./build-area-directory-data";
 export { matchPrefectures, prefectureShortName } from "./match-prefectures";
+export { stripPrefectureName } from "./strip-prefecture-name";

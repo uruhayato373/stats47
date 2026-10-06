@@ -10,6 +10,7 @@ import {
   DataTable,
 } from "@stats47/components";
 import { ToggleGroup, ToggleGroupItem } from "@stats47/components/atoms/ui/toggle-group";
+import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { rankByValue } from "@stats47/ranking";
 import { computeDeviationScores } from "@stats47/utils";
 import { Loader2 } from "lucide-react";
@@ -138,7 +139,7 @@ export function CityRankingSection({
               {row.getValue<number>("value").toLocaleString("ja-JP")}
               {unit && (
                 <span className="text-xs text-muted-foreground ml-1">
-                  {unit}
+                  {formatUnitForDisplay(unit)}
                 </span>
               )}
             </div>

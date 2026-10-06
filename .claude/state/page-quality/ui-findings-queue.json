@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-05T07:26:52.705Z",
+  "generatedAt": "2026-10-06T04:50:14.187Z",
   "auditAt": "2026-10-03T20:37:21.080Z",
   "findings": [
     {
@@ -10,14 +10,14 @@
       "metric_key": null,
       "severity": "low",
       "detail": "[mobile-390/low] スマホ1枚目、「人気のタグ」のチップ列: タグの件数(169など)が10pxで小さく、右端のチップが切れてスクロールできることが分かりにくい。同じ先頭画面でCookieバナーがボタン領域を覆って記事一覧を隠す → 件数の文字を大きくし、チップ列の右端に切れを示すフェードを付ける",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-04",
       "last_seen": "2026-10-04",
-      "fixed_at": null,
+      "fixed_at": "2026-10-06T04:47:13.047Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "人気タグのチップの件数を 10px→text-xs にし、横スクロール時は右端をマスクで薄くして続きを示した (RailLinksCard)。Cookie バナーの重なりは同意前の一時表示で今回は変更なし"
     },
     {
       "key": "agent|blog-article--charts",
@@ -27,14 +27,14 @@
       "metric_key": null,
       "severity": "low",
       "detail": "[mobile-390/low] スマホ1枚目、パンくずとH1の間の「ホーム > ブログ」帯と、その下の「stats47 データジャーナル / 統計で読む地域ニュース / PR を含む場合があります」の行: パンくずが灰色の帯に入って記事の導入前に2層の見出し行が続き、「PRを含む場合があります」が細かい文字で他の肩書きと並び、意味の違う3項目が区切りの / だけでつながって読みにくい → PR表記は独立した行にして肩書きと分け、パンくず帯と肩書き行の余白を詰める",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-04",
       "last_seen": "2026-10-04",
-      "fixed_at": null,
+      "fixed_at": "2026-10-06T04:47:14.106Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "PR 表記を肩書き行から独立した行に分け、肩書き行の下余白を詰めた (blog/[slug]/page.tsx)"
     },
     {
       "key": "agent|geo-analysis",
@@ -61,14 +61,14 @@
       "metric_key": null,
       "severity": "medium",
       "detail": "[mobile-390/medium] スマホ1枚目下部、「注目のランキング」カードと「新着ブログ」カード: カード右端が切れた横スクロールで、2枚目のタイトルと値(「公衆…」「東…」「10,7…」)が途中で見切れ、スクロールできることが「>」ボタン以外に分かりにくい。ランキングカードの値の左に大きな空白があり、地図が小さく情報量が少ない → 2枚目のカードが見える幅を残していることを示す余白かフェードを付け、カードの地図と値の配置を詰める\n[mobile-390/low] スマホ2枚目、「都道府県から探す」のタイル地図: 北海道・東北が右端に寄り、左上に大きな空白があり、九州の右端付近は画面外に切れそうに見える。10px級の都道府県名が縦書きで折り返されて読みにくい → タイル地図の列幅を幅に合わせて詰め、県名は折り返さず略称か横書きで表示する",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-04",
       "last_seen": "2026-10-04",
-      "fixed_at": null,
+      "fixed_at": "2026-10-06T04:47:17.569Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "カード横スクロールの右端に続きを示すフェードを追加 (HorizontalCardCarousel)。タイル地図の県名を折り返さない (whitespace-nowrap)。左上の空白はタイル配置が列島の形を写すため現状維持"
     },
     {
       "key": "agent|municipality",
@@ -95,14 +95,14 @@
       "metric_key": null,
       "severity": "high",
       "detail": "[mobile-390/high] スマホ1枚目、「田原本町の特徴(県内ランキング上位)」カードの各行(身体障害者更生援護施設設定員数など)。デスクトップ1枚目の同カードも同じ: 値が「0人(2011年度)」「0施設」の指標が「3位」「4位」「5位」と上位として並び、読者は特徴や強みと誤読する。同率0の順位で、見出しの「上位」と内容が合わない → 値が0の指標は特徴リストから外すか、「0(同率)」と明示し、上位表示は意味のある値のある指標だけにする\n[mobile-390/medium] スマホ1枚目、H1直下の小見出し「奈良県 奈良県 田原本町」と、下の市区町村一覧の「奈良県 奈良市」などの表記。デスクトップ1枚目も同じ: 県名が二重に表示され、一覧の各リンクにも毎回「奈良県」が付いていて冗長で読みにくい。カード見出しと説明文にも「奈良県 田原本町」が繰り返される → 小見出しの県名重複を直し、同じ県内の一覧では市区町村名だけを表示する",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-04",
       "last_seen": "2026-10-04",
-      "fixed_at": null,
+      "fixed_at": "2026-10-06T04:47:18.907Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "値が 0 の指標を市区町村の特徴から除外 (selectCityHighlights + test)。県名の重複を stripPrefectureName で除き、一覧も市区町村名だけにした"
     },
     {
       "key": "agent|other",
@@ -112,14 +112,14 @@
       "metric_key": null,
       "severity": "low",
       "detail": "[mobile-390/low] スマホ1枚目、タグ一覧の各記事カード(「一般世帯数の県差は何を映すのか」など): タイトルと抜粋のあとにカード内で区切り線が引かれているが、その下に何も続かず、空の領域が見える。タイトルが左に寄ったカードの左右余白と線の位置がそろっていない → カード下部の使われていない区切り線を消すか、そこに更新日などの情報を置く",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-09-24",
       "last_seen": "2026-10-04",
-      "fixed_at": null,
+      "fixed_at": "2026-10-06T04:47:21.146Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": "再発 (2026-10-04 の週次で再検出)"
+      "note": "タグ一覧の記事カードから使われていない区切り線を外し、見出しの行間を整えた (tag/[tagKey]/page.tsx)"
     },
     {
       "key": "agent|prefecture-detail",
@@ -146,14 +146,14 @@
       "metric_key": null,
       "severity": "medium",
       "detail": "[mobile-390/medium] スマホ1枚目の中ほど、青い案内バナー「青森県の視点 — 47都道府県チャートで青森県をハイライト表示しています」: 狭い幅で文章と右端の「青森県プロフィールへ →」が3列に分かれて詰まり、文が1〜2文字ずつ折り返して読みにくい。リンクも小さく折り返されて見つけにくい → スマホではバナーを縦積みにして文章を全幅で出し、リンクは次の行に独立して置く\n[mobile-390/low] スマホ1枚目、「ページ内」ボックス: 「ページ内」の目次に項目が1つ(「土砂災害を都道府県別に見る」)だけで、すぐ下に「全指標・出典調査」の開閉行が続き、同じ種類の枠が重なって主要データが下に押される → 項目が1つだけの目次は出さないか、開閉行とまとめて1つにする",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-04",
       "last_seen": "2026-10-04",
-      "fixed_at": null,
+      "fixed_at": "2026-10-06T04:47:22.414Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "視点バナーをスマホでは縦積み (文→リンクの順) にし、項目が 1 つだけの「ページ内」目次は出さないようにした (ThemePageLayout)"
     },
     {
       "key": "agent|ranking",
@@ -180,14 +180,14 @@
       "metric_key": null,
       "severity": "medium",
       "detail": "[mobile-390/medium] スマホ1枚目、「地図」タブ内の日本地図(「2021年度」セレクトの下): 地図の外側にハバロフスク・上海・ソウルなど海外の地名が多数出て、日本の都道府県の色分けより目立つ。地図の枠が地図本体とずれ、左と下に余白の帯が見え、画面下まで地図が広がって凡例が切れている → 海外の地名ラベルを消すか薄くし、地図の枠と表示範囲を日本列島に合わせる\n[mobile-390/low] スマホ1枚目上部、パンくず最後の項目とその下のH1: パンくずの最後に長いタイトルがH1と同じ文言で全文入っている。3行に折り返し、H1の前に同じ長文が2回続く → パンくずの最後の項目は短縮するか省き、カテゴリ名までにする",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-04",
       "last_seen": "2026-10-04",
-      "fixed_at": null,
+      "fixed_at": "2026-10-06T04:47:26.648Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "背景タイルを不透明度 0.55 にして海外の地名を薄くし、狭い幅ではパンくずの現在地 (H1 と同じ長文) を出さないようにした。地図枠と凡例の切れは今回未変更で、週次で残れば再起票"
     },
     {
       "key": "agent|theme",
@@ -282,14 +282,14 @@
       "metric_key": "unit_symbol_mixing",
       "severity": "warning",
       "detail": "unit_symbol_mixing: 1 URL (最大 7、閾値 <= 0)。例: https://stats47.jp/blog",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-04",
       "last_seen": "2026-10-04",
-      "fixed_at": null,
+      "fixed_at": "2026-10-06T04:47:11.822Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "ブログ一覧・タグ一覧・テーマ関連記事の説明文を normalizePercentInText で表示時に % へ揃えた (R2 原稿は不変)。localhost /blog で ％ 0 件"
     },
     {
       "key": "machine|category|unit_symbol_mixing",
@@ -299,14 +299,14 @@
       "metric_key": "unit_symbol_mixing",
       "severity": "warning",
       "detail": "unit_symbol_mixing: 6 URL (最大 2、閾値 <= 0)。例: https://stats47.jp/category/administrativefinancial / https://stats47.jp/category/construction / https://stats47.jp/category/energy",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-04",
       "last_seen": "2026-10-04",
-      "fixed_at": null,
+      "fixed_at": "2026-10-06T04:47:15.199Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "FeaturedRankingCard・CategoryTopicGroups・サイドバーの単位を formatUnitForDisplay に通した。localhost /category/energy /category/construction で ％ 0 件"
     },
     {
       "key": "machine|geo-analysis|internal_jargon_terms",
@@ -316,14 +316,14 @@
       "metric_key": "internal_jargon_terms",
       "severity": "warning",
       "detail": "internal_jargon_terms: 13 URL (最大 7、閾値 <= 0)。例: https://stats47.jp/geo/population-flood-risk / https://stats47.jp/geo/population-flood-risk/01/overlap / https://stats47.jp/geo/population-flood-risk/13/overlap",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-04",
       "last_seen": "2026-10-04",
-      "fixed_at": null,
+      "fixed_at": "2026-10-06T04:47:16.503Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "「保存則」→「合計の検算」「lineage」→「処理の流れ」。部品の文言と、R2 manifest 由来の方法・段階は toGeoReaderTerms で表示時に置換。localhost /geo/population-flood-risk・snow-designation で 0 件"
     },
     {
       "key": "machine|https://stats47.jp/|overlapping_tap_targets",
@@ -639,14 +639,14 @@
       "metric_key": "blog_svg_text_issues",
       "severity": "warning",
       "detail": "blog_svg_text_issues = 1 (閾値 <= 0)",
-      "status": "pending",
+      "status": "owner",
       "first_seen": "2026-09-27",
       "last_seen": "2026-10-04",
       "fixed_at": null,
-      "resolved_at": null,
-      "resolved_by": null,
-      "card": null,
-      "note": ""
+      "resolved_at": "2026-10-06",
+      "resolved_by": "owner",
+      "card": "BLOG-SVG-NODATA-20261006",
+      "note": "data JSON が R2 に無く再生成できない。一次資料から作り直すか手で直すかの判断が要る"
     },
     {
       "key": "machine|https://stats47.jp/blog/allocation-tax-area|blog_svg_text_issues",
@@ -656,14 +656,14 @@
       "metric_key": "blog_svg_text_issues",
       "severity": "warning",
       "detail": "blog_svg_text_issues = 1 (閾値 <= 0)",
-      "status": "pending",
+      "status": "owner",
       "first_seen": "2026-09-27",
       "last_seen": "2026-10-04",
       "fixed_at": null,
-      "resolved_at": null,
-      "resolved_by": null,
-      "card": null,
-      "note": ""
+      "resolved_at": "2026-10-06",
+      "resolved_by": "owner",
+      "card": "BLOG-SVG-REGEN-20261006",
+      "note": "生成器は正しく、R2 の SVG の再生成 (regenerate-blog-svgs.yml) だけで直る。R2 反映はオーナー承認"
     },
     {
       "key": "machine|https://stats47.jp/blog/automotive-industry-transformation-map|blog_svg_text_issues",
@@ -673,14 +673,14 @@
       "metric_key": "blog_svg_text_issues",
       "severity": "warning",
       "detail": "blog_svg_text_issues = 1 (閾値 <= 0)",
-      "status": "pending",
+      "status": "owner",
       "first_seen": "2026-09-27",
       "last_seen": "2026-10-04",
       "fixed_at": null,
-      "resolved_at": null,
-      "resolved_by": null,
-      "card": null,
-      "note": ""
+      "resolved_at": "2026-10-06",
+      "resolved_by": "owner",
+      "card": "BLOG-SVG-NODATA-20261006",
+      "note": "data JSON が R2 に無く再生成できない。一次資料から作り直すか手で直すかの判断が要る"
     },
     {
       "key": "machine|https://stats47.jp/blog/beer-peak-month-july-to-december|a11y_violations",
@@ -690,14 +690,14 @@
       "metric_key": "a11y_violations",
       "severity": "warning",
       "detail": "a11y_violations = 1 (閾値 <= 0)",
-      "status": "pending",
+      "status": "owner",
       "first_seen": "2026-09-27",
       "last_seen": "2026-10-04",
       "fixed_at": null,
-      "resolved_at": null,
-      "resolved_by": null,
-      "card": null,
-      "note": ""
+      "resolved_at": "2026-10-06",
+      "resolved_by": "owner",
+      "card": "SHARE-BUTTON-CONTRAST-01",
+      "note": "LINE・はてなのブランド色と text-positive のコントラスト不足。ブランド色の扱いはデザイン判断"
     },
     {
       "key": "machine|https://stats47.jp/blog/beer-peak-month-july-to-december|blog_svg_text_issues",
@@ -707,14 +707,14 @@
       "metric_key": "blog_svg_text_issues",
       "severity": "warning",
       "detail": "blog_svg_text_issues = 3 (閾値 <= 0)",
-      "status": "pending",
+      "status": "owner",
       "first_seen": "2026-09-27",
       "last_seen": "2026-10-04",
       "fixed_at": null,
-      "resolved_at": null,
-      "resolved_by": null,
-      "card": null,
-      "note": ""
+      "resolved_at": "2026-10-06",
+      "resolved_by": "owner",
+      "card": "BLOG-SVG-REGEN-20261006",
+      "note": "生成器は正しく、R2 の SVG の再生成 (regenerate-blog-svgs.yml) だけで直る。R2 反映はオーナー承認"
     },
     {
       "key": "machine|https://stats47.jp/blog/birth-death-gap-decline|blog_svg_text_issues",
@@ -724,14 +724,14 @@
       "metric_key": "blog_svg_text_issues",
       "severity": "warning",
       "detail": "blog_svg_text_issues = 1 (閾値 <= 0)",
-      "status": "pending",
+      "status": "owner",
       "first_seen": "2026-09-27",
       "last_seen": "2026-10-04",
       "fixed_at": null,
-      "resolved_at": null,
-      "resolved_by": null,
-      "card": null,
-      "note": ""
+      "resolved_at": "2026-10-06",
+      "resolved_by": "owner",
+      "card": "BLOG-SVG-NODATA-20261006",
+      "note": "data JSON が R2 に無く再生成できない。一次資料から作り直すか手で直すかの判断が要る"
     },
     {
       "key": "machine|https://stats47.jp/blog/cc-estat-07-birthrate-line|blog_svg_text_issues",
@@ -741,14 +741,14 @@
       "metric_key": "blog_svg_text_issues",
       "severity": "warning",
       "detail": "blog_svg_text_issues = 1 (閾値 <= 0)",
-      "status": "pending",
+      "status": "owner",
       "first_seen": "2026-09-27",
       "last_seen": "2026-10-04",
       "fixed_at": null,
-      "resolved_at": null,
-      "resolved_by": null,
-      "card": null,
-      "note": ""
+      "resolved_at": "2026-10-06",
+      "resolved_by": "owner",
+      "card": "BLOG-SVG-REGEN-20261006",
+      "note": "生成器は正しく、R2 の SVG の再生成 (regenerate-blog-svgs.yml) だけで直る。R2 反映はオーナー承認"
     },
     {
       "key": "machine|https://stats47.jp/blog/cc-estat-08-bar-chart-race|blog_svg_text_issues",
@@ -758,14 +758,14 @@
       "metric_key": "blog_svg_text_issues",
       "severity": "warning",
       "detail": "blog_svg_text_issues = 1 (閾値 <= 0)",
-      "status": "pending",
+      "status": "owner",
       "first_seen": "2026-09-27",
       "last_seen": "2026-10-04",
       "fixed_at": null,
-      "resolved_at": null,
-      "resolved_by": null,
-      "card": null,
-      "note": ""
+      "resolved_at": "2026-10-06",
+      "resolved_by": "owner",
+      "card": "BLOG-SVG-REGEN-20261006",
+      "note": "生成器は正しく、R2 の SVG の再生成 (regenerate-blog-svgs.yml) だけで直る。R2 反映はオーナー承認"
     },
     {
       "key": "machine|https://stats47.jp/blog/cc-estat-14-energy-area-chart|blog_svg_text_issues",
@@ -775,14 +775,14 @@
       "metric_key": "blog_svg_text_issues",
       "severity": "warning",
       "detail": "blog_svg_text_issues = 1 (閾値 <= 0)",
-      "status": "pending",
+      "status": "owner",
       "first_seen": "2026-09-27",
       "last_seen": "2026-10-04",
       "fixed_at": null,
-      "resolved_at": null,
-      "resolved_by": null,
-      "card": null,
-      "note": ""
+      "resolved_at": "2026-10-06",
+      "resolved_by": "owner",
+      "card": "BLOG-SVG-REGEN-20261006",
+      "note": "生成器は正しく、R2 の SVG の再生成 (regenerate-blog-svgs.yml) だけで直る。R2 反映はオーナー承認"
     },
     {
       "key": "machine|https://stats47.jp/blog/cc-estat-16-commerce-bubble|blog_svg_text_issues",
@@ -792,14 +792,14 @@
       "metric_key": "blog_svg_text_issues",
       "severity": "warning",
       "detail": "blog_svg_text_issues = 1 (閾値 <= 0)",
-      "status": "pending",
+      "status": "owner",
       "first_seen": "2026-09-27",
       "last_seen": "2026-10-04",
       "fixed_at": null,
-      "resolved_at": null,
-      "resolved_by": null,
-      "card": null,
-      "note": ""
+      "resolved_at": "2026-10-06",
+      "resolved_by": "owner",
+      "card": "BLOG-SVG-REGEN-20261006",
+      "note": "生成器は正しく、R2 の SVG の再生成 (regenerate-blog-svgs.yml) だけで直る。R2 反映はオーナー承認"
     },
     {
       "key": "machine|https://stats47.jp/blog/cc-estat-17-edu-slope-graph|blog_svg_text_issues",
@@ -2645,14 +2645,14 @@
       "metric_key": "unit_symbol_mixing",
       "severity": "warning",
       "detail": "unit_symbol_mixing: 38 URL (最大 4、閾値 <= 0)。例: https://stats47.jp/japan/healthcare / https://stats47.jp/municipalities/ranking/commuter-ratio-from-other-municipalities / https://stats47.jp/municipalities/ranking/commuter-ratio-to-other-municipalities",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-04",
       "last_seen": "2026-10-04",
-      "fixed_at": null,
+      "fixed_at": "2026-10-06T04:47:20.050Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "/japan・/municipalities/ranking・テーマ系部品の単位を formatUnitForDisplay に通した。localhost /japan/healthcare・/municipalities/ranking/commuter-ratio-from-other-municipalities で ％ 0 件"
     },
     {
       "key": "machine|prefecture-detail|internal_jargon_terms",
@@ -2696,14 +2696,14 @@
       "metric_key": "same_shop_ad_duplicates",
       "severity": "warning",
       "detail": "same_shop_ad_duplicates: 309 URL (最大 3、閾値 <= 0)。例: https://stats47.jp/ranking/agricultural-land-conversion-area / https://stats47.jp/ranking/apartment-ratio / https://stats47.jp/ranking/apple-consumption-expenditure",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-04",
       "last_seen": "2026-10-04",
-      "fixed_at": null,
+      "fixed_at": "2026-10-06T04:47:23.858Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "楽天商品カードの選定で同じ店を 1 枚 1 件までにした (selectQualityItems + rakutenShopKey、test 追加)。別カード間の重複は次の週次で残れば再起票"
     },
     {
       "key": "machine|ranking|unit_symbol_mixing",
@@ -2713,14 +2713,14 @@
       "metric_key": "unit_symbol_mixing",
       "severity": "warning",
       "detail": "unit_symbol_mixing: 1610 URL (最大 21、閾値 <= 0)。例: https://stats47.jp/ranking/abandoned-cultivated-land-area / https://stats47.jp/ranking/academic-achievement-test-average-rate / https://stats47.jp/ranking/accidental-deaths-per-100k",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-04",
       "last_seen": "2026-10-04",
-      "fixed_at": null,
+      "fixed_at": "2026-10-06T04:47:24.971Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "関連ランキング・カテゴリ一覧表・KPI 部品の単位を formatUnitForDisplay、AI 解説本文の数字直後の ％ を normalizePercentInText で表示時に % へ揃えた。localhost /ranking/abandoned-cultivated-land-area で ％ 0 件"
     },
     {
       "key": "machine|survey|internal_jargon_terms",
@@ -2730,14 +2730,14 @@
       "metric_key": "internal_jargon_terms",
       "severity": "warning",
       "detail": "internal_jargon_terms: 1 URL (最大 1、閾値 <= 0)。例: https://stats47.jp/survey/local-finance",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-04",
       "last_seen": "2026-10-04",
-      "fixed_at": null,
+      "fixed_at": "2026-10-06T04:47:28.050Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "local-finance の注記の「rankingKeyとsubtitle」を「指標名と補足（分母・内訳）」に言い換えた (survey-editorial.ts)"
     },
     {
       "key": "machine|survey|unit_symbol_mixing",
@@ -2747,14 +2747,14 @@
       "metric_key": "unit_symbol_mixing",
       "severity": "warning",
       "detail": "unit_symbol_mixing: 14 URL (最大 5、閾値 <= 0)。例: https://stats47.jp/survey/accommodation-survey / https://stats47.jp/survey/city-planning-survey / https://stats47.jp/survey/cpi-annual",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-04",
       "last_seen": "2026-10-04",
-      "fixed_at": null,
+      "fixed_at": "2026-10-06T04:47:29.274Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "カテゴリ一覧表 (CategoryRankingListClient) の単位列を formatUnitForDisplay に通した。localhost /survey/cpi-annual・local-finance・accommodation-survey で ％ 0 件"
     },
     {
       "key": "machine|theme|internal_jargon_terms",
@@ -2764,14 +2764,14 @@
       "metric_key": "internal_jargon_terms",
       "severity": "warning",
       "detail": "internal_jargon_terms: 5 URL (最大 1、閾値 <= 0)。例: https://stats47.jp/themes/climate / https://stats47.jp/themes/geographic-access / https://stats47.jp/themes/landslide-exposure",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-04",
       "last_seen": "2026-10-04",
-      "fixed_at": null,
+      "fixed_at": "2026-10-06T04:47:30.799Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "geo-cross-analysis.ts の spatialReading の「保存則」を「合計の検算」に言い換えた。localhost /themes/climate で 0 件"
     },
     {
       "key": "machine|theme|unit_symbol_mixing",
@@ -2781,14 +2781,14 @@
       "metric_key": "unit_symbol_mixing",
       "severity": "warning",
       "detail": "unit_symbol_mixing: 3 URL (最大 1、閾値 <= 0)。例: https://stats47.jp/themes/aging-society / https://stats47.jp/themes/environmental-quality / https://stats47.jp/themes/local-economy",
-      "status": "pending",
+      "status": "fixed",
       "first_seen": "2026-10-04",
       "last_seen": "2026-10-04",
-      "fixed_at": null,
+      "fixed_at": "2026-10-06T04:47:32.029Z",
       "resolved_at": null,
       "resolved_by": null,
       "card": null,
-      "note": ""
+      "note": "aging-society / local-economy の論点要約の「100％」を「100%」に、テーマ部品の単位を formatUnitForDisplay に通した。localhost /themes/aging-society 等で ％ 0 件"
     }
   ]
 }

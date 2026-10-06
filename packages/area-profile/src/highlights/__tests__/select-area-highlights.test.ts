@@ -175,4 +175,12 @@ describe("焼き込み・市区町村の補助関数", () => {
     const picked = selectCityHighlights([item("c", 6), item("b", 2), item("a", 1), item("a2", 3, "a")], { limit: 5 });
     expect(picked.map((p) => p.rankingKey)).toEqual(["a", "b"]);
   });
+
+  it("selectCityHighlights は値が 0 の指標 (同率 0 で付いた上位順位) を特徴に出さない", () => {
+    const item = (rankingKey: string, rank: number, value: number) => ({
+      rankingKey, rank, indicator: rankingKey, year: "2020年度", value, unit: "施設",
+    });
+    const picked = selectCityHighlights([item("zero", 1, 0), item("real", 2, 3)], { limit: 5 });
+    expect(picked.map((p) => p.rankingKey)).toEqual(["real"]);
+  });
 });

@@ -29,7 +29,7 @@ export function GeoLandslideAudit({
         各行は「入力面外＋警戒のみ＋特別」の排他的な3区分で、同じ分母へ戻ります。特別警戒面を優先表示しますが、警戒面への包含は仮定しません。
       </p>
       <div className="min-w-0 overflow-x-auto">
-        <Table scrollRegion aria-label="土砂災害曝露の保存則">
+        <Table scrollRegion aria-label="土砂災害曝露の合計の検算">
           <TableHeader>
             <TableRow>
               <TableHead>対象</TableHead>

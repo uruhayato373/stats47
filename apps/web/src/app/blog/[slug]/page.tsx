@@ -346,13 +346,13 @@ export default async function BlogPostPage({ params }: PageProps) {
                     <ArticleCard>
                             {/* 記事ヘッダー */}
                             <header className="mb-8 border-b border-border pb-6 font-news-article">
-                                <div className="mb-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-[12px] font-medium leading-6 text-muted-foreground">
+                                <div className="mb-1 flex flex-wrap items-center gap-x-2 text-[12px] font-medium leading-6 text-muted-foreground">
                                     <span className="text-primary">stats47 データジャーナル</span>
                                     <span aria-hidden="true">/</span>
                                     <span>統計で読む地域ニュース</span>
-                                    <span aria-hidden="true">/</span>
-                                    <span>PRを含む場合があります</span>
                                 </div>
+                                {/* PR 表記は肩書きと意味が違うので独立した行にする (2026-10-04 週次 UI 検査) */}
+                                <p className="mb-4 text-[12px] leading-6 text-muted-foreground">PRを含む場合があります</p>
                                 <h1 className="article-title mb-4 text-[1.45rem] font-bold text-foreground sm:text-[28px]">{article.title}</h1>
                                 {article.frontmatter.subtitle && (
                                     <p className="mb-5 text-[15px] leading-8 text-muted-foreground sm:text-base">{article.frontmatter.subtitle}</p>

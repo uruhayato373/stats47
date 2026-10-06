@@ -116,20 +116,30 @@ export function HorizontalCardCarousel({
         </Button>
       </div>
 
-      <div
-        ref={scrollRef}
-        role="region"
-        aria-label={`${ariaLabel}（左右の矢印で移動できます）`}
-        tabIndex={0}
-        onScroll={updateScrollState}
-        onKeyDown={(event) => {
-          if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
-          event.preventDefault();
-          scroll(event.key === 'ArrowLeft' ? 'left' : 'right');
-        }}
-        className={`grid snap-x snap-mandatory grid-flow-col auto-cols-[85%] gap-3 overflow-x-auto overscroll-x-contain motion-safe:scroll-smooth [scrollbar-width:none] [&>*]:snap-start [&::-webkit-scrollbar]:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 sm:auto-cols-[calc((100%_-_0.75rem)/2)] lg:auto-cols-[calc((100%_-_1.5rem)/3)] xl:auto-cols-[calc((100%_-_2.25rem)/4)] ${className}`}
-      >
-        {children}
+      <div className="relative">
+        <div
+          ref={scrollRef}
+          role="region"
+          aria-label={`${ariaLabel}（左右の矢印で移動できます）`}
+          tabIndex={0}
+          onScroll={updateScrollState}
+          onKeyDown={(event) => {
+            if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+            event.preventDefault();
+            scroll(event.key === 'ArrowLeft' ? 'left' : 'right');
+          }}
+          className={`grid snap-x snap-mandatory grid-flow-col auto-cols-[85%] gap-3 overflow-x-auto overscroll-x-contain motion-safe:scroll-smooth [scrollbar-width:none] [&>*]:snap-start [&::-webkit-scrollbar]:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 sm:auto-cols-[calc((100%_-_0.75rem)/2)] lg:auto-cols-[calc((100%_-_1.5rem)/3)] xl:auto-cols-[calc((100%_-_2.25rem)/4)] ${className}`}
+        >
+          {children}
+        </div>
+        {/* 右に続きがあることを矢印以外でも示す。見切れたカードの上に薄い帯を重ねる
+          (2026-10-04 週次 UI 検査: スマホで 2 枚目が途中で切れ、横に動かせると分かりにくい) */}
+        <div
+          aria-hidden="true"
+          className={`pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-background to-transparent transition-opacity ${
+            canScrollRight ? 'opacity-100' : 'opacity-0'
+          }`}
+        />
       </div>
     </div>
   );

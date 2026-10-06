@@ -4,6 +4,8 @@ import React from "react";
 
 import dynamic from "next/dynamic";
 
+import { formatUnitForDisplay } from "@stats47/data-configs/unit";
+
 import { ChartSkeleton } from "../../shared/ChartSkeleton";
 
 import type { LineChartData } from "../../../types/visualization";
@@ -68,7 +70,7 @@ export const LineChartClient: React.FC<LineChartClientProps> = ({
                   <span className="text-foreground/80">{line.name}</span>
                   <span className="ml-auto tabular-nums font-medium">
                     {value.toLocaleString()}
-                    {unit ? <span className="font-normal text-muted-foreground ml-0.5">{unit}</span> : null}
+                    {unit ? <span className="font-normal text-muted-foreground ml-0.5">{formatUnitForDisplay(unit)}</span> : null}
                   </span>
                 </li>
               );

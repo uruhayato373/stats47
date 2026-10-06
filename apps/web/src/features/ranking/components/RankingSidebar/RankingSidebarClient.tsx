@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 
+import { formatUnitForDisplay } from "@stats47/data-configs/unit";
+
 import { RailCard, RailLinkList, RailNavRow } from "@/components/surface";
 
 import type { AreaType } from "@/features/area";
@@ -107,7 +109,7 @@ export function RankingSidebarClient({
                                         {item.top1.areaName}{" "}
                                         {item.top1.value ? (
                                             <span className="font-semibold text-foreground">
-                                                {item.top1.value}{item.unit ?? ""}
+                                                {item.top1.value}{formatUnitForDisplay(item.unit)}
                                             </span>
                                         ) : null}
                                     </span>

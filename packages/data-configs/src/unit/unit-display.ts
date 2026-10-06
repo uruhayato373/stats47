@@ -12,3 +12,13 @@ export function formatUnitForDisplay(unit: string | null | undefined): string {
     .replace(/\s+/g, "")
     .replace(/(k?m|c?m)([23])(?![0-9])/g, (_, base: string, power: string) => `${base}${power === "2" ? "²" : "³"}`);
 }
+
+/**
+ * 文章 (AI 解説・FAQ などの生成文) の中で、数字の直後に付いた全角「％」だけを半角「%」にそろえる。
+ * 同じページの表やカードは formatUnitForDisplay で「%」に畳むため、本文だけ「％」だと混在して見える
+ * (2026-10-04 週次 UI 検査 unit_symbol_mixing)。R2 の生成文は書き換えず、表示時だけ整える。
+ * 数字に続かない「％」(「％表示」等の語) と、ほかの全角文字は変えない。
+ */
+export function normalizePercentInText(text: string): string {
+  return text.replace(/(\d)\s*％/g, "$1%");
+}

@@ -146,7 +146,7 @@ export function RankingDataTable({
             <div className="text-right font-mono whitespace-nowrap">
               {formatRankingValue(row.getValue<number>("value"), precision)}
               {unit && (
-                <span className="text-xs text-muted-foreground ml-1">{unit}</span>
+                <span className="text-xs text-muted-foreground ml-1">{formatUnitForDisplay(unit)}</span>
               )}
             </div>
           );

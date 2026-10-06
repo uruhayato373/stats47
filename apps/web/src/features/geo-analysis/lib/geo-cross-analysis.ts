@@ -47,7 +47,7 @@ export const GEO_CROSS_ANALYSIS_CONFIGS: Readonly<
   'population-snow-designation': {
     slug: 'population-snow-designation', eyebrow: '豪雪指定区域 × 人口', shortTitle: '豪雪指定区域と人口',
     description: '2016年度の豪雪指定区域に2020年基準人口の250mメッシュ中心を重ね、区域内と判定した人口と面積を確認します。',
-    spatialReading: '2020年人口の分布、通常・特別豪雪区域との中心包含、境界にかかる格子と保存則を確認します。',
+    spatialReading: '2020年人口の分布、通常・特別豪雪区域との中心包含、境界にかかる格子と合計の検算を確認します。',
     overlapLabel: '豪雪指定区域との重なり', overlapLegend: '青＝通常の豪雪指定区域、紫＝特別豪雪区域、灰＝中心が今回の入力区域外。輪郭は表示用に20m簡略化した指定区域で、判定には未簡略化の原典を使用しています。',
     mapLimit: '2016年度指定境界と2020年の調整済み基準人口を使用しています。現在の法指定人口、個別住宅の指定や安全を判定するものではありません。',
     mapTitle: '豪雪指定区域に中心があるメッシュの人口割合', mapSubtitle: '2020年基準人口を分母とし、特別豪雪を内数として示します。',
@@ -60,7 +60,7 @@ export const GEO_CROSS_ANALYSIS_CONFIGS: Readonly<
     description:
       '2022年4月の行政施設・公的集会施設を固定し、1km人口メッシュ中心から最寄り施設への距離帯ごとに人口を比較します。',
     spatialReading:
-      '人口、県内の原典施設、最寄り距離帯、保存則の順に確認します。県外の最寄り施設も探索対象です。',
+      '人口、県内の原典施設、最寄り距離帯、合計の検算の順に確認します。県外の最寄り施設も探索対象です。',
     overlapLabel: '最寄り施設への距離帯',
     overlapLegend:
       'メッシュの色は中心点から最寄り施設への距離帯です。点は判定で参照された施設で、県外の施設を含みます。',
@@ -221,3 +221,13 @@ export function buildGeoMapModel(snapshot: GeoAnalysisSnapshot): {
 }
 
 export type { GeoAnalysisSnapshot, GeoAnalysisValueFormat };
+
+/**
+ * R2 の manifest・snapshot に焼き込まれた処理用語を、画面に出すときだけ読者向けの語にする。
+ * 「保存則」(県別の合計が全国値・総数と一致するかの検算) と「lineage」(入力から結論までの処理の流れ) は
+ * 開発の用語で、週次の内部用語検査 (internal_jargon_terms) が Geo 13 URL で検出した (2026-10-04)。
+ * 生成物は検算の記録として元の語のまま残す。
+ */
+export function toGeoReaderTerms(text: string): string {
+  return text.replace(/保存則/g, '合計の検算').replace(/lineage/gi, '処理の流れ');
+}

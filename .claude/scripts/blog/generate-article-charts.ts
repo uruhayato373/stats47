@@ -115,7 +115,9 @@ if (!SLUG) {
   process.exit(1);
 }
 
-const ARTICLE_DIR = path.join(PROJECT_ROOT, BASE, SLUG);
+// 絶対パスの --base はそのまま使う。path.join だと /tmp/x が <repo>/tmp/x に化け、
+// plan-svg-text-fix.ts (OS 一時領域で再生成する) が全件 unverified になっていた (2026-10-06)
+const ARTICLE_DIR = path.resolve(PROJECT_ROOT, BASE, SLUG);
 const DATA_DIR = path.join(ARTICLE_DIR, 'data');
 const ARTICLE_MD = path.join(ARTICLE_DIR, 'article.md');
 
