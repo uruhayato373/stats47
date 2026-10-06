@@ -2820,6 +2820,23 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
   概算値と確定値の区別を年ごとに保持する。SSDS 由来の 2008〜2021 年度と重なる年は値の一致を検査してから置き換える。
 - **完了条件**: 2022 年度以降が 47 県そろって R2 に入り、provenance が監査 (`/audit-provenance`) を通り、ランキングページの最新年が更新されている。
 
+### [DATA-LAYOUT-MOVE-01] 計測・記録・改善のデータを `.claude/` から `data/<取得元>/` へ移す
+
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run check-datasets] [起票:2026-10-06] [領域:管理]
+
+- **経緯**: 2026-10-06 に台帳 `config/datasets.mjs` と検査 `npm run check-datasets` を入れた (手順 1・ファイルは動かしていない)。
+  台帳で本来の置き場 (`target`) と現在地が食い違う行が 68 行・1,155 件あり、ほぼすべてが `data/` への移行対象。
+  一覧は `npm run check-datasets -- --moves`。区分は `.claude/rules/data-storage.md`、手本は doboku-note の `data/<取得元>/`。
+- **次**: 取得元ごとに 1 回ずつ移す。順の目安は GSC → GA4 → PSI → Cloudflare → アフィリエイト (`.claude/state/ads` と
+  `metrics/affiliate`) → 商品の販売台帳 → SNS 投稿台帳 → 改善ログと週次スナップショット → 週次・月次レビューと NSM。
+  1 回の中身: 台帳の `path` を `data/<取得元>/` へ書き換え、コードは台帳の id からパスを引く (`datasetPath(id)` を足し、
+  `config-paths.test.ts` と同じ直書き検査を data/ にも広げる) → `git mv` → workflow の commit-back の `git add` と
+  `RETENTION_POLICIES` の `directory` を同じ差分で変える → develop → main まで反映 → 次の定期実行が新しい置き場に書いたことを確かめる。
+  `note.hashtags` (→ `config/`) と `improvement.budgets` (→ `.claude/config/`) も同じ手順で動かす。
+- **停止条件**: 定期実行は main の workflow 定義で動くので、パスを変えた取得元は main へ反映して定期実行で確かめるまで、
+  次の取得元へ進まない (旧パスへ書き続けて記録が割れる)。本番 deploy は毎回オーナーの承認を取る。
+- **完了条件**: `npm run check-datasets -- --moves` が 0 行。関係する workflow の次回の定期実行が新しい置き場へ書いている。
+
 ## 🟢 低 — 時期未定・条件付き (trigger は本文に)
 
 ### [SSOT-CONSOLIDATION-REST-01] 2026-10-06 の定数集約で見送った重複を、挙動の差を解消してから寄せる
