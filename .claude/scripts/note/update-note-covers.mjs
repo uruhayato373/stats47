@@ -21,6 +21,7 @@ import {
   coverOperationVersion,
   findCoverOperation,
 } from './lib/cover-update.mjs';
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const ROOT = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -101,7 +102,7 @@ if (!opts.commit || !articles.length) process.exit(0);
 
 const journalPath = path.join(
   ROOT,
-  'data/note/evidence',
+  datasetDir("note.operation-evidence"),
   `note-cover-refresh-${manifest.version}.json`
 );
 const journal = fs.existsSync(journalPath)

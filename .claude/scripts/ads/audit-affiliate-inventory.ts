@@ -24,6 +24,7 @@ import {
 import { CATEGORY_KEYS } from "@stats47/data-configs";
 import { AFFILIATE_ADS } from "../../../apps/web/scripts/affiliate-ads-data";
 import { isAffiliateActive } from "../../../apps/web/src/features/ads/constants/affiliate-delivery-policy";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = resolve(__dirname, "../../..");
@@ -154,7 +155,7 @@ function main(): void {
   };
 
   // JSON snapshot を data/affiliate/ に書き出す (機械向け / ループの入力)
-  const stateDir = resolve(PROJECT_ROOT, "data/affiliate");
+  const stateDir = resolve(PROJECT_ROOT, datasetDir("affiliate.audits"));
   mkdirSync(stateDir, { recursive: true });
   for (const name of [`inventory-${date}.json`, "inventory-latest.json"]) {
     writeFileSync(resolve(stateDir, name), JSON.stringify(snapshot, null, 2));
@@ -261,7 +262,7 @@ function main(): void {
 
   process.stdout.write(lines.join("\n") + "\n");
   process.stderr.write(
-    `\n[audit] JSON snapshot → data/affiliate/inventory-${date}.json (+ latest)\n`,
+    `\n[audit] JSON snapshot → ${datasetDir("affiliate.inventory")}/inventory-${date}.json (+ latest)\n`,
   );
 
   // pre-commit / CI ゲート: --check-size 指定時は非 canonical・非 legacy サイズがあれば exit 1。

@@ -87,6 +87,7 @@ import { STOREFRONT_PRODUCTS } from '../src/features/products/storefront';
 import type { StorefrontProduct } from '../src/features/products/types';
 import { assertCoverGenerationType } from '../../../.claude/scripts/note/lib/cover-assets.mjs';
 import { SITE as SITE_IDENTITY } from '@stats47/types';
+import { datasetPath } from "../../../config/datasets.mjs";
 
 const PUBLIC_URL =
   process.env.R2_PUBLIC_FETCH_URL ?? SITE_IDENTITY.r2PublicBaseUrl;
@@ -279,7 +280,7 @@ async function listNoteEntries(): Promise<NoteEntry[]> {
     }
   };
   const out = new Map<string, NoteEntry>();
-  const draft = readJson('data/note/note-draft-index.json') as {
+  const draft = readJson(datasetPath("note.draft-index")) as {
     drafts?: Record<string, { vertical?: string; r2_path?: string; r2_access?: string }>;
   } | null;
   for (const [slug, v] of Object.entries(draft?.drafts ?? {})) {
@@ -302,7 +303,7 @@ async function listNoteEntries(): Promise<NoteEntry[]> {
       });
     }
   }
-  const pub = readJson('data/note/note-published-urls.json') as {
+  const pub = readJson(datasetPath("note.published-urls")) as {
     articles?: Record<string, { vertical?: string; r2_path?: string; r2_access?: string }>;
   } | null;
   for (const [slug, v] of Object.entries(pub?.articles ?? {})) {

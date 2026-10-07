@@ -8,9 +8,10 @@ import { resolve, dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { ALL_PRODUCTS } from "../catalog/products";
 import { buildSalesCatalog, renderSalesCsv, renderSalesHtml } from "./sales-catalog";
+import { datasetDir } from "../../../../config/datasets.mjs";
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../..");
-const STATE_PATH = resolve(REPO_ROOT, "data/products/catalog-status.json");
+const STATE_PATH = resolve(REPO_ROOT, `${datasetDir("products.publication-receipts")}/catalog-status.json`);
 
 export function writeReport(generatedAt = new Date().toISOString(), opts: { kindleVersion?: string; noteRevision?: string } = {}): string {
   const catalog = buildSalesCatalog(REPO_ROOT, generatedAt, opts.kindleVersion, opts.noteRevision);

@@ -18,11 +18,13 @@
 
 const fs = require("node:fs");
 const path = require("node:path");
+const { datasetPath } = require("../../../config/datasets.mjs");
 
 // 投稿台帳は記録なので data/sns/ (台帳 id は sns.posts / sns.post-log)。テストがこのファイルを別の root へコピーして
 // 使うので、自分の場所からの相対パスで引く
-const STORE_PATH = path.resolve(__dirname, "../../../data/sns/posts.json");
-const LOG_PATH = path.resolve(__dirname, "../../../data/sns/post-log.md");
+const ROOT = path.resolve(__dirname, "../../..");
+const STORE_PATH = path.join(ROOT, datasetPath("sns.posts"));
+const LOG_PATH = path.join(ROOT, datasetPath("sns.post-log"));
 
 const PLATFORM_LABEL = {
   instagram: "📸 Instagram",

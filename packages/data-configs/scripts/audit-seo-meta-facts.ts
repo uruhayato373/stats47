@@ -40,10 +40,11 @@ import {
 } from "../src/seo-meta-facts.js";
 import type { MetricConfig } from "../src/types.js";
 import { SITE } from "@stats47/types";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(__dirname, "../../..");
-const BASELINE = resolve(REPO_ROOT, "data/data-quality/seo-meta-facts-baseline.json");
+const BASELINE = resolve(REPO_ROOT, `${datasetDir("data-quality.state")}/seo-meta-facts-baseline.json`);
 const R2 = process.env.R2_PUBLIC_FETCH_URL ?? SITE.r2PublicBaseUrl;
 const CONCURRENCY = 16;
 

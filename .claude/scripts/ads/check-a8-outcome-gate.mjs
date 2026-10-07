@@ -6,9 +6,10 @@ import { join } from "node:path";
 import { evaluateA8OutcomeGate } from "./lib/a8-report-period-core.mjs";
 import { repoRoot } from "./lib/asp-browser-base.mjs";
 import { A8_REPORT_AUTOMATION } from "../../../config/paths.mjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const root = repoRoot();
-const affiliateDir = join(root, "data/affiliate");
+const affiliateDir = join(root, datasetDir("affiliate.audits"));
 const configPath = join(root, A8_REPORT_AUTOMATION);
 
 const readJson = (path) => (existsSync(path) ? JSON.parse(readFileSync(path, "utf8")) : null);

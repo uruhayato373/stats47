@@ -19,8 +19,9 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { datasetDir } from "../../../config/datasets.mjs";
 
-export const STATE_DIR = "data/ci/monthly-jobs";
+export const STATE_DIR = datasetDir("ops.monthly-jobs");
 export const KEEP_MONTHS = 12;
 export const STATUSES = ["ok", "skipped", "failed"];
 const SUMMARY_MAX = 4000;

@@ -21,6 +21,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { isAnchorRow } from "./analyze-ctr-seesaw.mjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -52,7 +53,7 @@ const CTR_THRESHOLD_RATIO = 0.8;
 
 const SNAPSHOTS_DIR = path.join(
   PROJECT_ROOT,
-  "data/gsc/snapshots",
+  datasetDir("gsc.snapshots"),
 );
 
 function resolveInput() {

@@ -60,11 +60,12 @@ import {
 import { decodeCsvBuffer, parsePeriodFromFilename, parseCsv } from "./lib/a8-report-csv.mjs";
 import { buildA8PeriodContract, compareA8Period, currentJstDate } from "./lib/a8-report-period-core.mjs";
 import { A8_REPORT_AUTOMATION } from "../../../config/paths.mjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const REPO_ROOT = repoRoot();
 // raw CSV / manifest（再取得可能な一次データ）は git 管理外のステージング領域へ
 const RAW_STATE_DIR = join(REPO_ROOT, ".local/a8-ui");
-const AFF_STATE_DIR = join(REPO_ROOT, "data/affiliate");
+const AFF_STATE_DIR = join(REPO_ROOT, datasetDir("affiliate.audits"));
 const LAST_RUN_MARKER = join(AFF_STATE_DIR, "a8-ui-last-run.json");
 
 function parseArgs() {

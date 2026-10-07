@@ -98,10 +98,15 @@ paths:
     経緯の行は除く (2026-10-07 に手順書から全 Markdown へ広げた。作業カードの完了条件が旧パスを指したまま残っていたため)
   - 画像が `IMAGE_ROOTS` の外にある
   - `.claude/state/` を指す行が許可リスト `AGENT_STATE` に無い
+  - コード (ts・tsx・mjs・cjs・js) が台帳の `data/` のパスを直書きしている。テスト・コメント行・import 行と、
+    `DATA_LITERAL_EXEMPT` に理由付きで載せたファイル (web の実行時バンドルに入る `packages/data-configs/src` など) は除く
 - 新しい記録・素材は、先に台帳へ 1 行足してから書く。日付付きファイルの寿命は `prune-state-snapshots.mjs` の
   `RETENTION_POLICIES` だけが数値を持ち、台帳は名前で参照する。
-- コードは置き場を直書きせず、台帳の id で引く (`datasetPath(id)` / `datasetDir(id)`)。`config/` の設定は
+- コードは置き場を直書きせず、台帳の id で引く (`datasetPath(id)` / `datasetDir(id)`)。`.cjs` からは
+  `require("…/config/datasets.mjs")` で読む (require(esm)。Node 20.19 / 22.12 以降)。`config/` の設定は
   `config/paths.mjs` の定数を import する。workflow と shell は直書きでよいが、旧置き場は上の検査が止める。
+  - テストの fixture が実物のスクリプトを一時ディレクトリへコピーして動かすときは、`config/datasets.mjs` と
+    `config/paths.mjs` もコピーする (`apps/admin/tests/helpers/fixture-root.ts`)
   - `config/` のファイルの直書き (部品に分けた `path.join(".claude", "config", "x.json")` の形も含む) と定数の実在は
     `packages/product-factory/tests/config-paths.test.ts` が検査する。
 - `.claude/config/` を `.claude/` の下に残すのは、そこが Claude Code の保護パスだからである。無人 run

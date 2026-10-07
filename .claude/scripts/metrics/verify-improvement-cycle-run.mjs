@@ -20,12 +20,13 @@ import { summarizeClaudeExecution } from "../lib/summarize-claude-execution.mjs"
 import { PROJECT_ROOT } from "./lib/auth.mjs";
 import { evaluateRun } from "./lib/improvement-cycle-gate.mjs";
 import { applyProposal } from "./lib/improvement-cycle-proposal.mjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const strategyLanes = createRequire(import.meta.url)("../lib/strategy-lanes.cjs");
 const IMPROVEMENTS = ".claude/todo/improvements.md";
 const BACKLOG = ".claude/todo/backlog.md";
 // 改善施策の詳細ログは記録なので data/improvement/<施策>/ (台帳 id は improvement.logs)
-const LOGS = "data/improvement";
+const LOGS = datasetDir("improvement.logs");
 const logPath = (skill) => `${LOGS}/${skill}/improvement-log.md`;
 
 function arg(name) {
@@ -75,7 +76,7 @@ function main() {
   const base = arg("--base");
   const week = arg("--week");
   if (!base || !/^\d{4}-W\d{2}$/.test(week ?? "")) throw new Error("--base <sha> と --week YYYY-Www が必要");
-  const outPath = "data/measurement-cycle/triage-latest.json";
+  const outPath = `${datasetDir("business.measurement-cycle")}/triage-latest.json`;
   const proposalPath = arg("--proposal");
   const applied = proposalPath ? applyProposalFile(proposalPath, week) : { problems: [] };
   const untracked = lines(git("ls-files", "--others", "--exclude-standard")).filter((f) => f !== outPath);
@@ -107,7 +108,7 @@ function main() {
     improvements: result.improvements,
     backlogAdded: result.backlogAdded,
   };
-  mkdirSync(join(PROJECT_ROOT, "data/measurement-cycle"), { recursive: true });
+  mkdirSync(join(PROJECT_ROOT, datasetDir("business.measurement-cycle")), { recursive: true });
   writeFileSync(join(PROJECT_ROOT, outPath), JSON.stringify(state, null, 2) + "\n");
   const i = result.improvements;
   console.log(`[improvement-cycle] gate=${state.gate} deleted=${i.deleted.length} updated=${i.updated.length} added=${i.added.length} backlogAdded=${result.backlogAdded.length}`);

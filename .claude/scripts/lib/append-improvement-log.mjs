@@ -30,6 +30,7 @@
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -71,11 +72,11 @@ function categorize(msg) {
 }
 
 const CATEGORY_TO_FILE = {
-  performance: "data/improvement/performance-improvement/improvement-log.md",
-  gsc: "data/improvement/gsc-improvement/improvement-log.md",
-  sns: "data/improvement/sns-metrics-improvement/improvement-log.md",
-  ga4: "data/improvement/ga4-improvement/improvement-log.md",
-  adsense: "data/improvement/adsense-improvement/improvement-log.md",
+  performance: `${datasetDir("improvement.logs")}/performance-improvement/improvement-log.md`,
+  gsc: `${datasetDir("improvement.logs")}/gsc-improvement/improvement-log.md`,
+  sns: `${datasetDir("improvement.logs")}/sns-metrics-improvement/improvement-log.md`,
+  ga4: `${datasetDir("improvement.logs")}/ga4-improvement/improvement-log.md`,
+  adsense: `${datasetDir("improvement.logs")}/adsense-improvement/improvement-log.md`,
 };
 
 const category = categorize(message);

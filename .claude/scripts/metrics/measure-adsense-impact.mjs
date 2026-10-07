@@ -49,16 +49,17 @@ import {
 import { DEFAULT_THRESHOLDS } from "../lib/effect-verdict/thresholds.mjs";
 import { isoWeekOf, isoWeekEnd, weekIndex, weekDiff } from "../lib/effect-verdict/iso-week.mjs";
 import { upsertSection } from "../lib/effect-verdict/section-upsert.mjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const PROJECT_ROOT = join(__dirname, "..", "..", "..");
 const BACKLOG = join(PROJECT_ROOT, ".claude/todo/improvements.md");
-const HISTORY = join(PROJECT_ROOT, "data/adsense/history.csv");
-const DEVICE_HISTORY = join(PROJECT_ROOT, "data/adsense/history-devices.csv");
+const HISTORY = join(PROJECT_ROOT, `${datasetDir("adsense.history")}/history.csv`);
+const DEVICE_HISTORY = join(PROJECT_ROOT, `${datasetDir("adsense.history")}/history-devices.csv`);
 const LOG_PATH = join(
   PROJECT_ROOT,
-  "data/improvement/adsense-improvement/improvement-log.md",
+  `${datasetDir("improvement.logs")}/adsense-improvement/improvement-log.md`,
 );
 
 const args = process.argv.slice(2);
@@ -256,7 +257,7 @@ export function createAdsenseAdapter(opts = {}) {
 
     sourcesOf(subject, window) {
       return window.afterWeek
-        ? [{ name: "adsense:data/adsense/history.csv", observedAt: isoWeekEnd(window.afterWeek) }]
+        ? [{ name: `adsense:${datasetDir("adsense.history")}/history.csv`, observedAt: isoWeekEnd(window.afterWeek) }]
         : [{ name: "adsense:history.csv", observedAt: null }];
     },
 

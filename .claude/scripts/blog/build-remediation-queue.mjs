@@ -35,6 +35,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { isAnchorRow } from "../gsc/analyze-ctr-seesaw.mjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -47,8 +48,8 @@ const getArg = (flag, fallback) => {
 };
 const hasFlag = (flag) => args.includes(flag);
 
-const QUEUE_PATH = path.join(PROJECT_ROOT, "data/blog/remediation-queue.json");
-const HISTORY_PATH = path.join(PROJECT_ROOT, "data/blog/auto-brushup-history.json");
+const QUEUE_PATH = path.join(PROJECT_ROOT, `${datasetDir("blog.operations")}/remediation-queue.json`);
+const HISTORY_PATH = path.join(PROJECT_ROOT, `${datasetDir("blog.operations")}/auto-brushup-history.json`);
 
 // CTR 改善余地スコア (select-brushup-candidates.mjs と同じ Backlinko 2023 業界平均 CTR)
 const INDUSTRY_AVG_CTR = {
@@ -167,7 +168,7 @@ for (const r of audit.results || []) {
 
 // 2. GSC レーン: 最新 snapshot の pages.csv を読む (無ければ GSC スコア 0 で続行)
 function findLatestSnapshot() {
-  const dir = path.join(PROJECT_ROOT, "data/gsc/snapshots");
+  const dir = path.join(PROJECT_ROOT, datasetDir("gsc.snapshots"));
   if (!fs.existsSync(dir)) return null;
   const weeks = fs.readdirSync(dir).filter((d) => /^\d{4}-W\d{2}$/.test(d));
   if (!weeks.length) return null;
@@ -179,7 +180,7 @@ const gscBySlug = new Map();
 if (week) {
   const pagesCsv = path.join(
     PROJECT_ROOT,
-    "data/gsc/snapshots",
+    datasetDir("gsc.snapshots"),
     week,
     "pages.csv",
   );

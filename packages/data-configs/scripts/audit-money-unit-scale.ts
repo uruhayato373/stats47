@@ -37,10 +37,11 @@ import {
 } from "../src/money-unit.js";
 import { METRICS_REGISTRY } from "../src/registry.js";
 import type { MetricConfig } from "../src/types.js";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(__dirname, "../../..");
-const META_DIR = resolve(REPO_ROOT, "data/estat/meta");
+const META_DIR = resolve(REPO_ROOT, datasetDir("estat.meta"));
 
 interface MetaDump {
   statsDataId: string;

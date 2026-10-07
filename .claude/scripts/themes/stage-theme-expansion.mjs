@@ -11,6 +11,7 @@ import {
   inspectLocalMetricCoverage,
 } from './theme-expansion-core.mjs';
 import { R2_PUBLIC_BASE_URL } from '../lib/site-config.cjs';
+import { datasetDir } from "../../../config/datasets.mjs";
 
 // Local preparation only: canonical builders produce the release files; no upload capability.
 const require = createRequire(import.meta.url);
@@ -75,7 +76,7 @@ if (!options['api-artifact-dir'])
 const stage = resolve(root, options['stage-dir']);
 const planPath =
   '.claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json';
-const evidencePath = 'data/estat/theme-expansion-verification.json';
+const evidencePath = `${datasetDir("estat.candidates")}/theme-expansion-verification.json`;
 const plan = JSON.parse(await readFile(resolve(root, planPath), 'utf8'));
 const evidence = JSON.parse(
   await readFile(resolve(root, evidencePath), 'utf8')

@@ -11,6 +11,8 @@
  *     reference/ の監査とレビュー・原稿の outbox) は対象外。コードのコメント行と、文書で「旧置き場」「旧パス」と書いた
  *     経緯の行は除く
  *   - 画像が IMAGE_ROOTS の外にある (素材の原本は assets/、配信用はアプリの public/ へ)
+ *   - コード (ts・tsx・mjs・cjs・js) が台帳の data/ のパスを直書きしている (datasetPath(id) / datasetDir(id) で引く)。
+ *     テスト・コメント行・import 行・DATA_LITERAL_EXEMPT に理由を書いたファイルは除く
  *   - `.claude/state/` を指す行が AGENT_STATE (エージェント運用の状態の許可リスト) に無い / 許可リストに台帳に無い id がある
  * 出すだけのもの: target の置き場と現在地が違う行 (data/ への移行対象) の件数と一覧。
  *
@@ -107,6 +109,7 @@ export function checkDatasets({ datasets, files, governed, ignoredNames, kinds, 
 }
 
 const COMMENT_LINE = /^\s*(?:\/\/|\/?\*|#)/;
+const IMPORT_LINE = /^\s*(?:import\b|export\b.*\bfrom\b)/;
 export const RETIRED_SCAN_GLOBS = ["*.mjs", "*.cjs", "*.js", "*.ts", "*.tsx", "*.mts", "*.cts", "*.sh", "*.ps1", "*.py", "*.yml", "*.yaml", "package.json"];
 /**
  * 人と agent が読む文書。ここに旧パスが残ると、agent が旧置き場を読んで空と判断したり旧置き場へ書いたりする。
@@ -162,6 +165,59 @@ export function retiredHits() {
     .filter((hit) => hit.file !== "config/datasets.mjs"); // 旧置き場を宣言する台帳自身は除く
 }
 
+export const DATA_LITERAL_CODE_GLOBS = ["*.ts", "*.tsx", "*.mjs", "*.cjs", "*.js"];
+/** data/ の直書きを許すファイル (理由付き)。足すときは理由を書く */
+export const DATA_LITERAL_EXEMPT = [
+  { re: /(^|\/)__tests__\/|\.test\.[cm]?[jt]sx?$|^(?:packages|apps)\/[^/]+\/tests\//, why: "テストは期待値として実パスを書く" },
+  { re: /^config\//, why: "台帳と config/ の定数そのもの" },
+  { re: /^packages\/data-configs\/src\//, why: "web の実行時バンドル (middleware・ページ) に入るので repo 運用の台帳を import しない。表示用の出典ラベルは旧パスの検査が守る" },
+  { re: /^\.claude\/scripts\/lib\/check-repo-hygiene\.cjs$/, why: "テストが一時リポジトリへ単体でコピーして動かす検査器。直書きは案内文の 1 か所だけ" },
+];
+
+/** 台帳の data/ の第 1 階層 (data/gsc・data/sns …) */
+export function dataTops(datasets) {
+  return [...new Set(datasets.filter((d) => d.path.startsWith("data/")).map((d) => d.path.split("/")[1]))].filter((t) => !t.includes("{"));
+}
+
+/**
+ * コードの行 ({ file, line, text }) から data/ の直書きを探す。コメント行は除く。
+ * `../../../data/x` のような相対パスは、ファイルの位置から解いてリポジトリ直下の data/ を指すものだけを拾う。
+ */
+export function findDataPathLiterals(tops, hits, exempt = DATA_LITERAL_EXEMPT) {
+  const names = tops.map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|");
+  const direct = new RegExp(`(?<![A-Za-z0-9_./-])data/(?:${names})(?![A-Za-z0-9_-])`);
+  const relative = new RegExp(`((?:\\.\\./)+)data/(?:${names})(?![A-Za-z0-9_-])`);
+  const errors = [];
+  for (const { file, line, text } of hits) {
+    // import 先は静的な文字列でしか書けない。誤りは型検査と実行時に必ず落ちる (config-paths.test.ts と同じ扱い)
+    if (COMMENT_LINE.test(text) || IMPORT_LINE.test(text) || exempt.some((e) => e.re.test(file))) continue;
+    let bad = direct.test(text);
+    const rel = text.match(relative);
+    if (!bad && rel) {
+      const ups = rel[1].length / 3;
+      bad = file.split("/").length - 1 === ups; // ファイルのディレクトリの深さだけ上がるとリポジトリ直下
+    }
+    if (bad) errors.push(`data/ の直書き: ${file}:${line} (台帳の datasetPath(id) / datasetDir(id) で引く。置き場は .claude/rules/data-storage.md)`);
+  }
+  return errors;
+}
+
+export function dataLiteralHits(tops) {
+  const args = ["-C", ROOT, "-c", "core.quotepath=false", "grep", "-n", "-E", `data/(${tops.join("|")})`, "--", ...DATA_LITERAL_CODE_GLOBS];
+  let out;
+  try {
+    out = execFileSync("git", args, { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });
+  } catch (e) {
+    if (e.status === 1) return [];
+    throw e;
+  }
+  return out
+    .split("\n")
+    .map((row) => row.match(/^([^:]+):(\d+):(.*)$/))
+    .filter(Boolean)
+    .map((m) => ({ file: m[1], line: Number(m[2]), text: m[3] }));
+}
+
 function trackedFiles() {
   return execFileSync("git", ["-C", ROOT, "ls-files", "-z"], { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 })
     .split("\0")
@@ -184,6 +240,8 @@ function main() {
     agentState: AGENT_STATE,
   });
   result.errors.push(...findRetiredReferences(RETIRED, retiredHits()));
+  const tops = dataTops(DATASETS);
+  result.errors.push(...findDataPathLiterals(tops, dataLiteralHits(tops)));
   for (const e of result.errors) console.error(`✗ ${e}`);
   const moveFiles = result.moves.reduce((n, m) => n + m.files, 0);
   if (process.argv.includes("--moves")) {

@@ -23,14 +23,15 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const store = require("../lib/sns-posts-store.cjs");
+const { datasetDir, datasetPath } = require("../../../config/datasets.mjs");
 
 const ROOT = path.resolve(__dirname, "..", "..", "..");
-const LOG_PATH = path.join(ROOT, "data/sns/ig-posted-log.jsonl");
+const LOG_PATH = path.join(ROOT, datasetPath("sns.ig-posted-log"));
 const SNS_RANKING = path.join(ROOT, ".local/r2/sns/ranking");
 const SNS_BCR = path.join(ROOT, ".local/r2/sns/bar-chart-race");
 const APP_RANKING = path.join(ROOT, ".local/r2/app/ranking");
 // 週ごとの予約表は data/sns/instagram-wNN-schedule.json
-const STATE_DIR = path.join(ROOT, "data/sns");
+const STATE_DIR = path.join(ROOT, datasetDir("sns.drafts"));
 
 // ---------------------------------------------------------
 // 引数解析

@@ -2537,7 +2537,7 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
   概算値と確定値の区別を年ごとに保持する。SSDS 由来の 2008〜2021 年度と重なる年は値の一致を検査してから置き換える。
 - **完了条件**: 2022 年度以降が 47 県そろって R2 に入り、provenance が監査 (`/audit-provenance`) を通り、ランキングページの最新年が更新されている。
 
-### [DATA-LAYOUT-MOVE-01] 置き場を data/<取得元>/ へ移した後、定期実行が新しい置き場へ書くことを確かめ、残る直書きを台帳の id に替える
+### [DATA-LAYOUT-MOVE-01] 置き場を data/<取得元>/ へ移した後、定期実行が新しい置き場へ書くことを確かめる
 
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:npm run check-datasets] [起票:2026-10-06] [進行中] [領域:管理]
 
@@ -2552,10 +2552,12 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
   `data/sns/posts.json`)・Threads 確認・AI 解説 (`data/ai-content`)・workflow 健全性 (`data/ci`)・backlog-loop (`data/gsc`・`data/page-quality`)。
   週次: 土曜の page-quality・内部リンク・出典・ランキング整合・e-Stat 年カバレッジ、日曜の `fetch-metrics-weekly` (`data/` 全体) と
   search-growth・affiliate GA4、月曜の improvement-cycle。
-  あわせて、コードに残る `data/...` の直書きを `datasetPath(id)` / `datasetDir(id)` へ替える (`config-paths.test.ts` と同じ直書き検査を
-  `data/` にも広げる)。オーナーの Mac / Windows の launchd ジョブ (SNS・A8) は `git pull` 後に新しい置き場へ書く。
+  オーナーの Mac / Windows の launchd ジョブ (SNS・A8) は `git pull` 後に新しい置き場へ書く。
+- **済み (2026-10-07)**: 作業カード・文書・memory の旧パス 82 か所を直し、旧パスの検査を履歴以外の全 Markdown へ広げた。
+  コードの `data/` 直書き 231 ファイル・500 か所を `datasetPath(id)` / `datasetDir(id)` に置き換え (値が一致する箇所だけを
+  構文木で機械置換)、`check-datasets` が新しい直書きを止める (例外は `DATA_LITERAL_EXEMPT` に理由付き)。
 - **未決**: SEO の日次系列 (`data/seo/rank-history/`・`selections/`) の保持期間 (`prune-state-snapshots.test.mjs` に「保持期間は未決」で宣言)。
-- **完了条件**: 上の日次・週次の定期実行がすべて新しい置き場へ書いた (期日 2026-10-13)。`data/` の直書きの検査が CI で通る。
+- **完了条件**: 上の日次・週次の定期実行がすべて新しい置き場へ書いた (期日 2026-10-13)。
 
 ## 🟢 低 — 時期未定・条件付き (trigger は本文に)
 

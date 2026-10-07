@@ -28,6 +28,7 @@ import {
 import { resolvePeriods } from "./lib/periods.mjs";
 import { buildGscSummary, SUMMARY_FILE } from "./lib/weekly-summary.mjs";
 import { GSC_PROPERTY } from "../lib/site-config.cjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const SITE_URL = GSC_PROPERTY;
 const SCOPES = ["https://www.googleapis.com/auth/webmasters.readonly"];
@@ -73,7 +74,7 @@ async function main() {
   const periods = resolvePeriods({ source: "gsc", week });
   const { periodStart: startDate, periodEnd: endDate } = periods.rolling28d;
 
-  const outDir = join(PROJECT_ROOT, "data/gsc/snapshots", week);
+  const outDir = join(PROJECT_ROOT, datasetDir("gsc.snapshots"), week);
   mkdirSync(outDir, { recursive: true });
 
   const auth = new google.auth.GoogleAuth({ keyFile, scopes: SCOPES });

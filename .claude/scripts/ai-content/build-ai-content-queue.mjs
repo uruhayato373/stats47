@@ -56,12 +56,13 @@ import { checkValueHealth, latestPartition } from "./lib/value-health.mjs";
 import { loadFailureState, quarantinedKeys } from "./record-generation-outcome.mjs";
 import { isAnchorRow } from "../gsc/analyze-ctr-seesaw.mjs";
 import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..", "..", "..");
 const R2_PUBLIC = process.env.R2_PUBLIC_FETCH_URL ?? R2_PUBLIC_BASE_URL;
-const GSC_SNAP_DIR = join(ROOT, "data/gsc/snapshots");
-const STATE_DIR = join(ROOT, "data/ai-content/remediation");
+const GSC_SNAP_DIR = join(ROOT, datasetDir("gsc.snapshots"));
+const STATE_DIR = join(ROOT, datasetDir("ai-content.remediation"));
 const QUEUE_JSON = join(STATE_DIR, "remediation-queue.json");
 const LATEST_MD = join(STATE_DIR, "LATEST.md");
 const HISTORY_CSV = join(STATE_DIR, "progress-history.csv");

@@ -27,13 +27,14 @@
 "use strict";
 
 const fs = require("fs");
+const { datasetDir, datasetPath } = require("../../../config/datasets.mjs");
 const fsp = fs.promises;
 const path = require("path");
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
 const DEFAULT_METRICS_DIR = path.join(
   PROJECT_ROOT,
-  "data/note/metrics"
+  datasetDir("note.metrics")
 );
 const DEFAULT_DOCS_ROOT = path.join(PROJECT_ROOT, "docs/31_note記事原稿");
 const DEFAULT_VERTICAL = "koumuin-claude-code";
@@ -106,7 +107,7 @@ function printHelp() {
       "  --until YYYY-MM-DD     集計終了日 (この日以前の snapshot を採用)",
       "  --vertical <name>      対象バーティカル (default: koumuin-claude-code)",
       "  --output <path>        Markdown レポート出力先 (.csv は同階層に併存)",
-      "  --metrics-dir <path>   fetch-note-metrics の保存先 (default: data/note/metrics)",
+      `  --metrics-dir <path>   fetch-note-metrics の保存先 (default: ${datasetDir("note.metrics")})`,
       "  --docs-root <path>     note 原稿のルート (default: docs/31_note記事原稿)",
       "  --self-test            内蔵テストを実行して終了",
       "  -h, --help             本ヘルプを表示",
@@ -158,8 +159,8 @@ async function loadDrafts(docsRoot, vertical) {
   if (!fs.existsSync(verticalDir)) {
     // ephemeral outbox 化以降は docs/31 が存在しない場合がある
     // note-published-urls.json / note-draft-index.json を参照してスラッグ一覧を返す
-    const pubFile = path.join(PROJECT_ROOT, "data/note/note-published-urls.json");
-    const dftFile = path.join(PROJECT_ROOT, "data/note/note-draft-index.json");
+    const pubFile = path.join(PROJECT_ROOT, datasetPath("note.published-urls"));
+    const dftFile = path.join(PROJECT_ROOT, datasetPath("note.draft-index"));
     const slugs = [];
     if (fs.existsSync(pubFile)) {
       const pub = JSON.parse(fs.readFileSync(pubFile, "utf8"));

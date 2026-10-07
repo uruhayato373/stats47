@@ -18,6 +18,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { SITE_ORIGIN } from "../lib/site-config.cjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -266,7 +267,7 @@ function renderMarkdown(results) {
     lines.push("### 改善提案ポインタ");
     lines.push("- LCP/CLS 過去施策: `.claude/todo/improvements.md`");
     lines.push(
-      "- 詳細ログ: `data/improvement/performance-improvement/improvement-log.md`"
+      `- 詳細ログ: \`${datasetDir("improvement.logs")}/performance-improvement/improvement-log.md\``
     );
     lines.push(
       `- 検証コマンド: \`curl "https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=https://stats47.jp${r.pathname}&strategy=mobile"\``

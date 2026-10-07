@@ -57,6 +57,7 @@ import { loadInventory } from "./lib/buzz-map-inventory-core.mjs";
 
 // x-catalog / sns-posts-store は .cjs (require)
 import { createRequire } from "node:module";
+import { datasetDir } from "../../../config/datasets.mjs";
 const require = createRequire(import.meta.url);
 const { getAffinity } = require("../lib/x-catalog.cjs") as {
   getAffinity: () => Record<string, Record<string, string>>;
@@ -80,10 +81,10 @@ const POSTS_CONTENT_KEY_TO_IDEA: Record<string, string> = {
 };
 
 const PROJECT_ROOT = join(import.meta.dirname ?? __dirname, "../../..");
-const STATE_PATH = join(PROJECT_ROOT, "data/sns/buzz-map-catalog.json");
+const STATE_PATH = join(PROJECT_ROOT, `${datasetDir("sns.buzz-map-attribution")}/buzz-map-catalog.json`);
 const GSC_SNAPSHOTS = join(
   PROJECT_ROOT,
-  "data/gsc/snapshots",
+  datasetDir("gsc.snapshots"),
 );
 
 type Lane = "muni" | "pref" | "ksj" | "mlit-dpf" | "gsi" | "curated";
@@ -669,7 +670,7 @@ function loadMeasuredFeedback(): Map<
   { landingSessions: number; deepClickRate: number | null; outcomeScore: number }
 > {
   const out = new Map<string, { landingSessions: number; deepClickRate: number | null; outcomeScore: number }>();
-  const p = join(PROJECT_ROOT, "data/sns/buzz-map-attribution-latest.json");
+  const p = join(PROJECT_ROOT, `${datasetDir("sns.buzz-map-attribution")}/buzz-map-attribution-latest.json`);
   if (!existsSync(p)) return out;
   try {
     const json = JSON.parse(readFileSync(p, "utf8")) as {

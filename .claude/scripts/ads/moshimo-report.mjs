@@ -26,14 +26,15 @@ import {
   MOSHIMO_RESULTS_SCHEMA_VERSION,
   parseMoshimoPromotionRows,
 } from './lib/moshimo-report-core.mjs';
+import { datasetPath } from "../../../config/datasets.mjs";
 
 const OUTPUT_PATH = join(
   repoRoot(),
-  'data/affiliate/moshimo-results.json'
+  datasetPath("moshimo.results")
 );
 const CATALOG_PATH = join(
   repoRoot(),
-  'data/affiliate/affiliate-catalog.json'
+  datasetPath("affiliate.catalog")
 );
 
 function isoDate(value) {

@@ -26,6 +26,7 @@ import { resolve, join, dirname } from "path";
 import { fileURLToPath } from "url";
 import { tmpdir } from "os";
 import { R2_PUBLIC_BASE_URL } from "../../lib/site-config.cjs";
+import { datasetPath } from "../../../../config/datasets.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "../../../..");
@@ -50,10 +51,10 @@ const KNOWN = new Set(
 
 // 対象: stats47-note の published + draft (R2 本体を持つものだけ後段で残る)
 const pub = JSON.parse(
-  readFileSync(join(ROOT, "data/note/note-published-urls.json"), "utf8"),
+  readFileSync(join(ROOT, datasetPath("note.published-urls")), "utf8"),
 ).articles;
 const dft = JSON.parse(
-  readFileSync(join(ROOT, "data/note/note-draft-index.json"), "utf8"),
+  readFileSync(join(ROOT, datasetPath("note.draft-index")), "utf8"),
 ).drafts;
 const byKey = new Map();
 for (const [slug, v] of Object.entries(pub))

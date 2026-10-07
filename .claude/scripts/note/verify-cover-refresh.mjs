@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { COVER_ROOT, readCoverLedger, updateCoverLedger, recordCoverObservation, coverUrlPath } from './lib/cover-assets.mjs';
 import { readStoredCover, createCoverStore, fetchNoteDetail } from './lib/cover-storage.mjs';
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const args = process.argv.slice(2);
 if (args.length && (args.length !== 2 || args[0] !== '--keys' || !args[1]))
@@ -13,7 +14,7 @@ const ledger = readCoverLedger();
 if ([...keys].some((key) => !ledger.articles.some((a) => a.articleKey === key))) throw Error('unknown article key');
 const selected = ledger.articles.filter((a) => a.noteUrl && (!keys.size || keys.has(a.articleKey)));
 const store = createCoverStore();
-const state = path.join(COVER_ROOT, 'data/note/evidence');
+const state = path.join(COVER_ROOT, datasetDir("note.operation-evidence"));
 const journals = fs.readdirSync(state).filter((name) => /^note-cover-refresh-ledger-[a-f0-9]+\.json$/.test(name))
   .flatMap((name) => {
     const journal = JSON.parse(fs.readFileSync(path.join(state, name), 'utf8'));

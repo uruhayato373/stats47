@@ -27,6 +27,7 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const { execFileSync } = require("node:child_process");
+const { datasetDir } = require("../../../../../config/datasets.mjs");
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../../../..");
 const catalog = require(
@@ -38,7 +39,7 @@ const store = require(
 
 const INDEX_PATH = path.join(
   PROJECT_ROOT,
-  "data/sns/metric-discovery-index.json",
+  `${datasetDir("sns.drafts")}/metric-discovery-index.json`,
 );
 const KNOWN_KEYS_PATH = path.join(
   PROJECT_ROOT,

@@ -21,6 +21,7 @@ import fs from "node:fs";
 import { fileURLToPath } from "node:url";
 import { ProxyAgent } from "undici";
 import { ESTAT_META_INFO_URL } from "../lib/estat-catalog/endpoints.cjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const PROJECT_ROOT = path.resolve(path.dirname(__filename), "..", "..", "..");
@@ -43,8 +44,8 @@ const fetchOpts = proxyUrl ? { dispatcher: new ProxyAgent(proxyUrl) } : {};
 const BASE_URL = ESTAT_META_INFO_URL;
 const DELAY_MS = 500;
 
-const OUT_CANDIDATES = path.join(PROJECT_ROOT, "data/estat/ssds-candidates.json");
-const OUT_SUMMARY = path.join(PROJECT_ROOT, "data/estat/ssds-candidates-summary.json");
+const OUT_CANDIDATES = path.join(PROJECT_ROOT, `${datasetDir("estat.candidates")}/ssds-candidates.json`);
+const OUT_SUMMARY = path.join(PROJECT_ROOT, `${datasetDir("estat.candidates")}/ssds-candidates-summary.json`);
 
 function pickString(v) {
   if (typeof v === "string") return v;

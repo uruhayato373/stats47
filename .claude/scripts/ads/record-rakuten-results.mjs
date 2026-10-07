@@ -18,9 +18,10 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { datasetPath } from "../../../config/datasets.mjs";
 
 const ROOT = fileURLToPath(new URL('../../../', import.meta.url));
-export const RAKUTEN_RESULTS_PATH = 'data/affiliate/rakuten-results.json';
+export const RAKUTEN_RESULTS_PATH = datasetPath("rakuten.results");
 
 /** 引数を検査して 1 か月分の記録にする。不正なら Error を投げる。 */
 export function parseRecord(argv, now = new Date()) {

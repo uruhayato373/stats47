@@ -13,9 +13,10 @@
 import { readFileSync, writeFileSync, existsSync, mkdirSync, cpSync, readdirSync, statSync } from 'fs'
 import { resolve, join, relative } from 'path'
 import { execSync } from 'child_process'
+import { datasetPath } from "../../../config/datasets.mjs";
 
 const ROOT = resolve(import.meta.dirname, '../../..')
-const URLS_FILE = join(ROOT, 'data/note/note-published-urls.json')
+const URLS_FILE = join(ROOT, datasetPath("note.published-urls"))
 const DOCS31 = join(ROOT, 'docs/31_note記事原稿')
 const LOCAL_R2 = join(ROOT, '.local/r2')
 
