@@ -350,7 +350,8 @@ async function readReusableAiBackground(options: {
     // 通常の Error だと公開 run 全体が止まり、後続の記事まで公開されなくなる (2026-10-07)。
     throw new MissingArticleBackgroundError(
       `${options.slug}: 記事変更によりAI背景promptが変わりました。` +
-        'generate-blog-thumbnails-cloud.ts --ai-background --slug で明示再生成してください'
+        '/generate-blog-images の Mode A (Codex) で記事固有背景を作ってください: ' +
+        `npm run blog-images:codex -- request-article --slug ${options.slug} --article docs/21_ブログ記事原稿/${options.slug}/article.md`
     );
   }
   const remoteBackground = await readRemoteObjectWithIdentity(keys.background);
