@@ -133,6 +133,12 @@ ThemeCatalog の `annotation` は系列断絶・母集団差など、その char
   `getStatsData` で実測し config と比較。755 件を一括では照会しない)。候補は
   `data/estat/year-coverage/LATEST.md` に溜まる。data-ingester が候補を見て
   config の `years` を拡張し、`data/data-refresh-requests.json` push で再取り込みする。
+- **e-Stat の実在年を確かめた結果の正本は `data/estat/year-coverage/queue.json` の `results`** (指標ごと。
+  2026-10-08 オーナー判断)。テーマの提案文書・カード・memory へ年の一覧を写さず、この記録を引く。
+  新規登録や `years` の拡張で確かめたときは、手で数えず
+  `npx tsx packages/ranking/src/scripts/audit-estat-year-coverage.ts --metrics <key1,key2>` で記録する
+  (`cdArea` なしで全都道府県を取り、年ごとの都道府県数 `prefectureCountsByYear` と `scope: "all-prefectures"` を残す)。
+  記録は年を広げても消えず、週次の巡回が今の config と照らして判定 (`extend-candidate` / `config-covers` 等) を付け直す。
 
 ## 量産時の必須手順 (agent / skill)
 

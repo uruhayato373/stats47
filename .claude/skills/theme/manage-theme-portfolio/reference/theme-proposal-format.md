@@ -49,7 +49,9 @@ fishery-marine・local-economy の 3 テーマをこの形で提案し、承認�
    検索需要の補足は queries.csv の該当クエリ数と表示数で書く。
 3. **現行の構成** (表) — `順 | 章 (key) | カード | チャート`。最後に指標数 (primary / secondary / context) を書く。
 4. **表 1: 現行指標** — `rankingKey | 現行 | 提案 | 年 | 理由`。
-   - 提案は keep / remove / 追加 / role 変更 / `years` 拡張。年は config の登録年と、e-Stat の実在年 (`getStatsData` で確かめた範囲と確認日) を並べる。
+   - 提案は keep / remove / 追加 / role 変更 / `years` 拡張。年は config の登録年と、e-Stat の実在年を並べる。実在年は
+     `audit-estat-year-coverage.ts --metrics <key>` で `data/estat/year-coverage/queue.json` に記録し、文書には記録の範囲と確認日だけを引く
+     (年の確認結果の正本は `data/`。`.claude/rules/metric-config-standards.md`「`years` は最新年だけに絞らない」)。
    - remove は「別テーマに主担当がある」「推移を描けない」など視点で理由を書く。
 5. **表 2: 現行チャート・カード・章** — 3 つの小表に分ける。
    - チャート: `componentKey | 提案 | 理由 / 実装差分`。

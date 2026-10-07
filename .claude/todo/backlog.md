@@ -2915,7 +2915,8 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - **2026-10-07 承認**: オーナーが両提案の推奨案すべて (「おすすめで」) と、実装・検査が済みしだい d56 を待たずに公開することを承認した。
 - **2026-10-08 途中経過 (develop)**: metric config を先に入れた。客室稼働率を 2009〜2024 年、ホテル営業施設数を 1997〜2017 年、
   物価地域差指数 9 指標を 2013〜2024 年へ広げ、新規の実宿泊者数 (`actual-overnight-guests`、`0000010107` / `G7103`) を registry・極性・
-  調査の対応表 (`data/surveys/taxonomy.json`) に登録した。12 コードとも e-Stat の全年で 47 都道府県そろうことを確かめた (提案文書の表 1 に追記)。
+  調査の対応表 (`data/surveys/taxonomy.json`) に登録した。12 指標の e-Stat の実在年は、年の確認記録の正本
+  `data/estat/year-coverage/queue.json` に全都道府県で記録した (`audit-estat-year-coverage.ts --metrics`。同日、この記録を正本にする改修も入れた)。
   **次**: 2 テーマの `data/themes/catalogs/*.json` を提案どおりに編集 → generate / validate / baseline / ratchet → 選定根拠の backfill →
   `data-refresh.yml` で 12 指標の観測値を取得 (まず dryRun) → develop → main → page-components と ranking-items を R2 へ反映 → 本番確認。
   新規指標は `/ranking/actual-overnight-guests` を出すまで、ranking-items とキー一覧 (KNOWN / SITEMAP) の同期も要る。
