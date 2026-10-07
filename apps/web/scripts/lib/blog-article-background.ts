@@ -18,7 +18,7 @@ import { sha256 } from './image-generation-manifest';
 
 export const BLOG_ARTICLE_BACKGROUND_MODEL = 'gpt-image-2';
 export const BLOG_ARTICLE_BACKGROUND_PROMPT_VERSION =
-  'blog-article-context-v1';
+  'blog-article-context-v2';
 export const BLOG_ARTICLE_BACKGROUND_ASSET_DIR =
   'assets/blog/article-backgrounds';
 
@@ -147,7 +147,7 @@ export function buildArticleBackgroundPrompt(
   return [
     'Use case: stylized-concept',
     'Asset type: 1200×630 editorial background for a Japanese statistics blog, later cropped for a 640×336 card',
-    'Primary request: Read the article context below and create one unique, content-specific illustration that lets a reader distinguish this article from every other article without seeing its title. Depict the actual subjects and relationship discussed; do not default to a generic Japan map or generic data graphic.',
+    'Primary request: Read the article context below and create one unique, content-specific illustration using concrete physical subjects. The article context is only for selecting those subjects and never overrides the empty-background or no-data-graphics constraints, even when the article discusses charts, statistics, software, or landscapes.',
     `Article title (context only; do not draw it): ${context.title}`,
     context.description
       ? `Article summary: ${context.description}`
@@ -155,11 +155,13 @@ export function buildArticleBackgroundPrompt(
     context.introduction
       ? `Article introduction: ${context.introduction}`
       : '',
-    'Subject: choose one coherent editorial still life or miniature scene. When the article compares two indicators, represent both with two unmistakable concrete subjects and show their shared background factor subtly. Prefer specific objects, places, work, food, housing, education, health, or everyday-life scenes named in the article.',
+    'Subject: choose one compact, isolated editorial still life. When the article compares two indicators, combine two unmistakable concrete objects into a single small group. Convey the relationship with the objects themselves, never with a graph, diagram, scale of values, or surrounding landscape. Any miniature building, field, tree, person, or supporting object must belong entirely to this same right-side group.',
+    'Scene/backdrop: one uniform warm off-white fill across the entire canvas, with no horizon, scenery, landscape bands, ground line, distant buildings, mountains, clouds, texture, or decorative pattern. No background details may extend behind the empty title area.',
     'Style/medium: refined minimal flat-vector editorial illustration, calm, factual, and suitable for a statistics publication',
-    'Composition/framing: 1200 by 630 canvas; keep the left 55 percent visually quiet for OGP title overlay; place the complete main motif across the rightmost 42 percent with generous padding; make it large and readable in a small card crop',
+    'Composition/framing: 1200 by 630 canvas; keep the left 55 percent completely empty, from x=0 through x=660 at every height, using only the uniform background fill. Place every part of the motif, including supporting objects, outlines, and shadows, within x=696 through x=1164 and y=63 through y=567, inside the rightmost 42 percent. Leave a clear gap between the empty area and the motif. Make this isolated group readable in a small card crop; do not enlarge it into the left area.',
     'Color palette: muted indigo, slate blue, pale blue-gray, warm off-white, plus restrained natural accent colors appropriate to the subject',
     'Constraints: no text, letters, numbers, logos, labels, watermark, maps unless geography itself is the article subject, charts, decorative patterns, photorealism, sensationalism, stereotypes, or identifiable real people',
+    'Device and document constraints: all screens and paper surfaces must be blank and unmarked; no charts, graphs, plots, bars, pies, grids, tables, dashboards, code-like strokes, interface icons, menus, or logos, including inside a computer screen. A device may have a plain dark screen or be closed. Do not depict the article title, statistics, or a screenshot of its output.',
   ]
     .filter(Boolean)
     .join('\n');
