@@ -125,6 +125,8 @@
 - [proxy preload for fetch scripts](proxy-preload-for-fetch-scripts.md) — 会社PCで素のfetch()のscriptを無改修で通す node --import 手法
 - [two-machine local footprint 2026-09](project_two_machine_local_footprint_2026-09.md) — dotfiles/mirror/state:pull の運用ポインタ、この Windows PC の pre-commit 12 分・vitest フレーク・preflight 環境要因
 - [feedback_worktree_junction_deletes_target.md](feedback_worktree_junction_deletes_target.md) — worktreeへnode_modulesのjunctionを張るとgit worktree remove --forceが本体のapps/*/node_modulesを消す(2026-09-16実害)。junctionはcmd /c rmdirで外してから削除
+- [feedback_worktree_symlinked_node_modules_resolve_main.md](feedback_worktree_symlinked_node_modules_resolve_main.md) — worktreeのnode_modulesを本体へ丸ごとsymlinkすると@stats47/*が本体packagesを指し、型検査が本体のコードで判定される。@stats47だけworktreeへ張り直す
+- [feedback_cloud_session_workflow_dispatch_403.md](feedback_cloud_session_workflow_dispatch_403.md) — クラウドセッションのGitHub MCPはworkflow_dispatchが403。R2再生成等はpush前に起動者と期限を決め、オーナーへ手順を渡す
 - [feedback_x_scheduled_bulk_delete.md](feedback_x_scheduled_bulk_delete.md) — X予約の一括削除は描画中の7〜8件しか消えない。台帳キーで選択→削除→読み直しを残件0まで繰り返す
 - [project_sns_scheduling_limits.md](project_sns_scheduling_limits.md) — X予約は重み付き280(日本語=2・URL=23)でlint char_maxより厳しい。Threads Web予約は同時25件まで(残りはTHREADS-TOPUP-01で補充)
 - [project_page_quality_ui_review.md](project_page_quality_ui_review.md) — 週次ページ品質=全URL静的+代表7幅スクショ+Claude確認。生データはR2 state/page-quality/(git禁止)。SNS予約画像はMac launchd週次
