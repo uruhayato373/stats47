@@ -1,0 +1,10 @@
+{
+  "workflow": "regenerate-blog-svgs.yml",
+  "inputs": {
+    "mode": "scatter-canonical",
+    "dry_run": "false"
+  },
+  "ref": "develop",
+  "reason": "svg-builder の formatTick の丸め修正 (f180aaa78) で、公開中の散布図 4 枚のホバー表示が正規生成結果と一致しなくなった。日次の Scatter integrity gate (UTC 23:00) の前に R2 を作り直す",
+  "requestedAt": "2026-10-07T08:19:39Z"
+}
