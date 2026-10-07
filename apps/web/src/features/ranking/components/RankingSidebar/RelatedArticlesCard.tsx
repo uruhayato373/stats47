@@ -2,13 +2,14 @@ import { readTagsForItemFromR2 } from "@stats47/ranking/server";
 import { isOk, type AreaType } from "@stats47/types";
 import { Newspaper } from "lucide-react";
 
-import { RailCard, RailLinkList, RailNavRow } from "@/components/surface";
+import { RailCard, RailLinkList, RailNavRow, railNavRowClassName } from "@/components/surface";
 
 import {
   getRelatedArticleSummaries,
   listArticlesUsingRankingKeys,
   listMetricPairArticles,
 } from "@/features/blog/server";
+import { findKindleProductForBlog, TrackedProductLink } from "@/features/products";
 
 interface RelatedArticlesCardProps {
   rankingKey: string;
@@ -42,6 +43,11 @@ export async function RelatedArticlesCard({
 
   if (relatedArticles.length === 0) return null;
 
+  // 表示中の関連記事を実際に収録した Kindle 本だけを出す (タグやカテゴリからの推測はしない)
+  const kindleProduct = relatedArticles
+    .map((article) => findKindleProductForBlog(article.slug))
+    .find((product) => product !== null) ?? null;
+
   return (
     <RailCard
       title="関連記事"
@@ -56,6 +62,21 @@ export async function RelatedArticlesCard({
           </RailNavRow>
         ))}
       </RailLinkList>
+      {kindleProduct && (
+        <div className="mt-2 border-t border-border pt-2">
+          <p className="px-2 text-xs text-muted-foreground">この記事を収録した本</p>
+          <TrackedProductLink
+            href={`/products/${kindleProduct.slug}`}
+            label={`${kindleProduct.id}:${kindleProduct.title}`}
+            surface="ranking_product"
+            className={railNavRowClassName({})}
+          >
+            <span className="line-clamp-2 min-w-0 flex-1 leading-snug">
+              {kindleProduct.title}（Kindle）
+            </span>
+          </TrackedProductLink>
+        </div>
+      )}
     </RailCard>
   );
 }
