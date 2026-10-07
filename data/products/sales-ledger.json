@@ -1,4 +1,19 @@
 {
   "schemaVersion": 1,
-  "observations": []
+  "observations": [
+    {
+      "id": "223344e97e9b72ad496f",
+      "channel": "kdp",
+      "productId": "K-S1-02",
+      "periodStart": "2026-08-01",
+      "periodEnd": "2026-08-31",
+      "orders": 1,
+      "units": 1,
+      "netRevenueYen": 254,
+      "refunds": 0,
+      "evidencePath": ".local/product-sales-evidence/kdp/kdp-monthly-2026-08.json",
+      "evidenceSha256": "819ad765457036c000a496b60f1daf1a6419ee2cdb637dfde36ff703cf99a275",
+      "recordedAt": "2026-10-07T21:57:23.008Z"
+    }
+  ]
 }

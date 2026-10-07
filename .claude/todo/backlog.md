@@ -311,6 +311,14 @@ updated: 2026-10-06
 - **完了条件**: 次の本番デプロイで reset step と smoke が通り、post-deploy-smoke (Playwright) も通る。
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [NOTE-INDEX-DRIFT-01] note の公開済みインデックスがカタログとずれている (65 件の r2_body・status)
+タグ: [エージェント・SSOT] [種類:不具合] [実行:対話] [検証:npx tsx .claude/scripts/note/catalog/generate-note-catalog.ts] [起票:2026-10-08] [領域:商品]
+
+- **事象 (2026-10-08)**: カタログを変えずに `generate-note-catalog.ts --apply` を実行すると、コミット済みの `data/note/note-published-urls.json` (10-06 更新) から 65 件が `r2_body: true → false`・`status: r2_ready → note_only` に変わる。生成器かカタログのどちらが正しいかは未確認。
+- **次**: 65 件の R2 `note/<vertical>/<id>/draft.md` が実在するかを確かめ、正しい側に合わせる。このインデックスを読む `publish-paid-note-private-r2.ts` などへの影響を先に読む。
+- **停止条件**: 原因が分かるまで `--apply` の結果をコミットしない。
+- **完了条件**: カタログを変えずに再生成した結果がコミット済みのファイルと一致する。
+
 ### [THEME-READING-CHAPTER-EMPTY-01] 考察・FAQ だけの章 (読み方章 8 テーマ) が見出しと説明だけの空の章に見え、中身が比較の節の後に出る
 タグ: [UI・UX] [種類:不具合] [実行:対話] [検証:node .claude/scripts/themes/capture-theme-page.mjs consumer-prices] [起票:2026-10-08] [領域:サイト]
 
@@ -354,6 +362,25 @@ updated: 2026-10-06
 - **次 (実行順)**: ① 公衆電話 (`/ranking/public-phone-count` と `/blog/public-phone-count`)、出生率 (`/blog/fertility-rate-prefecture-gap` と `/ranking/total-fertility-rate`) の 2 組で、同じ検索語に両方が出ていないかを GSC (page × query) で確かめ、食い合いなら役割を分ける (canonical・内部リンク・title の切り口) ② 残り 5 ページを `/search-growth` の候補にし、title・description を 1 ページずつ変える (一括変更はしない) ③ 変えた日を記録し、4 週後に同じ 28 日窓で CTR を比べる。
 - **2026-10-07 の確認 (本番の title・canonical を curl で取得)**: 2 組とも canonical はそれぞれ自分自身で、title がほぼ同じ書き方 (同じ年・同じ 1 位と最下位の値) だった。公衆電話は ranking「公衆電話設置台数 都道府県ランキング【2024年】｜1位東京都（10,717.00個）」と blog「公衆電話設置台数1位東京10,717個・最下位徳島509個｜…」。出生率は ranking「…なぜ沖縄1.60が1位で東京0.99が最下位?」と blog「…沖縄1.60・東京0.99、早婚の県ほど高い…」。出生率の ranking から blog へのリンクは 0 本。**[仮説]** 同じ検索語に 2 ページが出て、互いの順位とクリックを下げている。検証: GSC で page × query を取り、同じクエリに両 URL が表示されているか (Mac か CI)。期日: 10-25。判定: 同じクエリの表示が両方にあれば、ranking を「一覧・推移・地図」、blog を「なぜ・相関」の切り口に分けて title を変える。
 - **2026-10-07 修正**: 公衆電話の ranking の title・description に出ていた「10,717.00個」は、設定 `packages/data-configs/src/metrics/public-phone-count.ts` の `display.decimalPlaces: 2` (台数なのに小数 2 桁) と、その値で書かれた seoTitle・seoDescription が原因だった。小数 0 桁に直し、文言を「10,717個」「509個」にした (同じ「.00」のある seoTitle は全 metric でこの 1 件だけ)。本番に出すにはランキングの生成物の作り直しと R2 反映 (オーナー承認) が要る。
+- **2026-10-08 確認 (段6)**: R2 の `app/ranking/public-phone-count/item.json` は 2026-10-07T22:01Z に作り直されて seoTitle が「10,717個」になり、本番 `/ranking/public-phone-count` の HTML も「10,717個」(24 か所・「.00」0 件) を返した。ただし `origin/main` の config は「10,717.00個」のまま (修正 `52da45b35` は develop のみ)。main のコードで動く `sync-snapshots` が次に ranking-items を作ると戻るので、**develop→main のマージ (オーナー承認) で定着させる**。マージ後に `curl -s https://stats47.jp/ranking/public-phone-count | grep -c '10,717.00'` が 0 であることを確かめる。
+- **① の結果 (2026-10-08・Mac で GSC page × query、28 日 09-08〜10-05)**:
+  - **公衆電話は食い合いがある。** 両方に表示されたクエリが 29 件あり、その表示は ranking 4,011・blog 1,566。主な検索語は「全国の公衆電話の数」(ranking 1,788 表示・順位 6.6 / blog 32 表示・8.3) のような**全国の総数**を問うもので、どちらの title にも全国の数が無い。ページ全体では ranking 6,670 表示・22 クリック (0.33%)、blog 4,792 表示・14 クリック (0.29%)。2024 年の 47 都道府県の合計は 96,126 個 (R2 `app/stats/public-phone-count/values.json` の合計。blog 本文の「9.6 万台」と一致)。
+  - **出生率は食い合いではない。** 両方に表示されたクエリは 9 件・表示は ranking 11 / blog 48 だけ。ranking は 70 表示・順位 13.6 で、「出生率 ランキング 日本」などのランキング語は blog が順位 1〜1.5 で受けている。ただし ranking の title が「なぜ」の切り口で、blog の title が「ランキング」の切り口と、役割が逆になっている。同じ主題・同じ数値の 3 本目 `/blog/total-fertility-rate` (49 表示・順位 10.1) があり、`BLOG-DUPLICATE-AUDIT-01` で扱う。
+  - **役割分けの案 (未適用・オーナー確認待ち)**:
+    | ページ | 切り口 | title 案 | 変える場所 |
+    |---|---|---|---|
+    | `/ranking/public-phone-count` | 一覧・推移・地図 | 公衆電話の数 都道府県ランキング【2024年】全国96,126個・1位東京都10,717個｜推移と地図 | `packages/data-configs/src/metrics/public-phone-count.ts` の seoTitle・seoDescription (description は「全国の公衆電話は 2024 年に 96,126 個。都道府県別の一覧、1975 年からの推移、地図で比較」) |
+    | `/blog/public-phone-count` | なぜ・相関 | 公衆電話はなぜ減った? ピーク93.5万台→9.6万台、都市に残り地方で消える理由｜47都道府県2024 | 記事 frontmatter (R2 の記事を docs/21 の送り箱経由で更新)。本文冒頭から ranking へ「都道府県別の一覧と推移」のリンクを置く |
+    | `/ranking/total-fertility-rate` | 一覧・推移・地図 | 合計特殊出生率 都道府県ランキング【2023年】1位沖縄1.60・最下位東京0.99｜推移と地図 | metric の seoTitle。ranking→blog のリンク (0 本) を足す。blog の title は順位 1 の検索語を受けているので変えない |
+  - 判断: 公衆電話は案どおり 2 ページを分ける。出生率は ranking の title と相互リンクだけ直す。
+- **② の結果 (2026-10-08)**: 残り 5 ページはどれも search-growth に `ctr-opportunity` として pending で入っていた (`data/search-growth/candidates.json`、10-04 生成)。承認 (`search-growth:approve`) は週 2 件の上限があるため人が行う。ページごとの案は次のとおり (1 ページずつ変え、変えた日を記録する)。
+  | ページ | 主な検索語 (28 日・表示) | 案 | 判断 |
+  |---|---|---|---|
+  | `/blog/roadside-station-count-prefecture-gap` | 道の駅多い県 706・道の駅が多い県 434・道の駅が多い都道府県 336 (順位 8〜9・CTR 0.1〜0.6%) | 「道の駅が多い県ランキング｜1位北海道128駅・最下位東京1駅 47都道府県【2026年】」 | 変える (最優先) |
+  | `/blog/avg-height-high-school-2nd-male` | 高校2年生 平均身長 764 (順位 7.0・CTR 0.13%) | 「高校2年生男子の平均身長 都道府県ランキング｜1位新潟・福井171cm、最下位沖縄167.6cm【2023年度】」。全国平均は R2 に全国行が無いので title に書かない (47 県の単純平均は全国平均ではない) | 変える |
+  | `/blog/health-life-expectancy-structure` | 健康寿命 都道府県 ランキング 2026 225 (順位 6.4) | 検索語は「2026」だがデータは 2022 年。「最新」を足し、年はデータの年のまま: 「健康寿命 都道府県ランキング【最新・2022年】男性1位静岡73.75年…」 | 変える (年を偽らない) |
+  | `/survey/census` | 40代 未婚 割合 日本 国勢調査 448 ほか (順位 2.6〜5.9・クリック 0) | 調査ハブで答えられない検索語。title は変えず、ハブから `unmarried-ratio-{male,female}-40-44` のランキングへのリンクを目立たせる | title は見送る (検索意図のずれ) |
+  | `/ranking/food-self-sufficiency-rate-calorie` | — | 停止条件どおり `DATA-FOOD-SELF-SUFFICIENCY-MAFF-01` の後 | 見送る |
 - **停止条件**: title の一括置換をしない。食料自給率はデータの年を直す (`DATA-FOOD-SELF-SUFFICIENCY-MAFF-01`) まで title を変えない。
 - **完了条件**: 7 ページそれぞれに「変えた / 見送った」と理由が記録され、変えたページの変更日が search-growth の台帳にある。
 
@@ -363,6 +390,15 @@ updated: 2026-10-06
 - **前提 (実測)**: W40 の 28 日でクエリが分かるクリック 2,688 件のうち、食べ物の消費量・特産が 31% (うどん・納豆・昆布・里芋・マグロ・うなぎ・カツオ・米など)。この面の楽天の商品カードはクリック率がサイト平均より高い (母数不足)。
 - **① の結果 (2026-10-07)**: W37〜W40 のクエリから品目を抜き出し (表示 20 以上・上位 40 品目)、公開中の metric と突き合わせた。**40 品目すべてに公開中のランキングがあった** (日本酒は「清酒」、寿司は「すし」、ラーメンは「中華そば」、お茶は「緑茶」の名前で存在)。足りないのはページではない。**同じ品目に複数のページがあり、表示が割れている**。W40 の 28 日で、カツオはブログ `/blog/bonito-catch-prefecture` が表示 5,880・CTR 1.7% を受け、ランキングは購入数量 699・かつお節 573・漁獲 214・支出額 24 に分かれる。うどんは外食の「そば・うどん」731・生うどん数量 524・干しうどん数量 176・干しうどん支出額 7 と、ブログ 3 本に分かれる。綴り違いの `/blog/bonito-catch-perfecture` や、ランキングの key と同じ名前のブログ URL (`/blog/fresh-udon-soba-consumption-quantity` など) にも表示が出ている。ブログからのリンクは、うどんのブログ→干しうどん支出額 0 本 (生うどん数量・外食へはある)、カツオのブログ→カツオ支出額 0 本、ぎょうざは双方向にある。ぎょうざは metric の key が `gyoza-frozen` で title が「ぎょうざ消費支出額」と、冷凍か惣菜かが名前から読めない。
 - **次 (方針を変更)**: 新しいページを足すより、② 品目ごとに「入口にするページ」を 1 つ決め (表示とクリックが最も多いもの)、他のページからそこへリンクを集め、title の切り口を分ける ③ 綴り違い・旧 URL のブログが表示を受けていれば、301 か canonical で入口へまとめる (`apps/web/src/config/blog-redirects.ts`) ④ 需要上位品目のランキングの title・description を、定義を崩さない範囲で検索語に寄せる (例: 清酒のランキングに「日本酒」を併記) ⑤ ぎょうざの metric が家計調査のどの品目 (冷凍調理食品か、調理食品の「ぎょうざ」か) かを e-Stat の分類で確かめ、表示名を直す ⑥ 2025 年報の取り込みは `KAKEI-EXPANSION-02`。新しい品目のランキング・ブログは、需要があってページが無い品目が見つかったときだけ作る。
+- **②⑤ の結果 (2026-10-08・Mac で GSC 28 日 09-08〜10-05)**:
+  | 品目 | 入口にするページ (表示/クリック) | 同じ品目の他のページ | 足りないリンク (本番 HTML で確認) |
+  |---|---|---|---|
+  | うどん | `/ranking/soba-udon-dining-consumption-expenditure` (728/39) | ranking 生うどん数量 (571/33)・干しうどん数量 (239/5)、blog 生うどん (359/6)・そば外食 (102/2)・食文化地図 (73/2) | 入口 → 生うどん数量・干しうどん数量のランキング / 生うどん数量のランキング → 入口と blog (今は支出額のランキングだけ) / 食文化地図 → 入口 |
+  | カツオ | `/blog/bonito-catch-prefecture` (5,453/91) | ranking かつお購入数量 (626/38)・漁獲 (231/2)・支出額 (22/1) | 入口 → かつお購入数量のランキング / かつお購入数量のランキング → 入口 (今は支出額と漁獲のランキングだけ) |
+  | かつお節 | `/ranking/katsuobushi-consumption-quantity` (558/36) | blog `katsuobushi-expenditure-ranking` (159/4)、ranking 支出額 (39/1) | ランキング → blog |
+  | ぎょうざ | `/blog/frozen-gyoza-spending-prefecture-gap` (1,305/19) | ranking `gyoza-frozen-consumption-expenditure` (17/1) | 双方向にある。足さない |
+  - リンクの作られ方: ranking の「関連記事」は、その指標を図に使う記事 (blog snapshot の `rankingRefs`) と相関記事から自動で出る (`RelatedArticlesCard.tsx`)。blog → ranking は記事本文のリンクと図の出典カード。どちらも**記事の書き換えと公開**で足す (docs/21 の送り箱 → publish-blog。本番反映なのでオーナー承認)。カツオの入口記事は漁獲の記事なので、購入数量のランキングとは本文中の「食べる側」の一文とリンクでつなぐ (図に入れて rankingRefs にしない。主題が変わるため)。
+  - **ぎょうざの品目 (⑤)**: `gyoza-frozen-consumption-expenditure` の `cdCat01: 010920070` は、e-Stat の表 0003348239 の分類で「371 ぎょうざ」。「1.9.2 他の調理食品」の下にあり、「370 冷凍調理食品」(`010920100`) とは別の品目である (`data/estat/meta/0003348239.json`)。key と blog の slug の「冷凍」は分類と合わない。ところが blog 本文は「ぎょうざ」に冷凍餃子が含まれると 7 か所で書いている。**確認済み (2026-10-08)**: 総務省 統計局「家計調査 収支項目分類及びその内容例示」2020年改定版 (`https://www.stat.go.jp/data/kakei/kou2020/zuhyou/kouh2020.xlsx`、シート「2消費支出」) で、371 ぎょうざの例示は「生も含む」、除外の欄が「× ぎょうざの冷凍品→370」。370 冷凍調理食品の例示に「冷凍食品（コロッケ かば焼き ぎょうざ しゅうまい…）」がある。**冷凍ぎょうざはこの指標に入らない**。blog の「冷凍餃子・持ち帰りの支出を数える」(7 か所) は誤り。次: blog の 7 か所を「持ち帰りの生・焼きぎょうざ (冷凍品は別品目の冷凍調理食品)」に直して公開し (承認)、metric の `subtitle` に「冷凍品を除く」を足す。key `gyoza-frozen-consumption-expenditure` と slug `frozen-gyoza-spending-prefecture-gap` は URL なので変えない (変えるなら 301 を同時に入れる)。 → metric の subtitle・note は 2026-10-08 に直した (`62a5fe9e1`。本番反映は develop→main のマージと sync-snapshots の後)。同じコミットで収支項目分類の正本 `data/estat/kakei-classification/` と CI 検査を足した。blog 本文 7 か所とランキングの AI 解説の冷凍の記述は未修正。
 - **停止条件**: 需要の証拠 (検索表示) が無い品目は作らない。47 都道府県分の薄い記事を一括で作らない。家計調査は県庁所在市の世帯の値であり県全体ではないことを表題と本文で崩さない。
 - **完了条件**: 品目の突き合わせ表が残り、追加したページそれぞれの 4 週後の検索表示とクリックが記録されている。
 
@@ -379,6 +415,19 @@ updated: 2026-10-06
 
 - **事象 (2026-10-07 に本番を curl で確認)**: 次の組がどちらも index 対象 (`robots: index, follow`)・canonical は自分自身で、表題の主題と数値が同じ。`/blog/fresh-udon-soba-consumption-quantity` (生うどん・そば消費量1位は香川16,788g…) と `/blog/fresh-udon-soba-consumption-prefecture-gap` (生うどん・そば消費量ランキング2024｜1位香川16,788g…)、`/blog/soba-udon-dining-consumption-expenditure` (そば・うどん外食費1位は香川16,156円…) と `/blog/soba-udon-dining-consumption-expenditure-prefecture-gap`。`/blog/school-teacher-annual-income` と `/blog/school-teacher-annual-income-prefecture-gap` も同じ (どちらも「1位愛知 885.9万円」)。確認できた重複は 3 組。同じ検索語で表示とクリックを分け合っている (`CONTENT-FOOD-TRIVIA-01` の「表示が割れている」の一因)。
 - **次**: ① R2 の `app/blog/all.json` で、表題と主指標 (rankingRefs の先頭) が同じで公開日の違う組を全件出す (主指標だけだと県別の食文化シリーズのような別の切り口も拾うので、表題の一致も条件にする) ② 組ごとに GSC の表示・クリックが多い方を残し、もう一方を 301 (`apps/web/src/config/blog-redirects.ts`) でまとめる ③ 残す記事に消す記事の固有の内容があれば移す。
+- **2026-10-08 結果 (Mac・GSC 28 日 09-08〜10-05)**: 3 組の残す側と、統合元にしか無い節 (R2 `app/blog/<slug>/article.md` の見出しで比較)。
+  | 組 | 残す (表示/クリック) | 301 で統合 (表示/クリック) | 統合元にしか無い節 (移す) |
+  |---|---|---|---|
+  | 生うどん | `fresh-udon-soba-consumption-prefecture-gap` (359/6) | `fresh-udon-soba-consumption-quantity` (7/0) | 九州・沖縄はなぜ少ない / うどん圏とそば圏が上位で交差する |
+  | そば外食 | `soba-udon-dining-consumption-expenditure-prefecture-gap` (102/2) | `soba-udon-dining-consumption-expenditure` (2/0) | 沖縄最下位とソーキそば / 新潟・長野が低い理由 / 関東の健闘 (埼玉4位・東京15位) |
+  | 教員年収 | `school-teacher-annual-income` (133/2) | `school-teacher-annual-income-prefecture-gap` (0/0。08-31 公開) | 同じ県でも年が変わると順位が大きく動く / データについて |
+  | 出生率 (`SEO-CTR-CANDIDATES-01` で発見) | `fertility-rate-prefecture-gap` (1,374/3) | `total-fertility-rate` (49/0) | 未比較 |
+- **実行順 (案・未適用)**: ① 残す記事へ上の節を移し、docs/21 の送り箱から公開する (blog の品質ゲートと critic を通す。公開は本番反映なのでオーナー承認) ② 公開を確かめてから `apps/web/src/config/blog-redirects.ts` に `"<統合元>": "<残す>"` を足す (middleware の 301 と sitemap の除外はこの表だけで効く) ③ 統合元を R2 の `app/blog/all.json` で非公開にする (このままだと一覧と関連記事に 301 先へのリンクが残る。R2 書き込みなので承認) ④ 本番で 1 組ずつ `curl -sI https://stats47.jp/blog/<統合元>` が 301 と残す URL を返すことを確かめる。②を①より先に出すと移す前の本文が見えなくなるので、順を入れ替えない。
+- **他の重複候補 (2026-10-08・all.json 609 本の title と seoTitle に同じ数値が 2 つ以上ある組)**: 機械照合で 22 組。そば外食と教員年収の組は表題の数値の丸めが違い拾えなかったので、この方式は取りこぼす。本文を読んでいないので、まとめる判断は組ごとに本文を見てから行う。
+  | 判断の候補 | 組 (GSC 28 日 表示/クリック) |
+  |---|---|
+  | まとめる候補 (同じ指標の単独ランキングに見える) | 牛肉 `beef-consumption-quantity` (493/10) と `beef-consumption-prefecture-gap` (315/13。表示とクリックで多い方が割れる) / 乳用牛 `dairy-cattle-count` (146/1) と `dairy-cattle-hokkaido-monopoly` (86/2) / テレワーク `engineer-telework-prefecture` (83/2) と `telework-gap-tokyo-6x` (0)・`telework-rate-tokyo-gap` (0) / 病床利用率 `hospital-bed-utilization-map` (217/4) と `general-hospital-bed-occupancy-rate` (2/0) / 納豆 `natto-consumption-expenditure` (54/2) と `natto-consumption-east-west-divide` (53/3) / ソフトウェア技術者 `software-engineer-salary-prefecture-gap` (155/3) と `software-engineer-income-gap` (7/0) / 小麦粉 `wheat-flour-consumption-prefecture` (791/55) と `wheat-flour-consumption-food-culture-gap` (251/3) / 空き家と地価 (表題が完全一致) `vacant-housing-rate-vs-standard-price-change-rate-commercial` (15/0) と `vacant-housing-vs-land-price` (1/0) / 県民所得 `prefectural-income-gdp-ranking` (2,257/46) と `per-capita-income-gap` (298/8。GDP と 1 人当たりで指標が違う可能性) |
+  | 切り口が違うので残す候補 (相関・閾値・地図) | `fertility-fiscal-nexus` / `udon-soba-food-culture-prefecture-map` / `inpatient-rate-aging-burden` / `minimum-wage-1000yen-prefecture` と `minimum-wage-increase-rate-prefecture-gap` / `tuna-consumption-medical-expense-correlation` / `vacant-housing-aging-correlation` / `black-tea-income-gap` |
 - **停止条件**: 主題が同じでも切り口が違う記事 (相関・地域別・県別シリーズ) はまとめない。301 は 1 組ずつ本番で確かめる。
 - **完了条件**: 重複の組の一覧と、それぞれの処置 (301・残す理由) が記録され、301 が本番で効いている。
 
@@ -405,6 +454,8 @@ updated: 2026-10-06
 - **前提 (実測)**: ランキング型 (A シリーズ) の有料記事 47 本は通算 (〜2026-09-11) 閲覧 4,842・売上 ¥0。note 全体の直近 28 日 (09-07〜10-04) は閲覧 7,048・売上 ¥0 (`data/note/dashboard/`)。有料の壁は売上を生まず、本文の読了と stats47 への送客だけを減らしている可能性がある。
 - **次 (実行順)**: ① 無料化の前の基準値を記録する: 対象 47 本の 28 日の閲覧と、GA4 の `sessionSource = note.com` の 28 日のセッションと着地ページ ② 閲覧の多い順に少数ずつ無料に戻す (note へのログインは人手。カタログ `.claude/scripts/note/catalog/` の有料・無料も同じ差分で直す) ③ 4 週後に同じ指標を取り、無料にした記事の閲覧と送客を、まだ有料の記事と比べる ④ D シリーズの有料データセット記事 5 本 (通算売上 ¥0) は、§3.4 の行政資料 pilot の販売面として残すか無料にするかを、同じ観測のあとに決める。
 - **基準値 (2026-10-07 記録・無料化の前)**: 対象 47 本の閲覧は直近 28 日 (09-07〜10-04) で計 804 (`data/note/dashboard/latest.json`、A シリーズの有料記事)。GA4 の外部サイト流入 (Referral。note.com を含む) は 28 日 (09-06〜10-03) で 602 セッション・1,698 PV (`data/ga4/snapshots/2026-W40/channels.csv`)。note.com だけの値は GA4 の流入元の内訳が要り、クラウドでは取れない (最後の記録は 08-09〜09-05 の 502 セッション)。無料化の前に Mac か CI で `sessionSource = note.com` の 28 日を 1 回取ってここに足す。
+- **基準値の追加 (2026-10-08・Mac で GA4)**: `sessionSource = note.com` は 28 日 (09-10〜10-07) で 380 セッション・1,140 PV・エンゲージ 284。着地ページの上位は `/ranking/annual-sunshine-duration` 82、`/` 37、`/ranking/real-public-debt-service-ratio` 24、`(not set)` 22、`/ranking/annual-clear-days` 19、`/ranking/annual-cloudy-days` 14、`/ranking/owner-occupied-housing-ratio` 12 (着地ページは 85 種)。再現: `node .claude/scripts/metrics/ga4-query.mjs --start 2026-09-10 --end 2026-10-07 --dims landingPage --metrics sessions,engagedSessions --filter 'sessionSource==note.com' --limit 100`。
+- **第 1 陣 (2026-10-08 選定・note.com への反映はオーナー待ち)**: A シリーズの有料記事を 28 日の閲覧 (09-07〜10-04) の多い順に 3 本。`n2ed31d721531` 財政健全化法の4指標 (閲覧 358)、`nba8bf272cc2b` 初婚年齢 (133)、`n67de9d45c426` 趣味・娯楽時間 (100)。3 本で A シリーズ有料 47 本の閲覧 804 の 74%。いずれも ¥200 で、入っているマガジン (`s47-fiscal`・`s47-population`・`s47-sports-culture`) は無料。**2026-10-08 に note.com で 3 本を無料に切り替えた** (公開設定の記事タイプを無料にして更新。`https://note.com/api/v3/notes/<id>` が 3 本とも `price: 0`・`can_read: true` を返すことを未ログインで確認)。カタログ `stats47-note.ts` と公開済み一覧 `data/note/note-published-urls.json` の 3 件も `is_paid: false` にした。一覧の `r2_access` は `private` のまま残した。本文が非公開 R2 にしか無く、`public` にすると OGP 生成とギャラリー監査が公開 R2 の本文を探して欠落扱いにするため。本文を公開 R2 へ移すのは R2 への書き込みなので、オーナーの承認を取ってから行い、そのとき一覧も `public` にする。4 週後の比較は、この 3 本の閲覧と、まだ有料の残り 44 本の閲覧、上の着地ページで行う。ノウハウ記事 (`nfd3ab8213e1f` Excel マクロの移植など) は対象外。
 - **停止条件**: 全記事を一括で変えない。ノウハウの有料記事・マガジン (Claude Code の実務) は有料のまま。note への反映はオーナーのログインを経てから。
 - **完了条件**: 47 本の有料・無料が決定どおりになり、カタログと note.com が一致し、無料化の前後 4 週の閲覧と送客が記録されている。
 
@@ -424,7 +475,8 @@ updated: 2026-10-06
 - **原因**: 台帳の `record` は証拠ファイルを `.local/product-sales-evidence/` (手元の端末だけにある場所) に置くことを必須にしている (`packages/product-factory/src/sales/cli.ts` の `resolveEvidence`、`ledger.ts` の検査)。CI は保管庫の復号鍵を持つが、この条件を満たせないので書けない。
 - **次**: ① 証拠の参照先として「保管庫のキーと、復号したレポートの sha256」を認める形を設計する (公開リポジトリには金額の集計だけを置き、生のレポートは保管庫に残す) ② `collect.mjs` の KDP 月次取得の直後に、本ごとの注文数・既読 KENP・推定ロイヤリティを台帳へ書く ③ 8 月分 (保管庫に既にある) で台帳に 12 冊分の行ができることを確かめる。
 - **停止条件**: 生のレポート (全アカウントの行を含む) と個人情報を公開リポジトリに置かない。stats47 の ASIN 以外の行を台帳に入れない (`kdp-reports.mjs` の `kdpAsinMap` と同じ照合を使う)。
-- **完了条件**: CI の KDP 月次取得のあとに台帳の行が自動で増え、`products:sales -- validate` が PASS し、週次の KPI ツリーで `paid-purchases` の KDP 分が判定不能でなくなる。
+- **2026-10-08 実装 (`fb6c2b288`・develop のみ・未 push)**: 台帳の証拠に保管庫キー `vault:kdp/monthly/month-<n>` と復号したレポートの stats47 行の内容ハッシュを認めた。`collect.mjs` が書籍別の集計だけを結果に載せ、書き込み権限のある record job の `summarize.mjs` が同じ書籍・月の行が無いときだけ足す (値の食い違いは上書きせず action_required、円以外・負の行は理由付きで除外、明細の無い本を 0 で埋めない)。8 月分は手入力で 1 行 (K-S1-02・¥254、`1f4a56bc4`) を記録済み。テスト: product-factory 298 件・measurement 73 件 pass。**定期実行は main の workflow 定義で `git add` するので、develop→main のマージ (オーナー承認) まで CI は台帳を書かない。**
+- **完了条件**: マージ後の CI の KDP 月次取得のあとに、明細のある本の行が台帳へ自動で増え (明細の無い本は行を作らない)、`products:sales -- validate` が PASS し、週次の KPI ツリーで `paid-purchases` の KDP 分が判定不能でなくなる。
 
 ### [KNOWHOW-PRODUCT-PILOT-01] AI×公的統計の実務ノウハウ商品を1つ選び、note の販売面で4週の実売を確かめる
 タグ: [収益化] [種類:制作] [実行:対話] [起票:2026-10-07] [領域:商品]
@@ -722,8 +774,21 @@ updated: 2026-10-06
   | 50 | `/blog/fertility-rate-prefecture-gap` | 1,501 / 1,005 | 0.3% | 5.1 | `/ranking/total-fertility-rate` との食い合いを確かめる |
   | 38 | `/ranking/food-self-sufficiency-rate-calorie` | 1,366 / 365 | 0.8% | 5.5 | データの年 (`DATA-FOOD-SELF-SUFFICIENCY-MAFF-01`) を直してから title |
   | 37 | `/blog/avg-height-high-school-2nd-male` | 5,742 / 4,701 | 0.5% | 7.3 | 順位 7 で CTR 0.5%。title に年と比較の切り口があるか |
-- **残り**: page × query の分解は GSC API の認証がある環境 (Mac か CI) で行う。上の候補は `SEO-CTR-CANDIDATES-01` で search-growth に渡す。
-- **完了条件**: 上位 10 件と、それぞれを search-growth 候補へ渡すか見送るかの判断が記録されている。
+- **2026-10-08 結果 (Mac・page × query、確定 7 日 W38=09-14〜20 と W39=09-21〜27)**: `#` 付き URL を除く page × query 行の合計は、W38 が表示 20,357・クリック 698 (CTR 3.43%)、W39 が表示 40,767・クリック 725 (1.78%)。W38 に表示の無かったページの表示 7,139 (クリック 14) を除くと W39 の CTR は 2.11%。表示が増えて CTR が低い上位 10 件は、すべて次の 2 主題だった。
+  | page | query | 表示 W38→W39 | クリック | CTR | 順位 |
+  |---|---|---|---:|---:|---:|
+  | `/ranking/public-phone-count` | 全国の公衆電話の数 | 2→1,751 | 2 | 0.1% | 6.6 |
+  | `/ranking/public-phone-count` | 公衆電話 全国 数 | 0→876 | 1 | 0.1% | 7.3 |
+  | `/blog/roadside-station-count-prefecture-gap` | 道の駅多い県 | 6→674 | 1 | 0.1% | 8.4 |
+  | `/blog/roadside-station-count-prefecture-gap` | 道の駅 多い県 | 10→673 | 0 | 0.0% | 8.8 |
+  | `/blog/public-phone-count` | 公衆電話の数 日本 | 0→411 | 0 | 0.0% | 9.9 |
+  | `/ranking/public-phone-count` | 日本にある公衆電話の数 | 0→380 | 0 | 0.0% | 6.9 |
+  | `/blog/roadside-station-count-prefecture-gap` | 道の駅が多い県 | 10→385 | 0 | 0.0% | 9.0 |
+  | `/blog/roadside-station-count-prefecture-gap` | 道の駅 数 ランキング | 0→360 | 0 | 0.0% | 9.9 |
+  | `/blog/public-phone-count` | 日本の公衆電話の数 | 0→359 | 1 | 0.3% | 9.2 |
+  | `/blog/roadside-station-count-prefecture-gap` | 道の駅の数 ランキング | 1→327 | 0 | 0.0% | 10.1 |
+  判断: 10 件とも `SEO-CTR-CANDIDATES-01` で扱う (公衆電話は食い合いの役割分け、道の駅は表題案)。どちらも search-growth の `ctr-opportunity` に pending で入っている。再現: `node .claude/scripts/metrics/gsc-query.mjs --start 2026-09-14 --end 2026-09-20 --dims page,query --limit 25000 --format json` (W39 は 09-21〜27)。
+- **完了条件**: 上位 10 件と、それぞれを search-growth 候補へ渡すか見送るかの判断が記録されている。→ 2026-10-08 に満たした (上の表)。
 
 ### [MODEL-OPT-APPLY-01] モデル使用量の改善提案を canary で確かめて agent の model / effort に反映する
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:npm run model-usage:test] [起票:2026-10-02] [領域:管理]

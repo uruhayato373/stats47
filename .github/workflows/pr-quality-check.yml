@@ -711,6 +711,15 @@ jobs:
           npm run build:registry --workspace=@stats47/data-configs -- --check
         continue-on-error: false
 
+      - name: 🧺 Kakei Item Classification Gate
+        run: |
+          # 家計調査 metric の文言が総務省の収支項目分類の「× 含まれない」例示と矛盾しないことを担保。
+          # 371 ぎょうざ に冷凍品が含まれると注記・ブログに書いていた (公式は「× ぎょうざの冷凍品→370」) 再発防止 (2026-10-08)。
+          # 正本: data/estat/kakei-classification/<改定>.json (生成: .claude/scripts/estat/build-kakei-classification.mjs)
+          npm run estat:kakei-classification:test
+          npm run estat:kakei-classification:check
+        continue-on-error: false
+
       - name: 📏 Unit Semantics Mirror Gate
         run: |
           # 単位の解釈は packages/data-configs/src/unit/unit-semantics.ts が正典で、

@@ -2,7 +2,8 @@
 import { readFileSync, readdirSync, existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { SOURCES } from './sources.mjs';
-import { datasetDir } from "../../../config/datasets.mjs";
+import { mergeSalesObservations } from '../../../packages/product-factory/src/sales/ledger-core.mjs';
+import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 const input = process.argv[2] || '.local/authenticated-ci-public';
 const output = `${datasetDir("revenue.authenticated")}/latest.json`;
@@ -46,8 +47,31 @@ const sources = Object.entries(SOURCES).map(([source, config]) => {
     remaining: source === 'kdp' ? 'payout_and_net_profit_not_collected' : source === 'afb' ? 'net_payout_and_partnership_status_not_collected' : null,
   };
 });
-const state = { schemaVersion: 1, generatedAt: new Date().toISOString(), runId: process.env.GITHUB_RUN_ID ?? null, sources,
-  status: sources.every(s => s.status === 'pass') ? 'pass' : 'action_required' };
+// KDP 月次レポートの書籍別集計を販売台帳へ足す。同じ書籍・月の行が既にあれば足さず (再実行・手入力済み)、
+// 数値の食い違いは上書きせず要対応にする。候補は collect.mjs が保管庫キー付きで作ったものだけを受け付ける。
+const kdpLedger = sources.find(s => s.source === 'kdp' && s.status === 'pass')?.quality?.salesLedger ?? null;
+let salesLedger = null;
+if (kdpLedger) {
+  try {
+    const candidates = kdpLedger.observations;
+    if (!Array.isArray(candidates) || candidates.some(o => o?.channel !== 'kdp' || o.evidencePath !== `vault:${kdpLedger.vaultKey}`)) {
+      throw new Error('invalid_sales_ledger_candidates');
+    }
+    const ledgerPath = datasetPath("sales.ledger");
+    const ledger = existsSync(ledgerPath) ? JSON.parse(readFileSync(ledgerPath, 'utf8')) : { schemaVersion: 1, observations: [] };
+    const merged = mergeSalesObservations(ledger, candidates);
+    if (merged.added.length) {
+      mkdirSync(dirname(ledgerPath), { recursive: true });
+      writeFileSync(ledgerPath, JSON.stringify(merged.ledger, null, 2) + '\n');
+    }
+    salesLedger = { status: merged.conflicts.length ? 'conflict' : 'pass', month: kdpLedger.month, added: merged.added.length,
+      skipped: merged.skipped.length, conflicts: merged.conflicts, excluded: kdpLedger.excluded ?? [] };
+  } catch (error) {
+    salesLedger = { status: 'failed', month: kdpLedger.month ?? null, code: String(error.message).slice(0, 200) };
+  }
+}
+const state = { schemaVersion: 1, generatedAt: new Date().toISOString(), runId: process.env.GITHUB_RUN_ID ?? null, sources, salesLedger,
+  status: sources.every(s => s.status === 'pass') && (salesLedger?.status ?? 'pass') === 'pass' ? 'pass' : 'action_required' };
 mkdirSync(dirname(output), { recursive: true });
 writeFileSync(output, JSON.stringify(state, null, 2) + '\n');
 // 商品の週次実売の入力 (metrics/lib/product-revenue.mjs)。成功した取得元の quality.revenue だけを日付単位で足す。
@@ -68,6 +92,9 @@ const lines = ['認証付き計測の最新試行。生データと認証状態�
     ? ['', 'KDP: 本棚とReportsの両方を本人が認証する。本人認証後のCI成功に続く再実行で再び認証を要求された場合、再ログインを反復せず停止し、private証跡の確定画面と実行環境を調査する。古いstateの再exportは認証復旧ではない。'] : []),
   ...(sources.some(s => s.recovery) ? ['', '再認証待ちの対象はブラウザへ再接続せず失敗状態を記録し、他の取得元は継続する。新しい本人認証を公開後、次回CIで再開する。待機チェックの時刻は計測値を取得した時刻ではない。'] : []),
   ...(sources.some(s => s.inventoryAvailable) ? ['', 'note: 検証済みの記事棚卸しだけ利用可能（restore.mjs note --inventory-only）。欠測はnull、全件KPI・効果判定には利用不可。通常の復元と成功判定は緩和しない。'] : []),
+  ...(salesLedger ? ['', salesLedger.status === 'failed'
+    ? `販売台帳 (KDP ${salesLedger.month}): 書き込み失敗 (${salesLedger.code})。台帳は変更していない。`
+    : `販売台帳 (KDP ${salesLedger.month}): 追加 ${salesLedger.added} 件・記録済み ${salesLedger.skipped} 件・食い違い ${salesLedger.conflicts.length} 件・円以外などで除外 ${salesLedger.excluded.length} 件${salesLedger.conflicts.length ? '。食い違いは上書きしていない。既存行と月次レポートを照合して直す' : ''}`] : []),
   '', 'KDPは昨日の書籍別注文・KENP・電子書籍ロイヤリティ見積りと月次ロイヤリティを分離して取得する。月次を週次へ按分せず、入金・税引後純利益にはしない。afbは発生日/確定日を分けた28日成果で、両系列を足さず、報酬を純収益・入金にしない。提携状態は別の手動経路。ココナラ表示数は有料機能で欠測の場合null。',
 ];
 writeFileSync('/tmp/authenticated-measurement-summary.md', lines.join('\n') + '\n');
