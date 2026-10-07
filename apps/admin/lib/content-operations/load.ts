@@ -16,6 +16,7 @@ import {
   KINDLE_SERIES_LABELS,
 } from '../../../../packages/product-factory/src/channels/kindle/cover-design';
 import { KDP_PORTFOLIO_POLICY } from '../../../../packages/product-factory/src/channels/kindle/kdp-publishing-policy';
+import { datasetDir } from '../../../../config/datasets.mjs';
 import { KDP_LISTINGS } from '../../../../config/paths.mjs';
 import surveysMaster from '../../../../packages/ranking/src/data/surveys.json';
 
@@ -130,29 +131,27 @@ function hasQuotedKey(body: string, key: string): boolean {
   return body.includes(`"${key}"`) || body.includes(`'${key}'`);
 }
 
+// テーマ定義の正本は data/themes/catalogs/<slug>.json (2026-10-06 に TS から移した)。
+// 指標カード・図・論点 (evidenceTopics) のどこに出る指標も「テーマに載っている」とみなすため、生成物の
+// indicator-sets (metrics だけ) ではなく JSON 全体から探す。カタログの無い旧テーマは indicator-sets を読む。
 function loadThemeTargets(root: string, metricKeys: string[]) {
-  const relDir = 'packages/data-configs/src/theme-catalog';
+  const catalogRelDir = datasetDir('themes.catalogs');
   const indicatorRelDir = 'packages/types/src/indicator-sets';
-  const indexPath = path.join(root, relDir, 'index.ts');
-  if (!fs.existsSync(indexPath)) return [];
-  const index = fs.readFileSync(indexPath, 'utf8');
-  const indicatorDir = path.join(root, indicatorRelDir);
+  const listSlugs = (rel: string, ext: string) => {
+    const dir = path.join(root, rel);
+    return fs.existsSync(dir)
+      ? fs
+          .readdirSync(dir)
+          .filter((file) => file.endsWith(ext) && file !== `index${ext}`)
+          .map((file) => file.slice(0, -ext.length))
+      : [];
+  };
   const slugs = [
-    ...new Set([
-      ...[...index.matchAll(/from\s+["']\.\/([^"']+)["']/g)].map(
-        (match) => match[1]
-      ),
-      ...(fs.existsSync(indicatorDir)
-        ? fs
-            .readdirSync(indicatorDir)
-            .filter((file) => file.endsWith('.ts') && file !== 'index.ts')
-            .map((file) => file.slice(0, -3))
-        : []),
-    ]),
+    ...new Set([...listSlugs(catalogRelDir, '.json'), ...listSlugs(indicatorRelDir, '.ts')]),
   ];
   return slugs.flatMap((slug) => {
     const files = [
-      path.join(root, relDir, `${slug}.ts`),
+      path.join(root, catalogRelDir, `${slug}.json`),
       path.join(root, indicatorRelDir, `${slug}.ts`),
     ].filter((file) => fs.existsSync(file));
     if (files.length === 0) return [];
