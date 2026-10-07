@@ -2,9 +2,14 @@ import { readTagsForItemFromR2 } from "@stats47/ranking/server";
 import { isOk, type AreaType } from "@stats47/types";
 import { Newspaper } from "lucide-react";
 
-import { RailCard, RailLinkList, RailNavRow } from "@/components/surface";
+import { RailCard, RailLinkList, RailNavRow, railNavRowClassName } from "@/components/surface";
 
-import { getRelatedArticleSummaries, listMetricPairArticles } from "@/features/blog/server";
+import {
+  getRelatedArticleSummaries,
+  listArticlesUsingRankingKeys,
+  listMetricPairArticles,
+} from "@/features/blog/server";
+import { findKindleProductForBlog, TrackedProductLink } from "@/features/products";
 
 interface RelatedArticlesCardProps {
   rankingKey: string;
@@ -15,9 +20,10 @@ export async function RelatedArticlesCard({
   rankingKey,
   areaType,
 }: RelatedArticlesCardProps) {
-  // 散布図でこの指標を扱う記事 (相関記事) は都道府県データなので prefecture だけ引く
-  const [tagsResult, pairArticles] = await Promise.all([
+  // この指標を図に使う記事と、散布図でこの指標を扱う記事 (相関記事) は都道府県データなので prefecture だけ引く
+  const [tagsResult, metricArticles, pairArticles] = await Promise.all([
     readTagsForItemFromR2(rankingKey, areaType),
+    areaType === "prefecture" ? listArticlesUsingRankingKeys([rankingKey], { limit: 3 }) : Promise.resolve([]),
     areaType === "prefecture" ? listMetricPairArticles(rankingKey) : Promise.resolve([]),
   ]);
   const tagKeys = isOk(tagsResult) ? tagsResult.data : [];
@@ -28,13 +34,19 @@ export async function RelatedArticlesCard({
     perTag: 3,
   });
 
-  // この指標そのものを扱う記事をタグ一致より先に出す。相関記事は tags が空でタグ経由では出ない
+  // この指標そのものを扱う記事をタグ一致より先に出す。metric の tags は空なのでタグ経由ではほぼ出ない
+  // (2026-10-07 実測: tags を持つ metric config 0 件)。図に使う記事 → 相関記事 → タグの順
   const seen = new Set<string>();
-  const relatedArticles = [...pairArticles, ...tagArticles]
+  const relatedArticles = [...metricArticles, ...pairArticles, ...tagArticles]
     .filter((article) => !seen.has(article.slug) && seen.add(article.slug))
     .slice(0, 3);
 
   if (relatedArticles.length === 0) return null;
+
+  // 表示中の関連記事を実際に収録した Kindle 本だけを出す (タグやカテゴリからの推測はしない)
+  const kindleProduct = relatedArticles
+    .map((article) => findKindleProductForBlog(article.slug))
+    .find((product) => product !== null) ?? null;
 
   return (
     <RailCard
@@ -50,6 +62,21 @@ export async function RelatedArticlesCard({
           </RailNavRow>
         ))}
       </RailLinkList>
+      {kindleProduct && (
+        <div className="mt-2 border-t border-border pt-2">
+          <p className="px-2 text-xs text-muted-foreground">この記事を収録した本</p>
+          <TrackedProductLink
+            href={`/products/${kindleProduct.slug}`}
+            label={`${kindleProduct.id}:${kindleProduct.title}`}
+            surface="ranking_product"
+            className={railNavRowClassName({})}
+          >
+            <span className="line-clamp-2 min-w-0 flex-1 leading-snug">
+              {kindleProduct.title}（Kindle）
+            </span>
+          </TrackedProductLink>
+        </div>
+      )}
     </RailCard>
   );
 }

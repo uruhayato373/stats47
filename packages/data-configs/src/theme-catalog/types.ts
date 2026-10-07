@@ -8,6 +8,9 @@
  * 独立編集され突合の仕組みが無かった。ThemeCatalog はこの 2 つを 1 ファイルに統合し、
  * 選定根拠 (どの白書・調査に基づくか) も selection として保持する。
  *
+ * 実体は `data/themes/catalogs/<key>.json` (2026-10-06 に TS から移した)。この型が JSON の形の正典で、
+ * `data/themes/schema/theme-catalog.schema.json` はこの型に合わせる (項目を足すときは両方を同じ差分で変える)。
+ *
  * カタログは生成の SSOT で、以下 2 つは生成物 (手編集禁止):
  *   - IndicatorSet TS  (`packages/types/src/indicator-sets/<theme>.ts`) … codegen
  *   - page-components JSON (`apps/web/scripts/data/page-components/theme/<theme>.json`) … R2 verbatim export 用
@@ -184,7 +187,11 @@ export interface CatalogChart {
  *   フォールバックするので、全テーマに書く必要はない。
  */
 export interface CatalogMetricGroup {
-  /** 固定年の県別比較。指定時は時系列を描かず、この年が欠けても最新年へ代替しない。 */
+  /**
+   * 固定年の県別比較の起点の年。指定時は時系列を描かない。グループの全指標に値がそろう、より新しい年が R2 に
+   * 入れば実行時にその最新年へ進む (`resolve-comparison-years.ts`)。1 指標でも欠ける年へは進めず、
+   * 指標ごとの最新年へも代替しない。
+   */
   comparisonYear?: string;
   /** 固定年の県別比較にタイル地図を追加する（率など地域差の比較用）。 */
   comparisonMap?: boolean;

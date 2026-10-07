@@ -31,6 +31,8 @@ Theme brief
 - チャートpropsは `theme-component-builder`、新しい描画型は `chart-component-builder` に渡す。
 - `theme-portfolio-manager` は実測評価と実験台帳を持ち、カタログやUIを直接実装しない。
 - 新規metric候補は `.claude/todo/backlog.md` へ分離し、未検証IDを投入しない。
+- proposal の形 (Theme brief・表 1〜3・採用決定) は `theme-proposal-format.md`、判断の視点は
+  `config/theme-selection-viewpoints.json` を使う。localhost の視覚 QA は `.claude/scripts/themes/capture-theme-page.mjs`。
 
 ## Theme brief
 
@@ -84,7 +86,7 @@ selection-backfill.md` の「role の推奨」表に出す (夜間バッチ自�
   recommended と一致したかで自動判定する。
 - 採択・却下は `node --import tsx .claude/scripts/themes/build-role-review-queue.mjs decide
   --theme <theme> --key <rankingKey> --decision accept|reject --note "..."` で記録してから、
-  下記「Claude Code実装契約」どおり `<theme>.ts` を編集する。
+  下記「Claude Code実装契約」どおり `data/themes/catalogs/<theme>.json` を編集する。
 - 進捗の正典 backlog: `THEME-ROLE-REVIEW-01`。
 
 ## Claude Code実装契約
@@ -92,7 +94,7 @@ selection-backfill.md` の「role の推奨」表に出す (夜間バッチ自�
 ```text
 対象: <theme-key>
 採択根拠: <review-or-audit-path>
-編集先: packages/data-configs/src/theme-catalog/<key>.ts
+編集先: data/themes/catalogs/<key>.json
 禁止: indicator-sets/*.ts / page-components/*.json の手編集
 要件:
 - metrics の role/selection を採択どおり反映

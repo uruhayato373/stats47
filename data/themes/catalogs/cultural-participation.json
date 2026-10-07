@@ -1,0 +1,291 @@
+{
+  "key": "cultural-participation",
+  "title": "文化芸術への参加",
+  "description": "美術・演劇などの鑑賞行動者率、図書館利用、博物館数を参加・施設の軸に分けて比較します。行動者率と施設数を合算しません。",
+  "category": "education",
+  "usage": "theme",
+  "metrics": [
+    {
+      "rankingKey": "hobby-participation-rate-art-appreciation",
+      "shortLabel": "美術鑑賞の行動者率",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "令和3年社会生活基本調査 調査票Ａに基づく結果 生活行動編（地域）趣味・娯楽98-2-2「男女,従業上の地位,趣味・娯楽の種類別行動者率(有業者)－全国，都道府県」（総務省統計局）",
+        "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0003456661",
+        "surveyedAt": "2026-09-16",
+        "rationale": "総務省統計局の社会生活基本調査は全国・都道府県別に趣味・娯楽の種類ごとの行動者率を公表しており、美術鑑賞はその独立した項目としてテレビ等の視聴と区別して定義されている。行動者率は10歳以上人口に占める行動者数の割合として算出されるため都道府県間で同一基準の比較が可能であり、文化芸術への参加率を直接示す代表的な指標として本テーマの中心に位置づけられる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability",
+          "dataQuality"
+        ],
+        "readerQuestion": "自分の住む都道府県では、実際に美術館やギャラリーで作品を鑑賞する人がどれくらいいるのか。",
+        "targetReaderOrDecision": "文化施設の利用促進策を検討する自治体職員・文化政策担当者。"
+      }
+    },
+    {
+      "rankingKey": "hobby-participation-rate-theater",
+      "shortLabel": "演芸・演劇・舞踊鑑賞の行動者率",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和3年社会生活基本調査 調査票Ａに基づく結果 生活行動編（地域）趣味・娯楽98-2-2「男女,従業上の地位,趣味・娯楽の種類別行動者率(有業者)－全国，都道府県」（総務省統計局）",
+        "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0003456661",
+        "surveyedAt": "2026-09-16",
+        "rationale": "社会生活基本調査では演芸・演劇・舞踊鑑賞が美術鑑賞とは別のカテゴリーとして都道府県別に集計されており、舞台芸術への参加という美術鑑賞とは異なる文化行動を捉えている。同一調査・同一定義の行動者率のため美術鑑賞や音楽鑑賞と並べて比較しても基準がぶれず、参加行動の多角的な把握という補完的な角度をテーマに与える。",
+        "adoptionCriteria": [
+          "comparability",
+          "complementarity",
+          "dataQuality"
+        ],
+        "readerQuestion": "演劇や舞踊などの舞台芸術を鑑賞する住民の割合は、美術鑑賞と比べてどう違うのか。",
+        "targetReaderOrDecision": "舞台芸術振興策の優先度を検討する文化行政担当者。"
+      }
+    },
+    {
+      "rankingKey": "hobby-participation-rate-classical-music",
+      "shortLabel": "クラシック音楽鑑賞の行動者率",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和3年社会生活基本調査 調査票Ａに基づく結果 生活行動編（地域）趣味・娯楽98-2-2「男女,従業上の地位,趣味・娯楽の種類別行動者率(有業者)－全国，都道府県」（総務省統計局）",
+        "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0003456661",
+        "surveyedAt": "2026-09-16",
+        "rationale": "本調査ではクラシック音楽鑑賞がコンサート会場での鑑賞行動として定義されており、自宅での音楽鑑賞や他の鑑賞行動とは別立てで都道府県別行動者率が算出されている。同じ調査手法・同じ行動者率の定義を用いるため他の鑑賞系指標と時系列・地域の両面で比較可能であり、音楽という別領域の参加実態を補う位置づけとなる。",
+        "adoptionCriteria": [
+          "comparability",
+          "complementarity",
+          "dataQuality"
+        ],
+        "readerQuestion": "地元でクラシックコンサートに足を運ぶ人はどれくらいいるのか、他の鑑賞活動と比べて多いのか少ないのか。",
+        "targetReaderOrDecision": "音楽ホール・コンサートホールの運営方針を検討する施設関係者。"
+      }
+    },
+    {
+      "rankingKey": "hobby-participation-rate-painting",
+      "shortLabel": "絵画・彫刻の制作の行動者率",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "絵画・彫刻の制作の行動者率を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "library-lending-books",
+      "shortLabel": "図書館館外貸出冊数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "社会教育調査 平成27年度 統計表 図書館調査（平成26年度間）86「図書の貸出業務等の実施状況（都道府県別）（前年度間）」（文部科学省）",
+        "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0003348634",
+        "surveyedAt": "2026-09-16",
+        "rationale": "文部科学省の社会教育調査は図書館調査の一環として都道府県別に図書の貸出業務における貸出冊数（総数・うち児童）を集計しており、この数値が社会・人口統計体系の都道府県データにも取り込まれている。鑑賞・制作という個人の行動者率とは異なり、図書館という施設の利用実績を冊数という実数で捉える指標であり、鑑賞系の行動者率とは異なる角度から文化・生涯学習への参加度を補完する。",
+        "adoptionCriteria": [
+          "complementarity",
+          "dataQuality",
+          "readerValue"
+        ],
+        "readerQuestion": "地元の図書館はどれくらい活発に利用されているのか、貸出冊数の推移はどうなっているか。",
+        "targetReaderOrDecision": "図書館の運営計画を立てる自治体の図書館担当課。"
+      }
+    },
+    {
+      "rankingKey": "total-museum-count",
+      "shortLabel": "博物館総数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "社会教育調査 平成20年度 統計表 博物館調査（博物館）91「種類別博物館数（都道府県別）」（文部科学省）",
+        "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0003021737",
+        "surveyedAt": "2026-09-16",
+        "rationale": "文部科学省の社会教育調査は博物館を含む社会教育施設を3年ごとに都道府県別に調査しており、博物館数は登録博物館・博物館相当施設を含む館数として集計される。行動者率が個人の参加行動を示すのに対し、博物館数は施設の供給側の量を示す指標であり、テーマの説明が求める「参加」と「施設」を分けて比較する軸のうち施設側を担う位置づけとなる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "complementarity",
+          "dataQuality"
+        ],
+        "readerQuestion": "自分の住む都道府県にはどれくらいの数の博物館・美術館があるのか。",
+        "targetReaderOrDecision": "文化施設の整備計画を検討する自治体の文化財・博物館行政担当者。"
+      }
+    },
+    {
+      "rankingKey": "relaxation-avg-time-male",
+      "shortLabel": "男性の休養・くつろぎ時間（週全体総平均・分/日）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
+        "surveyedAt": "2026-09-09",
+        "rationale": "男性の休養・くつろぎ時間（週全体総平均・分/日）を既存テーマの独立章へ追加する。"
+      }
+    },
+    {
+      "rankingKey": "relaxation-avg-time-female",
+      "shortLabel": "女性の休養・くつろぎ時間（週全体総平均・分/日）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
+        "surveyedAt": "2026-09-09",
+        "rationale": "女性の休養・くつろぎ時間（週全体総平均・分/日）を既存テーマの独立章へ追加する。"
+      }
+    },
+    {
+      "rankingKey": "hobby-leisure-avg-time-employed-male",
+      "shortLabel": "有業男性の趣味・娯楽時間（週全体総平均・分/日）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
+        "surveyedAt": "2026-09-09",
+        "rationale": "有業男性の趣味・娯楽時間（週全体総平均・分/日）を既存テーマの独立章へ追加する。"
+      }
+    },
+    {
+      "rankingKey": "hobby-leisure-avg-time-employed-female",
+      "shortLabel": "有業女性の趣味・娯楽時間（週全体総平均・分/日）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
+        "surveyedAt": "2026-09-09",
+        "rationale": "有業女性の趣味・娯楽時間（週全体総平均・分/日）を既存テーマの独立章へ追加する。"
+      }
+    }
+  ],
+  "charts": [],
+  "metricGroups": [
+    {
+      "key": "cultural-participation-indicator-1",
+      "title": "美術鑑賞の行動者率",
+      "rankingKeys": [
+        "hobby-participation-rate-art-appreciation"
+      ],
+      "defaultCheckedKeys": [
+        "hobby-participation-rate-art-appreciation"
+      ]
+    },
+    {
+      "key": "cultural-participation-indicator-2",
+      "title": "演芸・演劇・舞踊鑑賞の行動者率",
+      "rankingKeys": [
+        "hobby-participation-rate-theater"
+      ],
+      "defaultCheckedKeys": [
+        "hobby-participation-rate-theater"
+      ]
+    },
+    {
+      "key": "cultural-participation-indicator-3",
+      "title": "クラシック音楽鑑賞の行動者率",
+      "rankingKeys": [
+        "hobby-participation-rate-classical-music"
+      ],
+      "defaultCheckedKeys": [
+        "hobby-participation-rate-classical-music"
+      ]
+    },
+    {
+      "key": "cultural-participation-indicator-4",
+      "title": "絵画・彫刻の制作の行動者率",
+      "rankingKeys": [
+        "hobby-participation-rate-painting"
+      ],
+      "defaultCheckedKeys": [
+        "hobby-participation-rate-painting"
+      ]
+    },
+    {
+      "key": "cultural-participation-indicator-5",
+      "title": "図書館館外貸出冊数",
+      "rankingKeys": [
+        "library-lending-books"
+      ],
+      "defaultCheckedKeys": [
+        "library-lending-books"
+      ]
+    },
+    {
+      "key": "cultural-participation-indicator-6",
+      "title": "博物館総数",
+      "rankingKeys": [
+        "total-museum-count"
+      ],
+      "defaultCheckedKeys": [
+        "total-museum-count"
+      ]
+    },
+    {
+      "key": "candidate-119-1",
+      "title": "男性の休養・くつろぎ時間（週全体総平均・分/日）",
+      "rankingKeys": [
+        "relaxation-avg-time-male"
+      ],
+      "defaultCheckedKeys": [
+        "relaxation-avg-time-male"
+      ]
+    },
+    {
+      "key": "candidate-119-2",
+      "title": "女性の休養・くつろぎ時間（週全体総平均・分/日）",
+      "rankingKeys": [
+        "relaxation-avg-time-female"
+      ],
+      "defaultCheckedKeys": [
+        "relaxation-avg-time-female"
+      ]
+    },
+    {
+      "key": "candidate-115-1",
+      "title": "有業男性の趣味・娯楽時間（週全体総平均・分/日）",
+      "rankingKeys": [
+        "hobby-leisure-avg-time-employed-male"
+      ],
+      "defaultCheckedKeys": [
+        "hobby-leisure-avg-time-employed-male"
+      ]
+    },
+    {
+      "key": "candidate-115-2",
+      "title": "有業女性の趣味・娯楽時間（週全体総平均・分/日）",
+      "rankingKeys": [
+        "hobby-leisure-avg-time-employed-female"
+      ],
+      "defaultCheckedKeys": [
+        "hobby-leisure-avg-time-employed-female"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "key": "cultural-participation-overview",
+      "title": "文化芸術への参加を都道府県別に見る",
+      "description": "美術・演劇などの鑑賞行動者率、図書館利用、博物館数を参加・施設の軸に分けて比較します。行動者率と施設数を合算しません。",
+      "metricGroupKeys": [
+        "cultural-participation-indicator-1",
+        "cultural-participation-indicator-2",
+        "cultural-participation-indicator-3",
+        "cultural-participation-indicator-4",
+        "cultural-participation-indicator-5",
+        "cultural-participation-indicator-6"
+      ]
+    },
+    {
+      "key": "candidate-119",
+      "title": "休養・くつろぎの時間",
+      "description": "2021年社会生活基本調査の、休養・くつろぎに使う1日当たり時間です。週全体の総平均を男女別に比較します。上の趣味・娯楽時間は有業者に限る系列なので、これらを足して総余暇時間にはしません。",
+      "metricGroupKeys": [
+        "candidate-119-1",
+        "candidate-119-2"
+      ]
+    },
+    {
+      "key": "candidate-115",
+      "title": "文化・趣味への参加と使う時間",
+      "description": "2021年社会生活基本調査の有業者について、趣味・娯楽に使う1日当たり時間を男女別に比較します。週全体の総平均なので、調査日にその活動をしなかった人も含みます。文化芸術以外のゲームや観光なども含む時間です。",
+      "metricGroupKeys": [
+        "candidate-115-1",
+        "candidate-115-2"
+      ]
+    }
+  ],
+  "keywords": [
+    "文化",
+    "芸術",
+    "図書館",
+    "博物館"
+  ]
+}

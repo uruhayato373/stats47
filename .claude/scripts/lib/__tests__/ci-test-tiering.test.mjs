@@ -41,6 +41,17 @@ test('共有依存の変更は利用アプリへ波及する', () => {
   assert.equal(result.packages, true);
 });
 
+test('テーマ定義 (data/themes) だけの変更も data-configs の変更として web と admin を検証する', () => {
+  // data/themes の JSON は @stats47/data-configs が import する表示の SSOT。拡張子が .json でも code として扱う
+  const result = classifyPrQualityPaths(['data/themes/catalogs/aging-society.json']);
+  assert.equal(result.type_check, true);
+  assert.equal(result.tests, true);
+  assert.equal(result.packages, true);
+  assert.equal(result.web, true);
+  assert.equal(result.admin, true);
+  assert.equal(classifyPrQualityPaths(['data/seo/keywords.json']).web, false, 'ほかの data/ は対象外');
+});
+
 test('workflow YAML か scoped-workflow テストの変更だけが重い workflow 契約を走らせる', () => {
   assert.equal(classifyPrQualityPaths(['.github/workflows/sync-snapshots.yml']).workflow_contracts, true);
   assert.equal(classifyPrQualityPaths(['.claude/scripts/lib/__tests__/data-refresh-scoped-workflow.test.mjs']).workflow_contracts, true);

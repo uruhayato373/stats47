@@ -82,7 +82,8 @@
       "nav": [
         { "label": "コンテンツ横断・監査", "href": "/content", "kind": "inventory" },
         { "label": "参考文献管理", "href": "/content/references", "kind": "inventory" },
-        { "label": "カタログ監査", "href": "/quality/catalog-audit", "kind": "results" }
+        { "label": "カタログ監査", "href": "/quality/catalog-audit", "kind": "results" },
+        { "label": "指標を選ぶ視点", "href": "/quality/theme-viewpoints", "kind": "results" }
       ]
     },
     {

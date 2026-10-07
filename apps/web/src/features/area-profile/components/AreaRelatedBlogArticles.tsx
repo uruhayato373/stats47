@@ -4,7 +4,7 @@ import { Newspaper } from "lucide-react";
 
 import { SurfaceLinkCard } from "@/components/surface";
 
-import { getRelatedArticleSummaries } from "@/features/blog/server";
+import { getRelatedArticleSummaries, listArticlesUsingRankingKeys } from "@/features/blog/server";
 
 import type { AreaHighlights } from "@stats47/area-profile";
 
@@ -18,6 +18,10 @@ export async function AreaRelatedBlogArticles({ highlights, limit = 5 }: Props) 
     const topKeys = [...highlights.top, ...highlights.bottom].map((s) => s.rankingKey);
 
     if (topKeys.length === 0) return null;
+
+    // この県の特徴になっている指標を図に使う記事を先に出す。ranking item の tags は空なので
+    // タグ経由ではほぼ出ない (2026-10-07 実測: R2 の ranking item 2,467 件中 0 件)
+    const metricArticles = await listArticlesUsingRankingKeys(topKeys, { limit });
 
     // 上位 ranking keys のタグを並列取得
     const tagResults = await Promise.all(
@@ -36,13 +40,16 @@ export async function AreaRelatedBlogArticles({ highlights, limit = 5 }: Props) 
         }
     }
 
-    if (allTagKeys.length === 0) return null;
-
     // タグから記事を集約（取得+重複除去は共有ロジック）
-    const articles = await getRelatedArticleSummaries(allTagKeys.slice(0, 8), {
-        limit,
-        perTag: 3,
-    });
+    const tagArticles =
+        allTagKeys.length > 0
+            ? await getRelatedArticleSummaries(allTagKeys.slice(0, 8), { limit, perTag: 3 })
+            : [];
+
+    const seen = new Set<string>();
+    const articles = [...metricArticles, ...tagArticles]
+        .filter((article) => !seen.has(article.slug) && seen.add(article.slug))
+        .slice(0, limit);
 
     if (articles.length === 0) return null;
 

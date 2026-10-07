@@ -1,0 +1,948 @@
+{
+  "key": "population-dynamics",
+  "title": "人口動態",
+  "description": "人口はどれだけ変わり、その変化は出生・死亡と転入・転出のどちらで生じているかを把握する。",
+  "category": "demographics",
+  "usage": "theme",
+  "metrics": [
+    {
+      "rankingKey": "total-population",
+      "shortLabel": "総人口",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "人口推計（2024年（令和6年）10月1日現在）結果の概要（総務省統計局）",
+        "sourceUrl": "https://www.stat.go.jp/data/jinsui/2024np/index.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "総務省統計局の人口推計は総人口の最新値と前年からの増減を全国基準値として毎年公表しており、都道府県別人口の合計や経年比較の出発点になる。テーマの「人口は増えているか」を検討する際、まず総数の水準を押さえることが前提となり、増減率など他の指標を解釈する分母としても機能する。",
+        "adoptionCriteria": [
+          "representativeness",
+          "dataQuality"
+        ]
+      }
+    },
+    {
+      "rankingKey": "total-fertility-rate",
+      "shortLabel": "合計特殊出生率",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "人口動態調査 人口動態統計 確定数 出生上巻 4-1「年次別にみた出生数・出生率（人口千対）・出生性比及び合計特殊出生率」（厚生労働省／政府統計の総合窓口）",
+        "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0003411595",
+        "surveyedAt": "2026-09-16",
+        "rationale": "この統計表は出生数・出生率と並べて合計特殊出生率を収録しており、年齢構成の違いによる影響を除いた出生水準として都道府県間で比較できるよう設計されている。テーマの「出生と母の年齢・出生順位」を扱う章で、出生数という実数だけでは見えない一人当たりの出生水準を補う指標として位置付けられる。",
+        "adoptionCriteria": [
+          "comparability",
+          "complementarity"
+        ]
+      }
+    },
+    {
+      "rankingKey": "moving-in-excess-rate",
+      "shortLabel": "転入超過率",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-08",
+        "rationale": "転入超過率は「どこからどこへ移動するか」の補足として詳細索引に保持し、冒頭の要約へ重ねない。"
+      }
+    },
+    {
+      "rankingKey": "ratio-65-plus",
+      "shortLabel": "高齢化率",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-08",
+        "rationale": "高齢化構造の主責務を少子高齢化へ寄せる。人口構造図に必要な依存は保持する。 主表示は「少子高齢化」へ集約する。関連指標としての導線は保持する。"
+      }
+    },
+    {
+      "rankingKey": "population-growth-rate",
+      "shortLabel": "人口増減率",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "人口推計（2024年（令和6年）10月1日現在）結果の概要（総務省統計局）",
+        "sourceUrl": "https://www.stat.go.jp/data/jinsui/2024np/index.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "人口推計の結果概要は都道府県別の人口増加率を明示的に取り上げて地域差を示しており、テーマの中心的な問いである「人口は増えているか」に直接答える数値になっている。総人口の実数と組み合わせることで、自然増減・社会増減の内訳を見る前段の全体像を提供する。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability",
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "natural-increase-rate",
+      "shortLabel": "自然増減率",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "人口動態調査 人口動態統計 確定数 総覧中巻1「人口動態総覧，都道府県（特別区－指定都市再掲）別」（厚生労働省／政府統計の総合窓口）",
+        "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0003411563",
+        "surveyedAt": "2026-09-16",
+        "rationale": "都道府県別の人口動態総覧では自然増減率が出生率・死亡率と並ぶ表側項目として設計されており、人口千人当たりの水準で地域を横並びに比較できる。テーマの「出生と死亡・転入と転出の内訳」を扱う章で、総人口の増減を出生・死亡要因に切り分ける鍵となる指標として位置付けられる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability"
+        ]
+      }
+    },
+    {
+      "rankingKey": "crude-birth-rate",
+      "shortLabel": "粗出生率",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.mhlw.go.jp/toukei/list/81-1.html",
+        "surveyedAt": "2026-09-08",
+        "rationale": "粗出生率は対象範囲・構造の関連指標として詳細索引に保持し、冒頭の要約へ重ねない。"
+      }
+    },
+    {
+      "rankingKey": "crude-death-rate",
+      "shortLabel": "死亡率",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.mhlw.go.jp/toukei/list/81-1.html",
+        "surveyedAt": "2026-09-08",
+        "rationale": "死亡率は対象範囲・構造の関連指標として詳細索引に保持し、冒頭の要約へ重ねない。"
+      }
+    },
+    {
+      "rankingKey": "social-increase-rate",
+      "shortLabel": "社会増減率",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-08",
+        "rationale": "公開最新2019年のため現状把握の主画面へ昇格しない。歴史参考として保持し更新後に再判定。"
+      }
+    },
+    {
+      "rankingKey": "young-population-ratio",
+      "shortLabel": "年少人口割合",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-08",
+        "rationale": "年少人口割合は対象範囲・構造の関連指標として詳細索引に保持し、冒頭の要約へ重ねない。"
+      }
+    },
+    {
+      "rankingKey": "population-density-per-km2-inhabitable-area",
+      "shortLabel": "人口密度（可住地1km²当たり）",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/A",
+        "surveyedAt": "2026-09-08",
+        "rationale": "可住地1km²を基準にした可住地面積１km2当たり人口密度として比較する。関連指標の索引で補足する。"
+      }
+    },
+    {
+      "rankingKey": "day-time-population-ratio",
+      "shortLabel": "昼夜間人口比率",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-08",
+        "rationale": "昼夜間人口比率は対象範囲・構造の関連指標として詳細索引に保持し、冒頭の要約へ重ねない。"
+      }
+    },
+    {
+      "rankingKey": "births",
+      "shortLabel": "出生数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "人口動態調査 人口動態統計 確定数 出生上巻 4-1「年次別にみた出生数・出生率（人口千対）・出生性比及び合計特殊出生率」（厚生労働省／政府統計の総合窓口）",
+        "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0003411595",
+        "surveyedAt": "2026-09-16",
+        "rationale": "出生数は戸籍法に基づく届出の全数を毎月集計する人口動態調査の基礎数値であり、自然増減率や合計特殊出生率のもとになる実数として欠損や改定が少ない。テーマの「出生と死亡・転入と転出の内訳」を実数で裏付ける一次データとして、率指標だけでは見えない規模感を補う役割を持つ。",
+        "adoptionCriteria": [
+          "dataQuality",
+          "complementarity"
+        ]
+      }
+    },
+    {
+      "rankingKey": "death-count",
+      "shortLabel": "死亡数",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.mhlw.go.jp/toukei/list/81-1.html",
+        "surveyedAt": "2026-09-08",
+        "rationale": "死亡数は「出生と死亡・転入と転出の内訳」の補足として詳細索引に保持し、冒頭の要約へ重ねない。"
+      }
+    },
+    {
+      "rankingKey": "movers-in",
+      "shortLabel": "外国人転入者数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "住民基本台帳人口移動報告 参考表「移動前の住所地別転入者数－都道府県，市区町村（移動者，日本人移動者，外国人移動者）」（総務省統計局／政府統計の総合窓口）",
+        "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0004014382",
+        "surveyedAt": "2026-09-16",
+        "rationale": "住民基本台帳人口移動報告は転入者数を移動者・日本人移動者・外国人移動者に区分して都道府県別に集計しており、外国人転入者数は国内移動とは異なる国際的な流入を実数で示す独自区分になっている。テーマの「どこからどこへ移動するか」を扱う章で、国内移動だけでは捉えきれない人口動態の側面を補う指標として位置付けられる。",
+        "adoptionCriteria": [
+          "complementarity",
+          "dataQuality"
+        ]
+      }
+    },
+    {
+      "rankingKey": "movers-out",
+      "shortLabel": "外国人転出者数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "住民基本台帳人口移動報告 年報（実数）表11「年齢（５歳階級），男女別他市区町村からの転入者数，他市区町村への転出者数，転入超過数－全国，都道府県，市区町村（移動者，日本人移動者，外国人移動者）」（総務省統計局）",
+        "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0003419945",
+        "surveyedAt": "2026-09-16",
+        "rationale": "住民基本台帳人口移動報告の年報表11は、移動者を「移動者」「日本人移動者」「外国人移動者」の3区分で公表しており、外国人を含む転出者数を切り分けて把握できることを示している。これにより、人口動態の社会減が日本人と外国人のどちら側の移動で生じているかを区別でき、テーマの転入と転出のどちらで生じているかという問いに答える際の内訳情報として機能する。",
+        "adoptionCriteria": [
+          "complementarity",
+          "dataQuality"
+        ],
+        "readerQuestion": "外国人の転出は地域の人口減少にどの程度寄与しているか。",
+        "targetReaderOrDecision": "地域の社会増減を日本人・外国人別に把握したい自治体担当者。"
+      }
+    },
+    {
+      "rankingKey": "sex-ratio-total",
+      "shortLabel": "人口性比",
+      "role": "context",
+      "selection": {
+        "proposedBy": "参考文献由来テーマ企画 REFERENCE-CONTENT-DRAFTS-01",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-14",
+        "rationale": "男女構成比は転入超過・年齢構成と合わせて読む背景指標として詳細索引に保持する。"
+      }
+    },
+    {
+      "rankingKey": "interprefecture-net-migration-age15to24",
+      "shortLabel": "15〜24歳の県間転入超過数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "地域課題分析レポート2024年秋号 第1章(2)「人々の地域移動のタイミング」（内閣府政策統括官（経済財政分析担当）、令和6年12月）",
+        "sourceUrl": "https://www5.cao.go.jp/j-j/cr/cr24-3/chr24-3_01-02.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "内閣府の地域課題分析レポートは、東京圏への転入超過について、すべての地域において20代前半が最も多くなっていると分析しており、15~24歳前後の若年層の移動が地域間人口移動の中心的な年齢層であることを示している。県間転入超過数をこの年齢層で見ることは、テーマの若年層の県間移動と卒業後の進路という章の中心的な問いに直結する。",
+        "adoptionCriteria": [
+          "representativeness",
+          "readerValue"
+        ],
+        "readerQuestion": "進学・就職期の若者はどの都道府県に流出・流入しているか。",
+        "targetReaderOrDecision": "若年層の地元定着策を検討する地方自治体の政策担当者。"
+      }
+    },
+    {
+      "rankingKey": "interprefecture-net-migration-age25to34",
+      "shortLabel": "25〜34歳の県間転入超過数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "地域課題分析レポート2024年秋号 第1章(2)「人々の地域移動のタイミング」（内閣府政策統括官（経済財政分析担当）、令和6年12月）",
+        "sourceUrl": "https://www5.cao.go.jp/j-j/cr/cr24-3/chr24-3_01-02.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "同レポートは、20代前半に次いで多い年齢層として多くの地域で20代後半が挙げられると述べており、就職後数年が経過した20代後半から30代前半の層も地域間移動の主要な担い手であることを示している。25~34歳の県間転入超過数を見ることで、進学・卒業直後の移動である15~24歳の層とは異なる、就業安定期の移動傾向を補完的に捉えられる。",
+        "adoptionCriteria": [
+          "complementarity",
+          "representativeness"
+        ],
+        "readerQuestion": "就職後数年が経過した層はどの地域に定着・流出しているか。",
+        "targetReaderOrDecision": "若手社会人の定住施策を検討する地方自治体の政策担当者。"
+      }
+    },
+    {
+      "rankingKey": "high-school-graduates-out-of-prefecture-job-ratio",
+      "shortLabel": "高校卒業就職者のうち県外就職者の割合",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "学校基本調査 卒業後の状況調査「就職先別 県外就職者数（都道府県別）」（文部科学省）",
+        "sourceUrl": "https://www.e-stat.go.jp/stat-search/database?stat_infid=000023610097&layout=dataset&statdisp_id=0003066060",
+        "surveyedAt": "2026-09-16",
+        "rationale": "文部科学省の学校基本調査は就職先別県外就職者数（都道府県別）として、高校卒業後に就職した者のうち県外に就職した人数を都道府県別に集計しており、これが高校卒業者の県外就職割合の一次データとなっている。この指標は、卒業後すぐに地元を離れる若年層の流出圧力を都道府県間で比較する際の代表的な材料であり、テーマの若年層の県間移動と卒業後の進路の章を支える。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability"
+        ],
+        "readerQuestion": "高校卒業後、県内に残らず県外に就職する若者はどれくらいいるか。",
+        "targetReaderOrDecision": "高校卒業者の地元定着施策を検討する教育・労働行政担当者。"
+      }
+    },
+    {
+      "rankingKey": "high-school-advancement-rate",
+      "shortLabel": "高等学校卒業者の進学率",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "中学校卒業者、高等学校卒業者、短期大学卒業者及び大学卒業者の進路の推移（文部科学省）",
+        "sourceUrl": "https://www.mext.go.jp/a_menu/shotou/career/05010501/001.htm",
+        "surveyedAt": "2026-09-16",
+        "rationale": "文部科学省の資料は大学等進学者の範囲を大学学部から専攻科まで明確に定義しており、進学率の算定対象を厳密にしている。この定義に基づく進学率は、高校卒業後に進学のため県外へ移動する可能性がある層の規模を都道府県間で比較する際の基礎となり、県外就職割合と対をなす指標として卒業後の進路の全体像を補う。",
+        "adoptionCriteria": [
+          "dataQuality",
+          "complementarity"
+        ],
+        "readerQuestion": "高校卒業後、進学する若者の割合は都道府県でどう異なるか。",
+        "targetReaderOrDecision": "進学率と就職率を対比して若年層の進路動向を分析したい読者。"
+      }
+    },
+    {
+      "rankingKey": "births-mother-under25",
+      "shortLabel": "母が25歳未満の出生数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "人口動態調査 人口動態統計 確定数 出生上巻「出生数，都道府県（特別区－指定都市再掲）・性・母の年齢（５歳階級）別」（厚生労働省）",
+        "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0003411631",
+        "surveyedAt": "2026-09-16",
+        "rationale": "厚生労働省の人口動態調査確定数は、出生数を都道府県・性・母の年齢（５歳階級）別に区分した統計表を公表しており、母の年齢層別の出生数を都道府県ごとに比較できる一次データとなっている。母が25歳未満の出生数を都道府県間で比較することは、テーマの出生と母の年齢・出生順位の章が扱う、若い世代の出産動向の地域差を把握する上で直接的な材料となる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability"
+        ],
+        "readerQuestion": "若い世代の出産は都道府県によってどれくらい差があるか。",
+        "targetReaderOrDecision": "少子化・若年出産の地域差を分析したい行政・研究者。"
+      }
+    },
+    {
+      "rankingKey": "births-mother-age25to29",
+      "shortLabel": "母が25〜29歳の出生数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
+        "surveyedAt": "2026-09-09",
+        "rationale": "母が25〜29歳の出生数を既存テーマの独立章へ追加する。"
+      }
+    },
+    {
+      "rankingKey": "births-mother-age30to34",
+      "shortLabel": "母が30〜34歳の出生数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
+        "surveyedAt": "2026-09-09",
+        "rationale": "母が30〜34歳の出生数を既存テーマの独立章へ追加する。"
+      }
+    },
+    {
+      "rankingKey": "births-mother-age35to39",
+      "shortLabel": "母が35〜39歳の出生数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
+        "surveyedAt": "2026-09-09",
+        "rationale": "母が35〜39歳の出生数を既存テーマの独立章へ追加する。"
+      }
+    },
+    {
+      "rankingKey": "births-mother-age40plus",
+      "shortLabel": "母が40歳以上の出生数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
+        "surveyedAt": "2026-09-09",
+        "rationale": "母が40歳以上の出生数を既存テーマの独立章へ追加する。"
+      }
+    },
+    {
+      "rankingKey": "births-first-child",
+      "shortLabel": "第1子の出生数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "政府統計の総合窓口(e-Stat) 人口動態調査 人口動態統計 確定数 保管統計表「出生数，都道府県（特別区－指定都市再掲）・出生順位・性別」統計表(厚生労働省)",
+        "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0003411918",
+        "surveyedAt": "2026-09-16",
+        "rationale": "出生順位は同じ母親が生んだ子の通算順序として定義されており、第1子はその最初の出生を意味する。この統計表は都道府県別に出生順位別の出生数を整理しているため、第1子出生数を地域別に比較すれば、新規に子どもを持ち始める世帯の動向を把握でき、テーマの章「出生と母の年齢・出生順位」の中核的な内訳指標となる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability"
+        ]
+      }
+    },
+    {
+      "rankingKey": "births-second-child",
+      "shortLabel": "第2子の出生数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "政府統計の総合窓口(e-Stat) 人口動態調査 人口動態統計 確定数 保管統計表「出生数，都道府県（特別区－指定都市再掲）・出生順位・性別」統計表(厚生労働省)",
+        "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0003411918",
+        "surveyedAt": "2026-09-16",
+        "rationale": "同じ定義に基づき、第2子は母親にとって2番目の出生を指す区分として都道府県別に集計されている。第1子出生数と対比させることで、追加で子どもを持つ世帯の割合や地域差を捉えることができ、テーマの章における出生順位別の内訳把握を補完する指標となる。",
+        "adoptionCriteria": [
+          "complementarity",
+          "comparability"
+        ]
+      }
+    },
+    {
+      "rankingKey": "births-third-child-plus",
+      "shortLabel": "第3子以降の出生数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "人口動態調査 人口動態統計 確定数 保管統計表（報告書非掲載表）「出生10 出生数，都道府県（特別区－指定都市再掲）・出生順位・性別」（厚生労働省）",
+        "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0003411918",
+        "surveyedAt": "2026-09-16",
+        "rationale": "この統計表は出生数を都道府県別・出生順位別に区分しており、出生順位が同じ母親の出生子の累積総数として定義されている。第3子以降の出生数はこの出生順位区分の一部であり、単純な出生総数だけでは見えない多子世帯の分布や地域差を捉える補完的な切り口になる。人口動態統計は戸籍法に基づく届出の全数調査であり毎月実施される公的統計であるため、都道府県間比較や経年比較の基礎として安定している。",
+        "adoptionCriteria": [
+          "complementarity",
+          "dataQuality"
+        ]
+      }
+    },
+    {
+      "rankingKey": "five-year-residence-same-address",
+      "shortLabel": "5年前と同じ住所に住む5歳以上人口",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和2年国勢調査 移動人口の男女・年齢等集計「男女，年齢（5歳階級），5年前の常住地・現住地別人口－全国，都道府県，市区町村」（総務省統計局）",
+        "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0003447398",
+        "surveyedAt": "2026-09-16",
+        "rationale": "この表は5年前の常住地を「現住所」（移動なし）から「他県から」まで同一の分類軸で全国・都道府県・市区町村について集計しており、5年前と同じ住所に住み続けた人口は移動人口の裏返しとして地域の定住性を示す基礎値になる。国勢調査は5年ごとに全数を対象とする公的統計であるため、都道府県間で同一基準の比較が可能であり、人口移動の内訳を読み解く章の土台データとして位置付けられる。",
+        "adoptionCriteria": [
+          "comparability",
+          "dataQuality"
+        ]
+      }
+    },
+    {
+      "rankingKey": "five-year-residence-other-prefecture",
+      "shortLabel": "5年前は他県に住んでいた5歳以上人口",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和2年国勢調査 移動人口の男女・年齢等集計「男女，年齢（5歳階級），5年前の常住地・現住地別人口－全国，都道府県，市区町村」（総務省統計局）",
+        "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0003447398",
+        "surveyedAt": "2026-09-16",
+        "rationale": "同じ集計表には「他県から」という分類が設けられており、現住地の常住者のうち5年前に他都道府県に住んでいたと回答した人数を都道府県別に把握できる。これは県間の人口移動を扱う章で、どこからどこへ移動が生じているかを国勢調査という同一基準の全数調査で比較する際の中心的な指標になり、行政・研究双方で利用される公的データという点で読者にとっても信頼性が高い。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability"
+        ]
+      }
+    },
+    {
+      "rankingKey": "future-population",
+      "shortLabel": "将来推計人口",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "「日本の地域別将来推計人口（令和5年推計）」の概要（国立社会保障・人口問題研究所, 日本地理学会2024年秋季学術大会発表要旨）",
+        "sourceUrl": "https://www.jstage.jst.go.jp/article/ajg/2024s/0/2024s_92/_article/-char/ja/",
+        "surveyedAt": "2026-09-16",
+        "rationale": "この推計は2020年国勢調査を出発点とし、コーホート要因法という統一的な推計手法を都道府県・市区町村に適用しており、将来推計人口は自然増減と社会増減の仮定を組み込んだ将来の人口構造を都道府県間で同一基準で比較できる唯一の公式値である。人口が今後どう変わるかという将来推計の章にとって代表的な指標であり、行政・研究の計画立案でも参照される。",
+        "adoptionCriteria": [
+          "representativeness",
+          "dataQuality"
+        ]
+      }
+    },
+    {
+      "rankingKey": "future-population-change-rate-2050",
+      "shortLabel": "2020～2050年の人口増減率（推計）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "「日本の地域別将来推計人口（令和5年推計）」の概要（国立社会保障・人口問題研究所, 日本地理学会2024年秋季学術大会発表要旨）",
+        "sourceUrl": "https://www.jstage.jst.go.jp/article/ajg/2024s/0/2024s_92/_article/-char/ja/",
+        "surveyedAt": "2026-09-16",
+        "rationale": "資料は2020年から2050年までの30年間の増減率を都道府県ごとに算出しており、東京都のみが増加し秋田県が最大の減少率となることを明示している。実数の将来推計人口だけでは規模の違う都道府県間の変化幅を比較しにくいため、増減率という共通尺度に変換したこの指標は、どの地域で人口減少が急速に進むかを読者が直接比較するのに役立つ。",
+        "adoptionCriteria": [
+          "comparability",
+          "readerValue"
+        ]
+      }
+    }
+  ],
+  "metricGroups": [
+    {
+      "key": "population-change-1",
+      "title": "人口増減率",
+      "rankingKeys": [
+        "population-growth-rate"
+      ],
+      "defaultCheckedKeys": [
+        "population-growth-rate"
+      ]
+    },
+    {
+      "key": "population-change-2",
+      "title": "総人口",
+      "rankingKeys": [
+        "total-population"
+      ],
+      "defaultCheckedKeys": [
+        "total-population"
+      ]
+    },
+    {
+      "key": "natural-social-change",
+      "title": "出生と死亡・転入と転出の内訳",
+      "rankingKeys": [
+        "natural-increase-rate"
+      ],
+      "defaultCheckedKeys": [
+        "natural-increase-rate"
+      ]
+    },
+    {
+      "key": "candidate-34-1",
+      "title": "15〜24歳の県間転入超過数",
+      "rankingKeys": [
+        "interprefecture-net-migration-age15to24"
+      ],
+      "defaultCheckedKeys": [
+        "interprefecture-net-migration-age15to24"
+      ]
+    },
+    {
+      "key": "candidate-34-2",
+      "title": "25〜34歳の県間転入超過数",
+      "rankingKeys": [
+        "interprefecture-net-migration-age25to34"
+      ],
+      "defaultCheckedKeys": [
+        "interprefecture-net-migration-age25to34"
+      ]
+    },
+    {
+      "key": "candidate-34-3",
+      "title": "高校卒業就職者のうち県外就職者の割合",
+      "rankingKeys": [
+        "high-school-graduates-out-of-prefecture-job-ratio"
+      ],
+      "defaultCheckedKeys": [
+        "high-school-graduates-out-of-prefecture-job-ratio"
+      ]
+    },
+    {
+      "key": "candidate-34-4",
+      "title": "高等学校卒業者の進学率",
+      "rankingKeys": [
+        "high-school-advancement-rate"
+      ],
+      "defaultCheckedKeys": [
+        "high-school-advancement-rate"
+      ]
+    },
+    {
+      "key": "candidate-41-1",
+      "title": "出生数",
+      "rankingKeys": [
+        "births"
+      ],
+      "defaultCheckedKeys": [
+        "births"
+      ]
+    },
+    {
+      "key": "candidate-41-2",
+      "title": "合計特殊出生率",
+      "rankingKeys": [
+        "total-fertility-rate"
+      ],
+      "defaultCheckedKeys": [
+        "total-fertility-rate"
+      ]
+    },
+    {
+      "key": "candidate-41-3",
+      "title": "母が25歳未満の出生数",
+      "rankingKeys": [
+        "births-mother-under25"
+      ],
+      "defaultCheckedKeys": [
+        "births-mother-under25"
+      ]
+    },
+    {
+      "key": "candidate-41-4",
+      "title": "母が25〜29歳の出生数",
+      "rankingKeys": [
+        "births-mother-age25to29"
+      ],
+      "defaultCheckedKeys": [
+        "births-mother-age25to29"
+      ]
+    },
+    {
+      "key": "candidate-41-5",
+      "title": "母が30〜34歳の出生数",
+      "rankingKeys": [
+        "births-mother-age30to34"
+      ],
+      "defaultCheckedKeys": [
+        "births-mother-age30to34"
+      ]
+    },
+    {
+      "key": "candidate-41-6",
+      "title": "母が35〜39歳の出生数",
+      "rankingKeys": [
+        "births-mother-age35to39"
+      ],
+      "defaultCheckedKeys": [
+        "births-mother-age35to39"
+      ]
+    },
+    {
+      "key": "candidate-41-7",
+      "title": "母が40歳以上の出生数",
+      "rankingKeys": [
+        "births-mother-age40plus"
+      ],
+      "defaultCheckedKeys": [
+        "births-mother-age40plus"
+      ]
+    },
+    {
+      "key": "candidate-41-8",
+      "title": "第1子の出生数",
+      "rankingKeys": [
+        "births-first-child"
+      ],
+      "defaultCheckedKeys": [
+        "births-first-child"
+      ]
+    },
+    {
+      "key": "candidate-41-9",
+      "title": "第2子の出生数",
+      "rankingKeys": [
+        "births-second-child"
+      ],
+      "defaultCheckedKeys": [
+        "births-second-child"
+      ]
+    },
+    {
+      "key": "candidate-41-10",
+      "title": "第3子以降の出生数",
+      "rankingKeys": [
+        "births-third-child-plus"
+      ],
+      "defaultCheckedKeys": [
+        "births-third-child-plus"
+      ]
+    },
+    {
+      "key": "candidate-43-1",
+      "title": "5年前と同じ住所に住む5歳以上人口",
+      "rankingKeys": [
+        "five-year-residence-same-address"
+      ],
+      "defaultCheckedKeys": [
+        "five-year-residence-same-address"
+      ]
+    },
+    {
+      "key": "candidate-43-2",
+      "title": "5年前は他県に住んでいた5歳以上人口",
+      "rankingKeys": [
+        "five-year-residence-other-prefecture"
+      ],
+      "defaultCheckedKeys": [
+        "five-year-residence-other-prefecture"
+      ]
+    },
+    {
+      "key": "candidate-43-3",
+      "title": "外国人の転入者数",
+      "rankingKeys": [
+        "movers-in"
+      ],
+      "defaultCheckedKeys": [
+        "movers-in"
+      ]
+    },
+    {
+      "key": "candidate-43-4",
+      "title": "外国人の転出者数",
+      "rankingKeys": [
+        "movers-out"
+      ],
+      "defaultCheckedKeys": [
+        "movers-out"
+      ]
+    },
+    {
+      "key": "candidate-47-1",
+      "title": "将来推計人口",
+      "rankingKeys": [
+        "future-population"
+      ],
+      "defaultCheckedKeys": [
+        "future-population"
+      ]
+    },
+    {
+      "key": "candidate-47-2",
+      "title": "2020～2050年の人口増減率（推計）",
+      "rankingKeys": [
+        "future-population-change-rate-2050"
+      ],
+      "defaultCheckedKeys": [
+        "future-population-change-rate-2050"
+      ]
+    }
+  ],
+  "charts": [
+    {
+      "componentKey": "birth-death-count-trend",
+      "componentType": "line-chart",
+      "title": "自然増減：出生数と死亡数",
+      "componentProps": {
+        "seriesRefs": [
+          {
+            "metricKey": "births",
+            "label": "出生数",
+            "colorRole": "improve"
+          },
+          {
+            "metricKey": "death-count",
+            "label": "死亡数",
+            "colorRole": "neutral"
+          }
+        ]
+      },
+      "relatedRankingKeys": [
+        "births",
+        "death-count"
+      ],
+      "sourceName": "総務省 社会・人口統計体系（人口動態統計）",
+      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "natural-social-change",
+      "sortOrder": 10,
+      "comparisonBasis": "同一都道府県内での出生数と死亡数の時系列推移（自然増減の内訳比較）",
+      "visualizationRationale": "出生・死亡は交差（デッドクロス）の有無が地域差の核心のため折れ線で推移を見せる。棒グラフでは交差点が読み取りにくい。"
+    },
+    {
+      "componentKey": "theme-pop-migration-trend",
+      "componentType": "line-chart",
+      "title": "外国人の人口移動：転入者数と転出者数",
+      "componentProps": {
+        "seriesRefs": [
+          {
+            "metricKey": "movers-in",
+            "label": "外国人転入者数",
+            "colorRole": "population"
+          },
+          {
+            "metricKey": "movers-out",
+            "label": "外国人転出者数",
+            "colorRole": "count"
+          }
+        ]
+      },
+      "relatedRankingKeys": [
+        "movers-in",
+        "movers-out"
+      ],
+      "sourceName": "総務省 社会・人口統計体系",
+      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "natural-social-change",
+      "sortOrder": 20,
+      "comparisonBasis": "外国人転入者数と転出者数の時系列推移",
+      "visualizationRationale": "こちらも交差の有無が焦点のため、自然増減チャートと同じ折れ線形式に揃えテーマ内の視覚的一貫性を保つ。"
+    },
+    {
+      "componentKey": "md-population-dynamics-discussion",
+      "componentType": "markdown-section",
+      "title": "数値を比較するときの注意",
+      "componentProps": {
+        "markdown": "人口の規模と増減を分けて確かめます。各指標の対象年は同じとは限りません。\n\n出生・死亡と転入・転出を別々に確認します。出典・対象期間の違う数値を足し合わせて人口増減を再計算しないでください。転入・転出の系列は外国人移動者を対象とします。\n\n地域間の移動方向を確認します。移動の集計対象と基準年は図ごとに確認できます。"
+      },
+      "sourceName": "厚生労働白書 (令和7年版) / 男女共同参画白書 (令和7年版) / 国土交通白書 2025 / 少子化社会対策白書 (令和6年版) / 日本の将来推計人口 (令和5年推計) — 国立社会保障・人口問題研究所",
+      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "reading",
+      "sortOrder": 30
+    },
+    {
+      "componentKey": "md-population-dynamics-faq",
+      "componentType": "markdown-section",
+      "title": "よくある質問",
+      "componentProps": {
+        "displayMode": "faq",
+        "markdown": "### Q1: 人口は増えているかを見るときの注意は？\n\n人口の規模と増減を分けて確かめます。各指標の対象年は同じとは限りません。\n\n### Q2: このテーマの数値を比較するときの注意は？\n\n年齢別の人口構造は少子高齢化テーマで詳しく確認できます。"
+      },
+      "sourceName": "厚生労働白書 (令和7年版) / 男女共同参画白書 (令和7年版) / 国土交通白書 2025 / 少子化社会対策白書 (令和6年版)",
+      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "reading",
+      "sortOrder": 40
+    }
+  ],
+  "evidenceTopics": [
+    {
+      "key": "natural-population-change",
+      "lensKey": "outcomes",
+      "title": "出生と死亡から見る自然増減",
+      "question": "出生と死亡の差は、地域の自然増減にどのように表れているか。",
+      "summary": "人口動態統計の出生・死亡と自然増減率を結び付けます。粗出生率・粗死亡率は人口規模で標準化した率であり、出生数・死亡数そのものとは区別して読みます。",
+      "sourceKeys": [
+        "mhlw-vital-statistics-2024"
+      ],
+      "relatedRankingKeys": [
+        "natural-increase-rate",
+        "crude-birth-rate",
+        "crude-death-rate"
+      ],
+      "relatedChartKeys": [
+        "birth-death-count-trend"
+      ],
+      "relatedThemeKeys": [
+        "aging-society"
+      ]
+    },
+    {
+      "key": "age-structure-balance",
+      "lensKey": "composition",
+      "title": "年少人口と高齢人口の構成",
+      "question": "年少人口と65歳以上人口の構成には、どのような地域差があるか。",
+      "summary": "人口推計の年齢3区分を、総人口に占める構成比として読みます。割合の差は人口規模の差を示さず、将来人口の予測値でもありません。",
+      "sourceKeys": [
+        "stat-population-estimates-2024"
+      ],
+      "relatedRankingKeys": [
+        "young-population-ratio",
+        "ratio-65-plus"
+      ],
+      "relatedChartKeys": [],
+      "relatedThemeKeys": [
+        "aging-society"
+      ]
+    }
+  ],
+  "keywords": [
+    "人口動態",
+    "人口増減率",
+    "自然増減率",
+    "社会増減率",
+    "高齢化率",
+    "出生率",
+    "死亡率",
+    "転入超過",
+    "都道府県",
+    "ランキング"
+  ],
+  "sections": [
+    {
+      "key": "population-change",
+      "title": "人口は増えているか",
+      "description": "人口の規模と増減を分けて確かめます。各指標の対象年は同じとは限りません。",
+      "metricGroupKeys": [
+        "population-change-1",
+        "population-change-2"
+      ],
+      "chartKeys": []
+    },
+    {
+      "key": "natural-social-change",
+      "title": "出生と死亡・転入と転出の内訳",
+      "description": "出生・死亡と転入・転出を別々に確認します。出典・対象期間の違う数値を足し合わせて人口増減を再計算しないでください。転入・転出の系列は外国人移動者を対象とします。",
+      "metricGroupKeys": [
+        "natural-social-change"
+      ],
+      "chartKeys": [
+        "birth-death-count-trend",
+        "theme-pop-migration-trend"
+      ]
+    },
+    {
+      "key": "migration",
+      "title": "どこからどこへ移動するか",
+      "description": "地域間の移動方向を確認します。移動の集計対象と基準年は図ごとに確認できます。",
+      "metricGroupKeys": [],
+      "chartKeys": [],
+      "embeddedSectionKeys": [
+        "migration-flow"
+      ]
+    },
+    {
+      "key": "candidate-34",
+      "title": "若年層の県間移動と卒業後の進路",
+      "description": "2025年の15〜24歳・25〜34歳の県間転入超過数は外国人を含む移動者です。年齢・男女別の詳細は「年齢・男女別にみる県間の人口移動」で確認できます。県外就職割合は高校卒業後に就職した人、進学率は卒業者全体が分母で、就職先と住所の移動は別に読みます。",
+      "metricGroupKeys": [
+        "candidate-34-1",
+        "candidate-34-2",
+        "candidate-34-3",
+        "candidate-34-4"
+      ],
+      "embeddedSectionKeys": [
+        "young-migration-link"
+      ]
+    },
+    {
+      "key": "candidate-41",
+      "title": "出生と母の年齢・出生順位",
+      "description": "2024年の日本における日本人の出生を、母の年齢5区分と出生順位3区分で比較します。地域は子の住所です。年齢不詳は5区分に含めず、全国12人を原典に保持しています。全国は住所が外国の18人を含み、47県合計と異なります。出生順位は同じ母親がこれまでに生んだ出生子を数えた順序です。",
+      "metricGroupKeys": [
+        "candidate-41-1",
+        "candidate-41-2",
+        "candidate-41-3",
+        "candidate-41-4",
+        "candidate-41-5",
+        "candidate-41-6",
+        "candidate-41-7",
+        "candidate-41-8",
+        "candidate-41-9",
+        "candidate-41-10"
+      ]
+    },
+    {
+      "key": "candidate-43",
+      "title": "県間の人口移動と5年前の居住地",
+      "description": "県間移動の詳細表は2025年の外国人を含む移動者を年齢・男女・相手県別に比較します。5年前の居住地は2020年の5歳以上住民を2015年と比較したもので、5年間の転居回数ではありません。外国人の転入・転出カードは外国人だけを対象とする別系列です。",
+      "metricGroupKeys": [
+        "candidate-43-1",
+        "candidate-43-2",
+        "candidate-43-3",
+        "candidate-43-4"
+      ],
+      "embeddedSectionKeys": [
+        "migration-demographics",
+        "five-year-residence"
+      ]
+    },
+    {
+      "key": "candidate-47",
+      "title": "人口の将来推計",
+      "description": "社人研の令和5年推計です。2020年の国勢調査人口と将来推計を区別し、2050年の値は実績ではなく出生・死亡・移動の仮定に基づく推計として読みます。",
+      "metricGroupKeys": [
+        "candidate-47-1",
+        "candidate-47-2"
+      ]
+    },
+    {
+      "key": "reading",
+      "title": "読み方と関連する人口構造",
+      "description": "年齢別の人口構造は少子高齢化テーマで詳しく確認できます。",
+      "metricGroupKeys": [],
+      "chartKeys": [
+        "md-population-dynamics-discussion",
+        "md-population-dynamics-faq"
+      ]
+    }
+  ],
+  "harmRelevance": [
+    {
+      "axis": "ambition",
+      "reason": "転入超過率・人口増減率は、進学・就職・転職を機に居住地を検討する読者が、成長地域か縮小地域かを比較する材料になる。人口動態そのものが悩みではなく、移住・キャリア選択の判断材料としての関連。"
+    }
+  ]
+}

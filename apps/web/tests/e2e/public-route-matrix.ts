@@ -79,7 +79,8 @@ export const THEME_ROUTE_MATRIX: readonly ThemeRouteContract[] = [
     canonicalPath: "/themes/aging-society",
     heading: "少子高齢化",
     dataSelector: '[data-theme-chart="true"]',
-    expectedChartCount: 4,
+    // 2026-10-07 (#1085): 「高齢世帯の推移」を外し、図は推移・構成・ピラミッドの 3 枚
+    expectedChartCount: 3,
     representativeTypes: ["line-chart", "composition-chart", "pyramid-chart", "markdown-section"],
   },
   {
@@ -109,19 +110,11 @@ export const THEME_ROUTE_MATRIX: readonly ThemeRouteContract[] = [
     canonicalPath: "/themes/fishery-marine",
     heading: "漁業（水産業）",
     dataSelector: '[data-theme-chart="true"]',
-    expectedChartCount: 5,
-    representativeTypes: ["mixed-chart"],
-  },
-  {
-    id: "theme-local-economy",
-    path: "/themes/local-economy?pref=all",
-    canonicalPath: "/themes/local-economy",
-    heading: "地域経済",
-    dataSelector: '[data-theme-chart="true"]',
-    expectedChartCount: 2,
-    // 産業分類不詳を除く比率を100%へ正規化せず、元の値の推移を表示する。
+    // 2026-10-07 (#1085): 指標カードと重複する 4 図を外し、海面漁業産出額の長期推移 1 枚だけ
+    expectedChartCount: 1,
     representativeTypes: ["line-chart"],
   },
+  // theme-local-economy は 2026-10-07 (#1085) で図を外し、指標カードと比較カードだけになったため対象外
   {
     id: "theme-healthcare",
     path: "/themes/healthcare",

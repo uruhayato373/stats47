@@ -12,7 +12,7 @@ allowed-tools: Read, Grep, Glob, Bash, WebSearch, WebFetch
 `npm run validate:catalog` の `[no-adoption-criteria]` warn (2026-09-16 時点 542 件) を、**一次資料を実際に読んだ根拠**で
 埋めるスキル。定型文で埋めるのではなく、資料が見つからない指標は未記入のまま残す (捏造が最悪の失敗)。
 
-> 正典: `.claude/rules/theme-catalog-standards.md` §4 (selection / selection-evidence.ts の置き場) ・
+> 正典: `.claude/rules/theme-catalog-standards.md` §4 (selection の置き場) ・
 > `.claude/todo/backlog.md` THEME-SELECTION-BACKFILL-01 / 委譲規約: `.claude/rules/model-prompting.md` ・
 > `.claude/rules/agent-output-contract.md` (subagent は theme-researcher **最大 1 体**)
 
@@ -39,7 +39,7 @@ bash .claude/scripts/themes/run-selection-backfill.sh --dry-run          # LLM �
 2. 調査     モデルが WebSearch / WebFetch で一次資料を読み、JSON (entries / skipped / roleRecommendations) を返す
             ★モデルはファイルを触らない。役割は「資料を読んで根拠を書く」だけ
 3. apply    node --import tsx .claude/scripts/themes/selection-backfill.mjs apply --theme <key> --input <json>
-            決定的 gate → 通過分だけ書く (インライン定義は <theme>.ts、expanded.ts 由来は selection-evidence.ts)
+            決定的 gate → 通過分だけ data/themes/catalogs/<key>.json の該当指標の selection に書く
 ```
 
 gate (`selection-backfill-core.mjs gateEntries`) が落とすもの:
@@ -121,4 +121,4 @@ Agent tool 経路 (2026-09-16 aging-society: 1 テーマ 19 分・285K トーク
   driver: `.claude/scripts/themes/run-selection-backfill.sh`
 - test: `node --import tsx --test .claude/scripts/themes/__tests__/selection-backfill-core.test.mjs`
 - validator: `packages/data-configs/scripts/validate-theme-catalog.ts` (`validateSelectionEvidence`)
-- 置き場: `packages/data-configs/src/theme-catalog/selection-evidence.ts` (expanded.ts 由来の指標専用・生成物)
+- 置き場: `data/themes/catalogs/<key>.json` の各 metric の `selection`

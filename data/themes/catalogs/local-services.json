@@ -1,0 +1,460 @@
+{
+  "key": "local-services",
+  "title": "飲食・生活関連サービス",
+  "description": "飲食店数と、洗濯・理容・美容・浴場業の事業活動を比較します。事業所・従業者は2021年6月1日の事業所所在地別、売上・純付加価値は2020年の企業本所所在地別です。対象年と県への帰属が異なるため、両者を割って生産性とはしません。産業中分類78で、その他の生活関連サービス79と娯楽80を含みません。",
+  "category": "economy",
+  "usage": "theme",
+  "metrics": [
+    {
+      "rankingKey": "restaurant-count-per-1000",
+      "shortLabel": "飲食店数（人口千人当たり）",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "日本標準産業分類（平成25年[2013年]10月改定）中分類76「飲食店」解説（総務省・政府統計の総合窓口e-Stat）",
+        "sourceUrl": "https://www.e-stat.go.jp/classifications/terms/10/03/76",
+        "surveyedAt": "2026-09-16",
+        "rationale": "この分類定義は、飲食店数という指標がどの範囲の事業所を数えているかを都道府県共通の基準で明確にしており、テーマの説明にある「飲食店数と生活関連サービス業を比較する」という問いの分子側を規定する。標準産業分類に基づくため都道府県間・年次間で同一基準の比較が可能であり、テーマの主要な問いである「どの県で飲食店が多いか」を直接表す指標として位置づけられる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability"
+        ],
+        "readerQuestion": "人口あたりでどの都道府県に飲食店が多いのか。",
+        "targetReaderOrDecision": "都道府県の生活関連サービス業の集積度を比較したい読者。"
+      }
+    },
+    {
+      "rankingKey": "number-of-hotel-facilities",
+      "shortLabel": "ホテル営業施設数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "衛生行政報告例（抜粋）厚生労働省医薬・生活衛生局生活衛生課 公表資料",
+        "sourceUrl": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/kenkou/seikatsu-eisei/seikatsu-eisei21/index.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "厚生労働省が旅館業法上の許可施設として毎年度集計・公表している項目であることが明記されており、経済センサスの飲食店・生活関連サービス業とは異なる行政許可ベースの一次資料である。宿泊関連施設数は飲食・生活関連サービス業の集積と合わせて地域の生活関連産業の広がりを補足する角度を提供する。",
+        "adoptionCriteria": [
+          "dataQuality",
+          "complementarity"
+        ],
+        "readerQuestion": "宿泊業の営業施設はどの都道府県に多いのか。",
+        "targetReaderOrDecision": "飲食・生活関連サービス業と宿泊業の分布を合わせて見たい読者。"
+      }
+    },
+    {
+      "rankingKey": "number-of-hotel-rooms",
+      "shortLabel": "ホテル営業施設客室数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "衛生行政報告例（抜粋）厚生労働省医薬・生活衛生局生活衛生課 公表資料",
+        "sourceUrl": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/kenkou/seikatsu-eisei/seikatsu-eisei21/index.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "同じ衛生行政報告例で施設数と併せて客室数が集計項目として明記されており、施設数だけでは測れない宿泊受入容量の規模を示す。件数（施設数）と規模（客室数）を両方見ることで、都道府県ごとの宿泊業の実質的な供給力を補完的に把握できる。",
+        "adoptionCriteria": [
+          "complementarity",
+          "readerValue"
+        ],
+        "readerQuestion": "都道府県ごとに宿泊施設はどれくらいの部屋数を持っているのか。",
+        "targetReaderOrDecision": "宿泊業の供給力（規模）を都道府県間で比較したい読者。"
+      }
+    },
+    {
+      "rankingKey": "personal-items-service-consumption-expenditure",
+      "shortLabel": "身の回り用品関連サービスへの家計支出（県庁所在市・二人以上世帯・年額）",
+      "role": "context",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "身の回り用品関連サービスへの家計支出（県庁所在市・二人以上世帯・年額）を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "laundry-beauty-bath-industry-establishments",
+      "shortLabel": "洗濯・理容・美容・浴場業の事業所数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "日本標準産業分類（平成25年[2013年]10月改定）中分類78「洗濯・理容・美容・浴場業」解説（総務省・政府統計の総合窓口e-Stat）",
+        "sourceUrl": "https://www.e-stat.go.jp/classifications/terms/10/03/78",
+        "surveyedAt": "2026-09-16",
+        "rationale": "テーマの説明が明示する「産業中分類78」の対象範囲そのものを定義しており、事業所数指標がどのようなサービス業を集計しているかを裏付ける。この定義により、洗濯・理容・美容・浴場業の事業所数は都道府県間で同一の産業区分に基づき比較でき、飲食店数と対比させる際の基準が明確になる。",
+        "adoptionCriteria": [
+          "comparability",
+          "representativeness"
+        ],
+        "readerQuestion": "洗濯・理容・美容・浴場業の事業所はどの都道府県に多いのか。",
+        "targetReaderOrDecision": "生活関連サービス業の事業所集積を都道府県間で比較したい読者。"
+      }
+    },
+    {
+      "rankingKey": "laundry-beauty-bath-industry-employees",
+      "shortLabel": "洗濯・理容・美容・浴場業の従業者数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "日本標準産業分類（平成25年[2013年]10月改定）中分類78「洗濯・理容・美容・浴場業」解説（総務省・政府統計の総合窓口e-Stat）",
+        "sourceUrl": "https://www.e-stat.go.jp/classifications/terms/10/03/78",
+        "surveyedAt": "2026-09-16",
+        "rationale": "同じ産業中分類78の定義に基づき、従業者数は事業所数だけでは分からない業界の雇用規模・労働集約度を補足する。テーマは事業所・従業者を2021年6月1日時点の事業所所在地別として揃えており、事業所数と従業者数を並べることで、1事業所あたりの平均規模という角度から地域差を補完的に把握できる。",
+        "adoptionCriteria": [
+          "complementarity",
+          "comparability"
+        ],
+        "readerQuestion": "洗濯・理容・美容・浴場業の事業所は都道府県ごとにどれくらいの雇用を生んでいるのか。",
+        "targetReaderOrDecision": "地域の生活関連サービス業の雇用規模を把握したい読者。"
+      }
+    },
+    {
+      "rankingKey": "laundry-beauty-bath-industry-revenue",
+      "shortLabel": "洗濯・理容・美容・浴場業の企業売上高",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "統計局ホームページ「経済構造実態調査」用語の解説（総務省統計局）",
+        "sourceUrl": "https://www.stat.go.jp/data/kkj/kekka/yougo.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "この計算式は、売上高（収入）金額が費用総額や給与総額などを差し引く前の事業規模の基礎値であることを示しており、テーマが売上高を事業所・従業者とは別に企業本所所在地別・2020年時点で扱う理由と対応する。売上高は生産性の代理指標ではなく、あくまで企業規模を示す実額として位置づけられることが、この式からも裏付けられる。",
+        "adoptionCriteria": [
+          "dataQuality",
+          "complementarity"
+        ],
+        "readerQuestion": "洗濯・理容・美容・浴場業の企業規模（売上高）はどの都道府県で大きいのか。",
+        "targetReaderOrDecision": "事業所数・従業者数だけでは分からない企業規模を知りたい読者。"
+      }
+    },
+    {
+      "rankingKey": "laundry-beauty-bath-industry-net-value-added",
+      "shortLabel": "洗濯・理容・美容・浴場業の企業純付加価値額",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "日本標準産業分類（平成25年10月改定）生活関連サービス業，娯楽業 中分類78「洗濯・理容・美容・浴場業」（総務省統計局・政府統計の総合窓口 e-Stat 分類基準）",
+        "sourceUrl": "https://www.e-stat.go.jp/classifications/terms/10/03/78",
+        "surveyedAt": "2026-09-16",
+        "rationale": "総務省の日本標準産業分類は洗濯業・理容業・美容業・浴場業をまとめて中分類78「洗濯・理容・美容・浴場業」として定義しており、これはテーマ説明の「産業中分類78」と一致する公式の業種区分である。この定義に基づく企業純付加価値額は、飲食店と対比される生活関連サービス業の経済的な生産価値を都道府県別に測る指標として位置付けられる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability"
+        ],
+        "readerQuestion": "自分の都道府県で洗濯・理容・美容・浴場業はどれほどの付加価値を生み出しているか。",
+        "targetReaderOrDecision": "地域の生活関連サービス業の経済規模を比較したい読者。"
+      }
+    },
+    {
+      "rankingKey": "media-production-establishments",
+      "shortLabel": "映像・音声・文字情報制作業の事業所数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "日本標準産業分類（平成25年10月改定）情報通信業 中分類41「映像・音声・文字情報制作業」（総務省統計局・政府統計の総合窓口 e-Stat 分類基準）",
+        "sourceUrl": "https://www.e-stat.go.jp/classifications/terms/10/03/41",
+        "surveyedAt": "2026-09-16",
+        "rationale": "総務省の産業分類上、映像・音声・文字情報制作業は映画・テレビ番組・出版などを担う独立した中分類41として定義されており、生活関連サービス業とは異なる情報通信業に属する。事業所数は、経済センサス‐活動調査の事業所所在地別データとして都道府県別の集積状況を比較する基礎指標であり、テーマ章「映像制作・娯楽関連産業の事業活動」の中心的な把握単位となる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability"
+        ],
+        "readerQuestion": "映像・音声・文字情報制作業の事業所はどの都道府県に集積しているか。",
+        "targetReaderOrDecision": "映像・コンテンツ産業の地域集積を確認したい読者や事業者。"
+      }
+    },
+    {
+      "rankingKey": "media-production-employees",
+      "shortLabel": "映像・音声・文字情報制作業の従業者数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "日本標準産業分類（平成25年10月改定）情報通信業 中分類41「映像・音声・文字情報制作業」（総務省統計局・政府統計の総合窓口 e-Stat 分類基準）",
+        "sourceUrl": "https://www.e-stat.go.jp/classifications/terms/10/03/41",
+        "surveyedAt": "2026-09-16",
+        "rationale": "同じ中分類41の定義に基づき、従業者数は事業所数と対になる雇用規模の指標であり、映像・音声・文字情報制作業がどの都道府県でどれだけの雇用を生んでいるかを事業所所在地別に比較できる。事業所数だけでは把握できない事業所あたりの規模の違いを補い、地域の産業集積の厚みを示す補完的な指標となる。",
+        "adoptionCriteria": [
+          "comparability",
+          "complementarity"
+        ],
+        "readerQuestion": "映像・音声・文字情報制作業の従業者は各都道府県でどの程度の規模か。",
+        "targetReaderOrDecision": "地域の映像制作関連の雇用規模を確認したい読者。"
+      }
+    },
+    {
+      "rankingKey": "media-production-revenue",
+      "shortLabel": "映像・音声・文字情報制作業の企業売上高",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和3年経済センサス‐活動調査 用語の解説（大阪府 統計課、総務省・経済産業省公表資料に基づく解説）",
+        "sourceUrl": "https://www.pref.osaka.lg.jp/o040090/toukei/e-census/r3_census_yougo_.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "経済センサス‐活動調査の用語解説によれば、売上（収入）金額は令和2年1年間の実績を企業単位・企業本所所在地別に集計した値であり、事業所単位・2021年6月時点の事業所数・従業者数とは基準年・帰属先が異なる。この違いを踏まえたうえで、映像・音声・文字情報制作業の企業売上高は地域の産業規模を金額ベースで示す代表的な指標として位置付けられる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "dataQuality"
+        ],
+        "readerQuestion": "映像・音声・文字情報制作業の企業売上高は本社所在地ベースでどの都道府県が大きいか。",
+        "targetReaderOrDecision": "映像制作関連企業の立地・市場規模を比較したい読者。"
+      }
+    },
+    {
+      "rankingKey": "media-production-net-value-added",
+      "shortLabel": "映像・音声・文字情報制作業の企業純付加価値額",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和3年経済センサス‐活動調査 用語の解説（大阪府 統計課、総務省・経済産業省公表資料に基づく解説）",
+        "sourceUrl": "https://www.pref.osaka.lg.jp/o040090/toukei/e-census/r3_census_yougo_.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "用語解説は純付加価値額を企業の生産活動が新たに生み出した価値として定義しており、売上高が示す規模とは異なり、中間投入を差し引いた実質的な稼ぐ力を表す。映像・音声・文字情報制作業についてこの値を都道府県別に比較することで、売上高だけでは分からない収益性・付加価値創出力の地域差を補完的に把握できる。",
+        "adoptionCriteria": [
+          "complementarity",
+          "representativeness"
+        ],
+        "readerQuestion": "映像・音声・文字情報制作業はどの都道府県でより高い付加価値を生み出しているか。",
+        "targetReaderOrDecision": "地域産業の稼ぐ力を比較したい政策担当者・研究者。"
+      }
+    },
+    {
+      "rankingKey": "amusement-industry-establishments",
+      "shortLabel": "娯楽業の事業所数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "日本標準産業分類（平成25年10月改定）生活関連サービス業，娯楽業 中分類80「娯楽業」（総務省統計局・政府統計の総合窓口 e-Stat 分類基準）",
+        "sourceUrl": "https://www.e-stat.go.jp/classifications/terms/10/03/80",
+        "surveyedAt": "2026-09-16",
+        "rationale": "娯楽業は映画・演劇などの興行や娯楽施設の提供を行う事業所として中分類80に定義され、映像・音声・文字情報制作業（中分類41）とは異なる大分類N「生活関連サービス業，娯楽業」に属する。事業所数を都道府県別に比較することで、テーマ章「映像制作・娯楽関連産業の事業活動」における娯楽提供側の産業集積を、制作側の産業と対比して把握できる代表的な指標となる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability"
+        ],
+        "readerQuestion": "娯楽業の事業所はどの都道府県に多いか。",
+        "targetReaderOrDecision": "地域の娯楽関連産業の集積度を確認したい読者。"
+      }
+    },
+    {
+      "rankingKey": "amusement-industry-employees",
+      "shortLabel": "娯楽業の従業者数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "大阪府 令和3年経済センサス‐活動調査 用語の解説（大阪府統計課）",
+        "sourceUrl": "https://www.pref.osaka.lg.jp/o040090/toukei/e-census/r3_census_yougo_.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "この用語解説は「従業者数」を調査日時点で事業所に所属して働く全ての人と定義しており、事業所所在地別に集計されることが前提になっている。娯楽業の従業者数は事業所単位で都道府県に帰属するため、飲食・生活関連サービス業全体の雇用規模を都道府県間で比較する際の基準として使え、テーマが問う「どの県で娯楽業の雇用が厚いか」に直接答える指標になる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability",
+          "dataQuality"
+        ]
+      }
+    },
+    {
+      "rankingKey": "amusement-industry-revenue",
+      "shortLabel": "娯楽業の企業売上高",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "大阪府 令和3年経済センサス‐活動調査 用語の解説（大阪府統計課）",
+        "sourceUrl": "https://www.pref.osaka.lg.jp/o040090/toukei/e-census/r3_census_yougo_.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "用語解説は「売上（収入）金額」を令和2年1年間の販売・役務提供による実現額と定義しており、これは企業単位（本所所在地別）で集計される経理項目である。娯楽業の売上高は従業者数（事業所所在地別）とは調査年・帰属地の基準が異なるため、両者を単純に割って生産性指標とはできない点に注意しつつ、企業活動の規模を都道府県間で比較する独自の切り口を提供する。",
+        "adoptionCriteria": [
+          "representativeness",
+          "complementarity",
+          "dataQuality"
+        ]
+      }
+    },
+    {
+      "rankingKey": "amusement-industry-net-value-added",
+      "shortLabel": "娯楽業の企業純付加価値額",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "大阪府 令和3年経済センサス‐活動調査 用語の解説（大阪府統計課）",
+        "sourceUrl": "https://www.pref.osaka.lg.jp/o040090/toukei/e-census/r3_census_yougo_.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "用語解説は「純付加価値額」を生産額から中間投入を差し引いた新たに生み出された価値と定義しており、売上高とは異なり中間投入を控除した実質的な経済貢献を示す。娯楽業の純付加価値額は売上高と同じ企業本所所在地別・令和2年実績のため、売上高だけでは見えない収益性や地域経済への実質的な寄与度を補完的に示し、テーマの「事業活動を比較する」という問いに対して売上高とは異なる角度を加える。",
+        "adoptionCriteria": [
+          "complementarity",
+          "readerValue",
+          "dataQuality"
+        ]
+      }
+    }
+  ],
+  "charts": [],
+  "metricGroups": [
+    {
+      "key": "local-services-indicator-1",
+      "title": "飲食店数（人口千人当たり）",
+      "rankingKeys": [
+        "restaurant-count-per-1000"
+      ],
+      "defaultCheckedKeys": [
+        "restaurant-count-per-1000"
+      ]
+    },
+    {
+      "key": "local-services-indicator-2",
+      "title": "ホテル営業施設数",
+      "rankingKeys": [
+        "number-of-hotel-facilities"
+      ],
+      "defaultCheckedKeys": [
+        "number-of-hotel-facilities"
+      ]
+    },
+    {
+      "key": "local-services-indicator-3",
+      "title": "ホテル営業施設客室数",
+      "rankingKeys": [
+        "number-of-hotel-rooms"
+      ],
+      "defaultCheckedKeys": [
+        "number-of-hotel-rooms"
+      ]
+    },
+    {
+      "key": "local-services-indicator-4",
+      "title": "洗濯・理容・美容・浴場業の事業所数",
+      "rankingKeys": [
+        "laundry-beauty-bath-industry-establishments"
+      ],
+      "defaultCheckedKeys": [
+        "laundry-beauty-bath-industry-establishments"
+      ]
+    },
+    {
+      "key": "local-services-indicator-5",
+      "title": "洗濯・理容・美容・浴場業の従業者数",
+      "rankingKeys": [
+        "laundry-beauty-bath-industry-employees"
+      ],
+      "defaultCheckedKeys": [
+        "laundry-beauty-bath-industry-employees"
+      ]
+    },
+    {
+      "key": "local-services-indicator-6",
+      "title": "洗濯・理容・美容・浴場業の企業売上高",
+      "rankingKeys": [
+        "laundry-beauty-bath-industry-revenue"
+      ],
+      "defaultCheckedKeys": [
+        "laundry-beauty-bath-industry-revenue"
+      ]
+    },
+    {
+      "key": "local-services-indicator-7",
+      "title": "洗濯・理容・美容・浴場業の企業純付加価値額",
+      "rankingKeys": [
+        "laundry-beauty-bath-industry-net-value-added"
+      ],
+      "defaultCheckedKeys": [
+        "laundry-beauty-bath-industry-net-value-added"
+      ]
+    },
+    {
+      "key": "candidate-120-1",
+      "title": "映像・音声・文字情報制作業の事業所数",
+      "rankingKeys": [
+        "media-production-establishments"
+      ],
+      "defaultCheckedKeys": [
+        "media-production-establishments"
+      ]
+    },
+    {
+      "key": "candidate-120-2",
+      "title": "映像・音声・文字情報制作業の従業者数",
+      "rankingKeys": [
+        "media-production-employees"
+      ],
+      "defaultCheckedKeys": [
+        "media-production-employees"
+      ]
+    },
+    {
+      "key": "candidate-120-3",
+      "title": "映像・音声・文字情報制作業の企業売上高",
+      "rankingKeys": [
+        "media-production-revenue"
+      ],
+      "defaultCheckedKeys": [
+        "media-production-revenue"
+      ]
+    },
+    {
+      "key": "candidate-120-4",
+      "title": "映像・音声・文字情報制作業の企業純付加価値額",
+      "rankingKeys": [
+        "media-production-net-value-added"
+      ],
+      "defaultCheckedKeys": [
+        "media-production-net-value-added"
+      ]
+    },
+    {
+      "key": "candidate-120-5",
+      "title": "娯楽業の事業所数",
+      "rankingKeys": [
+        "amusement-industry-establishments"
+      ],
+      "defaultCheckedKeys": [
+        "amusement-industry-establishments"
+      ]
+    },
+    {
+      "key": "candidate-120-6",
+      "title": "娯楽業の従業者数",
+      "rankingKeys": [
+        "amusement-industry-employees"
+      ],
+      "defaultCheckedKeys": [
+        "amusement-industry-employees"
+      ]
+    },
+    {
+      "key": "candidate-120-7",
+      "title": "娯楽業の企業売上高",
+      "rankingKeys": [
+        "amusement-industry-revenue"
+      ],
+      "defaultCheckedKeys": [
+        "amusement-industry-revenue"
+      ]
+    },
+    {
+      "key": "candidate-120-8",
+      "title": "娯楽業の企業純付加価値額",
+      "rankingKeys": [
+        "amusement-industry-net-value-added"
+      ],
+      "defaultCheckedKeys": [
+        "amusement-industry-net-value-added"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "key": "local-services-overview",
+      "title": "飲食・生活関連サービスを都道府県別に見る",
+      "description": "飲食店数と、洗濯・理容・美容・浴場業の事業活動を比較します。事業所・従業者は2021年6月1日の事業所所在地別、売上・純付加価値は2020年の企業本所所在地別です。対象年と県への帰属が異なるため、両者を割って生産性とはしません。産業中分類78で、その他の生活関連サービス79と娯楽80を含みません。",
+      "metricGroupKeys": [
+        "local-services-indicator-1",
+        "local-services-indicator-2",
+        "local-services-indicator-3",
+        "local-services-indicator-4",
+        "local-services-indicator-5",
+        "local-services-indicator-6",
+        "local-services-indicator-7"
+      ]
+    },
+    {
+      "key": "candidate-120",
+      "title": "映像制作・娯楽関連産業の事業活動",
+      "description": "産業中分類41「映像・音声・文字情報制作業」と80「娯楽業」を別々に比較します。事業所・従業者は2021年6月1日の事業所所在地別、売上・純付加価値は2020年実績の企業本所所在地別です。対象と年が異なるため両者を割って生産性とはしません。金額は必要な回答が得られた企業等の集計で、文化産業全体や地域GDPではありません。",
+      "metricGroupKeys": [
+        "candidate-120-1",
+        "candidate-120-2",
+        "candidate-120-3",
+        "candidate-120-4",
+        "candidate-120-5",
+        "candidate-120-6",
+        "candidate-120-7",
+        "candidate-120-8"
+      ]
+    }
+  ],
+  "keywords": [
+    "飲食店",
+    "宿泊",
+    "生活関連サービス"
+  ]
+}

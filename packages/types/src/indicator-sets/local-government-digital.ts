@@ -1,5 +1,5 @@
 // AUTO-GENERATED — DO NOT EDIT.
-// Source of truth: packages/data-configs/src/theme-catalog/local-government-digital.ts
+// Source of truth: data/themes/catalogs/local-government-digital.json
 // Regenerate: npm run generate:catalog --workspace=@stats47/data-configs
 import type { IndicatorSet } from "../indicator-set";
 

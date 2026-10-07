@@ -1,7 +1,9 @@
 import { describe, expect, it } from 'vitest';
 
 import { getMetricConfig } from '../../registry';
-import { SAFETY_CATALOG } from '../safety';
+import { THEME_CATALOGS } from '..';
+
+const SAFETY_CATALOG = THEME_CATALOGS['safety'];
 
 // e-Stat 項目定義: https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/{K,I}
 const rates = [
@@ -28,6 +30,19 @@ const rawKeys = [
   'fire-deaths-per-100k', 'traffic-accident-injuries',
 ];
 const otherRates = ['criminal-arrest-rate', 'theft-criminal-arrest-rate', 'suicide-rate-per-100k'];
+// 2026-09-09 の章追加 (災害・消防・避難の章) で加わった指標。上の 26 件と違い、分母の意味はこのテストでは審査していない。
+// 一覧を固定しておくのは、安全テーマへ指標を足したときにこのテストで審査対象かどうかを決めさせるため。
+const chapterExtensionKeys = [
+  'flood-damage-general-assets', 'flood-affected-municipalities', 'natural-disaster-deaths',
+  'natural-disaster-missing-persons', 'natural-disaster-injured-persons', 'natural-disaster-destroyed-houses',
+  'natural-disaster-half-destroyed-houses', 'natural-disaster-partially-damaged-houses',
+  'disaster-recovery-expenses-prefecture', 'fire-department-water-count-per-100-thousand-people',
+  'fire-department-member-count-per-100-thousand-people', 'fire-department-pump-car-count-per-100-thousand-people',
+  'fire-department-emergency-car-count-per-100k', 'individual-evacuation-plan-coverage-rate',
+  'individual-evacuation-plan-listed-persons', 'individual-evacuation-plan-covered-persons',
+  'tsunami-evacuation-building-count', 'tsunami-evacuation-tower-count', 'disaster-relief-expenses-prefecture',
+  'consumer-consultation-accepted-cases',
+];
 
 describe('安全テーマの人口当たり指標', () => {
   it.each(rates.map(([key, code, denominator, unit]) => ({ metric: getMetricConfig(key)!, code, denominator, unit })))('$metric.key は公式の分母をラベルへ保持し、再び人口や面積で割らない', ({ metric, code, denominator, unit }) => {
@@ -45,7 +60,7 @@ describe('安全テーマの人口当たり指標', () => {
 
   it('全26定義を率と総数に分け、raw総数の正規化設定を保持する', () => {
     const reviewedKeys = [...rates.map(([key]) => key), ...rawKeys, ...otherRates];
-    expect(SAFETY_CATALOG.metrics.map(({ rankingKey }) => rankingKey).sort()).toEqual(reviewedKeys.sort());
+    expect(SAFETY_CATALOG.metrics.map(({ rankingKey }) => rankingKey).sort()).toEqual([...reviewedKeys, ...chapterExtensionKeys].sort());
     for (const key of rawKeys) {
       const metric = getMetricConfig(key)!;
       expect(metric.calculation?.normalizationOptions?.map(({ type }) => type), key).toEqual(['per_population', 'per_area']);

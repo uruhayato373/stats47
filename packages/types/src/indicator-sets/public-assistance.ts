@@ -1,5 +1,5 @@
 // AUTO-GENERATED — DO NOT EDIT.
-// Source of truth: packages/data-configs/src/theme-catalog/public-assistance.ts
+// Source of truth: data/themes/catalogs/public-assistance.json
 // Regenerate: npm run generate:catalog --workspace=@stats47/data-configs
 import type { IndicatorSet } from "../indicator-set";
 

@@ -154,7 +154,7 @@ tags: [theme, information-architecture, taxonomy, seo, migration]
 
 ## データ・実装原則
 
-- Authored SSOTは`packages/data-configs/src/theme-catalog/<key>.ts`
+- Authored SSOTは`data/themes/catalogs/<key>.json`
 - 手編集JSONやD1をSSOTにしない
 - 各rankingKey/chartの主責務テーマを1つに決める
 - 他テーマでは複製せず関連導線にする

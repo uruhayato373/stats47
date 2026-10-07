@@ -1,5 +1,5 @@
 // AUTO-GENERATED — DO NOT EDIT.
-// Source of truth: packages/data-configs/src/theme-catalog/consumer-prices.ts
+// Source of truth: data/themes/catalogs/consumer-prices.json
 // Regenerate: npm run generate:catalog --workspace=@stats47/data-configs
 import type { IndicatorSet } from "../indicator-set";
 

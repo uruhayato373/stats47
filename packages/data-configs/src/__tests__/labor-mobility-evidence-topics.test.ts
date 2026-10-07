@@ -1,7 +1,9 @@
 import { describe, expect, it } from "vitest";
 
 import { EVIDENCE_SOURCE_CATALOG } from "../theme-catalog/evidence-lenses";
-import { LABOR_MOBILITY_CATALOG } from "../theme-catalog/labor-mobility";
+import { THEME_CATALOGS } from "../theme-catalog";
+
+const LABOR_MOBILITY_CATALOG = THEME_CATALOGS["labor-mobility"];
 
 describe("labor-mobility evidence topics", () => {
   it("registers the two verified employment-status questions", () => {

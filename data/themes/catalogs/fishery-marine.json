@@ -1,0 +1,529 @@
+{
+  "key": "fishery-marine",
+  "title": "漁業（水産業）",
+  "description": "漁獲・養殖の供給、産出額、担い手の規模を地域別に把握する。",
+  "category": "industry",
+  "usage": "theme",
+  "metrics": [
+    {
+      "rankingKey": "fish-catch",
+      "shortLabel": "漁獲量",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "令和6年度 水産白書 参考資料2-5「漁業・養殖業都道府県別生産量及び産出額（令和5（2023）年）」（水産庁）",
+        "sourceUrl": "https://www.jfa.maff.go.jp/j/kikaku/wpaper/r06_h/sankou/sankou_2_5.html",
+        "surveyedAt": "2026-10-06",
+        "rationale": "水産庁は水産白書の参考資料として、漁業・養殖業の生産量と産出額を都道府県別にまとめて公表している。都道府県の水産業の規模を比べるときの基本の見方であり、漁獲量は海面漁業と内水面漁業の採捕量を合わせた量として、このテーマの入口に置く。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability"
+        ],
+        "readerQuestion": "この県で1年間にとれる魚介類の量は、全国で何位くらいか。",
+        "targetReaderOrDecision": "漁業が盛んな県を知りたい読者や、自分の県の水産業の規模を全国と比べたい読者。"
+      }
+    },
+    {
+      "rankingKey": "marine-fishery-catch",
+      "shortLabel": "海面漁獲量",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "海面漁業生産統計調査の概要「用語の説明」（農林水産省）",
+        "sourceUrl": "https://www.maff.go.jp/j/tokei/kouhyou/kaimen_gyosei/gaiyou/index.html",
+        "surveyedAt": "2026-10-06",
+        "rationale": "海面漁業生産統計調査は、漁獲量を漁ろう作業で得た水産動植物の採捕時の原形重量と定義し、水揚機関と海面漁業経営体を調べて把握している。海面漁業漁獲量は海の漁業の量を養殖と分けて示す指標で、「海と川・湖の内訳」の章で海面養殖業収獲量と対にして読む。",
+        "adoptionCriteria": [
+          "comparability",
+          "complementarity"
+        ],
+        "readerQuestion": "この県の海でとれる量は、養殖で育てる量と比べてどれくらいか。",
+        "targetReaderOrDecision": "海の漁業と養殖のどちらが中心かを知りたい読者。"
+      }
+    },
+    {
+      "rankingKey": "inland-fishery-catch",
+      "shortLabel": "内水面漁獲量",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "内水面漁業生産統計調査の概要「用語の説明」（農林水産省）",
+        "sourceUrl": "https://www.maff.go.jp/j/tokei/kouhyou/naisui_gyosei/gaiyou/index.html",
+        "surveyedAt": "2026-10-06",
+        "rationale": "内水面漁業生産統計調査は、内水面漁業の漁獲量を販売を目的として採捕された水産動植物の原形重量と定義し、遊漁者による採捕を含めていない。調査する河川と湖沼の範囲は年によって変更されてきたため、長い期間の比較には注意がいる。川と湖の漁業を海と分けて読むために、内水面養殖業収獲量と対にして置く。",
+        "adoptionCriteria": [
+          "complementarity"
+        ],
+        "readerQuestion": "この県の川や湖では、どれくらいの量の魚がとられているか。",
+        "targetReaderOrDecision": "海のない県を含めて、川や湖の漁業の規模を知りたい読者。"
+      }
+    },
+    {
+      "rankingKey": "fishing-port-count-ksj",
+      "shortLabel": "指定漁港総数",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.jfa.maff.go.jp/j/gyoko_gyozyo/g_zyoho_bako/gyoko_itiran/sub81.html",
+        "surveyedAt": "2026-09-08",
+        "rationale": "指定漁港総数は対象範囲・構造の関連指標として詳細索引に保持し、冒頭の要約へ重ねない。"
+      }
+    },
+    {
+      "rankingKey": "aquaculture-harvest",
+      "shortLabel": "養殖収獲量",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "内水面漁業生産統計調査の概要「用語の説明」（農林水産省）",
+        "sourceUrl": "https://www.maff.go.jp/j/tokei/kouhyou/naisui_gyosei/gaiyou/index.html",
+        "surveyedAt": "2026-10-06",
+        "rationale": "内水面漁業生産統計調査は養殖収獲量を収獲時の原形重量で計上し、種苗販売量を含めないと定めており、海面漁業生産統計調査も海面養殖業の収獲量を調べている。養殖収獲量は海面と内水面の養殖を合わせた量で、漁獲量と並べると、とる漁業と育てる漁業の規模を同じトンで比べられる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "complementarity"
+        ],
+        "readerQuestion": "この県では、とる漁業と育てる漁業のどちらが大きいか。",
+        "targetReaderOrDecision": "養殖が盛んな県を知りたい読者。"
+      }
+    },
+    {
+      "rankingKey": "marine-aquaculture-harvest",
+      "shortLabel": "海面養殖",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "海面漁業生産統計調査の概要「用語の説明」（農林水産省）",
+        "sourceUrl": "https://www.maff.go.jp/j/tokei/kouhyou/kaimen_gyosei/gaiyou/index.html",
+        "surveyedAt": "2026-10-06",
+        "rationale": "海面漁業生産統計調査は、海面養殖業を海面または陸上の施設で海水を使って水産動植物を集約的に育成し収獲する事業と定義し、その収獲量を調べている。海の養殖の量を海面漁業漁獲量と同じトンで比べ、海の水産業が漁業と養殖のどちらに支えられているかを読む。",
+        "adoptionCriteria": [
+          "comparability",
+          "complementarity"
+        ],
+        "readerQuestion": "この県の海で育てている魚介類や海藻の量はどれくらいか。",
+        "targetReaderOrDecision": "養殖の産地を知りたい読者。"
+      }
+    },
+    {
+      "rankingKey": "inland-aquaculture-harvest",
+      "shortLabel": "内水面養殖",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "内水面漁業生産統計調査の概要「調査の沿革」（農林水産省）",
+        "sourceUrl": "https://www.maff.go.jp/j/tokei/kouhyou/naisui_gyosei/gaiyou/index.html",
+        "surveyedAt": "2026-10-06",
+        "rationale": "内水面養殖業の収獲量は、調査の対象魚種を絞って集計されている。沿革によれば対象はます類・あゆ・こい・うなぎで、その後にしきごいの追加やうなぎの削除が行われた。川や湖の養殖の規模を海と分けて読むための指標だが、全魚種の合計ではない点に注意して置く。",
+        "adoptionCriteria": [
+          "complementarity"
+        ],
+        "readerQuestion": "この県の川や湖の養殖は、どれくらいの量があるか。",
+        "targetReaderOrDecision": "あゆやますなど淡水の養殖が盛んな県を知りたい読者。"
+      }
+    },
+    {
+      "rankingKey": "marine-fishery-aquaculture-output-value",
+      "shortLabel": "海面漁業・養殖業産出額",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "令和6年度 水産白書 参考資料2-5「漁業・養殖業都道府県別生産量及び産出額（令和5（2023）年）」（水産庁）",
+        "sourceUrl": "https://www.jfa.maff.go.jp/j/kikaku/wpaper/r06_h/sankou/sankou_2_5.html",
+        "surveyedAt": "2026-10-06",
+        "rationale": "水産庁は都道府県別の生産量と産出額を一つの表で公表し、海面養殖業の産出額には種苗養殖を含まないと注記している。海面漁業・養殖業産出額は海の漁業と養殖を合わせた金額で、量の指標と並べて水産業の経済規模を比べる。2017年からの系列で、2016年までの漁業産出額とは対象が違う。",
+        "adoptionCriteria": [
+          "representativeness",
+          "readerValue"
+        ],
+        "readerQuestion": "この県の海の漁業と養殖は、金額にするとどれくらいの規模か。",
+        "targetReaderOrDecision": "漁業が盛んな県を金額で比べたい読者。"
+      }
+    },
+    {
+      "rankingKey": "marine-fishery-output-value",
+      "shortLabel": "海面漁業産出額",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-08",
+        "rationale": "海面漁業産出額は対象範囲・構造の関連指標として詳細索引に保持し、冒頭の要約へ重ねない。"
+      }
+    },
+    {
+      "rankingKey": "fishery-output-value",
+      "shortLabel": "漁業産出額（2016年まで）",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-08",
+        "rationale": "旧系列は長期接続を検証する参照用途のみ保持し最新KPIには採用しない。"
+      }
+    },
+    {
+      "rankingKey": "fishery-workers",
+      "shortLabel": "漁業就業者",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "漁業センサスの概要「漁業センサスとは」（農林水産省）",
+        "sourceUrl": "https://www.maff.go.jp/j/tokei/census/fc/about/index.html",
+        "surveyedAt": "2026-10-06",
+        "rationale": "漁業センサスは、漁業の生産構造と就業構造を明らかにするために5年ごとに行う調査であり、漁業就業者数はその就業構造を表す中心の値である。担い手の数の変化を生産量や産出額と分けて読むために「漁業の担い手」の章に置く。2008年以降は5年ごとの値なので、間の年を補わない。",
+        "adoptionCriteria": [
+          "representativeness",
+          "dataQuality"
+        ],
+        "readerQuestion": "この県で漁業に従事する人は、どれくらい減ってきたか。",
+        "targetReaderOrDecision": "地域の漁業の担い手の状況を知りたい読者や、漁業への就業を考える読者。"
+      }
+    },
+    {
+      "rankingKey": "fishery-species-catch-scallop",
+      "shortLabel": "ホタテガイ",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.maff.go.jp/j/tokei/kouhyou/kaimen_gyosei/",
+        "surveyedAt": "2026-09-08",
+        "rationale": "ホタテガイは対象範囲・構造の関連指標として詳細索引に保持し、冒頭の要約へ重ねない。"
+      }
+    },
+    {
+      "rankingKey": "fishery-species-catch-japanese-squid",
+      "shortLabel": "スルメイカ",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.maff.go.jp/j/tokei/kouhyou/kaimen_gyosei/",
+        "surveyedAt": "2026-09-08",
+        "rationale": "スルメイカは対象範囲・構造の関連指標として詳細索引に保持し、冒頭の要約へ重ねない。"
+      }
+    },
+    {
+      "rankingKey": "fishery-species-catch-tuna",
+      "shortLabel": "マグロ類",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.maff.go.jp/j/tokei/kouhyou/kaimen_gyosei/",
+        "surveyedAt": "2026-09-08",
+        "rationale": "マグロ類は対象範囲・構造の関連指標として詳細索引に保持し、冒頭の要約へ重ねない。"
+      }
+    },
+    {
+      "rankingKey": "fishery-species-catch-bonito",
+      "shortLabel": "カツオ",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.maff.go.jp/j/tokei/kouhyou/kaimen_gyosei/",
+        "surveyedAt": "2026-09-08",
+        "rationale": "カツオは対象範囲・構造の関連指標として詳細索引に保持し、冒頭の要約へ重ねない。"
+      }
+    },
+    {
+      "rankingKey": "fishery-species-catch-mackerel",
+      "shortLabel": "サバ類",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.maff.go.jp/j/tokei/kouhyou/kaimen_gyosei/",
+        "surveyedAt": "2026-09-08",
+        "rationale": "サバ類は対象範囲・構造の関連指標として詳細索引に保持し、冒頭の要約へ重ねない。"
+      }
+    },
+    {
+      "rankingKey": "fishery-species-catch-pacific-saury",
+      "shortLabel": "サンマ",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.maff.go.jp/j/tokei/kouhyou/kaimen_gyosei/",
+        "surveyedAt": "2026-09-08",
+        "rationale": "サンマは対象範囲・構造の関連指標として詳細索引に保持し、冒頭の要約へ重ねない。"
+      }
+    },
+    {
+      "rankingKey": "fishery-species-catch-yellowtail",
+      "shortLabel": "ブリ類",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.maff.go.jp/j/tokei/kouhyou/kaimen_gyosei/",
+        "surveyedAt": "2026-09-08",
+        "rationale": "ブリ類は対象範囲・構造の関連指標として詳細索引に保持し、冒頭の要約へ重ねない。"
+      }
+    },
+    {
+      "rankingKey": "fishery-species-catch-sardine",
+      "shortLabel": "イワシ類",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.maff.go.jp/j/tokei/kouhyou/kaimen_gyosei/",
+        "surveyedAt": "2026-09-08",
+        "rationale": "イワシ類は対象範囲・構造の関連指標として詳細索引に保持し、冒頭の要約へ重ねない。"
+      }
+    },
+    {
+      "rankingKey": "fishery-species-catch-pollock",
+      "shortLabel": "スケトウダラ",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.maff.go.jp/j/tokei/kouhyou/kaimen_gyosei/",
+        "surveyedAt": "2026-09-08",
+        "rationale": "スケトウダラは対象範囲・構造の関連指標として詳細索引に保持し、冒頭の要約へ重ねない。"
+      }
+    },
+    {
+      "rankingKey": "fishery-species-catch-kelp",
+      "shortLabel": "コンブ類",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.maff.go.jp/j/tokei/kouhyou/kaimen_gyosei/",
+        "surveyedAt": "2026-09-08",
+        "rationale": "コンブ類は対象範囲・構造の関連指標として詳細索引に保持し、冒頭の要約へ重ねない。"
+      }
+    },
+    {
+      "rankingKey": "fishery-species-catch-snow-crab",
+      "shortLabel": "ズワイガニ",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.maff.go.jp/j/tokei/kouhyou/kaimen_gyosei/",
+        "surveyedAt": "2026-09-08",
+        "rationale": "ズワイガニは対象範囲・構造の関連指標として詳細索引に保持し、冒頭の要約へ重ねない。"
+      }
+    },
+    {
+      "rankingKey": "fishery-species-catch-sea-bream",
+      "shortLabel": "タイ類",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.maff.go.jp/j/tokei/kouhyou/kaimen_gyosei/",
+        "surveyedAt": "2026-09-08",
+        "rationale": "タイ類は対象範囲・構造の関連指標として詳細索引に保持し、冒頭の要約へ重ねない。"
+      }
+    }
+  ],
+  "charts": [
+    {
+      "componentKey": "theme-fishery-output-trend-marine",
+      "componentType": "line-chart",
+      "title": "海面漁業産出額の長期推移",
+      "componentProps": {
+        "seriesRefs": [
+          {
+            "metricKey": "marine-fishery-output-value",
+            "label": "海面漁業産出額",
+            "colorRole": "series-1"
+          }
+        ]
+      },
+      "relatedRankingKeys": [
+        "marine-fishery-output-value"
+      ],
+      "sourceName": "社会・人口統計体系",
+      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
+      "gridColumnSpan": 12,
+      "dataSource": "ranking",
+      "sortOrder": 10,
+      "annotation": "海面漁業のみの名目産出額です。養殖を含む系列とは対象が異なります。",
+      "section": "output-workers"
+    }
+  ],
+  "evidenceTopics": [
+    {
+      "key": "aquaculture-supply-shift",
+      "lensKey": "sustainability",
+      "title": "漁獲と養殖の供給構造",
+      "question": "漁獲量と養殖収獲量の推移には、どのような地域差があるか。",
+      "summary": "漁獲と養殖を別系列で追うと、水産物の生産構造の違いを確認できます。資源量の健全性や需要、採算性を直接示す指標ではありません。",
+      "sourceKeys": [
+        "jfa-fisheries-whitepaper-2025"
+      ],
+      "relatedRankingKeys": [
+        "fish-catch",
+        "aquaculture-harvest"
+      ],
+      "relatedThemeKeys": [
+        "local-economy"
+      ]
+    },
+    {
+      "key": "fishery-workforce-continuity",
+      "lensKey": "service-capacity",
+      "title": "漁業の担い手と地域の継続性",
+      "question": "漁業就業者数の長期変化は、地域の担い手基盤をどう映しているか。",
+      "summary": "漁業就業者数の長期推移から担い手規模の変化を確認できます。新規就業者数、年齢構成、兼業状況はこの系列に含まれません。",
+      "sourceKeys": [
+        "jfa-fisheries-whitepaper-2025"
+      ],
+      "relatedRankingKeys": [
+        "fishery-workers"
+      ],
+      "relatedThemeKeys": [
+        "aging-society"
+      ]
+    },
+    {
+      "key": "fish-consumption-east-west",
+      "lensKey": "composition",
+      "title": "生鮮魚介の好みは産地ではなく消費地で分かれる",
+      "question": "家庭で買う生鮮魚介の支出額を品目別に並べると、県庁所在市はどのような地域のまとまりに分かれるか",
+      "summary": "漁獲量が多い産地と、家庭でよく買う消費地は一致しない。太平洋側・東日本はまぐろ・さけ・さんま、日本海側・西日本はぶり・さば・かれい・たい・あじの支出が相対的に大きい。値は県庁所在市の二人以上世帯で、外食は含まない。",
+      "sourceKeys": [
+        "stat-family-income-expenditure-survey-2024"
+      ],
+      "relatedRankingKeys": [
+        "tuna-consumption-expenditure",
+        "yellowtail-consumption-expenditure",
+        "saury-consumption-expenditure",
+        "bonito-consumption-expenditure",
+        "oyster-consumption-expenditure",
+        "mackerel-consumption-expenditure",
+        "fishery-species-catch-tuna",
+        "fishery-species-catch-yellowtail"
+      ],
+      "relatedThemeKeys": [
+        "tourism",
+        "local-economy"
+      ]
+    }
+  ],
+  "keywords": [
+    "漁業",
+    "水産業",
+    "漁獲量",
+    "養殖",
+    "漁業就業者",
+    "漁業産出額",
+    "漁港",
+    "海面漁業",
+    "内水面漁業",
+    "都道府県",
+    "ランキング"
+  ],
+  "relatedArticleTagKeys": [
+    "fishery",
+    "fish-catch",
+    "aquaculture",
+    "fisheries-industry"
+  ],
+  "sections": [
+    {
+      "key": "catch",
+      "title": "漁獲量と養殖収獲量",
+      "description": "漁獲と養殖の対象範囲を確認します。海のない県など対象外の値を0に置き換えて比較しません。",
+      "metricGroupKeys": [
+        "catch"
+      ],
+      "chartKeys": []
+    },
+    {
+      "key": "aquaculture",
+      "title": "海と川・湖の内訳",
+      "description": "海面は海、内水面は川と湖の漁業・養殖です。海のない県は海面の対象外で、0ではありません。",
+      "metricGroupKeys": [
+        "marine",
+        "inland"
+      ],
+      "chartKeys": []
+    },
+    {
+      "key": "output-workers",
+      "title": "漁業・養殖業の産出額",
+      "description": "海面漁業・養殖業産出額は2017年から、海面漁業だけの産出額は1975年からの系列で、対象が違います。どちらも名目の金額で、魚の価格の変動を含みます。",
+      "metricGroupKeys": [
+        "output-workers-1"
+      ],
+      "chartKeys": [
+        "theme-fishery-output-trend-marine"
+      ]
+    },
+    {
+      "key": "workers",
+      "title": "漁業の担い手",
+      "description": "漁業就業者数は2003年まで毎年、2008年からは5年ごとの漁業センサスの値です。間の年は補っていません。",
+      "metricGroupKeys": [
+        "output-workers-2"
+      ],
+      "chartKeys": []
+    }
+  ],
+  "metricGroups": [
+    {
+      "key": "catch",
+      "title": "漁獲量と養殖収獲量",
+      "rankingKeys": [
+        "fish-catch",
+        "aquaculture-harvest"
+      ],
+      "defaultCheckedKeys": [
+        "fish-catch",
+        "aquaculture-harvest"
+      ]
+    },
+    {
+      "key": "marine",
+      "title": "海の漁獲と養殖",
+      "rankingKeys": [
+        "marine-fishery-catch",
+        "marine-aquaculture-harvest"
+      ],
+      "defaultCheckedKeys": [
+        "marine-fishery-catch",
+        "marine-aquaculture-harvest"
+      ]
+    },
+    {
+      "key": "inland",
+      "title": "川・湖の漁獲と養殖",
+      "rankingKeys": [
+        "inland-fishery-catch",
+        "inland-aquaculture-harvest"
+      ],
+      "defaultCheckedKeys": [
+        "inland-fishery-catch",
+        "inland-aquaculture-harvest"
+      ]
+    },
+    {
+      "key": "output-workers-1",
+      "title": "海面漁業・養殖業産出額",
+      "rankingKeys": [
+        "marine-fishery-aquaculture-output-value"
+      ],
+      "defaultCheckedKeys": [
+        "marine-fishery-aquaculture-output-value"
+      ]
+    },
+    {
+      "key": "output-workers-2",
+      "title": "漁業就業者",
+      "rankingKeys": [
+        "fishery-workers"
+      ],
+      "defaultCheckedKeys": [
+        "fishery-workers"
+      ]
+    }
+  ],
+  "rejectedCandidates": [
+    {
+      "rankingKey": "fishery-workers-coastal-offshore",
+      "reason": "沿岸・沖合・遠洋別の漁業就業者数だが、登録年が2003年の1年だけ。2008年以降の漁業センサスの同じ区分が登録されたら再検討する。"
+    },
+    {
+      "rankingKey": "number-of-individual-fishery-management",
+      "reason": "個人漁業経営体数で、1981〜2003年で止まっている。漁業センサスの経営体数 (2008年以降) が登録されたら再検討する。"
+    },
+    {
+      "rankingKey": "fishing-port-count-by-type",
+      "reason": "漁港の種類別の数で、登録年が2003年の1年だけ。水産庁の最新の漁港一覧から都道府県別の値が登録されたら再検討する。"
+    },
+    {
+      "rankingKey": "port-entry-vessel-count",
+      "reason": "漁港の入港実漁船隻数で、登録年が2003年の1年だけ。同じ統計の新しい年が登録されたら再検討する。"
+    }
+  ]
+}

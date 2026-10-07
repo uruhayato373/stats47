@@ -1,0 +1,93 @@
+{
+  "key": "earthquake-exposure",
+  "title": "地震への備え",
+  "description": "30年間の超過確率3%に対応する地震動の震度帯別人口を、2020年人口と2050年推計人口で比較します。住宅の耐震改修指標も別に確認できます。",
+  "category": "safety",
+  "usage": "theme",
+  "metrics": [
+    {
+      "rankingKey": "earthquake-renovation-rate",
+      "shortLabel": "耐震改修工事実施率",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "耐震改修工事実施率を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "earthquake-retrofit-housing",
+      "shortLabel": "耐震工事をした住宅数（持ち家）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "耐震工事をした住宅数（持ち家）を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "fire-earthquake-insurance-consumption-expenditure",
+      "shortLabel": "火災・地震保険料支出（県庁所在市・二人以上世帯・年額）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "火災・地震保険料支出（県庁所在市・二人以上世帯・年額）を都道府県別の実値として比較する。"
+      }
+    }
+  ],
+  "charts": [],
+  "metricGroups": [
+    {
+      "key": "earthquake-exposure-indicator-1",
+      "title": "耐震改修工事実施率",
+      "rankingKeys": [
+        "earthquake-renovation-rate"
+      ],
+      "defaultCheckedKeys": [
+        "earthquake-renovation-rate"
+      ]
+    },
+    {
+      "key": "earthquake-exposure-indicator-2",
+      "title": "耐震工事をした住宅数（持ち家）",
+      "rankingKeys": [
+        "earthquake-retrofit-housing"
+      ],
+      "defaultCheckedKeys": [
+        "earthquake-retrofit-housing"
+      ]
+    },
+    {
+      "key": "earthquake-exposure-indicator-3",
+      "title": "火災・地震保険料支出（県庁所在市・二人以上世帯・年額）",
+      "rankingKeys": [
+        "fire-earthquake-insurance-consumption-expenditure"
+      ],
+      "defaultCheckedKeys": [
+        "fire-earthquake-insurance-consumption-expenditure"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "key": "earthquake-exposure-overview",
+      "title": "地震への備えを都道府県別に見る",
+      "description": "30年間の超過確率3%に対応する地震動の震度帯別人口を、2020年人口と2050年推計人口で比較します。住宅の耐震改修指標も別に確認できます。",
+      "metricGroupKeys": [
+        "earthquake-exposure-indicator-1",
+        "earthquake-exposure-indicator-2",
+        "earthquake-exposure-indicator-3"
+      ],
+      "embeddedSectionKeys": [
+        "earthquake-population"
+      ]
+    }
+  ],
+  "keywords": [
+    "地震",
+    "耐震",
+    "防災",
+    "住宅"
+  ]
+}

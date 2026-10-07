@@ -1,16 +1,16 @@
 # cron ヘルスチェック
 
-取得: 2026-10-06T22:15:06.568Z
+取得: 2026-10-07T04:27:00.298Z
 
 ```
 scheduled workflow 49 件を検査
 
 ⚠️ cron 異常 7 件:
 - ai-content-gemini-daily.yml: 12 回連続失敗 (直近 12 回に成功なし)
+    2026-10-07T01:30:55Z failure https://github.com/uruhayato373/stats47/actions/runs/37557481571
     2026-10-06T02:17:11Z failure https://github.com/uruhayato373/stats47/actions/runs/37403381126
     2026-10-05T00:54:19Z failure https://github.com/uruhayato373/stats47/actions/runs/37249299101
-    2026-10-04T00:35:53Z failure https://github.com/uruhayato373/stats47/actions/runs/37165435290
-- workflow-health-daily.yml: 12 回連続失敗 (直近 12 回に成功なし)
+- workflow-health-daily.yml: 11 回連続失敗 (直近 12 回に成功なし)
     2026-10-06T04:59:11Z failure https://github.com/uruhayato373/stats47/actions/runs/37416294786
     2026-10-05T04:10:40Z failure https://github.com/uruhayato373/stats47/actions/runs/37262367199
     2026-10-04T04:24:31Z failure https://github.com/uruhayato373/stats47/actions/runs/37176911461

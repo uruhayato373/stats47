@@ -1,0 +1,1181 @@
+{
+  "key": "living-housing",
+  "title": "暮らし・住まい",
+  "description": "住宅ストックの余り方・所有形態・住戸の広さと、住む世帯の形を比較する。",
+  "category": "lifestyle",
+  "usage": "theme",
+  "metrics": [
+    {
+      "rankingKey": "vacant-housing-ratio",
+      "shortLabel": "空き家率",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "令和6年版高齢社会白書 第1章第2節4「生活環境」（内閣府）",
+        "sourceUrl": "https://www8.cao.go.jp/kourei/whitepaper/w-2024/html/zenbun/s1_2_4.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "内閣府の高齢社会白書は、居住者が長期不在の「使用目的のない空き家」がこの20年で約1.9倍に増えたことを住宅・土地統計調査の数値で示し、高齢化に伴う住まいの承継が進まない実態を政策課題として位置付けている。この白書の記述は、空き家比率が単なる余剰住宅の指標ではなく、世帯の高齢化・継承の停滞を映す指標であることを裏付けており、テーマ「住宅ストックは余っているか」の中心的な問いに直接対応する。",
+        "adoptionCriteria": [
+          "representativeness",
+          "readerValue"
+        ],
+        "readerQuestion": "自分の住む都道府県では、使われていない空き家がどれくらいの割合で増えているか。",
+        "targetReaderOrDecision": "地域の空き家対策や住宅承継の必要性を判断したい自治体職員・住民"
+      }
+    },
+    {
+      "rankingKey": "owner-occupied-housing-ratio",
+      "shortLabel": "持ち家率",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和6年版高齢社会白書 第1章第2節4「生活環境」（内閣府）",
+        "sourceUrl": "https://www8.cao.go.jp/kourei/whitepaper/w-2024/html/zenbun/s1_2_4.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "高齢社会白書は65歳以上の者の住宅所有状況として持家率が8割を超えることを示し、高齢期の住まいの安定性を測る基礎データとして持ち家比率を扱っている。この記述は、持ち家率が世帯の資産・居住継続の安定度を表す指標であることを裏付け、空き家比率と対にして地域差を比較する意義を補強する。",
+        "adoptionCriteria": [
+          "complementarity",
+          "dataQuality"
+        ],
+        "readerQuestion": "自分の都道府県の持ち家率は全国平均や過去と比べて高いか低いか。",
+        "targetReaderOrDecision": "住宅政策の地域比較を行う自治体職員・研究者"
+      }
+    },
+    {
+      "rankingKey": "floor-area-per-dwelling-owner",
+      "shortLabel": "持ち家延べ面積（1住宅当たり）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/H",
+        "surveyedAt": "2026-09-08",
+        "rationale": "1住宅当たりを基準にした持ち家住宅の延べ面積として比較する。対象範囲を表示して主章に配置する。"
+      }
+    },
+    {
+      "rankingKey": "floor-area-per-dwelling-rented",
+      "shortLabel": "借家延べ面積（1住宅当たり）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/H",
+        "surveyedAt": "2026-09-08",
+        "rationale": "1住宅当たりを基準にした借家住宅の延べ面積として比較する。対象範囲を表示して主章に配置する。"
+      }
+    },
+    {
+      "rankingKey": "households",
+      "shortLabel": "世帯数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和5年版高齢社会白書 第1章第1節3「家族と世帯」（内閣府）",
+        "sourceUrl": "https://www8.cao.go.jp/kourei/whitepaper/w-2023/html/zenbun/s1_1_3.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "高齢社会白書は、高齢者のいる世帯数を全世帯数（5,191万4千世帯）と対比して示しており、世帯数そのものが世帯構成の変化を測る基準単位として用いられている。この記述は、世帯数がテーマ「住む世帯はどう変わるか」における分母として不可欠であり、他の世帯構成比指標（核家族世帯率など）と組み合わせて初めて地域差や時系列変化を解釈できることを裏付ける。",
+        "adoptionCriteria": [
+          "comparability",
+          "complementarity"
+        ],
+        "readerQuestion": "自分の都道府県の総世帯数はどのように推移してきたか。",
+        "targetReaderOrDecision": "住宅需要や世帯構成の変化を把握したい自治体の住宅政策担当者"
+      }
+    },
+    {
+      "rankingKey": "nuclear-family-households-ratio",
+      "shortLabel": "核家族世帯率",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和5年版高齢社会白書 第1章第1節3「家族と世帯」（内閣府）",
+        "sourceUrl": "https://www8.cao.go.jp/kourei/whitepaper/w-2023/html/zenbun/s1_1_3.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "高齢社会白書は、昭和55年に半数を占めていた三世代世帯が令和3年には夫婦のみ世帯・単独世帯へと構成割合が入れ替わったことを示しており、核家族世帯（夫婦のみ・夫婦と子・ひとり親と子）の増加傾向を裏付ける一次資料となっている。この記述は、核家族世帯割合が単身化と並んで世帯構成の変化を捉える鍵指標であることを示し、テーマの章立て「世帯構成の変化」に直接対応する。",
+        "adoptionCriteria": [
+          "representativeness",
+          "complementarity"
+        ],
+        "readerQuestion": "自分の都道府県で核家族世帯の割合はどのように変化してきたか。",
+        "targetReaderOrDecision": "世帯構成の変化を踏まえて住宅・福祉施策を検討する自治体職員"
+      }
+    },
+    {
+      "rankingKey": "elderly-couple-only-household-ratio",
+      "shortLabel": "高齢夫婦世帯",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-08",
+        "rationale": "高齢世帯の専用比較は少子高齢化へ集約する。 主表示は「少子高齢化」へ集約する。関連指標としての導線は保持する。"
+      }
+    },
+    {
+      "rankingKey": "single-person-household-old-population-ratio",
+      "shortLabel": "高齢単独世帯（一般世帯に対して）",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-08",
+        "rationale": "高齢単身世帯の分母を含む解説は少子高齢化へ集約する。 主表示は「少子高齢化」へ集約する。関連指標としての導線は保持する。"
+      }
+    },
+    {
+      "rankingKey": "population-density-per-km2-inhabitable-area",
+      "shortLabel": "人口密度（可住地1km²当たり）",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/A",
+        "surveyedAt": "2026-09-08",
+        "rationale": "可住地1km²を基準にした可住地面積１km2当たり人口密度として比較する。関連指標の索引で補足する。"
+      }
+    },
+    {
+      "rankingKey": "habitable-area-ratio",
+      "shortLabel": "可住地面積割合",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-08",
+        "rationale": "可住地面積割合は「人口密度を背景に読む」の補足として詳細索引に保持し、冒頭の要約へ重ねない。"
+      }
+    },
+    {
+      "rankingKey": "densely-inhabited-district-population-density",
+      "shortLabel": "DID人口密度（DID面積1km²当たり）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "埼玉県 統計FAQ「人口集中地区（DID）とは何ですか」（埼玉県企画財政部統計課）",
+        "sourceUrl": "https://www.pref.saitama.lg.jp/a0206/toukeifaq/q3-1.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "この解説は、人口集中地区（DID）が「人口密度4,000人/km2以上」という基準で市区町村内に設定される統計上の地域単位であることを示しており、DID人口密度指標はこの基準がどの程度の実際の集積度として実現しているかを都道府県間で比較できる代表的な尺度になる。住宅ストックの余り方や住戸の広さを論じる際、人口がどれだけ密に集まっている地域に住宅が立地しているかという前提条件を示す点で、都市の人口集積と計画上の区域の章の問いに直接つながる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability"
+        ],
+        "readerQuestion": "自分の住む都道府県の人口集中地区はどれくらい人が密集しているのか。",
+        "targetReaderOrDecision": "都市計画やコンパクトシティ政策を検討する自治体職員・住民"
+      }
+    },
+    {
+      "rankingKey": "ratio-never-married-15-plus",
+      "shortLabel": "未婚率",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-08",
+        "rationale": "未婚率と高齢夫婦世帯割合を一緒に見せても住宅状況への答えにならない。 主表示は「少子高齢化」へ集約する。関連指標としての導線は保持する。"
+      }
+    },
+    {
+      "rankingKey": "marriages",
+      "shortLabel": "婚姻件数",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.mhlw.go.jp/toukei/list/81-1.html",
+        "surveyedAt": "2026-09-08",
+        "rationale": "婚姻動向は出生・家族形成の補足であり住宅ストックの主問から外す。 主表示は「少子高齢化」へ集約する。関連指標としての導線は保持する。"
+      }
+    },
+    {
+      "rankingKey": "divorces",
+      "shortLabel": "離婚件数",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.mhlw.go.jp/toukei/list/81-1.html",
+        "surveyedAt": "2026-09-08",
+        "rationale": "離婚件数は住宅状況を直接説明しない。 主表示は「少子高齢化」へ集約する。関連指標としての導線は保持する。"
+      }
+    },
+    {
+      "rankingKey": "single-person-household-ratio",
+      "shortLabel": "単独世帯割合",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "鹿児島県 令和2年国勢調査結果（人口等基本集計結果：世帯の構成）（鹿児島県企画部統計課）",
+        "sourceUrl": "https://www.pref.kagoshima.jp/ac09/tokei/bunya/kokutyo/r2kokutyo/r2jinnkoutoukihonnsyuukeisetainokousei.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "この結果は、令和2年国勢調査において単独世帯（1人世帯）が一般世帯の中で最も多い世帯類型になったことを都道府県単位で示しており、単身化と一人暮らしの進行度合いを地域間で比較する際の直接的な代表指標となる。住む世帯の形がどう変わるかというテーマの問いに対し、世帯構成の変化を定量的に裏付ける基礎データとして機能する。",
+        "adoptionCriteria": [
+          "representativeness",
+          "readerValue"
+        ],
+        "readerQuestion": "自分の住む地域では一人暮らし世帯がどれくらいの割合を占めているのか。",
+        "targetReaderOrDecision": "単身世帯向け住宅政策や見守りサービスを検討する自治体・事業者"
+      }
+    },
+    {
+      "rankingKey": "household-ratio-above-minimum-housing-area",
+      "shortLabel": "最低居住面積水準以上の世帯割合",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "徳島県庁コールセンターすだちくんコール「誘導居住面積水準、最低居住面積水準とは何ですか。」（徳島県）",
+        "sourceUrl": "https://www.pref.tokushima.lg.jp/FAQ/docs/00018685/",
+        "surveyedAt": "2026-09-16",
+        "rationale": "この解説は、最低居住面積水準が国の住生活基本計画に基づき世帯人数ごとに定められた「必要不可欠な住宅の広さ」の政策的しきい値であることを示している。この水準以上の世帯割合は、住戸の広さが最低限の生活水準を満たしているかを都道府県間で比較できる指標であり、どれくらいの広さに住むかというテーマの章の問いに直接応える。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability",
+          "dataQuality"
+        ],
+        "readerQuestion": "自分の地域では最低限必要とされる広さに満たない世帯がどれくらいいるのか。",
+        "targetReaderOrDecision": "住宅の質・広さに関する政策目標の達成度を確認したい行政担当者"
+      }
+    },
+    {
+      "rankingKey": "new-housing-starts",
+      "shortLabel": "着工新設住宅戸数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "国土交通省 報道発表資料「建築着工統計調査報告（令和6年度計分）」（国土交通省）",
+        "sourceUrl": "https://www.mlit.go.jp/report/press/joho04_hh_001299.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "国土交通省の建築着工統計調査は新設住宅着工戸数を毎年度公表しており、住宅ストックへの新規フローの総量を示す代表指標である。住宅ストックは余っているかという章の問いに対し、既存ストックの空き家率と対比させることで供給側の動きを把握する土台になる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "dataQuality"
+        ],
+        "readerQuestion": "自分の地域では新しい住宅がどれくらい建てられているのか。",
+        "targetReaderOrDecision": "住宅市場の需給動向を把握したい行政・事業者・住民"
+      }
+    },
+    {
+      "rankingKey": "new-owner-occupied-starts",
+      "shortLabel": "持家の新設着工戸数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "国土交通省 報道発表資料「建築着工統計調査報告（令和6年度計分）」（国土交通省）",
+        "sourceUrl": "https://www.mlit.go.jp/report/press/joho04_hh_001299.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "この報道発表は新設住宅着工戸数を持家・貸家・分譲住宅の利用関係別に分けて増減を説明しており、持家着工数は持ち家取得という住まい方の選択を示す内訳指標である。貸家着工数と対比することで、住宅着工の利用関係別比較の章が問う「持家と貸家のどちらが増えているか」に直接答えられる。",
+        "adoptionCriteria": [
+          "complementarity",
+          "comparability"
+        ],
+        "readerQuestion": "自分の地域では持家の新築がどれくらい増減しているのか。",
+        "targetReaderOrDecision": "持家取得を検討する世帯や住宅供給を計画する事業者"
+      }
+    },
+    {
+      "rankingKey": "new-rental-starts",
+      "shortLabel": "貸家の新設着工戸数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "国土交通省 報道発表資料「建築着工統計調査報告（令和6年度計分）」（国土交通省）",
+        "sourceUrl": "https://www.mlit.go.jp/report/press/joho04_hh_001299.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "同じ報道発表は貸家着工戸数の増減を持家と並べて示しており、賃貸住宅供給の動向を表す内訳指標である。持家着工数との対比によって、単身化や世帯構成の変化に伴う賃貸需要の高まりが供給側にどう反映されているかを、住宅着工の利用関係別比較の章で確認できる。",
+        "adoptionCriteria": [
+          "complementarity",
+          "comparability"
+        ],
+        "readerQuestion": "自分の地域では賃貸住宅の新築がどれくらい増減しているのか。",
+        "targetReaderOrDecision": "賃貸住宅の供給動向を把握したい事業者・入居検討者"
+      }
+    },
+    {
+      "rankingKey": "new-condo-starts",
+      "shortLabel": "分譲住宅の新設着工戸数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "建築着工統計調査報告（令和5年計分）報道発表資料（国土交通省総合政策局情報政策課建設経済統計調査室）",
+        "sourceUrl": "https://www.mlit.go.jp/report/press/joho04_hh_001203.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "国土交通省の建築着工統計調査報告は、新設住宅着工を持家・貸家・分譲住宅など利用関係別に区分して全体の増減要因を説明しており、分譲住宅の着工動向が新設住宅市場全体の変化を左右する主要因の一つとして扱われている。これは住宅ストックが今後どう増えていくかという将来側面を、既存ストックの空き家・広さの指標に補う位置付けとなる。",
+        "adoptionCriteria": [
+          "complementarity",
+          "readerValue"
+        ],
+        "readerQuestion": "分譲住宅の新設着工はここ数年で増えているのか減っているのか。",
+        "targetReaderOrDecision": "住宅市場の供給動向を分析する事業者・政策担当者。"
+      }
+    },
+    {
+      "rankingKey": "renovation-rate",
+      "shortLabel": "リフォーム工事実施率",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和5年住宅・土地統計調査の結果の概要（茨城県企画部統計課、令和5年住宅・土地統計調査結果）",
+        "sourceUrl": "https://www.pref.ibaraki.jp/kikaku/tokei/fukyu/tokei/betsu/zyutaku/zyu-tochi-r05/index.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "持ち家における増改築・改修工事の実施割合を全国共通の調査基準で示すもので、住宅ストックの更新・維持がどの程度進んでいるかを表す指標として資料に登場する。空き家率や延べ面積といったストック量の指標を補い、既存住宅の質的な更新状況という別角度からテーマを支える。",
+        "adoptionCriteria": [
+          "complementarity",
+          "comparability",
+          "dataQuality"
+        ],
+        "readerQuestion": "持ち家のリフォームはどの程度進んでいるのか、地域差はあるか。",
+        "targetReaderOrDecision": "住宅リフォーム需要を分析する事業者や住宅政策担当者。"
+      }
+    },
+    {
+      "rankingKey": "earthquake-renovation-rate",
+      "shortLabel": "耐震改修工事実施率",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和5年住宅・土地統計調査の結果の概要（茨城県企画部統計課、令和5年住宅・土地統計調査結果）",
+        "sourceUrl": "https://www.pref.ibaraki.jp/kikaku/tokei/fukyu/tokei/betsu/zyutaku/zyu-tochi-r05/index.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "耐震改修工事の実施割合は資料内でリフォーム工事全般とは別に単独項目として集計されており、住宅ストックの防災上の安全性という、広さや所有形態とは異なる質的側面を補完する指標として位置付けられている。低い実施率が全国的傾向であることも比較の材料になる。",
+        "adoptionCriteria": [
+          "complementarity",
+          "dataQuality"
+        ],
+        "readerQuestion": "持ち家の耐震改修はどの程度進んでいるのか、地域によって差があるのか。",
+        "targetReaderOrDecision": "防災・住宅政策を担当する自治体職員。"
+      }
+    },
+    {
+      "rankingKey": "vacant-housing-rate",
+      "shortLabel": "空き家率",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和5年住宅・土地統計調査の結果の概要（茨城県企画部統計課、令和5年住宅・土地統計調査結果）",
+        "sourceUrl": "https://www.pref.ibaraki.jp/kikaku/tokei/fukyu/tokei/betsu/zyutaku/zyu-tochi-r05/index.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "総務省が実施する住宅・土地統計調査の結果を都道府県が公式に解説したもので、総住宅数に占める空き家の割合を前回調査と比較する形で示している。この定義・比較方法は全国共通であり、都道府県間で住宅ストックの余剰度を比較する際の基準指標として使われることを示している。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability",
+          "dataQuality"
+        ],
+        "readerQuestion": "自分の都道府県の住宅ストックはどれだけ余っているか、他県と比べて空き家率は高いのか。",
+        "targetReaderOrDecision": "住宅政策担当者や空き家対策を検討する自治体職員。"
+      }
+    },
+    {
+      "rankingKey": "vacant-housing-excluding-rental-sale-secondary",
+      "shortLabel": "賃貸・売却用及び二次的住宅を除く空き家",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和5年住宅・土地統計調査の結果の概要（茨城県企画部統計課、令和5年住宅・土地統計調査結果）",
+        "sourceUrl": "https://www.pref.ibaraki.jp/kikaku/tokei/fukyu/tokei/betsu/zyutaku/zyu-tochi-r05/index.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "賃貸・売却用や別荘等の二次的住宅を除いた、いわゆる放置される可能性の高い空き家の増減を示す指標として資料内で個別に集計・報告されている。これは市場に出回らない空き家問題（老朽化・管理不十分な空き家）を捉える点で、賃貸用の空き家とは異なる角度からの補完的な指標である。",
+        "adoptionCriteria": [
+          "complementarity",
+          "comparability",
+          "readerValue"
+        ],
+        "readerQuestion": "市場に出ていない、管理が行き届いていない可能性のある空き家はどれだけ増えているか。",
+        "targetReaderOrDecision": "空き家の管理・除却政策を検討する自治体担当者。"
+      }
+    },
+    {
+      "rankingKey": "vacant-housing-for-rent",
+      "shortLabel": "賃貸用の空き家",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和5年住宅・土地統計調査の結果の概要（茨城県企画部統計課、令和5年住宅・土地統計調査結果）",
+        "sourceUrl": "https://www.pref.ibaraki.jp/kikaku/tokei/fukyu/tokei/betsu/zyutaku/zyu-tochi-r05/index.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "空き家全体の内訳として賃貸用の空き家が最大比率を占めることを示す資料であり、空き家率という総量指標だけでは見えない空き家の用途構成を補う位置付けになっている。賃貸市場の供給過剰の程度を都道府県間で比較する際の内訳指標として機能する。",
+        "adoptionCriteria": [
+          "complementarity",
+          "comparability"
+        ],
+        "readerQuestion": "空き家のうちどれだけが賃貸用として供給過剰になっているのか。",
+        "targetReaderOrDecision": "賃貸住宅市場の需給を分析する不動産事業者・自治体担当者。"
+      }
+    },
+    {
+      "rankingKey": "vacant-housing-for-sale",
+      "shortLabel": "売却用の空き家",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "政府統計の総合窓口 e-Stat「項目定義」H 居住（総務省統計局）",
+        "sourceUrl": "https://www.e-stat.go.jp/koumoku/koumoku_teigi/H",
+        "surveyedAt": "2026-09-16",
+        "rationale": "住宅・土地統計調査は空き家を賃貸用・売却用・二次的住宅・その他に区分しており、売却用の空き家は新築・中古を問わず市場に出ている流通可能な空き家ストックを示す。持ち家率・空き家率という総量指標だけでは見えない「売却可能な余剰住宅」の地域差を捉えられるため、住宅ストックの余り方を問うテーマの補完指標として位置付けられる。",
+        "adoptionCriteria": [
+          "complementarity",
+          "dataQuality"
+        ],
+        "readerQuestion": "この都道府県では空き家のうちどれだけが売却待ちの住宅なのか。",
+        "targetReaderOrDecision": "空き家対策や不動産流通の担当者が地域の流通可能な空き家量を把握する場面。"
+      }
+    },
+    {
+      "rankingKey": "vacant-housing-secondary-residences",
+      "shortLabel": "二次的住宅",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "政府統計の総合窓口 e-Stat「項目定義」H 居住（総務省統計局）",
+        "sourceUrl": "https://www.e-stat.go.jp/koumoku/koumoku_teigi/H",
+        "surveyedAt": "2026-09-16",
+        "rationale": "二次的住宅（別荘等）は週末や休暇時の保養目的で保有され、ふだんは人が住んでいない住宅と定義され、売却用・賃貸用の空き家とは利用動機が異なる。空き家全体を性質別に分解することで、住宅ストックの余剰が「流通待ち」なのか「保養用の保有」なのかを区別でき、既存の空き家率指標を補完する。",
+        "adoptionCriteria": [
+          "complementarity"
+        ],
+        "readerQuestion": "この都道府県の空き家のうち、別荘のように保養目的で保有されている住宅はどれくらいか。",
+        "targetReaderOrDecision": "観光地・別荘地を抱える自治体が住宅ストックの性質を把握する場面。"
+      }
+    },
+    {
+      "rankingKey": "single-households-age65plus-male",
+      "shortLabel": "65歳以上の男性単独世帯数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和6年版高齢社会白書 第1章第1節3「家族と世帯」（内閣府）",
+        "sourceUrl": "https://www8.cao.go.jp/kourei/whitepaper/w-2024/html/zenbun/s1_1_3.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "高齢社会白書は65歳以上の一人暮らしの者の割合を男女別に示し、令和2年時点で男性15.0％、将来は26.1％まで上昇すると見込んでいる。男性の単独世帯数を都道府県別に見ることで、単身化が進む世帯構成の変化を男女別に比較でき、住む世帯はどう変わるかという章の問いに直接つながる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "complementarity",
+          "readerValue"
+        ],
+        "readerQuestion": "この都道府県では65歳以上の男性で一人暮らしをしている人がどれくらいいるのか。",
+        "targetReaderOrDecision": "高齢者福祉・見守り施策を検討する自治体職員が単身高齢男性の規模を把握する場面。"
+      }
+    },
+    {
+      "rankingKey": "single-households-age65plus-female",
+      "shortLabel": "65歳以上の女性単独世帯数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和6年版高齢社会白書 第1章第1節3「家族と世帯」（内閣府）",
+        "sourceUrl": "https://www8.cao.go.jp/kourei/whitepaper/w-2024/html/zenbun/s1_1_3.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "同白書は女性の一人暮らし高齢者の割合が男性より高く、令和2年時点で22.1％、将来は29.3％まで上昇すると見込んでいることを示している。女性の単独世帯数を都道府県別に比較することで、高齢期の一人暮らしという単身化の実態を男女差込みで把握でき、世帯構成の変化を読む章の中心的な補完材料となる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "complementarity",
+          "readerValue"
+        ],
+        "readerQuestion": "この都道府県では65歳以上の女性で一人暮らしをしている人がどれくらいいるのか。",
+        "targetReaderOrDecision": "高齢者福祉・見守り施策を検討する自治体職員が単身高齢女性の規模を把握する場面。"
+      }
+    },
+    {
+      "rankingKey": "average-persons-per-general-household",
+      "shortLabel": "一般世帯の平均人員",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "政府統計の総合窓口 e-Stat「社会・人口統計体系 都道府県データ」社会生活統計指標 A 人口・世帯（総務省統計局）",
+        "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0000010201",
+        "surveyedAt": "2026-09-16",
+        "rationale": "社会・人口統計体系は都道府県別に「一般世帯の平均人員」を単位「人」で整備しており、世帯規模の地域差を同一基準で比較できる指標として位置付けている。持ち家・借家の1住宅当たり延べ面積と組み合わせることで、住戸の広さを世帯人員あたりの水準として読み替えられ、どれくらいの広さに住むかという章の問いを補強する。",
+        "adoptionCriteria": [
+          "comparability",
+          "complementarity"
+        ],
+        "readerQuestion": "この都道府県の一般世帯は平均して何人で暮らしているのか。",
+        "targetReaderOrDecision": "住宅の広さや世帯構成の変化を地域比較したい読者が基準となる世帯規模を確認する場面。"
+      }
+    },
+    {
+      "rankingKey": "housing-land-debt-per-household",
+      "shortLabel": "住宅・土地のための負債（総世帯平均）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "2019年全国家計構造調査 家計資産・負債に関する結果 都道府県表（総務省統計局）",
+        "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0003426515",
+        "surveyedAt": "2026-09-16",
+        "rationale": "全国家計構造調査の都道府県別集計は、資産・負債の種類を「住宅・土地のための負債」と「住宅・土地以外の負債」に区分して1世帯当たり負債現在高を示しており、住宅取得に伴う負債だけを切り出して都道府県間で比較できる。持ち家率や住宅取得の実態と合わせて読むことで、住まいを取得する際の負債負担の地域差を捉える指標となる。",
+        "adoptionCriteria": [
+          "comparability",
+          "complementarity",
+          "readerValue"
+        ],
+        "readerQuestion": "この都道府県の世帯は住宅・土地のためにどれくらいの負債を抱えているのか。",
+        "targetReaderOrDecision": "住宅取得を検討する読者や住宅政策担当者が地域の負債水準を把握する場面。"
+      }
+    },
+    {
+      "rankingKey": "private-rent-consumption-expenditure",
+      "shortLabel": "家賃支出",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
+        "surveyedAt": "2026-09-09",
+        "rationale": "家賃支出を既存テーマの独立章へ追加する。"
+      }
+    },
+    {
+      "rankingKey": "current-liabilities-balance-multi-person-households-per-household",
+      "shortLabel": "負債現在高",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
+        "surveyedAt": "2026-09-09",
+        "rationale": "負債現在高を既存テーマの独立章へ追加する。"
+      }
+    },
+    {
+      "rankingKey": "urban-planning-area",
+      "shortLabel": "都市計画区域の指定面積",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
+        "surveyedAt": "2026-09-09",
+        "rationale": "都市計画区域の指定面積を既存テーマの独立章へ追加する。"
+      }
+    },
+    {
+      "rankingKey": "urbanization-control-area-ratio",
+      "shortLabel": "都市計画区域に占める市街化調整区域の割合",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
+        "surveyedAt": "2026-09-09",
+        "rationale": "都市計画区域に占める市街化調整区域の割合を既存テーマの独立章へ追加する。"
+      }
+    },
+    {
+      "rankingKey": "urban-parks",
+      "shortLabel": "都市公園数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
+        "surveyedAt": "2026-09-09",
+        "rationale": "都市公園数を既存テーマの独立章へ追加する。"
+      }
+    },
+    {
+      "rankingKey": "urban-parks-area",
+      "shortLabel": "都市公園面積",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
+        "surveyedAt": "2026-09-09",
+        "rationale": "都市公園面積を既存テーマの独立章へ追加する。"
+      }
+    }
+  ],
+  "charts": [
+    {
+      "componentKey": "vacancy-ownership-rate-trend",
+      "componentType": "line-chart",
+      "title": "空き家率と持ち家率の推移",
+      "componentProps": {
+        "seriesRefs": [
+          {
+            "metricKey": "vacant-housing-ratio"
+          },
+          {
+            "metricKey": "owner-occupied-housing-ratio"
+          }
+        ],
+        "labels": [
+          "空き家率",
+          "持ち家率"
+        ],
+        "seriesColors": [
+          "danger",
+          "population"
+        ]
+      },
+      "relatedRankingKeys": [
+        "vacant-housing-ratio",
+        "owner-occupied-housing-ratio"
+      ],
+      "sourceName": "住宅・土地統計調査",
+      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "housing-stock",
+      "sortOrder": 10
+    },
+    {
+      "componentKey": "md-living-housing-discussion",
+      "componentType": "markdown-section",
+      "title": "数値を比較するときの注意",
+      "componentProps": {
+        "markdown": "空き家率と持ち家率は対象となる住宅が異なります。両者を足して住宅全体の内訳にはできません。\n\n持ち家と借家の平均面積に加え、世帯人数に応じた最低居住面積水準を満たす世帯の割合を確認します。\n\n単独世帯と核家族世帯は、それぞれの対象年を確認します。単年の値を過去まで延長して読みません。"
+      },
+      "sourceName": "国土交通白書 2025 / 住宅・土地統計調査 (総務省統計局) / 厚生労働白書 (令和7年版) / 空家等対策の推進に関する特別措置法 (国土交通省) / 立地適正化計画 (国土交通省)",
+      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "reading",
+      "sortOrder": 20
+    },
+    {
+      "componentKey": "md-living-housing-faq",
+      "componentType": "markdown-section",
+      "title": "よくある質問",
+      "componentProps": {
+        "displayMode": "faq",
+        "markdown": "### Q1: 住宅ストックは余っているかを見るときの注意は？\n\n空き家率と持ち家率は対象となる住宅が異なります。両者を足して住宅全体の内訳にはできません。\n\n### Q2: このテーマの数値を比較するときの注意は？\n\n住まいの広さと世帯の形を、地域人口の背景と合わせて読みます。"
+      },
+      "sourceName": "国土交通白書 2025 / 住宅・土地統計調査 (総務省統計局) / 厚生労働白書 (令和7年版) / 男女共同参画白書 (令和7年版) / 立地適正化計画 (国土交通省)",
+      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "reading",
+      "sortOrder": 30
+    },
+    {
+      "componentKey": "lh-dwelling-floor-area-trend",
+      "componentType": "line-chart",
+      "title": "持ち家・借家の延べ面積（1住宅当たり）",
+      "componentProps": {
+        "seriesRefs": [
+          {
+            "metricKey": "floor-area-per-dwelling-owner",
+            "label": "持ち家延べ面積（1住宅当たり）"
+          },
+          {
+            "metricKey": "floor-area-per-dwelling-rented",
+            "label": "借家延べ面積（1住宅当たり）"
+          }
+        ],
+        "labels": [
+          "持ち家延べ面積（1住宅当たり）",
+          "借家延べ面積（1住宅当たり）"
+        ],
+        "seriesColors": [
+          "series-6",
+          "count"
+        ]
+      },
+      "relatedRankingKeys": [
+        "floor-area-per-dwelling-owner",
+        "floor-area-per-dwelling-rented"
+      ],
+      "sourceName": "住宅・土地統計調査",
+      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "dwelling-space",
+      "sortOrder": 40,
+      "annotation": "住宅・土地統計調査の1住宅当たり延べ面積です。住宅全体の延べ面積を合計した値ではありません。"
+    },
+    {
+      "componentKey": "lh-household-structure-trend",
+      "componentType": "line-chart",
+      "title": "核家族世帯割合の推移",
+      "componentProps": {
+        "seriesRefs": [
+          {
+            "metricKey": "nuclear-family-households-ratio",
+            "label": "核家族世帯率",
+            "colorRole": "series-1"
+          }
+        ]
+      },
+      "relatedRankingKeys": [
+        "nuclear-family-households-ratio"
+      ],
+      "sourceName": "総務省「国勢調査」",
+      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
+      "gridColumnSpan": 12,
+      "dataSource": "ranking",
+      "sortOrder": 50,
+      "section": "households"
+    },
+    {
+      "componentKey": "lh-household-structure-trend-single",
+      "componentType": "line-chart",
+      "title": "単独世帯割合の比較",
+      "componentProps": {
+        "seriesRefs": [
+          {
+            "metricKey": "single-person-household-ratio",
+            "label": "単独世帯割合",
+            "colorRole": "series-1"
+          }
+        ]
+      },
+      "relatedRankingKeys": [
+        "single-person-household-ratio"
+      ],
+      "sourceName": "総務省「国勢調査」",
+      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
+      "gridColumnSpan": 12,
+      "dataSource": "ranking",
+      "sortOrder": 60,
+      "annotation": "単独世帯は現在配信している2020年の値です。",
+      "section": "households"
+    }
+  ],
+  "evidenceTopics": [
+    {
+      "key": "housing-stock-and-aging",
+      "lensKey": "sustainability",
+      "title": "高齢期の住まいと空き家ストック",
+      "question": "持ち家率と空き家率には、高齢化に伴う住まいの継承・利用の地域差がどう表れるか",
+      "summary": "白書は65歳以上の持ち家と使用目的のない空き家を扱います。ランキングは全世帯の持ち家率と、賃貸・売却用や二次的住宅も含む空き家率であり、対象を同一視しません。",
+      "sourceKeys": [
+        "cao-aging-whitepaper-2025-housing",
+        "stat-housing-land-survey-2023"
+      ],
+      "relatedRankingKeys": [
+        "owner-occupied-housing-ratio",
+        "vacant-housing-ratio"
+      ],
+      "relatedChartKeys": [
+        "vacancy-ownership-rate-trend"
+      ],
+      "relatedThemeKeys": [
+        "aging-society"
+      ]
+    },
+    {
+      "key": "tenure-space-gap",
+      "lensKey": "equity",
+      "title": "持ち家・借家の居住空間",
+      "question": "持ち家と借家の1住宅当たり延べ面積には、どのような地域差があるか",
+      "summary": "延べ面積は住宅内の広さを示す平均値です。住宅価格や家賃、世帯人員、建物の品質は示さないため、取得・居住の負担とは分けて読みます。",
+      "sourceKeys": [
+        "stat-housing-land-survey-2023"
+      ],
+      "relatedRankingKeys": [
+        "floor-area-per-dwelling-owner",
+        "floor-area-per-dwelling-rented"
+      ],
+      "relatedChartKeys": [
+        "lh-dwelling-floor-area-trend"
+      ],
+      "relatedThemeKeys": [
+        "real-income"
+      ]
+    }
+  ],
+  "keywords": [
+    "空き家",
+    "持ち家",
+    "人口密度",
+    "世帯構造",
+    "未婚率",
+    "都道府県",
+    "ランキング"
+  ],
+  "sections": [
+    {
+      "key": "housing-stock",
+      "title": "住宅ストックは余っているか",
+      "description": "空き家率と持ち家率は対象となる住宅が異なります。両者を足して住宅全体の内訳にはできません。",
+      "metricGroupKeys": [
+        "housing-stock"
+      ],
+      "chartKeys": [
+        "vacancy-ownership-rate-trend"
+      ]
+    },
+    {
+      "key": "dwelling-space",
+      "title": "どれくらいの広さに住むか",
+      "description": "持ち家と借家の平均面積に加え、世帯人数に応じた最低居住面積水準を満たす世帯の割合を確認します。",
+      "metricGroupKeys": [
+        "dwelling-space-1",
+        "dwelling-space-2"
+      ],
+      "chartKeys": [
+        "lh-dwelling-floor-area-trend"
+      ]
+    },
+    {
+      "key": "households",
+      "title": "住む世帯はどう変わるか",
+      "description": "単独世帯と核家族世帯は、それぞれの対象年を確認します。単年の値を過去まで延長して読みません。",
+      "metricGroupKeys": [
+        "households"
+      ],
+      "chartKeys": [
+        "lh-household-structure-trend",
+        "lh-household-structure-trend-single"
+      ]
+    },
+    {
+      "key": "candidate-5",
+      "title": "住宅着工の利用関係別比較",
+      "description": "2023・2024年度の新設住宅を持家・貸家・分譲住宅に分けて比較します。給与住宅はこの3分類に含まれないため、3つの合計を新設住宅全体とは扱いません。",
+      "metricGroupKeys": [
+        "candidate-5-1",
+        "candidate-5-2",
+        "candidate-5-3",
+        "candidate-5-4"
+      ]
+    },
+    {
+      "key": "candidate-6",
+      "title": "改修・リフォーム需要",
+      "metricGroupKeys": [
+        "candidate-6-1",
+        "candidate-6-2"
+      ]
+    },
+    {
+      "key": "candidate-8",
+      "title": "空き家の用途と住宅ストック",
+      "description": "2023年10月1日の空き家を賃貸用・売却用・二次的住宅・それ以外に分けて比較します。標本調査の推計値は100戸単位に丸められ、内訳の合計と総数が一致しない場合があります。二次的住宅には別荘等を含み、それ以外の空き家を管理不全空家の認定件数とはみなしません。",
+      "metricGroupKeys": [
+        "candidate-8-1",
+        "candidate-8-2",
+        "candidate-8-3",
+        "candidate-8-4",
+        "candidate-8-5",
+        "candidate-8-6"
+      ]
+    },
+    {
+      "key": "candidate-44",
+      "title": "単身化と一人暮らし",
+      "description": "2020年国勢調査の単独世帯を男女・年齢別に比較します。65歳以上の人数と単独世帯全体の割合は分母が異なります。年齢不詳を独立した区分として残し、施設等の世帯は含めません。",
+      "metricGroupKeys": [
+        "candidate-44-1",
+        "candidate-44-2",
+        "candidate-44-3"
+      ],
+      "embeddedSectionKeys": [
+        "single-households-demographics"
+      ]
+    },
+    {
+      "key": "candidate-45",
+      "title": "世帯構成の変化",
+      "metricGroupKeys": [
+        "candidate-45-1",
+        "candidate-45-2"
+      ]
+    },
+    {
+      "key": "candidate-74",
+      "title": "住居費と住宅取得の負債",
+      "description": "2019年の総世帯における住宅・土地のための負債残高を、家賃支出や二人以上世帯の金融負債と区別して確認します。住宅・土地負債はローンのない世帯も含む平均で、年間返済額ではありません。対象年・世帯区分が異なる指標から返済負担率は計算しません。",
+      "metricGroupKeys": [
+        "candidate-74-1",
+        "candidate-74-2",
+        "candidate-74-3"
+      ]
+    },
+    {
+      "key": "candidate-93",
+      "title": "都市の人口集積と計画上の区域",
+      "description": "人口集中地区は実際の人口集積、都市計画区域や市街化調整区域は計画上の指定です。区域面積は3月31日時点で、調整区域の割合は都市計画区域を分母とします。非線引区域もあるため、残りを市街化区域の割合とは扱いません。",
+      "metricGroupKeys": [
+        "candidate-93-1",
+        "candidate-93-2",
+        "candidate-93-3"
+      ]
+    },
+    {
+      "key": "candidate-94",
+      "title": "公園と都市緑地",
+      "metricGroupKeys": [
+        "candidate-94-1",
+        "candidate-94-2"
+      ]
+    },
+    {
+      "key": "reading",
+      "title": "読み方",
+      "description": "住まいの広さと世帯の形を、地域人口の背景と合わせて読みます。",
+      "metricGroupKeys": [],
+      "chartKeys": [
+        "md-living-housing-discussion",
+        "md-living-housing-faq"
+      ]
+    }
+  ],
+  "metricGroups": [
+    {
+      "key": "housing-stock",
+      "title": "住宅ストックは余っているか",
+      "rankingKeys": [
+        "vacant-housing-ratio",
+        "owner-occupied-housing-ratio"
+      ],
+      "defaultCheckedKeys": [
+        "vacant-housing-ratio",
+        "owner-occupied-housing-ratio"
+      ]
+    },
+    {
+      "key": "dwelling-space-1",
+      "title": "持ち家延べ面積・借家延べ面積",
+      "rankingKeys": [
+        "floor-area-per-dwelling-owner",
+        "floor-area-per-dwelling-rented"
+      ],
+      "defaultCheckedKeys": [
+        "floor-area-per-dwelling-owner",
+        "floor-area-per-dwelling-rented"
+      ]
+    },
+    {
+      "key": "dwelling-space-2",
+      "title": "最低居住面積水準以上の世帯割合",
+      "rankingKeys": [
+        "household-ratio-above-minimum-housing-area"
+      ],
+      "defaultCheckedKeys": [
+        "household-ratio-above-minimum-housing-area"
+      ]
+    },
+    {
+      "key": "households",
+      "title": "住む世帯はどう変わるか",
+      "rankingKeys": [
+        "single-person-household-ratio",
+        "nuclear-family-households-ratio"
+      ],
+      "defaultCheckedKeys": [
+        "single-person-household-ratio",
+        "nuclear-family-households-ratio"
+      ]
+    },
+    {
+      "key": "candidate-5-1",
+      "title": "着工新設住宅戸数",
+      "rankingKeys": [
+        "new-housing-starts"
+      ],
+      "defaultCheckedKeys": [
+        "new-housing-starts"
+      ]
+    },
+    {
+      "key": "candidate-5-2",
+      "title": "持家の新設着工戸数",
+      "rankingKeys": [
+        "new-owner-occupied-starts"
+      ],
+      "defaultCheckedKeys": [
+        "new-owner-occupied-starts"
+      ]
+    },
+    {
+      "key": "candidate-5-3",
+      "title": "貸家の新設着工戸数",
+      "rankingKeys": [
+        "new-rental-starts"
+      ],
+      "defaultCheckedKeys": [
+        "new-rental-starts"
+      ]
+    },
+    {
+      "key": "candidate-5-4",
+      "title": "分譲住宅の新設着工戸数",
+      "rankingKeys": [
+        "new-condo-starts"
+      ],
+      "defaultCheckedKeys": [
+        "new-condo-starts"
+      ]
+    },
+    {
+      "key": "candidate-6-1",
+      "title": "リフォーム工事実施率",
+      "rankingKeys": [
+        "renovation-rate"
+      ],
+      "defaultCheckedKeys": [
+        "renovation-rate"
+      ]
+    },
+    {
+      "key": "candidate-6-2",
+      "title": "耐震改修工事実施率",
+      "rankingKeys": [
+        "earthquake-renovation-rate"
+      ],
+      "defaultCheckedKeys": [
+        "earthquake-renovation-rate"
+      ]
+    },
+    {
+      "key": "candidate-8-1",
+      "title": "空き家率",
+      "rankingKeys": [
+        "vacant-housing-rate"
+      ],
+      "defaultCheckedKeys": [
+        "vacant-housing-rate"
+      ]
+    },
+    {
+      "key": "candidate-8-2",
+      "title": "空き家の用途と住宅ストック｜一般世帯数",
+      "rankingKeys": [
+        "households"
+      ],
+      "defaultCheckedKeys": [
+        "households"
+      ]
+    },
+    {
+      "key": "candidate-8-3",
+      "title": "賃貸・売却用及び二次的住宅を除く空き家",
+      "rankingKeys": [
+        "vacant-housing-excluding-rental-sale-secondary"
+      ],
+      "defaultCheckedKeys": [
+        "vacant-housing-excluding-rental-sale-secondary"
+      ]
+    },
+    {
+      "key": "candidate-8-4",
+      "title": "賃貸用の空き家",
+      "rankingKeys": [
+        "vacant-housing-for-rent"
+      ],
+      "defaultCheckedKeys": [
+        "vacant-housing-for-rent"
+      ]
+    },
+    {
+      "key": "candidate-8-5",
+      "title": "売却用の空き家",
+      "rankingKeys": [
+        "vacant-housing-for-sale"
+      ],
+      "defaultCheckedKeys": [
+        "vacant-housing-for-sale"
+      ]
+    },
+    {
+      "key": "candidate-8-6",
+      "title": "二次的住宅",
+      "rankingKeys": [
+        "vacant-housing-secondary-residences"
+      ],
+      "defaultCheckedKeys": [
+        "vacant-housing-secondary-residences"
+      ]
+    },
+    {
+      "key": "candidate-44-1",
+      "title": "65歳以上の男性単独世帯数",
+      "rankingKeys": [
+        "single-households-age65plus-male"
+      ],
+      "defaultCheckedKeys": [
+        "single-households-age65plus-male"
+      ]
+    },
+    {
+      "key": "candidate-44-2",
+      "title": "65歳以上の女性単独世帯数",
+      "rankingKeys": [
+        "single-households-age65plus-female"
+      ],
+      "defaultCheckedKeys": [
+        "single-households-age65plus-female"
+      ]
+    },
+    {
+      "key": "candidate-44-3",
+      "title": "単独世帯割合",
+      "rankingKeys": [
+        "single-person-household-ratio"
+      ],
+      "defaultCheckedKeys": [
+        "single-person-household-ratio"
+      ]
+    },
+    {
+      "key": "candidate-45-1",
+      "title": "世帯構成の変化｜一般世帯数",
+      "rankingKeys": [
+        "households"
+      ],
+      "defaultCheckedKeys": [
+        "households"
+      ]
+    },
+    {
+      "key": "candidate-45-2",
+      "title": "一般世帯の平均人員",
+      "rankingKeys": [
+        "average-persons-per-general-household"
+      ],
+      "defaultCheckedKeys": [
+        "average-persons-per-general-household"
+      ]
+    },
+    {
+      "key": "candidate-74-1",
+      "title": "住宅・土地のための負債（総世帯平均）",
+      "rankingKeys": [
+        "housing-land-debt-per-household"
+      ],
+      "defaultCheckedKeys": [
+        "housing-land-debt-per-household"
+      ]
+    },
+    {
+      "key": "candidate-74-2",
+      "title": "家賃支出",
+      "rankingKeys": [
+        "private-rent-consumption-expenditure"
+      ],
+      "defaultCheckedKeys": [
+        "private-rent-consumption-expenditure"
+      ]
+    },
+    {
+      "key": "candidate-74-3",
+      "title": "負債現在高",
+      "rankingKeys": [
+        "current-liabilities-balance-multi-person-households-per-household"
+      ],
+      "defaultCheckedKeys": [
+        "current-liabilities-balance-multi-person-households-per-household"
+      ]
+    },
+    {
+      "key": "candidate-93-1",
+      "title": "人口集中地区人口密度",
+      "rankingKeys": [
+        "densely-inhabited-district-population-density"
+      ],
+      "defaultCheckedKeys": [
+        "densely-inhabited-district-population-density"
+      ]
+    },
+    {
+      "key": "candidate-93-2",
+      "title": "都市計画区域の指定面積",
+      "rankingKeys": [
+        "urban-planning-area"
+      ],
+      "defaultCheckedKeys": [
+        "urban-planning-area"
+      ]
+    },
+    {
+      "key": "candidate-93-3",
+      "title": "都市計画区域に占める市街化調整区域の割合",
+      "rankingKeys": [
+        "urbanization-control-area-ratio"
+      ],
+      "defaultCheckedKeys": [
+        "urbanization-control-area-ratio"
+      ]
+    },
+    {
+      "key": "candidate-94-1",
+      "title": "都市公園数",
+      "rankingKeys": [
+        "urban-parks"
+      ],
+      "defaultCheckedKeys": [
+        "urban-parks"
+      ]
+    },
+    {
+      "key": "candidate-94-2",
+      "title": "都市公園面積",
+      "rankingKeys": [
+        "urban-parks-area"
+      ],
+      "defaultCheckedKeys": [
+        "urban-parks-area"
+      ]
+    }
+  ]
+}

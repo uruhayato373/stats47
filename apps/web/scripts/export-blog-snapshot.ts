@@ -32,6 +32,7 @@ import { GONE_BLOG_SLUGS } from '../src/config/gone-blog-slugs';
 import { blogPublicationContract } from '../../../packages/r2-storage/src/scripts/lib/blog-publication-guard';
 
 import { resolveArticleMetricPairs } from '../src/features/blog/services/article-metric-pairs';
+import { resolveArticleRankingRefs } from '../src/features/blog/services/article-ranking-refs';
 import {
   resolveArticleDataSources,
   resolveArticleSurveyIds,
@@ -39,6 +40,7 @@ import {
 import {
   BLOG_SNAPSHOT_KEY,
   buildMetricPairArticleIndex,
+  buildRankingArticleIndex,
   buildSurveyArticleIndex,
   type BlogSnapshot,
   type SnapshotArticle,
@@ -225,6 +227,9 @@ async function main() {
     const sources = published
       ? await resolveArticleDataSources({ slug, content }, fetchSource)
       : [];
+    const rankingRefs = published
+      ? await resolveArticleRankingRefs({ slug, content }, fetchSource)
+      : [];
     if (published && sources.length === 0) sourcelessSlugs.push(slug);
     articles.push({
       slug,
@@ -245,6 +250,7 @@ async function main() {
       surveyIds,
       sources,
       ...(metricPairs.length > 0 ? { metricPairs } : {}),
+      ...(rankingRefs.length > 0 ? { rankingRefs } : {}),
     });
   }
 
@@ -273,6 +279,7 @@ async function main() {
     tagMeta,
     surveyArticleIndex: buildSurveyArticleIndex(articles),
     metricPairArticleIndex: buildMetricPairArticleIndex(articles),
+    rankingArticleIndex: buildRankingArticleIndex(articles),
   };
 
   const body = JSON.stringify(snapshot);

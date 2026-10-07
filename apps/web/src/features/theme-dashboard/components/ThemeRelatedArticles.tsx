@@ -5,13 +5,15 @@ import { Newspaper } from "lucide-react";
 
 import { SectionCard } from "@/components/surface";
 
-import { getRelatedArticleSummaries } from "@/features/blog/server";
+import { getRelatedArticleSummaries, listArticlesUsingRankingKeys } from "@/features/blog/server";
 
 import { TrackedThemeLink } from "./TrackedThemeLink";
 
 interface ThemeRelatedArticlesProps {
   /** 関連記事を引くタグキー一覧 */
   tagKeys: string[];
+  /** テーマの指標。同じ指標を図に使う記事をタグ経由より先に出す */
+  rankingKeys?: string[];
   /** 表示する最大件数（デフォルト 6） */
   limit?: number;
 }
@@ -24,9 +26,18 @@ interface ThemeRelatedArticlesProps {
  */
 export async function ThemeRelatedArticles({
   tagKeys,
+  rankingKeys = [],
   limit = 6,
 }: ThemeRelatedArticlesProps) {
-  const visible = await getRelatedArticleSummaries(tagKeys, { limit });
+  // テーマの指標を多く使う記事を先に (タグの付け方に依らず同じデータを扱う記事)、残りをタグで埋める
+  const [byMetric, byTag] = await Promise.all([
+    listArticlesUsingRankingKeys(rankingKeys, { limit }),
+    tagKeys.length > 0 ? getRelatedArticleSummaries(tagKeys, { limit }) : Promise.resolve([]),
+  ]);
+  const seen = new Set<string>();
+  const visible = [...byMetric, ...byTag]
+    .filter((article) => !seen.has(article.slug) && seen.add(article.slug))
+    .slice(0, limit);
 
   if (visible.length === 0) return null;
 

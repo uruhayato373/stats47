@@ -1,9 +1,7 @@
 {
-  "hash": "fcfb7fd374dbc18694f4e032d7cd4403bb357d753bf8d0a24327173598fc6bac",
-  "audited_at": "2026-10-06T03:23:10",
+  "hash": "05e4bc45dd13bce30da74687c3624b6a7a708849c3c0519d655f1b4376eb3329",
+  "audited_at": "2026-10-07T13:08:12",
   "files": [
-    ".claude/scripts/measurement/__tests__/measurement.test.mjs",
-    ".claude/scripts/measurement/refresh-session.mjs",
-    ".claude/scripts/measurement/summarize.mjs"
+    ".claude/scripts/lib/internal-link-lint.mjs"
   ]
 }

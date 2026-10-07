@@ -176,6 +176,19 @@ source.json に表示用の出典を明示する:
   関連記事と「相関が高い指標」の「解説記事」リンクになる (`article-metric-pairs.ts`)。相関記事は
   tags が空なので**この経路が唯一の導線**。合成キーは 2 指標の関係ではないので対象外。
   kind や 2 キーのフィールド名を変えるときは `extractChartMetricPair` も同じ差分で直す。
+- **記事が使う指標と図の年も snapshot に焼く (2026-10-07)**。`export-blog-snapshot.ts` が図の source.json
+  (指標の抽出は `extractBlogChartSourceReferences`、年は `year`) と本文の `/ranking/` リンクから
+  `rankingRefs: [{ rankingKey, year? }]` を作り、`app/blog/all.json` に逆引き `rankingArticleIndex`
+  (rankingKey → slug) を焼く (`article-ranking-refs.ts`)。用途は 2 つ: 指標 → 記事の回遊と、図の年が指標の最新年より
+  古い記事の検出 (`build-stale-data-years.mjs`、日次 `blog-remediation-daily.yml`)。同じ指標を複数の年で描いた記事は
+  最も古い年を残す。古い記事は是正キューの `data-refresh` レーンに入り、`refresh-article-data-years.mjs` が
+  `kind: "ranking"` の図 (data JSON が fetch-ranking-data-r2.mjs の形のもの) を最新年で作り直す
+  (source.json に `refreshedFromYear` を残す。判定は `lib/refresh-chart-year.mjs`)。
+- **`yearPinnedReason` (2026-10-07)**: 本文がその年そのものを主題として論じる図 (特定の年の出来事や、制度が変わった前後の
+  比較で過去側に置いた図) だけ、source.json に `"yearPinnedReason": "<理由>"` を書く。`rankingRefs` はその図の年を持たず
+  (指標 → 記事の回遊には残る)、古い図の一覧と取り直しの対象から外れる。理由の無い固定はしない (空文字は固定として扱わない)。
+  本文が図の年を語っていない図は固定しない。2026-10-07 に図の年が古い 24 枚を本文と照らした結果、固定が正しい図は 0 枚で、
+  図だけが古い食い違い (財政力指数の 2 記事は 2022 年度の順位を語る節に 1989 年の地図) と、記事ごと古いものだけだった。
 
 **検査 (`audit-chart-provenance.mjs`)**: kind ごとに必要な参照があるか、参照先 rankingKey が R2 に実在するか、
 `NEXT_PUBLIC_ESTAT_APP_ID` がある CI では statsDataId が e-Stat API に実在するかを見る（最大3回再試行）。

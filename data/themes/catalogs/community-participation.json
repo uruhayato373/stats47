@@ -1,0 +1,111 @@
+{
+  "key": "community-participation",
+  "title": "市民参加と地域活動",
+  "description": "ボランティア活動の年間行動者率・まちづくり活動の参加率と、選挙投票率・図書館登録者数を比較します。まちづくり活動は2021年社会生活基本調査の10歳以上が対象で、過去1年間の清掃や地域おこしなどの活動を捉えます。活動種類は重複し、自治会加入率や孤独感とは異なります。",
+  "category": "demographics",
+  "usage": "theme",
+  "metrics": [
+    {
+      "rankingKey": "volunteer-activity-annual-participation-rate-10plus",
+      "shortLabel": "ボランティア年間行動者率（10歳以上）",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "ボランティア年間行動者率（10歳以上）を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "voter-turnout-governor",
+      "shortLabel": "都道府県知事選挙投票率",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "都道府県知事選挙投票率を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "library-registered-users",
+      "shortLabel": "図書館登録者数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "図書館登録者数を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "community-building-volunteer-participation-rate-10plus",
+      "shortLabel": "まちづくり活動の年間行動者率（10歳以上）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "まちづくり活動の年間行動者率（10歳以上）を都道府県別の実値として比較する。"
+      }
+    }
+  ],
+  "charts": [],
+  "metricGroups": [
+    {
+      "key": "community-participation-indicator-1",
+      "title": "ボランティア年間行動者率（10歳以上）",
+      "rankingKeys": [
+        "volunteer-activity-annual-participation-rate-10plus"
+      ],
+      "defaultCheckedKeys": [
+        "volunteer-activity-annual-participation-rate-10plus"
+      ]
+    },
+    {
+      "key": "community-participation-indicator-2",
+      "title": "都道府県知事選挙投票率",
+      "rankingKeys": [
+        "voter-turnout-governor"
+      ],
+      "defaultCheckedKeys": [
+        "voter-turnout-governor"
+      ]
+    },
+    {
+      "key": "community-participation-indicator-3",
+      "title": "図書館登録者数",
+      "rankingKeys": [
+        "library-registered-users"
+      ],
+      "defaultCheckedKeys": [
+        "library-registered-users"
+      ]
+    },
+    {
+      "key": "community-participation-indicator-4",
+      "title": "まちづくり活動の年間行動者率（10歳以上）",
+      "rankingKeys": [
+        "community-building-volunteer-participation-rate-10plus"
+      ],
+      "defaultCheckedKeys": [
+        "community-building-volunteer-participation-rate-10plus"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "key": "community-participation-overview",
+      "title": "市民参加と地域活動を都道府県別に見る",
+      "description": "ボランティア活動の年間行動者率・まちづくり活動の参加率と、選挙投票率・図書館登録者数を比較します。まちづくり活動は2021年社会生活基本調査の10歳以上が対象で、過去1年間の清掃や地域おこしなどの活動を捉えます。活動種類は重複し、自治会加入率や孤独感とは異なります。",
+      "metricGroupKeys": [
+        "community-participation-indicator-1",
+        "community-participation-indicator-2",
+        "community-participation-indicator-3",
+        "community-participation-indicator-4"
+      ]
+    }
+  ],
+  "keywords": [
+    "市民参加",
+    "ボランティア",
+    "投票率",
+    "地域活動"
+  ]
+}

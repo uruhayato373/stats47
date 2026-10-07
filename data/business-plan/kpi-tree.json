@@ -35,6 +35,29 @@
       }
     },
     {
+      "id": "site-pageviews",
+      "label": "ページビュー (GA4 Japan 確定7日×4週)",
+      "tier": "driver",
+      "cadence": "weekly",
+      "measurementStatus": "measured",
+      "unit": "PV/28日",
+      "source": "data/ga4/history-finalized7d.csv",
+      "target": {
+        "value": 79000,
+        "dueWeek": "2026-W52",
+        "basis": "search-clicks の目標 20,000 (2026-W52) × PV/検索クリック 3.98 (W37〜W40 の GA4 Japan PV 43,907 ÷ GSC rolling28d 11,023) ≈ 79,600 を切り下げ (2026-10-07 設定)"
+      }
+    },
+    {
+      "id": "ad-yield",
+      "label": "広告収益効率 (AdSense)",
+      "tier": "driver",
+      "cadence": "weekly",
+      "measurementStatus": "not-instrumented",
+      "unit": "円/1,000 GA4 Japan PV",
+      "source": "AdSense 収益 + data/ga4/history-finalized7d.csv"
+    },
+    {
       "id": "site-circulation-rate",
       "label": "サイト内回遊率 (代表値: ブログ→ランキング)",
       "tier": "driver",

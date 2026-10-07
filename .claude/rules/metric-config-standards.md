@@ -396,7 +396,7 @@ app/ranking へ射影するだけ。`calculateRankingValues` はランタイム�
 | 導出の純関数 (generator と監査が共有) | `packages/ranking/src/scripts/lib/calculated-stats-core.ts`                        |
 | 期間換算・丸めの resolver             | `packages/ranking/src/utils/period-align.ts`                                       |
 | CLI                                   | `packages/ranking/src/scripts/generate-calculated-stats.ts`                        |
-| task 配線                             | `run.sh` の TASKS。**`ranking-items` の後・`ranking-values` の前** (producer が先) |
+| task 配線                             | `run.sh` の TASKS。**`ranking-items` と `ranking-values` の前** (producer が先。後ろだと item.latestYear が 1 回分遅れる) |
 | 監査                                  | `audit-ranking-data-integrity.ts` の検査 (m)                                       |
 
 行の形・rank 規則 (value 降順・同値同順位・null は rank:null)・ソート順は

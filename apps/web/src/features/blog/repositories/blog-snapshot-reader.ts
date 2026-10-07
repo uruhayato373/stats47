@@ -6,6 +6,8 @@ import { POPULAR_BLOG_ARTICLE_SLUGS } from '../config/popular-articles';
 import {
   BLOG_SNAPSHOT_KEY,
   parseBlogSnapshot,
+  selectArticlesUsingRankingKeys,
+  type ArticleUsingMetrics,
   type BlogSnapshot,
   type SnapshotArticle,
   type SnapshotTagMeta,
@@ -270,6 +272,24 @@ export async function readMetricPairArticlesFromR2(rankingKey: string): Promise<
       title: article.title,
       description: article.description,
     }));
+}
+
+/**
+ * 渡した指標を使う公開記事 (blog snapshot の rankingArticleIndex)。選び方は selectArticlesUsingRankingKeys。
+ */
+export async function readArticlesUsingRankingKeysFromR2(
+  rankingKeys: readonly string[],
+  options: { excludeSlug?: string; limit?: number } = {}
+): Promise<ArticleUsingMetrics[]> {
+  if (rankingKeys.length === 0) return [];
+  return selectArticlesUsingRankingKeys(await loadSnapshot(), rankingKeys, options);
+}
+
+/** 記事が使う指標 (blog snapshot の rankingRefs)。記事 → ランキング・テーマの回遊に使う。 */
+export async function readRankingKeysForArticleFromR2(slug: string): Promise<string[]> {
+  const snapshot = await loadSnapshot();
+  const article = snapshot.articles.find((a) => a.slug === slug);
+  return (article?.rankingRefs ?? []).map((ref) => ref.rankingKey);
 }
 
 export async function readBlogSnapshotMetaFromR2(): Promise<{

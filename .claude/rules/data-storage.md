@@ -24,6 +24,10 @@ paths:
 記事メタTSや監査履歴と二重に書かず、専用validatorとwriter/readerの切替を一組で実装する。
 詳細と移行状況は [note-image-assets.md](note-image-assets.md)。画像バイナリは台帳へ埋め込まない。
 
+**テーマの指標・チャート定義 (ThemeCatalog) も例外として `data/themes/catalogs/<key>.json` のgit管理JSON + JSON Schema
+を正本とする (2026-10-06 オーナー決定)。** アプリは `@stats47/data-configs` 経由でこの JSON を読む。
+規約は [theme-catalog-standards.md](theme-catalog-standards.md) §1。
+
 ## git で管理するファイルの置き場 (2026-10-06 確定)
 
 `.claude/` はエージェント運用の置き場で、事業の台帳・記録・素材を置かない。git で管理するファイルは次の 5 つに分ける
@@ -50,7 +54,7 @@ paths:
 | `data/reviews/{weekly,monthly}/` | 週次・月次レビュー |
 | `data/seo/` `data/search-growth/` `data/blog/` `data/ai-content/` `data/ai-content-staging/` | キーワード改善サイクル、検索成長の候補と計測、ブログの監査・是正キューと推移、AI 解説の推移と是正キュー (`remediation/`)、AI 解説の公開待ち |
 | `data/ranking/` `data/provenance/` `data/page-quality/` `data/site/` `data/ogp/` | ランキングの整合監査、出典の是正キュー、ページ品質の週次監査 (`metrics/`) と UI 指摘キュー、サイト内リンク監査、OGP 画像の在庫 |
-| `data/estat/` `data/data-quality/` `data/surveys/` `data/themes/` `data/geo/` `data/municipalities/` `data/source-inventory/` | e-Stat の探索結果と年カバレッジ監査 (`year-coverage/`)、データ品質の検査、調査・テーマ・Geo のポートフォリオと監査、市区町村の拡充調査、参考文献の解決台帳 |
+| `data/estat/` `data/data-quality/` `data/surveys/` `data/themes/` `data/geo/` `data/municipalities/` `data/source-inventory/` | e-Stat の探索結果と年カバレッジ監査 (`year-coverage/`)、データ品質の検査、調査・テーマ・Geo のポートフォリオと監査 (テーマはアプリが読む指標・チャート定義 `catalogs/<key>.json` + JSON Schema も持つ。上の例外)、市区町村の拡充調査、参考文献の解決台帳 |
 | `data/ci/` `data/releases/` `data/content-operations/` | workflow の健全性・R2 の鮮度・月次ジョブ、リリースの検証証跡、コンテンツ公開の運用記録 |
 | `data/business-plan/` `data/goals/` | 事業計画の状態と KPI ツリー、目標の進捗 |
 
@@ -64,6 +68,7 @@ paths:
 | バックログ自動処理の実行台帳 (completion gate の証拠) | `.claude/state/backlog-loop/ledger.json` | `agent.backlog-loop` |
 | 整合性監査の印 (Stop hook が読む) | `.claude/state/consistency/audited.json` | `agent.consistency` |
 | RemoteTrigger の記録 | `.claude/state/triggers.json` | `agent.triggers` |
+| obsidian の mail-triage がメールから拾ったイベントの受信箱 (書き手と置き場はリポ外の cron が決める) | `.claude/state/inbox/mail-events.json` | `agent.mail-inbox` |
 | Claude routine のトークン実績・モデル使用量と canary・プロンプト評価 | `.claude/state/metrics/{claude-usage,model-usage,prompt-evals}/` | `claude.*` |
 | (git 管理外) セッションロック・実行間隔の記録 | `.claude/state/{session-locks,cadence}/` | — |
 
@@ -143,7 +148,7 @@ git TS 化し永続 D1 を全廃した。アプリが読む各データの真実
 
 ### Authored / 設定 (git TS が SSOT → 生成スクリプトで R2)
 - metric メタ — **SSOT は `packages/data-configs/src/metrics/<key>.ts`**
-- テーマのチャート定義など各種カタログ定義 — git TS → R2 反映 (冪等スクリプト)
+- 各種カタログ定義 — git TS → R2 反映 (冪等スクリプト)。テーマの指標・チャート定義だけは上の例外で `data/themes/catalogs/` の JSON
 
 ### Authored / 運用 (git TS 定義が SSOT → 生成スクリプトで R2 JSON)
 - `page_components` / `theme_metrics` / `categories` / `themes` / `surveys`

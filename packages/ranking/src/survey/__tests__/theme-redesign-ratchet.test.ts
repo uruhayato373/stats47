@@ -15,12 +15,41 @@ describe('theme redesign taxonomy population', () => {
     expect(new Set(adjustment.addedResolvedChartKeys).size).toBe(10);
     for (const key of adjustment.removedResolvedChartKeys) expect(charts.has(key), key).toBe(false);
     for (const key of adjustment.addedResolvedChartKeys) expect(charts.get(key)?.status, key).toBe('resolved');
-    expect(ratchet.theme.minResolvedCharts).toBeGreaterThanOrEqual(
-      adjustment.previousResolvedCharts - adjustment.removedResolvedChartKeys.length + adjustment.addedResolvedChartKeys.length
-    );
+    // 下限がこの訂正より下がる場合は themeBaselineFollowUps に記録したものだけ (次の it が連鎖を検査する)
     expect([...charts.values()].filter((chart) => chart.status === 'resolved').length).toBeGreaterThanOrEqual(ratchet.theme.minResolvedCharts);
     expect(ratchet.theme.minCoveragePct).toBe(100);
     expect(ratchet.theme.maxMissingLineageCharts).toBe(0);
+  });
+
+  it('lowers the chart baseline after 2026-09-09 only by the recorded follow-up removals', () => {
+    let expected = adjustment.previousResolvedCharts - adjustment.removedResolvedChartKeys.length + adjustment.addedResolvedChartKeys.length;
+    for (const followUp of ratchet.themeBaselineFollowUps) {
+      expect(followUp.previousResolvedCharts, followUp.date).toBeGreaterThanOrEqual(expected);
+      for (const key of followUp.removedResolvedChartKeys) expect(charts.has(key), key).toBe(false);
+      for (const key of followUp.addedResolvedChartKeys) expect(charts.get(key)?.status, key).toBe('resolved');
+      expected = followUp.previousResolvedCharts - followUp.removedResolvedChartKeys.length + followUp.addedResolvedChartKeys.length;
+    }
+    expect(ratchet.theme.minResolvedCharts).toBe(expected);
+  });
+
+  it('lowers the metric-group baseline only by the recorded follow-up card merges', () => {
+    const groups = new Map<string, ThemeChartSurveyTaxonomy>(results.flatMap((result) => result.metricGroups.map((group) => [`${result.themeKey}/${group.componentKey}`, group] as const)));
+    const withGroups = ratchet.themeBaselineFollowUps.flatMap((followUp) =>
+      followUp.previousResolvedMetricGroups === undefined
+        ? []
+        : [{
+            previous: followUp.previousResolvedMetricGroups,
+            removed: followUp.removedResolvedMetricGroupKeys ?? [],
+            added: followUp.addedResolvedMetricGroupKeys ?? [],
+          }],
+    );
+    expect(withGroups.length).toBeGreaterThan(0);
+    for (const followUp of withGroups) {
+      for (const key of followUp.removed) expect(groups.has(key), key).toBe(false);
+      for (const key of followUp.added) expect(groups.get(key)?.status, key).toBe('resolved');
+    }
+    const last = withGroups[withGroups.length - 1]!;
+    expect(ratchet.theme.minResolvedMetricGroups).toBe(last.previous - last.removed.length + last.added.length);
   });
 
   it('protects source coverage on metric-group graphs including all three launch themes', () => {

@@ -1,8 +1,10 @@
 import { describe, expect, it } from "vitest";
 
 import { getMetricConfig } from "../../registry";
-import { PORTS_CATALOG } from "../ports";
 import { parseStatSeriesRefs } from "../stat-series-ref";
+import { THEME_CATALOGS } from "..";
+
+const PORTS_CATALOG = THEME_CATALOGS["ports"];
 
 describe("CROSS-PAGE-DATA-SSOT-01 normalized port migration", () => {
   it("輸出入カテゴリを保持し、輸送形態合算recipeをMetricConfigに固定する", () => {

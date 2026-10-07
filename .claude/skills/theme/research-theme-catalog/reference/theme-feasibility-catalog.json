@@ -10092,6 +10092,11 @@
           "https://www.soumu.go.jp/iken/zaisei/card.html"
         ],
         "targetThemeKey": "local-finance",
+        "targetSectionKey": "fiscal-capacity",
+        "targetMetricKeys": [
+          "current-balance-ratio",
+          "future-burden-ratio"
+        ],
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],

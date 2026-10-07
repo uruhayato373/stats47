@@ -1,7 +1,9 @@
 import { describe, expect, it } from "vitest";
 
 import { EVIDENCE_SOURCE_CATALOG } from "../theme-catalog/evidence-lenses";
-import { LOCAL_ECONOMY_CATALOG } from "../theme-catalog/local-economy";
+import { THEME_CATALOGS } from "../theme-catalog";
+
+const LOCAL_ECONOMY_CATALOG = THEME_CATALOGS["local-economy"];
 
 describe("local-economy evidence topics", () => {
   it("registers the two verified regional-economy questions", () => {

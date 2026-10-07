@@ -1,0 +1,89 @@
+{
+  "$comment": "テーマページの指標を選ぶ視点の正本。採用基準 (adoptionCriteria) の定義と、提案・レビューで使う判断規則を持つ。check.kind=machine の規則は packages/data-configs/src/theme-catalog/selection-viewpoints.ts の同名関数が該当を数え、管理画面 /quality/catalog-audit に出す。review の規則は提案文書 (.claude/skills/theme/manage-theme-portfolio/reference/theme-proposal-format.md) の表で人が確かめる。採用基準の id は types.ts の ADOPTION_CRITERIA と JSON Schema の enum と一致させる (selection-viewpoints.test.ts が検査)。",
+  "version": 1,
+  "adoptionCriteria": [
+    {
+      "id": "representativeness",
+      "label": "代表性",
+      "question": "この指標はテーマの主問に直接答えるか。"
+    },
+    {
+      "id": "comparability",
+      "label": "比較可能性",
+      "question": "都道府県のあいだと年のあいだで、同じ定義・基準のまま比べられるか。"
+    },
+    {
+      "id": "complementarity",
+      "label": "補完性",
+      "question": "同じテーマのほかの指標と違う角度 (分母・対象・時点) を足すか。"
+    },
+    {
+      "id": "dataQuality",
+      "label": "データ品質",
+      "question": "47 都道府県がそろい、欠測や遡及改定が少ないか。"
+    },
+    {
+      "id": "readerValue",
+      "label": "読者への有用性",
+      "question": "読者が自分の県を比べたり、住まい・仕事・進学などを決めたりするのに直接役立つか。"
+    }
+  ],
+  "rules": [
+    {
+      "id": "card-chart-duplicate",
+      "title": "同じ指標をカードと図で二度見せない",
+      "statement": "図が描く指標がすべて同じテーマのどれか 1 枚のカードに入っているなら、その図は外す。カードは県を選ぶと推移を描くので、同じ線を下の図で繰り返さない。",
+      "severity": "fix",
+      "check": { "kind": "machine" }
+    },
+    {
+      "id": "single-year-as-trend",
+      "title": "1 年分しかない指標を推移として見せない",
+      "statement": "登録年が 1 年だけの指標は折れ線にしない。カードにするなら年を固定した比較カード (comparisonYear) にまとめ、表・棒グラフ・タイル地図で 47 都道府県を並べる。",
+      "severity": "fix",
+      "check": { "kind": "machine" }
+    },
+    {
+      "id": "owned-elsewhere",
+      "title": "ほかのテーマの主指標を抱え込まない",
+      "statement": "ほかのテーマで primary の指標をこのテーマの secondary・context に置くときは、主問に要る理由があるかを確かめる。理由がなければ外し、rejectedCandidates に主担当のテーマを書く。",
+      "severity": "review",
+      "check": { "kind": "machine" }
+    },
+    {
+      "id": "selection-evidence",
+      "title": "主要な指標には一次資料の選定根拠を書く",
+      "statement": "primary・secondary には selection を書き、満たす採用基準だけを adoptionCriteria に挙げる。根拠は公式ページからの逐語引用を backfill の gate に通してから書く。定型文で埋めない。",
+      "severity": "fix",
+      "check": { "kind": "machine" }
+    },
+    {
+      "id": "base-year-break",
+      "title": "基準年や定義の違う系列をつながない",
+      "statement": "県民経済計算の平成17年・23年・27年基準のように、基準年や定義が変わった系列を 1 本の推移にしない。新しい系列だけを使い、古い系列は rejectedCandidates に理由を残す。",
+      "severity": "review",
+      "check": { "kind": "review" }
+    },
+    {
+      "id": "scale-vs-rate",
+      "title": "総額と率・1 人当たりを取り違えさせない",
+      "statement": "総額は人口の多い県ほど大きい。総額を primary にするときは、率か 1 人当たりの指標を並べるか、章の説明に注記する。",
+      "severity": "review",
+      "check": { "kind": "review" }
+    },
+    {
+      "id": "reject-with-reason",
+      "title": "外した指標と採らなかった候補に理由を残す",
+      "statement": "外した指標と、調べたが採らなかった候補は rejectedCandidates に理由と再検討の条件を書く。次の見直しで同じ調査を繰り返さないため。",
+      "severity": "review",
+      "check": { "kind": "review" }
+    },
+    {
+      "id": "card-answers-one-question",
+      "title": "1 枚のカードは 1 つの問いに答える",
+      "statement": "カードの見出しだけで何を比べているか分かるようにする。章名を見出しに前置きせず、中身と違う見出しを付けない (例: 3 指標のカードに 2 指標の名前)。",
+      "severity": "review",
+      "check": { "kind": "review" }
+    }
+  ]
+}

@@ -6,7 +6,7 @@ developer_instructions = '''
 テーマダッシュボードの設計を担当する専門エージェント。データ発見から `ThemeCatalog` 設計までを一貫して行う。
 
 > **★ 統合カタログ SSOT**: `THEME_CATALOGS` 登録テーマは
-> **`packages/data-configs/src/theme-catalog/<key>.ts` (`ThemeCatalog`) が唯一の SSOT**。IndicatorSet TS と
+> **`data/themes/catalogs/<key>.json` (`ThemeCatalog`) が唯一の SSOT**。IndicatorSet TS と
 > page-components JSON は**そこからの生成物 (手編集禁止)**。指標選定 + チャート割当 + 選定根拠 (selection) を
 > この 1 ファイルで編集し `npm run generate:catalog` → `validate:catalog` する。
 > **2026-09-15 追加フィールドも本 agent が編集する**: `selection.adoptionCriteria`(採用基準) /
@@ -15,8 +15,8 @@ developer_instructions = '''
 > いずれも読者向け UI には描画しない内部メタデータで、`/quality/catalog-audit` が監査表示する。
 > 定型文で埋めず、根拠不足なら未記入のまま採用を保留してよい (validator は warn に留める)。
 > 規約: `.claude/rules/theme-catalog-standards.md` §4/§4.7/§4.8。調査・提案の前段は `theme-researcher` が担い、採択分を本 agent がカタログ化する。
-> **selection の置き場**: `expanded.ts` の tuple で定義された指標 (31 テーマ + 拡張 67 章) は
-> `selection-evidence.ts` に書く (§4「置き場」)。定型文の selection を一次資料で埋める作業は
+> **selection の置き場**: 全テーマとも `data/themes/catalogs/<key>.json` の各 metric の `selection` (§4「置き場」)。
+> 定型文の selection を一次資料で埋める作業は
 > skill `/backfill-theme-selection` (gate 付き writer) を通す — 手で JSON を書いて validator の
 > `[selection-*]` error を踏まない。
 
@@ -41,7 +41,7 @@ developer_instructions = '''
 ### 2. Theme component 定義は ThemeCatalog TS が唯一の SSOT
 
 **IndicatorSet と生成済み page-components にチャート定義を手編集してはならない。** Theme chart は
-`packages/data-configs/src/theme-catalog/<key>.ts` の `charts[]` に置く。
+`data/themes/catalogs/<key>.json` の `charts[]` に置く。
 
 - `IndicatorSet.charts` / `IndicatorSet.panelTabs[].charts` は廃止済み（型から削除）
 - `comparison_components` / `page_component_assignments` は廃止済み（`page_components` に統合、PR #216）
@@ -176,9 +176,9 @@ componentType 由来の汎用 description は生成しない。
 CPI→`cpi-profile`・`cpi-heatmap` / 年齢構造→`pyramid-chart` / 単一値→`kpi-card` / 考察→`markdown-section`。
 ※ 旧 `dual-line` / `donut-action` / `scatter` 等はテーマ renderer では描画されない (使わない)。
 
-### Step 7: カタログ TS 生成 (SSOT)
+### Step 7: カタログ JSON 生成 (SSOT)
 
-**`packages/data-configs/src/theme-catalog/<theme-key>.ts` (`ThemeCatalog`)** を編集し
+**`data/themes/catalogs/<theme-key>.json` (`ThemeCatalog`)** を編集し
 `npm run generate:catalog` で IndicatorSet TS + page-components JSON を再生成する (**生成物は手編集禁止**、
 pre-commit/CI の Theme Catalog Gate が弾く)。規約: `.claude/rules/theme-catalog-standards.md`。
 
@@ -210,7 +210,7 @@ Step 2 で発見した未登録指標:
 ## 出力フォーマット
 
 ```typescript
-// packages/data-configs/src/theme-catalog/<theme-key>.ts  ← カタログ駆動テーマの SSOT (これを編集)
+// data/themes/catalogs/<theme-key>.json  ← カタログ駆動テーマの SSOT (これを編集)
 import type { ThemeCatalog } from "./types";
 
 export const <THEME>_CATALOG: ThemeCatalog = {

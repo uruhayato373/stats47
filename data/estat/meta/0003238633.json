@@ -1,0 +1,1092 @@
+{
+ "statsDataId": "0003238633",
+ "title": "漁業・養殖業生産統計年報 海面漁業魚種別漁獲量累年統計(都道府県別)　全国～沖縄(1956年～2015年)",
+ "statName": "海面漁業生産統計調査",
+ "govOrg": "農林水産省",
+ "surveyDate": "201501-201512",
+ "overallTotalNumber": 260946,
+ "dimensions": [
+  {
+   "id": "tab",
+   "name": "表章項目",
+   "valueCount": 1,
+   "sampleValues": [
+    {
+     "code": "130",
+     "name": "漁獲量",
+     "unit": "t"
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "cat01",
+   "name": "漁業魚種（長期累年）",
+   "valueCount": 109,
+   "sampleValues": [
+    {
+     "code": "0100",
+     "name": "計",
+     "unit": null
+    },
+    {
+     "code": "0110",
+     "name": "魚類_計",
+     "unit": null
+    },
+    {
+     "code": "0120",
+     "name": "魚類_まぐろ類_小計",
+     "unit": null
+    },
+    {
+     "code": "0130",
+     "name": "魚類_まぐろ類_くろまぐろ",
+     "unit": null
+    },
+    {
+     "code": "0140",
+     "name": "魚類_まぐろ類_みなみまぐろ",
+     "unit": null
+    },
+    {
+     "code": "0150",
+     "name": "魚類_まぐろ類_びんなが",
+     "unit": null
+    },
+    {
+     "code": "0160",
+     "name": "魚類_まぐろ類_めばち",
+     "unit": null
+    },
+    {
+     "code": "0170",
+     "name": "魚類_まぐろ類_きはだ",
+     "unit": null
+    },
+    {
+     "code": "0180",
+     "name": "魚類_まぐろ類_その他のまぐろ類",
+     "unit": null
+    },
+    {
+     "code": "0190",
+     "name": "魚類_かじき類_小計",
+     "unit": null
+    },
+    {
+     "code": "0200",
+     "name": "魚類_かじき類_まかじき",
+     "unit": null
+    },
+    {
+     "code": "0210",
+     "name": "魚類_かじき類_めかじき",
+     "unit": null
+    },
+    {
+     "code": "0220",
+     "name": "魚類_かじき類_くろかじき類（くろかわ類）",
+     "unit": null
+    },
+    {
+     "code": "0230",
+     "name": "魚類_かじき類_その他のかじき類",
+     "unit": null
+    },
+    {
+     "code": "0240",
+     "name": "魚類_かつお類_小計",
+     "unit": null
+    },
+    {
+     "code": "0250",
+     "name": "魚類_かつお類_かつお",
+     "unit": null
+    },
+    {
+     "code": "0260",
+     "name": "魚類_かつお類_そうだがつお類",
+     "unit": null
+    },
+    {
+     "code": "0270",
+     "name": "魚類_さめ類",
+     "unit": null
+    },
+    {
+     "code": "0280",
+     "name": "魚類_さけ･ます類_小計",
+     "unit": null
+    },
+    {
+     "code": "0290",
+     "name": "魚類_さけ･ます類_さけ類",
+     "unit": null
+    },
+    {
+     "code": "0300",
+     "name": "魚類_さけ･ます類_ます類",
+     "unit": null
+    },
+    {
+     "code": "0310",
+     "name": "魚類_このしろ",
+     "unit": null
+    },
+    {
+     "code": "0320",
+     "name": "魚類_にしん",
+     "unit": null
+    },
+    {
+     "code": "0330",
+     "name": "魚類_いわし類_小計",
+     "unit": null
+    },
+    {
+     "code": "0340",
+     "name": "魚類_いわし類_まいわし",
+     "unit": null
+    },
+    {
+     "code": "0350",
+     "name": "魚類_いわし類_うるめいわし",
+     "unit": null
+    },
+    {
+     "code": "0360",
+     "name": "魚類_いわし類_かたくちいわし",
+     "unit": null
+    },
+    {
+     "code": "0370",
+     "name": "魚類_いわし類_しらす",
+     "unit": null
+    },
+    {
+     "code": "0380",
+     "name": "魚類_あじ類_小計",
+     "unit": null
+    },
+    {
+     "code": "0390",
+     "name": "魚類_あじ類_まあじ",
+     "unit": null
+    },
+    {
+     "code": "0400",
+     "name": "魚類_あじ類_むろあじ類",
+     "unit": null
+    },
+    {
+     "code": "0410",
+     "name": "魚類_さば類",
+     "unit": null
+    },
+    {
+     "code": "0420",
+     "name": "魚類_さんま",
+     "unit": null
+    },
+    {
+     "code": "0430",
+     "name": "魚類_ぶり類",
+     "unit": null
+    },
+    {
+     "code": "0440",
+     "name": "魚類_ひらめ･かれい類_小計",
+     "unit": null
+    },
+    {
+     "code": "0450",
+     "name": "魚類_ひらめ･かれい類_ひらめ",
+     "unit": null
+    },
+    {
+     "code": "0460",
+     "name": "魚類_ひらめ･かれい類_かれい類",
+     "unit": null
+    },
+    {
+     "code": "0470",
+     "name": "魚類_たら類_小計",
+     "unit": null
+    },
+    {
+     "code": "0480",
+     "name": "魚類_たら類_まだら",
+     "unit": null
+    },
+    {
+     "code": "0490",
+     "name": "魚類_たら類_すけとうだら",
+     "unit": null
+    },
+    {
+     "code": "0500",
+     "name": "魚類_ほっけ",
+     "unit": null
+    },
+    {
+     "code": "0510",
+     "name": "魚類_めぬけ類",
+     "unit": null
+    },
+    {
+     "code": "0520",
+     "name": "魚類_きちじ",
+     "unit": null
+    },
+    {
+     "code": "0530",
+     "name": "魚類_はたはた",
+     "unit": null
+    },
+    {
+     "code": "0540",
+     "name": "魚類_にぎす類",
+     "unit": null
+    },
+    {
+     "code": "0550",
+     "name": "魚類_にべ･ぐち類_計",
+     "unit": null
+    },
+    {
+     "code": "0560",
+     "name": "魚類_にべ･ぐち類_きぐち",
+     "unit": null
+    },
+    {
+     "code": "0570",
+     "name": "魚類_にべ･ぐち類_その他のにべ･ぐち類",
+     "unit": null
+    },
+    {
+     "code": "0580",
+     "name": "魚類_えそ類",
+     "unit": null
+    },
+    {
+     "code": "0590",
+     "name": "魚類_いぼだい",
+     "unit": null
+    },
+    {
+     "code": "0600",
+     "name": "魚類_あなご類",
+     "unit": null
+    },
+    {
+     "code": "0610",
+     "name": "魚類_はも",
+     "unit": null
+    },
+    {
+     "code": "0620",
+     "name": "魚類_たちうお",
+     "unit": null
+    },
+    {
+     "code": "0630",
+     "name": "魚類_ほうぼう類",
+     "unit": null
+    },
+    {
+     "code": "0640",
+     "name": "魚類_かながしら類",
+     "unit": null
+    },
+    {
+     "code": "0650",
+     "name": "魚類_えい類",
+     "unit": null
+    },
+    {
+     "code": "0660",
+     "name": "魚類_たい類_小計",
+     "unit": null
+    },
+    {
+     "code": "0670",
+     "name": "魚類_たい類_まだい",
+     "unit": null
+    },
+    {
+     "code": "0680",
+     "name": "魚類_たい類_ちだい･きだい",
+     "unit": null
+    },
+    {
+     "code": "0690",
+     "name": "魚類_たい類_ちだい",
+     "unit": null
+    },
+    {
+     "code": "0700",
+     "name": "魚類_たい類_きだい",
+     "unit": null
+    },
+    {
+     "code": "0710",
+     "name": "魚類_たい類_くろだい･へだい",
+     "unit": null
+    },
+    {
+     "code": "0720",
+     "name": "魚類_いさき",
+     "unit": null
+    },
+    {
+     "code": "0730",
+     "name": "魚類_さわら類",
+     "unit": null
+    },
+    {
+     "code": "0740",
+     "name": "魚類_しいら類",
+     "unit": null
+    },
+    {
+     "code": "0750",
+     "name": "魚類_とびうお類",
+     "unit": null
+    },
+    {
+     "code": "0760",
+     "name": "魚類_ぼら類",
+     "unit": null
+    },
+    {
+     "code": "0770",
+     "name": "魚類_すずき類",
+     "unit": null
+    },
+    {
+     "code": "0780",
+     "name": "魚類_いかなご類",
+     "unit": null
+    },
+    {
+     "code": "0790",
+     "name": "魚類_あまだい類",
+     "unit": null
+    },
+    {
+     "code": "0800",
+     "name": "魚類_ふぐ類",
+     "unit": null
+    },
+    {
+     "code": "0810",
+     "name": "魚類_その他の魚類",
+     "unit": null
+    },
+    {
+     "code": "0820",
+     "name": "えび類_計",
+     "unit": null
+    },
+    {
+     "code": "0830",
+     "name": "えび類_いせえび",
+     "unit": null
+    },
+    {
+     "code": "0840",
+     "name": "えび類_くるまえび",
+     "unit": null
+    },
+    {
+     "code": "0850",
+     "name": "えび類_その他のえび類",
+     "unit": null
+    },
+    {
+     "code": "0860",
+     "name": "かに類_計",
+     "unit": null
+    },
+    {
+     "code": "0870",
+     "name": "かに類_たらばがに",
+     "unit": null
+    },
+    {
+     "code": "0880",
+     "name": "かに類_ずわいがに",
+     "unit": null
+    },
+    {
+     "code": "0890",
+     "name": "かに類_べにずわいがに",
+     "unit": null
+    },
+    {
+     "code": "0900",
+     "name": "かに類_がざみ類",
+     "unit": null
+    },
+    {
+     "code": "0910",
+     "name": "かに類_その他のかに類",
+     "unit": null
+    },
+    {
+     "code": "0920",
+     "name": "おきあみ類",
+     "unit": null
+    },
+    {
+     "code": "0930",
+     "name": "貝類_計",
+     "unit": null
+    },
+    {
+     "code": "0940",
+     "name": "貝類_あわび類",
+     "unit": null
+    },
+    {
+     "code": "0950",
+     "name": "貝類_さざえ",
+     "unit": null
+    },
+    {
+     "code": "0960",
+     "name": "貝類_はまぐり類",
+     "unit": null
+    },
+    {
+     "code": "0970",
+     "name": "貝類_あさり類",
+     "unit": null
+    },
+    {
+     "code": "0980",
+     "name": "貝類_ほたてがい",
+     "unit": null
+    },
+    {
+     "code": "0990",
+     "name": "貝類_うばがい(ほっき)",
+     "unit": null
+    },
+    {
+     "code": "1000",
+     "name": "貝類_さるぼう(もがい)",
+     "unit": null
+    },
+    {
+     "code": "1010",
+     "name": "貝類_その他の貝類",
+     "unit": null
+    },
+    {
+     "code": "1020",
+     "name": "いか類_計",
+     "unit": null
+    },
+    {
+     "code": "1030",
+     "name": "いか類_こういか類",
+     "unit": null
+    },
+    {
+     "code": "1040",
+     "name": "いか類_するめいか",
+     "unit": null
+    },
+    {
+     "code": "1050",
+     "name": "いか類_あかいか",
+     "unit": null
+    },
+    {
+     "code": "1060",
+     "name": "いか類_その他のいか類",
+     "unit": null
+    },
+    {
+     "code": "1070",
+     "name": "たこ類",
+     "unit": null
+    },
+    {
+     "code": "1080",
+     "name": "うに類",
+     "unit": null
+    },
+    {
+     "code": "1090",
+     "name": "なまこ類",
+     "unit": null
+    },
+    {
+     "code": "1100",
+     "name": "海産ほ乳類",
+     "unit": null
+    },
+    {
+     "code": "1110",
+     "name": "その他の水産動物類",
+     "unit": null
+    },
+    {
+     "code": "1120",
+     "name": "海藻類_計",
+     "unit": null
+    },
+    {
+     "code": "1130",
+     "name": "海藻類_こんぶ類",
+     "unit": null
+    },
+    {
+     "code": "1140",
+     "name": "海藻類_わかめ類",
+     "unit": null
+    },
+    {
+     "code": "1150",
+     "name": "海藻類_ひじき",
+     "unit": null
+    },
+    {
+     "code": "1160",
+     "name": "海藻類_てんぐさ類",
+     "unit": null
+    },
+    {
+     "code": "1170",
+     "name": "海藻類_ふのり類",
+     "unit": null
+    },
+    {
+     "code": "1180",
+     "name": "海藻類_その他の海藻類",
+     "unit": null
+    }
+   ],
+   "hasTotal": true
+  },
+  {
+   "id": "area",
+   "name": "都道府県",
+   "valueCount": 40,
+   "sampleValues": [
+    {
+     "code": "00000",
+     "name": "全国",
+     "unit": null
+    },
+    {
+     "code": "01000",
+     "name": "北海道",
+     "unit": null
+    },
+    {
+     "code": "02000",
+     "name": "青森県",
+     "unit": null
+    },
+    {
+     "code": "03000",
+     "name": "岩手県",
+     "unit": null
+    },
+    {
+     "code": "04000",
+     "name": "宮城県",
+     "unit": null
+    },
+    {
+     "code": "05000",
+     "name": "秋田県",
+     "unit": null
+    },
+    {
+     "code": "06000",
+     "name": "山形県",
+     "unit": null
+    },
+    {
+     "code": "07000",
+     "name": "福島県",
+     "unit": null
+    },
+    {
+     "code": "08000",
+     "name": "茨城県",
+     "unit": null
+    },
+    {
+     "code": "12000",
+     "name": "千葉県",
+     "unit": null
+    },
+    {
+     "code": "13000",
+     "name": "東京都",
+     "unit": null
+    },
+    {
+     "code": "14000",
+     "name": "神奈川県",
+     "unit": null
+    },
+    {
+     "code": "15000",
+     "name": "新潟県",
+     "unit": null
+    },
+    {
+     "code": "16000",
+     "name": "富山県",
+     "unit": null
+    },
+    {
+     "code": "17000",
+     "name": "石川県",
+     "unit": null
+    },
+    {
+     "code": "18000",
+     "name": "福井県",
+     "unit": null
+    },
+    {
+     "code": "22000",
+     "name": "静岡県",
+     "unit": null
+    },
+    {
+     "code": "23000",
+     "name": "愛知県",
+     "unit": null
+    },
+    {
+     "code": "24000",
+     "name": "三重県",
+     "unit": null
+    },
+    {
+     "code": "26000",
+     "name": "京都府",
+     "unit": null
+    },
+    {
+     "code": "27000",
+     "name": "大阪府",
+     "unit": null
+    },
+    {
+     "code": "28000",
+     "name": "兵庫県",
+     "unit": null
+    },
+    {
+     "code": "30000",
+     "name": "和歌山県",
+     "unit": null
+    },
+    {
+     "code": "31000",
+     "name": "鳥取県",
+     "unit": null
+    },
+    {
+     "code": "32000",
+     "name": "島根県",
+     "unit": null
+    },
+    {
+     "code": "33000",
+     "name": "岡山県",
+     "unit": null
+    },
+    {
+     "code": "34000",
+     "name": "広島県",
+     "unit": null
+    },
+    {
+     "code": "35000",
+     "name": "山口県",
+     "unit": null
+    },
+    {
+     "code": "36000",
+     "name": "徳島県",
+     "unit": null
+    },
+    {
+     "code": "37000",
+     "name": "香川県",
+     "unit": null
+    },
+    {
+     "code": "38000",
+     "name": "愛媛県",
+     "unit": null
+    },
+    {
+     "code": "39000",
+     "name": "高知県",
+     "unit": null
+    },
+    {
+     "code": "40000",
+     "name": "福岡県",
+     "unit": null
+    },
+    {
+     "code": "41000",
+     "name": "佐賀県",
+     "unit": null
+    },
+    {
+     "code": "42000",
+     "name": "長崎県",
+     "unit": null
+    },
+    {
+     "code": "43000",
+     "name": "熊本県",
+     "unit": null
+    },
+    {
+     "code": "44000",
+     "name": "大分県",
+     "unit": null
+    },
+    {
+     "code": "45000",
+     "name": "宮崎県",
+     "unit": null
+    },
+    {
+     "code": "46000",
+     "name": "鹿児島県",
+     "unit": null
+    },
+    {
+     "code": "47000",
+     "name": "沖縄県",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "time",
+   "name": "年次",
+   "valueCount": 60,
+   "sampleValues": [
+    {
+     "code": "2015000000",
+     "name": "2015年",
+     "unit": null
+    },
+    {
+     "code": "2014000000",
+     "name": "2014年",
+     "unit": null
+    },
+    {
+     "code": "2013000000",
+     "name": "2013年",
+     "unit": null
+    },
+    {
+     "code": "2012000000",
+     "name": "2012年",
+     "unit": null
+    },
+    {
+     "code": "2011000000",
+     "name": "2011年",
+     "unit": null
+    },
+    {
+     "code": "2010000000",
+     "name": "2010年",
+     "unit": null
+    },
+    {
+     "code": "2009000000",
+     "name": "2009年",
+     "unit": null
+    },
+    {
+     "code": "2008000000",
+     "name": "2008年",
+     "unit": null
+    },
+    {
+     "code": "2007000000",
+     "name": "2007年",
+     "unit": null
+    },
+    {
+     "code": "2006000000",
+     "name": "2006年",
+     "unit": null
+    },
+    {
+     "code": "2005000000",
+     "name": "2005年",
+     "unit": null
+    },
+    {
+     "code": "2004000000",
+     "name": "2004年",
+     "unit": null
+    },
+    {
+     "code": "2003000000",
+     "name": "2003年",
+     "unit": null
+    },
+    {
+     "code": "2002000000",
+     "name": "2002年",
+     "unit": null
+    },
+    {
+     "code": "2001000000",
+     "name": "2001年",
+     "unit": null
+    },
+    {
+     "code": "2000000000",
+     "name": "2000年",
+     "unit": null
+    },
+    {
+     "code": "1999000000",
+     "name": "1999年",
+     "unit": null
+    },
+    {
+     "code": "1998000000",
+     "name": "1998年",
+     "unit": null
+    },
+    {
+     "code": "1997000000",
+     "name": "1997年",
+     "unit": null
+    },
+    {
+     "code": "1996000000",
+     "name": "1996年",
+     "unit": null
+    },
+    {
+     "code": "1995000000",
+     "name": "1995年",
+     "unit": null
+    },
+    {
+     "code": "1994000000",
+     "name": "1994年",
+     "unit": null
+    },
+    {
+     "code": "1993000000",
+     "name": "1993年",
+     "unit": null
+    },
+    {
+     "code": "1992000000",
+     "name": "1992年",
+     "unit": null
+    },
+    {
+     "code": "1991000000",
+     "name": "1991年",
+     "unit": null
+    },
+    {
+     "code": "1990000000",
+     "name": "1990年",
+     "unit": null
+    },
+    {
+     "code": "1989000000",
+     "name": "1989年",
+     "unit": null
+    },
+    {
+     "code": "1988000000",
+     "name": "1988年",
+     "unit": null
+    },
+    {
+     "code": "1987000000",
+     "name": "1987年",
+     "unit": null
+    },
+    {
+     "code": "1986000000",
+     "name": "1986年",
+     "unit": null
+    },
+    {
+     "code": "1985000000",
+     "name": "1985年",
+     "unit": null
+    },
+    {
+     "code": "1984000000",
+     "name": "1984年",
+     "unit": null
+    },
+    {
+     "code": "1983000000",
+     "name": "1983年",
+     "unit": null
+    },
+    {
+     "code": "1982000000",
+     "name": "1982年",
+     "unit": null
+    },
+    {
+     "code": "1981000000",
+     "name": "1981年",
+     "unit": null
+    },
+    {
+     "code": "1980000000",
+     "name": "1980年",
+     "unit": null
+    },
+    {
+     "code": "1979000000",
+     "name": "1979年",
+     "unit": null
+    },
+    {
+     "code": "1978000000",
+     "name": "1978年",
+     "unit": null
+    },
+    {
+     "code": "1977000000",
+     "name": "1977年",
+     "unit": null
+    },
+    {
+     "code": "1976000000",
+     "name": "1976年",
+     "unit": null
+    },
+    {
+     "code": "1975000000",
+     "name": "1975年",
+     "unit": null
+    },
+    {
+     "code": "1974000000",
+     "name": "1974年",
+     "unit": null
+    },
+    {
+     "code": "1973000000",
+     "name": "1973年",
+     "unit": null
+    },
+    {
+     "code": "1972000000",
+     "name": "1972年",
+     "unit": null
+    },
+    {
+     "code": "1971000000",
+     "name": "1971年",
+     "unit": null
+    },
+    {
+     "code": "1970000000",
+     "name": "1970年",
+     "unit": null
+    },
+    {
+     "code": "1969000000",
+     "name": "1969年",
+     "unit": null
+    },
+    {
+     "code": "1968000000",
+     "name": "1968年",
+     "unit": null
+    },
+    {
+     "code": "1967000000",
+     "name": "1967年",
+     "unit": null
+    },
+    {
+     "code": "1966000000",
+     "name": "1966年",
+     "unit": null
+    },
+    {
+     "code": "1965000000",
+     "name": "1965年",
+     "unit": null
+    },
+    {
+     "code": "1964000000",
+     "name": "1964年",
+     "unit": null
+    },
+    {
+     "code": "1963000000",
+     "name": "1963年",
+     "unit": null
+    },
+    {
+     "code": "1962000000",
+     "name": "1962年",
+     "unit": null
+    },
+    {
+     "code": "1961000000",
+     "name": "1961年",
+     "unit": null
+    },
+    {
+     "code": "1960000000",
+     "name": "1960年",
+     "unit": null
+    },
+    {
+     "code": "1959000000",
+     "name": "1959年",
+     "unit": null
+    },
+    {
+     "code": "1958000000",
+     "name": "1958年",
+     "unit": null
+    },
+    {
+     "code": "1957000000",
+     "name": "1957年",
+     "unit": null
+    },
+    {
+     "code": "1956000000",
+     "name": "1956年",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  }
+ ]
+}

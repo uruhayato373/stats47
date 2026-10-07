@@ -1,0 +1,132 @@
+{
+  "key": "childcare-services",
+  "title": "保育の需給",
+  "description": "保育所等の数・在所児・利用率と認定こども園数に加え、2025年4月1日の保育所等利用申込者数を比較します。申込者には利用中の児童も含まれます。指標によって対象年や集計範囲が異なるため、申込者と別の指標の定員を差し引いて待機児童数とはしません。",
+  "category": "education",
+  "usage": "theme",
+  "metrics": [
+    {
+      "rankingKey": "nursery-count-per-100k-0-5",
+      "shortLabel": "保育所等数（0～5歳人口10万人当たり）",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "保育所等数（0～5歳人口10万人当たり）を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "nursery-children-per-nursery-teacher",
+      "shortLabel": "保育所等在所児数（保育士1人当たり）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "保育所等在所児数（保育士1人当たり）を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "nursery-utilization-rate",
+      "shortLabel": "保育所等利用率（在所児数／定員数）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "保育所等利用率（在所児数／定員数）を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "certified-childcare-center-count-per-100k-0-5",
+      "shortLabel": "認定こども園数（0～5歳人口10万人当たり）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "認定こども園数（0～5歳人口10万人当たり）を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "childcare-applicants",
+      "shortLabel": "保育所等利用申込者数（4月1日時点）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "保育所等利用申込者数（4月1日時点）を都道府県別の実値として比較する。"
+      }
+    }
+  ],
+  "charts": [],
+  "metricGroups": [
+    {
+      "key": "childcare-services-indicator-1",
+      "title": "保育所等数（0～5歳人口10万人当たり）",
+      "rankingKeys": [
+        "nursery-count-per-100k-0-5"
+      ],
+      "defaultCheckedKeys": [
+        "nursery-count-per-100k-0-5"
+      ]
+    },
+    {
+      "key": "childcare-services-indicator-2",
+      "title": "保育所等在所児数（保育士1人当たり）",
+      "rankingKeys": [
+        "nursery-children-per-nursery-teacher"
+      ],
+      "defaultCheckedKeys": [
+        "nursery-children-per-nursery-teacher"
+      ]
+    },
+    {
+      "key": "childcare-services-indicator-3",
+      "title": "保育所等利用率（在所児数／定員数）",
+      "rankingKeys": [
+        "nursery-utilization-rate"
+      ],
+      "defaultCheckedKeys": [
+        "nursery-utilization-rate"
+      ]
+    },
+    {
+      "key": "childcare-services-indicator-4",
+      "title": "認定こども園数（0～5歳人口10万人当たり）",
+      "rankingKeys": [
+        "certified-childcare-center-count-per-100k-0-5"
+      ],
+      "defaultCheckedKeys": [
+        "certified-childcare-center-count-per-100k-0-5"
+      ]
+    },
+    {
+      "key": "childcare-services-indicator-5",
+      "title": "保育所等利用申込者数（4月1日時点）",
+      "rankingKeys": [
+        "childcare-applicants"
+      ],
+      "defaultCheckedKeys": [
+        "childcare-applicants"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "key": "childcare-services-overview",
+      "title": "保育の需給を都道府県別に見る",
+      "description": "保育所等の数・在所児・利用率と認定こども園数に加え、2025年4月1日の保育所等利用申込者数を比較します。申込者には利用中の児童も含まれます。指標によって対象年や集計範囲が異なるため、申込者と別の指標の定員を差し引いて待機児童数とはしません。",
+      "metricGroupKeys": [
+        "childcare-services-indicator-1",
+        "childcare-services-indicator-2",
+        "childcare-services-indicator-3",
+        "childcare-services-indicator-4",
+        "childcare-services-indicator-5"
+      ]
+    }
+  ],
+  "keywords": [
+    "保育",
+    "保育所",
+    "待機児童",
+    "こども園"
+  ]
+}

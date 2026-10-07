@@ -1,8 +1,10 @@
 import { describe, expect, it } from "vitest";
 
 import { EVIDENCE_SOURCE_CATALOG } from "../theme-catalog/evidence-lenses";
-import { FISHERY_MARINE_CATALOG } from "../theme-catalog/fishery-marine";
 import { METRICS_REGISTRY } from "../registry";
+import { THEME_CATALOGS } from "../theme-catalog";
+
+const FISHERY_MARINE_CATALOG = THEME_CATALOGS["fishery-marine"];
 
 describe("fishery-marine evidence topics", () => {
   it("供給構造と担い手基盤を別の論点として扱う", () => {

@@ -29,3 +29,6 @@ export const PSI_URLS = "config/psi-urls.txt";
 export const LOCAL_RESOURCES = "config/local-resources.json";
 export const SOURCE_VAULT = "config/source-vault.json";
 export const YOY_BATCH = "config/yoy-batch.json";
+
+// テーマページの指標を選ぶ視点 (採用基準・判断規則。管理画面と提案文書が読む)
+export const THEME_SELECTION_VIEWPOINTS = "config/theme-selection-viewpoints.json";

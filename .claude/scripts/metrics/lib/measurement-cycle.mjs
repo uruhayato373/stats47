@@ -352,6 +352,7 @@ export function summarizePaidPurchases({ ledger, liveProductCount, weekStart, we
  * @param {string} input.week
  * @param {string} input.asOf
  * @param {Array<object>|null} input.gscHistory data/gsc/history.csv
+ * @param {Array<object>|null} [input.ga4Finalized] data/ga4/history-finalized7d.csv (Japan-only の確定 7 日。4 行の和 = 28 日 PV)
  * @param {Array<object>|null} input.cycleHistory measurement-cycle/history.csv (今週の行を除く過去分)
  * @param {object|null} input.journey summarizeJourney の結果
  * @param {object|null} input.workContext summarizeWorkContext の結果
@@ -362,13 +363,19 @@ export function summarizePaidPurchases({ ledger, liveProductCount, weekStart, we
  * @param {string[]} input.focusKpis 今月の重点レーンの KPI id
  * @param {number} input.maxActive active 施策の上限
  */
-export function summarizeKpiTree({ nodes, week, asOf, gscHistory, cycleHistory, journey, workContext, affiliateRows, operations, authenticated = null, dataQuality = null, paidPurchases = null, improvementRows, focusKpis, maxActive }) {
+export function summarizeKpiTree({ nodes, week, asOf, gscHistory, ga4Finalized = null, cycleHistory, journey, workContext, affiliateRows, operations, authenticated = null, dataQuality = null, paidPurchases = null, improvementRows, focusKpis, maxActive }) {
   if (!nodes) return null;
   const prevWeek = shiftIsoWeek(week, -KPI_COMPARE_WEEKS_BACK);
   const gscNow = gscHistory?.find((r) => r.week === week) ?? null;
   const gscPrev = gscHistory?.find((r) => r.week === prevWeek) ?? null;
   const cyclePrev = cycleHistory?.find((r) => r.week === prevWeek) ?? null;
   const num = (v) => (v === "" || v == null || Number.isNaN(Number(v)) ? null : Number(v));
+  // 確定 7 日の 4 週の和。1 週でも欠ける・欠測日があれば null (部分和を 28 日 PV と呼ばない)
+  const pageviews28d = (endWeek) => {
+    const rows = [0, 1, 2, 3].map((i) => ga4Finalized?.find((r) => r.week === shiftIsoWeek(endWeek, -i)));
+    if (rows.some((r) => !r || num(r.pageviews_jp7d) == null || num(r.missing_days) !== 0)) return null;
+    return rows.reduce((sum, r) => sum + num(r.pageviews_jp7d), 0);
+  };
   const aff = (affiliateRows ?? [])
     .filter((r) => r.affiliate_vertical === "_all" && r.link_position === "_all" && r.date <= asOf)
     .sort((a, b) => a.date.localeCompare(b.date) || Number(a.days) - Number(b.days))
@@ -397,6 +404,14 @@ export function summarizeKpiTree({ nodes, week, asOf, gscHistory, cycleHistory, 
         return gscNow
           ? { status: "ok", value: `${num(gscNow.clicks_rolling28d)}`, previous: gscPrev ? `${num(gscPrev.clicks_rolling28d)}` : null }
           : { status: "missing", value: null, previous: null, note: `gsc/history.csv に ${week} の行が無い` };
+      case "site-pageviews": {
+        const now = pageviews28d(week);
+        if (now == null) return { status: "missing", value: null, previous: null, note: `ga4/history-finalized7d.csv に ${week} までの 4 週 (欠測日なし) がそろっていない` };
+        const prev = pageviews28d(prevWeek);
+        return { status: "ok", value: `${now}`, previous: prev == null ? null : `${prev}` };
+      }
+      case "ad-yield":
+        return { status: "not-connected", value: null, previous: null, note: "AdSense の再開 (ADSENSE-RESTART-01) の承認後に、AdSense 収益 ÷ GA4 Japan PV × 1,000 として接続する。停止前 W30〜W33 は ¥22" };
       case "site-circulation-rate":
         return journey
           ? { status: "ok", value: pct(journey.blogToRanking.rate), previous: num(cyclePrev?.blogToRankingRate) == null ? null : pct(num(cyclePrev.blogToRankingRate)) }

@@ -3,7 +3,7 @@ description = "テーマダッシュボードの ThemeCatalog chart設計・監�
 developer_instructions = '''
 # Theme Component Builder Agent
 
-> **Theme chart の唯一の SSOT** は `packages/data-configs/src/theme-catalog/<key>.ts`。
+> **Theme chart の唯一の SSOT** は `data/themes/catalogs/<key>.json`。
 > `page-components/theme/<key>.json` と IndicatorSet は生成物で手編集禁止。`charts[]` を編集し
 > `npm run generate:catalog` → `npm run validate:catalog` → `generate:catalog --check` を実行する。
 > 規約: `.claude/rules/theme-catalog-standards.md`。

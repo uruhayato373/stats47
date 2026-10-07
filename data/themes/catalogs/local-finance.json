@@ -1,0 +1,928 @@
+{
+  "key": "local-finance",
+  "title": "地方財政",
+  "description": "都道府県の歳入歳出、財政の弾力性、現在と将来の負担を決算年度付きで把握する。",
+  "category": "economy",
+  "usage": "theme",
+  "metrics": [
+    {
+      "rankingKey": "fiscal-strength-index-prefecture",
+      "shortLabel": "財政力指数",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "財政用語の解説「財政力指数」（長泉町公式サイト）",
+        "sourceUrl": "https://www.town.nagaizumi.lg.jp/soshiki/kikaku/4/1631.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "地方公共団体の財政運営を語るうえで、自主的な税収でどこまで標準的な行政需要を賄えるかを示すこの指数は最も基本的な出発点であり、地方交付税に頼る度合いという地域差を1つの数値に集約できる。都道府県間の財源基盤の違いを比較する章の中心指標として、他の収支・負担指標を読み解く前提を与える。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability"
+        ],
+        "readerQuestion": "自分の都道府県は自前の税収でどれだけ標準的な行政サービスを賄えているか。",
+        "targetReaderOrDecision": "都道府県間の財源基盤の違いを比較したい読者。"
+      }
+    },
+    {
+      "rankingKey": "current-balance-ratio",
+      "shortLabel": "経常収支比率",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "財政用語の解説「経常収支比率」（長泉町公式サイト）",
+        "sourceUrl": "https://www.town.nagaizumi.lg.jp/soshiki/kikaku/4/1631.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "この指標は財源が義務的経費で固定化されている度合い、すなわち政策的な自由度をどれだけ残せているかを測るものであり、財政力指数が示す財源の量とは別の角度から財政運営の余裕を評価できる。硬直度が高いほど新規施策や緊急対応に回せる一般財源が乏しいことを示すため、財政運営の余裕と負担を扱う章で財政力指数を補完する役割を持つ。",
+        "adoptionCriteria": [
+          "complementarity",
+          "comparability"
+        ],
+        "readerQuestion": "経常的な支出に一般財源がどれだけ縛られており、政策的に自由に使える余地がどれくらい残っているか。",
+        "targetReaderOrDecision": "財政運営の弾力性・硬直化の程度を都道府県間で比較したい読者。"
+      }
+    },
+    {
+      "rankingKey": "real-public-debt-service-ratio",
+      "shortLabel": "実質公債費比率",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "健全化判断比率の説明「実質公債費比率」（大阪市公式サイト）",
+        "sourceUrl": "https://www.city.osaka.lg.jp/zaisei/page/0000661357.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "地方公共団体の財政健全化法に基づく4指標の一つであり、単年度の借入返済負担が財政規模に対してどれだけ重いかを公営企業や特別会計への繰出しまで含めて捉える点で、単純な起債残高だけでは見えない現在の負担の実態を示す。現在の負担を扱う章で、将来負担比率と対をなす指標として位置付けられる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "dataQuality"
+        ],
+        "readerQuestion": "自分の都道府県は毎年度の借金返済の負担がどれだけ財政規模に対して重いか。",
+        "targetReaderOrDecision": "現在の公債費負担の重さを都道府県間で比較したい読者。"
+      }
+    },
+    {
+      "rankingKey": "future-burden-ratio",
+      "shortLabel": "将来負担比率",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "健全化判断比率の説明「将来負担比率」（大阪市公式サイト）",
+        "sourceUrl": "https://www.city.osaka.lg.jp/zaisei/page/0000661357.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "実質公債費比率が単年度の返済負担を示すのに対し、この指標は地方公社や第三セクターの損失補償まで含めた将来にわたる潜在的負債の残高を捉えるものであり、現在と将来の負担を区別して把握するというテーマの目的に直結する。財政健全化法の4指標の一つとして、都道府県間で共通の基準に基づき算定されるため比較可能性も高い。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability",
+          "complementarity"
+        ],
+        "readerQuestion": "自分の都道府県は将来にわたってどれだけの潜在的な負債を抱えているか。",
+        "targetReaderOrDecision": "将来世代への負担の大きさを都道府県間で比較したい読者。"
+      }
+    },
+    {
+      "rankingKey": "real-balance-ratio",
+      "shortLabel": "実質収支比率",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-08",
+        "rationale": "実質収支比率は専用の決算カード・財政フローを読むための補足指標として全指標索引から参照する。表示する金額と比率、都道府県会計と市町村を含む集計の範囲を区別する。"
+      }
+    },
+    {
+      "rankingKey": "local-tax-ratio-pref-finance",
+      "shortLabel": "地方税割合",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-08",
+        "rationale": "地方税割合は専用の決算カード・財政フローを読むための補足指標として全指標索引から参照する。表示する金額と比率、都道府県会計と市町村を含む集計の範囲を区別する。"
+      }
+    },
+    {
+      "rankingKey": "local-allocation-tax-ratio-pref-finance",
+      "shortLabel": "交付税割合",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-08",
+        "rationale": "交付税割合は専用の決算カード・財政フローを読むための補足指標として全指標索引から参照する。表示する金額と比率、都道府県会計と市町村を含む集計の範囲を区別する。"
+      }
+    },
+    {
+      "rankingKey": "national-treasury-disbursement-ratio-pref-finance",
+      "shortLabel": "国庫支出金割合",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-08",
+        "rationale": "国庫支出金割合は専用の決算カード・財政フローを読むための補足指標として全指標索引から参照する。表示する金額と比率、都道府県会計と市町村を含む集計の範囲を区別する。"
+      }
+    },
+    {
+      "rankingKey": "self-financing-ratio",
+      "shortLabel": "自主財源割合",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-08",
+        "rationale": "自主財源割合は専用の決算カード・財政フローを読むための補足指標として全指標索引から参照する。表示する金額と比率、都道府県会計と市町村を含む集計の範囲を区別する。"
+      }
+    },
+    {
+      "rankingKey": "per-capita-total-expenditure-pref-municipal",
+      "shortLabel": "歳出決算総額（人口1人当たり）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/D",
+        "surveyedAt": "2026-09-08",
+        "rationale": "人口1人を基準にした歳出決算総額として比較する。関連指標の索引で補足する。"
+      }
+    },
+    {
+      "rankingKey": "personnel-expenditure-ratio-pref-finance",
+      "shortLabel": "人件費割合",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "財政用語の解説「人件費」（富山市公式ウェブサイト）",
+        "sourceUrl": "https://www.city.toyama.lg.jp/shisei/yosan/1010829/1003118.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "人件費は性質別歳出の中で義務的経費の柱の一つであり、経常収支比率を押し上げる主要因でもあるため、歳出決算総額に占める人件費の割合を見ることで、財政の硬直化の内訳を職員給与や議員報酬といった具体的な支出項目に分解して確認できる。性質別歳出を分けて見る章で、経常収支比率の内実を裏付ける補完的な指標となる。",
+        "adoptionCriteria": [
+          "complementarity",
+          "readerValue"
+        ],
+        "readerQuestion": "都道府県の歳出のうちどれだけが職員給与など人件費に充てられているか。",
+        "targetReaderOrDecision": "性質別歳出の構成を職種・給与の観点から確認したい読者。"
+      }
+    },
+    {
+      "rankingKey": "assistance-expenditure-ratio-pref-finance",
+      "shortLabel": "扶助費割合",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "地方財政の状況（総務省、令和7年3月）第1部 4 地方経費の内容「性質別歳出」",
+        "sourceUrl": "https://www.soumu.go.jp/main_content/000998475.pdf",
+        "surveyedAt": "2026-09-16",
+        "rationale": "総務省の地方財政白書は扶助費を義務的経費の一つとして位置付け、生活困窮者・児童・障害者等への援助に要する経費であり任意に削減することが困難な支出であると説明している。扶助費割合は歳出に占める義務的な社会保障関係経費の重さを示し、都道府県財政の弾力性を測る指標として「財政運営の余裕と負担」の章の問いに直結する。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability"
+        ],
+        "readerQuestion": "自分の都道府県は歳出のうちどれくらいを社会保障関係の給付に振り向けているか。",
+        "targetReaderOrDecision": "都道府県の財政の硬直度合いを他地域と比較したい読者。"
+      }
+    },
+    {
+      "rankingKey": "investment-expenditure-ratio-pref-finance",
+      "shortLabel": "投資的経費割合",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和5年版 地方財政白書ビジュアル版（令和3年度決算）「歳出 4.性質別歳出」（総務省）",
+        "sourceUrl": "https://www.soumu.go.jp/iken/zaisei/r05data/2023data/r05020304.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "地方財政白書ビジュアル版は性質別歳出を義務的経費・投資的経費・その他の経費の3区分で説明しており、投資的経費は普通建設事業費など社会資本整備に充てられる裁量的支出として義務的経費と対比される。投資的経費割合は歳出構成の裁量性を示し、扶助費割合など義務的経費の比率と組み合わせることで財政運営の余裕を多面的に把握できる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "complementarity",
+          "comparability"
+        ],
+        "readerQuestion": "この都道府県は社会資本整備にどれだけ歳出を振り向けているか、それは年々どう変化しているか。",
+        "targetReaderOrDecision": "公共投資の水準を地域間・時系列で比較したい読者。"
+      }
+    },
+    {
+      "rankingKey": "welfare-expenditure-ratio-pref-finance",
+      "shortLabel": "民生費割合",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-08",
+        "rationale": "民生費割合は専用の決算カード・財政フローを読むための補足指標として全指標索引から参照する。表示する金額と比率、都道府県会計と市町村を含む集計の範囲を区別する。"
+      }
+    },
+    {
+      "rankingKey": "education-expenditure-ratio-pref-finance",
+      "shortLabel": "教育費割合",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-08",
+        "rationale": "教育費割合は専用の決算カード・財政フローを読むための補足指標として全指標索引から参照する。表示する金額と比率、都道府県会計と市町村を含む集計の範囲を区別する。"
+      }
+    },
+    {
+      "rankingKey": "public-works-expenditure-ratio-pref-finance",
+      "shortLabel": "土木費割合",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-08",
+        "rationale": "土木費割合は専用の決算カード・財政フローを読むための補足指標として全指標索引から参照する。表示する金額と比率、都道府県会計と市町村を含む集計の範囲を区別する。"
+      }
+    },
+    {
+      "rankingKey": "per-capita-inhabitant-tax-pref-municipal",
+      "shortLabel": "住民税（人口1人当たり）",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/D",
+        "surveyedAt": "2026-09-08",
+        "rationale": "人口1人を基準にした住民税として比較する。関連指標の索引で補足する。"
+      }
+    },
+    {
+      "rankingKey": "per-taxpayer-taxable-income",
+      "shortLabel": "課税対象所得（納税義務者1人当たり）",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/D",
+        "surveyedAt": "2026-09-08",
+        "rationale": "納税義務者1人を基準にした課税対象所得として比較する。関連指標の索引で補足する。"
+      }
+    },
+    {
+      "rankingKey": "taxpayer-ratio-per-pref-resident",
+      "shortLabel": "納税義務者割合",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-08",
+        "rationale": "納税義務者割合は専用の決算カード・財政フローを読むための補足指標として全指標索引から参照する。表示する金額と比率、都道府県会計と市町村を含む集計の範囲を区別する。"
+      }
+    },
+    {
+      "rankingKey": "laspeyres-index-prefecture",
+      "shortLabel": "ラスパイレス指数",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.soumu.go.jp/iken/kyuyo.html",
+        "surveyedAt": "2026-09-08",
+        "rationale": "ラスパイレス指数は専用の決算カード・財政フローを読むための補足指標として全指標索引から参照する。表示する金額と比率、都道府県会計と市町村を含む集計の範囲を区別する。"
+      }
+    },
+    {
+      "rankingKey": "municipality-count",
+      "shortLabel": "市町村数",
+      "role": "context",
+      "selection": {
+        "proposedBy": "参考文献由来テーマ企画 REFERENCE-CONTENT-DRAFTS-01",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-14",
+        "rationale": "自治体数を行政サービス・財政指標を読む基礎条件として詳細索引に保持する。"
+      }
+    },
+    {
+      "rankingKey": "households-on-public-assistance",
+      "shortLabel": "生活保護被保護実世帯数",
+      "role": "context",
+      "selection": {
+        "proposedBy": "参考文献由来テーマ企画 REFERENCE-CONTENT-DRAFTS-01",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-14",
+        "rationale": "扶助費比率の実数根拠として、制度利用世帯数を財政の基礎条件に保持する。"
+      }
+    },
+    {
+      "rankingKey": "child-welfare-expenses-prefecture",
+      "shortLabel": "児童福祉費（都道府県財政）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "地方財政の状況（総務省、令和7年3月）第1部 4 地方経費の内容「目的別歳出」民生費",
+        "sourceUrl": "https://www.soumu.go.jp/main_content/000998475.pdf",
+        "surveyedAt": "2026-09-16",
+        "rationale": "地方財政白書は目的別歳出のうち民生費の内訳として児童福祉費の決算額と前年度比の増減を示しており、都道府県においても児童福祉費は民生費の中で大きな構成比を占める費目として扱われている。児童福祉費の実額を把握することは「児童福祉への支出と公的給付」の章で都道府県間の子育て関連支出の規模を比較する出発点になる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "dataQuality"
+        ],
+        "readerQuestion": "この都道府県は児童福祉にどれだけの決算額を支出しているか。",
+        "targetReaderOrDecision": "子育て関連の財政支出規模を都道府県ごとに把握したい読者。"
+      }
+    },
+    {
+      "rankingKey": "child-welfare-expenditure-ratio-pref-finance",
+      "shortLabel": "児童福祉費割合",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
+        "surveyedAt": "2026-09-09",
+        "rationale": "児童福祉費割合を既存テーマの独立章へ追加する。"
+      }
+    },
+    {
+      "rankingKey": "child-rearing-allowance-recipients",
+      "shortLabel": "児童扶養手当受給者数（ひとり親等）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "用語の定義 J1401 児童扶養手当受給者数（福祉行政報告例－社会福祉行政業務報告－、厚生労働省政策統括官付参事官付行政報告統計室）",
+        "sourceUrl": "https://www.e-stat.go.jp/koumoku/koumoku_teigi/J",
+        "surveyedAt": "2026-09-16",
+        "rationale": "厚生労働省の福祉行政報告例に基づく定義は、児童扶養手当受給者数がひとり親家庭等に対する現金給付制度の年度末利用実績であることを明示している。歳出側の児童福祉費・児童福祉費割合が支出の規模を示すのに対し、この指標は給付を受ける世帯・児童の実人数という需要側の指標であり、「児童福祉への支出と公的給付」の章で支出と受給実態を突き合わせる補完材料になる。",
+        "adoptionCriteria": [
+          "complementarity",
+          "dataQuality",
+          "readerValue"
+        ],
+        "readerQuestion": "この都道府県でひとり親家庭等が児童扶養手当をどれだけ受給しているか。",
+        "targetReaderOrDecision": "児童福祉費の支出規模と実際の受給者数を突き合わせたい読者。"
+      }
+    },
+    {
+      "rankingKey": "maintenance-repair-expenses-prefecture",
+      "shortLabel": "維持補修費（都道府県財政）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "地方財政の状況（総務省、令和7年3月）第1部 4 地方経費の内容「性質別歳出」",
+        "sourceUrl": "https://www.soumu.go.jp/main_content/000998475.pdf",
+        "surveyedAt": "2026-09-16",
+        "rationale": "地方財政白書は維持補修費を「地方公共団体が管理する施設等の維持に要する経費」と定義し、決算額と前年度比の増減を毎年公表している。投資的経費（新規整備）と対になる既存施設の維持管理コストを示す指標であり、「公共施設の量と維持・建設への支出」の章で施設の老朽化対応に係る財政負担を都道府県間・経年で比較する材料になる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "complementarity",
+          "dataQuality"
+        ],
+        "readerQuestion": "この都道府県は既存の公共施設の維持管理にどれだけ歳出を割いているか、それは増加傾向にあるか。",
+        "targetReaderOrDecision": "公共施設の老朽化対応コストを地域間・時系列で比較したい読者。"
+      }
+    },
+    {
+      "rankingKey": "ordinary-construction-expenses-prefecture",
+      "shortLabel": "普通建設事業費（都道府県財政）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "政府統計の総合窓口 e-Stat「項目の定義」D 行政基盤 D310406 普通建設事業費（都道府県財政）（総務省・社会・人口統計体系）",
+        "sourceUrl": "https://www.e-stat.go.jp/koumoku/koumoku_teigi/D",
+        "surveyedAt": "2026-09-16",
+        "rationale": "この定義は普通建設事業費を「公共又は公用施設の新増設・更新等に要する経費」と明確に位置付けており、都道府県が道路・庁舎・学校等の施設整備にどれだけ歳出を投じているかを示す代表的な投資的経費の指標である。テーマ「公共施設の量と維持・建設への支出」の章において、支出額の面から施設整備の実態を把握するために直接必要な指標であり、他の経常的経費とは異なる角度から歳出を捉える点で補完性も持つ。",
+        "adoptionCriteria": [
+          "representativeness",
+          "complementarity"
+        ],
+        "readerQuestion": "都道府県は施設の新増設・更新にどれだけの経費を投じているか。",
+        "targetReaderOrDecision": "都道府県の投資的経費・公共施設整備状況を比較したい読者。"
+      }
+    },
+    {
+      "rankingKey": "prefectural-public-building-floor-area",
+      "shortLabel": "都道府県有建物の延面積（年度末）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "総務省「公共施設状況調査」統計表情報（政府統計の総合窓口 e-Stat）",
+        "sourceUrl": "https://www.e-stat.go.jp/statistics/00200252",
+        "surveyedAt": "2026-09-16",
+        "rationale": "公共施設状況調査は住民福祉の向上と地方公共団体の能率的な行政に資する資料作成を目的として、道路や公園をはじめとする公共施設の現況を都道府県・市町村ごとに把握するものであり、都道府県有建物の延面積はその中核的な施設ストック指標である。普通建設事業費という支出額の指標と対をなし、施設の「量」の側面からテーマ「公共施設の量と維持・建設への支出」を補完する。",
+        "adoptionCriteria": [
+          "representativeness",
+          "complementarity"
+        ],
+        "readerQuestion": "都道府県が保有する建物のストック量はどの程度か。",
+        "targetReaderOrDecision": "施設整備の支出額だけでなく保有ストックの規模も知りたい読者。"
+      }
+    },
+    {
+      "rankingKey": "prefectural-general-administration-staff",
+      "shortLabel": "一般行政部門職員数（都道府県）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "政府統計の総合窓口 e-Stat「項目の定義」D 行政基盤 D1201 一般行政部門職員数（都道府県）（総務省・社会・人口統計体系）",
+        "sourceUrl": "https://www.e-stat.go.jp/koumoku/koumoku_teigi/D",
+        "surveyedAt": "2026-09-16",
+        "rationale": "この定義は一般行政部門職員を教育・公安を除く議会事務局や総務・税務・民生など主要な行政分野に属する職員として都道府県間で統一的に区分しており、行政部門の職員数を比較する基礎データとなる。テーマの章「行政部門の職員数と職種別給与」において、人件費や組織規模の地域差を捉える代表的な指標として位置付けられる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability"
+        ],
+        "readerQuestion": "都道府県の一般行政を担う職員数はどれくらいか。",
+        "targetReaderOrDecision": "都道府県の行政組織規模や職員配置を比較したい読者。"
+      }
+    },
+    {
+      "rankingKey": "avg-salary-admin-prefecture",
+      "shortLabel": "一般行政職の平均給与月額（都道府県）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "総務省「地方公務員給与実態調査」地方公共団体別給与等の比較(1)ラスパイレス指数及び平均年齢・平均給与月額等 都道府県（政府統計の総合窓口 e-Stat）",
+        "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0003132176",
+        "surveyedAt": "2026-09-16",
+        "rationale": "地方公務員給与実態調査の都道府県別比較表は、全職種・一般職員に続いて「一般職員のうち一般行政職」を独立した職員区分として設け、平均給与月額を都道府県ごとに比較できる形で公表している。これは職種横断の平均値では見えない一般行政職固有の給与水準を示し、テーマの章「行政部門の職員数と職種別給与」において人件費の地域差を職種別に把握するための基準的な指標となる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability"
+        ],
+        "readerQuestion": "都道府県の一般行政職員の給与水準はどの程度か。",
+        "targetReaderOrDecision": "都道府県の人件費・職員給与を職種別に比較したい読者。"
+      }
+    },
+    {
+      "rankingKey": "avg-age-admin-prefecture",
+      "shortLabel": "一般行政職の平均年齢（都道府県）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "総務省「地方公務員給与実態調査」調査目的（政府統計の総合窓口 e-Stat 統計表情報）",
+        "sourceUrl": "https://www.e-stat.go.jp/statistics/00200211",
+        "surveyedAt": "2026-09-16",
+        "rationale": "本調査は地方公務員の給与実態を明らかにし、給与制度の基礎資料を得ることを目的としており、都道府県別比較表では一般行政職について平均年齢を平均給与月額と並べて公表している。平均年齢は職員構成の高齢化・若返りの度合いを示し、将来の退職手当や昇給に伴う人件費の見通しを左右するため、給与水準（平均給与月額）だけでは捉えられない負担構造の側面を補う指標である。",
+        "adoptionCriteria": [
+          "complementarity",
+          "comparability"
+        ],
+        "readerQuestion": "都道府県の一般行政職員の年齢構成はどう異なるか。",
+        "targetReaderOrDecision": "将来の人件費負担の見通しを立てたい財政担当者・読者。"
+      }
+    },
+    {
+      "rankingKey": "avg-salary-education-prefecture",
+      "shortLabel": "教育公務員の平均給与月額（都道府県）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "総務省「地方公務員給与実態調査」調査目的（政府統計の総合窓口 e-Stat 統計表情報）",
+        "sourceUrl": "https://www.e-stat.go.jp/statistics/00200211",
+        "surveyedAt": "2026-09-16",
+        "rationale": "本調査は地方公務員給与の実態把握と制度の基礎資料整備を目的とし、都道府県別比較表では教育公務員を一般行政職・警察職と並ぶ独立した職員区分として平均給与月額を公表している。教育公務員は都道府県人件費の中で大きな比重を占める職種であり、一般行政職の給与水準と並べて比較することで、テーマの章「行政部門の職員数と職種別給与」における職種間の給与差を捉える補完的な指標となる。",
+        "adoptionCriteria": [
+          "complementarity",
+          "comparability"
+        ],
+        "readerQuestion": "都道府県の教育公務員の給与水準は一般行政職と比べてどう違うか。",
+        "targetReaderOrDecision": "教員給与を含む都道府県人件費の構造を理解したい読者。"
+      }
+    },
+    {
+      "rankingKey": "avg-salary-police-prefecture",
+      "shortLabel": "警察職の平均給与月額（都道府県）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
+        "surveyedAt": "2026-09-09",
+        "rationale": "警察職の平均給与月額（都道府県）を既存テーマの独立章へ追加する。"
+      }
+    },
+    {
+      "rankingKey": "police-department-staff",
+      "shortLabel": "警察部門職員数（都道府県）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "総務省統計局「社会・人口統計体系」用語の定義 D 行政基盤 D1205「警察部門職員数」",
+        "sourceUrl": "https://www.e-stat.go.jp/koumoku/koumoku_teigi/D",
+        "surveyedAt": "2026-09-16",
+        "rationale": "社会・人口統計体系の用語定義は、警察部門職員数を都道府県職員のうち警察関係部門に属する職員数として明確に定義しており、都道府県間で同一基準の職員数を比較できる指標であることを示している。これは地方財政テーマの「行政部門の職員数と職種別給与」という章立てが求める、性質別歳出（人件費）の内訳を職種別に把握するための基礎データとして機能する。",
+        "adoptionCriteria": [
+          "comparability",
+          "dataQuality"
+        ],
+        "readerQuestion": "自分の都道府県の警察職員数は他の都道府県と比べて多いのか少ないのか。",
+        "targetReaderOrDecision": "都道府県の治安関連人件費や職員配置の規模を比較したい読者。"
+      }
+    },
+    {
+      "rankingKey": "furusato-donation-amount-prefecture",
+      "shortLabel": "受入額（県自身）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
+        "surveyedAt": "2026-09-09",
+        "rationale": "受入額（県自身）を既存テーマの独立章へ追加する。"
+      }
+    },
+    {
+      "rankingKey": "furusato-donation-count-prefecture",
+      "shortLabel": "受入件数（県自身）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
+        "surveyedAt": "2026-09-09",
+        "rationale": "受入件数（県自身）を既存テーマの独立章へ追加する。"
+      }
+    },
+    {
+      "rankingKey": "furusato-fundraising-cost-prefecture",
+      "shortLabel": "募集経費（県自身）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
+        "surveyedAt": "2026-09-09",
+        "rationale": "募集経費（県自身）を既存テーマの独立章へ追加する。"
+      }
+    },
+    {
+      "rankingKey": "furusato-return-gift-procurement-cost-prefecture",
+      "shortLabel": "返礼品調達費（募集費の内数）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
+        "surveyedAt": "2026-09-09",
+        "rationale": "返礼品調達費（募集費の内数）を既存テーマの独立章へ追加する。"
+      }
+    },
+    {
+      "rankingKey": "furusato-return-gift-shipping-cost-prefecture",
+      "shortLabel": "返礼品送付費（募集費の内数）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
+        "surveyedAt": "2026-09-09",
+        "rationale": "返礼品送付費（募集費の内数）を既存テーマの独立章へ追加する。"
+      }
+    },
+    {
+      "rankingKey": "furusato-tax-deduction-municipal-prefecture",
+      "shortLabel": "市町村民税控除額（県内課税分・推計値含む）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
+        "surveyedAt": "2026-09-09",
+        "rationale": "市町村民税控除額（県内課税分・推計値含む）を既存テーマの独立章へ追加する。"
+      }
+    },
+    {
+      "rankingKey": "furusato-tax-deduction-prefectural-prefecture",
+      "shortLabel": "道府県民税控除額（県内課税分・推計値含む）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
+        "surveyedAt": "2026-09-09",
+        "rationale": "道府県民税控除額（県内課税分・推計値含む）を既存テーマの独立章へ追加する。"
+      }
+    }
+  ],
+  "charts": [],
+  "evidenceTopics": [
+    {
+      "key": "revenue-base-and-equalization",
+      "lensKey": "composition",
+      "title": "自主財源と財源調整の構成",
+      "question": "地方税と地方交付税の構成は、地域の財源基盤の違いをどう補っているか。",
+      "summary": "財政力指数と歳入構成を組み合わせて読みます。地方税割合と地方交付税割合は歳入総額を分母とする構成比であり、割合だけで財政余力や税負担の大きさは判断できません。",
+      "sourceKeys": [
+        "mic-local-finance-whitepaper-2025"
+      ],
+      "relatedRankingKeys": [
+        "fiscal-strength-index-prefecture",
+        "local-tax-ratio-pref-finance",
+        "local-allocation-tax-ratio-pref-finance"
+      ],
+      "relatedChartKeys": [],
+      "relatedThemeKeys": [
+        "local-economy"
+      ]
+    },
+    {
+      "key": "debt-burden-and-soundness",
+      "lensKey": "sustainability",
+      "title": "公債費と将来負担の持続可能性",
+      "question": "現在の公債費負担と将来負担は、地域の財政運営にどのような制約を与えるか。",
+      "summary": "実質公債費比率と将来負担比率は、対象期間と算定対象が異なる健全化判断比率です。関連ランキングは2022年度、確報資料は2023年度決算のため、同一年の値として比較しません。",
+      "sourceKeys": [
+        "mic-fiscal-soundness-ratios-fy2023"
+      ],
+      "relatedRankingKeys": [
+        "real-public-debt-service-ratio",
+        "future-burden-ratio"
+      ],
+      "relatedChartKeys": [],
+      "relatedThemeKeys": [
+        "local-economy"
+      ]
+    }
+  ],
+  "keywords": [
+    "地方財政",
+    "財政力指数",
+    "経常収支比率",
+    "実質公債費比率",
+    "将来負担比率",
+    "地方税",
+    "地方交付税",
+    "歳出構造",
+    "都道府県",
+    "ランキング"
+  ],
+  "sections": [
+    {
+      "key": "balance",
+      "title": "財政の規模と収支",
+      "description": "都道府県の会計を対象に、収支・積立金・地方債を決算年度付きで確認します。市町村会計の合計ではありません。",
+      "metricGroupKeys": [],
+      "embeddedSectionKeys": [
+        "finance-overview"
+      ]
+    },
+    {
+      "key": "fiscal-capacity",
+      "title": "財政運営の余裕と負担",
+      "description": "財政力、経常経費、公債費、将来負担は別の側面です。指標を足して総合点にはしません。",
+      "metricGroupKeys": [],
+      "embeddedSectionKeys": [
+        "finance-sustainability"
+      ]
+    },
+    {
+      "key": "finance-flow",
+      "title": "どこから調達し何に使うか",
+      "description": "財源と使い道を確認します。目的別歳出と性質別歳出は分類が違うため、一つの構成比に混ぜません。",
+      "metricGroupKeys": [],
+      "embeddedSectionKeys": [
+        "finance-flow"
+      ]
+    },
+    {
+      "key": "candidate-50",
+      "title": "児童福祉への支出と公的給付",
+      "description": "都道府県の会計における児童福祉費と歳出に占める割合です。財政値は市町村支出や各家庭の費用を含みません。児童扶養手当受給者数はひとり親等を対象とする2023年度末の実績で、すべての児童を対象とする児童手当とは別の制度です。支出額・割合・受給者数を別々に読みます。",
+      "metricGroupKeys": [
+        "candidate-50-1",
+        "candidate-50-2",
+        "candidate-50-3"
+      ]
+    },
+    {
+      "key": "candidate-92",
+      "title": "公共施設の量と維持・建設への支出",
+      "description": "都道府県が報告する行政財産・普通財産の建物延面積と、都道府県財政の維持補修費・普通建設事業費を掲載します。建物面積は2024年度末の所有資産で、市町村分や道路等を含みません。支出は建物以外や新規建設を含むため、面積当たりの建物更新費には換算しません。",
+      "metricGroupKeys": [
+        "candidate-92-1",
+        "candidate-92-2",
+        "candidate-92-3"
+      ]
+    },
+    {
+      "key": "candidate-122",
+      "title": "目的別と性質別の歳出を分けて見る",
+      "description": "各指標に表示した年度の都道府県普通会計の歳出に対する人件費・扶助費・投資的経費の割合を比較します。性質別の分類で、目的別歳出のフローとは別です。ほかの性質の支出もあるため、3項目を合計100%に直しません。都道府県・市町村合算の1人当たり歳出とも会計範囲が異なります。",
+      "metricGroupKeys": [
+        "candidate-122-1",
+        "candidate-122-2",
+        "candidate-122-3",
+        "candidate-122-4"
+      ]
+    },
+    {
+      "key": "candidate-123",
+      "title": "行政部門の職員数と職種別給与",
+      "description": "都道府県職員の一般行政部門・警察部門の人数と、一般行政職・教育公務員・警察職の平均給与月額を分けて比較します。部門人数は4月1日時点で、県内市町村職員を含みません。平均年齢は年齢階級別の構成割合ではなく、職種の平均給与の差だけで同じ仕事の待遇差とは判断できません。",
+      "metricGroupKeys": [
+        "candidate-123-1",
+        "candidate-123-2",
+        "candidate-123-3",
+        "candidate-123-4",
+        "candidate-123-5",
+        "candidate-123-6"
+      ]
+    },
+    {
+      "key": "candidate-125",
+      "title": "ふるさと納税の受入・募集費・税控除",
+      "description": "都道府県自身の2025年度決算見込で、県内市町村分は含みません。東京都は当年度の指定申出がなく特例控除対象外ですが、原表の受入実績に含めています。募集費は返礼品調達費・送付費を含むため合算しません。税控除は県内市区町村の課税分で、2026年度課税（2025暦年寄附分）の推計値を含みます。受入額と対象・期間が異なるため差額を損益とは扱いません。",
+      "metricGroupKeys": [
+        "candidate-125-1",
+        "candidate-125-2",
+        "candidate-125-3",
+        "candidate-125-4",
+        "candidate-125-5",
+        "candidate-125-6",
+        "candidate-125-7"
+      ]
+    }
+  ],
+  "metricGroups": [
+    {
+      "key": "candidate-50-1",
+      "title": "児童福祉費（都道府県財政）",
+      "rankingKeys": [
+        "child-welfare-expenses-prefecture"
+      ],
+      "defaultCheckedKeys": [
+        "child-welfare-expenses-prefecture"
+      ]
+    },
+    {
+      "key": "candidate-50-2",
+      "title": "児童福祉費割合",
+      "rankingKeys": [
+        "child-welfare-expenditure-ratio-pref-finance"
+      ],
+      "defaultCheckedKeys": [
+        "child-welfare-expenditure-ratio-pref-finance"
+      ]
+    },
+    {
+      "key": "candidate-50-3",
+      "title": "児童扶養手当受給者数（ひとり親等）",
+      "rankingKeys": [
+        "child-rearing-allowance-recipients"
+      ],
+      "defaultCheckedKeys": [
+        "child-rearing-allowance-recipients"
+      ]
+    },
+    {
+      "key": "candidate-92-1",
+      "title": "維持補修費（都道府県財政）",
+      "rankingKeys": [
+        "maintenance-repair-expenses-prefecture"
+      ],
+      "defaultCheckedKeys": [
+        "maintenance-repair-expenses-prefecture"
+      ]
+    },
+    {
+      "key": "candidate-92-2",
+      "title": "普通建設事業費（都道府県財政）",
+      "rankingKeys": [
+        "ordinary-construction-expenses-prefecture"
+      ],
+      "defaultCheckedKeys": [
+        "ordinary-construction-expenses-prefecture"
+      ]
+    },
+    {
+      "key": "candidate-92-3",
+      "title": "都道府県有建物の延面積（年度末）",
+      "rankingKeys": [
+        "prefectural-public-building-floor-area"
+      ],
+      "defaultCheckedKeys": [
+        "prefectural-public-building-floor-area"
+      ]
+    },
+    {
+      "key": "candidate-122-1",
+      "title": "1人当たり歳出（都道府県・市町村合計）",
+      "rankingKeys": [
+        "per-capita-total-expenditure-pref-municipal"
+      ],
+      "defaultCheckedKeys": [
+        "per-capita-total-expenditure-pref-municipal"
+      ]
+    },
+    {
+      "key": "candidate-122-2",
+      "title": "人件費割合（都道府県普通会計）",
+      "rankingKeys": [
+        "personnel-expenditure-ratio-pref-finance"
+      ],
+      "defaultCheckedKeys": [
+        "personnel-expenditure-ratio-pref-finance"
+      ]
+    },
+    {
+      "key": "candidate-122-3",
+      "title": "扶助費割合（都道府県普通会計）",
+      "rankingKeys": [
+        "assistance-expenditure-ratio-pref-finance"
+      ],
+      "defaultCheckedKeys": [
+        "assistance-expenditure-ratio-pref-finance"
+      ]
+    },
+    {
+      "key": "candidate-122-4",
+      "title": "投資的経費割合（都道府県普通会計）",
+      "rankingKeys": [
+        "investment-expenditure-ratio-pref-finance"
+      ],
+      "defaultCheckedKeys": [
+        "investment-expenditure-ratio-pref-finance"
+      ]
+    },
+    {
+      "key": "candidate-123-1",
+      "title": "一般行政部門職員数（都道府県）",
+      "rankingKeys": [
+        "prefectural-general-administration-staff"
+      ],
+      "defaultCheckedKeys": [
+        "prefectural-general-administration-staff"
+      ]
+    },
+    {
+      "key": "candidate-123-2",
+      "title": "一般行政職の平均給与月額（都道府県）",
+      "rankingKeys": [
+        "avg-salary-admin-prefecture"
+      ],
+      "defaultCheckedKeys": [
+        "avg-salary-admin-prefecture"
+      ]
+    },
+    {
+      "key": "candidate-123-3",
+      "title": "一般行政職の平均年齢（都道府県）",
+      "rankingKeys": [
+        "avg-age-admin-prefecture"
+      ],
+      "defaultCheckedKeys": [
+        "avg-age-admin-prefecture"
+      ]
+    },
+    {
+      "key": "candidate-123-4",
+      "title": "教育公務員の平均給与月額（都道府県）",
+      "rankingKeys": [
+        "avg-salary-education-prefecture"
+      ],
+      "defaultCheckedKeys": [
+        "avg-salary-education-prefecture"
+      ]
+    },
+    {
+      "key": "candidate-123-5",
+      "title": "警察職の平均給与月額（都道府県）",
+      "rankingKeys": [
+        "avg-salary-police-prefecture"
+      ],
+      "defaultCheckedKeys": [
+        "avg-salary-police-prefecture"
+      ]
+    },
+    {
+      "key": "candidate-123-6",
+      "title": "警察部門職員数（都道府県）",
+      "rankingKeys": [
+        "police-department-staff"
+      ],
+      "defaultCheckedKeys": [
+        "police-department-staff"
+      ]
+    },
+    {
+      "key": "candidate-125-1",
+      "title": "受入額（県自身）",
+      "rankingKeys": [
+        "furusato-donation-amount-prefecture"
+      ],
+      "defaultCheckedKeys": [
+        "furusato-donation-amount-prefecture"
+      ]
+    },
+    {
+      "key": "candidate-125-2",
+      "title": "受入件数（県自身）",
+      "rankingKeys": [
+        "furusato-donation-count-prefecture"
+      ],
+      "defaultCheckedKeys": [
+        "furusato-donation-count-prefecture"
+      ]
+    },
+    {
+      "key": "candidate-125-3",
+      "title": "募集経費（県自身）",
+      "rankingKeys": [
+        "furusato-fundraising-cost-prefecture"
+      ],
+      "defaultCheckedKeys": [
+        "furusato-fundraising-cost-prefecture"
+      ]
+    },
+    {
+      "key": "candidate-125-4",
+      "title": "返礼品調達費（募集費の内数）",
+      "rankingKeys": [
+        "furusato-return-gift-procurement-cost-prefecture"
+      ],
+      "defaultCheckedKeys": [
+        "furusato-return-gift-procurement-cost-prefecture"
+      ]
+    },
+    {
+      "key": "candidate-125-5",
+      "title": "返礼品送付費（募集費の内数）",
+      "rankingKeys": [
+        "furusato-return-gift-shipping-cost-prefecture"
+      ],
+      "defaultCheckedKeys": [
+        "furusato-return-gift-shipping-cost-prefecture"
+      ]
+    },
+    {
+      "key": "candidate-125-6",
+      "title": "市町村民税控除額（県内課税分・推計値含む）",
+      "rankingKeys": [
+        "furusato-tax-deduction-municipal-prefecture"
+      ],
+      "defaultCheckedKeys": [
+        "furusato-tax-deduction-municipal-prefecture"
+      ]
+    },
+    {
+      "key": "candidate-125-7",
+      "title": "道府県民税控除額（県内課税分・推計値含む）",
+      "rankingKeys": [
+        "furusato-tax-deduction-prefectural-prefecture"
+      ],
+      "defaultCheckedKeys": [
+        "furusato-tax-deduction-prefectural-prefecture"
+      ]
+    }
+  ]
+}

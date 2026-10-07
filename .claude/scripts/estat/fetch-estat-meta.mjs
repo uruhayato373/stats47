@@ -144,10 +144,13 @@ async function main() {
     }
     await new Promise((r) => setTimeout(r, DELAY_MS));
   }
-  fs.writeFileSync(
-    path.join(PROJECT_ROOT, `${datasetDir("estat.candidates")}/meta-summary.json`),
-    JSON.stringify(summaries, null, 2),
-  );
+  // 一部の表だけ取り直しても、ほかの表のサマリを消さない (表 ID ごとに差し替える)
+  const summaryPath = path.join(PROJECT_ROOT, `${datasetDir("estat.candidates")}/meta-summary.json`);
+  const fetched = new Set(summaries.map((s) => s.statsDataId));
+  const kept = fs.existsSync(summaryPath)
+    ? JSON.parse(fs.readFileSync(summaryPath, "utf8")).filter((s) => !fetched.has(s.statsDataId))
+    : [];
+  fs.writeFileSync(summaryPath, JSON.stringify([...kept, ...summaries], null, 2));
   console.log(`\n  → ${datasetDir("estat.meta")}/*.json (${statsDataIds.length} 件)`);
   console.log(`  → ${datasetDir("estat.candidates")}/meta-summary.json`);
 }

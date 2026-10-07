@@ -1,5 +1,5 @@
 // AUTO-GENERATED — DO NOT EDIT.
-// Source of truth: packages/data-configs/src/theme-catalog/local-economy.ts
+// Source of truth: data/themes/catalogs/local-economy.json
 // Regenerate: npm run generate:catalog --workspace=@stats47/data-configs
 import type { IndicatorSet } from "../indicator-set";
 
@@ -11,6 +11,11 @@ export const LOCAL_ECONOMY_SET: IndicatorSet = {
   "usage": "theme",
   "metrics": [
     {
+      "rankingKey": "total-production-in-the-prefecture",
+      "shortLabel": "県内総生産額",
+      "role": "primary"
+    },
+    {
       "rankingKey": "per-taxpayer-taxable-income",
       "shortLabel": "課税対象所得（納税義務者1人当たり）",
       "role": "secondary"
@@ -19,26 +24,6 @@ export const LOCAL_ECONOMY_SET: IndicatorSet = {
       "rankingKey": "per-capita-prefectural-income-h27",
       "shortLabel": "1人当たり県民所得",
       "role": "primary"
-    },
-    {
-      "rankingKey": "minimum-wage-by-region",
-      "shortLabel": "最低賃金",
-      "role": "context"
-    },
-    {
-      "rankingKey": "active-job-opening-ratio",
-      "shortLabel": "有効求人倍率",
-      "role": "context"
-    },
-    {
-      "rankingKey": "unemployment-rate",
-      "shortLabel": "失業率",
-      "role": "context"
-    },
-    {
-      "rankingKey": "fiscal-strength-index-prefecture",
-      "shortLabel": "財政力指数",
-      "role": "context"
     },
     {
       "rankingKey": "employed-people-ratio-primary",
@@ -54,11 +39,6 @@ export const LOCAL_ECONOMY_SET: IndicatorSet = {
       "rankingKey": "employed-people-ratio-tertiary",
       "shortLabel": "第3次産業就業者比率",
       "role": "secondary"
-    },
-    {
-      "rankingKey": "disposable-income-worker-households",
-      "shortLabel": "可処分所得（二人以上の世帯のうち勤労者世帯）",
-      "role": "context"
     },
     {
       "rankingKey": "number-of-establishments-economic-census-basic-survey",

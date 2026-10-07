@@ -56,6 +56,7 @@ import {
   validateStatSeriesRefAlignment,
 } from '../src/theme-catalog/stat-series-ref';
 import { collectColorFieldViolations } from '../src/theme-catalog/chart-color-role';
+import { metricYearCount } from '../src/theme-catalog/selection-viewpoints';
 import { isGenericChartDescription } from '../src/theme-catalog/transform';
 
 const STRICT = process.argv.includes('--strict');
@@ -703,20 +704,6 @@ export function validateSelectionEvidence(
 }
 
 /**
- * YearSpec から年数を数える。`'all'` は R2 を読まないと分からないため未知として扱い、
- * 誤検知を避けるために検査対象から外す (確実に 1 年だけと言えるものだけを見る)。
- */
-function yearCount(years: unknown): number | null {
-  if (years === 'all') return null;
-  if (years && typeof years === 'object') {
-    const y = years as { from?: number; to?: number; years?: number[] };
-    if (Array.isArray(y.years)) return y.years.length;
-    if (typeof y.from === 'number' && typeof y.to === 'number') return y.to - y.from + 1;
-  }
-  return null;
-}
-
-/**
  * line-chart は時系列の推移を見せるためのチャート型。参照指標が 1 年分のデータしか
  * 持たない場合、折れ線は点1つにしかならず「推移」が原理的に描けない (チャート型と
  * データ形状の不一致)。まず warn で実測し、誤検知が無いことを確認してから昇格する
@@ -731,7 +718,7 @@ export function validateChartTemporalFit(
   for (const key of new Set(chart.relatedRankingKeys ?? [])) {
     const metric = METRICS_REGISTRY[key];
     if (!metric) continue; // 実在チェックは別関数の責務
-    const count = yearCount((metric as { years?: unknown }).years);
+    const count = metricYearCount((metric as { years?: unknown }).years);
     if (count !== null && count <= 1) {
       warns.push(
         `[chart-temporal-fit] ${where}: line-chart が参照する "${key}" は年数 ${count} 件 — 推移を描けない (表示方法の再検討候補)`

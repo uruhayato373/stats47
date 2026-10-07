@@ -14,26 +14,6 @@
     ]
   },
   {
-    "themeKey": "aging-society",
-    "componentKey": "cmp-pop-elderly-household",
-    "componentType": "line-chart",
-    "rawRequestKeys": [
-      "0000010201?cdCat01=#A06301",
-      "0000010201?cdCat01=#A06304",
-      "0000010201?cdCat01=#A06302"
-    ],
-    "metricKeys": [
-      "household-ratio-with-65plus",
-      "single-person-household-old-population-ratio",
-      "elderly-couple-only-household-ratio"
-    ],
-    "units": [
-      "％",
-      "％",
-      "％"
-    ]
-  },
-  {
     "themeKey": "education-culture",
     "componentKey": "theme-edu-higher-education-trend",
     "componentType": "line-chart",
@@ -45,68 +25,6 @@
     ],
     "units": [
       "％"
-    ]
-  },
-  {
-    "themeKey": "fishery-marine",
-    "componentKey": "theme-fishery-catch-trend",
-    "componentType": "line-chart",
-    "rawRequestKeys": [
-      "0000010103?cdCat01=C3121",
-      "0000010103?cdCat01=C312101"
-    ],
-    "metricKeys": [
-      "fish-catch",
-      "marine-fishery-catch"
-    ],
-    "units": [
-      "トン",
-      "トン"
-    ]
-  },
-  {
-    "themeKey": "fishery-marine",
-    "componentKey": "theme-fishery-aquaculture-mix",
-    "componentType": "mixed-chart",
-    "rawRequestKeys": [
-      "0000010103?cdCat01=C312201",
-      "0000010103?cdCat01=C312202"
-    ],
-    "metricKeys": [
-      "marine-aquaculture-harvest",
-      "inland-aquaculture-harvest"
-    ],
-    "units": [
-      "トン",
-      "トン"
-    ]
-  },
-  {
-    "themeKey": "fishery-marine",
-    "componentKey": "theme-fishery-output-trend",
-    "componentType": "line-chart",
-    "rawRequestKeys": [
-      "0000010103?cdCat01=C31201"
-    ],
-    "metricKeys": [
-      "marine-fishery-aquaculture-output-value"
-    ],
-    "units": [
-      "百万円"
-    ]
-  },
-  {
-    "themeKey": "fishery-marine",
-    "componentKey": "theme-fishery-half-century",
-    "componentType": "line-chart",
-    "rawRequestKeys": [
-      "0000010103?cdCat01=C3125"
-    ],
-    "metricKeys": [
-      "fishery-workers"
-    ],
-    "units": [
-      "人"
     ]
   },
   {
@@ -231,40 +149,6 @@
     "units": [
       "ｍ2",
       "ｍ2"
-    ]
-  },
-  {
-    "themeKey": "local-economy",
-    "componentKey": "theme-industry-structure",
-    "componentType": "donut-chart",
-    "rawRequestKeys": [
-      "0000010206?cdCat01=#F01201",
-      "0000010206?cdCat01=#F01202",
-      "0000010206?cdCat01=#F01203"
-    ],
-    "metricKeys": [
-      "employed-people-ratio-primary",
-      "employed-people-ratio-secondary",
-      "employed-people-ratio-tertiary"
-    ],
-    "units": [
-      "％",
-      "％",
-      "％"
-    ]
-  },
-  {
-    "themeKey": "local-economy",
-    "componentKey": "theme-le-establishments-trend",
-    "componentType": "line-chart",
-    "rawRequestKeys": [
-      "0000010103?cdCat01=C2107"
-    ],
-    "metricKeys": [
-      "number-of-establishments-economic-census-basic-survey"
-    ],
-    "units": [
-      "事業所"
     ]
   },
   {

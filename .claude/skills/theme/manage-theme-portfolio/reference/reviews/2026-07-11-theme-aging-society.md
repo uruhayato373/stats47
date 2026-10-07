@@ -1,7 +1,7 @@
 ---
 type: theme-catalog-review
 date: 2026-07-11
-status: proposal-ready
+status: superseded
 theme: aging-society
 tags: [theme-catalog, aging, metrics, charts]
 ---
@@ -173,7 +173,6 @@ npm run test:run --workspace apps/web
 
 ## 採用決定
 
-**現状: ユーザー承認待ち。**
-
-Claude Codeは承認前にcatalogを編集しない。承認後はまずPR-1のみを実装する。
+**現状: 2026-10-06 版に置き換え。** その後のカタログ変更 (章の導入・2026-09-09 の章追加) で前提の構成が変わったため、
+本書の提案は実装しない。現行の提案は `2026-10-06-theme-aging-society.md`。
 

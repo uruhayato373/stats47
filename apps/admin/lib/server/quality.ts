@@ -1,5 +1,7 @@
 import "server-only";
 
+import { datasetDir } from "../../../../config/datasets.mjs";
+
 import { catalogAuditSummary } from "./catalog-audit";
 import { contentOperations } from "./content-operations";
 import { cached, fileExists, readJson, TTL, wrap, type Wrapped } from "./state-io";
@@ -229,7 +231,7 @@ export function qualityQueues(): QualityQueue[] {
 }
 
 /**
- * ThemeCatalog は state ファイルを持たない (git TS SSOT を毎回検証する)。
+ * ThemeCatalog は state ファイルを持たない (data/themes/catalogs/ の JSON SSOT を毎回検証する)。
  * `q()` はファイル読み取り前提のため、他の live 計算キュー (content-operations) と同じ
  * 直接構築パターンにする。
  */
@@ -238,7 +240,7 @@ function catalogAuditQueue(): QualityQueue {
   return {
     key: "catalog-audit",
     label: "テーマカタログ完全性 (選定根拠・HARM)",
-    file: "packages/data-configs/src/theme-catalog/ (git TS SSOT)",
+    file: `${datasetDir("themes.catalogs")}/ (JSON SSOT)`,
     exists: true,
     generatedAt: null,
     total: summary.themeCount,

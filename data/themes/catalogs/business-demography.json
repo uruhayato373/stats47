@@ -1,0 +1,223 @@
+{
+  "key": "business-demography",
+  "title": "起業と開廃業",
+  "description": "雇用保険適用事業所の新規成立・消滅と、前年度末の適用事業所数を分母にした開業率・廃業率を比較します。雇用者のいない事業を含まず、企業単位の設立・倒産件数とは異なります。",
+  "category": "economy",
+  "usage": "theme",
+  "metrics": [
+    {
+      "rankingKey": "business-opening-rate",
+      "shortLabel": "開業率（雇用保険適用事業所）",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "開業率（雇用保険適用事業所）を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "business-closure-rate",
+      "shortLabel": "廃業率（雇用保険適用事業所）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "廃業率（雇用保険適用事業所）を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "business-opening-establishments",
+      "shortLabel": "年度内の新規成立事業所数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "年度内の新規成立事業所数を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "business-closure-establishments",
+      "shortLabel": "年度内の消滅事業所数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "年度内の消滅事業所数を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "business-opening-base-establishments",
+      "shortLabel": "分母となる前年度末の適用事業所数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "分母となる前年度末の適用事業所数を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "nonprimary-enterprises-count",
+      "shortLabel": "会社・個人経営の企業総数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
+        "surveyedAt": "2026-09-09",
+        "rationale": "会社・個人経営の企業総数を既存テーマの独立章へ追加する。"
+      }
+    },
+    {
+      "rankingKey": "nonprimary-enterprises-under5-count",
+      "shortLabel": "常用雇用者0〜4人の企業数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
+        "surveyedAt": "2026-09-09",
+        "rationale": "常用雇用者0〜4人の企業数を既存テーマの独立章へ追加する。"
+      }
+    },
+    {
+      "rankingKey": "nonprimary-enterprises-employees",
+      "shortLabel": "会社・個人経営の従業者総数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
+        "surveyedAt": "2026-09-09",
+        "rationale": "会社・個人経営の従業者総数を既存テーマの独立章へ追加する。"
+      }
+    },
+    {
+      "rankingKey": "nonprimary-enterprises-under5-employees",
+      "shortLabel": "常用雇用者0〜4人企業の従業者数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
+        "surveyedAt": "2026-09-09",
+        "rationale": "常用雇用者0〜4人企業の従業者数を既存テーマの独立章へ追加する。"
+      }
+    }
+  ],
+  "charts": [],
+  "metricGroups": [
+    {
+      "key": "business-demography-indicator-1",
+      "title": "開業率（雇用保険適用事業所）",
+      "rankingKeys": [
+        "business-opening-rate"
+      ],
+      "defaultCheckedKeys": [
+        "business-opening-rate"
+      ]
+    },
+    {
+      "key": "business-demography-indicator-2",
+      "title": "廃業率（雇用保険適用事業所）",
+      "rankingKeys": [
+        "business-closure-rate"
+      ],
+      "defaultCheckedKeys": [
+        "business-closure-rate"
+      ]
+    },
+    {
+      "key": "business-demography-indicator-3",
+      "title": "年度内の新規成立事業所数",
+      "rankingKeys": [
+        "business-opening-establishments"
+      ],
+      "defaultCheckedKeys": [
+        "business-opening-establishments"
+      ]
+    },
+    {
+      "key": "business-demography-indicator-4",
+      "title": "年度内の消滅事業所数",
+      "rankingKeys": [
+        "business-closure-establishments"
+      ],
+      "defaultCheckedKeys": [
+        "business-closure-establishments"
+      ]
+    },
+    {
+      "key": "business-demography-indicator-5",
+      "title": "分母となる前年度末の適用事業所数",
+      "rankingKeys": [
+        "business-opening-base-establishments"
+      ],
+      "defaultCheckedKeys": [
+        "business-opening-base-establishments"
+      ]
+    },
+    {
+      "key": "candidate-19-1",
+      "title": "会社・個人経営の企業総数",
+      "rankingKeys": [
+        "nonprimary-enterprises-count"
+      ],
+      "defaultCheckedKeys": [
+        "nonprimary-enterprises-count"
+      ]
+    },
+    {
+      "key": "candidate-19-2",
+      "title": "常用雇用者0〜4人の企業数",
+      "rankingKeys": [
+        "nonprimary-enterprises-under5-count"
+      ],
+      "defaultCheckedKeys": [
+        "nonprimary-enterprises-under5-count"
+      ]
+    },
+    {
+      "key": "candidate-19-3",
+      "title": "会社・個人経営の従業者総数",
+      "rankingKeys": [
+        "nonprimary-enterprises-employees"
+      ],
+      "defaultCheckedKeys": [
+        "nonprimary-enterprises-employees"
+      ]
+    },
+    {
+      "key": "candidate-19-4",
+      "title": "常用雇用者0〜4人企業の従業者数",
+      "rankingKeys": [
+        "nonprimary-enterprises-under5-employees"
+      ],
+      "defaultCheckedKeys": [
+        "nonprimary-enterprises-under5-employees"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "key": "business-demography-overview",
+      "title": "起業と開廃業を都道府県別に見る",
+      "description": "雇用保険適用事業所の新規成立・消滅と、前年度末の適用事業所数を分母にした開業率・廃業率を比較します。雇用者のいない事業を含まず、企業単位の設立・倒産件数とは異なります。",
+      "metricGroupKeys": [
+        "business-demography-indicator-1",
+        "business-demography-indicator-2",
+        "business-demography-indicator-3",
+        "business-demography-indicator-4",
+        "business-demography-indicator-5"
+      ]
+    },
+    {
+      "key": "candidate-19",
+      "title": "企業規模別の事業基盤",
+      "description": "2021年経済センサスの非農林漁業（公務を除く）、会社企業と個人経営の合計です。本所所在地に企業全体を集計しています。常用雇用者0〜4人は統計上の区分で、法定の中小・小規模企業とは異なります。従業者は役員・個人業主等を含み、常用雇用者だけの人数ではありません。",
+      "metricGroupKeys": [
+        "candidate-19-1",
+        "candidate-19-2",
+        "candidate-19-3",
+        "candidate-19-4"
+      ]
+    }
+  ],
+  "keywords": [
+    "起業",
+    "開業",
+    "廃業",
+    "事業所"
+  ]
+}

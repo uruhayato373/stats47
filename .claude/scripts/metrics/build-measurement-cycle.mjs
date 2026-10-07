@@ -164,6 +164,7 @@ function main() {
     week,
     asOf,
     gscHistory: readCsvIfExists(join(PROJECT_ROOT, datasetPath("gsc.history"))),
+    ga4Finalized: readCsvIfExists(join(PROJECT_ROOT, datasetPath("ga4.history-finalized"))),
     cycleHistory: history,
     journey,
     workContext,

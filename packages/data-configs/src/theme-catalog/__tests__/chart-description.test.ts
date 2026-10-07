@@ -6,6 +6,7 @@ import {
   validateIndicatorHubContentCompleteness,
 } from '../../../scripts/validate-theme-catalog';
 import { THEME_CATALOGS } from '../index';
+import catalogBaseline from '../../../../../.claude/config/theme-catalog-baseline.json';
 import {
   catalogToPageComponentsJson,
   isGenericChartDescription,
@@ -216,13 +217,13 @@ describe('theme chart indicator-hub links', () => {
     ]);
   });
 
-  it('全60 data-bound componentがテーマ内指標へ紐付く', () => {
+  it('全 data-bound component がテーマ内指標へ紐付く', () => {
     const dataBound = Object.values(THEME_CATALOGS).flatMap((theme) =>
       theme.charts
         .filter((item) => item.componentType !== 'markdown-section')
         .map((item) => ({ theme, item }))
     );
-    expect(dataBound).toHaveLength(60);
+    expect(dataBound).toHaveLength(catalogBaseline.counts.chartsWithRelatedRankingKeys);
     for (const { theme, item } of dataBound) {
       const metricKeys = new Set(
         theme.metrics.map((metric) => metric.rankingKey)
@@ -240,7 +241,7 @@ describe('theme chart indicator-hub links', () => {
     }
   });
 
-  it('追加図の関連リンクが参照する115指標すべてに個別の説明を必須化する', () => {
+  it('追加図の関連リンクが参照する全指標に個別の説明を必須化する', () => {
     const errors: string[] = [];
     const warns: string[] = [];
     const coverage = validateIndicatorHubContentCompleteness(
@@ -248,9 +249,9 @@ describe('theme chart indicator-hub links', () => {
       errors,
       warns
     );
-    expect(coverage.totalKeys).toBe(115);
+    expect(coverage.totalKeys).toBe(catalogBaseline.counts.indicatorHubKeys);
     expect(coverage.missingDescriptionKeys).toHaveLength(0);
-    expect(coverage.authoredNoteKeys).toHaveLength(69);
+    expect(coverage.authoredNoteKeys).toHaveLength(catalogBaseline.counts.authoredNoteKeys);
     expect(errors).toEqual([]);
     expect(warns).toEqual([]);
   });

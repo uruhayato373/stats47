@@ -5,8 +5,8 @@
 - [project_model_usage_cycle.md](project_model_usage_cycle.md) — モデル/effort最適化サイクル。agentはeffort未指定でセッションのxhighを継承、別名sonnet/opusの解決先はCLI版次第(2.1.280未満はOpus 5.5不可)、canaryは採点器ごと検証
 - [feedback_gsc_export_false_positive.md](feedback_gsc_export_false_positive.md) — GSC理由行の非表示クリック失敗は概要ZIPの偽成功を生む。概要+5詳細の内容・件数・帰属とcapabilityを照合
 - [feedback_native_chrome_session_export.md](feedback_native_chrome_session_export.md) — Google認証exportはOS keychain互換を保った専用profileの一時コピーで行い、元profileをテスト既定値で開かない
-- [project_monetization_contract.md](project_monetization_contract.md) — 収益化の恒久判断。AdSenseは恒久停止(RPM ¥37で月¥1,400上限)、NSMは週次収益でPVではない、アフィ評価は確定収益/1,000 viewable imp、affiliate_verticalは広告自身のverticalを送る(契約テストで強制)、本線は行政実務向け商品
-- [project_theme_selection_backfill_pipeline.md](project_theme_selection_backfill_pipeline.md) — ThemeCatalog selection の夜間 backfill。モデルは JSON のみ・決定的 gate が書く・expanded.ts 由来は selection-evidence.ts。headless claude はセッション内でも認証可、PDF は pdftotext で逐語照合
+- [project_monetization_contract.md](project_monetization_contract.md) — 収益化の判断。AdSenseは9/20恒久停止→9/28に維持費相殺として再開を決定(審査待ち・手動枠のみ)、NSMは週次収益でPVではない、アフィ評価は確定収益/1,000 viewable imp、affiliate_verticalは広告自身のverticalを送る、本線は行政実務向け商品、雑学の情報そのものは売れない(回収は広告・物販/ノウハウ商品/KDPの3経路)
+- [project_theme_selection_backfill_pipeline.md](project_theme_selection_backfill_pipeline.md) — ThemeCatalog selection の夜間 backfill。モデルは JSON のみ・決定的 gate が data/themes/catalogs/<key>.json に書く。headless claude はセッション内でも認証可、PDF は pdftotext で逐語照合
 - [feedback_note_product_card_ssot.md](feedback_note_product_card_ssot.md) — note商品カードはマガジンでなく実商品SSOTから解決。生成/修正は同一関数共有、regenerate-cardはカード不在時no-op
 - [project_note_ins_img_heading_placement_bug.md](project_note_ins_img_heading_placement_bug.md) — ins_imgは見出し直前アンカーで画像が見出し直後にずれる未解決バグ。盲目修正は悪化した実例あり
 - [feedback_geo_source_initial_display.md](feedback_geo_source_initial_display.md) — GISは操作前の地図表示・区画切替・一覧リンクによる移動を検証。代表区画を選んだ後のPASSだけで初期表示を完了扱いしない
@@ -125,6 +125,9 @@
 - [proxy preload for fetch scripts](proxy-preload-for-fetch-scripts.md) — 会社PCで素のfetch()のscriptを無改修で通す node --import 手法
 - [two-machine local footprint 2026-09](project_two_machine_local_footprint_2026-09.md) — dotfiles/mirror/state:pull の運用ポインタ、この Windows PC の pre-commit 12 分・vitest フレーク・preflight 環境要因
 - [feedback_worktree_junction_deletes_target.md](feedback_worktree_junction_deletes_target.md) — worktreeへnode_modulesのjunctionを張るとgit worktree remove --forceが本体のapps/*/node_modulesを消す(2026-09-16実害)。junctionはcmd /c rmdirで外してから削除
+- [feedback_worktree_symlinked_node_modules_resolve_main.md](feedback_worktree_symlinked_node_modules_resolve_main.md) — worktreeのnode_modulesを本体へ丸ごとsymlinkすると@stats47/*が本体packagesを指し、型検査が本体のコードで判定される。@stats47だけworktreeへ張り直す
+- [feedback_cloud_session_workflow_dispatch_403.md](feedback_cloud_session_workflow_dispatch_403.md) — クラウドセッションのGitHub MCPはworkflow_dispatchが403。data/workflow-dispatch-requests.jsonをdevelopへpushすればproxyが代理起動する
+- [feedback_review_agent_ran_cloud_write.md](feedback_review_agent_ran_cloud_write.md) — 記事のコード例を確かめるsubagentが環境のCLOUDFLARE_API_TOKENでwrangler r2 object put --remoteを実行(403)。手順解説の検証を頼むpromptに外部へ書くコマンドの禁止を書く
 - [feedback_x_scheduled_bulk_delete.md](feedback_x_scheduled_bulk_delete.md) — X予約の一括削除は描画中の7〜8件しか消えない。台帳キーで選択→削除→読み直しを残件0まで繰り返す
 - [project_sns_scheduling_limits.md](project_sns_scheduling_limits.md) — X予約は重み付き280(日本語=2・URL=23)でlint char_maxより厳しい。Threads Web予約は同時25件まで(残りはTHREADS-TOPUP-01で補充)
 - [project_page_quality_ui_review.md](project_page_quality_ui_review.md) — 週次ページ品質=全URL静的+代表7幅スクショ+Claude確認。生データはR2 state/page-quality/(git禁止)。SNS予約画像はMac launchd週次
@@ -136,3 +139,4 @@
 - [feedback_note_hashtag_api_quirks.md](feedback_note_hashtag_api_quirks.md) — noteタグ: 同一秒タグは順不同(集合で照合)・大小文字を既存タグに書換・α等は黙って削除・限定公開無料記事はPUT本文が全文でライン位置が公開範囲
 - [feedback_workflow_policy_comment_import.md](feedback_workflow_policy_comment_import.md) — audit-workflow-policy はコメント内の `from "x"` も依存と数え SCRIPT_RUN_WITHOUT_INSTALL を誤検出する。共通モジュールの使用例は散文で書く
 - [feedback_help_flag_runs_script.md](feedback_help_flag_runs_script.md) — 自作スクリプトの多くは --help を無視して本処理を実行する (2026-10-06 に blog outbox を誤生成)。確認は node --check / tsc / import のみの 1 行で
+- [feedback_blog_background_codex_only.md](feedback_blog_background_codex_only.md) — ブログ背景は Codex (generate-blog-images Mode A・送り箱は --article) で git に置く。Gemini で作り直さない。課金や公開を起こす依頼ファイルはコードの commit と別 push にする

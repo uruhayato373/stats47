@@ -30,8 +30,8 @@ chart source.json) を共通 resolver が surveys.json へ解決する。
 | **手動オーバーライド** | `MetricConfig.surveyId` (`packages/data-configs/src/metrics/<key>.ts`) | git TS | 導出不能/誤導出の例外だけ書く。実在 lint (`validate:config` の `survey-id`) が守る |
 | **配信 (item→survey)** | R2 `app/ranking/<key>/item.json` の `surveyIds[]` + `originalSurveys[]` | 焼き込み | `generate-ranking-items.ts` (builder) が生成 |
 | **配信 (survey→items)** | R2 `app/survey/<id>/items.json` + `app/survey/all.json` (itemCount 付き) | 焼き込み | master exporter (`export-master-snapshots.ts`) が生成 |
-| **テーマ chart lineage** | `packages/data-configs/src/theme-catalog/*.ts` の `relatedRankingKeys` / `rankingLink` / `estatParams` | git TS | `resolveThemeSurveyTaxonomy` が直接解決。surveyId を重複記録しない |
-| **テーマ指標カード lineage** | ThemeCatalog の `metricGroups[].rankingKeys` | git TS | 固定年比較・時系列カードも監査する。追加図とは別の母数・coverageを保持し、一部未解決を成功にしない |
+| **テーマ chart lineage** | `data/themes/catalogs/<key>.json` の `relatedRankingKeys` / `rankingLink` / `estatParams` | git JSON | `resolveThemeSurveyTaxonomy` が直接解決。surveyId を重複記録しない |
+| **テーマ指標カード lineage** | ThemeCatalog の `metricGroups[].rankingKeys` | git JSON | 固定年比較・時系列カードも監査する。追加図とは別の母数・coverageを保持し、一部未解決を成功にしない |
 | **ブログ chart lineage** | R2 `app/blog/<slug>/data/<base>.source.json` | R2 JSON | rankingKey / statsDataId、または手動取得統計の `sourceName` を共通原典辞書で解決。記事単位の派生 `surveyIds[]` は `app/blog/all.json` へ焼く |
 | **横断監査 state** | `data/surveys/taxonomy.json` | 派生 JSON | ranking/theme/blog 全量 + survey→各面の逆引き。手編集禁止 |
 | **悪化防止 ratchet** | `.claude/config/survey-taxonomy-ratchet.json` | git JSON | 週次監査が改善方向だけに tighten。PR は offline check |
@@ -117,6 +117,11 @@ ratchet の `maxLegacyDataSourceSectionArticles` / `maxSourcelessChartArticles` 
   2026-09-09のテーマ再編はcommit `7d40c9548` の34図削除・10図追加を
   `themeBaselineAdjustment` に記録した。追加図の下限は82→58、指標カードは別枠で
   resolved 88を下限とする。両枠ともcoverage 100%・missing-lineage 0を維持する。
+  2026-10-06のaging-society改善で高齢世帯の折れ線1図を外した分は`themeBaselineFollowUps`に記録し、
+  追加図の下限を60→59にした (後続の訂正も同じ配列へ足し、回帰テストが連鎖を検査する)。
+  同日のfishery-marine改善でカードと重複する4図を外した分も同じ配列に足し、下限を59→55にした。
+  同日のlocal-economy改善では2図を外して下限を55→53にし、単年カード5枚を年固定の比較カード2枚へまとめて
+  県内総生産額のカードを足した分で、指標カードの下限も447→446にした (同じ配列にカードのkeyも記録し、回帰テストが検査する)。
 
 ### 新しい調査を追加する
 1. `packages/ranking/src/data/surveys.json` にエントリ追加 (id は kebab-case)
