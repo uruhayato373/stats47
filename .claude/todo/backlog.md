@@ -2905,6 +2905,16 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - **禁止**: 承認前に R2 の item.json を一括で書き換えない。
 - **完了条件**: config の `seoTitle` / `seoDescription` に観測値を含むものが 0 件になり、item.json の文言が最新の値と一致する。
 
+### [THEME-REVIEW-TOURISM-CPI-01] 観光・物価テーマの見直し提案を承認してもらい、実装して公開する
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run validate:catalog --workspace=@stats47/data-configs] [起票:2026-10-07] [領域:データ]
+
+- **経緯 (2026-10-07)**: 3 テーマの見直しの公開後、管理画面 `/quality/theme-viewpoints` の次の候補 (GSC 2026-W40 の表示回数順) の観光 (147 回) と物価 (140 回) の提案を、
+  `reference/reviews/2026-10-07-theme-{tourism,consumer-prices}.md` に `proposal-ready` で書いている (theme-designer、effort medium)。
+- **次**: 提案の判断点をオーナーに示して承認を取る → `theme-proposal-format.md` の手順で実装・検証 → 公開の時期を決める
+  (2 テーマとも 9 月の実験 THEME-STRUCTURE-20260908-* の d56 = 2026-11-06 が pending)。
+- **停止条件**: 承認前は `data/themes/catalogs/` と metric config を編集しない。公開 (main へのマージ・R2 反映) は別に承認を取る。
+- **完了条件**: 2 テーマの提案の status が `implemented-pending-release` 以降になり、本番で提案どおりの章・カード・図が出ている。
+
 ### [THEME-CATALOG-OPT-RELEASE-01] aging-society・fishery-marine・local-economy の改善と章順・カード見出しの横断修正を、9 月の実験の d56 観測後に本番へ出す
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:node .claude/scripts/themes/validate-theme-state.mjs] [起票:2026-10-06] [期日:2026-11-13] [領域:データ]
 
