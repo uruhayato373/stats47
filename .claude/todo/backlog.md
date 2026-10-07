@@ -2914,6 +2914,7 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
   反映まではカードが登録済みの年 (県内総生産額は 2021 年の 1 点) だけを描く) → ② develop → main のデプロイ → ③ 3 テーマの実験を
   `evaluate-theme-experiments.mjs --register` で baseline 付きで登録し `--schedule <デプロイ日>`。
 - **2026-10-07 オーナー判断で前倒し**: d56 の観測を待たずに今出す (A 案)。#1084・#1085・#1090 は develop へマージ済み。①' の 2 指標の観測値は R2 に反映済み (県内総生産額 517 行・1人当たり県民所得 470 行、data-refresh run 37615385505)。手順の順番の訂正: `sync-snapshots.yml` は **main を checkout して** page-components を生成するので、① は ② (develop → main のマージ) の**後**に行う (マージから反映までの数分は、外した図がページ末尾に残って見える)。9 月の実験 (THEME-STRUCTURE-20260908-* / THEME-LAUNCH-*) の d56 には今回の変更が混ざる。効果判定の engine は同時投入を `confounded` として pending に留めるので、混ざった結果を full/none と判定しない。
+- **2026-10-07 公開済み**: ② main へのマージ (#1099・5ddda10b8)・Cloudflare デプロイ成功、① page-components の R2 反映 (sync-snapshots 成功)、①' 2 指標の観測値の再取得も済み。本番で aging-society の「年齢構造と支え手の比率」章あり・「高齢世帯の推移」なし、fishery-marine の「漁業の担い手」章あり、local-economy の先頭章「経済の規模と所得の水準」ありを確かめた。**残りは ③ の実験登録だけ**: 3 テーマに 9 月の pending 実験 (changeType structure) が残っていて、同じテーマ × changeType の pending は 1 件までなので今は登録できない。2026-11-06 の d56 判定 (今回の変更が混ざるので confounded の見込み) が入ったら、`--register` で baseline 付きで登録し `--schedule <id> 2026-10-07` を付ける。
 - **完了条件**: 本番 `/themes/aging-society` で「年齢構造と支え手の比率」章にカードが出て、「高齢世帯の推移」が無く、
   `/themes/fishery-marine` で図が「海面漁業産出額の長期推移」1 枚になり「漁業の担い手」章がある。
   `/themes/local-economy` の先頭章「経済の規模と所得の水準」で県内総生産額のカードが 2011〜2021 年、1人当たり県民所得が 2012〜2021 年の推移を描き、
