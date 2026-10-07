@@ -2594,8 +2594,19 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
   全指標に値がそろう R2 の最新年 (`availableYears`) へ実行時に進める。実測: 公開 609 記事・図 1,596 枚のうち自動で取り直せる形が 959 枚、
   今の本番で図の年が古いのは 21 記事・24 枚。
 - **次**: ① #1095 → #1096 → #1097 の順にマージし、sync-snapshots の blog task 後に `stale-data-years.md` の件数・
-  キューの `data-refresh` 件数・ランキングの関連記事を確かめる。② data-refresh レーンを `/brushup-blog --target queue` で消化する。
-  `fiscal-health-50years-trend` (1989 年の地図) と cc-estat 系の手順解説は `yearPinnedReason` を付ける候補 (取り直すか固定するかは記事ごとに判断)。
+  キューの `data-refresh` 件数・ランキングの関連記事を確かめる。② data-refresh レーンを `/brushup-blog --target queue` (focus `最新データ更新`) で
+  消化する。2026-10-07 に今の本番で図の年が古い 21 記事・24 枚を本文と照らした振り分け (年を固定すべき図は 0 枚):
+  - 図だけ取り直す (本文は新しい年を語る食い違い): `fiscal-health-50years-trend`・`fiscal-self-reliance-gap` (2022 年度の節に 1989 年の地図)
+  - 出典ファイルの年だけが誤り (data は本文と同じ年): `consumer-price-regional-gap` (source 2021・data 2024 = 最新。取り直すと source が直るだけ)、
+    `cc-estat-03-population-bar` (source 2023・data 2024。最新は 2025 なので下の書き直しも要る)
+  - 図を作り直す (説明と中身が違う): `healthy-life-expectancy-male-female-gap` の `healthy-life-expectancy-female-prefecture-rankings`
+    (alt は男女の散布図、中身は男性の棒グラフ。自動で取り直さない)
+  - 取り直して本文も書き直す (記事ごと古い年): `ai-claude-code-pref-analysis`・`area-ratio-prefecture-gap`・`cc-estat-02-search-skill`・
+    `cc-estat-04-aging-heatmap`・`cc-estat-13-agri-sankey` (図の alt だけ 2024 年になっている)・`cc-estat-20-publish`・
+    `dairy-cattle-hokkaido-monopoly`・`dairy-cattle-count` (2018 → 2025。タイトルも年を含む)・`engel-coefficient-vs-prefectural-income`・
+    `health-life-expectancy-structure`・`it-industry-concentration` (タイトルも年を含む)・`physical-therapist-annual-income-prefecture-gap`
+    (2023 年は順位が大きく入れ替わり結論から書き直し)・`real-disposable-income-reversal`・`school-teacher-annual-income-prefecture-gap`・
+    `sixth-industry-direct-sales`・`vacant-housing-vs-aging`。手順解説 (cc-estat・ai-claude-code) は本文に引用した AI の出力例の数値も直す
   ③ 年が 1 年だけのカードを推移へ戻すかは `THEME-SINGLE-YEAR-CARDS-01` で扱う (比較カードの年は追従するようになった)。
 - **完了条件**: 新しい年が R2 に入った翌週に、AI 解説が新しい年で作り直しの対象になり、古い年のブログ記事が一覧と是正キューの
   data-refresh レーンに出て、計算型のランキングが 1 回の data-refresh で新しい年を表示し、テーマの比較カードが新しい年を描く。
