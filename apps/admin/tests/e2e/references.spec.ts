@@ -85,9 +85,13 @@ test.describe('/content/references 参考文献の活用・展開管理', () => 
     const context = page.locator('section').filter({
       has: page.getByRole('heading', { name: /既存コンテンツの補強候補/ }),
     });
-    await expect(context.getByText('1 / 21ページ')).toBeVisible();
+    // 総ページ数は参考文献の台帳が増えると変わるので、1 ページ目の表示から読む
+    const firstPage = context.getByText(/^1 \/ \d+ページ$/);
+    await expect(firstPage).toBeVisible();
+    const total = (await firstPage.textContent())?.match(/\/ (\d+)ページ/)?.[1];
+    expect(Number(total)).toBeGreaterThan(1);
     await context.getByRole('link', { name: '次へ' }).click();
     await expect(page).toHaveURL(/contextPage=2/);
-    await expect(context.getByText('2 / 21ページ')).toBeVisible();
+    await expect(context.getByText(`2 / ${total}ページ`)).toBeVisible();
   });
 });
