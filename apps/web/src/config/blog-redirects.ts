@@ -14,6 +14,8 @@ export const BLOG_SLUG_REDIRECTS: Record<string, string> = {
   "cpi-change-rate-ranking": "cpi-change-regional-pattern",
   "fiscal-strength-ranking": "fiscal-self-reliance-gap",
   "food-expenditure-ranking": "food-spending-pattern",
+  // 2026-10-08 重複記事をまとめた (BLOG-DUPLICATE-AUDIT-01)
+  "fresh-udon-soba-consumption-quantity": "fresh-udon-soba-consumption-prefecture-gap",
   "household-income-ranking": "household-income-tokyo-okinawa",
   "household-spending-ranking": "household-spending-prefecture-gap",
   "household-structure-ranking": "household-solo-vs-dualincome",
@@ -36,6 +38,8 @@ export const BLOG_SLUG_REDIRECTS: Record<string, string> = {
   "savings-balance-ranking": "savings-balance-gap",
   "savings-rate-ranking": "savings-rate-gap",
   "school-nonattendance-ranking": "school-nonattendance-pattern",
+  // 2026-10-08 重複記事をまとめた (BLOG-DUPLICATE-AUDIT-01)
+  "soba-udon-dining-consumption-expenditure": "soba-udon-dining-consumption-expenditure-prefecture-gap",
   "sports-participation-ranking": "sports-urban-paradox",
   "sunshine-duration-ranking": "sunshine-pacific-vs-nihonkai",
   "traffic-accident-deaths-ranking": "traffic-accident-deaths-regional-risk",
