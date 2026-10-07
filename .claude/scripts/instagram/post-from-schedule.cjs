@@ -33,12 +33,14 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const { R2_PUBLIC_BASE_URL } = require("../lib/site-config.cjs");
+const { datasetDir, datasetPath } = require("../../../config/datasets.mjs");
 
 const TOKEN = process.env.INSTAGRAM_ACCESS_TOKEN;
 const IG_USER_ID = process.env.INSTAGRAM_BUSINESS_ACCOUNT_ID;
 const PUBLIC_R2_BASE = process.env.IG_PUBLIC_R2_BASE || R2_PUBLIC_BASE_URL;
 // 予約表 (instagram-wNN-schedule.json) と投稿済みログ (二重投稿の防止) は data/sns/
-const STATE_DIR = path.resolve(__dirname, "../../../data/sns");
+const ROOT = path.resolve(__dirname, "../../..");
+const STATE_DIR = path.join(ROOT, datasetDir("sns.instagram-schedules"));
 const FORCE_DATE = process.env.IG_FORCE_DATE; // YYYY-MM-DD
 
 // トークン検証は「当日エントリあり」確定後 (main 内) に行う。
@@ -133,7 +135,7 @@ function getJstTime() {
 
 /** ig-posted-log.jsonl から投稿済み (date|content_key) セットを作る (同日多重投稿の防止)。 */
 function loadPostedSet() {
-  const logPath = path.join(STATE_DIR, "ig-posted-log.jsonl");
+  const logPath = path.join(ROOT, datasetPath("sns.ig-posted-log"));
   const set = new Set();
   if (!fs.existsSync(logPath)) return set;
   for (const line of fs.readFileSync(logPath, "utf-8").trim().split("\n")) {

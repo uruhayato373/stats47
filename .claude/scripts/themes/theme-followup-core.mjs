@@ -1,4 +1,5 @@
 import { addDays } from '../metrics/lib/periods.mjs';
+import { datasetDir } from "../../../config/datasets.mjs";
 
 export function planFollowup(experiments, today, force = false) {
   if (!Array.isArray(experiments) || addDays(today, 0) !== today)
@@ -152,7 +153,7 @@ export function summarizeFollowup({
       '# テーマ継続確認',
       ...unique.map((p) => `- ${p}`),
       '',
-      '結果: `data/themes/ci-followup.json`。HTML・応答・cf-ray・スクリーンショットは実行runのtheme-followup-evidence artifactを参照。',
+      `結果: \`${datasetDir("themes.portfolio")}/ci-followup.json\`。HTML・応答・cf-ray・スクリーンショットは実行runのtheme-followup-evidence artifactを参照。`,
       '再現: `node --import tsx .claude/scripts/themes/audit-theme-runtime.ts` と `npm run theme:portfolio:audit`。',
     ].join('\n') + '\n';
   return {

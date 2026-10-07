@@ -21,6 +21,7 @@ import { resolve, join, dirname } from 'path'
 import { fileURLToPath } from 'url'
 import { createRequire } from 'module'
 import { R2_PUBLIC_BASE_URL, R2_BUCKET } from '../lib/site-config.cjs'
+import { datasetPath } from "../../../config/datasets.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const ROOT = resolve(__dirname, '../../..')
@@ -64,7 +65,7 @@ const s3 = DRY_RUN ? null : new S3Client({
 })
 
 // note-published-urls.json 読み込み
-const publishedPath = join(ROOT, 'data/note/note-published-urls.json')
+const publishedPath = join(ROOT, datasetPath("note.published-urls"))
 const publishedData = JSON.parse(readFileSync(publishedPath, 'utf8'))
 const articles = publishedData.articles || {}
 

@@ -27,10 +27,11 @@
  */
 import fs from "node:fs";
 import path from "node:path";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const PROJECT_ROOT = path.resolve(import.meta.dirname, "..", "..", "..");
 const DOCS = path.join(PROJECT_ROOT, "docs/21_ブログ記事原稿");
-const QUEUE = path.join(PROJECT_ROOT, "data/blog/remediation-queue.json");
+const QUEUE = path.join(PROJECT_ROOT, `${datasetDir("blog.operations")}/remediation-queue.json`);
 
 const args = process.argv.slice(2);
 const getArg = (k, d) => {

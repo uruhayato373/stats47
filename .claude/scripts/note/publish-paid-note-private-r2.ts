@@ -21,6 +21,7 @@ import {
 } from '@aws-sdk/client-s3';
 import { assertR2WriteAllowed } from '../../../packages/r2-storage/src/scripts/_assert-ci-write';
 import { R2_BUCKET, R2_PRIVATE_BUCKET } from '../lib/site-config.cjs';
+import { datasetPath } from "../../../config/datasets.mjs";
 
 interface PublishedArticle {
   vertical: string;
@@ -52,7 +53,7 @@ const client = new S3Client({
   credentials: { accessKeyId, secretAccessKey },
 });
 const state = JSON.parse(
-  fs.readFileSync(path.join(repoRoot, 'data/note/note-published-urls.json'), 'utf8'),
+  fs.readFileSync(path.join(repoRoot, datasetPath("note.published-urls")), 'utf8'),
 ) as { articles: Record<string, PublishedArticle> };
 
 function sha256(body: Uint8Array | string): string {

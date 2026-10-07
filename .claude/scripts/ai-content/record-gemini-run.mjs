@@ -9,6 +9,7 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const HEADER = [
   "date",
@@ -147,7 +148,7 @@ function main() {
   const reportPath = argValue(argv, "--report");
   const preflightReportPath = argValue(argv, "--preflight-report");
   const runId = argValue(argv, "--run-id") ?? process.env.GITHUB_RUN_ID;
-  const outputDir = argValue(argv, "--out-dir") ?? "data/ai-content";
+  const outputDir = argValue(argv, "--out-dir") ?? datasetDir("ai-content.history");
   if (!reportPath && !preflightReportPath) {
     throw new Error("--report or --preflight-report is required");
   }

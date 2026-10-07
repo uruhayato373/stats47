@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-06T02:19:55.525Z",
+  "generatedAt": "2026-10-07T01:35:08.816Z",
   "gscSnapshot": "2026-W40",
   "scopeKind": "all",
   "scope": "R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)",
@@ -5265,10 +5265,7 @@
         "pref-count"
       ],
       "lastModified": "Sun, 06 Sep 2026 21:23:14 GMT",
-      "updatedAt": "2026-09-06T07:25:30.276Z",
-      "dataWarns": [
-        "thin-coverage"
-      ]
+      "updatedAt": "2026-09-06T07:25:30.276Z"
     },
     {
       "rankingKey": "cod-pollution-load",

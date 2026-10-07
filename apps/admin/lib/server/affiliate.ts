@@ -23,10 +23,10 @@ import { cached, fileExists, readCsv, readJson, TTL, wrap, type Wrapped } from "
  * 欠測は 0 にせず、取得できなかった理由を返す (収益化戦略 §1)。
  */
 
-const METRICS = "data/affiliate";
+const METRICS = datasetDir("affiliate.audits");
 /** 提携台帳と GA4 実測の推移は記録なので data/affiliate/ */
 const ADS = datasetDir("affiliate.catalog");
-const AUTH = "data/authenticated/latest.json";
+const AUTH = `${datasetDir("revenue.authenticated")}/latest.json`;
 
 /** 表示がこれ以上あるのにクリック 0 の掲載位置を強調する (doboku-note と同じ基準) */
 export const ZERO_CLICK_IMPRESSION_THRESHOLD = 1000;

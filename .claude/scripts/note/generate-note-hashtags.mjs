@@ -18,6 +18,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { proposeHashtags } from './lib/note-hashtags-propose.mjs';
+import { datasetPath } from "../../../config/datasets.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, '../../..');
@@ -69,7 +70,7 @@ async function main() {
   const allMode = args.includes('--all');
   const draftRoot = path.join(PROJECT_ROOT, 'docs/31_note記事原稿');
 
-  const indexPath = path.join(PROJECT_ROOT, 'data/note/note-draft-index.json');
+  const indexPath = path.join(PROJECT_ROOT, datasetPath("note.draft-index"));
   const indexData = JSON.parse(fs.readFileSync(indexPath, 'utf8'));
   const drafts = indexData.drafts || {};
 

@@ -22,10 +22,11 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 const R2 = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
-const STATE_DIR = path.join(PROJECT_ROOT, "data/blog");
+const STATE_DIR = path.join(PROJECT_ROOT, datasetDir("blog.operations"));
 const LIMIT = process.argv.includes("--limit")
   ? Number(process.argv[process.argv.indexOf("--limit") + 1])
   : null;
@@ -174,10 +175,10 @@ ${Object.entries(byMethod).sort((a, b) => b[1] - a[1]).map(([k, v]) => `- \`${k}
 3. \`ssot-restore-new\` (${byMethod["ssot-restore-new"] || 0}): scatter/line/findings の復元手法を新規実装
 4. \`manual\` (${byMethod["manual"] || 0}): 無意味名・型不明 → 個別手当て
 
-真実源: \`data/blog/svg-lineage-queue.json\` / 正典: \`.claude/rules/blog-data-schema.md §1.7\`
+真実源: \`${datasetDir("blog.operations")}/svg-lineage-queue.json\` / 正典: \`.claude/rules/blog-data-schema.md §1.7\`
 `;
   fs.writeFileSync(path.join(STATE_DIR, "svg-lineage-LATEST.md"), md);
   console.error(`[lineage] queue: ${n} 枚 / both ${byStatus.both} / jsonOnly ${byStatus.jsonOnly} / neither ${byStatus.neither}`);
-  console.error(`[lineage] 書込: data/blog/svg-lineage-queue.json + svg-lineage-LATEST.md`);
+  console.error(`[lineage] 書込: ${datasetDir("blog.operations")}/svg-lineage-queue.json + svg-lineage-LATEST.md`);
 }
 main();

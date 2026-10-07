@@ -20,7 +20,9 @@
  *   - missing      : ai-content.json が R2 に無い → needs-regen
  *   - blocker      : ある が auditRow で blocker>0 (旧プロンプト由来の括弧数値等) → needs-regen
  *   - incomplete   : 4フィールドのいずれか欠落 (auditRow が missing-insights / missing-pref-commentary 等で blocker) → needs-regen
- *   - done         : ある かつ auditRow.ok (blocker 0)
+ *   - stale-year   : auditRow.ok だが解説の yearCode が values.json の最新年と違う → needs-regen
+ *                    (新しい年が取り込まれたあとも古い年を語り続けないため。lib/year-freshness.mjs)
+ *   - done         : ある かつ auditRow.ok (blocker 0) かつ解説の年が最新年
  *   - not-eligible : **観測値そのものが順位として成立しない** (全県同値 / 県重複 / 47超 / 0行)。
  *                    生成しても読者価値が無いので `--next` に出さない (下記)
  *
@@ -53,15 +55,17 @@ import { join, resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { auditRow } from "./audit-ai-content.mjs";
 import { checkValueHealth, latestPartition } from "./lib/value-health.mjs";
+import { applyYearFreshness } from "./lib/year-freshness.mjs";
 import { loadFailureState, quarantinedKeys } from "./record-generation-outcome.mjs";
 import { isAnchorRow } from "../gsc/analyze-ctr-seesaw.mjs";
 import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "..", "..", "..");
 const R2_PUBLIC = process.env.R2_PUBLIC_FETCH_URL ?? R2_PUBLIC_BASE_URL;
-const GSC_SNAP_DIR = join(ROOT, "data/gsc/snapshots");
-const STATE_DIR = join(ROOT, "data/ai-content/remediation");
+const GSC_SNAP_DIR = join(ROOT, datasetDir("gsc.snapshots"));
+const STATE_DIR = join(ROOT, datasetDir("ai-content.remediation"));
 const QUEUE_JSON = join(STATE_DIR, "remediation-queue.json");
 const LATEST_MD = join(STATE_DIR, "LATEST.md");
 const HISTORY_CSV = join(STATE_DIR, "progress-history.csv");
@@ -264,7 +268,12 @@ async function buildQueue(scope = "gsc") {
       batch.map(async (k) => {
         // ai-content (生成物) と values (接地データ) を同時に取る。直列にすると倍の時間がかかる。
         const [content, valueHealth] = await Promise.all([fetchAiContent(k), fetchValueHealth(k)]);
-        return applyValueHealth(classify(k, gscOf(k), content), valueHealth);
+        // 解説の年が values の最新年より古ければ作り直す (新しい年が取り込まれたあとに古い年を語らせない)
+        const fresh = applyYearFreshness(classify(k, gscOf(k), content), {
+          contentYear: content.row?.yearCode,
+          dataYear: valueHealth?.yearCode,
+        });
+        return applyValueHealth(fresh, valueHealth);
       }),
     );
     entries.push(...results);
@@ -293,7 +302,7 @@ async function buildQueue(scope = "gsc") {
       scope === "all"
         ? "R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)"
         : "GSC流入のある /ranking/ ページ (SEO優先母集団)",
-    doneCriteria: "R2 の ai-content が auditRow を通る (blocker 0)",
+    doneCriteria: "R2 の ai-content が auditRow を通り (blocker 0)、解説の年が values.json の最新年と同じ",
     summary: {
       total: entries.length,
       done: done.length,

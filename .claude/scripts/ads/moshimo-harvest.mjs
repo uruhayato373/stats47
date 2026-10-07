@@ -23,10 +23,11 @@ import {
   visibleText,
 } from './lib/asp-browser.mjs';
 import { parseMoshimoCode } from './lib/moshimo-code-core.mjs';
+import { datasetPath } from "../../../config/datasets.mjs";
 
 const CATALOG_PATH = join(
   repoRoot(),
-  'data/affiliate/affiliate-catalog.json'
+  datasetPath("affiliate.catalog")
 );
 const OUTPUT_DIR = join(repoRoot(), '.local/affiliate-harvest/moshimo');
 

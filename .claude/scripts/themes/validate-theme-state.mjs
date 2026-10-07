@@ -33,10 +33,11 @@ import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import { experimentIssues, assessCheckpoint, latestObservation } from "./evaluate-theme-experiments.mjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
-const STATE_DIR = process.env.STATE_DIR || path.join(PROJECT_ROOT, "data/themes");
+const STATE_DIR = process.env.STATE_DIR || path.join(PROJECT_ROOT, datasetDir("themes.portfolio"));
 const CATALOG_INDEX =
   process.env.CATALOG_INDEX || path.join(PROJECT_ROOT, "packages/data-configs/src/theme-catalog/index.ts");
 const jsonMode = process.argv.includes("--json");

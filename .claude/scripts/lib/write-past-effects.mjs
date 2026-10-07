@@ -35,14 +35,15 @@ import { fileURLToPath } from "node:url";
 import { parseBacklog } from "./scan-pending-improvements.mjs";
 import { toPathKey } from "../search-growth/lib/join-url.mjs";
 import { writeJson, readJson } from "../search-growth/lib/state.mjs";
+import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
 
-const SEARCH_GROWTH_LEDGER = path.join(PROJECT_ROOT, "data/search-growth/past-effects.json");
-const ADSENSE_LEDGER = path.join(PROJECT_ROOT, "data/adsense/past-effects.json");
-const BRUSHUP_HISTORY = path.join(PROJECT_ROOT, "data/blog/auto-brushup-history.json");
+const SEARCH_GROWTH_LEDGER = path.join(PROJECT_ROOT, `${datasetDir("search-growth.state")}/past-effects.json`);
+const ADSENSE_LEDGER = path.join(PROJECT_ROOT, datasetPath("adsense.past-effects"));
+const BRUSHUP_HISTORY = path.join(PROJECT_ROOT, `${datasetDir("blog.operations")}/auto-brushup-history.json`);
 
 /** サイト内 path として認識する第 1 セグメント (url-policy の実在ルートに限る)。 */
 const SITE_ROOTS = [

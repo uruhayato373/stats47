@@ -4,6 +4,7 @@ import { ALL_PRODUCTS } from "../../../../packages/product-factory/src/catalog/p
 import { COCONALA_LISTINGS } from "../../../../config/paths.mjs";
 import { readProductSales } from "./revenue";
 import { cached, fileExists, hasError, readJson, TTL, wrap, type Wrapped } from "./state-io";
+import { datasetPath } from "../../../../config/datasets.mjs";
 
 /**
  * ココナラの出品状況 (読み取り専用)。
@@ -107,7 +108,7 @@ export function coconalaSummary(): Wrapped<CoconalaSummary> {
         viewsTotal: measured
           ? { views: measured.analytics.views, start: measured.analytics.period.start, end: measured.analytics.period.end, observedAt: measured.generatedAt }
           : null,
-        source: `${LISTINGS} + packages/product-factory/src/catalog/products + data/products/sales-ledger.json + ${RESTORED}`,
+        source: `${LISTINGS} + packages/product-factory/src/catalog/products + ${datasetPath("sales.ledger")} + ${RESTORED}`,
       };
     }),
   );

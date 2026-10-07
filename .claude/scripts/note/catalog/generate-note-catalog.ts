@@ -13,6 +13,7 @@ import { mkdirSync, writeFileSync } from "fs";
 import { resolve, dirname, join } from "path";
 import { fileURLToPath } from "url";
 import { NOTE_ARTICLES } from "./index";
+import { datasetPath } from "../../../../config/datasets.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "../../../..");
@@ -56,7 +57,7 @@ const output = {
 const scratchpad = process.env.SCRATCHPAD || "/tmp";
 if (!APPLY) mkdirSync(scratchpad, { recursive: true });
 const outPath = APPLY
-  ? join(ROOT, "data/note/note-published-urls.json")
+  ? join(ROOT, datasetPath("note.published-urls"))
   : join(scratchpad, "note-published-urls.generated.json");
 
 writeFileSync(outPath, JSON.stringify(output, null, 2) + "\n", "utf8");

@@ -42,6 +42,7 @@ import {
   buildInventoryManifest,
 } from "./lib/adsense-report-contract.mjs";
 import { collectAdUnitEntries } from "./lib/adsense-ad-unit-walk.mjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 function requireEnv(name) {
   const v = process.env[name];
@@ -147,7 +148,7 @@ async function main() {
 
   // 期間は week から決定的に導出 (SSOT: periods.mjs)。未来週はここで throw する。
   const periods = resolvePeriods({ source: "adsense", week });
-  const outDir = join(PROJECT_ROOT, "data/adsense/snapshots", week);
+  const outDir = join(PROJECT_ROOT, datasetDir("adsense.snapshots"), week);
 
   if (dryRun) {
     console.log(`[adsense-snapshot] DRY-RUN week=${week} anchor=${periods.anchor} (遅延 ${periods.delayDays} 日)`);

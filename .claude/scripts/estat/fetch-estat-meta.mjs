@@ -22,6 +22,7 @@ import fs from "node:fs";
 import { fileURLToPath } from "node:url";
 import { ProxyAgent } from "undici";
 import { ESTAT_META_INFO_URL } from "../lib/estat-catalog/endpoints.cjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const PROJECT_ROOT = path.resolve(path.dirname(__filename), "..", "..", "..");
@@ -58,7 +59,7 @@ const proxyUrl = process.env.HTTPS_PROXY || process.env.HTTP_PROXY;
 const fetchOpts = proxyUrl ? { dispatcher: new ProxyAgent(proxyUrl) } : {};
 
 const BASE_URL = ESTAT_META_INFO_URL;
-const OUT_DIR = path.join(PROJECT_ROOT, "data/estat/meta");
+const OUT_DIR = path.join(PROJECT_ROOT, datasetDir("estat.meta"));
 const DELAY_MS = 500;
 
 function pickString(v) {
@@ -144,11 +145,11 @@ async function main() {
     await new Promise((r) => setTimeout(r, DELAY_MS));
   }
   fs.writeFileSync(
-    path.join(PROJECT_ROOT, "data/estat/meta-summary.json"),
+    path.join(PROJECT_ROOT, `${datasetDir("estat.candidates")}/meta-summary.json`),
     JSON.stringify(summaries, null, 2),
   );
-  console.log(`\n  → data/estat/meta/*.json (${statsDataIds.length} 件)`);
-  console.log(`  → data/estat/meta-summary.json`);
+  console.log(`\n  → ${datasetDir("estat.meta")}/*.json (${statsDataIds.length} 件)`);
+  console.log(`  → ${datasetDir("estat.candidates")}/meta-summary.json`);
 }
 
 main().catch((e) => {

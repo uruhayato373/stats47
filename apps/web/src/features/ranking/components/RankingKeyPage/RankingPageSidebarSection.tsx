@@ -1,5 +1,7 @@
 import { Suspense } from "react";
 
+import { RailLinksCard } from "@/components/rail";
+
 import {
   RailAdSlot,
   SidebarPromoBanner,
@@ -10,6 +12,7 @@ import type { AffiliateDestination } from "@/features/ads/constants/affiliate-de
 import { SIDEBAR_PROMO_BANNERS } from "@/features/ads/constants/sidebar-banners";
 import { AffiliateAdSlot, RakutenItemsCard } from "@/features/ads/server";
 import type { AreaType } from "@/features/area";
+import { listRelatedThemesForRankingKeys } from "@/features/theme-dashboard/server";
 
 import {
   ADSENSE_DISPLAY_ENABLED,
@@ -59,6 +62,9 @@ export function RankingPageSidebarSection({
   rankingName,
   excludeAffiliateAds = [],
 }: RankingPageSidebarSectionProps) {
+  // この指標を主指標・副指標として使うテーマ。ランキング (1 指標) からテーマ (複数指標の解釈) へ深掘りする導線。
+  // テーマは 47 都道府県を主語にするので、県のランキングでだけ出す。
+  const relatedThemes = areaType === "prefecture" ? listRelatedThemesForRankingKeys([rankingKey], { limit: 3 }) : [];
   // 品目が一致する家計調査だけを優先する。null（広告なし）の解決結果は覆さない。
   // 品目・R2在庫がない場合、カード自身が何も描画しない。
   const prioritizeRakutenItems = affiliateVertical !== null
@@ -107,6 +113,14 @@ export function RankingPageSidebarSection({
       {/* ランキング名が品目 (牛肉・うどん等) のとき楽天市場の商品を出す。品目でなければ描画しない。 */}
       {!prioritizeRakutenItems && rakutenItems}
       <RelatedArticlesCard rankingKey={rankingKey} areaType={areaType} />
+      {relatedThemes.length > 0 && (
+        <RailLinksCard
+          title="この指標を使うテーマ"
+          layout="list"
+          items={relatedThemes.map((theme) => ({ id: theme.themeKey, label: theme.title, href: theme.href }))}
+          trackingSurface="ranking_theme"
+        />
+      )}
       {/* AdSense再開時は従来位置へ戻し、同一バナーを二重描画しない。 */}
       {ADSENSE_DISPLAY_ENABLED && contextualAffiliateBanners}
       <SurveyCard

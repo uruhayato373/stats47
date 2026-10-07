@@ -28,12 +28,13 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
-const PORTFOLIO = path.join(PROJECT_ROOT, "data/surveys/portfolio.json");
-const GSC_SNAP = path.join(PROJECT_ROOT, "data/gsc/snapshots");
-const GA4_SNAP = path.join(PROJECT_ROOT, "data/ga4/snapshots");
+const PORTFOLIO = path.join(PROJECT_ROOT, `${datasetDir("surveys.portfolio")}/portfolio.json`);
+const GSC_SNAP = path.join(PROJECT_ROOT, datasetDir("gsc.snapshots"));
+const GA4_SNAP = path.join(PROJECT_ROOT, datasetDir("ga4.snapshots"));
 
 const MIN_GSC_IMPRESSIONS = 100; // per 56d (README 判定規律 3: imp<100 は CTR を確定しない)
 const MIN_GA4_PAGEVIEWS = 100;
@@ -186,8 +187,8 @@ function main() {
         rankingOutboundClicks,
       };
     }
-    s.gscSnapshotRef = `data/gsc/snapshots/${weeks[0]}/pages.csv`;
-    s.ga4SnapshotRef = `data/ga4/snapshots/${weeks[0]}/pages.csv`;
+    s.gscSnapshotRef = `${datasetDir("gsc.snapshots")}/${weeks[0]}/pages.csv`;
+    s.ga4SnapshotRef = `${datasetDir("ga4.snapshots")}/${weeks[0]}/pages.csv`;
 
     if ((s.metrics.gsc.impressions ?? 0) > 0 || (s.metrics.ga4.landingPageViews ?? 0) > 0) {
       withDemand.push([

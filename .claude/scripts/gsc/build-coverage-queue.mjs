@@ -61,6 +61,7 @@ import {
   summarizeCoverageQueue,
 } from "./lib/coverage-queue-state.mjs";
 import { SITE_ORIGIN } from "../lib/site-config.cjs";
+import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -81,13 +82,13 @@ const todayInTokyo = () =>
     day: "2-digit",
   }).format(new Date());
 
-const DRILLDOWN_DIR = path.join(PROJECT_ROOT, "data/gsc/coverage-drilldown");
-const STATE_DIR = path.join(PROJECT_ROOT, "data/gsc/coverage-remediation");
+const DRILLDOWN_DIR = path.join(PROJECT_ROOT, datasetDir("gsc.coverage-drilldown"));
+const STATE_DIR = path.join(PROJECT_ROOT, datasetDir("gsc.coverage-queue"));
 const QUEUE_PATH = path.join(STATE_DIR, "coverage-remediation-queue.json");
 const LATEST_PATH = path.join(STATE_DIR, "LATEST.md");
 // 件数の推移は記録なので data/gsc/ (キューと要約は作業状態なので data/gsc/coverage-remediation/)
-const TOTALS_HISTORY = path.join(PROJECT_ROOT, "data/gsc/coverage-totals-history.csv");
-const INSPECTION_DIR = path.join(PROJECT_ROOT, "data/gsc/url-inspection");
+const TOTALS_HISTORY = path.join(PROJECT_ROOT, datasetPath("gsc.coverage-totals"));
+const INSPECTION_DIR = path.join(PROJECT_ROOT, datasetDir("gsc.url-inspection"));
 const INSPECTION_WINDOW_DAYS = 14;
 
 const GOOGLEBOT_UA =
@@ -910,7 +911,7 @@ function writeLatest(out, observeCount) {
   const L = [];
   L.push(`# GSC カバレッジ是正 — ${out.week} (${out.generated_at})`);
   L.push("");
-  L.push("> SSOT: `data/gsc/coverage-remediation/coverage-remediation-queue.json` / 正典: `.claude/skills/analytics/gsc-coverage-remediation/SKILL.md`");
+  L.push(`> SSOT: \`${datasetPath("gsc.coverage-queue")}\` / 正典: \`.claude/skills/analytics/gsc-coverage-remediation/SKILL.md\``);
   L.push(`> 入力観測日: ${out.source_observed_at} / 入力週齢: ${out.source_age_weeks} 週`);
   L.push("");
   if (t) {

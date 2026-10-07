@@ -5,9 +5,10 @@ import { fileURLToPath } from 'node:url';
 import { createHash } from 'node:crypto';
 import Ajv from 'ajv';
 import schema from '../../../../data/note/cover-assets.schema.json' with { type: 'json' };
+import { datasetPath } from "../../../../config/datasets.mjs";
 
 export const COVER_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../../..');
-export const COVER_LEDGER_PATH = 'data/note/cover-assets.json';
+export const COVER_LEDGER_PATH = datasetPath("note.cover-assets");
 const ajv = new Ajv({ allErrors: true });
 const validateShape = ajv.compile(schema);
 export const coverSha = (bytes) => createHash('sha256').update(bytes).digest('hex');
@@ -27,7 +28,7 @@ export async function renameCoverFile(source, destination) {
 }
 export const coverUrlPath = (url) => url ? new URL(url).origin + new URL(url).pathname : null;
 export function assertCoverGenerationType(type) {
-  if (type === 'note-covers') throw Error('noteカバーは data/note/cover-assets.json が正本です。note:assets と generate-cover-refresh.ts を使用してください。汎用OGP生成からの上書きは終了しました。');
+  if (type === 'note-covers') throw Error(`noteカバーは ${datasetPath("note.cover-assets")} が正本です。note:assets と generate-cover-refresh.ts を使用してください。汎用OGP生成からの上書きは終了しました。`);
 }
 
 export function validateCoverLedger(ledger, catalog) {

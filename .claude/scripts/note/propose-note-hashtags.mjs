@@ -16,6 +16,7 @@ import { fileURLToPath } from 'node:url';
 import { fetchNoteDetail } from './lib/cover-storage.mjs';
 import { plainText, sourceSha256, hashtagFile, HASHTAG_MODEL } from './lib/note-hashtags.mjs';
 import { proposeHashtags } from './lib/note-hashtags-propose.mjs';
+import { datasetPath } from "../../../config/datasets.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');
 
@@ -27,7 +28,7 @@ if (Boolean(all) === Boolean(slugs?.length)) throw Error('`--slugs a,b` か `--a
 const force = argv.includes('--force');
 const CONCURRENCY = Number(value('--concurrency') || 3);
 
-const index = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/note/note-published-urls.json'), 'utf8')).articles;
+const index = JSON.parse(fs.readFileSync(path.join(ROOT, datasetPath("note.published-urls")), 'utf8')).articles;
 const targets = Object.entries(index).filter(([slug]) => !slug.startsWith('_') && (all || slugs.includes(slug)));
 if (slugs && targets.length !== slugs.length) throw Error('unknown slug in --slugs');
 

@@ -31,6 +31,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { THEME_CATALOGS } from "../../../packages/data-configs/src/theme-catalog/index.ts";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "../../..");
@@ -38,7 +39,7 @@ const AUDITS_DIR = path.join(
   ROOT,
   ".claude/skills/theme/manage-theme-portfolio/reference/audits",
 );
-const STATE_DIR = path.join(ROOT, "data/themes/role-review");
+const STATE_DIR = path.join(ROOT, datasetDir("themes.role-review"));
 const QUEUE_FILE = path.join(STATE_DIR, "role-review-queue.json");
 const LATEST_FILE = path.join(STATE_DIR, "LATEST.md");
 const DECISIONS_FILE = path.join(STATE_DIR, "role-review-decisions.json");

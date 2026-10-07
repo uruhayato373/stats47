@@ -21,4 +21,4 @@
 ## 欠陥一覧
 なし
 
-真実源: `.claude/state/blog/chart-provenance-queue.json` / 正典: `.claude/rules/blog-data-schema.md §1.5`
+真実源: `data/blog/chart-provenance-queue.json` / 正典: `.claude/rules/blog-data-schema.md §1.5`

@@ -1,7 +1,7 @@
 import "server-only";
 
 import { METRICS_REGISTRY } from "@stats47/data-configs/registry";
-import { THEME_CATALOGS } from "@stats47/data-configs/theme-catalog";
+import { THEME_CATALOGS, type CatalogMetricGroup } from "@stats47/data-configs/theme-catalog";
 import { fetchPrefectureTopology, fetchAllCitiesTopology } from "@stats47/gis/geoshape";
 import {
   readAllYearsRankingValuesFromR2,
@@ -12,6 +12,7 @@ import { isOk, type AreaType, type TopoJSONTopology } from "@stats47/types";
 
 import { logger } from "@/lib/logger";
 
+import { resolveComparisonYears } from "./resolve-comparison-years";
 import { themeYearLabel } from "./theme-year-label";
 
 import type { ThemeConfig, ThemeIndicatorData } from "../types";
@@ -20,6 +21,11 @@ import type { RankingItem, RankingValue } from "@stats47/ranking";
 export interface ThemePageData {
   indicatorDataMap: Record<string, ThemeIndicatorData>;
   topology: TopoJSONTopology | null;
+  /**
+   * カタログの指標カード編成。年を固定した比較カードの `comparisonYear` は、全指標に値がそろう
+   * R2 の最新年へ進めてある (resolveComparisonYears)。カタログに編成が無いテーマは undefined。
+   */
+  metricGroups?: CatalogMetricGroup[];
 }
 
 /**
@@ -68,13 +74,7 @@ export async function loadThemeData(
   options?: { areaType?: AreaType },
 ): Promise<ThemePageData | null> {
   const areaType: AreaType = options?.areaType ?? "prefecture";
-  const comparisonYears = new Map(
-    (THEME_CATALOGS[theme.themeKey]?.metricGroups ?? []).flatMap((group) =>
-      group.comparisonYear
-        ? group.rankingKeys.map((key) => [key, group.comparisonYear] as const)
-        : []
-    )
-  );
+  const catalogGroups = THEME_CATALOGS[theme.themeKey]?.metricGroups;
 
   // tabIndicators のキーと rankingKeys をマージ（重複排除）
   const tabKeys = theme.tabIndicators?.map((t) => t.rankingKey) ?? [];
@@ -99,6 +99,20 @@ export async function loadThemeData(
   }
 
   if (validItems.length === 0) return null;
+
+  const metricGroups = catalogGroups
+    ? resolveComparisonYears(
+        catalogGroups,
+        new Map(validItems.map(({ key, item }) => [key, item.availableYears?.map((y) => y.yearCode)])),
+      )
+    : undefined;
+  const comparisonYears = new Map(
+    (metricGroups ?? []).flatMap((group) =>
+      group.comparisonYear
+        ? group.rankingKeys.map((key) => [key, group.comparisonYear] as const)
+        : []
+    )
+  );
 
   // 2. 全指標のデータ + TopoJSON を並列取得。
   //    hideMap テーマは地図を描画しないため、巨大な GIS topology を fetch しない
@@ -193,5 +207,5 @@ export async function loadThemeData(
 
   if (Object.keys(indicatorDataMap).length === 0) return null;
 
-  return { indicatorDataMap, topology };
+  return { indicatorDataMap, topology, ...(metricGroups ? { metricGroups } : {}) };
 }

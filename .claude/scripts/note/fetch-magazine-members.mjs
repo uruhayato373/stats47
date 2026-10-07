@@ -10,6 +10,7 @@ import { chromium } from "playwright";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { mkdirSync, writeFileSync, readFileSync } from "node:fs";
+import { datasetPath } from "../../../config/datasets.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 const PROFILE = join(ROOT, ".local/playwright-note-profile");
@@ -27,7 +28,7 @@ const MAGS = [
 // catalog の noteUrl -> {catalogKey, magazine, isPaid} を索引 (突合用)
 const idx = new Map();
 try {
-  const pub = JSON.parse(readFileSync(join(ROOT, "data/note/note-published-urls.json"), "utf8")).articles;
+  const pub = JSON.parse(readFileSync(join(ROOT, datasetPath("note.published-urls")), "utf8")).articles;
   for (const [k, a] of Object.entries(pub)) {
     if (a.url) {
       const noteId = a.url.split("/n/")[1];

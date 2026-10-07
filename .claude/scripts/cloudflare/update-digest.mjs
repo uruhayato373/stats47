@@ -13,9 +13,10 @@
 import { readFileSync, writeFileSync, readdirSync, existsSync, appendFileSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 const PROJECT_ROOT = resolve(fileURLToPath(import.meta.url), "..", "..", "..", "..");
-const STATE_DIR = join(PROJECT_ROOT, "data/cloudflare");
+const STATE_DIR = join(PROJECT_ROOT, datasetDir("cloudflare.cost-snapshots"));
 const SNAPSHOTS_DIR = join(STATE_DIR, "snapshots");
 const HISTORY_CSV = join(STATE_DIR, "history.csv");
 const LATEST_MD = join(STATE_DIR, "LATEST.md");
@@ -162,7 +163,7 @@ function writeLatest() {
 
   lines.push("## History");
   lines.push("");
-  lines.push("Last 7 days (`data/cloudflare/history.csv`):");
+  lines.push(`Last 7 days (\`${datasetPath("cloudflare.history")}\`):`);
   lines.push("");
   lines.push("```");
   const hist = loadHistory();

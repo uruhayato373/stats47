@@ -3,9 +3,10 @@ import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 
 import { evaluateAffiliatePortfolioFreshness } from "./lib/affiliate-portfolio-core.mjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const pathArgIndex = process.argv.indexOf("--path");
-const path = resolve(pathArgIndex >= 0 ? process.argv[pathArgIndex + 1] : "data/affiliate/affiliate-portfolio-latest.json");
+const path = resolve(pathArgIndex >= 0 ? process.argv[pathArgIndex + 1] : `${datasetDir("affiliate.placement-baseline")}/affiliate-portfolio-latest.json`);
 const state = existsSync(path) ? JSON.parse(readFileSync(path, "utf8")) : null;
 const result = evaluateAffiliatePortfolioFreshness(state, new Date().toISOString());
 console.log(`affiliate portfolio freshness: ${result.status} age=${result.ageDays ?? "?"}d`);

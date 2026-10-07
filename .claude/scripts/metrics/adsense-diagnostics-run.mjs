@@ -18,9 +18,10 @@ import { readCsv } from "./update-history-csv.mjs";
 import { resolvePeriods } from "./lib/periods.mjs";
 import { buildAdsenseCandidates, MAX_CANDIDATES, ADSENSE_ACTIVE_WIP_LIMIT, ADSENSE_WEEKLY_ADOPTION_LIMIT } from "./lib/adsense-diagnostics.mjs";
 import { MANIFEST_FILE } from "./lib/adsense-report-contract.mjs";
+import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
-const STATE_DIR = join(PROJECT_ROOT, "data/adsense");
-const SNAP_DIR = join(PROJECT_ROOT, "data/adsense/snapshots");
+const STATE_DIR = join(PROJECT_ROOT, datasetDir("adsense.reports"));
+const SNAP_DIR = join(PROJECT_ROOT, datasetDir("adsense.snapshots"));
 
 const num = (v) => {
   if (v === undefined || v === null || v === "") return null;
@@ -164,7 +165,7 @@ function main() {
     console.log(`  [${c.rule}] ${c.key} score=${c.score} confidence=${c.confidence}`);
     console.log(`      判定: 14日=${c.judgment.day14} / 28日=${c.judgment.day28}  lever=${c.expectedLever}`);
   }
-  console.log(`wrote data/adsense/candidates-latest.json`);
+  console.log(`wrote ${datasetPath("adsense.candidates")}`);
 }
 
 main();

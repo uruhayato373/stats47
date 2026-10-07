@@ -28,14 +28,15 @@ import { require as tsxRequire } from "tsx/cjs/api";
 
 import { isAnchorRow } from "../gsc/analyze-ctr-seesaw.mjs";
 import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 const require = createRequire(import.meta.url);
 const core = require("./lib/placement-map-core.mjs");
 const scoutCore = require("./lib/a8-scout-core.mjs");
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
-const SNAP_DIR = join(ROOT, "data/gsc/snapshots");
-const OUT = join(ROOT, "data/affiliate/placement-map-latest.json");
+const SNAP_DIR = join(ROOT, datasetDir("gsc.snapshots"));
+const OUT = join(ROOT, `${datasetDir("affiliate.audits")}/placement-map-latest.json`);
 
 const args = process.argv.slice(2);
 const DRY = args.includes("--dry-run");
@@ -217,7 +218,7 @@ async function main() {
   });
 
   // reverse: 高EPC の案件と当て先 suggest
-  const catalog = JSON.parse(readFileSync(join(ROOT, "data/affiliate/a8-catalog.json"), "utf8"));
+  const catalog = JSON.parse(readFileSync(join(ROOT, datasetPath("a8.catalog")), "utf8"));
   const entries = Object.values(catalog.entries ?? {});
   // 共用案件 = doboku-note も配信している A8 プログラム。EPC は口座横断で stats47 単独ではない。
   const sharedProgramIds = ["s00000024757004", "s00000023057002", "s00000022176005"];

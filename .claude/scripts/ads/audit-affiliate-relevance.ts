@@ -22,12 +22,13 @@ import {
   auditBlogAffiliateRelevance,
 } from "./lib/affiliate-relevance-core.mjs";
 import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const args = new Set(process.argv.slice(2));
 const live = args.has("--live");
 const check = args.has("--check");
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
-const statePath = path.join(root, "data/affiliate/relevance-latest.json");
+const statePath = path.join(root, `${datasetDir("rakuten.results")}/relevance-latest.json`);
 
 async function main() {
   const catalogErrors = auditBlogAffiliatePolicyCatalog(

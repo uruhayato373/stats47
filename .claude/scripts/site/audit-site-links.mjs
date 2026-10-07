@@ -34,6 +34,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { R2_PUBLIC_BASE_URL, SITE_ORIGIN } from "../lib/site-config.cjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const ORIGIN = (process.env.SITE_ORIGIN ?? SITE_ORIGIN).replace(/\/$/, "");
 const R2_PUBLIC = (process.env.R2_PUBLIC_FETCH_URL ?? R2_PUBLIC_BASE_URL).replace(/\/$/, "");
@@ -308,7 +309,7 @@ async function main() {
   };
   const outPath = JSON_OUT
     ? path.resolve(JSON_OUT)
-    : path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../../data/site/link-audit.json");
+    : path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..", `${datasetDir("site.link-audit")}/link-audit.json`);
   fs.mkdirSync(path.dirname(outPath), { recursive: true });
   fs.writeFileSync(outPath, JSON.stringify(report, null, 2) + "\n", "utf8");
   console.log(`\n📄 ${outPath}`);

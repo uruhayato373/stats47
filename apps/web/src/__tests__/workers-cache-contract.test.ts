@@ -96,6 +96,28 @@ describe("Workers Cache invalidation wiring", () => {
     expect(workflow).not.toContain('main = ".open-next/worker.js"');
   });
 
+  // 2026-10-06 (Issue #1089): デプロイ後に / の HTML が消えた CSS (404) を参照したまま Workers Cache に残り、
+  // ホームが CSS なしで表示された。ウォームより前に消さないと、ウォーム自身が古い HTML を入れ直しうる。
+  it("deploy workflowは本番デプロイの後・ウォームの前にWorkers Cacheを全パージする", () => {
+    const workflow = readProjectFile(".github/workflows/deploy-workers.yml");
+    const script = readProjectFile(".github/scripts/reset-worker-cache-after-deploy.sh");
+    const deployAt = workflow.indexOf("name: Deploy to Production");
+    const resetAt = workflow.indexOf("bash .github/scripts/reset-worker-cache-after-deploy.sh");
+    const warmAt = workflow.indexOf("bash .github/scripts/warm-cache.sh");
+    expect(deployAt).toBeGreaterThan(-1);
+    expect(resetAt).toBeGreaterThan(deployAt);
+    expect(warmAt).toBeGreaterThan(resetAt);
+    expect(workflow.slice(resetAt - 300, resetAt)).toContain("WORKER_CACHE_PURGE_SECRET");
+    expect(script).toContain("purge-worker-cache.ts --all");
+    expect(script).toContain("__deploy_probe");
+  });
+
+  it("route smokeはHTMLが参照する/_next/staticの資産が200を返すかを検査する", () => {
+    const smoke = readProjectFile(".github/scripts/smoke-test-routes.sh");
+    expect(smoke).toMatch(/grep -oE '\/_next\/static\/\[\^"\?\]\+\\\.\(css\|js\)'/);
+    expect(smoke).toContain("[stale asset]");
+  });
+
   it("deploy prebuildが検索index専用processでCloudflare資格情報を変換する", () => {
     const workflow = readProjectFile(".github/workflows/deploy-workers.yml");
     const generator = readProjectFile("apps/web/scripts/generate-search-index.ts");

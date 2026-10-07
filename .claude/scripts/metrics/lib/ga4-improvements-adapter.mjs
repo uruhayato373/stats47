@@ -19,6 +19,7 @@ import { parseBacklog } from "../../lib/scan-pending-improvements.mjs";
 import { DEFAULT_THRESHOLDS } from "../../lib/effect-verdict/thresholds.mjs";
 import { parseCsv } from "./measurement-cycle.mjs";
 import { PROJECT_ROOT } from "./auth.mjs";
+import { datasetDir } from "../../../../config/datasets.mjs";
 
 const ACTIVE_STATUSES = new Set(["pending", "in-progress", "effect/pending"]);
 const PAGE_MARKER = /\[ga4-page:\s*([^\]\s]+)\s*\]/g;
@@ -115,7 +116,7 @@ export function createGa4ImprovementsAdapter({ entries, availableWeeks, loadPage
 
 /** repo の improvements.md と GA4 週次 snapshot から adapter を組み立てる (effect-verdict/cli.mjs が使う)。 */
 export function loadGa4ImprovementsAdapter({ root = PROJECT_ROOT, minWeeks = DEFAULT_THRESHOLDS.window.minWeeks } = {}) {
-  const snapshotDir = path.join(root, "data/ga4/snapshots");
+  const snapshotDir = path.join(root, datasetDir("ga4.snapshots"));
   const availableWeeks = fs.existsSync(snapshotDir)
     ? fs.readdirSync(snapshotDir).filter((d) => /^\d{4}-W\d{2}$/.test(d) && fs.existsSync(path.join(snapshotDir, d, "pages-clean.csv"))).sort()
     : [];
@@ -133,6 +134,6 @@ export function loadGa4ImprovementsAdapter({ root = PROJECT_ROOT, minWeeks = DEF
     availableWeeks,
     loadPages,
     minWeeks,
-    logPath: path.join(root, "data/improvement/ga4-improvement/improvement-log.md"),
+    logPath: path.join(root, `${datasetDir("improvement.logs")}/ga4-improvement/improvement-log.md`),
   });
 }

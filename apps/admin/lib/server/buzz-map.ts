@@ -5,6 +5,7 @@ import path from "node:path";
 
 import { projectRoot, localSnsDir, R2_BASE } from "./project-root";
 import { query as queryPosts } from "./posts-store";
+import { datasetDir } from "../../../../config/datasets.mjs";
 
 /**
  * buzz-map カタログの読み取り + 表示用 decorate。
@@ -56,7 +57,7 @@ interface CatalogFile {
 }
 
 function catalogPath(): string {
-  return path.join(projectRoot(), "data/sns/buzz-map-catalog.json");
+  return path.join(projectRoot(), `${datasetDir("sns.buzz-map-attribution")}/buzz-map-catalog.json`);
 }
 
 function loadCatalog(): CatalogFile {
