@@ -8,10 +8,10 @@
  * INDEXING-SITEMAP-02: 「コンテンツ実体のある URL」= active・prefecture対応・R2実在。
  * 2026-05-05 の単一週絞り込みによる大量インデックス削除を回避する設計 (詳細はスクリプト docstring)。
  *
- * 集計週: 2026-W16, 2026-W17, 2026-W18, 2026-W19, 2026-W20, 2026-W21, 2026-W22, 2026-W23, 2026-W24, 2026-W25, 2026-W26, 2026-W27, 2026-W28, 2026-W29, 2026-W30, 2026-W31, 2026-W32, 2026-W33, 2026-W34, 2026-W35, 2026-W36, 2026-W37, 2026-W38, 2026-W39
- *   週別 impressions>=1 キー数: 2026-W16: 314 / 2026-W17: 339 / 2026-W18: 621 / 2026-W19: 681 / 2026-W20: 798 / 2026-W21: 822 / 2026-W22: 842 / 2026-W23: 835 / 2026-W24: 924 / 2026-W25: 961 / 2026-W26: 1015 / 2026-W27: 1057 / 2026-W28: 1124 / 2026-W29: 1136 / 2026-W30: 1167 / 2026-W31: 1168 / 2026-W32: 1165 / 2026-W33: 1181 / 2026-W34: 1294 / 2026-W35: 1293 / 2026-W36: 1288 / 2026-W37: 1293 / 2026-W38: 1308 / 2026-W39: 1391
- * 和集合: 2411 キー (INDEXABLE +0 / KNOWN +699 / INDEXABLE 総数 335 / KNOWN 総数 2411)
- * 生成日: 2026-09-30
+ * 集計週: 2026-W16, 2026-W17, 2026-W18, 2026-W19, 2026-W20, 2026-W21, 2026-W22, 2026-W23, 2026-W24, 2026-W25, 2026-W26, 2026-W27, 2026-W28, 2026-W29, 2026-W30, 2026-W31, 2026-W32, 2026-W33, 2026-W34, 2026-W35, 2026-W36, 2026-W37, 2026-W38, 2026-W39, 2026-W40
+ *   週別 impressions>=1 キー数: 2026-W16: 314 / 2026-W17: 339 / 2026-W18: 621 / 2026-W19: 681 / 2026-W20: 798 / 2026-W21: 822 / 2026-W22: 842 / 2026-W23: 835 / 2026-W24: 924 / 2026-W25: 961 / 2026-W26: 1015 / 2026-W27: 1057 / 2026-W28: 1124 / 2026-W29: 1136 / 2026-W30: 1167 / 2026-W31: 1168 / 2026-W32: 1165 / 2026-W33: 1181 / 2026-W34: 1294 / 2026-W35: 1293 / 2026-W36: 1288 / 2026-W37: 1293 / 2026-W38: 1308 / 2026-W39: 1391 / 2026-W40: 1463
+ * 和集合: 2424 キー (INDEXABLE +0 / KNOWN +639 / INDEXABLE 総数 335 / KNOWN 総数 2424)
+ * 生成日: 2026-10-07
  *
  * 安全弁: url-policy.ts shouldIncludeInSitemap は本セットが空の場合 KNOWN 全件に
  *         フォールバックする (生成失敗時の大量削除を防ぐ)。
@@ -27,6 +27,7 @@ export const SITEMAP_RANKING_KEYS = new Set<string>([
   "accountant-annual-income",
   "active-job-opening-ratio",
   "actual-income-worker-households-per-month",
+  "actual-overnight-guests",
   "acupuncture-moxibustion-count",
   "acupuncturist-rate",
   "adult-class-lecture-count-per-million",
@@ -92,6 +93,8 @@ export const SITEMAP_RANKING_KEYS = new Set<string>([
   "assistance-expenditure-ratio-pref-finance",
   "assistance-expenses-prefecture",
   "associate-professor-annual-income",
+  "auto-insurance-penetration-bodily-injury-actual",
+  "auto-insurance-penetration-bodily-injury-fixed",
   "auto-liability-insurance-amount-received-per-payment",
   "auto-mechanic-annual-income",
   "autolock-apartment-rate",
@@ -257,6 +260,7 @@ export const SITEMAP_RANKING_KEYS = new Set<string>([
   "chicken-consumption-expenditure",
   "chicken-consumption-quantity",
   "chikuwa-consumption-expenditure",
+  "child-abuse-consultation-cases",
   "child-consultation-center-cases",
   "child-consultation-center-cases-per-1000",
   "child-rearing-allowance-recipients",
@@ -391,6 +395,7 @@ export const SITEMAP_RANKING_KEYS = new Set<string>([
   "crab-consumption-expenditure",
   "crab-consumption-quantity",
   "craft-materials-consumption-expenditure",
+  "cram-school-establishment-count",
   "criminal-arrest-rate",
   "criminal-recognition-count",
   "criminal-recognition-count-of-prostitution-crime-rate",
@@ -435,6 +440,7 @@ export const SITEMAP_RANKING_KEYS = new Set<string>([
   "daytime-population-ratio",
   "death-accident",
   "death-count",
+  "deaths-cerebral-infarction-per-100k",
   "deaths-cerebrovascular-disease",
   "deaths-cerebrovascular-disease-per-100k",
   "deaths-diabetes",
@@ -639,6 +645,8 @@ export const SITEMAP_RANKING_KEYS = new Set<string>([
   "final-energy-consumption-per-capita",
   "financial-assets-balance-multi-person-households",
   "financial-debt-balance",
+  "fire-affected-persons-count",
+  "fire-damage-amount",
   "fire-damage-casualties-per-accident",
   "fire-damage-casualties-per-population",
   "fire-damage-household-count-per-100-building-fires",
@@ -746,6 +754,7 @@ export const SITEMAP_RANKING_KEYS = new Set<string>([
   "fresh-shiitake-consumption-quantity",
   "fresh-udon-soba-consumption-expenditure",
   "fresh-udon-soba-consumption-quantity",
+  "fresh-vegetables-consumption-expenditure",
   "freshwater-clam-consumption-expenditure",
   "freshwater-clam-consumption-quantity",
   "fried-tofu-consumption-expenditure",
@@ -1284,6 +1293,7 @@ export const SITEMAP_RANKING_KEYS = new Set<string>([
   "monthly-average-actual-working-hours-male-pre2019",
   "monthly-parking-consumption-expenditure",
   "moped-count",
+  "mothers-age-at-first-birth",
   "motorcycle-count",
   "movers-in",
   "movers-out",
@@ -1416,6 +1426,7 @@ export const SITEMAP_RANKING_KEYS = new Set<string>([
   "nursery-count-per-100k-0-5",
   "nursery-teacher-annual-income",
   "nursery-utilization-rate",
+  "nursery-waiting-children-count",
   "nurses-general-hospital-per-100beds",
   "nurses-in-medical-facilities-per-100k",
   "nurses-per-100k-population",
@@ -1955,6 +1966,7 @@ export const SITEMAP_RANKING_KEYS = new Set<string>([
   "science-museum-count",
   "sea-bream-consumption-expenditure",
   "sea-bream-consumption-quantity",
+  "seafood-consumption-expenditure",
   "secondary-activity-avg-time-employed-female",
   "secondary-activity-avg-time-employed-male",
   "secondary-activity-avg-time-unemployed-female",
@@ -2184,6 +2196,7 @@ export const SITEMAP_RANKING_KEYS = new Set<string>([
   "theft-criminal-arrest-rate",
   "theft-offenses-recognized",
   "theft-offenses-recognized-per-1000",
+  "three-generation-household-members",
   "tissue-paper-consumption-expenditure",
   "tobacco-consumption-expenditure",
   "tofu-consumption-expenditure",
