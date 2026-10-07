@@ -1,6 +1,0 @@
-{
-  "metric": "actual-overnight-guests,room-utilization-rate,number-of-hotel-facilities,consumer-price-difference-index-overall-excl-rent,consumer-price-difference-index-utilities,consumer-price-difference-index-education,consumer-price-difference-index-culture-recreation,consumer-price-difference-index-transport-communication,consumer-price-difference-index-healthcare,consumer-price-difference-index-clothing-footwear,consumer-price-difference-index-furniture-household,consumer-price-difference-index-miscellaneous",
-  "since": "",
-  "dryRun": false,
-  "reason": "dryRun (run 37692245201) で ok 12 / fail 0、行数は実宿泊者数・客室稼働率 752 (47 県 x 16 年)、ホテル営業施設数 987 (47 x 21)、物価地域差指数 9 指標 564 (47 x 12) を確かめた。R2 に反映する (THEME-REVIEW-TOURISM-CPI-01)"
-}
