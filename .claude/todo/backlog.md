@@ -3016,6 +3016,10 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
   選定根拠 15 件を gate に通して書いた (提案文書は `implemented-pending-release`)。`data-refresh` の dryRun を依頼済み。
   **残り**: dryRun の件数を見て実 push を依頼 → PR #1100 の CI を green にしてマージ → page-components と ranking-items を R2 へ反映・キー一覧を同期 →
   本番で 2 テーマと `/ranking/actual-overnight-guests` を確かめる。
+- **2026-10-08 観測値は R2 に反映済み**: dryRun (run 37692245201) は ok 12 / fail 0。実 push (run 37693107860) の観測値は公開 URL で確かめた
+  (物価 9 指標 564 行 = 47 県 × 2013〜2024、客室稼働率・実宿泊者数 752 行 = 47 × 2009〜2024、ホテル営業施設数 987 行 = 47 × 1997〜2017)。
+  PR #1100 の pr-quality-check はコード変更の最後の commit (4e21dd945) で全 job 成功。localhost の 5 幅確認は崩れなし
+  (実宿泊者数のカードは ranking-items、物価のヒートマップは page-components の R2 反映後に出る)。
 - **停止条件**: 承認前は `data/themes/catalogs/` と metric config を編集しない。公開 (main へのマージ・R2 反映) は別に承認を取る。
 - **完了条件**: 2 テーマの提案の status が `implemented-pending-release` 以降になり、本番で提案どおりの章・カード・図が出ている。
 
