@@ -2587,11 +2587,18 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
   ② ブログは blog snapshot に記事が使う指標と図の年 (`rankingRefs`) と逆引き `rankingArticleIndex` を焼き、日次で図の年が古い記事を
   `data/blog/stale-data-years.{json,md}` に出す (次の sync-snapshots の blog task から有効)。同じ索引で、ランキング・テーマ・エリア・ブログを
   「同じ指標を使う」関係で互いにつないだ (#1096。第四分類軸ではなく参照関係として `03_情報設計.md` に節を足した)。
-- **次**: ① #1095 → #1096 の順にマージし、sync-snapshots の blog task 後に `stale-data-years.md` の件数と、ランキングの関連記事が出ることを確かめる。
-  ② 図の年が古い記事のデータを取り直す手順 (`fetch-ranking-data-r2.mjs` → `generate-article-charts.ts` → 本文の年と数値の書き直し → critic) を
-  brushup か別の skill に持たせる (今の brushup はデータを取り直さない)。③ `comparisonYear` のカードは `THEME-SINGLE-YEAR-CARDS-01` の振り分けで扱う。
-- **完了条件**: 新しい年が R2 に入った翌週に、AI 解説が新しい年で作り直しの対象になり、古い年のブログ記事が一覧に出て、計算型の
-  ランキングが 1 回の data-refresh で新しい年を表示する。
+- **実装 2 (2026-10-07・PR #1097、draft、#1096 の上)**: ② ブログは `refresh-article-data-years.mjs` が `kind: ranking` の図
+  (data JSON が fetch-ranking-data-r2 の形) を最新年で data・source・SVG まで作り直し、本文で古い年を書いた行を出す。
+  是正キューに `data-refresh` レーン (must-fix の次) を足し、brushup の focus `最新データ更新` を取り直し → 本文 → critic の手順にした。
+  意図して古い年を描いた図は source.json の `yearPinnedReason` で外す。④ テーマの `comparisonYear` は起点の年とし、
+  全指標に値がそろう R2 の最新年 (`availableYears`) へ実行時に進める。実測: 公開 609 記事・図 1,596 枚のうち自動で取り直せる形が 959 枚、
+  今の本番で図の年が古いのは 21 記事・24 枚。
+- **次**: ① #1095 → #1096 → #1097 の順にマージし、sync-snapshots の blog task 後に `stale-data-years.md` の件数・
+  キューの `data-refresh` 件数・ランキングの関連記事を確かめる。② data-refresh レーンを `/brushup-blog --target queue` で消化する。
+  `fiscal-health-50years-trend` (1989 年の地図) と cc-estat 系の手順解説は `yearPinnedReason` を付ける候補 (取り直すか固定するかは記事ごとに判断)。
+  ③ 年が 1 年だけのカードを推移へ戻すかは `THEME-SINGLE-YEAR-CARDS-01` で扱う (比較カードの年は追従するようになった)。
+- **完了条件**: 新しい年が R2 に入った翌週に、AI 解説が新しい年で作り直しの対象になり、古い年のブログ記事が一覧と是正キューの
+  data-refresh レーンに出て、計算型のランキングが 1 回の data-refresh で新しい年を表示し、テーマの比較カードが新しい年を描く。
 
 ### [THEME-SINGLE-YEAR-CARDS-01] 1 年分しかない指標のカード 287 枚を、年の拡張か年固定の比較カードへ振り分ける
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npx vitest run packages/data-configs/src/theme-catalog/__tests__/selection-viewpoints.test.ts] [起票:2026-10-07] [領域:データ]
