@@ -5,6 +5,7 @@ import { Grid, Section, Stack } from "@/components/layout-primitives";
 import { PageHeading } from "@/components/ops/primitives";
 import { themeViewpointSummary } from "@/lib/server/theme-viewpoints";
 
+import { datasetDir } from "../../../../../config/datasets.mjs";
 import { THEME_SELECTION_VIEWPOINTS } from "../../../../../config/paths.mjs";
 
 export const dynamic = "force-dynamic";
@@ -46,7 +47,7 @@ export default async function ThemeViewpointsPage({
     <Stack gap="lg">
       <PageHeading
         title="指標を選ぶ視点"
-        source={`${THEME_SELECTION_VIEWPOINTS} + data/themes/catalogs/`}
+        source={`${THEME_SELECTION_VIEWPOINTS} + ${datasetDir("themes.catalogs")}/`}
       >
         <p className="mt-2 max-w-3xl text-sm text-console-muted">
           テーマページの指標を選ぶときの採用基準と判断規則。機械で数えられる規則は、全テーマのカタログを毎回読み直して
