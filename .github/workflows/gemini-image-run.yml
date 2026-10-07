@@ -1,6 +1,12 @@
 name: 🎨 Gemini Image Run (request-file)
 
 # cloud Claude Code から Gemini API を使うための CI 実行経路 (2026-07-14 新設)。
+#
+# ★2026-10-07: task "blog-ogp" (ブログ背景の Gemini 生成) は廃止し、受け付けずに失敗させる。
+#   ブログの記事固有背景は Codex imagegen で作り assets/blog/article-backgrounds/ に置く
+#   (/generate-blog-images の Mode A。正典 .claude/rules/ogp-image-standards.md)。
+#   公開時のサムネイル検査のエラーがこの経路を案内していたため、書き直した記事の背景を
+#   Gemini で作ろうとする誤りが起きた。受け付ける task は今は無い (area-specialty は未配線)。
 # GEMINI_API_KEY は GitHub Secrets 専任 (ローカル .env.local 管理を不要にする)。
 #
 # 発火経路は 2 つ:
@@ -75,31 +81,19 @@ jobs:
 
       - name: 📋 Resolve request (dispatch 入力 or request file)
         id: req
-        env:
-          IN_SLUGS: ${{ inputs.slugs }}
-          IN_BUDGET: ${{ inputs.budget_usd }}
-          IN_APPLY: ${{ inputs.apply }}
+        # 受け付ける task は今は無い (blog-ogp は 2026-10-07 に廃止)。後続の生成 step は、新しい task を
+        # 配線するまで動かない。依頼ファイルは下の consume step が結果によらず消す。
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            {
-              echo "slugs=${IN_SLUGS}"
-              echo "budget=${IN_BUDGET:-0.5}"
-              echo "apply=${IN_APPLY:-false}"
-            } >> "$GITHUB_OUTPUT"
-          else
-            node -e '
-              const fs = require("fs");
-              const r = JSON.parse(fs.readFileSync("data/gemini-image-requests.json", "utf8"));
-              if (r.task !== "blog-ogp") { console.error("✗ task は blog-ogp のみ:", r.task); process.exit(1); }
-              const slugs = (r.slugs || []).filter((s) => /^[a-z0-9-]+$/.test(s));
-              if (slugs.length === 0) { console.error("✗ slugs が空/不正"); process.exit(1); }
-              const budget = Number(r.budgetUsd ?? 0.5);
-              if (!(budget > 0 && budget <= 2)) { console.error("✗ budgetUsd は 0<x<=2:", r.budgetUsd); process.exit(1); }
-              fs.appendFileSync(process.env.GITHUB_OUTPUT,
-                "slugs=" + slugs.join(",") + "\nbudget=" + budget + "\napply=" + (r.apply === true) + "\n");
-              console.log("request:", slugs.length, "slugs / budget $" + budget + " / apply=" + (r.apply === true));
-            '
+            echo "✗ ブログ背景の Gemini 生成 (blog-ogp) は廃止。/generate-blog-images の Mode A (Codex) を使う"
+            exit 1
           fi
+          node -e '
+            const r = JSON.parse(require("fs").readFileSync("data/gemini-image-requests.json", "utf8"));
+            if (r.task === "blog-ogp") console.error("✗ ブログ背景の Gemini 生成 (blog-ogp) は廃止。/generate-blog-images の Mode A (Codex) を使う");
+            else console.error("✗ 受け付ける task がありません:", r.task);
+            process.exit(1);
+          '
 
       - name: 🎨 Generate blog OGP AI backgrounds (Gemini)
         env:

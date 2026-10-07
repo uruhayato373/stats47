@@ -1,0 +1,155 @@
+{
+ "statsDataId": "0003411111",
+ "title": "第２部農業地帯別組織規模別統計表　組織規模別集計 組合員の資格　正組合員資格　耕作面積　戸数規模別",
+ "statName": "農業協同組合及び同連合会一斉調査",
+ "govOrg": "農林水産省",
+ "surveyDate": null,
+ "overallTotalNumber": 384,
+ "dimensions": [
+  {
+   "id": "tab",
+   "name": "表章項目",
+   "valueCount": 1,
+   "sampleValues": [
+    {
+     "code": "0100",
+     "name": "組合数",
+     "unit": "組合"
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "cat01",
+   "name": "耕作面積",
+   "valueCount": 4,
+   "sampleValues": [
+    {
+     "code": "100",
+     "name": "耕作面積_該当組合数",
+     "unit": null
+    },
+    {
+     "code": "110",
+     "name": "耕作面積_10アール以上",
+     "unit": null
+    },
+    {
+     "code": "120",
+     "name": "耕作面積_5アール以上10アール未満",
+     "unit": null
+    },
+    {
+     "code": "130",
+     "name": "耕作面積_5アール未満",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "cat02",
+   "name": "実数・平均",
+   "valueCount": 2,
+   "sampleValues": [
+    {
+     "code": "100",
+     "name": "実数",
+     "unit": null
+    },
+    {
+     "code": "110",
+     "name": "平均",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "cat03",
+   "name": "戸数規模別",
+   "valueCount": 8,
+   "sampleValues": [
+    {
+     "code": "100",
+     "name": "計",
+     "unit": null
+    },
+    {
+     "code": "110",
+     "name": "500戸未満",
+     "unit": null
+    },
+    {
+     "code": "120",
+     "name": "500戸～999戸",
+     "unit": null
+    },
+    {
+     "code": "130",
+     "name": "1,000戸～1,999戸",
+     "unit": null
+    },
+    {
+     "code": "140",
+     "name": "2,000戸～2,999戸",
+     "unit": null
+    },
+    {
+     "code": "150",
+     "name": "3,000戸～4,999戸",
+     "unit": null
+    },
+    {
+     "code": "160",
+     "name": "5,000戸～9,999戸",
+     "unit": null
+    },
+    {
+     "code": "170",
+     "name": "10,000戸以上",
+     "unit": null
+    }
+   ],
+   "hasTotal": true
+  },
+  {
+   "id": "time",
+   "name": "時間軸（年度次）",
+   "valueCount": 6,
+   "sampleValues": [
+    {
+     "code": "2008100000",
+     "name": "2008年度",
+     "unit": null
+    },
+    {
+     "code": "2007100000",
+     "name": "2007年度",
+     "unit": null
+    },
+    {
+     "code": "2006100000",
+     "name": "2006年度",
+     "unit": null
+    },
+    {
+     "code": "2005100000",
+     "name": "2005年度",
+     "unit": null
+    },
+    {
+     "code": "2004100000",
+     "name": "2004年度",
+     "unit": null
+    },
+    {
+     "code": "2003100000",
+     "name": "2003年度",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  }
+ ]
+}

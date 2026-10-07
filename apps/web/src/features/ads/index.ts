@@ -9,6 +9,7 @@ export { AffiliateTextAdList } from "./components/AffiliateTextAdList";
 export { OperatorProfileCard } from "./components/OperatorProfileCard";
 export { SidebarPromoBanner } from "./components/SidebarPromoBanner";
 export { NativeAffiliateRow } from "./components/NativeAffiliateRow";
+export { RelatedAmazonBook } from "./components/RelatedAmazonBook";
 export { isLandscapeBanner } from "./utils";
 export type { ResolvedAffiliateBanner } from "./types";
 

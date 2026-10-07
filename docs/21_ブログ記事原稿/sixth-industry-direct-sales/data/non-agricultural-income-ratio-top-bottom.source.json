@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "non-agricultural-income-ratio",
+  "year": "2003",
+  "unit": "％",
+  "label": "農外所得割合",
+  "readerLabel": "農外所得割合",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/non-agricultural-income-ratio/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug sixth-industry-direct-sales --keys non-agricultural-income-ratio --data-name non-agricultural-income-ratio-top-bottom",
+  "fetchedAt": "2026-10-07T09:25:39.561Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

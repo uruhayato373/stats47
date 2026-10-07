@@ -147,6 +147,11 @@ Geo証拠階段の`stage-population` / `stage-overlap` / `stage-audit`、公共�
 > どちらも登録済み `nav_surface` / `nav_label` の値追加で、新しい custom dimension は無い。
 > 商品詳細→Amazon/ココナラは `cta_click` の登録済み `link_position`
 > (`product_kindle` / `product_coconala`) と当該ページ path の組み合わせで商品別に集計する。
+> 2026-10-07 にランキング右レール「関連記事」→その記事を収録したKindle詳細を `ranking_product` として追加した
+> (値追加のみ)。同日から Kindle の販売先リンクには Amazon アソシエイトのタグが付く。
+
+> **Amazon 関連書籍 (2026-10-07)**: ブログ記事末の一般書籍推薦は `affiliate_click` の
+> `link_position=related-books`、`ad_id=amazon-<ASIN>` で送る。Kindle 自社本がある記事には出さない。
 
 > **nav_surface の値追加 (2026-09-07・ブログ回遊導線)**: `/blog` の右レールを
 > `blog_sidebar`、モバイルの記事一覧前を `blog_discovery_mobile` として追加した。

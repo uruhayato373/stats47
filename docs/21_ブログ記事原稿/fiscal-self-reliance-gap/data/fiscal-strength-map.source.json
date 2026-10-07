@@ -1,0 +1,12 @@
+{
+  "kind": "ranking",
+  "rankingKey": "fiscal-strength-index-prefecture",
+  "year": "2022",
+  "unit": "指数",
+  "source": "r2:app/ranking/fiscal-strength-index-prefecture/values.json",
+  "verifiedMatchRate": 100,
+  "schemeSource": "item.json",
+  "note": "SSOTから取得。既存地図の表示値と照合し metric+年を確定 (SVGから逆復元しない)",
+  "fetchedAt": "2026-10-07T05:33:31.195Z",
+  "refreshedFromYear": "1989"
+}

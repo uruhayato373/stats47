@@ -58,4 +58,36 @@ describe("product links", () => {
       link_position: "product_kindle",
     });
   });
+
+  it("Kindle の販売先リンクにだけ Amazon アソシエイトのタグと sponsored を付ける", () => {
+    vi.stubEnv("NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG", "stats47-22");
+    render(
+      <>
+        <TrackedProductOutboundLink
+          href="https://www.amazon.co.jp/dp/B0HF1XFXBY"
+          productId="K-S1-06"
+          productTitle="自治体財政の地図"
+          channel="kindle"
+        >
+          Amazon
+        </TrackedProductOutboundLink>
+        <TrackedProductOutboundLink
+          href="https://coconala.com/services/4323722"
+          productId="P-01"
+          productTitle="人口・世帯データ集"
+          channel="coconala"
+        >
+          ココナラ
+        </TrackedProductOutboundLink>
+      </>,
+    );
+    vi.unstubAllEnvs();
+
+    const amazon = screen.getByRole("link", { name: "Amazon" });
+    expect(amazon.getAttribute("href")).toBe("https://www.amazon.co.jp/dp/B0HF1XFXBY?tag=stats47-22");
+    expect(amazon.getAttribute("rel")).toContain("sponsored");
+    const coconala = screen.getByRole("link", { name: "ココナラ" });
+    expect(coconala.getAttribute("href")).toBe("https://coconala.com/services/4323722");
+    expect(coconala.getAttribute("rel")).not.toContain("sponsored");
+  });
 });

@@ -23,6 +23,19 @@ const segmentLabels = (svg: string) =>
 const legendSwatchColors = (svg: string) =>
   [...svg.matchAll(/<rect [^>]*width="12" height="10" fill="(#[0-9a-f]{6})"/g)].map((m) => m[1]);
 
+describe("generateStackedBarSvg (横・100%)", () => {
+  it("横向きでも棒の中は生値ではなく構成比を出す", () => {
+    const svg = generateStackedBarSvg(rows(["北海道"], ["畜産", "米"], (_g, si) => (si === 0 ? 7347 : 5253)), {
+      title: "構成比",
+      xKey: "yearCode",
+      seriesKey: "areaCode",
+      normalized: true,
+      horizontal: true,
+    });
+    expect(segmentLabels(svg)).toEqual(["58.3%", "41.7%"]);
+  });
+});
+
 describe("generateStackedBarSvg (縦・100%)", () => {
   it("縦軸が構成比なので、棒の中も生値ではなく構成比を出す", () => {
     const svg = generateStackedBarSvg(rows(["2018年度"], ["ビール", "焼酎"], (_g, si) => (si === 0 ? 3000 : 1000)), {

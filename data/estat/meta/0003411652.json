@@ -1,0 +1,469 @@
+{
+ "statsDataId": "0003411652",
+ "title": "上巻 死亡の場所別にみた年次別死亡数・百分率",
+ "statName": "人口動態調査",
+ "govOrg": "厚生労働省",
+ "surveyDate": "202401-202412",
+ "overallTotalNumber": 1628,
+ "dimensions": [
+  {
+   "id": "tab",
+   "name": "表章項目",
+   "valueCount": 2,
+   "sampleValues": [
+    {
+     "code": "10100",
+     "name": "死亡数",
+     "unit": "人"
+    },
+    {
+     "code": "10350",
+     "name": "百分率",
+     "unit": "%"
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "cat01",
+   "name": "施設",
+   "valueCount": 11,
+   "sampleValues": [
+    {
+     "code": "000000",
+     "name": "総数",
+     "unit": null
+    },
+    {
+     "code": "001000",
+     "name": "施設内総数",
+     "unit": null
+    },
+    {
+     "code": "001100",
+     "name": "病院",
+     "unit": null
+    },
+    {
+     "code": "001200",
+     "name": "診療所",
+     "unit": null
+    },
+    {
+     "code": "001300",
+     "name": "介護医療院・介護老人保健施設",
+     "unit": null
+    },
+    {
+     "code": "001350",
+     "name": "（再掲）介護医療院",
+     "unit": null
+    },
+    {
+     "code": "001400",
+     "name": "助産所",
+     "unit": null
+    },
+    {
+     "code": "001500",
+     "name": "老人ホーム",
+     "unit": null
+    },
+    {
+     "code": "002000",
+     "name": "施設外総数",
+     "unit": null
+    },
+    {
+     "code": "002100",
+     "name": "自宅",
+     "unit": null
+    },
+    {
+     "code": "002200",
+     "name": "その他",
+     "unit": null
+    }
+   ],
+   "hasTotal": true
+  },
+  {
+   "id": "time",
+   "name": "時間軸(年次)",
+   "valueCount": 74,
+   "sampleValues": [
+    {
+     "code": "2024000000",
+     "name": "2024年",
+     "unit": null
+    },
+    {
+     "code": "2023000000",
+     "name": "2023年",
+     "unit": null
+    },
+    {
+     "code": "2022000000",
+     "name": "2022年",
+     "unit": null
+    },
+    {
+     "code": "2021000000",
+     "name": "2021年",
+     "unit": null
+    },
+    {
+     "code": "2020000000",
+     "name": "2020年",
+     "unit": null
+    },
+    {
+     "code": "2019000000",
+     "name": "2019年",
+     "unit": null
+    },
+    {
+     "code": "2018000000",
+     "name": "2018年",
+     "unit": null
+    },
+    {
+     "code": "2017000000",
+     "name": "2017年",
+     "unit": null
+    },
+    {
+     "code": "2016000000",
+     "name": "2016年",
+     "unit": null
+    },
+    {
+     "code": "2015000000",
+     "name": "2015年",
+     "unit": null
+    },
+    {
+     "code": "2014000000",
+     "name": "2014年",
+     "unit": null
+    },
+    {
+     "code": "2013000000",
+     "name": "2013年",
+     "unit": null
+    },
+    {
+     "code": "2012000000",
+     "name": "2012年",
+     "unit": null
+    },
+    {
+     "code": "2011000000",
+     "name": "2011年",
+     "unit": null
+    },
+    {
+     "code": "2010000000",
+     "name": "2010年",
+     "unit": null
+    },
+    {
+     "code": "2009000000",
+     "name": "2009年",
+     "unit": null
+    },
+    {
+     "code": "2008000000",
+     "name": "2008年",
+     "unit": null
+    },
+    {
+     "code": "2007000000",
+     "name": "2007年",
+     "unit": null
+    },
+    {
+     "code": "2006000000",
+     "name": "2006年",
+     "unit": null
+    },
+    {
+     "code": "2005000000",
+     "name": "2005年",
+     "unit": null
+    },
+    {
+     "code": "2004000000",
+     "name": "2004年",
+     "unit": null
+    },
+    {
+     "code": "2003000000",
+     "name": "2003年",
+     "unit": null
+    },
+    {
+     "code": "2002000000",
+     "name": "2002年",
+     "unit": null
+    },
+    {
+     "code": "2001000000",
+     "name": "2001年",
+     "unit": null
+    },
+    {
+     "code": "2000000000",
+     "name": "2000年",
+     "unit": null
+    },
+    {
+     "code": "1999000000",
+     "name": "1999年",
+     "unit": null
+    },
+    {
+     "code": "1998000000",
+     "name": "1998年",
+     "unit": null
+    },
+    {
+     "code": "1997000000",
+     "name": "1997年",
+     "unit": null
+    },
+    {
+     "code": "1996000000",
+     "name": "1996年",
+     "unit": null
+    },
+    {
+     "code": "1995000000",
+     "name": "1995年",
+     "unit": null
+    },
+    {
+     "code": "1994000000",
+     "name": "1994年",
+     "unit": null
+    },
+    {
+     "code": "1993000000",
+     "name": "1993年",
+     "unit": null
+    },
+    {
+     "code": "1992000000",
+     "name": "1992年",
+     "unit": null
+    },
+    {
+     "code": "1991000000",
+     "name": "1991年",
+     "unit": null
+    },
+    {
+     "code": "1990000000",
+     "name": "1990年",
+     "unit": null
+    },
+    {
+     "code": "1989000000",
+     "name": "1989年",
+     "unit": null
+    },
+    {
+     "code": "1988000000",
+     "name": "1988年",
+     "unit": null
+    },
+    {
+     "code": "1987000000",
+     "name": "1987年",
+     "unit": null
+    },
+    {
+     "code": "1986000000",
+     "name": "1986年",
+     "unit": null
+    },
+    {
+     "code": "1985000000",
+     "name": "1985年",
+     "unit": null
+    },
+    {
+     "code": "1984000000",
+     "name": "1984年",
+     "unit": null
+    },
+    {
+     "code": "1983000000",
+     "name": "1983年",
+     "unit": null
+    },
+    {
+     "code": "1982000000",
+     "name": "1982年",
+     "unit": null
+    },
+    {
+     "code": "1981000000",
+     "name": "1981年",
+     "unit": null
+    },
+    {
+     "code": "1980000000",
+     "name": "1980年",
+     "unit": null
+    },
+    {
+     "code": "1979000000",
+     "name": "1979年",
+     "unit": null
+    },
+    {
+     "code": "1978000000",
+     "name": "1978年",
+     "unit": null
+    },
+    {
+     "code": "1977000000",
+     "name": "1977年",
+     "unit": null
+    },
+    {
+     "code": "1976000000",
+     "name": "1976年",
+     "unit": null
+    },
+    {
+     "code": "1975000000",
+     "name": "1975年",
+     "unit": null
+    },
+    {
+     "code": "1974000000",
+     "name": "1974年",
+     "unit": null
+    },
+    {
+     "code": "1973000000",
+     "name": "1973年",
+     "unit": null
+    },
+    {
+     "code": "1972000000",
+     "name": "1972年",
+     "unit": null
+    },
+    {
+     "code": "1971000000",
+     "name": "1971年",
+     "unit": null
+    },
+    {
+     "code": "1970000000",
+     "name": "1970年",
+     "unit": null
+    },
+    {
+     "code": "1969000000",
+     "name": "1969年",
+     "unit": null
+    },
+    {
+     "code": "1968000000",
+     "name": "1968年",
+     "unit": null
+    },
+    {
+     "code": "1967000000",
+     "name": "1967年",
+     "unit": null
+    },
+    {
+     "code": "1966000000",
+     "name": "1966年",
+     "unit": null
+    },
+    {
+     "code": "1965000000",
+     "name": "1965年",
+     "unit": null
+    },
+    {
+     "code": "1964000000",
+     "name": "1964年",
+     "unit": null
+    },
+    {
+     "code": "1963000000",
+     "name": "1963年",
+     "unit": null
+    },
+    {
+     "code": "1962000000",
+     "name": "1962年",
+     "unit": null
+    },
+    {
+     "code": "1961000000",
+     "name": "1961年",
+     "unit": null
+    },
+    {
+     "code": "1960000000",
+     "name": "1960年",
+     "unit": null
+    },
+    {
+     "code": "1959000000",
+     "name": "1959年",
+     "unit": null
+    },
+    {
+     "code": "1958000000",
+     "name": "1958年",
+     "unit": null
+    },
+    {
+     "code": "1957000000",
+     "name": "1957年",
+     "unit": null
+    },
+    {
+     "code": "1956000000",
+     "name": "1956年",
+     "unit": null
+    },
+    {
+     "code": "1955000000",
+     "name": "1955年",
+     "unit": null
+    },
+    {
+     "code": "1954000000",
+     "name": "1954年",
+     "unit": null
+    },
+    {
+     "code": "1953000000",
+     "name": "1953年",
+     "unit": null
+    },
+    {
+     "code": "1952000000",
+     "name": "1952年",
+     "unit": null
+    },
+    {
+     "code": "1951000000",
+     "name": "1951年",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  }
+ ]
+}

@@ -1,0 +1,463 @@
+{
+ "statsDataId": "0003200200",
+ "title": "BSI項目 貴社の景況判断ＢＳＩ：貴社の景況判断の決定要因(構成比・BSI)",
+ "statName": "法人企業景気予測調査",
+ "govOrg": "財務省",
+ "surveyDate": "201901-201903",
+ "overallTotalNumber": 32400,
+ "dimensions": [
+  {
+   "id": "cat01",
+   "name": "当期・翌期・翌々期",
+   "valueCount": 3,
+   "sampleValues": [
+    {
+     "code": "10",
+     "name": "当期",
+     "unit": null
+    },
+    {
+     "code": "20",
+     "name": "翌期",
+     "unit": null
+    },
+    {
+     "code": "30",
+     "name": "翌々期",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "cat02",
+   "name": "規模",
+   "valueCount": 3,
+   "sampleValues": [
+    {
+     "code": "20",
+     "name": "大企業",
+     "unit": null
+    },
+    {
+     "code": "30",
+     "name": "中堅企業",
+     "unit": null
+    },
+    {
+     "code": "40",
+     "name": "中小企業",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "cat03",
+   "name": "景況判断の決定要因",
+   "valueCount": 10,
+   "sampleValues": [
+    {
+     "code": "10",
+     "name": "国内需要（売上）の動向",
+     "unit": "%"
+    },
+    {
+     "code": "20",
+     "name": "海外需要（売上）の動向",
+     "unit": "%"
+    },
+    {
+     "code": "30",
+     "name": "販売価格の動向",
+     "unit": "%"
+    },
+    {
+     "code": "40",
+     "name": "仕入価格の動向",
+     "unit": "%"
+    },
+    {
+     "code": "50",
+     "name": "仕入以外のコストの動向",
+     "unit": "%"
+    },
+    {
+     "code": "60",
+     "name": "資金繰り・資金調達の動向",
+     "unit": "%"
+    },
+    {
+     "code": "70",
+     "name": "株式・不動産等の資産価格の動向",
+     "unit": "%"
+    },
+    {
+     "code": "80",
+     "name": "為替レートの動向",
+     "unit": "%"
+    },
+    {
+     "code": "90",
+     "name": "税制・会計制度等の動向",
+     "unit": "%"
+    },
+    {
+     "code": "100",
+     "name": "その他",
+     "unit": "%"
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "cat04",
+   "name": "景況判断",
+   "valueCount": 2,
+   "sampleValues": [
+    {
+     "code": "10",
+     "name": "上昇(構成比)",
+     "unit": null
+    },
+    {
+     "code": "30",
+     "name": "下降(構成比)",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "cat05",
+   "name": "業種",
+   "valueCount": 3,
+   "sampleValues": [
+    {
+     "code": "10",
+     "name": "全産業",
+     "unit": null
+    },
+    {
+     "code": "20",
+     "name": "製造業",
+     "unit": null
+    },
+    {
+     "code": "240",
+     "name": "非製造業",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "time",
+   "name": "調査期",
+   "valueCount": 60,
+   "sampleValues": [
+    {
+     "code": "2019000103",
+     "name": "2019年1～3月期",
+     "unit": null
+    },
+    {
+     "code": "2018001012",
+     "name": "2018年10～12月期",
+     "unit": null
+    },
+    {
+     "code": "2018000709",
+     "name": "2018年7～9月期",
+     "unit": null
+    },
+    {
+     "code": "2018000406",
+     "name": "2018年4～6月期",
+     "unit": null
+    },
+    {
+     "code": "2018000103",
+     "name": "2018年1～3月期",
+     "unit": null
+    },
+    {
+     "code": "2017001012",
+     "name": "2017年10～12月期",
+     "unit": null
+    },
+    {
+     "code": "2017000709",
+     "name": "2017年7～9月期",
+     "unit": null
+    },
+    {
+     "code": "2017000406",
+     "name": "2017年4～6月期",
+     "unit": null
+    },
+    {
+     "code": "2017000103",
+     "name": "2017年1～3月期",
+     "unit": null
+    },
+    {
+     "code": "2016001012",
+     "name": "2016年10～12月期",
+     "unit": null
+    },
+    {
+     "code": "2016000709",
+     "name": "2016年7～9月期",
+     "unit": null
+    },
+    {
+     "code": "2016000406",
+     "name": "2016年4～6月期",
+     "unit": null
+    },
+    {
+     "code": "2016000103",
+     "name": "2016年1～3月期",
+     "unit": null
+    },
+    {
+     "code": "2015001012",
+     "name": "2015年10～12月期",
+     "unit": null
+    },
+    {
+     "code": "2015000709",
+     "name": "2015年7～9月期",
+     "unit": null
+    },
+    {
+     "code": "2015000406",
+     "name": "2015年4～6月期",
+     "unit": null
+    },
+    {
+     "code": "2015000103",
+     "name": "2015年1～3月期",
+     "unit": null
+    },
+    {
+     "code": "2014001012",
+     "name": "2014年10～12月期",
+     "unit": null
+    },
+    {
+     "code": "2014000709",
+     "name": "2014年7～9月期",
+     "unit": null
+    },
+    {
+     "code": "2014000406",
+     "name": "2014年4～6月期",
+     "unit": null
+    },
+    {
+     "code": "2014000103",
+     "name": "2014年1～3月期",
+     "unit": null
+    },
+    {
+     "code": "2013001012",
+     "name": "2013年10～12月期",
+     "unit": null
+    },
+    {
+     "code": "2013000709",
+     "name": "2013年7～9月期",
+     "unit": null
+    },
+    {
+     "code": "2013000406",
+     "name": "2013年4～6月期",
+     "unit": null
+    },
+    {
+     "code": "2013000103",
+     "name": "2013年1～3月期",
+     "unit": null
+    },
+    {
+     "code": "2012001012",
+     "name": "2012年10～12月期",
+     "unit": null
+    },
+    {
+     "code": "2012000709",
+     "name": "2012年7～9月期",
+     "unit": null
+    },
+    {
+     "code": "2012000406",
+     "name": "2012年4～6月期",
+     "unit": null
+    },
+    {
+     "code": "2012000103",
+     "name": "2012年1～3月期",
+     "unit": null
+    },
+    {
+     "code": "2011001012",
+     "name": "2011年10～12月期",
+     "unit": null
+    },
+    {
+     "code": "2011000709",
+     "name": "2011年7～9月期",
+     "unit": null
+    },
+    {
+     "code": "2011000406",
+     "name": "2011年4～6月期",
+     "unit": null
+    },
+    {
+     "code": "2011000103",
+     "name": "2011年1～3月期",
+     "unit": null
+    },
+    {
+     "code": "2010001012",
+     "name": "2010年10～12月期",
+     "unit": null
+    },
+    {
+     "code": "2010000709",
+     "name": "2010年7～9月期",
+     "unit": null
+    },
+    {
+     "code": "2010000406",
+     "name": "2010年4～6月期",
+     "unit": null
+    },
+    {
+     "code": "2010000103",
+     "name": "2010年1～3月期",
+     "unit": null
+    },
+    {
+     "code": "2009001012",
+     "name": "2009年10～12月期",
+     "unit": null
+    },
+    {
+     "code": "2009000709",
+     "name": "2009年7～9月期",
+     "unit": null
+    },
+    {
+     "code": "2009000406",
+     "name": "2009年4～6月期",
+     "unit": null
+    },
+    {
+     "code": "2009000103",
+     "name": "2009年1～3月期",
+     "unit": null
+    },
+    {
+     "code": "2008001012",
+     "name": "2008年10～12月期",
+     "unit": null
+    },
+    {
+     "code": "2008000709",
+     "name": "2008年7～9月期",
+     "unit": null
+    },
+    {
+     "code": "2008000406",
+     "name": "2008年4～6月期",
+     "unit": null
+    },
+    {
+     "code": "2008000103",
+     "name": "2008年1～3月期",
+     "unit": null
+    },
+    {
+     "code": "2007001012",
+     "name": "2007年10～12月期",
+     "unit": null
+    },
+    {
+     "code": "2007000709",
+     "name": "2007年7～9月期",
+     "unit": null
+    },
+    {
+     "code": "2007000406",
+     "name": "2007年4～6月期",
+     "unit": null
+    },
+    {
+     "code": "2007000103",
+     "name": "2007年1～3月期",
+     "unit": null
+    },
+    {
+     "code": "2006001012",
+     "name": "2006年10～12月期",
+     "unit": null
+    },
+    {
+     "code": "2006000709",
+     "name": "2006年7～9月期",
+     "unit": null
+    },
+    {
+     "code": "2006000406",
+     "name": "2006年4～6月期",
+     "unit": null
+    },
+    {
+     "code": "2006000103",
+     "name": "2006年1～3月期",
+     "unit": null
+    },
+    {
+     "code": "2005001012",
+     "name": "2005年10～12月期",
+     "unit": null
+    },
+    {
+     "code": "2005000709",
+     "name": "2005年7～9月期",
+     "unit": null
+    },
+    {
+     "code": "2005000406",
+     "name": "2005年4～6月期",
+     "unit": null
+    },
+    {
+     "code": "2005000103",
+     "name": "2005年1～3月期",
+     "unit": null
+    },
+    {
+     "code": "2004001012",
+     "name": "2004年10～12月期",
+     "unit": null
+    },
+    {
+     "code": "2004000709",
+     "name": "2004年7～9月期",
+     "unit": null
+    },
+    {
+     "code": "2004000406",
+     "name": "2004年4～6月期",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  }
+ ]
+}
