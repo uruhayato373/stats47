@@ -220,6 +220,13 @@ jobs:
           R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
         run: |
           REMOVED=""
+          # outbox ごと消える前に、最後の review.md の指摘を台帳に残す (二重に記録しても行は増えない)
+          for SLUG in $PUBLISHED; do
+            if [ -f "docs/21_ブログ記事原稿/$SLUG/review.md" ]; then
+              node .claude/scripts/blog/record-critic-findings.mjs "docs/21_ブログ記事原稿/$SLUG" || echo "::warning::critic の指摘の記録に失敗 ($SLUG)"
+            fi
+          done
+          if [ -f data/blog/critic-findings.jsonl ]; then git add data/blog/critic-findings.jsonl; fi
           for SLUG in $PUBLISHED; do
             if [ -d "docs/21_ブログ記事原稿/$SLUG" ]; then
               git rm -r -q "docs/21_ブログ記事原稿/$SLUG" && REMOVED="$REMOVED $SLUG"

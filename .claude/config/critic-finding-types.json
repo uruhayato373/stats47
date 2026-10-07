@@ -1,0 +1,22 @@
+{
+  "$comment": "blog-critic の指摘の型 (review.md の `- [MAJOR][型:<key>] …`)。critic-findings-digest.mjs が型ごとに数え、窓の中で minArticles 本以上の記事に BLOCK/MAJOR が出た型を backlog に起票する。型を規約か gate に入れたら promotedAt にその日付を書く (それより前の指摘は数えない)。正典の説明: .claude/rules/blog-quality-standards.md「critic の指摘の型と格上げ」",
+  "windowDays": 56,
+  "minArticles": 3,
+  "types": {
+    "value": { "label": "数値・順位の食い違い", "description": "本文の値・順位・件数が data JSON と一致しない" },
+    "year": { "label": "年の食い違い", "description": "図と本文、または記事内で対象の年・年度が違い、理由が書かれていない" },
+    "definition": { "label": "定義の取り違え", "description": "対象・分母・年と年度・名目と実質・単位を取り違える" },
+    "source": { "label": "出典・統計表", "description": "出典の無い断定、統計表 ID・調査名の取り違え、製品・料金の未確認の断定" },
+    "causal": { "label": "原因の断定", "description": "データで確かめられない原因を断定する" },
+    "correlation": { "label": "相関の読み方", "description": "相関の向き・強さ・外れ値の扱いが書かれていない、または前後で食い違う" },
+    "region": { "label": "地域のくくり", "description": "「近畿」「日本海側」などのくくりが、地方別の値で支えられない" },
+    "related-link": { "label": "関連記事の紹介", "description": "関連記事のタイトル・内容の紹介が、リンク先の現在の記事と食い違う" },
+    "title-promise": { "label": "タイトル・約束", "description": "タイトル・description・見出しの約束を本文や図が果たさない" },
+    "chart-text": { "label": "図と本文", "description": "図の種類・内容と本文の説明が合わない、要る図が無い" },
+    "code": { "label": "コード・手順", "description": "手順解説のコードが実行できない、Step がつながらない、例が実物と違う" },
+    "structure": { "label": "構成・冗長", "description": "同じ事実の繰り返し、callout の重複、節の役割の重なり" },
+    "style": { "label": "文体・表記", "description": "ですます調・表記の揺れ・読み違えやすい書き方" },
+    "reader-value": { "label": "読者価値", "description": "読者の問いに答えていない、分析が浅い" },
+    "other": { "label": "その他", "description": "上のどれにも当たらない" }
+  }
+}

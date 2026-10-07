@@ -23,6 +23,7 @@ import { ArticleCard } from "@/components/surface";
 import {
     BannerAd,
     OperatorProfileCard,
+    RelatedAmazonBook,
 } from "@/features/ads";
 import { resolveContentVertical } from "@/features/ads/constants/affiliate-category";
 import { applyBlogAffiliatePolicy, resolveBlogBannerInput } from "@/features/ads/constants/blog-affiliate-policy";
@@ -43,7 +44,7 @@ import {
     resolveArticleDataSources,
     resolveArticleSurveyTaxonomy,
 } from "@/features/blog/server";
-import { BlogProductCta } from "@/features/products";
+import { BlogProductCta, findKindleProductForBlog } from "@/features/products";
 import { SurveyTaxonomyCard } from "@/features/survey";
 import { ALL_THEMES } from "@/features/theme-dashboard/listing.server";
 import { listRelatedThemesForRankingKeys } from "@/features/theme-dashboard/server";
@@ -430,6 +431,8 @@ export default async function BlogPostPage({ params }: PageProps) {
                     </ArticleCard>
 
                     <BlogProductCta blogSlug={slug} />
+                    {/* 自社 Kindle 本が無い記事だけ、バナーと同じ vertical に合う一般書籍 (Amazon) を出す */}
+                    {!findKindleProductForBlog(slug) && <RelatedAmazonBook vertical={bannerVertical} />}
 
                     {/* PC・モバイル共通の読了導線。右レールとの重複は作らない。 */}
                     {rakutenPlacement && (

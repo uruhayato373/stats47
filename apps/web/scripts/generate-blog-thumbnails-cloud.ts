@@ -503,7 +503,8 @@ async function main(): Promise<void> {
       if (!options.aiBackground && remoteWasAi && !reusableSha) {
         throw new Error(
           `${slug}: AI背景のpromptまたは画像が陳腐化しています。` +
-            '--ai-background --slug で明示再生成してください'
+            '/generate-blog-images の Mode A (Codex) で記事固有背景を作ってください ' +
+            '(npm run blog-images:codex -- request-article --slug <slug>)'
         );
       }
       const needsAiGeneration = options.aiBackground && !reusableSha;

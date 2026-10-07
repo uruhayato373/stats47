@@ -26,6 +26,7 @@
  *   { "pass": true|false, "checks": {...}, "warnings": [...], "blockers": [...] }
  */
 
+import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -33,6 +34,7 @@ import { fileURLToPath } from 'node:url';
 import { checkArticleFactual } from '../lib/article-factual-check.mjs';
 import { lintConsecutiveCallouts, lintSourceLinkPlacement } from '../lib/article-structure-lint.mjs';
 import { lintParenNumbers } from '../lib/paren-number-lint.mjs';
+import { lintStatsTableIds } from '../lib/stats-table-id-lint.mjs';
 import { lintInternalLinks, extractInternalLinks, isGoneBlogSlug } from '../lib/internal-link-lint.mjs';
 import { inspectChartSourceManifest } from '../lib/chart-provenance.mjs';
 import {
@@ -374,6 +376,14 @@ const parenLint = lintParenNumbers(content);
 checks.parenNumbers = parenLint.hits.length;
 blockers.push(...parenLint.blockers);
 
+// 統計表 ID の照合 (2026-10-07 追加、stats-table-id-lint.mjs)
+// 本文の statsDataId を e-Stat のメタ情報の控え (getMetaInfo) と照らし、存在しない ID・
+// 控えに無い ID・近くに書いた統計名との食い違いを止める。critic の目視でしか見つからなかった
+// 取り違え (賃金構造基本統計調査の表に「県民所得統計」と書いた等) の再発防止。
+const statsTableLint = lintStatsTableIds(content);
+checks.statsTableIdIssues = statsTableLint.hits.length;
+blockers.push(...statsTableLint.blockers);
+
 // 内部リンクの実在チェック (2026-07-24 追加、internal-link-lint.mjs)
 // 実在しない ranking key は HTTP 200 + 「ランキングが見つかりません」の soft 404 を返すため、
 // ステータス監視では捕まらない。repo 内の key 集合と突合して公開前に弾く。
@@ -660,6 +670,33 @@ if (fs.existsSync(reviewPath)) {
 }
 checks.published = isPublished;
 checks.criticReviewed = hasCriticPass;
+
+// ============================================================================
+// 背景: 送り箱の記事に、今の内容に合うサムネイル背景があるか ★push 前に止める
+// ============================================================================
+// 2026-10-07: 書き直しでタイトルを変えた 5 記事は、公開済みの AI 背景の prompt が合わなくなり、
+// push 後の公開 run のサムネイル検査で初めて止まった (公開時は skip される)。判定は公開時と同じ
+// 規則 (apps/web/scripts/lib/blog-background-status.ts) を TS の CLI で呼ぶ。R2 を読めないときは warning。
+const isOutboxDraft = articlePath.split(path.sep).includes('21_ブログ記事原稿');
+if (isPublished && isOutboxDraft) {
+  const run = spawnSync(
+    'npx',
+    ['tsx', path.join(PROJECT_ROOT, 'apps/web/scripts/check-blog-background.ts'), '--article', articlePath],
+    { cwd: PROJECT_ROOT, encoding: 'utf8', timeout: 120_000 }
+  );
+  let status = null;
+  try {
+    status = JSON.parse((run.stdout || '').trim().split('\n').pop() || 'null');
+  } catch {
+    status = null;
+  }
+  checks.background = status?.kind ?? 'unchecked';
+  if (status?.ok === false) {
+    blockers.push(`背景: ${status.message}`);
+  } else if (status?.ok !== true) {
+    warnings.push(`背景: ${status?.message ?? '背景の検査を実行できませんでした'}`);
+  }
+}
 if (isPublished && !hasCriticPass) {
   blockers.push(
     'critic レビュー未通過: 公開記事は blog-critic の review.md (verdict: PASS, 実体200字以上) が必須。' +

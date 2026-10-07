@@ -186,6 +186,7 @@ export const DATASETS = [
   d("claude.model-usage", `${SM}/model-usage/{name}.json`, "state", "ops", "state", "モデル使用量と最適化提案"),
   d("claude.model-canary", `${SM}/model-usage/canary/{date}-{name}.json`, "evidence", "ops", "state", "モデル / effort の canary 比較", { retain: "model-usage-canary" }),
   d("claude.prompt-evals", `${SM}/prompt-evals/{date}.json`, "evidence", "ops", "state", "プロンプト評価の結果"),
+  d("ops.ci-requests", "data/{name}-requests.json", "state", "ops", "data", "cloud セッションが CI に頼む実行依頼 (workflow の代理起動など)。CI が消費して git rm するので普段は 0 件", { planned: true }),
   d("ops.monthly-jobs", "data/ci/monthly-jobs/{name}.json", "state", "ops", "data", "月次ジョブの最終実行"),
   d("ops.releases", "data/releases/{date}-{name}.json", "evidence", "ops", "data", "release の検証証跡", { retain: "releases" }),
   d("instagram.token", "data/sns/instagram-token.json", "state", "sns", "data", "Instagram トークンの更新日と期限 (トークン本体は置かない)"),
