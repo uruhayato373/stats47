@@ -1,0 +1,12 @@
+{
+  "kind": "scatter",
+  "xKey": "fresh-udon-soba-consumption-quantity",
+  "yKey": "soba-udon-dining-consumption-expenditure",
+  "year": "2024",
+  "xSource": "r2:app/ranking/fresh-udon-soba-consumption-quantity/values.json",
+  "ySource": "r2:app/ranking/soba-udon-dining-consumption-expenditure/values.json",
+  "label": "生うどん・そば購入量 × 日本そば・うどん外食支出",
+  "note": "R2 app/ranking の2024年値(47都道府県)を県コードで結合。ピアソンr=0.460(香川を除くと0.258)・スピアマンrho=0.194は47県の値から計算",
+  "generatedBy": "author (R2 values.json join)",
+  "fetchedAt": "2026-10-07T22:40:54.636Z"
+}
