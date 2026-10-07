@@ -358,6 +358,7 @@ updated: 2026-10-06
   1. `quality-gate.mjs` の inline SVG 検出 (`/<svg[\s>]/`) がコードブロックの中も数える。D3 の手順記事が、検出を避けるために `<svg{...rootProps}>` や `const Svg = "svg"` という不自然な書き方をしている (cc-estat-04-aging-heatmap・cc-estat-13-agri-sankey)。`generate-article-charts --validate` も同じ理由でエラーを 4 件出す
   2. 記事のサンプルコードを描画した図 (svg-builder の対象外・source の kind は derived) の扱いが `blog-svg-chart-standards.md` に無い。cc-estat-04 の 2 枚は作業用の一時スクリプトで描いたもので、描画スクリプトがリポジトリに無く、作り直せない。svg-builder にサンキー型が無いので、cc-estat-13 (サンキーの手順記事) も完成図を載せられず、積み上げ棒で代用している
   3. `article-factual-check.mjs` が手順解説記事の本文の値の食い違いを検出できない形がある (cc-estat-04 の writer が値を書き換えて注入テストし、検出されなかった)。計算に使った入力 (総人口など) が data/ に無いと、その値も照合できない (it-industry-concentration の critic が公開 R2 から取り直して確かめた。calculated の JSON に入力の元値を持たせる運用にするか検討)。手順解説に限らず、単位が「戸」「倍」の数値も照合しない (dairy-cattle-hokkaido-monopoly で 4,970 戸を 4,790 戸に、1.44 倍を 1.54 倍に変えても pass した)
+  4. 「秋田県の3位から青森県の46位まで」のように範囲を順位で書くと、`article-factual-check.mjs` が INVERSE_RANK_MISMATCH と誤検知する (physical-therapist-annual-income-prefecture-gap の writer が報告。言い回しを変えて回避した)
 - **次**: 1 はコードブロックを除いて数える (公開済み記事で誤検知・見逃しの件数を比べてから入れる)。2 は描画スクリプトの置き場 (例: 記事の data/ に置く `render-*.ts`) と restore の書き方を規約に足し、cc-estat-04 の 2 枚の描画スクリプトを保存する。3 は注入テストを再現して、照合から漏れる数値の書き方を特定する。
 - **完了条件**: 1 と 3 の修正がテストで固定され、2 が規約に書かれ cc-estat-04 の図が repo のスクリプトから作り直せる。
 
@@ -398,6 +399,13 @@ updated: 2026-10-06
 - **事象**: 2026-10-07、it-industry-concentration の writer が使い方を確かめようと `--help` を付けて実行したところ、全件の監査が走って `data/blog/chart-provenance-queue.json` が書き換わった (writer が git checkout で戻した)。このキューは blog-remediation-daily の provenance ラチェットの基準なので、誤って書き換えると日次のラチェットの判定がずれる。
 - **次**: `--help` / `-h` で使い方を出して終了する。知らない引数は書き込まずにエラーにする。
 - **完了条件**: `--help` で何も書き換えずに exit 0 になる。
+
+### [METRIC-WAGE-SURVEY-01] 賃金構造基本統計調査の職種別年収 39 指標に surveyId と調査の注記を足す
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run validate:config --workspace=@stats47/data-configs] [起票:2026-10-07] [領域:データ]
+
+- **事象**: `packages/data-configs/src/metrics/*-annual-income.ts` の 39 指標はどれも `surveyId` を持たず (2026-10-07 に数えた)、指標の定義シートで「調査」が空欄になる。physical-therapist-annual-income-prefecture-gap の writer が報告した。職種別の県の値は標本が少なく年ごとに順位が大きく動くので、その注意も読者向けの定義に出したい。
+- **次**: 賃金構造基本統計調査の surveyId を `data/surveys` の台帳で確かめ、39 指標にまとめて足す。標本の少なさによる年ごとの変動の注意を note に足すかを、指標ごとの標本数を見て決める。
+- **完了条件**: 39 指標の定義シートで調査名が出る。
 
 ### [BLOG-REVISE-PATTERNS-01] 図の年の書き直しで critic が繰り返し REVISE にした型を、writer の規約か gate に入れる
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-07] [領域:サイト]
