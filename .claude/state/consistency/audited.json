@@ -1,7 +1,7 @@
 {
-  "hash": "05e4bc45dd13bce30da74687c3624b6a7a708849c3c0519d655f1b4376eb3329",
-  "audited_at": "2026-10-07T13:08:12",
+  "hash": "1f0a78114f58d4548d84a1bc95916a583fbbea08061473183687a5a103903166",
+  "audited_at": "2026-10-07T21:38:31",
   "files": [
-    ".claude/scripts/lib/internal-link-lint.mjs"
+    ".claude/scripts/note/catalog/data/stats47-note.ts"
   ]
 }
