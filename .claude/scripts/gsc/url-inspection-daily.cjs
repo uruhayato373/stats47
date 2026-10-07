@@ -35,6 +35,7 @@ const fs = require("node:fs");
 const { google } = require("googleapis");
 const { GSC_PROPERTY, SITE_ORIGIN } = require("../lib/site-config.cjs");
 const { PREF_AREA_CODES } = require("../lib/prefectures.cjs");
+const { datasetDir, datasetPath } = require("../../../config/datasets.mjs");
 
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
 const SITE_URL = GSC_PROPERTY;
@@ -141,7 +142,7 @@ function readCsv(filePath) {
 function getLatestSnapshotDir() {
   const dir = path.join(
     PROJECT_ROOT,
-    "data/gsc/snapshots",
+    datasetDir("gsc.snapshots"),
   );
   if (!fs.existsSync(dir)) return null;
   const weeks = fs
@@ -222,7 +223,7 @@ function rotateDaily(
 function loadRemediationUrls() {
   const p = path.join(
     PROJECT_ROOT,
-    "data/gsc/coverage-remediation/coverage-remediation-queue.json",
+    datasetPath("gsc.coverage-queue"),
   );
   if (!fs.existsSync(p)) return [];
   try {
@@ -465,7 +466,7 @@ function writeLatest(dateStr, summary, prevSummary) {
   }
   lines.push("");
   lines.push(
-    `_詳細 CSV: \`data/gsc/url-inspection/${dateStr}.csv\`_`,
+    `_詳細 CSV: \`${datasetDir("gsc.url-inspection")}/${dateStr}.csv\`_`,
   );
   lines.push("");
   return lines.join("\n");
@@ -475,7 +476,7 @@ async function main() {
   const dateStr = todayInTokyo();
   const outDir = path.join(
     PROJECT_ROOT,
-    "data/gsc/url-inspection",
+    datasetDir("gsc.url-inspection"),
   );
   fs.mkdirSync(outDir, { recursive: true });
 
@@ -595,7 +596,7 @@ function writeCoverageDrilldown(rows, dateStr) {
   const week = isoWeek(new Date(dateStr));
   const drilldownBase = path.join(
     PROJECT_ROOT,
-    "data/gsc/coverage-drilldown",
+    datasetDir("gsc.coverage-drilldown"),
   );
   const weekDir = path.join(drilldownBase, week);
   fs.mkdirSync(weekDir, { recursive: true });

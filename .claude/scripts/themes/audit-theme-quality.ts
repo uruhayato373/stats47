@@ -11,9 +11,10 @@ import { buildRecipe } from "../../../packages/data-configs/src/recipe";
 import { inspectThemePayload, compareThemeObservation, selectLastGoodObservations, inspectThemeStructure, inspectChartYears, summarizeThemeFindings } from "./theme-quality-core.mjs";
 import { readThemeQualityState, writeThemeQualityState } from "./theme-quality-state.mjs";
 import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
-const DEFAULT_OUTPUT = path.join(ROOT, "data/themes/quality.json");
+const DEFAULT_OUTPUT = path.join(ROOT, `${datasetDir("themes.portfolio")}/quality.json`);
 const argv = process.argv.slice(2);
 const { values: cli } = parseArgs({ args: argv, options: {
   json: { type: "string" }, previous: { type: "string" },

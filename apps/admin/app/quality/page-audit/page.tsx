@@ -7,6 +7,7 @@ import { ErrorNote, Freshness, PageHeading } from "@/components/ops/primitives";
 import { pageQualitySummary, type MetricValue } from "@/lib/server/page-quality";
 
 import { Card, CardContent } from "@/components/ui/card";
+import { datasetDir } from "../../../../../config/datasets.mjs";
 export const dynamic = "force-dynamic";
 export const metadata = { title: "ページ品質監査 — stats47 admin" };
 
@@ -45,7 +46,7 @@ export default async function PageQualityAuditPage({
       <div className="space-y-4">
         <PageHeading
           title="ページ品質監査"
-          source="data/page-quality/metrics/latest.json"
+          source={`${datasetDir("page-quality.metrics")}/latest.json`}
         />
         <ErrorNote error={summary.error ?? "unknown error"} />
         <p className="text-sm text-console-muted">
@@ -81,7 +82,7 @@ export default async function PageQualityAuditPage({
     <div className="space-y-8">
       <PageHeading
         title="ページ品質監査"
-        source="data/page-quality/metrics/latest.json"
+        source={`${datasetDir("page-quality.metrics")}/latest.json`}
       >
         <div className="flex flex-wrap items-center gap-2 pt-1">
           <StatusBadge tone="info">{summary.mode}</StatusBadge>

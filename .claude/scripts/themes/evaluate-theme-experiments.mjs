@@ -30,10 +30,11 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { addDays, jstDateOf } from "../metrics/lib/periods.mjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
-const STATE_DIR = process.env.STATE_DIR || path.join(PROJECT_ROOT, "data/themes");
+const STATE_DIR = process.env.STATE_DIR || path.join(PROJECT_ROOT, datasetDir("themes.portfolio"));
 const PORTFOLIO = path.join(STATE_DIR, "portfolio.json");
 const EXPERIMENTS = path.join(STATE_DIR, "experiments.json");
 
@@ -191,7 +192,7 @@ export function launchBaselineCandidate(experiment, observation) {
   const candidate = {
     sourceExperimentId: experiment.experimentId, sourceObservedAt: observation.observedAt,
     baselinePeriod: { from: primary.periodStart, to: primary.periodEnd }, baseline: {}, baselineScopes: {}, baselineStatuses: {},
-    evidenceRefs: [`data/themes/experiments.json#${experiment.experimentId}/d56/${observation.observedAt}`],
+    evidenceRefs: [`${datasetDir("themes.portfolio")}/experiments.json#${experiment.experimentId}/d56/${observation.observedAt}`],
   };
   for (const [kpi, value] of Object.entries(observation.values)) {
     if (measurementLimits(value, kpi, experiment, 56, observation.observedAt, true).length

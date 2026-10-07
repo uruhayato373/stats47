@@ -26,10 +26,11 @@
 
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
 import { dirname, join } from "node:path";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const PROJECT_ROOT = join(import.meta.dirname ?? __dirname, "../../..");
-const SINGLE_PATH = join(PROJECT_ROOT, "data/sns/buzz-map-catalog.json");
-const OUT_PATH = join(PROJECT_ROOT, "data/sns/buzz-map-combo-catalog.json");
+const SINGLE_PATH = join(PROJECT_ROOT, `${datasetDir("sns.buzz-map-attribution")}/buzz-map-catalog.json`);
+const OUT_PATH = join(PROJECT_ROOT, `${datasetDir("sns.buzz-map-attribution")}/buzz-map-combo-catalog.json`);
 const MACHINE_CAP = 120;
 
 type Status = "candidate" | "spec" | "generated" | "posted" | "rejected";

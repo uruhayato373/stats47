@@ -236,8 +236,10 @@ metricGroups: [
 
 `ThemeComparisonSection` は既存の章の後で、`metricGroups.rankingKeys` と `tabIndicators` から
 比較対象を導出する。専用の overview 指標リストは持たない。県の中央値・差分・指標切替地図には
-同じ年次の有限な都道府県値だけを使い、全国・市区町村・別年を混ぜない。固定 `comparisonYear` を
-尊重し、既存 `comparisonMap` の地図は重複表示しない。比較地図は県選択だけで、章の配置や既存
+同じ年次の有限な都道府県値だけを使い、全国・市区町村・別年を混ぜない。`comparisonYear` は
+起点の年で、グループの全指標に値がそろう新しい年が R2 に入ると実行時にその最新年へ進む
+(`apps/web/src/features/theme-dashboard/lib/resolve-comparison-years.ts`。1 指標でも欠ける年へは進めず、
+指標ごとの最新年にも代替しない。新しい年を R2 へ入れればカタログを書き換えずに追従する)。既存 `comparisonMap` の地図は重複表示しない。比較地図は県選択だけで、章の配置や既存
 セレクタを置き換えない。誤読防止注記は公開 `RankingItem.annotation` / `description` を使う。
 
 ### 実行時の振る舞い (UI 側の約束)

@@ -12,9 +12,10 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const store = require("../lib/sns-posts-store.cjs");
+const { datasetPath } = require("../../../config/datasets.mjs");
 
 const ROOT = path.resolve(__dirname, "..", "..", "..");
-const LOG_PATH = path.join(ROOT, "data/sns/ig-posted-log.jsonl");
+const LOG_PATH = path.join(ROOT, datasetPath("sns.ig-posted-log"));
 
 // 旧 SELECT posted_at, domain, content_key, post_url FROM sns_posts
 //     WHERE platform='instagram' AND status='posted' ORDER BY posted_at ASC

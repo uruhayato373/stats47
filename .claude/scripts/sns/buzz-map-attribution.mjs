@@ -29,6 +29,7 @@ import {
   buildScoreFeedback,
 } from "./lib/buzz-map-attribution-core.mjs";
 import { GA4_PROPERTY_ID } from "../lib/site-config.cjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const require = createRequire(import.meta.url);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -112,7 +113,7 @@ async function main() {
     feedback,
   };
   // 流入の計測は記録なので data/sns/ (台帳 id は sns.buzz-map-attribution)
-  const outDir = path.join(PROJECT_ROOT, "data/sns");
+  const outDir = path.join(PROJECT_ROOT, datasetDir("sns.drafts"));
   fs.mkdirSync(outDir, { recursive: true });
   const date = new Date().toISOString().slice(0, 10);
   fs.writeFileSync(path.join(outDir, `buzz-map-attribution-${date}.json`), JSON.stringify(payload, null, 2) + "\n");

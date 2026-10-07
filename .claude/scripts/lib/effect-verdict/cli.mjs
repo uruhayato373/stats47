@@ -34,11 +34,12 @@ import { createGscBlogWaveAdapter } from "../../blog/measure-gsc-impact.mjs";
 import { createAdsenseAdapter } from "../../metrics/measure-adsense-impact.mjs";
 import { loadGscImprovementsAdapter } from "../../metrics/lib/gsc-improvements-adapter.mjs";
 import { loadGa4ImprovementsAdapter } from "../../metrics/lib/ga4-improvements-adapter.mjs";
+import { datasetDir } from "../../../../config/datasets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..", "..");
-const STATE_DIR = path.join(PROJECT_ROOT, "data/effect-verdict");
+const STATE_DIR = path.join(PROJECT_ROOT, datasetDir("effect.verdicts"));
 
 /** 登録済み adapter。増やすときはここに 1 行足す。 */
 export function loadAdapters(opts = {}) {

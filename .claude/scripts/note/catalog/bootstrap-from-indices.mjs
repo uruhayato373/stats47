@@ -16,16 +16,17 @@
 import { readFileSync, writeFileSync, mkdirSync } from "fs";
 import { resolve, join, dirname } from "path";
 import { fileURLToPath } from "url";
+import { datasetPath } from "../../../../config/datasets.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "../../../..");
 const DRY = process.argv.includes("--dry-run");
 
 const pub = JSON.parse(
-  readFileSync(join(ROOT, "data/note/note-published-urls.json"), "utf8"),
+  readFileSync(join(ROOT, datasetPath("note.published-urls")), "utf8"),
 );
 const drafts = JSON.parse(
-  readFileSync(join(ROOT, "data/note/note-draft-index.json"), "utf8"),
+  readFileSync(join(ROOT, datasetPath("note.draft-index")), "utf8"),
 );
 
 /** vertical → 既定マガジン (koumuin 系は既存フッター運用でシリーズ = 1 マガジン) */

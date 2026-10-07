@@ -78,6 +78,8 @@ export const AGENT_STATE = {
   "agent.backlog-loop": "バックログ自動処理の completion gate の証拠",
   "agent.consistency": "Stop hook が読む整合性監査の印",
   "agent.triggers": "RemoteTrigger の登録記録",
+  // obsidian vault の mail-triage (毎日 cron) がこのリポへ書く。書き手と置き場はリポ外で決まるので動かさない
+  "agent.mail-inbox": "obsidian の mail-triage エージェントがメールから拾ったイベントの受信箱 (売上の正本ではない)",
   "claude.usage": "Claude routine のトークン実績 (エージェントの費用)",
   "claude.model-usage": "モデル選択の最適化の入力",
   "claude.model-canary": "モデル / effort の canary 比較",
@@ -142,6 +144,7 @@ export const DATASETS = [
   d("gsc.history", "data/gsc/history.csv", "series", "site", "data", "GSC の週次集約"),
   d("gsc.history-finalized", "data/gsc/history-finalized7d.csv", "series", "site", "data", "GSC の確定 7 日集約"),
   d("gsc.latest", "data/gsc/LATEST.md", "report", "site", "data", "GSC の前週比の要約"),
+  d("gsc.priority-ranking-keys", "data/gsc/priority-100-ranking-keys.csv", "evidence", "site", "data", "GSC 表示回数の上位 100 ランキング (2026-09-16 時点の抽出。AI 解説の有無付き)"),
   d("gsc.coverage-drilldown", "data/gsc/coverage-drilldown/{week}/{name}", "series", "site", "data", "GSC カバレッジ 6 種別の週次ドリルダウン"),
   d("gsc.coverage-drilldown-history", "data/gsc/coverage-drilldown/history.csv", "series", "site", "data", "カバレッジ件数の推移"),
   d("gsc.coverage-drilldown-latest", "data/gsc/coverage-drilldown/LATEST.md", "report", "site", "data", "カバレッジの最新要約"),
@@ -261,6 +264,7 @@ export const DATASETS = [
   d("agent.backlog-loop", ".claude/state/backlog-loop/ledger.json", "ledger", "ops", "state", "バックログ自動処理の実行台帳 (gate の証拠)"),
   d("agent.consistency", ".claude/state/consistency/audited.json", "state", "ops", "state", "整合性監査の印 (Stop hook が読む)"),
   d("agent.triggers", ".claude/state/triggers.json", "state", "ops", "state", "RemoteTrigger の記録"),
+  d("agent.mail-inbox", ".claude/state/inbox/mail-events.json", "state", "ops", "state", "obsidian の mail-triage がメールから拾ったイベント (売上の正本ではない。正本は各スクレイパーのログ)"),
 
   // ── assets/ : 画像などの素材の原本 ──
   d("blog.article-backgrounds", "assets/blog/article-backgrounds/{**}", "asset", "site", "assets", "ブログ記事のサムネイル背景の原本 (サムネイル生成が読む)"),
@@ -298,6 +302,7 @@ export const RETIRED = [
   { from: "docs/assets", to: "assets/page-heroes", since: "2026-10-06" },
   { from: ".claude/scripts/note/assets", to: "assets/note", since: "2026-10-06" },
   { from: ".claude/assets/affiliate-banners", to: "assets/affiliate-banners", since: "2026-10-06" },
+  { from: ".claude/skills/analytics/gsc-improvement/reference/priority-100-ranking-keys.csv", to: "data/gsc/priority-100-ranking-keys.csv", since: "2026-10-07" },
   // 作業状態 (2026-10-06 の第 2 段階で data/ へ。.claude/state にはエージェント運用の状態だけを残す)
   { from: ".claude/state/ads", to: "data/affiliate", since: "2026-10-06" },
   { from: ".claude/state/ai-content", to: "data/ai-content/remediation", since: "2026-10-06" },

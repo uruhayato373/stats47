@@ -10,6 +10,7 @@ import { GEO_SERVICE_OFFER } from "../channels/geo/service-offer";
 import { authoredBookSha256, semanticReviewErrors, revisionEditorIds, type ReviewedChapter } from "../channels/kindle/revision-evidence";
 import { FREE_SAMPLE_STATE, readFreeSampleDelivery } from "./free-sample-delivery";
 import { COCONALA_LISTINGS, KDP_LISTINGS } from "../../../../config/paths.mjs";
+import { datasetDir, datasetPath } from "../../../../config/datasets.mjs";
 
 type Obj = Record<string, unknown>;
 const obj = (v: unknown): Obj => v !== null && typeof v === "object" && !Array.isArray(v) ? v as Obj : {};
@@ -67,8 +68,8 @@ export function buildSalesCatalog(root: string, checkedAt: string, kindleVersion
     catch { warnings.push(`Missing or invalid evidence: ${path}`); return {}; }
   };
   const cp = COCONALA_LISTINGS, kp = KDP_LISTINGS;
-  const ap = "data/products/kindle-archives.json", np = "data/note/note-published-urls.json";
-  const pp = "data/products/coconala-packs-2026-09-06.json", gp = "data/products/geo-service-readiness-2026-09-06.json";
+  const ap = datasetPath("kindle.archives"), np = datasetPath("note.published-urls");
+  const pp = `${datasetDir("products.publication-receipts")}/coconala-packs-2026-09-06.json`, gp = `${datasetDir("products.publication-receipts")}/geo-service-readiness-2026-09-06.json`;
   const coco = obj(read(cp).listings), kdp = obj(read(kp).listings), archives = obj(read(ap).books);
   const ni = read(np), notes = obj(ni.articles), packs = read(pp), geo = read(gp);
   const nrp = `.local/note-products-revisions/${noteRevision}/report.json`;
@@ -121,7 +122,7 @@ export function buildSalesCatalog(root: string, checkedAt: string, kindleVersion
     const version = kindleVersion, dir = `.local/kindle-books/${b.id}/${version}`;
     const m = dir && existsSync(join(root, dir, "metadata.json")) ? read(`${dir}/metadata.json`) : {};
     const present = !!dir && existsSync(join(root, dir, "book.epub"));
-    const verificationPath = version ? `data/products/kindle-${version}-verification.json` : null;
+    const verificationPath = version ? `${datasetDir("kindle.archives")}/kindle-${version}-verification.json` : null;
     const verification = verificationPath && existsSync(join(root, verificationPath)) ? read(verificationPath) : {};
     const o: SalesOffer = { id: b.id, title: b.title, kind: "book", catalogStatus: b.status, scope: b.concept, free: false, candidate: false,
       buildStatus: present ? "generated" : "missing", artifactDirectory: dir,

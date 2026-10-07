@@ -9,6 +9,7 @@ import { mkdirSync, renameSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { PROJECT_ROOT, resolveServiceAccountKeyFile } from "../metrics/lib/auth.mjs";
 import { GA4_PROPERTY_ID } from "../lib/site-config.cjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const PROPERTY_ID = process.env.GA4_PROPERTY_ID || GA4_PROPERTY_ID;
 const args = process.argv.slice(2);
@@ -104,7 +105,7 @@ const report = {
   raw,
   japan,
 };
-const output = join(PROJECT_ROOT, "data/note/evidence", `note-referrals-${isoInJst()}.json`);
+const output = join(PROJECT_ROOT, datasetDir("note.operation-evidence"), `note-referrals-${isoInJst()}.json`);
 mkdirSync(dirname(output), { recursive: true });
 writeFileSync(`${output}.tmp`, `${JSON.stringify(report, null, 2)}\n`, "utf8");
 renameSync(`${output}.tmp`, output);

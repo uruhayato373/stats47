@@ -36,6 +36,7 @@ import {
   spuriousReasons,
 } from "./lib/topic-queue-spurious-core.mjs";
 import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -47,7 +48,7 @@ const getArg = (flag, fallback) => {
   return i >= 0 && args[i + 1] ? args[i + 1] : fallback;
 };
 
-const QUEUE_PATH = path.join(PROJECT_ROOT, "data/blog/topic-queue.json");
+const QUEUE_PATH = path.join(PROJECT_ROOT, `${datasetDir("blog.operations")}/topic-queue.json`);
 const SEASONALITY_PATH = path.join(__dirname, "data", "seasonality-table.json");
 const METRICS_DIR = path.join(PROJECT_ROOT, "packages/data-configs/src/metrics");
 const PREFS_PATH = path.join(PROJECT_ROOT, "packages/area/src/data/prefectures.json");
@@ -184,7 +185,7 @@ function stemOf(title) {
 
 // 2. GSC snapshot
 function findLatestSnapshot() {
-  const dir = path.join(PROJECT_ROOT, "data/gsc/snapshots");
+  const dir = path.join(PROJECT_ROOT, datasetDir("gsc.snapshots"));
   if (!fs.existsSync(dir)) return null;
   const weeks = fs.readdirSync(dir).filter((d) => /^\d{4}-W\d{2}$/.test(d));
   return weeks.sort().reverse()[0] || null;
@@ -195,7 +196,7 @@ function loadPagesCsv(week) {
   if (!week) return { ranking, areas };
   const csv = path.join(
     PROJECT_ROOT,
-    "data/gsc/snapshots",
+    datasetDir("gsc.snapshots"),
     week,
     "pages.csv",
   );

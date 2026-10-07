@@ -11,6 +11,7 @@ import { createCoverStore, fetchCoverSource, fetchNoteDetail, storeCoverBytes, r
 import { registerCoverCandidate } from './lib/cover-ingest.mjs';
 import { enumerateNoteBodies } from '../lib/gallery-collectors.mjs';
 import { R2_PUBLIC_BASE_URL } from '../lib/site-config.cjs';
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const command = process.argv[2];
 const options = {};
@@ -59,9 +60,9 @@ async function boundedMap(items, work) {
 
 if (command === 'seed') {
   // note の監査・カバー更新の記録は data/note/evidence/、release の検証証跡は data/releases/
-  const directory = path.join(COVER_ROOT, 'data/note/evidence');
+  const directory = path.join(COVER_ROOT, datasetDir("note.operation-evidence"));
   const files = [path.join(directory, 'note-cover-audit-latest.json')];
-  for (const dir of [directory, path.join(COVER_ROOT, 'data/releases')]) {
+  for (const dir of [directory, path.join(COVER_ROOT, datasetDir("ops.releases"))]) {
     if (fs.existsSync(dir)) files.push(...fs.readdirSync(dir).filter((name) => /note-cover-refresh.*verification\.json$/.test(name)).map((name) => path.join(dir, name)));
   }
   const imported = files.filter((file) => fs.existsSync(file)).flatMap((file) => observations(JSON.parse(fs.readFileSync(file, 'utf8'))));

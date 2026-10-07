@@ -17,6 +17,7 @@ import { dirname, resolve } from "node:path";
 import { CATEGORY_KEYS } from "@stats47/data-configs";
 import { AFFILIATE_ADS } from "../../../apps/web/scripts/affiliate-ads-data";
 import { buildAffiliatePortfolioViewModel } from "../../../apps/admin/lib/server/affiliate-portfolio-view";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 function esc(s: unknown): string {
   return String(s ?? "")
@@ -46,7 +47,7 @@ function main(): void {
   const gaps = CATEGORY_KEYS.filter((k) => !(byCat[k] ?? 0));
   const advertisers = new Set(active.map((a) => a.title)).size;
   const generatedAt = new Date().toISOString().slice(0, 19).replace("T", " ");
-  const portfolioPath = resolve(process.cwd(), "data/affiliate/affiliate-portfolio-latest.json");
+  const portfolioPath = resolve(process.cwd(), `${datasetDir("affiliate.placement-baseline")}/affiliate-portfolio-latest.json`);
   const portfolio = buildAffiliatePortfolioViewModel(
     existsSync(portfolioPath) ? JSON.parse(readFileSync(portfolioPath, "utf8")) : {},
   );

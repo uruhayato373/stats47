@@ -8,6 +8,7 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { ROOT } from "./lib/kdp-session.mjs";
 import { validateWeeklyApproval } from "./lib/kdp-weekly-approval.mjs";
+import { datasetPath } from "../../../config/datasets.mjs";
 
 const argv = process.argv.slice(2);
 const getArg = (name) => {
@@ -31,7 +32,7 @@ execFileSync(
   { cwd: ROOT, stdio: "inherit" },
 );
 
-const decision = JSON.parse(readFileSync(join(ROOT, "data/products/kdp-weekly-publication.json"), "utf8"));
+const decision = JSON.parse(readFileSync(join(ROOT, datasetPath("kdp.weekly-publication")), "utf8"));
 const approval = validateWeeklyApproval(decision, { week, id, ownerApproved, commit });
 if (!approval.ok) {
   console.error(`ABORT: ${approval.errors.join(" / ")}`);

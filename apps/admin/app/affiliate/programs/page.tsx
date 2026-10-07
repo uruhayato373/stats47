@@ -4,6 +4,7 @@ import { ErrorNote, PageHeading } from "@/components/ops/primitives";
 import { affiliatePrograms } from "@/lib/server/affiliate";
 import { adsSummary } from "@/lib/server/ads";
 import { hasError } from "@/lib/server/state-io";
+import { datasetDir } from "../../../../../config/datasets.mjs";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "アフィリエイト 提携・案件 — stats47 admin" };
@@ -33,7 +34,7 @@ export default function AffiliateProgramsPage() {
 
   return (
     <div className="space-y-8">
-      <PageHeading title="アフィリエイト 提携・案件" source="data/affiliate/{a8-catalog,affiliate-catalog}.json" />
+      <PageHeading title="アフィリエイト 提携・案件" source={`${datasetDir("affiliate.audits")}/{a8-catalog,affiliate-catalog}.json`} />
 
       <Section title="案件ポートフォリオ">
         {hasError(d.portfolio) ? (

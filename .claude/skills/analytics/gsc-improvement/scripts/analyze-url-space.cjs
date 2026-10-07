@@ -19,6 +19,7 @@ const path = require("path");
 const https = require("https");
 const { URL } = require("url");
 const { SITE_ORIGIN } = require("../../../../scripts/lib/site-config.cjs");
+const { datasetDir } = require("../../../../../config/datasets.mjs");
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../../../..");
 const SITE_URL = SITE_ORIGIN;
@@ -30,7 +31,7 @@ function resolveWeekArg() {
   if (arg && /^\d{4}-W\d{2}$/.test(arg)) return arg;
   const snapDir = path.join(
     PROJECT_ROOT,
-    "data/gsc/snapshots"
+    datasetDir("gsc.snapshots")
   );
   if (!fs.existsSync(snapDir)) throw new Error(`snapshots directory not found: ${snapDir}`);
   const weeks = fs.readdirSync(snapDir)
@@ -148,7 +149,7 @@ async function main() {
 
   const snapDir = path.join(
     PROJECT_ROOT,
-    "data/gsc/snapshots",
+    datasetDir("gsc.snapshots"),
     week
   );
   const pagesCsv = path.join(snapDir, "pages.csv");

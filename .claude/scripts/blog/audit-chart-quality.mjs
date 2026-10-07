@@ -45,6 +45,7 @@ import {
   lintScatterQuality,
   lintTileGridQuality,
 } from '../lib/svg-lint.mjs';
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -59,7 +60,7 @@ const BASE = path.resolve(PROJECT_ROOT, getArg('--base', '.local/r2/app/blog'));
 const JSON_OUT = args.includes('--json');
 const OUT_PATH = path.resolve(
   PROJECT_ROOT,
-  getArg('--out', 'data/blog/chart-audit.json')
+  getArg('--out', `${datasetDir("blog.operations")}/chart-audit.json`)
 );
 
 const log = (m) => !JSON_OUT && console.log(m);

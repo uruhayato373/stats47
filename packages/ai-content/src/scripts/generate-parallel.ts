@@ -92,6 +92,7 @@ import {
   type GeminiQuotaDetails,
   type GeminiTokenUsage,
 } from "../services/gemini-text-client";
+import { datasetDir } from "../../../../config/datasets.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 // packages/ai-content/src/scripts → リポジトリルートは 4 つ上
@@ -467,7 +468,7 @@ function writeStaging(outDir: string, row: AiContentSnapshotRow): string {
  * `data/ai-content-staging/*.json` なので、`app/ranking/<key>/` 配下に置くと拾われない)。
  */
 function writeOutbox(row: AiContentSnapshotRow): string {
-  const dir = path.join(PROJECT_ROOT, "data/ai-content-staging");
+  const dir = path.join(PROJECT_ROOT, datasetDir("ai-content.staging"));
   mkdirSync(dir, { recursive: true });
   const dest = path.join(dir, `${row.rankingKey}.json`);
   writeFileSync(dest, JSON.stringify(row, null, 2) + "\n", "utf-8");
@@ -594,7 +595,7 @@ async function processOne(
 
     if (opts.dryRun) {
       const dest = opts.outbox
-        ? path.join(PROJECT_ROOT, "data/ai-content-staging", `${rankingKey}.json`)
+        ? path.join(PROJECT_ROOT, datasetDir("ai-content.staging"), `${rankingKey}.json`)
         : path.join(opts.outDir, aiContentKeyPath(rankingKey));
       process.stdout.write(
         `[DRY] ${rankingKey} (${meta.yearCode}): prompt ${prompt.length}字 → ${dest}\n`,
@@ -882,7 +883,7 @@ async function main() {
   process.stdout.write(
     `pending ${pending.length} 件中 ${targets.length} 件を処理 → ${
       opts.outbox
-        ? `outbox: ${path.join(PROJECT_ROOT, "data/ai-content-staging")} (develop へ push すると公開)`
+        ? `outbox: ${path.join(PROJECT_ROOT, datasetDir("ai-content.staging"))} (develop へ push すると公開)`
         : `staging: ${opts.outDir}`
     }\n`,
   );

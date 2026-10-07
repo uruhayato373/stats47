@@ -35,10 +35,11 @@ import { METRICS_REGISTRY } from "@stats47/data-configs/registry";
 import type { MetricConfig } from "@stats47/data-configs";
 
 import { resolveEstatParams } from "../utils/source-config";
+import { datasetDir } from "../../../../config/datasets.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..", "..");
-const STATE_DIR = path.join(PROJECT_ROOT, "data/estat/year-coverage");
+const STATE_DIR = path.join(PROJECT_ROOT, datasetDir("estat.year-coverage"));
 const QUEUE_PATH = path.join(STATE_DIR, "queue.json");
 const LATEST_PATH = path.join(STATE_DIR, "LATEST.md");
 

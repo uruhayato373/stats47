@@ -22,6 +22,7 @@ import { execFileSync } from "child_process";
 import { createRequire } from "module";
 
 import { AFFILIATE_OFFER_PROFILES } from "../../../apps/web/scripts/affiliate-offer-profiles-data";
+import { datasetPath } from "../../../config/datasets.mjs";
 
 const require = createRequire(import.meta.url);
 const core = require("./lib/a8-scout-core.mjs");
@@ -29,7 +30,7 @@ const appendCore = require("./lib/a8-append-core.mjs");
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
 const ADS_DATA = path.join(PROJECT_ROOT, "apps/web/scripts/affiliate-ads-data.ts");
-const CATALOG_PATH = path.join(PROJECT_ROOT, "data/affiliate/a8-catalog.json");
+const CATALOG_PATH = path.join(PROJECT_ROOT, datasetPath("a8.catalog"));
 
 const APPLY = process.argv.includes("--apply");
 

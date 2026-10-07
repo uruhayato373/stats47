@@ -26,12 +26,13 @@ import { THEME_CATALOGS } from "../src/theme-catalog/index";
 import { getMetricConfig } from "../src/registry";
 
 import type { CatalogMetric } from "../src/theme-catalog/types";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, "../../..");
 const LIVE_AUDIT_PATH = path.join(
   REPO_ROOT,
-  "data/themes/charts/live-audit.json",
+  `${datasetDir("themes.chart-audit")}/live-audit.json`,
 );
 
 interface LiveAuditResult {

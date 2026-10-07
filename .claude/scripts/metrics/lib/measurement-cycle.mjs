@@ -8,6 +8,7 @@
 import { describeChannel, weeklyProductRevenue } from "./product-revenue.mjs";
 import { reconcileDimensions } from "../../google-admin/dimension-ledger.mjs";
 import { isoWeekOf, isoWeekRange } from "./periods.mjs";
+import { datasetDir } from "../../../../config/datasets.mjs";
 
 /** 登録すれば値別の内訳を読める最低発火量 (28 日)。これ未満は登録しても判定の標本にならない。 */
 export const MIN_EVENTS_FOR_BREAKDOWN = 100;
@@ -466,7 +467,7 @@ const TIER_LABEL = { nsm: "NSM", driver: "駆動", guardrail: "守り" };
 
 function renderKpiTree(k) {
   const lines = [];
-  lines.push(`**KPI ツリー**（正典: 事業計画 catalog → \`data/business-plan/kpi-tree.json\`。比較は ${KPI_COMPARE_WEEKS_BACK} 週前 ${k.compareWeek} = 窓が重ならない値。★ = 今月の重点レーンの KPI）`);
+  lines.push(`**KPI ツリー**（正典: 事業計画 catalog → \`${datasetDir("business-plan.state")}/kpi-tree.json\`。比較は ${KPI_COMPARE_WEEKS_BACK} 週前 ${k.compareWeek} = 窓が重ならない値。★ = 今月の重点レーンの KPI）`);
   lines.push("");
   lines.push("| 階層 | KPI | 今週 | 比較 | 目標 | 状態 | 施策 |");
   lines.push("|---|---|---|---|---|---|---|");

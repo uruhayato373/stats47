@@ -9,12 +9,13 @@ import { fileURLToPath } from "node:url";
 import { extractDashboardDom, collectDashboardPages } from "./lib/dashboard-dom.mjs";
 import { buildDashboardSnapshot, buildCoverMetricsReport, coverMetricsCsv, defaultPeriod, validatePeriod } from "./lib/dashboard-metrics.mjs";
 import { measurementContext, unattended, markMeasurementAuthenticated } from '../measurement/browser-session.mjs';
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
 const run = promisify(execFile);
 const pause = ms => new Promise(r => setTimeout(r, ms));
-const options = { ...defaultPeriod(), outputDir: join(ROOT, "data/note/dashboard"),
-  coverAudit: join(ROOT, "data/note/evidence/note-cover-audit-latest.json"), profile: "Profile 5" };
+const options = { ...defaultPeriod(), outputDir: join(ROOT, datasetDir("note.dashboard")),
+  coverAudit: join(ROOT, `${datasetDir("note.operation-evidence")}/note-cover-audit-latest.json`), profile: "Profile 5" };
 const flags = { "--start": "start", "--end": "end", "--output-dir": "outputDir", "--cover-audit": "coverAudit", "--profile": "profile" };
 for (let i = 2; i < process.argv.length; i++) {
   if (process.argv[i] === "--help") {

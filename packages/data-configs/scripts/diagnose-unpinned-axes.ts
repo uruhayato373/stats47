@@ -65,10 +65,11 @@ import {
 import { EXPECTED_SHAPE_ANOMALY } from "../src/expected-shape-anomaly.js";
 import { getMetricConfig } from "../src/registry.js";
 import type { MetricConfig, SourceConfig } from "../src/types.js";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(__dirname, "../../..");
-const META_DIR = resolve(REPO_ROOT, "data/estat/meta");
+const META_DIR = resolve(REPO_ROOT, datasetDir("estat.meta"));
 
 /** `.claude/scripts/estat/fetch-estat-meta.mjs` が書く形 */
 interface MetaDump {

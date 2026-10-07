@@ -4,6 +4,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 import { SITE as SITE_CONFIG } from "@stats47/types";
+import { datasetDir } from "../../../../config/datasets.mjs";
 
 /**
  * モノレポルートの解決 (旧 server.mjs の PROJECT_ROOT = path.resolve(__dirname, "../../..") 相当)。
@@ -61,7 +62,7 @@ export function localKindleCoverDraftsDir(): string {
 
 /** SNS の記録ディレクトリ (Instagram の予約表 instagram-w<N>-schedule.json の置き場)。 */
 export function snsDataDir(): string {
-  return path.join(projectRoot(), "data/sns");
+  return path.join(projectRoot(), datasetDir("sns.drafts"));
 }
 
 /** gallery 固有の永続 state (旧 GALLERY_STATE)。 */

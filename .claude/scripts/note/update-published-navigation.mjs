@@ -30,6 +30,7 @@ import {
 } from "./lib/navigation-footer.mjs";
 import { assertAccount, launchContext, UA } from "./lib/note-session.mjs";
 import { SITE_ORIGIN } from "../lib/site-config.cjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 // --force-regenerate-cards の一回限りの適用フラグ。main() が options から設定する
 // (関数シグネチャを全呼び出し経路で書き換えるより、この 1 スクリプト内では読みやすい)。
@@ -38,9 +39,9 @@ let FORCE_REGENERATE_CARDS = false;
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(SCRIPT_DIR, "../../..");
 const RUN_DATE = new Date().toISOString().slice(0, 10);
-const REPORT_PATH = join(ROOT, "data/note/navigation", `note-navigation-pilot-${RUN_DATE}.json`);
-const METRICS_PATH = join(ROOT, "data/note/metrics", `note-${RUN_DATE}.json`);
-const CIRCULATION_AUDIT_PATH = join(ROOT, "data/note/evidence", `note-circulation-audit-${RUN_DATE}.json`);
+const REPORT_PATH = join(ROOT, datasetDir("note.navigation-pilot"), `note-navigation-pilot-${RUN_DATE}.json`);
+const METRICS_PATH = join(ROOT, datasetDir("note.metrics"), `note-${RUN_DATE}.json`);
+const CIRCULATION_AUDIT_PATH = join(ROOT, datasetDir("note.operation-evidence"), `note-circulation-audit-${RUN_DATE}.json`);
 
 function parseArgs(argv) {
   const slugIndex = argv.indexOf("--slug");
