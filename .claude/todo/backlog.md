@@ -311,6 +311,17 @@ updated: 2026-10-06
 - **完了条件**: 次の本番デプロイで reset step と smoke が通り、post-deploy-smoke (Playwright) も通る。
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [THEME-READING-CHAPTER-EMPTY-01] 考察・FAQ だけの章 (読み方章 8 テーマ) が見出しと説明だけの空の章に見え、中身が比較の節の後に出る
+タグ: [UI・UX] [種類:不具合] [実行:対話] [検証:node .claude/scripts/themes/capture-theme-page.mjs consumer-prices] [起票:2026-10-08] [領域:サイト]
+
+- **事実 (2026-10-08、localhost と本番の `capture-theme-page.mjs` で確認)**: `ThemeMetricsDashboard.tsx` は `markdown-section` を章の `chartKeys` に関係なく
+  `ThemeComparisonSection` (都道府県の分布・指標の比較) の後にまとめて描く。このため `chartKeys` が markdown だけの章は、見出しと説明だけが出て、
+  中身の FAQ・考察は比較の節を挟んだページ末尾に出る。該当はカタログの `reading` 章 8 つ (healthcare / consumer-prices / local-economy / aging-society /
+  labor-mobility / labor-wages / population-dynamics / living-housing)。本番の consumer-prices でも同じ並びだった (変更前の版)。
+- **次**: 章の `chartKeys` にある markdown はその章の中で描き、どの章にも属さない markdown だけを末尾に残す。比較の節を読み方章の前に置くか後に置くかは、
+  読み方章を末尾に移した 2026-10-06 の判断 (`2026-10-06-theme-*.md`) と合わせて決める。
+- **完了条件**: 8 テーマの読み方章の見出しの直下に、その章の FAQ・考察が描かれる (`capture-theme-page.mjs` の章ごとの画像で確認)。
+
 ### [DATA-SHUKUHAKU-CORRECTION-01] 宿泊旅行統計の正誤表 (2015〜2024 年の年間値) が社会・人口統計体系の値に反映されているか確かめる
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-08] [領域:データ]
 
