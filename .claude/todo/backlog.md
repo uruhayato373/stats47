@@ -362,6 +362,7 @@ updated: 2026-10-06
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npm run validate:config --workspace=@stats47/data-configs] [起票:2026-10-07] [領域:データ]
 
 - **事象 (2026-10-07、sixth-industry-direct-sales の writer が報告し config で確認)**: `packages/data-configs/src/metrics/total-farm-household-income.ts` に description・note・surveyId が無く、指標の定義シートで対象 (農家 1 戸あたりか)・分母・調査が空欄になる。「総所得」が農外所得や年金を含むかも読者向けの定義に出ない。1 戸あたりの所得なのに normalizationOptions に「人口10万人あたり」「面積100km²あたり」があり、意味の無い換算が選べる。yearFormat は fiscal なのに seoTitle が「【2003年】」と暦年で書いている。系列は 1995〜2003 年度で止まっている。
+- **追記 (2026-10-07)**: 同じ表 0000010212 の農業所得割合 (#L0110101)・農外所得割合 (#L0110102) の config も対象・分母・調査が定義シートに出ない (sixth-industry-direct-sales の fix writer が報告)。e-Stat の控え `data/estat/meta/0000010212.json` の項目名は「#L01100_農家総所得」で、1 戸あたりかどうかの表記が無い。記事は「分母は未確認」と書いて公開する。3 指標をまとめて直す。
 - **次**: 社会・人口統計体系の指標定義 (#L01100) で対象と構成を確かめ、description と note に書く。surveyId を `data/surveys/taxonomy.json` で探して紐付ける。正規化の選択肢を外す。seoTitle を再生成して「年度」にする。
 - **完了条件**: 定義シートに対象・分母・調査が出て、正規化の選択肢が無く、seoTitle が「2003年度」になる。
 
