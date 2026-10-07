@@ -1,7 +1,7 @@
 ---
 type: theme-catalog-review
 date: 2026-10-07
-status: proposal-ready
+status: implemented-pending-release
 theme: consumer-prices
 supersedes: 2026-07-11-theme-consumer-prices.md
 tags: [theme-catalog, consumer-prices, regional-price-index, years-extension, cpi-heatmap]
@@ -86,8 +86,8 @@ tags: [theme-catalog, consumer-prices, regional-price-index, years-extension, cp
 | `household-survey-food-expenditure` | secondary | keep | 登録 2019・2024。e-Stat も同じ 2 年 (北海道で確認) | 同上 |
 | `average-temperature` | secondary | **remove** | 登録 1975〜2024 | climate の primary を抱え込んでいる (視点 `owned-elsewhere`)。章の説明自身が「県全域の気温や通年の光熱費ではない」と断っており、物価の主問に要る理由が示せない。理由は「判断の要る点」1 |
 
-実装時の再確認 (2026-10-08、`getStatsData` を `cdArea` なしで呼び、年ごとの欠測でない都道府県の件数を数えた): 年を広げる 9 コード
-(`#L04415`・`#L04418`〜`#L04425`) はすべて 2013〜2024 の 12 年で、どの年も 47 件そろう。上の表の「北海道のみ確認」は、この確認で 47 都道府県まで埋まった。
+実装時の再確認 (2026-10-08): 年を広げる 9 指標の実在年は全都道府県で取り直して `data/estat/year-coverage/queue.json` に記録した
+(`scope: "all-prefectures"`、年ごとの都道府県数つき)。上の表の「北海道のみ確認」の分も、この記録で全都道府県を見ている。
 
 外す 1 指標は climate に主担当があり、このテーマの指標一覧から消えるだけでランキングページと climate には残る。
 `selection-evidence` の 8 件は、残る primary・secondary の 7 指標の選定根拠を `/backfill-theme-selection` の gate 越しに書き直す
@@ -169,12 +169,15 @@ rankingKey が実在する `average-temperature` は、実装時に catalog の 
 
 ## 採用決定
 
-**ユーザー承認待ち。** 承認前は `data/themes/catalogs/` と metric config を編集しない。判断が要る点は次のとおり。
+**2026-10-07 にオーナーが承認した** (判断点 1〜5 はすべて推奨どおり。公開は判定日を待たずに出す)。
+実装は develop (PR [#1100](https://github.com/uruhayato373/stats47/pull/1100)、develop → main)。
 
-1. `average-temperature` を外す (推奨) か、光熱・水道の読みに要るものとして残すか。残す場合は理由を `selection` に書き、章「物価指数と家計の支出額」に気温のカードを戻す。
-2. 9 指標の `years` を 2013〜2024 に広げ、`theme-cpi-heatmap` を `cpi-heatmap` に作り替える (推奨)。広げた観測値の再取得と R2 反映はデプロイと同じ承認で行い、公開は d56 (2026-11-06) の観測後でよいか。
-3. 年の表記 (年度か暦年か) を、この提案の公開前に `METRIC-YEARFORMAT-KAKEI-01` で確定させるか、現行の「年度」表記のまま出して後で直すか。推奨は、統計局の集計期間を一次資料で確かめてから `yearFormat` を直す順で、確かめるまでは触らない。
-4. 7 月版の「家賃除く総合を primary にする」を取り下げ、secondary のまま残してよいか。
-5. 光熱・食料の 2 章を「物価指数と家計の支出額」の 1 章にまとめ、`expenses` と重複するカード 2 枚を外してよいか。
-
-実装後は、承認日・branch / PR・選定根拠の出典・warning の増減・件数基準と調査紐付け ratchet の変更をここに追記する。
+- 指標: 9 指標の `years` を 2013〜2024 年へ広げた (9 コードとも全都道府県で 12 年そろう。記録は `data/estat/year-coverage/queue.json`)。
+  年平均気温は外して `rejectedCandidates` に残した。`yearFormat` は変えていない (判断点 3、`METRIC-YEARFORMAT-KAKEI-01`)。
+- 図・カード・章: `theme-cpi-heatmap` を 12 費目の `cpi-heatmap` に作り替え、`md-cpi-discussion` を外した。図 4 → 3、カード 7 → 4、章 6 → 5。
+- 選定根拠: primary・secondary の 7 指標を `/backfill-theme-selection` の gate に通して書いた (7 件すべて通過)。
+  出典は小売物価統計調査（構造編）2024 年結果の概要・同調査の利用上の注意、令和 6 年全国家計構造調査の結果の概要。
+  role の推奨 3 件は `reference/audits/2026-10-08-selection-backfill.md` に残し、変えていない。
+- 件数基準: 調査紐付けの下限は metric groups 441 → 438 (`themeBaselineFollowUps` に記録)。図の件数基準と warning の増減は観光と同じ変更で更新した。
+- 公開: R2 の観測値の再取得までは、ヒートマップは 9 指標に共通する 2024 年の 1 列だけを描く。page-components の反映と観測値の取り込みを同じ便で行う。
+- PR の代表 E2E は図の定義を本番 R2 から読むので、`representativeTypes` は `cpi-profile` だけにした (`E2E-THEME-PR-PAGECOMPONENTS-01`)。

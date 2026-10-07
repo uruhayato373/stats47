@@ -1,7 +1,7 @@
 ---
 type: theme-catalog-review
 date: 2026-10-07
-status: proposal-ready
+status: implemented-pending-release
 theme: tourism
 supersedes: 2026-07-12-theme-tourism.md
 tags: [theme-catalog, tourism, accommodation, inbound, occupancy, consumption]
@@ -87,9 +87,8 @@ tags: [theme-catalog, tourism, accommodation, inbound, occupancy, consumption]
 年を広げる 2 指標 (`room-utilization-rate`・`number-of-hotel-facilities`) は、config の `years` を変えるだけで値は作らない。
 R2 の観測値は自動では増えないため、再取得はデプロイと同じ承認で行う。
 
-実装時の再確認 (2026-10-08、`getStatsData` を `cdArea` なしで呼び、年ごとの欠測でない都道府県の件数を数えた):
-`room-utilization-rate` (`#G04308`) は 2009〜2024 の 16 年、`number-of-hotel-facilities` (`C3803`) は 1997〜2017 の 21 年、
-`actual-overnight-guests` (`G7103`、単位「人」) は 2009〜2024 の 16 年で、どの年も 47 件そろう。
+実装時の再確認 (2026-10-08): 3 指標 (`room-utilization-rate`・`number-of-hotel-facilities`・`actual-overnight-guests`) の実在年は
+全都道府県で取り直して `data/estat/year-coverage/queue.json` に記録した (`scope: "all-prefectures"`、年ごとの都道府県数つき)。
 実宿泊者数の定義は観光庁「宿泊旅行統計調査 用語の解説」(`https://www.mlit.go.jp/kankocho/content/001983218.pdf`、同日 GET で 200) の
 「実宿泊者数とは、各月における宿泊手続をした人数をいい、子供や乳幼児も 1 人とした。」に合わせた。
 
@@ -173,12 +172,16 @@ rankingKey が実在する候補 (`jr-passenger-transport` の主担当 railway�
 
 ## 採用決定
 
-**ユーザー承認待ち。** 承認前は `data/themes/catalogs/tourism.json` と metric config を編集しない。判断が要る点は次のとおり。
+**2026-10-07 にオーナーが承認した** (判断点 1〜7 はすべて推奨どおり。判断点 7 は「判定日を待たずに出す」に変更)。
+実装は develop (PR [#1100](https://github.com/uruhayato373/stats47/pull/1100)、develop → main)。
 
-1. 実宿泊者数 (`actual-overnight-guests`、`0000010107` / `G7103`) を新規指標として追加し、secondary にするか。追加すると metric config の新規作成とデータ投入が増える。見送るなら表 1・カード `stays-actual` を外す。
-2. 客室稼働率を primary に上げ、primary を 2 件 (延べ宿泊者数・客室稼働率) にするか。総数だけを主役に置くより読み違いは減るが、primary 基準 (1〜3 件) の中で増える。
-3. 客室稼働率の `years` を 2009〜2024 に広げるとき、2010 年の対象拡大 (従業者 9 人以下) の断層と、2020〜2022 年のコロナ禍の落ち込みを、折れ線のまま見せてよいか。7 月版は無注記の接続を禁じているので、説明文に注記を置く案にしている。
-4. 訪問回答数 (`inbound-visit-sample-by-destination`) と空港数 (`airport-count`) を context に下げ、カードを外してよいか。一覧とランキングには残るが、主要画面からは消える。
-5. 日本人と外国人の旅行消費額 2 枚を 1 枚の比較カードにまとめてよいか。別の調査の推計を並べることになるので、説明に「足したり差を取ったりしない」と書く。2 枚のまま年を固定した比較カードにする案もある。
-6. 7 月版が保留にした観光入込客数を、今回も不採用 (表 3) のままにしてよいか。検索需要 (9 クエリ 26 表示) はあるが、公表状況を今回は確かめていない。
-7. 本番への反映を 9 月の実験の d56 (2026-11-06) 後まで待ち、`THEME-CATALOG-OPT-RELEASE-01` に含めてよいか。
+- 指標: 客室稼働率を primary にして 2009〜2024 年へ、ホテル営業施設数を 1997〜2017 年へ広げた。実宿泊者数 (`actual-overnight-guests`) を新規に登録して secondary にした。
+  訪問回答数と空港数は context に下げ、JR 旅客は外して `rejectedCandidates` に残した。実在年の記録は `data/estat/year-coverage/queue.json`。
+- 図・カード・章: 図 3 → 1、カード 11 → 6、章 8 → 6 (表 2 のとおり)。客室稼働率の説明に、2010 年 4 月からの調査対象の拡大
+  (観光庁「宿泊旅行統計調査の概要」で確認) と 2020〜2022 年の落ち込み (都道府県の中央値 2019 年 66.2％ → 2020 年 42.3％、e-Stat で確認) を書いた。
+- 選定根拠: primary・secondary の 8 指標を `/backfill-theme-selection` の gate (引用の逐語一致・URL の 200) に通して書いた (8 件すべて通過)。
+  出典は観光白書・観光立国推進基本計画 (第5次)・宿泊旅行統計調査・インバウンド消費動向調査・旅行・観光消費動向調査。
+  role の推奨 2 件は `reference/audits/2026-10-08-selection-backfill.md` に残し、変えていない。
+- 件数基準: `theme-catalog-baseline.json` の図 68 → 65 (2 テーマ計)、調査紐付けの下限は metric groups 446 → 441・図 53 → 51
+  (`survey-taxonomy-ratchet.json` の `themeBaselineFollowUps` に外した key と理由を記録)。`no-adoption-criteria` の warning は 2 テーマ計で 267 → 250。
+- 公開: main へのマージ後に page-components を R2 へ反映し、年を広げた 2 指標と新規指標の観測値を `data-refresh` で取り込む。

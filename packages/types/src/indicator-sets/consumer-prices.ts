@@ -76,11 +76,6 @@ export const CONSUMER_PRICES_SET: IndicatorSet = {
       "role": "secondary"
     },
     {
-      "rankingKey": "average-temperature",
-      "shortLabel": "年平均気温（代表観測地点）",
-      "role": "secondary"
-    },
-    {
       "rankingKey": "household-survey-food-expenditure",
       "shortLabel": "食料支出（二人以上世帯・10〜11月の月平均）",
       "role": "secondary"

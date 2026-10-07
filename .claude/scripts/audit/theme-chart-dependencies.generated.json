@@ -3,8 +3,8 @@
   "totalRequests": 0,
   "distinctRequests": 0,
   "requests": [],
-  "totalMetricRefs": 146,
-  "distinctMetricRefs": 142,
+  "totalMetricRefs": 154,
+  "distinctMetricRefs": 139,
   "metrics": [
     {
       "metricKey": "actual-income-worker-households-per-month",
@@ -12,14 +12,6 @@
       "expectedConfigHash": "4592c1fe7b4b6461",
       "themeKey": "real-income",
       "componentKey": "theme-real-income-actual-vs-disposable",
-      "componentType": "line-chart"
-    },
-    {
-      "metricKey": "air-passenger-transport",
-      "expectedUnit": "千人",
-      "expectedConfigHash": "72bde515097e4762",
-      "themeKey": "tourism",
-      "componentKey": "theme-tourism-transport-trend",
       "componentType": "line-chart"
     },
     {
@@ -1069,22 +1061,6 @@
       "themeKey": "safety",
       "componentKey": "safety-crime-types-donut",
       "componentType": "donut-chart"
-    },
-    {
-      "metricKey": "total-overnight-guests",
-      "expectedUnit": "人泊",
-      "expectedConfigHash": "7d70888ce2601167",
-      "themeKey": "tourism",
-      "componentKey": "theme-tourism-stay-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "metricKey": "total-overnight-guests-foreign",
-      "expectedUnit": "人泊",
-      "expectedConfigHash": "a9f3071b058203b0",
-      "themeKey": "tourism",
-      "componentKey": "theme-tourism-stay-trend",
-      "componentType": "line-chart"
     },
     {
       "metricKey": "traffic-accident-count",

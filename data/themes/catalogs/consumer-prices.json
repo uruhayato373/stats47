@@ -10,10 +10,17 @@
       "shortLabel": "総合",
       "role": "primary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
-        "surveyedAt": "2026-09-08",
-        "rationale": "総合は主問に直接答える見出し指標として残す。"
+        "proposedBy": "消費者物価地域差指数－小売物価統計調査（構造編）2024年（令和6年）結果 結果の概要「1 『総合』の物価水準」（総務省統計局、令和7年6月27日公表）",
+        "sourceUrl": "https://www.stat.go.jp/data/kouri/kouzou/pdf/g_2024.pdf",
+        "surveyedAt": "2026-10-08",
+        "rationale": "総務省は地域別の物価を明らかにする目的で消費者物価地域差指数を毎年作成しており、公表資料は最初に「総合」を取り上げている。2024年は東京都104.0に対し群馬県96.2で、都道府県間の比は1.08倍である。全国平均を100とする同年の相対値なので都道府県間の比較には使えるが、指数の変化は各地域の物価水準の時系列変化を表さない。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability",
+          "readerValue"
+        ],
+        "readerQuestion": "自分の住む都道府県の物価水準は、全国平均を100としたときにいくつか。",
+        "targetReaderOrDecision": "転居先や支出計画で、都道府県間の総合的な物価水準の差を確認したい生活者。"
       }
     },
     {
@@ -21,10 +28,16 @@
       "shortLabel": "家賃除く総合",
       "role": "secondary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
-        "surveyedAt": "2026-09-08",
-        "rationale": "家賃除く総合は「総合水準と家賃の影響」を読むため主要画面へ配置する。"
+        "proposedBy": "小売物価統計調査（構造編）結果 統計表利用上の注意（2025年結果～）1「消費者物価地域差指数の結果について」（総務省統計局）",
+        "sourceUrl": "https://www.stat.go.jp/data/kouri/kouzou/pdf/note_2025.pdf",
+        "surveyedAt": "2026-10-08",
+        "rationale": "総務省の利用上の注意は、「総合」が持家の帰属家賃を含まないのに対し、「家賃を除く総合」はそれに加えて民営家賃と公営・都市再生機構・公社家賃も含まないと定めている。同じ年・同じ全国基準で二つを並べれば、地域差のうち家賃に由来する部分を切り分けて読めるため、第1章「総合水準と家賃の影響」の比較相手になる。都市別でも公表される3系列の一つである。",
+        "adoptionCriteria": [
+          "complementarity",
+          "readerValue"
+        ],
+        "readerQuestion": "家賃を除いても、自分の都道府県の物価水準は全国平均より高いのか。",
+        "targetReaderOrDecision": "家賃の高い都市部と地方の物価を、家賃の影響と切り分けて比べたい読者。"
       }
     },
     {
@@ -32,10 +45,16 @@
       "shortLabel": "食料",
       "role": "secondary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
-        "surveyedAt": "2026-09-08",
-        "rationale": "食料は「何の費目が高いか」を読むため主要画面へ配置する。"
+        "proposedBy": "消費者物価地域差指数－小売物価統計調査（構造編）2024年（令和6年）結果 結果の概要「1 『総合』の物価水準」「2 10大費目別の物価水準」（総務省統計局、令和7年6月27日公表）",
+        "sourceUrl": "https://www.stat.go.jp/data/kouri/kouzou/pdf/g_2024.pdf",
+        "surveyedAt": "2026-10-08",
+        "rationale": "2024年結果の概要は、物価水準が低い群馬県では「食料」が全国平均との差に最もマイナスに寄与（-1.27）したと整理している。一方、10大費目別の都道府県間比率は「食料」が1.11倍で、最小の1.06倍（保健医療・交通・通信）に次いで小さい側にある。食料は総合水準の低さを説明する費目でありながら、住居などより地域差が小さいことも確かめられる指標である。",
+        "adoptionCriteria": [
+          "representativeness",
+          "complementarity"
+        ],
+        "readerQuestion": "食料品の物価水準は、都道府県でどの程度違うのか。",
+        "targetReaderOrDecision": "日々の食費に直結する価格水準の地域差を知りたい生活者。"
       }
     },
     {
@@ -43,10 +62,16 @@
       "shortLabel": "住居",
       "role": "secondary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
-        "surveyedAt": "2026-09-08",
-        "rationale": "住居は「何の費目が高いか」を読むため主要画面へ配置する。"
+        "proposedBy": "消費者物価地域差指数－小売物価統計調査（構造編）2024年（令和6年）結果 結果の概要「2 10大費目別の物価水準」（総務省統計局、令和7年6月27日公表）",
+        "sourceUrl": "https://www.stat.go.jp/data/kouri/kouzou/pdf/g_2024.pdf",
+        "surveyedAt": "2026-10-08",
+        "rationale": "2024年結果の概要は、総合水準が高い東京都と神奈川県で10大費目のうち「住居」の指数が最も高いとし、東京都では「住居」が全国平均との差に最もプラスに寄与（1.97）したと整理している。費目別の都道府県間比率も、東京都127.2と岐阜県81.3で1.56倍と教育に次いで大きい。なお「住居」は持家の帰属家賃を含まない。総合の高低に住居費がどう効くかを見る章の中心になる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "complementarity"
+        ],
+        "readerQuestion": "住居費の水準は、東京都と地方とでどれほど違うのか。",
+        "targetReaderOrDecision": "住み替えや転居先選びで、住居費の地域差を確認したい読者。"
       }
     },
     {
@@ -54,10 +79,16 @@
       "shortLabel": "光熱・水道",
       "role": "secondary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
-        "surveyedAt": "2026-09-08",
-        "rationale": "光熱・水道は「何の費目が高いか」を読むため主要画面へ配置する。"
+        "proposedBy": "消費者物価地域差指数－小売物価統計調査（構造編）2024年（令和6年）結果 結果の概要「2 10大費目別の物価水準（２）10大費目別都道府県間比率」（総務省統計局、令和7年6月27日公表）",
+        "sourceUrl": "https://www.stat.go.jp/data/kouri/kouzou/pdf/g_2024.pdf",
+        "surveyedAt": "2026-10-08",
+        "rationale": "2024年結果の概要は、光熱・水道の都道府県間比率が1.37倍で教育・住居に次いで大きく、2023年の1.34倍から0.03ポイント拡大したと示している。この拡大幅は表2の10大費目で最大である。最高は北海道119.6、最低は大阪府87.0で、東京都と神奈川県では光熱・水道が総合水準を最も押し下げている。地域差の構造が変わったかを見る章で、変化の大きい費目として使える。",
+        "adoptionCriteria": [
+          "representativeness",
+          "complementarity"
+        ],
+        "readerQuestion": "光熱・水道の物価水準は、北海道と大阪府でどれくらい違うのか。",
+        "targetReaderOrDecision": "光熱・水道の価格水準の地域差と、その変化を知りたい読者。"
       }
     },
     {
@@ -142,19 +173,16 @@
       "shortLabel": "光熱・水道支出（二人以上世帯・10〜11月の月平均）",
       "role": "secondary",
       "selection": {
-        "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
-        "surveyedAt": "2026-09-09",
-        "rationale": "光熱・水道支出（二人以上世帯・10〜11月の月平均）を既存テーマの独立章へ追加する。"
-      }
-    },
-    {
-      "rankingKey": "average-temperature",
-      "shortLabel": "年平均気温（代表観測地点）",
-      "role": "secondary",
-      "selection": {
-        "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
-        "surveyedAt": "2026-09-09",
-        "rationale": "年平均気温（代表観測地点）を既存テーマの独立章へ追加する。"
+        "proposedBy": "令和6年全国家計構造調査 家計収支に関する結果 結果の概要「（参考）調査時期に起因する留意事項」（総務省統計局、2025年12月19日公表）",
+        "sourceUrl": "https://www.stat.go.jp/data/zenkokukakei/2024/pdf/gaiyou1219.pdf",
+        "surveyedAt": "2026-10-08",
+        "rationale": "全国家計構造調査の概要は、家計収支が2024年10月・11月の集計であり、季節性は費目や地域によって異なるとして、光熱支出は北海道のように寒暖差が大きい地域で季節性が強く出ると注記している。同じ概要は、二人以上の世帯で光熱・水道の支出割合が2019年より上昇したと記す。価格指数と並べるときは、気候に由来する地域差を含む点を添える必要がある。",
+        "adoptionCriteria": [
+          "complementarity",
+          "readerValue"
+        ],
+        "readerQuestion": "光熱・水道の支出額が多い県は、価格が高いからか、使う量が多いからか。",
+        "targetReaderOrDecision": "価格指数と実際の支出額を並べて、家計負担の地域差を読みたい読者。"
       }
     },
     {
@@ -162,9 +190,17 @@
       "shortLabel": "食料支出（二人以上世帯・10〜11月の月平均）",
       "role": "secondary",
       "selection": {
-        "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
-        "surveyedAt": "2026-09-09",
-        "rationale": "食料支出（二人以上世帯・10〜11月の月平均）を既存テーマの独立章へ追加する。"
+        "proposedBy": "令和6年全国家計構造調査 家計収支に関する結果 結果の概要「Ⅰ 世帯の支出 1 消費支出の概況（2）二人以上の世帯」（総務省統計局、2025年12月19日公表）",
+        "sourceUrl": "https://www.stat.go.jp/data/zenkokukakei/2024/pdf/gaiyou1219.pdf",
+        "surveyedAt": "2026-10-08",
+        "rationale": "全国家計構造調査の概要は、二人以上の世帯の消費支出（1世帯当たり301,797円）に占める費目別割合で「食料（外食を除く）」が24.2％と最も高く、2019年より割合が上昇した費目にも挙げている。食料価格指数を家計の負担額に結び付ける際の最大費目であり、第4章「物価指数と家計の支出額」で価格指数と対にできる。概要は「外食」を別掲するため、本指標の範囲は統計表の定義で確認が要る。",
+        "adoptionCriteria": [
+          "representativeness",
+          "complementarity",
+          "readerValue"
+        ],
+        "readerQuestion": "食料価格指数が高い県では、家計の食料支出額も多いのか。",
+        "targetReaderOrDecision": "物価水準の差が家計の食費にどう表れるかを確認したい読者。"
       }
     }
   ],
@@ -262,18 +298,85 @@
     },
     {
       "componentKey": "theme-cpi-heatmap",
-      "componentType": "line-chart",
-      "title": "物価地域差指数（総合）の推移",
+      "componentType": "cpi-heatmap",
+      "title": "費目別の物価地域差指数の推移",
       "componentProps": {
         "seriesRefs": [
           {
             "metricKey": "consumer-price-difference-index-overall",
-            "label": "総合"
+            "label": "総合",
+            "colorRole": "series-1"
+          },
+          {
+            "metricKey": "consumer-price-difference-index-overall-excl-rent",
+            "label": "家賃除く総合",
+            "colorRole": "series-2"
+          },
+          {
+            "metricKey": "consumer-price-difference-index-food",
+            "label": "食料",
+            "colorRole": "series-3"
+          },
+          {
+            "metricKey": "consumer-price-difference-index-housing",
+            "label": "住居",
+            "colorRole": "series-4"
+          },
+          {
+            "metricKey": "consumer-price-difference-index-utilities",
+            "label": "光熱・水道",
+            "colorRole": "series-5"
+          },
+          {
+            "metricKey": "consumer-price-difference-index-education",
+            "label": "教育",
+            "colorRole": "series-6"
+          },
+          {
+            "metricKey": "consumer-price-difference-index-culture-recreation",
+            "label": "教養娯楽",
+            "colorRole": "series-7"
+          },
+          {
+            "metricKey": "consumer-price-difference-index-transport-communication",
+            "label": "交通・通信",
+            "colorRole": "series-8"
+          },
+          {
+            "metricKey": "consumer-price-difference-index-healthcare",
+            "label": "保健医療",
+            "colorRole": "series-9"
+          },
+          {
+            "metricKey": "consumer-price-difference-index-clothing-footwear",
+            "label": "被服",
+            "colorRole": "series-10"
+          },
+          {
+            "metricKey": "consumer-price-difference-index-furniture-household",
+            "label": "家具",
+            "colorRole": "series-11"
+          },
+          {
+            "metricKey": "consumer-price-difference-index-miscellaneous",
+            "label": "諸雑費",
+            "colorRole": "series-12"
           }
         ]
       },
       "relatedRankingKeys": [
-        "consumer-price-difference-index-overall"
+        "consumer-price-difference-index-overall",
+        "consumer-price-difference-index-overall-excl-rent",
+        "consumer-price-difference-index-food",
+        "consumer-price-difference-index-housing",
+        "consumer-price-difference-index-utilities",
+        "consumer-price-difference-index-education",
+        "consumer-price-difference-index-culture-recreation",
+        "consumer-price-difference-index-transport-communication",
+        "consumer-price-difference-index-healthcare",
+        "consumer-price-difference-index-clothing-footwear",
+        "consumer-price-difference-index-furniture-household",
+        "consumer-price-difference-index-miscellaneous"
       ],
       "sourceName": "小売物価統計調査（構造編）",
       "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
@@ -282,24 +385,7 @@
       "gridColumnSpanSm": null,
       "dataSource": "ranking",
       "section": "historical-change",
-      "sortOrder": 20,
-      "annotation": "複数年を収録する総合指数を表示します。費目別の単年指数は物価プロファイルで確認できます。"
-    },
-    {
-      "componentKey": "md-cpi-discussion",
-      "componentType": "markdown-section",
-      "title": "数値を比較するときの注意",
-      "componentProps": {
-        "markdown": "全国を100とした同じ年の地域間の価格差です。前年比の物価上昇率とは異なります。\n\n費目ごとの価格差を同じ年で比較します。指数を足して家計の生活費総額にはできません。\n\n複数年を収録する総合指数の推移を確認します。単年の費目別指数は過去へ延長しません。"
-      },
-      "sourceName": "経済財政白書 (令和7年度版) / 男女共同参画白書 (令和7年版) / 小売物価統計調査 — 総務省統計局",
-      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "reading",
-      "sortOrder": 30
+      "sortOrder": 20
     },
     {
       "componentKey": "md-cpi-faq",
@@ -309,7 +395,7 @@
         "displayMode": "faq",
         "markdown": "### Q1: 総合水準と家賃の影響を見るときの注意は？\n\n全国を100とした同じ年の地域間の価格差です。前年比の物価上昇率とは異なります。\n\n### Q2: このテーマの数値を比較するときの注意は？\n\n物価の水準差と家計が実際に支払う額は区別します。"
       },
-      "sourceName": "経済財政白書 (令和7年度版) / 小売物価統計調査 — 総務省統計局 / 毎月勤労統計調査 — 厚生労働省",
+      "sourceName": "小売物価統計調査（構造編）",
       "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
       "gridColumnSpan": 12,
       "gridColumnSpanTablet": null,
@@ -334,7 +420,8 @@
         "consumer-price-difference-index-overall-excl-rent"
       ],
       "relatedChartKeys": [
-        "theme-cpi-profile"
+        "theme-cpi-profile",
+        "theme-cpi-heatmap"
       ]
     },
     {
@@ -388,7 +475,7 @@
     {
       "key": "historical-change",
       "title": "地域差の構造は変わったか",
-      "description": "複数年を収録する総合指数の推移を確認します。単年の費目別指数は過去へ延長しません。",
+      "description": "選んだ県の費目別指数を年ごとに並べます。どの年も、その年の全国平均を100とした比較で、年どうしの差は前年比の物価上昇率ではありません。",
       "metricGroupKeys": [],
       "chartKeys": [
         "theme-cpi-heatmap"
@@ -396,20 +483,10 @@
     },
     {
       "key": "candidate-75",
-      "title": "光熱価格・家計支出と気温",
-      "description": "家計支出は県全域の二人以上世帯について、2019・2024年の10〜11月を平均した月額です。気温は代表観測地点の年間平均であり、県全域の気温や通年の光熱費ではありません。物価指数・支出額・気温はそれぞれ別の指標です。",
+      "title": "物価指数と家計の支出額",
+      "description": "家計支出は県全域の二人以上世帯について、2019・2024年の10〜11月を平均した月額です。物価地域差指数とは単位と対象が異なり、支出額の差だけで同じ商品の価格差とは判断できません。光熱・水道と食料の物価地域差指数は「何の費目が高いか」で見られます。",
       "metricGroupKeys": [
-        "candidate-75-1",
         "candidate-75-2",
-        "candidate-75-3"
-      ]
-    },
-    {
-      "key": "candidate-76",
-      "title": "食料価格と家計の食料支出",
-      "description": "食料支出は県全域の二人以上世帯について、2019・2024年の10〜11月を平均した月額です。食料の物価指数とは単位と対象が異なり、支出額の差だけで同じ商品の価格差とは判断できません。",
-      "metricGroupKeys": [
-        "candidate-76-1",
         "candidate-76-2"
       ]
     },
@@ -419,7 +496,6 @@
       "description": "物価の水準差と家計が実際に支払う額は区別します。",
       "metricGroupKeys": [],
       "chartKeys": [
-        "md-cpi-discussion",
         "md-cpi-faq"
       ]
     }
@@ -451,16 +527,6 @@
       ]
     },
     {
-      "key": "candidate-75-1",
-      "title": "光熱・水道物価地域差指数",
-      "rankingKeys": [
-        "consumer-price-difference-index-utilities"
-      ],
-      "defaultCheckedKeys": [
-        "consumer-price-difference-index-utilities"
-      ]
-    },
-    {
       "key": "candidate-75-2",
       "title": "光熱・水道支出（二人以上世帯・10〜11月の月平均）",
       "rankingKeys": [
@@ -468,26 +534,6 @@
       ],
       "defaultCheckedKeys": [
         "household-survey-utilities-expenditure"
-      ]
-    },
-    {
-      "key": "candidate-75-3",
-      "title": "年平均気温（代表観測地点）",
-      "rankingKeys": [
-        "average-temperature"
-      ],
-      "defaultCheckedKeys": [
-        "average-temperature"
-      ]
-    },
-    {
-      "key": "candidate-76-1",
-      "title": "食料物価地域差指数",
-      "rankingKeys": [
-        "consumer-price-difference-index-food"
-      ],
-      "defaultCheckedKeys": [
-        "consumer-price-difference-index-food"
       ]
     },
     {
@@ -499,6 +545,12 @@
       "defaultCheckedKeys": [
         "household-survey-food-expenditure"
       ]
+    }
+  ],
+  "rejectedCandidates": [
+    {
+      "rankingKey": "average-temperature",
+      "reason": "年平均気温。climate の主指標で主担当のテーマがあり、代表観測地点の年平均気温では光熱価格の地域差を説明する読みを支えられないため、このテーマの主問 (同じ年の全国平均と比べて何が高いか) から外れる。主問に光熱費の気候要因を含め、県全域を代表する気温の系列が使えるようになったら再検討する。"
     }
   ]
 }

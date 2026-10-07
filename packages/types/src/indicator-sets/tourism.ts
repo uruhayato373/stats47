@@ -16,13 +16,18 @@ export const TOURISM_SET: IndicatorSet = {
       "role": "primary"
     },
     {
+      "rankingKey": "room-utilization-rate",
+      "shortLabel": "客室稼働率",
+      "role": "primary"
+    },
+    {
       "rankingKey": "total-overnight-guests-foreign",
       "shortLabel": "外国人延べ宿泊者数",
       "role": "secondary"
     },
     {
-      "rankingKey": "room-utilization-rate",
-      "shortLabel": "客室稼働率",
+      "rankingKey": "actual-overnight-guests",
+      "shortLabel": "実宿泊者数",
       "role": "secondary"
     },
     {
@@ -51,11 +56,6 @@ export const TOURISM_SET: IndicatorSet = {
       "role": "secondary"
     },
     {
-      "rankingKey": "jr-passenger-transport",
-      "shortLabel": "JR旅客",
-      "role": "context"
-    },
-    {
       "rankingKey": "number-of-simple-lodging-facilities",
       "shortLabel": "簡易宿所数",
       "role": "context"
@@ -78,7 +78,7 @@ export const TOURISM_SET: IndicatorSet = {
     {
       "rankingKey": "inbound-visit-sample-by-destination",
       "shortLabel": "訪問者数推計の県別回答数",
-      "role": "secondary"
+      "role": "context"
     },
     {
       "rankingKey": "domestic-travel-consumption-by-destination",
@@ -93,7 +93,7 @@ export const TOURISM_SET: IndicatorSet = {
     {
       "rankingKey": "airport-count",
       "shortLabel": "空港数",
-      "role": "secondary"
+      "role": "context"
     }
   ],
   "keywords": [

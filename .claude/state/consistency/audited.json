@@ -1,7 +1,7 @@
 {
-  "hash": "1f0a78114f58d4548d84a1bc95916a583fbbea08061473183687a5a103903166",
-  "audited_at": "2026-10-07T21:38:31",
+  "hash": "a5718edd400adf4cebae66f3547642b0cf32690f7e3b0f6adf3aebf9324c62ad",
+  "audited_at": "2026-10-07T21:51:49",
   "files": [
-    ".claude/scripts/note/catalog/data/stats47-note.ts"
+    ".claude/scripts/audit/theme-chart-dependencies.generated.json"
   ]
 }

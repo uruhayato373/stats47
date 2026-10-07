@@ -61,8 +61,10 @@ describe("SSDS denominator labels", () => {
   });
 
   it("identifies overnight totals as including foreign guests", () => {
-    const chart = THEME_CATALOGS.tourism.charts.find((entry) => entry.componentKey === "theme-tourism-stay-trend");
-    expect(chart?.title).toContain("総数・外国人");
-    expect(chart?.annotation).toContain("総数には外国人を含みます");
+    // 2026-10-08: 総数・外国人の折れ線はカードと重複するので外し、注記は図と一緒に消えないよう章の説明へ移した
+    const section = THEME_CATALOGS.tourism.sections?.find((entry) => entry.key === "stays");
+    expect(section?.metricGroupKeys).toContain("stays");
+    expect(section?.description).toContain("総数には外国人を含み");
+    expect(section?.description).toContain("実人数ではありません");
   });
 });

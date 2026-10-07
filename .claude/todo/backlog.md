@@ -319,6 +319,42 @@ updated: 2026-10-06
 - **停止条件**: 原因が分かるまで `--apply` の結果をコミットしない。
 - **完了条件**: カタログを変えずに再生成した結果がコミット済みのファイルと一致する。
 
+### [THEME-READING-CHAPTER-EMPTY-01] 考察・FAQ だけの章 (読み方章 8 テーマ) が見出しと説明だけの空の章に見え、中身が比較の節の後に出る
+タグ: [UI・UX] [種類:不具合] [実行:対話] [検証:node .claude/scripts/themes/capture-theme-page.mjs consumer-prices] [起票:2026-10-08] [領域:サイト]
+
+- **事実 (2026-10-08、localhost と本番の `capture-theme-page.mjs` で確認)**: `ThemeMetricsDashboard.tsx` は `markdown-section` を章の `chartKeys` に関係なく
+  `ThemeComparisonSection` (都道府県の分布・指標の比較) の後にまとめて描く。このため `chartKeys` が markdown だけの章は、見出しと説明だけが出て、
+  中身の FAQ・考察は比較の節を挟んだページ末尾に出る。該当はカタログの `reading` 章 8 つ (healthcare / consumer-prices / local-economy / aging-society /
+  labor-mobility / labor-wages / population-dynamics / living-housing)。本番の consumer-prices でも同じ並びだった (変更前の版)。
+- **次**: 章の `chartKeys` にある markdown はその章の中で描き、どの章にも属さない markdown だけを末尾に残す。比較の節を読み方章の前に置くか後に置くかは、
+  読み方章を末尾に移した 2026-10-06 の判断 (`2026-10-06-theme-*.md`) と合わせて決める。
+- **完了条件**: 8 テーマの読み方章の見出しの直下に、その章の FAQ・考察が描かれる (`capture-theme-page.mjs` の章ごとの画像で確認)。
+
+### [DATA-SHUKUHAKU-CORRECTION-01] 宿泊旅行統計の正誤表 (2015〜2024 年の年間値) が社会・人口統計体系の値に反映されているか確かめる
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-08] [領域:データ]
+
+- **事実 (2026-10-08、theme-researcher が観光庁ページを取得して報告)**: 観光庁「宿泊旅行統計調査」のページ
+  (`https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html`) に「【正誤表】宿泊旅行統計(平成27年～令和6年年間値)」が載っている。
+  stats47 は延べ宿泊者数・外国人延べ宿泊者数・実宿泊者数 (`0000010107`) と客室稼働率 (`0000010207`) を社会・人口統計体系から取っており、
+  2015〜2024 年の値が訂正後のものかは確かめていない。
+- **次**: 正誤表の訂正箇所 (都道府県・年・項目) を読み、R2 の `app/stats/<key>/values.json` の同じ箇所と突き合わせる。違えば出典の更新を待つか、
+  出典を観光庁の年間値へ切り替えるかを決める。
+- **あわせて**: 同ページによると 2026 年 1 月分から層化基準が従業者数から客室数に変わった。2026 年以降の年を `years` に足すときは、
+  観光テーマの「客室稼働率と宿泊供給の参考」章の説明と metric config の `note` に系列の断絶を書く。
+- **完了条件**: 正誤表の訂正箇所すべてについて、R2 の値が訂正後と一致するか、違う箇所の扱いを決めて metric config か出典に反映した。
+
+### [E2E-THEME-PR-PAGECOMPONENTS-01] PR の代表 E2E がテーマの図を本番 R2 の page-components で描くので、PR で変えた図の種類を検証できない
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:npm run test:e2e --workspace=apps/web -- tests/e2e/public-route-contract.spec.ts] [起票:2026-10-08] [領域:サイト]
+
+- **事実**: `pr-quality-check.yml` の Representative E2E は PR のビルドを `R2_PUBLIC_FETCH_URL=https://storage.stats47.jp` で起動し、テーマの図の定義を
+  `loadPageComponents('theme', key)` で本番 R2 から読む (`ThemePageLayout.tsx`)。page-components を R2 へ反映する `sync-snapshots.yml` は main を checkout するので、
+  PR の時点では R2 は常に変更前の定義になる。2026-10-08 に consumer-prices の `theme-cpi-heatmap` を `line-chart` から `cpi-heatmap` に変えたが、
+  `public-route-matrix.ts` の `representativeTypes` に `cpi-heatmap` を入れると PR の E2E が落ちるため、PR では `cpi-profile` だけを見る形にした。
+- **次**: E2E のサーバーが PR で生成した `apps/web/scripts/data/page-components/theme/*.json` を読む経路 (例: 生成物を R2 の代わりに返す env) を作るか、
+  page-components を PR の preview 用の R2 prefix に置く。どちらにするかを決めてから実装する。
+- **完了条件**: PR で catalog の componentType を変えたとき、その PR の E2E が新しい図の種類で `data-data-state="ready"` を確かめられ、
+  consumer-prices の `representativeTypes` に `cpi-heatmap` を戻しても PR の時点で通る。
+
 ### [SEO-CTR-CANDIDATES-01] 取りこぼしクリックの大きい 7 ページを search-growth に渡し、食い合いの 2 組を先に確かめる
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-07] [期日:2026-10-25] [領域:サイト]
 
@@ -3036,10 +3072,15 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - **2026-10-07 承認**: オーナーが両提案の推奨案すべて (「おすすめで」) と、実装・検査が済みしだい d56 を待たずに公開することを承認した。
 - **2026-10-08 途中経過 (develop)**: metric config を先に入れた。客室稼働率を 2009〜2024 年、ホテル営業施設数を 1997〜2017 年、
   物価地域差指数 9 指標を 2013〜2024 年へ広げ、新規の実宿泊者数 (`actual-overnight-guests`、`0000010107` / `G7103`) を registry・極性・
-  調査の対応表 (`data/surveys/taxonomy.json`) に登録した。12 コードとも e-Stat の全年で 47 都道府県そろうことを確かめた (提案文書の表 1 に追記)。
+  調査の対応表 (`data/surveys/taxonomy.json`) に登録した。12 指標の e-Stat の実在年は、年の確認記録の正本
+  `data/estat/year-coverage/queue.json` に全都道府県で記録した (`audit-estat-year-coverage.ts --metrics`。同日、この記録を正本にする改修も入れた)。
   **次**: 2 テーマの `data/themes/catalogs/*.json` を提案どおりに編集 → generate / validate / baseline / ratchet → 選定根拠の backfill →
   `data-refresh.yml` で 12 指標の観測値を取得 (まず dryRun) → develop → main → page-components と ranking-items を R2 へ反映 → 本番確認。
   新規指標は `/ranking/actual-overnight-guests` を出すまで、ranking-items とキー一覧 (KNOWN / SITEMAP) の同期も要る。
+- **2026-10-08 カタログ実装済み (develop、PR #1100)**: 2 テーマのカタログ・生成物・件数基準・調査紐付けの下限・E2E を提案どおりに変え、
+  選定根拠 15 件を gate に通して書いた (提案文書は `implemented-pending-release`)。`data-refresh` の dryRun を依頼済み。
+  **残り**: dryRun の件数を見て実 push を依頼 → PR #1100 の CI を green にしてマージ → page-components と ranking-items を R2 へ反映・キー一覧を同期 →
+  本番で 2 テーマと `/ranking/actual-overnight-guests` を確かめる。
 - **停止条件**: 承認前は `data/themes/catalogs/` と metric config を編集しない。公開 (main へのマージ・R2 反映) は別に承認を取る。
 - **完了条件**: 2 テーマの提案の status が `implemented-pending-release` 以降になり、本番で提案どおりの章・カード・図が出ている。
 
@@ -3107,6 +3148,16 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - **完了条件**: 4 テーマで同じ rankingKey のカードが 1 か所だけになり、見出しに「章名｜」が残っていない。
 
 ## 🟢 低 — 時期未定・条件付き (trigger は本文に)
+
+### [DATA-CPI-REGIONAL-2025-01] 社会・人口統計体系に消費者物価地域差指数の 2025 年が入ったら、12 指標の years を 2025 年まで広げる
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npx tsx packages/ranking/src/scripts/audit-estat-year-coverage.ts --metrics consumer-price-difference-index-overall] [起票:2026-10-08] [領域:データ]
+
+- **trigger**: 社会・人口統計体系の `0000010212` に 2025 年の値が載ったとき。総務省統計局は小売物価統計調査（構造編）の 2025 年結果を
+  2026-09-18 に公表した (theme-researcher が `https://www.stat.go.jp/data/kouri/kouzou/gaiyou.html` で確認) が、
+  2026-10-08 の `getStatsData` では `0000010212` は 2013〜2024 年だけだった (`data/estat/year-coverage/queue.json` に記録)。
+- **次**: 上の検証コマンドで 2025 年が実在年に入ったら、物価地域差指数 12 指標の `years.to` を 2025 にし、`data-refresh` で取り込む。
+  config の `years` は `to: 2024` で止めてあるので、出典に新しい年が入っても自動では取り込まれない。
+- **完了条件**: 12 指標の R2 の値に 2025 年があり、`/themes/consumer-prices` のヒートマップが 2025 年の列まで描く。
 
 ### [SSOT-CONSOLIDATION-REST-01] 2026-10-06 の定数集約で見送った重複を、挙動の差を解消してから寄せる
 
