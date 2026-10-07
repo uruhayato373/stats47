@@ -71,3 +71,41 @@ test("hook として動かすと block を返し、stop_hook_active では黙る
   const quiet = run({ transcript_path: file, stop_hook_active: true });
   assert.equal(quiet.stdout, "");
 });
+
+// ── 2026-10-07 拡張: 呼び元自身の残作業と、未完了のタスク ──
+const taskCreate = (id, subject) => assistantTool("TaskCreate", { subject, description: "d" }, id);
+const taskUpdate = (taskId, status) => assistantTool("TaskUpdate", { taskId, status }, `u${taskId}`);
+
+test("返答に残作業を書いてカード ID も PR も無ければ差し戻し、ID か PR があれば通す", () => {
+  const bare = assistantText("進捗です。\n\nほかの残作業: outbox を contents/ へ移す (公開後)。");
+  const withCard = assistantText("ほかの残作業: outbox を移す (BLOG-OUTBOX-CONTENTS-01)。");
+  const withPr = assistantText("残作業: テーマ系の #1090 がレビュー待ち。");
+  assert.equal(unrecordedCandidates(bare).length, 1);
+  assert.match(unrecordedCandidates(bare)[0], /^返答: ほかの残作業/);
+  assert.deepEqual(unrecordedCandidates(withCard), []);
+  assert.deepEqual(unrecordedCandidates(withPr), []);
+});
+
+test("「残り 8 本」「未着手」のような進捗の数え方は残作業として拾わない", () => {
+  assert.deepEqual(unrecordedCandidates(assistantText("22 本のうち 11 本が完了し、残り 8 本は未着手です。")), []);
+});
+
+test("作ったまま完了にしていないタスクを拾い、完了・削除・記録・件名の ID で外す", () => {
+  const open = [taskCreate("c1", "不要ブランチの削除"), toolResult("c1", "Task #4 created successfully: 不要ブランチの削除")].join("\n");
+  assert.deepEqual(unrecordedCandidates(open), ["タスク: 不要ブランチの削除"]);
+  const done = [open, taskUpdate("4", "completed")].join("\n");
+  assert.deepEqual(unrecordedCandidates(done), []);
+  const recorded = [open, assistantTool("Edit", { file_path: ".claude/todo/backlog.md" }, "e1")].join("\n");
+  assert.deepEqual(unrecordedCandidates(recorded), []);
+  const withPr = [taskCreate("c2", "#1095→#1097 を develop へマージ"), toolResult("c2", "Task #1 created successfully: x")].join("\n");
+  assert.deepEqual(unrecordedCandidates(withPr), []);
+});
+
+test("記録より前の残作業は扱い済みにし、記録の後に書いた残作業は拾う", () => {
+  const transcript = [
+    assistantText("残作業: A を後で直す。"),
+    assistantTool("Edit", { file_path: ".claude/todo/backlog.md" }, "e2"),
+    assistantText("残作業: B を後で確認する。"),
+  ].join("\n");
+  assert.deepEqual(unrecordedCandidates(transcript), ["返答: 残作業: B を後で確認する。"]);
+});
