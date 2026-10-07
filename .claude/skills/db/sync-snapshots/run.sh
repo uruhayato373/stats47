@@ -43,13 +43,15 @@ TSX="npx tsx -r ./packages/ranking/src/scripts/setup-cli.js"
 # 集計するエフェメラル producer (build-correlation-snapshot.ts) として再実装 (DBレス Derived)。
 declare -a TASKS=(
   "remotion-static|apps/remotion/scripts/export-d1-to-remotion-static.ts --feature all"
+  # ★calculated-stats は ranking-items と ranking-values より前に置くこと。計算型 metric の正典
+  #   app/stats/<key>/values.json を作る producer で、ranking-values はそれを配信用に射影し、
+  #   ranking-items はそこから item.latestYear を決める。後ろに置くと、新しい年が来た run で
+  #   values は新しい年・item.latestYear は前の年のまま 1 回分ずれる (2026-10-07 に順序を前へ移した)。
+  #   入力は分子・分母の app/stats だけで、ranking-items の出力は読まない。
+  "calculated-stats|packages/ranking/src/scripts/generate-calculated-stats.ts"
   "ranking-items|packages/ranking/src/scripts/generate-ranking-items.ts"
   "item-metadata-refresh|packages/ranking/src/scripts/refresh-item-metadata.ts --apply"
   "master|packages/ranking/src/scripts/export-master-snapshots.ts"
-  # ★calculated-stats は ranking-values より前に置くこと。計算型 metric の正典
-  #   app/stats/<key>/values.json を作る producer で、ranking-values はそれを配信用に
-  #   射影するだけだから (逆順だと計算型が 1 年前のまま配信される)。
-  "calculated-stats|packages/ranking/src/scripts/generate-calculated-stats.ts"
   "ranking-values|packages/ranking/src/scripts/generate-ranking-values.ts"
   "municipality-ranking|packages/ranking/src/scripts/generate-municipality-ranking.ts --all-published"
   "ranking-normalized-values|packages/ranking/src/scripts/generate-ranking-normalized-values.ts"

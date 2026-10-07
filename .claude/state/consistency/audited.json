@@ -1,9 +1,17 @@
 {
-  "hash": "fcfb7fd374dbc18694f4e032d7cd4403bb357d753bf8d0a24327173598fc6bac",
-  "audited_at": "2026-10-06T03:23:10",
+  "hash": "f02560fe431edefe93984998fb4d6065f5e0c1281869bde211d0e9bb46a4d8bb",
+  "audited_at": "2026-10-07T03:08:39",
   "files": [
-    ".claude/scripts/measurement/__tests__/measurement.test.mjs",
-    ".claude/scripts/measurement/refresh-session.mjs",
-    ".claude/scripts/measurement/summarize.mjs"
+    ".claude/rules/blog-data-schema.md",
+    ".claude/rules/metric-config-standards.md",
+    ".claude/rules/ranking-content-standards.md",
+    ".claude/scripts/ai-content/__tests__/year-freshness.test.mjs",
+    ".claude/scripts/ai-content/build-ai-content-queue.mjs",
+    ".claude/scripts/ai-content/lib/year-freshness.mjs",
+    ".claude/scripts/blog/build-stale-data-years.mjs",
+    ".claude/scripts/blog/lib/__tests__/stale-data-years.test.mjs",
+    ".claude/scripts/blog/lib/stale-data-years.mjs",
+    ".claude/scripts/lib/__tests__/sync-snapshots-run-contract.test.mjs",
+    ".claude/skills/db/sync-snapshots/run.sh"
   ]
 }

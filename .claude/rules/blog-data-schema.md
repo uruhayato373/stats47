@@ -176,6 +176,12 @@ source.json に表示用の出典を明示する:
   関連記事と「相関が高い指標」の「解説記事」リンクになる (`article-metric-pairs.ts`)。相関記事は
   tags が空なので**この経路が唯一の導線**。合成キーは 2 指標の関係ではないので対象外。
   kind や 2 キーのフィールド名を変えるときは `extractChartMetricPair` も同じ差分で直す。
+- **記事が使う指標と図の年も snapshot に焼く (2026-10-07)**。`export-blog-snapshot.ts` が図の source.json
+  (指標の抽出は `extractBlogChartSourceReferences`、年は `year`) と本文の `/ranking/` リンクから
+  `rankingRefs: [{ rankingKey, year? }]` を作り、`app/blog/all.json` に逆引き `rankingArticleIndex`
+  (rankingKey → slug) を焼く (`article-ranking-refs.ts`)。用途は 2 つ: 指標 → 記事の回遊と、図の年が指標の最新年より
+  古い記事の検出 (`build-stale-data-years.mjs`、日次 `blog-remediation-daily.yml`)。同じ指標を複数の年で描いた記事は
+  最も古い年を残す。
 
 **検査 (`audit-chart-provenance.mjs`)**: kind ごとに必要な参照があるか、参照先 rankingKey が R2 に実在するか、
 `NEXT_PUBLIC_ESTAT_APP_ID` がある CI では statsDataId が e-Stat API に実在するかを見る（最大3回再試行）。

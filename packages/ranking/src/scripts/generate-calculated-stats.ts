@@ -11,8 +11,9 @@
  * R2 へ書かない。結果、配信値は単発実行の産物で分子・分母の更新に追従せず、同じ扱いの
  * 3 件が 1 年 / 1 年 / 18 年とバラバラだった。
  *
- * 本 generator は sync-snapshots の task として **ranking-items の後・ranking-values の前**に
- * 走る。app/stats を埋めれば ranking-values が配信 snapshot を自動生成する。
+ * 本 generator は sync-snapshots の task として **ranking-items と ranking-values の前**に
+ * 走る。app/stats を埋めれば ranking-items が item.latestYear を、ranking-values が配信 snapshot を
+ * 同じ run で作る (2026-10-07 まで ranking-items の後にあり、item.latestYear が 1 回分遅れていた)。
  *
  * ## 規律
  *
