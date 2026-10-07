@@ -1,0 +1,9 @@
+{
+  "workflow": "blog-auto-publish.yml",
+  "inputs": {
+    "slugs": "sixth-industry-direct-sales fiscal-self-reliance-gap"
+  },
+  "ref": "develop",
+  "reason": "記事固有背景 (a49db58fb) がそろった 2 記事を公開する。左 55% の輪郭量は 6.0% と 3.7%。cc-estat-20-publish は prompt の更新 (ae31fef96) に合わせた背景の作り直し待ち",
+  "requestedAt": "2026-10-07T12:29:55Z"
+}
