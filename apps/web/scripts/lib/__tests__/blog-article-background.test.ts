@@ -64,6 +64,21 @@ describe('article background composition contract', () => {
     }
   );
 
+  it('公開手順はPCとサーバーだけに絞り、記事文脈の変更はhashに反映する', () => {
+    const context = contexts[1];
+    const request = createArticleImagegenRequest(context);
+    const revised = createArticleImagegenRequest({
+      ...context,
+      title: '書き直した公開手順の記事',
+    });
+
+    expect(request.prompt).toMatch(/laptop.*blank dark screen.*server/i);
+    expect(request.prompt).toMatch(/no maps, globes/i);
+    expect(request.prompt).toMatch(/x=780 through x=1140/i);
+    expect(revised.prompt).toContain('書き直した公開手順の記事');
+    expect(revised.promptHash).not.toBe(request.promptHash);
+  });
+
   it('旧prompt versionのrequestを拒否し、既存画像を書き換えない', async () => {
     const projectRoot = mkdtempSync(join(tmpdir(), 'blog-article-background-'));
     temporaryDirectories.push(projectRoot);

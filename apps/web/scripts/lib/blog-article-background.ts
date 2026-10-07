@@ -80,6 +80,10 @@ Color palette: muted indigo, slate blue, pale blue-gray, restrained golden bread
 Constraints: no text, letters, numbers, logos, labels, watermark, maps, charts, decorative patterns, photorealism, or visible face`,
 };
 
+const PROMPT_SUBJECT_OVERRIDES: Readonly<Record<string, string>> = {
+  'cc-estat-20-publish': 'Subject: exactly one compact physical still life made of an unbranded laptop with a completely blank dark screen and one small unbranded server enclosure, connected by a simple cable kept inside the group. This represents taking a locally developed website online. No other props: no maps, globes, geographic silhouettes, location pins, cloud symbols, arrows, books, plants, or people. Keep the entire group, including shadows and cable, inside x=780 through x=1140; leave everything to its left empty.',
+};
+
 function frontmatterScalar(markdown: string, key: string): string {
   const match = markdown.match(/^---\r?\n([\s\S]*?)\r?\n---/);
   const block = match?.[1] ?? '';
@@ -155,7 +159,8 @@ export function buildArticleBackgroundPrompt(
     context.introduction
       ? `Article introduction: ${context.introduction}`
       : '',
-    'Subject: choose one compact, isolated editorial still life. When the article compares two indicators, combine two unmistakable concrete objects into a single small group. Convey the relationship with the objects themselves, never with a graph, diagram, scale of values, or surrounding landscape. Any miniature building, field, tree, person, or supporting object must belong entirely to this same right-side group.',
+    PROMPT_SUBJECT_OVERRIDES[context.slug] ??
+      'Subject: choose one compact, isolated editorial still life. When the article compares two indicators, combine two unmistakable concrete objects into a single small group. Convey the relationship with the objects themselves, never with a graph, diagram, scale of values, or surrounding landscape. Any miniature building, field, tree, person, or supporting object must belong entirely to this same right-side group.',
     'Scene/backdrop: one uniform warm off-white fill across the entire canvas, with no horizon, scenery, landscape bands, ground line, distant buildings, mountains, clouds, texture, or decorative pattern. No background details may extend behind the empty title area.',
     'Style/medium: refined minimal flat-vector editorial illustration, calm, factual, and suitable for a statistics publication',
     'Composition/framing: 1200 by 630 canvas; keep the left 55 percent completely empty, from x=0 through x=660 at every height, using only the uniform background fill. Place every part of the motif, including supporting objects, outlines, and shadows, within x=696 through x=1164 and y=63 through y=567, inside the rightmost 42 percent. Leave a clear gap between the empty area and the motif. Make this isolated group readable in a small card crop; do not enlarge it into the left area.',
