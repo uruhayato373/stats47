@@ -213,6 +213,24 @@ test('search clicks compare with the non-overlapping week, not the adjacent one'
   assert.deepEqual(node.improvements, ['SEO-01']);
 });
 
+test('site pageviews sum four finalized weeks and compare with the non-overlapping window', () => {
+  // AdSense の月額 = GA4 PV × 収益効率。PV は確定 7 日 × 4 週の和で、4 週前の窓 (重ならない) と比べる
+  const weeks = ['2026-W31', '2026-W32', '2026-W33', '2026-W34', '2026-W35', '2026-W36', '2026-W37', '2026-W38'];
+  const ga4Finalized = weeks.map((week, i) => ({ week, pageviews_jp7d: String(1000 * (i + 1)), missing_days: '0' }));
+  const nodes = [{ id: 'site-pageviews', label: 'PV', tier: 'driver' }, { id: 'ad-yield', label: '広告', tier: 'driver' }];
+  const t = kpi({ nodes, ga4Finalized });
+  const pv = t.nodes.find((n) => n.id === 'site-pageviews');
+  assert.equal(pv.value, String(5000 + 6000 + 7000 + 8000));
+  assert.equal(pv.previous, String(1000 + 2000 + 3000 + 4000));
+  // 欠測日のある週を含む窓は 28 日 PV と呼ばない
+  const gap = kpi({ nodes, ga4Finalized: ga4Finalized.map((r) => (r.week === '2026-W37' ? { ...r, missing_days: '1' } : r)) });
+  assert.equal(gap.nodes.find((n) => n.id === 'site-pageviews').status, 'missing');
+  // 広告収益効率は AdSense の承認まで接続しない (0 円と書かない)
+  const yieldNode = t.nodes.find((n) => n.id === 'ad-yield');
+  assert.equal(yieldNode.status, 'not-connected');
+  assert.equal(yieldNode.value, null);
+});
+
 test('unmeasurable nodes carry a reason instead of zero', () => {
   const t = kpi({ gscHistory: [] });
   assert.equal(t.nodes.find((n) => n.id === 'search-clicks').status, 'missing');
