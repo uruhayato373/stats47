@@ -139,6 +139,7 @@ export const DATASETS = [
   d("gsc.history", "data/gsc/history.csv", "series", "site", "data", "GSC の週次集約"),
   d("gsc.history-finalized", "data/gsc/history-finalized7d.csv", "series", "site", "data", "GSC の確定 7 日集約"),
   d("gsc.latest", "data/gsc/LATEST.md", "report", "site", "data", "GSC の前週比の要約"),
+  d("gsc.priority-ranking-keys", "data/gsc/priority-100-ranking-keys.csv", "evidence", "site", "data", "GSC 表示回数の上位 100 ランキング (2026-09-16 時点の抽出。AI 解説の有無付き)"),
   d("gsc.coverage-drilldown", "data/gsc/coverage-drilldown/{week}/{name}", "series", "site", "data", "GSC カバレッジ 6 種別の週次ドリルダウン"),
   d("gsc.coverage-drilldown-history", "data/gsc/coverage-drilldown/history.csv", "series", "site", "data", "カバレッジ件数の推移"),
   d("gsc.coverage-drilldown-latest", "data/gsc/coverage-drilldown/LATEST.md", "report", "site", "data", "カバレッジの最新要約"),
@@ -295,6 +296,7 @@ export const RETIRED = [
   { from: "docs/assets", to: "assets/page-heroes", since: "2026-10-06" },
   { from: ".claude/scripts/note/assets", to: "assets/note", since: "2026-10-06" },
   { from: ".claude/assets/affiliate-banners", to: "assets/affiliate-banners", since: "2026-10-06" },
+  { from: ".claude/skills/analytics/gsc-improvement/reference/priority-100-ranking-keys.csv", to: "data/gsc/priority-100-ranking-keys.csv", since: "2026-10-07" },
   // 作業状態 (2026-10-06 の第 2 段階で data/ へ。.claude/state にはエージェント運用の状態だけを残す)
   { from: ".claude/state/ads", to: "data/affiliate", since: "2026-10-06" },
   { from: ".claude/state/ai-content", to: "data/ai-content/remediation", since: "2026-10-06" },

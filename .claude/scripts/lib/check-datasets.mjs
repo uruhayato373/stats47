@@ -6,8 +6,10 @@
  *   - 台帳の行の不備 (id 重複・語彙外の kind / target / domain・寿命の名前が RETENTION_POLICIES に無い、または置き場が食い違う)
  *   - GOVERNED に当たる追跡ファイルが、台帳のどの行にも当たらない (未宣言) / 2 行以上に当たる (重なり)
  *   - どのファイルにも当たらない行 (planned を除く)
- *   - 移した旧置き場 (RETIRED の from) がコード・workflow・package.json と、agent の手順書 (SKILL.md・agents・rules・
- *     CLAUDE.md・Codex 用ミラー) に残っている。コードのコメント行と、手順書で「旧置き場」「旧パス」と書いた経緯の行は除く
+ *   - 移した旧置き場 (RETIRED の from) がコード・workflow・package.json と、Markdown (手順書・作業カード・文書・memory・
+ *     README) と Codex 用の agent 定義に残っている。当時のパスを残す履歴 (data/・.claude/state/・スキルの
+ *     reference/ の監査とレビュー・原稿の outbox) は対象外。コードのコメント行と、文書で「旧置き場」「旧パス」と書いた
+ *     経緯の行は除く
  *   - 画像が IMAGE_ROOTS の外にある (素材の原本は assets/、配信用はアプリの public/ へ)
  *   - `.claude/state/` を指す行が AGENT_STATE (エージェント運用の状態の許可リスト) に無い / 許可リストに台帳に無い id がある
  * 出すだけのもの: target の置き場と現在地が違う行 (data/ への移行対象) の件数と一覧。
@@ -107,18 +109,25 @@ export function checkDatasets({ datasets, files, governed, ignoredNames, kinds, 
 const COMMENT_LINE = /^\s*(?:\/\/|\/?\*|#)/;
 export const RETIRED_SCAN_GLOBS = ["*.mjs", "*.cjs", "*.js", "*.ts", "*.tsx", "*.mts", "*.cts", "*.sh", "*.ps1", "*.py", "*.yml", "*.yaml", "package.json"];
 /**
- * agent が手順として読む文書。ここに旧パスが残ると、agent が旧置き場を読んで空と判断したり旧置き場へ書いたりする。
- * 履歴の記録 (改善ログ・レビュー・state の json) は当時のパスのままにするので対象外。
+ * 人と agent が読む文書。ここに旧パスが残ると、agent が旧置き場を読んで空と判断したり旧置き場へ書いたりする。
+ * 2026-10-07 に手順書 (SKILL.md・agents・rules・CLAUDE.md) から全 Markdown へ広げた。作業カード (.claude/todo) の
+ * 完了条件が旧パスの git diff を指したまま残り、空の差分で合格に見える状態になっていたため。
  */
-export const RETIRED_SCAN_DOC_GLOBS = [
-  ":(glob).claude/skills/**/SKILL.md",
-  ":(glob).agents/skills/**/SKILL.md",
-  ":(glob).claude/agents/*.md",
-  ":(glob).codex/agents/*.toml",
-  ":(glob).claude/rules/*.md",
-  "CLAUDE.md",
+export const RETIRED_SCAN_DOC_GLOBS = [":(glob)**/*.md", ":(glob).codex/agents/*.toml"];
+/** 当時のパスを残す履歴 (data-storage.md「置き場を移す手順」5)。書き換えないので検査しない */
+export const RETIRED_SCAN_HISTORY_EXCLUDES = [
+  ":(exclude,glob)data/**",
+  ":(exclude,glob).claude/state/**",
+  ":(exclude,glob)**/reference/reports/**",
+  ":(exclude,glob)**/reference/audits/**",
+  ":(exclude,glob)**/reference/reviews/**",
+  ":(exclude,glob)**/reference/archive/**",
+  ":(exclude,glob)**/reference/snapshots/**",
+  ":(exclude,glob)**/reference/inventory/**",
+  ":(exclude,glob)docs/21_*/**",
+  ":(exclude,glob)docs/31_*/**",
 ];
-const DOC_FILE = /(?:\/SKILL\.md|^\.claude\/(?:agents|rules)\/[^/]+\.md|^\.codex\/agents\/[^/]+\.toml|^CLAUDE\.md)$/;
+const DOC_FILE = /\.(?:md|toml)$/;
 /** 手順書の中で経緯として旧パスに触れる行の印 */
 const HISTORY_MARK = /旧置き場|旧パス/;
 
@@ -134,9 +143,10 @@ export function findRetiredReferences(retired, hits) {
   return errors;
 }
 
-function retiredHits() {
+export function retiredHits() {
   if (RETIRED.length === 0) return [];
-  const args = ["-C", ROOT, "grep", "-n", "-F", ...RETIRED.flatMap((r) => ["-e", r.from]), "--", ...RETIRED_SCAN_GLOBS, ...RETIRED_SCAN_DOC_GLOBS];
+  const args = ["-C", ROOT, "-c", "core.quotepath=false", "grep", "-n", "-F", ...RETIRED.flatMap((r) => ["-e", r.from]), "--",
+    ...RETIRED_SCAN_GLOBS, ...RETIRED_SCAN_DOC_GLOBS, ...RETIRED_SCAN_HISTORY_EXCLUDES];
   let out;
   try {
     out = execFileSync("git", args, { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 });

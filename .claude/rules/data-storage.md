@@ -92,8 +92,10 @@ paths:
   `npm run check-datasets` (pre-commit・PR CI) が次を止める。
   - 対象範囲 (`config/`・`data/`・`assets/`・`.claude/state/`・`.claude/config/budgets/`、および旧置き場) の追跡ファイルが、
     台帳のちょうど 1 行に当たらない (未宣言・重なり)。どの行にも当たらない台帳の行
-  - 移した旧置き場 (`RETIRED`) がコード・workflow・package.json と、agent の手順書 (SKILL.md・agents・rules・CLAUDE.md・
-    Codex 用ミラー) に残っている。コードのコメント行と、手順書で「旧置き場」「旧パス」と書いた経緯の行は除く
+  - 移した旧置き場 (`RETIRED`) がコード・workflow・package.json と、Markdown (手順書・作業カード `.claude/todo`・`docs/`・
+    memory・README) と Codex 用の agent 定義に残っている。当時のパスを残す履歴 (`data/`・`.claude/state/`・スキルの
+    `reference/` の監査とレビュー・原稿の outbox) は対象外。コードのコメント行と、文書で「旧置き場」「旧パス」と書いた
+    経緯の行は除く (2026-10-07 に手順書から全 Markdown へ広げた。作業カードの完了条件が旧パスを指したまま残っていたため)
   - 画像が `IMAGE_ROOTS` の外にある
   - `.claude/state/` を指す行が許可リスト `AGENT_STATE` に無い
 - 新しい記録・素材は、先に台帳へ 1 行足してから書く。日付付きファイルの寿命は `prune-state-snapshots.mjs` の
@@ -109,7 +111,7 @@ paths:
 ### 置き場を移す手順
 
 1. 台帳の行の `path` を新しい置き場に書き換え、`git mv` で移す (中身は変えない)。
-2. 旧置き場を `RETIRED` に `{ from, to, since }` で宣言する。コード・手順書の直書きは検査が拾う。
+2. 旧置き場を `RETIRED` に `{ from, to, since }` で宣言する。コードと文書 (作業カード・memory を含む) の直書きは検査が拾う。
    部品に分けた形 (`path.join(ROOT, "state", "ads", ...)`・`resolve(STATE_DIR, "x.json")`) と、スキルの場所を基準にした
    相対パス (`reference/improvement-log.md`) は検査に掛からないので、別に探して直す。
 3. workflow の書き戻し (`git add`)・`RETENTION_POLICIES` の `directory`・品質検査の baseline のパスを同じ差分で変える。

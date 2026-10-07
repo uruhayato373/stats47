@@ -10,9 +10,9 @@ import { resolve } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 
-import { AGENT_STATE, DATASETS, GOVERNED, IGNORED_NAMES, IMAGE_EXT, IMAGE_ROOTS, KINDS, TARGETS, datasetDir, datasetPath } from "../../../../config/datasets.mjs";
+import { AGENT_STATE, DATASETS, GOVERNED, IGNORED_NAMES, IMAGE_EXT, IMAGE_ROOTS, KINDS, RETIRED, TARGETS, datasetDir, datasetPath } from "../../../../config/datasets.mjs";
 import { DOMAINS } from "../../../../config/paths.mjs";
-import { checkDatasets, findRetiredReferences, patternToRegExp } from "../check-datasets.mjs";
+import { checkDatasets, findRetiredReferences, patternToRegExp, retiredHits } from "../check-datasets.mjs";
 import { RETENTION_POLICIES } from "../prune-state-snapshots.mjs";
 
 const ROOT = resolve(fileURLToPath(new URL("../../../..", import.meta.url)));
@@ -184,4 +184,25 @@ test(".claude/state/ を指す行は AGENT_STATE の許可リストに無けれ�
       "AGENT_STATE に台帳に無い id: agent.gone",
     ],
   );
+});
+
+// 2026-10-07: 作業カードの完了条件が旧パスの git diff を指したまま残り、空の差分で合格に見えた。
+// 手順書だけでなく作業カード・文書・memory の旧パスも止め、当時のパスを残す履歴だけは対象外にする
+test("作業カード・文書・memory の旧パスも落ち、旧パスと書いた経緯の行だけ通す", () => {
+  const retired = [{ from: ".claude/state/metrics/foo", to: "data/foo", since: "2026-10-06" }];
+  const errors = findRetiredReferences(retired, [
+    { file: ".claude/todo/backlog.md", line: 3, text: "- **完了条件**: `git diff -- .claude/state/metrics/foo/history.csv` に削除行が無い" },
+    { file: "docs/01_技術設計/x.md", line: 4, text: "計測は .claude/state/metrics/foo/ に置く" },
+    { file: ".claude/memory/y.md", line: 5, text: "当時の旧パス `.claude/state/metrics/foo/` を上書きしていた" },
+  ]);
+  assert.deepEqual(errors, [
+    "旧置き場の参照: .claude/todo/backlog.md:3 (.claude/state/metrics/foo → data/foo)",
+    "旧置き場の参照: docs/01_技術設計/x.md:4 (.claude/state/metrics/foo → data/foo)",
+  ]);
+});
+
+test("実リポジトリに旧置き場の参照が残っていない (履歴を除く)", () => {
+  const hits = retiredHits();
+  assert.ok(!hits.some((h) => /^data\/|\/reference\/(?:audits|reviews|reports)\//.test(h.file)), "履歴の除外が効いていない");
+  assert.deepEqual(findRetiredReferences(RETIRED, hits), []);
 });
