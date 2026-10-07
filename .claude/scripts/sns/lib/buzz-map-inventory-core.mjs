@@ -11,6 +11,7 @@ import { readFileSync, readdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, resolve } from "node:path";
 import { R2_PUBLIC_BASE_URL } from "../../lib/site-config.cjs";
+import { datasetDir } from "../../../../config/datasets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -22,7 +23,7 @@ const KNOWN_RANKING_KEYS_PATH = resolve(
   "packages/ranking/src/config/known-ranking-keys.ts",
 );
 /** テーマ定義 (1 テーマ 1 ファイル `<slug>.json`)。規約: .claude/rules/theme-catalog-standards.md §1 */
-const THEMES_DATA_DIR = resolve(PROJECT_ROOT, "data/themes/catalogs");
+const THEMES_DATA_DIR = resolve(PROJECT_ROOT, datasetDir("themes.catalogs"));
 const THEMES_APP_DIR = resolve(PROJECT_ROOT, "apps/web/src/app/themes");
 const BLOG_ALL_JSON_URL = `${R2_PUBLIC_BASE_URL}/app/blog/all.json`;
 

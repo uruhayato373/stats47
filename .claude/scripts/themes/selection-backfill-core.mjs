@@ -19,6 +19,7 @@ import { createRequire } from "node:module";
 import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 import { THEME_CATALOGS } from "../../../packages/data-configs/src/theme-catalog/index.ts";
 import {
@@ -33,7 +34,7 @@ import { SITE_ORIGIN } from "../lib/site-config.cjs";
 const __filename = fileURLToPath(import.meta.url);
 export const PROJECT_ROOT = path.resolve(path.dirname(__filename), "..", "..", "..");
 // テーマ定義の SSOT。1 テーマ 1 ファイル (`<themeKey>.json`)。規約: .claude/rules/theme-catalog-standards.md §1
-export const THEMES_DIR = path.join(PROJECT_ROOT, "data/themes/catalogs");
+export const THEMES_DIR = path.join(PROJECT_ROOT, datasetDir("themes.catalogs"));
 export const ESTAT_PULL_DIR = path.join(PROJECT_ROOT, ".local/estat-catalog");
 
 const CRITERIA_LABELS = {
@@ -560,7 +561,7 @@ export function applySelections(themeKey, selections, { themesDir = THEMES_DIR, 
   const written = [];
   for (const [rankingKey, selection] of Object.entries(selections)) {
     const metric = catalog.metrics.find((entry) => entry.rankingKey === rankingKey);
-    if (!metric) throw new Error(`${themeKey}: ${rankingKey} は data/themes/catalogs/${themeKey}.json の metrics に無い`);
+    if (!metric) throw new Error(`${themeKey}: ${rankingKey} は ${datasetDir("themes.catalogs")}/${themeKey}.json の metrics に無い`);
     metric.selection = orderedSelection(selection);
     written.push(rankingKey);
   }
