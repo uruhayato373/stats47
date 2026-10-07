@@ -358,6 +358,22 @@ updated: 2026-10-06
 - **次**: 狭い区分の値を棒の外 (右端や凡例) に出す。基準線のオプションを足す。スマホ用のレイアウトを足して `generate-article-charts` から作る。公開済みの積み上げ棒 (2026-10 の監査で 4 枚程度) の見た目の差を比べてから入れる。
 - **完了条件**: 狭い区分の値も図に数字で出ることと、スマホ用 SVG ができることを svg-builder のテストで固定している。
 
+### [BLOG-FETCH-RANKING-FISCAL-01] ブログの図のデータを R2 から取るスクリプトが、年度の指標でも見出しを「〇〇年」にする
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:node .claude/scripts/blog/fetch-ranking-data-r2.mjs] [起票:2026-10-07] [領域:サイト]
+
+- **事象**: `.claude/scripts/blog/fetch-ranking-data-r2.mjs` が図の JSON の subtitle を `${year}年` 固定で書く (155・208 行目)。`yearFormat: 'fiscal'` の指標 (県民所得など) でも図に「2021年」と出て、本文の「2021年度」と食い違う。2026-10-07 の書き直しで ai-claude-code-pref-analysis と engel-coefficient-vs-prefectural-income の writer が別々に報告し、どちらも JSON を手で直した (1 回目の報告では起票しなかった)。
+- **次**: metric の yearFormat (または R2 の item.json の年の表記) から「年」「年度」を決める。公開済みの記事で「年度」の指標の図が「年」になっている件数を数え、再生成の要否を決める。
+- **完了条件**: 年度の指標を取ると subtitle が「〇〇年度」になることをテストで固定している。
+
+### [METRIC-HOUSEHOLD-DEFS-01] 家計調査系の 2 指標で、注記がデータと食い違う・同じ名前の値が 2 系統ある点を直す
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npm run validate:config --workspace=@stats47/data-configs] [起票:2026-10-07] [領域:データ]
+
+- **事象 (2026-10-07、engel-coefficient-vs-prefectural-income の writer が報告)**:
+  1. `information-communication-coefficient` の note に「全国的に上昇傾向」とあるが、writer の実測では R2 の 47 県の単純平均が 2020 年 5.40% から 2024 年 4.18% へ下がっている (note の文言は config で確認、R2 の推移は writer の実測で未再確認)
+  2. 「エンゲル係数」の値が 2 系統ある。`engel-coefficient` (yearFormat calendar) と、姉妹記事 engel-coefficient-prefecture-ranking が使う `food-expenditure-ratio-multi-person-households` (タイトル「食料費割合」、yearFormat fiscal) で、2024 年の兵庫県が 33.4% と 31.8% に分かれる
+- **次**: 1 は R2 の推移を確かめて note を直す。2 は 2 指標の分母・対象世帯・年の扱いの違いを config の description/note に書き、記事がどちらを使うかを読者に示せるようにする。家計調査系の yearFormat の不揃いは別カード (家計調査の年の表記を直すカード) と合わせて直す。
+- **完了条件**: 1 の note が R2 の推移と合い、2 の 2 指標の違いが定義シートで読める。
+
 ### [BLOG-REVISE-PATTERNS-01] 図の年の書き直しで critic が繰り返し REVISE にした型を、writer の規約か gate に入れる
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-07] [領域:サイト]
 
