@@ -27,7 +27,7 @@ for (const row of wiring.candidates) {
     delete candidate.implementedThemeKey;
   }
   decision.implementationEvidence = row.themeKey ? [
-    `data/themes/catalogs/${row.themeKey}.json`,
+    `${datasetDir("themes.catalogs")}/${row.themeKey}.json`,
     `packages/types/src/indicator-sets/${row.themeKey}.ts`,
     ...(row.sectionKey ? [`theme:${row.themeKey}#${row.sectionKey}`] : []),
   ] : [];
