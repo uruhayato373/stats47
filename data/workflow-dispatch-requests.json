@@ -1,0 +1,10 @@
+{
+  "workflow": "sync-snapshots.yml",
+  "inputs": {
+    "only": "page-components",
+    "dry_run": "false"
+  },
+  "ref": "main",
+  "reason": "#1099 (テーマ改善 #1084・#1085・#1090 を含む) を main へマージした。sync-snapshots は main を checkout して page-components を生成するので、マージ直後に R2 へ反映する (THEME-CATALOG-OPT-RELEASE-01 ①)",
+  "requestedAt": "2026-10-07T13:28:50Z"
+}
