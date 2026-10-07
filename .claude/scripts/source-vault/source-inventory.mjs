@@ -6,11 +6,12 @@ import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { SOURCE_VAULT } from '../../../config/paths.mjs';
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(SCRIPT_DIR, '../../..');
 const CONFIG_PATH = path.join(PROJECT_ROOT, SOURCE_VAULT);
-const STATE_ROOT = path.join(PROJECT_ROOT, '.claude/state/source-inventory');
+const STATE_ROOT = path.join(PROJECT_ROOT, datasetDir("source-inventory.manifests"));
 const TEMP_VAULT_ROOT = path.join(tmpdir(), 'stats47-source-vault');
 const ACTIONABLE_RESOLUTIONS = new Set([
   'reuse-existing-metric',

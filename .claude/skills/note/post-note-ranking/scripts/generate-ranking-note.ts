@@ -3,12 +3,13 @@
 import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { R2_PUBLIC_BASE_URL } from '../../../../scripts/lib/site-config.cjs';
+import { datasetPath } from "../../../../../config/datasets.mjs";
 
 const PROJECT_ROOT = path.resolve(__dirname, '../../../../..');
 const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
 const BLOCKER_STATE_PATH = path.join(
   PROJECT_ROOT,
-  '.claude/state/content-operations/note-generation-blockers.json'
+  datasetPath("content.note-blockers")
 );
 
 class GenerationBlockedError extends Error {

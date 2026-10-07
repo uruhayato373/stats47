@@ -7,7 +7,7 @@
  *   /api/report/monthly?date=YYYY-MM&overview=1 … その月の発生 (totals: clicks / sales=売上件数 / amount=売上金額 / rewards=成果報酬・未確定)
  *   /api/report/reward?date=YYYY-01             … その年の成果確定月ごとの確定額 (rows: yearmonth / points / cash / transfer)
  *
- * 記録先: .claude/state/metrics/affiliate/rakuten-results.json (record-rakuten-results.mjs と同じ形。同じ月は上書き)
+ * 記録先: data/affiliate/rakuten-results.json (record-rakuten-results.mjs と同じ形。同じ月は上書き)
  * - 当月と前月の発生を毎回取り直す (前月の成果は月をまたいで動くため)
  * - confirmedYen は「その月に確定した額」(ポイント + キャッシュ + 銀行振込)。発生月の確定額ではない
  *

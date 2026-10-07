@@ -72,7 +72,7 @@ npm run test:run   --workspace=@stats47/product-factory
 ### 横断販売カタログ
 
 `src/build/sales-catalog.ts` は既存の商品・書籍・Geo企画TSと出品証跡を結合する読み取り専用の派生器。
-`products:report` は `.claude/state/products/catalog-status.json` と
+`products:report` は `data/products/catalog-status.json` と
 `.local/product-portfolio/catalog.{html,csv}` を生成する。HTMLは商品ID・販売先・残工程で検索できる。
 商品IDを販売先ごとに増殖させず、無料サンプル・未制作企画も区別する。
 既定の改訂候補は`CURRENT_SALES_REVISIONS`（git TS）で固定する。ディレクトリ名順で実験版を採用したり、通常の再集計でnote原稿が旧版へ戻ったりしない。明示フラグによる別版の監査は可能だが、公開記録は変更しない。
@@ -106,7 +106,7 @@ KDPの単発・バッチは共有flowで送信版と保全済み必須5ファイ
 画面の既存「アップロード済み」だけを現行版の証拠にしない。同じセッションで検証済みEPUB/表紙の固定bytesを送信し、処理完了と最終read-backを確認する。公開直前に版とSHAを再照合し、送信証拠がなければ再投入する。これはPreviewer・本人による申告/公開承認を代替しない。
 
 無料P-13は総人口2024のPDF・PNG・CSV見本（Office非同梱）。生成時の固定先は
-`.claude/state/products/free-sample-delivery.json`に記録し、Coconalaの公開記録へ混ぜない。
+`data/products/free-sample-delivery.json`に記録し、Coconalaの公開記録へ混ぜない。
 note無料原稿はこのpinだけを参照し、有料パックの添付を露出しない。
 Noto JPのPDFはフォント全体を埋め込む。subsetでは文字抽出が成功しても描画文字が欠けるため、
 `tests/free-sample.test.ts`で埋め込みバイトを検査し、生成後にはページ画像も確認する。

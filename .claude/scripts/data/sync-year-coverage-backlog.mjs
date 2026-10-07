@@ -17,12 +17,13 @@ import { fileURLToPath } from "node:url";
 
 import { insertCards } from "../gsc/lib/coverage-backlog.mjs";
 import { BATCH_DIR, BY_DESIGN_PATH, CARD_PREFIX, batchPath, planYearCoverageCard } from "./lib/year-coverage-backlog.mjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const require = createRequire(import.meta.url);
 const { parseBacklog } = require("../lib/backlog-lib.cjs");
 
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
-const QUEUE_PATH = path.join(PROJECT_ROOT, ".claude/state/data/estat-year-coverage/queue.json");
+const QUEUE_PATH = path.join(PROJECT_ROOT, `${datasetDir("estat.year-coverage")}/queue.json`);
 const BACKLOG_PATH = path.join(PROJECT_ROOT, ".claude/todo/backlog.md");
 const args = process.argv.slice(2);
 const today = new Intl.DateTimeFormat("sv-SE", { timeZone: "Asia/Tokyo", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date());

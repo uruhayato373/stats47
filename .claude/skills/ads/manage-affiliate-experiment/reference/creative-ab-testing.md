@@ -33,7 +33,7 @@ weight?: number | null;        // 加重ランダムの重み (既定 1)
 - **variant = 1 クリエイティブ = 1 エントリ** (width/height/adType/imageUrl がサイズ・形式を表す)。
 - 同じ `experimentId` を持つ active エントリが「同じ枠の候補」。`experimentId` 無しは従来どおり priority 解決。
 - サイズは canonical 4 種 (300×250 / 250×250 / 320×100 / text) に限る (`affiliate-ads-standards.md` §3)。
-- 実験ごとの停止条件は `.claude/state/ads/experiments.json` (registry) に事前固定する
+- 実験ごとの停止条件は `data/affiliate/experiments.json` (registry) に事前固定する
   (SKILL.md `start` 参照)。registry の無い experimentId は判定スクリプトが `invalid` にする。
 
 ## GA4 計測

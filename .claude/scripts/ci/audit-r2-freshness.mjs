@@ -17,10 +17,11 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 
 import { evaluateFreshness, formatFreshnessReport } from "../lib/r2-freshness-core.mjs";
 import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, "..", "..", "..");
-const STATE_DIR = path.join(ROOT, ".claude/state/ci");
+const STATE_DIR = path.join(ROOT, datasetDir("ci.health"));
 const BASE = process.env.R2_PUBLIC_FETCH_URL ?? R2_PUBLIC_BASE_URL;
 
 /**

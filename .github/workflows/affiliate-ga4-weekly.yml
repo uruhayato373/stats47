@@ -16,9 +16,9 @@ name: 📊 Fetch Affiliate GA4 Metrics & Operations State
 # 置き場 (2026-09-14・docs/01_技術設計/02_データアーキテクチャ.md):
 #   - 生 snapshot ga4-affiliate-<date>.json は git に足さず R2 `state/ads/ga4-affiliate/` へ push する
 #     (公開 URL。ローカルは `npm run state:pull -- ads/ga4-affiliate` で live/ に取得。lifecycle 400 日)。
-#   - git には週次集約 `.claude/state/ads/ga4-affiliate-history.csv` と
-#     `.claude/state/ads/affiliate-experiment-history.csv`、および認証付き収集の保管庫から取り出した
-#     ASP 成果 (`.claude/state/metrics/affiliate/{a8-results,a8-report-log,a8-ui-last-run,moshimo-results}.json`) を commit-back する。
+#   - git には週次集約 `data/affiliate/ga4-affiliate-history.csv` と
+#     `data/affiliate/affiliate-experiment-history.csv`、および認証付き収集の保管庫から取り出した
+#     ASP 成果 (`data/affiliate/{a8-results,a8-report-log,a8-ui-last-run,moshimo-results}.json`) を commit-back する。
 #     前者は vertical × position、後者は experiment × variant の非重複週次累積に使う。
 #   - artifact は従来どおり 30 日 (デバッグ用)。
 
@@ -101,7 +101,7 @@ jobs:
           WINDOW_DAYS=$(node -e 'process.stdout.write(String(JSON.parse(process.argv[1]).days))' "$WINDOW_JSON")
           [ "$WINDOW_DAYS" = "7" ] || { echo "::error::運用経路は確定7日だけを受理します: ${WINDOW_DAYS}日"; exit 1; }
           node .claude/scripts/ads/fetch-affiliate-ga4.cjs "${ARGS[@]}" | tee /tmp/affiliate-ga4.md
-          SNAPSHOT_FILE=".claude/state/ads/ga4-affiliate-$SNAPSHOT_DATE.json"
+          SNAPSHOT_FILE="data/affiliate/ga4-affiliate-$SNAPSHOT_DATE.json"
           [ -f "$SNAPSHOT_FILE" ] || { echo "::error::snapshot が無い: $SNAPSHOT_FILE"; exit 1; }
           echo "snapshot_file=$SNAPSHOT_FILE" >> "$GITHUB_OUTPUT"
           echo "snapshot_date=$SNAPSHOT_DATE" >> "$GITHUB_OUTPUT"
@@ -170,7 +170,7 @@ jobs:
           echo "file=$FILE" >> "$GITHUB_OUTPUT"
           echo "date=$DATE" >> "$GITHUB_OUTPUT"
 
-      # git に残すのは週次集約だけ。生 JSON は .claude/state/ads/.gitignore で追跡しない。
+      # git に残すのは週次集約だけ。生 JSON は data/affiliate/.gitignore で追跡しない。
       - name: 📝 Append weekly aggregate and commit back
         id: history
         if: steps.ga4.outcome == 'success'
@@ -179,7 +179,7 @@ jobs:
           node .claude/scripts/ads/append-ga4-affiliate-history.mjs "${{ steps.publish.outputs.file }}"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .claude/state/ads/ga4-affiliate-history.csv .claude/state/ads/affiliate-experiment-history.csv
+          git add data/affiliate/ga4-affiliate-history.csv data/affiliate/affiliate-experiment-history.csv
           if git diff --cached --quiet; then
             echo "No aggregate changes"
           else
@@ -197,8 +197,8 @@ jobs:
           fi
           # 同時pushでdevelopが先へ進んでも誤検知しない。remote上に今回の確定7日行があることを直接読む。
           git fetch --depth=1 origin develop
-          git show FETCH_HEAD:.claude/state/ads/ga4-affiliate-history.csv > /tmp/remote-affiliate-history.csv
-          git show FETCH_HEAD:.claude/state/ads/affiliate-experiment-history.csv > /tmp/remote-affiliate-experiment-history.csv
+          git show FETCH_HEAD:data/affiliate/ga4-affiliate-history.csv > /tmp/remote-affiliate-history.csv
+          git show FETCH_HEAD:data/affiliate/affiliate-experiment-history.csv > /tmp/remote-affiliate-experiment-history.csv
           DATE="${{ steps.publish.outputs.date }}"
           node -e '
             const fs=require("fs");
@@ -261,7 +261,7 @@ jobs:
           done
           node <<'NODE'
           const fs = require("fs");
-          const p = ".claude/state/ads/affiliate-operations-latest.json";
+          const p = "data/affiliate/affiliate-operations-latest.json";
           if (!fs.existsSync(p)) {
             console.log("::error::affiliate-operations-latest.json が無い (集約 state を生成できていない)");
             process.exit(1);
@@ -277,7 +277,7 @@ jobs:
             console.log(`::error::affiliate experiment invalid: ${JSON.stringify(operations.experiments.invalid)}`);
             process.exit(1);
           }
-          const portfolio = JSON.parse(fs.readFileSync(".claude/state/ads/affiliate-portfolio-latest.json", "utf8"));
+          const portfolio = JSON.parse(fs.readFileSync("data/affiliate/affiliate-portfolio-latest.json", "utf8"));
           for (const name of ["outcome", "portfolio"]) {
             const value = portfolio.gates?.[name] ?? {};
             console.log(`${name}Gate: ${value.status} ${(value.reasons ?? []).join(", ")}`);
@@ -286,7 +286,7 @@ jobs:
               process.exit(1);
             }
           }
-          const pilot = JSON.parse(fs.readFileSync(".claude/state/ads/affiliate-pilot-readiness-latest.json", "utf8"));
+          const pilot = JSON.parse(fs.readFileSync("data/affiliate/affiliate-pilot-readiness-latest.json", "utf8"));
           if (pilot.plan && pilot.readiness?.status !== "ready") {
             console.log(`::error::pilotReadiness=${pilot.readiness?.status} (${(pilot.readiness?.reasons ?? []).join(", ")})`);
             process.exit(1);
@@ -302,11 +302,11 @@ jobs:
         run: |
           set -euo pipefail
           FILES=(
-            .claude/state/metrics/affiliate/a8-results.json
-            .claude/state/metrics/affiliate/a8-report-log.json
-            .claude/state/metrics/affiliate/a8-ui-last-run.json
-            .claude/state/metrics/affiliate/moshimo-results.json
-            .claude/state/metrics/affiliate/rakuten-results.json
+            data/affiliate/a8-results.json
+            data/affiliate/a8-report-log.json
+            data/affiliate/a8-ui-last-run.json
+            data/affiliate/moshimo-results.json
+            data/affiliate/rakuten-results.json
           )
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -332,10 +332,10 @@ jobs:
         with:
           name: affiliate-portfolio-state
           path: |
-            .claude/state/ads/ga4-affiliate-*.json
-            .claude/state/ads/affiliate-portfolio-latest.json
-            .claude/state/ads/affiliate-operations-latest.json
-            .claude/state/ads/affiliate-pilot-readiness-latest.json
+            data/affiliate/ga4-affiliate-*.json
+            data/affiliate/affiliate-portfolio-latest.json
+            data/affiliate/affiliate-operations-latest.json
+            data/affiliate/affiliate-pilot-readiness-latest.json
           retention-days: 30
 
       - name: 🚨 Raise affiliate measurement alert
@@ -354,28 +354,28 @@ jobs:
             echo "- history commit-back: ${{ steps.history.outcome }}"
             echo "- operations state: ${{ steps.operations.outcome }}"
             echo "- measurement gate: ${{ steps.measurement_gate.outcome }}"
-            if [ -f .claude/state/ads/affiliate-operations-latest.json ]; then
+            if [ -f data/affiliate/affiliate-operations-latest.json ]; then
               echo
               node -e '
                 const fs=require("fs");
                 const state=JSON.parse(fs.readFileSync(process.argv[1], "utf8"));
                 console.log("- reasons: " + ((state.measurementGate?.reasons ?? []).join(", ") || "none"));
-              ' .claude/state/ads/affiliate-operations-latest.json
+              ' data/affiliate/affiliate-operations-latest.json
             fi
-            if [ -f .claude/state/ads/affiliate-portfolio-latest.json ]; then
+            if [ -f data/affiliate/affiliate-portfolio-latest.json ]; then
               node -e '
                 const fs=require("fs");
                 const state=JSON.parse(fs.readFileSync(process.argv[1], "utf8"));
                 console.log("- outcome: " + state.gates?.outcome?.status + " " + ((state.gates?.outcome?.reasons ?? []).join(", ") || "none"));
                 console.log("- portfolio: " + state.gates?.portfolio?.status + " " + ((state.gates?.portfolio?.reasons ?? []).join(", ") || "none"));
-              ' .claude/state/ads/affiliate-portfolio-latest.json
+              ' data/affiliate/affiliate-portfolio-latest.json
             fi
-            if [ -f .claude/state/ads/affiliate-pilot-readiness-latest.json ]; then
+            if [ -f data/affiliate/affiliate-pilot-readiness-latest.json ]; then
               node -e '
                 const fs=require("fs");
                 const state=JSON.parse(fs.readFileSync(process.argv[1], "utf8"));
                 console.log("- pilot: " + state.readiness?.status + " " + ((state.readiness?.reasons ?? []).join(", ") || "none"));
-              ' .claude/state/ads/affiliate-pilot-readiness-latest.json
+              ' data/affiliate/affiliate-pilot-readiness-latest.json
             fi
           } > /tmp/affiliate-measurement-issue.md
           gh label create affiliate-measurement-alert \

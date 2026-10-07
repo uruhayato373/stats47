@@ -42,8 +42,8 @@ describe("business plan admin server", () => {
     );
     root = makeFixtureRoot({
       stateFiles: {
-        ".claude/state/business-plan/latest.json": STATE,
-        ".claude/state/sns/posts.json": JSON.stringify({
+        "data/business-plan/latest.json": STATE,
+        "data/sns/posts.json": JSON.stringify({
           posts: [
             { platform: "x", content_key: "geo-001-x-01", status: "draft" },
             { platform: "x", content_key: "geo-001-x-02", status: "scheduled" },

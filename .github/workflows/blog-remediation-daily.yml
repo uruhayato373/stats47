@@ -56,11 +56,20 @@ jobs:
 
       # 公開R2 audit (品質blocker) + 最新GSC snapshot を入力にキューを最新化。
       # 「直さず done でごまかし」を防ぐため done の退行を audit で再 pending に戻す。
+      #
+      # 先に図に描いた年が指標の最新年より古い公開記事の一覧を作る (2026-10-07 新設。
+      # build-stale-data-years.mjs → data/blog/stale-data-years.{json,md})。取り込みで新しい年が増えても
+      # 記事は書いた時点の年のままなので、データを取り直す候補を出す。年が進めば増えるのが正常なので
+      # ラチェットにはしない。キューはこの一覧を data-refresh レーンに入れるので先に作る (取り直しは
+      # refresh-article-data-years.mjs → 本文の書き直し → critic)。どちらも公開 R2 を読む同じ収集の単位なので
+      # 1 step にまとめる (片方だけ落ちる状況はほぼ無く、落ちたら step ごと失敗として残る)。
       - name: ♻️ Rebuild remediation queue
         continue-on-error: true # R2 取得失敗等で Issue 通知本体を止めない
         env:
           R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
-        run: node .claude/scripts/blog/build-remediation-queue.mjs
+        run: |
+          node .claude/scripts/blog/build-stale-data-years.mjs
+          node .claude/scripts/blog/build-remediation-queue.mjs
 
       # SVG データ系譜の棚卸し (2026-07-29 配線): 公開済み全 SVG について
       # <name>.json + <name>.source.json が R2 に揃っているかを走査し、復元キューを最新化する。
@@ -92,11 +101,21 @@ jobs:
       # ★2026-07-29: article.md の一致だけでなく「ローカルにあるファイルが全て R2 に載っているか」も
       # 確認する。data/*.json / *.source.json はローカルにしか無い場合があり (実例:
       # library-museum-cultural-capital)、article.md だけ見て消すと元データが永久に失われる。
-      - name: 🧹 Prune published drafts from docs/21 outbox
-        continue-on-error: true # 掃除失敗で Issue 通知本体を止めない
+      # 掃除の前に、critic の指摘を台帳に残して繰り返す型を backlog に起票する (正典: blog-quality-standards.md
+      # 「critic の指摘の型と格上げ」)。outbox の掃除で review.md が消える前に記録する。同じ指摘は二重に書かない。
+      # 記録・起票と掃除は互いの失敗で止めない (continue-on-error を増やさないよう 1 step にまとめる)。
+      - name: 🧹 Record critic findings + prune published drafts from docs/21 outbox
+        continue-on-error: true # 掃除・記録の失敗で Issue 通知本体を止めない
         env:
           R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
-        run: node .claude/scripts/blog/prune-published-outbox.mjs --apply
+        run: |
+          shopt -s nullglob
+          reviews=(docs/21_ブログ記事原稿/*/review.md)
+          if [ ${#reviews[@]} -gt 0 ]; then
+            node .claude/scripts/blog/record-critic-findings.mjs "${reviews[@]}" || echo "::warning::critic の指摘の記録に失敗"
+          fi
+          node .claude/scripts/blog/critic-findings-digest.mjs || echo "::warning::critic の指摘の集計・起票に失敗"
+          node .claude/scripts/blog/prune-published-outbox.mjs --apply
 
       - name: 📝 Compose today's rewrite issue body
         id: compose
@@ -127,7 +146,7 @@ jobs:
         # job の赤は最終の Ratchet verdict step が outcome を見て付け直す。
         continue-on-error: true
         run: |
-          Q=".claude/state/blog/svg-lineage-queue.json"
+          Q="data/blog/svg-lineage-queue.json"
           test -f "$Q" || { echo "queue が無い (rebuild 失敗) → スキップ"; exit 0; }
           # byStatus.neither が集計値 (build-lineage-queue.mjs が書く)。
           # entries[].status からも数えられるが、集計値を使う方がスキーマ変更に強い。
@@ -154,7 +173,7 @@ jobs:
         id: value_ratchet
         continue-on-error: true # 理由は lineage_ratchet と同じ
         run: |
-          Q=".claude/state/blog/remediation-queue.json"
+          Q="data/blog/remediation-queue.json"
           test -f "$Q" || { echo "queue が無い (rebuild 失敗) → スキップ"; exit 0; }
           COUNT='const q=require(process.argv[1]);const n=q.summary&&q.summary.valueMismatchArticles;if(typeof n!=="number"){console.error("summary.valueMismatchArticles が無い — スキーマ変更?");process.exit(2)}console.log(n)'
           NEW=$(node -e "$COUNT" "$PWD/$Q") || { echo "::error::queue のスキーマが想定と違います (ラチェットが空振りするので失敗させます)"; exit 1; }
@@ -174,7 +193,7 @@ jobs:
         id: provenance_ratchet
         continue-on-error: true # 理由は lineage_ratchet と同じ
         run: |
-          Q=".claude/state/blog/chart-provenance-queue.json"
+          Q="data/blog/chart-provenance-queue.json"
           test -f "$Q" || { echo "queue が無い (audit 失敗) → スキップ"; exit 0; }
           COUNT='const q=require(process.argv[1]);if(typeof q.defectCount!=="number"){console.error("defectCount が無い — スキーマ変更?");process.exit(2)}console.log(q.defectCount)'
           NEW=$(node -e "$COUNT" "$PWD/$Q") || { echo "::error::queue のスキーマが想定と違います (ラチェットが空振りするので失敗させます)"; exit 1; }
@@ -184,7 +203,7 @@ jobs:
           OLD=$(node -e "$COUNT" /tmp/prov-prev.json) || { echo "前回 queue のスキーマが古い → 比較をスキップ"; exit 0; }
           echo "再取得できない出典: 前回 $OLD → 今回 $NEW"
           if [ "$NEW" -gt "$OLD" ]; then
-            echo "::error::再取得できない source.json が $OLD → $NEW に増えました。詳細: .claude/state/blog/chart-provenance-LATEST.md / 正典: .claude/rules/blog-data-schema.md §1.5"
+            echo "::error::再取得できない source.json が $OLD → $NEW に増えました。詳細: data/blog/chart-provenance-LATEST.md / 正典: .claude/rules/blog-data-schema.md §1.5"
             exit 1
           fi
           echo "✓ 増えていません (縮小専用ラチェット OK)"
@@ -221,15 +240,23 @@ jobs:
 
           # prune-published-outbox の git rm 結果。ラチェットの baseline ではないので常に反映する。
           git add -A "docs/21_ブログ記事原稿/"
+          # 図の年が古い記事の一覧もラチェットではないので常に反映する (取得に失敗した日はファイルが無いか変わらない)
+          for f in data/blog/stale-data-years.json data/blog/stale-data-years.md; do
+            if [ -f "$f" ]; then git add "$f"; fi
+          done
+          # critic の指摘の台帳・要約と、繰り返す型の起票 (ラチェットではないので常に反映する)
+          for f in data/blog/critic-findings.jsonl data/blog/critic-findings-LATEST.md .claude/todo/backlog.md; do
+            if [ -f "$f" ]; then git add "$f"; fi
+          done
 
           # remediation-queue.json は value ラチェットの baseline (summary.valueMismatchArticles)
-          stage_or_restore "$VALUE_OUTCOME" "value" .claude/state/blog/remediation-queue.json
+          stage_or_restore "$VALUE_OUTCOME" "value" data/blog/remediation-queue.json
           # svg-lineage-queue.json は lineage ラチェットの baseline (byStatus.neither)
           stage_or_restore "$LINEAGE_OUTCOME" "lineage" \
-            .claude/state/blog/svg-lineage-queue.json .claude/state/blog/svg-lineage-LATEST.md
+            data/blog/svg-lineage-queue.json data/blog/svg-lineage-LATEST.md
           # chart-provenance-queue.json は provenance ラチェットの baseline (defectCount)
           stage_or_restore "$PROVENANCE_OUTCOME" "provenance" \
-            .claude/state/blog/chart-provenance-queue.json .claude/state/blog/chart-provenance-LATEST.md
+            data/blog/chart-provenance-queue.json data/blog/chart-provenance-LATEST.md
 
           if git diff --cached --quiet; then
             echo "No queue / outbox change to commit"
@@ -255,7 +282,7 @@ jobs:
           [ "$VALUE_OUTCOME" = "failure" ] && failed="$failed value"
           [ "$PROVENANCE_OUTCOME" = "failure" ] && failed="$failed provenance"
           if [ -n "$failed" ]; then
-            echo "::error::ラチェット失敗:$failed — 該当 queue の baseline だけを据え置きました。他の queue と docs/21 outbox は反映済みなので日次ループは回っています。詳細は .claude/state/blog/*-LATEST.md"
+            echo "::error::ラチェット失敗:$failed — 該当 queue の baseline だけを据え置きました。他の queue と docs/21 outbox は反映済みなので日次ループは回っています。詳細は data/blog/*-LATEST.md"
             exit 1
           fi
           echo "✓ ラチェット 3 種すべて OK"

@@ -22,7 +22,7 @@ stats47.jp の `/blog/{slug}` 記事を新規作成または brushup する際�
 
 | 層 | 担い手 | 役割 | 捕まえる / 捕まえない |
 |---|---|---|---|
-| ① 機械的フロア | `quality-gate.mjs` | 公開前の床 (決定的) | 捕: callout連続配置/内部リンク/NG word/factual rank/**markdown 表の存在 (全面禁止)**/source-link 配置/prose 文字数の床/**図あたり prose 字数の床 (「図はあるが薄い」を弾く)**。**不可: 読者価値の有無** |
+| ① 機械的フロア | `quality-gate.mjs` | 公開前の床 (決定的) | 捕: callout連続配置/内部リンク/NG word/factual rank/**markdown 表の存在 (全面禁止)**/source-link 配置/prose 文字数の床/**図あたり prose 字数の床 (「図はあるが薄い」を弾く)**/**送り箱の記事に今の内容に合うサムネイル背景があるか (タイトル変更で古くなった AI 背景を push 前に止め、Codex の手順を示す)**。**不可: 読者価値の有無** |
 | ② 意味レビュー | **`blog-critic` agent (別コンテキスト)** | 読者価値の判断 | 捕: 冗長・図表重複・論理の質・curiosity gap の真正性・CTA過多・「この要素は何を足すか」・**定義整合 (下記)** |
 | ③ アウトカム | gsc-analyst / 改善ログ | 最終評価 | GSC CTR/順位・GA4 滞在・CV (遅行・最も真実) |
 
@@ -44,7 +44,7 @@ stats47.jp の `/blog/{slug}` 記事を新規作成または brushup する際�
 - **critic は full / delta の二相で起動する (トークン節約)**: 初回審査は `full` (正典全観点 + 記事全文)、REVISE 後の再審査は `delta` (前回指摘 + 変更 hunk のみ、正典 465行と記事全文を再読しない。床は `quality-gate.mjs` が毎回フル実行するため落ちない)。GSC 流入上位 30 記事の初回 critic は opus、他は sonnet に傾斜する (`build-remediation-queue.mjs` の `reviewTier`。モデル規律は `.claude/rules/model-prompting.md`)。
 
 > **既存記事を計画的に順次是正するには (★どのセッションからでも開始可)**: 「次にどの記事を直すか」は
-> 状態付き是正キュー `.claude/state/blog/remediation-queue.json` が真実源 (GSC流入×品質blockerの統合スコア)。
+> 状態付き是正キュー `data/blog/remediation-queue.json` が真実源 (GSC流入×品質blockerの統合スコア)。
 > ```bash
 > node .claude/scripts/blog/build-remediation-queue.mjs   # コミット済み履歴+公開R2+GSCから再構築 (どこでも可)
 > ```
@@ -66,12 +66,24 @@ date: YYYY-MM-DD
 ## 評価サマリ
 <読者価値の総括>
 ## 指摘
-- [blocker|major|minor] <具体的指摘と修正案>
+- [BLOCK|MAJOR|MINOR][型:<key>] <具体的指摘と修正案>
 ## 判定理由
 <PASS/REVISE の根拠>
 ```
 
 `verdict: PASS`(実体200字以上) で初めて公開可。REVISE の指摘は article-writer 側が修正してから PASS に更新する。これにより「自己採点での公開」を構造的に不可能にする。
+
+### critic の指摘の型と格上げ
+
+critic の指摘には型 (`[型:<key>]`、語彙は `.claude/config/critic-finding-types.json`) を付け、review.md を書いた直後に
+`record-critic-findings.mjs` で台帳 `data/blog/critic-findings.jsonl` に残す (公開時の outbox 掃除の直前にも CI が記録する)。
+日次の `critic-findings-digest.mjs` が型ごとに数え、窓 (既定 56 日) の中で同じ型の BLOCK/MAJOR が 3 本以上の記事に
+出たら、backlog に `CRITIC-PATTERN-<型>` のカードを起票する。カードは「機械で判定できるなら gate、できなければ
+本規約と writer の指示」へ格上げして閉じ、config の `promotedAt` に日付を書く (以後はその日より後の再発だけを数える)。
+
+- **なぜ**: review.md は公開時に消え、REVISE の review.md は再審で上書きされる。2026-10-07 の 22 本の書き直しでは、
+  関連記事の紹介・地域のくくり・相関の向きなど同じ型の指摘が毎回 critic の目視で見つかり、規約にも gate にも戻らなかった。
+- 格上げの手本: 統計表 ID の取り違えを `stats-table-id-lint.mjs` (blocker) にした例。
 
 ## なぜこのルールがあるか
 
@@ -115,7 +127,7 @@ date: YYYY-MM-DD
 
 ### 実測補正: 短タイトル + gap は 1 要素まで
 
-勝ちパターン分析 (`.claude/state/blog/winning-patterns.json`、117 記事 winner/loser 各 39、robust 判定) の実測で、curiosity gap は「必須」だが**過剰は逆効果**と確定した (winner の gap 語彙使用率 28.2% vs loser 48.7%)。BLOG-WAVE-2026-05-25-auto (53 記事 gap 改修) が effect/none だった一因でもある。
+勝ちパターン分析 (`data/blog/winning-patterns.json`、117 記事 winner/loser 各 39、robust 判定) の実測で、curiosity gap は「必須」だが**過剰は逆効果**と確定した (winner の gap 語彙使用率 28.2% vs loser 48.7%)。BLOG-WAVE-2026-05-25-auto (53 記事 gap 改修) が effect/none だった一因でもある。
 
 - **title は短く ~17 字目標** (winner 中央値 17 字 vs loser 33 字)。`{主要fact+gap}｜{補足}` の補足部 (年・対象数) は **seoTitle 側に寄せ**、title 本体を軽くする。
 - **curiosity gap 要素はタイトルに 1 個まで**。疑問形 or 逆説 or 倍率のどれか 1 つで十分。「衝撃」「意外すぎる」等の煽り語の重ね掛けは禁止。
@@ -185,6 +197,26 @@ date: YYYY-MM-DD
   `audit-ai-content.mjs` と同じ許容規則に揃える (blog と ranking で二重基準を作らない)。
 - **既存負債**: 2026-07-31 実測で公開済み 424 記事の **79.5% (4,671 箇所)** が該当。既存記事は
   brushup で順次是正する (是正キューが blocker として拾う)。**新規記事は最初からこの形で書く**。
+
+### 統計表 ID は e-Stat の控えと照らす (blocker)
+
+本文・コードに書いた e-Stat の統計表 ID (`0003445758` のような 10 桁の statsDataId) は、
+e-Stat のメタ情報の控え (`data/estat/meta/<ID>.json` の `statName`) と照らす。
+
+```
+❌ STATS_DATA_ID = "0003445758"  # 県民所得統計   ← 実際は賃金構造基本統計調査の表
+❌ 生産農業所得統計（statsDataId 例 0003456789）  ← 実際は社会生活基本調査の表
+❌ e-Stat に存在しない ID を「例」として並べる
+✅ 賃金構造基本統計調査（0003445758）
+```
+
+- **なぜ**: ID は読者が e-Stat でそのまま引く値で、名前と食い違うと読者の作業がそこで止まる。
+  2026-10-07 の書き直しで上の 3 種が critic の目視でしか見つからなかった。
+- **控えの取得**: `node .claude/scripts/estat/fetch-estat-meta.mjs --full --ids <ID>`。控えが無い ID、
+  e-Stat に存在しない ID は blocker。架空の「例」の ID を書かない。
+- **名前の照合**: ID と同じ文 (無ければ直前の文) に統計名らしい語があり、控えの統計名が無ければ blocker。
+  統計名を書いていない ID は照らさない。社会・人口統計体系の表は指標ごとに元の調査が違うので、名前は照らさず実在だけを見る。
+- **検査**: `stats-table-id-lint.mjs` (`lintStatsTableIds`)。公開済み 389 記事で誤検知 0 件を確かめた境界をテストで固定している。
 
 ### 複合スケールの数値は表記を混ぜない
 
@@ -390,8 +422,8 @@ npx tsx .claude/scripts/blog/push-article-md-r2.ts --apply --src .local/blog-lin
 |---|---|---|
 | ランキングチャート | **生成画像 `![alt](data/<name>.svg)`** (上位5+下位5) | ✅ これだけ。`<chart-placeholder>` (未描画) と インライン `<svg>` は **禁止** |
 | データ表 / 比較表 | **SVG 図** (データ) または 箇条書き (列挙・手順) | ❌ markdown 表 (`\| … \|`) は全面禁止。区切り行 `\|---\|` があれば公開ブロック |
-| 関連ランキング | ページ側 `RelatedRankingsSection` (tag 駆動) | ❌ 記事内 `## 関連ランキング` を書かない。本文中は各図直下の `<source-link>` で個別誘導 |
-| 関連記事 | ページ側 `BlogRelatedArticlesSection` (tag 駆動) | ❌ 記事内 `## 関連記事` / `### 関連記事` を書かない |
+| 関連ランキング | ページ側 `RelatedRankingsSection` (記事が使う指標 → タグ・カテゴリの順) | ❌ 記事内 `## 関連ランキング` を書かない。本文中は各図直下の `<source-link>` で個別誘導 |
+| 関連記事 | ページ側 `BlogRelatedArticlesSection` (同じ指標を使う記事 → 同じタグ → 新着の順) | ❌ 記事内 `## 関連記事` / `### 関連記事` を書かない |
 | AI スクール広告 | (コードから除去済・2026-06-02) | 記事に書かない |
 | 関連データ DL | (コードから除去済・2026-06-02) | 記事に書かない |
 | 出典 | **ページ側 `DataSourceList`** (図の `source.json` から自動表示。調査名 → `/survey/<id>`、統計表 → e-Stat) | ❌ 本文に `## データ出典` を書かない (★2026-09-25〜 `quality-gate.mjs` が blocker)。出典は図の `source.json` に記録し、GIS 派生などは `displaySources` で明示する。計算方法・定義の説明が要るときだけ `## データについて` 節を書く |
@@ -453,12 +485,12 @@ npx tsx .claude/scripts/blog/push-article-md-r2.ts --apply --src .local/blog-lin
 
 ### 型ポートフォリオ (月次ミックス・2026-07-05 改訂)
 
-月 15-20 本ペースでの型配分。**配分比率の SSOT は `.claude/state/blog/seo-strategy.json` の `typeMix`**
+月 15-20 本ペースでの型配分。**配分比率の SSOT は `data/blog/seo-strategy.json` の `typeMix`**
 (blog-seo-strategist が winning-patterns 実測で四半期ごとに見直す)。人間向け戦略・入力データは
 `.claude/agents/blog-seo-strategist.md` §戦略コンテキスト。**比率の数値はここに再掲しない** (二重管理=ドリフトの元)。
 このルールは各型の「どう書くか」(下記の記事アーキタイプ) を持ち、「何本ずつ張るか」は上記 SSOT が持つ。
 
-- どの記事を書くかは topic-queue (`.claude/state/blog/topic-queue.json`、`build-topic-queue.mjs` が生成) の
+- どの記事を書くかは topic-queue (`data/blog/topic-queue.json`、`build-topic-queue.mjs` が生成) の
   pending 上位から払い出す (`/plan-article-queue`)
 
 ### 各型の章構成テンプレ
@@ -525,7 +557,7 @@ GSC スナップショットで以下に該当する記事は brushup 候補:
 
 ```bash
 awk -F',' 'NR>1 && $1 ~ /\/blog\// && $3 >= 200 && ($4+0) < 0.02 && ($4+0) > 0 {print $0}' \
-  .claude/skills/analytics/gsc-improvement/reference/snapshots/<week>/pages.csv | \
+  data/gsc/snapshots/<week>/pages.csv | \
   sort -t',' -k3 -rn | head -20
 ```
 
@@ -558,7 +590,7 @@ BLOG-CTR-03 / 04 で 10 記事を curiosity gap 改修:
 > 日次ループは対話セッションと同じ Pro/Max 利用枠を食う。ai-content 側の歩留まりが
 > 08-19 に 0/5 ($87.31)、08-20 に 1/5 ($21.33) まで落ちたのを受け、生成の量と時期は
 > **月次計画が目標を持ち、週次計画が「今週 N 本」を Must として割り当てる**運用へ移した。
-> 月間本数の SSOT は既存の `.claude/state/blog/seo-strategy.json` の `typeMix.perMonth`
+> 月間本数の SSOT は既存の `data/blog/seo-strategy.json` の `typeMix.perMonth`
 > (月 17-19 本)。新しい数値を作らない。
 
 ```
@@ -643,6 +675,7 @@ Must が形骸化するため、足りなければ月次の目標側を下げる
 | 文体: ですます調 (copula である調) | 機械 | blocker | `countDearuEndings` |
 | 文体: 動詞終止形の常体混在 | **critic** | — | 誤検出を避け gate では見ない |
 | **数値: 県名直後の括弧に値・順位を書かない** | 機械 | blocker | `lintParenNumbers` |
+| **出典: 統計表 ID が e-Stat に実在し、近くの統計名と一致** | 機械 | blocker | `lintStatsTableIds` |
 | 数値: 本文の値が data/*.json と一致 | 機械 | warn/blocker | `checkArticleFactual` |
 | 数値: rank 主張があるのに ground truth 無し | 機械 | blocker | `rankClaimCount` gate |
 | callout の個数 | **critic** | — | 最低数を強制しない。必要性と情報量を意味判断する |
@@ -700,7 +733,7 @@ node .claude/scripts/blog/audit-chart-quality.mjs
 node .claude/scripts/blog/audit-published-blog.mjs
 ```
 
-公開記事の品質是正キュー (真実源): `.claude/state/blog/remediation-queue.json` (build-remediation-queue.mjs が R2+GSC から再構築)。
+公開記事の品質是正キュー (真実源): `data/blog/remediation-queue.json` (build-remediation-queue.mjs が R2+GSC から再構築)。
 週次是正ループ (GSC 優先で blocker 記事を /brushup-blog → critic PASS) は同ファイル参照。
 
 ### enforce される箇所 (2026-06-02〜 / 公開前ブロック)

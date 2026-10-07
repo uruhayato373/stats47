@@ -1,5 +1,5 @@
 /**
- * 週次 UI 検査の指摘キュー (`.claude/state/page-quality/ui-findings-queue.json`) を操作する。
+ * 週次 UI 検査の指摘キュー (`data/page-quality/ui-findings-queue.json`) を操作する。
  * 検査 → 起票 → 修正 → 本番確認のループの入口 (判定は lib/ui-findings.ts の純粋関数)。
  *
  * Usage:
@@ -31,13 +31,14 @@ import {
   type UiFindingStatus,
 } from "./lib/ui-findings";
 import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const require = createRequire(join(PROJECT_ROOT, "package.json"));
 const { parseBacklog } = require("./.claude/scripts/lib/backlog-lib.cjs") as {
   parseBacklog: (text: string) => Array<{ id?: string }>;
 };
 
-const QUEUE_PATH = join(PROJECT_ROOT, ".claude/state/page-quality/ui-findings-queue.json");
+const QUEUE_PATH = join(PROJECT_ROOT, `${datasetDir("page-quality.findings")}/ui-findings-queue.json`);
 const BACKLOG_PATH = join(PROJECT_ROOT, ".claude/todo/backlog.md");
 const SCREENSHOT_BASE_URL = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
 
@@ -60,7 +61,7 @@ function loadQueue(): QueueFile {
 }
 
 function saveQueue(queue: QueueFile): void {
-  mkdirSync(join(PROJECT_ROOT, ".claude/state/page-quality"), { recursive: true });
+  mkdirSync(join(PROJECT_ROOT, datasetDir("page-quality.findings")), { recursive: true });
   const findings = [...queue.findings].sort((a, b) => a.key.localeCompare(b.key));
   writeFileSync(QUEUE_PATH, `${JSON.stringify({ ...queue, generatedAt: new Date().toISOString(), findings }, null, 2)}\n`);
 }

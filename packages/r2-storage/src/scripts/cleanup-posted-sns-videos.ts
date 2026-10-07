@@ -24,11 +24,12 @@ import fs from "node:fs";
 import path from "node:path";
 import { deleteMultipleFromR2, listFromR2WithSize } from "../lib/index";
 import { assertR2WriteAllowed } from "./_assert-ci-write";
+import { datasetPath } from "../../../../config/datasets.mjs";
 
 config({ path: path.resolve(__dirname, "..", "..", "..", "..", ".env.local") });
 
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..", "..");
-const POSTS_PATH = path.join(PROJECT_ROOT, ".claude/state/sns/posts.json");
+const POSTS_PATH = path.join(PROJECT_ROOT, datasetPath("sns.posts"));
 
 const args = process.argv.slice(2);
 const EXECUTE = args.includes("--execute");

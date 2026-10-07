@@ -339,6 +339,8 @@ export function trackHomeFeaturedClick(params: HomeFeaturedEventParams): void {
  * - `area_sidebar`: 都道府県ページ右のカテゴリナビ（home と同じリストの別配置）
  * - `product_catalog`: 商品一覧から商品詳細への導線
  * - `blog_product`: ブログ本文末の商品詳細への文脈一致導線
+ * - `ranking_product`: ランキング右レール「関連記事」から、その記事を収録した Kindle 本の商品詳細への導線
+ *   (2026-10-07 値追加。登録済み dimension の値追加なので GA4 側の作業は不要)
  * - `blog_sidebar` / `blog_discovery_mobile`: ブログ一覧の右レール / モバイル上部の探索導線
  *
  * いずれも既存 GA4 custom dimension `nav_surface` の値追加であり、新しい dimension は増やさない
@@ -369,9 +371,12 @@ export type NavSurface =
   | 'area_sidebar'
   | 'product_catalog'
   | 'blog_product'
+  | 'ranking_product'
   | 'blog_sidebar'
   | 'blog_discovery_mobile'
   | 'ranking_survey'
+  // ランキングの右レール「この指標を使うテーマ」(2026-10-07 値追加。登録済み dimension の値追加なので GA4 側の作業は不要)
+  | 'ranking_theme'
   | 'category_survey'
   | 'theme_survey'
   | 'blog_survey'

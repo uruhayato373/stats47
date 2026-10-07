@@ -125,7 +125,7 @@ fi
      先に eval で最下部までスクロール → 末尾の「ラインをこの場所に変更」を click（クリック後ボタンが黒反転＋×表示）。
    - **有料記事 → `segmentsPaid[0]` 先頭段落の直前の「ラインをこの場所に変更」を click**（その段落へスクロール→錨テキストで特定）。
 3. 右上 **「更新する」（新規は「投稿する」）** を click → **「記事が公開されました」モーダル**（X/Facebook/LINE/リンクコピーの共有ボタン）が出れば成功。
-4. 成功後 `.claude/state/note-published-urls.json` に `updated_at` を記録。
+4. 成功後 `data/note/note-published-urls.json` に `updated_at` を記録。
 
 > ボタン index は state 上で**ラベル行の 1 つ前の `[NNN]<button>` 行**から取る（例: `grep -B1 "ラインをこの場所に変更" state.txt | grep -oE '\[[0-9]+\]' | tail -1`）。
 

@@ -5,7 +5,7 @@
  * endDate-27 で取得) のため、単純合算は最大 4 倍の二重計上になる。
  * 56 日 = **非重複 2 窓 (最新週 + その 4 週前)** の合算で構成する。
  *
- * 集計規約 (schema 正典: .claude/state/themes/README.md):
+ * 集計規約 (schema 正典: data/themes/README.md):
  *   - GSC: clicks/impressions = 2 窓合算, ctr = 合算比, avgPosition = impressions 加重平均
  *   - GA4: pageViews = 2 窓合算 (加算可能)。activeUsers は週横断で加算不能のため
  *     最新窓の値のみ activeUsersLast28d として保存。engagementRate / avgSessionDuration は
@@ -28,13 +28,14 @@ import { THEME_CATALOGS } from "../../../packages/data-configs/src/theme-catalog
 import { parse } from "csv-parse/sync";
 import { selectThemeWindows, selectLatestThemeWindow, isJapanPageReport, normalizeThemePath, summarizeThemeTraffic, summarizeThemeNavigation } from "./theme-metrics-core.mjs";
 import { readThemeQualityState } from "./theme-quality-state.mjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
-const STATE_DIR = process.env.STATE_DIR || path.join(PROJECT_ROOT, ".claude/state/themes");
+const STATE_DIR = process.env.STATE_DIR || path.join(PROJECT_ROOT, datasetDir("themes.portfolio"));
 const PORTFOLIO = path.join(STATE_DIR, "portfolio.json");
-const GSC_SNAP = process.env.GSC_SNAPSHOT_DIR || path.join(PROJECT_ROOT, ".claude/skills/analytics/gsc-improvement/reference/snapshots");
-const GA4_SNAP = process.env.GA4_SNAPSHOT_DIR || path.join(PROJECT_ROOT, ".claude/skills/analytics/ga4-improvement/reference/snapshots");
+const GSC_SNAP = process.env.GSC_SNAPSHOT_DIR || path.join(PROJECT_ROOT, datasetDir("gsc.snapshots"));
+const GA4_SNAP = process.env.GA4_SNAPSHOT_DIR || path.join(PROJECT_ROOT, datasetDir("ga4.snapshots"));
 
 const AGE_REVIEW_YEARS = 5; // 公表周期を確認する候補。年齢だけでは未更新と断定しない
 
@@ -116,8 +117,8 @@ async function main() {
       ga4: summarizeThemeTraffic(select(ga428d, "pagePath"), "ga4", ga4Window28d),
       internalNav: summarizeThemeNavigation(select(nav28d, "pagePath"), navWindow28d),
     };
-    t.gscSnapshotRef = gscWindows ? `.claude/skills/analytics/gsc-improvement/reference/snapshots/${gscWindows[0].week}/pages.csv` : null;
-    t.ga4SnapshotRef = ga4Windows ? `.claude/skills/analytics/ga4-improvement/reference/snapshots/${ga4Windows[0].week}/pages-clean.csv` : null;
+    t.gscSnapshotRef = gscWindows ? `${datasetDir("gsc.snapshots")}/${gscWindows[0].week}/pages.csv` : null;
+    t.ga4SnapshotRef = ga4Windows ? `${datasetDir("ga4.snapshots")}/${ga4Windows[0].week}/pages-clean.csv` : null;
 
     // ── R2 データ品質 ──
     const keys = themeKeys(t.themeKey);

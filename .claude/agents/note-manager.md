@@ -15,8 +15,8 @@ note.com 記事のライフサイクル管理を担当する専門エージェ�
 > **★完全DBレス + ephemeral outbox（2026-06-19 正典）**: note 記事に **D1 `note_articles` テーブルは使わない**（廃止済）。
 > 記事本文の SSOT は **R2 `note/<vertical>/<slug>/`**。**`docs/31_note記事原稿/` は ephemeral outbox**（編集時のみ存在、push 後 CI が自動削除）。
 > - **editorial メタの SSOT は note-catalog (git TS)**: `.claude/scripts/note/catalog/`（vertical/series/**magazine**/isPaid/noteUrl/publishedAt/r2Path/**stats47Targets**）。正典: `catalog/README.md`。
-> - **`.claude/state/note-published-urls.json` は派生インデックス**（カタログから `generate-note-catalog.ts` で再生成。手編集しない）
-> - ドラフト一覧: **`.claude/state/note-draft-index.json`**（slug → vertical / r2_path。カタログ status=draft と対応）
+> - **`data/note/note-published-urls.json` は派生インデックス**（カタログから `generate-note-catalog.ts` で再生成。手編集しない）
+> - ドラフト一覧: **`data/note/note-draft-index.json`**（slug → vertical / r2_path。カタログ status=draft と対応）
 > - 編集前に復元: `bash .claude/scripts/note/restore-from-r2.sh <slug>` → docs/31 に展開。push 後 CI が R2 再同期 + docs/31 削除。
 
 > **note-catalog SSOT の保守は note-manager の担当（2026-07-15〜）**: note コーパス全体の editorial メタと
@@ -45,8 +45,8 @@ note.com 記事のライフサイクル管理を担当する専門エージェ�
 | 記事 SSOT（本文・画像・ハッシュタグ） | **R2 `note/<vertical>/<slug>/`** | 公開済み + ドラフト全記事。復元: `restore-from-r2.sh <slug>` |
 | 編集時の作業域（ephemeral outbox） | `docs/31_note記事原稿/<vertical>/<slug>/` | push 後 CI が自動削除。git に長期保持しない |
 | editorialメタ・公開URL（SSOT） | `.claude/scripts/note/catalog/data/<vertical>.ts` | status / noteUrl / publishedAt / magazine / isPaid |
-| 公開済みURL対応表（派生） | `.claude/state/note-published-urls.json` | catalogから生成。手編集しない |
-| ドラフト運用索引（補助） | `.claude/state/note-draft-index.json` | slug → `{vertical, r2_path, status}`。git TS catalog が記事集合のSSOT |
+| 公開済みURL対応表（派生） | `data/note/note-published-urls.json` | catalogから生成。手編集しない |
+| ドラフト運用索引（補助） | `data/note/note-draft-index.json` | slug → `{vertical, r2_path, status}`。git TS catalog が記事集合のSSOT |
 
 > vertical は `koumuin-claude-code` / `koumuin-estat-claude-code` 等のサブディレクトリ。slug 直下に draft.md がある旧構成も許容。
 
@@ -74,7 +74,7 @@ npx tsx .claude/scripts/note/catalog/generate-note-catalog.ts --apply
 npm run audit:content-operations
 ```
 
-`.claude/state/note-published-urls.json` は生成物なので直接編集しない。
+`data/note/note-published-urls.json` は生成物なので直接編集しない。
 
 ### Step 3: メモリ・進捗の更新（該当あれば）
 
@@ -125,7 +125,7 @@ npm run admin  # http://127.0.0.1:4747/content/note
 - `.claude/scripts/note/{prepare-article.cjs,build-body.cjs}` — Phase 0 / 本文生成
 - `.claude/skills/note/publish-note/references/{editor-operations.md,scheduling.md,update-mode.md}` — 詳細手順
 - `.claude/scripts/note/catalog/` — editorialメタ・公開URLのgit TS SSOT
-- `.claude/state/note-published-urls.json` — catalogから生成する公開済みURL派生index
+- `data/note/note-published-urls.json` — catalogから生成する公開済みURL派生index
 - `http://127.0.0.1:4747/content/note` — note運用の読み取り専用ミラー
 - `.claude/rules/browser-use-cleanup.md` — 終了時の daemon 停止 + タブクローズ
 - auto memory `feedback_note_publish_automation.md` — paste 方式の確定知見

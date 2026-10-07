@@ -2,7 +2,7 @@
 /**
  * SNS Weekly Report Generator (data portion)
  *
- * .claude/skills/analytics/sns-metrics-improvement/snapshots/ から週次データを読み、
+ * data/sns/metric-snapshots/ から週次データを読み、
  * .claude/skills/sns/sns-weekly-report/reference/reports/YYYY-Www.md に
  * プラットフォーム別サマリ + 上位投稿表を生成。
  *

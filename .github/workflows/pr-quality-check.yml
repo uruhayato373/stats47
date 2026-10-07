@@ -539,10 +539,14 @@ jobs:
         # 正典: .claude/rules/blog-quality-standards.md「ルール ↔ 機械チェック 対応表」
         run: |
           node .claude/scripts/lib/__tests__/paren-number-lint.test.mjs
+          node .claude/scripts/lib/__tests__/stats-table-id-lint.test.mjs
+          node --test .claude/scripts/blog/lib/__tests__/critic-findings.test.mjs
           node .claude/scripts/lib/__tests__/article-factual-check.value.test.mjs
           node .claude/scripts/lib/__tests__/quality-gate.svg-gates.test.mjs
           node --test .claude/scripts/lib/__tests__/chart-provenance.test.mjs
           node --test .claude/scripts/blog/lib/__tests__/source-repair-core.test.mjs
+          node --test .claude/scripts/blog/lib/__tests__/stale-data-years.test.mjs
+          node --test .claude/scripts/blog/lib/__tests__/refresh-chart-year.test.mjs
           node --test .claude/scripts/lib/__tests__/svg-lint.scatter.test.mjs
           node --test .claude/scripts/lib/__tests__/svg-lint.responsive-bar.test.mjs
           # 生成側のゲート (壊れた metric で記事を書き始めないこと・モデル可用性・生成 0 件の扱い)。
@@ -655,7 +659,7 @@ jobs:
       - name: 🗂️ Theme Portfolio State Guard
         # テーマポートフォリオ state の schema + 判定規律 (根拠なし merge/retire 禁止・
         # 重複実験防止・推測値/標本不足比率の混入防止・THEME_CATALOGS 整合) を検証。
-        # 読み取り専用で破壊的変更なし。正典: .claude/state/themes/README.md
+        # 読み取り専用で破壊的変更なし。正典: data/themes/README.md
         run: |
           node .claude/scripts/themes/validate-theme-state.mjs
           npm run theme:quality:test
@@ -677,7 +681,7 @@ jobs:
         # survey ポートフォリオ state の schema + 判定規律 (surveys.json 双方向一致・
         # survey-editorial.ts との drift・orphan/linkage 整合・根拠なし merge/retire 禁止・
         # 重複実験防止・推測値混入防止) を検証。読み取り専用で破壊的変更なし
-        # (本文生成・R2 push・deploy は行わない)。正典: .claude/state/surveys/README.md
+        # (本文生成・R2 push・deploy は行わない)。正典: data/surveys/README.md
         run: npx tsx .claude/scripts/surveys/validate-survey-portfolio.ts
         continue-on-error: false
 

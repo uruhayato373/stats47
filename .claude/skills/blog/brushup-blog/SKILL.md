@@ -29,7 +29,7 @@ primary_agent: article-writer
 
 ## --target queue: 計画的是正 (★推奨・週次バッチの実行エンジン)
 
-`build-remediation-queue.mjs` が作る**状態付き是正キュー** (`.claude/state/blog/remediation-queue.json`) を消費し、
+`build-remediation-queue.mjs` が作る**状態付き是正キュー** (`data/blog/remediation-queue.json`) を消費し、
 pending 上位 N 件を順に是正する。GSC 流入 (expectedLift) × 品質 blocker severity を**統合スコア**で序列化し、
 publish-blocker を持つ記事 (**must-fix レーン**) を最上位に置く。「次に何を直すか」「何本消化したか」「効いたか」を
 キューが追跡するので、**週次で少しずつ品質を底上げ**できる。正典: `.claude/skills/blog/brushup-blog/reference/blog-remediation-loop.md`。
@@ -63,6 +63,7 @@ node .claude/scripts/blog/build-remediation-queue.mjs --next 5   # pending 上�
    - `adjacent-callouts` → 最重要の注意だけを callout に残し、分析・読み方・補足は通常本文へ戻すか対応する節へ分散する (連続配置のまま余白だけ足さない)。全記事の機械是正は `node .claude/scripts/blog/fix-consecutive-callouts.mjs --base docs/21_ブログ記事原稿 --apply` を使う
    - `internalLinks<3` / source-link 末尾集約 → source-link を各図直下にインライン配置
    - `リンク切れ (soft 404 / 410 Gone)` → **勝手に近そうな別ページへ張り替えない**。`.claude/scripts/blog/data/broken-link-remap.json` に置換先 (アンカーテキストが指す指標が実在 metric の title と一致する場合のみ。無ければ `to: null` = リンク解除) と `reason` を追記し、`node .claude/scripts/blog/fix-broken-internal-links.mjs --apply` で決定的に是正する (置換先を live 実測し到達不能なら中断する)。正典 `.claude/rules/blog-quality-standards.md` §内部リンクの実在
+   - `data-refresh` レーン、または entry に `staleData` (図の年が指標の最新年より古い) がある → focus `最新データ更新` (下のフロー)。must-fix の記事でも `staleData` があれば同じ回で取り直す
    - opportunity レーン (blocker 無し・CTR 改善余地) → `CTR-reframe`
 3. **記事アーキタイプを 1 つ選び frontmatter `archetype: A|B|C|D|E` を宣言** (正典「記事アーキタイプ」)。型の章構成・必須分析視点に従う。
 4. **quality-gate を通す**: `node .claude/scripts/blog/quality-gate.mjs <draft path>`。`prose/図` blocker を含め blocker 0 になるまで直す。
@@ -71,7 +72,7 @@ node .claude/scripts/blog/build-remediation-queue.mjs --next 5   # pending 上�
 
 ### Step 4: wave を記録 (history + 改善ログ)
 
-- `.claude/state/blog/auto-brushup-history.json` に通過記事を追記 (wave_id 一致、`.claude/rules/blog-data-schema.md` の命名規則)。
+- `data/blog/auto-brushup-history.json` に通過記事を追記 (wave_id 一致、`.claude/rules/blog-data-schema.md` の命名規則)。
 - `.claude/todo/improvements.md` に `## [BLOG-WAVE-<wave_id>]` section を追加 (frontmatter `status: pending` / `due: <+28日>` / `wave_id`)。
 - 公開は CI (`publish-blog.yml` / develop push)。`quality-gate.mjs` が公開前に再 enforce する。
 
@@ -108,7 +109,7 @@ GSC の impressions × CTR と D1 の article メタデータを掛け合わせ�
 
 | データ | 場所 |
 |---|---|
-| GSC ページ別週次 | `.claude/skills/analytics/gsc-improvement/reference/snapshots/<最新週>/pages.csv` |
+| GSC ページ別週次 | `data/gsc/snapshots/<最新週>/pages.csv` |
 | ブログ記事 (公開) | R2 `app/blog/all.json` (`.articles`。旧 D1 articles テーブルは廃止) |
 
 ### 実行フロー (priority)
@@ -117,10 +118,10 @@ GSC の impressions × CTR と D1 の article メタデータを掛け合わせ�
 
 ```bash
 # 最新週を特定
-ls .claude/skills/analytics/gsc-improvement/reference/snapshots/ | sort | tail -1
+ls data/gsc/snapshots/ | sort | tail -1
 ```
 
-`.claude/skills/analytics/gsc-improvement/reference/snapshots/<最新週>/pages.csv` を Read する。
+`data/gsc/snapshots/<最新週>/pages.csv` を Read する。
 `/blog/` を含む行のみを抽出し、 slug を `https://stats47.jp/blog/` 以降の文字列として取得する。
 
 #### Step 2: R2 blog snapshot から記事メタデータ取得
@@ -145,7 +146,7 @@ GSC データは実測値。
 
 #### Step 4: brushup-queue.md 出力
 
-`.claude/state/blog/remediation-queue.json` に以下の形式で書き出す:
+`data/blog/remediation-queue.json` に以下の形式で書き出す:
 
 ```markdown
 # ブログ改善優先度キュー
@@ -174,7 +175,7 @@ GSC データは実測値。
 |---|---|---|---|
 | `CTR-reframe` (default) | 全文 reframe (seoTitle / description / 本文) | ❌ 使わない | CTR 改善 (curiosity gap タイトル + 構造的発見) |
 | `エキスパート視点追加` | 1-2 セクションのみ部分補強 | ✅ `nlm cross query` (**対話実行限定**) | 白書引用・政策背景 |
-| `最新データ更新` | データ説明部分のみ | ❌ | 最新年度値へ差し替え |
+| `最新データ更新` | 図 (data JSON・source.json・SVG) + 本文の年と数値 | ❌ | 図を指標の最新年で取り直す (`refresh-article-data-years.mjs`) |
 | `CTA強化` | 記事末尾の関連リンク | ❌ | 回遊性 |
 
 > **NotebookLM ガード (重要)**: `エキスパート視点追加` focus は `notebooklm` CLI が対話 OAuth 前提でヘッドレス非対応のため、**人間が起動する単記事実行時のみ**選べる。`--target batch` から内部呼び出しされた場合はこの focus を**強制的に拒否し `CTR-reframe` に倒す** (OAuth 失効でループが詰まる事故を防ぐ)。
@@ -199,7 +200,7 @@ exit 1 なら修正 → 再 check して pass するまで繰り返す。 詳細
 2. 「何が不足しているか」を診断し focus を確定 (引数で明示されていれば従う):
    - **CTR が低い (タイトルに curiosity gap なし)** → `CTR-reframe`
    - **エキスパート視点なし** (白書引用・政策的背景が薄い) → `エキスパート視点追加` ※単記事・対話実行時のみ
-   - **最新データなし** (`publishedAt` が 12 ヶ月以上前) → `最新データ更新`
+   - **最新データなし** (図の年が指標の最新年より古い = `data/blog/stale-data-years.json` に載っている、または `publishedAt` が 12 ヶ月以上前) → `最新データ更新`
    - **CTA 弱い** (末尾の関連リンク・ランキング誘導が貧弱) → `CTA強化`
 3. **ground-truth 確認 (必須)**: `ls .local/r2/app/blog/<slug>/data/` → 各 JSON を Read し、本文で言及する都道府県の `{rank, value, label}` を確認。本文に書く数値・rank はこの値のみ使う (derive 計算は過程を明示)。
 
@@ -280,11 +281,32 @@ nlm cross query --notebooks "<ノートブック名>" \
 
 各 H2 の散文導入 or 考察セクションに白書引用・政策背景・専門的解説を 2-3 文追加する。Edit ツールで最小限の変更を適用する (全文書き直し禁止)。
 
-### focus=最新データ更新 / CTA強化 のフロー (部分編集)
+### focus=最新データ更新 のフロー (図を最新年で取り直し、本文の年と数値を合わせる)
+
+新しい年が R2 に入った指標の図を作り直し、本文をその値に合わせる。**図を先に取り直し、本文はその data JSON だけを見て書く**
+(数値を記憶や類推で書かない。上の絶対遵守と同じ)。
+
+1. 確認: `node .claude/scripts/blog/refresh-article-data-years.mjs --slug <slug> --pull`
+   (公開中の記事と図を `docs/21_ブログ記事原稿/<slug>/` へ取り出し、図ごとに「取り直せる / 最新 / 年を固定 / 手作業」を表で出す)
+2. **図ごとに直し方を決める (既定は取り直す)**。表の補足に、本文で図の年と最新年がそれぞれ何回出るかが出る。
+   - 本文が図の年を語らず新しい年を語っている → 図だけが古い食い違い。図だけ取り直す
+     (実例: 財政力指数の 2 記事で、2022 年度の順位を語る節に 1989 年の地図が置かれていた)
+   - 本文も図も古い年で一貫している → 記事ごと古い。取り直して本文も書き直す。年が例として出てくるだけの手順解説記事もこちらで、
+     AI の出力例として本文に引用した数値も合わせて直す
+   - 図の説明 (alt・本文) と data JSON の中身が違う (散布図と書いてあるのに棒グラフのデータ、など) → 自動で取り直さず、図を作り直す
+   - 本文がその年そのものを主題として論じている (特定の年の出来事や、制度が変わった前後の比較で過去側に置いた図) ときだけ、
+     取り直さずにその図の `data/<name>.source.json` に `"yearPinnedReason": "<理由>"` を書く (古い図の一覧と data-refresh レーンから外れる)。
+     本文が図の年を語っていない図は固定しない (2026-10-07 に図の年が古い 24 枚を本文と照らした結果、固定が正しい図は 0 枚だった)
+3. 取り直し: 同じコマンドに `--apply`。data JSON・source.json (`year` と `refreshedFromYear`)・SVG (PC・本文縦長・Instagram) を
+   最新年で作り直す。「手作業」の図 (散布図・計算値など) は表の理由を見て `fetch-correlation-scatter.mjs` 等で個別に取り直す
+4. 本文: 表の下の「本文で古い年を書いた行」と、`article-factual-check.mjs` の `VALUE_MISMATCH` (取り直した data と食い違う
+   本文の数値) をすべて直す。順位が入れ替わって見出しや結論が成り立たなくなった節は、data に合わせて解釈から書き直す
+5. 共通 Step B / C (lint・quality-gate) → blog-critic (delta) → 公開。done にすると次の snapshot で図の年が最新になり、一覧から消える
+
+### focus=CTA強化 のフロー (部分編集)
 
 | focus | 反映先 | 内容 |
 |---|---|---|
-| 最新データ更新 | データ説明部分 | data/*.json・D1 の最新年度値に差し替え |
 | CTA強化 (関連ランキング誘導) | **対応する図・データを扱う H2 セクション内** (SVG 図の直下等) | そのセクションが言及するランキングへ `<source-link href="/ranking/...">` を**インライン配置**。**記事末尾に集約しない** (回遊性・文脈性を損なう)。ナビ目的の `/category/` `/themes/` への `<source-link>` は末尾の関連セクションで可。検査: `node .claude/scripts/blog/audit-article-structure.mjs` |
 
 ### 共通 Step B: bold+括弧レンダリングバグ検出・修正 (必須, 全 focus)
@@ -349,7 +371,7 @@ GSC で改善余地の大きい blog 記事を優先度順に選び、`--target 
 
 - **1 回最大 5 記事** (`--count` > 5 は 5 にクランプ)
 - **全件 skip 日は commit せず終了**
-- **90 日以内に brushup した記事は dedup** (`.claude/state/blog/auto-brushup-history.json`)
+- **90 日以内に brushup した記事は dedup** (`data/blog/auto-brushup-history.json`)
 - **NotebookLM 不使用** (バッチは CTR-reframe focus 固定。エキスパート視点追加は対話実行のみ)
 
 ### Step 1: 候補選定
@@ -391,21 +413,21 @@ gh pr create --base main --head develop \
 
 ### Step 4: history 更新
 
-`.claude/state/blog/auto-brushup-history.json` に通過記事を追記:
+`data/blog/auto-brushup-history.json` に通過記事を追記:
 
 ```jsonc
 { "date": "YYYY-MM-DD", "wave_id": "YYYY-MM-DD-auto", "slug": "...", "framing": "...", "expectedLift": N }
 ```
 
 - `wave_id` は `YYYY-MM-DD-auto`。同日再実行は `-2`, `-3` と連番化し、既存 `2026-05-25-auto` 等と衝突させない (`.claude/rules/blog-data-schema.md` の wave 命名規則)。
-- skip した記事は `.claude/state/blog/auto-brushup-skipped.log` に記録 (週次レビューで prompt 改善の手がかり)。
+- skip した記事は `data/blog/auto-brushup-skipped.log` に記録 (週次レビューで prompt 改善の手がかり)。
 
 ---
 
 ## 参照
 
 - **記事品質の正典: `.claude/rules/blog-quality-standards.md`** (curiosity gap / callout / 内部リンク / source-link 配置の単一ソース)
-- 優先度キュー: `.claude/state/blog/remediation-queue.json` (`--target priority` で生成)
+- 優先度キュー: `data/blog/remediation-queue.json` (`--target priority` で生成)
 - 品質確認: `/blog-review --mode proofread` で最終チェック
 - factual + 形式の防壁: `node .claude/scripts/blog/quality-gate.mjs <slug>` (内部で `article-factual-check.mjs` を呼ぶ)
 - 失敗事例 ledger: `.claude/skills/blog/SHARED-failure-cases.md`

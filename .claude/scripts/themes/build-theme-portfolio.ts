@@ -7,7 +7,7 @@
  * 既存値を保持する (blog remediation-queue と同じ upsert 思想)。
  * 意味項目の変更も本スクリプトの --set 経由で行う (portfolio.json の手編集禁止)。
  *
- * schema・判定規律の正典: .claude/state/themes/README.md
+ * schema・判定規律の正典: data/themes/README.md
  * 運用設計: .claude/skills/theme/manage-theme-portfolio/reference/テーマポートフォリオ運用.md
  *
  * Usage:
@@ -23,10 +23,11 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { THEME_CATALOGS } from "../../../packages/data-configs/src/theme-catalog/index";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
-const STATE_DIR = path.join(PROJECT_ROOT, ".claude/state/themes");
+const STATE_DIR = path.join(PROJECT_ROOT, datasetDir("themes.portfolio"));
 const REVIEW_DIR = path.join(PROJECT_ROOT, ".claude/skills/theme/manage-theme-portfolio/reference/reviews");
 const PORTFOLIO = path.join(STATE_DIR, "portfolio.json");
 const EXPERIMENTS = path.join(STATE_DIR, "experiments.json");

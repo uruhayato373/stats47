@@ -3,7 +3,7 @@
  * measure-gsc-impact.mjs — ブログ是正 wave の GSC 効果計測 (wave_id 駆動)
  *
  * 是正ループ ④ の自動化 (.claude/skills/blog/brushup-blog/reference/blog-remediation-loop.md)。
- * `.claude/state/blog/auto-brushup-history.json` の wave_id を真実源に、
+ * `data/blog/auto-brushup-history.json` の wave_id を真実源に、
  * due (是正から min-weeks 以上経過) に達した各 wave の before/after を週次 GSC snapshot で
  * 自動 diff し、`improvement-log.md` の `## [BLOG-WAVE-<wave_id>]` section を upsert する。
  *
@@ -19,10 +19,10 @@
  *   node .claude/scripts/blog/measure-gsc-impact.mjs --dry-run        # ログ書き込みせず stdout のみ
  *
  * 入力:
- *   - .claude/state/blog/auto-brushup-history.json   (wave_id → slug + date)
- *   - .claude/skills/analytics/gsc-improvement/reference/snapshots/<YYYY-Www>/pages.csv
+ *   - data/blog/auto-brushup-history.json   (wave_id → slug + date)
+ *   - data/gsc/snapshots/<YYYY-Www>/pages.csv
  * 出力:
- *   - .claude/skills/analytics/gsc-improvement/reference/improvement-log.md (section upsert)
+ *   - data/improvement/gsc-improvement/improvement-log.md (section upsert)
  *
  * 判定は閾値エンジンが行う。想定効果値 (target) が機械可読な形で無い wave は
  * `insufficient-target` ガードで effect/pending に留まる (数値を推測しない)。
@@ -36,6 +36,7 @@ import { decideVerdict, formatVerdictSection, extractTarget } from "../lib/effec
 import { DEFAULT_THRESHOLDS } from "../lib/effect-verdict/thresholds.mjs";
 import { isoWeekOf, isoWeekEnd, weekDiff, weekLt } from "../lib/effect-verdict/iso-week.mjs";
 import { upsertSection } from "../lib/effect-verdict/section-upsert.mjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -43,15 +44,15 @@ const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
 
 const SNAPSHOT_DIR = path.join(
   PROJECT_ROOT,
-  ".claude/skills/analytics/gsc-improvement/reference/snapshots",
+  datasetDir("gsc.snapshots"),
 );
 const LOG_PATH = path.join(
   PROJECT_ROOT,
-  ".claude/skills/analytics/gsc-improvement/reference/improvement-log.md",
+  `${datasetDir("improvement.logs")}/gsc-improvement/improvement-log.md`,
 );
 const HISTORY_PATH = path.join(
   PROJECT_ROOT,
-  ".claude/state/blog/auto-brushup-history.json",
+  `${datasetDir("blog.operations")}/auto-brushup-history.json`,
 );
 
 // ====== 利用可能 snapshot 週 ======

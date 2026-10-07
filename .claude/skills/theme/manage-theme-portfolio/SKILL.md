@@ -1,16 +1,16 @@
 ---
 name: manage-theme-portfolio
 domain: data
-description: 現行ThemeCatalogのテーマ群のポートフォリオを評価・更新する。ThemeCatalog と GSC/GA4 snapshot とレビュー文書を突合して .claude/state/themes/portfolio.json を再構築し、keep/improve/merge/split/rename/retire 候補を実測根拠つきで判定、実験の baseline/効果測定を管理する。theme-portfolio-manager が実行。Use when user says "テーマポートフォリオ", "テーマ棚卸し", "テーマ評価", "manage-theme-portfolio".
+description: 現行ThemeCatalogのテーマ群のポートフォリオを評価・更新する。ThemeCatalog と GSC/GA4 snapshot とレビュー文書を突合して data/themes/portfolio.json を再構築し、keep/improve/merge/split/rename/retire 候補を実測根拠つきで判定、実験の baseline/効果測定を管理する。theme-portfolio-manager が実行。Use when user says "テーマポートフォリオ", "テーマ棚卸し", "テーマ評価", "manage-theme-portfolio".
 allowed-tools: Read, Grep, Glob, Bash
 primary_agent: theme-portfolio-manager
 ---
 
 # manage-theme-portfolio
 
-テーマポートフォリオ (`.claude/state/themes/`) の継続評価サイクルを回す。
+テーマポートフォリオ (`data/themes/`) の継続評価サイクルを回す。
 運用設計の正典: `.claude/skills/theme/manage-theme-portfolio/reference/テーマポートフォリオ運用.md`。
-schema・判定規律の正典: `.claude/state/themes/README.md`。
+schema・判定規律の正典: `data/themes/README.md`。
 
 ## 参照ルーティング
 

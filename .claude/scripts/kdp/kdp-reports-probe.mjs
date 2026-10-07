@@ -2,7 +2,7 @@
 /**
  * kdp-reports-probe.mjs — KDP レポート画面 (販売数・KENP) の構造を **読み取り専用** で採取する。
  *
- * 目的 (2026-09-19): 22 冊が販売中なのに `.claude/state/products/sales-ledger.json` が空で、
+ * 目的 (2026-09-19): 22 冊が販売中なのに `data/products/sales-ledger.json` が空で、
  * 需要ファーストの判断 (横展開 / 取り下げ) ができない。レポートは KDP の React SPA が XHR で
  * JSON を取るので、画面を開いて **通ったレスポンスをそのまま保存** し、抽出器はそれを見て書く
  * (`kdp-publish --probe` と同じ「実機を見てから実装する」手順)。

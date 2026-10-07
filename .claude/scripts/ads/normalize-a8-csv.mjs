@@ -6,9 +6,9 @@
  *
  * stats47 での適応:
  *   - fetch-a8-ui-csv.mjs の raw run（CSV + manifest.json）の置き場を
- *     `.claude/state/metrics/affiliate/a8-ui/` から `.local/a8-ui/`（git 管理外）へ変更したのに
+ *     `data/affiliate/a8-ui/` から `.local/a8-ui/`（git 管理外）へ変更したのに
  *     合わせて RUN_DIR を変更した。正規化結果（a8-report-log.json / a8-results.json）は
- *     由来と同じ `.claude/state/metrics/affiliate/` に committed SSOT として残す。
+ *     由来と同じ `data/affiliate/` に committed SSOT として残す。
  *   - パス解決を `process.cwd()` 相対ではなく `repoRoot()`（asp-browser-base.mjs 由来）に変更し、
  *     実行ディレクトリや OS に依存しないようにした。
  *   - programIdMap は **stats47 の広告 SSOT (apps/web/scripts/affiliate-ads-data.ts) の mid= から
@@ -22,8 +22,8 @@
  *
  * fetch-a8-ui-csv.mjs が保存した run（raw CSV + manifest.json）を読み、
  *   1. <runDir>/normalized/<reportKey>.json（+ .rejects.json）を書く
- *   2. .claude/state/metrics/affiliate/a8-report-log.json へ upsert（committed SSOT）
- *   3. .claude/state/metrics/affiliate/a8-results.json の records へ rollup（既存スキーマ維持）
+ *   2. data/affiliate/a8-report-log.json へ upsert（committed SSOT）
+ *   3. data/affiliate/a8-results.json の records へ rollup（既存スキーマ維持）
  * raw CSV と manifest.json は書き換えない（append-only・監査可能性のため）。
  *
  * A8 は承認確定で過去月の数値が遡及変化するため、追記でなく **upsert**（最新 fetch が正）。
@@ -47,10 +47,11 @@ import {
 } from "./lib/a8-report-csv.mjs";
 import { repoRoot } from "./lib/asp-browser-base.mjs";
 import { A8_REPORT_AUTOMATION } from "../../../config/paths.mjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const REPO_ROOT = repoRoot();
 const RAW_STATE_DIR = join(REPO_ROOT, ".local/a8-ui");
-const AFF_DIR = join(REPO_ROOT, ".claude/state/metrics/affiliate");
+const AFF_DIR = join(REPO_ROOT, datasetDir("affiliate.audits"));
 const REPORT_LOG = join(AFF_DIR, "a8-report-log.json");
 const RESULTS = join(AFF_DIR, "a8-results.json");
 const CONFIG_PATH = join(REPO_ROOT, A8_REPORT_AUTOMATION);

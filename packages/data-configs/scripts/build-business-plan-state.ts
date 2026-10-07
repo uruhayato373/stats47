@@ -3,6 +3,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { BUSINESS_PLAN_2026, buildKpiTree } from '../src/business-plan';
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const repoRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
@@ -10,10 +11,10 @@ const repoRoot = path.resolve(
 );
 const outputPath = path.join(
   repoRoot,
-  '.claude/state/business-plan/latest.json'
+  `${datasetDir("business-plan.state")}/latest.json`
 );
 const snapshot = process.argv.includes('--snapshot');
-const KPI_TREE_PATH = '.claude/state/business-plan/kpi-tree.json';
+const KPI_TREE_PATH = `${datasetDir("business-plan.state")}/kpi-tree.json`;
 
 function newestMtime(rel: string): string | null {
   const full = path.join(repoRoot, rel);
@@ -32,12 +33,12 @@ function newestMtime(rel: string): string | null {
 }
 
 const sourceFreshness: Record<string, string | null> = {
-  ga4: newestMtime('.claude/state/metrics/ga4'),
-  x: newestMtime('.claude/state/metrics/sns'),
-  note: newestMtime('.claude/state/metrics/note'),
-  affiliate: newestMtime('.claude/state/metrics/affiliate'),
-  products: newestMtime('.claude/state/products'),
-  ci: newestMtime('.claude/state/ci'),
+  ga4: newestMtime(datasetDir("ga4.history")),
+  x: newestMtime(datasetDir("sns.drafts")),
+  note: newestMtime(datasetDir("note.cover-rollout")),
+  affiliate: newestMtime(datasetDir("affiliate.audits")),
+  products: newestMtime(datasetDir("products.publication-receipts")),
+  ci: newestMtime(datasetDir("ci.health")),
 };
 
 const statusCounts = BUSINESS_PLAN_2026.decisions.reduce<
@@ -105,7 +106,7 @@ if (snapshot) {
   const day = state.generatedAt.slice(0, 10);
   const snapshotPath = path.join(
     repoRoot,
-    `.claude/state/business-plan/history/${day}.json`
+    `${datasetDir("business-plan.history")}/${day}.json`
   );
   fs.mkdirSync(path.dirname(snapshotPath), { recursive: true });
   fs.writeFileSync(snapshotPath, `${JSON.stringify(state, null, 2)}\n`, 'utf8');

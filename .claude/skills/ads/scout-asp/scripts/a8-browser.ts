@@ -29,6 +29,7 @@ import * as path from "path";
 import * as fs from "fs";
 import { createHash } from "crypto";
 import { createRequire } from "module";
+import { datasetDir, datasetPath } from "../../../../../config/datasets.mjs";
 
 const require = createRequire(import.meta.url);
 const core = require("../../../../scripts/ads/lib/a8-scout-core.mjs");
@@ -69,8 +70,8 @@ function pickTargetSiteOption(options: string[]): string | null {
 }
 const DEBUG_DIR = path.join(PROJECT_ROOT, ".local/playwright-a8-debug");
 const OFFER_INSPECT_DIR = path.join(PROJECT_ROOT, ".local/a8-offer-inspect");
-const CATALOG_PATH = path.join(PROJECT_ROOT, ".claude/state/ads/a8-catalog.json");
-const INVENTORY_PATH = path.join(PROJECT_ROOT, ".claude/state/ads/inventory-latest.json");
+const CATALOG_PATH = path.join(PROJECT_ROOT, datasetPath("a8.catalog"));
+const INVENTORY_PATH = path.join(PROJECT_ROOT, `${datasetDir("affiliate.inventory")}/inventory-latest.json`);
 const ADS_DATA_PATH = path.join(PROJECT_ROOT, "apps/web/scripts/affiliate-ads-data.ts");
 
 let IS_DRY_RUN = false;

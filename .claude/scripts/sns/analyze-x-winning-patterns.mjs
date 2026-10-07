@@ -4,7 +4,7 @@
  *
  * posts.json の X 投稿 (template あり・impressions>0) を winners/losers に分割し、
  * feature (template / category / 時間帯 / 曜日) ごとに lift・confidence を出す。
- * 結果は投稿生成 (post-x-batch ③) が参照する `.claude/state/sns/x-winning-patterns.json` と
+ * 結果は投稿生成 (post-x-batch ③) が参照する `data/sns/x-winning-patterns.json` と
  * 比較用レポートを `.claude/skills/sns/x-viral-research/reference/reports/<date>.md` に書く。
  *
  * ★実証ベース (evidence-based-judgment.md):
@@ -20,14 +20,15 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { createRequire } from "node:module";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const require = createRequire(import.meta.url);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
 const store = require(path.join(PROJECT_ROOT, ".claude/scripts/lib/sns-posts-store.cjs"));
 
-const STATE_PATH = path.join(PROJECT_ROOT, ".claude/state/sns/x-winning-patterns.json");
-const INDEX_PATH = path.join(PROJECT_ROOT, ".claude/state/sns/metric-discovery-index.json");
+const STATE_PATH = path.join(PROJECT_ROOT, `${datasetDir("sns.drafts")}/x-winning-patterns.json`);
+const INDEX_PATH = path.join(PROJECT_ROOT, `${datasetDir("sns.drafts")}/metric-discovery-index.json`);
 
 function arg(flag, def) {
   const i = process.argv.indexOf(flag);

@@ -20,9 +20,10 @@ import { getGeoSourceNavigation } from '../src/features/geo-analysis/lib/geo-sou
 
 import type { FeatureCollection, GeoJsonProperties } from 'geojson';
 import type { Topology, GeometryObject } from 'topojson-specification';
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const root = process.cwd();
-const statePath = path.join(root, '.claude/state/geo/source-pages.json');
+const statePath = path.join(root, `${datasetDir("geo.sources")}/source-pages.json`);
 const reportDir = path.join(root, '.local/geo-source-pages');
 const sha = (value: string | Buffer) =>
   createHash('sha256').update(value).digest('hex');

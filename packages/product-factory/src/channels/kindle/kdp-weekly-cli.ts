@@ -4,11 +4,12 @@ import { fileURLToPath } from "node:url";
 import { validateSalesLedger } from "../../sales/ledger";
 import { buildKdpWeeklyDecision, type KdpWeeklyListing } from "./kdp-weekly-publication";
 import { KDP_LISTINGS } from "../../../../../config/paths.mjs";
+import { datasetPath } from "../../../../../config/datasets.mjs";
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../../..");
 const LISTINGS_PATH = resolve(REPO_ROOT, KDP_LISTINGS);
-const LEDGER_PATH = resolve(REPO_ROOT, ".claude/state/products/sales-ledger.json");
-const OUT_PATH = resolve(REPO_ROOT, ".claude/state/products/kdp-weekly-publication.json");
+const LEDGER_PATH = resolve(REPO_ROOT, datasetPath("sales.ledger"));
+const OUT_PATH = resolve(REPO_ROOT, datasetPath("kdp.weekly-publication"));
 
 function arg(name: string): string | null {
   const index = process.argv.indexOf(name);

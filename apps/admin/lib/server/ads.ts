@@ -2,6 +2,8 @@ import "server-only";
 
 import fs from "node:fs";
 
+import { datasetDir } from "../../../../config/datasets.mjs";
+
 import {
   cached,
   hasError,
@@ -14,7 +16,7 @@ import {
 import { buildAffiliatePortfolioViewModel, type AffiliatePortfolioViewModel } from "./affiliate-portfolio-view";
 
 /**
- * アフィリエイト運用の state (`.claude/state/ads/`) を読む。読み取り専用。
+ * アフィリエイト運用の state (`data/affiliate/`) を読む。読み取り専用。
  *
  * ★巨大 JSON はここで畳んで件数と内訳だけ返す。a8-catalog は 342KB、
  *   affiliate-catalog は 125KB、placement-map は 38KB あり、raw のまま
@@ -22,7 +24,9 @@ import { buildAffiliatePortfolioViewModel, type AffiliatePortfolioViewModel } fr
  *   「今どういう状態か」であって全件ではない。
  */
 
-const DIR = ".claude/state/ads";
+const DIR = datasetDir("affiliate.audits");
+/** GA4 実測の追跡済み snapshot と提携台帳は記録なので data/affiliate/ */
+const DATA_DIR = datasetDir("affiliate.catalog");
 
 type Gate = { status: string; reasons: string[] };
 
@@ -230,11 +234,11 @@ function readCompliance(): Wrapped<AdsCompliance> {
 function readGa4(): Wrapped<AdsGa4> {
   return wrap(() => {
     const files = fs
-      .readdirSync(statePath(DIR))
+      .readdirSync(statePath(DATA_DIR))
       .filter((f) => /^ga4-affiliate-\d{4}-\d{2}-\d{2}\.json$/.test(f))
       .sort();
     if (files.length === 0) throw new Error("ga4-affiliate-*.json が無い");
-    const d = readJson<Record<string, any>>(`${DIR}/${files[files.length - 1]}`);
+    const d = readJson<Record<string, any>>(`${DATA_DIR}/${files[files.length - 1]}`);
     const rows: Array<Record<string, any>> = d.overview ?? d.rows ?? [];
 
     const agg = (key: string) => {
@@ -275,8 +279,8 @@ function readCatalogs(): Wrapped<CatalogSummary[]> {
   return wrap(() => {
     const out: CatalogSummary[] = [];
     for (const file of ["a8-catalog.json", "affiliate-catalog.json"]) {
-      if (!fs.existsSync(statePath(DIR, file))) continue;
-      const d = readJson<Record<string, any>>(`${DIR}/${file}`);
+      if (!fs.existsSync(statePath(DATA_DIR, file))) continue;
+      const d = readJson<Record<string, any>>(`${DATA_DIR}/${file}`);
       // a8 は { entries: { <id>: {...} } }、3ASP 側は配列やオブジェクトの揺れがある
       const raw = d.entries ?? d.programs ?? d;
       const rows: Array<Record<string, unknown>> = Array.isArray(raw)

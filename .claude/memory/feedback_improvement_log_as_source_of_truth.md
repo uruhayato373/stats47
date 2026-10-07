@@ -14,14 +14,14 @@ PR #308 時点では改善施策 TODO を旧改善ログへ集約した。その
 **How to apply**:
 - 新規施策は `.claude/todo/improvements.md` に一意な ID で追加し、該当 metric の詳細ログへ参照を置く
 - section frontmatter は `- **status**:` `- **tier**:` `- **target_metric**:` `- **deployed_at**:` `- **due**:` `- **owner**:` `- **verification_command**:` `- **related_pr**:` のリスト形式
-- metric ごとの詳細履歴は `.claude/skills/analytics/*/reference/improvement-log.md`
+- metric ごとの詳細履歴は `data/improvement/*/improvement-log.md` (2026-10-06 に各スキルの `reference/` から移した)
 - `.claude/todo/weekly.md` は改善ログから抽出した「当週ビュー」 (`/weekly-plan` が上書き)
 - `docs/50_Issues/{feature,automation,ui-improvements}-backlog.md` は **未着手アイデア倉庫** (Tier 未確定段階)。Tier 確定したら改善ログに移行・section 削除
 - GitHub Issues は `enhancement`/`bug`/`auto-generated` のみ (PR で close されるチケットと日次アラート)
 - 効果判定 (effect/full / effect/partial / effect/none / effect/adverse) は **実証ベース判定ルール** (`.claude/rules/evidence-based-judgment.md`) に従い、検証コマンド実測値必須
 
 **例外**:
-- 検証コマンド・仮説などの詳細ログは `.claude/skills/analytics/<metric>-improvement/reference/improvement-log.md` (2 層構造の下層、agent 用)
+- 検証コマンド・仮説などの詳細ログは `data/improvement/<metric>-improvement/improvement-log.md` (2 層構造の下層、agent 用)
 - どちらも append-only。過去判定の改竄禁止
 
 **関連**:

@@ -22,7 +22,7 @@
  * 未確認 (または最終確認が最も古い) 候補から `--batch-size` 件だけ**を確認し、
  * 前回までの結果と統合して state に保存する (週次 cron で少しずつ全件を巡回する設計)。
  *
- * 出力: .claude/state/data/estat-year-coverage/{queue.json,LATEST.md}
+ * 出力: data/estat/year-coverage/{queue.json,LATEST.md}
  *
  * 正典: .claude/rules/metric-config-standards.md「`years` は最新年だけに絞らない」
  */
@@ -35,10 +35,11 @@ import { METRICS_REGISTRY } from "@stats47/data-configs/registry";
 import type { MetricConfig } from "@stats47/data-configs";
 
 import { resolveEstatParams } from "../utils/source-config";
+import { datasetDir } from "../../../../config/datasets.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..", "..");
-const STATE_DIR = path.join(PROJECT_ROOT, ".claude/state/data/estat-year-coverage");
+const STATE_DIR = path.join(PROJECT_ROOT, datasetDir("estat.year-coverage"));
 const QUEUE_PATH = path.join(STATE_DIR, "queue.json");
 const LATEST_PATH = path.join(STATE_DIR, "LATEST.md");
 

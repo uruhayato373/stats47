@@ -4,6 +4,7 @@ import { ErrorNote, PageHeading, Unmeasured } from "@/components/ops/primitives"
 import { readWeeklyProductRevenue } from "@/lib/server/kpi";
 import { revenueSummary } from "@/lib/server/revenue";
 import { hasError } from "@/lib/server/state-io";
+import { datasetDir, datasetPath } from "../../../../config/datasets.mjs";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "収益 — stats47 admin" };
@@ -28,7 +29,7 @@ export default function RevenuePage() {
     <div className="space-y-8">
       <PageHeading
         title="収益"
-        source=".claude/state/metrics/authenticated/revenue-history.json + .claude/state/products/sales-ledger.json + .claude/state/metrics/adsense/"
+        source={`${datasetDir("revenue.authenticated")}/revenue-history.json + ${datasetPath("sales.ledger")} + ${datasetDir("adsense.reports")}/`}
       />
 
       {/* ★計測範囲。0 と「未計測」を混同させないために必ず出す */}

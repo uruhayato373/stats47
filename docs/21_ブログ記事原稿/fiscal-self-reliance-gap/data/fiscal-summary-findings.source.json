@@ -1,0 +1,42 @@
+{
+  "kind": "authored",
+  "chartType": "findings",
+  "dataFile": "fiscal-summary-findings.json",
+  "note": "authored 要点テキスト (記事本文由来)。2022年度の data JSON と本文に合わせて書き直し、現行の findings-card (見出し+本文) で再生成した",
+  "regenerated": true,
+  "upstream": "記事本文 (authored)。SSOT指標ではない。",
+  "textCalculations": {
+    "note": "本文と要点カードが引用する相関係数の記録。図を最新年で取り直しても自動では更新されないので、取り直したときはここと本文を同時に確かめる",
+    "year": "2022",
+    "formula": "ピアソンの相関係数。x=各指標の47都道府県の値、y=財政力指数 (fiscal-strength-map.json)。r46ExcludingTokyo は東京都 (areaCode 13000) を除く46道府県で同じ式を計算",
+    "inputs": [
+      "fiscal-strength-map.json (財政力指数)",
+      "fiscal-vs-self-financing-scatter.json (自主財源の割合)",
+      "fiscal-vs-allocation-tax-scatter.json (地方交付税の割合)",
+      "current-balance-ratio-prefecture-rankings.json (経常収支比率)",
+      "real-public-debt-service-ratio-prefecture-rankings.json (実質公債費比率)"
+    ],
+    "results": [
+      {
+        "pair": "fiscal-strength-index-prefecture × self-financing-ratio",
+        "r47": 0.9192,
+        "r46ExcludingTokyo": 0.8953
+      },
+      {
+        "pair": "fiscal-strength-index-prefecture × local-allocation-tax-ratio-pref-finance",
+        "r47": -0.9679,
+        "r46ExcludingTokyo": -0.9688
+      },
+      {
+        "pair": "fiscal-strength-index-prefecture × current-balance-ratio",
+        "r47": 0.0926,
+        "r46ExcludingTokyo": 0.5039
+      },
+      {
+        "pair": "fiscal-strength-index-prefecture × real-public-debt-service-ratio",
+        "r47": -0.169,
+        "r46ExcludingTokyo": 0.0716
+      }
+    ]
+  }
+}

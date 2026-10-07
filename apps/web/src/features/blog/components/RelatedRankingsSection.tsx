@@ -1,7 +1,11 @@
 import Link from "next/link";
 
 import { metricDisplayName } from "@stats47/ranking";
-import { getRankingTitle, readRelatedRankingItemsByTagKeysFromR2 } from "@stats47/ranking/server";
+import {
+  getRankingTitle,
+  readRankingItemByKeyAndAreaTypeFromR2,
+  readRelatedRankingItemsByTagKeysFromR2,
+} from "@stats47/ranking/server";
 import { isOk } from "@stats47/types";
 import { BarChart3 } from "lucide-react";
 
@@ -11,26 +15,38 @@ import { getCategoryKeysForBlogTagKeys } from "@/config/category-blog-tag-keys";
 
 interface RelatedRankingsSectionProps {
   tagKeys: string[];
+  /** 記事が図や本文で使う指標 (blog snapshot の rankingRefs)。タグ・カテゴリ経由より先に出す */
+  rankingKeys?: string[];
   compact?: boolean;
 }
 
+const MAX_RANKINGS = 6;
+
 export async function RelatedRankingsSection({
   tagKeys,
+  rankingKeys = [],
   compact = false,
 }: RelatedRankingsSectionProps) {
-  if (tagKeys.length === 0) return null;
+  if (tagKeys.length === 0 && rankingKeys.length === 0) return null;
 
-  const result = await readRelatedRankingItemsByTagKeysFromR2(
-    tagKeys,
-    getCategoryKeysForBlogTagKeys(tagKeys),
-  );
-  if (!isOk(result)) return null;
+  // 記事が実際に使う指標を先に出す。タグ → カテゴリ経由は記事の主題と別の指標が混ざる
+  // (metric の tags は空で、タグからはカテゴリの代表ランキングしか引けない)
+  const [ownResults, result] = await Promise.all([
+    Promise.all(
+      rankingKeys.slice(0, MAX_RANKINGS).map((key) => readRankingItemByKeyAndAreaTypeFromR2(key, "prefecture")),
+    ),
+    tagKeys.length > 0
+      ? readRelatedRankingItemsByTagKeysFromR2(tagKeys, getCategoryKeysForBlogTagKeys(tagKeys))
+      : Promise.resolve(null),
+  ]);
+  const ownItems = ownResults.flatMap((r) => (isOk(r) ? r.data : []));
+  const tagItems = result && isOk(result) ? result.data : [];
 
   const seen = new Set<string>();
   const rankings: { rankingKey: string; title: string }[] = [];
 
-  for (const item of result.data) {
-    if (!seen.has(item.rankingKey) && rankings.length < 6) {
+  for (const item of [...ownItems, ...tagItems]) {
+    if (!seen.has(item.rankingKey) && rankings.length < MAX_RANKINGS) {
       seen.add(item.rankingKey);
       rankings.push({
         rankingKey: item.rankingKey,

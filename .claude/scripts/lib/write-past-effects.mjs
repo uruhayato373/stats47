@@ -7,9 +7,9 @@
  * (候補 736 件に confidence 抑制が一切かかっていなかった) のを閉じる。
  *
  * 台帳 (2 つ):
- *   1. `.claude/state/search-growth/past-effects.json` … `.urls` (key = pathKey or `<type>::<pathKey>`)
+ *   1. `data/search-growth/past-effects.json` … `.urls` (key = pathKey or `<type>::<pathKey>`)
  *      → `.claude/scripts/search-growth/lib/scoring.mjs` が confidence を ×0.6 / ×0.3 する
- *   2. `.claude/state/metrics/adsense/past-effects.json` … `.candidates` (key = `<rule>::<key>`)
+ *   2. `data/adsense/past-effects.json` … `.candidates` (key = `<rule>::<key>`)
  *      → `.claude/scripts/metrics/lib/adsense-diagnostics.mjs` が同様に抑制する
  *
  * key の抽出は**決定的**で、推測しない:
@@ -35,14 +35,15 @@ import { fileURLToPath } from "node:url";
 import { parseBacklog } from "./scan-pending-improvements.mjs";
 import { toPathKey } from "../search-growth/lib/join-url.mjs";
 import { writeJson, readJson } from "../search-growth/lib/state.mjs";
+import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
 
-const SEARCH_GROWTH_LEDGER = path.join(PROJECT_ROOT, ".claude/state/search-growth/past-effects.json");
-const ADSENSE_LEDGER = path.join(PROJECT_ROOT, ".claude/state/metrics/adsense/past-effects.json");
-const BRUSHUP_HISTORY = path.join(PROJECT_ROOT, ".claude/state/blog/auto-brushup-history.json");
+const SEARCH_GROWTH_LEDGER = path.join(PROJECT_ROOT, `${datasetDir("search-growth.state")}/past-effects.json`);
+const ADSENSE_LEDGER = path.join(PROJECT_ROOT, datasetPath("adsense.past-effects"));
+const BRUSHUP_HISTORY = path.join(PROJECT_ROOT, `${datasetDir("blog.operations")}/auto-brushup-history.json`);
 
 /** サイト内 path として認識する第 1 セグメント (url-policy の実在ルートに限る)。 */
 const SITE_ROOTS = [

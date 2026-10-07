@@ -16,7 +16,7 @@
  *
  * 出力:
  *   .claude/skills/blog/analyze-winning-patterns/reference/reports/<date>.md
- *   .claude/state/blog/winning-patterns.json                   機械向け (featureSignals + perArticleConformance)
+ *   data/blog/winning-patterns.json                   機械向け (featureSignals + perArticleConformance)
  *
  * 主指標 = CTR (同 impression 条件での "魅力") + 掲載順位 (position)。
  * 生クリック数は検索需要の母数に交絡するため補助。滞在 (GA4) は将来拡張 (per-page snapshot が要る)。
@@ -34,6 +34,7 @@ import { fileURLToPath } from "node:url";
 
 import { isAnchorRow } from "../gsc/analyze-ctr-seesaw.mjs";
 import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -46,12 +47,12 @@ const getArg = (flag, def) => {
   return i >= 0 ? args[i + 1] : def;
 };
 const MIN_IMP = parseInt(getArg("--min-imp", "15"), 10); // 評価対象にする最低 impression
-const JSON_OUT = getArg("--json", path.join(PROJECT_ROOT, ".claude/state/blog/winning-patterns.json"));
+const JSON_OUT = getArg("--json", path.join(PROJECT_ROOT, `${datasetDir("blog.operations")}/winning-patterns.json`));
 const CONCURRENCY = 8;
 
 // ── 1. GSC 最新 snapshot ─────────────────────────────────────────────
 function findLatestGscSnapshot() {
-  const dir = path.join(PROJECT_ROOT, ".claude/skills/analytics/gsc-improvement/reference/snapshots");
+  const dir = path.join(PROJECT_ROOT, datasetDir("gsc.snapshots"));
   if (!fs.existsSync(dir)) return null;
   const weeks = fs.readdirSync(dir).filter((d) => /^\d{4}-W\d{2}$/.test(d)).sort();
   for (let i = weeks.length - 1; i >= 0; i--) {
@@ -354,7 +355,7 @@ async function main() {
   process.stderr.write(`勝ち要因解析: GSC 読み込み中...\n`);
   const gsc = loadGsc();
   if (!gsc.bySlug.size) {
-    console.error("[error] GSC snapshot が見つからない (.claude/skills/analytics/gsc-improvement/reference/snapshots/)");
+    console.error(`[error] GSC snapshot が見つからない (${datasetDir("gsc.snapshots")}/)`);
     process.exit(1);
   }
   const published = await loadPublishedSlugs();

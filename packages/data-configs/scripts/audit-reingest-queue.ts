@@ -35,7 +35,7 @@
  * だけを見る。ここでは config への編集がほぼ確実に是正なので、日付が意味を持つ。
  * 全 metric の乖離は全面再生成後に検査(k) が担う。
  *
- * 出力: .claude/state/data/reingest-queue.json (機械) + LATEST.md (人間)
+ * 出力: data/data-quality/reingest-queue.json (機械) + LATEST.md (人間)
  *
  * 正典: .claude/rules/metric-config-standards.md §分類軸は必ず 1 系列に絞る
  */
@@ -52,10 +52,11 @@ import {
   type ReingestAssessment,
 } from "../src/reingest-need";
 import { SITE } from "@stats47/types";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
-const STATE_DIR = path.join(PROJECT_ROOT, ".claude/state/data");
+const STATE_DIR = path.join(PROJECT_ROOT, datasetDir("data-quality.state"));
 const R2 = process.env.R2_PUBLIC_FETCH_URL || SITE.r2PublicBaseUrl;
 
 const args = process.argv.slice(2);

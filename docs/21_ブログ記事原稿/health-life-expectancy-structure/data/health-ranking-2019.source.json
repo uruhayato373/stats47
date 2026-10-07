@@ -1,0 +1,15 @@
+{
+  "kind": "ranking",
+  "rankingKey": "healthy-life-expectancy-male",
+  "year": "2019",
+  "unit": "年",
+  "label": "健康寿命（男性）",
+  "readerLabel": "健康寿命（男性）",
+  "transform": "all47 (図には使わない。本文が2019年から2022年への順位の入れ替わりを書くときの照合用の2019年値)",
+  "source": "r2:app/ranking/healthy-life-expectancy-male/values.json",
+  "upstream": "metric config (packages/data-configs) → 厚生労働省「健康寿命の令和4年値について」(manual 取り込み) → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug health-life-expectancy-structure --keys healthy-life-expectancy-male --year 2019 --data-name health-ranking-2019",
+  "fetchedAt": "2026-10-07T05:43:05.031Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs",
+  "note": "本文の「2019年の順位」の根拠。2019年は男性の健康寿命の比較の起点で、図は health-year-shift-scatter が2019年と2022年を重ねて描く。"
+}

@@ -15,11 +15,11 @@ import { createObservation } from "./contracts.mjs";
 import { freshnessForSource, FRESHNESS_STALE_DEFAULT_DAYS } from "./freshness.mjs";
 import { toPathKey, SITE_ORIGIN } from "./join-url.mjs";
 import { redactString } from "./redaction.mjs";
-import { datasetDir } from "../../../../config/datasets.mjs";
+import { datasetDir, datasetPath } from "../../../../config/datasets.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 export const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..", "..");
-const LIVE_DIR = path.join(PROJECT_ROOT, ".claude/state/search-growth/live");
+const LIVE_DIR = path.join(PROJECT_ROOT, `${datasetDir("search-growth.state")}/live`);
 
 // ── CSV / week helpers ────────────────────────────────────────────────
 
@@ -104,7 +104,7 @@ const GSC = {
   secretName: "GOOGLE_SERVICE_ACCOUNT_KEY_JSON",
   liveScript: ".claude/scripts/metrics/fetch-gsc-snapshot.mjs",
   normalize(root, now) {
-    const dir = path.join(root, ".claude/skills/analytics/gsc-improvement/reference/snapshots");
+    const dir = path.join(root, datasetDir("gsc.snapshots"));
     const week = latestWeekDir(dir);
     if (!week) return { observedAt: null };
     const file = path.join(dir, week, "pages.csv");
@@ -139,7 +139,7 @@ const GA4 = {
   secretName: "GA4_PROPERTY_ID",
   liveScript: ".claude/scripts/metrics/fetch-ga4-snapshot.mjs",
   normalize(root, now) {
-    const dir = path.join(root, ".claude/skills/analytics/ga4-improvement/reference/snapshots");
+    const dir = path.join(root, datasetDir("ga4.snapshots"));
     const week = latestWeekDir(dir);
     if (!week) return { observedAt: null };
     const file = path.join(dir, week, "pages.csv");
@@ -216,7 +216,7 @@ const COVERAGE = {
   staleAfterDays: 14,
   api: "repo:coverage-remediation-queue",
   normalize(root, now) {
-    const file = path.join(root, ".claude/state/gsc/coverage-remediation-queue.json");
+    const file = path.join(root, datasetPath("gsc.coverage-queue"));
     if (!fs.existsSync(file)) return { observedAt: null };
     const j = JSON.parse(fs.readFileSync(file, "utf8"));
     const generatedAt = j.generated_at ?? fs.statSync(file).mtime.toISOString();
@@ -261,7 +261,7 @@ const INSPECTION = {
   secretName: "GOOGLE_SERVICE_ACCOUNT_KEY_JSON",
   liveScript: ".claude/scripts/gsc/url-inspection-daily.cjs",
   normalize(root, now) {
-    const dir = path.join(root, ".claude/state/metrics/gsc/url-inspection");
+    const dir = path.join(root, datasetDir("gsc.url-inspection"));
     const file = newestFile(dir, /^\d{4}-\d{2}-\d{2}\.csv$/);
     if (!file) return { observedAt: null };
     const { header, rows } = parseCsv(fs.readFileSync(file, "utf8"));
@@ -307,7 +307,7 @@ const CLOUDFLARE = {
   secretName: "CLOUDFLARE_API_TOKEN",
   liveScript: ".claude/scripts/cloudflare/fetch-usage.mjs",
   normalize(root, now) {
-    const dir = path.join(root, ".claude/state/metrics/cloudflare/snapshots");
+    const dir = path.join(root, datasetDir("cloudflare.snapshots"));
     const file = newestFile(dir, /^\d{4}-\d{2}-\d{2}\.json$/);
     if (!file) return { observedAt: null };
     const j = JSON.parse(fs.readFileSync(file, "utf8"));
@@ -331,7 +331,7 @@ const CLOUDFLARE = {
 function defaultProbeUrls(root, sampleSize) {
   const controls = ["/", "/ranking/taxable-income-per-capita", "/areas/13000", "/blog"];
   let picks = [];
-  const candFile = path.join(root, ".claude/state/search-growth/candidates.json");
+  const candFile = path.join(root, `${datasetDir("search-growth.state")}/candidates.json`);
   if (fs.existsSync(candFile)) {
     try {
       const j = JSON.parse(fs.readFileSync(candFile, "utf8"));
@@ -356,7 +356,7 @@ const SITEMAP = {
     return { source: "sitemap", status: r.ok ? (r.truncated ? "partial" : "success") : "failed", count: r.pathKeys.length, file: rel(file), error: r.error };
   },
   normalize(root, now) {
-    const file = path.join(root, ".claude/state/search-growth/live/sitemap.json");
+    const file = path.join(root, `${datasetDir("search-growth.state")}/live/sitemap.json`);
     if (!fs.existsSync(file)) return { observedAt: null };
     const j = JSON.parse(fs.readFileSync(file, "utf8"));
     if (!j.ok) return { observedAt: j.observedAt, observations: [] };
@@ -364,7 +364,7 @@ const SITEMAP = {
     const freshness = freshnessForSource({ status: j.truncated ? "partial" : "success", observedAt, now, staleAfterDays: this.staleAfterDays });
     const set = new Set(j.pathKeys);
     // inSitemap は probe 済み URL 分だけ emit して肥大を防ぐ (indexability-conflict に必要な範囲)。
-    const httpFile = path.join(root, ".claude/state/search-growth/live/http.json");
+    const httpFile = path.join(root, `${datasetDir("search-growth.state")}/live/http.json`);
     let probed = [];
     if (fs.existsSync(httpFile)) {
       try { probed = (JSON.parse(fs.readFileSync(httpFile, "utf8")).probes ?? []).map((p) => toPathKey(p.url)).filter(Boolean); } catch { /* */ }
@@ -397,7 +397,7 @@ const HTTP_LIVE = {
     return { source: "http", status: failed === probes.length ? "failed" : failed ? "partial" : "success", count: probes.length, file: rel(file) };
   },
   normalize(root, now) {
-    const file = path.join(root, ".claude/state/search-growth/live/http.json");
+    const file = path.join(root, `${datasetDir("search-growth.state")}/live/http.json`);
     if (!fs.existsSync(file)) return { observedAt: null };
     const j = JSON.parse(fs.readFileSync(file, "utf8"));
     const observedAt = j.observedAt;

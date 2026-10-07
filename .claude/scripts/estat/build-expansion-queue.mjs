@@ -15,8 +15,8 @@
  * ★計測ゲート: measured の gsc 流入を categoryTraffic に集計し、流入の付いたカテゴリの
  *   pending を優先する (闇雲に増やさず「流入が付いた系統だけ深掘り」= thin-content 回避)。
  *
- * 真実源: .claude/state/estat/expansion-queue.json (git tracked, 状態を保持)
- * 入力  : .claude/state/estat/ssds-candidates.json (enumerate-ssds-indicators.mjs → CI で再生成)
+ * 真実源: data/estat/expansion-queue.json (git tracked, 状態を保持)
+ * 入力  : data/estat/ssds-candidates.json (enumerate-ssds-indicators.mjs → CI で再生成)
  *
  * Usage:
  *   node .claude/scripts/estat/build-expansion-queue.mjs                 # 構築/更新 (状態を保ったまま upsert)
@@ -29,11 +29,12 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..", "..", "..");
-const CAND_FILE = path.join(ROOT, ".claude/state/estat/ssds-candidates.json");
-const QUEUE_FILE = path.join(ROOT, ".claude/state/estat/expansion-queue.json");
+const CAND_FILE = path.join(ROOT, `${datasetDir("estat.candidates")}/ssds-candidates.json`);
+const QUEUE_FILE = path.join(ROOT, `${datasetDir("estat.candidates")}/expansion-queue.json`);
 const METRICS_DIR = path.join(ROOT, "packages/data-configs/src/metrics");
 const KNOWN_FILE = path.join(ROOT, "packages/ranking/src/config/known-ranking-keys.ts");
 

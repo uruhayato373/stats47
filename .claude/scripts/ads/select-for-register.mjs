@@ -15,12 +15,13 @@ import { createRequire } from "node:module";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 const require = createRequire(import.meta.url);
 const core = require("./lib/a8-scout-core.mjs");
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
-const CATALOG = path.join(PROJECT_ROOT, ".claude/state/ads/a8-catalog.json");
-const INVENTORY = path.join(PROJECT_ROOT, ".claude/state/ads/inventory-latest.json");
+const CATALOG = path.join(PROJECT_ROOT, datasetPath("a8.catalog"));
+const INVENTORY = path.join(PROJECT_ROOT, `${datasetDir("affiliate.inventory")}/inventory-latest.json`);
 
 const args = process.argv.slice(2);
 const APPLY = args.includes("--apply");

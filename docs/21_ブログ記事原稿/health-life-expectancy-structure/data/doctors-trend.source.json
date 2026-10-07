@@ -1,0 +1,15 @@
+{
+  "kind": "calculated",
+  "year": "1976-2022 (2年おき)",
+  "inputs": [
+    {
+      "rankingKey": "physicians-in-medical-facilities",
+      "role": "sum over 47 prefectures"
+    }
+  ],
+  "formula": "value[万人] = 47都道府県の医師数 (physicians-in-medical-facilities, 医療施設に従事する医師数) の合計[人] / 10000 (小数第2位に丸め)",
+  "source": "r2:app/ranking/physicians-in-medical-facilities/values.json",
+  "fetchedAt": "2026-10-07T05:41:08.112Z",
+  "restore": "physicians-in-medical-facilities の values.json (R2 app/ranking の partitions) から 1976〜2022 年の 2 年おきの年を取り、年ごとに 47 都道府県の value を合計して 10000 で割る。専用の取得スクリプトは無い",
+  "note": "年は x 軸の間隔を揃えるため 1976 年から 2 年おきに取る。合計は json の totals に人単位で残す。"
+}

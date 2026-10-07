@@ -12,7 +12,7 @@ metadata:
 **判断**: 瞬発力のボトルネックは DBクエリ速度ではなく「①ネタ→指標の発見」「②指標→ビジュアル生成」だった(調査で確定)。D1(=エッジ配信用)は用途違いかつ Phase6 肥大→解約を再発させる。「ローカルで即触りたい」直感の正解形は **R2から再生成できるローカル索引JSON(DBレス互換の使い捨てキャッシュ)**。相関は既に `app/correlation/by-ranking-key/<key>.json` にあり1 fetchで横展開ネタが取れる(SNS用途で未活用だった)。任意指標×任意の即席横断が本当に要る将来のみ DuckDBミラー(これもDBレス互換)。
 
 **新設 (Phase 1・全て検証済)**:
-- `.claude/scripts/sns/build-discovery-index.ts` → `.claude/state/sns/metric-discovery-index.json`(2211件、git TS から再生成)
+- `.claude/scripts/sns/build-discovery-index.ts` → `data/sns/metric-discovery-index.json`(2211件、git TS から再生成)
 - `.claude/scripts/sns/find-metrics.mjs` — 自由文トピック→指標keyランキング(--top/--json)
 - `.claude/scripts/sns/news-synonyms.json` — ニュース語→指標語彙 同義語76見出し(移住→転入/転出 等)
 - `.claude/scripts/sns/quick-still.ts` — 指標key→R2 fetch→上位5下位5 SVG(横960x404/IG縦1080x1350)+PNG(sharp)+caption.txt。**記事(article.md)非依存**。出力 `.local/sns-quick/<key>/`

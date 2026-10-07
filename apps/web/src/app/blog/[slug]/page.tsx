@@ -23,6 +23,7 @@ import { ArticleCard } from "@/components/surface";
 import {
     BannerAd,
     OperatorProfileCard,
+    RelatedAmazonBook,
 } from "@/features/ads";
 import { resolveContentVertical } from "@/features/ads/constants/affiliate-category";
 import { applyBlogAffiliatePolicy, resolveBlogBannerInput } from "@/features/ads/constants/blog-affiliate-policy";
@@ -37,13 +38,16 @@ import {
     findArticleBySlug,
     findArticleTitlesBySlugs,
     getTagKeysForArticle,
+    getRankingKeysForArticle,
+    listArticlesUsingRankingKeys,
     articleService,
     resolveArticleDataSources,
     resolveArticleSurveyTaxonomy,
 } from "@/features/blog/server";
-import { BlogProductCta } from "@/features/products";
+import { BlogProductCta, findKindleProductForBlog } from "@/features/products";
 import { SurveyTaxonomyCard } from "@/features/survey";
 import { ALL_THEMES } from "@/features/theme-dashboard/listing.server";
+import { listRelatedThemesForRankingKeys } from "@/features/theme-dashboard/server";
 
 import { getRequiredBaseUrl } from "@/lib/env";
 import { blogThumbnailUrl } from "@/lib/metadata/ogp-image";
@@ -99,7 +103,26 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     return generateBlogMetadata({ title, description, slug });
 }
 
-async function getRelatedArticles(tagKeys: string[], currentSlug: string) {
+type RelatedArticle = Pick<Article, "slug" | "title">;
+
+/**
+ * 関連記事 = 同じ指標を使う記事 → 同じタグの記事 → 新着 の順で 5 件まで。
+ * 同じ指標を使う記事は、タグの付け方に依らず「同じデータを別の角度で読む」記事になる。
+ */
+async function getRelatedArticles(
+    tagKeys: string[],
+    rankingKeys: string[],
+    currentSlug: string,
+): Promise<RelatedArticle[]> {
+    const byMetric = await listArticlesUsingRankingKeys(rankingKeys, { excludeSlug: currentSlug, limit: 5 });
+    const byTag = await getTagRelatedArticles(tagKeys, currentSlug);
+    const seen = new Set<string>([currentSlug]);
+    return [...byMetric, ...byTag]
+        .filter((a) => !seen.has(a.slug) && seen.add(a.slug))
+        .slice(0, 5);
+}
+
+async function getTagRelatedArticles(tagKeys: string[], currentSlug: string) {
     if (tagKeys.length === 0) {
         const latest = await listLatestArticles(6);
         return latest.filter((a) => a.slug !== currentSlug);
@@ -203,7 +226,17 @@ export default async function BlogPostPage({ params }: PageProps) {
         vertical: resolveContentVertical(affiliateInput).vertical,
     });
     // relatedArticles は tagKeys に依存するため、上段の並列取得後に解決する。
-    const relatedArticles = await getRelatedArticles(tagKeys, slug);
+    const articleRankingKeys = await getRankingKeysForArticle(slug);
+    const relatedArticles = await getRelatedArticles(tagKeys, articleRankingKeys, slug);
+    // 記事が使う指標を主指標・副指標に持つテーマを先に、足りない分は既定のテーマで埋める
+    const seenThemes = new Set<string>();
+    const railThemes = [
+        ...listRelatedThemesForRankingKeys(articleRankingKeys, { limit: 6 }),
+        ...BLOG_RAIL_THEMES,
+    ]
+        .filter((theme) => !seenThemes.has(theme.themeKey) && seenThemes.add(theme.themeKey))
+        .slice(0, 6)
+        .map((theme) => ({ themeKey: theme.themeKey, title: theme.title }));
 
     const baseUrl = getRequiredBaseUrl();
     const R2_PUBLIC_URL = process.env.NEXT_PUBLIC_R2_PUBLIC_URL || R2_PUBLIC_BASE_URL;
@@ -240,7 +273,7 @@ export default async function BlogPostPage({ params }: PageProps) {
     // レール通常領域: 関連コンテンツ → 文脈一致広告 → 探索導線 → 運営者の順。
     const rail = (
         <>
-            <RelatedRankingsSection tagKeys={tagKeys} compact />
+            <RelatedRankingsSection tagKeys={tagKeys} rankingKeys={articleRankingKeys} compact />
 
             <SurveyTaxonomyCard
                 surveys={articleSurveys}
@@ -300,7 +333,7 @@ export default async function BlogPostPage({ params }: PageProps) {
 
                 <RailDataDiscoveryCards
                     categories={BLOG_RAIL_CATEGORIES}
-                    themes={BLOG_RAIL_THEMES}
+                    themes={railThemes}
                     prefectures={BLOG_RAIL_PREFECTURES}
                     trackingSurface="blog_sidebar"
                 />
@@ -398,6 +431,8 @@ export default async function BlogPostPage({ params }: PageProps) {
                     </ArticleCard>
 
                     <BlogProductCta blogSlug={slug} />
+                    {/* 自社 Kindle 本が無い記事だけ、バナーと同じ vertical に合う一般書籍 (Amazon) を出す */}
+                    {!findKindleProductForBlog(slug) && <RelatedAmazonBook vertical={bannerVertical} />}
 
                     {/* PC・モバイル共通の読了導線。右レールとの重複は作らない。 */}
                     {rakutenPlacement && (
@@ -419,7 +454,7 @@ function BlogRelatedArticlesSection({
     articles,
     currentSlug,
 }: {
-    articles: Article[];
+    articles: RelatedArticle[];
     currentSlug: string;
 }) {
     const filtered = articles.filter((a) => a.slug !== currentSlug);

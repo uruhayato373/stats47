@@ -16,11 +16,12 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
-const QUEUE_PATH = path.join(PROJECT_ROOT, ".claude/state/blog/remediation-queue.json");
+const QUEUE_PATH = path.join(PROJECT_ROOT, `${datasetDir("blog.operations")}/remediation-queue.json`);
 
 const args = process.argv.slice(2);
 const getArg = (flag, fallback) => {
@@ -57,15 +58,15 @@ lines.push("```");
 lines.push(`/brushup-blog --target queue --next ${N}`);
 lines.push("```");
 lines.push("");
-lines.push(`**残 pending: ${s.pending ?? pending.length} 件** (must-fix ${s.mustFixPending ?? "?"} / opportunity ${s.opportunityPending ?? "?"}) — GSC週: ${q.gscWeek || "?"}`);
+lines.push(`**残 pending: ${s.pending ?? pending.length} 件** (must-fix ${s.mustFixPending ?? "?"} / data-refresh ${s.dataRefreshPending ?? 0} / opportunity ${s.opportunityPending ?? "?"}) — GSC週: ${q.gscWeek || "?"}`);
 lines.push("");
 lines.push("| # | slug | lane | lift/月 | imp | blocker/warn | 主因 |");
 lines.push("|---|---|---|---|---|---|---|");
 top.forEach((e, i) => {
   const flag =
     (e.quality?.flags || [])
-      .filter((f) => typeof f === "string" && f.startsWith("blocker"))
-      .map((f) => f.replace(/^blocker:\s*/, ""))
+      .filter((f) => typeof f === "string" && (f.startsWith("blocker") || f.startsWith("data-refresh")))
+      .map((f) => f.replace(/^(blocker|data-refresh):\s*/, ""))
       .slice(0, 1)
       .join("") || "—";
   lines.push(

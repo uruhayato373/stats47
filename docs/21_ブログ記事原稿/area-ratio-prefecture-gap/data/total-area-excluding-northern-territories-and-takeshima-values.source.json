@@ -1,0 +1,15 @@
+{
+  "kind": "ranking",
+  "rankingKey": "total-area-excluding-northern-territories-and-takeshima",
+  "year": "2024",
+  "unit": "ｈａ",
+  "label": "総面積",
+  "readerLabel": "総面積",
+  "transform": "all47 (本文の数値を照合するための入力。この指標の図は作らない)",
+  "source": "r2:app/ranking/total-area-excluding-northern-territories-and-takeshima/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug area-ratio-prefecture-gap --keys total-area-excluding-northern-territories-and-takeshima --data-name total-area-excluding-northern-territories-and-takeshima-values",
+  "fetchedAt": "2026-10-07T06:53:02.398Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs",
+  "note": "本文の平方キロメートルは value(ｈａ)÷100 の換算値 (1平方キロメートル=100ｈａ)"
+}

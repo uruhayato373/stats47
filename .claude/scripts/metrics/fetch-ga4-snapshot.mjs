@@ -4,7 +4,7 @@
  * 引数:
  *   YYYY-Www (省略時は今日 JST の ISO 週。未来週は失敗する)
  *
- * 出力先: .claude/skills/analytics/ga4-improvement/reference/snapshots/<YYYY-Www>/
+ * 出力先: data/ga4/snapshots/<YYYY-Www>/
  *   - overview/pages/channels/devices/daily.csv … raw ローリング28日 (機会発見 + pollution 監視用)
  *   - pages-clean.csv / theme-navigation.csv + *.meta.json … Japan-only ローリング28日
  *   - survey-navigation.csv … Japan-only の survey→ranking nav_click (ローリング28日)
@@ -47,6 +47,7 @@ import {
   measurementRow,
 } from "./lib/journey-ga4-reports.mjs";
 import { GA4_PROPERTY_ID } from "../lib/site-config.cjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const DEFAULT_PROPERTY_ID = GA4_PROPERTY_ID;
 const SCOPES = ["https://www.googleapis.com/auth/analytics.readonly"];
@@ -136,7 +137,7 @@ async function main() {
   const periods = resolvePeriods({ source: "ga4", week });
   const rollingRange = [{ startDate: periods.rolling28d.periodStart, endDate: periods.rolling28d.periodEnd }];
 
-  const outDir = join(PROJECT_ROOT, ".claude/skills/analytics/ga4-improvement/reference/snapshots", week);
+  const outDir = join(PROJECT_ROOT, datasetDir("ga4.snapshots"), week);
   mkdirSync(outDir, { recursive: true });
 
   const auth = new google.auth.GoogleAuth({ keyFile, scopes: SCOPES });

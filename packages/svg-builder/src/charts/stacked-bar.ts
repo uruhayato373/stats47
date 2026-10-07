@@ -292,7 +292,9 @@ function generateHorizontal(
       );
 
       if (barW > 28) {
-        const label = normalized ? `${rawVals[si].toFixed(1)}%` : `${vals[si].toFixed(1)}%`;
+        // vals は normalized のとき構成比、そうでないときは入力そのもの (横向きは構成比の入力を前提にする)。
+        // 2026-10-07 まで normalized で生値に % を付けて「7347.0%」と出していた
+        const label = `${vals[si].toFixed(1)}%`;
         bars.push(
           `  <text x="${(xCursor + barW / 2).toFixed(1)}" y="${(barTop + BAR_H / 2 + 4).toFixed(1)}" text-anchor="middle" font-size="8.5" fill="#fff">${label}</text>`,
         );

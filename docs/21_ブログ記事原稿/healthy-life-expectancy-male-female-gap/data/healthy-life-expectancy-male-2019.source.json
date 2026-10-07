@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "healthy-life-expectancy-male",
+  "year": "2019",
+  "unit": "年",
+  "label": "健康寿命（男性）",
+  "readerLabel": "健康寿命（男性）",
+  "transform": "all47 (2019年の比較用データ。図には使わず本文の年比較にだけ使う)",
+  "source": "r2:app/ranking/healthy-life-expectancy-male/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug healthy-life-expectancy-male-female-gap --keys healthy-life-expectancy-male --year 2019 --data-name healthy-life-expectancy-male-2019",
+  "fetchedAt": "2026-10-07T05:53:12.099Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

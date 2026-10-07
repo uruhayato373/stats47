@@ -3,6 +3,7 @@ import { Section } from "@/components/layout-primitives";
 import { ErrorNote, Freshness, PageHeading } from "@/components/ops/primitives";
 import { opsSummary } from "@/lib/server/ops-ledger";
 import { hasError } from "@/lib/server/state-io";
+import { datasetDir } from "../../../../config/datasets.mjs";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "CI・台帳 — stats47 admin" };
@@ -12,7 +13,7 @@ export default function OpsPage() {
 
   return (
     <div className="space-y-8">
-      <PageHeading title="CI・台帳" source=".claude/state/ci/ ・ .claude/memory/" />
+      <PageHeading title="CI・台帳" source={`${datasetDir("ci.health")}/ ・ .claude/memory/`} />
 
       {/* CI 健全性 */}
       <Section title="workflow の健全性">

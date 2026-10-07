@@ -211,7 +211,7 @@ do_update(){
 import json,os
 from datetime import date
 slug=os.environ['SLUG']
-p='.claude/state/note-published-urls.json'
+p='data/note/note-published-urls.json'
 d=json.load(open(p))
 if slug in d['articles']:
     d['articles'][slug]['updated_at']=date.today().isoformat()
@@ -278,7 +278,7 @@ process_article(){
     for i in $(seq 0 $((NAFF-1))); do
       local AFF_ID=$(jq -r ".affiliateBanners[$i].id" "$J")
       local AFF_ANCHOR=$(jq -r ".affiliateBanners[$i].anchor" "$J")
-      local AFF_PNG="/Users/minamidaisuke/stats47/.claude/assets/affiliate-banners/${AFF_ID}.png"
+      local AFF_PNG="/Users/minamidaisuke/stats47/assets/affiliate-banners/${AFF_ID}.png"
       local AFF_URL
       AFF_URL=$(get_affiliate_url "$AFF_ID")
       if [ -z "$AFF_URL" ]; then echo "  [WARN] unknown affiliate id: $AFF_ID"; continue; fi

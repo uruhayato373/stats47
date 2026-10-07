@@ -25,12 +25,13 @@ import {
   planCoverageCards,
   staleBatchFiles,
 } from "./lib/coverage-backlog.mjs";
+import { datasetPath } from "../../../config/datasets.mjs";
 
 const require = createRequire(import.meta.url);
 const { parseBacklog } = require("../lib/backlog-lib.cjs");
 
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
-const QUEUE_PATH = path.join(PROJECT_ROOT, ".claude/state/gsc/coverage-remediation-queue.json");
+const QUEUE_PATH = path.join(PROJECT_ROOT, datasetPath("gsc.coverage-queue"));
 const BACKLOG_PATH = path.join(PROJECT_ROOT, ".claude/todo/backlog.md");
 const dryRun = process.argv.includes("--dry-run");
 

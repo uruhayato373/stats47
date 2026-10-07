@@ -104,4 +104,4 @@ JS
 
 - `/fetch-gsc-data` — GSC 検索パフォーマンス取得（同じサービスアカウント鍵を再利用）
 - `/deploy` — middleware / sitemap.ts 変更後、本スキルを続けて呼ぶと効果的
-- `.claude/skills/analytics/gsc-improvement/reference/improvement-log.md` — 施策効果の観測ログ
+- `data/improvement/gsc-improvement/improvement-log.md` — 施策効果の観測ログ

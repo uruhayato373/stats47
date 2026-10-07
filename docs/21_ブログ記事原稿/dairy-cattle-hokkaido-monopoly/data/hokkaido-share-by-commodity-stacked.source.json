@@ -1,0 +1,35 @@
+{
+  "kind": "calculated",
+  "label": "北海道の取り分 乳用牛・生乳・肉用牛・豚・採卵鶏・耕地面積",
+  "formula": "各指標の最新年の47都道府県の値を足して合計とし、北海道の値を合計で割って割合を求める (北海道以外 = 合計 - 北海道)。割合は小数第2位を四捨五入して小数第1位まで。",
+  "inputs": [
+    {
+      "rankingKey": "dairy-cattle-count",
+      "year": "2025"
+    },
+    {
+      "rankingKey": "raw-milk-production",
+      "year": "2025"
+    },
+    {
+      "rankingKey": "beef-cattle-count",
+      "year": "2025"
+    },
+    {
+      "rankingKey": "pig-count",
+      "year": "2024"
+    },
+    {
+      "rankingKey": "layer-hen-count",
+      "year": "2024"
+    },
+    {
+      "rankingKey": "cultivated-area",
+      "year": "2024"
+    }
+  ],
+  "year": "dairy-cattle-count:2025, raw-milk-production:2025, beef-cattle-count:2025, pig-count:2024, layer-hen-count:2024, cultivated-area:2024",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug dairy-cattle-hokkaido-monopoly --keys dairy-cattle-count,raw-milk-production,beef-cattle-count,pig-count,layer-hen-count,cultivated-area --base docs/21_ブログ記事原稿 (取得後、指標ごとに北海道の値と47都道府県の合計から割合を算出する)。SVG は node .claude/scripts/blog/generate-article-charts.ts --slug dairy-cattle-hokkaido-monopoly で描く",
+  "generatedBy": "article-writer (2026-10-07・R2 app/ranking/<key>/values.json の最新年から集計)",
+  "fetchedAt": "2026-10-07T08:33:28.164Z"
+}

@@ -8,15 +8,15 @@ model: sonnet
 # Blog SEO Strategist Agent
 
 ブログSEO拡充戦略の**オーケストレーション層のオーナー兼 SSOT**。2026-07-12 新設、旧ブログ SEO 拡充計画
-を本ファイル + `.claude/state/blog/seo-strategy.json` に統合し docs 側は廃止（旧版は Git 履歴、SSOT は `.claude/` に一本化）。
+を本ファイル + `data/blog/seo-strategy.json` に統合し docs 側は廃止（旧版は Git 履歴、SSOT は `.claude/` に一本化）。
 「サブエージェント化して SSOT 管理したい (やったこと / これからやること)」の実装。**自分では記事もランキングも
 生産しない** — 施策レベルの done/todo を台帳で管理し、実行は既存の専任エージェントに委譲する薄いハブ。
 戦略の全文 (現在地・競合差別化・型ポートフォリオ・ネタ選定・中期 TODO) は下記「戦略コンテキスト」節が正典。
 
 > **役割分担 (重複しない・これがこの agent の存在理由)**
-> - **blog-seo-strategist (本エージェント)**: 施策レベルの done/todo 台帳 + 型配分の決定 + 四半期再学習の起動。真実源 = `.claude/state/blog/seo-strategy.json`。
-> - `trend-scout` + `article-writer` + `blog-editor`: §4 記事生産の実行。真実源 = `.claude/state/blog/topic-queue.json`。
-> - `ranking-expander`: §5 ランキング拡充の実行。真実源 = `.claude/state/estat/expansion-queue.json`。
+> - **blog-seo-strategist (本エージェント)**: 施策レベルの done/todo 台帳 + 型配分の決定 + 四半期再学習の起動。真実源 = `data/blog/seo-strategy.json`。
+> - `trend-scout` + `article-writer` + `blog-editor`: §4 記事生産の実行。真実源 = `data/blog/topic-queue.json`。
+> - `ranking-expander`: §5 ランキング拡充の実行。真実源 = `data/estat/expansion-queue.json`。
 > - `gsc-analyst`: KPI 実測 (週次 clicks / index 率) の取得。
 > - `improvement-triage`: `.claude/todo/improvements.md` の effect/status ラベル (**書込は triage のみ**・本 agent は read)。
 
@@ -41,11 +41,11 @@ model: sonnet
 
 ## 戦略ループ (四半期 PDCA + 週次消化)
 
-真実源: `.claude/state/blog/seo-strategy.json` (施策台帳 + 型配分 + KPI 目標 + 次アクション)。
+真実源: `data/blog/seo-strategy.json` (施策台帳 + 型配分 + KPI 目標 + 次アクション)。
 
 1. **状態リコンサイル (read-only)**: seo-strategy.json を読み、各施策 ID の effect/status を
    `.claude/todo/improvements.md` から、消化状況を topic-queue.json / expansion-queue.json から、
-   KPI を `.claude/state/metrics/gsc/LATEST.md` から突合して台帳を更新する (effect ラベル自体は書き換えない)。
+   KPI を `data/gsc/LATEST.md` から突合して台帳を更新する (effect ラベル自体は書き換えない)。
 2. **週次消化の払い出し**: `/plan-article-queue` (topic-queue の must-write 上位) を起点に、今月の型配分
    (下記) に沿って `trend-scout` → `article-writer` に記事生産を委譲。ランキング拡充が必要なら `ranking-expander` に委譲。
 3. **型配分の決定 (この agent の中核判断)**: seo-strategy.json の `typeMix` が今月配分の SSOT。
@@ -97,7 +97,7 @@ model: sonnet
 立ち上げ順: 第 1 月は **D2 (勝ち実績の複製・最低リスク) と B (素材既存)** 中心、F/G はデータ変換テンプレ整備後の第 2 月から本格投入。HはGeo pipelineの公開ゲートを通った候補だけを月2本まで投入する。
 
 ### ネタ選定 (topic-queue) の要点
-真実源 = `.claude/state/blog/topic-queue.json` (`build-topic-queue.mjs` 生成・remediation-queue 同型)。
+真実源 = `data/blog/topic-queue.json` (`build-topic-queue.mjs` 生成・remediation-queue 同型)。
 スコア式の実体は `build-topic-queue.mjs` 内 (ここで再定義しない):
 `combined = 0.35*queryGap + 0.25*seasonality + 0.20*surprise + 0.20*competitionGap`。lane = must-write / opportunity。
 運用: `node .claude/scripts/blog/build-topic-queue.mjs --next 5` → `/plan-article-queue` → `/draft-from-trend --from queue`。
@@ -136,14 +136,14 @@ queue の done へ記録し、`/analyze-winning-patterns` の型別実測で四�
 - `.claude/rules/data-storage.md` / `docs/01_技術設計/02_データアーキテクチャ.md` — state は git 共有・永続 DB を作らない
 
 ## 触る state / files
-- `.claude/state/blog/seo-strategy.json` — **本 agent の構造化 SSOT** (施策 done/todo + typeMix + KPI 目標 + midTermTodos)。CRUD
+- `data/blog/seo-strategy.json` — **本 agent の構造化 SSOT** (施策 done/todo + typeMix + KPI 目標 + midTermTodos)。CRUD
 - 本ファイル `.claude/agents/blog-seo-strategist.md` §戦略コンテキスト — 戦略の全文 SSOT (旧 doc 15)。四半期改訂時に編集
-- `.claude/state/blog/topic-queue.json` / `.claude/state/estat/expansion-queue.json` — read only (委譲先の消化状況)
+- `data/blog/topic-queue.json` / `data/estat/expansion-queue.json` — read only (委譲先の消化状況)
 - `.claude/todo/improvements.md` — **read only** (effect/status の突合。書込は improvement-triage のみ)
-- `.claude/state/metrics/gsc/LATEST.md` / `.claude/state/blog/winning-patterns.json` — read only (KPI・再学習根拠)
+- `data/gsc/LATEST.md` / `data/blog/winning-patterns.json` — read only (KPI・再学習根拠)
 
 ## File Boundary (並行衝突回避)
-- write は `.claude/state/blog/seo-strategy.json` と (四半期のみ) doc 15 に限定。他はすべて read only。
+- write は `data/blog/seo-strategy.json` と (四半期のみ) doc 15 に限定。他はすべて read only。
 - 並行起動可: `trend-scout` (topic-queue write)、`ranking-expander` (expansion-queue write)、`gsc-analyst` (metrics write)、
   `improvement-triage` (backlog write) — 書込先が完全分離。
 - 並行 NG: 同 `seo-strategy.json` への本 agent 2 体同時 (race)。

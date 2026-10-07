@@ -8,7 +8,7 @@ primary_agent: strategy-advisor
 # monthly-review
 
 前月を締める振り返り。週次レビュー 4〜5 本と計測→記録→改善サイクルの state を集約し、
-`.claude/skills/management/monthly-review/reference/reviews/YYYY-MM.md` へ保存する。
+`data/reviews/monthly/YYYY-MM.md` へ保存する。
 **今月の重点を決めるのは `/monthly-plan` の仕事**で、月次計画はこのレビューを読んでから作る。
 
 配線の正本は `.claude/config/review-wiring.json` の `cadences.monthly` (保存先・必須見出し・入力・期限)。
@@ -36,17 +36,17 @@ node .claude/scripts/management/check-review-cadence.mjs
 
 | 入力 | 読み方 |
 |---|---|
-| 前月の週次レビュー | `.claude/skills/management/weekly-review/reference/reviews` のうち、木曜が対象月に入る ISO 週。各本の「計画 vs 実績」の Must 比、「KPI ツリー」、「来週への申し送り」 |
+| 前月の週次レビュー | `data/reviews/weekly` のうち、木曜が対象月に入る ISO 週。各本の「計画 vs 実績」の Must 比、「KPI ツリー」、「来週への申し送り」 |
 | 前月の月次計画 | `.claude/todo/monthly.md`。既に今月分へ上書きされていれば `git log -1 --format=%H --before=<今月>-01 -- .claude/todo/monthly.md` の版を `git show <sha>:.claude/todo/monthly.md` で読む |
-| 計測サイクルの週次履歴 | `.claude/state/metrics/measurement-cycle/history.csv` の対象月の週。KPI の値はここを正典にし、週次レビュー本文の数値を再集計しない |
-| 効果判定 | `.claude/state/effect-verdict` の対象月の週の `verdicts-YYYY-Www.json`。判定と `guards` をそのまま使う |
-| KPI ツリー | `.claude/state/business-plan/kpi-tree.json` (重点レーンの駆動 KPI とガードレール) |
-| 楽天アフィリエイト成果 | `.claude/state/metrics/affiliate/rakuten-results.json` の対象月の行。`observedAt` が月をまたいだ後なら確定として扱う。収集が止まっていれば判定不能と書く |
+| 計測サイクルの週次履歴 | `data/measurement-cycle/history.csv` の対象月の週。KPI の値はここを正典にし、週次レビュー本文の数値を再集計しない |
+| 効果判定 | `data/effect-verdict` の対象月の週の `verdicts-YYYY-Www.json`。判定と `guards` をそのまま使う |
+| KPI ツリー | `data/business-plan/kpi-tree.json` (重点レーンの駆動 KPI とガードレール) |
+| 楽天アフィリエイト成果 | `data/affiliate/rakuten-results.json` の対象月の行。`observedAt` が月をまたいだ後なら確定として扱う。収集が止まっていれば判定不能と書く |
 | 改善施策 | `.claude/todo/improvements.md` の active 施策と上限 |
-| 収益 (楽天以外) | `.claude/state/metrics/affiliate/a8-results.json`・`.claude/state/metrics/affiliate/moshimo-results.json` (afb は認証付き計測の `afb`)、商品は `.claude/state/products/sales-ledger.json`、KDP は月次レポート (`kdp-monthly-reports.mjs` の出力)。各週の合計は `node .claude/scripts/metrics/generate-weekly-metrics-issue.mjs --week <YYYY-Www>` の「週次収益 (NSM)」節 |
-| NSM 改善実験 | `.claude/state/experiments.json` の `status` と `next_check_date`。対象月までに期日が来た running / proposed |
-| 事業計画 | `.claude/state/business-plan/latest.json` の `nextActions` と開始ゲート |
-| 月次の自動処理 | `.claude/state/metrics/monthly-jobs` の各ジョブ (`ksj-catalog`・`estat-catalog`・`ctr-improvement`・`cloudflare-snapshot`) の対象月の記録。`status` (ok / skipped / failed)・`runUrl`・`summary` (CTR は改善候補の本文) を読む。Cloudflare の費用の中身は `.claude/skills/analytics/cloudflare-cost-improvement/reference/monthly-snapshots` (請求サイクル開始月の名前) |
+| 収益 (楽天以外) | `data/affiliate/a8-results.json`・`data/affiliate/moshimo-results.json` (afb は認証付き計測の `afb`)、商品は `data/products/sales-ledger.json`、KDP は月次レポート (`kdp-monthly-reports.mjs` の出力)。各週の合計は `node .claude/scripts/metrics/generate-weekly-metrics-issue.mjs --week <YYYY-Www>` の「週次収益 (NSM)」節 |
+| NSM 改善実験 | `data/business/experiments.json` の `status` と `next_check_date`。対象月までに期日が来た running / proposed |
+| 事業計画 | `data/business-plan/latest.json` の `nextActions` と開始ゲート |
+| 月次の自動処理 | `data/ci/monthly-jobs` の各ジョブ (`ksj-catalog`・`estat-catalog`・`ctr-improvement`・`cloudflare-snapshot`) の対象月の記録。`status` (ok / skipped / failed)・`runUrl`・`summary` (CTR は改善候補の本文) を読む。Cloudflare の費用の中身は `data/cloudflare/monthly-snapshots` (請求サイクル開始月の名前) |
 | 月次の定点観測 | `/competitor-scan` の `.claude/skills/sns/competitor-scan/reference/reports` (対象月の日付のレポート)、X の勝ちパターンの月次レポート |
 | 開いているアラート | `gh issue list --label auto-generated --state open` (横断監視 #763 を含む) |
 | GSC の月次接続 | `node .claude/scripts/gsc/audit-operations-cycle.mjs --stage monthly` |
@@ -74,7 +74,7 @@ node .claude/scripts/management/check-review-cadence.mjs
 
 ## Phase 3: 記録
 
-`reference/reviews/YYYY-MM.md` に次の形で保存する。見出しは `review-wiring.json` の `requiredSections` と一致させる。
+`data/reviews/monthly/YYYY-MM.md` に次の形で保存する。見出しは `review-wiring.json` の `requiredSections` と一致させる。
 
 ```markdown
 # 月次レビュー YYYY-MM
@@ -132,7 +132,7 @@ node .claude/scripts/management/check-review-cadence.mjs
 
 ## Gate
 
-- 保存先が `reference/reviews/YYYY-MM.md` で、必須見出しがすべてある。
+- 保存先が `data/reviews/monthly/YYYY-MM.md` で、必須見出しがすべてある。
 - 申し送りのすべての項目に実在する行き先がある。
 - KPI の数値は計測 state の値で、判定不能を 0 にしていない。
 - 効果判定を新しく下していない (エンジンと improvement-triage の判定を写しただけ)。

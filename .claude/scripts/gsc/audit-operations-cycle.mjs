@@ -15,6 +15,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { isoWeekOf } from '../lib/effect-verdict/iso-week.mjs';
+import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -209,19 +210,19 @@ export function auditOperationsCycle({
   const paths = {
     snapshots: path.join(
       root,
-      '.claude/skills/analytics/gsc-improvement/reference/snapshots'
+      datasetDir("gsc.snapshots")
     ),
-    verdicts: path.join(root, '.claude/state/effect-verdict'),
+    verdicts: path.join(root, datasetDir("effect.verdicts")),
     reviews: path.join(
       root,
-      '.claude/skills/management/weekly-review/reference/reviews'
+      datasetDir("business.weekly-reviews")
     ),
     weeklyPlan: path.join(root, '.claude/todo/weekly.md'),
     monthlyPlan: path.join(root, '.claude/todo/monthly.md'),
-    candidates: path.join(root, '.claude/state/search-growth/candidates.json'),
+    candidates: path.join(root, `${datasetDir("search-growth.state")}/candidates.json`),
     inspectionLatest: path.join(
       root,
-      '.claude/state/metrics/gsc/url-inspection/LATEST.md'
+      datasetPath("gsc.url-inspection-latest")
     ),
     improvements: path.join(root, '.claude/todo/improvements.md'),
   };
@@ -549,7 +550,7 @@ function main() {
   const markdown = renderMarkdown(result);
 
   if (args.includes('--write')) {
-    const outDir = path.join(root, '.claude/state/metrics/gsc');
+    const outDir = path.join(root, datasetDir("gsc.history"));
     fs.mkdirSync(outDir, { recursive: true });
     fs.writeFileSync(
       path.join(outDir, 'operations-cycle-LATEST.json'),

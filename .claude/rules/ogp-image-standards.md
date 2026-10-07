@@ -5,7 +5,8 @@ paths:
   - "apps/web/scripts/*geo-source-thumbnails.ts"
   - "apps/web/scripts/lib/geo-source-thumbnail-render.ts"
   - "apps/web/scripts/{generate-ogp-images,generate-blog-thumbnails*,manage-blog-codex-backgrounds,process-home-use-case-images}.ts"
-  - ".claude/{scripts/ogp,state/ogp,skills/ui/audit-ogp-images,skills/image-prompt,skills/blog/generate-blog-images}/**"
+  - ".claude/{scripts/ogp,skills/ui/audit-ogp-images,skills/image-prompt,skills/blog/generate-blog-images}/**"
+  - "data/ogp/**"
   - ".claude/agents/{image-prompt-curator,blog-editor,site-ux-manager,r2-publisher}.md"
 ---
 # OGP・カバー・リンクカード画像標準 (画像資産カタログ SSOT)
@@ -96,7 +97,7 @@ note全記事のカバー制作方針・KPI・比較実験の契約は
 node .claude/scripts/ogp/build-image-gallery.mjs --tabs blog-ogp,blog-card --limit 20
 # 欠落を HEAD/GET で確定 (stdout に tab: expected/ok/missing 集計)
 node .claude/scripts/ogp/build-image-gallery.mjs --tabs ranking-card --check
-# 全種別を棚卸し → .claude/state/ogp/inventory.json
+# 全種別を棚卸し → data/ogp/inventory.json
 node .claude/scripts/ogp/build-image-gallery.mjs --audit
 ```
 
@@ -115,7 +116,7 @@ node .claude/scripts/ogp/build-image-gallery.mjs --audit
 - **サンプリング**: ranking 系タブは既定 30 件 (先頭 10 + 等間隔 20)、`--all` で全量。他タブは全量。`--audit` も既定はサンプリング (全量は `--audit --all`)。
 - **真実を映す**: OGP タブは各ページの `og:image` meta から**実際に配信されている URL**を解決する。静的フォールバック (home/category の `/og-image.jpg`)・ハッシュ付き URL・ランタイム 500 をそのまま反映する。
 - **欠落検出**: 常時 `img onerror` バッジ (目視) + `--check`/`--audit` 時に GET でステータス + content-type を確定 (機械)。
-- **棚卸し出力** `.claude/state/ogp/inventory.json`: 種別 × 比率 × 供給状態 (`satori-route` /
+- **棚卸し出力** `data/ogp/inventory.json`: 種別 × 比率 × 供給状態 (`satori-route` /
   `r2-static` / `none`) × entries / expected / ok / missing。tag/survey/cities の「専用なし」も記録。
 
 ---
@@ -283,7 +284,7 @@ Codex built-in imagegenで固有背景を生成してから画像bundleを作る
 
 - **新規 Codex 背景のコード SSOT**:
   `apps/web/scripts/data/blog-codex-background-catalog.ts` (slug → 単一 motif / prompt / asset) +
-  `apps/web/scripts/lib/assets/blog-codex-backgrounds/*.jpg` (1200×630 JPEG)。共通構図は
+  `assets/blog/codex-backgrounds/*.jpg` (1200×630 JPEG)。共通構図は
   **左 62% をタイトル安全域として完全に空け、右 35% に主役を 1 つだけ置く**。同じ主題
   (例: まぐろ 2 記事) は背景を共有し、Satori のタイトル合成で区別する。自由入力プロンプトを記事本文へ持たせない。
   実行入口は `/generate-blog-images`、決定的request/ingest/checkは
@@ -292,10 +293,10 @@ Codex built-in imagegenで固有背景を生成してから画像bundleを作る
   model / promptVersionはasset定義へ固定し、既存v1 assetのprovenanceを新規versionで上書きしない。
 - **記事固有背景のコード SSOT (既定経路)**:
   `apps/web/scripts/lib/blog-article-background.ts` (本文context parser / prompt builder / hash / ingest) +
-  `apps/web/scripts/lib/assets/blog-article-backgrounds/<slug>.jpg` (各1200×630 JPEG)。requestはタイトル・description・
+  `assets/blog/article-backgrounds/<slug>.jpg` (各1200×630 JPEG)。requestはタイトル・description・
   導入文から決定的に作り、左55%をOGP文字安全域、右42%をカード用モチーフ領域にする。地理が主題でない記事へ
   汎用日本地図を使わず、比較記事では2つの具体物を描き分ける。
-- **既存 Gemini のコード SSOT (既存背景再利用 / 未移行記事 fallback)**:
+- **既存 Gemini のコード SSOT (公開済み Gemini 背景の再利用だけ。新規生成はしない)**:
   `apps/web/scripts/data/blog-ogp-visual-catalog.ts`
   — 6 系統 (map / people / economy / industry / timeline / comparison) × motif・固定スタイル `OGP_STYLE_PREFIX`
   (light / editorial / flat / 落ち着いた藍・**文字/数字/ロゴ/実顔/精密な地図境界を禁止**・左 1/3 をタイトル安全域として空ける)・
@@ -310,11 +311,9 @@ Codex built-in imagegenで固有背景を生成してから画像bundleを作る
   1200×630 JPEG + SHA契約を検証 →
   `buildBlogOgpElement` と `buildBlogThumbnailElement` で用途別合成 → R2。最終画像は
   `thumbnail-{light,dark}.webp` / `ogp/ogp.png`、source artifact は `ogp/background.jpg`。
-  `ogp/generation.json`へprompt/model/version/bytes SHAを記録する。未移行記事の既存背景は従来どおり
-  Gemini (`gemini-2.5-flash-image`) が背景 1 枚 →
-  `normalizeAiBackground` (`blog-thumbnail-render.ts`)
-  で 1200×630 cover + dark 処理 + 左タイトルスクリム (**satori 互換の JPEG**。webp は satori が解析不能で不可) →
-  同じ exact plan 経路へ入る。
+  `ogp/generation.json`へprompt/model/version/bytes SHAを記録する。未移行記事の公開済み Gemini 背景
+  (`gemini-2.5-flash-image`) は、promptHash が今の記事と一致する間だけ再利用する。タイトルを変えるなどで
+  一致しなくなった記事は、Gemini で作り直さず Codex で記事固有背景を作る (下の「背景が古い・無い記事」)。
 - **改善は共通prompt builderを先に直す**: `blog-article-background.ts`の構図・スタイル契約を直し、必要なslugだけ
   `request-article` → imagegen → `ingest-article`で同名JPEGを更新する。記事固有の例外は最小限のoverrideへ置く。
   旧catalog資産の保守時だけ`BLOG_CODEX_BACKGROUND_BY_SLUG`のsubject/detailを使う。
@@ -371,30 +370,21 @@ Codex built-in imagegenで固有背景を生成してから画像bundleを作る
   # Codex catalog 登録済み slug の exact plan 生成 (R2 creds のある CI / セッション)
   npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts --slug a,b
 
-  # 既存 Gemini の純粋監査 (API を呼ばない・生成予定/最大費用のみ)
-  npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts --ai-background --limit N
-  # ローカル目視 (R2 非書込・admin /assets「ブログ OGP パイロット (local)」タブで確認)
-  npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts --ai-background --slug a,b --out-dir .local/ogp-pilot
-  # 本番反映 (R2 push)
-  npx tsx apps/web/scripts/generate-blog-thumbnails-cloud.ts --ai-background --slug <slugs>
-  npx tsx packages/r2-storage/src/scripts/push-generated-image-set.ts \
-    --plan .local/image-generation-publish-plan-blog.json
+  # 送り箱の記事に今の内容に合う背景があるか (読み取り専用。quality-gate が push 前に呼ぶ)
+  npx tsx apps/web/scripts/check-blog-background.ts --article "docs/21_ブログ記事原稿/<slug>/article.md"
   ```
-- **★cloud Claude Code / ローカル env なしの CI 経路 (2026-07-14〜)**: request の slug が Codex catalog
-  登録済みなら git JPEG を使い、Gemini API は呼ばない。未移行記事だけ `GEMINI_API_KEY` を使う。
-  `GEMINI_API_KEY` は
-  **GitHub Secrets 専任** (ローカル .env.local 管理は不要)。cloud セッションは
-  `data/gemini-image-requests.json` に `{ "task": "blog-ogp", "slugs": [...], "budgetUsd": 0.5,
-"apply": true|false }` を書いて develop へ push すると `gemini-image-run.yml` が生成する
-  (apply=false は artifact で目視検証・true は R2 反映。request は CI が commit-back で消費)。
-  cloud は workflow_dispatch 不可 (actions:write 無し) のため push トリガー方式。
-  ローカルからは dispatch でも可。
+- **背景が古い・無い記事 (2026-10-07〜)**: 記事の書き直しでタイトルなどを変えると、公開済み AI 背景の
+  promptHash が外れ、公開時のサムネイル検査がその記事を skip する。quality-gate は送り箱の記事でこれを
+  push 前に止め、Codex の手順 (`request-article --article`) を示す。ブログ背景の Gemini 新規生成は止めた
+  (`gemini-image-run.yml` の task `blog-ogp` は受け付けずに失敗する)。cloud セッションでは codex MCP に
+  接続できないため、生成はオーナーのローカルで行う。経路の集約は backlog `BLOG-BG-PIPELINE-CONSOLIDATE-01`。
 - **役割分担**: catalog / Codex MCP生成 / git JPEG ingest / 品質監査 = `image-prompt-curator`
   (`/generate-blog-images`)、最終bundle生成・記事公開連動 = `blog-editor`、
   effect 判定 = `improvement-triage`。R2 push は共通exact plan publisher。
 - **既存 Gemini fallbackの削除条件**: 公開中の全slugがCodex catalog + git JPEGへ移行し、
   R2の全`ogp/generation.json`でGemini背景が0件になった時点で、Gemini client / cache /
-  request workflowを同一リリースで削除する。
+  ビジュアルカタログと `gemini-image-run.yml` のブログ部分を同一リリースで削除する
+  (backlog `BLOG-BG-PIPELINE-CONSOLIDATE-01` の 3)。
 - **展開状況**: 公開434記事のうち既存固有AI背景124件を再利用し、共有・重複だった310件は
   記事contextから固有git JPEGを生成済み (2026-08-22)。`blog-images:codex queue`の完了条件はtargets=0。
   R2反映前は公開側の旧画像が継続する。
@@ -413,7 +403,7 @@ OGP・カード・note カバーとは別の種別で、**ページ本文の先�
 | ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **SSOT (設定 + プロベナンス)** | `apps/web/src/components/layout/page-heroes.ts` (`THEME_HEROES` / `CATEGORY_HEROES` = git TS)。型は `PageHeroDef` / 画像は `HeroImageAsset` (1 枚を複数ページで参照共有可)                              |
 | 配信画像                       | `apps/web/public/images/<name>.webp` (静的アセット。R2 ではない)                                                                                                                                        |
-| 元画像                         | `docs/assets/<name>.png` (外部 AI 生成の PNG。再生成の入力)                                                                                                                                             |
+| 元画像                         | `assets/page-heroes/<name>.png` (外部 AI 生成の PNG。再生成の入力)                                                                                                                                             |
 | サイズ・比率                   | 生成 **3:2 (1536×1024)** → `HeroBanner` が左=テキスト / 右=画像の side-by-side で表示 (画像は object-cover)                                                                                             |
 | 生成方式                       | 外部 AI 画像生成 (Codex / Imagen 等) で **文字なし背景**を生成 → Sharp で webp 化。見出し・タグラインは**実 DOM テキスト**で重ねる (OGP と同じ家ルール: AI 画像に日本語・数字を焼き込まない)            |
 | プロベナンス                   | 各 `HeroImageAsset` に `prompt` / `aspectRatio` / `regenerate` (webp 再生成コマンド) / `sourceImage` を記録。タグラインの数値は `taglineFacts` に出典 (R2 + 年度) を明記 (`evidence-based-judgment.md`) |
@@ -451,7 +441,7 @@ homeの「知りたいことから探す」に使う、文字なしの装飾イ�
 | --- | --- |
 | 設定 | `packages/data-configs/src/home-portal.ts`の`imageSrc` |
 | 生成仕様 | `apps/web/scripts/data/home-use-case-image-catalog.ts` |
-| 元画像 | `docs/assets/home-use-case-<id>.png` (Codex built-in imagegen) |
+| 元画像 | `assets/page-heroes/home-use-case-<id>.png` (Codex built-in imagegen) |
 | 配信画像 | `apps/web/public/images/home/use-cases/<id>.webp` (透過・静的) |
 | 後処理 | `npx tsx apps/web/scripts/process-home-use-case-images.ts --all` |
 | 描画 | `PortalNavCard`の右側に装飾画像として配置し、`alt=""`。文言はDOMテキスト |
@@ -463,13 +453,15 @@ homeの「知りたいことから探す」に使う、文字なしの装飾イ�
 
 - ギャラリー生成: `.claude/scripts/ogp/build-image-gallery.mjs`
 - 監査スキル: `.claude/skills/ui/audit-ogp-images/SKILL.md`
-- 棚卸し state: `.claude/state/ogp/inventory.json`
+- 棚卸し state: `data/ogp/inventory.json`
 - **県シルエットカード (§5.7)**: トークン SSOT `apps/web/scripts/data/pref-silhouette-tokens.ts` /
   レンダラー `apps/web/scripts/lib/pref-silhouette-render.ts` / 生成 `generate-ogp-images.ts --type areas|pref-silhouette`
-- **ブログ OGP AI 背景 (§5)**: カタログ SSOT `apps/web/scripts/data/blog-ogp-visual-catalog.ts` / 解決・hash
-  `apps/web/scripts/lib/blog-ogp-visual.ts` / Gemini クライアント `apps/web/scripts/lib/gemini-image-client.ts` /
-  合成 `apps/web/scripts/lib/blog-thumbnail-render.ts` (`normalizeAiBackground`) / 生成 `apps/web/scripts/generate-blog-thumbnails-cloud.ts`
-  (`--ai-background`) / 目視 `npm run admin` → /assets「ブログ OGP パイロット (local)」タブ
+- **ブログ OGP AI 背景 (§5)**: 記事固有背景 `apps/web/scripts/lib/blog-article-background.ts` +
+  `assets/blog/article-backgrounds/` (生成は `/generate-blog-images` の Codex) / 背景の判定
+  `apps/web/scripts/lib/blog-background-status.ts` (push 前の検査 `check-blog-background.ts`) / 解決・hash
+  `apps/web/scripts/lib/blog-ogp-visual.ts` / 合成 `apps/web/scripts/lib/blog-thumbnail-render.ts` /
+  bundle 生成 `apps/web/scripts/generate-blog-thumbnails{,-cloud}.ts` / 公開済み Gemini 背景の再利用だけに残す
+  `blog-ogp-visual-catalog.ts`・`gemini-image-client.ts` / 目視 `npm run admin` → /assets「ブログ OGP パイロット (local)」タブ
 - **ページ hero (§5.6)**: SSOT `apps/web/src/components/layout/page-heroes.ts` (`THEME_HEROES` / `CATEGORY_HEROES` + プロベナンス) /
   描画 `apps/web/src/components/layout/HeroBanner.tsx` / テーマ差し替え `features/theme-dashboard/components/ThemeHero.tsx`
 - **home 利用意図カード (§5.8)**: SSOT `packages/data-configs/src/home-portal.ts` / prompt catalog

@@ -27,7 +27,7 @@
 - **モデル別 prompt の SSOT**: task capsule・effort・委譲上限は `.claude/rules/model-prompting.md`
 - **Agent prompt 冒頭に task capsule + Output Format を指定** → `.claude/rules/agent-output-contract.md`
 - **一時ファイルは `/tmp/`**: プロジェクトルートに作らない (pre-commit が `tmp_*` 等を自動削除)
-- **レビューをタスクへ変換する**: 批判的レビュー / pre-mortem / 監査の全文を `docs/` に蓄積しない。未完了の対策だけを優先度・実行順・停止条件・完了条件付きで `.claude/todo/` へ統合する。恒久判断は既存の戦略文書・rules・コード近傍READMEへ、agent用の定期履歴は各skillの `reference/` へ、機械メトリクスは `.claude/state/metrics/` へ置く。Issues は (a) `enhancement`/`bug` ラベルの PR で close される機能改修、(b) `auto-generated` ラベルの機械アラートのみ → `.claude/rules/docs-vs-issues.md`
+- **レビューをタスクへ変換する**: 批判的レビュー / pre-mortem / 監査の全文を `docs/` に蓄積しない。未完了の対策だけを優先度・実行順・停止条件・完了条件付きで `.claude/todo/` へ統合する。恒久判断は既存の戦略文書・rules・コード近傍READMEへ、agent用の定期履歴は各skillの `reference/` へ、計測・監査・是正キューの記録は `data/<取得元>/` へ置く (`.claude/state/` はエージェント運用の状態だけ。判断は `.claude/rules/data-storage.md`)。Issues は (a) `enhancement`/`bug` ラベルの PR で close される機能改修、(b) `auto-generated` ラベルの機械アラートのみ → `.claude/rules/docs-vs-issues.md`
 - **文書作成・整理はガバナンスSSOTに従う**: 新規文書より既存SSOTへの統合を優先する。判断規則は`.claude/rules/docs-vs-issues.md`、機械契約は`.claude/config/docs-governance.json`。文書の作成・移動・削除後は`npm run docs:fix`と`npm run docs:check`を実行する。意味判断を伴う棚卸しは`/maintain-docs`
 - **参考文献は private Google Drive で保全し、利用実装仕様書を通して展開する**: 固定ルートは `stats47/参考文献/<資料名>/<版>/` (1 資料 1 版 = 1 directory。PDF・`pages/`・`md/`・`figures/` を展開したまま置き、tar bundle にしない)。folder名は日本語を優先する。ローカルマウントから`$TMPDIR/stats47-source-vault/`へ検証付きで復元し、`npm run source-vault:process`の共通OCR・ページ画像・内部cropを使う。全ページ処理後は`npm run source-vault:inventory`で本文・書籍値を含まない解決台帳を生成し、coverage 100%を確認してからprofile単位で一時領域を削除する。リポジトリ内の`books/`、`docs/books/`、`.claude/pdfs/`は`npm run source-vault:check`で禁止する。資料単位のactiveな利用実装仕様書で権利・一次資料・mapping・gateを定義してから既存SSOTへ反映する → `.claude/rules/reference-source-standards.md`
 - **完全 DB レスが正典** → `docs/01_技術設計/02_データアーキテクチャ.md`。永続/常駐 D1 を SSOT に持たない。SSOT は **git TS** と **R2** の二つだけ。本番アプリは R2 snapshot のみ読む:
@@ -61,10 +61,10 @@
 | バグ修正の教訓 | `/knowledge` |
 | 同じエラー 2 回目 | `/continuous-learning` でパターン化 |
 | **改善施策の TODO 真実源** (status / tier / 期日) | `.claude/todo/improvements.md` |
-| 改善施策デプロイ (agent 用詳細) | `.claude/skills/analytics/{gsc,ga4,adsense,affiliate,sns-metrics,cloudflare-cost,performance}-improvement/reference/improvement-log.md` |
+| 改善施策デプロイ (agent 用詳細) | `data/improvement/{gsc,ga4,adsense,affiliate,sns-metrics,cloudflare-cost,performance}-improvement/improvement-log.md` |
 | **月次の重点 1-2 テーマ** (今月どこに張るか・Pro 予算配分) | `.claude/todo/monthly.md` (`/monthly-plan` で月初上書き。週次が分割消化) |
 | 週次計画進捗 | `.claude/todo/weekly.md` の TODO チェックボックスを Edit |
-| 週次振り返り | `.claude/skills/management/weekly-review/reference/reviews/YYYY-Www.md` |
+| 週次振り返り | `data/reviews/weekly/YYYY-Www.md` |
 | 批判的レビュー / 事前検死 | 全文はセッション内で提示。未完了策を `.claude/todo/{improvements,backlog}.md`、恒久判断を既存SSOTへ直接反映 |
 | **セッション残タスク** | `.claude/todo/backlog.md` へカード起票 (改善施策のみ improvements.md = improvement-triage 経由。一時ハンドオフ文書は作らない) |
 | 未分類の思いつき TODO | `.claude/todo/backlog.md` へカード起票 (迷ったら 🟡・タグは後から todo-curator が付与 → `.claude/rules/todo-standards.md`) |

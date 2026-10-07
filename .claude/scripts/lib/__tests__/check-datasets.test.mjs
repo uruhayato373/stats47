@@ -10,9 +10,9 @@ import { resolve } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 
-import { DATASETS, GOVERNED, IGNORED_NAMES, KINDS, TARGETS, datasetDir, datasetPath } from "../../../../config/datasets.mjs";
+import { AGENT_STATE, DATASETS, GOVERNED, IGNORED_NAMES, IMAGE_EXT, IMAGE_ROOTS, KINDS, RETIRED, TARGETS, datasetDir, datasetPath } from "../../../../config/datasets.mjs";
 import { DOMAINS } from "../../../../config/paths.mjs";
-import { checkDatasets, findRetiredReferences, patternToRegExp } from "../check-datasets.mjs";
+import { checkDatasets, dataLiteralHits, dataTops, findDataPathLiterals, findRetiredReferences, patternToRegExp, retiredHits } from "../check-datasets.mjs";
 import { RETENTION_POLICIES } from "../prune-state-snapshots.mjs";
 
 const ROOT = resolve(fileURLToPath(new URL("../../../..", import.meta.url)));
@@ -42,6 +42,9 @@ test("実リポジトリの追跡ファイルは台帳と矛盾しない", () =>
     targets: TARGETS,
     domainIds,
     retention: RETENTION_POLICIES,
+    imageRoots: IMAGE_ROOTS,
+    imageExt: IMAGE_EXT,
+    agentState: AGENT_STATE,
   });
   assert.deepEqual(result.errors, []);
 });
@@ -119,4 +122,113 @@ test("datasetPath は可変部分の無い行だけ、datasetDir は可変部分
   assert.throws(() => datasetPath(slotted.id), /datasetDir を使う/);
   assert.equal(datasetDir(slotted.id), slotted.path.slice(0, slotted.path.indexOf("/{date}")));
   assert.throws(() => datasetPath("no.such-dataset"), /台帳に無いデータセット/);
+});
+
+test("画像は IMAGE_ROOTS の外にあれば置き場違反で落ちる", () => {
+  const r = checkDatasets({
+    ...base,
+    datasets: [],
+    files: [
+      "assets/blog/article-backgrounds/a.webp",
+      "apps/web/public/images/b.png",
+      "packages/gis/data/geoshape/svg/01_北海道.svg",
+      ".claude/skills/note/x/examples/cover.svg",
+      "apps/web/scripts/lib/legacy-images/c.jpg",
+      ".claude/skills/note/x/magazine-cover.png",
+      "docs/legacy-images/d.png",
+      "README.md",
+    ],
+    imageRoots: IMAGE_ROOTS,
+    imageExt: IMAGE_EXT,
+  });
+  assert.deepEqual(
+    r.errors.map((e) => e.replace(/ \(.*$/, "")),
+    [
+      "画像の置き場違反: apps/web/scripts/lib/legacy-images/c.jpg",
+      "画像の置き場違反: .claude/skills/note/x/magazine-cover.png",
+      "画像の置き場違反: docs/legacy-images/d.png",
+    ],
+  );
+});
+
+test("手順書 (SKILL.md・rules・agents) の旧パスは落ち、旧置き場と書いた経緯の行だけ通す", () => {
+  const retired = [{ from: ".claude/state/metrics/foo", to: "data/foo", since: "2026-10-06" }];
+  const errors = findRetiredReferences(retired, [
+    { file: ".claude/skills/x/SKILL.md", line: 5, text: "1. `.claude/state/metrics/foo/LATEST.md` を Read" },
+    { file: ".claude/rules/y.md", line: 7, text: "# 出力は .claude/state/metrics/foo/ へ" },
+    { file: ".claude/agents/z.md", line: 9, text: "(旧置き場 `.claude/state/metrics/foo/` は 2026-10-06 に data/foo/ へ移した)" },
+    { file: ".codex/agents/z.toml", line: 2, text: "read .claude/state/metrics/foo/history.csv" },
+  ]);
+  assert.deepEqual(errors, [
+    "旧置き場の参照: .claude/skills/x/SKILL.md:5 (.claude/state/metrics/foo → data/foo)",
+    "旧置き場の参照: .claude/rules/y.md:7 (.claude/state/metrics/foo → data/foo)",
+    "旧置き場の参照: .codex/agents/z.toml:2 (.claude/state/metrics/foo → data/foo)",
+  ]);
+});
+
+// 2026-10-06 に .claude/state/ をエージェント運用の状態だけへ絞った。事業の記録を黙って戻すと、
+// 「エージェントをやめたら消してよい置き場」に事業の記録が混ざり、置き場の判断基準が崩れる
+test(".claude/state/ を指す行は AGENT_STATE の許可リストに無ければ落ちる", () => {
+  const datasets = [
+    ds("agent.ok", ".claude/state/ok/ledger.json", { target: "state" }),
+    ds("biz.queue", ".claude/state/sales-queue/queue.json", { target: "state" }),
+    ds("biz.mislabeled", ".claude/state/metrics/foo/{date}.json"),
+    ds("biz.data", "data/sales-queue/queue.json"),
+  ];
+  const r = checkDatasets({ ...base, datasets, files: [], agentState: { "agent.ok": "理由", "agent.gone": "理由" } });
+  assert.deepEqual(
+    r.errors.filter((e) => !e.startsWith("どのファイルにも")).map((e) => e.replace(/ \(.*$/, "")),
+    [
+      "biz.queue: .claude/state/ はエージェント運用の状態だけを置く",
+      "biz.mislabeled: .claude/state/ はエージェント運用の状態だけを置く",
+      "AGENT_STATE に台帳に無い id: agent.gone",
+    ],
+  );
+});
+
+// 2026-10-07: 作業カードの完了条件が旧パスの git diff を指したまま残り、空の差分で合格に見えた。
+// 手順書だけでなく作業カード・文書・memory の旧パスも止め、当時のパスを残す履歴だけは対象外にする
+test("作業カード・文書・memory の旧パスも落ち、旧パスと書いた経緯の行だけ通す", () => {
+  const retired = [{ from: ".claude/state/metrics/foo", to: "data/foo", since: "2026-10-06" }];
+  const errors = findRetiredReferences(retired, [
+    { file: ".claude/todo/backlog.md", line: 3, text: "- **完了条件**: `git diff -- .claude/state/metrics/foo/history.csv` に削除行が無い" },
+    { file: "docs/01_技術設計/x.md", line: 4, text: "計測は .claude/state/metrics/foo/ に置く" },
+    { file: ".claude/memory/y.md", line: 5, text: "当時の旧パス `.claude/state/metrics/foo/` を上書きしていた" },
+  ]);
+  assert.deepEqual(errors, [
+    "旧置き場の参照: .claude/todo/backlog.md:3 (.claude/state/metrics/foo → data/foo)",
+    "旧置き場の参照: docs/01_技術設計/x.md:4 (.claude/state/metrics/foo → data/foo)",
+  ]);
+});
+
+test("実リポジトリに旧置き場の参照が残っていない (履歴を除く)", () => {
+  const hits = retiredHits();
+  assert.ok(!hits.some((h) => /^data\/|\/reference\/(?:audits|reviews|reports)\//.test(h.file)), "履歴の除外が効いていない");
+  assert.deepEqual(findRetiredReferences(RETIRED, hits), []);
+});
+
+// 2026-10-07: コードに data/ の直書きが 230 ファイル・500 か所あり、置き場を移すたびに手で探して直していた。
+// 台帳の id で引けば、次に移すときは台帳の 1 行を変えるだけで済む
+test("コードの data/ 直書きは落ち、テスト・コメント・import・別ディレクトリの data/ は通す", () => {
+  const errors = findDataPathLiterals(["gsc", "sns"], [
+    { file: ".claude/scripts/a.mjs", line: 1, text: 'const p = path.join(ROOT, "data/gsc/history.csv");' },
+    { file: ".claude/scripts/b.mjs", line: 2, text: "console.log(`wrote data/sns/posts.json`);" },
+    { file: ".claude/scripts/lib/c.cjs", line: 3, text: 'const S = path.resolve(__dirname, "../../../data/sns/posts.json");' },
+    { file: ".claude/scripts/d.mjs", line: 4, text: "// data/gsc/history.csv を読む" },
+    { file: ".claude/scripts/e.mjs", line: 5, text: "import schema from '../../data/gsc/x.schema.json' with { type: 'json' };" },
+    { file: ".claude/scripts/lib/__tests__/f.test.mjs", line: 6, text: 'assert.equal(p, "data/gsc/history.csv");' },
+    { file: "packages/ranking/src/exporters/g.ts", line: 7, text: 'path.resolve(__dirname, "../data/sns.json")' },
+    { file: ".claude/scripts/h.mjs", line: 8, text: 'const q = "metadata/gsc/x";' },
+  ]);
+  assert.deepEqual(errors.map((e) => e.replace(/ \(.*$/, "")), [
+    "data/ の直書き: .claude/scripts/a.mjs:1",
+    "data/ の直書き: .claude/scripts/b.mjs:2",
+    "data/ の直書き: .claude/scripts/lib/c.cjs:3",
+  ]);
+});
+
+test("実リポジトリのコードに data/ の直書きが残っていない", () => {
+  const tops = dataTops(DATASETS);
+  assert.ok(tops.includes("gsc") && tops.includes("sns"), "台帳から data/ の第 1 階層を取れていない");
+  assert.deepEqual(findDataPathLiterals(tops, dataLiteralHits(tops)), []);
 });

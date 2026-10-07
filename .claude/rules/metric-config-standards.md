@@ -2,7 +2,7 @@
 paths:
   - "packages/data-configs/{src/metrics/**,src/*.ts,scripts/**}"
   - ".claude/skills/{db/publish-ranking,db/verify-value-distribution,management/expand-rankings,management/expand-indicators}/**"
-  - ".claude/state/ranking/**"
+  - "data/ranking/**"
   - ".claude/agents/{data-ingester,ranking-expander,ranking-publisher,open-data-curator,snapshot-exporter}.md"
 ---
 # metric config 標準 (ランキングデータの正典)
@@ -131,7 +131,7 @@ ThemeCatalog の `annotation` は系列断絶・母集団差など、その char
 - **既存 755 件の棚卸しは週次 `estat-year-coverage-audit-weekly.yml` が少しずつ巡回する**
   (`packages/ranking/src/scripts/audit-estat-year-coverage.ts`、都道府県1件をサンプルに
   `getStatsData` で実測し config と比較。755 件を一括では照会しない)。候補は
-  `.claude/state/data/estat-year-coverage/LATEST.md` に溜まる。data-ingester が候補を見て
+  `data/estat/year-coverage/LATEST.md` に溜まる。data-ingester が候補を見て
   config の `years` を拡張し、`data/data-refresh-requests.json` push で再取り込みする。
 
 ## 量産時の必須手順 (agent / skill)
@@ -249,7 +249,7 @@ agent 検証なしで壊れだけ取れる」を試して失敗した — 壊れ
 (`observedSeverity` の悪化検知と同じ発想)。台帳 lint が evidence・出典 URL・検証日・
 予測の存在・定型文の使い回し (同一 evidence 6 件以上) を強制する。
 
-**未検証はラチェット**で管理する (`.claude/state/ranking/integrity-audit.json` の
+**未検証はラチェット**で管理する (`data/ranking/integrity-audit.json` の
 `valueVerification`)。76 件が一斉に赤くなるゲートは無視されるので、baseline に固定して
 **増えたときだけ失敗**。`profile-violated` は即失敗 (検証が古くなった証拠)。
 
@@ -301,7 +301,7 @@ git の更新日では「クエリが変わった」と「ただ触った (整�
 
 週次 `ranking-integrity-audit-weekly.yml` に **縮小専用ラチェット**で配線済み
 (`--ratchet`: 前回より増えたときだけ失敗する)。0 件でなければ失敗にすると恒久的に赤くなり
-無視されるため、増加を止めて減る方へ向ける。state は `.claude/state/data/{reingest-queue.json,LATEST.md}`。
+無視されるため、増加を止めて減る方へ向ける。state は `data/data-quality/{reingest-queue.json,LATEST.md}`。
 
 ### 既知の壊れは期限つきで登録する
 
@@ -396,7 +396,7 @@ app/ranking へ射影するだけ。`calculateRankingValues` はランタイム�
 | 導出の純関数 (generator と監査が共有) | `packages/ranking/src/scripts/lib/calculated-stats-core.ts`                        |
 | 期間換算・丸めの resolver             | `packages/ranking/src/utils/period-align.ts`                                       |
 | CLI                                   | `packages/ranking/src/scripts/generate-calculated-stats.ts`                        |
-| task 配線                             | `run.sh` の TASKS。**`ranking-items` の後・`ranking-values` の前** (producer が先) |
+| task 配線                             | `run.sh` の TASKS。**`ranking-items` と `ranking-values` の前** (producer が先。後ろだと item.latestYear が 1 回分遅れる) |
 | 監査                                  | `audit-ranking-data-integrity.ts` の検査 (m)                                       |
 
 行の形・rank 規則 (value 降順・同値同順位・null は rank:null)・ソート順は

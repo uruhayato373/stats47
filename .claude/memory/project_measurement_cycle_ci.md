@@ -14,7 +14,7 @@ GA4 実測で止まっていた判定待ちを処理した手順 (計測→impro
 `[target: +N clicks]` が揃ったものだけ機械判定される。2026-W38 時点は 10 件中 0 件 (全件目印なし)。
 
 - 計測: 日曜 20:00 JST `fetch-metrics-weekly.yml` が GA4 snapshot (internal-transitions / landing-context / event-volume) と
-  `refresh-measurement-cycle.sh` → `build-measurement-cycle.mjs` → `.claude/state/metrics/measurement-cycle/{latest.json,LATEST.md,history.csv}`。
+  `refresh-measurement-cycle.sh` → `build-measurement-cycle.mjs` → `data/measurement-cycle/{latest.json,LATEST.md,history.csv}`。
   PSI / Cloudflare / SNS も同じ state に入る (閾値は各 source の既存判定を再利用: PSI は history.csv の violations_*、
   Cloudflare は threshold-check.mjs の evaluateRules、SNS は sns-metrics-store.readByRange)。
   **月曜 06:00 にも作り直す**: sns-metrics-weekly は fetch-metrics-weekly より後に終わる (2026-09-20: 14:33Z → 14:47Z) ため。
@@ -44,7 +44,7 @@ GA4 実測で止まっていた判定待ちを処理した手順 (計測→impro
 - 自動化できないオーナー作業: custom dimension 登録 (今は home_featured の card_variant/slot/experiment_variant だけが発火量十分)、ASP/KDP 再ログイン、本番デプロイ承認。
 
 **KPI ツリー配線 (2026-09-27)**: KPI の正典は事業計画 catalog の `kpiTier` (nsm / driver / guardrail) で、
-`business-plan:build-state` が `.claude/state/business-plan/kpi-tree.json` を書き `business-plan:check` がずれを拒否する
+`business-plan:build-state` が `data/business-plan/kpi-tree.json` を書き `business-plan:check` がずれを拒否する
 (.mjs/.cjs は TS を import できないためこの写しを読む)。施策は `[kpi: id]` 必須 (docs:check DG079 error)、
 `[target:]` なし・active 上限 10 超過は DG080 warning、無人 run のゲートは新規行の目印欠落と上限超過中の追加を拒否する。
 計測サイクルは KPI ごとに今週値・4週前 (rolling28d の非重複窓) 比較・ぶら下がる施策を出し、認証付き収集の認証切れも

@@ -15,11 +15,14 @@ import {
 } from "./lib/affiliate-portfolio-core.mjs";
 import { evaluateMeasurementGate } from "./lib/affiliate-operations-core.mjs";
 import { evaluateMoshimoOutcomeGate } from "./lib/moshimo-report-core.mjs";
+import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 import { A8_REPORT_AUTOMATION } from "../../../config/paths.mjs";
 
 const ROOT = resolve(fileURLToPath(new URL(".", import.meta.url)), "../../..");
-const STATE_DIR = resolve(ROOT, ".claude/state/ads");
-const AFFILIATE_METRICS_DIR = resolve(ROOT, ".claude/state/metrics/affiliate");
+const STATE_DIR = resolve(ROOT, datasetDir("affiliate.audits"));
+// GA4 実測の追跡済み snapshot と実験台帳は記録なので data/affiliate/ (台帳 id で引く)
+const GA4_SNAPSHOT_DIR = datasetDir("ga4.affiliate-snapshots");
+const AFFILIATE_METRICS_DIR = resolve(ROOT, datasetDir("affiliate.audits"));
 const OUT_PATH = resolve(STATE_DIR, "affiliate-portfolio-latest.json");
 
 function readJson(path: string): any | null {
@@ -28,15 +31,15 @@ function readJson(path: string): any | null {
 
 function latestGa4(): { data: any; path: string } | null {
   const candidates: Array<{ date: string; path: string; absolute: string }> = [];
-  for (const name of readdirSync(STATE_DIR)) {
+  for (const name of readdirSync(resolve(ROOT, GA4_SNAPSHOT_DIR))) {
     const match = /^ga4-affiliate-(\d{4}-\d{2}-\d{2})\.json$/.exec(name);
-    if (match) candidates.push({ date: match[1], path: `.claude/state/ads/${name}`, absolute: resolve(STATE_DIR, name) });
+    if (match) candidates.push({ date: match[1], path: `${GA4_SNAPSHOT_DIR}/${name}`, absolute: resolve(ROOT, GA4_SNAPSHOT_DIR, name) });
   }
   const liveDir = resolve(STATE_DIR, "live", "ga4-affiliate");
   if (existsSync(liveDir)) {
     for (const name of readdirSync(liveDir)) {
       const match = /^(\d{4}-\d{2}-\d{2})\.json$/.exec(name);
-      if (match) candidates.push({ date: match[1], path: `.claude/state/ads/live/ga4-affiliate/${name}`, absolute: resolve(liveDir, name) });
+      if (match) candidates.push({ date: match[1], path: `${datasetDir("affiliate.audits")}/live/ga4-affiliate/${name}`, absolute: resolve(liveDir, name) });
     }
   }
   const latest = candidates.sort((left, right) => left.date.localeCompare(right.date)).at(-1);
@@ -58,7 +61,7 @@ function main(): void {
   const nowIso = new Date().toISOString();
   const ga4 = latestGa4();
   const inventory = readJson(resolve(STATE_DIR, "inventory-latest.json"));
-  const experimentRegistry = readJson(resolve(STATE_DIR, "experiments.json"))?.experiments ?? [];
+  const experimentRegistry = readJson(resolve(ROOT, datasetPath("affiliate.experiments")))?.experiments ?? [];
   const activeExperiments = experimentRegistry.filter((experiment: { status?: string }) => experiment.status !== "closed");
   const portfolioPilots = experimentRegistry.filter((experiment: { portfolioPilot?: boolean }) => experiment.portfolioPilot === true);
   const otherActiveExperiments = activeExperiments.filter((experiment: { portfolioPilot?: boolean }) => experiment.portfolioPilot !== true);
@@ -96,12 +99,12 @@ function main(): void {
     ga4Path: ga4?.path ?? null,
     measurementGate,
     a8Results,
-    a8ResultsPath: a8Results ? ".claude/state/metrics/affiliate/a8-results.json" : null,
+    a8ResultsPath: a8Results ? datasetPath("a8.results") : null,
     outcomeGate,
     additionalOutcomeSources: [{
       source: "moshimo",
       programRefPrefix: "moshimo:",
-      path: ".claude/state/metrics/affiliate/moshimo-results.json",
+      path: datasetPath("moshimo.results"),
       data: moshimoResults,
       gate: moshimoOutcomeGate,
       required: requiresMoshimoOutcomes,

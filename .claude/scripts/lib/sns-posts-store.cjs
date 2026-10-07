@@ -3,7 +3,7 @@
  *
  * sns_posts は「書込専用の運用ログ」(投稿のたびに append、指標を後から UPDATE) であり、
  * authored config と性質が違うため git TS ではなく **エージェント用 state** として
- * `.claude/state/sns/posts.json` に置く (doc12 §3 / data-storage.md の `.claude/` カテゴリ)。
+ * `data/sns/posts.json` に置く (doc12 §3 / data-storage.md の `.claude/` カテゴリ)。
  * 永続/リモート D1・ローカル SQLite は使わない。
  *
  * 全 SNS 自動化スクリプト (publish-x / post-instagram / generate-schedule / delete-* /
@@ -18,9 +18,13 @@
 
 const fs = require("node:fs");
 const path = require("node:path");
+const { datasetPath } = require("../../../config/datasets.mjs");
 
-const STORE_PATH = path.resolve(__dirname, "../../state/sns/posts.json");
-const LOG_PATH = path.resolve(__dirname, "../../state/sns/post-log.md");
+// 投稿台帳は記録なので data/sns/ (台帳 id は sns.posts / sns.post-log)。テストがこのファイルを別の root へコピーして
+// 使うので、自分の場所からの相対パスで引く
+const ROOT = path.resolve(__dirname, "../../..");
+const STORE_PATH = path.join(ROOT, datasetPath("sns.posts"));
+const LOG_PATH = path.join(ROOT, datasetPath("sns.post-log"));
 
 const PLATFORM_LABEL = {
   instagram: "📸 Instagram",

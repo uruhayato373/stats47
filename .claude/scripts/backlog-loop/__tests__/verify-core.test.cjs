@@ -221,12 +221,12 @@ test('触ってよいパスだけを許す', () => {
 });
 
 test('★backlog-loop 以外の state も許す (閉じた案件の成果物がそこに出る)', () => {
-  // 2026-08-17 の実案件: SEO 文字列を是正すると `.claude/state/data/` の baseline が縮む。
+  // 2026-08-17 の実案件: SEO 文字列を是正すると `data/data-quality/` の baseline が縮む。
   // backlog-loop だけを許していたので、正当な成果物で verify が落ちた。
   const ok = verifyChangedPaths([
-    '.claude/state/data/seo-meta-facts-baseline.json',
-    '.claude/state/ranking/integrity-audit.json',
-    '.claude/state/blog/remediation-queue.json',
+    'data/data-quality/seo-meta-facts-baseline.json',
+    'data/ranking/integrity-audit.json',
+    'data/blog/remediation-queue.json',
   ]);
   assert.equal(ok.ok, true, JSON.stringify(ok.violations));
 });

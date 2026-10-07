@@ -4,7 +4,7 @@
  * WP0 (education-culture pilot) と同じ手法をカタログ横断へ拡張する:
  *   1. THEME_CATALOGS の全テーマ・全 metric (rankingKey) を列挙する。
  *   2. 各 metric の MetricConfig から e-Stat request key を組み立て、
- *      既存の週次 live audit (`.claude/state/theme-charts/live-audit.json`、192 distinct request
+ *      既存の週次 live audit (`data/themes/charts/live-audit.json`、192 distinct request
  *      を coverageOk:true で網羅済み・2026-08-15 実測) と突合する。
  *   3. hasNational===true → official 候補 (値レベルの一次資料照合は別途要)。
  *      hasNational===false → unsupported (00000 行自体が無い)。
@@ -26,12 +26,13 @@ import { THEME_CATALOGS } from "../src/theme-catalog/index";
 import { getMetricConfig } from "../src/registry";
 
 import type { CatalogMetric } from "../src/theme-catalog/types";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, "../../..");
 const LIVE_AUDIT_PATH = path.join(
   REPO_ROOT,
-  ".claude/state/theme-charts/live-audit.json",
+  `${datasetDir("themes.chart-audit")}/live-audit.json`,
 );
 
 interface LiveAuditResult {

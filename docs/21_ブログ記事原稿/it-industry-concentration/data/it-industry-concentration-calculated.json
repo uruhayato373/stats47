@@ -1,0 +1,581 @@
+{
+  "title": "情報通信業の県内総生産の集中度・人口比・テレワークとの順位相関 (計算値)",
+  "subtitle": "県内総生産は2021年度、総人口は2021年、テレワーク実施率は2022年",
+  "label": "計算値 (集中度・人口比・順位相関)",
+  "year": "2021",
+  "formula": "values[].formula を参照。保存値は小数第2位 (割合は第4位) を四捨五入",
+  "generatedBy": "article-writer (it-industry-concentration 書き直し・R2 app/ranking の値から集計)",
+  "values": [
+    {
+      "id": "tokyoVsTottori",
+      "value": 230.95,
+      "unit": "倍",
+      "display": "約231倍",
+      "formula": "東京都の値 ÷ 鳥取県の値 (情報通信業の県内総生産、2021年度)"
+    },
+    {
+      "id": "tokyoVsOsaka",
+      "value": 6.05,
+      "unit": "倍",
+      "display": "約6倍",
+      "formula": "東京都の値 ÷ 大阪府の値"
+    },
+    {
+      "id": "tokyoVsKanagawa",
+      "value": 6.96,
+      "unit": "倍",
+      "display": "約7倍",
+      "formula": "東京都の値 ÷ 神奈川県の値"
+    },
+    {
+      "id": "tokyoVsFukuoka",
+      "value": 13.37,
+      "unit": "倍",
+      "display": "約13倍",
+      "formula": "東京都の値 ÷ 福岡県の値"
+    },
+    {
+      "id": "tokyoVsMedianRank24",
+      "value": 81.88,
+      "unit": "倍",
+      "display": "約82倍",
+      "formula": "東京都の値 ÷ 24位 (三重県) の値",
+      "medianPref": "三重県",
+      "medianValueMillionYen": 162962
+    },
+    {
+      "id": "allPrefecturesSumMillionYen",
+      "value": 28099012,
+      "unit": "百万円",
+      "display": "47都道府県の合計",
+      "formula": "47都道府県の値の合計"
+    },
+    {
+      "id": "tokyoShareOf47",
+      "value": 0.4749,
+      "unit": "割合",
+      "display": "約47％",
+      "formula": "東京都の値 ÷ 47都道府県の合計"
+    },
+    {
+      "id": "top5SumMillionYen",
+      "value": 19748725,
+      "unit": "百万円",
+      "display": "上位5都道府県の合計",
+      "formula": "東京都・大阪府・神奈川県・愛知県・福岡県の値の合計"
+    },
+    {
+      "id": "top5ShareOf47",
+      "value": 0.7028,
+      "unit": "割合",
+      "display": "約70％",
+      "formula": "上位5都道府県の合計 ÷ 47都道府県の合計"
+    },
+    {
+      "id": "rest42ShareOf47",
+      "value": 0.2972,
+      "unit": "割合",
+      "display": "約30％",
+      "formula": "1 − 上位5都道府県の割合 (6位以下の42道府県)"
+    },
+    {
+      "id": "otherPrefecturesSumMillionYen",
+      "value": 14755409,
+      "unit": "百万円",
+      "display": "147,554億円",
+      "formula": "47都道府県の合計 − 東京都の値 (残る46道府県)"
+    },
+    {
+      "id": "tokyoVsOtherPrefecturesSum",
+      "value": 0.9043,
+      "unit": "割合",
+      "display": "約90％",
+      "formula": "東京都の値 ÷ 残る46道府県の合計"
+    },
+    {
+      "id": "bottom5SumMillionYen",
+      "value": 368816,
+      "unit": "百万円",
+      "display": "3,688億円",
+      "formula": "佐賀県・徳島県・秋田県・高知県・鳥取県の値の合計"
+    },
+    {
+      "id": "tokyoVsBottom5Sum",
+      "value": 36.18,
+      "unit": "倍",
+      "display": "約36倍 (東京都の約36分の1)",
+      "formula": "東京都の値 ÷ 下位5県の合計"
+    },
+    {
+      "id": "countBelow100000MillionYen",
+      "value": 11,
+      "unit": "県",
+      "display": "1,000億円に届かない県の数",
+      "formula": "値が100,000百万円 (=1,000億円) 未満の都道府県の数"
+    },
+    {
+      "id": "countBelow200000MillionYen",
+      "value": 30,
+      "unit": "県",
+      "display": "2,000億円に届かない県の数",
+      "formula": "値が200,000百万円 (=2,000億円) 未満の都道府県の数"
+    },
+    {
+      "id": "spreadAkitaTokushimaSaga",
+      "value": 0.0089,
+      "unit": "割合",
+      "display": "1％未満",
+      "formula": "(佐賀県の値 − 秋田県の値) ÷ 秋田県の値。徳島県は両者の間"
+    },
+    {
+      "id": "tokyoPopulation2021",
+      "value": 14010000,
+      "unit": "人",
+      "display": "約1,401万人",
+      "formula": "総人口 2021年 (人口推計、千人単位) の東京都の値"
+    },
+    {
+      "id": "allPrefecturesPopulation2021",
+      "value": 125500000,
+      "unit": "人",
+      "display": "約1億2,550万人",
+      "formula": "総人口 2021年の47都道府県の合計"
+    },
+    {
+      "id": "populationByPrefecture2021",
+      "unit": "人",
+      "display": "都道府県別の総人口 (2021年) の元値",
+      "formula": "R2 app/ranking/total-population/values.json の partitions[yearCode=2021] の value (人口推計、千人単位のため下3桁は0)。順位相関と人口の割合の入力",
+      "prefectures": [
+        {
+          "areaCode": "13000",
+          "areaName": "東京都",
+          "value": 14010000
+        },
+        {
+          "areaCode": "14000",
+          "areaName": "神奈川県",
+          "value": 9236000
+        },
+        {
+          "areaCode": "27000",
+          "areaName": "大阪府",
+          "value": 8806000
+        },
+        {
+          "areaCode": "23000",
+          "areaName": "愛知県",
+          "value": 7517000
+        },
+        {
+          "areaCode": "11000",
+          "areaName": "埼玉県",
+          "value": 7340000
+        },
+        {
+          "areaCode": "12000",
+          "areaName": "千葉県",
+          "value": 6275000
+        },
+        {
+          "areaCode": "28000",
+          "areaName": "兵庫県",
+          "value": 5432000
+        },
+        {
+          "areaCode": "01000",
+          "areaName": "北海道",
+          "value": 5183000
+        },
+        {
+          "areaCode": "40000",
+          "areaName": "福岡県",
+          "value": 5124000
+        },
+        {
+          "areaCode": "22000",
+          "areaName": "静岡県",
+          "value": 3608000
+        },
+        {
+          "areaCode": "08000",
+          "areaName": "茨城県",
+          "value": 2852000
+        },
+        {
+          "areaCode": "34000",
+          "areaName": "広島県",
+          "value": 2780000
+        },
+        {
+          "areaCode": "26000",
+          "areaName": "京都府",
+          "value": 2561000
+        },
+        {
+          "areaCode": "04000",
+          "areaName": "宮城県",
+          "value": 2290000
+        },
+        {
+          "areaCode": "15000",
+          "areaName": "新潟県",
+          "value": 2177000
+        },
+        {
+          "areaCode": "20000",
+          "areaName": "長野県",
+          "value": 2033000
+        },
+        {
+          "areaCode": "21000",
+          "areaName": "岐阜県",
+          "value": 1961000
+        },
+        {
+          "areaCode": "10000",
+          "areaName": "群馬県",
+          "value": 1927000
+        },
+        {
+          "areaCode": "09000",
+          "areaName": "栃木県",
+          "value": 1921000
+        },
+        {
+          "areaCode": "33000",
+          "areaName": "岡山県",
+          "value": 1876000
+        },
+        {
+          "areaCode": "07000",
+          "areaName": "福島県",
+          "value": 1812000
+        },
+        {
+          "areaCode": "24000",
+          "areaName": "三重県",
+          "value": 1756000
+        },
+        {
+          "areaCode": "43000",
+          "areaName": "熊本県",
+          "value": 1728000
+        },
+        {
+          "areaCode": "46000",
+          "areaName": "鹿児島県",
+          "value": 1576000
+        },
+        {
+          "areaCode": "47000",
+          "areaName": "沖縄県",
+          "value": 1468000
+        },
+        {
+          "areaCode": "25000",
+          "areaName": "滋賀県",
+          "value": 1411000
+        },
+        {
+          "areaCode": "35000",
+          "areaName": "山口県",
+          "value": 1328000
+        },
+        {
+          "areaCode": "38000",
+          "areaName": "愛媛県",
+          "value": 1321000
+        },
+        {
+          "areaCode": "29000",
+          "areaName": "奈良県",
+          "value": 1315000
+        },
+        {
+          "areaCode": "42000",
+          "areaName": "長崎県",
+          "value": 1297000
+        },
+        {
+          "areaCode": "02000",
+          "areaName": "青森県",
+          "value": 1221000
+        },
+        {
+          "areaCode": "03000",
+          "areaName": "岩手県",
+          "value": 1196000
+        },
+        {
+          "areaCode": "17000",
+          "areaName": "石川県",
+          "value": 1125000
+        },
+        {
+          "areaCode": "44000",
+          "areaName": "大分県",
+          "value": 1114000
+        },
+        {
+          "areaCode": "45000",
+          "areaName": "宮崎県",
+          "value": 1061000
+        },
+        {
+          "areaCode": "06000",
+          "areaName": "山形県",
+          "value": 1055000
+        },
+        {
+          "areaCode": "16000",
+          "areaName": "富山県",
+          "value": 1025000
+        },
+        {
+          "areaCode": "05000",
+          "areaName": "秋田県",
+          "value": 945000
+        },
+        {
+          "areaCode": "37000",
+          "areaName": "香川県",
+          "value": 942000
+        },
+        {
+          "areaCode": "30000",
+          "areaName": "和歌山県",
+          "value": 914000
+        },
+        {
+          "areaCode": "41000",
+          "areaName": "佐賀県",
+          "value": 806000
+        },
+        {
+          "areaCode": "19000",
+          "areaName": "山梨県",
+          "value": 805000
+        },
+        {
+          "areaCode": "18000",
+          "areaName": "福井県",
+          "value": 760000
+        },
+        {
+          "areaCode": "36000",
+          "areaName": "徳島県",
+          "value": 712000
+        },
+        {
+          "areaCode": "39000",
+          "areaName": "高知県",
+          "value": 684000
+        },
+        {
+          "areaCode": "32000",
+          "areaName": "島根県",
+          "value": 665000
+        },
+        {
+          "areaCode": "31000",
+          "areaName": "鳥取県",
+          "value": 549000
+        }
+      ]
+    },
+    {
+      "id": "tokyoPopulationShare",
+      "value": 0.1116,
+      "unit": "割合",
+      "display": "約11％",
+      "formula": "東京都の総人口 ÷ 47都道府県の総人口の合計"
+    },
+    {
+      "id": "itShareOverPopulationShare",
+      "value": 4.25,
+      "unit": "倍",
+      "display": "4倍を超える",
+      "formula": "東京都の情報通信業の割合 ÷ 東京都の人口の割合 (丸めない値で計算)"
+    },
+    {
+      "id": "teleworkTokyoVsAkita",
+      "value": 6.22,
+      "unit": "倍",
+      "display": "約6.2倍",
+      "formula": "東京都のテレワーク実施率 ÷ 秋田県のテレワーク実施率 (2022年)"
+    },
+    {
+      "id": "teleworkTokyoMinusKanagawaPoints",
+      "value": 9.8,
+      "unit": "ポイント",
+      "display": "約10ポイント",
+      "formula": "東京都のテレワーク実施率 (39.8％) − 神奈川県のテレワーク実施率 (30.0％) (2022年)"
+    },
+    {
+      "id": "teleworkCountAtLeast20",
+      "value": 4,
+      "unit": "都県",
+      "display": "20％を超える都県の数",
+      "formula": "実施率が20％以上の都道府県の数"
+    },
+    {
+      "id": "teleworkCountBelow10",
+      "value": 20,
+      "unit": "県",
+      "display": "10％を下回る県の数",
+      "formula": "実施率が10％未満の都道府県の数"
+    },
+    {
+      "id": "teleworkOfItTop5Min",
+      "value": 15.5,
+      "unit": "％",
+      "display": "福岡県の15.5％",
+      "formula": "情報通信業の県内総生産の上位5都道府県 (東京都・大阪府・神奈川県・愛知県・福岡県) のテレワーク実施率の最小値"
+    },
+    {
+      "id": "teleworkOfItTop5Max",
+      "value": 39.8,
+      "unit": "％",
+      "display": "東京都の39.8％",
+      "formula": "同・最大値"
+    },
+    {
+      "id": "teleworkOfItBottom5Min",
+      "value": 6.4,
+      "unit": "％",
+      "display": "秋田県の6.4％",
+      "formula": "情報通信業の県内総生産の下位5都道府県 (佐賀県・徳島県・秋田県・高知県・鳥取県) のテレワーク実施率の最小値"
+    },
+    {
+      "id": "teleworkOfItBottom5Max",
+      "value": 9,
+      "unit": "％",
+      "display": "佐賀県の9.0％",
+      "formula": "同・最大値"
+    },
+    {
+      "id": "spearmanItVsTelework47",
+      "value": 0.73,
+      "unit": "相関係数",
+      "display": "0.73",
+      "formula": "情報通信業の県内総生産 (2021年度) とテレワーク実施率 (2022年) の順位相関 (スピアマン)。値の大きい順に順位を付け、同値は平均順位。47都道府県"
+    },
+    {
+      "id": "spearmanItVsTelework46ExTokyo",
+      "value": 0.71,
+      "unit": "相関係数",
+      "display": "0.71",
+      "formula": "同・東京都を除く46道府県"
+    },
+    {
+      "id": "spearmanItVsPopulation47",
+      "value": 0.96,
+      "unit": "相関係数",
+      "display": "0.96",
+      "formula": "情報通信業の県内総生産 (2021年度) と総人口 (2021年) の順位相関 (スピアマン)。値の大きい順に順位を付け、同値は平均順位。47都道府県"
+    },
+    {
+      "id": "spearmanItVsPopulation46ExTokyo",
+      "value": 0.96,
+      "unit": "相関係数",
+      "display": "0.96",
+      "formula": "同・東京都を除く46道府県"
+    },
+    {
+      "id": "spearmanPopulationVsTelework47",
+      "value": 0.74,
+      "unit": "相関係数",
+      "display": "0.74",
+      "formula": "総人口 (2021年) とテレワーク実施率 (2022年) の順位相関 (スピアマン)。値の大きい順に順位を付け、同値は平均順位。47都道府県。総人口は populationByPrefecture2021 の値"
+    },
+    {
+      "id": "spearmanPopulationVsTelework46ExTokyo",
+      "value": 0.73,
+      "unit": "相関係数",
+      "display": "0.73",
+      "formula": "同・東京都を除く46道府県 (計算値 0.7269 を四捨五入)"
+    },
+    {
+      "id": "osakaItShareOf47",
+      "value": 0.0785,
+      "unit": "割合",
+      "display": "約7.8％",
+      "formula": "大阪府の値 ÷ 47都道府県の合計 (情報通信業の県内総生産)"
+    },
+    {
+      "id": "osakaPopulationShare",
+      "value": 0.0702,
+      "unit": "割合",
+      "display": "約7.0％",
+      "formula": "大阪府の総人口 ÷ 47都道府県の総人口の合計"
+    },
+    {
+      "id": "itShareOverPopShareKanagawa",
+      "value": 0.93,
+      "unit": "倍",
+      "display": "0.9倍",
+      "formula": "神奈川県のIT産業の割合 ÷ 神奈川県の人口の割合"
+    },
+    {
+      "id": "itShareOverPopShareFukuoka",
+      "value": 0.87,
+      "unit": "倍",
+      "display": "0.9倍",
+      "formula": "福岡県のIT産業の割合 ÷ 福岡県の人口の割合"
+    },
+    {
+      "id": "itShareOverPopShareAichi",
+      "value": 0.76,
+      "unit": "倍",
+      "display": "0.8倍",
+      "formula": "愛知県のIT産業の割合 ÷ 愛知県の人口の割合"
+    },
+    {
+      "id": "itShareOverPopShareOsaka",
+      "value": 1.12,
+      "unit": "倍",
+      "display": "1.1倍",
+      "formula": "大阪府のIT産業の割合 ÷ 大阪府の人口の割合"
+    },
+    {
+      "id": "countItShareAtLeastPopShare",
+      "value": 2,
+      "unit": "都府県",
+      "display": "2つ",
+      "formula": "IT産業の割合 ÷ 人口の割合 が1以上の都道府県の数 (東京都と大阪府)",
+      "prefs": [
+        "東京都",
+        "大阪府"
+      ]
+    },
+    {
+      "id": "medianItShareOverPopShare46ExTokyo",
+      "value": 0.48,
+      "unit": "倍",
+      "display": "約0.5倍",
+      "formula": "東京都を除く46道府県の「IT産業の割合 ÷ 人口の割合」を小さい順に並べた23番目 (中央値)"
+    },
+    {
+      "id": "bottom5ItShareOverPopShareMin",
+      "value": 0.37,
+      "unit": "倍",
+      "display": "秋田県の0.4倍",
+      "formula": "下位5県 (佐賀県・徳島県・秋田県・高知県・鳥取県) の「IT産業の割合 ÷ 人口の割合」の最小値"
+    },
+    {
+      "id": "bottom5ItShareOverPopShareMax",
+      "value": 0.49,
+      "unit": "倍",
+      "display": "徳島県・高知県の0.5倍",
+      "formula": "同・最大値"
+    },
+    {
+      "id": "tottoriItShareOverPopShare",
+      "value": 0.47,
+      "unit": "倍",
+      "display": "0.5倍",
+      "formula": "鳥取県のIT産業の割合 ÷ 鳥取県の人口の割合"
+    }
+  ]
+}

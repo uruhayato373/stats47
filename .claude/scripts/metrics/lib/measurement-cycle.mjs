@@ -8,6 +8,7 @@
 import { describeChannel, weeklyProductRevenue } from "./product-revenue.mjs";
 import { reconcileDimensions } from "../../google-admin/dimension-ledger.mjs";
 import { isoWeekOf, isoWeekRange } from "./periods.mjs";
+import { datasetDir } from "../../../../config/datasets.mjs";
 
 /** 登録すれば値別の内訳を読める最低発火量 (28 日)。これ未満は登録しても判定の標本にならない。 */
 export const MIN_EVENTS_FOR_BREAKDOWN = 100;
@@ -288,7 +289,7 @@ const keyOf = (v) => (typeof v === "string" ? v : v?.key ?? v?.rankingKey ?? v?.
 /**
  * データ品質ゲート通過率 = 週次のランキング整合性監査で、どの検査にも引っかからなかった公開指標の割合。
  * 検査の定義は ranking-integrity-audit (週次 CI) が持ち、ここは一覧を数えるだけ。
- * @param {object|null} audit .claude/state/ranking/integrity-audit.json
+ * @param {object|null} audit data/ranking/integrity-audit.json
  */
 export function summarizeDataQuality(audit) {
   const active = Number(audit?.totals?.activeKeys);
@@ -350,13 +351,13 @@ export function summarizePaidPurchases({ ledger, liveProductCount, weekStart, we
  * @param {Array<{id,label,tier,measurementStatus,unit}>|null} input.nodes kpi-tree.json の nodes
  * @param {string} input.week
  * @param {string} input.asOf
- * @param {Array<object>|null} input.gscHistory .claude/state/metrics/gsc/history.csv
+ * @param {Array<object>|null} input.gscHistory data/gsc/history.csv
  * @param {Array<object>|null} input.cycleHistory measurement-cycle/history.csv (今週の行を除く過去分)
  * @param {object|null} input.journey summarizeJourney の結果
  * @param {object|null} input.workContext summarizeWorkContext の結果
- * @param {Array<object>|null} input.affiliateRows .claude/state/ads/ga4-affiliate-history.csv
+ * @param {Array<object>|null} input.affiliateRows data/affiliate/ga4-affiliate-history.csv
  * @param {object|null} input.operations buildOperations の結果
- * @param {object|null} input.authenticated .claude/state/metrics/authenticated/latest.json (ASP・note・KDP 等の認証付き収集)
+ * @param {object|null} input.authenticated data/authenticated/latest.json (ASP・note・KDP 等の認証付き収集)
  * @param {Array<{id:string, kpis:string[]|null}>} input.improvementRows strategy-lanes.parseImprovementRows
  * @param {string[]} input.focusKpis 今月の重点レーンの KPI id
  * @param {number} input.maxActive active 施策の上限
@@ -466,7 +467,7 @@ const TIER_LABEL = { nsm: "NSM", driver: "駆動", guardrail: "守り" };
 
 function renderKpiTree(k) {
   const lines = [];
-  lines.push(`**KPI ツリー**（正典: 事業計画 catalog → \`.claude/state/business-plan/kpi-tree.json\`。比較は ${KPI_COMPARE_WEEKS_BACK} 週前 ${k.compareWeek} = 窓が重ならない値。★ = 今月の重点レーンの KPI）`);
+  lines.push(`**KPI ツリー**（正典: 事業計画 catalog → \`${datasetDir("business-plan.state")}/kpi-tree.json\`。比較は ${KPI_COMPARE_WEEKS_BACK} 週前 ${k.compareWeek} = 窓が重ならない値。★ = 今月の重点レーンの KPI）`);
   lines.push("");
   lines.push("| 階層 | KPI | 今週 | 比較 | 目標 | 状態 | 施策 |");
   lines.push("|---|---|---|---|---|---|---|");

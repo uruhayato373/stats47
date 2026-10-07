@@ -12,7 +12,7 @@ primary_agent: instagram-strategist
 
 最新トレンドスナップショットと stats47 の都道府県データを組み合わせ、**結論・理由・体験・反論・数字・ハウツー**の
 6 切り口で Instagram キャプション + カルーセルスライドコピーを一括生成し、
-`.claude/state/sns/posts.json` に draft 登録する。
+`data/sns/posts.json` に draft 登録する。
 
 X 版（`/post-x-batch`。角度×カテゴリ相性は rules §2-8 に統合済）との主な差分:
 
@@ -384,7 +384,7 @@ IG は即時投稿のみのため `scheduled_for` は「推奨投稿時刻」と
 
 # draft 登録後に確認
 jq '[.posts[] | select(.platform=="instagram" and .angle!=null)]' \
-  .claude/state/sns/posts.json
+  data/sns/posts.json
 
 # draft から投稿（推奨時刻になったら）
 /post-instagram {ranking_key} --type carousel  # または --type reels
@@ -411,7 +411,7 @@ jq '[.posts[] | select(.platform=="instagram" and .angle!=null)]' \
 |---|---|
 | `.claude/skills/sns/post-ig-6angles/reference/ig-angle-templates.md` | IG 切り口別キャプション + スライドコピー文例集 |
 | `.claude/rules/sns-content-standards.md` §2-8 | カテゴリ × 切り口アフィニティマップ（X/IG 共用 SSOT。旧 post-x-6angles から統合）|
-| `.claude/state/sns/posts.json` | 投稿 registry（draft 追記先）|
+| `data/sns/posts.json` | 投稿 registry（draft 追記先）|
 | `.claude/skills/blog/trends-snapshots/trends-all-<date>.md` | トレンドスナップショット |
 
 ---

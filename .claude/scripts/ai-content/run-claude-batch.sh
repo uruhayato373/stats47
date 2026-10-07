@@ -117,7 +117,7 @@ CI_DIR=.local/ci
 mkdir -p "$CI_DIR"
 # ★絶対パス: `npm run --workspace` は cwd を packages/ai-content にするため、相対だとそちらに書かれる
 REPORT="$PROJECT_ROOT/$CI_DIR/claude-run-$RUN_ID.json"
-STATE=.claude/state/ai-content/generation-failures.json
+STATE=data/ai-content/remediation/generation-failures.json
 
 # ---- 1-2. 対象選定 -------------------------------------------------------------
 TARGETS_FILE="$CI_DIR/targets-$RUN_ID.txt"
@@ -199,7 +199,7 @@ if [ "$NO_PUSH" = 1 ]; then
   exit 0
 fi
 
-git add -- data/ai-content-staging .claude/state/ai-content .claude/state/metrics/ai-content
+git add -- data/ai-content-staging data/ai-content/remediation data/ai-content
 if git diff --cached --quiet; then
   log "commit 対象なし"
   exit 0

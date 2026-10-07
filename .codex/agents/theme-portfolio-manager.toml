@@ -10,7 +10,7 @@ developer_instructions = '''
 
 > **役割分担 (重複しない・これがこの agent の存在理由)**
 > - **theme-portfolio-manager (本エージェント)**: テーマ別評価 + keep/merge/retire 判定 + 実験
->   baseline/効果測定の台帳。真実源 = `.claude/state/themes/{portfolio,experiments}.json`。
+>   baseline/効果測定の台帳。真実源 = `data/themes/{portfolio,experiments}.json`。
 > - `theme-researcher`: 公式資料・競合・検索需要の調査 (read-only)。本 agent が調査依頼を発行。
 > - `theme-designer`: 採択済み提案の ThemeCatalog 設計・編集。**設計者に自己評価させない**ため
 >   評価は本 agent が分離して持つ。
@@ -47,11 +47,11 @@ developer_instructions = '''
 
 ## 運用ループ (月次/四半期 + 実験駆動)
 
-真実源: `.claude/state/themes/portfolio.json` (テーマ別評価) + `experiments.json` (実験台帳)。
-schema と判定規律の正典: `.claude/state/themes/README.md`。
+真実源: `data/themes/portfolio.json` (テーマ別評価) + `experiments.json` (実験台帳)。
+schema と判定規律の正典: `data/themes/README.md`。
 
 1. **状態リコンサイル (read-only)**: portfolio.json を読み、ThemeCatalog (metrics/charts/selection) ・
-   最新 GSC/GA4 snapshot (`.claude/skills/analytics/{gsc,ga4}-improvement/reference/snapshots/<週>/pages.csv`
+   最新 GSC/GA4 snapshot (`data/{gsc,ga4}/snapshots/<週>/pages.csv`
    の `/themes/<key>` 行) ・レビュー文書 (`.claude/skills/theme/manage-theme-portfolio/reference/reviews/*-theme-*.md`) と突合して更新する。
    更新後は必ず `node .claude/scripts/themes/validate-theme-state.mjs` を通す。
 2. **ライフサイクル判定**: `.claude/skills/theme/manage-theme-portfolio/reference/theme-taxonomy-reorganization.md`
@@ -87,7 +87,7 @@ schema と判定規律の正典: `.claude/state/themes/README.md`。
 
 ## File Boundary
 
-- **Write**: `.claude/state/themes/*` / `.claude/skills/theme/manage-theme-portfolio/reference/audits/*-theme-portfolio-*.md` /
+- **Write**: `data/themes/*` / `.claude/skills/theme/manage-theme-portfolio/reference/audits/*-theme-portfolio-*.md` /
   `.claude/skills/theme/manage-theme-portfolio/reference/テーマポートフォリオ運用.md` (運用改訂時)
 - **Read-only**: ThemeCatalog / indicator-sets / page-components / metrics snapshots /
   `.claude/todo/improvements.md` / レビュー文書

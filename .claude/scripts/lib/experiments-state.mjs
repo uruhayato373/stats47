@@ -1,7 +1,7 @@
 /**
  * NSM 実験 state I/O
  *
- * `.claude/state/experiments.json` を single source of truth として実験ライフサイクルを管理する。
+ * `data/business/experiments.json` を single source of truth として実験ライフサイクルを管理する。
  * `/nsm-experiment` スキルから呼ばれる。
  *
  * CLI 使用:
@@ -14,8 +14,9 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname } from "node:path";
 import { pathToFileURL } from "node:url";
+import { datasetPath } from "../../../config/datasets.mjs";
 
-const STATE_PATH = ".claude/state/experiments.json";
+const STATE_PATH = datasetPath("business.experiments");
 
 // ── I/O ──────────────────────────────────────────────────────────
 

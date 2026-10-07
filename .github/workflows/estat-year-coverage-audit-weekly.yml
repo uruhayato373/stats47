@@ -12,7 +12,7 @@ name: 🗓️ e-Stat Year Coverage Audit (weekly)
 # これは「壊れている」ことの検知ではなく「config が e-Stat の実際のカバレッジより
 # 狭いかもしれない候補」を機械的に見つけるだけの発見キューのため、Issue は起票しない
 # (remediation-queue.json 等と同じ「見つけたら queue に積む」設計。data-ingester が
-# .claude/state/data/estat-year-coverage/LATEST.md を見て順に是正する)。
+# data/estat/year-coverage/LATEST.md を見て順に是正する)。
 #
 # 正典: packages/ranking/src/scripts/audit-estat-year-coverage.ts (実装コメント参照) /
 #       .claude/rules/metric-config-standards.md「years は最新年だけに絞らない」
@@ -76,7 +76,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .claude/state/data/estat-year-coverage .claude/todo/backlog.md
+          git add data/estat/year-coverage .claude/todo/backlog.md
           if git diff --cached --quiet; then
             echo "No audit changes"
             exit 0

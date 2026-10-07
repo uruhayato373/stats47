@@ -84,7 +84,7 @@ stats47 へ採用する前に Stage 2 の e-Stat / metric SSOT 照合を必ず�
 ```bash
 # 既存 snapshot CSV からテーマ関連クエリの impressions/CTR を grep
 grep -iE "<theme 関連キーワード>" \
-  .claude/skills/analytics/gsc-improvement/reference/snapshots/*/queries.csv | sort -t',' -k3 -rn | head -20
+  data/gsc/snapshots/*/queries.csv | sort -t',' -k3 -rn | head -20
 ```
 
 ## Stage 2: 実在確認 (必須・inline。estat-researcher サブ agent を spawn しない)
@@ -169,7 +169,7 @@ theme-researcher を Agent tool で呼ぶ場合、呼び元は報告が指す一
 - コード明記のSSDS系列を再取得: 既存の `NEXT_PUBLIC_ESTAT_APP_ID` を環境に設定して `npm run theme:expansion:verify`
 
 実装は `.claude/scripts/themes/verify-theme-expansion.mjs`、取得証拠は
-`.claude/state/estat/theme-expansion-verification.json`。生のAPI応答は既定で
+`data/estat/theme-expansion-verification.json`。生のAPI応答は既定で
 `/tmp/stats47-theme-expansion-api/` に保存し、gitには取得条件・hash・年別県数・欠測を残す。
 再取得は候補の採否を変更しない。原典の年度・母集団・系列改定の判断は担当が確認し、
 `check` を再実行する。公式ファイル・GIS・コード未解決指標まで検証済みとは扱わない。

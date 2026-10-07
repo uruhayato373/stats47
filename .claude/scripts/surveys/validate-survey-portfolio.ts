@@ -1,8 +1,8 @@
 /**
  * validate-survey-portfolio.ts — survey ポートフォリオ state の決定的 lint
  *
- * 対象: .claude/state/surveys/{portfolio,experiments}.json
- * schema・判定規律の正典: .claude/state/surveys/README.md
+ * 対象: data/surveys/{portfolio,experiments}.json
+ * schema・判定規律の正典: data/surveys/README.md
  * 運用設計: .claude/skills/survey/manage-survey-portfolio/reference/surveyポートフォリオ運用.md
  *
  * enforce する規律 (根拠なし判定・重複実験・drift を機械的に禁止する):
@@ -45,10 +45,11 @@ import {
   requiredSurveyReaderQuestionCount,
 } from "../../../apps/web/src/features/survey/survey-editorial";
 import { resolveSurveyTaxonomy } from "../../../packages/ranking/src/survey/survey-taxonomy";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
-const STATE_DIR = process.env.STATE_DIR || path.join(PROJECT_ROOT, ".claude/state/surveys");
+const STATE_DIR = process.env.STATE_DIR || path.join(PROJECT_ROOT, datasetDir("surveys.portfolio"));
 const SURVEYS_JSON =
   process.env.SURVEYS_JSON || path.join(PROJECT_ROOT, "packages/ranking/src/data/surveys.json");
 const jsonMode = process.argv.includes("--json");

@@ -4,7 +4,7 @@
  *
  * 期日 (evaluateAt7d/28d/56d) に到達した pending 実験へ、portfolio.json の現在実測を
  * observations.dNN として決定的に記録する。verdict の確定は本スクリプトの --verdict 経由でのみ
- * 行う (手編集禁止)。規律 (schema 正典 .claude/state/surveys/README.md):
+ * 行う (手編集禁止)。規律 (schema 正典 data/surveys/README.md):
  *   - d7 は異常検知のみ (インデックス/canonical/404/計測異常。verdict 確定不可。
  *     本番 HTTP/URL Inspection の実測は gsc-analyst へ依頼する — 本スクリプトは数値記録のみ)
  *   - d28 = 暫定 / d56 = 基本判定
@@ -28,10 +28,11 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
-const STATE_DIR = process.env.STATE_DIR || path.join(PROJECT_ROOT, ".claude/state/surveys");
+const STATE_DIR = process.env.STATE_DIR || path.join(PROJECT_ROOT, datasetDir("surveys.portfolio"));
 const PORTFOLIO = path.join(STATE_DIR, "portfolio.json");
 const EXPERIMENTS = path.join(STATE_DIR, "experiments.json");
 

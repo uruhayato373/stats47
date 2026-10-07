@@ -1,0 +1,10 @@
+{
+  "kind": "scatter",
+  "xKey": "vacant-housing-rate",
+  "yKey": "ratio-65-plus",
+  "year": "x:2023/y:2025",
+  "transform": "R2 app/ranking/<key>/values.json の x=2023年・y=2025年 partition から都道府県コードで結合。47都道府県全件、除外なし。y は小数第1位に丸め",
+  "pearsonR": 0.7354618447263571,
+  "source": "r2:app/ranking/vacant-housing-rate/values.json + r2:app/ranking/ratio-65-plus/values.json",
+  "fetchedAt": "2026-10-07"
+}

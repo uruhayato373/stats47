@@ -1,5 +1,5 @@
 /**
- * アフィリエイト運用 集約状態 (.claude/state/ads/affiliate-operations-latest.json) の決定的コア。
+ * アフィリエイト運用 集約状態 (data/affiliate/affiliate-operations-latest.json) の決定的コア。
  *
  * 純粋関数のみ (I/O なし)。CLI (.claude/scripts/ads/build-affiliate-operations-state.ts) が
  * snapshot 群 (inventory / GA4 / compliance / experiments registry / AFFILIATE_ADS) を渡す。
@@ -139,7 +139,7 @@ export function aggregateVariantMetrics(ga4Rows) {
  * 勝者の自動反映はしない — ready-to-decide は人間への提示までが責務。
  *
  * @param {object} args
- * @param {Array<object>} args.registry .claude/state/ads/experiments.json の experiments[]
+ * @param {Array<object>} args.registry data/affiliate/experiments.json の experiments[]
  * @param {Array<object>} args.ads AFFILIATE_ADS (experimentId 付きエントリを variant 定義として読む)
  * @param {Array<object>} args.variantMetrics aggregateVariantMetrics の出力
  * @param {string} args.nowIso 現在時刻 (ISO)

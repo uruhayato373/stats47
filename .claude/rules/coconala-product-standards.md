@@ -1,7 +1,8 @@
 ---
 paths:
   - "packages/product-factory/**"
-  - ".claude/{scripts/coconala,scripts/kdp,skills/product,state/products}/**"
+  - ".claude/{scripts/coconala,scripts/kdp,skills/product}/**"
+  - "data/products/**"
   - "config/{coconala,kdp}-*.json"
   - ".claude/agents/{coconala-*,kdp-operator,kindle-publisher}.md"
 ---
@@ -28,7 +29,7 @@ paths:
 | 実データ（観測値） | R2 `app/ranking/<key>/values.json` | 既存 R2 | 取得は `src/data/load-ranking-values.ts` |
 | 商品に焼く実データ | `src/data/datasets/<key>.ts` | git TS スナップショット | **基準年固定**。R2 から取得して手記の SOURCES を添える |
 | 生成バイナリ（pptx/xlsx/pdf/png…） | `.local/coconala-products/<id>/<version>/` | 派生物・**git 管理外** | 手編集を正典にしない・公開 R2 へ置かない |
-| リリース台帳（生成状況） | `.claude/state/products/catalog-status.json` | 機械状態 | `products:report` で再生成 |
+| リリース台帳（生成状況） | `data/products/catalog-status.json` | 機械状態 | `products:report` で再生成 |
 
 - **商品定義=git TS が SSOT**。生成物は再生成可能な派生物（`.local/` は `.gitignore` 済）。
 - **実データは R2 → git TS スナップショット（基準年固定）**。架空サンプルは `Dataset.isSample: true` で明示分離する。
@@ -123,7 +124,7 @@ npm run test:run   --workspace=@stats47/product-factory
 同じ product-factory に、Amazon KDP 向けの電子書籍 (EPUB3) を生成する **kindle チャネル** を持つ（2026-07-23 新設）。ココナラが「Office/データを売る」のに対し、Kindle は「読ませて送客する」役割で、既存ブログ 98 記事・ランキング ai-content を再構成して束ねる。ランキング大全は競合先行で弱いため、S1 論点読み物を最優先する。
 
 - **SSOT = `packages/product-factory/src/channels/kindle/book-catalog.ts`**（`KINDLE_BOOKS`）。4 シリーズ = S1 論点読み物 / S2 テーマ別データブック / S3 地域別 / S4 ランキング大全。本文素材の SSOT は **R2 `app/blog/<slug>/article.md` + `data/*.svg`**。生成物 `.local/kindle-books/<id>/v1/` は派生物（git 管理外・手編集を正典にしない）だが、**KDPへ送る版は送信前にAES-256-GCM暗号化してR2 `archive/kindle-encrypted/<id>/v1/<revision>/`へ完全bundleで保全する**。配信用R2へ平文EPUBを置かない。
-- **別PC復元の正典**は `.claude/state/products/kindle-archives.json`（Git）+ 上記R2暗号化bundle。`book.epub / cover.jpg / cover.png / metadata.json / READINESS.md`（`review.md`があれば同梱）のSHA-256からimmutable revisionを作る。暗号鍵はR2/Gitへ置かず、`KINDLE_ARCHIVE_KEY`、未設定時は当該PCの`R2_SECRET_ACCESS_KEY`からHKDFで導出する。認証Cookie・2FA・KDP profileはarchive対象外。
+- **別PC復元の正典**は `data/products/kindle-archives.json`（Git）+ 上記R2暗号化bundle。`book.epub / cover.jpg / cover.png / metadata.json / READINESS.md`（`review.md`があれば同梱）のSHA-256からimmutable revisionを作る。暗号鍵はR2/Gitへ置かず、`KINDLE_ARCHIVE_KEY`、未設定時は当該PCの`R2_SECRET_ACCESS_KEY`からHKDFで導出する。認証Cookie・2FA・KDP profileはarchive対象外。
 - **主エンジンは EPUB3 リフロー型**（`src/generators/epub.ts`・jszip）。図表は章内ブロック画像として SVG→PNG 化して同梱（sharp・density 288）。カバーは satori→sharp で 1600×2560 自動生成。**KDP は電子で PDF を実質受け付けない**ため EPUB を採る（PDF 生成器 `databook-pdf.ts` は目次・画像・チャート非対応でそもそも書籍に不向き）。
 
 #### 編集設計 (design) が無い本は作らない (2026-09-19 確定)
@@ -322,7 +323,7 @@ R2 `app/ranking/<key>/ai-content.json` はサイトで公開済み・監査済�
   再試行で前工程を実行してもstageは後退させず、工程ごとの時刻とread-back証拠を残す。
 - **draft-first + `--commit` gate + オーナー承認**: 既定は「下書き保存」。**実公開（`--commit`）は outward-facing・取り下げに時間がかかるため、オーナー明示承認時のみ**。未充填フィールド・公開未確定時は「公開した」と報告しない。
 - **週次レビュー→週次計画→公開の接続**: weekly-reviewはKDP本棚状態と`products:sales`の販売数/KENPを同期し、
-  `npm run kdp:weekly -- --week YYYY-Www --write`で`.claude/state/products/kdp-weekly-publication.json`を再生成する。
+  `npm run kdp:weekly -- --week YYYY-Www --write`で`data/products/kdp-weekly-publication.json`を再生成する。
   weekly-planは`prepare-one`なら1冊だけ準備し、`ready-for-owner-approval`ならその1冊だけを候補にできる。
   計画への記載・checkbox・過去の包括承認は公開承認ではない。対象IDの新しい明示承認がある場合だけ
   `npm run kdp:weekly-publish -- --week YYYY-Www --id <ID> --owner-approved <ID> --commit`を実行する。
@@ -386,7 +387,7 @@ account assert後は本棚を直前取得し、`下書き + レビュー中 + �
 掃除は `.claude/scripts/kdp/kdp-drafts.mjs`
 (`--prune` で対象表示 / `--prune --apply` で削除。SSOT の draftId は消さない)。
 
-- 実装: agent `kdp-operator` / skill `/kdp-publish` / `.claude/scripts/kdp/`（`{login,capture-account,kdp-publish,kdp-batch,kdp-drafts}.mjs` + `lib/kdp-{session,form,flow,status,archive-gate}.mjs`。フローの単一実装は `lib/kdp-flow.mjs`、多冊数は `kdp-batch.mjs --phase draft|verify|publish|status`）。完成物保全・復元は `npm run kindle:archive --workspace=@stats47/r2-storage -- --push|--audit|--restore`。出品内容と公開状態の SSOT は `config/kdp-listings.json`、暗号化archive台帳は `.claude/state/products/kindle-archives.json`。書籍生成・カタログは `kindle-publisher` に委譲。
+- 実装: agent `kdp-operator` / skill `/kdp-publish` / `.claude/scripts/kdp/`（`{login,capture-account,kdp-publish,kdp-batch,kdp-drafts}.mjs` + `lib/kdp-{session,form,flow,status,archive-gate}.mjs`。フローの単一実装は `lib/kdp-flow.mjs`、多冊数は `kdp-batch.mjs --phase draft|verify|publish|status`）。完成物保全・復元は `npm run kindle:archive --workspace=@stats47/r2-storage -- --push|--audit|--restore`。出品内容と公開状態の SSOT は `config/kdp-listings.json`、暗号化archive台帳は `data/products/kindle-archives.json`。書籍生成・カタログは `kindle-publisher` に委譲。
 
 役割分担（追加分）:
 
@@ -447,4 +448,4 @@ account assert後は本棚を直前取得し、`下書き + レビュー中 + �
 - 出品 SoT: `config/coconala-listings.json` / アカウント: `config/coconala-account.json`（★stats47 専用・sellerName 要記入）
 - 認証プロファイル: `docs/01_技術設計/07_Playwright認証プロファイル.md`（`playwright-coconala-profile`）
 - 移植元: doboku-note `.claude/agents/coconala-operator.md` / `.claude/skills/management/coconala-publish/`
-- **Kindle チャネル (§8)**: SSOT `packages/product-factory/src/channels/kindle/book-catalog.ts` / EPUB 生成器 `src/generators/epub.ts` / CLI `src/channels/kindle/cli.ts` / 台帳 `.claude/state/products/kindle-status.json`
+- **Kindle チャネル (§8)**: SSOT `packages/product-factory/src/channels/kindle/book-catalog.ts` / EPUB 生成器 `src/generators/epub.ts` / CLI `src/channels/kindle/cli.ts` / 台帳 `data/products/kindle-status.json`

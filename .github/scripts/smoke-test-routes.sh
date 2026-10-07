@@ -16,6 +16,10 @@
 #     無画像になる。ページ HTTP は 200 なので title 検査ではすり抜ける。
 #     → 各 route の og:image meta URL を実際に叩いて 200 か検査する (.claude/rules/ogp-image-standards.md)。
 #
+#   - 消えた静的資産の参照 (2026-10-06 障害・Issue #1089): デプロイ後に / の HTML が、デプロイで消えた CSS
+#     (404) を参照したまま Workers Cache に残り、CSS なしで表示された。HTTP 200・title 正常なので
+#     ほかの検査はすり抜けた → HTML が参照する /_next/static/ の CSS・JS が 200 を返すか検査する。
+#
 #   - 410 skip の逃げ道 (2026-07-24 追加の STRICT_URLS):
 #     通常の URLS は 301/410 を「意図的な gone」として skip するため、**200 を返すべき route が
 #     丸ごと 410 になった障害を検知できない**。実際 /tag/* は約 3 ヶ月 410 のままで、公開記事の
@@ -33,6 +37,8 @@ NOTFOUND_RE='見つかりません|ページが見つかりません|Not Found|4
 
 fail=0
 checked=0
+# 参照資産の HTTP status を URL 間で使い回す (同じ CSS・JS を何度も叩かない)
+declare -A ASSET_STATUS
 
 # sitemap.xml から「最初に出現する <prefix> URL」を 1 件取得 (データ変動に強い動的代表 URL)
 #
@@ -138,6 +144,21 @@ for url in "${URLS[@]}" "${STRICT_URLS[@]}"; do
     continue
   fi
 
+  # HTML が参照する /_next/static/ の CSS・JS が実在するか (古い HTML がキャッシュに残ると 404 になる)。
+  missing_assets=""
+  for asset in $(echo "$body" | grep -oE '/_next/static/[^"?]+\.(css|js)' | sort -u); do
+    if [ -z "${ASSET_STATUS[$asset]:-}" ]; then
+      ASSET_STATUS[$asset]="$(curl -s -o /dev/null -A "$UA" --max-time 20 -w '%{http_code}' "${BASE_URL}${asset}" 2>/dev/null)"
+    fi
+    [ "${ASSET_STATUS[$asset]}" = "200" ] || missing_assets="${missing_assets} ${asset}(${ASSET_STATUS[$asset]})"
+  done
+  if [ -n "$missing_assets" ]; then
+    echo "  ❌ [stale asset] ${url}"
+    echo "        missing:${missing_assets}"
+    fail=$((fail + 1))
+    continue
+  fi
+
   # og:image が実際に 200 を返すか (ランタイム opengraph-image route の Worker 500 等を捕捉)。
   # ページは 200・title も正常なのに og:image だけ壊れているケースを検知する。
   ogimg="$(echo "$body" | grep -o '<meta[^>]*property="og:image"[^>]*content="[^"]*"' | head -1 | sed -E 's/.*content="([^"]*)".*/\1/')"
@@ -188,10 +209,11 @@ fi
 
 echo ""
 if [ "$fail" -gt 0 ]; then
-  echo "❌ Smoke test FAILED: ${fail}/${checked} route(s) returning notFound / og:image error / HTTP error."
+  echo "❌ Smoke test FAILED: ${fail}/${checked} route(s) returning notFound / og:image error / stale asset / HTTP error."
   echo "   → notFound: generateStaticParams を R2 依存 route に付けていないか (.claude/rules/nextjs-ssg-preservation.md)"
   echo "   → og:image 非200: openGraph.images 未指定でランタイム opengraph-image に落ちていないか (.claude/rules/ogp-image-standards.md)"
   echo "   → featured count 不足: master export (sync-snapshots) が R2 item.json を部分列挙していないか (NODE_ENV=production を確認)"
+  echo "   → stale asset: 古い HTML がキャッシュに残っていないか (purge-cdn.yml で Workers Cache を全パージ。reset-worker-cache-after-deploy.sh)"
   exit 1
 fi
 echo "✅ Smoke test passed: ${checked}/${checked} representative routes OK."

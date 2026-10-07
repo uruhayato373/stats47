@@ -71,13 +71,13 @@ function fixture({
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'gsc-cycle-'));
   write(
     root,
-    '.claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W34/summary.json',
+    'data/gsc/snapshots/2026-W34/summary.json',
     {
       finalized7d: { coverage: { status: 'complete' } },
       wowBlockedReason: null,
     }
   );
-  write(root, '.claude/state/effect-verdict/verdicts-2026-W34.json', {
+  write(root, 'data/effect-verdict/verdicts-2026-W34.json', {
     week: candidateWeek,
     summary: { total: targetSubject || confirmedActive ? 1 : 0 },
     verdicts: [
@@ -103,7 +103,7 @@ function fixture({
         : []),
     ],
   });
-  write(root, '.claude/state/search-growth/candidates.json', {
+  write(root, 'data/search-growth/candidates.json', {
     generatedAt: '2026-08-23T13:00:00.000Z',
     week: '2026-W34',
     sourceHealth: {
@@ -121,13 +121,13 @@ function fixture({
   });
   write(
     root,
-    '.claude/state/metrics/gsc/url-inspection/LATEST.md',
+    'data/gsc/url-inspection/LATEST.md',
     '# GSC URL Inspection — 2026-08-22\n'
   );
   for (const week of ['2026-W31', '2026-W32', '2026-W33', '2026-W34']) {
     write(
       root,
-      `.claude/skills/management/weekly-review/reference/reviews/${week}.md`,
+      `data/reviews/weekly/${week}.md`,
       `# ${week}\n\n## search-growth 候補\n`
     );
   }
@@ -207,7 +207,7 @@ test('最新計測に対応するreviewと次週planの欠落をfailにする', 
   fs.rmSync(
     path.join(
       root,
-      '.claude/skills/management/weekly-review/reference/reviews/2026-W34.md'
+      'data/reviews/weekly/2026-W34.md'
     )
   );
   write(root, '.claude/todo/weekly.md', '---\nweek: 2026-W34\n---\n');
@@ -248,11 +248,11 @@ test('前週候補の月曜レビューは有効、過去週の判断は無効�
   t.after(() => fs.rmSync(root, { recursive: true, force: true }));
   const candidatesPath = path.join(
     root,
-    '.claude/state/search-growth/candidates.json'
+    'data/search-growth/candidates.json'
   );
   const candidates = JSON.parse(fs.readFileSync(candidatesPath, 'utf8'));
   candidates.candidates[0].dismissedAt = '2026-08-16T01:00:00.000Z';
-  write(root, '.claude/state/search-growth/candidates.json', candidates);
+  write(root, 'data/search-growth/candidates.json', candidates);
   const result = auditOperationsCycle({
     root,
     now: NOW,
@@ -314,7 +314,7 @@ test('review-inputはレビュー作成前なのでreviewとplanを要求しな�
   fs.rmSync(
     path.join(
       root,
-      '.claude/skills/management/weekly-review/reference/reviews/2026-W34.md'
+      'data/reviews/weekly/2026-W34.md'
     )
   );
   fs.rmSync(path.join(root, '.claude/todo/weekly.md'));

@@ -1,15 +1,16 @@
 /** Exact canonical restore allowlist. Sessions, diagnostics and arbitrary paths never leave the vault. */
 import { sourceFor } from './sources.mjs';
 import { createHash } from 'node:crypto';
+import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 export function consumerPath(name, path) {
   if (name === 'afb' && /^\.local\/authenticated-measurement\/afb-\d+\/outcomes\.json$/.test(path)) return '.local/authenticated-measurement/restored/afb.json';
-  if (name === 'moshimo' && path === '.claude/state/metrics/affiliate/moshimo-results.json') return path;
-  if (name === 'rakuten' && path === '.claude/state/metrics/affiliate/rakuten-results.json') return path;
-  if (name === 'a8' && /^\.claude\/state\/metrics\/affiliate\/a8-(results|report-log|ui-last-run)\.json$/.test(path)) return path;
-  if (name === 'gsc' && /^\.claude\/state\/metrics\/gsc\/coverage-drilldown\/\d{4}-W\d{2}\/[a-z0-9_-]+\.(csv|json)$/.test(path)) return path;
+  if (name === 'moshimo' && path === datasetPath("moshimo.results")) return path;
+  if (name === 'rakuten' && path === datasetPath("rakuten.results")) return path;
+  if (name === 'a8' && /^data\/affiliate\/a8-(results|report-log|ui-last-run)\.json$/.test(path)) return path;
+  if (name === 'gsc' && /^data\/gsc\/coverage-drilldown\/\d{4}-W\d{2}\/[a-z0-9_-]+\.(csv|json)$/.test(path)) return path;
   if (name === 'note') {
     const match = /^\.local\/authenticated-measurement\/note-\d+\/note\/(latest\.json|cover-metrics-latest\.(json|csv))$/.exec(path);
-    if (match) return `.claude/state/metrics/note/dashboard/${match[1]}`;
+    if (match) return `${datasetDir("note.dashboard")}/${match[1]}`;
   }
   if (name === 'coconala' && /^\.local\/authenticated-measurement\/coconala-\d+\/status\.json$/.test(path)) return '.local/authenticated-measurement/restored/coconala.json';
   if (name === 'kdp' && /^\.local\/authenticated-measurement\/kdp-\d+\/status\.json$/.test(path)) return '.local/authenticated-measurement/restored/kdp.json';

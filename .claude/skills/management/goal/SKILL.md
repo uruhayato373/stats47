@@ -63,7 +63,7 @@ stats47 には改善ループスキル(performance-improvement / gsc-improvement
 | `.claude/skills/management/goal/scripts/update-cycle.cjs` | cycle の md / meta.json 更新 |
 | `.claude/skills/management/goal/scripts/status-report.cjs` | status のテーブル生成 |
 | `.claude/skills/management/goal/reference/goals/<slug>-YYYY-MM-DD.md` | **goal 記録ファイル**(append-only) |
-| `.claude/state/goals/<slug>/meta.json` | ステータス・cycle 数等の機械可読版 |
+| `data/goals/<slug>/meta.json` | ステータス・cycle 数等の機械可読版 |
 
 ---
 
@@ -92,7 +92,7 @@ abandoned  abandoned   abandoned   next_cycle | success | revert
 
 **手順**:
 
-1. **slug 重複チェック**: `.claude/state/goals/<slug>/` が既存なら拒否(別 slug を提案)
+1. **slug 重複チェック**: `data/goals/<slug>/` が既存なら拒否(別 slug を提案)
 2. **AskUserQuestion で対話的に収集**(以下 6 項目):
    - タイトル(短文)
    - 連携 metric(psi / gsc / ga4 / adsense / sns / cost / custom)
@@ -112,7 +112,7 @@ abandoned  abandoned   abandoned   next_cycle | success | revert
 ```
 ✅ Goal 登録完了: <slug>
    md: .claude/skills/management/goal/reference/goals/<slug>-YYYY-MM-DD.md
-   meta: .claude/state/goals/<slug>/meta.json
+   meta: data/goals/<slug>/meta.json
    ベースライン: <値>
 次: /goal cycle <slug>
 ```
@@ -125,7 +125,7 @@ abandoned  abandoned   abandoned   next_cycle | success | revert
 
 **手順**:
 
-1. `.claude/state/goals/<slug>/meta.json` を Read してステータスを確認
+1. `data/goals/<slug>/meta.json` を Read してステータスを確認
 2. **未着手 cycle**なら:
    - 仮説プールから次の仮説候補を 3 件まで提示
    - AskUserQuestion で採用する仮説を選ばせる(複数選択可)
@@ -244,7 +244,7 @@ abandoned  abandoned   abandoned   next_cycle | success | revert
 
 **手順**:
 
-1. `.claude/state/goals/*/meta.json` を全 Read
+1. `data/goals/*/meta.json` を全 Read
 2. status・最終更新日でソートして table 出力:
 
 ```markdown
@@ -320,5 +320,5 @@ If verdict needs justification, add a Reason column with ≤ 8 words.
 - `.claude/rules/evidence-based-judgment.md` — 実証ベース判定ルール
 - `.claude/rules/agent-output-contract.md` — Agent 出力契約
 - `.claude/skills/management/knowledge/SKILL.md` — 教訓の蓄積
-- `.claude/skills/analytics/performance-improvement/reference/improvement-log.md` — PSI 改善履歴(連携例)
+- `data/improvement/performance-improvement/improvement-log.md` — PSI 改善履歴(連携例)
 - 本スキルの設計プラン（承認済）— Git 履歴の goal skill 設計

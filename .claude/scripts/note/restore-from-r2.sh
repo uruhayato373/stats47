@@ -16,8 +16,8 @@ set -euo pipefail
 SLUG="${1:?使い方: $0 <slug>}"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
-PUB_FILE="$PROJECT_ROOT/.claude/state/note-published-urls.json"
-DRAFT_FILE="$PROJECT_ROOT/.claude/state/note-draft-index.json"
+PUB_FILE="$PROJECT_ROOT/data/note/note-published-urls.json"
+DRAFT_FILE="$PROJECT_ROOT/data/note/note-draft-index.json"
 R2_BASE="https://storage.stats47.jp"
 
 # note-published-urls.json または note-draft-index.json から情報取得

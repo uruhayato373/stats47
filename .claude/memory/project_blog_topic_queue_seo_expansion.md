@@ -6,11 +6,11 @@ metadata:
 ---
 
 新規記事の SEO 拡充システム (feature/blog-seo-expansion, 2026-07-05, develop merge 済)。戦略正典 =
-`.claude/agents/blog-seo-strategist.md` §戦略コンテキスト + `.claude/state/blog/seo-strategy.json` (2026-07-12 に
+`.claude/agents/blog-seo-strategist.md` §戦略コンテキスト + `data/blog/seo-strategy.json` (2026-07-12 に
 旧 docs/02_実装計画/15 を統合し SSOT を .claude に一本化)。既存記事の是正 (remediation-queue) とは別系統の**新規記事**版。
 
 ## 「次に何を書くか」の真実源
-- **`.claude/state/blog/topic-queue.json`** (`build-topic-queue.mjs` が生成)。remediation-queue と同型の
+- **`data/blog/topic-queue.json`** (`build-topic-queue.mjs` が生成)。remediation-queue と同型の
   状態付きキュー (pending/in-progress/done を upsert 保持)。週次 cron (`fetch-metrics-weekly.yml` 後段) で自動再生成。
 - スコア: `0.35*queryGap + 0.25*seasonality + 0.20*surprise + 0.20*competitionGap`。
   - queryGap = GSC pages.csv の /ranking imp (専用ブログ記事なし) を norm(log)。既記事化は R2 all.json で dedup。

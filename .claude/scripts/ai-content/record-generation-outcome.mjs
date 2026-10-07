@@ -10,7 +10,7 @@
  *   → 連続失敗が threshold に達したキーは `--next` から外し、LATEST.md に「要手動対応」
  *      として可視化する (黙って永久に消さない)。一度でも PASS したらカウントを消す。
  *
- * SSOT: .claude/state/ai-content/generation-failures.json
+ * SSOT: data/ai-content/remediation/generation-failures.json
  *   { "version": 1, "keys": { "<key>": { failCount, lastReason, lastFailedAt, firstFailedAt } } }
  *
  * 純関数 (updateFailureState / quarantinedKeys) を export し、CLI から分離してテストする。

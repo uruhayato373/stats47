@@ -9,7 +9,7 @@
  *   node .claude/scripts/instagram/generate-schedule.cjs \
  *     --from 2026-06-11 --to 2026-07-01 \
  *     --images 14 --reels 3 \
- *     --out .claude/state/instagram-w20-schedule.json
+ *     --out data/sns/instagram-w20-schedule.json
  *
  * オプション:
  *   --from YYYY-MM-DD  開始日（デフォルト: 翌日）
@@ -23,13 +23,15 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const store = require("../lib/sns-posts-store.cjs");
+const { datasetDir, datasetPath } = require("../../../config/datasets.mjs");
 
 const ROOT = path.resolve(__dirname, "..", "..", "..");
-const LOG_PATH = path.join(ROOT, ".claude/state/ig-posted-log.jsonl");
+const LOG_PATH = path.join(ROOT, datasetPath("sns.ig-posted-log"));
 const SNS_RANKING = path.join(ROOT, ".local/r2/sns/ranking");
 const SNS_BCR = path.join(ROOT, ".local/r2/sns/bar-chart-race");
 const APP_RANKING = path.join(ROOT, ".local/r2/app/ranking");
-const STATE_DIR = path.join(ROOT, ".claude/state");
+// 週ごとの予約表は data/sns/instagram-wNN-schedule.json
+const STATE_DIR = path.join(ROOT, datasetDir("sns.drafts"));
 
 // ---------------------------------------------------------
 // 引数解析
@@ -59,7 +61,7 @@ const toDate = get("--to") || defaultTo.toISOString().slice(0, 10);
 function loadPostedSet() {
   const posted = new Set(); // "domain::content_key"
 
-  // 1. sns_posts ストア (.claude/state/sns/posts.json)
+  // 1. sns_posts ストア (data/sns/posts.json)
   try {
     const rows = store
       .query((p) => p.platform === "instagram" && p.status === "posted")

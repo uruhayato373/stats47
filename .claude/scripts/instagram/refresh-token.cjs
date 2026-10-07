@@ -9,7 +9,7 @@
  *   1. .env.local の INSTAGRAM_ACCESS_TOKEN を取得
  *   2. graph.instagram.com/refresh_access_token を叩く（24h 以内の連続呼び出しは不可）
  *   3. 新しいトークンで .env.local を書き換え
- *   4. 結果を .claude/state/metrics/instagram-token.json に記録
+ *   4. 結果を data/sns/instagram-token.json に記録
  *
  * 実行頻度:
  *   - 月 1 回（1 日等）が推奨。毎回 expires_in は 60 日にリセットされる
@@ -19,10 +19,12 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const os = require("node:os");
+const { datasetDir } = require("../../../config/datasets.mjs");
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
 const ENV_PATH = path.join(PROJECT_ROOT, ".env.local");
-const STATE_DIR = path.join(PROJECT_ROOT, ".claude/state/metrics");
+// トークンの更新日と期限 (本体は置かない) は data/sns/instagram-token.json
+const STATE_DIR = path.join(PROJECT_ROOT, datasetDir("sns.drafts"));
 const STATE_FILE = path.join(STATE_DIR, "instagram-token.json");
 
 const DRY_RUN = process.argv.includes("--dry-run");

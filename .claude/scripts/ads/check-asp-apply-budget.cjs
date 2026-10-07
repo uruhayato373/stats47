@@ -9,7 +9,7 @@
  * (ハードコードしない)。未設定なら既定 10。**これは各 ASP が公表している数字ではなく、
  * 自動操作のリスクを見て自分たちで置いた値**。緩めるなら実績を見てから。
  *
- * 申請履歴は `.claude/state/ads/affiliate-catalog.json` の
+ * 申請履歴は `data/affiliate/affiliate-catalog.json` の
  * `programs[].asps[<name>].history[] = {at, status:"applying"}` から JST 週で集計する。
  *
  * API:
@@ -26,9 +26,10 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const { AFFILIATE_ASP } = require("../../../config/paths.mjs");
+const { datasetPath } = require("../../../config/datasets.mjs");
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
-const CATALOG_PATH = path.join(PROJECT_ROOT, ".claude/state/ads/affiliate-catalog.json");
+const CATALOG_PATH = path.join(PROJECT_ROOT, datasetPath("affiliate.catalog"));
 const CONFIG_PATH = path.join(PROJECT_ROOT, AFFILIATE_ASP);
 const DEFAULT_MAX = 10;
 

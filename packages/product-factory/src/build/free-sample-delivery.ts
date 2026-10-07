@@ -3,8 +3,9 @@ import { createHash } from "node:crypto";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join, relative, resolve } from "node:path";
 import { ALL_PRODUCTS } from "../catalog/products";
+import { datasetPath } from "../../../../config/datasets.mjs";
 
-export const FREE_SAMPLE_STATE = ".claude/state/products/free-sample-delivery.json";
+export const FREE_SAMPLE_STATE = datasetPath("products.free-sample-delivery");
 export interface FreeSampleDelivery {
   title: string;
   _delivery: { artifactDirectory: string; manifestSha256: string; indicatorCount: number; pptxIndicatorCount: number; hasXlsx: boolean; officeValidation: string };

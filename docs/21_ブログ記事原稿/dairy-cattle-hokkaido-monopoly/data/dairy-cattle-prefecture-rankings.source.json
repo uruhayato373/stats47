@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "dairy-cattle-count",
+  "year": "2025",
+  "unit": "頭",
+  "label": "乳用牛飼養頭数",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/dairy-cattle-count/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug dairy-cattle-hokkaido-monopoly --keys dairy-cattle-count --data-name dairy-cattle-prefecture-rankings",
+  "fetchedAt": "2026-10-07T05:33:24.328Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs",
+  "refreshedFromYear": "2018"
+}

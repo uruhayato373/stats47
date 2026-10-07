@@ -4,11 +4,12 @@ import { spawnSync } from "node:child_process";
 import { mkdirSync, readFileSync, renameSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
 const args = process.argv.slice(2);
 const value = (flag, fallback) => args.includes(flag) ? args[args.indexOf(flag) + 1] : fallback;
-const reportPath = resolve(value("--report", ".claude/state/metrics/note/card-visibility-latest.json"));
+const reportPath = resolve(value("--report", `${datasetDir("note.cover-assets")}/card-visibility-latest.json`));
 const journalPath = resolve(value("--journal", ".local/note-card-repair-journal.json"));
 const slug = value("--slug", null);
 const maxArticles = Number(value("--max-articles", "1"));

@@ -83,7 +83,7 @@ jobs:
           npm run note:navigation:products:check 2>&1 | tee /tmp/note-product-navigation.log
           [ "${PIPESTATUS[0]}" -eq 0 ] || STATUS=1
 
-          REPORT=$(find .claude/state/metrics -maxdepth 1 -type f \
+          REPORT=$(find data/note/evidence -maxdepth 1 -type f \
             -name 'note-circulation-audit-*.json' -printf '%T@ %p\n' \
             | sort -nr | head -1 | cut -d' ' -f2-)
           if [ -z "$REPORT" ]; then
@@ -124,8 +124,8 @@ jobs:
         with:
           name: note-circulation-audit
           path: |
-            .claude/state/metrics/note-circulation-audit-*.json
-            .claude/state/metrics/note-cover-audit-latest.json
+            data/note/evidence/note-circulation-audit-*.json
+            data/note/evidence/note-cover-audit-latest.json
             data/note/cover-assets.json
             /tmp/note-cover-assets-tests.log
             /tmp/note-cover-assets-validate.log
@@ -149,7 +149,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           TITLE="[note Circulation Alert] 公開記事・導線・マガジン監査の異常"
-          REPORT=$(find .claude/state/metrics -maxdepth 1 -type f \
+          REPORT=$(find data/note/evidence -maxdepth 1 -type f \
             -name 'note-circulation-audit-*.json' -printf '%T@ %p\n' \
             | sort -nr | head -1 | cut -d' ' -f2-)
           {
@@ -159,8 +159,8 @@ jobs:
             echo ""
             echo "- Run: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
             echo "- Report artifact: note-circulation-audit"
-            if [ -f .claude/state/metrics/note-cover-audit-latest.json ]; then
-              node -e 'const r = require("./.claude/state/metrics/note-cover-audit-latest.json"); console.log("- Cover audit: " + r.status + " / " + JSON.stringify(r.summary) + " / coverage=" + r.coverage.complete);'
+            if [ -f data/note/evidence/note-cover-audit-latest.json ]; then
+              node -e 'const r = require("./data/note/evidence/note-cover-audit-latest.json"); console.log("- Cover audit: " + r.status + " / " + JSON.stringify(r.summary) + " / coverage=" + r.coverage.complete);'
             fi
             if [ -n "$REPORT" ]; then
               node - "$REPORT" <<'NODE'
@@ -209,7 +209,7 @@ jobs:
       - name: Persist complete cover observations for the management console
         if: always()
         run: |
-          node -e 'const r=require("./.claude/state/metrics/note-cover-audit-latest.json"); process.exit(r.coverage?.complete && Date.parse(r.completedAt)>Date.now()-3600000 ? 0 : 1)' || exit 0
+          node -e 'const r=require("./data/note/evidence/note-cover-audit-latest.json"); process.exit(r.coverage?.complete && Date.parse(r.completedAt)>Date.now()-3600000 ? 0 : 1)' || exit 0
           npm run note:assets:validate
           if git diff --quiet -- data/note/cover-assets.json; then exit 0; fi
           git config user.name 'github-actions[bot]'

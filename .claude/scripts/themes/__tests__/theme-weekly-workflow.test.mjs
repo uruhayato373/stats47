@@ -69,16 +69,16 @@ test('weekly observation commit preserves experiment checkpoints without staging
   const cwd = fs.mkdtempSync(path.join(os.tmpdir(), 'theme-weekly-commit-'));
   t.after(() => fs.rmSync(cwd, { recursive: true, force: true }));
   const observations = [
-    '.claude/state/theme-charts/live-audit.json',
-    '.claude/state/themes/quality.json',
-    '.claude/state/themes/quality.definitions.json',
-    '.claude/state/themes/quality.observations.json',
-    '.claude/state/themes/quality.lastGoodObservations.json',
-    '.claude/state/themes/portfolio.json',
-    '.claude/state/themes/experiments.json',
-    '.claude/state/themes/ci-followup.json',
+    'data/themes/charts/live-audit.json',
+    'data/themes/quality.json',
+    'data/themes/quality.definitions.json',
+    'data/themes/quality.observations.json',
+    'data/themes/quality.lastGoodObservations.json',
+    'data/themes/portfolio.json',
+    'data/themes/experiments.json',
+    'data/themes/ci-followup.json',
   ];
-  for (const file of [...observations, '.claude/state/themes/unrelated.json']) {
+  for (const file of [...observations, 'data/themes/unrelated.json']) {
     fs.mkdirSync(path.dirname(path.join(cwd, file)), { recursive: true });
     fs.writeFileSync(path.join(cwd, file), '{}\n');
   }

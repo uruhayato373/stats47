@@ -1,11 +1,11 @@
 /**
- * アフィリエイト運用 集約状態 (.claude/state/ads/affiliate-operations-latest.json) の生成 CLI。
+ * アフィリエイト運用 集約状態 (data/affiliate/affiliate-operations-latest.json) の生成 CLI。
  *
  * 入力 (すべて既存 snapshot / SSOT。ネットワーク不要):
- *   - .claude/state/ads/inventory-latest.json   (audit-affiliate-inventory.ts)
- *   - .claude/state/ads/ga4-affiliate-*.json    (fetch-affiliate-ga4.cjs、最新日付を自動選択)
- *   - .claude/state/ads/compliance-latest.json  (audit-affiliate-compliance.ts --live)
- *   - .claude/state/ads/experiments.json        (実験 registry、/manage-affiliate-experiment が書く)
+ *   - data/affiliate/inventory-latest.json   (audit-affiliate-inventory.ts)
+ *   - data/affiliate/ga4-affiliate-*.json    (fetch-affiliate-ga4.cjs、最新日付を自動選択)
+ *   - data/affiliate/compliance-latest.json  (audit-affiliate-compliance.ts --live)
+ *   - data/affiliate/experiments.json        (実験 registry、/manage-affiliate-experiment が書く)
  *   - apps/web/scripts/affiliate-ads-data.ts    (experimentId 付きエントリ = variant 実体)
  *
  * 判定 (freshness / 計測ゲート / 実験 status / 推奨アクション) はすべて
@@ -30,9 +30,12 @@ import {
   validateOperationsState,
 } from "./lib/affiliate-operations-core.mjs";
 
+import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = resolve(__dirname, "../../..");
-const STATE_DIR = resolve(PROJECT_ROOT, ".claude/state/ads");
+const STATE_DIR = resolve(PROJECT_ROOT, datasetDir("affiliate.audits"));
+const GA4_SNAPSHOT_DIR = datasetDir("ga4.affiliate-snapshots");
 const OUT_PATH = resolve(STATE_DIR, "affiliate-operations-latest.json");
 
 function readJsonIfExists(path: string): any | null {
@@ -48,15 +51,15 @@ function readJsonIfExists(path: string): any | null {
  */
 function latestGa4Snapshot(): { data: any; relPath: string } | null {
   const candidates: { date: string; abs: string; relPath: string }[] = [];
-  for (const n of readdirSync(STATE_DIR)) {
+  for (const n of readdirSync(resolve(PROJECT_ROOT, GA4_SNAPSHOT_DIR))) {
     const m = /^ga4-affiliate-(\d{4}-\d{2}-\d{2})\.json$/.exec(n);
-    if (m) candidates.push({ date: m[1], abs: resolve(STATE_DIR, n), relPath: `.claude/state/ads/${n}` });
+    if (m) candidates.push({ date: m[1], abs: resolve(PROJECT_ROOT, GA4_SNAPSHOT_DIR, n), relPath: `${GA4_SNAPSHOT_DIR}/${n}` });
   }
   const liveDir = resolve(STATE_DIR, "live", "ga4-affiliate");
   if (existsSync(liveDir)) {
     for (const n of readdirSync(liveDir)) {
       const m = /^(\d{4}-\d{2}-\d{2})\.json$/.exec(n);
-      if (m) candidates.push({ date: m[1], abs: resolve(liveDir, n), relPath: `.claude/state/ads/live/ga4-affiliate/${n}` });
+      if (m) candidates.push({ date: m[1], abs: resolve(liveDir, n), relPath: `${datasetDir("affiliate.audits")}/live/ga4-affiliate/${n}` });
     }
   }
   candidates.sort((a, b) => a.date.localeCompare(b.date));
@@ -89,7 +92,7 @@ function main(): void {
   const inventory = readJsonIfExists(resolve(STATE_DIR, "inventory-latest.json"));
   const ga4 = latestGa4Snapshot();
   const compliance = readJsonIfExists(resolve(STATE_DIR, "compliance-latest.json"));
-  const registry = readJsonIfExists(resolve(STATE_DIR, "experiments.json"))?.experiments ?? [];
+  const registry = readJsonIfExists(resolve(PROJECT_ROOT, datasetPath("affiliate.experiments")))?.experiments ?? [];
   const portfolio = readJsonIfExists(resolve(STATE_DIR, "affiliate-portfolio-latest.json"));
 
   const hasActiveExperiments = registry.some((e: { status?: string }) => e.status !== "closed");
@@ -113,13 +116,13 @@ function main(): void {
   const state = buildOperationsState({
     nowIso,
     inventory,
-    inventoryPath: inventory ? ".claude/state/ads/inventory-latest.json" : null,
+    inventoryPath: inventory ? `${datasetDir("affiliate.inventory")}/inventory-latest.json` : null,
     ga4: ga4?.data ?? null,
     ga4Path: ga4?.relPath ?? null,
     compliance,
     experiments,
     measurementGate,
-    portfolio: portfolio ? { ...portfolio, snapshotPath: ".claude/state/ads/affiliate-portfolio-latest.json" } : null,
+    portfolio: portfolio ? { ...portfolio, snapshotPath: `${datasetDir("affiliate.placement-baseline")}/affiliate-portfolio-latest.json` } : null,
   });
 
   const errors = validateOperationsState(state);

@@ -23,6 +23,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 const R2 = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
@@ -63,7 +64,7 @@ function parseFindings(svg) {
 }
 
 function loadTargets() {
-  const q = JSON.parse(fs.readFileSync(path.join(PROJECT_ROOT, ".claude/state/blog/svg-lineage-queue.json"), "utf8"));
+  const q = JSON.parse(fs.readFileSync(path.join(PROJECT_ROOT, `${datasetDir("blog.operations")}/svg-lineage-queue.json`), "utf8"));
   let entries = q.entries.filter((e) => e.status === "neither" && e.chartType === "findings").map((e) => ({ slug: e.slug, base: e.base }));
   if (BASE_ARG) { const [s, b] = BASE_ARG.split("/"); entries = entries.filter((e) => e.slug === s && e.base === b); }
   return entries;

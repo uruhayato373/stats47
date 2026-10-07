@@ -1,0 +1,364 @@
+{
+ "statsDataId": "0003456791",
+ "title": "曜日,男女,日常生活への支障の程度,従業上の地位,仕事からの個人の年間収入・収益,行動の種類別行動者平均時間(有業者)－全国",
+ "statName": "社会生活基本調査",
+ "govOrg": "総務省",
+ "surveyDate": "202101-202112",
+ "overallTotalNumber": 139104,
+ "dimensions": [
+  {
+   "id": "tab",
+   "name": "表章項目",
+   "valueCount": 1,
+   "sampleValues": [
+    {
+     "code": "202109A08B07",
+     "name": "行動者平均時間",
+     "unit": "分"
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "cat01",
+   "name": "曜日",
+   "valueCount": 8,
+   "sampleValues": [
+    {
+     "code": "1",
+     "name": "1_週全体",
+     "unit": null
+    },
+    {
+     "code": "2",
+     "name": "2_平日",
+     "unit": null
+    },
+    {
+     "code": "21",
+     "name": "21_うち平日(仕事のある日（出張・研修などを除く）)",
+     "unit": null
+    },
+    {
+     "code": "3",
+     "name": "3_土曜日",
+     "unit": null
+    },
+    {
+     "code": "31",
+     "name": "31_うち土曜日(仕事のある日（出張・研修などを除く）)",
+     "unit": null
+    },
+    {
+     "code": "32",
+     "name": "32_うち土曜日(仕事のない日)",
+     "unit": null
+    },
+    {
+     "code": "4",
+     "name": "4_日曜日",
+     "unit": null
+    },
+    {
+     "code": "41",
+     "name": "41_うち日曜日(仕事のない日)",
+     "unit": null
+    }
+   ],
+   "hasTotal": true
+  },
+  {
+   "id": "cat02",
+   "name": "男女",
+   "valueCount": 3,
+   "sampleValues": [
+    {
+     "code": "0",
+     "name": "0_総数",
+     "unit": null
+    },
+    {
+     "code": "1",
+     "name": "1_男",
+     "unit": null
+    },
+    {
+     "code": "2",
+     "name": "2_女",
+     "unit": null
+    }
+   ],
+   "hasTotal": true
+  },
+  {
+   "id": "cat03",
+   "name": "日常生活への支障の程度",
+   "valueCount": 3,
+   "sampleValues": [
+    {
+     "code": "0",
+     "name": "0_総数",
+     "unit": null
+    },
+    {
+     "code": "1",
+     "name": "1_日常生活に支障はない（６か月未満継続を含む）",
+     "unit": null
+    },
+    {
+     "code": "2",
+     "name": "2_日常生活に支障がある（６か月以上継続）",
+     "unit": null
+    }
+   ],
+   "hasTotal": true
+  },
+  {
+   "id": "cat04",
+   "name": "従業上の地位",
+   "valueCount": 7,
+   "sampleValues": [
+    {
+     "code": "0",
+     "name": "0_総数",
+     "unit": null
+    },
+    {
+     "code": "1",
+     "name": "1_雇用されている人",
+     "unit": null
+    },
+    {
+     "code": "2",
+     "name": "2_会社などの役員",
+     "unit": null
+    },
+    {
+     "code": "3",
+     "name": "3_雇人のある業主",
+     "unit": null
+    },
+    {
+     "code": "4",
+     "name": "4_雇人のない業主",
+     "unit": null
+    },
+    {
+     "code": "5",
+     "name": "5_自家営業の手伝い(家族従業者)",
+     "unit": null
+    },
+    {
+     "code": "6",
+     "name": "6_家庭内の賃仕事(内職)",
+     "unit": null
+    }
+   ],
+   "hasTotal": true
+  },
+  {
+   "id": "cat05",
+   "name": "仕事からの個人の年間収入・収益",
+   "valueCount": 12,
+   "sampleValues": [
+    {
+     "code": "0",
+     "name": "0_総数",
+     "unit": null
+    },
+    {
+     "code": "1",
+     "name": "1_収入なし",
+     "unit": null
+    },
+    {
+     "code": "2",
+     "name": "2_50万円未満",
+     "unit": null
+    },
+    {
+     "code": "3",
+     "name": "3_50～99万円",
+     "unit": null
+    },
+    {
+     "code": "4",
+     "name": "4_100～199万円",
+     "unit": null
+    },
+    {
+     "code": "5",
+     "name": "5_200～299万円",
+     "unit": null
+    },
+    {
+     "code": "6",
+     "name": "6_300～399万円",
+     "unit": null
+    },
+    {
+     "code": "7",
+     "name": "7_400～499万円",
+     "unit": null
+    },
+    {
+     "code": "8",
+     "name": "8_500万円以上",
+     "unit": null
+    },
+    {
+     "code": "R1",
+     "name": "R1_(再掲)100万円未満",
+     "unit": null
+    },
+    {
+     "code": "R2",
+     "name": "R2_(再掲)300万円未満",
+     "unit": null
+    },
+    {
+     "code": "R3",
+     "name": "R3_(再掲)300～499万円",
+     "unit": null
+    }
+   ],
+   "hasTotal": true
+  },
+  {
+   "id": "cat06",
+   "name": "行動の種類",
+   "valueCount": 23,
+   "sampleValues": [
+    {
+     "code": "01",
+     "name": "01_睡眠",
+     "unit": null
+    },
+    {
+     "code": "02",
+     "name": "02_身の回りの用事",
+     "unit": null
+    },
+    {
+     "code": "03",
+     "name": "03_食事",
+     "unit": null
+    },
+    {
+     "code": "04",
+     "name": "04_通勤・通学",
+     "unit": null
+    },
+    {
+     "code": "05",
+     "name": "05_仕事",
+     "unit": null
+    },
+    {
+     "code": "06",
+     "name": "06_学業",
+     "unit": null
+    },
+    {
+     "code": "07",
+     "name": "07_家事",
+     "unit": null
+    },
+    {
+     "code": "08",
+     "name": "08_介護・看護",
+     "unit": null
+    },
+    {
+     "code": "09",
+     "name": "09_育児",
+     "unit": null
+    },
+    {
+     "code": "10",
+     "name": "10_買い物",
+     "unit": null
+    },
+    {
+     "code": "11",
+     "name": "11_移動(通勤・通学を除く)",
+     "unit": null
+    },
+    {
+     "code": "12",
+     "name": "12_テレビ・ラジオ・新聞・雑誌",
+     "unit": null
+    },
+    {
+     "code": "13",
+     "name": "13_休養・くつろぎ",
+     "unit": null
+    },
+    {
+     "code": "14",
+     "name": "14_学習・自己啓発・訓練(学業以外)",
+     "unit": null
+    },
+    {
+     "code": "15",
+     "name": "15_趣味・娯楽",
+     "unit": null
+    },
+    {
+     "code": "16",
+     "name": "16_スポーツ",
+     "unit": null
+    },
+    {
+     "code": "17",
+     "name": "17_ボランティア活動・社会参加活動",
+     "unit": null
+    },
+    {
+     "code": "18",
+     "name": "18_交際・付き合い",
+     "unit": null
+    },
+    {
+     "code": "19",
+     "name": "19_受診・療養",
+     "unit": null
+    },
+    {
+     "code": "20",
+     "name": "20_その他",
+     "unit": null
+    },
+    {
+     "code": "R1",
+     "name": "R1_（再掲）１次活動",
+     "unit": null
+    },
+    {
+     "code": "R2",
+     "name": "R2_（再掲）２次活動",
+     "unit": null
+    },
+    {
+     "code": "R3",
+     "name": "R3_（再掲）３次活動",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "time",
+   "name": "時間軸",
+   "valueCount": 1,
+   "sampleValues": [
+    {
+     "code": "2021000000",
+     "name": "2021年",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  }
+ ]
+}

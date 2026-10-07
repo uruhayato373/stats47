@@ -81,7 +81,7 @@
 - [project_instagram_graph_api_setup.md](project_instagram_graph_api_setup.md) — Instagram Graph APIセットアップ完了(2026-04-25)。stats47jp・トークン60日・business_discovery不可
 - [feedback_lcp_optimization.md](feedback_lcp_optimization.md) — LCP改善はLCP要素の特定が先。HTML削減もpreloadもJS描画依存要素には効かない(EXP-002/003)
 - [feedback_browser_use_cleanup.md](feedback_browser_use_cleanup.md) — browser-useの`close`はpageだけ。daemonは`pkill -KILL -f "browser_use.skill_cli.daemon"`必須
-- [project_gsc_coverage_drilldown.md](project_gsc_coverage_drilldown.md) — GSC 6種別Coverage Drilldown CSVを週次で.claude/state/metrics/gsc/coverage-drilldown/に集約
+- [project_gsc_coverage_drilldown.md](project_gsc_coverage_drilldown.md) — GSC 6種別Coverage Drilldown CSVを週次でdata/gsc/coverage-drilldown/に集約
 - [project_cloudflare_token_consolidated.md](project_cloudflare_token_consolidated.md) — Cloudflare API tokenは「stats47」1個に集約(D1/R2/Pages/Account Settings)
 - [feedback_github_actions_pr_creation.md](feedback_github_actions_pr_creation.md) — ActionsがPR作成するにはrepo permission設定必要(gh APIで設定可)
 - [feedback_cloud_github_api_mcp_only.md](feedback_cloud_github_api_mcp_only.md) — クラウドは`gh`無し。`curl`+$GITHUB_TOKENはHTTP 200で"GitHub access is not enabled"を返し無言失敗(background agentでは空ファイル)。GitHub操作は`mcp__github__*`のみ
@@ -96,7 +96,7 @@
 - [feedback_backlog_ranking_key_audit.md](feedback_backlog_ranking_key_audit.md) — backlogのranking_keyはAI生成名で実在metricと乖離。実行前にmetrics.key実在チェック
 - [feedback_bulk_blog_publish_isr_404.md](feedback_bulk_blog_publish_isr_404.md) — sync-snapshots --only blogの順序でISR 404キャッシュ。連続curlで復活、残りはCloudflare手動パージ
 - [reference_scan_pending_improvements.md](reference_scan_pending_improvements.md) — scan-pending-improvements.mjs(改善ログからpending抽出、weekly-plan/triage共用)
-- [project_note_internal_link_breaks_on_publish.md](project_note_internal_link_breaks_on_publish.md) — note記事の../slug/draft.md内部リンクは公開後切れる。note URL化必要、対応表=.claude/state/note-published-urls.json
+- [project_note_internal_link_breaks_on_publish.md](project_note_internal_link_breaks_on_publish.md) — note記事の../slug/draft.md内部リンクは公開後切れる。note URL化必要、対応表=data/note/note-published-urls.json
 - [feedback_ga4_history_unreliable_wow.md](feedback_ga4_history_unreliable_wow.md) — GA4 history.csvのpageviewsはlast28d/bot混入。WoWはGSC clicksを使う
 - [feedback_ga4_journey_referrer_over_navclick.md](feedback_ga4_journey_referrer_over_navclick.md) — 回遊はnav_clickでなく週次internal-transitions.csv(referrer)で読む(theme→ranking実44/nav3)。GSC 0の流入増はBingを疑う
 - [project_measurement_cycle_ci.md](project_measurement_cycle_ci.md) — 計測→記録→改善サイクルのCI化(2026-09-24)。日曜計測→月曜06:00無人triage(ゲート付き)→09:00週次Issue。schedule/取得段はmain定義で動く。無人ClaudeはdontAskで.claude/を書けない→提案JSONを決定的適用
@@ -125,6 +125,9 @@
 - [proxy preload for fetch scripts](proxy-preload-for-fetch-scripts.md) — 会社PCで素のfetch()のscriptを無改修で通す node --import 手法
 - [two-machine local footprint 2026-09](project_two_machine_local_footprint_2026-09.md) — dotfiles/mirror/state:pull の運用ポインタ、この Windows PC の pre-commit 12 分・vitest フレーク・preflight 環境要因
 - [feedback_worktree_junction_deletes_target.md](feedback_worktree_junction_deletes_target.md) — worktreeへnode_modulesのjunctionを張るとgit worktree remove --forceが本体のapps/*/node_modulesを消す(2026-09-16実害)。junctionはcmd /c rmdirで外してから削除
+- [feedback_worktree_symlinked_node_modules_resolve_main.md](feedback_worktree_symlinked_node_modules_resolve_main.md) — worktreeのnode_modulesを本体へ丸ごとsymlinkすると@stats47/*が本体packagesを指し、型検査が本体のコードで判定される。@stats47だけworktreeへ張り直す
+- [feedback_cloud_session_workflow_dispatch_403.md](feedback_cloud_session_workflow_dispatch_403.md) — クラウドセッションのGitHub MCPはworkflow_dispatchが403。data/workflow-dispatch-requests.jsonをdevelopへpushすればproxyが代理起動する
+- [feedback_review_agent_ran_cloud_write.md](feedback_review_agent_ran_cloud_write.md) — 記事のコード例を確かめるsubagentが環境のCLOUDFLARE_API_TOKENでwrangler r2 object put --remoteを実行(403)。手順解説の検証を頼むpromptに外部へ書くコマンドの禁止を書く
 - [feedback_x_scheduled_bulk_delete.md](feedback_x_scheduled_bulk_delete.md) — X予約の一括削除は描画中の7〜8件しか消えない。台帳キーで選択→削除→読み直しを残件0まで繰り返す
 - [project_sns_scheduling_limits.md](project_sns_scheduling_limits.md) — X予約は重み付き280(日本語=2・URL=23)でlint char_maxより厳しい。Threads Web予約は同時25件まで(残りはTHREADS-TOPUP-01で補充)
 - [project_page_quality_ui_review.md](project_page_quality_ui_review.md) — 週次ページ品質=全URL静的+代表7幅スクショ+Claude確認。生データはR2 state/page-quality/(git禁止)。SNS予約画像はMac launchd週次
@@ -136,3 +139,4 @@
 - [feedback_note_hashtag_api_quirks.md](feedback_note_hashtag_api_quirks.md) — noteタグ: 同一秒タグは順不同(集合で照合)・大小文字を既存タグに書換・α等は黙って削除・限定公開無料記事はPUT本文が全文でライン位置が公開範囲
 - [feedback_workflow_policy_comment_import.md](feedback_workflow_policy_comment_import.md) — audit-workflow-policy はコメント内の `from "x"` も依存と数え SCRIPT_RUN_WITHOUT_INSTALL を誤検出する。共通モジュールの使用例は散文で書く
 - [feedback_help_flag_runs_script.md](feedback_help_flag_runs_script.md) — 自作スクリプトの多くは --help を無視して本処理を実行する (2026-10-06 に blog outbox を誤生成)。確認は node --check / tsc / import のみの 1 行で
+- [feedback_blog_background_codex_only.md](feedback_blog_background_codex_only.md) — ブログ背景は Codex (generate-blog-images Mode A・送り箱は --article) で git に置く。Gemini で作り直さない。課金や公開を起こす依頼ファイルはコードの commit と別 push にする

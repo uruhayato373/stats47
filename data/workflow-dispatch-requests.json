@@ -1,0 +1,9 @@
+{
+  "workflow": "blog-auto-publish.yml",
+  "inputs": {
+    "slugs": "ai-claude-code-pref-analysis area-ratio-prefecture-gap cc-estat-02-search-skill cc-estat-03-population-bar cc-estat-04-aging-heatmap cc-estat-13-agri-sankey cc-estat-20-publish consumer-price-regional-gap dairy-cattle-count dairy-cattle-hokkaido-monopoly engel-coefficient-vs-prefectural-income fiscal-health-50years-trend health-life-expectancy-structure healthy-life-expectancy-male-female-gap it-industry-concentration physical-therapist-annual-income-prefecture-gap real-disposable-income-reversal school-teacher-annual-income-prefecture-gap sixth-industry-direct-sales unhealthy-period-gender-prefecture-gap vacant-housing-vs-aging"
+  },
+  "ref": "develop",
+  "reason": "前回の公開 run (37605672827) が fiscal-self-reliance-gap の R2 背景の SHA 不整合 (以前からのもの) で止まった。この記事は Codex の記事固有背景で直すので外し、残り 21 記事を公開する (背景待ちの 5 記事は skip される)",
+  "requestedAt": "2026-10-07T10:34:29Z"
+}

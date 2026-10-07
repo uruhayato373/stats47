@@ -8,7 +8,7 @@ import { projectRoot } from "./project-root";
  * SNS 投稿台帳ストア (.claude/scripts/lib/sns-posts-store.cjs) への typed adapter。
  *
  * ★ webpack にバンドルさせない: `.cjs` は `__dirname` 相対で STORE_PATH
- * (.claude/state/sns/posts.json) を解決するため、bundle されると __dirname が
+ * (data/sns/posts.json) を解決するため、bundle されると __dirname が
  * .next の出力先になり STORE_PATH が壊れる。createRequire で実行時に絶対パス require し、
  * webpack の静的解析対象から外す。管理画面では読み取りメソッドだけを公開する。
  */
@@ -52,7 +52,7 @@ interface Store {
 // .cjs を実行時の素の Node require で読み込む。`createRequire(...)(path)` や `require(path)` を
 // 直接書くと webpack が require 依存として静的解析し webpackEmptyContext にバンドル → ランタイムで
 // MODULE_NOT_FOUND になる (実測)。`eval("require")` で得た native require は webpack の解析対象外に
-// なるため、.cjs は自身の __dirname 相対で STORE_PATH (.claude/state/sns/posts.json) を正しく解決する。
+// なるため、.cjs は自身の __dirname 相対で STORE_PATH (data/sns/posts.json) を正しく解決する。
 // Next の server bundle は CommonJS で実行されるため require は実行時に必ず存在する。path は
 // projectRoot (name 検証済) 起点の固定文字列連結のみで、任意コード実行の余地はない。
 let cachedStore: Store | null = null;

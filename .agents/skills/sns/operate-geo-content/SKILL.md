@@ -82,7 +82,7 @@ baseline投稿は分析の入口として15件中3件まで許可する。Geoの
 - derived queue: `.local/r2/sns/_queue/business-plan-m1-x.json`
 - derived analysis: `.local/r2/app/geo/**`
 - derived media: `.local/r2/sns/geo/**`
-- draft ledger: `.claude/state/sns/posts.json`（store/agent経由のみ）
+- draft ledger: `data/sns/posts.json`（store/agent経由のみ）
 - admin: read-only。SSOT・queue・台帳・R2へ書き込まない。
 
 ## Output Contract

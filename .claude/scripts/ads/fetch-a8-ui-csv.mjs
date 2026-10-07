@@ -5,12 +5,12 @@
  * 由来: doboku-note の scripts/fetch-a8-ui-csv.mjs
  *
  * stats47 での適応:
- *   - raw CSV / manifest.json の出力先を `.claude/state/metrics/affiliate/a8-ui/<runId>/`
+ *   - raw CSV / manifest.json の出力先を `data/affiliate/a8-ui/<runId>/`
  *     （committed 前提の state ディレクトリ）から `.local/a8-ui/<runId>/`（git 管理外の
  *     ステージング領域）へ変更した。生の CSV は再取得可能な一次データであり、正規化結果
  *     （a8-report-log.json / a8-results.json）だけを committed SSOT として残す方針
  *     （`.claude/rules/data-storage.md` の state/一時ファイル分離に合わせた）。
- *   - 最新取得マーカー（last-run.json）は `.claude/state/metrics/affiliate/a8-ui-last-run.json`
+ *   - 最新取得マーカー（last-run.json）は `data/affiliate/a8-ui-last-run.json`
  *     に配置（raw run ディレクトリが git 管理外に移ったため、marker だけを affiliate state
  *     直下にフラットに置く）。
  *   - パス解決は `process.cwd()` 相対ではなく `repoRoot()`（lib/a8-report-browser.mjs 経由で
@@ -60,11 +60,12 @@ import {
 import { decodeCsvBuffer, parsePeriodFromFilename, parseCsv } from "./lib/a8-report-csv.mjs";
 import { buildA8PeriodContract, compareA8Period, currentJstDate } from "./lib/a8-report-period-core.mjs";
 import { A8_REPORT_AUTOMATION } from "../../../config/paths.mjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const REPO_ROOT = repoRoot();
 // raw CSV / manifest（再取得可能な一次データ）は git 管理外のステージング領域へ
 const RAW_STATE_DIR = join(REPO_ROOT, ".local/a8-ui");
-const AFF_STATE_DIR = join(REPO_ROOT, ".claude/state/metrics/affiliate");
+const AFF_STATE_DIR = join(REPO_ROOT, datasetDir("affiliate.audits"));
 const LAST_RUN_MARKER = join(AFF_STATE_DIR, "a8-ui-last-run.json");
 
 function parseArgs() {

@@ -15,7 +15,7 @@
  *   now           … 全 parts が availability=r2 or e-Stat (即マージ→レンダ可能)
  *   needs-pipeline … KSJ 指定地域塗り等が R2 未変換 (要 pipeline)
  *
- * 真実源: .claude/state/sns/buzz-map-combo-catalog.json (git tracked・status upsert)
+ * 真実源: data/sns/buzz-map-combo-catalog.json (git tracked・status upsert)
  * 正典: .claude/rules/buzz-map-standards.md §4
  *
  * Usage:
@@ -26,10 +26,11 @@
 
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
 import { dirname, join } from "node:path";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const PROJECT_ROOT = join(import.meta.dirname ?? __dirname, "../../..");
-const SINGLE_PATH = join(PROJECT_ROOT, ".claude/state/sns/buzz-map-catalog.json");
-const OUT_PATH = join(PROJECT_ROOT, ".claude/state/sns/buzz-map-combo-catalog.json");
+const SINGLE_PATH = join(PROJECT_ROOT, `${datasetDir("sns.buzz-map-attribution")}/buzz-map-catalog.json`);
+const OUT_PATH = join(PROJECT_ROOT, `${datasetDir("sns.buzz-map-attribution")}/buzz-map-combo-catalog.json`);
 const MACHINE_CAP = 120;
 
 type Status = "candidate" | "spec" | "generated" | "posted" | "rejected";

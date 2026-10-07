@@ -17,7 +17,7 @@
  *   --base <dir>  記事ルート。デフォルト: .local/r2/app/blog (R2 pull 後のローカル)
  *                 docs ドラフト監査なら --base docs/21_ブログ記事原稿
  *   --json        機械可読 JSON を stdout に出力 (brushup 候補選定が読む)
- *   --out <path>  監査結果 JSON の保存先。デフォルト: .claude/state/blog/chart-audit.json
+ *   --out <path>  監査結果 JSON の保存先。デフォルト: data/blog/chart-audit.json
  *
  * 出力:
  *   - 人間向け: 優先度付きサマリ (どの記事のチャートを直すべきか)
@@ -45,6 +45,7 @@ import {
   lintScatterQuality,
   lintTileGridQuality,
 } from '../lib/svg-lint.mjs';
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -59,7 +60,7 @@ const BASE = path.resolve(PROJECT_ROOT, getArg('--base', '.local/r2/app/blog'));
 const JSON_OUT = args.includes('--json');
 const OUT_PATH = path.resolve(
   PROJECT_ROOT,
-  getArg('--out', '.claude/state/blog/chart-audit.json')
+  getArg('--out', `${datasetDir("blog.operations")}/chart-audit.json`)
 );
 
 const log = (m) => !JSON_OUT && console.log(m);

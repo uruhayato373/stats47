@@ -2,7 +2,7 @@
 /**
  * ニュースのトピック(自由文キーワード) → 該当統計指標キー を発見するローカル CLI。
  *
- * 索引 (.claude/state/sns/metric-discovery-index.json) をロードし、
+ * 索引 (data/sns/metric-discovery-index.json) をロードし、
  * トピック語を title/subtitle/description/seoTitle/seoDescription/category/
  * additionalCategories/sourceName に対して部分一致でスコアリングする。
  * 日本語なので形態素解析はせず includes ベースの単純マッチにする。
@@ -20,12 +20,13 @@
 import * as path from "path";
 import * as fs from "fs";
 import { fileURLToPath } from "url";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
 const INDEX_PATH = path.join(
   PROJECT_ROOT,
-  ".claude/state/sns/metric-discovery-index.json",
+  `${datasetDir("sns.drafts")}/metric-discovery-index.json`,
 );
 const SYNONYMS_PATH = path.join(__dirname, "news-synonyms.json");
 

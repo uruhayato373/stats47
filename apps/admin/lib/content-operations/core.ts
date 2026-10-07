@@ -11,6 +11,7 @@ import type {
 import { channelById } from "../channel-registry";
 import { buildReferenceContentPortfolio } from "./reference";
 import { KDP_LISTINGS } from "../../../../config/paths.mjs";
+import { datasetPath } from "../../../../config/datasets.mjs";
 
 export interface SourceSocialPost {
   platform: string;
@@ -100,8 +101,8 @@ export interface ContentOperationsInput {
 }
 
 const SOURCES: Record<ContentChannelDTO, string> = {
-  x: ".claude/state/sns/posts.json",
-  instagram: ".claude/state/sns/posts.json",
+  x: datasetPath("sns.posts"),
+  instagram: datasetPath("sns.posts"),
   note: ".claude/scripts/note/catalog/ (git TS) + R2本文",
   kindle:
     `packages/product-factory/src/channels/kindle/book-catalog.ts + ${KDP_LISTINGS}`,

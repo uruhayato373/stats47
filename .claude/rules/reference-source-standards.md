@@ -1,6 +1,7 @@
 ---
 paths:
-  - ".claude/{scripts/source-vault,skills/db/process-reference-source,state/source-inventory}/**"
+  - ".claude/{scripts/source-vault,skills/db/process-reference-source}/**"
+  - "data/source-inventory/**"
   - "config/source-vault.json"
   - "docs/02_実装計画/**"
   - ".claude/agents/{area-curator,area-databook-designer,open-data-curator}.md"
@@ -46,7 +47,7 @@ stats47 で調査・企画・実装に使う書籍、PDF、白書、報告書そ
   Drive MCP の 1 file 100MB 上限はローカルマウント経由では無関係で、ストリーミングマウントでは巨大 blob より個別 file の
   方が堅牢 (doboku-note と同じ判断)、訂正のたびに全量を複製する必要も無いため。同じ版の訂正・再OCR・段階の追加は
   同じ版 folder の file を差し替え / 追加し、Git manifest を `create --force` で作り直す。履歴は Git の manifest 差分で追う。
-- Git manifest は `.claude/state/source-inventory/<sourceKey>/<edition>/source-bundle-manifest.json` (schemaVersion 2、
+- Git manifest は `data/source-inventory/<sourceKey>/<edition>/source-bundle-manifest.json` (schemaVersion 2、
   `storage.layout: expanded`、`contentSha256`、全 file の path / bytes / sha256、`componentCounts`)。`revision` は manifest の
   世代番号で、Drive 上のコピーを増やさない。検証の正典は Git 版で、Drive 上の複製は人が見る用。
 - ローカルマウントの解決は `source-vault.mjs` の `resolveVaultRoot()` が行う。`STATS47_SOURCE_VAULT_ROOT` (マウント上の
@@ -107,7 +108,7 @@ PDF → ページ画像 → 文字起こし → 図クロップ → 台帳 → �
 | S1 ページ画像 | `pages/pNNNN.{png\|jpg}` (1ページ1枚) + `page-dims.json` | CLI `extract --mode image` (profile の `processing.pageImage` を適用) | ページ数 = PDF ページ数。UI 枠などの本文領域外は `contentCrop` で除き、座標は `page-dims.json` に記録する |
 | S2 文字起こし | `transcripts/pNNNN.txt` (生 OCR / text layer) + `md/pNNNN.md` (Markdown 文字起こし) | txt = CLI `extract`、md = agent が `pages/` 画像と txt を読んで書く | `md-check --check`: 全ページに md があり frontmatter (`page` / `kind` / `figures`) が規約どおり |
 | S3 図クロップ | `figures/<crop-id>.png` + `crop-manifest.json` | CLI `crop` (spec は agent が書く) | crop spec の internal-only 宣言。md の `figures[]` は実在 crop id だけ |
-| S4 台帳 | `.claude/state/source-inventory/<sourceKey>/<edition>/inventory.json` | CLI `source-inventory build` (authored mapping は git TS) | coverage 100%・本文/書籍値/ローカル path を含まない |
+| S4 台帳 | `data/source-inventory/<sourceKey>/<edition>/inventory.json` | CLI `source-inventory build` (authored mapping は git TS) | coverage 100%・本文/書籍値/ローカル path を含まない |
 | S5 展開 | 既存 SSOT (metric / theme / area / content) | 利用実装仕様書が定める owner | 各 SSOT の既存 gate |
 
 - **CLI が担うのは決定的な処理** (render、OCR、crop、parity、frontmatter 検査、bundle 化)。**agent が担うのは意味の作業**

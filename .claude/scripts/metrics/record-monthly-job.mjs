@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * 月次 workflow の実行結果を `.claude/state/metrics/monthly-jobs/<job>.json` に追記する (2026-10-01)。
+ * 月次 workflow の実行結果を `data/ci/monthly-jobs/<job>.json` に追記する (2026-10-01)。
  *
  * 背景: ctr-improvement-monthly / estat-catalog-monthly / ksj-catalog-monthly は結果を GitHub の
  * 実行サマリー (Workflow Summary) にしか残さず、月次レビューと管理画面がファイルから「走ったか・何が出たか」を
@@ -19,8 +19,9 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { datasetDir } from "../../../config/datasets.mjs";
 
-export const STATE_DIR = ".claude/state/metrics/monthly-jobs";
+export const STATE_DIR = datasetDir("ops.monthly-jobs");
 export const KEEP_MONTHS = 12;
 export const STATUSES = ["ok", "skipped", "failed"];
 const SUMMARY_MAX = 4000;

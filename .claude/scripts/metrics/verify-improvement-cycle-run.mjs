@@ -9,7 +9,7 @@
  * --proposal: Claude が書いた変更提案を lib/improvement-cycle-proposal.mjs で適用してから検査する。
  *   指定したのにファイルが無い・不正なら違反 (Claude が判断を書かずに終わった run を通さない)。
  * --execution-file: Claude のファイル書き込みが権限で拒否されていたら違反にする。
- * 出力: .claude/state/metrics/measurement-cycle/triage-latest.json (週次メトリクス Issue が読む)
+ * 出力: data/measurement-cycle/triage-latest.json (週次メトリクス Issue が読む)
  * 終了コード: 違反は 1 (commit しない)。判定ロジックは lib/improvement-cycle-{proposal,gate}.mjs。
  */
 import { execFileSync } from "node:child_process";
@@ -20,12 +20,14 @@ import { summarizeClaudeExecution } from "../lib/summarize-claude-execution.mjs"
 import { PROJECT_ROOT } from "./lib/auth.mjs";
 import { evaluateRun } from "./lib/improvement-cycle-gate.mjs";
 import { applyProposal } from "./lib/improvement-cycle-proposal.mjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const strategyLanes = createRequire(import.meta.url)("../lib/strategy-lanes.cjs");
 const IMPROVEMENTS = ".claude/todo/improvements.md";
 const BACKLOG = ".claude/todo/backlog.md";
-const SKILLS = ".claude/skills/analytics";
-const logPath = (skill) => `${SKILLS}/${skill}/reference/improvement-log.md`;
+// 改善施策の詳細ログは記録なので data/improvement/<施策>/ (台帳 id は improvement.logs)
+const LOGS = datasetDir("improvement.logs");
+const logPath = (skill) => `${LOGS}/${skill}/improvement-log.md`;
 
 function arg(name) {
   const i = process.argv.indexOf(name);
@@ -50,7 +52,7 @@ function applyProposalFile(proposalPath, week) {
   } catch (error) {
     return { problems: [`提案ファイルを JSON として読めない: ${error.message}`] };
   }
-  const skills = readdirSync(join(PROJECT_ROOT, SKILLS)).filter((d) => d.endsWith("-improvement") && existsSync(join(PROJECT_ROOT, logPath(d))));
+  const skills = readdirSync(join(PROJECT_ROOT, LOGS)).filter((d) => d.endsWith("-improvement") && existsSync(join(PROJECT_ROOT, logPath(d))));
   const logs = Object.fromEntries(skills.map((d) => [d, read(logPath(d))]));
   const result = applyProposal({ improvements: read(IMPROVEMENTS), backlog: read(BACKLOG), logs }, proposal, { week });
   if (result.problems.length) return result;
@@ -74,7 +76,7 @@ function main() {
   const base = arg("--base");
   const week = arg("--week");
   if (!base || !/^\d{4}-W\d{2}$/.test(week ?? "")) throw new Error("--base <sha> と --week YYYY-Www が必要");
-  const outPath = ".claude/state/metrics/measurement-cycle/triage-latest.json";
+  const outPath = `${datasetDir("business.measurement-cycle")}/triage-latest.json`;
   const proposalPath = arg("--proposal");
   const applied = proposalPath ? applyProposalFile(proposalPath, week) : { problems: [] };
   const untracked = lines(git("ls-files", "--others", "--exclude-standard")).filter((f) => f !== outPath);
@@ -106,7 +108,7 @@ function main() {
     improvements: result.improvements,
     backlogAdded: result.backlogAdded,
   };
-  mkdirSync(join(PROJECT_ROOT, ".claude/state/metrics/measurement-cycle"), { recursive: true });
+  mkdirSync(join(PROJECT_ROOT, datasetDir("business.measurement-cycle")), { recursive: true });
   writeFileSync(join(PROJECT_ROOT, outPath), JSON.stringify(state, null, 2) + "\n");
   const i = result.improvements;
   console.log(`[improvement-cycle] gate=${state.gate} deleted=${i.deleted.length} updated=${i.updated.length} added=${i.added.length} backlogAdded=${result.backlogAdded.length}`);

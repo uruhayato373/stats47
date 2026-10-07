@@ -16,6 +16,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { spawn } from 'node:child_process';
 import { SOURCE_VAULT } from '../../../config/paths.mjs';
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const SCRIPT_PATH = fileURLToPath(import.meta.url);
 const SCRIPT_DIR = path.dirname(SCRIPT_PATH);
@@ -382,7 +383,7 @@ function validateProcessingContract(profileName, profile) {
   }
   if (
     typeof profile.manifestPath !== 'string' ||
-    !profile.manifestPath.startsWith('.claude/state/source-inventory/')
+    !profile.manifestPath.startsWith(`${datasetDir("source-inventory.manifests")}/`)
   ) {
     throw new Error(`Invalid manifestPath: ${profileName}`);
   }

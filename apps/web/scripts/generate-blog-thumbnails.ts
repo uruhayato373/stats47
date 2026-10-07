@@ -32,6 +32,7 @@ import {
   parseBlogArticleImageContext,
   resolveArticleBackgroundSource,
 } from './lib/blog-article-background';
+import { backgroundRecord } from './lib/blog-background-status';
 import { resolveCodexBackgroundSource } from './lib/blog-codex-background-workflow';
 import {
   BLOG_IMAGE_PUBLISH_PLAN,
@@ -241,20 +242,6 @@ async function readRemoteShaMetadata(key: string): Promise<string | null> {
   return response.headers.get('x-amz-meta-stats47-sha256');
 }
 
-function backgroundRecord(value: unknown): Record<string, unknown> | null {
-  if (!value || typeof value !== 'object' || Array.isArray(value)) return null;
-  const root = value as Record<string, unknown>;
-  const metadata =
-    root.metadata && typeof root.metadata === 'object'
-      ? (root.metadata as Record<string, unknown>)
-      : root;
-  return metadata.background &&
-    typeof metadata.background === 'object' &&
-    !Array.isArray(metadata.background)
-    ? (metadata.background as Record<string, unknown>)
-    : null;
-}
-
 async function readReusableAiBackground(options: {
   slug: string;
   markdown: string;
@@ -346,9 +333,12 @@ async function readReusableAiBackground(options: {
     background.promptHash !== promptHash &&
     background.promptHash !== legacyPromptHash
   ) {
-    throw new Error(
+    // 記事の書き直しでタイトル等が変わった記事だけを skip (exit 20) にする。
+    // 通常の Error だと公開 run 全体が止まり、後続の記事まで公開されなくなる (2026-10-07)。
+    throw new MissingArticleBackgroundError(
       `${options.slug}: 記事変更によりAI背景promptが変わりました。` +
-        'generate-blog-thumbnails-cloud.ts --ai-background --slug で明示再生成してください'
+        '/generate-blog-images の Mode A (Codex) で記事固有背景を作ってください: ' +
+        `npm run blog-images:codex -- request-article --slug ${options.slug} --article docs/21_ブログ記事原稿/${options.slug}/article.md`
     );
   }
   const remoteBackground = await readRemoteObjectWithIdentity(keys.background);

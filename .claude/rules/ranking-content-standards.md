@@ -1,7 +1,8 @@
 ---
 paths:
   - "packages/ai-content/**"
-  - ".claude/{scripts/ai-content,state/ai-content,skills/content}/**"
+  - ".claude/{scripts/ai-content,skills/content}/**"
+  - "data/ai-content/**"
   - ".github/workflows/{ai-content-gemini-daily,publish-ai-content}.yml"
   - ".claude/agents/ranking-content-*.md"
 ---
@@ -14,7 +15,7 @@ critic (`ranking-content-critic`) / 人間はこれに従う。2026-07-12 に旧
 
 > **役割分担**: 戦略・KPI 目標は `docs/00_プロジェクト管理/03_マーケティング戦略.md`
 > （T1〜T4・成長レバー）。
-> Wave 進捗・生成の状態は **ai-content 是正キュー** (`.claude/state/ai-content/` + `build-ai-content-queue.mjs`、
+> Wave 進捗・生成の状態は **ai-content 是正キュー** (`data/ai-content/remediation/` + `build-ai-content-queue.mjs`、
 > memory `project_ai_content_remediation_queue`) と backlog (AICONTENT-02 / RANK-WAVE) が持つ。
 > 本 rule は「どう構成し・どの品質床で・どう生成するか」の運用正典。
 
@@ -159,6 +160,11 @@ values.json が取得できない場合は照合をスキップする (fail-open
 `not-eligible` にすることで `--next` から恒久的に外れ、backlog の件数も正直になる。
 done でも接地が不健全な key は `dataBlockers` を付けて LATEST.md に出す (公開済みの是正対象)。
 
+**解説の年が古い key は作り直しに戻す (`stale-year`、2026-10-07〜)。** ai-content.json は生成時の年を
+`yearCode` に持つが、`auditRow` は本文の形しか見ないので、取り込みで新しい年が増えても `done` のまま
+古い年を語り続けていた。キューは values.json の最新年と比べ、違えば `needs-regen` (reason `stale-year`) にする
+(`.claude/scripts/ai-content/lib/year-freshness.mjs`)。初回実測で GSC 流入のある 1,504 件中 43 件が該当した。
+
 **ブログ側の `checkGroundedRows` (`packages/ai-content/src/services/blog-topic-gate.ts`) との差は意図的**。
 blocker の 4 検査は同じ判断だが、40 行未満をブログは reject・ai-content は warn に留める。問うている
 ことが違うため — ブログは「この 1 本の記事を書けるか」(全国の傾向を論じる散文には県の網羅が要る)、
@@ -231,7 +237,7 @@ verify セマンティクス (日次 CI と対話セッションの共通規律)
 
 **quarantine (ai-content のみ)**: 連続で critic に落ちる常習キーは対象から外す。
 `.claude/scripts/ai-content/record-generation-outcome.mjs` で失敗回数を
-`.claude/state/ai-content/generation-failures.json` に積み、**3 回連続で失敗したキーを
+`data/ai-content/remediation/generation-failures.json` に積み、**3 回連続で失敗したキーを
 `build-ai-content-queue.mjs --next` が除外**する (doomed key が毎回バッチの 1 枠と生成
 コストを食い潰すのを防ぐ)。除外したキーは LATEST.md の「🚧 quarantine」節に理由付きで
 可視化し (黙って消さない)、一度でも PASS すればカウントを消して自動で復帰する。手動 agent
@@ -252,7 +258,7 @@ quarantine は持たない。
 3. author は response schema で FAQ 5 件・観測地域全件を固定する。既存の決定的監査に落ちた候補は公開しない。
 4. 生成と別の Gemini リクエストが意味品質を `PASS | REVISE` で審査する。`REVISE` は指摘付きで最大 1 回だけ全体再生成する。
 5. PASS 分だけ outbox へ書き、develop へコミットする。CI からの push は後続 workflow を発火しないため、`publish-ai-content.yml` を明示 dispatch し、run 成功まで待つ。
-6. 件数・通過率・author/critic リクエスト数・トークン数を `.claude/state/metrics/ai-content/` へ記録する。生成本文と prompt は記録しない。
+6. 件数・通過率・author/critic リクエスト数・トークン数を `data/ai-content/` へ記録する。生成本文と prompt は記録しない。
 
 **無料運用のゲート**: `GEMINI_API_KEY` は課金を有効化していない専用 Google AI Studio
 project から発行する。API は認証・quota/billing エラーを返すが、キーの project で
@@ -490,7 +496,7 @@ lite ではなく flash (47 県の解説を書かせるため)、preview / exper
 Generative Language API の有効化を確認する。
 
 **進捗管理**: `build-ai-content-queue.mjs --scope all` が実行のたびに
-`.claude/state/ai-content/progress-history.csv` へ 1 行追記し (同日同 scope は上書き)、
+`data/ai-content/remediation/progress-history.csv` へ 1 行追記し (同日同 scope は上書き)、
 `LATEST.md` に **消化ペース (件/日) と完了見込み日数**を出す。R2 が真実源でキューは毎回再導出する
 派生ビューなので、中断・再開しても状態がずれない。
 
@@ -501,7 +507,7 @@ node .claude/scripts/ai-content/build-ai-content-queue.mjs --no-build --next 40 
 
 `--scope gsc` (既定) は GSC 流入のあるページに絞った SEO 優先母集団で、**深掘り (brushup) の対象選定**に使う。
 `--scope all` は**全件完成フェーズ**用。どちらも同じ done 判定 (auditRow) を使うので混在しても矛盾しない。
-- 「次に何を生成するか」の真実源は **ai-content 是正キュー** (`build-ai-content-queue.mjs` → `.claude/state/ai-content/`)。
+- 「次に何を生成するか」の真実源は **ai-content 是正キュー** (`build-ai-content-queue.mjs` → `data/ai-content/remediation/`)。
   高流入 incomplete 優先。done は R2 の auditRow 通過で毎回再導出 (R2 が真実源・キューは派生)。
 
 ## Agent 分業

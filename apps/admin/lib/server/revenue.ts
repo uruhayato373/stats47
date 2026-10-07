@@ -15,13 +15,14 @@ import {
   wrap,
   type Wrapped,
 } from "./state-io";
+import { datasetDir, datasetPath } from "../../../../config/datasets.mjs";
 
 /**
  * 収益。★「未計測」を「0 円」として出さない。
  * 商品売上は証拠ファイルのsha256を持つ sales-ledger.json だけを実測として扱う。
  */
 
-const ADSENSE = ".claude/state/metrics/adsense";
+const ADSENSE = datasetDir("adsense.reports");
 
 export interface RevenueChannel {
   channel: string;
@@ -153,7 +154,7 @@ function readCandidates(): RevenueSummary["candidates"] {
 export function readProductSales(): RevenueSummary["productSales"] {
   return wrap(() => {
     const ledger = readJson<ProductSalesLedger>(
-      ".claude/state/products/sales-ledger.json",
+      datasetPath("sales.ledger"),
     );
     if (ledger.schemaVersion !== 1 || !Array.isArray(ledger.observations)) {
       throw new Error("sales-ledger.json のschemaが不正");
@@ -188,7 +189,7 @@ function readPublishedCounts(): { kindle: number; coconala: number } {
   };
 }
 
-const REVENUE_HISTORY = ".claude/state/metrics/authenticated/revenue-history.json";
+const REVENUE_HISTORY = `${datasetDir("revenue.authenticated")}/revenue-history.json`;
 /** 自動取得の観測をこの日数より古いものは「計測中」と見なさない (日次収集が止まったら未計測に戻す) */
 const AUTO_FRESH_DAYS = 3;
 

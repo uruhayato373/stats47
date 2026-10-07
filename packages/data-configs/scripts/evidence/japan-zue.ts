@@ -29,6 +29,7 @@ import type {
   JapanZueCandidate,
   JapanZueEvidenceItem,
 } from "../../src/evidence-inventory/types";
+import { datasetDir, datasetPath } from "../../../../config/datasets.mjs";
 
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../../..");
 const SOURCE_KEY = "japan-zue";
@@ -46,7 +47,7 @@ const EXPECTED_FIGURE_HEADINGS = 200;
 const EXPECTED_CHAPTER_NUMBER_CORRECTIONS = 1;
 const TABLE_SUBITEM_LIMIT = 48;
 const TEXT_STAT_LIMIT = EXPECTED_COUNTS["text-stat"];
-const STATE_DIR = path.join(PROJECT_ROOT, ".claude/state/source-inventory/japan-zue/2025-26");
+const STATE_DIR = path.join(PROJECT_ROOT, `${datasetDir("source-inventory.manifests")}/japan-zue/2025-26`);
 const CANDIDATES_PATH = path.join(STATE_DIR, "candidates.json");
 const SUMMARY_PATH = path.join(STATE_DIR, "evidence-summary.json");
 const ITEMS_PATH = path.join(
@@ -61,8 +62,8 @@ const ITEM_SHARD_PATHS = Array.from({ length: ITEM_SHARD_COUNT }, (_, index) =>
   ),
 );
 const SURVEYS_PATH = path.join(PROJECT_ROOT, "packages/ranking/src/data/surveys.json");
-const EXPERIMENTS_PATH = path.join(PROJECT_ROOT, ".claude/state/experiments.json");
-const SNS_POSTS_PATH = path.join(PROJECT_ROOT, ".claude/state/sns/posts.json");
+const EXPERIMENTS_PATH = path.join(PROJECT_ROOT, datasetPath("business.experiments"));
+const SNS_POSTS_PATH = path.join(PROJECT_ROOT, datasetPath("sns.posts"));
 const SNS_UTM_POLICY_PATH = path.join(PROJECT_ROOT, ".claude/scripts/lib/sns-utm.cjs");
 
 type EvidenceKind = JapanZueCandidate["source"]["kind"];

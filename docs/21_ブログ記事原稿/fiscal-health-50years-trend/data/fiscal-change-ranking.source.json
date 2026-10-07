@@ -1,0 +1,19 @@
+{
+  "kind": "derived",
+  "upstream": "metric config (packages/data-configs) → e-Stat 社会・人口統計体系 → R2 app/ranking",
+  "yearFormat": "fiscal",
+  "fetchedAt": "2026-10-07T06:17:53.515Z",
+  "generatedBy": "restoreScript (この source.json の restoreScript を node で実行すると3つの data JSON を R2 の values.json から作り直す)",
+  "restore": "記事ディレクトリ (data/ の親) で実行: node --input-type=module -e \"$(node -p \"require('./data/fiscal-trend.source.json').restoreScript.join('\\\\n')\")\" <出力ディレクトリ>  (fiscal-trend.json・current-balance-trend.json・fiscal-change-ranking.json の3つをまとめて出力する。R2 公開 URL の values.json を読むだけで認証は不要)",
+  "rankingKeys": [
+    "fiscal-strength-index-prefecture"
+  ],
+  "source": "r2:app/ranking/fiscal-strength-index-prefecture/values.json",
+  "label": "財政力指数の変化 (2022年度の値 − 1991年度の値)",
+  "unit": "指数",
+  "year": "1991, 2022",
+  "formula": "47 都道府県ごとに (2022年度の財政力指数 − 1991年度の財政力指数) を取り、変化量の降順に並べる (rank 1 = 上がり幅が最大、47 = 下がり幅が最大)。value は小数第5位に丸める。regionGroups は地域ごとの上がった県数・下がった県数と変化量の最小・最大、baselineChecks は起点を 1981 年度・2002 年度に替えた確認",
+  "observedYears": "1991, 2022 (どちらも47都道府県そろっている。1991年度は東京都の収録年度の最高値)",
+  "dataFile": "fiscal-change-ranking.json",
+  "restoreFrom": "fiscal-trend.source.json の restoreScript と同じ script が出力する"
+}

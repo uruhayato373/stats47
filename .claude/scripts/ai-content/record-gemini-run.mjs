@@ -2,13 +2,14 @@
  * ai-content run report (Gemini 日次 CI / ローカル claude CLI batch 共通) を長期指標と最新ダイジェストに変換する。
  *
  * 入力: generate-parallel.ts --report の JSON (本文・prompt・API key は含まない)
- * 出力: .claude/state/metrics/ai-content/{history.csv,LATEST.md}
+ * 出力: data/ai-content/{history.csv,LATEST.md}
  * 同一 run_id は upsert し、workflow rerun で二重記録しない。
  */
 
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const HEADER = [
   "date",
@@ -147,7 +148,7 @@ function main() {
   const reportPath = argValue(argv, "--report");
   const preflightReportPath = argValue(argv, "--preflight-report");
   const runId = argValue(argv, "--run-id") ?? process.env.GITHUB_RUN_ID;
-  const outputDir = argValue(argv, "--out-dir") ?? ".claude/state/metrics/ai-content";
+  const outputDir = argValue(argv, "--out-dir") ?? datasetDir("ai-content.history");
   if (!reportPath && !preflightReportPath) {
     throw new Error("--report or --preflight-report is required");
   }

@@ -14,7 +14,7 @@
  * オーナー承認の上で行う (R2 write は outward-facing。.claude/rules/todo-standards.md §7)。
  *
  * Usage:
- *   npx tsx .claude/scripts/blog/plan-svg-text-fix.ts @.claude/state/page-quality/backlog-batches/<ID>.txt
+ *   npx tsx .claude/scripts/blog/plan-svg-text-fix.ts @data/page-quality/backlog-batches/<ID>.txt
  *   npx tsx .claude/scripts/blog/plan-svg-text-fix.ts <slug> [<slug> ...] [--json]
  *
  * 正典: .claude/rules/page-quality-standards.md「チャートの文字の検査と修正の振り分け」

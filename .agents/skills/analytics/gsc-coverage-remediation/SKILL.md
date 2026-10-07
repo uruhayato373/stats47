@@ -11,7 +11,7 @@ GSC のインデックスカバレッジ問題 (404 / soft404 / 5xx / crawled-no
 **1 つの状態付きキュー**で追える。
 
 > **本 SKILL がこのループの運用正典 (runbook)**。2026-07-12 に旧 `docs/02_実装計画/12` を統合し .claude に一本化。
-> **SSOT (機械)**: `.claude/state/gsc/coverage-remediation-queue.json`。**人間向け要約**: `.claude/state/gsc/LATEST.md`。
+> **SSOT (機械)**: `data/gsc/coverage-remediation/coverage-remediation-queue.json`。**人間向け要約**: `data/gsc/coverage-remediation/LATEST.md`。
 > オーナー agent: `gsc-analyst` / status 更新: `improvement-triage`。
 
 ## 前提となる事実 (これを取り違えない)
@@ -78,7 +78,7 @@ sitemap 掲載・内部リンク・canonical を整えた上で `url-inspection-
 ## 実行手順
 
 ### Phase 0 — 前提確認
-- まず`.claude/state/metrics/authenticated/latest.json`のGSC成否・鮮度を確認する。CIはprivate R2の最新成功を復元する。
+- まず`data/authenticated/latest.json`のGSC成否・鮮度を確認する。CIはprivate R2の最新成功を復元する。
   認証未有効化/期限切れなら`docs/01_技術設計/07_Playwright認証プロファイル.md`の通常Chromeログイン→専用profile exportで復旧する。
   手動exportを使う場合だけ`USER_EXPORT_GUIDE.md` Step 2/3を案内する。古い成功へ黙ってfallbackしない。
 - export 不要で「キュー状態だけ見たい」なら Phase 3 の `--no-probe` か `--next` だけ実行。
@@ -112,14 +112,14 @@ node .claude/scripts/gsc/build-coverage-queue.mjs       # actionable URL を実�
   (`keepsDesignJudgment`。戻すと GSC-COV-* カードで対応不要とした 200 の URL が毎週再起票される)。
 
 ### Phase 3 — 報告
-- `.claude/state/gsc/LATEST.md` を読み、ユーザーに「総件数 (意図的の内訳)」と「要対応 pending の action 別件数」を提示。
+- `data/gsc/coverage-remediation/LATEST.md` を読み、ユーザーに「総件数 (意図的の内訳)」と「要対応 pending の action 別件数」を提示。
 - `node .claude/scripts/gsc/build-coverage-queue.mjs --next 20` で次にやる actionable を JSONL で取得。
 
 ### Phase 4 — 是正 (action 別)
 
 判断が要る action は `sync-coverage-backlog.mjs` が **action ごとに 1 枚ずつ** `GSC-COV-<種類>-<日付>` カード
 (10 URL まで・`[実行:sweep]`) を `.claude/todo/backlog.md` へ起票し、対話セッションで優先順位を見て選んだときに処理する (2026-09-27 に日次の自動処理を停止)。
-対象 URL は `.claude/state/gsc/backlog-batches/<ID>.txt`、completion gate は
+対象 URL は `data/gsc/coverage-remediation/backlog-batches/<ID>.txt`、completion gate は
 `build-coverage-queue.mjs --assert-handled <batch>` (全 URL が pending でなく、done 以外は理由 note 付き)。
 CI の Claude は curl / WebFetch を使えないので、本番ページは `build-coverage-queue.mjs --probe <url>` で読む。
 カードが消化されると翌日の日次 CI が次の batch を起票する。人がセッションで進めるときも同じカードを使う。
@@ -172,21 +172,21 @@ TASK: 以下の soft404→現在200 の URL 群が「薄い/空」か判定。R2
 
 | 役割 | パス | 書く / 読む |
 |---|---|---|
-| **状態付きキュー (SSOT・機械)** | `.claude/state/gsc/coverage-remediation-queue.json` | build が書く / skill・agent が読む |
-| 人間向け要約 | `.claude/state/gsc/LATEST.md` | build が書く / 人間が読む |
-| 経過観測 (週次件数) | `.claude/state/gsc/coverage-totals-history.csv` | build が追記 |
-| 取り込み済 drilldown | `.claude/state/metrics/gsc/coverage-drilldown/<週>/*-drilldown.csv` | ingest が書く |
-| observe-after-fix 対象 | `.claude/state/metrics/gsc/coverage-drilldown/<週>/coverage-live-observe-urls.csv` | build が書く / url-inspection で観測 |
-| agent 用詳細ログ | `.claude/skills/analytics/gsc-improvement/reference/improvement-log.md` `[COVERAGE-LOOP-01]` | skill/agent |
+| **状態付きキュー (SSOT・機械)** | `data/gsc/coverage-remediation/coverage-remediation-queue.json` | build が書く / skill・agent が読む |
+| 人間向け要約 | `data/gsc/coverage-remediation/LATEST.md` | build が書く / 人間が読む |
+| 経過観測 (週次件数) | `data/gsc/coverage-totals-history.csv` | build が追記 |
+| 取り込み済 drilldown | `data/gsc/coverage-drilldown/<週>/*-drilldown.csv` | ingest が書く |
+| observe-after-fix 対象 | `data/gsc/coverage-drilldown/<週>/coverage-live-observe-urls.csv` | build が書く / url-inspection で観測 |
+| agent 用詳細ログ | `data/improvement/gsc-improvement/improvement-log.md` `[COVERAGE-LOOP-01]` | skill/agent |
 | TODO 真実源 | `.claude/todo/improvements.md` `COVERAGE-LOOP-01` | improvement-triage |
 
 ## cadence (週次)
 
 **自動 (CI)**: `fetch-metrics-weekly.yml` (日曜 20:00 JST) が **Phase 2 のキュー再構築を毎週回す**
-(`build-coverage-queue.mjs` → `--sync-inspection` → `.claude/state/gsc/` を develop へ commit-back)。
+(`build-coverage-queue.mjs` → `--sync-inspection` → `data/gsc/coverage-remediation/` を develop へ commit-back)。
 **判断が要る是正も CI で回す (2026-09-24〜)**: 日次 `gsc-url-inspection-daily.yml` と週次の最後に
 `sync-coverage-backlog.mjs` が `GSC-COV-*` カードを起票し、対話セッション (2026-09-27 まで `backlog-loop-daily.yml` の日次実行) が
-直して develop へ push する。本番反映は develop→main の人の PR のまま。ループは `.claude/state/gsc` も commit する
+直して develop へ push する。本番反映は develop→main の人の PR のまま。ループは `data/gsc/coverage-remediation` も commit する
 (是正キューへの `--mark-*` が成果物のため)。
 入力週が 1 週以内なら本番 HTTP を再実測する。新しい export がなく入力週が 2 週以上古い場合は、
 古い母集団を最新と誤認しないよう fail-closed で停止する。失敗時は `[Coverage Alert]` Issue

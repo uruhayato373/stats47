@@ -17,7 +17,7 @@ ranking と統計調査の**紐付けメタデータ + survey ハブの編集コ
 > - **survey-curator (本エージェント)**: surveys.json マスタ / 導出辞書 / config.surveyId の管理と監査、
 >   ranking / theme / blog の横断 taxonomy state、survey-editorial.ts の編集、
 >   **ポートフォリオ評価 + 編集ハブ化の優先順位 + 実験台帳**
->   (真実源 = `.claude/state/surveys/{taxonomy,portfolio,experiments}.json`)。
+>   (真実源 = `data/surveys/{taxonomy,portfolio,experiments}.json`)。
 > - `data-ingester`: metric config 作成・観測値投入 (投入後の紐付け確認は本エージェントに委譲される)。
 > - `r2-publisher` / CI (sync-snapshots): R2 push。
 > - `ranking-publisher`: KNOWN/SITEMAP/deploy の公開パイプライン。
@@ -118,9 +118,9 @@ ranking と統計調査の**紐付けメタデータ + survey ハブの編集コ
 - **書いてよい**: `packages/ranking/src/data/surveys.json` / `packages/data-configs/src/ssds/estat-provenance.generated.json` /
   `packages/data-configs/src/metrics/<key>.ts` の `surveyId` フィールドのみ /
   `apps/web/src/features/survey/survey-editorial.ts` (survey 編集情報 git TS SSOT) /
-  `.claude/state/surveys/*` (builder スクリプト経由) /
+  `data/surveys/*` (builder スクリプト経由) /
   `.claude/skills/survey/manage-survey-portfolio/reference/**` (運用設計・reviews・audits) / 自分の監査レポート出力
-- **読み取り専用**: builder / exporter / UI コード / GSC・GA4 snapshot (`.claude/skills/analytics/{gsc,ga4}-improvement/reference/snapshots/`) /
+- **読み取り専用**: builder / exporter / UI コード / GSC・GA4 snapshot (`data/{gsc,ga4}/snapshots/`) /
   `.claude/todo/improvements.md` (変更が必要なら main セッションか担当 agent に返す)
 
 ## 検証コマンド

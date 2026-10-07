@@ -1,0 +1,21 @@
+{
+  "kind": "calculated",
+  "label": "不健康期間（男性）",
+  "unit": "年",
+  "formula": "life-expectancy-0-male（平均寿命、2020年）- healthy-life-expectancy-male（健康寿命、2019年）を都道府県ごとに算出",
+  "inputs": [
+    {
+      "rankingKey": "life-expectancy-0-male",
+      "year": "2020",
+      "source": "r2:app/ranking/life-expectancy-0-male/values.json"
+    },
+    {
+      "rankingKey": "healthy-life-expectancy-male",
+      "year": "2019",
+      "source": "r2:app/ranking/healthy-life-expectancy-male/values.json"
+    }
+  ],
+  "caveat": "健康寿命は2019年と2022年の2時点、平均寿命は5年おき（最新2020年）。年のずれが最小になる2019年と2020年を組み合わせた近似値。",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug unhealthy-period-gender-prefecture-gap --keys healthy-life-expectancy-male,life-expectancy-0-male --base docs/21_ブログ記事原稿 (取得後、都道府県ごとに 平均寿命-健康寿命 を算出)",
+  "yearPinnedReason": "不健康期間は健康寿命2019年と平均寿命2020年を組み合わせた算出値。都道府県別の平均寿命は5年おきで2020年が最新、健康寿命は2019年と2022年の2時点があり、2022年と組むと年のずれが1年から2年に広がる。本文がこの組み合わせと理由を説明しているため、最新年への自動の取り直し対象にしない"
+}

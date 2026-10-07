@@ -11,13 +11,14 @@
 import { readFileSync, writeFileSync, readdirSync, existsSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const PROJECT_ROOT = resolve(fileURLToPath(import.meta.url), "..", "..", "..", "..");
-const STATE_DIR = join(PROJECT_ROOT, ".claude/state/metrics/cloudflare");
+const STATE_DIR = join(PROJECT_ROOT, datasetDir("cloudflare.cost-snapshots"));
 const SNAPSHOTS_DIR = join(STATE_DIR, "snapshots");
 const BUDGETS_PATH = join(
   PROJECT_ROOT,
-  ".claude/skills/analytics/cloudflare-cost-improvement/reference/budgets-daily.json",
+  ".claude/config/budgets/cloudflare-cost-improvement/budgets-daily.json",
 );
 
 function parseArgs() {

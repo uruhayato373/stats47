@@ -14,8 +14,10 @@ import {
   parseAffiliateExperimentHistory,
 } from "./lib/affiliate-pilot-history-core.mjs";
 
+import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
+
 const ROOT = resolve(fileURLToPath(new URL(".", import.meta.url)), "../../..");
-const STATE_DIR = resolve(ROOT, ".claude/state/ads");
+const STATE_DIR = resolve(ROOT, datasetDir("affiliate.audits"));
 const OUT_PATH = resolve(STATE_DIR, "affiliate-pilot-readiness-latest.json");
 
 function readJson(path: string): any | null {
@@ -33,7 +35,7 @@ function main(): void {
 
   const portfolio = readJson(resolve(STATE_DIR, "affiliate-portfolio-latest.json"));
   const operations = readJson(resolve(STATE_DIR, "affiliate-operations-latest.json"));
-  const registry = readJson(resolve(STATE_DIR, "experiments.json"));
+  const registry = readJson(resolve(ROOT, datasetPath("affiliate.experiments")));
   const activeExperiments = (registry?.experiments ?? []).filter((experiment: { status?: string }) => experiment.status !== "closed");
 
   // pilot planはowner承認後にregistryへ追加される。存在しない間は推測して作らない。
@@ -52,7 +54,7 @@ function main(): void {
         maxDurationDays: plan.maxDurationDays,
       })
     : null;
-  const historyPath = resolve(STATE_DIR, "affiliate-experiment-history.csv");
+  const historyPath = resolve(ROOT, datasetPath("affiliate.experiment-history"));
   const historyRows = existsSync(historyPath)
     ? parseAffiliateExperimentHistory(readFileSync(historyPath, "utf8"))
     : [];
@@ -64,7 +66,7 @@ function main(): void {
         exposureEndedAt: plan.exposureEndedAt ?? null,
       })
     : [];
-  const moshimo = readJson(resolve(ROOT, ".claude/state/metrics/affiliate/moshimo-results.json"));
+  const moshimo = readJson(resolve(ROOT, datasetPath("moshimo.results")));
   const moshimoSource = portfolio?.sources?.additionalOutcomes?.find((source: { source?: string }) => source.source === "moshimo");
   const observation = plan
     ? buildAffiliatePilotObservation({

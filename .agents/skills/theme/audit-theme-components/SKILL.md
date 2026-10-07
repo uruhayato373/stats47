@@ -69,4 +69,4 @@ PDFの復元にはPopplerの`pdftotext`が必要。対象外県は`source.config
 - 最高/最低気温、給与月額/年収、就職率/就業率、人口等の分母は定義まで確認する。
 - 1 指標グループはコンパクトカード (選択 UI なし)、2 件以上だけ切替パネル。UI 側の是正は theme-ui-manager。
 - 本体UIは theme-ui-manager、指標選定は theme-designer、定義/取得は data-ingesterへ渡す。
-- 結果は `.claude/state/themes/quality.json`。未完了策は既存backlogへ統合し、docsへレビュー全文を増やさない。
+- 結果は `data/themes/quality.json`。未完了策は既存backlogへ統合し、docsへレビュー全文を増やさない。

@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "per-capita-prefectural-income-h27",
+  "year": "2021",
+  "unit": "千円",
+  "label": "1人当たり県民所得",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/per-capita-prefectural-income-h27/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug engel-coefficient-vs-prefectural-income --keys per-capita-prefectural-income-h27 --data-name prefectural-income-ranking",
+  "fetchedAt": "2026-09-05T10:04:34.828Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

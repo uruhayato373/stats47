@@ -30,7 +30,7 @@ Phase 1 の並列収集より前に、NSM（週間エンゲージドセッショ
 node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
 ```
 
-- 出力先: `.claude/skills/management/nsm-experiment/reference/weekly-snapshots/YYYY-Www.json`
+- 出力先: `data/nsm/weekly-snapshots/YYYY-Www.json`
 - 内容: GA4 + GSC + PSI の確定7日/直前7日比較サマリ（`finalized7d`/`previous7d`契約・`metrics-reader.mjs` 経由）
 - 既存ファイルがあればスキップ（上書きしたい場合は `--force`）
 - 続く Phase 1 Track C と Track E がこの JSON を参照する
@@ -61,7 +61,7 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
 調査項目:
 - .local/r2/blog/ 配下の記事一覧と最終更新日
   → 今週新規作成・更新された記事を特定
-- 投稿台帳 `.claude/state/sns/posts.json` から投稿実績を集計 (完全DBレス。旧 D1 sns_posts は廃止):
+- 投稿台帳 `data/sns/posts.json` から投稿実績を集計 (完全DBレス。旧 D1 sns_posts は廃止):
   ```bash
   # 今週の投稿数 / 投稿待ち / 全体概況 (<monday> は ISO 文字列)
   node -e 'const s=require("./.claude/scripts/lib/sns-posts-store.cjs");const M="<monday>";
@@ -73,10 +73,10 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
   ```
 - .local/r2/sns/ 配下の新規生成コンテンツ
 
-- ブログ新規記事キュー（`.claude/state/blog/topic-queue.json`）の消化状況:
+- ブログ新規記事キュー（`data/blog/topic-queue.json`）の消化状況:
   ```bash
   # pending / must-write / in-progress の件数と型ミックス、今週 done になった件数
-  node -e 'const q=require("./.claude/state/blog/topic-queue.json");
+  node -e 'const q=require("./data/blog/topic-queue.json");
     const c=(f)=>q.queue.filter(f).length; const by=(s)=>{const o={};for(const e of q.queue.filter(x=>x.status===s))o[e.archetype]=(o[e.archetype]||0)+1;return o};
     console.log(JSON.stringify({pending:c(x=>x.status==="pending"),must_write:c(x=>x.status==="pending"&&x.lane==="must-write"),in_progress:c(x=>x.status==="in-progress"),done:c(x=>x.status==="done"),pending型内訳:by("pending")},null,2))'
   ```
@@ -100,7 +100,7 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
    curl -s "https://storage.stats47.jp/app/blog/all.json" | jq '.articles | length'   # 公開記事数
    ```
 
-2. SNS 投稿実績（投稿台帳 `.claude/state/sns/posts.json` から集計。旧 D1 sns_posts は廃止）
+2. SNS 投稿実績（投稿台帳 `data/sns/posts.json` から集計。旧 D1 sns_posts は廃止）
    ```bash
    node -e 'const s=require("./.claude/scripts/lib/sns-posts-store.cjs");const M="<monday>";
      const cnt=(a,f)=>{const o={};for(const p of a){const k=f(p);o[k]=(o[k]||0)+1}return o};
@@ -111,7 +111,7 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
 
 3. GA4 snapshot 取得と期間分離
    `/fetch-ga4-data last28d snapshot <当週 YYYY-Www>` を実行する。
-   保存先: `.claude/skills/analytics/ga4-improvement/reference/snapshots/<YYYY-Www>/`
+   保存先: `data/ga4/snapshots/<YYYY-Www>/`
    取得ファイル:
    - raw: overview.csv / pages.csv(全件) / channels.csv / devices.csv / daily.csv
    - clean: overview-clean.csv / channels-clean.csv (country=Japan only, engagedSessions/engagementRate 含む)
@@ -123,7 +123,7 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
 
 4. GSC snapshot 取得と期間分離
    `/fetch-gsc-data last28d query snapshot <当週 YYYY-Www>` を実行する。
-   保存先: `.claude/skills/analytics/gsc-improvement/reference/snapshots/<YYYY-Www>/`
+   保存先: `data/gsc/snapshots/<YYYY-Www>/`
    取得ファイル: queries.csv(全件) / pages.csv(全件) / devices.csv / countries.csv / daily.csv
    実行時に以下が自動で連鎖する:
    a. `~/Downloads/stats47.jp-Coverage-YYYY-MM-DD/` を検出し、`重大な問題.csv` と `平均読み込み時間のチャート.csv` を `gcsエラー/` に mtime 比較でコピー（最新日付 1 件のみ）
@@ -150,19 +150,19 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
    **URL Inspection 日次データ**:
    GitHub Actions `gsc-url-inspection-daily.yml` が毎朝 JST 06:00 に自動取得・集計している（API 視点・自サイト把握 URL のみ）。
    レビュー本文「パフォーマンス → GSC」セクションに以下を埋め込む:
-   - `.claude/state/metrics/gsc/url-inspection/LATEST.md` の verdict / coverageState 表
-   - 時系列: `.claude/state/metrics/gsc/url-inspection/history.csv`、詳細: 最新日付CSV
-   - `.claude/state/metrics/gsc/coverage-drilldown/LATEST.md` は旧集約なので最新状態の根拠に使わない。GSC UI exportは下記remediation queueで読む
+   - `data/gsc/url-inspection/LATEST.md` の verdict / coverageState 表
+   - 時系列: `data/gsc/url-inspection/history.csv`、詳細: 最新日付CSV
+   - `data/gsc/coverage-drilldown/LATEST.md` は旧集約なので最新状態の根拠に使わない。GSC UI exportは下記remediation queueで読む
 
    **GSC カバレッジ是正ループ**:
    ユーザーが GSC UI から「ページ」export を取得していれば（API では取れない総件数・未把握 URL を含む）、是正ループを回す。
    正典: `.claude/skills/analytics/gsc-coverage-remediation/SKILL.md` / 実行: `/gsc-coverage-remediation`。
    - 取り込み: `python3 .claude/scripts/gsc/ingest-gsc-export.py`（~/Downloads の cp932 zip を自動正規化 → `coverage-drilldown/YYYY-Www/{category}-drilldown.csv`）
    - 構築: `node .claude/scripts/gsc/build-coverage-queue.mjs`（本番 HTTP 実測で A/B 分類）
-   - レビューに埋め込む: **`.claude/state/gsc/LATEST.md`**（要対応 action 別件数・カテゴリ総件数）と
-     `.claude/state/gsc/coverage-totals-history.csv`（404/soft404 件数の前週比トレンド）
+   - レビューに埋め込む: **`data/gsc/coverage-remediation/LATEST.md`**（要対応 action 別件数・カテゴリ総件数）と
+     `data/gsc/coverage-totals-history.csv`（404/soft404 件数の前週比トレンド）
    - effect 判定は再送信 URL の coverageState 遷移を実測してから（`evidence-based-judgment.md`）。
-     真実源は `.claude/state/gsc/coverage-remediation-queue.json`。今週実行する場合だけ
+     真実源は `data/gsc/coverage-remediation/coverage-remediation-queue.json`。今週実行する場合だけ
      `.claude/todo/weekly.md` から参照し、完了済みの旧改善IDをTODOへ戻さない。
 
 4.5. AdSense snapshot 取得
@@ -176,8 +176,8 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
    `/fetch-adsense-data` と `/adsense-improvement` は運用しない。過去の snapshot は
    `.claude/skills/analytics/adsense-improvement/reference/` に凍結記録として残す。
 
-   **アフィリエイトの週次観測**: `.claude/state/ads/ga4-affiliate-history.csv` と
-   `.claude/state/ads/affiliate-operations-latest.json` を見る。評価の主指標は
+   **アフィリエイトの週次観測**: `data/affiliate/ga4-affiliate-history.csv` と
+   `data/affiliate/affiliate-operations-latest.json` を見る。評価の主指標は
    確定収益 / 1,000 viewable impression で、クリック数だけで勝敗を決めない。
 
    **計測の健全性は機械が判定する**。`node .claude/scripts/metrics/check-revenue-guards.mjs`
@@ -191,7 +191,7 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
    - `privacy-threshold`（pages 0行）を欠損・0 と混同しない。rolling 28日差を WoW と呼ばない。
 
 4.6. R2 ストレージ定点観測 (Cloudflare cost)
-   `.claude/state/metrics/cloudflare/LATEST.md` の `r2_storage_gb` を読み、前週比を確認する。
+   `data/cloudflare/LATEST.md` の `r2_storage_gb` を読み、前週比を確認する。
    増勢が続く場合は `.claude/todo/improvements.md` の `[R2-STORAGE-01]` を更新する
    (保持・削除ポリシーの正典: `.claude/rules/r2-storage-design.md`「R2 保持・削除ポリシー」)。
 
@@ -207,7 +207,7 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
        const maxU=Math.max(0,...posted.map(p=>Date.parse(p.metrics_updated_at||0)||0));
        console.log(JSON.stringify({最終更新:maxU?new Date(maxU).toISOString():null,platform別:acc,X上位:topX},null,2))'
      ```
-   - **時系列履歴（週次トレンド）** は `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv` から:
+   - **時系列履歴（週次トレンド）** は `data/sns/metric-snapshots/YYYY-MM-DD/metrics.csv` から:
      ```bash
      # 直近 14 日分の snapshot を合算（sns-metrics-store.cjs の readByRange を使うと手軽）
      node -e "const s=require('./.claude/scripts/lib/sns-metrics-store.cjs'); const d=new Date(); const end=d.toISOString().slice(0,10); d.setDate(d.getDate()-14); const start=d.toISOString().slice(0,10); console.log(JSON.stringify(s.readByRange(start,end).length+' rows'))"
@@ -215,13 +215,13 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
 
 6. SNS メトリクスのレビュー本文への埋め込み
    SNS の週次ハイライトは本レビュードキュメントの本文に直接記載する。
-   GA4/GSC の詳細データは snapshot CSV (`.claude/skills/analytics/{gsc,ga4}-improvement/reference/snapshots/`) と改善ログ (`.claude/todo/improvements.md`) に分離済みなので、レビュー本文では「主要指標の前週差 + 改善ログ section 参照」のみに圧縮する。
+   GA4/GSC の詳細データは snapshot CSV (`data/{gsc,ga4}/snapshots/`) と改善ログ (`.claude/todo/improvements.md`) に分離済みなので、レビュー本文では「主要指標の前週差 + 改善ログ section 参照」のみに圧縮する。
 
 出力形式:
 - 「パフォーマンス概況」（overview.csv / GSC サマリー + AdSense + SNS の主要指標を 1 行で明記）
 - 「注目すべきトレンド」（流入経路の変化、上昇/下降クエリ、再生数の伸び、RPM 変化）
 - 「改善候補」（CTR が低い高表示クエリ、順位 11-20 位のクエリ — queries.csv から抽出）
-- 「snapshot 参照」（`.claude/skills/analytics/{gsc,ga4,adsense}-improvement/reference/snapshots/YYYY-Www/` と各期間）
+- 「snapshot 参照」（`data/{gsc,ga4,adsense}/snapshots/YYYY-Www/` と各期間）
 - 「検索成長候補」（最大3件。期間・証拠・制約・承認状態）
 - 「施策効果判定」（`.claude/todo/improvements.md`のdue施策を14/28/56日窓で判定）
 ```
@@ -231,13 +231,13 @@ node .claude/scripts/snapshot-weekly-metrics.mjs [YYYY-Www]
 ```
 調査項目:
 
-1. `.claude/state/experiments.json` から status が running / measuring の実験を抽出
+1. `data/business/experiments.json` から status が running / measuring の実験を抽出
    ```bash
    node .claude/scripts/lib/experiments-state.mjs active
    node .claude/scripts/lib/experiments-state.mjs pending
    ```
 
-2. 各 active 実験について、Phase 0 で生成された週次 snapshot JSON（`.claude/skills/management/nsm-experiment/reference/weekly-snapshots/YYYY-Www.json`）を参照し、baseline と今週値の delta を計算
+2. 各 active 実験について、Phase 0 で生成された週次 snapshot JSON（`data/nsm/weekly-snapshots/YYYY-Www.json`）を参照し、baseline と今週値の delta を計算
    - baseline → snapshot の該当メトリクス（例: `gsc_weekly_clicks`, `engagedSessions`, `gsc_total_errors`）
    - started_at から経過日数を計算（10 日未満なら「measure 判定はまだ早い」と注記）
 
@@ -324,7 +324,7 @@ echo "テーマ数:         $(npx tsx -e 'import {ALL_THEMES} from "./apps/web/s
 
 ### Phase 4: 出力
 
-Write tool で `.claude/skills/management/weekly-review/reference/reviews/YYYY-Www.md` を作成する。frontmatter を必ず含めること。
+Write tool で `data/reviews/weekly/YYYY-Www.md` を作成する。frontmatter を必ず含めること。
 
 ```yaml
 ---
@@ -407,7 +407,7 @@ tags: []
 
 ## NSM 実験進捗
 
-Phase 0 で生成された週次 snapshot（`.claude/skills/management/nsm-experiment/reference/weekly-snapshots/YYYY-Www.json`）を参照。
+Phase 0 で生成された週次 snapshot（`data/nsm/weekly-snapshots/YYYY-Www.json`）を参照。
 
 ### active な実験
 
@@ -441,7 +441,7 @@ Phase 0 で生成された週次 snapshot（`.claude/skills/management/nsm-exper
 
 ### GA4機会発見・pollution監査（ローリング28日）
 
-snapshot CSV: `.claude/skills/analytics/ga4-improvement/reference/snapshots/YYYY-Www/`
+snapshot CSV: `data/ga4/snapshots/YYYY-Www/`
 
 raw - cleanの差分:
 
@@ -454,7 +454,7 @@ raw - cleanの差分:
 - Organic Search (clean): N → N (+N) ※ clean ベースで評価
 - 上位ページの変化: pages.csv の Top 3 を 1 行ずつ
 
-### GSC KPI（確定7日） — snapshot: `.claude/skills/management/nsm-experiment/reference/weekly-snapshots/YYYY-Www.json`
+### GSC KPI（確定7日） — snapshot: `data/nsm/weekly-snapshots/YYYY-Www.json`
 
 | 指標 | finalized7d | previous7d | 差分 |
 |---|---|---|---|
@@ -467,7 +467,7 @@ raw - cleanの差分:
 
 ### GSC機会発見（ローリング28日）
 
-snapshot CSV: `.claude/skills/analytics/gsc-improvement/reference/snapshots/YYYY-Www/`
+snapshot CSV: `data/gsc/snapshots/YYYY-Www/`
 
 上位クエリ・改善候補（queries.csv / pages.csv / devices.csvから抽出）:
 - 順位 11-20 位で表示 > N の「あと一押し」クエリを 3 件
@@ -480,8 +480,8 @@ snapshot CSV: `.claude/skills/analytics/gsc-improvement/reference/snapshots/YYYY
 `snapshots/YYYY-Www/index-coverage.csv` が存在する場合は以下を 1 行で:
 - 404 / 5xx / ソフト404 / クロール済み未登録 / 検出未登録 / 登録済みの前週差
 
-**GSC運用サイクル**: `.claude/state/metrics/gsc/operations-cycle-LATEST.md` と対象週の
-`.claude/state/effect-verdict/verdicts-YYYY-Www.json`を参照し、FAIL/WARNと次アクションを記載する。
+**GSC運用サイクル**: `data/gsc/operations-cycle-LATEST.md` と対象週の
+`data/effect-verdict/verdicts-YYYY-Www.json`を参照し、FAIL/WARNと次アクションを記載する。
 review作成前の入力検査は次で実行する:
 
 ```bash
@@ -499,10 +499,10 @@ effect-verdictがこの週に判定変化を起こした施策のみを列挙。
 - 着手待ち（`effect/pending` かつ経過日数 < 14）の Tier 1 施策は下部に「待機中」として別枠で列挙
 - gsc/coverage/inspectionがfreshで候補がある場合、最大3件を審査し、approve/dismissを最低1件記録する。採用0件ならdismiss理由を残す
 
-**ブログ品質是正キューの進捗** (`.claude/state/blog/remediation-queue.json` の `summary` を Read):
+**ブログ品質是正キューの進捗** (`data/blog/remediation-queue.json` の `summary` を Read):
 
 ```bash
-node -e 'const q=require("./.claude/state/blog/remediation-queue.json");console.log(q.summary)'
+node -e 'const q=require("./data/blog/remediation-queue.json");console.log(q.summary)'
 ```
 
 - 「pending N (must-fix M) / done D」を 1 行で記載し、**前週比で pending がいくつ減ったか**を明記する (順次品質向上の進捗指標)。
@@ -520,7 +520,7 @@ node .claude/scripts/blog/analyze-winning-patterns.mjs   # CTR×構造特徴→f
   **robust かつ confidence hi/mid** のシグナルを 1-2 行で記載。
 - **robust な勝ちパターンのみ** `.claude/rules/blog-quality-standards.md` への書き戻しを検討 (定性裏取り後、`evidence-based-judgment.md` 準拠)。weakened/confounded は書き戻さない。
 
-### AdSense（過去 7 日） — snapshot CSV: `.claude/skills/analytics/adsense-improvement/reference/snapshots/YYYY-Www/`
+### AdSense（過去 7 日） — snapshot CSV: `data/adsense/snapshots/YYYY-Www/`
 
 `.env.local` に AdSense OAuth 未設定の場合は本節を省略し「AdSense OAuth 未設定」と 1 行記載。
 
@@ -537,7 +537,7 @@ node .claude/scripts/blog/analyze-winning-patterns.mjs   # CTR×構造特徴→f
 
 ### SNS パフォーマンス
 
-※ 最新値は投稿台帳 `posts.json` のキャッシュカラムから（`sns-posts-store.cjs` 経由。完全DBレス。旧 D1 sns_posts は廃止）、時系列履歴は `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv` から取得する（詳細は Phase 1 Track C 参照）。
+※ 最新値は投稿台帳 `posts.json` のキャッシュカラムから（`sns-posts-store.cjs` 経由。完全DBレス。旧 D1 sns_posts は廃止）、時系列履歴は `data/sns/metric-snapshots/YYYY-MM-DD/metrics.csv` から取得する（詳細は Phase 1 Track C 参照）。
 
 | プラットフォーム | 計測投稿数 | インプレッション / 再生数 | いいね |
 |---|---|---|---|
@@ -549,7 +549,7 @@ node .claude/scripts/blog/analyze-winning-patterns.mjs   # CTR×構造特徴→f
 
 ### KDP公開ゲート
 
-`.claude/state/products/kdp-weekly-publication.json`を参照し、推測で補完しない。
+`data/products/kdp-weekly-publication.json`を参照し、推測で補完しない。
 
 | 項目 | 実測 |
 |---|---|
@@ -575,7 +575,7 @@ node .claude/scripts/blog/analyze-winning-patterns.mjs   # CTR×構造特徴→f
 
 | 段 | 今週 | 根拠 |
 |---|---|---|
-| 計測 (fetch-metrics-weekly) | 生成 / 未生成 | `.claude/state/metrics/measurement-cycle/latest.json` の week |
+| 計測 (fetch-metrics-weekly) | 生成 / 未生成 | `data/measurement-cycle/latest.json` の week |
 | 記録 (無人 improvement-triage) | pass / fail・閉じた N・更新 N・追加 N | `triage-latest.json` |
 | 改善 (今週動いた施策) | 施策 ID | improvements.md / backlog-loop ledger |
 | 振り返り → 起票 (前週の申し送り) | 振り分け済み N / M | `node .claude/scripts/management/check-review-cadence.mjs --json` |
@@ -617,7 +617,7 @@ node .claude/scripts/blog/analyze-winning-patterns.mjs   # CTR×構造特徴→f
 
 ## 保存先 / TODO (.claude/todo/)
 
-- 本スキル出力: `.claude/skills/management/weekly-review/reference/reviews/YYYY-Www.md`
+- 本スキル出力: `data/reviews/weekly/YYYY-Www.md`
 - 計画: `.claude/todo/weekly.md`（レビューでは変更しない）
 - 改善施策: `.claude/todo/improvements.md`
 - 未着手の機能・自動化: `.claude/todo/backlog.md`
@@ -653,14 +653,14 @@ node .claude/scripts/blog/analyze-winning-patterns.mjs   # CTR×構造特徴→f
 
 ## 参照
 
-- `.claude/skills/management/weekly-review/reference/reviews/` / `.claude/todo/weekly.md` — 過去レビューと現在計画
-- `.claude/skills/analytics/gsc-improvement/reference/snapshots/` — GSC rolling28d discovery snapshot
-- `.claude/skills/analytics/ga4-improvement/reference/snapshots/` — GA4 clean/raw snapshot
-- `.claude/skills/analytics/adsense-improvement/reference/snapshots/` — AdSense週次snapshot
+- `data/reviews/weekly/` / `.claude/todo/weekly.md` — 過去レビューと現在計画
+- `data/gsc/snapshots/` — GSC rolling28d discovery snapshot
+- `data/ga4/snapshots/` — GA4 clean/raw snapshot
+- `data/adsense/snapshots/` — AdSense週次snapshot
 - `.claude/todo/improvements.md` — 施策status・due・ownerのSSOT
 - `docs/02_実装計画/00_INDEX.md` — 実装計画の現在地
 - `docs/00_プロジェクト管理/02_収益化戦略.md` — NSM・収益レーン・意思決定ゲート
-- `.claude/state/sns/posts.json` / `.claude/skills/analytics/sns-metrics-improvement/snapshots/` — SNSコンテンツ状況・メトリクス
+- `data/sns/posts.json` / `data/sns/metric-snapshots/` — SNSコンテンツ状況・メトリクス
 - `.claude/skills/analytics/fetch-ga4-data/SKILL.md` — GA4 データ取得手順（snapshot モード）
 - `.claude/skills/analytics/fetch-gsc-data/SKILL.md` — GSC データ取得手順（snapshot モード）
 - `.claude/skills/analytics/fetch-adsense-data/SKILL.md` — AdSense データ取得手順（snapshot モード）

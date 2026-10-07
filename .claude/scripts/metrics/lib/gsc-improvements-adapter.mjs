@@ -17,6 +17,7 @@ import { DEFAULT_THRESHOLDS } from "../../lib/effect-verdict/thresholds.mjs";
 import { parseCsv } from "./measurement-cycle.mjs";
 import { PROJECT_ROOT } from "./auth.mjs";
 import { resolvePeriods } from "./periods.mjs";
+import { datasetDir } from "../../../../config/datasets.mjs";
 
 const ACTIVE_STATUSES = new Set(["pending", "in-progress", "effect/pending"]);
 
@@ -112,7 +113,7 @@ export function createGscImprovementsAdapter({ entries, availableWeeks, loadPage
 
 /** repo の improvements.md と GSC 週次 snapshot から adapter を組み立てる (effect-verdict/cli.mjs が使う)。 */
 export function loadGscImprovementsAdapter({ root = PROJECT_ROOT, minWeeks = DEFAULT_THRESHOLDS.window.minWeeks } = {}) {
-  const snapshotDir = path.join(root, ".claude/skills/analytics/gsc-improvement/reference/snapshots");
+  const snapshotDir = path.join(root, datasetDir("gsc.snapshots"));
   const availableWeeks = fs.existsSync(snapshotDir)
     ? fs.readdirSync(snapshotDir).filter((d) => /^\d{4}-W\d{2}$/.test(d) && fs.existsSync(path.join(snapshotDir, d, "pages.csv"))).sort()
     : [];
@@ -130,7 +131,7 @@ export function loadGscImprovementsAdapter({ root = PROJECT_ROOT, minWeeks = DEF
     availableWeeks,
     loadPages,
     minWeeks,
-    logPath: path.join(root, ".claude/skills/analytics/gsc-improvement/reference/improvement-log.md"),
+    logPath: path.join(root, `${datasetDir("improvement.logs")}/gsc-improvement/improvement-log.md`),
   });
 }
 

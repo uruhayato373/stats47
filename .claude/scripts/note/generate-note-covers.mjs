@@ -14,6 +14,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import sharp from 'sharp';
+import { datasetPath } from "../../../config/datasets.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, '../../..');
@@ -298,7 +299,7 @@ if (!allMode && !targetSlug) {
   process.exit(0);
 }
 
-const indexPath = path.join(PROJECT_ROOT, '.claude/state/note-draft-index.json');
+const indexPath = path.join(PROJECT_ROOT, datasetPath("note.draft-index"));
 const indexData = JSON.parse(fs.readFileSync(indexPath, 'utf8'));
 const drafts = indexData.drafts || {};
 const draftRoot = path.join(PROJECT_ROOT, 'docs/31_note記事原稿');

@@ -50,7 +50,7 @@ coverage 是正キュー (`build-coverage-queue.mjs`) の旧 `resubmit` action �
 
 過去の送信ログは監査証拠として保持します (編集・削除しない):
 
-- `.claude/state/metrics/gsc/resubmit-history.json` (auto-resubmit の累計送信履歴)
+- `data/gsc/resubmit-history.json` (auto-resubmit の累計送信履歴)
 - `.claude/skills/analytics/indexing-api-submit/reference/indexing-api-log/YYYY-MM-DD.jsonl` (手動送信ログ)
 
 ## 退役したコードパス

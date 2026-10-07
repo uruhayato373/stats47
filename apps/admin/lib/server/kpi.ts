@@ -3,6 +3,7 @@ import "server-only";
 import { describeChannel, weeklyProductRevenue } from "../../../../.claude/scripts/metrics/lib/product-revenue.mjs";
 
 import { cached, fileExists, readJson, TTL, wrap, type Wrapped } from "./state-io";
+import { datasetDir } from "../../../../config/datasets.mjs";
 
 /**
  * KPI ツリーと商品の週次実売 (読み取り専用)。
@@ -11,9 +12,9 @@ import { cached, fileExists, readJson, TTL, wrap, type Wrapped } from "./state-i
  * - 商品の週次実売は revenue-history.json を、週次 Issue と同じ関数 (product-revenue.mjs) で計算する
  */
 
-const CYCLE = ".claude/state/metrics/measurement-cycle/latest.json";
-const TREE = ".claude/state/business-plan/kpi-tree.json";
-const REVENUE_HISTORY = ".claude/state/metrics/authenticated/revenue-history.json";
+const CYCLE = `${datasetDir("business.measurement-cycle")}/latest.json`;
+const TREE = `${datasetDir("business-plan.state")}/kpi-tree.json`;
+const REVENUE_HISTORY = `${datasetDir("revenue.authenticated")}/revenue-history.json`;
 
 export interface KpiTarget {
   value: number;

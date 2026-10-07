@@ -12,7 +12,7 @@ metadata:
 - **問題**: 管理画面の県別家計カバーが新候補を表示せず、別PCで候補を再取得できなかった。
 - **原因**: 制作manifestは無視された `.local/`、管理画面は公開監査JSON、画像一覧は旧public R2の固定パスを別々に読み、候補・採用・公開の対応が共有されていなかった。9/28-v4の実体が無いままレビュー記録だけが残っていた。
 - **対策**: オーナー指示で `data/note/cover-assets.json` + JSON Schema をカバー運用の正本とする例外を明文化。実体はprivate R2 `stats47-private/note/covers/<key>/revisions/<sha>.png`、ローカルは一時生成/アップロード入力だけ。生成・採用・公開・監査・両管理画面を同じ台帳へ接続し、汎用OGP writerは書込前に停止。未回収を新生成・承認・公開と混同せず、正確な候補SHAだけを採用する。
-- **証拠**: `npm run note:assets:test` (17件)、`note:covers:test` (16件)、管理画面の画像表示/取得失敗案内、`.claude/state/metrics/note/cover-operations-latest.json`。公開286+新家計47+旧家計47の380版をremote読み戻しで照合。
+- **証拠**: `npm run note:assets:test` (17件)、`note:covers:test` (16件)、管理画面の画像表示/取得失敗案内、`data/note/cover-operations-latest.json`。公開286+新家計47+旧家計47の380版をremote読み戻しで照合。
 
 WindowsのSVG復元は `path.basename()` を使う。`split('/')` はWindows区切りを処理せず、派生PNGの存在確認と復元に失敗する (`note:images:test` 20件で検証)。会社PCのTLSはWindowsの公開ルート証明書を読み、`rejectUnauthorized: true` を維持する。証明書providerに依存せず.NET X509Storeから取得する (`cover-storage.mjs`)。
 
@@ -34,6 +34,6 @@ WindowsのSVG復元は `path.basename()` を使う。`split('/')` はWindows区�
 - **問題**: 旧描画検査はテキストが0件でも通過し、記事固定データのないカバーは最新ランキングへ依存しかねなかった。
 - **原因**: Satoriのlayout callbackは文字列を`textContent`へ渡すため、`props.children`を読む検査では文字を数えられない。公開90本のうち記事側chart-data.jsonは22本だけで、8本にはunitが無かった。タイトルに同率1位の一部しか書かれていない3本も実測した。
 - **対策**: `question-cover-data.mjs`で記事タイトルの年・47県一意・値・単位・全同率1位を照合し、制作入力をprivate R2 `note/covers/<key>/inputs/<sha>.json`へ固定。カバーは凡例なし・値の線形YlOrRd、本文の順位配色とは別契約。描画検査は`textContent`を使い、0件・範囲外・重なりを停止する。取得済み入力を再利用する場合はsource inventoryのURL・SHA・観測時刻・200/404を照合し、407など通信失敗を欠損扱いしない。
-- **証拠**: `npm run note:assets:test`の固定年/47県/同率/単位修復/入力SHAテストと、`.claude/state/metrics/note/ranking-question-cover-latest.json`の90本生成・remote読戻し記録。公開前比較元は`note:assets prepare --source ledger`で保全済み画像を使用でき、公開観測時刻は更新しない。
+- **証拠**: `npm run note:assets:test`の固定年/47県/同率/単位修復/入力SHAテストと、`data/note/ranking-question-cover-latest.json`の90本生成・remote読戻し記録。公開前比較元は`note:assets prepare --source ledger`で保全済み画像を使用でき、公開観測時刻は更新しない。
 
 **2026-09-30 追記:** 生成AI画像は「作り直せない入力」なので二層保管(Drive 候補 / R2 承認版 / git は SHA・モデル・指示文)。note は `ingest-note-background.mjs`、Kindle は `stash-cover-candidate.mts`。画像の生成口は1つ: note 4枚は `render-ranking-images.mjs` だけ(pipeline:sns の note 出力は廃止)。公開入口は `ensure-note-images.mjs` が PNG を揃え、カバー無し公開を止める。SVG は git に置く(正本・約1.5MB・koumuin 268枚は手作り)。Kindle 元画像12冊は Drive `Kindle表紙/<id>/candidates/` に移設済み。レンダーは bit 単位で決定的(同一 SHA を実測)。

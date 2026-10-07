@@ -14,7 +14,7 @@ product-factory に **kindle チャネル**を新設し、Amazon KDP 向け電�
 - **SSOT = `book-catalog.ts`** (`KINDLE_BOOKS`・32冊)。4シリーズ: S1論点読み物12 / S2テーマ別データブック11 / S3地域別8 / S4ランキング大全1。本文素材SSOTは **R2 `app/blog/<slug>/article.md` + `data/*.svg`**。
 - types.ts / validator.ts (決定的・id `^K-S[1-4]-\d{2}$`・manuscript以降はfresh章1つ+chapters必須) / fetch-content.ts (R2記事取得+frontmatter除去+SVG→PNG) / md-to-xhtml.ts (callout/画像/CTA除去) / cover.ts (satori→sharp 1600×2560) / build-book.ts (orchestrator) / cli.ts。
 - **EPUB生成器 = `src/generators/epub.ts`** (jszip・EPUB3リフロー型・mimetype先頭STORE)。図表は章内ブロック画像PNG同梱。**PDFは使わない** (KDP電子はPDF実質不可・databook-pdf.tsは目次/画像非対応)。
-- CLI: `products:kindle:{plan,validate,generate,report}`。生成台帳 `.claude/state/products/kindle-status.json`。生成物 `.local/kindle-books/<id>/v1/` (git管理外)。KDP送信版はAES-256-GCM暗号化してR2 `archive/kindle-encrypted/<id>/v1/<revision>/`へ保全し、`.claude/state/products/kindle-archives.json`から別PC復元・rollbackする。
+- CLI: `products:kindle:{plan,validate,generate,report}`。生成台帳 `data/products/kindle-status.json`。生成物 `.local/kindle-books/<id>/v1/` (git管理外)。KDP送信版はAES-256-GCM暗号化してR2 `archive/kindle-encrypted/<id>/v1/<revision>/`へ保全し、`data/products/kindle-archives.json`から別PC復元・rollbackする。
 - deps追加: jszip/sharp/satori (package-lock反映済・既存hoisted版)。
 
 ## ★全32冊 生成完了 (2026-07-23・status全generated)

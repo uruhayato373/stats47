@@ -28,16 +28,16 @@ jobs:
         id: audit
         run: |
           node .claude/scripts/gsc/audit-operations-cycle.mjs --stage monitor --write
-          STATUS=$(node -e 'const j=require("./.claude/state/metrics/gsc/operations-cycle-LATEST.json");process.stdout.write(j.status)')
+          STATUS=$(node -e 'const j=require("./data/gsc/operations-cycle-LATEST.json");process.stdout.write(j.status)')
           echo "status=$STATUS" >> "$GITHUB_OUTPUT"
-          cat .claude/state/metrics/gsc/operations-cycle-LATEST.md >> "$GITHUB_STEP_SUMMARY"
+          cat data/gsc/operations-cycle-LATEST.md >> "$GITHUB_STEP_SUMMARY"
 
       - name: 💾 Commit operations state
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add .claude/state/metrics/gsc/operations-cycle-LATEST.json
-          git add .claude/state/metrics/gsc/operations-cycle-LATEST.md
+          git add data/gsc/operations-cycle-LATEST.json
+          git add data/gsc/operations-cycle-LATEST.md
           if git diff --staged --quiet; then
             echo "No GSC operations state changes"
           else
@@ -53,7 +53,7 @@ jobs:
         run: |
           TITLE="[GSC Cycle Alert] 週次レビュー・改善サイクルが未完了"
           {
-            cat .claude/state/metrics/gsc/operations-cycle-LATEST.md
+            cat data/gsc/operations-cycle-LATEST.md
             echo ""
             echo "Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
           } > /tmp/gsc-cycle-issue.md

@@ -8,7 +8,7 @@
  *   node .claude/scripts/blog/lint-article.cjs <slug1> <slug2> ...
  *   node .claude/scripts/blog/lint-article.cjs --all   (全記事をスキャン)
  *
- * exit 0: 問題なし / exit 1: 問題あり
+ * exit 0: 問題なし / exit 1: 問題あり / exit 2: 記事が見つからない・引数なし
  */
 
 const fs = require("fs");
@@ -103,14 +103,21 @@ function main() {
   }
 
   let allIssues = [];
+  const missing = [];
   for (const slug of slugs) {
     const filePath = resolveArticlePath(slug);
     if (!filePath) {
-      console.warn(`⚠ 記事が見つかりません: ${slug}`);
+      missing.push(slug);
       continue;
     }
     const issues = lintFile(filePath, slug);
     allIssues = allIssues.concat(issues);
+  }
+
+  // 見つからない記事を「問題なし」と数えない (2026-10-07: 存在しない slug でも exit 0 になり、検査したように見えていた)
+  if (missing.length > 0) {
+    console.error(`❌ 記事が見つかりません (.local/r2/app/blog と docs/21 の両方に無い): ${missing.join(", ")}`);
+    process.exit(2);
   }
 
   if (allIssues.length === 0) {

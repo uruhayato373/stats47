@@ -2,7 +2,7 @@
  * home「知りたいことから探す」画像の生成カタログ。
  *
  * 画風・構図・禁止事項を共通化し、用途ごとには主題と色だけを持つ。
- * 元画像は `docs/assets/home-use-case-<id>.png`、配信画像は
+ * 元画像は `assets/page-heroes/home-use-case-<id>.png`、配信画像は
  * `apps/web/public/images/home/use-cases/<id>.webp` に固定する。
  */
 
@@ -73,7 +73,7 @@ export function buildHomeUseCaseImagePrompt(id: HomeUseCaseImageId): string {
 }
 
 export function getHomeUseCaseImageSource(id: HomeUseCaseImageId): string {
-  return `docs/assets/home-use-case-${id}.png`;
+  return `assets/page-heroes/home-use-case-${id}.png`;
 }
 
 export function getHomeUseCaseImageOutput(id: HomeUseCaseImageId): string {

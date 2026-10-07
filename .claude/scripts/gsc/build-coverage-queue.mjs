@@ -15,7 +15,7 @@
  *   - still-404           : **現在も 404** = 公開漏れ(122 metric pipeline 等) or 真に死亡 → action: verify-intent
  *   - recheck             : timeout/0 → 再測定
  *
- * 真実源 (SSOT): .claude/state/gsc/coverage-remediation-queue.json (git tracked, 状態保持)
+ * 真実源 (SSOT): data/gsc/coverage-remediation/coverage-remediation-queue.json (git tracked, 状態保持)
  * 副産物: LATEST.md (人間向け要約) / coverage-totals-history.csv (経過観測) /
  *          <週>/coverage-live-resubmit-urls.csv (auto-resubmit.mjs が拾う curated 入力)
  *
@@ -61,6 +61,7 @@ import {
   summarizeCoverageQueue,
 } from "./lib/coverage-queue-state.mjs";
 import { SITE_ORIGIN } from "../lib/site-config.cjs";
+import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -81,12 +82,13 @@ const todayInTokyo = () =>
     day: "2-digit",
   }).format(new Date());
 
-const DRILLDOWN_DIR = path.join(PROJECT_ROOT, ".claude/state/metrics/gsc/coverage-drilldown");
-const STATE_DIR = path.join(PROJECT_ROOT, ".claude/state/gsc");
+const DRILLDOWN_DIR = path.join(PROJECT_ROOT, datasetDir("gsc.coverage-drilldown"));
+const STATE_DIR = path.join(PROJECT_ROOT, datasetDir("gsc.coverage-queue"));
 const QUEUE_PATH = path.join(STATE_DIR, "coverage-remediation-queue.json");
 const LATEST_PATH = path.join(STATE_DIR, "LATEST.md");
-const TOTALS_HISTORY = path.join(STATE_DIR, "coverage-totals-history.csv");
-const INSPECTION_DIR = path.join(PROJECT_ROOT, ".claude/state/metrics/gsc/url-inspection");
+// 件数の推移は記録なので data/gsc/ (キューと要約は作業状態なので data/gsc/coverage-remediation/)
+const TOTALS_HISTORY = path.join(PROJECT_ROOT, datasetPath("gsc.coverage-totals"));
+const INSPECTION_DIR = path.join(PROJECT_ROOT, datasetDir("gsc.url-inspection"));
 const INSPECTION_WINDOW_DAYS = 14;
 
 const GOOGLEBOT_UA =
@@ -909,7 +911,7 @@ function writeLatest(out, observeCount) {
   const L = [];
   L.push(`# GSC カバレッジ是正 — ${out.week} (${out.generated_at})`);
   L.push("");
-  L.push("> SSOT: `.claude/state/gsc/coverage-remediation-queue.json` / 正典: `.claude/skills/analytics/gsc-coverage-remediation/SKILL.md`");
+  L.push(`> SSOT: \`${datasetPath("gsc.coverage-queue")}\` / 正典: \`.claude/skills/analytics/gsc-coverage-remediation/SKILL.md\``);
   L.push(`> 入力観測日: ${out.source_observed_at} / 入力週齢: ${out.source_age_weeks} 週`);
   L.push("");
   if (t) {

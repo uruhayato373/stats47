@@ -10,7 +10,7 @@ type: feedback
 
 **対策**: 初期区画の選択は`apps/web/src/features/geo-analysis/lib/geo-source-initial-asset.ts`で一元化し、容量上限以内の1ファイルを自動表示する。区画変更UIは初期表示時に折りたたむ。GISを変える際はdataId/versionのkeyで選択・検索・地図の状態を初期化する。`apps/web/scripts/audit-geo-source-pages.ts`は自動表示対象を操作せずに検査し、L03-aでは手動区画変更と一覧リンクによるGIS往復も検査する。台帳の`map.initialDisplay`で自動表示と手動読込を区別する。
 
-**証拠**: 2026-09-09にL03-aを直接開くと地図DOMなし、ボタン後は3036の200地物を描画。修正後は操作なしで5339の6,300地物を取得・描画した。検証の実行結果は`.claude/state/geo/source-pages.json`、手順は`.claude/todo/backlog.md`のGEO-SOURCE-PAGES-01を参照する。
+**証拠**: 2026-09-09にL03-aを直接開くと地図DOMなし、ボタン後は3036の200地物を描画。修正後は操作なしで5339の6,300地物を取得・描画した。検証の実行結果は`data/geo/source-pages.json`、手順は`.claude/todo/backlog.md`のGEO-SOURCE-PAGES-01を参照する。
 
 **追加の原因と対策（非表示パネル）**: 地図の要素が`display:none`の状態で読み込まれると、Leafletは描画サイズを0として保持した。表示を戻してもcanvasは0×0のまま、区画全体へ戻す操作でも復旧しなかった。`GeoSourceMap`では`ResizeObserver`で地図要素の寸法を監視し、正のサイズになるまで初回の`fitBounds`を待つ。表示後は`invalidateSize`と表示対象の再取得を行い、observerはworkerとともに破棄する。監査ではL03-aを非表示で再マウントし、windowのresizeやズーム操作なしに表示を戻して、canvasの実描画と6,300地物の対象範囲を確認する。
 
@@ -24,7 +24,7 @@ type: feedback
 
 **対策**: `fit-geo-source-bounds.ts`でzoom0まで許可した地図の実寸と投影範囲から余白を決め、初期・reset・非表示からの復旧で共有する。`GeoSourceMap`は`GEO_BASEMAP.minNativeZoom=2`の実画像を低縮尺へ縮小し、既存VMAP0出典を表示する。回帰テストは実Leafletで世界範囲のcontain・reset・県別の従来fit・単地点の上限を検査する。画面では地物だけでなく背景のHTTP・naturalWidth・スクショも確認し、fit helperとprovider設定も監査fingerprintへ含める。
 
-**証拠**: 2026-09-13、原典11,581候補を320/1440pxで確認。native zoom2画像は全200/256px、地図zoom0/1で表示。初回100件95PASS・機能再確認8PASS・背景修正後2PASSを別履歴で保持し、一つの全件成功runとは呼ばない。正典は`.claude/state/metrics/releases/2026-09-13-all-sessions.json`。提供範囲は https://maps.gsi.go.jp/development/ichiran.html 。
+**証拠**: 2026-09-13、原典11,581候補を320/1440pxで確認。native zoom2画像は全200/256px、地図zoom0/1で表示。初回100件95PASS・機能再確認8PASS・背景修正後2PASSを別履歴で保持し、一つの全件成功runとは呼ばない。正典は`data/releases/2026-09-13-all-sessions.json`。提供範囲は https://maps.gsi.go.jp/development/ichiran.html 。
 
 ## 2026-09-13 本番の全国GIS転送
 

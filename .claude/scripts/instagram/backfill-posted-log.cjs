@@ -3,7 +3,7 @@
  * ig-posted-log.jsonl の初回バックフィル
  *
  * 共有ストア (sns_posts) から instagram の投稿済みレコードを読み出し、
- * .claude/state/ig-posted-log.jsonl に追記する。
+ * data/sns/ig-posted-log.jsonl に追記する。
  * 既存エントリと content_key+domain の重複チェックをして冪等に動作する。
  *
  * 実行: node .claude/scripts/instagram/backfill-posted-log.cjs
@@ -12,9 +12,10 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const store = require("../lib/sns-posts-store.cjs");
+const { datasetPath } = require("../../../config/datasets.mjs");
 
 const ROOT = path.resolve(__dirname, "..", "..", "..");
-const LOG_PATH = path.join(ROOT, ".claude/state/ig-posted-log.jsonl");
+const LOG_PATH = path.join(ROOT, datasetPath("sns.ig-posted-log"));
 
 // 旧 SELECT posted_at, domain, content_key, post_url FROM sns_posts
 //     WHERE platform='instagram' AND status='posted' ORDER BY posted_at ASC

@@ -7,7 +7,7 @@
  * 週次 Issue の「週次収益 (NSM)」は nsm-revenue-lines.mjs の rakutenLine がこの記録を読む。
  * 記録が無い・古いときは 0 円ではなく判定不能になる。
  *
- * 記録先: .claude/state/metrics/affiliate/rakuten-results.json (同じ月は上書き。observedAt は記録した時刻)
+ * 記録先: data/affiliate/rakuten-results.json (同じ月は上書き。observedAt は記録した時刻)
  *
  * Usage:
  *   npm run rakuten:record -- --month 2026-10 --orders 3 --estimated-yen 420 [--confirmed-yen 0]
@@ -18,9 +18,10 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { datasetPath } from "../../../config/datasets.mjs";
 
 const ROOT = fileURLToPath(new URL('../../../', import.meta.url));
-export const RAKUTEN_RESULTS_PATH = '.claude/state/metrics/affiliate/rakuten-results.json';
+export const RAKUTEN_RESULTS_PATH = datasetPath("rakuten.results");
 
 /** 引数を検査して 1 か月分の記録にする。不正なら Error を投げる。 */
 export function parseRecord(argv, now = new Date()) {

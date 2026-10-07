@@ -6,7 +6,7 @@
  * 56 日 = **非重複 2 窓 (最新週 + その 4 週前)** の合算で構成する
  * (2026-07-11 survey ポートフォリオ監査の訂正記録で実証済みの失敗パターンの再発防止)。
  *
- * 集計規約 (schema 正典: .claude/state/surveys/README.md):
+ * 集計規約 (schema 正典: data/surveys/README.md):
  *   - GSC: impressions/clicks = 2 窓合算。ctr = 合算比、averagePosition = impressions 加重平均
  *     — いずれも measured (impressions >= 100/56d) のみ保存。measured-low はカウント値のみ
  *   - GA4: landingPageViews = screenPageViews の 2 窓合算 (加算可能)。engagedSessions は
@@ -28,12 +28,13 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
-const PORTFOLIO = path.join(PROJECT_ROOT, ".claude/state/surveys/portfolio.json");
-const GSC_SNAP = path.join(PROJECT_ROOT, ".claude/skills/analytics/gsc-improvement/reference/snapshots");
-const GA4_SNAP = path.join(PROJECT_ROOT, ".claude/skills/analytics/ga4-improvement/reference/snapshots");
+const PORTFOLIO = path.join(PROJECT_ROOT, `${datasetDir("surveys.portfolio")}/portfolio.json`);
+const GSC_SNAP = path.join(PROJECT_ROOT, datasetDir("gsc.snapshots"));
+const GA4_SNAP = path.join(PROJECT_ROOT, datasetDir("ga4.snapshots"));
 
 const MIN_GSC_IMPRESSIONS = 100; // per 56d (README 判定規律 3: imp<100 は CTR を確定しない)
 const MIN_GA4_PAGEVIEWS = 100;
@@ -186,8 +187,8 @@ function main() {
         rankingOutboundClicks,
       };
     }
-    s.gscSnapshotRef = `.claude/skills/analytics/gsc-improvement/reference/snapshots/${weeks[0]}/pages.csv`;
-    s.ga4SnapshotRef = `.claude/skills/analytics/ga4-improvement/reference/snapshots/${weeks[0]}/pages.csv`;
+    s.gscSnapshotRef = `${datasetDir("gsc.snapshots")}/${weeks[0]}/pages.csv`;
+    s.ga4SnapshotRef = `${datasetDir("ga4.snapshots")}/${weeks[0]}/pages.csv`;
 
     if ((s.metrics.gsc.impressions ?? 0) > 0 || (s.metrics.ga4.landingPageViews ?? 0) > 0) {
       withDemand.push([

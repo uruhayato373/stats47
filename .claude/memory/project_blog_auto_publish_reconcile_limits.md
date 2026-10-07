@@ -39,7 +39,7 @@ metadata:
   と[PR #945](https://github.com/uruhayato373/stats47/pull/945)のデプロイ後、全73URLをGooglebotで実測し、
   HTTP 200・H1・self canonical・indexable・当該記事OGPを確認した。本文/図/元データ792ファイル、
   画像292枚、manifest 73件もR2から読み戻して一致。公開差分0・outbox guard PASSでカードを回収した。
-- slug単位の実測証跡は `.claude/state/metrics/content-release-2026-09-08.json`。
+- slug単位の実測証跡は `data/content-operations/content-release-2026-09-08.json`。
   対象外の既公開19コピーの未退避promptと未公開draft 7件は保持し、今回の公開残数へ混ぜない。
 
 ## 2026-06 当時の制約

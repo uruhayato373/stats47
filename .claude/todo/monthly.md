@@ -44,7 +44,7 @@ W36 の 6,053 から W40 の 10,018 へ伸びた一方、週次収益 (NSM) は�
 
 ## 前月の月次レビュー
 
-- レビュー: `.claude/skills/management/monthly-review/reference/reviews/2026-09.md`
+- レビュー: `data/reviews/monthly/2026-09.md`
 - 前月の重点: 重点 1 (未デプロイを本番へ届けて実測を再開) は**一部** (4 件中 3 件達成・T14d 比較の記録が未了)、
   重点 2 (公開しているものが正しいかを確定) は**未達** (37 metric の処置区分 0 件。09-25 に `DATA-QUALITY-LOOP-01` へ引き継ぎ)。
 
@@ -116,7 +116,7 @@ W36 の 6,053 から W40 の 10,018 へ伸びた一方、週次収益 (NSM) は�
 
 - **なぜ今月これか**: 7 月から 3 か月続けて未達。欠損は 09-25 に解消を確認したので、残るのは古さ・年表記・終了・薄さの処置である。
   検索クリックが倍増した今、誤った年や古い値を見せる損失が大きくなる。
-- **今月のゴール（月末に検証可能）**: `.claude/state/data/data-quality/queue.json` で W41〜W44 の 4 週続けて「処置件数 ≥ 新規検出」となり、
+- **今月のゴール（月末に検証可能）**: `data/data-quality/checks/queue.json` で W41〜W44 の 4 週続けて「処置件数 ≥ 新規検出」となり、
   需要上位から計 20 指標に処置 (更新 / 調査終了 / noindex / 誤検出) が付く。`data-quality-pass-rate` は 100% を維持する。
 - **判定に使う KPI**: `data-quality-pass-rate` (100.0%、W39 0.995 から改善)、`search-clicks` (10,018、4 週前比 +65.5%。ガードとして悪化しないこと)
 - **構成タスク**:
@@ -167,8 +167,8 @@ W36 の 6,053 から W40 の 10,018 へ伸びた一方、週次収益 (NSM) は�
 ## 関連ドキュメント
 
 - 収益化戦略: `docs/00_プロジェクト管理/02_収益化戦略.md`
-- 前月の月次レビュー: `.claude/skills/management/monthly-review/reference/reviews/2026-09.md`
+- 前月の月次レビュー: `data/reviews/monthly/2026-09.md`
 - 改善バックログ: `.claude/todo/improvements.md`
 - バックログ (機能・自動化・指標): `.claude/todo/backlog.md`
 - 実装計画 INDEX: `docs/02_実装計画/00_INDEX.md`
-- 計測サイクル: `.claude/state/metrics/measurement-cycle/LATEST.md`
+- 計測サイクル: `data/measurement-cycle/LATEST.md`

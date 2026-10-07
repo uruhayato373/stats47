@@ -12,8 +12,8 @@
  *   node .claude/scripts/estat/fetch-estat-meta.mjs --list <statsids.json>
  *   node .claude/scripts/estat/fetch-estat-meta.mjs --ids 0003355476,0003355295
  *
- * 出力: .claude/state/estat/meta/<statsDataId>.json (次元構造の要約)
- *       .claude/state/estat/meta-summary.json        (全テーブルの次元サマリ)
+ * 出力: data/estat/meta/<statsDataId>.json (次元構造の要約)
+ *       data/estat/meta-summary.json        (全テーブルの次元サマリ)
  */
 
 import { config } from "dotenv";
@@ -22,6 +22,7 @@ import fs from "node:fs";
 import { fileURLToPath } from "node:url";
 import { ProxyAgent } from "undici";
 import { ESTAT_META_INFO_URL } from "../lib/estat-catalog/endpoints.cjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const PROJECT_ROOT = path.resolve(path.dirname(__filename), "..", "..", "..");
@@ -58,7 +59,7 @@ const proxyUrl = process.env.HTTPS_PROXY || process.env.HTTP_PROXY;
 const fetchOpts = proxyUrl ? { dispatcher: new ProxyAgent(proxyUrl) } : {};
 
 const BASE_URL = ESTAT_META_INFO_URL;
-const OUT_DIR = path.join(PROJECT_ROOT, ".claude/state/estat/meta");
+const OUT_DIR = path.join(PROJECT_ROOT, datasetDir("estat.meta"));
 const DELAY_MS = 500;
 
 function pickString(v) {
@@ -143,12 +144,15 @@ async function main() {
     }
     await new Promise((r) => setTimeout(r, DELAY_MS));
   }
-  fs.writeFileSync(
-    path.join(PROJECT_ROOT, ".claude/state/estat/meta-summary.json"),
-    JSON.stringify(summaries, null, 2),
-  );
-  console.log(`\n  → .claude/state/estat/meta/*.json (${statsDataIds.length} 件)`);
-  console.log(`  → .claude/state/estat/meta-summary.json`);
+  // 一部の表だけ取り直しても、ほかの表のサマリを消さない (表 ID ごとに差し替える)
+  const summaryPath = path.join(PROJECT_ROOT, `${datasetDir("estat.candidates")}/meta-summary.json`);
+  const fetched = new Set(summaries.map((s) => s.statsDataId));
+  const kept = fs.existsSync(summaryPath)
+    ? JSON.parse(fs.readFileSync(summaryPath, "utf8")).filter((s) => !fetched.has(s.statsDataId))
+    : [];
+  fs.writeFileSync(summaryPath, JSON.stringify([...kept, ...summaries], null, 2));
+  console.log(`\n  → ${datasetDir("estat.meta")}/*.json (${statsDataIds.length} 件)`);
+  console.log(`  → ${datasetDir("estat.candidates")}/meta-summary.json`);
 }
 
 main().catch((e) => {

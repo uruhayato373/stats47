@@ -31,7 +31,7 @@ primary_agent: strategy-advisor
 0. **前月の月次レビュー（必須の入力）**
    ```bash
    node .claude/scripts/management/check-review-cadence.mjs
-   cat .claude/skills/management/monthly-review/reference/reviews/<前月 YYYY-MM>.md
+   cat data/reviews/monthly/<前月 YYYY-MM>.md
    ```
    → 前月の重点の判定・KPI ツリーの判定・効果判定・「来月への申し送り」は月次レビューが持つ。**月次計画で振り返りを書き直さない。**
    前月のレビューが無ければ、先に `/monthly-review` を実行する（月初 3 日からは欠落が Stop hook と `review-cadence-guard.yml` で通知される）。
@@ -39,7 +39,7 @@ primary_agent: strategy-advisor
 
 1. **直近 4 週の週次レビュー**（今月＋先月末をカバー）
    ```bash
-   ls -t .claude/skills/management/weekly-review/reference/reviews/*.md 2>/dev/null | head -4
+   ls -t data/reviews/weekly/*.md 2>/dev/null | head -4
    ```
    → 各レビューの「成果」「未達」「来週への申し送り」「パターン分析」を抽出。**繰り返し未達のテーマ**（複数週で stall しているもの）を特定する。これが今月の重点候補の最有力。
 
@@ -67,9 +67,9 @@ primary_agent: strategy-advisor
 
 5. **NSM / 主要指標の現状**（既に集約済みの LATEST を読むだけ。API は叩かない）
    ```bash
-   cat .claude/state/metrics/gsc/LATEST.md 2>/dev/null | head -20
-   cat .claude/state/metrics/ga4/LATEST.md 2>/dev/null | head -20
-   ls -t .claude/skills/management/nsm-experiment/reference/weekly-snapshots/*.json | head -1
+   cat data/gsc/LATEST.md 2>/dev/null | head -20
+   cat data/ga4/LATEST.md 2>/dev/null | head -20
+   ls -t data/nsm/weekly-snapshots/*.json | head -1
    node .claude/scripts/gsc/audit-operations-cycle.mjs --stage review-input
    ```
    → GSCの数値だけでなく、計測週・review・候補判断・effect verdictの接続状態を月次入力にする。
@@ -171,7 +171,7 @@ tags: []
 
 ## 前月の月次レビュー
 <!-- 判定は月次レビューが持つ。ここは引用と、申し送りをどこへ反映したかだけ。 -->
-- レビュー: `.claude/skills/management/monthly-review/reference/reviews/YYYY-MM.md`
+- レビュー: `data/reviews/monthly/YYYY-MM.md`
 - 前月の重点: <達成 / 一部 / 未達 を 1 行で引用>
 | 来月への申し送り (月次レビュー) | 行き先 | 今月の扱い (重点 / 週配分 / 見送り) |
 |---|---|---|
@@ -238,7 +238,7 @@ tags: []
 - **GSC運用サイクルは重点テーマ数に数えない健康管理の床**。GSCを重点に選ばない月も固定節を省略しない。
 - 月内の進捗は **週次計画 `/weekly-plan` が分割消化**する。週次は `.claude/todo/monthly.md` の `focus_themes` と `focus_domains` を読む。
 - **タスクの実体（status / due）は各バックログが真実源。** 月次計画は選定理由と配分だけを持ち、進捗は週次計画とバックログで扱う。
-- 月末の振り返りは **`/monthly-review`** が `.claude/skills/management/monthly-review/reference/reviews/YYYY-MM.md` に書く（2026-10-01 に独立。doboku-note と同じ「振り返り → 計画」の 2 段）。月次計画はそれを読んで重点を決める。期限・必須見出し・申し送りの振り分けは `.claude/config/review-wiring.json` が正本。
+- 月末の振り返りは **`/monthly-review`** が `data/reviews/monthly/YYYY-MM.md` に書く（2026-10-01 に独立。doboku-note と同じ「振り返り → 計画」の 2 段）。月次計画はそれを読んで重点を決める。期限・必須見出し・申し送りの振り分けは `.claude/config/review-wiring.json` が正本。
 - 月次計画は蓄積せず毎月上書きする。前月結果は月次レビューと git 履歴に残す。
 
 ## 保存先

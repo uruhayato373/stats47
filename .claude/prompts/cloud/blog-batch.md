@@ -4,7 +4,7 @@ Claude Code on the web / クラウドセッションに貼り付けて使う。`
 
 > **本数を空欄にしない。** 2026-W35 に「2 本だけ」という計画に対して 85 本が公開され、
 > 他の Must が全部押し出された。上限が無いと必ず同じことが起きる。
-> 月間の本数 SSOT は `.claude/state/blog/seo-strategy.json` の `typeMix.perMonth` (月 17-19 本)。
+> 月間の本数 SSOT は `data/blog/seo-strategy.json` の `typeMix.perMonth` (月 17-19 本)。
 
 ---
 

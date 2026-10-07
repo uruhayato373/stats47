@@ -74,10 +74,10 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add .claude/state/metrics/gsc/url-inspection/
-          git add .claude/state/gsc/
+          git add data/gsc/url-inspection/
+          git add data/gsc/coverage-remediation/
           git add .claude/todo/backlog.md
-          git add .claude/state/metrics/gsc/coverage-drilldown/*/coverage-live-observe-urls.csv 2>/dev/null || true
+          git add data/gsc/coverage-drilldown/*/coverage-live-observe-urls.csv 2>/dev/null || true
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
@@ -97,7 +97,7 @@ jobs:
         with:
           script: |
             const fs = require('fs');
-            const path = '.claude/state/metrics/gsc/url-inspection/LATEST.md';
+            const path = 'data/gsc/url-inspection/LATEST.md';
             if (!fs.existsSync(path)) {
               core.warning('LATEST.md not found, skipping comment');
               return;
@@ -113,6 +113,6 @@ jobs:
       - name: 📄 Step Summary
         if: always()
         run: |
-          if [ -f .claude/state/metrics/gsc/url-inspection/LATEST.md ]; then
-            cat .claude/state/metrics/gsc/url-inspection/LATEST.md >> "$GITHUB_STEP_SUMMARY"
+          if [ -f data/gsc/url-inspection/LATEST.md ]; then
+            cat data/gsc/url-inspection/LATEST.md >> "$GITHUB_STEP_SUMMARY"
           fi

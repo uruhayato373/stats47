@@ -22,10 +22,11 @@ import {
   SiteAttributionError,
   visibleText,
 } from './lib/asp-browser.mjs';
+import { datasetPath } from "../../../config/datasets.mjs";
 
 const CATALOG_PATH = join(
   repoRoot(),
-  '.claude/state/ads/affiliate-catalog.json'
+  datasetPath("affiliate.catalog")
 );
 const OUTPUT_DIR = join(repoRoot(), '.local/affiliate-offer-inspect/moshimo');
 

@@ -1,6 +1,6 @@
 /**
  * リリース台帳 (catalog-status) の再生成。
- * `.claude/state/products/catalog-status.json` に、設計・公開記録・固定納品版・残工程を分離して書く。
+ * `data/products/catalog-status.json` に、設計・公開記録・固定納品版・残工程を分離して書く。
  * 購入者情報・メッセージ本文・売上は保存しない (販売実績は別途 sales-ledger)。
  */
 import { writeFileSync, mkdirSync } from "node:fs";
@@ -8,9 +8,10 @@ import { resolve, dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { ALL_PRODUCTS } from "../catalog/products";
 import { buildSalesCatalog, renderSalesCsv, renderSalesHtml } from "./sales-catalog";
+import { datasetDir } from "../../../../config/datasets.mjs";
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../..");
-const STATE_PATH = resolve(REPO_ROOT, ".claude/state/products/catalog-status.json");
+const STATE_PATH = resolve(REPO_ROOT, `${datasetDir("products.publication-receipts")}/catalog-status.json`);
 
 export function writeReport(generatedAt = new Date().toISOString(), opts: { kindleVersion?: string; noteRevision?: string } = {}): string {
   const catalog = buildSalesCatalog(REPO_ROOT, generatedAt, opts.kindleVersion, opts.noteRevision);

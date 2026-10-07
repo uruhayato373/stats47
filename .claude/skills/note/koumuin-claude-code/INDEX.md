@@ -98,8 +98,8 @@ tags: [koumuin, claude-code, draft-index]
 このファイル (INDEX.md) と MAGAZINE.md は `.claude/skills/note/koumuin-claude-code/` に移動済み。
 
 - 記事編集: `bash .claude/scripts/note/restore-from-r2.sh <slug>` → docs/31 に展開 → push → CI 削除
-- ドラフト一覧: `.claude/state/note-draft-index.json`
-- 公開済み一覧: `.claude/state/note-published-urls.json`
+- ドラフト一覧: `data/note/note-draft-index.json`
+- 公開済み一覧: `data/note/note-published-urls.json`
 
 ## ディレクトリ構成 (R2 上)
 
@@ -161,7 +161,7 @@ note マガジンに 31 本をまとめれば、note 側が一覧と記事間導
 |---|---|
 | `.claude/scripts/note/add-koumuin-magazine-footer.cjs` | 全 31 本に v2 フッタを付与 (v1 があれば置換、冪等) |
 | `.claude/scripts/note/inject-magazine-url.cjs` | `{{MAGAZINE_URL}}` を実マガジン URL に一括置換 |
-| `.claude/state/note-published-urls.json` | 公開済み記事の slug→URL 真実源 (publish-note が自動追記) |
+| `data/note/note-published-urls.json` | 公開済み記事の slug→URL 真実源 (publish-note が自動追記) |
 
 旧 `add-koumuin-circulation-footer.cjs` (v1) は使用しない。
 

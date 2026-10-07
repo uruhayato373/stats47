@@ -29,7 +29,7 @@ ranking 詳細ページの AI コンテンツ (insights=考察 / regionalAnalysi
 (ワースト/ベスト/激減/急増/衝撃)・insights空・faq parse/推測表現・prefectureCommentary空/parse。warn = 字数・pref件数(47以外)・因果。
 `auditRow(row)` を export (再入可能) し CLI とキューが同一判定 = drift 防止。意味レビューは `ranking-content-critic`。
 
-**SSOT 是正キュー (中断耐性・複数PC安全)**: `.claude/state/ai-content/remediation-queue.json` + `LATEST.md`。
+**SSOT 是正キュー (中断耐性・複数PC安全)**: `data/ai-content/remediation/remediation-queue.json` + `LATEST.md`。
 **done は手動ログでなく「R2 の ai-content が auditRow を通る(blocker 0)か」で毎回再導出** = R2 が真実源、キューは派生ビュー。
 - quarantine は generation-failures の履歴全体ではなく、現在も `needs-regen` のキーとの積集合だけを LATEST / `--next` に表示する。公開済みへ直ったキーを未解決扱いしない。
 - 生成: `node .claude/scripts/ai-content/build-ai-content-queue.mjs` (GSC 流入のある /ranking/ 924件を R2 で判定。
@@ -53,8 +53,8 @@ AIとcanonical valuesを各2,166件HTTP 200・JSON取得し、values健全性の
 でR2公開し、本文SHA 12/12一致。公開outboxもCIが整理済み（git履歴から復元可能）。
 全件doneは既存の決定的ゲートでblockerが無いことを意味し、旧2,154件を今回すべて意味レビューしたわけではない。
 非阻害警告はAI 967キー（短文等）、values 41キー（thin-coverage）に残る。市区町村・全国専用ページは対象外。
-公開後の全量再確認は `.claude/state/metrics/content-release-2026-09-08.json`、現在の残数は
-`.claude/state/ai-content/{LATEST.md,remediation-queue.json}` を参照する。
+公開後の全量再確認は `data/content-operations/content-release-2026-09-08.json`、現在の残数は
+`data/ai-content/remediation/{LATEST.md,remediation-queue.json}` を参照する。
 日次CIは対象0ならAPIを呼ばず正常終了し、対象ありならbilling preflight不通で停止する。
 無料枠の課金設定は未確認で、課金・Secretは変更していない。生成完了と費用実験の完了を混同しない。
 

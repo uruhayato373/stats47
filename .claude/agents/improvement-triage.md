@@ -38,10 +38,10 @@ model: sonnet
 
 - `.claude/todo/improvements.md` — 追加 / status 更新 / 完了行削除 (排他)
 - `.claude/skills/analytics/<metric>-improvement/reference/improvement-log.md` — agent 用詳細層 (read、効果確定時は追記)
-- `.claude/state/effect-verdict/verdicts-<week>.json` — read (閾値エンジンの確定記録。backlog 反映の入力)
-- **`.claude/state/search-growth/past-effects.json`** — write (`.urls`: pathKey → `"none"|"adverse"`)
-- **`.claude/state/metrics/adsense/past-effects.json`** — write (`.candidates`: `<rule>::<key>` → `"none"|"adverse"`)
-- `.claude/state/metrics/{gsc,ga4,psi,adsense,cloudflare,blog,note,sns}/` — read only (analyst write を読む。上記 past-effects は例外的に write)
+- `data/effect-verdict/verdicts-<week>.json` — read (閾値エンジンの確定記録。backlog 反映の入力)
+- **`data/search-growth/past-effects.json`** — write (`.urls`: pathKey → `"none"|"adverse"`)
+- **`data/adsense/past-effects.json`** — write (`.candidates`: `<rule>::<key>` → `"none"|"adverse"`)
+- `data/{gsc,ga4,psi,adsense,cloudflare,blog,note,sns}/` — read only (analyst write を読む。上記 past-effects は例外的に write)
 
 ### past-effects 台帳は本 agent が維持する (writer 不在の再発防止)
 
@@ -66,7 +66,7 @@ candidate key (`<rule>::<key>`) をバックログ行に明記して解決する
 行を追加するときは、タイトルに次の 2 つを必ず書く。書けない施策は測れないので improvements.md に入れず、
 `.claude/todo/backlog.md` のカードにする。
 
-- `[kpi: <id>]` — その施策が動かす KPI。id は `.claude/state/business-plan/kpi-tree.json` の nodes
+- `[kpi: <id>]` — その施策が動かす KPI。id は `data/business-plan/kpi-tree.json` の nodes
   (正典は `packages/data-configs/src/business-plan/catalog.ts` の `kpiTier` 付き metric) から選ぶ。複数ならカンマ区切り
 - `[target: ±N 単位]` — 成功とみなす変化量。根拠 (過去事例か計算式) を行か詳細ログに書けるときだけ
 
@@ -74,12 +74,12 @@ active 施策が上限 (`strategy-lanes.cjs` の `MAX_ACTIVE_IMPROVEMENTS`) を�
 先に判定済みの行を詳細ログへ移して削除するか、backlog へ降格する。既存行の `[kpi:]` は消さない。
 検査は `npm run docs:check` の DG079 (error: 目印なし・未知の id) / DG080 (warning: 上限超過・`[target:]` なし) と、
 無人 run のゲート (`improvement-cycle-gate.mjs`: 新規行の `[kpi:]`・`[target:]` 欠落と上限超過中の追加を拒否) が行う。
-KPI ごとの今週の値とぶら下がる施策は `.claude/state/metrics/measurement-cycle/LATEST.md` の「KPI ツリー」節に出る。
+KPI ごとの今週の値とぶら下がる施策は `data/measurement-cycle/LATEST.md` の「KPI ツリー」節に出る。
 
 ### effect ラベルの確定は閾値エンジンが行う
 
 `node .claude/scripts/lib/effect-verdict/cli.mjs` (週次 cron) が
-`.claude/state/effect-verdict/verdicts-<week>.json` に確定ラベルと根拠を書く。本 agent は
+`data/effect-verdict/verdicts-<week>.json` に確定ラベルと根拠を書く。本 agent は
 その JSON を読んで backlog の status を反映する (cron は backlog を書き換えない = 排他 write を守る)。
 確定条件・4 ガード・自動判定と実証チェックリストの対応は
 `.claude/rules/evidence-based-judgment.md` §状況 1「閾値エンジン経由の確定」。
@@ -98,11 +98,11 @@ npm run effect-verdict:test                                 # 閾値ゲートの
 GSC 施策 (Metric に gsc) は `[gsc-page: /path]` (対象ページのパス前方一致・複数可) と
 `デプロイ済 YYYY-MM-DD` も揃うと `gsc-improvement` adapter
 (`.claude/scripts/metrics/lib/gsc-improvements-adapter.mjs`) が週次 snapshot の clicks で判定する。
-欠けている目印は `.claude/state/metrics/measurement-cycle/latest.json` の `engine.gsc.missing` に出る。
+欠けている目印は `data/measurement-cycle/latest.json` の `engine.gsc.missing` に出る。
 GA4 施策 (Metric に ga4) は `[ga4-page: /path]` と `デプロイ済 YYYY-MM-DD`・`[target: +N pageviews]` が揃うと
 `ga4-improvement` adapter (`.claude/scripts/metrics/lib/ga4-improvements-adapter.mjs`) が週次 snapshot の
 `pages-clean.csv` (Japan・rolling28d) の PV で判定する。2026-09-26 の page_view 二重計測是正をまたぐ窓は
-`confounded` で pending に留まる (release 記録 `.claude/state/metrics/releases/2026-09-26-ga4-measurement-v2.json`)。
+`confounded` で pending に留まる (release 記録 `data/releases/2026-09-26-ga4-measurement-v2.json`)。
 施策固有の内訳の照会は `node .claude/scripts/metrics/gsc-query.mjs` / `ga4-query.mjs` (再現コマンドとしてログに書く)。
 週次の無人 run (`improvement-cycle-weekly.yml`) は台帳を直接編集せず、`.local/ci/improvement-cycle/proposal.json` に変更提案を書く
 (`.claude/` は Claude Code の保護パスで、`dontAsk` では書き込みが必ず拒否されるため)。適用は

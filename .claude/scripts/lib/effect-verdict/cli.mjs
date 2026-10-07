@@ -3,7 +3,7 @@
  * cli.mjs — 登録済み adapter を横断して effect ラベルを確定し、機械可読な verdict を書く。
  *
  * 根拠は 2 系統に残す:
- *   - 機械可読: `.claude/state/effect-verdict/verdicts-<week>.json` (本 CLI)
+ *   - 機械可読: `data/effect-verdict/verdicts-<week>.json` (本 CLI)
  *   - 人間可読: 各 improvement-log の `### 判定` セクション (各 adapter の CLI 側で upsert)
  *
  * adapter 契約 (7 メンバ + 任意 3):
@@ -34,11 +34,12 @@ import { createGscBlogWaveAdapter } from "../../blog/measure-gsc-impact.mjs";
 import { createAdsenseAdapter } from "../../metrics/measure-adsense-impact.mjs";
 import { loadGscImprovementsAdapter } from "../../metrics/lib/gsc-improvements-adapter.mjs";
 import { loadGa4ImprovementsAdapter } from "../../metrics/lib/ga4-improvements-adapter.mjs";
+import { datasetDir } from "../../../../config/datasets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..", "..");
-const STATE_DIR = path.join(PROJECT_ROOT, ".claude/state/effect-verdict");
+const STATE_DIR = path.join(PROJECT_ROOT, datasetDir("effect.verdicts"));
 
 /** 登録済み adapter。増やすときはここに 1 行足す。 */
 export function loadAdapters(opts = {}) {

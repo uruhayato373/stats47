@@ -2,7 +2,7 @@
 
 /**
  * note.com/stats47 の公開済み記事のハッシュタグを、本文・価格・有料境界を保ったまま
- * data/note/hashtags/<slug>.json の承認済み99個へ置き換える (propose-note-hashtags.mjs が作る)。
+ * config/note-hashtags/<slug>.json の承認済み99個へ置き換える (propose-note-hashtags.mjs が作る)。
  * 公開中のタグの集合が承認済みの集合と一致する記事は対応済みとして飛ばす。
  *
  * Usage:
@@ -26,11 +26,12 @@ import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { readApprovedHashtags } from './lib/note-hashtags.mjs';
+import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = resolve(SCRIPT_DIR, '../../..');
-const PUBLISHED_INDEX = join(PROJECT_ROOT, '.claude/state/note-published-urls.json');
-const REPORT_DIR = join(PROJECT_ROOT, '.claude/state/metrics');
+const PUBLISHED_INDEX = join(PROJECT_ROOT, datasetPath("note.published-urls"));
+const REPORT_DIR = join(PROJECT_ROOT, datasetDir("note.operation-evidence"));
 const RUN_DATE = new Date().toISOString().slice(0, 10);
 const DEFAULT_REPORT = join(REPORT_DIR, `note-hashtag-audit-${RUN_DATE}.json`);
 const PROFILE_LOCK = join(tmpdir(), 'stats47-note-profile5.lock');

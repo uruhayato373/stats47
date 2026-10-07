@@ -6,6 +6,7 @@
 import { existsSync, readFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import { join } from "node:path";
+import { datasetDir, datasetPath } from "../../../../config/datasets.mjs";
 
 const require = createRequire(import.meta.url);
 const { parseBacklog } = require("../../lib/backlog-lib.cjs");
@@ -94,8 +95,8 @@ export function readCycleHealth(root, today) {
     const items = JSON.parse(ledgerText).items ?? {};
     completedIds = new Set(Object.entries(items).filter(([, v]) => v.status === "completed").map(([id]) => id));
   }
-  const yearText = readText(root, ".claude/state/data/estat-year-coverage/queue.json");
-  const gscText = readText(root, ".claude/state/gsc/coverage-remediation-queue.json");
+  const yearText = readText(root, `${datasetDir("estat.year-coverage")}/queue.json`);
+  const gscText = readText(root, datasetPath("gsc.coverage-queue"));
   const detectors = summarizeDetectors({
     yearResults: yearText ? JSON.parse(yearText).results : null,
     yearByDesign: JSON.parse(readText(root, YEAR_BY_DESIGN) ?? "{}"),

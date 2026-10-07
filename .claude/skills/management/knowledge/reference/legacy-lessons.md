@@ -278,7 +278,7 @@ co_agents: [strategy-advisor]
 
 **原因**: Google のインデックスは **sitemap から消したというシグナルだけでは除去トリガーにならない**。既にインデックスに入っている URL は、Googlebot が該当 URL を再クロールして 404 / 410 / noindex を受領することで初めて除去候補になる。sitemap は「新規 URL の発見」の案内であり、既存 URL の削除指示ではない。
 
-**対策**: インデックス残骸の systematically な除去には **middleware で明示的に 410 Gone を返す**のが最も強いシグナル。404 でも除去されるが 410 の方が早い。2026-04-18 の Fix 7（`/themes/<unknown>` 410）/ Fix 8（`/areas/{pref}/<non-indexable-sub>` 410）がこの対応例。観測は `.claude/skills/analytics/gsc-improvement/reference/improvement-log.md` の T0-THEME-01 / T0-AREA-SUB-01 を参照。
+**対策**: インデックス残骸の systematically な除去には **middleware で明示的に 410 Gone を返す**のが最も強いシグナル。404 でも除去されるが 410 の方が早い。2026-04-18 の Fix 7（`/themes/<unknown>` 410）/ Fix 8（`/areas/{pref}/<non-indexable-sub>` 410）がこの対応例。観測は `data/improvement/gsc-improvement/improvement-log.md` の T0-THEME-01 / T0-AREA-SUB-01 を参照。
 
 ---
 
@@ -298,7 +298,7 @@ co_agents: [strategy-advisor]
 **関連ファイル**:
 - `.claude/skills/sns/publish-x/publish-x.ts` L220-260（fail-safe 予約モード検出）
 - `.claude/skills/sns/publish-x/SKILL.md`（初回 `--dry-run` 必須手順）
-- `.claude/skills/analytics/gsc-improvement/reference/improvement-log.md` T3-SNS-01 Day 2-5 の投稿実時刻記録
+- `data/improvement/gsc-improvement/improvement-log.md` T3-SNS-01 Day 2-5 の投稿実時刻記録
 
 ---
 
@@ -353,7 +353,7 @@ mobile の throttled 環境では HTML 削減のメリット（~数百 ms）よ�
 
 **関連**:
 - Issue #74, PR #75 (ranking 誤った LCP 改善), #86 (themes 同じ誤り), **#96 revert**
-- EXP-002 (`.claude/state/experiments.json`、ADVERSE close)
+- EXP-002 (`data/business/experiments.json`、ADVERSE close)
 
 
 ---
@@ -528,12 +528,12 @@ export async function GET() {
 
 **対策**:
 1. **生成時ゲートで新規再発を停止（実装済）**: `quality-gate.mjs` が各 `data/*.svg` に `.json` + `.source.json` が揃わないと **blocker**（2026-06-20 昇格）。生成器 `generate-article-charts.ts` が SVG とセットで `source.json` を必ず出力（`writeChartSourceIfMissing`）。`build-lineage-queue.mjs` が系譜状態の真実源。
-2. **過去負債は既存ツールで計画消化**: `restore-{ranking,scatter,findings}-from-svg.mjs`（旧SVG表示値で指標を**特定**→SSOT を相対2%照合 ≥0.95→**SSOTから再生成**。絵から逆復元しない＝捏造防止）。手法 SSOT: `.claude/state/blog/neither-restore-method.md`（rank誤抽出・スケール差・派生・命名ドリフトの落とし穴も網羅）。所有: `chart-author` agent。
+2. **過去負債は既存ツールで計画消化**: `restore-{ranking,scatter,findings}-from-svg.mjs`（旧SVG表示値で指標を**特定**→SSOT を相対2%照合 ≥0.95→**SSOTから再生成**。絵から逆復元しない＝捏造防止）。手法 SSOT: `data/blog/neither-restore-method.md`（rank誤抽出・スケール差・派生・命名ドリフトの落とし穴も網羅）。所有: `chart-author` agent。
 3. **派生/非SSOT チャートは元データ永続が必須**（合成スコア等は失うと復元不能）。
 4. **教訓（横断パターン）**: component スパゲッティと同根＝**コードベースの進化速度 > ガードレールの整備速度**。対策は「ガバナンスを足す」でなく **①不変条件を機械ゲートで早期に固定する ②溜まった負債を既存ツールで計画消化する**。「作る前に既存（ツール・ゲート・ルール）を確認する」を徹底（本件でも復元ツールは既存だった）。
 
 **関連**:
 - `.claude/rules/blog-data-schema.md` §1.5/1.6/1.7（3点セット・復元キュー・再発防止の正典）
 - `.claude/scripts/blog/quality-gate.mjs`（系譜 gate L350-360）/ `generate-article-charts.ts`（source.json 自動出力）
-- `.claude/state/blog/{svg-lineage-queue.json,neither-restore-method.md}`
+- `data/blog/{svg-lineage-queue.json,neither-restore-method.md}`
 - `docs/01_技術設計/04_デザインシステム.md` と `.claude/todo/backlog.md` の `UI-CONSOLIDATION-RESIDUAL`

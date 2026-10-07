@@ -28,6 +28,8 @@
 import fs from "node:fs";
 import path from "node:path";
 
+import { datasetDir } from "../../../config/datasets.mjs";
+
 import {
   AREA_DATABOOK_TEMPLATE,
   collectTemplateMetricKeys,
@@ -55,7 +57,8 @@ const OUT_PATH = path.resolve(
 );
 const GSC_SNAPSHOT_DIR = path.resolve(
   __dirname,
-  "../../../.claude/skills/analytics/gsc-improvement/reference/snapshots",
+  "../../..",
+  datasetDir("gsc.snapshots"),
 );
 
 /** 索引 (/ranking のカテゴリ別ブロック) が 1 カテゴリあたり出す代表数。 */

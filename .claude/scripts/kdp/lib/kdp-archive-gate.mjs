@@ -1,13 +1,14 @@
 import { createHash } from "node:crypto";
 import { existsSync, readFileSync, realpathSync } from "node:fs";
 import { join, resolve } from "node:path";
+import { datasetPath } from "../../../../config/datasets.mjs";
 
 const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
 
 /** KDP送信対象の全ファイルが、R2へ検証済みの最新revisionと一致することを確認する。 */
 export function assertKindleAssetsArchived(root, id, listing) {
   if (!/^K-S[1-4]-\d{2}$/.test(id)) return { ok: false, reason: "不正なbook id" };
-  const statePath = join(root, ".claude/state/products/kindle-archives.json");
+  const statePath = join(root, datasetPath("kindle.archives"));
   if (!existsSync(statePath)) return { ok: false, reason: "Kindle archive台帳がありません" };
   let state;
   try {

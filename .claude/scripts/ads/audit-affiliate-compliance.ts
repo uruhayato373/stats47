@@ -12,7 +12,7 @@
  *   npx tsx .claude/scripts/ads/audit-affiliate-compliance.ts --check    # 構造 NG で exit 1 (pre-commit)
  *   npx tsx .claude/scripts/ads/audit-affiliate-compliance.ts --live --scan-all-blog --check  # 週次 CI
  *
- * state 出力 (--live 時のみ): .claude/state/ads/compliance-latest.json
+ * state 出力 (--live 時のみ): data/affiliate/compliance-latest.json
  */
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
@@ -26,6 +26,7 @@ import {
   validateDirectPlacementsStructure,
 } from "./lib/affiliate-compliance-core.mjs";
 import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = resolve(__dirname, "../../..");
@@ -47,7 +48,7 @@ async function fetchContent(url: string): Promise<FetchedContent> {
 function noteR2Path(slug: string): string | null {
   try {
     const index = JSON.parse(
-      readFileSync(resolve(PROJECT_ROOT, ".claude/state/note-draft-index.json"), "utf8"),
+      readFileSync(resolve(PROJECT_ROOT, datasetPath("note.draft-index")), "utf8"),
     );
     return index?.drafts?.[slug]?.r2_path ?? null;
   } catch {
@@ -163,7 +164,7 @@ async function main(): Promise<void> {
 
   // state 書き出しは --live のみ (構造のみの実行で live 監査結果を上書きしない)
   if (live) {
-    const stateDir = resolve(PROJECT_ROOT, ".claude/state/ads");
+    const stateDir = resolve(PROJECT_ROOT, datasetDir("affiliate.audits"));
     mkdirSync(stateDir, { recursive: true });
     writeFileSync(resolve(stateDir, "compliance-latest.json"), JSON.stringify(snapshot, null, 2));
   }
@@ -197,7 +198,7 @@ async function main(): Promise<void> {
   }
 
   if (live) {
-    process.stderr.write(`\n[compliance] snapshot → .claude/state/ads/compliance-latest.json\n`);
+    process.stderr.write(`\n[compliance] snapshot → ${datasetDir("affiliate.audits")}/compliance-latest.json\n`);
   }
 
   const hasBlockers =

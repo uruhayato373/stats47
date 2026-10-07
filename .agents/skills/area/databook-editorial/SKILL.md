@@ -27,7 +27,7 @@ allowed-tools: Read, Grep, Glob, Bash, Edit, Write, WebSearch, WebFetch
 `参考文献/2021都道府県DataBook/2021年版`(ローカルマウント)からOS一時領域へ複製する。repo内へPDFを置かない。
 
 ```bash
-SOURCE_MANIFEST=".claude/state/source-inventory/prefecture-databook/2021/source-bundle-manifest.json"
+SOURCE_MANIFEST="data/source-inventory/prefecture-databook/2021/source-bundle-manifest.json"
 SOURCE_WORK_DIR="${TMPDIR%/}/stats47-source-vault/work/prefecture-databook/2021/2021都道府県DataBook"
 SOURCE_DERIVED_DIR="${TMPDIR%/}/stats47-source-vault/derived/prefecture-databook/2021/r1"
 npm run source-vault -- verify --profile prefecture-databook-2021 --manifest "$SOURCE_MANIFEST" --vault

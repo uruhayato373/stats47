@@ -99,7 +99,7 @@ PCごとにChromeのProfile番号が違うため、Windowsでは番号を投稿�
 公開済み記事を修正済み draft.md で更新する（価格変更・誤字修正・記述更新の保守用）。
 詳細手順は **[references/update-mode.md](references/update-mode.md)** を参照。
 
-- 対象 slug が `.claude/state/note-published-urls.json` の `articles` に無ければ
+- 対象 slug が `data/note/note-published-urls.json` の `articles` に無ければ
   「未公開のため更新不可」で中断
 - 本文と本文中画像のみ差し替える。アイキャッチ・ハッシュタグ・価格は触らない
 - 有料記事の更新は有料エリア境界の再設定が絡む。**公開更新の依頼がある場合だけ**、Phase 7-Boundaryで境界を設定し、エージェントがscreenshotを目視確認してから同じセッションで確定する。確認できなければ公開せずユーザーへ引き継ぐ（詳細は`references/scheduling.md`）。
@@ -139,7 +139,7 @@ node .claude/scripts/note/generate-note-hashtags.mjs --slug <slug>
 
 - カバー: `docs/31_note記事原稿/[vertical/]<slug>/images/cover-1280x670.{svg,png}`
   **koumuin シリーズは `generate-koumuin-covers.cjs` が PNG まで生成する**（背景 bitmap は
-  `.claude/scripts/note/assets/koumuin-cover-bg.png`、無ければプログラム生成のダーク背景にフォールバック）。
+  `assets/note/koumuin-cover-bg.png`、無ければプログラム生成のダーク背景にフォールバック）。
   アップロードは PNG を使う。汎用版 (`generate-note-covers.mjs`) は SVG のみなので、その場合は
   `rsvg-convert`/`inkscape`/`svg-to-png.cjs` で PNG 化してからアップロードする（note は SVG を受け付けない場合がある）。
 - ハッシュタグ: `docs/31_note記事原稿/[vertical/]<slug>/hashtags.txt` に 1 行 1 タグで 99 個。Phase 7 でタグ入力時に使う。
@@ -284,7 +284,7 @@ browser-use --headed --profile "Profile 5" state 2>&1 > /tmp/note-acct.txt
 ### 公開済み記事のハッシュタグ専用更新
 
 本文の差し替えを行わず、公開済み記事のタグを記事に合う 99 個へ置き換えるときは、提案と反映の 2 段で行う。
-タグの正本は `data/note/hashtags/<slug>.json` (git)。穴埋め用の汎用タグ (`#毎日note` `#スキしてみて` 等) は使わない。
+タグの正本は `config/note-hashtags/<slug>.json` (git)。穴埋め用の汎用タグ (`#毎日note` `#スキしてみて` 等) は使わない。
 
 ```bash
 # 1. タイトルと公開本文から Claude がタグ 99 個を提案し、検査 (lib/note-hashtags.mjs) を通ったものだけ保存する
@@ -336,7 +336,7 @@ node .claude/scripts/note/sync-note-r2.mjs  # または develop push でCIに委
 
 **新規公開時の追加手順** (note-published-urls.json にまだ存在しない場合):
 ```javascript
-// .claude/state/note-published-urls.json の articles に手動追記
+// data/note/note-published-urls.json の articles に手動追記
 "<slug>": {
   "vertical": "<vertical>",
   "title": "<title>",
@@ -350,7 +350,7 @@ node .claude/scripts/note/sync-note-r2.mjs  # または develop push でCIに委
 追記後に `migrate-note-frontmatter.mjs --slug <slug>` → `build-note-published-index.mjs` を実行する。
 
 - **下書き保存のみ**（公開していない）の場合は上記不要
-- **ドラフト管理中だった場合**: `.claude/state/note-draft-index.json` の `drafts` から同 slug を削除する
+- **ドラフト管理中だった場合**: `data/note/note-draft-index.json` の `drafts` から同 slug を削除する
   （公開後は frontmatter の `note_url` が真実源になるため）
 
 - **ClipboardEvent 制約**: 最初の1セグメントのみ ClipboardEvent でペースト可能。2回目以降は `type` コマンドを使う
@@ -360,7 +360,7 @@ node .claude/scripts/note/sync-note-r2.mjs  # または develop push でCIに委
 
 ## トラブルシューティング
 
-公開済み記事の空白リンクカードは `npm run note:cards:audit -- --browser-verify --output .claude/state/metrics/note/card-visibility-latest.json` で全量監査する。ブラウザ確認に失敗した記事があれば同じ出力を入力に `--retry-unknown-from .claude/state/metrics/note/card-visibility-latest.json` で失敗分だけ再検証する。`unknownCards` が残る場合は修復対象にしない。
+公開済み記事の空白リンクカードは `npm run note:cards:audit -- --browser-verify --output data/note/card-visibility-latest.json` で全量監査する。ブラウザ確認に失敗した記事があれば同じ出力を入力に `--retry-unknown-from data/note/card-visibility-latest.json` で失敗分だけ再検証する。`unknownCards` が残る場合は修復対象にしない。
 
 Mac の `stats47` 専用プロファイルを `npm run note:session:check` で確認し、`npm run note:cards:repair-batch -- --max-articles 1 --max-cards 2` で対象を表示、`--commit` を付けて小分けに更新する。各カードの公開後検証に失敗したら journal (`.local/note-card-repair-journal.json`) を確認し、記事の下書きを回復するまで再実行しない。カード前の空段落はカードを公開した後に `npm run note:cards:compact-spacing -- --note-key n... --commit` で記事単位に詰め、再監査で `emptyCards=0` と `spacingIssues=0` を確認する。
 

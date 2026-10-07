@@ -87,12 +87,13 @@ model: sonnet
 
 - `docs/21_ブログ記事原稿/<slug>/article.md` + `data/` — **read only** (記事本文・data は触らない)
 - `.local/r2/app/blog/<slug>/` — read only (data JSON)
-- `.claude/state/blog/SHARED-failure-cases.md` — read (failure ledger 参照)
+- `data/blog/SHARED-failure-cases.md` — read (failure ledger 参照)
 - `docs/21_ブログ記事原稿/<slug>/review.md` — **write (本 agent の唯一の書き込み先)**
+- `data/blog/critic-findings.jsonl` — append (`record-critic-findings.mjs` 経由でのみ。指摘の台帳)
 
 ## File Boundary (並行衝突回避)
 
-- 記事本文 (article.md) / data は read-only。**書き込みは自分の `review.md` のみ** (記事は修正しない)
+- 記事本文 (article.md) / data は read-only。**書き込みは自分の `review.md` と指摘の台帳 (スクリプト経由) のみ** (記事は修正しない)
 - 同一記事へ本agentを重複起動しない。最初のpassでseverityを絞らず全findingを出す
 
 ## Output Contract (★review.md が公開ゲートの必須成果物)
@@ -111,11 +112,17 @@ date: YYYY-MM-DD
 ## 評価サマリ
 <読者価値の総括 2-4 文>
 ## 指摘
-- [BLOCK|MAJOR|MINOR] <具体的指摘 + 修正案>
+- [BLOCK|MAJOR|MINOR][型:<key>] <具体的指摘 + 修正案>
 ## 判定理由
 <PASS / REVISE の根拠>
 ```
 
+- **指摘には型を付ける**。`<key>` は `.claude/config/critic-finding-types.json` の types のどれか (value / year / definition /
+  source / causal / correlation / region / related-link / title-promise / chart-text / code / structure / style /
+  reader-value / other)。型ごとに数え、繰り返す型を writer の規約か gate に格上げするため (正典
+  `blog-quality-standards.md`「critic の指摘の型と格上げ」)。
+- **review.md を書いた直後に** `node .claude/scripts/blog/record-critic-findings.mjs docs/21_ブログ記事原稿/<slug>` を実行して
+  指摘を台帳に残す (REVISE の指摘は再審で上書きされるため、その前に残す。二重に実行しても行は増えない)。
 - BLOCK 級の指摘が 1 つでもあれば `verdict: REVISE`。呼び元 (article-writer) が修正 → 再 review で PASS に更新。
 - 呼び元への返答 (chat) は **Template A** (table-only: `Slug | Section | Issue Type | Severity | Recommendation`)。前置き文禁止。
 - panel-review 総括が要る場合のみ **Template C** (report) を併用可。

@@ -22,6 +22,7 @@ import { inspectR2ImageGeneration } from './lib/image-generation-r2-inspector';
 
 import type { ImageGenerationManifest } from '@stats47/types';
 import { SITE } from '@stats47/types';
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const stageRoot = '.local/image-staging/geo-thumbnails';
 const planPath = '.local/image-generation-publish-plan-geo-thumbnails.json';
@@ -62,7 +63,7 @@ export function readStagedGeoThumbnails(
   const state = stateSchema.parse(
     JSON.parse(
       readFileSync(
-        join(root, '.claude/state/geo/source-thumbnails.json'),
+        join(root, `${datasetDir("geo.sources")}/source-thumbnails.json`),
         'utf8'
       )
     )
@@ -258,7 +259,7 @@ async function main() {
         verified.push({ key, sha256: expectedSha, bytes: local.length });
       }
       save(
-        join(root, '.claude/state/geo/source-thumbnails-publication.json'),
+        join(root, `${datasetDir("geo.sources")}/source-thumbnails-publication.json`),
         JSON.stringify(
           {
             schemaVersion: 1,

@@ -1,9 +1,7 @@
 {
-  "hash": "fcfb7fd374dbc18694f4e032d7cd4403bb357d753bf8d0a24327173598fc6bac",
-  "audited_at": "2026-10-06T03:23:10",
+  "hash": "353f11bef5d3c45977b742cc890606b7b96c3edb7bf74851cb444ab950164d0d",
+  "audited_at": "2026-10-07T03:24:24",
   "files": [
-    ".claude/scripts/measurement/__tests__/measurement.test.mjs",
-    ".claude/scripts/measurement/refresh-session.mjs",
-    ".claude/scripts/measurement/summarize.mjs"
+    ".claude/rules/blog-quality-standards.md"
   ]
 }

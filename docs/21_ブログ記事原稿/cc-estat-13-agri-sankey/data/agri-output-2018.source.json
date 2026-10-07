@@ -1,0 +1,15 @@
+{
+  "kind": "estat",
+  "statsDataId": "0001894246",
+  "statsName": "生産農業所得統計（全国農業地域別農業産出額及び生産農業所得 実額）",
+  "year": "2018",
+  "valueUnit": "億円",
+  "label": "全国農業地域 × 品目の農業産出額（Step 1 の出力）",
+  "params": {
+    "statsDataId": "0001894246",
+    "note": "cat01=地域（001〜019）、cat02=農業産出額の品目（001〜023）。024 以降の生産農業所得・参考値は取得しない。数値でないセル（秘匿 x・事実なし -）は除外"
+  },
+  "transform": "getStatsData の戻り値を { regionCode, regionName, itemCode, item, itemPath, value } に整形。値は表の単位（億円）のまま。421 行（437 セルのうち数値のセル）",
+  "restore": "e-Stat API getStatsData（statsDataId=0001894246、cat02 が 001〜023）を取得し、記事 Step 1 のプロンプトの形式で整形する",
+  "fetchedAt": "2026-10-07"
+}

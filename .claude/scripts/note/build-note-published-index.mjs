@@ -12,13 +12,14 @@
  * 参照先:
  *   R2 note-draft-index.json  → 全スラッグ一覧
  *   R2 <vertical>/<slug>/draft.md → frontmatter を読んで note_url を収集
- *   .claude/state/note-published-urls.json → 上書き出力
+ *   data/note/note-published-urls.json → 上書き出力
  */
 
 import { readFileSync, writeFileSync } from 'fs'
 import { resolve, join, dirname } from 'path'
 import { fileURLToPath } from 'url'
 import { R2_PUBLIC_BASE_URL } from '../lib/site-config.cjs'
+import { datasetPath } from "../../../config/datasets.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const ROOT = resolve(__dirname, '../../..')
@@ -27,7 +28,7 @@ const DRY_RUN = process.argv.includes('--dry-run')
 if (DRY_RUN) console.log('[dry-run] ファイル書き込みはスキップ')
 
 const R2_PUBLIC = R2_PUBLIC_BASE_URL
-const OUT_FILE = join(ROOT, '.claude/state/note-published-urls.json')
+const OUT_FILE = join(ROOT, datasetPath("note.published-urls"))
 
 // ============================================================
 // frontmatter パーサー
@@ -62,7 +63,7 @@ function collectAllSlugs() {
   const slugMap = {}
 
   // 1. note-draft-index.json から未公開ドラフト（37件）
-  const localIndexPath = join(ROOT, '.claude/state/note-draft-index.json')
+  const localIndexPath = join(ROOT, datasetPath("note.draft-index"))
   const localData = JSON.parse(readFileSync(localIndexPath, 'utf8'))
   for (const [slug, info] of Object.entries(localData.drafts || {})) {
     if (info && info.vertical) slugMap[slug] = { vertical: info.vertical, r2_path: info.r2_path }
@@ -179,4 +180,4 @@ const output = {
 }
 
 writeFileSync(OUT_FILE, JSON.stringify(output, null, 2) + '\n', 'utf8')
-console.log(`\n✓ 書き出し完了: .claude/state/note-published-urls.json (${publishedCount}件)`)
+console.log(`\n✓ 書き出し完了: ${datasetPath("note.published-urls")} (${publishedCount}件)`)

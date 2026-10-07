@@ -55,9 +55,9 @@ jobs:
         id: check
         run: |
           set +e
-          mkdir -p .claude/state/ranking
+          mkdir -p data/ranking
           npx tsx packages/ranking/src/scripts/audit-ranking-data-integrity.ts \
-            --json .claude/state/ranking/integrity-audit.json \
+            --json data/ranking/integrity-audit.json \
             2>&1 | tee /tmp/ranking-integrity-audit.log
           echo "exit_code=${PIPESTATUS[0]}" >> "$GITHUB_OUTPUT"
 
@@ -136,7 +136,7 @@ jobs:
           {
             echo "### データ品質キュー (DATA-QUALITY-LOOP-01)"
             echo '```'
-            sed -n '/## サマリ/,/## 2\./p' .claude/state/data/data-quality/LATEST.md
+            sed -n '/## サマリ/,/## 2\./p' data/data-quality/checks/LATEST.md
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
 
@@ -145,7 +145,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .claude/state/ranking/integrity-audit.json .claude/state/data
+          git add data/ranking/integrity-audit.json data/data-quality
           if git diff --cached --quiet; then
             echo "No audit changes"
             exit 0
@@ -192,7 +192,7 @@ jobs:
             echo "- item↔values 年整合ズレ → item.json (fresh 生成) と values.json (stale) のどちらが正か確認して再生成"
             echo "- home/survey/category 件数の急減 → \`export-master-snapshots.ts\` の再生成漏れ・部分集合汚染を疑う"
             echo ""
-            echo "詳細 (全件 JSON): \`.claude/state/ranking/integrity-audit.json\` (このコミットで develop に反映済み)"
+            echo "詳細 (全件 JSON): \`data/ranking/integrity-audit.json\` (このコミットで develop に反映済み)"
             echo ""
             echo "### 再取り込みキュー"
             echo ""
@@ -206,7 +206,7 @@ jobs:
             echo "- stale-delivery → 再取り込みで直る (\`page-data-batch.ts --metric <key>\`)"
             echo "- config-insufficient → 再取り込みでは直らない (\`diagnose-unpinned-axes.ts --fetch\` で軸を診断)"
             echo ""
-            echo "詳細: \`.claude/state/data/LATEST.md\`"
+            echo "詳細: \`data/data-quality/LATEST.md\`"
             echo ""
             echo "正典: packages/ranking/src/scripts/audit-ranking-data-integrity.ts"
           } > /tmp/ranking-integrity-issue.md

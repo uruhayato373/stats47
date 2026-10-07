@@ -43,7 +43,7 @@ subagent は起動しない:
 
 #### Track B: コンテンツ資産
 ```
-- 投稿台帳 `.claude/state/sns/posts.json` から投稿状況を集計（完全DBレス。旧 D1 sns_posts は廃止）:
+- 投稿台帳 `data/sns/posts.json` から投稿状況を集計（完全DBレス。旧 D1 sns_posts は廃止）:
   `node -e 'const s=require("./.claude/scripts/lib/sns-posts-store.cjs");const by={};for(const p of s.loadAll()){const k=(p.domain||"?")+"/"+(p.platform||"?")+"/"+(p.status||"?");by[k]=(by[k]||0)+1}console.log(JSON.stringify(by,null,2))'`
 - .local/r2/sns/ の生成済みコンテンツ
 - ブログ記事の企画状況（`.claude/todo/backlog.md` と `topic-queue.json`）
@@ -100,12 +100,12 @@ SNS 拡散 (意外な事実の投稿 → 共有 → 流入)、データ引用 (C
 
 ### Step 4: 変遷を確認する
 
-戦略文書のGit履歴と `.claude/state/experiments.json` を参照する。
+戦略文書のGit履歴と `data/business/experiments.json` を参照する。
 
 ## 参照
 
 - `docs/02_実装計画/00_INDEX.md` — 実装計画の現在地
 - `docs/00_プロジェクト管理/02_収益化戦略.md` — NSM・収益レーン・意思決定ゲート
-- 投稿台帳 `.claude/state/sns/posts.json`（`sns-posts-store.cjs` 経由）— SNS 投稿状況・メトリクスキャッシュ
+- 投稿台帳 `data/sns/posts.json`（`sns-posts-store.cjs` 経由）— SNS 投稿状況・メトリクスキャッシュ
 - `.claude/skills/management/weekly-plan/SKILL.md` — 週次計画
 - 原典: Ognjen Boskovic の Growth Loops フレームワーク

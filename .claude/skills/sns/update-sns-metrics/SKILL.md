@@ -1,18 +1,18 @@
 ---
 name: update-sns-metrics
 domain: sns
-description: SNS メトリクスを `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv` に記録する。Use when user says "メトリクス更新", "SNS数値取得". Instagram は公式 API、X は browser-use CLI。YouTube pilot は Studio 手動値と GA4 UTM を記録する（API自動取得なし）。
+description: SNS メトリクスを `data/sns/metric-snapshots/YYYY-MM-DD/metrics.csv` に記録する。Use when user says "メトリクス更新", "SNS数値取得". Instagram は公式 API、X は browser-use CLI。YouTube pilot は Studio 手動値と GA4 UTM を記録する（API自動取得なし）。
 disable-model-invocation: true
 argument-hint: [--platform x|instagram|all]
 primary_agent: sns-metrics-sync
 co_agents: [x-strategist, instagram-strategist]
 ---
 
-各 SNS プラットフォームからメトリクスを取得し、時系列履歴は `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv` に、最新値キャッシュは投稿台帳 `.claude/state/sns/posts.json` の各レコード（impressions / likes / reposts / replies / bookmarks / metrics_updated_at カラム）に `sns-posts-store.cjs` の `updateById` で記録する。Instagram は Graph API v21、X は browser-use CLI を使用する。YouTube pilot は公開14日後に Studio から views / 30秒維持率 / 平均視聴率 / 平均視聴時間を手動取得し、GA4 の `utm_source=youtube` と合わせて EXP-006 に記録する。pilot 成功までは YouTube OAuth/API を再構築しない。
+各 SNS プラットフォームからメトリクスを取得し、時系列履歴は `data/sns/metric-snapshots/YYYY-MM-DD/metrics.csv` に、最新値キャッシュは投稿台帳 `data/sns/posts.json` の各レコード（impressions / likes / reposts / replies / bookmarks / metrics_updated_at カラム）に `sns-posts-store.cjs` の `updateById` で記録する。Instagram は Graph API v21、X は browser-use CLI を使用する。YouTube pilot は公開14日後に Studio から views / 30秒維持率 / 平均視聴率 / 平均視聴時間を手動取得し、GA4 の `utm_source=youtube` と合わせて EXP-006 に記録する。pilot 成功までは YouTube OAuth/API を再構築しない。
 
 **記録先の統一原則（.claude/rules/data-storage.md）**:
-- 時系列履歴 → `.claude/skills/analytics/sns-metrics-improvement/snapshots/YYYY-MM-DD/metrics.csv`（ヘルパ: `.claude/scripts/lib/sns-metrics-store.cjs`）
-- 運用データ（最新値キャッシュ） → 投稿台帳 `.claude/state/sns/posts.json` の cache カラム（`sns-posts-store.cjs` 経由。完全DBレス。旧 D1 sns_posts は廃止）
+- 時系列履歴 → `data/sns/metric-snapshots/YYYY-MM-DD/metrics.csv`（ヘルパ: `.claude/scripts/lib/sns-metrics-store.cjs`）
+- 運用データ（最新値キャッシュ） → 投稿台帳 `data/sns/posts.json` の cache カラム（`sns-posts-store.cjs` 経由。完全DBレス。旧 D1 sns_posts は廃止）
 - 旧 D1 `sns_metrics` テーブルは 2026-04-17 に廃止済み
 
 ### 期待カバレッジ
@@ -140,6 +140,6 @@ bash .claude/scripts/cleanup-browser.sh 2>/dev/null
 - `references/platform-instagram.md` — Instagram メトリクス取得手順（IG-1〜IG-5）
 - `.claude/scripts/lib/sns-metrics-store.cjs` — 時系列履歴書き込みヘルパ（CSV upsert）
 - `.claude/skills/analytics/sns-metrics-improvement/` — スナップショット蓄積先 + improvement-log
-- `.claude/state/sns/posts.json`（`.claude/scripts/lib/sns-posts-store.cjs`）— 投稿台帳 SSOT。最新値キャッシュの書込先（完全DBレス。旧 D1 sns_posts は廃止）
+- `data/sns/posts.json`（`.claude/scripts/lib/sns-posts-store.cjs`）— 投稿台帳 SSOT。最新値キャッシュの書込先（完全DBレス。旧 D1 sns_posts は廃止）
 - `packages/database/src/schema/sns_posts.ts` — レコードの型ソース（カラム名の参照用。配信 R2・投稿台帳には影響しない残置）
 - `.claude/skills/sns/find-quote-rt/SKILL.md` — X タイムライン DOM 抽出パターンの原典

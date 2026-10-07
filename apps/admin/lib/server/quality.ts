@@ -29,7 +29,7 @@ export interface QualityQueue {
   error?: string;
 }
 
-const Q = ".claude/state";
+const Q = "data";
 
 function q(
   key: string,
@@ -209,7 +209,7 @@ export function qualityQueues(): QualityQueue[] {
     q(
       "page-quality",
       "ページ品質 (肥大化・重複・速度)",
-      `${Q}/metrics/page-quality/latest.json`,
+      `${Q}/page-quality/metrics/latest.json`,
       "違反ページ",
       (d) => {
         const violations = Array.isArray(d.violations) ? d.violations : [];

@@ -12,7 +12,7 @@
  *
  * ## 入力
  *
- * `.claude/state/estat/meta/<statsDataId>.json` (`fetch-estat-meta.mjs` が書くダンプ)。
+ * `data/estat/meta/<statsDataId>.json` (`fetch-estat-meta.mjs` が書くダンプ)。
  * tab の `sampleValues[].unit` に e-Stat の原単位が入っている。**未取得の表はスキップして残数に数える**
  * (取れなかったことを「問題なし」に混ぜない)。`--fetch` で未取得ぶんを取りに行く。
  *
@@ -37,10 +37,11 @@ import {
 } from "../src/money-unit.js";
 import { METRICS_REGISTRY } from "../src/registry.js";
 import type { MetricConfig } from "../src/types.js";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(__dirname, "../../..");
-const META_DIR = resolve(REPO_ROOT, ".claude/state/estat/meta");
+const META_DIR = resolve(REPO_ROOT, datasetDir("estat.meta"));
 
 interface MetaDump {
   statsDataId: string;

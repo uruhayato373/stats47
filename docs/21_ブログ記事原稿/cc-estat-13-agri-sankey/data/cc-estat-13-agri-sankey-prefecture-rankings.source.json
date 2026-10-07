@@ -1,0 +1,16 @@
+{
+  "kind": "ranking",
+  "rankingKey": "agricultural-output",
+  "year": "2024",
+  "unit": "百万円",
+  "label": "農業産出額 都道府県ランキング（2024年）",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/agricultural-output/values.json",
+  "upstream": "metric config → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug cc-estat-13-agri-sankey --keys agricultural-output --data-name cc-estat-13-agri-sankey-prefecture-rankings",
+  "verifiedMatchRate": 100,
+  "generatedBy": "backfill-source.mjs",
+  "note": "source-backfill: 既存jsonの値をSSOTと照合しrankingKey+年を確定(SVGから逆復元しない)",
+  "fetchedAt": "2026-10-07T05:33:19.715Z",
+  "refreshedFromYear": "2023"
+}

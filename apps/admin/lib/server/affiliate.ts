@@ -1,5 +1,7 @@
 import "server-only";
 
+import { datasetDir } from "../../../../config/datasets.mjs";
+
 import {
   AFFILIATE_ADS,
 } from "../../../../apps/web/scripts/affiliate-ads-data";
@@ -13,17 +15,18 @@ import { cached, fileExists, readCsv, readJson, TTL, wrap, type Wrapped } from "
  * ゲート・実験・pilot・在庫・規約検査の既存集計は ads.ts をそのまま使い、ここでは持たない。
  *
  * 入力:
- * - 成果: `.claude/state/metrics/affiliate/{a8-results,a8-report-log,moshimo-results}.json`、
- *   `.claude/state/metrics/authenticated/latest.json` (ASP ごとの取得状態)、`.claude/state/ads/ga4-affiliate-history.csv`
+ * - 成果: `data/affiliate/{a8-results,a8-report-log,moshimo-results}.json`、
+ *   `data/authenticated/latest.json` (ASP ごとの取得状態)、`data/affiliate/ga4-affiliate-history.csv`
  * - 掲載先: git TS の広告定義 (`apps/web/scripts/affiliate-ads-data.ts` = 自動配置、
  *   `affiliate-direct-placements-data.ts` = 記事への直貼り)。配信と同じ定義を読むので、画面と本番がずれない
- * - 提携・案件: `.claude/state/ads/{a8-catalog,affiliate-catalog}.json`
+ * - 提携・案件: `data/affiliate/{a8-catalog,affiliate-catalog}.json`
  * 欠測は 0 にせず、取得できなかった理由を返す (収益化戦略 §1)。
  */
 
-const METRICS = ".claude/state/metrics/affiliate";
-const ADS = ".claude/state/ads";
-const AUTH = ".claude/state/metrics/authenticated/latest.json";
+const METRICS = datasetDir("affiliate.audits");
+/** 提携台帳と GA4 実測の推移は記録なので data/affiliate/ */
+const ADS = datasetDir("affiliate.catalog");
+const AUTH = `${datasetDir("revenue.authenticated")}/latest.json`;
 
 /** 表示がこれ以上あるのにクリック 0 の掲載位置を強調する (doboku-note と同じ基準) */
 export const ZERO_CLICK_IMPRESSION_THRESHOLD = 1000;

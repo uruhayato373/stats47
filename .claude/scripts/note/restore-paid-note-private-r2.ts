@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url';
 import dotenv from 'dotenv';
 import { GetObjectCommand, S3Client } from '@aws-sdk/client-s3';
 import { R2_PRIVATE_BUCKET } from '../lib/site-config.cjs';
+import { datasetPath } from "../../../config/datasets.mjs";
 
 interface Article {
   vertical: string;
@@ -33,7 +34,7 @@ const secretAccessKey = process.env.R2_SECRET_ACCESS_KEY;
 if (!endpoint || !accessKeyId || !secretAccessKey) throw new Error('R2 S3 credentials are required');
 const bucket = process.env.R2_PRIVATE_BUCKET_NAME ?? R2_PRIVATE_BUCKET;
 const client = new S3Client({ region: 'auto', endpoint, credentials: { accessKeyId, secretAccessKey } });
-const state = JSON.parse(fs.readFileSync(path.join(repoRoot, '.claude/state/note-published-urls.json'), 'utf8')) as {
+const state = JSON.parse(fs.readFileSync(path.join(repoRoot, datasetPath("note.published-urls")), 'utf8')) as {
   articles: Record<string, Article>;
 };
 const article = state.articles[slug];

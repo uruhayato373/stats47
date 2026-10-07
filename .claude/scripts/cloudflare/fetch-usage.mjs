@@ -2,7 +2,7 @@
  * Cloudflare 日次 usage snapshot 取得スクリプト
  *
  * Cloudflare GraphQL Analytics API から R2 / Workers / D1 の使用量を取得し、
- * .claude/state/metrics/cloudflare/snapshots/YYYY-MM-DD.json に保存する。
+ * data/cloudflare/snapshots/YYYY-MM-DD.json に保存する。
  *
  * 認証:
  *   .env.local の CLOUDFLARE_API_TOKEN と CLOUDFLARE_ACCOUNT_ID を使用。
@@ -16,9 +16,10 @@
 import { writeFileSync, mkdirSync, readFileSync, existsSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const PROJECT_ROOT = resolve(fileURLToPath(import.meta.url), "..", "..", "..", "..");
-const SNAPSHOTS_DIR = join(PROJECT_ROOT, ".claude/state/metrics/cloudflare/snapshots");
+const SNAPSHOTS_DIR = join(PROJECT_ROOT, datasetDir("cloudflare.snapshots"));
 
 function loadEnv() {
   const envPath = join(PROJECT_ROOT, ".env.local");

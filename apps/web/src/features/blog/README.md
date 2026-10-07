@@ -40,7 +40,6 @@ features/blog/
 │   ├── mdx-components.ts              # MDX コンポーネントマッピング
 │   ├── AffiliateItem.tsx               # インライン アフィリエイトカード UI
 │   ├── article-affiliate-sections.tsx  # 記事末尾 関連サービス（タグ自動配置）
-│   ├── article-related-books.tsx       # 記事末尾 関連書籍（タグ自動配置）
 │   └── charts/                         # D3.js チャートラッパー
 ├── repositories/
 │   └── article-repository.ts   # DB からの記事メタデータ取得
@@ -102,7 +101,7 @@ affiliate:
 記事末尾に 2 つのセクションが自動表示される（`blog/[slug]/page.tsx`）:
 
 1. **バナー広告**（`ArticleAffiliateBanner`）— 記事タグ → `TAG_AFFILIATE_MAP` → DB `affiliate_ads`（ad_type='banner'）で最大 2 件
-2. **関連書籍**（`ArticleRelatedBooks`）— 記事タグ → `TAG_AFFILIATE_MAP` → `CATEGORY_BOOKS` で最大 2 冊
+2. **書籍**（`BlogProductCta` / `RelatedAmazonBook`）— 記事を収録した自社 Kindle 本があればそれを出す。無ければバナーと同じ vertical (`resolveContentVertical`) → `CATEGORY_BOOKS` の一般書籍 1 冊を Amazon アソシエイトで出す
 
 マッピング定数は `@/features/ads/constants/` に集約。マッチしない場合は非表示。
 全リンクは `TrackedAffiliateLink` で GA4 クリック計測対応。

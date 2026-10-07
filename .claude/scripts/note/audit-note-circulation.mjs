@@ -21,13 +21,14 @@ import {
   summarizeArticleAudits,
   unique,
 } from "./lib/circulation-audit.mjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const SCRIPT_DIR = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(SCRIPT_DIR, "../../..");
 const args = process.argv.slice(2);
 const RUN_DATE = new Date().toISOString().slice(0, 10);
 const outputArg = args.includes("--output") ? args[args.indexOf("--output") + 1] : null;
-const OUTPUT = resolve(outputArg || join(ROOT, ".claude/state/metrics", `note-circulation-audit-${RUN_DATE}.json`));
+const OUTPUT = resolve(outputArg || join(ROOT, datasetDir("note.operation-evidence"), `note-circulation-audit-${RUN_DATE}.json`));
 const CHECK_LINKS = !args.includes("--no-link-check");
 const REPORT_ONLY = args.includes("--report-only");
 const UA = "stats47-note-circulation-audit/1.0";

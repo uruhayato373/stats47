@@ -17,6 +17,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -51,7 +52,7 @@ function industryAvgCtr(position) {
 function findLatestSnapshot() {
   const snapshotDir = path.join(
     PROJECT_ROOT,
-    ".claude/skills/analytics/gsc-improvement/reference/snapshots"
+    datasetDir("gsc.snapshots")
   );
   if (!fs.existsSync(snapshotDir)) return null;
   const weeks = fs.readdirSync(snapshotDir).filter((d) => /^\d{4}-W\d{2}$/.test(d));
@@ -68,7 +69,7 @@ if (!week) {
 
 const pagesCsv = path.join(
   PROJECT_ROOT,
-  ".claude/skills/analytics/gsc-improvement/reference/snapshots",
+  datasetDir("gsc.snapshots"),
   week,
   "pages.csv"
 );
@@ -80,7 +81,7 @@ if (!fs.existsSync(pagesCsv)) {
 // dedup history (auto-brushup-history.json で管理)
 const historyPath = path.join(
   PROJECT_ROOT,
-  ".claude/state/blog/auto-brushup-history.json"
+  `${datasetDir("blog.operations")}/auto-brushup-history.json`
 );
 function loadHistory() {
   if (!fs.existsSync(historyPath)) return { entries: [] };
@@ -91,7 +92,7 @@ const history = loadHistory();
 // チャート品質監査 (audit-chart-quality.mjs の出力) を読み込む。
 // 各 candidate に chartIssues を付与し、brushup agent が「ついでにチャート再生成」
 // すべき記事を判断できるようにする。GSC スコアは歪めず、同点時の tiebreaker にのみ使う。
-const chartAuditPath = path.join(PROJECT_ROOT, ".claude/state/blog/chart-audit.json");
+const chartAuditPath = path.join(PROJECT_ROOT, `${datasetDir("blog.operations")}/chart-audit.json`);
 const chartAudit = new Map();
 if (fs.existsSync(chartAuditPath)) {
   try {
@@ -110,7 +111,7 @@ if (fs.existsSync(chartAuditPath)) {
 
 // 記事構造監査 (audit-article-structure.mjs の出力) を読み込む。
 // source-link 末尾集約の違反を candidate に付与し、brushup 時に再配置させる。
-const structureAuditPath = path.join(PROJECT_ROOT, ".claude/state/blog/structure-audit.json");
+const structureAuditPath = path.join(PROJECT_ROOT, `${datasetDir("blog.operations")}/structure-audit.json`);
 const structureAudit = new Map();
 if (fs.existsSync(structureAuditPath)) {
   try {

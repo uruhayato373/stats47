@@ -1,0 +1,68 @@
+{
+  "kind": "calculated",
+  "label": "消費者物価地域差指数 費目別の最高と最低の差（2024年度）",
+  "unit": "ポイント",
+  "formula": "各指標の2024年度の47都道府県の値から、最大値と最小値の差を求める (差 = 最大値 - 最小値)。教育 125.1 - 78.8 = 46.3、住居 127.2 - 81.3 = 45.9、光熱・水道 119.6 - 87.0 = 32.6、被服及び履物 112.2 - 90.1 = 22.1、教養娯楽 106.7 - 91.5 = 15.2、諸雑費 105.2 - 90.9 = 14.3、家具・家事用品 104.6 - 93.5 = 11.1、食料 106.7 - 95.8 = 10.9、総合 104.0 - 96.2 = 7.8、交通・通信 103.2 - 97.4 = 5.8、保健医療 102.0 - 96.5 = 5.5",
+  "inputs": [
+    {
+      "rankingKey": "consumer-price-difference-index-overall",
+      "year": "2024"
+    },
+    {
+      "rankingKey": "consumer-price-difference-index-education",
+      "year": "2024"
+    },
+    {
+      "rankingKey": "consumer-price-difference-index-housing",
+      "year": "2024"
+    },
+    {
+      "rankingKey": "consumer-price-difference-index-utilities",
+      "year": "2024"
+    },
+    {
+      "rankingKey": "consumer-price-difference-index-clothing-footwear",
+      "year": "2024"
+    },
+    {
+      "rankingKey": "consumer-price-difference-index-culture-recreation",
+      "year": "2024"
+    },
+    {
+      "rankingKey": "consumer-price-difference-index-miscellaneous",
+      "year": "2024"
+    },
+    {
+      "rankingKey": "consumer-price-difference-index-furniture-household",
+      "year": "2024"
+    },
+    {
+      "rankingKey": "consumer-price-difference-index-food",
+      "year": "2024"
+    },
+    {
+      "rankingKey": "consumer-price-difference-index-transport-communication",
+      "year": "2024"
+    },
+    {
+      "rankingKey": "consumer-price-difference-index-healthcare",
+      "year": "2024"
+    }
+  ],
+  "inputFiles": [
+    "overall-prefecture-rankings.json",
+    "education-prefecture-values.json",
+    "housing-prefecture-rankings.json",
+    "utilities-prefecture-rankings.json",
+    "clothing-footwear-prefecture-values.json",
+    "culture-recreation-prefecture-values.json",
+    "miscellaneous-prefecture-values.json",
+    "furniture-household-prefecture-values.json",
+    "food-prefecture-rankings.json",
+    "transport-communication-prefecture-values.json",
+    "healthcare-prefecture-values.json"
+  ],
+  "year": "2024",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug consumer-price-regional-gap --keys consumer-price-difference-index-overall,consumer-price-difference-index-education,consumer-price-difference-index-housing,consumer-price-difference-index-utilities,consumer-price-difference-index-clothing-footwear,consumer-price-difference-index-culture-recreation,consumer-price-difference-index-miscellaneous,consumer-price-difference-index-furniture-household,consumer-price-difference-index-food,consumer-price-difference-index-transport-communication,consumer-price-difference-index-healthcare --base docs/21_ブログ記事原稿 (取得後、指標ごとに最大値と最小値の差を算出し、差の大きい順に並べる)",
+  "generatedBy": "article-writer (2026-10-07・総合と10費目すべての差に作り直し)"
+}

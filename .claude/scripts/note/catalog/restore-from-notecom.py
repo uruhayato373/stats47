@@ -35,7 +35,7 @@ import httpx
 from markdownify import markdownify as html2md
 
 ROOT = Path(__file__).resolve().parents[4]
-INDEX = ROOT / ".claude/state/note-published-urls.json"
+INDEX = ROOT / "data/note/note-published-urls.json"
 UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
 TODAY = "2026-07-15"  # Date.now() は harness で使えないため固定
 
