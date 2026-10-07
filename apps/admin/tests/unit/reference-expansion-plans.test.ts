@@ -82,14 +82,15 @@ planSummary: "2指標の関係を検証する"
     const referenceThemeKeys = [
       ...new Set([...stateThemeKeys, ...manualThemeKeys]),
     ];
+    // テーマ定義の正本は data/themes/catalogs/*.json (2026-10-06 に TS から移した)
     const integratedText = [
-      'packages/data-configs/src/theme-catalog',
-      'packages/types/src/indicator-sets',
+      ['data/themes/catalogs', '.json'],
+      ['packages/types/src/indicator-sets', '.ts'],
     ]
-      .flatMap((rel) =>
+      .flatMap(([rel, ext]) =>
         fs
           .readdirSync(path.join(root, rel))
-          .filter((file) => file.endsWith('.ts'))
+          .filter((file) => file.endsWith(ext))
           .map((file) => fs.readFileSync(path.join(root, rel, file), 'utf8'))
       )
       .join('\n');
