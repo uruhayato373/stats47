@@ -12,3 +12,4 @@ export declare const PSI_URLS: string;
 export declare const LOCAL_RESOURCES: string;
 export declare const SOURCE_VAULT: string;
 export declare const YOY_BATCH: string;
+export declare const THEME_SELECTION_VIEWPOINTS: string;

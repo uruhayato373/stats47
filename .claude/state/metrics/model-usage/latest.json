@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-05T07:48:07.551Z",
+  "generatedAt": "2026-10-07T00:48:59.265Z",
   "window": {
     "weeks": 4,
     "subWeeks": [
@@ -18,6 +18,13 @@
   },
   "sources": {
     "local": [
+      {
+        "platform": "linux",
+        "generatedAt": "2026-10-07T00:48:58.941Z",
+        "weeks": [
+          "2026-W41"
+        ]
+      },
       {
         "platform": "mac",
         "generatedAt": "2026-10-05T07:48:07.280Z",
@@ -395,15 +402,15 @@
     },
     {
       "model": "claude-opus-5-5",
-      "effort": "medium",
-      "calls": 2293,
-      "costUsd": 260.0096
+      "effort": "xhigh",
+      "calls": 2216,
+      "costUsd": 292.3029
     },
     {
       "model": "claude-opus-5-5",
-      "effort": "xhigh",
-      "calls": 1629,
-      "costUsd": 184.6922
+      "effort": "medium",
+      "calls": 2588,
+      "costUsd": 288.4831
     },
     {
       "model": "claude-sonnet-5",
@@ -426,8 +433,14 @@
     {
       "model": "claude-fable-5-1",
       "effort": "high",
-      "calls": 150,
-      "costUsd": 37.267
+      "calls": 156,
+      "costUsd": 44.6232
+    },
+    {
+      "model": "claude-opus-5-5",
+      "effort": "high",
+      "calls": 217,
+      "costUsd": 30.1753
     },
     {
       "model": "claude-sonnet-5",
@@ -440,29 +453,23 @@
       "effort": "max",
       "calls": 246,
       "costUsd": 22.2377
-    },
-    {
-      "model": "claude-opus-5-5",
-      "effort": "high",
-      "calls": 95,
-      "costUsd": 9.5777
     }
   ],
   "ci": [
     {
       "workflow": "backlog-loop",
-      "runs": 20,
-      "items": 40,
-      "costUsd": 31.5616,
+      "runs": 18,
+      "items": 36,
+      "costUsd": 25.9459,
       "errors": 0,
       "models": {
-        "unknown": 20
+        "unknown": 18
       },
       "efforts": {
-        "unknown": 20
+        "unknown": 18
       },
-      "costPerRun": 1.5781,
-      "costPerItem": 0.789
+      "costPerRun": 1.4414,
+      "costPerItem": 0.7207
     },
     {
       "workflow": "improvement-cycle",
@@ -497,6 +504,21 @@
       "costPerItem": 1.1075
     },
     {
+      "workflow": "seo-keyword-cycle",
+      "runs": 2,
+      "items": 2,
+      "costUsd": 0.5294,
+      "errors": 0,
+      "models": {
+        "claude-sonnet-5-5": 2
+      },
+      "efforts": {
+        "high": 2
+      },
+      "costPerRun": 0.2647,
+      "costPerItem": 0.2647
+    },
+    {
       "workflow": "page-quality-review",
       "runs": 1,
       "items": 1,
@@ -510,21 +532,6 @@
       },
       "costPerRun": 0.3173,
       "costPerItem": 0.3173
-    },
-    {
-      "workflow": "seo-keyword-cycle",
-      "runs": 1,
-      "items": 1,
-      "costUsd": 0.2647,
-      "errors": 0,
-      "models": {
-        "claude-sonnet-5-5": 1
-      },
-      "efforts": {
-        "high": 1
-      },
-      "costPerRun": 0.2647,
-      "costPerItem": 0.2647
     }
   ],
   "canary": [

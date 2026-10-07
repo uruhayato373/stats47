@@ -50,6 +50,11 @@
       "import": "./scripts/validate-theme-catalog.ts",
       "require": "./scripts/validate-theme-catalog.ts"
     },
+    "./theme-selection-viewpoints": {
+      "types": "./src/theme-catalog/selection-viewpoints.ts",
+      "import": "./src/theme-catalog/selection-viewpoints.ts",
+      "require": "./src/theme-catalog/selection-viewpoints.ts"
+    },
     "./unit": {
       "types": "./src/unit/index.ts",
       "import": "./src/unit/index.ts",

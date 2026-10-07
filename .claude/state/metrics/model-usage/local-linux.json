@@ -1,0 +1,87 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-07T00:48:58.941Z",
+  "platform": "linux",
+  "pricing": {
+    "source": "https://platform.claude.com/docs/en/about-claude/pricing",
+    "observedAt": "2026-10-02"
+  },
+  "scan": {
+    "dirs": 1,
+    "transcripts": 1,
+    "skipped": 0,
+    "weeks": [
+      "2026-W41"
+    ]
+  },
+  "rows": [
+    {
+      "week": "2026-W41",
+      "scope": "main",
+      "agentType": "(main)",
+      "model": "claude-fable-5-1",
+      "effort": "high",
+      "runs": 0,
+      "calls": 6,
+      "tokens": {
+        "input": 132,
+        "output": 8239,
+        "cacheWrite5m": 0,
+        "cacheWrite1h": 323950,
+        "cacheRead": 1855775
+      },
+      "costUsd": 7.3562
+    },
+    {
+      "week": "2026-W41",
+      "scope": "main",
+      "agentType": "(main)",
+      "model": "claude-opus-5-5",
+      "effort": "high",
+      "runs": 0,
+      "calls": 122,
+      "tokens": {
+        "input": 244,
+        "output": 94746,
+        "cacheWrite5m": 0,
+        "cacheWrite1h": 897031,
+        "cacheRead": 57627491
+      },
+      "costUsd": 20.5976
+    },
+    {
+      "week": "2026-W41",
+      "scope": "main",
+      "agentType": "(main)",
+      "model": "claude-opus-5-5",
+      "effort": "medium",
+      "runs": 1,
+      "calls": 295,
+      "tokens": {
+        "input": 592,
+        "output": 171034,
+        "cacheWrite5m": 0,
+        "cacheWrite1h": 553464,
+        "cacheRead": 103113859
+      },
+      "costUsd": 28.4735
+    },
+    {
+      "week": "2026-W41",
+      "scope": "main",
+      "agentType": "(main)",
+      "model": "claude-opus-5-5",
+      "effort": "xhigh",
+      "runs": 0,
+      "calls": 587,
+      "tokens": {
+        "input": 1174,
+        "output": 426061,
+        "cacheWrite5m": 0,
+        "cacheWrite1h": 5789722,
+        "cacheRead": 263834967
+      },
+      "costUsd": 107.6107
+    }
+  ]
+}

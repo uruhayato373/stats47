@@ -5,6 +5,8 @@ import { Section } from "@/components/layout-primitives";
 import { PageHeading } from "@/components/ops/primitives";
 import { catalogAuditSummary } from "@/lib/server/catalog-audit";
 
+import { datasetDir } from "../../../../../config/datasets.mjs";
+
 export const dynamic = "force-dynamic";
 export const metadata = { title: "テーマカタログ監査 — stats47 admin" };
 
@@ -31,7 +33,7 @@ export default async function CatalogAuditPage({
     <div className="space-y-8">
       <PageHeading
         title="テーマカタログ監査"
-        source="packages/data-configs/src/theme-catalog/ (git TS SSOT)"
+        source={`${datasetDir("themes.catalogs")}/ (JSON SSOT)`}
       >
         <p className="mt-2 max-w-3xl text-sm text-console-muted">
           ThemeCatalog の指標選定根拠 (readerQuestion / adoptionCriteria / harmRelevance 等) の

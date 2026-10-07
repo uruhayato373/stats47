@@ -31,6 +31,8 @@ Theme brief
 - チャートpropsは `theme-component-builder`、新しい描画型は `chart-component-builder` に渡す。
 - `theme-portfolio-manager` は実測評価と実験台帳を持ち、カタログやUIを直接実装しない。
 - 新規metric候補は `.claude/todo/backlog.md` へ分離し、未検証IDを投入しない。
+- proposal の形 (Theme brief・表 1〜3・採用決定) は `theme-proposal-format.md`、判断の視点は
+  `config/theme-selection-viewpoints.json` を使う。localhost の視覚 QA は `.claude/scripts/themes/capture-theme-page.mjs`。
 
 ## Theme brief
 

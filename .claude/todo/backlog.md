@@ -2748,6 +2748,117 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - **未決**: SEO の日次系列 (`data/seo/rank-history/`・`selections/`) の保持期間 (`prune-state-snapshots.test.mjs` に「保持期間は未決」で宣言)。
 - **完了条件**: 上の日次・週次の定期実行がすべて新しい置き場へ書いた (期日 2026-10-13)。
 
+### [ESTAT-YEAR-AVAILABILITY-01] e-Stat の実在年を data/ の台帳で管理し、設定の years を「除外だけ」にする
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-07] [領域:データ]
+
+- **症状**: 有効な e-Stat 指標 1,535 件のうち 652 件の `years` に穴がある (604 件は「最初のまとまった年 + 飛んで最新年」の形)。
+  2026-10-07 に 604 件から 12 件を抜き取って e-Stat と照合し、10 件で設定の範囲内に実在する年が抜けていた
+  (例: 客室稼働率 e-Stat 2009〜2024 年 47 県に対し設定 2009〜2014・2024、地方債現在高 e-Stat 48 年に対し設定 13 年)。
+- **原因 (git 履歴と移行前のスクリプトで確認)**:
+  ① D1 時代 (〜2026-05) の取り込みが年を欠いた: 新規指標は `ingest-indicator.mjs` で最新年だけ、全年の取り直し
+  (`backfill-stats-prefecture.cjs`) は優先指標だけ、取り直しの失敗で年が消えた例もある (復元スクリプト `restore-from-r2-cache.cjs` の注記)。
+  ② 2026-05-28 の D1 → R2 移行 (`ba298ec5a`) で `export-from-d1.ts` の `detectYearSpec` が「D1 にあった年」から `years` を生成し、穴を固定した。
+  ③ 今も `page-data-batch.ts` の `inYearRange` が設定にない年を捨てるので穴が再生産され、年カバレッジ監査
+  (`listSingleYearEstatCandidates`) は登録年 1 年の設定しか見ない。`{from,to}` の `to` を延ばす仕組みも無く、新しい年が出ても捨てる (抜き取り 12 件では未発生)。
+  根本は `years` 1 つに「e-Stat にある年 (事実)」と「見せないと決めた年 (判断)」を混ぜ、両者を区別できないこと。
+- **設計 (2026-10-07 オーナーと合意した方向)**:
+  ① 実在年の台帳 `data/estat/availability/tables/<statsDataId>.json` を e-Stat から生成する (取り出し条件 1,526 通りごとに年 × 値のある都道府県数・取得日。
+  表全体の `time` 一覧は指標の年と一致しないので getStatsData の非 null で数える。表の更新日が変わった表だけ週次で取り直す)。
+  ② 設定は理由付きの除外だけを書く。③ 取り込みと `years` の読み手は「台帳 − 除外」を 1 つの関数で使う。④ 台帳に新しい年が出たら再取り込みを積む。
+- **第 1 段 (2026-10-07 実装・PR #1093、未マージ)**: `npm run build:estat-availability --workspace=@stats47/data-configs` が台帳と
+  `data/estat/availability/{LATEST.md,diff.json}` を作る。県の値を e-Stat から取り込む有効な metric 2,221 件 (143 表・2,219 条件・取得失敗 0) で、
+  取り込み忘れ 438 件 (テーマで使う 102)・新しい年 26・e-Stat に無い年 40・範囲より前にも年がある 739・差分なし 1,273・`years:"all"` 53・重複行 1
+  (`convenience-store-sales`、`timeScope` 未指定)。手で確かめた客室稼働率・簡易宿所数は報告と一致。R2 照合 5 件で、穴はそのまま配信されている
+  (客室稼働率 7 年・人口増減率 1 年) こと、「e-Stat に無い年」の年は R2 にも無い (設定だけが主張している) ことを確認した。
+  「e-Stat に無い年」は年の問題より取り出し条件の問題が多い (職業別年収 22 件は設定 2010 年〜だが条件 0003445758 は 2020 年〜、
+  人口増減率・65 歳以上割合は設定の国勢調査年が今の条件に無い)。
+- **第 2 段 (2026-10-07 実装・PR #1094、#1093 の上に積んだ draft)**: `years` は残し、事実 (台帳) と判断
+  (新しい `yearExclusions`、理由付き) に分けた。規則 `resolveLedgerYears` で `sync-estat-years.ts` が `years` を合わせ、
+  PR CI (`Metric Years Gate`) が `--check` でずれを止め、週次 `estat-year-coverage-audit-weekly.yml` が台帳を取り直して新しい年を足す。
+  移行で 894 件を書き換えた (年を足す 759: 穴 438・新しい年 26・1 年だけの設定の古い年 317 / 値の無い年を外す 40 /
+  未判断の除外を引き継ぐ 422)。一部の県だけの年 (95 件が配信中) は機械では変えない。dry-run 10 件が形状ゲートを通過。
+- **追加 (2026-10-07・PR #1094 に同梱)**: 市区町村の値も台帳に載せた (171 件・表 21。years は県の値で決めるので報告だけ:
+  設定の年に値が無い 68・設定に無い年に 9 割以上の値がある 34)。台帳を取り直すと表のメタ情報の控え (`data/estat/meta/`) も取り直し、
+  控えの無かった 88 表を足して 163 表すべてに控えがある。市区町村プロフィールが config の最新年をそのまま使い、cities.json に
+  その年が無い指標 (23 件) を落としていたので、値がある最新の年を使うよう直した。ページへの配線の残りは `YEARS-DOWNSTREAM-FOLLOW-01`。
+- **次**: ① PR #1094 は 2026-11-06 の d56 観測の後にマージする (マージ後最初の毎月 5 日の `data-refresh.yml` で 759 件に年が入り、
+  テーマで使う指標の推移が変わるため)。② LATEST.md の「未判断の除外」422 件を見て、根拠があれば reason を書き換え、無ければ除外を消して
+  `npm run sync:estat-years --workspace=@stats47/data-configs` で年を戻す。③ 単年の旧監査 (`audit-estat-year-coverage.ts` と
+  `YEAR-COV-*` の自動起票・`assert-year-coverage-batch.ts`) は一部の県だけの年の判断にしか使わなくなったので、backlog-loop との
+  つながりを外して廃止するかを決める。④ 市区町村の値 (`cities.json`) も台帳に載せるかを決める。
+- **禁止**: 確かめていない年を設定に書かない。外す年を `years` から手で消さない (`yearExclusions` に理由付きで書く)。R2 の再取り込みを承認なしに行わない。
+- **完了条件**: PR #1094 がマージされ、本番の R2 で客室稼働率が 2009〜2024 年の 16 年分を配信し、`LATEST.md` の 4 分類が 0 件のまま週次で保たれ、未判断の除外が 0 件になる (`years` は手で書く許可リストではなく台帳から機械で合わせる列にした)。
+- **関連**: `THEME-SINGLE-YEAR-CARDS-01` (単年カード 287 枚の多くはこの穴が原因)、`YEAR-COV-*` の自動起票 (第 2 段で台帳の差分に置き換える)。
+
+### [YEARS-DOWNSTREAM-FOLLOW-01] 指標の年が増えたあと、AI 解説・ブログ・計算型 metric・年固定の比較カードが古い年のまま残るのを直す
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-07] [領域:サイト]
+
+- **背景**: `ESTAT-YEAR-AVAILABILITY-01` で years を台帳から合わせると (PR #1094)、R2 の取り込み後に 759 件の年が増え、うち新しい年が出た指標は
+  最新年が変わる。2026-10-07 に配線を調べた結果、ランキング (`generate-ranking-items.ts` / `generate-ranking-values.ts` が観測行を years で絞る)・
+  テーマの推移図 (`fetch-db-chart-data.ts` が values.json を直接読む)・テーマの指標カード (`item.latestYear`)・エリアのデータブック
+  (`area-profile` task)・市区町村ランキングは、毎月の `data-refresh.yml` の全件実行で追従する。追従しないのは次の 4 つ。
+  ① ランキングの AI 解説 (FAQ・県別解説): 生成時の年を本文に焼き、キュー (`build-ai-content-queue.mjs` の `classify`) は監査に通れば
+  `done` にして最新年と比べないので、新しい年が来ても作り直されない。② ブログ: 本文・図・data JSON は書いた時点の年
+  (`fetch-ranking-data-r2.mjs`) のまま、本文中の `<source-link>` カードだけ最新年を出す (`/api/ranking-card/[rankingKey]`) ので、
+  1 本の記事に 2 つの年が並ぶ。検査 (`article-factual-check.mjs`) は記事内の data JSON とだけ比べる。③ 計算型 metric: sync-snapshots の
+  `ranking-items` が `calculated-stats` より先に走るので、`item.latestYear` が 1 回分遅れる (`run.sh`)。④ テーマの年固定の比較カード
+  (`comparisonYear`): 新しい年が来ても固定のまま (設計どおりだが、単年の延長で推移を描けるようになった指標もある → `THEME-SINGLE-YEAR-CARDS-01`)。
+- **実装 (2026-10-07・PR #1095 / #1096、draft)**: ① AI 解説はキューが解説の yearCode と values の最新年を比べ、違えば
+  `needs-regen` (reason `stale-year`) に戻す (初回実測で GSC 流入 1,504 件中 43 件)。③ `calculated-stats` を `ranking-items` の前へ移した。
+  ② ブログは blog snapshot に記事が使う指標と図の年 (`rankingRefs`) と逆引き `rankingArticleIndex` を焼き、日次で図の年が古い記事を
+  `data/blog/stale-data-years.{json,md}` に出す (次の sync-snapshots の blog task から有効)。同じ索引で、ランキング・テーマ・エリア・ブログを
+  「同じ指標を使う」関係で互いにつないだ (#1096。第四分類軸ではなく参照関係として `03_情報設計.md` に節を足した)。
+- **実装 2 (2026-10-07・PR #1097、draft、#1096 の上)**: ② ブログは `refresh-article-data-years.mjs` が `kind: ranking` の図
+  (data JSON が fetch-ranking-data-r2 の形) を最新年で data・source・SVG まで作り直し、本文で古い年を書いた行を出す。
+  是正キューに `data-refresh` レーン (must-fix の次) を足し、brushup の focus `最新データ更新` を取り直し → 本文 → critic の手順にした。
+  意図して古い年を描いた図は source.json の `yearPinnedReason` で外す。④ テーマの `comparisonYear` は起点の年とし、
+  全指標に値がそろう R2 の最新年 (`availableYears`) へ実行時に進める。実測: 公開 609 記事・図 1,596 枚のうち自動で取り直せる形が 959 枚、
+  今の本番で図の年が古いのは 21 記事・24 枚。
+- **次**: ① #1095 → #1096 → #1097 の順にマージし、sync-snapshots の blog task 後に `stale-data-years.md` の件数・
+  キューの `data-refresh` 件数・ランキングの関連記事を確かめる。② data-refresh レーンを `/brushup-blog --target queue` (focus `最新データ更新`) で
+  消化する。2026-10-07 に今の本番で図の年が古い 21 記事・24 枚を本文と照らした振り分け (年を固定すべき図は 0 枚):
+  - 図だけ取り直す (本文は新しい年を語る食い違い): `fiscal-health-50years-trend`・`fiscal-self-reliance-gap` (2022 年度の節に 1989 年の地図)
+  - 出典ファイルの年だけが誤り (data は本文と同じ年): `consumer-price-regional-gap` (source 2021・data 2024 = 最新。取り直すと source が直るだけ)、
+    `cc-estat-03-population-bar` (source 2023・data 2024。最新は 2025 なので下の書き直しも要る)
+  - 図を作り直す (説明と中身が違う): `healthy-life-expectancy-male-female-gap` の `healthy-life-expectancy-female-prefecture-rankings`
+    (alt は男女の散布図、中身は男性の棒グラフ。自動で取り直さない)
+  - 取り直して本文も書き直す (記事ごと古い年): `ai-claude-code-pref-analysis`・`area-ratio-prefecture-gap`・`cc-estat-02-search-skill`・
+    `cc-estat-04-aging-heatmap`・`cc-estat-13-agri-sankey` (図の alt だけ 2024 年になっている)・`cc-estat-20-publish`・
+    `dairy-cattle-hokkaido-monopoly`・`dairy-cattle-count` (2018 → 2025。タイトルも年を含む)・`engel-coefficient-vs-prefectural-income`・
+    `health-life-expectancy-structure`・`it-industry-concentration` (タイトルも年を含む)・`physical-therapist-annual-income-prefecture-gap`
+    (2023 年は順位が大きく入れ替わり結論から書き直し)・`real-disposable-income-reversal`・`school-teacher-annual-income-prefecture-gap`・
+    `sixth-industry-direct-sales`・`vacant-housing-vs-aging`。手順解説 (cc-estat・ai-claude-code) は本文に引用した AI の出力例の数値も直す
+  ③ 年が 1 年だけのカードを推移へ戻すかは `THEME-SINGLE-YEAR-CARDS-01` で扱う (比較カードの年は追従するようになった)。
+- **完了条件**: 新しい年が R2 に入った翌週に、AI 解説が新しい年で作り直しの対象になり、古い年のブログ記事が一覧と是正キューの
+  data-refresh レーンに出て、計算型のランキングが 1 回の data-refresh で新しい年を表示し、テーマの比較カードが新しい年を描く。
+
+### [THEME-SINGLE-YEAR-CARDS-01] 1 年分しかない指標のカード 287 枚を、年の拡張か年固定の比較カードへ振り分ける
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npx vitest run packages/data-configs/src/theme-catalog/__tests__/selection-viewpoints.test.ts] [起票:2026-10-07] [領域:データ]
+
+- **背景**: 管理画面 `/quality/theme-viewpoints` の視点 `single-year-as-trend` で、2026-10-07 時点 46 テーマ 287 枚のカードが
+  1 年分の指標だけを持ち、推移を描けない (カードには「単年データのため推移グラフはありません」と出る)。
+  多くは metric config の `years` が最新年だけに絞られた分で、年カバレッジ監査の要拡張候補 (`data/estat/year-coverage/LATEST.md`、
+  2026-10-03 時点 193 件) と重なる。その候補は `YEAR-COV-*` カードで 10 件ずつ処理しているが、テーマのカードに出る指標を先に回す仕組みが無い。
+- **次**: ① 287 枚の指標を年カバレッジ監査の結果と突き合わせ、「e-Stat に複数年ある (years を広げる)」「本当に 1 年だけ
+  (comparisonYear の比較カードにまとめる)」「未確認」に分ける。② 広げる分は `YEAR-COV-*` の処理順でテーマのカードに出る指標を先にする
+  (`sync-year-coverage-backlog.mjs` の並べ方を変えるか、テーマ別の提案で個別に扱うかを決める)。③ 比較カードにまとめる分は
+  テーマ別の提案 (`theme-proposal-format.md`) で扱う。
+- **禁止**: 確認していない年を `years` に書かない。R2 の観測値の再取得とデプロイは別の承認で行う。
+- **完了条件**: `/quality/theme-viewpoints` の `single-year-as-trend` の件数が、振り分け ① の「本当に 1 年だけ」の件数以下になっている。
+- **関連**: 年の穴の根本対応は `ESTAT-YEAR-AVAILABILITY-01`。そちらの第 1 段の差分報告を ① の振り分けに使う。
+
+### [SEO-META-FROM-VALUES-01] ランキングの seoTitle / seoDescription に観測値を直書きするのをやめ、値から生成する
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:npm run validate:config --workspace=@stats47/data-configs] [起票:2026-10-07] [領域:サイト]
+
+- **背景**: metric config 2,606 件のうち 1,915 件の `seoTitle` / `seoDescription` が「1位東京都（113,685,917百万円）」のように
+  1 位の県と値を直書きしている (2026-10-07 実測)。builder はこれをそのまま `item.json` に焼くので、年を広げたり値を取り直したりするたびに
+  検索結果の文言が古い値のまま残る。`audit-seo-meta-facts.ts` は食い違いを見つけるだけで直さない。
+- **次**: ① 直書きの型を分類する (年・1 位・最下位・倍率)。② builder (`build-ranking-item-from-metric.ts`) が R2 の値から
+  同じ型の文言を作る関数を用意し、config には値を含まない雛形か上書きだけを残す。③ 既存 1,915 件を一括で雛形へ置き換え、
+  検索結果の文言が変わる件数を事前に出してオーナーの承認を取る (タイトルの変更は検索順位に影響しうる)。
+- **禁止**: 承認前に R2 の item.json を一括で書き換えない。
+- **完了条件**: config の `seoTitle` / `seoDescription` に観測値を含むものが 0 件になり、item.json の文言が最新の値と一致する。
+
 ### [THEME-CATALOG-OPT-RELEASE-01] aging-society・fishery-marine・local-economy の改善と章順・カード見出しの横断修正を、9 月の実験の d56 観測後に本番へ出す
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:node .claude/scripts/themes/validate-theme-state.mjs] [起票:2026-10-06] [期日:2026-11-13] [領域:データ]
 

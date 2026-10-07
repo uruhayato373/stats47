@@ -16,6 +16,7 @@ import {
 } from "../population-pyramid-deps";
 import type { CatalogChart } from "../types";
 import migrationContract from "./fixtures/series-ref-migration-contract.json";
+import catalogBaseline from "../../../../../.claude/config/theme-catalog-baseline.json";
 
 /**
  * WP4 — 依存抽出の共通 collector。
@@ -43,8 +44,8 @@ describe("① 期待依存集合が完全に列挙できる (baseline lock)", ()
   it("総 request / distinct request を固定 (移行で動いたら更新)", () => {
     expect(live.totalRequests).toBe(0);
     expect(live.distinctRequests).toEqual([]);
-    expect(live.totalMetricRefs).toBe(146);
-    expect(live.distinctMetricKeys).toHaveLength(142);
+    expect(live.totalMetricRefs).toBe(catalogBaseline.counts.totalMetricRefs);
+    expect(live.distinctMetricKeys).toHaveLength(catalogBaseline.counts.distinctMetricKeys);
   });
 
   it("R2へ移行済みの系列も metricKey 依存として列挙する", () => {
@@ -59,7 +60,7 @@ describe("① 期待依存集合が完全に列挙できる (baseline lock)", ()
     const expected = [
       ...new Set([...preexisting, ...migrationContract.flatMap((row) => row.metricKeys)]),
     ].sort();
-    expect(live.totalMetricRefs).toBe(146);
+    expect(live.totalMetricRefs).toBe(catalogBaseline.counts.totalMetricRefs);
     for (const key of expected) expect(live.distinctMetricKeys).toContain(key);
     expect(
       live.perChart.find((chart) => chart.componentKey === "theme-occ-medical-trend")
@@ -244,9 +245,9 @@ describe("⑤ 依存ミラー — 決定的・正典と byte 一致する形 (au
     expect(mirror.totalRequests).toBe(0);
     expect(mirror.distinctRequests).toBe(0);
     expect(mirror.requests).toEqual([]);
-    expect(mirror.totalMetricRefs).toBe(146);
-    expect(mirror.distinctMetricRefs).toBe(142);
-    expect(mirror.metrics).toHaveLength(142);
+    expect(mirror.totalMetricRefs).toBe(catalogBaseline.counts.totalMetricRefs);
+    expect(mirror.distinctMetricRefs).toBe(catalogBaseline.counts.distinctMetricKeys);
+    expect(mirror.metrics).toHaveLength(catalogBaseline.counts.distinctMetricKeys);
     const keys = mirror.requests.map((r) => r.key);
     expect(keys).toEqual([...keys].sort());
     // 各 request は audit が e-Stat に送れる形 (statsDataId + filters)

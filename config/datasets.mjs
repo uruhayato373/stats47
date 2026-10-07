@@ -128,6 +128,7 @@ export const DATASETS = [
   d("note.hashtags", "config/note-hashtags/{name}.json", "config", "product", "config", "note 記事ごとの承認済みハッシュタグ (人が判断して決める値)"),
   d("themes.catalogs", "data/themes/catalogs/{name}.json", "config", "data", "data", "テーマページの指標・チャート・章・選定根拠の定義 (1 テーマ 1 ファイル。表示の SSOT)"),
   d("themes.catalog-schema", "data/themes/schema/theme-catalog.schema.json", "config", "data", "data", "上の定義の JSON Schema"),
+  d("themes.selection-viewpoints", P.THEME_SELECTION_VIEWPOINTS, "config", "data", "config", "テーマの指標を選ぶ視点 (採用基準の定義・判断規則と機械検査の対応。人が判断して変える値)"),
   d("seo.keywords", "data/seo/keywords.json", "state", "site", "data", "キーワード改善サイクルの対象キーワード"),
   d("seo.selections", "data/seo/selections/{date}.json", "series", "site", "data", "週ごとの対象キーワードの選定"),
   d("seo.rank-history", "data/seo/rank-history/{date}.json", "series", "site", "data", "対象キーワードの順位の観測"),
