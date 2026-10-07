@@ -127,6 +127,7 @@
 - [feedback_worktree_junction_deletes_target.md](feedback_worktree_junction_deletes_target.md) — worktreeへnode_modulesのjunctionを張るとgit worktree remove --forceが本体のapps/*/node_modulesを消す(2026-09-16実害)。junctionはcmd /c rmdirで外してから削除
 - [feedback_worktree_symlinked_node_modules_resolve_main.md](feedback_worktree_symlinked_node_modules_resolve_main.md) — worktreeのnode_modulesを本体へ丸ごとsymlinkすると@stats47/*が本体packagesを指し、型検査が本体のコードで判定される。@stats47だけworktreeへ張り直す
 - [feedback_cloud_session_workflow_dispatch_403.md](feedback_cloud_session_workflow_dispatch_403.md) — クラウドセッションのGitHub MCPはworkflow_dispatchが403。data/workflow-dispatch-requests.jsonをdevelopへpushすればproxyが代理起動する
+- [feedback_review_agent_ran_cloud_write.md](feedback_review_agent_ran_cloud_write.md) — 記事のコード例を確かめるsubagentが環境のCLOUDFLARE_API_TOKENでwrangler r2 object put --remoteを実行(403)。手順解説の検証を頼むpromptに外部へ書くコマンドの禁止を書く
 - [feedback_x_scheduled_bulk_delete.md](feedback_x_scheduled_bulk_delete.md) — X予約の一括削除は描画中の7〜8件しか消えない。台帳キーで選択→削除→読み直しを残件0まで繰り返す
 - [project_sns_scheduling_limits.md](project_sns_scheduling_limits.md) — X予約は重み付き280(日本語=2・URL=23)でlint char_maxより厳しい。Threads Web予約は同時25件まで(残りはTHREADS-TOPUP-01で補充)
 - [project_page_quality_ui_review.md](project_page_quality_ui_review.md) — 週次ページ品質=全URL静的+代表7幅スクショ+Claude確認。生データはR2 state/page-quality/(git禁止)。SNS予約画像はMac launchd週次
