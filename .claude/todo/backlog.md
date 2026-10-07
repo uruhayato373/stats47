@@ -330,8 +330,16 @@ updated: 2026-10-06
   1. ~~配線~~ 2026-10-07 に済み: quality-gate が `check-blog-background.ts` (判定は `lib/blog-background-status.ts`) で、送り箱の記事に今の内容に合う背景が無ければ Codex の手順を示して止める
   2. 集約: 背景を選ぶ処理 (git の記事固有背景 > 旧 Codex カタログ > 公開済み AI 背景の再利用) と案内文を `lib/blog-background-status.ts` にまとめ、`generate-blog-thumbnails.ts` と `-cloud.ts` から呼ぶ (背景の記録を読む `backgroundRecord` は移し済み)
   3. 撤去: 未移行の記事を `blog-images:codex queue` (Mode B) で git の背景へ移し、R2 の Gemini 背景が 0 件になったら Gemini の client・cache・ビジュアルカタログ・`gemini-image-run.yml` の blog 部分と規約の Gemini の記述を同じ差分で消す。旧 Codex カタログも記事固有背景へ寄せる
+- **追記 (2026-10-07)**: Codex で作った 5 枚のうち 3 枚 (cc-estat-20-publish・dairy-cattle-hokkaido-monopoly・sixth-industry-direct-sales) で、左の文字用の余白不足と禁止のチャートの描き込みをオーナーが目視で見つけたが、`check:blog-images` と `check-blog-background.ts` は寸法と形式しか見ず検出しなかった。左 55% の余白 (例: 左側の画素のばらつき・エッジ量のしきい値) を機械で測る検査を足すか検討する。fiscal-self-reliance-gap は R2 の背景の SHA が HEAD metadata と食い違い、公開 run を fatal で止めた (quality-gate の検査は公開 URL しか読まないので検出できない)。この記事も記事固有背景で直す。
 - **停止条件**: 3 の画像生成は Codex が要る (クラウド環境では codex MCP が接続できない)。生成はオーナーのローカルで回す。
 - **完了条件**: 1 は背景の無い送り箱の記事で quality-gate が止まることをテストで固定。2 は背景の選択と案内文の実装が 1 か所。3 は `queue` の targets が 0 で、リポジトリに Gemini の生成コードが無い。
+
+### [DEBT-CHECK-GITIGNORED-SCAN-01] check-maintenance-debt が git 管理外 (gitignore 済み) のファイルまで走査して commit を止める
+タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [検証:node .claude/scripts/lib/check-maintenance-debt.cjs --baseline] [起票:2026-10-07] [領域:管理]
+
+- **事象 (2026-10-07)**: オーナーのローカルで、ブログ背景 5 枚だけの commit が pre-commit の `[UNBOUNDED_LEGACY] apps/remotion/pnpm-lock.yaml:866 deprecated に期限・削除条件がない` で止まった。このファイルは `.gitignore` (50 行目 `pnpm-lock.yaml`) の対象で git に無い。`.claude/scripts/lib/check-maintenance-debt.cjs` の `walk()` が `fs.readdirSync` でディスクを辿り、除外は名前 (`node_modules` など) と `apps/remotion/build` だけなので、手元にある管理外のファイルの内容で commit が止まる。
+- **次**: 走査対象を `git ls-files --cached --others --exclude-standard` (追跡中と、無視されていない未追跡) に変える。git が使えない環境の扱いを決める。
+- **完了条件**: gitignore 済みのファイルに `deprecated` を書いても検査が通り、追跡中のファイルでは今までどおり止まることをテストで固定している。
 
 ### [BLOG-OUTBOX-CONTENTS-01] ブログの公開待ち原稿の置き場を docs/21 から contents/ へ移す
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-10-07] [領域:サイト]
