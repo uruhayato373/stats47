@@ -139,3 +139,4 @@
 - [feedback_note_hashtag_api_quirks.md](feedback_note_hashtag_api_quirks.md) — noteタグ: 同一秒タグは順不同(集合で照合)・大小文字を既存タグに書換・α等は黙って削除・限定公開無料記事はPUT本文が全文でライン位置が公開範囲
 - [feedback_workflow_policy_comment_import.md](feedback_workflow_policy_comment_import.md) — audit-workflow-policy はコメント内の `from "x"` も依存と数え SCRIPT_RUN_WITHOUT_INSTALL を誤検出する。共通モジュールの使用例は散文で書く
 - [feedback_help_flag_runs_script.md](feedback_help_flag_runs_script.md) — 自作スクリプトの多くは --help を無視して本処理を実行する (2026-10-06 に blog outbox を誤生成)。確認は node --check / tsc / import のみの 1 行で
+- [feedback_blog_background_codex_only.md](feedback_blog_background_codex_only.md) — ブログ背景は Codex (generate-blog-images Mode A・送り箱は --article) で git に置く。Gemini で作り直さない。課金や公開を起こす依頼ファイルはコードの commit と別 push にする
