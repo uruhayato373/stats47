@@ -16,7 +16,7 @@ export const cityGasSupplyAreaHouseholds: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2016,
+    "from": 1975,
     "to": 2016,
   },
   "yearFormat": "fiscal",

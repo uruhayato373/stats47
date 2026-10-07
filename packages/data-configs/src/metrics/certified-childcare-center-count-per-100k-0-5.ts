@@ -16,7 +16,7 @@ export const certifiedChildcareCenterCountPer100k05: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2024,
+    "from": 2015,
     "to": 2024,
   },
   "yearFormat": "fiscal",

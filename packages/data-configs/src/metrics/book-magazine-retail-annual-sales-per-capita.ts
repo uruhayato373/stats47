@@ -17,8 +17,18 @@ export const bookMagazineRetailAnnualSalesPerCapita: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2006,
-    "to": 2006,
+    "years": [
+      1975,
+      1978,
+      1981,
+      1984,
+      1987,
+      1990,
+      1993,
+      1996,
+      2001,
+      2006,
+    ],
   },
   "yearFormat": "fiscal",
   "visualization": {

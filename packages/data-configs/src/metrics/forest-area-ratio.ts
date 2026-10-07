@@ -16,8 +16,15 @@ export const forestAreaRatio: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2019,
-    "to": 2019,
+    "years": [
+      1980,
+      1984,
+      1990,
+      2000,
+      2009,
+      2014,
+      2019,
+    ],
   },
   "yearFormat": "fiscal",
   "visualization": {

@@ -16,7 +16,7 @@ export const cityWardAssemblyMembers: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2024,
+    "from": 2001,
     "to": 2024,
   },
   "yearFormat": "fiscal",

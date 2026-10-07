@@ -16,7 +16,7 @@ export const artificialForestArea: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2007,
+    "from": 2000,
     "to": 2007,
   },
   "yearFormat": "fiscal",

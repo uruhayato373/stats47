@@ -17,7 +17,7 @@ export const newHireCount: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2021,
+    "from": 2014,
     "to": 2021,
   },
   "yearFormat": "calendar",

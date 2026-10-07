@@ -25,6 +25,7 @@ import {
   diffYearAvailability,
   expandYearSpec,
   formatYearList,
+  YEAR_EXCLUSION_INHERITED,
   type EstatAvailabilityEntry,
   type EstatAvailabilityQuery,
   type EstatAvailabilityTable,
@@ -42,7 +43,7 @@ const DEFAULT_CONCURRENCY = 3;
 const REQUEST_GAP_MS = 200;
 const REPORT_ROWS = 40;
 
-interface Target {
+export interface Target {
   config: MetricConfig;
   src: EstatSource;
   query: EstatAvailabilityQuery;
@@ -50,7 +51,7 @@ interface Target {
 }
 
 /** 県の値を e-Stat から取り込む有効な metric と、取り込みが投げる条件。 */
-function collectTargets(): Target[] {
+export function collectTargets(): Target[] {
   const targets: Target[] = [];
   for (const config of listAllMetrics()) {
     if (!config.isActive || !config.entities.includes("prefecture")) continue;
@@ -224,6 +225,10 @@ interface MetricDiffRow extends Partial<YearAvailabilityDiff> {
   ledgerYears?: string;
   /** 全県の数 (最も多く値が出た年の県の数) */
   fullCount?: number;
+  /** 移行時に引き継いだだけで、まだ判断していない除外の年 */
+  inheritedExclusions?: number[];
+  /** 理由を書いて判断した除外の年 */
+  judgedExclusions?: number[];
   error?: string;
   themes: string[];
 }
@@ -247,15 +252,20 @@ function themeIndex(): Map<string, string[]> {
   return index;
 }
 
+/** 台帳を「表 → 取り出し条件のキー → 行」で読む。 */
+export function loadLedgerEntries(): Map<string, Map<string, EstatAvailabilityEntry>> {
+  const tables = new Map<string, Map<string, EstatAvailabilityEntry>>();
+  if (!existsSync(TABLE_DIR)) return tables;
+  for (const file of readdirSync(TABLE_DIR).filter((f) => f.endsWith(".json"))) {
+    const table = JSON.parse(readFileSync(resolve(TABLE_DIR, file), "utf8")) as EstatAvailabilityTable;
+    tables.set(table.statsDataId, new Map(table.queries.map((e) => [availabilityQueryKey(e.query), e])));
+  }
+  return tables;
+}
+
 function buildReport(targets: readonly Target[]): { rows: Record<string, MetricDiffRow>; generatedAt: string } {
   const themes = themeIndex();
-  const tables = new Map<string, Map<string, EstatAvailabilityEntry>>();
-  if (existsSync(TABLE_DIR)) {
-    for (const file of readdirSync(TABLE_DIR).filter((f) => f.endsWith(".json"))) {
-      const table = JSON.parse(readFileSync(resolve(TABLE_DIR, file), "utf8")) as EstatAvailabilityTable;
-      tables.set(table.statsDataId, new Map(table.queries.map((e) => [availabilityQueryKey(e.query), e])));
-    }
-  }
+  const tables = loadLedgerEntries();
 
   const rows: Record<string, MetricDiffRow> = {};
   for (const t of [...targets].sort((a, b) => a.config.key.localeCompare(b.config.key))) {
@@ -285,10 +295,14 @@ function buildReport(targets: readonly Target[]): { rows: Record<string, MetricD
       rows[t.config.key] = { ...base, status: "years-all", configYears: configText, ledgerYears: ledgerText, fullCount };
       continue;
     }
+    const exclusions = t.config.yearExclusions ?? [];
+    const inherited = exclusions.filter((e) => e.reason === YEAR_EXCLUSION_INHERITED).flatMap((e) => e.years);
+    const judged = exclusions.filter((e) => e.reason !== YEAR_EXCLUSION_INHERITED).flatMap((e) => e.years);
     const diff = diffYearAvailability({
       configYears,
       ledgerYears,
       suppliedYears: (t.config.supplementalSources ?? []).flatMap((s) => s.years),
+      excludedYears: [...inherited, ...judged],
     });
     const hasDiff = CATEGORIES.some((c) => diff[c.id].length > 0);
     rows[t.config.key] = {
@@ -298,6 +312,8 @@ function buildReport(targets: readonly Target[]): { rows: Record<string, MetricD
       ledgerYears: ledgerText,
       fullCount,
       ...diff,
+      ...(inherited.length > 0 ? { inheritedExclusions: inherited } : {}),
+      ...(judged.length > 0 ? { judgedExclusions: judged } : {}),
     };
   }
   return { rows, generatedAt: new Date().toISOString() };
@@ -330,8 +346,12 @@ function writeReport(targets: readonly Target[]): void {
     fetchError: count("fetch-error"),
     truncated: count("truncated"),
     duplicateRows: count("duplicate-rows"),
+    inheritedExclusions: all.filter(([, r]) => r.inheritedExclusions).length,
+    judgedExclusions: all.filter(([, r]) => r.judgedExclusions).length,
   };
-  const kept = Object.fromEntries(all.filter(([, r]) => r.status !== "clean" && r.status !== "years-all"));
+  const kept = Object.fromEntries(
+    all.filter(([, r]) => (r.status !== "clean" && r.status !== "years-all") || r.inheritedExclusions || r.judgedExclusions),
+  );
   mkdirSync(OUT_DIR, { recursive: true });
   writeFileSync(resolve(OUT_DIR, "diff.json"), `${JSON.stringify({ generatedAt, summary, metrics: kept }, null, 2)}\n`);
 
@@ -356,6 +376,13 @@ function writeReport(targets: readonly Target[]): void {
     ];
   };
   const failures = all.filter(([, r]) => ["no-ledger", "fetch-error", "truncated", "duplicate-rows"].includes(r.status));
+  const unjudged = all
+    .filter(([, r]) => r.inheritedExclusions)
+    .sort(([ka, a], [kb, b]) =>
+      (b.themes.length > 0 ? 1 : 0) - (a.themes.length > 0 ? 1 : 0) ||
+      (b.inheritedExclusions?.length ?? 0) - (a.inheritedExclusions?.length ?? 0) ||
+      ka.localeCompare(kb),
+    );
 
   const md = [
     "# e-Stat の実在年と metric config の years の差分 (LATEST)",
@@ -367,7 +394,9 @@ function writeReport(targets: readonly Target[]): void {
       "`years` で絞らずに年ごとの値のある県を数えたもの",
     "- 全県: その条件で最も多く値が出た年の県の数 (港湾・漁業のように 47 県がそろわない統計があるため 47 に固定しない)。" +
       "一部の県だけの年は分類に入れない (diff.json の `partial`)",
-    "- 作り直し: `npx tsx packages/data-configs/scripts/build-estat-availability.ts` (`--offline` で報告だけ)",
+    "- 作り直し: `npx tsx packages/data-configs/scripts/build-estat-availability.ts` (`--offline` で報告だけ)。" +
+      "差分は `npx tsx packages/data-configs/scripts/sync-estat-years.ts` が years に反映する",
+    "- `yearExclusions` に書いた年は判断済みとして差分に数えない",
     "",
     "## 件数",
     "",
@@ -377,10 +406,31 @@ function writeReport(targets: readonly Target[]): void {
     `| 差分なし | ${summary.clean} | 設定の年が全県の値のある年と一致する |`,
     `| years: "all" | ${summary.yearsAll} | 許可リストが無く、取り込みは e-Stat の全年を使う |`,
     `| 台帳なし・取得失敗・打ち切り・重複行 | ${failures.length} | 差分を比べていない (下の表。取得失敗は次の実行で取り直し、打ち切りと重複行は metric config の軸を直す) |`,
+    `| 未判断の除外 | ${summary.inheritedExclusions} | 移行時に当時の years から引き継いだ除外。根拠を書くか、外して年を戻す (下の表) |`,
+    `| 理由付きの除外 | ${summary.judgedExclusions} | 判断して書いた除外 |`,
     "",
     "1 つの指標が複数の分類に入ることがある。",
     "",
     ...CATEGORIES.flatMap(section),
+    `## 未判断の除外 (${unjudged.length} 件)`,
+    "",
+    ...(unjudged.length === 0
+      ? ["なし", ""]
+      : [
+          "全県の値があるのに、2026-10 の移行時の years に無かったので除外として残した年。基準の切り替え・5 年おきの揃えなどの根拠があれば" +
+            " `yearExclusions` の reason を具体的に書き換え、無ければ除外を消して `sync-estat-years.ts` で年を戻す。" +
+            `テーマで使う指標を先に、除外の年の多い順。${unjudged.length > REPORT_ROWS ? `上位 ${REPORT_ROWS} 件 (全件は diff.json)。` : ""}`,
+          "",
+          "| 指標 | 表 | 設定の年 | 除外している年 | テーマ |",
+          "|---|---|---|---|---|",
+          ...unjudged
+            .slice(0, REPORT_ROWS)
+            .map(
+              ([key, r]) =>
+                `| \`${key}\` | ${r.statsDataId} | ${r.configYears} | ${formatYearList(r.inheritedExclusions ?? [])} | ${r.themes.join(", ")} |`,
+            ),
+          "",
+        ]),
     "## 台帳なし・取得失敗・打ち切り・重複行",
     "",
     ...(failures.length === 0

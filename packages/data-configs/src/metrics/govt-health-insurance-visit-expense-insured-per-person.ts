@@ -20,6 +20,28 @@ export const govtHealthInsuranceVisitExpenseInsuredPerPerson: MetricConfig = {
     "from": 2000,
     "to": 2007,
   },
+  "yearExclusions": [
+    {
+      "years": [
+        1985,
+        1986,
+        1987,
+        1988,
+        1989,
+        1990,
+        1991,
+        1992,
+        1993,
+        1994,
+        1995,
+        1996,
+        1997,
+        1998,
+        1999,
+      ],
+      "reason": "2026-10 の移行時に当時の years から引き継いだ除外 (まだ判断していない。根拠が無ければ外して年を戻す)",
+    },
+  ],
   "yearFormat": "fiscal",
   "visualization": {
     "colorScheme": "interpolateBlues",

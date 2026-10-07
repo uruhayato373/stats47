@@ -16,7 +16,7 @@ export const finalEnergyConsumptionPerCapita: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2022,
+    "from": 2007,
     "to": 2022,
   },
   "yearFormat": "fiscal",

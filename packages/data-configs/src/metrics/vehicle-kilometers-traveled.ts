@@ -16,8 +16,14 @@ export const vehicleKilometersTraveled: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2005,
-    "to": 2005,
+    "years": [
+      1980,
+      1985,
+      1990,
+      1994,
+      1999,
+      2005,
+    ],
   },
   "yearFormat": "fiscal",
   "visualization": {

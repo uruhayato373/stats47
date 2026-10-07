@@ -17,7 +17,7 @@ export const regularCashSalaryFemalePre2019: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2019,
+    "from": 1975,
     "to": 2019,
   },
   "yearFormat": "fiscal",

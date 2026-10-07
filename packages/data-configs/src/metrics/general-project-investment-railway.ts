@@ -20,6 +20,14 @@ export const generalProjectInvestmentRailway: MetricConfig = {
     "from": 1976,
     "to": 2006,
   },
+  "yearExclusions": [
+    {
+      "years": [
+        1975,
+      ],
+      "reason": "2026-10 の移行時に当時の years から引き継いだ除外 (まだ判断していない。根拠が無ければ外して年を戻す)",
+    },
+  ],
   "yearFormat": "fiscal",
   "visualization": {
     "colorScheme": "interpolateBlues",

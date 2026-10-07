@@ -19,7 +19,7 @@ export const disposableIncomeWorkerHouseholds: MetricConfig = {
   ],
   "years": {
     "from": 1975,
-    "to": 2024
+    "to": 2025,
   },
   "yearFormat": "fiscal",
   "visualization": {

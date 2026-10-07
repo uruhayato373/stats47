@@ -18,8 +18,8 @@ export const consumerPriceDifferenceIndexOverallExclRent: MetricConfig = {
     "prefecture"
   ],
   "years": {
-    "from": 2024,
-    "to": 2024
+    "from": 2013,
+    "to": 2024,
   },
   "yearFormat": "fiscal",
   "visualization": {

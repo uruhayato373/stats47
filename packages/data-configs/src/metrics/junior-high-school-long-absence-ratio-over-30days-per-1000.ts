@@ -16,20 +16,8 @@ export const juniorHighSchoolLongAbsenceRatioOver30daysPer1000: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "years": [
-      1991,
-      1992,
-      1993,
-      1994,
-      1995,
-      1996,
-      1997,
-      1998,
-      1999,
-      2000,
-      2001,
-      2023,
-    ],
+    "from": 1991,
+    "to": 2023,
   },
   "yearFormat": "fiscal",
   "visualization": {

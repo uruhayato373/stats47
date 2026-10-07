@@ -16,7 +16,7 @@ export const waterSupplyAnnualVolume: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2022,
+    "from": 2000,
     "to": 2022,
   },
   "yearFormat": "fiscal",

@@ -22,6 +22,23 @@ export const convenienceStoreCountPer100k: MetricConfig = {
       2014,
     ],
   },
+  "yearExclusions": [
+    {
+      "years": [
+        1982,
+        1985,
+        1988,
+        1991,
+        1994,
+        1997,
+        1999,
+        2002,
+        2004,
+        2007,
+      ],
+      "reason": "2026-10 の移行時に当時の years から引き継いだ除外 (まだ判断していない。根拠が無ければ外して年を戻す)",
+    },
+  ],
   "yearFormat": "fiscal",
   "visualization": {
     "colorScheme": "interpolateBlues",

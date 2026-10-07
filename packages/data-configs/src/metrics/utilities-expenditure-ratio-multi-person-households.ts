@@ -16,14 +16,8 @@ export const utilitiesExpenditureRatioMultiPersonHouseholds: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "years": [
-      2000,
-      2001,
-      2002,
-      2003,
-      2004,
-      2024,
-    ],
+    "from": 2000,
+    "to": 2024,
   },
   "yearFormat": "fiscal",
   "visualization": {

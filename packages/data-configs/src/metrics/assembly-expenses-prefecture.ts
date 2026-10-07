@@ -17,7 +17,7 @@ export const assemblyExpensesPrefecture: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2022,
+    "from": 2010,
     "to": 2022,
   },
   "yearFormat": "fiscal",

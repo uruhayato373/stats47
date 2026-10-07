@@ -18,7 +18,7 @@ export const activeJobOpeningRatio: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2022,
+    "from": 1975,
     "to": 2022,
   },
   "yearFormat": "fiscal",

@@ -20,7 +20,7 @@ export const femaleScheduledEarnings: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2022,
+    "from": 2021,
     "to": 2022,
   },
   "yearFormat": "calendar",

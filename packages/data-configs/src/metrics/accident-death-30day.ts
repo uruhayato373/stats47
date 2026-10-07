@@ -17,7 +17,7 @@ export const accidentDeath30day: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2018,
+    "from": 2016,
     "to": 2018,
   },
   "yearFormat": "fiscal",

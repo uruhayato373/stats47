@@ -17,7 +17,7 @@ export const perChildStudentSpecialSupportSchoolExpenditurePrefMunicipal: Metric
     "prefecture",
   ],
   "years": {
-    "from": 2022,
+    "from": 2007,
     "to": 2022,
   },
   "yearFormat": "fiscal",

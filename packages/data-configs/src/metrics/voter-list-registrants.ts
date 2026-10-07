@@ -16,21 +16,21 @@ export const voterListRegistrants: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "years": [
-      2006,
-      2007,
-      2008,
-      2009,
-      2010,
-      2011,
-      2012,
-      2013,
-      2014,
-      2015,
-      2016,
-      2024,
-    ],
+    "from": 2006,
+    "to": 2024,
   },
+  "yearExclusions": [
+    {
+      "years": [
+        2001,
+        2002,
+        2003,
+        2004,
+        2005,
+      ],
+      "reason": "2026-10 の移行時に当時の years から引き継いだ除外 (まだ判断していない。根拠が無ければ外して年を戻す)",
+    },
+  ],
   "yearFormat": "fiscal",
   "visualization": {
     "colorScheme": "interpolateBlues",

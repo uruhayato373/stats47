@@ -16,15 +16,8 @@ export const roomUtilizationRate: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "years": [
-      2009,
-      2010,
-      2011,
-      2012,
-      2013,
-      2014,
-      2024,
-    ],
+    "from": 2009,
+    "to": 2024,
   },
   "yearFormat": "fiscal",
   "visualization": {

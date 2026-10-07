@@ -17,21 +17,8 @@ export const welfareOfficeIntellectualDisabilityConsultationsPer100k: MetricConf
     "prefecture",
   ],
   "years": {
-    "years": [
-      1975,
-      1976,
-      1977,
-      1978,
-      1979,
-      1980,
-      1981,
-      1982,
-      1983,
-      1984,
-      1985,
-      1986,
-      2002,
-    ],
+    "from": 1975,
+    "to": 2002,
   },
   "yearFormat": "fiscal",
   "visualization": {

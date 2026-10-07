@@ -16,7 +16,7 @@ export const airCargoTransport: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2023,
+    "from": 1985,
     "to": 2023,
   },
   "yearFormat": "fiscal",

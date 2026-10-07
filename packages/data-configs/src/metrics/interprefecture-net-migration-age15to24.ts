@@ -16,7 +16,7 @@ export const interprefectureNetMigrationAge15to24: MetricConfig = {
   unit: '人',
   category: 'population',
   years: {
-    from: 2025,
+    from: 2020,
     to: 2025,
   },
   source: {

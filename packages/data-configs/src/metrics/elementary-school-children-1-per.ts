@@ -17,7 +17,7 @@ export const elementarySchoolChildren1Per: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2024,
+    "from": 1998,
     "to": 2024,
   },
   "yearFormat": "fiscal",

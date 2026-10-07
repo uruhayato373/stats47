@@ -18,11 +18,33 @@ export const annualSalesAmount: MetricConfig = {
     "city",
   ],
   "years": {
-    "years": [
-      2020,
-      2022,
-    ],
+    "from": 2020,
+    "to": 2023,
   },
+  "yearExclusions": [
+    {
+      "years": [
+        1975,
+        1978,
+        1981,
+        1984,
+        1987,
+        1990,
+        1993,
+        1996,
+        1998,
+        2001,
+        2003,
+        2006,
+        2011,
+        2013,
+        2015,
+        2018,
+        2019,
+      ],
+      "reason": "2026-10 の移行時に当時の years から引き継いだ除外 (まだ判断していない。根拠が無ければ外して年を戻す)",
+    },
+  ],
   "yearFormat": "fiscal",
   "visualization": {
     "colorScheme": "interpolateBlues",

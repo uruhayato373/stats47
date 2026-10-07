@@ -20,8 +20,18 @@ export const patentInventorCount: MetricConfig = {
   ],
   "years": {
     "from": 2016,
-    "to": 2024
+    "to": 2024,
   },
+  "yearExclusions": [
+    {
+      "years": [
+        2013,
+        2014,
+        2015,
+      ],
+      "reason": "2026-10 の移行時に当時の years から引き継いだ除外 (まだ判断していない。根拠が無ければ外して年を戻す)",
+    },
+  ],
   "yearFormat": "calendar",
   "display": {
     "conversionFactor": 1,

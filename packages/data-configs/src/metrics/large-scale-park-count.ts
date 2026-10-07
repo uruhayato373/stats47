@@ -16,7 +16,7 @@ export const largeScaleParkCount: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2007,
+    "from": 1975,
     "to": 2007,
   },
   "yearFormat": "fiscal",

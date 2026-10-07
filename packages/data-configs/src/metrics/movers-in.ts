@@ -20,7 +20,7 @@ export const moversIn: MetricConfig = {
   ],
   "years": {
     "from": 2014,
-    "to": 2024,
+    "to": 2025,
   },
   "yearFormat": "fiscal",
   "visualization": {

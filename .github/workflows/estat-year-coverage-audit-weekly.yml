@@ -16,6 +16,11 @@ name: 🗓️ e-Stat Year Coverage Audit (weekly)
 #
 # 正典: packages/ranking/src/scripts/audit-estat-year-coverage.ts (実装コメント参照) /
 #       .claude/rules/metric-config-standards.md「years は最新年だけに絞らない」
+#
+# 2026-10 から同じ job で e-Stat の実在年の台帳 (data/estat/availability/) も取り直す。
+# 表の更新日が変わった表だけを取り直し、全県の値がある新しい年を metric config の years に足して
+# (sync-estat-years.ts。値の無くなった年は外さず報告に出す)、years から作る生成物 (ranking-prominence) を作り直して commit する。
+# R2 の値は次の data-refresh.yml (毎月の全件) で増える。経緯: .claude/todo/backlog.md ESTAT-YEAR-AVAILABILITY-01
 
 on:
   schedule:
@@ -37,7 +42,7 @@ concurrency:
 jobs:
   audit:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 60
     env:
       NEXT_PUBLIC_ESTAT_APP_ID: ${{ vars.NEXT_PUBLIC_ESTAT_APP_ID }}
     steps:
@@ -72,11 +77,26 @@ jobs:
       - name: 🗂️ Sync year coverage backlog card
         run: node .claude/scripts/data/sync-year-coverage-backlog.mjs || echo "::warning::year coverage backlog sync failed, continuing"
 
+      - name: 📚 Refresh e-Stat availability ledger and sync metric years
+        run: |
+          npx tsx packages/data-configs/scripts/build-estat-availability.ts 2>&1 | tail -20 | tee /tmp/estat-availability.log
+          npx tsx packages/data-configs/scripts/sync-estat-years.ts 2>&1 | tee -a /tmp/estat-availability.log
+          (cd apps/web && npx tsx scripts/generate-ranking-prominence.ts)
+          # 同期後の years で差分の報告を作り直す
+          npx tsx packages/data-configs/scripts/build-estat-availability.ts --offline 2>&1 | tee -a /tmp/estat-availability.log
+          {
+            echo "### e-Stat 実在年の台帳と years の同期"
+            echo '```'
+            cat /tmp/estat-availability.log
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
       - name: 📤 Commit audit result to develop
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/estat/year-coverage .claude/todo/backlog.md
+          git add data/estat/year-coverage .claude/todo/backlog.md data/estat/availability \
+            packages/data-configs/src/metrics packages/data-configs/src/prominence/ranking-prominence.generated.ts
           if git diff --cached --quiet; then
             echo "No audit changes"
             exit 0

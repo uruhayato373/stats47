@@ -16,7 +16,7 @@ export const homeHelperCountPer100k: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2002,
+    "from": 2000,
     "to": 2002,
   },
   "yearFormat": "fiscal",

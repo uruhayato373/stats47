@@ -19,8 +19,8 @@ export const startingSalaryUniversity: MetricConfig = {
     "prefecture"
   ],
   "years": {
-    "from": 2023,
-    "to": 2023
+    "from": 2020,
+    "to": 2023,
   },
   "yearFormat": "calendar",
   "visualization": {

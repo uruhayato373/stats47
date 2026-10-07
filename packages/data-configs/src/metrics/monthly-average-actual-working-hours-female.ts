@@ -17,10 +17,8 @@ export const monthlyAverageActualWorkingHoursFemale: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "years": [
-      2020,
-      2024,
-    ],
+    "from": 2020,
+    "to": 2024,
   },
   "yearFormat": "fiscal",
   "visualization": {

@@ -19,6 +19,16 @@ export const selfServiceStoreCountPer100k: MetricConfig = {
   "years": {
     "years": [
       1982,
+      1985,
+      1988,
+      1991,
+      1994,
+      1997,
+      1999,
+      2002,
+      2004,
+      2007,
+      2011,
       2014,
     ],
   },

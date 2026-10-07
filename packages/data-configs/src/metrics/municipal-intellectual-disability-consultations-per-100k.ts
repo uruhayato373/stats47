@@ -17,7 +17,7 @@ export const municipalIntellectualDisabilityConsultationsPer100k: MetricConfig =
     "prefecture",
   ],
   "years": {
-    "from": 2007,
+    "from": 2003,
     "to": 2007,
   },
   "yearFormat": "fiscal",

@@ -16,21 +16,24 @@ export const neonatalMortalityRatePer1000Births: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "years": [
-      1988,
-      1989,
-      1990,
-      1991,
-      1992,
-      1993,
-      1994,
-      1995,
-      1996,
-      1997,
-      1998,
-      2023,
-    ],
+    "from": 1988,
+    "to": 2023,
   },
+  "yearExclusions": [
+    {
+      "years": [
+        1980,
+        1981,
+        1982,
+        1983,
+        1984,
+        1985,
+        1986,
+        1987,
+      ],
+      "reason": "2026-10 の移行時に当時の years から引き継いだ除外 (まだ判断していない。根拠が無ければ外して年を戻す)",
+    },
+  ],
   "yearFormat": "calendar",
   "visualization": {
     "colorScheme": "interpolateBlues",

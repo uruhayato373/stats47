@@ -16,8 +16,19 @@ export const agriculturalIncomeRatio: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2003,
-    "to": 2003,
+    "years": [
+      1985,
+      1990,
+      1995,
+      1996,
+      1997,
+      1998,
+      1999,
+      2000,
+      2001,
+      2002,
+      2003,
+    ],
   },
   "yearFormat": "fiscal",
   "visualization": {

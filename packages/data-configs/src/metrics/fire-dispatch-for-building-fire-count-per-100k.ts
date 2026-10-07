@@ -16,7 +16,7 @@ export const fireDispatchForBuildingFireCountPer100k: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2021,
+    "from": 1975,
     "to": 2021,
   },
   "yearFormat": "fiscal",

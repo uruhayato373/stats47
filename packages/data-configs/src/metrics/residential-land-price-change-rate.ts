@@ -16,7 +16,7 @@ export const residentialLandPriceChangeRate: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2024,
+    "from": 1976,
     "to": 2024,
   },
   "yearFormat": "fiscal",

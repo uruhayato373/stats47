@@ -17,7 +17,7 @@ export const residentialBuildingConstructionCost: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2024,
+    "from": 1975,
     "to": 2024,
   },
   "yearFormat": "fiscal",

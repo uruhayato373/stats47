@@ -17,7 +17,7 @@ export const totalProductionInThePrefecture: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2021,
+    "from": 2011,
     "to": 2021,
   },
   "yearFormat": "fiscal",

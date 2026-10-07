@@ -16,10 +16,8 @@ export const secondaryEducationSchoolCountPer100k1217: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "years": [
-      2018,
-      2024,
-    ],
+    "from": 2018,
+    "to": 2024,
   },
   "yearFormat": "fiscal",
   "visualization": {

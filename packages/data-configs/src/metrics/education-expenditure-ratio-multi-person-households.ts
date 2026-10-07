@@ -17,7 +17,7 @@ export const educationExpenditureRatioMultiPersonHouseholds: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2024,
+    "from": 2000,
     "to": 2024,
   },
   "yearFormat": "fiscal",

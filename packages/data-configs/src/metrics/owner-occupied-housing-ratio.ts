@@ -31,6 +31,14 @@ export const ownerOccupiedHousingRatio: MetricConfig = {
       2023,
     ],
   },
+  "yearExclusions": [
+    {
+      "years": [
+        1978,
+      ],
+      "reason": "2026-10 の移行時に当時の years から引き継いだ除外 (まだ判断していない。根拠が無ければ外して年を戻す)",
+    },
+  ],
   "yearFormat": "calendar",
   "visualization": {
     "colorScheme": "interpolateBlues",

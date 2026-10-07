@@ -17,8 +17,8 @@ export const waterSupplyPopulationRatio2012on: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2022,
-    "to": 2022,
+    "from": 2012,
+    "to": 2023,
   },
   "yearFormat": "fiscal",
   "visualization": {

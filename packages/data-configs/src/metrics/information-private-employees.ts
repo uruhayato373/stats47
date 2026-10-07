@@ -18,8 +18,12 @@ export const informationPrivateEmployees: MetricConfig = {
     "prefecture"
   ],
   "years": {
-    "from": 2021,
-    "to": 2021
+    "years": [
+      2011,
+      2014,
+      2016,
+      2021,
+    ],
   },
   "yearFormat": "calendar",
   "visualization": {

@@ -16,8 +16,10 @@ export const floodDeaths: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2014,
-    "to": 2014,
+    "years": [
+      2006,
+      2014,
+    ],
   },
   "yearFormat": "fiscal",
   "visualization": {

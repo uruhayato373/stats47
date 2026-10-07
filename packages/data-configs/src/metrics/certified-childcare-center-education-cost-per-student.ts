@@ -16,7 +16,7 @@ export const certifiedChildcareCenterEducationCostPerStudent: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2022,
+    "from": 2015,
     "to": 2022,
   },
   "yearFormat": "fiscal",

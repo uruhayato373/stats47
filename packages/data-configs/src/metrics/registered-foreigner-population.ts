@@ -36,6 +36,7 @@ export const registeredForeignerPopulation: MetricConfig = {
       2007,
       2008,
       2009,
+      2010,
       2011,
     ],
   },

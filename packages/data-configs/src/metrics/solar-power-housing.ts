@@ -17,8 +17,12 @@ export const solarPowerHousing: MetricConfig = {
     "city",
   ],
   "years": {
-    "from": 2023,
-    "to": 2023,
+    "years": [
+      2008,
+      2013,
+      2018,
+      2023,
+    ],
   },
   "yearFormat": "calendar",
   "visualization": {

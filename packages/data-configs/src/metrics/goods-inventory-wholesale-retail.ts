@@ -16,8 +16,19 @@ export const goodsInventoryWholesaleRetail: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2011,
-    "to": 2011,
+    "years": [
+      1976,
+      1979,
+      1982,
+      1985,
+      1988,
+      1991,
+      1994,
+      1997,
+      2002,
+      2007,
+      2011,
+    ],
   },
   "yearFormat": "fiscal",
   "visualization": {

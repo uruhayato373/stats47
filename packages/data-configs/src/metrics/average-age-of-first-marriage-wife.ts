@@ -17,7 +17,7 @@ export const averageAgeOfFirstMarriageWife: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2023,
+    "from": 1975,
     "to": 2023,
   },
   "yearFormat": "calendar",

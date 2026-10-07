@@ -18,7 +18,6 @@ export const relaxationAvgTimeMale: MetricConfig = {
   ],
   "years": {
     "years": [
-      1976,
       1981,
       1986,
       1991,

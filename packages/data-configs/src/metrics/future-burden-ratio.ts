@@ -19,8 +19,8 @@ export const futureBurdenRatio: MetricConfig = {
     "prefecture"
   ],
   "years": {
-    "from": 2022,
-    "to": 2022
+    "from": 2011,
+    "to": 2022,
   },
   "yearFormat": "fiscal",
   "visualization": {

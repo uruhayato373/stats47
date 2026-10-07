@@ -109,9 +109,11 @@ export function diffYearAvailability(params: {
   ledgerYears: Readonly<Record<string, number>>;
   /** supplementalSources で別の表から補う年。e-Stat の主の表に無くてよい */
   suppliedYears?: readonly number[];
+  /** yearExclusions に書いた年。判断済みなので差分に数えない */
+  excludedYears?: readonly number[];
 }): YearAvailabilityDiff {
   const { configYears, ledgerYears } = params;
-  const configured = new Set(configYears);
+  const configured = new Set([...configYears, ...(params.excludedYears ?? [])]);
   const supplied = new Set(params.suppliedYears ?? []);
   const full = Math.max(0, ...Object.values(ledgerYears));
   const first = Math.min(...configYears);
@@ -152,4 +154,92 @@ export function formatYearList(years: readonly number[]): string {
     i = j;
   }
   return parts.join(', ');
+}
+
+// ---- 台帳から years を決める (第 2 段) ----
+
+/** 移行時に当時の `years` から引き継いだだけの除外の理由。誰かが判断したら具体的な理由に書き換える。 */
+export const YEAR_EXCLUSION_INHERITED =
+  '2026-10 の移行時に当時の years から引き継いだ除外 (まだ判断していない。根拠が無ければ外して年を戻す)';
+
+/** 全県の値がある年 (その条件で最も多く値が出た年の県の数に届く年)。 */
+export function fullLedgerYears(ledgerYears: Readonly<Record<string, number>>): number[] {
+  const full = Math.max(0, ...Object.values(ledgerYears));
+  return Object.entries(ledgerYears)
+    .filter(([, count]) => full > 0 && count === full)
+    .map(([year]) => Number(year))
+    .sort((a, b) => a - b);
+}
+
+/** 2 年以上の一定間隔 (5 年おきなど) で並べた設定か。最後の 1 年 (最新年の追加) は間隔に数えない。 */
+function isRegularlySpaced(configYears: readonly number[]): boolean {
+  if (configYears.length < 3) return false;
+  const steps = configYears.slice(1).map((year, i) => year - configYears[i]!).slice(0, -1);
+  return steps.length >= 2 && steps.every((step) => step === steps[0]) && steps[0]! > 1;
+}
+
+/**
+ * 移行 (2026-10) で除外として引き継ぐ年。意図して外した可能性がある年だけを残し、穴は埋める。
+ * - 複数年の設定で、最初の年より前の全県の年 (基準の切り替えで外した可能性がある)
+ * - 一定間隔の設定で、間に挟まった全県の年 (5 年おきに揃えた可能性がある)
+ * 1 年だけの設定の古い年は引き継がない (`metric-config-standards.md`「years は最新年だけに絞らない」で既に誤りと決まっている)。
+ */
+export function inheritedExclusionYears(
+  configYears: readonly number[],
+  ledgerYears: Readonly<Record<string, number>>,
+): number[] {
+  // e-Stat に無い年は設定の形 (最初の年・間隔) の根拠にしない。人口増減率は 5 年おきの国勢調査年を
+  // 設定していたが、今の取り出し条件にはその年が無く 2021 年以降だけがある (5 年おきの意図は残っていない)
+  const sorted = configYears.filter((year) => (ledgerYears[String(year)] ?? 0) > 0).sort((a, b) => a - b);
+  if (sorted.length <= 1) return [];
+  const configured = new Set(sorted);
+  const first = sorted[0]!;
+  const last = sorted[sorted.length - 1]!;
+  const spaced = isRegularlySpaced(sorted);
+  return fullLedgerYears(ledgerYears).filter(
+    (year) => !configured.has(year) && (year < first || (spaced && year < last)),
+  );
+}
+
+export interface ResolvedLedgerYears {
+  /** 新しい years (昇順) */
+  years: number[];
+  /** 足した年 (全県の値があり、除外されていない) */
+  added: number[];
+  /** 外した年 (除外に書かれた年と、removeMissing のときは 1 県も値が無い年) */
+  removed: number[];
+}
+
+/**
+ * metric の years を台帳から決める。sync-estat-years.ts と、その --check が使う唯一の規則。
+ * - 全県の値がある年は、除外されていなければ入れる
+ * - 除外に書かれた年は外す
+ * - 1 県も値が無い年は removeMissing のときだけ外す (補完元から入れる年は外さない)。台帳を取り直したときの
+ *   e-Stat の一時的な欠けで配信中の年を消さないよう、週次の自動同期では外さず報告 (e-Stat に無い年) に出す
+ * - 一部の県だけ値がある年は今の years のまま (足しも外しもしない。載せるかは人が決める)
+ */
+export function resolveLedgerYears(params: {
+  configYears: readonly number[];
+  ledgerYears: Readonly<Record<string, number>>;
+  excludedYears?: readonly number[];
+  suppliedYears?: readonly number[];
+  removeMissing?: boolean;
+}): ResolvedLedgerYears {
+  const { configYears, ledgerYears } = params;
+  const excluded = new Set(params.excludedYears ?? []);
+  const supplied = new Set(params.suppliedYears ?? []);
+  const next = new Set<number>();
+  for (const year of configYears) {
+    const missing = !supplied.has(year) && (ledgerYears[String(year)] ?? 0) === 0;
+    const keep = supplied.has(year) || (!excluded.has(year) && !(params.removeMissing && missing));
+    if (keep) next.add(year);
+  }
+  for (const year of fullLedgerYears(ledgerYears)) if (!excluded.has(year)) next.add(year);
+  const before = new Set(configYears);
+  const years = [...next].sort((a, b) => a - b);
+  return {
+    years,
+    added: years.filter((year) => !before.has(year)),
+    removed: [...before].filter((year) => !next.has(year)).sort((a, b) => a - b),
+  };
 }

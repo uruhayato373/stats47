@@ -17,8 +17,17 @@ export const unmarriedRatioFemale3034: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2020,
-    "to": 2020,
+    "years": [
+      1980,
+      1985,
+      1990,
+      1995,
+      2000,
+      2005,
+      2010,
+      2015,
+      2020,
+    ],
   },
   "yearFormat": "calendar",
   "visualization": {

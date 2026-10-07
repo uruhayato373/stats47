@@ -16,22 +16,22 @@ export const numberOfIndividualFisheryManagement: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "years": [
-      1981,
-      1982,
-      1983,
-      1984,
-      1985,
-      1986,
-      1987,
-      1988,
-      1989,
-      1990,
-      1991,
-      2002,
-      2003,
-    ],
+    "from": 1981,
+    "to": 2003,
   },
+  "yearExclusions": [
+    {
+      "years": [
+        1975,
+        1976,
+        1977,
+        1978,
+        1979,
+        1980,
+      ],
+      "reason": "2026-10 の移行時に当時の years から引き継いだ除外 (まだ判断していない。根拠が無ければ外して年を戻す)",
+    },
+  ],
   "yearFormat": "fiscal",
   "visualization": {
     "colorScheme": "interpolateGreens",

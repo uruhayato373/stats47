@@ -22,7 +22,7 @@ export const birthsMotherAge40plus: MetricConfig = {
   },
   entities: ['prefecture'],
   years: {
-    from: 2024,
+    from: 2015,
     to: 2024,
   },
   yearFormat: 'calendar',

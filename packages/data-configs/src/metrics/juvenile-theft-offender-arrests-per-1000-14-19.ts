@@ -16,22 +16,23 @@ export const juvenileTheftOffenderArrestsPer10001419: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "years": [
-      2003,
-      2004,
-      2005,
-      2006,
-      2007,
-      2008,
-      2009,
-      2010,
-      2011,
-      2012,
-      2013,
-      2014,
-      2023,
-    ],
+    "from": 2003,
+    "to": 2023,
   },
+  "yearExclusions": [
+    {
+      "years": [
+        1975,
+        1980,
+        1985,
+        1990,
+        1995,
+        2000,
+        2002,
+      ],
+      "reason": "2026-10 の移行時に当時の years から引き継いだ除外 (まだ判断していない。根拠が無ければ外して年を戻す)",
+    },
+  ],
   "yearFormat": "fiscal",
   "visualization": {
     "colorScheme": "interpolateBlues",

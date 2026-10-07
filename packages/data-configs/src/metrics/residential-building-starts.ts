@@ -16,7 +16,7 @@ export const residentialBuildingStarts: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2024,
+    "from": 1997,
     "to": 2024,
   },
   "yearFormat": "fiscal",

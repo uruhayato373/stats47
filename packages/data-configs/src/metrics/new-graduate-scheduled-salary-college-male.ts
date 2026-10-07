@@ -17,8 +17,11 @@ export const newGraduateScheduledSalaryCollegeMale: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2024,
-    "to": 2024,
+    "years": [
+      2021,
+      2023,
+      2024,
+    ],
   },
   "yearFormat": "fiscal",
   "visualization": {

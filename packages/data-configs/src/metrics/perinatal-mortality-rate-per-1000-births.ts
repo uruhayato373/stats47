@@ -16,7 +16,7 @@ export const perinatalMortalityRatePer1000Births: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2023,
+    "from": 1995,
     "to": 2023,
   },
   "yearFormat": "calendar",

@@ -26,6 +26,17 @@ export const secondaryActivityAvgTimeUnemployedMale: MetricConfig = {
       2021,
     ],
   },
+  "yearExclusions": [
+    {
+      "years": [
+        1976,
+        1981,
+        1986,
+        1991,
+      ],
+      "reason": "2026-10 の移行時に当時の years から引き継いだ除外 (まだ判断していない。根拠が無ければ外して年を戻す)",
+    },
+  ],
   "yearFormat": "calendar",
   "visualization": {
     "colorScheme": "interpolateBlues",

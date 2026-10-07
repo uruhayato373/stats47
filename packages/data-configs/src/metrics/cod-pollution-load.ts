@@ -18,8 +18,13 @@ export const codPollutionLoad: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2019,
-    "to": 2019,
+    "years": [
+      2011,
+      2013,
+      2015,
+      2017,
+      2019,
+    ],
   },
   "yearFormat": "fiscal",
   "visualization": {

@@ -17,8 +17,10 @@ export const earthquakeRetrofitHousing: MetricConfig = {
     "city",
   ],
   "years": {
-    "from": 2008,
-    "to": 2008,
+    "years": [
+      2003,
+      2008,
+    ],
   },
   "yearFormat": "calendar",
   "visualization": {

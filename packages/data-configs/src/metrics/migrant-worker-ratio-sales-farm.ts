@@ -16,8 +16,12 @@ export const migrantWorkerRatioSalesFarm: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2004,
-    "to": 2004,
+    "years": [
+      1989,
+      1994,
+      1999,
+      2004,
+    ],
   },
   "yearFormat": "fiscal",
   "visualization": {

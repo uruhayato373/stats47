@@ -16,7 +16,7 @@ export const busOperators: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2013,
+    "from": 1975,
     "to": 2013,
   },
   "yearFormat": "fiscal",

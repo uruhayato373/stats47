@@ -17,7 +17,7 @@ export const windPowerTurbineCount: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2017,
+    "from": 2010,
     "to": 2017,
   },
   "yearFormat": "fiscal",
