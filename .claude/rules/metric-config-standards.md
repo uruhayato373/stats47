@@ -133,6 +133,12 @@ ThemeCatalog の `annotation` は系列断絶・母集団差など、その char
   `getStatsData` で実測し config と比較。755 件を一括では照会しない)。候補は
   `data/estat/year-coverage/LATEST.md` に溜まる。data-ingester が候補を見て
   config の `years` を拡張し、`data/data-refresh-requests.json` push で再取り込みする。
+- **単年に限らない年の穴は実在年の台帳で見る** (2026-10-07〜)。`npm run build:estat-availability
+  --workspace=@stats47/data-configs` が e-Stat の表・取り出し条件ごとに「年ごとの値のある県の数」を
+  `data/estat/availability/tables/<statsDataId>.json` に残し、`years` との差分を
+  `data/estat/availability/LATEST.md` に「取り込み忘れ・新しい年・e-Stat に無い年・範囲より前」で出す。
+  取得と県の判定は取り込み (`page-data-batch.ts`) と同じ経路。今は報告だけで、取り込みはまだ `years` で年を決める
+  (台帳から決める切り替えは `.claude/todo/backlog.md` ESTAT-YEAR-AVAILABILITY-01 の第 2 段)。
 
 ## 量産時の必須手順 (agent / skill)
 

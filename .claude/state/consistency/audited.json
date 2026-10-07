@@ -1,9 +1,7 @@
 {
-  "hash": "fcfb7fd374dbc18694f4e032d7cd4403bb357d753bf8d0a24327173598fc6bac",
-  "audited_at": "2026-10-06T03:23:10",
+  "hash": "b1837f509f9a4df139664b28f06b242b206eb15f33a27ddbaa8a118d162a4094",
+  "audited_at": "2026-10-07T01:22:56",
   "files": [
-    ".claude/scripts/measurement/__tests__/measurement.test.mjs",
-    ".claude/scripts/measurement/refresh-session.mjs",
-    ".claude/scripts/measurement/summarize.mjs"
+    ".claude/rules/metric-config-standards.md"
   ]
 }

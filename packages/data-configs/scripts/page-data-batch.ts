@@ -63,7 +63,7 @@ import {
   type ShapeSummary,
   type ShapeViolation,
 } from "../src/shape-gate.js";
-import type { MetricConfig, SourceConfig } from "../src/types.js";
+import type { KakeiChousaSource, MetricConfig, SourceConfig } from "../src/types.js";
 
 // known-broken は「公開済みの欠陥を認知している」だけなので新規書き込みを許可しない。
 // legitimate は統計の定義上正しい形であり、重症度ラチェットの範囲内なら書き込んでよい。
@@ -131,7 +131,7 @@ function parseArgs(): Args {
   return out;
 }
 
-function readAppId(): string {
+export function readAppId(): string {
   // クラウド環境では env を直接注入 (.env.local ファイルは無い) ため process.env を優先
   if (process.env.NEXT_PUBLIC_ESTAT_APP_ID) {
     return process.env.NEXT_PUBLIC_ESTAT_APP_ID;
@@ -671,6 +671,45 @@ function remapKakeiAreas(values: EstatValue[]): EstatValue[] {
   return out;
 }
 
+/**
+ * kakei-chousa は e-Stat API の通常テーブル (statsDataId + cdCat01/cdCat02 filter)。
+ * filter に格納されたパラメータを estat source と同形に写して同一経路で fetch する。statsDataId が無ければ null。
+ */
+export function kakeiEstatSource(source: KakeiChousaSource): Extract<SourceConfig, { kind: "estat" }> | null {
+  const filter = (source.filter ?? {}) as {
+    statsDataId?: string;
+    cdCat01?: string;
+    cdCat02?: string;
+    // 品目を合算して 1 指標にする (例: 情報通信関係費 = 固定電話+移動電話+NHK+ケーブルTV+他の受信料)。
+    // 家計調査は品目ごとに cdCat01 が分かれており総数コードが無いので estat と同じ axisSum を使う
+    axisSum?: Extract<SourceConfig, { kind: "estat" }>["axisSum"];
+  };
+  if (!filter.statsDataId) return null;
+  return {
+    kind: "estat",
+    statsDataId: filter.statsDataId,
+    cdCat01: filter.cdCat01,
+    cdCat02: filter.cdCat02,
+    axisSum: filter.axisSum,
+  };
+}
+
+/**
+ * 取り込みが県の values.json に書く行を、`years` で絞らずに返す (e-Stat の実在年の台帳用)。
+ * 取得・家計調査の写像・県の判定・値の読み方は processOne と同じ経路を通り、年の絞り込みだけを外す。
+ * 補完元 (supplementalSources) は別の表なので足さない。
+ */
+export async function fetchPrefectureRowsAllYears(
+  appId: string,
+  config: MetricConfig,
+  src: Extract<SourceConfig, { kind: "estat" }>,
+): Promise<{ rows: ReadonlyArray<{ yearCode: string; value: number | null }>; raw: EstatFetchResult["raw"] }> {
+  const fetched = await fetchEstatData(appId, src);
+  const values =
+    config.source.kind === "kakei-chousa" ? remapKakeiAreas(fetched.values) : fetched.values;
+  return { rows: shapeForPrefecture({ ...config, years: "all" }, values).rows, raw: fetched.raw };
+}
+
 /** 5 桁エリアコード判定 (都道府県集計行 NN000) */
 function isPrefCode5(code: string): boolean {
   if (!/^\d{2}000$/.test(code)) return false;
@@ -1046,28 +1085,13 @@ export async function processOne(
   if (config.source.kind === "external" || config.source.kind === "mlit") {
     return { key: config.key, ok: false, status: "skip", message: `${config.source.kind} source skipped (fetcher not implemented yet)` };
   }
-  // kakei-chousa は e-Stat API の通常テーブル (statsDataId + cdCat01/cdCat02 filter)。
-  // filter に格納されたパラメータを estat source と同形に写して同一経路で fetch する。
   let src: Extract<SourceConfig, { kind: "estat" }>;
   if (config.source.kind === "kakei-chousa") {
-    const filter = (config.source.filter ?? {}) as {
-      statsDataId?: string;
-      cdCat01?: string;
-      cdCat02?: string;
-      // 品目を合算して 1 指標にする (例: 情報通信関係費 = 固定電話+移動電話+NHK+ケーブルTV+他の受信料)。
-      // 家計調査は品目ごとに cdCat01 が分かれており総数コードが無いので estat と同じ axisSum を使う
-      axisSum?: Extract<SourceConfig, { kind: "estat" }>["axisSum"];
-    };
-    if (!filter.statsDataId) {
+    const mapped = kakeiEstatSource(config.source);
+    if (!mapped) {
       return { key: config.key, ok: false, status: "skip", message: "kakei-chousa missing filter.statsDataId skipped" };
     }
-    src = {
-      kind: "estat",
-      statsDataId: filter.statsDataId,
-      cdCat01: filter.cdCat01,
-      cdCat02: filter.cdCat02,
-      axisSum: filter.axisSum,
-    };
+    src = mapped;
   } else {
     src = config.source;
   }
