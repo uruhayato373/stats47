@@ -41,8 +41,14 @@ const RECORD_PATHS = [".claude/todo/", ".claude/memory/"];
 const WRITE_TOOLS = new Set(["Edit", "Write", "MultiEdit", "NotebookEdit"]);
 const BASH_WRITES = /(>>?|sed -i|tee |writeFileSync|appendFileSync|insertCards|git add)/;
 const MAX_LISTED = 5;
-/** 呼び元の返答で、後に回した作業を表す言い方。「残り N 本」「未着手」のような進捗の数え方は含めない。 */
-const DEFERRED = /(残タスク|残作業|(後|あと)で(対応|直す|起票|確認|やる)|別タスク|TODO)/;
+/**
+ * 呼び元の返答で、後に回した作業を表す書き方。「残り N 本」「未着手」のような進捗の数え方は含めない。
+ * 残作業・残タスクは、見出し (行頭) か「残作業:」の形のときだけ拾う。「残作業と判定した」のように語そのものを
+ * 説明する文を拾わないため (2026-10-07、hook の説明文で誤検知した)。
+ */
+const DEFERRED = /((残タスク|残作業)\s*(\*\*)?\s*[:：]|^\s*(?:[-*]\s+)?(?:\*\*)?(?:ほかの)?(?:残タスク|残作業)|(後|あと)で(対応|直す|起票|確認|やる)|別タスク|\bTODO\b)/m;
+/** transcript の行を JSON として解く前の粗い絞り込み (JSON の中では改行が \n なので行頭の判定はできない)。 */
+const DEFERRED_HINT = /(残タスク|残作業|(後|あと)で|別タスク|TODO)/;
 /** 記録済みとみなす参照: backlog のカード ID (`BLOG-OUTBOX-CONTENTS-01`) か PR (`#1098`・`/pull/1098`)。 */
 const RECORDED_REF = /([A-Z][A-Z0-9]+(?:-[A-Z0-9]+)+|#\d{3,}|\/pull\/\d+)/;
 const TASK_CREATED = /Task #(\d+) created/;
@@ -92,11 +98,16 @@ function recordsFinding(toolUse) {
  * transcript (JSONL) を前から読み、記録されていない起票候補を返す。
  * 50MB 級の transcript でも速いよう、関係しそうな行だけを JSON として解く。
  */
+/** 「」『』とバッククォートの中は引用 (語の説明) なので、残作業の判定から外す。 */
+function withoutQuotes(text) {
+  return text.replace(/「[^」]*」|『[^』]*』|`[^`]*`/g, "");
+}
+
 /** 返答の段落のうち、後に回した作業を書いていて、カード ID も PR も無いもの。 */
 function deferredIn(text) {
   return text
     .split(/\n\s*\n/)
-    .filter((paragraph) => DEFERRED.test(paragraph) && !RECORDED_REF.test(paragraph))
+    .filter((paragraph) => DEFERRED.test(withoutQuotes(paragraph)) && !RECORDED_REF.test(paragraph))
     .map((paragraph) => {
       const flat = paragraph.replace(/\s+/g, " ").trim();
       return `返答: ${flat.length > MAX_CHARS ? `${flat.slice(0, MAX_CHARS - 1)}…` : flat}`;
@@ -113,7 +124,7 @@ function unrecordedCandidates(transcriptText) {
     const mayTask = line.includes("TaskCreate") || line.includes("TaskUpdate") || (line.includes("tool_result") && line.includes("Task #"));
     const mayAct = line.includes('"assistant"') &&
       (line.includes('"Agent"') || line.includes('"Task"') || RECORD_PATHS.some((p) => line.includes(p)) ||
-        line.includes("起票しない") || DEFERRED.test(line));
+        line.includes("起票しない") || DEFERRED_HINT.test(line));
     if (!mayReport && !mayAct && !mayTask) continue;
     let entry;
     try {

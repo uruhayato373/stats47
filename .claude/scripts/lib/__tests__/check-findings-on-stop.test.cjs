@@ -109,3 +109,17 @@ test("記録より前の残作業は扱い済みにし、記録の後に書い�
   ].join("\n");
   assert.deepEqual(unrecordedCandidates(transcript), ["返答: 残作業: B を後で確認する。"]);
 });
+
+test("かぎ括弧やバッククォートで引用した語は残作業として拾わない (hook の説明文で誤検知した実例)", () => {
+  const explaining = assistantText("段落に「残作業」「後で対応」「別タスク」「TODO」と書き、同じ段落にカード ID も無いもの。");
+  const code = assistantText("`DEFERRED` は `残作業` などを拾う。");
+  assert.deepEqual(unrecordedCandidates(explaining), []);
+  assert.deepEqual(unrecordedCandidates(code), []);
+  assert.equal(unrecordedCandidates(assistantText("残作業: 公開後に流入を確かめる。")).length, 1);
+});
+
+test("残作業という語の説明文は拾わず、見出しと「残作業:」の形は拾う", () => {
+  assert.deepEqual(unrecordedCandidates(assistantText("hook が説明文を残作業と誤って判定しました。")), []);
+  assert.equal(unrecordedCandidates(assistantText("**ほかの残作業**\n- outbox の移行")).length, 1);
+  assert.equal(unrecordedCandidates(assistantText("ほかの残作業: outbox の移行")).length, 1);
+});
