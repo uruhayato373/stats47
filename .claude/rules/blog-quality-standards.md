@@ -66,12 +66,24 @@ date: YYYY-MM-DD
 ## 評価サマリ
 <読者価値の総括>
 ## 指摘
-- [blocker|major|minor] <具体的指摘と修正案>
+- [BLOCK|MAJOR|MINOR][型:<key>] <具体的指摘と修正案>
 ## 判定理由
 <PASS/REVISE の根拠>
 ```
 
 `verdict: PASS`(実体200字以上) で初めて公開可。REVISE の指摘は article-writer 側が修正してから PASS に更新する。これにより「自己採点での公開」を構造的に不可能にする。
+
+### critic の指摘の型と格上げ
+
+critic の指摘には型 (`[型:<key>]`、語彙は `.claude/config/critic-finding-types.json`) を付け、review.md を書いた直後に
+`record-critic-findings.mjs` で台帳 `data/blog/critic-findings.jsonl` に残す (公開時の outbox 掃除の直前にも CI が記録する)。
+日次の `critic-findings-digest.mjs` が型ごとに数え、窓 (既定 56 日) の中で同じ型の BLOCK/MAJOR が 3 本以上の記事に
+出たら、backlog に `CRITIC-PATTERN-<型>` のカードを起票する。カードは「機械で判定できるなら gate、できなければ
+本規約と writer の指示」へ格上げして閉じ、config の `promotedAt` に日付を書く (以後はその日より後の再発だけを数える)。
+
+- **なぜ**: review.md は公開時に消え、REVISE の review.md は再審で上書きされる。2026-10-07 の 22 本の書き直しでは、
+  関連記事の紹介・地域のくくり・相関の向きなど同じ型の指摘が毎回 critic の目視で見つかり、規約にも gate にも戻らなかった。
+- 格上げの手本: 統計表 ID の取り違えを `stats-table-id-lint.mjs` (blocker) にした例。
 
 ## なぜこのルールがあるか
 
