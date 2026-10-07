@@ -1,0 +1,9 @@
+{
+  "workflow": "blog-auto-publish.yml",
+  "inputs": {
+    "slugs": "ai-claude-code-pref-analysis area-ratio-prefecture-gap cc-estat-02-search-skill cc-estat-03-population-bar cc-estat-04-aging-heatmap cc-estat-13-agri-sankey cc-estat-20-publish consumer-price-regional-gap dairy-cattle-count dairy-cattle-hokkaido-monopoly engel-coefficient-vs-prefectural-income fiscal-health-50years-trend fiscal-self-reliance-gap health-life-expectancy-structure healthy-life-expectancy-male-female-gap it-industry-concentration physical-therapist-annual-income-prefecture-gap real-disposable-income-reversal school-teacher-annual-income-prefecture-gap sixth-industry-direct-sales unhealthy-period-gender-prefecture-gap vacant-housing-vs-aging"
+  },
+  "ref": "develop",
+  "reason": "22 記事の公開 run (37601882572) がタイトルを変えた記事の背景検査で止まった。背景が古い記事だけ skip する直し (fcc4ab85a 等) を入れたので、22 記事をまとめて公開し直す (背景待ちの 5 記事は skip される)",
+  "requestedAt": "2026-10-07T10:10:02Z"
+}
