@@ -2962,12 +2962,19 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - **完了条件**: config の `seoTitle` / `seoDescription` に観測値を含むものが 0 件になり、item.json の文言が最新の値と一致する。
 
 ### [THEME-REVIEW-TOURISM-CPI-01] 観光・物価テーマの見直し提案を承認してもらい、実装して公開する
-タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run validate:catalog --workspace=@stats47/data-configs] [起票:2026-10-07] [領域:データ]
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run validate:catalog --workspace=@stats47/data-configs] [起票:2026-10-07] [領域:データ] [進行中]
 
 - **経緯 (2026-10-07)**: 3 テーマの見直しの公開後、管理画面 `/quality/theme-viewpoints` の次の候補 (GSC 2026-W40 の表示回数順) の観光 (147 回) と物価 (140 回) の提案を、
   `reference/reviews/2026-10-07-theme-{tourism,consumer-prices}.md` に `proposal-ready` で書いている (theme-designer、effort medium)。
 - **次**: 提案の判断点をオーナーに示して承認を取る → `theme-proposal-format.md` の手順で実装・検証 → 公開の時期を決める
   (2 テーマとも 9 月の実験 THEME-STRUCTURE-20260908-* の d56 = 2026-11-06 が pending)。
+- **2026-10-07 承認**: オーナーが両提案の推奨案すべて (「おすすめで」) と、実装・検査が済みしだい d56 を待たずに公開することを承認した。
+- **2026-10-08 途中経過 (develop)**: metric config を先に入れた。客室稼働率を 2009〜2024 年、ホテル営業施設数を 1997〜2017 年、
+  物価地域差指数 9 指標を 2013〜2024 年へ広げ、新規の実宿泊者数 (`actual-overnight-guests`、`0000010107` / `G7103`) を registry・極性・
+  調査の対応表 (`data/surveys/taxonomy.json`) に登録した。12 コードとも e-Stat の全年で 47 都道府県そろうことを確かめた (提案文書の表 1 に追記)。
+  **次**: 2 テーマの `data/themes/catalogs/*.json` を提案どおりに編集 → generate / validate / baseline / ratchet → 選定根拠の backfill →
+  `data-refresh.yml` で 12 指標の観測値を取得 (まず dryRun) → develop → main → page-components と ranking-items を R2 へ反映 → 本番確認。
+  新規指標は `/ranking/actual-overnight-guests` を出すまで、ranking-items とキー一覧 (KNOWN / SITEMAP) の同期も要る。
 - **停止条件**: 承認前は `data/themes/catalogs/` と metric config を編集しない。公開 (main へのマージ・R2 反映) は別に承認を取る。
 - **完了条件**: 2 テーマの提案の status が `implemented-pending-release` 以降になり、本番で提案どおりの章・カード・図が出ている。
 

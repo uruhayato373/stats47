@@ -47,6 +47,7 @@ export const METRIC_POLARITY: Readonly<Record<string, PolarityEntry>> = {
   // 長時間労働の抑制方向: 過労死等防止対策大綱 数値目標 (2026-09-11確認)
   // https://www.mhlw.go.jp/content/11201000/001282630.pdf
   // 大綱の「週40時間以上」分母を、本カタログの「年間200日以上」の分母へ転用しない。
+  "actual-overnight-guests": { polarity: "neutral", evidence: "実宿泊者数は宿泊施設で宿泊手続をした人数の合計で、人口や観光地の多い県ほど大きくなり、値の大小を地域の優劣へ読み替えない。" },
   "ambulance-transported-deaths": { polarity: "higher-is-worse", evidence: "消防庁の初診時診断で死亡に分類された搬送人員であり、救命できなかった人的被害の増加を望ましいとは扱わない。" },
   "ambulance-transported-mild": { polarity: "neutral", evidence: "初診時に外来診療相当とされた搬送人員で、軽症者の救急利用と医療へのアクセスを含むため、件数だけで利用の適否を決めない。" },
   "ambulance-transported-moderate": { polarity: "higher-is-worse", evidence: "消防庁の初診時診断で入院診療が必要とされた傷病者数であり、傷病負担の増加を示す。搬送体制の優劣は示さない。" },

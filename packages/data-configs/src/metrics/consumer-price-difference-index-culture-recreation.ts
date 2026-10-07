@@ -18,7 +18,7 @@ export const consumerPriceDifferenceIndexCultureRecreation: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2024,
+    "from": 2013,
     "to": 2024,
   },
   "yearFormat": "fiscal",

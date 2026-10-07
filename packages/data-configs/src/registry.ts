@@ -15,6 +15,7 @@ import { accommodationConsumptionExpenditure } from "./metrics/accommodation-con
 import { accountantAnnualIncome } from "./metrics/accountant-annual-income";
 import { activeJobOpeningRatio } from "./metrics/active-job-opening-ratio";
 import { actualIncomeWorkerHouseholdsPerMonth } from "./metrics/actual-income-worker-households-per-month";
+import { actualOvernightGuests } from "./metrics/actual-overnight-guests";
 import { acupunctureMoxibustionCount } from "./metrics/acupuncture-moxibustion-count";
 import { acupuncturistRate } from "./metrics/acupuncturist-rate";
 import { adultClassLectureCountPerMillion } from "./metrics/adult-class-lecture-count-per-million";
@@ -2625,6 +2626,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "accountant-annual-income": accountantAnnualIncome,
   "active-job-opening-ratio": activeJobOpeningRatio,
   "actual-income-worker-households-per-month": actualIncomeWorkerHouseholdsPerMonth,
+  "actual-overnight-guests": actualOvernightGuests,
   "acupuncture-moxibustion-count": acupunctureMoxibustionCount,
   "acupuncturist-rate": acupuncturistRate,
   "adult-class-lecture-count-per-million": adultClassLectureCountPerMillion,

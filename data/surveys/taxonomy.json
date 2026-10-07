@@ -3,16 +3,16 @@
   "generatedAt": "2026-09-30T00:47:33.455Z",
   "masterSurveyCount": 150,
   "ranking": {
-    "metrics": 2566,
-    "activeMetrics": 2423,
-    "applicableMetrics": 2479,
-    "activeApplicableMetrics": 2337,
+    "metrics": 2567,
+    "activeMetrics": 2424,
+    "applicableMetrics": 2480,
+    "activeApplicableMetrics": 2338,
     "notApplicable": 87,
     "activeNotApplicable": 86,
-    "resolved": 2479,
+    "resolved": 2480,
     "unresolved": 0,
     "coveragePct": 100,
-    "activeResolved": 2337,
+    "activeResolved": 2338,
     "activeUnresolved": 0,
     "activeCoveragePct": 100,
     "activeNotApplicableKeys": [
@@ -106,7 +106,7 @@
     "activeUnresolvedKeys": [],
     "perSurveyActive": {
       "academic-achievement-survey": 1,
-      "accommodation-survey": 3,
+      "accommodation-survey": 4,
       "administrative-investment-report": 13,
       "agricultural-income-statistics": 3,
       "agriculture-forestry-census": 14,
@@ -2075,7 +2075,7 @@
     },
     {
       "surveyId": "accommodation-survey",
-      "rankingCount": 3,
+      "rankingCount": 4,
       "themeKeys": [
         "foreign-residents",
         "tourism"

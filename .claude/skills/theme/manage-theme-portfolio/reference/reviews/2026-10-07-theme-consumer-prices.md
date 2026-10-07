@@ -86,6 +86,9 @@ tags: [theme-catalog, consumer-prices, regional-price-index, years-extension, cp
 | `household-survey-food-expenditure` | secondary | keep | 登録 2019・2024。e-Stat も同じ 2 年 (北海道で確認) | 同上 |
 | `average-temperature` | secondary | **remove** | 登録 1975〜2024 | climate の primary を抱え込んでいる (視点 `owned-elsewhere`)。章の説明自身が「県全域の気温や通年の光熱費ではない」と断っており、物価の主問に要る理由が示せない。理由は「判断の要る点」1 |
 
+実装時の再確認 (2026-10-08、`getStatsData` を `cdArea` なしで呼び、年ごとの欠測でない都道府県の件数を数えた): 年を広げる 9 コード
+(`#L04415`・`#L04418`〜`#L04425`) はすべて 2013〜2024 の 12 年で、どの年も 47 件そろう。上の表の「北海道のみ確認」は、この確認で 47 都道府県まで埋まった。
+
 外す 1 指標は climate に主担当があり、このテーマの指標一覧から消えるだけでランキングページと climate には残る。
 `selection-evidence` の 8 件は、残る primary・secondary の 7 指標の選定根拠を `/backfill-theme-selection` の gate 越しに書き直す
 (現行の根拠は定型文で、`sourceUrl` は統計局の総合ページ `https://www.stat.go.jp/data/ssds/index.htm`、household の 2 指標は `sourceUrl` が無い)。
