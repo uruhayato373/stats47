@@ -39,7 +39,7 @@ const TABLE_ROW = /^\s*\|\s*起票候補[^|]*\|\s*(.+?)\s*\|\s*$/;
 const LINE_FORM = /^\s*起票候補\s*[:：]\s*(.+?)\s*$/;
 const RECORD_PATHS = [".claude/todo/", ".claude/memory/"];
 const WRITE_TOOLS = new Set(["Edit", "Write", "MultiEdit", "NotebookEdit"]);
-const BASH_WRITES = /(>>?|sed -i|tee |writeFileSync|appendFileSync|insertCards|git add)/;
+const BASH_WRITES = /(>>?|sed -i|tee |writeFileSync|appendFileSync|\.write\(|write_text\(|insertCards|git add)/;
 const MAX_LISTED = 5;
 /**
  * 呼び元の返答で、後に回した作業を表す書き方。「残り N 本」「未着手」のような進捗の数え方は含めない。

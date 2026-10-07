@@ -37,8 +37,13 @@ test("記録しないまま終えた候補を返す", () => {
 test("報告の後に backlog か memory を書けば差し戻さない", () => {
   const filedByEdit = [handback(report("A")), assistantTool("Edit", { file_path: "/repo/.claude/todo/backlog.md" })].join("\n");
   const filedByBash = [handback(report("B")), assistantTool("Bash", { command: "cat > .claude/memory/x.md <<'EOF'" })].join("\n");
+  const filedByPython = [
+    handback(report("B2")),
+    assistantTool("Bash", { command: "python3 - <<'EOF'\np='.claude/todo/backlog.md'\nopen(p,'w',encoding='utf-8').write(s)\nEOF" }),
+  ].join("\n");
   assert.deepEqual(unrecordedCandidates(filedByEdit), []);
   assert.deepEqual(unrecordedCandidates(filedByBash), []);
+  assert.deepEqual(unrecordedCandidates(filedByPython), []);
 });
 
 test("報告より前の記録や、読むだけの Bash では記録扱いにしない", () => {

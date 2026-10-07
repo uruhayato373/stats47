@@ -351,6 +351,13 @@ updated: 2026-10-06
 - **次**: `npx tsx .claude/scripts/blog/build-metric-definition-sheet.ts` で 2 指標の定義シートを出し、対象欄の値の出どころを特定して直す。`dairy-cattle-count` には `dairy-cattle-holdings` と同じ形で description と note を書く。
 - **完了条件**: 2 指標の定義シートで、調査時点が出ていて、対象欄と note が食い違わない。`npm run validate:config --workspace=@stats47/data-configs` が通る。
 
+### [METRIC-FARM-INCOME-DEFS-01] 農家総所得の指標で、対象・分母・調査が定義に出ず、意味の無い正規化が選べる
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npm run validate:config --workspace=@stats47/data-configs] [起票:2026-10-07] [領域:データ]
+
+- **事象 (2026-10-07、sixth-industry-direct-sales の writer が報告し config で確認)**: `packages/data-configs/src/metrics/total-farm-household-income.ts` に description・note・surveyId が無く、指標の定義シートで対象 (農家 1 戸あたりか)・分母・調査が空欄になる。「総所得」が農外所得や年金を含むかも読者向けの定義に出ない。1 戸あたりの所得なのに normalizationOptions に「人口10万人あたり」「面積100km²あたり」があり、意味の無い換算が選べる。yearFormat は fiscal なのに seoTitle が「【2003年】」と暦年で書いている。系列は 1995〜2003 年度で止まっている。
+- **次**: 社会・人口統計体系の指標定義 (#L01100) で対象と構成を確かめ、description と note に書く。surveyId を `data/surveys/taxonomy.json` で探して紐付ける。正規化の選択肢を外す。seoTitle を再生成して「年度」にする。
+- **完了条件**: 定義シートに対象・分母・調査が出て、正規化の選択肢が無く、seoTitle が「2003年度」になる。
+
 ### [BLOG-TUTORIAL-GATE-GAPS-01] 手順解説記事 (cc-estat 連載) で quality-gate が誤って数える・照合できない 3 か所を直す
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:node .claude/scripts/blog/quality-gate.mjs <slug>] [起票:2026-10-07] [領域:サイト]
 
@@ -405,6 +412,7 @@ updated: 2026-10-06
 
 - **事象**: `packages/data-configs/src/metrics/*-annual-income.ts` の 39 指標はどれも `surveyId` を持たず (2026-10-07 に数えた)、指標の定義シートで「調査」が空欄になる。physical-therapist-annual-income-prefecture-gap の writer が報告した。職種別の県の値は標本が少なく年ごとに順位が大きく動くので、その注意も読者向けの定義に出したい。
 - **次**: 賃金構造基本統計調査の surveyId を `data/surveys` の台帳で確かめ、39 指標にまとめて足す。標本の少なさによる年ごとの変動の注意を note に足すかを、指標ごとの標本数を見て決める。 定義シートに対象 (一般労働者か・男女計か) も出るよう、description に書く (physical-therapist-annual-income の critic が報告)。
+- **追記 (2026-10-07)**: `school-teacher-annual-income` も同じで、critic が定義シートの対象欄「対象の記述なし」と「surveyId 未設定」を確認した。
 - **完了条件**: 39 指標の定義シートで調査名が出る。
 
 ### [BLOG-REFRESH-DERIVED-SCATTER-01] 図の年の取り直しスクリプトが、計算で作った散布図を取り直せない
@@ -1909,6 +1917,7 @@ updated: 2026-10-06
 
 - **owner**: survey-curator (surveyId) / data-ingester (yearFormat)
 - **実測 (2026-09-19)**: 同じ家計調査 (SSDS 経由) 由来なのに `disposable-income-worker-households` / `disposable-income-after-rent` / `real-disposable-income` は `yearFormat: 'fiscal'`、`black-tea-consumption-expenditure` / `private-rent-consumption-expenditure` / `engel-coefficient` は `'calendar'`。サイトの yearName が同じ調査で「2024年度」と「2024年」に分かれ、ブログ (real-disposable-income-reversal 等) が「2024年度」を書く原因になった。家計調査の年次結果は暦年平均 (統計局「2024年（令和6年）平均」)。上記 4 key と `per-capita-prefectural-income-h27` は `surveyId` 未設定で指標定義シートが「(surveyId 未設定)」を返す。 `per-capita-prefectural-income-h27` は description と note も無く、定義シートの対象欄が「config に対象の記述なし」になる (2026-10-07、engel-coefficient-vs-prefectural-income の writer が報告。県民所得の構成・分母・名目か実質かが読者向けの定義に出ない)。
+- **追記 (2026-10-07)**: real-disposable-income-reversal の critic が、`consumer-price-difference-index-overall` (消費者物価地域差指数) と家計の 3 指標の yearFormat が fiscal のままで、記事の年の書き方が揃わないことを再度報告した。
 - **次**: ①家計調査由来 metric を列挙し (`grep -l 家計調査 packages/data-configs/src/metrics/*.ts`)、yearFormat を出典で確定して揃える (SSDS の表ラベルは「年度」でも家計調査項目は暦年)。②surveyId を `kakei-chousa` 等へ紐付け `/audit-survey-linkage` を通す。③ranking-prominence / seoTitle の再生成が要るか確認。
 - **範囲の拡張 (2026-09-19 追記)**: S1 12 冊の図 120 枚を `.local/kindle-audit/fig-years.ts` (図の年表記 × source.json の rankingKey × config yearFormat) で実測すると、国勢調査 (未婚率・単独世帯 2020)、社会生活基本調査 (行動者率 2021)、住宅・土地統計、宿泊旅行統計 (2024) まで一律 `fiscal` だった。家計調査に限らず「調査の集計期間が暦年・時点のもの」を一次資料で確定して直す。書籍側は `figure-corrections.ts` で本文に合わせて図の年表記を当てているが、config が直ればその校訂は不要になる。
 - **停止条件**: yearFormat を一括置換しない (SSDS には年度が正しい項目もある)。出典で確認できない key は `未宣言` のまま残し、指標定義シートに出す。
