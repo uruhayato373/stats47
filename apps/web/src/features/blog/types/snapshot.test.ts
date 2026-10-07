@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import {
   buildMetricPairArticleIndex,
+  buildRankingArticleIndex,
   buildSurveyArticleIndex,
   parseBlogSnapshot,
   type SnapshotArticle,
@@ -91,5 +92,45 @@ describe('parseBlogSnapshot metric pairs', () => {
       articles: [],
       metricPairArticleIndex: { income: ['a'] },
     })).toThrow('metricPairArticleIndex');
+  });
+});
+
+describe('buildRankingArticleIndex', () => {
+  const withRefs = (slug: string, published: boolean, keys: string[]) => ({
+    ...article(slug, published),
+    rankingRefs: keys.map((rankingKey) => ({ rankingKey, year: '2020' })),
+  });
+
+  it('指標ごとにその指標を使う公開記事を引ける形にし、下書きを含めない (指標 → 記事の回遊に使う)', () => {
+    expect(
+      buildRankingArticleIndex([
+        withRefs('b', true, ['income']),
+        withRefs('a', true, ['income', 'rent']),
+        withRefs('draft', false, ['income']),
+        article('no-refs', true),
+      ])
+    ).toEqual({ income: ['a', 'b'], rent: ['a'] });
+  });
+});
+
+describe('parseBlogSnapshot ranking refs', () => {
+  const base = { generatedAt: '2026-10-07T00:00:00.000Z', tagMeta: [] };
+
+  it('記事の指標と逆引き索引をそのまま通す', () => {
+    const parsed = parseBlogSnapshot({
+      ...base,
+      articles: [{ ...article('a', true), rankingRefs: [{ rankingKey: 'income', year: '2022' }, { rankingKey: 'rent' }] }],
+      rankingArticleIndex: { income: ['a'], rent: ['a'] },
+    });
+    expect(parsed.articles[0].rankingRefs).toEqual([{ rankingKey: 'income', year: '2022' }, { rankingKey: 'rent' }]);
+    expect(parsed.rankingArticleIndex?.income).toEqual(['a']);
+  });
+
+  it('壊れた指標・索引は配信境界で拒否する', () => {
+    expect(() => parseBlogSnapshot({
+      ...base,
+      articles: [{ ...article('a', true), rankingRefs: [{ rankingKey: 'income', year: 2022 }] }],
+    })).toThrow('rankingRefs');
+    expect(() => parseBlogSnapshot({ ...base, articles: [], rankingArticleIndex: { income: 'a' } })).toThrow('rankingArticleIndex');
   });
 });

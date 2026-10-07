@@ -160,6 +160,11 @@ values.json が取得できない場合は照合をスキップする (fail-open
 `not-eligible` にすることで `--next` から恒久的に外れ、backlog の件数も正直になる。
 done でも接地が不健全な key は `dataBlockers` を付けて LATEST.md に出す (公開済みの是正対象)。
 
+**解説の年が古い key は作り直しに戻す (`stale-year`、2026-10-07〜)。** ai-content.json は生成時の年を
+`yearCode` に持つが、`auditRow` は本文の形しか見ないので、取り込みで新しい年が増えても `done` のまま
+古い年を語り続けていた。キューは values.json の最新年と比べ、違えば `needs-regen` (reason `stale-year`) にする
+(`.claude/scripts/ai-content/lib/year-freshness.mjs`)。初回実測で GSC 流入のある 1,504 件中 43 件が該当した。
+
 **ブログ側の `checkGroundedRows` (`packages/ai-content/src/services/blog-topic-gate.ts`) との差は意図的**。
 blocker の 4 検査は同じ判断だが、40 行未満をブログは reject・ai-content は warn に留める。問うている
 ことが違うため — ブログは「この 1 本の記事を書けるか」(全国の傾向を論じる散文には県の網羅が要る)、
