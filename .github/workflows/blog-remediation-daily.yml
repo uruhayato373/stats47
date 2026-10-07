@@ -60,8 +60,9 @@ jobs:
       # 先に図に描いた年が指標の最新年より古い公開記事の一覧を作る (2026-10-07 新設。
       # build-stale-data-years.mjs → data/blog/stale-data-years.{json,md})。取り込みで新しい年が増えても
       # 記事は書いた時点の年のままなので、データを取り直す候補を出す。年が進めば増えるのが正常なので
-      # ラチェットにはしない。どちらも公開 R2 を読む同じ収集の単位なので 1 step にまとめる
-      # (片方だけ落ちる状況はほぼ無く、落ちたら step ごと失敗として残る)。
+      # ラチェットにはしない。キューはこの一覧を data-refresh レーンに入れるので先に作る (取り直しは
+      # refresh-article-data-years.mjs → 本文の書き直し → critic)。どちらも公開 R2 を読む同じ収集の単位なので
+      # 1 step にまとめる (片方だけ落ちる状況はほぼ無く、落ちたら step ごと失敗として残る)。
       - name: ♻️ Rebuild remediation queue
         continue-on-error: true # R2 取得失敗等で Issue 通知本体を止めない
         env:

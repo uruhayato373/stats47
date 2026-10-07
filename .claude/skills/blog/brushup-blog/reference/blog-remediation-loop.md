@@ -66,11 +66,15 @@ node .claude/scripts/blog/build-remediation-queue.mjs
 
 ```
 combinedScore = 0.6 × norm(GSC expectedLift) + 0.4 × norm(blockers×3 + warnings)
-lane = blockers>0 ? "must-fix" : expectedLift>0 ? "opportunity" : "clean"(キュー除外)
-ソート = lane (must-fix → opportunity) → combinedScore 降順 → expectedLift 降順 → conformance 昇順
+lane = blockers>0 ? "must-fix" : staleData あり ? "data-refresh" : expectedLift>0 ? "opportunity" : "clean"(キュー除外)
+ソート = lane (must-fix → data-refresh → opportunity) → combinedScore 降順 → expectedLift 降順 → conformance 昇順
 ```
 
 - **must-fix レーン最上位**: publish-blocker を持つ記事を必ず先に消す。レーン内は高流入×blocker が最優先、低流入 blocker も残り順次消化。
+- **data-refresh レーン (2026-10-07)**: 図の年が指標の最新年より古い記事 (`data/blog/stale-data-years.json`。日次でキューの前に作る)。
+  本文中のランキングカードは最新年を出すので、1 本の記事に 2 つの年が並ぶ。entry の `staleData` に指標と年を持ち、
+  `/brushup-blog` の focus `最新データ更新` (`refresh-article-data-years.mjs` で図を取り直す → 本文を書き直す) で直す。
+  done の記事も、そのあと新しい年が出れば再 pending に戻る。本文がその年そのものを主題にした図だけ source.json の `yearPinnedReason` で外す。
 - **opportunity レーン**: blocker は無いが CTR 改善余地 (expectedLift) がある記事 (CTR-reframe 対象)。
 - **conformance tiebreaker (天井ループ連携)**: `data/blog/winning-patterns.json` (`analyze-winning-patterns.mjs` の出力) があれば各記事に勝ちパターン適合度 (`conformance`) を付与し、同スコア時は **適合度が低い (=改善余地が大きい) 記事を先に**取り出す。天井ループ: `.claude/rules/blog-quality-standards.md` §継続品質ループ。
 

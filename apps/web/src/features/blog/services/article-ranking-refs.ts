@@ -16,9 +16,14 @@ function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 }
 
-/** source.json の `year` (4 桁)。無い・読めないときは undefined。 */
+/**
+ * source.json の `year` (4 桁)。無い・読めないときは undefined。
+ * `yearPinnedReason` (本文がその年そのものを主題として論じる図。特定の年の出来事など) があれば年を返さない
+ * (新しい年が出ても古い図として扱わない。指標 → 記事の回遊には残る)。
+ */
 function chartYear(source: unknown): string | undefined {
   if (!isRecord(source)) return undefined;
+  if (typeof source.yearPinnedReason === "string" && source.yearPinnedReason.trim()) return undefined;
   const year = typeof source.year === "number" ? String(source.year) : source.year;
   return typeof year === "string" && /^\d{4}$/.test(year) ? year : undefined;
 }
