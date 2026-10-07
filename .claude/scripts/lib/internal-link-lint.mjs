@@ -113,7 +113,7 @@ function loadKeySets() {
   for (const filename of fs.readdirSync(path.join(ROOT, SOURCES.themeSets))) {
     if (!filename.endsWith(".ts")) continue;
     const source = readRequired(path.join(SOURCES.themeSets, filename));
-    if (!source.startsWith("// AUTO-GENERATED") || !source.includes("Source of truth: packages/data-configs/src/theme-catalog/")) continue;
+    if (!source.startsWith("// AUTO-GENERATED") || !source.includes("Source of truth: data/themes/catalogs/")) continue;
     const literal = source.match(/export const \w+: IndicatorSet = (\{[\s\S]*?\});/);
     if (!literal) continue;
     const set = JSON.parse(literal[1]);
