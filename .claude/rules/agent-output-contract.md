@@ -42,6 +42,18 @@ OUTPUT FORMAT: only as long as the findings require; the caller reads it to deci
 Structure: 1 paragraph (findings) + 1 paragraph (recommendation).
 ```
 
+## 起票候補 (全 template 共通・必須)
+
+subagent の最終報告は、形式に関係なく最後に「起票候補」を置く。作業中に見つけた依頼範囲外の不具合・改善点・
+再発しうる誤り・環境の問題を 1 件 1 文で書き (複数は「;」区切り)、無ければ「なし」と書く。依頼の範囲内で
+直したものは書かない。推測ではなく、証拠を指せるものだけを書く。
+
+- Template A は表の最終行を起票候補の行にする (列が 2 列でない表は、表の下に起票候補の 1 行を置く)。B / C は最終行を「起票候補:」で始める
+- prompt の OUTPUT FORMAT にこの行を書き忘れても省かない (呼び元はこの行を前提にする)
+- 呼び元は「なし」以外を `.claude/todo/backlog.md` (未完了の行動) か `.claude/memory/` (恒久の教訓) に記録してから
+  turn を終える。記録しないものは返答に「起票しない: <理由>」と書く。Stop hook `check-findings-on-stop.js` が
+  記録の無い候補を 1 回差し戻す
+
 ## 悪い例 / 良い例
 
 ❌ NG（末尾に書いて無視されるパターン）:
