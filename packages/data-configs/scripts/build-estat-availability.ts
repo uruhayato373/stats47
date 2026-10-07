@@ -11,9 +11,12 @@
  *   npx tsx packages/data-configs/scripts/build-estat-availability.ts --force      # 更新日に関係なく取り直す
  *   npx tsx packages/data-configs/scripts/build-estat-availability.ts --offline    # 取得せず、今の台帳から差分の報告だけ作る
  *
- * 出力: data/estat/availability/tables/<statsDataId>.json (台帳) と diff.json・LATEST.md (差分)
- * 対象: 有効な metric のうち県の値を e-Stat (estat / kakei-chousa) から取り込むもの。市区町村の値は対象外。
+ * 出力: data/estat/availability/tables/<statsDataId>.json (台帳) と diff.json・LATEST.md (差分)。
+ *       控えの無い表と更新日が変わった表は、メタ情報の控え data/estat/meta/<statsDataId>.json も取り直す。
+ * 対象: 有効な metric のうち県・市区町村の値を e-Stat (estat / kakei-chousa / citySource) から取り込むもの。
+ *       市区町村は報告だけで、years は県の値で決める (sync-estat-years.ts)。
  */
+import { spawnSync } from "node:child_process";
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -27,6 +30,7 @@ import {
   formatYearList,
   YEAR_EXCLUSION_INHERITED,
   type EstatAvailabilityEntry,
+  type EstatAvailabilityLevel,
   type EstatAvailabilityQuery,
   type EstatAvailabilityTable,
   type YearAvailabilityDiff,
@@ -34,7 +38,13 @@ import {
 import { listAllMetrics } from "../src/registry.js";
 import { listThemeCatalogs } from "../src/theme-catalog/index.js";
 import type { EstatSource, MetricConfig } from "../src/types.js";
-import { fetchPrefectureRowsAllYears, kakeiEstatSource, readAppId } from "./page-data-batch.js";
+import {
+  cityEstatSource,
+  fetchCityRowsAllYears,
+  fetchPrefectureRowsAllYears,
+  kakeiEstatSource,
+  readAppId,
+} from "./page-data-batch.js";
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../..");
 const OUT_DIR = resolve(REPO_ROOT, datasetDir("estat.availability"));
@@ -45,25 +55,38 @@ const REPORT_ROWS = 40;
 
 export interface Target {
   config: MetricConfig;
+  /** 県 (values.json) か市区町村 (cities.json) か */
+  level: EstatAvailabilityLevel;
+  /** 取り込みが使う県の e-Stat 条件 (市区町村もここから表を選ぶ) */
   src: EstatSource;
+  /** 台帳の表 (市区町村は市区町村の表) */
+  table: string;
   query: EstatAvailabilityQuery;
   queryKey: string;
 }
 
-/** 県の値を e-Stat から取り込む有効な metric と、取り込みが投げる条件。 */
+/** e-Stat から値を取り込む有効な metric と、取り込みが投げる条件 (県と市区町村)。 */
 export function collectTargets(): Target[] {
   const targets: Target[] = [];
   for (const config of listAllMetrics()) {
-    if (!config.isActive || !config.entities.includes("prefecture")) continue;
+    if (!config.isActive) continue;
     const src =
       config.source.kind === "estat"
         ? config.source
         : config.source.kind === "kakei-chousa"
           ? kakeiEstatSource(config.source)
           : null;
-    if (!src) continue;
-    const query = availabilityQueryOf(src);
-    targets.push({ config, src, query, queryKey: availabilityQueryKey(query) });
+    if (src && config.entities.includes("prefecture")) {
+      const query = availabilityQueryOf(src);
+      targets.push({ config, level: "prefecture", src, table: src.statsDataId, query, queryKey: availabilityQueryKey(query) });
+    }
+    // 取り込みは e-Stat 以外の県の値でも、citySource があれば市区町村だけ e-Stat から取る
+    const citySrc = src ?? config.citySource ?? null;
+    const city = citySrc && config.entities.includes("city") ? cityEstatSource(config, citySrc) : null;
+    if (citySrc && city) {
+      const query = availabilityQueryOf(city);
+      targets.push({ config, level: "city", src: citySrc, table: city.statsDataId, query, queryKey: availabilityQueryKey(query, "city") });
+    }
   }
   return targets;
 }
@@ -118,7 +141,12 @@ async function fetchTableInfo(
 async function fetchEntry(appId: string, target: Target): Promise<EstatAvailabilityEntry> {
   const fetchedAt = new Date().toISOString();
   try {
-    const { rows, raw } = await fetchPrefectureRowsAllYears(appId, target.config, target.src);
+    const fetched =
+      target.level === "city"
+        ? await fetchCityRowsAllYears(appId, target.config, target.src)
+        : await fetchPrefectureRowsAllYears(appId, target.config, target.src);
+    if (!fetched) throw new Error("市区町村の表が無い");
+    const { rows, raw } = fetched;
     const areasByYear = new Map<string, Set<string>>();
     const seen = new Set<string>();
     let duplicateRows = false;
@@ -133,6 +161,7 @@ async function fetchEntry(appId: string, target: Target): Promise<EstatAvailabil
     }
     return {
       query: target.query,
+      ...(target.level === "city" ? { level: "city" as const } : {}),
       fetchedAt,
       years: Object.fromEntries([...areasByYear.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([y, a]) => [y, a.size])),
       rawRows: raw.toNumber,
@@ -140,7 +169,12 @@ async function fetchEntry(appId: string, target: Target): Promise<EstatAvailabil
       ...(duplicateRows ? { duplicateRows: true } : {}),
     };
   } catch (e) {
-    return { query: target.query, fetchedAt, error: e instanceof Error ? e.message : String(e) };
+    return {
+      query: target.query,
+      ...(target.level === "city" ? { level: "city" as const } : {}),
+      fetchedAt,
+      error: e instanceof Error ? e.message : String(e),
+    };
   }
 }
 
@@ -161,18 +195,19 @@ async function runPool<T>(items: readonly T[], concurrency: number, worker: (ite
 async function refreshLedger(
   targets: readonly Target[],
   opts: { tables: ReadonlySet<string> | null; force: boolean; concurrency: number },
-): Promise<{ tables: number; fetched: number; failedTables: string[] }> {
+): Promise<{ tables: number; fetched: number; failedTables: string[]; updatedTables: string[] }> {
   const appId = readAppId();
   const byTable = new Map<string, Map<string, Target>>();
   for (const t of targets) {
-    if (opts.tables && !opts.tables.has(t.src.statsDataId)) continue;
-    const queries = byTable.get(t.src.statsDataId) ?? new Map<string, Target>();
+    if (opts.tables && !opts.tables.has(t.table)) continue;
+    const queries = byTable.get(t.table) ?? new Map<string, Target>();
     if (!queries.has(t.queryKey)) queries.set(t.queryKey, t);
-    byTable.set(t.src.statsDataId, queries);
+    byTable.set(t.table, queries);
   }
 
   let fetched = 0;
   const failedTables: string[] = [];
+  const updatedTables: string[] = [];
   const ids = [...byTable.keys()].sort();
   for (const [i, statsDataId] of ids.entries()) {
     const queries = byTable.get(statsDataId)!;
@@ -186,10 +221,11 @@ async function refreshLedger(
     }
     const previous = readTable(statsDataId);
     const reuse = !opts.force && previous?.updatedDate === info.updatedDate;
+    if (previous?.updatedDate !== info.updatedDate) updatedTables.push(statsDataId);
     const kept = new Map<string, EstatAvailabilityEntry>();
     if (reuse) {
       for (const entry of previous.queries) {
-        const key = availabilityQueryKey(entry.query);
+        const key = availabilityQueryKey(entry.query, entry.level);
         if (queries.has(key) && !entry.error) kept.set(key, entry);
       }
     }
@@ -210,7 +246,7 @@ async function refreshLedger(
         `${errors > 0 ? `・失敗 ${errors}` : ""})`,
     );
   }
-  return { tables: ids.length, fetched, failedTables };
+  return { tables: ids.length, fetched, failedTables, updatedTables };
 }
 
 // ---- 差分の報告 ----
@@ -258,7 +294,7 @@ export function loadLedgerEntries(): Map<string, Map<string, EstatAvailabilityEn
   if (!existsSync(TABLE_DIR)) return tables;
   for (const file of readdirSync(TABLE_DIR).filter((f) => f.endsWith(".json"))) {
     const table = JSON.parse(readFileSync(resolve(TABLE_DIR, file), "utf8")) as EstatAvailabilityTable;
-    tables.set(table.statsDataId, new Map(table.queries.map((e) => [availabilityQueryKey(e.query), e])));
+    tables.set(table.statsDataId, new Map(table.queries.map((e) => [availabilityQueryKey(e.query, e.level), e])));
   }
   return tables;
 }
@@ -269,8 +305,8 @@ function buildReport(targets: readonly Target[]): { rows: Record<string, MetricD
 
   const rows: Record<string, MetricDiffRow> = {};
   for (const t of [...targets].sort((a, b) => a.config.key.localeCompare(b.config.key))) {
-    const base = { statsDataId: t.src.statsDataId, themes: themes.get(t.config.key) ?? [] };
-    const entry = tables.get(t.src.statsDataId)?.get(t.queryKey);
+    const base = { statsDataId: t.table, themes: themes.get(t.config.key) ?? [] };
+    const entry = tables.get(t.table)?.get(t.queryKey);
     const configYears = expandYearSpec(t.config.years);
     const configText = configYears ? formatYearList(configYears) : "all";
     if (!entry) {
@@ -319,8 +355,83 @@ function buildReport(targets: readonly Target[]): { rows: Record<string, MetricD
   return { rows, generatedAt: new Date().toISOString() };
 }
 
+/** 市区町村の報告で「ほぼ全市区町村」とみなす割合 (最も多く値が出た年の市区町村の数に対して) */
+const CITY_NEAR_FULL_RATIO = 0.9;
+
+interface CityRow {
+  statsDataId: string;
+  status: MetricStatus;
+  configYears: string;
+  /** 市区町村の値がある年 */
+  cityYears?: string;
+  /** 最も多く値が出た年の市区町村の数 */
+  maxCount?: number;
+  /** 設定にあるのに市区町村の値が 1 つも無い年 (補完元の年は除く) */
+  noValueYears?: number[];
+  /** 設定に無いのに、ほぼ全市区町村の値がある年 */
+  extraYears?: number[];
+  error?: string;
+}
+
+/** 市区町村の台帳と years の差 (報告だけ。years は県の値で決める)。 */
+function buildCityReport(targets: readonly Target[]): Record<string, CityRow> {
+  const tables = loadLedgerEntries();
+  const rows: Record<string, CityRow> = {};
+  for (const t of [...targets].sort((a, b) => a.config.key.localeCompare(b.config.key))) {
+    const entry = tables.get(t.table)?.get(t.queryKey);
+    const configYears = expandYearSpec(t.config.years);
+    const base = { statsDataId: t.table, configYears: configYears ? formatYearList(configYears) : "all" };
+    if (!entry) {
+      rows[t.config.key] = { ...base, status: "no-ledger" };
+      continue;
+    }
+    if (entry.error || !entry.years) {
+      rows[t.config.key] = { ...base, status: "fetch-error", error: entry.error };
+      continue;
+    }
+    const years = entry.years;
+    const maxCount = Math.max(0, ...Object.values(years));
+    const cityYears = formatYearList(Object.keys(years).map(Number));
+    if (entry.truncated || entry.duplicateRows) {
+      rows[t.config.key] = { ...base, status: entry.truncated ? "truncated" : "duplicate-rows", cityYears, maxCount };
+      continue;
+    }
+    if (!configYears) {
+      rows[t.config.key] = { ...base, status: "years-all", cityYears, maxCount };
+      continue;
+    }
+    const supplied = new Set((t.config.supplementalSources ?? []).flatMap((x) => x.years));
+    const configured = new Set(configYears);
+    const noValueYears = configYears.filter((y) => !supplied.has(y) && !years[String(y)]);
+    const extraYears = Object.entries(years)
+      .filter(([y, n]) => !configured.has(Number(y)) && n >= maxCount * CITY_NEAR_FULL_RATIO)
+      .map(([y]) => Number(y));
+    const hasDiff = noValueYears.length > 0 || extraYears.length > 0;
+    rows[t.config.key] = {
+      ...base,
+      status: hasDiff ? "diff" : "clean",
+      cityYears,
+      maxCount,
+      ...(noValueYears.length > 0 ? { noValueYears } : {}),
+      ...(extraYears.length > 0 ? { extraYears } : {}),
+    };
+  }
+  return rows;
+}
+
 function writeReport(targets: readonly Target[]): void {
-  const { rows, generatedAt } = buildReport(targets);
+  const prefTargets = targets.filter((t) => t.level === "prefecture");
+  const cityTargets = targets.filter((t) => t.level === "city");
+  const { rows, generatedAt } = buildReport(prefTargets);
+  const cityRows = Object.entries(buildCityReport(cityTargets));
+  const cityCount = (pred: (r: CityRow) => boolean) => cityRows.filter(([, r]) => pred(r)).length;
+  const cityFailures = cityRows.filter(([, r]) => ["no-ledger", "fetch-error", "truncated", "duplicate-rows"].includes(r.status));
+  const cityDiffs = cityRows
+    .filter(([, r]) => r.status === "diff")
+    .sort(([ka, a], [kb, b]) =>
+      (b.noValueYears?.length ?? 0) + (b.extraYears?.length ?? 0) - (a.noValueYears?.length ?? 0) - (a.extraYears?.length ?? 0) ||
+      ka.localeCompare(kb),
+    );
   const all = Object.entries(rows);
   const count = (status: MetricStatus) => all.filter(([, r]) => r.status === status).length;
   const inCategory = (id: (typeof CATEGORIES)[number]["id"]) =>
@@ -334,8 +445,8 @@ function writeReport(targets: readonly Target[]): void {
 
   const summary = {
     metrics: all.length,
-    queries: new Set(targets.map((t) => `${t.src.statsDataId} ${t.queryKey}`)).size,
-    tables: new Set(targets.map((t) => t.src.statsDataId)).size,
+    queries: new Set(prefTargets.map((t) => `${t.table} ${t.queryKey}`)).size,
+    tables: new Set(prefTargets.map((t) => t.table)).size,
     missingInside: inCategory("missingInside").length,
     newer: inCategory("newer").length,
     notInEstat: inCategory("notInEstat").length,
@@ -353,7 +464,20 @@ function writeReport(targets: readonly Target[]): void {
     all.filter(([, r]) => (r.status !== "clean" && r.status !== "years-all") || r.inheritedExclusions || r.judgedExclusions),
   );
   mkdirSync(OUT_DIR, { recursive: true });
-  writeFileSync(resolve(OUT_DIR, "diff.json"), `${JSON.stringify({ generatedAt, summary, metrics: kept }, null, 2)}\n`);
+  const citySummary = {
+    metrics: cityRows.length,
+    tables: new Set(cityTargets.map((t) => t.table)).size,
+    noValueYears: cityCount((r) => (r.noValueYears?.length ?? 0) > 0),
+    extraYears: cityCount((r) => (r.extraYears?.length ?? 0) > 0),
+    clean: cityCount((r) => r.status === "clean"),
+    yearsAll: cityCount((r) => r.status === "years-all"),
+    failures: cityFailures.length,
+  };
+  const keptCities = Object.fromEntries(cityRows.filter(([, r]) => r.status !== "clean" && r.status !== "years-all"));
+  writeFileSync(
+    resolve(OUT_DIR, "diff.json"),
+    `${JSON.stringify({ generatedAt, summary, metrics: kept, citySummary, cities: keptCities }, null, 2)}\n`,
+  );
 
   const section = (c: (typeof CATEGORIES)[number]) => {
     const list = inCategory(c.id);
@@ -431,6 +555,38 @@ function writeReport(targets: readonly Target[]): void {
             ),
           "",
         ]),
+    "## 市区町村 (cities.json)",
+    "",
+    `- 対象: 市区町村の値を e-Stat から取り込む有効な metric ${citySummary.metrics} 件 (市区町村の表 ${citySummary.tables})。` +
+      "数えるのは取り込みと同じく現行の市区町村マスタにあるコードだけ",
+    "- **報告だけで years は変えない** (years は県の値で決める。市区町村は合併でコードが変わり、古い年ほど数が減るため「全市区町村の年」が定まらない)",
+    `- 設定の年に市区町村の値が無い: ${citySummary.noValueYears} 件 / 設定に無い年に市区町村の ${Math.round(CITY_NEAR_FULL_RATIO * 100)}% 以上の値がある: ${citySummary.extraYears} 件 / ` +
+      `差分なし: ${citySummary.clean} 件 / years: "all": ${citySummary.yearsAll} 件 / 台帳なし・失敗等: ${citySummary.failures} 件`,
+    "",
+    ...(cityDiffs.length === 0
+      ? ["差分なし", ""]
+      : [
+          `該当する年の多い順。${cityDiffs.length > REPORT_ROWS ? `上位 ${REPORT_ROWS} 件 (全件は diff.json の cities)。` : ""}`,
+          "",
+          "| 指標 | 市区町村の表 | 設定の年 | 値が無い年 | 設定に無いが値がある年 | 値がある年 (最多の数) |",
+          "|---|---|---|---|---|---|",
+          ...cityDiffs
+            .slice(0, REPORT_ROWS)
+            .map(
+              ([key, r]) =>
+                `| \`${key}\` | ${r.statsDataId} | ${r.configYears} | ${formatYearList(r.noValueYears ?? [])} | ` +
+                `${formatYearList(r.extraYears ?? [])} | ${r.cityYears} (${r.maxCount}) |`,
+            ),
+          "",
+        ]),
+    ...(cityFailures.length === 0
+      ? []
+      : [
+          "| 指標 (市区町村) | 表 | 状態 | 理由 |",
+          "|---|---|---|---|",
+          ...cityFailures.map(([key, r]) => `| \`${key}\` | ${r.statsDataId} | ${r.status} | ${(r.error ?? "").replace(/\|/g, "/").slice(0, 120)} |`),
+          "",
+        ]),
     "## 台帳なし・取得失敗・打ち切り・重複行",
     "",
     ...(failures.length === 0
@@ -447,6 +603,9 @@ function writeReport(targets: readonly Target[]): void {
   console.log(
     `差分: 取り込み忘れ ${summary.missingInside} / 新しい年 ${summary.newer} / e-Stat に無い年 ${summary.notInEstat} / ` +
       `範囲より前 ${summary.older} / 差分なし ${summary.clean} / all ${summary.yearsAll} / 失敗等 ${failures.length}`,
+  );
+  console.log(
+    `市区町村: 値が無い年 ${citySummary.noValueYears} / 設定に無い年 ${citySummary.extraYears} / 差分なし ${citySummary.clean} / 失敗等 ${citySummary.failures}`,
   );
   console.log(`→ ${datasetDir("estat.availability")}/LATEST.md`);
 }
@@ -465,12 +624,31 @@ function parseArgs(argv: readonly string[]) {
   };
 }
 
+/**
+ * 表のメタ情報の控え (`data/estat/meta/<statsDataId>.json`、分類コードの全項目) を、控えの無い表と更新日が変わった表について取り直す。
+ * 取得は既存の fetch-estat-meta.mjs に任せる (控えの形を 1 か所で決めるため)。
+ */
+function refreshTableMeta(tables: readonly string[], updatedTables: readonly string[]): void {
+  const metaDir = resolve(REPO_ROOT, datasetDir("estat.meta"));
+  const ids = [...new Set([...tables.filter((id) => !existsSync(resolve(metaDir, `${id}.json`))), ...updatedTables])].sort();
+  if (ids.length === 0) return;
+  console.log(`メタ情報の控え: ${ids.length} 表を取り直す`);
+  const result = spawnSync(
+    process.execPath,
+    [resolve(REPO_ROOT, ".claude/scripts/estat/fetch-estat-meta.mjs"), "--full", "--no-summary", "--ids", ids.join(",")],
+    { stdio: "inherit" },
+  );
+  if (result.status !== 0) console.warn(`  [meta-fail] fetch-estat-meta.mjs が exit ${result.status} (控えは前回のまま)`);
+}
+
 async function main(): Promise<void> {
   const args = parseArgs(process.argv.slice(2));
   const targets = collectTargets();
   if (!args.offline) {
     const result = await refreshLedger(targets, args);
     console.log(`台帳: 表 ${result.tables} / 取り直した条件 ${result.fetched} / 表の情報を取れなかった表 ${result.failedTables.length}`);
+    const tables = [...new Set(targets.map((t) => t.table))].filter((id) => !args.tables || args.tables.has(id));
+    refreshTableMeta(tables, result.updatedTables);
   }
   writeReport(targets);
 }

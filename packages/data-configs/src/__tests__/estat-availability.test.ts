@@ -41,6 +41,12 @@ describe('台帳の取り出し条件', () => {
     expect(availabilityQueryKey(summed)).not.toBe(availabilityQueryKey(plain));
   });
 
+  it('同じ条件でも市区町村の行は県の行と別のキーになる (同じ表に県と市区町村の数を混ぜない)', () => {
+    const query = { cdCat01: 'A1101' };
+    expect(availabilityQueryKey(query, 'city')).not.toBe(availabilityQueryKey(query));
+    expect(availabilityQueryKey(query, 'prefecture')).toBe(availabilityQueryKey(query));
+  });
+
   it('キーの書き順が違っても同じ条件は同じキーになる', () => {
     expect(availabilityQueryKey({ cdTab: '01', cdCat01: 'A' })).toBe(
       availabilityQueryKey({ cdCat01: 'A', cdTab: '01' }),

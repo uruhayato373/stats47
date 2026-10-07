@@ -1,0 +1,1456 @@
+{
+ "statsDataId": "0004008493",
+ "title": "男女、年間就業日数・就業の規則性・週間就業時間、就業希望意識・就業時間希望・求職活動の有無、従業上の地位・雇用形態別人口（有業者）－全国、都道府県、政令指定都市、県庁所在都市、人口30万以上の市",
+ "statName": "就業構造基本調査",
+ "govOrg": "総務省",
+ "surveyDate": null,
+ "overallTotalNumber": 5595840,
+ "dimensions": [
+  {
+   "id": "tab",
+   "name": "表章項目",
+   "valueCount": 1,
+   "sampleValues": [
+    {
+     "code": "001-2022",
+     "name": "人口",
+     "unit": "人"
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "cat01",
+   "name": "男女",
+   "valueCount": 3,
+   "sampleValues": [
+    {
+     "code": "0",
+     "name": "総数",
+     "unit": null
+    },
+    {
+     "code": "1",
+     "name": "男",
+     "unit": null
+    },
+    {
+     "code": "2",
+     "name": "女",
+     "unit": null
+    }
+   ],
+   "hasTotal": true
+  },
+  {
+   "id": "cat02",
+   "name": "年間日数･規則性･週間時間",
+   "valueCount": 116,
+   "sampleValues": [
+    {
+     "code": "0",
+     "name": "総数",
+     "unit": null
+    },
+    {
+     "code": "1",
+     "name": "200日未満",
+     "unit": null
+    },
+    {
+     "code": "11",
+     "name": "50日未満",
+     "unit": null
+    },
+    {
+     "code": "12",
+     "name": "50～99日",
+     "unit": null
+    },
+    {
+     "code": "13",
+     "name": "100～149日",
+     "unit": null
+    },
+    {
+     "code": "14",
+     "name": "150～199日",
+     "unit": null
+    },
+    {
+     "code": "15",
+     "name": "規則的就業（200日未満）",
+     "unit": null
+    },
+    {
+     "code": "1501",
+     "name": "15時間未満（200日未満）（規則的就業）",
+     "unit": null
+    },
+    {
+     "code": "1502",
+     "name": "15～19時間（200日未満）（規則的就業）",
+     "unit": null
+    },
+    {
+     "code": "1503",
+     "name": "20～24時間（200日未満）（規則的就業）",
+     "unit": null
+    },
+    {
+     "code": "1504",
+     "name": "25～29時間（200日未満）（規則的就業）",
+     "unit": null
+    },
+    {
+     "code": "1505",
+     "name": "30～34時間（200日未満）（規則的就業）",
+     "unit": null
+    },
+    {
+     "code": "1506",
+     "name": "35～39時間（200日未満）（規則的就業）",
+     "unit": null
+    },
+    {
+     "code": "1507",
+     "name": "40～44時間（200日未満）（規則的就業）",
+     "unit": null
+    },
+    {
+     "code": "1508",
+     "name": "45～49時間（200日未満）（規則的就業）",
+     "unit": null
+    },
+    {
+     "code": "1509",
+     "name": "50～54時間（200日未満）（規則的就業）",
+     "unit": null
+    },
+    {
+     "code": "1510",
+     "name": "55～59時間（200日未満）（規則的就業）",
+     "unit": null
+    },
+    {
+     "code": "1511",
+     "name": "60～64時間（200日未満）（規則的就業）",
+     "unit": null
+    },
+    {
+     "code": "1512",
+     "name": "65～69時間（200日未満）（規則的就業）",
+     "unit": null
+    },
+    {
+     "code": "1513",
+     "name": "70～74時間（200日未満）（規則的就業）",
+     "unit": null
+    },
+    {
+     "code": "1514",
+     "name": "75時間以上（200日未満）（規則的就業）",
+     "unit": null
+    },
+    {
+     "code": "15R01",
+     "name": "（再掲）15時間未満（200日未満）（規則的就業）",
+     "unit": null
+    },
+    {
+     "code": "15R02",
+     "name": "（再掲）15～19時間（200日未満）（規則的就業）",
+     "unit": null
+    },
+    {
+     "code": "15R03",
+     "name": "（再掲）20～21時間（200日未満）（規則的就業）",
+     "unit": null
+    },
+    {
+     "code": "15R04",
+     "name": "（再掲）22～29時間（200日未満）（規則的就業）",
+     "unit": null
+    },
+    {
+     "code": "15R05",
+     "name": "（再掲）30～34時間（200日未満）（規則的就業）",
+     "unit": null
+    },
+    {
+     "code": "15R06",
+     "name": "（再掲）35～42時間（200日未満）（規則的就業）",
+     "unit": null
+    },
+    {
+     "code": "15R07",
+     "name": "（再掲）43～45時間（200日未満）（規則的就業）",
+     "unit": null
+    },
+    {
+     "code": "15R08",
+     "name": "（再掲）46～48時間（200日未満）（規則的就業）",
+     "unit": null
+    },
+    {
+     "code": "15R09",
+     "name": "（再掲）49～59時間（200日未満）（規則的就業）",
+     "unit": null
+    },
+    {
+     "code": "15R10",
+     "name": "（再掲）60～64時間（200日未満）（規則的就業）",
+     "unit": null
+    },
+    {
+     "code": "15R11",
+     "name": "（再掲）65～74時間（200日未満）（規則的就業）",
+     "unit": null
+    },
+    {
+     "code": "15R12",
+     "name": "（再掲）75時間以上（200日未満）（規則的就業）",
+     "unit": null
+    },
+    {
+     "code": "16",
+     "name": "不規則的就業（200日未満）",
+     "unit": null
+    },
+    {
+     "code": "17",
+     "name": "季節的就業（200日未満）",
+     "unit": null
+    },
+    {
+     "code": "2",
+     "name": "200～249日",
+     "unit": null
+    },
+    {
+     "code": "201",
+     "name": "15時間未満（200～249日）",
+     "unit": null
+    },
+    {
+     "code": "202",
+     "name": "15～19時間（200～249日）",
+     "unit": null
+    },
+    {
+     "code": "203",
+     "name": "20～24時間（200～249日）",
+     "unit": null
+    },
+    {
+     "code": "204",
+     "name": "25～29時間（200～249日）",
+     "unit": null
+    },
+    {
+     "code": "205",
+     "name": "30～34時間（200～249日）",
+     "unit": null
+    },
+    {
+     "code": "206",
+     "name": "35～39時間（200～249日）",
+     "unit": null
+    },
+    {
+     "code": "207",
+     "name": "40～44時間（200～249日）",
+     "unit": null
+    },
+    {
+     "code": "208",
+     "name": "45～49時間（200～249日）",
+     "unit": null
+    },
+    {
+     "code": "209",
+     "name": "50～54時間（200～249日）",
+     "unit": null
+    },
+    {
+     "code": "210",
+     "name": "55～59時間（200～249日）",
+     "unit": null
+    },
+    {
+     "code": "211",
+     "name": "60～64時間（200～249日）",
+     "unit": null
+    },
+    {
+     "code": "212",
+     "name": "65～69時間（200～249日）",
+     "unit": null
+    },
+    {
+     "code": "213",
+     "name": "70～74時間（200～249日）",
+     "unit": null
+    },
+    {
+     "code": "214",
+     "name": "75時間以上（200～249日）",
+     "unit": null
+    },
+    {
+     "code": "2R01",
+     "name": "（再掲）15時間未満（200～249日）",
+     "unit": null
+    },
+    {
+     "code": "2R02",
+     "name": "（再掲）15～19時間（200～249日）",
+     "unit": null
+    },
+    {
+     "code": "2R03",
+     "name": "（再掲）20～21時間（200～249日）",
+     "unit": null
+    },
+    {
+     "code": "2R04",
+     "name": "（再掲）22～29時間（200～249日）",
+     "unit": null
+    },
+    {
+     "code": "2R05",
+     "name": "（再掲）30～34時間（200～249日）",
+     "unit": null
+    },
+    {
+     "code": "2R06",
+     "name": "（再掲）35～42時間（200～249日）",
+     "unit": null
+    },
+    {
+     "code": "2R07",
+     "name": "（再掲）43～45時間（200～249日）",
+     "unit": null
+    },
+    {
+     "code": "2R08",
+     "name": "（再掲）46～48時間（200～249日）",
+     "unit": null
+    },
+    {
+     "code": "2R09",
+     "name": "（再掲）49～59時間（200～249日）",
+     "unit": null
+    },
+    {
+     "code": "2R10",
+     "name": "（再掲）60～64時間（200～249日）",
+     "unit": null
+    },
+    {
+     "code": "2R11",
+     "name": "（再掲）65～74時間（200～249日）",
+     "unit": null
+    },
+    {
+     "code": "2R12",
+     "name": "（再掲）75時間以上（200～249日）",
+     "unit": null
+    },
+    {
+     "code": "3",
+     "name": "250～299日",
+     "unit": null
+    },
+    {
+     "code": "301",
+     "name": "15時間未満（250～299日）",
+     "unit": null
+    },
+    {
+     "code": "302",
+     "name": "15～19時間（250～299日）",
+     "unit": null
+    },
+    {
+     "code": "303",
+     "name": "20～24時間（250～299日）",
+     "unit": null
+    },
+    {
+     "code": "304",
+     "name": "25～29時間（250～299日）",
+     "unit": null
+    },
+    {
+     "code": "305",
+     "name": "30～34時間（250～299日）",
+     "unit": null
+    },
+    {
+     "code": "306",
+     "name": "35～39時間（250～299日）",
+     "unit": null
+    },
+    {
+     "code": "307",
+     "name": "40～44時間（250～299日）",
+     "unit": null
+    },
+    {
+     "code": "308",
+     "name": "45～49時間（250～299日）",
+     "unit": null
+    },
+    {
+     "code": "309",
+     "name": "50～54時間（250～299日）",
+     "unit": null
+    },
+    {
+     "code": "310",
+     "name": "55～59時間（250～299日）",
+     "unit": null
+    },
+    {
+     "code": "311",
+     "name": "60～64時間（250～299日）",
+     "unit": null
+    },
+    {
+     "code": "312",
+     "name": "65～69時間（250～299日）",
+     "unit": null
+    },
+    {
+     "code": "313",
+     "name": "70～74時間（250～299日）",
+     "unit": null
+    },
+    {
+     "code": "314",
+     "name": "75時間以上（250～299日）",
+     "unit": null
+    },
+    {
+     "code": "3R01",
+     "name": "（再掲）15時間未満（250～299日）",
+     "unit": null
+    },
+    {
+     "code": "3R02",
+     "name": "（再掲）15～19時間（250～299日）",
+     "unit": null
+    },
+    {
+     "code": "3R03",
+     "name": "（再掲）20～21時間（250～299日）",
+     "unit": null
+    },
+    {
+     "code": "3R04",
+     "name": "（再掲）22～29時間（250～299日）",
+     "unit": null
+    },
+    {
+     "code": "3R05",
+     "name": "（再掲）30～34時間（250～299日）",
+     "unit": null
+    },
+    {
+     "code": "3R06",
+     "name": "（再掲）35～42時間（250～299日）",
+     "unit": null
+    },
+    {
+     "code": "3R07",
+     "name": "（再掲）43～45時間（250～299日）",
+     "unit": null
+    },
+    {
+     "code": "3R08",
+     "name": "（再掲）46～48時間（250～299日）",
+     "unit": null
+    },
+    {
+     "code": "3R09",
+     "name": "（再掲）49～59時間（250～299日）",
+     "unit": null
+    },
+    {
+     "code": "3R10",
+     "name": "（再掲）60～64時間（250～299日）",
+     "unit": null
+    },
+    {
+     "code": "3R11",
+     "name": "（再掲）65～74時間（250～299日）",
+     "unit": null
+    },
+    {
+     "code": "3R12",
+     "name": "（再掲）75時間以上（250～299日）",
+     "unit": null
+    },
+    {
+     "code": "4",
+     "name": "300日以上",
+     "unit": null
+    },
+    {
+     "code": "401",
+     "name": "15時間未満（300日以上）",
+     "unit": null
+    },
+    {
+     "code": "402",
+     "name": "15～19時間（300日以上）",
+     "unit": null
+    },
+    {
+     "code": "403",
+     "name": "20～24時間（300日以上）",
+     "unit": null
+    },
+    {
+     "code": "404",
+     "name": "25～29時間（300日以上）",
+     "unit": null
+    },
+    {
+     "code": "405",
+     "name": "30～34時間（300日以上）",
+     "unit": null
+    },
+    {
+     "code": "406",
+     "name": "35～39時間（300日以上）",
+     "unit": null
+    },
+    {
+     "code": "407",
+     "name": "40～44時間（300日以上）",
+     "unit": null
+    },
+    {
+     "code": "408",
+     "name": "45～49時間（300日以上）",
+     "unit": null
+    },
+    {
+     "code": "409",
+     "name": "50～54時間（300日以上）",
+     "unit": null
+    },
+    {
+     "code": "410",
+     "name": "55～59時間（300日以上）",
+     "unit": null
+    },
+    {
+     "code": "411",
+     "name": "60～64時間（300日以上）",
+     "unit": null
+    },
+    {
+     "code": "412",
+     "name": "65～69時間（300日以上）",
+     "unit": null
+    },
+    {
+     "code": "413",
+     "name": "70～74時間（300日以上）",
+     "unit": null
+    },
+    {
+     "code": "414",
+     "name": "75時間以上（300日以上）",
+     "unit": null
+    },
+    {
+     "code": "4R01",
+     "name": "（再掲）15時間未満（300日以上）",
+     "unit": null
+    },
+    {
+     "code": "4R02",
+     "name": "（再掲）15～19時間（300日以上）",
+     "unit": null
+    },
+    {
+     "code": "4R03",
+     "name": "（再掲）20～21時間（300日以上）",
+     "unit": null
+    },
+    {
+     "code": "4R04",
+     "name": "（再掲）22～29時間（300日以上）",
+     "unit": null
+    },
+    {
+     "code": "4R05",
+     "name": "（再掲）30～34時間（300日以上）",
+     "unit": null
+    },
+    {
+     "code": "4R06",
+     "name": "（再掲）35～42時間（300日以上）",
+     "unit": null
+    },
+    {
+     "code": "4R07",
+     "name": "（再掲）43～45時間（300日以上）",
+     "unit": null
+    },
+    {
+     "code": "4R08",
+     "name": "（再掲）46～48時間（300日以上）",
+     "unit": null
+    },
+    {
+     "code": "4R09",
+     "name": "（再掲）49～59時間（300日以上）",
+     "unit": null
+    },
+    {
+     "code": "4R10",
+     "name": "（再掲）60～64時間（300日以上）",
+     "unit": null
+    },
+    {
+     "code": "4R11",
+     "name": "（再掲）65～74時間（300日以上）",
+     "unit": null
+    },
+    {
+     "code": "4R12",
+     "name": "（再掲）75時間以上（300日以上）",
+     "unit": null
+    }
+   ],
+   "hasTotal": true
+  },
+  {
+   "id": "cat03",
+   "name": "就希意識･就時希望･求活",
+   "valueCount": 15,
+   "sampleValues": [
+    {
+     "code": "0",
+     "name": "総数",
+     "unit": null
+    },
+    {
+     "code": "1",
+     "name": "継続就業希望者",
+     "unit": null
+    },
+    {
+     "code": "11",
+     "name": "うち増やしたい（継続就業希望者）",
+     "unit": null
+    },
+    {
+     "code": "12",
+     "name": "うち減らしたい（継続就業希望者）",
+     "unit": null
+    },
+    {
+     "code": "2",
+     "name": "追加就業希望者",
+     "unit": null
+    },
+    {
+     "code": "21",
+     "name": "うち増やしたい（追加就業希望者）",
+     "unit": null
+    },
+    {
+     "code": "211",
+     "name": "うち求職者（追加就業希望者）（うち増やしたい）",
+     "unit": null
+    },
+    {
+     "code": "22",
+     "name": "うち減らしたい（追加就業希望者）",
+     "unit": null
+    },
+    {
+     "code": "221",
+     "name": "うち求職者（追加就業希望者）（うち減らしたい）",
+     "unit": null
+    },
+    {
+     "code": "3",
+     "name": "転職希望者",
+     "unit": null
+    },
+    {
+     "code": "31",
+     "name": "うち増やしたい（転職希望者）",
+     "unit": null
+    },
+    {
+     "code": "311",
+     "name": "うち求職者（転職希望者）（うち増やしたい）",
+     "unit": null
+    },
+    {
+     "code": "32",
+     "name": "うち減らしたい（転職希望者）",
+     "unit": null
+    },
+    {
+     "code": "321",
+     "name": "うち求職者（転職希望者）（うち減らしたい）",
+     "unit": null
+    },
+    {
+     "code": "4",
+     "name": "就業休止希望者",
+     "unit": null
+    }
+   ],
+   "hasTotal": true
+  },
+  {
+   "id": "cat04",
+   "name": "従地位･雇形",
+   "valueCount": 8,
+   "sampleValues": [
+    {
+     "code": "0",
+     "name": "総数",
+     "unit": null
+    },
+    {
+     "code": "1",
+     "name": "うち自営業主",
+     "unit": null
+    },
+    {
+     "code": "2",
+     "name": "うち雇用者",
+     "unit": null
+    },
+    {
+     "code": "21",
+     "name": "会社などの役員",
+     "unit": null
+    },
+    {
+     "code": "22",
+     "name": "会社などの役員を除く雇用者",
+     "unit": null
+    },
+    {
+     "code": "221",
+     "name": "正規の職員・従業員",
+     "unit": null
+    },
+    {
+     "code": "222",
+     "name": "非正規の職員・従業員",
+     "unit": null
+    },
+    {
+     "code": "S",
+     "name": "（別掲）フリーランス",
+     "unit": null
+    }
+   ],
+   "hasTotal": true
+  },
+  {
+   "id": "area",
+   "name": "地域区分",
+   "valueCount": 134,
+   "sampleValues": [
+    {
+     "code": "00000",
+     "name": "全国",
+     "unit": null
+    },
+    {
+     "code": "01000",
+     "name": "北海道",
+     "unit": null
+    },
+    {
+     "code": "01100",
+     "name": "札幌市",
+     "unit": null
+    },
+    {
+     "code": "01204",
+     "name": "旭川市",
+     "unit": null
+    },
+    {
+     "code": "02000",
+     "name": "青森県",
+     "unit": null
+    },
+    {
+     "code": "02201",
+     "name": "青森市",
+     "unit": null
+    },
+    {
+     "code": "03000",
+     "name": "岩手県",
+     "unit": null
+    },
+    {
+     "code": "03201",
+     "name": "盛岡市",
+     "unit": null
+    },
+    {
+     "code": "04000",
+     "name": "宮城県",
+     "unit": null
+    },
+    {
+     "code": "04100",
+     "name": "仙台市",
+     "unit": null
+    },
+    {
+     "code": "05000",
+     "name": "秋田県",
+     "unit": null
+    },
+    {
+     "code": "05201",
+     "name": "秋田市",
+     "unit": null
+    },
+    {
+     "code": "06000",
+     "name": "山形県",
+     "unit": null
+    },
+    {
+     "code": "06201",
+     "name": "山形市",
+     "unit": null
+    },
+    {
+     "code": "07000",
+     "name": "福島県",
+     "unit": null
+    },
+    {
+     "code": "07201",
+     "name": "福島市",
+     "unit": null
+    },
+    {
+     "code": "07203",
+     "name": "郡山市",
+     "unit": null
+    },
+    {
+     "code": "07204",
+     "name": "いわき市",
+     "unit": null
+    },
+    {
+     "code": "08000",
+     "name": "茨城県",
+     "unit": null
+    },
+    {
+     "code": "08201",
+     "name": "水戸市",
+     "unit": null
+    },
+    {
+     "code": "09000",
+     "name": "栃木県",
+     "unit": null
+    },
+    {
+     "code": "09201",
+     "name": "宇都宮市",
+     "unit": null
+    },
+    {
+     "code": "10000",
+     "name": "群馬県",
+     "unit": null
+    },
+    {
+     "code": "10201",
+     "name": "前橋市",
+     "unit": null
+    },
+    {
+     "code": "10202",
+     "name": "高崎市",
+     "unit": null
+    },
+    {
+     "code": "11000",
+     "name": "埼玉県",
+     "unit": null
+    },
+    {
+     "code": "11100",
+     "name": "さいたま市",
+     "unit": null
+    },
+    {
+     "code": "11201",
+     "name": "川越市",
+     "unit": null
+    },
+    {
+     "code": "11203",
+     "name": "川口市",
+     "unit": null
+    },
+    {
+     "code": "11208",
+     "name": "所沢市",
+     "unit": null
+    },
+    {
+     "code": "11222",
+     "name": "越谷市",
+     "unit": null
+    },
+    {
+     "code": "12000",
+     "name": "千葉県",
+     "unit": null
+    },
+    {
+     "code": "12100",
+     "name": "千葉市",
+     "unit": null
+    },
+    {
+     "code": "12203",
+     "name": "市川市",
+     "unit": null
+    },
+    {
+     "code": "12204",
+     "name": "船橋市",
+     "unit": null
+    },
+    {
+     "code": "12207",
+     "name": "松戸市",
+     "unit": null
+    },
+    {
+     "code": "12217",
+     "name": "柏市",
+     "unit": null
+    },
+    {
+     "code": "13000",
+     "name": "東京都",
+     "unit": null
+    },
+    {
+     "code": "13100",
+     "name": "特別区部",
+     "unit": null
+    },
+    {
+     "code": "13201",
+     "name": "八王子市",
+     "unit": null
+    },
+    {
+     "code": "13209",
+     "name": "町田市",
+     "unit": null
+    },
+    {
+     "code": "14000",
+     "name": "神奈川県",
+     "unit": null
+    },
+    {
+     "code": "14100",
+     "name": "横浜市",
+     "unit": null
+    },
+    {
+     "code": "14130",
+     "name": "川崎市",
+     "unit": null
+    },
+    {
+     "code": "14150",
+     "name": "相模原市",
+     "unit": null
+    },
+    {
+     "code": "14201",
+     "name": "横須賀市",
+     "unit": null
+    },
+    {
+     "code": "14205",
+     "name": "藤沢市",
+     "unit": null
+    },
+    {
+     "code": "15000",
+     "name": "新潟県",
+     "unit": null
+    },
+    {
+     "code": "15100",
+     "name": "新潟市",
+     "unit": null
+    },
+    {
+     "code": "16000",
+     "name": "富山県",
+     "unit": null
+    },
+    {
+     "code": "16201",
+     "name": "富山市",
+     "unit": null
+    },
+    {
+     "code": "17000",
+     "name": "石川県",
+     "unit": null
+    },
+    {
+     "code": "17201",
+     "name": "金沢市",
+     "unit": null
+    },
+    {
+     "code": "18000",
+     "name": "福井県",
+     "unit": null
+    },
+    {
+     "code": "18201",
+     "name": "福井市",
+     "unit": null
+    },
+    {
+     "code": "19000",
+     "name": "山梨県",
+     "unit": null
+    },
+    {
+     "code": "19201",
+     "name": "甲府市",
+     "unit": null
+    },
+    {
+     "code": "20000",
+     "name": "長野県",
+     "unit": null
+    },
+    {
+     "code": "20201",
+     "name": "長野市",
+     "unit": null
+    },
+    {
+     "code": "21000",
+     "name": "岐阜県",
+     "unit": null
+    },
+    {
+     "code": "21201",
+     "name": "岐阜市",
+     "unit": null
+    },
+    {
+     "code": "22000",
+     "name": "静岡県",
+     "unit": null
+    },
+    {
+     "code": "22100",
+     "name": "静岡市",
+     "unit": null
+    },
+    {
+     "code": "22130",
+     "name": "浜松市",
+     "unit": null
+    },
+    {
+     "code": "23000",
+     "name": "愛知県",
+     "unit": null
+    },
+    {
+     "code": "23100",
+     "name": "名古屋市",
+     "unit": null
+    },
+    {
+     "code": "23201",
+     "name": "豊橋市",
+     "unit": null
+    },
+    {
+     "code": "23202",
+     "name": "岡崎市",
+     "unit": null
+    },
+    {
+     "code": "23203",
+     "name": "一宮市",
+     "unit": null
+    },
+    {
+     "code": "23206",
+     "name": "春日井市",
+     "unit": null
+    },
+    {
+     "code": "23211",
+     "name": "豊田市",
+     "unit": null
+    },
+    {
+     "code": "24000",
+     "name": "三重県",
+     "unit": null
+    },
+    {
+     "code": "24201",
+     "name": "津市",
+     "unit": null
+    },
+    {
+     "code": "24202",
+     "name": "四日市市",
+     "unit": null
+    },
+    {
+     "code": "25000",
+     "name": "滋賀県",
+     "unit": null
+    },
+    {
+     "code": "25201",
+     "name": "大津市",
+     "unit": null
+    },
+    {
+     "code": "26000",
+     "name": "京都府",
+     "unit": null
+    },
+    {
+     "code": "26100",
+     "name": "京都市",
+     "unit": null
+    },
+    {
+     "code": "27000",
+     "name": "大阪府",
+     "unit": null
+    },
+    {
+     "code": "27100",
+     "name": "大阪市",
+     "unit": null
+    },
+    {
+     "code": "27140",
+     "name": "堺市",
+     "unit": null
+    },
+    {
+     "code": "27203",
+     "name": "豊中市",
+     "unit": null
+    },
+    {
+     "code": "27205",
+     "name": "吹田市",
+     "unit": null
+    },
+    {
+     "code": "27207",
+     "name": "高槻市",
+     "unit": null
+    },
+    {
+     "code": "27210",
+     "name": "枚方市",
+     "unit": null
+    },
+    {
+     "code": "27227",
+     "name": "東大阪市",
+     "unit": null
+    },
+    {
+     "code": "28000",
+     "name": "兵庫県",
+     "unit": null
+    },
+    {
+     "code": "28100",
+     "name": "神戸市",
+     "unit": null
+    },
+    {
+     "code": "28201",
+     "name": "姫路市",
+     "unit": null
+    },
+    {
+     "code": "28202",
+     "name": "尼崎市",
+     "unit": null
+    },
+    {
+     "code": "28203",
+     "name": "明石市",
+     "unit": null
+    },
+    {
+     "code": "28204",
+     "name": "西宮市",
+     "unit": null
+    },
+    {
+     "code": "29000",
+     "name": "奈良県",
+     "unit": null
+    },
+    {
+     "code": "29201",
+     "name": "奈良市",
+     "unit": null
+    },
+    {
+     "code": "30000",
+     "name": "和歌山県",
+     "unit": null
+    },
+    {
+     "code": "30201",
+     "name": "和歌山市",
+     "unit": null
+    },
+    {
+     "code": "31000",
+     "name": "鳥取県",
+     "unit": null
+    },
+    {
+     "code": "31201",
+     "name": "鳥取市",
+     "unit": null
+    },
+    {
+     "code": "32000",
+     "name": "島根県",
+     "unit": null
+    },
+    {
+     "code": "32201",
+     "name": "松江市",
+     "unit": null
+    },
+    {
+     "code": "33000",
+     "name": "岡山県",
+     "unit": null
+    },
+    {
+     "code": "33100",
+     "name": "岡山市",
+     "unit": null
+    },
+    {
+     "code": "33202",
+     "name": "倉敷市",
+     "unit": null
+    },
+    {
+     "code": "34000",
+     "name": "広島県",
+     "unit": null
+    },
+    {
+     "code": "34100",
+     "name": "広島市",
+     "unit": null
+    },
+    {
+     "code": "34207",
+     "name": "福山市",
+     "unit": null
+    },
+    {
+     "code": "35000",
+     "name": "山口県",
+     "unit": null
+    },
+    {
+     "code": "35203",
+     "name": "山口市",
+     "unit": null
+    },
+    {
+     "code": "36000",
+     "name": "徳島県",
+     "unit": null
+    },
+    {
+     "code": "36201",
+     "name": "徳島市",
+     "unit": null
+    },
+    {
+     "code": "37000",
+     "name": "香川県",
+     "unit": null
+    },
+    {
+     "code": "37201",
+     "name": "高松市",
+     "unit": null
+    },
+    {
+     "code": "38000",
+     "name": "愛媛県",
+     "unit": null
+    },
+    {
+     "code": "38201",
+     "name": "松山市",
+     "unit": null
+    },
+    {
+     "code": "39000",
+     "name": "高知県",
+     "unit": null
+    },
+    {
+     "code": "39201",
+     "name": "高知市",
+     "unit": null
+    },
+    {
+     "code": "40000",
+     "name": "福岡県",
+     "unit": null
+    },
+    {
+     "code": "40100",
+     "name": "北九州市",
+     "unit": null
+    },
+    {
+     "code": "40130",
+     "name": "福岡市",
+     "unit": null
+    },
+    {
+     "code": "40203",
+     "name": "久留米市",
+     "unit": null
+    },
+    {
+     "code": "41000",
+     "name": "佐賀県",
+     "unit": null
+    },
+    {
+     "code": "41201",
+     "name": "佐賀市",
+     "unit": null
+    },
+    {
+     "code": "42000",
+     "name": "長崎県",
+     "unit": null
+    },
+    {
+     "code": "42201",
+     "name": "長崎市",
+     "unit": null
+    },
+    {
+     "code": "43000",
+     "name": "熊本県",
+     "unit": null
+    },
+    {
+     "code": "43100",
+     "name": "熊本市",
+     "unit": null
+    },
+    {
+     "code": "44000",
+     "name": "大分県",
+     "unit": null
+    },
+    {
+     "code": "44201",
+     "name": "大分市",
+     "unit": null
+    },
+    {
+     "code": "45000",
+     "name": "宮崎県",
+     "unit": null
+    },
+    {
+     "code": "45201",
+     "name": "宮崎市",
+     "unit": null
+    },
+    {
+     "code": "46000",
+     "name": "鹿児島県",
+     "unit": null
+    },
+    {
+     "code": "46201",
+     "name": "鹿児島市",
+     "unit": null
+    },
+    {
+     "code": "47000",
+     "name": "沖縄県",
+     "unit": null
+    },
+    {
+     "code": "47201",
+     "name": "那覇市",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "time",
+   "name": "時間軸",
+   "valueCount": 1,
+   "sampleValues": [
+    {
+     "code": "2022000000",
+     "name": "2022年",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  }
+ ]
+}

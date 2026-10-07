@@ -1,7 +1,8 @@
 {
-  "hash": "09816b3d9ab8873bff4ab61589984f71ab0e08195ae14787552a78da872511b8",
-  "audited_at": "2026-10-07T02:22:48",
+  "hash": "ad2f8fae9d55f38f124592f988120d9a804b2e7d3cbdb99f1fecd4a4b87334ab",
+  "audited_at": "2026-10-07T02:50:29",
   "files": [
-    ".claude/rules/metric-config-standards.md"
+    ".claude/rules/metric-config-standards.md",
+    ".claude/scripts/estat/fetch-estat-meta.mjs"
   ]
 }

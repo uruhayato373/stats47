@@ -95,9 +95,10 @@ function plan(migrate: boolean, removeMissing: boolean): { plans: Plan[]; skippe
   const ledger = loadLedgerEntries();
   const plans: Plan[] = [];
   const skipped: string[] = [];
-  for (const target of collectTargets()) {
+  // years は県の値で決める (市区町村の台帳は報告だけ。市区町村は合併でコードが変わり「全市区町村」の年が定まらない)
+  for (const target of collectTargets().filter((t) => t.level === "prefecture")) {
     const { config } = target;
-    const entry = ledger.get(target.src.statsDataId)?.get(target.queryKey);
+    const entry = ledger.get(target.table)?.get(target.queryKey);
     if (!entry?.years || entry.error || entry.truncated || entry.duplicateRows) continue;
     const configYears = expandYearSpec(config.years);
     if (!configYears) continue;

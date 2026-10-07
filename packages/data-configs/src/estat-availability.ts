@@ -20,11 +20,16 @@ export type EstatAvailabilityQuery = Omit<
   'kind' | 'statsDataId' | 'valueScale' | 'displayName' | 'url'
 >;
 
+/** 台帳の行が数える地域。県 (既定) か市区町村 (現行の市区町村マスタにあるコードだけ)。 */
+export type EstatAvailabilityLevel = 'prefecture' | 'city';
+
 export interface EstatAvailabilityEntry {
   query: EstatAvailabilityQuery;
+  /** 市区町村の値を数えた行だけ 'city' を持つ (無ければ県) */
+  level?: 'city';
   /** この条件を取り直した日時 (ISO) */
   fetchedAt: string;
-  /** 年 (4 桁) → 値のある都道府県の数 (同じ県の重複行は 1 と数える)。値が 1 県も無い年は載せない */
+  /** 年 (4 桁) → 値のある都道府県 (level が city なら市区町村) の数 (同じ地域の重複行は 1 と数える)。値が 1 つも無い年は載せない */
   years?: Record<string, number>;
   /** e-Stat が返した行数 */
   rawRows?: number;
@@ -69,11 +74,15 @@ export function availabilityQueryOf(source: EstatSource): EstatAvailabilityQuery
   return query as EstatAvailabilityQuery;
 }
 
-/** 取り出し条件を 1 本の文字列にする (キーの順は固定)。同じ条件の metric は同じ台帳の行を使う。 */
-export function availabilityQueryKey(query: EstatAvailabilityQuery): string {
-  return JSON.stringify(
-    QUERY_KEYS.filter((key) => query[key] !== undefined).map((key) => [key, query[key]]),
+/** 取り出し条件を 1 本の文字列にする (キーの順は固定)。同じ条件の metric は同じ台帳の行を使う。市区町村は別の行。 */
+export function availabilityQueryKey(
+  query: EstatAvailabilityQuery,
+  level: EstatAvailabilityLevel = 'prefecture',
+): string {
+  const key = JSON.stringify(
+    QUERY_KEYS.filter((k) => query[k] !== undefined).map((k) => [k, query[k]]),
   );
+  return level === 'city' ? `city:${key}` : key;
 }
 
 /** `years` を 4 桁の年の昇順の配列にする。`'all'` は許可リストが無いので null。 */
