@@ -27,10 +27,10 @@ describe("extractChartRankingRefs", () => {
   });
 
   it("年を固定した図 (yearPinnedReason) は指標だけを返し、古い図として扱わない", () => {
-    const source = { kind: "ranking", rankingKey: "total-population", year: "1989", yearPinnedReason: "50 年の推移の起点" };
+    const source = { kind: "ranking", rankingKey: "total-population", year: "2011", yearPinnedReason: "2011 年の震災直後を主題にした図" };
     expect(extractChartRankingRefs(source)).toEqual([{ rankingKey: "total-population" }]);
     expect(extractChartRankingRefs({ ...source, yearPinnedReason: " " })).toEqual([
-      { rankingKey: "total-population", year: "1989" },
+      { rankingKey: "total-population", year: "2011" },
     ]);
   });
 });

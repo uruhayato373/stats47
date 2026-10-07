@@ -18,7 +18,7 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 
 /**
  * source.json の `year` (4 桁)。無い・読めないときは undefined。
- * `yearPinnedReason` (意図して過去の年を描いた図。推移の起点の年や手順解説の例) があれば年を返さない
+ * `yearPinnedReason` (本文がその年そのものを主題として論じる図。特定の年の出来事など) があれば年を返さない
  * (新しい年が出ても古い図として扱わない。指標 → 記事の回遊には残る)。
  */
 function chartYear(source: unknown): string | undefined {

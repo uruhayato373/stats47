@@ -10,7 +10,7 @@ import {
 } from "../refresh-chart-year.mjs";
 
 // 図を最新年で取り直す判定。自動で作り直すのは fetch-ranking-data-r2.mjs の形の図だけで、
-// 意図して過去の年を描いた図と、形の違う図には触らない (推測で作り直すと値を捏造しうる) ことを固定する。
+// 年を固定した図 (本文がその年そのものを主題にした図) と、形の違う図には触らない (推測で作り直すと値を捏造しうる) ことを固定する。
 const rankingSource = { kind: "ranking", rankingKey: "dairy-cattle-count", year: "2018" };
 const rankingData = {
   title: "乳用牛飼養頭数",
@@ -56,11 +56,11 @@ describe("planChartRefresh", () => {
 
   it("yearPinnedReason のある図は年が古くても触らない", () => {
     const plan = planChartRefresh({
-      source: { ...rankingSource, yearPinnedReason: "50 年の推移の起点" },
+      source: { ...rankingSource, yearPinnedReason: "2011 年の震災直後を主題にした図" },
       data: rankingData,
       latestYear: "2025",
     });
-    assert.deepEqual(plan, { status: "pinned", reason: "50 年の推移の起点" });
+    assert.deepEqual(plan, { status: "pinned", reason: "2011 年の震災直後を主題にした図" });
   });
 
   it("ranking 以外の kind・年の無い図・形の違う data は手作業に回す", () => {

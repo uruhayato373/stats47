@@ -14,8 +14,9 @@
  *
  * - 対象は `kind: "ranking"` で、data JSON が fetch-ranking-data-r2.mjs の形の図だけ (判定は lib/refresh-chart-year.mjs)。
  *   それ以外 (散布図・計算値・手書き) は理由を付けて「手作業」に出す
- * - source.json に `yearPinnedReason` がある図 (推移の起点の年・手順解説の例など、意図して過去の年を描いた図) は触らない。
- *   古い年が意図したものなら、取り直さずにこの項目を足す
+ * - source.json に `yearPinnedReason` がある図 (本文がその年そのものを主題として論じる図) は触らない
+ * - 取り直せる図には、本文で図の年と最新年がそれぞれ何回出るかを付ける。図の年が 0 回なら本文は別の年を語っており、
+ *   図だけが古い食い違い (固定せず取り直す)。判断の手順は /brushup-blog の focus 最新データ更新
  * - SVG は取り直した図だけを一時ディレクトリで generate-article-charts.ts に描かせて戻す (ほかの図は再生成しない)
  *
  * オプション: --base <dir> (既定 docs/21_ブログ記事原稿) / --pull (無いファイルを R2 公開 URL から取る) /
@@ -151,9 +152,10 @@ async function main() {
 
   const refreshed = charts.filter((c) => c.status === "refresh");
   const fetchedAt = new Date().toISOString();
+  const yearCount = (year) => markdown.split(`${year}年`).length - 1;
   for (const chart of refreshed) {
     const { data, notes } = rebuildChartData(chart.data, chart.partition, chart);
-    chart.notes = notes;
+    chart.notes = [...notes, `本文: ${chart.fromYear}年 ${yearCount(chart.fromYear)} 回 / ${chart.toYear}年 ${yearCount(chart.toYear)} 回`];
     if (!APPLY) continue;
     fs.writeFileSync(path.join(dataDir, `${chart.base}.json`), `${JSON.stringify(data, null, 2)}\n`);
     fs.writeFileSync(
@@ -191,8 +193,9 @@ async function main() {
   }
   if (refreshed.length > 0) {
     console.log(
-      "\n古い年を意図して描いた図 (推移の起点の年・手順解説の例など) は取り直さず、" +
-        "その図の source.json に `yearPinnedReason` (理由) を書く。",
+      "\n補足の「本文: 図の年 N 回 / 最新年 M 回」で直し方を決める。図の年が 0 回なら図だけの食い違い (図だけ取り直す)。" +
+        "本文も古い年で一貫していれば本文も書き直す。本文がその年そのものを主題にしているときだけ、" +
+        "取り直さず source.json に `yearPinnedReason` を書く。",
     );
     console.log(`\n## 本文で古い年を書いた行 (${mentions.length} 行)\n`);
     for (const m of mentions) console.log(`- L${m.line}: ${m.text.trim().slice(0, 120)}`);

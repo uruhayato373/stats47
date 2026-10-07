@@ -10,7 +10,7 @@
  * 是正キュー (build-remediation-queue.mjs) がこの一覧を読み、該当記事を data-refresh レーンに入れる。
  * 取り直しは refresh-article-data-years.mjs (図の data JSON・source.json・SVG を最新年で作り直す) →
  * 本文の年と数値の書き直し → critic (/brushup-blog の focus 最新データ更新)。
- * source.json に yearPinnedReason がある図 (意図して過去の年を描いた図) は年を持たないので一覧に出ない。
+ * source.json に yearPinnedReason がある図 (本文がその年そのものを主題にした図) は年を持たないので一覧に出ない。
  *
  *   node .claude/scripts/blog/build-stale-data-years.mjs
  *
@@ -59,7 +59,7 @@ async function main() {
     `- 公開記事 ${published.length} 件のうち、使う指標を snapshot から読めた記事 ${withRefs} 件を判定` +
       (withRefs === 0 ? " (blog snapshot に rankingRefs がまだ無い。次の sync-snapshots の blog task で入る)" : ""),
     `- 図の年が指標の最新年より古い記事: **${stale.length} 件**。遅れの大きい順`,
-    "- 直し方: `node .claude/scripts/blog/refresh-article-data-years.mjs --slug <slug> --pull --apply` で図を最新年で作り直す → 本文の年と数値を書き直して critic を通す (`/brushup-blog` の focus `最新データ更新`)。意図して古い年を描いた図は取り直さず source.json に `yearPinnedReason` を書く",
+    "- 直し方: `node .claude/scripts/blog/refresh-article-data-years.mjs --slug <slug> --pull --apply` で図を最新年で作り直す → 本文の年と数値を書き直して critic を通す (`/brushup-blog` の focus `最新データ更新`)。本文がその年そのものを主題にした図だけ、取り直さず source.json に `yearPinnedReason` を書く (本文が図の年を語っていない図は図だけの食い違いなので取り直す)",
     "",
     ...(stale.length === 0
       ? ["なし"]
