@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-07T00:22:39.407Z",
+  "generatedAt": "2026-10-07T00:48:58.941Z",
   "platform": "linux",
   "pricing": {
     "source": "https://platform.claude.com/docs/en/about-claude/pricing",
@@ -39,15 +39,15 @@
       "model": "claude-opus-5-5",
       "effort": "high",
       "runs": 0,
-      "calls": 87,
+      "calls": 122,
       "tokens": {
-        "input": 174,
-        "output": 77599,
+        "input": 244,
+        "output": 94746,
         "cacheWrite5m": 0,
-        "cacheWrite1h": 861378,
-        "cacheRead": 37208435
+        "cacheWrite1h": 897031,
+        "cacheRead": 57627491
       },
-      "costUsd": 15.8854
+      "costUsd": 20.5976
     },
     {
       "week": "2026-W41",
@@ -56,15 +56,15 @@
       "model": "claude-opus-5-5",
       "effort": "medium",
       "runs": 1,
-      "calls": 244,
+      "calls": 295,
       "tokens": {
-        "input": 488,
-        "output": 135830,
+        "input": 592,
+        "output": 171034,
         "cacheWrite5m": 0,
-        "cacheWrite1h": 478614,
-        "cacheRead": 70635255
+        "cacheWrite1h": 553464,
+        "cacheRead": 103113859
       },
-      "costUsd": 20.6745
+      "costUsd": 28.4735
     },
     {
       "week": "2026-W41",
