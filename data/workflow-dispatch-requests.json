@@ -1,9 +1,0 @@
-{
-  "workflow": "blog-auto-publish.yml",
-  "inputs": {
-    "slugs": "dairy-cattle-count dairy-cattle-hokkaido-monopoly health-life-expectancy-structure"
-  },
-  "ref": "develop",
-  "reason": "Codex の記事固有背景 (6a1c9b9aa) がそろった 3 記事を公開する。cc-estat-20-publish と sixth-industry-direct-sales は背景の作り直し待ち、fiscal-self-reliance-gap は背景の新規作成待ち",
-  "requestedAt": "2026-10-07T10:52:30Z"
-}
