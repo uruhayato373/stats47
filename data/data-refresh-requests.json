@@ -1,6 +1,0 @@
-{
-  "metric": "actual-overnight-guests,room-utilization-rate,number-of-hotel-facilities,consumer-price-difference-index-overall-excl-rent,consumer-price-difference-index-utilities,consumer-price-difference-index-education,consumer-price-difference-index-culture-recreation,consumer-price-difference-index-transport-communication,consumer-price-difference-index-healthcare,consumer-price-difference-index-clothing-footwear,consumer-price-difference-index-furniture-household,consumer-price-difference-index-miscellaneous",
-  "since": "",
-  "dryRun": true,
-  "reason": "観光・物価テーマの見直し (THEME-REVIEW-TOURISM-CPI-01) で年を広げた 11 指標と新規の実宿泊者数を、R2 に書く前に件数と形状だけ確かめる (2026-10-08)"
-}
