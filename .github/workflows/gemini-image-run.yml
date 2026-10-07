@@ -108,7 +108,9 @@ jobs:
           APPLY: ${{ steps.req.outputs.apply }}
         run: |
           # ARGS は配列で組む (ARG_VECTOR_QUOTED)。--slug の値は CSV 1 引数が正 (フラグ値)
-          ARGS=(--ai-background --slug "$SLUGS" --budget-usd "$BUDGET")
+          # 送り箱 (docs/21) に書き直し中の記事があれば、その新しいタイトルで背景を作る。
+          # 公開時の検査は送り箱の記事で prompt を照合するため、R2 の公開版で作ると止まり続ける。
+          ARGS=(--ai-background --slug "$SLUGS" --budget-usd "$BUDGET" --article-dir docs/21_ブログ記事原稿)
           if [ "$APPLY" != "true" ]; then
             ARGS+=(--out-dir .local/gemini-verify)
           fi

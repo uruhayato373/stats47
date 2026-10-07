@@ -346,7 +346,9 @@ async function readReusableAiBackground(options: {
     background.promptHash !== promptHash &&
     background.promptHash !== legacyPromptHash
   ) {
-    throw new Error(
+    // 記事の書き直しでタイトル等が変わった記事だけを skip (exit 20) にする。
+    // 通常の Error だと公開 run 全体が止まり、後続の記事まで公開されなくなる (2026-10-07)。
+    throw new MissingArticleBackgroundError(
       `${options.slug}: 記事変更によりAI背景promptが変わりました。` +
         'generate-blog-thumbnails-cloud.ts --ai-background --slug で明示再生成してください'
     );
