@@ -1,2 +1,2 @@
 export * from "./article.types";
-export type { BlogSnapshot } from "./snapshot";
+export type { BlogSnapshot, SnapshotRankingRef } from "./snapshot";

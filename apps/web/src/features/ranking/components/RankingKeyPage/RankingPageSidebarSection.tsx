@@ -19,6 +19,7 @@ import {
 import { RankingItemsSidebar } from "../RankingSidebar";
 import { PortStatisticsMapCard } from "../RankingSidebar/PortStatisticsMapCard";
 import { RelatedArticlesCard } from "../RankingSidebar/RelatedArticlesCard";
+import { RelatedThemesCard } from "../RankingSidebar/RelatedThemesCard";
 import { SurveyCard } from "../RankingSidebar/SurveyCard";
 
 import type { RankingItem } from "@stats47/ranking";
@@ -107,6 +108,7 @@ export function RankingPageSidebarSection({
       {/* ランキング名が品目 (牛肉・うどん等) のとき楽天市場の商品を出す。品目でなければ描画しない。 */}
       {!prioritizeRakutenItems && rakutenItems}
       <RelatedArticlesCard rankingKey={rankingKey} areaType={areaType} />
+      {areaType === "prefecture" && <RelatedThemesCard rankingKey={rankingKey} />}
       {/* AdSense再開時は従来位置へ戻し、同一バナーを二重描画しない。 */}
       {ADSENSE_DISPLAY_ENABLED && contextualAffiliateBanners}
       <SurveyCard

@@ -4,6 +4,7 @@ import {
   buildMetricPairArticleIndex,
   buildRankingArticleIndex,
   buildSurveyArticleIndex,
+  selectArticlesUsingRankingKeys,
   parseBlogSnapshot,
   type SnapshotArticle,
 } from './snapshot';
@@ -132,5 +133,31 @@ describe('parseBlogSnapshot ranking refs', () => {
       articles: [{ ...article('a', true), rankingRefs: [{ rankingKey: 'income', year: 2022 }] }],
     })).toThrow('rankingRefs');
     expect(() => parseBlogSnapshot({ ...base, articles: [], rankingArticleIndex: { income: 'a' } })).toThrow('rankingArticleIndex');
+  });
+});
+
+describe('selectArticlesUsingRankingKeys', () => {
+  const withRefs = (slug: string, publishedAt: string, keys: string[]) => ({
+    ...article(slug, true),
+    publishedAt,
+    rankingRefs: keys.map((rankingKey) => ({ rankingKey })),
+  });
+  const articles = [
+    withRefs('old-both', '2026-01-01', ['income', 'rent']),
+    withRefs('new-one', '2026-09-01', ['income']),
+    withRefs('self', '2026-09-02', ['income', 'rent']),
+    { ...article('draft', false), rankingRefs: [{ rankingKey: 'income' }] },
+  ];
+
+  it('同じ指標を多く使う記事を先に、同数なら新しい順に並べ、自分自身と下書きを除く', () => {
+    expect(
+      selectArticlesUsingRankingKeys({ articles }, ['income', 'rent'], { excludeSlug: 'self' }).map((a) => a.slug)
+    ).toEqual(['old-both', 'new-one']);
+  });
+
+  it('焼き込んだ索引があればそれを使い、件数を絞れる', () => {
+    expect(
+      selectArticlesUsingRankingKeys({ articles, rankingArticleIndex: { rent: ['old-both'] } }, ['income', 'rent'], { limit: 1 })
+    ).toEqual([{ slug: 'old-both', title: 'old-both', description: null, rankingKeys: ['rent'] }]);
   });
 });

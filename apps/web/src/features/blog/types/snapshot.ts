@@ -254,3 +254,54 @@ export function buildMetricPairArticleIndex(
       ])
   );
 }
+
+export interface ArticleUsingMetrics {
+  slug: string;
+  title: string;
+  description: string | null;
+  /** 渡した指標のうち、その記事が使うもの */
+  rankingKeys: string[];
+}
+
+/**
+ * 渡した指標を使う公開記事。ランキング (1 指標)・エリア (県の特徴指標)・テーマ (テーマの指標)・
+ * ブログ (記事自身が使う指標) から、同じ指標を扱う記事へ回遊するための共通の選び方。
+ * 一致した指標の多い順、同数なら新しい順。索引が無い旧 snapshot は記事の rankingRefs から作る。
+ */
+export function selectArticlesUsingRankingKeys(
+  snapshot: Pick<BlogSnapshot, 'articles' | 'rankingArticleIndex'>,
+  rankingKeys: readonly string[],
+  options: { excludeSlug?: string; limit?: number } = {}
+): ArticleUsingMetrics[] {
+  const index = snapshot.rankingArticleIndex ?? buildRankingArticleIndex(snapshot.articles);
+  const matched = new Map<string, Set<string>>();
+  for (const key of new Set(rankingKeys)) {
+    for (const slug of index[key] ?? []) {
+      if (slug === options.excludeSlug) continue;
+      const keys = matched.get(slug) ?? new Set<string>();
+      keys.add(key);
+      matched.set(slug, keys);
+    }
+  }
+  const bySlug = new Map(
+    snapshot.articles.filter((a) => a.published === true).map((a) => [a.slug, a])
+  );
+  return [...matched.entries()]
+    .flatMap(([slug, keys]) => {
+      const article = bySlug.get(slug);
+      return article ? [{ article, keys: [...keys].sort() }] : [];
+    })
+    .sort(
+      (a, b) =>
+        b.keys.length - a.keys.length ||
+        (b.article.publishedAt ?? '').localeCompare(a.article.publishedAt ?? '') ||
+        a.article.slug.localeCompare(b.article.slug)
+    )
+    .slice(0, options.limit ?? Number.POSITIVE_INFINITY)
+    .map(({ article, keys }) => ({
+      slug: article.slug,
+      title: article.title,
+      description: article.description,
+      rankingKeys: keys,
+    }));
+}
