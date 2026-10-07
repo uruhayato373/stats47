@@ -1,0 +1,153 @@
+{
+  "key": "natural-environment",
+  "title": "森林と自然環境",
+  "description": "森林面積・林野面積割合、人工造林面積、自然環境保全地域、自然公園を別々に比較します。人工造林面積は植林した面積で、人工林全体の面積ではありません。保全地域と森林面積を足して自然面積とは扱いません。2024年の国立・国定公園の年間延べ利用者数も比較できます。利用者数は県立公園を含まないため、自然公園全体の面積との比率は計算しません。",
+  "category": "lifestyle",
+  "usage": "theme",
+  "metrics": [
+    {
+      "rankingKey": "woodland-area",
+      "shortLabel": "森林面積",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "森林面積を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "forest-area-ratio",
+      "shortLabel": "林野面積割合",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "林野面積割合を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "artificial-forest-area",
+      "shortLabel": "人工造林面積",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "人工造林面積を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "natural-environment-conservation-area",
+      "shortLabel": "自然環境保全地域面積",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "自然環境保全地域面積を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "nature-park-area",
+      "shortLabel": "自然公園面積",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "自然公園面積を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "national-quasi-national-park-visits",
+      "shortLabel": "国立・国定公園の年間延べ利用者数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "国立・国定公園の年間延べ利用者数を都道府県別の実値として比較する。"
+      }
+    }
+  ],
+  "charts": [],
+  "metricGroups": [
+    {
+      "key": "natural-environment-indicator-1",
+      "title": "森林面積",
+      "rankingKeys": [
+        "woodland-area"
+      ],
+      "defaultCheckedKeys": [
+        "woodland-area"
+      ]
+    },
+    {
+      "key": "natural-environment-indicator-2",
+      "title": "林野面積割合",
+      "rankingKeys": [
+        "forest-area-ratio"
+      ],
+      "defaultCheckedKeys": [
+        "forest-area-ratio"
+      ]
+    },
+    {
+      "key": "natural-environment-indicator-3",
+      "title": "人工造林面積",
+      "rankingKeys": [
+        "artificial-forest-area"
+      ],
+      "defaultCheckedKeys": [
+        "artificial-forest-area"
+      ]
+    },
+    {
+      "key": "natural-environment-indicator-4",
+      "title": "自然環境保全地域面積",
+      "rankingKeys": [
+        "natural-environment-conservation-area"
+      ],
+      "defaultCheckedKeys": [
+        "natural-environment-conservation-area"
+      ]
+    },
+    {
+      "key": "natural-environment-indicator-5",
+      "title": "自然公園面積",
+      "rankingKeys": [
+        "nature-park-area"
+      ],
+      "defaultCheckedKeys": [
+        "nature-park-area"
+      ]
+    },
+    {
+      "key": "natural-environment-indicator-6",
+      "title": "国立・国定公園の年間延べ利用者数",
+      "rankingKeys": [
+        "national-quasi-national-park-visits"
+      ],
+      "defaultCheckedKeys": [
+        "national-quasi-national-park-visits"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "key": "natural-environment-overview",
+      "title": "森林と自然環境を都道府県別に見る",
+      "description": "森林面積・林野面積割合、人工造林面積、自然環境保全地域、自然公園を別々に比較します。人工造林面積は植林した面積で、人工林全体の面積ではありません。保全地域と森林面積を足して自然面積とは扱いません。2024年の国立・国定公園の年間延べ利用者数も比較できます。利用者数は県立公園を含まないため、自然公園全体の面積との比率は計算しません。",
+      "metricGroupKeys": [
+        "natural-environment-indicator-1",
+        "natural-environment-indicator-2",
+        "natural-environment-indicator-3",
+        "natural-environment-indicator-4",
+        "natural-environment-indicator-5",
+        "natural-environment-indicator-6"
+      ]
+    }
+  ],
+  "keywords": [
+    "自然環境",
+    "森林",
+    "自然公園",
+    "保全地域"
+  ]
+}

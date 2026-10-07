@@ -1,10 +1,12 @@
 import { describe, expect, it } from "vitest";
 
 import { getMetricConfig } from "../../registry";
-import { OCCUPATION_SALARY_CATALOG } from "../occupation-salary";
 import { parseStatSeriesRefs } from "../stat-series-ref";
 
 import contract from "./fixtures/series-ref-normalized-salary-contract.json";
+import { THEME_CATALOGS } from "..";
+
+const OCCUPATION_SALARY_CATALOG = THEME_CATALOGS["occupation-salary"];
 
 describe("CROSS-PAGE-DATA-SSOT-01 normalized salary migration", () => {
   it("raw職種コードを保持し、MetricConfigの年収合成・単位正規化を必須にする", () => {

@@ -1,7 +1,9 @@
 import { describe, expect, it } from "vitest";
 
 import { EVIDENCE_SOURCE_CATALOG } from "../theme-catalog/evidence-lenses";
-import { SAFETY_CATALOG } from "../theme-catalog/safety";
+import { THEME_CATALOGS } from "../theme-catalog";
+
+const SAFETY_CATALOG = THEME_CATALOGS["safety"];
 
 describe("safety evidence topics", () => {
   it("犯罪と交通事故を別の論点として扱う", () => {

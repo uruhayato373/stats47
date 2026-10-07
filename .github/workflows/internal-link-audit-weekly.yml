@@ -120,7 +120,7 @@ jobs:
               echo "是正手順: 参照元 route から**生成元**を特定して直す (記事本文ではない)。"
               echo "- \`/tag/*\` → \`cd apps/web && npx tsx scripts/generate-known-tag-keys.ts\` (R2 から再生成) + デプロイ"
               echo "- \`/ranking/*\` が県ページ由来 → \`packages/data-configs/src/area-databook/template.ts\` (\`validate:area-databook\`)"
-              echo "- \`/ranking/*\` がテーマ由来 → \`packages/data-configs/src/theme-catalog/*.ts\` (\`validate:catalog\`)"
+              echo "- \`/ranking/*\` がテーマ由来 → \`data/themes/catalogs/*.json\` (\`validate:catalog\`)"
               echo "- \`/survey/*\` → 合成 id (\`ssds-src:*\`) は \`SourceAttribution\` がリンク化しない規約"
             fi
             echo ""

@@ -1,0 +1,751 @@
+{
+  "key": "labor-mobility",
+  "title": "人材流動性・雇用環境",
+  "description": "求人・失業から雇用の需給を、離職・転職から仕事の移動を読み分ける。",
+  "category": "economy",
+  "usage": "theme",
+  "metrics": [
+    {
+      "rankingKey": "turnover-rate",
+      "shortLabel": "離職率",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "令和4年就業構造基本調査結果報告書 用語の解説（茨城県統計課、総務省統計局調査に基づく）",
+        "sourceUrl": "https://www.pref.ibaraki.jp/kikaku/tokei/fukyu/tokei/betsu/rodo/syugyo04-2/yougo.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "総務省の就業構造基本調査を基にした用語解説は「離職者」を過去1年間に仕事を辞めて現在無業の者と定義しており、離職率はこの離職者数を継続就業者・転職者と合わせた母数で割った値である。仕事を辞めて再就業していない層を都道府県間で比較できるため、雇用環境から労働市場を離れる動きを直接示す代表指標として位置付けられる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability"
+        ],
+        "readerQuestion": "自分の地域は仕事を辞めたまま無業になっている人の割合が高いのか低いのか。",
+        "targetReaderOrDecision": "地域の雇用の安定性を評価したい自治体職員や求職者支援機関の担当者。"
+      }
+    },
+    {
+      "rankingKey": "job-change-rate",
+      "shortLabel": "転職率",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和4年就業構造基本調査結果報告書 用語の解説（茨城県統計課、総務省統計局調査に基づく）",
+        "sourceUrl": "https://www.pref.ibaraki.jp/kikaku/tokei/fukyu/tokei/betsu/rodo/syugyo04-2/yougo.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "同じ用語解説は「転職者」を過去1年間に前職を辞めて現職に就いた者と定義しており、転職率はこの転職者数を現在の有業者数で割った値である。離職率が仕事を離れる動きを表すのに対し、転職率は仕事を移る動きを表すため、両者を並べることで離職と転職という異なる就業異動の種類を読み分けられる補完的な指標となる。",
+        "adoptionCriteria": [
+          "complementarity",
+          "comparability"
+        ],
+        "readerQuestion": "自分の地域では仕事を辞めた人のうちどれくらいが別の仕事に移っているのか。",
+        "targetReaderOrDecision": "地域の人材流動性を把握したい労働政策担当者や転職支援サービス事業者。"
+      }
+    },
+    {
+      "rankingKey": "active-job-opening-ratio",
+      "shortLabel": "有効求人倍率",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "一般職業紹介状況(職業安定業務統計) 労働統計所在案内（労働政策研究・研修機構）",
+        "sourceUrl": "https://www.jil.go.jp/kokunai/statistics/shozai/html/a01.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "一般職業紹介状況の解説は有効求人倍率をハローワークの月間有効求人数を月間有効求職者数で割った値と定義しており、求職者1人あたり何件の求人があるかを毎月・地域別に把握できる。求人と求職のバランスを直接示すため、人手不足や雇用の需給ひっ迫の度合いを測る中心指標として位置付けられる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "dataQuality"
+        ],
+        "readerQuestion": "自分の地域は求職者に対して求人がどれだけあるのか。",
+        "targetReaderOrDecision": "求人難や人手不足の実態を確認したい企業経営者や自治体の産業政策担当者。"
+      }
+    },
+    {
+      "rankingKey": "unemployment-rate",
+      "shortLabel": "失業率",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "労働力調査かんたんガイド（総務省統計局）",
+        "sourceUrl": "https://www.stat.go.jp/data/roudou/kantan/gaiyo.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "総務省統計局の解説によれば完全失業率は労働力調査の中核的な公表結果の一つであり、月例経済報告の雇用指標として景気判断や雇用対策に活用されている。国勢調査に基づく5年分の時系列データを都道府県別に比較することで、地域の労働市場の需給ひっ迫度を長期的に確認できる指標として位置付けられる。",
+        "adoptionCriteria": [
+          "comparability",
+          "dataQuality"
+        ],
+        "readerQuestion": "自分の地域の完全失業率はこの20年でどう変化してきたのか。",
+        "targetReaderOrDecision": "地域経済の景気判断や雇用対策の効果を確認したい行政担当者。"
+      }
+    },
+    {
+      "rankingKey": "employment-rate",
+      "shortLabel": "就職率（公共職業安定所）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "一般職業紹介状況(職業安定業務統計) 労働統計所在案内（労働政策研究・研修機構）",
+        "sourceUrl": "https://www.jil.go.jp/kokunai/statistics/shozai/html/a01.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "一般職業紹介状況の解説では就職率をハローワークの就職件数を求職申込件数で除した値としており、求職活動がどれだけ実際の就職に結びついているかを示す。有効求人倍率が需給の量的バランスを示すのに対し、就職率は職業紹介の成立度合いを示すため、求人・求職環境を別角度から補完する指標として位置付けられる。",
+        "adoptionCriteria": [
+          "complementarity",
+          "readerValue"
+        ],
+        "readerQuestion": "自分の地域ではハローワークでの求職活動がどれだけ実際の就職につながっているのか。",
+        "targetReaderOrDecision": "職業紹介の実効性を確認したいハローワーク利用者や就労支援担当者。"
+      }
+    },
+    {
+      "rankingKey": "telework-rate",
+      "shortLabel": "テレワーク率",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和4年就業構造基本調査結果報告書 用語の解説（茨城県統計課、総務省統計局調査に基づく）",
+        "sourceUrl": "https://www.pref.ibaraki.jp/kikaku/tokei/fukyu/tokei/betsu/rodo/syugyo04-2/yougo.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "就業構造基本調査の用語解説はテレワークを有業者がICTを活用してオフィス以外の場所で働くことと定義しており、令和4年調査で初めて都道府県別に集計された新しい働き方の指標である。就業の状態や通勤との関係を地域間で比較する材料となり、離職・転職といった移動とは異なる「働き方の柔軟性」という角度からテーマを補完する。",
+        "adoptionCriteria": [
+          "complementarity",
+          "readerValue"
+        ],
+        "readerQuestion": "自分の地域では働く人のうちどれくらいがテレワークを実施しているのか。",
+        "targetReaderOrDecision": "地域の働き方の柔軟性や通勤負担の変化を知りたい在宅勤務希望者や企業の人事担当者。"
+      }
+    },
+    {
+      "rankingKey": "side-job-rate",
+      "shortLabel": "副業率",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.stat.go.jp/data/shugyou/2022/index.html",
+        "surveyedAt": "2026-09-08",
+        "rationale": "副業率は「就業の状態と働き方」の補足として詳細索引に保持し、冒頭の要約へ重ねない。"
+      }
+    },
+    {
+      "rankingKey": "monthly-average-actual-working-hours-male",
+      "shortLabel": "月間平均実労働時間（男性）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "労働政策研究・研修機構「労働統計用語解説」112 実労働時間数の項（JILPT）",
+        "sourceUrl": "https://www.jil.go.jp/kokunai/statistics/yougo/d21.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "この用語解説は、毎月勤労統計調査で用いられる実労働時間数を「労働者が実際に労働した時間数」と明確に定義し、所定内・所定外労働時間との合成関係を示している。月間平均実労働時間数（男性）はこの実労働時間数を性別・都道府県別に集計した値であり、長時間就業の地域差を比較する章の土台となる基礎統計として位置付けられる。",
+        "adoptionCriteria": [
+          "comparability",
+          "dataQuality"
+        ],
+        "readerQuestion": "自分の住む都道府県の男性労働者は全国平均より長く働いているか。",
+        "targetReaderOrDecision": "労働時間の地域差を確認したい読者・自治体の労働政策担当者。"
+      }
+    },
+    {
+      "rankingKey": "employment-mobility-rate",
+      "shortLabel": "就業異動率",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "政府統計の総合窓口(e-Stat)「指標計算式」F 労働 F04104「就業異動率」",
+        "sourceUrl": "https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/F",
+        "surveyedAt": "2026-09-16",
+        "rationale": "e-Statの指標計算式ページは、就業異動率が転職者数・離職者数・新規就業者数を合算し15歳以上人口で割った合成指標であることを明示している。この定義は、離職・転職・新規就業という異なる動きをひとつの比率にまとめる指標であり、テーマの「離職・転職・就業異動の違い」という論点や「就業異動率を詳しく見る」章の代表指標として直接対応する。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability"
+        ],
+        "readerQuestion": "自分の県では転職・離職・新規就業を合わせた人の動きはどれくらい活発か。",
+        "targetReaderOrDecision": "地域の労働移動の活発さを都道府県間で比較したい読者。"
+      }
+    },
+    {
+      "rankingKey": "day-time-population-ratio",
+      "shortLabel": "昼夜間人口比率",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "政府統計の総合窓口(e-Stat)「指標計算式」A 人口・世帯 A6108「昼夜間人口比率」",
+        "sourceUrl": "https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/A",
+        "surveyedAt": "2026-09-16",
+        "rationale": "e-Statの指標計算式ページはA6108コードを昼夜間人口比率として定義しており、国勢調査の常住人口に対する通勤・通学による流入出を反映した指標であることを示す。この比率は「通勤通学と昼間人口」章で、就業地としての中心性や通勤流動の地域差を捉える中心指標として機能する。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability"
+        ],
+        "readerQuestion": "自分の県は通勤・通学で人口が流入する側か、流出する側か。",
+        "targetReaderOrDecision": "通勤・通学による昼夜間の人口移動を把握したい読者や都市計画担当者。"
+      }
+    },
+    {
+      "rankingKey": "day-time-population",
+      "shortLabel": "昼間人口",
+      "role": "context",
+      "selection": {
+        "proposedBy": "参考文献由来テーマ企画 REFERENCE-CONTENT-DRAFTS-01",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-14",
+        "rationale": "昼夜間人口比率(率)の実数根拠として、就業地への流入規模を詳細索引に保持する。"
+      }
+    },
+    {
+      "rankingKey": "non-regular-employment-rate",
+      "shortLabel": "非正規雇用率",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "平成27年版男女共同参画白書 第1部 コラム「地域における男女の仕事と暮らし」（内閣府男女共同参画局）",
+        "sourceUrl": "https://www.gender.go.jp/about_danjo/whitepaper/h27/zentai/html/honpen/b1_s00_03.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "この白書は総務省「就業構造基本調査」を用いて、有業者に占める正規雇用割合（裏返せば非正規雇用割合）が都道府県によって10ポイント以上開くことを示している。これは非正規雇用率が地域間で大きく異なる代表的な指標であることを裏付け、「非正規雇用と雇用の安定性」章での都道府県比較の根拠となる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability",
+          "readerValue"
+        ],
+        "readerQuestion": "自分の県の非正規雇用率は全国的に見て高い方か低い方か。",
+        "targetReaderOrDecision": "地域の雇用の安定性を比較したい読者・自治体の雇用政策担当者。"
+      }
+    },
+    {
+      "rankingKey": "nonregular-employees-count",
+      "shortLabel": "非正規の職員・従業員数（15歳以上）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和4年版男女共同参画白書 第1部第2節「就業」（内閣府男女共同参画局）",
+        "sourceUrl": "https://www.gender.go.jp/about_danjo/whitepaper/r04/zentai/html/honpen/b1_s02_01.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "白書は非正規雇用労働者の実数を男女別に示しており、割合だけでなく絶対数の把握が政策議論で重視されていることを裏付ける。都道府県別の非正規の職員・従業員数は、人口規模の異なる地域間で非正規雇用の「量」を比較する補完指標として、率指標である非正規雇用率と組み合わせて読む価値がある。",
+        "adoptionCriteria": [
+          "complementarity",
+          "readerValue"
+        ],
+        "readerQuestion": "自分の県には非正規で働く人が実際に何人くらいいるのか。",
+        "targetReaderOrDecision": "地域の非正規雇用の規模を実数で把握したい読者。"
+      }
+    },
+    {
+      "rankingKey": "nonregular-continuation-wish-rate",
+      "shortLabel": "非正規の継続就業希望割合",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "平成18年度 年次経済財政報告（経済財政白書）第1節「雇用の変化とその影響」（内閣府）",
+        "sourceUrl": "https://www5.cao.go.jp/j-j/wp/wp-je06/06-00301.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "経済財政白書は非正規雇用者本人が現在の就業形態の継続を希望する割合を政府統計から取り上げ、性別・年齢層によって大きく異なることを示している。この論点は、非正規雇用者数や非正規雇用率だけでは分からない「働き方への満足度・安定志向」という角度を補い、非正規雇用と雇用の安定性章の解釈に厚みを与える。",
+        "adoptionCriteria": [
+          "complementarity",
+          "readerValue"
+        ],
+        "readerQuestion": "非正規で働く人のうち、今の働き方を続けたいと考えている人はどれくらいいるのか。",
+        "targetReaderOrDecision": "非正規雇用の質や安定性を数だけでなく本人の意向から読み取りたい読者。"
+      }
+    },
+    {
+      "rankingKey": "nonregular-job-change-wish-rate",
+      "shortLabel": "非正規の転職希望割合",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "平成9年就業構造基本調査 用語の解説「転職希望者」（総務省統計局）",
+        "sourceUrl": "https://www.stat.go.jp/data/shugyou/1997/4.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "就業構造基本調査の用語解説は「転職希望者」を、現在の仕事を続けながら別の仕事も持ちたい「追加就業希望者」と明確に区別し、現職を離れて他の仕事に移ることを望む人と定義している。非正規雇用者に限ってこの割合を見ることで、非正規という雇用形態そのものへの不満や不安定さが仕事の移動意欲にどう表れているかを、離職・転職を扱うテーマの問いに直接結び付けて読み解ける。",
+        "adoptionCriteria": [
+          "representativeness",
+          "complementarity"
+        ],
+        "readerQuestion": "非正規雇用で働く人のうち、どれくらいの人が今の仕事を辞めて別の仕事に変わりたいと考えているか。",
+        "targetReaderOrDecision": "非正規雇用の待遇改善策や正社員転換支援策を検討する地方自治体の労働政策担当者。"
+      }
+    },
+    {
+      "rankingKey": "monthly-average-actual-working-hours-female",
+      "shortLabel": "女性月間平均実労働時間",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "統計FAQ 16D-Q01「平均的な就業時間」（総務省統計局）",
+        "sourceUrl": "https://www.stat.go.jp/library/faq/faq16/faq16d01.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "統計局のFAQは、平均的な就業時間を捉える調査として労働力調査と並び毎月勤労統計調査の月間実労働時間数を挙げており、これが働き方の実態を測る公式な指標であることを裏付けている。女性の実労働時間を都道府県別・時系列で見ることで、非正規雇用や短時間就業の広がりが地域の労働時間水準にどう反映されているかを、他の雇用指標と組み合わせて補完的に読み解ける。",
+        "adoptionCriteria": [
+          "comparability",
+          "complementarity"
+        ],
+        "readerQuestion": "女性の月間実労働時間数は、地域や年によってどのように変化しているか。",
+        "targetReaderOrDecision": "女性の働き方や労働時間の地域差を調べたい研究者・自治体の男女共同参画担当者。"
+      }
+    },
+    {
+      "rankingKey": "employees-weekly-hours-60plus-count",
+      "shortLabel": "週60時間以上の雇用者数（年間200日以上）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
+        "surveyedAt": "2026-09-09",
+        "rationale": "週60時間以上の雇用者数（年間200日以上）を既存テーマの独立章へ追加する。"
+      }
+    },
+    {
+      "rankingKey": "employees-weekly-hours-60plus-rate",
+      "shortLabel": "週60時間以上の雇用者割合（年間200日以上）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和4年版 労働経済の分析 第1部第3章「労働時間・賃金等の動向」（厚生労働省）",
+        "sourceUrl": "https://www.mhlw.go.jp/stf/wp/hakusyo/roudou/21/1-3.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "労働経済白書は週60時間以上就労する雇用者の割合を長時間労働是正の進捗を示す代表的な指標として位置付け、働き方改革関連法の施行前後で男女別・年次別に比較している。この割合を都道府県別に見ることで、長時間就業の是正が地域でどこまで進んでいるかを、労働時間や人手不足の章と結び付けて評価できる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "readerValue"
+        ],
+        "readerQuestion": "週60時間以上働く雇用者の割合は、地域や年によってどう変化しているか。",
+        "targetReaderOrDecision": "長時間労働是正の政策効果を地域別に把握したい労働行政の担当者。"
+      }
+    },
+    {
+      "rankingKey": "commuter-ratio-to-other-municipalities",
+      "shortLabel": "他市区町村への通勤者比率",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和2年国勢調査 従業地・通学地による人口・就業状態等集計結果 結果の概要（総務省統計局）",
+        "sourceUrl": "https://www.stat.go.jp/data/kokusei/2020/kekka/pdf/outline_04.pdf",
+        "surveyedAt": "2026-09-16",
+        "rationale": "国勢調査の結果概要は、他市区町村・他県への通勤通学者比率を都道府県間で比較し、大都市圏近郊の県で顕著に高いことを示す代表的な地域指標として扱っている。この比率は職住が同一市区町村内で完結しない働き方の広がりを表し、通勤・昼間人口の章で就業異動や職業紹介圏の広さを読み解く土台になる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability"
+        ],
+        "readerQuestion": "自分の県では、他の市区町村や県外へ通勤・通学する人の割合はどのくらいか。",
+        "targetReaderOrDecision": "都市圏の通勤圏設定や広域交通政策を検討する自治体・国土交通担当者。"
+      }
+    }
+  ],
+  "charts": [
+    {
+      "componentKey": "labor-mobility-turnover-vs-jobchange",
+      "componentType": "line-chart",
+      "title": "離職率と転職率の比較",
+      "componentProps": {
+        "seriesRefs": [
+          {
+            "metricKey": "turnover-rate"
+          },
+          {
+            "metricKey": "job-change-rate"
+          }
+        ],
+        "labels": [
+          "離職率",
+          "転職率"
+        ],
+        "seriesColors": [
+          "danger",
+          "improve"
+        ]
+      },
+      "relatedRankingKeys": [
+        "turnover-rate",
+        "job-change-rate"
+      ],
+      "sourceName": "社会・人口統計体系",
+      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "turnover",
+      "sortOrder": 10
+    },
+    {
+      "componentKey": "md-labor-mobility-discussion",
+      "componentType": "markdown-section",
+      "title": "数値を比較するときの注意",
+      "componentProps": {
+        "markdown": "求人倍率、失業率、公共職業安定所の就職率は対象と年が異なります。別年の数値を同時点の需給や収支として計算しません。\n\n離職率と転職率は母集団・期間が異なります。同じ人の流入と流出を示す組合せではありません。\n\n働き方と昼夜間人口を確認します。昼夜間人口比率には通勤だけでなく通学も含まれます。"
+      },
+      "sourceName": "労働経済白書 (令和7年版) / 厚生労働白書 (令和7年版) / 男女共同参画白書 (令和7年版) / 経済財政白書 (令和7年版) / 賃金構造基本統計調査 (厚生労働省)",
+      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "reading",
+      "sortOrder": 20
+    },
+    {
+      "componentKey": "md-labor-mobility-faq",
+      "componentType": "markdown-section",
+      "title": "よくある質問",
+      "componentProps": {
+        "displayMode": "faq",
+        "markdown": "### Q1: 求人と失業の需給を見るときの注意は？\n\n求人倍率、失業率、公共職業安定所の就職率は対象と年が異なります。別年の数値を同時点の需給や収支として計算しません。\n\n### Q2: このテーマの数値を比較するときの注意は？\n\n人の移動、就業状態、職業紹介の結果を分けて読みます。"
+      },
+      "sourceName": "労働経済白書 (令和7年版) / 厚生労働白書 (令和7年版) / 三位一体の労働市場改革 (内閣官房)",
+      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "reading",
+      "sortOrder": 30
+    },
+    {
+      "componentKey": "theme-lm-employment-mobility-trend",
+      "componentType": "line-chart",
+      "title": "就業異動率の推移",
+      "componentProps": {
+        "seriesRefs": [
+          {
+            "metricKey": "employment-mobility-rate"
+          }
+        ],
+        "labels": [
+          "就業異動率"
+        ],
+        "seriesColors": [
+          "danger"
+        ]
+      },
+      "relatedRankingKeys": [
+        "employment-mobility-rate"
+      ],
+      "sourceName": "総務省 社会・人口統計体系（労働）",
+      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "employment-mobility",
+      "sortOrder": 40
+    }
+  ],
+  "evidenceTopics": [
+    {
+      "key": "job-separation-and-change",
+      "lensKey": "mobility",
+      "title": "離職・転職・就業異動の違い",
+      "question": "離職、転職、新規就業を分けると、地域の就業異動はどう見えるか。",
+      "summary": "2022年就業構造基本調査の1年前との状態変化を読む。離職率は継続就業者・転職者・離職者の合計、転職率は現在の有業者、就業異動率は15歳以上人口が分母で互いに異なるため、率の大小をそのまま差し引かない。",
+      "sourceKeys": [
+        "stat-employment-status-survey-2022"
+      ],
+      "relatedRankingKeys": [
+        "turnover-rate",
+        "job-change-rate",
+        "employment-mobility-rate"
+      ],
+      "relatedChartKeys": [
+        "labor-mobility-turnover-vs-jobchange",
+        "theme-lm-employment-mobility-trend"
+      ],
+      "relatedThemeKeys": [
+        "labor-wages",
+        "local-economy"
+      ]
+    },
+    {
+      "key": "telework-participation",
+      "lensKey": "participation",
+      "title": "テレワーク実施の地域差",
+      "question": "有業者のうちテレワークを実施した人の割合には、どのような地域差があるか。",
+      "summary": "2022年の有業者を分母に、テレワークを実施した人の割合を比べる単年の構造調査である。産業・職業構成の違いを含むため、地域差を通信環境や制度の効果だけで説明せず、時系列変化とも解釈しない。",
+      "sourceKeys": [
+        "stat-employment-status-survey-2022"
+      ],
+      "relatedRankingKeys": [
+        "telework-rate"
+      ],
+      "relatedThemeKeys": [
+        "labor-wages",
+        "local-economy"
+      ]
+    }
+  ],
+  "keywords": [
+    "離職率",
+    "転職率",
+    "有効求人倍率",
+    "テレワーク",
+    "人材流動性",
+    "都道府県",
+    "ランキング"
+  ],
+  "sections": [
+    {
+      "key": "job-market",
+      "title": "求人・求職と職業紹介",
+      "description": "求人倍率、失業率、公共職業安定所の就職率は対象と年が異なります。別年の数値を同時点の需給や収支として計算しません。",
+      "metricGroupKeys": [
+        "job-market-1",
+        "job-market-2",
+        "job-market-3"
+      ],
+      "chartKeys": []
+    },
+    {
+      "key": "turnover",
+      "title": "離職と転職",
+      "description": "離職率と転職率は母集団・期間が異なります。同じ人の流入と流出を示す組合せではありません。",
+      "metricGroupKeys": [
+        "turnover"
+      ],
+      "chartKeys": [
+        "labor-mobility-turnover-vs-jobchange"
+      ]
+    },
+    {
+      "key": "work-style",
+      "title": "就業の状態と働き方",
+      "description": "働き方と昼夜間人口を確認します。昼夜間人口比率には通勤だけでなく通学も含まれます。",
+      "metricGroupKeys": [
+        "work-style"
+      ],
+      "chartKeys": [],
+      "embeddedSectionKeys": [
+        "commute-flow"
+      ]
+    },
+    {
+      "key": "employment-mobility",
+      "title": "就業異動率を詳しく見る",
+      "description": "就業異動率は15歳以上人口に対する就業状態の変化を示し、離職率・転職率とは分母が異なります。",
+      "metricGroupKeys": [
+        "employment-mobility"
+      ],
+      "chartKeys": [
+        "theme-lm-employment-mobility-trend"
+      ]
+    },
+    {
+      "key": "reading",
+      "title": "読み方",
+      "description": "人の移動、就業状態、職業紹介の結果を分けて読みます。",
+      "metricGroupKeys": [],
+      "chartKeys": [
+        "md-labor-mobility-discussion",
+        "md-labor-mobility-faq"
+      ]
+    },
+    {
+      "key": "candidate-33",
+      "title": "人手不足と求人",
+      "metricGroupKeys": [
+        "candidate-33-1"
+      ]
+    },
+    {
+      "key": "candidate-37",
+      "title": "非正規雇用と雇用の安定性",
+      "description": "非正規雇用率に加え、2022年就業構造基本調査の非正規の職員・従業員数と、継続・転職希望の割合を比較します。希望割合の分母は希望不詳を含む非正規の職員・従業員総数です。継続希望は追加就業希望を含まず、転職希望は実際の転職とは異なります。",
+      "metricGroupKeys": [
+        "candidate-37-1",
+        "candidate-37-2",
+        "candidate-37-3",
+        "candidate-37-4"
+      ]
+    },
+    {
+      "key": "candidate-38",
+      "title": "労働時間と長時間就業",
+      "description": "月間平均実労働時間と、2022年就業構造基本調査の週60時間以上就業する雇用者数・割合を比較します。週60時間以上の指標は役員を除く雇用者のうち年間200日以上就業する人が対象で、割合の分母には週間時間不詳を含みます。主な仕事のふだんの時間を表し、平均実労働時間の系列とは調査と対象が異なります。",
+      "metricGroupKeys": [
+        "candidate-38-1",
+        "candidate-38-2",
+        "candidate-38-3",
+        "candidate-38-4"
+      ]
+    },
+    {
+      "key": "candidate-39",
+      "title": "テレワークと通勤",
+      "metricGroupKeys": [
+        "candidate-39-1"
+      ]
+    },
+    {
+      "key": "candidate-84",
+      "title": "通勤通学と昼間人口",
+      "metricGroupKeys": [
+        "candidate-84-1",
+        "candidate-84-2"
+      ]
+    }
+  ],
+  "metricGroups": [
+    {
+      "key": "job-market-1",
+      "title": "有効求人倍率",
+      "rankingKeys": [
+        "active-job-opening-ratio"
+      ],
+      "defaultCheckedKeys": [
+        "active-job-opening-ratio"
+      ]
+    },
+    {
+      "key": "job-market-2",
+      "title": "失業率",
+      "rankingKeys": [
+        "unemployment-rate"
+      ],
+      "defaultCheckedKeys": [
+        "unemployment-rate"
+      ]
+    },
+    {
+      "key": "job-market-3",
+      "title": "就職率（公共職業安定所）",
+      "rankingKeys": [
+        "employment-rate"
+      ],
+      "defaultCheckedKeys": [
+        "employment-rate"
+      ]
+    },
+    {
+      "key": "turnover",
+      "title": "離職と転職",
+      "rankingKeys": [
+        "turnover-rate",
+        "job-change-rate"
+      ],
+      "defaultCheckedKeys": [
+        "turnover-rate",
+        "job-change-rate"
+      ]
+    },
+    {
+      "key": "work-style",
+      "title": "就業の状態と働き方",
+      "rankingKeys": [
+        "telework-rate",
+        "day-time-population-ratio"
+      ],
+      "defaultCheckedKeys": [
+        "telework-rate",
+        "day-time-population-ratio"
+      ]
+    },
+    {
+      "key": "employment-mobility",
+      "title": "就業異動率を詳しく見る",
+      "rankingKeys": [
+        "employment-mobility-rate"
+      ],
+      "defaultCheckedKeys": [
+        "employment-mobility-rate"
+      ]
+    },
+    {
+      "key": "candidate-33-1",
+      "title": "人手不足と求人｜有効求人倍率",
+      "rankingKeys": [
+        "active-job-opening-ratio"
+      ],
+      "defaultCheckedKeys": [
+        "active-job-opening-ratio"
+      ]
+    },
+    {
+      "key": "candidate-37-1",
+      "title": "非正規雇用と雇用の安定性｜非正規雇用率",
+      "rankingKeys": [
+        "non-regular-employment-rate"
+      ],
+      "defaultCheckedKeys": [
+        "non-regular-employment-rate"
+      ]
+    },
+    {
+      "key": "candidate-37-2",
+      "title": "非正規雇用と雇用の安定性｜非正規の職員・従業員数（15歳以上）",
+      "rankingKeys": [
+        "nonregular-employees-count"
+      ],
+      "defaultCheckedKeys": [
+        "nonregular-employees-count"
+      ]
+    },
+    {
+      "key": "candidate-37-3",
+      "title": "非正規雇用と雇用の安定性｜非正規の継続就業希望割合",
+      "rankingKeys": [
+        "nonregular-continuation-wish-rate"
+      ],
+      "defaultCheckedKeys": [
+        "nonregular-continuation-wish-rate"
+      ]
+    },
+    {
+      "key": "candidate-37-4",
+      "title": "非正規雇用と雇用の安定性｜非正規の転職希望割合",
+      "rankingKeys": [
+        "nonregular-job-change-wish-rate"
+      ],
+      "defaultCheckedKeys": [
+        "nonregular-job-change-wish-rate"
+      ]
+    },
+    {
+      "key": "candidate-38-1",
+      "title": "労働時間と長時間就業｜男性月間平均実労働時間",
+      "rankingKeys": [
+        "monthly-average-actual-working-hours-male"
+      ],
+      "defaultCheckedKeys": [
+        "monthly-average-actual-working-hours-male"
+      ]
+    },
+    {
+      "key": "candidate-38-2",
+      "title": "労働時間と長時間就業｜女性月間平均実労働時間",
+      "rankingKeys": [
+        "monthly-average-actual-working-hours-female"
+      ],
+      "defaultCheckedKeys": [
+        "monthly-average-actual-working-hours-female"
+      ]
+    },
+    {
+      "key": "candidate-38-3",
+      "title": "労働時間と長時間就業｜週60時間以上の雇用者数（年間200日以上）",
+      "rankingKeys": [
+        "employees-weekly-hours-60plus-count"
+      ],
+      "defaultCheckedKeys": [
+        "employees-weekly-hours-60plus-count"
+      ]
+    },
+    {
+      "key": "candidate-38-4",
+      "title": "労働時間と長時間就業｜週60時間以上の雇用者割合（年間200日以上）",
+      "rankingKeys": [
+        "employees-weekly-hours-60plus-rate"
+      ],
+      "defaultCheckedKeys": [
+        "employees-weekly-hours-60plus-rate"
+      ]
+    },
+    {
+      "key": "candidate-39-1",
+      "title": "テレワークと通勤｜テレワーク実施率",
+      "rankingKeys": [
+        "telework-rate"
+      ],
+      "defaultCheckedKeys": [
+        "telework-rate"
+      ]
+    },
+    {
+      "key": "candidate-84-1",
+      "title": "通勤通学と昼間人口｜昼夜間人口比率",
+      "rankingKeys": [
+        "day-time-population-ratio"
+      ],
+      "defaultCheckedKeys": [
+        "day-time-population-ratio"
+      ]
+    },
+    {
+      "key": "candidate-84-2",
+      "title": "通勤通学と昼間人口｜他市区町村への通勤者比率",
+      "rankingKeys": [
+        "commuter-ratio-to-other-municipalities"
+      ],
+      "defaultCheckedKeys": [
+        "commuter-ratio-to-other-municipalities"
+      ]
+    }
+  ]
+}

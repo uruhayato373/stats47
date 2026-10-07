@@ -100,8 +100,8 @@
 | agent | 領域 | role | 派生元 |
 |---|---|---|---|
 | `theme-researcher` 🆕 | data | テーマ指標×チャート候補を白書(NotebookLM)/Web/競合/GSC から調査し provenance 付き提案を 03_指標バックログ へ (read-only)。採択は theme-designer に委譲 | 2026-07-04 新設 |
-| `theme-designer` | data | テーマ → 統合カタログ (ThemeCatalog) 設計 (どの指標を載せるか)。カタログ駆動テーマは `packages/data-configs/src/theme-catalog/` が SSOT | 既存 |
-| `theme-component-builder` | data | page_components 監査・編集 (旧 theme-enhancer)。カタログ駆動テーマは catalog TS の charts[] を編集 | リネーム |
+| `theme-designer` | data | テーマ → 統合カタログ (ThemeCatalog) 設計 (どの指標を載せるか)。カタログ駆動テーマは `data/themes/catalogs/` が SSOT | 既存 |
+| `theme-component-builder` | data | page_components 監査・編集 (旧 theme-enhancer)。カタログ駆動テーマは catalog JSON の charts[] を編集 | リネーム |
 | `theme-ui-manager` 🆕 | data | テーマページ UI 層の統一・監査・是正 (レイアウト/見出し/セレクタ/カード構成/コピー)。重複セレクタ・古い「地図」コピー等のドリフトを管理 | 2026-06-20 新設 |
 | `ranking-ui-manager` 🆕 | data | ランキングページ (/ranking/*) UI 層の統一・監査・是正 (レイアウト/見出し/パンくず/サイドバー/SEO構造化データ/コピー)。theme-ui-manager の ranking 版。データ=data-ingester、公開=ranking-publisher に委譲 | 2026-06-21 新設 |
 | `site-ux-manager` 🆕 | site | サイト横断 UI/IA の統一・監査・是正 (ヘッダー/ナビ IA・モバイルドロワー・ホーム・ブログ/タグ一覧カード・共通 shell・リンクカード taxonomy・右レール構成・UX 計装配線)。ページ内部は各 page manager、GA4 台帳は ga4-analyst に委譲。site-content-layout ベンチマーク駆動 | 2026-07-20 新設 |

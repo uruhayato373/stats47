@@ -127,11 +127,11 @@ test('registered metrics and merge links cannot masquerade as rendered sections'
 test('existing dedicated chapter can satisfy an explicit reuse without adding a duplicate', () => {
   const plan = { themes: [{ id: 1, decision: { disposition: 'existing-section', targetThemeKey: 'finance' } }] };
   const catalogs = { finance: { key: 'finance', metrics: [{ rankingKey: 'ratio' }], sections: [{ key: 'sustainability', metricGroupKeys: [], embeddedSectionKeys: ['finance-sustainability'] }] } };
-  const extensions = { finance: [{ candidateId: 1, existingSectionKey: 'sustainability', metrics: [['ratio', '比率']] }] };
   assert.equal(inspectExpansionWiring(plan, catalogs).counts.existingSectionWired, 0);
-  assert.equal(inspectExpansionWiring(plan, catalogs, extensions).counts.existingSectionWired, 1);
+  Object.assign(plan.themes[0].decision, { targetSectionKey: 'sustainability', targetMetricKeys: ['ratio'] });
+  assert.equal(inspectExpansionWiring(plan, catalogs).counts.existingSectionWired, 1);
   catalogs.finance.sections = [];
-  assert.equal(inspectExpansionWiring(plan, catalogs, extensions).counts.existingSectionWired, 0);
+  assert.equal(inspectExpansionWiring(plan, catalogs).counts.existingSectionWired, 0);
 });
 
 test('missing handoff, duplicate scheduling and held candidates fail', () => {

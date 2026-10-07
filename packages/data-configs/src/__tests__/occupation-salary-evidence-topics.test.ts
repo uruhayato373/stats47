@@ -1,7 +1,9 @@
 import { describe, expect, it } from "vitest";
 
 import { EVIDENCE_SOURCE_CATALOG } from "../theme-catalog/evidence-lenses";
-import { OCCUPATION_SALARY_CATALOG } from "../theme-catalog/occupation-salary";
+import { THEME_CATALOGS } from "../theme-catalog";
+
+const OCCUPATION_SALARY_CATALOG = THEME_CATALOGS["occupation-salary"];
 
 describe("occupation-salary evidence topics", () => {
   it("registers the two verified wage-structure questions", () => {

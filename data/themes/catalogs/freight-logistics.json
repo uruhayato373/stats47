@@ -1,0 +1,114 @@
+{
+  "key": "freight-logistics",
+  "title": "物流と貨物輸送",
+  "description": "発送県と到着県の組合せを鉄道・自動車・海運・航空別に確認します。2024年度の貨物流動が基本ですが、海運は2024暦年のフレートトンです。単位と期間を分け、輸送機関横断の合計は作りません。",
+  "category": "tourism",
+  "usage": "theme",
+  "metrics": [
+    {
+      "rankingKey": "jr-freight-shipment",
+      "shortLabel": "JR貨物発送量",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "JR貨物発送量を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "air-cargo-transport",
+      "shortLabel": "航空貨物輸送量",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "航空貨物輸送量を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "number-of-freight-cars",
+      "shortLabel": "貨物車数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "貨物車数を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "truck-operators",
+      "shortLabel": "トラック事業者",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "トラック事業者を都道府県別の実値として比較する。"
+      }
+    }
+  ],
+  "charts": [],
+  "metricGroups": [
+    {
+      "key": "freight-logistics-indicator-1",
+      "title": "JR貨物発送量",
+      "rankingKeys": [
+        "jr-freight-shipment"
+      ],
+      "defaultCheckedKeys": [
+        "jr-freight-shipment"
+      ]
+    },
+    {
+      "key": "freight-logistics-indicator-2",
+      "title": "航空貨物輸送量",
+      "rankingKeys": [
+        "air-cargo-transport"
+      ],
+      "defaultCheckedKeys": [
+        "air-cargo-transport"
+      ]
+    },
+    {
+      "key": "freight-logistics-indicator-3",
+      "title": "貨物車数",
+      "rankingKeys": [
+        "number-of-freight-cars"
+      ],
+      "defaultCheckedKeys": [
+        "number-of-freight-cars"
+      ]
+    },
+    {
+      "key": "freight-logistics-indicator-4",
+      "title": "トラック事業者",
+      "rankingKeys": [
+        "truck-operators"
+      ],
+      "defaultCheckedKeys": [
+        "truck-operators"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "key": "freight-logistics-overview",
+      "title": "物流と貨物輸送を都道府県別に見る",
+      "description": "発送県と到着県の組合せを鉄道・自動車・海運・航空別に確認します。2024年度の貨物流動が基本ですが、海運は2024暦年のフレートトンです。単位と期間を分け、輸送機関横断の合計は作りません。",
+      "metricGroupKeys": [
+        "freight-logistics-indicator-1",
+        "freight-logistics-indicator-2",
+        "freight-logistics-indicator-3",
+        "freight-logistics-indicator-4"
+      ],
+      "embeddedSectionKeys": [
+        "freight-od"
+      ]
+    }
+  ],
+  "keywords": [
+    "物流",
+    "貨物",
+    "輸送",
+    "トラック"
+  ]
+}

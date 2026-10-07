@@ -1,5 +1,5 @@
 // AUTO-GENERATED — DO NOT EDIT.
-// Source of truth: packages/data-configs/src/theme-catalog/freight-logistics.ts
+// Source of truth: data/themes/catalogs/freight-logistics.json
 // Regenerate: npm run generate:catalog --workspace=@stats47/data-configs
 import type { IndicatorSet } from "../indicator-set";
 

@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest";
+import { THEME_CATALOGS } from "../theme-catalog";
 
-import { EDUCATION_CULTURE_CATALOG } from "../theme-catalog/education-culture";
+const EDUCATION_CULTURE_CATALOG = THEME_CATALOGS["education-culture"];
+
 
 const SCHOOL_KEYS = [
   "elementary-school-count-per-100km2-habitable",
@@ -15,7 +17,8 @@ const CULTURE_KEYS = [
 
 describe("education-culture visualization composition", () => {
   it("学校密度・学習環境・進路・文化施設・鑑賞行動を分母ごとの5群に分ける", () => {
-    const groups = EDUCATION_CULTURE_CATALOG.metricGroups ?? [];
+    // candidate-* は 2026-09-09 の章追加のカード (1 カード 1 指標)。構成は expansion-semantics.test.ts が見る
+    const groups = (EDUCATION_CULTURE_CATALOG.metricGroups ?? []).filter(({ key }) => !key.startsWith("candidate-"));
     expect(groups.map(({ key, rankingKeys }) => ({ key, rankingKeys }))).toEqual([
       { key: "schools-1", rankingKeys: SCHOOL_KEYS },
       { key: "schools-2", rankingKeys: ["elementary-school-students-per-teacher"] },

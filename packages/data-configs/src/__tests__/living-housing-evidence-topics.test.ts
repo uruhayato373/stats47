@@ -1,7 +1,9 @@
 import { describe, expect, it } from "vitest";
 
 import { EVIDENCE_SOURCE_CATALOG } from "../theme-catalog/evidence-lenses";
-import { LIVING_HOUSING_CATALOG } from "../theme-catalog/living-housing";
+import { THEME_CATALOGS } from "../theme-catalog";
+
+const LIVING_HOUSING_CATALOG = THEME_CATALOGS["living-housing"];
 
 describe("living-housing evidence topics", () => {
   it("住宅ストックと居住空間を別の論点として扱う", () => {

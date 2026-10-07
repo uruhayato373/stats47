@@ -1,0 +1,175 @@
+{
+  "key": "innovation-patents",
+  "title": "研究開発と特許",
+  "description": "特許・意匠・商標の出願と登録、延べ発明者数を比較します。件数は筆頭出願人の住所、発明者数は出願に記載された全発明者の延べ人数です。発明者数はPCT国内移行を含む2016年以降を表示します。研究の質や事業化収益を表すものではありません。",
+  "category": "industry",
+  "usage": "theme",
+  "metrics": [
+    {
+      "rankingKey": "patent-application-count",
+      "shortLabel": "特許出願件数（筆頭出願人住所）",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "特許出願件数（筆頭出願人住所）を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "patent-registration-count",
+      "shortLabel": "特許登録件数（筆頭出願人住所）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "特許登録件数（筆頭出願人住所）を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "patent-inventor-count",
+      "shortLabel": "出願に記載された延べ発明者数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "出願に記載された延べ発明者数を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "design-application-count",
+      "shortLabel": "意匠出願件数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "意匠出願件数を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "design-registration-count",
+      "shortLabel": "意匠登録件数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "意匠登録件数を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "trademark-application-count",
+      "shortLabel": "商標出願件数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "商標出願件数を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "trademark-registration-count",
+      "shortLabel": "商標登録件数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "商標登録件数を都道府県別の実値として比較する。"
+      }
+    }
+  ],
+  "charts": [],
+  "metricGroups": [
+    {
+      "key": "innovation-patents-indicator-1",
+      "title": "特許出願件数（筆頭出願人住所）",
+      "rankingKeys": [
+        "patent-application-count"
+      ],
+      "defaultCheckedKeys": [
+        "patent-application-count"
+      ]
+    },
+    {
+      "key": "innovation-patents-indicator-2",
+      "title": "特許登録件数（筆頭出願人住所）",
+      "rankingKeys": [
+        "patent-registration-count"
+      ],
+      "defaultCheckedKeys": [
+        "patent-registration-count"
+      ]
+    },
+    {
+      "key": "innovation-patents-indicator-3",
+      "title": "出願に記載された延べ発明者数",
+      "rankingKeys": [
+        "patent-inventor-count"
+      ],
+      "defaultCheckedKeys": [
+        "patent-inventor-count"
+      ]
+    },
+    {
+      "key": "innovation-patents-indicator-4",
+      "title": "意匠出願件数",
+      "rankingKeys": [
+        "design-application-count"
+      ],
+      "defaultCheckedKeys": [
+        "design-application-count"
+      ]
+    },
+    {
+      "key": "innovation-patents-indicator-5",
+      "title": "意匠登録件数",
+      "rankingKeys": [
+        "design-registration-count"
+      ],
+      "defaultCheckedKeys": [
+        "design-registration-count"
+      ]
+    },
+    {
+      "key": "innovation-patents-indicator-6",
+      "title": "商標出願件数",
+      "rankingKeys": [
+        "trademark-application-count"
+      ],
+      "defaultCheckedKeys": [
+        "trademark-application-count"
+      ]
+    },
+    {
+      "key": "innovation-patents-indicator-7",
+      "title": "商標登録件数",
+      "rankingKeys": [
+        "trademark-registration-count"
+      ],
+      "defaultCheckedKeys": [
+        "trademark-registration-count"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "key": "innovation-patents-overview",
+      "title": "研究開発と特許を都道府県別に見る",
+      "description": "特許・意匠・商標の出願と登録、延べ発明者数を比較します。件数は筆頭出願人の住所、発明者数は出願に記載された全発明者の延べ人数です。発明者数はPCT国内移行を含む2016年以降を表示します。研究の質や事業化収益を表すものではありません。",
+      "metricGroupKeys": [
+        "innovation-patents-indicator-1",
+        "innovation-patents-indicator-2",
+        "innovation-patents-indicator-3",
+        "innovation-patents-indicator-4",
+        "innovation-patents-indicator-5",
+        "innovation-patents-indicator-6",
+        "innovation-patents-indicator-7"
+      ]
+    }
+  ],
+  "keywords": [
+    "研究開発",
+    "特許",
+    "意匠",
+    "商標",
+    "発明者"
+  ]
+}

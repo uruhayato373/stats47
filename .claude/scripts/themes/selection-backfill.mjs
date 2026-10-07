@@ -182,11 +182,11 @@ async function cmdReapply(args) {
     attachClassNames(target, classIndex);
     const output = JSON.parse(fs.readFileSync(path.join(dir, file), "utf8"));
     const gate = await gateEntries(target, output, { fetchSource, classIndex, surveyedAt: args["surveyed-at"] ?? todayIso() });
-    const written = args["dry-run"] ? { inline: [], evidence: [] } : applySelections(themeKey, gate.accepted);
+    const written = args["dry-run"] ? [] : applySelections(themeKey, gate.accepted);
     const recovered = Object.keys(gate.accepted);
     const stillRejected = gate.rejected.filter((r) => !r.reasons.includes("not-a-target"));
     summary.push({ file, recovered, stillRejected });
-    log(`${file}: 回収 ${recovered.length} (${recovered.join(", ") || "-"}) / 依然不合格 ${stillRejected.length}${written.inline.length + written.evidence.length ? "" : args["dry-run"] ? " (dry-run)" : ""}`);
+    log(`${file}: 回収 ${recovered.length} (${recovered.join(", ") || "-"}) / 依然不合格 ${stillRejected.length}${written.length ? "" : args["dry-run"] ? " (dry-run)" : ""}`);
     for (const r of stillRejected) log(`   ✗ ${r.rankingKey}: ${r.reasons.join(", ")}`);
   }
   process.stdout.write(`${JSON.stringify(summary, null, 2)}\n`);
@@ -341,7 +341,7 @@ async function processTheme(target, opts, state) {
     untouched: 0,
     chunks: chunks.length,
     usage: { ...EMPTY_USAGE },
-    written: { inline: [], evidence: [] },
+    written: [],
     acceptedKeys: [],
     rejectedDetail: [],
     skippedDetail: [],
@@ -390,8 +390,7 @@ async function processTheme(target, opts, state) {
     result.rejected += applied.rejected;
     result.skipped += applied.skipped;
     result.untouched += applied.untouched;
-    result.written.inline.push(...applied.written.inline);
-    result.written.evidence.push(...applied.written.evidence);
+    result.written.push(...applied.written);
     result.acceptedKeys.push(...applied.acceptedKeys);
     result.rejectedDetail.push(...applied.rejectedDetail);
     result.skippedDetail.push(...applied.skippedDetail);

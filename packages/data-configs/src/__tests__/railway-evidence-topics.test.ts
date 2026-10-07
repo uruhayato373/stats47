@@ -1,7 +1,9 @@
 import { describe, expect, it } from "vitest";
 
 import { EVIDENCE_SOURCE_CATALOG } from "../theme-catalog/evidence-lenses";
-import { RAILWAY_CATALOG } from "../theme-catalog/railway";
+import { THEME_CATALOGS } from "../theme-catalog";
+
+const RAILWAY_CATALOG = THEME_CATALOGS["railway"];
 
 describe("railway evidence topics", () => {
   it("旅客利用と貨物利用を別の論点として扱う", () => {

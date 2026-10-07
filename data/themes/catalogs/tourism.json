@@ -1,0 +1,510 @@
+{
+  "key": "tourism",
+  "title": "観光",
+  "description": "来訪者の宿泊需要、受入供給と利用率、交通アクセスの違いを把握する。",
+  "category": "tourism",
+  "usage": "theme",
+  "metrics": [
+    {
+      "rankingKey": "total-overnight-guests",
+      "shortLabel": "延べ宿泊者数（総数）",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-08",
+        "rationale": "宿泊者数は主問に直接答える見出し指標として残す。"
+      }
+    },
+    {
+      "rankingKey": "total-overnight-guests-foreign",
+      "shortLabel": "外国人延べ宿泊者数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-08",
+        "rationale": "外国人宿泊は「宿泊需要はどれくらいか」を読むため主要画面へ配置する。"
+      }
+    },
+    {
+      "rankingKey": "room-utilization-rate",
+      "shortLabel": "客室稼働率",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-08",
+        "rationale": "客室稼働率は「宿泊施設と客室の使われ方」を読むため主要画面へ配置する。"
+      }
+    },
+    {
+      "rankingKey": "travel-participation-rate-domestic-tourism",
+      "shortLabel": "国内旅行率",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-08",
+        "rationale": "住民の旅行行動率で集客指標ではないためcontextへ格下げする。"
+      }
+    },
+    {
+      "rankingKey": "travel-participation-rate-overseas",
+      "shortLabel": "海外旅行率",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-08",
+        "rationale": "海外旅行率は「住民の旅行行動」の補足として詳細索引に保持し、冒頭の要約へ重ねない。"
+      }
+    },
+    {
+      "rankingKey": "travel-participation-rate-overnight",
+      "shortLabel": "宿泊旅行率",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-08",
+        "rationale": "宿泊旅行率は「住民の旅行行動」の補足として詳細索引に保持し、冒頭の要約へ重ねない。"
+      }
+    },
+    {
+      "rankingKey": "travel-participation-rate-day-trip",
+      "shortLabel": "日帰り旅行率",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-08",
+        "rationale": "日帰り旅行率は「住民の旅行行動」の補足として詳細索引に保持し、冒頭の要約へ重ねない。"
+      }
+    },
+    {
+      "rankingKey": "air-passenger-transport",
+      "shortLabel": "航空旅客",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-08",
+        "rationale": "観光以外を含むアクセス補足に限り、主要KPIから外す。"
+      }
+    },
+    {
+      "rankingKey": "jr-passenger-transport",
+      "shortLabel": "JR旅客",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-08",
+        "rationale": "JR旅客は「アクセスの背景」の補足として詳細索引に保持し、冒頭の要約へ重ねない。"
+      }
+    },
+    {
+      "rankingKey": "number-of-simple-lodging-facilities",
+      "shortLabel": "簡易宿所数",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-08",
+        "rationale": "簡易宿所数は対象範囲・構造の関連指標として詳細索引に保持し、冒頭の要約へ重ねない。"
+      }
+    },
+    {
+      "rankingKey": "number-of-hotel-facilities",
+      "shortLabel": "ホテル営業施設数",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-08",
+        "rationale": "公開最新2017年のため現状把握の主画面へ昇格しない。歴史参考として保持し更新後に再判定。"
+      }
+    },
+    {
+      "rankingKey": "number-of-hotel-rooms",
+      "shortLabel": "ホテル客室数",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-08",
+        "rationale": "公開最新2017年のため現状把握の主画面へ昇格しない。歴史参考として保持し更新後に再判定。"
+      }
+    },
+    {
+      "rankingKey": "inbound-visitors-by-destination",
+      "shortLabel": "訪日外国人の訪問者数（推計）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
+        "surveyedAt": "2026-09-09",
+        "rationale": "訪日外国人の訪問者数（推計）を既存テーマの独立章へ追加する。"
+      }
+    },
+    {
+      "rankingKey": "inbound-visit-sample-by-destination",
+      "shortLabel": "訪問者数推計の県別回答数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
+        "surveyedAt": "2026-09-09",
+        "rationale": "訪問者数推計の県別回答数を既存テーマの独立章へ追加する。"
+      }
+    },
+    {
+      "rankingKey": "domestic-travel-consumption-by-destination",
+      "shortLabel": "日本人旅行者の県内消費額",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
+        "surveyedAt": "2026-09-09",
+        "rationale": "日本人旅行者の県内消費額を既存テーマの独立章へ追加する。"
+      }
+    },
+    {
+      "rankingKey": "inbound-travel-consumption-by-destination",
+      "shortLabel": "訪日外国人旅行者の県内消費額",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
+        "surveyedAt": "2026-09-09",
+        "rationale": "訪日外国人旅行者の県内消費額を既存テーマの独立章へ追加する。"
+      }
+    },
+    {
+      "rankingKey": "airport-count",
+      "shortLabel": "空港数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
+        "surveyedAt": "2026-09-09",
+        "rationale": "空港数を既存テーマの独立章へ追加する。"
+      }
+    }
+  ],
+  "charts": [
+    {
+      "componentKey": "theme-tourism-stay-trend",
+      "componentType": "line-chart",
+      "title": "延べ宿泊者数の推移（総数・外国人）",
+      "componentProps": {
+        "seriesRefs": [
+          {
+            "metricKey": "total-overnight-guests",
+            "label": "延べ宿泊者数（総数）"
+          },
+          {
+            "metricKey": "total-overnight-guests-foreign",
+            "label": "外国人延べ宿泊者数"
+          }
+        ],
+        "seriesColors": [
+          "population",
+          "count"
+        ]
+      },
+      "relatedRankingKeys": [
+        "total-overnight-guests",
+        "total-overnight-guests-foreign"
+      ],
+      "sourceName": "社会・人口統計体系",
+      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "stays",
+      "sortOrder": 10,
+      "annotation": "総数には外国人を含みます。両系列を足すと外国人分が重複します。延べ宿泊者数は人泊で、実人数ではありません。"
+    },
+    {
+      "componentKey": "theme-tourism-transport-trend",
+      "componentType": "line-chart",
+      "title": "航空旅客輸送量の比較",
+      "componentProps": {
+        "seriesRefs": [
+          {
+            "metricKey": "air-passenger-transport"
+          }
+        ],
+        "labels": [
+          "航空旅客"
+        ],
+        "seriesColors": [
+          "series-7"
+        ]
+      },
+      "relatedRankingKeys": [
+        "air-passenger-transport"
+      ],
+      "sourceName": "社会・人口統計体系",
+      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "transport",
+      "sortOrder": 20
+    },
+    {
+      "componentKey": "theme-tourism-hotel-supply-trend",
+      "componentType": "line-chart",
+      "title": "宿泊施設数と客室数の推移",
+      "componentProps": {
+        "seriesRefs": [
+          {
+            "metricKey": "number-of-hotel-facilities",
+            "label": "ホテル営業施設数",
+            "colorRole": "population"
+          },
+          {
+            "metricKey": "number-of-hotel-rooms",
+            "label": "ホテル客室数",
+            "colorRole": "count"
+          }
+        ]
+      },
+      "relatedRankingKeys": [
+        "number-of-hotel-facilities",
+        "number-of-hotel-rooms"
+      ],
+      "sourceName": "総務省 社会・人口統計体系",
+      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "accommodation",
+      "sortOrder": 30
+    }
+  ],
+  "evidenceTopics": [
+    {
+      "key": "domestic-and-inbound-stays",
+      "lensKey": "participation",
+      "title": "国内外の宿泊需要の地域集中",
+      "question": "延べ宿泊者数と外国人延べ宿泊者数には、宿泊需要の地域的な集中がどう表れるか",
+      "summary": "延べ宿泊者数は1人が複数泊すると泊数分を数えます。外国人延べ宿泊者数は総数の内数なので、両者を足さず、総需要と外国人需要の集中を分けて読みます。",
+      "sourceKeys": [
+        "jta-accommodation-survey"
+      ],
+      "relatedRankingKeys": [
+        "total-overnight-guests",
+        "total-overnight-guests-foreign"
+      ],
+      "relatedChartKeys": [
+        "theme-tourism-stay-trend"
+      ]
+    }
+  ],
+  "keywords": [
+    "観光",
+    "宿泊者数",
+    "インバウンド",
+    "客室稼働率",
+    "都道府県",
+    "ランキング"
+  ],
+  "sections": [
+    {
+      "key": "stays",
+      "title": "宿泊需要はどれくらいか",
+      "description": "延べ宿泊者数は宿泊日数を含むため、訪問した実人数ではありません。",
+      "metricGroupKeys": [
+        "stays"
+      ],
+      "chartKeys": [
+        "theme-tourism-stay-trend"
+      ]
+    },
+    {
+      "key": "accommodation",
+      "title": "客室稼働率と宿泊供給の参考",
+      "description": "客室稼働率と施設・客室数では対象年が異なります。施設・客室数は2017年までの過去参考です。",
+      "metricGroupKeys": [
+        "accommodation"
+      ],
+      "chartKeys": [
+        "theme-tourism-hotel-supply-trend"
+      ]
+    },
+    {
+      "key": "transport",
+      "title": "アクセスの背景",
+      "description": "航空旅客数は観光以外の移動も含みます。観光客数の代わりにはなりません。",
+      "metricGroupKeys": [],
+      "chartKeys": [
+        "theme-tourism-transport-trend"
+      ]
+    },
+    {
+      "key": "candidate-25",
+      "title": "宿泊市場と稼働率",
+      "metricGroupKeys": [
+        "candidate-25-1"
+      ]
+    },
+    {
+      "key": "candidate-26",
+      "title": "外国人旅行者の訪問・宿泊・消費",
+      "description": "訪問者数は2025年の全目的・一般客の推計で、日帰りと空港・港の所在地も含みます。同じ旅行で複数県を訪れるため県別値を全国実人数へ合算しません。訪問回答数は重み付け前の標本で、回答数から推計訪問率を作り直しません。宿泊・消費の系列とは単位と対象を分けます。",
+      "metricGroupKeys": [
+        "candidate-26-1",
+        "candidate-26-2",
+        "candidate-26-3"
+      ]
+    },
+    {
+      "key": "candidate-27",
+      "title": "訪問先の旅行消費額",
+      "description": "日本人の国内旅行と訪日外国人一般客が訪問先の県で消費した金額を別々に比較します。全目的・宿泊と日帰りを含み、県間交通費等を除きます。異なる標本調査の推計で、県内所得や地域への還元率ではありません。",
+      "metricGroupKeys": [
+        "candidate-27-1",
+        "candidate-27-2"
+      ]
+    },
+    {
+      "key": "candidate-28",
+      "title": "宿泊の規模と季節性",
+      "description": "年間の宿泊規模と2024年の月別の増減を確認します。月別値は全施設の確定値で、観光・出張等の全目的を含みます。月の日数の違いや能登半島地震による調査対象の除外に注意して読みます。",
+      "metricGroupKeys": [
+        "candidate-28-1"
+      ],
+      "embeddedSectionKeys": [
+        "tourism-seasonality"
+      ]
+    },
+    {
+      "key": "candidate-85",
+      "title": "空港と航空交通",
+      "description": "2025年の空港別旅客・貨物取扱いを国内線・国際線に分けて確認します。所在地で空港を選び、国際線通過客や複数県にまたがる空港を区別します。県民の実利用人数ではありません。",
+      "metricGroupKeys": [
+        "candidate-85-1",
+        "candidate-85-2"
+      ],
+      "embeddedSectionKeys": [
+        "airport-traffic"
+      ]
+    }
+  ],
+  "metricGroups": [
+    {
+      "key": "stays",
+      "title": "宿泊需要はどれくらいか",
+      "rankingKeys": [
+        "total-overnight-guests",
+        "total-overnight-guests-foreign"
+      ],
+      "defaultCheckedKeys": [
+        "total-overnight-guests",
+        "total-overnight-guests-foreign"
+      ]
+    },
+    {
+      "key": "accommodation",
+      "title": "客室稼働率と宿泊供給の参考",
+      "rankingKeys": [
+        "room-utilization-rate"
+      ],
+      "defaultCheckedKeys": [
+        "room-utilization-rate"
+      ]
+    },
+    {
+      "key": "candidate-25-1",
+      "title": "宿泊市場と稼働率｜客室稼働率",
+      "rankingKeys": [
+        "room-utilization-rate"
+      ],
+      "defaultCheckedKeys": [
+        "room-utilization-rate"
+      ]
+    },
+    {
+      "key": "candidate-26-1",
+      "title": "外国人旅行者の訪問・宿泊・消費｜訪日外国人の訪問者数（推計）",
+      "rankingKeys": [
+        "inbound-visitors-by-destination"
+      ],
+      "defaultCheckedKeys": [
+        "inbound-visitors-by-destination"
+      ]
+    },
+    {
+      "key": "candidate-26-2",
+      "title": "外国人旅行者の訪問・宿泊・消費｜訪問者数推計の県別回答数",
+      "rankingKeys": [
+        "inbound-visit-sample-by-destination"
+      ],
+      "defaultCheckedKeys": [
+        "inbound-visit-sample-by-destination"
+      ]
+    },
+    {
+      "key": "candidate-26-3",
+      "title": "外国人旅行者の訪問・宿泊・消費｜外国人延べ宿泊者数",
+      "rankingKeys": [
+        "total-overnight-guests-foreign"
+      ],
+      "defaultCheckedKeys": [
+        "total-overnight-guests-foreign"
+      ]
+    },
+    {
+      "key": "candidate-27-1",
+      "title": "訪問先の旅行消費額｜日本人旅行者の県内消費額",
+      "rankingKeys": [
+        "domestic-travel-consumption-by-destination"
+      ],
+      "defaultCheckedKeys": [
+        "domestic-travel-consumption-by-destination"
+      ]
+    },
+    {
+      "key": "candidate-27-2",
+      "title": "訪問先の旅行消費額｜訪日外国人旅行者の県内消費額",
+      "rankingKeys": [
+        "inbound-travel-consumption-by-destination"
+      ],
+      "defaultCheckedKeys": [
+        "inbound-travel-consumption-by-destination"
+      ]
+    },
+    {
+      "key": "candidate-28-1",
+      "title": "宿泊の規模と季節性｜年間の延べ宿泊者数",
+      "rankingKeys": [
+        "total-overnight-guests"
+      ],
+      "defaultCheckedKeys": [
+        "total-overnight-guests"
+      ]
+    },
+    {
+      "key": "candidate-85-1",
+      "title": "空港と航空交通｜空港数",
+      "rankingKeys": [
+        "airport-count"
+      ],
+      "defaultCheckedKeys": [
+        "airport-count"
+      ]
+    },
+    {
+      "key": "candidate-85-2",
+      "title": "空港と航空交通｜航空輸送人員",
+      "rankingKeys": [
+        "air-passenger-transport"
+      ],
+      "defaultCheckedKeys": [
+        "air-passenger-transport"
+      ]
+    }
+  ]
+}

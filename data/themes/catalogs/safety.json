@@ -1,0 +1,1388 @@
+{
+  "key": "safety",
+  "title": "安全",
+  "description": "犯罪、交通事故、火災の発生と被害を別の軸として確認する。",
+  "category": "safety",
+  "usage": "theme",
+  "metrics": [
+    {
+      "rankingKey": "penal-code-offenses-recognized-per-1000",
+      "shortLabel": "刑法犯認知件数（人口千人当たり）",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "令和6年版 犯罪白書 第1編第1章第1節1「認知件数と発生率」（法務省）",
+        "sourceUrl": "https://hakusyo1.moj.go.jp/jp/71/nfm/n71_2_1_1_1_1.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "犯罪白書は認知件数の実数だけでなく、人口当たりに換算した「発生率」を長期推移の中心指標として提示しており、絶対数の増減が人口変動と混同されない比較軸を与えている。これは都道府県間・年次間で犯罪の起こりやすさを揃えて比較するための代表的な尺度であり、テーマが問う「地域ごとにどのような差があるか」に直接対応する。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability"
+        ]
+      }
+    },
+    {
+      "rankingKey": "serious-crime-per-100k",
+      "shortLabel": "凶悪犯",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-08",
+        "rationale": "凶悪犯は「犯罪の認知と検挙」の補足として詳細索引に保持し、冒頭の要約へ重ねない。"
+      }
+    },
+    {
+      "rankingKey": "criminal-recognition-count",
+      "shortLabel": "認知件数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和6年版 犯罪白書 第1編第1章第1節1「認知件数と発生率」（法務省）",
+        "sourceUrl": "https://hakusyo1.moj.go.jp/jp/71/nfm/n71_2_1_1_1_1.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "犯罪白書は認知件数の実数そのものを刑法犯動向の基本統計として長期にわたり示しており、警察が把握した犯罪発生の総量を示す一次的な数値である。人口当たり指標である発生率を補い、実際の負担量（警察・地域社会が対応する件数の規模）を読者に伝える補完的な角度を持つ。",
+        "adoptionCriteria": [
+          "complementarity",
+          "dataQuality"
+        ]
+      }
+    },
+    {
+      "rankingKey": "violent-crime-per-100k",
+      "shortLabel": "粗暴犯",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-08",
+        "rationale": "粗暴犯は対象範囲・構造の関連指標として詳細索引に保持し、冒頭の要約へ重ねない。"
+      }
+    },
+    {
+      "rankingKey": "criminal-arrest-rate",
+      "shortLabel": "検挙率",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和6年版 犯罪白書 第1編第1章第1節3「検挙率」（法務省）",
+        "sourceUrl": "https://hakusyo1.moj.go.jp/jp/71/nfm/n71_2_1_1_1_3.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "犯罪白書は検挙率を認知件数・発生率と並ぶ主要統計として独立した項目で扱っており、警察の対応能力や治安維持の実効性を示す指標と位置付けている。認知件数だけでは測れない「事件解決の程度」という異なる角度を提供し、地域の治安を多面的に評価する読者の意思決定を支える。",
+        "adoptionCriteria": [
+          "complementarity",
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "intellectual-crime-per-100k",
+      "shortLabel": "知能犯",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-08",
+        "rationale": "知能犯は対象範囲・構造の関連指標として詳細索引に保持し、冒頭の要約へ重ねない。"
+      }
+    },
+    {
+      "rankingKey": "theft-offenses-recognized-per-1000",
+      "shortLabel": "窃盗犯認知件数（人口千人当たり）",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/K",
+        "surveyedAt": "2026-09-08",
+        "rationale": "人口千人当たりの窃盗犯認知件数として定義を示し、補足指標への導線を保持する。"
+      }
+    },
+    {
+      "rankingKey": "theft-criminal-arrest-rate",
+      "shortLabel": "窃盗検挙率",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-08",
+        "rationale": "窃盗検挙率は対象範囲・構造の関連指標として詳細索引に保持し、冒頭の要約へ重ねない。"
+      }
+    },
+    {
+      "rankingKey": "juvenile-criminal-arrest-person-per-population",
+      "shortLabel": "少年刑法犯検挙人員（14～19歳人口千人当たり）",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/K",
+        "surveyedAt": "2026-09-08",
+        "rationale": "14～19歳人口千人当たりの少年刑法犯検挙人員として定義を示し、補足指標への導線を保持する。"
+      }
+    },
+    {
+      "rankingKey": "drug-enforcement-arrest-count-per-population",
+      "shortLabel": "覚醒剤取締検挙件数（人口10万人当たり）",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/K",
+        "surveyedAt": "2026-09-08",
+        "rationale": "人口10万人当たりの覚醒剤取締検挙件数として定義を示し、補足指標への導線を保持する。"
+      }
+    },
+    {
+      "rankingKey": "traffic-accident-deaths-per-100k",
+      "shortLabel": "交通事故死者数（人口10万人当たり）",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "令和7年版 交通安全白書 第1部第1章第1節1「道路交通事故のすう勢」（内閣府）",
+        "sourceUrl": "https://www8.cao.go.jp/koutu/taisaku/r07kou_haku/zenbun/genkyo/h1/h1b1s1_1.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "交通安全白書は交通事故死者数を実数ではなく人口10万人当たりに換算した値を、昭和45年のピークからの長期推移を語る際の基準指標として用いており、人口規模の異なる年代・地域を同一基準で比較できる点を重視している。これはテーマが掲げる交通事故の人的被害の地域差を検証するための代表的な尺度である。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability"
+        ]
+      }
+    },
+    {
+      "rankingKey": "traffic-accident-count-per-population",
+      "shortLabel": "交通事故発生件数（人口10万人当たり）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "政府統計の総合窓口（e-Stat）道路の交通に関する統計「30日以内交通事故死者の状況」解説（警察庁）",
+        "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0003281586",
+        "surveyedAt": "2026-09-16",
+        "rationale": "この統計は都道府県警察からの報告を集計し人口当たりの発生状況として整理することで、国の交通安全対策の立案という政策目的に直結する形で使われている。総数（criminal-recognition-count等と同様の考え方）だけでは埋もれる人口規模差を補正し、地域間比較を可能にする点で総数指標を補完する。",
+        "adoptionCriteria": [
+          "comparability",
+          "complementarity"
+        ]
+      }
+    },
+    {
+      "rankingKey": "traffic-accident-count",
+      "shortLabel": "事故件数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和7年版 交通安全白書 第1部第1章第2節「令和6年中の道路交通事故の状況」（内閣府）",
+        "sourceUrl": "https://www8.cao.go.jp/koutu/taisaku/r07kou_haku/zenbun/genkyo/h1/h1b1s1_2.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "交通安全白書は毎年の交通事故発生件数の実数を死者数・負傷者数と並べて前年比で報告しており、事故そのものの発生規模を示す基礎的な統計として扱われている。人口当たり指標だけでは分からない事故対応の絶対的な負荷（警察・救急の出動件数規模）を示す点で、他の交通安全指標を補完する。",
+        "adoptionCriteria": [
+          "dataQuality",
+          "complementarity"
+        ]
+      }
+    },
+    {
+      "rankingKey": "traffic-accident-deaths-per-100-accidents",
+      "shortLabel": "交通事故死者数（交通事故100件当たり）",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/K",
+        "surveyedAt": "2026-09-08",
+        "rationale": "交通事故100件当たりの交通事故死者数として定義を示し、補足指標への導線を保持する。"
+      }
+    },
+    {
+      "rankingKey": "traffic-accident-injuries-per-100k",
+      "shortLabel": "交通事故負傷者数（人口10万人当たり）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和7年版 交通安全白書 全文 第1編第1部第1章第2節「令和6年中の道路交通事故の状況」（内閣府）",
+        "sourceUrl": "https://www8.cao.go.jp/koutu/taisaku/r07kou_haku/zenbun/genkyo/h1/h1b1s1_2.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "交通安全白書は道路交通事故の状況を負傷者数の前年比増減で説明しており、負傷者数は事故の人的被害規模を示す中心指標として毎年報告されている。人口10万人当たりに換算することで都道府県間の被害規模を人口規模に依存せず比較でき、交通事故の発生と人的被害というテーマの問いに直接応える。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability"
+        ]
+      }
+    },
+    {
+      "rankingKey": "traffic-accident-casualties-elderly-65plus",
+      "shortLabel": "高齢者事故",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和6年版 交通安全白書 全文 特集第1章第1節「高齢化の進展と交通死亡事故の状況」（内閣府）",
+        "sourceUrl": "https://www8.cao.go.jp/koutu/taisaku/r06kou_haku/zenbun/genkyo/feature/feature_1_1.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "交通安全白書は高齢化の進展に伴い高齢者が交通事故死者数の過半を占める状況を特集で取り上げており、高齢者の死傷者数は交通安全対策における重点対象として継続的に把握されている。この指標は都道府県ごとの高齢化率の違いが交通事故被害にどう表れるかという問いに応え、全体の交通事故指標を補う角度を提供する。",
+        "adoptionCriteria": [
+          "representativeness",
+          "complementarity"
+        ]
+      }
+    },
+    {
+      "rankingKey": "building-fire-count-per-100-thousand-people",
+      "shortLabel": "火災出火件数（人口10万人当たり）",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "令和6年版 消防白書 第1章第1節1「出火状況」（総務省消防庁）",
+        "sourceUrl": "https://www.fdma.go.jp/publication/hakusho/r6/chapter1/section1/para1/67985.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "消防白書は出火件数を火災の発生状況を示す基礎データとして毎年公表しており、出火状況の節の冒頭で扱われる代表的な統計である。人口10万人当たりに換算することで人口規模の異なる都道府県間の火災発生リスクを比較でき、火災と救急需要という章の中心的な問いに直接答える。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability"
+        ]
+      }
+    },
+    {
+      "rankingKey": "fire-deaths-per-100k",
+      "shortLabel": "火災死者",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和6年版 消防白書 第1章第1節1「火災の現況と最近の動向」（総務省消防庁）",
+        "sourceUrl": "https://www.fdma.go.jp/publication/hakusho/r6/chapter1/section1/para1/67983.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "消防白書は火災死者数を火災による人的被害の最重要指標として毎年経年比較しており、出火件数（発生件数）とは別に被害の深刻さを示す補完的な角度を提供する。出火件数だけでは把握できない被害の重大性を示すため、火災と救急需要の章で出火件数と組み合わせて読む価値がある。",
+        "adoptionCriteria": [
+          "representativeness",
+          "complementarity"
+        ]
+      }
+    },
+    {
+      "rankingKey": "fire-damage-casualties-per-population",
+      "shortLabel": "火災死傷者数（人口10万人当たり）",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/K",
+        "surveyedAt": "2026-09-08",
+        "rationale": "人口10万人当たりの火災死傷者数として定義を示し、補足指標への導線を保持する。"
+      }
+    },
+    {
+      "rankingKey": "annual-emergency-dispatches-per-1000",
+      "shortLabel": "救急出動件数（人口千人当たり）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和6年版 消防白書 第2章第5節1「救急業務の実施状況」（総務省消防庁）",
+        "sourceUrl": "https://www.fdma.go.jp/publication/hakusho/r6/chapter2/section5/68130.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "消防白書は救急出動件数を救急業務の実施状況を示す基幹統計として毎年公表しており、過去最多を更新し続ける救急需要の逼迫を示す指標として位置付けている。人口千人当たりに換算することで都道府県間の救急体制への負荷を比較でき、火災と救急需要という章の救急面を代表する指標となる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability",
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "disaster-damage-amount-per-person",
+      "shortLabel": "災害被害額（人口1人当たり）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和7年版 防災白書 附属資料3「施設関係等被害額及び同被害額の国内総生産に対する比率の推移」（内閣府）",
+        "sourceUrl": "https://www.bousai.go.jp/kaigirep/hakusho/r07/honbun/3b_6s_03_00.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "防災白書は施設関係等被害額の推移を国内総生産に対する比率とあわせて附属資料として毎年整理しており、自然災害による経済的損失を経年で把握するための公式統計として位置付けている。人口1人当たりに換算することで都道府県間の被害規模を人口規模に依存せず比較でき、自然災害の人的・住家被害と復旧支出という章の金銭的被害の側面を補う。",
+        "adoptionCriteria": [
+          "dataQuality",
+          "complementarity"
+        ]
+      }
+    },
+    {
+      "rankingKey": "suicide-rate-per-100k",
+      "shortLabel": "自殺率",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-08",
+        "rationale": "自殺死亡を治安評価に含めず、健康アウトカムとして対象定義を明示する。 主表示は「医療・健康」へ集約する。関連指標としての導線は保持する。"
+      }
+    },
+    {
+      "rankingKey": "suicides-per-100k",
+      "shortLabel": "自殺者数（日本人人口10万人当たり）",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/I",
+        "surveyedAt": "2026-09-08",
+        "rationale": "日本人人口10万人当たりの自殺者数として定義を示し、補足指標への導線を保持する。 自殺率の別系列と定義・出典を照合し、並列KPI化しない。 主表示は「医療・健康」へ集約する。関連指標としての導線は保持する。"
+      }
+    },
+    {
+      "rankingKey": "accidental-deaths-per-100k",
+      "shortLabel": "不慮の事故による死亡者数（人口10万人当たり）",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/K",
+        "surveyedAt": "2026-09-08",
+        "rationale": "人口10万人当たりの不慮の事故による死亡者数として定義を示し、補足指標への導線を保持する。 不慮の事故死亡は交通以外も含む健康アウトカムとして扱う。 主表示は「医療・健康」へ集約する。関連指標としての導線は保持する。"
+      }
+    },
+    {
+      "rankingKey": "police-officer-count-per-population",
+      "shortLabel": "警察官数（人口千人当たり）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "社会・人口統計体系 社会生活統計指標－都道府県の指標－ 「Ｋ　安全」分類 統計表（総務省統計局・政府統計の総合窓口 e-Stat）",
+        "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0000010211",
+        "surveyedAt": "2026-09-16",
+        "rationale": "この統計表は都道府県別の社会生活指標を「Ｋ　安全」という大分類にまとめており、警察官数（人口千人当たり）はその中の1項目（#K05103）として位置付けられている。犯罪の認知・検挙状況を扱う既存論点に対し、取締り・治安維持の人的体制という供給側の指標を加えることで、認知件数や検挙率の地域差を体制面から補完的に説明できる。",
+        "adoptionCriteria": [
+          "comparability",
+          "complementarity"
+        ],
+        "readerQuestion": "人口当たりの警察官数が多い都道府県ほど、犯罪の検挙率は高い傾向にあるか。",
+        "targetReaderOrDecision": "都道府県の治安体制と犯罪統計の関係を確認したい読者。"
+      }
+    },
+    {
+      "rankingKey": "traffic-accident-injuries",
+      "shortLabel": "交通事故負傷者数",
+      "role": "context",
+      "selection": {
+        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
+        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
+        "surveyedAt": "2026-09-08",
+        "rationale": "交通事故負傷者数は「交通事故の発生と人的被害」の補足として詳細索引に保持し、冒頭の要約へ重ねない。"
+      }
+    },
+    {
+      "rankingKey": "flood-damage-general-assets",
+      "shortLabel": "水害一般資産等被害額",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "水害統計調査の概要（国土交通省水管理・国土保全局）",
+        "sourceUrl": "https://www.mlit.go.jp/statistics/details/t-other-2_tk_000289.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "水害統計調査は治水行政の基礎資料を得るために一般資産（家屋・家庭用品・農漁家資産・事業所資産・農作物）の被害額を市区町村単位で積み上げて集計しており、水害の経済的被害規模を都道府県間で比較する代表的な指標となる。洪水と浸水という章立てのもとで、被害の「量」を金額で示す軸として機能する。",
+        "adoptionCriteria": [
+          "representativeness",
+          "dataQuality"
+        ],
+        "readerQuestion": "水害による資産被害額が大きい都道府県はどこか。",
+        "targetReaderOrDecision": "治水対策の優先度を検討する地方自治体・防災担当者。"
+      }
+    },
+    {
+      "rankingKey": "flood-affected-municipalities",
+      "shortLabel": "水害被災市区町村数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "水害統計調査の概要（国土交通省水管理・国土保全局）",
+        "sourceUrl": "https://www.mlit.go.jp/statistics/details/t-other-2_tk_000289.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "被災市区町村数は、市区町村ごとの現地調査結果を都道府県経由で集計する仕組みに基づいており、被害額とは異なり水害の「広がり」（面的な被災範囲）を示す指標である。被害額指標と組み合わせることで、局地的な大規模被害か広域にわたる小規模被害かという水害の性格の違いを都道府県間で比較できる。",
+        "adoptionCriteria": [
+          "complementarity",
+          "dataQuality"
+        ],
+        "readerQuestion": "水害で被災した市区町村数が多い都道府県は、被害が広域に及んでいるのか。",
+        "targetReaderOrDecision": "水害の被災範囲の広がりを確認したい防災担当者・研究者。"
+      }
+    },
+    {
+      "rankingKey": "natural-disaster-deaths",
+      "shortLabel": "自然災害による死者数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和7年版 消防白書 附属資料1-5-2「令和6年1月1日から12月31日までの間に発生した自然災害等による都道府県別被害状況」（総務省消防庁）",
+        "sourceUrl": "https://www.fdma.go.jp/publication/hakusho/r7/document/69468.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "消防白書の附属資料1-5-2は、暴風・豪雨・地震など自然災害全般による被害を都道府県別に集計した公式表であり、死者数はその中で人的被害の最も重い区分として扱われている。自然災害の人的被害を都道府県間で比較する際の代表的な指標であり、住家被害や経済被害と並んで「人的・住家被害と復旧支出」の章の中心的な軸となる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability"
+        ],
+        "readerQuestion": "令和6年に自然災害による死者数が多かった都道府県はどこか。",
+        "targetReaderOrDecision": "防災計画の優先地域を検討する自治体・国の防災担当者。"
+      }
+    },
+    {
+      "rankingKey": "natural-disaster-missing-persons",
+      "shortLabel": "自然災害による行方不明者数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和7年版 消防白書 附属資料1-5-2「令和6年1月1日から12月31日までの間に発生した自然災害等による都道府県別被害状況」（総務省消防庁）",
+        "sourceUrl": "https://www.fdma.go.jp/publication/hakusho/r7/document/69468.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "この備考は同じ附属資料1-5-2表が対象とする「自然災害」の範囲を定義しており、行方不明者数もこの定義に基づき暴風・地震・津波など多様な災害種別を横断して都道府県別に計上されている。死者数だけでは捕捉できない、災害直後の捜索・救助が続く被害の規模を示す点で死者数を補完する指標となる。",
+        "adoptionCriteria": [
+          "complementarity",
+          "dataQuality"
+        ],
+        "readerQuestion": "自然災害による行方不明者が発生した都道府県はどこで、死者数との差はどの程度か。",
+        "targetReaderOrDecision": "災害時の捜索・救助体制を検討する防災担当者。"
+      }
+    },
+    {
+      "rankingKey": "natural-disaster-injured-persons",
+      "shortLabel": "自然災害による負傷者数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和7年版 消防白書 附属資料1-5-2「令和6年1月1日から12月31日までの間に発生した自然災害等による都道府県別被害状況」（総務省消防庁）",
+        "sourceUrl": "https://www.fdma.go.jp/publication/hakusho/r7/document/69468.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "この備考は附属資料1-5-2表全体の集計上の注意点を示すものであり、負傷者数を含む同表の各数値がこの端数処理ルールの下で都道府県別に集計されていることを意味する。負傷者数は死者・行方不明者に至らない人的被害を捉える指標であり、重篤度の低い被害まで含めることで自然災害の人的被害を過小評価しないための補完的な軸となる。",
+        "adoptionCriteria": [
+          "complementarity",
+          "dataQuality"
+        ],
+        "readerQuestion": "自然災害による負傷者数が多い都道府県は、死者・行方不明者数が多い都道府県と一致するか。",
+        "targetReaderOrDecision": "災害医療・救急体制の需要を見積もる担当者。"
+      }
+    },
+    {
+      "rankingKey": "natural-disaster-destroyed-houses",
+      "shortLabel": "自然災害による全壊住家棟数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和7年版 消防白書 附属資料「資料1-5-2 令和6年1月1日から12月31日までの間に発生した自然災害等による都道府県別被害状況」（総務省消防庁）",
+        "sourceUrl": "https://www.fdma.go.jp/publication/hakusho/r7/document/69468.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "消防白書はこの資料で自然災害を暴風・地震・津波など多様な現象として定義したうえで、都道府県別の住家被害を全壊・半壊・一部破損に区分して集計している。全壊棟数は住家の機能喪失という最も重い被害を示す指標であり、能登半島地震のように特定の都道府県に被害が集中する状況を都道府県間で比較する際の代表的な尺度となる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability"
+        ],
+        "readerQuestion": "自分の県では自然災害でどれだけの住宅が全壊したのか。",
+        "targetReaderOrDecision": "地域防災計画の担当者や住宅再建支援制度を検討する自治体職員。"
+      }
+    },
+    {
+      "rankingKey": "natural-disaster-half-destroyed-houses",
+      "shortLabel": "自然災害による半壊住家棟数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和7年版 消防白書 附属資料「資料1-5-2 令和6年1月1日から12月31日までの間に発生した自然災害等による都道府県別被害状況」（総務省消防庁）",
+        "sourceUrl": "https://www.fdma.go.jp/publication/hakusho/r7/document/69468.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "消防白書の被害集計は住家被害を全壊・半壊・一部破損の三区分で都道府県別に公表しており、半壊は修理により再建可能な中程度の被害を示す。全壊のみでは捉えられない、より広い範囲で発生する生活再建ニーズを都道府県間で比較するために、全壊棟数と並ぶ補完的な指標として位置付けられる。",
+        "adoptionCriteria": [
+          "comparability",
+          "complementarity"
+        ],
+        "readerQuestion": "全壊には至らないが修理が必要な住宅被害は、どの都道府県に多いのか。",
+        "targetReaderOrDecision": "被災者生活再建支援金の制度設計に関わる自治体職員。"
+      }
+    },
+    {
+      "rankingKey": "natural-disaster-partially-damaged-houses",
+      "shortLabel": "自然災害による一部破損住家棟数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和7年版 消防白書 附属資料「資料1-5-2 令和6年1月1日から12月31日までの間に発生した自然災害等による都道府県別被害状況」（総務省消防庁）",
+        "sourceUrl": "https://www.fdma.go.jp/publication/hakusho/r7/document/69468.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "消防白書の同一資料では一部破損住家も全壊・半壊と並ぶ被害区分として都道府県別に集計されており、令和6年能登半島地震のように長野県などで一部破損のみが発生した県もあるなど、被害の裾野の広がりを示す。全壊・半壊だけでは見えない軽微な被害の地域差を補完的に把握できる。",
+        "adoptionCriteria": [
+          "comparability",
+          "complementarity"
+        ],
+        "readerQuestion": "軽微な住宅被害まで含めると、被害はどこまで広がっているのか。",
+        "targetReaderOrDecision": "災害廃棄物処理や応急修理支援を計画する自治体職員。"
+      }
+    },
+    {
+      "rankingKey": "disaster-recovery-expenses-prefecture",
+      "shortLabel": "災害復旧費（都道府県財政）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "国土交通省水管理・国土保全局「災害復旧事業の概要」（防災）",
+        "sourceUrl": "https://www.mlit.go.jp/mizukokudo/river/hukkyu_jigyou.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "この解説は災害復旧事業が地方公共団体の財政力に応じた国庫負担のもとで実施される制度であることを示しており、都道府県決算における災害復旧費は被災後にどれだけの復旧支出が発生したかを金額で表す指標となる。棟数指標が被害の物理的規模を示すのに対し、復旧費は財政負担という別の軸から都道府県間の災害影響を比較できる。",
+        "adoptionCriteria": [
+          "complementarity",
+          "readerValue"
+        ],
+        "readerQuestion": "災害からの復旧にはどれくらいの財政負担がかかっているのか。",
+        "targetReaderOrDecision": "都道府県財政を分析する研究者や地方財政担当者。"
+      }
+    },
+    {
+      "rankingKey": "fire-department-water-count-per-100-thousand-people",
+      "shortLabel": "消防水利数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "消防水利の基準（昭和39年12月10日消防庁告示第7号）（総務省消防庁）",
+        "sourceUrl": "https://www.fdma.go.jp/laws/kokuji/post27/",
+        "surveyedAt": "2026-09-16",
+        "rationale": "消防庁告示は消防水利を消火栓・防火水槽・河川・井戸など消火活動に不可欠な水利施設として法的に定義しており、一定の貯水量・給水能力の基準を課している。人口10万人当たりの消防水利数は、火災発生時に地域がどれだけ消火資源を備えているかという供給側の備えを示す指標であり、火災・救急需要という章の中で被害発生指標を補完する。",
+        "adoptionCriteria": [
+          "complementarity",
+          "dataQuality"
+        ],
+        "readerQuestion": "自分の地域には人口当たりどれだけの消防水利があるのか。",
+        "targetReaderOrDecision": "消防力の整備計画を検討する消防本部・自治体担当者。"
+      }
+    },
+    {
+      "rankingKey": "fire-department-member-count-per-100-thousand-people",
+      "shortLabel": "消防吏員数（人口10万人当たり）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和5年版 消防白書 第2章第1節「消防組織」（総務省消防庁）",
+        "sourceUrl": "https://www.fdma.go.jp/publication/hakusho/r5/chapter2/section1/66820.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "消防白書は全国の消防職員のうち実際に消火・救助・救急活動に従事する消防吏員の人数を集計しており、これは消防組織の人的な対応能力を表す代表的な数値である。人口10万人当たりに換算することで、消防水利数（施設面）と対をなす人員面の備えとして都道府県間の消防体制を比較でき、災害・火災に対する地域の対応力を測る指標となる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "complementarity",
+          "dataQuality"
+        ],
+        "readerQuestion": "人口当たりの消防職員数は地域によってどれだけ差があるのか。",
+        "targetReaderOrDecision": "消防力の整備指針に基づき人員配置を検討する消防本部・総務省担当者。"
+      }
+    },
+    {
+      "rankingKey": "fire-department-pump-car-count-per-100-thousand-people",
+      "shortLabel": "消防ポンプ自動車等現有数（人口10万人当たり）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "平成30年版 消防白書 第2章第1節2「消防防災施設等」（総務省消防庁）",
+        "sourceUrl": "https://www.fdma.go.jp/publication/hakusho/h30/chapter2/section1/38289.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "消防白書は消防ポンプ自動車を消防活動の基盤となる装備として位置づけており、地域の消防力を測る具体的な物量指標として扱っている。社会・人口統計体系では1975年から2022年まで人口10万人当たりの台数として都道府県別に長期間比較できるため、犯罪や交通事故とは異なる「火災への備え」という角度からテーマの安全性を補完する指標になる。",
+        "adoptionCriteria": [
+          "complementarity",
+          "dataQuality"
+        ],
+        "readerQuestion": "自分の都道府県は人口当たりの消防ポンプ自動車の台数が他地域と比べて多いか少ないか。",
+        "targetReaderOrDecision": "地域の消防・防火体制の充実度を確認したい住民や自治体防災担当者。"
+      }
+    },
+    {
+      "rankingKey": "fire-department-emergency-car-count-per-100k",
+      "shortLabel": "救急自動車数（人口10万人当たり）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和6年版 消防白書 第2章第5節2「救急業務の実施体制」（総務省消防庁）",
+        "sourceUrl": "https://www.fdma.go.jp/publication/hakusho/r6/chapter2/section5/68132.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "消防白書は救急自動車の保有台数を救急業務の実施体制を示す基礎データとして毎年公表しており、地域の救急対応力を測る代表的な指標として位置づけている。社会・人口統計体系による人口10万人当たりの台数は都道府県間の比較を可能にし、火災・救急需要という章の中で消防ポンプ台数と並ぶ体制面の補完指標となる。",
+        "adoptionCriteria": [
+          "complementarity",
+          "dataQuality"
+        ],
+        "readerQuestion": "救急車の配備密度は都道府県ごとにどれくらい差があるか。",
+        "targetReaderOrDecision": "救急医療体制の地域差を把握したい住民や医療・防災政策の検討者。"
+      }
+    },
+    {
+      "rankingKey": "individual-evacuation-plan-coverage-rate",
+      "shortLabel": "個別避難計画の作成率",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "内閣府・消防庁「避難行動要支援者名簿及び個別避難計画の作成等に係る取組状況」（令和8年調査、令和8年4月1日現在）",
+        "sourceUrl": "https://www.bousai.go.jp/taisaku/hisaisyagyousei/pdf/r8chosa1.pdf",
+        "surveyedAt": "2026-09-16",
+        "rationale": "この調査は個別避難計画の作成率を市町村単位で毎年集計しており、避難行動要支援者に対する自治体の備えの進捗を直接示す政策目標指標として扱われている。作成率が低い階級が過半数を占めるという記述は、地域差が大きい現状を政府自身が課題として明示しており、避難施設整備の章で都道府県間の取組差を確認する読者の問いに直接応える。",
+        "adoptionCriteria": [
+          "representativeness",
+          "readerValue"
+        ],
+        "readerQuestion": "自分の住む地域では要支援者の個別避難計画がどの程度進んでいるか。",
+        "targetReaderOrDecision": "個別避難計画の進捗を確認したい住民や福祉・防災担当の自治体職員。"
+      }
+    },
+    {
+      "rankingKey": "individual-evacuation-plan-listed-persons",
+      "shortLabel": "避難行動要支援者名簿の掲載人数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "内閣府・消防庁「避難行動要支援者名簿及び個別避難計画の作成等に係る取組状況」（令和8年調査、令和8年4月1日現在）",
+        "sourceUrl": "https://www.bousai.go.jp/taisaku/hisaisyagyousei/pdf/r8chosa1.pdf",
+        "surveyedAt": "2026-09-16",
+        "rationale": "避難行動要支援者名簿の掲載者数は、市町村が把握している要支援者の母数として個別避難計画の作成対象範囲を定める基礎データであり、この調査資料では名簿掲載者を基準に平時からの情報提供割合などが算出されている。掲載人数の規模を都道府県別に見ることで、要支援者数と計画整備の負荷の大きさという避難施設整備の背景を読者が把握できる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "complementarity"
+        ],
+        "readerQuestion": "自分の地域で避難行動要支援者名簿に登録されている人数はどれくらいか。",
+        "targetReaderOrDecision": "要支援者対策の規模感を把握したい自治体防災・福祉担当者。"
+      }
+    },
+    {
+      "rankingKey": "individual-evacuation-plan-covered-persons",
+      "shortLabel": "個別避難計画が作成された人数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "内閣府・消防庁「避難行動要支援者名簿及び個別避難計画の作成等に係る取組状況」（令和8年調査、令和8年4月1日現在）",
+        "sourceUrl": "https://www.bousai.go.jp/taisaku/hisaisyagyousei/pdf/r8chosa1.pdf",
+        "surveyedAt": "2026-09-16",
+        "rationale": "この資料は個別避難計画が作成された要支援者の実人数を全国集計として公表しており、作成率（割合）だけでは見えない絶対的な達成規模を示す指標として位置づけられている。名簿掲載人数と対にして都道府県別に見ることで、避難施設整備の章において「どれだけの人が実際に守られる計画を持っているか」という読者の問いに答えられる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "readerValue"
+        ],
+        "readerQuestion": "実際に個別避難計画が作成されている要支援者は何人いるのか。",
+        "targetReaderOrDecision": "要配慮者支援の実効性を確認したい住民や福祉・防災担当者。"
+      }
+    },
+    {
+      "rankingKey": "tsunami-evacuation-building-count",
+      "shortLabel": "津波避難ビル数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "内閣府「津波避難ビル・津波避難タワー等に関する取組調査結果について」（令和5年4月1日現在調査）",
+        "sourceUrl": "https://www.bousai.go.jp/jishin/tsunami/hinan/pdf/sanko_1.pdf",
+        "surveyedAt": "2026-09-16",
+        "rationale": "内閣府は全国40都道府県678市区町村を対象に津波避難ビルの整備状況を毎年調査しており、耐震性など安全性の観点から整備数の質を確認する政策資料として公表している。この指標は洪水・自然災害の章において、避難施設整備の物理的な備えを都道府県別に比較する代表的な指標であり、個別避難計画（ソフト面）と対をなす補完的な角度を提供する。",
+        "adoptionCriteria": [
+          "representativeness",
+          "complementarity"
+        ],
+        "readerQuestion": "自分の地域には津波から緊急避難できるビルがどれだけ整備されているか。",
+        "targetReaderOrDecision": "沿岸自治体の津波避難施設整備状況を確認したい住民や防災担当者。"
+      }
+    },
+    {
+      "rankingKey": "tsunami-evacuation-tower-count",
+      "shortLabel": "津波避難タワー等数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "高知市ホームページ「津波避難センター・津波避難タワー」（高知市地域防災推進課）",
+        "sourceUrl": "https://www.city.kochi.kochi.jp/soshiki/12/tunamihinann-ct.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "この市の公式ページは、津波避難タワー等が「自然地形の高台や高い建物等が無く津波からの避難が困難な地域」を対象に整備される緊急避難インフラであることを示しており、内閣府が都道府県別に集計する整備数はこうした地域の避難環境整備の進み具合を可視化する指標として位置付けられる。テーマの「避難施設と個別避難計画の整備」章において、都道府県ごとの整備の遅速を比較する材料になる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "readerValue"
+        ],
+        "readerQuestion": "自分の住む都道府県では津波避難タワー等の整備がどの程度進んでいるか。",
+        "targetReaderOrDecision": "沿岸部の防災担当者や住民が避難環境の整備状況を把握する際の参考情報。"
+      }
+    },
+    {
+      "rankingKey": "disaster-relief-expenses-prefecture",
+      "shortLabel": "災害救助費",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
+        "surveyedAt": "2026-09-09",
+        "rationale": "災害救助費を既存テーマの独立章へ追加する。"
+      }
+    },
+    {
+      "rankingKey": "consumer-consultation-accepted-cases",
+      "shortLabel": "消費生活相談受付件数（年度）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "千葉県「令和6年度の消費生活相談の概要について」（千葉県環境生活部くらし安全推進課）",
+        "sourceUrl": "https://www.pref.chiba.lg.jp/seikouan/press/2025/r6-soudangaiyou.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "都道府県の消費生活センターが年度ごとに受け付けた相談件数を集計・公表し、前年度比の増減率まで示していることから、この件数が消費者被害の規模と変化を捉える基礎指標として自治体自身に位置付けられていることが分かる。消費者庁の地方消費者行政の現況調査はこうした都道府県ごとの集計を全国横断で束ねたものであり、テーマの「犯罪と消費者被害」章で都道府県間の消費者トラブルの多寡を比較する材料になる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability",
+          "readerValue"
+        ],
+        "readerQuestion": "自分の住む都道府県では消費生活相談の件数が増えているのか減っているのか。",
+        "targetReaderOrDecision": "消費者行政担当者や住民が消費者被害の動向を把握する際の参考情報。"
+      }
+    }
+  ],
+  "charts": [
+    {
+      "componentKey": "crime-count-arrest-rate-trend",
+      "componentType": "mixed-chart",
+      "title": "刑法犯認知件数（人口千人当たり）と検挙率の推移",
+      "componentProps": {
+        "columnSeriesRefs": [
+          {
+            "metricKey": "penal-code-offenses-recognized-per-1000"
+          }
+        ],
+        "lineSeriesRefs": [
+          {
+            "metricKey": "criminal-arrest-rate"
+          }
+        ],
+        "columnLabels": [
+          "認知件数（人口千人当たり）"
+        ],
+        "lineLabels": [
+          "検挙率"
+        ],
+        "leftUnit": "件/千人",
+        "rightUnit": "%",
+        "columnColors": [
+          "count"
+        ],
+        "lineColors": [
+          "improve"
+        ]
+      },
+      "relatedRankingKeys": [
+        "penal-code-offenses-recognized-per-1000",
+        "criminal-arrest-rate"
+      ],
+      "sourceName": "犯罪統計",
+      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "crime",
+      "sortOrder": 10,
+      "annotation": "刑法犯認知件数は人口千人当たり、検挙率は認知件数に対する検挙件数の割合です。"
+    },
+    {
+      "componentKey": "traffic-accident-deaths-trend",
+      "componentType": "line-chart",
+      "title": "交通事故 発生件数と負傷者数の推移",
+      "componentProps": {
+        "seriesRefs": [
+          {
+            "metricKey": "traffic-accident-count"
+          },
+          {
+            "metricKey": "traffic-accident-injuries"
+          }
+        ],
+        "labels": [
+          "事故発生件数",
+          "負傷者数"
+        ],
+        "seriesColors": [
+          "count",
+          "danger"
+        ]
+      },
+      "relatedRankingKeys": [
+        "traffic-accident-count",
+        "traffic-accident-injuries"
+      ],
+      "sourceName": "交通事故統計",
+      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "traffic",
+      "sortOrder": 20
+    },
+    {
+      "componentKey": "fire-emergency-trend",
+      "componentType": "line-chart",
+      "title": "救急出動件数（人口千人当たり）の推移",
+      "componentProps": {
+        "seriesRefs": [
+          {
+            "metricKey": "annual-emergency-dispatches-per-1000",
+            "label": "救急出動件数（人口千人当たり）",
+            "colorRole": "series-1"
+          }
+        ]
+      },
+      "relatedRankingKeys": [
+        "annual-emergency-dispatches-per-1000"
+      ],
+      "sourceName": "消防統計",
+      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
+      "gridColumnSpan": 12,
+      "dataSource": "ranking",
+      "sortOrder": 30,
+      "section": "fire-emergency"
+    },
+    {
+      "componentKey": "fire-emergency-trend-fire",
+      "componentType": "line-chart",
+      "title": "火災出火件数（人口10万人当たり）の比較",
+      "componentProps": {
+        "seriesRefs": [
+          {
+            "metricKey": "building-fire-count-per-100-thousand-people",
+            "label": "火災出火件数（人口10万人当たり）",
+            "colorRole": "series-1"
+          }
+        ]
+      },
+      "relatedRankingKeys": [
+        "building-fire-count-per-100-thousand-people"
+      ],
+      "sourceName": "消防統計",
+      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
+      "gridColumnSpan": 12,
+      "dataSource": "ranking",
+      "sortOrder": 40,
+      "annotation": "現在配信している2023年の人口10万人当たりの火災出火件数です。建物以外の火災も含みます。",
+      "section": "fire-emergency"
+    },
+    {
+      "componentKey": "safety-crime-types-donut",
+      "componentType": "donut-chart",
+      "title": "罪種別 刑法犯認知件数の内訳（2023年）",
+      "componentProps": {
+        "topN": 5,
+        "seriesRefs": [
+          {
+            "metricKey": "theft-offenses-recognized",
+            "label": "窃盗犯",
+            "colorRole": "population"
+          },
+          {
+            "metricKey": "violent-crime-per-100k",
+            "label": "粗暴犯",
+            "colorRole": "count"
+          },
+          {
+            "metricKey": "intellectual-crime-per-100k",
+            "label": "知能犯",
+            "colorRole": "special"
+          },
+          {
+            "metricKey": "theme-prostitution-crime-recognition-count",
+            "label": "風俗犯",
+            "colorRole": "series-6"
+          },
+          {
+            "metricKey": "serious-crime-per-100k",
+            "label": "凶悪犯",
+            "colorRole": "danger"
+          }
+        ]
+      },
+      "relatedRankingKeys": [
+        "criminal-recognition-count"
+      ],
+      "sourceName": "総務省統計局 社会・人口統計体系（警察庁 犯罪統計）",
+      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "crime",
+      "sortOrder": 50
+    },
+    {
+      "componentKey": "safety-fire-casualties-donut",
+      "componentType": "donut-chart",
+      "title": "火災による死傷者の内訳（2023年）",
+      "componentProps": {
+        "topN": 2,
+        "seriesRefs": [
+          {
+            "metricKey": "theme-fire-injured-count",
+            "label": "火災負傷者",
+            "colorRole": "count"
+          },
+          {
+            "metricKey": "fire-deaths-per-100k",
+            "label": "火災死亡者",
+            "colorRole": "danger"
+          }
+        ]
+      },
+      "relatedRankingKeys": [
+        "fire-deaths-per-100k"
+      ],
+      "sourceName": "総務省統計局 社会・人口統計体系（消防庁 火災年報）",
+      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "fire-emergency",
+      "sortOrder": 60
+    }
+  ],
+  "evidenceTopics": [
+    {
+      "key": "recognized-crime-and-clearance",
+      "lensKey": "outcomes",
+      "title": "犯罪の認知状況と検挙状況",
+      "question": "人口千人当たりの刑法犯認知件数と検挙率には、地域ごとにどのような差があるか",
+      "summary": "刑法犯認知件数は警察が犯罪の発生を認知した事件数で、未認知の事件は含みません。主指標と推移図では人口千人当たりの値を使い、罪種別の内訳は総件数で表示します。検挙率は検挙した事件件数を認知件数で割った割合であり、検挙人員の割合ではありません。",
+      "sourceKeys": [
+        "npa-crime-statistics"
+      ],
+      "relatedRankingKeys": [
+        "penal-code-offenses-recognized-per-1000",
+        "criminal-arrest-rate"
+      ],
+      "relatedChartKeys": [
+        "crime-count-arrest-rate-trend"
+      ]
+    },
+    {
+      "key": "traffic-accidents-and-injuries",
+      "lensKey": "outcomes",
+      "title": "交通事故の発生と人的被害",
+      "question": "交通事故の発生件数と負傷者数には、地域ごとにどのような差があるか",
+      "summary": "現在の交通事故統計は、人の死亡または負傷を伴う事故を対象とし、物損事故は含みません。発生件数は事故の数、負傷者数は重傷者と軽傷者の人数なので、同じ単位として足し合わせません。",
+      "sourceKeys": [
+        "npa-traffic-accident-statistics"
+      ],
+      "relatedRankingKeys": [
+        "traffic-accident-count",
+        "traffic-accident-injuries"
+      ],
+      "relatedChartKeys": [
+        "traffic-accident-deaths-trend"
+      ]
+    }
+  ],
+  "keywords": [
+    "犯罪",
+    "刑法犯",
+    "凶悪犯",
+    "治安",
+    "交通事故",
+    "死者数",
+    "火災",
+    "救急",
+    "災害",
+    "自殺",
+    "都道府県",
+    "ランキング"
+  ],
+  "sections": [
+    {
+      "key": "crime",
+      "title": "犯罪の認知と検挙",
+      "description": "主指標は人口千人当たりの刑法犯認知件数です。検挙率とは別の尺度であり、認知件数には届け出や把握状況も影響します。",
+      "metricGroupKeys": [
+        "crime-1",
+        "crime-2"
+      ],
+      "chartKeys": [
+        "crime-count-arrest-rate-trend",
+        "safety-crime-types-donut"
+      ]
+    },
+    {
+      "key": "traffic",
+      "title": "交通事故の発生と人的被害",
+      "description": "主指標は人口10万人当たりの事故件数・死者数・負傷者数です。総件数・総人数の推移図と分けて確認します。",
+      "metricGroupKeys": [
+        "traffic-1",
+        "traffic-2"
+      ],
+      "chartKeys": [
+        "traffic-accident-deaths-trend"
+      ]
+    },
+    {
+      "key": "fire-emergency",
+      "title": "火災と救急需要",
+      "description": "火災は人口10万人当たり、救急出動は人口千人当たりで比較します。火災死傷者の内訳は総人数です。",
+      "metricGroupKeys": [
+        "fire-emergency-1",
+        "fire-emergency-2"
+      ],
+      "chartKeys": [
+        "fire-emergency-trend",
+        "fire-emergency-trend-fire",
+        "safety-fire-casualties-donut"
+      ]
+    },
+    {
+      "key": "candidate-88",
+      "title": "交通安全と高齢者の死傷",
+      "description": "交通事故件数・死亡率に加え、65歳以上の死傷者数を比較します。高齢者の被害を捉える年齢区分であり、高齢運転者が起こした事故件数や事故原因を表すものではありません。",
+      "metricGroupKeys": [
+        "candidate-88-1",
+        "candidate-88-2",
+        "candidate-88-3"
+      ]
+    },
+    {
+      "key": "candidate-106",
+      "title": "洪水と浸水",
+      "metricGroupKeys": [
+        "candidate-106-1",
+        "candidate-106-2"
+      ]
+    },
+    {
+      "key": "candidate-109",
+      "title": "自然災害の人的・住家被害と復旧支出",
+      "description": "2024年中に発生した自然災害等の被害を、2025年4月1日現在の集計で掲載します。死者には災害関連死を含み、負傷者は重傷と軽傷の合計です。住家の全壊・半壊・一部破損は棟数で、浸水のみの被害を含む総数ではありません。既存の被害額や復旧支出は対象年・年度・単位を別に確認し、支出の多さを復旧速度とみなしません。",
+      "metricGroupKeys": [
+        "candidate-109-1",
+        "candidate-109-2",
+        "candidate-109-3",
+        "candidate-109-4",
+        "candidate-109-5",
+        "candidate-109-6",
+        "candidate-109-7",
+        "candidate-109-8"
+      ]
+    },
+    {
+      "key": "candidate-110",
+      "title": "消防・救急の人員と車両",
+      "description": "消防吏員・消防ポンプ自動車等は2022年、救急自動車は2024年の人口10万人当たりの値です。車両や人員の実数ではなく、各県の人口規模をそろえた供給量として読みます。異なる年の値を同年の構成比にはしません。",
+      "metricGroupKeys": [
+        "candidate-110-1",
+        "candidate-110-2",
+        "candidate-110-3",
+        "candidate-110-4",
+        "candidate-110-5"
+      ]
+    },
+    {
+      "key": "candidate-111",
+      "title": "避難施設と個別避難計画の整備",
+      "description": "個別避難計画は2026年4月1日現在、名簿に載る要支援者のうち計画が作成された人数と割合です。自治体ごとに名簿の対象基準が異なり、過去の累計や優先作成対象者数は分母にしません。施設数と計画作成率は実際の避難成功率ではありません。津波避難施設の対象外7県は0へ置き換えず、他災害の施設総数にも読み替えません。",
+      "metricGroupKeys": [
+        "candidate-111-1",
+        "candidate-111-2",
+        "candidate-111-3",
+        "candidate-111-4",
+        "candidate-111-5",
+        "candidate-111-6"
+      ],
+      "embeddedSectionKeys": [
+        "shelter-applicability"
+      ]
+    },
+    {
+      "key": "candidate-112",
+      "title": "犯罪と消費者被害",
+      "description": "2025年度調査で把握した2024年度中の受付件数。都道府県・政令市・市区町村・広域連合・一部事務組合を含む県別の公表合計を使用する。「うちあっせん件数」は内数であり加算しない。相談者の実人数や認定された消費者被害の件数、犯罪認知件数とは異なる。窓口の県別集計であり、相談者の居住県別とはしない。",
+      "metricGroupKeys": [
+        "candidate-112-1",
+        "candidate-112-2",
+        "candidate-112-3"
+      ]
+    }
+  ],
+  "metricGroups": [
+    {
+      "key": "crime-1",
+      "title": "刑法犯認知件数（人口千人当たり）",
+      "rankingKeys": [
+        "penal-code-offenses-recognized-per-1000"
+      ],
+      "defaultCheckedKeys": [
+        "penal-code-offenses-recognized-per-1000"
+      ]
+    },
+    {
+      "key": "crime-2",
+      "title": "検挙率",
+      "rankingKeys": [
+        "criminal-arrest-rate"
+      ],
+      "defaultCheckedKeys": [
+        "criminal-arrest-rate"
+      ]
+    },
+    {
+      "key": "traffic-1",
+      "title": "交通事故死者・負傷者数（人口10万人当たり）",
+      "rankingKeys": [
+        "traffic-accident-deaths-per-100k",
+        "traffic-accident-injuries-per-100k"
+      ],
+      "defaultCheckedKeys": [
+        "traffic-accident-deaths-per-100k",
+        "traffic-accident-injuries-per-100k"
+      ]
+    },
+    {
+      "key": "traffic-2",
+      "title": "交通事故発生件数（人口10万人当たり）",
+      "rankingKeys": [
+        "traffic-accident-count-per-population"
+      ],
+      "defaultCheckedKeys": [
+        "traffic-accident-count-per-population"
+      ]
+    },
+    {
+      "key": "fire-emergency-1",
+      "title": "人口当たりの火災・救急出動",
+      "rankingKeys": [
+        "building-fire-count-per-100-thousand-people",
+        "annual-emergency-dispatches-per-1000"
+      ],
+      "defaultCheckedKeys": [
+        "building-fire-count-per-100-thousand-people",
+        "annual-emergency-dispatches-per-1000"
+      ]
+    },
+    {
+      "key": "fire-emergency-2",
+      "title": "火災死者",
+      "rankingKeys": [
+        "fire-deaths-per-100k"
+      ],
+      "defaultCheckedKeys": [
+        "fire-deaths-per-100k"
+      ]
+    },
+    {
+      "key": "candidate-88-1",
+      "title": "交通安全と高齢者の死傷｜交通事故発生件数",
+      "rankingKeys": [
+        "traffic-accident-count"
+      ],
+      "defaultCheckedKeys": [
+        "traffic-accident-count"
+      ]
+    },
+    {
+      "key": "candidate-88-2",
+      "title": "交通安全と高齢者の死傷｜交通事故死者数（人口10万人当たり）",
+      "rankingKeys": [
+        "traffic-accident-deaths-per-100k"
+      ],
+      "defaultCheckedKeys": [
+        "traffic-accident-deaths-per-100k"
+      ]
+    },
+    {
+      "key": "candidate-88-3",
+      "title": "交通安全と高齢者の死傷｜交通事故死傷者数（65歳以上）",
+      "rankingKeys": [
+        "traffic-accident-casualties-elderly-65plus"
+      ],
+      "defaultCheckedKeys": [
+        "traffic-accident-casualties-elderly-65plus"
+      ]
+    },
+    {
+      "key": "candidate-106-1",
+      "title": "洪水と浸水｜水害一般資産等被害額",
+      "rankingKeys": [
+        "flood-damage-general-assets"
+      ],
+      "defaultCheckedKeys": [
+        "flood-damage-general-assets"
+      ]
+    },
+    {
+      "key": "candidate-106-2",
+      "title": "洪水と浸水｜水害被災市区町村数",
+      "rankingKeys": [
+        "flood-affected-municipalities"
+      ],
+      "defaultCheckedKeys": [
+        "flood-affected-municipalities"
+      ]
+    },
+    {
+      "key": "candidate-109-1",
+      "title": "自然災害の人的・住家被害と復旧支出｜自然災害による死者数",
+      "rankingKeys": [
+        "natural-disaster-deaths"
+      ],
+      "defaultCheckedKeys": [
+        "natural-disaster-deaths"
+      ]
+    },
+    {
+      "key": "candidate-109-2",
+      "title": "自然災害の人的・住家被害と復旧支出｜自然災害による行方不明者数",
+      "rankingKeys": [
+        "natural-disaster-missing-persons"
+      ],
+      "defaultCheckedKeys": [
+        "natural-disaster-missing-persons"
+      ]
+    },
+    {
+      "key": "candidate-109-3",
+      "title": "自然災害の人的・住家被害と復旧支出｜自然災害による負傷者数",
+      "rankingKeys": [
+        "natural-disaster-injured-persons"
+      ],
+      "defaultCheckedKeys": [
+        "natural-disaster-injured-persons"
+      ]
+    },
+    {
+      "key": "candidate-109-4",
+      "title": "自然災害の人的・住家被害と復旧支出｜自然災害による全壊住家棟数",
+      "rankingKeys": [
+        "natural-disaster-destroyed-houses"
+      ],
+      "defaultCheckedKeys": [
+        "natural-disaster-destroyed-houses"
+      ]
+    },
+    {
+      "key": "candidate-109-5",
+      "title": "自然災害の人的・住家被害と復旧支出｜自然災害による半壊住家棟数",
+      "rankingKeys": [
+        "natural-disaster-half-destroyed-houses"
+      ],
+      "defaultCheckedKeys": [
+        "natural-disaster-half-destroyed-houses"
+      ]
+    },
+    {
+      "key": "candidate-109-6",
+      "title": "自然災害の人的・住家被害と復旧支出｜自然災害による一部破損住家棟数",
+      "rankingKeys": [
+        "natural-disaster-partially-damaged-houses"
+      ],
+      "defaultCheckedKeys": [
+        "natural-disaster-partially-damaged-houses"
+      ]
+    },
+    {
+      "key": "candidate-109-7",
+      "title": "自然災害の人的・住家被害と復旧支出｜災害復旧費（都道府県財政）",
+      "rankingKeys": [
+        "disaster-recovery-expenses-prefecture"
+      ],
+      "defaultCheckedKeys": [
+        "disaster-recovery-expenses-prefecture"
+      ]
+    },
+    {
+      "key": "candidate-109-8",
+      "title": "自然災害の人的・住家被害と復旧支出｜1人当たり災害被害額",
+      "rankingKeys": [
+        "disaster-damage-amount-per-person"
+      ],
+      "defaultCheckedKeys": [
+        "disaster-damage-amount-per-person"
+      ]
+    },
+    {
+      "key": "candidate-110-1",
+      "title": "消防・救急の人員と車両｜消防水利数",
+      "rankingKeys": [
+        "fire-department-water-count-per-100-thousand-people"
+      ],
+      "defaultCheckedKeys": [
+        "fire-department-water-count-per-100-thousand-people"
+      ]
+    },
+    {
+      "key": "candidate-110-2",
+      "title": "消防・救急の人員と車両｜救急出動件数（人口千人当たり）",
+      "rankingKeys": [
+        "annual-emergency-dispatches-per-1000"
+      ],
+      "defaultCheckedKeys": [
+        "annual-emergency-dispatches-per-1000"
+      ]
+    },
+    {
+      "key": "candidate-110-3",
+      "title": "消防・救急の人員と車両｜消防吏員数（人口10万人当たり）",
+      "rankingKeys": [
+        "fire-department-member-count-per-100-thousand-people"
+      ],
+      "defaultCheckedKeys": [
+        "fire-department-member-count-per-100-thousand-people"
+      ]
+    },
+    {
+      "key": "candidate-110-4",
+      "title": "消防・救急の人員と車両｜消防ポンプ自動車等現有数（人口10万人当たり）",
+      "rankingKeys": [
+        "fire-department-pump-car-count-per-100-thousand-people"
+      ],
+      "defaultCheckedKeys": [
+        "fire-department-pump-car-count-per-100-thousand-people"
+      ]
+    },
+    {
+      "key": "candidate-110-5",
+      "title": "消防・救急の人員と車両｜救急自動車数（人口10万人当たり）",
+      "rankingKeys": [
+        "fire-department-emergency-car-count-per-100k"
+      ],
+      "defaultCheckedKeys": [
+        "fire-department-emergency-car-count-per-100k"
+      ]
+    },
+    {
+      "key": "candidate-111-1",
+      "title": "避難施設と個別避難計画の整備｜個別避難計画の作成率",
+      "rankingKeys": [
+        "individual-evacuation-plan-coverage-rate"
+      ],
+      "defaultCheckedKeys": [
+        "individual-evacuation-plan-coverage-rate"
+      ]
+    },
+    {
+      "key": "candidate-111-2",
+      "title": "避難施設と個別避難計画の整備｜避難行動要支援者名簿の掲載人数",
+      "rankingKeys": [
+        "individual-evacuation-plan-listed-persons"
+      ],
+      "defaultCheckedKeys": [
+        "individual-evacuation-plan-listed-persons"
+      ]
+    },
+    {
+      "key": "candidate-111-3",
+      "title": "避難施設と個別避難計画の整備｜個別避難計画が作成された人数",
+      "rankingKeys": [
+        "individual-evacuation-plan-covered-persons"
+      ],
+      "defaultCheckedKeys": [
+        "individual-evacuation-plan-covered-persons"
+      ]
+    },
+    {
+      "key": "candidate-111-4",
+      "title": "避難施設と個別避難計画の整備｜津波避難ビル数",
+      "rankingKeys": [
+        "tsunami-evacuation-building-count"
+      ],
+      "defaultCheckedKeys": [
+        "tsunami-evacuation-building-count"
+      ]
+    },
+    {
+      "key": "candidate-111-5",
+      "title": "避難施設と個別避難計画の整備｜津波避難タワー等数",
+      "rankingKeys": [
+        "tsunami-evacuation-tower-count"
+      ],
+      "defaultCheckedKeys": [
+        "tsunami-evacuation-tower-count"
+      ]
+    },
+    {
+      "key": "candidate-111-6",
+      "title": "避難施設と個別避難計画の整備｜災害救助費",
+      "rankingKeys": [
+        "disaster-relief-expenses-prefecture"
+      ],
+      "defaultCheckedKeys": [
+        "disaster-relief-expenses-prefecture"
+      ]
+    },
+    {
+      "key": "candidate-112-1",
+      "title": "犯罪と消費者被害｜消費生活相談受付件数（年度）",
+      "rankingKeys": [
+        "consumer-consultation-accepted-cases"
+      ],
+      "defaultCheckedKeys": [
+        "consumer-consultation-accepted-cases"
+      ]
+    },
+    {
+      "key": "candidate-112-2",
+      "title": "犯罪と消費者被害｜刑法犯認知件数",
+      "rankingKeys": [
+        "criminal-recognition-count"
+      ],
+      "defaultCheckedKeys": [
+        "criminal-recognition-count"
+      ]
+    },
+    {
+      "key": "candidate-112-3",
+      "title": "犯罪と消費者被害｜警察官数（人口千人当たり）",
+      "rankingKeys": [
+        "police-officer-count-per-population"
+      ],
+      "defaultCheckedKeys": [
+        "police-officer-count-per-population"
+      ]
+    }
+  ]
+}

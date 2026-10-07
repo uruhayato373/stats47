@@ -1,0 +1,4 @@
+{
+  "//": "theme-catalog/catalogs は 55 テーマ分の定義 JSON を読むだけで副作用がない。カタログを使わないクライアント部品のチャンクから外すための宣言 (index.ts のコメント参照)",
+  "sideEffects": false
+}

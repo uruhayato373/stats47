@@ -1,0 +1,427 @@
+{
+  "key": "forestry-timber",
+  "title": "森林・林業・木材産業",
+  "description": "森林資源と木材の生産・出荷に加え、2025年農林業センサスの経営体・労働力と2024年の林業産出額を比較します。労働力は経営体ごとの過去1年間の人数で、雇用と経営内部を分けます。県別産出額は全国表と集計対象が異なり、木材・きのこ以外に薪炭・林野副産物を含みます。",
+  "category": "industry",
+  "usage": "theme",
+  "metrics": [
+    {
+      "rankingKey": "woodland-area",
+      "shortLabel": "森林面積",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "令和6年度 森林・林業白書 第I部第1章第1節「森林の整備・保全」（林野庁）",
+        "sourceUrl": "https://www.rinya.maff.go.jp/j/kikaku/hakusyo/r6hakusyo_h/all/chap1_1_1.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "白書は森林面積を国土面積との対比で示し、日本の森林資源量を測る最も基本的な指標として位置付けている。都道府県別の森林面積を比較することで、各地域がどれだけの森林資源を有するかという本テーマの出発点となる問いに直接答えられる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability"
+        ]
+      }
+    },
+    {
+      "rankingKey": "forest-area-ratio",
+      "shortLabel": "林野面積割合",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和6年度 森林・林業白書 第I部第1章第1節「森林の整備・保全」（林野庁）",
+        "sourceUrl": "https://www.rinya.maff.go.jp/j/kikaku/hakusyo/r6hakusyo_h/all/chap1_1_1.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "白書は森林面積を国土面積に対する割合として示すことで、実面積の大小だけでは分からない地域の森林依存度を表現している。森林面積割合は実面積（woodland-area）を補う比率指標として、都道府県間の森林率の違いを比較可能な形で示す。",
+        "adoptionCriteria": [
+          "comparability",
+          "complementarity"
+        ]
+      }
+    },
+    {
+      "rankingKey": "artificial-forest-area",
+      "shortLabel": "人工造林面積",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和6年度 森林・林業白書 第I部第1章第2節「森林整備の動向」（林野庁）",
+        "sourceUrl": "https://www.rinya.maff.go.jp/j/kikaku/hakusyo/r6hakusyo_h/all/chap1_2_1.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "白書は人工造林面積を毎年度の森林整備実施状況を示す代表的な指標として公表しており、伐採後の再造林や新規植栽の進み具合を測る政策的な注目指標である。都道府県別に見ることで、森林資源の循環利用がどの地域で進んでいるかという補完的な視点を提供する。",
+        "adoptionCriteria": [
+          "complementarity",
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "forest-road-length",
+      "shortLabel": "林道延長",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "「路網整備の推進について」（林野庁）",
+        "sourceUrl": "https://www.rinya.maff.go.jp/j/seibi/sagyoudo/romousuisin.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "林野庁は林道を含む路網の延長を、木材の搬出や森林施業の効率化を左右する基盤整備の到達度として提示し、目標延長との差を政策課題としている。都道府県別の林道延長は、木材生産を支えるインフラ整備の地域差を示す補完的指標として有用である。",
+        "adoptionCriteria": [
+          "complementarity",
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "roundwood-production-volume",
+      "shortLabel": "素材生産量（2024年確報）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "「木材統計調査の概要」（農林水産省）",
+        "sourceUrl": "https://www.maff.go.jp/j/tokei/kouhyou/mokuzai/gaiyou/index.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "農林水産省の木材統計調査は素材生産量を都道府県別・樹種別に算出する調査方法を明示しており、木材需給報告書がこの指標を地域比較の基礎資料として設計していることが分かる。素材生産量は木材産業の生産面を代表する中心指標として本テーマの比較軸になる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability",
+          "dataQuality"
+        ]
+      }
+    },
+    {
+      "rankingKey": "roundwood-sugi-production-volume",
+      "shortLabel": "すぎの素材生産量",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和6年度 森林・林業白書 第I部第2章第1節「林業の動向」（林野庁）",
+        "sourceUrl": "https://www.rinya.maff.go.jp/j/kikaku/hakusyo/r6hakusyo_h/all/chap2_1_1.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "白書は樹種別の素材生産量の中でスギが過半を占める主力樹種であることを示しており、全体の素材生産量（roundwood-production-volume）だけでは見えないスギ生産への地域集中度を補完的に把握できる。これにより都道府県ごとの林業構造の違いを樹種別に比較できる。",
+        "adoptionCriteria": [
+          "complementarity",
+          "readerValue"
+        ]
+      }
+    },
+    {
+      "rankingKey": "roundwood-hinoki-production-volume",
+      "shortLabel": "ひのきの素材生産量",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "政府統計の総合窓口 e-Stat「木材統計調査 確報 平成30年木材需給報告書」都道府県別、月別統計 表1-2-2「素材需給の動向 素材生産量 主要部門別、樹種別素材生産量」（農林水産省）",
+        "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0003415785",
+        "surveyedAt": "2026-09-16",
+        "rationale": "木材統計調査（木材需給報告書）の統計表は素材生産量を針葉樹の中でも「あかまつ・くろまつ、すぎ、ひのき、からまつ、えぞまつ・とどまつ、その他」に樹種区分して都道府県別・月別に集計しており、ひのきはすぎと並ぶ主要樹種の一つとして継続的に把握される項目である。テーマが県別の素材生産の内訳を比較する上で、代表的な高付加価値樹種であるひのきの生産量は他樹種との違いを示す指標になる。",
+        "adoptionCriteria": [
+          "comparability",
+          "complementarity"
+        ],
+        "readerQuestion": "自分の県はひのきの素材生産でどの程度の位置にあるか。",
+        "targetReaderOrDecision": "木材産業の樹種別強みを把握したい行政・事業者。"
+      }
+    },
+    {
+      "rankingKey": "sawmill-count",
+      "shortLabel": "製材工場数（7.5kW以上）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "農林水産省「木材統計調査の概要」調査の概要（用語の解説）",
+        "sourceUrl": "https://www.maff.go.jp/j/tokei/kouhyou/mokuzai/gaiyou/",
+        "surveyedAt": "2026-09-16",
+        "rationale": "木材統計調査は製材工場を「動力の出力数が7.5kW未満の工場を除く」事業所と明確に定義した上で全国・都道府県別に工場数を調査しており、この定義がカタログの単位「工場（7.5kW以上）」と一致する。製材工場数は素材の受け皿となる加工基盤の規模を都道府県間で比較する代表的な指標であり、素材生産量や出荷量と組み合わせて地域の木材産業構造を捉えるのに資する。",
+        "adoptionCriteria": [
+          "representativeness",
+          "dataQuality",
+          "comparability"
+        ],
+        "readerQuestion": "自分の県には製材工場がどれだけ集積しているか。",
+        "targetReaderOrDecision": "地域の木材加工業の集積度を評価したい自治体・事業者。"
+      }
+    },
+    {
+      "rankingKey": "sawnwood-shipment-volume",
+      "shortLabel": "製材品出荷量",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "農林水産省「木材統計調査の概要」調査の概要（用語の解説）",
+        "sourceUrl": "https://www.maff.go.jp/j/tokei/kouhyou/mokuzai/gaiyou/",
+        "surveyedAt": "2026-09-16",
+        "rationale": "木材統計調査は製材品出荷量を「手持ち材による販売・自家消費分」と「賃びき材」の総量として明確に定義しており、素材生産量（原木段階）とは異なる出荷段階の実態を示す。この定義に基づく製材品出荷量は都道府県別に継続調査されているため、素材生産量や製材工場数と組み合わせることで、原木生産から製品出荷までの木材産業の流れを都道府県間で比較する補完的な指標となる。",
+        "adoptionCriteria": [
+          "complementarity",
+          "dataQuality",
+          "comparability"
+        ],
+        "readerQuestion": "自分の県の製材工場はどれだけの製材品を実際に出荷しているか。",
+        "targetReaderOrDecision": "木材産業の出荷実態を把握したい行政・事業者。"
+      }
+    },
+    {
+      "rankingKey": "forestry-management-entities",
+      "shortLabel": "林業経営体数（2025年調査）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "農林水産省「2025年農林業センサス結果の概要（概数値）」（令和7年2月1日現在）林業経営体調査結果",
+        "sourceUrl": "https://www.maff.go.jp/j/tokei/kekka_gaiyou/noucen/040909/index.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "2025年農林業センサスの結果概要は林業経営体数を全国の中心的な見出し指標として掲げ、5年前（2020年）との増減率まで示している。これは林業を担う経営主体の裾野が都道府県間でどう異なるか、また全国的な減少傾向の中で各県がどの位置にあるかを比較する代表的な指標であり、労働力（雇用者・内部労働者）や産出額と組み合わせて経営構造を読み解く土台になる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability",
+          "readerValue"
+        ],
+        "readerQuestion": "自分の県の林業経営体数はこの5年でどれだけ変化したか。",
+        "targetReaderOrDecision": "林業経営構造の変化を把握したい行政・研究者。"
+      }
+    },
+    {
+      "rankingKey": "forestry-hired-workers",
+      "shortLabel": "林業経営体の雇用者数（2025年調査）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "愛知県「2020年農林業センサス結果 利用上の注意」用語の解説（農林水産省の定義を引用）",
+        "sourceUrl": "https://www.pref.aichi.jp/soshiki/toukei/noucentyuui2020kakuteiti.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "農林業センサスの用語解説は「雇用者」を林業経営のために雇った常雇い・臨時雇いの合計と定義しており、経営体の外部から調達される労働力を明確に区分している。これは経営体内部の家族・役員労働力（内部労働者数）と対をなす概念であり、雇用者数を都道府県別に比較することで、地域ごとに林業経営が雇用労働にどれだけ依存しているかを読み取る指標になる。",
+        "adoptionCriteria": [
+          "dataQuality",
+          "complementarity",
+          "comparability"
+        ],
+        "readerQuestion": "自分の県の林業は雇用労働にどの程度依存しているか。",
+        "targetReaderOrDecision": "地域の林業雇用の実態を把握したい行政・研究者。"
+      }
+    },
+    {
+      "rankingKey": "forestry-internal-workers",
+      "shortLabel": "林業経営体の内部労働者数（2025年調査）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "林業経営体の内部労働者数（2025年調査）を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "forestry-output-value",
+      "shortLabel": "林業産出額（2024年確報）",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "農林水産省「林業産出額の概要」（林業産出額統計）",
+        "sourceUrl": "https://www.maff.go.jp/j/tokei/kouhyou/ringyou_sansyutu/gaiyou/index.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "農林水産省は林業産出額統計の目的を、林業生産の実態を金額で評価し林業行政の企画立案の基礎資料とすることと説明している。都道府県別に林業産出額を並べることで、各地域の林業生産規模の違いを金額ベースで一目で比較でき、テーマの主要な問いである都道府県別の森林・林業の姿を最も直接的に示す指標となる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability"
+        ]
+      }
+    },
+    {
+      "rankingKey": "forestry-timber-output-value",
+      "shortLabel": "木材生産産出額（2024年確報）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "農林水産省「林業産出額の概要」（林業産出額統計）",
+        "sourceUrl": "https://www.maff.go.jp/j/tokei/kouhyou/ringyou_sansyutu/gaiyou/index.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "林業産出額は木材生産・栽培きのこ類生産・薪炭生産・林野副産物採取の4部門で構成されると説明されており、木材生産部門は伐木から用材に供される素材を生産する活動と定義されている。木材生産産出額は林業産出額の内訳のうち素材生産という林業の本来的な活動を切り出した指標であり、林業産出額全体との比較で木材生産の比重を都道府県別に把握する補完的な指標として位置付けられる。",
+        "adoptionCriteria": [
+          "complementarity",
+          "comparability"
+        ]
+      }
+    },
+    {
+      "rankingKey": "forestry-mushroom-output-value",
+      "shortLabel": "栽培きのこ類産出額（2024年確報）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "農林水産省「林業産出額の概要」（林業産出額統計）",
+        "sourceUrl": "https://www.maff.go.jp/j/tokei/kouhyou/ringyou_sansyutu/gaiyou/index.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "林業産出額の内訳のひとつである栽培きのこ類生産部門は、ほだ木又は培養基を用いてきのこ類を生産する活動と定義されており、素材生産である木材生産部門とは性格の異なる産出額として区分されている。この指標を用いることで、木材生産だけでなく特用林産物としてのきのこ栽培が都道府県ごとにどれだけ林業産出額に寄与しているかを木材生産産出額と対比して把握でき、テーマが指摘する「木材・きのこ以外」を含む産出額構成の理解にも資する。",
+        "adoptionCriteria": [
+          "complementarity",
+          "comparability"
+        ]
+      }
+    }
+  ],
+  "charts": [],
+  "metricGroups": [
+    {
+      "key": "forestry-timber-indicator-1",
+      "title": "森林面積",
+      "rankingKeys": [
+        "woodland-area"
+      ],
+      "defaultCheckedKeys": [
+        "woodland-area"
+      ]
+    },
+    {
+      "key": "forestry-timber-indicator-2",
+      "title": "林野面積割合",
+      "rankingKeys": [
+        "forest-area-ratio"
+      ],
+      "defaultCheckedKeys": [
+        "forest-area-ratio"
+      ]
+    },
+    {
+      "key": "forestry-timber-indicator-3",
+      "title": "人工造林面積",
+      "rankingKeys": [
+        "artificial-forest-area"
+      ],
+      "defaultCheckedKeys": [
+        "artificial-forest-area"
+      ]
+    },
+    {
+      "key": "forestry-timber-indicator-4",
+      "title": "林道延長",
+      "rankingKeys": [
+        "forest-road-length"
+      ],
+      "defaultCheckedKeys": [
+        "forest-road-length"
+      ]
+    },
+    {
+      "key": "forestry-timber-indicator-5",
+      "title": "素材生産量（2024年確報）",
+      "rankingKeys": [
+        "roundwood-production-volume"
+      ],
+      "defaultCheckedKeys": [
+        "roundwood-production-volume"
+      ]
+    },
+    {
+      "key": "forestry-timber-indicator-6",
+      "title": "すぎの素材生産量",
+      "rankingKeys": [
+        "roundwood-sugi-production-volume"
+      ],
+      "defaultCheckedKeys": [
+        "roundwood-sugi-production-volume"
+      ]
+    },
+    {
+      "key": "forestry-timber-indicator-7",
+      "title": "ひのきの素材生産量",
+      "rankingKeys": [
+        "roundwood-hinoki-production-volume"
+      ],
+      "defaultCheckedKeys": [
+        "roundwood-hinoki-production-volume"
+      ]
+    },
+    {
+      "key": "forestry-timber-indicator-8",
+      "title": "製材工場数（7.5kW以上）",
+      "rankingKeys": [
+        "sawmill-count"
+      ],
+      "defaultCheckedKeys": [
+        "sawmill-count"
+      ]
+    },
+    {
+      "key": "forestry-timber-indicator-9",
+      "title": "製材品出荷量",
+      "rankingKeys": [
+        "sawnwood-shipment-volume"
+      ],
+      "defaultCheckedKeys": [
+        "sawnwood-shipment-volume"
+      ]
+    },
+    {
+      "key": "forestry-timber-indicator-10",
+      "title": "林業経営体数（2025年調査）",
+      "rankingKeys": [
+        "forestry-management-entities"
+      ],
+      "defaultCheckedKeys": [
+        "forestry-management-entities"
+      ]
+    },
+    {
+      "key": "forestry-timber-indicator-11",
+      "title": "林業経営体の雇用者数（2025年調査）",
+      "rankingKeys": [
+        "forestry-hired-workers"
+      ],
+      "defaultCheckedKeys": [
+        "forestry-hired-workers"
+      ]
+    },
+    {
+      "key": "forestry-timber-indicator-12",
+      "title": "林業経営体の内部労働者数（2025年調査）",
+      "rankingKeys": [
+        "forestry-internal-workers"
+      ],
+      "defaultCheckedKeys": [
+        "forestry-internal-workers"
+      ]
+    },
+    {
+      "key": "forestry-timber-indicator-13",
+      "title": "林業産出額（2024年確報）",
+      "rankingKeys": [
+        "forestry-output-value"
+      ],
+      "defaultCheckedKeys": [
+        "forestry-output-value"
+      ]
+    },
+    {
+      "key": "forestry-timber-indicator-14",
+      "title": "木材生産産出額（2024年確報）",
+      "rankingKeys": [
+        "forestry-timber-output-value"
+      ],
+      "defaultCheckedKeys": [
+        "forestry-timber-output-value"
+      ]
+    },
+    {
+      "key": "forestry-timber-indicator-15",
+      "title": "栽培きのこ類産出額（2024年確報）",
+      "rankingKeys": [
+        "forestry-mushroom-output-value"
+      ],
+      "defaultCheckedKeys": [
+        "forestry-mushroom-output-value"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "key": "forestry-timber-overview",
+      "title": "森林・林業・木材産業を都道府県別に見る",
+      "description": "森林資源と木材の生産・出荷に加え、2025年農林業センサスの経営体・労働力と2024年の林業産出額を比較します。労働力は経営体ごとの過去1年間の人数で、雇用と経営内部を分けます。県別産出額は全国表と集計対象が異なり、木材・きのこ以外に薪炭・林野副産物を含みます。",
+      "metricGroupKeys": [
+        "forestry-timber-indicator-1",
+        "forestry-timber-indicator-2",
+        "forestry-timber-indicator-3",
+        "forestry-timber-indicator-4",
+        "forestry-timber-indicator-5",
+        "forestry-timber-indicator-6",
+        "forestry-timber-indicator-7",
+        "forestry-timber-indicator-8",
+        "forestry-timber-indicator-9",
+        "forestry-timber-indicator-10",
+        "forestry-timber-indicator-11",
+        "forestry-timber-indicator-12",
+        "forestry-timber-indicator-13",
+        "forestry-timber-indicator-14",
+        "forestry-timber-indicator-15"
+      ]
+    }
+  ],
+  "keywords": [
+    "森林",
+    "林業",
+    "人工林",
+    "林道"
+  ]
+}

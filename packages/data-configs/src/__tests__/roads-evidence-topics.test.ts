@@ -1,7 +1,9 @@
 import { describe, expect, it } from "vitest";
 
 import { EVIDENCE_SOURCE_CATALOG } from "../theme-catalog/evidence-lenses";
-import { ROADS_CATALOG } from "../theme-catalog/roads";
+import { THEME_CATALOGS } from "../theme-catalog";
+
+const ROADS_CATALOG = THEME_CATALOGS["roads"];
 
 describe("roads evidence topics", () => {
   it("道路網と維持管理を異なる論点として公式資料へ接続する", () => {

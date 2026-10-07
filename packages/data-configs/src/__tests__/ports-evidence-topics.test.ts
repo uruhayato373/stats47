@@ -1,7 +1,9 @@
 import { describe, expect, it } from "vitest";
 
 import { EVIDENCE_SOURCE_CATALOG } from "../theme-catalog/evidence-lenses";
-import { PORTS_CATALOG } from "../theme-catalog/ports";
+import { THEME_CATALOGS } from "../theme-catalog";
+
+const PORTS_CATALOG = THEME_CATALOGS["ports"];
 
 describe("ports evidence topics", () => {
   it("貨物利用と旅客利用を別の論点として扱う", () => {

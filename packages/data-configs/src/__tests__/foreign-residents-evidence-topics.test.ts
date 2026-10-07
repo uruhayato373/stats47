@@ -1,7 +1,9 @@
 import { describe, expect, it } from "vitest";
 
 import { EVIDENCE_SOURCE_CATALOG } from "../theme-catalog/evidence-lenses";
-import { FOREIGN_RESIDENTS_CATALOG } from "../theme-catalog/foreign-residents";
+import { THEME_CATALOGS } from "../theme-catalog";
+
+const FOREIGN_RESIDENTS_CATALOG = THEME_CATALOGS["foreign-residents"];
 
 describe("foreign-residents evidence topics", () => {
   it("人口規模と国籍構成を別の論点として扱う", () => {

@@ -1,0 +1,337 @@
+{
+  "key": "agriculture-production",
+  "title": "農業の生産力",
+  "description": "農業産出額、農家数、基幹的農業従事者を別々の指標として比較します。総額は人口規模の影響を受けるため、1人当たり指標と混同しません。",
+  "category": "industry",
+  "usage": "theme",
+  "metrics": [
+    {
+      "rankingKey": "agricultural-output",
+      "shortLabel": "農業産出額",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "生産農業所得統計の概要（農林水産省）",
+        "sourceUrl": "https://www.maff.go.jp/j/tokei/kouhyou/nougyou_sansyutu/gaiyou/",
+        "surveyedAt": "2026-09-16",
+        "rationale": "農林水産省は農業産出額を都道府県別の品目生産量に農家庭先販売価格を乗じて算出する統計として位置付けており、農業生産の実態を金額で評価し農政の企画立案に資する資料と説明している。これは都道府県間で同一手法により推計される総額指標であり、テーマ「農業の生産力を都道府県別に見る」の中心指標として、規模の大小をまず把握する役割を果たす。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability",
+          "dataQuality"
+        ],
+        "readerQuestion": "自分の都道府県の農業生産の規模は全国の中でどの位置にあるか。",
+        "targetReaderOrDecision": "都道府県別の農業生産規模を比較したい読者。"
+      }
+    },
+    {
+      "rankingKey": "agricultural-output-per-employed-person",
+      "shortLabel": "農業就業者1人当たり農業産出額",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "社会・人口統計体系 都道府県データ 社会生活統計指標 C 経済基盤（総務省統計局）",
+        "sourceUrl": "https://www.e-stat.go.jp/dbview?sid=0000010203",
+        "surveyedAt": "2026-09-16",
+        "rationale": "総務省統計局の社会・人口統計体系「C 経済基盤」の統計表には、農業産出額を就業者数で割った「就業者1人当たり農業産出額（販売農家）」がコードC0410101として都道府県別に整備されている。総額指標である農業産出額だけでは人口・就業者規模の違いが反映されないため、この1人当たり指標を併置することで、テーマの説明にある「総額と1人当たりを混同しない」比較軸を担保できる。",
+        "adoptionCriteria": [
+          "complementarity",
+          "comparability"
+        ],
+        "readerQuestion": "農業就業者1人が生み出す産出額は都道府県によってどう異なるか。",
+        "targetReaderOrDecision": "生産性の観点で都道府県の農業を比較したい読者。"
+      }
+    },
+    {
+      "rankingKey": "agricultural-farm-count",
+      "shortLabel": "農家数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "「農家の数は減っていますか。」（農林水産省）",
+        "sourceUrl": "https://www.maff.go.jp/j/heya/kodomo_sodan/0103/05.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "農林水産省は農家数が20年間で約56%減少したことを公式解説として示しており、農業の担い手基盤の縮小を端的に表す指標であることが分かる。農業産出額（総額）や就業者1人当たり産出額とは異なる角度から、農業を営む経営単位の数そのものの変化を捉えられるため、テーマの「農家数を別々の指標として比較する」という位置付けに合致する。",
+        "adoptionCriteria": [
+          "representativeness",
+          "complementarity"
+        ],
+        "readerQuestion": "自分の地域で農業を営む世帯数はどれだけ減っているか。",
+        "targetReaderOrDecision": "農業の担い手基盤の縮小度合いを把握したい読者。"
+      }
+    },
+    {
+      "rankingKey": "core-agricultural-workers",
+      "shortLabel": "基幹的農業従事者数（販売農家）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "令和3年版 食料・農業・農村白書 第1部第1章第1節（1）基幹的農業従事者（農林水産省）",
+        "sourceUrl": "https://www.maff.go.jp/j/wpaper/w_maff/r3/r3_h/trend/part1/chap1/c1_1_01.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "食料・農業・農村白書は基幹的農業従事者数の減少と高齢化を農業の持続的発展に関わる重要課題として取り上げており、65歳以上が全体の7割を占める点も指摘している。農家数が経営単位の数を示すのに対し、基幹的農業従事者数は実際に農業に従事する人の数を示すため、農家数とは異なる角度から労働力の担い手不足を補完的に把握できる指標である。",
+        "adoptionCriteria": [
+          "representativeness",
+          "complementarity",
+          "readerValue"
+        ],
+        "readerQuestion": "実際に農業に主として従事している人はどれだけ減り、高齢化しているか。",
+        "targetReaderOrDecision": "農業労働力の担い手不足を政策上の論点として検討する読者。"
+      }
+    },
+    {
+      "rankingKey": "cultivated-area",
+      "shortLabel": "耕地面積",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "耕地面積を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "raw-milk-production",
+      "shortLabel": "年間生乳生産量（t）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "牛乳乳製品統計調査の概要（農林水産省）",
+        "sourceUrl": "https://www.maff.go.jp/j/tokei/kouhyou/gyunyu/gaiyou/index.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "農林水産省の牛乳乳製品統計調査は都道府県別の生乳生産量を移出入量とあわせて把握することを調査の役割として明記しており、畜産・酪農分野に特化した地域別の生産規模を示す資料となっている。農業産出額や耕地面積が農業全般の規模を示すのに対し、生乳生産量は畜産・酪農という特定分野の生産量を直接表すため、章立て「畜産・酪農の飼養規模と生産量」に対応する補完的な指標である。",
+        "adoptionCriteria": [
+          "representativeness",
+          "complementarity",
+          "comparability"
+        ],
+        "readerQuestion": "自分の都道府県は酪農・牛乳生産でどれだけの規模を持つか。",
+        "targetReaderOrDecision": "畜産・酪農分野の都道府県別生産規模を把握したい読者。"
+      }
+    },
+    {
+      "rankingKey": "dairy-cattle-count",
+      "shortLabel": "乳用牛飼養頭数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "農林水産省「畜産統計調査の概要（乳用牛及び肉用牛）」調査の目的・乳用牛の定義",
+        "sourceUrl": "https://www.maff.go.jp/j/tokei/kouhyou/tikusan/gaiyou_tokei/index.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "農林水産省は畜産統計における乳用牛を「搾乳を目的として飼養している牛」と明確に定義し、酪農および肉用牛生産の近代化基本方針における地域別飼養頭数目標の策定など行政施策の基礎資料として利活用されると位置付けている。都道府県別の乳用牛飼養頭数は、農業産出額や農家数とは異なる畜産部門の生産規模を直接示す指標であり、テーマの「畜産・酪農の飼養規模と生産量」章を支える基礎データとなる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "dataQuality"
+        ],
+        "readerQuestion": "都道府県ごとに酪農（乳用牛）の飼養規模はどれくらい違うのか。",
+        "targetReaderOrDecision": "酪農振興策や飼養頭数目標を検討する行政関係者・研究者。"
+      }
+    },
+    {
+      "rankingKey": "dairy-cattle-holdings",
+      "shortLabel": "乳用牛の飼養戸数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "農林水産省「畜産統計調査の概要（乳用牛及び肉用牛）」調査の目的・乳用牛の定義",
+        "sourceUrl": "https://www.maff.go.jp/j/tokei/kouhyou/tikusan/gaiyou_tokei/index.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "畜産統計は「規模別・飼養状態別飼養戸数」を把握することを目的の一つとして明記しており、飼養頭数だけでなく飼養戸数を併記することで1戸当たり規模（経営の大規模化・集約化の進展）を都道府県間で比較できるようにしている。乳用牛飼養戸数は、頭数指標を補完し、産地の経営構造の違いを示す観点でテーマに資する。",
+        "adoptionCriteria": [
+          "comparability",
+          "complementarity"
+        ],
+        "readerQuestion": "乳用牛を飼養する農家の数は都道府県でどう違い、1戸当たりの飼養規模はどう変化しているか。",
+        "targetReaderOrDecision": "酪農経営の集約化・大規模化の動向を分析する研究者・自治体担当者。"
+      }
+    },
+    {
+      "rankingKey": "beef-cattle-count",
+      "shortLabel": "肉用牛飼養頭数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "農林水産省「畜産統計調査の概要（乳用牛及び肉用牛）」肉用牛の定義",
+        "sourceUrl": "https://www.maff.go.jp/j/tokei/kouhyou/tikusan/gaiyou_tokei/index.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "農林水産省は肉用牛を乳用牛とは別に「肉用を目的として飼養している牛」として区別して定義し、家畜改良増殖目標の増殖目標算定や食料需給表（飼料自給率）の算定に利用していると説明している。乳用牛飼養頭数と並置することで、都道府県ごとの畜産構造（酪農地帯か肉用牛産地か）の違いを比較可能にし、テーマの畜産章の中心指標となる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability"
+        ],
+        "readerQuestion": "肉用牛の飼養規模は乳用牛とどう異なる分布を都道府県別に持つのか。",
+        "targetReaderOrDecision": "肉用牛生産振興策を検討する行政・畜産経営分析者。"
+      }
+    },
+    {
+      "rankingKey": "pig-count",
+      "shortLabel": "豚飼養頭数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "農林水産省「畜産統計調査の概要（豚、採卵鶏及びブロイラー）」調査の目的・豚の定義",
+        "sourceUrl": "https://www.maff.go.jp/j/tokei/kouhyou/tikusan/gaiyou/index.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "畜産統計調査は豚の飼養頭数・経営タイプ別頭数を毎年2月1日現在で把握し、食料・農業・農村基本計画における飼養頭羽数指標の設定・検証や食料需給表（飼料自給率）の算定に用いられると説明している。豚飼養頭数は牛とは異なる畜種の生産規模を示し、都道府県別の畜産構造の多様性を把握するうえで欠かせない補完的指標である。",
+        "adoptionCriteria": [
+          "complementarity",
+          "dataQuality"
+        ],
+        "readerQuestion": "豚の飼養は特定の都道府県にどれだけ集中しているのか。",
+        "targetReaderOrDecision": "食料自給率・畜産行政の基礎資料を確認する政策担当者。"
+      }
+    },
+    {
+      "rankingKey": "layer-hen-count",
+      "shortLabel": "採卵鶏の成鶏めす（千羽）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "農林水産省「畜産統計調査の概要（豚、採卵鶏及びブロイラー）」採卵鶏調査の対象・定義",
+        "sourceUrl": "https://www.maff.go.jp/j/tokei/kouhyou/tikusan/gaiyou/index.html",
+        "surveyedAt": "2026-09-16",
+        "rationale": "採卵鶏調査は成鶏めす1,000羽以上の飼養者を対象に飼養羽数を毎年調査しており、種鶏やひなを除いた成鶏めすに限定することで、実際に鶏卵を生産する規模を都道府県間で比較可能な形で示している。これは牛・豚とは異なる畜種として、テーマの飼養規模比較を完結させる補完的な指標である。",
+        "adoptionCriteria": [
+          "comparability",
+          "complementarity"
+        ],
+        "readerQuestion": "採卵鶏（鶏卵生産）の飼養規模は都道府県ごとにどのように分布しているか。",
+        "targetReaderOrDecision": "鶏卵生産の産地構造を分析する研究者・行政担当者。"
+      }
+    }
+  ],
+  "charts": [],
+  "metricGroups": [
+    {
+      "key": "agriculture-production-indicator-1",
+      "title": "農業産出額",
+      "rankingKeys": [
+        "agricultural-output"
+      ],
+      "defaultCheckedKeys": [
+        "agricultural-output"
+      ]
+    },
+    {
+      "key": "agriculture-production-indicator-2",
+      "title": "農業就業者1人当たり農業産出額",
+      "rankingKeys": [
+        "agricultural-output-per-employed-person"
+      ],
+      "defaultCheckedKeys": [
+        "agricultural-output-per-employed-person"
+      ]
+    },
+    {
+      "key": "agriculture-production-indicator-3",
+      "title": "農家数",
+      "rankingKeys": [
+        "agricultural-farm-count"
+      ],
+      "defaultCheckedKeys": [
+        "agricultural-farm-count"
+      ]
+    },
+    {
+      "key": "agriculture-production-indicator-4",
+      "title": "基幹的農業従事者数（販売農家）",
+      "rankingKeys": [
+        "core-agricultural-workers"
+      ],
+      "defaultCheckedKeys": [
+        "core-agricultural-workers"
+      ]
+    },
+    {
+      "key": "agriculture-production-indicator-5",
+      "title": "耕地面積",
+      "rankingKeys": [
+        "cultivated-area"
+      ],
+      "defaultCheckedKeys": [
+        "cultivated-area"
+      ]
+    },
+    {
+      "key": "candidate-10-1",
+      "title": "畜産・酪農の飼養規模と生産量｜年間生乳生産量（t）",
+      "rankingKeys": [
+        "raw-milk-production"
+      ],
+      "defaultCheckedKeys": [
+        "raw-milk-production"
+      ]
+    },
+    {
+      "key": "candidate-10-2",
+      "title": "畜産・酪農の飼養規模と生産量｜乳用牛飼養頭数",
+      "rankingKeys": [
+        "dairy-cattle-count"
+      ],
+      "defaultCheckedKeys": [
+        "dairy-cattle-count"
+      ]
+    },
+    {
+      "key": "candidate-10-3",
+      "title": "畜産・酪農の飼養規模と生産量｜乳用牛の飼養戸数",
+      "rankingKeys": [
+        "dairy-cattle-holdings"
+      ],
+      "defaultCheckedKeys": [
+        "dairy-cattle-holdings"
+      ]
+    },
+    {
+      "key": "candidate-10-4",
+      "title": "畜産・酪農の飼養規模と生産量｜肉用牛飼養頭数",
+      "rankingKeys": [
+        "beef-cattle-count"
+      ],
+      "defaultCheckedKeys": [
+        "beef-cattle-count"
+      ]
+    },
+    {
+      "key": "candidate-10-5",
+      "title": "畜産・酪農の飼養規模と生産量｜豚飼養頭数",
+      "rankingKeys": [
+        "pig-count"
+      ],
+      "defaultCheckedKeys": [
+        "pig-count"
+      ]
+    },
+    {
+      "key": "candidate-10-6",
+      "title": "畜産・酪農の飼養規模と生産量｜採卵鶏の成鶏めす（千羽）",
+      "rankingKeys": [
+        "layer-hen-count"
+      ],
+      "defaultCheckedKeys": [
+        "layer-hen-count"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "key": "agriculture-production-overview",
+      "title": "農業の生産力を都道府県別に見る",
+      "description": "農業産出額、農家数、基幹的農業従事者を別々の指標として比較します。総額は人口規模の影響を受けるため、1人当たり指標と混同しません。",
+      "metricGroupKeys": [
+        "agriculture-production-indicator-1",
+        "agriculture-production-indicator-2",
+        "agriculture-production-indicator-3",
+        "agriculture-production-indicator-4",
+        "agriculture-production-indicator-5"
+      ]
+    },
+    {
+      "key": "candidate-10",
+      "title": "畜産・酪農の飼養規模と生産量",
+      "description": "乳用牛・肉用牛は2025年、豚・採卵鶏は2024年の2月1日時点です。生乳生産量は2025年1〜12月の確報で、出荷分に自家飲用・子牛ほ乳用など未出荷分を含みます。飼養規模と年間の生産量を別々に読み、異なる時点・単位の値を構成比にしません。",
+      "metricGroupKeys": [
+        "candidate-10-1",
+        "candidate-10-2",
+        "candidate-10-3",
+        "candidate-10-4",
+        "candidate-10-5",
+        "candidate-10-6"
+      ]
+    }
+  ],
+  "keywords": [
+    "農業",
+    "農業産出額",
+    "農家"
+  ]
+}

@@ -483,7 +483,7 @@ fi
 #     - develop 着地: develop-quality-gate.yml の catalog-gates job (同じ preflight:pr)
 #     - main PR: pr-quality-check.yml の Catalog Gates job
 #   が走らせるので、commit ごとに直列で払わない。commit 前に手元で確かめたいときは preflight:pr。
-STAGED_CATALOG_HINT=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | grep -E "^packages/data-configs/src/(metrics|topics|theme-catalog|area-databook|unit)/|^packages/types/src/indicator-sets/|^apps/web/scripts/data/page-components/(theme|area)/" || true)
+STAGED_CATALOG_HINT=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | grep -E "^packages/data-configs/src/(metrics|topics|theme-catalog|area-databook|unit)/|^data/themes/|^packages/types/src/indicator-sets/|^apps/web/scripts/data/page-components/(theme|area)/" || true)
 if [ -n "$STAGED_CATALOG_HINT" ]; then
   echo -e "${GREEN}📚 catalog / metric config の整合チェックは commit では走らせない${NC}"
   echo -e "${YELLOW}💡 push 前に: npm run preflight:pr (develop 着地時と main PR の CI でも同じ検査が走る)${NC}"

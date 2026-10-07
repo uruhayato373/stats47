@@ -1,0 +1,156 @@
+{
+  "key": "land-property-market",
+  "title": "不動産取引と地価",
+  "description": "2025年の住宅地について、100㎡以上300㎡未満の土地の取引単価と公示価格の分布・標本数を示します。住宅地の区分と基準時点が異なるため、両系列は分けて読みます。住宅地・工業地の地価変動率も確認できます。",
+  "category": "economy",
+  "usage": "theme",
+  "metrics": [
+    {
+      "rankingKey": "residential-land-transaction-median-price",
+      "shortLabel": "住宅地の取引単価中央値（100〜300㎡未満）",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "住宅地の取引単価中央値（100〜300㎡未満）を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "residential-land-transaction-sample-count",
+      "shortLabel": "住宅地の取引価格標本数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "住宅地の取引価格標本数を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "residential-official-land-median-price",
+      "shortLabel": "住宅地の公示価格中央値（100〜300㎡未満）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "住宅地の公示価格中央値（100〜300㎡未満）を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "residential-official-land-point-count",
+      "shortLabel": "住宅地の公示標準地数",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "住宅地の公示標準地数を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "residential-land-price-change-rate",
+      "shortLabel": "住宅地地価変動率",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "住宅地地価変動率を都道府県別の実値として比較する。"
+      }
+    },
+    {
+      "rankingKey": "industrial-land-price-change-rate",
+      "shortLabel": "標準価格変動率（工業地）",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "128テーマ実現性調査・全体展開",
+        "surveyedAt": "2026-09-09",
+        "rationale": "標準価格変動率（工業地）を都道府県別の実値として比較する。"
+      }
+    }
+  ],
+  "charts": [],
+  "metricGroups": [
+    {
+      "key": "land-property-market-indicator-1",
+      "title": "住宅地の取引単価中央値（100〜300㎡未満）",
+      "rankingKeys": [
+        "residential-land-transaction-median-price"
+      ],
+      "defaultCheckedKeys": [
+        "residential-land-transaction-median-price"
+      ]
+    },
+    {
+      "key": "land-property-market-indicator-2",
+      "title": "住宅地の取引価格標本数",
+      "rankingKeys": [
+        "residential-land-transaction-sample-count"
+      ],
+      "defaultCheckedKeys": [
+        "residential-land-transaction-sample-count"
+      ]
+    },
+    {
+      "key": "land-property-market-indicator-3",
+      "title": "住宅地の公示価格中央値（100〜300㎡未満）",
+      "rankingKeys": [
+        "residential-official-land-median-price"
+      ],
+      "defaultCheckedKeys": [
+        "residential-official-land-median-price"
+      ]
+    },
+    {
+      "key": "land-property-market-indicator-4",
+      "title": "住宅地の公示標準地数",
+      "rankingKeys": [
+        "residential-official-land-point-count"
+      ],
+      "defaultCheckedKeys": [
+        "residential-official-land-point-count"
+      ]
+    },
+    {
+      "key": "land-property-market-indicator-5",
+      "title": "住宅地地価変動率",
+      "rankingKeys": [
+        "residential-land-price-change-rate"
+      ],
+      "defaultCheckedKeys": [
+        "residential-land-price-change-rate"
+      ]
+    },
+    {
+      "key": "land-property-market-indicator-6",
+      "title": "標準価格変動率（工業地）",
+      "rankingKeys": [
+        "industrial-land-price-change-rate"
+      ],
+      "defaultCheckedKeys": [
+        "industrial-land-price-change-rate"
+      ]
+    }
+  ],
+  "sections": [
+    {
+      "key": "land-property-market-overview",
+      "title": "不動産取引と地価を都道府県別に見る",
+      "description": "2025年の住宅地について、100㎡以上300㎡未満の土地の取引単価と公示価格の分布・標本数を示します。住宅地の区分と基準時点が異なるため、両系列は分けて読みます。住宅地・工業地の地価変動率も確認できます。",
+      "metricGroupKeys": [
+        "land-property-market-indicator-1",
+        "land-property-market-indicator-2",
+        "land-property-market-indicator-3",
+        "land-property-market-indicator-4",
+        "land-property-market-indicator-5",
+        "land-property-market-indicator-6"
+      ],
+      "embeddedSectionKeys": [
+        "property-prices"
+      ]
+    }
+  ],
+  "keywords": [
+    "地価",
+    "不動産",
+    "住宅地",
+    "工業地"
+  ]
+}

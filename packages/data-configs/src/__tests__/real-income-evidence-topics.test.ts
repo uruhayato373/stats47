@@ -1,8 +1,10 @@
 import { describe, expect, it } from "vitest";
 
 import { EVIDENCE_SOURCE_CATALOG } from "../theme-catalog/evidence-lenses";
-import { REAL_INCOME_CATALOG } from "../theme-catalog/real-income";
 import { METRICS_REGISTRY } from "../registry";
+import { THEME_CATALOGS } from "../theme-catalog";
+
+const REAL_INCOME_CATALOG = THEME_CATALOGS["real-income"];
 
 describe("real-income evidence topics", () => {
   it("registers the two verified household-income questions", () => {
