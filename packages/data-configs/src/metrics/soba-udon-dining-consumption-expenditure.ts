@@ -3,7 +3,7 @@ import type { MetricConfig } from "../types";
 export const sobaUdonDiningConsumptionExpenditure: MetricConfig = {
   "key": "soba-udon-dining-consumption-expenditure",
   "title": "日本そば・うどん消費支出額",
-  "subtitle": "都道府県庁所在市の二人以上世帯の年間日本そば・うどん消費支出額",
+  "subtitle": "都道府県庁所在市の二人以上世帯の年間日本そば・うどん消費支出額（外食の食事代）",
   "unit": "円",
   "category": "economy",
   "source": {
