@@ -243,7 +243,7 @@
     },
     {
       "key": "candidate-10-1",
-      "title": "畜産・酪農の飼養規模と生産量｜年間生乳生産量（t）",
+      "title": "年間生乳生産量（t）",
       "rankingKeys": [
         "raw-milk-production"
       ],
@@ -253,7 +253,7 @@
     },
     {
       "key": "candidate-10-2",
-      "title": "畜産・酪農の飼養規模と生産量｜乳用牛飼養頭数",
+      "title": "乳用牛飼養頭数",
       "rankingKeys": [
         "dairy-cattle-count"
       ],
@@ -263,7 +263,7 @@
     },
     {
       "key": "candidate-10-3",
-      "title": "畜産・酪農の飼養規模と生産量｜乳用牛の飼養戸数",
+      "title": "乳用牛の飼養戸数",
       "rankingKeys": [
         "dairy-cattle-holdings"
       ],
@@ -273,7 +273,7 @@
     },
     {
       "key": "candidate-10-4",
-      "title": "畜産・酪農の飼養規模と生産量｜肉用牛飼養頭数",
+      "title": "肉用牛飼養頭数",
       "rankingKeys": [
         "beef-cattle-count"
       ],
@@ -283,7 +283,7 @@
     },
     {
       "key": "candidate-10-5",
-      "title": "畜産・酪農の飼養規模と生産量｜豚飼養頭数",
+      "title": "豚飼養頭数",
       "rankingKeys": [
         "pig-count"
       ],
@@ -293,7 +293,7 @@
     },
     {
       "key": "candidate-10-6",
-      "title": "畜産・酪農の飼養規模と生産量｜採卵鶏の成鶏めす（千羽）",
+      "title": "採卵鶏の成鶏めす（千羽）",
       "rankingKeys": [
         "layer-hen-count"
       ],

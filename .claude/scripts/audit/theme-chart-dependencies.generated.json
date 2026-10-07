@@ -3,8 +3,8 @@
   "totalRequests": 0,
   "distinctRequests": 0,
   "requests": [],
-  "totalMetricRefs": 159,
-  "distinctMetricRefs": 155,
+  "totalMetricRefs": 146,
+  "distinctMetricRefs": 142,
   "metrics": [
     {
       "metricKey": "actual-income-worker-households-per-month",
@@ -239,38 +239,6 @@
       "componentType": "line-chart"
     },
     {
-      "metricKey": "elderly-couple-only-household-ratio",
-      "expectedUnit": "％",
-      "expectedConfigHash": "2262a0deb852b045",
-      "themeKey": "aging-society",
-      "componentKey": "cmp-pop-elderly-household",
-      "componentType": "line-chart"
-    },
-    {
-      "metricKey": "employed-people-ratio-primary",
-      "expectedUnit": "％",
-      "expectedConfigHash": "bfe416412473b0c2",
-      "themeKey": "local-economy",
-      "componentKey": "theme-industry-structure",
-      "componentType": "line-chart"
-    },
-    {
-      "metricKey": "employed-people-ratio-secondary",
-      "expectedUnit": "％",
-      "expectedConfigHash": "6043c40a971e363d",
-      "themeKey": "local-economy",
-      "componentKey": "theme-industry-structure",
-      "componentType": "line-chart"
-    },
-    {
-      "metricKey": "employed-people-ratio-tertiary",
-      "expectedUnit": "％",
-      "expectedConfigHash": "c3cd05630b85cad4",
-      "themeKey": "local-economy",
-      "componentKey": "theme-industry-structure",
-      "componentType": "line-chart"
-    },
-    {
       "metricKey": "employment-mobility-rate",
       "expectedUnit": "％",
       "expectedConfigHash": "df9c6ab40bd32317",
@@ -293,22 +261,6 @@
       "themeKey": "safety",
       "componentKey": "safety-fire-casualties-donut",
       "componentType": "donut-chart"
-    },
-    {
-      "metricKey": "fish-catch",
-      "expectedUnit": "トン",
-      "expectedConfigHash": "9ec0eeb2651a7c5d",
-      "themeKey": "fishery-marine",
-      "componentKey": "theme-fishery-catch-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "metricKey": "fishery-workers",
-      "expectedUnit": "人",
-      "expectedConfigHash": "67c3c256eb5631e1",
-      "themeKey": "fishery-marine",
-      "componentKey": "theme-fishery-half-century",
-      "componentType": "line-chart"
     },
     {
       "metricKey": "floor-area-per-dwelling-owner",
@@ -364,14 +316,6 @@
       "expectedConfigHash": "d7f892596eeb8a82",
       "themeKey": "healthcare",
       "componentKey": "theme-health-supply-trend-hospitals",
-      "componentType": "line-chart"
-    },
-    {
-      "metricKey": "household-ratio-with-65plus",
-      "expectedUnit": "％",
-      "expectedConfigHash": "e37748499b83820a",
-      "themeKey": "aging-society",
-      "componentKey": "cmp-pop-elderly-household",
       "componentType": "line-chart"
     },
     {
@@ -461,14 +405,6 @@
       "themeKey": "education-culture",
       "componentKey": "theme-edu-higher-education-trend",
       "componentType": "line-chart"
-    },
-    {
-      "metricKey": "inland-aquaculture-harvest",
-      "expectedUnit": "トン",
-      "expectedConfigHash": "f61941b77919bfc8",
-      "themeKey": "fishery-marine",
-      "componentKey": "theme-fishery-aquaculture-mix",
-      "componentType": "mixed-chart"
     },
     {
       "metricKey": "intellectual-crime-per-100k",
@@ -567,30 +503,6 @@
       "componentType": "line-chart"
     },
     {
-      "metricKey": "marine-aquaculture-harvest",
-      "expectedUnit": "トン",
-      "expectedConfigHash": "c62045e02d31862b",
-      "themeKey": "fishery-marine",
-      "componentKey": "theme-fishery-aquaculture-mix",
-      "componentType": "mixed-chart"
-    },
-    {
-      "metricKey": "marine-fishery-aquaculture-output-value",
-      "expectedUnit": "百万円",
-      "expectedConfigHash": "2c235b988e656953",
-      "themeKey": "fishery-marine",
-      "componentKey": "theme-fishery-output-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "metricKey": "marine-fishery-catch",
-      "expectedUnit": "トン",
-      "expectedConfigHash": "b231a49f2d4b35d0",
-      "themeKey": "fishery-marine",
-      "componentKey": "theme-fishery-catch-trend",
-      "componentType": "line-chart"
-    },
-    {
       "metricKey": "marine-fishery-output-value",
       "expectedUnit": "百万円",
       "expectedConfigHash": "ad6585da6dd634e5",
@@ -636,14 +548,6 @@
       "expectedConfigHash": "3160916f2a09ea34",
       "themeKey": "living-housing",
       "componentKey": "lh-household-structure-trend",
-      "componentType": "line-chart"
-    },
-    {
-      "metricKey": "number-of-establishments-economic-census-basic-survey",
-      "expectedUnit": "事業所",
-      "expectedConfigHash": "f353befd6b013e56",
-      "themeKey": "local-economy",
-      "componentKey": "theme-le-establishments-trend",
       "componentType": "line-chart"
     },
     {
@@ -813,14 +717,6 @@
       "themeKey": "single-parent-households",
       "componentKey": "single-parent-income-composition",
       "componentType": "composition-chart"
-    },
-    {
-      "metricKey": "single-person-household-old-population-ratio",
-      "expectedUnit": "％",
-      "expectedConfigHash": "3a62c7049e888577",
-      "themeKey": "aging-society",
-      "componentKey": "cmp-pop-elderly-household",
-      "componentType": "line-chart"
     },
     {
       "metricKey": "single-person-household-ratio",

@@ -19,6 +19,8 @@ describe("aging-society evidence topics", () => {
   });
 
   it("内閣府の一次資料と同一テーマ内の実在routeへ接続する", () => {
+    // 図への参照は任意。高齢世帯の論点は同じ指標のカードと重複した折れ線を外したため (2026-10-06)、
+    // ランキングへの導線だけを持つ。参照する図があるときは同じテーマに実在することを確かめる。
     const chartKeys = new Set(
       AGING_SOCIETY_CATALOG.charts.map(({ componentKey }) => componentKey),
     );
@@ -28,7 +30,6 @@ describe("aging-society evidence topics", () => {
 
     for (const topic of AGING_SOCIETY_CATALOG.evidenceTopics ?? []) {
       expect(topic.relatedRankingKeys?.length).toBeGreaterThan(0);
-      expect(topic.relatedChartKeys?.length).toBeGreaterThan(0);
       for (const rankingKey of topic.relatedRankingKeys ?? []) {
         expect(rankingKeys.has(rankingKey)).toBe(true);
       }

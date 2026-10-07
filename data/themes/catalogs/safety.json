@@ -1116,7 +1116,7 @@
     },
     {
       "key": "candidate-88-1",
-      "title": "交通安全と高齢者の死傷｜交通事故発生件数",
+      "title": "交通事故発生件数",
       "rankingKeys": [
         "traffic-accident-count"
       ],
@@ -1126,7 +1126,7 @@
     },
     {
       "key": "candidate-88-2",
-      "title": "交通安全と高齢者の死傷｜交通事故死者数（人口10万人当たり）",
+      "title": "交通事故死者数（人口10万人当たり）",
       "rankingKeys": [
         "traffic-accident-deaths-per-100k"
       ],
@@ -1136,7 +1136,7 @@
     },
     {
       "key": "candidate-88-3",
-      "title": "交通安全と高齢者の死傷｜交通事故死傷者数（65歳以上）",
+      "title": "交通事故死傷者数（65歳以上）",
       "rankingKeys": [
         "traffic-accident-casualties-elderly-65plus"
       ],
@@ -1146,7 +1146,7 @@
     },
     {
       "key": "candidate-106-1",
-      "title": "洪水と浸水｜水害一般資産等被害額",
+      "title": "水害一般資産等被害額",
       "rankingKeys": [
         "flood-damage-general-assets"
       ],
@@ -1156,7 +1156,7 @@
     },
     {
       "key": "candidate-106-2",
-      "title": "洪水と浸水｜水害被災市区町村数",
+      "title": "水害被災市区町村数",
       "rankingKeys": [
         "flood-affected-municipalities"
       ],
@@ -1166,7 +1166,7 @@
     },
     {
       "key": "candidate-109-1",
-      "title": "自然災害の人的・住家被害と復旧支出｜自然災害による死者数",
+      "title": "自然災害による死者数",
       "rankingKeys": [
         "natural-disaster-deaths"
       ],
@@ -1176,7 +1176,7 @@
     },
     {
       "key": "candidate-109-2",
-      "title": "自然災害の人的・住家被害と復旧支出｜自然災害による行方不明者数",
+      "title": "自然災害による行方不明者数",
       "rankingKeys": [
         "natural-disaster-missing-persons"
       ],
@@ -1186,7 +1186,7 @@
     },
     {
       "key": "candidate-109-3",
-      "title": "自然災害の人的・住家被害と復旧支出｜自然災害による負傷者数",
+      "title": "自然災害による負傷者数",
       "rankingKeys": [
         "natural-disaster-injured-persons"
       ],
@@ -1196,7 +1196,7 @@
     },
     {
       "key": "candidate-109-4",
-      "title": "自然災害の人的・住家被害と復旧支出｜自然災害による全壊住家棟数",
+      "title": "自然災害による全壊住家棟数",
       "rankingKeys": [
         "natural-disaster-destroyed-houses"
       ],
@@ -1206,7 +1206,7 @@
     },
     {
       "key": "candidate-109-5",
-      "title": "自然災害の人的・住家被害と復旧支出｜自然災害による半壊住家棟数",
+      "title": "自然災害による半壊住家棟数",
       "rankingKeys": [
         "natural-disaster-half-destroyed-houses"
       ],
@@ -1216,7 +1216,7 @@
     },
     {
       "key": "candidate-109-6",
-      "title": "自然災害の人的・住家被害と復旧支出｜自然災害による一部破損住家棟数",
+      "title": "自然災害による一部破損住家棟数",
       "rankingKeys": [
         "natural-disaster-partially-damaged-houses"
       ],
@@ -1226,7 +1226,7 @@
     },
     {
       "key": "candidate-109-7",
-      "title": "自然災害の人的・住家被害と復旧支出｜災害復旧費（都道府県財政）",
+      "title": "災害復旧費（都道府県財政）",
       "rankingKeys": [
         "disaster-recovery-expenses-prefecture"
       ],
@@ -1236,7 +1236,7 @@
     },
     {
       "key": "candidate-109-8",
-      "title": "自然災害の人的・住家被害と復旧支出｜1人当たり災害被害額",
+      "title": "1人当たり災害被害額",
       "rankingKeys": [
         "disaster-damage-amount-per-person"
       ],
@@ -1246,7 +1246,7 @@
     },
     {
       "key": "candidate-110-1",
-      "title": "消防・救急の人員と車両｜消防水利数",
+      "title": "消防水利数",
       "rankingKeys": [
         "fire-department-water-count-per-100-thousand-people"
       ],
@@ -1256,7 +1256,7 @@
     },
     {
       "key": "candidate-110-2",
-      "title": "消防・救急の人員と車両｜救急出動件数（人口千人当たり）",
+      "title": "救急出動件数（人口千人当たり）",
       "rankingKeys": [
         "annual-emergency-dispatches-per-1000"
       ],
@@ -1266,7 +1266,7 @@
     },
     {
       "key": "candidate-110-3",
-      "title": "消防・救急の人員と車両｜消防吏員数（人口10万人当たり）",
+      "title": "消防吏員数（人口10万人当たり）",
       "rankingKeys": [
         "fire-department-member-count-per-100-thousand-people"
       ],
@@ -1276,7 +1276,7 @@
     },
     {
       "key": "candidate-110-4",
-      "title": "消防・救急の人員と車両｜消防ポンプ自動車等現有数（人口10万人当たり）",
+      "title": "消防ポンプ自動車等現有数（人口10万人当たり）",
       "rankingKeys": [
         "fire-department-pump-car-count-per-100-thousand-people"
       ],
@@ -1286,7 +1286,7 @@
     },
     {
       "key": "candidate-110-5",
-      "title": "消防・救急の人員と車両｜救急自動車数（人口10万人当たり）",
+      "title": "救急自動車数（人口10万人当たり）",
       "rankingKeys": [
         "fire-department-emergency-car-count-per-100k"
       ],
@@ -1296,7 +1296,7 @@
     },
     {
       "key": "candidate-111-1",
-      "title": "避難施設と個別避難計画の整備｜個別避難計画の作成率",
+      "title": "個別避難計画の作成率",
       "rankingKeys": [
         "individual-evacuation-plan-coverage-rate"
       ],
@@ -1306,7 +1306,7 @@
     },
     {
       "key": "candidate-111-2",
-      "title": "避難施設と個別避難計画の整備｜避難行動要支援者名簿の掲載人数",
+      "title": "避難行動要支援者名簿の掲載人数",
       "rankingKeys": [
         "individual-evacuation-plan-listed-persons"
       ],
@@ -1316,7 +1316,7 @@
     },
     {
       "key": "candidate-111-3",
-      "title": "避難施設と個別避難計画の整備｜個別避難計画が作成された人数",
+      "title": "個別避難計画が作成された人数",
       "rankingKeys": [
         "individual-evacuation-plan-covered-persons"
       ],
@@ -1326,7 +1326,7 @@
     },
     {
       "key": "candidate-111-4",
-      "title": "避難施設と個別避難計画の整備｜津波避難ビル数",
+      "title": "津波避難ビル数",
       "rankingKeys": [
         "tsunami-evacuation-building-count"
       ],
@@ -1336,7 +1336,7 @@
     },
     {
       "key": "candidate-111-5",
-      "title": "避難施設と個別避難計画の整備｜津波避難タワー等数",
+      "title": "津波避難タワー等数",
       "rankingKeys": [
         "tsunami-evacuation-tower-count"
       ],
@@ -1346,7 +1346,7 @@
     },
     {
       "key": "candidate-111-6",
-      "title": "避難施設と個別避難計画の整備｜災害救助費",
+      "title": "災害救助費",
       "rankingKeys": [
         "disaster-relief-expenses-prefecture"
       ],
@@ -1356,7 +1356,7 @@
     },
     {
       "key": "candidate-112-1",
-      "title": "犯罪と消費者被害｜消費生活相談受付件数（年度）",
+      "title": "消費生活相談受付件数（年度）",
       "rankingKeys": [
         "consumer-consultation-accepted-cases"
       ],
@@ -1366,7 +1366,7 @@
     },
     {
       "key": "candidate-112-2",
-      "title": "犯罪と消費者被害｜刑法犯認知件数",
+      "title": "刑法犯認知件数",
       "rankingKeys": [
         "criminal-recognition-count"
       ],
@@ -1376,7 +1376,7 @@
     },
     {
       "key": "candidate-112-3",
-      "title": "犯罪と消費者被害｜警察官数（人口千人当たり）",
+      "title": "警察官数（人口千人当たり）",
       "rankingKeys": [
         "police-officer-count-per-population"
       ],

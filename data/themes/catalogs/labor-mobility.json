@@ -508,16 +508,6 @@
       ]
     },
     {
-      "key": "reading",
-      "title": "読み方",
-      "description": "人の移動、就業状態、職業紹介の結果を分けて読みます。",
-      "metricGroupKeys": [],
-      "chartKeys": [
-        "md-labor-mobility-discussion",
-        "md-labor-mobility-faq"
-      ]
-    },
-    {
       "key": "candidate-33",
       "title": "人手不足と求人",
       "metricGroupKeys": [
@@ -559,6 +549,16 @@
       "metricGroupKeys": [
         "candidate-84-1",
         "candidate-84-2"
+      ]
+    },
+    {
+      "key": "reading",
+      "title": "読み方",
+      "description": "人の移動、就業状態、職業紹介の結果を分けて読みます。",
+      "metricGroupKeys": [],
+      "chartKeys": [
+        "md-labor-mobility-discussion",
+        "md-labor-mobility-faq"
       ]
     }
   ],
@@ -639,7 +639,7 @@
     },
     {
       "key": "candidate-37-1",
-      "title": "非正規雇用と雇用の安定性｜非正規雇用率",
+      "title": "非正規雇用率",
       "rankingKeys": [
         "non-regular-employment-rate"
       ],
@@ -649,7 +649,7 @@
     },
     {
       "key": "candidate-37-2",
-      "title": "非正規雇用と雇用の安定性｜非正規の職員・従業員数（15歳以上）",
+      "title": "非正規の職員・従業員数（15歳以上）",
       "rankingKeys": [
         "nonregular-employees-count"
       ],
@@ -659,7 +659,7 @@
     },
     {
       "key": "candidate-37-3",
-      "title": "非正規雇用と雇用の安定性｜非正規の継続就業希望割合",
+      "title": "非正規の継続就業希望割合",
       "rankingKeys": [
         "nonregular-continuation-wish-rate"
       ],
@@ -669,7 +669,7 @@
     },
     {
       "key": "candidate-37-4",
-      "title": "非正規雇用と雇用の安定性｜非正規の転職希望割合",
+      "title": "非正規の転職希望割合",
       "rankingKeys": [
         "nonregular-job-change-wish-rate"
       ],
@@ -679,7 +679,7 @@
     },
     {
       "key": "candidate-38-1",
-      "title": "労働時間と長時間就業｜男性月間平均実労働時間",
+      "title": "男性月間平均実労働時間",
       "rankingKeys": [
         "monthly-average-actual-working-hours-male"
       ],
@@ -689,7 +689,7 @@
     },
     {
       "key": "candidate-38-2",
-      "title": "労働時間と長時間就業｜女性月間平均実労働時間",
+      "title": "女性月間平均実労働時間",
       "rankingKeys": [
         "monthly-average-actual-working-hours-female"
       ],
@@ -699,7 +699,7 @@
     },
     {
       "key": "candidate-38-3",
-      "title": "労働時間と長時間就業｜週60時間以上の雇用者数（年間200日以上）",
+      "title": "週60時間以上の雇用者数（年間200日以上）",
       "rankingKeys": [
         "employees-weekly-hours-60plus-count"
       ],
@@ -709,7 +709,7 @@
     },
     {
       "key": "candidate-38-4",
-      "title": "労働時間と長時間就業｜週60時間以上の雇用者割合（年間200日以上）",
+      "title": "週60時間以上の雇用者割合（年間200日以上）",
       "rankingKeys": [
         "employees-weekly-hours-60plus-rate"
       ],
@@ -719,7 +719,7 @@
     },
     {
       "key": "candidate-39-1",
-      "title": "テレワークと通勤｜テレワーク実施率",
+      "title": "テレワーク実施率",
       "rankingKeys": [
         "telework-rate"
       ],
@@ -729,7 +729,7 @@
     },
     {
       "key": "candidate-84-1",
-      "title": "通勤通学と昼間人口｜昼夜間人口比率",
+      "title": "昼夜間人口比率",
       "rankingKeys": [
         "day-time-population-ratio"
       ],
@@ -739,7 +739,7 @@
     },
     {
       "key": "candidate-84-2",
-      "title": "通勤通学と昼間人口｜他市区町村への通勤者比率",
+      "title": "他市区町村への通勤者比率",
       "rankingKeys": [
         "commuter-ratio-to-other-municipalities"
       ],

@@ -1,7 +1,7 @@
 ---
 type: theme-catalog-review
 date: 2026-10-06
-status: proposal-ready
+status: implemented-pending-release
 theme: aging-society
 supersedes: 2026-07-11-theme-aging-society.md
 tags: [theme-catalog, aging, metrics, charts, sections]
@@ -27,7 +27,7 @@ tags: [theme-catalog, aging, metrics, charts, sections]
 | 主問 | この県の高齢化はどこまで進み、子ども・現役世代・高齢者のバランスはどう変わってきたか |
 | 比較軸 | 地域差 (都道府県順位) と時系列 (1975〜2025)。内訳は年齢 3 区分と男女×年齢階級 |
 | 誤読リスク | 高齢化率の上昇は高齢者の増加と若年層の減少の両方で起きる。出生率と高齢化率を因果で結ばない。高齢単独世帯の割合は一般世帯が分母で、高齢者本人の独居率ではない。老人ホーム定員は充足率ではない。人口千人当たりの婚姻率は年齢構成の影響を受ける |
-| baseline (GSC 2026-W40, 28 日) | `/themes/aging-society`: クリック 13、表示 1,091、CTR 1.19%、平均掲載順位 8.30 (`gsc-improvement/reference/snapshots/2026-W40/pages.csv`)。テーマページで表示回数が最大 (次点 fishery-marine 199 の約 5.5 倍) |
+| baseline (GSC 2026-W40, 28 日) | `/themes/aging-society`: クリック 13、表示 1,091、CTR 1.19%、平均掲載順位 8.30 (`data/gsc/snapshots/2026-W40/pages.csv`)。テーマページで表示回数が最大 (次点 fishery-marine 199 の約 5.5 倍) |
 
 検索需要の補足 (同 snapshot の `queries.csv`): 「高齢者 一人暮らし 割合」系の 5 クエリで計 293 表示がある。
 ページ別の内訳は取得していないため、どのページに着地しているかは未確認。現行指標には「65 歳以上人口に占める一人暮らしの割合」が無く、
@@ -118,7 +118,7 @@ role を変えるものと外すものだけを個別に書く。ここに無い
 | 75 歳以上人口比率 (未登録) | rankingKey が無い (7 月版と同じ判断) | metric config と 47 都道府県の観測値を作ったとき |
 | 将来推計の高齢化率 | 実績と推計を区別する描画仕様が無い (7 月版と同じ判断) | 実績/推計の線種と境界年を示せる chart props ができたとき |
 
-この表の内容は実装時に catalog の `rejectedCandidates` へ記録する。
+rankingKey が実在する候補は catalog の `rejectedCandidates` にも記録する。
 
 ## 横断修正 (aging-society 以外にも同じ問題がある)
 
@@ -142,8 +142,16 @@ aging-society の調査中に、同じ形の問題が他テーマにもあるこ
 
 ## 採用決定
 
-**現状: ユーザー承認待ち。** 承認前に catalog を編集しない。判断が要る点は次の 3 つ。
+**2026-10-06 ユーザーが全項目を承認し、同日 branch `claude/theme-catalog-optimization` に実装した (未デプロイ)。**
+提案から変えた点と、実装で分かったことは次のとおり。
 
-1. 表 1〜3 の aging-society の変更 (特に離婚率を context へ、年金総額・ボランティアを外す)
-2. 横断修正 X1 (8 テーマの章順)
-3. 横断修正 X2 (28 テーマ 263 カードの見出し)
+- X2 は 263 件のうち 258 件に適用した。残る 5 件は、章名を外すと同じテーマ内の別カードと見出しが同じになる
+  (同じ指標のカードが 2 つの章に出ている)。重複の整理は backlog `THEME-DUP-METRIC-CARD-01`。
+- `rejectedCandidates` には rankingKey が実在する 3 件 (年金総額・ボランティア・15〜64 歳人口割合) を記録した。
+  未登録の 3 候補は rankingKey が無いので本書の表 3 だけに残す。独居率は backlog `THEME-AGING-LIVING-ALONE-METRIC-01`。
+- 新しい secondary 2 件の selection は、backfill の gate (`selection-backfill.mjs apply`) を通して書いた。
+  老年人口指数は内閣府「令和7年版 高齢社会白書」第1章第1節1、年少人口指数は総務省統計局 統計FAQ 02A-Q11 の定義。
+- 章の順に合わせて `metricGroups` の並びも変えた (カードは章の順に描かれ、テストは定義順と描画順の一致を検査する)。
+- 変更した 28 テーマはすべて 9 月の pending 実験 (d56 = 2026-11-06) を持つ。aging-society の実験登録とデプロイは
+  その観測の後に行う (backlog `THEME-CATALOG-OPT-RELEASE-01`)。R2 の page-components 反映をデプロイと同時に行わないと、
+  外した「高齢世帯の推移」が R2 から読まれてページ末尾に残る (localhost で確認)。

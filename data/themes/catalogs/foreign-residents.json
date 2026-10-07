@@ -315,7 +315,7 @@
     },
     {
       "key": "candidate-40-1",
-      "title": "外国人の雇用と事業所｜外国人労働者数（雇用届出）",
+      "title": "外国人労働者数（雇用届出）",
       "rankingKeys": [
         "foreign-worker-count"
       ],
@@ -325,7 +325,7 @@
     },
     {
       "key": "candidate-40-2",
-      "title": "外国人の雇用と事業所｜外国人を雇用する事業所数",
+      "title": "外国人を雇用する事業所数",
       "rankingKeys": [
         "foreign-employing-establishment-count"
       ],

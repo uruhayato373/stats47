@@ -343,7 +343,7 @@
     },
     {
       "key": "candidate-35-1",
-      "title": "女性の就業と賃金｜女性労働力人口比率",
+      "title": "女性労働力人口比率",
       "rankingKeys": [
         "labor-force-population-ratio-woman"
       ],
@@ -353,7 +353,7 @@
     },
     {
       "key": "candidate-35-2",
-      "title": "女性の就業と賃金｜女性所定内給与額",
+      "title": "女性所定内給与額",
       "rankingKeys": [
         "female-scheduled-earnings"
       ],
@@ -443,6 +443,14 @@
       ]
     },
     {
+      "key": "candidate-35",
+      "title": "女性の就業と賃金",
+      "metricGroupKeys": [
+        "candidate-35-1",
+        "candidate-35-2"
+      ]
+    },
+    {
       "key": "reading",
       "title": "読み方・雇用環境への導線",
       "description": "給与の月額・時間額・対象労働者の範囲を確認します。求人・失業・転職は雇用環境テーマへ接続します。",
@@ -450,14 +458,6 @@
       "chartKeys": [
         "md-labor-wages-discussion",
         "md-labor-wages-faq"
-      ]
-    },
-    {
-      "key": "candidate-35",
-      "title": "女性の就業と賃金",
-      "metricGroupKeys": [
-        "candidate-35-1",
-        "candidate-35-2"
       ]
     }
   ]

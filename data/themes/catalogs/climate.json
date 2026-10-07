@@ -278,7 +278,7 @@
     },
     {
       "key": "candidate-96-2",
-      "title": "雪国の暮らしと除雪｜最深積雪",
+      "title": "最深積雪",
       "rankingKeys": [
         "maximum-snow-depth"
       ],
@@ -288,7 +288,7 @@
     },
     {
       "key": "candidate-104-1",
-      "title": "暑さと熱中症の救急搬送｜熱中症救急搬送人員",
+      "title": "熱中症救急搬送人員",
       "rankingKeys": [
         "heatstroke-emergency-transports"
       ],
@@ -298,7 +298,7 @@
     },
     {
       "key": "candidate-104-2",
-      "title": "暑さと熱中症の救急搬送｜最高気温",
+      "title": "最高気温",
       "rankingKeys": [
         "maximum-temperature"
       ],
@@ -308,7 +308,7 @@
     },
     {
       "key": "candidate-104-3",
-      "title": "暑さと熱中症の救急搬送｜年間日照時間",
+      "title": "年間日照時間",
       "rankingKeys": [
         "annual-sunshine-duration"
       ],

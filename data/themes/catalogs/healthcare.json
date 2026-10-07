@@ -1023,16 +1023,6 @@
       ]
     },
     {
-      "key": "reading",
-      "title": "読み方",
-      "description": "供給・利用・費用・健康結果を分けて読み、単一指標から医療の良し悪しを決めないようにします。",
-      "metricGroupKeys": [],
-      "chartKeys": [
-        "md-healthcare-discussion",
-        "md-healthcare-faq"
-      ]
-    },
-    {
       "key": "candidate-57",
       "title": "診療科と年齢から見る医療人材",
       "description": "2024年12月31日の医療施設従事医師を、主たる従業地別に診療科と年齢で比較します。40歳未満・40〜59歳・60歳以上は同じ総数の内訳です。小児科・産婦人科系・救急科は主たる診療科の人数で、全診療科の内訳は専用図表から確認できます。人口当たり指標と人数は区別して読みます。",
@@ -1115,6 +1105,16 @@
         "candidate-68-1",
         "candidate-68-2",
         "candidate-68-3"
+      ]
+    },
+    {
+      "key": "reading",
+      "title": "読み方",
+      "description": "供給・利用・費用・健康結果を分けて読み、単一指標から医療の良し悪しを決めないようにします。",
+      "metricGroupKeys": [],
+      "chartKeys": [
+        "md-healthcare-discussion",
+        "md-healthcare-faq"
       ]
     }
   ],
@@ -1205,7 +1205,7 @@
     },
     {
       "key": "candidate-57-1",
-      "title": "診療科と年齢から見る医療人材｜医師数（人口10万人当たり）",
+      "title": "医師数（人口10万人当たり）",
       "rankingKeys": [
         "physicians-in-medical-facilities-per-100k"
       ],
@@ -1215,7 +1215,7 @@
     },
     {
       "key": "candidate-57-2",
-      "title": "診療科と年齢から見る医療人材｜看護師・准看護師数（人口10万人当たり）",
+      "title": "看護師・准看護師数（人口10万人当たり）",
       "rankingKeys": [
         "nurses-in-medical-facilities-per-100k"
       ],
@@ -1225,7 +1225,7 @@
     },
     {
       "key": "candidate-57-3",
-      "title": "診療科と年齢から見る医療人材｜40歳未満の医療施設従事医師数（2024年末）",
+      "title": "40歳未満の医療施設従事医師数（2024年末）",
       "rankingKeys": [
         "medical-physicians-under-40"
       ],
@@ -1235,7 +1235,7 @@
     },
     {
       "key": "candidate-57-4",
-      "title": "診療科と年齢から見る医療人材｜40〜59歳の医療施設従事医師数（2024年末）",
+      "title": "40〜59歳の医療施設従事医師数（2024年末）",
       "rankingKeys": [
         "medical-physicians-age-40-59"
       ],
@@ -1245,7 +1245,7 @@
     },
     {
       "key": "candidate-57-5",
-      "title": "診療科と年齢から見る医療人材｜60歳以上の医療施設従事医師数（2024年末）",
+      "title": "60歳以上の医療施設従事医師数（2024年末）",
       "rankingKeys": [
         "medical-physicians-age-60-plus"
       ],
@@ -1255,7 +1255,7 @@
     },
     {
       "key": "candidate-57-6",
-      "title": "診療科と年齢から見る医療人材｜小児科の医師数（2024年末）",
+      "title": "小児科の医師数（2024年末）",
       "rankingKeys": [
         "medical-physicians-pediatrics"
       ],
@@ -1265,7 +1265,7 @@
     },
     {
       "key": "candidate-57-7",
-      "title": "診療科と年齢から見る医療人材｜産婦人科系の医師数（2024年末）",
+      "title": "産婦人科系の医師数（2024年末）",
       "rankingKeys": [
         "medical-physicians-obstetrics-gynecology"
       ],
@@ -1275,7 +1275,7 @@
     },
     {
       "key": "candidate-57-8",
-      "title": "診療科と年齢から見る医療人材｜救急科の医師数（2024年末）",
+      "title": "救急科の医師数（2024年末）",
       "rankingKeys": [
         "medical-physicians-emergency-medicine"
       ],
@@ -1285,7 +1285,7 @@
     },
     {
       "key": "candidate-58-1",
-      "title": "救急搬送の所要時間と初診時の傷病程度｜救急自動車による搬送人員",
+      "title": "救急自動車による搬送人員",
       "rankingKeys": [
         "ambulance-transported-persons"
       ],
@@ -1295,7 +1295,7 @@
     },
     {
       "key": "candidate-58-2",
-      "title": "救急搬送の所要時間と初診時の傷病程度｜救急搬送人員（初診時死亡）",
+      "title": "救急搬送人員（初診時死亡）",
       "rankingKeys": [
         "ambulance-transported-deaths"
       ],
@@ -1305,7 +1305,7 @@
     },
     {
       "key": "candidate-58-3",
-      "title": "救急搬送の所要時間と初診時の傷病程度｜救急搬送人員（重症）",
+      "title": "救急搬送人員（重症）",
       "rankingKeys": [
         "ambulance-transported-severe"
       ],
@@ -1315,7 +1315,7 @@
     },
     {
       "key": "candidate-58-4",
-      "title": "救急搬送の所要時間と初診時の傷病程度｜救急搬送人員（中等症）",
+      "title": "救急搬送人員（中等症）",
       "rankingKeys": [
         "ambulance-transported-moderate"
       ],
@@ -1325,7 +1325,7 @@
     },
     {
       "key": "candidate-58-5",
-      "title": "救急搬送の所要時間と初診時の傷病程度｜救急搬送人員（軽症）",
+      "title": "救急搬送人員（軽症）",
       "rankingKeys": [
         "ambulance-transported-mild"
       ],
@@ -1335,7 +1335,7 @@
     },
     {
       "key": "candidate-58-6",
-      "title": "救急搬送の所要時間と初診時の傷病程度｜救急搬送人員（その他）",
+      "title": "救急搬送人員（その他）",
       "rankingKeys": [
         "ambulance-transported-other"
       ],
@@ -1345,7 +1345,7 @@
     },
     {
       "key": "candidate-58-7",
-      "title": "救急搬送の所要時間と初診時の傷病程度｜救急搬送病院収容所要時間",
+      "title": "救急搬送病院収容所要時間",
       "rankingKeys": [
         "ambulance-hospital-arrival-time"
       ],
@@ -1355,7 +1355,7 @@
     },
     {
       "key": "candidate-58-8",
-      "title": "救急搬送の所要時間と初診時の傷病程度｜救急出動件数（人口千人当たり）",
+      "title": "救急出動件数（人口千人当たり）",
       "rankingKeys": [
         "annual-emergency-dispatches-per-1000"
       ],
@@ -1365,7 +1365,7 @@
     },
     {
       "key": "candidate-59-1",
-      "title": "出産と周産期医療の施設供給｜分娩取扱病院数（2023年）",
+      "title": "分娩取扱病院数（2023年）",
       "rankingKeys": [
         "delivery-hospital-count"
       ],
@@ -1375,7 +1375,7 @@
     },
     {
       "key": "candidate-59-2",
-      "title": "出産と周産期医療の施設供給｜分娩取扱診療所数（2023年）",
+      "title": "分娩取扱診療所数（2023年）",
       "rankingKeys": [
         "delivery-clinic-count"
       ],
@@ -1385,7 +1385,7 @@
     },
     {
       "key": "candidate-59-3",
-      "title": "出産と周産期医療の施設供給｜総合周産期母子医療センター（2026年）",
+      "title": "総合周産期母子医療センター（2026年）",
       "rankingKeys": [
         "general-perinatal-center-count"
       ],
@@ -1395,7 +1395,7 @@
     },
     {
       "key": "candidate-59-4",
-      "title": "出産と周産期医療の施設供給｜地域周産期母子医療センター（2026年）",
+      "title": "地域周産期母子医療センター（2026年）",
       "rankingKeys": [
         "regional-perinatal-center-count"
       ],
@@ -1405,7 +1405,7 @@
     },
     {
       "key": "candidate-61-1",
-      "title": "訪問診療と訪問看護の実施｜訪問診療実施件数（2023年9月）",
+      "title": "訪問診療実施件数（2023年9月）",
       "rankingKeys": [
         "home-medical-visit-cases"
       ],
@@ -1415,7 +1415,7 @@
     },
     {
       "key": "candidate-61-2",
-      "title": "訪問診療と訪問看護の実施｜訪問看護・指導実施件数（2023年9月）",
+      "title": "訪問看護・指導実施件数（2023年9月）",
       "rankingKeys": [
         "home-nursing-visit-cases"
       ],
@@ -1425,7 +1425,7 @@
     },
     {
       "key": "candidate-61-3",
-      "title": "訪問診療と訪問看護の実施｜訪問介護利用者数（1事業所当たり）",
+      "title": "訪問介護利用者数（1事業所当たり）",
       "rankingKeys": [
         "home-helper-users-per-office"
       ],
@@ -1435,7 +1435,7 @@
     },
     {
       "key": "candidate-61-4",
-      "title": "訪問診療と訪問看護の実施｜訪問介護従事者平均年収",
+      "title": "訪問介護従事者平均年収",
       "rankingKeys": [
         "home-care-worker-annual-income"
       ],
@@ -1445,7 +1445,7 @@
     },
     {
       "key": "candidate-65-1",
-      "title": "健康寿命と平均寿命｜男性健康寿命",
+      "title": "男性健康寿命",
       "rankingKeys": [
         "healthy-life-expectancy-male"
       ],
@@ -1455,7 +1455,7 @@
     },
     {
       "key": "candidate-65-2",
-      "title": "健康寿命と平均寿命｜女性健康寿命",
+      "title": "女性健康寿命",
       "rankingKeys": [
         "healthy-life-expectancy-female"
       ],
@@ -1465,7 +1465,7 @@
     },
     {
       "key": "candidate-65-3",
-      "title": "健康寿命と平均寿命｜男性平均寿命（2020年）",
+      "title": "男性平均寿命（2020年）",
       "rankingKeys": [
         "life-expectancy-0-male"
       ],
@@ -1475,7 +1475,7 @@
     },
     {
       "key": "candidate-65-4",
-      "title": "健康寿命と平均寿命｜女性平均寿命（2020年）",
+      "title": "女性平均寿命（2020年）",
       "rankingKeys": [
         "life-expectancy-0-female"
       ],
@@ -1485,7 +1485,7 @@
     },
     {
       "key": "candidate-67-1",
-      "title": "がんの新規罹患と疾病の死亡｜がんの新規罹患数（2023年）",
+      "title": "がんの新規罹患数（2023年）",
       "rankingKeys": [
         "new-cancer-incidence-count"
       ],
@@ -1495,7 +1495,7 @@
     },
     {
       "key": "candidate-67-2",
-      "title": "がんの新規罹患と疾病の死亡｜生活習慣病死亡率",
+      "title": "生活習慣病死亡率",
       "rankingKeys": [
         "deaths-lifestyle-diseases-per-100k"
       ],
@@ -1505,7 +1505,7 @@
     },
     {
       "key": "candidate-68-1",
-      "title": "こころの状態と相談・受療｜K6が10点以上の割合（12歳以上・不詳除外）",
+      "title": "K6が10点以上の割合（12歳以上・不詳除外）",
       "rankingKeys": [
         "k6-score10plus-rate-12plus"
       ],
@@ -1515,7 +1515,7 @@
     },
     {
       "key": "candidate-68-2",
-      "title": "こころの状態と相談・受療｜市区町村の精神保健福祉相談延人員",
+      "title": "市区町村の精神保健福祉相談延人員",
       "rankingKeys": [
         "municipal-mental-health-consultation-extended-persons"
       ],
@@ -1525,7 +1525,7 @@
     },
     {
       "key": "candidate-68-3",
-      "title": "こころの状態と相談・受療｜気分障害外来受療率",
+      "title": "気分障害外来受療率",
       "rankingKeys": [
         "treatment-rate-mood-disorder-outpatient"
       ],

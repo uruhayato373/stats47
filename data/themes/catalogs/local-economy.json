@@ -6,6 +6,23 @@
   "usage": "theme",
   "metrics": [
     {
+      "rankingKey": "total-production-in-the-prefecture",
+      "shortLabel": "県内総生産額",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "県民経済計算「統計の目的」（内閣府経済社会総合研究所）",
+        "sourceUrl": "https://www.esri.cao.go.jp/jp/sna/sonota/kenmin/contents/mokuteki.html",
+        "surveyedAt": "2026-10-07",
+        "rationale": "内閣府経済社会総合研究所は県民経済計算を、県内の経済の循環と構造を生産・分配・支出の各面から計量把握し、県経済の実態を包括的に明らかにする統計と位置付けている。県内総生産額はその生産の面の総額で、県内で生まれた付加価値の合計として県の経済の規模を都道府県間で比べる中心の指標になる。人口の多い県ほど大きくなるため、テーマでは1人当たり県民所得と並べ、経済の規模と所得の水準を分けて読めるようにする。",
+        "adoptionCriteria": [
+          "representativeness",
+          "readerValue"
+        ],
+        "readerQuestion": "自分の県の経済の規模は、県内総生産額で見ると全国で何番目か。",
+        "targetReaderOrDecision": "県の経済の大きさを他県と比べたい住民・学生・自治体の政策担当者。"
+      }
+    },
+    {
       "rankingKey": "per-taxpayer-taxable-income",
       "shortLabel": "課税対象所得（納税義務者1人当たり）",
       "role": "secondary",
@@ -40,58 +57,21 @@
       }
     },
     {
-      "rankingKey": "minimum-wage-by-region",
-      "shortLabel": "最低賃金",
-      "role": "context",
-      "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
-        "surveyedAt": "2026-09-08",
-        "rationale": "法定最低賃金は賃金テーマの主指標であり地域経済で重複掲載しない。 主表示は「労働・賃金」へ集約する。関連指標としての導線は保持する。"
-      }
-    },
-    {
-      "rankingKey": "active-job-opening-ratio",
-      "shortLabel": "有効求人倍率",
-      "role": "context",
-      "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
-        "surveyedAt": "2026-09-08",
-        "rationale": "求人需給は雇用環境テーマへ集約する。 主表示は「人材流動性・雇用環境」へ集約する。関連指標としての導線は保持する。"
-      }
-    },
-    {
-      "rankingKey": "unemployment-rate",
-      "shortLabel": "失業率",
-      "role": "context",
-      "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
-        "surveyedAt": "2026-09-08",
-        "rationale": "失業は雇用環境テーマへ集約する。 主表示は「人材流動性・雇用環境」へ集約する。関連指標としての導線は保持する。"
-      }
-    },
-    {
-      "rankingKey": "fiscal-strength-index-prefecture",
-      "shortLabel": "財政力指数",
-      "role": "context",
-      "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
-        "surveyedAt": "2026-09-08",
-        "rationale": "自治体の財政力と地域経済力を同一視しない。 主表示は「地方財政」へ集約する。関連指標としての導線は保持する。"
-      }
-    },
-    {
       "rankingKey": "employed-people-ratio-primary",
       "shortLabel": "第1次産業就業者比率",
       "role": "secondary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
-        "surveyedAt": "2026-09-08",
-        "rationale": "第1次産業就業者比率は「どの産業で働いているか」を読むため主要画面へ配置する。"
+        "proposedBy": "平成12年国勢調査 産業（大分類）別就業者数（総務省統計局）",
+        "sourceUrl": "https://www.stat.go.jp/data/kokusei/2000/kihon2/00/03.html",
+        "surveyedAt": "2026-10-07",
+        "rationale": "国勢調査は就業者を産業3部門に分けて人数と就業者全体に占める割合を公表しており、平成12年の全国では農業・林業・漁業の第1次産業就業者が就業者の5.0%だった。第1次産業就業者比率は農林漁業で働く人の厚みを都道府県間で比べる指標で、全国では小さい割合でも県による差が大きい。第2次・第3次産業の比率と合わせて、地域の就業構造を3区分で読むために使う。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability",
+          "complementarity"
+        ],
+        "readerQuestion": "自分の県は農業・林業・漁業で働く人の割合が全国と比べて多いか少ないか。",
+        "targetReaderOrDecision": "地域の産業構造・雇用構成を比較したい読者。"
       }
     },
     {
@@ -128,17 +108,6 @@
         ],
         "readerQuestion": "自分の県はサービス業など第3次産業で働く人の割合が全国と比べて多いか少ないか。",
         "targetReaderOrDecision": "地域の産業構造・雇用構成を比較したい読者。"
-      }
-    },
-    {
-      "rankingKey": "disposable-income-worker-households",
-      "shortLabel": "可処分所得（二人以上の世帯のうち勤労者世帯）",
-      "role": "context",
-      "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
-        "surveyedAt": "2026-09-08",
-        "rationale": "勤労者世帯の家計収入は実質収入の主責務であり県民所得と別の母集団。 主表示は「実質収入・購買力」へ集約する。関連指標としての導線は保持する。"
       }
     },
     {
@@ -279,60 +248,6 @@
   ],
   "charts": [
     {
-      "componentKey": "theme-industry-structure",
-      "componentType": "line-chart",
-      "title": "産業別就業者比率の推移",
-      "annotation": "産業分類不詳などにより3系列の合計は100%になりません。元の就業者比率を表示しています。",
-      "componentProps": {
-        "seriesRefs": [
-          {
-            "metricKey": "employed-people-ratio-primary",
-            "label": "第1次産業就業者比率",
-            "colorRole": "improve"
-          },
-          {
-            "metricKey": "employed-people-ratio-secondary",
-            "label": "第2次産業就業者比率",
-            "colorRole": "population"
-          },
-          {
-            "metricKey": "employed-people-ratio-tertiary",
-            "label": "第3次産業就業者比率",
-            "colorRole": "series-12"
-          }
-        ]
-      },
-      "relatedRankingKeys": [
-        "employed-people-ratio-primary",
-        "employed-people-ratio-secondary",
-        "employed-people-ratio-tertiary"
-      ],
-      "sourceName": "社会・人口統計体系",
-      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "industry",
-      "sortOrder": 10
-    },
-    {
-      "componentKey": "md-local-economy-discussion",
-      "componentType": "markdown-section",
-      "title": "数値を比較するときの注意",
-      "componentProps": {
-        "markdown": "県民1人当たりの所得と納税者1人当たりの所得は分母が異なり、家計の手取り額ではありません。\n\n産業別就業者の割合から地域の仕事の構成を確認します。産出額は就業者の割合や所得とは別の尺度です。\n\n事業所数は2014年までの過去参考です。現在の事業所規模を表す数値として扱いません。"
-      },
-      "sourceName": "経済財政白書 (令和7年版) / 中小企業白書 (2024年版) / 地方財政白書 (令和8年版) / 男女共同参画白書 (令和7年版) / 国土交通白書 2025",
-      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "reading",
-      "sortOrder": 20
-    },
-    {
       "componentKey": "md-local-economy-faq",
       "componentType": "markdown-section",
       "title": "よくある質問",
@@ -348,35 +263,6 @@
       "dataSource": "ranking",
       "section": "reading",
       "sortOrder": 30
-    },
-    {
-      "componentKey": "theme-le-establishments-trend",
-      "componentType": "line-chart",
-      "title": "全産業事業所数の推移",
-      "componentProps": {
-        "seriesRefs": [
-          {
-            "metricKey": "number-of-establishments-economic-census-basic-survey"
-          }
-        ],
-        "labels": [
-          "事業所数"
-        ],
-        "seriesColors": [
-          "population"
-        ]
-      },
-      "relatedRankingKeys": [
-        "number-of-establishments-economic-census-basic-survey"
-      ],
-      "sourceName": "総務省・経済産業省「経済センサス」",
-      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "establishments",
-      "sortOrder": 40
     }
   ],
   "evidenceTopics": [
@@ -394,9 +280,6 @@
         "employed-people-ratio-secondary",
         "employed-people-ratio-tertiary"
       ],
-      "relatedChartKeys": [
-        "theme-industry-structure"
-      ],
       "relatedThemeKeys": [
         "manufacturing",
         "labor-mobility"
@@ -413,9 +296,6 @@
       ],
       "relatedRankingKeys": [
         "number-of-establishments-economic-census-basic-survey"
-      ],
-      "relatedChartKeys": [
-        "theme-le-establishments-trend"
       ],
       "relatedThemeKeys": [
         "manufacturing",
@@ -441,9 +321,10 @@
   "sections": [
     {
       "key": "income",
-      "title": "所得形成の水準",
-      "description": "県民1人当たりの所得と納税者1人当たりの所得は分母が異なり、家計の手取り額ではありません。",
+      "title": "経済の規模と所得の水準",
+      "description": "県内総生産額は県内で生まれた付加価値の合計で、人口の多い県ほど大きくなります。1人当たり県民所得は企業の所得なども含み、個人の給与ではありません。県民1人当たりの所得と納税者1人当たりの所得は分母が異なり、家計の手取り額ではありません。",
       "metricGroupKeys": [
+        "gdp",
         "income-1",
         "income-2"
       ],
@@ -452,42 +333,19 @@
     {
       "key": "industry",
       "title": "どの産業で働いているか",
-      "description": "産業別就業者の割合から地域の仕事の構成を確認します。産出額は就業者の割合や所得とは別の尺度です。",
+      "description": "産業別就業者の割合から地域の仕事の構成を確認します。産業分類不詳などにより、3区分の就業者比率の合計は100%になりません。産出額は就業者の割合や所得とは別の尺度です。",
       "metricGroupKeys": [
         "industry-1",
         "industry-2"
       ],
-      "chartKeys": [
-        "theme-industry-structure"
-      ]
-    },
-    {
-      "key": "establishments",
-      "title": "事業所基盤の過去参考",
-      "description": "事業所数は2014年までの過去参考です。現在の事業所規模を表す数値として扱いません。",
-      "metricGroupKeys": [],
-      "chartKeys": [
-        "theme-le-establishments-trend"
-      ]
-    },
-    {
-      "key": "reading",
-      "title": "読み方と関連する仕事・財政",
-      "description": "賃金・雇用環境・家計・財政は関連テーマで詳しく確認できます。",
-      "metricGroupKeys": [],
-      "chartKeys": [
-        "md-local-economy-discussion",
-        "md-local-economy-faq"
-      ]
+      "chartKeys": []
     },
     {
       "key": "candidate-16",
       "title": "産業別の雇用構成と特化係数",
       "description": "2021年6月1日の同一統計を使い、県の産業別従業者割合を全国と比べます。特化係数1は全国と同じ構成比です。公務、農林漁業の個人経営、外国会社・法人でない団体等を除き、事業所所在地別に集計しています。公式全産業の分母には大分類へ分かれない上位集計の差分を含めます。",
       "metricGroupKeys": [
-        "candidate-16-1",
-        "candidate-16-2",
-        "candidate-16-3"
+        "candidate-16-1"
       ],
       "embeddedSectionKeys": [
         "industry-specialization"
@@ -498,12 +356,30 @@
       "title": "企業の付加価値と地域への配分",
       "description": "2020年の全産業純付加価値を、企業本所所在地別と傘下事業所への従事者按分で比べます。全国額は同じでも県別への帰属が異なります。GDPとは含まれる項目が異なり、異なる県帰属の売上・雇用と割って生産性を作りません。",
       "metricGroupKeys": [
-        "candidate-18-1",
-        "candidate-18-2"
+        "candidate-18-1"
+      ]
+    },
+    {
+      "key": "reading",
+      "title": "読み方と関連する仕事・財政",
+      "description": "賃金・雇用環境・家計・財政は関連テーマで詳しく確認できます。",
+      "metricGroupKeys": [],
+      "chartKeys": [
+        "md-local-economy-faq"
       ]
     }
   ],
   "metricGroups": [
+    {
+      "key": "gdp",
+      "title": "県内総生産額",
+      "rankingKeys": [
+        "total-production-in-the-prefecture"
+      ],
+      "defaultCheckedKeys": [
+        "total-production-in-the-prefecture"
+      ]
+    },
     {
       "key": "income-1",
       "title": "1人当たり県民所得",
@@ -526,7 +402,7 @@
     },
     {
       "key": "industry-1",
-      "title": "第1次産業就業者比率・第2次産業就業者比率",
+      "title": "第1次・第2次・第3次産業の就業者比率",
       "rankingKeys": [
         "employed-people-ratio-primary",
         "employed-people-ratio-secondary",
@@ -549,53 +425,66 @@
     },
     {
       "key": "candidate-16-1",
-      "title": "産業別の雇用構成と特化係数｜製造業の従業者特化係数",
+      "title": "産業別の従業者特化係数（2021年）",
       "rankingKeys": [
-        "employment-location-quotient-manufacturing"
-      ],
-      "defaultCheckedKeys": [
-        "employment-location-quotient-manufacturing"
-      ]
-    },
-    {
-      "key": "candidate-16-2",
-      "title": "産業別の雇用構成と特化係数｜情報通信業の従業者特化係数",
-      "rankingKeys": [
-        "employment-location-quotient-information-communication"
-      ],
-      "defaultCheckedKeys": [
-        "employment-location-quotient-information-communication"
-      ]
-    },
-    {
-      "key": "candidate-16-3",
-      "title": "産業別の雇用構成と特化係数｜医療・福祉の従業者特化係数",
-      "rankingKeys": [
+        "employment-location-quotient-manufacturing",
+        "employment-location-quotient-information-communication",
         "employment-location-quotient-health-welfare"
       ],
       "defaultCheckedKeys": [
-        "employment-location-quotient-health-welfare"
-      ]
+        "employment-location-quotient-manufacturing"
+      ],
+      "comparisonYear": "2021"
     },
     {
       "key": "candidate-18-1",
-      "title": "企業の付加価値と地域への配分｜全産業の企業純付加価値（本所県）",
+      "title": "全産業の純付加価値（2020年）",
       "rankingKeys": [
-        "enterprise-net-value-added-all-industries"
+        "enterprise-net-value-added-all-industries",
+        "private-establishment-net-value-added"
       ],
       "defaultCheckedKeys": [
         "enterprise-net-value-added-all-industries"
-      ]
+      ],
+      "comparisonYear": "2020"
+    }
+  ],
+  "rejectedCandidates": [
+    {
+      "rankingKey": "per-capita-kenmin-shotoku-h17",
+      "reason": "平成17年基準の1人当たり県民所得で、平成27年基準の系列とつなぐと水準が段差になる。同じ基準で遡った系列が公表されたら再検討する。"
     },
     {
-      "key": "candidate-18-2",
-      "title": "企業の付加価値と地域への配分｜民営事業所の純付加価値（所在地へ按分）",
-      "rankingKeys": [
-        "private-establishment-net-value-added"
-      ],
-      "defaultCheckedKeys": [
-        "private-establishment-net-value-added"
-      ]
+      "rankingKey": "per-capita-kenmin-shotoku-h23",
+      "reason": "平成23年基準の1人当たり県民所得で、平成27年基準の系列とつなぐと水準が段差になる。同じ基準で遡った系列が公表されたら再検討する。"
+    },
+    {
+      "rankingKey": "gross-prefectural-income-growth-rate-nominal-h23",
+      "reason": "平成23年基準の県民所得の増加率で2018年までしかなく、平成27年基準の現行系列と基準が違う。平成27年基準の成長率が複数年登録されたら再検討する。"
+    },
+    {
+      "rankingKey": "gdp-growth-rate-pref-h27",
+      "reason": "平成27年基準の県内総生産の対前年増加率だが、isActive が false で登録年も2020年だけ。有効化され複数年が登録されたら再検討する。"
+    },
+    {
+      "rankingKey": "minimum-wage-by-region",
+      "reason": "地域別最低賃金。labor-wages の主指標で、主担当のテーマがあり、このテーマの主問 (県の経済の規模と所得の水準) から外れる。このテーマの主問が賃金を含む形に変わったら再検討する。"
+    },
+    {
+      "rankingKey": "active-job-opening-ratio",
+      "reason": "有効求人倍率。labor-mobility の主指標で、主担当のテーマがあり、このテーマの主問 (県の経済の規模と所得の水準) から外れる。このテーマの主問が雇用を含む形に変わったら再検討する。"
+    },
+    {
+      "rankingKey": "unemployment-rate",
+      "reason": "完全失業率。labor-mobility で扱っており、主担当のテーマがあり、このテーマの主問 (県の経済の規模と所得の水準) から外れる。このテーマの主問が雇用を含む形に変わったら再検討する。"
+    },
+    {
+      "rankingKey": "fiscal-strength-index-prefecture",
+      "reason": "財政力指数。local-finance の主指標で、主担当のテーマがあり、このテーマの主問 (県の経済の規模と所得の水準) から外れる。このテーマの主問が自治体財政を含む形に変わったら再検討する。"
+    },
+    {
+      "rankingKey": "disposable-income-worker-households",
+      "reason": "勤労者世帯の可処分所得。real-income の主指標で、主担当のテーマがあり、このテーマの主問 (県の経済の規模と所得の水準) から外れる。このテーマの主問が世帯の手取りを含む形に変わったら再検討する。"
     }
   ]
 }

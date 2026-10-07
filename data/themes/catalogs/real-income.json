@@ -507,7 +507,7 @@
     },
     {
       "key": "candidate-73-2",
-      "title": "可処分所得と生活費｜実収入",
+      "title": "実収入",
       "rankingKeys": [
         "actual-income-worker-households-per-month"
       ],
@@ -517,7 +517,7 @@
     },
     {
       "key": "candidate-77-1",
-      "title": "家計の消費配分｜消費支出（全費目）",
+      "title": "消費支出（全費目）",
       "rankingKeys": [
         "household-survey-consumption-expenditure"
       ],
@@ -527,7 +527,7 @@
     },
     {
       "key": "candidate-80-1",
-      "title": "所得と金融資産の分布｜等価可処分所得ジニ係数（総世帯）",
+      "title": "等価可処分所得ジニ係数（総世帯）",
       "rankingKeys": [
         "gini-coefficient-disposable-income"
       ],
@@ -537,7 +537,7 @@
     },
     {
       "key": "candidate-80-2",
-      "title": "所得と金融資産の分布｜等価金融資産残高ジニ係数（総世帯）",
+      "title": "等価金融資産残高ジニ係数（総世帯）",
       "rankingKeys": [
         "gini-coefficient-financial-assets"
       ],

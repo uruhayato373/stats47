@@ -696,7 +696,7 @@
   "metricGroups": [
     {
       "key": "candidate-50-1",
-      "title": "児童福祉への支出と公的給付｜児童福祉費（都道府県財政）",
+      "title": "児童福祉費（都道府県財政）",
       "rankingKeys": [
         "child-welfare-expenses-prefecture"
       ],
@@ -706,7 +706,7 @@
     },
     {
       "key": "candidate-50-2",
-      "title": "児童福祉への支出と公的給付｜児童福祉費割合",
+      "title": "児童福祉費割合",
       "rankingKeys": [
         "child-welfare-expenditure-ratio-pref-finance"
       ],
@@ -716,7 +716,7 @@
     },
     {
       "key": "candidate-50-3",
-      "title": "児童福祉への支出と公的給付｜児童扶養手当受給者数（ひとり親等）",
+      "title": "児童扶養手当受給者数（ひとり親等）",
       "rankingKeys": [
         "child-rearing-allowance-recipients"
       ],
@@ -726,7 +726,7 @@
     },
     {
       "key": "candidate-92-1",
-      "title": "公共施設の量と維持・建設への支出｜維持補修費（都道府県財政）",
+      "title": "維持補修費（都道府県財政）",
       "rankingKeys": [
         "maintenance-repair-expenses-prefecture"
       ],
@@ -736,7 +736,7 @@
     },
     {
       "key": "candidate-92-2",
-      "title": "公共施設の量と維持・建設への支出｜普通建設事業費（都道府県財政）",
+      "title": "普通建設事業費（都道府県財政）",
       "rankingKeys": [
         "ordinary-construction-expenses-prefecture"
       ],
@@ -746,7 +746,7 @@
     },
     {
       "key": "candidate-92-3",
-      "title": "公共施設の量と維持・建設への支出｜都道府県有建物の延面積（年度末）",
+      "title": "都道府県有建物の延面積（年度末）",
       "rankingKeys": [
         "prefectural-public-building-floor-area"
       ],
@@ -756,7 +756,7 @@
     },
     {
       "key": "candidate-122-1",
-      "title": "目的別と性質別の歳出を分けて見る｜1人当たり歳出（都道府県・市町村合計）",
+      "title": "1人当たり歳出（都道府県・市町村合計）",
       "rankingKeys": [
         "per-capita-total-expenditure-pref-municipal"
       ],
@@ -766,7 +766,7 @@
     },
     {
       "key": "candidate-122-2",
-      "title": "目的別と性質別の歳出を分けて見る｜人件費割合（都道府県普通会計）",
+      "title": "人件費割合（都道府県普通会計）",
       "rankingKeys": [
         "personnel-expenditure-ratio-pref-finance"
       ],
@@ -776,7 +776,7 @@
     },
     {
       "key": "candidate-122-3",
-      "title": "目的別と性質別の歳出を分けて見る｜扶助費割合（都道府県普通会計）",
+      "title": "扶助費割合（都道府県普通会計）",
       "rankingKeys": [
         "assistance-expenditure-ratio-pref-finance"
       ],
@@ -786,7 +786,7 @@
     },
     {
       "key": "candidate-122-4",
-      "title": "目的別と性質別の歳出を分けて見る｜投資的経費割合（都道府県普通会計）",
+      "title": "投資的経費割合（都道府県普通会計）",
       "rankingKeys": [
         "investment-expenditure-ratio-pref-finance"
       ],
@@ -796,7 +796,7 @@
     },
     {
       "key": "candidate-123-1",
-      "title": "行政部門の職員数と職種別給与｜一般行政部門職員数（都道府県）",
+      "title": "一般行政部門職員数（都道府県）",
       "rankingKeys": [
         "prefectural-general-administration-staff"
       ],
@@ -806,7 +806,7 @@
     },
     {
       "key": "candidate-123-2",
-      "title": "行政部門の職員数と職種別給与｜一般行政職の平均給与月額（都道府県）",
+      "title": "一般行政職の平均給与月額（都道府県）",
       "rankingKeys": [
         "avg-salary-admin-prefecture"
       ],
@@ -816,7 +816,7 @@
     },
     {
       "key": "candidate-123-3",
-      "title": "行政部門の職員数と職種別給与｜一般行政職の平均年齢（都道府県）",
+      "title": "一般行政職の平均年齢（都道府県）",
       "rankingKeys": [
         "avg-age-admin-prefecture"
       ],
@@ -826,7 +826,7 @@
     },
     {
       "key": "candidate-123-4",
-      "title": "行政部門の職員数と職種別給与｜教育公務員の平均給与月額（都道府県）",
+      "title": "教育公務員の平均給与月額（都道府県）",
       "rankingKeys": [
         "avg-salary-education-prefecture"
       ],
@@ -836,7 +836,7 @@
     },
     {
       "key": "candidate-123-5",
-      "title": "行政部門の職員数と職種別給与｜警察職の平均給与月額（都道府県）",
+      "title": "警察職の平均給与月額（都道府県）",
       "rankingKeys": [
         "avg-salary-police-prefecture"
       ],
@@ -846,7 +846,7 @@
     },
     {
       "key": "candidate-123-6",
-      "title": "行政部門の職員数と職種別給与｜警察部門職員数（都道府県）",
+      "title": "警察部門職員数（都道府県）",
       "rankingKeys": [
         "police-department-staff"
       ],
@@ -856,7 +856,7 @@
     },
     {
       "key": "candidate-125-1",
-      "title": "ふるさと納税の受入・募集費・税控除｜受入額（県自身）",
+      "title": "受入額（県自身）",
       "rankingKeys": [
         "furusato-donation-amount-prefecture"
       ],
@@ -866,7 +866,7 @@
     },
     {
       "key": "candidate-125-2",
-      "title": "ふるさと納税の受入・募集費・税控除｜受入件数（県自身）",
+      "title": "受入件数（県自身）",
       "rankingKeys": [
         "furusato-donation-count-prefecture"
       ],
@@ -876,7 +876,7 @@
     },
     {
       "key": "candidate-125-3",
-      "title": "ふるさと納税の受入・募集費・税控除｜募集経費（県自身）",
+      "title": "募集経費（県自身）",
       "rankingKeys": [
         "furusato-fundraising-cost-prefecture"
       ],
@@ -886,7 +886,7 @@
     },
     {
       "key": "candidate-125-4",
-      "title": "ふるさと納税の受入・募集費・税控除｜返礼品調達費（募集費の内数）",
+      "title": "返礼品調達費（募集費の内数）",
       "rankingKeys": [
         "furusato-return-gift-procurement-cost-prefecture"
       ],
@@ -896,7 +896,7 @@
     },
     {
       "key": "candidate-125-5",
-      "title": "ふるさと納税の受入・募集費・税控除｜返礼品送付費（募集費の内数）",
+      "title": "返礼品送付費（募集費の内数）",
       "rankingKeys": [
         "furusato-return-gift-shipping-cost-prefecture"
       ],
@@ -906,7 +906,7 @@
     },
     {
       "key": "candidate-125-6",
-      "title": "ふるさと納税の受入・募集費・税控除｜市町村民税控除額（県内課税分・推計値含む）",
+      "title": "市町村民税控除額（県内課税分・推計値含む）",
       "rankingKeys": [
         "furusato-tax-deduction-municipal-prefecture"
       ],
@@ -916,7 +916,7 @@
     },
     {
       "key": "candidate-125-7",
-      "title": "ふるさと納税の受入・募集費・税控除｜道府県民税控除額（県内課税分・推計値含む）",
+      "title": "道府県民税控除額（県内課税分・推計値含む）",
       "rankingKeys": [
         "furusato-tax-deduction-prefectural-prefecture"
       ],

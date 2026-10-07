@@ -524,7 +524,7 @@
     },
     {
       "key": "candidate-52-1",
-      "title": "学校の規模と廃校の実績｜公立学校廃校発生数（2004〜2023年度累計）",
+      "title": "公立学校廃校発生数（2004〜2023年度累計）",
       "rankingKeys": [
         "public-school-closures-cumulative"
       ],
@@ -534,7 +534,7 @@
     },
     {
       "key": "candidate-52-2",
-      "title": "学校の規模と廃校の実績｜小学校数",
+      "title": "小学校数",
       "rankingKeys": [
         "elementary-school-count"
       ],
@@ -544,7 +544,7 @@
     },
     {
       "key": "candidate-52-3",
-      "title": "学校の規模と廃校の実績｜中学校数",
+      "title": "中学校数",
       "rankingKeys": [
         "junior-high-school-count"
       ],
@@ -554,7 +554,7 @@
     },
     {
       "key": "candidate-53-1",
-      "title": "高校卒業後の進路｜高等学校卒業者の進学率",
+      "title": "高等学校卒業者の進学率",
       "rankingKeys": [
         "high-school-advancement-rate"
       ],
@@ -564,7 +564,7 @@
     },
     {
       "key": "candidate-54-1",
-      "title": "大学と地域人材｜大学数",
+      "title": "大学数",
       "rankingKeys": [
         "university-count"
       ],
@@ -574,7 +574,7 @@
     },
     {
       "key": "candidate-54-2",
-      "title": "大学と地域人材｜大学数（人口10万人当たり）",
+      "title": "大学数（人口10万人当たり）",
       "rankingKeys": [
         "university-count-per-100k"
       ],
@@ -584,7 +584,7 @@
     },
     {
       "key": "candidate-55-1",
-      "title": "教育費と学習環境｜小学校教育費",
+      "title": "小学校教育費",
       "rankingKeys": [
         "elementary-school-education-cost-per-student"
       ],
@@ -594,7 +594,7 @@
     },
     {
       "key": "candidate-56-1",
-      "title": "生涯学習と学び直し｜商業実務・ビジネス関係の学習行動者率",
+      "title": "商業実務・ビジネス関係の学習行動者率",
       "rankingKeys": [
         "study-participation-rate-business"
       ],
@@ -604,7 +604,7 @@
     },
     {
       "key": "candidate-113-1",
-      "title": "図書館と読書環境｜図書館蔵書数",
+      "title": "図書館蔵書数",
       "rankingKeys": [
         "library-books"
       ],
@@ -614,7 +614,7 @@
     },
     {
       "key": "candidate-113-2",
-      "title": "図書館と読書環境｜図書館貸出冊数",
+      "title": "図書館貸出冊数",
       "rankingKeys": [
         "library-lending-books"
       ],
@@ -624,7 +624,7 @@
     },
     {
       "key": "candidate-114-1",
-      "title": "博物館・美術館の供給と利用｜登録博物館の入館者数",
+      "title": "登録博物館の入館者数",
       "rankingKeys": [
         "registered-museum-visitors"
       ],
@@ -634,7 +634,7 @@
     },
     {
       "key": "candidate-114-2",
-      "title": "博物館・美術館の供給と利用｜指定施設の入館者数",
+      "title": "指定施設の入館者数",
       "rankingKeys": [
         "designated-museum-visitors"
       ],
@@ -644,7 +644,7 @@
     },
     {
       "key": "candidate-114-3",
-      "title": "博物館・美術館の供給と利用｜博物館類似施設の入館者数",
+      "title": "博物館類似施設の入館者数",
       "rankingKeys": [
         "museum-like-facility-visitors"
       ],
@@ -654,7 +654,7 @@
     },
     {
       "key": "candidate-114-4",
-      "title": "博物館・美術館の供給と利用｜博物館総数",
+      "title": "博物館総数",
       "rankingKeys": [
         "total-museum-count"
       ],
@@ -664,7 +664,7 @@
     },
     {
       "key": "candidate-114-5",
-      "title": "博物館・美術館の供給と利用｜美術博物館数",
+      "title": "美術博物館数",
       "rankingKeys": [
         "art-museum-count"
       ],
@@ -674,7 +674,7 @@
     },
     {
       "key": "candidate-116-1",
-      "title": "文化財の指定・保護と所在地｜県指定等文化財件数",
+      "title": "県指定等文化財件数",
       "rankingKeys": [
         "prefecture-designated-cultural-property-count"
       ],
@@ -684,7 +684,7 @@
     },
     {
       "key": "candidate-116-2",
-      "title": "文化財の指定・保護と所在地｜県政府の文化財保護経費",
+      "title": "県政府の文化財保護経費",
       "rankingKeys": [
         "prefectural-cultural-property-protection-expenditure"
       ],
@@ -694,7 +694,7 @@
     },
     {
       "key": "candidate-116-3",
-      "title": "文化財の指定・保護と所在地｜埋蔵文化財専門職員数",
+      "title": "埋蔵文化財専門職員数",
       "rankingKeys": [
         "buried-cultural-property-specialist-count"
       ],

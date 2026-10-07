@@ -355,7 +355,7 @@
     },
     {
       "key": "candidate-98-1",
-      "title": "FIT・FIPの再エネ導入設備容量｜FIT・FIP導入設備容量の合計",
+      "title": "FIT・FIP導入設備容量の合計",
       "rankingKeys": [
         "fit-fip-installed-capacity"
       ],
@@ -365,7 +365,7 @@
     },
     {
       "key": "candidate-98-2",
-      "title": "FIT・FIPの再エネ導入設備容量｜制度開始後の新規認定分の導入容量",
+      "title": "制度開始後の新規認定分の導入容量",
       "rankingKeys": [
         "fit-fip-new-approved-installed-capacity"
       ],
@@ -375,7 +375,7 @@
     },
     {
       "key": "candidate-98-3",
-      "title": "FIT・FIPの再エネ導入設備容量｜旧制度から移行した設備の導入容量",
+      "title": "旧制度から移行した設備の導入容量",
       "rankingKeys": [
         "fit-transition-installed-capacity"
       ],
@@ -385,7 +385,7 @@
     },
     {
       "key": "candidate-99-1",
-      "title": "地域のCO₂排出量推計｜地域のCO₂排出量推計・合計",
+      "title": "地域のCO₂排出量推計・合計",
       "rankingKeys": [
         "regional-co2-emissions-estimate"
       ],
@@ -395,7 +395,7 @@
     },
     {
       "key": "candidate-99-2",
-      "title": "地域のCO₂排出量推計｜産業部門のCO₂推計",
+      "title": "産業部門のCO₂推計",
       "rankingKeys": [
         "regional-industry-co2-emissions-estimate"
       ],
@@ -405,7 +405,7 @@
     },
     {
       "key": "candidate-99-3",
-      "title": "地域のCO₂排出量推計｜業務その他部門のCO₂推計",
+      "title": "業務その他部門のCO₂推計",
       "rankingKeys": [
         "regional-business-co2-emissions-estimate"
       ],
@@ -415,7 +415,7 @@
     },
     {
       "key": "candidate-99-4",
-      "title": "地域のCO₂排出量推計｜家庭部門のCO₂推計",
+      "title": "家庭部門のCO₂推計",
       "rankingKeys": [
         "regional-household-co2-emissions-estimate"
       ],
@@ -425,7 +425,7 @@
     },
     {
       "key": "candidate-99-5",
-      "title": "地域のCO₂排出量推計｜運輸部門のCO₂推計（航空を除く）",
+      "title": "運輸部門のCO₂推計（航空を除く）",
       "rankingKeys": [
         "regional-transport-co2-emissions-estimate"
       ],
@@ -435,7 +435,7 @@
     },
     {
       "key": "candidate-99-6",
-      "title": "地域のCO₂排出量推計｜一般廃棄物焼却のCO₂推計",
+      "title": "一般廃棄物焼却のCO₂推計",
       "rankingKeys": [
         "regional-waste-co2-emissions-estimate"
       ],

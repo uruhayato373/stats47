@@ -210,7 +210,7 @@
     },
     {
       "key": "candidate-119-1",
-      "title": "休養・くつろぎの時間｜男性の休養・くつろぎ時間（週全体総平均・分/日）",
+      "title": "男性の休養・くつろぎ時間（週全体総平均・分/日）",
       "rankingKeys": [
         "relaxation-avg-time-male"
       ],
@@ -220,7 +220,7 @@
     },
     {
       "key": "candidate-119-2",
-      "title": "休養・くつろぎの時間｜女性の休養・くつろぎ時間（週全体総平均・分/日）",
+      "title": "女性の休養・くつろぎ時間（週全体総平均・分/日）",
       "rankingKeys": [
         "relaxation-avg-time-female"
       ],
@@ -230,7 +230,7 @@
     },
     {
       "key": "candidate-115-1",
-      "title": "文化・趣味への参加と使う時間｜有業男性の趣味・娯楽時間（週全体総平均・分/日）",
+      "title": "有業男性の趣味・娯楽時間（週全体総平均・分/日）",
       "rankingKeys": [
         "hobby-leisure-avg-time-employed-male"
       ],
@@ -240,7 +240,7 @@
     },
     {
       "key": "candidate-115-2",
-      "title": "文化・趣味への参加と使う時間｜有業女性の趣味・娯楽時間（週全体総平均・分/日）",
+      "title": "有業女性の趣味・娯楽時間（週全体総平均・分/日）",
       "rankingKeys": [
         "hobby-leisure-avg-time-employed-female"
       ],
