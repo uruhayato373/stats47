@@ -26,6 +26,7 @@
  *   { "pass": true|false, "checks": {...}, "warnings": [...], "blockers": [...] }
  */
 
+import { spawnSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -669,6 +670,33 @@ if (fs.existsSync(reviewPath)) {
 }
 checks.published = isPublished;
 checks.criticReviewed = hasCriticPass;
+
+// ============================================================================
+// 背景: 送り箱の記事に、今の内容に合うサムネイル背景があるか ★push 前に止める
+// ============================================================================
+// 2026-10-07: 書き直しでタイトルを変えた 5 記事は、公開済みの AI 背景の prompt が合わなくなり、
+// push 後の公開 run のサムネイル検査で初めて止まった (公開時は skip される)。判定は公開時と同じ
+// 規則 (apps/web/scripts/lib/blog-background-status.ts) を TS の CLI で呼ぶ。R2 を読めないときは warning。
+const isOutboxDraft = articlePath.split(path.sep).includes('21_ブログ記事原稿');
+if (isPublished && isOutboxDraft) {
+  const run = spawnSync(
+    'npx',
+    ['tsx', path.join(PROJECT_ROOT, 'apps/web/scripts/check-blog-background.ts'), '--article', articlePath],
+    { cwd: PROJECT_ROOT, encoding: 'utf8', timeout: 120_000 }
+  );
+  let status = null;
+  try {
+    status = JSON.parse((run.stdout || '').trim().split('\n').pop() || 'null');
+  } catch {
+    status = null;
+  }
+  checks.background = status?.kind ?? 'unchecked';
+  if (status?.ok === false) {
+    blockers.push(`背景: ${status.message}`);
+  } else if (status?.ok !== true) {
+    warnings.push(`背景: ${status?.message ?? '背景の検査を実行できませんでした'}`);
+  }
+}
 if (isPublished && !hasCriticPass) {
   blockers.push(
     'critic レビュー未通過: 公開記事は blog-critic の review.md (verdict: PASS, 実体200字以上) が必須。' +

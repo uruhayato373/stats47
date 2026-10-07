@@ -32,6 +32,7 @@ import {
   parseBlogArticleImageContext,
   resolveArticleBackgroundSource,
 } from './lib/blog-article-background';
+import { backgroundRecord } from './lib/blog-background-status';
 import { resolveCodexBackgroundSource } from './lib/blog-codex-background-workflow';
 import {
   BLOG_IMAGE_PUBLISH_PLAN,
@@ -239,20 +240,6 @@ async function readRemoteShaMetadata(key: string): Promise<string | null> {
     throw new Error(`R2 HEAD failed: ${key}: HTTP ${response.status}`);
   }
   return response.headers.get('x-amz-meta-stats47-sha256');
-}
-
-function backgroundRecord(value: unknown): Record<string, unknown> | null {
-  if (!value || typeof value !== 'object' || Array.isArray(value)) return null;
-  const root = value as Record<string, unknown>;
-  const metadata =
-    root.metadata && typeof root.metadata === 'object'
-      ? (root.metadata as Record<string, unknown>)
-      : root;
-  return metadata.background &&
-    typeof metadata.background === 'object' &&
-    !Array.isArray(metadata.background)
-    ? (metadata.background as Record<string, unknown>)
-    : null;
 }
 
 async function readReusableAiBackground(options: {
