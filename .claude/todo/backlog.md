@@ -2582,10 +2582,14 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
   1 本の記事に 2 つの年が並ぶ。検査 (`article-factual-check.mjs`) は記事内の data JSON とだけ比べる。③ 計算型 metric: sync-snapshots の
   `ranking-items` が `calculated-stats` より先に走るので、`item.latestYear` が 1 回分遅れる (`run.sh`)。④ テーマの年固定の比較カード
   (`comparisonYear`): 新しい年が来ても固定のまま (設計どおりだが、単年の延長で推移を描けるようになった指標もある → `THEME-SINGLE-YEAR-CARDS-01`)。
-- **次**: ① キューの `classify` で、解説の年と `item.latestYear` が違えば `needs-regen` にする (作り直しの件数と費用を先に出す)。
-  ② ブログは data JSON の年が `item.latestYear` より古い記事を一覧にし、brushup の候補へ回す (記事の年は本文と揃っているので勝手に書き換えない)。
-  ③ `run.sh` の順を `calculated-stats` → `ranking-items` にできるか (calculated-stats が item を読むか) を確かめて直す。
-  ④ `comparisonYear` のカードは `THEME-SINGLE-YEAR-CARDS-01` の振り分けで扱う。
+- **実装 (2026-10-07・PR #1095 / #1096、draft)**: ① AI 解説はキューが解説の yearCode と values の最新年を比べ、違えば
+  `needs-regen` (reason `stale-year`) に戻す (初回実測で GSC 流入 1,504 件中 43 件)。③ `calculated-stats` を `ranking-items` の前へ移した。
+  ② ブログは blog snapshot に記事が使う指標と図の年 (`rankingRefs`) と逆引き `rankingArticleIndex` を焼き、日次で図の年が古い記事を
+  `data/blog/stale-data-years.{json,md}` に出す (次の sync-snapshots の blog task から有効)。同じ索引で、ランキング・テーマ・エリア・ブログを
+  「同じ指標を使う」関係で互いにつないだ (#1096。第四分類軸ではなく参照関係として `03_情報設計.md` に節を足した)。
+- **次**: ① #1095 → #1096 の順にマージし、sync-snapshots の blog task 後に `stale-data-years.md` の件数と、ランキングの関連記事が出ることを確かめる。
+  ② 図の年が古い記事のデータを取り直す手順 (`fetch-ranking-data-r2.mjs` → `generate-article-charts.ts` → 本文の年と数値の書き直し → critic) を
+  brushup か別の skill に持たせる (今の brushup はデータを取り直さない)。③ `comparisonYear` のカードは `THEME-SINGLE-YEAR-CARDS-01` の振り分けで扱う。
 - **完了条件**: 新しい年が R2 に入った翌週に、AI 解説が新しい年で作り直しの対象になり、古い年のブログ記事が一覧に出て、計算型の
   ランキングが 1 回の data-refresh で新しい年を表示する。
 
