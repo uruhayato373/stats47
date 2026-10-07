@@ -1,7 +1,7 @@
 {
-  "hash": "353f11bef5d3c45977b742cc890606b7b96c3edb7bf74851cb444ab950164d0d",
-  "audited_at": "2026-10-07T03:24:24",
+  "hash": "05e4bc45dd13bce30da74687c3624b6a7a708849c3c0519d655f1b4376eb3329",
+  "audited_at": "2026-10-07T13:08:12",
   "files": [
-    ".claude/rules/blog-quality-standards.md"
+    ".claude/scripts/lib/internal-link-lint.mjs"
   ]
 }
