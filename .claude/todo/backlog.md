@@ -413,6 +413,30 @@ updated: 2026-10-06
 - **完了条件**: PR で catalog の componentType を変えたとき、その PR の E2E が新しい図の種類で `data-data-state="ready"` を確かめられ、
   consumer-prices の `representativeTypes` に `cpi-heatmap` を戻しても PR の時点で通る。
 
+### [DATA-REFRESH-MUNI-FETCH-RETRY-01] 市区町村ランキングの生成が R2 取得 1 回の通信エラーでタスクごと落ちる
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:npx vitest run packages/ranking/src/scripts] [起票:2026-10-08] [領域:データ]
+
+- **事実**: data-refresh run 37693107860 (Issue #1101) の手順 10 で `municipality-ranking` が `fetch failed` で止まった。
+  `number-of-establishments-information-communication` まで 144 key を書いた直後で、HTTP 状態は出ていない (Node の fetch が接続段階で失敗したときの文言)。
+  同じ run の他の 13 task は成功し、push もエラー 0 で終わった。次の key の元データ `app/stats/number-of-establishments-manufacturing/cities.json` は
+  直後に取り直すと 200 (596 KB) だった。`generate-municipality-ranking.ts` は 212 key の `cities.json` を 1 本ずつ取り、再試行を持たない。
+  今回の変更 (都道府県の 12 指標) は市区町村カタログ (`municipality-catalog.ts`) にも `cities.json` にも触れていない。
+- **次**: `generateForKey` の取得に、接続失敗と 5xx だけを数回 (間隔を空けて) 再試行する処理を足す。4xx と識別子の不一致は今どおり即失敗にする。
+  再試行を足したら `sync-snapshots` を `only=municipality-ranking` で 1 回走らせて成功を確かめる。
+- **完了条件**: 一時的な接続失敗を模したテストで再試行後に成功し、4xx では再試行しないことをテストが固定している。Issue #1101 が次の data-refresh の成功で閉じている。
+
+### [DATA-REFRESH-DERIVED-FROM-DEVELOP-01] develop への push で起動した data-refresh が、未リリースの develop から派生 snapshot を作って本番 R2 に出す
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-08] [領域:データ]
+
+- **事実 (2026-10-08)**: `data-refresh.yml` は push 起動のとき `ref: github.ref_name` (= develop) を checkout し、手順 10 で派生 snapshot を scope all で作り直して R2 へ push する。
+  run 37693107860 の後、本番 R2 の `app/page-components/theme/{tourism,consumer-prices}.json` は develop の
+  `apps/web/scripts/data/page-components/theme/*.json` と一致した。main のコードはまだ変更前のカタログで、PR #1100 のマージ前だった。
+  `sync-snapshots.yml` は main を checkout する設計なので、同じ R2 に main 由来と develop 由来の書き手が混ざっている。
+  今回は本番の 2 テーマが 200 でエラー表示も無かったが、develop の page-components や ranking-items が壊れていれば、デプロイ前に本番が壊れる。
+- **次**: push 起動でも派生 snapshot は main を checkout して作る (観測値の取得だけ develop の metric config を使う) か、手順 10 の scope を
+  観測値に依存する task だけに絞るかを決める。どちらでも、`branch-workflow.md` の「本番は main」の前提と揃える。
+- **完了条件**: develop への push で起動した data-refresh の後、本番 R2 の page-components と ranking items が main の内容のままである (未マージの変更で比べて確かめる)。
+
 ### [SEO-CTR-CANDIDATES-01] 取りこぼしクリックの大きい 7 ページを search-growth に渡し、食い合いの 2 組を先に確かめる
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-07] [期日:2026-10-25] [領域:サイト]
 
@@ -3161,6 +3185,12 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
   (物価 9 指標 564 行 = 47 県 × 2013〜2024、客室稼働率・実宿泊者数 752 行 = 47 × 2009〜2024、ホテル営業施設数 987 行 = 47 × 1997〜2017)。
   PR #1100 の pr-quality-check はコード変更の最後の commit (4e21dd945) で全 job 成功。localhost の 5 幅確認は崩れなし
   (実宿泊者数のカードは ranking-items、物価のヒートマップは page-components の R2 反映後に出る)。
+- **2026-10-08 派生 snapshot も R2 に反映済み**: run 37693107860 の手順 10 が develop から page-components と ranking-items を作って push していた
+  (本番 R2 の 2 テーマの page-components は develop の生成物と一致、`app/ranking/actual-overnight-guests/item.json` は 200)。
+  手順 10 の `municipality-ranking` だけが一時的な通信エラーで落ちた (今回の変更とは無関係。`DATA-REFRESH-MUNI-FETCH-RETRY-01`)。
+  develop から派生物が出る経路は `DATA-REFRESH-DERIVED-FROM-DEVELOP-01` に起票した。キー一覧 (KNOWN / SITEMAP) は sync-ranking-keys の keys PR を待たず
+  develop で再生成した (追加 13 件・削除 0)。**残り**: PR #1100 をマージ → 本番で 2 テーマと `/ranking/actual-overnight-guests` を確かめる →
+  ranking-items の sync-snapshots を 1 回走らせ、新キーの OGP 画像の生成と keys PR が差分なしになることを確かめる。
 - **停止条件**: 承認前は `data/themes/catalogs/` と metric config を編集しない。公開 (main へのマージ・R2 反映) は別に承認を取る。
 - **完了条件**: 2 テーマの提案の status が `implemented-pending-release` 以降になり、本番で提案どおりの章・カード・図が出ている。
 
