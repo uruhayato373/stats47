@@ -21,12 +21,13 @@ import { join } from "node:path";
 import { PROJECT_ROOT, parseWeekArg } from "./lib/auth.mjs";
 import { jstDateOf, isoWeekOf, addDays } from "./lib/periods.mjs";
 import { SUMMARY_FILE } from "./lib/weekly-summary.mjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const SNAPSHOT_DIRS = {
-  gsc: "data/gsc/snapshots",
-  ga4: "data/ga4/snapshots",
+  gsc: datasetDir("gsc.snapshots"),
+  ga4: datasetDir("ga4.snapshots"),
 };
-const NSM_DIR = "data/nsm/weekly-snapshots";
+const NSM_DIR = datasetDir("business.nsm-weekly");
 
 function getArgNum(flag) {
   const i = process.argv.indexOf(flag);

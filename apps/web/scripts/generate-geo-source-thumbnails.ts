@@ -41,6 +41,7 @@ import type {
 } from '@stats47/types';
 import type { Feature, FeatureCollection } from 'geojson';
 import type { GeometryObject, Topology } from 'topojson-specification';
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const root = process.cwd();
 const stageRoot = '.local/image-staging/geo-thumbnails';
@@ -285,7 +286,7 @@ async function main() {
       2
     )
   );
-  const statePath = join(root, 'data/geo/source-thumbnails.json');
+  const statePath = join(root, `${datasetDir("geo.sources")}/source-thumbnails.json`);
   const previous = existsSync(statePath)
     ? (readJson(statePath) as { items: Record<string, unknown> })
     : { items: {} };

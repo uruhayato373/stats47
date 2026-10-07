@@ -34,7 +34,7 @@ import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = resolve(__dirname, "../../..");
-const STATE_DIR = resolve(PROJECT_ROOT, "data/affiliate");
+const STATE_DIR = resolve(PROJECT_ROOT, datasetDir("affiliate.audits"));
 const GA4_SNAPSHOT_DIR = datasetDir("ga4.affiliate-snapshots");
 const OUT_PATH = resolve(STATE_DIR, "affiliate-operations-latest.json");
 
@@ -59,7 +59,7 @@ function latestGa4Snapshot(): { data: any; relPath: string } | null {
   if (existsSync(liveDir)) {
     for (const n of readdirSync(liveDir)) {
       const m = /^(\d{4}-\d{2}-\d{2})\.json$/.exec(n);
-      if (m) candidates.push({ date: m[1], abs: resolve(liveDir, n), relPath: `data/affiliate/live/ga4-affiliate/${n}` });
+      if (m) candidates.push({ date: m[1], abs: resolve(liveDir, n), relPath: `${datasetDir("affiliate.audits")}/live/ga4-affiliate/${n}` });
     }
   }
   candidates.sort((a, b) => a.date.localeCompare(b.date));
@@ -116,13 +116,13 @@ function main(): void {
   const state = buildOperationsState({
     nowIso,
     inventory,
-    inventoryPath: inventory ? "data/affiliate/inventory-latest.json" : null,
+    inventoryPath: inventory ? `${datasetDir("affiliate.inventory")}/inventory-latest.json` : null,
     ga4: ga4?.data ?? null,
     ga4Path: ga4?.relPath ?? null,
     compliance,
     experiments,
     measurementGate,
-    portfolio: portfolio ? { ...portfolio, snapshotPath: "data/affiliate/affiliate-portfolio-latest.json" } : null,
+    portfolio: portfolio ? { ...portfolio, snapshotPath: `${datasetDir("affiliate.placement-baseline")}/affiliate-portfolio-latest.json` } : null,
   });
 
   const errors = validateOperationsState(state);

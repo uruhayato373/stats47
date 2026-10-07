@@ -20,12 +20,13 @@
 import * as path from "path";
 import * as fs from "fs";
 import { fileURLToPath } from "url";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
 const INDEX_PATH = path.join(
   PROJECT_ROOT,
-  "data/sns/metric-discovery-index.json",
+  `${datasetDir("sns.drafts")}/metric-discovery-index.json`,
 );
 const SYNONYMS_PATH = path.join(__dirname, "news-synonyms.json");
 

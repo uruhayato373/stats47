@@ -43,8 +43,9 @@ import {
   shouldReviewAbsentStatus,
   zipNamesWithIds,
 } from "./lib/affiliate-status-core.mjs";
+import { datasetPath } from "../../../config/datasets.mjs";
 
-const CATALOG = join(repoRoot(), "data/affiliate/affiliate-catalog.json");
+const CATALOG = join(repoRoot(), datasetPath("affiliate.catalog"));
 
 /**
  * 指定 ASP について、台帳が既に持っている「ID → name」を返す。

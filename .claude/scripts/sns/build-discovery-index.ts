@@ -17,11 +17,12 @@ import {
   resolveRankingHook,
   resolveRankingReaderLabel,
 } from "../../../packages/data-configs/src/prominence/resolve-ranking-hook";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
 const OUTPUT_PATH = path.join(
   PROJECT_ROOT,
-  "data/sns/metric-discovery-index.json",
+  `${datasetDir("sns.drafts")}/metric-discovery-index.json`,
 );
 
 interface DiscoveryEntry {

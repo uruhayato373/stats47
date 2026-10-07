@@ -47,6 +47,7 @@ import {
   measurementRow,
 } from "./lib/journey-ga4-reports.mjs";
 import { GA4_PROPERTY_ID } from "../lib/site-config.cjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const DEFAULT_PROPERTY_ID = GA4_PROPERTY_ID;
 const SCOPES = ["https://www.googleapis.com/auth/analytics.readonly"];
@@ -136,7 +137,7 @@ async function main() {
   const periods = resolvePeriods({ source: "ga4", week });
   const rollingRange = [{ startDate: periods.rolling28d.periodStart, endDate: periods.rolling28d.periodEnd }];
 
-  const outDir = join(PROJECT_ROOT, "data/ga4/snapshots", week);
+  const outDir = join(PROJECT_ROOT, datasetDir("ga4.snapshots"), week);
   mkdirSync(outDir, { recursive: true });
 
   const auth = new google.auth.GoogleAuth({ keyFile, scopes: SCOPES });

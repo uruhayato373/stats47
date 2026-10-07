@@ -16,9 +16,10 @@
 import { writeFileSync, mkdirSync, readFileSync, existsSync } from "node:fs";
 import { join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const PROJECT_ROOT = resolve(fileURLToPath(import.meta.url), "..", "..", "..", "..");
-const SNAPSHOTS_DIR = join(PROJECT_ROOT, "data/cloudflare/snapshots");
+const SNAPSHOTS_DIR = join(PROJECT_ROOT, datasetDir("cloudflare.snapshots"));
 
 function loadEnv() {
   const envPath = join(PROJECT_ROOT, ".env.local");

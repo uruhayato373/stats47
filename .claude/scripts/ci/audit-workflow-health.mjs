@@ -24,11 +24,12 @@ import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
 import { evaluateAll, formatReport, isScheduled } from "../lib/workflow-health-core.mjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, "..", "..", "..");
 const WORKFLOW_DIR = path.join(ROOT, ".github/workflows");
-const STATE_DIR = path.join(ROOT, "data/ci");
+const STATE_DIR = path.join(ROOT, datasetDir("ci.health"));
 
 function arg(name, fallback) {
   const i = process.argv.indexOf(`--${name}`);

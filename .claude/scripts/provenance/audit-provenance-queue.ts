@@ -16,10 +16,11 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { METRICS_REGISTRY } from "@stats47/data-configs/registry";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, "../../..");
-const STATE_DIR = resolve(ROOT, "data/provenance");
+const STATE_DIR = resolve(ROOT, datasetDir("provenance.queue"));
 const CHECK = process.argv.includes("--check");
 
 type Klass = "A" | "A'" | "B" | "C" | "D";
@@ -132,7 +133,7 @@ function classify(key: string, cfg: unknown): Entry {
 
 function readBlogLineage(): { total: number; byStatus: Record<string, number> } | null {
   try {
-    const p = resolve(ROOT, "data/blog/svg-lineage-queue.json");
+    const p = resolve(ROOT, `${datasetDir("blog.operations")}/svg-lineage-queue.json`);
     const d = JSON.parse(readFileSync(p, "utf8"));
     return { total: d.total, byStatus: d.byStatus };
   } catch {
@@ -200,7 +201,7 @@ function main() {
 
   console.log(`provenance 棚卸し: metric ${entries.length} 件`);
   console.log(`  クラス分布: ${Object.entries(byClass).map(([k, v]) => `${k}=${v}`).join(" ")}`);
-  console.log(`  是正対象 (C欠落+D): ${needsWork.length} 件 → data/provenance/LATEST.md`);
+  console.log(`  是正対象 (C欠落+D): ${needsWork.length} 件 → ${datasetDir("provenance.queue")}/LATEST.md`);
 
   if (CHECK && needsWork.filter((e) => e.klass === "D").length > 0) {
     console.error(`\n❌ D クラス (出典不明) が ${needsWork.filter((e) => e.klass === "D").length} 件`);

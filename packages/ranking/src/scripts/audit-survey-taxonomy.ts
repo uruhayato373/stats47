@@ -30,6 +30,7 @@ import {
   type SurveySurfaceStatus,
 } from '../survey/survey-taxonomy';
 import { SITE } from '@stats47/types';
+import { datasetDir } from "../../../../config/datasets.mjs";
 
 interface BlogSnapshotArticle {
   slug: string;
@@ -96,7 +97,7 @@ const ROOT = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
   '../../../..'
 );
-const STATE_PATH = path.join(ROOT, 'data/surveys/taxonomy.json');
+const STATE_PATH = path.join(ROOT, `${datasetDir("surveys.portfolio")}/taxonomy.json`);
 const RATCHET_PATH = path.join(
   ROOT,
   '.claude/config/survey-taxonomy-ratchet.json'

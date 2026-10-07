@@ -31,10 +31,11 @@ import { fileURLToPath } from "node:url";
 
 import { getSurveyEditorialContent } from "../../../apps/web/src/features/survey/survey-editorial";
 import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
-const STATE_DIR = path.join(PROJECT_ROOT, "data/surveys");
+const STATE_DIR = path.join(PROJECT_ROOT, datasetDir("surveys.portfolio"));
 const REVIEW_DIR = path.join(
   PROJECT_ROOT,
   ".claude/skills/survey/manage-survey-portfolio/reference/reviews",

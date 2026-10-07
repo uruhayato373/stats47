@@ -52,10 +52,11 @@ import {
   type ReingestAssessment,
 } from "../src/reingest-need";
 import { SITE } from "@stats47/types";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
-const STATE_DIR = path.join(PROJECT_ROOT, "data/data-quality");
+const STATE_DIR = path.join(PROJECT_ROOT, datasetDir("data-quality.state"));
 const R2 = process.env.R2_PUBLIC_FETCH_URL || SITE.r2PublicBaseUrl;
 
 const args = process.argv.slice(2);

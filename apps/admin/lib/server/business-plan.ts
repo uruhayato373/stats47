@@ -16,6 +16,7 @@ import {
   wrap,
   type Wrapped,
 } from "./state-io";
+import { datasetDir, datasetPath } from "../../../../config/datasets.mjs";
 
 interface SocialPostState {
   posts: Array<{
@@ -237,7 +238,7 @@ export function businessPlanAdminData(): BusinessPlanAdminData {
     })
   );
   const state = wrap(() =>
-    readJson<BusinessPlanState>("data/business-plan/latest.json")
+    readJson<BusinessPlanState>(`${datasetDir("business-plan.state")}/latest.json`)
   );
   const gisCatalog = wrap(() =>
     readJson<GisCatalogState>(".local/r2/app/geo/data-catalog/items.json")
@@ -246,7 +247,7 @@ export function businessPlanAdminData(): BusinessPlanAdminData {
     BUSINESS_PLAN_2026.m1.xPosts.map((post) => post.contentKey)
   );
   const x = wrap(() => {
-    const posts = readJson<SocialPostState>("data/sns/posts.json").posts.filter(
+    const posts = readJson<SocialPostState>(datasetPath("sns.posts")).posts.filter(
       (post) =>
         post.platform === "x" &&
         post.content_key !== null &&

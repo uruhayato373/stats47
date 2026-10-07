@@ -10,9 +10,9 @@ import { resolve } from "node:path";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
 
-import { AGENT_STATE, DATASETS, GOVERNED, IGNORED_NAMES, IMAGE_EXT, IMAGE_ROOTS, KINDS, TARGETS, datasetDir, datasetPath } from "../../../../config/datasets.mjs";
+import { AGENT_STATE, DATASETS, GOVERNED, IGNORED_NAMES, IMAGE_EXT, IMAGE_ROOTS, KINDS, RETIRED, TARGETS, datasetDir, datasetPath } from "../../../../config/datasets.mjs";
 import { DOMAINS } from "../../../../config/paths.mjs";
-import { checkDatasets, findRetiredReferences, patternToRegExp } from "../check-datasets.mjs";
+import { checkDatasets, dataLiteralHits, dataTops, findDataPathLiterals, findRetiredReferences, patternToRegExp, retiredHits } from "../check-datasets.mjs";
 import { RETENTION_POLICIES } from "../prune-state-snapshots.mjs";
 
 const ROOT = resolve(fileURLToPath(new URL("../../../..", import.meta.url)));
@@ -184,4 +184,51 @@ test(".claude/state/ を指す行は AGENT_STATE の許可リストに無けれ�
       "AGENT_STATE に台帳に無い id: agent.gone",
     ],
   );
+});
+
+// 2026-10-07: 作業カードの完了条件が旧パスの git diff を指したまま残り、空の差分で合格に見えた。
+// 手順書だけでなく作業カード・文書・memory の旧パスも止め、当時のパスを残す履歴だけは対象外にする
+test("作業カード・文書・memory の旧パスも落ち、旧パスと書いた経緯の行だけ通す", () => {
+  const retired = [{ from: ".claude/state/metrics/foo", to: "data/foo", since: "2026-10-06" }];
+  const errors = findRetiredReferences(retired, [
+    { file: ".claude/todo/backlog.md", line: 3, text: "- **完了条件**: `git diff -- .claude/state/metrics/foo/history.csv` に削除行が無い" },
+    { file: "docs/01_技術設計/x.md", line: 4, text: "計測は .claude/state/metrics/foo/ に置く" },
+    { file: ".claude/memory/y.md", line: 5, text: "当時の旧パス `.claude/state/metrics/foo/` を上書きしていた" },
+  ]);
+  assert.deepEqual(errors, [
+    "旧置き場の参照: .claude/todo/backlog.md:3 (.claude/state/metrics/foo → data/foo)",
+    "旧置き場の参照: docs/01_技術設計/x.md:4 (.claude/state/metrics/foo → data/foo)",
+  ]);
+});
+
+test("実リポジトリに旧置き場の参照が残っていない (履歴を除く)", () => {
+  const hits = retiredHits();
+  assert.ok(!hits.some((h) => /^data\/|\/reference\/(?:audits|reviews|reports)\//.test(h.file)), "履歴の除外が効いていない");
+  assert.deepEqual(findRetiredReferences(RETIRED, hits), []);
+});
+
+// 2026-10-07: コードに data/ の直書きが 230 ファイル・500 か所あり、置き場を移すたびに手で探して直していた。
+// 台帳の id で引けば、次に移すときは台帳の 1 行を変えるだけで済む
+test("コードの data/ 直書きは落ち、テスト・コメント・import・別ディレクトリの data/ は通す", () => {
+  const errors = findDataPathLiterals(["gsc", "sns"], [
+    { file: ".claude/scripts/a.mjs", line: 1, text: 'const p = path.join(ROOT, "data/gsc/history.csv");' },
+    { file: ".claude/scripts/b.mjs", line: 2, text: "console.log(`wrote data/sns/posts.json`);" },
+    { file: ".claude/scripts/lib/c.cjs", line: 3, text: 'const S = path.resolve(__dirname, "../../../data/sns/posts.json");' },
+    { file: ".claude/scripts/d.mjs", line: 4, text: "// data/gsc/history.csv を読む" },
+    { file: ".claude/scripts/e.mjs", line: 5, text: "import schema from '../../data/gsc/x.schema.json' with { type: 'json' };" },
+    { file: ".claude/scripts/lib/__tests__/f.test.mjs", line: 6, text: 'assert.equal(p, "data/gsc/history.csv");' },
+    { file: "packages/ranking/src/exporters/g.ts", line: 7, text: 'path.resolve(__dirname, "../data/sns.json")' },
+    { file: ".claude/scripts/h.mjs", line: 8, text: 'const q = "metadata/gsc/x";' },
+  ]);
+  assert.deepEqual(errors.map((e) => e.replace(/ \(.*$/, "")), [
+    "data/ の直書き: .claude/scripts/a.mjs:1",
+    "data/ の直書き: .claude/scripts/b.mjs:2",
+    "data/ の直書き: .claude/scripts/lib/c.cjs:3",
+  ]);
+});
+
+test("実リポジトリのコードに data/ の直書きが残っていない", () => {
+  const tops = dataTops(DATASETS);
+  assert.ok(tops.includes("gsc") && tops.includes("sns"), "台帳から data/ の第 1 階層を取れていない");
+  assert.deepEqual(findDataPathLiterals(tops, dataLiteralHits(tops)), []);
 });

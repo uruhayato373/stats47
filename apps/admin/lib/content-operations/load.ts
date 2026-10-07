@@ -39,6 +39,7 @@ import {
   type SourceEvidenceInventory,
 } from './reference';
 import { referenceExpansionPlans } from '../server/reference-expansion-plans';
+import { datasetDir, datasetPath } from "../../../../config/datasets.mjs";
 
 function readJson(root: string, rel: string): unknown {
   return JSON.parse(fs.readFileSync(path.join(root, rel), 'utf8'));
@@ -245,7 +246,7 @@ function loadNoteOutbox(root: string) {
 }
 
 function loadNoteGenerationBlockers(root: string) {
-  const rel = 'data/content-operations/note-generation-blockers.json';
+  const rel = datasetPath("content.note-blockers");
   const raw = readOptionalJson(root, rel) as {
     blockers?: Record<
       string,
@@ -328,23 +329,23 @@ export function loadContentOperations(
   generatedAt = new Date().toISOString()
 ): ContentOperationsResponse {
   const social = ContentSocialPostsState.parse(
-    readJson(root, 'data/sns/posts.json')
+    readJson(root, datasetPath("sns.posts"))
   );
   const kdp = ContentKdpListingsState.parse(
     readJson(root, KDP_LISTINGS)
   );
   const kindleBuild = ContentKindleBuildState.parse(
-    readJson(root, 'data/products/kindle-status.json')
+    readJson(root, `${datasetDir("kindle.archives")}/kindle-status.json`)
   );
   const kindleArchivesRaw = readOptionalJson(
     root,
-    'data/products/kindle-archives.json'
+    datasetPath("kindle.archives")
   );
   const kindleArchives = kindleArchivesRaw
     ? ContentKindleArchiveState.parse(kindleArchivesRaw)
     : null;
   const noteDraftIndex = ContentNoteDraftIndex.parse(
-    readJson(root, 'data/note/note-draft-index.json')
+    readJson(root, datasetPath("note.draft-index"))
   );
   const inventories = REFERENCE_SOURCE_POLICIES.flatMap((policy) => {
     const raw = readOptionalJson(root, policy.statePath);

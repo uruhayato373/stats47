@@ -33,6 +33,10 @@ const REAL_BACKLOG_LIB = path.resolve(
   __dirname,
   "../../../../.claude/scripts/lib/backlog-lib.cjs",
 );
+// store は置き場を台帳 (config/datasets.mjs) から引くので、台帳と台帳が読む config/paths.mjs も実物をコピーする
+const REAL_CONFIG_FILES = ["datasets.mjs", "paths.mjs"].map((name) =>
+  path.resolve(__dirname, "../../../../config", name),
+);
 
 export interface SeedPost {
   id: number;
@@ -80,6 +84,9 @@ export function makeFixtureRoot(opts: FixtureOptions = {}): string {
   const libDir = path.join(root, ".claude/scripts/lib");
   fs.mkdirSync(libDir, { recursive: true });
   fs.copyFileSync(REAL_STORE, path.join(libDir, "sns-posts-store.cjs"));
+  const configDir = path.join(root, "config");
+  fs.mkdirSync(configDir, { recursive: true });
+  for (const file of REAL_CONFIG_FILES) fs.copyFileSync(file, path.join(configDir, path.basename(file)));
 
   // 3) posts.json seed
   const snsStateDir = path.join(root, "data/sns");

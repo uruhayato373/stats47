@@ -1,13 +1,14 @@
 import "server-only";
 
 import { cached, fileExists, readCsv, readJson, TTL } from "./state-io";
+import { datasetDir } from "../../../../config/datasets.mjs";
 
 // 週次全件の結果は R2 state/page-quality/ にあり、`npm run state:pull -- page-quality` で live/ に取得する。
 // live/ が無ければ git の代表URL結果 (page-quality:check) を読む。
-const LIVE_LATEST_PATH = "data/page-quality/live/latest.json";
-const LIVE_HISTORY_PATH = "data/page-quality/live/history.csv";
-const GIT_LATEST_PATH = "data/page-quality/metrics/latest.json";
-const GIT_HISTORY_PATH = "data/page-quality/metrics/history.csv";
+const LIVE_LATEST_PATH = `${datasetDir("page-quality.findings")}/live/latest.json`;
+const LIVE_HISTORY_PATH = `${datasetDir("page-quality.findings")}/live/history.csv`;
+const GIT_LATEST_PATH = `${datasetDir("page-quality.metrics")}/latest.json`;
+const GIT_HISTORY_PATH = `${datasetDir("page-quality.metrics")}/history.csv`;
 const pick = (live: string, git: string) => (fileExists(live) ? live : git);
 
 export type MetricValue = number | boolean | { value: null; reason: string } | undefined;

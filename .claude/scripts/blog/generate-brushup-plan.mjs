@@ -24,6 +24,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { execSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -55,7 +56,7 @@ const industryAvgCtr = (p) => {
 
 // 最新 GSC snapshot
 function findLatestSnapshot() {
-  const dir = path.join(PROJECT_ROOT, "data/gsc/snapshots");
+  const dir = path.join(PROJECT_ROOT, datasetDir("gsc.snapshots"));
   const weeks = fs.readdirSync(dir).filter((d) => /^\d{4}-W\d{2}$/.test(d));
   weeks.sort().reverse();
   return weeks[0];
@@ -64,7 +65,7 @@ function findLatestSnapshot() {
 const week = findLatestSnapshot();
 const pagesCsv = path.join(
   PROJECT_ROOT,
-  "data/gsc/snapshots",
+  datasetDir("gsc.snapshots"),
   week,
   "pages.csv"
 );
@@ -204,7 +205,7 @@ const totalExpectedLift = scheduled.reduce((sum, s) => sum + s.expectedLift, 0);
 
 if (!REPORT_ONLY) {
   // JSON output for routine consumption
-  const planPath = path.join(PROJECT_ROOT, "data/blog/auto-brushup-plan.json");
+  const planPath = path.join(PROJECT_ROOT, `${datasetDir("blog.operations")}/auto-brushup-plan.json`);
   fs.mkdirSync(path.dirname(planPath), { recursive: true });
   fs.writeFileSync(planPath, JSON.stringify(plan, null, 2));
   console.log(`✅ Plan saved: ${planPath}`);
@@ -269,7 +270,7 @@ for (const day of plan.days) {
 
 const reportPath = path.join(
   PROJECT_ROOT,
-  "data/blog/brushup-plan.md"
+  `${datasetDir("blog.operations")}/brushup-plan.md`
 );
 fs.mkdirSync(path.dirname(reportPath), { recursive: true });
 fs.writeFileSync(reportPath, reportLines.join("\n"));

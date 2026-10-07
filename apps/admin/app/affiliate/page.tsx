@@ -4,6 +4,7 @@ import { ErrorNote, Freshness, PageHeading } from "@/components/ops/primitives";
 import { affiliateResults, ZERO_CLICK_IMPRESSION_THRESHOLD } from "@/lib/server/affiliate";
 import { adsSummary } from "@/lib/server/ads";
 import { hasError } from "@/lib/server/state-io";
+import { datasetDir } from "../../../../config/datasets.mjs";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "アフィリエイト 成果 — stats47 admin" };
@@ -28,7 +29,7 @@ export default function AffiliateResultsPage() {
 
   return (
     <div className="space-y-8">
-      <PageHeading title="アフィリエイト 成果" source="data/affiliate/ + data/affiliate/" />
+      <PageHeading title="アフィリエイト 成果" source={`${datasetDir("affiliate.audits")}/ + ${datasetDir("affiliate.audits")}/`} />
 
       {hasError(r) ? (
         <ErrorNote error={r.error} />

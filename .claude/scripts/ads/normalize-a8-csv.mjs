@@ -47,10 +47,11 @@ import {
 } from "./lib/a8-report-csv.mjs";
 import { repoRoot } from "./lib/asp-browser-base.mjs";
 import { A8_REPORT_AUTOMATION } from "../../../config/paths.mjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const REPO_ROOT = repoRoot();
 const RAW_STATE_DIR = join(REPO_ROOT, ".local/a8-ui");
-const AFF_DIR = join(REPO_ROOT, "data/affiliate");
+const AFF_DIR = join(REPO_ROOT, datasetDir("affiliate.audits"));
 const REPORT_LOG = join(AFF_DIR, "a8-report-log.json");
 const RESULTS = join(AFF_DIR, "a8-results.json");
 const CONFIG_PATH = join(REPO_ROOT, A8_REPORT_AUTOMATION);

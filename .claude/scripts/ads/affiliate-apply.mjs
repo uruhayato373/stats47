@@ -59,8 +59,9 @@ import {
   buildEligibilityFingerprintMaterial,
   evaluateAffiliateEligibility,
 } from "./lib/affiliate-eligibility-core.mjs";
+import { datasetPath } from "../../../config/datasets.mjs";
 
-const CATALOG = join(repoRoot(), "data/affiliate/affiliate-catalog.json");
+const CATALOG = join(repoRoot(), datasetPath("affiliate.catalog"));
 
 // 頻度ガードは CommonJS (A8 側の check-a8-apply-budget.cjs と同じ形) なので require で読む。
 const { applyBudget, toJstDate } = createRequire(import.meta.url)("./check-asp-apply-budget.cjs");

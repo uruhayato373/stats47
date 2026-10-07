@@ -167,7 +167,7 @@ if [ -n "$STAGED_ANY" ]; then
     ERROR_COUNT=$((ERROR_COUNT + 1))
   fi
   if ! node "$GUARD_ROOT/.claude/scripts/lib/check-datasets.mjs"; then
-    echo -e "${RED}❌ 置き場の台帳違反 (台帳に無い記録・旧置き場の参照・画像の置き場違反)。.claude/rules/data-storage.md を参照。${NC}"
+    echo -e "${RED}❌ 置き場の台帳違反 (台帳に無い記録・旧置き場の参照・画像の置き場違反・コードの data/ 直書き)。.claude/rules/data-storage.md を参照。${NC}"
     ERROR_COUNT=$((ERROR_COUNT + 1))
   fi
   if ! node "$GUARD_ROOT/.claude/scripts/note/audit-note-image-assets.mjs" || ! node "$GUARD_ROOT/.claude/scripts/note/cover-assets.mjs" validate; then

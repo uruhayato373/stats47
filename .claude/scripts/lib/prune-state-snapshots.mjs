@@ -14,42 +14,43 @@
 import { existsSync, readdirSync, rmSync } from "node:fs";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const PROJECT_ROOT = resolve(fileURLToPath(new URL("../../..", import.meta.url)));
 
 export const RETENTION_POLICIES = Object.freeze({
   psi: {
-    directory: "data/psi",
+    directory: datasetDir("psi.batch"),
     pattern: /^psi-batch-\d{4}-\d{2}-\d{2}T[\d-]+\.json$/,
     keep: 1,
   },
   gsc: {
-    directory: "data/gsc/url-inspection",
+    directory: datasetDir("gsc.url-inspection"),
     pattern: /^\d{4}-\d{2}-\d{2}\.csv$/,
     keep: 7,
   },
   cloudflare: {
-    directory: "data/cloudflare/snapshots",
+    directory: datasetDir("cloudflare.snapshots"),
     pattern: /^\d{4}-\d{2}-\d{2}\.json$/,
     keep: 30,
   },
   "page-quality": {
-    directory: "data/page-quality/metrics/snapshots",
+    directory: `${datasetDir("page-quality.metrics")}/snapshots`,
     pattern: /^\d{4}-\d{2}-\d{2}\.json$/,
     keep: 8,
   },
   note: {
-    directory: "data/note/metrics",
+    directory: datasetDir("note.metrics"),
     pattern: /^note-\d{4}-\d{2}-\d{2}\.json$/,
     keep: 4,
   },
   "note-navigation": {
-    directory: "data/note/navigation",
+    directory: datasetDir("note.navigation-pilot"),
     pattern: /^note-navigation-pilot-\d{4}-\d{2}-\d{2}\.json$/,
     keep: 8,
   },
   releases: {
-    directory: "data/releases",
+    directory: datasetDir("ops.releases"),
     pattern: /^\d{4}-\d{2}-\d{2}-.+\.json$/,
     keep: 8,
   },
@@ -61,28 +62,28 @@ export const RETENTION_POLICIES = Object.freeze({
     keep: 20,
   },
   "business-plan": {
-    directory: "data/business-plan/history",
+    directory: datasetDir("business-plan.history"),
     pattern: /^\d{4}-\d{2}-\d{2}\.json$/,
     keep: 12,
   },
   "search-growth-manifests": {
-    directory: "data/search-growth/manifests",
+    directory: datasetDir("search-growth.manifests"),
     pattern: /^\d{4}-W\d{2}\.json$/,
     keep: 8,
   },
   // analytics の週次 snapshot ディレクトリ。wave 判定が before 週を参照するため 26 週残す。
   "analytics-gsc": {
-    directory: "data/gsc/snapshots",
+    directory: datasetDir("gsc.snapshots"),
     pattern: /^\d{4}-W\d{2}$/,
     keep: 26,
   },
   "analytics-ga4": {
-    directory: "data/ga4/snapshots",
+    directory: datasetDir("ga4.snapshots"),
     pattern: /^\d{4}-W\d{2}$/,
     keep: 26,
   },
   "analytics-adsense": {
-    directory: "data/adsense/snapshots",
+    directory: datasetDir("adsense.snapshots"),
     pattern: /^\d{4}-W\d{2}$/,
     keep: 26,
   },

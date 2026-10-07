@@ -16,6 +16,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
 const R2 = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
@@ -114,7 +115,7 @@ function deriveSourceFromJson(json, dataFile, chartType) {
 }
 
 async function main() {
-  const q = JSON.parse(fs.readFileSync(path.join(PROJECT_ROOT, "data/blog/svg-lineage-queue.json"), "utf8"));
+  const q = JSON.parse(fs.readFileSync(path.join(PROJECT_ROOT, `${datasetDir("blog.operations")}/svg-lineage-queue.json`), "utf8"));
   let targets = q.entries.filter((e) => e.restoreMethod === "source-backfill");
   if (LIMIT) targets = targets.slice(0, LIMIT);
   console.error(`[backfill] source-backfill: ${targets.length} 枚 (全 chartType)`);

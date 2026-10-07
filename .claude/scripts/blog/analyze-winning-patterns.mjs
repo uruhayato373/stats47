@@ -34,6 +34,7 @@ import { fileURLToPath } from "node:url";
 
 import { isAnchorRow } from "../gsc/analyze-ctr-seesaw.mjs";
 import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -46,12 +47,12 @@ const getArg = (flag, def) => {
   return i >= 0 ? args[i + 1] : def;
 };
 const MIN_IMP = parseInt(getArg("--min-imp", "15"), 10); // 評価対象にする最低 impression
-const JSON_OUT = getArg("--json", path.join(PROJECT_ROOT, "data/blog/winning-patterns.json"));
+const JSON_OUT = getArg("--json", path.join(PROJECT_ROOT, `${datasetDir("blog.operations")}/winning-patterns.json`));
 const CONCURRENCY = 8;
 
 // ── 1. GSC 最新 snapshot ─────────────────────────────────────────────
 function findLatestGscSnapshot() {
-  const dir = path.join(PROJECT_ROOT, "data/gsc/snapshots");
+  const dir = path.join(PROJECT_ROOT, datasetDir("gsc.snapshots"));
   if (!fs.existsSync(dir)) return null;
   const weeks = fs.readdirSync(dir).filter((d) => /^\d{4}-W\d{2}$/.test(d)).sort();
   for (let i = weeks.length - 1; i >= 0; i--) {
@@ -354,7 +355,7 @@ async function main() {
   process.stderr.write(`勝ち要因解析: GSC 読み込み中...\n`);
   const gsc = loadGsc();
   if (!gsc.bySlug.size) {
-    console.error("[error] GSC snapshot が見つからない (data/gsc/snapshots/)");
+    console.error(`[error] GSC snapshot が見つからない (${datasetDir("gsc.snapshots")}/)`);
     process.exit(1);
   }
   const published = await loadPublishedSlugs();

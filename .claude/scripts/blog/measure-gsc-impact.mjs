@@ -36,6 +36,7 @@ import { decideVerdict, formatVerdictSection, extractTarget } from "../lib/effec
 import { DEFAULT_THRESHOLDS } from "../lib/effect-verdict/thresholds.mjs";
 import { isoWeekOf, isoWeekEnd, weekDiff, weekLt } from "../lib/effect-verdict/iso-week.mjs";
 import { upsertSection } from "../lib/effect-verdict/section-upsert.mjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -43,15 +44,15 @@ const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
 
 const SNAPSHOT_DIR = path.join(
   PROJECT_ROOT,
-  "data/gsc/snapshots",
+  datasetDir("gsc.snapshots"),
 );
 const LOG_PATH = path.join(
   PROJECT_ROOT,
-  "data/improvement/gsc-improvement/improvement-log.md",
+  `${datasetDir("improvement.logs")}/gsc-improvement/improvement-log.md`,
 );
 const HISTORY_PATH = path.join(
   PROJECT_ROOT,
-  "data/blog/auto-brushup-history.json",
+  `${datasetDir("blog.operations")}/auto-brushup-history.json`,
 );
 
 // ====== 利用可能 snapshot 週 ======

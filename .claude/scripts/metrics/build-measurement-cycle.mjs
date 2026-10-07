@@ -23,11 +23,11 @@ import {
 import { judgeability } from "./lib/gsc-improvements-adapter.mjs";
 import { parseDimensionLedger } from "../google-admin/dimension-ledger.mjs";
 import { parseBacklog } from "../lib/scan-pending-improvements.mjs";
-import { datasetPath } from "../../../config/datasets.mjs";
+import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 const strategyLanes = createRequire(import.meta.url)("../lib/strategy-lanes.cjs");
 
-const AUTHENTICATED_LATEST = "data/authenticated/latest.json";
+const AUTHENTICATED_LATEST = `${datasetDir("revenue.authenticated")}/latest.json`;
 const ACTIVE_STATUSES = new Set(["pending", "in-progress", "effect/pending"]);
 const HISTORY_COLUMNS = [
   "week", "periodStart", "periodEnd", "blogToRankingRate", "themesToRankingRate",
@@ -94,7 +94,7 @@ const liveProductCountOf = (kdp) =>
  */
 function buildOperations(week, asOf, pending) {
   const psiRows = readCsvIfExists(join(PROJECT_ROOT, datasetPath("psi.history")));
-  const cfDir = join(PROJECT_ROOT, "data/cloudflare");
+  const cfDir = join(PROJECT_ROOT, datasetDir("cloudflare.cost-snapshots"));
   const cfRows = readCsvIfExists(join(cfDir, "history.csv"));
   const rules = JSON.parse(readFileSync(join(PROJECT_ROOT, ".claude/config/budgets/cloudflare-cost-improvement/budgets-daily.json"), "utf8")).rules;
   const snapshotsDir = join(cfDir, "snapshots");
@@ -118,8 +118,8 @@ function main() {
   const week = arg("--week");
   if (!/^\d{4}-W\d{2}$/.test(week ?? "")) throw new Error("--week YYYY-Www が必要");
   const asOf = isoWeekToDateRange(week).endDate;
-  const snapshotDir = join(PROJECT_ROOT, "data/ga4/snapshots", week);
-  const outDir = join(PROJECT_ROOT, "data/measurement-cycle");
+  const snapshotDir = join(PROJECT_ROOT, datasetDir("ga4.snapshots"), week);
+  const outDir = join(PROJECT_ROOT, datasetDir("business.measurement-cycle"));
 
   const transitions = readSlice(snapshotDir, "internal-transitions");
   const landing = readSlice(snapshotDir, "landing-context");
@@ -150,7 +150,7 @@ function main() {
   const ledgerEntries = parseDimensionLedger(readFileSync(join(PROJECT_ROOT, ".claude/rules/analytics-event-standards.md"), "utf8"));
   const pending = parseBacklog(join(PROJECT_ROOT, ".claude/todo/improvements.md"), new Date(`${asOf}T00:00:00Z`))
     .filter((e) => ACTIVE_STATUSES.has(e.status));
-  const verdictsPath = join(PROJECT_ROOT, "data/effect-verdict", `verdicts-${week}.json`);
+  const verdictsPath = join(PROJECT_ROOT, datasetDir("effect.verdicts"), `verdicts-${week}.json`);
   const verdicts = existsSync(verdictsPath) ? JSON.parse(readFileSync(verdictsPath, "utf8")) : null;
   const gscRows = pending.filter((e) => /gsc/i.test(e.target_metric ?? "")).map(judgeability);
 
@@ -163,20 +163,20 @@ function main() {
     ...readKpiInputs(),
     week,
     asOf,
-    gscHistory: readCsvIfExists(join(PROJECT_ROOT, "data/gsc/history.csv")),
+    gscHistory: readCsvIfExists(join(PROJECT_ROOT, datasetPath("gsc.history"))),
     cycleHistory: history,
     journey,
     workContext,
-    affiliateRows: readCsvIfExists(join(PROJECT_ROOT, "data/affiliate/ga4-affiliate-history.csv")),
+    affiliateRows: readCsvIfExists(join(PROJECT_ROOT, datasetPath("ga4.affiliate-history"))),
     operations,
     authenticated: readJsonIfExists(AUTHENTICATED_LATEST),
-    dataQuality: summarizeDataQuality(readJsonIfExists("data/ranking/integrity-audit.json")),
+    dataQuality: summarizeDataQuality(readJsonIfExists(`${datasetDir("ranking.audits")}/integrity-audit.json`)),
     paidPurchases: summarizePaidPurchases({
-      ledger: readJsonIfExists("data/products/sales-ledger.json"),
-      liveProductCount: liveProductCountOf(readJsonIfExists("data/products/kdp-weekly-publication.json")),
+      ledger: readJsonIfExists(datasetPath("sales.ledger")),
+      liveProductCount: liveProductCountOf(readJsonIfExists(datasetPath("kdp.weekly-publication"))),
       weekStart: isoWeekToDateRange(week).startDate,
       weekEnd: asOf,
-      revenueHistory: readJsonIfExists("data/authenticated/revenue-history.json"),
+      revenueHistory: readJsonIfExists(`${datasetDir("revenue.authenticated")}/revenue-history.json`),
     }),
   });
 
@@ -231,7 +231,7 @@ function main() {
     activeImprovements: kpiTree?.improvements.active ?? "",
     kpiUnlinked: kpiTree?.improvements.unlinked.length ?? "",
     measurementFreshOk: kpiValue("measurement-freshness")?.value ?? "",
-    dataQualityPassRate: summarizeDataQuality(readJsonIfExists("data/ranking/integrity-audit.json"))?.passRate ?? "",
+    dataQualityPassRate: summarizeDataQuality(readJsonIfExists(`${datasetDir("ranking.audits")}/integrity-audit.json`))?.passRate ?? "",
   });
   history.sort((a, b) => a.week.localeCompare(b.week));
   writeFileSync(historyPath, toCsv(history, HISTORY_COLUMNS));
