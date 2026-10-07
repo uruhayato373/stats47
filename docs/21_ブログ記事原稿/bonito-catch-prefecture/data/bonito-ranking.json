@@ -2,10 +2,12 @@
   "title": "カツオ漁獲量",
   "subtitle": "2015年",
   "label": "カツオ漁獲量",
+  "readerLabel": "カツオ漁獲量",
+  "hook": "カツオ漁獲量が最も多い県は？",
   "unit": "トン",
   "year": "2015",
   "rankingKey": "fishery-species-catch-bonito",
-  "source": "e-Stat（政府統計の総合窓口）",
+  "source": "海面漁業生産統計調査",
   "generatedBy": "fetch-ranking-data-r2.mjs",
   "data": [
     {
@@ -192,90 +194,27 @@
     },
     {
       "rank": 27,
-      "areaName": "岩手県",
-      "pref": "岩手県",
-      "value": 0,
-      "areaCode": "03000"
-    },
-    {
-      "rank": 28,
-      "areaName": "秋田県",
-      "pref": "秋田県",
-      "value": 0,
-      "areaCode": "05000"
-    },
-    {
-      "rank": 29,
       "areaName": "山形県",
       "pref": "山形県",
       "value": 0,
       "areaCode": "06000"
     },
     {
-      "rank": 30,
-      "areaName": "茨城県",
-      "pref": "茨城県",
-      "value": 0,
-      "areaCode": "08000"
-    },
-    {
-      "rank": 31,
+      "rank": 28,
       "areaName": "石川県",
       "pref": "石川県",
       "value": 0,
       "areaCode": "17000"
     },
     {
-      "rank": 32,
-      "areaName": "大阪府",
-      "pref": "大阪府",
-      "value": 0,
-      "areaCode": "27000"
-    },
-    {
-      "rank": 33,
-      "areaName": "兵庫県",
-      "pref": "兵庫県",
-      "value": 0,
-      "areaCode": "28000"
-    },
-    {
-      "rank": 34,
-      "areaName": "鳥取県",
-      "pref": "鳥取県",
-      "value": 0,
-      "areaCode": "31000"
-    },
-    {
-      "rank": 35,
+      "rank": 29,
       "areaName": "島根県",
       "pref": "島根県",
       "value": 0,
       "areaCode": "32000"
     },
     {
-      "rank": 36,
-      "areaName": "岡山県",
-      "pref": "岡山県",
-      "value": 0,
-      "areaCode": "33000"
-    },
-    {
-      "rank": 37,
-      "areaName": "広島県",
-      "pref": "広島県",
-      "value": 0,
-      "areaCode": "34000"
-    },
-    {
-      "rank": 38,
-      "areaName": "香川県",
-      "pref": "香川県",
-      "value": 0,
-      "areaCode": "37000"
-    },
-    {
-      "rank": 39,
+      "rank": 30,
       "areaName": "熊本県",
       "pref": "熊本県",
       "value": 0,
