@@ -141,6 +141,7 @@ updated: 2026-10-06
 - **アフィリエイト週次への波及（2026-09-24 確認）**: `affiliate-ga4-weekly.yml`のscheduled run `35639065973`（2026-09-21T18:32Z）はfailureだった。GA4取得・R2 read-back・履歴commit-backはsuccessしたが、operations state stepの`restore.mjs moshimo --if-activated`が`unavailable`を返し、measurement gateもfailureとなってIssue #1007がOPENのまま残っている。つまりA8・もしもの再認証が完了するまで、アフィリエイト週次は毎回failureになり、週次収益（NSM）のアフィリエイト確定額は判定不能のまま続く。GA4側の計測経路自体は復旧している。
 - **完了条件**: 全collectorの実データ取得・private R2 read-back・git記録の整合・認証付き計測Issueの復旧closeが成立し、本人の再認証を挟まない別日付のmain scheduleで連続2回以上確認する（恒久的な無人保証とはしない）。noteの欠落は不完全のまま原因を区別し、カタログ削除/0埋めで通さない。サイト全体の放置運用判定は、このカードだけでなく横断監視Issue #763の別系統異常の解消も必要。
 - **停止条件**: 2FA/CAPTCHA/規約同意を自動化しない。Cookie/APIキーをgit/ログ/artifactへ出さない。KDPの速報売上/KENPを確定ロイヤリティや週次純収益へ代入しない。afbの発生日/確定日系列を合算せず、API報酬を純収益・入金へ代入しない。出版/提携状態の成功を全計測完了と言わない。自動投稿/申請/振込/商品変更は範囲外。
+- **観測 (2026-10-08)**: run 37695475962 (develop への push で起動) で、もしもが `auth_required` (`blockedSince` 2026-10-07T16:31:27Z、新規)、KDP も `auth_required` (`blockedSince` 2026-09-30T08:35:08Z のまま)。どちらも `collectionAttempted:false` で、本人の再認証待ち。
 
 ### [EFFECT-TARGET-MARKERS-01] 効果判定エンジンが GSC 施策 10 件を 1 件も判定できない状態を解消する
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-09-25] [領域:管理]
@@ -3141,6 +3142,10 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
   選定根拠 15 件を gate に通して書いた (提案文書は `implemented-pending-release`)。`data-refresh` の dryRun を依頼済み。
   **残り**: dryRun の件数を見て実 push を依頼 → PR #1100 の CI を green にしてマージ → page-components と ranking-items を R2 へ反映・キー一覧を同期 →
   本番で 2 テーマと `/ranking/actual-overnight-guests` を確かめる。
+- **2026-10-08 観測値は R2 に反映済み**: dryRun (run 37692245201) は ok 12 / fail 0。実 push (run 37693107860) の観測値は公開 URL で確かめた
+  (物価 9 指標 564 行 = 47 県 × 2013〜2024、客室稼働率・実宿泊者数 752 行 = 47 × 2009〜2024、ホテル営業施設数 987 行 = 47 × 1997〜2017)。
+  PR #1100 の pr-quality-check はコード変更の最後の commit (4e21dd945) で全 job 成功。localhost の 5 幅確認は崩れなし
+  (実宿泊者数のカードは ranking-items、物価のヒートマップは page-components の R2 反映後に出る)。
 - **停止条件**: 承認前は `data/themes/catalogs/` と metric config を編集しない。公開 (main へのマージ・R2 反映) は別に承認を取る。
 - **完了条件**: 2 テーマの提案の status が `implemented-pending-release` 以降になり、本番で提案どおりの章・カード・図が出ている。
 
