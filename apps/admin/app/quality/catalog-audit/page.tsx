@@ -31,7 +31,7 @@ export default async function CatalogAuditPage({
     <div className="space-y-8">
       <PageHeading
         title="テーマカタログ監査"
-        source="packages/data-configs/src/theme-catalog/ (git TS SSOT)"
+        source="data/themes/catalogs/ (JSON SSOT)"
       >
         <p className="mt-2 max-w-3xl text-sm text-console-muted">
           ThemeCatalog の指標選定根拠 (readerQuestion / adoptionCriteria / harmRelevance 等) の

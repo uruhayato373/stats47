@@ -116,7 +116,7 @@ function buildSummary(): CatalogAuditSummary {
 }
 
 /**
- * ThemeCatalog (git TS SSOT) を都度検証して完全性を集計する。
+ * ThemeCatalog (data/themes/catalogs/ の JSON SSOT) を都度検証して完全性を集計する。
  * 別台帳・キャッシュファイルは持たず、正典から毎回導出する (完全DBレス)。
  * TTL はビルド全体の再計算コストを抑えるためだけの表示キャッシュで、SSOT ではない。
  */

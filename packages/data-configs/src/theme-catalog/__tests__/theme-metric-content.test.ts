@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import { METRICS_REGISTRY } from "../../registry";
 import { THEME_CATALOGS } from "../index";
+import catalogBaseline from "../../../../../.claude/config/theme-catalog-baseline.json";
 import {
   collectThemeMetricContentCoverage,
   validateThemeMetricContentCoverage,
@@ -14,9 +15,9 @@ describe("theme metric content coverage", () => {
       METRICS_REGISTRY,
     );
 
-    expect(coverage.themeReferencedKeys).toHaveLength(102);
+    expect(coverage.themeReferencedKeys).toHaveLength(catalogBaseline.counts.indicatorHubKeys);
     expect(coverage.missingDescriptionKeys).toHaveLength(0);
-    expect(coverage.populatedNoteKeys).toHaveLength(62);
+    expect(coverage.populatedNoteKeys).toHaveLength(catalogBaseline.counts.authoredNoteKeys);
     expect(coverage.duplicateDescriptionGroups).toEqual([]);
   });
 

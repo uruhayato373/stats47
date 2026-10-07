@@ -6,6 +6,7 @@ import { THEME_CATALOGS } from "../index";
 import { parseStatSeriesRefs } from "../stat-series-ref";
 
 import migrationContract from "./fixtures/series-ref-migration-contract.json";
+import catalogBaseline from "../../../../../.claude/config/theme-catalog-baseline.json";
 
 const FORBIDDEN_TRANSFORMS = [
   "tabCombination",
@@ -73,8 +74,8 @@ describe("CROSS-PAGE-DATA-SSOT-01 exact migration contract", () => {
     }
   });
 
-  it("21 chart の旧 request は参照先MetricConfigの取得条件と完全一致する", () => {
-    expect(migrationContract).toHaveLength(21);
+  it("移行契約の chart の旧 request は参照先MetricConfigの取得条件と完全一致する", () => {
+    expect(migrationContract).toHaveLength(catalogBaseline.counts.migrationContractRows);
     for (const row of migrationContract) {
       expect(row.rawRequestKeys, row.componentKey).toEqual(
         row.metricKeys.map(metricRequestKey),
@@ -94,7 +95,7 @@ describe("CROSS-PAGE-DATA-SSOT-01 exact migration contract", () => {
     }
   });
 
-  it("21 chart は明示した全国チャート以外area overrideなしのtyped refsだけを持つ", () => {
+  it("移行契約の chart は明示した全国チャート以外area overrideなしのtyped refsだけを持つ", () => {
     for (const row of migrationContract) {
       const catalog = THEME_CATALOGS[row.themeKey as keyof typeof THEME_CATALOGS];
       const chart = catalog.charts.find((candidate) => candidate.componentKey === row.componentKey);
