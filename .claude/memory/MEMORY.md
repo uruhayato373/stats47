@@ -5,7 +5,7 @@
 - [project_model_usage_cycle.md](project_model_usage_cycle.md) — モデル/effort最適化サイクル。agentはeffort未指定でセッションのxhighを継承、別名sonnet/opusの解決先はCLI版次第(2.1.280未満はOpus 5.5不可)、canaryは採点器ごと検証
 - [feedback_gsc_export_false_positive.md](feedback_gsc_export_false_positive.md) — GSC理由行の非表示クリック失敗は概要ZIPの偽成功を生む。概要+5詳細の内容・件数・帰属とcapabilityを照合
 - [feedback_native_chrome_session_export.md](feedback_native_chrome_session_export.md) — Google認証exportはOS keychain互換を保った専用profileの一時コピーで行い、元profileをテスト既定値で開かない
-- [project_monetization_contract.md](project_monetization_contract.md) — 収益化の恒久判断。AdSenseは恒久停止(RPM ¥37で月¥1,400上限)、NSMは週次収益でPVではない、アフィ評価は確定収益/1,000 viewable imp、affiliate_verticalは広告自身のverticalを送る(契約テストで強制)、本線は行政実務向け商品
+- [project_monetization_contract.md](project_monetization_contract.md) — 収益化の判断。AdSenseは9/20恒久停止→9/28に維持費相殺として再開を決定(審査待ち・手動枠のみ)、NSMは週次収益でPVではない、アフィ評価は確定収益/1,000 viewable imp、affiliate_verticalは広告自身のverticalを送る、本線は行政実務向け商品、雑学の情報そのものは売れない(回収は広告・物販/ノウハウ商品/KDPの3経路)
 - [project_theme_selection_backfill_pipeline.md](project_theme_selection_backfill_pipeline.md) — ThemeCatalog selection の夜間 backfill。モデルは JSON のみ・決定的 gate が data/themes/catalogs/<key>.json に書く。headless claude はセッション内でも認証可、PDF は pdftotext で逐語照合
 - [feedback_note_product_card_ssot.md](feedback_note_product_card_ssot.md) — note商品カードはマガジンでなく実商品SSOTから解決。生成/修正は同一関数共有、regenerate-cardはカード不在時no-op
 - [project_note_ins_img_heading_placement_bug.md](project_note_ins_img_heading_placement_bug.md) — ins_imgは見出し直前アンカーで画像が見出し直後にずれる未解決バグ。盲目修正は悪化した実例あり
