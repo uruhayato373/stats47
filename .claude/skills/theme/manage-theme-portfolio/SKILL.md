@@ -82,6 +82,7 @@ node .claude/scripts/themes/evaluate-theme-experiments.mjs --schedule <id> <デ�
 # テーマ 1 件の改善を実装したあと (手順の全体は reference/theme-proposal-format.md)
 npx tsx packages/data-configs/scripts/update-theme-catalog-baseline.ts [--write]  # 図・指標の件数基準 (.claude/config/theme-catalog-baseline.json)
 node .claude/scripts/themes/capture-theme-page.mjs <themeKey>                    # next start 中の localhost を 5 幅で確認し章ごとの画像を撮る
+node --import tsx .claude/scripts/themes/record-theme-viewpoints.ts              # 視点の該当件数を週ごとに記録 (週次監査の 5b が呼ぶ)
 ```
 
 - cadence: **週次で機械監査、月次で公式資料と構成の再確認、四半期で監査レポート** (`.claude/skills/theme/manage-theme-portfolio/reference/audits/YYYY-MM-DD-theme-portfolio-audit.md`) を必須とする。CI (`pr-quality-check.yml` の Theme Portfolio State Guard) は schema/規律を検証。週次theme-chart-auditは公開R2と構成を読み、固定アラートを更新する。

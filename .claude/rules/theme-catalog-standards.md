@@ -172,6 +172,7 @@ Markdown 見出しを再解析しない。空回答・不正見出し・重複�
 - **採用基準の定義と、提案・レビューで使う判断規則の正本は `config/theme-selection-viewpoints.json`**。
   機械で数えられる規則 (カードと図の重複・単年の推移・他テーマの主指標・選定根拠の欠け) は
   `theme-catalog/selection-viewpoints.ts` が数え、管理画面 `/quality/theme-viewpoints` に全テーマの該当箇所を出す (gate ではない)。
+  同じ画面に次に見直すテーマの候補 (GSC 表示回数順) と、週次監査が記録した該当件数の推移も出す。
   提案文書の形は `.claude/skills/theme/manage-theme-portfolio/reference/theme-proposal-format.md`。
 - 出典は URL + アクセス日を必須とする (`.claude/rules/evidence-based-judgment.md`)。推測で「白書由来」と書かない。
 - **`adoptionCriteria` は採用基準の controlled vocabulary** (`ADOPTION_CRITERIA`、types.ts):

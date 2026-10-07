@@ -12,6 +12,7 @@ export const metadata = { title: "指標を選ぶ視点 — stats47 admin" };
 
 const PAGE = "/quality/theme-viewpoints";
 const MAX_THEME_LINKS = 4;
+const MAX_CANDIDATES = 10;
 
 const SEVERITY_LABEL = { fix: "直す", review: "確かめる" } as const;
 
@@ -37,6 +38,9 @@ export default async function ThemeViewpointsPage({
     : [];
   const fixHits = machineRules.filter((r) => r.severity === "fix").reduce((n, r) => n + (r.hitCount ?? 0), 0);
   const reviewHits = machineRules.filter((r) => r.severity === "review").reduce((n, r) => n + (r.hitCount ?? 0), 0);
+  const nextCandidates = summary.candidates.filter((c) => !c.inFlight).slice(0, MAX_CANDIDATES);
+  const inFlight = summary.candidates.filter((c) => c.inFlight);
+  const ruleTitle = new Map(summary.rules.map((r) => [r.id, r.title]));
 
   return (
     <Stack gap="lg">
@@ -61,6 +65,65 @@ export default async function ThemeViewpointsPage({
         <StatCard label="直す候補" value={fixHits} tone={fixHits ? "warn" : "good"} sub="重さが「直す」の規則の該当" />
         <StatCard label="確かめる候補" value={reviewHits} tone={reviewHits ? "info" : "good"} sub="重さが「確かめる」の規則の該当" />
       </Grid>
+
+      <Section
+        title="次に見直す候補"
+        count={nextCandidates.length}
+        note={`検索の表示回数 (GSC ${summary.gscWeek ?? "未取得"} の 28 日) が多い順。30 日以内の承認待ちと公開待ちのテーマは下に分けた。公開の目安より前に出すと、進行中の実験の観測に混ざる。`}
+      >
+        <DataTable columns={["テーマ", "表示 (28日)", "直す候補", "確かめる候補", "最新の提案", "公開の目安"]}>
+          {[...nextCandidates, ...inFlight].map((c) => (
+            <Row key={c.key}>
+              <Cell nowrap>
+                <div className={c.inFlight ? "text-console-muted" : "font-medium"}>{c.title}</div>
+                <code className="text-[10px] text-console-muted">{c.key}</code>
+              </Cell>
+              <Cell nowrap>{c.impressions === null ? <span className="text-console-muted">—</span> : c.impressions.toLocaleString("ja-JP")}</Cell>
+              <Cell nowrap>
+                <StatusBadge tone={c.fixHits ? "warn" : "good"}>{c.fixHits}</StatusBadge>
+              </Cell>
+              <Cell nowrap>
+                <StatusBadge tone={c.reviewHits ? "info" : "good"}>{c.reviewHits}</StatusBadge>
+              </Cell>
+              <Cell nowrap>
+                {c.latestReview ? (
+                  <span className="text-[12px]">
+                    {c.latestReview.date} <span className="text-console-muted">{c.latestReview.status}</span>
+                  </span>
+                ) : (
+                  <span className="text-console-muted">—</span>
+                )}
+              </Cell>
+              <Cell nowrap>
+                {c.pendingUntil ? <span className="text-[12px]">{c.pendingUntil} 以降</span> : <span className="text-console-muted">—</span>}
+              </Cell>
+            </Row>
+          ))}
+        </DataTable>
+      </Section>
+
+      <Section
+        title="該当件数の推移"
+        count={summary.trend.weeks.length}
+        note="週次のテーマ監査 (theme:portfolio:audit) が記録した件数 (直近 8 週)。"
+      >
+        {summary.trend.weeks.length === 0 ? (
+          <p className="text-sm text-console-muted">まだ記録がありません。</p>
+        ) : (
+          <DataTable columns={["視点", ...summary.trend.weeks]}>
+            {Object.entries(summary.trend.byRule).map(([rule, counts]) => (
+              <Row key={rule}>
+                <Cell nowrap>{ruleTitle.get(rule) ?? rule}</Cell>
+                {counts.map((n, i) => (
+                  <Cell key={summary.trend.weeks[i]} nowrap>
+                    {n ?? <span className="text-console-muted">—</span>}
+                  </Cell>
+                ))}
+              </Row>
+            ))}
+          </DataTable>
+        )}
+      </Section>
 
       <Section title="判断規則" count={summary.rules.length}>
         <DataTable columns={["視点", "内容", "確かめ方", "該当", "多いテーマ"]}>

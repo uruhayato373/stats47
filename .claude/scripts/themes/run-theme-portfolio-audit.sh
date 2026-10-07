@@ -25,6 +25,9 @@ node .claude/scripts/themes/validate-theme-state.mjs
 echo "── 5/6 実験期日チェック ──"
 node .claude/scripts/themes/evaluate-theme-experiments.mjs --check
 
+echo "── 5b 指標を選ぶ視点の該当件数を週ごとに記録 ──"
+node --import tsx .claude/scripts/themes/record-theme-viewpoints.ts
+
 echo "── 6/6 drift (git HEAD との差分) ──"
 node --input-type=module <<'EOF'
 import { execFileSync } from "node:child_process";
