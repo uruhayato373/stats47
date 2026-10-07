@@ -265,34 +265,3 @@ export async function resolveArticleBackgroundSource(
     assetPath,
   };
 }
-
-/**
- * 背景生成の入力にする article.md を読む。`articleDir/<slug>/article.md` (公開待ちの送り箱) があれば
- * それを使い、無ければ R2 の公開版を読む。
- *
- * 記事の書き直しでタイトルを変えると、公開時の検査が「AI背景の prompt が古い」として記事を止める。
- * 背景の生成が R2 の公開版 (古いタイトル) しか読めないと、新しいタイトルの背景を作れず、
- * 公開できない循環になる (2026-10-07 に 5 記事で発生)。
- */
-export async function readArticleMarkdownForImage(options: {
-  projectRoot: string;
-  slug: string;
-  articleDir: string | null;
-  fetchPublished: (slug: string) => Promise<string>;
-}): Promise<{ markdown: string; origin: 'outbox' | 'published' }> {
-  if (options.articleDir) {
-    const draftPath = resolve(
-      options.projectRoot,
-      options.articleDir,
-      options.slug,
-      'article.md'
-    );
-    if (existsSync(draftPath)) {
-      return { markdown: readFileSync(draftPath, 'utf8'), origin: 'outbox' };
-    }
-  }
-  return {
-    markdown: await options.fetchPublished(options.slug),
-    origin: 'published',
-  };
-}

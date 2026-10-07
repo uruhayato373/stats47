@@ -37,7 +37,6 @@ import {
 import { normalizeAiBackgroundBuffer } from './lib/blog-ai-background-normalizer';
 import {
   parseBlogArticleImageContext,
-  readArticleMarkdownForImage,
   resolveArticleBackgroundSource,
 } from './lib/blog-article-background';
 import { resolveCodexBackgroundSource } from './lib/blog-codex-background-workflow';
@@ -82,7 +81,6 @@ interface CliOptions {
   maxAttempts: number;
   budgetUsd: number;
   outDir: string | null;
-  articleDir: string | null;
 }
 
 interface AiDescriptor {
@@ -175,10 +173,6 @@ function parseArgs(): CliOptions {
   ) {
     throw new Error('--out-dir は .local/ 配下を指定してください');
   }
-  const articleDir = stringArg(args, '--article-dir');
-  if (articleDir && articleDir.split('/').includes('..')) {
-    throw new Error('--article-dir に .. を含めないでください');
-  }
   return {
     audit: args.includes('--audit'),
     force,
@@ -190,7 +184,6 @@ function parseArgs(): CliOptions {
     maxAttempts: Math.min(positiveIntegerArg(args, '--max-attempts') ?? 2, 3),
     budgetUsd: positiveNumberArg(args, '--budget-usd', 2),
     outDir,
-    articleDir,
   };
 }
 
@@ -400,15 +393,10 @@ async function main(): Promise<void> {
   const prepared = await pMap(
     slugs,
     async (slug): Promise<PreparedBlogImage> => {
-      const { markdown } = await readArticleMarkdownForImage({
-        projectRoot: PROJECT_ROOT,
-        slug,
-        articleDir: options.articleDir,
-        fetchPublished: async (target) =>
-          (
-            await fetchRequired(`${PUBLIC_URL}/app/blog/${target}/article.md`)
-          ).text(),
-      });
+      const response = await fetchRequired(
+        `${PUBLIC_URL}/app/blog/${slug}/article.md`
+      );
+      const markdown = await response.text();
       const derived = deriveOgpFromFrontmatter(parseFrontmatter(markdown));
       if (!derived)
         throw new Error(`${slug}: article frontmatter title がありません`);
