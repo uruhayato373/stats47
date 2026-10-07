@@ -17,6 +17,7 @@ features/ads/
 │   ├── AffiliateAdSlot.tsx        # テキスト広告スロット（DB → AdSense フォールバック）
 │   ├── AdSenseAdWrapper.tsx       # AdSense 広告ラッパー
 │   ├── FurusatoNozeiCard.tsx      # ふるさと納税専用カード
+│   ├── RelatedAmazonBook.tsx      # ブログ記事末の関連書籍（Amazon アソシエイト）
 │   └── tracked-affiliate-link.tsx # GA4クリック計測付きリンク（use client）
 ├── constants/
 │   ├── affiliate-category.ts      # カテゴリマッピング・テーマ・型定義

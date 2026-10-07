@@ -74,7 +74,7 @@
     "measurement:restore": "node .claude/scripts/measurement/restore.mjs",
     "measurement:status": "node .claude/scripts/measurement/health.mjs",
     "measurement:test": "node --test .claude/scripts/measurement/__tests__/*.test.mjs",
-    "test:agent-efficiency": "node --test --test-concurrency=2 .claude/scripts/lib/__tests__/stop-docs-cache.test.cjs .claude/scripts/lib/__tests__/test-packages-ci.test.mjs .claude/scripts/lib/__tests__/session-guard.test.cjs .claude/scripts/lib/__tests__/media-workspace-ci-contract.test.cjs .claude/scripts/lib/__tests__/preflight-commit.test.mjs .claude/scripts/lib/__tests__/check-agent-skill-consistency.test.cjs .claude/scripts/lib/__tests__/scripts-type-check-coverage.test.cjs .claude/scripts/lib/__tests__/ci-test-tiering.test.mjs",
+    "test:agent-efficiency": "node --test --test-concurrency=2 .claude/scripts/lib/__tests__/stop-docs-cache.test.cjs .claude/scripts/lib/__tests__/test-packages-ci.test.mjs .claude/scripts/lib/__tests__/session-guard.test.cjs .claude/scripts/lib/__tests__/check-findings-on-stop.test.cjs .claude/scripts/lib/__tests__/media-workspace-ci-contract.test.cjs .claude/scripts/lib/__tests__/preflight-commit.test.mjs .claude/scripts/lib/__tests__/check-agent-skill-consistency.test.cjs .claude/scripts/lib/__tests__/scripts-type-check-coverage.test.cjs .claude/scripts/lib/__tests__/ci-test-tiering.test.mjs",
     "preflight": "node .claude/scripts/lib/preflight-commit.mjs",
     "preflight:pr": "node .claude/scripts/lib/preflight-commit.mjs --pr",
     "test:content-routines": "node --test .claude/scripts/lib/__tests__/content-generation-routine.test.cjs .claude/scripts/lib/__tests__/summarize-claude-execution.test.mjs .claude/scripts/lib/__tests__/record-claude-usage.test.mjs",

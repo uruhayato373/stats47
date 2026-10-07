@@ -311,6 +311,185 @@ updated: 2026-10-06
 - **完了条件**: 次の本番デプロイで reset step と smoke が通り、post-deploy-smoke (Playwright) も通る。
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [AMAZON-ASSOCIATE-PILOT-01] Amazon アソシエイトと Kindle 自社本への導線の効果を測り、続けるか広げるかを決める
+タグ: [収益化] [種類:改善] [実行:対話] [起票:2026-10-07] [期日:2026-11-15] [領域:アフィリエイト]
+
+- **経緯**: 2026-10-07 のオーナー判断で、アフィリエイトは週次計画上「維持」レーンだが、アクセス実験として Amazon を配線した。(1) 商品詳細から Amazon への Kindle リンクにタグ `stats47-22` と `rel=sponsored` を付けた。(2) ランキング右レールの「関連記事」に、表示中の記事を収録した Kindle 本の行を足した (`nav_surface=ranking_product`。上限 164 ランキング)。(3) Kindle 本の無いブログ記事末に `CATEGORY_BOOKS` の一般書籍 1 冊を出した (`affiliate_click` の `link_position=related-books`)。
+- **交絡**: `AFF-RESOLUTION-EFFECT-01` (判定期日 10-08) と窓が重なる。デプロイ日を境界にし、それ以前の窓とは比べない。
+- **未確認 (オーナー)**: Amazon アソシエイト口座 `stats47-22` がまだ有効か (規定期間内の売上件数による閉鎖条件)。Amazon の成果は自動収集の対象外で、KDP は `auth_required`。どちらも取れるまで売上効果は判定不能のまま。
+- **現在地 (2026-10-07)**: 実装は develop (`11e2d6ba`) にあり、本番は未反映。draft PR #1099 (develop → main) を作成済み。Security Scan だけが失敗しているが、main でも同じ理由で落ちている既存の失敗 (下の [DEPS-BRACES-GATE-01] の追記を参照) で、この変更が原因ではない。ローカルでの確認手順: `npm ci` → `npm run dev:web` を開き、`/products/kindle-k-s1-01` (Amazon リンクに `?tag=` が付く)、`/ranking/healthy-life-expectancy-male` (右レールに「この記事を収録した本」)、`/blog/2050-population-map-reading` (記事末に「PR・関連書籍」) を見る。
+- **ローカルで続きにやること (実行順)**: ①Amazon アソシエイトの管理画面で `stats47-22` が有効か確かめる。無効なら本番へ出す前に止める ②`CATEGORY_BOOKS` (`apps/web/src/features/ads/constants/related-books.ts`) を labor / education などへ広げるなら、Amazon で実在 ASIN と書名を確かめてから足す (推測の ASIN を書かない) ③ローカルの表示を確認し、オーナー判断で PR #1099 の draft を外して main へマージする (= 本番デプロイ)。デプロイ日をこのカードに書く。
+- **次**: デプロイ後 28 日で GA4 の `nav_click` (`ranking_product` / `blog_product`) と `affiliate_click` / `affiliate_impression` (`related-books`)、`cta_click` (`product_kindle`) を取り、Amazon レポートと KDP 売上を照合する。`CATEGORY_BOOKS` は 5 vertical だけなので、labor / education などへ広げるなら実在 ASIN を Amazon で確かめてから足す。
+- **完了条件**: 28 日分のクリック数と、Amazon / KDP の売上 (取れなければ取れない理由) を記録し、継続・拡大・撤退のどれかをオーナーが決めた。
+
+### [BLOG-BG-PIPELINE-CONSOLIDATE-01] ブログ背景の経路を Codex の記事固有背景 1 本にまとめ、背景の不足を push 前に止める
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:node .claude/scripts/blog/quality-gate.mjs <slug>] [起票:2026-10-07] [領域:サイト]
+
+- **事象 (2026-10-07)**: 22 記事の書き直しを公開したところ、タイトルを変えた 5 記事でサムネイル検査が「AI 背景の prompt が古い」と止め、run 全体が止まった。エラーと規約が背景の作り直しに Gemini 経路を案内していたため、Gemini で作り直す依頼を誤って push した (正典は Codex の記事固有背景)。背景の出どころは 3 系統 (git の記事固有背景 492 枚・旧 Codex カタログ 23 枚・R2 だけにある Gemini 背景。公開 619 記事のうち 100 本前後が未移行の見込み) で、背景を選ぶ処理が `generate-blog-thumbnails.ts` と `generate-blog-thumbnails-cloud.ts` に別々に書かれている。
+- **次 (実行順)**:
+  1. ~~配線~~ 2026-10-07 に済み: quality-gate が `check-blog-background.ts` (判定は `lib/blog-background-status.ts`) で、送り箱の記事に今の内容に合う背景が無ければ Codex の手順を示して止める
+  2. 集約: 背景を選ぶ処理 (git の記事固有背景 > 旧 Codex カタログ > 公開済み AI 背景の再利用) と案内文を `lib/blog-background-status.ts` にまとめ、`generate-blog-thumbnails.ts` と `-cloud.ts` から呼ぶ (背景の記録を読む `backgroundRecord` は移し済み)
+  3. 撤去: 未移行の記事を `blog-images:codex queue` (Mode B) で git の背景へ移し、R2 の Gemini 背景が 0 件になったら Gemini の client・cache・ビジュアルカタログ・`gemini-image-run.yml` の blog 部分と規約の Gemini の記述を同じ差分で消す。旧 Codex カタログも記事固有背景へ寄せる
+- **追記 (2026-10-07)**: Codex で作った 5 枚のうち 3 枚 (cc-estat-20-publish・dairy-cattle-hokkaido-monopoly・sixth-industry-direct-sales) で、左の文字用の余白不足と禁止のチャートの描き込みをオーナーが目視で見つけたが、`check:blog-images` と `check-blog-background.ts` は寸法と形式しか見ず検出しなかった。左 55% の余白 (例: 左側の画素のばらつき・エッジ量のしきい値) を機械で測る検査を足すか検討する。fiscal-self-reliance-gap は R2 の背景の SHA が HEAD metadata と食い違い、公開 run を fatal で止めた (quality-gate の検査は公開 URL しか読まないので検出できない)。この記事も記事固有背景で直す。
+- **停止条件**: 3 の画像生成は Codex が要る (クラウド環境では codex MCP が接続できない)。生成はオーナーのローカルで回す。
+- **完了条件**: 1 は背景の無い送り箱の記事で quality-gate が止まることをテストで固定。2 は背景の選択と案内文の実装が 1 か所。3 は `queue` の targets が 0 で、リポジトリに Gemini の生成コードが無い。
+
+### [DEBT-CHECK-GITIGNORED-SCAN-01] check-maintenance-debt が git 管理外 (gitignore 済み) のファイルまで走査して commit を止める
+タグ: [エージェント・SSOT] [種類:不具合] [実行:sweep] [検証:node .claude/scripts/lib/check-maintenance-debt.cjs --baseline] [起票:2026-10-07] [領域:管理]
+
+- **事象 (2026-10-07)**: オーナーのローカルで、ブログ背景 5 枚だけの commit が pre-commit の `[UNBOUNDED_LEGACY] apps/remotion/pnpm-lock.yaml:866 deprecated に期限・削除条件がない` で止まった。このファイルは `.gitignore` (50 行目 `pnpm-lock.yaml`) の対象で git に無い。`.claude/scripts/lib/check-maintenance-debt.cjs` の `walk()` が `fs.readdirSync` でディスクを辿り、除外は名前 (`node_modules` など) と `apps/remotion/build` だけなので、手元にある管理外のファイルの内容で commit が止まる。
+- **次**: 走査対象を `git ls-files --cached --others --exclude-standard` (追跡中と、無視されていない未追跡) に変える。git が使えない環境の扱いを決める。
+- **完了条件**: gitignore 済みのファイルに `deprecated` を書いても検査が通り、追跡中のファイルでは今までどおり止まることをテストで固定している。
+
+### [BLOG-OUTBOX-CONTENTS-01] ブログの公開待ち原稿の置き場を docs/21 から contents/ へ移す
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-10-07] [領域:サイト]
+
+- **経緯**: 2026-10-07 にオーナーが「docs/ ではなく、R2 か contents/ で管理し、ローカルは一時的に持つだけでよいのでは」と指摘し、(a) 「図の年の書き直し 22 本を公開してから移す」を選んだ。docs/21 は公開待ちの outbox で、公開後は CI が消す。docs/ は人が読み返す文書の置き場で、性質が合わない。
+- **次**: 22 本の公開が終わってから着手する。docs/21 を参照するファイル (2026-10-07 の時点で約 109 件: quality-gate・blog-auto-publish.yml・blog-remediation-daily.yml・check-docs-code-refs の除外・skill・rule・check-datasets の IMAGE_ROOTS など) を洗い出し、`config/datasets.mjs` の台帳に置き場を宣言し、RETIRED に旧置き場を書いて移す (`.claude/rules/data-storage.md`「置き場を移す手順」。develop への push から main のマージまでを数十分に収める)。
+- **停止条件**: 未公開の原稿が docs/21 に残っているあいだは移さない。公開の workflow が新旧どちらの置き場も読めない時間を作らない。
+- **完了条件**: 新しい置き場から blog-auto-publish が記事を公開し、docs/21 を指す参照が check-datasets の RETIRED 検査で 0 件になる。
+
+### [BLOG-TITLE-CHANGE-WATCH-01] 図の年の書き直しでタイトルを変えた公開記事の検索流入を、公開後に確かめる
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-07] [領域:サイト]
+
+- **事象**: 2026-10-07 の書き直しで、数値の誤りやタイトルの約束が果たせないことを理由に、公開中の記事のタイトルを変えた。とくに `health-life-expectancy-structure` は週約 3,900 表示 (書き直し前の GSC) の記事で、タイトルと主題が変わった。ほかにタイトルを変えたのは `healthy-life-expectancy-male-female-gap`・`cc-estat-02-search-skill`・`cc-estat-04-aging-heatmap`・`ai-claude-code-pref-analysis` などである (公開時の diff で確定する)。
+- **次**: 公開日を記録し、公開前 28 日の表示回数・クリック・掲載順位を baseline として GSC から取る。improvement-triage に渡して `improvements.md` に effect/pending として載せ、期日を公開の 4 週間後にする。
+- **完了条件**: 対象の記事と baseline が improvements.md に載っている (効果判定そのものは improvements.md 側で行う)。
+
+### [BRANCH-CLEANUP-20261007] マージ済みの作業ブランチ 3 本を GitHub から消す
+タグ: [インフラ・計測] [種類:改善] [実行:ユーザー] [起票:2026-10-07] [領域:管理]
+
+- **事象**: `claude/years-downstream-follow`・`claude/metric-related-content`・`claude/years-follow-blog-theme` は develop にマージ済みだが、クラウドセッションの git proxy がリモートのブランチ削除を 403 で拒むので消せなかった (2026-10-07)。
+- **次**: GitHub の Branches 画面で 3 本を削除する。
+- **完了条件**: `git ls-remote --heads origin 'claude/years-*' 'claude/metric-related-content'` が何も返さない。
+
+### [METRIC-DAIRY-CONFIG-01] 乳用牛の 2 指標で、調査時点と対象の表示が欠けている・食い違っている点を直す
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-07] [領域:データ]
+
+- **事象**: `dairy-cattle-count` の metric config に description と note が無く、調査時点 (2 月 1 日現在) が読者向けの定義に出ない (2026-10-07 に config で確認)。同じ畜産統計の肉用牛・豚・採卵鶏・乳用牛飼養戸数の config には `surveyId: "livestock-statistics"` があるのに、`dairy-cattle-count` だけに無く、定義シートの「調査」が空欄になる。critic によると、指標の定義シートで `dairy-cattle-holdings` の対象欄が「企業」と出る。一方、config の note は「飼養戸数は法人企業数ではなく」と書いていて、両者が食い違う (critic の報告。定義シートの出力は未確認)。
+- **次**: `npx tsx .claude/scripts/blog/build-metric-definition-sheet.ts` で 2 指標の定義シートを出し、対象欄の値の出どころを特定して直す。`dairy-cattle-count` には `dairy-cattle-holdings` と同じ形で description と note を書く。
+- **完了条件**: 2 指標の定義シートで、調査時点が出ていて、対象欄と note が食い違わない。`npm run validate:config --workspace=@stats47/data-configs` が通る。
+
+### [BLOG-SEOTITLE-MIXED-YEAR-01] 年の違う指標を並べた記事で、seoTitle の年が片方の指標にも付いて見えるのを gate で止める
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:node .claude/scripts/blog/quality-gate.mjs <slug>] [起票:2026-10-07] [領域:サイト]
+
+- **事象 (2026-10-07、sixth-industry-direct-sales の critic が BLOCK で報告)**: 農業産出額 (2024年) と農家総所得 (2003年度) を並べた記事の seoTitle の末尾に「2024年」が 1 つだけ付き、農家総所得も 2024 年の値に見えた。quality-gate と factual-check はどちらも、記事の図の data JSON の年が複数あるのに seoTitle・title が 1 つの年しか書いていない形を検出しない。
+- **次**: 記事の data/*.json から年 (と年・年度の別) を集め、2 種類以上あるのに seoTitle・title に年が 1 つだけ書かれていたら warning を出す。公開済みの記事で何件当たるかを数えてから blocker にするかを決める。
+- **完了条件**: 年の違う図を持つ記事で seoTitle に年が 1 つだけあると検出されることを、quality-gate のテストで固定している。
+
+### [METRIC-SUPPLEMENTAL-SOURCE-DISPLAY-01] 補助の出典から取った年の値でも、指標の出典表示が主の出典のままになる
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-07] [領域:データ]
+
+- **事象 (2026-10-07、vacant-housing-vs-aging の critic が報告)**: `packages/data-configs/src/metrics/ratio-65-plus.ts` は 2025 年の値を `supplementalSources` (国勢調査、統計表 0004065933) から取るが、指標の出典表示は主の source (社会・人口統計体系) のままで、ブログの記事が 2025 年の値の出典を誤って書きやすい。ランキングページの出典表示が年ごとに切り替わるかは未確認。
+- **次**: `supplementalSources` を持つ指標を数え、ランキングページと指標の定義シートが、表示中の年の出典を出しているかを確かめる。出していなければ、年に応じて出典を選ぶ。
+- **完了条件**: 補助の出典から取った年を表示すると、その年の出典 (調査名と統計表 ID) が出ることをテストで固定している。
+
+### [METRIC-FARM-INCOME-DEFS-01] 農家総所得の指標で、対象・分母・調査が定義に出ず、意味の無い正規化が選べる
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npm run validate:config --workspace=@stats47/data-configs] [起票:2026-10-07] [領域:データ]
+
+- **事象 (2026-10-07、sixth-industry-direct-sales の writer が報告し config で確認)**: `packages/data-configs/src/metrics/total-farm-household-income.ts` に description・note・surveyId が無く、指標の定義シートで対象 (農家 1 戸あたりか)・分母・調査が空欄になる。「総所得」が農外所得や年金を含むかも読者向けの定義に出ない。1 戸あたりの所得なのに normalizationOptions に「人口10万人あたり」「面積100km²あたり」があり、意味の無い換算が選べる。yearFormat は fiscal なのに seoTitle が「【2003年】」と暦年で書いている。系列は 1995〜2003 年度で止まっている。
+- **追記 (2026-10-07)**: 同じ表 0000010212 の農業所得割合 (#L0110101)・農外所得割合 (#L0110102) の config も対象・分母・調査が定義シートに出ない (sixth-industry-direct-sales の fix writer が報告)。e-Stat の控え `data/estat/meta/0000010212.json` の項目名は「#L01100_農家総所得」で、1 戸あたりかどうかの表記が無い。記事は「分母は未確認」と書いて公開する。3 指標をまとめて直す。
+- **追記 (2026-10-07)**: 再審の critic によると、北海道の 2003 年度は農業所得割合 46% と農外所得割合 15.1% を足して 61.1% で、2 つの割合の分母が農家総所得とは限らない (残りは年金などの可能性)。分母を確かめるときに合わせて見る。
+- **次**: 社会・人口統計体系の指標定義 (#L01100) で対象と構成を確かめ、description と note に書く。surveyId を `data/surveys/taxonomy.json` で探して紐付ける。正規化の選択肢を外す。seoTitle を再生成して「年度」にする。
+- **完了条件**: 定義シートに対象・分母・調査が出て、正規化の選択肢が無く、seoTitle が「2003年度」になる。
+
+### [BLOG-TUTORIAL-GATE-GAPS-01] 手順解説記事 (cc-estat 連載) で quality-gate が誤って数える・照合できない 3 か所を直す
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:node .claude/scripts/blog/quality-gate.mjs <slug>] [起票:2026-10-07] [領域:サイト]
+
+- **事象 (2026-10-07 の書き直しで writer・critic が報告)**:
+  1. `quality-gate.mjs` の inline SVG 検出 (`/<svg[\s>]/`) がコードブロックの中も数える。D3 の手順記事が、検出を避けるために `<svg{...rootProps}>` や `const Svg = "svg"` という不自然な書き方をしている (cc-estat-04-aging-heatmap・cc-estat-13-agri-sankey)。`generate-article-charts --validate` も同じ理由でエラーを 4 件出す
+  2. 記事のサンプルコードを描画した図 (svg-builder の対象外・source の kind は derived) の扱いが `blog-svg-chart-standards.md` に無い。cc-estat-04 の 2 枚は作業用の一時スクリプトで描いたもので、描画スクリプトがリポジトリに無く、作り直せない。svg-builder にサンキー型が無いので、cc-estat-13 (サンキーの手順記事) も完成図を載せられず、積み上げ棒で代用している
+  3. `article-factual-check.mjs` が手順解説記事の本文の値の食い違いを検出できない形がある (cc-estat-04 の writer が値を書き換えて注入テストし、検出されなかった)。計算に使った入力 (総人口など) が data/ に無いと、その値も照合できない (it-industry-concentration の critic が公開 R2 から取り直して確かめた。calculated の JSON に入力の元値を持たせる運用にするか検討)。手順解説に限らず、単位が「戸」「倍」の数値も照合しない (dairy-cattle-hokkaido-monopoly で 4,970 戸を 4,790 戸に、1.44 倍を 1.54 倍に変えても pass した)
+  4. 「秋田県の3位から青森県の46位まで」のように範囲を順位で書くと、`article-factual-check.mjs` が INVERSE_RANK_MISMATCH と誤検知する (physical-therapist-annual-income-prefecture-gap の writer が報告。言い回しを変えて回避した)
+  5. 県名の直後に派生値 (2 県の差や目減り額など、data JSON の値から計算した数) を書くと、`article-factual-check.mjs` がその県の別の指標の値と取り違えて VALUE_MISMATCH の警告を出す (real-disposable-income-reversal の writer が「1,856円」「22,681円」で報告。文の組み立てを変えて回避した)
+  6. `quality-gate.mjs` の NG_PATTERN「title 「N位」だけで終わる」の正規表現 (`/^title:\s*"[^"]*\d+位[^"]*"/m`) は、「N位」を含むタイトルをすべて止め、名前と判定がずれている (vacant-housing-vs-aging の writer が報告し、112 行目で確認)。「4位なのに空き家は37位」のように問いを作るタイトルも止まる
+- **次**: 1 はコードブロックを除いて数える (公開済み記事で誤検知・見逃しの件数を比べてから入れる)。2 は描画スクリプトの置き場 (例: 記事の data/ に置く `render-*.ts`) と restore の書き方を規約に足し、cc-estat-04 の 2 枚の描画スクリプトを保存する。3 は注入テストを再現して、照合から漏れる数値の書き方を特定する。
+- **完了条件**: 1 と 3 の修正がテストで固定され、2 が規約に書かれ cc-estat-04 の図が repo のスクリプトから作り直せる。
+
+### [BLOG-STACKED-BAR-LABEL-MOBILE-01] ブログの積み上げ棒で、狭い区分の値が図に出ないことと、スマホ用 SVG が無いことを直す
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npx vitest run --root packages/svg-builder] [起票:2026-10-07] [領域:サイト]
+
+- **事象 (2026-10-07、dairy-cattle-hokkaido-monopoly の writer が報告)**: `generateStackedBarSvg` は区分の幅が一定以下だと棒の中の値ラベルを出さない (横向きは幅 28 以下)。北海道のシェアを並べた図で、採卵鶏の 3.5% が図のどこにも数字で出なかった。また `generate-article-charts` は積み上げ棒のスマホ用 SVG (`-mobile.svg`) を作らないので、ランキング図と違ってスマホでは横長の図を縮めて見せている。
+- **追記**: 横向きの積み上げ棒は幅 4.9% 未満の区分のラベルを出さず、比べる基準の縦線 (例: 全国平均 26.6%) も引けない (同じ記事の critic 対応で、9 地方の図と基準線を見送った)。
+- **次**: 狭い区分の値を棒の外 (右端や凡例) に出す。基準線のオプションを足す。スマホ用のレイアウトを足して `generate-article-charts` から作る。公開済みの積み上げ棒 (2026-10 の監査で 4 枚程度) の見た目の差を比べてから入れる。
+- **完了条件**: 狭い区分の値も図に数字で出ることと、スマホ用 SVG ができることを svg-builder のテストで固定している。
+
+### [BLOG-FETCH-RANKING-FISCAL-01] ブログの図のデータを R2 から取るスクリプトが、年度の指標でも見出しを「〇〇年」にする
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:node .claude/scripts/blog/fetch-ranking-data-r2.mjs] [起票:2026-10-07] [領域:サイト]
+
+- **事象**: `.claude/scripts/blog/fetch-ranking-data-r2.mjs` が図の JSON の subtitle を `${year}年` 固定で書く (155・208 行目)。`yearFormat: 'fiscal'` の指標 (県民所得など) でも図に「2021年」と出て、本文の「2021年度」と食い違う。2026-10-07 の書き直しで ai-claude-code-pref-analysis と engel-coefficient-vs-prefectural-income の writer が別々に報告し、どちらも JSON を手で直した (1 回目の報告では起票しなかった)。it-industry-concentration の writer も 3 件目として同じ報告をした。
+- **次**: metric の yearFormat (または R2 の item.json の年の表記) から「年」「年度」を決める。公開済みの記事で「年度」の指標の図が「年」になっている件数を数え、再生成の要否を決める。
+- **完了条件**: 年度の指標を取ると subtitle が「〇〇年度」になることをテストで固定している。
+
+### [METRIC-HOUSEHOLD-DEFS-01] 家計調査系の 2 指標で、注記がデータと食い違う・同じ名前の値が 2 系統ある点を直す
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npm run validate:config --workspace=@stats47/data-configs] [起票:2026-10-07] [領域:データ]
+
+- **事象 (2026-10-07、engel-coefficient-vs-prefectural-income の writer が報告)**:
+  1. `information-communication-coefficient` の note に「全国的に上昇傾向」とあるが、writer の実測では R2 の 47 県の単純平均が 2020 年 5.40% から 2024 年 4.18% へ下がっている (note の文言は config で確認、R2 の推移は writer の実測で未再確認)
+  2. 「エンゲル係数」の値が 2 系統ある。`engel-coefficient` (yearFormat calendar) と、姉妹記事 engel-coefficient-prefecture-ranking が使う `food-expenditure-ratio-multi-person-households` (タイトル「食料費割合」、yearFormat fiscal) で、2024 年の兵庫県が 33.4% と 31.8% に分かれる。critic の確認では 17 県すべてで 1.4〜2.3 ポイントの系統差があり、47 県の単純平均も 29.5% と 27.8% で違う。総務省の公表値と照合し、どちらがどの定義 (分母・世帯の範囲) かを確かめる
+- **次**: 1 は R2 の推移を確かめて note を直す。2 は 2 指標の分母・対象世帯・年の扱いの違いを config の description/note に書き、記事がどちらを使うかを読者に示せるようにする。家計調査系の yearFormat の不揃いは別カード (家計調査の年の表記を直すカード) と合わせて直す。
+- **完了条件**: 1 の note が R2 の推移と合い、2 の 2 指標の違いが定義シートで読める。
+
+### [BLOG-SCATTER-LABELS-01] ブログの散布図に、本文で名指しする県の名前を出せるようにする
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npx vitest run --root packages/svg-builder] [起票:2026-10-07] [領域:サイト]
+
+- **事象**: `generateScatterSvg` は全点を同じ色の点で描き、県名を出せない。本文で「京都府は右上、三重県は左下」のように名指ししても、読者は図のどの点かを見分けられない。2026-10-07 の書き直しで unhealthy-period-gender-prefecture-gap の writer と engel-coefficient-vs-prefectural-income の critic が別々に報告し、どちらも本文に座標を書いて代用した。
+- **追記 (2026-10-07)**: school-teacher-annual-income-prefecture-gap の critic も 3 件目として同じ報告をした (本文で名指しする愛媛県・長崎県の点が図で特定できない)。
+- **次**: data JSON に名指しする県 (例: `labelAreas: ["26000", "24000"]`) を書けるようにし、その点だけに県名を添える。点の重なりで読めなくならない配置を `lintScatterQuality` の検査と合わせて決める (散布図は 720×720・単色の規格がある)。
+- **完了条件**: 指定した県だけに名前が出ることと、指定が無い図の出力が変わらないことを svg-builder のテストで固定している。
+
+### [BLOG-AUDIT-PROVENANCE-HELP-01] audit-chart-provenance.mjs が --help でも全件監査を実行して是正キューを書き換える
+タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [検証:node .claude/scripts/blog/audit-chart-provenance.mjs --help] [起票:2026-10-07] [領域:サイト]
+
+- **事象**: 2026-10-07、it-industry-concentration の writer が使い方を確かめようと `--help` を付けて実行したところ、全件の監査が走って `data/blog/chart-provenance-queue.json` が書き換わった (writer が git checkout で戻した)。このキューは blog-remediation-daily の provenance ラチェットの基準なので、誤って書き換えると日次のラチェットの判定がずれる。
+- **次**: `--help` / `-h` で使い方を出して終了する。知らない引数は書き込まずにエラーにする。
+- **完了条件**: `--help` で何も書き換えずに exit 0 になる。
+
+### [METRIC-WAGE-SURVEY-01] 賃金構造基本統計調査の職種別年収 39 指標に surveyId と調査の注記を足す
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run validate:config --workspace=@stats47/data-configs] [起票:2026-10-07] [領域:データ]
+
+- **事象**: `packages/data-configs/src/metrics/*-annual-income.ts` の 39 指標はどれも `surveyId` を持たず (2026-10-07 に数えた)、指標の定義シートで「調査」が空欄になる。physical-therapist-annual-income-prefecture-gap の writer が報告した。職種別の県の値は標本が少なく年ごとに順位が大きく動くので、その注意も読者向けの定義に出したい。
+- **次**: 賃金構造基本統計調査の surveyId を `data/surveys` の台帳で確かめ、39 指標にまとめて足す。標本の少なさによる年ごとの変動の注意を note に足すかを、指標ごとの標本数を見て決める。 定義シートに対象 (一般労働者か・男女計か) も出るよう、description に書く (physical-therapist-annual-income の critic が報告)。
+- **追記 (2026-10-07)**: `school-teacher-annual-income` も同じで、critic が定義シートの対象欄「対象の記述なし」と「surveyId 未設定」を確認した。
+- **完了条件**: 39 指標の定義シートで調査名が出る。
+
+### [BLOG-REFRESH-DERIVED-SCATTER-01] 図の年の取り直しスクリプトが、計算で作った散布図を取り直せない
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:node --test .claude/scripts/blog/lib/__tests__/refresh-chart-year.test.mjs] [起票:2026-10-07] [領域:サイト]
+
+- **事象**: `refresh-article-data-years.mjs` は ranking の図だけを取り直し、source の kind が `derived-scatter` / `calculated` の散布図は「unsupported」として残す。2026-10-07 の書き直しでは real-disposable-income-reversal など複数の記事で、writer が散布図の x・y を R2 から手で取り直した。
+- **次**: 散布図の source.json の入力 (x・y の rankingKey と年) から両軸を最新の共通年で取り直し、相関などの計算値を記録し直す機能を足す。両軸の最新年が違う場合は、そろう年を選び、どちらの年かを図の見出しに出す。
+- **追記 (2026-10-07)**: school-teacher-annual-income-prefecture-gap の writer が、2022 年と 2023 年の年収の散布図を手作りの `kind: calculated` の source.json (年は 2023) で足した。refresh-article-data-years がこの形を取り直しの対象にするかは未確認で、この図も同じ問題を持つ。
+- **追記 (2026-10-07)**: vacant-housing-vs-aging の writer によると、R2 の `app/correlation/by-ranking-key` に vacant-housing-rate と ratio-65-plus の組が無く、散布図を相関 snapshot から復元できなかった。writer はランキングの値から 47 点を結んで作り直し、人口規模を統制した偏相関 (旧版の 0.555) は再計算できないので記事から外した。
+- **追記 (2026-10-07、同記事の critic)**: 最新年が指標ごとに違う組 (空き家率 2023 年 × 65 歳以上人口割合 2025 年) を相関 snapshot に持たせるか、記事ごとにランキングの値から作り直す運用を規約にするかを決める。
+- **完了条件**: 散布図を含む記事で取り直しが手作業なしに終わることを、テストで固定している。
+
+### [BLOG-REVISE-PATTERNS-01] 図の年の書き直しで critic が繰り返し REVISE にした型を、writer の規約か gate に入れる
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-07] [領域:サイト]
+
+- **事象**: 2026-10-07 の 22 本の書き直しで、critic (blog-critic) の REVISE が同じ型で繰り返した。writer の指示書にも規約にも無く、毎回 critic の目視で見つかっている。
+  1. 関連記事の紹介が、同時に書き直した姉妹記事の新しいタイトル・内容と食い違う (unhealthy-period-gender-prefecture-gap と healthy-life-expectancy-male-female-gap)
+  2. 地域のくくり (「近畿・関東」など) が、地方別の平均で確かめると支えられない (unhealthy-period-gender-prefecture-gap)
+  3. 相関係数の向き (高いほど高いのか低いのか) が書かれていない、または前後の説明と食い違う (fiscal-self-reliance-gap)
+  4. 本文の値と図の年が違うのに理由が書かれていない (area-ratio-prefecture-gap)
+  5. 料金・製品仕様を出典なしで断定する (ai-claude-code-pref-analysis)
+- **次**: 機械で判定できるものを gate にする。1 は本文の `/blog/<slug>` リンクの表示名と、リンク先の現在のタイトルの照合で判定できる。4 は図の data JSON の年と、同じ節の本文の年の照合で候補を出せる。2・3・5 は `blog-quality-standards.md` と article-writer の指示に書き、critic の観点に残す。
+- **停止条件**: 誤検知の多い gate を blocker にしない。公開済み記事に当てて誤検知を数え、0 件の境界で入れる (stats-table-id-lint と同じ手順)。
+- **完了条件**: 1 と 4 の検査が quality-gate に入り、公開済み記事での誤検知 0 件をテストで固定している。2・3・5 が規約に書かれている。
+
+### [BLOG-CC-ESTAT-WORKERS-01] 公開中の Claude Code 連載 2 本が配信先を「Cloudflare Pages」と書いている表記を Workers に直す
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:node .claude/scripts/blog/quality-gate.mjs <slug>] [起票:2026-10-07] [領域:サイト]
+
+- **事象**: stats47 の配信先は Cloudflare Workers (OpenNext) だが、`cc-estat-18-cache-r2` と `cc-estat-19-skill-pipeline` の本文に「Cloudflare Pages」の表記が残っている (2026-10-07、連載の最終回 cc-estat-20 を書き直した writer が報告)。cc-estat-19 のトークン作成例には、使っていない D1 の Edit 権限も含まれている (cc-estat-20 の critic が報告)。cc-estat-18 の `wrangler r2 object put` の例には `--remote` が無く、wrangler 4.148.0 ではローカルに書いてしまう。`remote = true` のときは `preview_bucket_name` を外す注意も要る (cc-estat-20 の writer がローカルで再現)。cc-estat-20 も本文は Workers に直したが、タグは未登録の `CloudflareWorkers` にすると 410 になるため `CloudflarePages` のままにしてある。記事の tags の `CloudflarePages` を `CloudflareWorkers` に替えるには `apps/web/src/config/known-tag-keys.ts` の再生成が要る (未登録のタグは 410 になる)。
+- **次**: 2 本を R2 から docs/21 へ取り、本文の表記とコード例 (`runtime = "edge"`・`wrangler pages deploy` など) を公式ドキュメントで確かめて直す。タグを替えるなら known-tag-keys の再生成を同じ変更に入れる。blog-critic を通して公開する。
+- **完了条件**: 2 本の本文に Pages 前提の記述が残っておらず、critic PASS で再公開されている。
+
+### [BLOG-STATS-TABLE-ID-FIX-01] 公開中の Claude Code 連載 2 本の、実在する別の表を指す統計表 ID を直す
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:node .claude/scripts/blog/quality-gate.mjs <slug>] [起票:2026-10-07] [領域:サイト]
+
+- **事象**: 2026-10-07 に入れた統計表 ID の照合 (`stats-table-id-lint.mjs`) を公開済み 389 記事に当てたところ、図の年の書き直し対象 22 本の外で 2 本が当たった。`cc-estat-09-radar-prefecture` は「県民所得」の表として `0003448900` を書いているが、e-Stat では経済構造実態調査 (公園・遊園地の従業者数) の表である。`cc-estat-14-energy-area-chart` は「電力需給統計」として `0003234567` を書いているが、e-Stat では木材統計調査の表である。どちらも連番風の ID で、例として作った値の可能性がある。
+- **手順**: 各記事を R2 から docs/21 へ取り、e-Stat で実在する正しい表の ID に差し替える (取れなければ ID を書かずに統計名とデータベースへのリンクにする)。コード例の取得結果が本文の説明と食い違わないかも確かめ、blog-critic を通して公開する。
+- **完了条件**: 2 本とも quality-gate の `STATS_TABLE_*` が 0 件で再公開され、本番の記事で ID と統計名が一致している。
+
 ### [DEPS-TAILWIND4-01] apps/web を tailwindcss 4 へ移行し、braces を runtime 依存から外す
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:npm audit --omit=dev --audit-level=low] [起票:2026-10-06] [領域:管理]
 
@@ -1778,7 +1957,8 @@ updated: 2026-10-06
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npx tsx .claude/scripts/blog/build-metric-definition-sheet.ts --slug real-disposable-income-reversal] [起票:2026-09-19] [期日:2026-10-17] [領域:データ]
 
 - **owner**: survey-curator (surveyId) / data-ingester (yearFormat)
-- **実測 (2026-09-19)**: 同じ家計調査 (SSDS 経由) 由来なのに `disposable-income-worker-households` / `disposable-income-after-rent` / `real-disposable-income` は `yearFormat: 'fiscal'`、`black-tea-consumption-expenditure` / `private-rent-consumption-expenditure` / `engel-coefficient` は `'calendar'`。サイトの yearName が同じ調査で「2024年度」と「2024年」に分かれ、ブログ (real-disposable-income-reversal 等) が「2024年度」を書く原因になった。家計調査の年次結果は暦年平均 (統計局「2024年（令和6年）平均」)。上記 4 key と `per-capita-prefectural-income-h27` は `surveyId` 未設定で指標定義シートが「(surveyId 未設定)」を返す。
+- **実測 (2026-09-19)**: 同じ家計調査 (SSDS 経由) 由来なのに `disposable-income-worker-households` / `disposable-income-after-rent` / `real-disposable-income` は `yearFormat: 'fiscal'`、`black-tea-consumption-expenditure` / `private-rent-consumption-expenditure` / `engel-coefficient` は `'calendar'`。サイトの yearName が同じ調査で「2024年度」と「2024年」に分かれ、ブログ (real-disposable-income-reversal 等) が「2024年度」を書く原因になった。家計調査の年次結果は暦年平均 (統計局「2024年（令和6年）平均」)。上記 4 key と `per-capita-prefectural-income-h27` は `surveyId` 未設定で指標定義シートが「(surveyId 未設定)」を返す。 `per-capita-prefectural-income-h27` は description と note も無く、定義シートの対象欄が「config に対象の記述なし」になる (2026-10-07、engel-coefficient-vs-prefectural-income の writer が報告。県民所得の構成・分母・名目か実質かが読者向けの定義に出ない)。
+- **追記 (2026-10-07)**: real-disposable-income-reversal の critic が、`consumer-price-difference-index-overall` (消費者物価地域差指数) と家計の 3 指標の yearFormat が fiscal のままで、記事の年の書き方が揃わないことを再度報告した。
 - **次**: ①家計調査由来 metric を列挙し (`grep -l 家計調査 packages/data-configs/src/metrics/*.ts`)、yearFormat を出典で確定して揃える (SSDS の表ラベルは「年度」でも家計調査項目は暦年)。②surveyId を `kakei-chousa` 等へ紐付け `/audit-survey-linkage` を通す。③ranking-prominence / seoTitle の再生成が要るか確認。
 - **範囲の拡張 (2026-09-19 追記)**: S1 12 冊の図 120 枚を `.local/kindle-audit/fig-years.ts` (図の年表記 × source.json の rankingKey × config yearFormat) で実測すると、国勢調査 (未婚率・単独世帯 2020)、社会生活基本調査 (行動者率 2021)、住宅・土地統計、宿泊旅行統計 (2024) まで一律 `fiscal` だった。家計調査に限らず「調査の集計期間が暦年・時点のもの」を一次資料で確定して直す。書籍側は `figure-corrections.ts` で本文に合わせて図の年表記を当てているが、config が直ればその校訂は不要になる。
 - **停止条件**: yearFormat を一括置換しない (SSDS には年度が正しい項目もある)。出典で確認できない key は `未宣言` のまま残し、指標定義シートに出す。
@@ -2754,6 +2934,7 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 
 - **論点**: braces (GHSA-vfj7-8cjw-p6xm) は `<=3.0.3` が該当し、2026-10-06 時点で修正版が無い。knip の経路は 2026-10-06 に knip 6 へ更新して外した。[DEPS-TAILWIND4-01] で tailwindcss 3 を外しても、`eslint-config-next` / `@next/eslint-plugin-next` 16.3.8 (最新) が `fast-glob` 3.3.1 を固定している dev 依存の経路が残り、上流に修正が無い。このため main への push と全 PR で `npm audit --audit-level=high` が失敗し続け、他の新しい high を見落とす。
 - **選択肢**: (a) braces または Next.js の eslint plugin の上流修正を待つ。待つ間はゲートが赤のままになる。(b) dev 依存に限り、この GHSA だけを期限付きの例外として扱う。例えば `npm audit --json` の結果からこの ID を除いて判定するスクリプトにし、`test:dependency-security` に例外の期限と理由を固定する。runtime ゲート (`--omit=dev --audit-level=low`) は例外にしない。
+- **追記 (2026-10-07)**: braces とは別に、sharp `<0.35.5` (CVE-2026-96889 / GHSA-wq5f-xc86-pv6w, high) が加わった。PR #1099 の run 37597838232 と、main への push の run 37554632545 で検出。直接依存は Dependabot PR #1087 (sharp 0.35.5) で上がる。ただし next・miniflare・wrangler が内部で持つ sharp が残り、#1087 自身の Security Scan も失敗している。`npm audit fix --force` は `@cloudflare/vitest-pool-workers` の版変更を伴う破壊的な更新を提案する。sharp は runtime 経路 (next) にも乗るので、例外の対象にはしない。
 - **停止条件**: runtime 依存の脆弱性を例外にしない。期限と再評価日の無い例外を入れない。
 - **完了条件**: 採否が決まり、採った方針で Security Scan が green になる。または待つと決めたなら、再評価日 (braces の新版公開の確認) を本カードに書く。
 

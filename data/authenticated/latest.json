@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-06T09:53:58.907Z",
-  "runId": "37445622951",
+  "generatedAt": "2026-10-07T08:36:27.035Z",
+  "runId": "37594285209",
   "sources": [
     {
       "source": "moshimo",
       "capability": "outcomes",
-      "observedAt": "2026-10-06T09:52:39.765Z",
+      "observedAt": "2026-10-07T08:34:07.541Z",
       "activated": true,
       "status": "pass",
       "code": null,
-      "runId": "37445622951",
+      "runId": "37594285209",
       "runAttempt": 1,
       "metricsAvailable": true,
       "inventoryAvailable": false,
@@ -18,7 +18,7 @@
       "relogin": "session_valid",
       "recovery": null,
       "evidence": {
-        "sha256": "d8e7fcbee31420838d4eb4c818b5f0ba3aa010f75748753c9228e41ede830f45",
+        "sha256": "355d79c677c194e9d5fb02fed2a11f37a9eb541662790c902e782f56dd1d38e0",
         "bytes": 24010
       },
       "quality": null,
@@ -28,11 +28,11 @@
     {
       "source": "a8",
       "capability": "site-outcomes",
-      "observedAt": "2026-10-06T09:52:29.141Z",
+      "observedAt": "2026-10-07T08:33:29.986Z",
       "activated": true,
       "status": "pass",
       "code": null,
-      "runId": "37445622951",
+      "runId": "37594285209",
       "runAttempt": 1,
       "metricsAvailable": true,
       "inventoryAvailable": false,
@@ -40,7 +40,7 @@
       "relogin": "session_valid",
       "recovery": null,
       "evidence": {
-        "sha256": "3e091a2887f4a7493d13909cfa059220f1b56b7150de47bd0def3756707cba2f",
+        "sha256": "46b206584ca1522776a4935ccad8a645e318c74cd24c3264325fbf60913a149b",
         "bytes": 210093
       },
       "quality": null,
@@ -50,11 +50,11 @@
     {
       "source": "afb",
       "capability": "site-conversion-outcomes",
-      "observedAt": "2026-10-06T09:51:49.111Z",
+      "observedAt": "2026-10-07T08:34:16.291Z",
       "activated": true,
       "status": "pass",
       "code": null,
-      "runId": "37445622951",
+      "runId": "37594285209",
       "runAttempt": 1,
       "metricsAvailable": true,
       "inventoryAvailable": false,
@@ -62,7 +62,7 @@
       "relogin": null,
       "recovery": null,
       "evidence": {
-        "sha256": "3f344fb9c2b84b95a7231d5bef13a6945007dc0c35b13f1f8be8b043ba2cf9c9",
+        "sha256": "b34c5c532a3f6ebc5713e14bfb94fbe0fb0d0659d7248ced5fab79117ac8332c",
         "bytes": 1409
       },
       "quality": {
@@ -76,11 +76,11 @@
     {
       "source": "note",
       "capability": "dashboard-metrics",
-      "observedAt": "2026-10-06T09:52:33.793Z",
+      "observedAt": "2026-10-07T08:34:30.186Z",
       "activated": true,
       "status": "pass",
       "code": null,
-      "runId": "37445622951",
+      "runId": "37594285209",
       "runAttempt": 1,
       "metricsAvailable": true,
       "inventoryAvailable": true,
@@ -88,29 +88,33 @@
       "relogin": "session_valid",
       "recovery": null,
       "evidence": {
-        "sha256": "936eb40baf0b4faf825e008d5f4a078e5557c15b2f540a8268e70aefdcb51f0b",
-        "bytes": 1701042
+        "sha256": "e43925d3be68c7aa551a6d5127d4b773c3c3455c324dbb207352c1864d04d487",
+        "bytes": 1697115
       },
       "quality": {
         "expectedRows": 286,
-        "observedRows": 286,
-        "missingRows": 0,
+        "observedRows": 285,
+        "missingRows": 1,
         "totalsMatched": true,
         "paginationComplete": true,
         "revenue": null,
         "revenueStatus": "verification_required"
       },
-      "knownIncomplete": null,
+      "knownIncomplete": {
+        "code": "note_dashboard_row_hidden",
+        "missingRows": 1,
+        "acceptedBy": "owner-2026-09-27"
+      },
       "remaining": null
     },
     {
       "source": "gsc",
       "capability": "verified-coverage-export",
-      "observedAt": "2026-10-06T09:52:15.188Z",
+      "observedAt": "2026-10-07T08:34:32.534Z",
       "activated": true,
       "status": "pass",
       "code": null,
-      "runId": "37445622951",
+      "runId": "37594285209",
       "runAttempt": 1,
       "metricsAvailable": true,
       "inventoryAvailable": false,
@@ -118,8 +122,8 @@
       "relogin": null,
       "recovery": null,
       "evidence": {
-        "sha256": "a1c5b80367ea36b731c8c1f57c5f20877fe83b9865bdde2380cc7d81679d81d4",
-        "bytes": 3093630
+        "sha256": "9d94aa593d77a9707211051a7999412d7af76e5d6742ee38cf0b459f2c766611",
+        "bytes": 3028562
       },
       "quality": null,
       "knownIncomplete": null,
@@ -128,11 +132,11 @@
     {
       "source": "kdp",
       "capability": "publication-daily-and-monthly-royalties",
-      "observedAt": "2026-10-06T09:52:22.178Z",
+      "observedAt": "2026-10-07T08:34:20.673Z",
       "activated": true,
       "status": "failed",
       "code": "auth_required",
-      "runId": "37445622951",
+      "runId": "37594285209",
       "runAttempt": 1,
       "metricsAvailable": false,
       "inventoryAvailable": false,
@@ -143,7 +147,7 @@
         "blockedSince": "2026-09-30T08:35:08.183Z"
       },
       "evidence": {
-        "sha256": "a5407a3e44627102e3f6c32fcbd4b44d6ce2c1a72ef2a282c41cda04e4fb36ea",
+        "sha256": "5a9c0f1f3d0c14150857732189bc6d303320dc5a375f086c03ecb9cb3b9d4bef",
         "bytes": 159
       },
       "quality": null,
@@ -153,11 +157,11 @@
     {
       "source": "rakuten",
       "capability": "monthly-outcomes",
-      "observedAt": "2026-10-06T09:52:38.403Z",
+      "observedAt": "2026-10-07T08:34:05.555Z",
       "activated": true,
       "status": "pass",
       "code": null,
-      "runId": "37445622951",
+      "runId": "37594285209",
       "runAttempt": 1,
       "metricsAvailable": true,
       "inventoryAvailable": false,
@@ -165,7 +169,7 @@
       "relogin": "session_valid",
       "recovery": null,
       "evidence": {
-        "sha256": "45e92aafc67533082f907f7212440b21b08e9c7a38eda41795522f75681ef89d",
+        "sha256": "50d34f7e7aa20467421fa3405aee90e34fd99b3d9321956f0246b4183df1608d",
         "bytes": 1045
       },
       "quality": null,
@@ -175,11 +179,11 @@
     {
       "source": "coconala",
       "capability": "marketplace-metrics",
-      "observedAt": "2026-10-06T09:52:24.497Z",
+      "observedAt": "2026-10-07T08:34:30.868Z",
       "activated": true,
       "status": "failed",
       "code": "auth_required",
-      "runId": "37445622951",
+      "runId": "37594285209",
       "runAttempt": 1,
       "metricsAvailable": false,
       "inventoryAvailable": false,
@@ -190,7 +194,7 @@
         "blockedSince": "2026-10-01T12:39:06.962Z"
       },
       "evidence": {
-        "sha256": "014d24caf07929d3873c34fccd1dbfaf89f286179f26f1c73349654b1ed7e121",
+        "sha256": "975349425ccf17289cdcb8d3ac9ab15399e368763655c855e507b74b1faf9b0f",
         "bytes": 164
       },
       "quality": null,

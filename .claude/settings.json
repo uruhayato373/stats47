@@ -89,6 +89,14 @@
             "command": "node \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/check-docs-on-stop.js"
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/check-findings-on-stop.js"
+          }
+        ]
       }
     ]
   }

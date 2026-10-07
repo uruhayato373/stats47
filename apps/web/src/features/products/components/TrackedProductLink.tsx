@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 
+import { buildAmazonUrl } from "@/features/ads/constants/related-books";
+
 import { trackCtaClick, trackNavClick } from "@/lib/analytics/events";
 
 import type { StorefrontChannel } from "../types";
@@ -9,7 +11,7 @@ import type { StorefrontChannel } from "../types";
 interface TrackedProductLinkProps {
   readonly href: string;
   readonly label: string;
-  readonly surface: "product_catalog" | "blog_product";
+  readonly surface: "product_catalog" | "blog_product" | "ranking_product";
   readonly className?: string;
   readonly children: React.ReactNode;
 }
@@ -45,6 +47,7 @@ interface TrackedProductOutboundLinkProps {
 /**
  * 販売先クリック。商品IDは詳細ページの page path、販売先は登録済み link_position で判別する。
  * 新しい GA4 custom dimension に依存しないため、デプロイ直後から集計可能。
+ * Kindle は Amazon アソシエイトのタグを付ける (自社本でも第三者の購入は紹介料の対象) ため sponsored にする。
  */
 export function TrackedProductOutboundLink({
   href,
@@ -56,9 +59,9 @@ export function TrackedProductOutboundLink({
 }: TrackedProductOutboundLinkProps) {
   return (
     <a
-      href={href}
+      href={channel === "kindle" ? buildAmazonUrl(href) : href}
       target="_blank"
-      rel="noopener noreferrer"
+      rel={channel === "kindle" ? "noopener noreferrer sponsored" : "noopener noreferrer"}
       className={className}
       data-click-owner="cta"
       onClick={() =>

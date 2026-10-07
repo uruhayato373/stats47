@@ -1,0 +1,820 @@
+{
+ "statsDataId": "0003084610",
+ "title": "令和元年以前 職種DB第１表",
+ "statName": "賃金構造基本統計調査",
+ "govOrg": "厚生労働省",
+ "surveyDate": null,
+ "overallTotalNumber": 123840,
+ "dimensions": [
+  {
+   "id": "tab",
+   "name": "表章項目",
+   "valueCount": 8,
+   "sampleValues": [
+    {
+     "code": "33",
+     "name": "年齢",
+     "unit": "歳"
+    },
+    {
+     "code": "34",
+     "name": "勤続年数",
+     "unit": "年"
+    },
+    {
+     "code": "36",
+     "name": "所定内実労働時間数",
+     "unit": "時間"
+    },
+    {
+     "code": "38",
+     "name": "超過実労働時間数",
+     "unit": "時間"
+    },
+    {
+     "code": "40",
+     "name": "きまって支給する現金給与額",
+     "unit": "千円"
+    },
+    {
+     "code": "42",
+     "name": "所定内給与額",
+     "unit": "千円"
+    },
+    {
+     "code": "44",
+     "name": "年間賞与その他特別給与額",
+     "unit": "千円"
+    },
+    {
+     "code": "45",
+     "name": "労働者数",
+     "unit": "十人"
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "cat01",
+   "name": "性別_基本",
+   "valueCount": 3,
+   "sampleValues": [
+    {
+     "code": "01",
+     "name": "男女計",
+     "unit": null
+    },
+    {
+     "code": "02",
+     "name": "男",
+     "unit": null
+    },
+    {
+     "code": "03",
+     "name": "女",
+     "unit": null
+    }
+   ],
+   "hasTotal": true
+  },
+  {
+   "id": "cat02",
+   "name": "企業規模_基本",
+   "valueCount": 4,
+   "sampleValues": [
+    {
+     "code": "01",
+     "name": "企業規模計（10人以上）",
+     "unit": null
+    },
+    {
+     "code": "02",
+     "name": "1,000人以上",
+     "unit": null
+    },
+    {
+     "code": "03",
+     "name": "100～999人",
+     "unit": null
+    },
+    {
+     "code": "04",
+     "name": "10～99人",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "cat03",
+   "name": "職種全区分",
+   "valueCount": 129,
+   "sampleValues": [
+    {
+     "code": "0010",
+     "name": "自然科学系研究者",
+     "unit": null
+    },
+    {
+     "code": "0020",
+     "name": "化学分析員",
+     "unit": null
+    },
+    {
+     "code": "0030",
+     "name": "技術士",
+     "unit": null
+    },
+    {
+     "code": "0040",
+     "name": "一級建築士",
+     "unit": null
+    },
+    {
+     "code": "0050",
+     "name": "測量技術者",
+     "unit": null
+    },
+    {
+     "code": "0060",
+     "name": "システム・エンジニア",
+     "unit": null
+    },
+    {
+     "code": "0070",
+     "name": "プログラマー",
+     "unit": null
+    },
+    {
+     "code": "0080",
+     "name": "医師",
+     "unit": null
+    },
+    {
+     "code": "0090",
+     "name": "歯科医師",
+     "unit": null
+    },
+    {
+     "code": "0100",
+     "name": "獣医師",
+     "unit": null
+    },
+    {
+     "code": "0110",
+     "name": "薬剤師",
+     "unit": null
+    },
+    {
+     "code": "0120",
+     "name": "看護師",
+     "unit": null
+    },
+    {
+     "code": "0130",
+     "name": "准看護師",
+     "unit": null
+    },
+    {
+     "code": "0140",
+     "name": "看護補助者",
+     "unit": null
+    },
+    {
+     "code": "0150",
+     "name": "診療放射線・診療エックス線技師",
+     "unit": null
+    },
+    {
+     "code": "0160",
+     "name": "臨床検査技師",
+     "unit": null
+    },
+    {
+     "code": "0170",
+     "name": "理学療法士、作業療法士",
+     "unit": null
+    },
+    {
+     "code": "0180",
+     "name": "歯科衛生士",
+     "unit": null
+    },
+    {
+     "code": "0190",
+     "name": "歯科技工士",
+     "unit": null
+    },
+    {
+     "code": "0200",
+     "name": "栄養士",
+     "unit": null
+    },
+    {
+     "code": "0210",
+     "name": "保育士（保母・保父）",
+     "unit": null
+    },
+    {
+     "code": "0220",
+     "name": "介護支援専門員（ケアマネージャー）",
+     "unit": null
+    },
+    {
+     "code": "0230",
+     "name": "ホームヘルパー",
+     "unit": null
+    },
+    {
+     "code": "0240",
+     "name": "福祉施設介護員",
+     "unit": null
+    },
+    {
+     "code": "0250",
+     "name": "弁護士",
+     "unit": null
+    },
+    {
+     "code": "0260",
+     "name": "公認会計士、税理士",
+     "unit": null
+    },
+    {
+     "code": "0270",
+     "name": "社会保険労務士",
+     "unit": null
+    },
+    {
+     "code": "0280",
+     "name": "不動産鑑定士",
+     "unit": null
+    },
+    {
+     "code": "0290",
+     "name": "幼稚園教諭",
+     "unit": null
+    },
+    {
+     "code": "0300",
+     "name": "高等学校教員",
+     "unit": null
+    },
+    {
+     "code": "0310",
+     "name": "大学教授",
+     "unit": null
+    },
+    {
+     "code": "0320",
+     "name": "大学准教授",
+     "unit": null
+    },
+    {
+     "code": "0330",
+     "name": "大学講師",
+     "unit": null
+    },
+    {
+     "code": "0340",
+     "name": "各種学校・専修学校教員",
+     "unit": null
+    },
+    {
+     "code": "0350",
+     "name": "個人教師、塾・予備校講師",
+     "unit": null
+    },
+    {
+     "code": "0360",
+     "name": "記者",
+     "unit": null
+    },
+    {
+     "code": "0370",
+     "name": "デザイナー",
+     "unit": null
+    },
+    {
+     "code": "0380",
+     "name": "ワープロ・オペレーター",
+     "unit": null
+    },
+    {
+     "code": "0390",
+     "name": "キーパンチャー",
+     "unit": null
+    },
+    {
+     "code": "0400",
+     "name": "電子計算機オペレーター",
+     "unit": null
+    },
+    {
+     "code": "0410",
+     "name": "百貨店店員",
+     "unit": null
+    },
+    {
+     "code": "0420",
+     "name": "販売店員（百貨店店員を除く。）",
+     "unit": null
+    },
+    {
+     "code": "0430",
+     "name": "スーパー店チェッカー",
+     "unit": null
+    },
+    {
+     "code": "0440",
+     "name": "自動車外交販売員",
+     "unit": null
+    },
+    {
+     "code": "0450",
+     "name": "家庭用品外交販売員",
+     "unit": null
+    },
+    {
+     "code": "0460",
+     "name": "保険外交員",
+     "unit": null
+    },
+    {
+     "code": "0470",
+     "name": "理容・美容師",
+     "unit": null
+    },
+    {
+     "code": "0480",
+     "name": "洗たく工",
+     "unit": null
+    },
+    {
+     "code": "0490",
+     "name": "調理士",
+     "unit": null
+    },
+    {
+     "code": "0500",
+     "name": "調理士見習",
+     "unit": null
+    },
+    {
+     "code": "0510",
+     "name": "給仕従事者",
+     "unit": null
+    },
+    {
+     "code": "0520",
+     "name": "娯楽接客員",
+     "unit": null
+    },
+    {
+     "code": "0530",
+     "name": "警備員",
+     "unit": null
+    },
+    {
+     "code": "0540",
+     "name": "守衛",
+     "unit": null
+    },
+    {
+     "code": "0550",
+     "name": "電車運転士",
+     "unit": null
+    },
+    {
+     "code": "0560",
+     "name": "電車車掌",
+     "unit": null
+    },
+    {
+     "code": "0570",
+     "name": "旅客掛",
+     "unit": null
+    },
+    {
+     "code": "0580",
+     "name": "自家用乗用自動車運転者",
+     "unit": null
+    },
+    {
+     "code": "0590",
+     "name": "自家用貨物自動車運転者",
+     "unit": null
+    },
+    {
+     "code": "0600",
+     "name": "タクシー運転者",
+     "unit": null
+    },
+    {
+     "code": "0610",
+     "name": "営業用バス運転者",
+     "unit": null
+    },
+    {
+     "code": "0620",
+     "name": "営業用大型貨物自動車運転者",
+     "unit": null
+    },
+    {
+     "code": "0630",
+     "name": "営業用普通・小型貨物自動車運転者",
+     "unit": null
+    },
+    {
+     "code": "0640",
+     "name": "航空機操縦士",
+     "unit": null
+    },
+    {
+     "code": "0650",
+     "name": "航空機客室乗務員",
+     "unit": null
+    },
+    {
+     "code": "0660",
+     "name": "製鋼工",
+     "unit": null
+    },
+    {
+     "code": "0670",
+     "name": "非鉄金属精錬工",
+     "unit": null
+    },
+    {
+     "code": "0680",
+     "name": "鋳物工",
+     "unit": null
+    },
+    {
+     "code": "0690",
+     "name": "型鍛造工",
+     "unit": null
+    },
+    {
+     "code": "0700",
+     "name": "鉄鋼熱処理工",
+     "unit": null
+    },
+    {
+     "code": "0710",
+     "name": "圧延伸張工",
+     "unit": null
+    },
+    {
+     "code": "0720",
+     "name": "金属検査工",
+     "unit": null
+    },
+    {
+     "code": "0730",
+     "name": "一般化学工",
+     "unit": null
+    },
+    {
+     "code": "0740",
+     "name": "化繊紡糸工",
+     "unit": null
+    },
+    {
+     "code": "0750",
+     "name": "ガラス製品工",
+     "unit": null
+    },
+    {
+     "code": "0760",
+     "name": "陶磁器工",
+     "unit": null
+    },
+    {
+     "code": "0770",
+     "name": "旋盤工",
+     "unit": null
+    },
+    {
+     "code": "0780",
+     "name": "フライス盤工",
+     "unit": null
+    },
+    {
+     "code": "0790",
+     "name": "金属プレス工",
+     "unit": null
+    },
+    {
+     "code": "0800",
+     "name": "鉄工",
+     "unit": null
+    },
+    {
+     "code": "0810",
+     "name": "板金工",
+     "unit": null
+    },
+    {
+     "code": "0820",
+     "name": "電気めっき工",
+     "unit": null
+    },
+    {
+     "code": "0830",
+     "name": "バフ研磨工",
+     "unit": null
+    },
+    {
+     "code": "0840",
+     "name": "仕上工",
+     "unit": null
+    },
+    {
+     "code": "0850",
+     "name": "溶接工",
+     "unit": null
+    },
+    {
+     "code": "0860",
+     "name": "機械組立工",
+     "unit": null
+    },
+    {
+     "code": "0870",
+     "name": "機械検査工",
+     "unit": null
+    },
+    {
+     "code": "0880",
+     "name": "機械修理工",
+     "unit": null
+    },
+    {
+     "code": "0890",
+     "name": "重電機器組立工",
+     "unit": null
+    },
+    {
+     "code": "0900",
+     "name": "通信機器組立工",
+     "unit": null
+    },
+    {
+     "code": "0910",
+     "name": "半導体チップ製造工",
+     "unit": null
+    },
+    {
+     "code": "0920",
+     "name": "プリント配線工",
+     "unit": null
+    },
+    {
+     "code": "0930",
+     "name": "軽電機器検査工",
+     "unit": null
+    },
+    {
+     "code": "0940",
+     "name": "自動車組立工",
+     "unit": null
+    },
+    {
+     "code": "0950",
+     "name": "自動車整備工",
+     "unit": null
+    },
+    {
+     "code": "0960",
+     "name": "パン・洋生菓子製造工",
+     "unit": null
+    },
+    {
+     "code": "0970",
+     "name": "精紡工",
+     "unit": null
+    },
+    {
+     "code": "0980",
+     "name": "織布工",
+     "unit": null
+    },
+    {
+     "code": "0990",
+     "name": "洋裁工",
+     "unit": null
+    },
+    {
+     "code": "1000",
+     "name": "ミシン縫製工",
+     "unit": null
+    },
+    {
+     "code": "1010",
+     "name": "製材工",
+     "unit": null
+    },
+    {
+     "code": "1020",
+     "name": "木型工",
+     "unit": null
+    },
+    {
+     "code": "1030",
+     "name": "家具工",
+     "unit": null
+    },
+    {
+     "code": "1040",
+     "name": "建具製造工",
+     "unit": null
+    },
+    {
+     "code": "1050",
+     "name": "製紙工",
+     "unit": null
+    },
+    {
+     "code": "1060",
+     "name": "紙器工",
+     "unit": null
+    },
+    {
+     "code": "1070",
+     "name": "プロセス製版工",
+     "unit": null
+    },
+    {
+     "code": "1080",
+     "name": "オフセット印刷工",
+     "unit": null
+    },
+    {
+     "code": "1090",
+     "name": "合成樹脂製品成形工",
+     "unit": null
+    },
+    {
+     "code": "1100",
+     "name": "金属・建築塗装工",
+     "unit": null
+    },
+    {
+     "code": "1110",
+     "name": "機械製図工",
+     "unit": null
+    },
+    {
+     "code": "1120",
+     "name": "ボイラー工",
+     "unit": null
+    },
+    {
+     "code": "1130",
+     "name": "クレーン運転工",
+     "unit": null
+    },
+    {
+     "code": "1140",
+     "name": "建設機械運転工",
+     "unit": null
+    },
+    {
+     "code": "1150",
+     "name": "玉掛け作業員",
+     "unit": null
+    },
+    {
+     "code": "1160",
+     "name": "発電・変電工",
+     "unit": null
+    },
+    {
+     "code": "1170",
+     "name": "電気工",
+     "unit": null
+    },
+    {
+     "code": "1180",
+     "name": "掘削・発破工",
+     "unit": null
+    },
+    {
+     "code": "1190",
+     "name": "型枠大工",
+     "unit": null
+    },
+    {
+     "code": "1200",
+     "name": "とび工",
+     "unit": null
+    },
+    {
+     "code": "1210",
+     "name": "鉄筋工",
+     "unit": null
+    },
+    {
+     "code": "1220",
+     "name": "大工",
+     "unit": null
+    },
+    {
+     "code": "1230",
+     "name": "左官",
+     "unit": null
+    },
+    {
+     "code": "1240",
+     "name": "配管工",
+     "unit": null
+    },
+    {
+     "code": "1250",
+     "name": "はつり工",
+     "unit": null
+    },
+    {
+     "code": "1260",
+     "name": "土工",
+     "unit": null
+    },
+    {
+     "code": "1270",
+     "name": "港湾荷役作業員",
+     "unit": null
+    },
+    {
+     "code": "1280",
+     "name": "ビル清掃員",
+     "unit": null
+    },
+    {
+     "code": "1290",
+     "name": "用務員",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "time",
+   "name": "時間軸（2009～2019）",
+   "valueCount": 10,
+   "sampleValues": [
+    {
+     "code": "20190000000",
+     "name": "2019年",
+     "unit": null
+    },
+    {
+     "code": "2018000000",
+     "name": "2018年",
+     "unit": null
+    },
+    {
+     "code": "2017000000",
+     "name": "2017年",
+     "unit": null
+    },
+    {
+     "code": "2016000000",
+     "name": "2016年",
+     "unit": null
+    },
+    {
+     "code": "2015000000",
+     "name": "2015年",
+     "unit": null
+    },
+    {
+     "code": "2014000000",
+     "name": "2014年",
+     "unit": null
+    },
+    {
+     "code": "2013000000",
+     "name": "2013年",
+     "unit": null
+    },
+    {
+     "code": "2012000000",
+     "name": "2012年",
+     "unit": null
+    },
+    {
+     "code": "2011000000",
+     "name": "2011年",
+     "unit": null
+    },
+    {
+     "code": "2010000000",
+     "name": "2010年",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  }
+ ]
+}
