@@ -1,0 +1,13 @@
+{
+  "title": "焼津（冷凍・遠洋）と気仙沼（生鮮・近海）の二極構造",
+  "subtitle": "統計上の都道府県別漁獲量（2015年、単位: トン）",
+  "unit": "トン",
+  "year": "2015",
+  "rankingKey": "fishery-species-catch-bonito",
+  "source": "e-Stat（政府統計の総合窓口）",
+  "note": "bonito-ranking.json の静岡県・宮城県の値を並べた手描き SVG の元データ。県の値であり、焼津港・気仙沼港単独の水揚げ量ではない",
+  "data": [
+    { "areaName": "静岡県", "areaCode": "22000", "label": "静岡県（焼津）", "value": 81295 },
+    { "areaName": "宮城県", "areaCode": "04000", "label": "宮城県（気仙沼）", "value": 19828 }
+  ]
+}
