@@ -16,7 +16,6 @@ import {
   KINDLE_SERIES_LABELS,
 } from '../../../../packages/product-factory/src/channels/kindle/cover-design';
 import { KDP_PORTFOLIO_POLICY } from '../../../../packages/product-factory/src/channels/kindle/kdp-publishing-policy';
-import { datasetDir } from '../../../../config/datasets.mjs';
 import { KDP_LISTINGS } from '../../../../config/paths.mjs';
 import surveysMaster from '../../../../packages/ranking/src/data/surveys.json';
 
