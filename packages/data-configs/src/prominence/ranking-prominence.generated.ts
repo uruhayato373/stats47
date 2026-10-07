@@ -88,7 +88,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "population",
     "categoryName": "人口・世帯",
-    "count": 152,
+    "count": 154,
     "representatives": [
       {
         "rankingKey": "births",
@@ -316,7 +316,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "economy",
     "categoryName": "企業・家計・経済",
-    "count": 868,
+    "count": 871,
     "representatives": [
       {
         "rankingKey": "natto-consumption-expenditure",
@@ -453,7 +453,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "tourism",
     "categoryName": "運輸・観光",
-    "count": 44,
+    "count": 45,
     "representatives": [
       {
         "rankingKey": "total-overnight-guests",
@@ -594,7 +594,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "safetyenvironment",
     "categoryName": "司法・安全・環境",
-    "count": 141,
+    "count": 145,
     "representatives": [
       {
         "rankingKey": "per-capita-police-expenditure-pref-municipal",
@@ -640,7 +640,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "socialsecurity",
     "categoryName": "社会保障・衛生",
-    "count": 285,
+    "count": 288,
     "representatives": [
       {
         "rankingKey": "physical-disability-certificates-issued",
