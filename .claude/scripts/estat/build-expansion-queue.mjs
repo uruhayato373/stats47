@@ -29,11 +29,12 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..", "..", "..");
-const CAND_FILE = path.join(ROOT, "data/estat/ssds-candidates.json");
-const QUEUE_FILE = path.join(ROOT, "data/estat/expansion-queue.json");
+const CAND_FILE = path.join(ROOT, `${datasetDir("estat.candidates")}/ssds-candidates.json`);
+const QUEUE_FILE = path.join(ROOT, `${datasetDir("estat.candidates")}/expansion-queue.json`);
 const METRICS_DIR = path.join(ROOT, "packages/data-configs/src/metrics");
 const KNOWN_FILE = path.join(ROOT, "packages/ranking/src/config/known-ranking-keys.ts");
 

@@ -23,7 +23,7 @@ import { PROJECT_ROOT, toIsoWeek } from "./lib/auth.mjs";
 import { readMeasurementHealth, formatMeasurementHealth } from '../measurement/health.mjs';
 import { aspRevenueLines, productRevenueLine } from './nsm-revenue-lines.mjs';
 import { formatCycleHealth, readCycleHealth } from './lib/cycle-health.mjs';
-import { datasetPath } from '../../../config/datasets.mjs';
+import { datasetDir, datasetPath } from '../../../config/datasets.mjs';
 
 function parseArgs() {
   const args = process.argv.slice(2);
@@ -142,8 +142,8 @@ function ghIssueList(argv) {
 
 function gsSection(week) {
   // KPI/WoW は確定7日 (非重複) 系列だけを使う。rolling28d は文脈の単一値のみ。
-  const fin = readCsv("data/gsc/history-finalized7d.csv");
-  const rolling = readCsv("data/gsc/history.csv");
+  const fin = readCsv(datasetPath("gsc.history-finalized"));
+  const rolling = readCsv(datasetPath("gsc.history"));
   const lines = [];
   const target = fin?.rows.find((r) => r.week === week);
   if (target) {
@@ -166,7 +166,7 @@ function gsSection(week) {
 
 function ga4Section(week) {
   // KPI/WoW は Japan-only 確定7日 (非重複) を優先する。
-  const fin = readCsv("data/ga4/history-finalized7d.csv");
+  const fin = readCsv(datasetPath("ga4.history-finalized"));
   const target = fin?.rows.find((r) => r.week === week);
   if (target) {
     const idx = fin.rows.indexOf(target);
@@ -180,7 +180,7 @@ function ga4Section(week) {
     return lines.join("\n") + "\n";
   }
   // fallback: 後方互換の legacy 系列 (基盤混在)。同一 basis の直前行とだけ比較する。
-  const hist = readCsv("data/ga4/history.csv");
+  const hist = readCsv(datasetPath("ga4.history"));
   if (!hist) return "_GA4: history が存在しません_\n";
   const t = hist.rows.find((r) => r.week === week);
   if (!t) return `_GA4: ${week} の行が見つかりません_\n`;
@@ -230,7 +230,7 @@ function revenueSection(week) {
   lines.push("- AdSense: **¥0**（2026-08-29 に恒久停止。再開前提の枠・スクリプトは撤去済み）");
 
   // --- アフィリエイト: 発生額は ASP 管理画面にしかないため、ここでは観測の鮮度だけを判定する。
-  const aff = readCsv("data/affiliate/ga4-affiliate-history.csv");
+  const aff = readCsv(datasetPath("ga4.affiliate-history"));
   const affRows = aff?.rows.filter((r) => r.affiliate_vertical === "_all" && r.link_position === "_all") ?? [];
   const latestAff = affRows.length > 0 ? affRows[affRows.length - 1] : null;
   if (!latestAff) {
@@ -258,16 +258,16 @@ function revenueSection(week) {
   // --- ASP 別の発生・確定。認証切れ・古い観測は 0 円にせず「判定不能」と書く (nsm-revenue-lines.mjs)。
   lines.push(
     ...aspRevenueLines({
-      authLatest: readJsonOrNull("data/authenticated/latest.json"),
-      a8Results: readJsonOrNull("data/affiliate/a8-results.json"),
-      moshimoResults: readJsonOrNull("data/affiliate/moshimo-results.json"),
-      rakutenResults: readJsonOrNull("data/affiliate/rakuten-results.json"),
+      authLatest: readJsonOrNull(`${datasetDir("revenue.authenticated")}/latest.json`),
+      a8Results: readJsonOrNull(datasetPath("a8.results")),
+      moshimoResults: readJsonOrNull(datasetPath("moshimo.results")),
+      rakutenResults: readJsonOrNull(datasetPath("rakuten.results")),
       asOf: weekSun,
     }).map((line) => `  ${line}`),
   );
 
   // --- 商品: 実売の台帳。販売中の商品があるのに記録 0 件なら ¥0 ではなく判定不能 (nsm-revenue-lines.mjs)。
-  const kdpPublication = readJsonOrNull("data/products/kdp-weekly-publication.json");
+  const kdpPublication = readJsonOrNull(datasetPath("kdp.weekly-publication"));
   const portfolio = kdpPublication?.portfolio;
   const liveProductCount =
     Number.isInteger(portfolio?.s1Live) && Number.isInteger(portfolio?.pilotLive)
@@ -275,11 +275,11 @@ function revenueSection(week) {
       : null;
   lines.push(
     productRevenueLine({
-      ledger: readJsonOrNull("data/products/sales-ledger.json"),
+      ledger: readJsonOrNull(datasetPath("sales.ledger")),
       liveProductCount,
       weekStart: weekMon.toISOString().slice(0, 10),
       weekEnd: sundayStr,
-      revenueHistory: readJsonOrNull("data/authenticated/revenue-history.json"),
+      revenueHistory: readJsonOrNull(`${datasetDir("revenue.authenticated")}/revenue-history.json`),
     }),
   );
 
@@ -373,7 +373,7 @@ function alertsSection(week) {
  * 週がずれた state を今週の結果として見せない。
  */
 function cycleSection(week) {
-  const dir = join(PROJECT_ROOT, "data/measurement-cycle");
+  const dir = join(PROJECT_ROOT, datasetDir("business.measurement-cycle"));
   const lines = [];
   let cycle = null;
   try {

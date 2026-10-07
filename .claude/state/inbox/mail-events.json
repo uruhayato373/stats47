@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "description": "obsidian の mail-triage（毎日 cron）がメールから拾ったイベント。売上の正本ではない——正本は各リポのスクレイパーが取るログ。辞書は obsidian .claude/mail-rules.json",
+  "updatedAt": "2026-10-07T01:33:25.538Z",
+  "events": [
+    {
+      "id": "1a10ea31bc25f2e6",
+      "receivedAt": "2026-10-06T00:35:32.000Z",
+      "account": "kazu",
+      "kind": "search-console-monthly",
+      "label": "Search Console 月次レポート",
+      "month": "9",
+      "clicks": "12.1K",
+      "impressions": "354K"
+    },
+    {
+      "id": "1a106b62677ddf36",
+      "receivedAt": "2026-10-04T11:39:23.000Z",
+      "account": "stats47",
+      "kind": "adsense",
+      "label": "AdSense のお知らせ"
+    },
+    {
+      "id": "1a0fb2598e03b496",
+      "receivedAt": "2026-10-02T05:45:40.000Z",
+      "account": "stats47",
+      "kind": "adsense",
+      "label": "AdSense のお知らせ"
+    },
+    {
+      "id": "1a0f6d884fa459b3",
+      "receivedAt": "2026-10-01T09:42:56.000Z",
+      "account": "stats47",
+      "kind": "coconala-monthly",
+      "label": "ココナラ 月次の出品レポート",
+      "month": "2026年9月",
+      "views": 146
+    },
+    {
+      "id": "1a09274aaad4cdfe",
+      "receivedAt": "2026-09-11T21:51:54.000Z",
+      "account": "kazu",
+      "kind": "search-console-milestone",
+      "label": "Search Console クリック数の到達"
+    },
+    {
+      "id": "1a085ad3818a34b6",
+      "receivedAt": "2026-09-09T10:18:36.000Z",
+      "account": "stats47",
+      "kind": "adsense",
+      "label": "AdSense のお知らせ"
+    },
+    {
+      "id": "1a07e6d7b8e8323a",
+      "receivedAt": "2026-09-08T00:31:39.000Z",
+      "account": "kazu",
+      "kind": "search-console-monthly",
+      "label": "Search Console 月次レポート",
+      "month": "8",
+      "clicks": "5.81K",
+      "impressions": "171K"
+    }
+  ]
+}

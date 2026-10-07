@@ -34,6 +34,7 @@ const {
   shortName,
 } = require("./lib/affiliate-ga4-reports-core.cjs");
 const { GA4_PROPERTY_ID } = require("../lib/site-config.cjs");
+const { datasetDir } = require("../../../config/datasets.mjs");
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
 const PROPERTY_ID = process.env.GA4_PROPERTY_ID || GA4_PROPERTY_ID;
@@ -324,7 +325,7 @@ async function main() {
     ),
   };
 
-  const dir = path.join(PROJECT_ROOT, "data/affiliate");
+  const dir = path.join(PROJECT_ROOT, datasetDir("affiliate.audits"));
   fs.mkdirSync(dir, { recursive: true });
   fs.writeFileSync(
     path.join(dir, `ga4-affiliate-${date}.json`),
@@ -389,7 +390,7 @@ async function main() {
 
   process.stdout.write(out.join("\n") + "\n");
   process.stderr.write(
-    `\n[ga4] snapshot → data/affiliate/ga4-affiliate-${date}.json (dims: ${valueDimNames.join(",") || "none"})\n`,
+    `\n[ga4] snapshot → ${datasetDir("ga4.affiliate-history")}/ga4-affiliate-${date}.json (dims: ${valueDimNames.join(",") || "none"})\n`,
   );
 }
 

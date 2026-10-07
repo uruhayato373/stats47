@@ -390,8 +390,8 @@ npx tsx .claude/scripts/blog/push-article-md-r2.ts --apply --src .local/blog-lin
 |---|---|---|
 | ランキングチャート | **生成画像 `![alt](data/<name>.svg)`** (上位5+下位5) | ✅ これだけ。`<chart-placeholder>` (未描画) と インライン `<svg>` は **禁止** |
 | データ表 / 比較表 | **SVG 図** (データ) または 箇条書き (列挙・手順) | ❌ markdown 表 (`\| … \|`) は全面禁止。区切り行 `\|---\|` があれば公開ブロック |
-| 関連ランキング | ページ側 `RelatedRankingsSection` (tag 駆動) | ❌ 記事内 `## 関連ランキング` を書かない。本文中は各図直下の `<source-link>` で個別誘導 |
-| 関連記事 | ページ側 `BlogRelatedArticlesSection` (tag 駆動) | ❌ 記事内 `## 関連記事` / `### 関連記事` を書かない |
+| 関連ランキング | ページ側 `RelatedRankingsSection` (記事が使う指標 → タグ・カテゴリの順) | ❌ 記事内 `## 関連ランキング` を書かない。本文中は各図直下の `<source-link>` で個別誘導 |
+| 関連記事 | ページ側 `BlogRelatedArticlesSection` (同じ指標を使う記事 → 同じタグ → 新着の順) | ❌ 記事内 `## 関連記事` / `### 関連記事` を書かない |
 | AI スクール広告 | (コードから除去済・2026-06-02) | 記事に書かない |
 | 関連データ DL | (コードから除去済・2026-06-02) | 記事に書かない |
 | 出典 | **ページ側 `DataSourceList`** (図の `source.json` から自動表示。調査名 → `/survey/<id>`、統計表 → e-Stat) | ❌ 本文に `## データ出典` を書かない (★2026-09-25〜 `quality-gate.mjs` が blocker)。出典は図の `source.json` に記録し、GIS 派生などは `displaySources` で明示する。計算方法・定義の説明が要るときだけ `## データについて` 節を書く |

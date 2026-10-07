@@ -26,9 +26,10 @@ import { PROJECT_ROOT } from "./lib/auth.mjs";
 import { readCsv } from "./update-history-csv.mjs";
 import { loadCodeAdSlots } from "./lib/code-ad-slots.mjs";
 import { AD_UNITS_FILE, ADSENSE_UNIT_HISTORY_FILE } from "./lib/adsense-report-contract.mjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
-const SNAPSHOT_DIR = "data/adsense/snapshots";
-const STATE_DIR = "data/adsense";
+const SNAPSHOT_DIR = datasetDir("adsense.snapshots");
+const STATE_DIR = datasetDir("adsense.reports");
 
 function parseArgs(argv) {
   const week = argv.find((a) => /^\d{4}-W\d{2}$/.test(a)) ?? null;

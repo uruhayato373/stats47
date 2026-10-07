@@ -42,6 +42,7 @@ import {
   buildCandidatePlan,
 } from './lib/buzz-map-batch-core.mjs';
 import { R2_PUBLIC_BASE_URL, SITE_ORIGIN } from '../lib/site-config.cjs';
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const require = createRequire(import.meta.url);
 // posts.json は read-only 参照 (dedup)。書込は insert のみ・--apply --to draft でだけ呼ぶ。
@@ -55,7 +56,7 @@ const snsPostsStore = require('../lib/sns-posts-store.cjs') as {
 const PROJECT_ROOT = join(import.meta.dirname ?? __dirname, '../../..');
 const STATE_PATH = join(
   PROJECT_ROOT,
-  'data/sns/buzz-map-catalog.json'
+  `${datasetDir("sns.buzz-map-attribution")}/buzz-map-catalog.json`
 );
 const SPEC_DIR = join(
   PROJECT_ROOT,

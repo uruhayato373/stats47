@@ -25,6 +25,7 @@ import {
 } from './lib/image-generation-manifest';
 
 import type { ImageGenerationManifest } from '@stats47/types';
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const root = process.cwd();
 const stage = join(root, '.local/image-staging/geo-thumbnails');
@@ -299,7 +300,7 @@ async function main() {
     productionVerified: false,
   };
   writeFileSync(
-    join(root, 'data/geo/source-thumbnails-audit.json'),
+    join(root, `${datasetDir("geo.sources")}/source-thumbnails-audit.json`),
     JSON.stringify(result, null, 2) + '\n'
   );
   console.log(

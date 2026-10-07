@@ -24,11 +24,12 @@
 
 const fs = require("fs");
 const path = require("path");
+const { datasetDir } = require("../../../config/datasets.mjs");
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
 const SNAPSHOTS_DIR = path.join(
   PROJECT_ROOT,
-  "data/gsc/snapshots",
+  datasetDir("gsc.snapshots"),
 );
 const OUT_FILE = path.join(
   PROJECT_ROOT,

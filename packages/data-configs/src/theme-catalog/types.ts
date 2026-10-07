@@ -187,7 +187,11 @@ export interface CatalogChart {
  *   フォールバックするので、全テーマに書く必要はない。
  */
 export interface CatalogMetricGroup {
-  /** 固定年の県別比較。指定時は時系列を描かず、この年が欠けても最新年へ代替しない。 */
+  /**
+   * 固定年の県別比較の起点の年。指定時は時系列を描かない。グループの全指標に値がそろう、より新しい年が R2 に
+   * 入れば実行時にその最新年へ進む (`resolve-comparison-years.ts`)。1 指標でも欠ける年へは進めず、
+   * 指標ごとの最新年へも代替しない。
+   */
   comparisonYear?: string;
   /** 固定年の県別比較にタイル地図を追加する（率など地域差の比較用）。 */
   comparisonMap?: boolean;

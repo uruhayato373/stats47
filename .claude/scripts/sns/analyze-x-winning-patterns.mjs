@@ -20,14 +20,15 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { createRequire } from "node:module";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const require = createRequire(import.meta.url);
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
 const store = require(path.join(PROJECT_ROOT, ".claude/scripts/lib/sns-posts-store.cjs"));
 
-const STATE_PATH = path.join(PROJECT_ROOT, "data/sns/x-winning-patterns.json");
-const INDEX_PATH = path.join(PROJECT_ROOT, "data/sns/metric-discovery-index.json");
+const STATE_PATH = path.join(PROJECT_ROOT, `${datasetDir("sns.drafts")}/x-winning-patterns.json`);
+const INDEX_PATH = path.join(PROJECT_ROOT, `${datasetDir("sns.drafts")}/metric-discovery-index.json`);
 
 function arg(flag, def) {
   const i = process.argv.indexOf(flag);

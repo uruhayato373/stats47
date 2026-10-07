@@ -20,6 +20,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const backlogLib = require('./backlog-lib.cjs');
 const { DOMAINS } = require('../../../config/paths.mjs');
+const { datasetDir } = require("../../../config/datasets.mjs");
 
 const STRATEGY_DOC = 'docs/00_プロジェクト管理/02_収益化戦略.md';
 const STANCES = ['攻める', '維持', '凍結'];
@@ -28,7 +29,7 @@ const FROZEN = '凍結';
 const START = '<!-- strategy-lanes:start -->';
 const END = '<!-- strategy-lanes:end -->';
 const COLUMNS = ['順', '領域', '構え', '今の狙い', '構えを変える条件', '改善Metric', 'KPI'];
-const KPI_TREE = 'data/business-plan/kpi-tree.json';
+const KPI_TREE = `${datasetDir("business-plan.state")}/kpi-tree.json`;
 const DOMAINS_JSON = DOMAINS;
 /**
  * 同時に判定まで回す active 施策の上限。超えている間は新しい施策を足さず、月次計画で削る。
@@ -53,7 +54,7 @@ const HIGH_TIER_TOP_N = 3;
 const OWNER_EXECUTOR = 'ユーザー';
 /** 分割して 1 週で届く大きさにした持ち越し Must に付ける目印 */
 const SPLIT_MARKER = '[分割]';
-const REVIEWS_DIR = 'data/reviews/weekly';
+const REVIEWS_DIR = datasetDir("business.weekly-reviews");
 const KPI_MARKER = /\[kpi:\s*([^\]]+)\]/;
 const TARGET_MARKER = /\[target:\s*[^\]]+\]/;
 const PLAN_SECTIONS = ['Must', 'Should', 'Could'];

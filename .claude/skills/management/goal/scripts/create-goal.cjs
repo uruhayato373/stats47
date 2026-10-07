@@ -22,6 +22,7 @@
 
 const fs = require("node:fs");
 const path = require("node:path");
+const { datasetDir } = require("../../../../../config/datasets.mjs");
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../../../..");
 const TEMPLATE_PATH = path.join(
@@ -36,7 +37,7 @@ const GOALS_DOC_DIR = path.join(
   PROJECT_ROOT,
   ".claude/skills/management/goal/reference/goals"
 );
-const GOALS_STATE_DIR = path.join(PROJECT_ROOT, "data/goals");
+const GOALS_STATE_DIR = path.join(PROJECT_ROOT, datasetDir("business.goals"));
 
 function parseArgs(argv) {
   const args = {};

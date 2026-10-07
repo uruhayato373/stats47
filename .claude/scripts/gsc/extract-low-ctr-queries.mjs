@@ -18,6 +18,7 @@
 import { readFileSync, readdirSync, statSync, existsSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -47,7 +48,7 @@ const INDUSTRY_AVG = {
 
 const SNAPSHOTS_DIR = path.join(
   PROJECT_ROOT,
-  "data/gsc/snapshots",
+  datasetDir("gsc.snapshots"),
 );
 
 // ---- snapshot 解決 ----

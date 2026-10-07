@@ -4,6 +4,7 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import { dirname, resolve } from 'node:path';
 import { inspectExpansionWiring } from './theme-expansion-core.mjs';
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const require = createRequire(import.meta.url);
 const { THEME_CATALOGS } = require('../../../packages/data-configs/src/theme-catalog/index.ts');
@@ -40,7 +41,7 @@ plan.handoff = {
   dataValidationGate: 'pending-per-metric-and-source',
 };
 await writeFile(planPath, JSON.stringify(plan, null, 2) + '\n');
-const statePath = resolve(root, `data/themes/evidence/${day}-all-expansion.json`);
+const statePath = resolve(root, `${datasetDir("themes.rollout-evidence")}/${day}-all-expansion.json`);
 await mkdir(dirname(statePath), { recursive: true });
 const previous = await readFile(statePath, 'utf8').then(JSON.parse).catch((error) => {
   if (error.code !== 'ENOENT') throw error;

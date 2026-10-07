@@ -36,6 +36,15 @@ describe('テーマの固定比較年', () => {
     const result = await loadThemeData(config('existing'));
     expect(result?.indicatorDataMap.value.rankingValues).toEqual([row('2024')]);
   });
+  it('R2 に新しい年が入れば比較年をその年へ進め、カードにも同じ年を渡す', async () => {
+    readItem.mockResolvedValue({ success: true, data: {
+      latestYear: { yearCode: '2024' },
+      availableYears: [{ yearCode: '2024', yearName: '2024年' }, { yearCode: '2021', yearName: '2021年' }],
+    } });
+    const result = await loadThemeData(config('fixed'));
+    expect(result?.indicatorDataMap.value.rankingValues).toEqual([row('2024')]);
+    expect(result?.metricGroups?.[0].comparisonYear).toBe('2024');
+  });
 });
 
 

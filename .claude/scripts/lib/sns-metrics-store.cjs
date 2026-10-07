@@ -25,11 +25,12 @@
 
 const fs = require("node:fs");
 const path = require("node:path");
+const { datasetDir } = require("../../../config/datasets.mjs");
 
 const REPO_ROOT = process.env.SNS_METRICS_REPO_ROOT || process.cwd();
 const BASE_DIR = path.join(
   REPO_ROOT,
-  "data/sns/metric-snapshots",
+  datasetDir("sns.metric-snapshots"),
 );
 
 const COLUMNS = [

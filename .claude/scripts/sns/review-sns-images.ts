@@ -30,6 +30,7 @@ import {
   validateAgentReview,
 } from "./lib/sns-image-review";
 import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const { MAX_WEIGHTED_LENGTH, weightedLength } = require("../lib/x-weighted-length.cjs") as {
   MAX_WEIGHTED_LENGTH: number;
@@ -105,7 +106,7 @@ async function resolveImage(source: string, mediaDir: string): Promise<{ source:
 }
 
 function loadIgSchedules(): Array<Parameters<typeof itemsFromIgSchedule>[0][number]> {
-  const dir = join(PROJECT_ROOT, "data/sns");
+  const dir = join(PROJECT_ROOT, datasetDir("sns.drafts"));
   return readdirSync(dir)
     .filter((f) => /^instagram-w\d+-schedule\.json$/.test(f))
     .flatMap((f) => {

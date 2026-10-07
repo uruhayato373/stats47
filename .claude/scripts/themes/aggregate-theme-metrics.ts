@@ -28,13 +28,14 @@ import { THEME_CATALOGS } from "../../../packages/data-configs/src/theme-catalog
 import { parse } from "csv-parse/sync";
 import { selectThemeWindows, selectLatestThemeWindow, isJapanPageReport, normalizeThemePath, summarizeThemeTraffic, summarizeThemeNavigation } from "./theme-metrics-core.mjs";
 import { readThemeQualityState } from "./theme-quality-state.mjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
-const STATE_DIR = process.env.STATE_DIR || path.join(PROJECT_ROOT, "data/themes");
+const STATE_DIR = process.env.STATE_DIR || path.join(PROJECT_ROOT, datasetDir("themes.portfolio"));
 const PORTFOLIO = path.join(STATE_DIR, "portfolio.json");
-const GSC_SNAP = process.env.GSC_SNAPSHOT_DIR || path.join(PROJECT_ROOT, "data/gsc/snapshots");
-const GA4_SNAP = process.env.GA4_SNAPSHOT_DIR || path.join(PROJECT_ROOT, "data/ga4/snapshots");
+const GSC_SNAP = process.env.GSC_SNAPSHOT_DIR || path.join(PROJECT_ROOT, datasetDir("gsc.snapshots"));
+const GA4_SNAP = process.env.GA4_SNAPSHOT_DIR || path.join(PROJECT_ROOT, datasetDir("ga4.snapshots"));
 
 const AGE_REVIEW_YEARS = 5; // 公表周期を確認する候補。年齢だけでは未更新と断定しない
 
@@ -116,8 +117,8 @@ async function main() {
       ga4: summarizeThemeTraffic(select(ga428d, "pagePath"), "ga4", ga4Window28d),
       internalNav: summarizeThemeNavigation(select(nav28d, "pagePath"), navWindow28d),
     };
-    t.gscSnapshotRef = gscWindows ? `data/gsc/snapshots/${gscWindows[0].week}/pages.csv` : null;
-    t.ga4SnapshotRef = ga4Windows ? `data/ga4/snapshots/${ga4Windows[0].week}/pages-clean.csv` : null;
+    t.gscSnapshotRef = gscWindows ? `${datasetDir("gsc.snapshots")}/${gscWindows[0].week}/pages.csv` : null;
+    t.ga4SnapshotRef = ga4Windows ? `${datasetDir("ga4.snapshots")}/${ga4Windows[0].week}/pages-clean.csv` : null;
 
     // ── R2 データ品質 ──
     const keys = themeKeys(t.themeKey);

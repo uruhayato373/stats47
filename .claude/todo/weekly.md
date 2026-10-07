@@ -22,7 +22,7 @@ W40 は 🔴 の上から 2 枚を Must に入れて Must 2/2 を達成し、W37
 
 ## 前週の申し送り
 
-W40 レビュー（`.claude/skills/management/weekly-review/reference/reviews/2026-W40.md`）の「来週への申し送り」から。
+W40 レビュー（`data/reviews/weekly/2026-W40.md`）の「来週への申し送り」から。
 
 | W40申し送り | 振り分け | W41での扱い |
 |---|---|---|
@@ -115,7 +115,7 @@ KPI は確定7日と重複しない前週だけで比べる。rolling 28日（cl
 ### Must（絶対達成、2件）
 
 - [x] **データ品質キューの第 2 週 5 指標を処置する** [M] — `DATA-QUALITY-LOOP-01`（🔴 3 番目・データ領域・KPI `data-quality-pass-rate`）。
-  `.claude/state/data/data-quality/LATEST.md` の「2 更新」で、W40 に処置した 5 指標を除いた GSC 表示の多い順から 5 指標を取る
+  `data/data-quality/checks/LATEST.md` の「2 更新」で、W40 に処置した 5 指標を除いた GSC 表示の多い順から 5 指標を取る
   (`average-height-primary-school-fifth-grade-male` から)。各指標で公式の最新公表を一次資料で確かめてから基準 1〜4 のどれかに決める。
   5 指標すべてに処置と根拠が backlog カードに記録され、更新するものは config 変更と data-refresh の dryRun まで済んでいれば完了。
   R2 反映はオーナー承認で別に行う。使用: `/inspect-estat-meta`、data-ingester
@@ -156,7 +156,7 @@ KPI は確定7日と重複しない前週だけで比べる。rolling 28日（cl
 
 ## KDP公開ゲート
 
-- **判定**: `measure`（`.claude/state/products/kdp-weekly-publication.json`、2026-W40 で再生成）
+- **判定**: `measure`（`data/products/kdp-weekly-publication.json`、2026-W40 で再生成）
 - **候補**: なし
 - **需要証拠**: 販売数/KENP は K-S1-01〜12 すべて未計測。0 需要ではない
 - **停止条件**: KDP の再認証と販売数/KENP の記録が済むまで新規公開しない
@@ -181,13 +181,13 @@ KPI は確定7日と重複しない前週だけで比べる。rolling 28日（cl
 
 ## 関連ドキュメント・施策
 
-- 前週レビュー: `.claude/skills/management/weekly-review/reference/reviews/2026-W40.md`
-- 週次snapshot: `.claude/skills/management/nsm-experiment/reference/weekly-snapshots/2026-W40.json`
+- 前週レビュー: `data/reviews/weekly/2026-W40.md`
+- 週次snapshot: `data/nsm/weekly-snapshots/2026-W40.json`
 - 月次計画: `.claude/todo/monthly.md`（2026-10）
 - backlog: `DATA-QUALITY-LOOP-01` / `A8-CROSSCHECK-EXCEED-01` / `EFFECT-TARGET-MARKERS-01` / `AUTHENTICATED-MEASUREMENT-ACTIVATION-01` / `STATE-OVERLAY-MAIN-01` / `AUTH-CREDENTIAL-REGISTER-01` / `MODEL-OPT-APPLY-01`
 - 改善施策: `AFF-RESOLUTION-EFFECT-01` / `THEME-EXPANSION-EFFECT-01` / `PERF-WORKER-P99-01` / `R2-STORAGE-01`
-- データ品質キュー: `.claude/state/data/data-quality/LATEST.md`
-- KDP state: `.claude/state/products/kdp-weekly-publication.json`
+- データ品質キュー: `data/data-quality/checks/LATEST.md`
+- KDP state: `data/products/kdp-weekly-publication.json`
 
 ## 次週への申し送り候補
 

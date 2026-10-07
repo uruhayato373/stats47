@@ -14,10 +14,10 @@ import {
   parseAffiliateExperimentHistory,
 } from "./lib/affiliate-pilot-history-core.mjs";
 
-import { datasetPath } from "../../../config/datasets.mjs";
+import { datasetDir, datasetPath } from "../../../config/datasets.mjs";
 
 const ROOT = resolve(fileURLToPath(new URL(".", import.meta.url)), "../../..");
-const STATE_DIR = resolve(ROOT, "data/affiliate");
+const STATE_DIR = resolve(ROOT, datasetDir("affiliate.audits"));
 const OUT_PATH = resolve(STATE_DIR, "affiliate-pilot-readiness-latest.json");
 
 function readJson(path: string): any | null {
@@ -66,7 +66,7 @@ function main(): void {
         exposureEndedAt: plan.exposureEndedAt ?? null,
       })
     : [];
-  const moshimo = readJson(resolve(ROOT, "data/affiliate/moshimo-results.json"));
+  const moshimo = readJson(resolve(ROOT, datasetPath("moshimo.results")));
   const moshimoSource = portfolio?.sources?.additionalOutcomes?.find((source: { source?: string }) => source.source === "moshimo");
   const observation = plan
     ? buildAffiliatePilotObservation({

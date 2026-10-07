@@ -15,9 +15,10 @@ import { fileURLToPath } from "node:url";
 import { KINDLE_BOOKS, BOOK_BY_ID } from "./book-catalog";
 import { validateKindleCatalog } from "./validator";
 import { buildBook, assertBookVersion } from "./build-book";
+import { datasetDir } from "../../../../../config/datasets.mjs";
 
 const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../../..");
-const STATUS_PATH = resolve(REPO_ROOT, "data/products/kindle-status.json");
+const STATUS_PATH = resolve(REPO_ROOT, `${datasetDir("kindle.archives")}/kindle-status.json`);
 
 const argv = process.argv.slice(2);
 const sub = argv[0] ?? "";

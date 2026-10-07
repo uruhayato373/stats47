@@ -24,7 +24,7 @@ import { buildAffiliatePortfolioViewModel, type AffiliatePortfolioViewModel } fr
  *   「今どういう状態か」であって全件ではない。
  */
 
-const DIR = "data/affiliate";
+const DIR = datasetDir("affiliate.audits");
 /** GA4 実測の追跡済み snapshot と提携台帳は記録なので data/affiliate/ */
 const DATA_DIR = datasetDir("affiliate.catalog");
 

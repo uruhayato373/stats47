@@ -53,16 +53,17 @@ import {
 } from "./lib/adsense-report-contract.mjs";
 import { loadCodeAdSlots } from "./lib/code-ad-slots.mjs";
 import { pathToFileURL } from "node:url";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const SNAPSHOT_DIRS = {
-  gsc: "data/gsc/snapshots",
-  ga4: "data/ga4/snapshots",
-  adsense: "data/adsense/snapshots",
+  gsc: datasetDir("gsc.snapshots"),
+  ga4: datasetDir("ga4.snapshots"),
+  adsense: datasetDir("adsense.snapshots"),
 };
 const STATE_DIRS = {
-  gsc: "data/gsc",
-  ga4: "data/ga4",
-  adsense: "data/adsense",
+  gsc: datasetDir("gsc.history"),
+  ga4: datasetDir("ga4.history"),
+  adsense: datasetDir("adsense.reports"),
 };
 
 function parseCsvLine(line) {

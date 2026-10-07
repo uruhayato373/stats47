@@ -47,9 +47,10 @@ const path = require("node:path");
 
 const store = require("../lib/sns-posts-store.cjs");
 const core = require("../lib/threads-core.cjs");
+const { datasetPath } = require("../../../config/datasets.mjs");
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
-const DEFAULT_SCHEDULE = path.join(PROJECT_ROOT, "data/sns/threads-schedule.json");
+const DEFAULT_SCHEDULE = path.join(PROJECT_ROOT, datasetPath("sns.threads-schedule"));
 const GRAPH = "https://graph.threads.net/v1.0";
 
 /** 公開前待ち (公式推奨: 平均 30 秒)。https://developers.facebook.com/docs/threads/posts */

@@ -45,6 +45,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { promisify } from "node:util";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const execFileAsync = promisify(execFile);
 const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url));
@@ -285,7 +286,7 @@ export const PR_GATES = [
     name: "Survey Taxonomy",
     why: "active metric 数が変わると taxonomy state が drift する",
     run: () => tryRun("npx", ["tsx", "packages/ranking/src/scripts/audit-survey-taxonomy.ts", "--offline", "--check"]),
-    hint: "npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --json data/surveys/taxonomy.json",
+    hint: `npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --json ${datasetDir("surveys.portfolio")}/taxonomy.json`,
   },
   {
     name: "Sitemap / Tag Keys",
@@ -317,7 +318,7 @@ export const PR_GATES = [
   },
   {
     name: "Business Plan",
-    why: "カタログの source・KPI を変えると生成物 data/business-plan/kpi-tree.json が古くなる (2026-10-06 に 2 回 CI で落ちた)",
+    why: `カタログの source・KPI を変えると生成物 ${datasetDir("business-plan.state")}/kpi-tree.json が古くなる (2026-10-06 に 2 回 CI で落ちた)`,
     run: () => tryRun("npm", ["run", "business-plan:check"]),
     hint: "npm run business-plan:build-state (生成物のうち kpi-tree.json だけを commit する)",
   },

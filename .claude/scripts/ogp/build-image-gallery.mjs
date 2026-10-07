@@ -34,6 +34,7 @@ import { fileURLToPath } from "node:url";
 
 import { OGP_TABS, buildTab, esc, pMap, probe } from "../lib/gallery-collectors.mjs";
 import { R2_PUBLIC_BASE_URL, SITE_ORIGIN } from "../lib/site-config.cjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
@@ -53,7 +54,7 @@ const AUDIT = !!flag("audit", false);
 const CHECK = AUDIT || !!flag("check", false); // --audit は --check を含む
 const LIMIT = flag("limit", null) ? Number(flag("limit", null)) : null;
 const OUT = flag("out", "/tmp/ogp-image-gallery.html");
-const INVENTORY_OUT = path.join(PROJECT_ROOT, "data/ogp/inventory.json");
+const INVENTORY_OUT = path.join(PROJECT_ROOT, `${datasetDir("ogp.inventory")}/inventory.json`);
 
 const ALL_TABS = OGP_TABS;
 const REQ_TABS = flag("tabs", null);

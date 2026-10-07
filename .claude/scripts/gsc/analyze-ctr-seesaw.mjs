@@ -22,8 +22,9 @@
 
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { pathToFileURL } from 'node:url';
+import { datasetDir } from "../../../config/datasets.mjs";
 
-const SNAP = 'data/gsc/snapshots';
+const SNAP = datasetDir("gsc.snapshots");
 
 function readCsv(path) {
   const [head, ...rest] = readFileSync(path, 'utf8').trim().split(/\r?\n/);

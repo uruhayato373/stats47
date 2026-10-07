@@ -4,7 +4,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 import { projectRoot } from "./project-root";
-import { datasetPath } from "../../../../config/datasets.mjs";
+import { datasetDir, datasetPath } from "../../../../config/datasets.mjs";
 import {
   cached,
   mdTableAfter,
@@ -50,7 +50,7 @@ function readCsv(fp: string): Array<Record<string, string | number>> {
 export function readBlogQueue(root: string) {
   return wrap(() => {
     const q = readJson(
-      path.join(root, "data/blog/remediation-queue.json"),
+      path.join(root, `${datasetDir("blog.operations")}/remediation-queue.json`),
     ) as {
       queue: Array<Record<string, unknown>>;
       generatedAt?: string;
@@ -78,7 +78,7 @@ export function readBlogQueue(root: string) {
 export function readAiContentQueue(root: string) {
   return wrap(() => {
     const q = readJson(
-      path.join(root, "data/ai-content/remediation/remediation-queue.json"),
+      path.join(root, `${datasetDir("ai-content.remediation")}/remediation-queue.json`),
     ) as { entries: Array<Record<string, unknown>>; generatedAt?: string; summary?: unknown };
     const top = q.entries
       .filter((e) => e.status !== "done")
@@ -96,7 +96,7 @@ export function readAiContentQueue(root: string) {
               : (e.reviewTier ?? null),
       }));
     let latestRun: Record<string, string | number> | null = null;
-    const historyPath = path.join(root, "data/ai-content/history.csv");
+    const historyPath = path.join(root, datasetPath("ai-content.history"));
     if (fs.existsSync(historyPath)) {
       const runs = readCsv(historyPath);
       latestRun = runs.at(-1) ?? null;
@@ -107,7 +107,7 @@ export function readAiContentQueue(root: string) {
 
 export function readTopicQueue(root: string) {
   return wrap(() => {
-    const q = readJson(path.join(root, "data/blog/topic-queue.json")) as {
+    const q = readJson(path.join(root, `${datasetDir("blog.operations")}/topic-queue.json`)) as {
       queue: Array<Record<string, unknown>>;
       generatedAt?: string;
       summary?: unknown;
@@ -126,7 +126,7 @@ export function readTopicQueue(root: string) {
 
 export function readWinningPatterns(root: string) {
   return wrap(() => {
-    const w = readJson(path.join(root, "data/blog/winning-patterns.json")) as {
+    const w = readJson(path.join(root, `${datasetDir("blog.operations")}/winning-patterns.json`)) as {
       generatedAt?: string;
       gscWeek?: string;
       sample?: unknown;
@@ -145,7 +145,7 @@ export function readWinningPatterns(root: string) {
 
 export function readSnsPosts(root: string) {
   return wrap(() => {
-    const data = readJson(path.join(root, "data/sns/posts.json")) as {
+    const data = readJson(path.join(root, datasetPath("sns.posts"))) as {
       posts?: Array<Record<string, unknown>>;
     };
     const posts = (data.posts || []).filter((p) => p.status !== "deleted");
@@ -173,7 +173,7 @@ export function readSnsPosts(root: string) {
 
 export function readExperiments(root: string) {
   return wrap(() => {
-    const data = readJson(path.join(root, "data/business/experiments.json")) as {
+    const data = readJson(path.join(root, datasetPath("business.experiments"))) as {
       experiments?: Array<{ id: string; title: string; status: string }>;
       updated_at?: string;
     };
@@ -188,7 +188,7 @@ export function readMetricsHistory(root: string) {
     // KPI/WoW 表示は確定7日 (非重複) 系列。旧 history.csv はローリング28日/基盤混在のため
     // カードの週次 WoW には使わない。列名は UI 互換の clicks/impressions 等へ写像する。
     const gscFin = readCsvOrNull(
-      path.join(root, "data/gsc/history-finalized7d.csv"),
+      path.join(root, datasetPath("gsc.history-finalized")),
     );
     const gsc = gscFin
       ? gscFin.map((r) => ({
@@ -200,7 +200,7 @@ export function readMetricsHistory(root: string) {
         }))
       : null;
     const ga4Fin = readCsvOrNull(
-      path.join(root, "data/ga4/history-finalized7d.csv"),
+      path.join(root, datasetPath("ga4.history-finalized")),
     );
     const ga4 = ga4Fin
       ? ga4Fin.map((r) => ({
@@ -209,10 +209,10 @@ export function readMetricsHistory(root: string) {
           sessions: r.sessions_jp7d,
           pageviews: r.pageviews_jp7d,
         }))
-      : readCsvOrNull(path.join(root, "data/ga4/history.csv"));
+      : readCsvOrNull(path.join(root, datasetPath("ga4.history")));
     let adsense: Array<Record<string, string | number>> | null = null;
     try {
-      adsense = readCsv(path.join(root, "data/adsense/history.csv"));
+      adsense = readCsv(path.join(root, `${datasetDir("adsense.history")}/history.csv`));
     } catch {
       // adsense は無い環境がある
     }
@@ -241,7 +241,7 @@ export function parsePsiLatest(root: string) {
 export function readGscCoverage(root: string) {
   return wrap(() => {
     const q = readJson(
-      path.join(root, "data/gsc/coverage-remediation/coverage-remediation-queue.json"),
+      path.join(root, datasetPath("gsc.coverage-queue")),
     ) as {
       week?: string;
       generated_at?: string;

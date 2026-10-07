@@ -4,8 +4,9 @@ import { dirname, join } from "node:path";
 import type { AuditRun, MetricKey, PageAuditResult, Violation } from "../types";
 import { PROJECT_ROOT } from "./thresholds";
 import { R2_PUBLIC_BASE_URL } from "../../lib/site-config.cjs";
+import { datasetDir } from "../../../../config/datasets.mjs";
 
-export const STATE_DIR = join(PROJECT_ROOT, "data/page-quality/metrics");
+export const STATE_DIR = join(PROJECT_ROOT, datasetDir("page-quality.metrics"));
 export const HISTORY_CSV = join(STATE_DIR, "history.csv");
 export const LATEST_JSON = join(STATE_DIR, "latest.json");
 export const LATEST_MD = join(STATE_DIR, "LATEST.md");
@@ -19,7 +20,7 @@ export const WEEKLY_SUMMARY_CSV = join(STATE_DIR, "weekly-summary.csv");
  */
 export const R2_STATE_PREFIX = "state/page-quality";
 export const R2_STAGE_DIR = join(PROJECT_ROOT, ".local/r2", R2_STATE_PREFIX);
-export const LIVE_DIR = join(PROJECT_ROOT, "data/page-quality/live");
+export const LIVE_DIR = join(PROJECT_ROOT, `${datasetDir("page-quality.findings")}/live`);
 /** R2 の URL ごとの履歴は直近この日数だけ残す (delta_pct 判定は直前の値しか使わない)。 */
 const FULL_HISTORY_KEEP_DAYS = 84;
 

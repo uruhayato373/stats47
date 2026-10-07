@@ -7,9 +7,10 @@ import { summarizeSalesLedger, validateSalesLedger } from "./ledger";
 import { COCONALA_LISTINGS, KDP_LISTINGS } from "../../../../config/paths.mjs";
 
 import type { SalesChannel, SalesLedger, SalesObservation } from "./types";
+import { datasetPath } from "../../../../config/datasets.mjs";
 
 const ROOT = path.resolve(__dirname, "../../../..");
-const LEDGER_PATH = path.join(ROOT, "data/products/sales-ledger.json");
+const LEDGER_PATH = path.join(ROOT, datasetPath("sales.ledger"));
 const EVIDENCE_ROOT = path.join(ROOT, ".local/product-sales-evidence");
 const EMPTY_LEDGER: SalesLedger = { schemaVersion: 1, observations: [] };
 

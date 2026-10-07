@@ -32,9 +32,10 @@ import {
   formatNsmSection,
 } from "./lib/metrics-reader.mjs";
 import { jstDateOf, isoWeekOf } from "./metrics/lib/periods.mjs";
+import { datasetDir } from "../../config/datasets.mjs";
 
 const OUT_DIR =
-  "data/nsm/weekly-snapshots";
+  datasetDir("business.nsm-weekly");
 const INDEX_PATH = join(OUT_DIR, "index.json");
 
 // ── ISO 8601 週番号 ────────────────────────────────────────────

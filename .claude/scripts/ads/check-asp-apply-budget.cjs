@@ -26,9 +26,10 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const { AFFILIATE_ASP } = require("../../../config/paths.mjs");
+const { datasetPath } = require("../../../config/datasets.mjs");
 
 const PROJECT_ROOT = path.resolve(__dirname, "../../..");
-const CATALOG_PATH = path.join(PROJECT_ROOT, "data/affiliate/affiliate-catalog.json");
+const CATALOG_PATH = path.join(PROJECT_ROOT, datasetPath("affiliate.catalog"));
 const CONFIG_PATH = path.join(PROJECT_ROOT, AFFILIATE_ASP);
 const DEFAULT_MAX = 10;
 

@@ -27,7 +27,7 @@ metadata:
 - **未修正 (2026-05-28 検出)**: `.claude/skills/blog/discover-trends/SKILL.md` Phase 3 のクエリ (indicators / indicator_tags / tags JOIN / latest_year / area_type 参照) — trend-scout 実行時に schema correction を prompt で渡せば動作するが、SKILL.md 本体も書き換え推奨
 
 **DBレス移行による追加 drift (2026-06-06 検出)**: 完全DBレス移行で local SQLite (`.local/d1/.../*.sqlite`) は不在になったが、`weekly-review` SKILL.md の Phase 1 Agent B/C/2.5 が `sqlite3 <miniflare path>` で `sns_posts` / `articles` / `metrics` を直接 query する手順のまま放置。実行すると DB 不在で全 query スキップになる。
-- **回避策 (今回採用)**: Agent B/C を git TS / R2 公開URL / `.claude/state/metrics/*/LATEST.md` / `docs/` 参照に置換。articles published は `grep -rl 'published: true' docs/21_ブログ記事原稿/*/article.md`、metrics は git TS config、SNS は `sns-metrics-improvement/snapshots/` (DB cache は無い)。
+- **回避策 (今回採用)**: Agent B/C を git TS / R2 公開URL / `data/<取得元>/LATEST.md` (当時の旧置き場は `.claude/state/metrics/*/LATEST.md`) / `docs/` 参照に置換。articles published は `grep -rl 'published: true' docs/21_ブログ記事原稿/*/article.md`、metrics は git TS config、SNS は `sns-metrics-improvement/snapshots/` (DB cache は無い)。
 - **未修正**: `weekly-review` SKILL.md 本体 (Phase 1 Agent B/C, Phase 2.5 ロードマップ更新) は DB query 前提のまま。書き換え推奨。
 - Phase 2.5 のロードマップ実測値更新も DB 依存で動かない。docs/21 article.md 数 (162) と旧ロードマップ値 (182本) は計測法が違うため安易に上書きしない。
 

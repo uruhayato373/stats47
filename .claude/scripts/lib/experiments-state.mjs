@@ -14,8 +14,9 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname } from "node:path";
 import { pathToFileURL } from "node:url";
+import { datasetPath } from "../../../config/datasets.mjs";
 
-const STATE_PATH = "data/business/experiments.json";
+const STATE_PATH = datasetPath("business.experiments");
 
 // ── I/O ──────────────────────────────────────────────────────────
 

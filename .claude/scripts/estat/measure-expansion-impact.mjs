@@ -17,11 +17,12 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..", "..", "..");
-const QUEUE_FILE = path.join(ROOT, "data/estat/expansion-queue.json");
-const SNAP_DIR = path.join(ROOT, "data/gsc/snapshots");
+const QUEUE_FILE = path.join(ROOT, `${datasetDir("estat.candidates")}/expansion-queue.json`);
+const SNAP_DIR = path.join(ROOT, datasetDir("gsc.snapshots"));
 
 const args = process.argv.slice(2);
 const weekArg = args.includes("--week") ? args[args.indexOf("--week") + 1] : null;

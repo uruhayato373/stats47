@@ -45,6 +45,7 @@ import {
   verifyKindleArchiveManifest,
 } from "./lib/kindle-archive";
 import { SITE } from "@stats47/types";
+import { datasetPath } from "../../../../config/datasets.mjs";
 
 const PROJECT_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../..");
 config({ path: join(PROJECT_ROOT, ".env.local") });
@@ -52,7 +53,7 @@ config({ path: join(PROJECT_ROOT, ".env.local") });
 const BUCKET = process.env.KINDLE_ARCHIVE_BUCKET || process.env.CLOUDFLARE_R2_BUCKET_NAME || SITE.r2Bucket;
 const ARCHIVE_PREFIX = "archive/kindle-encrypted";
 const LOCAL_ROOT = join(PROJECT_ROOT, ".local/kindle-books");
-const STATE_PATH = join(PROJECT_ROOT, "data/products/kindle-archives.json");
+const STATE_PATH = join(PROJECT_ROOT, datasetPath("kindle.archives"));
 const REQUIRED_ARCHIVE_FILES = [
   "book.epub",
   "cover.jpg",

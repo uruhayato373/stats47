@@ -16,6 +16,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { readCoverLedger, coverDisplayState } from '../note/lib/cover-assets.mjs';
 import { PREF_AREA_CODES } from './prefectures.cjs';
+import { datasetPath } from "../../../config/datasets.mjs";
 
 export const DEFAULT_CONCURRENCY = 12;
 export const RANKING_SAMPLE = 30;
@@ -195,12 +196,12 @@ export function enumerateNoteCovers(projectRoot) {
 export function enumerateNoteBodies(projectRoot) {
   const out = new Map(); // slug -> { slug, status, noteUrl, r2Path }
   const inScope = (v) => v?.r2_path && v.r2_access !== "private" && !BESPOKE_COVER_VERTICALS.includes(v.vertical);
-  const draft = readJsonSafe(path.join(projectRoot, "data/note/note-draft-index.json"));
+  const draft = readJsonSafe(path.join(projectRoot, datasetPath("note.draft-index")));
   for (const [slug, v] of Object.entries(draft?.drafts || {})) {
     if (!inScope(v)) continue;
     out.set(slug, { slug, status: v?.status || "draft", noteUrl: null, r2Path: v.r2_path });
   }
-  const pub = readJsonSafe(path.join(projectRoot, "data/note/note-published-urls.json"));
+  const pub = readJsonSafe(path.join(projectRoot, datasetPath("note.published-urls")));
   for (const [slug, v] of Object.entries(pub?.articles || {})) {
     if (slug.startsWith("_")) continue;
     if (!inScope(v)) {
@@ -364,7 +365,7 @@ export async function buildTab(tab, opts) {
       let covers = enumerateNoteCovers(projectRoot);
       if (limit) covers = covers.slice(0, limit);
       return {
-        source: "data/note/cover-assets.json",
+        source: datasetPath("note.cover-assets"),
         aspect: "1.91:1",
         r2KeyPattern: `stats47-private: note/covers/<article>/revisions/<sha256>.png`,
         entries: covers.map((c) => ({

@@ -25,14 +25,15 @@ import type { MetricConfig } from "@stats47/data-configs";
 
 import { classifyQueueEntry, resolveSources, sortQueue, type CdcatEntry, type QueueEntry } from "./lib/data-quality-queue";
 import { SITE } from "@stats47/types";
+import { datasetDir } from "../../../../config/datasets.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..", "..", "..", "..");
-const INTEGRITY = path.join(ROOT, "data/ranking/integrity-audit.json");
-const YEAR_COVERAGE = path.join(ROOT, "data/estat/year-coverage/queue.json");
+const INTEGRITY = path.join(ROOT, `${datasetDir("ranking.audits")}/integrity-audit.json`);
+const YEAR_COVERAGE = path.join(ROOT, `${datasetDir("estat.year-coverage")}/queue.json`);
 const CDCAT01 = path.join(ROOT, "packages/data-configs/src/ssds/cdcat01-sources.generated.json");
-const SEARCH_GROWTH = path.join(ROOT, "data/search-growth/candidates.json");
-const OUT_DIR = path.join(ROOT, "data/data-quality/checks");
+const SEARCH_GROWTH = path.join(ROOT, `${datasetDir("search-growth.state")}/candidates.json`);
+const OUT_DIR = path.join(ROOT, datasetDir("data-quality.checks"));
 const R2_BASE = process.env.R2_PUBLIC_FETCH_URL ?? SITE.r2PublicBaseUrl;
 
 const args = process.argv.slice(2);
