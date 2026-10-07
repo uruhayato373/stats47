@@ -3,7 +3,7 @@ title: 今週の計画
 type: weekly-plan
 week: 2026-W41
 date: 2026-10-05
-updated: 2026-10-05
+updated: 2026-10-07
 status: active
 tags: []
 ---
@@ -153,6 +153,9 @@ KPI は確定7日と重複しない前週だけで比べる。rolling 28日（cl
 - **`PERF-WORKER-P99-01`**: Workers Observability で route 別 CPU の内訳を確認してほしい（Due 10-12）。
 - **`R2-STORAGE-01`**: doboku-note-archive 8.98 GB の保持方針（許容か削減か）を決めてほしい（Due 10-12）。
 - **`EXP-006`**: YouTube Studio のチャンネル所有確認。済むまで制作と計測日を進めない。
+- **`ADSENSE-RESTART-01`** (10-07 追加): 旧アカウントが停止状態かを確かめ、uruhayato373 で新規申請し、発行された `pub-…` を伝えてほしい。
+- **`NOTE-FREE-DEFAULT-01`** (10-07 追加): 雑学・ランキングの有料記事を閲覧の多い順に数本だけ無料に戻す (note へのログインが必要)。先に Claude が基準値を記録する。
+- **`AMAZON-ASSOCIATE-PILOT-01`** (10-07 追加): `stats47-22` が有効かを Amazon アソシエイトの管理画面で確かめ、PR #1099 を本番に出すか決めてほしい。
 
 ## KDP公開ゲート
 
@@ -194,3 +197,5 @@ KPI は確定7日と重複しない前週だけで比べる。rolling 28日（cl
 - データ品質の「更新」と決めた指標の R2 反映を 1 回の承認にまとめる
 - `EFFECT-TARGET-MARKERS-01` のオーナー判断を W42 Must で反映する
 - 再認証後の `measurement-freshness` の値を W41 の計測サイクルで確かめる
+- W42 Should に `KDP-LEDGER-AUTO-01` (重点1: 週次収益の KDP 分)、Could に `BUSINESS-PLAN-FRESHNESS-MTIME-01` を入れる
+- W41 の週次レビューから `site-pageviews` (28 日 PV。W40 は 43,907、W52 目標 79,000) を 1 行記録する
