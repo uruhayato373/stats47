@@ -89,8 +89,11 @@ export const THEME_ROUTE_MATRIX: readonly ThemeRouteContract[] = [
     canonicalPath: "/themes/consumer-prices",
     heading: "物価・消費",
     dataSelector: '[data-theme-chart="true"]',
+    // 2026-10-08: 総合 1 本の折れ線を 12 費目 × 年の cpi-heatmap に作り替えた (図は物価プロファイルと 2 枚)。
+    // PR の E2E は図の定義を本番 R2 から読み、R2 の反映は main へのマージ後なので、変更前後どちらでも成り立つ cpi-profile だけを見る
+    // (E2E-THEME-PR-PAGECOMPONENTS-01)
     expectedChartCount: 2,
-    representativeTypes: ["cpi-profile", "line-chart"],
+    representativeTypes: ["cpi-profile"],
   },
   {
     id: "theme-education",

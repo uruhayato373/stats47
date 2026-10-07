@@ -27,10 +27,10 @@
     ]
   },
   "theme": {
-    "minResolvedMetricGroups": 446,
+    "minResolvedMetricGroups": 438,
     "minMetricGroupCoveragePct": 100,
     "maxMissingLineageMetricGroups": 0,
-    "minResolvedCharts": 53,
+    "minResolvedCharts": 51,
     "minCoveragePct": 100,
     "maxMissingLineageCharts": 0
   },
@@ -138,6 +138,42 @@
       "addedResolvedMetricGroupKeys": [
         "local-economy/gdp"
       ]
+    },
+    {
+      "date": "2026-10-08",
+      "reason": "Owner-approved tourism review (2026-10-07-theme-tourism.md) removed the stay-trend and air-transport line charts that redrew the cards above them, removed five cards that repeated a metric already shown in an earlier chapter or showed a single year that cannot draw a trend, merged the two travel-consumption cards into one fixed-year comparison card and added an actual-overnight-guests card, so resolved metric groups go 446 -> 441. Every removed metric stays resolved through the remaining cards or as a context metric; coverage stays 100% with zero missing lineage.",
+      "previousResolvedCharts": 53,
+      "removedResolvedChartKeys": [
+        "tourism/theme-tourism-stay-trend",
+        "tourism/theme-tourism-transport-trend"
+      ],
+      "addedResolvedChartKeys": [],
+      "previousResolvedMetricGroups": 446,
+      "removedResolvedMetricGroupKeys": [
+        "tourism/candidate-25-1",
+        "tourism/candidate-26-2",
+        "tourism/candidate-26-3",
+        "tourism/candidate-27-2",
+        "tourism/candidate-28-1",
+        "tourism/candidate-85-1"
+      ],
+      "addedResolvedMetricGroupKeys": [
+        "tourism/stays-actual"
+      ]
+    },
+    {
+      "date": "2026-10-08",
+      "reason": "Owner-approved consumer-prices review (2026-10-07-theme-consumer-prices.md) removed two single-index cards that repeated the expenses card and the average-temperature card (the metric is climate's primary and leaves this theme), so resolved metric groups go 441 -> 438. The heatmap chart changed from a one-line chart to a 12-category cpi-heatmap and stays resolved; the removed discussion markdown is not a data chart. Coverage stays 100% with zero missing lineage.",
+      "previousResolvedCharts": 51,
+      "removedResolvedChartKeys": [],
+      "addedResolvedChartKeys": [],
+      "previousResolvedMetricGroups": 441,
+      "removedResolvedMetricGroupKeys": [
+        "consumer-prices/candidate-75-1",
+        "consumer-prices/candidate-75-3",
+        "consumer-prices/candidate-76-1"
+      ],
+      "addedResolvedMetricGroupKeys": []
     }
   ]
 }

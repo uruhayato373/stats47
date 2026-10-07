@@ -1,7 +1,7 @@
 {
-  "hash": "05e4bc45dd13bce30da74687c3624b6a7a708849c3c0519d655f1b4376eb3329",
-  "audited_at": "2026-10-07T13:08:12",
+  "hash": "a5718edd400adf4cebae66f3547642b0cf32690f7e3b0f6adf3aebf9324c62ad",
+  "audited_at": "2026-10-07T21:51:49",
   "files": [
-    ".claude/scripts/lib/internal-link-lint.mjs"
+    ".claude/scripts/audit/theme-chart-dependencies.generated.json"
   ]
 }

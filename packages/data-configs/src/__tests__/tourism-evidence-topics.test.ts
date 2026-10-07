@@ -26,8 +26,8 @@ describe("tourism evidence topics", () => {
       TOURISM_CATALOG.metrics.map(({ rankingKey }) => rankingKey),
     );
 
+    // 2026-10-08: 宿泊需要の折れ線はカードと重複するので外した。論点からの導線は同じテーマの指標ハブ (ranking) が受ける
     expect(topic?.relatedRankingKeys?.length).toBeGreaterThan(0);
-    expect(topic?.relatedChartKeys?.length).toBeGreaterThan(0);
     for (const rankingKey of topic?.relatedRankingKeys ?? []) {
       expect(rankingKeys.has(rankingKey)).toBe(true);
     }

@@ -10,10 +10,33 @@
       "shortLabel": "延べ宿泊者数（総数）",
       "role": "primary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
-        "surveyedAt": "2026-09-08",
-        "rationale": "宿泊者数は主問に直接答える見出し指標として残す。"
+        "proposedBy": "令和8年版観光白書（令和7年度観光の状況・令和8年度観光施策）概要版 第Ⅰ部「日本の観光の動向（宿泊旅行）」（観光庁、2026年7月公表）",
+        "sourceUrl": "https://www.mlit.go.jp/kankocho/content/002011051.pdf",
+        "surveyedAt": "2026-10-08",
+        "rationale": "観光白書は第Ⅰ部の宿泊旅行の項を延べ宿泊者数の総数から書き起こし、日本人と外国人に分けた推移と、三大都市圏と地方部に分けた外国人の推移を並べている。宿泊需要の規模を測る基準の指標として扱っていると読める。都道府県別に並べれば、宿泊需要がどの地域に集まっているかを見る出発点になる。白書の数値は2025年の速報値で、確定値は後で改定される点に注意が必要である。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability"
+        ],
+        "readerQuestion": "自分の県の延べ宿泊者数は全国の中でどれくらいの規模で、東京都や大阪府とどれだけ差があるのか。",
+        "targetReaderOrDecision": "県内の宿泊需要の規模を全国と比べて把握したい自治体の観光担当者や宿泊事業者。"
+      }
+    },
+    {
+      "rankingKey": "room-utilization-rate",
+      "shortLabel": "客室稼働率",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "観光庁 宿泊旅行統計調査（2025年・年間値（確定値））報道発表資料「２．客室稼働率」（観光庁、2026年7月6日）",
+        "sourceUrl": "https://www.mlit.go.jp/kankocho/content/002010560.pdf",
+        "surveyedAt": "2026-10-08",
+        "rationale": "観光庁は年間値の公表で、延べ宿泊者数に続けて客室稼働率を独立の項目として掲げている。全体の61.6%と施設タイプ別の差に加えて、都道府県で最も高い大阪府の値を示し、地域差を読ませる構成である。観光庁の用語の解説は客室稼働率を利用客室数を総客室数で除したものと定めており、宿泊者数の多さだけでは分からない受入側の余力を表す。分母が宿泊者数と異なるので、順位を同じ並びで読み替えない注意が要る。",
+        "adoptionCriteria": [
+          "representativeness",
+          "complementarity"
+        ],
+        "readerQuestion": "県内の宿泊施設は、全国や大阪府・東京都と比べてどれくらい客室が埋まっているのか。",
+        "targetReaderOrDecision": "宿泊の供給と利用のバランスを確かめたい宿泊事業者や自治体の観光担当者。"
       }
     },
     {
@@ -21,21 +44,33 @@
       "shortLabel": "外国人延べ宿泊者数",
       "role": "secondary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
-        "surveyedAt": "2026-09-08",
-        "rationale": "外国人宿泊は「宿泊需要はどれくらいか」を読むため主要画面へ配置する。"
+        "proposedBy": "観光立国推進基本計画（第5次）本文 第2「観光立国の実現に関する目標」2.「観光立国の推進に関する目標」（観光庁、2026年3月27日閣議決定）",
+        "sourceUrl": "https://www.mlit.go.jp/kankocho/content/001991698.pdf",
+        "surveyedAt": "2026-10-08",
+        "rationale": "第5次基本計画は、地方誘客を進める政策目標の一つに訪日外国人旅行者の地方部における延べ宿泊者数を掲げ、当面は三大都市圏と同等の1対1の割合を目指して1億3,000万人泊を目標としている。外国人延べ宿泊者数は、この目標の進み具合を都道府県単位で確かめる基礎データになり、総数とは別の角度から地域の偏りを示す。同計画は三大都市圏と地方部の区分の見直しも今後の検討課題としており、区分の定義に注意が必要である。",
+        "adoptionCriteria": [
+          "representativeness",
+          "complementarity",
+          "readerValue"
+        ],
+        "readerQuestion": "外国人の宿泊は三大都市圏にどれだけ偏っていて、自分の県は地方部としてどこまで伸びているのか。",
+        "targetReaderOrDecision": "地方誘客の成果を宿泊数で確かめたい自治体やDMOのインバウンド施策担当者。"
       }
     },
     {
-      "rankingKey": "room-utilization-rate",
-      "shortLabel": "客室稼働率",
+      "rankingKey": "actual-overnight-guests",
+      "shortLabel": "実宿泊者数",
       "role": "secondary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
-        "surveyedAt": "2026-09-08",
-        "rationale": "客室稼働率は「宿泊施設と客室の使われ方」を読むため主要画面へ配置する。"
+        "proposedBy": "観光庁 宿泊旅行統計調査「用語の解説（年間報告書より抜粋）」（観光庁）",
+        "sourceUrl": "https://www.mlit.go.jp/kankocho/content/001983218.pdf",
+        "surveyedAt": "2026-10-08",
+        "rationale": "観光庁の用語の解説は、実宿泊者数を各月に宿泊手続をした人数と定義し、子供や乳幼児も1人と数えるとしている。延べ宿泊者数が人泊の単位で泊ごとに数えるのに対し、実宿泊者数は宿泊した人の数なので、両者を並べると1人あたりの泊数、つまり滞在の長さが読める。令和7年の年間報告書も延べ宿泊者数と実宿泊者数を同じ項で報告し、一人当たり平均宿泊数を示している。",
+        "adoptionCriteria": [
+          "complementarity"
+        ],
+        "readerQuestion": "延べ宿泊者数の多い県は多くの人を迎えているのか、それとも一人が長く泊まっているのか。",
+        "targetReaderOrDecision": "滞在の長さに注目して宿泊需要の中身を見たい観光担当者や研究者。"
       }
     },
     {
@@ -87,21 +122,16 @@
       "shortLabel": "航空旅客",
       "role": "secondary",
       "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
-        "surveyedAt": "2026-09-08",
-        "rationale": "観光以外を含むアクセス補足に限り、主要KPIから外す。"
-      }
-    },
-    {
-      "rankingKey": "jr-passenger-transport",
-      "shortLabel": "JR旅客",
-      "role": "context",
-      "selection": {
-        "proposedBy": "全テーマ構成監査（既存統計・公開データの照合）",
-        "sourceUrl": "https://www.stat.go.jp/data/ssds/index.htm",
-        "surveyedAt": "2026-09-08",
-        "rationale": "JR旅客は「アクセスの背景」の補足として詳細索引に保持し、冒頭の要約へ重ねない。"
+        "proposedBy": "観光立国推進基本計画（第5次）本文 第3 1.（2）⑤「地方部への交通ネットワークの機能強化」イ「航空ネットワークの強化」（観光庁、2026年3月27日閣議決定）",
+        "sourceUrl": "https://www.mlit.go.jp/kankocho/content/001991698.pdf",
+        "surveyedAt": "2026-10-08",
+        "rationale": "第5次基本計画は、国内線の構造改革を通じて国内航空ネットワークを維持・強化し、インバウンドの地方誘客と地域経済の活性化につなげるとして、国内航空を地方への人の流れをつくる交通基盤に位置付けている。国内定期航空の旅客輸送人員は、その基盤の利用規模を都道府県別に比べる指標になる。ただし旅客地域流動調査の航空分は国内定期航空の空港間旅客流動を府県別に集約したもので、国際線の利用は含まない。",
+        "adoptionCriteria": [
+          "complementarity",
+          "readerValue"
+        ],
+        "readerQuestion": "国内定期航空の旅客輸送人員で見ると、自分の県は全国の中でどの程度の規模なのか。",
+        "targetReaderOrDecision": "空路での来訪しやすさを把握したい自治体の観光・交通担当者。"
       }
     },
     {
@@ -142,15 +172,22 @@
       "shortLabel": "訪日外国人の訪問者数（推計）",
       "role": "secondary",
       "selection": {
-        "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
-        "surveyedAt": "2026-09-09",
-        "rationale": "訪日外国人の訪問者数（推計）を既存テーマの独立章へ追加する。"
+        "proposedBy": "観光庁 インバウンド消費動向調査の概要「③都道府県別集計の推計手法」（観光庁）",
+        "sourceUrl": "https://www.mlit.go.jp/kankocho/content/002018884.pdf",
+        "surveyedAt": "2026-10-08",
+        "rationale": "観光庁は、訪日外国人の都道府県別訪問者数を、クルーズ客を除いた一般客の訪日外客数にB1地域調査の都道府県別訪問率を掛けて推計すると説明している。全数の実測ではなく出国時の聞き取りにもとづく推計値であり、宿泊統計では見えない訪問の広がりを都道府県別に比べられる。調査地点は25空海港で、各県を訪れた旅行者の出国港の80%をカバーする設計である。小さな県の差は誤差を含むと考えて読む必要がある。",
+        "adoptionCriteria": [
+          "representativeness",
+          "complementarity"
+        ],
+        "readerQuestion": "訪日外国人は自分の県を実際にどれくらい訪れていて、宿泊者数だけで見た場合と順位はどう違うのか。",
+        "targetReaderOrDecision": "訪問の広がりを宿泊数と合わせて確かめたい自治体やDMOのインバウンド施策担当者。"
       }
     },
     {
       "rankingKey": "inbound-visit-sample-by-destination",
       "shortLabel": "訪問者数推計の県別回答数",
-      "role": "secondary",
+      "role": "context",
       "selection": {
         "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
         "surveyedAt": "2026-09-09",
@@ -162,9 +199,16 @@
       "shortLabel": "日本人旅行者の県内消費額",
       "role": "secondary",
       "selection": {
-        "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
-        "surveyedAt": "2026-09-09",
-        "rationale": "日本人旅行者の県内消費額を既存テーマの独立章へ追加する。"
+        "proposedBy": "観光庁「観光庁が作成している統計の紹介」【３】旅行・観光消費動向調査 ③都道府県別集計の推計手法（観光庁）",
+        "sourceUrl": "https://www.mlit.go.jp/kankocho/content/001982651.pdf",
+        "surveyedAt": "2026-10-08",
+        "rationale": "観光庁は、日本人の都道府県別旅行消費額を、目的地の支出にその他訪問地の支出と団体・パックツアー料金の一部を按分して加算する推計だと説明している。その他訪問地の支出は総額のおよそ2割に当たり、加えなければ訪問先の消費を過小に見積もるという。観光庁の公表ページでも都道府県別集計表は参考扱いである。したがって実測の県内売上ではなく、配分ルールに依存する推計値として、日本人旅行者の消費規模を県間で比べる材料にする。",
+        "adoptionCriteria": [
+          "representativeness",
+          "complementarity"
+        ],
+        "readerQuestion": "日本人の国内旅行で、自分の県には宿泊と日帰りを合わせて年間どれくらいの消費が生まれているのか。",
+        "targetReaderOrDecision": "国内旅行の消費規模を県間で比べたい自治体の観光担当者。"
       }
     },
     {
@@ -172,15 +216,22 @@
       "shortLabel": "訪日外国人旅行者の県内消費額",
       "role": "secondary",
       "selection": {
-        "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
-        "surveyedAt": "2026-09-09",
-        "rationale": "訪日外国人旅行者の県内消費額を既存テーマの独立章へ追加する。"
+        "proposedBy": "観光庁 インバウンド消費動向調査の概要「B1地域調査の特徴」（観光庁）",
+        "sourceUrl": "https://www.mlit.go.jp/kankocho/content/002018884.pdf",
+        "surveyedAt": "2026-10-08",
+        "rationale": "観光庁はB1地域調査で訪問地（都道府県）ごとの支出を費目別に尋ねており、これにより非標本誤差を減らしながら宿泊費や飲食費などの費目別の支出を把握できると説明している。目標精度は都道府県ごとの1日当たり旅行中支出で、年間訪問者が多い県は標準誤差率5%、少ない県は20%と設計されている。県内消費の規模を比べる手がかりになるが、小さな県ほど誤差が大きい前提で読む必要がある。",
+        "adoptionCriteria": [
+          "representativeness",
+          "readerValue"
+        ],
+        "readerQuestion": "訪日外国人は自分の県で年間どれくらい消費していて、他県と比べてどの位置にあるのか。",
+        "targetReaderOrDecision": "インバウンド消費の県間差を確かめたい自治体やDMOの担当者。"
       }
     },
     {
       "rankingKey": "airport-count",
       "shortLabel": "空港数",
-      "role": "secondary",
+      "role": "context",
       "selection": {
         "proposedBy": "128テーマ実現性調査・既存テーマ拡充",
         "surveyedAt": "2026-09-09",
@@ -189,69 +240,6 @@
     }
   ],
   "charts": [
-    {
-      "componentKey": "theme-tourism-stay-trend",
-      "componentType": "line-chart",
-      "title": "延べ宿泊者数の推移（総数・外国人）",
-      "componentProps": {
-        "seriesRefs": [
-          {
-            "metricKey": "total-overnight-guests",
-            "label": "延べ宿泊者数（総数）"
-          },
-          {
-            "metricKey": "total-overnight-guests-foreign",
-            "label": "外国人延べ宿泊者数"
-          }
-        ],
-        "seriesColors": [
-          "population",
-          "count"
-        ]
-      },
-      "relatedRankingKeys": [
-        "total-overnight-guests",
-        "total-overnight-guests-foreign"
-      ],
-      "sourceName": "社会・人口統計体系",
-      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "stays",
-      "sortOrder": 10,
-      "annotation": "総数には外国人を含みます。両系列を足すと外国人分が重複します。延べ宿泊者数は人泊で、実人数ではありません。"
-    },
-    {
-      "componentKey": "theme-tourism-transport-trend",
-      "componentType": "line-chart",
-      "title": "航空旅客輸送量の比較",
-      "componentProps": {
-        "seriesRefs": [
-          {
-            "metricKey": "air-passenger-transport"
-          }
-        ],
-        "labels": [
-          "航空旅客"
-        ],
-        "seriesColors": [
-          "series-7"
-        ]
-      },
-      "relatedRankingKeys": [
-        "air-passenger-transport"
-      ],
-      "sourceName": "社会・人口統計体系",
-      "sourceLink": "https://www.stat.go.jp/data/ssds/index.htm",
-      "gridColumnSpan": 12,
-      "gridColumnSpanTablet": null,
-      "gridColumnSpanSm": null,
-      "dataSource": "ranking",
-      "section": "transport",
-      "sortOrder": 20
-    },
     {
       "componentKey": "theme-tourism-hotel-supply-trend",
       "componentType": "line-chart",
@@ -297,9 +285,6 @@
       "relatedRankingKeys": [
         "total-overnight-guests",
         "total-overnight-guests-foreign"
-      ],
-      "relatedChartKeys": [
-        "theme-tourism-stay-trend"
       ]
     }
   ],
@@ -315,18 +300,25 @@
     {
       "key": "stays",
       "title": "宿泊需要はどれくらいか",
-      "description": "延べ宿泊者数は宿泊日数を含むため、訪問した実人数ではありません。",
+      "description": "延べ宿泊者数は宿泊日数を含むため、訪問した実人数ではありません。実宿泊者数は宿泊手続をした人数で、1人が何泊しても1人と数えます。総数には外国人を含み、両者を足すと重複します。総数は人口や観光地の多い県ほど大きくなります。",
       "metricGroupKeys": [
-        "stays"
-      ],
-      "chartKeys": [
-        "theme-tourism-stay-trend"
+        "stays",
+        "stays-actual"
+      ]
+    },
+    {
+      "key": "candidate-28",
+      "title": "宿泊の季節性",
+      "description": "2024年の月別の増減を確認します。月別値は全施設の確定値で、観光・出張等の全目的を含みます。月の日数の違いや能登半島地震による調査対象の除外に注意して読みます。",
+      "metricGroupKeys": [],
+      "embeddedSectionKeys": [
+        "tourism-seasonality"
       ]
     },
     {
       "key": "accommodation",
       "title": "客室稼働率と宿泊供給の参考",
-      "description": "客室稼働率と施設・客室数では対象年が異なります。施設・客室数は2017年までの過去参考です。",
+      "description": "客室稼働率と施設・客室数では対象年が異なります。施設・客室数は2017年までの過去参考です。客室稼働率は2010年4月から従業者9人以下の施設も調査の対象に加わったため、2009年と2010年以降を同じ尺度で比べません。2020〜2021年は都道府県の中央値が40％台に下がり、2022年も50％台にとどまります。",
       "metricGroupKeys": [
         "accommodation"
       ],
@@ -335,57 +327,26 @@
       ]
     },
     {
-      "key": "transport",
-      "title": "アクセスの背景",
-      "description": "航空旅客数は観光以外の移動も含みます。観光客数の代わりにはなりません。",
-      "metricGroupKeys": [],
-      "chartKeys": [
-        "theme-tourism-transport-trend"
-      ]
-    },
-    {
-      "key": "candidate-25",
-      "title": "宿泊市場と稼働率",
-      "metricGroupKeys": [
-        "candidate-25-1"
-      ]
-    },
-    {
       "key": "candidate-26",
       "title": "外国人旅行者の訪問・宿泊・消費",
-      "description": "訪問者数は2025年の全目的・一般客の推計で、日帰りと空港・港の所在地も含みます。同じ旅行で複数県を訪れるため県別値を全国実人数へ合算しません。訪問回答数は重み付け前の標本で、回答数から推計訪問率を作り直しません。宿泊・消費の系列とは単位と対象を分けます。",
+      "description": "訪問者数は2025年の全目的・一般客の推計で、日帰りと空港・港の所在地も含みます。同じ旅行で複数県を訪れるため県別値を全国実人数へ合算しません。推計のもとになった県別の回答数はランキングページで確認できます。宿泊・消費の系列とは単位と対象を分けます。",
       "metricGroupKeys": [
-        "candidate-26-1",
-        "candidate-26-2",
-        "candidate-26-3"
+        "candidate-26-1"
       ]
     },
     {
       "key": "candidate-27",
       "title": "訪問先の旅行消費額",
-      "description": "日本人の国内旅行と訪日外国人一般客が訪問先の県で消費した金額を別々に比較します。全目的・宿泊と日帰りを含み、県間交通費等を除きます。異なる標本調査の推計で、県内所得や地域への還元率ではありません。",
+      "description": "日本人の国内旅行と訪日外国人一般客が訪問先の県で消費した金額を並べて比較します。全目的・宿泊と日帰りを含み、県間交通費等を除きます。異なる標本調査の推計なので、並べて見ますが足したり差を取ったりしません。消費額は総額で、旅行者が多い県ほど大きくなります。県内所得や地域への還元率ではありません。",
       "metricGroupKeys": [
-        "candidate-27-1",
-        "candidate-27-2"
-      ]
-    },
-    {
-      "key": "candidate-28",
-      "title": "宿泊の規模と季節性",
-      "description": "年間の宿泊規模と2024年の月別の増減を確認します。月別値は全施設の確定値で、観光・出張等の全目的を含みます。月の日数の違いや能登半島地震による調査対象の除外に注意して読みます。",
-      "metricGroupKeys": [
-        "candidate-28-1"
-      ],
-      "embeddedSectionKeys": [
-        "tourism-seasonality"
+        "candidate-27-1"
       ]
     },
     {
       "key": "candidate-85",
       "title": "空港と航空交通",
-      "description": "2025年の空港別旅客・貨物取扱いを国内線・国際線に分けて確認します。所在地で空港を選び、国際線通過客や複数県にまたがる空港を区別します。県民の実利用人数ではありません。",
+      "description": "2025年の空港別旅客・貨物取扱いを国内線・国際線に分けて確認します。所在地で空港を選び、国際線通過客や複数県にまたがる空港を区別します。県民の実利用人数ではありません。航空旅客数は観光以外の移動も含みます。観光客数の代わりにはなりません。",
       "metricGroupKeys": [
-        "candidate-85-1",
         "candidate-85-2"
       ],
       "embeddedSectionKeys": [
@@ -407,18 +368,18 @@
       ]
     },
     {
-      "key": "accommodation",
-      "title": "客室稼働率と宿泊供給の参考",
+      "key": "stays-actual",
+      "title": "実宿泊者数",
       "rankingKeys": [
-        "room-utilization-rate"
+        "actual-overnight-guests"
       ],
       "defaultCheckedKeys": [
-        "room-utilization-rate"
+        "actual-overnight-guests"
       ]
     },
     {
-      "key": "candidate-25-1",
-      "title": "客室稼働率",
+      "key": "accommodation",
+      "title": "客室稼働率と宿泊供給の参考",
       "rankingKeys": [
         "room-utilization-rate"
       ],
@@ -434,67 +395,20 @@
       ],
       "defaultCheckedKeys": [
         "inbound-visitors-by-destination"
-      ]
-    },
-    {
-      "key": "candidate-26-2",
-      "title": "訪問者数推計の県別回答数",
-      "rankingKeys": [
-        "inbound-visit-sample-by-destination"
       ],
-      "defaultCheckedKeys": [
-        "inbound-visit-sample-by-destination"
-      ]
-    },
-    {
-      "key": "candidate-26-3",
-      "title": "外国人延べ宿泊者数",
-      "rankingKeys": [
-        "total-overnight-guests-foreign"
-      ],
-      "defaultCheckedKeys": [
-        "total-overnight-guests-foreign"
-      ]
+      "comparisonYear": "2025"
     },
     {
       "key": "candidate-27-1",
-      "title": "日本人旅行者の県内消費額",
+      "title": "訪問先での旅行消費額（2025年）",
       "rankingKeys": [
-        "domestic-travel-consumption-by-destination"
-      ],
-      "defaultCheckedKeys": [
-        "domestic-travel-consumption-by-destination"
-      ]
-    },
-    {
-      "key": "candidate-27-2",
-      "title": "訪日外国人旅行者の県内消費額",
-      "rankingKeys": [
+        "domestic-travel-consumption-by-destination",
         "inbound-travel-consumption-by-destination"
       ],
       "defaultCheckedKeys": [
-        "inbound-travel-consumption-by-destination"
-      ]
-    },
-    {
-      "key": "candidate-28-1",
-      "title": "年間の延べ宿泊者数",
-      "rankingKeys": [
-        "total-overnight-guests"
+        "domestic-travel-consumption-by-destination"
       ],
-      "defaultCheckedKeys": [
-        "total-overnight-guests"
-      ]
-    },
-    {
-      "key": "candidate-85-1",
-      "title": "空港数",
-      "rankingKeys": [
-        "airport-count"
-      ],
-      "defaultCheckedKeys": [
-        "airport-count"
-      ]
+      "comparisonYear": "2025"
     },
     {
       "key": "candidate-85-2",
@@ -505,6 +419,12 @@
       "defaultCheckedKeys": [
         "air-passenger-transport"
       ]
+    }
+  ],
+  "rejectedCandidates": [
+    {
+      "rankingKey": "jr-passenger-transport",
+      "reason": "JR旅客輸送量。railway の主指標で主担当のテーマがあり、観光目的の移動を識別できないため、このテーマの主問 (宿泊需要・外国人の来訪・稼働・消費) から外れる。このテーマの主問が鉄道アクセスを含む形に変わったら再検討する。"
     }
   ]
 }

@@ -285,36 +285,5 @@
     "units": [
       "件"
     ]
-  },
-  {
-    "themeKey": "tourism",
-    "componentKey": "theme-tourism-stay-trend",
-    "componentType": "line-chart",
-    "rawRequestKeys": [
-      "0000010107?cdCat01=G7101",
-      "0000010107?cdCat01=G7102"
-    ],
-    "metricKeys": [
-      "total-overnight-guests",
-      "total-overnight-guests-foreign"
-    ],
-    "units": [
-      "人泊",
-      "人泊"
-    ]
-  },
-  {
-    "themeKey": "tourism",
-    "componentKey": "theme-tourism-transport-trend",
-    "componentType": "line-chart",
-    "rawRequestKeys": [
-      "0000010103?cdCat01=C3706"
-    ],
-    "metricKeys": [
-      "air-passenger-transport"
-    ],
-    "units": [
-      "千人"
-    ]
   }
 ]
