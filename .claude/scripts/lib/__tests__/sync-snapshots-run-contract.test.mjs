@@ -116,6 +116,19 @@ test("ranking-items を master より先に生成し metadata refresh を master
   );
 });
 
+test("calculated-stats を ranking-items より先に生成し、計算型 metric の item.latestYear を同じ run で新しい年にする", () => {
+  const source = fs.readFileSync(RUN_SH, "utf8");
+  const taskBlock = source.match(/declare -a TASKS=\(\n([\s\S]*?)\n\)/)?.[1] ?? "";
+  const labels = [...taskBlock.matchAll(/^\s*"([^|]+)\|/gm)].map((match) => match[1]);
+  const calculatedAt = labels.indexOf("calculated-stats");
+  assert.ok(calculatedAt >= 0, "calculated-stats task が見つからない");
+  assert.ok(
+    calculatedAt < labels.indexOf("ranking-items"),
+    "calculated-stats が ranking-items より後だと、ranking-items が前の run の app/stats から latestYear を決める",
+  );
+  assert.ok(calculatedAt < labels.indexOf("ranking-values"), "ranking-values は calculated-stats の出力を射影する");
+});
+
 test("ranking-items を生成直後に push してから metadata と master が remote を読む", () => {
   const { status, calls } = runRunSh();
   assert.equal(status, 0);

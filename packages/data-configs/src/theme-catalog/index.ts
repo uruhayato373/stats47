@@ -117,6 +117,7 @@ export function listThemeCatalogs(): ThemeCatalog[] {
   return Object.values(THEME_CATALOGS);
 }
 
+export { listThemesUsingRankingKeys, type RelatedThemeByMetric } from './related-themes';
 export { INDUSTRY_SPECIALIZATION_SOURCE } from './industry-specialization-source';
 
 export { MEDICAL_WORKFORCE_SOURCE } from './medical-workforce-source';

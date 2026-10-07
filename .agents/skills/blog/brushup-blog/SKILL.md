@@ -63,6 +63,7 @@ node .claude/scripts/blog/build-remediation-queue.mjs --next 5   # pending 上�
    - `adjacent-callouts` → 最重要の注意だけを callout に残し、分析・読み方・補足は通常本文へ戻すか対応する節へ分散する (連続配置のまま余白だけ足さない)。全記事の機械是正は `node .claude/scripts/blog/fix-consecutive-callouts.mjs --base docs/21_ブログ記事原稿 --apply` を使う
    - `internalLinks<3` / source-link 末尾集約 → source-link を各図直下にインライン配置
    - `リンク切れ (soft 404 / 410 Gone)` → **勝手に近そうな別ページへ張り替えない**。`.claude/scripts/blog/data/broken-link-remap.json` に置換先 (アンカーテキストが指す指標が実在 metric の title と一致する場合のみ。無ければ `to: null` = リンク解除) と `reason` を追記し、`node .claude/scripts/blog/fix-broken-internal-links.mjs --apply` で決定的に是正する (置換先を live 実測し到達不能なら中断する)。正典 `.claude/rules/blog-quality-standards.md` §内部リンクの実在
+   - `data-refresh` レーン、または entry に `staleData` (図の年が指標の最新年より古い) がある → focus `最新データ更新` (下のフロー)。must-fix の記事でも `staleData` があれば同じ回で取り直す
    - opportunity レーン (blocker 無し・CTR 改善余地) → `CTR-reframe`
 3. **記事アーキタイプを 1 つ選び frontmatter `archetype: A|B|C|D|E` を宣言** (正典「記事アーキタイプ」)。型の章構成・必須分析視点に従う。
 4. **quality-gate を通す**: `node .claude/scripts/blog/quality-gate.mjs <draft path>`。`prose/図` blocker を含め blocker 0 になるまで直す。
@@ -174,7 +175,7 @@ GSC データは実測値。
 |---|---|---|---|
 | `CTR-reframe` (default) | 全文 reframe (seoTitle / description / 本文) | ❌ 使わない | CTR 改善 (curiosity gap タイトル + 構造的発見) |
 | `エキスパート視点追加` | 1-2 セクションのみ部分補強 | ✅ `nlm cross query` (**対話実行限定**) | 白書引用・政策背景 |
-| `最新データ更新` | データ説明部分のみ | ❌ | 最新年度値へ差し替え |
+| `最新データ更新` | 図 (data JSON・source.json・SVG) + 本文の年と数値 | ❌ | 図を指標の最新年で取り直す (`refresh-article-data-years.mjs`) |
 | `CTA強化` | 記事末尾の関連リンク | ❌ | 回遊性 |
 
 > **NotebookLM ガード (重要)**: `エキスパート視点追加` focus は `notebooklm` CLI が対話 OAuth 前提でヘッドレス非対応のため、**人間が起動する単記事実行時のみ**選べる。`--target batch` から内部呼び出しされた場合はこの focus を**強制的に拒否し `CTR-reframe` に倒す** (OAuth 失効でループが詰まる事故を防ぐ)。
@@ -199,7 +200,7 @@ exit 1 なら修正 → 再 check して pass するまで繰り返す。 詳細
 2. 「何が不足しているか」を診断し focus を確定 (引数で明示されていれば従う):
    - **CTR が低い (タイトルに curiosity gap なし)** → `CTR-reframe`
    - **エキスパート視点なし** (白書引用・政策的背景が薄い) → `エキスパート視点追加` ※単記事・対話実行時のみ
-   - **最新データなし** (`publishedAt` が 12 ヶ月以上前) → `最新データ更新`
+   - **最新データなし** (図の年が指標の最新年より古い = `data/blog/stale-data-years.json` に載っている、または `publishedAt` が 12 ヶ月以上前) → `最新データ更新`
    - **CTA 弱い** (末尾の関連リンク・ランキング誘導が貧弱) → `CTA強化`
 3. **ground-truth 確認 (必須)**: `ls .local/r2/app/blog/<slug>/data/` → 各 JSON を Read し、本文で言及する都道府県の `{rank, value, label}` を確認。本文に書く数値・rank はこの値のみ使う (derive 計算は過程を明示)。
 
@@ -280,11 +281,32 @@ nlm cross query --notebooks "<ノートブック名>" \
 
 各 H2 の散文導入 or 考察セクションに白書引用・政策背景・専門的解説を 2-3 文追加する。Edit ツールで最小限の変更を適用する (全文書き直し禁止)。
 
-### focus=最新データ更新 / CTA強化 のフロー (部分編集)
+### focus=最新データ更新 のフロー (図を最新年で取り直し、本文の年と数値を合わせる)
+
+新しい年が R2 に入った指標の図を作り直し、本文をその値に合わせる。**図を先に取り直し、本文はその data JSON だけを見て書く**
+(数値を記憶や類推で書かない。上の絶対遵守と同じ)。
+
+1. 確認: `node .claude/scripts/blog/refresh-article-data-years.mjs --slug <slug> --pull`
+   (公開中の記事と図を `docs/21_ブログ記事原稿/<slug>/` へ取り出し、図ごとに「取り直せる / 最新 / 年を固定 / 手作業」を表で出す)
+2. **図ごとに直し方を決める (既定は取り直す)**。表の補足に、本文で図の年と最新年がそれぞれ何回出るかが出る。
+   - 本文が図の年を語らず新しい年を語っている → 図だけが古い食い違い。図だけ取り直す
+     (実例: 財政力指数の 2 記事で、2022 年度の順位を語る節に 1989 年の地図が置かれていた)
+   - 本文も図も古い年で一貫している → 記事ごと古い。取り直して本文も書き直す。年が例として出てくるだけの手順解説記事もこちらで、
+     AI の出力例として本文に引用した数値も合わせて直す
+   - 図の説明 (alt・本文) と data JSON の中身が違う (散布図と書いてあるのに棒グラフのデータ、など) → 自動で取り直さず、図を作り直す
+   - 本文がその年そのものを主題として論じている (特定の年の出来事や、制度が変わった前後の比較で過去側に置いた図) ときだけ、
+     取り直さずにその図の `data/<name>.source.json` に `"yearPinnedReason": "<理由>"` を書く (古い図の一覧と data-refresh レーンから外れる)。
+     本文が図の年を語っていない図は固定しない (2026-10-07 に図の年が古い 24 枚を本文と照らした結果、固定が正しい図は 0 枚だった)
+3. 取り直し: 同じコマンドに `--apply`。data JSON・source.json (`year` と `refreshedFromYear`)・SVG (PC・本文縦長・Instagram) を
+   最新年で作り直す。「手作業」の図 (散布図・計算値など) は表の理由を見て `fetch-correlation-scatter.mjs` 等で個別に取り直す
+4. 本文: 表の下の「本文で古い年を書いた行」と、`article-factual-check.mjs` の `VALUE_MISMATCH` (取り直した data と食い違う
+   本文の数値) をすべて直す。順位が入れ替わって見出しや結論が成り立たなくなった節は、data に合わせて解釈から書き直す
+5. 共通 Step B / C (lint・quality-gate) → blog-critic (delta) → 公開。done にすると次の snapshot で図の年が最新になり、一覧から消える
+
+### focus=CTA強化 のフロー (部分編集)
 
 | focus | 反映先 | 内容 |
 |---|---|---|
-| 最新データ更新 | データ説明部分 | data/*.json・D1 の最新年度値に差し替え |
 | CTA強化 (関連ランキング誘導) | **対応する図・データを扱う H2 セクション内** (SVG 図の直下等) | そのセクションが言及するランキングへ `<source-link href="/ranking/...">` を**インライン配置**。**記事末尾に集約しない** (回遊性・文脈性を損なう)。ナビ目的の `/category/` `/themes/` への `<source-link>` は末尾の関連セクションで可。検査: `node .claude/scripts/blog/audit-article-structure.mjs` |
 
 ### 共通 Step B: bold+括弧レンダリングバグ検出・修正 (必須, 全 focus)

@@ -408,7 +408,7 @@ export async function ThemePageLayout({
 
           <ThemeDashboardClient
             themeConfig={theme}
-            metricGroups={catalog?.metricGroups}
+            metricGroups={data.metricGroups}
             sections={catalog?.sections}
             embeddedSections={embeddedSections}
             indicatorDataMap={data.indicatorDataMap}
@@ -457,12 +457,14 @@ export async function ThemePageLayout({
             </div>
           )}
 
-          {theme.relatedArticleTagKeys &&
-            theme.relatedArticleTagKeys.length > 0 && (
-              <Suspense fallback={null}>
-                <ThemeRelatedArticles tagKeys={theme.relatedArticleTagKeys} />
-              </Suspense>
-            )}
+          {((theme.relatedArticleTagKeys?.length ?? 0) > 0 || theme.rankingKeys.length > 0) && (
+            <Suspense fallback={null}>
+              <ThemeRelatedArticles
+                tagKeys={theme.relatedArticleTagKeys ?? []}
+                rankingKeys={theme.rankingKeys}
+              />
+            </Suspense>
+          )}
         </div>
       </PageShell>
     </ThemePrefectureProvider>

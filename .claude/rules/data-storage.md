@@ -64,6 +64,7 @@ paths:
 | バックログ自動処理の実行台帳 (completion gate の証拠) | `.claude/state/backlog-loop/ledger.json` | `agent.backlog-loop` |
 | 整合性監査の印 (Stop hook が読む) | `.claude/state/consistency/audited.json` | `agent.consistency` |
 | RemoteTrigger の記録 | `.claude/state/triggers.json` | `agent.triggers` |
+| obsidian の mail-triage がメールから拾ったイベントの受信箱 (書き手と置き場はリポ外の cron が決める) | `.claude/state/inbox/mail-events.json` | `agent.mail-inbox` |
 | Claude routine のトークン実績・モデル使用量と canary・プロンプト評価 | `.claude/state/metrics/{claude-usage,model-usage,prompt-evals}/` | `claude.*` |
 | (git 管理外) セッションロック・実行間隔の記録 | `.claude/state/{session-locks,cadence}/` | — |
 

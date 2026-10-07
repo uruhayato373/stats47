@@ -2,15 +2,15 @@
   "total": 1598,
   "staged": false,
   "byStatus": {
-    "both": 1503,
+    "both": 1505,
     "jsonOnly": 0,
-    "neither": 95
+    "neither": 93
   },
   "byMethod": {
-    "done": 1503,
-    "manual": 40,
+    "done": 1505,
+    "manual": 39,
     "ssot-restore": 22,
-    "ssot-restore-new": 33
+    "ssot-restore-new": 32
   },
   "autoRecoverableCount": 0,
   "entries": [
@@ -502,12 +502,12 @@
       "slug": "alcohol-prefecture-map",
       "base": "liquor-type-breakdown",
       "chartType": "stacked",
-      "hasJson": false,
+      "hasJson": true,
       "hasSource": true,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new",
+      "status": "both",
+      "restoreMethod": "done",
       "autoRecoverable": false,
-      "residualCard": "CHART-LINEAGE-RESIDUAL-01"
+      "residualCard": null
     },
     {
       "slug": "alcohol-prefecture-map",
@@ -1151,12 +1151,12 @@
       "slug": "birth-death-gap-decline",
       "base": "inline-chart-1",
       "chartType": "unknown",
-      "hasJson": false,
+      "hasJson": true,
       "hasSource": true,
-      "status": "neither",
-      "restoreMethod": "manual",
+      "status": "both",
+      "restoreMethod": "done",
       "autoRecoverable": false,
-      "residualCard": "CHART-LINEAGE-RESIDUAL-01"
+      "residualCard": null
     },
     {
       "slug": "birth-death-gap-decline",
