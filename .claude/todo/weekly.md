@@ -197,5 +197,6 @@ KPI は確定7日と重複しない前週だけで比べる。rolling 28日（cl
 - データ品質の「更新」と決めた指標の R2 反映を 1 回の承認にまとめる
 - `EFFECT-TARGET-MARKERS-01` のオーナー判断を W42 Must で反映する
 - 再認証後の `measurement-freshness` の値を W41 の計測サイクルで確かめる
-- W42 Should に `KDP-LEDGER-AUTO-01` (重点1: 週次収益の KDP 分)、Could に `BUSINESS-PLAN-FRESHNESS-MTIME-01` を入れる
+- W42 Should に `KDP-LEDGER-AUTO-01` (重点1: 週次収益の KDP 分) を入れる。`BUSINESS-PLAN-FRESHNESS-MTIME-01` は 10-07 に実装済み (テストを足せば閉じられる)
+- サイト領域が 10-07 に「攻める」になった。W42 の Should に `SEO-CTR-CANDIDATES-01` ① (公衆電話・出生率の食い合い確認) と `CONTENT-FOOD-TRIVIA-01` ① (品目の突き合わせ表) を入れる。Must の総量は増やさない
 - W41 の週次レビューから `site-pageviews` (28 日 PV。W40 は 43,907、W52 目標 79,000) を 1 行記録する
