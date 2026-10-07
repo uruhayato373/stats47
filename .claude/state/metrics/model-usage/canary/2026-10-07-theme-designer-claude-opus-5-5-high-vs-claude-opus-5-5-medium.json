@@ -1,0 +1,226 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-10-07T00:53:20.054Z",
+  "agent": "theme-designer",
+  "fixture": {
+    "file": ".claude/scripts/model-usage/canary-fixtures/theme-designer.json",
+    "version": 1,
+    "expected": [
+      "local-economy-before/add-gross-product",
+      "local-economy-before/extend-years",
+      "local-economy-before/card-chart-duplicate",
+      "local-economy-before/single-year-comparison",
+      "local-economy-before/owned-elsewhere",
+      "local-economy-before/base-year-break",
+      "local-economy-before/scale-vs-rate",
+      "local-economy-before/drop-repeated-text"
+    ]
+  },
+  "baseline": {
+    "model": "claude-opus-5-5",
+    "effort": "high"
+  },
+  "candidate": {
+    "model": "claude-opus-5-5",
+    "effort": "medium"
+  },
+  "repeats": 2,
+  "rules": {
+    "maxRecallDrop": 0,
+    "maxCostRatio": 1.1
+  },
+  "verdict": "pass",
+  "scores": {
+    "baseline": {
+      "recall": 0.8125,
+      "cost": 0.26958879999999996
+    },
+    "candidate": {
+      "recall": 0.8125,
+      "cost": 0.1837455
+    }
+  },
+  "runs": {
+    "baseline": [
+      {
+        "hits": [
+          {
+            "id": "local-economy-before/add-gross-product",
+            "hit": true
+          },
+          {
+            "id": "local-economy-before/extend-years",
+            "hit": true
+          },
+          {
+            "id": "local-economy-before/card-chart-duplicate",
+            "hit": true
+          },
+          {
+            "id": "local-economy-before/single-year-comparison",
+            "hit": true
+          },
+          {
+            "id": "local-economy-before/owned-elsewhere",
+            "hit": false
+          },
+          {
+            "id": "local-economy-before/base-year-break",
+            "hit": true
+          },
+          {
+            "id": "local-economy-before/scale-vs-rate",
+            "hit": false
+          },
+          {
+            "id": "local-economy-before/drop-repeated-text",
+            "hit": true
+          }
+        ],
+        "recall": 0.75,
+        "isError": false,
+        "costUsd": 0.387632,
+        "durationMs": 85638,
+        "models": [
+          "claude-opus-5-5"
+        ],
+        "outputTokens": 8146
+      },
+      {
+        "hits": [
+          {
+            "id": "local-economy-before/add-gross-product",
+            "hit": true
+          },
+          {
+            "id": "local-economy-before/extend-years",
+            "hit": true
+          },
+          {
+            "id": "local-economy-before/card-chart-duplicate",
+            "hit": true
+          },
+          {
+            "id": "local-economy-before/single-year-comparison",
+            "hit": true
+          },
+          {
+            "id": "local-economy-before/owned-elsewhere",
+            "hit": true
+          },
+          {
+            "id": "local-economy-before/base-year-break",
+            "hit": true
+          },
+          {
+            "id": "local-economy-before/scale-vs-rate",
+            "hit": false
+          },
+          {
+            "id": "local-economy-before/drop-repeated-text",
+            "hit": true
+          }
+        ],
+        "recall": 0.875,
+        "isError": false,
+        "costUsd": 0.1515456,
+        "durationMs": 86860,
+        "models": [
+          "claude-opus-5-5"
+        ],
+        "outputTokens": 7296
+      }
+    ],
+    "candidate": [
+      {
+        "hits": [
+          {
+            "id": "local-economy-before/add-gross-product",
+            "hit": true
+          },
+          {
+            "id": "local-economy-before/extend-years",
+            "hit": true
+          },
+          {
+            "id": "local-economy-before/card-chart-duplicate",
+            "hit": true
+          },
+          {
+            "id": "local-economy-before/single-year-comparison",
+            "hit": true
+          },
+          {
+            "id": "local-economy-before/owned-elsewhere",
+            "hit": false
+          },
+          {
+            "id": "local-economy-before/base-year-break",
+            "hit": true
+          },
+          {
+            "id": "local-economy-before/scale-vs-rate",
+            "hit": true
+          },
+          {
+            "id": "local-economy-before/drop-repeated-text",
+            "hit": true
+          }
+        ],
+        "recall": 0.875,
+        "isError": false,
+        "costUsd": 0.2748454,
+        "durationMs": 52896,
+        "models": [
+          "claude-opus-5-5"
+        ],
+        "outputTokens": 4865
+      },
+      {
+        "hits": [
+          {
+            "id": "local-economy-before/add-gross-product",
+            "hit": true
+          },
+          {
+            "id": "local-economy-before/extend-years",
+            "hit": true
+          },
+          {
+            "id": "local-economy-before/card-chart-duplicate",
+            "hit": true
+          },
+          {
+            "id": "local-economy-before/single-year-comparison",
+            "hit": true
+          },
+          {
+            "id": "local-economy-before/owned-elsewhere",
+            "hit": false
+          },
+          {
+            "id": "local-economy-before/base-year-break",
+            "hit": true
+          },
+          {
+            "id": "local-economy-before/scale-vs-rate",
+            "hit": false
+          },
+          {
+            "id": "local-economy-before/drop-repeated-text",
+            "hit": true
+          }
+        ],
+        "recall": 0.75,
+        "isError": false,
+        "costUsd": 0.0926456,
+        "durationMs": 46410,
+        "models": [
+          "claude-opus-5-5"
+        ],
+        "outputTokens": 4351
+      }
+    ]
+  },
+  "raw": ".local/model-canary/2026-10-07-theme-designer-claude-opus-5-5-high-vs-claude-opus-5-5-medium"
+}

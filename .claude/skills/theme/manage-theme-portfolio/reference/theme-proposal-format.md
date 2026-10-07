@@ -25,6 +25,15 @@ fishery-marine・local-economy の 3 テーマをこの形で提案し、承認�
 30 日以内の承認待ちと公開待ちのテーマは下に分けてある。表示回数が近いときは、直す候補の多い方を先にする。
 「該当件数の推移」は週次のテーマ監査 (`npm run theme:portfolio:audit`) が記録し、直したぶん減っているかを見る。
 
+## 提案に使う effort
+
+2026-10-07 の canary (`.claude/scripts/model-usage/canary-fixtures/theme-designer.json`、見直し前の local-economy から
+承認済みの 8 判断を当てる課題) で、Opus 5.5 の medium は high と同じ recall 0.81 で、費用は 32% 低かった
+(`.claude/state/metrics/model-usage/canary/2026-10-07-theme-designer-claude-opus-5-5-high-vs-claude-opus-5-5-medium.json`)。
+提案も実装も medium を既定にする。両方の effort で落ちやすいのは「他テーマの主指標を一覧からも外す」と
+「総額は人口の多い県ほど大きいと注記する」の 2 つで、どちらも視点 (`owned-elsewhere`・`scale-vs-rate`) に書いてあるので、
+提案の前に `config/theme-selection-viewpoints.json` を読む。
+
 ## 置き場と状態
 
 - 置き場: `reference/reviews/YYYY-MM-DD-theme-<key>.md` (1 テーマ 1 文書)。前の版があれば frontmatter の `supersedes` に書く。
