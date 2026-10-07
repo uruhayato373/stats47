@@ -337,7 +337,6 @@ updated: 2026-10-06
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-07] [領域:データ]
 
 - **事象**: `dairy-cattle-count` の metric config に description と note が無く、調査時点 (2 月 1 日現在) が読者向けの定義に出ない (2026-10-07 に config で確認)。critic によると、指標の定義シートで `dairy-cattle-holdings` の対象欄が「企業」と出る。一方、config の note は「飼養戸数は法人企業数ではなく」と書いていて、両者が食い違う (critic の報告。定義シートの出力は未確認)。
-- **値の確認**: 三重県の乳用牛飼養戸数が 26 戸 (頭数 7,040 頭で 1 戸あたり約 271 頭) と全国でも突出している。畜産統計の公式表 (1(1)ア) と突き合わせ、取り込みの誤りでないかを確かめる (2026-10-07、dairy-cattle-count の writer が報告)。
 - **次**: `npx tsx .claude/scripts/blog/build-metric-definition-sheet.ts` で 2 指標の定義シートを出し、対象欄の値の出どころを特定して直す。`dairy-cattle-count` には `dairy-cattle-holdings` と同じ形で description と note を書く。
 - **完了条件**: 2 指標の定義シートで、調査時点が出ていて、対象欄と note が食い違わない。`npm run validate:config --workspace=@stats47/data-configs` が通る。
 
