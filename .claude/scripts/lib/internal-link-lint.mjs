@@ -24,6 +24,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { PREF_AREA_CODES } from "./prefectures.cjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 /**
  * リポジトリルートを上方向に探索して決める。
@@ -113,7 +114,7 @@ function loadKeySets() {
   for (const filename of fs.readdirSync(path.join(ROOT, SOURCES.themeSets))) {
     if (!filename.endsWith(".ts")) continue;
     const source = readRequired(path.join(SOURCES.themeSets, filename));
-    if (!source.startsWith("// AUTO-GENERATED") || !source.includes("Source of truth: data/themes/catalogs/")) continue;
+    if (!source.startsWith("// AUTO-GENERATED") || !source.includes(`Source of truth: ${datasetDir("themes.catalogs")}/`)) continue;
     const literal = source.match(/export const \w+: IndicatorSet = (\{[\s\S]*?\});/);
     if (!literal) continue;
     const set = JSON.parse(literal[1]);
