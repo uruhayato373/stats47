@@ -407,6 +407,13 @@ updated: 2026-10-06
 - **次**: 賃金構造基本統計調査の surveyId を `data/surveys` の台帳で確かめ、39 指標にまとめて足す。標本の少なさによる年ごとの変動の注意を note に足すかを、指標ごとの標本数を見て決める。
 - **完了条件**: 39 指標の定義シートで調査名が出る。
 
+### [BLOG-REFRESH-DERIVED-SCATTER-01] 図の年の取り直しスクリプトが、計算で作った散布図を取り直せない
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:node --test .claude/scripts/blog/lib/__tests__/refresh-chart-year.test.mjs] [起票:2026-10-07] [領域:サイト]
+
+- **事象**: `refresh-article-data-years.mjs` は ranking の図だけを取り直し、source の kind が `derived-scatter` / `calculated` の散布図は「unsupported」として残す。2026-10-07 の書き直しでは real-disposable-income-reversal など複数の記事で、writer が散布図の x・y を R2 から手で取り直した。
+- **次**: 散布図の source.json の入力 (x・y の rankingKey と年) から両軸を最新の共通年で取り直し、相関などの計算値を記録し直す機能を足す。両軸の最新年が違う場合は、そろう年を選び、どちらの年かを図の見出しに出す。
+- **完了条件**: 散布図を含む記事で取り直しが手作業なしに終わることを、テストで固定している。
+
 ### [BLOG-REVISE-PATTERNS-01] 図の年の書き直しで critic が繰り返し REVISE にした型を、writer の規約か gate に入れる
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-07] [領域:サイト]
 
