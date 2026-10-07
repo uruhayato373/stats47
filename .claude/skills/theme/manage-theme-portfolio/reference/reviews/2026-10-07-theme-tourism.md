@@ -87,6 +87,12 @@ tags: [theme-catalog, tourism, accommodation, inbound, occupancy, consumption]
 年を広げる 2 指標 (`room-utilization-rate`・`number-of-hotel-facilities`) は、config の `years` を変えるだけで値は作らない。
 R2 の観測値は自動では増えないため、再取得はデプロイと同じ承認で行う。
 
+実装時の再確認 (2026-10-08、`getStatsData` を `cdArea` なしで呼び、年ごとの欠測でない都道府県の件数を数えた):
+`room-utilization-rate` (`#G04308`) は 2009〜2024 の 16 年、`number-of-hotel-facilities` (`C3803`) は 1997〜2017 の 21 年、
+`actual-overnight-guests` (`G7103`、単位「人」) は 2009〜2024 の 16 年で、どの年も 47 件そろう。
+実宿泊者数の定義は観光庁「宿泊旅行統計調査 用語の解説」(`https://www.mlit.go.jp/kankocho/content/001983218.pdf`、同日 GET で 200) の
+「実宿泊者数とは、各月における宿泊手続をした人数をいい、子供や乳幼児も 1 人とした。」に合わせた。
+
 ## 表 2: 現行チャート・カード・章
 
 ### チャート
