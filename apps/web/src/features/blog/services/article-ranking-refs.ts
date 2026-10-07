@@ -5,9 +5,10 @@ import { fetchFromR2AsJson } from "@stats47/r2-storage/server";
 import { extractBlogChartSourceReferences } from "@stats47/ranking";
 
 import { blogR2Key } from "../r2-key";
-import type { SnapshotRankingRef } from "../types/snapshot";
 
 import { extractArticleChartBases } from "./article-survey-taxonomy";
+
+import type { SnapshotRankingRef } from "../types";
 
 type SourceFetcher = (key: string) => Promise<unknown | null>;
 
