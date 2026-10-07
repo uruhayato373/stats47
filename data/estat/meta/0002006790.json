@@ -1,0 +1,386 @@
+{
+ "statsDataId": "0002006790",
+ "title": "都道府県別推計統計表 都道府県別農業産出額及び生産農業所得 合計（全国）に占める割合",
+ "statName": "生産農業所得統計",
+ "govOrg": "農林水産省",
+ "surveyDate": "202001-202012",
+ "overallTotalNumber": 1152,
+ "dimensions": [
+  {
+   "id": "cat01",
+   "name": "(E015-01-2-005)都道府県",
+   "valueCount": 48,
+   "sampleValues": [
+    {
+     "code": "001",
+     "name": "北海道",
+     "unit": null
+    },
+    {
+     "code": "002",
+     "name": "青森",
+     "unit": null
+    },
+    {
+     "code": "003",
+     "name": "岩手",
+     "unit": null
+    },
+    {
+     "code": "004",
+     "name": "宮城",
+     "unit": null
+    },
+    {
+     "code": "005",
+     "name": "秋田",
+     "unit": null
+    },
+    {
+     "code": "006",
+     "name": "山形",
+     "unit": null
+    },
+    {
+     "code": "007",
+     "name": "福島",
+     "unit": null
+    },
+    {
+     "code": "008",
+     "name": "茨城",
+     "unit": null
+    },
+    {
+     "code": "009",
+     "name": "栃木",
+     "unit": null
+    },
+    {
+     "code": "010",
+     "name": "群馬",
+     "unit": null
+    },
+    {
+     "code": "011",
+     "name": "埼玉",
+     "unit": null
+    },
+    {
+     "code": "012",
+     "name": "千葉",
+     "unit": null
+    },
+    {
+     "code": "013",
+     "name": "東京",
+     "unit": null
+    },
+    {
+     "code": "014",
+     "name": "神奈川",
+     "unit": null
+    },
+    {
+     "code": "015",
+     "name": "新潟",
+     "unit": null
+    },
+    {
+     "code": "016",
+     "name": "富山",
+     "unit": null
+    },
+    {
+     "code": "017",
+     "name": "石川",
+     "unit": null
+    },
+    {
+     "code": "018",
+     "name": "福井",
+     "unit": null
+    },
+    {
+     "code": "019",
+     "name": "山梨",
+     "unit": null
+    },
+    {
+     "code": "020",
+     "name": "長野",
+     "unit": null
+    },
+    {
+     "code": "021",
+     "name": "岐阜",
+     "unit": null
+    },
+    {
+     "code": "022",
+     "name": "静岡",
+     "unit": null
+    },
+    {
+     "code": "023",
+     "name": "愛知",
+     "unit": null
+    },
+    {
+     "code": "024",
+     "name": "三重",
+     "unit": null
+    },
+    {
+     "code": "025",
+     "name": "滋賀",
+     "unit": null
+    },
+    {
+     "code": "026",
+     "name": "京都",
+     "unit": null
+    },
+    {
+     "code": "027",
+     "name": "大阪",
+     "unit": null
+    },
+    {
+     "code": "028",
+     "name": "兵庫",
+     "unit": null
+    },
+    {
+     "code": "029",
+     "name": "奈良",
+     "unit": null
+    },
+    {
+     "code": "030",
+     "name": "和歌山",
+     "unit": null
+    },
+    {
+     "code": "031",
+     "name": "鳥取",
+     "unit": null
+    },
+    {
+     "code": "032",
+     "name": "島根",
+     "unit": null
+    },
+    {
+     "code": "033",
+     "name": "岡山",
+     "unit": null
+    },
+    {
+     "code": "034",
+     "name": "広島",
+     "unit": null
+    },
+    {
+     "code": "035",
+     "name": "山口",
+     "unit": null
+    },
+    {
+     "code": "036",
+     "name": "徳島",
+     "unit": null
+    },
+    {
+     "code": "037",
+     "name": "香川",
+     "unit": null
+    },
+    {
+     "code": "038",
+     "name": "愛媛",
+     "unit": null
+    },
+    {
+     "code": "039",
+     "name": "高知",
+     "unit": null
+    },
+    {
+     "code": "040",
+     "name": "福岡",
+     "unit": null
+    },
+    {
+     "code": "041",
+     "name": "佐賀",
+     "unit": null
+    },
+    {
+     "code": "042",
+     "name": "長崎",
+     "unit": null
+    },
+    {
+     "code": "043",
+     "name": "熊本",
+     "unit": null
+    },
+    {
+     "code": "044",
+     "name": "大分",
+     "unit": null
+    },
+    {
+     "code": "045",
+     "name": "宮崎",
+     "unit": null
+    },
+    {
+     "code": "046",
+     "name": "鹿児島",
+     "unit": null
+    },
+    {
+     "code": "047",
+     "name": "沖縄",
+     "unit": null
+    },
+    {
+     "code": "048",
+     "name": "合計",
+     "unit": null
+    }
+   ],
+   "hasTotal": true
+  },
+  {
+   "id": "cat02",
+   "name": "(E015-01-1-010)農業産出額",
+   "valueCount": 24,
+   "sampleValues": [
+    {
+     "code": "001",
+     "name": "農業産出額_計",
+     "unit": "％"
+    },
+    {
+     "code": "002",
+     "name": "農業産出額_耕種_小計",
+     "unit": "％"
+    },
+    {
+     "code": "003",
+     "name": "農業産出額_耕種_米",
+     "unit": "％"
+    },
+    {
+     "code": "004",
+     "name": "農業産出額_耕種_麦類",
+     "unit": "％"
+    },
+    {
+     "code": "005",
+     "name": "農業産出額_耕種_雑穀",
+     "unit": "％"
+    },
+    {
+     "code": "006",
+     "name": "農業産出額_耕種_豆類",
+     "unit": "％"
+    },
+    {
+     "code": "007",
+     "name": "農業産出額_耕種_いも類",
+     "unit": "％"
+    },
+    {
+     "code": "008",
+     "name": "農業産出額_耕種_野菜",
+     "unit": "％"
+    },
+    {
+     "code": "009",
+     "name": "農業産出額_耕種_果実",
+     "unit": "％"
+    },
+    {
+     "code": "010",
+     "name": "農業産出額_耕種_花き",
+     "unit": "％"
+    },
+    {
+     "code": "011",
+     "name": "農業産出額_耕種_花き_工芸農作物",
+     "unit": "％"
+    },
+    {
+     "code": "012",
+     "name": "農業産出額_耕種_花き_工芸農作物_茶",
+     "unit": "％"
+    },
+    {
+     "code": "013",
+     "name": "農業産出額_耕種_その他作物",
+     "unit": "％"
+    },
+    {
+     "code": "014",
+     "name": "農業産出額_畜産_小計",
+     "unit": "％"
+    },
+    {
+     "code": "015",
+     "name": "農業産出額_畜産_肉用牛",
+     "unit": "％"
+    },
+    {
+     "code": "016",
+     "name": "農業産出額_畜産_乳用牛",
+     "unit": "％"
+    },
+    {
+     "code": "017",
+     "name": "農業産出額_畜産_乳用牛_生乳",
+     "unit": "％"
+    },
+    {
+     "code": "018",
+     "name": "農業産出額_畜産_豚",
+     "unit": "％"
+    },
+    {
+     "code": "019",
+     "name": "農業産出額_畜産_鶏",
+     "unit": "％"
+    },
+    {
+     "code": "020",
+     "name": "農業産出額_畜産_鶏_工芸_鶏卵",
+     "unit": "％"
+    },
+    {
+     "code": "021",
+     "name": "農業産出額_畜産_鶏_工芸_ブロイラー",
+     "unit": "％"
+    },
+    {
+     "code": "022",
+     "name": "農業産出額_畜産_その他畜産物",
+     "unit": "％"
+    },
+    {
+     "code": "023",
+     "name": "農業産出額_加工農産物",
+     "unit": "％"
+    },
+    {
+     "code": "024",
+     "name": "生産農業所得",
+     "unit": "％"
+    }
+   ],
+   "hasTotal": true
+  }
+ ]
+}

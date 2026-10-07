@@ -1,0 +1,13 @@
+{
+  "kind": "ranking",
+  "rankingKey": "consumer-price-difference-index-food",
+  "year": "2024",
+  "unit": "（全国=100）",
+  "label": "消費者物価地域差指数 食料（2024年度）",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/consumer-price-difference-index-food/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug consumer-price-regional-gap --keys consumer-price-difference-index-food --data-name food-prefecture-rankings",
+  "fetchedAt": "2026-10-07T06:54:17.472Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

@@ -1,0 +1,89 @@
+<!-- data-source: dairy-cattle-count-prefecture-rankings.json | generated: 2026-10-07T09:30:43.655Z -->
+<svg width="640" height="960" viewBox="0 0 640 960" xmlns="http://www.w3.org/2000/svg" font-family="'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif" role="img" aria-label="乳用牛飼養頭数">
+  <style>
+    .svg-bg{fill:#ffffff}
+    .svg-plot{fill:#f9fafb}
+    .svg-plot-border{stroke:#d1d5db}
+    .svg-title{fill:#1f2937}
+    .svg-axis{fill:#374151}
+    .svg-tick{fill:#6b7280}
+    .svg-grid{stroke:#e5e7eb}
+    @media (prefers-color-scheme:dark){
+    .svg-bg{fill:#0f172a}
+    .svg-plot{fill:#1e293b}
+    .svg-plot-border{stroke:#334155}
+    .svg-title{fill:#e2e8f0}
+    .svg-axis{fill:#cbd5e1}
+    .svg-tick{fill:#94a3b8}
+    .svg-grid{stroke:#334155}
+    }
+  </style>
+  <rect width="640" height="960" class="svg-bg"/>
+  <text x="320" y="42" text-anchor="middle" font-size="28" font-weight="bold" class="svg-title">乳用牛飼養頭数</text>
+  <text x="320" y="78" text-anchor="middle" font-size="20" class="svg-tick">2025年</text>
+  <rect x="24" y="134" width="592" height="44" rx="8" fill="#dc2626"/>
+  <text x="44" y="163" font-size="20" font-weight="bold" fill="#ffffff">上位5</text>
+  <rect x="24" y="188" width="592" height="58" rx="8" fill="#fef2f2"/>
+  <circle cx="54" cy="215" r="18" fill="#dc2626"/>
+  <text x="54" y="222" text-anchor="middle" font-size="20" font-weight="bold" fill="#ffffff">1</text>
+  <text x="88" y="222" font-size="24" font-weight="bold" fill="#1f2937">北海道</text>
+  <text x="598" y="222" text-anchor="end" font-size="22" font-weight="700" fill="#dc2626">816,800 頭</text>
+  <rect x="88" y="231" width="400" height="10" rx="4" fill="#ef4444" opacity="0.85"/>
+  <rect x="24" y="254" width="592" height="58" rx="8" fill="#ffffff"/>
+  <circle cx="54" cy="281" r="18" fill="#dc2626"/>
+  <text x="54" y="288" text-anchor="middle" font-size="20" font-weight="bold" fill="#ffffff">2</text>
+  <text x="88" y="288" font-size="24" font-weight="bold" fill="#1f2937">栃木県</text>
+  <text x="598" y="288" text-anchor="end" font-size="22" font-weight="700" fill="#dc2626">51,400 頭</text>
+  <rect x="88" y="297" width="25.171" height="10" rx="4" fill="#ef4444" opacity="0.85"/>
+  <rect x="24" y="320" width="592" height="58" rx="8" fill="#fef2f2"/>
+  <circle cx="54" cy="347" r="18" fill="#dc2626"/>
+  <text x="54" y="354" text-anchor="middle" font-size="20" font-weight="bold" fill="#ffffff">3</text>
+  <text x="88" y="354" font-size="24" font-weight="bold" fill="#1f2937">熊本県</text>
+  <text x="598" y="354" text-anchor="end" font-size="22" font-weight="700" fill="#dc2626">41,900 頭</text>
+  <rect x="88" y="363" width="20.519" height="10" rx="4" fill="#ef4444" opacity="0.85"/>
+  <rect x="24" y="386" width="592" height="58" rx="8" fill="#ffffff"/>
+  <circle cx="54" cy="413" r="18" fill="#dc2626"/>
+  <text x="54" y="420" text-anchor="middle" font-size="20" font-weight="bold" fill="#ffffff">4</text>
+  <text x="88" y="420" font-size="24" font-weight="bold" fill="#1f2937">岩手県</text>
+  <text x="598" y="420" text-anchor="end" font-size="22" font-weight="700" fill="#dc2626">37,600 頭</text>
+  <rect x="88" y="429" width="18.413" height="10" rx="4" fill="#ef4444" opacity="0.85"/>
+  <rect x="24" y="452" width="592" height="58" rx="8" fill="#fef2f2"/>
+  <circle cx="54" cy="479" r="18" fill="#dc2626"/>
+  <text x="54" y="486" text-anchor="middle" font-size="20" font-weight="bold" fill="#ffffff">5</text>
+  <text x="88" y="486" font-size="24" font-weight="bold" fill="#1f2937">群馬県</text>
+  <text x="598" y="486" text-anchor="end" font-size="22" font-weight="700" fill="#dc2626">31,000 頭</text>
+  <rect x="88" y="495" width="15.181" height="10" rx="4" fill="#ef4444" opacity="0.85"/>
+  <rect x="24" y="530" width="592" height="44" rx="8" fill="#1565c0"/>
+  <text x="44" y="559" font-size="20" font-weight="bold" fill="#ffffff">下位5</text>
+  <rect x="24" y="584" width="592" height="58" rx="8" fill="#eff6ff"/>
+  <circle cx="54" cy="611" r="18" fill="#1565c0"/>
+  <text x="54" y="618" text-anchor="middle" font-size="20" font-weight="bold" fill="#ffffff">43</text>
+  <text x="88" y="618" font-size="24" font-weight="bold" fill="#1f2937">佐賀県</text>
+  <text x="598" y="618" text-anchor="end" font-size="22" font-weight="700" fill="#1565c0">1,740 頭</text>
+  <rect x="88" y="627" width="0.852" height="10" rx="4" fill="#42a5f5" opacity="0.85"/>
+  <rect x="24" y="650" width="592" height="58" rx="8" fill="#ffffff"/>
+  <circle cx="54" cy="677" r="18" fill="#1565c0"/>
+  <text x="54" y="684" text-anchor="middle" font-size="20" font-weight="bold" fill="#ffffff">44</text>
+  <text x="88" y="684" font-size="24" font-weight="bold" fill="#1f2937">東京都</text>
+  <text x="598" y="684" text-anchor="end" font-size="22" font-weight="700" fill="#1565c0">1,330 頭</text>
+  <rect x="88" y="693" width="0.651" height="10" rx="4" fill="#42a5f5" opacity="0.85"/>
+  <rect x="24" y="716" width="592" height="58" rx="8" fill="#eff6ff"/>
+  <circle cx="54" cy="743" r="18" fill="#1565c0"/>
+  <text x="54" y="750" text-anchor="middle" font-size="20" font-weight="bold" fill="#ffffff">45</text>
+  <text x="88" y="750" font-size="24" font-weight="bold" fill="#1f2937">大阪府</text>
+  <text x="598" y="750" text-anchor="end" font-size="22" font-weight="700" fill="#1565c0">1,080 頭</text>
+  <rect x="88" y="759" width="0.529" height="10" rx="4" fill="#42a5f5" opacity="0.85"/>
+  <rect x="24" y="782" width="592" height="58" rx="8" fill="#ffffff"/>
+  <circle cx="54" cy="809" r="18" fill="#1565c0"/>
+  <text x="54" y="816" text-anchor="middle" font-size="20" font-weight="bold" fill="#ffffff">46</text>
+  <text x="88" y="816" font-size="24" font-weight="bold" fill="#1f2937">福井県</text>
+  <text x="598" y="816" text-anchor="end" font-size="22" font-weight="700" fill="#1565c0">940 頭</text>
+  <rect x="88" y="825" width="0.46" height="10" rx="4" fill="#42a5f5" opacity="0.85"/>
+  <rect x="24" y="848" width="592" height="58" rx="8" fill="#eff6ff"/>
+  <circle cx="54" cy="875" r="18" fill="#1565c0"/>
+  <text x="54" y="882" text-anchor="middle" font-size="20" font-weight="bold" fill="#ffffff">47</text>
+  <text x="88" y="882" font-size="24" font-weight="bold" fill="#1f2937">和歌山県</text>
+  <text x="598" y="882" text-anchor="end" font-size="22" font-weight="700" fill="#1565c0">510 頭</text>
+  <rect x="88" y="891" width="0.25" height="10" rx="4" fill="#42a5f5" opacity="0.85"/>
+  <text x="616" y="944" text-anchor="end" font-size="20" class="svg-tick">出典: e-Stat（政府統計の総合窓口）</text>
+</svg>

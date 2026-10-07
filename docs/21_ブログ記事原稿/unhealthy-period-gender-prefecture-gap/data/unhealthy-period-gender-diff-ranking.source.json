@@ -1,0 +1,27 @@
+{
+  "kind": "calculated",
+  "label": "不健康期間の男女差",
+  "unit": "年",
+  "formula": "不健康期間(女性) - 不健康期間(男性) を都道府県ごとに算出。不健康期間 = 平均寿命(2020年) - 健康寿命(2019年)",
+  "inputs": [
+    {
+      "rankingKey": "life-expectancy-0-male",
+      "year": "2020"
+    },
+    {
+      "rankingKey": "healthy-life-expectancy-male",
+      "year": "2019"
+    },
+    {
+      "rankingKey": "life-expectancy-0-female",
+      "year": "2020"
+    },
+    {
+      "rankingKey": "healthy-life-expectancy-female",
+      "year": "2019"
+    }
+  ],
+  "caveat": "男女別の健康寿命の記事は、2022年値で健康寿命そのものの男女差を扱う。本指標は平均寿命を掛け合わせた不健康期間の男女差であり、算出対象が異なる（役割分担は本文参照）。",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug unhealthy-period-gender-prefecture-gap --keys healthy-life-expectancy-male,healthy-life-expectancy-female,life-expectancy-0-male,life-expectancy-0-female --base docs/21_ブログ記事原稿 (取得後、都道府県ごとに 不健康期間(女性)-不健康期間(男性) を算出)",
+  "yearPinnedReason": "不健康期間は健康寿命2019年と平均寿命2020年を組み合わせた算出値。都道府県別の平均寿命は5年おきで2020年が最新、健康寿命は2019年と2022年の2時点があり、2022年と組むと年のずれが1年から2年に広がる。本文がこの組み合わせと理由を説明しているため、最新年への自動の取り直し対象にしない"
+}

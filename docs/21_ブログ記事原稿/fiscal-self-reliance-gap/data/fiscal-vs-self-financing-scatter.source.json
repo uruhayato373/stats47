@@ -1,0 +1,12 @@
+{
+  "kind": "scatter",
+  "xKey": "self-financing-ratio",
+  "yKey": "fiscal-strength-index-prefecture",
+  "year": "x:2022/y:2022",
+  "xSource": "r2:app/ranking/self-financing-ratio/values.json",
+  "ySource": "r2:app/ranking/fiscal-strength-index-prefecture/values.json",
+  "verifiedBy": "ssot-join",
+  "note": "x=自主財源の割合(self-financing-ratio) / y=財政力指数(fiscal-strength-index-prefecture)。47点すべてを R2 app/ranking の2022年度値と照合して一致を確認した (SVGから逆復元しない)。以前の軸ラベルは x と y が逆に書かれていたため、データの向きに合わせて直した",
+  "fetchedAt": "2026-10-07T06:18:48.818Z",
+  "verifiedMatchRate": 100
+}

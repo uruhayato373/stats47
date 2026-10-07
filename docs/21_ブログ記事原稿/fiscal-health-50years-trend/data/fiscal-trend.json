@@ -1,0 +1,1005 @@
+{
+  "title": "財政力指数の推移（東京都・単純平均・最下位）",
+  "subtitle": "収録された25年度のみ点で表示。1975〜1980年度・1993〜2001年度・2014〜2021年度は欠測で、線は前後の年度を結んだものです",
+  "unit": "指数",
+  "yLabel": "財政力指数",
+  "note": "単純平均は各年度の47都道府県の値を合計して47で割った値（人口で重みを付けていない）。最下位は各年度の最小値で、data[].area にその都道府県を記録。value が null の年度は R2 に収録がない欠測。",
+  "series": [
+    {
+      "label": "東京都",
+      "data": [
+        {
+          "year": "1975",
+          "value": null
+        },
+        {
+          "year": "1976",
+          "value": null
+        },
+        {
+          "year": "1977",
+          "value": null
+        },
+        {
+          "year": "1978",
+          "value": null
+        },
+        {
+          "year": "1979",
+          "value": null
+        },
+        {
+          "year": "1980",
+          "value": null
+        },
+        {
+          "year": "1981",
+          "value": 1.153
+        },
+        {
+          "year": "1982",
+          "value": 1.186
+        },
+        {
+          "year": "1983",
+          "value": 1.188
+        },
+        {
+          "year": "1984",
+          "value": 1.192
+        },
+        {
+          "year": "1985",
+          "value": 1.208
+        },
+        {
+          "year": "1986",
+          "value": 1.254
+        },
+        {
+          "year": "1987",
+          "value": 1.314
+        },
+        {
+          "year": "1988",
+          "value": 1.413
+        },
+        {
+          "year": "1989",
+          "value": 1.527
+        },
+        {
+          "year": "1990",
+          "value": 1.622
+        },
+        {
+          "year": "1991",
+          "value": 1.64
+        },
+        {
+          "year": "1992",
+          "value": 1.565
+        },
+        {
+          "year": "1993",
+          "value": null
+        },
+        {
+          "year": "1994",
+          "value": null
+        },
+        {
+          "year": "1995",
+          "value": null
+        },
+        {
+          "year": "1996",
+          "value": null
+        },
+        {
+          "year": "1997",
+          "value": null
+        },
+        {
+          "year": "1998",
+          "value": null
+        },
+        {
+          "year": "1999",
+          "value": null
+        },
+        {
+          "year": "2000",
+          "value": null
+        },
+        {
+          "year": "2001",
+          "value": null
+        },
+        {
+          "year": "2002",
+          "value": 1.034
+        },
+        {
+          "year": "2003",
+          "value": 1.044
+        },
+        {
+          "year": "2004",
+          "value": 1.06
+        },
+        {
+          "year": "2005",
+          "value": 1.107
+        },
+        {
+          "year": "2006",
+          "value": 1.215
+        },
+        {
+          "year": "2007",
+          "value": 1.319
+        },
+        {
+          "year": "2008",
+          "value": 1.406
+        },
+        {
+          "year": "2009",
+          "value": 1.341
+        },
+        {
+          "year": "2010",
+          "value": 1.162
+        },
+        {
+          "year": "2011",
+          "value": 0.961
+        },
+        {
+          "year": "2012",
+          "value": 0.864
+        },
+        {
+          "year": "2013",
+          "value": 0.871
+        },
+        {
+          "year": "2014",
+          "value": null
+        },
+        {
+          "year": "2015",
+          "value": null
+        },
+        {
+          "year": "2016",
+          "value": null
+        },
+        {
+          "year": "2017",
+          "value": null
+        },
+        {
+          "year": "2018",
+          "value": null
+        },
+        {
+          "year": "2019",
+          "value": null
+        },
+        {
+          "year": "2020",
+          "value": null
+        },
+        {
+          "year": "2021",
+          "value": null
+        },
+        {
+          "year": "2022",
+          "value": 1.064
+        }
+      ]
+    },
+    {
+      "label": "単純平均",
+      "data": [
+        {
+          "year": "1975",
+          "value": null
+        },
+        {
+          "year": "1976",
+          "value": null
+        },
+        {
+          "year": "1977",
+          "value": null
+        },
+        {
+          "year": "1978",
+          "value": null
+        },
+        {
+          "year": "1979",
+          "value": null
+        },
+        {
+          "year": "1980",
+          "value": null
+        },
+        {
+          "year": "1981",
+          "value": 0.465
+        },
+        {
+          "year": "1982",
+          "value": 0.479
+        },
+        {
+          "year": "1983",
+          "value": 0.482
+        },
+        {
+          "year": "1984",
+          "value": 0.49
+        },
+        {
+          "year": "1985",
+          "value": 0.496
+        },
+        {
+          "year": "1986",
+          "value": 0.503
+        },
+        {
+          "year": "1987",
+          "value": 0.495
+        },
+        {
+          "year": "1988",
+          "value": 0.495
+        },
+        {
+          "year": "1989",
+          "value": 0.496
+        },
+        {
+          "year": "1990",
+          "value": 0.505
+        },
+        {
+          "year": "1991",
+          "value": 0.508
+        },
+        {
+          "year": "1992",
+          "value": 0.507
+        },
+        {
+          "year": "1993",
+          "value": null
+        },
+        {
+          "year": "1994",
+          "value": null
+        },
+        {
+          "year": "1995",
+          "value": null
+        },
+        {
+          "year": "1996",
+          "value": null
+        },
+        {
+          "year": "1997",
+          "value": null
+        },
+        {
+          "year": "1998",
+          "value": null
+        },
+        {
+          "year": "1999",
+          "value": null
+        },
+        {
+          "year": "2000",
+          "value": null
+        },
+        {
+          "year": "2001",
+          "value": null
+        },
+        {
+          "year": "2002",
+          "value": 0.406
+        },
+        {
+          "year": "2003",
+          "value": 0.408
+        },
+        {
+          "year": "2004",
+          "value": 0.411
+        },
+        {
+          "year": "2005",
+          "value": 0.428
+        },
+        {
+          "year": "2006",
+          "value": 0.464
+        },
+        {
+          "year": "2007",
+          "value": 0.497
+        },
+        {
+          "year": "2008",
+          "value": 0.521
+        },
+        {
+          "year": "2009",
+          "value": 0.516
+        },
+        {
+          "year": "2010",
+          "value": 0.49
+        },
+        {
+          "year": "2011",
+          "value": 0.465
+        },
+        {
+          "year": "2012",
+          "value": 0.455
+        },
+        {
+          "year": "2013",
+          "value": 0.464
+        },
+        {
+          "year": "2014",
+          "value": null
+        },
+        {
+          "year": "2015",
+          "value": null
+        },
+        {
+          "year": "2016",
+          "value": null
+        },
+        {
+          "year": "2017",
+          "value": null
+        },
+        {
+          "year": "2018",
+          "value": null
+        },
+        {
+          "year": "2019",
+          "value": null
+        },
+        {
+          "year": "2020",
+          "value": null
+        },
+        {
+          "year": "2021",
+          "value": null
+        },
+        {
+          "year": "2022",
+          "value": 0.494
+        }
+      ]
+    },
+    {
+      "label": "最下位",
+      "data": [
+        {
+          "year": "1975",
+          "value": null
+        },
+        {
+          "year": "1976",
+          "value": null
+        },
+        {
+          "year": "1977",
+          "value": null
+        },
+        {
+          "year": "1978",
+          "value": null
+        },
+        {
+          "year": "1979",
+          "value": null
+        },
+        {
+          "year": "1980",
+          "value": null
+        },
+        {
+          "year": "1981",
+          "value": 0.231,
+          "area": "沖縄県"
+        },
+        {
+          "year": "1982",
+          "value": 0.24,
+          "area": "島根県"
+        },
+        {
+          "year": "1983",
+          "value": 0.24,
+          "area": "高知県"
+        },
+        {
+          "year": "1984",
+          "value": 0.246,
+          "area": "島根県"
+        },
+        {
+          "year": "1985",
+          "value": 0.248,
+          "area": "島根県"
+        },
+        {
+          "year": "1986",
+          "value": 0.247,
+          "area": "島根県"
+        },
+        {
+          "year": "1987",
+          "value": 0.237,
+          "area": "高知県"
+        },
+        {
+          "year": "1988",
+          "value": 0.234,
+          "area": "高知県"
+        },
+        {
+          "year": "1989",
+          "value": 0.224,
+          "area": "高知県"
+        },
+        {
+          "year": "1990",
+          "value": 0.215,
+          "area": "高知県"
+        },
+        {
+          "year": "1991",
+          "value": 0.207,
+          "area": "高知県"
+        },
+        {
+          "year": "1992",
+          "value": 0.208,
+          "area": "高知県"
+        },
+        {
+          "year": "1993",
+          "value": null
+        },
+        {
+          "year": "1994",
+          "value": null
+        },
+        {
+          "year": "1995",
+          "value": null
+        },
+        {
+          "year": "1996",
+          "value": null
+        },
+        {
+          "year": "1997",
+          "value": null
+        },
+        {
+          "year": "1998",
+          "value": null
+        },
+        {
+          "year": "1999",
+          "value": null
+        },
+        {
+          "year": "2000",
+          "value": null
+        },
+        {
+          "year": "2001",
+          "value": null
+        },
+        {
+          "year": "2002",
+          "value": 0.199,
+          "area": "高知県"
+        },
+        {
+          "year": "2003",
+          "value": 0.203,
+          "area": "高知県"
+        },
+        {
+          "year": "2004",
+          "value": 0.203,
+          "area": "島根県"
+        },
+        {
+          "year": "2005",
+          "value": 0.211,
+          "area": "島根県"
+        },
+        {
+          "year": "2006",
+          "value": 0.227,
+          "area": "島根県"
+        },
+        {
+          "year": "2007",
+          "value": 0.237,
+          "area": "島根県"
+        },
+        {
+          "year": "2008",
+          "value": 0.242,
+          "area": "島根県"
+        },
+        {
+          "year": "2009",
+          "value": 0.242,
+          "area": "島根県"
+        },
+        {
+          "year": "2010",
+          "value": 0.236,
+          "area": "島根県"
+        },
+        {
+          "year": "2011",
+          "value": 0.229,
+          "area": "島根県"
+        },
+        {
+          "year": "2012",
+          "value": 0.221,
+          "area": "島根県"
+        },
+        {
+          "year": "2013",
+          "value": 0.224,
+          "area": "島根県"
+        },
+        {
+          "year": "2014",
+          "value": null
+        },
+        {
+          "year": "2015",
+          "value": null
+        },
+        {
+          "year": "2016",
+          "value": null
+        },
+        {
+          "year": "2017",
+          "value": null
+        },
+        {
+          "year": "2018",
+          "value": null
+        },
+        {
+          "year": "2019",
+          "value": null
+        },
+        {
+          "year": "2020",
+          "value": null
+        },
+        {
+          "year": "2021",
+          "value": null
+        },
+        {
+          "year": "2022",
+          "value": 0.254,
+          "area": "島根県"
+        }
+      ]
+    }
+  ],
+  "rangeBySeries": [
+    {
+      "label": "東京都",
+      "min": {
+        "year": "2012",
+        "value": 0.864
+      },
+      "max": {
+        "year": "1991",
+        "value": 1.64
+      },
+      "spread": 0.776
+    },
+    {
+      "label": "単純平均",
+      "min": {
+        "year": "2002",
+        "value": 0.406
+      },
+      "max": {
+        "year": "2008",
+        "value": 0.521
+      },
+      "spread": 0.115
+    },
+    {
+      "label": "最下位",
+      "min": {
+        "year": "2002",
+        "value": 0.199
+      },
+      "max": {
+        "year": "2022",
+        "value": 0.254
+      },
+      "spread": 0.055
+    }
+  ],
+  "countsByYear": [
+    {
+      "year": "1981",
+      "atOrAbove1": {
+        "count": 1,
+        "areas": [
+          "東京都"
+        ]
+      },
+      "below0_3": {
+        "count": 13
+      }
+    },
+    {
+      "year": "1982",
+      "atOrAbove1": {
+        "count": 3,
+        "areas": [
+          "東京都",
+          "愛知県",
+          "神奈川県"
+        ]
+      },
+      "below0_3": {
+        "count": 13
+      }
+    },
+    {
+      "year": "1983",
+      "atOrAbove1": {
+        "count": 3,
+        "areas": [
+          "東京都",
+          "愛知県",
+          "神奈川県"
+        ]
+      },
+      "below0_3": {
+        "count": 12
+      }
+    },
+    {
+      "year": "1984",
+      "atOrAbove1": {
+        "count": 3,
+        "areas": [
+          "東京都",
+          "愛知県",
+          "神奈川県"
+        ]
+      },
+      "below0_3": {
+        "count": 9
+      }
+    },
+    {
+      "year": "1985",
+      "atOrAbove1": {
+        "count": 3,
+        "areas": [
+          "東京都",
+          "愛知県",
+          "神奈川県"
+        ]
+      },
+      "below0_3": {
+        "count": 9
+      }
+    },
+    {
+      "year": "1986",
+      "atOrAbove1": {
+        "count": 4,
+        "areas": [
+          "東京都",
+          "愛知県",
+          "神奈川県",
+          "大阪府"
+        ]
+      },
+      "below0_3": {
+        "count": 10
+      }
+    },
+    {
+      "year": "1987",
+      "atOrAbove1": {
+        "count": 4,
+        "areas": [
+          "東京都",
+          "愛知県",
+          "神奈川県",
+          "大阪府"
+        ]
+      },
+      "below0_3": {
+        "count": 12
+      }
+    },
+    {
+      "year": "1988",
+      "atOrAbove1": {
+        "count": 4,
+        "areas": [
+          "東京都",
+          "愛知県",
+          "大阪府",
+          "神奈川県"
+        ]
+      },
+      "below0_3": {
+        "count": 12
+      }
+    },
+    {
+      "year": "1989",
+      "atOrAbove1": {
+        "count": 4,
+        "areas": [
+          "東京都",
+          "大阪府",
+          "愛知県",
+          "神奈川県"
+        ]
+      },
+      "below0_3": {
+        "count": 14
+      }
+    },
+    {
+      "year": "1990",
+      "atOrAbove1": {
+        "count": 4,
+        "areas": [
+          "東京都",
+          "大阪府",
+          "愛知県",
+          "神奈川県"
+        ]
+      },
+      "below0_3": {
+        "count": 14
+      }
+    },
+    {
+      "year": "1991",
+      "atOrAbove1": {
+        "count": 4,
+        "areas": [
+          "東京都",
+          "大阪府",
+          "愛知県",
+          "神奈川県"
+        ]
+      },
+      "below0_3": {
+        "count": 14
+      }
+    },
+    {
+      "year": "1992",
+      "atOrAbove1": {
+        "count": 4,
+        "areas": [
+          "東京都",
+          "愛知県",
+          "大阪府",
+          "神奈川県"
+        ]
+      },
+      "below0_3": {
+        "count": 13
+      }
+    },
+    {
+      "year": "2002",
+      "atOrAbove1": {
+        "count": 1,
+        "areas": [
+          "東京都"
+        ]
+      },
+      "below0_3": {
+        "count": 15
+      }
+    },
+    {
+      "year": "2003",
+      "atOrAbove1": {
+        "count": 1,
+        "areas": [
+          "東京都"
+        ]
+      },
+      "below0_3": {
+        "count": 15
+      }
+    },
+    {
+      "year": "2004",
+      "atOrAbove1": {
+        "count": 1,
+        "areas": [
+          "東京都"
+        ]
+      },
+      "below0_3": {
+        "count": 15
+      }
+    },
+    {
+      "year": "2005",
+      "atOrAbove1": {
+        "count": 1,
+        "areas": [
+          "東京都"
+        ]
+      },
+      "below0_3": {
+        "count": 14
+      }
+    },
+    {
+      "year": "2006",
+      "atOrAbove1": {
+        "count": 1,
+        "areas": [
+          "東京都"
+        ]
+      },
+      "below0_3": {
+        "count": 10
+      }
+    },
+    {
+      "year": "2007",
+      "atOrAbove1": {
+        "count": 2,
+        "areas": [
+          "東京都",
+          "愛知県"
+        ]
+      },
+      "below0_3": {
+        "count": 6
+      }
+    },
+    {
+      "year": "2008",
+      "atOrAbove1": {
+        "count": 2,
+        "areas": [
+          "東京都",
+          "愛知県"
+        ]
+      },
+      "below0_3": {
+        "count": 5,
+        "areas": [
+          "秋田県",
+          "長崎県",
+          "鳥取県",
+          "高知県",
+          "島根県"
+        ]
+      }
+    },
+    {
+      "year": "2009",
+      "atOrAbove1": {
+        "count": 2,
+        "areas": [
+          "東京都",
+          "愛知県"
+        ]
+      },
+      "below0_3": {
+        "count": 6
+      }
+    },
+    {
+      "year": "2010",
+      "atOrAbove1": {
+        "count": 2,
+        "areas": [
+          "東京都",
+          "愛知県"
+        ]
+      },
+      "below0_3": {
+        "count": 7
+      }
+    },
+    {
+      "year": "2011",
+      "atOrAbove1": {
+        "count": 0,
+        "areas": []
+      },
+      "below0_3": {
+        "count": 9
+      }
+    },
+    {
+      "year": "2012",
+      "atOrAbove1": {
+        "count": 0,
+        "areas": []
+      },
+      "below0_3": {
+        "count": 11
+      }
+    },
+    {
+      "year": "2013",
+      "atOrAbove1": {
+        "count": 0,
+        "areas": []
+      },
+      "below0_3": {
+        "count": 10
+      }
+    },
+    {
+      "year": "2022",
+      "atOrAbove1": {
+        "count": 1,
+        "areas": [
+          "東京都"
+        ]
+      },
+      "below0_3": {
+        "count": 3,
+        "areas": [
+          "鳥取県",
+          "高知県",
+          "島根県"
+        ]
+      }
+    }
+  ],
+  "countsNote": "rangeBySeries と countsByYear は図には描かない補助データ。rangeBySeries は収録年度での各系列の最小・最大と差。countsByYear は各年度に財政力指数が1.0以上・0.3未満だった都道府県の数（該当が5以下のときは名前も。47都道府県そろった年度のみ）。"
+}

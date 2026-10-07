@@ -1,0 +1,24 @@
+{
+  "kind": "calculated",
+  "label": "1戸あたり乳用牛飼養頭数",
+  "unit": "頭/戸",
+  "year": "2025",
+  "formula": "value = 乳用牛飼養頭数 ÷ 乳用牛飼養戸数 を都道府県ごとに算出 (頭/戸)。保存値は小数第3位を四捨五入した小数第2位。順位は値降順・同値は同順位。summary の合計は47都道府県の頭数合計 ÷ 戸数合計、順位相関は同値に平均順位を使った相関係数",
+  "inputs": [
+    {
+      "rankingKey": "dairy-cattle-count",
+      "year": "2025",
+      "role": "numerator",
+      "dataFile": "dairy-cattle-count-prefecture-rankings.json"
+    },
+    {
+      "rankingKey": "dairy-cattle-holdings",
+      "year": "2025",
+      "role": "denominator",
+      "dataFile": "dairy-cattle-holdings-ranking.json"
+    }
+  ],
+  "caveat": "頭数は e-Stat 畜産統計調査の表、戸数は農林水産省 畜産統計 確報の公式 Excel と取り込み元が別で、割り算は記事側の自前計算。頭数は1万頭未満が10頭単位に丸められているため、戸数の少ない県ほど端数の影響が大きい。公表されている別の集計値との突き合わせは行っていない",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug dairy-cattle-count --keys dairy-cattle-count,dairy-cattle-holdings --base docs/21_ブログ記事原稿 (取得後、都道府県ごとに 乳用牛飼養頭数 ÷ 乳用牛飼養戸数 を算出)",
+  "generatedBy": "article-writer (dairy-cattle-count 分解)"
+}

@@ -1,0 +1,13 @@
+{
+  "kind": "scatter",
+  "xKey": "healthy-life-expectancy-male",
+  "yKey": "physicians-in-medical-facilities-per-100k",
+  "year": "x:2022/y:2022",
+  "xSource": "r2:app/ranking/healthy-life-expectancy-male/values.json",
+  "ySource": "r2:app/ranking/physicians-in-medical-facilities-per-100k/values.json",
+  "pearsonR": -0.3062,
+  "pointCount": 47,
+  "fetchedAt": "2026-10-07T05:41:08.112Z",
+  "restore": "healthy-life-expectancy-male と physicians-in-medical-facilities-per-100k の 2022 年の values.json (R2 app/ranking) を areaCode で結合する。専用の散布図取得スクリプトは無い",
+  "note": "同じ年 (2022) の男性の健康寿命と、医療施設従事医師数 (人口10万人当たり) を areaCode で結合した47点。pearsonR は同じ47点から算出したピアソンの積率相関係数。"
+}

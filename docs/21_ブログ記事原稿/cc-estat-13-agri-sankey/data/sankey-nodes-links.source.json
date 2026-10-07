@@ -1,0 +1,15 @@
+{
+  "kind": "estat",
+  "statsDataId": "0001894246",
+  "statsName": "生産農業所得統計（全国農業地域別農業産出額及び生産農業所得 実額）",
+  "year": "2018",
+  "valueUnit": "億円",
+  "label": "サンキーの nodes と links（Step 3 の出力）",
+  "params": {
+    "statsDataId": "0001894246",
+    "derivedFrom": "data/agri-output-2018.json"
+  },
+  "transform": "data/agri-output-2018.json と記事 Step 2 の mapping を、記事 Step 3 の buildSankey（pickTopItems の n は 10）に渡した出力。28 ノード（1 段目 10 + 2 段目 7 + 3 段目 11）、83 リンク、地域から出るリンクの合計は 90,299 億円",
+  "restore": "記事 Step 3 の build-sankey.ts に data/agri-output-2018.json と Step 2 の mapping（regionMap・categoryMap）を渡す",
+  "fetchedAt": "2026-10-07"
+}

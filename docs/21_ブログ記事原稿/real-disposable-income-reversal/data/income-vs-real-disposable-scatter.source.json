@@ -1,0 +1,48 @@
+{
+  "kind": "calculated",
+  "label": "1人当たり県民所得(2021年度)と家賃控除後可処分所得(2024年・月額)の散布図、および本文で使う計算値",
+  "unit": "円",
+  "formula": "散布図の点は、x=1人当たり県民所得(2021年度・千円)、y=家賃控除後可処分所得(2024年・月額・円)を47都道府県の県コードで結合したもの。yは y = 勤労者世帯の可処分所得(月額) - 二人以上世帯の年間民営家賃消費支出額 ÷ 12。東京都 637,958 - 175,694÷12(=14,641) = 623,317、埼玉県 620,576 - 92,279÷12(=7,690) = 612,886、沖縄県 423,924 - 256,598÷12(=21,383) = 402,541、愛媛県 420,678 - 58,755÷12(=4,896) = 415,782。東京都と埼玉県の控除額の差 14,641 - 7,690 = 6,951円。実質可処分所得は 勤労者世帯の可処分所得 ÷ 消費者物価地域差指数(全国=100) × 100。東京都 637,958 ÷ 104.0 × 100 = 613,421(家賃を引く前との差 637,958 - 613,421 = 24,537円)、埼玉県 620,576 ÷ 100.3 × 100 = 618,720(同 620,576 - 618,720 = 1,856円)。本文の差: 名目の可処分所得の東京都と埼玉県の差 637,958 - 620,576 = 17,382円、家賃控除後の差 623,317 - 612,886 = 10,431円、実質の差(埼玉県が上) 618,720 - 613,421 = 5,299円。消費者物価地域差指数の最大と最小の差 104.0 - 96.2 = 7.8ポイント。倍率: 1人当たり県民所得の東京都÷愛知県 5,761 ÷ 3,597 = 1.602倍(1.6倍)、東京都÷埼玉県 5,761 ÷ 3,049 = 1.889倍(1.9倍)、最大÷最小 5,761 ÷ 2,258 = 2.551倍(2.6倍)、東京都を除く最大÷最小 3,597 ÷ 2,258 = 1.593倍(1.6倍)。勤労者世帯の可処分所得の東京都÷埼玉県 637,958 ÷ 620,576 = 1.028倍(1.0倍)、最大÷最小 637,958 ÷ 420,678 = 1.516倍(1.5倍)。家賃控除後の最大÷最小 623,317 ÷ 402,541 = 1.548倍(1.5倍)。実質の最大÷最小 618,720 ÷ 423,078 = 1.462倍(1.5倍)。相関: 県民所得(2021年度)と家賃控除後可処分所得(2024年)の47県のピアソン相関係数 r = 0.565(0.57)、東京都を除く46県で r = 0.575(0.57)。 目減りの差 24,537 - 1,856 = 22,681円(名目の差 17,382円を上回る)。",
+  "inputs": [
+    {
+      "rankingKey": "per-capita-prefectural-income-h27",
+      "year": "2021"
+    },
+    {
+      "rankingKey": "disposable-income-after-rent",
+      "year": "2024"
+    },
+    {
+      "rankingKey": "disposable-income-worker-households",
+      "year": "2024"
+    },
+    {
+      "rankingKey": "private-rent-consumption-expenditure",
+      "year": "2024"
+    },
+    {
+      "rankingKey": "consumer-price-difference-index-overall",
+      "year": "2024"
+    },
+    {
+      "rankingKey": "real-disposable-income",
+      "year": "2024"
+    }
+  ],
+  "inputFiles": [
+    "per-capita-prefectural-income-h27-prefecture-rankings.json",
+    "disposable-income-after-rent-prefecture-rankings.json",
+    "disposable-income-worker-households-prefecture-rankings.json",
+    "private-rent-consumption-expenditure-prefecture-rankings.json",
+    "consumer-price-difference-index-overall-prefecture-rankings.json",
+    "real-disposable-income-prefecture-rankings.json"
+  ],
+  "year": "2021年度(x)・2024年(y)",
+  "years": {
+    "per-capita-prefectural-income-h27": "2021",
+    "disposable-income-after-rent": "2024"
+  },
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug real-disposable-income-reversal --keys per-capita-prefectural-income-h27,disposable-income-after-rent,disposable-income-worker-households,consumer-price-difference-index-overall,real-disposable-income (取得後、県コードで結合し、式のとおりに差・倍率・相関係数を算出する。民営家賃消費支出額 private-rent-consumption-expenditure は https://storage.stats47.jp/app/ranking/private-rent-consumption-expenditure/values.json の2024年を使う)",
+  "fetchedAt": "2026-10-07",
+  "generatedBy": "article-writer (2026-10-07・散布図のxを2021年度へ取り直し、計算値を記録)"
+}

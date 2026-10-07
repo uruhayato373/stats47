@@ -1,0 +1,20 @@
+{
+  "kind": "derived",
+  "upstream": "metric config (packages/data-configs) → e-Stat 社会・人口統計体系 → R2 app/ranking",
+  "yearFormat": "fiscal",
+  "fetchedAt": "2026-10-07T06:17:53.515Z",
+  "generatedBy": "restoreScript (この source.json の restoreScript を node で実行すると3つの data JSON を R2 の values.json から作り直す)",
+  "restore": "記事ディレクトリ (data/ の親) で実行: node --input-type=module -e \"$(node -p \"require('./data/fiscal-trend.source.json').restoreScript.join('\\\\n')\")\" <出力ディレクトリ>  (fiscal-trend.json・current-balance-trend.json・fiscal-change-ranking.json の3つをまとめて出力する。R2 公開 URL の values.json を読むだけで認証は不要)",
+  "rankingKeys": [
+    "current-balance-ratio"
+  ],
+  "source": "r2:app/ranking/current-balance-ratio/values.json",
+  "label": "経常収支比率",
+  "unit": "％",
+  "year": "1975-2022",
+  "formula": "partitions[年度] ごとに 47 都道府県の値から 大阪府の値 / 東京都の値 / 47 都道府県の単純平均 (合計÷47) を取り、小数第1位に丸める。R2 に 47 都道府県そろった年度がない年は value=null (欠測) とし補間しない。countsByYear は各年度の 100% 以上・90% 以上・80% 未満の都道府県数、rangeBySeries は収録年度での各系列の最小・最大と差",
+  "observedYears": "1975-1986, 1997-2018, 2022 の35年度",
+  "missingYears": "1987-1996, 2019-2021 (R2 に収録なし。欠測の理由は確認できていない)",
+  "dataFile": "current-balance-trend.json",
+  "restoreFrom": "fiscal-trend.source.json の restoreScript と同じ script が出力する"
+}
