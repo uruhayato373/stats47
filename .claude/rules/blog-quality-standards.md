@@ -186,6 +186,26 @@ date: YYYY-MM-DD
 - **既存負債**: 2026-07-31 実測で公開済み 424 記事の **79.5% (4,671 箇所)** が該当。既存記事は
   brushup で順次是正する (是正キューが blocker として拾う)。**新規記事は最初からこの形で書く**。
 
+### 統計表 ID は e-Stat の控えと照らす (blocker)
+
+本文・コードに書いた e-Stat の統計表 ID (`0003445758` のような 10 桁の statsDataId) は、
+e-Stat のメタ情報の控え (`data/estat/meta/<ID>.json` の `statName`) と照らす。
+
+```
+❌ STATS_DATA_ID = "0003445758"  # 県民所得統計   ← 実際は賃金構造基本統計調査の表
+❌ 生産農業所得統計（statsDataId 例 0003456789）  ← 実際は社会生活基本調査の表
+❌ e-Stat に存在しない ID を「例」として並べる
+✅ 賃金構造基本統計調査（0003445758）
+```
+
+- **なぜ**: ID は読者が e-Stat でそのまま引く値で、名前と食い違うと読者の作業がそこで止まる。
+  2026-10-07 の書き直しで上の 3 種が critic の目視でしか見つからなかった。
+- **控えの取得**: `node .claude/scripts/estat/fetch-estat-meta.mjs --full --ids <ID>`。控えが無い ID、
+  e-Stat に存在しない ID は blocker。架空の「例」の ID を書かない。
+- **名前の照合**: ID と同じ文 (無ければ直前の文) に統計名らしい語があり、控えの統計名が無ければ blocker。
+  統計名を書いていない ID は照らさない。社会・人口統計体系の表は指標ごとに元の調査が違うので、名前は照らさず実在だけを見る。
+- **検査**: `stats-table-id-lint.mjs` (`lintStatsTableIds`)。公開済み 389 記事で誤検知 0 件を確かめた境界をテストで固定している。
+
 ### 複合スケールの数値は表記を混ぜない
 
 `4万5,897円` のようにスケールを跨いだ表記も、`45,897円` の表記も許容する
@@ -643,6 +663,7 @@ Must が形骸化するため、足りなければ月次の目標側を下げる
 | 文体: ですます調 (copula である調) | 機械 | blocker | `countDearuEndings` |
 | 文体: 動詞終止形の常体混在 | **critic** | — | 誤検出を避け gate では見ない |
 | **数値: 県名直後の括弧に値・順位を書かない** | 機械 | blocker | `lintParenNumbers` |
+| **出典: 統計表 ID が e-Stat に実在し、近くの統計名と一致** | 機械 | blocker | `lintStatsTableIds` |
 | 数値: 本文の値が data/*.json と一致 | 機械 | warn/blocker | `checkArticleFactual` |
 | 数値: rank 主張があるのに ground truth 無し | 機械 | blocker | `rankClaimCount` gate |
 | callout の個数 | **critic** | — | 最低数を強制しない。必要性と情報量を意味判断する |

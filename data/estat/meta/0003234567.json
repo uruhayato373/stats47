@@ -1,0 +1,71 @@
+{
+ "statsDataId": "0003234567",
+ "title": "総括表 木材産業の動向　合単板製造業　特殊合板製造量及び出荷量　出荷量",
+ "statName": "木材統計調査",
+ "govOrg": "農林水産省",
+ "surveyDate": "200401-200412",
+ "overallTotalNumber": 14,
+ "dimensions": [
+  {
+   "id": "tab",
+   "name": "表章項目",
+   "valueCount": 2,
+   "sampleValues": [
+    {
+     "code": "180",
+     "name": "出荷量",
+     "unit": "m3"
+    },
+    {
+     "code": "350",
+     "name": "対前年比",
+     "unit": "%"
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "time",
+   "name": "時間軸(年次)",
+   "valueCount": 7,
+   "sampleValues": [
+    {
+     "code": "2004000000",
+     "name": "2004年",
+     "unit": null
+    },
+    {
+     "code": "2003000000",
+     "name": "2003年",
+     "unit": null
+    },
+    {
+     "code": "2002000000",
+     "name": "2002年",
+     "unit": null
+    },
+    {
+     "code": "2001000000",
+     "name": "2001年",
+     "unit": null
+    },
+    {
+     "code": "2000000000",
+     "name": "2000年",
+     "unit": null
+    },
+    {
+     "code": "1999000000",
+     "name": "1999年",
+     "unit": null
+    },
+    {
+     "code": "1998000000",
+     "name": "1998年",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  }
+ ]
+}
