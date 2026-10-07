@@ -1,0 +1,228 @@
+{
+  "statsDataId": "0003456409",
+  "statName": "社会生活基本調査",
+  "title": "男女,スポーツの種類別行動者率(10歳以上)－全国，都道府県",
+  "updatedDate": "2026-09-03",
+  "queries": [
+    {
+      "query": {
+        "cdCat01": "0",
+        "cdCat02": "99000",
+        "cdCat03": "01"
+      },
+      "fetchedAt": "2026-10-07T01:54:54.982Z",
+      "years": { "2021": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "0",
+        "cdCat02": "99000",
+        "cdCat03": "02"
+      },
+      "fetchedAt": "2026-10-07T01:54:59.011Z",
+      "years": { "2021": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "0",
+        "cdCat02": "99000",
+        "cdCat03": "03"
+      },
+      "fetchedAt": "2026-10-07T01:54:59.925Z",
+      "years": { "2021": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "0",
+        "cdCat02": "99000",
+        "cdCat03": "04"
+      },
+      "fetchedAt": "2026-10-07T01:54:54.982Z",
+      "years": { "2021": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "0",
+        "cdCat02": "99000",
+        "cdCat03": "05"
+      },
+      "fetchedAt": "2026-10-07T01:54:58.823Z",
+      "years": { "2021": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "0",
+        "cdCat02": "99000",
+        "cdCat03": "06"
+      },
+      "fetchedAt": "2026-10-07T01:54:59.507Z",
+      "years": { "2021": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "0",
+        "cdCat02": "99000",
+        "cdCat03": "07"
+      },
+      "fetchedAt": "2026-10-07T01:54:59.767Z",
+      "years": { "2021": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "0",
+        "cdCat02": "99000",
+        "cdCat03": "08"
+      },
+      "fetchedAt": "2026-10-07T01:54:54.982Z",
+      "years": { "2021": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "0",
+        "cdCat02": "99000",
+        "cdCat03": "09"
+      },
+      "fetchedAt": "2026-10-07T01:54:56.708Z",
+      "years": { "2021": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "0",
+        "cdCat02": "99000",
+        "cdCat03": "10"
+      },
+      "fetchedAt": "2026-10-07T01:54:56.761Z",
+      "years": { "2021": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "0",
+        "cdCat02": "99000",
+        "cdCat03": "11"
+      },
+      "fetchedAt": "2026-10-07T01:54:58.154Z",
+      "years": { "2021": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "0",
+        "cdCat02": "99000",
+        "cdCat03": "12"
+      },
+      "fetchedAt": "2026-10-07T01:54:58.186Z",
+      "years": { "2021": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "0",
+        "cdCat02": "99000",
+        "cdCat03": "13"
+      },
+      "fetchedAt": "2026-10-07T01:54:55.748Z",
+      "years": { "2021": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "0",
+        "cdCat02": "99000",
+        "cdCat03": "14"
+      },
+      "fetchedAt": "2026-10-07T01:54:56.449Z",
+      "years": { "2021": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "0",
+        "cdCat02": "99000",
+        "cdCat03": "15"
+      },
+      "fetchedAt": "2026-10-07T01:54:59.101Z",
+      "years": { "2021": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "0",
+        "cdCat02": "99000",
+        "cdCat03": "16"
+      },
+      "fetchedAt": "2026-10-07T01:54:58.451Z",
+      "years": { "2021": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "0",
+        "cdCat02": "99000",
+        "cdCat03": "17"
+      },
+      "fetchedAt": "2026-10-07T01:54:57.516Z",
+      "years": { "2021": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "0",
+        "cdCat02": "99000",
+        "cdCat03": "18"
+      },
+      "fetchedAt": "2026-10-07T01:54:55.929Z",
+      "years": { "2021": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "0",
+        "cdCat02": "99000",
+        "cdCat03": "19"
+      },
+      "fetchedAt": "2026-10-07T01:54:57.541Z",
+      "years": { "2021": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "0",
+        "cdCat02": "99000",
+        "cdCat03": "20"
+      },
+      "fetchedAt": "2026-10-07T01:55:00.165Z",
+      "years": { "2021": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "0",
+        "cdCat02": "99000",
+        "cdCat03": "21"
+      },
+      "fetchedAt": "2026-10-07T01:55:00.562Z",
+      "years": { "2021": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "0",
+        "cdCat02": "99000",
+        "cdCat03": "22"
+      },
+      "fetchedAt": "2026-10-07T01:54:57.406Z",
+      "years": { "2021": 47 },
+      "rawRows": 48
+    }
+  ]
+}

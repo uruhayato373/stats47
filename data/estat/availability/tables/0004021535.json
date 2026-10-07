@@ -1,0 +1,27 @@
+{
+  "statsDataId": "0004021535",
+  "statName": "住宅・土地統計調査",
+  "title": "非木造の共同住宅の状況 オートロックの別(2区分)、階数(6区分)、エレベーターの有無等(4区分)、住宅の所有の関係(5区分)別非木造の共同住宅数－全国、都道府県、21大都市",
+  "updatedDate": "2025-03-27",
+  "queries": [
+    {
+      "query": {
+        "cdCat02": "00",
+        "cdCat03": "0",
+        "cdCat04": "0",
+        "axisRatio": {
+          "axis": "cat01",
+          "numeratorCodes": [
+            "1"
+          ],
+          "denominatorCodes": [
+            "0"
+          ]
+        }
+      },
+      "fetchedAt": "2026-10-07T01:57:14.121Z",
+      "years": { "2023": 47 },
+      "rawRows": 138
+    }
+  ]
+}

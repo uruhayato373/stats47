@@ -1,0 +1,27 @@
+{
+  "statsDataId": "0004008577",
+  "statName": "就業構造基本調査",
+  "title": "男女、年齢、育児の有無・頻度・育児休業等制度利用の有無、就業状態・仕事の主従別人口（15歳以上人口）－全国、都道府県、政令指定都市、県庁所在都市、人口30万以上の市",
+  "updatedDate": "2026-09-11",
+  "queries": [
+    {
+      "query": {
+        "cdCat01": "0",
+        "cdCat02": "0",
+        "cdCat03": "1",
+        "axisRatio": {
+          "axis": "cat04",
+          "numeratorCodes": [
+            "1"
+          ],
+          "denominatorCodes": [
+            "0"
+          ]
+        }
+      },
+      "fetchedAt": "2026-10-07T01:56:56.845Z",
+      "years": { "2022": 47 },
+      "rawRows": 268
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "statsDataId": "0004008518",
+  "statName": "就業構造基本調査",
+  "title": "男女、年齢、就業希望意識・就業時間希望・求職活動の有無、従業上の地位・雇用形態別人口（有業者）－全国、都道府県、政令指定都市、県庁所在都市、人口30万以上の市",
+  "updatedDate": "2026-09-11",
+  "queries": [
+    {
+      "query": {
+        "cdCat01": "0",
+        "cdCat02": "00",
+        "cdCat03": "0",
+        "cdCat04": "222",
+        "cdTab": "001-2022"
+      },
+      "fetchedAt": "2026-10-07T01:56:54.145Z",
+      "years": { "2022": 47 },
+      "rawRows": 134
+    },
+    {
+      "query": {
+        "cdCat01": "0",
+        "cdCat02": "00",
+        "cdCat04": "222",
+        "cdTab": "001-2022",
+        "axisRatio": {
+          "axis": "cat03",
+          "numeratorCodes": [
+            "1"
+          ],
+          "denominatorCodes": [
+            "0"
+          ]
+        }
+      },
+      "fetchedAt": "2026-10-07T01:56:54.144Z",
+      "years": { "2022": 47 },
+      "rawRows": 268
+    },
+    {
+      "query": {
+        "cdCat01": "0",
+        "cdCat02": "00",
+        "cdCat04": "222",
+        "cdTab": "001-2022",
+        "axisRatio": {
+          "axis": "cat03",
+          "numeratorCodes": [
+            "3"
+          ],
+          "denominatorCodes": [
+            "0"
+          ]
+        }
+      },
+      "fetchedAt": "2026-10-07T01:56:54.146Z",
+      "years": { "2022": 47 },
+      "rawRows": 268
+    }
+  ]
+}
