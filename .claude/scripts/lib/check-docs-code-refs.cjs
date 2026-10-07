@@ -17,7 +17,8 @@
  *
  * 許容: 行に「計画・将来・予定・新規・未実装・廃止・旧・退役・削除済・していた・vault・Obsidian」の
  *       どれかがあれば、未作成の予定や過去の経緯・リポジトリ外の説明として検査しない。
- * 除外: docs/31_note記事原稿/ (読者の環境を例示するパスを含む記事原稿で、stats47 の手順ではない)。
+ * 除外: docs/31_note記事原稿/ と docs/21_ブログ記事原稿/ (公開待ちの記事原稿。読者の環境を例示するパスを含み、
+ *       stats47 の手順ではない。ブログの outbox は公開後に CI が消すので普段は空で、改稿中だけ記事が置かれる)。
  *
  * 使い方:
  *   node .claude/scripts/lib/check-docs-code-refs.cjs         # 壊れた参照があれば exit 1
@@ -27,7 +28,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const EXCLUDED_DIRS = ["docs/31_note記事原稿"];
+const EXCLUDED_DIRS = ["docs/31_note記事原稿", "docs/21_ブログ記事原稿"];
 const ALLOW_MARKER_RE = /計画|将来|予定|新規|未実装|廃止|旧|退役|削除済|していた|vault|Obsidian/;
 const PATH_RE = /(?<![\w./-])((?:\.claude|\.github|apps|packages|scripts)\/[^\s`'"()[\]|,;：、。（）「」・*]+)/g;
 const NPM_RE = /npm run ([\w:.-]+)/g;

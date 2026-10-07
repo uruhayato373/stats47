@@ -1,7 +1,7 @@
 {
-  "hash": "b1837f509f9a4df139664b28f06b242b206eb15f33a27ddbaa8a118d162a4094",
-  "audited_at": "2026-10-07T01:22:56",
+  "hash": "353f11bef5d3c45977b742cc890606b7b96c3edb7bf74851cb444ab950164d0d",
+  "audited_at": "2026-10-07T03:24:24",
   "files": [
-    ".claude/rules/metric-config-standards.md"
+    ".claude/rules/blog-quality-standards.md"
   ]
 }

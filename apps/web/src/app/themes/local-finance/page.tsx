@@ -173,7 +173,7 @@ export default async function LocalFinanceThemePage({
         />
         <ThemeDashboardClient
           themeConfig={supplementaryConfig}
-          metricGroups={supplementaryGroups}
+          metricGroups={supplementaryData?.metricGroups ?? supplementaryGroups}
           sections={supplementary}
           indicatorDataMap={supplementaryData?.indicatorDataMap ?? {}}
           topology={null}

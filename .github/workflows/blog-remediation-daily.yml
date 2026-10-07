@@ -56,11 +56,20 @@ jobs:
 
       # 公開R2 audit (品質blocker) + 最新GSC snapshot を入力にキューを最新化。
       # 「直さず done でごまかし」を防ぐため done の退行を audit で再 pending に戻す。
+      #
+      # 先に図に描いた年が指標の最新年より古い公開記事の一覧を作る (2026-10-07 新設。
+      # build-stale-data-years.mjs → data/blog/stale-data-years.{json,md})。取り込みで新しい年が増えても
+      # 記事は書いた時点の年のままなので、データを取り直す候補を出す。年が進めば増えるのが正常なので
+      # ラチェットにはしない。キューはこの一覧を data-refresh レーンに入れるので先に作る (取り直しは
+      # refresh-article-data-years.mjs → 本文の書き直し → critic)。どちらも公開 R2 を読む同じ収集の単位なので
+      # 1 step にまとめる (片方だけ落ちる状況はほぼ無く、落ちたら step ごと失敗として残る)。
       - name: ♻️ Rebuild remediation queue
         continue-on-error: true # R2 取得失敗等で Issue 通知本体を止めない
         env:
           R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
-        run: node .claude/scripts/blog/build-remediation-queue.mjs
+        run: |
+          node .claude/scripts/blog/build-stale-data-years.mjs
+          node .claude/scripts/blog/build-remediation-queue.mjs
 
       # SVG データ系譜の棚卸し (2026-07-29 配線): 公開済み全 SVG について
       # <name>.json + <name>.source.json が R2 に揃っているかを走査し、復元キューを最新化する。
@@ -221,6 +230,10 @@ jobs:
 
           # prune-published-outbox の git rm 結果。ラチェットの baseline ではないので常に反映する。
           git add -A "docs/21_ブログ記事原稿/"
+          # 図の年が古い記事の一覧もラチェットではないので常に反映する (取得に失敗した日はファイルが無いか変わらない)
+          for f in data/blog/stale-data-years.json data/blog/stale-data-years.md; do
+            if [ -f "$f" ]; then git add "$f"; fi
+          done
 
           # remediation-queue.json は value ラチェットの baseline (summary.valueMismatchArticles)
           stage_or_restore "$VALUE_OUTCOME" "value" data/blog/remediation-queue.json
