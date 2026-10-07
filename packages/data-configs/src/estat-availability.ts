@@ -24,12 +24,14 @@ export interface EstatAvailabilityEntry {
   query: EstatAvailabilityQuery;
   /** この条件を取り直した日時 (ISO) */
   fetchedAt: string;
-  /** 年 (4 桁) → 値のある都道府県の数。値が 1 県も無い年は載せない */
+  /** 年 (4 桁) → 値のある都道府県の数 (同じ県の重複行は 1 と数える)。値が 1 県も無い年は載せない */
   years?: Record<string, number>;
   /** e-Stat が返した行数 */
   rawRows?: number;
   /** 取得上限で行が切れた (この条件の数は信用できない) */
   truncated?: boolean;
+  /** 同じ県・年に 2 行以上ある (軸の絞り忘れ。取り込みの形状ゲートが書き込みを止める形なので、差分は比べない) */
+  duplicateRows?: boolean;
   /** 取得に失敗した理由。失敗した条件は years を持たない */
   error?: string;
 }

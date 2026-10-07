@@ -118,17 +118,25 @@ async function fetchEntry(appId: string, target: Target): Promise<EstatAvailabil
   const fetchedAt = new Date().toISOString();
   try {
     const { rows, raw } = await fetchPrefectureRowsAllYears(appId, target.config, target.src);
-    const years: Record<string, number> = {};
+    const areasByYear = new Map<string, Set<string>>();
+    const seen = new Set<string>();
+    let duplicateRows = false;
     for (const row of rows) {
+      const cell = `${row.yearCode}|${row.areaCode}`;
+      if (seen.has(cell)) duplicateRows = true;
+      seen.add(cell);
       if (row.value === null) continue;
-      years[row.yearCode] = (years[row.yearCode] ?? 0) + 1;
+      const areas = areasByYear.get(row.yearCode) ?? new Set<string>();
+      areas.add(row.areaCode);
+      areasByYear.set(row.yearCode, areas);
     }
     return {
       query: target.query,
       fetchedAt,
-      years: Object.fromEntries(Object.entries(years).sort(([a], [b]) => a.localeCompare(b))),
+      years: Object.fromEntries([...areasByYear.entries()].sort(([a], [b]) => a.localeCompare(b)).map(([y, a]) => [y, a.size])),
       rawRows: raw.toNumber,
       ...(raw.totalNumber > raw.toNumber ? { truncated: true } : {}),
+      ...(duplicateRows ? { duplicateRows: true } : {}),
     };
   } catch (e) {
     return { query: target.query, fetchedAt, error: e instanceof Error ? e.message : String(e) };
@@ -206,7 +214,7 @@ async function refreshLedger(
 
 // ---- 差分の報告 ----
 
-type MetricStatus = "diff" | "clean" | "years-all" | "no-ledger" | "fetch-error" | "truncated";
+type MetricStatus = "diff" | "clean" | "years-all" | "no-ledger" | "fetch-error" | "truncated" | "duplicate-rows";
 
 interface MetricDiffRow extends Partial<YearAvailabilityDiff> {
   statsDataId: string;
@@ -268,8 +276,9 @@ function buildReport(targets: readonly Target[]): { rows: Record<string, MetricD
     const ledgerText = formatYearList(
       Object.entries(ledgerYears).filter(([, n]) => n === fullCount).map(([y]) => Number(y)),
     );
-    if (entry.truncated) {
-      rows[t.config.key] = { ...base, status: "truncated", configYears: configText, ledgerYears: ledgerText };
+    if (entry.truncated || entry.duplicateRows) {
+      const status = entry.truncated ? "truncated" : "duplicate-rows";
+      rows[t.config.key] = { ...base, status, configYears: configText, ledgerYears: ledgerText };
       continue;
     }
     if (!configYears) {
@@ -320,6 +329,7 @@ function writeReport(targets: readonly Target[]): void {
     noLedger: count("no-ledger"),
     fetchError: count("fetch-error"),
     truncated: count("truncated"),
+    duplicateRows: count("duplicate-rows"),
   };
   const kept = Object.fromEntries(all.filter(([, r]) => r.status !== "clean" && r.status !== "years-all"));
   mkdirSync(OUT_DIR, { recursive: true });
@@ -345,7 +355,7 @@ function writeReport(targets: readonly Target[]): void {
       "",
     ];
   };
-  const failures = all.filter(([, r]) => ["no-ledger", "fetch-error", "truncated"].includes(r.status));
+  const failures = all.filter(([, r]) => ["no-ledger", "fetch-error", "truncated", "duplicate-rows"].includes(r.status));
 
   const md = [
     "# e-Stat の実在年と metric config の years の差分 (LATEST)",
@@ -366,12 +376,12 @@ function writeReport(targets: readonly Target[]): void {
     ...CATEGORIES.map((c) => `| ${c.label} | ${inCategory(c.id).length} | ${c.meaning} |`),
     `| 差分なし | ${summary.clean} | 設定の年が全県の値のある年と一致する |`,
     `| years: "all" | ${summary.yearsAll} | 許可リストが無く、取り込みは e-Stat の全年を使う |`,
-    `| 台帳なし・取得失敗・打ち切り | ${failures.length} | 次の実行で取り直す (下の表) |`,
+    `| 台帳なし・取得失敗・打ち切り・重複行 | ${failures.length} | 差分を比べていない (下の表。取得失敗は次の実行で取り直し、打ち切りと重複行は metric config の軸を直す) |`,
     "",
     "1 つの指標が複数の分類に入ることがある。",
     "",
     ...CATEGORIES.flatMap(section),
-    "## 台帳なし・取得失敗・打ち切り",
+    "## 台帳なし・取得失敗・打ち切り・重複行",
     "",
     ...(failures.length === 0
       ? ["なし"]

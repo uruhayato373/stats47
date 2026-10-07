@@ -703,7 +703,7 @@ export async function fetchPrefectureRowsAllYears(
   appId: string,
   config: MetricConfig,
   src: Extract<SourceConfig, { kind: "estat" }>,
-): Promise<{ rows: ReadonlyArray<{ yearCode: string; value: number | null }>; raw: EstatFetchResult["raw"] }> {
+): Promise<{ rows: ReadonlyArray<{ areaCode: string; yearCode: string; value: number | null }>; raw: EstatFetchResult["raw"] }> {
   const fetched = await fetchEstatData(appId, src);
   const values =
     config.source.kind === "kakei-chousa" ? remapKakeiAreas(fetched.values) : fetched.values;
