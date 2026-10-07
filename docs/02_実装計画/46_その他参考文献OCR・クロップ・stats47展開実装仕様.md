@@ -2,7 +2,7 @@
 title: その他参考文献OCR・クロップ・stats47展開実装仕様
 type: implementation-spec
 date: 2026-08-29
-updated: 2026-09-15
+updated: 2026-10-08
 status: active
 related_backlog: PREFECTURE-DEVIATION-S5-01
 owner: open-data-curator
@@ -32,17 +32,21 @@ git push、PR、deploy、SNS・note公開は別途オーナー承認を要する
 | `kakei-marketing-2015` / `kakei-marketing` | 吉本佳生『マーケティングに使える「家計調査」 世界最大の消費者ビッグデータは「宝の山」だ』講談社、2015年7月、ISBN 978-4-06-219375-7。Kindle画面のスキャンPDF 1件・307ページ（縦書き・text layerなし） | `参考文献/マーケティングに使える家計調査/2015年版` / `data/source-inventory/kakei-marketing/2015/source-bundle-manifest.json` | `open-data-curator`（分析・論点の台帳）、展開は`data-ingester`（new-metric）・`theme-designer`（evidenceTopics）・`article-writer`（記事）。書誌は講談社公式ページで確認済み。\1
 2026-09-10 に Drive 直下へ未整理のまま置かれていた Kindle 画面スキャン 7 冊を profile 化し、S0 保全と S1 ページ画像 (`pages/pNNNN.jpg`、contentCrop 無し) まで進めた。
 奥付ページが Kindle のレビュー画面で終わるため刊行年・ISBN を確認できず、版は `unknown` / Drive folder `版不明` とする。
-書誌の確定 (国立国会図書館サーチ等) と権利判断が終わるまで全項目 `rights-hold`。S2 以降と inventory は未着手。
+その後 S2 (Markdown 文字起こし) と S4 台帳まで到達したが、台帳は論点の台帳を持たず、重複・出典記述に当たらない本文ページまで
+既定の「判別不能」へ落ちていた。2026-10-08 のオーナー判断で 7 冊ともサイトのネタ元として扱い、`kakei-marketing` と同じ形の
+論点台帳 `packages/data-configs/src/evidence-inventory/<sourceKey>/analyses.json` で全ページをページ範囲ごとに解決する。
+表紙・目次・奥付・重複スキャンも範囲と理由を台帳に書き、範囲に入らないページがあれば `source-inventory build` が止まる。
+数値は書籍から取らず一次資料で再取得し、一次資料に辿れない項目 (民間調査・独自集計・俗説) は `primary-source-unavailable` に留める。
 
 | profile / sourceKey | 書誌・入力 (2026-09-10 表紙・末尾ページで確認) | Drive論理パス / Git manifest | owner / stats47での用途 |
 | --- | --- | --- | --- |
 | `capital-city-guide` / `capital-city-guide` | 南部泰則『47都道府県 県庁所在地ガイド: 地理・文化・観光・産業を一冊でわかりやすく紹介』Kindle 個人出版。スキャン 150p (1600×1836px) | `参考文献/47都道府県県庁所在地ガイド/版不明` / `data/source-inventory/capital-city-guide/unknown/source-bundle-manifest.json` | `area-curator`。area 編集の候補発見のみ。解説文・写真を複製しない |
 | `money-health-ranking` / `money-health-ranking` | 荒木宏香・宮本勝浩・村上和巳・花谷美枝・種市房子・週刊エコノミスト編集部『おカネと健康 都道府県ランキング』週刊エコノミスト ebooks (毎日新聞出版)。スキャン 60p (1600×1812px) | `参考文献/おカネと健康 都道府県ランキング/版不明` / `data/source-inventory/money-health-ranking/unknown/source-bundle-manifest.json` | `open-data-curator`。ranking / survey / theme の候補発見。数値は一次資料で再取得 |
-| `yabai-kenmin-ranking` / `yabai-kenmin-ranking` | 『全国47都道府県 やばい県民ランキング』著者未確認。スキャン 50p (1600×1812px) だが表紙が 20 ページ重複し本文は 62% で途切れる (一意ページ 28) | `参考文献/全国47都道府県やばい県民ランキング/版不明` / `data/source-inventory/yabai-kenmin-ranking/unknown/source-bundle-manifest.json` | `open-data-curator`。俗説ランキングで統計根拠にならない。企画の切り口参照のみ。再スキャンするまで不完全 |
+| `yabai-kenmin-ranking` / `yabai-kenmin-ranking` | 『全国47都道府県 やばい県民ランキング』著者未確認。スキャン 50p (1600×1812px) だが表紙が 20 ページ重複し本文は 62% で途切れる (一意ページ 28) | `参考文献/全国47都道府県やばい県民ランキング/版不明` / `data/source-inventory/yabai-kenmin-ranking/unknown/source-bundle-manifest.json` | `open-data-curator`。書籍の順位は俗説で統計根拠にしない。論点のうち公的統計で確かめられるものだけを既存 metric へ接続し、残りは `primary-source-unavailable`。再スキャンするまで不完全 |
 | `amusement-shop-density` / `amusement-shop-density` | 雨堤孝一『全国都道府県遊技営業店密度ランキング: 風俗営業許可件数 風営法ランキング』(風営法ランキングシリーズ②) Kindle 個人出版。スキャン 15p (1600×1812px) | `参考文献/全国都道府県遊技営業店密度ランキング/版不明` / `data/source-inventory/amusement-shop-density/unknown/source-bundle-manifest.json` | `open-data-curator`。警察庁「風俗営業等の状況」等の一次資料で再取得する候補発見 |
-| `gis-business-guide` / `gis-business-guide` | ESRIジャパン株式会社『図解入門ビジネス 最新GIS[地理情報システム]のビジネス活用がよ〜くわかる本』秀和システム、2022-10-28刊 (ISBN 978-4-7980-6650-9、2026-09-14書誌確認済み)。スキャン 230p (800×1030px) | `参考文献/最新GISのビジネス活用がよ〜くわかる本/2022年版` / `data/source-inventory/gis-business-guide/2022/source-bundle-manifest.json` | `geo-analysis-curator`。Geo 分析の手法・用語の内部参照のみ。公開物の根拠にしない |
+| `gis-business-guide` / `gis-business-guide` | ESRIジャパン株式会社『図解入門ビジネス 最新GIS[地理情報システム]のビジネス活用がよ〜くわかる本』秀和システム、2022-10-28刊 (ISBN 978-4-7980-6650-9、2026-09-14書誌確認済み)。スキャン 230p (800×1030px) | `参考文献/最新GISのビジネス活用がよ〜くわかる本/2022年版` / `data/source-inventory/gis-business-guide/2022/source-bundle-manifest.json` | `geo-analysis-curator`。手法・用語は内部参照 (`context-only`)。書籍の事例を公的な空間データと既存 metric で再現できる論点だけを Geo 分析・記事の候補にする |
 | `prefecture-ranking-consumption` / `prefecture-ranking-consumption` | 久保哲朗『統計から読み解く 47都道府県ランキング 消費・子供・スポーツ編』日東書院本社、2020-07刊 (ISBN 978-4-528-02297-3、2026-09-14書誌確認済み) | `参考文献/統計から読み解く47都道府県ランキング 消費・子供・スポーツ編/2020年版` / `data/source-inventory/prefecture-ranking-consumption/2020/source-bundle-manifest.json` | `open-data-curator`。`prefecture-deviation` と同著者。ranking / survey / theme / 記事の候補発見。数値は一次資料で再取得 |
-| `average-income-ranking` / `average-income-ranking` | 『都道府県別平均年収ランキング: 47都道府県の収入と生活コストから見える"実質手取り"と衆学の旅』著者未確認、Kindle 個人出版。スキャン 110p (1600×1836px) だが本文は 84% で途切れる | `参考文献/都道府県別平均年収ランキング/版不明` / `data/source-inventory/average-income-ranking/unknown/source-bundle-manifest.json` | `open-data-curator`。既存 Kindle 企画『実質手取りの地図』の競合参照。統計根拠にしない。再スキャンするまで不完全 |
+| `average-income-ranking` / `average-income-ranking` | 『都道府県別平均年収ランキング: 47都道府県の収入と生活コストから見える"実質手取り"と衆学の旅』著者未確認、Kindle 個人出版。スキャン 110p (1600×1836px) だが本文は 84% で途切れる | `参考文献/都道府県別平均年収ランキング/版不明` / `data/source-inventory/average-income-ranking/unknown/source-bundle-manifest.json` | `open-data-curator`。既存 Kindle 企画『実質手取りの地図』の競合参照を兼ねる。書籍の年収・生活費は出典のない目安なので使わず、県ごとの話題を既存の賃金・家賃・物価 metric と県ページへ接続する。再スキャンするまで不完全 |
 
 2026-08-29の全ページ処理・台帳生成結果は次のとおり。全資料で内部照合用cropを1件ずつ実見し、原本、OCR本文、
 ページ画像、crop画像をGit・R2・公開assetへ保存していない。

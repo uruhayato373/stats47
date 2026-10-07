@@ -1,0 +1,415 @@
+{
+  "sourceKey": "yabai-kenmin-ranking",
+  "edition": "unknown",
+  "reviewedAt": "2026-10-08",
+  "publicOriginalReuse": "forbidden",
+  "analyses": [
+    {
+      "id": "yabai-kenmin-ranking-unknown-a01",
+      "chapter": 0,
+      "question": "表紙ページ(題名のみ・著者名の記載なし)",
+      "thesis": "書名を大きく示した表紙1ページで、統計的な論点を含まない。著者名の表記も無い。",
+      "pages": [
+        1,
+        1
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "表紙のみで題名以外の情報が無く、検証できる統計項目が無い。画像も表紙デザインだけ",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "台帳上の記録のみで、制作や追加調査は不要"
+    },
+    {
+      "id": "yabai-kenmin-ranking-unknown-a02",
+      "chapter": 0,
+      "question": "表紙画像の重複スキャン(2〜23ページ)",
+      "thesis": "1ページ目の表紙と画像が完全一致するページが22枚続く。文字起こしも空白で本文を含まない。",
+      "pages": [
+        2,
+        23
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "22枚すべてがハッシュ同一で、1ページ目の表紙と同じ画像。文字起こしも空白で、重複スキャンによる水増しと確認した",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "台帳上の記録のみ。再スキャンが必要なら未取得分は24ページ以降の続きとして扱う"
+    },
+    {
+      "id": "yabai-kenmin-ranking-unknown-a03",
+      "chapter": 0,
+      "question": "本書が「ネガティブな指標」を都道府県で並べる枠組みは、中立な統計の問いにどう置き換えられるか？",
+      "thesis": "序章は、事故・人生・健康・地域格差の4つの切り口で都道府県を比べる構成の説明で、個別の統計値は含まない。",
+      "pages": [
+        24,
+        24
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "序章の趣旨説明のみで、出典の記載も統計項目も無い。24ページは序章の前半で、後半は25ページに続く",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "台帳上の記録のみ。各章の論点は後続エントリで中立な問いに置き換える"
+    },
+    {
+      "id": "yabai-kenmin-ranking-unknown-a04",
+      "chapter": 1,
+      "question": "交通事故による死者は、人口規模で調整すると都道府県でどう並び替わるか？",
+      "thesis": "死者の実数は大都市圏に集まりやすい一方、人口あたりで見ると順位が変わりうる。実数と人口あたりを並べて道路事情・人口密度との関係を検証する論点。25ページは序章の後半と本章見出し、26ページに表、27ページに考察。",
+      "pages": [
+        25,
+        27
+      ],
+      "resolution": "reuse-existing-metric",
+      "resolutionReason": "警察庁の交通事故統計に基づく都道府県別死者数は社会・人口統計体系から再取得でき、人口10万人あたりの既存指標(2024年まで)がある。書籍は実数を使うため定義は異なり、書籍の出典は記載が無いので同一系列とは扱わず独立に再検証する",
+      "metricKeys": [
+        "traffic-accident-deaths-per-100k",
+        "traffic-accident-deaths-per-100-accidents"
+      ],
+      "surveyIds": [
+        "traffic-accident-statistics"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (安全・交通事故)",
+          "datasetId": "0000010211",
+          "url": "https://www.e-stat.go.jp/dbview?sid=0000010211",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "既存の2指標で実数と人口あたりの順位差を並べ、北海道のように人口密度と死者数がずれる県を道路延長などGIS側の補助レイヤーと突き合わせる記事案にする"
+    },
+    {
+      "id": "yabai-kenmin-ranking-unknown-a05",
+      "chapter": 2,
+      "question": "自殺死亡率は都道府県間でどの程度ばらつき、地域差はどの指標と並べて読むべきか？",
+      "thesis": "人口動態統計の自殺死亡率の県差を、年齢構成や人口規模の影響に注意して読む論点。28ページは前章の結論と本章の見出し、29ページに表、30ページに考察。",
+      "pages": [
+        28,
+        30
+      ],
+      "resolution": "reuse-existing-metric",
+      "resolutionReason": "厚生労働省の人口動態調査に基づく自殺死亡率は社会・人口統計体系から47県値を再取得でき、日本人人口あたりと人口10万対の既存指標がある。書籍の出典と年次は記載が無く、順位の一致は前提にしない",
+      "metricKeys": [
+        "suicides-per-100k",
+        "suicide-rate-per-100k"
+      ],
+      "surveyIds": [
+        "vital-statistics"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (自殺死亡率)",
+          "datasetId": "0000010209",
+          "url": "https://www.e-stat.go.jp/dbview?sid=0000010209",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2023"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "自殺死亡率は年齢調整の有無で順位が動くため、年齢調整死亡率(age-adjusted-mortality-statistics)の有無を確認したうえで、扱いに配慮した解説の構成を検討する"
+    },
+    {
+      "id": "yabai-kenmin-ranking-unknown-a06",
+      "chapter": 3,
+      "question": "離婚率の都道府県差は、結婚年齢や就業・所得の指標とどこまで重なるか？",
+      "thesis": "人口千人あたりの離婚率の県差を、人口動態・就業の指標と組み合わせて検証する論点。31ページは前章の結論と本章見出し、32〜33ページに順位と考察。",
+      "pages": [
+        31,
+        33
+      ],
+      "resolution": "reuse-existing-metric",
+      "resolutionReason": "人口動態統計の離婚件数を総人口で割った離婚率は社会・人口統計体系から再取得でき、既存指標(2024年まで)がある。書籍の年次・出典は記載が無く、要因の説明は書籍の主張であり検証していない",
+      "metricKeys": [
+        "divorces-per-total-population"
+      ],
+      "surveyIds": [
+        "vital-statistics"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (離婚率)",
+          "datasetId": "0000010201",
+          "url": "https://www.e-stat.go.jp/dbview?sid=0000010201",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "既存指標を軸に、平均初婚年齢や非正規雇用比率の既存指標との散布図で関係の有無を示す記事案を作る(相関と因果を区別して書く)"
+    },
+    {
+      "id": "yabai-kenmin-ranking-unknown-a07",
+      "chapter": 4,
+      "question": "都道府県の財政負担の重さは、どの財政指標でどう測れ、地理的条件とどう関係するか？",
+      "thesis": "借入や債務の大きさを人口規模・財政規模のどちらで割るかで見え方が変わる。実質公債費比率・将来負担比率・地方債現在高の指標を使い分けて県差を読む論点。34ページに順位、36ページに考察、37ページ冒頭に結び(37ページ後半は次章の見出し)。",
+      "pages": [
+        34,
+        36
+      ],
+      "resolution": "reuse-existing-metric",
+      "resolutionReason": "総務省の財政健全化判断比率と地方財政の統計は社会・人口統計体系から再取得でき、既存指標がある。書籍が借金の定義(一人あたり・比率等)を明示していないため、既存指標のどれと同じかは判定できず、独立の問いとして扱う",
+      "metricKeys": [
+        "real-public-debt-service-ratio",
+        "future-burden-ratio",
+        "local-debt-current-ratio"
+      ],
+      "surveyIds": [
+        "local-finance",
+        "prefectural-settlement-survey"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (都道府県財政・健全化判断比率)",
+          "datasetId": "0000010104",
+          "url": "https://www.e-stat.go.jp/dbview?sid=0000010104",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (地方債現在高)",
+          "datasetId": "0000010204",
+          "url": "https://www.e-stat.go.jp/dbview?sid=0000010204",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "3指標の県順位を並べ、指標ごとに順位が入れ替わる県を示す。地方債現在高の対象年は metric 定義で確認してから使う"
+    },
+    {
+      "id": "yabai-kenmin-ranking-unknown-a08",
+      "chapter": 5,
+      "question": "食塩摂取量や肥満・喫煙などの生活習慣の県差は、高血圧・糖尿病の指標とどこまで重なるか？",
+      "thesis": "食習慣と疾患指標を県単位で並べ、地域差の関係を探る論点。37ページは前章の結び、38ページに順位、39ページに考察。飲酒の県別値は国民健康・栄養調査の当該表に無い。",
+      "pages": [
+        37,
+        39
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "食塩摂取量(2024年・国民健康・栄養調査)と高血圧性疾患・糖尿病の死亡率・受療率は既存指標があり、組み合わせで検証できる。BMI(第66表)・野菜摂取量(第67表)・男性喫煙者割合(第70表)は同じ報告書に都道府県別年齢調整値があるが未登録で、飲酒の県別値は同報告書の確認範囲に無い",
+      "metricKeys": [
+        "salt-intake-male-age-adjusted",
+        "salt-intake-female-age-adjusted",
+        "deaths-hypertensive-diseases-per-100k",
+        "deaths-diabetes-per-100k",
+        "treatment-rate-diabetes-outpatient"
+      ],
+      "surveyIds": [
+        "national-health-nutrition-survey",
+        "vital-statistics",
+        "patient-survey"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "令和6年国民健康・栄養調査報告 第4部(第66〜70表: BMI・野菜・食塩・歩数・喫煙の都道府県別年齢調整値)",
+          "url": "https://www.mhlw.go.jp/stf/seisakunitsuite/bunya/kenkou_iryou/kenkou/eiyou/r6-houkoku_00001.html",
+          "termsUrl": "https://www.mhlw.go.jp/chosakuken/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "BMI・男性喫煙者割合・野菜摂取量を new-metric として登録する案を data-ingester に渡し、食塩・疾患指標との散布図(信頼区間と標本の大きさを併記)で記事化する。飲酒は別の一次資料を探す"
+    },
+    {
+      "id": "yabai-kenmin-ranking-unknown-a09",
+      "chapter": 6,
+      "question": "犯罪の発生件数は、人口あたりで見ると都道府県でどう違い、どの認知件数の内訳が差を生んでいるか？",
+      "thesis": "刑法犯認知件数を人口あたりに直し、窃盗・凶悪犯など罪種別の割合と併せて県差を読む論点。40ページは前章の結びと本章見出し、41ページに順位、42ページに考察。",
+      "pages": [
+        40,
+        42
+      ],
+      "resolution": "reuse-existing-metric",
+      "resolutionReason": "警察庁の犯罪統計に基づく刑法犯認知件数は社会・人口統計体系から再取得でき、人口千人あたり・罪種別割合の既存指標がある。書籍の出典と年次は記載が無く、順位の一致は前提にしない。認知件数は届出や警察の認知に依存する点を併記する",
+      "metricKeys": [
+        "penal-code-offenses-recognized-per-1000",
+        "theft-offenses-recognized-per-1000",
+        "criminal-arrest-rate"
+      ],
+      "surveyIds": [
+        "police-statistics"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (刑法犯認知件数)",
+          "datasetId": "0000010211",
+          "url": "https://www.e-stat.go.jp/dbview?sid=0000010211",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2023"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "人口あたりの認知件数と検挙率を並べ、大都市圏と地方の差が罪種構成で説明できるかを示す記事案にする"
+    },
+    {
+      "id": "yabai-kenmin-ranking-unknown-a10",
+      "chapter": 7,
+      "question": "県民性のイメージ(性格の評価)は、公的な統計で裏付けられる指標に置き換えられるか？",
+      "thesis": "本書自身が統計ではなく俗説・イメージのランキングと断っている部分。評価の根拠は示されず、公的統計に対応する指標も無い。",
+      "pages": [
+        43,
+        45
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "本書が「統計ではなく世間のイメージ・県民性ジョーク」と明記し、出典の記載が無い。性格の良し悪しを公的統計で測る一次資料も無く、47県値を再取得できない",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "ランキングとして採用しない。県民性に触れる記事が必要な場合は、公的統計の事実と俗説を分けて書く"
+    },
+    {
+      "id": "yabai-kenmin-ranking-unknown-a11",
+      "chapter": 8,
+      "question": "学力と教育の県差は、全国学力・学習状況調査や進学の指標でどう測れるか？",
+      "thesis": "学力調査の平均正答率を軸に、大学進学など教育の指標と並べて県差を読む論点。46ページに見出しと定義、47ページに順位、48ページに考察(結びは49ページ冒頭に続く)。",
+      "pages": [
+        46,
+        48
+      ],
+      "resolution": "reuse-existing-metric",
+      "resolutionReason": "国立教育政策研究所の全国学力・学習状況調査は都道府県別平均正答率が公表されており、既存指標(2025年)がある。書籍は大学進学率や教育環境も加味するとするが、進学率の既存指標は無く未検証。書籍の年次・出典は記載が無い",
+      "metricKeys": [
+        "academic-achievement-test-average-rate"
+      ],
+      "surveyIds": [
+        "academic-achievement-survey",
+        "school-basic-survey"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "国立教育政策研究所",
+          "publicationOrDataset": "全国学力・学習状況調査 都道府県別結果",
+          "url": "https://www.nier.go.jp/kaihatsu/zenkokugakuryoku.html",
+          "termsUrl": "https://www.mext.go.jp/b_menu/1351168.htm",
+          "dataYears": [
+            "2025"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "既存指標で県順位を整理し、学校基本調査の大学進学率は未登録なので new-metric 候補として別途確認する(kakei-marketing の学力論点と重複しない切り口にする)"
+    },
+    {
+      "id": "yabai-kenmin-ranking-unknown-a12",
+      "chapter": 9,
+      "question": "容姿の評価(美男美女が多いとされる県)は、公的な統計で扱える指標か？",
+      "thesis": "芸能人の出身地や印象に基づくと本書が断る俗説のランキング。数値化できる客観的な定義が示されていない。49ページ後半に見出しと説明、50ページに順位。スキャンは50ページで途切れ、以降は未取得。",
+      "pages": [
+        49,
+        50
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "本書が統計ではなく俗説と明記し、容姿を測る公的統計や出典が存在しない。47県値を再取得できない。なお本スキャンは50ページで途切れ、後続章は未取得",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "採用しない。スキャンの続き(10部以降)が必要なら再取得を依頼する"
+    }
+  ]
+}

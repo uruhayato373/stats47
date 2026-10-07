@@ -1,0 +1,2345 @@
+{
+  "sourceKey": "prefecture-ranking-consumption",
+  "edition": "2020",
+  "reviewedAt": "2026-10-08",
+  "publicOriginalReuse": "forbidden",
+  "analyses": [
+    {
+      "id": "prefecture-ranking-consumption-2020-a01",
+      "chapter": 0,
+      "question": "表紙は stats47 で検証する問いを含むか",
+      "thesis": "表紙(書名・著者・帯の宣伝コピー)。数量の論点ではなく装飾的な宣伝文のため展開しない",
+      "pages": [
+        1,
+        1
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "表紙(書名・著者・帯の宣伝コピー)。数量の論点ではなく装飾的な宣伝文のため展開しない",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "stats47 での展開対象外。ページ範囲の被覆のみを台帳に残し、以後の作業は不要"
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a02",
+      "chapter": 0,
+      "question": "見返しと扉に検証すべき論点はあるか",
+      "thesis": "p2 は白紙、p3 は扉(書名・著者・版元の表示のみ)で論点なし",
+      "pages": [
+        2,
+        3
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "p2 は白紙、p3 は扉(書名・著者・版元の表示のみ)で論点なし",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "stats47 での展開対象外。ページ範囲の被覆のみを台帳に残し、以後の作業は不要"
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a03",
+      "chapter": 0,
+      "question": "凡例ページの偏差値・相関の説明は再利用できるか",
+      "thesis": "本書の見方(偏差値と相関係数の用語説明と紙面見本)。書籍独自の読み方の説明で、stats47 は自前の偏差値定義を持つため展開しない",
+      "pages": [
+        4,
+        4
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "本書の見方(偏差値と相関係数の用語説明と紙面見本)。書籍独自の読み方の説明で、stats47 は自前の偏差値定義を持つため展開しない",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "stats47 での展開対象外。ページ範囲の被覆のみを台帳に残し、以後の作業は不要"
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a04",
+      "chapter": 0,
+      "question": "はじめにから独立の論点を取り出せるか",
+      "thesis": "はじめに(東西の食の違いを例に本書のねらいを述べる序文)。具体的な統計値を伴わない趣旨説明のため展開しない",
+      "pages": [
+        5,
+        5
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "はじめに(東西の食の違いを例に本書のねらいを述べる序文)。具体的な統計値を伴わない趣旨説明のため展開しない",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "stats47 での展開対象外。ページ範囲の被覆のみを台帳に残し、以後の作業は不要"
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a05",
+      "chapter": 0,
+      "question": "目次は論点として扱うか",
+      "thesis": "目次(ランキング項目名とページ番号の一覧)。本台帳の項目範囲を決める索引として使うのみで、独立した論点ではない",
+      "pages": [
+        6,
+        8
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "目次(ランキング項目名とページ番号の一覧)。本台帳の項目範囲を決める索引として使うのみで、独立した論点ではない",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "stats47 での展開対象外。ページ範囲の被覆のみを台帳に残し、以後の作業は不要"
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a06",
+      "chapter": 0,
+      "question": "第1章の章扉に論点はあるか",
+      "thesis": "第1章「項目別ランキング」の章扉(地図の装飾のみ)で論点なし",
+      "pages": [
+        9,
+        9
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "第1章「項目別ランキング」の章扉(地図の装飾のみ)で論点なし",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "stats47 での展開対象外。ページ範囲の被覆のみを台帳に残し、以後の作業は不要"
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a07",
+      "chapter": 1,
+      "question": "中学校の運動部活動について、種目ごとの生徒100人あたり部員数の地域差は、競技団体の加盟生徒数から独立に再現できるか",
+      "thesis": "サッカー・水泳・剣道・バドミントン・軟式野球・バレーボール・陸上競技・卓球・バスケットボール・テニスの中学運動部員比率ランキングが連続する区間。書籍の偏差値や順位は写さず、日本中体連の公表集計と学校基本調査の生徒数から種目別の地域差を独立に確認する。",
+      "pages": [
+        10,
+        29
+      ],
+      "resolution": "rights-hold",
+      "resolutionReason": "利用条件が未確認(中体連サイトに利用規約の明文なし)のため rights-hold。既存metricは出典明記のうえオーナー承認済みで運用中で、新規の公開展開は条件確認後。日本中学校体育連盟の加盟生徒数を分子とする種目別の既存metricが全種目分そろっている。最新年度は書籍と異なる。書籍のテニスは軟式か硬式か紙面から確定できず、既存はソフトテニスなので対応は要確認。",
+      "metricKeys": [
+        "junior-high-club-per100-soccer",
+        "junior-high-club-per100-swimming",
+        "junior-high-club-per100-kendo",
+        "junior-high-club-per100-badminton",
+        "junior-high-club-per100-baseball-soft",
+        "junior-high-club-per100-volleyball",
+        "junior-high-club-per100-track-and-field",
+        "junior-high-club-per100-table-tennis",
+        "junior-high-club-per100-basketball",
+        "junior-high-club-per100-soft-tennis"
+      ],
+      "surveyIds": [
+        "junior-high-athletics-membership-survey",
+        "school-basic-survey"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "公益財団法人日本中学校体育連盟",
+          "publicationOrDataset": "加盟校・加盟生徒数調査集計表",
+          "url": "https://nippon-chutairen.or.jp/data/result/",
+          "dataYears": [
+            "2025"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "needs-review"
+        }
+      ],
+      "nextAction": "既存の種目別metricの値を最新年で確認し、書籍のテニス項目がソフトテニスに当たるかを紙面と中体連集計で照合したうえで、地域差の傾向を blog/theme の文脈補強に使うか判断する"
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a08",
+      "chapter": 1,
+      "question": "中学生の運動部への参加率は、全国学力・学習状況調査の質問紙結果から都道府県別に独立に取れるか",
+      "thesis": "中学生の運動部参加率のランキング。部員数ではなく、質問紙で運動部に所属すると答えた生徒の割合に当たる指標。書籍の値は写さず、同調査の都道府県別公表資料から再取得できるかを確認する。",
+      "pages": [
+        30,
+        31
+      ],
+      "resolution": "rights-hold",
+      "resolutionReason": "国立教育政策研究所の利用条件を未確認のため rights-hold。出典表記は全国学力・学習状況調査。国立教育政策研究所が都道府県別の質問紙結果を公表しており、運動部参加率に当たる設問が現行調査に継続しているかは未確認のため、metric化の前に設問の実在を確認する。既存の中体連部員比率は分母と分子が別定義で代用できない。",
+      "metricKeys": [],
+      "surveyIds": [
+        "academic-achievement-survey"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "文部科学省・国立教育政策研究所",
+          "publicationOrDataset": "全国学力・学習状況調査 都道府県別の質問紙調査結果",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/prefecture_city.html",
+          "dataYears": [
+            "2025"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "needs-review"
+        }
+      ],
+      "nextAction": "国立教育政策研究所の都道府県別質問紙結果で部活動の参加設問と運動部への所属を区別できる項目があるか確認し、あれば最新年の47県値を取得する"
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a09",
+      "chapter": 1,
+      "question": "男子高校生の競技別部員比率(ラグビー)は、高体連の加盟登録状況から独立に再現できるか",
+      "thesis": "男子高校生のラグビー部員比率ランキング。全国高体連が競技別・都道府県別に公表する人数を、高校生徒数で割る形で再構成できるかを確認する。",
+      "pages": [
+        32,
+        33
+      ],
+      "resolution": "rights-hold",
+      "resolutionReason": "全国高体連の利用条件を未確認のため rights-hold。全国高体連の統計資料ページに競技別・都道府県別の加盟登録人数のPDFが毎年公開されており、ラグビーフットボールの列があることをPDFで確認した。分母となる高校男子生徒数は学校基本調査で取れる。利用規約の明文は未確認のため rights は needs-review。",
+      "metricKeys": [],
+      "surveyIds": [
+        "school-basic-survey"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "公益財団法人全国高等学校体育連盟",
+          "publicationOrDataset": "加盟・登録状況(競技別・都道府県別の校数と人数)",
+          "url": "https://www.zen-koutairen.com/statistics/",
+          "dataYears": [
+            "2025"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "needs-review"
+        }
+      ],
+      "nextAction": "最新年度のPDFからラグビーの男子部員数を47県分抽出し、学校基本調査の高校男子生徒数で100人あたりに換算する手順と利用条件を整理する(中体連と同様の抽出スクリプトを参考にする)"
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a10",
+      "chapter": 1,
+      "question": "サイクリング・登山・スキーの行動者の地域差は、社会生活基本調査の行動者率で独立に確認できるか",
+      "thesis": "成人の人口あたりサイクリング・登山ハイキング・スキースノーボード人口のランキングが連続する区間。書籍の人口換算は再現せず、社会生活基本調査の種目別行動者率で地域差を確認する。",
+      "pages": [
+        34,
+        39
+      ],
+      "resolution": "reuse-existing-metric",
+      "resolutionReason": "同じ社会生活基本調査の種目別行動者率の既存metricがある。ただし既存は調査最新回の全年齢対象の行動者率で、書籍の対象年齢の絞り込みと調査回が異なるため順位は一致しない。",
+      "metricKeys": [
+        "sports-participation-rate-cycling",
+        "sports-participation-rate-hiking",
+        "sports-participation-rate-skiing"
+      ],
+      "surveyIds": [
+        "social-life-basic-survey"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会生活基本調査(都道府県別・行動者率および生活時間)",
+          "url": "https://www.stat.go.jp/data/shakai/2021/index.html",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2021"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "既存3指標の都道府県値を確認し、年齢範囲と調査回の差を注記したうえでレジャー系テーマの補強材料にするか判断する"
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a11",
+      "chapter": 1,
+      "question": "ゲートボールの行動者の地域差は、社会生活基本調査から独立に取れるか",
+      "thesis": "高齢者に多い種目として知られるゲートボール人口のランキング。既存のグラウンドゴルフ指標とは別種目として扱い、調査の種目表にゲートボールがあるかを確認する。",
+      "pages": [
+        40,
+        41
+      ],
+      "resolution": "new-metric",
+      "resolutionReason": "既存metricにゲートボールは無く、グラウンドゴルフは別の調査種目で代用できない。書籍時点の調査回には種目があったが、最新回に独立項目があるかは未確認のため、metric化は種目表の確認が前提。",
+      "metricKeys": [],
+      "surveyIds": [
+        "social-life-basic-survey"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会生活基本調査(都道府県別・行動者率)",
+          "url": "https://www.stat.go.jp/data/shakai/2016/index.html",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2016",
+            "2021"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "e-Statの社会生活基本調査の種目別都道府県表でゲートボールの項目が最新回にあるかを確認し、無ければ調査回を限定した一回限りの比較か見送りかを決める"
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a12",
+      "chapter": 1,
+      "question": "ゴルフ・釣り・スポーツ全般の実施者の地域差は、社会生活基本調査系の既存指標で確認できるか",
+      "thesis": "ゴルフ人口、釣り人口、およびスポーツ全般を行う人の比率のランキングが連続する区間。書籍の換算値は写さず、行動者率の既存指標で地域差を確かめる。",
+      "pages": [
+        42,
+        47
+      ],
+      "resolution": "reuse-existing-metric",
+      "resolutionReason": "ゴルフと釣りは同調査の行動者率、スポーツ全般は社会・人口統計体系の年間行動者率が既存metricにある。対象年齢と調査回が書籍と異なるため順位の一致は前提にしない。",
+      "metricKeys": [
+        "sports-participation-rate-golf",
+        "sports-participation-rate-fishing",
+        "sports-annual-participation-rate-10plus"
+      ],
+      "surveyIds": [
+        "social-life-basic-survey"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会生活基本調査(都道府県別・行動者率および生活時間)",
+          "url": "https://www.stat.go.jp/data/shakai/2021/index.html",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2021"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会生活統計指標(都道府県の指標)",
+          "url": "https://www.stat.go.jp/data/ssds/index.htm",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2021"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "3指標の最新値を確認し、ゴルフ場数など供給側の既存指標との掛け合わせが意味を持つかを検討する"
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a13",
+      "chapter": 1,
+      "question": "観戦・楽器・写真・ゲーム・パチンコ・カラオケといった娯楽の行動者の地域差は、既存の行動者率指標で確認できるか",
+      "thesis": "スポーツ観戦、楽器演奏、写真撮影、テレビゲーム、パチンコ、カラオケの人口比ランキングが連続する区間。書籍の人口換算ではなく社会生活基本調査の行動者率で地域差を見る。",
+      "pages": [
+        48,
+        59
+      ],
+      "resolution": "reuse-existing-metric",
+      "resolutionReason": "6項目すべてに同調査の趣味・娯楽の行動者率の既存metricがある。対象年齢の絞り込みと調査回が書籍と異なる。",
+      "metricKeys": [
+        "hobby-participation-rate-sports-spectating",
+        "hobby-participation-rate-instrument",
+        "hobby-participation-rate-photography",
+        "hobby-participation-rate-video-games",
+        "hobby-participation-rate-pachinko",
+        "hobby-participation-rate-karaoke"
+      ],
+      "surveyIds": [
+        "social-life-basic-survey"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会生活基本調査(都道府県別・行動者率および生活時間)",
+          "url": "https://www.stat.go.jp/data/shakai/2021/index.html",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2021"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "各指標の最新年の47県値を確認し、パチンコ店舗密度など供給側指標との掛け合わせ候補を整理する"
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a14",
+      "chapter": 1,
+      "question": "園芸・編み物手芸・英語学習の行動者の地域差は、既存の行動者率指標で確認できるか",
+      "thesis": "園芸・ガーデニング、編み物・手芸、英語学習の人口比ランキングが連続する区間。書籍の換算値ではなく社会生活基本調査の行動者率で地域差を確認する。",
+      "pages": [
+        60,
+        65
+      ],
+      "resolution": "reuse-existing-metric",
+      "resolutionReason": "3項目とも同調査の行動者率の既存metricがある。対象年齢と調査回が書籍と異なる。",
+      "metricKeys": [
+        "hobby-participation-rate-gardening",
+        "hobby-participation-rate-knitting",
+        "study-participation-rate-english"
+      ],
+      "surveyIds": [
+        "social-life-basic-survey"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会生活基本調査(都道府県別・行動者率および生活時間)",
+          "url": "https://www.stat.go.jp/data/shakai/2021/index.html",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2021"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "既存3指標の値を確認し、園芸用品や語学月謝の家計調査指標との組み合わせが説明力を持つか検討する"
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a15",
+      "chapter": 1,
+      "question": "書道・茶道・華道・ボランティア・将棋・囲碁といった文化的活動の地域差は、既存の行動者率指標で確認できるか",
+      "thesis": "書道、茶道、華道、ボランティア活動、将棋、囲碁の人口比ランキングが連続する区間。書籍の換算値を写さず、社会生活基本調査と社会・人口統計体系の行動者率で地域差を確認する。",
+      "pages": [
+        66,
+        77
+      ],
+      "resolution": "reuse-existing-metric",
+      "resolutionReason": "6項目すべてに既存の行動者率metricがある。ボランティアは年間行動者率で対象年齢が異なる2系統があり、書籍の対象年齢との対応は未確認。",
+      "metricKeys": [
+        "hobby-participation-rate-calligraphy",
+        "hobby-participation-rate-tea-ceremony",
+        "hobby-participation-rate-flower-arrangement",
+        "volunteer-activity-annual-participation-rate-15plus",
+        "volunteer-activity-annual-participation-rate-10plus",
+        "hobby-participation-rate-shogi",
+        "hobby-participation-rate-go"
+      ],
+      "surveyIds": [
+        "social-life-basic-survey"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会生活基本調査(都道府県別・行動者率および生活時間)",
+          "url": "https://www.stat.go.jp/data/shakai/2021/index.html",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2021"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会生活統計指標(都道府県の指標)",
+          "url": "https://www.stat.go.jp/data/ssds/index.htm",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2021"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "各指標の最新値を確認し、地域文化や高齢化指標との掛け合わせ候補を整理する"
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a16",
+      "chapter": 1,
+      "question": "水泳プールの人口あたり施設数の地域差は、既存の施設数指標から確認できるか",
+      "thesis": "水泳プール数のランキング。書籍の10万人あたり換算ではなく、既存の施設数指標とその人口換算の選択肢で地域差を確認する。",
+      "pages": [
+        78,
+        79
+      ],
+      "resolution": "reuse-existing-metric",
+      "resolutionReason": "社会・人口統計体系由来の水泳プール数metricが2系統(総数と公共)あり、人口換算の選択肢を持つ。書籍の出典は体育・スポーツ施設現況調査で、公共のみか民間を含むかの対応は要確認。",
+      "metricKeys": [
+        "public-swimming-pool-count-per-million",
+        "swimming-pool-public"
+      ],
+      "surveyIds": [
+        "sports-facilities-survey"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会生活統計指標(都道府県の指標)",
+          "url": "https://www.stat.go.jp/data/ssds/index.htm",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2021"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "スポーツ庁(文部科学省)",
+          "publicationOrDataset": "体育・スポーツ施設現況調査",
+          "url": "https://www.mext.go.jp/sports/b_menu/toukei/chousa04/shisetsu/kekka/1368165.htm",
+          "dataYears": [
+            "2018"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "2系統のどちらが書籍の集計範囲に近いかを施設現況調査の定義で確認し、採用する指標を決める"
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a17",
+      "chapter": 1,
+      "question": "陸上競技場と野球場の人口あたり施設数は、体育・スポーツ施設現況調査から独立に取れるか",
+      "thesis": "陸上競技場数と野球場数のランキングが連続する区間。既存の野球場指標はソフトボール場を含むため別定義として扱い、施設現況調査の種目別施設数を確認する。",
+      "pages": [
+        80,
+        83
+      ],
+      "resolution": "new-metric",
+      "resolutionReason": "陸上競技場の既存metricは無い。野球場は既存の野球場・ソフトボール場数(公共)が球場とソフトボール場の合算で定義が異なり、そのまま代用できない。",
+      "metricKeys": [],
+      "surveyIds": [
+        "sports-facilities-survey"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "スポーツ庁(文部科学省)",
+          "publicationOrDataset": "体育・スポーツ施設現況調査",
+          "url": "https://www.mext.go.jp/sports/b_menu/toukei/chousa04/shisetsu/kekka/1368165.htm",
+          "dataYears": [
+            "2018"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "施設現況調査の種目別施設数表から陸上競技場と野球場の都道府県値を取得できるか確認し、既存の合算指標との関係を注記する"
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a18",
+      "chapter": 1,
+      "question": "体育館の人口あたり施設数の地域差は、既存の施設数指標から確認できるか",
+      "thesis": "体育館数のランキング。書籍の換算値ではなく既存の体育館数指標で地域差を確認する。",
+      "pages": [
+        84,
+        85
+      ],
+      "resolution": "reuse-existing-metric",
+      "resolutionReason": "社会・人口統計体系由来の体育館数metricがあり人口換算の選択肢を持つ。書籍の出典は体育・スポーツ施設現況調査で、調査回と集計範囲の対応は要確認。",
+      "metricKeys": [
+        "public-gymnasium-count-per-million"
+      ],
+      "surveyIds": [
+        "sports-facilities-survey"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会生活統計指標(都道府県の指標)",
+          "url": "https://www.stat.go.jp/data/ssds/index.htm",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2021"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "スポーツ庁(文部科学省)",
+          "publicationOrDataset": "体育・スポーツ施設現況調査",
+          "url": "https://www.mext.go.jp/sports/b_menu/toukei/chousa04/shisetsu/kekka/1368165.htm",
+          "dataYears": [
+            "2018"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "既存指標の集計範囲を確認し、公立学校体育館指標など近い指標との重複を整理する"
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a19",
+      "chapter": 1,
+      "question": "食事にかける時間の地域差は、社会生活基本調査の生活時間から独立に確認できるか",
+      "thesis": "成人の食事時間のランキング。書籍の週平均の男女計ではなく、既存の男女別の食事時間指標で地域差を確認する。",
+      "pages": [
+        86,
+        87
+      ],
+      "resolution": "reuse-existing-metric",
+      "resolutionReason": "食事の平均時間に男女別の既存metricがあるが、男女計は未登録で書籍の集計単位とは異なる。男女別の二系統で傾向を確認することになる。",
+      "metricKeys": [
+        "meal-avg-time-female",
+        "meal-avg-time-male"
+      ],
+      "surveyIds": [
+        "social-life-basic-survey"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会生活統計指標(都道府県の指標)",
+          "url": "https://www.stat.go.jp/data/ssds/index.htm",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2021"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "男女別の傾向が一致するかを確認し、男女計が必要なら社会生活基本調査の男女計の系列を新規に登録するか判断する"
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a20",
+      "chapter": 1,
+      "question": "テレビ・ラジオ・新聞・雑誌に費やす時間の地域差は、社会生活基本調査から独立に確認できるか",
+      "thesis": "マスメディア接触時間のランキング。既存指標は非有業者に限られるため、全体の系列が取れるかを確認する。",
+      "pages": [
+        88,
+        89
+      ],
+      "resolution": "new-metric",
+      "resolutionReason": "既存のテレビ・ラジオ・新聞・雑誌の平均時間は非有業者の男女別のみで、書籍の全体の閲覧時間とは対象が異なる。全体の系列が同じ調査表にあるかは未確認。",
+      "metricKeys": [],
+      "surveyIds": [
+        "social-life-basic-survey"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会生活統計指標(都道府県の指標)",
+          "url": "https://www.stat.go.jp/data/ssds/index.htm",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2021"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "社会・人口統計体系または調査表で全体のメディア接触時間の都道府県値があるか確認し、あれば新規登録を検討する"
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a21",
+      "chapter": 1,
+      "question": "家事・休養・睡眠・仕事の時間配分の地域差は、既存の生活時間指標から確認できるか",
+      "thesis": "女性の家事時間、休養・くつろぎ、睡眠、労働時間のランキングが連続する区間。書籍の男女計の週平均ではなく、既存の男女別・有業者別の生活時間指標で地域差を確認する。",
+      "pages": [
+        90,
+        97
+      ],
+      "resolution": "reuse-existing-metric",
+      "resolutionReason": "家事(女性)、休養、睡眠、仕事の平均時間に既存metricがある。ただし睡眠と休養は男女別のみで男女計は無く、仕事時間は有業者に限る。書籍の労働時間の対象範囲は紙面から確定できない。",
+      "metricKeys": [
+        "housework-avg-time-female",
+        "relaxation-avg-time-female",
+        "relaxation-avg-time-male",
+        "sleep-avg-time-female",
+        "sleep-avg-time-male",
+        "work-avg-time-employed-female",
+        "work-avg-time-employed-male"
+      ],
+      "surveyIds": [
+        "social-life-basic-survey"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会生活統計指標(都道府県の指標)",
+          "url": "https://www.stat.go.jp/data/ssds/index.htm",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2021"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "既存指標の定義(日平均・対象者)を確認し、地域差の傾向を労働・通勤指標との掛け合わせの材料にするか判断する"
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a22",
+      "chapter": 1,
+      "question": "鉄道通勤・通学と自家用車通勤・通学の比率の地域差は、国勢調査の既存指標から組み立てられるか",
+      "thesis": "通勤通学の交通手段別比率のランキング2項目。既存の手段別通勤通学者数と総数から比率を算出して都市型・地方型の違いを確認する。",
+      "pages": [
+        98,
+        101
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "手段別の通勤・通学者数(鉄道・電車、自家用車)と通勤者総数の既存metricがあり、比率はこれらの掛け合わせで作れる。書籍は調査回が古く、最新の国勢調査で再計算になる。",
+      "metricKeys": [
+        "commute-by-train",
+        "commute-by-car",
+        "commuters-total"
+      ],
+      "surveyIds": [
+        "census"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "国勢調査(従業地・通学地による人口・就業状態等)",
+          "url": "https://www.stat.go.jp/data/kokusei/2020/index.html",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2020"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "手段別通勤通学者数を総数で割った比率を試算し、母数(通勤・通学者の定義)をそろえたうえで ranking 化の要否を判断する"
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a23",
+      "chapter": 1,
+      "question": "Facebookの人口あたり利用者数は、公的統計で代替できるか",
+      "thesis": "人口あたりのFacebookユーザー数のランキング。民間プラットフォーム固有の指標で、行政統計に同じ項目は無い。",
+      "pages": [
+        102,
+        103
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "出典表記はFacebook(2020年)で、広告配信管理画面等の民間推計に当たり、再取得できる公開一次資料が無い。公的な代替はインターネット利用率(p104-107)で扱う。",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [],
+      "nextAction": "展開しない。SNS利用の地域差は通信利用動向調査由来の指標で別途検討する"
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a24",
+      "chapter": 1,
+      "question": "SNS利用率とインターネット利用率の地域差は、通信利用動向調査から独立に取れるか",
+      "thesis": "個人のSNS利用率とインターネット利用率のランキング2項目。総務省の通信利用動向調査の都道府県別集計から再取得できるかを確認する。",
+      "pages": [
+        104,
+        107
+      ],
+      "resolution": "new-metric",
+      "resolutionReason": "インターネット利用率の都道府県別値は情報通信白書で通信利用動向調査由来として公表されており再取得できる見込み。SNS利用率の都道府県別表があるかは未確認。既存のスマートフォン関連metricは趣味・娯楽の行動者率で定義が異なる。",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省",
+          "publicationOrDataset": "通信利用動向調査",
+          "url": "https://www.soumu.go.jp/johotsusintokei/statistics/statistics05.html",
+          "dataYears": [
+            "2018"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "情報通信統計データベースとe-Statの通信利用動向調査の都道府県別表で、インターネット利用率とSNS利用率が毎年公表されているかを確認する"
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a25",
+      "chapter": 1,
+      "question": "小学生の通塾率と読書の習慣の地域差は、全国学力・学習状況調査の質問紙から独立に取れるか",
+      "thesis": "小学生の通塾率と読書率のランキング2項目。文部科学省の全国学力・学習状況調査の質問紙回答の都道府県別公表資料から再取得できるかを確認する。",
+      "pages": [
+        108,
+        111
+      ],
+      "resolution": "rights-hold",
+      "resolutionReason": "国立教育政策研究所の利用条件を未確認のため rights-hold。出典表記は全国学力テスト。国立教育政策研究所が都道府県別の質問紙結果を公表している。通塾と読書に当たる設問が現行調査に継続しているかは未確認。既存の趣味としての読書行動者率は対象と定義が異なる。",
+      "metricKeys": [],
+      "surveyIds": [
+        "academic-achievement-survey"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "文部科学省・国立教育政策研究所",
+          "publicationOrDataset": "全国学力・学習状況調査 都道府県別の質問紙調査結果",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/prefecture_city.html",
+          "dataYears": [
+            "2025"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "needs-review"
+        }
+      ],
+      "nextAction": "最新年の都道府県別質問紙結果で通塾と読書に当たる設問を確認し、継続して取れる場合のみ47県値を取得する"
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a26",
+      "chapter": 1,
+      "question": "小学生の通学時間の地域差は、社会生活基本調査から独立に取れるか",
+      "thesis": "小学生の通学時間のランキング。出典は社会生活基本調査とされ、年齢階級別の通学時間の都道府県表があるかを確認する。",
+      "pages": [
+        112,
+        113
+      ],
+      "resolution": "new-metric",
+      "resolutionReason": "既存metricに通学時間は無い。社会生活基本調査の通学時間の都道府県別・年齢階級別の公表有無は未確認。",
+      "metricKeys": [],
+      "surveyIds": [
+        "social-life-basic-survey"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会生活基本調査(都道府県別・行動者率および生活時間)",
+          "url": "https://www.stat.go.jp/data/shakai/2021/index.html",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2021"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "e-Statの社会生活基本調査の生活時間表で、10代前半の通学時間が都道府県別に公表されているかを確認する"
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a27",
+      "chapter": 1,
+      "question": "小学生の宿題・学校外学習・地域行事参加・長時間のネット利用・朝食の習慣の地域差は、全国学力・学習状況調査から独立に取れるか",
+      "thesis": "宿題の実行、学校外学習、地域行事への参加、長時間のネット利用、朝食摂取のランキングが連続する区間。いずれも同調査の質問紙回答が出典で、都道府県別公表資料から再取得できるかを確認する。",
+      "pages": [
+        114,
+        123
+      ],
+      "resolution": "rights-hold",
+      "resolutionReason": "国立教育政策研究所の利用条件を未確認のため rights-hold。書籍の出典はいずれも全国学力・学習状況調査(年度は項目ごとに異なる)。国立教育政策研究所が都道府県別の質問紙結果を公表している。設問の文言が年度で変わるため、現行調査で同じ意味の項目があるかを設問ごとに確認する必要がある。既存の朝食欠食割合は成人の健診データで対象が異なる。",
+      "metricKeys": [],
+      "surveyIds": [
+        "academic-achievement-survey"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "文部科学省・国立教育政策研究所",
+          "publicationOrDataset": "全国学力・学習状況調査 都道府県別の質問紙調査結果",
+          "url": "https://www.nier.go.jp/25chousakekkahoukoku/factsheet/prefecture_city.html",
+          "dataYears": [
+            "2025"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "needs-review"
+        }
+      ],
+      "nextAction": "最新年の質問紙結果で5項目に当たる設問を設問ごとに確認し、継続して取れる項目だけ47県値の取得に進む"
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a28",
+      "chapter": 1,
+      "question": "エンゲル係数の地域差は、家計調査の既存指標で確認できるか",
+      "thesis": "消費支出に占める食料費の割合のランキング。既存のエンゲル係数指標で地域差を確認する。",
+      "pages": [
+        124,
+        125
+      ],
+      "resolution": "reuse-existing-metric",
+      "resolutionReason": "同じ家計調査由来のエンゲル係数metricが既にある。調査年と集計単位(都道府県庁所在市)の扱いは既存metricの定義に従う。",
+      "metricKeys": [
+        "engel-coefficient"
+      ],
+      "surveyIds": [
+        "kakei-chousa",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査(品目別・都道府県庁所在市)",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "最新値で地域差を確認し、既存のエンゲル係数ページの解説と重複しない切り口があるか確認する"
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a29",
+      "chapter": 1,
+      "question": "米の購入量の地域差は、家計調査の既存指標で確認できるか",
+      "thesis": "1世帯あたり年間の米の購入量のランキング。既存の米消費量指標で地域差を確認する。",
+      "pages": [
+        126,
+        127
+      ],
+      "resolution": "reuse-existing-metric",
+      "resolutionReason": "家計調査の品目別購入数量による米消費量metricが既にある。",
+      "metricKeys": [
+        "rice-consumption-quantity",
+        "rice-consumption-expenditure"
+      ],
+      "surveyIds": [
+        "kakei-chousa",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査(品目別・都道府県庁所在市)",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "最新値を確認し、米の産地・収穫量指標との掛け合わせ候補を整理する"
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a30",
+      "chapter": 1,
+      "question": "生鮮野菜の購入量(重量)の地域差は、家計調査から独立に取れるか",
+      "thesis": "1世帯あたり年間の生鮮野菜の購入量のランキング。既存は支出額のみで、重量の集計を確認する。",
+      "pages": [
+        128,
+        129
+      ],
+      "resolution": "new-metric",
+      "resolutionReason": "既存の生鮮野菜metricは消費支出額で、書籍の購入量(重量)とは単位と定義が異なる。家計調査の中分類の購入数量があるかを確認する。",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査(品目別・都道府県庁所在市)",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "家計調査の品目分類で生鮮野菜の購入数量が公表されているかを確認し、あれば新規登録を検討する"
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a31",
+      "chapter": 1,
+      "question": "野菜の品目別購入量の地域差は、家計調査の既存指標で確認できるか",
+      "thesis": "キャベツ、たまねぎ、大根、トマト、じゃがいも、にんじん、はくさい、きゅうり、もやし、レタスの購入量ランキングが連続する区間。書籍の偏差値は写さず、品目別の既存指標で地域差と産地の関係を確認する。",
+      "pages": [
+        130,
+        149
+      ],
+      "resolution": "reuse-existing-metric",
+      "resolutionReason": "10品目すべてに家計調査の品目別購入量の既存metricがある。書籍の集計年と最新年は異なる。",
+      "metricKeys": [
+        "cabbage-consumption-quantity",
+        "onion-consumption-quantity",
+        "daikon-consumption-quantity",
+        "tomato-consumption-quantity",
+        "potato-consumption-quantity",
+        "carrot-consumption-quantity",
+        "chinese-cabbage-consumption-quantity",
+        "cucumber-consumption-quantity",
+        "bean-sprouts-consumption-quantity",
+        "lettuce-consumption-quantity"
+      ],
+      "surveyIds": [
+        "kakei-chousa",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査(品目別・都道府県庁所在市)",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "品目ごとの最新値を確認し、作付面積・収穫量指標との掛け合わせで産地近接の仮説を検証できるか整理する"
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a32",
+      "chapter": 1,
+      "question": "果物全体の購入量の地域差は、家計調査から独立に取れるか",
+      "thesis": "1世帯あたり年間の果物の購入量のランキング。既存は個別果物と他の果物のみで、果物全体の集計があるかを確認する。",
+      "pages": [
+        150,
+        151
+      ],
+      "resolution": "new-metric",
+      "resolutionReason": "既存metricに果物全体の購入量は無く、他の果物は残余項目で代用できない。家計調査の中分類に果物の購入数量があるかを確認する。",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査(品目別・都道府県庁所在市)",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "家計調査の品目分類で果物の中分類の購入数量が公表されているかを確認し、あれば新規登録を検討する"
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a33",
+      "chapter": 1,
+      "question": "バナナ・りんご・みかん・すいか・いちごの購入量の地域差は、家計調査の既存指標で確認できるか",
+      "thesis": "果物の品目別購入量ランキングが連続する区間。産地の位置と消費量の関係を、既存の品目別指標で確認する。",
+      "pages": [
+        152,
+        161
+      ],
+      "resolution": "reuse-existing-metric",
+      "resolutionReason": "5品目すべてに家計調査の品目別購入量の既存metricがある。書籍のみかんは紙面の見出しが不鮮明で、既存のmandarin(みかん)に当たると推定している。",
+      "metricKeys": [
+        "banana-consumption-quantity",
+        "apple-consumption-quantity",
+        "mandarin-consumption-quantity",
+        "watermelon-consumption-quantity",
+        "strawberry-consumption-quantity"
+      ],
+      "surveyIds": [
+        "kakei-chousa",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査(品目別・都道府県庁所在市)",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "品目ごとの最新値を確認し、果樹の収穫量指標との掛け合わせ候補を整理する"
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a34",
+      "chapter": 1,
+      "question": "魚介類全体の購入量の地域差は、家計調査から独立に取れるか",
+      "thesis": "1世帯あたり年間の魚介類の購入量のランキング。既存は支出額のみで、重量の集計を確認する。",
+      "pages": [
+        162,
+        163
+      ],
+      "resolution": "new-metric",
+      "resolutionReason": "既存の魚介類metricは消費支出額で、書籍の購入量とは単位と定義が異なる。家計調査の魚介類の購入数量があるかを確認する。",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査(品目別・都道府県庁所在市)",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "家計調査の魚介類の購入数量が公表されているかを確認し、あれば漁獲量指標との掛け合わせを含めて新規登録を検討する"
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a35",
+      "chapter": 1,
+      "question": "サンマ・サバ・タイの購入量の地域差は、家計調査の既存指標で確認できるか",
+      "thesis": "魚種別の購入量ランキングが連続する区間。漁獲や食文化との関係を、品目別の既存指標で確認する。",
+      "pages": [
+        164,
+        169
+      ],
+      "resolution": "reuse-existing-metric",
+      "resolutionReason": "3魚種すべてに家計調査の品目別購入量の既存metricがある。p168-169の見出しは紙面が不鮮明で、周辺の並びからタイと判断した。",
+      "metricKeys": [
+        "saury-consumption-quantity",
+        "mackerel-consumption-quantity",
+        "sea-bream-consumption-quantity"
+      ],
+      "surveyIds": [
+        "kakei-chousa",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査(品目別・都道府県庁所在市)",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "最新値を確認し、魚種別の既存漁獲量指標との掛け合わせ候補を整理する"
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a36",
+      "chapter": 1,
+      "question": "貝類全体の購入量の地域差は、家計調査から独立に取れるか",
+      "thesis": "1世帯あたり年間の貝類の購入量のランキング。既存はあさり・しじみ・他の貝の個別品目のみで、貝類の集計があるかを確認する。",
+      "pages": [
+        170,
+        171
+      ],
+      "resolution": "new-metric",
+      "resolutionReason": "既存metricはあさり・しじみ・他の貝に分かれ、貝類の中分類の集計は無い。個別の合算では品目の抜けが生じるため、家計調査の中分類の有無を確認する。",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査(品目別・都道府県庁所在市)",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "家計調査の品目分類で貝類の中分類の購入数量があるか確認し、あれば新規登録を検討する"
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a37",
+      "chapter": 1,
+      "question": "食塩・味噌・しょう油・砂糖の購入量の地域差は、家計調査の既存指標で確認できるか",
+      "thesis": "基礎調味料の購入量ランキングが連続する区間。味つけの地域差を、品目別の既存指標で確認する。",
+      "pages": [
+        172,
+        179
+      ],
+      "resolution": "reuse-existing-metric",
+      "resolutionReason": "4品目すべてに家計調査の品目別購入量の既存metricがある。p178-179の見出しは紙面が不鮮明で、周辺の並びから砂糖と判断した。",
+      "metricKeys": [
+        "table-salt-consumption-quantity",
+        "miso-consumption-quantity",
+        "soy-sauce-consumption-quantity",
+        "sugar-consumption-quantity"
+      ],
+      "surveyIds": [
+        "kakei-chousa",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査(品目別・都道府県庁所在市)",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "最新値を確認し、食塩摂取量など健康系の既存指標との関係を確認する候補を整理する"
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a38",
+      "chapter": 1,
+      "question": "緑茶・紅茶・コーヒーの購入量の地域差は、家計調査の既存指標で確認できるか",
+      "thesis": "嗜好飲料の品目別購入量ランキングが連続する区間。産地や喫茶文化との関係を、既存の品目別指標で確認する。",
+      "pages": [
+        180,
+        185
+      ],
+      "resolution": "reuse-existing-metric",
+      "resolutionReason": "3品目すべてに家計調査の品目別購入量の既存metricがある。p180-185のうち緑茶とコーヒーは紙面の見出しが不鮮明で、周辺の並びから判断した。",
+      "metricKeys": [
+        "green-tea-consumption-quantity",
+        "black-tea-consumption-quantity",
+        "coffee-consumption-quantity"
+      ],
+      "surveyIds": [
+        "kakei-chousa",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査(品目別・都道府県庁所在市)",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "最新値を確認し、茶の生産量や喫茶店支出の既存指標との組み合わせ候補を整理する"
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a39",
+      "chapter": 1,
+      "question": "炭酸飲料とミネラルウォーターの支出の地域差は、家計調査の既存指標で確認できるか",
+      "thesis": "清涼飲料の支出額ランキング2項目。地域差を既存の支出額指標で確認する。",
+      "pages": [
+        186,
+        189
+      ],
+      "resolution": "reuse-existing-metric",
+      "resolutionReason": "2品目とも家計調査の品目別支出額の既存metricがある。p188-189の見出しは紙面が不鮮明で、ミネラルウォーターと判断した。",
+      "metricKeys": [
+        "carbonated-drink-consumption-expenditure",
+        "mineral-water-consumption-expenditure"
+      ],
+      "surveyIds": [
+        "kakei-chousa",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査(品目別・都道府県庁所在市)",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "最新値を確認し、気温や人口構成指標との掛け合わせの要否を判断する"
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a40",
+      "chapter": 1,
+      "question": "牛乳の購入量の地域差は、家計調査から独立に取れるか",
+      "thesis": "1世帯あたり年間の牛乳の購入量のランキング。既存の乳関連metricは乳飲料や粉乳で、牛乳の購入量があるかを確認する。",
+      "pages": [
+        190,
+        191
+      ],
+      "resolution": "new-metric",
+      "resolutionReason": "既存metricに牛乳は無く、乳飲料・粉乳・脱脂粉乳は別品目で代用できない。家計調査の牛乳の購入数量を確認する。",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査(品目別・都道府県庁所在市)",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "家計調査の品目分類で牛乳の購入数量を確認し、生乳生産量の既存指標との掛け合わせを含めて新規登録を検討する"
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a41",
+      "chapter": 1,
+      "question": "成人あたりの酒類消費量(ビール・焼酎・日本酒・ワイン・ウイスキー)の地域差は、国税庁の公表から独立に取れるか",
+      "thesis": "20歳以上人口あたりの酒類別消費量ランキングが連続する区間。出典は国税庁統計情報で、家計調査ではなく酒類の販売数量を人口で割る定義になっている。",
+      "pages": [
+        192,
+        201
+      ],
+      "resolution": "new-metric",
+      "resolutionReason": "既存の酒類metricは家計調査の世帯購入量で、書籍の国税庁の販売(消費)数量を成人人口で割る定義とは分子の出典も分母も異なる。国税庁が酒類別の都道府県別数量を公表していることを公式ページで確認した。",
+      "metricKeys": [],
+      "surveyIds": [
+        "nta-annual-statistics"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "国税庁",
+          "publicationOrDataset": "国税庁統計年報書および酒のしおり(酒類販売(消費)数量)",
+          "url": "https://www.nta.go.jp/taxes/sake/shiori-gaikyo/shiori/index.htm",
+          "dataYears": [
+            "2023"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "国税庁の酒類販売(消費)数量の都道府県別表の最新年を取得し、成人人口(国勢調査・人口推計)で割る算式と既存の家計調査指標との違いを注記する"
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a42",
+      "chapter": 1,
+      "question": "菓子類の支出額の地域差は、家計調査から独立に取れるか",
+      "thesis": "1世帯あたり年間の菓子類の支出額のランキング。既存は個別の菓子品目のみで、菓子類全体の集計があるかを確認する。",
+      "pages": [
+        202,
+        203
+      ],
+      "resolution": "new-metric",
+      "resolutionReason": "既存metricは和菓子・洋菓子・スナックなど個別品目で、菓子類全体の支出額は無い。個別品目の合算は項目の抜けが生じる。家計調査の中分類の有無を確認する。",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査(品目別・都道府県庁所在市)",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "家計調査の品目分類で菓子類の中分類の支出額を確認し、あれば新規登録を検討する"
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a43",
+      "chapter": 1,
+      "question": "納豆の支出額の地域差は、家計調査の既存指標で確認できるか",
+      "thesis": "1世帯あたり年間の納豆の支出額のランキング。東西の食文化の差を既存の指標で確認する。",
+      "pages": [
+        204,
+        205
+      ],
+      "resolution": "reuse-existing-metric",
+      "resolutionReason": "家計調査の品目別支出額の納豆metricが既にある。",
+      "metricKeys": [
+        "natto-consumption-expenditure"
+      ],
+      "surveyIds": [
+        "kakei-chousa",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査(品目別・都道府県庁所在市)",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "最新値を確認し、大豆関連の既存指標との組み合わせ候補を整理する"
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a44",
+      "chapter": 1,
+      "question": "インスタントラーメンの購入量の地域差は、家計調査の既存指標で確認できるか",
+      "thesis": "1世帯あたり年間のインスタントラーメンの購入量のランキング。既存の品目別指標で地域差を確認する。",
+      "pages": [
+        206,
+        207
+      ],
+      "resolution": "reuse-existing-metric",
+      "resolutionReason": "家計調査の品目別購入量のインスタントラーメンmetricが既にある。",
+      "metricKeys": [
+        "instant-noodles-consumption-quantity"
+      ],
+      "surveyIds": [
+        "kakei-chousa",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査(品目別・都道府県庁所在市)",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "最新値を確認し、外食のラーメン支出など近い既存指標との重複を整理する"
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a45",
+      "chapter": 1,
+      "question": "パンの購入量(重量)の地域差は、家計調査から独立に取れるか",
+      "thesis": "1世帯あたり年間のパンの購入量のランキング。既存は支出額のみで、重量の集計を確認する。",
+      "pages": [
+        208,
+        209
+      ],
+      "resolution": "new-metric",
+      "resolutionReason": "既存のパンmetricは消費支出額で、書籍の購入量とは単位と定義が異なる。家計調査のパンの購入数量があるかを確認する。",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "theme",
+        "blog",
+        "note",
+        "instagram",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査(品目別・都道府県庁所在市)",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "家計調査の品目別購入数量でパンが公表されているかを確認し、あれば新規登録を検討する"
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a46",
+      "chapter": 0,
+      "question": "p210 と p211 に検証すべき論点はあるか",
+      "thesis": "p210 は白紙、p211 は第2章「47都道府県別ランキング」の章扉で論点なし",
+      "pages": [
+        210,
+        211
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "p210 は白紙、p211 は第2章「47都道府県別ランキング」の章扉で論点なし",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "stats47 での展開対象外。ページ範囲の被覆のみを台帳に残し、以後の作業は不要"
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a47",
+      "chapter": 2,
+      "question": "北海道・東北の各県について、県ごとの強み・弱みの全体像は、stats47 の既存ランキングから独立に組み立てられるか",
+      "thesis": "北海道・東北の県別プロフィールと、その県が上位・下位に入る項目の索引が県ごとに見開きで並ぶ区間。書籍の偏差値や順位は使わず、stats47 の県データブックの実在ランキングキーで県別の特徴を再構成できるかを確認する。",
+      "pages": [
+        212,
+        225
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県別ページは第1章のランキング結果を県ごとに並べ替えた索引で、新しい一次資料を持たない。県別の編集は area の県データブックと既存の複数指標で独立に組めるため、県コードに紐づけた掛け合わせ分析として扱う。",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa",
+        "social-life-basic-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "x",
+        "instagram"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会生活統計指標(都道府県の指標)",
+          "url": "https://www.stat.go.jp/data/ssds/index.htm",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2021"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査(品目別・都道府県庁所在市)",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "北海道・東北の各県について県データブックの該当指標が実在しているかを確認し、書籍の県別索引で言及される分野(食・部活・生活時間)が県データブックの節に対応しているか照合する",
+      "areaCodes": [
+        "01000",
+        "02000",
+        "03000",
+        "04000",
+        "05000",
+        "06000",
+        "07000"
+      ]
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a48",
+      "chapter": 2,
+      "question": "関東の各県について、県ごとの強み・弱みの全体像は、stats47 の既存ランキングから独立に組み立てられるか",
+      "thesis": "関東の県別プロフィールと、その県が上位・下位に入る項目の索引が県ごとに見開きで並ぶ区間。書籍の偏差値や順位は使わず、stats47 の県データブックの実在ランキングキーで県別の特徴を再構成できるかを確認する。",
+      "pages": [
+        226,
+        239
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県別ページは第1章のランキング結果を県ごとに並べ替えた索引で、新しい一次資料を持たない。県別の編集は area の県データブックと既存の複数指標で独立に組めるため、県コードに紐づけた掛け合わせ分析として扱う。",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa",
+        "social-life-basic-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "x",
+        "instagram"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会生活統計指標(都道府県の指標)",
+          "url": "https://www.stat.go.jp/data/ssds/index.htm",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2021"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査(品目別・都道府県庁所在市)",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "関東の各県について県データブックの該当指標が実在しているかを確認し、書籍の県別索引で言及される分野(食・部活・生活時間)が県データブックの節に対応しているか照合する",
+      "areaCodes": [
+        "08000",
+        "09000",
+        "10000",
+        "11000",
+        "12000",
+        "13000",
+        "14000"
+      ]
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a49",
+      "chapter": 2,
+      "question": "中部の各県について、県ごとの強み・弱みの全体像は、stats47 の既存ランキングから独立に組み立てられるか",
+      "thesis": "中部の県別プロフィールと、その県が上位・下位に入る項目の索引が県ごとに見開きで並ぶ区間。書籍の偏差値や順位は使わず、stats47 の県データブックの実在ランキングキーで県別の特徴を再構成できるかを確認する。",
+      "pages": [
+        240,
+        257
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県別ページは第1章のランキング結果を県ごとに並べ替えた索引で、新しい一次資料を持たない。県別の編集は area の県データブックと既存の複数指標で独立に組めるため、県コードに紐づけた掛け合わせ分析として扱う。",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa",
+        "social-life-basic-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "x",
+        "instagram"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会生活統計指標(都道府県の指標)",
+          "url": "https://www.stat.go.jp/data/ssds/index.htm",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2021"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査(品目別・都道府県庁所在市)",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "中部の各県について県データブックの該当指標が実在しているかを確認し、書籍の県別索引で言及される分野(食・部活・生活時間)が県データブックの節に対応しているか照合する",
+      "areaCodes": [
+        "15000",
+        "16000",
+        "17000",
+        "18000",
+        "19000",
+        "20000",
+        "21000",
+        "22000",
+        "23000"
+      ]
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a50",
+      "chapter": 2,
+      "question": "近畿の各県について、県ごとの強み・弱みの全体像は、stats47 の既存ランキングから独立に組み立てられるか",
+      "thesis": "近畿の県別プロフィールと、その県が上位・下位に入る項目の索引が県ごとに見開きで並ぶ区間。書籍の偏差値や順位は使わず、stats47 の県データブックの実在ランキングキーで県別の特徴を再構成できるかを確認する。",
+      "pages": [
+        258,
+        271
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県別ページは第1章のランキング結果を県ごとに並べ替えた索引で、新しい一次資料を持たない。県別の編集は area の県データブックと既存の複数指標で独立に組めるため、県コードに紐づけた掛け合わせ分析として扱う。",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa",
+        "social-life-basic-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "x",
+        "instagram"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会生活統計指標(都道府県の指標)",
+          "url": "https://www.stat.go.jp/data/ssds/index.htm",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2021"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査(品目別・都道府県庁所在市)",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "近畿の各県について県データブックの該当指標が実在しているかを確認し、書籍の県別索引で言及される分野(食・部活・生活時間)が県データブックの節に対応しているか照合する",
+      "areaCodes": [
+        "24000",
+        "25000",
+        "26000",
+        "27000",
+        "28000",
+        "29000",
+        "30000"
+      ]
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a51",
+      "chapter": 2,
+      "question": "中国・四国の各県について、県ごとの強み・弱みの全体像は、stats47 の既存ランキングから独立に組み立てられるか",
+      "thesis": "中国・四国の県別プロフィールと、その県が上位・下位に入る項目の索引が県ごとに見開きで並ぶ区間。書籍の偏差値や順位は使わず、stats47 の県データブックの実在ランキングキーで県別の特徴を再構成できるかを確認する。",
+      "pages": [
+        272,
+        289
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県別ページは第1章のランキング結果を県ごとに並べ替えた索引で、新しい一次資料を持たない。県別の編集は area の県データブックと既存の複数指標で独立に組めるため、県コードに紐づけた掛け合わせ分析として扱う。",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa",
+        "social-life-basic-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "x",
+        "instagram"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会生活統計指標(都道府県の指標)",
+          "url": "https://www.stat.go.jp/data/ssds/index.htm",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2021"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査(品目別・都道府県庁所在市)",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "中国・四国の各県について県データブックの該当指標が実在しているかを確認し、書籍の県別索引で言及される分野(食・部活・生活時間)が県データブックの節に対応しているか照合する",
+      "areaCodes": [
+        "31000",
+        "32000",
+        "33000",
+        "34000",
+        "35000",
+        "36000",
+        "37000",
+        "38000",
+        "39000"
+      ]
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a52",
+      "chapter": 2,
+      "question": "九州・沖縄の各県について、県ごとの強み・弱みの全体像は、stats47 の既存ランキングから独立に組み立てられるか",
+      "thesis": "九州・沖縄の県別プロフィールと、その県が上位・下位に入る項目の索引が県ごとに見開きで並ぶ区間。書籍の偏差値や順位は使わず、stats47 の県データブックの実在ランキングキーで県別の特徴を再構成できるかを確認する。",
+      "pages": [
+        290,
+        305
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "県別ページは第1章のランキング結果を県ごとに並べ替えた索引で、新しい一次資料を持たない。県別の編集は area の県データブックと既存の複数指標で独立に組めるため、県コードに紐づけた掛け合わせ分析として扱う。",
+      "metricKeys": [],
+      "surveyIds": [
+        "kakei-chousa",
+        "social-life-basic-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog",
+        "note",
+        "x",
+        "instagram"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会生活統計指標(都道府県の指標)",
+          "url": "https://www.stat.go.jp/data/ssds/index.htm",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2021"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査(品目別・都道府県庁所在市)",
+          "url": "https://www.stat.go.jp/data/kakei/",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "九州・沖縄の各県について県データブックの該当指標が実在しているかを確認し、書籍の県別索引で言及される分野(食・部活・生活時間)が県データブックの節に対応しているか照合する",
+      "areaCodes": [
+        "40000",
+        "41000",
+        "42000",
+        "43000",
+        "44000",
+        "45000",
+        "46000",
+        "47000"
+      ]
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a53",
+      "chapter": 0,
+      "question": "奥付(制作スタッフ)に論点はあるか",
+      "thesis": "奥付・制作スタッフ一覧。刊行情報のみで統計の論点なし",
+      "pages": [
+        306,
+        306
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "奥付・制作スタッフ一覧。刊行情報のみで統計の論点なし",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "stats47 での展開対象外。ページ範囲の被覆のみを台帳に残し、以後の作業は不要"
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a54",
+      "chapter": 0,
+      "question": "p307 の画面に論点はあるか",
+      "thesis": "Kindleアプリのレビュー依頼画面のスキャン(書誌情報の再掲と評価入力の定型UI)で本文ではない",
+      "pages": [
+        307,
+        307
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "Kindleアプリのレビュー依頼画面のスキャン(書誌情報の再掲と評価入力の定型UI)で本文ではない",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "stats47 での展開対象外。ページ範囲の被覆のみを台帳に残し、以後の作業は不要"
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a55",
+      "chapter": 0,
+      "question": "p308-309 に論点はあるか",
+      "thesis": "p308-309 はp307と画像が完全一致する重複スキャン(Kindleレビュー依頼画面)",
+      "pages": [
+        308,
+        309
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "p308-309 はp307と画像が完全一致する重複スキャン(Kindleレビュー依頼画面)",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "stats47 での展開対象外。ページ範囲の被覆のみを台帳に残し、以後の作業は不要"
+    },
+    {
+      "id": "prefecture-ranking-consumption-2020-a56",
+      "chapter": 0,
+      "question": "p310 に論点はあるか",
+      "thesis": "Kindleレビュー依頼画面の別画像(p307-309と同種の定型UIで内容は実質同一)。復元スキャンの最終ページ",
+      "pages": [
+        310,
+        310
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "Kindleレビュー依頼画面の別画像(p307-309と同種の定型UIで内容は実質同一)。復元スキャンの最終ページ",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "stats47 での展開対象外。ページ範囲の被覆のみを台帳に残し、以後の作業は不要"
+    }
+  ]
+}

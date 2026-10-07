@@ -1,0 +1,115 @@
+{
+  "sourceKey": "amusement-shop-density",
+  "edition": "unknown",
+  "reviewedAt": "2026-10-08",
+  "publicOriginalReuse": "forbidden",
+  "analyses": [
+    {
+      "id": "amusement-shop-density-unknown-a01",
+      "chapter": 0,
+      "question": "表紙ページ(題名・著者・シリーズ表記のみ)",
+      "thesis": "書名、行政書士である著者名、シリーズ名だけを載せた表紙で、統計的な論点を含まない。",
+      "pages": [
+        1,
+        1
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "表紙のみで題名・著者・シリーズ表記しかなく、検証できる統計項目がない",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "台帳上の記録のみで、制作や追加調査は不要"
+    },
+    {
+      "id": "amusement-shop-density-unknown-a02",
+      "chapter": 1,
+      "question": "遊技・娯楽系の営業施設(ぱちんこ・麻雀・ゲームセンター等)の人口あたりの立地は、都道府県でどう異なるか？",
+      "thesis": "風営法上の許可を要する営業を、ぱちんこ・麻雀ほか・ゲームセンター・合計の4区分に分けて人口比で並べる都道府県表。許可件数は実際の営業所数と一致しない前提で扱う必要がある。",
+      "pages": [
+        2,
+        5
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "表の原データは全国風俗環境浄化協会の許可件数と各県公表人口の組み合わせで、麻雀ほか・ゲームセンター・合計の都道府県別値を載せる公的一次資料を確認できなかった。警察庁の風俗営業等の現状(令和7年版PDF)は全国値のみで都道府県別表が無い。ぱちんこ区分だけは全日遊連公表(警察庁保安課原典)の営業所数を人口1万人あたりにした既存指標があるが、許可件数と営業所数、集計年、公表主体が書籍と異なり同一系列とは言えない",
+      "metricKeys": [
+        "pachinko-shop-density-per-10k"
+      ],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking"
+      ],
+      "primarySources": [
+        {
+          "organization": "警察庁生活安全局保安課",
+          "publicationOrDataset": "令和7年における風俗営業等の現状と風俗関係事犯等の取締り状況について(全国値のみ・都道府県別表なし)",
+          "url": "https://www.npa.go.jp/publications/statistics/safetylife/fuuzoku.html",
+          "dataYears": [
+            "2025"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "needs-review"
+        }
+      ],
+      "nextAction": "ぱちんこは既存の pachinko-shop-density-per-10k で扱う(書籍の許可件数とは別系列と明記)。麻雀・ゲームセンターは各都道府県警の公開資料に47県分の許可数があるかを調べ、揃う場合のみ new-metric 化する。揃わなければ保留のままにする"
+    },
+    {
+      "id": "amusement-shop-density-unknown-a03",
+      "chapter": 2,
+      "question": "風営法の許可件数を営業所数の代わりに使うとき、実数とのずれはどこから生じるか？",
+      "thesis": "対象となる営業の法的な区分、許可の要否の例外、廃業後も許可証が残る場合、人口・面積の公表時期の違いなど、許可件数ベースの密度指標を読む際の限界を述べた注記部分。",
+      "pages": [
+        6,
+        7
+      ],
+      "resolution": "context-only",
+      "resolutionReason": "表の算出方法と許可件数の限界を述べる注記と著者連絡先で、47県値そのものではない。既存のぱちんこ店舗数指標を紹介する記事で、集計の単位と限界を補足する文脈として使える",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "全日本遊技事業協同組合連合会",
+          "publicationOrDataset": "全国遊技場店舗数及び機械台数(警察庁発表)",
+          "url": "https://www.zennichiyuren.or.jp/material/report/8.html",
+          "dataYears": [
+            "2025"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "needs-review"
+        }
+      ],
+      "existing": {
+        "blogSlugs": []
+      },
+      "nextAction": "pachinko-shop-density-per-10k の解説に、許可件数と営業所数の違いを一文で補足する際の根拠メモとして参照する(書籍の文言は写さない)"
+    },
+    {
+      "id": "amusement-shop-density-unknown-a04",
+      "chapter": 0,
+      "question": "電子書籍ストアのレビュー・著者フォロー画面の取り込み(重複スキャン)",
+      "thesis": "Kindleストア上の書誌・レビュー依頼・著者紹介の表示を撮影した画像で、同一内容が8ページ連続する。統計の論点を含まない。",
+      "pages": [
+        8,
+        15
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "8枚とも画像が完全一致(ハッシュ同一)のストア画面で、文字起こし側でも本文を含まず空白扱い。統計項目も表もなく、重複スキャンでもある",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "台帳上の記録のみで、制作や追加調査は不要"
+    }
+  ]
+}

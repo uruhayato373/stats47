@@ -80,6 +80,18 @@ const PREFECTURE_DEVIATION_ANALYSES_PATH = path.join(
   PROJECT_ROOT,
   'packages/data-configs/src/evidence-inventory/prefecture-deviation/analyses.json'
 );
+// 全ページを analyses.json のページ範囲で解決する単一PDFの資料 (Kindle 画面スキャン 7 冊)。
+// 2026-10-08 まで台帳が無く、重複・出典記述に当たらない本文ページまで既定の「判別不能」へ黙って落ちていた。
+// 再発防止として、台帳の範囲に入らないページがあれば既定値へ落とさず build を止める。
+const FULL_COVERAGE_ANALYSES_SOURCES = new Set([
+  'amusement-shop-density',
+  'average-income-ranking',
+  'capital-city-guide',
+  'gis-business-guide',
+  'money-health-ranking',
+  'prefecture-ranking-consumption',
+  'yabai-kenmin-ranking',
+]);
 // 展開PDF (スキャンした書類 6〜11.pdf) を読み順に並べたdocument id。書籍の物理ページ順と一致する
 // (各文書の最終scanと次文書の先頭scanを画像で照合して確定済み: 2026-09-15)。
 const PREFECTURE_DEVIATION_DOCUMENT_ORDER = [
@@ -537,6 +549,23 @@ async function prefectureDeviationAnalyses() {
   return loadPageRangeAnalyses(PREFECTURE_DEVIATION_ANALYSES_PATH);
 }
 
+async function fullCoverageAnalyses(sourceKey, documents) {
+  if (documents.length !== 1) {
+    throw new Error(`${sourceKey} analyses assume a single PDF, workspace has ${documents.length}`);
+  }
+  const analyses = await loadPageRangeAnalyses(path.join(
+    PROJECT_ROOT,
+    'packages/data-configs/src/evidence-inventory',
+    sourceKey,
+    'analyses.json'
+  ));
+  const lastPage = Math.max(...analyses.map((analysis) => analysis.pages[1]));
+  if (lastPage > documents[0].pages) {
+    throw new Error(`${sourceKey} analyses reach p.${lastPage}, PDF has ${documents[0].pages} pages`);
+  }
+  return analyses;
+}
+
 // 6分冊PDFをまたぐ通し scan ページ番号 (1始まり) を解決する。prefecture-deviation の analyses.json は
 // この通しページで範囲を宣言しており、prefecture-databook/kakei-marketing と違い単一documentではないため、
 // documentごとにリセットされる page.page をそのままでは使えない。各documentの先頭オフセットを
@@ -616,6 +645,9 @@ async function buildPageSource(context) {
   const prefectureDeviationOffsets = context.profile.sourceKey === 'prefecture-deviation'
     ? resolvePrefectureDeviationOffsets(workspace.documents)
     : null;
+  const authoredAnalyses = FULL_COVERAGE_ANALYSES_SOURCES.has(context.profile.sourceKey)
+    ? await fullCoverageAnalyses(context.profile.sourceKey, workspace.documents)
+    : null;
   const seenPageImages = new Set();
   const items = pages.map(({ document, page, text }) => {
     const id = `${context.profile.sourceKey}-${context.profile.edition}-${document.id}-p${String(page.page).padStart(4, '0')}`;
@@ -691,6 +723,32 @@ async function buildPageSource(context) {
           geoScopes: [],
           contentRoles: ['agent', 'skill', 'internal-documentation'],
           internalFiles: adoption[1],
+        },
+        processing,
+      };
+    }
+
+    if (authoredAnalyses) {
+      const analysis = authoredAnalyses.find(
+        (entry) => page.page >= entry.pages[0] && page.page <= entry.pages[1]
+      );
+      if (!analysis) {
+        throw new Error(
+          `${context.profile.sourceKey} p.${page.page} is not covered by authored analyses`
+        );
+      }
+      return {
+        id, source,
+        topicHint: analysis.id,
+        resolution: analysis.resolution,
+        reason: analysis.resolutionReason,
+        ...(analysis.primarySources?.[0] ? { primarySource: analysis.primarySources[0] } : {}),
+        mapping: {
+          metricKeys: analysis.metricKeys ?? [],
+          surveyIds: analysis.surveyIds ?? [],
+          ...(analysis.areaCodes?.length ? { areaCodes: analysis.areaCodes } : {}),
+          geoScopes: analysis.geoScopes ?? [],
+          contentRoles: analysis.contentRoles ?? [],
         },
         processing,
       };

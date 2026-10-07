@@ -45,7 +45,14 @@ export type EvidenceSourceKey =
   | "prefecture-databook"
   | "prefecture-deviation"
   | "claude-skills-guide"
-  | "kakei-marketing";
+  | "kakei-marketing"
+  | "amusement-shop-density"
+  | "average-income-ranking"
+  | "capital-city-guide"
+  | "gis-business-guide"
+  | "money-health-ranking"
+  | "prefecture-ranking-consumption"
+  | "yabai-kenmin-ranking";
 
 export interface ReferenceSourcePolicy {
   sourceKey: EvidenceSourceKey;
