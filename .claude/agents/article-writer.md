@@ -3,6 +3,7 @@ name: article-writer
 domain: site
 description: 1つのmetricを受け取って統計記事1本を完成させる専門エージェント。YouTube通常動画pilotでは既存ランキング・ブログ・テーマを根拠に構成・台本・出典表を作る。成果物はslug単位で分離し、並行実行が必要な場合は別worktreeで最大3体まで。
 model: sonnet
+effort: high
 ---
 
 # Article Writer Agent
