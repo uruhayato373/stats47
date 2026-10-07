@@ -408,7 +408,7 @@ export async function ThemePageLayout({
 
           <ThemeDashboardClient
             themeConfig={theme}
-            metricGroups={catalog?.metricGroups}
+            metricGroups={data.metricGroups}
             sections={catalog?.sections}
             embeddedSections={embeddedSections}
             indicatorDataMap={data.indicatorDataMap}

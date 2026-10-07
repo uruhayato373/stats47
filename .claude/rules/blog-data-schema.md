@@ -181,7 +181,12 @@ source.json に表示用の出典を明示する:
   `rankingRefs: [{ rankingKey, year? }]` を作り、`app/blog/all.json` に逆引き `rankingArticleIndex`
   (rankingKey → slug) を焼く (`article-ranking-refs.ts`)。用途は 2 つ: 指標 → 記事の回遊と、図の年が指標の最新年より
   古い記事の検出 (`build-stale-data-years.mjs`、日次 `blog-remediation-daily.yml`)。同じ指標を複数の年で描いた記事は
-  最も古い年を残す。
+  最も古い年を残す。古い記事は是正キューの `data-refresh` レーンに入り、`refresh-article-data-years.mjs` が
+  `kind: "ranking"` の図 (data JSON が fetch-ranking-data-r2.mjs の形のもの) を最新年で作り直す
+  (source.json に `refreshedFromYear` を残す。判定は `lib/refresh-chart-year.mjs`)。
+- **`yearPinnedReason` (2026-10-07)**: 意図して過去の年を描いた図 (推移の起点の年・手順解説の例・特定の年の出来事) は
+  source.json に `"yearPinnedReason": "<理由>"` を書く。`rankingRefs` はその図の年を持たず (指標 → 記事の回遊には残る)、
+  古い図の一覧と取り直しの対象から外れる。理由の無い固定はしない (空文字は固定として扱わない)。
 
 **検査 (`audit-chart-provenance.mjs`)**: kind ごとに必要な参照があるか、参照先 rankingKey が R2 に実在するか、
 `NEXT_PUBLIC_ESTAT_APP_ID` がある CI では statsDataId が e-Stat API に実在するかを見る（最大3回再試行）。

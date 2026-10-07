@@ -10,6 +10,9 @@
  * 優先度 = 統合スコア + must-fix レーン (ユーザー選択 2026-06-06):
  *   - lane "must-fix":   publish-blocker (blockers>0) を持つ記事 → 最上位レーン。
  *                        レーン内は combinedScore (GSC 流入 × 品質 severity) で序列化。
+ *   - lane "data-refresh": blocker 無しだが図の年が指標の最新年より古い記事 (2026-10-07)。入力は
+ *                        build-stale-data-years.mjs の stale-data-years.json。本文中のランキングカードは最新年を出すので、
+ *                        1 本の記事に 2 つの年が並ぶ。取り直しは refresh-article-data-years.mjs (entry.staleData に対象)。
  *   - lane "opportunity": blocker 無しだが CTR 改善余地 (expectedLift>0) がある記事 → 次レーン。
  *   - clean (blocker 無し・改善余地無し) はキューに入れない。
  *
@@ -50,6 +53,7 @@ const hasFlag = (flag) => args.includes(flag);
 
 const QUEUE_PATH = path.join(PROJECT_ROOT, `${datasetDir("blog.operations")}/remediation-queue.json`);
 const HISTORY_PATH = path.join(PROJECT_ROOT, `${datasetDir("blog.operations")}/auto-brushup-history.json`);
+const STALE_YEARS_PATH = path.join(PROJECT_ROOT, `${datasetDir("blog.operations")}/stale-data-years.json`);
 
 // CTR 改善余地スコア (select-brushup-candidates.mjs と同じ Backlinko 2023 業界平均 CTR)
 const INDUSTRY_AVG_CTR = {
@@ -125,11 +129,20 @@ if (nextN) {
 
 // ── build モード ─────────────────────────────────────────────────────────
 function summarize(queue) {
-  const s = { total: queue.length, pending: 0, inProgress: 0, done: 0, mustFixPending: 0, opportunityPending: 0 };
+  const s = {
+    total: queue.length,
+    pending: 0,
+    inProgress: 0,
+    done: 0,
+    mustFixPending: 0,
+    dataRefreshPending: 0,
+    opportunityPending: 0,
+  };
   for (const e of queue) {
     if (e.status === "pending") {
       s.pending++;
       if (e.lane === "must-fix") s.mustFixPending++;
+      else if (e.lane === "data-refresh") s.dataRefreshPending++;
       else s.opportunityPending++;
     } else if (e.status === "in-progress") s.inProgress++;
     else if (e.status === "done") s.done++;
@@ -227,6 +240,16 @@ if (fs.existsSync(wpPath)) {
   }
 }
 
+// 3.6 図の年が古い記事 (build-stale-data-years.mjs の出力)。無ければ data-refresh レーンは空のまま。
+const staleBySlug = new Map();
+if (fs.existsSync(STALE_YEARS_PATH)) {
+  try {
+    for (const s of JSON.parse(fs.readFileSync(STALE_YEARS_PATH, "utf8")).stale || []) staleBySlug.set(s.slug, s.stale);
+  } catch {
+    /* 壊れていても床ループは動かす */
+  }
+}
+
 // 4. 全 published 記事を走査して raw entry を作る
 const slugs = new Set([...auditBySlug.keys(), ...gscBySlug.keys()]);
 const raw = [];
@@ -236,12 +259,18 @@ for (const slug of slugs) {
   const blockers = a ? a.blockers : 0;
   const warnings = a ? a.warnings : 0;
   if (!a) continue; // audit に無い記事 (未公開等) は対象外
-  const flags = (a.flags || []).map((f) => `${f[0]}: ${f[1]}`);
+  const staleData = staleBySlug.get(slug) || [];
+  const flags = [
+    ...(a.flags || []).map((f) => `${f[0]}: ${f[1]}`),
+    ...staleData.map((s) => `data-refresh: 図の年が古い (${s.rankingKey} ${s.articleYear} → ${s.latestYear})`),
+  ];
   const severity = blockers * 3 + warnings; // 品質 severity (生)
-  const lane = blockers > 0 ? "must-fix" : g.expectedLift > 0 ? "opportunity" : "clean";
+  const lane =
+    blockers > 0 ? "must-fix" : staleData.length > 0 ? "data-refresh" : g.expectedLift > 0 ? "opportunity" : "clean";
   raw.push({
     slug,
     lane,
+    staleData,
     gsc: g,
     quality: {
       blockers,
@@ -267,7 +296,7 @@ for (const r of raw) {
 }
 
 // 6. レーン順 (must-fix → opportunity) + レーン内 combinedScore 降順でソート
-const LANE_RANK = { "must-fix": 0, opportunity: 1, clean: 2 };
+const LANE_RANK = { "must-fix": 0, "data-refresh": 1, opportunity: 2, clean: 3 };
 raw.sort((x, y) => {
   if (LANE_RANK[x.lane] !== LANE_RANK[y.lane]) return LANE_RANK[x.lane] - LANE_RANK[y.lane];
   if (y.combinedScore !== x.combinedScore) return y.combinedScore - x.combinedScore;
@@ -298,8 +327,9 @@ for (const r of raw) {
       in_progress_at = old.in_progress_at || null;
       wave_id = old.wave_id || null;
     } else if (old.status === "done") {
-      // 是正済み。audit が今 blocker 0 なら done 維持、まだ blocker があれば再 pending (是正が不十分/退行)
-      if (r.quality.blockers === 0) {
+      // 是正済み。audit が今 blocker 0 なら done 維持、まだ blocker があれば再 pending (是正が不十分/退行)。
+      // 是正のあとで新しい年が出た記事も再 pending にする (図の年が古いまま done に残さない)
+      if (r.quality.blockers === 0 && r.staleData.length === 0) {
         status = "done";
         wave_id = old.wave_id || null;
         remediated_at = old.remediated_at || null;
@@ -308,7 +338,12 @@ for (const r of raw) {
         wave_id = old.wave_id || null; // 過去 wave は履歴として残す
       }
     }
-  } else if (r.lastBrushup && new Date(r.lastBrushup.date).getTime() >= dedupCutoff && r.quality.blockers === 0) {
+  } else if (
+    r.lastBrushup &&
+    new Date(r.lastBrushup.date).getTime() >= dedupCutoff &&
+    r.quality.blockers === 0 &&
+    r.staleData.length === 0
+  ) {
     // 直近 brushup 済 + 今 blocker 無し → done としてシード
     status = "done";
     wave_id = r.lastBrushup.wave_id || null;
@@ -323,6 +358,7 @@ for (const r of raw) {
     combinedScore: r.combinedScore,
     gsc: r.gsc,
     quality: r.quality,
+    ...(r.staleData.length > 0 ? { staleData: r.staleData } : {}),
     wave_id,
     remediated_at,
     in_progress_at,
@@ -348,7 +384,7 @@ const result = {
   generatedAt: new Date().toISOString(),
   gscWeek: week || null,
   auditGeneratedAt: audit.generatedAt || null,
-  scoring: "combined = 0.6*norm(GSC expectedLift) + 0.4*norm(blockers*3+warnings); lane: must-fix > opportunity",
+  scoring: "combined = 0.6*norm(GSC expectedLift) + 0.4*norm(blockers*3+warnings); lane: must-fix > data-refresh > opportunity",
   reviewTier: `GSC impressions 上位 ${OPUS_REVIEW_TOP_N} 件 = opus critic (tier2), 他 = sonnet (tier1)`,
   summary: summarize(queue),
   queue,
@@ -359,11 +395,13 @@ saveQueue(result);
 const s = result.summary;
 process.stderr.write(
   `\n是正キュー更新: ${QUEUE_PATH}\n` +
-    `  pending ${s.pending} (must-fix ${s.mustFixPending} / opportunity ${s.opportunityPending}) / in-progress ${s.inProgress} / done ${s.done}\n` +
+    `  pending ${s.pending} (must-fix ${s.mustFixPending} / data-refresh ${s.dataRefreshPending} / opportunity ${s.opportunityPending}) / in-progress ${s.inProgress} / done ${s.done}\n` +
     `  GSC week: ${week || "なし"} / audit: ${audit.generatedAt?.slice(0, 10) || "?"}\n\n次の 8 件 (pending 上位):\n`,
 );
 for (const e of queue.filter((e) => e.status === "pending").slice(0, 8)) {
-  const flag = e.quality.flags.filter((f) => f.startsWith("blocker")).slice(0, 2).join("; ") || "(blocker なし)";
+  const flag =
+    e.quality.flags.filter((f) => f.startsWith("blocker") || f.startsWith("data-refresh")).slice(0, 2).join("; ") ||
+    "(blocker なし)";
   process.stderr.write(
     `  #${e.priority} [${e.lane}] ${e.slug} | lift ${e.gsc.expectedLift} imp ${e.gsc.impressions} | B${e.quality.blockers}/W${e.quality.warnings} | ${flag}\n`,
   );
