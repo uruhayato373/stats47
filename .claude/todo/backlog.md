@@ -379,9 +379,16 @@ updated: 2026-10-06
 
 - **事象 (2026-10-07、engel-coefficient-vs-prefectural-income の writer が報告)**:
   1. `information-communication-coefficient` の note に「全国的に上昇傾向」とあるが、writer の実測では R2 の 47 県の単純平均が 2020 年 5.40% から 2024 年 4.18% へ下がっている (note の文言は config で確認、R2 の推移は writer の実測で未再確認)
-  2. 「エンゲル係数」の値が 2 系統ある。`engel-coefficient` (yearFormat calendar) と、姉妹記事 engel-coefficient-prefecture-ranking が使う `food-expenditure-ratio-multi-person-households` (タイトル「食料費割合」、yearFormat fiscal) で、2024 年の兵庫県が 33.4% と 31.8% に分かれる
+  2. 「エンゲル係数」の値が 2 系統ある。`engel-coefficient` (yearFormat calendar) と、姉妹記事 engel-coefficient-prefecture-ranking が使う `food-expenditure-ratio-multi-person-households` (タイトル「食料費割合」、yearFormat fiscal) で、2024 年の兵庫県が 33.4% と 31.8% に分かれる。critic の確認では 17 県すべてで 1.4〜2.3 ポイントの系統差があり、47 県の単純平均も 29.5% と 27.8% で違う。総務省の公表値と照合し、どちらがどの定義 (分母・世帯の範囲) かを確かめる
 - **次**: 1 は R2 の推移を確かめて note を直す。2 は 2 指標の分母・対象世帯・年の扱いの違いを config の description/note に書き、記事がどちらを使うかを読者に示せるようにする。家計調査系の yearFormat の不揃いは別カード (家計調査の年の表記を直すカード) と合わせて直す。
 - **完了条件**: 1 の note が R2 の推移と合い、2 の 2 指標の違いが定義シートで読める。
+
+### [BLOG-SCATTER-LABELS-01] ブログの散布図に、本文で名指しする県の名前を出せるようにする
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npx vitest run --root packages/svg-builder] [起票:2026-10-07] [領域:サイト]
+
+- **事象**: `generateScatterSvg` は全点を同じ色の点で描き、県名を出せない。本文で「京都府は右上、三重県は左下」のように名指ししても、読者は図のどの点かを見分けられない。2026-10-07 の書き直しで unhealthy-period-gender-prefecture-gap の writer と engel-coefficient-vs-prefectural-income の critic が別々に報告し、どちらも本文に座標を書いて代用した。
+- **次**: data JSON に名指しする県 (例: `labelAreas: ["26000", "24000"]`) を書けるようにし、その点だけに県名を添える。点の重なりで読めなくならない配置を `lintScatterQuality` の検査と合わせて決める (散布図は 720×720・単色の規格がある)。
+- **完了条件**: 指定した県だけに名前が出ることと、指定が無い図の出力が変わらないことを svg-builder のテストで固定している。
 
 ### [BLOG-REVISE-PATTERNS-01] 図の年の書き直しで critic が繰り返し REVISE にした型を、writer の規約か gate に入れる
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-07] [領域:サイト]
