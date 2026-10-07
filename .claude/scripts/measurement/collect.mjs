@@ -9,6 +9,7 @@ import { sourceFor, scopedState, failureCode, selectSessionBundle } from './sour
 import { readVault, writeVault } from './vault.mjs';
 import { collectAfbOutcomes } from './afb-outcomes.mjs';
 import { kdpMonthlyVaultKey } from './kdp-monthly-reports.mjs';
+import { kdpMonthlyObservations } from '../../../packages/product-factory/src/sales/ledger-core.mjs';
 import { authenticationPause, rejectedAuthentication } from './auth-recovery.mjs';
 import { acceptedNoteGap, noteInventoryAvailable } from './note-inventory.mjs';
 import { AFFILIATE_ASP } from '../../../config/paths.mjs';
@@ -204,9 +205,16 @@ try {
           paidOrders: daily.records.filter(r => r.kind === 'processed-orders').reduce((sum, r) => sum + (r.paid ?? 0), 0) }
         : null;
       result.quality = { monthlyPeriod: monthly.period.month, monthlyRows: monthly.coverage.includedRows, monthlyComplete: true, revenue: dailyRevenue };
-      if (!local) await writeVault(kdpMonthlyVaultKey(monthly.period.month), {
-        schemaVersion: 1, source: 'kdp', observedAt: now, report: monthly, workbook: files[monthlyPath],
-      });
+      if (!local) {
+        const vaultKey = kdpMonthlyVaultKey(monthly.period.month);
+        await writeVault(vaultKey, {
+          schemaVersion: 1, source: 'kdp', observedAt: now, report: monthly, workbook: files[monthlyPath],
+        });
+        // 販売台帳の候補。書籍ごとの集計値と保管庫キー・内容ハッシュだけを公開の結果へ出し、生の明細は保管庫に残す。
+        // 書き込みは contents: write を持つ record job が develop の台帳へ重複なしで行う (summarize.mjs)。
+        result.quality.salesLedger = { month: monthly.period.month, vaultKey,
+          ...kdpMonthlyObservations(monthly, { vaultKey, recordedAt: now }) };
+      }
     }
   }
   const evidence = { schemaVersion: 1, source: name, observedAt: now, files, logs };

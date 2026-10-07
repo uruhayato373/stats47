@@ -4,6 +4,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 import { summarizeSalesLedger, validateSalesLedger } from "./ledger";
+import { mergeSalesObservations, salesObservationId } from "./ledger-core.mjs";
 import { COCONALA_LISTINGS, KDP_LISTINGS } from "../../../../config/paths.mjs";
 
 import type { SalesChannel, SalesLedger, SalesObservation } from "./types";
@@ -83,10 +84,9 @@ function record(): void {
   assertPublishedProduct(channel, productId);
   const periodStart = required("--period-start");
   const periodEnd = required("--period-end");
-  const fingerprint = [channel, productId, periodStart, periodEnd, evidence.sha256].join(":");
   const kenpRead = nonNegativeInteger("--kenp", true);
   const observation: SalesObservation = {
-    id: crypto.createHash("sha256").update(fingerprint).digest("hex").slice(0, 20),
+    id: salesObservationId(channel, productId, periodStart, periodEnd, evidence.sha256),
     channel,
     productId,
     periodStart,
@@ -101,14 +101,12 @@ function record(): void {
     recordedAt: new Date().toISOString(),
   };
 
-  const current = readLedger();
-  if (current.observations.some((row) => row.id === observation.id)) {
-    throw new Error(`duplicate observation: ${observation.id}`);
+  // CI の KDP 月次自動記録と同じ判定。同じ商品・期間の行があれば二重に数えない
+  const { ledger: next, added, skipped, conflicts } = mergeSalesObservations(readLedger(), [observation]);
+  const existing = [...skipped, ...conflicts][0];
+  if (added.length === 0 && existing) {
+    throw new Error(`already recorded for ${productId} ${periodStart}..${periodEnd}: ${existing.existingId}`);
   }
-  const next = validateSalesLedger({
-    schemaVersion: 1,
-    observations: [...current.observations, observation],
-  });
   writeLedger(next);
   console.log(`sales ledger: recorded ${observation.id}`);
 }
