@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const roomUtilizationRate: MetricConfig = {
   "key": "room-utilization-rate",
   "title": "客室稼働率",
+  "description": "宿泊旅行統計調査の客室稼働率（利用客室数 ÷ 総客室数）で、従業者数10人以上の宿泊施設の値。",
   "unit": "％",
   "category": "tourism",
   "source": {

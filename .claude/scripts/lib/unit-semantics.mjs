@@ -128,6 +128,9 @@ const BASE_UNITS = [
   ["者", "count"],
   ["基", "count"],
   ["束", "count"],
+  // 体格指数 BMI の単位。kg と m2 を割った量なので質量・面積とは換算しない。
+  // 国民健康・栄養調査の年齢調整BMI (bmi-male-20to69-age-adjusted / bmi-female-40to69-age-adjusted)。NFKC後は kg/m2。
+  ["kg/m2", "body-mass-index"],
   ["g", "mass"],
   ["kg", "mass"],
   ["t", "mass"],
@@ -154,6 +157,9 @@ const BASE_UNITS = [
   // NFKC は「℃」を「°C」(2 文字) に分解する。正規化後の形で持つ
   // (元の 1 文字で書くとカタログ側が一致しない。2026-08-12 にテストで検出)
   ["°C", "temperature"],
+  // 国民健康・栄養調査の BMI 平均値 (bmi-*-age-adjusted)。NFKC 後は kg/m2。
+  // 体重 ÷ 身長² の指標で、質量・面積のどちらとも換算しない。
+  ["kg/m2", "bmi"],
 ];
 
 /** 割合を表す単位 (相互に換算しない — ‰ と ％ は 10 倍違うが混同事故を避け別次元にする)。 */

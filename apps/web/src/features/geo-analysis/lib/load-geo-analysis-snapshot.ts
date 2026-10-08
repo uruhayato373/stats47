@@ -2,7 +2,13 @@ import 'server-only';
 
 import { PREFECTURE_AREA_CODE_RE } from '@stats47/area';
 import { SNOW_DESIGNATION_SOURCE } from '@stats47/data-configs/theme-catalog';
-import { FLOOD_ARCHIVES, parseGeoLandslideSnapshot, type GeoAnalysisEvidenceManifest } from '@stats47/gis';
+import {
+  FLOOD_ARCHIVES,
+  LOW_ELEVATION_DATA_VERSION,
+  LOW_ELEVATION_PRIMARY_METRIC_KEY,
+  parseGeoLandslideSnapshot,
+  type GeoAnalysisEvidenceManifest,
+} from '@stats47/gis';
 import { fetchFromR2AsJson } from '@stats47/r2-storage/server';
 
 import {
@@ -158,6 +164,7 @@ export function parseGeoAnalysisSnapshot(
     'population-flood-risk': 'floodExposureShare2050',
     'population-station-access': 'stationAccessShare2050',
     'population-public-facility-access': 'administrativeWithin1000mShare2020',
+    'population-low-elevation': LOW_ELEVATION_PRIMARY_METRIC_KEY,
   };
   if (value.primaryMetricKey !== primaryMetricKeys[expectedSlug]) return null;
   // 旧94件は河川区分10が欠落。manifestを使わない比較・area/themeにも配信しない。
@@ -169,6 +176,7 @@ export function parseGeoAnalysisSnapshot(
     return null;
 
   if (expectedSlug === 'population-snow-designation' && value.dataVersion !== SNOW_DESIGNATION_SOURCE.dataVersion) return null;
+  if (expectedSlug === 'population-low-elevation' && value.dataVersion !== LOW_ELEVATION_DATA_VERSION) return null;
   const snapshot = value as unknown as GeoAnalysisSnapshot;
   if (
     expectedSlug === 'population-public-facility-access' &&

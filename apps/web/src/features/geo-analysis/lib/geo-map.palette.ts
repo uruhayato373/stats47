@@ -71,6 +71,8 @@ export const GEO_MAP_COLORS = {
   },
   /** 人口レイヤーの 5 段階 (0 / <100 / <1000 / <5000 / それ以上) */
   populationLayerScale: ['#e2e8f0', '#c6dbef', '#6baed6', '#2171b5', '#08306b'],
+  /** 標高の区分 (index = 標高不明 / 0m以下 / 0m超5m以下 / 5m超10m以下 / 10m超) */
+  lowElevationBands: ['#ffffff', '#1e3a8a', '#2563eb', '#7dd3fc', '#e2e8f0'],
   /** 公共施設までの距離帯 (500m 以内 → 5km 超) */
   publicFacilityBands: ['#0f766e', '#0284c7', '#d97706', '#c2410c', '#7f1d1d'],
   /** カードプレビュー SVG */

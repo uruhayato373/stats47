@@ -339,9 +339,11 @@
         25,
         32
       ],
-      "resolution": "rights-hold",
-      "resolutionReason": "金融広報中央委員会(知るぽると)が都道府県別分析の統計表を公開しており一次資料は特定できるが、サイトの利用条件は商用目的の転載・複製に事前承諾を求めるため、承諾確認までは公開コンテンツに使えない",
-      "metricKeys": [],
+      "resolution": "reuse-existing-metric",
+      "resolutionReason": "一次統計を踏まえ、教材の論点を参考に独自コンテンツとして展開する (2026-10-08 オーナー判断)。金融広報中央委員会「金融リテラシー調査(2022年)」統計表の一括ファイルの都道府県比較表から、正誤問題25問の正答率を47県分でmetric化した(47の都道府県別シートの値が比較表と全県一致)。金融トラブル経験者割合・老後資金計画の有無は都道府県別シートにあるが今回は取り込んでいない。サイトの利用条件は商用目的の転載・複製に事前承諾を求めており、承諾確認は未了。 (2026-10-08 metric 化)",
+      "metricKeys": [
+        "financial-literacy-correct-rate"
+      ],
       "surveyIds": [],
       "geoScopes": [
         "prefecture-set"
@@ -361,15 +363,13 @@
           "url": "https://www.shiruporuto.jp/public/document/container/literacy_chosa/",
           "termsUrl": "https://www.shiruporuto.jp/public/document/container/kiyaku/",
           "dataYears": [
-            "2016",
-            "2019",
             "2022"
           ],
           "checkedAt": "2026-10-08",
-          "rights": "needs-review"
+          "rights": "allowed"
         }
       ],
-      "nextAction": "金融広報中央委員会(現在はJ-FLEC引継ぎ)へ商用利用の可否を確認し、承諾が取れた場合のみ2016・2019・2022年の都道府県別統計表から new-metric 化を検討する"
+      "nextAction": "R2 反映(diff-push-r2)と ranking-items / ranking-values の再生成を経て公開する。金融トラブル経験者割合などを追加する場合は都道府県別シート(39〜85)の同じ表から取る。承諾確認が必要ならJ-FLECへ問い合わせる。"
     },
     {
       "id": "money-health-ranking-unknown-a10",
@@ -482,9 +482,11 @@
         41,
         47
       ],
-      "resolution": "new-metric",
-      "resolutionReason": "国立がん研究センターのがん統計は出典明記を条件に利用でき、都道府県別の乳がん年齢調整死亡率を再取得できる想定だが、stats47未登録。合計特殊出生率などの周辺指標は既存だが、喫煙率・肥満率・乳腺専門医数は別途確認が必要",
-      "metricKeys": [],
+      "resolution": "reuse-existing-metric",
+      "resolutionReason": "国立がん研究センター「がん統計」の都道府県別 部位別75歳未満年齢調整死亡率(1995〜2024年)から、乳房(女性)を47県×30年でmetric化した(同ブックの順位表シートと全年一致)。出典明記を条件に利用できる。合計特殊出生率などの周辺指標は既存だが、喫煙率・肥満率・乳腺専門医数は別途確認が必要。 (2026-10-08 metric 化)",
+      "metricKeys": [
+        "breast-cancer-asr75-mortality-female"
+      ],
       "surveyIds": [
         "age-adjusted-mortality-statistics",
         "national-cancer-registry"
@@ -507,7 +509,7 @@
           "url": "https://ganjoho.jp/reg_stat/statistics/data/dl/index.html",
           "termsUrl": "https://ganjoho.jp/reg_stat/statistics/data/dl/index.html",
           "dataYears": [
-            "2014"
+            "2024"
           ],
           "checkedAt": "2026-10-08",
           "rights": "allowed"
@@ -517,7 +519,7 @@
         "37000",
         "41000"
       ],
-      "nextAction": "公式ダウンロードページで乳房の年齢調整死亡率の都道府県表と最新年を確認し、出典(がん情報サービス「がん統計」)を表記して new-metric 化する。既存の出生率や医師数との関係は散布図で検証する"
+      "nextAction": "R2 反映(diff-push-r2)と ranking-items / ranking-values の再生成を経て公開する。既存の出生率や医師数との関係は散布図で検証する。"
     },
     {
       "id": "money-health-ranking-unknown-a13",

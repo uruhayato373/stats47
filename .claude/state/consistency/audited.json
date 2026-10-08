@@ -1,8 +1,7 @@
 {
-  "hash": "d8899ef631222b8a9cb8cf94e06518cdd3f119a1ce5b57f14d9c638b9bb3c21b",
-  "audited_at": "2026-10-07T22:22:42",
+  "hash": "2bc768a01fd92128804d3d9274c7838da97fa1c50c983670ef4941ab2b15a9c6",
+  "audited_at": "2026-10-08T06:02:52",
   "files": [
-    ".claude/scripts/source-vault/__tests__/source-inventory.test.mjs",
-    ".claude/scripts/source-vault/source-inventory.mjs"
+    ".claude/scripts/blog/data/display-sources-backfill.json"
   ]
 }

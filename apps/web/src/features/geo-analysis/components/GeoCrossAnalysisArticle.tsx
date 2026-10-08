@@ -31,6 +31,7 @@ import { loadGeoAnalysisBundle } from '../lib/load-geo-analysis-snapshot';
 import { GeoAnalysisTracker } from './GeoAnalysisTracker';
 import { GeoContentPublicationSection } from './GeoContentPublicationSection';
 import { GeoLandslideSummary } from './GeoLandslideSummary';
+import { GeoLowElevationAttribution } from './GeoLowElevationAttribution';
 import { GeoPublicFacilitySummary } from './GeoPublicFacilitySummary';
 import { GeoSnowDesignationSummary } from './GeoSnowDesignationSummary';
 import { GeoSpatialEvidenceExplorer } from './GeoSpatialEvidenceExplorer';
@@ -45,6 +46,10 @@ const inputCountLabels: Record<string, string> = {
   floodZipFiles: '洪水データファイル',
   floodFeatures: '洪水ポリゴン',
   matchedFloodFeatures: '人口メッシュに一致した洪水ポリゴン',
+  elevationMeshes: '標高の3次メッシュ',
+  elevationZipFiles: '標高データファイル',
+  populationMeshesWithoutElevationRow: '標高の行がない人口メッシュ',
+  elevationUnknownMeshesAmongPopulated: '標高不明の人口メッシュ',
 };
 
 interface Props {
@@ -300,6 +305,9 @@ export async function GeoCrossAnalysisArticle({
             </li>
           ))}
         </ul>
+        {slug === 'population-low-elevation' ? (
+          <GeoLowElevationAttribution manifest={evidenceManifest} />
+        ) : null}
         <p className="mt-3 text-xs leading-relaxed text-muted-foreground">
           上記の国土数値情報をもとにstats47が空間演算・集計・表示用加工を行いました（生成日:{' '}
           {generatedDate}）。
@@ -311,7 +319,9 @@ export async function GeoCrossAnalysisArticle({
             ? '指定区域と人口の原典・検証記録は各県の検算データで確認できます。上記の生成日は取得日ではありません。'
             : slug === 'population-public-facility-access'
               ? '施設原典の取得日・人口原典の検証記録は各県の検算データで確認できます。上記の生成日は取得日ではありません。'
-              : '原典の初回取得日時は旧パイプラインで未記録です。上記の生成日は取得日ではありません。'}
+              : slug === 'population-low-elevation'
+                ? '原典の取得日は上の「原典表示」に記載しています。上記の生成日は取得日ではありません。'
+                : '原典の初回取得日時は旧パイプラインで未記録です。上記の生成日は取得日ではありません。'}
           対象版・入力ファイルのSHA-256・途中データは「検算」とデータ導線で確認できます。
         </p>
       </SurfaceSection>

@@ -12,6 +12,7 @@ import { BarChart3 } from "lucide-react";
 import { RailCard, RailNavRow } from "@/components/surface";
 
 import { getCategoryKeysForBlogTagKeys } from "@/config/category-blog-tag-keys";
+import { KNOWN_RANKING_KEYS } from "@/config/known-ranking-keys";
 
 interface RelatedRankingsSectionProps {
   tagKeys: string[];
@@ -27,13 +28,17 @@ export async function RelatedRankingsSection({
   rankingKeys = [],
   compact = false,
 }: RelatedRankingsSectionProps) {
-  if (tagKeys.length === 0 && rankingKeys.length === 0) return null;
+  // 公開中の都道府県ランキングだけを出す。記事は市区町村専用・非公開の指標も rankingRefs に持ち、
+  // R2 に古い item が残っているとそれを読めてしまい、410 のページへのリンクになる
+  // (2026-10-08 に international-cooperation-volunteer-map で実測。RANKING-ACTIVE-WITHOUT-VALUES-01)
+  const publishedKeys = rankingKeys.filter((key) => KNOWN_RANKING_KEYS.has(key));
+  if (tagKeys.length === 0 && publishedKeys.length === 0) return null;
 
   // 記事が実際に使う指標を先に出す。タグ → カテゴリ経由は記事の主題と別の指標が混ざる
   // (metric の tags は空で、タグからはカテゴリの代表ランキングしか引けない)
   const [ownResults, result] = await Promise.all([
     Promise.all(
-      rankingKeys.slice(0, MAX_RANKINGS).map((key) => readRankingItemByKeyAndAreaTypeFromR2(key, "prefecture")),
+      publishedKeys.slice(0, MAX_RANKINGS).map((key) => readRankingItemByKeyAndAreaTypeFromR2(key, "prefecture")),
     ),
     tagKeys.length > 0
       ? readRelatedRankingItemsByTagKeysFromR2(tagKeys, getCategoryKeysForBlogTagKeys(tagKeys))
@@ -46,7 +51,7 @@ export async function RelatedRankingsSection({
   const rankings: { rankingKey: string; title: string }[] = [];
 
   for (const item of [...ownItems, ...tagItems]) {
-    if (!seen.has(item.rankingKey) && rankings.length < MAX_RANKINGS) {
+    if (!seen.has(item.rankingKey) && KNOWN_RANKING_KEYS.has(item.rankingKey) && rankings.length < MAX_RANKINGS) {
       seen.add(item.rankingKey);
       rankings.push({
         rankingKey: item.rankingKey,

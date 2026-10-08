@@ -20,6 +20,8 @@ interface FaqSectionProps {
   subtitle?: string;
   sources?: FaqSource[];
   renderAnswer?: (answer: string, item: FaqItem) => ReactNode;
+  /** 見出しの階層。ページ直下は h2、テーマの章の中に置くときは h3 */
+  headingLevel?: 2 | 3;
 }
 
 /** 複数の質問を同じ密度・操作契約で表示するFAQ専用セクション。 */
@@ -29,15 +31,17 @@ export function FaqSection({
   subtitle,
   sources,
   renderAnswer,
+  headingLevel = 2,
 }: FaqSectionProps) {
   if (items.length === 0) return null;
+  const Heading = headingLevel === 3 ? "h3" : "h2";
 
   return (
     <SurfaceSection aria-label={title} className="py-2">
       <header className="pb-2">
-        <h2 className="text-sm font-semibold leading-5 text-foreground">
+        <Heading className="text-sm font-semibold leading-5 text-foreground">
           {title}
-        </h2>
+        </Heading>
         {subtitle ? (
           <p className="mt-0.5 text-sm leading-relaxed text-muted-foreground">
             {subtitle}

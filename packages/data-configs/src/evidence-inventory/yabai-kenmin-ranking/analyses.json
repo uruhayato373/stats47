@@ -249,13 +249,18 @@
         39
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "食塩摂取量(2024年・国民健康・栄養調査)と高血圧性疾患・糖尿病の死亡率・受療率は既存指標があり、組み合わせで検証できる。BMI(第66表)・野菜摂取量(第67表)・男性喫煙者割合(第70表)は同じ報告書に都道府県別年齢調整値があるが未登録で、飲酒の県別値は同報告書の確認範囲に無い",
+      "resolutionReason": "食塩摂取量(2024年・国民健康・栄養調査)と高血圧性疾患・糖尿病の死亡率・受療率は既存指標があり、組み合わせで検証できる。BMI(第66表)・野菜摂取量(第67表)・男性喫煙者割合(第70表)は同じ報告書に都道府県別年齢調整値があるが未登録で、飲酒の県別値は同報告書の確認範囲に無い。BMI(第66表)・男性喫煙者割合(第70表)はbmi-male-20to69-age-adjusted・bmi-female-40to69-age-adjusted・smoking-rate-male-age-adjustedとして登録し、野菜摂取量(第67表)は既存のvegetable-intake-male/female-age-adjustedに接続した(2026-10-08 metric 化)",
       "metricKeys": [
         "salt-intake-male-age-adjusted",
         "salt-intake-female-age-adjusted",
         "deaths-hypertensive-diseases-per-100k",
         "deaths-diabetes-per-100k",
-        "treatment-rate-diabetes-outpatient"
+        "treatment-rate-diabetes-outpatient",
+        "bmi-male-20to69-age-adjusted",
+        "bmi-female-40to69-age-adjusted",
+        "smoking-rate-male-age-adjusted",
+        "vegetable-intake-male-age-adjusted",
+        "vegetable-intake-female-age-adjusted"
       ],
       "surveyIds": [
         "national-health-nutrition-survey",
@@ -284,7 +289,7 @@
           "rights": "allowed"
         }
       ],
-      "nextAction": "BMI・男性喫煙者割合・野菜摂取量を new-metric として登録する案を data-ingester に渡し、食塩・疾患指標との散布図(信頼区間と標本の大きさを併記)で記事化する。飲酒は別の一次資料を探す"
+      "nextAction": "食塩・疾患指標とBMI・喫煙・野菜の散布図(信頼区間と標本の大きさを併記)で記事化する。BMIは平均値で肥満者割合ではない点を明記する。飲酒は別の一次資料を探す"
     },
     {
       "id": "yabai-kenmin-ranking-unknown-a09",

@@ -167,6 +167,7 @@ const CANONICAL_WIDTH = {
   summary: [960], // findings card 幅 960 (高さ可変)
   line: [680], // 680×420
   scatter: [720], // 720×720
+  radar: [720], // 720×720 (2026-10-08 新設。radar.ts の RADAR_CANVAS)
   'stacked-bar': [680], // 680×可変
 };
 // 全カタログ統一完了 (2026-06-21): both 全件が正規幅。error で再発防止する。
@@ -177,6 +178,7 @@ const SIZE_ENFORCED = new Set([
   'tile-grid',
   'summary',
   'scatter',
+  'radar',
   'line',
   'stacked-bar',
 ]);
@@ -200,6 +202,7 @@ export function classifyChartTypeFromName(filename) {
     return 'tile-grid';
   if (/(?:-national-trend|-timeseries|-trend)$/.test(f)) return 'line';
   if (/-scatter$/.test(f)) return 'scatter';
+  if (/-radar$/.test(f)) return 'radar';
   if (/-stacked$/.test(f)) return 'stacked-bar';
   if (/(?:-summary-findings|-findings)$/.test(f)) return 'summary';
   return null; // 分類不能 (無意味名 inline-chart-N 等) は対象外

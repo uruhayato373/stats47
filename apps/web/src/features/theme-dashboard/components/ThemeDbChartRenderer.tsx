@@ -20,6 +20,8 @@ interface Props {
   chart: PageComponent;
   prefCode: string;
   prefName: string;
+  /** markdown-section の見出しの階層 (テーマの章の中では 3) */
+  headingLevel?: 2 | 3;
 }
 
 /**
@@ -28,7 +30,7 @@ interface Props {
  * page_components の componentType に応じてデータを取得し、
  * 実際のチャート描画は ThemeChartResultRenderer に委譲する。
  */
-export function ThemeDbChartRenderer({ chart, prefCode, prefName }: Props) {
+export function ThemeDbChartRenderer({ chart, prefCode, prefName, headingLevel }: Props) {
   const [loadResult, setLoadResult] = useState<
     ThemeChartLoadResult | undefined
   >(undefined);
@@ -69,6 +71,7 @@ export function ThemeDbChartRenderer({ chart, prefCode, prefName }: Props) {
           title={chart.title}
           props={props}
           fallbackSourceName={chart.sourceName}
+          headingLevel={headingLevel}
         />
       </div>
     );

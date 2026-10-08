@@ -1,5 +1,6 @@
 import type { GeoSnowPrefDetail } from './snow-designation';
 import type { GeoLandslidePrefDetail } from './landslide-exposure';
+import type { GeoLowElevationPrefDetail } from './low-elevation-population';
 export type GeoAnalysisValueFormat =
   | "integer"
   | "decimal1"
@@ -88,6 +89,8 @@ export interface GeoAnalysisInputEvidence {
   readonly geometry: "mesh" | "point" | "line" | "polygon";
   readonly role: Extract<GeoAnalysisLayerRole, "calculation-input" | "context-only">;
   readonly usedInCalculation: boolean;
+  /** 公式配布元から実際に取得した日時。記録のある分析だけが持つ。 */
+  readonly retrievedAt?: string;
 }
 
 export interface GeoAnalysisStageEvidence {
@@ -212,7 +215,8 @@ export type GeoAnalysisPrefDetail =
   | GeoStationAccessPrefDetail
   | GeoPublicFacilityPrefDetail
   | GeoSnowPrefDetail
-  | GeoLandslidePrefDetail;
+  | GeoLandslidePrefDetail
+  | GeoLowElevationPrefDetail;
 
 export function geoAnalysisManifestKey(slug: string): string {
   return `app/geo/${slug}/manifest.json`;

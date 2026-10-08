@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "date": "2026-10-07",
+  "date": "2026-10-08",
   "period": {
-    "periodStart": "2026-09-28",
-    "periodEnd": "2026-10-04",
+    "periodStart": "2026-09-29",
+    "periodEnd": "2026-10-05",
     "windowDays": 7
   },
-  "inputHash": "06aecc485fb0d30523a5c87338e8504e6388a1b8e616fdcc1dd89de1ffa88ca0",
+  "inputHash": "8e1fef09a4f40c4fef9ab2d0a0c1e7d660a4f275f075d218c6fa619ac31c195e",
   "movements": [
     {
       "keyword": "うどん消費量ランキング",
@@ -27,15 +27,6 @@
       "change": -55
     },
     {
-      "keyword": "任意保険 加入 率",
-      "targetPath": "/ranking/voluntary-car-insurance-rate-bodily-injury",
-      "before": 75,
-      "after": 23.142857142857142,
-      "beforeImpressions": 1,
-      "impressions": 7,
-      "change": 51.85714285714286
-    },
-    {
       "keyword": "カツオ 漁獲量",
       "targetPath": "/ranking/fishery-species-catch-bonito",
       "before": 9,
@@ -43,6 +34,15 @@
       "beforeImpressions": 2,
       "impressions": 1,
       "change": -47
+    },
+    {
+      "keyword": "47 都 道府県 ランキング いろいろ",
+      "targetPath": "/ranking",
+      "before": 65,
+      "after": 19,
+      "beforeImpressions": 1,
+      "impressions": 1,
+      "change": 46
     },
     {
       "keyword": "地方 債 利率 ランキング",
@@ -54,13 +54,31 @@
       "change": 46
     },
     {
+      "keyword": "食料自給率 日本 ランキング",
+      "targetPath": "/ranking/food-self-sufficiency-rate-calorie",
+      "before": 3,
+      "after": 48,
+      "beforeImpressions": 3,
+      "impressions": 1,
+      "change": -45
+    },
+    {
       "keyword": "高校 教員 年収",
       "targetPath": "/blog/high-school-teacher-salary-prefecture-gap",
-      "before": 45.666666666666664,
+      "before": 45,
       "after": 10.666666666666666,
-      "beforeImpressions": 3,
+      "beforeImpressions": 2,
       "impressions": 6,
-      "change": 35
+      "change": 34.333333333333336
+    },
+    {
+      "keyword": "任意保険 加入 率",
+      "targetPath": "/ranking/voluntary-car-insurance-rate-bodily-injury",
+      "before": 55,
+      "after": 21.166666666666668,
+      "beforeImpressions": 2,
+      "impressions": 6,
+      "change": 33.83333333333333
     },
     {
       "keyword": "警察 官 年収 ランキング",
@@ -72,31 +90,13 @@
       "change": 32
     },
     {
-      "keyword": "和歌山 最低賃金 推移",
-      "targetPath": "/areas/30000/labor-wages",
-      "before": 39,
-      "after": 11,
-      "beforeImpressions": 1,
+      "keyword": "都 道府県 財政 ランキング 2025",
+      "targetPath": "/blog/fiscal-self-reliance-gap",
+      "before": 1,
+      "after": 28,
+      "beforeImpressions": 4,
       "impressions": 1,
-      "change": 28
-    },
-    {
-      "keyword": "生活保護 大阪",
-      "targetPath": "/areas/27000/public-assistance",
-      "before": 28.6,
-      "after": 56,
-      "beforeImpressions": 5,
-      "impressions": 1,
-      "change": -27.4
-    },
-    {
-      "keyword": "教員 年収ランキング",
-      "targetPath": "/ranking/school-teacher-annual-income",
-      "before": 34.666666666666664,
-      "after": 7.5,
-      "beforeImpressions": 3,
-      "impressions": 2,
-      "change": 27.166666666666664
+      "change": -27
     }
   ],
   "verdicts": [
@@ -109,9 +109,9 @@
   "selected": {
     "keyword": "日照時間 ランキング",
     "targetPath": "/ranking/annual-sunshine-duration",
-    "rank": 5.402843601895735,
-    "impressions": 211,
-    "clicks": 11,
+    "rank": 5.177664974619289,
+    "impressions": 197,
+    "clicks": 12,
     "group": 5,
     "previousMethod": null,
     "editableFile": "packages/data-configs/src/metrics/annual-sunshine-duration.ts"

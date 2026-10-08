@@ -43,7 +43,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "landweather",
     "categoryName": "国土・気象",
-    "count": 40,
+    "count": 41,
     "representatives": [
       {
         "rankingKey": "annual-sunshine-duration",
@@ -88,7 +88,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "population",
     "categoryName": "人口・世帯",
-    "count": 154,
+    "count": 156,
     "representatives": [
       {
         "rankingKey": "births",
@@ -316,7 +316,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "economy",
     "categoryName": "企業・家計・経済",
-    "count": 871,
+    "count": 885,
     "representatives": [
       {
         "rankingKey": "natto-consumption-expenditure",
@@ -498,7 +498,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "educationsports",
     "categoryName": "教育・文化・スポーツ",
-    "count": 270,
+    "count": 277,
     "representatives": [
       {
         "rankingKey": "avg-height-high-school-2nd-male",
@@ -546,7 +546,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "administrativefinancial",
     "categoryName": "行財政",
-    "count": 142,
+    "count": 143,
     "representatives": [
       {
         "rankingKey": "local-allocation-tax-prefecture",
@@ -594,7 +594,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "safetyenvironment",
     "categoryName": "司法・安全・環境",
-    "count": 145,
+    "count": 146,
     "representatives": [
       {
         "rankingKey": "per-capita-police-expenditure-pref-municipal",
@@ -640,7 +640,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "socialsecurity",
     "categoryName": "社会保障・衛生",
-    "count": 288,
+    "count": 291,
     "representatives": [
       {
         "rankingKey": "physical-disability-certificates-issued",
@@ -745,7 +745,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "ict",
     "categoryName": "情報通信・科学技術",
-    "count": 22,
+    "count": 24,
     "representatives": [
       {
         "rankingKey": "public-phone-count",
@@ -995,7 +995,11 @@ export const AREA_HIGHLIGHT_PROMINENCE: Readonly<Record<string, number>> =
   "average-weight-high-school-second-grade-male": 0.28,
   "avg-height-high-school-2nd-male": 1,
   "barber-beauty-salon-count-per-100k": 0.28,
+  "beef-cattle-count": 0.6313,
+  "beef-consumption-quantity": 0.8805,
   "certified-childcare-center-count-per-100k-0-5": 0.35,
+  "chicken-consumption-expenditure": 0.6555,
+  "chinese-noodles-consumption-expenditure": 0.8242,
   "cleaning-shop-count-per-100k": 0.5188,
   "consumption-expenditure-multi-person-households-per-month": 0.8534,
   "criminal-arrest-rate": 0.55,
@@ -1017,38 +1021,50 @@ export const AREA_HIGHLIGHT_PROMINENCE: Readonly<Record<string, number>> =
   "food-expenditure-ratio-multi-person-households": 0.6387,
   "food-self-sufficiency-rate-calorie": 0.7488,
   "foreign-resident-count-per-100k": 0.3892,
+  "forest-area-ratio": 0.2938,
+  "fresh-udon-soba-consumption-expenditure": 0.5992,
   "future-population-change-rate-2050": 0.5188,
   "gas-station-count-per-100km": 0.5721,
   "general-clinic-count-per-100k": 0.48,
   "general-hospital-count-per-100k": 0.48,
+  "green-tea-consumption-expenditure": 0.5992,
   "households": 0.7404,
   "households-on-public-assistance-per-1000": 0.28,
   "kindergarten-count-per-100k-3-5": 0.55,
+  "layer-hen-count": 0.575,
   "library-count-per-million": 0.6438,
   "life-expectancy-0-female": 0.635,
   "life-expectancy-0-male": 0.3962,
   "male-scheduled-earnings": 0.35,
   "manufacturing-establishments": 0.7188,
+  "manufacturing-industry-added-value": 0.8313,
   "manufacturing-shipment-amount": 0.9437,
+  "manufacturing-shipment-amount-per-employee": 0.48,
   "marine-aquaculture-harvest": 0.55,
   "marine-fishery-catch": 0.55,
   "museum-count-per-million": 0.7324,
+  "nature-park-area-ratio": 0.55,
   "owner-occupied-housing-ratio": 0.7779,
   "penal-code-offenses-recognized-per-1000": 0.5925,
   "per-capita-prefectural-income-h27": 0.5975,
   "physicians-in-medical-facilities-per-100k": 0.48,
+  "pig-count": 0.6313,
   "police-officer-count-per-population": 0.4459,
   "population-density-per-km2-total-area": 0.7188,
   "post-office-count-per-100km2": 0.48,
   "residential-land-price-change-rate": 0.4063,
   "rice-harvest-volume": 0.4063,
+  "sake-consumption-expenditure": 0.768,
   "self-financing-ratio": 0.55,
   "sewage-treatment-coverage-rate": 0.6875,
   "single-person-household-ratio": 0.6842,
   "suicide-rate-per-100k": 0.5308,
   "taxpayer-ratio-per-pref-resident": 0.55,
+  "total-area-excluding-northern-territories-and-takeshima": 0.775,
   "total-overnight-guests": 0.7601,
+  "total-overnight-guests-foreign": 0.5351,
   "total-population": 0.55,
+  "total-production-in-the-prefecture": 0.4213,
   "traffic-accident-count": 0.55,
   "transport-communication-expenditure-ratio-multi-person-households": 0.6284,
   "unemployment-rate": 0.6449,

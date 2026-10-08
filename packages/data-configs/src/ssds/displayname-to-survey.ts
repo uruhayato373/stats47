@@ -81,6 +81,8 @@ export const DISPLAYNAME_TO_SURVEY: Record<string, string> = {
   騒音規制法施行状況調査: 'noise-control-law-status-survey',
   '国立教育政策研究所「全国学力・学習状況調査」': 'academic-achievement-survey',
   '(公財)日本中学校体育連盟': 'junior-high-athletics-membership-survey',
+  // 2026-10-08: 知るぽると (金融広報中央委員会) の金融リテラシー調査。統計表の一括ファイルを手動取得した external。
+  '金融広報中央委員会(知るぽると)': 'financial-literacy-survey',
   '県民経済計算年報（内閣府）': 'prefectural-accounts',
   // IPSS 令和5年推計の正式な地域別人口推計名。全国推計・GISメッシュとの推測同一視はしない。
   // https://www.ipss.go.jp/pp-shicyoson/j/shicyoson23/t-page.asp (確認: 2026-09-06)
@@ -152,6 +154,8 @@ export const STATS_DATA_ID_TO_SURVEY_OVERRIDE: Record<
   '0003457306': { id: 'social-life-basic-survey', name: '社会生活基本調査' },
   '0003457311': { id: 'social-life-basic-survey', name: '社会生活基本調査' },
   '0003457319': { id: 'social-life-basic-survey', name: '社会生活基本調査' },
+  // 2026-10-08 放送メディア行動者の時間 (broadcast-media-time-all) の原表。e-Stat 統計名を照合して追加。
+  '0003457337': { id: 'social-life-basic-survey', name: '社会生活基本調査' },
   '0004002555': { id: 'patient-survey', name: '患者調査' },
   '0004003256': {
     id: 'economic-census-activity',
@@ -246,5 +250,11 @@ export const STATS_DATA_ID_TO_SURVEY_OVERRIDE: Record<
   '0003423613': {
     id: 'resident-registry-migration-report',
     name: '住民基本台帳人口移動報告',
+  },
+  // ブログ cc-estat-13-agri-sankey の地域別の図が直接引く表。2026-10-08 に控え
+  // data/estat/meta/0001894246.json (統計名: 生産農業所得統計 / 農林水産省) と照合。
+  '0001894246': {
+    id: 'agricultural-income-statistics',
+    name: '生産農業所得統計',
   },
 };

@@ -44,6 +44,7 @@ import {
 } from '../lib/geo-public-facility-evidence';
 import {
   isGeoSpatialView,
+  LOW_ELEVATION_POPULATION_LEGEND,
   POPULATION_LEGEND,
   spatialAuditRows,
   type SpatialView,
@@ -77,6 +78,8 @@ const PublicFacilityMap = dynamic(
 );
 
 const LandslideMap = dynamic(() => import('./GeoLandslideLeafletMap').then(m => m.GeoLandslideLeafletMap), { ssr: false });
+
+const LowElevationMap = dynamic(() => import('./GeoLowElevationLeafletMap').then(m => m.GeoLowElevationLeafletMap), { ssr: false });
 
 const SnowMap = dynamic(() => import('./GeoSnowDesignationLeafletMap').then(m => m.GeoSnowDesignationLeafletMap), { ssr: false });
 
@@ -278,7 +281,7 @@ function GeoSpatialEvidenceExplorerState({
           className={`grid h-auto w-full grid-cols-1 ${hasFacilities ? 'sm:grid-cols-3' : 'sm:grid-cols-2'}`}
         >
           <TabsTrigger value="population" className="min-h-11">
-            {slug === 'population-snow-designation' || landslide ? '2020年基準人口の分布' : '人口の分布と変化'}
+            {slug === 'population-low-elevation' ? '2020年人口の分布' : slug === 'population-snow-designation' || landslide ? '2020年基準人口の分布' : '人口の分布と変化'}
           </TabsTrigger>
           {hasFacilities ? (
             <TabsTrigger value="facilities" className="min-h-11">
@@ -296,7 +299,7 @@ function GeoSpatialEvidenceExplorerState({
           <TabsContent key={stage} value={stage} className="mt-4">
             <p className="mb-3 text-sm leading-relaxed text-muted-foreground">
               {stage === 'population'
-                ? landslide ? '2020年基準人口：薄青＝100人未満、青＝100〜999人、濃青＝1,000人以上。' : slug === 'population-snow-designation' ? '2020年基準人口：薄青＝100人未満、青＝100〜999人、濃青＝1,000人以上。灰色の輪郭は指定境界を横切る格子です。' : POPULATION_LEGEND
+                ? slug === 'population-low-elevation' ? LOW_ELEVATION_POPULATION_LEGEND : landslide ? '2020年基準人口：薄青＝100人未満、青＝100〜999人、濃青＝1,000人以上。' : slug === 'population-snow-designation' ? '2020年基準人口：薄青＝100人未満、青＝100〜999人、濃青＝1,000人以上。灰色の輪郭は指定境界を横切る格子です。' : POPULATION_LEGEND
                 : stage === 'facilities'
                   ? landslide ? '行政施設と公的集会施設の原典地点を全件表示します。施設の種類と指定区域への包含をタップして確認できます。' : '選択県の原典施設を全件表示します。施設群を切り替えて確認できます。白い点は2022年4月の施設地点です。'
                   : config.overlapLegend}
@@ -332,6 +335,8 @@ function GeoSpatialEvidenceExplorerState({
               ) : stage === 'facilities' ? null : detail.slug ===
                 'population-station-access' ? (
                 <StationMap detail={detail} view={stage} />
+              ) : detail.slug === 'population-low-elevation' ? (
+                <LowElevationMap detail={detail} view={stage} />
               ) : detail.slug === 'population-snow-designation' ? (
                 <SnowMap detail={detail} view={stage} manifest={manifest} />
               ) : (

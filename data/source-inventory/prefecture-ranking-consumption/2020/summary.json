@@ -12,15 +12,13 @@
   "itemCount": 310,
   "resolvedCount": 310,
   "resolutionCoverage": 1,
-  "actionableCount": 254,
-  "blockedCount": 40,
+  "actionableCount": 288,
+  "blockedCount": 6,
   "byResolution": {
     "not-applicable": 16,
-    "rights-hold": 38,
-    "reuse-existing-metric": 118,
-    "new-metric": 38,
-    "combined-analysis": 98,
-    "primary-source-unavailable": 2
+    "reuse-existing-metric": 172,
+    "primary-source-unavailable": 6,
+    "combined-analysis": 116
   },
   "byKind": {
     "page": 310

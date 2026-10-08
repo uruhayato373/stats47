@@ -3,7 +3,8 @@ import type { MetricConfig } from "../types";
 export const totalOvernightGuestsForeign: MetricConfig = {
   "key": "total-overnight-guests-foreign",
   "title": "外国人延べ宿泊者数",
-  "description": "外国人延べ宿泊者数（宿泊旅行統計調査）",
+  "description": "外国人延べ宿泊者数（従業者数10人以上の宿泊施設、宿泊旅行統計調査）",
+  "note": "社会・人口統計体系は従業者数10人以上の宿泊施設の結果を収める。観光庁が公表する値は従業者数10人未満の施設を含む推計値のため、この値より大きい。",
   "unit": "人泊",
   "category": "tourism",
   "source": {

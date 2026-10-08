@@ -158,6 +158,45 @@ describe('reference content portfolio', () => {
     );
   });
 
+  it('県データブックのテンプレートに載った指標だけを県ページへ統合済みにする', () => {
+    const withAreaRole = (
+      areaDatabookMetricKeys: string[],
+      contentRoles = ['ranking', 'area']
+    ) =>
+      buildReferenceContentPortfolio(
+        fixture({
+          areaDatabookMetricKeys,
+          inventories: [
+            {
+              sourceKey: 'book-a',
+              edition: '2026',
+              sourcePath: 'data/source-inventory/book-a/2026/inventory.json',
+              items: [
+                {
+                  id: 'metric-evidence',
+                  resolution: 'reuse-existing-metric',
+                  primarySource: { url: 'https://example.go.jp/stat' },
+                  mapping: {
+                    metricKeys: ['sample-metric'],
+                    contentRoles,
+                  },
+                },
+              ],
+            },
+          ],
+          expectedSourceKeys: ['book-a'],
+        })
+      ).units
+        .find((unit) => unit.id === 'metric:sample-metric')!
+        .channels.find((channel) => channel.channel === 'area')!.stage;
+
+    expect(withAreaRole([])).toBe('ready');
+    expect(withAreaRole(['sample-metric'])).toBe('integrated');
+    // 台帳に area 役割が無くても、県ページに載っていれば統合済み
+    expect(withAreaRole(['sample-metric'], ['ranking'])).toBe('integrated');
+    expect(withAreaRole([], ['ranking'])).toBe('not-applicable');
+  });
+
   it('非公開metricから下流制作をreadyにしない', () => {
     const input = fixture({
       metrics: [

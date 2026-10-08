@@ -31,6 +31,10 @@
     "income-1000man-which-prefecture": {
       "displaySources": [{ "label": "賃金構造基本統計調査", "surveyId": "wage-structure-survey" }],
       "evidence": "source.json の source 文字列「厚生労働省『賃金構造基本統計調査』」。調査マスタ wage-structure-survey に解決する"
+    },
+    "cc-estat-09-radar-prefecture": {
+      "displaySources": [{ "label": "総務省統計局『社会・人口統計体系（都道府県データ）』", "url": "https://www.stat.go.jp/data/ssds/index.htm" }],
+      "evidence": "レーダー図 2 枚 (tokyo-radar / tokyo-kyoto-radar) の source.json inputs 6 指標はすべて SSDS の statsDataId (0000010101 / 0000010203 / 0000010112 / 0000010209 / 0000010211 / 0000010107)。kind:calculated のため出典が自動解決されない。URL は 2026-10-08 に HTTP 200 を確認"
     }
   }
 }

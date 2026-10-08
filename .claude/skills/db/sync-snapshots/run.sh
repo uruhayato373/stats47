@@ -10,10 +10,14 @@ cd "$PROJECT_ROOT"
 
 # Args
 ONLY=""
+SKIP=""
 DRY_RUN=0
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --only) ONLY="$2"; shift 2 ;;
+    # --skip a,b: 指定した task を作らない (data-refresh が develop への push で起動したとき、
+    #   git の設定だけから作る task を本番 R2 へ出さないため。DATA-REFRESH-DERIVED-FROM-DEVELOP-01)
+    --skip) SKIP="$2"; shift 2 ;;
     --dry-run) DRY_RUN=1; shift ;;
     *) echo "Unknown arg: $1"; exit 1 ;;
   esac
@@ -91,6 +95,20 @@ push_allowed() {
   [ "$CI" = "true" ] || [ "$GITHUB_ACTIONS" = "true" ] || [ "$ALLOW_LOCAL_R2_WRITE" = "1" ]
 }
 
+# --skip の typo で除外が黙って効かないのを防ぐ (--only の silent no-op ガードと同じ理由)
+if [ -n "$SKIP" ]; then
+  IFS=',' read -r -a SKIP_LABELS <<< "$SKIP"
+  for skip_label in "${SKIP_LABELS[@]}"; do
+    known=0
+    for task in "${TASKS[@]}"; do [ "${task%|*}" = "$skip_label" ] && known=1; done
+    if [ "$known" -eq 0 ]; then
+      echo "❌ --skip '$skip_label' に一致する task がありません。有効な task:"
+      for task in "${TASKS[@]}"; do echo "  - ${task%|*}"; done
+      exit 1
+    fi
+  done
+fi
+
 FAILED=()
 MATCHED=0
 for task in "${TASKS[@]}"; do
@@ -98,6 +116,10 @@ for task in "${TASKS[@]}"; do
   script="${task##*|}"
 
   if [ -n "$ONLY" ] && [ "$ONLY" != "$label" ]; then
+    continue
+  fi
+  if [ -n "$SKIP" ] && [[ ",$SKIP," == *",$label,"* ]]; then
+    echo "⏭️ $label は --skip で作らない"
     continue
   fi
   MATCHED=$((MATCHED + 1))

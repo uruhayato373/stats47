@@ -8,8 +8,10 @@ import { SurfaceSection } from "@/components/surface";
 import type { MarkdownSectionComponentProps } from "../types";
 
 interface Props {
-  /** セクションタイトル（H2 として表示） */
+  /** セクションタイトル (既定は H2。テーマの章の中では H3) */
   title: string;
+  /** 見出しの階層。ページ直下は h2、テーマの章の中に置くときは h3 */
+  headingLevel?: 2 | 3;
   /** Markdown / 出典 / subtitle を含む props */
   props: MarkdownSectionComponentProps;
   /** 出典名（chart.sourceName。props.sources とは独立） */
@@ -37,8 +39,9 @@ const proseClasses =
  * - sources は末尾に「出典」見出し付きリストで表示（URL があれば外部リンク）
  * - 入力は信頼できる DB 経由前提（DOMPurify は不要）
  */
-export function MarkdownSectionRenderer({ title, props, fallbackSourceName }: Props) {
+export function MarkdownSectionRenderer({ title, props, fallbackSourceName, headingLevel = 2 }: Props) {
   const { subtitle, sources } = props;
+  const Heading = headingLevel === 3 ? "h3" : "h2";
 
   if (props.displayMode === "faq") {
     const faqSources = sources?.length
@@ -52,6 +55,7 @@ export function MarkdownSectionRenderer({ title, props, fallbackSourceName }: Pr
         subtitle={subtitle}
         items={props.items}
         sources={faqSources}
+        headingLevel={headingLevel}
         renderAnswer={(answer) => (
           <div className={proseClasses}>
             <ReactMarkdown remarkPlugins={[remarkGfm, remarkBreaks]}>
@@ -68,7 +72,7 @@ export function MarkdownSectionRenderer({ title, props, fallbackSourceName }: Pr
       aria-label={title}
       className="p-6"
     >
-      <h2 className="text-base font-semibold text-foreground mb-1">{title}</h2>
+      <Heading className="text-base font-semibold text-foreground mb-1">{title}</Heading>
       {subtitle && (
         <p className="text-xs text-muted-foreground mb-3">{subtitle}</p>
       )}

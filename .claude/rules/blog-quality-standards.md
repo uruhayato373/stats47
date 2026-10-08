@@ -22,7 +22,7 @@ stats47.jp の `/blog/{slug}` 記事を新規作成または brushup する際�
 
 | 層 | 担い手 | 役割 | 捕まえる / 捕まえない |
 |---|---|---|---|
-| ① 機械的フロア | `quality-gate.mjs` | 公開前の床 (決定的) | 捕: callout連続配置/内部リンク/NG word/factual rank/**markdown 表の存在 (全面禁止)**/source-link 配置/prose 文字数の床/**図あたり prose 字数の床 (「図はあるが薄い」を弾く)**/**送り箱の記事に今の内容に合うサムネイル背景があるか (タイトル変更で古くなった AI 背景を push 前に止め、Codex の手順を示す)**。**不可: 読者価値の有無** |
+| ① 機械的フロア | `quality-gate.mjs` | 公開前の床 (決定的) | 捕: callout連続配置/内部リンク/NG word/factual rank/**markdown 表の存在 (全面禁止)**/source-link 配置/prose 文字数の床/**図あたり prose 字数の床 (「図はあるが薄い」を弾く)**/**送り箱の記事に今の内容に合うサムネイル背景があるか (タイトル変更で古くなった AI 背景を push 前に止め、Codex の手順を示す。記事固有の背景 `assets/blog/article-backgrounds/<slug>.jpg` がある記事は title を変えても止まらない)**。**不可: 読者価値の有無** |
 | ② 意味レビュー | **`blog-critic` agent (別コンテキスト)** | 読者価値の判断 | 捕: 冗長・図表重複・論理の質・curiosity gap の真正性・CTA過多・「この要素は何を足すか」・**定義整合 (下記)** |
 | ③ アウトカム | gsc-analyst / 改善ログ | 最終評価 | GSC CTR/順位・GA4 滞在・CV (遅行・最も真実) |
 

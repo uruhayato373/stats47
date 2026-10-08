@@ -1,16 +1,16 @@
 {
-  "total": 1598,
+  "total": 1609,
   "staged": false,
   "byStatus": {
-    "both": 1505,
+    "both": 1525,
     "jsonOnly": 0,
-    "neither": 93
+    "neither": 84
   },
   "byMethod": {
-    "done": 1505,
-    "manual": 39,
+    "done": 1525,
+    "manual": 34,
     "ssot-restore": 22,
-    "ssot-restore-new": 32
+    "ssot-restore-new": 28
   },
   "autoRecoverableCount": 0,
   "entries": [
@@ -1236,17 +1236,6 @@
       "residualCard": null
     },
     {
-      "slug": "bonito-catch-prefecture",
-      "base": "bonito-two-poles",
-      "chartType": "unknown",
-      "hasJson": false,
-      "hasSource": true,
-      "status": "neither",
-      "restoreMethod": "manual",
-      "autoRecoverable": false,
-      "residualCard": "CHART-LINEAGE-RESIDUAL-01"
-    },
-    {
       "slug": "bonito-catch-zero-prefectures-gap",
       "base": "bonito-catch-zero-prefectures-gap-prefecture-rankings",
       "chartType": "ranking",
@@ -1687,6 +1676,28 @@
       "residualCard": null
     },
     {
+      "slug": "cc-estat-04-aging-heatmap",
+      "base": "aging-heatmap-oranges",
+      "chartType": "unknown",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "cc-estat-04-aging-heatmap",
+      "base": "aging-heatmap-viridis",
+      "chartType": "unknown",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "cc-estat-05-medical-cost-choropleth",
       "base": "national-medical-expense-per-person",
       "chartType": "unknown",
@@ -1831,14 +1842,14 @@
     },
     {
       "slug": "cc-estat-13-agri-sankey",
-      "base": "inline-chart-1",
-      "chartType": "unknown",
-      "hasJson": false,
+      "base": "cc-estat-13-agri-sankey-region-category-stacked",
+      "chartType": "stacked",
+      "hasJson": true,
       "hasSource": true,
-      "status": "neither",
-      "restoreMethod": "manual",
+      "status": "both",
+      "restoreMethod": "done",
       "autoRecoverable": false,
-      "residualCard": "CHART-LINEAGE-RESIDUAL-01"
+      "residualCard": null
     },
     {
       "slug": "cc-estat-14-energy-area-chart",
@@ -2414,18 +2425,40 @@
     },
     {
       "slug": "consumer-price-regional-gap",
-      "base": "inline-chart-1",
-      "chartType": "unknown",
-      "hasJson": false,
+      "base": "price-index-gap-summary-findings",
+      "chartType": "findings",
+      "hasJson": true,
       "hasSource": true,
-      "status": "neither",
-      "restoreMethod": "manual",
+      "status": "both",
+      "restoreMethod": "done",
       "autoRecoverable": false,
-      "residualCard": "CHART-LINEAGE-RESIDUAL-01"
+      "residualCard": null
     },
     {
       "slug": "consumer-price-regional-gap",
       "base": "housing-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "consumer-price-regional-gap",
+      "base": "food-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "consumer-price-regional-gap",
+      "base": "utilities-prefecture-rankings",
       "chartType": "ranking",
       "hasJson": true,
       "hasSource": true,
@@ -2875,9 +2908,42 @@
       "residualCard": null
     },
     {
+      "slug": "dairy-cattle-count",
+      "base": "total-population-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "dairy-cattle-count",
+      "base": "dairy-cattle-holdings-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "dairy-cattle-hokkaido-monopoly",
       "base": "dairy-cattle-prefecture-rankings",
       "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "dairy-cattle-hokkaido-monopoly",
+      "base": "hokkaido-share-by-commodity-stacked",
+      "chartType": "stacked",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -4330,23 +4396,34 @@
       "slug": "fiscal-health-50years-trend",
       "base": "fiscal-trend",
       "chartType": "line",
-      "hasJson": false,
+      "hasJson": true,
       "hasSource": true,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new",
+      "status": "both",
+      "restoreMethod": "done",
       "autoRecoverable": false,
-      "residualCard": "CHART-LINEAGE-RESIDUAL-01"
+      "residualCard": null
+    },
+    {
+      "slug": "fiscal-health-50years-trend",
+      "base": "fiscal-change-ranking",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
     },
     {
       "slug": "fiscal-health-50years-trend",
       "base": "current-balance-trend",
       "chartType": "line",
-      "hasJson": false,
+      "hasJson": true,
       "hasSource": true,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new",
+      "status": "both",
+      "restoreMethod": "done",
       "autoRecoverable": false,
-      "residualCard": "CHART-LINEAGE-RESIDUAL-01"
+      "residualCard": null
     },
     {
       "slug": "fiscal-health-50years-trend",
@@ -4384,6 +4461,17 @@
     {
       "slug": "fiscal-self-reliance-gap",
       "base": "fiscal-vs-self-financing-scatter",
+      "chartType": "scatter",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "fiscal-self-reliance-gap",
+      "base": "fiscal-vs-allocation-tax-scatter",
       "chartType": "scatter",
       "hasJson": true,
       "hasSource": true,
@@ -5033,17 +5121,6 @@
     {
       "slug": "fresh-udon-soba-consumption-prefecture-gap",
       "base": "fresh-udon-soba-ranking",
-      "chartType": "ranking",
-      "hasJson": true,
-      "hasSource": true,
-      "status": "both",
-      "restoreMethod": "done",
-      "autoRecoverable": false,
-      "residualCard": null
-    },
-    {
-      "slug": "fresh-udon-soba-consumption-quantity",
-      "base": "fresh-udon-soba-prefecture-rankings",
       "chartType": "ranking",
       "hasJson": true,
       "hasSource": true,
@@ -5912,17 +5989,6 @@
     },
     {
       "slug": "health-life-expectancy-structure",
-      "base": "health-trend",
-      "chartType": "line",
-      "hasJson": false,
-      "hasSource": true,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new",
-      "autoRecoverable": false,
-      "residualCard": "CHART-LINEAGE-RESIDUAL-01"
-    },
-    {
-      "slug": "health-life-expectancy-structure",
       "base": "health-ranking",
       "chartType": "ranking",
       "hasJson": true,
@@ -5945,14 +6011,25 @@
     },
     {
       "slug": "health-life-expectancy-structure",
+      "base": "health-year-shift-scatter",
+      "chartType": "scatter",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "health-life-expectancy-structure",
       "base": "doctors-trend",
       "chartType": "line",
-      "hasJson": false,
+      "hasJson": true,
       "hasSource": true,
-      "status": "neither",
-      "restoreMethod": "ssot-restore-new",
+      "status": "both",
+      "restoreMethod": "done",
       "autoRecoverable": false,
-      "residualCard": "CHART-LINEAGE-RESIDUAL-01"
+      "residualCard": null
     },
     {
       "slug": "health-life-expectancy-structure",
@@ -5966,9 +6043,9 @@
       "residualCard": null
     },
     {
-      "slug": "health-life-expectancy-structure",
-      "base": "health-summary-findings",
-      "chartType": "findings",
+      "slug": "healthy-life-expectancy-male-female-gap",
+      "base": "healthy-life-expectancy-male-ranking",
+      "chartType": "ranking",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -5978,30 +6055,19 @@
     },
     {
       "slug": "healthy-life-expectancy-male-female-gap",
-      "base": "inline-chart-1",
-      "chartType": "unknown",
-      "hasJson": false,
-      "hasSource": true,
-      "status": "neither",
-      "restoreMethod": "manual",
-      "autoRecoverable": false,
-      "residualCard": "CHART-LINEAGE-RESIDUAL-01"
-    },
-    {
-      "slug": "healthy-life-expectancy-male-female-gap",
-      "base": "inline-chart-2",
-      "chartType": "unknown",
-      "hasJson": false,
-      "hasSource": true,
-      "status": "neither",
-      "restoreMethod": "manual",
-      "autoRecoverable": false,
-      "residualCard": "CHART-LINEAGE-RESIDUAL-01"
-    },
-    {
-      "slug": "healthy-life-expectancy-male-female-gap",
-      "base": "healthy-life-expectancy-female-prefecture-rankings",
+      "base": "healthy-life-expectancy-female-ranking",
       "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "healthy-life-expectancy-male-female-gap",
+      "base": "healthy-life-expectancy-male-female-scatter",
+      "chartType": "scatter",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -8113,6 +8179,17 @@
     {
       "slug": "it-industry-concentration",
       "base": "it-industry-concentration-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "it-industry-concentration",
+      "base": "it-industry-concentration-telework-ranking",
       "chartType": "ranking",
       "hasJson": true,
       "hasSource": true,
@@ -12743,7 +12820,18 @@
     },
     {
       "slug": "real-disposable-income-reversal",
-      "base": "real-disposable-income-prefecture-rankings",
+      "base": "income-vs-real-disposable-scatter",
+      "chartType": "scatter",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "real-disposable-income-reversal",
+      "base": "disposable-income-worker-households-prefecture-rankings",
       "chartType": "ranking",
       "hasJson": true,
       "hasSource": true,
@@ -12754,8 +12842,19 @@
     },
     {
       "slug": "real-disposable-income-reversal",
-      "base": "income-vs-real-disposable-scatter",
-      "chartType": "scatter",
+      "base": "consumer-price-difference-index-overall-prefecture-rankings",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "real-disposable-income-reversal",
+      "base": "real-disposable-income-prefecture-rankings",
+      "chartType": "ranking",
       "hasJson": true,
       "hasSource": true,
       "status": "both",
@@ -13666,6 +13765,17 @@
       "residualCard": null
     },
     {
+      "slug": "school-teacher-annual-income-prefecture-gap",
+      "base": "school-teacher-annual-income-2022-2023-scatter",
+      "chartType": "scatter",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "sea-bream-expenditure-ranking",
       "base": "sea-bream-ranking",
       "chartType": "ranking",
@@ -14183,6 +14293,17 @@
       "residualCard": null
     },
     {
+      "slug": "sixth-industry-direct-sales",
+      "base": "non-agricultural-income-ratio-top-bottom",
+      "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
       "slug": "small-business-dominance-map",
       "base": "small-biz-ranking",
       "chartType": "ranking",
@@ -14251,17 +14372,6 @@
     {
       "slug": "smartphone-ownership-prefecture-gap",
       "base": "smartphone-ownership-prefecture-gap-prefecture-rankings",
-      "chartType": "ranking",
-      "hasJson": true,
-      "hasSource": true,
-      "status": "both",
-      "restoreMethod": "done",
-      "autoRecoverable": false,
-      "residualCard": null
-    },
-    {
-      "slug": "soba-udon-dining-consumption-expenditure",
-      "base": "soba-udon-ranking",
       "chartType": "ranking",
       "hasJson": true,
       "hasSource": true,
@@ -16111,6 +16221,17 @@
       "slug": "udon-soba-food-culture-prefecture-map",
       "base": "udon-soba-ranking",
       "chartType": "ranking",
+      "hasJson": true,
+      "hasSource": true,
+      "status": "both",
+      "restoreMethod": "done",
+      "autoRecoverable": false,
+      "residualCard": null
+    },
+    {
+      "slug": "udon-soba-food-culture-prefecture-map",
+      "base": "fresh-udon-soba-dining-scatter",
+      "chartType": "scatter",
       "hasJson": true,
       "hasSource": true,
       "status": "both",

@@ -14,7 +14,8 @@ export function buildGeoCardPreview(
 ) {
   if (
     detail.slug === 'population-snow-designation' ||
-    detail.slug === 'population-landslide-exposure'
+    detail.slug === 'population-landslide-exposure' ||
+    detail.slug === 'population-low-elevation'
   ) {
     throw new Error('This preview requires bounds-based population meshes');
   }

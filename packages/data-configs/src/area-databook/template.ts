@@ -18,6 +18,14 @@
 import type { AreaDatabookTemplate } from "./types";
 
 const BOOK = "都道府県 Data Book (日本食糧新聞社)";
+const GUIDE = "47都道府県 県庁所在地ガイド";
+const GUIDE_SURVEYED = "2026-10-08";
+const LIVESTOCK_SELECTION = (rationale: string) => ({
+  proposedBy: "農林水産省「畜産統計」確報 (乳用牛と並ぶ畜産の県別規模)",
+  sourceUrl: "https://www.maff.go.jp/j/tokei/kouhyou/tikusan/",
+  surveyedAt: GUIDE_SURVEYED,
+  rationale,
+});
 
 export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
   sections: [
@@ -90,6 +98,21 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
               capitalCityValue: true,
             },
             { rankingKey: "dairy-cattle-count", shortLabel: "乳用牛飼育頭数" },
+            {
+              rankingKey: "beef-cattle-count",
+              shortLabel: "肉用牛飼養頭数",
+              selection: LIVESTOCK_SELECTION("肉用牛の飼養規模。北海道・九州の畜産地帯と他県の差を読む"),
+            },
+            {
+              rankingKey: "pig-count",
+              shortLabel: "豚飼養頭数",
+              selection: LIVESTOCK_SELECTION("豚の飼養規模。南九州・関東の養豚地帯を読む"),
+            },
+            {
+              rankingKey: "layer-hen-count",
+              shortLabel: "採卵鶏飼養羽数",
+              selection: LIVESTOCK_SELECTION("採卵鶏(成鶏めす)の飼養規模。鶏卵の産地を読む"),
+            },
           ],
         },
       ],
@@ -294,6 +317,15 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
               shortLabel: "有効求人倍率",
               compareNationalAvg: true,
             },
+            {
+              rankingKey: "total-production-in-the-prefecture",
+              shortLabel: "県内総生産",
+              selection: {
+                proposedBy: GUIDE,
+                surveyedAt: GUIDE_SURVEYED,
+                rationale: "県の経済規模の総額。1人当たり県民所得では見えない規模を補う",
+              },
+            },
             { rankingKey: "unemployment-rate", shortLabel: "失業率" },
             { rankingKey: "self-financing-ratio", shortLabel: "自主財源の割合" },
             { rankingKey: "taxpayer-ratio-per-pref-resident", shortLabel: "納税義務者割合" },
@@ -355,6 +387,24 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
               rankingKey: "manufacturing-shipment-amount",
               shortLabel: "製造品出荷額",
             },
+            {
+              rankingKey: "manufacturing-industry-added-value",
+              shortLabel: "製造業付加価値額",
+              selection: {
+                proposedBy: GUIDE,
+                surveyedAt: GUIDE_SURVEYED,
+                rationale: "出荷額から原材料費等を除いた、製造業が県内で生み出した価値",
+              },
+            },
+            {
+              rankingKey: "manufacturing-shipment-amount-per-employee",
+              shortLabel: "従業者1人当たり出荷額",
+              selection: {
+                proposedBy: GUIDE,
+                surveyedAt: GUIDE_SURVEYED,
+                rationale: "出荷額の総額では見えない、従業者1人が生む出荷額の県差",
+              },
+            },
             { rankingKey: "final-energy-consumption-per-capita", shortLabel: "1人当たり最終エネルギー消費量" },
             { rankingKey: "employee-ratio-10-29-employee-establishments-private", shortLabel: "10〜29人事業所の従業者割合" },
           ],
@@ -408,6 +458,50 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
             {
               rankingKey: "average-relative-humidity",
               shortLabel: "平均相対湿度",
+            },
+          ],
+        },
+      ],
+    },
+    /* 自然・土地利用 (県庁所在地ガイドの論点台帳から追加) -------------- */
+    {
+      sectionKey: "land-nature",
+      kind: "climate",
+      title: "自然・土地利用",
+      description: "県土の広さと、森林・自然公園が占める割合",
+      sortOrder: 85,
+      blocks: [
+        {
+          blockType: "ranked-kpi-grid",
+          blockKey: "land-nature-kpi",
+          columns: 3,
+          metrics: [
+            {
+              rankingKey: "total-area-excluding-northern-territories-and-takeshima",
+              shortLabel: "総面積",
+              selection: {
+                proposedBy: GUIDE,
+                surveyedAt: GUIDE_SURVEYED,
+                rationale: "県の広さ。人口密度の分母として、北海道の大きさと香川の小ささを読む",
+              },
+            },
+            {
+              rankingKey: "forest-area-ratio",
+              shortLabel: "森林面積割合",
+              selection: {
+                proposedBy: GUIDE,
+                surveyedAt: GUIDE_SURVEYED,
+                rationale: "県土の森林の多さ。山がちな県と平野の県の違いを読む",
+              },
+            },
+            {
+              rankingKey: "nature-park-area-ratio",
+              shortLabel: "自然公園面積割合",
+              selection: {
+                proposedBy: GUIDE,
+                surveyedAt: GUIDE_SURVEYED,
+                rationale: "国立・国定・都道府県立の自然公園が県土に占める割合",
+              },
             },
           ],
         },
@@ -489,6 +583,15 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
             {
               rankingKey: "total-overnight-guests",
               shortLabel: "延べ宿泊者数",
+            },
+            {
+              rankingKey: "total-overnight-guests-foreign",
+              shortLabel: "外国人延べ宿泊者数",
+              selection: {
+                proposedBy: GUIDE,
+                surveyedAt: GUIDE_SURVEYED,
+                rationale: "延べ宿泊者数のうち外国人の規模。訪日客の行き先の県差を読む",
+              },
             },
           ],
         },
@@ -582,6 +685,83 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
                 "education-expenditure-ratio-multi-person-households",
               shortLabel: "教育費割合",
               capitalCityValue: true,
+            },
+          ],
+        },
+      ],
+    },
+    /* ⑥ 消費: 品目別 (家計調査・県庁所在市の年間) ---------------------- */
+    {
+      sectionKey: "consumption-items",
+      kind: "consumption",
+      title: "食の消費(品目別)",
+      description: "県庁所在市の二人以上世帯が 1 年間に買った量・支出額。牛肉は購入量、ほかは支出額",
+      sortOrder: 145,
+      blocks: [
+        {
+          blockType: "ranked-kpi-grid",
+          blockKey: "consumption-items-kpi",
+          columns: 3,
+          metrics: [
+            {
+              rankingKey: "beef-consumption-quantity",
+              shortLabel: "牛肉の購入量",
+              capitalCityValue: true,
+              selection: {
+                proposedBy: GUIDE,
+                surveyedAt: GUIDE_SURVEYED,
+                rationale: "肉の好みの東西差を読む代表品目",
+              },
+            },
+            {
+              rankingKey: "chicken-consumption-expenditure",
+              shortLabel: "鶏肉の支出額",
+              capitalCityValue: true,
+              selection: {
+                proposedBy: GUIDE,
+                surveyedAt: GUIDE_SURVEYED,
+                rationale: "牛肉と並べて肉の好みの県差を読む",
+              },
+            },
+            {
+              rankingKey: "fresh-udon-soba-consumption-expenditure",
+              shortLabel: "生うどん・そばの支出額",
+              capitalCityValue: true,
+              selection: {
+                proposedBy: GUIDE,
+                surveyedAt: GUIDE_SURVEYED,
+                rationale: "麺の食文化(香川・長野など)の県差",
+              },
+            },
+            {
+              rankingKey: "chinese-noodles-consumption-expenditure",
+              shortLabel: "中華麺の支出額",
+              capitalCityValue: true,
+              selection: {
+                proposedBy: GUIDE,
+                surveyedAt: GUIDE_SURVEYED,
+                rationale: "うどん・そばと並べて麺の好みの県差を読む",
+              },
+            },
+            {
+              rankingKey: "green-tea-consumption-expenditure",
+              shortLabel: "緑茶の支出額",
+              capitalCityValue: true,
+              selection: {
+                proposedBy: GUIDE,
+                surveyedAt: GUIDE_SURVEYED,
+                rationale: "茶どころ静岡をはじめ飲み物の好みの県差",
+              },
+            },
+            {
+              rankingKey: "sake-consumption-expenditure",
+              shortLabel: "清酒の支出額",
+              capitalCityValue: true,
+              selection: {
+                proposedBy: GUIDE,
+                surveyedAt: GUIDE_SURVEYED,
+                rationale: "酒どころの県差を家庭の支出から読む",
+              },
             },
           ],
         },

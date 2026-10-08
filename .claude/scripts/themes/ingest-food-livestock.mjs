@@ -232,6 +232,13 @@ export function extractFoodLivestock(workbook, d) {
   assert.equal(new Set(rows.map((row) => row.areaCode)).size, 47);
   return { rows, verification: reconciled(rows, national, d) };
 }
+/** 値の降順・同値は同順位 (page-data-batch / stats-values-writer と同じ規則)。rank を持たない values.json は順位表示・県データブックで使えない。 */
+function competitionRanks(rows) {
+  const sorted = [...rows].sort((a, b) => b.value - a.value);
+  const ranks = new Map();
+  sorted.forEach((row, i) => ranks.set(row.areaCode, i > 0 && row.value === sorted[i - 1].value ? ranks.get(sorted[i - 1].areaCode) : i + 1));
+  return ranks;
+}
 async function sourceWorkbook(d, directory) {
   const path = resolve(directory, d.source.file);
   let bytes;
@@ -264,7 +271,8 @@ async function main() {
     assert.equal(config.source?.config?.provenance?.sha256, d.source.sha256);
     if (!workbooks.has(d.source.file)) workbooks.set(d.source.file, await sourceWorkbook(d, options['source-dir']));
     const { rows, verification } = extractFoodLivestock(workbooks.get(d.source.file), d);
-    const payload = parseStatsValuesPayload({ metricKey: d.key, entityKind: 'prefecture', rows: rows.map(({ sourceRow, sourceColumn, ...row }) => ({ ...row, unit: d.unit, yearCode: String(d.year), yearName: d.yearName })), meta: { generatedAt, rowCount: 47, areaCount: 47, yearRange: [String(d.year), String(d.year)], recipe: buildRecipe(config) } });
+    const ranks = competitionRanks(rows);
+    const payload = parseStatsValuesPayload({ metricKey: d.key, entityKind: 'prefecture', rows: rows.map(({ sourceRow, sourceColumn, ...row }) => ({ ...row, unit: d.unit, yearCode: String(d.year), yearName: d.yearName, rank: ranks.get(row.areaCode) })), meta: { generatedAt, rowCount: 47, areaCount: 47, yearRange: [String(d.year), String(d.year)], recipe: buildRecipe(config) } });
     const content = JSON.stringify(payload);
     files.push({ key: `app/stats/${d.key}/values.json`, metricKey: d.key, content, sha256: sha(content), source: d.source, sourceCells: rows.map(({ value, ...row }) => row), year: d.year, yearName: d.yearName, unit: d.unit, verification });
   }

@@ -71,7 +71,7 @@ export const PUBLIC_ROUTE_MATRIX: readonly PublicRouteContract[] = [
 ] as const;
 
 /** 公開中のThemeCatalog component typesを、実在routeと期待chart数へ固定する。
- * cpi-heatmapはline-chartへ移行済み。KPIは地方財政の専用章で検証する。 */
+ * KPIは地方財政の専用章で検証する。 */
 export const THEME_ROUTE_MATRIX: readonly ThemeRouteContract[] = [
   {
     id: "theme-aging",
@@ -90,10 +90,9 @@ export const THEME_ROUTE_MATRIX: readonly ThemeRouteContract[] = [
     heading: "物価・消費",
     dataSelector: '[data-theme-chart="true"]',
     // 2026-10-08: 総合 1 本の折れ線を 12 費目 × 年の cpi-heatmap に作り替えた (図は物価プロファイルと 2 枚)。
-    // PR の E2E は図の定義を本番 R2 から読み、R2 の反映は main へのマージ後なので、変更前後どちらでも成り立つ cpi-profile だけを見る
-    // (E2E-THEME-PR-PAGECOMPONENTS-01)
+    // PR の E2E は図の定義を PR の生成物から読む (.github/scripts/r2-overlay-server.mjs)
     expectedChartCount: 2,
-    representativeTypes: ["cpi-profile"],
+    representativeTypes: ["cpi-profile", "cpi-heatmap"],
   },
   {
     id: "theme-education",

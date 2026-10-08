@@ -66,6 +66,35 @@ npx tsx packages/r2-storage/src/scripts/diff-push-r2.ts --prefix app/stats
 
 非対応 source は skip (失敗扱いではない)。
 
+## 手動取得 (`fetcherKey:"manual"`) の取得スクリプト
+
+page-data-batch が skip する `external` + `manual` の metric は、一次資料 (xlsx / PDF / 公開 HTML) ごとに専用の取得スクリプトが
+`.claude/scripts/data/` にあり、`.local/r2/app/stats/<key>/values.json` を書き出す (rank は値の降順・同値同順位で付く。
+共通部品は `.claude/scripts/data/lib/stats-values-writer.mjs`)。各 metric の `source.config.provenance.restore` が同じスクリプトを指す。
+書き出しはローカルだけで、本番 R2 への反映は上の「5. R2 へ push」(`diff-push-r2.ts`) を別に行う。
+provenance の規約は [`data-provenance-standards.md`](../../../rules/data-provenance-standards.md)。
+
+| スクリプト (`node .claude/scripts/data/...`) | 書き出す metric key | 一次資料 |
+|---|---|---|
+| `fetch-chutairen-club-membership.mjs` | `junior-high-club-per100-*` (競技別) | 日本中学校体育連盟 加盟生徒数調査 PDF |
+| `fetch-pachinko-shop-density.mjs` | `pachinko-shop-density-per-10k` | 全日遊連公表 (警察庁保安課原典) |
+| `fetch-japanese-instruction-students.mjs` | `students-requiring-japanese-instruction` (`npm run evidence:pilot:data:write-local`) | 文部科学省 日本語指導が必要な児童生徒の受入状況調査 |
+| `fetch-cancer-asr75-breast.mjs` | `breast-cancer-asr75-mortality-female` | 国立がん研究センター がん情報サービス |
+| `fetch-financial-literacy-correct-rate.mjs` | `financial-literacy-correct-rate` | 金融広報中央委員会 金融リテラシー調査 統計表 xlsx |
+| `fetch-national-assessment-questionnaire.mjs` | `national-assessment-elementary-{breakfast,study-1h-plus,tutoring,reading-like}-rate` | 国立教育政策研究所 全国学力・学習状況調査 児童質問紙 (47 県 xlsx) |
+| `fetch-nta-alcohol-per-adult.mjs` | `alcohol-sales-per-adult-{total,beer,sake,shochu,wine,whisky}` | 国税庁 酒のしおり (沖縄は表に無く 46 県) |
+| `fetch-opendata-adoption-rate.mjs` | `opendata-adoption-rate-municipalities` | デジタル庁 オープンデータ取組済自治体資料 (全団体リスト CSV) |
+| `fetch-sports-facility-athletics-stadium.mjs` | `athletics-stadium-count-public` | スポーツ庁 体育・スポーツ施設現況調査 |
+| `fetch-zen-koutairen-rugby.mjs` | `high-school-club-per100-rugby-male` | 全国高等学校体育連盟 加盟・登録状況 ÷ 学校基本調査の男子生徒数 |
+| `fetch-nhns-2024-prefecture.mjs` | `bmi-male-20to69-age-adjusted` `bmi-female-40to69-age-adjusted` `smoking-rate-male-age-adjusted` | 厚生労働省 令和6年国民健康・栄養調査 都道府県別結果 PDF |
+| `fetch-census-sex-ratio-20-39.mjs` | `sex-ratio-age-20-39` | 国勢調査 5 歳階級別人口 (入力は R2 の `theme-population-pyramid-*` 8 本。先に page-data-batch で取り込む) |
+| `fetch-heatstroke-deaths-mhlw.mjs` | `heatstroke-deaths` | 厚生労働省 人口動態統計「熱中症による死亡数」xlsx |
+| `.claude/scripts/themes/ingest-food-livestock.mjs --write-local` | 畜産・食品製造 7 指標 (`beef-cattle-count` `pig-count` `layer-hen-count` ほか) | 農林水産省 畜産統計・経済産業省 経済構造実態調査 (e-Stat file-download、SHA256 固定) |
+
+新しい手動取得スクリプトを足したら、この表に 1 行足す (書きっぱなしだと `check-agent-skill-consistency.cjs` の W1 orphan になり、次の担当者が辿れない)。
+各スクリプトは `--help` を持たず、引数なしで本処理を走らせる。
+
+
 ## 新規 metric 追加フロー
 
 1. `packages/data-configs/src/metrics/<new-key>.ts` を新規作成 (既存ファイルをコピーして編集)

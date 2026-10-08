@@ -212,7 +212,7 @@ test('default all scope retains existing full/partial-publish path and shared wr
   assert.equal(workflow.on.workflow_dispatch.inputs.snapshot_scope.default, 'all');
   assert.equal(workflow.concurrency.group, 'r2-write');
   assert.equal(batch['continue-on-error'], true);
-  assert.equal(full.run, 'bash .claude/skills/db/sync-snapshots/run.sh');
+  assert.match(full.run, /bash \.claude\/skills\/db\/sync-snapshots\/run\.sh "\$\{ARGS\[@\]\}"/);
   assert.match(full.if, /snapshot_scope != 'ranking'/);
   assert.match(ranking.if, /snapshot_scope == 'ranking'/);
   assert.equal(ranking.env.NODE_ENV, 'production');
@@ -242,3 +242,21 @@ for (const overrides of [{ INPUT_SNAPSHOT_SCOPE: 'invalid' }, { INPUT_SNAPSHOT_S
     assert.equal(result.outputs, '');
   });
 }
+
+test('develop への push で起動したときだけ、派生 snapshot から page-components を除外する', () => {
+  assert.equal(full.env.EVENT_NAME, '${{ github.event_name }}');
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'data-refresh-skip-'));
+  const fakeRoot = path.join(dir, '.claude/skills/db/sync-snapshots');
+  fs.mkdirSync(fakeRoot, { recursive: true });
+  // run.sh の代わりに、渡された引数だけを記録する
+  fs.writeFileSync(path.join(fakeRoot, 'run.sh'), 'printf "%s\\n" "$*" > "$ARGS_LOG"\n');
+  const argsOf = (eventName) => {
+    const log = path.join(dir, `${eventName}.log`);
+    const res = spawnSync('bash', ['-e', '-c', full.run], { cwd: dir, encoding: 'utf8', env: { ...process.env, EVENT_NAME: eventName, ARGS_LOG: log } });
+    assert.equal(res.status, 0, res.stderr);
+    return fs.readFileSync(log, 'utf8').trim();
+  };
+  assert.equal(argsOf('push'), '--skip page-components');
+  assert.equal(argsOf('schedule'), '');
+  assert.equal(argsOf('workflow_dispatch'), '');
+});

@@ -32,6 +32,46 @@ function argValue(name: string): string | undefined {
   return index >= 0 ? process.argv[index + 1] : undefined;
 }
 
+const FETCH_ATTEMPTS = 3;
+const RETRY_BASE_DELAY_MS = 500;
+
+/** 4xx など、取り直しても結果が変わらない失敗。再試行しない */
+class PermanentFetchError extends Error {}
+
+/**
+ * `cities.json` を取る。接続の失敗 (Node の fetch の "fetch failed" 等) と 5xx だけを間隔を空けて再試行する。
+ *
+ * --all-published は 200 件超の key を 1 本ずつ取るので、1 回の瞬断でタスク全体が落ちる
+ * (2026-10-08 の data-refresh run 37693107860 で 144 件目の次が "fetch failed"、直後に取り直すと 200 だった。
+ *  DATA-REFRESH-MUNI-FETCH-RETRY-01)。4xx は元データが無い・URL が違うなので、すぐ失敗にする。
+ */
+export async function fetchCitiesPayload(
+  url: string,
+  deps: {
+    fetchImpl?: typeof fetch;
+    sleep?: (ms: number) => Promise<void>;
+  } = {}
+): Promise<unknown> {
+  const fetchImpl = deps.fetchImpl ?? fetch;
+  const sleep =
+    deps.sleep ?? ((ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms)));
+  let lastError: unknown;
+  for (let attempt = 0; attempt < FETCH_ATTEMPTS; attempt++) {
+    try {
+      const response = await fetchImpl(url);
+      if (response.ok) return await response.json();
+      const error = new Error(`cities source fetch failed: ${response.status}`);
+      if (response.status < 500) throw new PermanentFetchError(error.message);
+      lastError = error;
+    } catch (error) {
+      if (error instanceof PermanentFetchError) throw error;
+      lastError = error;
+    }
+    if (attempt < FETCH_ATTEMPTS - 1) await sleep(RETRY_BASE_DELAY_MS * 2 ** attempt);
+  }
+  throw lastError;
+}
+
 async function writeSnapshot(
   root: string,
   key: string,
@@ -101,13 +141,9 @@ async function generateForKey(
     );
   }
 
-  const response = await fetch(
+  const payload = (await fetchCitiesPayload(
     `${r2Base}/app/stats/${encodeURIComponent(rankingKey)}/cities.json`
-  );
-  if (!response.ok) {
-    throw new Error(`cities source fetch failed: ${response.status}`);
-  }
-  const payload = (await response.json()) as StatsPayload;
+  )) as StatsPayload;
   if (payload.metricKey !== rankingKey || payload.entityKind !== 'city') {
     throw new Error(
       `cities source identity mismatch: ${payload.metricKey}/${payload.entityKind}`
@@ -190,7 +226,10 @@ async function main(): Promise<void> {
   }
 }
 
-main().catch((error: unknown) => {
-  console.error(error instanceof Error ? error.message : String(error));
-  process.exitCode = 1;
-});
+// 直接実行時のみ main を走らせる (fetchCitiesPayload を import してテストできるようにするため)
+if (process.argv[1]?.includes('generate-municipality-ranking')) {
+  main().catch((error: unknown) => {
+    console.error(error instanceof Error ? error.message : String(error));
+    process.exitCode = 1;
+  });
+}
