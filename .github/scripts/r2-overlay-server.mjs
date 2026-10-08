@@ -12,12 +12,14 @@
  * この中継に向けるだけで、本番のコードと読み取り経路は変えない。
  *
  *   node .github/scripts/r2-overlay-server.mjs [port]   # 既定 4790
- *   R2_OVERLAY_UPSTREAM=https://storage.stats47.jp (既定)
+ *   R2_OVERLAY_UPSTREAM=<転送先> (既定は packages/types/src/site.json の r2PublicBaseUrl)
  */
 import fs from "node:fs";
 import http from "node:http";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+
+import { R2_PUBLIC_BASE_URL } from "../../.claude/scripts/lib/site-config.cjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const LOCAL_DIR = path.join(ROOT, "apps/web/scripts/data/page-components");
@@ -74,7 +76,7 @@ export function createOverlayServer({ upstream, localDir = LOCAL_DIR, log = () =
 
 if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
   const port = Number(process.argv[2] ?? 4790);
-  const upstream = process.env.R2_OVERLAY_UPSTREAM ?? "https://storage.stats47.jp";
+  const upstream = process.env.R2_OVERLAY_UPSTREAM || R2_PUBLIC_BASE_URL;
   createOverlayServer({ upstream, log: (line) => console.log(`[r2-overlay] ${line}`) }).listen(port, "127.0.0.1", () => {
     console.log(`[r2-overlay] http://127.0.0.1:${port} → page-components はローカル、それ以外は ${upstream}`);
   });
