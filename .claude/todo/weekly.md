@@ -142,7 +142,7 @@ KPI は確定7日と重複しない前週だけで比べる。rolling 28日（cl
 
 - [x] **承認済み search-growth 1件を終端する** [S] — `soft-404-risk::/ranking/barber-beautician-annual-income`（定常の候補審査）。
   R2 の観測年数・データ点数・描画を実測し、補強 / noindex / dismiss を記録するか WIP から外す。W41 の search-growth 判断 (最低 1 件) をこれで満たす。使用: `/search-growth`
-- [ ] **effort 提案 4 件の採否を決める** [S] — `MODEL-OPT-APPLY-01`（管理領域）。`.claude/state/metrics/model-usage/latest.json` の canary pass を確かめ、
+- [x] **effort 提案 4 件の採否を決める** [S] — `MODEL-OPT-APPLY-01`（管理領域）。`.claude/state/metrics/model-usage/latest.json` の canary pass を確かめ、
   frontmatter の effort を変えるかを agent ごとに決める。変える場合は canary の結果ファイルを根拠に書く。
 
 ## オーナー作業

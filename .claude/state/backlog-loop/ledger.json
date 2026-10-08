@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-06T21:55:18.729Z",
+  "updatedAt": "2026-10-08T22:31:30.370Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -6490,6 +6490,679 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-10-06T21:55:18.729Z"
+    },
+    "GSC-CTR-DECOMPOSE-01": {
+      "class": "investigate",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-08T21:16:15.432Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "card-review"
+            ],
+            "pass": true
+          },
+          "evidence": "2026-10-08 に上位10件の扱いをカードに記録済み (todo-curator 監査 2026-10-09)",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-08T21:16:15.432Z"
+    },
+    "MODEL-OPT-APPLY-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-08T21:16:15.483Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npm run model-usage:report"
+            ],
+            "pass": true
+          },
+          "evidence": "cf1f701d9 で 4 体に effort:high。2026-10-09 の report で proposals 0 件。監視は MODEL-OPT-MONITOR-01",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-08T21:16:15.483Z"
+    },
+    "AFF-PR-LABEL-DECISION-01": {
+      "class": "decision",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-08T21:16:15.534Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "card-review"
+            ],
+            "pass": true
+          },
+          "evidence": "オーナー判断 2026-10-08 で PR 表記を戻した (6671cdf54 / PR #1106)。02_収益化戦略.md:189-190 に記録",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-08T21:16:15.534Z"
+    },
+    "MIGRATION-FLOW-IG-01": {
+      "class": "decision",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-08T21:16:15.585Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "card-review"
+            ],
+            "pass": true
+          },
+          "evidence": "6d57cbb85 で schedule を外し on: workflow_dispatch のみ",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-08T21:16:15.585Z"
+    },
+    "BLOG-CARD-CALLOUT-RELEASE-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-08T21:16:15.665Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "curl /api/ranking-card/total-population",
+              "data/ga4 nav-click-surfaces"
+            ],
+            "pass": true
+          },
+          "evidence": "e6eb6a044 は main 済み・API 200。GA4 W39/W40 に nav_surface=blog_ranking_card の nav_click (最多 52)",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-08T21:16:15.665Z"
+    },
+    "ADMIN-OPS-PAGES-TEST-TIMEOUT-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-08T21:16:15.715Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx vitest run tests/unit/ops-pages.test.ts"
+            ],
+            "pass": true
+          },
+          "evidence": "66806a343 でカタログ監査を固定値化し 15s timeout を撤去。負荷下 3 回で 0.4-0.9s",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-08T21:16:15.715Z"
+    },
+    "BLOG-AUDIT-PROVENANCE-HELP-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-08T21:16:15.766Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test (追加テスト 49 件 pass)",
+              "npm run preflight"
+            ],
+            "pass": true
+          },
+          "evidence": "d6c4e9626 で修正し完了条件のテストを追加",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-08T21:16:15.766Z"
+    },
+    "CRITIC-FINDINGS-SILENT-ZERO-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-08T21:16:15.816Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test (追加テスト 49 件 pass)",
+              "npm run preflight"
+            ],
+            "pass": true
+          },
+          "evidence": "96c0f4ca1 で修正し完了条件のテストを追加",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-08T21:16:15.816Z"
+    },
+    "DEBT-CHECK-GITIGNORED-SCAN-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-08T21:16:15.867Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test (追加テスト 49 件 pass)",
+              "npm run preflight"
+            ],
+            "pass": true
+          },
+          "evidence": "3dc404062 で修正し完了条件のテストを追加",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-08T21:16:15.867Z"
+    },
+    "BLOG-FETCH-RANKING-FISCAL-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-08T21:16:15.916Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test (追加テスト 49 件 pass)",
+              "npm run preflight"
+            ],
+            "pass": true
+          },
+          "evidence": "81c0e4af9 で修正し完了条件のテストを追加",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-08T21:16:15.916Z"
+    },
+    "KAKEI-CLASSIFICATION-GROUP-CODE-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-08T21:16:15.967Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test (追加テスト 49 件 pass)",
+              "npm run preflight"
+            ],
+            "pass": true
+          },
+          "evidence": "66e39568e で修正し完了条件のテストを追加",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-08T21:16:15.967Z"
+    },
+    "ARTICLE-WRITER-PARTITION-ORDER-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-08T21:16:16.017Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test (追加テスト 49 件 pass)",
+              "npm run preflight"
+            ],
+            "pass": true
+          },
+          "evidence": "4c9c2bac3 で修正し完了条件のテストを追加",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-08T21:16:16.017Z"
+    },
+    "NOTE-PLAN-DBLESS-01": {
+      "class": "docs",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-08T21:16:16.067Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "grep D1 docs/30_note記事企画 (旧/廃止以外 0 件)"
+            ],
+            "pass": true
+          },
+          "evidence": "c8c8560dd",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-08T21:16:16.067Z"
+    },
+    "THEME-COUNT-LITERAL-TESTS-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-08T21:16:16.118Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "data-configs 1145 / web 399 / admin 138 tests",
+              "npm run preflight:pr"
+            ],
+            "pass": true
+          },
+          "evidence": "37cd98d8c。57 番目のテーマを仮に足してテスト無修正で通過を確認",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-08T21:16:16.118Z"
+    },
+    "WEB-TSC-INCREMENTAL-01": {
+      "class": "investigate",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-08T21:16:16.170Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "npx tsc (incremental 0件→修正後4件)",
+              "turbo type-check",
+              "pre-commit"
+            ],
+            "pass": true
+          },
+          "evidence": "仮説支持。1f746b1e7 で assumeChangesOnlyAffectDirectDependencies を削除",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-08T21:16:16.170Z"
+    },
+    "METRIC-WAGE-SURVEY-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-08T21:16:16.235Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "validate:config",
+              "validate:years",
+              "audit-survey-taxonomy --offline --check"
+            ],
+            "pass": true
+          },
+          "evidence": "6291c7bd3。定義シートが resolveSurveyLinkage で調査名を引く。39/39 が賃金構造基本統計調査",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-08T21:16:16.235Z"
+    },
+    "METRIC-DEF-SHEET-SURVEY-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-08T21:16:16.286Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "build-metric-definition-sheet (家計調査 713/713)"
+            ],
+            "pass": true
+          },
+          "evidence": "6291c7bd3 で同時に解消",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-08T21:16:16.286Z"
+    },
+    "SEO-UNIT-DASH-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-08T21:16:16.357Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "grep ‐） 0件",
+              "validate:config 変異で exit 1"
+            ],
+            "pass": true
+          },
+          "evidence": "c38540590。[seo-unit-dash] lint 追加",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-08T21:16:16.357Z"
+    },
+    "METRIC-NORMALIZATION-UNIT-DASH-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-08T21:59:52.112Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "validate:config (変異で exit 1)"
+            ],
+            "pass": true
+          },
+          "evidence": "10 指標 (割合・指数) から normalizationOptions を削除し [normalization-unit-dash] lint を追加",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-08T21:59:52.112Z"
+    },
+    "NOTE-KUMAMOTO-TEST-ENOENT-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-08T22:31:30.370Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test kakei-note-evidence.test.mjs"
+            ],
+            "pass": true
+          },
+          "evidence": "3a7d3ba35^ の chart-data.json を __tests__/fixtures に置きテストの参照先を変更",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-08T22:31:30.370Z"
     }
   }
 }

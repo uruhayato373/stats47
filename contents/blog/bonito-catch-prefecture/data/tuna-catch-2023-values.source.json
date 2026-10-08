@@ -1,0 +1,10 @@
+{
+  "kind": "ranking",
+  "rankingKey": "fishery-species-catch-tuna",
+  "year": "2023",
+  "unit": "トン",
+  "label": "マグロ類漁獲量",
+  "transform": "本文が順位を引く補助データ。R2 の2023年 partition をそのまま写し、図には使わない",
+  "source": "r2:app/ranking/fishery-species-catch-tuna/values.json",
+  "restore": "/usr/bin/curl -s https://storage.stats47.jp/app/ranking/fishery-species-catch-tuna/values.json の partitions[yearCode=2023]"
+}

@@ -44,25 +44,9 @@ export const complainantCount: MetricConfig = {
   },
   "calculation": {
     "isCalculated": false,
-    "normalizationOptions": [
-      {
-        "type": "per_population",
-        "label": "人口10万人あたり",
-        "unit": "‐/10万人",
-        "scaleFactor": 100000,
-        "decimalPlaces": 2,
-      },
-      {
-        "type": "per_area",
-        "label": "面積100km²あたり",
-        "unit": "‐/100km²",
-        "scaleFactor": 100,
-        "decimalPlaces": 2,
-      },
-    ],
   },
   "groupKey": "complainant-count",
-  "seoTitle": "有訴者率ランキング都道府県【2022年】｜1位兵庫県（314.9‐）",
-  "seoDescription": "2022年の有訴者率の都道府県別ランキング。1位兵庫県（314.9‐）、最下位東京都（244‐）で1.3倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "有訴者率ランキング都道府県【2022年】｜1位兵庫県（314.9）",
+  "seoDescription": "2022年の有訴者率の都道府県別ランキング。1位兵庫県（314.9）、最下位東京都（244）で1.3倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

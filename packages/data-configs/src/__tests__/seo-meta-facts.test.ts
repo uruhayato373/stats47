@@ -1,6 +1,22 @@
 import { describe, expect, it } from "vitest";
 
-import { checkSeoFacts, extractSeoClaims } from "../seo-meta-facts";
+import { checkSeoFacts, extractSeoClaims, findDigitDashPlaceholders } from "../seo-meta-facts";
+
+describe("findDigitDashPlaceholders", () => {
+  it("数字の直後の ‐ (単位のプレースホルダ) を拾う", () => {
+    expect(
+      findDigitDashPlaceholders("1位秋田県（417.4‐）、最下位沖縄県（143.3‐）で2.9倍の格差。"),
+    ).toEqual(["4‐", "3‐"]);
+    expect(findDigitDashPlaceholders("1位香川県（10,146.81 ‐）")).toEqual(["1 ‐"]);
+    expect(findDigitDashPlaceholders("全国１位（２５‐）")).toEqual(["５‐"]);
+  });
+
+  it("単位つきの値・数字に続かない ‐・ASCII の範囲表記は拾わない", () => {
+    expect(findDigitDashPlaceholders("1位秋田県（417.4）、最下位沖縄県（143.3人）")).toEqual([]);
+    expect(findDigitDashPlaceholders("経済センサス‐活動調査の2021年データ")).toEqual([]);
+    expect(findDigitDashPlaceholders("2020-2023年の推移")).toEqual([]);
+  });
+});
 
 /**
  * 感度 (実際の欠陥で発火) と非感度 (正しい文で発火しない) を両方向で固定する。

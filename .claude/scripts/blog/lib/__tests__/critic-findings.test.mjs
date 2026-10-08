@@ -5,12 +5,26 @@
  *   の 3 つが崩れると、カードが毎日増えるか、逆に何も起票されない無検査の仕組みになる。
  */
 import assert from "node:assert/strict";
+import { spawnSync } from "node:child_process";
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
 import test from "node:test";
+import { fileURLToPath } from "node:url";
 
-import { aggregateByType, cardIdForType, parseReview, planPatternCards, toLedgerRows } from "../critic-findings.mjs";
+import {
+  aggregateByType,
+  cardIdForType,
+  parseReview,
+  planPatternCards,
+  reviewProblems,
+  toLedgerRows,
+} from "../critic-findings.mjs";
+
+const RECORDER = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "record-critic-findings.mjs");
 
 const TYPES = { "related-link": { label: "関連記事の紹介" }, region: { label: "地域のくくり" }, other: { label: "その他" } };
-const review = (slug, date, findings) =>
+const review = (slug, date, findings, heading = "## 指摘") =>
   [
     "---",
     `slug: ${slug}`,
@@ -21,7 +35,7 @@ const review = (slug, date, findings) =>
     "---",
     "## 評価サマリ",
     "要約。",
-    "## 指摘",
+    heading,
     ...findings,
     "## 判定理由",
     "- [MAJOR][型:region] 判定理由の箇条書きは指摘として数えない。",
@@ -89,4 +103,32 @@ test("型の無い指摘と「その他」は起票しない", () => {
   const rows = [...rowsFor("unclassified", ["a", "b", "c"]), ...rowsFor("other", ["a", "b", "c"])];
   const cards = planPatternCards(aggregateByType(rows, settings), { ...settings, openIds: [], ledgerPath: "x" });
   assert.equal(cards.length, 0);
+});
+
+test("「## 指摘(残るもの)」のように後ろに語が付いた見出しも指摘の節として読む", () => {
+  const parsed = parseReview(
+    review("a", "2026-10-07", ["- [MAJOR][型:region] 近畿のくくりが支えられない。"], "## 指摘(残るもの)"),
+    { knownTypes: Object.keys(TYPES) },
+  );
+  assert.deepEqual(parsed.findings.map((f) => [f.severity, f.type]), [["MAJOR", "region"]]);
+  assert.deepEqual(reviewProblems(parsed), []);
+});
+
+test("REVISE なのに指摘を 1 件も読めない review は問題として返し、PASS の 0 件は通す", () => {
+  const revise = parseReview(review("a", "2026-10-07", ["型も重さも書いていない行"]), { knownTypes: Object.keys(TYPES) });
+  assert.equal(revise.findings.length, 0);
+  assert.equal(reviewProblems(revise).length, 1);
+  const pass = parseReview(review("a", "2026-10-07", []).replace("verdict: REVISE", "verdict: PASS"));
+  assert.deepEqual(reviewProblems(pass), []);
+});
+
+test("record-critic-findings は REVISE で指摘 0 件の review.md を exit 1 で止め、台帳に書かない", () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "critic-findings-"));
+  const file = path.join(dir, "review.md");
+  fs.writeFileSync(file, review("silent-zero", "2026-10-07", ["本文だけで箇条書きの書式になっていない。"], "## 指摘事項なし?"));
+  const result = spawnSync(process.execPath, [RECORDER, file], { encoding: "utf8" });
+  fs.rmSync(dir, { recursive: true, force: true });
+  assert.equal(result.status, 1, result.stdout + result.stderr);
+  assert.match(result.stderr, /REVISE なのに指摘を 1 件も読めない/);
+  assert.match(result.stdout, /追記 0 件/);
 });
