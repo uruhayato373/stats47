@@ -84,6 +84,11 @@
         "surveyedAt": "2026-09-09",
         "rationale": "都道府県議会議員に占める女性の割合を都道府県別の実値として比較する。"
       }
+    },
+    {
+      "rankingKey": "husband-childcare-rate",
+      "shortLabel": "夫の育児参加率",
+      "role": "context"
     }
   ],
   "charts": [],

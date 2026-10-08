@@ -124,6 +124,11 @@ export const AGING_SOCIETY_SET: IndicatorSet = {
       "rankingKey": "elderly-workers-ratio",
       "shortLabel": "高齢就業者割合",
       "role": "secondary"
+    },
+    {
+      "rankingKey": "mothers-age-at-first-birth",
+      "shortLabel": "第1子出生時の母の平均年齢",
+      "role": "context"
     }
   ],
   "keywords": [

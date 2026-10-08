@@ -729,7 +729,8 @@ updated: 2026-10-06
 
 - **経緯**: 2026-10-07 にオーナーが「docs/ ではなく、R2 か contents/ で管理し、ローカルは一時的に持つだけでよいのでは」と指摘し、(a) 「図の年の書き直し 22 本を公開してから移す」を選んだ。公開待ちの outbox は公開後に CI が消すもので、人が読み返す文書の置き場 (docs/) と性質が合わない。
 - **現在地 (2026-10-08)**: 22 本の公開後に、docs/21 の原稿 32 本を README と一緒に `git mv` で `contents/blog/` へ移した (未公開の 13 本も同じ diff で移したので失われていない)。台帳 `config/datasets.mjs` に `blog.outbox` と RETIRED を足し、workflow 4 本・スクリプト・skill・rule・memory の参照を書き換え、`npm run check-datasets` の旧置き場の参照は 0 件になった。PR CI の変更分類 (`plan-pr-quality.mjs`) は原稿だけの PR で重い job を起動しないよう `contents/` を docs/ と同じ扱いにした。
-- **次**: main へのマージ後、①次に記事を公開する run で `blog-auto-publish.yml` が `contents/blog` から公開し、公開した slug を commit-back で消すこと ②`blog-remediation-daily.yml` の最初の run が `contents/blog` を掃除して書き戻すことを、run のログで確かめる。
+- **本番反映 (2026-10-08)**: uruhayato373/stats47#1108 で main へマージ (10:17 UTC)。デプロイと post-deploy smoke (run 37763482616) は成功。移動の push で `blog-auto-publish` (run 37760839708) が `contents/blog` から 20 本を候補に取り、19 本は手書き出典節、1 本は背景未生成の blocker で全件 skip した (公開 0・R2 は不変)。PR の図の検証 workflow は抽出の awk が旧パスのままで 0 件で通っていたので直し、32 本の検証が通った。push からマージまでの定期実行は Instagram の 1 本だけで、outbox に触れず記録の欠落は無い。
+- **次**: ①次に記事を公開する run で `blog-auto-publish.yml` が `contents/blog` から公開し、公開した slug を commit-back で消すこと ②`blog-remediation-daily.yml` の最初の run (2026-10-08 23:00 UTC = 10-09 08:00 JST) が `contents/blog` を掃除して書き戻すことを、run のログで確かめる。
 - **完了条件**: 上の 2 つの run が成功し、ログに `contents/blog` の slug が出ている。
 
 ### [BLOG-TITLE-CHANGE-WATCH-01] 図の年の書き直しでタイトルを変えた公開記事の検索流入を、公開後に確かめる
@@ -3370,6 +3371,15 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - **次**: 生成器 `packages/gis/src/geo-analysis/low-elevation-population-overlay.py` の manifest 出力を JS と同じキー順にし、Web 側の照合対象に manifest を戻す。
 - **完了条件**: manifest も SHA 照合され、キー順を崩した manifest を監査が拒否することを変異で確かめた。
 
+### [THEME-COUNT-LITERAL-TESTS-01] テーマを足すたびに手で合わせるテストの件数直書きをなくす
+
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-10-08] [領域:サイト]
+
+- **観測 (2026-10-08)**: 新テーマ `household-food-spending` を足した際、`theme-overview-coverage.test.ts`・`all-themes.test.ts` のテーマ数 (55→56)、
+  `faq-markdown.test.ts` の FAQ 数 (8→9)、`.claude/config/theme-catalog-baseline.json` を手で書き換えた。件数は `THEME_CATALOGS` から導出できる。
+- **次**: 件数の直書きを `THEME_CATALOGS` 由来の値に置き換える。ただし「意図せず消えたテーマ」を検出する役割があるテストは、キー一覧の固定など別の形で残す。
+- **完了条件**: テーマを 1 つ足しても、カタログ JSON・登録簿・生成物以外のテストを手で直さずに通る。
+
 ## 🟢 低 — 時期未定・条件付き (trigger は本文に)
 
 ### [DATA-SHUKUHAKU-CORRECTION-01] 宿泊旅行統計の 2026 年分を足すときに、層化基準の変更による系列の断絶を書く
@@ -3855,3 +3865,13 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 タグ: [収益化] [種類:意思決定] [実行:対話] [起票:2026-09-27] [領域:商品]
 
 stats47 で培ったデータ加工を、受託・販売などの形で収入にできるかを考える。（出典: 2026-09-24 の手書きメモ・vault dairy/2026-09-24）
+
+### [THEME-CHILD-WELFARE-01] 児童福祉・子どもの安全を扱うテーマを新設するか決める
+
+タグ: [コンテンツ品質] [種類:意思決定] [実行:対話] [起票:2026-10-08] [領域:サイト]
+
+- **観測 (2026-10-08)**: 参考文献由来の公開指標 `child-abuse-consultation-cases` (児童虐待相談対応件数) を既存 55 テーマのどれにも採用できなかった
+  (theme-designer の判断。保育の需給・ひとり親の主題とは別)。
+- **判断すること**: 児童相談・不登校・子どもの貧困などを束ねるテーマを作るか、指標をランキング単体のまま置くか。
+- **完了条件**: 新設なら theme-designer がカタログを作り、見送りなら参考文献のテーマ企画の表の行に理由を残す。
+

@@ -71,9 +71,9 @@ describe('テーマ比較と既存章の統合', () => {
     ).toContain('floor-area-per-dwelling-owner');
   });
 
-  it('全55カタログの既存指標・章・生成先を保持し、別のoverview定義を必須にしない', () => {
+  it('全56カタログの既存指標・章・生成先を保持し、別のoverview定義を必須にしない', () => {
     const catalogs = listThemeCatalogs();
-    expect(catalogs).toHaveLength(55);
+    expect(catalogs).toHaveLength(56);
     const generatedKeys = new Set(THEME_INDICATOR_SETS.map((item) => item.key));
     for (const item of catalogs) {
       expect(generatedKeys.has(item.key), item.key).toBe(true);

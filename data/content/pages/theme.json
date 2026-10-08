@@ -467,6 +467,26 @@
       ]
     },
     {
+      "id": "theme:household-food-spending",
+      "kind": "theme",
+      "key": "household-food-spending",
+      "title": "食卓と家計の支出",
+      "href": "/themes/household-food-spending",
+      "published": true,
+      "rankingKeys": [
+        "dining-out-consumption-expenditure",
+        "food-expenditure-total",
+        "rice-consumption-expenditure",
+        "bread-consumption-quantity",
+        "confectionery-consumption-expenditure",
+        "beef-consumption-quantity",
+        "consumption-expenditure-total",
+        "fresh-seafood-consumption-quantity",
+        "fresh-vegetables-consumption-quantity",
+        "pork-consumption-quantity"
+      ]
+    },
+    {
       "id": "theme:information-industry",
       "kind": "theme",
       "key": "information-industry",

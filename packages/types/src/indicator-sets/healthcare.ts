@@ -264,6 +264,46 @@ export const HEALTHCARE_SET: IndicatorSet = {
       "rankingKey": "k6-known-score-estimated-persons-12plus",
       "shortLabel": "K6の点数が判明している推計人数（分母）",
       "role": "context"
+    },
+    {
+      "rankingKey": "outpatient-rate-per-100k",
+      "shortLabel": "外来受療率",
+      "role": "context"
+    },
+    {
+      "rankingKey": "inpatient-rate-per-100k",
+      "shortLabel": "入院受療率",
+      "role": "context"
+    },
+    {
+      "rankingKey": "treatment-rate-diabetes-outpatient",
+      "shortLabel": "糖尿病の受療率（外来）",
+      "role": "context"
+    },
+    {
+      "rankingKey": "emergency-hospital-general-clinic-count-per-100k",
+      "shortLabel": "救急告示病院・一般診療所数",
+      "role": "context"
+    },
+    {
+      "rankingKey": "deaths-cerebral-infarction-per-100k",
+      "shortLabel": "脳梗塞による死亡者数",
+      "role": "context"
+    },
+    {
+      "rankingKey": "breast-cancer-asr75-mortality-female",
+      "shortLabel": "乳がん 75歳未満年齢調整死亡率",
+      "role": "context"
+    },
+    {
+      "rankingKey": "heatstroke-deaths",
+      "shortLabel": "熱中症による死亡数",
+      "role": "context"
+    },
+    {
+      "rankingKey": "suicide-count",
+      "shortLabel": "自殺者数",
+      "role": "context"
     }
   ],
   "keywords": [

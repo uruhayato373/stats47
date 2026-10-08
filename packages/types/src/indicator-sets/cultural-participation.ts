@@ -59,6 +59,51 @@ export const CULTURAL_PARTICIPATION_SET: IndicatorSet = {
       "rankingKey": "hobby-leisure-avg-time-employed-female",
       "shortLabel": "有業女性の趣味・娯楽時間（週全体総平均・分/日）",
       "role": "secondary"
+    },
+    {
+      "rankingKey": "hobby-participation-rate-go",
+      "shortLabel": "囲碁の行動者率",
+      "role": "context"
+    },
+    {
+      "rankingKey": "hobby-participation-rate-shogi",
+      "shortLabel": "将棋の行動者率",
+      "role": "context"
+    },
+    {
+      "rankingKey": "hobby-participation-rate-flower-arrangement",
+      "shortLabel": "華道の行動者率",
+      "role": "context"
+    },
+    {
+      "rankingKey": "hobby-participation-rate-instrument",
+      "shortLabel": "楽器の演奏の行動者率",
+      "role": "context"
+    },
+    {
+      "rankingKey": "hobby-participation-rate-photography",
+      "shortLabel": "写真の撮影・プリントの行動者率",
+      "role": "context"
+    },
+    {
+      "rankingKey": "hobby-participation-rate-reading",
+      "shortLabel": "趣味としての読書の行動者率",
+      "role": "context"
+    },
+    {
+      "rankingKey": "hobby-participation-rate-calligraphy",
+      "shortLabel": "書道の行動者率",
+      "role": "context"
+    },
+    {
+      "rankingKey": "hobby-participation-rate-tea-ceremony",
+      "shortLabel": "茶道の行動者率",
+      "role": "context"
+    },
+    {
+      "rankingKey": "hobby-participation-rate-knitting",
+      "shortLabel": "編み物・手芸の行動者率",
+      "role": "context"
     }
   ],
   "keywords": [

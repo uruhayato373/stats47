@@ -89,6 +89,16 @@ export const LOCAL_SERVICES_SET: IndicatorSet = {
       "rankingKey": "amusement-industry-net-value-added",
       "shortLabel": "娯楽業の企業純付加価値額",
       "role": "secondary"
+    },
+    {
+      "rankingKey": "beauty-salon-count",
+      "shortLabel": "美容所数",
+      "role": "context"
+    },
+    {
+      "rankingKey": "barber-beauty-salon-count",
+      "shortLabel": "理容・美容所数",
+      "role": "context"
     }
   ],
   "keywords": [

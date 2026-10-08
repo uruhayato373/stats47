@@ -174,6 +174,11 @@ export const POPULATION_DYNAMICS_SET: IndicatorSet = {
       "rankingKey": "future-population-change-rate-2050",
       "shortLabel": "2020～2050年の人口増減率（推計）",
       "role": "secondary"
+    },
+    {
+      "rankingKey": "sex-ratio-age-20-39",
+      "shortLabel": "人口性比（20〜39歳）",
+      "role": "context"
     }
   ],
   "keywords": [

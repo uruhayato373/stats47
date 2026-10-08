@@ -54,6 +54,11 @@
         "surveyedAt": "2026-09-09",
         "rationale": "保育所等利用申込者数（4月1日時点）を都道府県別の実値として比較する。"
       }
+    },
+    {
+      "rankingKey": "nursery-waiting-children-count",
+      "shortLabel": "保育所等利用待機児童数",
+      "role": "context"
     }
   ],
   "charts": [],

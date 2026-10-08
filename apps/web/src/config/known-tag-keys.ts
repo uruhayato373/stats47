@@ -10,7 +10,7 @@
  * 更新タイミング: ブログ公開で R2 blog snapshot が変わった後。commit + デプロイで反映。
  *
  * 最終生成日: 2026-10-08
- * 件数: 912
+ * 件数: 910
  */
 export const KNOWN_TAG_KEYS: ReadonlySet<string> = new Set([
   "1000世帯あたり",
@@ -56,14 +56,12 @@ export const KNOWN_TAG_KEYS: ReadonlySet<string> = new Set([
   "TSMC",
   "TopoJSON",
   "annual-precipitation",
-  "automation",
   "claude-code",
   "cron",
   "e-Stat",
   "e-stat",
   "laborwage",
   "landweather",
-  "productivity",
   "あじ",
   "いか消費量",
   "いちご",
