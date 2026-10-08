@@ -1,0 +1,72 @@
+[
+  {
+    "areaName": "沖縄県",
+    "rank": 1,
+    "value": 2412,
+    "label": "かつお節・削り節消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "高知県",
+    "rank": 2,
+    "value": 1221,
+    "label": "かつお節・削り節消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "福岡県",
+    "rank": 3,
+    "value": 1201,
+    "label": "かつお節・削り節消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "和歌山県",
+    "rank": 4,
+    "value": 1161,
+    "label": "かつお節・削り節消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "兵庫県",
+    "rank": 5,
+    "value": 1112,
+    "label": "かつお節・削り節消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "栃木県",
+    "rank": 43,
+    "value": 653,
+    "label": "かつお節・削り節消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "新潟県",
+    "rank": 44,
+    "value": 652,
+    "label": "かつお節・削り節消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "大分県",
+    "rank": 45,
+    "value": 627,
+    "label": "かつお節・削り節消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "石川県",
+    "rank": 46,
+    "value": 622,
+    "label": "かつお節・削り節消費支出額",
+    "unit": "円"
+  },
+  {
+    "areaName": "鳥取県",
+    "rank": 47,
+    "value": 566,
+    "label": "かつお節・削り節消費支出額",
+    "unit": "円"
+  }
+]

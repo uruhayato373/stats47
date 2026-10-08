@@ -80,6 +80,31 @@ test('prefecture-deviation inventory resolves per authored analysis, not a right
   );
 });
 
+const FULL_COVERAGE_ANALYSES_PROFILES = [
+  'amusement-shop-density/unknown',
+  'average-income-ranking/unknown',
+  'capital-city-guide/unknown',
+  'gis-business-guide/2022',
+  'money-health-ranking/unknown',
+  'prefecture-ranking-consumption/2020',
+  'yabai-kenmin-ranking/unknown',
+];
+
+test('Kindle scan books resolve every page through authored analyses, not the unreadable-page default', async () => {
+  // 2026-10-08 まで論点台帳が無く、本文の読めるページまで「表紙・目次・広告・判別不能」へ一律に落ちていた。
+  for (const profile of FULL_COVERAGE_ANALYSES_PROFILES) {
+    const inventory = JSON.parse(
+      await readFile(path.join(STATE_ROOT, profile, 'inventory.json'), 'utf8')
+    );
+    const unreadable = inventory.items.filter((item) => /判別不能/.test(item.reason));
+    assert.equal(unreadable.length, 0, `${profile} still has default unreadable pages`);
+    assert.ok(
+      inventory.items.every((item) => item.topicHint.startsWith(`${inventory.sourceKey}-`)),
+      `${profile} has pages outside authored analyses`
+    );
+  }
+});
+
 test('committed inventories contain no book body, OCR body, or local path', async () => {
   const profiles = [
     'japan-zue/2025-26',
@@ -87,6 +112,7 @@ test('committed inventories contain no book body, OCR body, or local path', asyn
     'prefecture-databook/2021',
     'claude-skills-guide/2026',
     'kakei-marketing/2015',
+    ...FULL_COVERAGE_ANALYSES_PROFILES,
   ];
   for (const profile of profiles) {
     const inventory = await readFile(

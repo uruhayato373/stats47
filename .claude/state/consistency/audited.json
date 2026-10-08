@@ -1,7 +1,8 @@
 {
-  "hash": "05e4bc45dd13bce30da74687c3624b6a7a708849c3c0519d655f1b4376eb3329",
-  "audited_at": "2026-10-07T13:08:12",
+  "hash": "d8899ef631222b8a9cb8cf94e06518cdd3f119a1ce5b57f14d9c638b9bb3c21b",
+  "audited_at": "2026-10-07T22:22:42",
   "files": [
-    ".claude/scripts/lib/internal-link-lint.mjs"
+    ".claude/scripts/source-vault/__tests__/source-inventory.test.mjs",
+    ".claude/scripts/source-vault/source-inventory.mjs"
   ]
 }

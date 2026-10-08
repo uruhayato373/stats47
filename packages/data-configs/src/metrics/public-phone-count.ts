@@ -74,7 +74,7 @@ export const publicPhoneCount: MetricConfig = {
   },
   "display": {
     "conversionFactor": 1,
-    "decimalPlaces": 2,
+    "decimalPlaces": 0,
   },
   "calculation": {
     "isCalculated": false,
@@ -96,7 +96,7 @@ export const publicPhoneCount: MetricConfig = {
     ],
   },
   "groupKey": "public-phone-count",
-  "seoTitle": "公衆電話設置台数 都道府県ランキング【2024年】｜1位東京都（10,717.00個）",
-  "seoDescription": "2024年の公衆電話設置台数を都道府県別に比較。1位は東京都（10,717.00個）、最下位は徳島県（509.00個）、最大と最小の差は21.1倍です。地図やグラフで47都道府県の違いを確認できます。",
+  "seoTitle": "公衆電話設置台数 都道府県ランキング【2024年】｜1位東京都（10,717個）",
+  "seoDescription": "2024年の公衆電話設置台数を都道府県別に比較。1位は東京都（10,717個）、最下位は徳島県（509個）、最大と最小の差は21.1倍です。地図やグラフで47都道府県の違いを確認できます。",
   "isActive": true,
 };

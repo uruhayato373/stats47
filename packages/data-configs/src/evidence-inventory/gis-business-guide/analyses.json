@@ -1,0 +1,1429 @@
+{
+  "sourceKey": "gis-business-guide",
+  "edition": "2022",
+  "reviewedAt": "2026-10-08",
+  "publicOriginalReuse": "forbidden",
+  "analyses": [
+    {
+      "id": "gis-business-guide-2022-a01",
+      "chapter": 0,
+      "question": "表紙ページ(題名・出版シリーズ名・帯の内容紹介)",
+      "thesis": "題名、著者である民間GIS企業名、帯の宣伝文句が載る表紙。統計項目は無い。",
+      "pages": [
+        1,
+        1
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "表紙と帯の宣伝文だけで、検証できる統計項目や出典付きの値が無い",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "台帳上の記録のみで、制作や追加調査は不要"
+    },
+    {
+      "id": "gis-business-guide-2022-a02",
+      "chapter": 0,
+      "question": "表紙裏の空白、扉、本書の注意書き",
+      "thesis": "空白ページ1枚、題名を再掲する扉、出版社の免責・複製禁止・商標に関する注意書きから成る。",
+      "pages": [
+        2,
+        4
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "空白と扉と法的な注意書きだけで、統計・空間データの論点が無い",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "台帳上の記録のみで、制作や追加調査は不要"
+    },
+    {
+      "id": "gis-business-guide-2022-a03",
+      "chapter": 0,
+      "question": "本書の趣旨と章構成の説明",
+      "thesis": "位置を共通の鍵にして異種のデータを結びつけるというGISの有用性と、全9章の構成を述べる序文。",
+      "pages": [
+        5,
+        5
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "序文であり、個別の統計項目・出典・値を含まない。章ごとの論点は後続エントリで扱う",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "台帳上の記録のみで、制作や追加調査は不要"
+    },
+    {
+      "id": "gis-business-guide-2022-a04",
+      "chapter": 0,
+      "question": "目次(章・節の一覧)",
+      "thesis": "第1章から第9章までの節題を並べた目次で、案内の機能だけを持つ。",
+      "pages": [
+        6,
+        10
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "目次のみで本文の論点を含まない。節題は後続エントリの分割根拠として使った。文字起こしは装飾レイアウトで一部不鮮明だが画像でも節題以上の情報は無い",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "台帳上の記録のみで、制作や追加調査は不要"
+    },
+    {
+      "id": "gis-business-guide-2022-a05",
+      "chapter": 1,
+      "question": "カーナビ・位置情報ゲーム・映像制作・地球観測など、日常にあるGISの利用はどのような形か",
+      "thesis": "電力・ガス・水道の設備管理、ナビゲーション、位置情報ゲーム、映画のCG、衛星画像など、身近な分野でGISが使われていることの紹介。",
+      "pages": [
+        11,
+        19
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "一般向けの利用例の紹介で、都道府県別に再取得できる統計・空間データが無い。商用製品や映画・ゲームの事例で、stats47の指標にも対応しない",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "台帳上の記録のみで、制作や追加調査は不要"
+    },
+    {
+      "id": "gis-business-guide-2022-a06",
+      "chapter": 1,
+      "question": "ハザードマップのように、災害の想定範囲を地図で示すことは、住民の備えの判断にどう役立つか",
+      "thesis": "防災分野でGISが使われてきた経緯、自然災害伝承碑という新しい地図記号、自治体が公開するハザードマップの役割をまとめた導入部。災害リスクの計算そのものは含まない。",
+      "pages": [
+        20,
+        21
+      ],
+      "resolution": "context-only",
+      "resolutionReason": "手法の紹介と図版例が中心で、47県値の再取得に結びつく統計項目が無い。ただしstats47は洪水浸水想定区域と人口メッシュを重ねるGeo分析を既に持ち、その背景説明として使える。入力は国土数値情報の洪水浸水想定区域(CC BY 4.0)",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "blog",
+        "theme"
+      ],
+      "primarySources": [
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "重ねるハザードマップ(ハザードマップポータルサイト)",
+          "url": "https://disaportal.gsi.go.jp/",
+          "termsUrl": "https://www.gsi.go.jp/kikaku/kiyaku.html",
+          "dataYears": [
+            "unverified"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "needs-review"
+        },
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "自然災害伝承碑",
+          "url": "https://www.gsi.go.jp/bousaichiri/denshouhi.html",
+          "termsUrl": "https://www.gsi.go.jp/kikaku/kiyaku.html",
+          "dataYears": [
+            "unverified"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "needs-review"
+        },
+        {
+          "organization": "国土交通省 国土政策局",
+          "publicationOrDataset": "国土数値情報 洪水浸水想定区域データ",
+          "datasetId": "A31b",
+          "url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A31b-2025.html",
+          "termsUrl": "https://nlftp.mlit.go.jp/ksj/other/agreement.html",
+          "dataYears": [
+            "2025"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "洪水浸水想定のGeo分析の解説に、ハザードマップの公式入口(重ねるハザードマップ)と国土数値情報の出典を併記する背景文として使う。書籍の図版は使わない"
+    },
+    {
+      "id": "gis-business-guide-2022-a07",
+      "chapter": 1,
+      "question": "感染症ダッシュボードやSDGsの達成度を地図で見せる取り組みは、どのような構成か",
+      "thesis": "新型コロナの感染者数ダッシュボード、自治体の感染対策マップ、SDGs達成度の可視化事例を紹介する節。",
+      "pages": [
+        22,
+        25
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "2020年以降の感染症ダッシュボードとSDGsの広域プラットフォーム事例の紹介で、現在も更新されて47県値を再取得できる系列が示されていない。個別の統計値や出典付きの表も無い",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "台帳上の記録のみで、制作や追加調査は不要"
+    },
+    {
+      "id": "gis-business-guide-2022-a08",
+      "chapter": 1,
+      "question": "地理教育でGISはどう位置づけられているか、学習用の参考書籍は何か",
+      "thesis": "高校の必修科目の変更と大学の地理学でのGIS活用の説明、および参考書籍の一覧。",
+      "pages": [
+        26,
+        28
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "教育課程の説明と書籍案内で、統計項目が無い。書籍一覧は書名・著者の列挙で、データではない",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "台帳上の記録のみで、制作や追加調査は不要"
+    },
+    {
+      "id": "gis-business-guide-2022-a09",
+      "chapter": 2,
+      "question": "GISとは何か、地理情報にはどのような種類があり、位置によるデータ統合は何をもたらすか",
+      "thesis": "地理情報の種類、GISの役割、複数の主題レイヤーを位置で重ね合わせる特長、利点の3分類を述べる基礎知識。",
+      "pages": [
+        29,
+        33
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "用語の定義と製品としての利点の説明で、個別の統計や空間データを示していない。第2章の開幕ページも同じ性質",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "台帳上の記録のみで、制作や追加調査は不要"
+    },
+    {
+      "id": "gis-business-guide-2022-a10",
+      "chapter": 2,
+      "question": "GISのデータは、点・線・面とラスターでどう表現され、どう管理されるか",
+      "thesis": "ベクターデータとラスターデータの違い、現実世界を主題別のテーブルへ置き換える管理形態の説明。",
+      "pages": [
+        34,
+        37
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "データモデルの一般的な説明で、stats47が扱う統計・空間データの個別項目に対応しない",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "台帳上の記録のみで、制作や追加調査は不要"
+    },
+    {
+      "id": "gis-business-guide-2022-a11",
+      "chapter": 2,
+      "question": "広い範囲の分布図で面積を比べるとき、地図投影の選び方は結果にどう影響するか",
+      "thesis": "緯度経度は距離や面積の計算に向かないこと、メルカトル図法が高緯度で面積を歪めること、分布図では面積の正しい投影法を使うべきことの説明。stats47のGeo分析で面積や距離を計算する際の前提と重なる。",
+      "pages": [
+        38,
+        39
+      ],
+      "resolution": "context-only",
+      "resolutionReason": "投影法の一般論で47県値は含まないが、Geo分析の面積・距離計算の前提として使える説明。座標系の公式な根拠は国土地理院の測地成果で確認できる",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "測地成果2011(日本の測地系)",
+          "url": "https://www.gsi.go.jp/sokuchikijun/jgd2011.html",
+          "termsUrl": "https://www.gsi.go.jp/kikaku/kiyaku.html",
+          "dataYears": [
+            "unverified"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "Geo分析の手法ページで、距離・面積を測るときは投影座標か球面距離を使う理由を一文で補足する(書籍の図は使わない)"
+    },
+    {
+      "id": "gis-business-guide-2022-a12",
+      "chapter": 2,
+      "question": "統計表と境界ポリゴンを地域コードで結びつけると、何が地図に描けるようになるか",
+      "thesis": "市区町村境界のベクターデータに人口などの表を関連づけ、属性として扱うという説明。多様化するデータ(画像・表・リアルタイム)の紹介も含む。stats47が指標を県境界へ載せる仕組みと同じ発想。",
+      "pages": [
+        40,
+        41
+      ],
+      "resolution": "context-only",
+      "resolutionReason": "手法の説明であり、新しい47県値は含まない。境界は国土数値情報の行政区域(CC BY 4.0)とe-Statの統計GISで公式に確認できる",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture-set",
+        "municipality-set"
+      ],
+      "contentRoles": [
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "国土交通省 国土政策局",
+          "publicationOrDataset": "国土数値情報 行政区域データ",
+          "datasetId": "N03",
+          "url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-2025.html",
+          "termsUrl": "https://nlftp.mlit.go.jp/ksj/other/agreement.html",
+          "dataYears": [
+            "2025"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "政府統計の総合窓口 統計GIS(境界データ・地域メッシュ統計)",
+          "url": "https://www.e-stat.go.jp/gis",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2020"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "コロプレス地図の作り方の解説で、境界データの出典と地域コード結合の考え方を示す補足として使う"
+    },
+    {
+      "id": "gis-business-guide-2022-a13",
+      "chapter": 2,
+      "question": "GISはクラウド・デスクトップ・サーバー・モバイルのどの形態で使われ、Web GISは何を可能にするか",
+      "thesis": "システム形態4種とWeb GISの特長、地図の共有・利用場面を述べた説明。",
+      "pages": [
+        42,
+        45
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "製品選定に関わる形態の比較で、統計項目や空間データの個別情報を含まない",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "台帳上の記録のみで、制作や追加調査は不要"
+    },
+    {
+      "id": "gis-business-guide-2022-a14",
+      "chapter": 2,
+      "question": "行政機関が無償で出している背景地図と統計・空間データには何があり、どこで入手できるか",
+      "thesis": "基盤地図情報、国土数値情報、e-Statの統計GISの3つを無償データの入口として挙げ、足りない場合の有償データにも触れる。stats47のデータ出典の説明と重なる。",
+      "pages": [
+        46,
+        47
+      ],
+      "resolution": "context-only",
+      "resolutionReason": "個別の統計値ではなく入手先の案内。3つの入口は公式サイトで到達性を確認でき、国土数値情報はstats47のGIS取り込みで利用済み。新規に登録すべきデータは示されていない",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture-set",
+        "municipality-set"
+      ],
+      "contentRoles": [
+        "blog",
+        "note"
+      ],
+      "primarySources": [
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "基盤地図情報",
+          "url": "https://www.gsi.go.jp/kiban/",
+          "termsUrl": "https://www.gsi.go.jp/kikaku/kiyaku.html",
+          "dataYears": [
+            "unverified"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土政策局",
+          "publicationOrDataset": "国土数値情報ダウンロードサイト",
+          "url": "https://nlftp.mlit.go.jp/ksj/",
+          "termsUrl": "https://nlftp.mlit.go.jp/ksj/other/agreement.html",
+          "dataYears": [
+            "unverified"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "政府統計の総合窓口 統計GIS(境界データ・地域メッシュ統計)",
+          "url": "https://www.e-stat.go.jp/gis",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2020"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "オープンデータ・カタログと国土数値情報登録に既にある入口かを照合し、未登録の入口があれば open-data-curator に渡す。解説記事では3入口の公式URLを紹介する"
+    },
+    {
+      "id": "gis-business-guide-2022-a15",
+      "chapter": 2,
+      "question": "地図サービス、GISの規格とファイル形式、関係する事業者、法制度、歴史はどうなっているか",
+      "thesis": "地理院地図・OpenStreetMap・ArcGIS Living Atlasの紹介、国際・国内の標準化団体とファイル形式、事業者の分類、地理空間情報活用推進基本法、GISの年表。",
+      "pages": [
+        48,
+        58
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "地図サービスの案内、規格、事業者、政策史、年表の説明で、47県値に落とせる統計項目が無い。地図サービスの利用条件の評価はカタログ側の作業",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "台帳上の記録のみで、制作や追加調査は不要"
+    },
+    {
+      "id": "gis-business-guide-2022-a16",
+      "chapter": 3,
+      "question": "人口密度のような地域指標は、表で並べる場合と地図で塗り分ける場合でどう読み方が変わるか",
+      "thesis": "23区の人口密度を表と段階塗り分け地図で対比し、地図なら傾向が一目でわかるという説明。点密度・円の大きさ・3D表現など可視化の種類にも触れる。stats47の都道府県コロプレスの考え方と同じ。",
+      "pages": [
+        59,
+        61
+      ],
+      "resolution": "reuse-existing-metric",
+      "resolutionReason": "書籍の例は東京23区だが、同じ問いは都道府県単位でも成立し、人口密度は総面積あたり・可住地面積あたり・人口集中地区あたりの既存指標がある。区単位の値は再取得しておらず、47県の比較に置き換えて使う",
+      "metricKeys": [
+        "population-density-per-km2-total-area",
+        "population-density-habitable",
+        "densely-inhabited-district-population-density"
+      ],
+      "surveyIds": [
+        "census"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (人口密度・総面積)",
+          "datasetId": "0000010201",
+          "url": "https://www.e-stat.go.jp/dbview?sid=0000010201",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2020"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (人口密度・可住地面積)",
+          "datasetId": "0000020301",
+          "url": "https://www.e-stat.go.jp/dbview?sid=0000020301",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2020"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "既存の3指標を使い、表の順位とコロプレスで見える地域の塊を並べる説明記事を作る。区単位の地図は市区町村コロプレスの別企画で扱う"
+    },
+    {
+      "id": "gis-business-guide-2022-a17",
+      "chapter": 3,
+      "question": "施設までの距離や浸水想定との重なりのような空間解析は、どの手順で計算し、何が結論になるか",
+      "thesis": "現象の発生場所の集中を調べるホットスポット分析、近接解析、オーバーレイ解析、条件を重ねる適地選定、道路網での到達圏、ジオデモグラフィックスなど空間解析の種類を整理した節。stats47のGeo分析(駅・公的施設からの距離別人口、洪水浸水想定と人口の重なり)が使う演算と対応する。",
+      "pages": [
+        62,
+        65
+      ],
+      "resolution": "context-only",
+      "resolutionReason": "手法の分類で、書籍自体は47県値を示さない。stats47は国土数値情報の駅別乗降客数・洪水浸水想定区域・メッシュ人口で近接・重ね合わせを既に実装しており、その手法解説の補足に使える",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "blog",
+        "note"
+      ],
+      "primarySources": [
+        {
+          "organization": "国土交通省 国土政策局",
+          "publicationOrDataset": "国土数値情報 駅別乗降客数データ",
+          "datasetId": "S12",
+          "url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-S12-2024.html",
+          "termsUrl": "https://nlftp.mlit.go.jp/ksj/other/agreement.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土政策局",
+          "publicationOrDataset": "国土数値情報 洪水浸水想定区域データ",
+          "datasetId": "A31b",
+          "url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A31b-2025.html",
+          "termsUrl": "https://nlftp.mlit.go.jp/ksj/other/agreement.html",
+          "dataYears": [
+            "2025"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土政策局",
+          "publicationOrDataset": "国土数値情報 1kmメッシュ別将来推計人口データ(R6国政局推計)",
+          "datasetId": "mesh1000r6",
+          "url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-mesh1000r6.html",
+          "termsUrl": "https://nlftp.mlit.go.jp/ksj/other/agreement.html",
+          "dataYears": [
+            "2020",
+            "2050"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "Geo分析の解説ページで近接解析・オーバーレイ解析の用語を平易に説明する際の対応表にする。新しい分析の追加は geo-analysis-curator に判断を委ねる"
+    },
+    {
+      "id": "gis-business-guide-2022-a18",
+      "chapter": 3,
+      "question": "市区町村の境界やデータを統合して県の単位に集約したとき、集計値の合計は保たれるか",
+      "thesis": "複数県の市町村境界を統合して地方全体の境界を作る、市町村単位のデータを集約して都道府県データを作るといった加工・調整機能の説明。stats47が重視する、途中の集計と最終集計が一致するという保存則の考え方に近い。",
+      "pages": [
+        66,
+        67
+      ],
+      "resolution": "context-only",
+      "resolutionReason": "手法の説明で、新しい値は含まない。市区町村の境界と人口の公式データで保存則の検算ができる(境界は国土数値情報の行政区域、人口は国勢調査)",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture-set",
+        "municipality-set"
+      ],
+      "contentRoles": [
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "国土交通省 国土政策局",
+          "publicationOrDataset": "国土数値情報 行政区域データ",
+          "datasetId": "N03",
+          "url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-N03-2025.html",
+          "termsUrl": "https://nlftp.mlit.go.jp/ksj/other/agreement.html",
+          "dataYears": [
+            "2025"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "政府統計の総合窓口 統計GIS(境界データ・地域メッシュ統計)",
+          "url": "https://www.e-stat.go.jp/gis",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2020"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "市区町村から県への集約が保存則を満たす例として、Geo分析の検算説明に使う。書籍の図(四国4県の統合図)は使わない"
+    },
+    {
+      "id": "gis-business-guide-2022-a19",
+      "chapter": 3,
+      "question": "現地調査・情報共有・画像データ・3Dデータでは、GISは何ができるか",
+      "thesis": "モバイルGISでの現地入力、印刷物やWebでの地図共有、衛星画像のラスター解析、2Dと3Dデータの違いを説明する節。",
+      "pages": [
+        68,
+        75
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "調査用アプリ、共有手段、衛星画像解析、3Dデータの機能紹介で、47県の統計項目が無い。衛星画像と3Dは個別地域の事例で全国比較に使える系列ではない",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "台帳上の記録のみで、制作や追加調査は不要"
+    },
+    {
+      "id": "gis-business-guide-2022-a20",
+      "chapter": 3,
+      "question": "業種ごとにGISの活用例にはどのようなものがあり、空間解析の歴史的な原点は何か",
+      "thesis": "小売・製造・物流・建設などの業種別活用例の目次的な紹介と、19世紀のコレラ分布図の逸話を載せたコラム。",
+      "pages": [
+        76,
+        80
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "活用例の索引と歴史的逸話で、現代の日本の統計項目が無い。コレラ分布図は歴史上の事例で47県値に対応しない",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "台帳上の記録のみで、制作や追加調査は不要"
+    },
+    {
+      "id": "gis-business-guide-2022-a21",
+      "chapter": 4,
+      "question": "小売業の売上や顧客の分布を地図でモニタリングすると、何がわかるか",
+      "thesis": "第4章の導入と、自社の売上データと顧客データを地図に載せて地域の偏りや競合店との関係を見る事例。",
+      "pages": [
+        81,
+        83
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "企業が自社で持つ売上・顧客・POSデータが前提で、公的統計として再取得できる値が無い。章の導入ページも同じ範囲",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "台帳上の記録のみで、制作や追加調査は不要"
+    },
+    {
+      "id": "gis-business-guide-2022-a22",
+      "chapter": 4,
+      "question": "店舗の立地を考えるとき、人口の集まり・駅の多さ・店舗の競合状況は、県の単位でどう関係するか",
+      "thesis": "商圏範囲の設定、国勢調査などによる商圏内の人口特性の集計、現地調査との結びつけを述べる。県の単位に縮約すると、人口密度・駅数・人口あたり店舗数の掛け合わせになる。",
+      "pages": [
+        84,
+        87
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "書籍は店舗周辺の商圏が対象で、県単位では商圏範囲を表現できない。そのため県単位の人口密度・駅数・コンビニ店舗数の既存指標を掛け合わせる縮約版として扱い、書籍の分析そのものの再現とは言わない",
+      "metricKeys": [
+        "population-density-habitable",
+        "railway-station-count",
+        "convenience-store-count-per-100k"
+      ],
+      "surveyIds": [
+        "census"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (人口密度・可住地面積)",
+          "datasetId": "0000020301",
+          "url": "https://www.e-stat.go.jp/dbview?sid=0000020301",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2020"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (コンビニエンスストア数)",
+          "datasetId": "0000010208",
+          "url": "https://www.e-stat.go.jp/dbview?sid=0000010208",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "unverified"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土政策局",
+          "publicationOrDataset": "国土数値情報 駅別乗降客数データ",
+          "datasetId": "S12",
+          "url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-S12-2024.html",
+          "termsUrl": "https://nlftp.mlit.go.jp/ksj/other/agreement.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "3指標の散布図で、人口が集まる県ほど人口あたりの店舗数が多いかを検証する記事案を作る。商圏人口の距離帯分析は既存の駅アクセスGeo分析との重複を確認する"
+    },
+    {
+      "id": "gis-business-guide-2022-a23",
+      "chapter": 4,
+      "question": "店舗網の最適化、複数店舗の出店戦略、売上予測では、GISはどう使われるか",
+      "thesis": "既存店への影響の分析、適地選定のシミュレーション、特定地域に集中して出店する戦略、ハフモデルや機械学習による売上予測を説明する。",
+      "pages": [
+        88,
+        93
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "企業の店舗網・売上実績と予測モデルが前提で、公的統計の47県値として再取得できない。ハフモデルは手法の紹介であり、データ項目ではない",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "台帳上の記録のみで、制作や追加調査は不要"
+    },
+    {
+      "id": "gis-business-guide-2022-a24",
+      "chapter": 4,
+      "question": "昼間に人が集まる県と夜間に人が多い県は、国勢調査の指標でどう分かれるか",
+      "thesis": "国勢調査は居住地基準で更新が5年おき、地域メッシュ統計の昼間人口は夜間人口に流入と流出を加減した推計であるという限界の説明と、携帯の位置情報による人流データとの対比。人流データ自体は民間・限定期間で47県比較に向かない。",
+      "pages": [
+        94,
+        95
+      ],
+      "resolution": "reuse-existing-metric",
+      "resolutionReason": "人流データは再取得できないが、国勢調査の昼夜間人口比率と昼間人口は既存指標にあり、昼間の人の集まり方を県単位で検証できる。人流データとの優劣は比較できないので、国勢調査側の限界の説明に限る",
+      "metricKeys": [
+        "daytime-population-ratio",
+        "day-time-population-ratio",
+        "day-time-population"
+      ],
+      "surveyIds": [
+        "census"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "国勢調査 昼夜間人口比率",
+          "datasetId": "0003454499",
+          "url": "https://www.e-stat.go.jp/dbview?sid=0003454499",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2020"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (昼夜間人口比率)",
+          "datasetId": "0000010101",
+          "url": "https://www.e-stat.go.jp/dbview?sid=0000010101",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2020"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "既存の昼夜間人口比率と昼間人口で県の順位と地域差を整理し、通勤通学による流入が効く県を示す記事案を作る。人流オープンデータの活用は期間が限られるため対象外"
+    },
+    {
+      "id": "gis-business-guide-2022-a25",
+      "chapter": 4,
+      "question": "店舗内の屋内測位、店舗の品ぞろえの最適化、住所から座標への変換は、どのような手順か",
+      "thesis": "屋内で人の動きを測り滞留をヒートマップで見る事例、商圏の属性から品ぞろえを考える手順、ジオコーディングの仕組みを述べたコラム。",
+      "pages": [
+        96,
+        100
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "店舗内の測位データと自社の売上データが前提で、公的統計の47県値が無い。ジオコーディングは技術説明で、データ項目ではない",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "台帳上の記録のみで、制作や追加調査は不要"
+    },
+    {
+      "id": "gis-business-guide-2022-a26",
+      "chapter": 5,
+      "question": "地域の消費傾向を公的な家計調査で見ると、ワインのような品目の支出は都道府県庁所在市でどう違うか",
+      "thesis": "第5章の導入と、人口・世帯数だけでなく購買データを使うエリアマーケティングの説明。以前は家計調査が使われ、近年はID-POSやクレジットカードの購買データが使えるようになったという流れ。民間購買データは再取得できない。",
+      "pages": [
+        101,
+        103
+      ],
+      "resolution": "reuse-existing-metric",
+      "resolutionReason": "購買データは民間で再取得できないが、書籍が例に挙げる品目に対応する家計調査(都道府県庁所在市別)の既存指標があり、公的統計側の地域差は確認できる。調査対象は庁所在市で県全体ではない点を併記する",
+      "metricKeys": [
+        "wine-consumption-expenditure",
+        "wine-consumption-quantity"
+      ],
+      "surveyIds": [
+        "kakei-chousa"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (品目別・都道府県庁所在市別)",
+          "datasetId": "0003348239",
+          "url": "https://www.e-stat.go.jp/stat-search/files?page=1&layout=datalist&toukei=00200561",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "ワインの支出額・購入量の庁所在市別の差を、家計調査の限界(標本調査・庁所在市のみ)を併記して示す記事案を作る"
+    },
+    {
+      "id": "gis-business-guide-2022-a27",
+      "chapter": 5,
+      "question": "販促のためのターゲットエリアは、年齢構成や住宅の所有形態などの統計からどう絞り込めるか",
+      "thesis": "国勢調査の年齢別人口・住宅の所有形態・推計年収でターゲットエリアを抽出し、顧客データから実勢商圏を求めて広告の配布範囲を絞る手順。",
+      "pages": [
+        104,
+        105
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "自社の顧客データと広告配布計画を前提とした販促手順で、47県値として再取得できる項目ではない。推計年収は民間データで出典も不明",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "台帳上の記録のみで、制作や追加調査は不要"
+    },
+    {
+      "id": "gis-business-guide-2022-a28",
+      "chapter": 5,
+      "question": "人口構成・人口密度・昼間人口の違いから、都道府県をいくつかの類型に分けられるか",
+      "thesis": "統計や地理データをもとに地域を生活様式などの類型に分類するジオデモグラフィックデータを、購買データと組み合わせて販促や品ぞろえに活かす説明。書籍の類型名と分類結果は民間データで再取得できない。",
+      "pages": [
+        106,
+        107
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "書籍の分類は民間のジオデモグラフィックで再現できないが、人口構成・人口密度・昼夜間人口比率の既存指標を使えば、独自の定義で都道府県を類型化する検証はできる。書籍の類型とは別物として扱う",
+      "metricKeys": [
+        "old-population-index",
+        "young-population-index",
+        "population-density-habitable",
+        "daytime-population-ratio"
+      ],
+      "surveyIds": [
+        "census"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (老年・年少人口指数)",
+          "datasetId": "0000010201",
+          "url": "https://www.e-stat.go.jp/dbview?sid=0000010201",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2020"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (昼夜間人口比率)",
+          "datasetId": "0000010101",
+          "url": "https://www.e-stat.go.jp/dbview?sid=0000010101",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2020"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "老年人口指数・年少人口指数・人口密度・昼夜間人口比率で県を群に分け、各群の特徴を説明する記事案を作る。分類手法と閾値を公開し、書籍の類型とは対応づけない"
+    },
+    {
+      "id": "gis-business-guide-2022-a29",
+      "chapter": 5,
+      "question": "営業活動の可視化、担当地域の最適化、小売店への提案、倉庫の提案、用地取得では、GISはどう使われるか",
+      "thesis": "顧客の訪問状況の地図管理、営業担当地域の分割、商圏タイプ別の店舗分類、物流倉庫の輸送費シミュレーション、用地情報の一元管理を説明する。",
+      "pages": [
+        108,
+        117
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "自社の営業・顧客・用地・倉庫情報の管理手順で、公的統計として再取得できる項目が無い。商圏レポートの統計は国勢調査由来だが、提示された項目は個別の事例画面",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "台帳上の記録のみで、制作や追加調査は不要"
+    },
+    {
+      "id": "gis-business-guide-2022-a30",
+      "chapter": 5,
+      "question": "人口のような絶対値を地図にするとき、行政界とメッシュのどちらで集計すると分布を正しく読めるか",
+      "thesis": "行政界は面積がまちまちで絶対値を塗り分けると実際の分布と異なる傾向になりうるが、メッシュはほぼ等面積で適切に示せるというコラム。国勢調査・住民基本台帳ベースの人口データ・経済センサスの種類と更新頻度の表を含む。",
+      "pages": [
+        118,
+        118
+      ],
+      "resolution": "context-only",
+      "resolutionReason": "統計GISの利用上の注意を述べたコラムで、新しい47県値は含まない。メッシュ統計は総務省統計局の統計GISで公式に確認でき、stats47のメッシュ人口を使うGeo分析の根拠として使える",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture-set",
+        "municipality-set"
+      ],
+      "contentRoles": [
+        "blog",
+        "note"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "政府統計の総合窓口 統計GIS(境界データ・地域メッシュ統計)",
+          "url": "https://www.e-stat.go.jp/gis",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2020"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土政策局",
+          "publicationOrDataset": "国土数値情報 1kmメッシュ別将来推計人口データ(R6国政局推計)",
+          "datasetId": "mesh1000r6",
+          "url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-mesh1000r6.html",
+          "termsUrl": "https://nlftp.mlit.go.jp/ksj/other/agreement.html",
+          "dataYears": [
+            "2020",
+            "2050"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "Geo分析の説明で、メッシュ集計が行政界集計の面積差を避けられることを補足する。表の民間データ(全国人口統計マスター)は有償で対象外"
+    },
+    {
+      "id": "gis-business-guide-2022-a31",
+      "chapter": 6,
+      "question": "企業や住民が災害リスクを見積もるとき、国の公開する災害想定データをどう使えるか",
+      "thesis": "国土数値情報には河川洪水・地震・津波などの災害ごとのリスク情報がGIS用ファイルで公開されており、BCPのリスク分析に使えること、気象などのライブ情報を取り込む試みがあることを述べる。",
+      "pages": [
+        119,
+        121
+      ],
+      "resolution": "context-only",
+      "resolutionReason": "国土数値情報の災害想定データの紹介で、書籍は値を示さない。データの公開は公式に確認でき、洪水浸水想定区域はCC BY 4.0。土砂災害・津波は一部の県に限る条件があり、利用は個別確認が要る",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "blog",
+        "theme"
+      ],
+      "primarySources": [
+        {
+          "organization": "国土交通省 国土政策局",
+          "publicationOrDataset": "国土数値情報 洪水浸水想定区域データ",
+          "datasetId": "A31b",
+          "url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A31b-2025.html",
+          "termsUrl": "https://nlftp.mlit.go.jp/ksj/other/agreement.html",
+          "dataYears": [
+            "2025"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "重ねるハザードマップ(ハザードマップポータルサイト)",
+          "url": "https://disaportal.gsi.go.jp/",
+          "termsUrl": "https://www.gsi.go.jp/kikaku/kiyaku.html",
+          "dataYears": [
+            "unverified"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "needs-review"
+        }
+      ],
+      "nextAction": "洪水浸水想定のGeo分析の解説で、国土数値情報が災害別のGISファイルを公開していることを出典付きで紹介する。条件付きデータ(A33・A40)は既存のライセンス判定に従う"
+    },
+    {
+      "id": "gis-business-guide-2022-a32",
+      "chapter": 6,
+      "question": "災害発生後の被害状況は、ドローン画像やAIでどう把握されるか",
+      "thesis": "ドローン撮影画像の活用、360度カメラ画像と地図の連携、AIによる被災状況の把握の紹介。",
+      "pages": [
+        122,
+        123
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "被災時の撮影画像と解析手法の紹介で、全国を同じ基準で比較できる統計・空間データが無い",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "台帳上の記録のみで、制作や追加調査は不要"
+    },
+    {
+      "id": "gis-business-guide-2022-a33",
+      "chapter": 6,
+      "question": "標高の低い地域には、都道府県ごとにどれだけの人が住んでいるか",
+      "thesis": "海面上昇や豪雨のリスクを地図で伝える節で、標高の低い地域を2D・3Dで示すことや、洪水・避難のシミュレーションにGISが使われることを述べる。標高と人口を重ねれば、低い土地に住む人の割合を県別に計算できる。",
+      "pages": [
+        124,
+        125
+      ],
+      "resolution": "new-metric",
+      "resolutionReason": "国土数値情報の標高・傾斜度3次メッシュ(最新は2011年度版)と1kmメッシュ将来推計人口(2020年基準)で、標高の低いメッシュに住む人口割合を県別に再計算できる。ただし標高メッシュは約1km単位の平均・最低標高で、海抜の低い狭い土地の厳密な判定には粗く、相対比較に限る",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "blog",
+        "note"
+      ],
+      "primarySources": [
+        {
+          "organization": "国土交通省 国土政策局",
+          "publicationOrDataset": "国土数値情報 標高・傾斜度3次メッシュデータ",
+          "datasetId": "G04-a",
+          "url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-G04-a.html",
+          "termsUrl": "https://nlftp.mlit.go.jp/ksj/other/agreement.html",
+          "dataYears": [
+            "2011"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土政策局",
+          "publicationOrDataset": "国土数値情報 1kmメッシュ別将来推計人口データ(R6国政局推計)",
+          "datasetId": "mesh1000r6",
+          "url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-mesh1000r6.html",
+          "termsUrl": "https://nlftp.mlit.go.jp/ksj/other/agreement.html",
+          "dataYears": [
+            "2020",
+            "2050"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "標高メッシュと人口メッシュを重ねる決定的な空間演算の手順と、メッシュ平均標高の限界を整理して geo-analysis-curator に渡す。入力の版・SHA・保存則を満たしたうえで、順位ではなく県別の人口構成として公開する案を検討する"
+    },
+    {
+      "id": "gis-business-guide-2022-a34",
+      "chapter": 6,
+      "question": "サプライチェーン、施設管理、移動体の位置情報は、GISでどう可視化・管理されるか",
+      "thesis": "取引関係の可視化、供給リスクの管理(自動車会社の事例)、施設内のIoTと3Dモデルの統合、車両や人のログとジオフェンスの利用。",
+      "pages": [
+        126,
+        133
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "企業の取引・設備・車両ログが前提で、公的統計の47県値として再取得できない。事例は特定企業の画面例",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "台帳上の記録のみで、制作や追加調査は不要"
+    },
+    {
+      "id": "gis-business-guide-2022-a35",
+      "chapter": 6,
+      "question": "物流拠点の配置、集配エリア、配送の進捗管理、共同配送、調達物流の費用は、GISでどう分析されるか",
+      "thesis": "拠点のカバーエリア分析、集配エリアの作成、配送ルートの計画と監視、巡回経路問題、共同配送や調達物流の費用シミュレーション、ネットワーク解析の仕組みのコラム。",
+      "pages": [
+        134,
+        149
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "企業の配送実績・拠点・費用を入力とするシミュレーション手順で、公的統計の47県値が無い。ネットワーク解析は技術解説で、データ項目ではない",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "台帳上の記録のみで、制作や追加調査は不要"
+    },
+    {
+      "id": "gis-business-guide-2022-a36",
+      "chapter": 7,
+      "question": "建築・土木の設計と施工の状況は、GISでどう可視化されるか",
+      "thesis": "第7章の導入、設計工程へのGIS組み込み、建設現場の進捗やヒヤリハットの統合管理画面の説明。",
+      "pages": [
+        150,
+        154
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "建設事業者の設計・施工管理の手順で、公的統計として再取得できる項目が無い。章の導入ページも同範囲",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "台帳上の記録のみで、制作や追加調査は不要"
+    },
+    {
+      "id": "gis-business-guide-2022-a37",
+      "chapter": 7,
+      "question": "太陽光発電所のような設備を置く適地は、土地利用・傾斜・距離・日射量をどう重ねて決めるか",
+      "thesis": "人口や交通量による効果、地形や土地利用による費用、開発規制の有無を指標化して重ね合わせ、重要度で重みを付けて候補地を選ぶ手順の説明。重みづけの設定は分析者の判断に依存する。",
+      "pages": [
+        155,
+        156
+      ],
+      "resolution": "context-only",
+      "resolutionReason": "一般的な適地選定の手順で、書籍は値を示さない。土地利用細分メッシュと標高・傾斜度は国土数値情報で再取得できるが、重みや閾値は恣意性を伴い、47県値の比較には設計判断が要る",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "国土交通省 国土政策局",
+          "publicationOrDataset": "国土数値情報 土地利用細分メッシュデータ",
+          "datasetId": "L03-b",
+          "url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-L03-b-2021.html",
+          "termsUrl": "https://nlftp.mlit.go.jp/ksj/other/agreement.html",
+          "dataYears": [
+            "2021"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土政策局",
+          "publicationOrDataset": "国土数値情報 標高・傾斜度3次メッシュデータ",
+          "datasetId": "G04-a",
+          "url": "https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-G04-a.html",
+          "termsUrl": "https://nlftp.mlit.go.jp/ksj/other/agreement.html",
+          "dataYears": [
+            "2011"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "適地選定を県別の比較に使う場合は、重みを置かない条件別の面積比率に限る。日射量の一次資料は別途確認が必要で、現時点では保留する"
+    },
+    {
+      "id": "gis-business-guide-2022-a38",
+      "chapter": 7,
+      "question": "社会インフラの設計と保守点検は、GISでどう管理されるか、代表的なデスクトップGISは何か",
+      "thesis": "設備管理データベースとしてのGISの要素、ガス導管の点検での現地入力、デスクトップGISソフトの一覧コラム。",
+      "pages": [
+        157,
+        161
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "設備事業者の管理手順とソフトの製品一覧で、公的統計・空間データの項目が無い。ガス導管のデータは事業者の内部データ",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "台帳上の記録のみで、制作や追加調査は不要"
+    },
+    {
+      "id": "gis-business-guide-2022-a39",
+      "chapter": 8,
+      "question": "GISを組織に導入するとき、業務フロー・人材・システム構成・データの扱いで何を検討するか",
+      "thesis": "導入の5要素、目的の明確化、PoC、人材の役割分担、システム形態と実装方式の選択、利用データの構成、データの作成・入手・保守、SoR・SoE・SoIの分類を述べた導入ガイド。",
+      "pages": [
+        162,
+        181
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "組織への導入手順の説明で、統計項目や47県値が無い。データの入手方法の説明も一般論で、新たな出典の提示は無い",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "台帳上の記録のみで、制作や追加調査は不要"
+    },
+    {
+      "id": "gis-business-guide-2022-a40",
+      "chapter": 9,
+      "question": "デジタルトランスフォーメーションやデジタルツインに、GISはどう関わるか",
+      "thesis": "デジタル化とDXの違い、ドバイの事例、デジタルツインの概念と荒川下流域の事例。",
+      "pages": [
+        182,
+        186
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "DXとデジタルツインの概念説明と海外・河川の事例で、全国の47県値として再取得できる項目が無い",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "台帳上の記録のみで、制作や追加調査は不要"
+    },
+    {
+      "id": "gis-business-guide-2022-a41",
+      "chapter": 9,
+      "question": "3D都市モデルのような詳細な都市データは、どの地域まで公開され、何に使えるか",
+      "thesis": "国土交通省のProject PLATEAUによる3D都市モデルのオープンデータ化、CityGMLとLODの考え方、防災などへの活用の紹介。",
+      "pages": [
+        187,
+        188
+      ],
+      "resolution": "context-only",
+      "resolutionReason": "整備対象は一部の都市で、47都道府県を同じ基準で比較できる全国値ではない。公開は公式サイトで確認できるが、利用条件は個別確認が要る",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [
+        "municipality-set"
+      ],
+      "contentRoles": [
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "国土交通省",
+          "publicationOrDataset": "Project PLATEAU 3D都市モデル",
+          "url": "https://www.mlit.go.jp/plateau/open-data/",
+          "dataYears": [
+            "unverified"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "needs-review"
+        }
+      ],
+      "nextAction": "47県比較には使わず、都市単位の記事で3D都市モデルの存在を紹介する際の出典として保持する。対象都市の範囲は公式サイトで確認してから参照する"
+    },
+    {
+      "id": "gis-business-guide-2022-a42",
+      "chapter": 9,
+      "question": "BIM/CIM、点群、ドローン、IoT、AI、VR/AR/MRは、GISとどう連携するか",
+      "thesis": "建設分野の3Dモデル、レーザー点群、ドローン画像、センサーデータ、機械学習による検出、拡張現実の利用場面を述べる。",
+      "pages": [
+        189,
+        200
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "技術動向の紹介で、47県値として再取得できる統計・空間データが無い。個別の事例画面と国の試行事業の紹介にとどまる",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "台帳上の記録のみで、制作や追加調査は不要"
+    },
+    {
+      "id": "gis-business-guide-2022-a43",
+      "chapter": 9,
+      "question": "通勤・通学で昼間の人口が増減する県は、国勢調査の指標でどう把握できるか",
+      "thesis": "パーソントリップ調査や国勢調査由来の昼間人口の限界と、携帯位置情報による人流データの粒度・頻度の優位、新型コロナ期の公開と行政のオープンデータ化の流れの説明。人流オープンデータは期間が限られ47県の継続系列ではない。",
+      "pages": [
+        201,
+        202
+      ],
+      "resolution": "reuse-existing-metric",
+      "resolutionReason": "人流データは継続的な47県系列ではなく再取得対象にしない。国勢調査の昼夜間人口比率と昼間人口は既存指標があり、従来型の指標側の地域差は検証できる。94〜95ページの論点と同じ指標を使う",
+      "metricKeys": [
+        "daytime-population-ratio",
+        "day-time-population"
+      ],
+      "surveyIds": [
+        "census"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "survey",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "国勢調査 昼夜間人口比率",
+          "datasetId": "0003454499",
+          "url": "https://www.e-stat.go.jp/dbview?sid=0003454499",
+          "termsUrl": "https://www.e-stat.go.jp/terms-of-use",
+          "dataYears": [
+            "2020"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "94〜95ページと同じ既存指標で扱い、人流データは期間限定の参考として注記する。独立した記事にせず、昼夜間人口の記事の限界説明へ統合する"
+    },
+    {
+      "id": "gis-business-guide-2022-a44",
+      "chapter": 9,
+      "question": "自動車のプローブ情報、SNS、高精度測位、自動運転、屋内地図は、GISとどう関わるか",
+      "thesis": "走行履歴による渋滞把握、災害時のSNS情報、衛星測位の精度向上、自動運転用の高精度地図とダイナミックマップ、屋内地図の活用場面を紹介する。",
+      "pages": [
+        203,
+        212
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "技術動向と個別の事例紹介で、47県値として継続的に再取得できる公開データの提示が無い。プローブやSNSは民間・非継続の系列",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "台帳上の記録のみで、制作や追加調査は不要"
+    },
+    {
+      "id": "gis-business-guide-2022-a45",
+      "chapter": 9,
+      "question": "自治体のオープンデータへの取り組みは、都道府県ごとにどれだけ進んでいるか",
+      "thesis": "オープンデータの定義(機械判読可能で二次利用自由)、自治体の取り組みが広がっていること、位置情報を含むデータの形式、G空間情報センター、クリエイティブ・コモンズのライセンスの説明。",
+      "pages": [
+        213,
+        214
+      ],
+      "resolution": "new-metric",
+      "resolutionReason": "デジタル庁が取組済みの都道府県・市区町村の一覧(Excel・CSV)を公開しており、都道府県ごとの取組済み市区町村の割合を再計算できる。書籍が示す全体の取組割合の年次は本書時点のもので、現時点の値とは別。分母の市区町村数は総務省の公式一覧で確認が要り、一覧ページ自体に個別の利用条件の記載は無いが、サイト全体にはデジタル庁の利用規約(公共データ利用規約第1.0版)が適用される",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "デジタル庁",
+          "publicationOrDataset": "オープンデータ取組済自治体一覧(都道府県・市区町村、令和8年6月30日時点)",
+          "url": "https://www.digital.go.jp/resources/data_local_governments",
+          "termsUrl": "https://www.digital.go.jp/copyright-policy",
+          "dataYears": [
+            "2026"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "取組済み一覧と市区町村の総数から都道府県別の取組割合を算出する設計を data-ingester に渡す。出典表記と加工の旨の表示(公共データ利用規約第1.0版)を表示に含める。open-data-curator の自治体標準オープンデータセットの項目との重複も確認する"
+    },
+    {
+      "id": "gis-business-guide-2022-a46",
+      "chapter": 9,
+      "question": "GISポータル、組織間連携、地理空間情報の推進計画は、どのような仕組みと施策か",
+      "thesis": "GISポータルと分散型GISによる組織間連携の説明、第4期地理空間情報活用推進基本計画の重点施策(防災、衛星、スマート農業、空間IDなど)の一覧。",
+      "pages": [
+        215,
+        221
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "ポータルの構成と国の基本計画・施策の説明で、統計項目や47県値が無い。国土交通データプラットフォームは既存のオープンデータ・カタログ側で管理している",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "台帳上の記録のみで、制作や追加調査は不要"
+    },
+    {
+      "id": "gis-business-guide-2022-a47",
+      "chapter": 0,
+      "question": "巻末の索引、著者紹介、監修者・執筆者、奥付",
+      "thesis": "索引3ページ、発行元の会社紹介と図の著作権表記、監修・編集・執筆者の一覧、奥付(発行日・ISBN)。",
+      "pages": [
+        222,
+        227
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "索引と著作権表記と奥付で、統計項目や論点が無い。人名・社名・ISBNの記載は参照用であり台帳の対象外",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "台帳上の記録のみで、制作や追加調査は不要"
+    },
+    {
+      "id": "gis-business-guide-2022-a48",
+      "chapter": 0,
+      "question": "電子書籍アプリのレビュー依頼画面の取り込み(重複スキャン)",
+      "thesis": "Kindleアプリのレビュー依頼画面の撮影画像が3ページ続く。",
+      "pages": [
+        228,
+        230
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "3ページとも画像が完全一致(ハッシュ同一)で、文字起こしでも書誌再掲とレビュー依頼の定型画面だけで本文が無い。重複スキャン",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "台帳上の記録のみで、制作や追加調査は不要"
+    }
+  ]
+}

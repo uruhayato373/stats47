@@ -48,6 +48,19 @@ e-Stat の `@time` は **10 桁のフルタイムコード**（例 `"2009100000"
 **page-data-batch の扱い:** `inYearRange` はフルコードが来ても 4 桁に正規化して比較する防御を持つが、
 **SSOT（config）側を 4 桁に保つのが正**。lint で担保する。
 
+## 家計調査の品目の範囲は収支項目分類で確かめる (2026-10-08)
+
+家計調査の品目に**何が含まれ何が含まれないか**は、e-Stat の分類名からは分からない。総務省 統計局の
+「収支項目分類及びその内容例示」の控え `data/estat/kakei-classification/<改定>.json` を正本にし、
+metric の title・subtitle・note やブログ本文で品目の範囲を書く前に読む。
+
+- 実例: 「371 ぎょうざ」は冷凍品を含まない (公式の例示「× ぎょうざの冷凍品→370」)。冷凍は「370 冷凍調理食品」に入る。
+  これを確かめずに、metric の注記とブログ本文に「冷凍餃子も数える」と書いていた。
+- 検査: `npm run estat:kakei-classification:check` が全家計調査 metric の文言を「× 含まれない」例示と突き合わせる
+  (PR CI の Kakei Item Classification Gate)。語の照合なので、意味の正しさの最終判断は正本の例示を読んで行う。
+- 統計局が改定を出したら `npm run estat:kakei-classification:build -- --revision <年>` で控えを作り、
+  `check-kakei-classification.ts` の `TABLES` に新しい表と改定を足す。
+
 ## 関連
 
 - **e-Statメタデータ完全カタログ** (全国/都道府県/市区町村のstatsDataId+分類コード+年次+エリア種別を月次でR2保有): 初回のみ`catalog.mjs pull`、以後`node --import tsx .claude/scripts/estat/catalog.mjs search <語>`。統計表の存在確認は生API呼び出しの前にこちらを先に引く。設計 `docs/02_実装計画/48_e-Statカタログ実装仕様.md`

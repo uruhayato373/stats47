@@ -12,10 +12,12 @@
   "itemCount": 15,
   "resolvedCount": 15,
   "resolutionCoverage": 1,
-  "actionableCount": 0,
-  "blockedCount": 0,
+  "actionableCount": 2,
+  "blockedCount": 4,
   "byResolution": {
-    "not-applicable": 15
+    "not-applicable": 9,
+    "primary-source-unavailable": 4,
+    "context-only": 2
   },
   "byKind": {
     "page": 15

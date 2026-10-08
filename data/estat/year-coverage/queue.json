@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-03T22:50:20.906Z",
+  "generatedAt": "2026-10-07T21:31:24.581Z",
   "results": {
     "abandoned-cultivated-land-area": {
       "key": "abandoned-cultivated-land-area",
@@ -87,7 +87,7 @@
     "actual-income-worker-households-per-month": {
       "key": "actual-income-worker-households-per-month",
       "statsDataId": "0000010212",
-      "configYears": 1,
+      "configYears": 50,
       "estatNonNullYears": 50,
       "availableYearCodes": [
         "1975",
@@ -141,8 +141,53 @@
         "2023",
         "2024"
       ],
-      "verdict": "extend-candidate",
+      "verdict": "config-covers",
       "checkedAt": "2026-09-19T22:17:57.343Z"
+    },
+    "actual-overnight-guests": {
+      "key": "actual-overnight-guests",
+      "statsDataId": "0000010107",
+      "configYears": 16,
+      "estatNonNullYears": 16,
+      "availableYearCodes": [
+        "2009",
+        "2010",
+        "2011",
+        "2012",
+        "2013",
+        "2014",
+        "2015",
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "verdict": "config-covers",
+      "checkedAt": "2026-10-07T21:31:12.895Z",
+      "scope": "all-prefectures",
+      "prefectureCountsByYear": {
+        "2009": 47,
+        "2010": 47,
+        "2011": 47,
+        "2012": 47,
+        "2013": 47,
+        "2014": 47,
+        "2015": 47,
+        "2016": 47,
+        "2017": 47,
+        "2018": 47,
+        "2019": 47,
+        "2020": 47,
+        "2021": 47,
+        "2022": 47,
+        "2023": 47,
+        "2024": 47
+      }
     },
     "acupuncture-moxibustion-count": {
       "key": "acupuncture-moxibustion-count",
@@ -660,7 +705,7 @@
     "air-passenger-transport": {
       "key": "air-passenger-transport",
       "statsDataId": "0000010103",
-      "configYears": 1,
+      "configYears": 49,
       "estatNonNullYears": 49,
       "availableYearCodes": [
         "1975",
@@ -713,7 +758,7 @@
         "2022",
         "2023"
       ],
-      "verdict": "extend-candidate",
+      "verdict": "config-covers",
       "checkedAt": "2026-09-19T22:18:13.621Z"
     },
     "amusement-industry-employees": {
@@ -1050,7 +1095,7 @@
     "annual-precipitation": {
       "key": "annual-precipitation",
       "statsDataId": "0000010102",
-      "configYears": 1,
+      "configYears": 50,
       "estatNonNullYears": 50,
       "availableYearCodes": [
         "1975",
@@ -1104,13 +1149,13 @@
         "2023",
         "2024"
       ],
-      "verdict": "extend-candidate",
+      "verdict": "config-covers",
       "checkedAt": "2026-09-19T22:18:26.758Z"
     },
     "annual-precipitation-days": {
       "key": "annual-precipitation-days",
       "statsDataId": "0000010102",
-      "configYears": 1,
+      "configYears": 50,
       "estatNonNullYears": 50,
       "availableYearCodes": [
         "1975",
@@ -1164,7 +1209,7 @@
         "2023",
         "2024"
       ],
-      "verdict": "extend-candidate",
+      "verdict": "config-covers",
       "checkedAt": "2026-09-19T22:18:27.767Z"
     },
     "annual-snow-days": {
@@ -1275,7 +1320,7 @@
     "area-ratio-of-total": {
       "key": "area-ratio-of-total",
       "statsDataId": "0000010202",
-      "configYears": 1,
+      "configYears": 50,
       "estatNonNullYears": 50,
       "availableYearCodes": [
         "1975",
@@ -1329,7 +1374,7 @@
         "2023",
         "2024"
       ],
-      "verdict": "extend-candidate",
+      "verdict": "config-covers",
       "checkedAt": "2026-09-19T22:18:33.669Z"
     },
     "art-museum-count": {
@@ -1938,7 +1983,7 @@
     "average-height-primary-school-fifth-grade-male": {
       "key": "average-height-primary-school-fifth-grade-male",
       "statsDataId": "0000010209",
-      "configYears": 1,
+      "configYears": 47,
       "estatNonNullYears": 47,
       "availableYearCodes": [
         "1975",
@@ -1989,7 +2034,7 @@
         "2022",
         "2023"
       ],
-      "verdict": "extend-candidate",
+      "verdict": "config-covers",
       "checkedAt": "2026-09-19T22:18:49.893Z"
     },
     "average-length-of-stay": {
@@ -2165,7 +2210,7 @@
     "average-relative-humidity": {
       "key": "average-relative-humidity",
       "statsDataId": "0000010102",
-      "configYears": 1,
+      "configYears": 50,
       "estatNonNullYears": 50,
       "availableYearCodes": [
         "1975",
@@ -2219,7 +2264,7 @@
         "2023",
         "2024"
       ],
-      "verdict": "extend-candidate",
+      "verdict": "config-covers",
       "checkedAt": "2026-09-19T22:18:57.155Z"
     },
     "average-road-traffic-volume": {
@@ -2239,7 +2284,7 @@
     "average-temperature": {
       "key": "average-temperature",
       "statsDataId": "0000010102",
-      "configYears": 1,
+      "configYears": 50,
       "estatNonNullYears": 50,
       "availableYearCodes": [
         "1975",
@@ -2293,7 +2338,7 @@
         "2023",
         "2024"
       ],
-      "verdict": "extend-candidate",
+      "verdict": "config-covers",
       "checkedAt": "2026-09-19T22:18:59.883Z"
     },
     "average-weight-high-school-second-grade-female": {
@@ -2877,7 +2922,7 @@
     "avg-propensity-to-consume-worker-households": {
       "key": "avg-propensity-to-consume-worker-households",
       "statsDataId": "0000010212",
-      "configYears": 1,
+      "configYears": 50,
       "estatNonNullYears": 50,
       "availableYearCodes": [
         "1975",
@@ -2931,13 +2976,13 @@
         "2023",
         "2024"
       ],
-      "verdict": "extend-candidate",
+      "verdict": "config-covers",
       "checkedAt": "2026-09-19T22:19:11.963Z"
     },
     "avg-savings-rate-worker-households": {
       "key": "avg-savings-rate-worker-households",
       "statsDataId": "0000010212",
-      "configYears": 1,
+      "configYears": 50,
       "estatNonNullYears": 50,
       "availableYearCodes": [
         "1975",
@@ -2991,7 +3036,7 @@
         "2023",
         "2024"
       ],
-      "verdict": "extend-candidate",
+      "verdict": "config-covers",
       "checkedAt": "2026-09-19T22:19:12.752Z"
     },
     "bamboo-production": {
@@ -3029,7 +3074,7 @@
     "bank-deposit-balance-per-person": {
       "key": "bank-deposit-balance-per-person",
       "statsDataId": "0000010203",
-      "configYears": 1,
+      "configYears": 50,
       "estatNonNullYears": 50,
       "availableYearCodes": [
         "1975",
@@ -3083,7 +3128,7 @@
         "2023",
         "2024"
       ],
-      "verdict": "extend-candidate",
+      "verdict": "config-covers",
       "checkedAt": "2026-09-19T22:19:14.536Z"
     },
     "bank-loan-balance": {
@@ -3649,7 +3694,7 @@
     "building-fire-count-per-100-thousand-people": {
       "key": "building-fire-count-per-100-thousand-people",
       "statsDataId": "0000010211",
-      "configYears": 1,
+      "configYears": 49,
       "estatNonNullYears": 49,
       "availableYearCodes": [
         "1975",
@@ -3702,7 +3747,7 @@
         "2022",
         "2023"
       ],
-      "verdict": "extend-candidate",
+      "verdict": "config-covers",
       "checkedAt": "2026-09-19T22:19:35.995Z"
     },
     "building-fire-damage-amount-per-building-fire": {
@@ -4003,6 +4048,39 @@
       ],
       "verdict": "extend-candidate",
       "checkedAt": "2026-09-26T22:36:25.517Z"
+    },
+    "census-household-change-rate-5y": {
+      "key": "census-household-change-rate-5y",
+      "statsDataId": "0004065882",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2025"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:48:27.982Z"
+    },
+    "census-population-change-5y": {
+      "key": "census-population-change-5y",
+      "statsDataId": "0004065882",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2025"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:48:28.696Z"
+    },
+    "census-population-change-rate-5y": {
+      "key": "census-population-change-rate-5y",
+      "statsDataId": "0004065882",
+      "configYears": 1,
+      "estatNonNullYears": 1,
+      "availableYearCodes": [
+        "2025"
+      ],
+      "verdict": "confirmed-single-year",
+      "checkedAt": "2026-10-03T22:48:29.334Z"
     },
     "certified-childcare-center-count-per-100k-0-5": {
       "key": "certified-childcare-center-count-per-100k-0-5",
@@ -4907,7 +4985,7 @@
     "consumer-price-difference-index-clothing-footwear": {
       "key": "consumer-price-difference-index-clothing-footwear",
       "statsDataId": "0000010212",
-      "configYears": 1,
+      "configYears": 12,
       "estatNonNullYears": 12,
       "availableYearCodes": [
         "2013",
@@ -4923,13 +5001,28 @@
         "2023",
         "2024"
       ],
-      "verdict": "extend-candidate",
-      "checkedAt": "2026-09-26T22:36:57.959Z"
+      "verdict": "config-covers",
+      "checkedAt": "2026-10-07T21:31:22.643Z",
+      "scope": "all-prefectures",
+      "prefectureCountsByYear": {
+        "2013": 47,
+        "2014": 47,
+        "2015": 47,
+        "2016": 47,
+        "2017": 47,
+        "2018": 47,
+        "2019": 47,
+        "2020": 47,
+        "2021": 47,
+        "2022": 47,
+        "2023": 47,
+        "2024": 47
+      }
     },
     "consumer-price-difference-index-culture-recreation": {
       "key": "consumer-price-difference-index-culture-recreation",
       "statsDataId": "0000010212",
-      "configYears": 1,
+      "configYears": 12,
       "estatNonNullYears": 12,
       "availableYearCodes": [
         "2013",
@@ -4945,13 +5038,28 @@
         "2023",
         "2024"
       ],
-      "verdict": "extend-candidate",
-      "checkedAt": "2026-09-26T22:36:59.267Z"
+      "verdict": "config-covers",
+      "checkedAt": "2026-10-07T21:31:20.128Z",
+      "scope": "all-prefectures",
+      "prefectureCountsByYear": {
+        "2013": 47,
+        "2014": 47,
+        "2015": 47,
+        "2016": 47,
+        "2017": 47,
+        "2018": 47,
+        "2019": 47,
+        "2020": 47,
+        "2021": 47,
+        "2022": 47,
+        "2023": 47,
+        "2024": 47
+      }
     },
     "consumer-price-difference-index-education": {
       "key": "consumer-price-difference-index-education",
       "statsDataId": "0000010212",
-      "configYears": 1,
+      "configYears": 12,
       "estatNonNullYears": 12,
       "availableYearCodes": [
         "2013",
@@ -4967,13 +5075,28 @@
         "2023",
         "2024"
       ],
-      "verdict": "extend-candidate",
-      "checkedAt": "2026-09-26T22:37:00.339Z"
+      "verdict": "config-covers",
+      "checkedAt": "2026-10-07T21:31:19.420Z",
+      "scope": "all-prefectures",
+      "prefectureCountsByYear": {
+        "2013": 47,
+        "2014": 47,
+        "2015": 47,
+        "2016": 47,
+        "2017": 47,
+        "2018": 47,
+        "2019": 47,
+        "2020": 47,
+        "2021": 47,
+        "2022": 47,
+        "2023": 47,
+        "2024": 47
+      }
     },
     "consumer-price-difference-index-food": {
       "key": "consumer-price-difference-index-food",
       "statsDataId": "0000010212",
-      "configYears": 1,
+      "configYears": 12,
       "estatNonNullYears": 12,
       "availableYearCodes": [
         "2013",
@@ -4989,13 +5112,13 @@
         "2023",
         "2024"
       ],
-      "verdict": "extend-candidate",
+      "verdict": "config-covers",
       "checkedAt": "2026-09-26T22:37:01.228Z"
     },
     "consumer-price-difference-index-furniture-household": {
       "key": "consumer-price-difference-index-furniture-household",
       "statsDataId": "0000010212",
-      "configYears": 1,
+      "configYears": 12,
       "estatNonNullYears": 12,
       "availableYearCodes": [
         "2013",
@@ -5011,13 +5134,28 @@
         "2023",
         "2024"
       ],
-      "verdict": "extend-candidate",
-      "checkedAt": "2026-09-26T22:37:02.072Z"
+      "verdict": "config-covers",
+      "checkedAt": "2026-10-07T21:31:23.375Z",
+      "scope": "all-prefectures",
+      "prefectureCountsByYear": {
+        "2013": 47,
+        "2014": 47,
+        "2015": 47,
+        "2016": 47,
+        "2017": 47,
+        "2018": 47,
+        "2019": 47,
+        "2020": 47,
+        "2021": 47,
+        "2022": 47,
+        "2023": 47,
+        "2024": 47
+      }
     },
     "consumer-price-difference-index-healthcare": {
       "key": "consumer-price-difference-index-healthcare",
       "statsDataId": "0000010212",
-      "configYears": 1,
+      "configYears": 12,
       "estatNonNullYears": 12,
       "availableYearCodes": [
         "2013",
@@ -5033,13 +5171,28 @@
         "2023",
         "2024"
       ],
-      "verdict": "extend-candidate",
-      "checkedAt": "2026-09-26T22:37:02.966Z"
+      "verdict": "config-covers",
+      "checkedAt": "2026-10-07T21:31:21.998Z",
+      "scope": "all-prefectures",
+      "prefectureCountsByYear": {
+        "2013": 47,
+        "2014": 47,
+        "2015": 47,
+        "2016": 47,
+        "2017": 47,
+        "2018": 47,
+        "2019": 47,
+        "2020": 47,
+        "2021": 47,
+        "2022": 47,
+        "2023": 47,
+        "2024": 47
+      }
     },
     "consumer-price-difference-index-housing": {
       "key": "consumer-price-difference-index-housing",
       "statsDataId": "0000010212",
-      "configYears": 1,
+      "configYears": 12,
       "estatNonNullYears": 12,
       "availableYearCodes": [
         "2013",
@@ -5055,13 +5208,13 @@
         "2023",
         "2024"
       ],
-      "verdict": "extend-candidate",
+      "verdict": "config-covers",
       "checkedAt": "2026-09-26T22:37:03.979Z"
     },
     "consumer-price-difference-index-miscellaneous": {
       "key": "consumer-price-difference-index-miscellaneous",
       "statsDataId": "0000010212",
-      "configYears": 1,
+      "configYears": 12,
       "estatNonNullYears": 12,
       "availableYearCodes": [
         "2013",
@@ -5077,13 +5230,28 @@
         "2023",
         "2024"
       ],
-      "verdict": "extend-candidate",
-      "checkedAt": "2026-09-26T22:37:04.803Z"
+      "verdict": "config-covers",
+      "checkedAt": "2026-10-07T21:31:24.280Z",
+      "scope": "all-prefectures",
+      "prefectureCountsByYear": {
+        "2013": 47,
+        "2014": 47,
+        "2015": 47,
+        "2016": 47,
+        "2017": 47,
+        "2018": 47,
+        "2019": 47,
+        "2020": 47,
+        "2021": 47,
+        "2022": 47,
+        "2023": 47,
+        "2024": 47
+      }
     },
     "consumer-price-difference-index-overall-excl-rent": {
       "key": "consumer-price-difference-index-overall-excl-rent",
       "statsDataId": "0000010212",
-      "configYears": 1,
+      "configYears": 12,
       "estatNonNullYears": 12,
       "availableYearCodes": [
         "2013",
@@ -5099,13 +5267,28 @@
         "2023",
         "2024"
       ],
-      "verdict": "extend-candidate",
-      "checkedAt": "2026-09-26T22:37:05.576Z"
+      "verdict": "config-covers",
+      "checkedAt": "2026-10-07T21:31:17.436Z",
+      "scope": "all-prefectures",
+      "prefectureCountsByYear": {
+        "2013": 47,
+        "2014": 47,
+        "2015": 47,
+        "2016": 47,
+        "2017": 47,
+        "2018": 47,
+        "2019": 47,
+        "2020": 47,
+        "2021": 47,
+        "2022": 47,
+        "2023": 47,
+        "2024": 47
+      }
     },
     "consumer-price-difference-index-transport-communication": {
       "key": "consumer-price-difference-index-transport-communication",
       "statsDataId": "0000010212",
-      "configYears": 1,
+      "configYears": 12,
       "estatNonNullYears": 12,
       "availableYearCodes": [
         "2013",
@@ -5121,13 +5304,28 @@
         "2023",
         "2024"
       ],
-      "verdict": "extend-candidate",
-      "checkedAt": "2026-09-26T22:37:06.407Z"
+      "verdict": "config-covers",
+      "checkedAt": "2026-10-07T21:31:21.250Z",
+      "scope": "all-prefectures",
+      "prefectureCountsByYear": {
+        "2013": 47,
+        "2014": 47,
+        "2015": 47,
+        "2016": 47,
+        "2017": 47,
+        "2018": 47,
+        "2019": 47,
+        "2020": 47,
+        "2021": 47,
+        "2022": 47,
+        "2023": 47,
+        "2024": 47
+      }
     },
     "consumer-price-difference-index-utilities": {
       "key": "consumer-price-difference-index-utilities",
       "statsDataId": "0000010212",
-      "configYears": 1,
+      "configYears": 12,
       "estatNonNullYears": 12,
       "availableYearCodes": [
         "2013",
@@ -5143,8 +5341,23 @@
         "2023",
         "2024"
       ],
-      "verdict": "extend-candidate",
-      "checkedAt": "2026-09-26T22:37:07.304Z"
+      "verdict": "config-covers",
+      "checkedAt": "2026-10-07T21:31:18.537Z",
+      "scope": "all-prefectures",
+      "prefectureCountsByYear": {
+        "2013": 47,
+        "2014": 47,
+        "2015": 47,
+        "2016": 47,
+        "2017": 47,
+        "2018": 47,
+        "2019": 47,
+        "2020": 47,
+        "2021": 47,
+        "2022": 47,
+        "2023": 47,
+        "2024": 47
+      }
     },
     "convenience-store-sales": {
       "key": "convenience-store-sales",
@@ -6247,39 +6460,6 @@
       "verdict": "confirmed-single-year",
       "checkedAt": "2026-09-26T22:38:04.901Z"
     },
-    "census-household-change-rate-5y": {
-      "key": "census-household-change-rate-5y",
-      "statsDataId": "0004065882",
-      "configYears": 1,
-      "estatNonNullYears": 1,
-      "availableYearCodes": [
-        "2025"
-      ],
-      "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-03T22:48:27.982Z"
-    },
-    "census-population-change-5y": {
-      "key": "census-population-change-5y",
-      "statsDataId": "0004065882",
-      "configYears": 1,
-      "estatNonNullYears": 1,
-      "availableYearCodes": [
-        "2025"
-      ],
-      "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-03T22:48:28.696Z"
-    },
-    "census-population-change-rate-5y": {
-      "key": "census-population-change-rate-5y",
-      "statsDataId": "0004065882",
-      "configYears": 1,
-      "estatNonNullYears": 1,
-      "availableYearCodes": [
-        "2025"
-      ],
-      "verdict": "confirmed-single-year",
-      "checkedAt": "2026-10-03T22:48:29.334Z"
-    },
     "financial-debt-balance": {
       "key": "financial-debt-balance",
       "statsDataId": "0000010112",
@@ -6830,13 +7010,13 @@
     "gender-wage-gap": {
       "key": "gender-wage-gap",
       "statsDataId": "0003426933",
-      "configYears": 1,
+      "configYears": 2,
       "estatNonNullYears": 2,
       "availableYearCodes": [
         "2021",
         "2022"
       ],
-      "verdict": "extend-candidate",
+      "verdict": "config-covers",
       "checkedAt": "2026-10-03T22:49:07.845Z"
     },
     "general-affairs-expenses-prefecture": {
@@ -7743,6 +7923,106 @@
       ],
       "verdict": "extend-candidate",
       "checkedAt": "2026-10-03T22:50:20.605Z"
+    },
+    "number-of-hotel-facilities": {
+      "key": "number-of-hotel-facilities",
+      "statsDataId": "0000010103",
+      "configYears": 21,
+      "estatNonNullYears": 21,
+      "availableYearCodes": [
+        "1997",
+        "1998",
+        "1999",
+        "2000",
+        "2001",
+        "2002",
+        "2003",
+        "2004",
+        "2005",
+        "2006",
+        "2007",
+        "2008",
+        "2009",
+        "2010",
+        "2011",
+        "2012",
+        "2013",
+        "2014",
+        "2015",
+        "2016",
+        "2017"
+      ],
+      "verdict": "config-covers",
+      "checkedAt": "2026-10-07T21:31:16.748Z",
+      "scope": "all-prefectures",
+      "prefectureCountsByYear": {
+        "1997": 47,
+        "1998": 47,
+        "1999": 47,
+        "2000": 47,
+        "2001": 47,
+        "2002": 47,
+        "2003": 47,
+        "2004": 47,
+        "2005": 47,
+        "2006": 47,
+        "2007": 47,
+        "2008": 47,
+        "2009": 47,
+        "2010": 47,
+        "2011": 47,
+        "2012": 47,
+        "2013": 47,
+        "2014": 47,
+        "2015": 47,
+        "2016": 47,
+        "2017": 47
+      }
+    },
+    "room-utilization-rate": {
+      "key": "room-utilization-rate",
+      "statsDataId": "0000010207",
+      "configYears": 16,
+      "estatNonNullYears": 16,
+      "availableYearCodes": [
+        "2009",
+        "2010",
+        "2011",
+        "2012",
+        "2013",
+        "2014",
+        "2015",
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "verdict": "config-covers",
+      "checkedAt": "2026-10-07T21:31:13.981Z",
+      "scope": "all-prefectures",
+      "prefectureCountsByYear": {
+        "2009": 47,
+        "2010": 47,
+        "2011": 47,
+        "2012": 47,
+        "2013": 47,
+        "2014": 47,
+        "2015": 47,
+        "2016": 47,
+        "2017": 47,
+        "2018": 47,
+        "2019": 47,
+        "2020": 47,
+        "2021": 47,
+        "2022": 47,
+        "2023": 47,
+        "2024": 47
+      }
     }
   }
 }

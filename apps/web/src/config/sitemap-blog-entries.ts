@@ -7,7 +7,7 @@
  * 詳細な背景は生成スクリプトの docstring を参照。
  *
  * 最終生成日: 2026-10-07
- * 件数: blog 608 / tag 67 / survey 147
+ * 件数: blog 606 / tag 67 / survey 147
  */
 
 export interface SitemapBlogEntry {
@@ -213,7 +213,6 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "foreign-residents-diversity-map", lastModified: "2026-03-05" },
   { slug: "forest-coverage-woodland-economy", lastModified: "2026-03-06" },
   { slug: "fresh-udon-soba-consumption-prefecture-gap", lastModified: "2026-05-17" },
-  { slug: "fresh-udon-soba-consumption-quantity", lastModified: "2026-06-14" },
   { slug: "freshwater-clam-expenditure-ranking", lastModified: "2026-07-10" },
   { slug: "frozen-gyoza-spending-prefecture-gap", lastModified: "2026-05-31" },
   { slug: "fukui-food-culture", lastModified: "2026-07-10" },
@@ -517,7 +516,6 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "sixth-industry-direct-sales", lastModified: "2026-03-06" },
   { slug: "small-business-dominance-map", lastModified: "2026-03-09" },
   { slug: "smartphone-ownership-prefecture-gap", lastModified: "2026-05-31" },
-  { slug: "soba-udon-dining-consumption-expenditure", lastModified: "2026-06-21" },
   { slug: "soba-udon-dining-consumption-expenditure-prefecture-gap", lastModified: "2026-08-29" },
   { slug: "software-engineer-income-gap", lastModified: "2026-06-02" },
   { slug: "software-engineer-salary-prefecture-gap", lastModified: "2026-06-02" },

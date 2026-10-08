@@ -1,0 +1,3183 @@
+{
+  "sourceKey": "capital-city-guide",
+  "edition": "unknown",
+  "reviewedAt": "2026-10-08",
+  "publicOriginalReuse": "forbidden",
+  "analyses": [
+    {
+      "id": "capital-city-guide-unknown-a01",
+      "chapter": 0,
+      "question": "表紙は stats47 の検証対象になる統計を含むか。",
+      "thesis": "書名と日本各地の観光地・グルメ写真のコラージュのみのページで、統計値や出典を含まない。",
+      "pages": [
+        1,
+        1
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "表紙。書名と写真コラージュのみで、再取得できる統計値も出典表記もない",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "対応不要。写真は権利があるため複製・再利用しない"
+    },
+    {
+      "id": "capital-city-guide-unknown-a02",
+      "chapter": 0,
+      "question": "目次から、章立て以外に検証できる情報を得られるか。",
+      "thesis": "47都道府県の県庁所在地の章名を並べた目次で、統計項目は含まない。県別エントリのページ範囲は、各県の見出しが現れる頁を境界とし、見出しが頁の半分より後ろにある頁は前の県に、前半にある頁は後の県に割り当てた。",
+      "pages": [
+        2,
+        2
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "目次ページ。章名の列挙のみで統計値・出典なし。以降の県別範囲の割当規則をここに記録する",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "対応不要。県別エントリは p3 以降で1県1件に分けて台帳化済み"
+    },
+    {
+      "id": "capital-city-guide-unknown-a03",
+      "chapter": 1,
+      "question": "北海道の章が紹介する水産物・酪農・広大な面積と空港網のうち、公的統計で他県と比べて位置づけを検証できる項目はどれか。",
+      "thesis": "県庁所在地ガイドの北海道の章に出てくる産業・観光・自然の特徴を、面積・農業産出額・製造品出荷額等・延べ宿泊者数に、ホタテ・コンブ・イカの漁獲量、乳用牛頭数、空港数を加えた既存指標へ当てはめ、北海道ページの編集材料にできる事実と、一次資料の確認が別途要る記述(名産・祭り・歴史・シンボル)に仕分ける論点。",
+      "pages": [
+        3,
+        4
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "北海道の面積・農業産出額・製造品出荷額等・延べ宿泊者数とホタテ・コンブ・イカの漁獲量、乳用牛頭数、空港数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "metricKeys": [
+        "total-area-excluding-northern-territories-and-takeshima",
+        "agricultural-output",
+        "manufacturing-shipment-amount",
+        "total-overnight-guests",
+        "fishery-species-catch-scallop",
+        "fishery-species-catch-kelp",
+        "fishery-species-catch-japanese-squid",
+        "dairy-cattle-count",
+        "airport-count"
+      ],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (統計でみる都道府県のすがた)",
+          "url": "https://www.stat.go.jp/data/ssds/index.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "全国都道府県市区町村別面積調",
+          "url": "https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "観光庁",
+          "publicationOrDataset": "宿泊旅行統計調査",
+          "url": "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "01000"
+      ],
+      "nextAction": "北海道の県ページ(area)編集時に、上記の既存指標を県の位置づけの根拠として確認し、特産・県シンボルは県公式サイトで area-curator が検証する。"
+    },
+    {
+      "id": "capital-city-guide-unknown-a04",
+      "chapter": 2,
+      "question": "青森の章が紹介するりんご・サバ・イカ・ホタテなど農水産物と本州最北の位置のうち、公的統計で他県と比べて位置づけを検証できる項目はどれか。",
+      "thesis": "県庁所在地ガイドの青森の章に出てくる産業・観光・自然の特徴を、面積・農業産出額・製造品出荷額等・延べ宿泊者数に、サバ・ホタテ・イカの漁獲量を加えた既存指標へ当てはめ、青森ページの編集材料にできる事実と、一次資料の確認が別途要る記述(名産・祭り・歴史・シンボル)に仕分ける論点。",
+      "pages": [
+        5,
+        6
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "青森の面積・農業産出額・製造品出荷額等・延べ宿泊者数とサバ・ホタテ・イカの漁獲量は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "metricKeys": [
+        "total-area-excluding-northern-territories-and-takeshima",
+        "agricultural-output",
+        "manufacturing-shipment-amount",
+        "total-overnight-guests",
+        "fishery-species-catch-mackerel",
+        "fishery-species-catch-scallop",
+        "fishery-species-catch-japanese-squid"
+      ],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (統計でみる都道府県のすがた)",
+          "url": "https://www.stat.go.jp/data/ssds/index.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "全国都道府県市区町村別面積調",
+          "url": "https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "観光庁",
+          "publicationOrDataset": "宿泊旅行統計調査",
+          "url": "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "02000"
+      ],
+      "nextAction": "青森の県ページ(area)編集時に、上記の既存指標を県の位置づけの根拠として確認し、特産・県シンボルは県公式サイトで area-curator が検証する。りんごの生産量は県別の既存metricが無く(消費支出額のみ)、果樹生産量の new-metric 候補として別途確認する。"
+    },
+    {
+      "id": "capital-city-guide-unknown-a05",
+      "chapter": 3,
+      "question": "岩手の章が紹介する広い県土と沿岸・内陸の気候差、麺類の食文化のうち、公的統計で他県と比べて位置づけを検証できる項目はどれか。",
+      "thesis": "県庁所在地ガイドの岩手の章に出てくる産業・観光・自然の特徴を、面積・農業産出額・製造品出荷額等・延べ宿泊者数に、中華麺の消費支出額、森林面積割合を加えた既存指標へ当てはめ、岩手ページの編集材料にできる事実と、一次資料の確認が別途要る記述(名産・祭り・歴史・シンボル)に仕分ける論点。",
+      "pages": [
+        7,
+        8
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "岩手の面積・農業産出額・製造品出荷額等・延べ宿泊者数と中華麺の消費支出額、森林面積割合は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "metricKeys": [
+        "total-area-excluding-northern-territories-and-takeshima",
+        "agricultural-output",
+        "manufacturing-shipment-amount",
+        "total-overnight-guests",
+        "chinese-noodles-consumption-expenditure",
+        "forest-area-ratio"
+      ],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (統計でみる都道府県のすがた)",
+          "url": "https://www.stat.go.jp/data/ssds/index.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "全国都道府県市区町村別面積調",
+          "url": "https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "観光庁",
+          "publicationOrDataset": "宿泊旅行統計調査",
+          "url": "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "03000"
+      ],
+      "nextAction": "岩手の県ページ(area)編集時に、上記の既存指標を県の位置づけの根拠として確認し、特産・県シンボルは県公式サイトで area-curator が検証する。"
+    },
+    {
+      "id": "capital-city-guide-unknown-a06",
+      "chapter": 4,
+      "question": "宮城の章が紹介する米・畜産・水産業と松島などの景勝地のうち、公的統計で他県と比べて位置づけを検証できる項目はどれか。",
+      "thesis": "県庁所在地ガイドの宮城の章に出てくる産業・観光・自然の特徴を、面積・農業産出額・製造品出荷額等・延べ宿泊者数に、水稲収穫量、海面漁業産出額を加えた既存指標へ当てはめ、宮城ページの編集材料にできる事実と、一次資料の確認が別途要る記述(名産・祭り・歴史・シンボル)に仕分ける論点。",
+      "pages": [
+        9,
+        9
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "宮城の面積・農業産出額・製造品出荷額等・延べ宿泊者数と水稲収穫量、海面漁業産出額は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "metricKeys": [
+        "total-area-excluding-northern-territories-and-takeshima",
+        "agricultural-output",
+        "manufacturing-shipment-amount",
+        "total-overnight-guests",
+        "rice-harvest-volume",
+        "marine-fishery-output-value"
+      ],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (統計でみる都道府県のすがた)",
+          "url": "https://www.stat.go.jp/data/ssds/index.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "全国都道府県市区町村別面積調",
+          "url": "https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "観光庁",
+          "publicationOrDataset": "宿泊旅行統計調査",
+          "url": "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "04000"
+      ],
+      "nextAction": "宮城の県ページ(area)編集時に、上記の既存指標を県の位置づけの根拠として確認し、特産・県シンボルは県公式サイトで area-curator が検証する。"
+    },
+    {
+      "id": "capital-city-guide-unknown-a07",
+      "chapter": 5,
+      "question": "秋田の章が紹介する米・秋田杉・水産物と豪雪の気候のうち、公的統計で他県と比べて位置づけを検証できる項目はどれか。",
+      "thesis": "県庁所在地ガイドの秋田の章に出てくる産業・観光・自然の特徴を、面積・農業産出額・製造品出荷額等・延べ宿泊者数に、水稲収穫量、森林面積割合、老年化指数を加えた既存指標へ当てはめ、秋田ページの編集材料にできる事実と、一次資料の確認が別途要る記述(名産・祭り・歴史・シンボル)に仕分ける論点。",
+      "pages": [
+        10,
+        11
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "秋田の面積・農業産出額・製造品出荷額等・延べ宿泊者数と水稲収穫量、森林面積割合、老年化指数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "metricKeys": [
+        "total-area-excluding-northern-territories-and-takeshima",
+        "agricultural-output",
+        "manufacturing-shipment-amount",
+        "total-overnight-guests",
+        "rice-harvest-volume",
+        "forest-area-ratio",
+        "aging-index"
+      ],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (統計でみる都道府県のすがた)",
+          "url": "https://www.stat.go.jp/data/ssds/index.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "全国都道府県市区町村別面積調",
+          "url": "https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "観光庁",
+          "publicationOrDataset": "宿泊旅行統計調査",
+          "url": "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "05000"
+      ],
+      "nextAction": "秋田の県ページ(area)編集時に、上記の既存指標を県の位置づけの根拠として確認し、特産・県シンボルは県公式サイトで area-curator が検証する。"
+    },
+    {
+      "id": "capital-city-guide-unknown-a08",
+      "chapter": 6,
+      "question": "山形の章が紹介する果物・米・肉と、ラーメンや芋煮などの食文化のうち、公的統計で他県と比べて位置づけを検証できる項目はどれか。",
+      "thesis": "県庁所在地ガイドの山形の章に出てくる産業・観光・自然の特徴を、面積・農業産出額・製造品出荷額等・延べ宿泊者数に、中華麺・さといも・こんにゃくの消費支出額を加えた既存指標へ当てはめ、山形ページの編集材料にできる事実と、一次資料の確認が別途要る記述(名産・祭り・歴史・シンボル)に仕分ける論点。",
+      "pages": [
+        12,
+        13
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "山形の面積・農業産出額・製造品出荷額等・延べ宿泊者数と中華麺・さといも・こんにゃくの消費支出額は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "metricKeys": [
+        "total-area-excluding-northern-territories-and-takeshima",
+        "agricultural-output",
+        "manufacturing-shipment-amount",
+        "total-overnight-guests",
+        "chinese-noodles-consumption-expenditure",
+        "taro-consumption-expenditure",
+        "konnyaku-consumption-expenditure"
+      ],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (統計でみる都道府県のすがた)",
+          "url": "https://www.stat.go.jp/data/ssds/index.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "全国都道府県市区町村別面積調",
+          "url": "https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "観光庁",
+          "publicationOrDataset": "宿泊旅行統計調査",
+          "url": "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "06000"
+      ],
+      "nextAction": "山形の県ページ(area)編集時に、上記の既存指標を県の位置づけの根拠として確認し、特産・県シンボルは県公式サイトで area-curator が検証する。"
+    },
+    {
+      "id": "capital-city-guide-unknown-a09",
+      "chapter": 7,
+      "question": "福島の章が紹介する会津・中通り・浜通りの地域差、果物・日本酒と震災からの復興のうち、公的統計で他県と比べて位置づけを検証できる項目はどれか。",
+      "thesis": "県庁所在地ガイドの福島の章に出てくる産業・観光・自然の特徴を、面積・農業産出額・製造品出荷額等・延べ宿泊者数に、清酒の消費支出額、耕地放棄面積を加えた既存指標へ当てはめ、福島ページの編集材料にできる事実と、一次資料の確認が別途要る記述(名産・祭り・歴史・シンボル)に仕分ける論点。",
+      "pages": [
+        14,
+        15
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "福島の面積・農業産出額・製造品出荷額等・延べ宿泊者数と清酒の消費支出額、耕地放棄面積は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "metricKeys": [
+        "total-area-excluding-northern-territories-and-takeshima",
+        "agricultural-output",
+        "manufacturing-shipment-amount",
+        "total-overnight-guests",
+        "sake-consumption-expenditure",
+        "abandoned-cultivated-land-area"
+      ],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (統計でみる都道府県のすがた)",
+          "url": "https://www.stat.go.jp/data/ssds/index.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "全国都道府県市区町村別面積調",
+          "url": "https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "観光庁",
+          "publicationOrDataset": "宿泊旅行統計調査",
+          "url": "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "07000"
+      ],
+      "nextAction": "福島の県ページ(area)編集時に、上記の既存指標を県の位置づけの根拠として確認し、特産・県シンボルは県公式サイトで area-curator が検証する。震災・復興に関する記述は一次資料(県・復興庁)の確認が別途必要で、本書の記述を根拠にしない。"
+    },
+    {
+      "id": "capital-city-guide-unknown-a10",
+      "chapter": 8,
+      "question": "茨城の章が紹介する研究機関・製造業・農水産業が併存する産業構造のうち、公的統計で他県と比べて位置づけを検証できる項目はどれか。",
+      "thesis": "県庁所在地ガイドの茨城の章に出てくる産業・観光・自然の特徴を、面積・農業産出額・製造品出荷額等・延べ宿泊者数に、サバ類の漁獲量、工業専用地域面積比率を加えた既存指標へ当てはめ、茨城ページの編集材料にできる事実と、一次資料の確認が別途要る記述(名産・祭り・歴史・シンボル)に仕分ける論点。",
+      "pages": [
+        16,
+        17
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "茨城の面積・農業産出額・製造品出荷額等・延べ宿泊者数とサバ類の漁獲量、工業専用地域面積比率は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "metricKeys": [
+        "total-area-excluding-northern-territories-and-takeshima",
+        "agricultural-output",
+        "manufacturing-shipment-amount",
+        "total-overnight-guests",
+        "fishery-species-catch-mackerel",
+        "industrial-exclusive-area-ratio"
+      ],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (統計でみる都道府県のすがた)",
+          "url": "https://www.stat.go.jp/data/ssds/index.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "全国都道府県市区町村別面積調",
+          "url": "https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "観光庁",
+          "publicationOrDataset": "宿泊旅行統計調査",
+          "url": "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "08000"
+      ],
+      "nextAction": "茨城の県ページ(area)編集時に、上記の既存指標を県の位置づけの根拠として確認し、特産・県シンボルは県公式サイトで area-curator が検証する。"
+    },
+    {
+      "id": "capital-city-guide-unknown-a11",
+      "chapter": 9,
+      "question": "栃木の章が紹介するいちご・日光の社寺などの観光資源のうち、公的統計で他県と比べて位置づけを検証できる項目はどれか。",
+      "thesis": "県庁所在地ガイドの栃木の章に出てくる産業・観光・自然の特徴を、面積・農業産出額・製造品出荷額等・延べ宿泊者数に、いちごの消費支出額、ホテル営業施設数を加えた既存指標へ当てはめ、栃木ページの編集材料にできる事実と、一次資料の確認が別途要る記述(名産・祭り・歴史・シンボル)に仕分ける論点。",
+      "pages": [
+        18,
+        18
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "栃木の面積・農業産出額・製造品出荷額等・延べ宿泊者数といちごの消費支出額、ホテル営業施設数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "metricKeys": [
+        "total-area-excluding-northern-territories-and-takeshima",
+        "agricultural-output",
+        "manufacturing-shipment-amount",
+        "total-overnight-guests",
+        "strawberry-consumption-expenditure",
+        "number-of-hotel-facilities"
+      ],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (統計でみる都道府県のすがた)",
+          "url": "https://www.stat.go.jp/data/ssds/index.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "全国都道府県市区町村別面積調",
+          "url": "https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "観光庁",
+          "publicationOrDataset": "宿泊旅行統計調査",
+          "url": "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "09000"
+      ],
+      "nextAction": "栃木の県ページ(area)編集時に、上記の既存指標を県の位置づけの根拠として確認し、特産・県シンボルは県公式サイトで area-curator が検証する。いちごの収穫量は作物統計が一次資料で、既存metricは消費側のみ。"
+    },
+    {
+      "id": "capital-city-guide-unknown-a12",
+      "chapter": 10,
+      "question": "群馬の章が紹介するこんにゃく・自動車関連産業・温泉と養蚕の歴史のうち、公的統計で他県と比べて位置づけを検証できる項目はどれか。",
+      "thesis": "県庁所在地ガイドの群馬の章に出てくる産業・観光・自然の特徴を、面積・農業産出額・製造品出荷額等・延べ宿泊者数に、こんにゃくの消費支出額、製造業事業所数を加えた既存指標へ当てはめ、群馬ページの編集材料にできる事実と、一次資料の確認が別途要る記述(名産・祭り・歴史・シンボル)に仕分ける論点。",
+      "pages": [
+        19,
+        20
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "群馬の面積・農業産出額・製造品出荷額等・延べ宿泊者数とこんにゃくの消費支出額、製造業事業所数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "metricKeys": [
+        "total-area-excluding-northern-territories-and-takeshima",
+        "agricultural-output",
+        "manufacturing-shipment-amount",
+        "total-overnight-guests",
+        "konnyaku-consumption-expenditure",
+        "manufacturing-establishments"
+      ],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (統計でみる都道府県のすがた)",
+          "url": "https://www.stat.go.jp/data/ssds/index.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "全国都道府県市区町村別面積調",
+          "url": "https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "観光庁",
+          "publicationOrDataset": "宿泊旅行統計調査",
+          "url": "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "10000"
+      ],
+      "nextAction": "群馬の県ページ(area)編集時に、上記の既存指標を県の位置づけの根拠として確認し、特産・県シンボルは県公式サイトで area-curator が検証する。こんにゃく芋の生産量は作物統計が一次資料で既存metricが無い。"
+    },
+    {
+      "id": "capital-city-guide-unknown-a13",
+      "chapter": 11,
+      "question": "埼玉の章が紹介する東京隣接の近郊農業・製造業・交通ターミナルのうち、公的統計で他県と比べて位置づけを検証できる項目はどれか。",
+      "thesis": "県庁所在地ガイドの埼玉の章に出てくる産業・観光・自然の特徴を、面積・農業産出額・製造品出荷額等・延べ宿泊者数に、さといもの消費支出額、製造業事業所数、鉄道駅乗降客数を加えた既存指標へ当てはめ、埼玉ページの編集材料にできる事実と、一次資料の確認が別途要る記述(名産・祭り・歴史・シンボル)に仕分ける論点。",
+      "pages": [
+        21,
+        22
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "埼玉の面積・農業産出額・製造品出荷額等・延べ宿泊者数とさといもの消費支出額、製造業事業所数、鉄道駅乗降客数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "metricKeys": [
+        "total-area-excluding-northern-territories-and-takeshima",
+        "agricultural-output",
+        "manufacturing-shipment-amount",
+        "total-overnight-guests",
+        "taro-consumption-expenditure",
+        "manufacturing-establishments",
+        "railway-passengers"
+      ],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (統計でみる都道府県のすがた)",
+          "url": "https://www.stat.go.jp/data/ssds/index.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "全国都道府県市区町村別面積調",
+          "url": "https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "観光庁",
+          "publicationOrDataset": "宿泊旅行統計調査",
+          "url": "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "11000"
+      ],
+      "nextAction": "埼玉の県ページ(area)編集時に、上記の既存指標を県の位置づけの根拠として確認し、特産・県シンボルは県公式サイトで area-curator が検証する。"
+    },
+    {
+      "id": "capital-city-guide-unknown-a14",
+      "chapter": 12,
+      "question": "千葉の章が紹介する京葉工業地帯・空港と港湾・近郊農水産業のうち、公的統計で他県と比べて位置づけを検証できる項目はどれか。",
+      "thesis": "県庁所在地ガイドの千葉の章に出てくる産業・観光・自然の特徴を、面積・農業産出額・製造品出荷額等・延べ宿泊者数に、輸入貨物量、工業用水量、空港数を加えた既存指標へ当てはめ、千葉ページの編集材料にできる事実と、一次資料の確認が別途要る記述(名産・祭り・歴史・シンボル)に仕分ける論点。",
+      "pages": [
+        23,
+        24
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "千葉の面積・農業産出額・製造品出荷額等・延べ宿泊者数と輸入貨物量、工業用水量、空港数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "metricKeys": [
+        "total-area-excluding-northern-territories-and-takeshima",
+        "agricultural-output",
+        "manufacturing-shipment-amount",
+        "total-overnight-guests",
+        "port-cargo-import",
+        "industrial-water-usage",
+        "airport-count"
+      ],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (統計でみる都道府県のすがた)",
+          "url": "https://www.stat.go.jp/data/ssds/index.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "全国都道府県市区町村別面積調",
+          "url": "https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "観光庁",
+          "publicationOrDataset": "宿泊旅行統計調査",
+          "url": "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "12000"
+      ],
+      "nextAction": "千葉の県ページ(area)編集時に、上記の既存指標を県の位置づけの根拠として確認し、特産・県シンボルは県公式サイトで area-curator が検証する。"
+    },
+    {
+      "id": "capital-city-guide-unknown-a15",
+      "chapter": 13,
+      "question": "東京の章が紹介する都内総生産・産業構成と島しょ部まで含む多様性のうち、公的統計で他県と比べて位置づけを検証できる項目はどれか。",
+      "thesis": "県庁所在地ガイドの東京の章に出てくる産業・観光・自然の特徴を、面積・農業産出額・製造品出荷額等・延べ宿泊者数に、県内総生産額、鉄道駅乗降客数、外国人延べ宿泊者数を加えた既存指標へ当てはめ、東京ページの編集材料にできる事実と、一次資料の確認が別途要る記述(名産・祭り・歴史・シンボル)に仕分ける論点。",
+      "pages": [
+        25,
+        26
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "東京の面積・農業産出額・製造品出荷額等・延べ宿泊者数と県内総生産額、鉄道駅乗降客数、外国人延べ宿泊者数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "metricKeys": [
+        "total-area-excluding-northern-territories-and-takeshima",
+        "agricultural-output",
+        "manufacturing-shipment-amount",
+        "total-overnight-guests",
+        "total-production-in-the-prefecture",
+        "railway-passengers",
+        "total-overnight-guests-foreign"
+      ],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (統計でみる都道府県のすがた)",
+          "url": "https://www.stat.go.jp/data/ssds/index.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "全国都道府県市区町村別面積調",
+          "url": "https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "観光庁",
+          "publicationOrDataset": "宿泊旅行統計調査",
+          "url": "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "13000"
+      ],
+      "nextAction": "東京の県ページ(area)編集時に、上記の既存指標を県の位置づけの根拠として確認し、特産・県シンボルは県公式サイトで area-curator が検証する。"
+    },
+    {
+      "id": "capital-city-guide-unknown-a16",
+      "chapter": 14,
+      "question": "神奈川の章が紹介する横浜港を中心とした貿易と製造業・観光のうち、公的統計で他県と比べて位置づけを検証できる項目はどれか。",
+      "thesis": "県庁所在地ガイドの神奈川の章に出てくる産業・観光・自然の特徴を、面積・農業産出額・製造品出荷額等・延べ宿泊者数に、輸出貨物量・輸入貨物量を加えた既存指標へ当てはめ、神奈川ページの編集材料にできる事実と、一次資料の確認が別途要る記述(名産・祭り・歴史・シンボル)に仕分ける論点。",
+      "pages": [
+        27,
+        28
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "神奈川の面積・農業産出額・製造品出荷額等・延べ宿泊者数と輸出貨物量・輸入貨物量は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "metricKeys": [
+        "total-area-excluding-northern-territories-and-takeshima",
+        "agricultural-output",
+        "manufacturing-shipment-amount",
+        "total-overnight-guests",
+        "port-cargo-export",
+        "port-cargo-import"
+      ],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (統計でみる都道府県のすがた)",
+          "url": "https://www.stat.go.jp/data/ssds/index.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "全国都道府県市区町村別面積調",
+          "url": "https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "観光庁",
+          "publicationOrDataset": "宿泊旅行統計調査",
+          "url": "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "14000"
+      ],
+      "nextAction": "神奈川の県ページ(area)編集時に、上記の既存指標を県の位置づけの根拠として確認し、特産・県シンボルは県公式サイトで area-curator が検証する。"
+    },
+    {
+      "id": "capital-city-guide-unknown-a17",
+      "chapter": 15,
+      "question": "新潟の章が紹介する米・日本酒・金属加工などの産業と豪雪のうち、公的統計で他県と比べて位置づけを検証できる項目はどれか。",
+      "thesis": "県庁所在地ガイドの新潟の章に出てくる産業・観光・自然の特徴を、面積・農業産出額・製造品出荷額等・延べ宿泊者数に、水稲収穫量・作付面積、清酒の消費支出額を加えた既存指標へ当てはめ、新潟ページの編集材料にできる事実と、一次資料の確認が別途要る記述(名産・祭り・歴史・シンボル)に仕分ける論点。",
+      "pages": [
+        29,
+        30
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "新潟の面積・農業産出額・製造品出荷額等・延べ宿泊者数と水稲収穫量・作付面積、清酒の消費支出額は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "metricKeys": [
+        "total-area-excluding-northern-territories-and-takeshima",
+        "agricultural-output",
+        "manufacturing-shipment-amount",
+        "total-overnight-guests",
+        "rice-harvest-volume",
+        "rice-cultivated-area",
+        "sake-consumption-expenditure"
+      ],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (統計でみる都道府県のすがた)",
+          "url": "https://www.stat.go.jp/data/ssds/index.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "全国都道府県市区町村別面積調",
+          "url": "https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "観光庁",
+          "publicationOrDataset": "宿泊旅行統計調査",
+          "url": "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "15000"
+      ],
+      "nextAction": "新潟の県ページ(area)編集時に、上記の既存指標を県の位置づけの根拠として確認し、特産・県シンボルは県公式サイトで area-curator が検証する。"
+    },
+    {
+      "id": "capital-city-guide-unknown-a18",
+      "chapter": 16,
+      "question": "富山の章が紹介する医薬品・ものづくり・水産物と立山連峰の自然のうち、公的統計で他県と比べて位置づけを検証できる項目はどれか。",
+      "thesis": "県庁所在地ガイドの富山の章に出てくる産業・観光・自然の特徴を、面積・農業産出額・製造品出荷額等・延べ宿泊者数に、医薬品販売業数、水稲収穫量を加えた既存指標へ当てはめ、富山ページの編集材料にできる事実と、一次資料の確認が別途要る記述(名産・祭り・歴史・シンボル)に仕分ける論点。",
+      "pages": [
+        31,
+        32
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "富山の面積・農業産出額・製造品出荷額等・延べ宿泊者数と医薬品販売業数、水稲収穫量は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "metricKeys": [
+        "total-area-excluding-northern-territories-and-takeshima",
+        "agricultural-output",
+        "manufacturing-shipment-amount",
+        "total-overnight-guests",
+        "pharmaceutical-sales-count-per-100k",
+        "rice-harvest-volume"
+      ],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (統計でみる都道府県のすがた)",
+          "url": "https://www.stat.go.jp/data/ssds/index.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "全国都道府県市区町村別面積調",
+          "url": "https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "観光庁",
+          "publicationOrDataset": "宿泊旅行統計調査",
+          "url": "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "16000"
+      ],
+      "nextAction": "富山の県ページ(area)編集時に、上記の既存指標を県の位置づけの根拠として確認し、特産・県シンボルは県公式サイトで area-curator が検証する。"
+    },
+    {
+      "id": "capital-city-guide-unknown-a19",
+      "chapter": 17,
+      "question": "石川の章が紹介する金箔・伝統工芸・機械工業と加賀・能登の地域差のうち、公的統計で他県と比べて位置づけを検証できる項目はどれか。",
+      "thesis": "県庁所在地ガイドの石川の章に出てくる産業・観光・自然の特徴を、面積・農業産出額・製造品出荷額等・延べ宿泊者数に、都道府県指定等文化財件数、ホテル営業施設数を加えた既存指標へ当てはめ、石川ページの編集材料にできる事実と、一次資料の確認が別途要る記述(名産・祭り・歴史・シンボル)に仕分ける論点。",
+      "pages": [
+        33,
+        34
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "石川の面積・農業産出額・製造品出荷額等・延べ宿泊者数と都道府県指定等文化財件数、ホテル営業施設数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "metricKeys": [
+        "total-area-excluding-northern-territories-and-takeshima",
+        "agricultural-output",
+        "manufacturing-shipment-amount",
+        "total-overnight-guests",
+        "prefecture-designated-cultural-property-count",
+        "number-of-hotel-facilities"
+      ],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (統計でみる都道府県のすがた)",
+          "url": "https://www.stat.go.jp/data/ssds/index.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "全国都道府県市区町村別面積調",
+          "url": "https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "観光庁",
+          "publicationOrDataset": "宿泊旅行統計調査",
+          "url": "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "17000"
+      ],
+      "nextAction": "石川の県ページ(area)編集時に、上記の既存指標を県の位置づけの根拠として確認し、特産・県シンボルは県公式サイトで area-curator が検証する。金箔の生産割合は書籍の記述のみで一次資料に辿れておらず、検証前は使わない。"
+    },
+    {
+      "id": "capital-city-guide-unknown-a20",
+      "chapter": 18,
+      "question": "福井の章が紹介する越前和紙などの伝統工芸、農水産物と北陸新幹線延伸のうち、公的統計で他県と比べて位置づけを検証できる項目はどれか。",
+      "thesis": "県庁所在地ガイドの福井の章に出てくる産業・観光・自然の特徴を、面積・農業産出額・製造品出荷額等・延べ宿泊者数に、水稲10a当たり収量、ホテル営業施設数を加えた既存指標へ当てはめ、福井ページの編集材料にできる事実と、一次資料の確認が別途要る記述(名産・祭り・歴史・シンボル)に仕分ける論点。",
+      "pages": [
+        35,
+        36
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "福井の面積・農業産出額・製造品出荷額等・延べ宿泊者数と水稲10a当たり収量、ホテル営業施設数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "metricKeys": [
+        "total-area-excluding-northern-territories-and-takeshima",
+        "agricultural-output",
+        "manufacturing-shipment-amount",
+        "total-overnight-guests",
+        "rice-yield-per-10a",
+        "number-of-hotel-facilities"
+      ],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (統計でみる都道府県のすがた)",
+          "url": "https://www.stat.go.jp/data/ssds/index.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "全国都道府県市区町村別面積調",
+          "url": "https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "観光庁",
+          "publicationOrDataset": "宿泊旅行統計調査",
+          "url": "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "18000"
+      ],
+      "nextAction": "福井の県ページ(area)編集時に、上記の既存指標を県の位置づけの根拠として確認し、特産・県シンボルは県公式サイトで area-curator が検証する。"
+    },
+    {
+      "id": "capital-city-guide-unknown-a21",
+      "chapter": 19,
+      "question": "山梨の章が紹介するぶどう・ももなどの果物とワイン・ジュエリー産業のうち、公的統計で他県と比べて位置づけを検証できる項目はどれか。",
+      "thesis": "県庁所在地ガイドの山梨の章に出てくる産業・観光・自然の特徴を、面積・農業産出額・製造品出荷額等・延べ宿泊者数に、ぶどう・ワインの消費支出額を加えた既存指標へ当てはめ、山梨ページの編集材料にできる事実と、一次資料の確認が別途要る記述(名産・祭り・歴史・シンボル)に仕分ける論点。",
+      "pages": [
+        37,
+        38
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "山梨の面積・農業産出額・製造品出荷額等・延べ宿泊者数とぶどう・ワインの消費支出額は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "metricKeys": [
+        "total-area-excluding-northern-territories-and-takeshima",
+        "agricultural-output",
+        "manufacturing-shipment-amount",
+        "total-overnight-guests",
+        "grape-consumption-expenditure",
+        "wine-consumption-expenditure"
+      ],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (統計でみる都道府県のすがた)",
+          "url": "https://www.stat.go.jp/data/ssds/index.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "全国都道府県市区町村別面積調",
+          "url": "https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "観光庁",
+          "publicationOrDataset": "宿泊旅行統計調査",
+          "url": "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "19000"
+      ],
+      "nextAction": "山梨の県ページ(area)編集時に、上記の既存指標を県の位置づけの根拠として確認し、特産・県シンボルは県公式サイトで area-curator が検証する。果樹とワインの生産量は作物統計・国税庁資料が一次資料で既存metricが無い。"
+    },
+    {
+      "id": "capital-city-guide-unknown-a22",
+      "chapter": 20,
+      "question": "長野の章が紹介する高原野菜・精密機械・温泉と山岳県の地形のうち、公的統計で他県と比べて位置づけを検証できる項目はどれか。",
+      "thesis": "県庁所在地ガイドの長野の章に出てくる産業・観光・自然の特徴を、面積・農業産出額・製造品出荷額等・延べ宿泊者数に、温泉・銭湯入浴料とレタスの消費支出額を加えた既存指標へ当てはめ、長野ページの編集材料にできる事実と、一次資料の確認が別途要る記述(名産・祭り・歴史・シンボル)に仕分ける論点。",
+      "pages": [
+        39,
+        40
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "長野の面積・農業産出額・製造品出荷額等・延べ宿泊者数と温泉・銭湯入浴料とレタスの消費支出額は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "metricKeys": [
+        "total-area-excluding-northern-territories-and-takeshima",
+        "agricultural-output",
+        "manufacturing-shipment-amount",
+        "total-overnight-guests",
+        "public-bath-consumption-expenditure",
+        "lettuce-consumption-expenditure"
+      ],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (統計でみる都道府県のすがた)",
+          "url": "https://www.stat.go.jp/data/ssds/index.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "全国都道府県市区町村別面積調",
+          "url": "https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "観光庁",
+          "publicationOrDataset": "宿泊旅行統計調査",
+          "url": "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "20000"
+      ],
+      "nextAction": "長野の県ページ(area)編集時に、上記の既存指標を県の位置づけの根拠として確認し、特産・県シンボルは県公式サイトで area-curator が検証する。レタスの出荷量は作物統計が一次資料。"
+    },
+    {
+      "id": "capital-city-guide-unknown-a23",
+      "chapter": 21,
+      "question": "岐阜の章が紹介する飛騨・美濃の地域差、森林資源と飛騨牛などのブランドのうち、公的統計で他県と比べて位置づけを検証できる項目はどれか。",
+      "thesis": "県庁所在地ガイドの岐阜の章に出てくる産業・観光・自然の特徴を、面積・農業産出額・製造品出荷額等・延べ宿泊者数に、森林面積割合、肉用牛飼養頭数を加えた既存指標へ当てはめ、岐阜ページの編集材料にできる事実と、一次資料の確認が別途要る記述(名産・祭り・歴史・シンボル)に仕分ける論点。",
+      "pages": [
+        41,
+        42
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "岐阜の面積・農業産出額・製造品出荷額等・延べ宿泊者数と森林面積割合、肉用牛飼養頭数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "metricKeys": [
+        "total-area-excluding-northern-territories-and-takeshima",
+        "agricultural-output",
+        "manufacturing-shipment-amount",
+        "total-overnight-guests",
+        "forest-area-ratio",
+        "beef-cattle-count"
+      ],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (統計でみる都道府県のすがた)",
+          "url": "https://www.stat.go.jp/data/ssds/index.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "全国都道府県市区町村別面積調",
+          "url": "https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "観光庁",
+          "publicationOrDataset": "宿泊旅行統計調査",
+          "url": "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "21000"
+      ],
+      "nextAction": "岐阜の県ページ(area)編集時に、上記の既存指標を県の位置づけの根拠として確認し、特産・県シンボルは県公式サイトで area-curator が検証する。"
+    },
+    {
+      "id": "capital-city-guide-unknown-a24",
+      "chapter": 22,
+      "question": "静岡の章が紹介する茶・水産物・楽器やオートバイなどの製造業のうち、公的統計で他県と比べて位置づけを検証できる項目はどれか。",
+      "thesis": "県庁所在地ガイドの静岡の章に出てくる産業・観光・自然の特徴を、面積・農業産出額・製造品出荷額等・延べ宿泊者数に、緑茶の消費支出額、カツオ漁獲量、楽器の消費支出額を加えた既存指標へ当てはめ、静岡ページの編集材料にできる事実と、一次資料の確認が別途要る記述(名産・祭り・歴史・シンボル)に仕分ける論点。",
+      "pages": [
+        43,
+        44
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "静岡の面積・農業産出額・製造品出荷額等・延べ宿泊者数と緑茶の消費支出額、カツオ漁獲量、楽器の消費支出額は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "metricKeys": [
+        "total-area-excluding-northern-territories-and-takeshima",
+        "agricultural-output",
+        "manufacturing-shipment-amount",
+        "total-overnight-guests",
+        "green-tea-consumption-expenditure",
+        "fishery-species-catch-bonito",
+        "musical-instrument-consumption-expenditure"
+      ],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (統計でみる都道府県のすがた)",
+          "url": "https://www.stat.go.jp/data/ssds/index.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "全国都道府県市区町村別面積調",
+          "url": "https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "観光庁",
+          "publicationOrDataset": "宿泊旅行統計調査",
+          "url": "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "22000"
+      ],
+      "nextAction": "静岡の県ページ(area)編集時に、上記の既存指標を県の位置づけの根拠として確認し、特産・県シンボルは県公式サイトで area-curator が検証する。茶の生産量は作物統計が一次資料で、既存metricは消費側のみ。"
+    },
+    {
+      "id": "capital-city-guide-unknown-a25",
+      "chapter": 23,
+      "question": "愛知の章が紹介する自動車を軸としたものづくりと貿易のうち、公的統計で他県と比べて位置づけを検証できる項目はどれか。",
+      "thesis": "県庁所在地ガイドの愛知の章に出てくる産業・観光・自然の特徴を、面積・農業産出額・製造品出荷額等・延べ宿泊者数に、製造業従業者数、輸出貨物量、製造業付加価値額を加えた既存指標へ当てはめ、愛知ページの編集材料にできる事実と、一次資料の確認が別途要る記述(名産・祭り・歴史・シンボル)に仕分ける論点。",
+      "pages": [
+        45,
+        46
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "愛知の面積・農業産出額・製造品出荷額等・延べ宿泊者数と製造業従業者数、輸出貨物量、製造業付加価値額は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "metricKeys": [
+        "total-area-excluding-northern-territories-and-takeshima",
+        "agricultural-output",
+        "manufacturing-shipment-amount",
+        "total-overnight-guests",
+        "manufacturing-employees",
+        "port-cargo-export",
+        "manufacturing-industry-added-value"
+      ],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (統計でみる都道府県のすがた)",
+          "url": "https://www.stat.go.jp/data/ssds/index.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "全国都道府県市区町村別面積調",
+          "url": "https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "観光庁",
+          "publicationOrDataset": "宿泊旅行統計調査",
+          "url": "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "23000"
+      ],
+      "nextAction": "愛知の県ページ(area)編集時に、上記の既存指標を県の位置づけの根拠として確認し、特産・県シンボルは県公式サイトで area-curator が検証する。"
+    },
+    {
+      "id": "capital-city-guide-unknown-a26",
+      "chapter": 24,
+      "question": "三重の章が紹介する伊勢神宮などの観光資源と北部の工業・南部の自然のうち、公的統計で他県と比べて位置づけを検証できる項目はどれか。",
+      "thesis": "県庁所在地ガイドの三重の章に出てくる産業・観光・自然の特徴を、面積・農業産出額・製造品出荷額等・延べ宿泊者数に、ホテル営業施設数、製造業従業者数を加えた既存指標へ当てはめ、三重ページの編集材料にできる事実と、一次資料の確認が別途要る記述(名産・祭り・歴史・シンボル)に仕分ける論点。",
+      "pages": [
+        47,
+        49
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "三重の面積・農業産出額・製造品出荷額等・延べ宿泊者数とホテル営業施設数、製造業従業者数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "metricKeys": [
+        "total-area-excluding-northern-territories-and-takeshima",
+        "agricultural-output",
+        "manufacturing-shipment-amount",
+        "total-overnight-guests",
+        "number-of-hotel-facilities",
+        "manufacturing-employees"
+      ],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (統計でみる都道府県のすがた)",
+          "url": "https://www.stat.go.jp/data/ssds/index.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "全国都道府県市区町村別面積調",
+          "url": "https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "観光庁",
+          "publicationOrDataset": "宿泊旅行統計調査",
+          "url": "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "24000"
+      ],
+      "nextAction": "三重の県ページ(area)編集時に、上記の既存指標を県の位置づけの根拠として確認し、特産・県シンボルは県公式サイトで area-curator が検証する。"
+    },
+    {
+      "id": "capital-city-guide-unknown-a27",
+      "chapter": 25,
+      "question": "滋賀の章が紹介する琵琶湖を中心とした自然と近江商人の歴史のうち、公的統計で他県と比べて位置づけを検証できる項目はどれか。",
+      "thesis": "県庁所在地ガイドの滋賀の章に出てくる産業・観光・自然の特徴を、面積・農業産出額・製造品出荷額等・延べ宿泊者数に、自然公園面積割合、都道府県立自然公園面積を加えた既存指標へ当てはめ、滋賀ページの編集材料にできる事実と、一次資料の確認が別途要る記述(名産・祭り・歴史・シンボル)に仕分ける論点。",
+      "pages": [
+        50,
+        51
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "滋賀の面積・農業産出額・製造品出荷額等・延べ宿泊者数と自然公園面積割合、都道府県立自然公園面積は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "metricKeys": [
+        "total-area-excluding-northern-territories-and-takeshima",
+        "agricultural-output",
+        "manufacturing-shipment-amount",
+        "total-overnight-guests",
+        "nature-park-area-ratio",
+        "prefectural-nature-park-area"
+      ],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (統計でみる都道府県のすがた)",
+          "url": "https://www.stat.go.jp/data/ssds/index.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "全国都道府県市区町村別面積調",
+          "url": "https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "観光庁",
+          "publicationOrDataset": "宿泊旅行統計調査",
+          "url": "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "25000"
+      ],
+      "nextAction": "滋賀の県ページ(area)編集時に、上記の既存指標を県の位置づけの根拠として確認し、特産・県シンボルは県公式サイトで area-curator が検証する。琵琶湖が県面積に占める割合は国土地理院の面積調で確認できるが、既存metricが無い。"
+    },
+    {
+      "id": "capital-city-guide-unknown-a28",
+      "chapter": 26,
+      "question": "京都の章が紹介する観光資源・ハイテク企業・研究都市としての側面のうち、公的統計で他県と比べて位置づけを検証できる項目はどれか。",
+      "thesis": "県庁所在地ガイドの京都の章に出てくる産業・観光・自然の特徴を、面積・農業産出額・製造品出荷額等・延べ宿泊者数に、海外観光旅行の行動者率、延べ宿泊者数を加えた既存指標へ当てはめ、京都ページの編集材料にできる事実と、一次資料の確認が別途要る記述(名産・祭り・歴史・シンボル)に仕分ける論点。",
+      "pages": [
+        52,
+        53
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "京都の面積・農業産出額・製造品出荷額等・延べ宿泊者数と海外観光旅行の行動者率、延べ宿泊者数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "metricKeys": [
+        "total-area-excluding-northern-territories-and-takeshima",
+        "agricultural-output",
+        "manufacturing-shipment-amount",
+        "total-overnight-guests",
+        "travel-participation-rate-overseas",
+        "total-overnight-guests"
+      ],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (統計でみる都道府県のすがた)",
+          "url": "https://www.stat.go.jp/data/ssds/index.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "全国都道府県市区町村別面積調",
+          "url": "https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "観光庁",
+          "publicationOrDataset": "宿泊旅行統計調査",
+          "url": "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "26000"
+      ],
+      "nextAction": "京都の県ページ(area)編集時に、上記の既存指標を県の位置づけの根拠として確認し、特産・県シンボルは県公式サイトで area-curator が検証する。年間観光客数は京都府・京都市の観光調査が一次資料で、書籍の数字は検証前は使わない。"
+    },
+    {
+      "id": "capital-city-guide-unknown-a29",
+      "chapter": 27,
+      "question": "大阪の章が紹介する府内総生産・中小製造業・商業と交通網のうち、公的統計で他県と比べて位置づけを検証できる項目はどれか。",
+      "thesis": "県庁所在地ガイドの大阪の章に出てくる産業・観光・自然の特徴を、面積・農業産出額・製造品出荷額等・延べ宿泊者数に、県内総生産額、製造業事業所数、コンビニ店舗数を加えた既存指標へ当てはめ、大阪ページの編集材料にできる事実と、一次資料の確認が別途要る記述(名産・祭り・歴史・シンボル)に仕分ける論点。",
+      "pages": [
+        54,
+        55
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "大阪の面積・農業産出額・製造品出荷額等・延べ宿泊者数と県内総生産額、製造業事業所数、コンビニ店舗数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "metricKeys": [
+        "total-area-excluding-northern-territories-and-takeshima",
+        "agricultural-output",
+        "manufacturing-shipment-amount",
+        "total-overnight-guests",
+        "total-production-in-the-prefecture",
+        "manufacturing-establishments",
+        "convenience-store-count-per-100k"
+      ],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (統計でみる都道府県のすがた)",
+          "url": "https://www.stat.go.jp/data/ssds/index.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "全国都道府県市区町村別面積調",
+          "url": "https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "観光庁",
+          "publicationOrDataset": "宿泊旅行統計調査",
+          "url": "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "27000"
+      ],
+      "nextAction": "大阪の県ページ(area)編集時に、上記の既存指標を県の位置づけの根拠として確認し、特産・県シンボルは県公式サイトで area-curator が検証する。"
+    },
+    {
+      "id": "capital-city-guide-unknown-a30",
+      "chapter": 28,
+      "question": "兵庫の章が紹介する神戸・阪神と但馬・淡路を含む多様な地域と酒・牛肉のうち、公的統計で他県と比べて位置づけを検証できる項目はどれか。",
+      "thesis": "県庁所在地ガイドの兵庫の章に出てくる産業・観光・自然の特徴を、面積・農業産出額・製造品出荷額等・延べ宿泊者数に、牛肉の消費量、入港船舶隻数を加えた既存指標へ当てはめ、兵庫ページの編集材料にできる事実と、一次資料の確認が別途要る記述(名産・祭り・歴史・シンボル)に仕分ける論点。",
+      "pages": [
+        56,
+        57
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "兵庫の面積・農業産出額・製造品出荷額等・延べ宿泊者数と牛肉の消費量、入港船舶隻数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "metricKeys": [
+        "total-area-excluding-northern-territories-and-takeshima",
+        "agricultural-output",
+        "manufacturing-shipment-amount",
+        "total-overnight-guests",
+        "beef-consumption-quantity",
+        "port-inbound-ships"
+      ],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (統計でみる都道府県のすがた)",
+          "url": "https://www.stat.go.jp/data/ssds/index.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "全国都道府県市区町村別面積調",
+          "url": "https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "観光庁",
+          "publicationOrDataset": "宿泊旅行統計調査",
+          "url": "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "28000"
+      ],
+      "nextAction": "兵庫の県ページ(area)編集時に、上記の既存指標を県の位置づけの根拠として確認し、特産・県シンボルは県公式サイトで area-curator が検証する。"
+    },
+    {
+      "id": "capital-city-guide-unknown-a31",
+      "chapter": 29,
+      "question": "奈良の章が紹介する古代の都の文化遺産と食の保存文化のうち、公的統計で他県と比べて位置づけを検証できる項目はどれか。",
+      "thesis": "県庁所在地ガイドの奈良の章に出てくる産業・観光・自然の特徴を、面積・農業産出額・製造品出荷額等・延べ宿泊者数に、ホテル営業施設数、都道府県指定等文化財件数を加えた既存指標へ当てはめ、奈良ページの編集材料にできる事実と、一次資料の確認が別途要る記述(名産・祭り・歴史・シンボル)に仕分ける論点。",
+      "pages": [
+        58,
+        59
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "奈良の面積・農業産出額・製造品出荷額等・延べ宿泊者数とホテル営業施設数、都道府県指定等文化財件数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "metricKeys": [
+        "total-area-excluding-northern-territories-and-takeshima",
+        "agricultural-output",
+        "manufacturing-shipment-amount",
+        "total-overnight-guests",
+        "number-of-hotel-facilities",
+        "prefecture-designated-cultural-property-count"
+      ],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (統計でみる都道府県のすがた)",
+          "url": "https://www.stat.go.jp/data/ssds/index.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "全国都道府県市区町村別面積調",
+          "url": "https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "観光庁",
+          "publicationOrDataset": "宿泊旅行統計調査",
+          "url": "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "29000"
+      ],
+      "nextAction": "奈良の県ページ(area)編集時に、上記の既存指標を県の位置づけの根拠として確認し、特産・県シンボルは県公式サイトで area-curator が検証する。"
+    },
+    {
+      "id": "capital-city-guide-unknown-a32",
+      "chapter": 30,
+      "question": "和歌山の章が紹介するみかん・梅などの果実と高野山・熊野の信仰の道のうち、公的統計で他県と比べて位置づけを検証できる項目はどれか。",
+      "thesis": "県庁所在地ガイドの和歌山の章に出てくる産業・観光・自然の特徴を、面積・農業産出額・製造品出荷額等・延べ宿泊者数に、みかん・梅干しの消費支出額を加えた既存指標へ当てはめ、和歌山ページの編集材料にできる事実と、一次資料の確認が別途要る記述(名産・祭り・歴史・シンボル)に仕分ける論点。",
+      "pages": [
+        60,
+        62
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "和歌山の面積・農業産出額・製造品出荷額等・延べ宿泊者数とみかん・梅干しの消費支出額は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "metricKeys": [
+        "total-area-excluding-northern-territories-and-takeshima",
+        "agricultural-output",
+        "manufacturing-shipment-amount",
+        "total-overnight-guests",
+        "mandarin-consumption-expenditure",
+        "pickled-plum-consumption-expenditure"
+      ],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (統計でみる都道府県のすがた)",
+          "url": "https://www.stat.go.jp/data/ssds/index.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "全国都道府県市区町村別面積調",
+          "url": "https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "観光庁",
+          "publicationOrDataset": "宿泊旅行統計調査",
+          "url": "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "30000"
+      ],
+      "nextAction": "和歌山の県ページ(area)編集時に、上記の既存指標を県の位置づけの根拠として確認し、特産・県シンボルは県公式サイトで area-curator が検証する。みかんと梅の生産量は作物統計が一次資料で、既存metricは消費側のみ。"
+    },
+    {
+      "id": "capital-city-guide-unknown-a33",
+      "chapter": 31,
+      "question": "鳥取の章が紹介する砂丘・山岳・海岸線の自然と日本海側の食のうち、公的統計で他県と比べて位置づけを検証できる項目はどれか。",
+      "thesis": "県庁所在地ガイドの鳥取の章に出てくる産業・観光・自然の特徴を、面積・農業産出額・製造品出荷額等・延べ宿泊者数に、ホテル営業施設数、自然公園面積割合を加えた既存指標へ当てはめ、鳥取ページの編集材料にできる事実と、一次資料の確認が別途要る記述(名産・祭り・歴史・シンボル)に仕分ける論点。",
+      "pages": [
+        63,
+        64
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "鳥取の面積・農業産出額・製造品出荷額等・延べ宿泊者数とホテル営業施設数、自然公園面積割合は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "metricKeys": [
+        "total-area-excluding-northern-territories-and-takeshima",
+        "agricultural-output",
+        "manufacturing-shipment-amount",
+        "total-overnight-guests",
+        "number-of-hotel-facilities",
+        "nature-park-area-ratio"
+      ],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (統計でみる都道府県のすがた)",
+          "url": "https://www.stat.go.jp/data/ssds/index.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "全国都道府県市区町村別面積調",
+          "url": "https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "観光庁",
+          "publicationOrDataset": "宿泊旅行統計調査",
+          "url": "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "31000"
+      ],
+      "nextAction": "鳥取の県ページ(area)編集時に、上記の既存指標を県の位置づけの根拠として確認し、特産・県シンボルは県公式サイトで area-curator が検証する。"
+    },
+    {
+      "id": "capital-city-guide-unknown-a34",
+      "chapter": 32,
+      "question": "島根の章が紹介する神話・世界遺産・城と離島を含む地域構成のうち、公的統計で他県と比べて位置づけを検証できる項目はどれか。",
+      "thesis": "県庁所在地ガイドの島根の章に出てくる産業・観光・自然の特徴を、面積・農業産出額・製造品出荷額等・延べ宿泊者数に、ホテル営業施設数、都道府県指定等文化財件数を加えた既存指標へ当てはめ、島根ページの編集材料にできる事実と、一次資料の確認が別途要る記述(名産・祭り・歴史・シンボル)に仕分ける論点。",
+      "pages": [
+        65,
+        66
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "島根の面積・農業産出額・製造品出荷額等・延べ宿泊者数とホテル営業施設数、都道府県指定等文化財件数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "metricKeys": [
+        "total-area-excluding-northern-territories-and-takeshima",
+        "agricultural-output",
+        "manufacturing-shipment-amount",
+        "total-overnight-guests",
+        "number-of-hotel-facilities",
+        "prefecture-designated-cultural-property-count"
+      ],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (統計でみる都道府県のすがた)",
+          "url": "https://www.stat.go.jp/data/ssds/index.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "全国都道府県市区町村別面積調",
+          "url": "https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "観光庁",
+          "publicationOrDataset": "宿泊旅行統計調査",
+          "url": "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "32000"
+      ],
+      "nextAction": "島根の県ページ(area)編集時に、上記の既存指標を県の位置づけの根拠として確認し、特産・県シンボルは県公式サイトで area-curator が検証する。"
+    },
+    {
+      "id": "capital-city-guide-unknown-a35",
+      "chapter": 33,
+      "question": "岡山の章が紹介する温暖な気候・果物・デニムなどの繊維と瀬戸内の位置のうち、公的統計で他県と比べて位置づけを検証できる項目はどれか。",
+      "thesis": "県庁所在地ガイドの岡山の章に出てくる産業・観光・自然の特徴を、面積・農業産出額・製造品出荷額等・延べ宿泊者数に、年間快晴日数、事業所当たり製造品出荷額等を加えた既存指標へ当てはめ、岡山ページの編集材料にできる事実と、一次資料の確認が別途要る記述(名産・祭り・歴史・シンボル)に仕分ける論点。",
+      "pages": [
+        67,
+        68
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "岡山の面積・農業産出額・製造品出荷額等・延べ宿泊者数と年間快晴日数、事業所当たり製造品出荷額等は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "metricKeys": [
+        "total-area-excluding-northern-territories-and-takeshima",
+        "agricultural-output",
+        "manufacturing-shipment-amount",
+        "total-overnight-guests",
+        "annual-clear-days",
+        "manufacturing-shipment-amount-per-establishment"
+      ],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (統計でみる都道府県のすがた)",
+          "url": "https://www.stat.go.jp/data/ssds/index.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "全国都道府県市区町村別面積調",
+          "url": "https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "観光庁",
+          "publicationOrDataset": "宿泊旅行統計調査",
+          "url": "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "33000"
+      ],
+      "nextAction": "岡山の県ページ(area)編集時に、上記の既存指標を県の位置づけの根拠として確認し、特産・県シンボルは県公式サイトで area-curator が検証する。"
+    },
+    {
+      "id": "capital-city-guide-unknown-a36",
+      "chapter": 34,
+      "question": "広島の章が紹介する牡蠣・レモン・自動車・造船と世界遺産のうち、公的統計で他県と比べて位置づけを検証できる項目はどれか。",
+      "thesis": "県庁所在地ガイドの広島の章に出てくる産業・観光・自然の特徴を、面積・農業産出額・製造品出荷額等・延べ宿泊者数に、かき(貝)の消費支出額、入港船舶隻数を加えた既存指標へ当てはめ、広島ページの編集材料にできる事実と、一次資料の確認が別途要る記述(名産・祭り・歴史・シンボル)に仕分ける論点。",
+      "pages": [
+        69,
+        70
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "広島の面積・農業産出額・製造品出荷額等・延べ宿泊者数とかき(貝)の消費支出額、入港船舶隻数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "metricKeys": [
+        "total-area-excluding-northern-territories-and-takeshima",
+        "agricultural-output",
+        "manufacturing-shipment-amount",
+        "total-overnight-guests",
+        "oyster-consumption-expenditure",
+        "port-inbound-ships"
+      ],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (統計でみる都道府県のすがた)",
+          "url": "https://www.stat.go.jp/data/ssds/index.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "全国都道府県市区町村別面積調",
+          "url": "https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "観光庁",
+          "publicationOrDataset": "宿泊旅行統計調査",
+          "url": "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "34000"
+      ],
+      "nextAction": "広島の県ページ(area)編集時に、上記の既存指標を県の位置づけの根拠として確認し、特産・県シンボルは県公式サイトで area-curator が検証する。牡蠣の生産量は漁業・養殖業生産統計が一次資料で、既存metricは消費側のみ。"
+    },
+    {
+      "id": "capital-city-guide-unknown-a37",
+      "chapter": 35,
+      "question": "山口の章が紹介する本州最西端の位置・ふぐ・化学工業と維新の歴史のうち、公的統計で他県と比べて位置づけを検証できる項目はどれか。",
+      "thesis": "県庁所在地ガイドの山口の章に出てくる産業・観光・自然の特徴を、面積・農業産出額・製造品出荷額等・延べ宿泊者数に、海面漁業産出額、事業所当たり製造品出荷額等を加えた既存指標へ当てはめ、山口ページの編集材料にできる事実と、一次資料の確認が別途要る記述(名産・祭り・歴史・シンボル)に仕分ける論点。",
+      "pages": [
+        71,
+        72
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "山口の面積・農業産出額・製造品出荷額等・延べ宿泊者数と海面漁業産出額、事業所当たり製造品出荷額等は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "metricKeys": [
+        "total-area-excluding-northern-territories-and-takeshima",
+        "agricultural-output",
+        "manufacturing-shipment-amount",
+        "total-overnight-guests",
+        "marine-fishery-output-value",
+        "manufacturing-shipment-amount-per-establishment"
+      ],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (統計でみる都道府県のすがた)",
+          "url": "https://www.stat.go.jp/data/ssds/index.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "全国都道府県市区町村別面積調",
+          "url": "https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "観光庁",
+          "publicationOrDataset": "宿泊旅行統計調査",
+          "url": "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "35000"
+      ],
+      "nextAction": "山口の県ページ(area)編集時に、上記の既存指標を県の位置づけの根拠として確認し、特産・県シンボルは県公式サイトで area-curator が検証する。ふぐの取扱量は下関の市場統計が一次資料で既存metricが無い。"
+    },
+    {
+      "id": "capital-city-guide-unknown-a38",
+      "chapter": 36,
+      "question": "徳島の章が紹介するすだちなどの農産物と阿波おどり・渦潮の観光のうち、公的統計で他県と比べて位置づけを検証できる項目はどれか。",
+      "thesis": "県庁所在地ガイドの徳島の章に出てくる産業・観光・自然の特徴を、面積・農業産出額・製造品出荷額等・延べ宿泊者数に、森林面積割合、ホテル営業施設数を加えた既存指標へ当てはめ、徳島ページの編集材料にできる事実と、一次資料の確認が別途要る記述(名産・祭り・歴史・シンボル)に仕分ける論点。",
+      "pages": [
+        73,
+        74
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "徳島の面積・農業産出額・製造品出荷額等・延べ宿泊者数と森林面積割合、ホテル営業施設数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "metricKeys": [
+        "total-area-excluding-northern-territories-and-takeshima",
+        "agricultural-output",
+        "manufacturing-shipment-amount",
+        "total-overnight-guests",
+        "forest-area-ratio",
+        "number-of-hotel-facilities"
+      ],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (統計でみる都道府県のすがた)",
+          "url": "https://www.stat.go.jp/data/ssds/index.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "全国都道府県市区町村別面積調",
+          "url": "https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "観光庁",
+          "publicationOrDataset": "宿泊旅行統計調査",
+          "url": "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "36000"
+      ],
+      "nextAction": "徳島の県ページ(area)編集時に、上記の既存指標を県の位置づけの根拠として確認し、特産・県シンボルは県公式サイトで area-curator が検証する。すだちの生産量は特産果樹生産動態等調査が一次資料。"
+    },
+    {
+      "id": "capital-city-guide-unknown-a39",
+      "chapter": 37,
+      "question": "香川の章が紹介する日本一小さい県の面積とうどん・オリーブ・アートのうち、公的統計で他県と比べて位置づけを検証できる項目はどれか。",
+      "thesis": "県庁所在地ガイドの香川の章に出てくる産業・観光・自然の特徴を、面積・農業産出額・製造品出荷額等・延べ宿泊者数に、生・乾うどんそばの消費支出額を加えた既存指標へ当てはめ、香川ページの編集材料にできる事実と、一次資料の確認が別途要る記述(名産・祭り・歴史・シンボル)に仕分ける論点。",
+      "pages": [
+        75,
+        76
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "香川の面積・農業産出額・製造品出荷額等・延べ宿泊者数と生・乾うどんそばの消費支出額は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "metricKeys": [
+        "total-area-excluding-northern-territories-and-takeshima",
+        "agricultural-output",
+        "manufacturing-shipment-amount",
+        "total-overnight-guests",
+        "fresh-udon-soba-consumption-expenditure",
+        "dried-udon-soba-consumption-expenditure"
+      ],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (統計でみる都道府県のすがた)",
+          "url": "https://www.stat.go.jp/data/ssds/index.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "全国都道府県市区町村別面積調",
+          "url": "https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "観光庁",
+          "publicationOrDataset": "宿泊旅行統計調査",
+          "url": "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "37000"
+      ],
+      "nextAction": "香川の県ページ(area)編集時に、上記の既存指標を県の位置づけの根拠として確認し、特産・県シンボルは県公式サイトで area-curator が検証する。オリーブの生産量は特産果樹生産動態等調査が一次資料。"
+    },
+    {
+      "id": "capital-city-guide-unknown-a40",
+      "chapter": 38,
+      "question": "愛媛の章が紹介する柑橘・温泉・城・しまなみ海道のうち、公的統計で他県と比べて位置づけを検証できる項目はどれか。",
+      "thesis": "県庁所在地ガイドの愛媛の章に出てくる産業・観光・自然の特徴を、面積・農業産出額・製造品出荷額等・延べ宿泊者数に、ホテル営業施設数、みかんの消費支出額を加えた既存指標へ当てはめ、愛媛ページの編集材料にできる事実と、一次資料の確認が別途要る記述(名産・祭り・歴史・シンボル)に仕分ける論点。",
+      "pages": [
+        77,
+        78
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "愛媛の面積・農業産出額・製造品出荷額等・延べ宿泊者数とホテル営業施設数、みかんの消費支出額は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "metricKeys": [
+        "total-area-excluding-northern-territories-and-takeshima",
+        "agricultural-output",
+        "manufacturing-shipment-amount",
+        "total-overnight-guests",
+        "number-of-hotel-facilities",
+        "mandarin-consumption-expenditure"
+      ],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (統計でみる都道府県のすがた)",
+          "url": "https://www.stat.go.jp/data/ssds/index.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "全国都道府県市区町村別面積調",
+          "url": "https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "観光庁",
+          "publicationOrDataset": "宿泊旅行統計調査",
+          "url": "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "38000"
+      ],
+      "nextAction": "愛媛の県ページ(area)編集時に、上記の既存指標を県の位置づけの根拠として確認し、特産・県シンボルは県公式サイトで area-curator が検証する。柑橘の収穫量は果樹生産統計が一次資料で、既存metricは消費側のみ。"
+    },
+    {
+      "id": "capital-city-guide-unknown-a41",
+      "chapter": 39,
+      "question": "高知の章が紹介するカツオ・清流・森林と偉人にちなむ観光のうち、公的統計で他県と比べて位置づけを検証できる項目はどれか。",
+      "thesis": "県庁所在地ガイドの高知の章に出てくる産業・観光・自然の特徴を、面積・農業産出額・製造品出荷額等・延べ宿泊者数に、カツオ漁獲量、森林面積割合、都道府県立自然公園数を加えた既存指標へ当てはめ、高知ページの編集材料にできる事実と、一次資料の確認が別途要る記述(名産・祭り・歴史・シンボル)に仕分ける論点。",
+      "pages": [
+        79,
+        80
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "高知の面積・農業産出額・製造品出荷額等・延べ宿泊者数とカツオ漁獲量、森林面積割合、都道府県立自然公園数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "metricKeys": [
+        "total-area-excluding-northern-territories-and-takeshima",
+        "agricultural-output",
+        "manufacturing-shipment-amount",
+        "total-overnight-guests",
+        "fishery-species-catch-bonito",
+        "forest-area-ratio",
+        "prefectural-natural-park-count"
+      ],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (統計でみる都道府県のすがた)",
+          "url": "https://www.stat.go.jp/data/ssds/index.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "全国都道府県市区町村別面積調",
+          "url": "https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "観光庁",
+          "publicationOrDataset": "宿泊旅行統計調査",
+          "url": "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "39000"
+      ],
+      "nextAction": "高知の県ページ(area)編集時に、上記の既存指標を県の位置づけの根拠として確認し、特産・県シンボルは県公式サイトで area-curator が検証する。"
+    },
+    {
+      "id": "capital-city-guide-unknown-a42",
+      "chapter": 40,
+      "question": "福岡の章が紹介する九州の玄関口としての都市機能・食文化・北九州の工業のうち、公的統計で他県と比べて位置づけを検証できる項目はどれか。",
+      "thesis": "県庁所在地ガイドの福岡の章に出てくる産業・観光・自然の特徴を、面積・農業産出額・製造品出荷額等・延べ宿泊者数に、空港数、事業所当たり製造品出荷額等、県内総生産額を加えた既存指標へ当てはめ、福岡ページの編集材料にできる事実と、一次資料の確認が別途要る記述(名産・祭り・歴史・シンボル)に仕分ける論点。",
+      "pages": [
+        81,
+        83
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "福岡の面積・農業産出額・製造品出荷額等・延べ宿泊者数と空港数、事業所当たり製造品出荷額等、県内総生産額は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "metricKeys": [
+        "total-area-excluding-northern-territories-and-takeshima",
+        "agricultural-output",
+        "manufacturing-shipment-amount",
+        "total-overnight-guests",
+        "airport-count",
+        "manufacturing-shipment-amount-per-establishment",
+        "total-production-in-the-prefecture"
+      ],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (統計でみる都道府県のすがた)",
+          "url": "https://www.stat.go.jp/data/ssds/index.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "全国都道府県市区町村別面積調",
+          "url": "https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "観光庁",
+          "publicationOrDataset": "宿泊旅行統計調査",
+          "url": "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "40000"
+      ],
+      "nextAction": "福岡の県ページ(area)編集時に、上記の既存指標を県の位置づけの根拠として確認し、特産・県シンボルは県公式サイトで area-curator が検証する。"
+    },
+    {
+      "id": "capital-city-guide-unknown-a43",
+      "chapter": 41,
+      "question": "佐賀の章が紹介する有明海・玄界灘の自然と有田焼などの陶磁器文化のうち、公的統計で他県と比べて位置づけを検証できる項目はどれか。",
+      "thesis": "県庁所在地ガイドの佐賀の章に出てくる産業・観光・自然の特徴を、面積・農業産出額・製造品出荷額等・延べ宿泊者数に、ホテル営業施設数、海面漁業産出額を加えた既存指標へ当てはめ、佐賀ページの編集材料にできる事実と、一次資料の確認が別途要る記述(名産・祭り・歴史・シンボル)に仕分ける論点。",
+      "pages": [
+        84,
+        85
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "佐賀の面積・農業産出額・製造品出荷額等・延べ宿泊者数とホテル営業施設数、海面漁業産出額は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "metricKeys": [
+        "total-area-excluding-northern-territories-and-takeshima",
+        "agricultural-output",
+        "manufacturing-shipment-amount",
+        "total-overnight-guests",
+        "number-of-hotel-facilities",
+        "marine-fishery-output-value"
+      ],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (統計でみる都道府県のすがた)",
+          "url": "https://www.stat.go.jp/data/ssds/index.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "全国都道府県市区町村別面積調",
+          "url": "https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "観光庁",
+          "publicationOrDataset": "宿泊旅行統計調査",
+          "url": "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "41000"
+      ],
+      "nextAction": "佐賀の県ページ(area)編集時に、上記の既存指標を県の位置づけの根拠として確認し、特産・県シンボルは県公式サイトで area-curator が検証する。"
+    },
+    {
+      "id": "capital-city-guide-unknown-a44",
+      "chapter": 42,
+      "question": "長崎の章が紹介する離島の多さ・漁業・造船と歴史的な国際交流のうち、公的統計で他県と比べて位置づけを検証できる項目はどれか。",
+      "thesis": "県庁所在地ガイドの長崎の章に出てくる産業・観光・自然の特徴を、面積・農業産出額・製造品出荷額等・延べ宿泊者数に、海面漁業漁獲量、漁業産出額、空港数を加えた既存指標へ当てはめ、長崎ページの編集材料にできる事実と、一次資料の確認が別途要る記述(名産・祭り・歴史・シンボル)に仕分ける論点。",
+      "pages": [
+        86,
+        87
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "長崎の面積・農業産出額・製造品出荷額等・延べ宿泊者数と海面漁業漁獲量、漁業産出額、空港数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "metricKeys": [
+        "total-area-excluding-northern-territories-and-takeshima",
+        "agricultural-output",
+        "manufacturing-shipment-amount",
+        "total-overnight-guests",
+        "marine-fishery-catch",
+        "fishery-output-value",
+        "airport-count"
+      ],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (統計でみる都道府県のすがた)",
+          "url": "https://www.stat.go.jp/data/ssds/index.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "全国都道府県市区町村別面積調",
+          "url": "https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "観光庁",
+          "publicationOrDataset": "宿泊旅行統計調査",
+          "url": "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "42000"
+      ],
+      "nextAction": "長崎の県ページ(area)編集時に、上記の既存指標を県の位置づけの根拠として確認し、特産・県シンボルは県公式サイトで area-curator が検証する。島の数は国土地理院等の一次資料で確認するまで書籍の数を使わない。"
+    },
+    {
+      "id": "capital-city-guide-unknown-a45",
+      "chapter": 43,
+      "question": "熊本の章が紹介する阿蘇・水資源・農産物と熊本城などの文化のうち、公的統計で他県と比べて位置づけを検証できる項目はどれか。",
+      "thesis": "県庁所在地ガイドの熊本の章に出てくる産業・観光・自然の特徴を、面積・農業産出額・製造品出荷額等・延べ宿泊者数に、鶏肉・飲酒代の消費支出額を加えた既存指標へ当てはめ、熊本ページの編集材料にできる事実と、一次資料の確認が別途要る記述(名産・祭り・歴史・シンボル)に仕分ける論点。",
+      "pages": [
+        88,
+        89
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "熊本の面積・農業産出額・製造品出荷額等・延べ宿泊者数と鶏肉・飲酒代の消費支出額は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "metricKeys": [
+        "total-area-excluding-northern-territories-and-takeshima",
+        "agricultural-output",
+        "manufacturing-shipment-amount",
+        "total-overnight-guests",
+        "chicken-consumption-expenditure",
+        "drinking-out-consumption-expenditure"
+      ],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (統計でみる都道府県のすがた)",
+          "url": "https://www.stat.go.jp/data/ssds/index.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "全国都道府県市区町村別面積調",
+          "url": "https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "観光庁",
+          "publicationOrDataset": "宿泊旅行統計調査",
+          "url": "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "43000"
+      ],
+      "nextAction": "熊本の県ページ(area)編集時に、上記の既存指標を県の位置づけの根拠として確認し、特産・県シンボルは県公式サイトで area-curator が検証する。"
+    },
+    {
+      "id": "capital-city-guide-unknown-a46",
+      "chapter": 44,
+      "question": "大分の章が紹介する温泉・かぼす・乾しいたけと製造業のうち、公的統計で他県と比べて位置づけを検証できる項目はどれか。",
+      "thesis": "県庁所在地ガイドの大分の章に出てくる産業・観光・自然の特徴を、面積・農業産出額・製造品出荷額等・延べ宿泊者数に、温泉・銭湯入浴料の消費支出額、従業者当たり製造品出荷額等を加えた既存指標へ当てはめ、大分ページの編集材料にできる事実と、一次資料の確認が別途要る記述(名産・祭り・歴史・シンボル)に仕分ける論点。",
+      "pages": [
+        90,
+        91
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "大分の面積・農業産出額・製造品出荷額等・延べ宿泊者数と温泉・銭湯入浴料の消費支出額、従業者当たり製造品出荷額等は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "metricKeys": [
+        "total-area-excluding-northern-territories-and-takeshima",
+        "agricultural-output",
+        "manufacturing-shipment-amount",
+        "total-overnight-guests",
+        "public-bath-consumption-expenditure",
+        "manufacturing-shipment-amount-per-employee"
+      ],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (統計でみる都道府県のすがた)",
+          "url": "https://www.stat.go.jp/data/ssds/index.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "全国都道府県市区町村別面積調",
+          "url": "https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "観光庁",
+          "publicationOrDataset": "宿泊旅行統計調査",
+          "url": "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "44000"
+      ],
+      "nextAction": "大分の県ページ(area)編集時に、上記の既存指標を県の位置づけの根拠として確認し、特産・県シンボルは県公式サイトで area-curator が検証する。源泉数・湧出量は環境省の温泉利用状況が一次資料で既存metricが無い。"
+    },
+    {
+      "id": "capital-city-guide-unknown-a47",
+      "chapter": 45,
+      "question": "宮崎の章が紹介する神話の舞台・温暖な気候・畜産のうち、公的統計で他県と比べて位置づけを検証できる項目はどれか。",
+      "thesis": "県庁所在地ガイドの宮崎の章に出てくる産業・観光・自然の特徴を、面積・農業産出額・製造品出荷額等・延べ宿泊者数に、肉用牛・豚・採卵鶏の飼養頭数を加えた既存指標へ当てはめ、宮崎ページの編集材料にできる事実と、一次資料の確認が別途要る記述(名産・祭り・歴史・シンボル)に仕分ける論点。",
+      "pages": [
+        92,
+        94
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "宮崎の面積・農業産出額・製造品出荷額等・延べ宿泊者数と肉用牛・豚・採卵鶏の飼養頭数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "metricKeys": [
+        "total-area-excluding-northern-territories-and-takeshima",
+        "agricultural-output",
+        "manufacturing-shipment-amount",
+        "total-overnight-guests",
+        "beef-cattle-count",
+        "pig-count",
+        "layer-hen-count"
+      ],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (統計でみる都道府県のすがた)",
+          "url": "https://www.stat.go.jp/data/ssds/index.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "全国都道府県市区町村別面積調",
+          "url": "https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "観光庁",
+          "publicationOrDataset": "宿泊旅行統計調査",
+          "url": "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "45000"
+      ],
+      "nextAction": "宮崎の県ページ(area)編集時に、上記の既存指標を県の位置づけの根拠として確認し、特産・県シンボルは県公式サイトで area-curator が検証する。"
+    },
+    {
+      "id": "capital-city-guide-unknown-a48",
+      "chapter": 46,
+      "question": "鹿児島の章が紹介する火山・離島・畜産と薩摩藩の近代化の歴史のうち、公的統計で他県と比べて位置づけを検証できる項目はどれか。",
+      "thesis": "県庁所在地ガイドの鹿児島の章に出てくる産業・観光・自然の特徴を、面積・農業産出額・製造品出荷額等・延べ宿泊者数に、豚・肉用牛の飼養頭数、年間快晴日数を加えた既存指標へ当てはめ、鹿児島ページの編集材料にできる事実と、一次資料の確認が別途要る記述(名産・祭り・歴史・シンボル)に仕分ける論点。",
+      "pages": [
+        95,
+        96
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "鹿児島の面積・農業産出額・製造品出荷額等・延べ宿泊者数と豚・肉用牛の飼養頭数、年間快晴日数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "metricKeys": [
+        "total-area-excluding-northern-territories-and-takeshima",
+        "agricultural-output",
+        "manufacturing-shipment-amount",
+        "total-overnight-guests",
+        "pig-count",
+        "beef-cattle-count",
+        "annual-clear-days"
+      ],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (統計でみる都道府県のすがた)",
+          "url": "https://www.stat.go.jp/data/ssds/index.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "全国都道府県市区町村別面積調",
+          "url": "https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "観光庁",
+          "publicationOrDataset": "宿泊旅行統計調査",
+          "url": "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "46000"
+      ],
+      "nextAction": "鹿児島の県ページ(area)編集時に、上記の既存指標を県の位置づけの根拠として確認し、特産・県シンボルは県公式サイトで area-curator が検証する。"
+    },
+    {
+      "id": "capital-city-guide-unknown-a49",
+      "chapter": 47,
+      "question": "沖縄の章が紹介する亜熱帯の気候・離島・観光と琉球の歴史文化のうち、公的統計で他県と比べて位置づけを検証できる項目はどれか。",
+      "thesis": "県庁所在地ガイドの沖縄の章に出てくる産業・観光・自然の特徴を、面積・農業産出額・製造品出荷額等・延べ宿泊者数に、外国人延べ宿泊者数、空港数、ホテル営業施設数を加えた既存指標へ当てはめ、沖縄ページの編集材料にできる事実と、一次資料の確認が別途要る記述(名産・祭り・歴史・シンボル)に仕分ける論点。",
+      "pages": [
+        97,
+        98
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "沖縄の面積・農業産出額・製造品出荷額等・延べ宿泊者数と外国人延べ宿泊者数、空港数、ホテル営業施設数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "metricKeys": [
+        "total-area-excluding-northern-territories-and-takeshima",
+        "agricultural-output",
+        "manufacturing-shipment-amount",
+        "total-overnight-guests",
+        "total-overnight-guests-foreign",
+        "airport-count",
+        "number-of-hotel-facilities"
+      ],
+      "surveyIds": [],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (統計でみる都道府県のすがた)",
+          "url": "https://www.stat.go.jp/data/ssds/index.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "国土交通省 国土地理院",
+          "publicationOrDataset": "全国都道府県市区町村別面積調",
+          "url": "https://www.gsi.go.jp/KOKUJYOHO/MENCHO-title.htm",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "観光庁",
+          "publicationOrDataset": "宿泊旅行統計調査",
+          "url": "https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html",
+          "dataYears": [
+            "2023",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "47000"
+      ],
+      "nextAction": "沖縄の県ページ(area)編集時に、上記の既存指標を県の位置づけの根拠として確認し、特産・県シンボルは県公式サイトで area-curator が検証する。"
+    },
+    {
+      "id": "capital-city-guide-unknown-a50",
+      "chapter": 0,
+      "question": "p99以降の52ページに内容はあるか。",
+      "thesis": "p99〜p150 は画像が完全一致する空白ページ(文字起こしも空)で、既知の重複スキャン p100〜p150 に加え p99 も同一画像であることを確認した。p98 で沖縄の章が終わり、奥付や広告は存在しない。",
+      "pages": [
+        99,
+        150
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "p99〜p150 は画像MD5が全て同一の空白ページ。文字起こしも空で内容なし",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "対応不要。再スキャン・再処理は不要"
+    }
+  ]
+}

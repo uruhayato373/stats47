@@ -15,8 +15,8 @@
  * 更新タイミング: ranking item 追加/有効化 + CI generate-ranking-items 実行後。
  *                 必ず git commit してからデプロイ。
  *
- * 最終生成日: 2026-09-30
- * 件数: 2411
+ * 最終生成日: 2026-10-07
+ * 件数: 2424
  */
 export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "abandoned-cultivated-land-area",
@@ -29,6 +29,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "accountant-annual-income",
   "active-job-opening-ratio",
   "actual-income-worker-households-per-month",
+  "actual-overnight-guests",
   "acupuncture-moxibustion-count",
   "acupuncturist-rate",
   "adult-class-lecture-count-per-million",
@@ -94,6 +95,8 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "assistance-expenditure-ratio-pref-finance",
   "assistance-expenses-prefecture",
   "associate-professor-annual-income",
+  "auto-insurance-penetration-bodily-injury-actual",
+  "auto-insurance-penetration-bodily-injury-fixed",
   "auto-liability-insurance-amount-received-per-payment",
   "auto-mechanic-annual-income",
   "autolock-apartment-rate",
@@ -259,6 +262,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "chicken-consumption-expenditure",
   "chicken-consumption-quantity",
   "chikuwa-consumption-expenditure",
+  "child-abuse-consultation-cases",
   "child-consultation-center-cases",
   "child-consultation-center-cases-per-1000",
   "child-rearing-allowance-recipients",
@@ -393,6 +397,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "crab-consumption-expenditure",
   "crab-consumption-quantity",
   "craft-materials-consumption-expenditure",
+  "cram-school-establishment-count",
   "criminal-arrest-rate",
   "criminal-recognition-count",
   "criminal-recognition-count-of-prostitution-crime-rate",
@@ -437,6 +442,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "daytime-population-ratio",
   "death-accident",
   "death-count",
+  "deaths-cerebral-infarction-per-100k",
   "deaths-cerebrovascular-disease",
   "deaths-cerebrovascular-disease-per-100k",
   "deaths-diabetes",
@@ -641,6 +647,8 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "final-energy-consumption-per-capita",
   "financial-assets-balance-multi-person-households",
   "financial-debt-balance",
+  "fire-affected-persons-count",
+  "fire-damage-amount",
   "fire-damage-casualties-per-accident",
   "fire-damage-casualties-per-population",
   "fire-damage-household-count-per-100-building-fires",
@@ -748,6 +756,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "fresh-shiitake-consumption-quantity",
   "fresh-udon-soba-consumption-expenditure",
   "fresh-udon-soba-consumption-quantity",
+  "fresh-vegetables-consumption-expenditure",
   "freshwater-clam-consumption-expenditure",
   "freshwater-clam-consumption-quantity",
   "fried-tofu-consumption-expenditure",
@@ -1286,6 +1295,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "monthly-average-actual-working-hours-male-pre2019",
   "monthly-parking-consumption-expenditure",
   "moped-count",
+  "mothers-age-at-first-birth",
   "motorcycle-count",
   "movers-in",
   "movers-out",
@@ -1418,6 +1428,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "nursery-count-per-100k-0-5",
   "nursery-teacher-annual-income",
   "nursery-utilization-rate",
+  "nursery-waiting-children-count",
   "nurses-general-hospital-per-100beds",
   "nurses-in-medical-facilities-per-100k",
   "nurses-per-100k-population",
@@ -1957,6 +1968,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "science-museum-count",
   "sea-bream-consumption-expenditure",
   "sea-bream-consumption-quantity",
+  "seafood-consumption-expenditure",
   "secondary-activity-avg-time-employed-female",
   "secondary-activity-avg-time-employed-male",
   "secondary-activity-avg-time-unemployed-female",
@@ -2186,6 +2198,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "theft-criminal-arrest-rate",
   "theft-offenses-recognized",
   "theft-offenses-recognized-per-1000",
+  "three-generation-household-members",
   "tissue-paper-consumption-expenditure",
   "tobacco-consumption-expenditure",
   "tofu-consumption-expenditure",

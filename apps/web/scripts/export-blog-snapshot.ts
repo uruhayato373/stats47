@@ -28,6 +28,7 @@ import {
 import dotenv from 'dotenv';
 import yaml from 'js-yaml';
 
+import { BLOG_SLUG_REDIRECTS } from '../src/config/blog-redirects';
 import { GONE_BLOG_SLUGS } from '../src/config/gone-blog-slugs';
 import { blogPublicationContract } from '../../../packages/r2-storage/src/scripts/lib/blog-publication-guard';
 
@@ -172,7 +173,11 @@ async function main() {
       .map(([s]) => s),
   ]);
   // 旧本文・sticky prior・seed が残っていても終了記事を再掲載しない。
-  const slugs = [...allSlugs].filter((slug) => !GONE_BLOG_SLUGS.has(slug)).sort();
+  // 301 で別記事へまとめた slug も載せない。R2 に旧本文が残っていると一覧・関連記事に 301 先へのリンクが出るため
+  // (2026-10-08 に重複記事を 301 でまとめたとき、export が 410 だけを除いていたので見つかった)。
+  const slugs = [...allSlugs]
+    .filter((slug) => !GONE_BLOG_SLUGS.has(slug) && !Object.hasOwn(BLOG_SLUG_REDIRECTS, slug))
+    .sort();
   console.log(
     `📄 対象記事: ${slugs.length} 件 (配信 ${priorBySlug.size} ∪ ローカル ${slugInfo.size})`
   );

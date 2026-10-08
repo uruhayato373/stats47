@@ -58,6 +58,25 @@ export const REFERENCE_SOURCE_POLICIES = [
     fallbackReason: "表紙・目次・Kindle操作画面等で、分析・論点に属さないページ",
     publicOriginalReuse: "forbidden",
   },
+  // Kindle 画面スキャン 7 冊。各 `<sourceKey>/analyses.json` が全ページをページ範囲で解決し、
+  // 範囲外のページがあると source-inventory build が止まる (既定の解決へ落とさない)。
+  ...([
+    ["amusement-shop-density", "unknown"],
+    ["average-income-ranking", "unknown"],
+    ["capital-city-guide", "unknown"],
+    ["gis-business-guide", "2022"],
+    ["money-health-ranking", "unknown"],
+    ["prefecture-ranking-consumption", "2020"],
+    ["yabai-kenmin-ranking", "unknown"],
+  ] as const).map(([sourceKey, edition]) => ({
+    sourceKey,
+    edition,
+    statePath: `data/source-inventory/${sourceKey}/${edition}/inventory.json`,
+    inputUnit: "page" as const,
+    fallbackResolution: "not-applicable" as const,
+    fallbackReason: "表紙・目次・奥付・重複スキャン等を analyses.json に範囲と理由付きで宣言したページ",
+    publicOriginalReuse: "forbidden" as const,
+  })),
 ] as const satisfies readonly ReferenceSourcePolicy[];
 
 const ANTHROPIC_SKILLS_DOCS =

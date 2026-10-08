@@ -54,6 +54,13 @@ const SOURCE_LABELS: Record<string, string> = {
   'prefecture-deviation': '47都道府県の偏差値',
   'prefecture-databook': '2021都道府県DataBook',
   'claude-skills-guide': 'Claudeスキル構築ガイド',
+  'amusement-shop-density': '全国都道府県遊技営業店密度ランキング',
+  'average-income-ranking': '都道府県別平均年収ランキング',
+  'capital-city-guide': '47都道府県県庁所在地ガイド',
+  'gis-business-guide': '最新GISのビジネス活用がよ〜くわかる本',
+  'money-health-ranking': 'おカネと健康 都道府県ランキング',
+  'prefecture-ranking-consumption': '統計から読み解く47都道府県ランキング 消費・子供・スポーツ編',
+  'yabai-kenmin-ranking': '全国47都道府県やばい県民ランキング',
 };
 const GEO_SCOPE_LABELS: Record<string, string> = {
   japan: '日本全体',

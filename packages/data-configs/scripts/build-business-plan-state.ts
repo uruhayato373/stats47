@@ -1,3 +1,4 @@
+import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -32,13 +33,33 @@ function newestMtime(rel: string): string | null {
     : stat.mtime.toISOString();
 }
 
+function git(args: string[]): string {
+  try {
+    return execFileSync('git', args, { cwd: repoRoot, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
+  } catch {
+    return '';
+  }
+}
+
+/**
+ * データが最後に変わった時刻。git はファイルの更新時刻を保存しないので、clone・checkout 直後の mtime は
+ * 取得時刻ではなく checkout 時刻になる (BUSINESS-PLAN-FRESHNESS-MTIME-01)。最後にコミットした時刻を使い、
+ * 未コミットの変更があるときと git が使えないときだけ mtime に戻す。
+ */
+function lastChanged(rel: string): string | null {
+  if (!fs.existsSync(path.join(repoRoot, rel))) return null;
+  if (git(['status', '--porcelain', '--', rel])) return newestMtime(rel);
+  const committed = git(['log', '-1', '--format=%cI', '-M', '--diff-filter=AM', '--', rel]); // 改名だけのコミットは数えない
+  return committed ? new Date(committed).toISOString() : newestMtime(rel);
+}
+
 const sourceFreshness: Record<string, string | null> = {
-  ga4: newestMtime(datasetDir("ga4.history")),
-  x: newestMtime(datasetDir("sns.drafts")),
-  note: newestMtime(datasetDir("note.cover-rollout")),
-  affiliate: newestMtime(datasetDir("affiliate.audits")),
-  products: newestMtime(datasetDir("products.publication-receipts")),
-  ci: newestMtime(datasetDir("ci.health")),
+  ga4: lastChanged(datasetDir("ga4.history")),
+  x: lastChanged(datasetDir("sns.drafts")),
+  note: lastChanged(datasetDir("note.cover-rollout")),
+  affiliate: lastChanged(datasetDir("affiliate.audits")),
+  products: lastChanged(datasetDir("products.publication-receipts")),
+  ci: lastChanged(datasetDir("ci.health")),
 };
 
 const statusCounts = BUSINESS_PLAN_2026.decisions.reduce<

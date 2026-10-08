@@ -28,6 +28,7 @@
 import fs from "node:fs";
 import path from "node:path";
 
+import { BLOG_SLUG_REDIRECTS } from "../src/config/blog-redirects";
 import { GONE_BLOG_SLUGS } from "../src/config/gone-blog-slugs";
 import { SITE } from "@stats47/types";
 
@@ -149,8 +150,14 @@ async function run() {
     throw new Error("blog snapshot に articles がありません。生成を中止します。");
   }
 
+  // 301 で別記事へまとめた slug も載せない (export-blog-snapshot.ts と同じ除外。R2 の一覧に旧記事が残っていても sitemap に出さない)
   const published = articles.filter(
-    (a) => !GONE_BLOG_SLUGS.has(a.slug) && a.published !== false && typeof a.publishedAt === "string" && a.publishedAt.length > 0,
+    (a) =>
+      !GONE_BLOG_SLUGS.has(a.slug) &&
+      !Object.hasOwn(BLOG_SLUG_REDIRECTS, a.slug) &&
+      a.published !== false &&
+      typeof a.publishedAt === "string" &&
+      a.publishedAt.length > 0,
   );
   if (published.length === 0) {
     throw new Error("公開記事が 0 件です。生成を中止します。");

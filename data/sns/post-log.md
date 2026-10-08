@@ -3,10 +3,14 @@
 投稿済み全件。`posted_at` 降順。
 スクリプトで自動生成 — 手編集しない (`sns-posts-store.cjs` が `insert()`/`updateById()` のたびに再生成)。
 
-**601 件** (最終更新: 2026-10-06)
+**605 件** (最終更新: 2026-10-07)
 
 | 日付 | 媒体 | コンテンツ | キャプション | URL |
 |---|---|---|---|---|
+| 2026-10-07 | 📸 Instagram | correlation-carousel/average-temperature--kerosene-consumption-quantity |  | [🔗](https://www.instagram.com/p/DeM4zvokTTA/) |
+| 2026-10-07 | 📸 Instagram | bar-chart-race/marriages |  | [🔗](https://www.instagram.com/reel/DeMFNCvANLS/) |
+| 2026-10-07 | 🧵 Threads | area/area-14000-profile | 神奈川の「らしさ」をデータでたどる。 県花ヤマユリ、曽我の梅とワカサギ、統計ランキングを1ページに整理しました。 続きは… | [🔗](https://www.threads.com/@stats47jp/post/DeL6qWfgkft) |
+| 2026-10-07 | 🧵 Threads | ranking/campsite-public | 秋キャンプの県選びに使えるデータ。  ①公共キャンプ場の数を見る（1位北海道134、2位新潟76、3位福島74） ②地図… | [🔗](https://www.threads.com/@stats47jp/post/DeLM4mFkX0X) |
 | 2026-10-06 | 📸 Instagram | area-carousel/39000 |  | [🔗](https://www.instagram.com/p/DeKPMIvIDIO/) |
 | 2026-10-06 | 🧵 Threads | area/area-13000-profile | 東京を1位・47位だけで語らない。 県木はイチョウ、県鳥はユリカモメ。人口・産業・暮らしの県データブックへ。 続きは👇… | [🔗](https://www.threads.com/@stats47jp/post/DeJYr_lke_Q) |
 | 2026-10-06 | 🧵 Threads | ranking/propane-gas-consumption-expenditure | プロパンガス代、高知と兵庫で129倍差。  高知 4万6,453円 兵庫 360円  2位岩手、3位島根も3万9千円台。… | [🔗](https://www.threads.com/@stats47jp/post/DeIqVKliDsU) |

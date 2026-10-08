@@ -1,0 +1,3500 @@
+{
+  "sourceKey": "average-income-ranking",
+  "edition": "unknown",
+  "reviewedAt": "2026-10-08",
+  "publicOriginalReuse": "forbidden",
+  "analyses": [
+    {
+      "id": "average-income-ranking-unknown-a01",
+      "chapter": 0,
+      "question": "p1〜p4 は何のページか。",
+      "thesis": "表紙画像を拡大・トリミング違いで撮った4枚で、画像ファイルのMD5が全て一致する重複スキャン(文字起こしも空)。",
+      "pages": [
+        1,
+        4
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "p1〜p4 は表紙の同一画像4枚。画像MD5が全て一致し文字起こしも空",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "対応不要。再スキャン不要"
+    },
+    {
+      "id": "average-income-ranking-unknown-a02",
+      "chapter": 0,
+      "question": "表紙・扉から統計項目を読み取れるか。",
+      "thesis": "書名と副題、日本地図と増加を示すグラフのイラスト、続く扉の書名のみで、統計値も出典も無い。副題に「実質手取り」が含まれることが本書の核だと分かる。",
+      "pages": [
+        5,
+        6
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "表紙と扉。書名・副題・イラストのみで統計値・出典なし",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "対応不要。写真・イラストは複製しない"
+    },
+    {
+      "id": "average-income-ranking-unknown-a03",
+      "chapter": 0,
+      "question": "目次から検証できる項目はあるか。",
+      "thesis": "序章から第6章までの章名を示す目次で、p7 は余白と見出しのみ。実際の本文は第4章(改訂版)の途中までしか収録されていない。",
+      "pages": [
+        7,
+        8
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "目次。章名の列挙のみで統計値・出典なし。第5・6章は本文が存在しない",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "対応不要。第5・6章の本文は不完全スキャンのため未収録"
+    },
+    {
+      "id": "average-income-ranking-unknown-a04",
+      "chapter": 0,
+      "question": "序章は本書の数値の根拠を示しているか。",
+      "thesis": "序章は読み方の説明で、平均年収・実質手取り・生活費が「目安」であり正確な統計ではないと断っている。出典やデータセット名は示されない。",
+      "pages": [
+        9,
+        14
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "序章。読み方の説明で数値なし。本文の年収・生活費が出典なしの目安だと著者自身が断っている",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "対応不要。この自己申告を、以降の数値を primary-source-unavailable とした根拠にする"
+    },
+    {
+      "id": "average-income-ranking-unknown-a05",
+      "chapter": 1,
+      "question": "平均年収の高い県と低い県の差は、賃金・県民所得・課税対象所得のどの指標でも同じ順序と開きになるか。",
+      "thesis": "賃金構造基本統計調査の所定内給与、県民所得、納税者当たり課税対象所得という性質の違う所得指標を並べ、都市圏と地方の差の大きさを複数の物差しで確かめる論点。書籍の金額・順位は使わない。",
+      "pages": [
+        15,
+        21
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "既存metricの賃金・県民所得・課税対象所得で再計算できる。書籍の平均年収・順位・幸福度の記述は出典なしの目安で採用しない。平均と中央値の差は都道府県別の中央値が公表されているか未確認(unverified)",
+      "metricKeys": [
+        "male-scheduled-earnings",
+        "female-scheduled-earnings",
+        "per-capita-prefectural-income-h27",
+        "per-taxpayer-taxable-income",
+        "annual-income-per-household"
+      ],
+      "surveyIds": [
+        "wage-structure-survey",
+        "prefectural-accounts",
+        "national-household-survey"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "theme",
+        "blog",
+        "note",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "賃金構造基本統計調査 (都道府県別 所定内給与額)",
+          "url": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系 (県民経済計算ほか)",
+          "url": "https://www.stat.go.jp/data/ssds/index.html",
+          "dataYears": [
+            "2021",
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "所得指標ごとに順位相関と最大・最小の比を出し、年収換算が必要なら賞与を含む賃金構造基本統計調査の表を new-metric 化できるか確認する"
+    },
+    {
+      "id": "average-income-ranking-unknown-a06",
+      "chapter": 2,
+      "question": "賃金から家賃・物価・光熱費を差し引いた「手元に残る額」で並べ替えると、順位は賃金順からどう変わるか。",
+      "thesis": "実質可処分所得、家賃を差し引いた参考額、地域差指数、民営家賃などの公的指標で県別の実質的な余裕を再計算し、高収入だが出費も多い県と、収入は中位でも暮らしやすい県を分ける論点。",
+      "pages": [
+        22,
+        28
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "実質可処分所得・家賃差引の参考額・消費者物価地域差指数・民営家賃が既存metricにあり再計算できる。書籍の実質手取り額・ワンルーム家賃・食費の金額は出典がなく採用しない。第2章に登場する福井・富山は第3章の47県一覧に現れない矛盾もある",
+      "metricKeys": [
+        "real-disposable-income",
+        "disposable-income-after-rent",
+        "consumer-price-difference-index-overall",
+        "consumer-price-difference-index-housing",
+        "private-rental-housing-rent-per-3-3m2",
+        "owner-occupied-housing-ratio",
+        "male-scheduled-earnings"
+      ],
+      "surveyIds": [
+        "household-survey",
+        "retail-price-survey",
+        "national-household-survey",
+        "wage-structure-survey"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "theme",
+        "blog",
+        "note",
+        "x",
+        "area"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (都道府県庁所在市別 支出)",
+          "url": "https://www.stat.go.jp/data/kakei/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "小売物価統計調査 (消費者物価地域差指数・民営家賃)",
+          "url": "https://www.stat.go.jp/data/kouri/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "賃金構造基本統計調査 (都道府県別 所定内給与額)",
+          "url": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "18000",
+        "16000",
+        "23000",
+        "40000",
+        "24000",
+        "12000",
+        "27000",
+        "26000",
+        "14000",
+        "13000"
+      ],
+      "nextAction": "既存の実質可処分所得を軸に、賃金と家賃の寄与を分けて示すランキング記事または theme の下書きを作る。書籍の順位は比較対象にしない"
+    },
+    {
+      "id": "average-income-ranking-unknown-a07",
+      "chapter": 3,
+      "question": "第3章の導入に検証対象はあるか。",
+      "thesis": "第3章が1県ごとに平均年収・実質手取り・生活コスト・雑学を載せる構成であることの説明のみ。",
+      "pages": [
+        29,
+        29
+      ],
+      "resolution": "not-applicable",
+      "resolutionReason": "第3章の構成説明。数値や出典なし",
+      "metricKeys": [],
+      "surveyIds": [],
+      "geoScopes": [],
+      "contentRoles": [],
+      "primarySources": [],
+      "nextAction": "対応不要。県別の項目は p30 以降で1県1件に分けて台帳化済み"
+    },
+    {
+      "id": "average-income-ranking-unknown-a08",
+      "chapter": 3,
+      "question": "東京について、書籍が挙げる平均年収・実質手取り・生活費の目安は、公的統計のどの指標なら確かめられるか。",
+      "thesis": "書籍は東京の家賃・食費の高さと単身世帯の多さを、年収と生活費の目安とともに紹介している。stats47 では目安値は使わず、同じ話題を賃金・実質可処分所得・家賃や関連する家計支出などの公的指標で比べ、県ページの補足にできる範囲を決める論点。",
+      "pages": [
+        30,
+        31
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "書籍の平均年収・実質手取り・家賃・食費は「目安」と断った出典なしの金額で、公式統計に辿れないため採用しない。",
+      "metricKeys": [
+        "male-scheduled-earnings",
+        "real-disposable-income",
+        "disposable-income-after-rent",
+        "private-rental-housing-rent-per-3-3m2",
+        "single-person-household-ratio",
+        "dual-income-household-ratio"
+      ],
+      "surveyIds": [
+        "wage-structure-survey",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "賃金構造基本統計調査 (都道府県別 所定内給与額)",
+          "url": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (都道府県庁所在市別 支出)",
+          "url": "https://www.stat.go.jp/data/kakei/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "小売物価統計調査 (消費者物価地域差指数・民営家賃)",
+          "url": "https://www.stat.go.jp/data/kouri/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "13000"
+      ],
+      "nextAction": "東京の県ページで所得・家賃・物価を扱うときは上記の既存指標だけを根拠にし、書籍の金額は載せない。"
+    },
+    {
+      "id": "average-income-ranking-unknown-a09",
+      "chapter": 3,
+      "question": "神奈川について、書籍が挙げる平均年収・実質手取り・生活費の目安は、公的統計のどの指標なら確かめられるか。",
+      "thesis": "書籍は神奈川の通勤圏としての家賃水準を、年収と生活費の目安とともに紹介している。stats47 では目安値は使わず、同じ話題を賃金・実質可処分所得・家賃や関連する家計支出などの公的指標で比べ、県ページの補足にできる範囲を決める論点。",
+      "pages": [
+        32,
+        32
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "書籍の平均年収・実質手取り・家賃・食費は「目安」と断った出典なしの金額で、公式統計に辿れないため採用しない。",
+      "metricKeys": [
+        "male-scheduled-earnings",
+        "real-disposable-income",
+        "disposable-income-after-rent",
+        "private-rental-housing-rent-per-3-3m2",
+        "consumer-price-difference-index-housing"
+      ],
+      "surveyIds": [
+        "wage-structure-survey",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "賃金構造基本統計調査 (都道府県別 所定内給与額)",
+          "url": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (都道府県庁所在市別 支出)",
+          "url": "https://www.stat.go.jp/data/kakei/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "小売物価統計調査 (消費者物価地域差指数・民営家賃)",
+          "url": "https://www.stat.go.jp/data/kouri/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "14000"
+      ],
+      "nextAction": "神奈川の県ページで所得・家賃・物価を扱うときは上記の既存指標だけを根拠にし、書籍の金額は載せない。"
+    },
+    {
+      "id": "average-income-ranking-unknown-a10",
+      "chapter": 3,
+      "question": "愛知について、書籍が挙げる平均年収・実質手取り・生活費の目安は、公的統計のどの指標なら確かめられるか。",
+      "thesis": "書籍は愛知の製造業の強さと喫茶店文化を、年収と生活費の目安とともに紹介している。stats47 では目安値は使わず、同じ話題を賃金・実質可処分所得・家賃や関連する家計支出などの公的指標で比べ、県ページの補足にできる範囲を決める論点。",
+      "pages": [
+        33,
+        34
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "書籍の平均年収・実質手取り・家賃・食費は「目安」と断った出典なしの金額で、公式統計に辿れないため採用しない。",
+      "metricKeys": [
+        "male-scheduled-earnings",
+        "real-disposable-income",
+        "disposable-income-after-rent",
+        "private-rental-housing-rent-per-3-3m2",
+        "coffee-shop-consumption-expenditure",
+        "manufacturing-shipment-amount"
+      ],
+      "surveyIds": [
+        "wage-structure-survey",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "賃金構造基本統計調査 (都道府県別 所定内給与額)",
+          "url": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (都道府県庁所在市別 支出)",
+          "url": "https://www.stat.go.jp/data/kakei/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "小売物価統計調査 (消費者物価地域差指数・民営家賃)",
+          "url": "https://www.stat.go.jp/data/kouri/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "23000"
+      ],
+      "nextAction": "愛知の県ページで所得・家賃・物価を扱うときは上記の既存指標だけを根拠にし、書籍の金額は載せない。"
+    },
+    {
+      "id": "average-income-ranking-unknown-a11",
+      "chapter": 3,
+      "question": "大阪について、書籍が挙げる平均年収・実質手取り・生活費の目安は、公的統計のどの指標なら確かめられるか。",
+      "thesis": "書籍は大阪の外食の多さと家賃を、年収と生活費の目安とともに紹介している。stats47 では目安値は使わず、同じ話題を賃金・実質可処分所得・家賃や関連する家計支出などの公的指標で比べ、県ページの補足にできる範囲を決める論点。",
+      "pages": [
+        35,
+        35
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "書籍の平均年収・実質手取り・家賃・食費は「目安」と断った出典なしの金額で、公式統計に辿れないため採用しない。",
+      "metricKeys": [
+        "male-scheduled-earnings",
+        "real-disposable-income",
+        "disposable-income-after-rent",
+        "private-rental-housing-rent-per-3-3m2",
+        "dining-out-consumption-expenditure",
+        "sushi-dining-consumption-expenditure"
+      ],
+      "surveyIds": [
+        "wage-structure-survey",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "賃金構造基本統計調査 (都道府県別 所定内給与額)",
+          "url": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (都道府県庁所在市別 支出)",
+          "url": "https://www.stat.go.jp/data/kakei/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "小売物価統計調査 (消費者物価地域差指数・民営家賃)",
+          "url": "https://www.stat.go.jp/data/kouri/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "27000"
+      ],
+      "nextAction": "大阪の県ページで所得・家賃・物価を扱うときは上記の既存指標だけを根拠にし、書籍の金額は載せない。"
+    },
+    {
+      "id": "average-income-ranking-unknown-a12",
+      "chapter": 3,
+      "question": "京都について、書籍が挙げる平均年収・実質手取り・生活費の目安は、公的統計のどの指標なら確かめられるか。",
+      "thesis": "書籍は京都の観光地価格と大企業の集積を、年収と生活費の目安とともに紹介している。stats47 では目安値は使わず、同じ話題を賃金・実質可処分所得・家賃や関連する家計支出などの公的指標で比べ、県ページの補足にできる範囲を決める論点。",
+      "pages": [
+        36,
+        37
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "書籍の平均年収・実質手取り・家賃・食費は「目安」と断った出典なしの金額で、公式統計に辿れないため採用しない。",
+      "metricKeys": [
+        "male-scheduled-earnings",
+        "real-disposable-income",
+        "disposable-income-after-rent",
+        "private-rental-housing-rent-per-3-3m2",
+        "consumer-price-difference-index-overall"
+      ],
+      "surveyIds": [
+        "wage-structure-survey",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "賃金構造基本統計調査 (都道府県別 所定内給与額)",
+          "url": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (都道府県庁所在市別 支出)",
+          "url": "https://www.stat.go.jp/data/kakei/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "小売物価統計調査 (消費者物価地域差指数・民営家賃)",
+          "url": "https://www.stat.go.jp/data/kouri/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "26000"
+      ],
+      "nextAction": "京都の県ページで所得・家賃・物価を扱うときは上記の既存指標だけを根拠にし、書籍の金額は載せない。"
+    },
+    {
+      "id": "average-income-ranking-unknown-a13",
+      "chapter": 3,
+      "question": "兵庫について、書籍が挙げる平均年収・実質手取り・生活費の目安は、公的統計のどの指標なら確かめられるか。",
+      "thesis": "書籍は兵庫の神戸牛と関西の中での生活費を、年収と生活費の目安とともに紹介している。stats47 では目安値は使わず、同じ話題を賃金・実質可処分所得・家賃や関連する家計支出などの公的指標で比べ、県ページの補足にできる範囲を決める論点。",
+      "pages": [
+        38,
+        38
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "書籍の平均年収・実質手取り・家賃・食費は「目安」と断った出典なしの金額で、公式統計に辿れないため採用しない。",
+      "metricKeys": [
+        "male-scheduled-earnings",
+        "real-disposable-income",
+        "disposable-income-after-rent",
+        "private-rental-housing-rent-per-3-3m2",
+        "beef-consumption-quantity"
+      ],
+      "surveyIds": [
+        "wage-structure-survey",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "賃金構造基本統計調査 (都道府県別 所定内給与額)",
+          "url": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (都道府県庁所在市別 支出)",
+          "url": "https://www.stat.go.jp/data/kakei/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "小売物価統計調査 (消費者物価地域差指数・民営家賃)",
+          "url": "https://www.stat.go.jp/data/kouri/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "28000"
+      ],
+      "nextAction": "兵庫の県ページで所得・家賃・物価を扱うときは上記の既存指標だけを根拠にし、書籍の金額は載せない。"
+    },
+    {
+      "id": "average-income-ranking-unknown-a14",
+      "chapter": 3,
+      "question": "静岡について、書籍が挙げる平均年収・実質手取り・生活費の目安は、公的統計のどの指標なら確かめられるか。",
+      "thesis": "書籍は静岡の緑茶の購入量と製造業を、年収と生活費の目安とともに紹介している。stats47 では目安値は使わず、同じ話題を賃金・実質可処分所得・家賃や関連する家計支出などの公的指標で比べ、県ページの補足にできる範囲を決める論点。",
+      "pages": [
+        39,
+        39
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "書籍の平均年収・実質手取り・家賃・食費は「目安」と断った出典なしの金額で、公式統計に辿れないため採用しない。",
+      "metricKeys": [
+        "male-scheduled-earnings",
+        "real-disposable-income",
+        "disposable-income-after-rent",
+        "private-rental-housing-rent-per-3-3m2",
+        "green-tea-consumption-quantity",
+        "green-tea-consumption-expenditure"
+      ],
+      "surveyIds": [
+        "wage-structure-survey",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "賃金構造基本統計調査 (都道府県別 所定内給与額)",
+          "url": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (都道府県庁所在市別 支出)",
+          "url": "https://www.stat.go.jp/data/kakei/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "小売物価統計調査 (消費者物価地域差指数・民営家賃)",
+          "url": "https://www.stat.go.jp/data/kouri/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "22000"
+      ],
+      "nextAction": "静岡の県ページで所得・家賃・物価を扱うときは上記の既存指標だけを根拠にし、書籍の金額は載せない。"
+    },
+    {
+      "id": "average-income-ranking-unknown-a15",
+      "chapter": 3,
+      "question": "滋賀について、書籍が挙げる平均年収・実質手取り・生活費の目安は、公的統計のどの指標なら確かめられるか。",
+      "thesis": "書籍は滋賀の社長の輩出と関西圏への通勤を、年収と生活費の目安とともに紹介している。stats47 では目安値は使わず、同じ話題を賃金・実質可処分所得・家賃や関連する家計支出などの公的指標で比べ、県ページの補足にできる範囲を決める論点。",
+      "pages": [
+        40,
+        41
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "書籍の平均年収・実質手取り・家賃・食費は「目安」と断った出典なしの金額で、公式統計に辿れないため採用しない。社長輩出率は帝国データバンク等の民間集計で、公的統計の既存指標が無い。",
+      "metricKeys": [
+        "male-scheduled-earnings",
+        "real-disposable-income",
+        "disposable-income-after-rent",
+        "private-rental-housing-rent-per-3-3m2",
+        "consumer-price-difference-index-overall"
+      ],
+      "surveyIds": [
+        "wage-structure-survey",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "賃金構造基本統計調査 (都道府県別 所定内給与額)",
+          "url": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (都道府県庁所在市別 支出)",
+          "url": "https://www.stat.go.jp/data/kakei/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "小売物価統計調査 (消費者物価地域差指数・民営家賃)",
+          "url": "https://www.stat.go.jp/data/kouri/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "25000"
+      ],
+      "nextAction": "滋賀の県ページで所得・家賃・物価を扱うときは上記の既存指標だけを根拠にし、書籍の金額は載せない。社長輩出率は帝国データバンク等の民間集計で、公的統計の既存指標が無い。"
+    },
+    {
+      "id": "average-income-ranking-unknown-a16",
+      "chapter": 3,
+      "question": "埼玉について、書籍が挙げる平均年収・実質手取り・生活費の目安は、公的統計のどの指標なら確かめられるか。",
+      "thesis": "書籍は埼玉のベッドタウンとしての家賃と製造業を、年収と生活費の目安とともに紹介している。stats47 では目安値は使わず、同じ話題を賃金・実質可処分所得・家賃や関連する家計支出などの公的指標で比べ、県ページの補足にできる範囲を決める論点。",
+      "pages": [
+        42,
+        42
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "書籍の平均年収・実質手取り・家賃・食費は「目安」と断った出典なしの金額で、公式統計に辿れないため採用しない。",
+      "metricKeys": [
+        "male-scheduled-earnings",
+        "real-disposable-income",
+        "disposable-income-after-rent",
+        "private-rental-housing-rent-per-3-3m2",
+        "manufacturing-establishments",
+        "commute-by-train"
+      ],
+      "surveyIds": [
+        "wage-structure-survey",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "賃金構造基本統計調査 (都道府県別 所定内給与額)",
+          "url": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (都道府県庁所在市別 支出)",
+          "url": "https://www.stat.go.jp/data/kakei/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "小売物価統計調査 (消費者物価地域差指数・民営家賃)",
+          "url": "https://www.stat.go.jp/data/kouri/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "11000"
+      ],
+      "nextAction": "埼玉の県ページで所得・家賃・物価を扱うときは上記の既存指標だけを根拠にし、書籍の金額は載せない。"
+    },
+    {
+      "id": "average-income-ranking-unknown-a17",
+      "chapter": 3,
+      "question": "千葉について、書籍が挙げる平均年収・実質手取り・生活費の目安は、公的統計のどの指標なら確かめられるか。",
+      "thesis": "書籍は千葉の東京への通勤と沿岸の工業地帯を、年収と生活費の目安とともに紹介している。stats47 では目安値は使わず、同じ話題を賃金・実質可処分所得・家賃や関連する家計支出などの公的指標で比べ、県ページの補足にできる範囲を決める論点。",
+      "pages": [
+        43,
+        43
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "書籍の平均年収・実質手取り・家賃・食費は「目安」と断った出典なしの金額で、公式統計に辿れないため採用しない。",
+      "metricKeys": [
+        "male-scheduled-earnings",
+        "real-disposable-income",
+        "disposable-income-after-rent",
+        "private-rental-housing-rent-per-3-3m2",
+        "commute-by-train"
+      ],
+      "surveyIds": [
+        "wage-structure-survey",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "賃金構造基本統計調査 (都道府県別 所定内給与額)",
+          "url": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (都道府県庁所在市別 支出)",
+          "url": "https://www.stat.go.jp/data/kakei/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "小売物価統計調査 (消費者物価地域差指数・民営家賃)",
+          "url": "https://www.stat.go.jp/data/kouri/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "12000"
+      ],
+      "nextAction": "千葉の県ページで所得・家賃・物価を扱うときは上記の既存指標だけを根拠にし、書籍の金額は載せない。"
+    },
+    {
+      "id": "average-income-ranking-unknown-a18",
+      "chapter": 3,
+      "question": "広島について、書籍が挙げる平均年収・実質手取り・生活費の目安は、公的統計のどの指標なら確かめられるか。",
+      "thesis": "書籍は広島の自動車・造船と外食費を、年収と生活費の目安とともに紹介している。stats47 では目安値は使わず、同じ話題を賃金・実質可処分所得・家賃や関連する家計支出などの公的指標で比べ、県ページの補足にできる範囲を決める論点。",
+      "pages": [
+        44,
+        45
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "書籍の平均年収・実質手取り・家賃・食費は「目安」と断った出典なしの金額で、公式統計に辿れないため採用しない。お好み焼きを家庭で作る割合は公的統計で確認できていない。",
+      "metricKeys": [
+        "male-scheduled-earnings",
+        "real-disposable-income",
+        "disposable-income-after-rent",
+        "private-rental-housing-rent-per-3-3m2",
+        "manufacturing-shipment-amount",
+        "dining-out-consumption-expenditure"
+      ],
+      "surveyIds": [
+        "wage-structure-survey",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "賃金構造基本統計調査 (都道府県別 所定内給与額)",
+          "url": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (都道府県庁所在市別 支出)",
+          "url": "https://www.stat.go.jp/data/kakei/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "小売物価統計調査 (消費者物価地域差指数・民営家賃)",
+          "url": "https://www.stat.go.jp/data/kouri/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "34000"
+      ],
+      "nextAction": "広島の県ページで所得・家賃・物価を扱うときは上記の既存指標だけを根拠にし、書籍の金額は載せない。お好み焼きを家庭で作る割合は公的統計で確認できていない。"
+    },
+    {
+      "id": "average-income-ranking-unknown-a19",
+      "chapter": 3,
+      "question": "石川について、書籍が挙げる平均年収・実質手取り・生活費の目安は、公的統計のどの指標なら確かめられるか。",
+      "thesis": "書籍は石川の金沢の家賃・外食費の安さを、年収と生活費の目安とともに紹介している。stats47 では目安値は使わず、同じ話題を賃金・実質可処分所得・家賃や関連する家計支出などの公的指標で比べ、県ページの補足にできる範囲を決める論点。",
+      "pages": [
+        46,
+        46
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "書籍の平均年収・実質手取り・家賃・食費は「目安」と断った出典なしの金額で、公式統計に辿れないため採用しない。回転寿司の評価は出典がなく、すし(外食)の消費支出額で代替できる範囲に限る。",
+      "metricKeys": [
+        "male-scheduled-earnings",
+        "real-disposable-income",
+        "disposable-income-after-rent",
+        "private-rental-housing-rent-per-3-3m2",
+        "sushi-dining-consumption-expenditure"
+      ],
+      "surveyIds": [
+        "wage-structure-survey",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "賃金構造基本統計調査 (都道府県別 所定内給与額)",
+          "url": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (都道府県庁所在市別 支出)",
+          "url": "https://www.stat.go.jp/data/kakei/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "小売物価統計調査 (消費者物価地域差指数・民営家賃)",
+          "url": "https://www.stat.go.jp/data/kouri/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "17000"
+      ],
+      "nextAction": "石川の県ページで所得・家賃・物価を扱うときは上記の既存指標だけを根拠にし、書籍の金額は載せない。回転寿司の評価は出典がなく、すし(外食)の消費支出額で代替できる範囲に限る。"
+    },
+    {
+      "id": "average-income-ranking-unknown-a20",
+      "chapter": 3,
+      "question": "岐阜について、書籍が挙げる平均年収・実質手取り・生活費の目安は、公的統計のどの指標なら確かめられるか。",
+      "thesis": "書籍は岐阜の名古屋圏への通勤とモーニング文化を、年収と生活費の目安とともに紹介している。stats47 では目安値は使わず、同じ話題を賃金・実質可処分所得・家賃や関連する家計支出などの公的指標で比べ、県ページの補足にできる範囲を決める論点。",
+      "pages": [
+        47,
+        48
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "書籍の平均年収・実質手取り・家賃・食費は「目安」と断った出典なしの金額で、公式統計に辿れないため採用しない。",
+      "metricKeys": [
+        "male-scheduled-earnings",
+        "real-disposable-income",
+        "disposable-income-after-rent",
+        "private-rental-housing-rent-per-3-3m2",
+        "coffee-shop-consumption-expenditure"
+      ],
+      "surveyIds": [
+        "wage-structure-survey",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "賃金構造基本統計調査 (都道府県別 所定内給与額)",
+          "url": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (都道府県庁所在市別 支出)",
+          "url": "https://www.stat.go.jp/data/kakei/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "小売物価統計調査 (消費者物価地域差指数・民営家賃)",
+          "url": "https://www.stat.go.jp/data/kouri/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "21000"
+      ],
+      "nextAction": "岐阜の県ページで所得・家賃・物価を扱うときは上記の既存指標だけを根拠にし、書籍の金額は載せない。"
+    },
+    {
+      "id": "average-income-ranking-unknown-a21",
+      "chapter": 3,
+      "question": "福岡について、書籍が挙げる平均年収・実質手取り・生活費の目安は、公的統計のどの指標なら確かめられるか。",
+      "thesis": "書籍は福岡の都市機能と家賃・外食費の安さを、年収と生活費の目安とともに紹介している。stats47 では目安値は使わず、同じ話題を賃金・実質可処分所得・家賃や関連する家計支出などの公的指標で比べ、県ページの補足にできる範囲を決める論点。",
+      "pages": [
+        49,
+        49
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "書籍の平均年収・実質手取り・家賃・食費は「目安」と断った出典なしの金額で、公式統計に辿れないため採用しない。",
+      "metricKeys": [
+        "male-scheduled-earnings",
+        "real-disposable-income",
+        "disposable-income-after-rent",
+        "private-rental-housing-rent-per-3-3m2",
+        "ramen-dining-consumption-expenditure",
+        "other-noodle-dining-consumption-expenditure"
+      ],
+      "surveyIds": [
+        "wage-structure-survey",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "賃金構造基本統計調査 (都道府県別 所定内給与額)",
+          "url": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (都道府県庁所在市別 支出)",
+          "url": "https://www.stat.go.jp/data/kakei/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "小売物価統計調査 (消費者物価地域差指数・民営家賃)",
+          "url": "https://www.stat.go.jp/data/kouri/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "40000"
+      ],
+      "nextAction": "福岡の県ページで所得・家賃・物価を扱うときは上記の既存指標だけを根拠にし、書籍の金額は載せない。"
+    },
+    {
+      "id": "average-income-ranking-unknown-a22",
+      "chapter": 3,
+      "question": "長野について、書籍が挙げる平均年収・実質手取り・生活費の目安は、公的統計のどの指標なら確かめられるか。",
+      "thesis": "書籍は長野の精密機械と蕎麦・暖房費を、年収と生活費の目安とともに紹介している。stats47 では目安値は使わず、同じ話題を賃金・実質可処分所得・家賃や関連する家計支出などの公的指標で比べ、県ページの補足にできる範囲を決める論点。",
+      "pages": [
+        50,
+        51
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "書籍の平均年収・実質手取り・家賃・食費は「目安」と断った出典なしの金額で、公式統計に辿れないため採用しない。",
+      "metricKeys": [
+        "male-scheduled-earnings",
+        "real-disposable-income",
+        "disposable-income-after-rent",
+        "private-rental-housing-rent-per-3-3m2",
+        "kerosene-consumption-expenditure",
+        "dried-udon-soba-consumption-quantity"
+      ],
+      "surveyIds": [
+        "wage-structure-survey",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "賃金構造基本統計調査 (都道府県別 所定内給与額)",
+          "url": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (都道府県庁所在市別 支出)",
+          "url": "https://www.stat.go.jp/data/kakei/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "小売物価統計調査 (消費者物価地域差指数・民営家賃)",
+          "url": "https://www.stat.go.jp/data/kouri/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "20000"
+      ],
+      "nextAction": "長野の県ページで所得・家賃・物価を扱うときは上記の既存指標だけを根拠にし、書籍の金額は載せない。"
+    },
+    {
+      "id": "average-income-ranking-unknown-a23",
+      "chapter": 3,
+      "question": "北海道について、書籍が挙げる平均年収・実質手取り・生活費の目安は、公的統計のどの指標なら確かめられるか。",
+      "thesis": "書籍は北海道の冬の暖房費と光熱費を、年収と生活費の目安とともに紹介している。stats47 では目安値は使わず、同じ話題を賃金・実質可処分所得・家賃や関連する家計支出などの公的指標で比べ、県ページの補足にできる範囲を決める論点。",
+      "pages": [
+        52,
+        52
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "書籍の平均年収・実質手取り・家賃・食費は「目安」と断った出典なしの金額で、公式統計に辿れないため採用しない。暖房費の地域差に関する記述は出典がなく、検証は灯油・光熱費の家計調査で行う。",
+      "metricKeys": [
+        "male-scheduled-earnings",
+        "real-disposable-income",
+        "disposable-income-after-rent",
+        "private-rental-housing-rent-per-3-3m2",
+        "kerosene-consumption-expenditure",
+        "utilities-expenditure-ratio-multi-person-households"
+      ],
+      "surveyIds": [
+        "wage-structure-survey",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "賃金構造基本統計調査 (都道府県別 所定内給与額)",
+          "url": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (都道府県庁所在市別 支出)",
+          "url": "https://www.stat.go.jp/data/kakei/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "小売物価統計調査 (消費者物価地域差指数・民営家賃)",
+          "url": "https://www.stat.go.jp/data/kouri/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "01000"
+      ],
+      "nextAction": "北海道の県ページで所得・家賃・物価を扱うときは上記の既存指標だけを根拠にし、書籍の金額は載せない。暖房費の地域差に関する記述は出典がなく、検証は灯油・光熱費の家計調査で行う。"
+    },
+    {
+      "id": "average-income-ranking-unknown-a24",
+      "chapter": 3,
+      "question": "栃木について、書籍が挙げる平均年収・実質手取り・生活費の目安は、公的統計のどの指標なら確かめられるか。",
+      "thesis": "書籍は栃木の製造業と餃子の食文化を、年収と生活費の目安とともに紹介している。stats47 では目安値は使わず、同じ話題を賃金・実質可処分所得・家賃や関連する家計支出などの公的指標で比べ、県ページの補足にできる範囲を決める論点。",
+      "pages": [
+        53,
+        53
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "書籍の平均年収・実質手取り・家賃・食費は「目安」と断った出典なしの金額で、公式統計に辿れないため採用しない。",
+      "metricKeys": [
+        "male-scheduled-earnings",
+        "real-disposable-income",
+        "disposable-income-after-rent",
+        "private-rental-housing-rent-per-3-3m2",
+        "gyoza-frozen-consumption-expenditure"
+      ],
+      "surveyIds": [
+        "wage-structure-survey",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "賃金構造基本統計調査 (都道府県別 所定内給与額)",
+          "url": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (都道府県庁所在市別 支出)",
+          "url": "https://www.stat.go.jp/data/kakei/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "小売物価統計調査 (消費者物価地域差指数・民営家賃)",
+          "url": "https://www.stat.go.jp/data/kouri/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "09000"
+      ],
+      "nextAction": "栃木の県ページで所得・家賃・物価を扱うときは上記の既存指標だけを根拠にし、書籍の金額は載せない。"
+    },
+    {
+      "id": "average-income-ranking-unknown-a25",
+      "chapter": 3,
+      "question": "茨城について、書籍が挙げる平均年収・実質手取り・生活費の目安は、公的統計のどの指標なら確かめられるか。",
+      "thesis": "書籍は茨城の研究都市と納豆の消費を、年収と生活費の目安とともに紹介している。stats47 では目安値は使わず、同じ話題を賃金・実質可処分所得・家賃や関連する家計支出などの公的指標で比べ、県ページの補足にできる範囲を決める論点。",
+      "pages": [
+        54,
+        55
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "書籍の平均年収・実質手取り・家賃・食費は「目安」と断った出典なしの金額で、公式統計に辿れないため採用しない。",
+      "metricKeys": [
+        "male-scheduled-earnings",
+        "real-disposable-income",
+        "disposable-income-after-rent",
+        "private-rental-housing-rent-per-3-3m2",
+        "natto-consumption-expenditure"
+      ],
+      "surveyIds": [
+        "wage-structure-survey",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "賃金構造基本統計調査 (都道府県別 所定内給与額)",
+          "url": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (都道府県庁所在市別 支出)",
+          "url": "https://www.stat.go.jp/data/kakei/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "小売物価統計調査 (消費者物価地域差指数・民営家賃)",
+          "url": "https://www.stat.go.jp/data/kouri/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "08000"
+      ],
+      "nextAction": "茨城の県ページで所得・家賃・物価を扱うときは上記の既存指標だけを根拠にし、書籍の金額は載せない。"
+    },
+    {
+      "id": "average-income-ranking-unknown-a26",
+      "chapter": 3,
+      "question": "岡山について、書籍が挙げる平均年収・実質手取り・生活費の目安は、公的統計のどの指標なら確かめられるか。",
+      "thesis": "書籍は岡山の晴れの日の多さと光熱費を、年収と生活費の目安とともに紹介している。stats47 では目安値は使わず、同じ話題を賃金・実質可処分所得・家賃や関連する家計支出などの公的指標で比べ、県ページの補足にできる範囲を決める論点。",
+      "pages": [
+        56,
+        56
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "書籍の平均年収・実質手取り・家賃・食費は「目安」と断った出典なしの金額で、公式統計に辿れないため採用しない。",
+      "metricKeys": [
+        "male-scheduled-earnings",
+        "real-disposable-income",
+        "disposable-income-after-rent",
+        "private-rental-housing-rent-per-3-3m2",
+        "annual-sunshine-duration",
+        "annual-clear-days"
+      ],
+      "surveyIds": [
+        "wage-structure-survey",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "賃金構造基本統計調査 (都道府県別 所定内給与額)",
+          "url": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (都道府県庁所在市別 支出)",
+          "url": "https://www.stat.go.jp/data/kakei/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "小売物価統計調査 (消費者物価地域差指数・民営家賃)",
+          "url": "https://www.stat.go.jp/data/kouri/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "33000"
+      ],
+      "nextAction": "岡山の県ページで所得・家賃・物価を扱うときは上記の既存指標だけを根拠にし、書籍の金額は載せない。"
+    },
+    {
+      "id": "average-income-ranking-unknown-a27",
+      "chapter": 3,
+      "question": "三重について、書籍が挙げる平均年収・実質手取り・生活費の目安は、公的統計のどの指標なら確かめられるか。",
+      "thesis": "書籍は三重の名古屋圏との近さと観光資源を、年収と生活費の目安とともに紹介している。stats47 では目安値は使わず、同じ話題を賃金・実質可処分所得・家賃や関連する家計支出などの公的指標で比べ、県ページの補足にできる範囲を決める論点。",
+      "pages": [
+        57,
+        57
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "書籍の平均年収・実質手取り・家賃・食費は「目安」と断った出典なしの金額で、公式統計に辿れないため採用しない。パチンコ発祥という由来は一次資料に辿れず、使わない。",
+      "metricKeys": [
+        "male-scheduled-earnings",
+        "real-disposable-income",
+        "disposable-income-after-rent",
+        "private-rental-housing-rent-per-3-3m2",
+        "pachinko-shop-density-per-10k"
+      ],
+      "surveyIds": [
+        "wage-structure-survey",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "賃金構造基本統計調査 (都道府県別 所定内給与額)",
+          "url": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (都道府県庁所在市別 支出)",
+          "url": "https://www.stat.go.jp/data/kakei/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "小売物価統計調査 (消費者物価地域差指数・民営家賃)",
+          "url": "https://www.stat.go.jp/data/kouri/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "24000"
+      ],
+      "nextAction": "三重の県ページで所得・家賃・物価を扱うときは上記の既存指標だけを根拠にし、書籍の金額は載せない。パチンコ発祥という由来は一次資料に辿れず、使わない。"
+    },
+    {
+      "id": "average-income-ranking-unknown-a28",
+      "chapter": 3,
+      "question": "群馬について、書籍が挙げる平均年収・実質手取り・生活費の目安は、公的統計のどの指標なら確かめられるか。",
+      "thesis": "書籍は群馬の製造業と温泉観光を、年収と生活費の目安とともに紹介している。stats47 では目安値は使わず、同じ話題を賃金・実質可処分所得・家賃や関連する家計支出などの公的指標で比べ、県ページの補足にできる範囲を決める論点。",
+      "pages": [
+        58,
+        59
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "書籍の平均年収・実質手取り・家賃・食費は「目安」と断った出典なしの金額で、公式統計に辿れないため採用しない。",
+      "metricKeys": [
+        "male-scheduled-earnings",
+        "real-disposable-income",
+        "disposable-income-after-rent",
+        "private-rental-housing-rent-per-3-3m2",
+        "public-bath-consumption-expenditure",
+        "manufacturing-shipment-amount"
+      ],
+      "surveyIds": [
+        "wage-structure-survey",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "賃金構造基本統計調査 (都道府県別 所定内給与額)",
+          "url": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (都道府県庁所在市別 支出)",
+          "url": "https://www.stat.go.jp/data/kakei/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "小売物価統計調査 (消費者物価地域差指数・民営家賃)",
+          "url": "https://www.stat.go.jp/data/kouri/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "10000"
+      ],
+      "nextAction": "群馬の県ページで所得・家賃・物価を扱うときは上記の既存指標だけを根拠にし、書籍の金額は載せない。"
+    },
+    {
+      "id": "average-income-ranking-unknown-a29",
+      "chapter": 3,
+      "question": "新潟について、書籍が挙げる平均年収・実質手取り・生活費の目安は、公的統計のどの指標なら確かめられるか。",
+      "thesis": "書籍は新潟の米・日本酒と冬の暖房費を、年収と生活費の目安とともに紹介している。stats47 では目安値は使わず、同じ話題を賃金・実質可処分所得・家賃や関連する家計支出などの公的指標で比べ、県ページの補足にできる範囲を決める論点。",
+      "pages": [
+        60,
+        60
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "書籍の平均年収・実質手取り・家賃・食費は「目安」と断った出典なしの金額で、公式統計に辿れないため採用しない。蔵元数が全国最多という記述は国税庁等の一次資料で別途確認する。",
+      "metricKeys": [
+        "male-scheduled-earnings",
+        "real-disposable-income",
+        "disposable-income-after-rent",
+        "private-rental-housing-rent-per-3-3m2",
+        "kerosene-consumption-expenditure",
+        "sake-consumption-expenditure"
+      ],
+      "surveyIds": [
+        "wage-structure-survey",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "賃金構造基本統計調査 (都道府県別 所定内給与額)",
+          "url": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (都道府県庁所在市別 支出)",
+          "url": "https://www.stat.go.jp/data/kakei/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "小売物価統計調査 (消費者物価地域差指数・民営家賃)",
+          "url": "https://www.stat.go.jp/data/kouri/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "15000"
+      ],
+      "nextAction": "新潟の県ページで所得・家賃・物価を扱うときは上記の既存指標だけを根拠にし、書籍の金額は載せない。蔵元数が全国最多という記述は国税庁等の一次資料で別途確認する。"
+    },
+    {
+      "id": "average-income-ranking-unknown-a30",
+      "chapter": 3,
+      "question": "山口について、書籍が挙げる平均年収・実質手取り・生活費の目安は、公的統計のどの指標なら確かめられるか。",
+      "thesis": "書籍は山口の化学工業とふぐの消費を、年収と生活費の目安とともに紹介している。stats47 では目安値は使わず、同じ話題を賃金・実質可処分所得・家賃や関連する家計支出などの公的指標で比べ、県ページの補足にできる範囲を決める論点。",
+      "pages": [
+        61,
+        62
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "書籍の平均年収・実質手取り・家賃・食費は「目安」と断った出典なしの金額で、公式統計に辿れないため採用しない。ふぐの消費量は一次資料が無く使わない。",
+      "metricKeys": [
+        "male-scheduled-earnings",
+        "real-disposable-income",
+        "disposable-income-after-rent",
+        "private-rental-housing-rent-per-3-3m2",
+        "manufacturing-shipment-amount-per-establishment"
+      ],
+      "surveyIds": [
+        "wage-structure-survey",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "賃金構造基本統計調査 (都道府県別 所定内給与額)",
+          "url": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (都道府県庁所在市別 支出)",
+          "url": "https://www.stat.go.jp/data/kakei/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "小売物価統計調査 (消費者物価地域差指数・民営家賃)",
+          "url": "https://www.stat.go.jp/data/kouri/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "35000"
+      ],
+      "nextAction": "山口の県ページで所得・家賃・物価を扱うときは上記の既存指標だけを根拠にし、書籍の金額は載せない。ふぐの消費量は一次資料が無く使わない。"
+    },
+    {
+      "id": "average-income-ranking-unknown-a31",
+      "chapter": 3,
+      "question": "奈良について、書籍が挙げる平均年収・実質手取り・生活費の目安は、公的統計のどの指標なら確かめられるか。",
+      "thesis": "書籍は奈良の大阪・京都への通勤負担を、年収と生活費の目安とともに紹介している。stats47 では目安値は使わず、同じ話題を賃金・実質可処分所得・家賃や関連する家計支出などの公的指標で比べ、県ページの補足にできる範囲を決める論点。",
+      "pages": [
+        63,
+        63
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "書籍の平均年収・実質手取り・家賃・食費は「目安」と断った出典なしの金額で、公式統計に辿れないため採用しない。",
+      "metricKeys": [
+        "male-scheduled-earnings",
+        "real-disposable-income",
+        "disposable-income-after-rent",
+        "private-rental-housing-rent-per-3-3m2",
+        "commute-by-train"
+      ],
+      "surveyIds": [
+        "wage-structure-survey",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "賃金構造基本統計調査 (都道府県別 所定内給与額)",
+          "url": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (都道府県庁所在市別 支出)",
+          "url": "https://www.stat.go.jp/data/kakei/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "小売物価統計調査 (消費者物価地域差指数・民営家賃)",
+          "url": "https://www.stat.go.jp/data/kouri/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "29000"
+      ],
+      "nextAction": "奈良の県ページで所得・家賃・物価を扱うときは上記の既存指標だけを根拠にし、書籍の金額は載せない。"
+    },
+    {
+      "id": "average-income-ranking-unknown-a32",
+      "chapter": 3,
+      "question": "和歌山について、書籍が挙げる平均年収・実質手取り・生活費の目安は、公的統計のどの指標なら確かめられるか。",
+      "thesis": "書籍は和歌山の梅・みかんと地元ラーメンを、年収と生活費の目安とともに紹介している。stats47 では目安値は使わず、同じ話題を賃金・実質可処分所得・家賃や関連する家計支出などの公的指標で比べ、県ページの補足にできる範囲を決める論点。",
+      "pages": [
+        64,
+        64
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "書籍の平均年収・実質手取り・家賃・食費は「目安」と断った出典なしの金額で、公式統計に辿れないため採用しない。",
+      "metricKeys": [
+        "male-scheduled-earnings",
+        "real-disposable-income",
+        "disposable-income-after-rent",
+        "private-rental-housing-rent-per-3-3m2",
+        "pickled-plum-consumption-expenditure",
+        "mandarin-consumption-expenditure",
+        "ramen-dining-consumption-expenditure"
+      ],
+      "surveyIds": [
+        "wage-structure-survey",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "賃金構造基本統計調査 (都道府県別 所定内給与額)",
+          "url": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (都道府県庁所在市別 支出)",
+          "url": "https://www.stat.go.jp/data/kakei/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "小売物価統計調査 (消費者物価地域差指数・民営家賃)",
+          "url": "https://www.stat.go.jp/data/kouri/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "30000"
+      ],
+      "nextAction": "和歌山の県ページで所得・家賃・物価を扱うときは上記の既存指標だけを根拠にし、書籍の金額は載せない。"
+    },
+    {
+      "id": "average-income-ranking-unknown-a33",
+      "chapter": 3,
+      "question": "長崎について、書籍が挙げる平均年収・実質手取り・生活費の目安は、公的統計のどの指標なら確かめられるか。",
+      "thesis": "書籍は長崎の造船・観光と家賃の安さを、年収と生活費の目安とともに紹介している。stats47 では目安値は使わず、同じ話題を賃金・実質可処分所得・家賃や関連する家計支出などの公的指標で比べ、県ページの補足にできる範囲を決める論点。",
+      "pages": [
+        65,
+        66
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "書籍の平均年収・実質手取り・家賃・食費は「目安」と断った出典なしの金額で、公式統計に辿れないため採用しない。見出しの県名が原本で判読できず、本文の記述から長崎と推定されている。",
+      "metricKeys": [
+        "male-scheduled-earnings",
+        "real-disposable-income",
+        "disposable-income-after-rent",
+        "private-rental-housing-rent-per-3-3m2",
+        "marine-fishery-output-value"
+      ],
+      "surveyIds": [
+        "wage-structure-survey",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "賃金構造基本統計調査 (都道府県別 所定内給与額)",
+          "url": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (都道府県庁所在市別 支出)",
+          "url": "https://www.stat.go.jp/data/kakei/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "小売物価統計調査 (消費者物価地域差指数・民営家賃)",
+          "url": "https://www.stat.go.jp/data/kouri/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "42000"
+      ],
+      "nextAction": "長崎の県ページで所得・家賃・物価を扱うときは上記の既存指標だけを根拠にし、書籍の金額は載せない。見出しの県名が原本で判読できず、本文の記述から長崎と推定されている。"
+    },
+    {
+      "id": "average-income-ranking-unknown-a34",
+      "chapter": 3,
+      "question": "大分について、書籍が挙げる平均年収・実質手取り・生活費の目安は、公的統計のどの指標なら確かめられるか。",
+      "thesis": "書籍は大分の温泉の身近さと製造業を、年収と生活費の目安とともに紹介している。stats47 では目安値は使わず、同じ話題を賃金・実質可処分所得・家賃や関連する家計支出などの公的指標で比べ、県ページの補足にできる範囲を決める論点。",
+      "pages": [
+        67,
+        67
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "書籍の平均年収・実質手取り・家賃・食費は「目安」と断った出典なしの金額で、公式統計に辿れないため採用しない。",
+      "metricKeys": [
+        "male-scheduled-earnings",
+        "real-disposable-income",
+        "disposable-income-after-rent",
+        "private-rental-housing-rent-per-3-3m2",
+        "public-bath-consumption-expenditure",
+        "manufacturing-shipment-amount-per-employee"
+      ],
+      "surveyIds": [
+        "wage-structure-survey",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "賃金構造基本統計調査 (都道府県別 所定内給与額)",
+          "url": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (都道府県庁所在市別 支出)",
+          "url": "https://www.stat.go.jp/data/kakei/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "小売物価統計調査 (消費者物価地域差指数・民営家賃)",
+          "url": "https://www.stat.go.jp/data/kouri/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "44000"
+      ],
+      "nextAction": "大分の県ページで所得・家賃・物価を扱うときは上記の既存指標だけを根拠にし、書籍の金額は載せない。"
+    },
+    {
+      "id": "average-income-ranking-unknown-a35",
+      "chapter": 3,
+      "question": "山梨について、書籍が挙げる平均年収・実質手取り・生活費の目安は、公的統計のどの指標なら確かめられるか。",
+      "thesis": "書籍は山梨の果物・ワインと東京への近さを、年収と生活費の目安とともに紹介している。stats47 では目安値は使わず、同じ話題を賃金・実質可処分所得・家賃や関連する家計支出などの公的指標で比べ、県ページの補足にできる範囲を決める論点。",
+      "pages": [
+        68,
+        69
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "書籍の平均年収・実質手取り・家賃・食費は「目安」と断った出典なしの金額で、公式統計に辿れないため採用しない。",
+      "metricKeys": [
+        "male-scheduled-earnings",
+        "real-disposable-income",
+        "disposable-income-after-rent",
+        "private-rental-housing-rent-per-3-3m2",
+        "grape-consumption-expenditure",
+        "wine-consumption-expenditure"
+      ],
+      "surveyIds": [
+        "wage-structure-survey",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "賃金構造基本統計調査 (都道府県別 所定内給与額)",
+          "url": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (都道府県庁所在市別 支出)",
+          "url": "https://www.stat.go.jp/data/kakei/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "小売物価統計調査 (消費者物価地域差指数・民営家賃)",
+          "url": "https://www.stat.go.jp/data/kouri/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "19000"
+      ],
+      "nextAction": "山梨の県ページで所得・家賃・物価を扱うときは上記の既存指標だけを根拠にし、書籍の金額は載せない。"
+    },
+    {
+      "id": "average-income-ranking-unknown-a36",
+      "chapter": 3,
+      "question": "宮城について、書籍が挙げる平均年収・実質手取り・生活費の目安は、公的統計のどの指標なら確かめられるか。",
+      "thesis": "書籍は宮城の東北の中核都市と牛タンの食文化を、年収と生活費の目安とともに紹介している。stats47 では目安値は使わず、同じ話題を賃金・実質可処分所得・家賃や関連する家計支出などの公的指標で比べ、県ページの補足にできる範囲を決める論点。",
+      "pages": [
+        70,
+        70
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "書籍の平均年収・実質手取り・家賃・食費は「目安」と断った出典なしの金額で、公式統計に辿れないため採用しない。",
+      "metricKeys": [
+        "male-scheduled-earnings",
+        "real-disposable-income",
+        "disposable-income-after-rent",
+        "private-rental-housing-rent-per-3-3m2",
+        "consumer-price-difference-index-overall"
+      ],
+      "surveyIds": [
+        "wage-structure-survey",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "賃金構造基本統計調査 (都道府県別 所定内給与額)",
+          "url": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (都道府県庁所在市別 支出)",
+          "url": "https://www.stat.go.jp/data/kakei/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "小売物価統計調査 (消費者物価地域差指数・民営家賃)",
+          "url": "https://www.stat.go.jp/data/kouri/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "04000"
+      ],
+      "nextAction": "宮城の県ページで所得・家賃・物価を扱うときは上記の既存指標だけを根拠にし、書籍の金額は載せない。"
+    },
+    {
+      "id": "average-income-ranking-unknown-a37",
+      "chapter": 3,
+      "question": "熊本について、書籍が挙げる平均年収・実質手取り・生活費の目安は、公的統計のどの指標なら確かめられるか。",
+      "thesis": "書籍は熊本の半導体関連の企業誘致と観光を、年収と生活費の目安とともに紹介している。stats47 では目安値は使わず、同じ話題を賃金・実質可処分所得・家賃や関連する家計支出などの公的指標で比べ、県ページの補足にできる範囲を決める論点。",
+      "pages": [
+        71,
+        72
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "書籍の平均年収・実質手取り・家賃・食費は「目安」と断った出典なしの金額で、公式統計に辿れないため採用しない。",
+      "metricKeys": [
+        "male-scheduled-earnings",
+        "real-disposable-income",
+        "disposable-income-after-rent",
+        "private-rental-housing-rent-per-3-3m2",
+        "manufacturing-shipment-amount"
+      ],
+      "surveyIds": [
+        "wage-structure-survey",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "賃金構造基本統計調査 (都道府県別 所定内給与額)",
+          "url": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (都道府県庁所在市別 支出)",
+          "url": "https://www.stat.go.jp/data/kakei/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "小売物価統計調査 (消費者物価地域差指数・民営家賃)",
+          "url": "https://www.stat.go.jp/data/kouri/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "43000"
+      ],
+      "nextAction": "熊本の県ページで所得・家賃・物価を扱うときは上記の既存指標だけを根拠にし、書籍の金額は載せない。"
+    },
+    {
+      "id": "average-income-ranking-unknown-a38",
+      "chapter": 3,
+      "question": "香川について、書籍が挙げる平均年収・実質手取り・生活費の目安は、公的統計のどの指標なら確かめられるか。",
+      "thesis": "書籍は香川のうどんの手頃さと食費を、年収と生活費の目安とともに紹介している。stats47 では目安値は使わず、同じ話題を賃金・実質可処分所得・家賃や関連する家計支出などの公的指標で比べ、県ページの補足にできる範囲を決める論点。",
+      "pages": [
+        73,
+        73
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "書籍の平均年収・実質手取り・家賃・食費は「目安」と断った出典なしの金額で、公式統計に辿れないため採用しない。",
+      "metricKeys": [
+        "male-scheduled-earnings",
+        "real-disposable-income",
+        "disposable-income-after-rent",
+        "private-rental-housing-rent-per-3-3m2",
+        "fresh-udon-soba-consumption-expenditure",
+        "dried-udon-soba-consumption-expenditure"
+      ],
+      "surveyIds": [
+        "wage-structure-survey",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "賃金構造基本統計調査 (都道府県別 所定内給与額)",
+          "url": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (都道府県庁所在市別 支出)",
+          "url": "https://www.stat.go.jp/data/kakei/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "小売物価統計調査 (消費者物価地域差指数・民営家賃)",
+          "url": "https://www.stat.go.jp/data/kouri/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "37000"
+      ],
+      "nextAction": "香川の県ページで所得・家賃・物価を扱うときは上記の既存指標だけを根拠にし、書籍の金額は載せない。"
+    },
+    {
+      "id": "average-income-ranking-unknown-a39",
+      "chapter": 3,
+      "question": "愛媛について、書籍が挙げる平均年収・実質手取り・生活費の目安は、公的統計のどの指標なら確かめられるか。",
+      "thesis": "書籍は愛媛の造船・製紙とみかんを、年収と生活費の目安とともに紹介している。stats47 では目安値は使わず、同じ話題を賃金・実質可処分所得・家賃や関連する家計支出などの公的指標で比べ、県ページの補足にできる範囲を決める論点。",
+      "pages": [
+        74,
+        75
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "書籍の平均年収・実質手取り・家賃・食費は「目安」と断った出典なしの金額で、公式統計に辿れないため採用しない。p75 は原本のスキャンが空白で、愛媛の章の末尾が欠けている可能性がある。",
+      "metricKeys": [
+        "male-scheduled-earnings",
+        "real-disposable-income",
+        "disposable-income-after-rent",
+        "private-rental-housing-rent-per-3-3m2",
+        "mandarin-consumption-expenditure"
+      ],
+      "surveyIds": [
+        "wage-structure-survey",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "賃金構造基本統計調査 (都道府県別 所定内給与額)",
+          "url": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (都道府県庁所在市別 支出)",
+          "url": "https://www.stat.go.jp/data/kakei/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "小売物価統計調査 (消費者物価地域差指数・民営家賃)",
+          "url": "https://www.stat.go.jp/data/kouri/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "38000"
+      ],
+      "nextAction": "愛媛の県ページで所得・家賃・物価を扱うときは上記の既存指標だけを根拠にし、書籍の金額は載せない。p75 は原本のスキャンが空白で、愛媛の章の末尾が欠けている可能性がある。"
+    },
+    {
+      "id": "average-income-ranking-unknown-a40",
+      "chapter": 3,
+      "question": "鹿児島について、書籍が挙げる平均年収・実質手取り・生活費の目安は、公的統計のどの指標なら確かめられるか。",
+      "thesis": "書籍は鹿児島の農業・畜産と温泉を、年収と生活費の目安とともに紹介している。stats47 では目安値は使わず、同じ話題を賃金・実質可処分所得・家賃や関連する家計支出などの公的指標で比べ、県ページの補足にできる範囲を決める論点。",
+      "pages": [
+        76,
+        77
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "書籍の平均年収・実質手取り・家賃・食費は「目安」と断った出典なしの金額で、公式統計に辿れないため採用しない。鹿児島は書籍内で2つの順位に重複して掲載されている。",
+      "metricKeys": [
+        "male-scheduled-earnings",
+        "real-disposable-income",
+        "disposable-income-after-rent",
+        "private-rental-housing-rent-per-3-3m2",
+        "pig-count",
+        "beef-cattle-count"
+      ],
+      "surveyIds": [
+        "wage-structure-survey",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "賃金構造基本統計調査 (都道府県別 所定内給与額)",
+          "url": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (都道府県庁所在市別 支出)",
+          "url": "https://www.stat.go.jp/data/kakei/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "小売物価統計調査 (消費者物価地域差指数・民営家賃)",
+          "url": "https://www.stat.go.jp/data/kouri/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "46000"
+      ],
+      "nextAction": "鹿児島の県ページで所得・家賃・物価を扱うときは上記の既存指標だけを根拠にし、書籍の金額は載せない。鹿児島は書籍内で2つの順位に重複して掲載されている。"
+    },
+    {
+      "id": "average-income-ranking-unknown-a41",
+      "chapter": 3,
+      "question": "福島について、書籍が挙げる平均年収・実質手取り・生活費の目安は、公的統計のどの指標なら確かめられるか。",
+      "thesis": "書籍は福島の農業・エネルギー産業と暖房費を、年収と生活費の目安とともに紹介している。stats47 では目安値は使わず、同じ話題を賃金・実質可処分所得・家賃や関連する家計支出などの公的指標で比べ、県ページの補足にできる範囲を決める論点。",
+      "pages": [
+        78,
+        78
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "書籍の平均年収・実質手取り・家賃・食費は「目安」と断った出典なしの金額で、公式統計に辿れないため採用しない。震災後の賃金上昇という記述は一次資料で確認するまで使わない。",
+      "metricKeys": [
+        "male-scheduled-earnings",
+        "real-disposable-income",
+        "disposable-income-after-rent",
+        "private-rental-housing-rent-per-3-3m2",
+        "peach-consumption-expenditure",
+        "kerosene-consumption-expenditure"
+      ],
+      "surveyIds": [
+        "wage-structure-survey",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "賃金構造基本統計調査 (都道府県別 所定内給与額)",
+          "url": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (都道府県庁所在市別 支出)",
+          "url": "https://www.stat.go.jp/data/kakei/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "小売物価統計調査 (消費者物価地域差指数・民営家賃)",
+          "url": "https://www.stat.go.jp/data/kouri/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "07000"
+      ],
+      "nextAction": "福島の県ページで所得・家賃・物価を扱うときは上記の既存指標だけを根拠にし、書籍の金額は載せない。震災後の賃金上昇という記述は一次資料で確認するまで使わない。"
+    },
+    {
+      "id": "average-income-ranking-unknown-a42",
+      "chapter": 3,
+      "question": "佐賀について、書籍が挙げる平均年収・実質手取り・生活費の目安は、公的統計のどの指標なら確かめられるか。",
+      "thesis": "書籍は佐賀の農工バランスと海苔を、年収と生活費の目安とともに紹介している。stats47 では目安値は使わず、同じ話題を賃金・実質可処分所得・家賃や関連する家計支出などの公的指標で比べ、県ページの補足にできる範囲を決める論点。",
+      "pages": [
+        79,
+        80
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "書籍の平均年収・実質手取り・家賃・食費は「目安」と断った出典なしの金額で、公式統計に辿れないため採用しない。海苔の生産量は漁業・養殖業生産統計が一次資料で、既存metricは消費側のみ。",
+      "metricKeys": [
+        "male-scheduled-earnings",
+        "real-disposable-income",
+        "disposable-income-after-rent",
+        "private-rental-housing-rent-per-3-3m2",
+        "dried-nori-consumption-expenditure"
+      ],
+      "surveyIds": [
+        "wage-structure-survey",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "賃金構造基本統計調査 (都道府県別 所定内給与額)",
+          "url": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (都道府県庁所在市別 支出)",
+          "url": "https://www.stat.go.jp/data/kakei/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "小売物価統計調査 (消費者物価地域差指数・民営家賃)",
+          "url": "https://www.stat.go.jp/data/kouri/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "41000"
+      ],
+      "nextAction": "佐賀の県ページで所得・家賃・物価を扱うときは上記の既存指標だけを根拠にし、書籍の金額は載せない。海苔の生産量は漁業・養殖業生産統計が一次資料で、既存metricは消費側のみ。"
+    },
+    {
+      "id": "average-income-ranking-unknown-a43",
+      "chapter": 3,
+      "question": "山形について、書籍が挙げる平均年収・実質手取り・生活費の目安は、公的統計のどの指標なら確かめられるか。",
+      "thesis": "書籍は山形の農業・食文化と暖房費を、年収と生活費の目安とともに紹介している。stats47 では目安値は使わず、同じ話題を賃金・実質可処分所得・家賃や関連する家計支出などの公的指標で比べ、県ページの補足にできる範囲を決める論点。",
+      "pages": [
+        81,
+        81
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "書籍の平均年収・実質手取り・家賃・食費は「目安」と断った出典なしの金額で、公式統計に辿れないため採用しない。",
+      "metricKeys": [
+        "male-scheduled-earnings",
+        "real-disposable-income",
+        "disposable-income-after-rent",
+        "private-rental-housing-rent-per-3-3m2",
+        "ramen-dining-consumption-expenditure",
+        "kerosene-consumption-expenditure"
+      ],
+      "surveyIds": [
+        "wage-structure-survey",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "賃金構造基本統計調査 (都道府県別 所定内給与額)",
+          "url": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (都道府県庁所在市別 支出)",
+          "url": "https://www.stat.go.jp/data/kakei/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "小売物価統計調査 (消費者物価地域差指数・民営家賃)",
+          "url": "https://www.stat.go.jp/data/kouri/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "06000"
+      ],
+      "nextAction": "山形の県ページで所得・家賃・物価を扱うときは上記の既存指標だけを根拠にし、書籍の金額は載せない。"
+    },
+    {
+      "id": "average-income-ranking-unknown-a44",
+      "chapter": 3,
+      "question": "徳島について、書籍が挙げる平均年収・実質手取り・生活費の目安は、公的統計のどの指標なら確かめられるか。",
+      "thesis": "書籍は徳島の製薬・化学産業と阿波おどりを、年収と生活費の目安とともに紹介している。stats47 では目安値は使わず、同じ話題を賃金・実質可処分所得・家賃や関連する家計支出などの公的指標で比べ、県ページの補足にできる範囲を決める論点。",
+      "pages": [
+        82,
+        83
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "書籍の平均年収・実質手取り・家賃・食費は「目安」と断った出典なしの金額で、公式統計に辿れないため採用しない。",
+      "metricKeys": [
+        "male-scheduled-earnings",
+        "real-disposable-income",
+        "disposable-income-after-rent",
+        "private-rental-housing-rent-per-3-3m2",
+        "manufacturing-shipment-amount-per-establishment"
+      ],
+      "surveyIds": [
+        "wage-structure-survey",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "賃金構造基本統計調査 (都道府県別 所定内給与額)",
+          "url": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (都道府県庁所在市別 支出)",
+          "url": "https://www.stat.go.jp/data/kakei/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "小売物価統計調査 (消費者物価地域差指数・民営家賃)",
+          "url": "https://www.stat.go.jp/data/kouri/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "36000"
+      ],
+      "nextAction": "徳島の県ページで所得・家賃・物価を扱うときは上記の既存指標だけを根拠にし、書籍の金額は載せない。"
+    },
+    {
+      "id": "average-income-ranking-unknown-a45",
+      "chapter": 3,
+      "question": "岩手について、書籍が挙げる平均年収・実質手取り・生活費の目安は、公的統計のどの指標なら確かめられるか。",
+      "thesis": "書籍は岩手の農業・製造業と暖房費を、年収と生活費の目安とともに紹介している。stats47 では目安値は使わず、同じ話題を賃金・実質可処分所得・家賃や関連する家計支出などの公的指標で比べ、県ページの補足にできる範囲を決める論点。",
+      "pages": [
+        84,
+        84
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "書籍の平均年収・実質手取り・家賃・食費は「目安」と断った出典なしの金額で、公式統計に辿れないため採用しない。",
+      "metricKeys": [
+        "male-scheduled-earnings",
+        "real-disposable-income",
+        "disposable-income-after-rent",
+        "private-rental-housing-rent-per-3-3m2",
+        "kerosene-consumption-expenditure",
+        "chinese-noodles-consumption-expenditure"
+      ],
+      "surveyIds": [
+        "wage-structure-survey",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "賃金構造基本統計調査 (都道府県別 所定内給与額)",
+          "url": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (都道府県庁所在市別 支出)",
+          "url": "https://www.stat.go.jp/data/kakei/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "小売物価統計調査 (消費者物価地域差指数・民営家賃)",
+          "url": "https://www.stat.go.jp/data/kouri/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "03000"
+      ],
+      "nextAction": "岩手の県ページで所得・家賃・物価を扱うときは上記の既存指標だけを根拠にし、書籍の金額は載せない。"
+    },
+    {
+      "id": "average-income-ranking-unknown-a46",
+      "chapter": 3,
+      "question": "鳥取について、書籍が挙げる平均年収・実質手取り・生活費の目安は、公的統計のどの指標なら確かめられるか。",
+      "thesis": "書籍は鳥取の人口の少なさと生活費の低さを、年収と生活費の目安とともに紹介している。stats47 では目安値は使わず、同じ話題を賃金・実質可処分所得・家賃や関連する家計支出などの公的指標で比べ、県ページの補足にできる範囲を決める論点。",
+      "pages": [
+        85,
+        86
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "書籍の平均年収・実質手取り・家賃・食費は「目安」と断った出典なしの金額で、公式統計に辿れないため採用しない。",
+      "metricKeys": [
+        "male-scheduled-earnings",
+        "real-disposable-income",
+        "disposable-income-after-rent",
+        "private-rental-housing-rent-per-3-3m2",
+        "consumer-price-difference-index-overall"
+      ],
+      "surveyIds": [
+        "wage-structure-survey",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "賃金構造基本統計調査 (都道府県別 所定内給与額)",
+          "url": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (都道府県庁所在市別 支出)",
+          "url": "https://www.stat.go.jp/data/kakei/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "小売物価統計調査 (消費者物価地域差指数・民営家賃)",
+          "url": "https://www.stat.go.jp/data/kouri/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "31000"
+      ],
+      "nextAction": "鳥取の県ページで所得・家賃・物価を扱うときは上記の既存指標だけを根拠にし、書籍の金額は載せない。"
+    },
+    {
+      "id": "average-income-ranking-unknown-a47",
+      "chapter": 3,
+      "question": "島根について、書籍が挙げる平均年収・実質手取り・生活費の目安は、公的統計のどの指標なら確かめられるか。",
+      "thesis": "書籍は島根の公務員比率の高さと生活費を、年収と生活費の目安とともに紹介している。stats47 では目安値は使わず、同じ話題を賃金・実質可処分所得・家賃や関連する家計支出などの公的指標で比べ、県ページの補足にできる範囲を決める論点。",
+      "pages": [
+        87,
+        87
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "書籍の平均年収・実質手取り・家賃・食費は「目安」と断った出典なしの金額で、公式統計に辿れないため採用しない。公務員比率は国勢調査・就業構造基本調査等の一次資料で別途確認する。",
+      "metricKeys": [
+        "male-scheduled-earnings",
+        "real-disposable-income",
+        "disposable-income-after-rent",
+        "private-rental-housing-rent-per-3-3m2",
+        "consumer-price-difference-index-overall"
+      ],
+      "surveyIds": [
+        "wage-structure-survey",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "賃金構造基本統計調査 (都道府県別 所定内給与額)",
+          "url": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (都道府県庁所在市別 支出)",
+          "url": "https://www.stat.go.jp/data/kakei/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "小売物価統計調査 (消費者物価地域差指数・民営家賃)",
+          "url": "https://www.stat.go.jp/data/kouri/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "32000"
+      ],
+      "nextAction": "島根の県ページで所得・家賃・物価を扱うときは上記の既存指標だけを根拠にし、書籍の金額は載せない。公務員比率は国勢調査・就業構造基本調査等の一次資料で別途確認する。"
+    },
+    {
+      "id": "average-income-ranking-unknown-a48",
+      "chapter": 3,
+      "question": "高知について、書籍が挙げる平均年収・実質手取り・生活費の目安は、公的統計のどの指標なら確かめられるか。",
+      "thesis": "書籍は高知のカツオの食文化と経済規模を、年収と生活費の目安とともに紹介している。stats47 では目安値は使わず、同じ話題を賃金・実質可処分所得・家賃や関連する家計支出などの公的指標で比べ、県ページの補足にできる範囲を決める論点。",
+      "pages": [
+        88,
+        88
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "書籍の平均年収・実質手取り・家賃・食費は「目安」と断った出典なしの金額で、公式統計に辿れないため採用しない。",
+      "metricKeys": [
+        "male-scheduled-earnings",
+        "real-disposable-income",
+        "disposable-income-after-rent",
+        "private-rental-housing-rent-per-3-3m2",
+        "fishery-species-catch-bonito"
+      ],
+      "surveyIds": [
+        "wage-structure-survey",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "賃金構造基本統計調査 (都道府県別 所定内給与額)",
+          "url": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (都道府県庁所在市別 支出)",
+          "url": "https://www.stat.go.jp/data/kakei/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "小売物価統計調査 (消費者物価地域差指数・民営家賃)",
+          "url": "https://www.stat.go.jp/data/kouri/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "39000"
+      ],
+      "nextAction": "高知の県ページで所得・家賃・物価を扱うときは上記の既存指標だけを根拠にし、書籍の金額は載せない。"
+    },
+    {
+      "id": "average-income-ranking-unknown-a49",
+      "chapter": 3,
+      "question": "青森について、書籍が挙げる平均年収・実質手取り・生活費の目安は、公的統計のどの指標なら確かめられるか。",
+      "thesis": "書籍は青森の農漁業と冬の光熱費を、年収と生活費の目安とともに紹介している。stats47 では目安値は使わず、同じ話題を賃金・実質可処分所得・家賃や関連する家計支出などの公的指標で比べ、県ページの補足にできる範囲を決める論点。",
+      "pages": [
+        89,
+        90
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "書籍の平均年収・実質手取り・家賃・食費は「目安」と断った出典なしの金額で、公式統計に辿れないため採用しない。",
+      "metricKeys": [
+        "male-scheduled-earnings",
+        "real-disposable-income",
+        "disposable-income-after-rent",
+        "private-rental-housing-rent-per-3-3m2",
+        "kerosene-consumption-expenditure",
+        "utilities-expenditure-ratio-multi-person-households"
+      ],
+      "surveyIds": [
+        "wage-structure-survey",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "賃金構造基本統計調査 (都道府県別 所定内給与額)",
+          "url": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (都道府県庁所在市別 支出)",
+          "url": "https://www.stat.go.jp/data/kakei/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "小売物価統計調査 (消費者物価地域差指数・民営家賃)",
+          "url": "https://www.stat.go.jp/data/kouri/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "02000"
+      ],
+      "nextAction": "青森の県ページで所得・家賃・物価を扱うときは上記の既存指標だけを根拠にし、書籍の金額は載せない。"
+    },
+    {
+      "id": "average-income-ranking-unknown-a50",
+      "chapter": 3,
+      "question": "宮崎について、書籍が挙げる平均年収・実質手取り・生活費の目安は、公的統計のどの指標なら確かめられるか。",
+      "thesis": "書籍は宮崎の農業・ブランド農産物と生活費を、年収と生活費の目安とともに紹介している。stats47 では目安値は使わず、同じ話題を賃金・実質可処分所得・家賃や関連する家計支出などの公的指標で比べ、県ページの補足にできる範囲を決める論点。",
+      "pages": [
+        91,
+        91
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "書籍の平均年収・実質手取り・家賃・食費は「目安」と断った出典なしの金額で、公式統計に辿れないため採用しない。宮崎は書籍内で2つの順位に重複して掲載されている。",
+      "metricKeys": [
+        "male-scheduled-earnings",
+        "real-disposable-income",
+        "disposable-income-after-rent",
+        "private-rental-housing-rent-per-3-3m2",
+        "pig-count",
+        "beef-cattle-count"
+      ],
+      "surveyIds": [
+        "wage-structure-survey",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "賃金構造基本統計調査 (都道府県別 所定内給与額)",
+          "url": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (都道府県庁所在市別 支出)",
+          "url": "https://www.stat.go.jp/data/kakei/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "小売物価統計調査 (消費者物価地域差指数・民営家賃)",
+          "url": "https://www.stat.go.jp/data/kouri/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "45000"
+      ],
+      "nextAction": "宮崎の県ページで所得・家賃・物価を扱うときは上記の既存指標だけを根拠にし、書籍の金額は載せない。宮崎は書籍内で2つの順位に重複して掲載されている。"
+    },
+    {
+      "id": "average-income-ranking-unknown-a51",
+      "chapter": 3,
+      "question": "秋田について、書籍が挙げる平均年収・実質手取り・生活費の目安は、公的統計のどの指標なら確かめられるか。",
+      "thesis": "書籍は秋田の人口減少と冬の暖房費を、年収と生活費の目安とともに紹介している。stats47 では目安値は使わず、同じ話題を賃金・実質可処分所得・家賃や関連する家計支出などの公的指標で比べ、県ページの補足にできる範囲を決める論点。",
+      "pages": [
+        92,
+        93
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "書籍の平均年収・実質手取り・家賃・食費は「目安」と断った出典なしの金額で、公式統計に辿れないため採用しない。",
+      "metricKeys": [
+        "male-scheduled-earnings",
+        "real-disposable-income",
+        "disposable-income-after-rent",
+        "private-rental-housing-rent-per-3-3m2",
+        "aging-index",
+        "kerosene-consumption-expenditure"
+      ],
+      "surveyIds": [
+        "wage-structure-survey",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "賃金構造基本統計調査 (都道府県別 所定内給与額)",
+          "url": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (都道府県庁所在市別 支出)",
+          "url": "https://www.stat.go.jp/data/kakei/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "小売物価統計調査 (消費者物価地域差指数・民営家賃)",
+          "url": "https://www.stat.go.jp/data/kouri/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "05000"
+      ],
+      "nextAction": "秋田の県ページで所得・家賃・物価を扱うときは上記の既存指標だけを根拠にし、書籍の金額は載せない。"
+    },
+    {
+      "id": "average-income-ranking-unknown-a52",
+      "chapter": 3,
+      "question": "沖縄について、書籍が挙げる平均年収・実質手取り・生活費の目安は、公的統計のどの指標なら確かめられるか。",
+      "thesis": "書籍は沖縄の観光業中心の雇用と物価を、年収と生活費の目安とともに紹介している。stats47 では目安値は使わず、同じ話題を賃金・実質可処分所得・家賃や関連する家計支出などの公的指標で比べ、県ページの補足にできる範囲を決める論点。",
+      "pages": [
+        94,
+        94
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "書籍の平均年収・実質手取り・家賃・食費は「目安」と断った出典なしの金額で、公式統計に辿れないため採用しない。幸福度調査で上位という記述は調査名がなく、使わない。",
+      "metricKeys": [
+        "male-scheduled-earnings",
+        "real-disposable-income",
+        "disposable-income-after-rent",
+        "private-rental-housing-rent-per-3-3m2",
+        "consumer-price-difference-index-overall",
+        "total-overnight-guests-foreign"
+      ],
+      "surveyIds": [
+        "wage-structure-survey",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "賃金構造基本統計調査 (都道府県別 所定内給与額)",
+          "url": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (都道府県庁所在市別 支出)",
+          "url": "https://www.stat.go.jp/data/kakei/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "小売物価統計調査 (消費者物価地域差指数・民営家賃)",
+          "url": "https://www.stat.go.jp/data/kouri/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "47000"
+      ],
+      "nextAction": "沖縄の県ページで所得・家賃・物価を扱うときは上記の既存指標だけを根拠にし、書籍の金額は載せない。幸福度調査で上位という記述は調査名がなく、使わない。"
+    },
+    {
+      "id": "average-income-ranking-unknown-a53",
+      "chapter": 3,
+      "question": "鹿児島について、書籍が挙げる平均年収・実質手取り・生活費の目安は、公的統計のどの指標なら確かめられるか。",
+      "thesis": "書籍は鹿児島の農業・畜産と食料自給度を、年収と生活費の目安とともに紹介している。stats47 では目安値は使わず、同じ話題を賃金・実質可処分所得・家賃や関連する家計支出などの公的指標で比べ、県ページの補足にできる範囲を決める論点。",
+      "pages": [
+        95,
+        96
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "書籍の平均年収・実質手取り・家賃・食費は「目安」と断った出典なしの金額で、公式統計に辿れないため採用しない。鹿児島は書籍内で2つの順位に重複して掲載されている。",
+      "metricKeys": [
+        "male-scheduled-earnings",
+        "real-disposable-income",
+        "disposable-income-after-rent",
+        "private-rental-housing-rent-per-3-3m2",
+        "pig-count",
+        "beef-cattle-count",
+        "food-self-sufficiency-rate-calorie"
+      ],
+      "surveyIds": [
+        "wage-structure-survey",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "賃金構造基本統計調査 (都道府県別 所定内給与額)",
+          "url": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (都道府県庁所在市別 支出)",
+          "url": "https://www.stat.go.jp/data/kakei/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "小売物価統計調査 (消費者物価地域差指数・民営家賃)",
+          "url": "https://www.stat.go.jp/data/kouri/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "46000"
+      ],
+      "nextAction": "鹿児島の県ページで所得・家賃・物価を扱うときは上記の既存指標だけを根拠にし、書籍の金額は載せない。鹿児島は書籍内で2つの順位に重複して掲載されている。"
+    },
+    {
+      "id": "average-income-ranking-unknown-a54",
+      "chapter": 3,
+      "question": "宮崎について、書籍が挙げる平均年収・実質手取り・生活費の目安は、公的統計のどの指標なら確かめられるか。",
+      "thesis": "書籍は宮崎の農業中心の産業構造と野球キャンプを、年収と生活費の目安とともに紹介している。stats47 では目安値は使わず、同じ話題を賃金・実質可処分所得・家賃や関連する家計支出などの公的指標で比べ、県ページの補足にできる範囲を決める論点。",
+      "pages": [
+        97,
+        97
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "書籍の平均年収・実質手取り・家賃・食費は「目安」と断った出典なしの金額で、公式統計に辿れないため採用しない。宮崎は書籍内で2つの順位に重複して掲載されている。",
+      "metricKeys": [
+        "male-scheduled-earnings",
+        "real-disposable-income",
+        "disposable-income-after-rent",
+        "private-rental-housing-rent-per-3-3m2",
+        "pig-count",
+        "beef-cattle-count"
+      ],
+      "surveyIds": [
+        "wage-structure-survey",
+        "household-survey"
+      ],
+      "geoScopes": [
+        "prefecture"
+      ],
+      "contentRoles": [
+        "area",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "賃金構造基本統計調査 (都道府県別 所定内給与額)",
+          "url": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (都道府県庁所在市別 支出)",
+          "url": "https://www.stat.go.jp/data/kakei/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "小売物価統計調査 (消費者物価地域差指数・民営家賃)",
+          "url": "https://www.stat.go.jp/data/kouri/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "45000"
+      ],
+      "nextAction": "宮崎の県ページで所得・家賃・物価を扱うときは上記の既存指標だけを根拠にし、書籍の金額は載せない。宮崎は書籍内で2つの順位に重複して掲載されている。"
+    },
+    {
+      "id": "average-income-ranking-unknown-a55",
+      "chapter": 3,
+      "question": "賃金・家賃・暖房費の組み合わせで都道府県を分けると、書籍が言う都市圏・中堅地方・低賃金低コスト・寒冷地の4類型は公的統計でも現れるか。",
+      "thesis": "賃金水準、民営家賃、灯油支出、実質可処分所得の4指標で都道府県をクラスタ分けし、類型の境界と例外を確かめる論点。類型名と所属県は書籍の記述を使わずに計算結果から決める。",
+      "pages": [
+        98,
+        102
+      ],
+      "resolution": "combined-analysis",
+      "resolutionReason": "4指標とも既存metricで再計算できる。書籍の類型と県の割当は出典のない総括で、検証前の仮説としてのみ扱う。p98 は第3章まとめの冒頭で、末尾は原本スキャンで一部不鮮明",
+      "metricKeys": [
+        "male-scheduled-earnings",
+        "private-rental-housing-rent-per-3-3m2",
+        "kerosene-consumption-expenditure",
+        "real-disposable-income"
+      ],
+      "surveyIds": [
+        "wage-structure-survey",
+        "household-survey",
+        "retail-price-survey"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "theme",
+        "blog",
+        "note",
+        "x"
+      ],
+      "primarySources": [
+        {
+          "organization": "厚生労働省",
+          "publicationOrDataset": "賃金構造基本統計調査 (都道府県別 所定内給与額)",
+          "url": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html",
+          "dataYears": [
+            "2022"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (都道府県庁所在市別 支出)",
+          "url": "https://www.stat.go.jp/data/kakei/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "小売物価統計調査 (消費者物価地域差指数・民営家賃)",
+          "url": "https://www.stat.go.jp/data/kouri/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "nextAction": "4指標を標準化して階層クラスタリングし、類型ごとの代表県と例外県を出すGeo/ランキング系の下書きにする"
+    },
+    {
+      "id": "average-income-ranking-unknown-a56",
+      "chapter": 4,
+      "question": "改訂版の実質手取りランキングの順位と金額は、公的統計で再現できるか。",
+      "thesis": "第3章の結果を並べ替えた別の順位表で、一部の県しか収録されず、順位も第2章・第3章と食い違う。本文は途中で途切れる不完全スキャンである。stats47 では第2章の再計算(実質可処分所得)を使い、この章の順位は使わない。",
+      "pages": [
+        103,
+        110
+      ],
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "改訂版の順位・金額は出典なしの目安値。収録県が一部だけで、第2章と順位が食い違い、p110 で本文が途切れる不完全スキャンのため採用できない",
+      "metricKeys": [
+        "real-disposable-income",
+        "disposable-income-after-rent"
+      ],
+      "surveyIds": [
+        "household-survey",
+        "retail-price-survey"
+      ],
+      "geoScopes": [
+        "prefecture-set"
+      ],
+      "contentRoles": [
+        "ranking",
+        "blog"
+      ],
+      "primarySources": [
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "家計調査 (都道府県庁所在市別 支出)",
+          "url": "https://www.stat.go.jp/data/kakei/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "小売物価統計調査 (消費者物価地域差指数・民営家賃)",
+          "url": "https://www.stat.go.jp/data/kouri/index.html",
+          "dataYears": [
+            "2024"
+          ],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        }
+      ],
+      "areaCodes": [
+        "18000",
+        "21000",
+        "28000",
+        "24000",
+        "33000",
+        "35000",
+        "11000",
+        "42000",
+        "44000",
+        "37000",
+        "38000",
+        "36000",
+        "03000"
+      ],
+      "nextAction": "この章は参照しない。実質的な豊かさの論点は第2章(a06)の再計算に一本化し、不完全スキャンの再取得は優先しない"
+    }
+  ]
+}
