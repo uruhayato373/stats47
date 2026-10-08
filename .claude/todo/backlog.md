@@ -616,6 +616,11 @@ updated: 2026-10-06
   認証付きの R2 HEAD でしか読めない (公開 URL の HEAD には `x-amz-meta-*` が出ない)。bonito の背景は 2026-08-31 に上げたもの。
   **次**: (a) 本体の SHA が記録と合いメタデータだけが古い場合に、その記事だけを飛ばす (exit 20) か、(b) メタデータを正しい値で上げ直すかを決める。
   どちらでも、1 記事の背景の不整合で後ろの記事の公開まで止まる今の挙動をなくす。
+- **2026-10-08 の対処 (b を 4 枚に適用)**: 2026-08-31 に上げた `bonito-catch-prefecture`・`katsuobushi-expenditure-ranking`・
+  `fresh-udon-soba-consumption-prefecture-gap`・`udon-soba-food-culture-prefecture-map` の `ogp/background.jpg` は、本体の SHA-256 が
+  `ogp/generation.json` の `metadata.background.sha256` と asset 契約に一致し、`stats47-sha256` メタデータだけが無かった。
+  本体を変えずに CopyObject (MetadataDirective REPLACE、Content-Type を保持) でメタデータを付け、HEAD と本体の SHA を読み直して確かめた。
+  同じ日に上げたほかの背景にも同じ欠落がありうる (未調査)。挙動の是正 (1 記事で run 全体が止まる) は残る。
 - **停止条件**: 3 の画像生成は Codex が要る (クラウド環境では codex MCP が接続できない)。生成はオーナーのローカルで回す。
 - **完了条件**: 1 は背景の無い送り箱の記事で quality-gate が止まることをテストで固定。2 は背景の選択と案内文の実装が 1 か所。3 は `queue` の targets が 0 で、リポジトリに Gemini の生成コードが無い。
 
