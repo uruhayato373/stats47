@@ -1067,8 +1067,6 @@
       "title": "診療科と年齢から見る医療人材",
       "description": "2024年12月31日の医療施設従事医師を、主たる従業地別に診療科と年齢で比較します。40歳未満・40〜59歳・60歳以上は同じ総数の内訳です。小児科・産婦人科系・救急科は主たる診療科の人数で、全診療科の内訳は専用図表から確認できます。人口当たり指標と人数は区別して読みます。",
       "metricGroupKeys": [
-        "candidate-57-1",
-        "candidate-57-2",
         "candidate-57-3",
         "candidate-57-4",
         "candidate-57-5",
@@ -1091,7 +1089,6 @@
         "candidate-58-4",
         "candidate-58-5",
         "candidate-58-6",
-        "candidate-58-7",
         "candidate-58-8"
       ]
     },
@@ -1122,8 +1119,6 @@
       "title": "健康寿命と平均寿命",
       "description": "健康寿命は2022年、0歳平均余命である平均寿命は2020年の値です。健康寿命は日常生活に制限のない期間を表します。年と算定方法が異なるため、2系列を差し引いて不健康な期間を求めません。",
       "metricGroupKeys": [
-        "candidate-65-1",
-        "candidate-65-2",
         "candidate-65-3",
         "candidate-65-4"
       ]
@@ -1241,26 +1236,6 @@
       ],
       "defaultCheckedKeys": [
         "ambulance-hospital-arrival-time"
-      ]
-    },
-    {
-      "key": "candidate-57-1",
-      "title": "医師数（人口10万人当たり）",
-      "rankingKeys": [
-        "physicians-in-medical-facilities-per-100k"
-      ],
-      "defaultCheckedKeys": [
-        "physicians-in-medical-facilities-per-100k"
-      ]
-    },
-    {
-      "key": "candidate-57-2",
-      "title": "看護師・准看護師数（人口10万人当たり）",
-      "rankingKeys": [
-        "nurses-in-medical-facilities-per-100k"
-      ],
-      "defaultCheckedKeys": [
-        "nurses-in-medical-facilities-per-100k"
       ]
     },
     {
@@ -1384,16 +1359,6 @@
       ]
     },
     {
-      "key": "candidate-58-7",
-      "title": "救急搬送病院収容所要時間",
-      "rankingKeys": [
-        "ambulance-hospital-arrival-time"
-      ],
-      "defaultCheckedKeys": [
-        "ambulance-hospital-arrival-time"
-      ]
-    },
-    {
       "key": "candidate-58-8",
       "title": "救急出動件数（人口千人当たり）",
       "rankingKeys": [
@@ -1481,26 +1446,6 @@
       ],
       "defaultCheckedKeys": [
         "home-care-worker-annual-income"
-      ]
-    },
-    {
-      "key": "candidate-65-1",
-      "title": "男性健康寿命",
-      "rankingKeys": [
-        "healthy-life-expectancy-male"
-      ],
-      "defaultCheckedKeys": [
-        "healthy-life-expectancy-male"
-      ]
-    },
-    {
-      "key": "candidate-65-2",
-      "title": "女性健康寿命",
-      "rankingKeys": [
-        "healthy-life-expectancy-female"
-      ],
-      "defaultCheckedKeys": [
-        "healthy-life-expectancy-female"
       ]
     },
     {

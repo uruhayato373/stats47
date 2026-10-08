@@ -2549,7 +2549,7 @@
       "decision": {
         "disposition": "existing-section",
         "scope": "求人・求職と就職の対応",
-        "rationale": "job-marketの有効求人倍率を求人数と求職者数へ展開する。",
+        "rationale": "job-marketの有効求人倍率を求人数と求職者数へ展開する。 2026-10-08 オーナー承認で、重複していた candidate-33 の章を既存の job-market 章に統合した (THEME-DUP-METRIC-CARD-01)。",
         "owner": "theme-designer",
         "decidedAt": "2026-09-09",
         "evidenceRefs": [
@@ -2559,6 +2559,10 @@
           "https://www.mhlw.go.jp/stf/newpage_62187.html"
         ],
         "targetThemeKey": "labor-mobility",
+        "targetSectionKey": "job-market",
+        "targetMetricKeys": [
+          "active-job-opening-ratio"
+        ],
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [],
@@ -2597,7 +2601,7 @@
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
           "packages/types/src/indicator-sets/labor-mobility.ts",
-          "theme:labor-mobility#candidate-33"
+          "theme:labor-mobility#job-market"
         ]
       }
     },
@@ -6124,7 +6128,7 @@
       "decision": {
         "disposition": "existing-section",
         "scope": "控除前後の所得と生活費",
-        "rationale": "household-incomeとpurchasing-powerが同じ核指標を扱う。",
+        "rationale": "household-incomeとpurchasing-powerが同じ核指標を扱う。 2026-10-08 オーナー承認で、重複していた candidate-73 の章を既存の household-income 章に統合した (THEME-DUP-METRIC-CARD-01)。",
         "owner": "theme-designer",
         "decidedAt": "2026-09-09",
         "evidenceRefs": [
@@ -6137,6 +6141,11 @@
           "data/estat/theme-expansion-verification.json"
         ],
         "targetThemeKey": "real-income",
+        "targetSectionKey": "household-income",
+        "targetMetricKeys": [
+          "actual-income-worker-households-per-month",
+          "disposable-income-worker-households"
+        ],
         "implementationStatus": "catalog-section-wired-data-validation-pending",
         "dataVerification": {
           "explicitCodes": [
@@ -6177,7 +6186,7 @@
         "implementationEvidence": [
           "packages/data-configs/src/theme-catalog/index.ts",
           "packages/types/src/indicator-sets/real-income.ts",
-          "theme:real-income#candidate-73"
+          "theme:real-income#household-income"
         ]
       }
     },
