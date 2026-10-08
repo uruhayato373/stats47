@@ -1,6 +1,0 @@
-{
-  "metric": "milk-consumption-quantity,internet-usage-rate-10plus",
-  "since": "",
-  "dryRun": false,
-  "reason": "dryRun で牛乳の購入量 (run 37727006207, 846 行 = 47 県 x 18 年) とインターネット利用行動者率 (run 37728844145, 94 行 = 47 県 x 2 回) を確かめた。R2 に反映する (REFERENCE-KINDLE7-S5-01)"
-}
