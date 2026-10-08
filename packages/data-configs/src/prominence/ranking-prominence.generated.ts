@@ -43,7 +43,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "landweather",
     "categoryName": "国土・気象",
-    "count": 40,
+    "count": 41,
     "representatives": [
       {
         "rankingKey": "annual-sunshine-duration",
@@ -88,7 +88,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "population",
     "categoryName": "人口・世帯",
-    "count": 154,
+    "count": 156,
     "representatives": [
       {
         "rankingKey": "births",
@@ -316,7 +316,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "economy",
     "categoryName": "企業・家計・経済",
-    "count": 871,
+    "count": 885,
     "representatives": [
       {
         "rankingKey": "natto-consumption-expenditure",
@@ -498,7 +498,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "educationsports",
     "categoryName": "教育・文化・スポーツ",
-    "count": 270,
+    "count": 277,
     "representatives": [
       {
         "rankingKey": "avg-height-high-school-2nd-male",
@@ -546,7 +546,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "administrativefinancial",
     "categoryName": "行財政",
-    "count": 142,
+    "count": 143,
     "representatives": [
       {
         "rankingKey": "local-allocation-tax-prefecture",
@@ -594,7 +594,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "safetyenvironment",
     "categoryName": "司法・安全・環境",
-    "count": 145,
+    "count": 146,
     "representatives": [
       {
         "rankingKey": "per-capita-police-expenditure-pref-municipal",
@@ -640,7 +640,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "socialsecurity",
     "categoryName": "社会保障・衛生",
-    "count": 288,
+    "count": 291,
     "representatives": [
       {
         "rankingKey": "physical-disability-certificates-issued",
@@ -745,7 +745,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "ict",
     "categoryName": "情報通信・科学技術",
-    "count": 22,
+    "count": 24,
     "representatives": [
       {
         "rankingKey": "public-phone-count",
@@ -995,6 +995,7 @@ export const AREA_HIGHLIGHT_PROMINENCE: Readonly<Record<string, number>> =
   "average-weight-high-school-second-grade-male": 0.28,
   "avg-height-high-school-2nd-male": 1,
   "barber-beauty-salon-count-per-100k": 0.28,
+  "beef-cattle-count": 0.6313,
   "beef-consumption-quantity": 0.8805,
   "certified-childcare-center-count-per-100k-0-5": 0.35,
   "chicken-consumption-expenditure": 0.6555,
@@ -1030,6 +1031,7 @@ export const AREA_HIGHLIGHT_PROMINENCE: Readonly<Record<string, number>> =
   "households": 0.7404,
   "households-on-public-assistance-per-1000": 0.28,
   "kindergarten-count-per-100k-3-5": 0.55,
+  "layer-hen-count": 0.575,
   "library-count-per-million": 0.6438,
   "life-expectancy-0-female": 0.635,
   "life-expectancy-0-male": 0.3962,
@@ -1046,6 +1048,7 @@ export const AREA_HIGHLIGHT_PROMINENCE: Readonly<Record<string, number>> =
   "penal-code-offenses-recognized-per-1000": 0.5925,
   "per-capita-prefectural-income-h27": 0.5975,
   "physicians-in-medical-facilities-per-100k": 0.48,
+  "pig-count": 0.6313,
   "police-officer-count-per-population": 0.4459,
   "population-density-per-km2-total-area": 0.7188,
   "post-office-count-per-100km2": 0.48,

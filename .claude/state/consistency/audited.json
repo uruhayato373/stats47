@@ -1,8 +1,7 @@
 {
-  "hash": "506040f86b9e9350c6f8bbdc433ac2bc246d53df3bafb2d97ea5d58c87f77a4d",
-  "audited_at": "2026-10-08T05:12:35",
+  "hash": "2bc768a01fd92128804d3d9274c7838da97fa1c50c983670ef4941ab2b15a9c6",
+  "audited_at": "2026-10-08T06:02:52",
   "files": [
-    ".claude/rules/analytics-event-standards.md",
-    ".claude/rules/geo-analysis-standards.md"
+    ".claude/scripts/blog/data/display-sources-backfill.json"
   ]
 }

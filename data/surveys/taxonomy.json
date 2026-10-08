@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-08T04:42:41.240Z",
+  "generatedAt": "2026-10-08T06:03:11.836Z",
   "masterSurveyCount": 151,
   "ranking": {
     "metrics": 2598,
-    "activeMetrics": 2454,
+    "activeMetrics": 2455,
     "applicableMetrics": 2509,
     "activeApplicableMetrics": 2367,
     "notApplicable": 89,
-    "activeNotApplicable": 87,
+    "activeNotApplicable": 88,
     "resolved": 2509,
     "unresolved": 0,
     "coveragePct": 100,
@@ -56,6 +56,7 @@
       "landslide-warning-zone-count",
       "landslip-special-warning-zone-count",
       "landslip-warning-zone-count",
+      "low-elevation-population-ratio-5m",
       "metabolic-syndrome-prevalence-among-checkup-recipients",
       "municipality-count",
       "natural-disaster-deaths",
@@ -731,11 +732,11 @@
   "blog": {
     "articles": 607,
     "charts": 1607,
-    "applicableCharts": 1481,
+    "applicableCharts": 1483,
     "byStatus": {
-      "resolved": 1481,
+      "resolved": 1483,
       "unresolved": 0,
-      "not-applicable": 126,
+      "not-applicable": 124,
       "missing-lineage": 0
     },
     "coveragePct": 100,
@@ -807,7 +808,6 @@
         "workplace-accident-regional-map"
       ],
       "sourcelessChartArticles": [
-        "cc-estat-09-radar-prefecture",
         "cc-estat-17-edu-slope-graph"
       ],
       "snapshotSourcesMissingArticles": []
@@ -822,6 +822,7 @@
         "spinach-consumption-ranking"
       ],
       "accommodation-survey": [
+        "cc-estat-09-radar-prefecture",
         "cc-estat-11-tourism-stacked",
         "foreign-overnight-guests-prefecture-gap",
         "inbound-by-nationality-regional-preference",
@@ -899,6 +900,7 @@
         "cc-estat-02-search-skill",
         "cc-estat-03-population-bar",
         "cc-estat-04-aging-heatmap",
+        "cc-estat-09-radar-prefecture",
         "cc-estat-15-crime-small-multiple",
         "cc-estat-18-cache-r2",
         "cc-estat-20-publish",
@@ -1600,6 +1602,7 @@
       "national-household-survey": [
         "black-tea-income-gap",
         "car-ownership-household-prefecture-gap",
+        "cc-estat-09-radar-prefecture",
         "deposit-securities-prefecture-personality",
         "household-liabilities-prefecture-gap",
         "ict-digital-divide-composite-analysis",
@@ -1610,6 +1613,7 @@
       ],
       "national-medical-expenditure": [
         "cc-estat-05-medical-cost-choropleth",
+        "cc-estat-09-radar-prefecture",
         "tuna-consumption-quantity-vs-national-medical-expense-per",
         "tuna-medical-expense"
       ],
@@ -1647,6 +1651,7 @@
         "hospital-bed-utilization-map"
       ],
       "police-statistics": [
+        "cc-estat-09-radar-prefecture",
         "cc-estat-15-crime-small-multiple",
         "crime-rate-regional-gap",
         "livable-prefecture-composite-ranking",
@@ -1667,6 +1672,7 @@
         "cc-estat-02-search-skill",
         "cc-estat-03-population-bar",
         "cc-estat-04-aging-heatmap",
+        "cc-estat-09-radar-prefecture",
         "cc-estat-15-crime-small-multiple",
         "cc-estat-18-cache-r2",
         "cc-estat-20-publish",
@@ -1760,6 +1766,7 @@
         "ai-claude-code-pref-analysis",
         "bank-deposit-balance-shikoku-anomaly",
         "cc-estat-06-income-scatter",
+        "cc-estat-09-radar-prefecture",
         "engel-coefficient-vs-prefectural-income",
         "forest-coverage-woodland-economy",
         "it-industry-concentration",
@@ -2090,6 +2097,7 @@
         "tourism"
       ],
       "blogSlugs": [
+        "cc-estat-09-radar-prefecture",
         "cc-estat-11-tourism-stacked",
         "foreign-overnight-guests-prefecture-gap",
         "inbound-by-nationality-regional-preference",
@@ -2274,6 +2282,7 @@
         "cc-estat-02-search-skill",
         "cc-estat-03-population-bar",
         "cc-estat-04-aging-heatmap",
+        "cc-estat-09-radar-prefecture",
         "cc-estat-15-crime-small-multiple",
         "cc-estat-18-cache-r2",
         "cc-estat-20-publish",
@@ -3529,6 +3538,7 @@
       "blogSlugs": [
         "black-tea-income-gap",
         "car-ownership-household-prefecture-gap",
+        "cc-estat-09-radar-prefecture",
         "deposit-securities-prefecture-personality",
         "household-liabilities-prefecture-gap",
         "ict-digital-divide-composite-analysis",
@@ -3546,6 +3556,7 @@
       ],
       "blogSlugs": [
         "cc-estat-05-medical-cost-choropleth",
+        "cc-estat-09-radar-prefecture",
         "tuna-consumption-quantity-vs-national-medical-expense-per",
         "tuna-medical-expense"
       ]
@@ -3665,6 +3676,7 @@
         "safety"
       ],
       "blogSlugs": [
+        "cc-estat-09-radar-prefecture",
         "cc-estat-15-crime-small-multiple",
         "crime-rate-regional-gap",
         "livable-prefecture-composite-ranking",
@@ -3709,6 +3721,7 @@
         "cc-estat-02-search-skill",
         "cc-estat-03-population-bar",
         "cc-estat-04-aging-heatmap",
+        "cc-estat-09-radar-prefecture",
         "cc-estat-15-crime-small-multiple",
         "cc-estat-18-cache-r2",
         "cc-estat-20-publish",
@@ -3840,6 +3853,7 @@
         "ai-claude-code-pref-analysis",
         "bank-deposit-balance-shikoku-anomaly",
         "cc-estat-06-income-scatter",
+        "cc-estat-09-radar-prefecture",
         "engel-coefficient-vs-prefectural-income",
         "forest-coverage-woodland-economy",
         "it-industry-concentration",
