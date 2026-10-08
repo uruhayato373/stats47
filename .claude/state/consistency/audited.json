@@ -1,8 +1,15 @@
 {
-  "hash": "d8899ef631222b8a9cb8cf94e06518cdd3f119a1ce5b57f14d9c638b9bb3c21b",
-  "audited_at": "2026-10-07T22:22:42",
+  "hash": "3e3a741cdb9750426427ea3171c70415c0ab8809fef60e8bc56c8b122a92e25a",
+  "audited_at": "2026-10-08T00:50:36",
   "files": [
-    ".claude/scripts/source-vault/__tests__/source-inventory.test.mjs",
-    ".claude/scripts/source-vault/source-inventory.mjs"
+    ".claude/scripts/data/fetch-cancer-asr75-breast.mjs",
+    ".claude/scripts/data/fetch-financial-literacy-correct-rate.mjs",
+    ".claude/scripts/data/fetch-national-assessment-questionnaire.mjs",
+    ".claude/scripts/data/fetch-nta-alcohol-per-adult.mjs",
+    ".claude/scripts/data/fetch-opendata-adoption-rate.mjs",
+    ".claude/scripts/data/fetch-sports-facility-athletics-stadium.mjs",
+    ".claude/scripts/data/fetch-zen-koutairen-rugby.mjs",
+    ".claude/scripts/data/lib/read-xls.mjs",
+    ".claude/scripts/data/lib/stats-values-writer.mjs"
   ]
 }

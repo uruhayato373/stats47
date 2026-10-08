@@ -17,9 +17,8 @@
   "byResolution": {
     "not-applicable": 188,
     "context-only": 22,
-    "reuse-existing-metric": 10,
-    "combined-analysis": 6,
-    "new-metric": 4
+    "reuse-existing-metric": 14,
+    "combined-analysis": 6
   },
   "byKind": {
     "page": 230

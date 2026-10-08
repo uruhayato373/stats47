@@ -50,7 +50,7 @@
         4
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "北海道の面積・農業産出額・製造品出荷額等・延べ宿泊者数とホタテ・コンブ・イカの漁獲量、乳用牛頭数、空港数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "resolutionReason": "北海道の面積・農業産出額・製造品出荷額等・延べ宿泊者数とホタテ・コンブ・イカの漁獲量、乳用牛頭数、空港数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない。県データブックの共通テンプレートには採用しない: ホタテガイ漁獲量は値のある県が3県しかない、コンブ類漁獲量は値のある県が4県しかない、スルメイカ漁獲量は値のある県が36県に限られ、0の県もある、空港数は2007年のデータで古く、10県は0か所",
       "metricKeys": [
         "total-area-excluding-northern-territories-and-takeshima",
         "agricultural-output",
@@ -67,7 +67,6 @@
         "prefecture"
       ],
       "contentRoles": [
-        "area",
         "blog"
       ],
       "primarySources": [
@@ -119,7 +118,7 @@
         6
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "青森の面積・農業産出額・製造品出荷額等・延べ宿泊者数とサバ・ホタテ・イカの漁獲量は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "resolutionReason": "青森の面積・農業産出額・製造品出荷額等・延べ宿泊者数とサバ・ホタテ・イカの漁獲量は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない。県データブックの共通テンプレートには採用しない: サバ類漁獲量は値のある県が36県に限られる、ホタテガイ漁獲量は値のある県が3県しかない、スルメイカ漁獲量は値のある県が36県に限られ、0の県もある",
       "metricKeys": [
         "total-area-excluding-northern-territories-and-takeshima",
         "agricultural-output",
@@ -134,7 +133,6 @@
         "prefecture"
       ],
       "contentRoles": [
-        "area",
         "blog"
       ],
       "primarySources": [
@@ -252,7 +250,7 @@
         9
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "宮城の面積・農業産出額・製造品出荷額等・延べ宿泊者数と水稲収穫量、海面漁業産出額は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "resolutionReason": "宮城の面積・農業産出額・製造品出荷額等・延べ宿泊者数と水稲収穫量、海面漁業産出額は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない。県データブックの共通テンプレートには採用しない: 海面漁業産出額は内陸県など8県が0で、3県は値が無い",
       "metricKeys": [
         "total-area-excluding-northern-territories-and-takeshima",
         "agricultural-output",
@@ -266,7 +264,6 @@
         "prefecture"
       ],
       "contentRoles": [
-        "area",
         "blog"
       ],
       "primarySources": [
@@ -318,7 +315,7 @@
         11
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "秋田の面積・農業産出額・製造品出荷額等・延べ宿泊者数と水稲収穫量、森林面積割合、老年化指数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "resolutionReason": "秋田の面積・農業産出額・製造品出荷額等・延べ宿泊者数と水稲収穫量、森林面積割合、老年化指数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない。県データブックの共通テンプレートには採用しない: 老年化指数は高齢化率・年少人口割合の既存チャートと同趣旨",
       "metricKeys": [
         "total-area-excluding-northern-territories-and-takeshima",
         "agricultural-output",
@@ -333,7 +330,6 @@
         "prefecture"
       ],
       "contentRoles": [
-        "area",
         "blog"
       ],
       "primarySources": [
@@ -385,7 +381,7 @@
         13
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "山形の面積・農業産出額・製造品出荷額等・延べ宿泊者数と中華麺・さといも・こんにゃくの消費支出額は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "resolutionReason": "山形の面積・農業産出額・製造品出荷額等・延べ宿泊者数と中華麺・さといも・こんにゃくの消費支出額は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない。県データブックの共通テンプレートには採用しない: さといも支出額、こんにゃく支出額は家計調査の個別品目は少額で県庁所在市の標本が小さく、テンプレートには主要品目だけを置く",
       "metricKeys": [
         "total-area-excluding-northern-territories-and-takeshima",
         "agricultural-output",
@@ -400,7 +396,6 @@
         "prefecture"
       ],
       "contentRoles": [
-        "area",
         "blog"
       ],
       "primarySources": [
@@ -452,7 +447,7 @@
         15
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "福島の面積・農業産出額・製造品出荷額等・延べ宿泊者数と清酒の消費支出額、耕地放棄面積は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "resolutionReason": "福島の面積・農業産出額・製造品出荷額等・延べ宿泊者数と清酒の消費支出額、耕地放棄面積は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない。県データブックの共通テンプレートには採用しない: 耕地放棄面積は2014年のデータで古い",
       "metricKeys": [
         "total-area-excluding-northern-territories-and-takeshima",
         "agricultural-output",
@@ -466,7 +461,6 @@
         "prefecture"
       ],
       "contentRoles": [
-        "area",
         "blog"
       ],
       "primarySources": [
@@ -518,7 +512,7 @@
         17
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "茨城の面積・農業産出額・製造品出荷額等・延べ宿泊者数とサバ類の漁獲量、工業専用地域面積比率は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "resolutionReason": "茨城の面積・農業産出額・製造品出荷額等・延べ宿泊者数とサバ類の漁獲量、工業専用地域面積比率は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない。県データブックの共通テンプレートには採用しない: サバ類漁獲量は値のある県が36県に限られる、工業専用地域面積比率は比率の分母が指標定義から確定できない",
       "metricKeys": [
         "total-area-excluding-northern-territories-and-takeshima",
         "agricultural-output",
@@ -532,7 +526,6 @@
         "prefecture"
       ],
       "contentRoles": [
-        "area",
         "blog"
       ],
       "primarySources": [
@@ -584,7 +577,7 @@
         18
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "栃木の面積・農業産出額・製造品出荷額等・延べ宿泊者数といちごの消費支出額、ホテル営業施設数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "resolutionReason": "栃木の面積・農業産出額・製造品出荷額等・延べ宿泊者数といちごの消費支出額、ホテル営業施設数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない。県データブックの共通テンプレートには採用しない: ホテル営業施設数は2017年止まりで古い、いちご支出額は家計調査の個別品目は少額で県庁所在市の標本が小さく、テンプレートには主要品目だけを置く",
       "metricKeys": [
         "total-area-excluding-northern-territories-and-takeshima",
         "agricultural-output",
@@ -598,7 +591,6 @@
         "prefecture"
       ],
       "contentRoles": [
-        "area",
         "blog"
       ],
       "primarySources": [
@@ -650,7 +642,7 @@
         20
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "群馬の面積・農業産出額・製造品出荷額等・延べ宿泊者数とこんにゃくの消費支出額、製造業事業所数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "resolutionReason": "群馬の面積・農業産出額・製造品出荷額等・延べ宿泊者数とこんにゃくの消費支出額、製造業事業所数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない。県データブックの共通テンプレートには採用しない: こんにゃく支出額は家計調査の個別品目は少額で県庁所在市の標本が小さく、テンプレートには主要品目だけを置く",
       "metricKeys": [
         "total-area-excluding-northern-territories-and-takeshima",
         "agricultural-output",
@@ -664,7 +656,6 @@
         "prefecture"
       ],
       "contentRoles": [
-        "area",
         "blog"
       ],
       "primarySources": [
@@ -716,7 +707,7 @@
         22
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "埼玉の面積・農業産出額・製造品出荷額等・延べ宿泊者数とさといもの消費支出額、製造業事業所数、鉄道駅乗降客数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "resolutionReason": "埼玉の面積・農業産出額・製造品出荷額等・延べ宿泊者数とさといもの消費支出額、製造業事業所数、鉄道駅乗降客数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない。県データブックの共通テンプレートには採用しない: 鉄道駅の乗降客数は国土数値情報に登録された駅だけの合計で、県間の網羅性が揃わない、さといも支出額は家計調査の個別品目は少額で県庁所在市の標本が小さく、テンプレートには主要品目だけを置く",
       "metricKeys": [
         "total-area-excluding-northern-territories-and-takeshima",
         "agricultural-output",
@@ -731,7 +722,6 @@
         "prefecture"
       ],
       "contentRoles": [
-        "area",
         "blog"
       ],
       "primarySources": [
@@ -783,7 +773,7 @@
         24
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "千葉の面積・農業産出額・製造品出荷額等・延べ宿泊者数と輸入貨物量、工業用水量、空港数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "resolutionReason": "千葉の面積・農業産出額・製造品出荷額等・延べ宿泊者数と輸入貨物量、工業用水量、空港数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない。県データブックの共通テンプレートには採用しない: 輸入貨物量は港のない県があり、39県にしか値が無い、工業用水量は2015年のデータで古い、空港数は2007年のデータで古く、10県は0か所",
       "metricKeys": [
         "total-area-excluding-northern-territories-and-takeshima",
         "agricultural-output",
@@ -798,7 +788,6 @@
         "prefecture"
       ],
       "contentRoles": [
-        "area",
         "blog"
       ],
       "primarySources": [
@@ -850,7 +839,7 @@
         26
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "東京の面積・農業産出額・製造品出荷額等・延べ宿泊者数と県内総生産額、鉄道駅乗降客数、外国人延べ宿泊者数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "resolutionReason": "東京の面積・農業産出額・製造品出荷額等・延べ宿泊者数と県内総生産額、鉄道駅乗降客数、外国人延べ宿泊者数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない。県データブックの共通テンプレートには採用しない: 鉄道駅の乗降客数は国土数値情報に登録された駅だけの合計で、県間の網羅性が揃わない",
       "metricKeys": [
         "total-area-excluding-northern-territories-and-takeshima",
         "agricultural-output",
@@ -865,7 +854,6 @@
         "prefecture"
       ],
       "contentRoles": [
-        "area",
         "blog"
       ],
       "primarySources": [
@@ -917,7 +905,7 @@
         28
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "神奈川の面積・農業産出額・製造品出荷額等・延べ宿泊者数と輸出貨物量・輸入貨物量は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "resolutionReason": "神奈川の面積・農業産出額・製造品出荷額等・延べ宿泊者数と輸出貨物量・輸入貨物量は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない。県データブックの共通テンプレートには採用しない: 輸出貨物量は港のない県があり、39県にしか値が無い、輸入貨物量は港のない県があり、39県にしか値が無い",
       "metricKeys": [
         "total-area-excluding-northern-territories-and-takeshima",
         "agricultural-output",
@@ -931,7 +919,6 @@
         "prefecture"
       ],
       "contentRoles": [
-        "area",
         "blog"
       ],
       "primarySources": [
@@ -983,7 +970,7 @@
         30
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "新潟の面積・農業産出額・製造品出荷額等・延べ宿泊者数と水稲収穫量・作付面積、清酒の消費支出額は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "resolutionReason": "新潟の面積・農業産出額・製造品出荷額等・延べ宿泊者数と水稲収穫量・作付面積、清酒の消費支出額は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない。県データブックの共通テンプレートには採用しない: 水稲作付面積は2019年のデータで、コメ収穫量の既存指標と同趣旨",
       "metricKeys": [
         "total-area-excluding-northern-territories-and-takeshima",
         "agricultural-output",
@@ -998,7 +985,6 @@
         "prefecture"
       ],
       "contentRoles": [
-        "area",
         "blog"
       ],
       "primarySources": [
@@ -1050,7 +1036,7 @@
         32
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "富山の面積・農業産出額・製造品出荷額等・延べ宿泊者数と医薬品販売業数、水稲収穫量は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "resolutionReason": "富山の面積・農業産出額・製造品出荷額等・延べ宿泊者数と医薬品販売業数、水稲収穫量は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない。県データブックの共通テンプレートには採用しない: 医薬品販売業数は医師・病院・診療所の既存指標と同趣旨",
       "metricKeys": [
         "total-area-excluding-northern-territories-and-takeshima",
         "agricultural-output",
@@ -1064,7 +1050,6 @@
         "prefecture"
       ],
       "contentRoles": [
-        "area",
         "blog"
       ],
       "primarySources": [
@@ -1116,7 +1101,7 @@
         34
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "石川の面積・農業産出額・製造品出荷額等・延べ宿泊者数と都道府県指定等文化財件数、ホテル営業施設数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "resolutionReason": "石川の面積・農業産出額・製造品出荷額等・延べ宿泊者数と都道府県指定等文化財件数、ホテル営業施設数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない。県データブックの共通テンプレートには採用しない: 都道府県指定等文化財件数は国指定・市区町村指定を含まず、文化財の豊かさを表さない、ホテル営業施設数は2017年止まりで古い",
       "metricKeys": [
         "total-area-excluding-northern-territories-and-takeshima",
         "agricultural-output",
@@ -1130,7 +1115,6 @@
         "prefecture"
       ],
       "contentRoles": [
-        "area",
         "blog"
       ],
       "primarySources": [
@@ -1182,7 +1166,7 @@
         36
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "福井の面積・農業産出額・製造品出荷額等・延べ宿泊者数と水稲10a当たり収量、ホテル営業施設数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "resolutionReason": "福井の面積・農業産出額・製造品出荷額等・延べ宿泊者数と水稲10a当たり収量、ホテル営業施設数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない。県データブックの共通テンプレートには採用しない: 水稲10a当たり収量は2019年のデータで、コメ収穫量の既存指標と同趣旨、ホテル営業施設数は2017年止まりで古い",
       "metricKeys": [
         "total-area-excluding-northern-territories-and-takeshima",
         "agricultural-output",
@@ -1196,7 +1180,6 @@
         "prefecture"
       ],
       "contentRoles": [
-        "area",
         "blog"
       ],
       "primarySources": [
@@ -1248,7 +1231,7 @@
         38
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "山梨の面積・農業産出額・製造品出荷額等・延べ宿泊者数とぶどう・ワインの消費支出額は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "resolutionReason": "山梨の面積・農業産出額・製造品出荷額等・延べ宿泊者数とぶどう・ワインの消費支出額は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない。県データブックの共通テンプレートには採用しない: ぶどう支出額、ワイン支出額は家計調査の個別品目は少額で県庁所在市の標本が小さく、テンプレートには主要品目だけを置く",
       "metricKeys": [
         "total-area-excluding-northern-territories-and-takeshima",
         "agricultural-output",
@@ -1262,7 +1245,6 @@
         "prefecture"
       ],
       "contentRoles": [
-        "area",
         "blog"
       ],
       "primarySources": [
@@ -1314,7 +1296,7 @@
         40
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "長野の面積・農業産出額・製造品出荷額等・延べ宿泊者数と温泉・銭湯入浴料とレタスの消費支出額は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "resolutionReason": "長野の面積・農業産出額・製造品出荷額等・延べ宿泊者数と温泉・銭湯入浴料とレタスの消費支出額は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない。県データブックの共通テンプレートには採用しない: 温泉・銭湯入浴料支出額、レタス支出額は家計調査の個別品目は少額で県庁所在市の標本が小さく、テンプレートには主要品目だけを置く",
       "metricKeys": [
         "total-area-excluding-northern-territories-and-takeshima",
         "agricultural-output",
@@ -1328,7 +1310,6 @@
         "prefecture"
       ],
       "contentRoles": [
-        "area",
         "blog"
       ],
       "primarySources": [
@@ -1380,7 +1361,7 @@
         42
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "岐阜の面積・農業産出額・製造品出荷額等・延べ宿泊者数と森林面積割合、肉用牛飼養頭数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "resolutionReason": "岐阜の面積・農業産出額・製造品出荷額等・延べ宿泊者数と森林面積割合、肉用牛飼養頭数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない。県データブックの共通テンプレートには採用しない: 肉用牛飼養頭数はR2の観測値に順位が無く、県データブックで値を出せない",
       "metricKeys": [
         "total-area-excluding-northern-territories-and-takeshima",
         "agricultural-output",
@@ -1394,7 +1375,6 @@
         "prefecture"
       ],
       "contentRoles": [
-        "area",
         "blog"
       ],
       "primarySources": [
@@ -1446,7 +1426,7 @@
         44
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "静岡の面積・農業産出額・製造品出荷額等・延べ宿泊者数と緑茶の消費支出額、カツオ漁獲量、楽器の消費支出額は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "resolutionReason": "静岡の面積・農業産出額・製造品出荷額等・延べ宿泊者数と緑茶の消費支出額、カツオ漁獲量、楽器の消費支出額は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない。県データブックの共通テンプレートには採用しない: カツオ漁獲量は値のある県が30県に限られ、0の県もある、楽器支出額は家計調査の個別品目は少額で県庁所在市の標本が小さく、テンプレートには主要品目だけを置く",
       "metricKeys": [
         "total-area-excluding-northern-territories-and-takeshima",
         "agricultural-output",
@@ -1461,7 +1441,6 @@
         "prefecture"
       ],
       "contentRoles": [
-        "area",
         "blog"
       ],
       "primarySources": [
@@ -1513,7 +1492,7 @@
         46
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "愛知の面積・農業産出額・製造品出荷額等・延べ宿泊者数と製造業従業者数、輸出貨物量、製造業付加価値額は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "resolutionReason": "愛知の面積・農業産出額・製造品出荷額等・延べ宿泊者数と製造業従業者数、輸出貨物量、製造業付加価値額は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない。県データブックの共通テンプレートには採用しない: 製造業従業者数は製造業事業所数・出荷額の既存指標と同趣旨、輸出貨物量は港のない県があり、39県にしか値が無い",
       "metricKeys": [
         "total-area-excluding-northern-territories-and-takeshima",
         "agricultural-output",
@@ -1528,7 +1507,6 @@
         "prefecture"
       ],
       "contentRoles": [
-        "area",
         "blog"
       ],
       "primarySources": [
@@ -1580,7 +1558,7 @@
         49
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "三重の面積・農業産出額・製造品出荷額等・延べ宿泊者数とホテル営業施設数、製造業従業者数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "resolutionReason": "三重の面積・農業産出額・製造品出荷額等・延べ宿泊者数とホテル営業施設数、製造業従業者数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない。県データブックの共通テンプレートには採用しない: ホテル営業施設数は2017年止まりで古い、製造業従業者数は製造業事業所数・出荷額の既存指標と同趣旨",
       "metricKeys": [
         "total-area-excluding-northern-territories-and-takeshima",
         "agricultural-output",
@@ -1594,7 +1572,6 @@
         "prefecture"
       ],
       "contentRoles": [
-        "area",
         "blog"
       ],
       "primarySources": [
@@ -1646,7 +1623,7 @@
         51
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "滋賀の面積・農業産出額・製造品出荷額等・延べ宿泊者数と自然公園面積割合、都道府県立自然公園面積は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "resolutionReason": "滋賀の面積・農業産出額・製造品出荷額等・延べ宿泊者数と自然公園面積割合、都道府県立自然公園面積は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない。県データブックの共通テンプレートには採用しない: 都道府県立自然公園面積は県立の公園だけで群馬県は0、自然公園面積割合で足りる",
       "metricKeys": [
         "total-area-excluding-northern-territories-and-takeshima",
         "agricultural-output",
@@ -1660,7 +1637,6 @@
         "prefecture"
       ],
       "contentRoles": [
-        "area",
         "blog"
       ],
       "primarySources": [
@@ -1712,7 +1688,7 @@
         53
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "京都の面積・農業産出額・製造品出荷額等・延べ宿泊者数と海外観光旅行の行動者率、延べ宿泊者数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "resolutionReason": "京都の面積・農業産出額・製造品出荷額等・延べ宿泊者数と海外観光旅行の行動者率、延べ宿泊者数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない。県データブックの共通テンプレートには採用しない: 海外観光旅行の行動者率は2021年はコロナ禍で0.1〜0.7%に落ちた年のデータ",
       "metricKeys": [
         "total-area-excluding-northern-territories-and-takeshima",
         "agricultural-output",
@@ -1726,7 +1702,6 @@
         "prefecture"
       ],
       "contentRoles": [
-        "area",
         "blog"
       ],
       "primarySources": [
@@ -1778,7 +1753,7 @@
         55
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "大阪の面積・農業産出額・製造品出荷額等・延べ宿泊者数と県内総生産額、製造業事業所数、コンビニ店舗数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "resolutionReason": "大阪の面積・農業産出額・製造品出荷額等・延べ宿泊者数と県内総生産額、製造業事業所数、コンビニ店舗数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない。県データブックの共通テンプレートには採用しない: コンビニエンスストア数は2014年のデータで古い",
       "metricKeys": [
         "total-area-excluding-northern-territories-and-takeshima",
         "agricultural-output",
@@ -1793,7 +1768,6 @@
         "prefecture"
       ],
       "contentRoles": [
-        "area",
         "blog"
       ],
       "primarySources": [
@@ -1845,7 +1819,7 @@
         57
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "兵庫の面積・農業産出額・製造品出荷額等・延べ宿泊者数と牛肉の消費量、入港船舶隻数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "resolutionReason": "兵庫の面積・農業産出額・製造品出荷額等・延べ宿泊者数と牛肉の消費量、入港船舶隻数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない。県データブックの共通テンプレートには採用しない: 入港船舶隻数は港のない県があり、40県にしか値が無い",
       "metricKeys": [
         "total-area-excluding-northern-territories-and-takeshima",
         "agricultural-output",
@@ -1859,7 +1833,6 @@
         "prefecture"
       ],
       "contentRoles": [
-        "area",
         "blog"
       ],
       "primarySources": [
@@ -1911,7 +1884,7 @@
         59
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "奈良の面積・農業産出額・製造品出荷額等・延べ宿泊者数とホテル営業施設数、都道府県指定等文化財件数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "resolutionReason": "奈良の面積・農業産出額・製造品出荷額等・延べ宿泊者数とホテル営業施設数、都道府県指定等文化財件数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない。県データブックの共通テンプレートには採用しない: ホテル営業施設数は2017年止まりで古い、都道府県指定等文化財件数は国指定・市区町村指定を含まず、文化財の豊かさを表さない",
       "metricKeys": [
         "total-area-excluding-northern-territories-and-takeshima",
         "agricultural-output",
@@ -1925,7 +1898,6 @@
         "prefecture"
       ],
       "contentRoles": [
-        "area",
         "blog"
       ],
       "primarySources": [
@@ -1977,7 +1949,7 @@
         62
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "和歌山の面積・農業産出額・製造品出荷額等・延べ宿泊者数とみかん・梅干しの消費支出額は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "resolutionReason": "和歌山の面積・農業産出額・製造品出荷額等・延べ宿泊者数とみかん・梅干しの消費支出額は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない。県データブックの共通テンプレートには採用しない: みかん支出額、梅干し支出額は家計調査の個別品目は少額で県庁所在市の標本が小さく、テンプレートには主要品目だけを置く",
       "metricKeys": [
         "total-area-excluding-northern-territories-and-takeshima",
         "agricultural-output",
@@ -1991,7 +1963,6 @@
         "prefecture"
       ],
       "contentRoles": [
-        "area",
         "blog"
       ],
       "primarySources": [
@@ -2043,7 +2014,7 @@
         64
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "鳥取の面積・農業産出額・製造品出荷額等・延べ宿泊者数とホテル営業施設数、自然公園面積割合は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "resolutionReason": "鳥取の面積・農業産出額・製造品出荷額等・延べ宿泊者数とホテル営業施設数、自然公園面積割合は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない。県データブックの共通テンプレートには採用しない: ホテル営業施設数は2017年止まりで古い",
       "metricKeys": [
         "total-area-excluding-northern-territories-and-takeshima",
         "agricultural-output",
@@ -2057,7 +2028,6 @@
         "prefecture"
       ],
       "contentRoles": [
-        "area",
         "blog"
       ],
       "primarySources": [
@@ -2109,7 +2079,7 @@
         66
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "島根の面積・農業産出額・製造品出荷額等・延べ宿泊者数とホテル営業施設数、都道府県指定等文化財件数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "resolutionReason": "島根の面積・農業産出額・製造品出荷額等・延べ宿泊者数とホテル営業施設数、都道府県指定等文化財件数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない。県データブックの共通テンプレートには採用しない: ホテル営業施設数は2017年止まりで古い、都道府県指定等文化財件数は国指定・市区町村指定を含まず、文化財の豊かさを表さない",
       "metricKeys": [
         "total-area-excluding-northern-territories-and-takeshima",
         "agricultural-output",
@@ -2123,7 +2093,6 @@
         "prefecture"
       ],
       "contentRoles": [
-        "area",
         "blog"
       ],
       "primarySources": [
@@ -2175,7 +2144,7 @@
         68
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "岡山の面積・農業産出額・製造品出荷額等・延べ宿泊者数と年間快晴日数、事業所当たり製造品出荷額等は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "resolutionReason": "岡山の面積・農業産出額・製造品出荷額等・延べ宿泊者数と年間快晴日数、事業所当たり製造品出荷額等は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない。県データブックの共通テンプレートには採用しない: 年間快晴日数は値のある県が11県しかない、1事業所当たり製造品出荷額等は従業者1人当たり出荷額と同趣旨",
       "metricKeys": [
         "total-area-excluding-northern-territories-and-takeshima",
         "agricultural-output",
@@ -2189,7 +2158,6 @@
         "prefecture"
       ],
       "contentRoles": [
-        "area",
         "blog"
       ],
       "primarySources": [
@@ -2241,7 +2209,7 @@
         70
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "広島の面積・農業産出額・製造品出荷額等・延べ宿泊者数とかき(貝)の消費支出額、入港船舶隻数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "resolutionReason": "広島の面積・農業産出額・製造品出荷額等・延べ宿泊者数とかき(貝)の消費支出額、入港船舶隻数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない。県データブックの共通テンプレートには採用しない: 入港船舶隻数は港のない県があり、40県にしか値が無い、かき(貝)支出額は家計調査の個別品目は少額で県庁所在市の標本が小さく、テンプレートには主要品目だけを置く",
       "metricKeys": [
         "total-area-excluding-northern-territories-and-takeshima",
         "agricultural-output",
@@ -2255,7 +2223,6 @@
         "prefecture"
       ],
       "contentRoles": [
-        "area",
         "blog"
       ],
       "primarySources": [
@@ -2307,7 +2274,7 @@
         72
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "山口の面積・農業産出額・製造品出荷額等・延べ宿泊者数と海面漁業産出額、事業所当たり製造品出荷額等は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "resolutionReason": "山口の面積・農業産出額・製造品出荷額等・延べ宿泊者数と海面漁業産出額、事業所当たり製造品出荷額等は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない。県データブックの共通テンプレートには採用しない: 海面漁業産出額は内陸県など8県が0で、3県は値が無い、1事業所当たり製造品出荷額等は従業者1人当たり出荷額と同趣旨",
       "metricKeys": [
         "total-area-excluding-northern-territories-and-takeshima",
         "agricultural-output",
@@ -2321,7 +2288,6 @@
         "prefecture"
       ],
       "contentRoles": [
-        "area",
         "blog"
       ],
       "primarySources": [
@@ -2373,7 +2339,7 @@
         74
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "徳島の面積・農業産出額・製造品出荷額等・延べ宿泊者数と森林面積割合、ホテル営業施設数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "resolutionReason": "徳島の面積・農業産出額・製造品出荷額等・延べ宿泊者数と森林面積割合、ホテル営業施設数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない。県データブックの共通テンプレートには採用しない: ホテル営業施設数は2017年止まりで古い",
       "metricKeys": [
         "total-area-excluding-northern-territories-and-takeshima",
         "agricultural-output",
@@ -2387,7 +2353,6 @@
         "prefecture"
       ],
       "contentRoles": [
-        "area",
         "blog"
       ],
       "primarySources": [
@@ -2439,7 +2404,7 @@
         76
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "香川の面積・農業産出額・製造品出荷額等・延べ宿泊者数と生・乾うどんそばの消費支出額は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "resolutionReason": "香川の面積・農業産出額・製造品出荷額等・延べ宿泊者数と生・乾うどんそばの消費支出額は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない。県データブックの共通テンプレートには採用しない: 乾うどん・そば支出額は生うどん・そばの既存指標と同趣旨",
       "metricKeys": [
         "total-area-excluding-northern-territories-and-takeshima",
         "agricultural-output",
@@ -2453,7 +2418,6 @@
         "prefecture"
       ],
       "contentRoles": [
-        "area",
         "blog"
       ],
       "primarySources": [
@@ -2505,7 +2469,7 @@
         78
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "愛媛の面積・農業産出額・製造品出荷額等・延べ宿泊者数とホテル営業施設数、みかんの消費支出額は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "resolutionReason": "愛媛の面積・農業産出額・製造品出荷額等・延べ宿泊者数とホテル営業施設数、みかんの消費支出額は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない。県データブックの共通テンプレートには採用しない: ホテル営業施設数は2017年止まりで古い、みかん支出額は家計調査の個別品目は少額で県庁所在市の標本が小さく、テンプレートには主要品目だけを置く",
       "metricKeys": [
         "total-area-excluding-northern-territories-and-takeshima",
         "agricultural-output",
@@ -2519,7 +2483,6 @@
         "prefecture"
       ],
       "contentRoles": [
-        "area",
         "blog"
       ],
       "primarySources": [
@@ -2571,7 +2534,7 @@
         80
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "高知の面積・農業産出額・製造品出荷額等・延べ宿泊者数とカツオ漁獲量、森林面積割合、都道府県立自然公園数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "resolutionReason": "高知の面積・農業産出額・製造品出荷額等・延べ宿泊者数とカツオ漁獲量、森林面積割合、都道府県立自然公園数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない。県データブックの共通テンプレートには採用しない: カツオ漁獲量は値のある県が30県に限られ、0の県もある、都道府県立自然公園数は県立の公園だけで群馬県は0、自然公園面積割合で足りる",
       "metricKeys": [
         "total-area-excluding-northern-territories-and-takeshima",
         "agricultural-output",
@@ -2586,7 +2549,6 @@
         "prefecture"
       ],
       "contentRoles": [
-        "area",
         "blog"
       ],
       "primarySources": [
@@ -2638,7 +2600,7 @@
         83
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "福岡の面積・農業産出額・製造品出荷額等・延べ宿泊者数と空港数、事業所当たり製造品出荷額等、県内総生産額は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "resolutionReason": "福岡の面積・農業産出額・製造品出荷額等・延べ宿泊者数と空港数、事業所当たり製造品出荷額等、県内総生産額は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない。県データブックの共通テンプレートには採用しない: 空港数は2007年のデータで古く、10県は0か所、1事業所当たり製造品出荷額等は従業者1人当たり出荷額と同趣旨",
       "metricKeys": [
         "total-area-excluding-northern-territories-and-takeshima",
         "agricultural-output",
@@ -2653,7 +2615,6 @@
         "prefecture"
       ],
       "contentRoles": [
-        "area",
         "blog"
       ],
       "primarySources": [
@@ -2705,7 +2666,7 @@
         85
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "佐賀の面積・農業産出額・製造品出荷額等・延べ宿泊者数とホテル営業施設数、海面漁業産出額は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "resolutionReason": "佐賀の面積・農業産出額・製造品出荷額等・延べ宿泊者数とホテル営業施設数、海面漁業産出額は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない。県データブックの共通テンプレートには採用しない: ホテル営業施設数は2017年止まりで古い、海面漁業産出額は内陸県など8県が0で、3県は値が無い",
       "metricKeys": [
         "total-area-excluding-northern-territories-and-takeshima",
         "agricultural-output",
@@ -2719,7 +2680,6 @@
         "prefecture"
       ],
       "contentRoles": [
-        "area",
         "blog"
       ],
       "primarySources": [
@@ -2771,7 +2731,7 @@
         87
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "長崎の面積・農業産出額・製造品出荷額等・延べ宿泊者数と海面漁業漁獲量、漁業産出額、空港数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "resolutionReason": "長崎の面積・農業産出額・製造品出荷額等・延べ宿泊者数と海面漁業漁獲量、漁業産出額、空港数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない。県データブックの共通テンプレートには採用しない: 漁業産出額は2016年止まりで、内陸県など8県が0、空港数は2007年のデータで古く、10県は0か所",
       "metricKeys": [
         "total-area-excluding-northern-territories-and-takeshima",
         "agricultural-output",
@@ -2786,7 +2746,6 @@
         "prefecture"
       ],
       "contentRoles": [
-        "area",
         "blog"
       ],
       "primarySources": [
@@ -2838,7 +2797,7 @@
         89
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "熊本の面積・農業産出額・製造品出荷額等・延べ宿泊者数と鶏肉・飲酒代の消費支出額は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "resolutionReason": "熊本の面積・農業産出額・製造品出荷額等・延べ宿泊者数と鶏肉・飲酒代の消費支出額は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない。県データブックの共通テンプレートには採用しない: 飲酒代支出額は家計調査の個別品目は少額で県庁所在市の標本が小さく、テンプレートには主要品目だけを置く",
       "metricKeys": [
         "total-area-excluding-northern-territories-and-takeshima",
         "agricultural-output",
@@ -2852,7 +2811,6 @@
         "prefecture"
       ],
       "contentRoles": [
-        "area",
         "blog"
       ],
       "primarySources": [
@@ -2904,7 +2862,7 @@
         91
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "大分の面積・農業産出額・製造品出荷額等・延べ宿泊者数と温泉・銭湯入浴料の消費支出額、従業者当たり製造品出荷額等は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "resolutionReason": "大分の面積・農業産出額・製造品出荷額等・延べ宿泊者数と温泉・銭湯入浴料の消費支出額、従業者当たり製造品出荷額等は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない。県データブックの共通テンプレートには採用しない: 温泉・銭湯入浴料支出額は家計調査の個別品目は少額で県庁所在市の標本が小さく、テンプレートには主要品目だけを置く",
       "metricKeys": [
         "total-area-excluding-northern-territories-and-takeshima",
         "agricultural-output",
@@ -2918,7 +2876,6 @@
         "prefecture"
       ],
       "contentRoles": [
-        "area",
         "blog"
       ],
       "primarySources": [
@@ -2970,7 +2927,7 @@
         94
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "宮崎の面積・農業産出額・製造品出荷額等・延べ宿泊者数と肉用牛・豚・採卵鶏の飼養頭数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "resolutionReason": "宮崎の面積・農業産出額・製造品出荷額等・延べ宿泊者数と肉用牛・豚・採卵鶏の飼養頭数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない。県データブックの共通テンプレートには採用しない: 肉用牛飼養頭数はR2の観測値に順位が無く、県データブックで値を出せない、豚飼養頭数はR2の観測値に順位が無く、県データブックで値を出せない、採卵鶏の成鶏めす飼養羽数はR2の観測値に順位が無く、畜種を並べすぎにもなる",
       "metricKeys": [
         "total-area-excluding-northern-territories-and-takeshima",
         "agricultural-output",
@@ -2985,7 +2942,6 @@
         "prefecture"
       ],
       "contentRoles": [
-        "area",
         "blog"
       ],
       "primarySources": [
@@ -3037,7 +2993,7 @@
         96
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "鹿児島の面積・農業産出額・製造品出荷額等・延べ宿泊者数と豚・肉用牛の飼養頭数、年間快晴日数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "resolutionReason": "鹿児島の面積・農業産出額・製造品出荷額等・延べ宿泊者数と豚・肉用牛の飼養頭数、年間快晴日数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない。県データブックの共通テンプレートには採用しない: 豚飼養頭数はR2の観測値に順位が無く、県データブックで値を出せない、肉用牛飼養頭数はR2の観測値に順位が無く、県データブックで値を出せない、年間快晴日数は値のある県が11県しかない",
       "metricKeys": [
         "total-area-excluding-northern-territories-and-takeshima",
         "agricultural-output",
@@ -3052,7 +3008,6 @@
         "prefecture"
       ],
       "contentRoles": [
-        "area",
         "blog"
       ],
       "primarySources": [
@@ -3104,7 +3059,7 @@
         98
       ],
       "resolution": "combined-analysis",
-      "resolutionReason": "沖縄の面積・農業産出額・製造品出荷額等・延べ宿泊者数と外国人延べ宿泊者数、空港数、ホテル営業施設数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない",
+      "resolutionReason": "沖縄の面積・農業産出額・製造品出荷額等・延べ宿泊者数と外国人延べ宿泊者数、空港数、ホテル営業施設数は既存metricで他県比較ができる。名産・祭り・歴史・シンボルの記述は書籍の解説文であり、area-databook-standards の一次資料確認を経るまで検証済みとして扱わない。県データブックの共通テンプレートには採用しない: 空港数は2007年のデータで古く、10県は0か所、ホテル営業施設数は2017年止まりで古い",
       "metricKeys": [
         "total-area-excluding-northern-territories-and-takeshima",
         "agricultural-output",
@@ -3119,7 +3074,6 @@
         "prefecture"
       ],
       "contentRoles": [
-        "area",
         "blog"
       ],
       "primarySources": [

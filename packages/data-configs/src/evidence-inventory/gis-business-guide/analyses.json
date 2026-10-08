@@ -1029,9 +1029,11 @@
         124,
         125
       ],
-      "resolution": "new-metric",
-      "resolutionReason": "国土数値情報の標高・傾斜度3次メッシュ(最新は2011年度版)と1kmメッシュ将来推計人口(2020年基準)で、標高の低いメッシュに住む人口割合を県別に再計算できる。ただし標高メッシュは約1km単位の平均・最低標高で、海抜の低い狭い土地の厳密な判定には粗く、相対比較に限る",
-      "metricKeys": [],
+      "resolution": "reuse-existing-metric",
+      "resolutionReason": "国土数値情報の標高・傾斜度3次メッシュ(最新は2011年度版)と1kmメッシュ将来推計人口(2020年基準)で、標高の低いメッシュに住む人口割合を県別に再計算できる。ただし標高メッシュは約1km単位の平均・最低標高で、海抜の低い狭い土地の厳密な判定には粗く、相対比較に限る (2026-10-08 metric 化)",
+      "metricKeys": [
+        "low-elevation-population-ratio-5m"
+      ],
       "surveyIds": [],
       "geoScopes": [
         "prefecture-set"
@@ -1068,7 +1070,7 @@
           "rights": "allowed"
         }
       ],
-      "nextAction": "標高メッシュと人口メッシュを重ねる決定的な空間演算の手順と、メッシュ平均標高の限界を整理して geo-analysis-curator に渡す。入力の版・SHA・保存則を満たしたうえで、順位ではなく県別の人口構成として公開する案を検討する"
+      "nextAction": "県別の途中成果物と保存則は .local/r2/app/geo/population-low-elevation に生成済み(47県・国勢調査2020人口と整数一致)。残りは Geo 分析定義(GEO_ANALYSES)への登録、標高の原典表示(承認番号付き文言)の掲載、R2反映。順位ではなく0・5・10m の県別人口構成として公開する"
     },
     {
       "id": "gis-business-guide-2022-a34",
@@ -1345,9 +1347,11 @@
         213,
         214
       ],
-      "resolution": "new-metric",
-      "resolutionReason": "デジタル庁が取組済みの都道府県・市区町村の一覧(Excel・CSV)を公開しており、都道府県ごとの取組済み市区町村の割合を再計算できる。書籍が示す全体の取組割合の年次は本書時点のもので、現時点の値とは別。分母の市区町村数は総務省の公式一覧で確認が要り、一覧ページ自体に個別の利用条件の記載は無いが、サイト全体にはデジタル庁の利用規約(公共データ利用規約第1.0版)が適用される",
-      "metricKeys": [],
+      "resolution": "reuse-existing-metric",
+      "resolutionReason": "デジタル庁「オープンデータ取組済自治体一覧」全団体リスト(CSV・令和8年6月30日時点)の県別の取組済み市区町村数を、既存metric municipality-count(2024年度)の市区町村総数で割った割合をmetric化した(取組済み1,617団体と分母1,788が公表資料と一致)。出典表記と加工の旨は公共データ利用規約第1.0版に従い表示する。書籍が示す全体の取組割合は本書時点の値で、現時点とは別。 (2026-10-08 metric 化)",
+      "metricKeys": [
+        "opendata-adoption-rate-municipalities"
+      ],
       "surveyIds": [],
       "geoScopes": [
         "prefecture-set"
@@ -1369,7 +1373,7 @@
           "rights": "allowed"
         }
       ],
-      "nextAction": "取組済み一覧と市区町村の総数から都道府県別の取組割合を算出する設計を data-ingester に渡す。出典表記と加工の旨の表示(公共データ利用規約第1.0版)を表示に含める。open-data-curator の自治体標準オープンデータセットの項目との重複も確認する"
+      "nextAction": "R2 反映(diff-push-r2)と ranking-items / ranking-values の再生成を経て公開する。open-data-curator の自治体標準オープンデータセットの項目との重複を確認する。"
     },
     {
       "id": "gis-business-guide-2022-a46",

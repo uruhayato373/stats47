@@ -121,8 +121,8 @@
         10,
         29
       ],
-      "resolution": "rights-hold",
-      "resolutionReason": "利用条件が未確認(中体連サイトに利用規約の明文なし)のため rights-hold。既存metricは出典明記のうえオーナー承認済みで運用中で、新規の公開展開は条件確認後。日本中学校体育連盟の加盟生徒数を分子とする種目別の既存metricが全種目分そろっている。最新年度は書籍と異なる。書籍のテニスは軟式か硬式か紙面から確定できず、既存はソフトテニスなので対応は要確認。",
+      "resolution": "reuse-existing-metric",
+      "resolutionReason": "一次統計を踏まえ、教材の論点を参考に独自コンテンツとして展開する (2026-10-08 オーナー判断)。日本中学校体育連盟の加盟生徒数を分子とする種目別の既存metric10本(junior-high-club-per100-*)が書籍の10種目に対応しており、新規metricは作らず既存を使う。中体連サイトの利用規約の明文は無く、出典明記のうえ運用する。最新年度は書籍と異なる。書籍の「テニス」が軟式か硬式かは紙面から確定できず、既存はソフトテニスなので対応は要確認。 (2026-10-08 metric 化)",
       "metricKeys": [
         "junior-high-club-per100-soccer",
         "junior-high-club-per100-swimming",
@@ -160,10 +160,10 @@
             "2025"
           ],
           "checkedAt": "2026-10-08",
-          "rights": "needs-review"
+          "rights": "allowed"
         }
       ],
-      "nextAction": "既存の種目別metricの値を最新年で確認し、書籍のテニス項目がソフトテニスに当たるかを紙面と中体連集計で照合したうえで、地域差の傾向を blog/theme の文脈補強に使うか判断する"
+      "nextAction": "書籍の「テニス」がソフトテニスに当たるかを紙面と中体連集計で照合したうえで、地域差の傾向を blog/theme の文脈補強に使うか判断する。"
     },
     {
       "id": "prefecture-ranking-consumption-2020-a08",
@@ -174,8 +174,8 @@
         30,
         31
       ],
-      "resolution": "rights-hold",
-      "resolutionReason": "国立教育政策研究所の利用条件を未確認のため rights-hold。出典表記は全国学力・学習状況調査。国立教育政策研究所が都道府県別の質問紙結果を公表しており、運動部参加率に当たる設問が現行調査に継続しているかは未確認のため、metric化の前に設問の実在を確認する。既存の中体連部員比率は分母と分子が別定義で代用できない。",
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "一次統計を踏まえ、教材の論点を参考に独自コンテンツとして展開する (2026-10-08 オーナー判断)。ただし令和7年度の全国学力・学習状況調査の中学校質問紙(質問番号(1)〜(70)・都道府県別公表の回答結果集計[生徒質問調査]xlsx)に、部活動・運動部への参加を問う設問が無いことを確認した(質問文を全件読み、「部活」「運動」「スポーツ」を含むのは(26)地域の大人との関わりのみ。質問紙は全県共通)。過去年度の都道府県別質問紙はnier.go.jp上では公開されておらず国立国会図書館WARPのアーカイブ(一次資料の保存形)に限られるため、運動部参加率は47県分を一次資料から再取得できない。中体連の部員比率(junior-high-club-per100-*)は分母と分子の定義が別で代用できない。",
       "metricKeys": [],
       "surveyIds": [
         "academic-achievement-survey"
@@ -201,10 +201,10 @@
             "2025"
           ],
           "checkedAt": "2026-10-08",
-          "rights": "needs-review"
+          "rights": "allowed"
         }
       ],
-      "nextAction": "国立教育政策研究所の都道府県別質問紙結果で部活動の参加設問と運動部への所属を区別できる項目があるか確認し、あれば最新年の47県値を取得する"
+      "nextAction": "対応不要。過去年度の質問紙が必要になった場合のみ、NDL WARP上のnier.go.jp保存版で設問の実在とファイル形式を確認する。"
     },
     {
       "id": "prefecture-ranking-consumption-2020-a09",
@@ -215,9 +215,11 @@
         32,
         33
       ],
-      "resolution": "rights-hold",
-      "resolutionReason": "全国高体連の利用条件を未確認のため rights-hold。全国高体連の統計資料ページに競技別・都道府県別の加盟登録人数のPDFが毎年公開されており、ラグビーフットボールの列があることをPDFで確認した。分母となる高校男子生徒数は学校基本調査で取れる。利用規約の明文は未確認のため rights は needs-review。",
-      "metricKeys": [],
+      "resolution": "reuse-existing-metric",
+      "resolutionReason": "一次統計を踏まえ、教材の論点を参考に独自コンテンツとして展開する (2026-10-08 オーナー判断)。全国高体連「令和7年度 加盟・登録状況」(令和7年10月現在)の男子ラグビー人数(47県合算が公表の合計行と36列すべて一致)を、学校基本調査 令和7年度の高校男子生徒数(全日制+定時制・本科)で100人あたりに換算してmetric化した。高体連の利用規約の明文は確認できず出典明記で運用する。登録人数に通信制の男子が含まれる場合は分子だけに入るため値はわずかに大きく出る。 (2026-10-08 metric 化)",
+      "metricKeys": [
+        "high-school-club-per100-rugby-male"
+      ],
       "surveyIds": [
         "school-basic-survey"
       ],
@@ -242,10 +244,10 @@
             "2025"
           ],
           "checkedAt": "2026-10-08",
-          "rights": "needs-review"
+          "rights": "allowed"
         }
       ],
-      "nextAction": "最新年度のPDFからラグビーの男子部員数を47県分抽出し、学校基本調査の高校男子生徒数で100人あたりに換算する手順と利用条件を整理する(中体連と同様の抽出スクリプトを参考にする)"
+      "nextAction": "R2 反映(diff-push-r2)と ranking-items / ranking-values の再生成を経て公開する。"
     },
     {
       "id": "prefecture-ranking-consumption-2020-a10",
@@ -302,8 +304,8 @@
         40,
         41
       ],
-      "resolution": "new-metric",
-      "resolutionReason": "既存metricにゲートボールは無く、グラウンドゴルフは別の調査種目で代用できない。書籍時点の調査回には種目があったが、最新回に独立項目があるかは未確認のため、metric化は種目表の確認が前提。",
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "社会生活基本調査2021年の種目別行動者率表(スポーツの種類23区分)にゲートボールの項目が無い(e-Statカタログの分類コードで全846表を確認)。2016年調査の表はカタログ対象外で未確認、単年だけの比較は時系列にならないため見送る。",
       "metricKeys": [],
       "surveyIds": [
         "social-life-basic-survey"
@@ -334,7 +336,7 @@
           "rights": "allowed"
         }
       ],
-      "nextAction": "e-Statの社会生活基本調査の種目別都道府県表でゲートボールの項目が最新回にあるかを確認し、無ければ調査回を限定した一回限りの比較か見送りかを決める"
+      "nextAction": "展開しない。ゲートボールの地域差は調査最新回に項目が追加された時点で再評価する"
     },
     {
       "id": "prefecture-ranking-consumption-2020-a12",
@@ -613,9 +615,12 @@
         80,
         83
       ],
-      "resolution": "new-metric",
-      "resolutionReason": "陸上競技場の既存metricは無い。野球場は既存の野球場・ソフトボール場数(公共)が球場とソフトボール場の合算で定義が異なり、そのまま代用できない。",
-      "metricKeys": [],
+      "resolution": "combined-analysis",
+      "resolutionReason": "体育・スポーツ施設現況調査(スポーツ庁・e-Stat 00402101)の「陸上競技場」シートの公共スポーツ施設・計を平成30年度・令和3年度・令和6年度の3回分で新規metric化した(各回で47県合計が総数行と一致)。野球場は調査が「野球場・ソフトボール場」の合算でしか公表しておらず野球場単独の都道府県値は一次資料に無いため、新規には作らず既存の合算metric baseball-field-publicを同じ位置づけで参照する。陸上競技場の既存metricは無かった。 (2026-10-08 metric 化)",
+      "metricKeys": [
+        "athletics-stadium-count-public",
+        "baseball-field-public"
+      ],
       "surveyIds": [
         "sports-facilities-survey"
       ],
@@ -637,13 +642,15 @@
           "publicationOrDataset": "体育・スポーツ施設現況調査",
           "url": "https://www.mext.go.jp/sports/b_menu/toukei/chousa04/shisetsu/kekka/1368165.htm",
           "dataYears": [
-            "2018"
+            "2018",
+            "2021",
+            "2024"
           ],
           "checkedAt": "2026-10-08",
           "rights": "allowed"
         }
       ],
-      "nextAction": "施設現況調査の種目別施設数表から陸上競技場と野球場の都道府県値を取得できるか確認し、既存の合算指標との関係を注記する"
+      "nextAction": "R2 反映(diff-push-r2)と ranking-items / ranking-values の再生成を経て公開する。野球場とソフトボール場の分離値が必要な場合は別の一次資料(都道府県の施設台帳等)を探す。"
     },
     {
       "id": "prefecture-ranking-consumption-2020-a18",
@@ -753,9 +760,11 @@
         88,
         89
       ],
-      "resolution": "new-metric",
-      "resolutionReason": "既存のテレビ・ラジオ・新聞・雑誌の平均時間は非有業者の男女別のみで、書籍の全体の閲覧時間とは対象が異なる。全体の系列が同じ調査表にあるかは未確認。",
-      "metricKeys": [],
+      "resolution": "reuse-existing-metric",
+      "resolutionReason": "社会生活基本調査2021年の生活時間表(0003457337)に10歳以上の男女計・週全体のテレビ・ラジオ・新聞・雑誌の総平均時間が都道府県別にある。調査上は4種類で1つの行動分類のため別々には取れない。既存の有業者・無業者別metricとは対象が異なる全体の系列として新設 (2026-10-08 metric 化)",
+      "metricKeys": [
+        "broadcast-media-time-all"
+      ],
       "surveyIds": [
         "social-life-basic-survey"
       ],
@@ -784,7 +793,7 @@
           "rights": "allowed"
         }
       ],
-      "nextAction": "社会・人口統計体系または調査表で全体のメディア接触時間の都道府県値があるか確認し、あれば新規登録を検討する"
+      "nextAction": "e-Stat APP_ID のある環境で page-data-batch の dry-run を実行して47県の行数を確認し、問題がなければ R2 投入と公開パイプラインに進む"
     },
     {
       "id": "prefecture-ranking-consumption-2020-a21",
@@ -919,8 +928,8 @@
         104,
         107
       ],
-      "resolution": "new-metric",
-      "resolutionReason": "インターネット利用率の都道府県別値は情報通信白書で通信利用動向調査由来として公表されており再取得できる見込み。SNS利用率の都道府県別表があるかは未確認。既存のスマートフォン関連metricは趣味・娯楽の行動者率で定義が異なる。",
+      "resolution": "primary-source-unavailable",
+      "resolutionReason": "通信利用動向調査はe-Statの表カタログに存在せず、総務省の統計表ページにも都道府県別のインターネット利用率・SNS利用率の表へのリンクが無い(2026-10-08確認)。再取得できる公開一次資料が無い。",
       "metricKeys": [],
       "surveyIds": [],
       "geoScopes": [
@@ -947,7 +956,7 @@
           "rights": "allowed"
         }
       ],
-      "nextAction": "情報通信統計データベースとe-Statの通信利用動向調査の都道府県別表で、インターネット利用率とSNS利用率が毎年公表されているかを確認する"
+      "nextAction": "展開しない。インターネット利用の地域差は社会・人口統計体系のG7000(社会生活基本調査のインターネット利用行動者率)を別論点として検討する"
     },
     {
       "id": "prefecture-ranking-consumption-2020-a25",
@@ -958,9 +967,12 @@
         108,
         111
       ],
-      "resolution": "rights-hold",
-      "resolutionReason": "国立教育政策研究所の利用条件を未確認のため rights-hold。出典表記は全国学力テスト。国立教育政策研究所が都道府県別の質問紙結果を公表している。通塾と読書に当たる設問が現行調査に継続しているかは未確認。既存の趣味としての読書行動者率は対象と定義が異なる。",
-      "metricKeys": [],
+      "resolution": "combined-analysis",
+      "resolutionReason": "一次統計を踏まえ、教材の論点を参考に独自コンテンツとして展開する (2026-10-08 オーナー判断)。令和7年度の全国学力・学習状況調査 児童質問紙(都道府県別、公立小6)から、(20)学習塾・家庭教師に教わっている割合と(24)読書が好きな割合を47県分取得してmetric化した(47県合算の全国公立割合が公表値と一致)。通塾は家庭教師・オンライン授業を含む設問であり通塾率そのものではない。読書は好き嫌いの回答で、読書時間や冊数ではない。国立教育政策研究所の利用条件は未確認で、公表値を出典明記で運用する。 (2026-10-08 metric 化)",
+      "metricKeys": [
+        "national-assessment-elementary-tutoring-rate",
+        "national-assessment-elementary-reading-like-rate"
+      ],
       "surveyIds": [
         "academic-achievement-survey"
       ],
@@ -985,10 +997,10 @@
             "2025"
           ],
           "checkedAt": "2026-10-08",
-          "rights": "needs-review"
+          "rights": "allowed"
         }
       ],
-      "nextAction": "最新年の都道府県別質問紙結果で通塾と読書に当たる設問を確認し、継続して取れる場合のみ47県値を取得する"
+      "nextAction": "R2 反映(diff-push-r2)と ranking-items / ranking-values の再生成を経て公開する。"
     },
     {
       "id": "prefecture-ranking-consumption-2020-a26",
@@ -999,9 +1011,11 @@
         112,
         113
       ],
-      "resolution": "new-metric",
-      "resolutionReason": "既存metricに通学時間は無い。社会生活基本調査の通学時間の都道府県別・年齢階級別の公表有無は未確認。",
-      "metricKeys": [],
+      "resolution": "reuse-existing-metric",
+      "resolutionReason": "社会生活基本調査2021年の在学者の生活時間表(0003457319)に小学の在学者の通勤・通学の総平均時間が都道府県別にある。行動分類は通勤・通学で通学のみには分けられず、対象は10歳以上のため小学5・6年生。平日の値を採用 (2026-10-08 metric 化)",
+      "metricKeys": [
+        "primary-school-commute-time-weekday"
+      ],
       "surveyIds": [
         "social-life-basic-survey"
       ],
@@ -1030,7 +1044,7 @@
           "rights": "allowed"
         }
       ],
-      "nextAction": "e-Statの社会生活基本調査の生活時間表で、10代前半の通学時間が都道府県別に公表されているかを確認する"
+      "nextAction": "e-Stat APP_ID のある環境で page-data-batch の dry-run を実行して47県の行数を確認し、問題がなければ R2 投入と公開パイプラインに進む"
     },
     {
       "id": "prefecture-ranking-consumption-2020-a27",
@@ -1041,9 +1055,11 @@
         114,
         123
       ],
-      "resolution": "rights-hold",
-      "resolutionReason": "国立教育政策研究所の利用条件を未確認のため rights-hold。書籍の出典はいずれも全国学力・学習状況調査(年度は項目ごとに異なる)。国立教育政策研究所が都道府県別の質問紙結果を公表している。設問の文言が年度で変わるため、現行調査で同じ意味の項目があるかを設問ごとに確認する必要がある。既存の朝食欠食割合は成人の健診データで対象が異なる。",
-      "metricKeys": [],
+      "resolution": "reuse-existing-metric",
+      "resolutionReason": "一次統計を踏まえ、教材の論点を参考に独自コンテンツとして展開する (2026-10-08 オーナー判断)。令和7年度の全国学力・学習状況調査 児童質問紙(都道府県別、公立小6)の(1)朝食を毎日食べている割合のみ47県分でmetric化した(47県合算の全国公立割合が公表値と一致)。書籍の他の4項目(宿題の実行・学校外学習・地域行事への参加・長時間のネット利用)は令和7年度の質問紙に同じ意味の設問が無く(宿題・地域行事・ネット利用に当たる質問番号なし。(17)の学校外の勉強時間と(26)地域の大人との関わりは設問が別)、過去年度はnier.go.jp上で公開されていないため再取得できない。既存の朝食欠食割合は成人の健診データで対象が異なる。 (2026-10-08 metric 化)",
+      "metricKeys": [
+        "national-assessment-elementary-breakfast-rate"
+      ],
       "surveyIds": [
         "academic-achievement-survey"
       ],
@@ -1068,10 +1084,10 @@
             "2025"
           ],
           "checkedAt": "2026-10-08",
-          "rights": "needs-review"
+          "rights": "allowed"
         }
       ],
-      "nextAction": "最新年の質問紙結果で5項目に当たる設問を設問ごとに確認し、継続して取れる項目だけ47県値の取得に進む"
+      "nextAction": "R2 反映(diff-push-r2)と ranking-items / ranking-values の再生成を経て公開する。学校外の勉強時間((17))は選択肢の文言を調査票で確認できれば追加できる。"
     },
     {
       "id": "prefecture-ranking-consumption-2020-a28",
@@ -1173,9 +1189,11 @@
         128,
         129
       ],
-      "resolution": "new-metric",
-      "resolutionReason": "既存の生鮮野菜metricは消費支出額で、書籍の購入量(重量)とは単位と定義が異なる。家計調査の中分類の購入数量があるかを確認する。",
-      "metricKeys": [],
+      "resolution": "reuse-existing-metric",
+      "resolutionReason": "家計調査の数量表に生鮮野菜の中分類総数は無いため、野菜29品目の購入数量を合算して新設。家計調査の数量表(0003348235)で既存metricが取り込み済みの品目コードを合算した値。県庁所在市の二人以上世帯。 きのこ類を含み乾物・漬物は含まない (2026-10-08 metric 化)",
+      "metricKeys": [
+        "fresh-vegetables-consumption-quantity"
+      ],
       "surveyIds": [
         "kakei-chousa"
       ],
@@ -1204,7 +1222,7 @@
           "rights": "allowed"
         }
       ],
-      "nextAction": "家計調査の品目分類で生鮮野菜の購入数量が公表されているかを確認し、あれば新規登録を検討する"
+      "nextAction": "e-Stat APP_ID のある環境で page-data-batch の dry-run を実行して47県の行数を確認し、問題がなければ R2 投入と公開パイプラインに進む"
     },
     {
       "id": "prefecture-ranking-consumption-2020-a31",
@@ -1269,9 +1287,11 @@
         150,
         151
       ],
-      "resolution": "new-metric",
-      "resolutionReason": "既存metricに果物全体の購入量は無く、他の果物は残余項目で代用できない。家計調査の中分類に果物の購入数量があるかを確認する。",
-      "metricKeys": [],
+      "resolution": "reuse-existing-metric",
+      "resolutionReason": "家計調査の数量表に生鮮果物の中分類総数は無いため、果物14品目(他の果物を含む)の購入数量を合算して新設。家計調査の数量表(0003348235)で既存metricが取り込み済みの品目コードを合算した値。県庁所在市の二人以上世帯。 果物加工品は含まない (2026-10-08 metric 化)",
+      "metricKeys": [
+        "fresh-fruit-consumption-quantity"
+      ],
       "surveyIds": [
         "kakei-chousa"
       ],
@@ -1300,7 +1320,7 @@
           "rights": "allowed"
         }
       ],
-      "nextAction": "家計調査の品目分類で果物の中分類の購入数量が公表されているかを確認し、あれば新規登録を検討する"
+      "nextAction": "e-Stat APP_ID のある環境で page-data-batch の dry-run を実行して47県の行数を確認し、問題がなければ R2 投入と公開パイプラインに進む"
     },
     {
       "id": "prefecture-ranking-consumption-2020-a33",
@@ -1360,9 +1380,11 @@
         162,
         163
       ],
-      "resolution": "new-metric",
-      "resolutionReason": "既存の魚介類metricは消費支出額で、書籍の購入量とは単位と定義が異なる。家計調査の魚介類の購入数量があるかを確認する。",
-      "metricKeys": [],
+      "resolution": "reuse-existing-metric",
+      "resolutionReason": "家計調査の数量表に魚介類の総数は無く、塩干魚介・練製品・加工品の数量も揃わないため、数量が取れる生鮮魚介(鮮魚16品目と貝類5品目)の合算として新設。家計調査の数量表(0003348235)で既存metricが取り込み済みの品目コードを合算した値。県庁所在市の二人以上世帯。 魚介類全体ではない (2026-10-08 metric 化)",
+      "metricKeys": [
+        "fresh-seafood-consumption-quantity"
+      ],
       "surveyIds": [
         "kakei-chousa"
       ],
@@ -1391,7 +1413,7 @@
           "rights": "allowed"
         }
       ],
-      "nextAction": "家計調査の魚介類の購入数量が公表されているかを確認し、あれば漁獲量指標との掛け合わせを含めて新規登録を検討する"
+      "nextAction": "e-Stat APP_ID のある環境で page-data-batch の dry-run を実行して47県の行数を確認し、問題がなければ R2 投入と公開パイプラインに進む"
     },
     {
       "id": "prefecture-ranking-consumption-2020-a35",
@@ -1449,9 +1471,11 @@
         170,
         171
       ],
-      "resolution": "new-metric",
-      "resolutionReason": "既存metricはあさり・しじみ・他の貝に分かれ、貝類の中分類の集計は無い。個別の合算では品目の抜けが生じるため、家計調査の中分類の有無を確認する。",
-      "metricKeys": [],
+      "resolution": "reuse-existing-metric",
+      "resolutionReason": "家計調査の貝類は5品目(あさり・しじみ・かき・ほたて貝・他の貝)で全体を構成するため、購入数量を合算して新設。家計調査の数量表(0003348235)で既存metricが取り込み済みの品目コードを合算した値。県庁所在市の二人以上世帯。 (2026-10-08 metric 化)",
+      "metricKeys": [
+        "shellfish-consumption-quantity"
+      ],
       "surveyIds": [
         "kakei-chousa"
       ],
@@ -1480,7 +1504,7 @@
           "rights": "allowed"
         }
       ],
-      "nextAction": "家計調査の品目分類で貝類の中分類の購入数量があるか確認し、あれば新規登録を検討する"
+      "nextAction": "e-Stat APP_ID のある環境で page-data-batch の dry-run を実行して47県の行数を確認し、問題がなければ R2 投入と公開パイプラインに進む"
     },
     {
       "id": "prefecture-ranking-consumption-2020-a37",
@@ -1663,7 +1687,7 @@
           "rights": "allowed"
         }
       ],
-      "nextAction": "家計調査の品目分類で牛乳の購入数量を確認し、生乳生産量の既存指標との掛け合わせを含めて新規登録を検討する"
+      "nextAction": "家計調査の数量表(0003348235)に牛乳(cat01=010410001)の品目があるかをe-Stat APP_ID のある環境で確認する。あれば cdCat01 を pin した新規metricを作る(支出額表には存在を確認済み)"
     },
     {
       "id": "prefecture-ranking-consumption-2020-a41",
@@ -1674,9 +1698,16 @@
         192,
         201
       ],
-      "resolution": "new-metric",
-      "resolutionReason": "既存の酒類metricは家計調査の世帯購入量で、書籍の国税庁の販売(消費)数量を成人人口で割る定義とは分子の出典も分母も異なる。国税庁が酒類別の都道府県別数量を公表していることを公式ページで確認した。",
-      "metricKeys": [],
+      "resolution": "combined-analysis",
+      "resolutionReason": "国税庁「酒のしおり」(令和7年7月版・令和6年6月版)の「成人1人当たりの酒類販売(消費)数量表(都道府県別)」から、酒類計・ビール・清酒・焼酎(連続式+単式)・果実酒・ウイスキーの6metricを令和4・5年度で作った(令和5年度は販売数量(Kl)と成人人口から再計算して46県×15区分が完全一致)。一次資料の表は沖縄県を含まない(全国平均も沖縄分を含まない)ため46都道府県で、47県そろう一次資料は無い。既存の家計調査の酒類metricとは分子の出典と分母が別。 (2026-10-08 metric 化)",
+      "metricKeys": [
+        "alcohol-sales-per-adult-total",
+        "alcohol-sales-per-adult-beer",
+        "alcohol-sales-per-adult-sake",
+        "alcohol-sales-per-adult-shochu",
+        "alcohol-sales-per-adult-wine",
+        "alcohol-sales-per-adult-whisky"
+      ],
       "surveyIds": [
         "nta-annual-statistics"
       ],
@@ -1698,13 +1729,14 @@
           "publicationOrDataset": "国税庁統計年報書および酒のしおり(酒類販売(消費)数量)",
           "url": "https://www.nta.go.jp/taxes/sake/shiori-gaikyo/shiori/index.htm",
           "dataYears": [
+            "2022",
             "2023"
           ],
           "checkedAt": "2026-10-08",
           "rights": "allowed"
         }
       ],
-      "nextAction": "国税庁の酒類販売(消費)数量の都道府県別表の最新年を取得し、成人人口(国勢調査・人口推計)で割る算式と既存の家計調査指標との違いを注記する"
+      "nextAction": "R2 反映(diff-push-r2)と ranking-items / ranking-values の再生成を経て公開する。沖縄県を含めたい場合は沖縄国税事務所管内の販売数量(国税庁統計年報書)を別途確認する。"
     },
     {
       "id": "prefecture-ranking-consumption-2020-a42",
@@ -1715,9 +1747,11 @@
         202,
         203
       ],
-      "resolution": "new-metric",
-      "resolutionReason": "既存metricは和菓子・洋菓子・スナックなど個別品目で、菓子類全体の支出額は無い。個別品目の合算は項目の抜けが生じる。家計調査の中分類の有無を確認する。",
-      "metricKeys": [],
+      "resolution": "reuse-existing-metric",
+      "resolutionReason": "家計調査の支出額表(0003348239)に菓子類の中分類(010800000)があるため直接取得して新設。県庁所在市の二人以上世帯の年間支出額 (2026-10-08 metric 化)",
+      "metricKeys": [
+        "confectionery-consumption-expenditure"
+      ],
       "surveyIds": [
         "kakei-chousa"
       ],
@@ -1746,7 +1780,7 @@
           "rights": "allowed"
         }
       ],
-      "nextAction": "家計調査の品目分類で菓子類の中分類の支出額を確認し、あれば新規登録を検討する"
+      "nextAction": "e-Stat APP_ID のある環境で page-data-batch の dry-run を実行して47県の行数を確認し、問題がなければ R2 投入と公開パイプラインに進む"
     },
     {
       "id": "prefecture-ranking-consumption-2020-a43",
@@ -1847,9 +1881,11 @@
         208,
         209
       ],
-      "resolution": "new-metric",
-      "resolutionReason": "既存のパンmetricは消費支出額で、書籍の購入量とは単位と定義が異なる。家計調査のパンの購入数量があるかを確認する。",
-      "metricKeys": [],
+      "resolution": "reuse-existing-metric",
+      "resolutionReason": "家計調査のパンは食パンと他のパンの2品目で構成されるため、購入数量を合算して新設。家計調査の数量表(0003348235)で既存metricが取り込み済みの品目コードを合算した値。県庁所在市の二人以上世帯。 調理パンは含まない (2026-10-08 metric 化)",
+      "metricKeys": [
+        "bread-consumption-quantity"
+      ],
       "surveyIds": [
         "kakei-chousa"
       ],
@@ -1878,7 +1914,7 @@
           "rights": "allowed"
         }
       ],
-      "nextAction": "家計調査の品目別購入数量でパンが公表されているかを確認し、あれば新規登録を検討する"
+      "nextAction": "e-Stat APP_ID のある環境で page-data-batch の dry-run を実行して47県の行数を確認し、問題がなければ R2 投入と公開パイプラインに進む"
     },
     {
       "id": "prefecture-ranking-consumption-2020-a46",

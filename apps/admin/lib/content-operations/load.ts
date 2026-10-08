@@ -8,6 +8,7 @@ import {
 } from '../../../../packages/data-configs/src/evidence-inventory/japan-zue/pilot';
 import { JAPAN_ZUE_MANUAL_OVERRIDES } from '../../../../packages/data-configs/src/evidence-inventory/japan-zue/policy';
 import { REFERENCE_SOURCE_POLICIES } from '../../../../packages/data-configs/src/evidence-inventory/reference-sources';
+import { AREA_DATABOOK_TEMPLATE } from '../../../../packages/data-configs/src/area-databook/template';
 import { KINDLE_BOOKS } from '../../../../packages/product-factory/src/channels/kindle/book-catalog';
 import {
   KINDLE_COVER_BACKGROUND_BY_ID,
@@ -40,6 +41,23 @@ import {
 } from './reference';
 import { referenceExpansionPlans } from '../server/reference-expansion-plans';
 import { datasetDir, datasetPath } from "../../../../config/datasets.mjs";
+
+function areaDatabookMetricKeys(): string[] {
+  return AREA_DATABOOK_TEMPLATE.sections.flatMap((section) =>
+    section.blocks.flatMap((block) => {
+      if (block.blockType === 'ranked-kpi-grid') {
+        return block.metrics.map((metric) => metric.rankingKey);
+      }
+      if (block.blockType === 'gender-paired-kpi') {
+        return block.pairs.flatMap((pair) => [pair.maleKey, pair.femaleKey]);
+      }
+      if (block.blockType === 'chart') {
+        return block.chart.relatedRankingKeys ?? [];
+      }
+      return [];
+    })
+  );
+}
 
 function readJson(root: string, rel: string): unknown {
   return JSON.parse(fs.readFileSync(path.join(root, rel), 'utf8'));
@@ -417,6 +435,7 @@ export function loadContentOperations(
         )
       ),
     ].filter((file) => fs.existsSync(path.join(root, file))),
+    areaDatabookMetricKeys: areaDatabookMetricKeys(),
     areas: prefectures.map((prefecture) => {
       const editorialPath = `packages/data-configs/src/area-databook/editorial/${prefecture.prefCode}.ts`;
       return {

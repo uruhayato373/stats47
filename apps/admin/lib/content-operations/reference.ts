@@ -102,6 +102,8 @@ export interface ReferenceContentInput {
   noteBlockers?: ReferenceNoteBlocker[];
   kindleBooks: ReferenceKindleSource[];
   areas: ReferenceAreaSource[];
+  /** 47 県共通の県データブック・テンプレートに載っている指標 (県ページへの統合の実在証跡) */
+  areaDatabookMetricKeys?: string[];
   surveys?: Array<{ id: string }>;
   themes?: ReferenceThemeSource[];
   japanThemes?: ReferenceThemeSource[];
@@ -368,6 +370,7 @@ export function buildReferenceContentPortfolio(
     }
   }
 
+  const areaDatabookKeys = new Set(input.areaDatabookMetricKeys ?? []);
   const metricByKey = new Map(
     input.metrics.map((metric) => [metric.key, metric])
   );
@@ -539,16 +542,20 @@ export function buildReferenceContentPortfolio(
                   : '公開中の指標が無いため停止'
           )
         : coverage('theme', 'not-applicable', [], 'テーマ展開対象外'),
-      roles.includes('area')
-        ? coverage(
-            'area',
-            siteReady ? 'ready' : 'blocked',
-            siteReady ? [key] : [],
-            siteReady
-              ? `${metric?.title ?? key}を県の優劣へ短絡せず、地域条件と既存指標で解釈する都道府県ページ企画`
-              : '公開中の指標が無いため停止'
-          )
-        : coverage('area', 'not-applicable', [], '地域別解説対象外'),
+      // 県ページは共通テンプレートの指標だけを描画するので、テンプレートへの採用を統合の証跡にする
+      // (台帳の area 役割はエントリ単位で、採用・不採用の指標が同じエントリに混ざるため)
+      siteReady && areaDatabookKeys.has(key)
+        ? coverage('area', 'integrated', [key], '県データブックの共通テンプレートへ採用済み')
+        : roles.includes('area')
+          ? coverage(
+              'area',
+              siteReady ? 'ready' : 'blocked',
+              siteReady ? [key] : [],
+              siteReady
+                ? `${metric?.title ?? key}を県の優劣へ短絡せず、地域条件と既存指標で解釈する都道府県ページ企画`
+                : '公開中の指標が無いため停止'
+            )
+          : coverage('area', 'not-applicable', [], '地域別解説対象外'),
       roles.includes('japan')
         ? coverage(
             'japan',
