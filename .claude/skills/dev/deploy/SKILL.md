@@ -80,7 +80,7 @@ web モードでは下表の MCP ツールだけを使う。
 
 | 対象 | 反映経路 | 起動 |
 |---|---|---|
-| 新規/更新ブログ記事 (`docs/21_ブログ記事原稿/<slug>/article.md`, `published:true`) | `blog-auto-publish.yml`（**develop checkout**・factual/quality ゲート後 R2 push・MAX_PUBLISH 件） | **develop への article.md push で自動発火** (Phase 2) / 手動は `publish-blog.yml` dispatch |
+| 新規/更新ブログ記事 (`contents/blog/<slug>/article.md`, `published:true`) | `blog-auto-publish.yml`（**develop checkout**・factual/quality ゲート後 R2 push・MAX_PUBLISH 件） | **develop への article.md push で自動発火** (Phase 2) / 手動は `publish-blog.yml` dispatch |
 | affiliate 広告 (`apps/web/scripts/affiliate-ads-data.ts`) | `publish-affiliate-ads.yml`（develop checkout → `run.sh --only affiliate-ads`） | **develop への affiliate-ads-data.ts push で自動発火** / 手動は `sync-snapshots.yml -f only=affiliate-ads` |
 | page_components 等その他 snapshot | `sync-snapshots.yml` | dispatch (`-f only=<task>`) |
 | 固定バナー画像 (コード直書きの `SidebarPromoBanner` 等) | コードデプロイのみで反映 (R2 不要) | main マージで自動 |
@@ -184,7 +184,7 @@ cd apps/web && npx eslint src/ --ext .ts,.tsx && cd ../..
 cd apps/web && npx vitest run && cd ../..
 
 # 4. 再発防止ガード (.claude/scripts/lib/check-*.cjs — 検出時 exit 1 で停止)
-node .claude/scripts/lib/check-published-drafts.cjs   # 公開済み記事の下書きが docs/21 に残っていないか
+node .claude/scripts/lib/check-published-drafts.cjs   # 公開済み記事の下書きが contents/blog に残っていないか
 ```
 
 全パスしたら Step 2.5 へ進む。

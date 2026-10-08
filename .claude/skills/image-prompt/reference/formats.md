@@ -7,7 +7,7 @@
 | use_case | 推奨サイズ | アスペクト比 | 想定クロップ | 保存先 |
 |---|---|---|---|---|
 | `note-header` | 1280×670 | ≒1.91:1 | 上下わずか | `docs/31_note記事原稿/<slug>/header.png` |
-| `blog-hero` | 1600×900 | 16:9 | なし（記事内で使用） | `docs/21_ブログ記事原稿/<slug>/hero.png` |
+| `blog-hero` | 1600×900 | 16:9 | なし（記事内で使用） | `contents/blog/<slug>/hero.png` |
 | `x-banner` | 1500×500 | 3:1 | モバイル時に上下クロップ | `.local/r2/sns/brand/x-banner.png` |
 | `sns-supporting` | 1080×1080 or 1080×1350 | 1:1 or 4:5 | プラットフォーム依存 | `.local/r2/sns/ranking/<ranking_key>/supporting.png` |
 | `brand-asset` | 任意（1920×1080 推奨） | 16:9 | なし | `.local/r2/brand/` |

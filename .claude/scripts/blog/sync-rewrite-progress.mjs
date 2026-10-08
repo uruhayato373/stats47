@@ -3,11 +3,11 @@
  * sync-rewrite-progress.mjs — ブログ一括リライトの進捗を SSOT(remediation-queue.json) に記録する。
  *
  * 目的: 「リライトが済んだ記事をもう一度リライトしない」を担保する。
- *   blog-mass-rewrite workflow は docs/21_ブログ記事原稿/<slug>/ に成果物を出すだけで
+ *   blog-mass-rewrite workflow は contents/blog/<slug>/ に成果物を出すだけで
  *   queue の status を更新しない (workflow script は FS 書き込み不可)。本スクリプトが
- *   batch 後に docs/21 を走査し、各記事の状態を queue に upsert する (=毎バッチ後の post-step)。
+ *   batch 後に contents/blog を走査し、各記事の状態を queue に upsert する (=毎バッチ後の post-step)。
  *
- * 判定 (docs/21 のファイル状態が真実源):
+ * 判定 (contents/blog のファイル状態が真実源):
  *   - article.md なし                          → 触らない (未リライト=pending のまま)
  *   - article.md あり + review.md verdict:PASS  → done       (公開可。remediated_at=today, wave_id)
  *   - article.md あり + review.md verdict:REVISE→ in-progress (要修正。rewrite済=再リライトしない)
@@ -30,7 +30,7 @@ import path from "node:path";
 import { datasetDir } from "../../../config/datasets.mjs";
 
 const PROJECT_ROOT = path.resolve(import.meta.dirname, "..", "..", "..");
-const DOCS = path.join(PROJECT_ROOT, "docs/21_ブログ記事原稿");
+const DOCS = path.join(PROJECT_ROOT, "contents/blog");
 const QUEUE = path.join(PROJECT_ROOT, `${datasetDir("blog.operations")}/remediation-queue.json`);
 
 const args = process.argv.slice(2);
@@ -49,7 +49,7 @@ function reviewVerdict(slug) {
   return m ? m[1].toUpperCase() : "UNKNOWN";
 }
 
-// docs/21 の article.md ありを走査
+// contents/blog の article.md ありを走査
 const slugs = fs.existsSync(DOCS)
   ? fs.readdirSync(DOCS).filter((d) => {
       try {
@@ -93,7 +93,7 @@ for (const slug of slugs) {
 }
 
 console.error(
-  `[sync] docs/21 article.md=${slugs.length} → done(PASS)=${done} / in-progress(rewrite済)=${inprog} / queue外=${skipped}`,
+  `[sync] contents/blog article.md=${slugs.length} → done(PASS)=${done} / in-progress(rewrite済)=${inprog} / queue外=${skipped}`,
 );
 
 if (dryRun) {

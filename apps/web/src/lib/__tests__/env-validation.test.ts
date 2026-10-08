@@ -65,19 +65,11 @@ describe("validateRequiredEnvVars", () => {
     expect(() => validateRequiredEnvVars()).toThrow(".env.local");
   });
 
-  it("AdSense 有効時に CLIENT_ID が未設定ならエラーに含む", () => {
+  // パブリッシャー ID はサイト識別子の正本 (@stats47/types の SITE) にあり、環境変数を要求しない
+  it("AdSense 有効時もパブリッシャー ID の環境変数を要求しない", () => {
     process.env.NEXT_PUBLIC_BASE_URL = "https://stats47.jp";
     process.env.NEXT_PUBLIC_ESTAT_APP_ID = "test-app-id";
     process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_ENABLED = "true";
-    delete process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT_ID;
-
-    expect(() => validateRequiredEnvVars()).toThrow("NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT_ID");
-  });
-
-  it("AdSense 無効時に CLIENT_ID が未設定でもエラーにならない", () => {
-    process.env.NEXT_PUBLIC_BASE_URL = "https://stats47.jp";
-    process.env.NEXT_PUBLIC_ESTAT_APP_ID = "test-app-id";
-    process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_ENABLED = "false";
 
     expect(() => validateRequiredEnvVars()).not.toThrow();
   });

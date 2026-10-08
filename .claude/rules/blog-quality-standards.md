@@ -1,6 +1,6 @@
 ---
 paths:
-  - "docs/21_ブログ記事原稿/**"
+  - "contents/blog/**"
   - ".claude/{scripts/blog,skills/blog,workflows}/**"
   - "apps/web/src/{features/blog,app/blog}/**"
   - ".claude/agents/{article-writer,blog-*,chart-author,trend-scout,kindle-publisher}.md"
@@ -53,7 +53,7 @@ stats47.jp の `/blog/{slug}` 記事を新規作成または brushup する際�
 
 ### critic レビュー成果物 `review.md` (公開の必須条件)
 
-`published: true` の記事は `docs/21_ブログ記事原稿/<slug>/review.md` (blog-critic が生成) が無いと **`quality-gate.mjs` が blocker で公開を止める**。format:
+`published: true` の記事は `contents/blog/<slug>/review.md` (blog-critic が生成) が無いと **`quality-gate.mjs` が blocker で公開を止める**。format:
 
 ```markdown
 ---
@@ -600,7 +600,7 @@ topic-queue (何を書くか。build-topic-queue.mjs)
   → SVG 生成 (generate-article-charts.ts。ランキング + タイルマップの 2 枚)
   → 本文生成 → quality-gate → 落ちたら指摘を添えて再試行
   → ★critic (別コンテキスト。記事本文だけを渡す) → review.md
-  → published:true → 最終ゲート → docs/21 outbox → develop push
+  → published:true → 最終ゲート → contents/blog outbox → develop push
   → blog-auto-publish.yml が push トリガーで発火 → factual/quality 再検証 → R2 公開
 ```
 
@@ -644,7 +644,7 @@ GSC 実測と是正ループ (`.claude/skills/blog/brushup-blog/reference/blog-r
 
 ### 公開までの経路
 
-`docs/21_ブログ記事原稿/<slug>/article.md` を `published: true` で develop へ push すると、
+`contents/blog/<slug>/article.md` を `published: true` で develop へ push すると、
 `blog-auto-publish.yml` が push トリガーで発火し、R2 反映前に `ci-factual-gate` と
 `quality-gate.mjs` を再実行する。**`review.md` の critic PASS も `quality-gate.mjs` が見る**ので、
 日次 CI を消しても critic ゲートは残る。
@@ -742,7 +742,7 @@ node .claude/scripts/blog/audit-published-blog.mjs
 
 | 関門 | 対象 | 挙動 |
 |---|---|---|
-| **pre-commit** (`apps/web/scripts/pre-commit-checks.sh` §6.1) | staged の `docs/21_ブログ記事原稿/*/article.md` で **`published: true`** のもの | blocker があれば commit 中止。`published: false` の作業中ドラフトは対象外 |
+| **pre-commit** (`apps/web/scripts/pre-commit-checks.sh` §6.1) | staged の `contents/blog/*/article.md` で **`published: true`** のもの | blocker があれば commit 中止。`published: false` の作業中ドラフトは対象外 |
 | **publish-blog.yml** (CI→R2) | publish 対象 slug | ステージ後・push 前に実行。blocker があれば R2 公開をブロック (権威ゲート) |
 
 > 作業中ドラフトを commit したいだけなら frontmatter を `published: false` にする。公開 (`published: true`) する記事は必ず gate を通す。

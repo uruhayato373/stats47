@@ -2,7 +2,7 @@
 /**
  * generate-article-charts.ts
  *
- * docs/21_ブログ記事原稿/<slug>/data/*.json を読み、SVG チャートを生成する固定 CLI スクリプト。
+ * contents/blog/<slug>/data/*.json を読み、SVG チャートを生成する固定 CLI スクリプト。
  *
  * Usage:
  *   npx tsx .claude/scripts/blog/generate-article-charts.ts --slug <slug>            # 生成 + placeholder 置換
@@ -110,7 +110,7 @@ const VALIDATE = args.includes('--validate');
 const EXTRACT_INLINE = args.includes('--extract-inline');
 // --base: 記事ルート (slug の親)。デフォルトは docs draft。公開済記事の chart 再生成は
 //          `--base .local/r2/app/blog` で R2 data を直接対象にできる (Phase 7 で追加)。
-const BASE = getArg('--base') || 'docs/21_ブログ記事原稿';
+const BASE = getArg('--base') || 'contents/blog';
 
 if (!SLUG) {
   console.error('Usage: --slug <slug> [--base <dir>] [--dry-run|--validate]');

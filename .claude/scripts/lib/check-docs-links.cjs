@@ -110,7 +110,7 @@ const isPlaceholder = (p) =>
   p.includes("{") ||
   p.includes("YYYY") ||
   p.includes("NNN") ||
-  // workflow の `docs/21_ブログ記事原稿/$SLUG/article.md` のようなシェル変数展開は
+  // workflow の `contents/blog/$SLUG/article.md` のようなシェル変数展開は
   // 実パスではない。走査範囲を .github へ広げた 2026-07-30 に誤検知 3 件が出たため追加。
   p.includes("$");
 // 自己 (このチェッカーの regex 例) は走査対象から外す。

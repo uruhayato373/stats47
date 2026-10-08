@@ -2,7 +2,7 @@
 "use strict";
 
 // 画像・SVG コントラクトの回帰ガード (MC-14)。
-//   phase 1: apps/web/public + docs/21・docs/31 の本文画像参照を検査。
+//   phase 1: apps/web/public + contents/blog・docs/31 の本文画像参照を検査。
 //   phase 2: git 管理対象の画像を repo 全体で棚卸しし、デコード/寸法/容量/形式一致/
 //            SVG 安全性/SHA-256 重複/MD・HTML・CSS・TS(X) のローカル参照解決を検査。
 //            未参照画像は非ブロックの warning。既存 finding は baseline 化し新規のみ block。
@@ -25,7 +25,7 @@ const ROOT = process.env.CLAUDE_PROJECT_DIR || path.resolve(__dirname, "..", "..
 const BASELINE = process.env.ASSET_POLICY_BASELINE || path.join(ROOT, ".claude/config/asset-policy-baseline.json");
 const PUBLIC = path.join(ROOT, "apps/web/public");
 // 本文画像参照 (相対解決) を検査する Markdown ルート。
-const DOC_ROOTS = [path.join(ROOT, "docs/21_ブログ記事原稿"), path.join(ROOT, "docs/31_note記事原稿")];
+const DOC_ROOTS = [path.join(ROOT, "contents/blog"), path.join(ROOT, "docs/31_note記事原稿")];
 
 const IMAGE_EXT = /\.(?:png|jpe?g|webp|gif|avif|svg)$/i;
 const RASTER_EXT = /\.(?:png|jpe?g|webp|gif|avif)$/i;
@@ -85,7 +85,7 @@ function trackedFiles() {
     const files = out.split("\0").filter(Boolean);
     if (files.length) return files.map((f) => path.join(ROOT, f));
   } catch { /* fall through */ }
-  const dirs = ["apps/web/public", "docs", "packages", "apps/remotion/public", "apps/web/scripts", ".claude", "assets", "config"]
+  const dirs = ["apps/web/public", "docs", "contents", "packages", "apps/remotion/public", "apps/web/scripts", ".claude", "assets", "config"]
     .map((d) => path.join(ROOT, d));
   return dirs.flatMap(walk);
 }
@@ -206,7 +206,7 @@ async function collect() {
   // SHA-256 完全同一 (2枚以上) を重複として報告。message にグループ (代表 + 他) を含める。
   // 例外1: docs/31 (note.com 原稿) の記事同梱画像は、note.com が記事ごとに画像実体の
   // アップロードを要求し相対参照 (images/xxx.png) で 1 枚を共有できないため、同一バイトでも
-  // 各記事に実体が必要。共有可能な public / docs/21 の重複だけを debt として検出する。
+  // 各記事に実体が必要。共有可能な public / contents/blog の重複だけを debt として検出する。
   // 例外2: symlink は実体を持たない参照 (git blob は数十バイトのパス文字列のみ)。
   // AGENTS.md → CLAUDE.md と同じ意図的な単一ソース参照であり、複製ではないため対象外。
   const isNoteEmbeddedAsset = (relPath) => relPath.startsWith("docs/31_note記事原稿/");

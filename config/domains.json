@@ -107,7 +107,7 @@
     "docs/01_技術設計/": "ops",
     "docs/02_実装計画/": "ops",
     "docs/10_SNS戦略/": "sns",
-    "docs/21_ブログ記事原稿/": "site",
+    "contents/blog/": "site",
     "docs/30_note記事企画/": "product",
     "docs/31_note記事原稿/": "product",
     ".claude/todo/": "plan",

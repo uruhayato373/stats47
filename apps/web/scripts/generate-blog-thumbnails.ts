@@ -338,7 +338,7 @@ async function readReusableAiBackground(options: {
     throw new MissingArticleBackgroundError(
       `${options.slug}: 記事変更によりAI背景promptが変わりました。` +
         '/generate-blog-images の Mode A (Codex) で記事固有背景を作ってください: ' +
-        `npm run blog-images:codex -- request-article --slug ${options.slug} --article docs/21_ブログ記事原稿/${options.slug}/article.md`
+        `npm run blog-images:codex -- request-article --slug ${options.slug} --article contents/blog/${options.slug}/article.md`
     );
   }
   const remoteBackground = await readRemoteObjectWithIdentity(keys.background);

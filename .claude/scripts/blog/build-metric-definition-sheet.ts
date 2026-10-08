@@ -13,10 +13,10 @@
  * 実行:
  *   npx tsx .claude/scripts/blog/build-metric-definition-sheet.ts --slug <slug> [--slug ...]
  *   npx tsx .claude/scripts/blog/build-metric-definition-sheet.ts --keys a,b,c
- *   npx tsx .claude/scripts/blog/build-metric-definition-sheet.ts --article docs/21_ブログ記事原稿/<slug>/article.md
+ *   npx tsx .claude/scripts/blog/build-metric-definition-sheet.ts --article contents/blog/<slug>/article.md
  *
  * 指標の集め方 (--slug / --article):
- *   本文の `/ranking/<key>` リンク + data/*.json の rankingKey (R2 または docs/21 のローカル)。
+ *   本文の `/ranking/<key>` リンク + data/*.json の rankingKey (R2 または contents/blog のローカル)。
  *   出力は markdown 表 (stdout)。`--out <path>` でファイルへ。
  *
  * 判定はしない。表を出すだけ (定義の矛盾を見つけるのは人 / critic の仕事)。
@@ -54,7 +54,7 @@ export async function collectKeys(slug: string): Promise<string[]> {
   const push = (k: string) => {
     if (k && !keys.includes(k)) keys.push(k);
   };
-  const local = path.join(PROJECT_ROOT, "docs/21_ブログ記事原稿", slug);
+  const local = path.join(PROJECT_ROOT, "contents/blog", slug);
   let md: string;
   if (fs.existsSync(path.join(local, "article.md"))) {
     md = fs.readFileSync(path.join(local, "article.md"), "utf8");

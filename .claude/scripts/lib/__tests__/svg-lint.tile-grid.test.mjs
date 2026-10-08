@@ -9,10 +9,10 @@
  * 「旧デザインを実際に落とすか」を実測していなかった。本テストがその穴を埋める。
  *
  * 実データでの対照実験 (同日実施):
- *   旧 2 世代前 (600×700・docs/21 の 2 検体) → error 5 / 4
+ *   旧 2 世代前 (600×700・当時の docs/21 outbox の 2 検体) → error 5 / 4
  *   旧 1 世代前 (780×560・本番 R2 の実物)   → error 2 (キャンバス + 旧見出し)
  *   現行 (720×720・svg-builder の実出力)    → error 0 / warning 0
- * ※ docs/21 は公開後に自動削除される ephemeral outbox なので、恒久テストは
+ * ※ contents/blog は公開後に自動削除される ephemeral outbox なので、恒久テストは
  *    実ファイルに依存せず合成検体で不変量を固定する。generator の実出力が通ることは
  *    packages/svg-builder 側の vitest (choropleth.gate.test.ts) が担保する。
  */

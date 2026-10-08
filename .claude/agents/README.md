@@ -123,7 +123,7 @@
 | 同時起動シナリオ | 各 agent の file boundary |
 |---|---|
 | `trend-scout` + `gsc-analyst` + `ga4-analyst` | `state/blog/` vs `state/metrics/gsc/` vs `state/metrics/ga4/` |
-| `article-writer × 最大3` + `chart-author` | `.local/r2/app/blog/<slug>/` を slug 単位排他、chart-author は `docs/21_ブログ記事原稿/<slug>/` を読むのみ |
+| `article-writer × 最大3` + `chart-author` | `.local/r2/app/blog/<slug>/` を slug 単位排他、chart-author は `contents/blog/<slug>/` を読むのみ |
 | `data-ingester` → `snapshot-exporter` → `r2-publisher` | git TS / API → `.local/r2/app/` → R2 push の一方向。同ranking_keyは逐次 |
 | `x-strategist` + `instagram-strategist` | API / state / metrics サブディレクトリが完全分離 |
 | `gsc-analyst` + `improvement-triage` | gsc-analyst → `.claude/state/metrics/gsc/` write、triage → `.claude/todo/improvements.md` 排他 append |

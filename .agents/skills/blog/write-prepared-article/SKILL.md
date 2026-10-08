@@ -30,7 +30,7 @@ npx tsx packages/ai-content/src/scripts/generate-blog-article.ts --limit 1 --kee
 準備が終わると次の形になる。
 
 ```
-docs/21_ブログ記事原稿/<slug>/
+contents/blog/<slug>/
   ├── article.prompt.txt   ← 型・ルール・接地済み ground truth が入った prompt
   ├── data/*.json          ← R2 観測値の接地物（数値の出どころ）
   ├── data/*.source.json   ← 出典 manifest（再取得できる形）
@@ -44,7 +44,7 @@ docs/21_ブログ記事原稿/<slug>/
 ### 1. 対象を確認する
 
 ```bash
-find "docs/21_ブログ記事原稿" -mindepth 2 -maxdepth 2 -name 'article.prompt.txt' \
+find "contents/blog" -mindepth 2 -maxdepth 2 -name 'article.prompt.txt' \
   | sed 's|.*/\([^/]*\)/article.prompt.txt|\1|'
 ```
 
@@ -77,7 +77,7 @@ blocker が出たら**直して再実行する**。**ゲートは緩めない**�
 
 ### 4. critic に審査させる（別コンテキスト・必須）
 
-`blog-critic` agent を起動し、`docs/21_ブログ記事原稿/<slug>/review.md` を書かせる。
+`blog-critic` agent を起動し、`contents/blog/<slug>/review.md` を書かせる。
 
 **自分で書いた記事を自分で採点しない。** `blog-quality-standards.md` が禁じているのは
 「書いた本人が自己採点して公開する」ことで、critic は別コンテキストで記事本文だけを読む。
@@ -96,7 +96,7 @@ critic が PASS していれば `published: true` を立てて最終ゲートを
 ### 6. push する
 
 develop へ push すると `blog-auto-publish.yml` が factual / quality ゲートを再検証して
-R2 に公開する。公開後は CI が `docs/21` の当該ドラフトを自動削除する（outbox は常に空に戻る）。
+R2 に公開する。公開後は CI が `contents/blog` の当該ドラフトを自動削除する（outbox は常に空に戻る）。
 
 ## やらないこと
 
@@ -111,7 +111,7 @@ R2 に公開する。公開後は CI が `docs/21` の当該ドラフトを自�
 ## 関連
 
 - 準備側: `packages/ai-content/src/scripts/generate-blog-article.ts` / `.claude/scripts/blog/build-topic-queue.mjs`
-- 公開: `docs/21_ブログ記事原稿/<slug>/article.md` を `published: true` で develop へ push すると
+- 公開: `contents/blog/<slug>/article.md` を `published: true` で develop へ push すると
   `blog-auto-publish.yml` が push トリガーで発火する
 - 品質基準（正典）: `.claude/rules/blog-quality-standards.md`（§ルール ↔ 機械チェック 対応表）
 - 決定的ゲート: `.claude/scripts/blog/quality-gate.mjs`

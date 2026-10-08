@@ -60,14 +60,14 @@ node .claude/scripts/blog/build-remediation-queue.mjs --next 5   # pending 上�
    - `である調 文末` (dearuEndings>0) → **本文を ですます調 に変換** (である。→です。/だった。→でした。/ではない。→ではありません。/動詞終止形→ます形)。callout・引用・データ出典の体言止めは対象外 (正典 `.claude/rules/blog-quality-standards.md`「文体」)。**★copula だけの正規表現一括置換は禁止** (2026-06-13 実証): 動詞終止形・形容詞終止 (〜もたらす。/〜多い。) が常体で残り「です。」と混在して崩壊し、`quality-gate.mjs` は copula しか見ないため**通ってしまう**。必ず article-writer エンジンが**文単位で ですます完全化**する
    - `rank 主張あるが data 無し` (検証不能 blocker) → R2 `app/ranking/<key>/values.json` から `data/<name>-prefecture-rankings.json` を生成 (value 降順で rank 再計算) し本文数値を data に一致させる
    - `prose/図 <350` → **各図直下に「なぜ上位/下位か」の解釈段落**を追加 (記事アーキタイプの必須分析視点。図あたり ~600字)
-   - `adjacent-callouts` → 最重要の注意だけを callout に残し、分析・読み方・補足は通常本文へ戻すか対応する節へ分散する (連続配置のまま余白だけ足さない)。全記事の機械是正は `node .claude/scripts/blog/fix-consecutive-callouts.mjs --base docs/21_ブログ記事原稿 --apply` を使う
+   - `adjacent-callouts` → 最重要の注意だけを callout に残し、分析・読み方・補足は通常本文へ戻すか対応する節へ分散する (連続配置のまま余白だけ足さない)。全記事の機械是正は `node .claude/scripts/blog/fix-consecutive-callouts.mjs --base contents/blog --apply` を使う
    - `internalLinks<3` / source-link 末尾集約 → source-link を各図直下にインライン配置
    - `リンク切れ (soft 404 / 410 Gone)` → **勝手に近そうな別ページへ張り替えない**。`.claude/scripts/blog/data/broken-link-remap.json` に置換先 (アンカーテキストが指す指標が実在 metric の title と一致する場合のみ。無ければ `to: null` = リンク解除) と `reason` を追記し、`node .claude/scripts/blog/fix-broken-internal-links.mjs --apply` で決定的に是正する (置換先を live 実測し到達不能なら中断する)。正典 `.claude/rules/blog-quality-standards.md` §内部リンクの実在
    - `data-refresh` レーン、または entry に `staleData` (図の年が指標の最新年より古い) がある → focus `最新データ更新` (下のフロー)。must-fix の記事でも `staleData` があれば同じ回で取り直す
    - opportunity レーン (blocker 無し・CTR 改善余地) → `CTR-reframe`
 3. **記事アーキタイプを 1 つ選び frontmatter `archetype: A|B|C|D|E` を宣言** (正典「記事アーキタイプ」)。型の章構成・必須分析視点に従う。
 4. **quality-gate を通す**: `node .claude/scripts/blog/quality-gate.mjs <draft path>`。`prose/図` blocker を含め blocker 0 になるまで直す。
-5. **blog-critic を別 agent で起動** → `docs/21_…/<slug>/review.md` verdict: PASS まで反復 (★自己採点禁止)。
+5. **blog-critic を別 agent で起動** → `contents/blog/<slug>/review.md` verdict: PASS まで反復 (★自己採点禁止)。
 6. **done に印 + wave_id**: `node .claude/scripts/blog/build-remediation-queue.mjs --mark-done <slug> --wave-id YYYY-MM-DD-manual`
 
 ### Step 4: wave を記録 (history + 改善ログ)
@@ -287,7 +287,7 @@ nlm cross query --notebooks "<ノートブック名>" \
 (数値を記憶や類推で書かない。上の絶対遵守と同じ)。
 
 1. 確認: `node .claude/scripts/blog/refresh-article-data-years.mjs --slug <slug> --pull`
-   (公開中の記事と図を `docs/21_ブログ記事原稿/<slug>/` へ取り出し、図ごとに「取り直せる / 最新 / 年を固定 / 手作業」を表で出す)
+   (公開中の記事と図を `contents/blog/<slug>/` へ取り出し、図ごとに「取り直せる / 最新 / 年を固定 / 手作業」を表で出す)
 2. **図ごとに直し方を決める (既定は取り直す)**。表の補足に、本文で図の年と最新年がそれぞれ何回出るかが出る。
    - 本文が図の年を語らず新しい年を語っている → 図だけが古い食い違い。図だけ取り直す
      (実例: 財政力指数の 2 記事で、2022 年度の順位を語る節に 1989 年の地図が置かれていた)
@@ -335,7 +335,7 @@ node .claude/scripts/blog/quality-gate.mjs <slug>
 quality-gate は内部で `article-factual-check.mjs` を呼び、rank/値の data 突合・callout連続配置/内部リンク/H2・**prose 文字数の床 (1600)**・NG ワード・**truncated 表**を一括検証する。
 
 > **★公開記事は blog-critic レビュー (review.md verdict: PASS) が必須**: `published:true` の記事は
-> `docs/21_ブログ記事原稿/<slug>/review.md` (別 agent `blog-critic` が `/blog-review --mode expert` で生成、
+> `contents/blog/<slug>/review.md` (別 agent `blog-critic` が `/blog-review --mode expert` で生成、
 > verdict: PASS) が無いと quality-gate が blocker で止める。**リライトした本人が自己採点しない** ——
 > 必ず別コンテキストの blog-critic に意味レビュー (冗長・図表重複・水増し・CTA過多・読者価値) を依頼し、
 > REVISE 指摘を反映してから PASS を得る。文字数の量的十分性も critic が判断する (高い文字数床で水増しを誘発しない)。

@@ -12,7 +12,7 @@ name: 📤 Blog Auto-Publish (develop → R2)
 #   緊急停止: GitHub Actions UI の "Disable workflow" (リポジトリ変数によるガードは廃止)。
 #
 # 安全装置:
-#   - published:true の docs/21 記事だけが対象 (作業中ドラフト published:false は無視)
+#   - published:true の contents/blog 記事だけが対象 (作業中ドラフト published:false は無視)
 #   - publish 前に ci-factual-gate (数値捏造) + quality-gate (構造・薄さ) を再検証し、
 #     落ちた slug はスキップ (R2 に到達させない)
 #   - 1 回の実行で公開する件数の上限は撤廃 (2026-08-31 オーナー判断)。公開対象は
@@ -34,12 +34,12 @@ on:
   push:
     branches: [develop]
     paths:
-      - 'docs/21_ブログ記事原稿/**/article.md'
+      - 'contents/blog/**/article.md'
       # この workflow 自身の変更でも発火させ、未公開記事の backfill (reconcile) を回せるようにする。
       - '.github/workflows/blog-auto-publish.yml'
 
 permissions:
-  contents: write # 公開後に docs/21 ドラフトを自動削除 (ephemeral outbox) して commit-back するため
+  contents: write # 公開後に contents/blog ドラフトを自動削除 (ephemeral outbox) して commit-back するため
 
 concurrency:
   group: r2-write # 全 R2 image writer + publish-blog.yml と共通
@@ -88,7 +88,7 @@ jobs:
             # ★ core.quotepath=false で日本語パスをエスケープせず出力 (既定 true だと
             #    "docs/21_\343\203..." とエスケープされ grep に一致せず 0 件になる既知バグ)。
             CHANGED=$(git -c core.quotepath=false diff --name-only --diff-filter=ACM "HEAD~1" "HEAD" \
-              | grep -E '^docs/21_ブログ記事原稿/[^/]+/article\.md$' || true)
+              | grep -E '^contents/blog/[^/]+/article\.md$' || true)
             CANDIDATES=""
             for f in $CHANGED; do CANDIDATES="$CANDIDATES $(basename "$(dirname "$f")")"; done
             # reconcile: 変更検出が空なら、公開が要る記事を backfill する。
@@ -111,7 +111,7 @@ jobs:
           SLUGS=""
           COUNT=0
           for slug in $CANDIDATES; do
-            f="docs/21_ブログ記事原稿/$slug/article.md"
+            f="contents/blog/$slug/article.md"
             if [ -f "$f" ] && grep -qE '^published:[[:space:]]*true[[:space:]]*$' "$f"; then
               SLUGS="$SLUGS $slug"; COUNT=$((COUNT + 1))
             else
@@ -137,7 +137,7 @@ jobs:
           SKIPPED=""
           for SLUG in $TARGET_SLUGS; do
             echo "::group::publish $SLUG"
-            DRAFT="docs/21_ブログ記事原稿/$SLUG/article.md"
+            DRAFT="contents/blog/$SLUG/article.md"
             # --- ゲート (公開前ブロック) ---
             if ! node .claude/scripts/blog/ci-factual-gate.mjs "$SLUG"; then
               echo "❌ $SLUG: factual gate fail → skip"; SKIPPED="$SKIPPED $SLUG"; echo "::endgroup::"; continue
@@ -148,7 +148,7 @@ jobs:
             # --- thumbnail を outbox から先に検証・生成 (isolated staging + exact plan) ---
             # 既知の背景未生成 (exit 20) だけを skip。通信/SHA/生成失敗は run を止める。
             # 記事本体を先に staging すると、末尾の app/blog sync が未完成記事も公開してしまう。
-            if BLOG_DIR=docs/21_ブログ記事原稿 npx tsx apps/web/scripts/generate-blog-thumbnails.ts --slug "$SLUG"; then
+            if BLOG_DIR=contents/blog npx tsx apps/web/scripts/generate-blog-thumbnails.ts --slug "$SLUG"; then
               :
             else
               THUMBNAIL_STATUS=$?
@@ -161,7 +161,7 @@ jobs:
             fi
             # --- ステージ (publishedAt 補完) ---
             mkdir -p ".local/r2/app/blog/$SLUG"
-            cp -R "docs/21_ブログ記事原稿/$SLUG/." ".local/r2/app/blog/$SLUG/"
+            cp -R "contents/blog/$SLUG/." ".local/r2/app/blog/$SLUG/"
             A=".local/r2/app/blog/$SLUG/article.md"
             if grep -qE '^publishedAt:\s*\(未定\)' "$A" || ! grep -qE '^publishedAt:\s*[0-9]' "$A"; then
               perl -i -pe "s/^publishedAt:.*/publishedAt: $(date -u +%Y-%m-%d)/" "$A"
@@ -211,10 +211,10 @@ jobs:
         if: ${{ env.PUBLISHED != '' }}
         run: npm run audit:public-data-contract
 
-      # docs/21 は ephemeral outbox: 公開に成功した slug のドラフトを R2 反映後に削除し、
-      # commit-back する。これで docs/21 は常に空 (未公開ドラフトのみ) に保たれ、R2(正典)と
+      # contents/blog は ephemeral outbox: 公開に成功した slug のドラフトを R2 反映後に削除し、
+      # commit-back する。これで contents/blog は常に空 (未公開ドラフトのみ) に保たれ、R2(正典)と
       # ドリフトしない。[skip ci] で自己再発火を防止、pull --rebase で他 push との race を吸収。
-      - name: 🧹 Remove published drafts from docs/21 (ephemeral outbox)
+      - name: 🧹 Remove published drafts from contents/blog (ephemeral outbox)
         if: ${{ steps.detect.outputs.slugs != '' && success() }}
         env:
           R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
@@ -222,14 +222,14 @@ jobs:
           REMOVED=""
           # outbox ごと消える前に、最後の review.md の指摘を台帳に残す (二重に記録しても行は増えない)
           for SLUG in $PUBLISHED; do
-            if [ -f "docs/21_ブログ記事原稿/$SLUG/review.md" ]; then
-              node .claude/scripts/blog/record-critic-findings.mjs "docs/21_ブログ記事原稿/$SLUG" || echo "::warning::critic の指摘の記録に失敗 ($SLUG)"
+            if [ -f "contents/blog/$SLUG/review.md" ]; then
+              node .claude/scripts/blog/record-critic-findings.mjs "contents/blog/$SLUG" || echo "::warning::critic の指摘の記録に失敗 ($SLUG)"
             fi
           done
           if [ -f data/blog/critic-findings.jsonl ]; then git add data/blog/critic-findings.jsonl; fi
           for SLUG in $PUBLISHED; do
-            if [ -d "docs/21_ブログ記事原稿/$SLUG" ]; then
-              git rm -r -q "docs/21_ブログ記事原稿/$SLUG" && REMOVED="$REMOVED $SLUG"
+            if [ -d "contents/blog/$SLUG" ]; then
+              git rm -r -q "contents/blog/$SLUG" && REMOVED="$REMOVED $SLUG"
             fi
           done
           # ★sitemap のコミット済み snapshot を公開実態に追随させる (2026-08-20 配線)。
@@ -244,7 +244,7 @@ jobs:
             echo "::warning::sitemap-blog-entries の再生成に失敗 (公開自体は成功。次の sync-snapshots で追随する)"
           fi
           if git diff --cached --quiet; then
-            echo "削除対象なし (docs/21 に公開済みドラフトの取り残しなし)"; exit 0
+            echo "削除対象なし (contents/blog に公開済みドラフトの取り残しなし)"; exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -263,5 +263,5 @@ jobs:
           {
             echo "- ✅ 公開: ${PUBLISHED:-なし}"
             echo "- ⏭️ ゲート未達でスキップ: ${SKIPPED:-なし}"
-            echo "- 🧹 docs/21 outbox: 公開済みドラフトを削除済 (ephemeral)"
+            echo "- 🧹 contents/blog outbox: 公開済みドラフトを削除済 (ephemeral)"
           } >> "$GITHUB_STEP_SUMMARY"

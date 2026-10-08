@@ -1,7 +1,7 @@
 export const meta = {
   name: 'blog-critic-followup',
   description: 'rewrite 済みブログに blog-critic を追走し review.md を生成 (PASS/REVISE)',
-  phases: [{ title: 'Critic', detail: 'blog-critic が docs/21 の記事を意味レビュー → review.md' }],
+  phases: [{ title: 'Critic', detail: 'blog-critic が contents/blog の記事を意味レビュー → review.md' }],
 }
 
 // args = ["slug1","slug2",...] (rewrite 済・review.md 無しの critic 未実施記事)
@@ -36,13 +36,13 @@ function criticPrompt(slug) {
 OUTPUT は StructuredOutput tool で返す (人間向けテキスト不要)。
 
 あなたは blog-critic。**既に rewrite 済み**の記事を読者価値の観点で **mode: full** で意味レビューする。リライトは行わない。
-記事: docs/21_ブログ記事原稿/${slug}/article.md
+記事: contents/blog/${slug}/article.md
 
 1. 記事を読み、.claude/rules/blog-quality-standards.md の品質3層モデル②(意味レビュー)で評価する:
    curiosity gap の真正性 / 図あたりの解釈の厚み / 冗長・図表重複の有無 / callout の情報量 /
    ですます調の一貫性 / 内部リンクの妥当性 / 記事アーキタイプ(A-E)の必須分析視点が満たされているか /
    数値・順位が data/*.json と矛盾しないか。
-2. review.md を docs/21_ブログ記事原稿/${slug}/review.md に書き出す (frontmatter に slug/reviewer:blog-critic/verdict/date、
+2. review.md を contents/blog/${slug}/review.md に書き出す (frontmatter に slug/reviewer:blog-critic/verdict/date、
    本文に 評価サマリ + 指摘[blocker/major/minor] + 判定理由)。verdict は必ず PASS か REVISE を明記。
 3. StructuredOutput で verdict(PASS/REVISE) / blockers(致命的指摘数) / summary(≤30字) を返す。
    実体ある分析で読者価値が十分なら PASS、図表重複・水増し・薄い解釈・事実矛盾が残るなら REVISE。

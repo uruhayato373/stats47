@@ -6,7 +6,7 @@
  * article.md / slug に一切依存せず一発生成するローカル CLI。
  *
  * 記事執筆パイプライン (fetch-ranking-data-r2.mjs → generate-article-charts.ts) は
- * docs/21_ブログ記事原稿/<slug>/ を前提にしており「まず記事を書く」ことを要求する。
+ * contents/blog/<slug>/ を前提にしており「まず記事を書く」ことを要求する。
  * これは SNS 投稿の瞬発力（数分で1枚出す）には重すぎるため、
  * 同じ SSOT (R2 app/ranking/<key>) と同じ描画エンジン (@stats47/svg-builder) を再利用し、
  * slug/記事を経由しない単発版として切り出す。

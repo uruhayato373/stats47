@@ -15,7 +15,7 @@
  *   node .claude/scripts/blog/audit-chart-quality.mjs [--base <dir>] [--json] [--out <path>]
  *
  *   --base <dir>  記事ルート。デフォルト: .local/r2/app/blog (R2 pull 後のローカル)
- *                 docs ドラフト監査なら --base docs/21_ブログ記事原稿
+ *                 docs ドラフト監査なら --base contents/blog
  *   --json        機械可読 JSON を stdout に出力 (brushup 候補選定が読む)
  *   --out <path>  監査結果 JSON の保存先。デフォルト: data/blog/chart-audit.json
  *
@@ -70,7 +70,7 @@ if (!fs.existsSync(BASE)) {
   console.error(`[error] base dir not found: ${BASE}`);
   console.error(
     `先に R2 を pull してください (例: /pull-r2 --prefix blog)。` +
-      ` または --base docs/21_ブログ記事原稿 でドラフトを監査。`
+      ` または --base contents/blog でドラフトを監査。`
   );
   process.exit(1);
 }

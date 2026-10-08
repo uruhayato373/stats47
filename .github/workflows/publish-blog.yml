@@ -1,7 +1,7 @@
-name: 📝 Publish Blog Article (docs/21 draft → R2)
+name: 📝 Publish Blog Article (contents/blog draft → R2)
 
 # 完全DBレス / cloud-first のブログ公開パイプライン。
-# docs/21_ブログ記事原稿/<slug> のドラフトを R2 cloud (app/blog/<slug>) に publish し、
+# contents/blog/<slug> のドラフトを R2 cloud (app/blog/<slug>) に publish し、
 # blog snapshot (all.json) を再生成 + push する。ローカル R2 creds 不要 (GitHub Secrets 使用)。
 #
 # 使い方:
@@ -18,7 +18,7 @@ on:
   workflow_dispatch:
     inputs:
       slug:
-        description: 'docs/21_ブログ記事原稿/<slug> の slug'
+        description: 'contents/blog/<slug> の slug'
         required: true
       published_at:
         description: 'publishedAt (YYYY-MM-DD、空なら本日 UTC)'
@@ -30,7 +30,7 @@ on:
         default: 'true'
 
 permissions:
-  contents: write # 本番公開後に docs/21 ドラフトを自動削除 (ephemeral outbox) して commit-back するため
+  contents: write # 本番公開後に contents/blog ドラフトを自動削除 (ephemeral outbox) して commit-back するため
 
 concurrency:
   group: r2-write
@@ -68,8 +68,8 @@ jobs:
       - name: ✅ Validate draft exists
         run: |
           SLUG="${{ github.event.inputs.slug }}"
-          test -f "docs/21_ブログ記事原稿/$SLUG/article.md" \
-            || { echo "❌ ドラフトが無い: docs/21_ブログ記事原稿/$SLUG/article.md"; exit 1; }
+          test -f "contents/blog/$SLUG/article.md" \
+            || { echo "❌ ドラフトが無い: contents/blog/$SLUG/article.md"; exit 1; }
           # 既に公開済みなら二重公開しない (R2 に既存)
           echo "draft OK: $SLUG"
 
@@ -82,7 +82,7 @@ jobs:
           PD="${{ github.event.inputs.published_at }}"
           [ -z "$PD" ] && PD="$(date -u +%Y-%m-%d)"
           mkdir -p ".local/r2/app/blog/$SLUG"
-          cp -R "docs/21_ブログ記事原稿/$SLUG/." ".local/r2/app/blog/$SLUG/"
+          cp -R "contents/blog/$SLUG/." ".local/r2/app/blog/$SLUG/"
           # 公開フォルダ側の publishedAt + published を設定 (git のドラフトは触らない)
           A=".local/r2/app/blog/$SLUG/article.md"
           perl -i -pe "s/^publishedAt:.*/publishedAt: $PD/" "$A"
@@ -167,17 +167,17 @@ jobs:
           echo "live: https://stats47.jp/blog/$SLUG → HTTP $code"
           [ "$code" = "200" ] || echo "⚠️ まだ 200 でない (ISR/cache 反映待ちの可能性)。数分後に再確認を"
 
-      # docs/21 は ephemeral outbox: 本番公開時のみ、公開した slug のドラフトを R2 反映後に
+      # contents/blog は ephemeral outbox: 本番公開時のみ、公開した slug のドラフトを R2 反映後に
       # 自動削除して commit-back する ([skip ci] で再発火防止 / pull --rebase で race 吸収)。
-      - name: 🧹 Remove published draft from docs/21 (ephemeral outbox)
+      - name: 🧹 Remove published draft from contents/blog (ephemeral outbox)
         if: ${{ github.event.inputs.dry_run == 'false' }}
         run: |
           SLUG="${{ github.event.inputs.slug }}"
-          [ -d "docs/21_ブログ記事原稿/$SLUG" ] || { echo "ドラフトなし (削除不要)"; exit 0; }
-          git rm -r -q "docs/21_ブログ記事原稿/$SLUG"
+          [ -d "contents/blog/$SLUG" ] || { echo "ドラフトなし (削除不要)"; exit 0; }
+          git rm -r -q "contents/blog/$SLUG"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -q -m "chore(blog): remove published draft $SLUG from docs/21 outbox [skip ci]"
+          git commit -q -m "chore(blog): remove published draft $SLUG from contents/blog outbox [skip ci]"
           for i in 1 2 3; do
             if git pull --rebase --quiet origin develop && git push origin HEAD:develop; then
               echo "✅ outbox cleanup pushed: $SLUG"; break
@@ -191,5 +191,5 @@ jobs:
             echo "### Publish Blog: ${{ github.event.inputs.slug }}"
             echo "- dry_run: ${{ github.event.inputs.dry_run }}"
             echo "- factual gate: passed"
-            echo "- 🧹 docs/21 outbox: 公開後にドラフトを自動削除 (ephemeral)"
+            echo "- 🧹 contents/blog outbox: 公開後にドラフトを自動削除 (ephemeral)"
           } >> "$GITHUB_STEP_SUMMARY"

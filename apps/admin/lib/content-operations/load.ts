@@ -218,7 +218,7 @@ function loadBlogs(root: string): ReferenceBlogSource[] {
       rankingKeys: [...new Set(rankingKeys)],
     };
   });
-  const outbox = path.join(root, 'docs/21_ブログ記事原稿');
+  const outbox = path.join(root, 'contents/blog');
   const drafts: ReferenceBlogSource[] = [];
   if (fs.existsSync(outbox)) {
     for (const entry of fs.readdirSync(outbox, { withFileTypes: true })) {

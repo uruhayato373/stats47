@@ -61,7 +61,7 @@ async function main() {
         "必要な環境変数: NEXT_PUBLIC_BASE_URL, NEXT_PUBLIC_ESTAT_APP_ID\n"
       );
       console.error(
-        "AdSenseを有効にする場合: NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT_ID, NEXT_PUBLIC_GOOGLE_ADSENSE_ENABLED\n"
+        "AdSenseを有効にする場合: NEXT_PUBLIC_GOOGLE_ADSENSE_ENABLED (パブリッシャー ID は packages/types/src/site.json)\n"
       );
     } else {
       console.error("\n.env.localファイルに必要な環境変数を設定してください。");

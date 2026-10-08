@@ -9,7 +9,7 @@ metadata:
 ---
 
 2026-10-06、import の解決確認のつもりで `npx tsx packages/ai-content/src/scripts/generate-blog-article.ts --help` を実行したところ、
---help は無視されて既定モードの本処理が走り、topic-queue の先頭トピックの outbox (`docs/21_ブログ記事原稿/<slug>/` に prompt と図データ 14 ファイル) を作った。
+--help は無視されて既定モードの本処理が走り、topic-queue の先頭トピックの outbox (`contents/blog/<slug>/` に prompt と図データ 14 ファイル) を作った。
 既定モードは LLM も R2 書き込みもしない設計だったので、作成時刻で今回の生成と確かめてディレクトリを消すだけで済んだ。
 
 **Why:** 自作スクリプトの多くは `getArg` 程度の手書きパーサで、未知の引数を黙って無視する。--help が無害だという前提は成り立たない。

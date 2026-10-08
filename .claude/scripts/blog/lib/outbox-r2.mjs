@@ -1,5 +1,5 @@
 /**
- * docs/21 outbox と R2 (正典) の突き合わせ。
+ * contents/blog outbox と R2 (正典) の突き合わせ。
  *
  * outbox の 1 記事は R2 に対して 3 状態のいずれかを取る:
  *
@@ -16,7 +16,7 @@
  * **改稿版は構造的に永久公開されなかった** (pruner は正しく保持していたので
  * outbox に溜まり続けた)。両者が同じ関数を使うことでこのズレを再発させない。
  *
- * 正典: .claude/rules/blog-data-schema.md §0 (docs/21 = ephemeral outbox / R2 = SSOT)
+ * 正典: .claude/rules/blog-data-schema.md §0 (contents/blog = ephemeral outbox / R2 = SSOT)
  */
 
 import { readFileSync } from "node:fs";

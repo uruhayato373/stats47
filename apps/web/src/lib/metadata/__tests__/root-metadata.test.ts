@@ -2,6 +2,7 @@ import { readFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { SITE } from "@stats47/types";
 import { describe, it, expect, vi } from "vitest";
 
 vi.mock("@/lib/env", () => ({
@@ -13,6 +14,8 @@ vi.mock("@/lib/logger", () => ({
 }));
 
 import { generateRootMetadata } from "../root-metadata";
+
+const REPO_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "../../../../../..");
 
 describe("generateRootMetadata", () => {
   it("metadataBase を設定する", () => {
@@ -60,39 +63,31 @@ describe("generateRootMetadata", () => {
   });
 
   // AdSense 審査中は広告コードを出さず、所有権確認の meta だけを出す (ADSENSE-RESTART-01)
-  it("AdSense のクライアント ID があれば広告表示の可否と独立に所有権確認の meta を出す", () => {
-    vi.stubEnv("NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT_ID", "ca-pub-0000000000000000");
+  it("広告表示の可否や環境変数と独立に、正本のパブリッシャー ID で所有権確認の meta を出す", () => {
+    vi.stubEnv("NEXT_PUBLIC_GOOGLE_ADSENSE_ENABLED", "");
 
     const metadata = generateRootMetadata();
 
-    expect(metadata.other).toEqual({ "google-adsense-account": "ca-pub-0000000000000000" });
+    expect(metadata.other).toEqual({ "google-adsense-account": SITE.adsenseClientId });
+    expect(SITE.adsenseClientId).toMatch(/^ca-pub-\d{16}$/);
     vi.unstubAllEnvs();
   });
 
-  it("AdSense のクライアント ID が無ければ meta を出さない", () => {
-    vi.stubEnv("NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT_ID", "");
-
-    const metadata = generateRootMetadata();
-
-    expect(metadata.other).toBeUndefined();
-    vi.unstubAllEnvs();
-  });
-
-  // ads.txt と本番 build の client ID は手で同期しているため、食い違うと審査・配信が別口座を指す
-  it("ads.txt のパブリッシャー ID が本番 build の AdSense クライアント ID と一致する", () => {
-    const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), "../../../../../..");
-    const adsTxt = readFileSync(resolve(repoRoot, "apps/web/public/ads.txt"), "utf8");
-    const deployWorkflow = readFileSync(
-      resolve(repoRoot, ".github/workflows/deploy-workers.yml"),
-      "utf8",
-    );
+  // パブリッシャー ID の正本は site.json だけ。ads.txt と食い違うと審査・配信が別口座を指す
+  it("ads.txt のパブリッシャー ID が正本 (SITE.adsenseClientId) と一致する", () => {
+    const adsTxt = readFileSync(resolve(REPO_ROOT, "apps/web/public/ads.txt"), "utf8");
 
     const adsTxtPublisherId = adsTxt.match(/google\.com, (pub-\d+), DIRECT/)?.[1];
-    const buildClientId = deployWorkflow.match(
-      /NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT_ID: "ca-(pub-\d+)"/,
-    )?.[1];
 
     expect(adsTxtPublisherId).toBeDefined();
-    expect(adsTxtPublisherId).toBe(buildClientId);
+    expect(`ca-${adsTxtPublisherId}`).toBe(SITE.adsenseClientId);
+  });
+
+  // 2026-10-08 に env から site.json へ移した。env を戻すと正本が二つになり、片方だけ更新されて食い違う
+  it("本番 build と Workers の設定にパブリッシャー ID の環境変数を戻さない", () => {
+    for (const file of [".github/workflows/deploy-workers.yml", "apps/web/wrangler.toml"]) {
+      const text = readFileSync(resolve(REPO_ROOT, file), "utf8");
+      expect(text, file).not.toContain("NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT_ID");
+    }
   });
 });

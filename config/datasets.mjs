@@ -25,6 +25,7 @@ export const KINDS = {
   report: "人が読む要約",
   evidence: "根拠 (一回きりの調査・作業の記録)",
   asset: "素材の原本 (画像と、その生成の説明・マニフェスト)",
+  outbox: "公開待ちの原稿 (公開後に CI が消す。公開した記事の正本は R2)",
 };
 
 /** 本来の置き場。path がこの dir で始まらない行は移行対象 */
@@ -34,6 +35,7 @@ export const TARGETS = {
   state: { dir: ".claude/state/", label: "エージェントの作業状態" },
   "agent-config": { dir: ".claude/config/", label: "品質ゲートの基準・閾値" },
   assets: { dir: "assets/", label: "画像などの素材の原本" },
+  contents: { dir: "contents/", label: "公開待ちの原稿" },
 };
 
 /** 完全性を検査する範囲。ここに当たる追跡ファイルは台帳のどれか 1 行に当たらなければならない */
@@ -41,6 +43,7 @@ export const GOVERNED = [
   /^config\//,
   /^data\//,
   /^assets\//,
+  /^contents\//,
   /^\.claude\/state\//,
   /^\.claude\/skills\/analytics\/[^/]+\/reference\/(snapshots|monthly-snapshots|weekly-snapshots|archive)\//,
   /^\.claude\/skills\/analytics\/[^/]+\/reference\/(improvement-log\.md|budgets[^/]*\.json)$/,
@@ -56,7 +59,7 @@ export const GOVERNED = [
  *   packages/*\/src/・packages/*\/data/  パッケージに同梱する画像・図形 (コードが import する・GIS の県形状など)
  *   config/coconala/assets/  ココナラのプロフィール・商品画像 (出品台帳と一緒に人が判断して変える)
  *   .claude/skills/**\/examples/ (と Codex 用ミラー .agents/)  スキルの説明に使う作例
- *   docs/21_ブログ記事原稿/・docs/31_note記事原稿/  公開待ちの原稿 outbox (公開後に CI が消す)
+ *   contents/blog/・docs/31_note記事原稿/  公開待ちの原稿 outbox (公開後に CI が消す)
  */
 export const IMAGE_ROOTS = [
   /^assets\//,
@@ -64,7 +67,8 @@ export const IMAGE_ROOTS = [
   /^packages\/[^/]+\/(?:src|data)\//,
   /^config\/coconala\/assets\//,
   /^\.(?:claude|agents)\/skills\/(?:[^/]+\/)+examples\//,
-  /^docs\/(?:21_ブログ記事原稿|31_note記事原稿)\//,
+  /^contents\/blog\//,
+  /^docs\/31_note記事原稿\//,
 ];
 export const IMAGE_EXT = /\.(?:png|jpe?g|webp|gif|avif|svg|ico)$/i;
 
@@ -275,6 +279,7 @@ export const DATASETS = [
   d("agent.mail-inbox", ".claude/state/inbox/mail-events.json", "state", "ops", "state", "obsidian の mail-triage がメールから拾ったイベント (売上の正本ではない。正本は各スクレイパーのログ)"),
 
   // ── assets/ : 画像などの素材の原本 ──
+  d("blog.outbox", "contents/blog/{**}", "outbox", "site", "contents", "ブログの公開待ち原稿 (develop への push で blog-auto-publish が R2 へ公開し、公開した slug を消す)"),
   d("blog.article-backgrounds", "assets/blog/article-backgrounds/{**}", "asset", "site", "assets", "ブログ記事のサムネイル背景の原本 (サムネイル生成が読む)"),
   d("blog.codex-backgrounds", "assets/blog/codex-backgrounds/{**}", "asset", "site", "assets", "Codex で生成したブログ背景の原本と採用状態"),
   d("ogp.backgrounds", "assets/ogp/{**}", "asset", "site", "assets", "OGP・サムネイルのブランド背景と、その元画像"),
@@ -304,6 +309,8 @@ export const DATASETS = [
  * (旧パスを読んで黙って空になる・旧パスへ書き続けて記録が割れるのを防ぐ)。履歴の記録 (json の出典・md) は対象外。
  */
 export const RETIRED = [
+  // ブログの公開待ち原稿 (2026-10-08 に docs/ から。docs/ は人が読み返す文書の置き場で、公開後に消える原稿と性質が合わない)
+  { from: "docs/21_ブログ記事原稿", to: "contents/blog", since: "2026-10-08" },
   // 画像の原本 (2026-10-06 に assets/ へ)
   { from: "apps/web/scripts/lib/assets", to: "assets/blog・assets/ogp", since: "2026-10-06" },
   { from: "apps/web/scripts/data/area-specialty", to: "assets/area-specialty", since: "2026-10-06" },

@@ -1,7 +1,7 @@
 ---
 paths:
   - "packages/svg-builder/**"
-  - "docs/21_ブログ記事原稿/**/data/**"
+  - "contents/blog/**/data/**"
   - ".claude/{scripts/blog,skills/blog/generate-article-charts,skills/ui/audit-blog-svg-charts}/**"
   - ".claude/agents/chart-author.md"
 ---
@@ -340,7 +340,7 @@ dark mode 非対応 / theme 色 inline の 2 つは 140 枚該当のため warni
 
 | 検体                                                              | 実測                                                                                   |
 | ----------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| 旧 2 世代前（600×700・`docs/21` の 2 検体）                       | **error 5 / 4**（キャンバス・背景 rect・prefers-color-scheme・svg-\* class・凡例位置） |
+| 旧 2 世代前（600×700・当時の `docs/21` outbox の 2 検体）                       | **error 5 / 4**（キャンバス・背景 rect・prefers-color-scheme・svg-\* class・凡例位置） |
 | 旧 1 世代前（780×560・**本番 R2 の実物**）                        | **error 2**（キャンバス + 旧見出し）— 不変量 #7 が本番集団を捉えることの確認           |
 | 現行（720×720・svg-builder の実出力）                             | **error 0 / warning 0**                                                                |
 | 再生成した実データ **85 枚**（`regenerate-tile-maps.ts` dry-run） | **error 0 / warning 0**・viewBox は全件 720×720                                        |
@@ -350,7 +350,7 @@ dark mode 非対応 / theme 色 inline の 2 つは 140 枚該当のため warni
 **38 枚は flag のまま**（記事内に `/ranking/<key>` 候補が無い 11 枚 + 候補はあるが値が一致しない 27 枚）。
 flag は個別に metric→key を特定する必要があり、**SVG の絵から値を逆復元しない**（捏造防止）。
 
-恒久テストは 2 本。`docs/21` は公開後に自動削除される ephemeral outbox なので、実ファイルに依存させない:
+恒久テストは 2 本。`contents/blog` は公開後に自動削除される ephemeral outbox なので、実ファイルに依存させない:
 
 - `.claude/scripts/lib/__tests__/svg-lint.tile-grid.test.mjs` — 不変量ごとに 1 つだけ壊した合成検体で
   **ゲートの感度**を固定（mutation testing）。検査自体も検証済み（見出しチェックを 1 つ無効化すると落ちる）
