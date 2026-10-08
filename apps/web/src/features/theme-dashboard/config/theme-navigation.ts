@@ -19,6 +19,7 @@ export const THEME_NAV_GROUPS = [
       'aging-society',
       'living-housing',
       'consumer-prices',
+      'household-food-spending',
       'foreign-residents',
     ],
   },
