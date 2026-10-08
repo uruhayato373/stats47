@@ -77,8 +77,8 @@ export const oldPopulationIndex: MetricConfig = {
   "calculation": {
     "isCalculated": false
   },
-  "seoTitle": "老年人口指数ランキング都道府県【2022年】｜1位秋田県（74.2‐）",
-  "seoDescription": "2022年の老年人口指数の都道府県別ランキング。1位秋田県（74.2‐）、最下位東京都（34.4‐）で2.2倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "老年人口指数ランキング都道府県【2022年】｜1位秋田県（74.2）",
+  "seoDescription": "2022年の老年人口指数の都道府県別ランキング。1位秋田県（74.2）、最下位東京都（34.4）で2.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
   "subtitle": "15～64歳人口100人当たり"
 };

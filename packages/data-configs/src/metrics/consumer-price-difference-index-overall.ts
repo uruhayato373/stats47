@@ -52,7 +52,7 @@ export const consumerPriceDifferenceIndexOverall: MetricConfig = {
   "calculation": {
     "isCalculated": false
   },
-  "seoTitle": "消費者物価地域差指数ランキング都道府県【2024年】｜1位東京都（104‐）",
-  "seoDescription": "2024年の消費者物価地域差指数の都道府県別ランキング。1位東京都（104‐）、最下位群馬県（96.2‐）で1.1倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "消費者物価地域差指数ランキング都道府県【2024年】｜1位東京都（104）",
+  "seoDescription": "2024年の消費者物価地域差指数の都道府県別ランキング。1位東京都（104）、最下位群馬県（96.2）で1.1倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true
 };
