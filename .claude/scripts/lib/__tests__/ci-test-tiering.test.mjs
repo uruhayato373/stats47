@@ -55,6 +55,8 @@ test('テーマ定義 (data/themes) だけの変更も data-configs の変更と
 test('workflow YAML か scoped-workflow テストの変更だけが重い workflow 契約を走らせる', () => {
   assert.equal(classifyPrQualityPaths(['.github/workflows/sync-snapshots.yml']).workflow_contracts, true);
   assert.equal(classifyPrQualityPaths(['.claude/scripts/lib/__tests__/data-refresh-scoped-workflow.test.mjs']).workflow_contracts, true);
+  assert.equal(classifyPrQualityPaths(['.github/scripts/r2-overlay-server.mjs']).workflow_contracts, true);
+  assert.equal(classifyPrQualityPaths(['.claude/scripts/lib/__tests__/r2-overlay-server.test.mjs']).workflow_contracts, true);
   assert.equal(classifyPrQualityPaths(['apps/web/src/app/page.tsx']).workflow_contracts, false);
   const pr = fs.readFileSync(path.join(ROOT, '.github/workflows/pr-quality-check.yml'), 'utf8');
   assert.match(pr, /if: needs\.changes\.outputs\.workflow_contracts == 'true'\n\s+run: npm run test:scoped-workflow-contracts/);
