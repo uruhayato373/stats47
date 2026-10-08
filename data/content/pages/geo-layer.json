@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "pages": [
+    {
+      "id": "geo-layer:population-mesh",
+      "kind": "geo-layer",
+      "key": "population-mesh",
+      "title": "1kmメッシュの人口",
+      "href": "/geo/layers/population-mesh",
+      "published": true
+    },
+    {
+      "id": "geo-layer:residential-land-price",
+      "kind": "geo-layer",
+      "key": "residential-land-price",
+      "title": "住宅地の地価公示地点",
+      "href": "/geo/layers/residential-land-price",
+      "published": true
+    },
+    {
+      "id": "geo-layer:station-points",
+      "kind": "geo-layer",
+      "key": "station-points",
+      "title": "駅の代表点",
+      "href": "/geo/layers/station-points",
+      "published": true
+    }
+  ]
+}

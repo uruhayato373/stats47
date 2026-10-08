@@ -1,0 +1,1701 @@
+{
+  "version": 1,
+  "pages": [
+    {
+      "id": "municipality-ranking:abandoned-cultivated-land-area",
+      "kind": "municipality-ranking",
+      "key": "abandoned-cultivated-land-area",
+      "title": "耕地放棄面積",
+      "href": "/municipalities/ranking/abandoned-cultivated-land-area",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:agricultural-output",
+      "kind": "municipality-ranking",
+      "key": "agricultural-output",
+      "title": "農業産出額",
+      "href": "/municipalities/ranking/agricultural-output",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:annual-sales-amount",
+      "kind": "municipality-ranking",
+      "key": "annual-sales-amount",
+      "title": "商業年間商品販売額",
+      "href": "/municipalities/ranking/annual-sales-amount",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:annual-sales-amount-per-employee",
+      "kind": "municipality-ranking",
+      "key": "annual-sales-amount-per-employee",
+      "title": "商業年間商品販売額",
+      "href": "/municipalities/ranking/annual-sales-amount-per-employee",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:annual-sales-amount-per-establishment",
+      "kind": "municipality-ranking",
+      "key": "annual-sales-amount-per-establishment",
+      "title": "商業年間商品販売額",
+      "href": "/municipalities/ranking/annual-sales-amount-per-establishment",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:auto-insurance-penetration-bodily-injury-actual",
+      "kind": "municipality-ranking",
+      "key": "auto-insurance-penetration-bodily-injury-actual",
+      "title": "自動車保険普及率",
+      "href": "/municipalities/ranking/auto-insurance-penetration-bodily-injury-actual",
+      "published": false
+    },
+    {
+      "id": "municipality-ranking:auto-insurance-penetration-bodily-injury-fixed",
+      "kind": "municipality-ranking",
+      "key": "auto-insurance-penetration-bodily-injury-fixed",
+      "title": "自動車保険普及率",
+      "href": "/municipalities/ranking/auto-insurance-penetration-bodily-injury-fixed",
+      "published": false
+    },
+    {
+      "id": "municipality-ranking:births",
+      "kind": "municipality-ranking",
+      "key": "births",
+      "title": "出生数",
+      "href": "/municipalities/ranking/births",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:census-household-change-rate-5y",
+      "kind": "municipality-ranking",
+      "key": "census-household-change-rate-5y",
+      "title": "5年間の世帯増減率",
+      "href": "/municipalities/ranking/census-household-change-rate-5y",
+      "published": false
+    },
+    {
+      "id": "municipality-ranking:census-population-change-5y",
+      "kind": "municipality-ranking",
+      "key": "census-population-change-5y",
+      "title": "5年間の人口増減数",
+      "href": "/municipalities/ranking/census-population-change-5y",
+      "published": false
+    },
+    {
+      "id": "municipality-ranking:census-population-change-rate-5y",
+      "kind": "municipality-ranking",
+      "key": "census-population-change-rate-5y",
+      "title": "5年間の人口増減率",
+      "href": "/municipalities/ranking/census-population-change-rate-5y",
+      "published": false
+    },
+    {
+      "id": "municipality-ranking:civil-engineering-expense-municipal",
+      "kind": "municipality-ranking",
+      "key": "civil-engineering-expense-municipal",
+      "title": "土木費",
+      "href": "/municipalities/ranking/civil-engineering-expense-municipal",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:commute-by-bicycle",
+      "kind": "municipality-ranking",
+      "key": "commute-by-bicycle",
+      "title": "自宅外通勤・通学者数（自転車）",
+      "href": "/municipalities/ranking/commute-by-bicycle",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:commute-by-bus",
+      "kind": "municipality-ranking",
+      "key": "commute-by-bus",
+      "title": "自宅外通勤・通学者数（乗合バス）",
+      "href": "/municipalities/ranking/commute-by-bus",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:commute-by-car",
+      "kind": "municipality-ranking",
+      "key": "commute-by-car",
+      "title": "自宅外通勤・通学者数（自家用車）",
+      "href": "/municipalities/ranking/commute-by-car",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:commute-by-motorcycle",
+      "kind": "municipality-ranking",
+      "key": "commute-by-motorcycle",
+      "title": "自宅外通勤・通学者数（オートバイ）",
+      "href": "/municipalities/ranking/commute-by-motorcycle",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:commute-by-train",
+      "kind": "municipality-ranking",
+      "key": "commute-by-train",
+      "title": "自宅外通勤・通学者数（鉄道・電車）",
+      "href": "/municipalities/ranking/commute-by-train",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:commute-on-foot",
+      "kind": "municipality-ranking",
+      "key": "commute-on-foot",
+      "title": "自宅外通勤・通学者数（徒歩）",
+      "href": "/municipalities/ranking/commute-on-foot",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:commuter-ratio-from-other-municipalities",
+      "kind": "municipality-ranking",
+      "key": "commuter-ratio-from-other-municipalities",
+      "title": "他市区町村からの通勤者比率",
+      "href": "/municipalities/ranking/commuter-ratio-from-other-municipalities",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:commuter-ratio-to-other-municipalities",
+      "kind": "municipality-ranking",
+      "key": "commuter-ratio-to-other-municipalities",
+      "title": "他市区町村への通勤者比率",
+      "href": "/municipalities/ranking/commuter-ratio-to-other-municipalities",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:commuters-total",
+      "kind": "municipality-ranking",
+      "key": "commuters-total",
+      "title": "自宅外通勤・通学者数",
+      "href": "/municipalities/ranking/commuters-total",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:consolidated-real-deficit-ratio-municipal",
+      "kind": "municipality-ranking",
+      "key": "consolidated-real-deficit-ratio-municipal",
+      "title": "連結実質赤字比率",
+      "href": "/municipalities/ranking/consolidated-real-deficit-ratio-municipal",
+      "published": false
+    },
+    {
+      "id": "municipality-ranking:crime-rate-per-1k",
+      "kind": "municipality-ranking",
+      "key": "crime-rate-per-1k",
+      "title": "刑法犯認知件数（人口千人当たり）",
+      "href": "/municipalities/ranking/crime-rate-per-1k",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:criminal-recognition-count",
+      "kind": "municipality-ranking",
+      "key": "criminal-recognition-count",
+      "title": "刑法犯認知件数",
+      "href": "/municipalities/ranking/criminal-recognition-count",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:cultivated-area",
+      "kind": "municipality-ranking",
+      "key": "cultivated-area",
+      "title": "耕地面積",
+      "href": "/municipalities/ranking/cultivated-area",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:culture-recreation-cost-all-households",
+      "kind": "municipality-ranking",
+      "key": "culture-recreation-cost-all-households",
+      "title": "教養娯楽費（全世帯）",
+      "href": "/municipalities/ranking/culture-recreation-cost-all-households",
+      "published": false
+    },
+    {
+      "id": "municipality-ranking:current-balance-ratio-city",
+      "kind": "municipality-ranking",
+      "key": "current-balance-ratio-city",
+      "title": "経常収支比率（市町村財政）",
+      "href": "/municipalities/ranking/current-balance-ratio-city",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:day-time-population",
+      "kind": "municipality-ranking",
+      "key": "day-time-population",
+      "title": "昼間人口",
+      "href": "/municipalities/ranking/day-time-population",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:day-time-population-ratio",
+      "kind": "municipality-ranking",
+      "key": "day-time-population-ratio",
+      "title": "昼夜間人口比率",
+      "href": "/municipalities/ranking/day-time-population-ratio",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:death-count",
+      "kind": "municipality-ranking",
+      "key": "death-count",
+      "title": "死亡数",
+      "href": "/municipalities/ranking/death-count",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:densely-inhabited-district-population",
+      "kind": "municipality-ranking",
+      "key": "densely-inhabited-district-population",
+      "title": "人口集中地区人口",
+      "href": "/municipalities/ranking/densely-inhabited-district-population",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:densely-inhabited-district-population-density",
+      "kind": "municipality-ranking",
+      "key": "densely-inhabited-district-population-density",
+      "title": "人口集中地区人口密度",
+      "href": "/municipalities/ranking/densely-inhabited-district-population-density",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:densely-populated-area",
+      "kind": "municipality-ranking",
+      "key": "densely-populated-area",
+      "title": "人口集中地区面積",
+      "href": "/municipalities/ranking/densely-populated-area",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:densely-populated-area-change-rate",
+      "kind": "municipality-ranking",
+      "key": "densely-populated-area-change-rate",
+      "title": "人口集中地区面積の変化率",
+      "href": "/municipalities/ranking/densely-populated-area-change-rate",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:dental-clinic-count",
+      "kind": "municipality-ranking",
+      "key": "dental-clinic-count",
+      "title": "歯科診療所数",
+      "href": "/municipalities/ranking/dental-clinic-count",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:dentists-in-medical-facilities",
+      "kind": "municipality-ranking",
+      "key": "dentists-in-medical-facilities",
+      "title": "歯科医師数",
+      "href": "/municipalities/ranking/dentists-in-medical-facilities",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:department-store-count-per-100k",
+      "kind": "municipality-ranking",
+      "key": "department-store-count-per-100k",
+      "title": "百貨店数",
+      "href": "/municipalities/ranking/department-store-count-per-100k",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:department-stores-10-per",
+      "kind": "municipality-ranking",
+      "key": "department-stores-10-per",
+      "title": "百貨店数",
+      "href": "/municipalities/ranking/department-stores-10-per",
+      "published": false
+    },
+    {
+      "id": "municipality-ranking:department-supermarket-count",
+      "kind": "municipality-ranking",
+      "key": "department-supermarket-count",
+      "title": "百貨店、総合スーパー数",
+      "href": "/municipalities/ranking/department-supermarket-count",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:department-supermarket-count-per-100k",
+      "kind": "municipality-ranking",
+      "key": "department-supermarket-count-per-100k",
+      "title": "百貨店、総合スーパー数",
+      "href": "/municipalities/ranking/department-supermarket-count-per-100k",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:divorces",
+      "kind": "municipality-ranking",
+      "key": "divorces",
+      "title": "離婚件数",
+      "href": "/municipalities/ranking/divorces",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:dwelling-per-floor-area",
+      "kind": "municipality-ranking",
+      "key": "dwelling-per-floor-area",
+      "title": "１住宅当たりの延べ面積",
+      "href": "/municipalities/ranking/dwelling-per-floor-area",
+      "published": false
+    },
+    {
+      "id": "municipality-ranking:earthquake-retrofit-housing",
+      "kind": "municipality-ranking",
+      "key": "earthquake-retrofit-housing",
+      "title": "耐震工事をした住宅数（持ち家）",
+      "href": "/municipalities/ranking/earthquake-retrofit-housing",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:education-cost-all-households",
+      "kind": "municipality-ranking",
+      "key": "education-cost-all-households",
+      "title": "教育費",
+      "href": "/municipalities/ranking/education-cost-all-households",
+      "published": false
+    },
+    {
+      "id": "municipality-ranking:education-expense-municipal",
+      "kind": "municipality-ranking",
+      "key": "education-expense-municipal",
+      "title": "教育費",
+      "href": "/municipalities/ranking/education-expense-municipal",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:elderly-couple-only-household-ratio",
+      "kind": "municipality-ranking",
+      "key": "elderly-couple-only-household-ratio",
+      "title": "高齢夫婦のみの世帯の割合",
+      "href": "/municipalities/ranking/elderly-couple-only-household-ratio",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:elderly-population-ratio",
+      "kind": "municipality-ranking",
+      "key": "elderly-population-ratio",
+      "title": "65歳以上人口割合",
+      "href": "/municipalities/ranking/elderly-population-ratio",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:elderly-workers-ratio",
+      "kind": "municipality-ranking",
+      "key": "elderly-workers-ratio",
+      "title": "高齢就業者割合",
+      "href": "/municipalities/ranking/elderly-workers-ratio",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:elementary-school-children-count",
+      "kind": "municipality-ranking",
+      "key": "elementary-school-children-count",
+      "title": "小学校児童数",
+      "href": "/municipalities/ranking/elementary-school-children-count",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:elementary-school-count",
+      "kind": "municipality-ranking",
+      "key": "elementary-school-count",
+      "title": "小学校数",
+      "href": "/municipalities/ranking/elementary-school-count",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:elementary-school-count-per-100km2-habitable",
+      "kind": "municipality-ranking",
+      "key": "elementary-school-count-per-100km2-habitable",
+      "title": "小学校数",
+      "href": "/municipalities/ranking/elementary-school-count-per-100km2-habitable",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:elementary-school-teachers",
+      "kind": "municipality-ranking",
+      "key": "elementary-school-teachers",
+      "title": "小学校教員数",
+      "href": "/municipalities/ranking/elementary-school-teachers",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:employed-people-ratio",
+      "kind": "municipality-ranking",
+      "key": "employed-people-ratio",
+      "title": "就業者比率",
+      "href": "/municipalities/ranking/employed-people-ratio",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:employed-people-ratio-primary",
+      "kind": "municipality-ranking",
+      "key": "employed-people-ratio-primary",
+      "title": "第1次産業就業者比率",
+      "href": "/municipalities/ranking/employed-people-ratio-primary",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:employed-people-ratio-secondary",
+      "kind": "municipality-ranking",
+      "key": "employed-people-ratio-secondary",
+      "title": "第2次産業就業者比率",
+      "href": "/municipalities/ranking/employed-people-ratio-secondary",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:employed-people-ratio-tertiary",
+      "kind": "municipality-ranking",
+      "key": "employed-people-ratio-tertiary",
+      "title": "第3次産業就業者比率",
+      "href": "/municipalities/ranking/employed-people-ratio-tertiary",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:fire-affected-persons-count",
+      "kind": "municipality-ranking",
+      "key": "fire-affected-persons-count",
+      "title": "火災り災人員数",
+      "href": "/municipalities/ranking/fire-affected-persons-count",
+      "published": false
+    },
+    {
+      "id": "municipality-ranking:fire-damage-amount",
+      "kind": "municipality-ranking",
+      "key": "fire-damage-amount",
+      "title": "火災損害額",
+      "href": "/municipalities/ranking/fire-damage-amount",
+      "published": false
+    },
+    {
+      "id": "municipality-ranking:fiscal-strength-index",
+      "kind": "municipality-ranking",
+      "key": "fiscal-strength-index",
+      "title": "財政力指数",
+      "href": "/municipalities/ranking/fiscal-strength-index",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:foreign-population-per-100k",
+      "kind": "municipality-ranking",
+      "key": "foreign-population-per-100k",
+      "title": "外国人人口（人口10万人当たり）",
+      "href": "/municipalities/ranking/foreign-population-per-100k",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:foreign-resident-count",
+      "kind": "municipality-ranking",
+      "key": "foreign-resident-count",
+      "title": "外国人人口",
+      "href": "/municipalities/ranking/foreign-resident-count",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:foreign-resident-count-per-100k",
+      "kind": "municipality-ranking",
+      "key": "foreign-resident-count-per-100k",
+      "title": "外国人人口",
+      "href": "/municipalities/ranking/foreign-resident-count-per-100k",
+      "published": false
+    },
+    {
+      "id": "municipality-ranking:foreign-resident-population",
+      "kind": "municipality-ranking",
+      "key": "foreign-resident-population",
+      "title": "住民基本台帳人口（外国人）",
+      "href": "/municipalities/ranking/foreign-resident-population",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:forest-area",
+      "kind": "municipality-ranking",
+      "key": "forest-area",
+      "title": "林野面積",
+      "href": "/municipalities/ranking/forest-area",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:future-burden-ratio-city",
+      "kind": "municipality-ranking",
+      "key": "future-burden-ratio-city",
+      "title": "将来負担比率（市町村財政）",
+      "href": "/municipalities/ranking/future-burden-ratio-city",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:garbage-collection-population",
+      "kind": "municipality-ranking",
+      "key": "garbage-collection-population",
+      "title": "ごみ計画収集人口",
+      "href": "/municipalities/ranking/garbage-collection-population",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:garbage-final-disposal",
+      "kind": "municipality-ranking",
+      "key": "garbage-final-disposal",
+      "title": "ごみ最終処分量",
+      "href": "/municipalities/ranking/garbage-final-disposal",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:garbage-total-output",
+      "kind": "municipality-ranking",
+      "key": "garbage-total-output",
+      "title": "ごみ総排出量",
+      "href": "/municipalities/ranking/garbage-total-output",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:general-clinic-count",
+      "kind": "municipality-ranking",
+      "key": "general-clinic-count",
+      "title": "一般診療所数",
+      "href": "/municipalities/ranking/general-clinic-count",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:general-clinic-count-per-100k",
+      "kind": "municipality-ranking",
+      "key": "general-clinic-count-per-100k",
+      "title": "一般診療所数",
+      "href": "/municipalities/ranking/general-clinic-count-per-100k",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:general-clinic-count-per-100km2",
+      "kind": "municipality-ranking",
+      "key": "general-clinic-count-per-100km2",
+      "title": "一般診療所数",
+      "href": "/municipalities/ranking/general-clinic-count-per-100km2",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:general-hospital-count",
+      "kind": "municipality-ranking",
+      "key": "general-hospital-count",
+      "title": "一般病院数",
+      "href": "/municipalities/ranking/general-hospital-count",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:general-hospital-count-per-100k",
+      "kind": "municipality-ranking",
+      "key": "general-hospital-count-per-100k",
+      "title": "一般病院数",
+      "href": "/municipalities/ranking/general-hospital-count-per-100k",
+      "published": false
+    },
+    {
+      "id": "municipality-ranking:general-hospital-count-per-100km2",
+      "kind": "municipality-ranking",
+      "key": "general-hospital-count-per-100km2",
+      "title": "一般病院数",
+      "href": "/municipalities/ranking/general-hospital-count-per-100km2",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:general-hospital-per-100k",
+      "kind": "municipality-ranking",
+      "key": "general-hospital-per-100k",
+      "title": "一般病院数（人口10万人当たり）",
+      "href": "/municipalities/ranking/general-hospital-per-100k",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:general-household-members",
+      "kind": "municipality-ranking",
+      "key": "general-household-members",
+      "title": "一般世帯人員数",
+      "href": "/municipalities/ranking/general-household-members",
+      "published": false
+    },
+    {
+      "id": "municipality-ranking:habitable-area",
+      "kind": "municipality-ranking",
+      "key": "habitable-area",
+      "title": "可住地面積",
+      "href": "/municipalities/ranking/habitable-area",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:habitable-area-ratio",
+      "kind": "municipality-ranking",
+      "key": "habitable-area-ratio",
+      "title": "可住地面積割合",
+      "href": "/municipalities/ranking/habitable-area-ratio",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:healthcare-cost-all-households",
+      "kind": "municipality-ranking",
+      "key": "healthcare-cost-all-households",
+      "title": "保健医療費（全世帯）",
+      "href": "/municipalities/ranking/healthcare-cost-all-households",
+      "published": false
+    },
+    {
+      "id": "municipality-ranking:high-school-count",
+      "kind": "municipality-ranking",
+      "key": "high-school-count",
+      "title": "高等学校数",
+      "href": "/municipalities/ranking/high-school-count",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:high-school-count-per-100km2-habitable",
+      "kind": "municipality-ranking",
+      "key": "high-school-count-per-100km2-habitable",
+      "title": "高等学校数",
+      "href": "/municipalities/ranking/high-school-count-per-100km2-habitable",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:households",
+      "kind": "municipality-ranking",
+      "key": "households",
+      "title": "世帯数",
+      "href": "/municipalities/ranking/households",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:housing-cost-all-households",
+      "kind": "municipality-ranking",
+      "key": "housing-cost-all-households",
+      "title": "住居費（全世帯）",
+      "href": "/municipalities/ranking/housing-cost-all-households",
+      "published": false
+    },
+    {
+      "id": "municipality-ranking:housing-floor-area",
+      "kind": "municipality-ranking",
+      "key": "housing-floor-area",
+      "title": "1住宅当たり延べ面積",
+      "href": "/municipalities/ranking/housing-floor-area",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:industrial-land-price",
+      "kind": "municipality-ranking",
+      "key": "industrial-land-price",
+      "title": "標準価格（工業地）",
+      "href": "/municipalities/ranking/industrial-land-price",
+      "published": false
+    },
+    {
+      "id": "municipality-ranking:integrated-kindergarten-enrollment",
+      "kind": "municipality-ranking",
+      "key": "integrated-kindergarten-enrollment",
+      "title": "幼保連携型認定こども園在園者数",
+      "href": "/municipalities/ranking/integrated-kindergarten-enrollment",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:intellectual-disability-support-facility-capacity",
+      "kind": "municipality-ranking",
+      "key": "intellectual-disability-support-facility-capacity",
+      "title": "知的障害者援護施設定員数",
+      "href": "/municipalities/ranking/intellectual-disability-support-facility-capacity",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:intellectual-disability-support-facility-residents",
+      "kind": "municipality-ranking",
+      "key": "intellectual-disability-support-facility-residents",
+      "title": "知的障害者援護施設在所者数",
+      "href": "/municipalities/ranking/intellectual-disability-support-facility-residents",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:japanese-movers-in",
+      "kind": "municipality-ranking",
+      "key": "japanese-movers-in",
+      "title": "転入者数",
+      "href": "/municipalities/ranking/japanese-movers-in",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:japanese-movers-out",
+      "kind": "municipality-ranking",
+      "key": "japanese-movers-out",
+      "title": "転出者数",
+      "href": "/municipalities/ranking/japanese-movers-out",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:japanese-population",
+      "kind": "municipality-ranking",
+      "key": "japanese-population",
+      "title": "日本人人口",
+      "href": "/municipalities/ranking/japanese-population",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:junior-high-school-count",
+      "kind": "municipality-ranking",
+      "key": "junior-high-school-count",
+      "title": "中学校数",
+      "href": "/municipalities/ranking/junior-high-school-count",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:junior-high-school-count-per-100km2-habitable",
+      "kind": "municipality-ranking",
+      "key": "junior-high-school-count-per-100km2-habitable",
+      "title": "中学校数",
+      "href": "/municipalities/ranking/junior-high-school-count-per-100km2-habitable",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:junior-high-school-students-count",
+      "kind": "municipality-ranking",
+      "key": "junior-high-school-students-count",
+      "title": "中学校生徒数",
+      "href": "/municipalities/ranking/junior-high-school-students-count",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:junior-high-school-teachers",
+      "kind": "municipality-ranking",
+      "key": "junior-high-school-teachers",
+      "title": "中学校教員数",
+      "href": "/municipalities/ranking/junior-high-school-teachers",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:kei-car-count",
+      "kind": "municipality-ranking",
+      "key": "kei-car-count",
+      "title": "軽自動車等台数",
+      "href": "/municipalities/ranking/kei-car-count",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:large-retail-store-count-per-100k",
+      "kind": "municipality-ranking",
+      "key": "large-retail-store-count-per-100k",
+      "title": "大型小売店数",
+      "href": "/municipalities/ranking/large-retail-store-count-per-100k",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:large-retail-store-count-per-100k-alt",
+      "kind": "municipality-ranking",
+      "key": "large-retail-store-count-per-100k-alt",
+      "title": "大型小売店数",
+      "href": "/municipalities/ranking/large-retail-store-count-per-100k-alt",
+      "published": false
+    },
+    {
+      "id": "municipality-ranking:large-scale-retail-stores-10-per",
+      "kind": "municipality-ranking",
+      "key": "large-scale-retail-stores-10-per",
+      "title": "大型小売店数",
+      "href": "/municipalities/ranking/large-scale-retail-stores-10-per",
+      "published": false
+    },
+    {
+      "id": "municipality-ranking:library-count-per-million",
+      "kind": "municipality-ranking",
+      "key": "library-count-per-million",
+      "title": "図書館数",
+      "href": "/municipalities/ranking/library-count-per-million",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:major-lake-area",
+      "kind": "municipality-ranking",
+      "key": "major-lake-area",
+      "title": "主要湖沼面積",
+      "href": "/municipalities/ranking/major-lake-area",
+      "published": false
+    },
+    {
+      "id": "municipality-ranking:manufacturing-employees",
+      "kind": "municipality-ranking",
+      "key": "manufacturing-employees",
+      "title": "製造業従業者数",
+      "href": "/municipalities/ranking/manufacturing-employees",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:manufacturing-establishments",
+      "kind": "municipality-ranking",
+      "key": "manufacturing-establishments",
+      "title": "製造業事業所数",
+      "href": "/municipalities/ranking/manufacturing-establishments",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:manufacturing-net-value-added-private",
+      "kind": "municipality-ranking",
+      "key": "manufacturing-net-value-added-private",
+      "title": "純付加価値額（製造業）",
+      "href": "/municipalities/ranking/manufacturing-net-value-added-private",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:manufacturing-sales-private",
+      "kind": "municipality-ranking",
+      "key": "manufacturing-sales-private",
+      "title": "売上金額（製造業）",
+      "href": "/municipalities/ranking/manufacturing-sales-private",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:manufacturing-shipment",
+      "kind": "municipality-ranking",
+      "key": "manufacturing-shipment",
+      "title": "製造品出荷額等",
+      "href": "/municipalities/ranking/manufacturing-shipment",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:manufacturing-shipment-amount",
+      "kind": "municipality-ranking",
+      "key": "manufacturing-shipment-amount",
+      "title": "製造品出荷額等",
+      "href": "/municipalities/ranking/manufacturing-shipment-amount",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:marriages",
+      "kind": "municipality-ranking",
+      "key": "marriages",
+      "title": "婚姻件数",
+      "href": "/municipalities/ranking/marriages",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:moped-count",
+      "kind": "municipality-ranking",
+      "key": "moped-count",
+      "title": "原動機付自転車台数",
+      "href": "/municipalities/ranking/moped-count",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:motorcycle-count",
+      "kind": "municipality-ranking",
+      "key": "motorcycle-count",
+      "title": "二輪の小型自動車台数",
+      "href": "/municipalities/ranking/motorcycle-count",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:movers-in",
+      "kind": "municipality-ranking",
+      "key": "movers-in",
+      "title": "転入者数",
+      "href": "/municipalities/ranking/movers-in",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:movers-out",
+      "kind": "municipality-ranking",
+      "key": "movers-out",
+      "title": "転出者数",
+      "href": "/municipalities/ranking/movers-out",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:moving-in-excess-rate",
+      "kind": "municipality-ranking",
+      "key": "moving-in-excess-rate",
+      "title": "転入超過率",
+      "href": "/municipalities/ranking/moving-in-excess-rate",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:moving-in-excess-rate-japanese",
+      "kind": "municipality-ranking",
+      "key": "moving-in-excess-rate-japanese",
+      "title": "転入超過率",
+      "href": "/municipalities/ranking/moving-in-excess-rate-japanese",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:moving-in-rate",
+      "kind": "municipality-ranking",
+      "key": "moving-in-rate",
+      "title": "転入率",
+      "href": "/municipalities/ranking/moving-in-rate",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:moving-in-rate-japanese",
+      "kind": "municipality-ranking",
+      "key": "moving-in-rate-japanese",
+      "title": "転入率",
+      "href": "/municipalities/ranking/moving-in-rate-japanese",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:moving-out-rate",
+      "kind": "municipality-ranking",
+      "key": "moving-out-rate",
+      "title": "転出率",
+      "href": "/municipalities/ranking/moving-out-rate",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:moving-out-rate-japanese",
+      "kind": "municipality-ranking",
+      "key": "moving-out-rate-japanese",
+      "title": "転出率",
+      "href": "/municipalities/ranking/moving-out-rate-japanese",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:municipal-bonds-outstanding",
+      "kind": "municipality-ranking",
+      "key": "municipal-bonds-outstanding",
+      "title": "地方債",
+      "href": "/municipalities/ranking/municipal-bonds-outstanding",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:municipal-general-administration-staff",
+      "kind": "municipality-ranking",
+      "key": "municipal-general-administration-staff",
+      "title": "一般行政部門職員数",
+      "href": "/municipalities/ranking/municipal-general-administration-staff",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:municipal-resident-tax",
+      "kind": "municipality-ranking",
+      "key": "municipal-resident-tax",
+      "title": "市町村民税",
+      "href": "/municipalities/ranking/municipal-resident-tax",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:national-health-insurance-benefits",
+      "kind": "municipality-ranking",
+      "key": "national-health-insurance-benefits",
+      "title": "国民健康保険給付金額",
+      "href": "/municipalities/ranking/national-health-insurance-benefits",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:new-condo-starts",
+      "kind": "municipality-ranking",
+      "key": "new-condo-starts",
+      "title": "着工新設分譲住宅数",
+      "href": "/municipalities/ranking/new-condo-starts",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:new-housing-floor-area",
+      "kind": "municipality-ranking",
+      "key": "new-housing-floor-area",
+      "title": "着工新設住宅床面積",
+      "href": "/municipalities/ranking/new-housing-floor-area",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:new-housing-starts",
+      "kind": "municipality-ranking",
+      "key": "new-housing-starts",
+      "title": "着工新設住宅戸数",
+      "href": "/municipalities/ranking/new-housing-starts",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:new-owner-occupied-starts",
+      "kind": "municipality-ranking",
+      "key": "new-owner-occupied-starts",
+      "title": "着工新設持家数",
+      "href": "/municipalities/ranking/new-owner-occupied-starts",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:new-rental-starts",
+      "kind": "municipality-ranking",
+      "key": "new-rental-starts",
+      "title": "着工新設貸家数",
+      "href": "/municipalities/ranking/new-rental-starts",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:nuclear-family-household-count",
+      "kind": "municipality-ranking",
+      "key": "nuclear-family-household-count",
+      "title": "核家族世帯数",
+      "href": "/municipalities/ranking/nuclear-family-household-count",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:nuclear-family-households-ratio",
+      "kind": "municipality-ranking",
+      "key": "nuclear-family-households-ratio",
+      "title": "核家族世帯割合",
+      "href": "/municipalities/ranking/nuclear-family-households-ratio",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:number-of-commercial-employees-wholesale-retail",
+      "kind": "municipality-ranking",
+      "key": "number-of-commercial-employees-wholesale-retail",
+      "title": "商業従業者数",
+      "href": "/municipalities/ranking/number-of-commercial-employees-wholesale-retail",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:number-of-establishments-agriculture-forestry",
+      "kind": "municipality-ranking",
+      "key": "number-of-establishments-agriculture-forestry",
+      "title": "事業所数",
+      "href": "/municipalities/ranking/number-of-establishments-agriculture-forestry",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:number-of-establishments-agriculture-forestry-fisheries",
+      "kind": "municipality-ranking",
+      "key": "number-of-establishments-agriculture-forestry-fisheries",
+      "title": "事業所数",
+      "href": "/municipalities/ranking/number-of-establishments-agriculture-forestry-fisheries",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:number-of-establishments-construction",
+      "kind": "municipality-ranking",
+      "key": "number-of-establishments-construction",
+      "title": "事業所数",
+      "href": "/municipalities/ranking/number-of-establishments-construction",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:number-of-establishments-economic-census-basic-survey",
+      "kind": "municipality-ranking",
+      "key": "number-of-establishments-economic-census-basic-survey",
+      "title": "事業所数",
+      "href": "/municipalities/ranking/number-of-establishments-economic-census-basic-survey",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:number-of-establishments-education-learning-support",
+      "kind": "municipality-ranking",
+      "key": "number-of-establishments-education-learning-support",
+      "title": "事業所数",
+      "href": "/municipalities/ranking/number-of-establishments-education-learning-support",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:number-of-establishments-establishment-corporate-statistics",
+      "kind": "municipality-ranking",
+      "key": "number-of-establishments-establishment-corporate-statistics",
+      "title": "事業所数",
+      "href": "/municipalities/ranking/number-of-establishments-establishment-corporate-statistics",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:number-of-establishments-finance-insurance",
+      "kind": "municipality-ranking",
+      "key": "number-of-establishments-finance-insurance",
+      "title": "事業所数",
+      "href": "/municipalities/ranking/number-of-establishments-finance-insurance",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:number-of-establishments-fisheries",
+      "kind": "municipality-ranking",
+      "key": "number-of-establishments-fisheries",
+      "title": "事業所数",
+      "href": "/municipalities/ranking/number-of-establishments-fisheries",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:number-of-establishments-information-communication",
+      "kind": "municipality-ranking",
+      "key": "number-of-establishments-information-communication",
+      "title": "事業所数",
+      "href": "/municipalities/ranking/number-of-establishments-information-communication",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:number-of-establishments-manufacturing",
+      "kind": "municipality-ranking",
+      "key": "number-of-establishments-manufacturing",
+      "title": "事業所数",
+      "href": "/municipalities/ranking/number-of-establishments-manufacturing",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:number-of-establishments-medical-welfare",
+      "kind": "municipality-ranking",
+      "key": "number-of-establishments-medical-welfare",
+      "title": "事業所数",
+      "href": "/municipalities/ranking/number-of-establishments-medical-welfare",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:number-of-establishments-mining-quarrying-gravel-extraction",
+      "kind": "municipality-ranking",
+      "key": "number-of-establishments-mining-quarrying-gravel-extraction",
+      "title": "事業所数",
+      "href": "/municipalities/ranking/number-of-establishments-mining-quarrying-gravel-extraction",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:number-of-establishments-real-estate-leasing",
+      "kind": "municipality-ranking",
+      "key": "number-of-establishments-real-estate-leasing",
+      "title": "事業所数",
+      "href": "/municipalities/ranking/number-of-establishments-real-estate-leasing",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:number-of-establishments-transport-post",
+      "kind": "municipality-ranking",
+      "key": "number-of-establishments-transport-post",
+      "title": "事業所数",
+      "href": "/municipalities/ranking/number-of-establishments-transport-post",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:number-of-establishments-wholesale-retail",
+      "kind": "municipality-ranking",
+      "key": "number-of-establishments-wholesale-retail",
+      "title": "事業所数",
+      "href": "/municipalities/ranking/number-of-establishments-wholesale-retail",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:nursing-welfare-facilities-basic-tabulation-6510-per",
+      "kind": "municipality-ranking",
+      "key": "nursing-welfare-facilities-basic-tabulation-6510-per",
+      "title": "介護老人福祉施設（基本票）",
+      "href": "/municipalities/ranking/nursing-welfare-facilities-basic-tabulation-6510-per",
+      "published": false
+    },
+    {
+      "id": "municipality-ranking:nursing-welfare-facilities-detailed-tabulation-6510-per",
+      "kind": "municipality-ranking",
+      "key": "nursing-welfare-facilities-detailed-tabulation-6510-per",
+      "title": "介護老人福祉施設（詳細票）",
+      "href": "/municipalities/ranking/nursing-welfare-facilities-detailed-tabulation-6510-per",
+      "published": false
+    },
+    {
+      "id": "municipality-ranking:nursing-welfare-facility-count-per-100k-65plus",
+      "kind": "municipality-ranking",
+      "key": "nursing-welfare-facility-count-per-100k-65plus",
+      "title": "介護老人福祉施設数",
+      "href": "/municipalities/ranking/nursing-welfare-facility-count-per-100k-65plus",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:outflow-commuter-student-population",
+      "kind": "municipality-ranking",
+      "key": "outflow-commuter-student-population",
+      "title": "流出人口（他県で従業・通学している人口）",
+      "href": "/municipalities/ranking/outflow-commuter-student-population",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:owner-occupied-housing-ratio",
+      "kind": "municipality-ranking",
+      "key": "owner-occupied-housing-ratio",
+      "title": "持ち家比率",
+      "href": "/municipalities/ranking/owner-occupied-housing-ratio",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:penal-code-offenses-recognized-per-1000",
+      "kind": "municipality-ranking",
+      "key": "penal-code-offenses-recognized-per-1000",
+      "title": "刑法犯認知件数",
+      "href": "/municipalities/ranking/penal-code-offenses-recognized-per-1000",
+      "published": false
+    },
+    {
+      "id": "municipality-ranking:per-taxpayer-income",
+      "kind": "municipality-ranking",
+      "key": "per-taxpayer-income",
+      "title": "納税義務者1人当たり課税所得",
+      "href": "/municipalities/ranking/per-taxpayer-income",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:per-taxpayer-taxable-income",
+      "kind": "municipality-ranking",
+      "key": "per-taxpayer-taxable-income",
+      "title": "課税対象所得",
+      "href": "/municipalities/ranking/per-taxpayer-taxable-income",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:pharmacist-count",
+      "kind": "municipality-ranking",
+      "key": "pharmacist-count",
+      "title": "薬剤師数",
+      "href": "/municipalities/ranking/pharmacist-count",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:physical-disability-rehabilitation-facility-capacity",
+      "kind": "municipality-ranking",
+      "key": "physical-disability-rehabilitation-facility-capacity",
+      "title": "身体障害者更生援護施設定員数",
+      "href": "/municipalities/ranking/physical-disability-rehabilitation-facility-capacity",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:physical-disability-rehabilitation-facility-residents",
+      "kind": "municipality-ranking",
+      "key": "physical-disability-rehabilitation-facility-residents",
+      "title": "身体障害者更生援護施設在所者数",
+      "href": "/municipalities/ranking/physical-disability-rehabilitation-facility-residents",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:physicians-in-medical-facilities",
+      "kind": "municipality-ranking",
+      "key": "physicians-in-medical-facilities",
+      "title": "医師数",
+      "href": "/municipalities/ranking/physicians-in-medical-facilities",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:population-density-habitable",
+      "kind": "municipality-ranking",
+      "key": "population-density-habitable",
+      "title": "人口密度（可住地面積1km²当たり）",
+      "href": "/municipalities/ranking/population-density-habitable",
+      "published": false
+    },
+    {
+      "id": "municipality-ranking:population-density-per-km2-inhabitable-area",
+      "kind": "municipality-ranking",
+      "key": "population-density-per-km2-inhabitable-area",
+      "title": "可住地面積１km2当たり人口密度",
+      "href": "/municipalities/ranking/population-density-per-km2-inhabitable-area",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:population-migration-net-municipality",
+      "kind": "municipality-ranking",
+      "key": "population-migration-net-municipality",
+      "title": "市区町村別純移動 (転入−転出)",
+      "href": "/municipalities/ranking/population-migration-net-municipality",
+      "published": false
+    },
+    {
+      "id": "municipality-ranking:production-age-population-ratio",
+      "kind": "municipality-ranking",
+      "key": "production-age-population-ratio",
+      "title": "15～64歳人口割合",
+      "href": "/municipalities/ranking/production-age-population-ratio",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:projected-population-2020",
+      "kind": "municipality-ranking",
+      "key": "projected-population-2020",
+      "title": "将来推計人口",
+      "href": "/municipalities/ranking/projected-population-2020",
+      "published": false
+    },
+    {
+      "id": "municipality-ranking:projected-population-2025",
+      "kind": "municipality-ranking",
+      "key": "projected-population-2025",
+      "title": "将来推計人口",
+      "href": "/municipalities/ranking/projected-population-2025",
+      "published": false
+    },
+    {
+      "id": "municipality-ranking:projected-population-2030",
+      "kind": "municipality-ranking",
+      "key": "projected-population-2030",
+      "title": "将来推計人口",
+      "href": "/municipalities/ranking/projected-population-2030",
+      "published": false
+    },
+    {
+      "id": "municipality-ranking:projected-population-2035",
+      "kind": "municipality-ranking",
+      "key": "projected-population-2035",
+      "title": "将来推計人口",
+      "href": "/municipalities/ranking/projected-population-2035",
+      "published": false
+    },
+    {
+      "id": "municipality-ranking:projected-population-2040",
+      "kind": "municipality-ranking",
+      "key": "projected-population-2040",
+      "title": "将来推計人口",
+      "href": "/municipalities/ranking/projected-population-2040",
+      "published": false
+    },
+    {
+      "id": "municipality-ranking:projected-population-2045",
+      "kind": "municipality-ranking",
+      "key": "projected-population-2045",
+      "title": "将来推計人口",
+      "href": "/municipalities/ranking/projected-population-2045",
+      "published": false
+    },
+    {
+      "id": "municipality-ranking:projected-population-2050",
+      "kind": "municipality-ranking",
+      "key": "projected-population-2050",
+      "title": "将来推計人口",
+      "href": "/municipalities/ranking/projected-population-2050",
+      "published": false
+    },
+    {
+      "id": "municipality-ranking:psychiatric-hospital-count",
+      "kind": "municipality-ranking",
+      "key": "psychiatric-hospital-count",
+      "title": "精神科病院数",
+      "href": "/municipalities/ranking/psychiatric-hospital-count",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:public-assistance-expense-municipal",
+      "kind": "municipality-ranking",
+      "key": "public-assistance-expense-municipal",
+      "title": "扶助費",
+      "href": "/municipalities/ranking/public-assistance-expense-municipal",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:public-hall-count-per-million",
+      "kind": "municipality-ranking",
+      "key": "public-hall-count-per-million",
+      "title": "公民館数",
+      "href": "/municipalities/ranking/public-hall-count-per-million",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:ratio-65-plus",
+      "kind": "municipality-ranking",
+      "key": "ratio-65-plus",
+      "title": "65歳以上人口割合",
+      "href": "/municipalities/ranking/ratio-65-plus",
+      "published": false
+    },
+    {
+      "id": "municipality-ranking:ratio-never-married-15-plus",
+      "kind": "municipality-ranking",
+      "key": "ratio-never-married-15-plus",
+      "title": "未婚者割合",
+      "href": "/municipalities/ranking/ratio-never-married-15-plus",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:real-balance-ratio-city",
+      "kind": "municipality-ranking",
+      "key": "real-balance-ratio-city",
+      "title": "実質収支比率（市町村財政）",
+      "href": "/municipalities/ranking/real-balance-ratio-city",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:real-deficit-ratio-municipal",
+      "kind": "municipality-ranking",
+      "key": "real-deficit-ratio-municipal",
+      "title": "実質赤字比率",
+      "href": "/municipalities/ranking/real-deficit-ratio-municipal",
+      "published": false
+    },
+    {
+      "id": "municipality-ranking:real-public-debt-service-ratio-city",
+      "kind": "municipality-ranking",
+      "key": "real-public-debt-service-ratio-city",
+      "title": "実質公債費比率（市町村財政）",
+      "href": "/municipalities/ranking/real-public-debt-service-ratio-city",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:restaurant-count-per-1000",
+      "kind": "municipality-ranking",
+      "key": "restaurant-count-per-1000",
+      "title": "飲食店数",
+      "href": "/municipalities/ranking/restaurant-count-per-1000",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:restaurant-count-per-1000-alt",
+      "kind": "municipality-ranking",
+      "key": "restaurant-count-per-1000-alt",
+      "title": "飲食店数",
+      "href": "/municipalities/ranking/restaurant-count-per-1000-alt",
+      "published": false
+    },
+    {
+      "id": "municipality-ranking:restaurants-per",
+      "kind": "municipality-ranking",
+      "key": "restaurants-per",
+      "title": "飲食店数",
+      "href": "/municipalities/ranking/restaurants-per",
+      "published": false
+    },
+    {
+      "id": "municipality-ranking:retail-store-count",
+      "kind": "municipality-ranking",
+      "key": "retail-store-count",
+      "title": "小売店数",
+      "href": "/municipalities/ranking/retail-store-count",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:retail-store-count-alt",
+      "kind": "municipality-ranking",
+      "key": "retail-store-count-alt",
+      "title": "小売店数",
+      "href": "/municipalities/ranking/retail-store-count-alt",
+      "published": false
+    },
+    {
+      "id": "municipality-ranking:retail-store-count-per-1000",
+      "kind": "municipality-ranking",
+      "key": "retail-store-count-per-1000",
+      "title": "小売店数",
+      "href": "/municipalities/ranking/retail-store-count-per-1000",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:retail-store-count-per-1000-alt",
+      "kind": "municipality-ranking",
+      "key": "retail-store-count-per-1000-alt",
+      "title": "小売店数",
+      "href": "/municipalities/ranking/retail-store-count-per-1000-alt",
+      "published": false
+    },
+    {
+      "id": "municipality-ranking:retail-stores-per",
+      "kind": "municipality-ranking",
+      "key": "retail-stores-per",
+      "title": "小売店数",
+      "href": "/municipalities/ranking/retail-stores-per",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:sales-amount-private",
+      "kind": "municipality-ranking",
+      "key": "sales-amount-private",
+      "title": "売上金額",
+      "href": "/municipalities/ranking/sales-amount-private",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:sanitation-expense-municipal",
+      "kind": "municipality-ranking",
+      "key": "sanitation-expense-municipal",
+      "title": "衛生費",
+      "href": "/municipalities/ranking/sanitation-expense-municipal",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:secondary-employed-people-ratio-tertiary",
+      "kind": "municipality-ranking",
+      "key": "secondary-employed-people-ratio-tertiary",
+      "title": "第2次・第3次産業就業者比率",
+      "href": "/municipalities/ranking/secondary-employed-people-ratio-tertiary",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:single-father-households",
+      "kind": "municipality-ranking",
+      "key": "single-father-households",
+      "title": "父子世帯数",
+      "href": "/municipalities/ranking/single-father-households",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:single-mother-households",
+      "kind": "municipality-ranking",
+      "key": "single-mother-households",
+      "title": "母子世帯数",
+      "href": "/municipalities/ranking/single-mother-households",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:single-person-household-old-population-ratio",
+      "kind": "municipality-ranking",
+      "key": "single-person-household-old-population-ratio",
+      "title": "65歳以上世帯員の単独世帯の割合",
+      "href": "/municipalities/ranking/single-person-household-old-population-ratio",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:single-person-households",
+      "kind": "municipality-ranking",
+      "key": "single-person-households",
+      "title": "単独世帯数",
+      "href": "/municipalities/ranking/single-person-households",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:solar-power-housing",
+      "kind": "municipality-ranking",
+      "key": "solar-power-housing",
+      "title": "太陽光を利用した発電機器のある住宅数",
+      "href": "/municipalities/ranking/solar-power-housing",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:standard-financial-scale-municipal",
+      "kind": "municipality-ranking",
+      "key": "standard-financial-scale-municipal",
+      "title": "標準財政規模（市町村財政）",
+      "href": "/municipalities/ranking/standard-financial-scale-municipal",
+      "published": false
+    },
+    {
+      "id": "municipality-ranking:standard-fiscal-demand-municipality",
+      "kind": "municipality-ranking",
+      "key": "standard-fiscal-demand-municipality",
+      "title": "基準財政需要額",
+      "href": "/municipalities/ranking/standard-fiscal-demand-municipality",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:standard-fiscal-revenue-municipality",
+      "kind": "municipality-ranking",
+      "key": "standard-fiscal-revenue-municipality",
+      "title": "基準財政収入額",
+      "href": "/municipalities/ranking/standard-fiscal-revenue-municipality",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:taxpayer-count-equal",
+      "kind": "municipality-ranking",
+      "key": "taxpayer-count-equal",
+      "title": "納税義務者数",
+      "href": "/municipalities/ranking/taxpayer-count-equal",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:taxpayer-count-income",
+      "kind": "municipality-ranking",
+      "key": "taxpayer-count-income",
+      "title": "納税義務者数",
+      "href": "/municipalities/ranking/taxpayer-count-income",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:total-area-excluding-northern-territories-and-takeshima",
+      "kind": "municipality-ranking",
+      "key": "total-area-excluding-northern-territories-and-takeshima",
+      "title": "総面積",
+      "href": "/municipalities/ranking/total-area-excluding-northern-territories-and-takeshima",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:total-area-prefecture-ratio",
+      "kind": "municipality-ranking",
+      "key": "total-area-prefecture-ratio",
+      "title": "総面積（都道府県面積に占める割合）",
+      "href": "/municipalities/ranking/total-area-prefecture-ratio",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:total-assessed-land-area",
+      "kind": "municipality-ranking",
+      "key": "total-assessed-land-area",
+      "title": "評価総地積",
+      "href": "/municipalities/ranking/total-assessed-land-area",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:total-population",
+      "kind": "municipality-ranking",
+      "key": "total-population",
+      "title": "総人口",
+      "href": "/municipalities/ranking/total-population",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:traffic-accident-count",
+      "kind": "municipality-ranking",
+      "key": "traffic-accident-count",
+      "title": "交通事故発生件数",
+      "href": "/municipalities/ranking/traffic-accident-count",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:traffic-accident-count-per-population",
+      "kind": "municipality-ranking",
+      "key": "traffic-accident-count-per-population",
+      "title": "交通事故発生件数",
+      "href": "/municipalities/ranking/traffic-accident-count-per-population",
+      "published": false
+    },
+    {
+      "id": "municipality-ranking:traffic-accident-per-100k",
+      "kind": "municipality-ranking",
+      "key": "traffic-accident-per-100k",
+      "title": "交通事故発生件数（人口10万人当たり）",
+      "href": "/municipalities/ranking/traffic-accident-per-100k",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:unemployment-rate",
+      "kind": "municipality-ranking",
+      "key": "unemployment-rate",
+      "title": "完全失業率",
+      "href": "/municipalities/ranking/unemployment-rate",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:urban-planning-area",
+      "kind": "municipality-ranking",
+      "key": "urban-planning-area",
+      "title": "都市計画区域指定面積",
+      "href": "/municipalities/ranking/urban-planning-area",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:vacant-housing-ratio",
+      "kind": "municipality-ranking",
+      "key": "vacant-housing-ratio",
+      "title": "空き家比率",
+      "href": "/municipalities/ranking/vacant-housing-ratio",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:welfare-expense-municipal",
+      "kind": "municipality-ranking",
+      "key": "welfare-expense-municipal",
+      "title": "民生費",
+      "href": "/municipalities/ranking/welfare-expense-municipal",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:wholesale-annual-sales-amount",
+      "kind": "municipality-ranking",
+      "key": "wholesale-annual-sales-amount",
+      "title": "卸売業年間商品販売額",
+      "href": "/municipalities/ranking/wholesale-annual-sales-amount",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:woodland-area",
+      "kind": "municipality-ranking",
+      "key": "woodland-area",
+      "title": "森林面積",
+      "href": "/municipalities/ranking/woodland-area",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:workers-agriculture-forestry-fishery",
+      "kind": "municipality-ranking",
+      "key": "workers-agriculture-forestry-fishery",
+      "title": "従業者数",
+      "href": "/municipalities/ranking/workers-agriculture-forestry-fishery",
+      "published": true
+    },
+    {
+      "id": "municipality-ranking:young-population-ratio",
+      "kind": "municipality-ranking",
+      "key": "young-population-ratio",
+      "title": "15歳未満人口割合",
+      "href": "/municipalities/ranking/young-population-ratio",
+      "published": true
+    }
+  ]
+}

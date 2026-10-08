@@ -1,7 +1,9 @@
 import 'server-only';
 
+import { resolveContentTag } from '@stats47/data-configs/content';
 import { createSnapshotReader } from '@stats47/r2-storage/server';
 
+import { BLOG_SLUG_REDIRECTS } from '../../../config/blog-redirects';
 import { POPULAR_BLOG_ARTICLE_SLUGS } from '../config/popular-articles';
 import {
   BLOG_SNAPSHOT_KEY,
@@ -32,7 +34,27 @@ const readSnapshot = createSnapshotReader<BlogSnapshot, BlogSnapshot>({
 
 async function loadSnapshot(): Promise<BlogSnapshot> {
   // R2/CDN の旧索引が残っていても恒久終了記事への導線を復活させない。
-  return excludeGoneBlogArticles(await readSnapshot());
+  const snapshot = excludeGoneBlogArticles(await readSnapshot());
+  const counts = new Map<string, number>();
+  const articles = snapshot.articles
+    .filter(article => !Object.hasOwn(BLOG_SLUG_REDIRECTS, article.slug))
+    .map(article => {
+      const tags = new Map(article.tags.map(value => {
+        const tag = resolveContentTag(value.tagKey);
+        const canonical = tag ? { tagKey: tag.key, tagId: tag.id } : value;
+        return [canonical.tagKey, canonical] as const;
+      }));
+      if (article.published === true) for (const key of tags.keys()) counts.set(key, (counts.get(key) ?? 0) + 1);
+      return { ...article, tags: [...tags.values()] };
+    });
+  return { ...snapshot, articles, tagMeta: [...counts].map(([tagKey, articleCount]) => ({ tagKey, articleCount })) };
+}
+
+const canonicalTagKey = (value: string) => resolveContentTag(value)?.key ?? value;
+
+/** 横断回遊は最新の公開索引を使う。ID台帳に古い記事メタが残っても終了記事を復活させない。 */
+export async function readNavigationArticlesFromR2(): Promise<SnapshotArticle[]> {
+  return (await loadSnapshot()).articles.filter(article => article.published === true);
 }
 
 function toArticle(row: SnapshotArticle): Article {
@@ -109,7 +131,7 @@ export async function readArticlesByTagKeyFromR2(
   const snapshot = await loadSnapshot();
   const matched = snapshot.articles
     .filter(
-      (a) => a.published === true && a.tags.some((t) => t.tagKey === tagKey)
+      (a) => a.published === true && a.tags.some((t) => t.tagKey === canonicalTagKey(tagKey))
     )
     .sort(compareByPublishedAtDesc);
   return matched.slice(offset, offset + limit).map(toArticle);
@@ -174,7 +196,7 @@ export async function readArticleSummariesByTagKeyFromR2(
   const snapshot = await loadSnapshot();
   return snapshot.articles
     .filter(
-      (a) => a.published === true && a.tags.some((t) => t.tagKey === tagKey)
+      (a) => a.published === true && a.tags.some((t) => t.tagKey === canonicalTagKey(tagKey))
     )
     .sort(compareByPublishedAtDesc)
     .slice(0, limit)
@@ -201,7 +223,7 @@ export async function readArticleSummariesByTagKeysFromR2(
 
   for (const tagKey of tagKeys) {
     const batch = published
-      .filter((article) => article.tags.some((tag) => tag.tagKey === tagKey))
+      .filter((article) => article.tags.some((tag) => tag.tagKey === canonicalTagKey(tagKey)))
       .slice(0, perTag);
     for (const article of batch) {
       if (seen.has(article.slug) || result.length >= limit) continue;

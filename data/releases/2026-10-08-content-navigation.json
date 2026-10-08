@@ -1,0 +1,554 @@
+{
+  "schemaVersion": 1,
+  "observedAt": "2026-10-08T09:30:01.346Z",
+  "method": "Playwright Chromium: desktop/mobile screens, real clicks with intercepted gtag payloads, Googlebot user agent target navigation; TLS verification enabled",
+  "scope": {
+    "routeFamilies": 44,
+    "pageIds": 9116,
+    "tagIds": 928,
+    "explicitRelations": 576
+  },
+  "release": {
+    "pr": "https://github.com/uruhayato373/stats47/pull/1107",
+    "mergeSha": "d181b730ceb7d4750d3245efcef46dcf3ae9a86f",
+    "ci": {
+      "conclusion": "success",
+      "headSha": "0458305949df95b8693ba4e5b82d2ad39266c15b",
+      "status": "completed",
+      "url": "https://github.com/uruhayato373/stats47/actions/runs/37752642886"
+    },
+    "deploy": {
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/uruhayato373/stats47/actions/runs/37753755260",
+      "publishedAt": "2026-10-08T09:09:17Z",
+      "cacheResetAt": "2026-10-08T09:09:23Z"
+    },
+    "postDeploySmoke": {
+      "conclusion": "success",
+      "headSha": "d181b730ceb7d4750d3245efcef46dcf3ae9a86f",
+      "status": "completed",
+      "url": "https://github.com/uruhayato373/stats47/actions/runs/37755227656"
+    },
+    "r2DataPublicationRequired": false
+  },
+  "screens": [
+    {
+      "name": "ranking-sunshine",
+      "width": 1440,
+      "status": 200,
+      "overflow": false,
+      "h1": 1,
+      "links": [
+        {
+          "id": "blog:annual-sunshine-duration-prefecture-gap",
+          "href": "/blog/annual-sunshine-duration-prefecture-gap",
+          "y": 178,
+          "height": 80
+        },
+        {
+          "id": "blog:annual-sunshine-duration-vs-auto-liability-insurance-amount",
+          "href": "/blog/annual-sunshine-duration-vs-auto-liability-insurance-amount",
+          "y": 260,
+          "height": 80
+        },
+        {
+          "id": "blog:sunshine-pacific-vs-nihonkai",
+          "href": "/blog/sunshine-pacific-vs-nihonkai",
+          "y": 341,
+          "height": 79
+        },
+        {
+          "id": "theme:climate",
+          "href": "/themes/climate",
+          "y": 507,
+          "height": 59
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "ranking-sunshine",
+      "width": 390,
+      "status": 200,
+      "overflow": false,
+      "h1": 1,
+      "links": [
+        {
+          "id": "blog:annual-sunshine-duration-prefecture-gap",
+          "href": "/blog/annual-sunshine-duration-prefecture-gap",
+          "y": 955,
+          "height": 80
+        },
+        {
+          "id": "blog:annual-sunshine-duration-vs-auto-liability-insurance-amount",
+          "href": "/blog/annual-sunshine-duration-vs-auto-liability-insurance-amount",
+          "y": 1036,
+          "height": 80
+        },
+        {
+          "id": "blog:sunshine-pacific-vs-nihonkai",
+          "href": "/blog/sunshine-pacific-vs-nihonkai",
+          "y": 1118,
+          "height": 79
+        },
+        {
+          "id": "theme:climate",
+          "href": "/themes/climate",
+          "y": 4003,
+          "height": 59
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "blog-academic",
+      "width": 1440,
+      "status": 200,
+      "overflow": false,
+      "h1": 1,
+      "links": [
+        {
+          "id": "ranking:academic-achievement-test-average-rate",
+          "href": "/ranking/academic-achievement-test-average-rate",
+          "y": 178,
+          "height": 59
+        },
+        {
+          "id": "blog:advancement-plus-employment-rate-prefecture",
+          "href": "/blog/advancement-plus-employment-rate-prefecture",
+          "y": 447,
+          "height": 80
+        },
+        {
+          "id": "blog:income-quintile-education",
+          "href": "/blog/income-quintile-education",
+          "y": 529,
+          "height": 80
+        },
+        {
+          "id": "blog:spinach-consumption-ranking",
+          "href": "/blog/spinach-consumption-ranking",
+          "y": 610,
+          "height": 79
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "blog-academic",
+      "width": 390,
+      "status": 200,
+      "overflow": false,
+      "h1": 1,
+      "links": [
+        {
+          "id": "ranking:academic-achievement-test-average-rate",
+          "href": "/ranking/academic-achievement-test-average-rate",
+          "y": 757,
+          "height": 59
+        },
+        {
+          "id": "blog:advancement-plus-employment-rate-prefecture",
+          "href": "/blog/advancement-plus-employment-rate-prefecture",
+          "y": 9353,
+          "height": 80
+        },
+        {
+          "id": "blog:income-quintile-education",
+          "href": "/blog/income-quintile-education",
+          "y": 9435,
+          "height": 80
+        },
+        {
+          "id": "blog:spinach-consumption-ranking",
+          "href": "/blog/spinach-consumption-ranking",
+          "y": 9516,
+          "height": 62
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "theme-climate",
+      "width": 1440,
+      "status": 200,
+      "overflow": false,
+      "h1": 1,
+      "links": [
+        {
+          "id": "blog:sunshine-pacific-vs-nihonkai",
+          "href": "/blog/sunshine-pacific-vs-nihonkai",
+          "y": 232,
+          "height": 80
+        },
+        {
+          "id": "blog:precipitation-snow-regional-gap",
+          "href": "/blog/precipitation-snow-regional-gap",
+          "y": 232,
+          "height": 80
+        },
+        {
+          "id": "blog:annual-precipitation-rainy-season-gap",
+          "href": "/blog/annual-precipitation-rainy-season-gap",
+          "y": 232,
+          "height": 80
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "theme-climate",
+      "width": 390,
+      "status": 200,
+      "overflow": false,
+      "h1": 1,
+      "links": [
+        {
+          "id": "blog:sunshine-pacific-vs-nihonkai",
+          "href": "/blog/sunshine-pacific-vs-nihonkai",
+          "y": 638,
+          "height": 80
+        },
+        {
+          "id": "blog:precipitation-snow-regional-gap",
+          "href": "/blog/precipitation-snow-regional-gap",
+          "y": 718,
+          "height": 80
+        },
+        {
+          "id": "blog:annual-precipitation-rainy-season-gap",
+          "href": "/blog/annual-precipitation-rainy-season-gap",
+          "y": 797,
+          "height": 79
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "area-kochi",
+      "width": 1440,
+      "status": 200,
+      "overflow": false,
+      "h1": 1,
+      "links": [
+        {
+          "id": "blog:annual-sunshine-duration-prefecture-gap",
+          "href": "/blog/annual-sunshine-duration-prefecture-gap",
+          "y": 651,
+          "height": 96
+        },
+        {
+          "id": "blog:annual-sunshine-duration-vs-auto-liability-insurance-amount",
+          "href": "/blog/annual-sunshine-duration-vs-auto-liability-insurance-amount",
+          "y": 651,
+          "height": 96
+        },
+        {
+          "id": "blog:farmland-crisis-abandoned-land",
+          "href": "/blog/farmland-crisis-abandoned-land",
+          "y": 651,
+          "height": 96
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "area-kochi",
+      "width": 390,
+      "status": 200,
+      "overflow": false,
+      "h1": 1,
+      "links": [
+        {
+          "id": "blog:annual-sunshine-duration-prefecture-gap",
+          "href": "/blog/annual-sunshine-duration-prefecture-gap",
+          "y": 1006,
+          "height": 80
+        },
+        {
+          "id": "blog:annual-sunshine-duration-vs-auto-liability-insurance-amount",
+          "href": "/blog/annual-sunshine-duration-vs-auto-liability-insurance-amount",
+          "y": 1086,
+          "height": 80
+        },
+        {
+          "id": "blog:farmland-crisis-abandoned-land",
+          "href": "/blog/farmland-crisis-abandoned-land",
+          "y": 1165,
+          "height": 79
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "geo-land-price",
+      "width": 1440,
+      "status": 200,
+      "overflow": false,
+      "h1": 1,
+      "links": [
+        {
+          "id": "blog:population-decline-land-price-divergence",
+          "href": "/blog/population-decline-land-price-divergence",
+          "y": 1601,
+          "height": 63
+        },
+        {
+          "id": "theme:living-housing",
+          "href": "/themes/living-housing",
+          "y": 1666,
+          "height": 60
+        },
+        {
+          "id": "theme:local-economy",
+          "href": "/themes/local-economy",
+          "y": 1728,
+          "height": 59
+        }
+      ],
+      "errors": []
+    },
+    {
+      "name": "geo-land-price",
+      "width": 390,
+      "status": 200,
+      "overflow": false,
+      "h1": 1,
+      "links": [
+        {
+          "id": "blog:population-decline-land-price-divergence",
+          "href": "/blog/population-decline-land-price-divergence",
+          "y": 2135,
+          "height": 63
+        },
+        {
+          "id": "theme:living-housing",
+          "href": "/themes/living-housing",
+          "y": 2200,
+          "height": 60
+        },
+        {
+          "id": "theme:local-economy",
+          "href": "/themes/local-economy",
+          "y": 2262,
+          "height": 59
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "interactions": [
+    {
+      "width": 1440,
+      "href": "/blog/annual-sunshine-duration-prefecture-gap",
+      "id": "blog:annual-sunshine-duration-prefecture-gap",
+      "events": 1,
+      "surface": "ranking_blog",
+      "destinationTitle": "日照時間1位はなぜ高知?日本海側との差"
+    },
+    {
+      "width": 390,
+      "href": "/blog/annual-sunshine-duration-prefecture-gap",
+      "id": "blog:annual-sunshine-duration-prefecture-gap",
+      "events": 1,
+      "surface": "ranking_blog",
+      "destinationTitle": "日照時間1位はなぜ高知?日本海側との差"
+    },
+    {
+      "width": 768,
+      "href": "/blog/annual-sunshine-duration-prefecture-gap",
+      "id": "blog:annual-sunshine-duration-prefecture-gap",
+      "events": 1,
+      "surface": "ranking_blog",
+      "destinationTitle": "日照時間1位はなぜ高知?日本海側との差"
+    },
+    {
+      "width": 390,
+      "dark": true,
+      "overflow": false,
+      "images": [
+        {
+          "loaded": true,
+          "src": "https://storage.stats47.jp/app/blog/annual-sunshine-duration-prefecture-gap/thumbnail-light.webp?v=20260822-v3"
+        },
+        {
+          "loaded": true,
+          "src": "https://storage.stats47.jp/app/blog/annual-sunshine-duration-vs-auto-liability-insurance-amount/thumbnail-light.webp?v=20260822-v3"
+        },
+        {
+          "loaded": true,
+          "src": "https://storage.stats47.jp/app/blog/sunshine-pacific-vs-nihonkai/thumbnail-light.webp?v=20260822-v3"
+        }
+      ]
+    }
+  ],
+  "targets": [
+    {
+      "id": "blog:annual-sunshine-duration-prefecture-gap",
+      "href": "/blog/annual-sunshine-duration-prefecture-gap",
+      "status": 200,
+      "finalUrl": "https://stats47.jp/blog/annual-sunshine-duration-prefecture-gap",
+      "title": "日照時間1位はなぜ高知?日本海側との差"
+    },
+    {
+      "id": "blog:annual-sunshine-duration-vs-auto-liability-insurance-amount",
+      "href": "/blog/annual-sunshine-duration-vs-auto-liability-insurance-amount",
+      "status": 200,
+      "finalUrl": "https://stats47.jp/blog/annual-sunshine-duration-vs-auto-liability-insurance-amount",
+      "title": "日照時間が長い県は保険金も高い?"
+    },
+    {
+      "id": "blog:sunshine-pacific-vs-nihonkai",
+      "href": "/blog/sunshine-pacific-vs-nihonkai",
+      "status": 200,
+      "finalUrl": "https://stats47.jp/blog/sunshine-pacific-vs-nihonkai",
+      "title": "太平洋側と日本海側でなぜこれほど晴天日が違うのか"
+    },
+    {
+      "id": "theme:climate",
+      "href": "/themes/climate",
+      "status": 200,
+      "finalUrl": "https://stats47.jp/themes/climate",
+      "title": "兵庫県の気候"
+    },
+    {
+      "id": "ranking:academic-achievement-test-average-rate",
+      "href": "/ranking/academic-achievement-test-average-rate",
+      "status": 200,
+      "finalUrl": "https://stats47.jp/ranking/academic-achievement-test-average-rate",
+      "title": "全国学力テスト平均正答率"
+    },
+    {
+      "id": "blog:advancement-plus-employment-rate-prefecture",
+      "href": "/blog/advancement-plus-employment-rate-prefecture",
+      "status": 200,
+      "finalUrl": "https://stats47.jp/blog/advancement-plus-employment-rate-prefecture",
+      "title": "進学率だけでは分からない、堅実な県はどこ"
+    },
+    {
+      "id": "blog:income-quintile-education",
+      "href": "/blog/income-quintile-education",
+      "status": 200,
+      "finalUrl": "https://stats47.jp/blog/income-quintile-education",
+      "title": "教育費だけ格差が桁違いなのはなぜ?"
+    },
+    {
+      "id": "blog:spinach-consumption-ranking",
+      "href": "/blog/spinach-consumption-ranking",
+      "status": 200,
+      "finalUrl": "https://stats47.jp/blog/spinach-consumption-ranking",
+      "title": "学力上位県はほうれんそう好き?"
+    },
+    {
+      "id": "blog:precipitation-snow-regional-gap",
+      "href": "/blog/precipitation-snow-regional-gap",
+      "status": 200,
+      "finalUrl": "https://stats47.jp/blog/precipitation-snow-regional-gap",
+      "title": "「雨が多い」と「雨の日が多い」は別物──47都道府県を4タイプに分類すると見えてくること"
+    },
+    {
+      "id": "blog:annual-precipitation-rainy-season-gap",
+      "href": "/blog/annual-precipitation-rainy-season-gap",
+      "status": 200,
+      "finalUrl": "https://stats47.jp/blog/annual-precipitation-rainy-season-gap",
+      "title": "降水量トップは静岡だが雨の日数トップは富山｜梅雨で分かれる47都道府県の雨タイプ (2024)"
+    },
+    {
+      "id": "blog:farmland-crisis-abandoned-land",
+      "href": "/blog/farmland-crisis-abandoned-land",
+      "status": 200,
+      "finalUrl": "https://stats47.jp/blog/farmland-crisis-abandoned-land",
+      "title": "耕作放棄地42.3万ha、なぜ東北に集中?"
+    },
+    {
+      "id": "blog:population-decline-land-price-divergence",
+      "href": "/blog/population-decline-land-price-divergence",
+      "status": 200,
+      "finalUrl": "https://stats47.jp/blog/population-decline-land-price-divergence",
+      "title": "人口増の東京にも減少地点？"
+    },
+    {
+      "id": "theme:living-housing",
+      "href": "/themes/living-housing",
+      "status": 200,
+      "finalUrl": "https://stats47.jp/themes/living-housing",
+      "title": "兵庫県の暮らし・住まい"
+    },
+    {
+      "id": "theme:local-economy",
+      "href": "/themes/local-economy",
+      "status": 200,
+      "finalUrl": "https://stats47.jp/themes/local-economy",
+      "title": "兵庫県の地域経済"
+    }
+  ],
+  "tagAliases": [
+    {
+      "alias": "climate",
+      "canonical": "気候",
+      "status": 200,
+      "redirectStatus": 301,
+      "finalUrl": "https://stats47.jp/tag/気候",
+      "title": "気候"
+    },
+    {
+      "alias": "temperature",
+      "canonical": "気温",
+      "status": 200,
+      "redirectStatus": 301,
+      "finalUrl": "https://stats47.jp/tag/気温",
+      "title": "気温"
+    }
+  ],
+  "existingSecurityFailure": {
+    "changedDependencies": false,
+    "changedLockfile": false,
+    "advisories": [
+      "GHSA-vfj7-8cjw-p6xm",
+      "GHSA-4jqv-mc3x-m676",
+      "GHSA-mcj8-r9mp-w47p",
+      "GHSA-wq5f-xc86-pv6w"
+    ],
+    "auditCounts": {
+      "moderate": 2,
+      "high": 14
+    },
+    "sameAsPublishedMainRun": "https://github.com/uruhayato373/stats47/actions/runs/37739913090",
+    "backlogIds": [
+      "DEPS-TAILWIND4-01",
+      "DEPS-BRACES-GATE-01"
+    ]
+  },
+  "baseline": {
+    "metadata": {
+      "schemaVersion": 1,
+      "source": "ga4",
+      "countryFilter": "Japan",
+      "periodStart": "2026-09-06",
+      "periodEnd": "2026-10-03",
+      "windowDays": 28,
+      "generatedAt": "2026-10-04T15:37:20.019Z",
+      "status": "ok",
+      "rowCount": 138
+    },
+    "source": "data/ga4/snapshots/2026-W40",
+    "blogToRankingPageviews": 869,
+    "rankingToBlogPageviews": 476,
+    "blogToBlogPageviews": 218,
+    "navClickEvents": 4643,
+    "unlabeledEvents": 1828
+  },
+  "effectiveness": {
+    "verdict": "not_evaluated",
+    "reason": "Post-release traffic has not accumulated. Card impressions are not measured; nav_click alone does not establish card CTR.",
+    "nextComparison": {
+      "countryFilter": "Japan",
+      "periodStart": "2026-10-11",
+      "periodEnd": "2026-11-07",
+      "windowDays": 28,
+      "compare": "internal-transitions and source pageviews over matching 28-day windows; nav_click surface/ID attribution; confounding and freshness guards"
+    },
+    "backlogId": "RANKING-PAGE-STRUCTURE-01"
+  }
+}

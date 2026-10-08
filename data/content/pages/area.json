@@ -1,0 +1,381 @@
+{
+  "version": 1,
+  "pages": [
+    {
+      "id": "area:01000",
+      "kind": "area",
+      "key": "01000",
+      "title": "北海道",
+      "href": "/areas/01000",
+      "published": true
+    },
+    {
+      "id": "area:02000",
+      "kind": "area",
+      "key": "02000",
+      "title": "青森県",
+      "href": "/areas/02000",
+      "published": true
+    },
+    {
+      "id": "area:03000",
+      "kind": "area",
+      "key": "03000",
+      "title": "岩手県",
+      "href": "/areas/03000",
+      "published": true
+    },
+    {
+      "id": "area:04000",
+      "kind": "area",
+      "key": "04000",
+      "title": "宮城県",
+      "href": "/areas/04000",
+      "published": true
+    },
+    {
+      "id": "area:05000",
+      "kind": "area",
+      "key": "05000",
+      "title": "秋田県",
+      "href": "/areas/05000",
+      "published": true
+    },
+    {
+      "id": "area:06000",
+      "kind": "area",
+      "key": "06000",
+      "title": "山形県",
+      "href": "/areas/06000",
+      "published": true
+    },
+    {
+      "id": "area:07000",
+      "kind": "area",
+      "key": "07000",
+      "title": "福島県",
+      "href": "/areas/07000",
+      "published": true
+    },
+    {
+      "id": "area:08000",
+      "kind": "area",
+      "key": "08000",
+      "title": "茨城県",
+      "href": "/areas/08000",
+      "published": true
+    },
+    {
+      "id": "area:09000",
+      "kind": "area",
+      "key": "09000",
+      "title": "栃木県",
+      "href": "/areas/09000",
+      "published": true
+    },
+    {
+      "id": "area:10000",
+      "kind": "area",
+      "key": "10000",
+      "title": "群馬県",
+      "href": "/areas/10000",
+      "published": true
+    },
+    {
+      "id": "area:11000",
+      "kind": "area",
+      "key": "11000",
+      "title": "埼玉県",
+      "href": "/areas/11000",
+      "published": true
+    },
+    {
+      "id": "area:12000",
+      "kind": "area",
+      "key": "12000",
+      "title": "千葉県",
+      "href": "/areas/12000",
+      "published": true
+    },
+    {
+      "id": "area:13000",
+      "kind": "area",
+      "key": "13000",
+      "title": "東京都",
+      "href": "/areas/13000",
+      "published": true
+    },
+    {
+      "id": "area:14000",
+      "kind": "area",
+      "key": "14000",
+      "title": "神奈川県",
+      "href": "/areas/14000",
+      "published": true
+    },
+    {
+      "id": "area:15000",
+      "kind": "area",
+      "key": "15000",
+      "title": "新潟県",
+      "href": "/areas/15000",
+      "published": true
+    },
+    {
+      "id": "area:16000",
+      "kind": "area",
+      "key": "16000",
+      "title": "富山県",
+      "href": "/areas/16000",
+      "published": true
+    },
+    {
+      "id": "area:17000",
+      "kind": "area",
+      "key": "17000",
+      "title": "石川県",
+      "href": "/areas/17000",
+      "published": true
+    },
+    {
+      "id": "area:18000",
+      "kind": "area",
+      "key": "18000",
+      "title": "福井県",
+      "href": "/areas/18000",
+      "published": true
+    },
+    {
+      "id": "area:19000",
+      "kind": "area",
+      "key": "19000",
+      "title": "山梨県",
+      "href": "/areas/19000",
+      "published": true
+    },
+    {
+      "id": "area:20000",
+      "kind": "area",
+      "key": "20000",
+      "title": "長野県",
+      "href": "/areas/20000",
+      "published": true
+    },
+    {
+      "id": "area:21000",
+      "kind": "area",
+      "key": "21000",
+      "title": "岐阜県",
+      "href": "/areas/21000",
+      "published": true
+    },
+    {
+      "id": "area:22000",
+      "kind": "area",
+      "key": "22000",
+      "title": "静岡県",
+      "href": "/areas/22000",
+      "published": true
+    },
+    {
+      "id": "area:23000",
+      "kind": "area",
+      "key": "23000",
+      "title": "愛知県",
+      "href": "/areas/23000",
+      "published": true
+    },
+    {
+      "id": "area:24000",
+      "kind": "area",
+      "key": "24000",
+      "title": "三重県",
+      "href": "/areas/24000",
+      "published": true
+    },
+    {
+      "id": "area:25000",
+      "kind": "area",
+      "key": "25000",
+      "title": "滋賀県",
+      "href": "/areas/25000",
+      "published": true
+    },
+    {
+      "id": "area:26000",
+      "kind": "area",
+      "key": "26000",
+      "title": "京都府",
+      "href": "/areas/26000",
+      "published": true
+    },
+    {
+      "id": "area:27000",
+      "kind": "area",
+      "key": "27000",
+      "title": "大阪府",
+      "href": "/areas/27000",
+      "published": true
+    },
+    {
+      "id": "area:28000",
+      "kind": "area",
+      "key": "28000",
+      "title": "兵庫県",
+      "href": "/areas/28000",
+      "published": true
+    },
+    {
+      "id": "area:29000",
+      "kind": "area",
+      "key": "29000",
+      "title": "奈良県",
+      "href": "/areas/29000",
+      "published": true
+    },
+    {
+      "id": "area:30000",
+      "kind": "area",
+      "key": "30000",
+      "title": "和歌山県",
+      "href": "/areas/30000",
+      "published": true
+    },
+    {
+      "id": "area:31000",
+      "kind": "area",
+      "key": "31000",
+      "title": "鳥取県",
+      "href": "/areas/31000",
+      "published": true
+    },
+    {
+      "id": "area:32000",
+      "kind": "area",
+      "key": "32000",
+      "title": "島根県",
+      "href": "/areas/32000",
+      "published": true
+    },
+    {
+      "id": "area:33000",
+      "kind": "area",
+      "key": "33000",
+      "title": "岡山県",
+      "href": "/areas/33000",
+      "published": true
+    },
+    {
+      "id": "area:34000",
+      "kind": "area",
+      "key": "34000",
+      "title": "広島県",
+      "href": "/areas/34000",
+      "published": true
+    },
+    {
+      "id": "area:35000",
+      "kind": "area",
+      "key": "35000",
+      "title": "山口県",
+      "href": "/areas/35000",
+      "published": true
+    },
+    {
+      "id": "area:36000",
+      "kind": "area",
+      "key": "36000",
+      "title": "徳島県",
+      "href": "/areas/36000",
+      "published": true
+    },
+    {
+      "id": "area:37000",
+      "kind": "area",
+      "key": "37000",
+      "title": "香川県",
+      "href": "/areas/37000",
+      "published": true
+    },
+    {
+      "id": "area:38000",
+      "kind": "area",
+      "key": "38000",
+      "title": "愛媛県",
+      "href": "/areas/38000",
+      "published": true
+    },
+    {
+      "id": "area:39000",
+      "kind": "area",
+      "key": "39000",
+      "title": "高知県",
+      "href": "/areas/39000",
+      "published": true
+    },
+    {
+      "id": "area:40000",
+      "kind": "area",
+      "key": "40000",
+      "title": "福岡県",
+      "href": "/areas/40000",
+      "published": true
+    },
+    {
+      "id": "area:41000",
+      "kind": "area",
+      "key": "41000",
+      "title": "佐賀県",
+      "href": "/areas/41000",
+      "published": true
+    },
+    {
+      "id": "area:42000",
+      "kind": "area",
+      "key": "42000",
+      "title": "長崎県",
+      "href": "/areas/42000",
+      "published": true
+    },
+    {
+      "id": "area:43000",
+      "kind": "area",
+      "key": "43000",
+      "title": "熊本県",
+      "href": "/areas/43000",
+      "published": true
+    },
+    {
+      "id": "area:44000",
+      "kind": "area",
+      "key": "44000",
+      "title": "大分県",
+      "href": "/areas/44000",
+      "published": true
+    },
+    {
+      "id": "area:45000",
+      "kind": "area",
+      "key": "45000",
+      "title": "宮崎県",
+      "href": "/areas/45000",
+      "published": true
+    },
+    {
+      "id": "area:46000",
+      "kind": "area",
+      "key": "46000",
+      "title": "鹿児島県",
+      "href": "/areas/46000",
+      "published": true
+    },
+    {
+      "id": "area:47000",
+      "kind": "area",
+      "key": "47000",
+      "title": "沖縄県",
+      "href": "/areas/47000",
+      "published": true
+    }
+  ]
+}

@@ -770,6 +770,11 @@ jobs:
           npm run validate:catalog --workspace=@stats47/data-configs
           npm run generate:catalog --workspace=@stats47/data-configs -- --check
 
+      - name: Content identity and navigation gate
+        run: |
+          npx tsx apps/web/scripts/sync-content-catalog.ts --check
+          npx tsx apps/web/scripts/validate-content-catalog.ts
+
       - name: 🧩 Theme Dependency Mirror Gate
         run: |
           # テーマ chart の期待 e-Stat 依存集合 (pyramid 34・composition/donut 展開含む) の正典は

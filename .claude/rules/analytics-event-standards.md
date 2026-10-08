@@ -349,6 +349,12 @@ Geo証拠階段の`stage-population` / `stage-overlap` / `stage-audit`、公共�
 
 ## 3. 新しい計装を追加するときの手順
 
+2026-10-08 ページID・回遊統一では既存 `nav_click` の導線名に `ranking_blog` / `area_blog` / `geo_related` を追加した。
+共通カードは `data-nav-surface` と不変ページIDの `data-nav-label` を持ち、NavClickTrackerだけが送信する。
+`theme_blog` / `blog_sidebar` / `blog_discovery_mobile` は既存値を使う。タグのラベルも表示名から `tag:<id>` へ変更した。
+登録済み `nav_surface` / `nav_label` の値変更で、新しいdimensionは増やさない。公開前後のラベル別件数をそのまま比較せず、
+ページ種別の回遊はinternal-transitionsで確認する。カード表示回数は追加していないため、nav_clickをカードCTRとは呼ばない。
+
 1. `events.ts` に関数・パラメータを追加（既存の `sendEvent` 経由）。
 2. **本ファイル §2 に 1 行追加**し、登録要否と状態 (`⏳要登録`) を記す。
 3. 登録が要るなら §1 の手順をオーナー、または明示承認済みallowlist runnerが実施

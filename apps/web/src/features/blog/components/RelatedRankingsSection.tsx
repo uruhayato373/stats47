@@ -1,108 +1,11 @@
-import Link from "next/link";
+import { contentTagIds } from '@stats47/data-configs/content';
 
-import { metricDisplayName } from "@stats47/ranking";
-import {
-  getRankingTitle,
-  readRankingItemByKeyAndAreaTypeFromR2,
-  readRelatedRankingItemsByTagKeysFromR2,
-} from "@stats47/ranking/server";
-import { isOk } from "@stats47/types";
-import { BarChart3 } from "lucide-react";
+import { ContentNavigation } from '@/components/rail/ContentNavigation';
 
-import { RailCard, RailNavRow } from "@/components/surface";
-
-import { getCategoryKeysForBlogTagKeys } from "@/config/category-blog-tag-keys";
-import { KNOWN_RANKING_KEYS } from "@/config/known-ranking-keys";
-
-interface RelatedRankingsSectionProps {
-  tagKeys: string[];
-  /** 記事が図や本文で使う指標 (blog snapshot の rankingRefs)。タグ・カテゴリ経由より先に出す */
-  rankingKeys?: string[];
-  compact?: boolean;
-}
-
-const MAX_RANKINGS = 6;
-
-export async function RelatedRankingsSection({
-  tagKeys,
-  rankingKeys = [],
-  compact = false,
-}: RelatedRankingsSectionProps) {
-  // 公開中の都道府県ランキングだけを出す。記事は市区町村専用・非公開の指標も rankingRefs に持ち、
-  // R2 に古い item が残っているとそれを読めてしまい、410 のページへのリンクになる
-  // (2026-10-08 に international-cooperation-volunteer-map で実測。RANKING-ACTIVE-WITHOUT-VALUES-01)
-  const publishedKeys = rankingKeys.filter((key) => KNOWN_RANKING_KEYS.has(key));
-  if (tagKeys.length === 0 && publishedKeys.length === 0) return null;
-
-  // 記事が実際に使う指標を先に出す。タグ → カテゴリ経由は記事の主題と別の指標が混ざる
-  // (metric の tags は空で、タグからはカテゴリの代表ランキングしか引けない)
-  const [ownResults, result] = await Promise.all([
-    Promise.all(
-      publishedKeys.slice(0, MAX_RANKINGS).map((key) => readRankingItemByKeyAndAreaTypeFromR2(key, "prefecture")),
-    ),
-    tagKeys.length > 0
-      ? readRelatedRankingItemsByTagKeysFromR2(tagKeys, getCategoryKeysForBlogTagKeys(tagKeys))
-      : Promise.resolve(null),
-  ]);
-  const ownItems = ownResults.flatMap((r) => (isOk(r) ? r.data : []));
-  const tagItems = result && isOk(result) ? result.data : [];
-
-  const seen = new Set<string>();
-  const rankings: { rankingKey: string; title: string }[] = [];
-
-  for (const item of [...ownItems, ...tagItems]) {
-    if (!seen.has(item.rankingKey) && KNOWN_RANKING_KEYS.has(item.rankingKey) && rankings.length < MAX_RANKINGS) {
-      seen.add(item.rankingKey);
-      rankings.push({
-        rankingKey: item.rankingKey,
-        title: metricDisplayName({ title: getRankingTitle(item), readerLabel: item.readerLabel, subtitle: item.subtitle }),
-      });
-    }
-  }
-
-  if (rankings.length === 0) return null;
-
-  return (
-    <RailCard
-      title="関連ランキング"
-      icon={<BarChart3 className="h-4 w-4 text-muted-foreground" />}
-    >
-      {compact ? (
-        <nav aria-label="関連ランキング" className="-mx-4 flex flex-col">
-          {rankings.map((ranking) => (
-            <RailNavRow
-              key={ranking.rankingKey}
-              href={`/ranking/${ranking.rankingKey}`}
-            >
-              <span className="flex flex-col gap-0.5">
-                <span className="line-clamp-2 leading-snug">
-                  {ranking.title}
-                </span>
-                <span className="text-xs text-muted-foreground">
-                  都道府県別ランキング
-                </span>
-              </span>
-            </RailNavRow>
-          ))}
-        </nav>
-      ) : (
-        <div className="grid grid-cols-1 gap-x-4 sm:grid-cols-2 lg:grid-cols-3">
-          {rankings.map((ranking) => (
-            <Link
-              key={ranking.rankingKey}
-              href={`/ranking/${ranking.rankingKey}`}
-              className="group block border-b border-border py-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
-            >
-              <p className="line-clamp-2 text-sm font-medium group-hover:text-primary">
-                {ranking.title}
-              </p>
-              <p className="mt-1 text-xs text-muted-foreground">
-                都道府県別ランキング
-              </p>
-            </Link>
-          ))}
-        </div>
-      )}
-    </RailCard>
-  );
+import { readContentRecommendations } from '@/features/content-navigation/server';
+interface Props { tagKeys: string[]; rankingKeys?: string[]; compact?: boolean; }
+export async function RelatedRankingsSection({ tagKeys, rankingKeys = [] }: Props) {
+  const items = await readContentRecommendations({sourceId: 'context:blog', kinds: ['ranking'], rankingKeys, tagIds: contentTagIds(tagKeys), limit: 3});
+  if (!items.length) return null;
+  return <ContentNavigation title="この記事のデータを見る" items={items} surface="blog_sidebar" />;
 }

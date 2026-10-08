@@ -137,4 +137,42 @@ describe('RailLinksCard', () => {
       'sm:min-h-7'
     );
   });
+
+  it('記事本文内ではカードを重ねず、読む理由と不変IDを持つ導線を表示する', () => {
+    const { container } = render(
+      <RailLinksCard
+        title="この記事のデータを見る"
+        layout="media"
+        frame="inline"
+        trackingSurface="blog_ranking_card"
+        items={[
+          {
+            id: 'ranking:annual-sunshine-duration',
+            contentId: 'ranking:annual-sunshine-duration',
+            trackingLabel: 'ranking:annual-sunshine-duration',
+            label: '日照時間ランキング',
+            description: 'この記事で使ったデータ',
+            href: '/ranking/annual-sunshine-duration',
+          },
+        ]}
+      />
+    );
+
+    expect(
+      screen.getByRole('heading', { name: 'この記事のデータを見る' })
+    ).toBeInTheDocument();
+    expect(container.querySelector('.rounded-card')).toBeNull();
+    const link = screen.getByRole('link', {
+      name: /この記事で使ったデータ.*日照時間ランキング/,
+    });
+    expect(link).toHaveAttribute(
+      'data-content-id',
+      'ranking:annual-sunshine-duration'
+    );
+    expect(link).toHaveAttribute(
+      'data-nav-label',
+      'ranking:annual-sunshine-duration'
+    );
+    expect(link).toHaveAttribute('data-nav-surface', 'blog_ranking_card');
+  });
 });

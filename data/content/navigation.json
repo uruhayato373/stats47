@@ -1,0 +1,57 @@
+{
+  "version": 1,
+  "limit": 3,
+  "relations": {
+    "explains": {
+      "priority": 100,
+      "label": "このデータを読み解く記事"
+    },
+    "contains": {
+      "priority": 90,
+      "label": "同じ指標を使うテーマ"
+    },
+    "uses": {
+      "priority": 100,
+      "label": "この記事で使ったデータ"
+    },
+    "geo": {
+      "priority": 95,
+      "label": "地図と途中計算で確かめる"
+    },
+    "sharedMetric": {
+      "priority": 80,
+      "label": "同じデータを読み解く記事"
+    },
+    "tag": {
+      "priority": 30,
+      "label": "同じ話題の記事"
+    },
+    "themeContext": {
+      "priority": 60,
+      "label": "関連するテーマで広げて見る"
+    }
+  },
+  "categoryTags": {
+    "landweather": "tag:climate",
+    "population": "tag:population",
+    "laborwage": "tag:labor",
+    "agriculture": "tag:agriculture",
+    "miningindustry": "tag:manufacturing",
+    "commercial": "tag:industrial-structure",
+    "economy": "tag:economy",
+    "construction": "tag:housing",
+    "energy": "tag:energy",
+    "tourism": "tag:tourism",
+    "educationsports": "tag:education",
+    "administrativefinancial": "tag:local-government-finance",
+    "safetyenvironment": "tag:environment",
+    "socialsecurity": "tag:social-security",
+    "international": "tag:multicultural-coexistence",
+    "infrastructure": "tag:infrastructure",
+    "ict": "tag:t-f415bf7b07a9"
+  },
+  "excludedArticleTagIdsByKind": {
+    "area": ["tag:t-a8cd52d0d273", "tag:t-4fa06acf0d1d"]
+  },
+  "links": []
+}

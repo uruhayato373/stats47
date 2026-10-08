@@ -208,7 +208,9 @@
     "geo:build-public-facility-access": "node --import tsx packages/gis/src/mlit-ksj/scripts/build-public-facility-access.ts",
     "geo:audit-public-facility-access": "tsx packages/gis/src/mlit-ksj/scripts/audit-geo-analysis-artifacts.ts --public-facility-only",
     "note:paid-landing:patch": "node .claude/scripts/note/patch-note-paid-landing.mjs",
-    "note:paid-landing:test": "node --test .claude/scripts/note/__tests__/paid-landing-patch.test.mjs"
+    "note:paid-landing:test": "node --test .claude/scripts/note/__tests__/paid-landing-patch.test.mjs",
+    "content:sync": "tsx apps/web/scripts/sync-content-catalog.ts",
+    "content:check": "tsx apps/web/scripts/sync-content-catalog.ts --check && tsx apps/web/scripts/validate-content-catalog.ts"
   },
   "devDependencies": {
     "@types/shapefile": "^0.6.4",

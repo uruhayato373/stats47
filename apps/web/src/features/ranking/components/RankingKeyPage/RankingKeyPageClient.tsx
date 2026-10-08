@@ -254,6 +254,7 @@ export function RankingKeyPageClient({
                     />
                 </div>
 
+                <div className="order-3 lg:hidden">{sections.relatedArticles}</div>
                 <div className="order-3 flex flex-col gap-3 lg:order-2">
                     <RankingHeaderControls
                         normalizationOptions={rankingItem.calculation?.normalizationOptions}

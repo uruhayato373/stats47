@@ -127,7 +127,7 @@ describe('readBlogIndexPageFromR2', () => {
         { a1: 'a1 のタイトル' }
       );
       expect(await reader.readAllTagsWithCountFromR2()).toEqual([
-        { tag: 'population', tagKey: 'population', count: 5 },
+        { tag: '人口', tagKey: '人口', count: 5 },
       ]);
     }
   );
@@ -219,6 +219,30 @@ describe('readBlogIndexPageFromR2', () => {
     await expect(readBlogIndexPageFromR2(2, 0)).rejects.toThrow(
       'R2 unavailable'
     );
+  });
+});
+
+describe('tag identity and canonical navigation', () => {
+  it('旧タグ別名・現在のキー・不変IDで同じ記事を返し、別名の二重カウントを防ぐ', async () => {
+    loadSnapshot.mockResolvedValue({
+      ...SNAPSHOT,
+      articles: [{ ...article('same', '2026-01-01'), tags: [{ tagKey: 'population' }, { tagKey: '人口' }] }],
+    });
+    const reader = await importReader();
+    for (const value of ['population', '人口', 'tag:population']) {
+      expect((await reader.readArticlesByTagKeyFromR2(value)).map(row => row.slug)).toEqual(['same']);
+    }
+    expect(await reader.readAllTagsWithCountFromR2()).toEqual([{ tag: '人口', tagKey: '人口', count: 1 }]);
+    expect(await reader.readTagKeysForArticleFromR2('same')).toEqual([{ tagKey: '人口' }]);
+  });
+
+  it('旧索引に残る転送元・下書き・終了記事を回遊へ復活させない', async () => {
+    loadSnapshot.mockResolvedValue({
+      ...SNAPSHOT,
+      articles: [article('aging-society-ranking', '2026-01-01'), article('dam-count-prefecture-gap', '2026-01-01'), article('draft', '2026-01-01', false), article('live', '2026-01-01')],
+    });
+    const reader = await importReader();
+    expect((await reader.readNavigationArticlesFromR2()).map(row => row.slug)).toEqual(['live']);
   });
 });
 
