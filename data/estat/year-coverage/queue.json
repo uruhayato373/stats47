@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-07T21:31:24.581Z",
+  "generatedAt": "2026-10-08T01:40:41.396Z",
   "results": {
     "abandoned-cultivated-land-area": {
       "key": "abandoned-cultivated-land-area",
@@ -5232,6 +5232,43 @@
       ],
       "verdict": "config-covers",
       "checkedAt": "2026-10-07T21:31:24.280Z",
+      "scope": "all-prefectures",
+      "prefectureCountsByYear": {
+        "2013": 47,
+        "2014": 47,
+        "2015": 47,
+        "2016": 47,
+        "2017": 47,
+        "2018": 47,
+        "2019": 47,
+        "2020": 47,
+        "2021": 47,
+        "2022": 47,
+        "2023": 47,
+        "2024": 47
+      }
+    },
+    "consumer-price-difference-index-overall": {
+      "key": "consumer-price-difference-index-overall",
+      "statsDataId": "0000010212",
+      "configYears": 12,
+      "estatNonNullYears": 12,
+      "availableYearCodes": [
+        "2013",
+        "2014",
+        "2015",
+        "2016",
+        "2017",
+        "2018",
+        "2019",
+        "2020",
+        "2021",
+        "2022",
+        "2023",
+        "2024"
+      ],
+      "verdict": "config-covers",
+      "checkedAt": "2026-10-08T01:40:41.094Z",
       "scope": "all-prefectures",
       "prefectureCountsByYear": {
         "2013": 47,
