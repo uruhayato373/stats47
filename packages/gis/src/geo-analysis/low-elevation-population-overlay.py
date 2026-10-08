@@ -22,14 +22,39 @@ BAND_LABELS = ['標高不明', '平均標高0m以下', '0m超5m以下', '5m超10
 G04_URL = 'https://nlftp.mlit.go.jp/ksj/gml/data/G04-a/G04-a-11/'
 POP_URL = 'https://nlftp.mlit.go.jp/ksj/gml/data/m1kr6/m1kr6-24/1km_mesh_2024_GEOJSON.zip'
 MESH_TOLERANCE = 1e-6              # degrees
+DATA_VERSION = 'G04-a-11_mesh1000r6-24_2020'
+# 公開ページに掲載する原典表示。TS側 LOW_ELEVATION_ATTRIBUTION と一致を audit で検査する
+# (G04-a の2文は https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-G04-a.html の「作成方法(原典表示)」の逐語)。
+ATTRIBUTION = {
+    'G04-a': [
+        'この地図は、国土地理院長の承認を得て、同院発行の基盤地図情報を使用したものである。(承認番号 平成25情使、第590号)',
+        'この地図は、国土地理院長の承認を得て、同院発行の基盤地図情報を複製したものである。(承認番号 平成25情複、第581号)',
+    ],
+    'mesh1000r6': '国土交通省国土数値情報「1kmメッシュ別将来推計人口(R6国政局推計)」(CC BY 4.0)の令和2年(2020年)人口を使用し、stats47が標高メッシュと結合・集計した',
+}
 
 
 def sha(b): return hashlib.sha256(b).hexdigest()
-def encode(x): return (json.dumps(x, ensure_ascii=False, separators=(',', ':'), allow_nan=False) + '\n').encode()
+def official_key(url):
+    """Identifier of the official distribution file (host + path). Not an R2 key: the raw ZIPs are not stored in R2."""
+    return url.split('://', 1)[1]
+def js_canonical(x):
+    """Integral floats -> ints so the bytes equal JS JSON.stringify of the parsed value (0.0 -> 0).
+    The Web loader re-serialises with JSON.stringify and compares SHA-256/bytes with the manifest."""
+    if isinstance(x, float) and x.is_integer(): return int(x)
+    if isinstance(x, dict): return {k: js_canonical(v) for k, v in x.items()}
+    if isinstance(x, (list, tuple)): return [js_canonical(v) for v in x]
+    return x
+def encode(x, pretty=False):
+    """pretty=True is the 2-space layout JS JSON.stringify(v, null, 2) produces (item.json); otherwise compact."""
+    x = js_canonical(x)
+    text = (json.dumps(x, ensure_ascii=False, indent=2, separators=(',', ': '), allow_nan=False) if pretty
+            else json.dumps(x, ensure_ascii=False, separators=(',', ':'), allow_nan=False))
+    return (text + '\n').encode()
 def ensure(ok, message):
     if not ok: raise ValueError(message)
-def write(path, value):
-    path.parent.mkdir(parents=True, exist_ok=True); path.write_bytes(encode(value))
+def write(path, value, pretty=False):
+    path.parent.mkdir(parents=True, exist_ok=True); path.write_bytes(encode(value, pretty))
 
 
 def mesh_bounds(code):
@@ -122,7 +147,7 @@ def load_elevation(g04_dir):
                 ensure(vals[2] <= vals[0] <= vals[1], 'min<=mean<=max ' + m)
                 elev[m] = tuple(vals)
         inputs.append({'layerId': 'ksj-g04a-elevation-mesh-3rd', 'datasetId': 'G04-a', 'version': '11',
-                       'url': G04_URL + fn, 'sha256': sha(raw), 'bytes': len(raw), 'records': len(dbf),
+                       'key': official_key(G04_URL + fn), 'url': G04_URL + fn, 'sha256': sha(raw), 'bytes': len(raw), 'records': len(dbf),
                        'geometryMismatch': mismatch,
                        'retrievedAt': datetime.fromtimestamp(p.stat().st_mtime, timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
                        'geometry': 'mesh', 'role': 'calculation-input', 'usedInCalculation': True})
@@ -160,7 +185,7 @@ def load_population(zip_path):
         members.append({'pref': pc, 'member': name, 'bytes': len(inner_raw), 'sha256': sha(inner_raw),
                         'geojson': gname, 'geojsonBytes': len(gbytes), 'geojsonSha256': sha(gbytes),
                         'records': len(rows), 'geometryMismatch': mismatch})
-    meta = {'layerId': 'ipss-population-mesh-1km', 'datasetId': 'mesh1000r6', 'version': '24', 'url': POP_URL,
+    meta = {'layerId': 'ipss-population-mesh-1km', 'datasetId': 'mesh1000r6', 'version': '24', 'key': official_key(POP_URL), 'url': POP_URL,
             'sha256': sha(raw_outer), 'bytes': len(raw_outer),
             'retrievedAt': datetime.fromtimestamp(zip_path.stat().st_mtime, timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
             'geometry': 'mesh', 'role': 'calculation-input', 'usedInCalculation': True, 'members': members}
@@ -249,6 +274,13 @@ def build(args):
             'lowElevationPopulationMean5m': thr[1]['meanBased']['population'],
             'elevationUnknownPopulation': unknown[1] / SCALE}})
     ensure(round(nat['population'] / SCALE) == sum(census.values()), 'national conservation')
+    # 値の降順・同値は同順位。表示順であり優劣ではない。
+    primary_of = lambda r: r['values']['lowElevationShareMean5m']
+    for r in item_rows:
+        r['rank'] = 1 + sum(1 for o in item_rows if primary_of(o) > primary_of(r))
+    ordered = sorted(item_rows, key=lambda r: (-primary_of(r), r['areaCode']))
+    shares = sorted(primary_of(r) for r in item_rows)
+    median = shares[len(shares) // 2] if len(shares) % 2 else (shares[len(shares) // 2 - 1] + shares[len(shares) // 2]) / 2
 
     metrics = [
         ('lowElevationShareMean5m', '平均標高5m以下の地域の人口割合', '%', 'percent1', '平均標高が5m以下の1kmメッシュに住む2020年人口の、都道府県人口に対する比率'),
@@ -258,13 +290,17 @@ def build(args):
         ('population2020', '2020年人口', '人', 'integer', '1kmメッシュ人口の県内合計(国勢調査2020の都道府県人口と一致を検算)'),
         ('lowElevationPopulationMean5m', '平均標高5m以下の地域の人口', '人', 'integer', '平均標高が5m以下の1kmメッシュに住む2020年人口'),
     ]
-    item = {'schemaVersion': 1, 'slug': SLUG, 'generatedAt': generated_at, 'dataVersion': 'G04-a-11_mesh1000r6-24_2020',
+    item = {'schemaVersion': 1, 'slug': SLUG, 'generatedAt': generated_at, 'dataVersion': DATA_VERSION,
             'geography': 'prefecture', 'title': '標高の低い土地に、どれだけの人が住んでいるか',
             'question': '標高・傾斜度3次メッシュと1kmメッシュ人口(2020年)を重ねると、標高の低い土地に住む人口の割合は県でどう違うか',
             'primaryMetricKey': 'lowElevationShareMean5m',
             'metrics': [{'key': k, 'label': l, 'unit': u, 'format': f, 'description': d} for k, l, u, f, d in metrics],
-            'rows': item_rows,
-            'summary': {'observationCount': 47, 'nationalPopulation2020': nat['population'] / SCALE,
+            # 配信表は主指標の高い順(同順位は県コード順)。表の見出し「高い順」と一致させる。
+            'rows': sorted(item_rows, key=lambda r: (r['rank'], r['areaCode'])),
+            'summary': {'observationCount': 47, 'medianValue': median,
+                        'topAreaCodes': [r['areaCode'] for r in ordered[:3]],
+                        'bottomAreaCodes': [r['areaCode'] for r in sorted(item_rows, key=lambda r: (primary_of(r), r['areaCode']))[:3]],
+                        'nationalPopulation2020': nat['population'] / SCALE,
                         'nationalShareMean': {str(t): share(nat['meanLe'][t], nat['population']) for t in THRESHOLDS},
                         'elevationUnknownPopulation': nat['unknown'] / SCALE},
             'method': ['標高・傾斜度3次メッシュ(2011年度版)の3次メッシュコードと、1kmメッシュ人口(2020年)の3次メッシュコードを完全一致で結合した',
@@ -283,13 +319,13 @@ def build(args):
                 '0m以下の分類は国土交通省のゼロメートル地帯(朔望平均満潮位以下)と同じ定義ではない。標高の基準面と満潮位が異なる',
                 '5mと10mに全国共通の公的な基準は確認できない。複数のしきい値を並べ、単一の安全・危険の境界として読まない',
                 '県境をまたぐメッシュは県ごとの人口行にメッシュ全体の標高を当てている',
-                '標高の原典表示(国土地理院長の承認番号付きの文言)を公開ページに掲載する必要がある'],
+                '標高は国土数値情報(原典は国土地理院の基盤地図情報 数値標高モデル)、人口は国勢調査2020を基準にした1kmメッシュ人口で、基準時点が異なる'],
             'dataQuality': {'expectedAreas': 47, 'actualAreas': 47, 'missingAreaCodes': [],
                             'inputCounts': {'elevationMeshes': len(elev), 'elevationZipFiles': len(g_inputs),
                                             'populationMeshes': all_mesh, 'populationMeshesWithoutElevationRow': 0,
                                             'elevationUnknownMeshesAmongPopulated': sum(1 for p in prefs.values() for m, _s, _p in p if elev[m] is None)},
                             'coverageNote': '国勢調査2020の人口が正のメッシュ(1kmメッシュ人口データに行のあるメッシュ)をすべて標高メッシュと照合した。標高不明のメッシュ人口は低地にも非低地にも入れず別枠で保存した'}}
-    write(base / 'item.json', item)
+    write(base / 'item.json', item, pretty=True)
     idata = (base / 'item.json').read_bytes()
 
     stages = [
@@ -309,13 +345,16 @@ def build(args):
                'sourceRecords': all_mesh + len(elev), 'derivedRecords': all_mesh, 'populatedMeshes': all_mesh,
                'maxDetailBytes': max(o['bytes'] for o in outputs),
                'nationalConservation': {'meshPopulation': nat['population'] / SCALE, 'censusPopulation2020': sum(census.values())}}
+    builder_path = pathlib.Path(__file__)
     manifest = {'schemaVersion': 1, 'slug': SLUG, 'generatedAt': generated_at, 'builder': 'packages/gis/src/geo-analysis/low-elevation-population-overlay.py',
+                # この分析の定義 = 生成スクリプト本体。変更後に再生成しないと audit が不一致で止める
+                'definitionSha256': sha(builder_path.read_bytes()),
                 'thresholdsM': list(THRESHOLDS), 'primaryThresholdM': PRIMARY_THRESHOLD,
                 'inputs': g_inputs + [pop_meta], 'contextLayers': [],
                 'censusReference': {'metricKey': 'total-population', 'yearCode': '2020', 'source': '国勢調査2020(社会・人口統計体系 A1101)', 'populationByArea': {k + '000': v for k, v in sorted(census.items())}},
                 'stages': stages, 'aggregate': {'key': 'app/geo/%s/item.json' % SLUG, 'sha256': sha(idata), 'bytes': len(idata), 'recordCount': 47},
                 'quality': quality,
-                'attribution': {'G04-a': '国土交通省国土数値情報。原典: 国土地理院基盤地図情報数値標高モデル(10m・250mメッシュ)。公開時は原典の承認番号付き表示文言(平成25情使 第590号・情複 第581号)を確認して掲載する', 'mesh1000r6': '国土交通省国土数値情報 1kmメッシュ別将来推計人口(R6国政局推計)・CC BY 4.0・令和2年国勢調査を基準に加工'}}
+                'attribution': ATTRIBUTION}
     write(base / 'manifest.json', manifest)
 
     # ranking values (population share of the primary threshold, mean basis)
@@ -356,6 +395,13 @@ def audit(args):
     ia = (base / 'item.json').read_bytes()
     if sha(ia) != m['aggregate']['sha256']: errs.append('item sha')
     item = json.loads(ia)
+    if m.get('definitionSha256') != sha(pathlib.Path(__file__).read_bytes()): errs.append('definitionSha256 != builder source (regenerate)')
+    if m.get('attribution') != ATTRIBUTION: errs.append('attribution')
+    if [r['rank'] for r in item['rows']] != sorted(r['rank'] for r in item['rows']): errs.append('rows not in rank order')
+    for r in item['rows']:
+        p5 = r['values']['lowElevationShareMean5m']
+        if r['rank'] != 1 + sum(1 for o in item['rows'] if o['values']['lowElevationShareMean5m'] > p5): errs.append('rank ' + r['areaCode'])
+    if len({k for k in (i['key'] for i in m['inputs'])}) != len(m['inputs']): errs.append('input keys not unique')
     v = json.loads((out_root / 'app' / 'stats' / METRIC_KEY / 'values.json').read_text())
     iv = {r['areaCode']: round(r['values']['lowElevationShareMean5m'], 2) for r in item['rows']}
     if {r['areaCode']: r['value'] for r in v['rows']} != iv or len(iv) != 47: errs.append('values != item')

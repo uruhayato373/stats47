@@ -61,6 +61,13 @@ class LowElevationTest(unittest.TestCase):
         s['bands'][2][1] += 1                            # corrupt one band
         with self.assertRaises(ValueError): o.pref_entry(s, 2107)
 
+    def test_encoding_matches_js_json_stringify(self):
+        # The Web loader compares SHA-256 of JSON.stringify(parsed): 0.0 must be written as 0.
+        self.assertEqual(o.encode({'a': 0.0, 'b': [1.5, 2.0, -0.0], 'c': True, 'd': '標高', 'e': None}),
+                         '{"a":0,"b":[1.5,2,0],"c":true,"d":"標高","e":null}\n'.encode())
+        self.assertEqual(o.encode({'a': [1.0], 'b': {}, 'c': []}, pretty=True),
+                         '{\n  "a": [\n    1\n  ],\n  "b": {},\n  "c": []\n}\n'.encode())
+
     def test_dbf_reader_rejects_deleted_records(self):
         import struct
         head = struct.pack('<BBBBIHH20x', 3, 0, 0, 0, 1, 32 + 32 + 1, 1 + 4)

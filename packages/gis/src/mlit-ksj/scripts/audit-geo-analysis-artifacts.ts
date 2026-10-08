@@ -14,6 +14,14 @@ import {
   assertFloodConservation,
   assertLandPriceConservation,
 } from '../../geo-analysis/content-details';
+import {
+  LOW_ELEVATION_PRIMARY_METRIC_KEY,
+  LOW_ELEVATION_SLUG,
+  assertGeoLowElevationConservation,
+  lowElevationCensusPopulation,
+  parseGeoLowElevationManifest,
+  parseGeoLowElevationPrefDetail,
+} from '../../geo-analysis/low-elevation-population';
 import { assertStationAccessConservation } from '../../geo-analysis/station-access';
 import {
   assertPublicFacilityConservation,
@@ -27,6 +35,9 @@ import {
   geoAnalysisPrefKey,
   geoStationAccessPrefKey,
 } from '../../geo-analysis/snapshot';
+
+import { GIS_DATASETS } from '../datasets';
+import { assertKsjPublicStructuredOutputAllowed } from '../license-policy';
 
 import type {
   GeoAnalysisArtifactEvidence,
@@ -435,7 +446,92 @@ function auditPublicFacility(): void {
   );
 }
 
+/**
+ * 標高の低い土地に住む人口。生成物(.local/r2)を再読込して、承認済み入力集合・商用公開gate・
+ * 正準JSON・3段階で同一のSHA/bytes・47県の再計算と保存則・国勢調査人口との一致を検査する。
+ */
+function auditLowElevation(): void {
+  const slug = LOW_ELEVATION_SLUG;
+  const prefix = `app/geo/${slug}`;
+  // 商用公開gate: 入力2データセットとも、公開構造化artifactを許可する条件であること。
+  for (const dataId of ['G04-a', 'mesh1000r6']) {
+    const dataset = GIS_DATASETS.find((d) => d.dataId === dataId);
+    if (!dataset) throw new Error(`${slug}: ${dataId} が datasets.ts に未登録`);
+    assertKsjPublicStructuredOutputAllowed({
+      dataId,
+      license: dataset.license,
+      output: `${prefix}/{item,manifest,pref/*}.json`,
+    });
+  }
+  const { value: raw } = readArtifact<unknown>(geoAnalysisManifestKey(slug));
+  const manifest = parseGeoLowElevationManifest(raw);
+  if (!manifest) throw new Error(`${slug}: manifest契約(承認済み入力集合・段階・品質)不一致`);
+  // 定義 = 生成スクリプト本体。変更後に再生成していない生成物は公開しない。
+  const builder = fs.readFileSync(
+    path.resolve('packages/gis/src/geo-analysis/low-elevation-population-overlay.py')
+  );
+  if (createHash('sha256').update(builder).digest('hex') !== manifest.definitionSha256)
+    throw new Error(`${slug}: 生成スクリプトが変更されている。再生成が必要`);
+  const { value: aggregate, body: aggregateBody } =
+    readArtifact<GeoAnalysisSnapshot>(manifest.aggregate.key);
+  assertArtifactEvidence(manifest.aggregate, aggregateBody);
+  if (
+    JSON.stringify(aggregate, null, 2) + '\n' !== aggregateBody.toString('utf8')
+  )
+    throw new Error(`${slug}: itemが正準JSON(2スペース)ではない`);
+  if (
+    aggregate.rows.length !== 47 ||
+    aggregate.primaryMetricKey !== LOW_ELEVATION_PRIMARY_METRIC_KEY ||
+    aggregate.generatedAt !== manifest.generatedAt
+  )
+    throw new Error(`${slug}: aggregate coverage/版不一致`);
+  for (const row of aggregate.rows) {
+    const value = row.values[LOW_ELEVATION_PRIMARY_METRIC_KEY];
+    const rank =
+      1 + aggregate.rows.filter((other) => (other.values[LOW_ELEVATION_PRIMARY_METRIC_KEY] ?? 0) > (value ?? 0)).length;
+    if (value === null || rank !== row.rank) throw new Error(`${row.areaCode}: rank不一致`);
+  }
+  // 表は「高い順」と案内するため、配信順は順位順であること。
+  if (aggregate.rows.some((row, i) => i > 0 && row.rank < aggregate.rows[i - 1]!.rank))
+    throw new Error(`${slug}: rowsが順位順ではない`);
+  let meshes = 0;
+  let maxDetailBytes = 0;
+  for (const pref of fetchPrefectures()) {
+    const key = geoAnalysisPrefKey(slug, pref.prefCode.slice(0, 2));
+    const { value, body } = readArtifact<unknown>(key);
+    if (JSON.stringify(value) + '\n' !== body.toString('utf8'))
+      throw new Error(`${key}: 正準JSON(compact)ではない`);
+    const detail = parseGeoLowElevationPrefDetail(value, pref.prefCode);
+    if (!detail) throw new Error(`${key}: 県詳細の契約/再計算不一致`);
+    for (const id of ['population-mesh', 'elevation-mesh', 'mesh-code-join']) {
+      const evidence = stageOutput(manifest, id, key);
+      assertArtifactEvidence(evidence, body);
+      if (evidence.recordCount !== detail.meshes.length)
+        throw new Error(`${key}: ${id}の件数不一致`);
+    }
+    const row = aggregate.rows.find((r) => r.areaCode === pref.prefCode);
+    if (!row) throw new Error(`${pref.prefCode}: aggregate欠落`);
+    assertGeoLowElevationConservation(detail, row);
+    if (detail.summary.conservation.censusPopulation2020 !== lowElevationCensusPopulation(manifest, pref.prefCode))
+      throw new Error(`${key}: 国勢調査人口がmanifestの基準と不一致`);
+    meshes += detail.meshes.length;
+    maxDetailBytes = Math.max(maxDetailBytes, body.byteLength);
+  }
+  if (
+    meshes !== manifest.quality.populatedMeshes ||
+    maxDetailBytes !== manifest.quality.maxDetailBytes
+  )
+    throw new Error(`${slug}: 全県品質集計不一致`);
+  console.log(
+    `✅ ${slug}: 47/47 areas / ${manifest.inputs.length} source hashes / ${meshes} meshes / conservation 47/47 / max ${(maxDetailBytes / 1_000_000).toFixed(2)} MB`
+  );
+}
+
 function main(): void {
+  if (process.argv.includes('--low-elevation-only')) {
+    auditLowElevation();
+    return;
+  }
   if (process.argv.includes('--public-facility-only')) {
     auditPublicFacility();
     return;
@@ -511,6 +607,7 @@ function main(): void {
   console.log(
     `✅ Geo分析artifact: 47/47 areas / conservation 47/47 / max ${(maxDetailBytes / 1_000_000).toFixed(2)} MB`
   );
+  auditLowElevation();
 }
 
 main();

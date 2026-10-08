@@ -7,6 +7,9 @@ import {
   parseGeoSnowPrefDetail,
   parseGeoLandslidePrefDetail,
   assertGeoLandslideConservation,
+  assertGeoLowElevationConservation,
+  lowElevationCensusPopulation,
+  parseGeoLowElevationPrefDetail,
   buildFloodPrefDetail,
   buildLandPricePrefDetail,
   geoAnalysisManifestKey,
@@ -51,6 +54,7 @@ export function parseGeoAnalysisPrefDetail(
     return null;
   if (expectedSlug === 'population-snow-designation') return parseGeoSnowPrefDetail(value, expectedAreaCode);
   if (expectedSlug === 'population-landslide-exposure') return parseGeoLandslidePrefDetail(value, expectedAreaCode);
+  if (expectedSlug === 'population-low-elevation') return parseGeoLowElevationPrefDetail(value, expectedAreaCode);
   if (expectedSlug === 'population-public-facility-access')
     return parseGeoPublicFacilityPrefDetail(value, expectedAreaCode);
   if (expectedSlug === 'population-station-access') {
@@ -163,7 +167,7 @@ export function parseGeoAnalysisPrefDetail(
     return null;
   const detail = value as unknown as Exclude<
     GeoAnalysisPrefDetail,
-    { slug: 'population-station-access' | 'population-public-facility-access' | 'population-snow-designation' | 'population-landslide-exposure' }
+    { slug: 'population-station-access' | 'population-public-facility-access' | 'population-snow-designation' | 'population-landslide-exposure' | 'population-low-elevation' }
   >;
   const summary = value.summary;
   const input = {
@@ -267,6 +271,22 @@ export async function loadGeoAnalysisPrefBundle(
       if (!row) return null;
       if (detail.slug === 'population-landslide-exposure') assertGeoLandslideConservation(detail, row as GeoAnalysisSnapshotRow);
       else assertGeoSnowConservation(detail, row as GeoAnalysisSnapshotRow);
+    }
+    if (detail.slug === 'population-low-elevation') {
+      // 県詳細の国勢調査人口がmanifestの基準と一致し、集計行(item.json)の数値に対応するか。
+      const aggregate = await fetchFromR2AsJson<unknown>(manifest.aggregate.key);
+      if (
+        !isRecord(aggregate) ||
+        aggregate.slug !== slug ||
+        aggregate.generatedAt !== detail.generatedAt ||
+        !Array.isArray(aggregate.rows) ||
+        !(await matchesGeoArtifact(aggregate, manifest.aggregate, true)) ||
+        detail.summary.conservation.censusPopulation2020 !== lowElevationCensusPopulation(manifest, areaCode)
+      )
+        return null;
+      const row = aggregate.rows.find((row) => isRecord(row) && row.areaCode === areaCode);
+      if (!row) return null;
+      assertGeoLowElevationConservation(detail, row as GeoAnalysisSnapshotRow);
     }
     if (detail.slug === 'population-public-facility-access') {
       const sourceArtifact = manifest.stages

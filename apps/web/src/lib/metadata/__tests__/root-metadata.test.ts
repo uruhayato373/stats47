@@ -1,3 +1,7 @@
+import { readFileSync } from "node:fs";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+
 import { describe, it, expect, vi } from "vitest";
 
 vi.mock("@/lib/env", () => ({
@@ -53,5 +57,42 @@ describe("generateRootMetadata", () => {
       index: true,
       follow: true,
     });
+  });
+
+  // AdSense 審査中は広告コードを出さず、所有権確認の meta だけを出す (ADSENSE-RESTART-01)
+  it("AdSense のクライアント ID があれば広告表示の可否と独立に所有権確認の meta を出す", () => {
+    vi.stubEnv("NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT_ID", "ca-pub-0000000000000000");
+
+    const metadata = generateRootMetadata();
+
+    expect(metadata.other).toEqual({ "google-adsense-account": "ca-pub-0000000000000000" });
+    vi.unstubAllEnvs();
+  });
+
+  it("AdSense のクライアント ID が無ければ meta を出さない", () => {
+    vi.stubEnv("NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT_ID", "");
+
+    const metadata = generateRootMetadata();
+
+    expect(metadata.other).toBeUndefined();
+    vi.unstubAllEnvs();
+  });
+
+  // ads.txt と本番 build の client ID は手で同期しているため、食い違うと審査・配信が別口座を指す
+  it("ads.txt のパブリッシャー ID が本番 build の AdSense クライアント ID と一致する", () => {
+    const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), "../../../../../..");
+    const adsTxt = readFileSync(resolve(repoRoot, "apps/web/public/ads.txt"), "utf8");
+    const deployWorkflow = readFileSync(
+      resolve(repoRoot, ".github/workflows/deploy-workers.yml"),
+      "utf8",
+    );
+
+    const adsTxtPublisherId = adsTxt.match(/google\.com, (pub-\d+), DIRECT/)?.[1];
+    const buildClientId = deployWorkflow.match(
+      /NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT_ID: "ca-(pub-\d+)"/,
+    )?.[1];
+
+    expect(adsTxtPublisherId).toBeDefined();
+    expect(adsTxtPublisherId).toBe(buildClientId);
   });
 });

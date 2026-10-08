@@ -20,6 +20,12 @@ import type { AreaDatabookTemplate } from "./types";
 const BOOK = "都道府県 Data Book (日本食糧新聞社)";
 const GUIDE = "47都道府県 県庁所在地ガイド";
 const GUIDE_SURVEYED = "2026-10-08";
+const LIVESTOCK_SELECTION = (rationale: string) => ({
+  proposedBy: "農林水産省「畜産統計」確報 (乳用牛と並ぶ畜産の県別規模)",
+  sourceUrl: "https://www.maff.go.jp/j/tokei/kouhyou/tikusan/",
+  surveyedAt: GUIDE_SURVEYED,
+  rationale,
+});
 
 export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
   sections: [
@@ -92,6 +98,21 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
               capitalCityValue: true,
             },
             { rankingKey: "dairy-cattle-count", shortLabel: "乳用牛飼育頭数" },
+            {
+              rankingKey: "beef-cattle-count",
+              shortLabel: "肉用牛飼養頭数",
+              selection: LIVESTOCK_SELECTION("肉用牛の飼養規模。北海道・九州の畜産地帯と他県の差を読む"),
+            },
+            {
+              rankingKey: "pig-count",
+              shortLabel: "豚飼養頭数",
+              selection: LIVESTOCK_SELECTION("豚の飼養規模。南九州・関東の養豚地帯を読む"),
+            },
+            {
+              rankingKey: "layer-hen-count",
+              shortLabel: "採卵鶏飼養羽数",
+              selection: LIVESTOCK_SELECTION("採卵鶏(成鶏めす)の飼養規模。鶏卵の産地を読む"),
+            },
           ],
         },
       ],

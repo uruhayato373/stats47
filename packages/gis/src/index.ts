@@ -77,3 +77,24 @@ export { SNOW_DESIGNATION_DEFINITION, SNOW_DESIGNATION_DEFINITION_SHA256 } from 
 export { LANDSLIDE_EXPOSURE_DEFINITION, LANDSLIDE_EXPOSURE_DEFINITION_SHA256 } from './geo-analysis/landslide-exposure-definition';
 export { parseGeoLandslideSnapshot, parseGeoLandslidePrefDetail, parseGeoLandslideManifest, assertGeoLandslideConservation, assertLandslideSourcePublication, landslideMeshBounds, landslideCounts, landslideValues, landslideNationalValues, expectedLandslideInputs, LANDSLIDE_STAGES, type GeoLandslidePrefDetail, type GeoLandslideMesh, type GeoLandslideFacility, type GeoLandslideSummary, type GeoLandslideCounts } from './geo-analysis/landslide-exposure';
 export { parseGeoSnowPrefDetail, parseGeoSnowManifest, assertGeoSnowConservation, snowMeshBounds, type GeoSnowPrefDetail, type GeoSnowMesh, type GeoSnowSummary } from './geo-analysis/snow-designation';
+export {
+  LOW_ELEVATION_SLUG,
+  LOW_ELEVATION_DATA_VERSION,
+  LOW_ELEVATION_THRESHOLDS_M,
+  LOW_ELEVATION_PRIMARY_THRESHOLD_M,
+  LOW_ELEVATION_PRIMARY_METRIC_KEY,
+  LOW_ELEVATION_BAND_LABELS,
+  LOW_ELEVATION_ATTRIBUTION,
+  lowElevationMeshBounds,
+  lowElevationBand,
+  summarizeLowElevation,
+  parseGeoLowElevationPrefDetail,
+  parseGeoLowElevationManifest,
+  assertGeoLowElevationConservation,
+  lowElevationCensusPopulation,
+  type GeoLowElevationPrefDetail,
+  type GeoLowElevationMesh,
+  type GeoLowElevationSummary,
+  type GeoLowElevationBand,
+  type GeoLowElevationThreshold,
+} from './geo-analysis/low-elevation-population';

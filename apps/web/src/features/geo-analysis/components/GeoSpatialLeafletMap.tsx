@@ -50,7 +50,7 @@ export function GeoSpatialLeafletMap({
 }: {
   detail: Exclude<
     GeoAnalysisPrefDetail,
-    { slug: 'population-public-facility-access' | 'population-snow-designation' | 'population-landslide-exposure' }
+    { slug: 'population-public-facility-access' | 'population-snow-designation' | 'population-landslide-exposure' | 'population-low-elevation' }
   >;
   view: Exclude<SpatialView, 'audit'>;
 }) {
