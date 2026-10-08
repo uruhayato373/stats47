@@ -1,6 +1,7 @@
 "use client";
 
 import { AdImpressionTracker } from "./AdImpressionTracker";
+import { PrLabel } from "./PrLabel";
 import { TrackedAffiliateLink } from "./tracked-affiliate-link";
 
 interface BannerAdProps {
@@ -24,6 +25,7 @@ interface BannerAdProps {
 /**
  * バナー広告の統一表示コンポーネント。
  * TrackedAffiliateLink 経由で GA4 計測 + rel="sponsored" を保証する。
+ * 画像の上に PR 表記を出す (呼び出し側で PR を重ねない)。
  */
 export function BannerAd({
   href,
@@ -51,25 +53,28 @@ export function BannerAd({
       creativeSize={creativeSize}
     >
       <div className={`relative flex flex-col items-center ${className ?? ""}`}>
-        <TrackedAffiliateLink
-          href={href}
-          category={category}
-          label={label}
-          position={position}
-          adId={adId}
-          experimentId={experimentId}
-          variantId={variantId}
-          creativeSize={creativeSize}
-        >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={imageUrl}
-            width={width ?? undefined}
-            height={height ?? undefined}
-            alt=""
-            className="max-w-full h-auto"
-          />
-        </TrackedAffiliateLink>
+        <div className="flex max-w-full flex-col items-start gap-1">
+          <PrLabel />
+          <TrackedAffiliateLink
+            href={href}
+            category={category}
+            label={label}
+            position={position}
+            adId={adId}
+            experimentId={experimentId}
+            variantId={variantId}
+            creativeSize={creativeSize}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={imageUrl}
+              width={width ?? undefined}
+              height={height ?? undefined}
+              alt=""
+              className="max-w-full h-auto"
+            />
+          </TrackedAffiliateLink>
+        </div>
         {trackingPixelUrl && (
           // eslint-disable-next-line @next/next/no-img-element
           <img

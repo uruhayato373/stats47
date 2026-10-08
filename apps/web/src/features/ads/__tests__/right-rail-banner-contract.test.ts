@@ -67,7 +67,8 @@ describe("right rail banner contract", () => {
     expect(rankingRail).not.toContain("FurusatoNozeiCard");
   });
 
-  it("image affiliate placements do not add PR copy or card chrome", () => {
+  // PR 表記は BannerAd が持つ (2026-10-08)。呼び出し側で PR や装飾を重ねない
+  it("image affiliate placements do not add their own PR copy or card chrome", () => {
     const fixedBanner = source("apps/web/src/features/ads/components/SidebarPromoBanner.tsx");
     const affiliateSlot = source("apps/web/src/features/ads/components/AffiliateAdSlot.tsx");
     const bannerBranchStart = affiliateSlot.indexOf("banners.map");
