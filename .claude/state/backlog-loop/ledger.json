@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-08T21:16:16.357Z",
+  "updatedAt": "2026-10-08T21:59:52.112Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -7097,6 +7097,39 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-10-08T21:16:16.357Z"
+    },
+    "METRIC-NORMALIZATION-UNIT-DASH-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-08T21:59:52.112Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "validate:config (変異で exit 1)"
+            ],
+            "pass": true
+          },
+          "evidence": "10 指標 (割合・指数) から normalizationOptions を削除し [normalization-unit-dash] lint を追加",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-08T21:59:52.112Z"
     }
   }
 }
