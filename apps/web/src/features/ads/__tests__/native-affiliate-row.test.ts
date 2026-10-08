@@ -52,7 +52,9 @@ describe("NativeAffiliateRow の構造契約", () => {
     expect(src).toContain(".filter(isLandscapeBanner)");
   });
 
-  it("PR・見出し・商品名・もっと見る導線を表示しない", () => {
+  // 2026-10-08 オーナー判断: 画像だけでは記事の図と見分けにくいので PR 表記は付ける (ステマ告示への対応)
+  it("各バナーに PR 表記を付け、見出し・商品名・もっと見る導線は表示しない", () => {
+    expect(src).toContain("<PrLabel />");
     expect(src).not.toContain(">PR<");
     expect(src).not.toContain("<h3");
     expect(src).not.toContain("<p");
@@ -97,9 +99,10 @@ describe("NativeAffiliateRow の構造契約", () => {
 describe("SidebarStickyBannerAd の契約", () => {
   const src = readComponent("SidebarStickyBannerAd.tsx");
 
-  it("可視要素にPR見出しを足さず、バナー画像だけを表示する", () => {
+  it("PR 表記は BannerAd に任せ、独自の PR 見出しを重ねない", () => {
     expect(src).toContain("<BannerAd");
     expect(src).not.toContain(">PR<");
+    expect(src).not.toContain("<PrLabel");
   });
 
   it('sidebar-sticky locationCode を読む (縦長の唯一の受け皿)', () => {
@@ -116,5 +119,14 @@ describe("SidebarStickyBannerAd の契約", () => {
 
   it("計装済みコンポーネント (BannerAd) に描画を委譲する", () => {
     expect(src).toContain("<BannerAd");
+  });
+});
+
+describe("BannerAd の契約", () => {
+  const src = readComponent("BannerAd.tsx");
+
+  it("画像バナーの上に PR 表記を出す (全ての画像バナー枠の共通部品)", () => {
+    expect(src).toContain("<PrLabel />");
+    expect(src.indexOf("<PrLabel />")).toBeLessThan(src.indexOf("<TrackedAffiliateLink"));
   });
 });

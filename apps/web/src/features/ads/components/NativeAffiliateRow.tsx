@@ -3,6 +3,7 @@ import Image from "next/image";
 import { isLandscapeBanner } from "../utils";
 
 import { AdImpressionTracker } from "./AdImpressionTracker";
+import { PrLabel } from "./PrLabel";
 import { TrackedAffiliateLink } from "./tracked-affiliate-link";
 
 import type { ResolvedAffiliateBanner } from "../types";
@@ -32,10 +33,11 @@ function getThreeUpGridClassName(itemCount: number): string {
 }
 
 /**
- * ネイティブアフィリエイト枠。リンク付きバナー画像だけをグリッド表示する。
+ * ネイティブアフィリエイト枠。リンク付きバナー画像を、各画像の上の PR 表記つきでグリッド表示する。
  *
  * ★ 2026-08-14: PR ラベル・見出し・商品名・もっと見る導線・カード装飾を廃止した。
  *   ASP 提供バナーの意匠をそのまま表示し、サイト側の可視テキストや装飾を重ねない。
+ * ★ 2026-10-08: PR 表記だけをオーナー判断で戻した (PrLabel)。見出し・商品名・装飾は引き続き足さない。
  *
  * ★ 縦長 (height > width) クリエイティブはここで除外する。本文の横並びグリッドに
  *   スカイスクレイパー (120x600) が入ると行が過度に高くなるため。縦長の受け皿は
@@ -80,38 +82,41 @@ export function NativeAffiliateRow({
           creativeSize={`${b.width}x${b.height}`}
           className={isThreeUp && index > 0 ? "hidden md:block" : undefined}
         >
-          <TrackedAffiliateLink
-            href={b.href}
-            category={b.vertical ?? trackingCategory}
-            label={b.title}
-            position={position}
-            adId={b.id}
-            className="relative block"
-          >
-            <Image
-              src={b.imageUrl}
-              alt={b.title}
-              width={b.width}
-              height={b.height}
-              sizes={
-                isThreeUp
-                  ? "(max-width: 767px) 100vw, 33vw"
-                  : "(max-width: 767px) 50vw, 25vw"
-              }
-              className="block h-auto w-full"
-              loading="lazy"
-            />
-            {b.trackingPixelUrl && (
-              /* eslint-disable-next-line @next/next/no-img-element */
-              <img
-                src={b.trackingPixelUrl}
-                alt=""
-                width={1}
-                height={1}
-                className="absolute left-0 top-0 h-px w-px opacity-0"
+          <div className="flex flex-col gap-1">
+            <PrLabel />
+            <TrackedAffiliateLink
+              href={b.href}
+              category={b.vertical ?? trackingCategory}
+              label={b.title}
+              position={position}
+              adId={b.id}
+              className="relative block"
+            >
+              <Image
+                src={b.imageUrl}
+                alt={b.title}
+                width={b.width}
+                height={b.height}
+                sizes={
+                  isThreeUp
+                    ? "(max-width: 767px) 100vw, 33vw"
+                    : "(max-width: 767px) 50vw, 25vw"
+                }
+                className="block h-auto w-full"
+                loading="lazy"
               />
-            )}
-          </TrackedAffiliateLink>
+              {b.trackingPixelUrl && (
+                /* eslint-disable-next-line @next/next/no-img-element */
+                <img
+                  src={b.trackingPixelUrl}
+                  alt=""
+                  width={1}
+                  height={1}
+                  className="absolute left-0 top-0 h-px w-px opacity-0"
+                />
+              )}
+            </TrackedAffiliateLink>
+          </div>
         </AdImpressionTracker>
       ))}
     </div>
