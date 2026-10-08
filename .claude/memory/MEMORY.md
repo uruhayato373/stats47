@@ -140,3 +140,4 @@
 - [feedback_workflow_policy_comment_import.md](feedback_workflow_policy_comment_import.md) — audit-workflow-policy はコメント内の `from "x"` も依存と数え SCRIPT_RUN_WITHOUT_INSTALL を誤検出する。共通モジュールの使用例は散文で書く
 - [feedback_help_flag_runs_script.md](feedback_help_flag_runs_script.md) — 自作スクリプトの多くは --help を無視して本処理を実行する (2026-10-06 に blog outbox を誤生成)。確認は node --check / tsc / import のみの 1 行で
 - [feedback_blog_background_codex_only.md](feedback_blog_background_codex_only.md) — ブログ背景は Codex (generate-blog-images Mode A・送り箱は --article) で git に置く。Gemini で作り直さない。課金や公開を起こす依頼ファイルはコードの commit と別 push にする
+- [feedback_file_backlog_as_you_go.md](feedback_file_backlog_as_you_go.md) — 長い作業では範囲外の課題を見つけた時点で backlog へ起票しながら進める。既存カード検索→追記優先、CI 待ち中の起票コミットはマージ後に push
