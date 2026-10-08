@@ -2310,20 +2310,6 @@ updated: 2026-10-06
   スマホで縦に積まれる / 関連記事がサムネイル付きで、補う候補が 3 件以上あるページ (納豆で確認) では 3 件出る / ランキングページの右レールに出典調査のカードが無い /
   撮り直しでスマホのページ高さが現状 (5,284px) から減っている。
 
-### [BLOG-OUTBOX-DATA-SOURCE-01] contents/blog に滞留した公開フラグ付き原稿 19 本の理由を確かめ、手書き出典節を移行する
-
-タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npx tsx .claude/scripts/blog/migrate-data-source-sections.ts --outbox] [起票:2026-09-25] [領域:データ]
-
-- **背景**: 2026-09-25 の出典統一で `quality-gate.mjs` が本文の手書き「データ出典」節を blocker にした。`contents/blog` には
-  手書き節を持つ原稿が 27 本あり、うち 19 本は `published: true` のまま公開されずに残っている (prune は R2 と内容一致のときだけ消すので、
-  R2 と差がある)。なぜ公開されていないかは未確認。このまま公開しようとすると新しい gate で止まる。
-- **現在地 (2026-10-08 に確認)**: 19 本は改稿版ではなく、R2 より古い写しだった。R2 の本文は 2026-09-25 の移行で「## データ出典」節を消すか「## データについて」へ改めた版で、outbox 側との差はこの節だけ (19 本すべてで R2 と比べて確認)。`select-republish-slugs.mjs` は内容が違うので「revised」として毎回選び、`quality-gate.mjs` が手書き出典節の blocker で止めるので公開されない (= R2 は退行しない)。08-30 の統合 commit (`23b382309`) が掃除済みの原稿を出戻りさせたとみられる。R2 が新しいので、変換して再公開するより outbox から消すほうが筋がよい。
-- **次**: ① 19 本について、公開 workflow (`blog-auto-publish.yml`) が選ばなかった理由を `select-republish-slugs.mjs` と
-  `quality-gate.mjs` の出力で確かめる。② 公開を意図するものは `migrate-data-source-sections.ts --outbox --apply` で変換してから公開経路へ戻す。
-  意図しないものは `published: false` にするか、R2 と同じ内容なら outbox から除く。
-- **停止条件**: 公開 (R2 反映) はオーナーの確認を取ってから行う。変換は出典節だけを変え、散文は変えない。
-- **完了条件**: 検証コマンドが「contents/blog 原稿: 0 本」を返す。
-
 ### [KINDLE-DATA-SOURCE-01] Kindle の章の出典をブログ本文の手書き節から切り離し、据え置き 61 本の本文も移行する
 
 タグ: [収益化] [種類:改善] [実行:対話] [検証:npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --offline --check] [起票:2026-09-25] [領域:商品]

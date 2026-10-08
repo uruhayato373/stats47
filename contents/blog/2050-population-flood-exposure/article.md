@@ -91,7 +91,7 @@ ogImage: /blog/2050-population-flood-exposure/og.png
 - 入力一覧と保存則を別々に検査し、県内メッシュから集計の根拠へ戻れるようにしています。
 - 中心点近似と原資料の提供範囲には限界があり、避難や個別住所の安全判断には使えません。
 
-## データ出典
+## データについて
 
 国土交通省[「1kmメッシュ別将来推計人口（R6国政局推計）」](https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-mesh1000r6.html) version 24、および[「洪水浸水想定区域（1次メッシュ単位、2025年度）」](https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-A31b-2025.html) version 25の想定最大規模レイヤを加工しました。原データの利用条件はCC BY 4.0です。背景地図タイルは図に使用していません。
 
