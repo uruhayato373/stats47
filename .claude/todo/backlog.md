@@ -3284,8 +3284,9 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
   県欠けの年を載せると順位がずれるので、e-Stat に表が揃うか、別の取得元を決めるまでは 2018 → 2023 の間が空く。
 - **完了条件の達成 (2026-10-08)**: uruhayato373/stats47#1111 のデプロイ後、本番 `/ranking/fishery-species-catch-bonito` は 200 で、タイトルと本文が 2023 年 (1 位静岡県 56,969 t) を出している。
 - **次**: ④ fishery-marine に「主な魚種」の章を提案する (下)。⑤ ブログ `bonito-catch-prefecture` の 2023 年への更新を blog 側へ渡す。④⑤ が済んだらこのカードを消す。
-- **提案 (2026-10-08、オーナー承認待ち)**: fishery-marine に「主な魚種と産地」章を足す。カツオ・サバ・サンマ・スケトウダラ・ホタテの 5 指標をカード化し、
-  初期表示は 2023 年の上位県。2019〜2022 年が空くことを章の注記に書く。
+- **④ 承認・実装 (2026-10-08)**: オーナーが修正案 (検索表示順のサンマ・イワシ・サバ・カツオ・マグロ) で承認。cf0335d56 で「主な魚種と産地」章を作った。
+  uruhayato373/stats47#1112 のマージ後に本番の `/themes/fishery-marine` で章を確かめる。残りは ⑤ (ブログ `bonito-catch-prefecture` は 2015 年の図。
+  魚種の最新年が 2023 年になったので、日次の `build-stale-data-years.mjs` が是正キューの data-refresh レーンに入れるかを確かめる)。
 
 ### [THEME-AGING-LIVING-ALONE-METRIC-01] 65歳以上人口に占める一人暮らしの割合 (高齢者の独居率) を指標に足す
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run validate:config --workspace=@stats47/data-configs] [起票:2026-10-06] [領域:データ]
@@ -3305,6 +3306,7 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - **本番 (2026-10-08)**: uruhayato373/stats47#1111 のデプロイ後、`/ranking/elderly-living-alone-rate` は Googlebot UA で 200、OGP 画像も 200。残りは下の章の提案だけ。
 - **提案 (2026-10-08、オーナー承認待ち)**: aging-society の「高齢者はどの世帯で暮らすか」章に `elderly-living-alone-rate` を secondary で足し、
   既存の一般世帯分母の指標と同じ章で並べる (カード見出しは「高齢者の一人暮らしの割合」、注記に分母の違いを書く)。
+- **承認・実装 (2026-10-08)**: オーナー承認。cf0335d56 でカードに足し、章の説明に分母の違いを書いた。uruhayato373/stats47#1112 のマージ後に本番の `/themes/aging-society` でタイルを確かめたらカードを消す。
 
 ### [THEME-DUP-METRIC-CARD-01] 同じ指標のカードが 2 つの章に出ている 4 テーマを、どちらか 1 か所に整理する
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run validate:catalog --workspace=@stats47/data-configs] [起票:2026-10-06] [領域:データ]
@@ -3320,7 +3322,8 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - **完了条件**: 4 テーマで同じ rankingKey のカードが 1 か所だけになり、見出しに「章名｜」が残っていない。
 - **範囲の訂正 (2026-10-08)**: 同じテーマの中で同じ rankingKey が 2 枚のカードに出ているのは、上の 4 件だけではなく 6 テーマ 16 指標ある (healthcare 5・labor-mobility 3・climate・living-housing・real-income・safety 各 2。THEME-SINGLE-YEAR-CARDS-01 の振り分けの途中で見つかった)。
 - **済 (2026-10-08)**: `validate:catalog` に `[group-dup-metric]` (warning) を足し、既存 16 件を warning baseline (`.claude/config/quality-warning-baseline.json`、期限 2026-12-31) に登録した。17 件目からは develop の Quality Warning Ratchet が止める。意図して 2 章に置く例外の仕組みは、下の提案で「両方に残す」が承認されたときだけ足す。
-- **提案 (2026-10-08、オーナー承認待ち)**: 外すカードを次のとおりにする。章の唯一のカードを外すことになるのは ⑤⑦⑧ の 3 章で、その章ごと既存章へ畳み、`theme-feasibility-catalog.json` の該当候補を「既存章に統合」に変える。
+- **承認・実装 (2026-10-08)**: オーナー承認 (「就業の状態と働き方」の章は埋め込み図だけで残す)。b942a5926 で 16 件を整理し、warning baseline を 0 にした。uruhayato373/stats47#1112 のマージ後に本番で確かめたらカードを消す。
+- **提案 (2026-10-08)**: 外すカードを次のとおりにする。章の唯一のカードを外すことになるのは ⑤⑦⑧ の 3 章で、その章ごと既存章へ畳み、`theme-feasibility-catalog.json` の該当候補を「既存章に統合」に変える。
   ① climate 年間日照時間: 「暑さと熱中症の救急搬送」(candidate-104-3) から外し「日照」に残す。② climate 年間雪日数: 「雪国の暮らしと除雪」(candidate-96-1) から外し、図のある「降水と雪」に残す。
   ③ healthcare 医師・看護師 (人口10万対): 「診療科と年齢から見る医療人材」の単独カード 2 枚 (candidate-57-1・-2) を外し、2 系列カード supply-1 に残す。④ healthcare 健康寿命 男・女: candidate-65-1・-2 を外し healthy-years に残す。救急搬送病院収容所要時間: candidate-58-7 を外し「地域の医療アクセス」(その章の唯一のカード) に残す。
   ⑤ labor-mobility 有効求人倍率: 「人手不足と求人」(candidate-33) はこの 1 枚だけなので章ごと「求人・求職と職業紹介」へ畳む。⑥ labor-mobility テレワーク実施率・昼夜間人口比率: work-style の 2 系列カードは candidate-39-1 と candidate-84-1 の完全な重複なので、work-style のカードを外す (work-style 章は埋め込み章だけ残るので、章の扱いも同時に決める)。

@@ -430,7 +430,7 @@
           ]
         }
       },
-      "notes": "公開日 2026-09-11 で schedule 済み。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。 同時変更: 2026-10-07 (#1099) にカード見出し 4 件の文言を変えた (章名の重複を除いただけで、章・指標・図は不変)。d28・d56 の判定ではこの変更を制約として併記する。",
+      "notes": "公開日 2026-09-11 で schedule 済み。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。 同時変更: 2026-10-07 (#1099) にカード見出し 4 件の文言を変えた (章名の重複を除いただけで、章・指標・図は不変)。d28・d56 の判定ではこの変更を制約として併記する。 同時変更: 2026-10-08 オーナー承認の candidate 章の重複カード 2 枚を削除 (b942a5926)。uruhayato373/stats47#1112 のマージ日に公開。",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
@@ -2210,7 +2210,7 @@
           ]
         }
       },
-      "notes": "公開日 2026-09-11 で schedule 済み。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。 同時変更: 2026-10-07 (#1099) にカード見出し 4 件の文言を変えた (章名の重複を除いただけで、章・指標・図は不変)。d28・d56 の判定ではこの変更を制約として併記する。",
+      "notes": "公開日 2026-09-11 で schedule 済み。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。 同時変更: 2026-10-07 (#1099) にカード見出し 4 件の文言を変えた (章名の重複を除いただけで、章・指標・図は不変)。d28・d56 の判定ではこの変更を制約として併記する。 同時変更: 2026-10-08 オーナー承認の 「可処分所得と生活費」章を控除前後の月収へ統合 (b942a5926)。uruhayato373/stats47#1112 のマージ日に公開。",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
@@ -2443,7 +2443,7 @@
           ]
         }
       },
-      "notes": "公開日 2026-09-11 で schedule 済み。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。 同時変更: 2026-10-07 (#1099) にカード見出し 27 件の文言を変えた (章名の重複を除いただけで、章・指標・図は不変)。d28・d56 の判定ではこの変更を制約として併記する。",
+      "notes": "公開日 2026-09-11 で schedule 済み。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。 同時変更: 2026-10-07 (#1099) にカード見出し 27 件の文言を変えた (章名の重複を除いただけで、章・指標・図は不変)。d28・d56 の判定ではこの変更を制約として併記する。 同時変更: 2026-10-08 オーナー承認の candidate 章の重複カード 2 枚を削除 (b942a5926)。uruhayato373/stats47#1112 のマージ日に公開。",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
@@ -5987,7 +5987,7 @@
         "d56": "2026-12-02"
       },
       "result": null,
-      "notes": "THEME-STRUCTURE-20260908-aging-society (d28 で aborted) の引き継ぎ。baseline は portfolio.json (generatedAt 2026-10-08) の非重複 56 日窓 W36+W40 (GA4 2026-08-09〜2026-10-03、GSC 2026-08-07〜2026-10-01) で、公開日 2026-10-07 より前。measured-low の比率値は null。季節性 (9〜11 月) と、同時期に続けている他テーマの見出し文言の変更 (19 テーマ) を判定時の制約として扱う。",
+      "notes": "THEME-STRUCTURE-20260908-aging-society (d28 で aborted) の引き継ぎ。baseline は portfolio.json (generatedAt 2026-10-08) の非重複 56 日窓 W36+W40 (GA4 2026-08-09〜2026-10-03、GSC 2026-08-07〜2026-10-01) で、公開日 2026-10-07 より前。measured-low の比率値は null。季節性 (9〜11 月) と、同時期に続けている他テーマの見出し文言の変更 (19 テーマ) を判定時の制約として扱う。 同時変更: 2026-10-08 オーナー承認の 「高齢者はどの世帯で暮らすか」のカードに高齢者の一人暮らしの割合を追加 (cf0335d56)。uruhayato373/stats47#1112 のマージ日に公開。",
       "evidenceRefs": [
         "data/themes/portfolio.json#aging-society/metrics",
         "data/gsc/snapshots/2026-W36/pages.csv",
@@ -6033,7 +6033,7 @@
         "d56": "2026-12-02"
       },
       "result": null,
-      "notes": "THEME-STRUCTURE-20260908-fishery-marine (d28 で aborted) の引き継ぎ。baseline は portfolio.json (generatedAt 2026-10-08) の非重複 56 日窓 W36+W40 (GA4 2026-08-09〜2026-10-03、GSC 2026-08-07〜2026-10-01) で、公開日 2026-10-07 より前。measured-low の比率値は null。季節性 (9〜11 月) と、同時期に続けている他テーマの見出し文言の変更 (19 テーマ) を判定時の制約として扱う。",
+      "notes": "THEME-STRUCTURE-20260908-fishery-marine (d28 で aborted) の引き継ぎ。baseline は portfolio.json (generatedAt 2026-10-08) の非重複 56 日窓 W36+W40 (GA4 2026-08-09〜2026-10-03、GSC 2026-08-07〜2026-10-01) で、公開日 2026-10-07 より前。measured-low の比率値は null。季節性 (9〜11 月) と、同時期に続けている他テーマの見出し文言の変更 (19 テーマ) を判定時の制約として扱う。 同時変更: 2026-10-08 オーナー承認の 「主な魚種と産地」章を新設し魚種別漁獲量 5 指標を secondary に (cf0335d56)。uruhayato373/stats47#1112 のマージ日に公開。",
       "evidenceRefs": [
         "data/themes/portfolio.json#fishery-marine/metrics",
         "data/gsc/snapshots/2026-W36/pages.csv",
@@ -6125,7 +6125,7 @@
         "d56": "2026-12-02"
       },
       "result": null,
-      "notes": "THEME-STRUCTURE-20260908-healthcare (d28 で aborted) の引き継ぎ。baseline は portfolio.json (generatedAt 2026-10-08) の非重複 56 日窓 W36+W40 (GA4 2026-08-09〜2026-10-03、GSC 2026-08-07〜2026-10-01) で、公開日 2026-10-07 より前。measured-low の比率値は null。季節性 (9〜11 月) と、同時期に続けている他テーマの見出し文言の変更 (19 テーマ) を判定時の制約として扱う。",
+      "notes": "THEME-STRUCTURE-20260908-healthcare (d28 で aborted) の引き継ぎ。baseline は portfolio.json (generatedAt 2026-10-08) の非重複 56 日窓 W36+W40 (GA4 2026-08-09〜2026-10-03、GSC 2026-08-07〜2026-10-01) で、公開日 2026-10-07 より前。measured-low の比率値は null。季節性 (9〜11 月) と、同時期に続けている他テーマの見出し文言の変更 (19 テーマ) を判定時の制約として扱う。 同時変更: 2026-10-08 オーナー承認の candidate 章の重複カード 5 枚を削除 (b942a5926)。uruhayato373/stats47#1112 のマージ日に公開。",
       "evidenceRefs": [
         "data/themes/portfolio.json#healthcare/metrics",
         "data/gsc/snapshots/2026-W36/pages.csv",
@@ -6171,7 +6171,7 @@
         "d56": "2026-12-02"
       },
       "result": null,
-      "notes": "THEME-STRUCTURE-20260908-labor-mobility (d28 で aborted) の引き継ぎ。baseline は portfolio.json (generatedAt 2026-10-08) の非重複 56 日窓 W36+W40 (GA4 2026-08-09〜2026-10-03、GSC 2026-08-07〜2026-10-01) で、公開日 2026-10-07 より前。measured-low の比率値は null。季節性 (9〜11 月) と、同時期に続けている他テーマの見出し文言の変更 (19 テーマ) を判定時の制約として扱う。",
+      "notes": "THEME-STRUCTURE-20260908-labor-mobility (d28 で aborted) の引き継ぎ。baseline は portfolio.json (generatedAt 2026-10-08) の非重複 56 日窓 W36+W40 (GA4 2026-08-09〜2026-10-03、GSC 2026-08-07〜2026-10-01) で、公開日 2026-10-07 より前。measured-low の比率値は null。季節性 (9〜11 月) と、同時期に続けている他テーマの見出し文言の変更 (19 テーマ) を判定時の制約として扱う。 同時変更: 2026-10-08 オーナー承認の 「人手不足と求人」章を求人・求職と職業紹介へ統合し、「就業の状態と働き方」の重複カードを削除 (b942a5926)。uruhayato373/stats47#1112 のマージ日に公開。",
       "evidenceRefs": [
         "data/themes/portfolio.json#labor-mobility/metrics",
         "data/gsc/snapshots/2026-W36/pages.csv",
@@ -6263,7 +6263,7 @@
         "d56": "2026-12-02"
       },
       "result": null,
-      "notes": "THEME-STRUCTURE-20260908-living-housing (d28 で aborted) の引き継ぎ。baseline は portfolio.json (generatedAt 2026-10-08) の非重複 56 日窓 W36+W40 (GA4 2026-08-09〜2026-10-03、GSC 2026-08-07〜2026-10-01) で、公開日 2026-10-07 より前。measured-low の比率値は null。季節性 (9〜11 月) と、同時期に続けている他テーマの見出し文言の変更 (19 テーマ) を判定時の制約として扱う。",
+      "notes": "THEME-STRUCTURE-20260908-living-housing (d28 で aborted) の引き継ぎ。baseline は portfolio.json (generatedAt 2026-10-08) の非重複 56 日窓 W36+W40 (GA4 2026-08-09〜2026-10-03、GSC 2026-08-07〜2026-10-01) で、公開日 2026-10-07 より前。measured-low の比率値は null。季節性 (9〜11 月) と、同時期に続けている他テーマの見出し文言の変更 (19 テーマ) を判定時の制約として扱う。 同時変更: 2026-10-08 オーナー承認の candidate 章の重複カード 2 枚を削除し、カード見出し「一般世帯数」から章名を外した (b942a5926)。uruhayato373/stats47#1112 のマージ日に公開。",
       "evidenceRefs": [
         "data/themes/portfolio.json#living-housing/metrics",
         "data/gsc/snapshots/2026-W36/pages.csv",
