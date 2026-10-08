@@ -1,0 +1,126 @@
+{
+  "label": "小中学校教員の平均年収 年別の1位と最下位",
+  "unit": "万円",
+  "source": "e-Stat 統計表 0003445758（賃金構造基本統計調査）。cdCat01=01, cdCat02=1192。2022年は表章項目 08（月例給与）・12（賞与）・13（労働者数）、他の年は 40・44・45。月例給与と賞与は千円、労働者数は十人単位で公表されている値を10倍した人数。年収は月例給与×12＋賞与（千円）を10で割った万円。順位と年収の値は R2 app/ranking/school-teacher-annual-income/values.json と同じ。",
+  "restore": "R2 の値は https://storage.stats47.jp/app/ranking/school-teacher-annual-income/values.json の partitions から取得。月例給与・賞与・推計労働者数は e-Stat API getStatsData（statsDataId=0003445758, cdCat01=01, cdCat02=1192）から取得。",
+  "checks": [
+    {
+      "id": "same-value-885.89",
+      "description": "2022年の千葉県と2023年の愛知県がともに885.89万円になる計算",
+      "rows": [
+        {
+          "year": "2022",
+          "areaName": "千葉県",
+          "monthlyKyen": 454.6,
+          "bonusKyen": 3403.7,
+          "annualKyen": 8858.9
+        },
+        {
+          "year": "2023",
+          "areaName": "愛知県",
+          "monthlyKyen": 516.1,
+          "bonusKyen": 2665.7,
+          "annualKyen": 8858.9
+        }
+      ]
+    }
+  ],
+  "extremes": [
+    {
+      "areaName": "東京都",
+      "rank": 1,
+      "value": 813.8,
+      "unit": "万円",
+      "label": "小中学校教員の平均年収",
+      "year": "2020",
+      "kind": "first",
+      "monthlyKyen": 495.3,
+      "bonusKyen": 2194.4,
+      "estimatedWorkers": 7220
+    },
+    {
+      "areaName": "茨城県",
+      "rank": 38,
+      "value": 322.2,
+      "unit": "万円",
+      "label": "小中学校教員の平均年収",
+      "year": "2020",
+      "kind": "last",
+      "monthlyKyen": 268.5,
+      "bonusKyen": 0.0,
+      "estimatedWorkers": 10
+    },
+    {
+      "areaName": "京都府",
+      "rank": 1,
+      "value": 822.17,
+      "unit": "万円",
+      "label": "小中学校教員の平均年収",
+      "year": "2021",
+      "kind": "first",
+      "monthlyKyen": 484.7,
+      "bonusKyen": 2405.3,
+      "estimatedWorkers": 330
+    },
+    {
+      "areaName": "石川県",
+      "rank": 43,
+      "value": 245.16,
+      "unit": "万円",
+      "label": "小中学校教員の平均年収",
+      "year": "2021",
+      "kind": "last",
+      "monthlyKyen": 204.3,
+      "bonusKyen": 0.0,
+      "estimatedWorkers": 40
+    },
+    {
+      "areaName": "千葉県",
+      "rank": 1,
+      "value": 885.89,
+      "unit": "万円",
+      "label": "小中学校教員の平均年収",
+      "year": "2022",
+      "kind": "first",
+      "monthlyKyen": 454.6,
+      "bonusKyen": 3403.7,
+      "estimatedWorkers": 2750
+    },
+    {
+      "areaName": "長崎県",
+      "rank": 44,
+      "value": 406.17,
+      "unit": "万円",
+      "label": "小中学校教員の平均年収",
+      "year": "2022",
+      "kind": "last",
+      "monthlyKyen": 288.5,
+      "bonusKyen": 599.7,
+      "estimatedWorkers": 850
+    },
+    {
+      "areaName": "愛知県",
+      "rank": 1,
+      "value": 885.89,
+      "unit": "万円",
+      "label": "小中学校教員の平均年収",
+      "year": "2023",
+      "kind": "first",
+      "monthlyKyen": 516.1,
+      "bonusKyen": 2665.7,
+      "estimatedWorkers": 730
+    },
+    {
+      "areaName": "愛媛県",
+      "rank": 44,
+      "value": 315.72,
+      "unit": "万円",
+      "label": "小中学校教員の平均年収",
+      "year": "2023",
+      "kind": "last",
+      "monthlyKyen": 246.6,
+      "bonusKyen": 198.0,
+      "estimatedWorkers": 60
+    }
+  ]
+}

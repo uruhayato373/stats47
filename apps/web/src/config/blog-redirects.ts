@@ -39,6 +39,8 @@ export const BLOG_SLUG_REDIRECTS: Record<string, string> = {
   "savings-rate-ranking": "savings-rate-gap",
   "school-nonattendance-ranking": "school-nonattendance-pattern",
   // 2026-10-08 重複記事をまとめた (BLOG-DUPLICATE-AUDIT-01)
+  "school-teacher-annual-income-prefecture-gap": "school-teacher-annual-income",
+  // 2026-10-08 重複記事をまとめた (BLOG-DUPLICATE-AUDIT-01)
   "soba-udon-dining-consumption-expenditure": "soba-udon-dining-consumption-expenditure-prefecture-gap",
   "sports-participation-ranking": "sports-urban-paradox",
   "sunshine-duration-ranking": "sunshine-pacific-vs-nihonkai",
