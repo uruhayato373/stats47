@@ -9,7 +9,8 @@
  * 2 段階の重大度:
  *   - error (exit 1 / CI・pre-commit をブロック):
  *       無効 category キー / title への年混入・注釈(※)混入 /
- *       subtitle が注釈(※)・title と冗長 / unit が空・"‐" / 重複 title に区別子なし。
+ *       subtitle が注釈(※)・title と冗長 / unit が空・"‐" / 重複 title に区別子なし /
+ *       seoTitle・seoDescription の数字の直後の "‐" (seo-unit-dash)。
  *     ※ 旧 warn だった 5 系統 (title-year/title-note, subtitle-note/redundant, unit, dup-title) は
  *       Phase 3 のデータ是正で warn=0 を達成 (2026-06) → error に昇格済。これにより量産時の再混入を CI/pre-commit で阻止する。
  *       category は型 (CategoryKey union) でもコンパイル時にブロックされ、本 lint はその runtime backstop。
@@ -34,6 +35,7 @@ import {
   listThemeCatalogs,
   validateThemeMetricContentCoverage,
 } from '../src/theme-catalog';
+import { findDigitDashPlaceholders } from '../src/seo-meta-facts';
 import { parseUnit } from '../src/unit/unit-semantics';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -94,6 +96,8 @@ interface Row {
   isActive: boolean | null;
   colorScheme: string | null;
   valueScale: number | null;
+  seoTitle: string | null;
+  seoDescription: string | null;
 }
 
 /**
@@ -153,6 +157,8 @@ function main() {
       isActive: boolField(text, 'isActive'),
       colorScheme: strField(text, 'colorScheme'),
       valueScale: numField(text, 'valueScale'),
+      seoTitle: strField(text, 'seoTitle'),
+      seoDescription: strField(text, 'seoDescription'),
     });
   }
 
@@ -266,6 +272,22 @@ function main() {
       r.unit.trim() === '-'
     ) {
       errors.push(`[unit] ${r.file}: unit が空/プレースホルダ ("${r.unit}")`);
+    }
+  }
+
+  // error: seoTitle / seoDescription の数字の直後に「‐」(単位のプレースホルダ) が残っている
+  // (「1位秋田県（417.4‐）」。2026-10-09 に 41 指標を是正。判定は seo-meta-facts.ts)
+  for (const r of rows) {
+    for (const [field, text] of [
+      ['seoTitle', r.seoTitle],
+      ['seoDescription', r.seoDescription],
+    ] as const) {
+      const hits = text ? findDigitDashPlaceholders(text) : [];
+      if (hits.length > 0) {
+        errors.push(
+          `[seo-unit-dash] ${r.file}: ${field} の数字の直後に「‐」(${hits.length} 箇所)。「‐」は単位ではないので外す`
+        );
+      }
     }
   }
 

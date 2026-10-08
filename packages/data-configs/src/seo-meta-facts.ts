@@ -233,3 +233,16 @@ export function checkSeoFacts(params: {
 
   return out;
 }
+
+/**
+ * 数字の直後に置かれた「‐」(U+2010) を拾う。
+ *
+ * e-Stat の単位が「‐」(単位なし) の指標で、seoTitle / seoDescription の値に「‐」が単位として
+ * 連結され、「1位秋田県（417.4‐）」の形で 41 指標 123 箇所が配信されていた
+ * (2026-10-09 に是正。backlog `SEO-UNIT-DASH-01`)。「‐」は単位ではないので数字の直後に置かない。
+ * 範囲は ASCII の「-」か「〜」で書く (この関数は U+2010 だけを見る)。
+ * 検査の配線: `scripts/validate-metric-config.ts` の `[seo-unit-dash]` (error)。
+ */
+export function findDigitDashPlaceholders(text: string): string[] {
+  return [...text.matchAll(/[0-9０-９][^\S\n]*‐/g)].map((m) => m[0]);
+}

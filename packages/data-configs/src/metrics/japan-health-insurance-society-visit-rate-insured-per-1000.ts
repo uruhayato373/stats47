@@ -62,7 +62,7 @@ export const japanHealthInsuranceSocietyVisitRateInsuredPer1000: MetricConfig = 
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "全国保険協会管掌健康保険受診率ランキング都道府県【2023年】｜1位山形県（8,661.34‐）",
-  "seoDescription": "2023年の全国保険協会管掌健康保険受診率の都道府県別ランキング。1位山形県（8,661.34‐）、最下位沖縄県（6,999‐）で1.2倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "全国保険協会管掌健康保険受診率ランキング都道府県【2023年】｜1位山形県（8,661.34）",
+  "seoDescription": "2023年の全国保険協会管掌健康保険受診率の都道府県別ランキング。1位山形県（8,661.34）、最下位沖縄県（6,999）で1.2倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

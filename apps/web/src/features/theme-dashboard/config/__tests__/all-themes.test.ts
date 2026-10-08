@@ -9,11 +9,12 @@ import {
 } from '../theme-section-registry';
 
 describe('ALL_THEMES', () => {
-  it('56テーマのカタログと画面登録が一致する', () => {
+  it('全テーマのカタログと画面登録が一致する', () => {
+    // テーマ数は直書きしない (THEME-COUNT-LITERAL-TESTS-01)。画面登録とカタログ登録簿の key 集合を突き合わせ、
+    // 重複登録も検出する。テーマが意図せず消えたことは theme-catalog-baseline.json の themeKeys が検出する。
     const keys = ALL_THEMES.map((theme) => theme.themeKey);
     expect(keys).toEqual(expect.arrayContaining(['construction-industry', 'waste-recycling', 'information-industry']));
-    expect(ALL_THEMES).toHaveLength(56);
-    expect(Object.keys(THEME_CATALOGS)).toHaveLength(56);
+    expect(new Set(keys).size).toBe(keys.length);
     expect([...keys].sort()).toEqual(Object.keys(THEME_CATALOGS).sort());
   });
   it('テーマが1つ以上定義されている', () => {

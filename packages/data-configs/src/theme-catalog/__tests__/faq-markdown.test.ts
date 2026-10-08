@@ -45,7 +45,18 @@ describe("ThemeCatalog FAQ の配信契約", () => {
       );
     }
 
-    expect(faqRows).toHaveLength(9);
+    // FAQ 数は直書きしない (THEME-COUNT-LITERAL-TESTS-01)。カタログに書かれた FAQ が 1 件も落ちずに
+    // 生成されることを見る。FAQ の章が意図せず消えたことは theme-catalog-baseline.json の
+    // chartsByType["markdown-section"] が検出する。
+    const authoredFaqs = listThemeCatalogs()
+      .flatMap((catalog) => catalog.charts)
+      .filter(
+        (chart) =>
+          chart.componentType === "markdown-section" &&
+          (chart.componentProps as Record<string, unknown> | undefined)?.displayMode === "faq",
+      );
+    expect(authoredFaqs.length).toBeGreaterThan(0);
+    expect(faqRows).toHaveLength(authoredFaqs.length);
     for (const row of faqRows) {
       const props = row.componentProps as Record<string, unknown>;
       expect(Array.isArray(props.items)).toBe(true);

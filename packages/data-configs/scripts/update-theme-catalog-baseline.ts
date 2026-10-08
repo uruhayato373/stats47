@@ -28,6 +28,8 @@ const MIGRATION_FIXTURE = path.join(
 
 export interface ThemeCatalogCounts {
   themes: number;
+  /** 登録テーマの key (昇順)。件数だけでは、1 つ消えて 1 つ増えたときに気づけないため名前で固定する */
+  themeKeys: string[];
   charts: number;
   chartsByType: Record<string, number>;
   chartsWithRelatedRankingKeys: number;
@@ -53,6 +55,7 @@ export function measureThemeCatalogCounts(): ThemeCatalogCounts {
   }
   return {
     themes: baseline.themes,
+    themeKeys: Object.keys(THEME_CATALOGS).sort(),
     charts: baseline.charts,
     chartsByType: baseline.chartsByType,
     chartsWithRelatedRankingKeys: baseline.chartsWithRelatedRankingKeys,

@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const physicalTherapistAnnualIncome: MetricConfig = {
   "key": "physical-therapist-annual-income",
   "title": "理学療法士等の平均年収",
+  "description": "賃金構造基本統計調査の一般労働者・男女計の理学療法士，作業療法士，言語聴覚士，視能訓練士について、きまって支給する現金給与額を12倍し、年間賞与その他特別給与額を加えた推計年収。",
   "unit": "万円",
   "category": "socialsecurity",
   "source": {

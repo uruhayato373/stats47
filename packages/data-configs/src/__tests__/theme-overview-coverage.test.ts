@@ -71,12 +71,14 @@ describe('テーマ比較と既存章の統合', () => {
     ).toContain('floor-area-per-dwelling-owner');
   });
 
-  it('全56カタログの既存指標・章・生成先を保持し、別のoverview定義を必須にしない', () => {
+  it('全カタログの既存指標・章・生成先を保持し、別のoverview定義を必須にしない', () => {
+    // テーマ数は直書きしない (THEME-COUNT-LITERAL-TESTS-01)。登録簿と生成物の key 集合が両方向で一致することを見る。
+    // テーマが意図せず消えたことは .claude/config/theme-catalog-baseline.json の themeKeys が検出する。
     const catalogs = listThemeCatalogs();
-    expect(catalogs).toHaveLength(56);
+    expect(catalogs.length).toBeGreaterThan(0);
     const generatedKeys = new Set(THEME_INDICATOR_SETS.map((item) => item.key));
+    expect([...generatedKeys].sort()).toEqual(catalogs.map((item) => item.key).sort());
     for (const item of catalogs) {
-      expect(generatedKeys.has(item.key), item.key).toBe(true);
       const keys = new Set(item.metrics.map((metric) => metric.rankingKey));
       for (const group of item.metricGroups ?? []) {
         for (const key of group.rankingKeys)
