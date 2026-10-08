@@ -42,6 +42,14 @@
       "expiresAt": "2026-10-31"
     },
     {
+      "source": "theme-catalog",
+      "code": "group-dup-metric",
+      "count": 16,
+      "owner": "theme-designer",
+      "reason": "同じテーマの中で同じ指標が 2 枚のカードに出ている既存分 (6 テーマ 16 指標)。どちらの章に残すかはオーナー承認の提案で決めて減らす (THEME-DUP-METRIC-CARD-01)",
+      "expiresAt": "2026-12-31"
+    },
+    {
       "source": "polarity",
       "code": "polarity-unassigned",
       "count": 2284,
