@@ -3261,74 +3261,18 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
   「【2024年】｜1位東京」のまま (2024 年の値としては正しいので `audit-seo-meta-facts.ts` は通る)。魚種 12 指標は今回手で 2023 年に書き直した。
   値から生成すれば、年を広げるたびにこの手作業は要らなくなる。
 
-### [FISHERY-SPECIES-REFRESH-01] 魚種別漁獲量 12 指標を 2015 年から 2023 年まで延ばし、fishery-marine に「主な魚種」の章を作る
-タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run validate:config --workspace=@stats47/data-configs] [起票:2026-10-06] [領域:データ]
+### [FISHERY-SPECIES-REFRESH-01] 魚種別漁獲量を図に使うブログ 4 本を 2023 年のデータで取り直す
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:node .claude/scripts/blog/build-stale-data-years.mjs] [起票:2026-10-06] [領域:データ]
 
-- **背景**: `fishery-species-catch-*` 12 指標は累年統計 `0003238633` (1956〜2015 年) だけを読み、2015 年で止まっている。
-  検索需要は魚種に集まっている (GSC 2026-W40・28 日: カツオ関連 121 クエリ計 2,077 表示、着地は 2015 年データのブログ
-  `blog/bonito-catch-prefecture` 5,880 表示。魚種ランキングはサンマ 612・イワシ 530・サバ 426・カツオ 214・マグロ 202・スケトウダラ 149 表示)。
-  e-Stat には海面漁業生産統計調査「海面漁業の部 大海区都道府県振興局別統計 魚種別漁獲量」の年ごとの表がある
-  (2026-10-06 に `getStatsList` で確認: 2017 年 `0003322129`、2023 年 `0004043248`。2018〜2022 年は同じ検索の上限 200 件で切れたため未確認)。
-- **次**: ① 2016〜2023 年の各年の statsDataId と魚種の分類コードを e-Stat で解決する。表の地域軸は「大海区・都道府県・振興局」が混在するので、
-  都道府県の行だけを使い、北海道は振興局を足さずに道の行を使う。② 累年統計 (〜2015) と年次表 (2016〜) の値が重なる年で一致するかを確かめ、
-  1 本の系列としてつなげるかを決める (定義が違えば別 key)。③ metric config と R2 観測値を更新する (data-ingester)。
-  ④ fishery-marine に「主な魚種」の章を提案する (選んだ県の魚種構成。提案 → 承認 → catalog 編集の順)。⑤ ブログ `bonito-catch-prefecture` の更新を blog 側へ渡す。
-- **禁止**: 2015 年の値を最新値として見せない。海のない県の対象外を 0 として順位に入れない。
-- **完了条件**: 12 指標の `years.to` が 2023 になり、`/ranking/fishery-species-catch-bonito` が 2023 年の値を表示する。
-- **済 (2026-10-08)**: ①② estat-researcher が解決した。2016 `0003216642`・2017 `0003322129` は地域が @area、2018 `0001803958` は cat02・2023 `0004043248` は cat01 に
-  県名で入る (全国 + 39 県 + 大海区・振興局)。全国値は 2014〜2016 年の 12 魚種すべてで累年統計と一致し、魚種名と 39 県の範囲も同じなので、同じ key でつなぐ。
-  ③ 12 指標に `supplementalSources` で 4 年を足し、`years.to` を 2023 にした。取り込み側は `areaAxis.coverage: "coastal"` (海のない 8 県ちょうどの欠けだけを許す) を足して
-  補完表でも地域の写像を使えるようにした。ローカル取り込みで 12 本とも 4 年分 39 行が入り、静岡のカツオ 2023 年 56,969 t は年次表の値と一致した。
-  description の「40都道府県」は 39 に直した (累年表の 40 は全国を含む数)。
-- **残る年**: 2019 年は魚種別の表が API に無い。2020〜2022 年は県別の 39 表に分かれ、青森 (2020・2021)・大阪 (2020)・山形 (2021・2022) の表が API に無いため載せていない。
-  県欠けの年を載せると順位がずれるので、e-Stat に表が揃うか、別の取得元を決めるまでは 2018 → 2023 の間が空く。
-- **完了条件の達成 (2026-10-08)**: uruhayato373/stats47#1111 のデプロイ後、本番 `/ranking/fishery-species-catch-bonito` は 200 で、タイトルと本文が 2023 年 (1 位静岡県 56,969 t) を出している。
-- **次**: ④ fishery-marine に「主な魚種」の章を提案する (下)。⑤ ブログ `bonito-catch-prefecture` の 2023 年への更新を blog 側へ渡す。④⑤ が済んだらこのカードを消す。
-- **④ 承認・実装 (2026-10-08)**: オーナーが修正案 (検索表示順のサンマ・イワシ・サバ・カツオ・マグロ) で承認。cf0335d56 で「主な魚種と産地」章を作った。
-  uruhayato373/stats47#1112 のマージ後に本番の `/themes/fishery-marine` で章を確かめる。残りは ⑤ (ブログ `bonito-catch-prefecture` は 2015 年の図。
-  魚種の最新年が 2023 年になったので、日次の `build-stale-data-years.mjs` が是正キューの data-refresh レーンに入れるかを確かめる)。
-
-### [THEME-AGING-LIVING-ALONE-METRIC-01] 65歳以上人口に占める一人暮らしの割合 (高齢者の独居率) を指標に足す
-タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run validate:config --workspace=@stats47/data-configs] [起票:2026-10-06] [領域:データ]
-
-- **背景**: GSC 2026-W40 (28 日) で「高齢者 一人暮らし 割合」系の 5 クエリが計 293 表示。現行の
-  `single-person-household-old-population-ratio` は一般世帯が分母で、高齢者本人の独居率ではない (aging-society の章注記どおり)。
-  既存の `single-households-age65plus-male/female` は 2020 年の世帯数だけ。
-- **次**: 国勢調査の表で、47 都道府県の「65 歳以上の単独世帯人員」と「65 歳以上人口」を複数回分 (2010・2015・2020 等)
-  解決できるかを e-Stat で確かめる (statsDataId と分類コードを記録)。解決できたら metric config を作り観測値を R2 へ入れ、
-  aging-society の「高齢者はどの世帯で暮らすか」章に secondary として足す (提案 → 承認 → catalog 編集の順)。
-- **禁止**: 一般世帯を分母にした既存指標を独居率と言い換えて表示しない。
-- **済 (2026-10-08)**: 新指標 `elderly-living-alone-rate` (65歳以上人口に占める一人暮らしの割合) を作った。社会・人口統計体系 `0000010101` の
-  A811105 (65歳以上の世帯員のいる単独世帯数) ÷ A1303 (65歳以上人口) を `axisRatio` で取り、1980〜2020 年の 5 年ごと 9 回分 (47 県 × 9 = 423 行)。
-  estat-researcher が 2010・2015・2020 の 141 セルで国勢調査の表 (0003038624・0003154100・0003445173 と各年の人口表) と一致することを確かめた。
-  2020 年は東京 26.11% が最高、山形 12.08% が最低 (既存の一般世帯分母の指標は高知が 1 位で、顔ぶれが変わる)。
-  2025 年は国勢調査の表 (0004065973 ÷ 0004065916) にあるが、表が 2 つに分かれ axisRatio では取れないので、社会・人口統計体系への反映を待つ。
-- **本番 (2026-10-08)**: uruhayato373/stats47#1111 のデプロイ後、`/ranking/elderly-living-alone-rate` は Googlebot UA で 200、OGP 画像も 200。残りは下の章の提案だけ。
-- **提案 (2026-10-08、オーナー承認待ち)**: aging-society の「高齢者はどの世帯で暮らすか」章に `elderly-living-alone-rate` を secondary で足し、
-  既存の一般世帯分母の指標と同じ章で並べる (カード見出しは「高齢者の一人暮らしの割合」、注記に分母の違いを書く)。
-- **承認・実装 (2026-10-08)**: オーナー承認。cf0335d56 でカードに足し、章の説明に分母の違いを書いた。uruhayato373/stats47#1112 のマージ後に本番の `/themes/aging-society` でタイルを確かめたらカードを消す。
-
-### [THEME-DUP-METRIC-CARD-01] 同じ指標のカードが 2 つの章に出ている 4 テーマを、どちらか 1 か所に整理する
-タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run validate:catalog --workspace=@stats47/data-configs] [起票:2026-10-06] [領域:データ]
-
-- **背景**: カード見出しから章名の繰り返しを外したとき (2026-10-06)、次の 5 枚は見出しが同じ章内の別カードと同じになり
-  `[group-dup-title]` に当たったため、章名付きの見出しを残した。どれも同じ rankingKey のカードが 2 つの章に出ている。
-  climate `annual-snow-days` (降水と雪 / 雪国の暮らしと除雪)、labor-mobility `active-job-opening-ratio`
-  (求人・求職と職業紹介 / 人手不足と求人)、living-housing `households` (空き家の用途と住宅ストック / 世帯構成の変化)、
-  real-income `disposable-income-worker-households` (控除前後の月収 / 可処分所得と生活費)。
-- **次**: テーマごとに、どちらの章の問いにそのカードが要るかを提案し、承認後に片方を外す。後から足された章 (`candidate-<id>`)
-  の唯一のカードを外す場合は、`npm run theme:expansion:check` がその章を未配線と判定するので、判断台帳
-  (`theme-feasibility-catalog.json`) の扱いも同じ変更で決める。
-- **完了条件**: 4 テーマで同じ rankingKey のカードが 1 か所だけになり、見出しに「章名｜」が残っていない。
-- **範囲の訂正 (2026-10-08)**: 同じテーマの中で同じ rankingKey が 2 枚のカードに出ているのは、上の 4 件だけではなく 6 テーマ 16 指標ある (healthcare 5・labor-mobility 3・climate・living-housing・real-income・safety 各 2。THEME-SINGLE-YEAR-CARDS-01 の振り分けの途中で見つかった)。
-- **済 (2026-10-08)**: `validate:catalog` に `[group-dup-metric]` (warning) を足し、既存 16 件を warning baseline (`.claude/config/quality-warning-baseline.json`、期限 2026-12-31) に登録した。17 件目からは develop の Quality Warning Ratchet が止める。意図して 2 章に置く例外の仕組みは、下の提案で「両方に残す」が承認されたときだけ足す。
-- **承認・実装 (2026-10-08)**: オーナー承認 (「就業の状態と働き方」の章は埋め込み図だけで残す)。b942a5926 で 16 件を整理し、warning baseline を 0 にした。uruhayato373/stats47#1112 のマージ後に本番で確かめたらカードを消す。
-- **提案 (2026-10-08)**: 外すカードを次のとおりにする。章の唯一のカードを外すことになるのは ⑤⑦⑧ の 3 章で、その章ごと既存章へ畳み、`theme-feasibility-catalog.json` の該当候補を「既存章に統合」に変える。
-  ① climate 年間日照時間: 「暑さと熱中症の救急搬送」(candidate-104-3) から外し「日照」に残す。② climate 年間雪日数: 「雪国の暮らしと除雪」(candidate-96-1) から外し、図のある「降水と雪」に残す。
-  ③ healthcare 医師・看護師 (人口10万対): 「診療科と年齢から見る医療人材」の単独カード 2 枚 (candidate-57-1・-2) を外し、2 系列カード supply-1 に残す。④ healthcare 健康寿命 男・女: candidate-65-1・-2 を外し healthy-years に残す。救急搬送病院収容所要時間: candidate-58-7 を外し「地域の医療アクセス」(その章の唯一のカード) に残す。
-  ⑤ labor-mobility 有効求人倍率: 「人手不足と求人」(candidate-33) はこの 1 枚だけなので章ごと「求人・求職と職業紹介」へ畳む。⑥ labor-mobility テレワーク実施率・昼夜間人口比率: work-style の 2 系列カードは candidate-39-1 と candidate-84-1 の完全な重複なので、work-style のカードを外す (work-style 章は埋め込み章だけ残るので、章の扱いも同時に決める)。
-  ⑦ real-income 実収入・可処分所得: 「可処分所得と生活費」(candidate-73) の 2 枚はどちらも household-income の重複なので章ごと畳む。living-housing 単独世帯割合: candidate-44-3 を外し households に残す。一般世帯数: 「空き家の用途と住宅ストック」(candidate-8-2) から外し「世帯構成の変化」に残す。
-  ⑧ safety 交通事故死者数: candidate-88-2 を外し traffic-1 に残す。救急出動件数: candidate-110-2 を外し fire-emergency-1 に残す。
+- **背景**: 魚種別漁獲量 12 指標は 2023 年まで延び (uruhayato373/stats47#1111)、fishery-marine に「主な魚種と産地」の章ができた (uruhayato373/stats47#1112)。
+  一方、魚種の指標を図に使うブログ 4 本は 2015 年の図のまま。2026-10-08 にローカルで `build-stale-data-years.mjs` を回すと、4 本とも「図 2015 年・最新 2023 年」で出た:
+  `bonito-catch-prefecture` (GSC 2026-W40・28 日で 5,880 表示。カツオ関連の検索の主な着地)・`bonito-catch-zero-prefectures-gap`・
+  `fish-catch-vs-consumption-prefecture` (マグロ・ブリ)・`fishery-species-prefecture-specialty` (ホタテ)。
+- **次**: ① 日次の blog-remediation-daily が 4 本を是正キュー (`data/blog/remediation-queue.json`) の data-refresh レーンに入れたかを確かめる。
+  10-08 02:25Z のキューは魚種データの取り込み前に作られたので、`bonito-catch-prefecture` は opportunity レーンのまま。
+  ② `refresh-article-data-years.mjs` で図を 2023 年で作り直し、本文の年と数値を書き直して critic を通す (/brushup-blog の最新データ更新)。
+- **禁止**: 2019〜2022 年は e-Stat に表が揃っていないので、2018 → 2023 の空白を線でつないで連続した推移に見せない。海のない 8 県を 0 として順位に入れない。
+- **完了条件**: 4 本が `stale-data-years.json` から消え、本番の記事が 2023 年の値を出す。
 
 ### [MANUAL-METRIC-YEARNAME-01] 手動取得の指標の年表記に「年」「年度」が付かず、e-Stat 由来の指標と表示が揃わない
 
