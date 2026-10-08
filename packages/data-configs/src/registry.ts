@@ -191,6 +191,8 @@ import { blockParkCountPer100km2 } from "./metrics/block-park-count-per-100km2";
 import { blockParkCount } from "./metrics/block-park-count";
 import { blouseConsumptionExpenditure } from "./metrics/blouse-consumption-expenditure";
 import { blouseConsumptionQuantity } from "./metrics/blouse-consumption-quantity";
+import { bmiFemale40to69AgeAdjusted } from "./metrics/bmi-female-40to69-age-adjusted";
+import { bmiMale20to69AgeAdjusted } from "./metrics/bmi-male-20to69-age-adjusted";
 import { bodPollutionLoad } from "./metrics/bod-pollution-load";
 import { bonitoConsumptionExpenditure } from "./metrics/bonito-consumption-expenditure";
 import { bonitoConsumptionQuantity } from "./metrics/bonito-consumption-quantity";
@@ -1362,6 +1364,7 @@ import { midwifeAnnualIncome } from "./metrics/midwife-annual-income";
 import { midwifeByPrefecture } from "./metrics/midwife-by-prefecture";
 import { midwifeCount } from "./metrics/midwife-count";
 import { migrantWorkerRatioSalesFarm } from "./metrics/migrant-worker-ratio-sales-farm";
+import { milkConsumptionQuantity } from "./metrics/milk-consumption-quantity";
 import { milkDrinkConsumptionExpenditure } from "./metrics/milk-drink-consumption-expenditure";
 import { mineralWaterConsumptionExpenditure } from "./metrics/mineral-water-consumption-expenditure";
 import { minimumWageByRegion } from "./metrics/minimum-wage-by-region";
@@ -2184,6 +2187,7 @@ import { smartphoneUsageRateBySex } from "./metrics/smartphone-usage-rate-by-sex
 import { smartphoneUsageStudents } from "./metrics/smartphone-usage-students";
 import { smartphoneUsageTimeByAge } from "./metrics/smartphone-usage-time-by-age";
 import { smokeEmissionFacilityCount } from "./metrics/smoke-emission-facility-count";
+import { smokingRateMaleAgeAdjusted } from "./metrics/smoking-rate-male-age-adjusted";
 import { snackConsumptionExpenditure } from "./metrics/snack-consumption-expenditure";
 import { sobaUdonDiningConsumptionExpenditure } from "./metrics/soba-udon-dining-consumption-expenditure";
 import { socialEducationExpensesPrefecture } from "./metrics/social-education-expenses-prefecture";
@@ -2825,6 +2829,8 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "block-park-count": blockParkCount,
   "blouse-consumption-expenditure": blouseConsumptionExpenditure,
   "blouse-consumption-quantity": blouseConsumptionQuantity,
+  "bmi-female-40to69-age-adjusted": bmiFemale40to69AgeAdjusted,
+  "bmi-male-20to69-age-adjusted": bmiMale20to69AgeAdjusted,
   "bod-pollution-load": bodPollutionLoad,
   "bonito-consumption-expenditure": bonitoConsumptionExpenditure,
   "bonito-consumption-quantity": bonitoConsumptionQuantity,
@@ -3996,6 +4002,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "midwife-by-prefecture": midwifeByPrefecture,
   "midwife-count": midwifeCount,
   "migrant-worker-ratio-sales-farm": migrantWorkerRatioSalesFarm,
+  "milk-consumption-quantity": milkConsumptionQuantity,
   "milk-drink-consumption-expenditure": milkDrinkConsumptionExpenditure,
   "mineral-water-consumption-expenditure": mineralWaterConsumptionExpenditure,
   "minimum-wage-by-region": minimumWageByRegion,
@@ -4818,6 +4825,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "smartphone-usage-students": smartphoneUsageStudents,
   "smartphone-usage-time-by-age": smartphoneUsageTimeByAge,
   "smoke-emission-facility-count": smokeEmissionFacilityCount,
+  "smoking-rate-male-age-adjusted": smokingRateMaleAgeAdjusted,
   "snack-consumption-expenditure": snackConsumptionExpenditure,
   "soba-udon-dining-consumption-expenditure": sobaUdonDiningConsumptionExpenditure,
   "social-education-expenses-prefecture": socialEducationExpensesPrefecture,

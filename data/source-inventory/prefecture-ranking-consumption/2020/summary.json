@@ -16,10 +16,9 @@
   "blockedCount": 10,
   "byResolution": {
     "not-applicable": 16,
-    "reuse-existing-metric": 166,
+    "reuse-existing-metric": 168,
     "primary-source-unavailable": 10,
-    "combined-analysis": 116,
-    "new-metric": 2
+    "combined-analysis": 116
   },
   "byKind": {
     "page": 310
