@@ -264,9 +264,57 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 47
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": 45,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "gsc.impressions": {
+              "value": 992,
+              "status": "measured",
+              "scope": "search-console",
+              "windowDays": 28,
+              "periodStart": "2026-09-04",
+              "periodEnd": "2026-10-01",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "ga4.engagementRatePvWeighted": {
+              "value": null,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "missing-or-low-sample",
+            "window-includes-pre-publication"
+          ],
+          "constraints": [
+            "gsc.impressions: window-includes-pre-publication",
+            "ga4.engagementRatePvWeighted: missing-or-low-sample",
+            "ga4.engagementRatePvWeighted: window-includes-pre-publication"
+          ]
         }
       },
-      "notes": "公開日 2026-09-11 で schedule 済み。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。 同時変更: 2026-10-07 (#1099) に承認済み提案の章・指標・図の見直しとカード見出し 3 件の文言。d56 は 9 月の変更だけの効果を表さないため、d28 で aborted にして 2026-10-07 公開の新実験へ引き継ぐ (2026-10-08 オーナー承認)。",
+      "notes": "同時変更: 2026-10-07 (#1099) に承認済み提案の章・指標・図の見直し (年齢構造と支え手の比率の章を追加、高齢世帯の推移を外した)。9 月の変更だけの効果を d56 で測れないため d28 (2026-10-09) で打ち切り、公開日からの新実験へ引き継ぐ (2026-10-08 オーナー承認、THEME-CATALOG-OPT-RELEASE-01)",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
@@ -293,7 +341,7 @@
         "gsc.impressions": "measured",
         "ga4.engagementRatePvWeighted": "measured"
       },
-      "verdict": "pending"
+      "verdict": "aborted"
     },
     {
       "guardrailKpis": [
@@ -330,6 +378,56 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 11
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": 1,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "gsc.impressions": {
+              "value": 40,
+              "status": "measured-low",
+              "scope": "search-console",
+              "windowDays": 28,
+              "periodStart": "2026-09-04",
+              "periodEnd": "2026-10-01",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "ga4.engagementRatePvWeighted": {
+              "value": null,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "missing-or-low-sample",
+            "window-includes-pre-publication"
+          ],
+          "constraints": [
+            "gsc.impressions: missing-or-low-sample",
+            "gsc.impressions: window-includes-pre-publication",
+            "gsc.impressions: baseline-missing-or-low-sample",
+            "ga4.engagementRatePvWeighted: missing-or-low-sample",
+            "ga4.engagementRatePvWeighted: window-includes-pre-publication"
+          ]
         }
       },
       "notes": "公開日 2026-09-11 で schedule 済み。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。 同時変更: 2026-10-07 (#1099) にカード見出し 4 件の文言を変えた (章名の重複を除いただけで、章・指標・図は不変)。d28・d56 の判定ではこの変更を制約として併記する。",
@@ -392,9 +490,59 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 47
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": 23,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "gsc.impressions": {
+              "value": 138,
+              "status": "measured-low",
+              "scope": "search-console",
+              "windowDays": 28,
+              "periodStart": "2026-09-04",
+              "periodEnd": "2026-10-01",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "ga4.engagementRatePvWeighted": {
+              "value": null,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "missing-or-low-sample",
+            "window-includes-pre-publication"
+          ],
+          "constraints": [
+            "gsc.impressions: missing-or-low-sample",
+            "gsc.impressions: window-includes-pre-publication",
+            "gsc.impressions: baseline-missing-or-low-sample",
+            "ga4.engagementRatePvWeighted: missing-or-low-sample",
+            "ga4.engagementRatePvWeighted: window-includes-pre-publication"
+          ]
         }
       },
-      "notes": "公開日 2026-09-11 で schedule 済み。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。 同時変更: 2026-10-07 (#1099) にカード見出し 2 件の文言、2026-10-08 (#1100) に承認済み提案の章・指標・図の見直し。d56 は 9 月の変更だけの効果を表さないため、d28 で aborted にして 2026-10-08 公開の新実験へ引き継ぐ (2026-10-08 オーナー承認)。",
+      "notes": "同時変更: 2026-10-08 (#1104) に承認済み提案 (THEME-REVIEW-TOURISM-CPI-01) の章・指標・図の見直し。9 月の変更だけの効果を d56 で測れないため d28 (2026-10-09) で打ち切り、公開日からの新実験へ引き継ぐ (2026-10-08 オーナー承認、THEME-CATALOG-OPT-RELEASE-01)",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
@@ -421,7 +569,7 @@
         "gsc.impressions": "measured-low",
         "ga4.engagementRatePvWeighted": "measured"
       },
-      "verdict": "pending"
+      "verdict": "aborted"
     },
     {
       "guardrailKpis": [
@@ -464,6 +612,58 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 47
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": 27,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "gsc.impressions": {
+              "value": 46,
+              "status": "measured-low",
+              "scope": "search-console",
+              "windowDays": 28,
+              "periodStart": "2026-09-04",
+              "periodEnd": "2026-10-01",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "ga4.engagementRatePvWeighted": {
+              "value": null,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "missing-or-low-sample",
+            "window-includes-pre-publication",
+            "baseline-missing-or-low-sample"
+          ],
+          "constraints": [
+            "gsc.impressions: missing-or-low-sample",
+            "gsc.impressions: window-includes-pre-publication",
+            "gsc.impressions: baseline-missing-or-low-sample",
+            "ga4.engagementRatePvWeighted: missing-or-low-sample",
+            "ga4.engagementRatePvWeighted: window-includes-pre-publication",
+            "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
+          ]
         }
       },
       "notes": "公開日 2026-09-11 で schedule 済み。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。 同時変更: 2026-10-07 (#1099) にカード見出し 18 件の文言を変えた (章名の重複を除いただけで、章・指標・図は不変)。d28・d56 の判定ではこの変更を制約として併記する。",
@@ -540,9 +740,61 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 3
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": 19,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "gsc.impressions": {
+              "value": 189,
+              "status": "measured-low",
+              "scope": "search-console",
+              "windowDays": 28,
+              "periodStart": "2026-09-04",
+              "periodEnd": "2026-10-01",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "ga4.engagementRatePvWeighted": {
+              "value": null,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "missing-or-low-sample",
+            "window-includes-pre-publication",
+            "baseline-missing-or-low-sample"
+          ],
+          "constraints": [
+            "gsc.impressions: missing-or-low-sample",
+            "gsc.impressions: window-includes-pre-publication",
+            "gsc.impressions: baseline-missing-or-low-sample",
+            "ga4.engagementRatePvWeighted: missing-or-low-sample",
+            "ga4.engagementRatePvWeighted: window-includes-pre-publication",
+            "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
+          ]
         }
       },
-      "notes": "公開日 2026-09-11 で schedule 済み。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。 同時変更: 2026-10-07 (#1099) に承認済み提案の章・指標・図の見直しとカード見出し 2 件の文言。d56 は 9 月の変更だけの効果を表さないため、d28 で aborted にして 2026-10-07 公開の新実験へ引き継ぐ (2026-10-08 オーナー承認)。",
+      "notes": "同時変更: 2026-10-07 (#1099) に承認済み提案の章・指標・図の見直し (漁業の担い手の章を追加、図を海面漁業産出額の長期推移 1 枚に)。9 月の変更だけの効果を d56 で測れないため d28 (2026-10-09) で打ち切り、公開日からの新実験へ引き継ぐ (2026-10-08 オーナー承認、THEME-CATALOG-OPT-RELEASE-01)",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
@@ -569,7 +821,7 @@
         "gsc.impressions": "measured-low",
         "ga4.engagementRatePvWeighted": "measured-low"
       },
-      "verdict": "pending"
+      "verdict": "aborted"
     },
     {
       "guardrailKpis": [
@@ -607,9 +859,61 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 46
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": 20,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "gsc.impressions": {
+              "value": 82,
+              "status": "measured-low",
+              "scope": "search-console",
+              "windowDays": 28,
+              "periodStart": "2026-09-04",
+              "periodEnd": "2026-10-01",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "ga4.engagementRatePvWeighted": {
+              "value": null,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "missing-or-low-sample",
+            "window-includes-pre-publication",
+            "baseline-missing-or-low-sample"
+          ],
+          "constraints": [
+            "gsc.impressions: missing-or-low-sample",
+            "gsc.impressions: window-includes-pre-publication",
+            "gsc.impressions: baseline-missing-or-low-sample",
+            "ga4.engagementRatePvWeighted: missing-or-low-sample",
+            "ga4.engagementRatePvWeighted: window-includes-pre-publication",
+            "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
+          ]
         }
       },
-      "notes": "公開日 2026-09-11 で schedule 済み。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。 同時変更: 2026-10-07 (#1099) に読み方章を末尾へ移し、カード見出し 33 件の文言を変えた。d56 は 9 月の変更だけの効果を表さないため、d28 で aborted にして 2026-10-07 公開の新実験へ引き継ぐ (2026-10-08 オーナー承認)。",
+      "notes": "同時変更: 2026-10-07 (#1099) に読み方の章をページ末尾へ移した。9 月の変更だけの効果を d56 で測れないため d28 (2026-10-09) で打ち切り、公開日からの新実験へ引き継ぐ (2026-10-08 オーナー承認、THEME-CATALOG-OPT-RELEASE-01)",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
@@ -636,7 +940,7 @@
         "gsc.impressions": "measured-low",
         "ga4.engagementRatePvWeighted": "measured-low"
       },
-      "verdict": "pending"
+      "verdict": "aborted"
     },
     {
       "guardrailKpis": [
@@ -675,9 +979,61 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 47
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": 0,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "gsc.impressions": {
+              "value": 4,
+              "status": "measured-low",
+              "scope": "search-console",
+              "windowDays": 28,
+              "periodStart": "2026-09-04",
+              "periodEnd": "2026-10-01",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "ga4.engagementRatePvWeighted": {
+              "value": null,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "missing-or-low-sample",
+            "window-includes-pre-publication",
+            "baseline-missing-or-low-sample"
+          ],
+          "constraints": [
+            "gsc.impressions: missing-or-low-sample",
+            "gsc.impressions: window-includes-pre-publication",
+            "gsc.impressions: baseline-missing-or-low-sample",
+            "ga4.engagementRatePvWeighted: missing-or-low-sample",
+            "ga4.engagementRatePvWeighted: window-includes-pre-publication",
+            "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
+          ]
         }
       },
-      "notes": "公開日 2026-09-11 で schedule 済み。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。 同時変更: 2026-10-07 (#1099) に読み方章を末尾へ移し、カード見出し 11 件の文言を変えた。d56 は 9 月の変更だけの効果を表さないため、d28 で aborted にして 2026-10-07 公開の新実験へ引き継ぐ (2026-10-08 オーナー承認)。",
+      "notes": "同時変更: 2026-10-07 (#1099) に読み方の章をページ末尾へ移した。9 月の変更だけの効果を d56 で測れないため d28 (2026-10-09) で打ち切り、公開日からの新実験へ引き継ぐ (2026-10-08 オーナー承認、THEME-CATALOG-OPT-RELEASE-01)",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
@@ -704,7 +1060,7 @@
         "gsc.impressions": "measured-low",
         "ga4.engagementRatePvWeighted": "measured-low"
       },
-      "verdict": "pending"
+      "verdict": "aborted"
     },
     {
       "guardrailKpis": [
@@ -742,9 +1098,61 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 47
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": 26,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "gsc.impressions": {
+              "value": 1,
+              "status": "measured-low",
+              "scope": "search-console",
+              "windowDays": 28,
+              "periodStart": "2026-09-04",
+              "periodEnd": "2026-10-01",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "ga4.engagementRatePvWeighted": {
+              "value": null,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "missing-or-low-sample",
+            "window-includes-pre-publication",
+            "baseline-missing-or-low-sample"
+          ],
+          "constraints": [
+            "gsc.impressions: missing-or-low-sample",
+            "gsc.impressions: window-includes-pre-publication",
+            "gsc.impressions: baseline-missing-or-low-sample",
+            "ga4.engagementRatePvWeighted: missing-or-low-sample",
+            "ga4.engagementRatePvWeighted: window-includes-pre-publication",
+            "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
+          ]
         }
       },
-      "notes": "公開日 2026-09-11 で schedule 済み。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。 同時変更: 2026-10-07 (#1099) に読み方章を末尾へ移し、カード見出し 2 件の文言を変えた。d56 は 9 月の変更だけの効果を表さないため、d28 で aborted にして 2026-10-07 公開の新実験へ引き継ぐ (2026-10-08 オーナー承認)。",
+      "notes": "同時変更: 2026-10-07 (#1099) に読み方の章をページ末尾へ移した。9 月の変更だけの効果を d56 で測れないため d28 (2026-10-09) で打ち切り、公開日からの新実験へ引き継ぐ (2026-10-08 オーナー承認、THEME-CATALOG-OPT-RELEASE-01)",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
@@ -771,7 +1179,7 @@
         "gsc.impressions": "measured-low",
         "ga4.engagementRatePvWeighted": "measured-low"
       },
-      "verdict": "pending"
+      "verdict": "aborted"
     },
     {
       "guardrailKpis": [
@@ -817,9 +1225,61 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 47
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": 23,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "gsc.impressions": {
+              "value": 76,
+              "status": "measured-low",
+              "scope": "search-console",
+              "windowDays": 28,
+              "periodStart": "2026-09-04",
+              "periodEnd": "2026-10-01",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "ga4.engagementRatePvWeighted": {
+              "value": null,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "missing-or-low-sample",
+            "window-includes-pre-publication",
+            "baseline-missing-or-low-sample"
+          ],
+          "constraints": [
+            "gsc.impressions: missing-or-low-sample",
+            "gsc.impressions: window-includes-pre-publication",
+            "gsc.impressions: baseline-missing-or-low-sample",
+            "ga4.engagementRatePvWeighted: missing-or-low-sample",
+            "ga4.engagementRatePvWeighted: window-includes-pre-publication",
+            "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
+          ]
         }
       },
-      "notes": "公開日 2026-09-11 で schedule 済み。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。 同時変更: 2026-10-07 (#1099) に読み方章を末尾へ移し、カード見出し 23 件の文言を変えた。d56 は 9 月の変更だけの効果を表さないため、d28 で aborted にして 2026-10-07 公開の新実験へ引き継ぐ (2026-10-08 オーナー承認)。",
+      "notes": "同時変更: 2026-10-07 (#1099) に読み方の章をページ末尾へ移した。9 月の変更だけの効果を d56 で測れないため d28 (2026-10-09) で打ち切り、公開日からの新実験へ引き継ぐ (2026-10-08 オーナー承認、THEME-CATALOG-OPT-RELEASE-01)",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
@@ -846,7 +1306,7 @@
         "gsc.impressions": "measured-low",
         "ga4.engagementRatePvWeighted": "measured-low"
       },
-      "verdict": "pending"
+      "verdict": "aborted"
     },
     {
       "guardrailKpis": [
@@ -892,9 +1352,61 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 47
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": 30,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "gsc.impressions": {
+              "value": 168,
+              "status": "measured-low",
+              "scope": "search-console",
+              "windowDays": 28,
+              "periodStart": "2026-09-04",
+              "periodEnd": "2026-10-01",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "ga4.engagementRatePvWeighted": {
+              "value": null,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "missing-or-low-sample",
+            "window-includes-pre-publication",
+            "baseline-missing-or-low-sample"
+          ],
+          "constraints": [
+            "gsc.impressions: missing-or-low-sample",
+            "gsc.impressions: window-includes-pre-publication",
+            "gsc.impressions: baseline-missing-or-low-sample",
+            "ga4.engagementRatePvWeighted: missing-or-low-sample",
+            "ga4.engagementRatePvWeighted: window-includes-pre-publication",
+            "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
+          ]
         }
       },
-      "notes": "公開日 2026-09-11 で schedule 済み。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。 同時変更: 2026-10-07 (#1099) に承認済み提案の章・指標・図の見直しとカード見出し 3 件の文言。d56 は 9 月の変更だけの効果を表さないため、d28 で aborted にして 2026-10-07 公開の新実験へ引き継ぐ (2026-10-08 オーナー承認)。",
+      "notes": "同時変更: 2026-10-07 (#1099) に承認済み提案の章・指標・図の見直し (先頭章を経済の規模と所得の水準に、事業所数の章を外した)。9 月の変更だけの効果を d56 で測れないため d28 (2026-10-09) で打ち切り、公開日からの新実験へ引き継ぐ (2026-10-08 オーナー承認、THEME-CATALOG-OPT-RELEASE-01)",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
@@ -921,7 +1433,7 @@
         "gsc.impressions": "measured-low",
         "ga4.engagementRatePvWeighted": "measured-low"
       },
-      "verdict": "pending"
+      "verdict": "aborted"
     },
     {
       "guardrailKpis": [
@@ -954,6 +1466,56 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 47
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": 28,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "gsc.impressions": {
+              "value": 26,
+              "status": "measured-low",
+              "scope": "search-console",
+              "windowDays": 28,
+              "periodStart": "2026-09-04",
+              "periodEnd": "2026-10-01",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "ga4.engagementRatePvWeighted": {
+              "value": null,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "missing-or-low-sample",
+            "window-includes-pre-publication"
+          ],
+          "constraints": [
+            "gsc.impressions: missing-or-low-sample",
+            "gsc.impressions: window-includes-pre-publication",
+            "gsc.impressions: baseline-missing-or-low-sample",
+            "ga4.engagementRatePvWeighted: missing-or-low-sample",
+            "ga4.engagementRatePvWeighted: window-includes-pre-publication"
+          ]
         }
       },
       "notes": "公開日 2026-09-11 で schedule 済み。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。 同時変更: 2026-10-07 (#1099) にカード見出し 23 件の文言を変えた (章名の重複を除いただけで、章・指標・図は不変)。d28・d56 の判定ではこの変更を制約として併記する。",
@@ -1019,6 +1581,58 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 42
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": 14,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "gsc.impressions": {
+              "value": 53,
+              "status": "measured-low",
+              "scope": "search-console",
+              "windowDays": 28,
+              "periodStart": "2026-09-04",
+              "periodEnd": "2026-10-01",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "ga4.engagementRatePvWeighted": {
+              "value": null,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "missing-or-low-sample",
+            "window-includes-pre-publication",
+            "baseline-missing-or-low-sample"
+          ],
+          "constraints": [
+            "gsc.impressions: missing-or-low-sample",
+            "gsc.impressions: window-includes-pre-publication",
+            "gsc.impressions: baseline-missing-or-low-sample",
+            "ga4.engagementRatePvWeighted: missing-or-low-sample",
+            "ga4.engagementRatePvWeighted: window-includes-pre-publication",
+            "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
+          ]
         }
       },
       "notes": "公開日 2026-09-11 で schedule 済み。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。 同時変更: 2026-10-07 (#1099) にカード見出し 4 件の文言を変えた (章名の重複を除いただけで、章・指標・図は不変)。d28・d56 の判定ではこの変更を制約として併記する。",
@@ -1081,6 +1695,58 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 18
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": 8,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "gsc.impressions": {
+              "value": 5,
+              "status": "measured-low",
+              "scope": "search-console",
+              "windowDays": 28,
+              "periodStart": "2026-09-04",
+              "periodEnd": "2026-10-01",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "ga4.engagementRatePvWeighted": {
+              "value": null,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "missing-or-low-sample",
+            "window-includes-pre-publication",
+            "baseline-missing-or-low-sample"
+          ],
+          "constraints": [
+            "gsc.impressions: missing-or-low-sample",
+            "gsc.impressions: window-includes-pre-publication",
+            "gsc.impressions: baseline-missing-or-low-sample",
+            "ga4.engagementRatePvWeighted: missing-or-low-sample",
+            "ga4.engagementRatePvWeighted: window-includes-pre-publication",
+            "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
+          ]
         }
       },
       "notes": "公開日 2026-09-11 で schedule 済み。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
@@ -1148,9 +1814,56 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 47
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": 203,
+              "status": "measured",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "gsc.impressions": {
+              "value": 89,
+              "status": "measured-low",
+              "scope": "search-console",
+              "windowDays": 28,
+              "periodStart": "2026-09-04",
+              "periodEnd": "2026-10-01",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "ga4.engagementRatePvWeighted": {
+              "value": 0.9375,
+              "status": "measured",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "window-includes-pre-publication"
+          ],
+          "constraints": [
+            "gsc.impressions: missing-or-low-sample",
+            "gsc.impressions: window-includes-pre-publication",
+            "ga4.engagementRatePvWeighted: window-includes-pre-publication"
+          ]
         }
       },
-      "notes": "公開日 2026-09-11 で schedule 済み。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。 同時変更: 2026-10-07 (#1099) に読み方章を末尾へ移し、カード見出し 20 件の文言を変えた。d56 は 9 月の変更だけの効果を表さないため、d28 で aborted にして 2026-10-07 公開の新実験へ引き継ぐ (2026-10-08 オーナー承認)。",
+      "notes": "同時変更: 2026-10-07 (#1099) に読み方の章をページ末尾へ移した。9 月の変更だけの効果を d56 で測れないため d28 (2026-10-09) で打ち切り、公開日からの新実験へ引き継ぐ (2026-10-08 オーナー承認、THEME-CATALOG-OPT-RELEASE-01)",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
@@ -1177,7 +1890,7 @@
         "gsc.impressions": "measured",
         "ga4.engagementRatePvWeighted": "measured"
       },
-      "verdict": "pending"
+      "verdict": "aborted"
     },
     {
       "guardrailKpis": [
@@ -1210,6 +1923,58 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 39
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": 8,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "gsc.impressions": {
+              "value": 14,
+              "status": "measured-low",
+              "scope": "search-console",
+              "windowDays": 28,
+              "periodStart": "2026-09-04",
+              "periodEnd": "2026-10-01",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "ga4.engagementRatePvWeighted": {
+              "value": null,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "missing-or-low-sample",
+            "window-includes-pre-publication",
+            "baseline-missing-or-low-sample"
+          ],
+          "constraints": [
+            "gsc.impressions: missing-or-low-sample",
+            "gsc.impressions: window-includes-pre-publication",
+            "gsc.impressions: baseline-missing-or-low-sample",
+            "ga4.engagementRatePvWeighted: missing-or-low-sample",
+            "ga4.engagementRatePvWeighted: window-includes-pre-publication",
+            "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
+          ]
         }
       },
       "notes": "公開日 2026-09-11 で schedule 済み。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。 同時変更: 2026-10-07 (#1099) にカード見出し 1 件の文言を変えた (章名の重複を除いただけで、章・指標・図は不変)。d28・d56 の判定ではこの変更を制約として併記する。",
@@ -1272,6 +2037,58 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 47
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": 13,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "gsc.impressions": {
+              "value": 22,
+              "status": "measured-low",
+              "scope": "search-console",
+              "windowDays": 28,
+              "periodStart": "2026-09-04",
+              "periodEnd": "2026-10-01",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "ga4.engagementRatePvWeighted": {
+              "value": null,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "missing-or-low-sample",
+            "window-includes-pre-publication",
+            "baseline-missing-or-low-sample"
+          ],
+          "constraints": [
+            "gsc.impressions: missing-or-low-sample",
+            "gsc.impressions: window-includes-pre-publication",
+            "gsc.impressions: baseline-missing-or-low-sample",
+            "ga4.engagementRatePvWeighted: missing-or-low-sample",
+            "ga4.engagementRatePvWeighted: window-includes-pre-publication",
+            "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
+          ]
         }
       },
       "notes": "公開日 2026-09-11 で schedule 済み。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
@@ -1339,6 +2156,58 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 47
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": 40,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "gsc.impressions": {
+              "value": 50,
+              "status": "measured-low",
+              "scope": "search-console",
+              "windowDays": 28,
+              "periodStart": "2026-09-04",
+              "periodEnd": "2026-10-01",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "ga4.engagementRatePvWeighted": {
+              "value": null,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "missing-or-low-sample",
+            "window-includes-pre-publication",
+            "baseline-missing-or-low-sample"
+          ],
+          "constraints": [
+            "gsc.impressions: missing-or-low-sample",
+            "gsc.impressions: window-includes-pre-publication",
+            "gsc.impressions: baseline-missing-or-low-sample",
+            "ga4.engagementRatePvWeighted: missing-or-low-sample",
+            "ga4.engagementRatePvWeighted: window-includes-pre-publication",
+            "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
+          ]
         }
       },
       "notes": "公開日 2026-09-11 で schedule 済み。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。 同時変更: 2026-10-07 (#1099) にカード見出し 4 件の文言を変えた (章名の重複を除いただけで、章・指標・図は不変)。d28・d56 の判定ではこの変更を制約として併記する。",
@@ -1403,6 +2272,58 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 47
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": 19,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "gsc.impressions": {
+              "value": 37,
+              "status": "measured-low",
+              "scope": "search-console",
+              "windowDays": 28,
+              "periodStart": "2026-09-04",
+              "periodEnd": "2026-10-01",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "ga4.engagementRatePvWeighted": {
+              "value": null,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "missing-or-low-sample",
+            "window-includes-pre-publication",
+            "baseline-missing-or-low-sample"
+          ],
+          "constraints": [
+            "gsc.impressions: missing-or-low-sample",
+            "gsc.impressions: window-includes-pre-publication",
+            "gsc.impressions: baseline-missing-or-low-sample",
+            "ga4.engagementRatePvWeighted: missing-or-low-sample",
+            "ga4.engagementRatePvWeighted: window-includes-pre-publication",
+            "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
+          ]
         }
       },
       "notes": "公開日 2026-09-11 で schedule 済み。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。 同時変更: 2026-10-07 (#1099) にカード見出し 6 件の文言を変えた (章名の重複を除いただけで、章・指標・図は不変)。d28・d56 の判定ではこの変更を制約として併記する。",
@@ -1468,6 +2389,58 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 40
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": 0,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "gsc.impressions": {
+              "value": 55,
+              "status": "measured-low",
+              "scope": "search-console",
+              "windowDays": 28,
+              "periodStart": "2026-09-04",
+              "periodEnd": "2026-10-01",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "ga4.engagementRatePvWeighted": {
+              "value": null,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "missing-or-low-sample",
+            "window-includes-pre-publication",
+            "baseline-missing-or-low-sample"
+          ],
+          "constraints": [
+            "gsc.impressions: missing-or-low-sample",
+            "gsc.impressions: window-includes-pre-publication",
+            "gsc.impressions: baseline-missing-or-low-sample",
+            "ga4.engagementRatePvWeighted: missing-or-low-sample",
+            "ga4.engagementRatePvWeighted: window-includes-pre-publication",
+            "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
+          ]
         }
       },
       "notes": "公開日 2026-09-11 で schedule 済み。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。 同時変更: 2026-10-07 (#1099) にカード見出し 27 件の文言を変えた (章名の重複を除いただけで、章・指標・図は不変)。d28・d56 の判定ではこの変更を制約として併記する。",
@@ -1538,9 +2511,61 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 47
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": 16,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "gsc.impressions": {
+              "value": 123,
+              "status": "measured-low",
+              "scope": "search-console",
+              "windowDays": 28,
+              "periodStart": "2026-09-04",
+              "periodEnd": "2026-10-01",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "ga4.engagementRatePvWeighted": {
+              "value": null,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "missing-or-low-sample",
+            "window-includes-pre-publication",
+            "baseline-missing-or-low-sample"
+          ],
+          "constraints": [
+            "gsc.impressions: missing-or-low-sample",
+            "gsc.impressions: window-includes-pre-publication",
+            "gsc.impressions: baseline-missing-or-low-sample",
+            "ga4.engagementRatePvWeighted: missing-or-low-sample",
+            "ga4.engagementRatePvWeighted: window-includes-pre-publication",
+            "ga4.engagementRatePvWeighted: baseline-missing-or-low-sample"
+          ]
         }
       },
-      "notes": "公開日 2026-09-11 で schedule 済み。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。 同時変更: 2026-10-07 (#1099) にカード見出し 3 件の文言、2026-10-08 (#1100) に承認済み提案の章・指標・図の見直し。d56 は 9 月の変更だけの効果を表さないため、d28 で aborted にして 2026-10-08 公開の新実験へ引き継ぐ (2026-10-08 オーナー承認)。",
+      "notes": "同時変更: 2026-10-08 (#1104) に承認済み提案 (THEME-REVIEW-TOURISM-CPI-01) の章・指標・図の見直し。9 月の変更だけの効果を d56 で測れないため d28 (2026-10-09) で打ち切り、公開日からの新実験へ引き継ぐ (2026-10-08 オーナー承認、THEME-CATALOG-OPT-RELEASE-01)",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
@@ -1567,7 +2592,7 @@
         "gsc.impressions": "measured-low",
         "ga4.engagementRatePvWeighted": "measured-low"
       },
-      "verdict": "pending"
+      "verdict": "aborted"
     },
     {
       "guardrailKpis": [
@@ -1604,6 +2629,55 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 47
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": null,
+              "status": "insufficient-data",
+              "scope": "Japan",
+              "windowDays": 0,
+              "periodStart": null,
+              "periodEnd": null,
+              "weeks": []
+            },
+            "gsc.impressions": {
+              "value": 21,
+              "status": "measured-low",
+              "scope": "search-console",
+              "windowDays": 28,
+              "periodStart": "2026-09-04",
+              "periodEnd": "2026-10-01",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "internalNav.eventCount": {
+              "value": null,
+              "status": "insufficient-data",
+              "scope": "Japan",
+              "windowDays": 0,
+              "periodStart": null,
+              "periodEnd": null,
+              "weeks": []
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "missing-or-low-sample",
+            "complete-window-unavailable",
+            "window-includes-pre-publication",
+            "window-not-observed-yet"
+          ],
+          "constraints": [
+            "gsc.impressions: window-includes-pre-publication",
+            "internalNav.eventCount: missing-or-low-sample",
+            "internalNav.eventCount: complete-window-unavailable",
+            "internalNav.eventCount: window-includes-pre-publication",
+            "internalNav.eventCount: window-not-observed-yet",
+            "new-url-has-no-pre-publication-baseline"
+          ]
         }
       },
       "notes": "同時変更: 2026-10-07 (#1099) にカード見出し 8 件の文言を変えた (章名の重複を除いただけで、章・指標・図は不変)。d28・d56 の判定ではこの変更を制約として併記する。",
@@ -1647,6 +2721,55 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 47
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": 5,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "gsc.impressions": {
+              "value": 52,
+              "status": "measured-low",
+              "scope": "search-console",
+              "windowDays": 28,
+              "periodStart": "2026-09-04",
+              "periodEnd": "2026-10-01",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "internalNav.eventCount": {
+              "value": null,
+              "status": "insufficient-data",
+              "scope": "Japan",
+              "windowDays": 0,
+              "periodStart": null,
+              "periodEnd": null,
+              "weeks": []
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "window-includes-pre-publication"
+          ],
+          "constraints": [
+            "gsc.impressions: window-includes-pre-publication",
+            "internalNav.eventCount: missing-or-low-sample",
+            "internalNav.eventCount: complete-window-unavailable",
+            "internalNav.eventCount: window-includes-pre-publication",
+            "internalNav.eventCount: window-not-observed-yet",
+            "new-url-has-no-pre-publication-baseline",
+            "primary-low-sample-count-only"
+          ]
         }
       },
       "notes": null,
@@ -1694,6 +2817,55 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 47
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": null,
+              "status": "insufficient-data",
+              "scope": "Japan",
+              "windowDays": 0,
+              "periodStart": null,
+              "periodEnd": null,
+              "weeks": []
+            },
+            "gsc.impressions": {
+              "value": 7,
+              "status": "measured-low",
+              "scope": "search-console",
+              "windowDays": 28,
+              "periodStart": "2026-09-04",
+              "periodEnd": "2026-10-01",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "internalNav.eventCount": {
+              "value": null,
+              "status": "insufficient-data",
+              "scope": "Japan",
+              "windowDays": 0,
+              "periodStart": null,
+              "periodEnd": null,
+              "weeks": []
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "missing-or-low-sample",
+            "complete-window-unavailable",
+            "window-includes-pre-publication",
+            "window-not-observed-yet"
+          ],
+          "constraints": [
+            "gsc.impressions: window-includes-pre-publication",
+            "internalNav.eventCount: missing-or-low-sample",
+            "internalNav.eventCount: complete-window-unavailable",
+            "internalNav.eventCount: window-includes-pre-publication",
+            "internalNav.eventCount: window-not-observed-yet",
+            "new-url-has-no-pre-publication-baseline"
+          ]
         }
       },
       "notes": null,
@@ -1741,6 +2913,55 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 47
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": 1,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "gsc.impressions": {
+              "value": 32,
+              "status": "measured-low",
+              "scope": "search-console",
+              "windowDays": 28,
+              "periodStart": "2026-09-04",
+              "periodEnd": "2026-10-01",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "internalNav.eventCount": {
+              "value": null,
+              "status": "insufficient-data",
+              "scope": "Japan",
+              "windowDays": 0,
+              "periodStart": null,
+              "periodEnd": null,
+              "weeks": []
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "window-includes-pre-publication"
+          ],
+          "constraints": [
+            "gsc.impressions: window-includes-pre-publication",
+            "internalNav.eventCount: missing-or-low-sample",
+            "internalNav.eventCount: complete-window-unavailable",
+            "internalNav.eventCount: window-includes-pre-publication",
+            "internalNav.eventCount: window-not-observed-yet",
+            "new-url-has-no-pre-publication-baseline",
+            "primary-low-sample-count-only"
+          ]
         }
       },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。 同時変更: 2026-10-07 (#1099) にカード見出し 6 件の文言を変えた (章名の重複を除いただけで、章・指標・図は不変)。d28・d56 の判定ではこの変更を制約として併記する。",
@@ -1790,6 +3011,54 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 47
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": 27,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "gsc.impressions": {
+              "value": 92,
+              "status": "measured-low",
+              "scope": "search-console",
+              "windowDays": 28,
+              "periodStart": "2026-09-04",
+              "periodEnd": "2026-10-01",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "internalNav.eventCount": {
+              "value": 6,
+              "status": "measured",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "window-includes-pre-publication"
+          ],
+          "constraints": [
+            "gsc.impressions: window-includes-pre-publication",
+            "internalNav.eventCount: window-includes-pre-publication",
+            "new-url-has-no-pre-publication-baseline",
+            "primary-low-sample-count-only"
+          ]
         }
       },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。 同時変更: 2026-10-07 (#1099) にカード見出し 4 件の文言を変えた (章名の重複を除いただけで、章・指標・図は不変)。d28・d56 の判定ではこの変更を制約として併記する。",
@@ -1838,6 +3107,54 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 47
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": 6,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "gsc.impressions": {
+              "value": 13,
+              "status": "measured-low",
+              "scope": "search-console",
+              "windowDays": 28,
+              "periodStart": "2026-09-04",
+              "periodEnd": "2026-10-01",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "internalNav.eventCount": {
+              "value": 3,
+              "status": "measured",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "window-includes-pre-publication"
+          ],
+          "constraints": [
+            "gsc.impressions: window-includes-pre-publication",
+            "internalNav.eventCount: window-includes-pre-publication",
+            "new-url-has-no-pre-publication-baseline",
+            "primary-low-sample-count-only"
+          ]
         }
       },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
@@ -1885,6 +3202,54 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 47
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": 3,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "gsc.impressions": {
+              "value": 1,
+              "status": "measured-low",
+              "scope": "search-console",
+              "windowDays": 28,
+              "periodStart": "2026-09-04",
+              "periodEnd": "2026-10-01",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "internalNav.eventCount": {
+              "value": 1,
+              "status": "measured",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "window-includes-pre-publication"
+          ],
+          "constraints": [
+            "gsc.impressions: window-includes-pre-publication",
+            "internalNav.eventCount: window-includes-pre-publication",
+            "new-url-has-no-pre-publication-baseline",
+            "primary-low-sample-count-only"
+          ]
         }
       },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
@@ -1934,6 +3299,56 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 11
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": null,
+              "status": "insufficient-data",
+              "scope": "Japan",
+              "windowDays": 0,
+              "periodStart": null,
+              "periodEnd": null,
+              "weeks": []
+            },
+            "gsc.impressions": {
+              "value": null,
+              "status": "insufficient-data",
+              "scope": "search-console",
+              "windowDays": 0,
+              "periodStart": null,
+              "periodEnd": null,
+              "weeks": []
+            },
+            "internalNav.eventCount": {
+              "value": null,
+              "status": "insufficient-data",
+              "scope": "Japan",
+              "windowDays": 0,
+              "periodStart": null,
+              "periodEnd": null,
+              "weeks": []
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "missing-or-low-sample",
+            "complete-window-unavailable",
+            "window-includes-pre-publication",
+            "window-not-observed-yet"
+          ],
+          "constraints": [
+            "gsc.impressions: missing-or-low-sample",
+            "gsc.impressions: complete-window-unavailable",
+            "gsc.impressions: window-includes-pre-publication",
+            "gsc.impressions: window-not-observed-yet",
+            "internalNav.eventCount: missing-or-low-sample",
+            "internalNav.eventCount: complete-window-unavailable",
+            "internalNav.eventCount: window-includes-pre-publication",
+            "internalNav.eventCount: window-not-observed-yet",
+            "new-url-has-no-pre-publication-baseline"
+          ]
         }
       },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
@@ -1989,6 +3404,55 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 47
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": 2,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "gsc.impressions": {
+              "value": null,
+              "status": "insufficient-data",
+              "scope": "search-console",
+              "windowDays": 0,
+              "periodStart": null,
+              "periodEnd": null,
+              "weeks": []
+            },
+            "internalNav.eventCount": {
+              "value": 1,
+              "status": "measured",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "window-includes-pre-publication"
+          ],
+          "constraints": [
+            "gsc.impressions: missing-or-low-sample",
+            "gsc.impressions: complete-window-unavailable",
+            "gsc.impressions: window-includes-pre-publication",
+            "gsc.impressions: window-not-observed-yet",
+            "internalNav.eventCount: window-includes-pre-publication",
+            "new-url-has-no-pre-publication-baseline",
+            "primary-low-sample-count-only"
+          ]
         }
       },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。 同時変更: 2026-10-07 (#1099) にカード見出し 4 件の文言を変えた (章名の重複を除いただけで、章・指標・図は不変)。d28・d56 の判定ではこの変更を制約として併記する。",
@@ -2042,6 +3506,55 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 47
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": 2,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "gsc.impressions": {
+              "value": 7,
+              "status": "measured-low",
+              "scope": "search-console",
+              "windowDays": 28,
+              "periodStart": "2026-09-04",
+              "periodEnd": "2026-10-01",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "internalNav.eventCount": {
+              "value": null,
+              "status": "insufficient-data",
+              "scope": "Japan",
+              "windowDays": 0,
+              "periodStart": null,
+              "periodEnd": null,
+              "weeks": []
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "window-includes-pre-publication"
+          ],
+          "constraints": [
+            "gsc.impressions: window-includes-pre-publication",
+            "internalNav.eventCount: missing-or-low-sample",
+            "internalNav.eventCount: complete-window-unavailable",
+            "internalNav.eventCount: window-includes-pre-publication",
+            "internalNav.eventCount: window-not-observed-yet",
+            "new-url-has-no-pre-publication-baseline",
+            "primary-low-sample-count-only"
+          ]
         }
       },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
@@ -2090,6 +3603,55 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 47
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": null,
+              "status": "insufficient-data",
+              "scope": "Japan",
+              "windowDays": 0,
+              "periodStart": null,
+              "periodEnd": null,
+              "weeks": []
+            },
+            "gsc.impressions": {
+              "value": 16,
+              "status": "measured-low",
+              "scope": "search-console",
+              "windowDays": 28,
+              "periodStart": "2026-09-04",
+              "periodEnd": "2026-10-01",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "internalNav.eventCount": {
+              "value": null,
+              "status": "insufficient-data",
+              "scope": "Japan",
+              "windowDays": 0,
+              "periodStart": null,
+              "periodEnd": null,
+              "weeks": []
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "missing-or-low-sample",
+            "complete-window-unavailable",
+            "window-includes-pre-publication",
+            "window-not-observed-yet"
+          ],
+          "constraints": [
+            "gsc.impressions: window-includes-pre-publication",
+            "internalNav.eventCount: missing-or-low-sample",
+            "internalNav.eventCount: complete-window-unavailable",
+            "internalNav.eventCount: window-includes-pre-publication",
+            "internalNav.eventCount: window-not-observed-yet",
+            "new-url-has-no-pre-publication-baseline"
+          ]
         }
       },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
@@ -2136,6 +3698,54 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 47
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": 2,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "gsc.impressions": {
+              "value": 20,
+              "status": "measured-low",
+              "scope": "search-console",
+              "windowDays": 28,
+              "periodStart": "2026-09-04",
+              "periodEnd": "2026-10-01",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "internalNav.eventCount": {
+              "value": 1,
+              "status": "measured",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "window-includes-pre-publication"
+          ],
+          "constraints": [
+            "gsc.impressions: window-includes-pre-publication",
+            "internalNav.eventCount: window-includes-pre-publication",
+            "new-url-has-no-pre-publication-baseline",
+            "primary-low-sample-count-only"
+          ]
         }
       },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
@@ -2183,6 +3793,55 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 47
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": null,
+              "status": "insufficient-data",
+              "scope": "Japan",
+              "windowDays": 0,
+              "periodStart": null,
+              "periodEnd": null,
+              "weeks": []
+            },
+            "gsc.impressions": {
+              "value": 17,
+              "status": "measured-low",
+              "scope": "search-console",
+              "windowDays": 28,
+              "periodStart": "2026-09-04",
+              "periodEnd": "2026-10-01",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "internalNav.eventCount": {
+              "value": null,
+              "status": "insufficient-data",
+              "scope": "Japan",
+              "windowDays": 0,
+              "periodStart": null,
+              "periodEnd": null,
+              "weeks": []
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "missing-or-low-sample",
+            "complete-window-unavailable",
+            "window-includes-pre-publication",
+            "window-not-observed-yet"
+          ],
+          "constraints": [
+            "gsc.impressions: window-includes-pre-publication",
+            "internalNav.eventCount: missing-or-low-sample",
+            "internalNav.eventCount: complete-window-unavailable",
+            "internalNav.eventCount: window-includes-pre-publication",
+            "internalNav.eventCount: window-not-observed-yet",
+            "new-url-has-no-pre-publication-baseline"
+          ]
         }
       },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
@@ -2231,6 +3890,54 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 47
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": 17,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "gsc.impressions": {
+              "value": 41,
+              "status": "measured-low",
+              "scope": "search-console",
+              "windowDays": 28,
+              "periodStart": "2026-09-04",
+              "periodEnd": "2026-10-01",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "internalNav.eventCount": {
+              "value": 2,
+              "status": "measured",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "window-includes-pre-publication"
+          ],
+          "constraints": [
+            "gsc.impressions: window-includes-pre-publication",
+            "internalNav.eventCount: window-includes-pre-publication",
+            "new-url-has-no-pre-publication-baseline",
+            "primary-low-sample-count-only"
+          ]
         }
       },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
@@ -2277,6 +3984,54 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 47
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": 9,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "gsc.impressions": {
+              "value": 62,
+              "status": "measured-low",
+              "scope": "search-console",
+              "windowDays": 28,
+              "periodStart": "2026-09-04",
+              "periodEnd": "2026-10-01",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "internalNav.eventCount": {
+              "value": 4,
+              "status": "measured",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "window-includes-pre-publication"
+          ],
+          "constraints": [
+            "gsc.impressions: window-includes-pre-publication",
+            "internalNav.eventCount: window-includes-pre-publication",
+            "new-url-has-no-pre-publication-baseline",
+            "primary-low-sample-count-only"
+          ]
         }
       },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
@@ -2326,6 +4081,56 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 47
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": null,
+              "status": "insufficient-data",
+              "scope": "Japan",
+              "windowDays": 0,
+              "periodStart": null,
+              "periodEnd": null,
+              "weeks": []
+            },
+            "gsc.impressions": {
+              "value": null,
+              "status": "insufficient-data",
+              "scope": "search-console",
+              "windowDays": 0,
+              "periodStart": null,
+              "periodEnd": null,
+              "weeks": []
+            },
+            "internalNav.eventCount": {
+              "value": null,
+              "status": "insufficient-data",
+              "scope": "Japan",
+              "windowDays": 0,
+              "periodStart": null,
+              "periodEnd": null,
+              "weeks": []
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "missing-or-low-sample",
+            "complete-window-unavailable",
+            "window-includes-pre-publication",
+            "window-not-observed-yet"
+          ],
+          "constraints": [
+            "gsc.impressions: missing-or-low-sample",
+            "gsc.impressions: complete-window-unavailable",
+            "gsc.impressions: window-includes-pre-publication",
+            "gsc.impressions: window-not-observed-yet",
+            "internalNav.eventCount: missing-or-low-sample",
+            "internalNav.eventCount: complete-window-unavailable",
+            "internalNav.eventCount: window-includes-pre-publication",
+            "internalNav.eventCount: window-not-observed-yet",
+            "new-url-has-no-pre-publication-baseline"
+          ]
         }
       },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
@@ -2373,6 +4178,55 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 47
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": 2,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "gsc.impressions": {
+              "value": 25,
+              "status": "measured-low",
+              "scope": "search-console",
+              "windowDays": 28,
+              "periodStart": "2026-09-04",
+              "periodEnd": "2026-10-01",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "internalNav.eventCount": {
+              "value": null,
+              "status": "insufficient-data",
+              "scope": "Japan",
+              "windowDays": 0,
+              "periodStart": null,
+              "periodEnd": null,
+              "weeks": []
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "window-includes-pre-publication"
+          ],
+          "constraints": [
+            "gsc.impressions: window-includes-pre-publication",
+            "internalNav.eventCount: missing-or-low-sample",
+            "internalNav.eventCount: complete-window-unavailable",
+            "internalNav.eventCount: window-includes-pre-publication",
+            "internalNav.eventCount: window-not-observed-yet",
+            "new-url-has-no-pre-publication-baseline",
+            "primary-low-sample-count-only"
+          ]
         }
       },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
@@ -2419,6 +4273,54 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 47
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": 16,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "gsc.impressions": {
+              "value": 45,
+              "status": "measured-low",
+              "scope": "search-console",
+              "windowDays": 28,
+              "periodStart": "2026-09-04",
+              "periodEnd": "2026-10-01",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "internalNav.eventCount": {
+              "value": 6,
+              "status": "measured",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "window-includes-pre-publication"
+          ],
+          "constraints": [
+            "gsc.impressions: window-includes-pre-publication",
+            "internalNav.eventCount: window-includes-pre-publication",
+            "new-url-has-no-pre-publication-baseline",
+            "primary-low-sample-count-only"
+          ]
         }
       },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。 同時変更: 2026-10-07 (#1099) にカード見出し 6 件の文言を変えた (章名の重複を除いただけで、章・指標・図は不変)。d28・d56 の判定ではこの変更を制約として併記する。",
@@ -2470,6 +4372,55 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 47
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": 2,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "gsc.impressions": {
+              "value": null,
+              "status": "insufficient-data",
+              "scope": "search-console",
+              "windowDays": 0,
+              "periodStart": null,
+              "periodEnd": null,
+              "weeks": []
+            },
+            "internalNav.eventCount": {
+              "value": 2,
+              "status": "measured",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "window-includes-pre-publication"
+          ],
+          "constraints": [
+            "gsc.impressions: missing-or-low-sample",
+            "gsc.impressions: complete-window-unavailable",
+            "gsc.impressions: window-includes-pre-publication",
+            "gsc.impressions: window-not-observed-yet",
+            "internalNav.eventCount: window-includes-pre-publication",
+            "new-url-has-no-pre-publication-baseline",
+            "primary-low-sample-count-only"
+          ]
         }
       },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。 同時変更: 2026-10-07 (#1099) にカード見出し 4 件の文言を変えた (章名の重複を除いただけで、章・指標・図は不変)。d28・d56 の判定ではこの変更を制約として併記する。",
@@ -2514,6 +4465,55 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 47
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": null,
+              "status": "insufficient-data",
+              "scope": "Japan",
+              "windowDays": 0,
+              "periodStart": null,
+              "periodEnd": null,
+              "weeks": []
+            },
+            "gsc.impressions": {
+              "value": 25,
+              "status": "measured-low",
+              "scope": "search-console",
+              "windowDays": 28,
+              "periodStart": "2026-09-04",
+              "periodEnd": "2026-10-01",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "internalNav.eventCount": {
+              "value": null,
+              "status": "insufficient-data",
+              "scope": "Japan",
+              "windowDays": 0,
+              "periodStart": null,
+              "periodEnd": null,
+              "weeks": []
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "missing-or-low-sample",
+            "complete-window-unavailable",
+            "window-includes-pre-publication",
+            "window-not-observed-yet"
+          ],
+          "constraints": [
+            "gsc.impressions: window-includes-pre-publication",
+            "internalNav.eventCount: missing-or-low-sample",
+            "internalNav.eventCount: complete-window-unavailable",
+            "internalNav.eventCount: window-includes-pre-publication",
+            "internalNav.eventCount: window-not-observed-yet",
+            "new-url-has-no-pre-publication-baseline"
+          ]
         }
       },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
@@ -2558,6 +4558,55 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 47
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": null,
+              "status": "insufficient-data",
+              "scope": "Japan",
+              "windowDays": 0,
+              "periodStart": null,
+              "periodEnd": null,
+              "weeks": []
+            },
+            "gsc.impressions": {
+              "value": 15,
+              "status": "measured-low",
+              "scope": "search-console",
+              "windowDays": 28,
+              "periodStart": "2026-09-04",
+              "periodEnd": "2026-10-01",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "internalNav.eventCount": {
+              "value": null,
+              "status": "insufficient-data",
+              "scope": "Japan",
+              "windowDays": 0,
+              "periodStart": null,
+              "periodEnd": null,
+              "weeks": []
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "missing-or-low-sample",
+            "complete-window-unavailable",
+            "window-includes-pre-publication",
+            "window-not-observed-yet"
+          ],
+          "constraints": [
+            "gsc.impressions: window-includes-pre-publication",
+            "internalNav.eventCount: missing-or-low-sample",
+            "internalNav.eventCount: complete-window-unavailable",
+            "internalNav.eventCount: window-includes-pre-publication",
+            "internalNav.eventCount: window-not-observed-yet",
+            "new-url-has-no-pre-publication-baseline"
+          ]
         }
       },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
@@ -2602,6 +4651,54 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 47
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": 9,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "gsc.impressions": {
+              "value": 39,
+              "status": "measured-low",
+              "scope": "search-console",
+              "windowDays": 28,
+              "periodStart": "2026-09-04",
+              "periodEnd": "2026-10-01",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "internalNav.eventCount": {
+              "value": 1,
+              "status": "measured",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "window-includes-pre-publication"
+          ],
+          "constraints": [
+            "gsc.impressions: window-includes-pre-publication",
+            "internalNav.eventCount: window-includes-pre-publication",
+            "new-url-has-no-pre-publication-baseline",
+            "primary-low-sample-count-only"
+          ]
         }
       },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
@@ -2646,6 +4743,55 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 47
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": 3,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "gsc.impressions": {
+              "value": 7,
+              "status": "measured-low",
+              "scope": "search-console",
+              "windowDays": 28,
+              "periodStart": "2026-09-04",
+              "periodEnd": "2026-10-01",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "internalNav.eventCount": {
+              "value": null,
+              "status": "insufficient-data",
+              "scope": "Japan",
+              "windowDays": 0,
+              "periodStart": null,
+              "periodEnd": null,
+              "weeks": []
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "window-includes-pre-publication"
+          ],
+          "constraints": [
+            "gsc.impressions: window-includes-pre-publication",
+            "internalNav.eventCount: missing-or-low-sample",
+            "internalNav.eventCount: complete-window-unavailable",
+            "internalNav.eventCount: window-includes-pre-publication",
+            "internalNav.eventCount: window-not-observed-yet",
+            "new-url-has-no-pre-publication-baseline",
+            "primary-low-sample-count-only"
+          ]
         }
       },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
@@ -2706,6 +4852,54 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 47
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": 15,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "gsc.impressions": {
+              "value": 3,
+              "status": "measured-low",
+              "scope": "search-console",
+              "windowDays": 28,
+              "periodStart": "2026-09-04",
+              "periodEnd": "2026-10-01",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "internalNav.eventCount": {
+              "value": 3,
+              "status": "measured",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "window-includes-pre-publication"
+          ],
+          "constraints": [
+            "gsc.impressions: window-includes-pre-publication",
+            "internalNav.eventCount: window-includes-pre-publication",
+            "new-url-has-no-pre-publication-baseline",
+            "primary-low-sample-count-only"
+          ]
         }
       },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。 同時変更: 2026-10-07 (#1099) にカード見出し 8 件の文言を変えた (章名の重複を除いただけで、章・指標・図は不変)。d28・d56 の判定ではこの変更を制約として併記する。",
@@ -2750,6 +4944,55 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 47
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": 1,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "gsc.impressions": {
+              "value": 3,
+              "status": "measured-low",
+              "scope": "search-console",
+              "windowDays": 28,
+              "periodStart": "2026-09-04",
+              "periodEnd": "2026-10-01",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "internalNav.eventCount": {
+              "value": null,
+              "status": "insufficient-data",
+              "scope": "Japan",
+              "windowDays": 0,
+              "periodStart": null,
+              "periodEnd": null,
+              "weeks": []
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "window-includes-pre-publication"
+          ],
+          "constraints": [
+            "gsc.impressions: window-includes-pre-publication",
+            "internalNav.eventCount: missing-or-low-sample",
+            "internalNav.eventCount: complete-window-unavailable",
+            "internalNav.eventCount: window-includes-pre-publication",
+            "internalNav.eventCount: window-not-observed-yet",
+            "new-url-has-no-pre-publication-baseline",
+            "primary-low-sample-count-only"
+          ]
         }
       },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
@@ -2798,6 +5041,55 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 47
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": 1,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "gsc.impressions": {
+              "value": 14,
+              "status": "measured-low",
+              "scope": "search-console",
+              "windowDays": 28,
+              "periodStart": "2026-09-04",
+              "periodEnd": "2026-10-01",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "internalNav.eventCount": {
+              "value": null,
+              "status": "insufficient-data",
+              "scope": "Japan",
+              "windowDays": 0,
+              "periodStart": null,
+              "periodEnd": null,
+              "weeks": []
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "window-includes-pre-publication"
+          ],
+          "constraints": [
+            "gsc.impressions: window-includes-pre-publication",
+            "internalNav.eventCount: missing-or-low-sample",
+            "internalNav.eventCount: complete-window-unavailable",
+            "internalNav.eventCount: window-includes-pre-publication",
+            "internalNav.eventCount: window-not-observed-yet",
+            "new-url-has-no-pre-publication-baseline",
+            "primary-low-sample-count-only"
+          ]
         }
       },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
@@ -2842,6 +5134,54 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 47
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": 4,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "gsc.impressions": {
+              "value": 40,
+              "status": "measured-low",
+              "scope": "search-console",
+              "windowDays": 28,
+              "periodStart": "2026-09-04",
+              "periodEnd": "2026-10-01",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "internalNav.eventCount": {
+              "value": 1,
+              "status": "measured",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "window-includes-pre-publication"
+          ],
+          "constraints": [
+            "gsc.impressions: window-includes-pre-publication",
+            "internalNav.eventCount: window-includes-pre-publication",
+            "new-url-has-no-pre-publication-baseline",
+            "primary-low-sample-count-only"
+          ]
         }
       },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
@@ -2886,6 +5226,55 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 47
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": 5,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "gsc.impressions": {
+              "value": 32,
+              "status": "measured-low",
+              "scope": "search-console",
+              "windowDays": 28,
+              "periodStart": "2026-09-04",
+              "periodEnd": "2026-10-01",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "internalNav.eventCount": {
+              "value": null,
+              "status": "insufficient-data",
+              "scope": "Japan",
+              "windowDays": 0,
+              "periodStart": null,
+              "periodEnd": null,
+              "weeks": []
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "window-includes-pre-publication"
+          ],
+          "constraints": [
+            "gsc.impressions: window-includes-pre-publication",
+            "internalNav.eventCount: missing-or-low-sample",
+            "internalNav.eventCount: complete-window-unavailable",
+            "internalNav.eventCount: window-includes-pre-publication",
+            "internalNav.eventCount: window-not-observed-yet",
+            "new-url-has-no-pre-publication-baseline",
+            "primary-low-sample-count-only"
+          ]
         }
       },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。 同時変更: 2026-10-07 (#1099) にカード見出し 9 件の文言を変えた (章名の重複を除いただけで、章・指標・図は不変)。d28・d56 の判定ではこの変更を制約として併記する。",
@@ -2936,6 +5325,54 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 47
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": 12,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "gsc.impressions": {
+              "value": 75,
+              "status": "measured-low",
+              "scope": "search-console",
+              "windowDays": 28,
+              "periodStart": "2026-09-04",
+              "periodEnd": "2026-10-01",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "internalNav.eventCount": {
+              "value": 3,
+              "status": "measured",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "window-includes-pre-publication"
+          ],
+          "constraints": [
+            "gsc.impressions: window-includes-pre-publication",
+            "internalNav.eventCount: window-includes-pre-publication",
+            "new-url-has-no-pre-publication-baseline",
+            "primary-low-sample-count-only"
+          ]
         }
       },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。 同時変更: 2026-10-07 (#1099) にカード見出し 1 件の文言を変えた (章名の重複を除いただけで、章・指標・図は不変)。d28・d56 の判定ではこの変更を制約として併記する。",
@@ -2985,6 +5422,55 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 47
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": 9,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "gsc.impressions": {
+              "value": 40,
+              "status": "measured-low",
+              "scope": "search-console",
+              "windowDays": 28,
+              "periodStart": "2026-09-04",
+              "periodEnd": "2026-10-01",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "internalNav.eventCount": {
+              "value": null,
+              "status": "insufficient-data",
+              "scope": "Japan",
+              "windowDays": 0,
+              "periodStart": null,
+              "periodEnd": null,
+              "weeks": []
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "window-includes-pre-publication"
+          ],
+          "constraints": [
+            "gsc.impressions: window-includes-pre-publication",
+            "internalNav.eventCount: missing-or-low-sample",
+            "internalNav.eventCount: complete-window-unavailable",
+            "internalNav.eventCount: window-includes-pre-publication",
+            "internalNav.eventCount: window-not-observed-yet",
+            "new-url-has-no-pre-publication-baseline",
+            "primary-low-sample-count-only"
+          ]
         }
       },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
@@ -3034,6 +5520,54 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 47
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": 6,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "gsc.impressions": {
+              "value": 21,
+              "status": "measured-low",
+              "scope": "search-console",
+              "windowDays": 28,
+              "periodStart": "2026-09-04",
+              "periodEnd": "2026-10-01",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "internalNav.eventCount": {
+              "value": 2,
+              "status": "measured",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "window-includes-pre-publication"
+          ],
+          "constraints": [
+            "gsc.impressions: window-includes-pre-publication",
+            "internalNav.eventCount: window-includes-pre-publication",
+            "new-url-has-no-pre-publication-baseline",
+            "primary-low-sample-count-only"
+          ]
         }
       },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
@@ -3082,6 +5616,55 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 47
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": 17,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "gsc.impressions": {
+              "value": 31,
+              "status": "measured-low",
+              "scope": "search-console",
+              "windowDays": 28,
+              "periodStart": "2026-09-04",
+              "periodEnd": "2026-10-01",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "internalNav.eventCount": {
+              "value": null,
+              "status": "insufficient-data",
+              "scope": "Japan",
+              "windowDays": 0,
+              "periodStart": null,
+              "periodEnd": null,
+              "weeks": []
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "window-includes-pre-publication"
+          ],
+          "constraints": [
+            "gsc.impressions: window-includes-pre-publication",
+            "internalNav.eventCount: missing-or-low-sample",
+            "internalNav.eventCount: complete-window-unavailable",
+            "internalNav.eventCount: window-includes-pre-publication",
+            "internalNav.eventCount: window-not-observed-yet",
+            "new-url-has-no-pre-publication-baseline",
+            "primary-low-sample-count-only"
+          ]
         }
       },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。 同時変更: 2026-10-07 (#1099) にカード見出し 8 件の文言を変えた (章名の重複を除いただけで、章・指標・図は不変)。d28・d56 の判定ではこの変更を制約として併記する。",
@@ -3126,6 +5709,55 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 40
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": 3,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "gsc.impressions": {
+              "value": 21,
+              "status": "measured-low",
+              "scope": "search-console",
+              "windowDays": 28,
+              "periodStart": "2026-09-04",
+              "periodEnd": "2026-10-01",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "internalNav.eventCount": {
+              "value": null,
+              "status": "insufficient-data",
+              "scope": "Japan",
+              "windowDays": 0,
+              "periodStart": null,
+              "periodEnd": null,
+              "weeks": []
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "window-includes-pre-publication"
+          ],
+          "constraints": [
+            "gsc.impressions: window-includes-pre-publication",
+            "internalNav.eventCount: missing-or-low-sample",
+            "internalNav.eventCount: complete-window-unavailable",
+            "internalNav.eventCount: window-includes-pre-publication",
+            "internalNav.eventCount: window-not-observed-yet",
+            "new-url-has-no-pre-publication-baseline",
+            "primary-low-sample-count-only"
+          ]
         }
       },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
@@ -3170,6 +5802,55 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 47
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": 5,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "gsc.impressions": {
+              "value": 49,
+              "status": "measured-low",
+              "scope": "search-console",
+              "windowDays": 28,
+              "periodStart": "2026-09-04",
+              "periodEnd": "2026-10-01",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "internalNav.eventCount": {
+              "value": null,
+              "status": "insufficient-data",
+              "scope": "Japan",
+              "windowDays": 0,
+              "periodStart": null,
+              "periodEnd": null,
+              "weeks": []
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "window-includes-pre-publication"
+          ],
+          "constraints": [
+            "gsc.impressions: window-includes-pre-publication",
+            "internalNav.eventCount: missing-or-low-sample",
+            "internalNav.eventCount: complete-window-unavailable",
+            "internalNav.eventCount: window-includes-pre-publication",
+            "internalNav.eventCount: window-not-observed-yet",
+            "new-url-has-no-pre-publication-baseline",
+            "primary-low-sample-count-only"
+          ]
         }
       },
       "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
@@ -3225,6 +5906,44 @@
             "missingKeyList": [],
             "latestYearPrefCoverageMin": 47
           }
+        },
+        "d28": {
+          "observedAt": "2026-10-09",
+          "values": {
+            "ga4.pageViews": {
+              "value": 11,
+              "status": "measured-low",
+              "scope": "Japan",
+              "windowDays": 28,
+              "periodStart": "2026-09-06",
+              "periodEnd": "2026-10-03",
+              "weeks": [
+                "2026-W40"
+              ]
+            },
+            "gsc.impressions": {
+              "value": 25,
+              "status": "measured-low",
+              "scope": "search-console",
+              "windowDays": 28,
+              "periodStart": "2026-09-04",
+              "periodEnd": "2026-10-01",
+              "weeks": [
+                "2026-W40"
+              ]
+            }
+          },
+          "status": "insufficient-data",
+          "reasons": [
+            "missing-or-low-sample",
+            "window-includes-pre-publication",
+            "baseline-missing-or-low-sample"
+          ],
+          "constraints": [
+            "gsc.impressions: missing-or-low-sample",
+            "gsc.impressions: window-includes-pre-publication",
+            "gsc.impressions: baseline-missing-or-low-sample"
+          ]
         }
       },
       "notes": "未公開。2026-07-12〜2026-09-05の56日を公式APIへ直接指定して取得した実カウントをbaselineとして保存する。欠落した前28日を0補完していない。PV11・impressions15は最低標本未満のため比率・効果を確定しない。実公開後にscheduleし、D7品質・D28暫定・D56観測と低標本の制約を記録する。 同時変更: 2026-10-07 (#1099) にカード見出し 2 件の文言を変えた (章名の重複を除いただけで、章・指標・図は不変)。d28・d56 の判定ではこの変更を制約として併記する。",
@@ -3250,6 +5969,466 @@
       "baselineStatuses": {
         "ga4.pageViews": "measured-low",
         "gsc.impressions": "measured-low"
+      }
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "ga4.engagementRatePvWeighted"
+      ],
+      "baselinePeriod": {
+        "from": "2026-08-09",
+        "to": "2026-10-03"
+      },
+      "startedAt": "2026-10-07",
+      "evaluateAt": {
+        "d7": "2026-10-14",
+        "d28": "2026-11-04",
+        "d56": "2026-12-02"
+      },
+      "result": null,
+      "notes": "THEME-STRUCTURE-20260908-aging-society (d28 で aborted) の引き継ぎ。baseline は portfolio.json (generatedAt 2026-10-08) の非重複 56 日窓 W36+W40 (GA4 2026-08-09〜2026-10-03、GSC 2026-08-07〜2026-10-01) で、公開日 2026-10-07 より前。measured-low の比率値は null。季節性 (9〜11 月) と、同時期に続けている他テーマの見出し文言の変更 (19 テーマ) を判定時の制約として扱う。",
+      "evidenceRefs": [
+        "data/themes/portfolio.json#aging-society/metrics",
+        "data/gsc/snapshots/2026-W36/pages.csv",
+        "data/gsc/snapshots/2026-W40/pages.csv",
+        "data/ga4/snapshots/2026-W36",
+        "data/ga4/snapshots/2026-W40"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-STRUCTURE-20261007-aging-society",
+      "themeKey": "aging-society",
+      "changeType": "structure",
+      "hypothesis": "2026-10-07 (#1099) の章・指標・図の見直し (承認済み提案) により、テーマ閲覧と指標への回遊が改善するか、公開後の国内アクセスで確認する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": {
+        "ga4.pageViews": 129,
+        "gsc.impressions": 2026,
+        "ga4.engagementRatePvWeighted": 0.6342
+      },
+      "baselineScopes": {
+        "ga4": "Japan",
+        "gsc": "search-console",
+        "internalNav": "Japan"
+      },
+      "baselineStatuses": {
+        "ga4.pageViews": "measured",
+        "gsc.impressions": "measured",
+        "ga4.engagementRatePvWeighted": "measured"
+      }
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "ga4.engagementRatePvWeighted"
+      ],
+      "baselinePeriod": {
+        "from": "2026-08-09",
+        "to": "2026-10-03"
+      },
+      "startedAt": "2026-10-07",
+      "evaluateAt": {
+        "d7": "2026-10-14",
+        "d28": "2026-11-04",
+        "d56": "2026-12-02"
+      },
+      "result": null,
+      "notes": "THEME-STRUCTURE-20260908-fishery-marine (d28 で aborted) の引き継ぎ。baseline は portfolio.json (generatedAt 2026-10-08) の非重複 56 日窓 W36+W40 (GA4 2026-08-09〜2026-10-03、GSC 2026-08-07〜2026-10-01) で、公開日 2026-10-07 より前。measured-low の比率値は null。季節性 (9〜11 月) と、同時期に続けている他テーマの見出し文言の変更 (19 テーマ) を判定時の制約として扱う。",
+      "evidenceRefs": [
+        "data/themes/portfolio.json#fishery-marine/metrics",
+        "data/gsc/snapshots/2026-W36/pages.csv",
+        "data/gsc/snapshots/2026-W40/pages.csv",
+        "data/ga4/snapshots/2026-W36",
+        "data/ga4/snapshots/2026-W40"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-STRUCTURE-20261007-fishery-marine",
+      "themeKey": "fishery-marine",
+      "changeType": "structure",
+      "hypothesis": "2026-10-07 (#1099) の章・指標・図の見直し (承認済み提案) により、テーマ閲覧と指標への回遊が改善するか、公開後の国内アクセスで確認する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": {
+        "ga4.pageViews": 30,
+        "gsc.impressions": 284,
+        "ga4.engagementRatePvWeighted": null
+      },
+      "baselineScopes": {
+        "ga4": "Japan",
+        "gsc": "search-console",
+        "internalNav": "Japan"
+      },
+      "baselineStatuses": {
+        "ga4.pageViews": "measured-low",
+        "gsc.impressions": "measured",
+        "ga4.engagementRatePvWeighted": "measured-low"
+      }
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "ga4.engagementRatePvWeighted"
+      ],
+      "baselinePeriod": {
+        "from": "2026-08-09",
+        "to": "2026-10-03"
+      },
+      "startedAt": "2026-10-07",
+      "evaluateAt": {
+        "d7": "2026-10-14",
+        "d28": "2026-11-04",
+        "d56": "2026-12-02"
+      },
+      "result": null,
+      "notes": "THEME-STRUCTURE-20260908-local-economy (d28 で aborted) の引き継ぎ。baseline は portfolio.json (generatedAt 2026-10-08) の非重複 56 日窓 W36+W40 (GA4 2026-08-09〜2026-10-03、GSC 2026-08-07〜2026-10-01) で、公開日 2026-10-07 より前。measured-low の比率値は null。季節性 (9〜11 月) と、同時期に続けている他テーマの見出し文言の変更 (19 テーマ) を判定時の制約として扱う。",
+      "evidenceRefs": [
+        "data/themes/portfolio.json#local-economy/metrics",
+        "data/gsc/snapshots/2026-W36/pages.csv",
+        "data/gsc/snapshots/2026-W40/pages.csv",
+        "data/ga4/snapshots/2026-W36",
+        "data/ga4/snapshots/2026-W40"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-STRUCTURE-20261007-local-economy",
+      "themeKey": "local-economy",
+      "changeType": "structure",
+      "hypothesis": "2026-10-07 (#1099) の章・指標・図の見直し (承認済み提案) により、テーマ閲覧と指標への回遊が改善するか、公開後の国内アクセスで確認する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": {
+        "ga4.pageViews": 44,
+        "gsc.impressions": 276,
+        "ga4.engagementRatePvWeighted": null
+      },
+      "baselineScopes": {
+        "ga4": "Japan",
+        "gsc": "search-console",
+        "internalNav": "Japan"
+      },
+      "baselineStatuses": {
+        "ga4.pageViews": "measured-low",
+        "gsc.impressions": "measured",
+        "ga4.engagementRatePvWeighted": "measured-low"
+      }
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "ga4.engagementRatePvWeighted"
+      ],
+      "baselinePeriod": {
+        "from": "2026-08-09",
+        "to": "2026-10-03"
+      },
+      "startedAt": "2026-10-07",
+      "evaluateAt": {
+        "d7": "2026-10-14",
+        "d28": "2026-11-04",
+        "d56": "2026-12-02"
+      },
+      "result": null,
+      "notes": "THEME-STRUCTURE-20260908-healthcare (d28 で aborted) の引き継ぎ。baseline は portfolio.json (generatedAt 2026-10-08) の非重複 56 日窓 W36+W40 (GA4 2026-08-09〜2026-10-03、GSC 2026-08-07〜2026-10-01) で、公開日 2026-10-07 より前。measured-low の比率値は null。季節性 (9〜11 月) と、同時期に続けている他テーマの見出し文言の変更 (19 テーマ) を判定時の制約として扱う。",
+      "evidenceRefs": [
+        "data/themes/portfolio.json#healthcare/metrics",
+        "data/gsc/snapshots/2026-W36/pages.csv",
+        "data/gsc/snapshots/2026-W40/pages.csv",
+        "data/ga4/snapshots/2026-W36",
+        "data/ga4/snapshots/2026-W40"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-STRUCTURE-20261007-healthcare",
+      "themeKey": "healthcare",
+      "changeType": "structure",
+      "hypothesis": "2026-10-07 (#1099) に読み方の章をページ末尾へ移し、問いに答える章を先に読めるようにしたことで、テーマ閲覧と滞在が改善するか、公開後の国内アクセスで確認する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": {
+        "ga4.pageViews": 56,
+        "gsc.impressions": 158,
+        "ga4.engagementRatePvWeighted": null
+      },
+      "baselineScopes": {
+        "ga4": "Japan",
+        "gsc": "search-console",
+        "internalNav": "Japan"
+      },
+      "baselineStatuses": {
+        "ga4.pageViews": "measured-low",
+        "gsc.impressions": "measured-low",
+        "ga4.engagementRatePvWeighted": "measured-low"
+      }
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "ga4.engagementRatePvWeighted"
+      ],
+      "baselinePeriod": {
+        "from": "2026-08-09",
+        "to": "2026-10-03"
+      },
+      "startedAt": "2026-10-07",
+      "evaluateAt": {
+        "d7": "2026-10-14",
+        "d28": "2026-11-04",
+        "d56": "2026-12-02"
+      },
+      "result": null,
+      "notes": "THEME-STRUCTURE-20260908-labor-mobility (d28 で aborted) の引き継ぎ。baseline は portfolio.json (generatedAt 2026-10-08) の非重複 56 日窓 W36+W40 (GA4 2026-08-09〜2026-10-03、GSC 2026-08-07〜2026-10-01) で、公開日 2026-10-07 より前。measured-low の比率値は null。季節性 (9〜11 月) と、同時期に続けている他テーマの見出し文言の変更 (19 テーマ) を判定時の制約として扱う。",
+      "evidenceRefs": [
+        "data/themes/portfolio.json#labor-mobility/metrics",
+        "data/gsc/snapshots/2026-W36/pages.csv",
+        "data/gsc/snapshots/2026-W40/pages.csv",
+        "data/ga4/snapshots/2026-W36",
+        "data/ga4/snapshots/2026-W40"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-STRUCTURE-20261007-labor-mobility",
+      "themeKey": "labor-mobility",
+      "changeType": "structure",
+      "hypothesis": "2026-10-07 (#1099) に読み方の章をページ末尾へ移し、問いに答える章を先に読めるようにしたことで、テーマ閲覧と滞在が改善するか、公開後の国内アクセスで確認する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": {
+        "ga4.pageViews": 13,
+        "gsc.impressions": 20,
+        "ga4.engagementRatePvWeighted": null
+      },
+      "baselineScopes": {
+        "ga4": "Japan",
+        "gsc": "search-console",
+        "internalNav": "Japan"
+      },
+      "baselineStatuses": {
+        "ga4.pageViews": "measured-low",
+        "gsc.impressions": "measured-low",
+        "ga4.engagementRatePvWeighted": "measured-low"
+      }
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "ga4.engagementRatePvWeighted"
+      ],
+      "baselinePeriod": {
+        "from": "2026-08-09",
+        "to": "2026-10-03"
+      },
+      "startedAt": "2026-10-07",
+      "evaluateAt": {
+        "d7": "2026-10-14",
+        "d28": "2026-11-04",
+        "d56": "2026-12-02"
+      },
+      "result": null,
+      "notes": "THEME-STRUCTURE-20260908-labor-wages (d28 で aborted) の引き継ぎ。baseline は portfolio.json (generatedAt 2026-10-08) の非重複 56 日窓 W36+W40 (GA4 2026-08-09〜2026-10-03、GSC 2026-08-07〜2026-10-01) で、公開日 2026-10-07 より前。measured-low の比率値は null。季節性 (9〜11 月) と、同時期に続けている他テーマの見出し文言の変更 (19 テーマ) を判定時の制約として扱う。",
+      "evidenceRefs": [
+        "data/themes/portfolio.json#labor-wages/metrics",
+        "data/gsc/snapshots/2026-W36/pages.csv",
+        "data/gsc/snapshots/2026-W40/pages.csv",
+        "data/ga4/snapshots/2026-W36",
+        "data/ga4/snapshots/2026-W40"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-STRUCTURE-20261007-labor-wages",
+      "themeKey": "labor-wages",
+      "changeType": "structure",
+      "hypothesis": "2026-10-07 (#1099) に読み方の章をページ末尾へ移し、問いに答える章を先に読めるようにしたことで、テーマ閲覧と滞在が改善するか、公開後の国内アクセスで確認する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": {
+        "ga4.pageViews": 54,
+        "gsc.impressions": 10,
+        "ga4.engagementRatePvWeighted": null
+      },
+      "baselineScopes": {
+        "ga4": "Japan",
+        "gsc": "search-console",
+        "internalNav": "Japan"
+      },
+      "baselineStatuses": {
+        "ga4.pageViews": "measured-low",
+        "gsc.impressions": "measured-low",
+        "ga4.engagementRatePvWeighted": "measured-low"
+      }
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "ga4.engagementRatePvWeighted"
+      ],
+      "baselinePeriod": {
+        "from": "2026-08-09",
+        "to": "2026-10-03"
+      },
+      "startedAt": "2026-10-07",
+      "evaluateAt": {
+        "d7": "2026-10-14",
+        "d28": "2026-11-04",
+        "d56": "2026-12-02"
+      },
+      "result": null,
+      "notes": "THEME-STRUCTURE-20260908-living-housing (d28 で aborted) の引き継ぎ。baseline は portfolio.json (generatedAt 2026-10-08) の非重複 56 日窓 W36+W40 (GA4 2026-08-09〜2026-10-03、GSC 2026-08-07〜2026-10-01) で、公開日 2026-10-07 より前。measured-low の比率値は null。季節性 (9〜11 月) と、同時期に続けている他テーマの見出し文言の変更 (19 テーマ) を判定時の制約として扱う。",
+      "evidenceRefs": [
+        "data/themes/portfolio.json#living-housing/metrics",
+        "data/gsc/snapshots/2026-W36/pages.csv",
+        "data/gsc/snapshots/2026-W40/pages.csv",
+        "data/ga4/snapshots/2026-W36",
+        "data/ga4/snapshots/2026-W40"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-STRUCTURE-20261007-living-housing",
+      "themeKey": "living-housing",
+      "changeType": "structure",
+      "hypothesis": "2026-10-07 (#1099) に読み方の章をページ末尾へ移し、問いに答える章を先に読めるようにしたことで、テーマ閲覧と滞在が改善するか、公開後の国内アクセスで確認する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": {
+        "ga4.pageViews": 47,
+        "gsc.impressions": 83,
+        "ga4.engagementRatePvWeighted": null
+      },
+      "baselineScopes": {
+        "ga4": "Japan",
+        "gsc": "search-console",
+        "internalNav": "Japan"
+      },
+      "baselineStatuses": {
+        "ga4.pageViews": "measured-low",
+        "gsc.impressions": "measured-low",
+        "ga4.engagementRatePvWeighted": "measured-low"
+      }
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "ga4.engagementRatePvWeighted"
+      ],
+      "baselinePeriod": {
+        "from": "2026-08-09",
+        "to": "2026-10-03"
+      },
+      "startedAt": "2026-10-07",
+      "evaluateAt": {
+        "d7": "2026-10-14",
+        "d28": "2026-11-04",
+        "d56": "2026-12-02"
+      },
+      "result": null,
+      "notes": "THEME-STRUCTURE-20260908-population-dynamics (d28 で aborted) の引き継ぎ。baseline は portfolio.json (generatedAt 2026-10-08) の非重複 56 日窓 W36+W40 (GA4 2026-08-09〜2026-10-03、GSC 2026-08-07〜2026-10-01) で、公開日 2026-10-07 より前。measured-low の比率値は null。季節性 (9〜11 月) と、同時期に続けている他テーマの見出し文言の変更 (19 テーマ) を判定時の制約として扱う。",
+      "evidenceRefs": [
+        "data/themes/portfolio.json#population-dynamics/metrics",
+        "data/gsc/snapshots/2026-W36/pages.csv",
+        "data/gsc/snapshots/2026-W40/pages.csv",
+        "data/ga4/snapshots/2026-W36",
+        "data/ga4/snapshots/2026-W40"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-STRUCTURE-20261007-population-dynamics",
+      "themeKey": "population-dynamics",
+      "changeType": "structure",
+      "hypothesis": "2026-10-07 (#1099) に読み方の章をページ末尾へ移し、問いに答える章を先に読めるようにしたことで、テーマ閲覧と滞在が改善するか、公開後の国内アクセスで確認する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": {
+        "ga4.pageViews": 274,
+        "gsc.impressions": 643,
+        "ga4.engagementRatePvWeighted": 0.8332
+      },
+      "baselineScopes": {
+        "ga4": "Japan",
+        "gsc": "search-console",
+        "internalNav": "Japan"
+      },
+      "baselineStatuses": {
+        "ga4.pageViews": "measured",
+        "gsc.impressions": "measured",
+        "ga4.engagementRatePvWeighted": "measured"
+      }
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "ga4.engagementRatePvWeighted"
+      ],
+      "baselinePeriod": {
+        "from": "2026-08-09",
+        "to": "2026-10-03"
+      },
+      "startedAt": "2026-10-08",
+      "evaluateAt": {
+        "d7": "2026-10-15",
+        "d28": "2026-11-05",
+        "d56": "2026-12-03"
+      },
+      "result": null,
+      "notes": "THEME-STRUCTURE-20260908-tourism (d28 で aborted) の引き継ぎ。baseline は portfolio.json (generatedAt 2026-10-08) の非重複 56 日窓 W36+W40 (GA4 2026-08-09〜2026-10-03、GSC 2026-08-07〜2026-10-01) で、公開日 2026-10-08 より前。measured-low の比率値は null。季節性 (9〜11 月) と、同時期に続けている他テーマの見出し文言の変更 (19 テーマ) を判定時の制約として扱う。",
+      "evidenceRefs": [
+        "data/themes/portfolio.json#tourism/metrics",
+        "data/gsc/snapshots/2026-W36/pages.csv",
+        "data/gsc/snapshots/2026-W40/pages.csv",
+        "data/ga4/snapshots/2026-W36",
+        "data/ga4/snapshots/2026-W40"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-STRUCTURE-20261008-tourism",
+      "themeKey": "tourism",
+      "changeType": "structure",
+      "hypothesis": "2026-10-08 (#1104) の章・指標・図の見直し (THEME-REVIEW-TOURISM-CPI-01 の承認済み提案) により、テーマ閲覧と指標への回遊が改善するか、公開後の国内アクセスで確認する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": {
+        "ga4.pageViews": 23,
+        "gsc.impressions": 153,
+        "ga4.engagementRatePvWeighted": null
+      },
+      "baselineScopes": {
+        "ga4": "Japan",
+        "gsc": "search-console",
+        "internalNav": "Japan"
+      },
+      "baselineStatuses": {
+        "ga4.pageViews": "measured-low",
+        "gsc.impressions": "measured-low",
+        "ga4.engagementRatePvWeighted": "measured-low"
+      }
+    },
+    {
+      "guardrailKpis": [
+        "gsc.impressions",
+        "ga4.engagementRatePvWeighted"
+      ],
+      "baselinePeriod": {
+        "from": "2026-08-09",
+        "to": "2026-10-03"
+      },
+      "startedAt": "2026-10-08",
+      "evaluateAt": {
+        "d7": "2026-10-15",
+        "d28": "2026-11-05",
+        "d56": "2026-12-03"
+      },
+      "result": null,
+      "notes": "THEME-STRUCTURE-20260908-consumer-prices (d28 で aborted) の引き継ぎ。baseline は portfolio.json (generatedAt 2026-10-08) の非重複 56 日窓 W36+W40 (GA4 2026-08-09〜2026-10-03、GSC 2026-08-07〜2026-10-01) で、公開日 2026-10-08 より前。measured-low の比率値は null。季節性 (9〜11 月) と、同時期に続けている他テーマの見出し文言の変更 (19 テーマ) を判定時の制約として扱う。",
+      "evidenceRefs": [
+        "data/themes/portfolio.json#consumer-prices/metrics",
+        "data/gsc/snapshots/2026-W36/pages.csv",
+        "data/gsc/snapshots/2026-W40/pages.csv",
+        "data/ga4/snapshots/2026-W36",
+        "data/ga4/snapshots/2026-W40"
+      ],
+      "verdict": "pending",
+      "experimentId": "THEME-STRUCTURE-20261008-consumer-prices",
+      "themeKey": "consumer-prices",
+      "changeType": "structure",
+      "hypothesis": "2026-10-08 (#1104) の章・指標・図の見直し (THEME-REVIEW-TOURISM-CPI-01 の承認済み提案) により、テーマ閲覧と指標への回遊が改善するか、公開後の国内アクセスで確認する。",
+      "primaryKpi": "ga4.pageViews",
+      "baseline": {
+        "ga4.pageViews": 103,
+        "gsc.impressions": 207,
+        "ga4.engagementRatePvWeighted": 0.7171
+      },
+      "baselineScopes": {
+        "ga4": "Japan",
+        "gsc": "search-console",
+        "internalNav": "Japan"
+      },
+      "baselineStatuses": {
+        "ga4.pageViews": "measured",
+        "gsc.impressions": "measured",
+        "ga4.engagementRatePvWeighted": "measured"
       }
     }
   ]
