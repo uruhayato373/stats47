@@ -1230,11 +1230,25 @@ jobs:
           name: pr-web-next-build
           path: apps/web/.next
 
+      # テーマ・地域の図の定義 (page-components) は実行時に R2 から読む。本番 R2 は main の内容なので、
+      # このままでは PR で変えた図の種類を検査できない。page-components だけを PR の生成物から返し、
+      # それ以外は本番 R2 へ取り次ぐ中継をアプリの読み取り先にする (E2E-THEME-PR-PAGECOMPONENTS-01)。
+      - name: 🔁 Start R2 overlay (PR の page-components + 本番 R2)
+        run: |
+          node .github/scripts/r2-overlay-server.mjs 4790 > /tmp/pr-e2e-r2-overlay.log 2>&1 &
+          echo $! > /tmp/pr-e2e-r2-overlay.pid
+          for _ in $(seq 1 30); do
+            curl -sf http://127.0.0.1:4790/app/page-components/theme/consumer-prices.json > /dev/null && exit 0
+            sleep 1
+          done
+          cat /tmp/pr-e2e-r2-overlay.log
+          exit 1
+
       - name: ▶️ Start verified web build
         working-directory: apps/web
         env:
           NEXT_PUBLIC_R2_PUBLIC_URL: https://storage.stats47.jp
-          R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
+          R2_PUBLIC_FETCH_URL: http://127.0.0.1:4790
         run: |
           npx next start --port 3100 > /tmp/pr-e2e-next.log 2>&1 &
           echo $! > /tmp/pr-e2e-next.pid
@@ -1269,7 +1283,9 @@ jobs:
 
       - name: 🛑 Stop web app
         if: always()
-        run: kill "$(cat /tmp/pr-e2e-next.pid)" 2>/dev/null || true
+        run: |
+          kill "$(cat /tmp/pr-e2e-next.pid)" 2>/dev/null || true
+          kill "$(cat /tmp/pr-e2e-r2-overlay.pid)" 2>/dev/null || true
 
       - name: 📊 Upload Playwright report
         if: always()

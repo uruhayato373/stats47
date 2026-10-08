@@ -1,9 +1,11 @@
 import { METRICS_REGISTRY } from '@stats47/data-configs';
+import { resolveRankingReaderLabel } from '@stats47/data-configs/prominence';
 import {
   EVIDENCE_LENS_CATALOG,
   EVIDENCE_SOURCE_CATALOG,
   THEME_CATALOGS,
 } from '@stats47/data-configs/theme-catalog';
+import { metricDisplayName } from '@stats47/ranking';
 import { BookOpenText } from 'lucide-react';
 
 import { SectionCard } from '@/components/surface';
@@ -48,7 +50,23 @@ export function ThemeEvidenceTopicsSection({ themeKey }: { themeKey: string }) {
           const rankings = (topic.relatedRankingKeys ?? []).flatMap(
             (rankingKey) => {
               const metric = METRICS_REGISTRY[rankingKey];
-              return metric ? [{ key: rankingKey, title: metric.title }] : [];
+              // 名前はサイト共通の組み立て (分母・内訳の subtitle を添える) にそろえる。
+              // title だけでは費目違いの物価指数や人口当たりの値が同じ名前で並ぶ (THEME-EVIDENCE-RANKING-LABEL-DUP-01)
+              return metric
+                ? [
+                    {
+                      key: rankingKey,
+                      title: metricDisplayName({
+                        title: metric.title,
+                        readerLabel: resolveRankingReaderLabel({
+                          rankingKey,
+                          title: metric.title,
+                        }),
+                        subtitle: metric.subtitle,
+                      }),
+                    },
+                  ]
+                : [];
             }
           );
           const themes = (topic.relatedThemeKeys ?? []).flatMap(

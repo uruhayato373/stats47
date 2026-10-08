@@ -317,7 +317,20 @@ jobs:
         env:
           NODE_ENV: production
           NODE_OPTIONS: --max-old-space-size=8192
-        run: bash .claude/skills/db/sync-snapshots/run.sh
+          EVENT_NAME: ${{ github.event_name }}
+        # ★develop への push で起動したときは、テーマ・地域ページの図の定義 (page-components) を作らない。
+        #   push 起動は develop を checkout するので、作るとマージ前の図の定義が本番 R2 に出て、
+        #   main のコードが新しい定義を読む (2026-10-08 に観光・物価の定義が PR #1100 のマージ前に本番へ出た)。
+        #   page-components の本番の書き手は main を checkout する sync-snapshots。
+        #   広告 (affiliate-ads) は publish-affiliate-ads.yml が develop から出す設計なので除外しない。
+        #   観測値から作る task (ranking-items など) は、新しい指標をマージ前に確かめられるよう今までどおり作る。
+        #   (DATA-REFRESH-DERIVED-FROM-DEVELOP-01)
+        run: |
+          ARGS=()
+          if [ "$EVENT_NAME" = "push" ]; then
+            ARGS+=(--skip page-components)
+          fi
+          bash .claude/skills/db/sync-snapshots/run.sh "${ARGS[@]}"
 
       # statsのPUT完了後、production/S3 readで同じキーの配信用派生を生成する。
       # items --onlyでもall.jsonは全registryから生成される。索引を部分集合へ縮めない。

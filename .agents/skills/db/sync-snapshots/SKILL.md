@@ -2,7 +2,7 @@
 name: sync-snapshots
 domain: data
 description: git TS / R2 観測値から全 R2 snapshot を一括 export する。R2 キーパスは app/ 名前空間に統一。データ変更後に必ず実行。
-argument-hint: "[--only <category>] [--dry-run]"
+argument-hint: "[--only <category>] [--skip <category,...>] [--dry-run]"
 disable-model-invocation: true
 primary_agent: snapshot-exporter
 co_agents: [article-writer, theme-designer, note-manager]
@@ -171,6 +171,16 @@ bash .claude/skills/db/sync-snapshots/run.sh --only station-passengers
 
 `--only blog` のpushは`app/blog`に限定する。CIが別用途にstagingした県画像等を巻き込まない。
 共有索引は生成契約と生成時R2の基底をpublisherで照合し、競合時は最新R2から再生成する。
+
+### 一部の task を除く
+
+```bash
+bash .claude/skills/db/sync-snapshots/run.sh --skip page-components
+```
+
+`--skip` はカンマ区切りで task を除く。存在しない task 名は何も作らずに失敗する。`data-refresh.yml` は develop への push で
+起動したとき `--skip page-components` を付け、マージ前の図の定義を本番 R2 に出さない (page-components の本番の書き手は
+main を checkout するこの workflow)。
 
 ### dry-run (実行しない、走るスクリプトをリスト表示)
 

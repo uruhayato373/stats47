@@ -52,7 +52,9 @@ export function classifyPrQualityPaths(inputPaths) {
   const workflowContracts = paths.some((path) =>
     matchesAny(path, [
       /^\.github\/workflows\/[^/]+\.ya?ml$/,
-      /^\.claude\/scripts\/lib\/__tests__\/[^/]*scoped-workflow\.test\.mjs$/,
+      // workflow の step が呼ぶ CI 用スクリプト (例: PR の E2E の R2 読み取り中継)
+      /^\.github\/scripts\//,
+      /^\.claude\/scripts\/lib\/__tests__\/(?:[^/]*scoped-workflow|r2-overlay-server)\.test\.mjs$/,
     ])
   );
   const remoteAssets = paths.some((path) =>
