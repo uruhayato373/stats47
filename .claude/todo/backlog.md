@@ -312,6 +312,18 @@ updated: 2026-10-06
 - **完了条件**: 次の本番デプロイで reset step と smoke が通り、post-deploy-smoke (Playwright) も通る。
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [GEO-LOW-ELEVATION-TEST-SKIP-01] 低標高人口の Geo 分析のテストに登録の無い条件付き skip が入り、PR の品質例外の検査が落ちる
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:node .claude/scripts/lib/check-quality-exceptions.cjs --base origin/main] [起票:2026-10-08] [期日:2026-10-09] [領域:データ]
+
+- **事象 (2026-10-08)**: 0e3303546 で足した `packages/gis/src/geo-analysis/__tests__/low-elevation-population.test.ts` の
+  `describe.skipIf(!hasArtifacts)` (ローカルの `.local/r2` に生成物があるときだけ 47 県と manifest の契約を確かめる) が、
+  品質例外の台帳 (`.claude/config/quality-exceptions.json`) に無く、`npm run preflight:pr` の quality-exceptions が落ちる。
+  台帳は main より件数を増やせない検査 (`auditRegistryGrowth`) もあるので、登録では直らない。develop→main のリリースを止めている。
+- **次**: 生成物の契約をテストから外し、生成スクリプト側の検証 (build 後の自己検査) か、R2 の公開物を読む週次の Geo 監査へ移す。
+  または固定の小さな生成物を fixture に置いて skip なしで回す。どちらにするかは Geo 分析を作ったセッションの設計に合わせる。
+- **禁止**: skip を `if` で包むなど、検出を避けるだけの書き換えをしない。テストを消して済ませない。
+- **完了条件**: `node .claude/scripts/lib/check-quality-exceptions.cjs --base origin/main` が通り、47 県と manifest の契約がどこかで機械的に検査されている。
+
 ### [CRITIC-PATTERN-TITLE-PROMISE] critic の指摘「タイトル・約束」が 3 本の記事で繰り返した。writer の規約か gate に入れる
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-08] [領域:サイト]
 
@@ -880,20 +892,17 @@ updated: 2026-10-06
 - **次**: 2 本を R2 から docs/21 へ取り、本文の表記とコード例 (`runtime = "edge"`・`wrangler pages deploy` など) を公式ドキュメントで確かめて直す。タグを替えるなら known-tag-keys の再生成を同じ変更に入れる。blog-critic を通して公開する。
 - **完了条件**: 2 本の本文に Pages 前提の記述が残っておらず、critic PASS で再公開されている。
 
-### [BLOG-STATS-TABLE-ID-FIX-01] 公開中の Claude Code 連載 2 本の、実在する別の表を指す統計表 ID を直す
-タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:node .claude/scripts/blog/quality-gate.mjs <slug>] [起票:2026-10-07] [期日:2026-10-08] [領域:サイト]
+### [BLOG-STATS-TABLE-ID-FIX-01] 公開中の Claude Code 連載 cc-estat-14 の、実在する別の表を指す統計表 ID を直す
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:node .claude/scripts/blog/quality-gate.mjs <slug>] [起票:2026-10-07] [領域:サイト]
 
-- **事象**: 2026-10-07 に入れた統計表 ID の照合 (`stats-table-id-lint.mjs`) を公開済み 389 記事に当てたところ、図の年の書き直し対象 22 本の外で 2 本が当たった。`cc-estat-09-radar-prefecture` は「県民所得」の表として `0003448900` を書いているが、e-Stat では経済構造実態調査 (公園・遊園地の従業者数) の表である。`cc-estat-14-energy-area-chart` は「電力需給統計」として `0003234567` を書いているが、e-Stat では木材統計調査の表である。どちらも連番風の ID で、例として作った値の可能性がある。
-- **事象 (2026-10-08 追記)**: `cc-estat-09-radar-prefecture` は図 2 枚 (`tokyo-radar-findings` / `tokyo-kyoto-overlay-findings`) が出自不明の所見カード (`kind: "authored"`, `incomplete: true`) で、記事の出典が 0 件になっている。
-  本文も「statsDataId は架空例」と書いており、出典を書き足すと出自の捏造になるので、書き直しでしか直らない。
-  週次の survey taxonomy 監査は 10-04 からこの記事で失敗しており (出典 0 件の図付き記事 2 > 許容 1。uruhayato373/stats47#1066)、`data/surveys/taxonomy.json` のブログ部分が 09-30 のまま更新されない。
-  10-08 04:42 UTC に状態ファイルが R2 込みで作り直された (3352042ad) ので、今は PR の Survey Taxonomy 検査も
-  「出典 0 件の図付き記事 2 > 許容 1」で落ち、develop→main のリリースを止めている。
-- **期日の理由**: リリースを止めているので最優先。cc-estat-09 を書き直して再公開し、
-  `npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --json data/surveys/taxonomy.json` の結果を commit する
-  (cc-estat-14 は後でよい)。再公開は R2 への書き込みなのでオーナー承認を取ってから行う。
-- **手順**: 各記事を R2 から docs/21 へ取り、e-Stat で実在する正しい表の ID に差し替える (取れなければ ID を書かずに統計名とデータベースへのリンクにする)。コード例の取得結果が本文の説明と食い違わないかも確かめ、blog-critic を通して公開する。
-- **完了条件**: 2 本とも quality-gate の `STATS_TABLE_*` が 0 件で再公開され、本番の記事で ID と統計名が一致している。
+- **事象**: 2026-10-07 に入れた統計表 ID の照合 (`stats-table-id-lint.mjs`) を公開済み 389 記事に当てたところ、2 本が当たった。
+  `cc-estat-14-energy-area-chart` は「電力需給統計」として `0003234567` を書いているが、e-Stat では木材統計調査の表である。連番風の ID で、例として作った値の可能性がある。
+- **済 (2026-10-08)**: もう 1 本の `cc-estat-09-radar-prefecture` は、6 軸を社会・人口統計体系の実在の指標に置き換え、R2 の実データとレーダーチャート
+  (svg-builder に radar 型を新設) で書き直して再公開した (5d1ad14d8、blog-critic PASS)。出典 0 件が解消し、survey taxonomy の週次・PR の検査が通る。
+- **手順**: cc-estat-14 を R2 から docs/21 へ取り (`node .claude/scripts/blog/refresh-article-data-years.mjs --slug cc-estat-14-energy-area-chart --pull`)、
+  e-Stat で実在する正しい表の ID に差し替える (取れなければ ID を書かずに統計名とデータベースへのリンクにする)。
+  コード例の取得結果と本文の数値が実データと食い違わないかも確かめ、blog-critic を通して公開する。
+- **完了条件**: quality-gate の `STATS_TABLE_*` が 0 件で再公開され、本番の記事で ID と統計名が一致している。
 
 ### [DEPS-TAILWIND4-01] apps/web を tailwindcss 4 へ移行し、braces を runtime 依存から外す
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:npm audit --omit=dev --audit-level=low] [起票:2026-10-06] [領域:管理]
