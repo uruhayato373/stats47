@@ -377,30 +377,6 @@ updated: 2026-10-06
 - **停止条件**: 原因が分かるまで `--apply` の結果をコミットしない。
 - **完了条件**: カタログを変えずに再生成した結果がコミット済みのファイルと一致する。
 
-### [THEME-READING-CHAPTER-EMPTY-01] 考察・FAQ だけの章 (読み方章 8 テーマ) が見出しと説明だけの空の章に見え、中身が比較の節の後に出る
-タグ: [UI・UX] [種類:不具合] [実行:対話] [検証:node .claude/scripts/themes/capture-theme-page.mjs consumer-prices] [起票:2026-10-08] [領域:サイト]
-
-- **事実 (2026-10-08、localhost と本番の `capture-theme-page.mjs` で確認)**: `ThemeMetricsDashboard.tsx` は `markdown-section` を章の `chartKeys` に関係なく
-  `ThemeComparisonSection` (都道府県の分布・指標の比較) の後にまとめて描く。このため `chartKeys` が markdown だけの章は、見出しと説明だけが出て、
-  中身の FAQ・考察は比較の節を挟んだページ末尾に出る。該当はカタログの `reading` 章 8 つ (healthcare / consumer-prices / local-economy / aging-society /
-  labor-mobility / labor-wages / population-dynamics / living-housing)。本番の consumer-prices でも同じ並びだった (変更前の版)。
-- **次**: 章の `chartKeys` にある markdown はその章の中で描き、どの章にも属さない markdown だけを末尾に残す。比較の節を読み方章の前に置くか後に置くかは、
-  読み方章を末尾に移した 2026-10-06 の判断 (`2026-10-06-theme-*.md`) と合わせて決める。
-- **完了条件**: 8 テーマの読み方章の見出しの直下に、その章の FAQ・考察が描かれる (`capture-theme-page.mjs` の章ごとの画像で確認)。
-
-### [DATA-SHUKUHAKU-CORRECTION-01] 宿泊旅行統計の正誤表 (2015〜2024 年の年間値) が社会・人口統計体系の値に反映されているか確かめる
-タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-08] [領域:データ]
-
-- **事実 (2026-10-08、theme-researcher が観光庁ページを取得して報告)**: 観光庁「宿泊旅行統計調査」のページ
-  (`https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html`) に「【正誤表】宿泊旅行統計(平成27年～令和6年年間値)」が載っている。
-  stats47 は延べ宿泊者数・外国人延べ宿泊者数・実宿泊者数 (`0000010107`) と客室稼働率 (`0000010207`) を社会・人口統計体系から取っており、
-  2015〜2024 年の値が訂正後のものかは確かめていない。
-- **次**: 正誤表の訂正箇所 (都道府県・年・項目) を読み、R2 の `app/stats/<key>/values.json` の同じ箇所と突き合わせる。違えば出典の更新を待つか、
-  出典を観光庁の年間値へ切り替えるかを決める。
-- **あわせて**: 同ページによると 2026 年 1 月分から層化基準が従業者数から客室数に変わった。2026 年以降の年を `years` に足すときは、
-  観光テーマの「客室稼働率と宿泊供給の参考」章の説明と metric config の `note` に系列の断絶を書く。
-- **完了条件**: 正誤表の訂正箇所すべてについて、R2 の値が訂正後と一致するか、違う箇所の扱いを決めて metric config か出典に反映した。
-
 ### [E2E-THEME-PR-PAGECOMPONENTS-01] PR の代表 E2E がテーマの図を本番 R2 の page-components で描くので、PR で変えた図の種類を検証できない
 タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:npm run test:e2e --workspace=apps/web -- tests/e2e/public-route-contract.spec.ts] [起票:2026-10-08] [領域:サイト]
 
@@ -449,6 +425,27 @@ updated: 2026-10-06
   **残り**: workflow の変更は main に入ってから効く。次の develop → main の公開後、定期実行かカタログを変えたマージの run で
   Verify の手順が通ることを確かめてカードを消す。
 - **完了条件**: カタログを変えた PR のマージ後、手作業なしで by-theme の相関一覧が新しいカタログで作り直され、外れた指標が残っていれば検査が止める。
+
+### [RANKING-ACTIVE-WITHOUT-VALUES-01] 有効な 2 指標が R2 に観測値を持たず、8 月の古い item だけが残ってビルドがエラーを記録する
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-08] [領域:データ]
+
+- **事実 (2026-10-08)**: `foreign-population-per-100k` と `population-density-habitable` は metric config で `isActive: true` だが、
+  R2 の `app/stats/<key>/values.json` が 404 で、既知キー一覧にも無く `/ranking/<key>` は 410。R2 には 2026-08-26 生成の
+  `app/ranking/<key>/item.json` だけが残り、`hook` を持たないので、`next build` の prerender で
+  `readRankingItemByKeyAndAreaTypeFromR2: failed` / `item.hook must be a non-empty string` が 2 件記録される (ビルドは成功する)。
+- **次**: 2 指標が観測値を取れない理由 (出典の年・コード) を確かめ、取れるなら `data-refresh` で取り込む。取れないなら `isActive: false` にして、
+  R2 の古い item を消すか作り直す。
+- **完了条件**: 2 指標が公開されて 200 になるか、無効になっていて、`next build` のログに 2 指標の item のエラーが出ない。
+
+### [THEME-EVIDENCE-RANKING-LABEL-DUP-01] テーマの論点の関連ランキングに、同じ名前のリンクが並んで区別できない
+タグ: [UI・UX] [種類:不具合] [実行:対話] [起票:2026-10-08] [領域:サイト]
+
+- **事実 (2026-10-08、localhost の `/themes/consumer-prices` で確認)**: 「白書・統計から見る論点」の関連ランキングに
+  「消費者物価地域差指数」が 2〜3 個並ぶ。費目の違う別々の指標 (総合・家賃を除く総合・食料など) で、title が同じで区別子 (subtitle) が出ていない。
+  本番の consumer-prices も同じ部品 (`ThemeEvidenceTopicsSection`) で描いている。
+- **次**: 関連ランキングのリンク名に、同じ title が並ぶときだけ subtitle を添える (ランキングページの見出しと同じ規則にそろえる)。
+  他のテーマにも同じ title の指標が並ぶ論点がないかを全テーマで数える。
+- **完了条件**: 全テーマの論点の関連ランキングで、同じ名前のリンクが並ばない。
 
 ### [DATA-REFRESH-DERIVED-FROM-DEVELOP-01] develop への push で起動した data-refresh が、未リリースの develop から派生 snapshot を作って本番 R2 に出す
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-08] [領域:データ]
@@ -3272,6 +3269,21 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - **完了条件**: 4 テーマで同じ rankingKey のカードが 1 か所だけになり、見出しに「章名｜」が残っていない。
 
 ## 🟢 低 — 時期未定・条件付き (trigger は本文に)
+
+### [DATA-SHUKUHAKU-CORRECTION-01] 宿泊旅行統計の 2026 年分を足すときに、層化基準の変更による系列の断絶を書く
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-08] [領域:データ]
+
+- **trigger**: 社会・人口統計体系の `0000010107` (G7101〜G7103) か `0000010207` (#G04308) に 2026 年の値が載ったとき。
+  観光庁「宿泊旅行統計調査」のページ (`https://www.mlit.go.jp/kankocho/tokei_hakusyo/shukuhakutokei.html`) によると、
+  2026 年 1 月分から層化基準が従業者数から客室数に変わった。
+- **次**: 4 指標の `years.to` を 2026 にするときは、系列の断絶を metric config の `note` と観光テーマの「客室稼働率と宿泊供給の参考」章の説明に書く。
+  社会・人口統計体系が引き続き「従業者数10人以上の施設」の値を収めるかを、e-Stat の項目定義 (`https://www.e-stat.go.jp/koumoku/koumoku_teigi/G`) で確かめてから書く。
+- **2026-10-08 済み (正誤表との照合)**: 正誤表 (令和 7 年 8 月 26 日) の年間値の数値の訂正は 2024 年の福島県の日本人・外国人の内訳だけで、合計は変わらない。
+  訂正の対象は観光庁が公表する全施設 (従業者数10人未満を含む) の推計値で、社会・人口統計体系の 4 項目は「従業者数10人以上の施設の結果」なので
+  同じ系列ではない (2024 年の福島県: R2 778 万人泊、正誤表 954 万人泊)。社会・人口統計体系の表は正誤表の後 (2026-06-19) に更新されており、
+  10人以上の系列への訂正は公表されていないので R2 の値をそのまま使う。照合の途中で、4 指標の説明が範囲を書いていないことと、
+  観光テーマの章の説明の誤りを見つけて直した (develop、`fix(data): 宿泊旅行統計の 4 指標が…`)。
+- **完了条件**: 2026 年の値を取り込んだ 4 指標に、系列の断絶が note と章の説明に書かれている。
 
 ### [DATA-CPI-REGIONAL-2025-01] 社会・人口統計体系に消費者物価地域差指数の 2025 年が入ったら、12 指標の years を 2025 年まで広げる
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npx tsx packages/ranking/src/scripts/audit-estat-year-coverage.ts --metrics consumer-price-difference-index-overall] [起票:2026-10-08] [領域:データ]
