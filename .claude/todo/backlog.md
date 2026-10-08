@@ -881,14 +881,17 @@ updated: 2026-10-06
 - **完了条件**: 2 本の本文に Pages 前提の記述が残っておらず、critic PASS で再公開されている。
 
 ### [BLOG-STATS-TABLE-ID-FIX-01] 公開中の Claude Code 連載 2 本の、実在する別の表を指す統計表 ID を直す
-タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:node .claude/scripts/blog/quality-gate.mjs <slug>] [起票:2026-10-07] [期日:2026-10-09] [領域:サイト]
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:node .claude/scripts/blog/quality-gate.mjs <slug>] [起票:2026-10-07] [期日:2026-10-08] [領域:サイト]
 
 - **事象**: 2026-10-07 に入れた統計表 ID の照合 (`stats-table-id-lint.mjs`) を公開済み 389 記事に当てたところ、図の年の書き直し対象 22 本の外で 2 本が当たった。`cc-estat-09-radar-prefecture` は「県民所得」の表として `0003448900` を書いているが、e-Stat では経済構造実態調査 (公園・遊園地の従業者数) の表である。`cc-estat-14-energy-area-chart` は「電力需給統計」として `0003234567` を書いているが、e-Stat では木材統計調査の表である。どちらも連番風の ID で、例として作った値の可能性がある。
 - **事象 (2026-10-08 追記)**: `cc-estat-09-radar-prefecture` は図 2 枚 (`tokyo-radar-findings` / `tokyo-kyoto-overlay-findings`) が出自不明の所見カード (`kind: "authored"`, `incomplete: true`) で、記事の出典が 0 件になっている。
   本文も「statsDataId は架空例」と書いており、出典を書き足すと出自の捏造になるので、書き直しでしか直らない。
   週次の survey taxonomy 監査は 10-04 からこの記事で失敗しており (出典 0 件の図付き記事 2 > 許容 1。uruhayato373/stats47#1066)、`data/surveys/taxonomy.json` のブログ部分が 09-30 のまま更新されない。
-  PR の検査はこの状態ファイルを使い、鮮度の上限 10 日を **2026-10-10 00:47 UTC** に超えると全 PR の preflight が落ちる。
-- **期日の理由**: 上の時刻までに cc-estat-09 を書き直して再公開し、`npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --json data/surveys/taxonomy.json` の結果を commit する (cc-estat-14 は後でよい)。
+  10-08 04:42 UTC に状態ファイルが R2 込みで作り直された (3352042ad) ので、今は PR の Survey Taxonomy 検査も
+  「出典 0 件の図付き記事 2 > 許容 1」で落ち、develop→main のリリースを止めている。
+- **期日の理由**: リリースを止めているので最優先。cc-estat-09 を書き直して再公開し、
+  `npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --json data/surveys/taxonomy.json` の結果を commit する
+  (cc-estat-14 は後でよい)。再公開は R2 への書き込みなのでオーナー承認を取ってから行う。
 - **手順**: 各記事を R2 から docs/21 へ取り、e-Stat で実在する正しい表の ID に差し替える (取れなければ ID を書かずに統計名とデータベースへのリンクにする)。コード例の取得結果が本文の説明と食い違わないかも確かめ、blog-critic を通して公開する。
 - **完了条件**: 2 本とも quality-gate の `STATS_TABLE_*` が 0 件で再公開され、本番の記事で ID と統計名が一致している。
 
