@@ -36,8 +36,8 @@ describe("dashboard catalog mirror", () => {
       localDashboards: 1,
       stories: 40,
       resasStories: 40,
-      coveredThemes: 55,
-      declaredThemes: 55,
+      coveredThemes: 56,
+      declaredThemes: 56,
       partialDashboards: 1,
       staleStories: 0,
     });
