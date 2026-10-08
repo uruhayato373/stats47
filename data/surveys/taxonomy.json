@@ -1,18 +1,18 @@
 {
   "schemaVersion": 1,
   "generatedAt": "2026-09-30T00:47:33.455Z",
-  "masterSurveyCount": 150,
+  "masterSurveyCount": 151,
   "ranking": {
-    "metrics": 2567,
-    "activeMetrics": 2424,
-    "applicableMetrics": 2480,
-    "activeApplicableMetrics": 2338,
-    "notApplicable": 87,
-    "activeNotApplicable": 86,
-    "resolved": 2480,
+    "metrics": 2594,
+    "activeMetrics": 2450,
+    "applicableMetrics": 2505,
+    "activeApplicableMetrics": 2363,
+    "notApplicable": 89,
+    "activeNotApplicable": 87,
+    "resolved": 2505,
     "unresolved": 0,
     "coveragePct": 100,
-    "activeResolved": 2338,
+    "activeResolved": 2363,
     "activeUnresolved": 0,
     "activeCoveragePct": 100,
     "activeNotApplicableKeys": [
@@ -64,6 +64,7 @@
       "natural-disaster-injured-persons",
       "natural-disaster-missing-persons",
       "natural-disaster-partially-damaged-houses",
+      "opendata-adoption-rate-municipalities",
       "pachinko-shop-density-per-10k",
       "pm25-compliant-general-station-count",
       "pm25-general-station-compliance-rate",
@@ -105,9 +106,10 @@
     ],
     "activeUnresolvedKeys": [],
     "perSurveyActive": {
-      "academic-achievement-survey": 1,
+      "academic-achievement-survey": 4,
       "accommodation-survey": 4,
       "administrative-investment-report": 13,
+      "age-adjusted-mortality-statistics": 1,
       "agricultural-income-statistics": 3,
       "agriculture-forestry-census": 14,
       "agriculture-management-survey": 5,
@@ -137,6 +139,7 @@
       "establishment-enterprise-census": 11,
       "factory-location-survey": 3,
       "farmland-transfer-conversion-report": 1,
+      "financial-literacy-survey": 1,
       "fire-annual-report": 15,
       "fishery-aquaculture-production": 21,
       "fishery-census": 10,
@@ -161,7 +164,7 @@
       "japan-post-statistics": 6,
       "job-placement-statistics": 11,
       "junior-high-athletics-membership-survey": 10,
-      "kakei-chousa": 709,
+      "kakei-chousa": 716,
       "labor-market-annual": 9,
       "late-elderly-medical-annual-report": 1,
       "life-insurance-business-statistics": 4,
@@ -189,13 +192,13 @@
       "national-child-fitness-survey": 4,
       "national-election-results": 4,
       "national-health-insurance-annual-report": 4,
-      "national-health-nutrition-survey": 6,
+      "national-health-nutrition-survey": 9,
       "national-household-survey": 34,
       "national-medical-expenditure": 3,
       "natural-conservation-area-data": 1,
       "natural-park-area": 6,
       "nature-park-visitor-survey": 1,
-      "nta-annual-statistics": 2,
+      "nta-annual-statistics": 8,
       "passenger-regional-flow-survey": 4,
       "patent-administration-annual-report": 7,
       "patient-survey": 28,
@@ -220,16 +223,16 @@
       "resident-registry-population-survey": 4,
       "retail-price-survey": 15,
       "road-statistics": 19,
-      "school-basic-survey": 73,
+      "school-basic-survey": 74,
       "school-health-survey": 12,
       "sewerage-statistics": 5,
       "sixth-industry-survey": 2,
       "social-education-survey": 38,
-      "social-life-basic-survey": 113,
+      "social-life-basic-survey": 115,
       "social-welfare-facility-survey": 34,
       "sole-proprietor-survey": 3,
       "special-forest-products-statistics": 2,
-      "sports-facilities-survey": 2,
+      "sports-facilities-survey": 3,
       "student-guidance-issues-survey": 7,
       "telecommunications-contract-share-quarterly": 2,
       "telecommunications-service-contract-report": 5,
@@ -2063,7 +2066,7 @@
   "surveys": [
     {
       "surveyId": "academic-achievement-survey",
-      "rankingCount": 1,
+      "rankingCount": 4,
       "themeKeys": [],
       "blogSlugs": [
         "academic-achievement-test-prefecture-ranking",
@@ -2102,7 +2105,7 @@
     },
     {
       "surveyId": "age-adjusted-mortality-statistics",
-      "rankingCount": 0,
+      "rankingCount": 1,
       "themeKeys": [],
       "blogSlugs": []
     },
@@ -2618,6 +2621,12 @@
       "blogSlugs": []
     },
     {
+      "surveyId": "financial-literacy-survey",
+      "rankingCount": 1,
+      "themeKeys": [],
+      "blogSlugs": []
+    },
+    {
       "surveyId": "fire-annual-report",
       "rankingCount": 15,
       "themeKeys": [
@@ -2911,7 +2920,7 @@
     },
     {
       "surveyId": "kakei-chousa",
-      "rankingCount": 709,
+      "rankingCount": 716,
       "themeKeys": [
         "earthquake-exposure",
         "living-housing",
@@ -3485,7 +3494,7 @@
     },
     {
       "surveyId": "national-health-nutrition-survey",
-      "rankingCount": 6,
+      "rankingCount": 9,
       "themeKeys": [
         "health-checkups",
         "sports-participation"
@@ -3561,7 +3570,7 @@
     },
     {
       "surveyId": "nta-annual-statistics",
-      "rankingCount": 2,
+      "rankingCount": 8,
       "themeKeys": [],
       "blogSlugs": [
         "alcohol-prefecture-map"
@@ -4023,7 +4032,7 @@
     },
     {
       "surveyId": "school-basic-survey",
-      "rankingCount": 73,
+      "rankingCount": 74,
       "themeKeys": [
         "education-culture",
         "population-dynamics"
@@ -4106,7 +4115,7 @@
     },
     {
       "surveyId": "social-life-basic-survey",
-      "rankingCount": 113,
+      "rankingCount": 115,
       "themeKeys": [
         "community-participation",
         "cultural-participation",
@@ -4166,7 +4175,7 @@
     },
     {
       "surveyId": "sports-facilities-survey",
-      "rankingCount": 2,
+      "rankingCount": 3,
       "themeKeys": [
         "sports-participation"
       ],
