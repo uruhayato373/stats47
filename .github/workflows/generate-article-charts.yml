@@ -36,11 +36,11 @@ jobs:
         id: slugs
         run: |
           # --depth=1 は shallow ref を作り 3 点 diff の merge base が消える (検出 0 件で success になっていた)。
-          # quotepath=false でないと非 ASCII パスが引用符付きで出て /^docs\/21_/ に一致しない。
+          # quotepath=false は非 ASCII のパスを引用符付きで出さないため (2026-10-08 に原稿を contents/blog へ移すまでは置き場の名前が日本語だった)。
           # 公開後の outbox 掃除で消えた原稿は検証対象外 (--diff-filter=d)。
           git fetch origin "${{ github.base_ref }}"
           SLUGS=$(git -c core.quotepath=false diff --name-only --diff-filter=d "origin/${{ github.base_ref }}...HEAD" -- 'contents/blog/' | \
-                  awk -F/ '/^docs\/21_/ {print $3}' | sort -u)
+                  awk -F/ 'NF >= 4 && /^contents\/blog\// {print $3}' | sort -u)
           {
             echo "list<<EOF"
             echo "$SLUGS"
