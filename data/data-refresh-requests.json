@@ -1,0 +1,6 @@
+{
+  "metric": "internet-usage-rate-10plus",
+  "since": "",
+  "dryRun": true,
+  "reason": "REFERENCE-KINDLE7-S5-01 で追加したインターネット利用行動者率 (SSDS 0000010107 G7000) の取得と実在年を確かめる"
+}
