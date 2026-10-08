@@ -54,5 +54,6 @@ export const financialLiteracyCorrectRate: MetricConfig = {
   },
   "seoTitle": "金融リテラシー(正誤問題)の正答率、都道府県で差｜1位島根県58.83% vs 最下位沖縄県51.03%【2022年】",
   "seoDescription": "金融広報中央委員会『金融リテラシー調査(2022年)』の正誤問題25問の正答率を都道府県別に比較。1位島根県58.83%、最下位沖縄県51.03%で7.80ポイント差(全国55.66%)。地図とグラフで47都道府県を比較。",
+  "surveyId": "financial-literacy-survey",
   "isActive": true,
 };

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-30T00:47:33.455Z",
+  "generatedAt": "2026-10-08T04:42:41.240Z",
   "masterSurveyCount": 151,
   "ranking": {
     "metrics": 2598,
@@ -729,13 +729,13 @@
     }
   },
   "blog": {
-    "articles": 606,
-    "charts": 1587,
-    "applicableCharts": 1460,
+    "articles": 607,
+    "charts": 1607,
+    "applicableCharts": 1481,
     "byStatus": {
-      "resolved": 1460,
+      "resolved": 1481,
       "unresolved": 0,
-      "not-applicable": 127,
+      "not-applicable": 126,
       "missing-lineage": 0
     },
     "coveragePct": 100,
@@ -762,11 +762,8 @@
         "energy-infrastructure-gas-electricity",
         "engel-coefficient-prefecture-ranking",
         "expenditure-structure-comparison",
-        "fiscal-health-50years-trend",
-        "fiscal-self-reliance-gap",
         "future-burden-ratio-extreme-gap",
         "gasoline-car-society-map",
-        "health-life-expectancy-structure",
         "heating-cost-vs-disposable-income",
         "hospital-bed-utilization-map",
         "household-spending-prefecture-gap",
@@ -779,7 +776,6 @@
         "koumuin-ai-tenshoku-1500man",
         "koumuin-claude-code-estat-automation",
         "library-museum-cultural-capital",
-        "local-government-debt-burden",
         "local-tax-revenue-gap",
         "mackerel-expenditure-ranking",
         "manufacturing-aichi-dominance",
@@ -796,7 +792,6 @@
         "pharma-medical-device-production-map",
         "pollution-complaints-regional-map",
         "population-migration-tokyo-concentration",
-        "real-disposable-income-reversal",
         "renewable-energy-regional-gap",
         "savings-balance-gap",
         "small-business-dominance-map",
@@ -812,6 +807,7 @@
         "workplace-accident-regional-map"
       ],
       "sourcelessChartArticles": [
+        "cc-estat-09-radar-prefecture",
         "cc-estat-17-edu-slope-graph"
       ],
       "snapshotSourcesMissingArticles": []
@@ -843,7 +839,6 @@
       "agricultural-income-statistics": [
         "agriculture-hokkaido-dominance",
         "cc-estat-13-agri-sankey",
-        "fresh-udon-soba-consumption-quantity",
         "habitable-area-land-use",
         "sixth-industry-direct-sales"
       ],
@@ -907,6 +902,7 @@
         "cc-estat-15-crime-small-multiple",
         "cc-estat-18-cache-r2",
         "cc-estat-20-publish",
+        "census-2025-population-change-rate-prefecture",
         "childcare-friendly-prefecture-ranking",
         "commercial-sales-productivity-gap",
         "communication-cost-burden",
@@ -917,6 +913,7 @@
         "convenience-store-density-map",
         "crime-rate-regional-gap",
         "cup-noodles-consumption-expenditure-vs-fire-damage",
+        "dairy-cattle-count",
         "day-time-population-prefecture-gap",
         "densely-populated-area-prefecture-gap",
         "dental-checkup-persons-per-1000-prefecture-gap",
@@ -929,6 +926,7 @@
         "dual-income-household-ratio-vs-tatami-per-dwelling-owner",
         "earthquake-insurance-prefecture-gap",
         "elderly-population-care-capacity-gap",
+        "elderly-ratio-rise-2020-2025",
         "elementary-school-children-count",
         "energy-infrastructure-gas-electricity",
         "estat-7-techniques-from-unusable-to-usable",
@@ -950,6 +948,7 @@
         "half-population-elderly-municipalities",
         "health-life-expectancy-structure",
         "hospital-bed-utilization-map",
+        "household-growth-population-decline-census-2025",
         "household-income-tokyo-okinawa",
         "household-solo-vs-dualincome",
         "household-structure-transformation",
@@ -957,6 +956,7 @@
         "ict-digital-divide-composite-analysis",
         "inbound-by-nationality-regional-preference",
         "inflow-population-ratio-prefecture-gap",
+        "it-industry-concentration",
         "library-museum-cultural-capital",
         "livable-prefecture-composite-ranking",
         "local-allocation-tax-prefecture-vs-total-area-excluding",
@@ -1034,6 +1034,8 @@
       ],
       "crop-statistics": [
         "agriculture-hokkaido-dominance",
+        "dairy-cattle-count",
+        "dairy-cattle-hokkaido-monopoly",
         "farmland-crisis-abandoned-land",
         "habitable-area-land-use",
         "local-allocation-tax-prefecture-vs-cultivated-area",
@@ -1249,6 +1251,7 @@
         "beer-vs-happoshu-shift",
         "black-tea-expenditure-ranking",
         "black-tea-income-gap",
+        "bonito-catch-prefecture",
         "bonito-vs-oyster-fish-map",
         "bread-consumption-expenditure-vs-final-education-university",
         "bread-consumption-expenditure-vs-high-school-advancement",
@@ -1290,7 +1293,6 @@
         "food-spending-pattern",
         "food-trio-prefecture-map",
         "fresh-udon-soba-consumption-prefecture-gap",
-        "fresh-udon-soba-consumption-quantity",
         "freshwater-clam-expenditure-ranking",
         "frozen-gyoza-spending-prefecture-gap",
         "fukui-food-culture",
@@ -1406,7 +1408,6 @@
         "shrimp-consumption-quantity-prefecture-gap",
         "shumai-consumption-expenditure-vs-jr-freight-shipment",
         "shumai-consumption-expenditure-vs-main-household-ratio-main",
-        "soba-udon-dining-consumption-expenditure",
         "soba-udon-dining-consumption-expenditure-prefecture-gap",
         "soy-sauce-consumption-expenditure-prefecture-gap",
         "spinach-consumption-ranking",
@@ -1469,7 +1470,7 @@
         "late-elderly-medical-expense-prefecture-gap"
       ],
       "life-tables": [
-        "cc-estat-04-aging-heatmap",
+        "healthy-life-expectancy-male-female-gap",
         "unhealthy-period-gender-prefecture-gap"
       ],
       "livestock-statistics": [
@@ -1559,6 +1560,9 @@
         "psychiatric-bed-count-vs-standard-fiscal-demand-municipality",
         "tuna-consumption-quantity-vs-annual-new-inpatients-general"
       ],
+      "milk-dairy-statistics": [
+        "dairy-cattle-hokkaido-monopoly"
+      ],
       "minimum-wage": [
         "minimum-wage-1000yen-breakthrough",
         "minimum-wage-1000yen-prefecture",
@@ -1619,7 +1623,6 @@
         "railway-theme-overview"
       ],
       "patient-survey": [
-        "health-life-expectancy-structure",
         "hospital-bed-utilization-map",
         "inpatient-rate-aging-burden",
         "inpatient-rate-prefecture-gap",
@@ -1654,6 +1657,7 @@
         "2050-population-map-reading",
         "aging-rate-akita-vs-okinawa",
         "aging-solo-living-crisis",
+        "area-ratio-prefecture-gap",
         "bank-deposit-balance-shikoku-anomaly",
         "barber-beauty-salon-regional-gap",
         "beef-consumption-quantity-vs-unmarried-ratio-male-45-49",
@@ -1673,12 +1677,14 @@
         "convenience-store-density-map",
         "crime-rate-regional-gap",
         "cup-noodles-consumption-expenditure-vs-fire-damage",
+        "dairy-cattle-count",
         "dental-checkup-persons-per-1000-prefecture-gap",
         "disaster-damage-per-person-prefecture-gap",
         "divorces-per-total-population",
         "dual-income-household-ratio-vs-public-assistance-housing",
         "earthquake-insurance-prefecture-gap",
         "elderly-population-care-capacity-gap",
+        "elderly-ratio-rise-2020-2025",
         "elementary-school-children-count",
         "estat-7-techniques-from-unusable-to-usable",
         "female-lecture-prefecture-gap",
@@ -1690,11 +1696,13 @@
         "foreign-residents-diversity-map",
         "future-population-tokyo-paradox",
         "garbage-total-output",
+        "half-population-elderly-municipalities",
         "health-life-expectancy-structure",
         "hospital-bed-utilization-map",
         "household-income-tokyo-okinawa",
         "ict-digital-divide-composite-analysis",
         "inflow-population-ratio-prefecture-gap",
+        "it-industry-concentration",
         "library-museum-cultural-capital",
         "livable-prefecture-composite-ranking",
         "local-tax-regional-gap",
@@ -1703,7 +1711,6 @@
         "marriage-divorce-okinawa",
         "marriage-unmarried-crisis",
         "mobile-contracts-over-population",
-        "municipality-population-decline-tiers",
         "natural-increase-rate-prefecture-gap",
         "nursing-care-shortage-2040",
         "pachinko-shop-density-per-10k-vs-dependent-population-index",

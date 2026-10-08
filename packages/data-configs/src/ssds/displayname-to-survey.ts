@@ -251,4 +251,10 @@ export const STATS_DATA_ID_TO_SURVEY_OVERRIDE: Record<
     id: 'resident-registry-migration-report',
     name: '住民基本台帳人口移動報告',
   },
+  // ブログ cc-estat-13-agri-sankey の地域別の図が直接引く表。2026-10-08 に控え
+  // data/estat/meta/0001894246.json (統計名: 生産農業所得統計 / 農林水産省) と照合。
+  '0001894246': {
+    id: 'agricultural-income-statistics',
+    name: '生産農業所得統計',
+  },
 };
