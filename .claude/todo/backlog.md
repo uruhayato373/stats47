@@ -312,18 +312,6 @@ updated: 2026-10-06
 - **完了条件**: 次の本番デプロイで reset step と smoke が通り、post-deploy-smoke (Playwright) も通る。
 ## 🟡 中 — 2〜3ヶ月以内
 
-### [GEO-LOW-ELEVATION-TEST-SKIP-01] 低標高人口の Geo 分析のテストに登録の無い条件付き skip が入り、PR の品質例外の検査が落ちる
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:node .claude/scripts/lib/check-quality-exceptions.cjs --base origin/main] [起票:2026-10-08] [期日:2026-10-09] [領域:データ]
-
-- **事象 (2026-10-08)**: 0e3303546 で足した `packages/gis/src/geo-analysis/__tests__/low-elevation-population.test.ts` の
-  `describe.skipIf(!hasArtifacts)` (ローカルの `.local/r2` に生成物があるときだけ 47 県と manifest の契約を確かめる) が、
-  品質例外の台帳 (`.claude/config/quality-exceptions.json`) に無く、`npm run preflight:pr` の quality-exceptions が落ちる。
-  台帳は main より件数を増やせない検査 (`auditRegistryGrowth`) もあるので、登録では直らない。develop→main のリリースを止めている。
-- **次**: 生成物の契約をテストから外し、生成スクリプト側の検証 (build 後の自己検査) か、R2 の公開物を読む週次の Geo 監査へ移す。
-  または固定の小さな生成物を fixture に置いて skip なしで回す。どちらにするかは Geo 分析を作ったセッションの設計に合わせる。
-- **禁止**: skip を `if` で包むなど、検出を避けるだけの書き換えをしない。テストを消して済ませない。
-- **完了条件**: `node .claude/scripts/lib/check-quality-exceptions.cjs --base origin/main` が通り、47 県と manifest の契約がどこかで機械的に検査されている。
-
 ### [CRITIC-PATTERN-TITLE-PROMISE] critic の指摘「タイトル・約束」が 3 本の記事で繰り返した。writer の規約か gate に入れる
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-08] [領域:サイト]
 
