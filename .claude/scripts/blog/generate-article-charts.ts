@@ -21,6 +21,7 @@
  *   *-tile-grid.json           → tile-grid-map (都道府県地図)    [実装済み]
  *   *-timeseries.json          → line chart (時系列・多系列対応)  [実装済み]
  *   *-scatter.json             → scatter chart (正方形・単色)      [実装済み]
+ *   *-radar.json               → radar chart (720×720・正規化済み値) [実装済み]
  *   *-stacked.json             → stacked-bar                     [TODO]
  *   *-summary-findings.json    → findings card (番号付き要点)     [実装済み]
  *   *-findings.json            → findings card (番号付き要点)     [実装済み]
@@ -50,6 +51,7 @@ import {
   generateBarChartSvg,
   generateChoroplethSvg,
   generateLineSvg,
+  generateRadarSvg,
   generateScatterSvg,
   generateStackedBarSvg,
   generateFindingsCardSvg,
@@ -154,6 +156,7 @@ function detectChartType(filename, parsed) {
     explicit === 'tile-grid' ||
     explicit === 'line' ||
     explicit === 'scatter' ||
+    explicit === 'radar' ||
     explicit === 'stacked-bar' ||
     explicit === 'summary'
   ) {
@@ -168,6 +171,7 @@ function detectChartTypeFromName(filename) {
   if (filename.endsWith('-map.json')) return 'tile-grid';
   if (filename.endsWith('-timeseries.json')) return 'line';
   if (filename.endsWith('-scatter.json')) return 'scatter';
+  if (filename.endsWith('-radar.json')) return 'radar';
   if (filename.endsWith('-stacked.json')) return 'stacked-bar';
   if (filename.endsWith('-summary-findings.json')) return 'summary';
   if (filename.endsWith('-findings.json')) return 'summary';
@@ -426,6 +430,17 @@ function genScatterChartSvg(data) {
     title,
     xLabel: data.xUnit ? `${xLabel}（${data.xUnit}）` : xLabel,
     yLabel: data.yUnit ? `${yLabel}（${data.yUnit}）` : yLabel,
+  });
+}
+
+/**
+ * radar: { title, axes:[{key,label}], series:[{name, values:{<key>:0..1}, palette?, reference?}] }
+ * → svg-builder generateRadarSvg。正規化・反転は data JSON を作る側で済ませておく。
+ */
+function genRadarChartSvg(data) {
+  return generateRadarSvg(data.axes ?? [], data.series ?? [], {
+    title: data.title ?? 'レーダーチャート',
+    subtitle: data.subtitle,
   });
 }
 
@@ -781,6 +796,8 @@ for (const { file, type, parsed } of jsonMeta) {
     }
   } else if (type === 'scatter') {
     svg = genScatterChartSvg(parsed);
+  } else if (type === 'radar') {
+    svg = genRadarChartSvg(parsed);
   } else if (type === 'summary') {
     svg = genFindingsCardSvg(parsed);
   } else if (type === 'stacked-bar') {
