@@ -2541,20 +2541,23 @@ updated: 2026-10-06
 - **完了条件**: `combined-analysis`25件全てがreuse-existing-metric/new-metricいずれかで既存SSOTへ接続され、
   管理画面`/content/references`で実在証跡が確認できる。
 
-### [REFERENCE-KINDLE7-S5-01] Kindle スキャン 7 冊の論点台帳から、新規指標・権利確認・県ページ編集を展開する
+### [REFERENCE-KINDLE7-S5-01] Kindle スキャン 7 冊由来の指標の残作業 (Geo 着地・調査紐付け・欠け県・取得の定期化)
 
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run source-vault:test] [起票:2026-10-08] [領域:データ]
 
-- **owner**: 台帳は`open-data-curator`、統計表の実在確認は`estat-researcher`、投入は`data-ingester`、県ページ編集は`area-curator`、Geo は`geo-analysis-curator`。
-- **現状証拠 (2026-10-08)**: 7 冊の論点台帳 `packages/data-configs/src/evidence-inventory/<sourceKey>/analyses.json` で全 925 ページを解決済み
-  (`npm run source-vault:inventory:check` exit 0)。書籍の数値・順位は持たない。未展開は次のとおり。
-  - `new-metric` 16 件: 消費編 13 (魚介類・生鮮野菜・果物・パン・牛乳の重量、国税庁の酒類消費量、陸上競技場・野球場、メディア接触時間、インターネット利用率など)、GIS 2 (国土数値情報の標高メッシュ×1km メッシュ人口の低標高人口割合、デジタル庁の取組済み自治体一覧によるオープンデータ取組割合)、おカネと健康 1 (75 歳未満年齢調整死亡率・乳房)。
-  - `rights-hold` 6 件: 消費編 5 (日本中学校体育連盟の部員数・全国高体連のラグビー部員数・全国学力調査の質問紙系。中体連の部員数は既存 metric 10 本が出典明記で運用中なので、同じ利用条件で解除できるか先に確認する)、おカネと健康 1 (金融リテラシー調査。転載に事前承諾が要る)。
-  - 県ページ編集: 県庁所在地ガイド 47 県の `combined-analysis` のうち、area チャネルが ready の 64 単位 (カツオ・サバ類漁獲量、製造品出荷額等、駅乗降客数など)。
-  - 補足: 国民健康・栄養調査 (令和6年) の BMI・野菜・男性喫煙の 47 県表が未登録 (やばい県民 a08)。麻雀・ゲームセンターの県別許可数は警察庁 PDF に無く、各県警の公表が未調査 (遊技店密度 a02)。
-- **次**: ①`new-metric` を 1 件ずつ `estat-researcher` が表の実在・47 県粒度・年度を確認 → `data-ingester` が provenance 9 点セットで投入。②`rights-hold` は利用条件を確認し、許諾不要なら `rights: "allowed"` に直して台帳を再生成。③県ページ編集は `area-curator` が `area-databook-standards.md` に沿って ready の単位を接続。
-- **停止条件**: 書籍の数値・順位・本文・図表を公開物へ流さない。利用条件が未確認の資料は `rights-hold` のまま。R2 write・deploy・SNS 公開は別途承認。
-- **完了条件**: `new-metric` 16 件と `rights-hold` 6 件がそれぞれ既存 SSOT への接続か `primary-source-unavailable` に確定し、管理画面 `/content/references` で 7 冊の未接続の制作単位が 0 になる。
+- **owner**: Geo は`geo-analysis-curator`、調査の紐付けは`survey-curator`、投入は`data-ingester`、県データブックは`area-databook-designer`。
+- **済み (2026-10-08)**: 7 冊の新規指標 27 本を作り、権利確認待ち 6 件をオーナー判断で解除し、県データブックに 13 指標を採用した。
+  e-Stat 8 本は data-refresh run 37710319585、e-Stat 以外 17 本は取得スクリプト → diff-push-r2 で R2 へ反映済み。
+  台帳は全 925 ページで `new-metric`・`rights-hold` が 0 (`npm run source-vault:inventory:check` exit 0)。
+- **残り**:
+  - Geo: `low-elevation-population-ratio-5m` は `isActive:false`。`GEO_ANALYSES` 登録・`/geo/population-low-elevation` 着地ページ・標高 (G04-a) の承認番号付き原典表示を作ってから公開する (geo-analysis-standards)。0m・10m 版を別 metric にするかもここで決める。生成は `packages/gis/src/geo-analysis/low-elevation-population-overlay.py`。
+  - 調査の紐付け: 金融リテラシー調査に対応する survey が `surveys.json` に無い。provenance 辞書が社会生活基本調査 0003457337 を未カバー。
+  - 欠け県: 国税庁の成人 1 人当たり酒類 6 本は沖縄が一次資料の表に無く 46 県。国税庁統計年報書で補えるか確認する。
+  - 県データブック: `beef-cattle-count`・`pig-count`・`layer-hen-count` は R2 の値に順位が無く不採用にした。順位付きで再投入すれば採用を再判断できる。
+  - 追加の論点候補: SSDS 0000010107 の G7000 (インターネット利用行動者率) を消費編 a24 の代替にする、全国学力調査の (17) 学校外の勉強時間、麻雀・ゲームセンターの県別許可数 (各県警の公表)。
+  - 取得の定期化: `.claude/scripts/data/fetch-*.mjs` の新規 8 本は手動実行のみで、npm script・skill・定期更新に配線していない。単位 `kg/m²` が単位語彙に無い (validate:config の unit-vocab warn)。
+- **停止条件**: 書籍の数値・順位・本文・図表を公開物へ流さない。Geo は着地ページと原典表示が無いまま公開しない。
+- **完了条件**: 低標高人口割合が `/geo` 着地ページ付きで公開され、上の残りがそれぞれ接続済みか「やらない」理由付きで確定する。
 
 ### [REFERENCE-CONTENT-DRAFTS-01] 参考文献由来のテーマ企画と横断ブログ下書きを制作する
 
