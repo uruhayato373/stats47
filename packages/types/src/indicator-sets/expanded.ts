@@ -31,6 +31,7 @@ import { SPORTS_PARTICIPATION_SET } from './sports-participation';
 import { LOCAL_GOVERNMENT_DIGITAL_SET } from './local-government-digital';
 import { GENDER_PARTICIPATION_SET } from './gender-participation';
 import { COMMUNITY_PARTICIPATION_SET } from './community-participation';
+import { HOUSEHOLD_FOOD_SPENDING_SET } from './household-food-spending';
 
 export const EXPANDED_THEME_SETS: IndicatorSet[] = [
   LAND_PROPERTY_MARKET_SET,
@@ -64,4 +65,5 @@ export const EXPANDED_THEME_SETS: IndicatorSet[] = [
   LOCAL_GOVERNMENT_DIGITAL_SET,
   GENDER_PARTICIPATION_SET,
   COMMUNITY_PARTICIPATION_SET,
+  HOUSEHOLD_FOOD_SPENDING_SET,
 ];

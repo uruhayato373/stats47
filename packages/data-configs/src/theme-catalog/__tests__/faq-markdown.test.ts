@@ -45,7 +45,7 @@ describe("ThemeCatalog FAQ の配信契約", () => {
       );
     }
 
-    expect(faqRows).toHaveLength(8);
+    expect(faqRows).toHaveLength(9);
     for (const row of faqRows) {
       const props = row.componentProps as Record<string, unknown>;
       expect(Array.isArray(props.items)).toBe(true);

@@ -1,0 +1,1519 @@
+{
+  "key": "household-food-spending",
+  "title": "食卓と家計の支出",
+  "description": "都道府県庁所在市の二人以上世帯について、食料費・外食・主食・魚介・肉・野菜・果物・飲料・酒類などの品目別の支出額と購入量を比べます。県全体の値ではなく、県庁所在市の家計調査の値です。",
+  "category": "lifestyle",
+  "usage": "theme",
+  "metrics": [
+    {
+      "rankingKey": "dining-out-consumption-expenditure",
+      "shortLabel": "外食の支出額",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "総務省統計局 家計調査（品目分類）",
+        "sourceUrl": "https://www.stat.go.jp/data/kakei/",
+        "surveyedAt": "2026-10-08",
+        "rationale": "家庭で食べる食料費と対になる、外で食べる支出の水準を比べる指標。",
+        "adoptionCriteria": [
+          "representativeness",
+          "complementarity"
+        ],
+        "readerQuestion": "外食にいくら使う都市はどこか",
+        "targetReaderOrDecision": "食費の使い方を比べる読者"
+      }
+    },
+    {
+      "rankingKey": "food-expenditure-total",
+      "shortLabel": "食料費",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "総務省統計局 家計調査（品目分類）",
+        "sourceUrl": "https://www.stat.go.jp/data/kakei/",
+        "surveyedAt": "2026-10-08",
+        "rationale": "食料への支出総額を県庁所在市で比べる、このテーマ全体の基準となる指標。",
+        "adoptionCriteria": [
+          "representativeness",
+          "comparability",
+          "readerValue"
+        ],
+        "readerQuestion": "食料にいくら使う都市はどこか",
+        "targetReaderOrDecision": "生活費を都市間で比べる読者"
+      }
+    },
+    {
+      "rankingKey": "rice-consumption-expenditure",
+      "shortLabel": "米の支出額",
+      "role": "primary",
+      "selection": {
+        "proposedBy": "総務省統計局 家計調査（品目分類）",
+        "sourceUrl": "https://www.stat.go.jp/data/kakei/",
+        "surveyedAt": "2026-10-08",
+        "rationale": "主食である米への支出を比べる指標。パンや麺と並べて主食の違いを読む出発点になる。",
+        "adoptionCriteria": [
+          "representativeness",
+          "readerValue"
+        ],
+        "readerQuestion": "米にいくら使う都市はどこか",
+        "targetReaderOrDecision": "食の地域差に関心のある読者"
+      }
+    },
+    {
+      "rankingKey": "bread-consumption-quantity",
+      "shortLabel": "パンの購入量",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "総務省統計局 家計調査（品目分類）",
+        "sourceUrl": "https://www.stat.go.jp/data/kakei/",
+        "surveyedAt": "2026-10-08",
+        "rationale": "食パンと他のパンの合計で、米との主食の違いを購入量で読む指標。",
+        "adoptionCriteria": [
+          "complementarity",
+          "readerValue"
+        ],
+        "readerQuestion": "パンをよく買う都市はどこか",
+        "targetReaderOrDecision": "米とパンの違いに関心のある読者"
+      }
+    },
+    {
+      "rankingKey": "confectionery-consumption-expenditure",
+      "shortLabel": "菓子類の支出額",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "総務省統計局 家計調査（品目分類）",
+        "sourceUrl": "https://www.stat.go.jp/data/kakei/",
+        "surveyedAt": "2026-10-08",
+        "rationale": "食事以外の食の支出を代表する指標。",
+        "adoptionCriteria": [
+          "complementarity",
+          "readerValue"
+        ],
+        "readerQuestion": "菓子類にいくら使う都市はどこか",
+        "targetReaderOrDecision": "間食や嗜好品の支出に関心のある読者"
+      }
+    },
+    {
+      "rankingKey": "beef-consumption-quantity",
+      "shortLabel": "牛肉の購入量",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "総務省統計局 家計調査（品目分類）",
+        "sourceUrl": "https://www.stat.go.jp/data/kakei/",
+        "surveyedAt": "2026-10-08",
+        "rationale": "肉の種類による地域差を読むための指標。豚肉と対にして比べる。",
+        "adoptionCriteria": [
+          "complementarity",
+          "readerValue"
+        ],
+        "readerQuestion": "牛肉をよく買う都市はどこか",
+        "targetReaderOrDecision": "肉の好みの地域差に関心のある読者"
+      }
+    },
+    {
+      "rankingKey": "consumption-expenditure-total",
+      "shortLabel": "消費支出総額",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "総務省統計局 家計調査（品目分類）",
+        "sourceUrl": "https://www.stat.go.jp/data/kakei/",
+        "surveyedAt": "2026-10-08",
+        "rationale": "食料費が家計全体のなかで占める位置を読むための分母となる指標。",
+        "adoptionCriteria": [
+          "complementarity",
+          "comparability"
+        ],
+        "readerQuestion": "家計全体の支出が大きい都市はどこか",
+        "targetReaderOrDecision": "食料費の水準を家計全体と合わせて読みたい読者"
+      }
+    },
+    {
+      "rankingKey": "fresh-seafood-consumption-quantity",
+      "shortLabel": "生鮮魚介の購入量",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "総務省統計局 家計調査（品目分類）",
+        "sourceUrl": "https://www.stat.go.jp/data/kakei/",
+        "surveyedAt": "2026-10-08",
+        "rationale": "鮮魚と貝類の合計で、魚介を家庭でどれだけ買うかを読む指標。",
+        "adoptionCriteria": [
+          "representativeness",
+          "readerValue"
+        ],
+        "readerQuestion": "魚介をよく買う都市はどこか",
+        "targetReaderOrDecision": "魚食の地域差に関心のある読者"
+      }
+    },
+    {
+      "rankingKey": "fresh-vegetables-consumption-quantity",
+      "shortLabel": "生鮮野菜の購入量",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "総務省統計局 家計調査（品目分類）",
+        "sourceUrl": "https://www.stat.go.jp/data/kakei/",
+        "surveyedAt": "2026-10-08",
+        "rationale": "野菜の購入量の合計で、食卓の中身の地域差を読む指標。",
+        "adoptionCriteria": [
+          "representativeness",
+          "readerValue"
+        ],
+        "readerQuestion": "野菜をよく買う都市はどこか",
+        "targetReaderOrDecision": "食生活の地域差に関心のある読者"
+      }
+    },
+    {
+      "rankingKey": "pork-consumption-quantity",
+      "shortLabel": "豚肉の購入量",
+      "role": "secondary",
+      "selection": {
+        "proposedBy": "総務省統計局 家計調査（品目分類）",
+        "sourceUrl": "https://www.stat.go.jp/data/kakei/",
+        "surveyedAt": "2026-10-08",
+        "rationale": "牛肉と対にして肉の種類による地域差を読むための指標。",
+        "adoptionCriteria": [
+          "complementarity",
+          "readerValue"
+        ],
+        "readerQuestion": "豚肉をよく買う都市はどこか",
+        "targetReaderOrDecision": "肉の好みの地域差に関心のある読者"
+      }
+    },
+    {
+      "rankingKey": "apple-consumption-quantity",
+      "shortLabel": "りんごの購入量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "nhk-fee-consumption-expenditure",
+      "shortLabel": "NHK放送受信料の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "clam-consumption-expenditure",
+      "shortLabel": "あさりの支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "horse-mackerel-consumption-expenditure",
+      "shortLabel": "あじの支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "squid-consumption-expenditure",
+      "shortLabel": "いかの支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "strawberry-consumption-quantity",
+      "shortLabel": "いちごの購入量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "sardine-consumption-expenditure",
+      "shortLabel": "いわしの支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "internet-fee-consumption-expenditure",
+      "shortLabel": "インターネット接続料の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "whisky-consumption-expenditure",
+      "shortLabel": "ウイスキーの支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "shrimp-consumption-expenditure",
+      "shortLabel": "えびの支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "curtain-consumption-expenditure",
+      "shortLabel": "カーテンの支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "oyster-consumption-quantity",
+      "shortLabel": "かき(貝)の購入量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "katsuobushi-consumption-expenditure",
+      "shortLabel": "かつお節・削り節の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "katsuobushi-consumption-quantity",
+      "shortLabel": "かつお節・削り節の購入量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "crab-consumption-expenditure",
+      "shortLabel": "かにの支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "flounder-consumption-expenditure",
+      "shortLabel": "かれいの支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "flounder-consumption-quantity",
+      "shortLabel": "かれいの購入量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "cabbage-consumption-quantity",
+      "shortLabel": "キャベツの購入量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "cucumber-consumption-quantity",
+      "shortLabel": "きゅうりの購入量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "gyoza-frozen-consumption-expenditure",
+      "shortLabel": "ぎょうざの支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "cable-tv-fee-consumption-expenditure",
+      "shortLabel": "ケーブルテレビ放送受信料の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "coffee-consumption-expenditure",
+      "shortLabel": "コーヒーの支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "coffee-consumption-quantity",
+      "shortLabel": "コーヒーの購入量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "golf-green-fee-consumption-expenditure",
+      "shortLabel": "ゴルフプレー料金の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "golf-equipment-consumption-expenditure",
+      "shortLabel": "ゴルフ用具の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "konbu-consumption-expenditure",
+      "shortLabel": "こんぶの支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "konbu-consumption-quantity",
+      "shortLabel": "こんぶの購入量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "salmon-consumption-expenditure",
+      "shortLabel": "さけの支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "salmon-consumption-quantity",
+      "shortLabel": "さけの購入量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "mackerel-consumption-quantity",
+      "shortLabel": "さばの購入量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "green-beans-consumption-expenditure",
+      "shortLabel": "さやまめの支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "green-beans-consumption-quantity",
+      "shortLabel": "さやまめの購入量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "saury-consumption-quantity",
+      "shortLabel": "さんまの購入量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "freshwater-clam-consumption-expenditure",
+      "shortLabel": "しじみの支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "potato-consumption-quantity",
+      "shortLabel": "じゃがいもの購入量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "jam-consumption-expenditure",
+      "shortLabel": "ジャムの支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "soy-sauce-consumption-quantity",
+      "shortLabel": "しょう油の購入量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "watermelon-consumption-quantity",
+      "shortLabel": "すいかの購入量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "sushi-dining-consumption-expenditure",
+      "shortLabel": "すし(外食)の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "sports-club-fee-consumption-expenditure",
+      "shortLabel": "スポーツクラブ使用料の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "sports-spectating-consumption-expenditure",
+      "shortLabel": "スポーツ観覧料の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "daikon-consumption-quantity",
+      "shortLabel": "だいこんの購入量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "sea-bream-consumption-expenditure",
+      "shortLabel": "たいの支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "sea-bream-consumption-quantity",
+      "shortLabel": "たいの購入量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "octopus-consumption-expenditure",
+      "shortLabel": "たこの支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "onion-consumption-quantity",
+      "shortLabel": "たまねぎの購入量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "tomato-consumption-quantity",
+      "shortLabel": "トマトの購入量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "carrot-consumption-quantity",
+      "shortLabel": "にんじんの購入量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "necktie-consumption-expenditure",
+      "shortLabel": "ネクタイの支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "necktie-consumption-quantity",
+      "shortLabel": "ネクタイの購入量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "chinese-cabbage-consumption-expenditure",
+      "shortLabel": "はくさいの支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "chinese-cabbage-consumption-quantity",
+      "shortLabel": "はくさいの購入量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "butter-consumption-expenditure",
+      "shortLabel": "バターの支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "banana-consumption-quantity",
+      "shortLabel": "バナナの購入量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "hamburger-consumption-expenditure",
+      "shortLabel": "ハンバーガーの支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "beer-consumption-expenditure",
+      "shortLabel": "ビールの支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "beer-consumption-quantity",
+      "shortLabel": "ビールの購入量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "spinach-consumption-expenditure",
+      "shortLabel": "ほうれんそうの支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "spinach-consumption-quantity",
+      "shortLabel": "ほうれんそうの購入量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "scallop-consumption-expenditure",
+      "shortLabel": "ほたて貝の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "margarine-consumption-expenditure",
+      "shortLabel": "マーガリンの支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "margarine-consumption-quantity",
+      "shortLabel": "マーガリンの購入量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "mandarin-consumption-quantity",
+      "shortLabel": "みかんの購入量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "miso-consumption-quantity",
+      "shortLabel": "みその購入量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "mineral-water-consumption-expenditure",
+      "shortLabel": "ミネラルウォーターの支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "bean-sprouts-consumption-quantity",
+      "shortLabel": "もやしの購入量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "lettuce-consumption-quantity",
+      "shortLabel": "レタスの購入量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "lotus-root-consumption-expenditure",
+      "shortLabel": "れんこんの支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "lotus-root-consumption-quantity",
+      "shortLabel": "れんこんの購入量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "wine-consumption-expenditure",
+      "shortLabel": "ワインの支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "drinking-out-consumption-expenditure",
+      "shortLabel": "飲酒代の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "movie-theater-consumption-expenditure",
+      "shortLabel": "映画・演劇等入場料の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "shellfish-consumption-quantity",
+      "shortLabel": "貝類の購入量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "overseas-package-tour-consumption-expenditure",
+      "shortLabel": "外国パック旅行費の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "coffee-shop-consumption-expenditure",
+      "shortLabel": "喫茶代の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "beef-consumption-expenditure",
+      "shortLabel": "牛肉の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "milk-consumption-quantity",
+      "shortLabel": "牛乳の購入量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "seafood-consumption-expenditure",
+      "shortLabel": "魚介類の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "mobile-phone-bill-consumption-expenditure",
+      "shortLabel": "携帯電話通信料の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "landline-bill-consumption-expenditure",
+      "shortLabel": "固定電話通信料の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "black-tea-consumption-expenditure",
+      "shortLabel": "紅茶の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "black-tea-consumption-quantity",
+      "shortLabel": "紅茶の購入量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "domestic-package-tour-consumption-expenditure",
+      "shortLabel": "国内パック旅行費の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "domestic-student-remittance-consumption-expenditure",
+      "shortLabel": "国内遊学仕送り金の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "sugar-consumption-quantity",
+      "shortLabel": "砂糖の購入量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "interior-decoration-consumption-expenditure",
+      "shortLabel": "室内装飾品の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "tuition-consumption-expenditure",
+      "shortLabel": "授業料等の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "accommodation-consumption-expenditure",
+      "shortLabel": "宿泊料の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "shochu-consumption-expenditure",
+      "shortLabel": "焼酎の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "shochu-consumption-quantity",
+      "shortLabel": "焼酎の購入量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "garden-maintenance-consumption-expenditure",
+      "shortLabel": "植木・庭手入れ代の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "white-bread-consumption-expenditure",
+      "shortLabel": "食パンの支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "white-bread-consumption-quantity",
+      "shortLabel": "食パンの購入量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "table-salt-consumption-quantity",
+      "shortLabel": "食塩の購入量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "sake-consumption-expenditure",
+      "shortLabel": "清酒の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "fresh-fruit-consumption-quantity",
+      "shortLabel": "生鮮果物の購入量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "fresh-vegetables-consumption-expenditure",
+      "shortLabel": "生鮮野菜の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "instant-noodles-consumption-quantity",
+      "shortLabel": "即席麺の購入量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "other-bread-consumption-expenditure",
+      "shortLabel": "他のパンの支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "other-bread-consumption-quantity",
+      "shortLabel": "他のパンの購入量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "other-citrus-consumption-expenditure",
+      "shortLabel": "他の柑きつ類の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "other-citrus-consumption-quantity",
+      "shortLabel": "他の柑きつ類の購入量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "other-meat-consumption-expenditure",
+      "shortLabel": "他の生鮮肉の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "other-meat-consumption-quantity",
+      "shortLabel": "他の生鮮肉の購入量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "other-broadcast-fee-consumption-expenditure",
+      "shortLabel": "他の放送受信料の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "carbonated-drink-consumption-expenditure",
+      "shortLabel": "炭酸飲料の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "ramen-dining-consumption-expenditure",
+      "shortLabel": "中華そばの支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "chinese-food-dining-consumption-expenditure",
+      "shortLabel": "中華食の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "kerosene-consumption-expenditure",
+      "shortLabel": "灯油の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "pork-consumption-expenditure",
+      "shortLabel": "豚肉の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "soba-udon-dining-consumption-expenditure",
+      "shortLabel": "日本そば・うどんの支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "natto-consumption-expenditure",
+      "shortLabel": "納豆の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "happoshu-consumption-expenditure",
+      "shortLabel": "発泡酒・ビール風アルコール飲料の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "happoshu-consumption-quantity",
+      "shortLabel": "発泡酒・ビール風アルコール飲料の購入量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "womens-stockings-consumption-expenditure",
+      "shortLabel": "婦人用ストッキングの支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "womens-stockings-consumption-quantity",
+      "shortLabel": "婦人用ストッキングの購入量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "cultural-facility-admission-consumption-expenditure",
+      "shortLabel": "文化施設入場料の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "rice-consumption-quantity",
+      "shortLabel": "米の購入量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "hat-consumption-expenditure",
+      "shortLabel": "帽子の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "hat-consumption-quantity",
+      "shortLabel": "帽子の購入量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "amusement-park-consumption-expenditure",
+      "shortLabel": "遊園地入場・乗物代の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "western-food-dining-consumption-expenditure",
+      "shortLabel": "洋食の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "green-tea-consumption-expenditure",
+      "shortLabel": "緑茶の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "green-tea-consumption-quantity",
+      "shortLabel": "緑茶の購入量",
+      "role": "context"
+    },
+    {
+      "rankingKey": "frozen-food-consumption-expenditure",
+      "shortLabel": "冷凍調理食品の支出額",
+      "role": "context"
+    },
+    {
+      "rankingKey": "japanese-food-dining-consumption-expenditure",
+      "shortLabel": "和食の支出額",
+      "role": "context"
+    }
+  ],
+  "charts": [
+    {
+      "componentKey": "household-food-spending-staple-trend",
+      "componentType": "line-chart",
+      "title": "米・食パン・他のパンの支出額の推移",
+      "componentProps": {
+        "seriesRefs": [
+          {
+            "metricKey": "rice-consumption-expenditure",
+            "label": "米の支出額",
+            "colorRole": "series-1"
+          },
+          {
+            "metricKey": "white-bread-consumption-expenditure",
+            "label": "食パンの支出額",
+            "colorRole": "series-2"
+          },
+          {
+            "metricKey": "other-bread-consumption-expenditure",
+            "label": "他のパンの支出額",
+            "colorRole": "series-3"
+          }
+        ]
+      },
+      "relatedRankingKeys": [
+        "rice-consumption-expenditure",
+        "white-bread-consumption-expenditure",
+        "other-bread-consumption-expenditure"
+      ],
+      "annotation": "県庁所在市の二人以上世帯の年間支出額です。県全体の値ではありません。",
+      "sourceName": "総務省 家計調査",
+      "sourceLink": "https://www.stat.go.jp/data/kakei/",
+      "gridColumnSpan": 12,
+      "dataSource": "ranking",
+      "sortOrder": 10,
+      "comparisonBasis": "同じ都市の中で、米・食パン・他のパンの支出額の時間変化を並べる",
+      "visualizationRationale": "同じ単位（円）の3系列を同一軸で重ねて推移の違いを読むため折れ線を選定",
+      "section": "grains"
+    },
+    {
+      "componentKey": "household-food-spending-alcohol-trend",
+      "componentType": "line-chart",
+      "title": "酒類の支出額の推移",
+      "componentProps": {
+        "seriesRefs": [
+          {
+            "metricKey": "beer-consumption-expenditure",
+            "label": "ビールの支出額",
+            "colorRole": "series-1"
+          },
+          {
+            "metricKey": "happoshu-consumption-expenditure",
+            "label": "発泡酒・ビール風アルコール飲料の支出額",
+            "colorRole": "series-2"
+          },
+          {
+            "metricKey": "sake-consumption-expenditure",
+            "label": "清酒の支出額",
+            "colorRole": "series-3"
+          },
+          {
+            "metricKey": "wine-consumption-expenditure",
+            "label": "ワインの支出額",
+            "colorRole": "series-4"
+          },
+          {
+            "metricKey": "shochu-consumption-expenditure",
+            "label": "焼酎の支出額",
+            "colorRole": "series-5"
+          }
+        ]
+      },
+      "relatedRankingKeys": [
+        "beer-consumption-expenditure",
+        "happoshu-consumption-expenditure",
+        "sake-consumption-expenditure",
+        "wine-consumption-expenditure",
+        "shochu-consumption-expenditure"
+      ],
+      "annotation": "県庁所在市の二人以上世帯の年間支出額です。県全体の値ではありません。",
+      "sourceName": "総務省 家計調査",
+      "sourceLink": "https://www.stat.go.jp/data/kakei/",
+      "gridColumnSpan": 12,
+      "dataSource": "ranking",
+      "sortOrder": 20,
+      "comparisonBasis": "同じ都市の中で、酒類5種の支出額の時間変化を並べる",
+      "visualizationRationale": "同じ単位（円）の複数系列の推移を重ねて読むため折れ線を選定",
+      "section": "drinks"
+    },
+    {
+      "componentKey": "md-household-food-spending-faq",
+      "componentType": "markdown-section",
+      "title": "よくある質問",
+      "componentProps": {
+        "displayMode": "faq",
+        "markdown": "### Q1: この数値は都道府県全体の値ですか？\n\n都道府県庁所在市（東京都は特別区部）の二人以上世帯が調査対象です。県全体の平均ではないため、市と県の暮らしの違いは反映されません。\n\n### Q2: 支出額と消費量はどう違いますか？\n\n支出額は購入にかけた金額（円）、消費量は購入した数量（重さや容量）です。価格の高い品目を買うと、量が同じでも支出額は大きくなります。\n\n### Q3: 調査世帯が少ないので数値が動きやすいのでは？\n\n都市ごとの調査世帯数は多くないため、特に品目別の値は年によって動きます。1年の順位だけで結論を出さず、推移とあわせて読んでください。"
+      },
+      "sourceName": "総務省 家計調査",
+      "sourceLink": "https://www.stat.go.jp/data/kakei/",
+      "gridColumnSpan": 12,
+      "gridColumnSpanTablet": null,
+      "gridColumnSpanSm": null,
+      "dataSource": "ranking",
+      "section": "reading",
+      "sortOrder": 90
+    }
+  ],
+  "metricGroups": [
+    {
+      "key": "household-totals",
+      "title": "消費支出と食料費",
+      "rankingKeys": [
+        "food-expenditure-total",
+        "consumption-expenditure-total"
+      ],
+      "defaultCheckedKeys": [
+        "food-expenditure-total",
+        "consumption-expenditure-total"
+      ],
+      "comparisonYear": "2024"
+    },
+    {
+      "key": "rice",
+      "title": "米",
+      "rankingKeys": [
+        "rice-consumption-expenditure",
+        "rice-consumption-quantity"
+      ],
+      "defaultCheckedKeys": [
+        "rice-consumption-expenditure",
+        "rice-consumption-quantity"
+      ],
+      "comparisonYear": "2024"
+    },
+    {
+      "key": "bread-noodles",
+      "title": "パンと即席麺",
+      "rankingKeys": [
+        "bread-consumption-quantity",
+        "white-bread-consumption-expenditure",
+        "white-bread-consumption-quantity",
+        "other-bread-consumption-expenditure",
+        "other-bread-consumption-quantity",
+        "instant-noodles-consumption-quantity"
+      ],
+      "defaultCheckedKeys": [
+        "bread-consumption-quantity",
+        "white-bread-consumption-expenditure"
+      ],
+      "comparisonYear": "2024"
+    },
+    {
+      "key": "seafood-total",
+      "title": "魚介類の合計",
+      "rankingKeys": [
+        "fresh-seafood-consumption-quantity",
+        "seafood-consumption-expenditure",
+        "shellfish-consumption-quantity"
+      ],
+      "defaultCheckedKeys": [
+        "fresh-seafood-consumption-quantity",
+        "seafood-consumption-expenditure"
+      ],
+      "comparisonYear": "2024"
+    },
+    {
+      "key": "fish-everyday",
+      "title": "さけ・さば・さんま・あじ・いわし",
+      "rankingKeys": [
+        "salmon-consumption-expenditure",
+        "salmon-consumption-quantity",
+        "mackerel-consumption-quantity",
+        "saury-consumption-quantity",
+        "horse-mackerel-consumption-expenditure",
+        "sardine-consumption-expenditure"
+      ],
+      "defaultCheckedKeys": [
+        "salmon-consumption-expenditure",
+        "salmon-consumption-quantity"
+      ],
+      "comparisonYear": "2024"
+    },
+    {
+      "key": "fish-white",
+      "title": "たい・かれい",
+      "rankingKeys": [
+        "sea-bream-consumption-expenditure",
+        "sea-bream-consumption-quantity",
+        "flounder-consumption-expenditure",
+        "flounder-consumption-quantity"
+      ],
+      "defaultCheckedKeys": [
+        "sea-bream-consumption-expenditure",
+        "sea-bream-consumption-quantity"
+      ],
+      "comparisonYear": "2024"
+    },
+    {
+      "key": "shellfish-crustacean",
+      "title": "貝・えび・かに・いか・たこ",
+      "rankingKeys": [
+        "clam-consumption-expenditure",
+        "freshwater-clam-consumption-expenditure",
+        "oyster-consumption-quantity",
+        "scallop-consumption-expenditure",
+        "shrimp-consumption-expenditure",
+        "crab-consumption-expenditure",
+        "squid-consumption-expenditure",
+        "octopus-consumption-expenditure"
+      ],
+      "defaultCheckedKeys": [
+        "clam-consumption-expenditure",
+        "freshwater-clam-consumption-expenditure"
+      ],
+      "comparisonYear": "2024"
+    },
+    {
+      "key": "dashi-seaweed",
+      "title": "こんぶ・かつお節",
+      "rankingKeys": [
+        "konbu-consumption-expenditure",
+        "konbu-consumption-quantity",
+        "katsuobushi-consumption-expenditure",
+        "katsuobushi-consumption-quantity"
+      ],
+      "defaultCheckedKeys": [
+        "konbu-consumption-expenditure",
+        "konbu-consumption-quantity"
+      ],
+      "comparisonYear": "2024"
+    },
+    {
+      "key": "meat",
+      "title": "牛肉・豚肉・その他の生鮮肉",
+      "rankingKeys": [
+        "beef-consumption-quantity",
+        "pork-consumption-quantity",
+        "beef-consumption-expenditure",
+        "pork-consumption-expenditure",
+        "other-meat-consumption-expenditure",
+        "other-meat-consumption-quantity"
+      ],
+      "defaultCheckedKeys": [
+        "beef-consumption-quantity",
+        "pork-consumption-quantity"
+      ],
+      "comparisonYear": "2024"
+    },
+    {
+      "key": "dairy-fats",
+      "title": "牛乳・バター・マーガリン",
+      "rankingKeys": [
+        "milk-consumption-quantity",
+        "butter-consumption-expenditure",
+        "margarine-consumption-expenditure"
+      ],
+      "defaultCheckedKeys": [
+        "milk-consumption-quantity",
+        "butter-consumption-expenditure"
+      ],
+      "comparisonYear": "2024"
+    },
+    {
+      "key": "vegetables-total",
+      "title": "生鮮野菜の合計",
+      "rankingKeys": [
+        "fresh-vegetables-consumption-quantity",
+        "fresh-vegetables-consumption-expenditure"
+      ],
+      "defaultCheckedKeys": [
+        "fresh-vegetables-consumption-quantity",
+        "fresh-vegetables-consumption-expenditure"
+      ],
+      "comparisonYear": "2024"
+    },
+    {
+      "key": "leafy-vegetables",
+      "title": "キャベツ・はくさい・レタス・ほうれんそう",
+      "rankingKeys": [
+        "cabbage-consumption-quantity",
+        "chinese-cabbage-consumption-expenditure",
+        "chinese-cabbage-consumption-quantity",
+        "lettuce-consumption-quantity",
+        "spinach-consumption-expenditure",
+        "spinach-consumption-quantity"
+      ],
+      "defaultCheckedKeys": [
+        "cabbage-consumption-quantity",
+        "chinese-cabbage-consumption-expenditure"
+      ],
+      "comparisonYear": "2024"
+    },
+    {
+      "key": "root-vegetables",
+      "title": "だいこん・にんじん・たまねぎ・じゃがいも・れんこん",
+      "rankingKeys": [
+        "daikon-consumption-quantity",
+        "carrot-consumption-quantity",
+        "onion-consumption-quantity",
+        "potato-consumption-quantity",
+        "lotus-root-consumption-expenditure",
+        "lotus-root-consumption-quantity"
+      ],
+      "defaultCheckedKeys": [
+        "daikon-consumption-quantity",
+        "carrot-consumption-quantity"
+      ],
+      "comparisonYear": "2024"
+    },
+    {
+      "key": "fruit-vegetables",
+      "title": "トマト・きゅうり・さやまめ・もやし",
+      "rankingKeys": [
+        "tomato-consumption-quantity",
+        "cucumber-consumption-quantity",
+        "green-beans-consumption-expenditure",
+        "green-beans-consumption-quantity",
+        "bean-sprouts-consumption-quantity"
+      ],
+      "defaultCheckedKeys": [
+        "tomato-consumption-quantity",
+        "cucumber-consumption-quantity"
+      ],
+      "comparisonYear": "2024"
+    },
+    {
+      "key": "fruit",
+      "title": "果物",
+      "rankingKeys": [
+        "fresh-fruit-consumption-quantity",
+        "apple-consumption-quantity",
+        "strawberry-consumption-quantity",
+        "watermelon-consumption-quantity",
+        "banana-consumption-quantity",
+        "mandarin-consumption-quantity",
+        "other-citrus-consumption-expenditure",
+        "other-citrus-consumption-quantity"
+      ],
+      "defaultCheckedKeys": [
+        "fresh-fruit-consumption-quantity",
+        "apple-consumption-quantity"
+      ],
+      "comparisonYear": "2024"
+    },
+    {
+      "key": "seasonings",
+      "title": "みそ・しょう油・砂糖・食塩・マーガリン",
+      "rankingKeys": [
+        "miso-consumption-quantity",
+        "soy-sauce-consumption-quantity",
+        "sugar-consumption-quantity",
+        "table-salt-consumption-quantity",
+        "margarine-consumption-quantity"
+      ],
+      "defaultCheckedKeys": [
+        "miso-consumption-quantity",
+        "soy-sauce-consumption-quantity"
+      ],
+      "comparisonYear": "2024"
+    },
+    {
+      "key": "sweets-processed",
+      "title": "菓子・ジャム・加工食品",
+      "rankingKeys": [
+        "confectionery-consumption-expenditure",
+        "jam-consumption-expenditure",
+        "natto-consumption-expenditure",
+        "gyoza-frozen-consumption-expenditure",
+        "frozen-food-consumption-expenditure"
+      ],
+      "defaultCheckedKeys": [
+        "confectionery-consumption-expenditure",
+        "jam-consumption-expenditure"
+      ],
+      "comparisonYear": "2024"
+    },
+    {
+      "key": "dining-out-total",
+      "title": "外食・喫茶・飲酒代",
+      "rankingKeys": [
+        "dining-out-consumption-expenditure",
+        "coffee-shop-consumption-expenditure",
+        "drinking-out-consumption-expenditure"
+      ],
+      "defaultCheckedKeys": [
+        "dining-out-consumption-expenditure",
+        "coffee-shop-consumption-expenditure"
+      ],
+      "comparisonYear": "2024"
+    },
+    {
+      "key": "dining-cuisines",
+      "title": "外食の種類",
+      "rankingKeys": [
+        "japanese-food-dining-consumption-expenditure",
+        "western-food-dining-consumption-expenditure",
+        "chinese-food-dining-consumption-expenditure",
+        "ramen-dining-consumption-expenditure",
+        "soba-udon-dining-consumption-expenditure",
+        "sushi-dining-consumption-expenditure",
+        "hamburger-consumption-expenditure"
+      ],
+      "defaultCheckedKeys": [
+        "japanese-food-dining-consumption-expenditure",
+        "western-food-dining-consumption-expenditure"
+      ],
+      "comparisonYear": "2024"
+    },
+    {
+      "key": "tea-coffee",
+      "title": "コーヒー・緑茶・紅茶",
+      "rankingKeys": [
+        "coffee-consumption-expenditure",
+        "coffee-consumption-quantity",
+        "green-tea-consumption-expenditure",
+        "green-tea-consumption-quantity",
+        "black-tea-consumption-expenditure",
+        "black-tea-consumption-quantity"
+      ],
+      "defaultCheckedKeys": [
+        "coffee-consumption-expenditure",
+        "coffee-consumption-quantity"
+      ],
+      "comparisonYear": "2024"
+    },
+    {
+      "key": "soft-drinks",
+      "title": "ミネラルウォーター・炭酸飲料",
+      "rankingKeys": [
+        "mineral-water-consumption-expenditure",
+        "carbonated-drink-consumption-expenditure"
+      ],
+      "defaultCheckedKeys": [
+        "mineral-water-consumption-expenditure",
+        "carbonated-drink-consumption-expenditure"
+      ],
+      "comparisonYear": "2024"
+    },
+    {
+      "key": "alcohol-spending",
+      "title": "酒類の支出額",
+      "rankingKeys": [
+        "beer-consumption-expenditure",
+        "happoshu-consumption-expenditure",
+        "sake-consumption-expenditure",
+        "wine-consumption-expenditure",
+        "whisky-consumption-expenditure",
+        "shochu-consumption-expenditure"
+      ],
+      "defaultCheckedKeys": [
+        "beer-consumption-expenditure",
+        "happoshu-consumption-expenditure"
+      ],
+      "comparisonYear": "2024"
+    },
+    {
+      "key": "alcohol-volume",
+      "title": "酒類の消費量",
+      "rankingKeys": [
+        "beer-consumption-quantity",
+        "happoshu-consumption-quantity",
+        "shochu-consumption-quantity"
+      ],
+      "defaultCheckedKeys": [
+        "beer-consumption-quantity",
+        "happoshu-consumption-quantity"
+      ],
+      "comparisonYear": "2024"
+    },
+    {
+      "key": "communication",
+      "title": "通信・放送",
+      "rankingKeys": [
+        "internet-fee-consumption-expenditure",
+        "mobile-phone-bill-consumption-expenditure",
+        "landline-bill-consumption-expenditure",
+        "nhk-fee-consumption-expenditure",
+        "cable-tv-fee-consumption-expenditure",
+        "other-broadcast-fee-consumption-expenditure"
+      ],
+      "defaultCheckedKeys": [
+        "internet-fee-consumption-expenditure",
+        "mobile-phone-bill-consumption-expenditure"
+      ],
+      "comparisonYear": "2024"
+    },
+    {
+      "key": "leisure",
+      "title": "教養娯楽",
+      "rankingKeys": [
+        "movie-theater-consumption-expenditure",
+        "cultural-facility-admission-consumption-expenditure",
+        "amusement-park-consumption-expenditure",
+        "sports-club-fee-consumption-expenditure",
+        "sports-spectating-consumption-expenditure",
+        "golf-green-fee-consumption-expenditure",
+        "golf-equipment-consumption-expenditure"
+      ],
+      "defaultCheckedKeys": [
+        "movie-theater-consumption-expenditure",
+        "cultural-facility-admission-consumption-expenditure"
+      ],
+      "comparisonYear": "2024"
+    },
+    {
+      "key": "travel",
+      "title": "旅行と宿泊",
+      "rankingKeys": [
+        "domestic-package-tour-consumption-expenditure",
+        "overseas-package-tour-consumption-expenditure",
+        "accommodation-consumption-expenditure"
+      ],
+      "defaultCheckedKeys": [
+        "domestic-package-tour-consumption-expenditure",
+        "overseas-package-tour-consumption-expenditure"
+      ],
+      "comparisonYear": "2024"
+    },
+    {
+      "key": "schooling",
+      "title": "授業料と仕送り",
+      "rankingKeys": [
+        "tuition-consumption-expenditure",
+        "domestic-student-remittance-consumption-expenditure"
+      ],
+      "defaultCheckedKeys": [
+        "tuition-consumption-expenditure",
+        "domestic-student-remittance-consumption-expenditure"
+      ],
+      "comparisonYear": "2024"
+    },
+    {
+      "key": "home-goods",
+      "title": "住まいの手入れと暖房",
+      "rankingKeys": [
+        "curtain-consumption-expenditure",
+        "interior-decoration-consumption-expenditure",
+        "garden-maintenance-consumption-expenditure",
+        "kerosene-consumption-expenditure"
+      ],
+      "defaultCheckedKeys": [
+        "curtain-consumption-expenditure",
+        "interior-decoration-consumption-expenditure"
+      ],
+      "comparisonYear": "2024"
+    },
+    {
+      "key": "clothing-spending",
+      "title": "ネクタイ・帽子・ストッキングの支出",
+      "rankingKeys": [
+        "necktie-consumption-expenditure",
+        "hat-consumption-expenditure",
+        "womens-stockings-consumption-expenditure",
+        "womens-stockings-consumption-quantity"
+      ],
+      "defaultCheckedKeys": [
+        "necktie-consumption-expenditure",
+        "hat-consumption-expenditure"
+      ],
+      "comparisonYear": "2024"
+    },
+    {
+      "key": "clothing-pieces",
+      "title": "ネクタイ・帽子の購入数",
+      "rankingKeys": [
+        "necktie-consumption-quantity",
+        "hat-consumption-quantity"
+      ],
+      "defaultCheckedKeys": [
+        "necktie-consumption-quantity",
+        "hat-consumption-quantity"
+      ],
+      "comparisonYear": "2024"
+    }
+  ],
+  "sections": [
+    {
+      "key": "household-food-spending-totals",
+      "title": "暮らし全体と食料費",
+      "description": "消費支出総額と食料費を、県庁所在市の二人以上世帯で比べます。県全体の値ではありません。",
+      "metricGroupKeys": [
+        "household-totals"
+      ]
+    },
+    {
+      "key": "household-food-spending-grains",
+      "title": "米・パン・麺",
+      "description": "主食の支出額と購入量を比べます。支出額は円、購入量は重さで、尺度が異なるため同じ軸で優劣を決めません。",
+      "metricGroupKeys": [
+        "rice",
+        "bread-noodles"
+      ],
+      "chartKeys": [
+        "household-food-spending-staple-trend"
+      ]
+    },
+    {
+      "key": "household-food-spending-seafood",
+      "title": "魚介類",
+      "description": "魚介の支出額と購入量を魚種別に比べます。県庁所在市の家庭が買った量で、漁獲量や水揚げ量ではありません。",
+      "metricGroupKeys": [
+        "seafood-total",
+        "fish-everyday",
+        "fish-white",
+        "shellfish-crustacean",
+        "dashi-seaweed"
+      ]
+    },
+    {
+      "key": "household-food-spending-meat-dairy",
+      "title": "肉・乳製品",
+      "description": "牛肉・豚肉と乳製品の購入量と支出額を比べます。",
+      "metricGroupKeys": [
+        "meat",
+        "dairy-fats"
+      ]
+    },
+    {
+      "key": "household-food-spending-vegetables-fruit",
+      "title": "野菜・果物",
+      "description": "生鮮野菜と果物の購入量を品目別に比べます。家庭で買った量で、産地の生産量ではありません。",
+      "metricGroupKeys": [
+        "vegetables-total",
+        "leafy-vegetables",
+        "root-vegetables",
+        "fruit-vegetables",
+        "fruit"
+      ]
+    },
+    {
+      "key": "household-food-spending-pantry",
+      "title": "調味料・菓子・加工食品",
+      "description": "調味料の購入量と、菓子・加工食品の支出額を比べます。",
+      "metricGroupKeys": [
+        "seasonings",
+        "sweets-processed"
+      ]
+    },
+    {
+      "key": "household-food-spending-dining-out",
+      "title": "外食",
+      "description": "外食・喫茶・飲酒代の支出額と、外食の種類別の支出額を比べます。",
+      "metricGroupKeys": [
+        "dining-out-total",
+        "dining-cuisines"
+      ]
+    },
+    {
+      "key": "household-food-spending-drinks",
+      "title": "飲料と酒類",
+      "description": "茶・コーヒー・清涼飲料・酒類の支出額と購入量を比べます。",
+      "metricGroupKeys": [
+        "tea-coffee",
+        "soft-drinks",
+        "alcohol-spending",
+        "alcohol-volume"
+      ],
+      "chartKeys": [
+        "household-food-spending-alcohol-trend"
+      ]
+    },
+    {
+      "key": "household-food-spending-beyond-food",
+      "title": "食料以外の家計支出",
+      "description": "通信・教養娯楽・旅行・住まい・被服などの支出額を比べます。食卓の支出と並べて家計全体の使い方を見るための参考です。",
+      "metricGroupKeys": [
+        "communication",
+        "leisure",
+        "travel",
+        "schooling",
+        "home-goods",
+        "clothing-spending",
+        "clothing-pieces"
+      ],
+      "chartKeys": [
+        "md-household-food-spending-faq"
+      ]
+    }
+  ],
+  "keywords": [
+    "食費",
+    "家計調査",
+    "消費支出",
+    "外食",
+    "米",
+    "パン",
+    "魚介",
+    "肉",
+    "野菜",
+    "果物",
+    "酒",
+    "県庁所在市",
+    "都道府県",
+    "ランキング"
+  ],
+  "rejectedCandidates": [
+    {
+      "rankingKey": "male-scheduled-earnings",
+      "reason": "賃金構造基本統計調査の男性所定内給与額（月額・2022年のみ）で、家計調査の品目別支出・消費量ではない。食卓と家計の支出の主題外のため、賃金を扱う labor-wages / occupation-salary に任せる。"
+    },
+    {
+      "rankingKey": "education-cost-all-households",
+      "reason": "全世帯の教育費で、県庁所在市の二人以上世帯を対象とする家計調査の品目別系列とは出所・地域単位が異なる。同一尺度で並べられないため除外する。"
+    },
+    {
+      "rankingKey": "current-savings-balance-multi-person-households",
+      "reason": "貯蓄現在高は品目別の支出・消費量ではなく、同じ主題を扱う household-assets-debt テーマの指標と重複するため除外する。"
+    }
+  ]
+}
