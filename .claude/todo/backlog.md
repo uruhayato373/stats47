@@ -29,6 +29,7 @@ updated: 2026-10-06
 - **経緯**: 週次の `fetch-metrics-weekly` は main を checkout して計測し、`.claude/state/metrics/` 全体を develop へ上書きコピーしていた。2026-10-04 の W40 コミット e45f5a0ee は、main に未マージだった 15 ファイル (page-quality 週次監査・KSJ / e-Stat 月次記録・psi / cloudflare / URL Inspection の履歴など) を main の古い版へ戻した。`psi-audit-daily` と `cloudflare-usage-daily` も同じ形で、main が遅れている間は前日以前の行を毎日失っていた (psi は 4 月以降の 55 日分)。`deploy-workers` の improvement-log の書き戻しも同じ形だった。2026-10-05 に develop で 4 本を直し、消えた行を git 履歴から戻した。今後の再発は `workflow-commit-back.test.cjs` の `findForeignTreeRestore` が止める。
 - **マージ済み (2026-10-06 11:34 JST)**: PR #1070 (main `881505c2e`) で main へ入り、本番デプロイと post-deploy smoke は成功した。
   main の `psi-audit-daily` は `ref: develop` の新しい定義になっている。残りは下の完了条件の確認だけ (psi 日次 10-07 02:00 JST・cloudflare 日次 02:30 JST・W41 週次 10-11 20:00 JST)。
+- **2026-10-08 確認 (日次分)**: psi 日次 `d0d1bfa96` (10-06) と `bf8c1a9f3` (10-07) は `data/psi/history.csv` の削除行 0。cloudflare 日次 `f6e57c1c7` (10-06) と `40f5b3284` (10-07) の削除行は 2026-08-27〜09-05 の 10 行だけで、どれも保持 30 日を過ぎた行。残りは W41 週次 (10-11 20:00 JST) のコミットの確認だけ。
 - **完了条件**: マージ後の最初の psi 日次・cloudflare 日次・W41 週次の各コミットで、`git diff <commit>^ <commit> -- data/psi/history.csv data/cloudflare/history.csv` に削除行が無い (cloudflare は保持 30 日を超えた古い行の削除だけ許す)。週次コミットが `.claude/state/metrics/{page-quality,monthly-jobs,authenticated}` を変えていない。マージ前に行が再び消えていたら、2026-10-05 の復元コミットと同じ方法 (develop 上の全版の和集合) で戻す。
 
 ### [A8-CROSSCHECK-EXCEED-01] A8 の 9 月検算で専用案件のクリックがサイト別合計を超える原因を確定する
@@ -500,39 +501,15 @@ updated: 2026-10-06
   (`DERIVED_FILES`。キーではないので件数の増減には数えない)。手順書にも同じ 1 行と、正しい出力先を書いた。既知キーを 1 件消すと
   `--check` が exit 1、job と同じ順で作り直すと exit 0 になることを確かめた。**残り**: workflow は main の定義で動くので、次の公開の後、
   キーが増える keys PR で Static Gates が通るのを見てからカードを消す。
+- **2026-10-08**: 修正前の job が作った keys PR uruhayato373/stats47#1103 は、キーが今日のリリースで main に同期済みで差が日付のコメント 1 行だけになっていたので閉じた (この PR では検証できない)。次に sync-ranking-keys がキーの増える PR を作ったときに確かめる。
 - **完了条件**: キーが増える keys PR で `generate-ranking-prominence.ts --check` が通る。
 
-### [RANKING-ACTIVE-WITHOUT-VALUES-01] ブログの関連ランキングが、非公開の指標の古い item を読んで 410 のページへリンクする
-タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-08] [領域:データ] [進行中]
+### [RANKING-ACTIVE-WITHOUT-VALUES-01] 市区町村専用 2 指標の、どこからも読まれなくなった都道府県 item.json を R2 から消す
+タグ: [コンテンツ品質] [種類:改善] [実行:ユーザー] [起票:2026-10-08] [領域:データ]
 
-- **事実 (2026-10-08)**: `foreign-population-per-100k` と `population-density-habitable` は `entities: ["city"]` の市区町村専用指標で、
-  都道府県のランキングは無い (既知キー一覧に無く `/ranking/<key>` は 410)。R2 には 2026-08-26 生成の都道府県 `item.json` が `hook` 無しで残る。
-  ブログ記事の `rankingRefs` は非公開の 7 指標を 17 記事で持ち、記事下の関連ランキング (`RelatedRankingsSection`) がそれを読んでいた。
-  `next build` の prerender で `item.hook must be a non-empty string` が 2 件記録され、`international-cooperation-volunteer-map` は
-  `/ranking/volunteer-activity-international-cooperation-15plus` (410) へのリンクを 2 本描いていた。
-- **済**: 関連ランキングを既知キー一覧 (`KNOWN_RANKING_KEYS`) にある指標だけに絞った (develop。テスト 3 件、修正前の部品では 3 件とも落ちることを確認)。
-  ブログは build 時に焼かれるので、本番に出るのは次の develop→main のデプロイ。
-- **次**: 次のデプロイの CI build ログに上の 2 件のエラーが出ないこと、本番の `/blog/international-cooperation-volunteer-map` に 410 へのリンクが無いことを確かめる。
-  R2 に残る 2 指標の古い都道府県 `item.json` は、どこからも読まれなくなるので消してよいが、R2 の削除は承認を取ってから行う。
-- **完了条件**: 本番デプロイ後の build ログに 2 指標の item のエラーが無く、上の記事の関連ランキングに 410 のリンクが無い。
-
-### [DATA-REFRESH-DERIVED-FROM-DEVELOP-01] develop への push で起動した data-refresh が、未リリースの develop から派生 snapshot を作って本番 R2 に出す
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-08] [領域:データ] [進行中]
-
-- **事実 (2026-10-08)**: `data-refresh.yml` は push 起動のとき `ref: github.ref_name` (= develop) を checkout し、手順 10 で派生 snapshot を scope all で作り直して R2 へ push する。
-  run 37693107860 の後、本番 R2 の `app/page-components/theme/{tourism,consumer-prices}.json` は develop の
-  `apps/web/scripts/data/page-components/theme/*.json` と一致した。main のコードはまだ変更前のカタログで、PR #1100 のマージ前だった。
-  `sync-snapshots.yml` は main を checkout する設計なので、同じ R2 に main 由来と develop 由来の書き手が混ざっている。
-  今回は本番の 2 テーマが 200 でエラー表示も無かったが、develop の page-components や ranking-items が壊れていれば、デプロイ前に本番が壊れる。
-- **2026-10-08 オーナー判断**: develop への push で起動したときは、git の設定だけから作る図の定義 (page-components) を作らない。
-  観測値から作るもの (ranking-items など) は、新しい指標をマージ前に R2 で確かめられるよう今までどおり作る。
-  広告 (affiliate-ads) は `publish-affiliate-ads.yml` が develop から出す設計なので除外しない。
-- **2026-10-08 実装 (develop)**: `run.sh` に `--skip <task,...>` を足し (存在しない task 名は何も作らずに失敗)、`data-refresh.yml` の手順 10 は
-  push 起動のときだけ `--skip page-components` を付ける。契約テスト 2 本に検査を足し、除外の処理と push の条件を壊すとそれぞれ落ちることを確かめた。
-  **残り**: workflow は develop の push で起動した run が develop の定義で動くので、次に develop へ data-refresh を依頼した run のログで
-  「⏭️ page-components は --skip で作らない」が出て、本番 R2 の page-components が変わらないことを確かめてからカードを消す。
-- **完了条件**: develop への push で起動した data-refresh の後、本番 R2 の page-components が main の内容のままである。
-
+- **経緯**: ブログの関連ランキングが非公開の指標の古い `item.json` を読み、410 のページへリンクしていた。関連ランキングを既知キー一覧の指標だけに絞り (develop の修正)、2026-10-08 の本番デプロイ (uruhayato373/stats47#1108) で確かめた: デプロイの build ログに `item.hook must be a non-empty string` は 0 件、本番の `/blog/international-cooperation-volunteer-map` の `/ranking/` リンクは 2 本とも 200 で、410 だった `volunteer-activity-international-cooperation-15plus` へのリンクは無い。
+- **残り**: R2 に残る `foreign-population-per-100k` と `population-density-habitable` の都道府県 `item.json` (2026-08-26 生成) は、もうどこからも読まれない。R2 の削除はオーナーの承認が要る (削除の入口は `r2-maintenance.yml` の `RETENTION_TARGETS` に対象を足す形)。
+- **完了条件**: 承認のうえで 2 つの `app/ranking/<key>/item.json` が R2 から消えている。消さないと決めた場合はこのカードを消す。
 ### [SEO-CTR-CANDIDATES-01] 取りこぼしクリックの大きい 7 ページを search-growth に渡し、食い合いの 2 組を先に確かめる
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-07] [期日:2026-10-25] [領域:サイト]
 
