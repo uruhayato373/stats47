@@ -24,6 +24,7 @@ import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
+import { latestPartition } from "../lib/latest-partition.mjs";
 import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..", "..");
@@ -85,9 +86,9 @@ export function computeRanks(values) {
 async function fetchRankingLatest(key) {
   const values = await fetchJson(`${R2}/app/ranking/${key}/values.json`);
   if (!values) return null;
-  const partitions = (values.partitions || []).slice().sort((a, b) => (a.yearCode > b.yearCode ? 1 : -1));
-  if (partitions.length === 0) return null;
-  const partition = partitions[partitions.length - 1];
+  // 最新年は yearCode の最大で選ぶ (values.json の並びに頼らない)
+  const partition = latestPartition(values.partitions);
+  if (!partition) return null;
   const rows = computeRanks(partition.values || []);
   if (rows.length === 0) return null;
 

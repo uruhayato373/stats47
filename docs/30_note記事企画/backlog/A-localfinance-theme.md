@@ -118,4 +118,4 @@ DB 登録済み (13 年分: 2012-2024)。`data_source: soumu`、団体コード�
 - H24 (2012) は `.xls`、H25 (2013) 以降は `.xlsx`
 - 団体コード → area_code 変換: 先頭 2 桁 (例: `010006` → `01`)
 - **注意**: H24-H25 の値 (100〜112) は異常値ではない。国家公務員給与が東日本大震災復興のため臨時削減された結果の相対変動
-- 更新手順: 総務省ページから PDF/Excel 取得 → Python パース (`openpyxl` / `xlrd`) → 47 県分 JSON 生成 → `better-sqlite3` でローカル D1 へ INSERT → `indicators` の `available_years`・`latest_year` を UPDATE → `/sync-snapshots` で R2 反映
+- 更新手順 (2026-10-09 時点の現行経路): 総務省ページから PDF/Excel 取得 → パース (`.claude/scripts/data/lib/read-xls.mjs` 等) → 47 県分を `.claude/scripts/data/lib/stats-values-writer.mjs` で正典の形 (`.local/r2/app/stats/laspeyres-index-prefecture/values.json`) に書き出す → `diff-push-r2.ts --prefix app/stats/laspeyres-index-prefecture/` で R2 へ反映 → metric config `packages/data-configs/src/metrics/laspeyres-index-prefecture.ts` の `years` を更新 → `sync-snapshots` の `ranking-items` / `ranking-values` で配信用に再生成。R2 には 2012〜2025 の 14 年分がある (2026-10-09 に GET で確認)。旧手順のローカル D1 への INSERT は DB レス化で廃止

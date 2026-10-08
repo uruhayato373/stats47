@@ -33,7 +33,7 @@ export const crudeDeathRate: MetricConfig = {
   "calculation": {
     "isCalculated": false,
   },
-  "seoTitle": "粗死亡率ランキング都道府県【2023年】｜1位秋田県（19.17‐）",
-  "seoDescription": "2023年の粗死亡率の都道府県別ランキング。1位秋田県（19.17‐）、最下位東京都（9.74‐）で2.0倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "粗死亡率ランキング都道府県【2023年】｜1位秋田県（19.17）",
+  "seoDescription": "2023年の粗死亡率の都道府県別ランキング。1位秋田県（19.17）、最下位東京都（9.74）で2.0倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
 };

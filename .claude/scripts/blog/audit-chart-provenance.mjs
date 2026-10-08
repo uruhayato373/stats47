@@ -60,6 +60,38 @@ const STATE_DIR = path.join(PROJECT_ROOT, datasetDir("blog.operations"));
 const QUEUE_IN = path.join(STATE_DIR, 'svg-lineage-queue.json');
 const CONC = 24;
 const args = process.argv.slice(2);
+const USAGE = `Usage: node .claude/scripts/blog/audit-chart-provenance.mjs [--limit N] [--json] [--staged]
+
+  --limit N  先頭 N 件だけ監査する
+  --json     結果を JSON で標準出力へ出す
+  --staged   .local/r2 の staging にある source.json を優先して読む
+  --help,-h  この説明を出して終了する (何も書き込まない)
+
+出力: chart-provenance-queue.json / chart-provenance-LATEST.md (置き場は台帳 blog.operations)`;
+// --help でも全件監査して是正キューを書き換えていた (BLOG-AUDIT-PROVENANCE-HELP-01)。
+// 引数は書き込み前にすべて検査し、説明要求と未知の引数では何も書かずに終わる。
+{
+  const KNOWN_FLAGS = new Set(['--json', '--staged', '--limit']);
+  for (let i = 0; i < args.length; i++) {
+    const a = args[i];
+    if (a === '--help' || a === '-h') {
+      console.log(USAGE);
+      process.exit(0);
+    }
+    if (!KNOWN_FLAGS.has(a)) {
+      console.error(`unknown argument: ${a}\n\n${USAGE}`);
+      process.exit(2);
+    }
+    if (a === '--limit') {
+      const v = args[i + 1];
+      if (v === undefined || !Number.isInteger(Number(v)) || Number(v) < 1) {
+        console.error(`--limit には 1 以上の整数が必要です (受け取った値: ${v ?? '(なし)'})`);
+        process.exit(2);
+      }
+      i++;
+    }
+  }
+}
 const JSON_OUT = args.includes('--json');
 const STAGED = args.includes('--staged');
 const LIMIT = args.includes('--limit')

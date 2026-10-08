@@ -44,9 +44,16 @@ const BASELINE = catalogBaseline.counts;
 const live = collectCatalogBaseline(Object.values(THEME_CATALOGS));
 
 describe('baseline lock (ratchet)', () => {
-  it('テーマ数・chart 数は記録値と一致する (テーマ追加時はここを更新)', () => {
+  it('テーマ数・chart 数は記録値と一致する (テーマ追加時は update-theme-catalog-baseline.ts --write)', () => {
     expect(live.themes).toBe(BASELINE.themes);
     expect(live.charts).toBe(BASELINE.charts);
+  });
+
+  it('登録テーマの key は記録値と一致する (意図せず消えたテーマを名前で示す)', () => {
+    // テーマ数の直書きを各テストからなくした代わりに、消失の検出はここが担う (THEME-COUNT-LITERAL-TESTS-01)。
+    // 件数だけだと 1 つ消えて 1 つ増えた変更を見逃すので、key の一覧で比べる。
+    expect(Object.keys(THEME_CATALOGS).sort()).toEqual(BASELINE.themeKeys);
+    expect(BASELINE.themeKeys).toHaveLength(BASELINE.themes);
   });
 
   it('componentType ごとの chart 数を固定する (chart 種別内訳の baseline)', () => {

@@ -3,7 +3,7 @@ import type { MetricConfig } from "../types";
 export const kindergartenTeacherAnnualIncome: MetricConfig = {
   "key": "kindergarten-teacher-annual-income",
   "title": "幼稚園教員・保育教諭の平均年収",
-  "description": "幼稚園教員・保育教諭の都道府県別平均年収。賃金構造基本統計調査に基づく。",
+  "description": "幼稚園教員・保育教諭の都道府県別平均年収。賃金構造基本統計調査に基づく。対象は一般労働者・男女計。",
   "unit": "万円",
   "category": "economy",
   "source": {

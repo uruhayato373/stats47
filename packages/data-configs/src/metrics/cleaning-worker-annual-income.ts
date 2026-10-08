@@ -3,6 +3,7 @@ import type { MetricConfig } from "../types";
 export const cleaningWorkerAnnualIncome: MetricConfig = {
   "key": "cleaning-worker-annual-income",
   "title": "清掃・廃棄物処理従事者の平均年収",
+  "description": "賃金構造基本統計調査の一般労働者・男女計の清掃員（ビル・建物を除く），廃棄物処理従事者について、きまって支給する現金給与額を12倍し、年間賞与その他特別給与額を加えた推計年収。",
   "unit": "万円",
   "category": "laborwage",
   "source": {

@@ -6,7 +6,7 @@
     "title": "家計調査 収支項目分類及びその内容例示 (2020年1月改定)",
     "url": "https://www.stat.go.jp/data/kakei/kou2020/zuhyou/kouh2020.xlsx",
     "sha256": "6ec377f378daafbd9800cb55f581b4d361456c6665f5f672f037bf4d9ad3813e",
-    "fetchedAt": "2026-10-08"
+    "fetchedAt": "2026-10-09"
   },
   "itemCount": 517,
   "items": {
@@ -16,7 +16,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.1",
-        "name": "穀  類"
+        "codeKind": "number",
+        "name": "穀類",
+        "range": "102～160"
       },
       "definition": [],
       "includes": [
@@ -42,7 +44,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.1.2",
-        "name": "パ ン"
+        "codeKind": "number",
+        "name": "パン",
+        "range": "120・129"
       },
       "definition": [
         "パンのうち，基本的な原材料(穀粉，酵母種，食塩，砂糖，脂肪)のみでできているもの。",
@@ -72,7 +76,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.1.2",
-        "name": "パ ン"
+        "codeKind": "number",
+        "name": "パン",
+        "range": "120・129"
       },
       "definition": [
         "パンのうち，基本的な原材料以外の材料を加え，初めから一つに成形されたパン。原材料としてハム，卵，チーズなどが使われていてもよい。",
@@ -106,7 +112,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.1.3",
-        "name": "麺類"
+        "codeKind": "number",
+        "name": "麺類",
+        "range": "130～139"
       },
       "definition": [
         "冷凍・半生も含む。"
@@ -123,7 +131,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.1.3",
-        "name": "麺類"
+        "codeKind": "number",
+        "name": "麺類",
+        "range": "130～139"
       },
       "definition": [],
       "includes": [
@@ -137,7 +147,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.1.3",
-        "name": "麺類"
+        "codeKind": "number",
+        "name": "麺類",
+        "range": "130～139"
       },
       "definition": [
         "製造過程において調理味付けされ，保存可能の状態に加工されたもの(メンマ,あげ玉,わかめ程度を付加したものも含む。カップ麺は除く。)。"
@@ -154,7 +166,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.1.3",
-        "name": "麺類"
+        "codeKind": "number",
+        "name": "麺類",
+        "range": "130～139"
       },
       "definition": [
         "小麦粉に鶏卵，塩，かん水，水を加え麺状にしたもの及び成形後蒸す又は揚げる加工をしたもの。冷凍も含む。"
@@ -174,7 +188,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.1.3",
-        "name": "麺類"
+        "codeKind": "number",
+        "name": "麺類",
+        "range": "130～139"
       },
       "definition": [
         "生・乾・冷凍も含む。"
@@ -197,7 +213,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.1.3",
-        "name": "麺類"
+        "codeKind": "number",
+        "name": "麺類",
+        "range": "130～139"
       },
       "definition": [
         "カップ状のものに麺や具材が入り，お湯を注ぐだけで飲食できるもの。主食的に食べるもの。"
@@ -213,7 +231,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.1.3",
-        "name": "麺類"
+        "codeKind": "number",
+        "name": "麺類",
+        "range": "130～139"
       },
       "definition": [
         "130～135の項目に分類されない麺類。",
@@ -231,7 +251,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.1.4",
-        "name": "他の穀類"
+        "codeKind": "number",
+        "name": "他の穀類",
+        "range": "140～160"
       },
       "definition": [
         "小麦粉の(ビタミン入り)精製品も含む。"
@@ -248,7 +270,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.1.4",
-        "name": "他の穀類"
+        "codeKind": "number",
+        "name": "他の穀類",
+        "range": "140～160"
       },
       "definition": [
         "豆，あわ，のり入りなども含む。",
@@ -274,7 +298,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.1.4",
-        "name": "他の穀類"
+        "codeKind": "number",
+        "name": "他の穀類",
+        "range": "140～160"
       },
       "definition": [
         "140，150の項目に分類されない他の穀類。"
@@ -303,8 +329,10 @@
       "name": "まぐろ",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "鮮 魚"
+        "code": "170～189",
+        "codeKind": "range",
+        "name": "鮮魚",
+        "range": "170～189"
       },
       "definition": [],
       "includes": [
@@ -323,8 +351,10 @@
       "name": "あ じ",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "鮮 魚"
+        "code": "170～189",
+        "codeKind": "range",
+        "name": "鮮魚",
+        "range": "170～189"
       },
       "definition": [],
       "includes": [
@@ -343,8 +373,10 @@
       "name": "いわし",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "鮮 魚"
+        "code": "170～189",
+        "codeKind": "range",
+        "name": "鮮魚",
+        "range": "170～189"
       },
       "definition": [],
       "includes": [
@@ -363,8 +395,10 @@
       "name": "かつお",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "鮮 魚"
+        "code": "170～189",
+        "codeKind": "range",
+        "name": "鮮魚",
+        "range": "170～189"
       },
       "definition": [],
       "includes": [
@@ -383,8 +417,10 @@
       "name": "かれい",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "鮮 魚"
+        "code": "170～189",
+        "codeKind": "range",
+        "name": "鮮魚",
+        "range": "170～189"
       },
       "definition": [],
       "includes": [
@@ -398,8 +434,10 @@
       "name": "さ け",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "鮮 魚"
+        "code": "170～189",
+        "codeKind": "range",
+        "name": "鮮魚",
+        "range": "170～189"
       },
       "definition": [],
       "includes": [
@@ -420,8 +458,10 @@
       "name": "さ ば",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "鮮 魚"
+        "code": "170～189",
+        "codeKind": "range",
+        "name": "鮮魚",
+        "range": "170～189"
       },
       "definition": [],
       "includes": [],
@@ -437,8 +477,10 @@
       "name": "さんま",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "鮮 魚"
+        "code": "170～189",
+        "codeKind": "range",
+        "name": "鮮魚",
+        "range": "170～189"
       },
       "definition": [],
       "includes": [],
@@ -449,8 +491,10 @@
       "name": "た い",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "鮮 魚"
+        "code": "170～189",
+        "codeKind": "range",
+        "name": "鮮魚",
+        "range": "170～189"
       },
       "definition": [],
       "includes": [
@@ -470,8 +514,10 @@
       "name": "ぶ り",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "鮮 魚"
+        "code": "170～189",
+        "codeKind": "range",
+        "name": "鮮魚",
+        "range": "170～189"
       },
       "definition": [],
       "includes": [
@@ -490,8 +536,10 @@
       "name": "い か",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "鮮 魚"
+        "code": "170～189",
+        "codeKind": "range",
+        "name": "鮮魚",
+        "range": "170～189"
       },
       "definition": [
         "ゆでも含む。"
@@ -506,8 +554,10 @@
       "name": "た こ",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "鮮 魚"
+        "code": "170～189",
+        "codeKind": "range",
+        "name": "鮮魚",
+        "range": "170～189"
       },
       "definition": [
         "ゆでも含む。"
@@ -527,8 +577,10 @@
       "name": "え び",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "鮮 魚"
+        "code": "170～189",
+        "codeKind": "range",
+        "name": "鮮魚",
+        "range": "170～189"
       },
       "definition": [
         "ゆで，蒸しも含む。"
@@ -549,8 +601,10 @@
       "name": "か に",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "鮮 魚"
+        "code": "170～189",
+        "codeKind": "range",
+        "name": "鮮魚",
+        "range": "170～189"
       },
       "definition": [
         "ゆで，蒸しも含む。"
@@ -570,8 +624,10 @@
       "name": "さしみ盛合わせ",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "鮮 魚"
+        "code": "170～189",
+        "codeKind": "range",
+        "name": "鮮魚",
+        "range": "170～189"
       },
       "definition": [
         "２種類以上のさしみの盛合わせ。つま入りも含む。"
@@ -592,8 +648,10 @@
       "name": "他の鮮魚",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "鮮 魚"
+        "code": "170～189",
+        "codeKind": "range",
+        "name": "鮮魚",
+        "range": "170～189"
       },
       "definition": [
         "170～186の項目に分類されない鮮魚。魚名のあるあら，生卵，白子を含む。",
@@ -619,8 +677,10 @@
       "name": "あさり",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "貝 類"
+        "code": "190～194",
+        "codeKind": "range",
+        "name": "貝類",
+        "range": "190～194"
       },
       "definition": [],
       "includes": [],
@@ -631,8 +691,10 @@
       "name": "かき（貝）",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "貝 類"
+        "code": "190～194",
+        "codeKind": "range",
+        "name": "貝類",
+        "range": "190～194"
       },
       "definition": [],
       "includes": [],
@@ -643,8 +705,10 @@
       "name": "しじみ",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "貝 類"
+        "code": "190～194",
+        "codeKind": "range",
+        "name": "貝類",
+        "range": "190～194"
       },
       "definition": [],
       "includes": [],
@@ -655,8 +719,10 @@
       "name": "他の貝",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "貝 類"
+        "code": "190～194",
+        "codeKind": "range",
+        "name": "貝類",
+        "range": "190～194"
       },
       "definition": [
         "190～192，194の項目に分類されない貝類。",
@@ -673,8 +739,10 @@
       "name": "ほたて貝",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "貝 類"
+        "code": "190～194",
+        "codeKind": "range",
+        "name": "貝類",
+        "range": "190～194"
       },
       "definition": [],
       "includes": [],
@@ -686,7 +754,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.2.2",
-        "name": "塩干魚介"
+        "codeKind": "number",
+        "name": "塩干魚介",
+        "range": "195～202"
       },
       "definition": [],
       "includes": [
@@ -700,7 +770,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.2.2",
-        "name": "塩干魚介"
+        "codeKind": "number",
+        "name": "塩干魚介",
+        "range": "195～202"
       },
       "definition": [
         "塩たらこに限る。"
@@ -721,7 +793,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.2.2",
-        "name": "塩干魚介"
+        "codeKind": "number",
+        "name": "塩干魚介",
+        "range": "195～202"
       },
       "definition": [],
       "includes": [
@@ -735,7 +809,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.2.2",
-        "name": "塩干魚介"
+        "codeKind": "number",
+        "name": "塩干魚介",
+        "range": "195～202"
       },
       "definition": [
         "ひと干し，塩干も含む。"
@@ -751,7 +827,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.2.2",
-        "name": "塩干魚介"
+        "codeKind": "number",
+        "name": "塩干魚介",
+        "range": "195～202"
       },
       "definition": [
         "195～198の項目に分類されない塩干魚介。"
@@ -803,7 +881,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.2.3",
-        "name": "魚肉練製品"
+        "codeKind": "number",
+        "name": "魚肉練製品",
+        "range": "203～209"
       },
       "definition": [
         "魚肉のすり身又は中に野菜などを入れ，油で揚げたもの。"
@@ -821,7 +901,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.2.3",
-        "name": "魚肉練製品"
+        "codeKind": "number",
+        "name": "魚肉練製品",
+        "range": "203～209"
       },
       "definition": [
         "魚肉のすり身を竹などに巻きつけて焼き上げたもの。ちくわにチーズを挿入したものなどを含む。"
@@ -839,7 +921,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.2.3",
-        "name": "魚肉練製品"
+        "codeKind": "number",
+        "name": "魚肉練製品",
+        "range": "203～209"
       },
       "definition": [
         "魚肉のすり身を蒸すなどしたもの。チーズなどが混入したものも含む。",
@@ -856,7 +940,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.2.3",
-        "name": "魚肉練製品"
+        "codeKind": "number",
+        "name": "魚肉練製品",
+        "range": "203～209"
       },
       "definition": [
         "203～205の項目に分類されない魚肉練製品。"
@@ -878,7 +964,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.2.4",
-        "name": "他の魚介加工品"
+        "codeKind": "number",
+        "name": "他の魚介加工品",
+        "range": "210～217"
       },
       "definition": [
         "主として，だし汁をとるのに用いる魚肉のくん乾品。"
@@ -900,7 +988,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.2.4",
-        "name": "他の魚介加工品"
+        "codeKind": "number",
+        "name": "他の魚介加工品",
+        "range": "210～217"
       },
       "definition": [
         "魚介類のみそ漬，しょう油漬，味りん漬，あわ漬，酢漬，ぬか漬，かす漬及びマリネ。"
@@ -919,7 +1009,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.2.4",
-        "name": "他の魚介加工品"
+        "codeKind": "number",
+        "name": "他の魚介加工品",
+        "range": "210～217"
       },
       "definition": [
         "魚介類をしょう油，砂糖などの調味料で味付けし，煮詰めたもの。"
@@ -950,7 +1042,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.2.4",
-        "name": "他の魚介加工品"
+        "codeKind": "number",
+        "name": "他の魚介加工品",
+        "range": "210～217"
       },
       "definition": [
         "中身の主成分が魚介である缶詰及び瓶詰。",
@@ -977,7 +1071,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.2.4",
-        "name": "他の魚介加工品"
+        "codeKind": "number",
+        "name": "他の魚介加工品",
+        "range": "210～217"
       },
       "definition": [
         "210～216の項目に分類されない｢他の魚介加工品｣。主として鮮度を保つために一次加工したものも含む。"
@@ -1001,7 +1097,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.3.1",
-        "name": "生鮮肉"
+        "codeKind": "number",
+        "name": "生鮮肉",
+        "range": "220～224・22X"
       },
       "definition": [
         "骨付きも含む。"
@@ -1015,7 +1113,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.3.1",
-        "name": "生鮮肉"
+        "codeKind": "number",
+        "name": "生鮮肉",
+        "range": "220～224・22X"
       },
       "definition": [
         "骨付きも含む。"
@@ -1029,7 +1129,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.3.1",
-        "name": "生鮮肉"
+        "codeKind": "number",
+        "name": "生鮮肉",
+        "range": "220～224・22X"
       },
       "definition": [
         "骨付きも含む。"
@@ -1043,7 +1145,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.3.1",
-        "name": "生鮮肉"
+        "codeKind": "number",
+        "name": "生鮮肉",
+        "range": "220～224・22X"
       },
       "definition": [
         "220～222，22Xの項目に分類されない鳥獣肉，鳥獣の臓もつなど。",
@@ -1063,7 +1167,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.3.2",
-        "name": "加工肉"
+        "codeKind": "number",
+        "name": "加工肉",
+        "range": "225～229"
       },
       "definition": [
         "鳥獣肉を塩漬け後，香付けのためくん煙し，原則として湯煮などしたもの。"
@@ -1086,7 +1192,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.3.2",
-        "name": "加工肉"
+        "codeKind": "number",
+        "name": "加工肉",
+        "range": "225～229"
       },
       "definition": [
         "鳥獣肉のひき肉を腸詰めにし，乾燥後，くん煙などしたもの。野菜入りなども含む。"
@@ -1109,7 +1217,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.3.2",
-        "name": "加工肉"
+        "codeKind": "number",
+        "name": "加工肉",
+        "range": "225～229"
       },
       "definition": [
         "鳥獣の腹肉などを塩漬け後，くん製にしたもの。"
@@ -1123,7 +1233,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.3.2",
-        "name": "加工肉"
+        "codeKind": "number",
+        "name": "加工肉",
+        "range": "225～229"
       },
       "definition": [
         "225～227の項目に分類されない加工肉。鳥獣肉のみそ漬，塩物又はたれなどに漬けたもの，干物，中身の主成分が肉である缶詰，瓶詰も含む。"
@@ -1161,7 +1273,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.4",
-        "name": "乳卵類"
+        "codeKind": "number",
+        "name": "乳卵類",
+        "range": "230～238"
       },
       "definition": [
         "乳製品以外の成分(果糖，コーヒー，香料，カルシウム，鉄など)入りは除く。"
@@ -1188,7 +1302,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.4.2",
-        "name": "乳製品"
+        "codeKind": "number",
+        "name": "乳製品",
+        "range": "231～235"
       },
       "definition": [
         "液体も含む。"
@@ -1210,7 +1326,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.4.2",
-        "name": "乳製品"
+        "codeKind": "number",
+        "name": "乳製品",
+        "range": "231～235"
       },
       "definition": [
         "果実入りなども含む。"
@@ -1226,7 +1344,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.4.2",
-        "name": "乳製品"
+        "codeKind": "number",
+        "name": "乳製品",
+        "range": "231～235"
       },
       "definition": [],
       "includes": [
@@ -1250,7 +1370,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.4.2",
-        "name": "乳製品"
+        "codeKind": "number",
+        "name": "乳製品",
+        "range": "231～235"
       },
       "definition": [
         "魚，野菜入りなども含む。"
@@ -1267,7 +1389,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.4.2",
-        "name": "乳製品"
+        "codeKind": "number",
+        "name": "乳製品",
+        "range": "231～235"
       },
       "definition": [
         "231～234の項目に分類されない乳製品。"
@@ -1295,7 +1419,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.4.2",
-        "name": "乳製品"
+        "codeKind": "number",
+        "name": "乳製品",
+        "range": "231～235"
       },
       "definition": [
         "うずらの卵  あひるの卵"
@@ -1315,8 +1441,10 @@
       "name": "キャベツ",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "葉茎菜"
+        "code": "240～249",
+        "codeKind": "range",
+        "name": "葉茎菜",
+        "range": "240～249"
       },
       "definition": [],
       "includes": [
@@ -1336,8 +1464,10 @@
       "name": "ほうれんそう",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "葉茎菜"
+        "code": "240～249",
+        "codeKind": "range",
+        "name": "葉茎菜",
+        "range": "240～249"
       },
       "definition": [],
       "includes": [],
@@ -1348,8 +1478,10 @@
       "name": "はくさい",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "葉茎菜"
+        "code": "240～249",
+        "codeKind": "range",
+        "name": "葉茎菜",
+        "range": "240～249"
       },
       "definition": [],
       "includes": [],
@@ -1360,8 +1492,10 @@
       "name": "ね ぎ",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "葉茎菜"
+        "code": "240～249",
+        "codeKind": "range",
+        "name": "葉茎菜",
+        "range": "240～249"
       },
       "definition": [],
       "includes": [
@@ -1374,8 +1508,10 @@
       "name": "レタス",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "葉茎菜"
+        "code": "240～249",
+        "codeKind": "range",
+        "name": "葉茎菜",
+        "range": "240～249"
       },
       "definition": [],
       "includes": [
@@ -1390,8 +1526,10 @@
       "name": "もやし",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "葉茎菜"
+        "code": "240～249",
+        "codeKind": "range",
+        "name": "葉茎菜",
+        "range": "240～249"
       },
       "definition": [
         "豆類を人為的に発芽させたもの。"
@@ -1411,8 +1549,10 @@
       "name": "ブロッコリー",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "葉茎菜"
+        "code": "240～249",
+        "codeKind": "range",
+        "name": "葉茎菜",
+        "range": "240～249"
       },
       "definition": [],
       "includes": [],
@@ -1423,8 +1563,10 @@
       "name": "他の葉茎菜",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "葉茎菜"
+        "code": "240～249",
+        "codeKind": "range",
+        "name": "葉茎菜",
+        "range": "240～249"
       },
       "definition": [
         "240～247の項目に分類されない葉茎菜。",
@@ -1458,8 +1600,10 @@
       "name": "さつまいも",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "根 菜"
+        "code": "250～259・25X",
+        "codeKind": "range",
+        "name": "根菜",
+        "range": "250～259・25X"
       },
       "definition": [],
       "includes": [
@@ -1472,8 +1616,10 @@
       "name": "じゃがいも",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "根 菜"
+        "code": "250～259・25X",
+        "codeKind": "range",
+        "name": "根菜",
+        "range": "250～259・25X"
       },
       "definition": [],
       "includes": [
@@ -1486,8 +1632,10 @@
       "name": "さといも",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "根 菜"
+        "code": "250～259・25X",
+        "codeKind": "range",
+        "name": "根菜",
+        "range": "250～259・25X"
       },
       "definition": [],
       "includes": [
@@ -1502,8 +1650,10 @@
       "name": "だいこん",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "根 菜"
+        "code": "250～259・25X",
+        "codeKind": "range",
+        "name": "根菜",
+        "range": "250～259・25X"
       },
       "definition": [],
       "includes": [
@@ -1520,8 +1670,10 @@
       "name": "にんじん",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "根 菜"
+        "code": "250～259・25X",
+        "codeKind": "range",
+        "name": "根菜",
+        "range": "250～259・25X"
       },
       "definition": [],
       "includes": [
@@ -1534,8 +1686,10 @@
       "name": "ごぼう",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "根 菜"
+        "code": "250～259・25X",
+        "codeKind": "range",
+        "name": "根菜",
+        "range": "250～259・25X"
       },
       "definition": [],
       "includes": [],
@@ -1546,8 +1700,10 @@
       "name": "たまねぎ",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "根 菜"
+        "code": "250～259・25X",
+        "codeKind": "range",
+        "name": "根菜",
+        "range": "250～259・25X"
       },
       "definition": [],
       "includes": [
@@ -1565,8 +1721,10 @@
       "name": "れんこん",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "根 菜"
+        "code": "250～259・25X",
+        "codeKind": "range",
+        "name": "根菜",
+        "range": "250～259・25X"
       },
       "definition": [],
       "includes": [
@@ -1588,8 +1746,10 @@
       "name": "他の根菜",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "根 菜"
+        "code": "250～259・25X",
+        "codeKind": "range",
+        "name": "根菜",
+        "range": "250～259・25X"
       },
       "definition": [
         "250～258，25Xの項目に分類されない根菜。",
@@ -1608,8 +1768,10 @@
       "name": "さやまめ",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "他の野菜"
+        "code": "260～269・26B・26X",
+        "codeKind": "range",
+        "name": "他の野菜",
+        "range": "260～269・26B・26X"
       },
       "definition": [
         "とうろく豆"
@@ -1632,8 +1794,10 @@
       "name": "かぼちゃ",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "他の野菜"
+        "code": "260～269・26B・26X",
+        "codeKind": "range",
+        "name": "他の野菜",
+        "range": "260～269・26B・26X"
       },
       "definition": [],
       "includes": [
@@ -1646,8 +1810,10 @@
       "name": "きゅうり",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "他の野菜"
+        "code": "260～269・26B・26X",
+        "codeKind": "range",
+        "name": "他の野菜",
+        "range": "260～269・26B・26X"
       },
       "definition": [],
       "includes": [
@@ -1660,8 +1826,10 @@
       "name": "な す",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "他の野菜"
+        "code": "260～269・26B・26X",
+        "codeKind": "range",
+        "name": "他の野菜",
+        "range": "260～269・26B・26X"
       },
       "definition": [],
       "includes": [
@@ -1674,8 +1842,10 @@
       "name": "トマト",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "他の野菜"
+        "code": "260～269・26B・26X",
+        "codeKind": "range",
+        "name": "他の野菜",
+        "range": "260～269・26B・26X"
       },
       "definition": [],
       "includes": [
@@ -1689,8 +1859,10 @@
       "name": "ピーマン",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "他の野菜"
+        "code": "260～269・26B・26X",
+        "codeKind": "range",
+        "name": "他の野菜",
+        "range": "260～269・26B・26X"
       },
       "definition": [],
       "includes": [
@@ -1709,8 +1881,10 @@
       "name": "生しいたけ",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "他の野菜"
+        "code": "260～269・26B・26X",
+        "codeKind": "range",
+        "name": "他の野菜",
+        "range": "260～269・26B・26X"
       },
       "definition": [],
       "includes": [],
@@ -1726,8 +1900,10 @@
       "name": "他のきのこ",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "他の野菜"
+        "code": "260～269・26B・26X",
+        "codeKind": "range",
+        "name": "他の野菜",
+        "range": "260～269・26B・26X"
       },
       "definition": [
         "266，26B，26Xの項目に分類されないきのこ類。"
@@ -1744,8 +1920,10 @@
       "name": "他の野菜の",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "他の野菜"
+        "code": "260～269・26B・26X",
+        "codeKind": "range",
+        "name": "他の野菜",
+        "range": "260～269・26B・26X"
       },
       "definition": [
         "260～267，26B，26Xの項目に分類されない｢他の野菜｣。"
@@ -1781,7 +1959,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.5.2",
-        "name": "乾物・海藻"
+        "codeKind": "number",
+        "name": "乾物・海藻",
+        "range": "273～279"
       },
       "definition": [
         "乾燥した豆類。",
@@ -1800,7 +1980,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.5.2",
-        "name": "乾物・海藻"
+        "codeKind": "number",
+        "name": "乾物・海藻",
+        "range": "273～279"
       },
       "definition": [
         "生しいたけを乾燥させたもの。きざみも含む。"
@@ -1819,7 +2001,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.5.2",
-        "name": "乾物・海藻"
+        "codeKind": "number",
+        "name": "乾物・海藻",
+        "range": "273～279"
       },
       "definition": [
         "缶入，瓶入も含む。"
@@ -1845,7 +2029,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.5.2",
-        "name": "乾物・海藻"
+        "codeKind": "number",
+        "name": "乾物・海藻",
+        "range": "273～279"
       },
       "definition": [],
       "includes": [
@@ -1862,7 +2048,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.5.2",
-        "name": "乾物・海藻"
+        "codeKind": "number",
+        "name": "乾物・海藻",
+        "range": "273～279"
       },
       "definition": [],
       "includes": [
@@ -1885,7 +2073,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.5.2",
-        "name": "乾物・海藻"
+        "codeKind": "number",
+        "name": "乾物・海藻",
+        "range": "273～279"
       },
       "definition": [
         "273～278の項目に分類されない乾物及び海藻。",
@@ -1925,7 +2115,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.5.3",
-        "name": "大豆加工品"
+        "codeKind": "number",
+        "name": "大豆加工品",
+        "range": "280～289"
       },
       "definition": [
         "原料が大豆のものに限る。野菜などを混合したものも含む。"
@@ -1950,7 +2142,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.5.3",
-        "name": "大豆加工品"
+        "codeKind": "number",
+        "name": "大豆加工品",
+        "range": "280～289"
       },
       "definition": [
         "豆腐又は豆腐に野菜などを入れて油で揚げたもの。"
@@ -1967,7 +2161,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.5.3",
-        "name": "大豆加工品"
+        "codeKind": "number",
+        "name": "大豆加工品",
+        "range": "280～289"
       },
       "definition": [
         "大豆を蒸し，納豆菌で発酵させたもの。"
@@ -1990,7 +2186,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.5.3",
-        "name": "大豆加工品"
+        "codeKind": "number",
+        "name": "大豆加工品",
+        "range": "280～289"
       },
       "definition": [
         "280～282の項目に分類されない大豆加工品。"
@@ -2019,7 +2217,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.5.4",
-        "name": "他の野菜･         海藻加工品"
+        "codeKind": "number",
+        "name": "他の野菜･海藻加工品",
+        "range": "290～299"
       },
       "definition": [
         "ごま入り，のり入りも含む。"
@@ -2036,7 +2236,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.5.4",
-        "name": "他の野菜･         海藻加工品"
+        "codeKind": "number",
+        "name": "他の野菜･海藻加工品",
+        "range": "290～299"
       },
       "definition": [
         "梅の実を塩漬けしたもの。原形をとどめないものは除く。瓶詰も含む。"
@@ -2058,7 +2260,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.5.4",
-        "name": "他の野菜･         海藻加工品"
+        "codeKind": "number",
+        "name": "他の野菜･海藻加工品",
+        "range": "290～299"
       },
       "definition": [
         "漬物と明記のものに限る。"
@@ -2082,7 +2286,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.5.4",
-        "name": "他の野菜･         海藻加工品"
+        "codeKind": "number",
+        "name": "他の野菜･海藻加工品",
+        "range": "290～299"
       },
       "definition": [
         "漬物と明記のものに限る。"
@@ -2104,7 +2310,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.5.4",
-        "name": "他の野菜･         海藻加工品"
+        "codeKind": "number",
+        "name": "他の野菜･海藻加工品",
+        "range": "290～299"
       },
       "definition": [
         "291～293の項目に分類されない漬物。缶詰，瓶詰も含む。"
@@ -2126,7 +2334,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.5.4",
-        "name": "他の野菜･         海藻加工品"
+        "codeKind": "number",
+        "name": "他の野菜･海藻加工品",
+        "range": "290～299"
       },
       "definition": [
         "魚，野菜入りなどの混合つくだ煮及び缶詰，瓶詰も含む。"
@@ -2152,7 +2362,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.5.4",
-        "name": "他の野菜･         海藻加工品"
+        "codeKind": "number",
+        "name": "他の野菜･海藻加工品",
+        "range": "290～299"
       },
       "definition": [
         "こんぶつくだ煮以外の野菜・海藻のつくだ煮。缶詰，瓶詰も含む。"
@@ -2168,7 +2380,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.5.4",
-        "name": "他の野菜･         海藻加工品"
+        "codeKind": "number",
+        "name": "他の野菜･海藻加工品",
+        "range": "290～299"
       },
       "definition": [
         "290～296の項目に分類されない｢他の野菜・海藻加工品｣。冷凍も含む。缶詰，瓶詰も含む。",
@@ -2195,7 +2409,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.6.1",
-        "name": "生鮮果物"
+        "codeKind": "number",
+        "name": "生鮮果物",
+        "range": "300～316"
       },
       "definition": [],
       "includes": [
@@ -2209,7 +2425,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.6.1",
-        "name": "生鮮果物"
+        "codeKind": "number",
+        "name": "生鮮果物",
+        "range": "300～316"
       },
       "definition": [],
       "includes": [
@@ -2228,7 +2446,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.6.1",
-        "name": "生鮮果物"
+        "codeKind": "number",
+        "name": "生鮮果物",
+        "range": "300～316"
       },
       "definition": [
         "301，315の項目に分類されない柑きつ類。"
@@ -2247,7 +2467,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.6.1",
-        "name": "生鮮果物"
+        "codeKind": "number",
+        "name": "生鮮果物",
+        "range": "300～316"
       },
       "definition": [],
       "includes": [
@@ -2262,7 +2484,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.6.1",
-        "name": "生鮮果物"
+        "codeKind": "number",
+        "name": "生鮮果物",
+        "range": "300～316"
       },
       "definition": [],
       "includes": [
@@ -2276,7 +2500,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.6.1",
-        "name": "生鮮果物"
+        "codeKind": "number",
+        "name": "生鮮果物",
+        "range": "300～316"
       },
       "definition": [],
       "includes": [],
@@ -2293,7 +2519,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.6.1",
-        "name": "生鮮果物"
+        "codeKind": "number",
+        "name": "生鮮果物",
+        "range": "300～316"
       },
       "definition": [],
       "includes": [
@@ -2316,7 +2544,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.6.1",
-        "name": "生鮮果物"
+        "codeKind": "number",
+        "name": "生鮮果物",
+        "range": "300～316"
       },
       "definition": [],
       "includes": [],
@@ -2328,7 +2558,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.6.1",
-        "name": "生鮮果物"
+        "codeKind": "number",
+        "name": "生鮮果物",
+        "range": "300～316"
       },
       "definition": [],
       "includes": [
@@ -2342,7 +2574,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.6.1",
-        "name": "生鮮果物"
+        "codeKind": "number",
+        "name": "生鮮果物",
+        "range": "300～316"
       },
       "definition": [],
       "includes": [],
@@ -2354,7 +2588,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.6.1",
-        "name": "生鮮果物"
+        "codeKind": "number",
+        "name": "生鮮果物",
+        "range": "300～316"
       },
       "definition": [],
       "includes": [
@@ -2373,7 +2609,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.6.1",
-        "name": "生鮮果物"
+        "codeKind": "number",
+        "name": "生鮮果物",
+        "range": "300～316"
       },
       "definition": [
         "300～312，315，316の項目に分類されない生鮮果物。"
@@ -2394,7 +2632,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.6.1",
-        "name": "生鮮果物"
+        "codeKind": "number",
+        "name": "生鮮果物",
+        "range": "300～316"
       },
       "definition": [],
       "includes": [],
@@ -2406,7 +2646,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.6.1",
-        "name": "生鮮果物"
+        "codeKind": "number",
+        "name": "生鮮果物",
+        "range": "300～316"
       },
       "definition": [],
       "includes": [
@@ -2420,7 +2662,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.6.1",
-        "name": "生鮮果物"
+        "codeKind": "number",
+        "name": "生鮮果物",
+        "range": "300～316"
       },
       "definition": [],
       "includes": [
@@ -2444,7 +2688,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.7.1",
-        "name": "油 脂"
+        "codeKind": "number",
+        "name": "油脂",
+        "range": "320・321"
       },
       "definition": [
         "植物性，動物性油脂。香味油も含む。"
@@ -2467,7 +2713,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.7.1",
-        "name": "油 脂"
+        "codeKind": "number",
+        "name": "油脂",
+        "range": "320・321"
       },
       "definition": [
         "原則として，植物性油脂を原料として水などを加えて乳化し，バター状にしたもの。風味を加えたものも含む。動物性油脂が一部含まれたものも含む。"
@@ -2481,7 +2729,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.7.2",
-        "name": "調味料"
+        "codeKind": "number",
+        "name": "調味料",
+        "range": "322～339・33X"
       },
       "definition": [],
       "includes": [
@@ -2501,7 +2751,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.7.2",
-        "name": "調味料"
+        "codeKind": "number",
+        "name": "調味料",
+        "range": "322～339・33X"
       },
       "definition": [
         "だし入りも含む。"
@@ -2519,7 +2771,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.7.2",
-        "name": "調味料"
+        "codeKind": "number",
+        "name": "調味料",
+        "range": "322～339・33X"
       },
       "definition": [
         "だし入りも含む。"
@@ -2542,7 +2796,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.7.2",
-        "name": "調味料"
+        "codeKind": "number",
+        "name": "調味料",
+        "range": "322～339・33X"
       },
       "definition": [],
       "includes": [
@@ -2561,7 +2817,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.7.2",
-        "name": "調味料"
+        "codeKind": "number",
+        "name": "調味料",
+        "range": "322～339・33X"
       },
       "definition": [],
       "includes": [
@@ -2583,7 +2841,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.7.2",
-        "name": "調味料"
+        "codeKind": "number",
+        "name": "調味料",
+        "range": "322～339・33X"
       },
       "definition": [
         "野菜又は果実の搾汁，煮出汁，ピューレを主体として，これらに糖類，食塩，香辛料などを加えたもの。液体のものに限る。"
@@ -2609,7 +2869,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.7.2",
-        "name": "調味料"
+        "codeKind": "number",
+        "name": "調味料",
+        "range": "322～339・33X"
       },
       "definition": [
         "トマトを煮て裏ごしをし，砂糖，食塩，酢，香辛料などを加えたもの。"
@@ -2627,7 +2889,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.7.2",
-        "name": "調味料"
+        "codeKind": "number",
+        "name": "調味料",
+        "range": "322～339・33X"
       },
       "definition": [
         "風味を加えたものも含む。"
@@ -2643,7 +2907,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.7.2",
-        "name": "調味料"
+        "codeKind": "number",
+        "name": "調味料",
+        "range": "322～339・33X"
       },
       "definition": [
         "果物及び野菜を原料としたもの。"
@@ -2666,7 +2932,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.7.2",
-        "name": "調味料"
+        "codeKind": "number",
+        "name": "調味料",
+        "range": "322～339・33X"
       },
       "definition": [],
       "includes": [
@@ -2680,7 +2948,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.7.2",
-        "name": "調味料"
+        "codeKind": "number",
+        "name": "調味料",
+        "range": "322～339・33X"
       },
       "definition": [
         "カレー粉にその他の香辛料，油脂，調味料などを加えたもの。固形，か粒，半練のものも含む。"
@@ -2707,7 +2977,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.7.2",
-        "name": "調味料"
+        "codeKind": "number",
+        "name": "調味料",
+        "range": "322～339・33X"
       },
       "definition": [
         "スープ，ポタージュ，吸い物，みそ汁などが湯をさすだけでできるように材料が配合されたもの。",
@@ -2735,7 +3007,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.7.2",
-        "name": "調味料"
+        "codeKind": "number",
+        "name": "調味料",
+        "range": "322～339・33X"
       },
       "definition": [
         "かつおだし，いりこだしなどを濃縮又は乾燥したもの。か粒，粉末，液体も含む。"
@@ -2752,7 +3026,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.7.2",
-        "name": "調味料"
+        "codeKind": "number",
+        "name": "調味料",
+        "range": "322～339・33X"
       },
       "definition": [
         "原則として，ごはんにふりかけて食べるように調製されたもの。半生も含む。"
@@ -2769,7 +3045,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.7.2",
-        "name": "調味料"
+        "codeKind": "number",
+        "name": "調味料",
+        "range": "322～339・33X"
       },
       "definition": [
         "322～336，33Xの項目に分類されない調味料。",
@@ -2797,7 +3075,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.8",
-        "name": "菓子類"
+        "codeKind": "number",
+        "name": "菓子類",
+        "range": "340～359"
       },
       "definition": [
         "あんに砂糖，寒天を加えて練り，又は蒸したもの。"
@@ -2818,7 +3098,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.8",
-        "name": "菓子類"
+        "codeKind": "number",
+        "name": "菓子類",
+        "range": "340～359"
       },
       "definition": [
         "小麦粉，その他の穀類の粉で各種の練りあんを包んで蒸したもの。"
@@ -2844,7 +3126,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.8",
-        "name": "菓子類"
+        "codeKind": "number",
+        "name": "菓子類",
+        "range": "340～359"
       },
       "definition": [
         "340，341の項目に分類されない和生菓子。半生菓子も含む。"
@@ -2874,7 +3158,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.8",
-        "name": "菓子類"
+        "codeKind": "number",
+        "name": "菓子類",
+        "range": "340～359"
       },
       "definition": [],
       "includes": [],
@@ -2886,7 +3172,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.8",
-        "name": "菓子類"
+        "codeKind": "number",
+        "name": "菓子類",
+        "range": "340～359"
       },
       "definition": [
         "原則として，小麦粉をスポンジ状，タルト状に焼きあげ，それに生クリーム，果物などを飾ったもの。",
@@ -2909,7 +3197,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.8",
-        "name": "菓子類"
+        "codeKind": "number",
+        "name": "菓子類",
+        "range": "340～359"
       },
       "definition": [
         "343，344，347，348の項目に分類されない洋生菓子。半生菓子も含む。"
@@ -2930,7 +3220,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.8",
-        "name": "菓子類"
+        "codeKind": "number",
+        "name": "菓子類",
+        "range": "340～359"
       },
       "definition": [
         "ビスケットにクリーム，ジャムなどを挟んだもの及びソフトビスケットも含む。"
@@ -2947,7 +3239,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.8",
-        "name": "菓子類"
+        "codeKind": "number",
+        "name": "菓子類",
+        "range": "340～359"
       },
       "definition": [
         "ゼラチン，寒天などに果汁や各種調味料を加えて凝固させたもの。"
@@ -2968,7 +3262,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.8",
-        "name": "菓子類"
+        "codeKind": "number",
+        "name": "菓子類",
+        "range": "340～359"
       },
       "definition": [
         "卵，牛乳などを原料として，各種調味料を加えて蒸したり固めたりしたもの。"
@@ -2989,7 +3285,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.8",
-        "name": "菓子類"
+        "codeKind": "number",
+        "name": "菓子類",
+        "range": "340～359"
       },
       "definition": [
         "ソフトキャラメルも含む。"
@@ -3006,7 +3304,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.8",
-        "name": "菓子類"
+        "codeKind": "number",
+        "name": "菓子類",
+        "range": "340～359"
       },
       "definition": [
         "米粉又は小麦粉を主原料として焼く又は揚げたもの。砂糖，卵，水あめなどを加えたものも含む。"
@@ -3027,7 +3327,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.8",
-        "name": "菓子類"
+        "codeKind": "number",
+        "name": "菓子類",
+        "range": "340～359"
       },
       "definition": [
         "原則として，チョコレート生地の重量が60％以上のもの。"
@@ -3043,7 +3345,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.8",
-        "name": "菓子類"
+        "codeKind": "number",
+        "name": "菓子類",
+        "range": "340～359"
       },
       "definition": [
         "原則として，チョコレート生地の重量が40％以上60％未満のもの又は準チョコレート生地が60％以上のもの。"
@@ -3057,7 +3361,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.8",
-        "name": "菓子類"
+        "codeKind": "number",
+        "name": "菓子類",
+        "range": "340～359"
       },
       "definition": [
         "氷菓子も含む。"
@@ -3074,7 +3380,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.8",
-        "name": "菓子類"
+        "codeKind": "number",
+        "name": "菓子類",
+        "range": "340～359"
       },
       "definition": [
         "じゃがいも，とうもろこし，小麦粉などを主原料とし焼く又は揚げたもの。"
@@ -3092,7 +3400,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.8",
-        "name": "菓子類"
+        "codeKind": "number",
+        "name": "菓子類",
+        "range": "340～359"
       },
       "definition": [
         "340～357の項目に分類されない菓子類。"
@@ -3119,7 +3429,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.9.1",
-        "name": "主食的調理食品"
+        "codeKind": "number",
+        "name": "主食的調理食品",
+        "range": "360～363・36A・36B"
       },
       "definition": [
         "飲食店以外の持ち帰りのもの。おかずとセットのもの。冷凍は除く。"
@@ -3136,7 +3448,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.9.1",
-        "name": "主食的調理食品"
+        "codeKind": "number",
+        "name": "主食的調理食品",
+        "range": "360～363・36A・36B"
       },
       "definition": [
         "パンを材料として，それに加工食品，調理食品，野菜，果物などを挟んで調製されたもの。冷凍も含む。"
@@ -3160,7 +3474,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.9.1",
-        "name": "主食的調理食品"
+        "codeKind": "number",
+        "name": "主食的調理食品",
+        "range": "360～363・36A・36B"
       },
       "definition": [
         "360，361，36A，36Bの項目に分類されない主食的調理食品。冷凍も含む。"
@@ -3186,7 +3502,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.9.2",
-        "name": "他の調理食品"
+        "codeKind": "number",
+        "name": "他の調理食品",
+        "range": "364～376"
       },
       "definition": [],
       "includes": [
@@ -3205,7 +3523,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.9.2",
-        "name": "他の調理食品"
+        "codeKind": "number",
+        "name": "他の調理食品",
+        "range": "364～376"
       },
       "definition": [],
       "includes": [
@@ -3228,7 +3548,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.9.2",
-        "name": "他の調理食品"
+        "codeKind": "number",
+        "name": "他の調理食品",
+        "range": "364～376"
       },
       "definition": [
         "生も含む。"
@@ -3249,7 +3571,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.9.2",
-        "name": "他の調理食品"
+        "codeKind": "number",
+        "name": "他の調理食品",
+        "range": "364～376"
       },
       "definition": [
         "肉に限る。生も含む。"
@@ -3271,7 +3595,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.9.2",
-        "name": "他の調理食品"
+        "codeKind": "number",
+        "name": "他の調理食品",
+        "range": "364～376"
       },
       "definition": [
         "生も含む。"
@@ -3298,7 +3624,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.9.2",
-        "name": "他の調理食品"
+        "codeKind": "number",
+        "name": "他の調理食品",
+        "range": "364～376"
       },
       "definition": [
         "生も含む。"
@@ -3319,7 +3647,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.9.2",
-        "name": "他の調理食品"
+        "codeKind": "number",
+        "name": "他の調理食品",
+        "range": "364～376"
       },
       "definition": [
         "｢1.9.2 他の調理食品｣の冷凍食品。"
@@ -3344,7 +3674,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.9.2",
-        "name": "他の調理食品"
+        "codeKind": "number",
+        "name": "他の調理食品",
+        "range": "364～376"
       },
       "definition": [
         "生も含む。"
@@ -3363,7 +3695,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.9.2",
-        "name": "他の調理食品"
+        "codeKind": "number",
+        "name": "他の調理食品",
+        "range": "364～376"
       },
       "definition": [
         "生も含む。"
@@ -3384,7 +3718,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.9.2",
-        "name": "他の調理食品"
+        "codeKind": "number",
+        "name": "他の調理食品",
+        "range": "364～376"
       },
       "definition": [
         "ひき肉を主原料として，つなぎ材料を加えて焼いたもの。生も含む。"
@@ -3405,7 +3741,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.9.2",
-        "name": "他の調理食品"
+        "codeKind": "number",
+        "name": "他の調理食品",
+        "range": "364～376"
       },
       "definition": [
         "店頭売り，宅配を問わない。"
@@ -3423,7 +3761,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.9.2",
-        "name": "他の調理食品"
+        "codeKind": "number",
+        "name": "他の調理食品",
+        "range": "364～376"
       },
       "definition": [
         "364～375の項目に分類されない｢他の調理食品｣。缶詰・瓶詰も含む。ただし，中身の主成分が魚介又は肉である缶詰及び瓶詰は216又は229に分類する。加工賃も含む。"
@@ -3459,7 +3799,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.10.1",
-        "name": "茶 類"
+        "codeKind": "number",
+        "name": "茶類",
+        "range": "380・381・383・38X"
       },
       "definition": [
         "茶葉のみ。"
@@ -3481,7 +3823,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.10.1",
-        "name": "茶 類"
+        "codeKind": "number",
+        "name": "茶類",
+        "range": "380・381・383・38X"
       },
       "definition": [
         "茶葉のみ。"
@@ -3498,7 +3842,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.10.2",
-        "name": "コーヒー・ココア"
+        "codeKind": "number",
+        "name": "コーヒー・ココア",
+        "range": "382・384・386"
       },
       "definition": [
         "粒，か粒，粉末，固体のもの。"
@@ -3516,7 +3862,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.10.1",
-        "name": "茶 類"
+        "codeKind": "number",
+        "name": "茶類",
+        "range": "380・381・383・38X"
       },
       "definition": [
         "380，381の項目に分類されない茶葉など。"
@@ -3533,7 +3881,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.10.2",
-        "name": "コーヒー・ココア"
+        "codeKind": "number",
+        "name": "コーヒー・ココア",
+        "range": "382・384・386"
       },
       "definition": [
         "液体のみ。濃縮液も含む。"
@@ -3552,7 +3902,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.10.3",
-        "name": "他の飲料"
+        "codeKind": "number",
+        "name": "他の飲料",
+        "range": "385・387・～389・38A・38B・38Y"
       },
       "definition": [
         "果実，野菜の液汁を10％以上含有するもので，含有物に炭酸ガス，乳酸又は乳酸菌を含まないもの。粉末は除く。"
@@ -3570,7 +3922,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.10.2",
-        "name": "コーヒー・ココア"
+        "codeKind": "number",
+        "name": "コーヒー・ココア",
+        "range": "382・384・386"
       },
       "definition": [
         "か粒，粉末，固体，液体のもの。濃縮液も含む。"
@@ -3584,7 +3938,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.10.3",
-        "name": "他の飲料"
+        "codeKind": "number",
+        "name": "他の飲料",
+        "range": "385・387・～389・38A・38B・38Y"
       },
       "definition": [
         "主原料を問わず，炭酸を圧入したもの。"
@@ -3603,7 +3959,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.10.3",
-        "name": "他の飲料"
+        "codeKind": "number",
+        "name": "他の飲料",
+        "range": "385・387・～389・38A・38B・38Y"
       },
       "definition": [
         "乳酸又は乳酸菌が添加された飲料で，炭酸が圧入されていないもの。果汁，果肉が添加されたもの及び粉末も含む。"
@@ -3617,7 +3975,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.10.3",
-        "name": "他の飲料"
+        "codeKind": "number",
+        "name": "他の飲料",
+        "range": "385・387・～389・38A・38B・38Y"
       },
       "definition": [
         "385，387，388，38A，38B，38Yの項目に分類されない｢他の飲料｣。"
@@ -3634,8 +3994,10 @@
       "name": "日本そば・うどん",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "食事代"
+        "code": "390～396・399・39A・39B",
+        "codeKind": "range",
+        "name": "食事代",
+        "range": "390～396・399・39A・39B"
       },
       "definition": [],
       "includes": [],
@@ -3646,8 +4008,10 @@
       "name": "中華そば",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "食事代"
+        "code": "390～396・399・39A・39B",
+        "codeKind": "range",
+        "name": "食事代",
+        "range": "390～396・399・39A・39B"
       },
       "definition": [],
       "includes": [
@@ -3660,8 +4024,10 @@
       "name": "他の麺類外食",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "食事代"
+        "code": "390～396・399・39A・39B",
+        "codeKind": "range",
+        "name": "食事代",
+        "range": "390～396・399・39A・39B"
       },
       "definition": [
         "390，391の項目に分類されない麺類の外食。"
@@ -3676,8 +4042,10 @@
       "name": "す し（外食）",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "食事代"
+        "code": "390～396・399・39A・39B",
+        "codeKind": "range",
+        "name": "食事代",
+        "range": "390～396・399・39A・39B"
       },
       "definition": [],
       "includes": [],
@@ -3688,8 +4056,10 @@
       "name": "和食",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "食事代"
+        "code": "390～396・399・39A・39B",
+        "codeKind": "range",
+        "name": "食事代",
+        "range": "390～396・399・39A・39B"
       },
       "definition": [],
       "includes": [
@@ -3706,8 +4076,10 @@
       "name": "洋食",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "食事代"
+        "code": "390～396・399・39A・39B",
+        "codeKind": "range",
+        "name": "食事代",
+        "range": "390～396・399・39A・39B"
       },
       "definition": [],
       "includes": [
@@ -3723,8 +4095,10 @@
       "name": "他の主食的外食",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "食事代"
+        "code": "390～396・399・39A・39B",
+        "codeKind": "range",
+        "name": "食事代",
+        "range": "390～396・399・39A・39B"
       },
       "definition": [
         "390～395，399，39A，39Bの項目に分類されない外食。食事を目的とした会費及び積立ても含む。"
@@ -3743,8 +4117,10 @@
       "name": "喫茶代",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "食事代"
+        "code": "390～396・399・39A・39B",
+        "codeKind": "range",
+        "name": "食事代",
+        "range": "390～396・399・39A・39B"
       },
       "definition": [
         "飲物(酒類は除く。)，菓子及び果物の外食。"
@@ -3757,8 +4133,10 @@
       "name": "飲酒代",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "食事代"
+        "code": "390～396・399・39A・39B",
+        "codeKind": "range",
+        "name": "食事代",
+        "range": "390～396・399・39A・39B"
       },
       "definition": [
         "飲酒代及びこれに伴う料理代。飲酒を目的とした諸会費も含む。"
@@ -3771,8 +4149,10 @@
       "name": "焼肉",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "食事代"
+        "code": "390～396・399・39A・39B",
+        "codeKind": "range",
+        "name": "食事代",
+        "range": "390～396・399・39A・39B"
       },
       "definition": [
         "原則，焼肉（自ら網で焼くもの）店での焼肉を伴った食事。"
@@ -3786,7 +4166,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "2.1",
-        "name": "家賃地代"
+        "codeKind": "number",
+        "name": "家賃地代",
+        "range": "400～409"
       },
       "definition": [
         "民間法人企業及び個人企業が所有する住宅の貸借料。間代・日割家賃も含む。"
@@ -3800,7 +4182,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "2.1",
-        "name": "家賃地代"
+        "codeKind": "number",
+        "name": "家賃地代",
+        "range": "400～409"
       },
       "definition": [
         "借地として契約してある宅地の地代。"
@@ -3817,7 +4201,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "2.1",
-        "name": "家賃地代"
+        "codeKind": "number",
+        "name": "家賃地代",
+        "range": "400～409"
       },
       "definition": [
         "公営企業及び地方公共団体が所有する住宅の貸借料。日割家賃も含む。"
@@ -3833,7 +4219,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "2.1",
-        "name": "家賃地代"
+        "codeKind": "number",
+        "name": "家賃地代",
+        "range": "400～409"
       },
       "definition": [
         "勤務先が所有する又は借り上げている住宅の貸借料。間代・日割家賃も含む。"
@@ -3847,7 +4235,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "2.1",
-        "name": "家賃地代"
+        "codeKind": "number",
+        "name": "家賃地代",
+        "range": "400～409"
       },
       "definition": [
         "400～404の項目に分類されない家賃地代。"
@@ -3879,7 +4269,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "2.2.1",
-        "name": "設備材料"
+        "codeKind": "number",
+        "name": "設備材料",
+        "range": "410・419"
       },
       "definition": [
         "耐久財的要素を持つ設備器具などであって住宅，庭などの設備として住宅，庭などと一体となって機能するもの。分離できない工事費及び部品も含む。",
@@ -3913,7 +4305,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "2.2.1",
-        "name": "設備材料"
+        "codeKind": "number",
+        "name": "設備材料",
+        "range": "410・419"
       },
       "definition": [
         "主として半耐久財的要素を持つ材料｡非耐久財(消耗品)も含む｡"
@@ -3948,7 +4342,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "2.2.2",
-        "name": "工事その他の     サービス"
+        "codeKind": "number",
+        "name": "工事その他のサービス",
+        "range": "420～429"
       },
       "definition": [
         "既製の畳を購入した場合も含む。"
@@ -3965,7 +4361,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "2.2.2",
-        "name": "工事その他の     サービス"
+        "codeKind": "number",
+        "name": "工事その他のサービス",
+        "range": "420～429"
       },
       "definition": [
         "台所，風呂場，洗面所，トイレ，水道，排水管などの水回り設備に関する工事費，修繕維持費。保守点検費も含む。"
@@ -3992,7 +4390,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "2.2.2",
-        "name": "工事その他の     サービス"
+        "codeKind": "number",
+        "name": "工事その他のサービス",
+        "range": "420～429"
       },
       "definition": [
         "家屋の外回り及び家屋に付帯する設備(門，塀，柵など)に関する工事費，修繕維持費。"
@@ -4018,7 +4418,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "2.2.2",
-        "name": "工事その他の     サービス"
+        "codeKind": "number",
+        "name": "工事その他のサービス",
+        "range": "420～429"
       },
       "definition": [
         "植木や庭の維持，管理に必要なサービスに関するもの。"
@@ -4037,7 +4439,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "2.2.2",
-        "name": "工事その他の     サービス"
+        "codeKind": "number",
+        "name": "工事その他のサービス",
+        "range": "420～429"
       },
       "definition": [
         "420～426の項目に分類されない工事費。工事費以外のサービスも含まれる。"
@@ -4059,7 +4463,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "2.2.2",
-        "name": "工事その他の     サービス"
+        "codeKind": "number",
+        "name": "工事その他のサービス",
+        "range": "420～429"
       },
       "definition": [
         "火災や地震，その他災害に関する掛け捨て型の保険料。"
@@ -4076,7 +4482,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "3",
-        "name": "光熱・水道"
+        "codeKind": "number",
+        "name": "光熱・水道",
+        "range": "430～440"
       },
       "definition": [],
       "includes": [
@@ -4100,7 +4508,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "3.2",
-        "name": "ガス代"
+        "codeKind": "number",
+        "name": "ガス代",
+        "range": "431・432"
       },
       "definition": [],
       "includes": [],
@@ -4112,7 +4522,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "3.2",
-        "name": "ガス代"
+        "codeKind": "number",
+        "name": "ガス代",
+        "range": "431・432"
       },
       "definition": [],
       "includes": [],
@@ -4129,7 +4541,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "3.3",
-        "name": "他の光熱"
+        "codeKind": "number",
+        "name": "他の光熱",
+        "range": "433・439"
       },
       "definition": [
         "ストーブやセントラルヒーティングなどに用いる燃料で原油を精製して製造されたもの。配達料も含む。"
@@ -4143,7 +4557,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "3.3",
-        "name": "他の光熱"
+        "codeKind": "number",
+        "name": "他の光熱",
+        "range": "433・439"
       },
       "definition": [
         "433の項目に分類されない燃料及び冷却製品。"
@@ -4176,7 +4592,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "3.3",
-        "name": "他の光熱"
+        "codeKind": "number",
+        "name": "他の光熱",
+        "range": "433・439"
       },
       "definition": [],
       "includes": [
@@ -4189,8 +4607,10 @@
       "name": "炊事用電気器具",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": ""
+        "code": "4.1.1",
+        "codeKind": "number",
+        "name": "家事用耐久財",
+        "range": "451～459・45X・45X"
       },
       "definition": [
         "45Xの項目に分類されない炊事に用いる電気・電動器具。",
@@ -4223,8 +4643,10 @@
       "name": "炊事用ガス器具",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": ""
+        "code": "4.1.1",
+        "codeKind": "number",
+        "name": "家事用耐久財",
+        "range": "451～459・45X・45X"
       },
       "definition": [
         "都市ガス用，天然ガス用，プロパンガス用で炊事に用いるガス器具。部品も含む。",
@@ -4254,8 +4676,10 @@
       "name": "電気冷蔵庫",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": ""
+        "code": "4.1.1",
+        "codeKind": "number",
+        "name": "家事用耐久財",
+        "range": "451～459・45X・45X"
       },
       "definition": [
         "冷凍庫も含む。"
@@ -4273,8 +4697,10 @@
       "name": "電気掃除機",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": ""
+        "code": "4.1.1",
+        "codeKind": "number",
+        "name": "家事用耐久財",
+        "range": "451～459・45X・45X"
       },
       "definition": [
         "充電式も含む。"
@@ -4299,8 +4725,10 @@
       "name": "電気洗濯機",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": ""
+        "code": "4.1.1",
+        "codeKind": "number",
+        "name": "家事用耐久財",
+        "range": "451～459・45X・45X"
       },
       "definition": [
         "乾燥機及び脱水機も含む。"
@@ -4318,8 +4746,10 @@
       "name": "他の家事用耐久財",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": ""
+        "code": "4.1.1",
+        "codeKind": "number",
+        "name": "家事用耐久財",
+        "range": "451～459・45X・45X"
       },
       "definition": [
         "451～456，45Xの項目に分類されない家事用耐久財。"
@@ -4348,7 +4778,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "4.1.2",
-        "name": "冷暖房用器具"
+        "codeKind": "number",
+        "name": "冷暖房用器具",
+        "range": "470～479"
       },
       "definition": [
         "冷房，暖房機能を備えたもの。冷房専用のものも含む。"
@@ -4367,7 +4799,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "4.1.2",
-        "name": "冷暖房用器具"
+        "codeKind": "number",
+        "name": "冷暖房用器具",
+        "range": "470～479"
       },
       "definition": [
         "石油，ガスの強制給排気式(FF式)温風ヒーターも含む。"
@@ -4383,7 +4817,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "4.1.2",
-        "name": "冷暖房用器具"
+        "codeKind": "number",
+        "name": "冷暖房用器具",
+        "range": "470～479"
       },
       "definition": [
         "470，472の項目に分類されない冷暖房用器具。"
@@ -4409,7 +4845,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "4.1.3",
-        "name": "一般家具"
+        "codeKind": "number",
+        "name": "一般家具",
+        "range": "480～489"
       },
       "definition": [
         "主に衣類を収納するもので，引き出しや戸棚を備えているもの。"
@@ -4430,7 +4868,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "4.1.3",
-        "name": "一般家具"
+        "codeKind": "number",
+        "name": "一般家具",
+        "range": "480～489"
       },
       "definition": [
         "セット，単品を問わない。部品も含む。"
@@ -4453,7 +4893,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "4.1.3",
-        "name": "一般家具"
+        "codeKind": "number",
+        "name": "一般家具",
+        "range": "480～489"
       },
       "definition": [
         "主に食器などを収納するものであって，引き出しや棚を備えているもの。"
@@ -4474,7 +4916,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "4.1.3",
-        "name": "一般家具"
+        "codeKind": "number",
+        "name": "一般家具",
+        "range": "480～489"
       },
       "definition": [
         "480～483の項目に分類されない一般家具。"
@@ -4494,7 +4938,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "4.2",
-        "name": "室内装備・装飾品"
+        "codeKind": "number",
+        "name": "室内装備・装飾品",
+        "range": "491～499"
       },
       "definition": [],
       "includes": [
@@ -4511,7 +4957,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "4.2",
-        "name": "室内装備・装飾品"
+        "codeKind": "number",
+        "name": "室内装備・装飾品",
+        "range": "491～499"
       },
       "definition": [
         "鑑賞的又は装飾的要素のある備品。"
@@ -4530,7 +4978,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "4.2",
-        "name": "室内装備・装飾品"
+        "codeKind": "number",
+        "name": "室内装備・装飾品",
+        "range": "491～499"
       },
       "definition": [
         "素材を問わない。"
@@ -4557,7 +5007,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "4.2",
-        "name": "室内装備・装飾品"
+        "codeKind": "number",
+        "name": "室内装備・装飾品",
+        "range": "491～499"
       },
       "definition": [],
       "includes": [
@@ -4577,7 +5029,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "4.2",
-        "name": "室内装備・装飾品"
+        "codeKind": "number",
+        "name": "室内装備・装飾品",
+        "range": "491～499"
       },
       "definition": [
         "491～496の項目に分類されない室内装備・装飾品。",
@@ -4605,7 +5059,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "4.3",
-        "name": "寝具類"
+        "codeKind": "number",
+        "name": "寝具類",
+        "range": "500～509"
       },
       "definition": [
         "乳児用は除く。"
@@ -4631,7 +5087,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "4.3",
-        "name": "寝具類"
+        "codeKind": "number",
+        "name": "寝具類",
+        "range": "500～509"
       },
       "definition": [
         "規格を問わない。乳児用は除く。"
@@ -4657,7 +5115,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "4.3",
-        "name": "寝具類"
+        "codeKind": "number",
+        "name": "寝具類",
+        "range": "500～509"
       },
       "definition": [
         "素材を問わない。乳児用は除く。"
@@ -4678,7 +5138,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "4.3",
-        "name": "寝具類"
+        "codeKind": "number",
+        "name": "寝具類",
+        "range": "500～509"
       },
       "definition": [
         "素材及び規格を問わない。乳児用は除く。"
@@ -4699,7 +5161,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "4.3",
-        "name": "寝具類"
+        "codeKind": "number",
+        "name": "寝具類",
+        "range": "500～509"
       },
       "definition": [
         "500～505の項目に分類されない寝具類。"
@@ -4721,7 +5185,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "4.4",
-        "name": "家事雑貨"
+        "codeKind": "number",
+        "name": "家事雑貨",
+        "range": "510～529"
       },
       "definition": [
         "素材及び規格を問わない。ただし，アルミはく・紙製などの簡易食器は除く。"
@@ -4750,7 +5216,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "4.4",
-        "name": "家事雑貨"
+        "codeKind": "number",
+        "name": "家事雑貨",
+        "range": "510～529"
       },
       "definition": [
         "510の項目に分類されないもので，主として食卓で用いる用品。ただし，アルミはく・紙製などの簡易食器は除く。"
@@ -4789,7 +5257,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "4.4",
-        "name": "家事雑貨"
+        "codeKind": "number",
+        "name": "家事雑貨",
+        "range": "510～529"
       },
       "definition": [
         "素材を問わない。",
@@ -4814,7 +5284,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "4.4",
-        "name": "家事雑貨"
+        "codeKind": "number",
+        "name": "家事雑貨",
+        "range": "510～529"
       },
       "definition": [
         "515の項目に分類されない主として炊事に用いる小物類及び台所で用いる備品。",
@@ -4844,7 +5316,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "4.4",
-        "name": "家事雑貨"
+        "codeKind": "number",
+        "name": "家事雑貨",
+        "range": "510～529"
       },
       "definition": [
         "形体を問わない。室内の照明用に限る。"
@@ -4860,7 +5334,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "4.4",
-        "name": "家事雑貨"
+        "codeKind": "number",
+        "name": "家事雑貨",
+        "range": "510～529"
       },
       "definition": [
         "洗顔，入浴，汗ふきに用いるもので，手ぬぐい，ガーゼ手ぬぐいなども含む。大小は問わない。"
@@ -4877,7 +5353,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "4.4",
-        "name": "家事雑貨"
+        "codeKind": "number",
+        "name": "家事雑貨",
+        "range": "510～529"
       },
       "definition": [
         "510～519の項目に分類されない家事雑貨。"
@@ -4902,8 +5380,10 @@
       "name": "ポリ袋・ラップ",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "他の家事用消耗品"
+        "code": "530・535～539",
+        "codeKind": "range",
+        "name": "他の家事用消耗品",
+        "range": "530・535～539"
       },
       "definition": [
         "ポリエチレン，ビニール，アルミはく製の袋状のもの及び１枚のものを巻いたもの。"
@@ -4916,8 +5396,10 @@
       "name": "ティッシュペーパー",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "ティッシュペーパー・トイレットペーパー"
+        "code": "531・532",
+        "codeKind": "range",
+        "name": "ティッシュペーパー・トイレットペーパー",
+        "range": "531・532"
       },
       "definition": [
         "ロール状以外の薄葉紙のもの。"
@@ -4937,8 +5419,10 @@
       "name": "トイレットペーパー",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "ティッシュペーパー・トイレットペーパー"
+        "code": "531・532",
+        "codeKind": "range",
+        "name": "ティッシュペーパー・トイレットペーパー",
+        "range": "531・532"
       },
       "definition": [
         "ロール状で水溶性のある薄葉紙のもの。"
@@ -4951,8 +5435,10 @@
       "name": "台所・住居用洗剤",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "洗剤"
+        "code": "533・534",
+        "codeKind": "range",
+        "name": "洗剤",
+        "range": "533・534"
       },
       "definition": [
         "台所，住居に用いる洗剤及び研磨剤。粉末，固形，ねり，液体を問わない。"
@@ -4965,8 +5451,10 @@
       "name": "洗濯用洗剤",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "洗剤"
+        "code": "533・534",
+        "codeKind": "range",
+        "name": "洗剤",
+        "range": "533・534"
       },
       "definition": [
         "粉末，固形，ねり，液体を問わない。"
@@ -4979,8 +5467,10 @@
       "name": "殺虫･防虫剤",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "他の家事用消耗品"
+        "code": "530・535～539",
+        "codeKind": "range",
+        "name": "他の家事用消耗品",
+        "range": "530・535～539"
       },
       "definition": [
         "置き型，スプレーなど形状を問わない。"
@@ -4993,8 +5483,10 @@
       "name": "柔軟仕上剤",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "他の家事用消耗品"
+        "code": "530・535～539",
+        "codeKind": "range",
+        "name": "他の家事用消耗品",
+        "range": "530・535～539"
       },
       "definition": [
         "粉末，固形，ねり，液体を問わない。"
@@ -5007,8 +5499,10 @@
       "name": "芳香・消臭剤",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "他の家事用消耗品"
+        "code": "530・535～539",
+        "codeKind": "range",
+        "name": "他の家事用消耗品",
+        "range": "530・535～539"
       },
       "definition": [
         "置き型，スプレーなど形状を問わない。"
@@ -5024,8 +5518,10 @@
       "name": "他の家事用消耗品",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "他の家事用消耗品"
+        "code": "530・535～539",
+        "codeKind": "range",
+        "name": "他の家事用消耗品",
+        "range": "530・535～539"
       },
       "definition": [
         "530，535～537の項目に分類されない家事用消耗品。"
@@ -5050,7 +5546,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "4.6",
-        "name": "家事サービス"
+        "codeKind": "number",
+        "name": "家事サービス",
+        "range": "540～542"
       },
       "definition": [
         "炊事，洗濯，室内，庭の掃除など通常の家事を世帯員以外の者に行わせ，そのサービスの対価として支払った賃金及び料金。",
@@ -5070,7 +5568,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "4.6",
-        "name": "家事サービス"
+        "codeKind": "number",
+        "name": "家事サービス",
+        "range": "540～542"
       },
       "definition": [
         "汚物・じんかいの処理料金，浄化槽の清掃料金，粗大ゴミの処分料金及びリサイクル料金。"
@@ -5089,7 +5589,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "4.6",
-        "name": "家事サービス"
+        "codeKind": "number",
+        "name": "家事サービス",
+        "range": "540～542"
       },
       "definition": [
         "家具・家事用品の借賃，分解掃除代，修理代(加工賃，出張費)及びそれらの洗濯代。",
@@ -5109,7 +5611,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "5",
-        "name": "被服及び履物"
+        "codeKind": "number",
+        "name": "被服及び履物",
+        "range": "558～694"
       },
       "definition": [
         "羽織，帯地，子供用着物も含む。"
@@ -5141,7 +5645,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "5.2.1",
-        "name": "男子用洋服"
+        "codeKind": "number",
+        "name": "男子用洋服",
+        "range": "560～569"
       },
       "definition": [],
       "includes": [
@@ -5161,7 +5667,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "5.2.1",
-        "name": "男子用洋服"
+        "codeKind": "number",
+        "name": "男子用洋服",
+        "range": "560～569"
       },
       "definition": [
         "テーラードジャケット，ブレザーなどの背広型の上着。"
@@ -5182,7 +5690,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "5.2.1",
-        "name": "男子用洋服"
+        "codeKind": "number",
+        "name": "男子用洋服",
+        "range": "560～569"
       },
       "definition": [],
       "includes": [
@@ -5206,7 +5716,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "5.2.1",
-        "name": "男子用洋服"
+        "codeKind": "number",
+        "name": "男子用洋服",
+        "range": "560～569"
       },
       "definition": [],
       "includes": [
@@ -5232,7 +5744,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "5.2.1",
-        "name": "男子用洋服"
+        "codeKind": "number",
+        "name": "男子用洋服",
+        "range": "560～569"
       },
       "definition": [
         "学校制定又は学生用と記入のあるものに限る。"
@@ -5266,7 +5780,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "5.2.1",
-        "name": "男子用洋服"
+        "codeKind": "number",
+        "name": "男子用洋服",
+        "range": "560～569"
       },
       "definition": [
         "560～565の項目に分類されない男子用洋服。"
@@ -5295,7 +5811,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "5.2.2",
-        "name": "婦人用洋服"
+        "codeKind": "number",
+        "name": "婦人用洋服",
+        "range": "570～576"
       },
       "definition": [],
       "includes": [
@@ -5320,7 +5838,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "5.2.2",
-        "name": "婦人用洋服"
+        "codeKind": "number",
+        "name": "婦人用洋服",
+        "range": "570～576"
       },
       "definition": [],
       "includes": [
@@ -5339,7 +5859,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "5.2.2",
-        "name": "婦人用洋服"
+        "codeKind": "number",
+        "name": "婦人用洋服",
+        "range": "570～576"
       },
       "definition": [],
       "includes": [
@@ -5364,7 +5886,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "5.2.2",
-        "name": "婦人用洋服"
+        "codeKind": "number",
+        "name": "婦人用洋服",
+        "range": "570～576"
       },
       "definition": [],
       "includes": [
@@ -5390,7 +5914,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "5.2.2",
-        "name": "婦人用洋服"
+        "codeKind": "number",
+        "name": "婦人用洋服",
+        "range": "570～576"
       },
       "definition": [
         "婦人用の上着。"
@@ -5406,7 +5932,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "5.2.2",
-        "name": "婦人用洋服"
+        "codeKind": "number",
+        "name": "婦人用洋服",
+        "range": "570～576"
       },
       "definition": [
         "学校制定又は学生用と記入のあるものに限る。"
@@ -5444,7 +5972,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "5.2.2",
-        "name": "婦人用洋服"
+        "codeKind": "number",
+        "name": "婦人用洋服",
+        "range": "570～576"
       },
       "definition": [
         "570～575の項目に分類されない婦人用洋服。"
@@ -5471,7 +6001,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "5.2.3",
-        "name": "子供用洋服"
+        "codeKind": "number",
+        "name": "子供用洋服",
+        "range": "580・582"
       },
       "definition": [
         "１歳以上小学生以下を対象とした洋服。",
@@ -5497,7 +6029,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "5.2.3",
-        "name": "子供用洋服"
+        "codeKind": "number",
+        "name": "子供用洋服",
+        "range": "580・582"
       },
       "definition": [
         "１歳未満を対象とした洋服。"
@@ -5519,7 +6053,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "5.3.1",
-        "name": "男子用シャツ・   セーター類"
+        "codeKind": "number",
+        "name": "男子用シャツ・セーター類",
+        "range": "590～592"
       },
       "definition": [
         "半袖も含む。"
@@ -5536,7 +6072,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "5.3.1",
-        "name": "男子用シャツ・   セーター類"
+        "codeKind": "number",
+        "name": "男子用シャツ・セーター類",
+        "range": "590～592"
       },
       "definition": [
         "590の項目に分類されない男子用シャツ。"
@@ -5555,7 +6093,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "5.3.1",
-        "name": "男子用シャツ・   セーター類"
+        "codeKind": "number",
+        "name": "男子用シャツ・セーター類",
+        "range": "590～592"
       },
       "definition": [
         "チョッキ"
@@ -5578,7 +6118,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "5.3.2",
-        "name": "婦人用シャツ・  セーター類"
+        "codeKind": "number",
+        "name": "婦人用シャツ・セーター類",
+        "range": "593～595"
       },
       "definition": [
         "長袖，半袖，袖なしも含む。"
@@ -5597,7 +6139,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "5.3.2",
-        "name": "婦人用シャツ・  セーター類"
+        "codeKind": "number",
+        "name": "婦人用シャツ・セーター類",
+        "range": "593～595"
       },
       "definition": [
         "593の項目に分類されない婦人用シャツ類。"
@@ -5616,7 +6160,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "5.3.2",
-        "name": "婦人用シャツ・  セーター類"
+        "codeKind": "number",
+        "name": "婦人用シャツ・セーター類",
+        "range": "593～595"
       },
       "definition": [
         "チョッキ"
@@ -5639,7 +6185,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "5.3.2",
-        "name": "婦人用シャツ・  セーター類"
+        "codeKind": "number",
+        "name": "婦人用シャツ・セーター類",
+        "range": "593～595"
       },
       "definition": [],
       "includes": [
@@ -5657,7 +6205,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "5.4.1",
-        "name": "男子用下着類"
+        "codeKind": "number",
+        "name": "男子用下着類",
+        "range": "600・602"
       },
       "definition": [],
       "includes": [
@@ -5678,7 +6228,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "5.4.1",
-        "name": "男子用下着類"
+        "codeKind": "number",
+        "name": "男子用下着類",
+        "range": "600・602"
       },
       "definition": [],
       "includes": [
@@ -5697,7 +6249,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "5.4.2",
-        "name": "婦人用下着類"
+        "codeKind": "number",
+        "name": "婦人用下着類",
+        "range": "610～614"
       },
       "definition": [
         "服を美しく着るために体型を整える補正下着類。"
@@ -5720,7 +6274,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "5.4.2",
-        "name": "婦人用下着類"
+        "codeKind": "number",
+        "name": "婦人用下着類",
+        "range": "610～614"
       },
       "definition": [
         "610の項目に分類されない婦人用下着類。"
@@ -5741,7 +6297,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "5.4.2",
-        "name": "婦人用下着類"
+        "codeKind": "number",
+        "name": "婦人用下着類",
+        "range": "610～614"
       },
       "definition": [],
       "includes": [
@@ -5760,7 +6318,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "5.4.3",
-        "name": "子供用下着類"
+        "codeKind": "number",
+        "name": "子供用下着類",
+        "range": "620・621"
       },
       "definition": [],
       "includes": [
@@ -5778,7 +6338,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "5.4.3",
-        "name": "子供用下着類"
+        "codeKind": "number",
+        "name": "子供用下着類",
+        "range": "620・621"
       },
       "definition": [],
       "includes": [
@@ -5793,7 +6355,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "5.5",
-        "name": "生地・糸類"
+        "codeKind": "number",
+        "name": "生地・糸類",
+        "range": "631・640"
       },
       "definition": [
         "着物地に限らず１反，半反単位の反物及び生地。切り売りを含む。"
@@ -5815,7 +6379,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "5.5",
-        "name": "生地・糸類"
+        "codeKind": "number",
+        "name": "生地・糸類",
+        "range": "631・640"
       },
       "definition": [
         "631の項目に分類されない生地・糸類。ボタン，ファスナーなど洋裁，和裁などに用いる付属材料。"
@@ -5841,7 +6407,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "5.6",
-        "name": "他の被服"
+        "codeKind": "number",
+        "name": "他の被服",
+        "range": "650～659"
       },
       "definition": [
         "素材を問わない。"
@@ -5872,7 +6440,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "5.6",
-        "name": "他の被服"
+        "codeKind": "number",
+        "name": "他の被服",
+        "range": "650～659"
       },
       "definition": [],
       "includes": [
@@ -5888,7 +6458,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "5.6",
-        "name": "他の被服"
+        "codeKind": "number",
+        "name": "他の被服",
+        "range": "650～659"
       },
       "definition": [
         "素材を問わない。"
@@ -5906,7 +6478,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "5.6",
-        "name": "他の被服"
+        "codeKind": "number",
+        "name": "他の被服",
+        "range": "650～659"
       },
       "definition": [],
       "includes": [
@@ -5929,7 +6503,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "5.6",
-        "name": "他の被服"
+        "codeKind": "number",
+        "name": "他の被服",
+        "range": "650～659"
       },
       "definition": [],
       "includes": [
@@ -5948,7 +6524,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "5.6",
-        "name": "他の被服"
+        "codeKind": "number",
+        "name": "他の被服",
+        "range": "650～659"
       },
       "definition": [
         "洋服用ストッキングに限る。"
@@ -5969,7 +6547,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "5.6",
-        "name": "他の被服"
+        "codeKind": "number",
+        "name": "他の被服",
+        "range": "650～659"
       },
       "definition": [],
       "includes": [
@@ -5989,7 +6569,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "5.6",
-        "name": "他の被服"
+        "codeKind": "number",
+        "name": "他の被服",
+        "range": "650～659"
       },
       "definition": [
         "乳児用靴下も含む。"
@@ -6010,7 +6592,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "5.6",
-        "name": "他の被服"
+        "codeKind": "number",
+        "name": "他の被服",
+        "range": "650～659"
       },
       "definition": [
         "650～657の項目に分類されない「他の被服」。",
@@ -6049,7 +6633,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "5.7",
-        "name": "履物類"
+        "codeKind": "number",
+        "name": "履物類",
+        "range": "670～680"
       },
       "definition": [
         "布製は除く。"
@@ -6073,7 +6659,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "5.7",
-        "name": "履物類"
+        "codeKind": "number",
+        "name": "履物類",
+        "range": "670～680"
       },
       "definition": [
         "布製は除く。"
@@ -6092,7 +6680,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "5.7",
-        "name": "履物類"
+        "codeKind": "number",
+        "name": "履物類",
+        "range": "670～680"
       },
       "definition": [
         "主にタウン用，通勤・通学用に使用されるもの。子供用は除く。"
@@ -6116,7 +6706,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "5.7",
-        "name": "履物類"
+        "codeKind": "number",
+        "name": "履物類",
+        "range": "670～680"
       },
       "definition": [
         "全ての子供靴。"
@@ -6137,7 +6729,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "5.7",
-        "name": "履物類"
+        "codeKind": "number",
+        "name": "履物類",
+        "range": "670～680"
       },
       "definition": [
         "子供用は除く。"
@@ -6154,7 +6748,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "5.7",
-        "name": "履物類"
+        "codeKind": "number",
+        "name": "履物類",
+        "range": "670～680"
       },
       "definition": [
         "670～679の項目に分類されない履物類。付属品も含む。"
@@ -6197,7 +6793,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "5.8",
-        "name": "被服関連サービス"
+        "codeKind": "number",
+        "name": "被服関連サービス",
+        "range": "691～694"
       },
       "definition": [
         "「被服及び履物」に分類されるものの洗濯代。"
@@ -6232,7 +6830,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "5.8",
-        "name": "被服関連サービス"
+        "codeKind": "number",
+        "name": "被服関連サービス",
+        "range": "691～694"
       },
       "definition": [
         "691，694の項目に分類されない被服関連サービス。"
@@ -6261,7 +6861,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "5.8",
-        "name": "被服関連サービス"
+        "codeKind": "number",
+        "name": "被服関連サービス",
+        "range": "691～694"
       },
       "definition": [
         "「被服及び履物」に分類されるものの賃借料。なお，結婚式や披露宴に花嫁及び花婿が用いる衣装の賃借料は婚礼関係費に分類する。"
@@ -6291,7 +6893,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "6.1",
-        "name": "医薬品"
+        "codeKind": "number",
+        "name": "医薬品",
+        "range": "700～709"
       },
       "definition": [
         "錠剤，ドリンク剤など形状は問わない。解熱鎮痛剤も含む。"
@@ -6316,7 +6920,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "6.1",
-        "name": "医薬品"
+        "codeKind": "number",
+        "name": "医薬品",
+        "range": "700～709"
       },
       "definition": [
         "錠剤，ドリンク剤など形状は問わない。消化剤，整腸剤なども含む。"
@@ -6337,7 +6943,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "6.1",
-        "name": "医薬品"
+        "codeKind": "number",
+        "name": "医薬品",
+        "range": "700～709"
       },
       "definition": [
         "錠剤，ドリンク剤など形状は問わない。健康保持用摂取品は除く。",
@@ -6362,7 +6970,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "6.1",
-        "name": "医薬品"
+        "codeKind": "number",
+        "name": "医薬品",
+        "range": "700～709"
       },
       "definition": [
         "切傷，すり傷，やけど，皮膚の疾患などの外皮用治療薬。軟こう，液剤，エアゾール式も含む。はり薬，飲み薬は除く。"
@@ -6385,7 +6995,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "6.1",
-        "name": "医薬品"
+        "codeKind": "number",
+        "name": "医薬品",
+        "range": "700～709"
       },
       "definition": [
         "704の項目に分類されない外用薬及びはり薬。"
@@ -6414,7 +7026,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "6.1",
-        "name": "医薬品"
+        "codeKind": "number",
+        "name": "医薬品",
+        "range": "700～709"
       },
       "definition": [
         "700～706の項目に分類されない医薬品及び医薬部外品。なお，主として保健医療用に用いる化学薬品も含む。",
@@ -6438,7 +7052,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "6.1",
-        "name": "医薬品"
+        "codeKind": "number",
+        "name": "医薬品",
+        "range": "700～709"
       },
       "definition": [],
       "includes": [
@@ -6465,7 +7081,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "6.3",
-        "name": "保健医療用品･器具"
+        "codeKind": "number",
+        "name": "保健医療用品･器具",
+        "range": "711～719"
       },
       "definition": [
         "疾患手当などに用いる衛生用品，材料などの非耐久財。"
@@ -6488,7 +7106,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "6.3",
-        "name": "保健医療用品･器具"
+        "codeKind": "number",
+        "name": "保健医療用品･器具",
+        "range": "711～719"
       },
       "definition": [
         "目の矯正用のもの。フレームも含む。コンタクトレンズは除く。"
@@ -6513,7 +7133,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "6.3",
-        "name": "保健医療用品･器具"
+        "codeKind": "number",
+        "name": "保健医療用品･器具",
+        "range": "711～719"
       },
       "definition": [
         "大人用及びパンツ型のものを含む。紙製に限る。"
@@ -6527,7 +7149,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "6.3",
-        "name": "保健医療用品･器具"
+        "codeKind": "number",
+        "name": "保健医療用品･器具",
+        "range": "711～719"
       },
       "definition": [],
       "includes": [
@@ -6549,7 +7173,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "6.3",
-        "name": "保健医療用品･器具"
+        "codeKind": "number",
+        "name": "保健医療用品･器具",
+        "range": "711～719"
       },
       "definition": [
         "711～714の項目に分類されない身体の治療及び健康の維持に用いる道具，器具並びに身体補助用器具。部品，付属品も含む。"
@@ -6586,7 +7212,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "6.4",
-        "name": "保健医療サービス"
+        "codeKind": "number",
+        "name": "保健医療サービス",
+        "range": "720～729"
       },
       "definition": [
         "医師の診断に基づく疾病の治療，身体の矯正のために必要なサービス。歯科は除く。",
@@ -6611,7 +7239,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "6.4",
-        "name": "保健医療サービス"
+        "codeKind": "number",
+        "name": "保健医療サービス",
+        "range": "720～729"
       },
       "definition": [
         "723の項目に分類されない入院料。"
@@ -6625,7 +7255,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "6.4",
-        "name": "保健医療サービス"
+        "codeKind": "number",
+        "name": "保健医療サービス",
+        "range": "720～729"
       },
       "definition": [
         "歯科医師から受けた疾病の治療などのために必要なサービス。"
@@ -6642,7 +7274,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "6.4",
-        "name": "保健医療サービス"
+        "codeKind": "number",
+        "name": "保健医療サービス",
+        "range": "720～729"
       },
       "definition": [
         "出産に伴う手術料，薬剤料，文書料，治療代，食事代なども含む。新生児に係るものも含む。"
@@ -6656,7 +7290,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "6.4",
-        "name": "保健医療サービス"
+        "codeKind": "number",
+        "name": "保健医療サービス",
+        "range": "720～729"
       },
       "definition": [
         "整骨院(接骨院)や鍼灸院で受けた治療代及び薬代。",
@@ -6678,7 +7314,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "6.4",
-        "name": "保健医療サービス"
+        "codeKind": "number",
+        "name": "保健医療サービス",
+        "range": "720～729"
       },
       "definition": [
         "健康保持や病気の早期発見を目的に，詳しい検査を行う人間ドックや健康診断。宿泊を伴うものも含む。"
@@ -6692,7 +7330,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "6.4",
-        "name": "保健医療サービス"
+        "codeKind": "number",
+        "name": "保健医療サービス",
+        "range": "720～729"
       },
       "definition": [
         "病院や整骨院（接骨院），鍼灸院以外で受けた治療代。"
@@ -6718,7 +7358,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "6.4",
-        "name": "保健医療サービス"
+        "codeKind": "number",
+        "name": "保健医療サービス",
+        "range": "720～729"
       },
       "definition": [
         "720～728の項目に分類されない保健医療サービス。"
@@ -6741,7 +7383,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "7.1",
-        "name": "交通"
+        "codeKind": "number",
+        "name": "交通",
+        "range": "730～739"
       },
       "definition": [
         "鉄道利用に係る各種料金。"
@@ -6764,7 +7408,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "7.1",
-        "name": "交通"
+        "codeKind": "number",
+        "name": "交通",
+        "range": "730～739"
       },
       "definition": [
         "学校教育法に定める学校及び予備校などの学校法人への通学のための鉄道定期代。回数券も含む。"
@@ -6783,7 +7429,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "7.1",
-        "name": "交通"
+        "codeKind": "number",
+        "name": "交通",
+        "range": "730～739"
       },
       "definition": [
         "通学以外の定期代及び回数券。"
@@ -6799,7 +7447,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "7.1",
-        "name": "交通"
+        "codeKind": "number",
+        "name": "交通",
+        "range": "730～739"
       },
       "definition": [
         "路線バス利用に係る各種料金。"
@@ -6820,7 +7470,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "7.1",
-        "name": "交通"
+        "codeKind": "number",
+        "name": "交通",
+        "range": "730～739"
       },
       "definition": [
         "児童福祉法，学校教育法に定める学校及び予備校などの学校法人への通学のためのバス定期代。認定こども園も含む。回数券も含む。"
@@ -6839,7 +7491,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "7.1",
-        "name": "交通"
+        "codeKind": "number",
+        "name": "交通",
+        "range": "730～739"
       },
       "definition": [
         "通学以外の定期代及び回数券。"
@@ -6855,7 +7509,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "7.1",
-        "name": "交通"
+        "codeKind": "number",
+        "name": "交通",
+        "range": "730～739"
       },
       "definition": [],
       "includes": [
@@ -6877,7 +7533,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "7.1",
-        "name": "交通"
+        "codeKind": "number",
+        "name": "交通",
+        "range": "730～739"
       },
       "definition": [
         "航空機利用に係る各種料金。回数券も含む。"
@@ -6898,7 +7556,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "7.1",
-        "name": "交通"
+        "codeKind": "number",
+        "name": "交通",
+        "range": "730～739"
       },
       "definition": [
         "自動車，オートバイなどで通行の際，料金を徴収する道路。"
@@ -6915,7 +7575,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "7.1",
-        "name": "交通"
+        "codeKind": "number",
+        "name": "交通",
+        "range": "730～739"
       },
       "definition": [
         "730～738の項目に分類されない運賃及びサービスに関するもの。"
@@ -6954,7 +7616,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "7.2.1",
-        "name": "自動車等購入"
+        "codeKind": "number",
+        "name": "自動車等購入",
+        "range": "740・742"
       },
       "definition": [
         "中古車も含む。"
@@ -6968,7 +7632,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "7.2.1",
-        "name": "自動車等購入"
+        "codeKind": "number",
+        "name": "自動車等購入",
+        "range": "740・742"
       },
       "definition": [
         "中古も含む。"
@@ -6986,7 +7652,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "7.2.1",
-        "name": "自動車等購入"
+        "codeKind": "number",
+        "name": "自動車等購入",
+        "range": "740・742"
       },
       "definition": [],
       "includes": [
@@ -7006,7 +7674,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "7.2.3",
-        "name": "自動車等維持"
+        "codeKind": "number",
+        "name": "自動車等維持",
+        "range": "750～759・75B・75X"
       },
       "definition": [
         "自動車，オートバイなどの輸送機器の燃料。"
@@ -7023,7 +7693,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "7.2.3",
-        "name": "自動車等維持"
+        "codeKind": "number",
+        "name": "自動車等維持",
+        "range": "750～759・75B・75X"
       },
       "definition": [
         "自動車などの運行に必要な部品。（特定の場合追加的に必要になるものは除く。）",
@@ -7048,7 +7720,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "7.2.3",
-        "name": "自動車等維持"
+        "codeKind": "number",
+        "name": "自動車等維持",
+        "range": "750～759・75B・75X"
       },
       "definition": [],
       "includes": [
@@ -7070,7 +7744,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "7.2.3",
-        "name": "自動車等維持"
+        "codeKind": "number",
+        "name": "自動車等維持",
+        "range": "750～759・75B・75X"
       },
       "definition": [
         "自動車の整備，修理に必要なサービスに関するもの。"
@@ -7088,7 +7764,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "7.2.3",
-        "name": "自動車等維持"
+        "codeKind": "number",
+        "name": "自動車等維持",
+        "range": "750～759・75B・75X"
       },
       "definition": [
         "753，755，756，75B，75Xの項目に分類されない自動車等関連サービス。"
@@ -7120,7 +7798,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "7.2.3",
-        "name": "自動車等維持"
+        "codeKind": "number",
+        "name": "自動車等維持",
+        "range": "750～759・75B・75X"
       },
       "definition": [
         "オートバイ，自転車などの整備，修理に必要なサービスに",
@@ -7138,7 +7818,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "7.2.3",
-        "name": "自動車等維持"
+        "codeKind": "number",
+        "name": "自動車等維持",
+        "range": "750～759・75B・75X"
       },
       "definition": [
         "75Xの項目に分類されない駐車場借料。"
@@ -7155,7 +7837,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "7.2.3",
-        "name": "自動車等維持"
+        "codeKind": "number",
+        "name": "自動車等維持",
+        "range": "750～759・75B・75X"
       },
       "definition": [
         "自動車損害賠償責任保険の保険料。"
@@ -7176,7 +7860,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "7.2.3",
-        "name": "自動車等維持"
+        "codeKind": "number",
+        "name": "自動車等維持",
+        "range": "750～759・75B・75X"
       },
       "definition": [
         "自動車損害賠償責任保険以外の任意加入保険の保険料。",
@@ -7194,7 +7880,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "7.2.3",
-        "name": "自動車等維持"
+        "codeKind": "number",
+        "name": "自動車等維持",
+        "range": "750～759・75B・75X"
       },
       "definition": [
         "757，758の項目に分類されない輸送機器に係る保険料。"
@@ -7217,7 +7905,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "7.3",
-        "name": "通 信"
+        "codeKind": "number",
+        "name": "通信",
+        "range": "760～769"
       },
       "definition": [
         "ゆうパック，ゆうメールなどの郵便局で取り扱う荷物も含む。",
@@ -7257,7 +7947,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "7.3",
-        "name": "通 信"
+        "codeKind": "number",
+        "name": "通信",
+        "range": "760～769"
       },
       "definition": [],
       "includes": [
@@ -7279,7 +7971,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "7.3",
-        "name": "通 信"
+        "codeKind": "number",
+        "name": "通信",
+        "range": "760～769"
       },
       "definition": [
         "スマートフォン・携帯電話の音声通話，データ通信に係る料金"
@@ -7308,7 +8002,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "7.3",
-        "name": "通 信"
+        "codeKind": "number",
+        "name": "通信",
+        "range": "760～769"
       },
       "definition": [
         "766の項目に分類されない通信機器。部品も含む。764，766の項目の付属品及び修理代も含む。"
@@ -7327,7 +8023,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "7.3",
-        "name": "通 信"
+        "codeKind": "number",
+        "name": "通信",
+        "range": "760～769"
       },
       "definition": [
         "スマートフォン，携帯電話，部品も含む。"
@@ -7341,7 +8039,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "7.3",
-        "name": "通 信"
+        "codeKind": "number",
+        "name": "通信",
+        "range": "760～769"
       },
       "definition": [],
       "includes": [
@@ -7359,7 +8059,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "8.1",
-        "name": "授業料等"
+        "codeKind": "number",
+        "name": "授業料等",
+        "range": "770～779"
       },
       "definition": [],
       "includes": [],
@@ -7371,7 +8073,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "8.1",
-        "name": "授業料等"
+        "codeKind": "number",
+        "name": "授業料等",
+        "range": "770～779"
       },
       "definition": [],
       "includes": [],
@@ -7383,7 +8087,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "8.1",
-        "name": "授業料等"
+        "codeKind": "number",
+        "name": "授業料等",
+        "range": "770～779"
       },
       "definition": [],
       "includes": [],
@@ -7395,7 +8101,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "8.1",
-        "name": "授業料等"
+        "codeKind": "number",
+        "name": "授業料等",
+        "range": "770～779"
       },
       "definition": [],
       "includes": [],
@@ -7407,7 +8115,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "8.1",
-        "name": "授業料等"
+        "codeKind": "number",
+        "name": "授業料等",
+        "range": "770～779"
       },
       "definition": [],
       "includes": [],
@@ -7419,7 +8129,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "8.1",
-        "name": "授業料等"
+        "codeKind": "number",
+        "name": "授業料等",
+        "range": "770～779"
       },
       "definition": [],
       "includes": [],
@@ -7431,7 +8143,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "8.1",
-        "name": "授業料等"
+        "codeKind": "number",
+        "name": "授業料等",
+        "range": "770～779"
       },
       "definition": [
         "短期大学，高等専門学校，大学院も含む。"
@@ -7445,7 +8159,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "8.1",
-        "name": "授業料等"
+        "codeKind": "number",
+        "name": "授業料等",
+        "range": "770～779"
       },
       "definition": [
         "短期大学，高等専門学校，大学院も含む。"
@@ -7462,7 +8178,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "8.1",
-        "name": "授業料等"
+        "codeKind": "number",
+        "name": "授業料等",
+        "range": "770～779"
       },
       "definition": [
         "国公立，私立を問わない。",
@@ -7494,7 +8212,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "8.1",
-        "name": "授業料等"
+        "codeKind": "number",
+        "name": "授業料等",
+        "range": "770～779"
       },
       "definition": [
         "国公立，私立を問わない。"
@@ -7510,7 +8230,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "8.2",
-        "name": "教科書･学習参考教材"
+        "codeKind": "number",
+        "name": "教科書･学習参考教材",
+        "range": "780・781"
       },
       "definition": [],
       "includes": [
@@ -7524,7 +8246,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "8.2",
-        "name": "教科書･学習参考教材"
+        "codeKind": "number",
+        "name": "教科書･学習参考教材",
+        "range": "780・781"
       },
       "definition": [
         "３歳以上の幼児の学習参考教材も含む。"
@@ -7542,7 +8266,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "8.3",
-        "name": "補習教育"
+        "codeKind": "number",
+        "name": "補習教育",
+        "range": "790～792"
       },
       "definition": [
         "幼児・小学校の補習教育に限る。"
@@ -7577,7 +8303,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "8.3",
-        "name": "補習教育"
+        "codeKind": "number",
+        "name": "補習教育",
+        "range": "790～792"
       },
       "definition": [
         "中学校の補習教育に限る。"
@@ -7601,7 +8329,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "8.3",
-        "name": "補習教育"
+        "codeKind": "number",
+        "name": "補習教育",
+        "range": "790～792"
       },
       "definition": [
         "高校の補習教育・予備校に限る。"
@@ -7624,7 +8354,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "9.1",
-        "name": "教養娯楽用耐久財"
+        "codeKind": "number",
+        "name": "教養娯楽用耐久財",
+        "range": "801～813"
       },
       "definition": [],
       "includes": [
@@ -7643,7 +8375,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "9.1",
-        "name": "教養娯楽用耐久財"
+        "codeKind": "number",
+        "name": "教養娯楽用耐久財",
+        "range": "801～813"
       },
       "definition": [
         "部品も含む。"
@@ -7667,7 +8401,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "9.1",
-        "name": "教養娯楽用耐久財"
+        "codeKind": "number",
+        "name": "教養娯楽用耐久財",
+        "range": "801～813"
       },
       "definition": [
         "部品も含む。"
@@ -7688,7 +8424,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "9.1",
-        "name": "教養娯楽用耐久財"
+        "codeKind": "number",
+        "name": "教養娯楽用耐久財",
+        "range": "801～813"
       },
       "definition": [
         "部品も含む。"
@@ -7710,7 +8448,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "9.1",
-        "name": "教養娯楽用耐久財"
+        "codeKind": "number",
+        "name": "教養娯楽用耐久財",
+        "range": "801～813"
       },
       "definition": [
         "801～807，810，813の項目に分類されない教養娯楽用耐久財。",
@@ -7741,7 +8481,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "9.1",
-        "name": "教養娯楽用耐久財"
+        "codeKind": "number",
+        "name": "教養娯楽用耐久財",
+        "range": "801～813"
       },
       "definition": [
         "ソフト，周辺機器，部品も含む。"
@@ -7768,7 +8510,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "9.1",
-        "name": "教養娯楽用耐久財"
+        "codeKind": "number",
+        "name": "教養娯楽用耐久財",
+        "range": "801～813"
       },
       "definition": [
         "801～810，813の項目に分類されるものの修理代。手間代及び出張費も含む。"
@@ -7782,7 +8526,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "9.1",
-        "name": "教養娯楽用耐久財"
+        "codeKind": "number",
+        "name": "教養娯楽用耐久財",
+        "range": "801～813"
       },
       "definition": [
         "テレビに接続して映像の録画・再生に使用するもの（携帯型は除く。）。\nオーディオ系機器との一体型及びスピーカー付きなどのセットは除く。"
@@ -7803,8 +8549,10 @@
       "name": "筆記・絵画用具",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "文房具"
+        "code": "821～829",
+        "codeKind": "range",
+        "name": "文房具",
+        "range": "821～829"
       },
       "definition": [],
       "includes": [
@@ -7827,8 +8575,10 @@
       "name": "ノート・紙製品",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "文房具"
+        "code": "821～829",
+        "codeKind": "range",
+        "name": "文房具",
+        "range": "821～829"
       },
       "definition": [],
       "includes": [
@@ -7849,8 +8599,10 @@
       "name": "他の学習用消耗品",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "文房具"
+        "code": "821～829",
+        "codeKind": "range",
+        "name": "文房具",
+        "range": "821～829"
       },
       "definition": [],
       "includes": [
@@ -7877,8 +8629,10 @@
       "name": "他の学習用文房具",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "文房具"
+        "code": "821～829",
+        "codeKind": "range",
+        "name": "文房具",
+        "range": "821～829"
       },
       "definition": [
         "半耐久性の文房具。"
@@ -7903,8 +8657,10 @@
       "name": "他の文房具",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "文房具"
+        "code": "821～829",
+        "codeKind": "range",
+        "name": "文房具",
+        "range": "821～829"
       },
       "definition": [
         "821～828の項目に分類されない非耐久性の文房具。",
@@ -7922,8 +8678,10 @@
       "name": "ゴルフ用具",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "運動用具類"
+        "code": "832～834",
+        "codeKind": "range",
+        "name": "運動用具類",
+        "range": "832～834"
       },
       "definition": [],
       "includes": [
@@ -7942,8 +8700,10 @@
       "name": "他の運動用具",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "運動用具類"
+        "code": "832～834",
+        "codeKind": "range",
+        "name": "運動用具類",
+        "range": "832～834"
       },
       "definition": [
         "832の項目に分類されない運動用具。",
@@ -7970,8 +8730,10 @@
       "name": "スポーツウェア",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "運動用具類"
+        "code": "832～834",
+        "codeKind": "range",
+        "name": "運動用具類",
+        "range": "832～834"
       },
       "definition": [
         "スポーツ専用の衣類，履物及び身の回り用品。",
@@ -7992,8 +8754,10 @@
       "name": "ゲームソフト等",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "玩具"
+        "code": "835～837",
+        "codeKind": "range",
+        "name": "玩具",
+        "range": "835～837"
       },
       "definition": [
         "ゲーム機の部品及び周辺機器も含む。"
@@ -8009,8 +8773,10 @@
       "name": "ゲーム機",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "玩具"
+        "code": "835～837",
+        "codeKind": "range",
+        "name": "玩具",
+        "range": "835～837"
       },
       "definition": [
         "携帯型，据置型のゲーム機本体。ソフトや付属品とのセット販売のものも含む。"
@@ -8023,8 +8789,10 @@
       "name": "他の玩具",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "玩具"
+        "code": "835～837",
+        "codeKind": "range",
+        "name": "玩具",
+        "range": "835～837"
       },
       "definition": [
         "835，836の項目に分類されない玩具。"
@@ -8050,8 +8818,10 @@
       "name": "切り花",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "玩具"
+        "code": "835～837",
+        "codeKind": "range",
+        "name": "玩具",
+        "range": "835～837"
       },
       "definition": [
         "花と籠などが一体となっているものも含む。"
@@ -8072,8 +8842,10 @@
       "name": "他のペット",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "他の教養娯楽用品"
+        "code": "842・843・845～849・84A・84Y",
+        "codeKind": "range",
+        "name": "他の教養娯楽用品",
+        "range": "842・843・845～849・84A・84Y"
       },
       "definition": [
         "84Xの項目に分類されないペットに関するサービス。"
@@ -8089,8 +8861,10 @@
       "name": "他の教養娯楽用品",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "他の教養娯楽用品"
+        "code": "842・843・845～849・84A・84Y",
+        "codeKind": "range",
+        "name": "他の教養娯楽用品",
+        "range": "842・843・845～849・84A・84Y"
       },
       "definition": [
         "843,845～849，84A，84Yの項目に分類されない教養娯楽用品。"
@@ -8110,8 +8884,10 @@
       "name": "手芸・工芸材料",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "他の教養娯楽用品"
+        "code": "842・843・845～849・84A・84Y",
+        "codeKind": "range",
+        "name": "他の教養娯楽用品",
+        "range": "842・843・845～849・84A・84Y"
       },
       "definition": [
         "専ら手芸及び工芸に使用する材料。"
@@ -8129,8 +8905,10 @@
       "name": "教養娯楽用品",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "他の教養娯楽用品"
+        "code": "842・843・845～849・84A・84Y",
+        "codeKind": "range",
+        "name": "他の教養娯楽用品",
+        "range": "842・843・845～849・84A・84Y"
       },
       "definition": [
         "821～843，845～849，84A，84Yの項目に分類されるものの修理代及びサービスに関するもの。",
@@ -8149,8 +8927,10 @@
       "name": "音楽・映像",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "他の教養娯楽用品"
+        "code": "842・843・845～849・84A・84Y",
+        "codeKind": "range",
+        "name": "他の教養娯楽用品",
+        "range": "842・843・845～849・84A・84Y"
       },
       "definition": [
         "録音，録画されている各種記録媒体。"
@@ -8165,8 +8945,10 @@
       "name": "音楽・映像用",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "他の教養娯楽用品"
+        "code": "842・843・845～849・84A・84Y",
+        "codeKind": "range",
+        "name": "他の教養娯楽用品",
+        "range": "842・843・845～849・84A・84Y"
       },
       "definition": [
         "録音，録画されていない各種記録媒体。"
@@ -8183,8 +8965,10 @@
       "name": "園芸用品",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "他の教養娯楽用品"
+        "code": "842・843・845～849・84A・84Y",
+        "codeKind": "range",
+        "name": "他の教養娯楽用品",
+        "range": "842・843・845～849・84A・84Y"
       },
       "definition": [
         "ガーデニング，家庭菜園に係る用品。"
@@ -8209,8 +8993,10 @@
       "name": "ペットフード",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "他の教養娯楽用品"
+        "code": "842・843・845～849・84A・84Y",
+        "codeKind": "range",
+        "name": "他の教養娯楽用品",
+        "range": "842・843・845～849・84A・84Y"
       },
       "definition": [],
       "includes": [
@@ -8223,8 +9009,10 @@
       "name": "電池",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "他の教養娯楽用品"
+        "code": "842・843・845～849・84A・84Y",
+        "codeKind": "range",
+        "name": "他の教養娯楽用品",
+        "range": "842・843・845～849・84A・84Y"
       },
       "definition": [
         "用途，形体は問わない。"
@@ -8249,7 +9037,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "9.3",
-        "name": "書籍・他の印刷物"
+        "codeKind": "number",
+        "name": "書籍・他の印刷物",
+        "range": "850～859"
       },
       "definition": [
         "日刊新聞に限る。一部買いも含む。"
@@ -8274,7 +9064,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "9.3",
-        "name": "書籍・他の印刷物"
+        "codeKind": "number",
+        "name": "書籍・他の印刷物",
+        "range": "850～859"
       },
       "definition": [
         "週刊誌,月刊誌,季刊誌などの定期刊行物。別冊,古本も含む。"
@@ -8293,7 +9085,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "9.3",
-        "name": "書籍・他の印刷物"
+        "codeKind": "number",
+        "name": "書籍・他の印刷物",
+        "range": "850～859"
       },
       "definition": [
         "851の項目に分類されない書籍。古本も含む。"
@@ -8317,7 +9111,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "9.3",
-        "name": "書籍・他の印刷物"
+        "codeKind": "number",
+        "name": "書籍・他の印刷物",
+        "range": "850～859"
       },
       "definition": [
         "850～854の項目に分類されない「他の印刷物」。"
@@ -8335,7 +9131,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "9.4",
-        "name": "教養娯楽サービス"
+        "codeKind": "number",
+        "name": "教養娯楽サービス",
+        "range": "860～889・88A・88B・88X・88Y"
       },
       "definition": [
         "宿泊料に伴う奉仕料も含む。"
@@ -8351,7 +9149,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "9.4.2",
-        "name": "パック旅行費"
+        "codeKind": "number",
+        "name": "パック旅行費",
+        "range": "861・862"
       },
       "definition": [],
       "includes": [],
@@ -8363,7 +9163,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "9.4.2",
-        "name": "パック旅行費"
+        "codeKind": "number",
+        "name": "パック旅行費",
+        "range": "861・862"
       },
       "definition": [],
       "includes": [],
@@ -8375,7 +9177,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "9.4.3",
-        "name": "月謝類"
+        "codeKind": "number",
+        "name": "月謝類",
+        "range": "870～876・879"
       },
       "definition": [],
       "includes": [
@@ -8391,7 +9195,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "9.4.3",
-        "name": "月謝類"
+        "codeKind": "number",
+        "name": "月謝類",
+        "range": "870～876・879"
       },
       "definition": [],
       "includes": [
@@ -8408,7 +9214,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "9.4.3",
-        "name": "月謝類"
+        "codeKind": "number",
+        "name": "月謝類",
+        "range": "870～876・879"
       },
       "definition": [],
       "includes": [
@@ -8428,7 +9236,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "9.4.3",
-        "name": "月謝類"
+        "codeKind": "number",
+        "name": "月謝類",
+        "range": "870～876・879"
       },
       "definition": [
         "自動車学校，自動車教習所の入学金，入所料。合宿料共のものも含む。"
@@ -8444,7 +9254,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "9.4.3",
-        "name": "月謝類"
+        "codeKind": "number",
+        "name": "月謝類",
+        "range": "870～876・879"
       },
       "definition": [],
       "includes": [
@@ -8458,7 +9270,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "9.4.3",
-        "name": "月謝類"
+        "codeKind": "number",
+        "name": "月謝類",
+        "range": "870～876・879"
       },
       "definition": [],
       "includes": [
@@ -8472,7 +9286,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "9.4.3",
-        "name": "月謝類"
+        "codeKind": "number",
+        "name": "月謝類",
+        "range": "870～876・879"
       },
       "definition": [],
       "includes": [
@@ -8485,8 +9301,10 @@
       "name": "ゴルフプレー料金",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "入場･観覧･\nゲーム代"
+        "code": "877・878・881～886",
+        "codeKind": "range",
+        "name": "入場･観覧･ゲーム代",
+        "range": "877・878・881～886"
       },
       "definition": [
         "練習場での料金を含む。用具レンタル料込みを含む。"
@@ -8517,8 +9335,10 @@
       "name": "スポーツクラブ\n使用料",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "入場･観覧･\nゲーム代"
+        "code": "877・878・881～886",
+        "codeKind": "range",
+        "name": "入場･観覧･ゲーム代",
+        "range": "877・878・881～886"
       },
       "definition": [
         "スポーツクラブ（フィットネス・アスレチックジム）を利用した際に支払う利用料。公営施設も含む。用具レンタル料込みを含む。ただし，月謝制のレッスン料は除く。"
@@ -8552,7 +9372,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "9.4.3",
-        "name": "月謝類"
+        "codeKind": "number",
+        "name": "月謝類",
+        "range": "870～876・879"
       },
       "definition": [
         "870～876の項目に分類されない月謝類。"
@@ -8567,8 +9389,10 @@
       "name": "他の放送受信料",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "放送受信料"
+        "code": "880・88A・88B",
+        "codeKind": "range",
+        "name": "放送受信料",
+        "range": "880・88A・88B"
       },
       "definition": [
         "88A，88Bの項目に分類されない放送受信料。加入料も含む。"
@@ -8586,8 +9410,10 @@
       "name": "他のスポーツ",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "入場･観覧･\nゲーム代"
+        "code": "877・878・881～886",
+        "codeKind": "range",
+        "name": "入場･観覧･ゲーム代",
+        "range": "877・878・881～886"
       },
       "definition": [
         "877，878に分類されないスポーツ施設の利用料金。"
@@ -8610,8 +9436,10 @@
       "name": "映画・演劇等",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "入場･観覧･\nゲーム代"
+        "code": "877・878・881～886",
+        "codeKind": "range",
+        "name": "入場･観覧･ゲーム代",
+        "range": "877・878・881～886"
       },
       "definition": [
         "映画，演劇，コンサート，落語などの入場料。"
@@ -8628,8 +9456,10 @@
       "name": "スポーツ観覧料",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "入場･観覧･\nゲーム代"
+        "code": "877・878・881～886",
+        "codeKind": "range",
+        "name": "入場･観覧･ゲーム代",
+        "range": "877・878・881～886"
       },
       "definition": [],
       "includes": [
@@ -8645,8 +9475,10 @@
       "name": "文化施設入場料",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "入場･観覧･\nゲーム代"
+        "code": "877・878・881～886",
+        "codeKind": "range",
+        "name": "入場･観覧･ゲーム代",
+        "range": "877・878・881～886"
       },
       "definition": [
         "原則として美術館，博物館，動物園，社寺などの文化施設の入場料，拝観料。"
@@ -8663,8 +9495,10 @@
       "name": "他の入場･ゲーム代",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "入場･観覧･\nゲーム代"
+        "code": "877・878・881～886",
+        "codeKind": "range",
+        "name": "入場･観覧･ゲーム代",
+        "range": "877・878・881～886"
       },
       "definition": [
         "877，878，881～884，886の項目に分類されない入場・ゲーム代。"
@@ -8682,8 +9516,10 @@
       "name": "遊園地入場・",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "入場･観覧･\nゲーム代"
+        "code": "877・878・881～886",
+        "codeKind": "range",
+        "name": "入場･観覧･ゲーム代",
+        "range": "877・878・881～886"
       },
       "definition": [
         "乗物代は遊園地内のものに限る。"
@@ -8699,8 +9535,10 @@
       "name": "写真撮影・",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "入場･観覧･\nゲーム代"
+        "code": "877・878・881～886",
+        "codeKind": "range",
+        "name": "入場･観覧･ゲーム代",
+        "range": "877・878・881～886"
       },
       "definition": [],
       "includes": [
@@ -8714,8 +9552,10 @@
       "name": "諸会費",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "入場･観覧･\nゲーム代"
+        "code": "877・878・881～886",
+        "codeKind": "range",
+        "name": "入場･観覧･ゲーム代",
+        "range": "877・878・881～886"
       },
       "definition": [
         "教養娯楽的要素のあるクラブ費，会費。"
@@ -8736,8 +9576,10 @@
       "name": "他の教養娯楽",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "入場･観覧･\nゲーム代"
+        "code": "877・878・881～886",
+        "codeKind": "range",
+        "name": "入場･観覧･ゲーム代",
+        "range": "877・878・881～886"
       },
       "definition": [
         "877，878，880～888，88A，88B，88X，88Yの項目に分類されない「他の教養娯楽サービス」。",
@@ -8767,7 +9609,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "10.1.1",
-        "name": "理美容サービス"
+        "codeKind": "number",
+        "name": "理美容サービス",
+        "range": "890～899"
       },
       "definition": [
         "入浴施設に係る料金。入館料に入浴料以外（マッサージ・エステ・個室休憩所・館内着・食事など）の料金が含まれているものは除く。"
@@ -8789,7 +9633,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "10.1.1",
-        "name": "理美容サービス"
+        "codeKind": "number",
+        "name": "理美容サービス",
+        "range": "890～899"
       },
       "definition": [
         "指名料も含む。"
@@ -8810,7 +9656,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "10.1.1",
-        "name": "理美容サービス"
+        "codeKind": "number",
+        "name": "理美容サービス",
+        "range": "890～899"
       },
       "definition": [
         "シャンプー，カット，トリートメント，セット代及び指名料も含む。"
@@ -8826,7 +9674,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "10.1.1",
-        "name": "理美容サービス"
+        "codeKind": "number",
+        "name": "理美容サービス",
+        "range": "890～899"
       },
       "definition": [
         "シャンプー，トリートメント及びセット代も含む。"
@@ -8842,7 +9692,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "10.1.1",
-        "name": "理美容サービス"
+        "codeKind": "number",
+        "name": "理美容サービス",
+        "range": "890～899"
       },
       "definition": [
         "890～894の項目に分類されない理美容衛生に関するもの。",
@@ -8863,7 +9715,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "10.1.2",
-        "name": "理美容用品"
+        "codeKind": "number",
+        "name": "理美容用品",
+        "range": "900～915"
       },
       "definition": [],
       "includes": [
@@ -8880,7 +9734,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "10.1.2",
-        "name": "理美容用品"
+        "codeKind": "number",
+        "name": "理美容用品",
+        "range": "900～915"
       },
       "definition": [
         "携帯用，子供用も含む。"
@@ -8896,7 +9752,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "10.1.2",
-        "name": "理美容用品"
+        "codeKind": "number",
+        "name": "理美容用品",
+        "range": "900～915"
       },
       "definition": [
         "900，901の項目に分類されない理美容用品。"
@@ -8916,8 +9774,10 @@
       "name": "浴用・洗顔石けん",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "石けん類・化粧品"
+        "code": "904～915",
+        "codeKind": "range",
+        "name": "石けん類・化粧品",
+        "range": "904～915"
       },
       "definition": [
         "形状を問わない。携帯用・詰め替え用も含む。"
@@ -8936,8 +9796,10 @@
       "name": "シャンプー",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "石けん類・化粧品"
+        "code": "904～915",
+        "codeKind": "range",
+        "name": "石けん類・化粧品",
+        "range": "904～915"
       },
       "definition": [
         "粉，液体，クリーム状の洗髪用シャンプー。"
@@ -8952,8 +9814,10 @@
       "name": "歯磨き",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "石けん類・化粧品"
+        "code": "904～915",
+        "codeKind": "range",
+        "name": "石けん類・化粧品",
+        "range": "904～915"
       },
       "definition": [
         "粉，ねり，液体も含む。"
@@ -8969,8 +9833,10 @@
       "name": "整髪・養毛剤",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "石けん類・化粧品"
+        "code": "904～915",
+        "codeKind": "range",
+        "name": "石けん類・化粧品",
+        "range": "904～915"
       },
       "definition": [
         "ヘアローション  ヘアスプレー ポマード  チック"
@@ -8985,8 +9851,10 @@
       "name": "ヘアコンディショナー",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "石けん類・化粧品"
+        "code": "904～915",
+        "codeKind": "range",
+        "name": "石けん類・化粧品",
+        "range": "904～915"
       },
       "definition": [],
       "includes": [],
@@ -8997,8 +9865,10 @@
       "name": "化粧クリーム",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "石けん類・化粧品"
+        "code": "904～915",
+        "codeKind": "range",
+        "name": "石けん類・化粧品",
+        "range": "904～915"
       },
       "definition": [
         "男性用，ベビー用クリームも含む。"
@@ -9025,8 +9895,10 @@
       "name": "化粧水",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "石けん類・化粧品"
+        "code": "904～915",
+        "codeKind": "range",
+        "name": "石けん類・化粧品",
+        "range": "904～915"
       },
       "definition": [
         "男性用，ベビー用化粧水も含む。"
@@ -9042,8 +9914,10 @@
       "name": "ファンデーション",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "石けん類・化粧品"
+        "code": "904～915",
+        "codeKind": "range",
+        "name": "石けん類・化粧品",
+        "range": "904～915"
       },
       "definition": [
         "粉，固形，ねり，水白粉も含む。"
@@ -9058,8 +9932,10 @@
       "name": "口 紅",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "石けん類・化粧品"
+        "code": "904～915",
+        "codeKind": "range",
+        "name": "石けん類・化粧品",
+        "range": "904～915"
       },
       "definition": [
         "リップクリーム，液体も含む。"
@@ -9074,8 +9950,10 @@
       "name": "他の化粧品",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "石けん類・化粧品"
+        "code": "904～915",
+        "codeKind": "range",
+        "name": "石けん類・化粧品",
+        "range": "904～915"
       },
       "definition": [
         "904～912，914，915の項目に分類されない化粧品。",
@@ -9095,8 +9973,10 @@
       "name": "乳液",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "石けん類・化粧品"
+        "code": "904～915",
+        "codeKind": "range",
+        "name": "石けん類・化粧品",
+        "range": "904～915"
       },
       "definition": [],
       "includes": [],
@@ -9107,8 +9987,10 @@
       "name": "ヘアカラーリング剤",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "石けん類・化粧品"
+        "code": "904～915",
+        "codeKind": "range",
+        "name": "石けん類・化粧品",
+        "range": "904～915"
       },
       "definition": [
         "洗って落とせるタイプも含む。"
@@ -9125,7 +10007,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "10.1.3",
-        "name": "身の回り用品"
+        "codeKind": "number",
+        "name": "身の回り用品",
+        "range": "920～935"
       },
       "definition": [],
       "includes": [
@@ -9143,8 +10027,10 @@
       "name": "ハンドバッグ",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "かばん類"
+        "code": "924～927",
+        "codeKind": "range",
+        "name": "かばん類",
+        "range": "924～927"
       },
       "definition": [
         "大人用，子供用及び性別を問わない。"
@@ -9160,8 +10046,10 @@
       "name": "通学用かばん",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "かばん類"
+        "code": "924～927",
+        "codeKind": "range",
+        "name": "かばん類",
+        "range": "924～927"
       },
       "definition": [],
       "includes": [
@@ -9174,8 +10062,10 @@
       "name": "旅行用かばん",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "かばん類"
+        "code": "924～927",
+        "codeKind": "range",
+        "name": "かばん類",
+        "range": "924～927"
       },
       "definition": [
         "旅行用のかばんに限る。"
@@ -9190,8 +10080,10 @@
       "name": "他のバッグ",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "かばん類"
+        "code": "924～927",
+        "codeKind": "range",
+        "name": "かばん類",
+        "range": "924～927"
       },
       "definition": [
         "924～926の項目に分類されないかばん類。"
@@ -9216,8 +10108,10 @@
       "name": "アクセサリー",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "かばん類"
+        "code": "924～927",
+        "codeKind": "range",
+        "name": "かばん類",
+        "range": "924～927"
       },
       "definition": [
         "貴金属類などの装飾を目的として身に付けるもの。",
@@ -9236,8 +10130,10 @@
       "name": "腕時計",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "かばん類"
+        "code": "924～927",
+        "codeKind": "range",
+        "name": "かばん類",
+        "range": "924～927"
       },
       "definition": [],
       "includes": [
@@ -9250,8 +10146,10 @@
       "name": "他の身の回り用品",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "かばん類"
+        "code": "924～927",
+        "codeKind": "range",
+        "name": "かばん類",
+        "range": "924～927"
       },
       "definition": [
         "928，930の項目に分類されない身の回り用品及び服飾品。"
@@ -9279,8 +10177,10 @@
       "name": "身の回り用品",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "かばん類"
+        "code": "924～927",
+        "codeKind": "range",
+        "name": "かばん類",
+        "range": "924～927"
       },
       "definition": [
         "身の回り用品の修理代（加工賃も含む。），賃借料，洗濯",
@@ -9300,8 +10200,10 @@
       "name": "たばこ",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "かばん類"
+        "code": "924～927",
+        "codeKind": "range",
+        "name": "かばん類",
+        "range": "924～927"
       },
       "definition": [],
       "includes": [
@@ -9320,7 +10222,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "10.1.5",
-        "name": "他の諸雑費"
+        "codeKind": "number",
+        "name": "他の諸雑費",
+        "range": "950～959・95X"
       },
       "definition": [
         "寺の維持費，神社の氏子費，寺・神社への寄付及び信仰に関するもの。"
@@ -9339,7 +10243,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "10.1.5",
-        "name": "他の諸雑費"
+        "codeKind": "number",
+        "name": "他の諸雑費",
+        "range": "950～959・95X"
       },
       "definition": [
         "原則として，介護認定者が公的介護保険サービスを享受した時に支払う利用料（自己負担分）。"
@@ -9359,7 +10265,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "10.1.5",
-        "name": "他の諸雑費"
+        "codeKind": "number",
+        "name": "他の諸雑費",
+        "range": "950～959・95X"
       },
       "definition": [
         "各種掛け捨て型の保険料。ただし，429，757～759，95Xの項目に分類されない各種掛け捨て型の保険料。"
@@ -9375,7 +10283,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "10.1.5",
-        "name": "他の諸雑費"
+        "codeKind": "number",
+        "name": "他の諸雑費",
+        "range": "950～959・95X"
       },
       "definition": [
         "世帯以外の団体などへの寄付金，祝儀などの移転的支出。"
@@ -9394,7 +10304,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "10.1.5",
-        "name": "他の諸雑費"
+        "codeKind": "number",
+        "name": "他の諸雑費",
+        "range": "950～959・95X"
       },
       "definition": [
         "保育施設以外を利用した場合も含む。"
@@ -9422,7 +10334,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "10.1.5",
-        "name": "他の諸雑費"
+        "codeKind": "number",
+        "name": "他の諸雑費",
+        "range": "950～959・95X"
       },
       "definition": [
         "線香  ろうそく"
@@ -9439,7 +10353,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "10.1.5",
-        "name": "他の諸雑費"
+        "codeKind": "number",
+        "name": "他の諸雑費",
+        "range": "950～959・95X"
       },
       "definition": [
         "宿泊，交通費は除く。"
@@ -9456,7 +10372,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "10.1.5",
-        "name": "他の諸雑費"
+        "codeKind": "number",
+        "name": "他の諸雑費",
+        "range": "950～959・95X"
       },
       "definition": [
         "宿泊，交通費は除く。"
@@ -9472,7 +10390,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "10.1.5",
-        "name": "他の諸雑費"
+        "codeKind": "number",
+        "name": "他の諸雑費",
+        "range": "950～959・95X"
       },
       "definition": [
         "956，957の項目に分類されない冠婚葬祭費。"
@@ -9488,7 +10408,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "10.1.5",
-        "name": "他の諸雑費"
+        "codeKind": "number",
+        "name": "他の諸雑費",
+        "range": "950～959・95X"
       },
       "definition": [
         "950～958，95Xの項目に分類されない「他の諸雑費」。"
@@ -9509,7 +10431,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "10.2",
-        "name": "こづかい(使途不明)"
+        "codeKind": "number",
+        "name": "こづかい(使途不明)",
+        "range": "960・961"
       },
       "definition": [],
       "includes": [],
@@ -9521,7 +10445,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "10.2",
-        "name": "こづかい(使途不明)"
+        "codeKind": "number",
+        "name": "こづかい(使途不明)",
+        "range": "960・961"
       },
       "definition": [
         "世帯主を除く世帯員こづかい。"
@@ -9535,7 +10461,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "10.3",
-        "name": "交際費"
+        "codeKind": "number",
+        "name": "交際費",
+        "range": "970～973"
       },
       "definition": [],
       "includes": [
@@ -9550,7 +10478,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "10.3.7",
-        "name": "他の交際費"
+        "codeKind": "number",
+        "name": "他の交際費",
+        "range": "971～973"
       },
       "definition": [
         "親睦又は交際的要素のある会費。"
@@ -9564,7 +10494,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "10.3.7",
-        "name": "他の交際費"
+        "codeKind": "number",
+        "name": "他の交際費",
+        "range": "971～973"
       },
       "definition": [
         "社会生活上やむを得ない半公課的意味をもつ定期的に支払われる会費又は負担費。"
@@ -9582,7 +10514,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "10.3.7",
-        "name": "他の交際費"
+        "codeKind": "number",
+        "name": "他の交際費",
+        "range": "971～973"
       },
       "definition": [
         "集合住宅などに住む際，必要な共益費などの負担費。"
@@ -9599,7 +10533,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "10.4",
-        "name": "仕送り金"
+        "codeKind": "number",
+        "name": "仕送り金",
+        "range": "980・981"
       },
       "definition": [
         "学校教育法に定める学校及び国内の予備校在学者に対する仕送り金。旅行費，クラブ活動費なども含む。"
@@ -9613,7 +10549,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "10.4",
-        "name": "仕送り金"
+        "codeKind": "number",
+        "name": "仕送り金",
+        "range": "980・981"
       },
       "definition": [
         "980の項目に分類されないその他の生活補助を目的とした仕送り金。"
@@ -9626,8 +10564,10 @@
       "name": "受贈金",
       "sheet": "1収入",
       "group": {
-        "code": null,
-        "name": "特別収入"
+        "code": "032・039",
+        "codeKind": "range",
+        "name": "特別収入",
+        "range": "032・039"
       },
       "definition": [],
       "includes": [],
@@ -9638,8 +10578,10 @@
       "name": "他の特別収入",
       "sheet": "1収入",
       "group": {
-        "code": null,
-        "name": "特別収入"
+        "code": "032・039",
+        "codeKind": "range",
+        "name": "特別収入",
+        "range": "032・039"
       },
       "definition": [],
       "includes": [],
@@ -9650,8 +10592,10 @@
       "name": "預貯金引出",
       "sheet": "1収入",
       "group": {
-        "code": null,
-        "name": "実収入以外の受取\n（繰入金を除く）"
+        "code": "040～049・052",
+        "codeKind": "range",
+        "name": "実収入以外の受取（繰入金を除く）",
+        "range": "040～049・052"
       },
       "definition": [],
       "includes": [],
@@ -9662,8 +10606,10 @@
       "name": "個人・企業年金       保険金",
       "sheet": "1収入",
       "group": {
-        "code": null,
-        "name": "保険金"
+        "code": "048・052",
+        "codeKind": "range",
+        "name": "保険金",
+        "range": "048・052"
       },
       "definition": [],
       "includes": [],
@@ -9674,8 +10620,10 @@
       "name": "他の保険金",
       "sheet": "1収入",
       "group": {
-        "code": null,
-        "name": "保険金"
+        "code": "048・052",
+        "codeKind": "range",
+        "name": "保険金",
+        "range": "048・052"
       },
       "definition": [],
       "includes": [],
@@ -9686,8 +10634,10 @@
       "name": "有価証券売却",
       "sheet": "1収入",
       "group": {
-        "code": null,
-        "name": "保険金"
+        "code": "048・052",
+        "codeKind": "range",
+        "name": "保険金",
+        "range": "048・052"
       },
       "definition": [],
       "includes": [],
@@ -9698,8 +10648,10 @@
       "name": "土地家屋借入金",
       "sheet": "1収入",
       "group": {
-        "code": null,
-        "name": "保険金"
+        "code": "048・052",
+        "codeKind": "range",
+        "name": "保険金",
+        "range": "048・052"
       },
       "definition": [],
       "includes": [],
@@ -9710,8 +10662,10 @@
       "name": "他の借入金",
       "sheet": "1収入",
       "group": {
-        "code": null,
-        "name": "保険金"
+        "code": "048・052",
+        "codeKind": "range",
+        "name": "保険金",
+        "range": "048・052"
       },
       "definition": [],
       "includes": [],
@@ -9722,8 +10676,10 @@
       "name": "財産売却",
       "sheet": "1収入",
       "group": {
-        "code": null,
-        "name": "保険金"
+        "code": "048・052",
+        "codeKind": "range",
+        "name": "保険金",
+        "range": "048・052"
       },
       "definition": [],
       "includes": [],
@@ -9734,8 +10690,10 @@
       "name": "実収入以外の\n受取のその他",
       "sheet": "1収入",
       "group": {
-        "code": null,
-        "name": "保険金"
+        "code": "048・052",
+        "codeKind": "range",
+        "name": "保険金",
+        "range": "048・052"
       },
       "definition": [],
       "includes": [],
@@ -9746,8 +10704,10 @@
       "name": "繰入金",
       "sheet": "1収入",
       "group": {
-        "code": null,
-        "name": "保険金"
+        "code": "048・052",
+        "codeKind": "range",
+        "name": "保険金",
+        "range": "048・052"
       },
       "definition": [],
       "includes": [],
@@ -9759,7 +10719,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.3.1",
-        "name": "生鮮肉"
+        "codeKind": "number",
+        "name": "生鮮肉",
+        "range": "220～224・22X"
       },
       "definition": [
         "牛肉，豚肉などの合いびき肉。"
@@ -9772,8 +10734,10 @@
       "name": "たけのこ",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "根 菜"
+        "code": "250～259・25X",
+        "codeKind": "range",
+        "name": "根菜",
+        "range": "250～259・25X"
       },
       "definition": [
         "ゆでたけのこも含む。"
@@ -9803,8 +10767,10 @@
       "name": "しめじ",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "他の野菜"
+        "code": "260～269・26B・26X",
+        "codeKind": "range",
+        "name": "他の野菜",
+        "range": "260～269・26B・26X"
       },
       "definition": [],
       "includes": [
@@ -9817,8 +10783,10 @@
       "name": "えのきたけ",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "他の野菜"
+        "code": "260～269・26B・26X",
+        "codeKind": "range",
+        "name": "他の野菜",
+        "range": "260～269・26B・26X"
       },
       "definition": [],
       "includes": [
@@ -9837,7 +10805,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.7.2",
-        "name": "調味料"
+        "codeKind": "number",
+        "name": "調味料",
+        "range": "322～339・33X"
       },
       "definition": [
         "液体のものに限る。"
@@ -9856,7 +10826,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.9.1",
-        "name": "主食的調理食品"
+        "codeKind": "number",
+        "name": "主食的調理食品",
+        "range": "360～363・36A・36B"
       },
       "definition": [
         "飲食店以外の持ち帰りのもの。冷凍は除く。"
@@ -9873,7 +10845,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.9.1",
-        "name": "主食的調理食品"
+        "codeKind": "number",
+        "name": "主食的調理食品",
+        "range": "360～363・36A・36B"
       },
       "definition": [
         "360，36Aの項目に分類されない単品の米飯。冷凍は除く。"
@@ -9895,7 +10869,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.10.1",
-        "name": "茶 類"
+        "codeKind": "number",
+        "name": "茶類",
+        "range": "380・381・383・38X"
       },
       "definition": [
         "液体のみ。"
@@ -9912,7 +10888,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.10.3",
-        "name": "他の飲料"
+        "codeKind": "number",
+        "name": "他の飲料",
+        "range": "385・387・～389・38A・38B・38Y"
       },
       "definition": [
         "生乳や乳製品を原料として，乳製品以外の成分（果汁，コーヒー，香料，カルシウム，鉄など）を加えたもの。"
@@ -9928,7 +10906,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.10.3",
-        "name": "他の飲料"
+        "codeKind": "number",
+        "name": "他の飲料",
+        "range": "385・387・～389・38A・38B・38Y"
       },
       "definition": [
         "飲用適の水を容器に詰めたもの。炭酸が圧入されたもの，栄養素及び果汁を加えたものを除く。"
@@ -9951,7 +10931,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "1.10.3",
-        "name": "他の飲料"
+        "codeKind": "number",
+        "name": "他の飲料",
+        "range": "385・387・～389・38A・38B・38Y"
       },
       "definition": [
         "スポーツなどで失われた水分や電解質を効率的に補給するための飲料。粉末も含む。"
@@ -9969,8 +10951,10 @@
       "name": "中華食",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "食事代"
+        "code": "390～396・399・39A・39B",
+        "codeKind": "range",
+        "name": "食事代",
+        "range": "390～396・399・39A・39B"
       },
       "definition": [
         "中華そばは除く。"
@@ -9990,8 +10974,10 @@
       "name": "ハンバーガー",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "食事代"
+        "code": "390～396・399・39A・39B",
+        "codeKind": "range",
+        "name": "食事代",
+        "range": "390～396・399・39A・39B"
       },
       "definition": [
         "セットも含む。ファストフード店に限る。"
@@ -10004,8 +10990,10 @@
       "name": "学校給食",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "食事代"
+        "code": "390～396・399・39A・39B",
+        "codeKind": "range",
+        "name": "食事代",
+        "range": "390～396・399・39A・39B"
       },
       "definition": [],
       "includes": [],
@@ -10016,8 +11004,10 @@
       "name": "賄い費",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "食事代"
+        "code": "390～396・399・39A・39B",
+        "codeKind": "range",
+        "name": "食事代",
+        "range": "390～396・399・39A・39B"
       },
       "definition": [],
       "includes": [
@@ -10030,8 +11020,10 @@
       "name": "電子レンジ",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": ""
+        "code": "4.1.1",
+        "codeKind": "number",
+        "name": "家事用耐久財",
+        "range": "451～459・45X・45X"
       },
       "definition": [
         "高周波の電磁波（電波）等を利用した加熱調理器具。オーブンレンジも含む。"
@@ -10050,7 +11042,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "7.2.3",
-        "name": "自動車等維持"
+        "codeKind": "number",
+        "name": "自動車等維持",
+        "range": "750～759・75B・75X"
       },
       "definition": [
         "契約により継続的に支払う料金。"
@@ -10067,7 +11061,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "7.2.3",
-        "name": "自動車等維持"
+        "codeKind": "number",
+        "name": "自動車等維持",
+        "range": "750～759・75B・75X"
       },
       "definition": [
         "四輪車に限る。付帯レンタル料金を含む。"
@@ -10085,8 +11081,10 @@
       "name": "ペット・他のペット",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "他の教養娯楽用品"
+        "code": "842・843・845～849・84A・84Y",
+        "codeKind": "range",
+        "name": "他の教養娯楽用品",
+        "range": "842・843・845～849・84A・84Y"
       },
       "definition": [
         "848の項目に分類されないペット及びそれらに関する用具。",
@@ -10104,8 +11102,10 @@
       "name": "園芸用植物",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "他の教養娯楽用品"
+        "code": "842・843・845～849・84A・84Y",
+        "codeKind": "range",
+        "name": "他の教養娯楽用品",
+        "range": "842・843・845～849・84A・84Y"
       },
       "definition": [
         "ガーデニング，家庭菜園に係る植物。"
@@ -10121,8 +11121,10 @@
       "name": "動物病院代",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "他の教養娯楽用品"
+        "code": "842・843・845～849・84A・84Y",
+        "codeKind": "range",
+        "name": "他の教養娯楽用品",
+        "range": "842・843・845～849・84A・84Y"
       },
       "definition": [
         "往診代・病院で処方される薬代も含む。"
@@ -10137,8 +11139,10 @@
       "name": "ＮＨＫ放送受信料",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "放送受信料"
+        "code": "880・88A・88B",
+        "codeKind": "range",
+        "name": "放送受信料",
+        "range": "880・88A・88B"
       },
       "definition": [
         "衛星放送も含む。"
@@ -10160,8 +11164,10 @@
       "name": "ケーブルテレビ",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "放送受信料"
+        "code": "880・88A・88B",
+        "codeKind": "range",
+        "name": "放送受信料",
+        "range": "880・88A・88B"
       },
       "definition": [
         "加入料も含む。"
@@ -10185,8 +11191,10 @@
       "name": "教養娯楽賃借料",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "入場･観覧･\nゲーム代"
+        "code": "877・878・881～886",
+        "codeKind": "range",
+        "name": "入場･観覧･ゲーム代",
+        "range": "877・878・881～886"
       },
       "definition": [
         "801～810，813，821，828～837，842，843，845，847，84A，84Y，851～859の項目に分類されるものの賃借料。"
@@ -10204,8 +11212,10 @@
       "name": "インターネット",
       "sheet": "2消費支出",
       "group": {
-        "code": null,
-        "name": "入場･観覧･\nゲーム代"
+        "code": "877・878・881～886",
+        "codeKind": "range",
+        "name": "入場･観覧･ゲーム代",
+        "range": "877・878・881～886"
       },
       "definition": [
         "インターネット接続の利用料。プロバイダ料金(加入料及びプロバイダの契約が通信料込みも含む。)。",
@@ -10223,7 +11233,9 @@
       "sheet": "2消費支出",
       "group": {
         "code": "10.1.5",
-        "name": "他の諸雑費"
+        "codeKind": "number",
+        "name": "他の諸雑費",
+        "range": "950～959・95X"
       },
       "definition": [
         "医療に関する掛け捨て型の保険料。"
@@ -10239,8 +11251,10 @@
       "name": "他の非消費支出",
       "sheet": "3非消費支出～繰越金",
       "group": {
-        "code": null,
-        "name": "社会保険料"
+        "code": "073・074・076・077",
+        "codeKind": "range",
+        "name": "社会保険料",
+        "range": "073・074・076・077"
       },
       "definition": [],
       "includes": [],
@@ -10251,8 +11265,10 @@
       "name": "預貯金",
       "sheet": "3非消費支出～繰越金",
       "group": {
-        "code": null,
-        "name": "実支出以外の支払\n（繰越金を除く）"
+        "code": "080～089・092",
+        "codeKind": "range",
+        "name": "実支出以外の支払（繰越金を除く）",
+        "range": "080～089・092"
       },
       "definition": [],
       "includes": [],
@@ -10263,8 +11279,10 @@
       "name": "個人・企業年金",
       "sheet": "3非消費支出～繰越金",
       "group": {
-        "code": null,
-        "name": "保険料"
+        "code": "083・092",
+        "codeKind": "range",
+        "name": "保険料",
+        "range": "083・092"
       },
       "definition": [],
       "includes": [],
@@ -10275,8 +11293,10 @@
       "name": "他の保険料",
       "sheet": "3非消費支出～繰越金",
       "group": {
-        "code": null,
-        "name": "保険料"
+        "code": "083・092",
+        "codeKind": "range",
+        "name": "保険料",
+        "range": "083・092"
       },
       "definition": [],
       "includes": [],
@@ -10287,8 +11307,10 @@
       "name": "有価証券購入",
       "sheet": "3非消費支出～繰越金",
       "group": {
-        "code": null,
-        "name": "保険料"
+        "code": "083・092",
+        "codeKind": "range",
+        "name": "保険料",
+        "range": "083・092"
       },
       "definition": [],
       "includes": [],
@@ -10299,8 +11321,10 @@
       "name": "土地家屋借金返済",
       "sheet": "3非消費支出～繰越金",
       "group": {
-        "code": null,
-        "name": "保険料"
+        "code": "083・092",
+        "codeKind": "range",
+        "name": "保険料",
+        "range": "083・092"
       },
       "definition": [],
       "includes": [],
@@ -10311,8 +11335,10 @@
       "name": "他の借金返済",
       "sheet": "3非消費支出～繰越金",
       "group": {
-        "code": null,
-        "name": "保険料"
+        "code": "083・092",
+        "codeKind": "range",
+        "name": "保険料",
+        "range": "083・092"
       },
       "definition": [],
       "includes": [],
@@ -10323,8 +11349,10 @@
       "name": "クレジット購入",
       "sheet": "3非消費支出～繰越金",
       "group": {
-        "code": null,
-        "name": "保険料"
+        "code": "083・092",
+        "codeKind": "range",
+        "name": "保険料",
+        "range": "083・092"
       },
       "definition": [],
       "includes": [],
@@ -10335,8 +11363,10 @@
       "name": "財産購入",
       "sheet": "3非消費支出～繰越金",
       "group": {
-        "code": null,
-        "name": "保険料"
+        "code": "083・092",
+        "codeKind": "range",
+        "name": "保険料",
+        "range": "083・092"
       },
       "definition": [],
       "includes": [],
@@ -10347,8 +11377,10 @@
       "name": "実支出以外の",
       "sheet": "3非消費支出～繰越金",
       "group": {
-        "code": null,
-        "name": "保険料"
+        "code": "083・092",
+        "codeKind": "range",
+        "name": "保険料",
+        "range": "083・092"
       },
       "definition": [],
       "includes": [],
@@ -10359,8 +11391,10 @@
       "name": "繰越金",
       "sheet": "3非消費支出～繰越金",
       "group": {
-        "code": null,
-        "name": "保険料"
+        "code": "083・092",
+        "codeKind": "range",
+        "name": "保険料",
+        "range": "083・092"
       },
       "definition": [],
       "includes": [],

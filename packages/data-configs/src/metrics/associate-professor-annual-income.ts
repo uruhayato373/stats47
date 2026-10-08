@@ -3,7 +3,7 @@ import type { MetricConfig } from "../types";
 export const associateProfessorAnnualIncome: MetricConfig = {
   "key": "associate-professor-annual-income",
   "title": "大学准教授の平均年収",
-  "description": "大学准教授の都道府県別平均年収。賃金構造基本統計調査に基づく。",
+  "description": "大学准教授の都道府県別平均年収。賃金構造基本統計調査に基づく。対象は一般労働者・男女計。",
   "unit": "万円",
   "category": "economy",
   "source": {

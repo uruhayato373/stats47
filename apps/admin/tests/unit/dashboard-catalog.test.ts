@@ -1,3 +1,4 @@
+import { THEME_INDICATOR_SETS } from "@stats47/types";
 import { afterEach, describe, expect, it, vi } from "vitest";
 
 import { cleanupFixtureRoot, makeFixtureRoot } from "../helpers/fixture-root";
@@ -36,8 +37,9 @@ describe("dashboard catalog mirror", () => {
       localDashboards: 1,
       stories: 40,
       resasStories: 40,
-      coveredThemes: 56,
-      declaredThemes: 56,
+      // テーマ数は直書きしない (THEME-COUNT-LITERAL-TESTS-01)。fixture は生成物の全テーマを宣言する。
+      coveredThemes: THEME_INDICATOR_SETS.length,
+      declaredThemes: THEME_INDICATOR_SETS.length,
       partialDashboards: 1,
       staleStories: 0,
     });

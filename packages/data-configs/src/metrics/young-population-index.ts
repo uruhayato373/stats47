@@ -33,8 +33,8 @@ export const youngPopulationIndex: MetricConfig = {
   "calculation": {
     "isCalculated": false
   },
-  "seoTitle": "年少人口指数ランキング都道府県【2022年】｜1位沖縄県（27.1‐）",
-  "seoDescription": "2022年の年少人口指数の都道府県別ランキング。1位沖縄県（27.1‐）、最下位東京都（16.5‐）で1.6倍の格差。地図やグラフで47都道府県を比較。",
+  "seoTitle": "年少人口指数ランキング都道府県【2022年】｜1位沖縄県（27.1）",
+  "seoDescription": "2022年の年少人口指数の都道府県別ランキング。1位沖縄県（27.1）、最下位東京都（16.5）で1.6倍の格差。地図やグラフで47都道府県を比較。",
   "isActive": true,
   "subtitle": "15～64歳人口100人当たり"
 };

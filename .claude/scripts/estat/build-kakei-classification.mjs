@@ -42,11 +42,33 @@ const text = (value) => {
   return String(value);
 };
 const clean = (value) => text(value).replace(/　/g, " ").trim();
+/** 分類番号 (「1.9.2」「10」)。D 列には番号の代わりに「受取」のような名前が入る行もある */
+const CLASSIFICATION_NUMBER = /^[0-9]{1,2}(?:\.[0-9]{1,2})*$/;
+/** 見出しの名前は表で揃えるための空白・改行を含む (「穀  類」「実収入以外の受取\n（繰入金を除く）」) ので詰める */
+const compactName = (value) => text(value).replace(/\s+/g, "");
+/**
+ * 見出し行 A 列の品目範囲 (「(170～189)」「390～396　 ･399･39A」「    010～030　\n    033～035」) を
+ * 「170～189」「390～396・399・39A」「010～030・033～035」の形にそろえる。
+ */
+export function normalizeItemRange(value) {
+  const tokens = text(value).replace(/[()（）]/g, "").replace(/[･]/g, "・").trim().split(/\s+/).filter(Boolean);
+  return tokens.reduce((joined, token) => {
+    if (!joined) return token;
+    return joined.endsWith("・") || token.startsWith("・") ? `${joined}${token}` : `${joined}・${token}`;
+  }, "");
+}
+/** 見出しの名前。表は同じ名前を E〜I 列の結合セルに繰り返すので、最初に見つかったものを使う */
+const headingName = (row) => [5, 6, 7, 8, 4].map((index) => compactName(row[index])).find(Boolean) ?? "";
 
 /**
  * 1 シートの行を品目へまとめる (pure)。列は A=品目番号 / D=分類番号 / F・G=項目名 / O=内容例示。
  * 品目番号のある行が品目の始まりで、品目番号の無い後続行は直前の品目の例示の続き。
  * 例示が括弧の途中で折り返された行 (「冷凍食品（コロッケ … しゅうまい」→「からあげ）」) は直前の例示へつなぐ。
+ *
+ * group は品目が属する見出し。code は D 列の分類番号 (codeKind: "number") だが、
+ * 「鮮魚」「食事代」や収入・非消費支出のシートの見出しは公式表のどの列にも分類番号が無い。
+ * そのときは A 列の品目範囲を code にし (codeKind: "range")、番号を作り出さない
+ * (KAKEI-CLASSIFICATION-GROUP-CODE-01)。A 列だけが続く行 (「・45X」) は直前の見出しの範囲の続き。
  */
 export function parseClassificationRows(rows, sheetName) {
   const items = {};
@@ -58,7 +80,22 @@ export function parseClassificationRows(rows, sheetName) {
     const name = clean(row[6]);
     const detail = clean(row[14]);
     if (code && !ITEM_CODE.test(code) && GROUP_RANGE.test(code)) {
-      group = { code: groupCode || null, name: clean(row[5]) || name };
+      const range = normalizeItemRange(row[0]);
+      const label = headingName(row);
+      const number = CLASSIFICATION_NUMBER.test(groupCode) ? groupCode : null;
+      if (!number && !label) {
+        // 範囲の折り返しだけの行。直前の見出しはそのままにして、範囲だけ伸ばす
+        // (同じ見出しを指す品目にも反映されるよう、見出しのオブジェクトをその場で書き換える)
+        if (group) {
+          group.range = normalizeItemRange(`${group.range} ${text(row[0])}`);
+          if (group.codeKind === "range") group.code = group.range;
+        }
+        current = null;
+        continue;
+      }
+      group = number
+        ? { code: number, codeKind: "number", name: label, range }
+        : { code: range, codeKind: "range", name: label, range };
       current = null;
       continue;
     }
