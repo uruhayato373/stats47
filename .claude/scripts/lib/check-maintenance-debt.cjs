@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 "use strict";
 
+const { spawnSync } = require("node:child_process");
 const fs = require("node:fs");
 const path = require("node:path");
 
@@ -25,6 +26,39 @@ function walk(dir) {
     if (!entry.isDirectory() && file === __filename) return [];
     return entry.isDirectory() ? walk(file) : TEXT_EXT.test(entry.name) ? [file] : [];
   });
+}
+// 走査対象は git が見ているファイル (追跡中 + 未追跡で ignore されていないもの) に限る。
+// ディスクを辿ると gitignore 済みの生成物・ローカル専用ファイルまで検査し、
+// commit されないファイルで pre-commit が止まる (DEBT-CHECK-GITIGNORED-SCAN-01)。
+// git が使えない (repo でない・git 不在) ときだけ従来の walk に戻す。
+function isSameDir(a, b) {
+  try { return fs.realpathSync(a) === fs.realpathSync(b); } catch { return false; }
+}
+function gitListedFiles() {
+  const top = spawnSync("git", ["-C", ROOT, "rev-parse", "--show-toplevel"], { encoding: "utf8" });
+  if (top.error || top.status !== 0 || !isSameDir(top.stdout.trim(), ROOT)) return null;
+  const roots = SCAN_ROOTS.map(rel);
+  const listed = spawnSync(
+    "git",
+    ["-C", ROOT, "ls-files", "-z", "--cached", "--others", "--exclude-standard", "--", ...roots],
+    { encoding: "utf8", maxBuffer: 256 * 1024 * 1024 },
+  );
+  if (listed.error || listed.status !== 0) return null;
+  return [...new Set(listed.stdout.split("\0").filter(Boolean))]
+    .filter((relative) => {
+      const parts = relative.split("/");
+      const name = parts[parts.length - 1];
+      if (parts.slice(0, -1).some((part) => EXCLUDED.has(part))) return false;
+      if ([...EXCLUDED_PATHS].some((prefix) => relative === prefix || relative.startsWith(`${prefix}/`))) return false;
+      if (/-baseline\.json$/.test(name) || !TEXT_EXT.test(name)) return false;
+      return true;
+    })
+    .map((relative) => path.join(ROOT, relative))
+    // 削除済みでまだ index に残るファイルと、本 checker 自身を除く (walk と同じ扱い)
+    .filter((file) => file !== __filename && fs.existsSync(file) && fs.statSync(file).isFile());
+}
+function listScanFiles() {
+  return gitListedFiles() ?? SCAN_ROOTS.flatMap(walk);
 }
 function finding(code, file, line, message, content) {
   return { code, file: rel(file), line, message, content: content.trim().slice(0, 200) };
@@ -201,7 +235,7 @@ function loadStatCache() {
   return {};
 }
 function collect() {
-  const files = SCAN_ROOTS.flatMap(walk);
+  const files = listScanFiles();
   const cache = loadStatCache();
   const next = {};
   const findings = [];
