@@ -288,6 +288,7 @@ export const METRIC_POLARITY: Readonly<Record<string, PolarityEntry>> = {
   "single-mother-households-income-500plus": { polarity: "neutral", evidence: "所得500万円以上の母子世帯実数は階級別の規模で、全世帯比や世帯人数を伴わず地域全体の豊かさと読み替えない。" },
   "single-mother-households-income-under100": { polarity: "neutral", evidence: "所得100万円未満の母子世帯実数は母集団規模と所得構成の内訳で、等価所得や世帯人数を調整した貧困率とは異なる。" },
   "single-mother-public-assistance-households": { polarity: "neutral", evidence: "現に生活保護を受けた母子世帯数は困窮需要と制度への到達を反映し、受給減を生活改善と自動的には解釈できない。" },
+  "smoking-rate-male-age-adjusted": { polarity: "higher-is-worse", evidence: "20歳以上男性の年齢調整した現在習慣的喫煙者の割合は健康日本21の喫煙率低下の目標対象で、高い方向を改善とは扱わない。標本調査で県の信頼区間が広く、順位差は有意差ではない。" },
   "specific-health-checkup-participation-rate": { polarity: "higher-is-better", evidence: "特定健診の推計対象者に占める受診者の割合が高いほど対象者への健診実施が進む。疾病の少なさとは区別する。" },
   "specific-health-guidance-completion-rate": { polarity: "higher-is-better", evidence: "特定保健指導対象者に占める指導終了者の割合が高いほど対象者への実施が進む。体重減少等の結果指標ではない。" },
   "steep-slope-special-warning-zone-count": { polarity: "neutral", evidence: "急傾斜地崩壊の特別警戒区域指定数は危険箇所と指定進捗をともに反映し、被害実績や未指定地の安全性を示さない。" },

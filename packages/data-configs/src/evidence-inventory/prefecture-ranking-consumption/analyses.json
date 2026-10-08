@@ -1656,9 +1656,11 @@
         190,
         191
       ],
-      "resolution": "new-metric",
-      "resolutionReason": "既存metricに牛乳は無く、乳飲料・粉乳・脱脂粉乳は別品目で代用できない。家計調査の牛乳の購入数量を確認する。",
-      "metricKeys": [],
+      "resolution": "reuse-existing-metric",
+      "resolutionReason": "既存metricに牛乳は無く、乳飲料・粉乳・脱脂粉乳は別品目で代用できない。家計調査の牛乳の購入数量を確認する。家計調査の数量表(0003348235)に牛乳(cat01=010410001、単位1l、cat02=03)の品目があることをe-Statの表示ページで確認し、milk-consumption-quantityとして登録した(2026-10-08 metric 化)",
+      "metricKeys": [
+        "milk-consumption-quantity"
+      ],
       "surveyIds": [
         "kakei-chousa"
       ],
@@ -1687,7 +1689,7 @@
           "rights": "allowed"
         }
       ],
-      "nextAction": "家計調査の数量表(0003348235)に牛乳(cat01=010410001)の品目があるかをe-Stat APP_ID のある環境で確認する。あれば cdCat01 を pin した新規metricを作る(支出額表には存在を確認済み)"
+      "nextAction": "呼び元のCIでpage-data-batchのdryRunを回し、牛乳の47県・年の観測値をR2へ反映する。反映後にranking公開の多段手順を踏む"
     },
     {
       "id": "prefecture-ranking-consumption-2020-a41",
