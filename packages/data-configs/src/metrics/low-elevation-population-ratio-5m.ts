@@ -55,5 +55,5 @@ export const lowElevationPopulationRatio5m: MetricConfig = {
   },
   "surveyScope": "not-applicable",
   "surveyScopeReason": "国土数値情報の標高メッシュと国勢調査基準のメッシュ人口を空間結合した派生値で、統計調査そのものの集計表ではないため",
-  "isActive": false,
+  "isActive": true,
 };

@@ -255,6 +255,11 @@ export interface BusinessPlanM1Analysis {
   /** snapshotで配信するmetric。投稿のclaimMetricKeyはこの集合外を参照できない。 */
   readonly metricKeys: readonly string[];
   readonly rankingKey?: string;
+  /**
+   * 空間分析の主指標を、単独のランキングとして公開している指標key。
+   * ランキングページから分析の canonical 着地へ接続する。baseline の rankingKey とは別（こちらは分析自体がランキング）。
+   */
+  readonly relatedRankingKey?: string;
   /** R2 配信用 snapshot。ランキングを直接読む分析では省略する。 */
   readonly r2Key?: string;
   /** 入力SHA・途中artifact・集計値のlineage。細粒度地図を配信する分析で必須。 */

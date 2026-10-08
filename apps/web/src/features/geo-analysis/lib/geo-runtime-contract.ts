@@ -3,6 +3,7 @@ import {
   assertFloodArchiveKeys,
   parseGeoSnowManifest,
   parseGeoLandslideManifest,
+  parseGeoLowElevationManifest,
   type GeoAnalysisArtifactEvidence,
   type GeoAnalysisEvidenceManifest,
 } from '@stats47/gis';
@@ -108,6 +109,7 @@ export function validateGeoManifest(
 ): GeoAnalysisEvidenceManifest | null {
   if (slug === 'population-snow-designation') return parseGeoSnowManifest(value);
   if (slug === 'population-landslide-exposure') return parseGeoLandslideManifest(value);
+  if (slug === 'population-low-elevation') return parseGeoLowElevationManifest(value);
   if (
     !isRecord(value) ||
     value.schemaVersion !== 1 ||

@@ -18,6 +18,9 @@ export function isGeoSpatialView(
   );
 }
 
+export const LOW_ELEVATION_POPULATION_LEGEND =
+  '2020年人口：灰＝0人、薄青＝100人未満、青＝1,000人未満、濃青＝5,000人未満、最濃＝5,000人以上（1kmメッシュあたり）。';
+
 export const POPULATION_LEGEND =
   '人口変化：青緑＝維持・増加、青＝15%未満減少、橙＝15〜30%減少、赤＝30%以上減少、灰＝基準人口0。';
 
@@ -26,7 +29,7 @@ export function landPointCategory(
   index: number,
   meshes: ReadonlyMap<
     string,
-    Exclude<GeoAnalysisPrefDetail, { slug: 'population-snow-designation' | 'population-landslide-exposure' }>['meshes'][number]
+    Exclude<GeoAnalysisPrefDetail, { slug: 'population-snow-designation' | 'population-landslide-exposure' | 'population-low-elevation' }>['meshes'][number]
   > = new Map(detail.meshes.map((mesh) => [mesh[0], mesh]))
 ) {
   const point = detail.landPricePoints[index];
@@ -48,7 +51,7 @@ export function landPointCategory(
 export function buildSpatialMeshMap(
   detail: Exclude<
     GeoAnalysisPrefDetail,
-    { slug: 'population-public-facility-access' | 'population-snow-designation' | 'population-landslide-exposure' }
+    { slug: 'population-public-facility-access' | 'population-snow-designation' | 'population-landslide-exposure' | 'population-low-elevation' }
   >
 ): FeatureCollection<Polygon> {
   return {
@@ -82,6 +85,37 @@ export function buildSpatialMeshMap(
   };
 }
 
+function lowElevationAuditRows(
+  detail: Extract<GeoAnalysisPrefDetail, { slug: 'population-low-elevation' }>
+): { label: string; value: string }[] {
+  const s = detail.summary;
+  const people = (v: number) => `${Math.round(v).toLocaleString('ja-JP')}人`;
+  const percent = (v: number | null) => (v === null ? '—' : `${v.toFixed(1)}%`);
+  const [five] = s.thresholds.filter((row) => row.thresholdM === 5);
+  return [
+    {
+      label: '標高不明 + 0m以下 + 0m超5m以下 + 5m超10m以下 + 10m超 = 県の1kmメッシュ人口',
+      value: `${s.bands.map((band) => people(band.population)).join(' + ')} = ${people(s.population2020)}`,
+    },
+    {
+      label: '1kmメッシュ人口の合計 / 国勢調査2020の都道府県人口',
+      value: `${people(s.conservation.meshPopulation)} / ${people(s.conservation.censusPopulation2020)}（${s.conservation.matchesCensus ? '一致' : '不一致'}）`,
+    },
+    {
+      label: '平均標高5m以下の人口 / 県の人口',
+      value: five
+        ? `${people(five.meanBased.population)} / ${people(s.population2020)} = ${percent(five.meanBased.sharePercent)}`
+        : '—',
+    },
+    {
+      label: '人口割合（平均標高基準 / 最低標高基準）',
+      value: s.thresholds
+        .map((row) => `${row.thresholdM}m以下 ${percent(row.meanBased.sharePercent)} / ${percent(row.minBased.sharePercent)}`)
+        .join('、'),
+    },
+  ];
+}
+
 export function spatialAuditRows(
   detail: GeoAnalysisPrefDetail
 ): { label: string; value: string }[] {
@@ -96,6 +130,7 @@ export function spatialAuditRows(
   }
   if (detail.slug === 'population-public-facility-access')
     return publicFacilityAuditRows(detail);
+  if (detail.slug === 'population-low-elevation') return lowElevationAuditRows(detail);
   if (detail.slug === 'population-snow-designation') {
     const s=detail.summary, people=(v:number)=>`${(v/10000).toLocaleString('ja-JP',{maximumFractionDigits:4})}人`;
     return [

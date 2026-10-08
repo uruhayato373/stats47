@@ -10,7 +10,7 @@ import {
 } from '../geo-routes';
 
 describe('Geo canonical route projection', () => {
-  it('全846途中URLを投稿着地またはquery付き分析への転送に一意分類する', () => {
+  it('全分析×47県×3段階の途中URLを投稿着地またはquery付き分析への転送に一意分類する', () => {
     let count = 0;
     for (const slug of GEO_ANALYSIS_SLUGS)
       for (const pref of GEO_PREF_CODES)
@@ -25,7 +25,11 @@ describe('Geo canonical route projection', () => {
           );
           count++;
         }
-    expect(count).toBe(846);
+    // 分析を足すたびに手で件数を直さない。数えた件数が直積と一致し、7分析以上を網羅していることだけを固定する。
+    expect(count).toBe(
+      GEO_ANALYSIS_SLUGS.length * GEO_PREF_CODES.length * GEO_STAGES.length
+    );
+    expect(GEO_ANALYSIS_SLUGS).toContain('population-low-elevation');
   });
   it('空間分析9投稿は県・途中段階まで特定した索引可能URLに着地する', () => {
     const posts = BUSINESS_PLAN_M1_X_POSTS.filter(

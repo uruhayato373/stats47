@@ -96,6 +96,12 @@ function previewRows(detail: GeoAnalysisPrefDetail): Array<{
 }> {
   if (detail.slug === 'population-landslide-exposure') return detail.meshes.slice(0,20).map(m=>({id:`${m[1]}:${m[0]}`,kind:'250m人口メッシュ・土砂災害指定区域の中心包含',value:`2020年基準人口 ${(m[2]/10000).toLocaleString('ja-JP')}人 / ${m[3]&56?'特別警戒':m[3]?'警戒のみ':'今回の入力面外'}`}));
   if (detail.slug === 'population-snow-designation') return detail.meshes.slice(0,20).map(m=>({id:`${m[1]}:${m[0]}`,kind:'250m人口メッシュ・豪雪中心包含',value:`2020年基準人口 ${(m[2]/10000).toLocaleString('ja-JP')}人 / ${['入力区域外','通常豪雪','特別豪雪'][m[3]]}${m[4]&16?' / 指定境界を横切る格子':''}`}));
+  if (detail.slug === 'population-low-elevation')
+    return detail.meshes.slice(0, 20).map((mesh) => ({
+      id: `${mesh[1]}:${mesh[0]}`,
+      kind: '1kmメッシュ人口・平均標高',
+      value: `2020年 ${mesh[2].toLocaleString('ja-JP')}人 / ${mesh[3] === null ? '標高不明' : `平均${mesh[3]}m・最高${mesh[4]}m・最低${mesh[5]}m`}`,
+    }));
   if (detail.slug === 'population-public-facility-access') {
     const facilities = new Map(
       detail.facilities.map((point) => [point[0], point])
@@ -175,7 +181,7 @@ export default async function GeoArticleDataPage({ params }: PageProps) {
       <SurfaceSection>
         <SectionHeader title="この県の検算済み集計" hideRule />
         <dl className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {detail.slug === 'population-public-facility-access' || detail.slug === 'population-snow-designation' || detail.slug === 'population-landslide-exposure'
+          {detail.slug === 'population-public-facility-access' || detail.slug === 'population-snow-designation' || detail.slug === 'population-landslide-exposure' || detail.slug === 'population-low-elevation'
             ? spatialAuditRows(detail).map((row) => (
                 <div key={row.label} className="border p-3">
                   <dt className="text-xs text-muted-foreground">{row.label}</dt>

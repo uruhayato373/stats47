@@ -14,6 +14,7 @@ export const GEO_HOME_ANALYSIS_LABELS = {
   'population-snow-designation': '豪雪指定 × 人口',
   'population-landslide-exposure': '土砂災害 × 人口・施設',
   'population-public-facility-access': '公共施設距離 × 人口',
+  'population-low-elevation': '低い標高 × 人口',
 } as const satisfies Record<GeoAnalysisSlug, string>;
 
 export const GEO_HOME_ANALYSIS_NAV_ITEMS = GEO_ANALYSES.map((analysis) => ({

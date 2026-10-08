@@ -177,6 +177,10 @@ Geo証拠階段の`stage-population` / `stage-overlap` / `stage-audit`、公共�
 > (`RailLinksCard`) のクリックに `ranking_theme` を送る。`nav_label` はテーマ名。登録済み `nav_surface` /
 > `nav_label` の値追加で、新しい custom dimension は無い。
 
+> **nav_surface の値追加 (2026-10-08・ランキングから地域分析へ)**: ランキングの右レール「この指標の地域分析」
+> (`RailLinksCard`) のクリックに `ranking_geo` を送る。`nav_label` は分析名。登録済み `nav_surface` /
+> `nav_label` の値追加で、新しい custom dimension は無い。
+
 > **nav_surface の値追加 (2026-09-17・レール UI 契約統一)**: `/ranking` 左レールのカテゴリ導線を
 > `ranking_category` として分離した (従来 `home_category` に混入していた)。`/geo` 右レールに
 > `geo_sidebar` を追加した。どちらも登録済み `nav_surface` / `nav_label` の値追加で、新しい

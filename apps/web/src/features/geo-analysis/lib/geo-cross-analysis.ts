@@ -12,6 +12,7 @@ export const GEO_CROSS_ANALYSIS_SLUGS = [
   'population-flood-risk',
   'population-station-access',
   'population-public-facility-access',
+  'population-low-elevation',
 ] as const;
 
 export type GeoCrossAnalysisSlug = (typeof GEO_CROSS_ANALYSIS_SLUGS)[number];
@@ -73,6 +74,29 @@ export const GEO_CROSS_ANALYSIS_CONFIGS: Readonly<
       '全国の比率は47県の人口合計を分母に計算します。県比率の単純平均ではありません。',
       '県外の最寄り施設も含みます。実際の利用先は窓口の担当範囲と現在の施設情報を確認してください。',
     ],
+  },
+  'population-low-elevation': {
+    slug: 'population-low-elevation',
+    eyebrow: '標高 × 人口',
+    shortTitle: '標高の低い土地に住む人口',
+    description:
+      '標高・傾斜度3次メッシュ（2009年時点の標高）と2020年の1kmメッシュ人口を同じ区画で結び、平均標高が5m以下の区画に住む人口の割合を都道府県別に比べます。',
+    spatialReading:
+      '2020年の人口分布、1kmメッシュの平均標高の区分、合計が国勢調査の都道府県人口に戻るかの検算を順に確認します。',
+    overlapLabel: '平均標高の区分',
+    overlapLegend:
+      '色は1kmメッシュの平均標高の区分です。濃青＝0m以下、青＝0m超5m以下、水色＝5m超10m以下、淡灰＝10m超、白＝標高不明。メッシュ内の最低標高はタップで確認できます。',
+    mapLimit:
+      '標高は2009年5月時点の約1km平均で、海抜の低い狭い土地や堤防の内外は区別できません。浸水・高潮・津波が起きることや、住まいの安全を示すものではありません。',
+    mapTitle: '平均標高5m以下の地域に住む人口の割合',
+    mapSubtitle:
+      '分母は同じ県の1kmメッシュ人口の合計で、国勢調査2020の都道府県人口と一致します。',
+    takeaways: [
+      '1kmメッシュの平均標高で分けるため、県内の狭い低地は平均に埋もれます。海抜の低さの厳密な判定ではなく、県どうしの相対的な比較に使います。',
+      '0m以下・5m以下・10m以下は同じ手順で並べた3つの見方です。5mと10mに全国共通の公的な基準は確認できないため、安全と危険の境界としては読みません。',
+      '標高は2009年時点、人口は2020年の国勢調査を基準にした値で、時点が異なります。地盤沈下や盛土・堤防工事は反映されていません。',
+    ],
+    hazardMapUrl: 'https://disaportal.gsi.go.jp/',
   },
   'population-land-price': {
     slug: 'population-land-price',

@@ -16,6 +16,7 @@ export const GEO_LAYERS = [
       'population-land-price',
       'population-flood-risk',
       'population-station-access',
+      'population-low-elevation',
     ],
   },
   {

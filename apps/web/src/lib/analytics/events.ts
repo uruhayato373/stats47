@@ -377,6 +377,8 @@ export type NavSurface =
   | 'ranking_survey'
   // ランキングの右レール「この指標を使うテーマ」(2026-10-07 値追加。登録済み dimension の値追加なので GA4 側の作業は不要)
   | 'ranking_theme'
+  // ランキングの右レール「この指標の地域分析」(2026-10-08 値追加。登録済み dimension の値追加なので GA4 側の作業は不要)
+  | 'ranking_geo'
   | 'category_survey'
   | 'theme_survey'
   | 'blog_survey'

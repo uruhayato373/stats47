@@ -1,5 +1,6 @@
 import { SNOW_DESIGNATION_ANALYSIS } from './snow-designation-analysis';
 import { LANDSLIDE_EXPOSURE_ANALYSIS } from './landslide-exposure-analysis';
+import { LOW_ELEVATION_POPULATION_ANALYSIS } from './low-elevation-population-analysis';
 import { BUSINESS_PLAN_M1_GEO_ANALYSES } from './m1';
 import type { BusinessPlanM1Analysis } from './types';
 
@@ -8,6 +9,7 @@ export const GEO_ANALYSES = [
   ...BUSINESS_PLAN_M1_GEO_ANALYSES,
   SNOW_DESIGNATION_ANALYSIS,
   LANDSLIDE_EXPOSURE_ANALYSIS,
+  LOW_ELEVATION_POPULATION_ANALYSIS,
 {
   "id": "m1-analysis-population-public-facility-access",
   "contentId": "geo-128",
@@ -63,3 +65,11 @@ export const GEO_ANALYSES = [
   ]
 },
 ] as const satisfies readonly BusinessPlanM1Analysis[];
+
+/** 主指標を単独のランキングとしても公開している分析。ランキングページから分析の canonical 着地へ接続する。 */
+export function findGeoAnalysisByRankingKey(rankingKey: string) {
+  return GEO_ANALYSES.find(
+    (analysis) =>
+      'relatedRankingKey' in analysis && analysis.relatedRankingKey === rankingKey
+  );
+}
