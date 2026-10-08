@@ -212,6 +212,11 @@ export default async function AreaProfilePage({ params }: PageProps) {
         <main className="min-w-0 space-y-8">
           <AreaRelatedRankingsCard areaName={profile.areaName} highlights={highlights} />
 
+          {/* 関連ブログ記事 (P0-AREAS-01 内部リンク強化) */}
+          <Suspense fallback={null}>
+            <AreaRelatedBlogArticles areaCode={areaCode} highlights={highlights} limit={3} />
+          </Suspense>
+
           {/* 県データブック (値+全国順位 + 特産品 + 推移チャート)。
                         databook 未生成の県は従来チャート表示にフォールバックする。 */}
           <Suspense
@@ -245,11 +250,6 @@ export default async function AreaProfilePage({ params }: PageProps) {
 
           {/* AdSense再開時にだけ共通枠を戻す。県別の収益導線は上の返礼品リンクへ集約する。 */}
           {ADSENSE_DISPLAY_ENABLED && <InContentAdSlot slot={HUB_INCONTENT} />}
-
-          {/* 関連ブログ記事 (P0-AREAS-01 内部リンク強化) */}
-          <Suspense fallback={null}>
-            <AreaRelatedBlogArticles highlights={highlights} limit={5} />
-          </Suspense>
 
           <CitiesNavCard areaCode={areaCode} areaName={profile.areaName} />
 

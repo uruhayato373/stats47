@@ -84,6 +84,21 @@
       "types": "./src/evidence-inventory/index.ts",
       "import": "./src/evidence-inventory/index.ts",
       "require": "./src/evidence-inventory/index.ts"
+    },
+    "./content": {
+      "types": "./src/content/index.ts",
+      "import": "./src/content/index.ts",
+      "require": "./src/content/index.ts"
+    },
+    "./content/navigation": {
+      "types": "./src/content/navigation.ts",
+      "import": "./src/content/navigation.ts",
+      "require": "./src/content/navigation.ts"
+    },
+    "./content/pages": {
+      "types": "./src/content/pages.ts",
+      "import": "./src/content/pages.ts",
+      "require": "./src/content/pages.ts"
     }
   },
   "scripts": {

@@ -13,6 +13,7 @@ import "server-only";
 // D1 版 (article-repository / article-tag-repository) は現状未使用だが、
 // 緊急時のフォールバックとして残置。
 export {
+  readNavigationArticlesFromR2,
   readArticleBySlugFromR2 as findArticleBySlug,
   readArticlesByTagKeyFromR2 as listArticlesByTagKey,
   readAllTagsWithCountFromR2 as listAllTagsWithCount,

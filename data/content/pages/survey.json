@@ -1,0 +1,1213 @@
+{
+  "version": 1,
+  "pages": [
+    {
+      "id": "survey:academic-achievement-survey",
+      "kind": "survey",
+      "key": "academic-achievement-survey",
+      "title": "全国学力・学習状況調査",
+      "href": "/survey/academic-achievement-survey",
+      "published": true
+    },
+    {
+      "id": "survey:accommodation-survey",
+      "kind": "survey",
+      "key": "accommodation-survey",
+      "title": "宿泊旅行統計調査",
+      "href": "/survey/accommodation-survey",
+      "published": true
+    },
+    {
+      "id": "survey:administrative-investment-report",
+      "kind": "survey",
+      "key": "administrative-investment-report",
+      "title": "行政投資実績",
+      "href": "/survey/administrative-investment-report",
+      "published": true
+    },
+    {
+      "id": "survey:age-adjusted-mortality-statistics",
+      "kind": "survey",
+      "key": "age-adjusted-mortality-statistics",
+      "title": "都道府県別年齢調整死亡率",
+      "href": "/survey/age-adjusted-mortality-statistics",
+      "published": true
+    },
+    {
+      "id": "survey:agricultural-income-statistics",
+      "kind": "survey",
+      "key": "agricultural-income-statistics",
+      "title": "生産農業所得統計",
+      "href": "/survey/agricultural-income-statistics",
+      "published": true
+    },
+    {
+      "id": "survey:agriculture-forestry-census",
+      "kind": "survey",
+      "key": "agriculture-forestry-census",
+      "title": "農林業センサス",
+      "href": "/survey/agriculture-forestry-census",
+      "published": true
+    },
+    {
+      "id": "survey:agriculture-management-survey",
+      "kind": "survey",
+      "key": "agriculture-management-survey",
+      "title": "農業経営統計調査報告",
+      "href": "/survey/agriculture-management-survey",
+      "published": true
+    },
+    {
+      "id": "survey:air-pollution-control-law-status",
+      "kind": "survey",
+      "key": "air-pollution-control-law-status",
+      "title": "大気汚染防止法施行状況",
+      "href": "/survey/air-pollution-control-law-status",
+      "published": true
+    },
+    {
+      "id": "survey:area-survey",
+      "kind": "survey",
+      "key": "area-survey",
+      "title": "全国都道府県市区町村別面積調",
+      "href": "/survey/area-survey",
+      "published": true
+    },
+    {
+      "id": "survey:boj-statistics",
+      "kind": "survey",
+      "key": "boj-statistics",
+      "title": "日本銀行統計",
+      "href": "/survey/boj-statistics",
+      "published": true
+    },
+    {
+      "id": "survey:buried-cultural-property-statistics",
+      "kind": "survey",
+      "key": "buried-cultural-property-statistics",
+      "title": "埋蔵文化財関係統計資料",
+      "href": "/survey/buried-cultural-property-statistics",
+      "published": true
+    },
+    {
+      "id": "survey:care-service-facility-survey",
+      "kind": "survey",
+      "key": "care-service-facility-survey",
+      "title": "介護サービス施設・事業所調査",
+      "href": "/survey/care-service-facility-survey",
+      "published": true
+    },
+    {
+      "id": "survey:census",
+      "kind": "survey",
+      "key": "census",
+      "title": "国勢調査",
+      "href": "/survey/census",
+      "published": true
+    },
+    {
+      "id": "survey:childcare-related-status-report",
+      "kind": "survey",
+      "key": "childcare-related-status-report",
+      "title": "保育所等関連状況取りまとめ",
+      "href": "/survey/childcare-related-status-report",
+      "published": true
+    },
+    {
+      "id": "survey:city-planning-survey",
+      "kind": "survey",
+      "key": "city-planning-survey",
+      "title": "都市計画現況調査",
+      "href": "/survey/city-planning-survey",
+      "published": true
+    },
+    {
+      "id": "survey:closed-school-facility-survey",
+      "kind": "survey",
+      "key": "closed-school-facility-survey",
+      "title": "廃校施設活用状況実態調査",
+      "href": "/survey/closed-school-facility-survey",
+      "published": true
+    },
+    {
+      "id": "survey:commercial-dynamics-survey",
+      "kind": "survey",
+      "key": "commercial-dynamics-survey",
+      "title": "商業動態統計調査",
+      "href": "/survey/commercial-dynamics-survey",
+      "published": true
+    },
+    {
+      "id": "survey:commercial-statistics",
+      "kind": "survey",
+      "key": "commercial-statistics",
+      "title": "商業統計調査",
+      "href": "/survey/commercial-statistics",
+      "published": true
+    },
+    {
+      "id": "survey:comprehensive-living-conditions-survey",
+      "kind": "survey",
+      "key": "comprehensive-living-conditions-survey",
+      "title": "国民生活基礎調査",
+      "href": "/survey/comprehensive-living-conditions-survey",
+      "published": true
+    },
+    {
+      "id": "survey:construction-orders-statistics",
+      "kind": "survey",
+      "key": "construction-orders-statistics",
+      "title": "建設工事受注動態統計調査",
+      "href": "/survey/construction-orders-statistics",
+      "published": true
+    },
+    {
+      "id": "survey:construction-work-statistics",
+      "kind": "survey",
+      "key": "construction-work-statistics",
+      "title": "建設工事施工統計調査報告",
+      "href": "/survey/construction-work-statistics",
+      "published": true
+    },
+    {
+      "id": "survey:cpi-annual",
+      "kind": "survey",
+      "key": "cpi-annual",
+      "title": "消費者物価指数",
+      "href": "/survey/cpi-annual",
+      "published": true
+    },
+    {
+      "id": "survey:crop-statistics",
+      "kind": "survey",
+      "key": "crop-statistics",
+      "title": "作物統計調査",
+      "href": "/survey/crop-statistics",
+      "published": true
+    },
+    {
+      "id": "survey:economic-census-activity",
+      "kind": "survey",
+      "key": "economic-census-activity",
+      "title": "経済センサス-活動調査",
+      "href": "/survey/economic-census-activity",
+      "published": true
+    },
+    {
+      "id": "survey:economic-census-basic",
+      "kind": "survey",
+      "key": "economic-census-basic",
+      "title": "経済センサス-基礎調査",
+      "href": "/survey/economic-census-basic",
+      "published": true
+    },
+    {
+      "id": "survey:economic-structure-survey",
+      "kind": "survey",
+      "key": "economic-structure-survey",
+      "title": "経済構造実態調査",
+      "href": "/survey/economic-structure-survey",
+      "published": true
+    },
+    {
+      "id": "survey:electricity-business-statistics",
+      "kind": "survey",
+      "key": "electricity-business-statistics",
+      "title": "電気事業便覧",
+      "href": "/survey/electricity-business-statistics",
+      "published": true
+    },
+    {
+      "id": "survey:employment-insurance-annual-report",
+      "kind": "survey",
+      "key": "employment-insurance-annual-report",
+      "title": "雇用保険事業年報",
+      "href": "/survey/employment-insurance-annual-report",
+      "published": true
+    },
+    {
+      "id": "survey:employment-structure-survey",
+      "kind": "survey",
+      "key": "employment-structure-survey",
+      "title": "就業構造基本調査",
+      "href": "/survey/employment-structure-survey",
+      "published": true
+    },
+    {
+      "id": "survey:employment-trends-survey",
+      "kind": "survey",
+      "key": "employment-trends-survey",
+      "title": "雇用動向調査",
+      "href": "/survey/employment-trends-survey",
+      "published": true
+    },
+    {
+      "id": "survey:establishment-enterprise-census",
+      "kind": "survey",
+      "key": "establishment-enterprise-census",
+      "title": "事業所・企業統計調査報告",
+      "href": "/survey/establishment-enterprise-census",
+      "published": true
+    },
+    {
+      "id": "survey:factory-location-survey",
+      "kind": "survey",
+      "key": "factory-location-survey",
+      "title": "工場立地動向調査",
+      "href": "/survey/factory-location-survey",
+      "published": true
+    },
+    {
+      "id": "survey:farmland-transfer-conversion-report",
+      "kind": "survey",
+      "key": "farmland-transfer-conversion-report",
+      "title": "農地の移動と転用",
+      "href": "/survey/farmland-transfer-conversion-report",
+      "published": true
+    },
+    {
+      "id": "survey:financial-literacy-survey",
+      "kind": "survey",
+      "key": "financial-literacy-survey",
+      "title": "金融リテラシー調査",
+      "href": "/survey/financial-literacy-survey",
+      "published": true
+    },
+    {
+      "id": "survey:fire-annual-report",
+      "kind": "survey",
+      "key": "fire-annual-report",
+      "title": "火災年報",
+      "href": "/survey/fire-annual-report",
+      "published": true
+    },
+    {
+      "id": "survey:fishery-aquaculture-production",
+      "kind": "survey",
+      "key": "fishery-aquaculture-production",
+      "title": "漁業・養殖業生産統計年報",
+      "href": "/survey/fishery-aquaculture-production",
+      "published": true
+    },
+    {
+      "id": "survey:fishery-census",
+      "kind": "survey",
+      "key": "fishery-census",
+      "title": "漁業センサス",
+      "href": "/survey/fishery-census",
+      "published": true
+    },
+    {
+      "id": "survey:fixed-asset-tax-land-statistics",
+      "kind": "survey",
+      "key": "fixed-asset-tax-land-statistics",
+      "title": "固定資産の価格等の概要調書（土地）",
+      "href": "/survey/fixed-asset-tax-land-statistics",
+      "published": true
+    },
+    {
+      "id": "survey:flood-statistics",
+      "kind": "survey",
+      "key": "flood-statistics",
+      "title": "水害統計調査",
+      "href": "/survey/flood-statistics",
+      "published": true
+    },
+    {
+      "id": "survey:foreign-residents-statistics",
+      "kind": "survey",
+      "key": "foreign-residents-statistics",
+      "title": "在留外国人統計",
+      "href": "/survey/foreign-residents-statistics",
+      "published": true
+    },
+    {
+      "id": "survey:forestry-output-statistics",
+      "kind": "survey",
+      "key": "forestry-output-statistics",
+      "title": "林業産出額",
+      "href": "/survey/forestry-output-statistics",
+      "published": true
+    },
+    {
+      "id": "survey:forestry-statistics-handbook",
+      "kind": "survey",
+      "key": "forestry-statistics-handbook",
+      "title": "森林・林業統計要覧",
+      "href": "/survey/forestry-statistics-handbook",
+      "published": true
+    },
+    {
+      "id": "survey:freight-regional-flow-survey",
+      "kind": "survey",
+      "key": "freight-regional-flow-survey",
+      "title": "貨物地域流動調査",
+      "href": "/survey/freight-regional-flow-survey",
+      "published": true
+    },
+    {
+      "id": "survey:gas-business-statistics",
+      "kind": "survey",
+      "key": "gas-business-statistics",
+      "title": "ガス事業年報",
+      "href": "/survey/gas-business-statistics",
+      "published": true
+    },
+    {
+      "id": "survey:health-admin-report",
+      "kind": "survey",
+      "key": "health-admin-report",
+      "title": "衛生行政報告例",
+      "href": "/survey/health-admin-report",
+      "published": true
+    },
+    {
+      "id": "survey:health-insurance-annual-report",
+      "kind": "survey",
+      "key": "health-insurance-annual-report",
+      "title": "健康保険事業年報",
+      "href": "/survey/health-insurance-annual-report",
+      "published": true
+    },
+    {
+      "id": "survey:health-insurance-society-annual-report",
+      "kind": "survey",
+      "key": "health-insurance-society-annual-report",
+      "title": "健康保険組合事業年報",
+      "href": "/survey/health-insurance-society-annual-report",
+      "published": true
+    },
+    {
+      "id": "survey:hospital-report",
+      "kind": "survey",
+      "key": "hospital-report",
+      "title": "病院報告",
+      "href": "/survey/hospital-report",
+      "published": true
+    },
+    {
+      "id": "survey:household-survey",
+      "kind": "survey",
+      "key": "household-survey",
+      "title": "家計調査",
+      "href": "/survey/household-survey",
+      "published": true
+    },
+    {
+      "id": "survey:housing-finance-user-survey",
+      "kind": "survey",
+      "key": "housing-finance-user-survey",
+      "title": "公庫融資利用者調査報告",
+      "href": "/survey/housing-finance-user-survey",
+      "published": true
+    },
+    {
+      "id": "survey:housing-land-survey",
+      "kind": "survey",
+      "key": "housing-land-survey",
+      "title": "住宅・土地統計調査",
+      "href": "/survey/housing-land-survey",
+      "published": true
+    },
+    {
+      "id": "survey:housing-starts-statistics",
+      "kind": "survey",
+      "key": "housing-starts-statistics",
+      "title": "住宅着工統計",
+      "href": "/survey/housing-starts-statistics",
+      "published": true
+    },
+    {
+      "id": "survey:inbound-consumption-survey",
+      "kind": "survey",
+      "key": "inbound-consumption-survey",
+      "title": "インバウンド消費動向調査",
+      "href": "/survey/inbound-consumption-survey",
+      "published": true
+    },
+    {
+      "id": "survey:industrial-statistics",
+      "kind": "survey",
+      "key": "industrial-statistics",
+      "title": "工業統計調査",
+      "href": "/survey/industrial-statistics",
+      "published": true
+    },
+    {
+      "id": "survey:insurance-rate-org-statistics",
+      "kind": "survey",
+      "key": "insurance-rate-org-statistics",
+      "title": "損害保険料率算出機構統計集",
+      "href": "/survey/insurance-rate-org-statistics",
+      "published": true
+    },
+    {
+      "id": "survey:japan-post-statistics",
+      "kind": "survey",
+      "key": "japan-post-statistics",
+      "title": "日本郵政統計",
+      "href": "/survey/japan-post-statistics",
+      "published": true
+    },
+    {
+      "id": "survey:japanese-language-instruction-survey",
+      "kind": "survey",
+      "key": "japanese-language-instruction-survey",
+      "title": "日本語指導が必要な児童生徒の受入状況等に関する調査",
+      "href": "/survey/japanese-language-instruction-survey",
+      "published": true
+    },
+    {
+      "id": "survey:job-placement-statistics",
+      "kind": "survey",
+      "key": "job-placement-statistics",
+      "title": "一般職業紹介状況",
+      "href": "/survey/job-placement-statistics",
+      "published": true
+    },
+    {
+      "id": "survey:junior-high-athletics-membership-survey",
+      "kind": "survey",
+      "key": "junior-high-athletics-membership-survey",
+      "title": "加盟校・加盟生徒数調査",
+      "href": "/survey/junior-high-athletics-membership-survey",
+      "published": true
+    },
+    {
+      "id": "survey:kakei-chousa",
+      "kind": "survey",
+      "key": "kakei-chousa",
+      "title": "家計調査（品目別）",
+      "href": "/survey/kakei-chousa",
+      "published": true
+    },
+    {
+      "id": "survey:labor-market-annual",
+      "kind": "survey",
+      "key": "labor-market-annual",
+      "title": "労働市場年報",
+      "href": "/survey/labor-market-annual",
+      "published": true
+    },
+    {
+      "id": "survey:late-elderly-medical-annual-report",
+      "kind": "survey",
+      "key": "late-elderly-medical-annual-report",
+      "title": "後期高齢者医療事業年報",
+      "href": "/survey/late-elderly-medical-annual-report",
+      "published": true
+    },
+    {
+      "id": "survey:life-insurance-business-statistics",
+      "kind": "survey",
+      "key": "life-insurance-business-statistics",
+      "title": "生命保険事業概況",
+      "href": "/survey/life-insurance-business-statistics",
+      "published": true
+    },
+    {
+      "id": "survey:life-tables",
+      "kind": "survey",
+      "key": "life-tables",
+      "title": "生命表",
+      "href": "/survey/life-tables",
+      "published": true
+    },
+    {
+      "id": "survey:livestock-statistics",
+      "kind": "survey",
+      "key": "livestock-statistics",
+      "title": "畜産統計調査",
+      "href": "/survey/livestock-statistics",
+      "published": true
+    },
+    {
+      "id": "survey:local-consumer-administration-status-survey",
+      "kind": "survey",
+      "key": "local-consumer-administration-status-survey",
+      "title": "地方消費者行政の現況調査",
+      "href": "/survey/local-consumer-administration-status-survey",
+      "published": true
+    },
+    {
+      "id": "survey:local-cultural-administration-survey",
+      "kind": "survey",
+      "key": "local-cultural-administration-survey",
+      "title": "地方における文化行政及び文化関係経費の状況",
+      "href": "/survey/local-cultural-administration-survey",
+      "published": true
+    },
+    {
+      "id": "survey:local-education-expense-survey",
+      "kind": "survey",
+      "key": "local-education-expense-survey",
+      "title": "地方教育費調査報告書",
+      "href": "/survey/local-education-expense-survey",
+      "published": true
+    },
+    {
+      "id": "survey:local-election-results",
+      "kind": "survey",
+      "key": "local-election-results",
+      "title": "地方選挙結果調",
+      "href": "/survey/local-election-results",
+      "published": true
+    },
+    {
+      "id": "survey:local-election-statistics",
+      "kind": "survey",
+      "key": "local-election-statistics",
+      "title": "地方公共団体の議会の議員及び長の所属党派別人員調等",
+      "href": "/survey/local-election-statistics",
+      "published": true
+    },
+    {
+      "id": "survey:local-finance",
+      "kind": "survey",
+      "key": "local-finance",
+      "title": "地方財政状況調査",
+      "href": "/survey/local-finance",
+      "published": true
+    },
+    {
+      "id": "survey:local-gov-staffing-survey",
+      "kind": "survey",
+      "key": "local-gov-staffing-survey",
+      "title": "地方公共団体定員管理調査",
+      "href": "/survey/local-gov-staffing-survey",
+      "published": true
+    },
+    {
+      "id": "survey:local-government-gender-equality-policy-status",
+      "kind": "survey",
+      "key": "local-government-gender-equality-policy-status",
+      "title": "地方公共団体における男女共同参画社会の形成又は女性に関する施策の推進状況",
+      "href": "/survey/local-government-gender-equality-policy-status",
+      "published": true
+    },
+    {
+      "id": "survey:local-public-employee-salary",
+      "kind": "survey",
+      "key": "local-public-employee-salary",
+      "title": "地方公務員給与実態調査",
+      "href": "/survey/local-public-employee-salary",
+      "published": true
+    },
+    {
+      "id": "survey:local-public-enterprise-accounts-survey",
+      "kind": "survey",
+      "key": "local-public-enterprise-accounts-survey",
+      "title": "地方公営企業決算状況調査",
+      "href": "/survey/local-public-enterprise-accounts-survey",
+      "published": true
+    },
+    {
+      "id": "survey:local-tax",
+      "kind": "survey",
+      "key": "local-tax",
+      "title": "地方税に関する調べ",
+      "href": "/survey/local-tax",
+      "published": true
+    },
+    {
+      "id": "survey:long-term-care-insurance-annual-report",
+      "kind": "survey",
+      "key": "long-term-care-insurance-annual-report",
+      "title": "介護保険事業状況報告年報",
+      "href": "/survey/long-term-care-insurance-annual-report",
+      "published": true
+    },
+    {
+      "id": "survey:medical-facility-survey",
+      "kind": "survey",
+      "key": "medical-facility-survey",
+      "title": "医療施設調査",
+      "href": "/survey/medical-facility-survey",
+      "published": true
+    },
+    {
+      "id": "survey:milk-dairy-statistics",
+      "kind": "survey",
+      "key": "milk-dairy-statistics",
+      "title": "牛乳乳製品統計調査",
+      "href": "/survey/milk-dairy-statistics",
+      "published": true
+    },
+    {
+      "id": "survey:minimum-wage",
+      "kind": "survey",
+      "key": "minimum-wage",
+      "title": "地域別最低賃金",
+      "href": "/survey/minimum-wage",
+      "published": true
+    },
+    {
+      "id": "survey:mlit-ksj",
+      "kind": "survey",
+      "key": "mlit-ksj",
+      "title": "国土数値情報",
+      "href": "/survey/mlit-ksj",
+      "published": true
+    },
+    {
+      "id": "survey:motor-vehicle-transport-statistics",
+      "kind": "survey",
+      "key": "motor-vehicle-transport-statistics",
+      "title": "交通関連統計資料集",
+      "href": "/survey/motor-vehicle-transport-statistics",
+      "published": true
+    },
+    {
+      "id": "survey:municipal-settlement-survey",
+      "kind": "survey",
+      "key": "municipal-settlement-survey",
+      "title": "市町村別決算状況調",
+      "href": "/survey/municipal-settlement-survey",
+      "published": true
+    },
+    {
+      "id": "survey:national-cancer-registry",
+      "kind": "survey",
+      "key": "national-cancer-registry",
+      "title": "全国がん登録",
+      "href": "/survey/national-cancer-registry",
+      "published": true
+    },
+    {
+      "id": "survey:national-child-fitness-survey",
+      "kind": "survey",
+      "key": "national-child-fitness-survey",
+      "title": "全国体力・運動能力、運動習慣等調査",
+      "href": "/survey/national-child-fitness-survey",
+      "published": true
+    },
+    {
+      "id": "survey:national-election-results",
+      "kind": "survey",
+      "key": "national-election-results",
+      "title": "国政選挙結果調",
+      "href": "/survey/national-election-results",
+      "published": true
+    },
+    {
+      "id": "survey:national-health-insurance-annual-report",
+      "kind": "survey",
+      "key": "national-health-insurance-annual-report",
+      "title": "国民健康保険事業年報",
+      "href": "/survey/national-health-insurance-annual-report",
+      "published": true
+    },
+    {
+      "id": "survey:national-health-nutrition-survey",
+      "kind": "survey",
+      "key": "national-health-nutrition-survey",
+      "title": "国民健康・栄養調査",
+      "href": "/survey/national-health-nutrition-survey",
+      "published": true
+    },
+    {
+      "id": "survey:national-household-survey",
+      "kind": "survey",
+      "key": "national-household-survey",
+      "title": "全国家計構造調査",
+      "href": "/survey/national-household-survey",
+      "published": true
+    },
+    {
+      "id": "survey:national-medical-expenditure",
+      "kind": "survey",
+      "key": "national-medical-expenditure",
+      "title": "国民医療費",
+      "href": "/survey/national-medical-expenditure",
+      "published": true
+    },
+    {
+      "id": "survey:natural-conservation-area-data",
+      "kind": "survey",
+      "key": "natural-conservation-area-data",
+      "title": "自然環境保全地域各種データ",
+      "href": "/survey/natural-conservation-area-data",
+      "published": true
+    },
+    {
+      "id": "survey:natural-park-area",
+      "kind": "survey",
+      "key": "natural-park-area",
+      "title": "自然公園の面積",
+      "href": "/survey/natural-park-area",
+      "published": true
+    },
+    {
+      "id": "survey:nature-park-visitor-survey",
+      "kind": "survey",
+      "key": "nature-park-visitor-survey",
+      "title": "自然公園等利用者数調",
+      "href": "/survey/nature-park-visitor-survey",
+      "published": true
+    },
+    {
+      "id": "survey:noise-control-law-status-survey",
+      "kind": "survey",
+      "key": "noise-control-law-status-survey",
+      "title": "騒音規制法施行状況調査",
+      "href": "/survey/noise-control-law-status-survey",
+      "published": true
+    },
+    {
+      "id": "survey:nta-annual-statistics",
+      "kind": "survey",
+      "key": "nta-annual-statistics",
+      "title": "国税庁統計年報書",
+      "href": "/survey/nta-annual-statistics",
+      "published": true
+    },
+    {
+      "id": "survey:passenger-regional-flow-survey",
+      "kind": "survey",
+      "key": "passenger-regional-flow-survey",
+      "title": "旅客地域流動調査",
+      "href": "/survey/passenger-regional-flow-survey",
+      "published": true
+    },
+    {
+      "id": "survey:patent-administration-annual-report",
+      "kind": "survey",
+      "key": "patent-administration-annual-report",
+      "title": "特許行政年次報告書",
+      "href": "/survey/patent-administration-annual-report",
+      "published": true
+    },
+    {
+      "id": "survey:patient-survey",
+      "kind": "survey",
+      "key": "patient-survey",
+      "title": "患者調査",
+      "href": "/survey/patient-survey",
+      "published": true
+    },
+    {
+      "id": "survey:pension-insurance-annual-report",
+      "kind": "survey",
+      "key": "pension-insurance-annual-report",
+      "title": "厚生年金保険・国民年金事業年報",
+      "href": "/survey/pension-insurance-annual-report",
+      "published": true
+    },
+    {
+      "id": "survey:petroleum-sales-statistics",
+      "kind": "survey",
+      "key": "petroleum-sales-statistics",
+      "title": "都道府県別石油製品販売総括",
+      "href": "/survey/petroleum-sales-statistics",
+      "published": true
+    },
+    {
+      "id": "survey:physician-survey",
+      "kind": "survey",
+      "key": "physician-survey",
+      "title": "医師・歯科医師・薬剤師統計",
+      "href": "/survey/physician-survey",
+      "published": true
+    },
+    {
+      "id": "survey:police-statistics",
+      "kind": "survey",
+      "key": "police-statistics",
+      "title": "犯罪統計",
+      "href": "/survey/police-statistics",
+      "published": true
+    },
+    {
+      "id": "survey:population-estimates",
+      "kind": "survey",
+      "key": "population-estimates",
+      "title": "人口推計",
+      "href": "/survey/population-estimates",
+      "published": true
+    },
+    {
+      "id": "survey:population-projection",
+      "kind": "survey",
+      "key": "population-projection",
+      "title": "日本の将来推計人口",
+      "href": "/survey/population-projection",
+      "published": true
+    },
+    {
+      "id": "survey:population-research",
+      "kind": "survey",
+      "key": "population-research",
+      "title": "人口問題研究",
+      "href": "/survey/population-research",
+      "published": true
+    },
+    {
+      "id": "survey:port-statistics",
+      "kind": "survey",
+      "key": "port-statistics",
+      "title": "港湾調査（港湾統計年報）",
+      "href": "/survey/port-statistics",
+      "published": true
+    },
+    {
+      "id": "survey:poverty-self-reliance-support-status-survey",
+      "kind": "survey",
+      "key": "poverty-self-reliance-support-status-survey",
+      "title": "生活困窮者自立支援制度支援状況調査",
+      "href": "/survey/poverty-self-reliance-support-status-survey",
+      "published": true
+    },
+    {
+      "id": "survey:prefectural-accounts",
+      "kind": "survey",
+      "key": "prefectural-accounts",
+      "title": "県民経済計算",
+      "href": "/survey/prefectural-accounts",
+      "published": true
+    },
+    {
+      "id": "survey:prefectural-energy-consumption-statistics",
+      "kind": "survey",
+      "key": "prefectural-energy-consumption-statistics",
+      "title": "都道府県別エネルギー消費統計",
+      "href": "/survey/prefectural-energy-consumption-statistics",
+      "published": true
+    },
+    {
+      "id": "survey:prefectural-food-self-sufficiency",
+      "kind": "survey",
+      "key": "prefectural-food-self-sufficiency",
+      "title": "都道府県別食料自給率",
+      "href": "/survey/prefectural-food-self-sufficiency",
+      "published": true
+    },
+    {
+      "id": "survey:prefectural-land-price-survey",
+      "kind": "survey",
+      "key": "prefectural-land-price-survey",
+      "title": "都道府県地価調査",
+      "href": "/survey/prefectural-land-price-survey",
+      "published": true
+    },
+    {
+      "id": "survey:prefectural-settlement-survey",
+      "kind": "survey",
+      "key": "prefectural-settlement-survey",
+      "title": "都道府県決算状況調",
+      "href": "/survey/prefectural-settlement-survey",
+      "published": true
+    },
+    {
+      "id": "survey:public-assistance-survey",
+      "kind": "survey",
+      "key": "public-assistance-survey",
+      "title": "被保護者調査",
+      "href": "/survey/public-assistance-survey",
+      "published": true
+    },
+    {
+      "id": "survey:public-facilities-status-survey",
+      "kind": "survey",
+      "key": "public-facilities-status-survey",
+      "title": "公共施設状況調査",
+      "href": "/survey/public-facilities-status-survey",
+      "published": true
+    },
+    {
+      "id": "survey:regional-health-promotion-report",
+      "kind": "survey",
+      "key": "regional-health-promotion-report",
+      "title": "地域保健・健康増進事業報告",
+      "href": "/survey/regional-health-promotion-report",
+      "published": true
+    },
+    {
+      "id": "survey:resident-registry-migration-report",
+      "kind": "survey",
+      "key": "resident-registry-migration-report",
+      "title": "住民基本台帳人口移動報告",
+      "href": "/survey/resident-registry-migration-report",
+      "published": true
+    },
+    {
+      "id": "survey:resident-registry-population-survey",
+      "kind": "survey",
+      "key": "resident-registry-population-survey",
+      "title": "住民基本台帳に基づく人口、人口動態及び世帯数調査",
+      "href": "/survey/resident-registry-population-survey",
+      "published": true
+    },
+    {
+      "id": "survey:retail-price-survey",
+      "kind": "survey",
+      "key": "retail-price-survey",
+      "title": "小売物価統計調査（構造編）",
+      "href": "/survey/retail-price-survey",
+      "published": true
+    },
+    {
+      "id": "survey:road-statistics",
+      "kind": "survey",
+      "key": "road-statistics",
+      "title": "道路統計年報",
+      "href": "/survey/road-statistics",
+      "published": true
+    },
+    {
+      "id": "survey:school-basic-survey",
+      "kind": "survey",
+      "key": "school-basic-survey",
+      "title": "学校基本調査",
+      "href": "/survey/school-basic-survey",
+      "published": true
+    },
+    {
+      "id": "survey:school-health-survey",
+      "kind": "survey",
+      "key": "school-health-survey",
+      "title": "学校保健統計調査報告書",
+      "href": "/survey/school-health-survey",
+      "published": true
+    },
+    {
+      "id": "survey:sewerage-statistics",
+      "kind": "survey",
+      "key": "sewerage-statistics",
+      "title": "下水道統計",
+      "href": "/survey/sewerage-statistics",
+      "published": true
+    },
+    {
+      "id": "survey:sixth-industry-survey",
+      "kind": "survey",
+      "key": "sixth-industry-survey",
+      "title": "6次産業化総合調査",
+      "href": "/survey/sixth-industry-survey",
+      "published": true
+    },
+    {
+      "id": "survey:social-education-survey",
+      "kind": "survey",
+      "key": "social-education-survey",
+      "title": "社会教育調査",
+      "href": "/survey/social-education-survey",
+      "published": true
+    },
+    {
+      "id": "survey:social-life-basic-survey",
+      "kind": "survey",
+      "key": "social-life-basic-survey",
+      "title": "社会生活基本調査",
+      "href": "/survey/social-life-basic-survey",
+      "published": true
+    },
+    {
+      "id": "survey:social-welfare-facility-survey",
+      "kind": "survey",
+      "key": "social-welfare-facility-survey",
+      "title": "社会福祉施設等調査",
+      "href": "/survey/social-welfare-facility-survey",
+      "published": true
+    },
+    {
+      "id": "survey:sole-proprietor-survey",
+      "kind": "survey",
+      "key": "sole-proprietor-survey",
+      "title": "個人企業経済調査",
+      "href": "/survey/sole-proprietor-survey",
+      "published": true
+    },
+    {
+      "id": "survey:special-forest-products-statistics",
+      "kind": "survey",
+      "key": "special-forest-products-statistics",
+      "title": "特用林産基礎資料",
+      "href": "/survey/special-forest-products-statistics",
+      "published": true
+    },
+    {
+      "id": "survey:sports-facilities-survey",
+      "kind": "survey",
+      "key": "sports-facilities-survey",
+      "title": "体育・スポーツ施設現況調査",
+      "href": "/survey/sports-facilities-survey",
+      "published": true
+    },
+    {
+      "id": "survey:student-guidance-issues-survey",
+      "kind": "survey",
+      "key": "student-guidance-issues-survey",
+      "title": "児童生徒の問題行動・不登校等生徒指導上の諸課題に関する調査",
+      "href": "/survey/student-guidance-issues-survey",
+      "published": true
+    },
+    {
+      "id": "survey:telecommunications-contract-share-quarterly",
+      "kind": "survey",
+      "key": "telecommunications-contract-share-quarterly",
+      "title": "電気通信サービスの契約数及びシェアに関する四半期データの公表",
+      "href": "/survey/telecommunications-contract-share-quarterly",
+      "published": true
+    },
+    {
+      "id": "survey:telecommunications-service-contract-report",
+      "kind": "survey",
+      "key": "telecommunications-service-contract-report",
+      "title": "電気通信役務契約等状況報告",
+      "href": "/survey/telecommunications-service-contract-report",
+      "published": true
+    },
+    {
+      "id": "survey:traffic-accident-statistics",
+      "kind": "survey",
+      "key": "traffic-accident-statistics",
+      "title": "交通事故統計",
+      "href": "/survey/traffic-accident-statistics",
+      "published": true
+    },
+    {
+      "id": "survey:travel-tourism-consumption-survey",
+      "kind": "survey",
+      "key": "travel-tourism-consumption-survey",
+      "title": "旅行・観光消費動向調査",
+      "href": "/survey/travel-tourism-consumption-survey",
+      "published": true
+    },
+    {
+      "id": "survey:truck-operator-statistics",
+      "kind": "survey",
+      "key": "truck-operator-statistics",
+      "title": "貨物自動車運送事業者数",
+      "href": "/survey/truck-operator-statistics",
+      "published": true
+    },
+    {
+      "id": "survey:urban-park-survey",
+      "kind": "survey",
+      "key": "urban-park-survey",
+      "title": "都市公園等整備現況調査",
+      "href": "/survey/urban-park-survey",
+      "published": true
+    },
+    {
+      "id": "survey:vehicle-registration-statistics",
+      "kind": "survey",
+      "key": "vehicle-registration-statistics",
+      "title": "自動車保有車両数",
+      "href": "/survey/vehicle-registration-statistics",
+      "published": true
+    },
+    {
+      "id": "survey:vital-statistics",
+      "kind": "survey",
+      "key": "vital-statistics",
+      "title": "人口動態統計",
+      "href": "/survey/vital-statistics",
+      "published": true
+    },
+    {
+      "id": "survey:voter-registration-statistics",
+      "kind": "survey",
+      "key": "voter-registration-statistics",
+      "title": "選挙人名簿及び在外選挙人名簿登録者数",
+      "href": "/survey/voter-registration-statistics",
+      "published": true
+    },
+    {
+      "id": "survey:wage-structure-survey",
+      "kind": "survey",
+      "key": "wage-structure-survey",
+      "title": "賃金構造基本統計調査",
+      "href": "/survey/wage-structure-survey",
+      "published": true
+    },
+    {
+      "id": "survey:waste-management-survey",
+      "kind": "survey",
+      "key": "waste-management-survey",
+      "title": "一般廃棄物処理事業実態調査",
+      "href": "/survey/waste-management-survey",
+      "published": true
+    },
+    {
+      "id": "survey:wastewater-treatment-coverage-report",
+      "kind": "survey",
+      "key": "wastewater-treatment-coverage-report",
+      "title": "汚水処理人口普及状況",
+      "href": "/survey/wastewater-treatment-coverage-report",
+      "published": true
+    },
+    {
+      "id": "survey:water-pollution-control-law-status",
+      "kind": "survey",
+      "key": "water-pollution-control-law-status",
+      "title": "水質汚濁防止法等の施行状況",
+      "href": "/survey/water-pollution-control-law-status",
+      "published": true
+    },
+    {
+      "id": "survey:water-pollution-survey",
+      "kind": "survey",
+      "key": "water-pollution-survey",
+      "title": "水質汚濁物質排出量総合調査",
+      "href": "/survey/water-pollution-survey",
+      "published": true
+    },
+    {
+      "id": "survey:waterworks-statistics",
+      "kind": "survey",
+      "key": "waterworks-statistics",
+      "title": "水道統計",
+      "href": "/survey/waterworks-statistics",
+      "published": true
+    },
+    {
+      "id": "survey:weather-statistics",
+      "kind": "survey",
+      "key": "weather-statistics",
+      "title": "気象統計",
+      "href": "/survey/weather-statistics",
+      "published": true
+    },
+    {
+      "id": "survey:welfare-admin-report",
+      "kind": "survey",
+      "key": "welfare-admin-report",
+      "title": "福祉行政報告例",
+      "href": "/survey/welfare-admin-report",
+      "published": true
+    },
+    {
+      "id": "survey:wind-power-deployment-statistics",
+      "kind": "survey",
+      "key": "wind-power-deployment-statistics",
+      "title": "都道府県別風力発電導入量",
+      "href": "/survey/wind-power-deployment-statistics",
+      "published": true
+    },
+    {
+      "id": "survey:wood-supply-demand-report",
+      "kind": "survey",
+      "key": "wood-supply-demand-report",
+      "title": "木材需給報告書",
+      "href": "/survey/wood-supply-demand-report",
+      "published": true
+    },
+    {
+      "id": "survey:workers-compensation-annual-report",
+      "kind": "survey",
+      "key": "workers-compensation-annual-report",
+      "title": "労働者災害補償保険事業年報",
+      "href": "/survey/workers-compensation-annual-report",
+      "published": true
+    },
+    {
+      "id": "survey:workplace-accident-survey",
+      "kind": "survey",
+      "key": "workplace-accident-survey",
+      "title": "労働災害動向調査",
+      "href": "/survey/workplace-accident-survey",
+      "published": true
+    }
+  ]
+}

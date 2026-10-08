@@ -252,6 +252,9 @@ jobs:
           (cd apps/web && npx tsx scripts/generate-known-tag-keys.ts)
           (cd apps/web && npx tsx scripts/generate-unpublished-blog-slugs.ts)
           (cd apps/web && npx tsx scripts/generate-sitemap-blog-entries.ts)
+          npm run content:sync -- --from-r2
+          npx tsx apps/web/scripts/sync-content-catalog.ts --check
+          npx tsx apps/web/scripts/validate-content-catalog.ts
 
       # 新規 ranking の OGP/カード を即生成 (KNOWN 確定直後・source=known で新キーも拾う)。
       # 未生成だと og:image が 404 になるため公開時に先回りする。欠落分のみ生成 (self-heal)。
@@ -296,6 +299,8 @@ jobs:
           )
           # KNOWN から作る生成物。キーではないので件数の増減には数えない
           DERIVED_FILES=(
+            data/content/entities.json
+            data/content/pages
             packages/data-configs/src/prominence/ranking-prominence.generated.ts
           )
           if git diff --quiet -- "${KEY_FILES[@]}" "${DERIVED_FILES[@]}"; then

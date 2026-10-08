@@ -406,6 +406,17 @@ export async function ThemePageLayout({
             </section>
           )}
 
+          {((theme.relatedArticleTagKeys?.length ?? 0) > 0 || theme.rankingKeys.length > 0) && (
+            <Suspense fallback={null}>
+              <ThemeRelatedArticles
+                themeKey={theme.themeKey}
+                tagKeys={theme.relatedArticleTagKeys ?? []}
+                rankingKeys={theme.rankingKeys}
+              />
+            </Suspense>
+          )}
+
+
           <ThemeDashboardClient
             themeConfig={theme}
             metricGroups={data.metricGroups}
@@ -457,14 +468,6 @@ export async function ThemePageLayout({
             </div>
           )}
 
-          {((theme.relatedArticleTagKeys?.length ?? 0) > 0 || theme.rankingKeys.length > 0) && (
-            <Suspense fallback={null}>
-              <ThemeRelatedArticles
-                tagKeys={theme.relatedArticleTagKeys ?? []}
-                rankingKeys={theme.rankingKeys}
-              />
-            </Suspense>
-          )}
         </div>
       </PageShell>
     </ThemePrefectureProvider>

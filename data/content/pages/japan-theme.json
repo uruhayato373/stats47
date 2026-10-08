@@ -1,0 +1,149 @@
+{
+  "version": 1,
+  "pages": [
+    {
+      "id": "japan-theme:aging-society",
+      "kind": "japan-theme",
+      "key": "aging-society",
+      "title": "日本の少子高齢化",
+      "href": "/japan/aging-society",
+      "published": true
+    },
+    {
+      "id": "japan-theme:education-culture",
+      "kind": "japan-theme",
+      "key": "education-culture",
+      "title": "日本の教育・文化",
+      "href": "/japan/education-culture",
+      "published": true
+    },
+    {
+      "id": "japan-theme:fishery-marine",
+      "kind": "japan-theme",
+      "key": "fishery-marine",
+      "title": "日本の漁業（水産業）",
+      "href": "/japan/fishery-marine",
+      "published": true
+    },
+    {
+      "id": "japan-theme:foreign-residents",
+      "kind": "japan-theme",
+      "key": "foreign-residents",
+      "title": "日本の外国人",
+      "href": "/japan/foreign-residents",
+      "published": true
+    },
+    {
+      "id": "japan-theme:healthcare",
+      "kind": "japan-theme",
+      "key": "healthcare",
+      "title": "日本の医療・健康",
+      "href": "/japan/healthcare",
+      "published": true
+    },
+    {
+      "id": "japan-theme:labor-mobility",
+      "kind": "japan-theme",
+      "key": "labor-mobility",
+      "title": "日本の人材流動性・雇用環境",
+      "href": "/japan/labor-mobility",
+      "published": true
+    },
+    {
+      "id": "japan-theme:labor-wages",
+      "kind": "japan-theme",
+      "key": "labor-wages",
+      "title": "日本の労働・賃金",
+      "href": "/japan/labor-wages",
+      "published": true
+    },
+    {
+      "id": "japan-theme:living-housing",
+      "kind": "japan-theme",
+      "key": "living-housing",
+      "title": "日本の暮らし・住まい",
+      "href": "/japan/living-housing",
+      "published": true
+    },
+    {
+      "id": "japan-theme:local-economy",
+      "kind": "japan-theme",
+      "key": "local-economy",
+      "title": "日本の地域経済",
+      "href": "/japan/local-economy",
+      "published": true
+    },
+    {
+      "id": "japan-theme:local-finance",
+      "kind": "japan-theme",
+      "key": "local-finance",
+      "title": "日本の地方財政",
+      "href": "/japan/local-finance",
+      "published": true
+    },
+    {
+      "id": "japan-theme:manufacturing",
+      "kind": "japan-theme",
+      "key": "manufacturing",
+      "title": "日本の製造業",
+      "href": "/japan/manufacturing",
+      "published": true
+    },
+    {
+      "id": "japan-theme:population-dynamics",
+      "kind": "japan-theme",
+      "key": "population-dynamics",
+      "title": "日本の人口動態",
+      "href": "/japan/population-dynamics",
+      "published": true
+    },
+    {
+      "id": "japan-theme:ports",
+      "kind": "japan-theme",
+      "key": "ports",
+      "title": "日本の港湾",
+      "href": "/japan/ports",
+      "published": true
+    },
+    {
+      "id": "japan-theme:railway",
+      "kind": "japan-theme",
+      "key": "railway",
+      "title": "日本の鉄道",
+      "href": "/japan/railway",
+      "published": true
+    },
+    {
+      "id": "japan-theme:real-income",
+      "kind": "japan-theme",
+      "key": "real-income",
+      "title": "日本の実質収入・購買力",
+      "href": "/japan/real-income",
+      "published": true
+    },
+    {
+      "id": "japan-theme:roads",
+      "kind": "japan-theme",
+      "key": "roads",
+      "title": "日本の道路",
+      "href": "/japan/roads",
+      "published": true
+    },
+    {
+      "id": "japan-theme:safety",
+      "kind": "japan-theme",
+      "key": "safety",
+      "title": "日本の安全",
+      "href": "/japan/safety",
+      "published": true
+    },
+    {
+      "id": "japan-theme:tourism",
+      "kind": "japan-theme",
+      "key": "tourism",
+      "title": "日本の観光",
+      "href": "/japan/tourism",
+      "published": true
+    }
+  ]
+}
