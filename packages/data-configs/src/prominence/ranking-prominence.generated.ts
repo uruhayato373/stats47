@@ -88,7 +88,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "population",
     "categoryName": "人口・世帯",
-    "count": 156,
+    "count": 157,
     "representatives": [
       {
         "rankingKey": "births",

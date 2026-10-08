@@ -16,7 +16,7 @@
  *                 必ず git commit してからデプロイ。
  *
  * 最終生成日: 2026-10-08
- * 件数: 2455
+ * 件数: 2456
  */
 export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "abandoned-cultivated-land-area",
@@ -569,6 +569,7 @@ export const KNOWN_RANKING_KEYS: ReadonlySet<string> = new Set([
   "elderly-general-worker-old-population-ratio",
   "elderly-general-worker-old-population-ratio-pre2019",
   "elderly-household-detail",
+  "elderly-living-alone-rate",
   "elderly-on-public-assistance-per-1000-65plus",
   "elderly-single-person-households",
   "elderly-welfare-expenditure-ratio-pref-finance",
