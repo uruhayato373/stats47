@@ -541,6 +541,7 @@ jobs:
           node .claude/scripts/lib/__tests__/paren-number-lint.test.mjs
           node .claude/scripts/lib/__tests__/stats-table-id-lint.test.mjs
           node --test .claude/scripts/blog/lib/__tests__/critic-findings.test.mjs
+          node --test .claude/scripts/blog/__tests__/audit-chart-provenance-cli.test.mjs
           node .claude/scripts/lib/__tests__/article-factual-check.value.test.mjs
           node .claude/scripts/lib/__tests__/quality-gate.svg-gates.test.mjs
           node --test .claude/scripts/lib/__tests__/chart-provenance.test.mjs
