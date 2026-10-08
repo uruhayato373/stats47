@@ -519,16 +519,19 @@ updated: 2026-10-06
   Verify の手順が通ることを確かめてカードを消す。
 - **完了条件**: カタログを変えた PR のマージ後、手作業なしで by-theme の相関一覧が新しいカタログで作り直され、外れた指標が残っていれば検査が止める。
 
-### [RANKING-ACTIVE-WITHOUT-VALUES-01] 有効な 2 指標が R2 に観測値を持たず、8 月の古い item だけが残ってビルドがエラーを記録する
-タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-08] [領域:データ]
+### [RANKING-ACTIVE-WITHOUT-VALUES-01] ブログの関連ランキングが、非公開の指標の古い item を読んで 410 のページへリンクする
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-08] [領域:データ] [進行中]
 
-- **事実 (2026-10-08)**: `foreign-population-per-100k` と `population-density-habitable` は metric config で `isActive: true` だが、
-  R2 の `app/stats/<key>/values.json` が 404 で、既知キー一覧にも無く `/ranking/<key>` は 410。R2 には 2026-08-26 生成の
-  `app/ranking/<key>/item.json` だけが残り、`hook` を持たないので、`next build` の prerender で
-  `readRankingItemByKeyAndAreaTypeFromR2: failed` / `item.hook must be a non-empty string` が 2 件記録される (ビルドは成功する)。
-- **次**: 2 指標が観測値を取れない理由 (出典の年・コード) を確かめ、取れるなら `data-refresh` で取り込む。取れないなら `isActive: false` にして、
-  R2 の古い item を消すか作り直す。
-- **完了条件**: 2 指標が公開されて 200 になるか、無効になっていて、`next build` のログに 2 指標の item のエラーが出ない。
+- **事実 (2026-10-08)**: `foreign-population-per-100k` と `population-density-habitable` は `entities: ["city"]` の市区町村専用指標で、
+  都道府県のランキングは無い (既知キー一覧に無く `/ranking/<key>` は 410)。R2 には 2026-08-26 生成の都道府県 `item.json` が `hook` 無しで残る。
+  ブログ記事の `rankingRefs` は非公開の 7 指標を 17 記事で持ち、記事下の関連ランキング (`RelatedRankingsSection`) がそれを読んでいた。
+  `next build` の prerender で `item.hook must be a non-empty string` が 2 件記録され、`international-cooperation-volunteer-map` は
+  `/ranking/volunteer-activity-international-cooperation-15plus` (410) へのリンクを 2 本描いていた。
+- **済**: 関連ランキングを既知キー一覧 (`KNOWN_RANKING_KEYS`) にある指標だけに絞った (develop。テスト 3 件、修正前の部品では 3 件とも落ちることを確認)。
+  ブログは build 時に焼かれるので、本番に出るのは次の develop→main のデプロイ。
+- **次**: 次のデプロイの CI build ログに上の 2 件のエラーが出ないこと、本番の `/blog/international-cooperation-volunteer-map` に 410 へのリンクが無いことを確かめる。
+  R2 に残る 2 指標の古い都道府県 `item.json` は、どこからも読まれなくなるので消してよいが、R2 の削除は承認を取ってから行う。
+- **完了条件**: 本番デプロイ後の build ログに 2 指標の item のエラーが無く、上の記事の関連ランキングに 410 のリンクが無い。
 
 ### [THEME-EVIDENCE-RANKING-LABEL-DUP-01] テーマの論点の関連ランキングに、同じ名前のリンクが並んで区別できない
 タグ: [UI・UX] [種類:不具合] [実行:対話] [起票:2026-10-08] [領域:サイト]
