@@ -543,6 +543,11 @@
         "surveyedAt": "2026-09-09",
         "rationale": "都市公園面積を既存テーマの独立章へ追加する。"
       }
+    },
+    {
+      "rankingKey": "three-generation-household-members",
+      "shortLabel": "3世代世帯人員",
+      "role": "context"
     }
   ],
   "charts": [

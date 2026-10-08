@@ -169,6 +169,51 @@
           "complementarity"
         ]
       }
+    },
+    {
+      "rankingKey": "bmi-female-40to69-age-adjusted",
+      "shortLabel": "女性のBMI（40〜69歳）",
+      "role": "context"
+    },
+    {
+      "rankingKey": "bmi-male-20to69-age-adjusted",
+      "shortLabel": "男性のBMI（20〜69歳）",
+      "role": "context"
+    },
+    {
+      "rankingKey": "smoking-rate-male-age-adjusted",
+      "shortLabel": "男性の習慣的喫煙者割合",
+      "role": "context"
+    },
+    {
+      "rankingKey": "alcohol-sales-per-adult-beer",
+      "shortLabel": "酒類販売数量（ビール・成人1人）",
+      "role": "context"
+    },
+    {
+      "rankingKey": "alcohol-sales-per-adult-sake",
+      "shortLabel": "酒類販売数量（清酒・成人1人）",
+      "role": "context"
+    },
+    {
+      "rankingKey": "alcohol-sales-per-adult-shochu",
+      "shortLabel": "酒類販売数量（焼酎・成人1人）",
+      "role": "context"
+    },
+    {
+      "rankingKey": "alcohol-sales-per-adult-total",
+      "shortLabel": "酒類販売数量（合計・成人1人）",
+      "role": "context"
+    },
+    {
+      "rankingKey": "alcohol-sales-per-adult-whisky",
+      "shortLabel": "酒類販売数量（ウイスキー・成人1人）",
+      "role": "context"
+    },
+    {
+      "rankingKey": "alcohol-sales-per-adult-wine",
+      "shortLabel": "酒類販売数量（ワイン・成人1人）",
+      "role": "context"
     }
   ],
   "charts": [],
