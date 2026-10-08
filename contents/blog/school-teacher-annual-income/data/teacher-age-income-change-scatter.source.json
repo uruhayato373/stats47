@@ -1,0 +1,49 @@
+{
+  "kind": "calculated",
+  "label": "小中学校教員の平均年齢と平均年収の変化 2022年から2023年",
+  "unit": "万円",
+  "year": "2023",
+  "formula": "横軸 = 2023年の平均年齢 − 2022年の平均年齢（歳）、縦軸 = 2023年の平均年収 − 2022年の平均年収（万円）。平均年齢は賃金構造基本統計調査（統計表ID 0003445758、職種は小・中学校教員、男女計）の表章項目「年齢」で、2022年は 01、2023年は 33。平均年収は同じ指標 school-teacher-annual-income の2022年と2023年の値。両方の年に平均年齢と平均年収の値がある41都道府県を、都道府県名で突き合わせた。",
+  "inputs": [
+    {
+      "statsDataId": "0003445758",
+      "cdCat01": "01",
+      "cdCat02": "1192",
+      "cdTab": "01",
+      "year": "2022",
+      "label": "年齢（歳）。2022年だけ表章項目のコードが違う"
+    },
+    {
+      "statsDataId": "0003445758",
+      "cdCat01": "01",
+      "cdCat02": "1192",
+      "cdTab": "33",
+      "year": "2023",
+      "label": "年齢（歳）"
+    },
+    {
+      "rankingKey": "school-teacher-annual-income",
+      "year": "2022"
+    },
+    {
+      "rankingKey": "school-teacher-annual-income",
+      "year": "2023"
+    }
+  ],
+  "excludedAreas": [
+    "青森県",
+    "岩手県",
+    "山形県",
+    "石川県",
+    "福井県",
+    "徳島県"
+  ],
+  "exclusionReason": "2022年と2023年のどちらかで平均年齢と平均年収の値がない都道府県のため。",
+  "expectedPointCount": 41,
+  "source": "e-Stat 統計表 0003445758（賃金構造基本統計調査 令和2年以降 一般_都道府県別_職種（特掲））、r2:app/ranking/school-teacher-annual-income/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking。平均年齢は metric 化していないため e-Stat の統計表から直接取得",
+  "restore": "e-Stat API getStatsData を statsDataId=0003445758, cdCat01=01, cdCat02=1192, cdTab=01（2022年）と 33（2023年）で取得して年齢を得る。年収は https://storage.stats47.jp/app/ranking/school-teacher-annual-income/values.json の2022年と2023年の値。areaName で突き合わせて差を取る。",
+  "surveyScope": "not-applicable",
+  "surveyScopeReason": "平均年齢の差と平均年収の差を組み合わせた派生値で、1つの統計だけには対応しない。",
+  "generatedBy": "manual (e-Stat 0003445758 の年齢と R2 app/ranking/school-teacher-annual-income の年収から作成)"
+}

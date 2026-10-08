@@ -1,0 +1,31 @@
+{
+  "kind": "calculated",
+  "label": "小中学校教員の平均年収 2022年と2023年の関係",
+  "unit": "万円",
+  "year": "2023",
+  "formula": "同じ指標 school-teacher-annual-income の2022年の値(x)と2023年の値(y)を、都道府県名で突き合わせて散布図にした。両方の年に値がある41都道府県だけを描いている。",
+  "inputs": [
+    {
+      "rankingKey": "school-teacher-annual-income",
+      "year": "2022"
+    },
+    {
+      "rankingKey": "school-teacher-annual-income",
+      "year": "2023"
+    }
+  ],
+  "excludedAreas": [
+    "青森県",
+    "岩手県",
+    "山形県",
+    "石川県",
+    "福井県",
+    "徳島県"
+  ],
+  "exclusionReason": "2022年と2023年のどちらか一方、または両方の年に値がない都道府県のため。",
+  "expectedPointCount": 41,
+  "source": "r2:app/ranking/school-teacher-annual-income/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug school-teacher-annual-income --keys school-teacher-annual-income --year 2022 と --year 2023 の値を areaName で突き合わせる",
+  "generatedBy": "manual (R2 app/ranking/school-teacher-annual-income/values.json の2022年と2023年の値を areaName で突き合わせて作成)"
+}
