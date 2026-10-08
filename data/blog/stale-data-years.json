@@ -1,6 +1,207 @@
 {
-  "generatedAt": "2026-10-07T03:05:29.358Z",
-  "published": 609,
-  "withRankingRefs": 0,
-  "stale": []
+  "generatedAt": "2026-10-08T02:24:53.452Z",
+  "published": 607,
+  "withRankingRefs": 568,
+  "stale": [
+    {
+      "slug": "fish-catch-vs-consumption-prefecture",
+      "title": "獲れる県と食べる県は違う？",
+      "stale": [
+        {
+          "rankingKey": "tuna-consumption-expenditure",
+          "articleYear": "2015",
+          "latestYear": "2024"
+        },
+        {
+          "rankingKey": "yellowtail-consumption-expenditure",
+          "articleYear": "2015",
+          "latestYear": "2024"
+        }
+      ]
+    },
+    {
+      "slug": "library-museum-cultural-capital",
+      "title": "人口あたり図書館数は県で7倍違う",
+      "stale": [
+        {
+          "rankingKey": "japanese-population",
+          "articleYear": "2020",
+          "latestYear": "2024"
+        }
+      ]
+    },
+    {
+      "slug": "retail-establishments-by-prefecture",
+      "title": "高知が「お店の多い県」で東京を超える──小売業の商業密度、絶対数と逆転する真因 (2021)",
+      "stale": [
+        {
+          "rankingKey": "total-population",
+          "articleYear": "2021",
+          "latestYear": "2025"
+        }
+      ]
+    },
+    {
+      "slug": "engel-coefficient-vs-prefectural-income",
+      "title": "エンゲル係数で県の豊かさは測れない",
+      "stale": [
+        {
+          "rankingKey": "engel-coefficient",
+          "articleYear": "2021",
+          "latestYear": "2024"
+        },
+        {
+          "rankingKey": "information-communication-coefficient",
+          "articleYear": "2021",
+          "latestYear": "2024"
+        }
+      ]
+    },
+    {
+      "slug": "fiscal-health-50years-trend",
+      "title": "2022年度に財政力指数が1.0を超えたのは東京都だけ──1991年度は4都府県だった",
+      "stale": [
+        {
+          "rankingKey": "total-population",
+          "articleYear": "2022",
+          "latestYear": "2025"
+        }
+      ]
+    },
+    {
+      "slug": "local-tax-regional-gap",
+      "title": "埼玉に733万人いても地方税が薄い真因──法人税収が東京に流れるベッドタウン構造",
+      "stale": [
+        {
+          "rankingKey": "total-population",
+          "articleYear": "2022",
+          "latestYear": "2025"
+        }
+      ]
+    },
+    {
+      "slug": "manufacturing-labor-productivity-pref",
+      "title": "製造業の生産性トップはなぜ大分？出荷額王・愛知が上回られる理由",
+      "stale": [
+        {
+          "rankingKey": "manufacturing-employees",
+          "articleYear": "2021",
+          "latestYear": "2024"
+        },
+        {
+          "rankingKey": "manufacturing-shipment-amount",
+          "articleYear": "2021",
+          "latestYear": "2023"
+        }
+      ]
+    },
+    {
+      "slug": "prefectural-debt-future-burden",
+      "title": "県債は誰が返す? 47都道府県",
+      "stale": [
+        {
+          "rankingKey": "production-age-population-ratio",
+          "articleYear": "2022",
+          "latestYear": "2025"
+        },
+        {
+          "rankingKey": "ratio-65-plus",
+          "articleYear": "2022",
+          "latestYear": "2025"
+        }
+      ]
+    },
+    {
+      "slug": "welfare-expenses-squeeze",
+      "title": "民生費が土木費を逆転｜30年で3倍、なぜ福祉が財政を縛るのか",
+      "stale": [
+        {
+          "rankingKey": "total-population",
+          "articleYear": "2022",
+          "latestYear": "2025"
+        }
+      ]
+    },
+    {
+      "slug": "manufacturing-productivity",
+      "title": "製造業の「稼ぐ力」──愛知が総額トップでも生産性トップではない理由",
+      "stale": [
+        {
+          "rankingKey": "manufacturing-employees",
+          "articleYear": "2022",
+          "latestYear": "2024"
+        },
+        {
+          "rankingKey": "manufacturing-industry-added-value",
+          "articleYear": "2022",
+          "latestYear": "2023"
+        },
+        {
+          "rankingKey": "manufacturing-shipment-amount",
+          "articleYear": "2022",
+          "latestYear": "2023"
+        }
+      ]
+    },
+    {
+      "slug": "safe-driving-5-features",
+      "title": "交通事故が少ない県に共通する「5つの特徴」とは",
+      "stale": [
+        {
+          "rankingKey": "ratio-65-plus",
+          "articleYear": "2023",
+          "latestYear": "2025"
+        },
+        {
+          "rankingKey": "traffic-accident-deaths-per-100-accidents",
+          "articleYear": "2023",
+          "latestYear": "2024"
+        }
+      ]
+    },
+    {
+      "slug": "vacant-house-crisis",
+      "title": "なぜ徳島は空き家が5軒に1軒なのか",
+      "stale": [
+        {
+          "rankingKey": "ratio-65-plus",
+          "articleYear": "2023",
+          "latestYear": "2025"
+        }
+      ]
+    },
+    {
+      "slug": "cc-estat-20-publish",
+      "title": "Claude Code で作った47都道府県チャートを公開｜Next.js × Cloudflare Pages 連載最終回",
+      "stale": [
+        {
+          "rankingKey": "total-population",
+          "articleYear": "2024",
+          "latestYear": "2025"
+        }
+      ]
+    },
+    {
+      "slug": "fertility-fiscal-nexus",
+      "title": "財政が豊かなほど少子化が深刻──東京0.99・沖縄1.60の逆説",
+      "stale": [
+        {
+          "rankingKey": "total-fertility-rate",
+          "articleYear": "2022",
+          "latestYear": "2023"
+        }
+      ]
+    },
+    {
+      "slug": "nurse-income-prefecture-gap",
+      "title": "看護師年収は大阪568万・宮崎416万で1.4倍差｜なぜ給与水準トップの東京が中位に沈むのか",
+      "stale": [
+        {
+          "rankingKey": "avg-salary-all-prefecture",
+          "articleYear": "2023",
+          "latestYear": "2024"
+        }
+      ]
+    }
+  ]
 }
