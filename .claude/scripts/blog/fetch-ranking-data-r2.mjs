@@ -29,6 +29,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { yearLabelOf } from "./lib/ranking-year-label.mjs";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -149,10 +150,12 @@ async function buildForKey(key, outBaseName, fullName) {
   const readerLabel = item.readerLabel || title;
   const hook = item.hook || "";
   const year = partition.yearCode;
+  // 年度の指標は「2021年度」と書く (年と年度を混ぜない。判定は ranking-year-label.mjs)
+  const yearLabel = yearLabelOf(year, item);
   const payload = {
     // カード見出しは簡潔に（指標名）。年はサブタイトルへ分離し、横長/縦長とも見切れにくくする。
     title,
-    subtitle: `${year}年`,
+    subtitle: yearLabel,
     label: title,
     readerLabel,
     ...(hook ? { hook } : {}),
@@ -205,7 +208,7 @@ async function buildForKey(key, outBaseName, fullName) {
     const mapBase = `${outBaseName}-map`;
     const mapPayload = {
       title,
-      subtitle: `${year}年`,
+      subtitle: yearLabel,
       label: title,
       readerLabel,
       ...(hook ? { hook } : {}),
