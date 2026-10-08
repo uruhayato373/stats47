@@ -312,6 +312,18 @@ updated: 2026-10-06
 - **完了条件**: 次の本番デプロイで reset step と smoke が通り、post-deploy-smoke (Playwright) も通る。
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [DEPLOY-SMOKE-NEW-KEY-OGP-01] ランキングの公開キーを足すデプロイは、OGP 画像が後から作られるためデプロイ後スモークテストで必ず落ちる
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:bash .github/scripts/smoke-test-routes.sh https://stats47.jp] [起票:2026-10-08] [領域:データ]
+
+- **事象 (2026-10-08)**: 公開キー (`KNOWN_RANKING_KEYS`) を増やしたデプロイが、同じ日に 2 回ともデプロイ後スモークテスト
+  (`deploy-workers.yml` の「Smoke test (Production routes)」) で落ちた。PR #1100 (run 37705476022、13 キー) と
+  PR #1104 (run 37737480909、31 キー)。スモークは差分で増えたキーの `og:image` を検査するが、OGP 画像は main のマージ後に
+  `sync-snapshots.yml` (ranking-items) の `sync-ranking-keys` job が作るので、デプロイの時点では必ず 404 になる。
+  Worker のデプロイ自体は成功しており、どちらも手動で sync-snapshots を代理起動して OGP を作った後、スモークを再実行して 26/26 で通った。
+- **次**: OGP 画像を作る時点をデプロイ前へ動かす (develop の data-refresh か PR の段階で、増えるキーの OGP を R2 に作る) か、
+  `deploy-workers.yml` がスモークの前に増えたキーの OGP を作る。検査を緩めて og:image を見ないようにはしない。
+- **完了条件**: 公開キーを足した次のデプロイで、手動の代理起動なしにデプロイ後スモークテストが通る。
+
 ### [CRITIC-PATTERN-TITLE-PROMISE] critic の指摘「タイトル・約束」が 3 本の記事で繰り返した。writer の規約か gate に入れる
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-08] [領域:サイト]
 
