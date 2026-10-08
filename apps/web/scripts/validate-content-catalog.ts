@@ -96,6 +96,9 @@ for (const tag of CONTENT_TAGS)
   }
 const ids = new Set(catalog.pages.map((page) => page.id));
 for (const page of catalog.pages) {
+  if (page.id.split(':')[0] !== page.kind) {
+    throw new Error(`IDとページ種別の不一致: ${page.id} ${page.kind}`);
+  }
   if (contentIdFromHref(page.href) !== page.id)
     throw new Error(
       `URLとIDの不一致: ${page.id} ${page.href} (${contentIdFromHref(page.href)})`

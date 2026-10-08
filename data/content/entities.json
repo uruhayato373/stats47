@@ -272,14 +272,14 @@
       "count": 18
     },
     {
-      "key": "municipality-theme",
-      "kind": "municipality-theme",
-      "count": 19
-    },
-    {
       "key": "municipality-ranking",
       "kind": "municipality-ranking",
       "count": 212
+    },
+    {
+      "key": "municipality-theme",
+      "kind": "municipality-theme",
+      "count": 19
     },
     {
       "key": "page",

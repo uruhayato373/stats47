@@ -97,8 +97,8 @@
       ]
     },
     {
-      "id": "route:municipalities-themes:themeSlug",
-      "kind": "municipalities-themes",
+      "id": "route:municipality-theme:themeSlug",
+      "kind": "municipality-theme",
       "pattern": "/municipalities/themes/[themeSlug]",
       "parameters": [
         "themeSlug"

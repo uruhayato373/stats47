@@ -176,7 +176,7 @@ async function run() {
     });
   for (const theme of Object.values(MUNICIPALITY_THEME_CATALOGS))
     add({
-      id: `municipalities-themes:${theme.slug}`,
+      id: `municipality-theme:${theme.slug}`,
       kind: 'municipality-theme',
       key: theme.slug,
       title: theme.title,

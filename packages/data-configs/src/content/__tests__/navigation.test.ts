@@ -19,6 +19,7 @@ describe('content identity and navigation', () => {
     expect(contentIdFromHref('/tag/%E6%B0%97%E5%80%99')).toBe('tag:climate');
     expect(contentIdFromHref('/ranking/annual-sunshine-duration?year=2024#map')).toBe('ranking:annual-sunshine-duration');
     expect(contentIdFromHref('/areas/39000/climate')).toBe('area-theme:39000:climate');
+    expect(contentIdFromHref('/municipalities/themes/population')).toBe('municipality-theme:population');
     expect(contentIdFromHref('/geo/population-land-price/39/overlap')).toBe('geo:population-land-price:39:overlap');
   });
   it('直接の指標一致をタグ一致より先に出し、自分・非公開・重複・無関係な新着を除外する', () => {

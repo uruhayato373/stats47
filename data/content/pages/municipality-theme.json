@@ -2,7 +2,7 @@
   "version": 1,
   "pages": [
     {
-      "id": "municipalities-themes:aging-society",
+      "id": "municipality-theme:aging-society",
       "kind": "municipality-theme",
       "key": "aging-society",
       "title": "市区町村の高齢化",
@@ -10,7 +10,7 @@
       "published": true
     },
     {
-      "id": "municipalities-themes:agriculture-forestry",
+      "id": "municipality-theme:agriculture-forestry",
       "kind": "municipality-theme",
       "key": "agriculture-forestry",
       "title": "市区町村の農林業",
@@ -18,7 +18,7 @@
       "published": true
     },
     {
-      "id": "municipalities-themes:commerce",
+      "id": "municipality-theme:commerce",
       "kind": "municipality-theme",
       "key": "commerce",
       "title": "市区町村の商業",
@@ -26,7 +26,7 @@
       "published": true
     },
     {
-      "id": "municipalities-themes:commuting",
+      "id": "municipality-theme:commuting",
       "kind": "municipality-theme",
       "key": "commuting",
       "title": "市区町村の通勤・通学と乗り物",
@@ -34,7 +34,7 @@
       "published": true
     },
     {
-      "id": "municipalities-themes:education",
+      "id": "municipality-theme:education",
       "kind": "municipality-theme",
       "key": "education",
       "title": "市区町村の教育・文化施設",
@@ -42,7 +42,7 @@
       "published": true
     },
     {
-      "id": "municipalities-themes:establishments",
+      "id": "municipality-theme:establishments",
       "kind": "municipality-theme",
       "key": "establishments",
       "title": "市区町村の事業所",
@@ -50,7 +50,7 @@
       "published": true
     },
     {
-      "id": "municipalities-themes:foreign-residents",
+      "id": "municipality-theme:foreign-residents",
       "kind": "municipality-theme",
       "key": "foreign-residents",
       "title": "市区町村の外国人住民",
@@ -58,7 +58,7 @@
       "published": true
     },
     {
-      "id": "municipalities-themes:households",
+      "id": "municipality-theme:households",
       "kind": "municipality-theme",
       "key": "households",
       "title": "市区町村の世帯構成",
@@ -66,7 +66,7 @@
       "published": true
     },
     {
-      "id": "municipalities-themes:housing",
+      "id": "municipality-theme:housing",
       "kind": "municipality-theme",
       "key": "housing",
       "title": "市区町村の住宅・建設",
@@ -74,7 +74,7 @@
       "published": true
     },
     {
-      "id": "municipalities-themes:labor",
+      "id": "municipality-theme:labor",
       "kind": "municipality-theme",
       "key": "labor",
       "title": "市区町村の労働・就業",
@@ -82,7 +82,7 @@
       "published": true
     },
     {
-      "id": "municipalities-themes:land-area",
+      "id": "municipality-theme:land-area",
       "kind": "municipality-theme",
       "key": "land-area",
       "title": "市区町村の土地・面積",
@@ -90,7 +90,7 @@
       "published": true
     },
     {
-      "id": "municipalities-themes:local-finance",
+      "id": "municipality-theme:local-finance",
       "kind": "municipality-theme",
       "key": "local-finance",
       "title": "市区町村の地方財政",
@@ -98,7 +98,7 @@
       "published": true
     },
     {
-      "id": "municipalities-themes:manufacturing",
+      "id": "municipality-theme:manufacturing",
       "kind": "municipality-theme",
       "key": "manufacturing",
       "title": "市区町村の製造業",
@@ -106,7 +106,7 @@
       "published": true
     },
     {
-      "id": "municipalities-themes:medical-welfare",
+      "id": "municipality-theme:medical-welfare",
       "kind": "municipality-theme",
       "key": "medical-welfare",
       "title": "市区町村の医療・福祉",
@@ -114,7 +114,7 @@
       "published": true
     },
     {
-      "id": "municipalities-themes:migration",
+      "id": "municipality-theme:migration",
       "kind": "municipality-theme",
       "key": "migration",
       "title": "市区町村の人口移動",
@@ -122,7 +122,7 @@
       "published": true
     },
     {
-      "id": "municipalities-themes:population",
+      "id": "municipality-theme:population",
       "kind": "municipality-theme",
       "key": "population",
       "title": "市区町村の人口",
@@ -130,7 +130,7 @@
       "published": true
     },
     {
-      "id": "municipalities-themes:safety-environment",
+      "id": "municipality-theme:safety-environment",
       "kind": "municipality-theme",
       "key": "safety-environment",
       "title": "市区町村の安全・環境",
@@ -138,7 +138,7 @@
       "published": true
     },
     {
-      "id": "municipalities-themes:urban-structure",
+      "id": "municipality-theme:urban-structure",
       "kind": "municipality-theme",
       "key": "urban-structure",
       "title": "市区町村の人口集中・都市構造",
@@ -146,7 +146,7 @@
       "published": true
     },
     {
-      "id": "municipalities-themes:vital-statistics",
+      "id": "municipality-theme:vital-statistics",
       "kind": "municipality-theme",
       "key": "vital-statistics",
       "title": "市区町村の出生・婚姻・死亡",
