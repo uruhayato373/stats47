@@ -3382,6 +3382,17 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - **次**: 件数の直書きを `THEME_CATALOGS` 由来の値に置き換える。ただし「意図せず消えたテーマ」を検出する役割があるテストは、キー一覧の固定など別の形で残す。
 - **完了条件**: テーマを 1 つ足しても、カタログ JSON・登録簿・生成物以外のテストを手で直さずに通る。
 
+### [PERF-THEME-HTML-SIZE-01] テーマページの HTML を目安 900KB に収める (新テーマ household-food-spending は 2.9MB)
+
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-08] [領域:サイト]
+
+- **観測 (2026-10-08、Googlebot UA・CDN パージ後)**: `/themes/household-food-spending` の HTML は 2,917,296 bytes、`/areas/<県>/household-food-spending` も約 2.93MB (47 ページ)。
+  既存の最大は `/themes/healthcare` 1,607,344 bytes、`sports-participation` 800,776、`consumer-prices` 477,891。基準は `.claude/skills/analytics/performance-improvement/page-quality-budgets.json` の
+  `html_bytes` 900,000 (warning)。初回 (キャッシュ無し) 応答は 10.6 秒、2 回目は 0.13 秒。
+- **[仮説]** 指標 136 件と、`comparisonYear` を持つ 30 グループの値をサーバー描画で HTML に埋め込んでいる。検証: HTML 内の RSC payload を指標キーごとに数え、グループ数を減らした版をローカルで測る。
+- **関連**: Workers CPU の増加調査 `CF-CPU-SURGE-01` の候補「テーマ拡充で 1 ページが重くなった」と同じ現象。
+- **完了条件**: 新テーマと healthcare の HTML が 900KB 以下、または目安を超える理由と新しい基準を page-quality-budgets.json に記録する。
+
 ## 🟢 低 — 時期未定・条件付き (trigger は本文に)
 
 ### [DATA-SHUKUHAKU-CORRECTION-01] 宿泊旅行統計の 2026 年分を足すときに、層化基準の変更による系列の断絶を書く
