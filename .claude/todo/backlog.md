@@ -720,6 +720,7 @@ updated: 2026-10-06
 - **本番反映 (2026-10-08)**: uruhayato373/stats47#1108 で main へマージ (10:17 UTC)。デプロイと post-deploy smoke (run 37763482616) は成功。移動の push で `blog-auto-publish` (run 37760839708) が `contents/blog` から 20 本を候補に取り、19 本は手書き出典節、1 本は背景未生成の blocker で全件 skip した (公開 0・R2 は不変)。PR の図の検証 workflow は抽出の awk が旧パスのままで 0 件で通っていたので直し、32 本の検証が通った。push からマージまでの定期実行は Instagram の 1 本だけで、outbox に触れず記録の欠落は無い。
 - **次**: ①次に記事を公開する run で `blog-auto-publish.yml` が `contents/blog` から公開し、公開した slug を commit-back で消すこと ②`blog-remediation-daily.yml` の最初の run (2026-10-08 23:00 UTC = 10-09 08:00 JST) が `contents/blog` を掃除して書き戻すことを、run のログで確かめる。
 - **完了条件**: 上の 2 つの run が成功し、ログに `contents/blog` の slug が出ている。
+- **① 済 (2026-10-08)**: cc-estat-14 の書き直し (a1535b433) の push で `blog-auto-publish` (run 37776610241) が `contents/blog` から公開し、outbox 掃除を 938ca1fa1 で書き戻した。本番の記事は新しい表 ID (0003409159) を出している。残りは ② の日次 run だけ。
 
 ### [BLOG-TITLE-CHANGE-WATCH-01] 図の年の書き直しでタイトルを変えた公開記事の検索流入を、公開後に確かめる
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-07] [領域:サイト]
@@ -855,18 +856,6 @@ updated: 2026-10-06
 - **事象**: stats47 の配信先は Cloudflare Workers (OpenNext) だが、`cc-estat-18-cache-r2` と `cc-estat-19-skill-pipeline` の本文に「Cloudflare Pages」の表記が残っている (2026-10-07、連載の最終回 cc-estat-20 を書き直した writer が報告)。cc-estat-19 のトークン作成例には、使っていない D1 の Edit 権限も含まれている (cc-estat-20 の critic が報告)。cc-estat-18 の `wrangler r2 object put` の例には `--remote` が無く、wrangler 4.148.0 ではローカルに書いてしまう。`remote = true` のときは `preview_bucket_name` を外す注意も要る (cc-estat-20 の writer がローカルで再現)。cc-estat-20 も本文は Workers に直したが、タグは未登録の `CloudflareWorkers` にすると 410 になるため `CloudflarePages` のままにしてある。記事の tags の `CloudflarePages` を `CloudflareWorkers` に替えるには `apps/web/src/config/known-tag-keys.ts` の再生成が要る (未登録のタグは 410 になる)。
 - **次**: 2 本を R2 から contents/blog へ取り、本文の表記とコード例 (`runtime = "edge"`・`wrangler pages deploy` など) を公式ドキュメントで確かめて直す。タグを替えるなら known-tag-keys の再生成を同じ変更に入れる。blog-critic を通して公開する。
 - **完了条件**: 2 本の本文に Pages 前提の記述が残っておらず、critic PASS で再公開されている。
-
-### [BLOG-STATS-TABLE-ID-FIX-01] 公開中の Claude Code 連載 cc-estat-14 の、実在する別の表を指す統計表 ID を直す
-タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:node .claude/scripts/blog/quality-gate.mjs <slug>] [起票:2026-10-07] [領域:サイト]
-
-- **事象**: 2026-10-07 に入れた統計表 ID の照合 (`stats-table-id-lint.mjs`) を公開済み 389 記事に当てたところ、2 本が当たった。
-  `cc-estat-14-energy-area-chart` は「電力需給統計」として `0003234567` を書いているが、e-Stat では木材統計調査の表である。連番風の ID で、例として作った値の可能性がある。
-- **済 (2026-10-08)**: もう 1 本の `cc-estat-09-radar-prefecture` は、6 軸を社会・人口統計体系の実在の指標に置き換え、R2 の実データとレーダーチャート
-  (svg-builder に radar 型を新設) で書き直して再公開した (5d1ad14d8、blog-critic PASS)。出典 0 件が解消し、survey taxonomy の週次・PR の検査が通る。
-- **手順**: cc-estat-14 を R2 から contents/blog へ取り (`node .claude/scripts/blog/refresh-article-data-years.mjs --slug cc-estat-14-energy-area-chart --pull`)、
-  e-Stat で実在する正しい表の ID に差し替える (取れなければ ID を書かずに統計名とデータベースへのリンクにする)。
-  コード例の取得結果と本文の数値が実データと食い違わないかも確かめ、blog-critic を通して公開する。
-- **完了条件**: quality-gate の `STATS_TABLE_*` が 0 件で再公開され、本番の記事で ID と統計名が一致している。
 
 ### [DEPS-TAILWIND4-01] apps/web を tailwindcss 4 へ移行し、braces を runtime 依存から外す
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:npm audit --omit=dev --audit-level=low] [起票:2026-10-06] [領域:管理]
