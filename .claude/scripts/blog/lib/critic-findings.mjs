@@ -36,14 +36,16 @@ function summarize(text) {
 }
 
 /**
- * review.md を読み、指摘を行ごとに返す。`## 指摘` 節の箇条書きだけを見る。
+ * review.md を読み、指摘を行ごとに返す。`## 指摘` で始まる見出しの節の箇条書きだけを見る。
+ * 見出しは `## 指摘(残るもの)` のように後ろに語が付くことがあるので前方一致で探す
+ * (完全一致だと節を見つけられず、指摘 0 件のまま ok を返していた。CRITIC-FINDINGS-SILENT-ZERO-01)。
  * @param {string} md
  * @param {{ slug?: string, knownTypes?: string[] }} [opts]
  */
 export function parseReview(md, opts = {}) {
   const fm = frontmatter(md);
   const known = new Set(opts.knownTypes ?? []);
-  const section = md.split(/^## 指摘\s*$/m)[1]?.split(/^## /m)[0] ?? "";
+  const section = md.split(/^## 指摘.*$/m)[1]?.split(/^## /m)[0] ?? "";
   const findings = [];
   for (const line of section.split("\n")) {
     const match = line.match(FINDING_LINE);
@@ -60,6 +62,19 @@ export function parseReview(md, opts = {}) {
     date: fm.date ?? null,
     findings,
   };
+}
+
+/**
+ * 台帳に記録してよい review かを判定し、問題を文で返す (空配列なら問題なし)。
+ * REVISE なのに指摘が 0 件なのは、見出しや箇条書きの書式を読めなかったときにしか起きない。
+ * 黙って 0 件で通すと、その記事の指摘が台帳から消える。
+ * @param {{ verdict: string|null, findings: unknown[] }} review
+ */
+export function reviewProblems(review) {
+  if (review.verdict === "REVISE" && review.findings.length === 0) {
+    return ["verdict が REVISE なのに指摘を 1 件も読めない (「## 指摘」節と「- [MAJOR][型:<key>] …」の書式を確かめる)"];
+  }
+  return [];
 }
 
 /** 台帳の 1 行。同じ review.md を何度記録しても同じ key になる (重複を書かない)。 */
