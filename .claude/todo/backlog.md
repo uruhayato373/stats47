@@ -413,18 +413,6 @@ updated: 2026-10-06
 - **完了条件**: PR で catalog の componentType を変えたとき、その PR の E2E が新しい図の種類で `data-data-state="ready"` を確かめられ、
   consumer-prices の `representativeTypes` に `cpi-heatmap` を戻しても PR の時点で通る。
 
-### [DATA-REFRESH-MUNI-FETCH-RETRY-01] 市区町村ランキングの生成が R2 取得 1 回の通信エラーでタスクごと落ちる
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:npx vitest run packages/ranking/src/scripts] [起票:2026-10-08] [領域:データ]
-
-- **事実**: data-refresh run 37693107860 (Issue #1101) の手順 10 で `municipality-ranking` が `fetch failed` で止まった。
-  `number-of-establishments-information-communication` まで 144 key を書いた直後で、HTTP 状態は出ていない (Node の fetch が接続段階で失敗したときの文言)。
-  同じ run の他の 13 task は成功し、push もエラー 0 で終わった。次の key の元データ `app/stats/number-of-establishments-manufacturing/cities.json` は
-  直後に取り直すと 200 (596 KB) だった。`generate-municipality-ranking.ts` は 212 key の `cities.json` を 1 本ずつ取り、再試行を持たない。
-  今回の変更 (都道府県の 12 指標) は市区町村カタログ (`municipality-catalog.ts`) にも `cities.json` にも触れていない。
-- **次**: `generateForKey` の取得に、接続失敗と 5xx だけを数回 (間隔を空けて) 再試行する処理を足す。4xx と識別子の不一致は今どおり即失敗にする。
-  再試行を足したら `sync-snapshots` を `only=municipality-ranking` で 1 回走らせて成功を確かめる。
-- **完了条件**: 一時的な接続失敗を模したテストで再試行後に成功し、4xx では再試行しないことをテストが固定している。Issue #1101 が次の data-refresh の成功で閉じている。
-
 ### [KEYS-SYNC-PROMINENCE-REGEN-01] ランキングの既知キーを足しても、そこから作るランキング索引の生成物が再生成されない
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:cd apps/web && npx tsx scripts/generate-ranking-prominence.ts --check] [起票:2026-10-08] [領域:データ] [進行中]
 
