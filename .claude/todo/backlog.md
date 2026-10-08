@@ -2613,21 +2613,6 @@ updated: 2026-10-06
 - **完了条件**: `combined-analysis`25件全てがreuse-existing-metric/new-metricいずれかで既存SSOTへ接続され、
   管理画面`/content/references`で実在証跡が確認できる。
 
-### [REFERENCE-KINDLE7-S5-01] 参考文献由来の新規 31 指標と低標高人口の Geo 分析を本番に出し、実測で確かめる
-
-タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run source-vault:test] [起票:2026-10-08] [領域:データ]
-
-- **owner**: 公開は`ranking-publisher`、Geo は`geo-analysis-curator`。
-- **済み (2026-10-08)**: Kindle スキャン 7 冊と『47都道府県の偏差値』の論点から新規 31 指標を作り、R2 に値・ランキング項目・配信用の値を反映、
-  KNOWN / SITEMAP に載せて develop へ push した。`/geo/population-low-elevation` 着地ページ (原典表示・保存則 47/47) を作り R2 へ反映した。
-  調査の紐付け (金融リテラシー調査・0003457337)、畜産 3 指標の順位付きの再反映と県データブック採用、G7000・学校外の勉強時間の指標化、
-  単位 kg/m2 と手動取得スクリプトの手順書は完了。沖縄の酒類 (国税庁が全国比較から除外) と麻雀・ゲームセンターの県別許可数
-  (47 県同一年の公表なし) はやらないと決めて台帳に理由を書いた。
-- **次**: develop→main の PR をマージしてデプロイし、CDN をパージする。新規 31 指標の `/ranking/<key>` と `/geo/population-low-elevation` を
-  Googlebot UA で実測して 200 と実データの表示を確かめる。
-- **停止条件**: 書籍の数値・順位・本文・図表を公開物へ流さない。
-- **完了条件**: 新規 31 指標と `/geo/population-low-elevation` が本番で 200 を返し、ランキングページに値が表示される。
-
 ### [REFERENCE-CONTENT-DRAFTS-01] 参考文献由来のテーマ企画と横断ブログ下書きを制作する
 
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run test --workspace=apps/admin -- reference-expansion-plans] [起票:2026-08-30] [領域:データ]
