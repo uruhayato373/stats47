@@ -41,7 +41,6 @@ describe("AdSense全体停止契約", () => {
 
   it("環境変数がtrueでもAdSense本体とscriptを生成しない", () => {
     vi.stubEnv("NEXT_PUBLIC_GOOGLE_ADSENSE_ENABLED", "true");
-    vi.stubEnv("NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT_ID", "ca-pub-test");
 
     const ad = render(<AdSenseAd format="article" slotId="1234567890" />);
     const script = render(<AdSenseScript />);

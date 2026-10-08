@@ -8,5 +8,6 @@
   "r2Bucket": "stats47",
   "r2PrivateBucket": "stats47-private",
   "gscProperty": "sc-domain:stats47.jp",
-  "ga4PropertyId": "463218070"
+  "ga4PropertyId": "463218070",
+  "adsenseClientId": "ca-pub-9055416085403520"
 }

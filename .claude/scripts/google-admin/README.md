@@ -125,8 +125,8 @@ GA4の設定変更専用サービスアカウント鍵を
 Google Cloud Consoleの用途をオーナーへ報告する。外部secretやOAuth clientの削除には
 別途明示承認が必要である。
 
-`NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT_ID`はWeb配信用の公開publisher IDであり、
-管理API用OAuth credentialとは別物なので統合しない。
+Web 配信用の公開 publisher ID (`ca-pub-…`) はサイト識別子の正本 `packages/types/src/site.json` の
+`adsenseClientId` に置く (2026-10-08 に環境変数から移した)。管理API用OAuth credentialとは別物なので統合しない。
 
 ## 不変の安全契約
 

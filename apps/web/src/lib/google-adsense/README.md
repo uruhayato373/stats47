@@ -105,9 +105,10 @@ import { AdSenseAd } from "@/lib/google-adsense";
 AdSense再開時は以下の環境変数が必要です：
 
 ```env
-NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT_ID=ca-pub-xxxxxxxxxxxxx
 NEXT_PUBLIC_GOOGLE_ADSENSE_ENABLED=true
 ```
+
+パブリッシャー ID (`ca-pub-…`) は公開値なので環境変数にせず、サイト識別子の正本 `packages/types/src/site.json` の `adsenseClientId` に置く (コードは `SITE.adsenseClientId`)。`apps/web/public/ads.txt` の `pub-…` と一致することをテストが確認する。
 
 ## 広告フォーマット
 

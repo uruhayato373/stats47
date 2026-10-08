@@ -17,4 +17,6 @@ export const SITE = {
   r2PrivateBucket: siteJson.r2PrivateBucket,
   gscProperty: siteJson.gscProperty,
   ga4PropertyId: siteJson.ga4PropertyId,
+  /** AdSense のパブリッシャー ID (公開値)。public/ads.txt の `pub-…` と一致させる */
+  adsenseClientId: siteJson.adsenseClientId,
 } as const;

@@ -9,6 +9,8 @@
 
 import { useEffect, useRef, useState } from "react";
 
+import { SITE } from "@stats47/types";
+
 import { logger } from "@/lib/logger";
 
 import { ADSENSE_DISPLAY_ENABLED } from "../constants";
@@ -50,8 +52,8 @@ export function AdSenseAd({
   const [isVisible, setIsVisible] = useState(!lazyLoad);
   const [isAdBlocked, setIsAdBlocked] = useState(false);
 
-  // 環境変数から設定を取得
-  const clientId = process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT_ID;
+  // パブリッシャー ID はサイト識別子の正本 (公開値)、表示の可否は環境変数で決める
+  const clientId = SITE.adsenseClientId;
   const isEnabled =
     ADSENSE_DISPLAY_ENABLED &&
     process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_ENABLED === "true";
@@ -128,12 +130,6 @@ export function AdSenseAd({
   // 全体表示を再開した状態で、環境変数が無効ならプレースホルダーを表示する。
   if (!isEnabled) {
     return <AdSensePlaceholder format={format} className={className} />;
-  }
-
-  // クライアントIDが設定されていない場合はエラー
-  if (!clientId) {
-    logger.error({}, "NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT_ID is not set");
-    return null;
   }
 
   // AdBlockで広告がブロックされた場合は何も表示しない

@@ -857,13 +857,6 @@
       ]
     },
     {
-      "name": "NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT_ID",
-      "visibility": "public",
-      "contexts": [
-        "process"
-      ]
-    },
-    {
       "name": "NEXT_PUBLIC_GOOGLE_ADSENSE_ENABLED",
       "visibility": "public",
       "contexts": [

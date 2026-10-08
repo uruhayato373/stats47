@@ -88,7 +88,6 @@ NEXT_PUBLIC_R2_PUBLIC_URL = "https://storage.stats47.jp"
 # R2ストレージバケット名（機密情報ではないため、varsセクションに設定）
 CLOUDFLARE_R2_BUCKET_NAME = "stats47"
 # Google AdSense設定
-NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT_ID = "ca-pub-9055416085403520"
 NEXT_PUBLIC_GOOGLE_ADSENSE_ENABLED = "true"
 # Amazon アソシエイト
 NEXT_PUBLIC_AMAZON_ASSOCIATE_TAG = "stats47-22"
