@@ -245,6 +245,9 @@ jobs:
           NODE_OPTIONS: '--conditions react-server'
         run: |
           (cd apps/web && npx tsx scripts/generate-known-ranking-keys.ts)
+          # ranking-prominence は KNOWN の件数からカテゴリ別の件数を数える。KNOWN だけ変えると
+          # keys PR が Static Gates の --check で落ちる (2026-09-30・10-08 に手で再生成した。KEYS-SYNC-PROMINENCE-REGEN-01)
+          (cd apps/web && npx tsx scripts/generate-ranking-prominence.ts)
           node .claude/scripts/gsc/build-sitemap-ranking-keys.cjs
           (cd apps/web && npx tsx scripts/generate-known-tag-keys.ts)
           (cd apps/web && npx tsx scripts/generate-unpublished-blog-slugs.ts)
@@ -291,7 +294,11 @@ jobs:
             apps/web/src/config/unpublished-blog-slugs.ts
             apps/web/src/config/sitemap-blog-entries.ts
           )
-          if git diff --quiet -- "${KEY_FILES[@]}"; then
+          # KNOWN から作る生成物。キーではないので件数の増減には数えない
+          DERIVED_FILES=(
+            packages/data-configs/src/prominence/ranking-prominence.generated.ts
+          )
+          if git diff --quiet -- "${KEY_FILES[@]}" "${DERIVED_FILES[@]}"; then
             echo "ranking / tag keys 差分なし — PR 不要"
             exit 0
           fi
@@ -328,7 +335,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git switch -C "$BRANCH"
-          git add "${KEY_FILES[@]}"
+          git add "${KEY_FILES[@]}" "${DERIVED_FILES[@]}"
           git commit -m "chore(keys): sync known ranking / sitemap / tag keys from R2 [skip ci]"
           git push -f origin "$BRANCH"
           # 既存 PR があれば再利用、無ければ作成 (develop→main = 本番デプロイの最終ゲート)。
