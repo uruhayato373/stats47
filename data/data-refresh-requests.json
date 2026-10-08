@@ -1,6 +1,0 @@
-{
-  "metric": "broadcast-media-time-all,primary-school-commute-time-weekday,fresh-vegetables-consumption-quantity,fresh-fruit-consumption-quantity,fresh-seafood-consumption-quantity,shellfish-consumption-quantity,confectionery-consumption-expenditure,bread-consumption-quantity",
-  "since": "",
-  "dryRun": true,
-  "reason": "REFERENCE-KINDLE7-S5-01 で追加した e-Stat・家計調査の新規 8 指標の取得と形状を確かめる (ローカルに e-Stat の APP_ID が無いため CI で dryRun)"
-}
