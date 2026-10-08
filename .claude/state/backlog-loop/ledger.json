@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-08T21:59:52.112Z",
+  "updatedAt": "2026-10-08T22:31:30.370Z",
   "items": {
     "RANKING-ITEM-CITY-ONLY-01": {
       "class": "misconception-close",
@@ -7130,6 +7130,39 @@
       },
       "reclassifiedFrom": [],
       "completedAt": "2026-10-08T21:59:52.112Z"
+    },
+    "NOTE-KUMAMOTO-TEST-ENOENT-01": {
+      "class": "impl-small",
+      "status": "completed",
+      "sourceFile": null,
+      "title": null,
+      "attempts": [
+        {
+          "at": "2026-10-08T22:31:30.370Z",
+          "runId": null,
+          "model": "opus",
+          "effort": null,
+          "outcome": "completed",
+          "turns": null,
+          "costUsd": null,
+          "gate": {
+            "commands": [
+              "node --test kakei-note-evidence.test.mjs"
+            ],
+            "pass": true
+          },
+          "evidence": "3a7d3ba35^ の chart-data.json を __tests__/fixtures に置きテストの参照先を変更",
+          "failReason": null,
+          "followUps": []
+        }
+      ],
+      "quarantine": {
+        "failCount": 0,
+        "lastReason": null,
+        "since": null
+      },
+      "reclassifiedFrom": [],
+      "completedAt": "2026-10-08T22:31:30.370Z"
     }
   }
 }

@@ -167,7 +167,8 @@ test("computeVerdict: effectiveRank exactly at threshold boundaries", () => {
 
 test("kumamoto fixture reproduces the known dominant + evidence shape (regression)", () => {
   const chartData = JSON.parse(
-    readFileSync(join(ROOT, "docs/31_note記事原稿/a-kakei-kumamoto/chart-data.json"), "utf8"),
+    // 原稿は 2026-10 に R2 へ移して docs/31 から消えた (3a7d3ba35)。消す直前の内容をテストの隣に置く
+    readFileSync(join(NOTE_DIR, "__tests__", "fixtures", "kakei-kumamoto-chart-data.json"), "utf8"),
   );
   const dominant = pickDominant(chartData.categoryBreakdown);
   assert.equal(dominant.catName, "教育");
