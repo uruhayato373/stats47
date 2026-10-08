@@ -3601,7 +3601,7 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 
 - **論点**: 画像バナーには見出し・説明を足さない方針 (収益化戦略 §3.2、2026-08-14) だが、09-12〜10-03 の 4 週では文脈とつながった枠ほど CTR が高い (ブログ本文 0.26%・楽天の商品カード 0.40〜0.46% に対し、バナーを並べるだけの `ranking-native` は 1,975 表示で 0 クリック、`category-native`・`theme-native` も 0 クリック)。クリックは 4 週で 58 件しかなく、導入文が効くとは断定できない。
 - **やるなら**: `ranking-native` の 1 枠だけで「この統計に関係するサービス」型の一文あり/なしを 2 週ずつ比べる (`/manage-affiliate-experiment`)。評価は確定収益 / 1,000 viewable impression、補助に CTR。
-- **前提と停止条件**: `AFF-RESOLUTION-EFFECT-01`・`AFF-IMPRESSION-ROUTING-01` の 10-25 判定と、画像バナーへの PR 表記の復元 (2026-10-08 にコード変更、本番反映日を境界として記録する) と窓を重ねない。開始は 10-25 判定のあと。採用するなら収益化戦略 §3.2 と `affiliate-ads-standards.md` §3 の「説明を足さない」を同じ差分で改める。
+- **前提と停止条件**: `AFF-RESOLUTION-EFFECT-01`・`AFF-IMPRESSION-ROUTING-01` の 10-25 判定と、画像バナーへの PR 表記の復元 (**2026-10-08 16:02 JST に本番反映**。hotfix PR #1106、main `b69ee76`、Deploy run 37739912995 success。本番 `/ranking/unemployment-rate` で画像広告 10 件すべてに PR を確認) と窓を重ねない。10-25 判定でも、この日時より前と後の CTR を同じ窓として比べない (improvement-triage へ申し送り)。開始は 10-25 判定のあと。採用するなら収益化戦略 §3.2 と `affiliate-ads-standards.md` §3 の「説明を足さない」を同じ差分で改める。
 - **完了条件**: オーナーがやる/やらないを決め、やるなら実験台帳 (`data/affiliate/experiments.json`) に登録されている。
 
 ### [METRIC-INTERNET-USAGE-STALE-01] 2006 年で止まったインターネット利用率の指標を公開し続けるか決める
