@@ -342,6 +342,7 @@ updated: 2026-10-06
   Worker のデプロイ自体は成功しており、どちらも手動で sync-snapshots を代理起動して OGP を作った後、スモークを再実行して 26/26 で通った。
 - **次**: OGP 画像を作る時点をデプロイ前へ動かす (develop の data-refresh か PR の段階で、増えるキーの OGP を R2 に作る) か、
   `deploy-workers.yml` がスモークの前に増えたキーの OGP を作る。検査を緩めて og:image を見ないようにはしない。
+- **2026-10-08 実装 (develop)**: `ranking-ogp-new-keys.yml` を足した。develop への push で `known-ranking-keys.ts` に足されたキー (抽出はスモークと同じ規則・最大 50 件) の OGP とリンクカードを、`sync-ranking-keys` job と同じ exact publish plan で R2 に作る (`r2-write`)。抽出は今日の 2 件 (77073be42 で 13 件、PR #1104 の main マージで 31 件) を再現した。workflow policy audit 0 件。push 起動の workflow は push した commit の定義で動くので、develop に入った時点から効く。**残り**: 次に既知キーを足す develop push でこの run が成功し、その後のデプロイのスモークが手動の代理起動なしに通るのを見てカードを消す。
 - **完了条件**: 公開キーを足した次のデプロイで、手動の代理起動なしにデプロイ後スモークテストが通る。
 
 ### [CRITIC-PATTERN-TITLE-PROMISE] critic の指摘「タイトル・約束」が 3 本の記事で繰り返した。writer の規約か gate に入れる
