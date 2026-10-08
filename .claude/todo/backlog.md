@@ -313,6 +313,14 @@ updated: 2026-10-06
 - **完了条件**: 次の本番デプロイで reset step と smoke が通り、post-deploy-smoke (Playwright) も通る。
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [YEAR-COV-AREA-AXIS-01] 年カバレッジ監査が、都道府県が分類軸にある表などの取得条件を再現できず、8 指標で値のある年を 0 と数える
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npx vitest run packages/ranking/src/scripts/__tests__/audit-estat-year-coverage.test.ts] [起票:2026-10-08] [領域:データ]
+
+- **事実 (2026-10-08)**: `audit-estat-year-coverage.ts` は、値のある年が 0 件のとき「空の集合は config の年に含まれる」ため `confirmed-single-year` (対応不要) と判定していた。該当は 8 指標 (dairy-cattle-count・inpatient-rate-per-100k・fishery-household-sex-age・fishery-management-orgs・fishery-workers-coastal-offshore・fishing-port-count-by-type・fishing-vessel-crew・fishing-vessel-tonnage-class)。`--metrics` で全都道府県を取っても 0 年のままだが、R2 の values.json には値がある (dairy-cattle-count 2025 年 47 県、inpatient-rate-per-100k 2023 年 47 県、fishing-vessel-crew 2003 年 39 県)。dairy と inpatient は都道府県が分類軸にある表 (`areaAxis`) で、監査の取得はこれを再現していない。漁業の 6 指標の原因は未調査。
+- **済 (2026-10-08)**: 値のある年が 0 件のときは新しい判定 `no-sample-values` (判断できない) にした。テストで固定し、修正を外すと落ちることを確かめた。8 指標の記録は `no-sample-values` に変わった。
+- **次**: 監査の取得を取り込み (`page-data-batch.ts`) と同じ条件 (`areaAxis`・軸の pin・合算) にそろえる。共通の取得関数があればそれを使い、無ければ取り込み側から切り出す。漁業の 6 指標は取得結果を見て原因を確かめる。
+- **完了条件**: 8 指標で、監査が R2 と同じ年に値を数え、`no-sample-values` が 0 件になる。
+
 ### [DATA-WAGE-TEACHER-COVERAGE-01] 賃金構造基本統計の教員年収ランキングが教員全体の約 5% しか映していないことをページに示すか、公開をやめるかを決める
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-08] [領域:サイト]
 
@@ -3224,6 +3232,11 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
   テーマ別の提案 (`theme-proposal-format.md`) で扱う。
 - **禁止**: 確認していない年を `years` に書かない。R2 の観測値の再取得とデプロイは別の承認で行う。
 - **完了条件**: `/quality/theme-viewpoints` の `single-year-as-trend` の件数が、振り分け ① の「本当に 1 年だけ」の件数以下になっている。
+- **① の結果 (2026-10-08)**: 視点と同じ判定関数で数え直すと 44 テーマ 281 枚 (287 枚との差 6 枚は、10-07 の観光・物価の提案の実装で年固定の比較カードにした分と外した分)。270 指標を次の 3 つに分けた。根拠は年カバレッジ監査 (`data/estat/year-coverage/queue.json`、北海道 1 県の標本) と、e-Stat の実在年の台帳 (未マージのブランチ `claude/estat-availability-ledger` の `data/estat/availability/tables/`、全県の値の有無) で、両方にある 70 指標はすべて一致した。
+  - **e-Stat に複数年ある: 63 指標・69 枚**。63 指標とも、台帳に合わせて years を広げる uruhayato373/stats47#1094 (draft、#1093 の上に積んだ第 2 段) のブランチで既に複数年になっている。#1094 のマージで 69 枚が視点から外れる見込み。#1094 は本文で 11-06 のテーマ実験の観測の後のマージを勧めている。
+  - **本当に 1 年だけ: 62 指標・65 枚**。54 指標は国勢調査・経済センサス・社会生活基本調査・住宅・土地統計調査・就業構造基本調査など、調査回ごとに表が分かれる統計の 1 回分。前の回が別の表にあるかは未確認。
+  - **未確認: 145 指標・147 枚**。すべて `source.kind: external` (manual 142・ssds 2・mlit_ksj 1) で、監査も台帳も見ていない。44 指標は e-Stat のダウンロードファイルを出典にしている。
+- **次 (更新)**: ② #1094 のマージ後に件数を数え直す。③ 65 枚は前の回の表を確かめ、無ければ年固定の比較カードへの提案 (`theme-proposal-format.md`) にする。147 枚は external の出典を指標ごとに確かめる (件数が多いので、テーマのカードに出る指標から順に `YEAR-COV-*` と同じ 10 件ずつで回す)。
 - **関連**: 年の穴の根本対応は `ESTAT-YEAR-AVAILABILITY-01`。そちらの第 1 段の差分報告を ① の振り分けに使う。
 
 ### [SEO-META-FROM-VALUES-01] ランキングの seoTitle / seoDescription に観測値を直書きするのをやめ、値から生成する
@@ -3309,6 +3322,7 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
   の唯一のカードを外す場合は、`npm run theme:expansion:check` がその章を未配線と判定するので、判断台帳
   (`theme-feasibility-catalog.json`) の扱いも同じ変更で決める。
 - **完了条件**: 4 テーマで同じ rankingKey のカードが 1 か所だけになり、見出しに「章名｜」が残っていない。
+- **範囲の訂正 (2026-10-08)**: 同じテーマの中で同じ rankingKey が 2 枚のカードに出ているのは、上の 4 件だけではなく 6 テーマ 16 指標ある (healthcare 5・labor-mobility 3・climate・living-housing・real-income・safety 各 2。THEME-SINGLE-YEAR-CARDS-01 の振り分けの途中で見つかった)。`validate-theme-catalog.ts` にはこれを見つける規則が無い。提案の前に、16 指標を `validate:catalog` の warning として数える規則を足し (意図して 2 章に置くものは理由付きで除外)、そのうえで章ごとの提案にする。
 
 ### [MANUAL-METRIC-YEARNAME-01] 手動取得の指標の年表記に「年」「年度」が付かず、e-Stat 由来の指標と表示が揃わない
 

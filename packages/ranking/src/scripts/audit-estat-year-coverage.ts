@@ -120,6 +120,12 @@ export type YearCoverageVerdict =
   | "confirmed-single-year"
   /** 複数年の config が、記録した e-Stat の実在年をすべて含む */
   | "config-covers"
+  /**
+   * 取得はできたが、監査の取得条件で値のある年が 1 つも無い。空の集合は config に「含まれる」ので、
+   * 以前は confirmed-single-year (対応不要) と判定していた (2026-10-08 に 8 件)。8 件とも R2 には値があり、
+   * 都道府県が分類軸にある表 (`areaAxis`) など、監査が取り込みと同じ条件で取れていない。単年かどうかは判断できない
+   */
+  | "no-sample-values"
   | "fetch-failed"
   | "no-estat-source";
 
@@ -218,6 +224,16 @@ export function classifyYearCoverage(params: {
     };
   }
   const sorted = [...new Set(nonNullYearCodes)].sort();
+  if (sorted.length === 0) {
+    return {
+      key,
+      statsDataId,
+      configYears,
+      estatNonNullYears: 0,
+      availableYearCodes: [],
+      verdict: "no-sample-values",
+    };
+  }
   const covered = configYearCodes
     ? sorted.every((code) => configYearCodes.includes(code))
     : sorted.length <= (configYears ?? 1);
@@ -435,6 +451,7 @@ async function main() {
   const confirmed = all.filter((r) => r.verdict === "confirmed-single-year");
   const covers = all.filter((r) => r.verdict === "config-covers");
   const failed = all.filter((r) => r.verdict === "fetch-failed");
+  const noSampleValues = all.filter((r) => r.verdict === "no-sample-values");
   const allPrefectures = all.filter((r) => r.scope === "all-prefectures");
   const unchecked = candidates.filter((key) => !updated[key]).length;
 
@@ -451,6 +468,7 @@ async function main() {
     `- **要拡張候補 (extend-candidate)**: ${extendCandidates.length} 件`,
     `- 単年で確定 (confirmed-single-year): ${confirmed.length} 件`,
     `- 複数年の config が実在年を含む (config-covers): ${covers.length} 件`,
+    `- 監査の取得では値が無く判定できない (no-sample-values): ${noSampleValues.length} 件${noSampleValues.length ? ` — ${noSampleValues.map((r) => `\`${r.key}\``).join(", ")}` : ""}`,
     `- 取得失敗 (fetch-failed・次回再試行): ${failed.length} 件`,
     `- 未確認 (次回以降のバッチで確認): ${unchecked} 件`,
     `- 全 47 都道府県で確認した記録 (\`--metrics\`、年ごとの都道府県数つき): ${allPrefectures.length} 件`,
@@ -476,6 +494,8 @@ async function main() {
     "  `data-refresh.yml` に再取り込みさせる。正典: `.claude/rules/metric-config-standards.md`",
     "- `confirmed-single-year`: 対応不要。この指標は本当に単年しかない",
     "- `config-covers`: 対応不要。config の years が記録した実在年をすべて含む",
+    "- `no-sample-values`: 監査の取得条件では値のある年が無いので、単年かどうか判断できない。",
+    "  `areaAxis` (都道府県が分類軸にある表) などを監査が再現できていない。R2 の values.json と e-Stat の実在年の台帳で年を確かめる",
     "- `fetch-failed`: 次回のバッチで自動的に再試行される (checkedAt が更新されないため優先度が高い)",
     "",
   ].join("\n");
