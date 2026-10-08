@@ -161,11 +161,14 @@ state と二重 SSOT になり、**表側が実態から乖離した** (2026-08-
 > するため触らない)。**縦長の唯一の受け皿は `SidebarStickyBannerAd`** (home 左レール・lg+ のみ・
 > sticky なし) = `sidebar-sticky` locationCode を読む唯一の消費者。native の呼び出し元は除外分を
 > 見込んで解決 limit を 8 にする (native 4 + 末尾 300×250 1 を横長だけで埋める余裕)。
-> **画像バナー枠の可視要素はリンク付きバナー画像だけ** — `NativeAffiliateRow`、
-> `SidebarPromoBanner`、`AffiliateAdSlot` の banner 分岐、本文中の `BannerAd` に PR ラベル、見出し、
-> 商品・サービス名、「もっと見る」導線、Surface/Card 装飾、固定アスペクト枠を追加しない。
+> **画像バナー枠の可視要素はリンク付きバナー画像と、その上の小さな PR 表記 (`PrLabel`) だけ** —
+> `NativeAffiliateRow`、`SidebarPromoBanner`、`AffiliateAdSlot` の banner 分岐、本文中の `BannerAd` に
+> 見出し、商品・サービス名、「もっと見る」導線、Surface/Card 装飾、固定アスペクト枠を追加しない。
 > ASP 提供バナーの縦横比を保ってそのまま表示する (2026-08-14 に native 全 7 ページ、
-> 2026-08-16 に固定/文脈バナーへ適用)。
+> 2026-08-16 に固定/文脈バナーへ適用)。PR 表記は 2026-08-14 に一度外したが、画像だけでは
+> 記事の図と見分けにくく、景品表示法のステマ告示 (2023-10-01 施行) の観点からも
+> **2026-10-08 のオーナー判断で戻した**。PR 表記は `BannerAd` と `NativeAffiliateRow` が持ち、
+> 呼び出し側で重ねない (契約テスト `native-affiliate-row.test.ts`)。表示前後で CTR の比較窓を分けること。
 
 **legacy 一点物** (grandfathering・新規禁止・段階移行): `160×600` / `120×600` / `165×120` / `320×250` / `336×280` / `300×300`
 → 再取得時に 300×250 か text へ寄せる。`KNOWN_LEGACY_SIZES` (audit script) で許容中。**新規はこれらも不可** (canonical のみ)。
