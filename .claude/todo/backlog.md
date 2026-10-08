@@ -319,6 +319,7 @@ updated: 2026-10-06
 - **事象 (2026-10-08)**: `fish-catch-vs-consumption-prefecture` の critic が「散布図に県名ラベルが無く (名前は hover 用 title のみ)、本文が名指しする県を図で探せない」を MAJOR で指摘した。
   svg-builder の scatter に注目点だけラベルを付ける機能が無いので、同じ型の散布図記事で同じ指摘が繰り返される。
 - **次**: scatter の data JSON に注目点 (areaCode の配列) を書けるようにし、その点だけ県名を描く。ラベルの重なり回避と mobile 版の扱いを決める。
+- **関連 (2026-10-08、bonito-catch-zero-prefectures-gap の critic)**: 県×年の「値あり / 0 トン / 行なし」を並べる状態マトリクスの型も svg-builder のカタログに無く、時系列の欠け方を図にできない (`contents/blog/bonito-catch-zero-prefectures-gap/data/bonito-status-by-year.json`)。散布図のラベルと同じ回で、カタログに足すかを決める。
 - **完了条件**: 注目点を指定した散布図で県名が描かれ、`.claude/rules/blog-svg-chart-standards.md` のサイズ gate を通る。
 
 ### [BLOG-REFRESH-STALE-SOURCE-FIELDS-01] 図の年の取り直しで source.json の coverage と補足値が古い年のまま残る
