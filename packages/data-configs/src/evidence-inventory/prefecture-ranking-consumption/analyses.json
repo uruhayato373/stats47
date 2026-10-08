@@ -928,10 +928,14 @@
         104,
         107
       ],
-      "resolution": "primary-source-unavailable",
-      "resolutionReason": "通信利用動向調査はe-Statの表カタログに存在せず、総務省の統計表ページにも都道府県別のインターネット利用率・SNS利用率の表へのリンクが無い(2026-10-08確認)。再取得できる公開一次資料が無い。",
-      "metricKeys": [],
-      "surveyIds": [],
+      "resolution": "reuse-existing-metric",
+      "resolutionReason": "インターネット利用の地域差は、通信利用動向調査ではなく社会・人口統計体系のG7000(社会生活基本調査のインターネットの利用行動者率・10歳以上)で扱う。SNS利用率は通信利用動向調査が都道府県別の公表表を持たず(2026-10-08確認)再取得できないため展開しない。internet-usage-rate-10plus を作り、観測値は data-refresh で取り込む (2026-10-08 metric 化)",
+      "metricKeys": [
+        "internet-usage-rate-10plus"
+      ],
+      "surveyIds": [
+        "social-life-basic-survey"
+      ],
       "geoScopes": [
         "prefecture-set"
       ],
@@ -946,6 +950,15 @@
       ],
       "primarySources": [
         {
+          "organization": "総務省統計局",
+          "publicationOrDataset": "社会・人口統計体系(社会生活基本調査) G7000 インターネットの利用行動者率(10歳以上)",
+          "datasetId": "0000010107",
+          "url": "https://www.stat.go.jp/data/ssds/index.htm",
+          "dataYears": [],
+          "checkedAt": "2026-10-08",
+          "rights": "allowed"
+        },
+        {
           "organization": "総務省",
           "publicationOrDataset": "通信利用動向調査",
           "url": "https://www.soumu.go.jp/johotsusintokei/statistics/statistics05.html",
@@ -956,7 +969,7 @@
           "rights": "allowed"
         }
       ],
-      "nextAction": "展開しない。インターネット利用の地域差は社会・人口統計体系のG7000(社会生活基本調査のインターネット利用行動者率)を別論点として検討する"
+      "nextAction": "data-refresh で観測値を取り込み、取得できた調査年を確認して config の years(範囲指定 2001-2021)を実在年に絞る。R2 反映後に ranking-items / ranking-values の再生成を経て公開する。SNS利用率は展開しない"
     },
     {
       "id": "prefecture-ranking-consumption-2020-a25",
@@ -1056,9 +1069,10 @@
         123
       ],
       "resolution": "reuse-existing-metric",
-      "resolutionReason": "一次統計を踏まえ、教材の論点を参考に独自コンテンツとして展開する (2026-10-08 オーナー判断)。令和7年度の全国学力・学習状況調査 児童質問紙(都道府県別、公立小6)の(1)朝食を毎日食べている割合のみ47県分でmetric化した(47県合算の全国公立割合が公表値と一致)。書籍の他の4項目(宿題の実行・学校外学習・地域行事への参加・長時間のネット利用)は令和7年度の質問紙に同じ意味の設問が無く(宿題・地域行事・ネット利用に当たる質問番号なし。(17)の学校外の勉強時間と(26)地域の大人との関わりは設問が別)、過去年度はnier.go.jp上で公開されていないため再取得できない。既存の朝食欠食割合は成人の健診データで対象が異なる。 (2026-10-08 metric 化)",
+      "resolutionReason": "一次統計を踏まえ、教材の論点を参考に独自コンテンツとして展開する (2026-10-08 オーナー判断)。令和7年度の全国学力・学習状況調査 児童質問紙(都道府県別、公立小6)の(1)朝食を毎日食べている割合のみ47県分でmetric化した(47県合算の全国公立割合が公表値と一致)。書籍の他の4項目(宿題の実行・学校外学習・地域行事への参加・長時間のネット利用)は令和7年度の質問紙に同じ意味の設問が無く(宿題・地域行事・ネット利用に当たる質問番号なし。(17)の学校外の勉強時間と(26)地域の大人との関わりは設問が別)、過去年度はnier.go.jp上で公開されていないため再取得できない。既存の朝食欠食割合は成人の健診データで対象が異なる。(17)の学校外の勉強時間は、児童質問調査票(https://www.nier.go.jp/25chousa/pdf/25shitsumonchousa_shou_jidou.pdf)で選択肢(3時間以上/2時間以上3時間より少ない/1時間以上2時間より少ない/30分以上1時間より少ない/30分より少ない/全くしない)を確認し、平日に1時間以上勉強する児童の割合として national-assessment-elementary-study-1h-plus-rate を追加した (2026-10-08 metric 化)。",
       "metricKeys": [
-        "national-assessment-elementary-breakfast-rate"
+        "national-assessment-elementary-breakfast-rate",
+        "national-assessment-elementary-study-1h-plus-rate"
       ],
       "surveyIds": [
         "academic-achievement-survey"
@@ -1087,7 +1101,7 @@
           "rights": "allowed"
         }
       ],
-      "nextAction": "R2 反映(diff-push-r2)と ranking-items / ranking-values の再生成を経て公開する。学校外の勉強時間((17))は選択肢の文言を調査票で確認できれば追加できる。"
+      "nextAction": "R2 反映(diff-push-r2)と ranking-items / ranking-values の再生成を経て公開する。"
     },
     {
       "id": "prefecture-ranking-consumption-2020-a28",

@@ -967,6 +967,7 @@ import { healthyLifeExpectancyFemale } from "./metrics/healthy-life-expectancy-f
 import { healthyLifeExpectancyMale } from "./metrics/healthy-life-expectancy-male";
 import { heaterConsumptionExpenditure } from "./metrics/heater-consumption-expenditure";
 import { heaterConsumptionQuantity } from "./metrics/heater-consumption-quantity";
+import { heatstrokeDeaths } from "./metrics/heatstroke-deaths";
 import { heatstrokeEmergencyTransports } from "./metrics/heatstroke-emergency-transports";
 import { highSchoolAdvancementRate } from "./metrics/high-school-advancement-rate";
 import { highSchoolClubPer100RugbyMale } from "./metrics/high-school-club-per100-rugby-male";
@@ -1117,6 +1118,7 @@ import { intellectualDisabilitySupportFacilityResidents } from "./metrics/intell
 import { intellectualDisabilitySupportFacilityStaffPer100k } from "./metrics/intellectual-disability-support-facility-staff-per-100k";
 import { interiorDecorationConsumptionExpenditure } from "./metrics/interior-decoration-consumption-expenditure";
 import { internetFeeConsumptionExpenditure } from "./metrics/internet-fee-consumption-expenditure";
+import { internetUsageRate10plus } from "./metrics/internet-usage-rate-10plus";
 import { interprefectureNetMigrationAge15to24 } from "./metrics/interprefecture-net-migration-age15to24";
 import { interprefectureNetMigrationAge25to34 } from "./metrics/interprefecture-net-migration-age25to34";
 import { inventoryChangeNominalH27 } from "./metrics/inventory-change-nominal-h27";
@@ -1412,6 +1414,7 @@ import { musicLessonConsumptionExpenditure } from "./metrics/music-lesson-consum
 import { musicalInstrumentConsumptionExpenditure } from "./metrics/musical-instrument-consumption-expenditure";
 import { nationalAssessmentElementaryBreakfastRate } from "./metrics/national-assessment-elementary-breakfast-rate";
 import { nationalAssessmentElementaryReadingLikeRate } from "./metrics/national-assessment-elementary-reading-like-rate";
+import { nationalAssessmentElementaryStudy1hPlusRate } from "./metrics/national-assessment-elementary-study-1h-plus-rate";
 import { nationalAssessmentElementaryTutoringRate } from "./metrics/national-assessment-elementary-tutoring-rate";
 import { nationalHealthInsuranceBenefits } from "./metrics/national-health-insurance-benefits";
 import { nationalHealthInsuranceEnrolleesPer1000 } from "./metrics/national-health-insurance-enrollees-per-1000";
@@ -2137,6 +2140,7 @@ import { seweragePenetrationRate2012on } from "./metrics/sewerage-penetration-ra
 import { seweragePenetrationRatePre2011 } from "./metrics/sewerage-penetration-rate-pre2011";
 import { sexOldPopulationRatio } from "./metrics/sex-old-population-ratio";
 import { sexProductionAgePopulationRatio } from "./metrics/sex-production-age-population-ratio";
+import { sexRatioAge2039 } from "./metrics/sex-ratio-age-20-39";
 import { sexRatioTotal } from "./metrics/sex-ratio-total";
 import { sexYoungPopulationRatio } from "./metrics/sex-young-population-ratio";
 import { shampooConsumptionExpenditure } from "./metrics/shampoo-consumption-expenditure";
@@ -3605,6 +3609,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "healthy-life-expectancy-male": healthyLifeExpectancyMale,
   "heater-consumption-expenditure": heaterConsumptionExpenditure,
   "heater-consumption-quantity": heaterConsumptionQuantity,
+  "heatstroke-deaths": heatstrokeDeaths,
   "heatstroke-emergency-transports": heatstrokeEmergencyTransports,
   "high-school-advancement-rate": highSchoolAdvancementRate,
   "high-school-club-per100-rugby-male": highSchoolClubPer100RugbyMale,
@@ -3755,6 +3760,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "intellectual-disability-support-facility-staff-per-100k": intellectualDisabilitySupportFacilityStaffPer100k,
   "interior-decoration-consumption-expenditure": interiorDecorationConsumptionExpenditure,
   "internet-fee-consumption-expenditure": internetFeeConsumptionExpenditure,
+  "internet-usage-rate-10plus": internetUsageRate10plus,
   "interprefecture-net-migration-age15to24": interprefectureNetMigrationAge15to24,
   "interprefecture-net-migration-age25to34": interprefectureNetMigrationAge25to34,
   "inventory-change-nominal-h27": inventoryChangeNominalH27,
@@ -4050,6 +4056,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "musical-instrument-consumption-expenditure": musicalInstrumentConsumptionExpenditure,
   "national-assessment-elementary-breakfast-rate": nationalAssessmentElementaryBreakfastRate,
   "national-assessment-elementary-reading-like-rate": nationalAssessmentElementaryReadingLikeRate,
+  "national-assessment-elementary-study-1h-plus-rate": nationalAssessmentElementaryStudy1hPlusRate,
   "national-assessment-elementary-tutoring-rate": nationalAssessmentElementaryTutoringRate,
   "national-health-insurance-benefits": nationalHealthInsuranceBenefits,
   "national-health-insurance-enrollees-per-1000": nationalHealthInsuranceEnrolleesPer1000,
@@ -4775,6 +4782,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "sewerage-penetration-rate-pre2011": seweragePenetrationRatePre2011,
   "sex-old-population-ratio": sexOldPopulationRatio,
   "sex-production-age-population-ratio": sexProductionAgePopulationRatio,
+  "sex-ratio-age-20-39": sexRatioAge2039,
   "sex-ratio-total": sexRatioTotal,
   "sex-young-population-ratio": sexYoungPopulationRatio,
   "shampoo-consumption-expenditure": shampooConsumptionExpenditure,

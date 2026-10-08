@@ -144,6 +144,7 @@ export const METRIC_POLARITY: Readonly<Record<string, PolarityEntry>> = {
   "gini-coefficient-financial-assets": { polarity: "higher-is-worse", evidence: "世帯員ベースの等価金融資産分布のジニ係数は高いほど不均等度が大きい。資産水準そのものの高低とは区別する。" },
   "health-checkup-breakfast-skipping-rate": { polarity: "neutral", evidence: "特定健診受診者の朝食欠食頻度の回答割合で、摂取内容・勤務形態・全住民の健康状態を含む単調な良否は決められない。" },
   "health-checkup-late-dinner-rate": { polarity: "neutral", evidence: "特定健診受診者の就寝前夕食頻度の回答割合で、生活時間や食事内容を併せず地域の健康の良否へ直結させない。" },
+  "heatstroke-deaths": { polarity: "higher-is-worse", evidence: "人口動態統計（確定数）で熱中症を死因とする死亡数であり、死亡の増加を望ましいとは扱わない。人口で割らない実数のため人口規模の影響を含み、県の対策の優劣は示さない。" },
   "heatstroke-emergency-transports": { polarity: "higher-is-worse", evidence: "消防庁が熱中症として集計した救急搬送は健康被害による搬送で、件数増は被害負担の増加を示す。" },
   "home-medical-visit-cases": { polarity: "neutral", evidence: "医療施設による訪問診療件数は在宅医療需要と提供体制の双方を反映し、未充足需要や患者の改善成果を直接示さない。" },
   "home-nursing-visit-cases": { polarity: "neutral", evidence: "病院・診療所の訪問看護指導件数は療養需要と支援提供をともに反映し、看護成果や全訪問看護の充足率ではない。" },

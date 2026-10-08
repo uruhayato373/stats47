@@ -11,6 +11,9 @@
  *
  * 取り込む質問 (小学校6年・令和7年度の質問番号):
  *   (1)  朝食を毎日食べていますか            → 「している」+「どちらかといえば、している」(肯定回答)
+ *   (17) 学校の授業時間以外に、普段(月曜日から金曜日)、1日当たりどれくらいの時間、勉強をしますか → 選択肢1「3時間以上」+2「2時間以上3時間より少ない」+3「1時間以上2時間より少ない」(1時間以上)
+ *        選択肢の文言は調査票 https://www.nier.go.jp/25chousa/pdf/25shitsumonchousa_shou_jidou.pdf (児童質問調査) で確認 (2026-10-08):
+ *        1=3時間以上 / 2=2時間以上3時間より少ない / 3=1時間以上2時間より少ない / 4=30分以上1時間より少ない / 5=30分より少ない / 6=全くしない
  *   (20) 学習塾の先生や家庭教師の先生に教わっていますか (オンライン授業含む) → 選択肢1「教わっていない」以外 (2〜5の合計)
  *   (24) 読書は好きですか                     → 「当てはまる」+「どちらかといえば、当てはまる」(肯定回答)
  *   割合 = 該当選択肢の児童数 ÷ (質問番号(1)〜(71)の集計対象児童数) x 100 (小数第1位)
@@ -34,6 +37,7 @@ const YEAR = "2025";
 // qLabel: シート上の質問番号(全角)。positive: 該当に数える選択肢番号 (1始まり)
 const QUESTIONS = [
   { key: "national-assessment-elementary-breakfast-rate", label: "（１）", text: "朝食を毎日食べていますか", positive: [1, 2] },
+  { key: "national-assessment-elementary-study-1h-plus-rate", label: "（１７）", text: "普段（月曜日から金曜日）、１日当たりどれくらいの時間、勉強をしますか", positive: [1, 2, 3] },
   { key: "national-assessment-elementary-tutoring-rate", label: "（２０）", text: "学習塾の先生や家庭教師の先生に教わっていますか", positive: [2, 3, 4, 5] },
   { key: "national-assessment-elementary-reading-like-rate", label: "（２４）", text: "読書は好きですか", positive: [1, 2] },
 ];

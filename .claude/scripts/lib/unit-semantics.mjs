@@ -128,6 +128,9 @@ const BASE_UNITS = [
   ["者", "count"],
   ["基", "count"],
   ["束", "count"],
+  // 体格指数 BMI の単位。kg と m2 を割った量なので質量・面積とは換算しない。
+  // 国民健康・栄養調査の年齢調整BMI (bmi-male-20to69-age-adjusted / bmi-female-40to69-age-adjusted)。NFKC後は kg/m2。
+  ["kg/m2", "body-mass-index"],
   ["g", "mass"],
   ["kg", "mass"],
   ["t", "mass"],

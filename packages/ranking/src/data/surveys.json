@@ -2848,5 +2848,24 @@
     "isActive": true,
     "createdAt": "2026-09-11 00:00:00",
     "updatedAt": "2026-09-11 00:00:00"
+  },
+  {
+    "id": "financial-literacy-survey",
+    "sourceKind": "survey",
+    "externalId": null,
+    "parentSourceId": null,
+    "name": "金融リテラシー調査",
+    "organization": "金融広報中央委員会",
+    "url": "https://www.shiruporuto.jp/public/document/container/literacy_chosa/",
+    "description": "18〜79歳の個人を対象とするインターネット調査。都道府県別の正答率は標本が限られるため、順位の小差は標本誤差を含む。",
+    "attributionText": null,
+    "license": null,
+    "licenseUrl": null,
+    "baseUrl": null,
+    "linkTemplate": null,
+    "displayOrder": 999,
+    "isActive": true,
+    "createdAt": "2026-10-08 00:00:00",
+    "updatedAt": "2026-10-08 00:00:00"
   }
 ]
