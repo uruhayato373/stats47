@@ -1,0 +1,6 @@
+{
+  "metric": "broadcast-media-time-all,primary-school-commute-time-weekday,fresh-vegetables-consumption-quantity,fresh-fruit-consumption-quantity,fresh-seafood-consumption-quantity,shellfish-consumption-quantity,confectionery-consumption-expenditure,bread-consumption-quantity",
+  "since": "",
+  "dryRun": false,
+  "reason": "dryRun (run 37709993738) で ok 8 / fail 0、社会生活基本調査 2 指標は 47 行 (2021 年)、家計調査 6 指標は 846 行 (47 県 x 18 年) を確かめた。R2 に反映する (REFERENCE-KINDLE7-S5-01)"
+}
