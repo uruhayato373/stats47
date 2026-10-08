@@ -382,13 +382,14 @@ export function ThemeMetricsDashboard({
     }
     return out;
   };
-  const renderChart = (chart: PageComponent) =>
+  const renderChart = (chart: PageComponent, headingLevel?: 2 | 3) =>
     chart.componentType === 'markdown-section' ? (
       <ThemeDbChartRenderer
         key={chart.componentKey}
         chart={chart}
         prefCode={pageComponentsAreaCode}
         prefName={areaName}
+        headingLevel={headingLevel}
       />
     ) : (
     <ChartPanel
@@ -432,22 +433,102 @@ export function ThemeMetricsDashboard({
     const chapterEmbedded = (section.embeddedSectionKeys ?? []).filter(
       (key) => embeddedSections[key] && !usedEmbedded.has(key)
     );
+    // 章の chartKeys にある考察・FAQ はその章の中で描く (見出しと中身を離さない)
+    const chapterMarkdown = markdownComponents.filter(
+      (chart) =>
+        section.chartKeys?.includes(chart.componentKey) &&
+        !usedCharts.has(chart.componentKey)
+    );
     chapterPanels.forEach((panel) => usedPanels.add(panel.key));
     chapterCharts.forEach((chart) => usedCharts.add(chart.componentKey));
+    chapterMarkdown.forEach((chart) => usedCharts.add(chart.componentKey));
     chapterEmbedded.forEach((key) => usedEmbedded.add(key));
     return {
       ...section,
       panels: chapterPanels,
       charts: chapterCharts,
+      markdown: chapterMarkdown,
       embedded: chapterEmbedded,
     };
   });
+  // 考察・FAQ だけの章 (読み方章) は比較の節の後ろへ回し、FAQ をページの最後に置く
+  // (2026-10-06 に読み方章を末尾へ移した判断と同じ。THEME-READING-CHAPTER-EMPTY-01)
+  const isTextOnly = (chapter: (typeof chapters)[number]) =>
+    chapter.markdown.length > 0 &&
+    chapter.panels.length === 0 &&
+    chapter.charts.length === 0 &&
+    chapter.embedded.length === 0;
+  const leadingChapters = chapters.filter((chapter) => !isTextOnly(chapter));
+  const trailingChapters = chapters.filter(isTextOnly);
+  const remainingMarkdown = markdownComponents.filter(
+    (chart) => !usedCharts.has(chart.componentKey)
+  );
   const remainingPanels = panels.filter((panel) => !usedPanels.has(panel.key));
   const remainingCharts = chartComponents.filter(
     (chart) => !usedCharts.has(chart.componentKey)
   );
   const remainingEmbedded = Object.keys(embeddedSections).filter(
     (key) => !usedEmbedded.has(key)
+  );
+
+  const renderChapter = (chapter: (typeof chapters)[number]) => (
+    <section
+      key={chapter.key}
+      id={`theme-section-${chapter.key}`}
+      aria-labelledby={`theme-heading-${chapter.key}`}
+      className="space-y-4 scroll-mt-24"
+    >
+      <div className="border-b border-border pb-3">
+        <h2
+          id={`theme-heading-${chapter.key}`}
+          className="text-lg font-semibold"
+        >
+          {chapter.title}
+        </h2>
+        {chapter.description && (
+          <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+            {chapter.description}
+          </p>
+        )}
+      </div>
+      {renderPanelRuns(chapter.panels, (panel) => {
+        const coveredKeys = new Set(
+          chapter.charts.flatMap((chart) =>
+            ['seriesRefs', 'columnSeriesRefs', 'lineSeriesRefs'].flatMap(
+              (field) => {
+                const refs = chart.componentProps[field];
+                return Array.isArray(refs)
+                  ? refs.flatMap((ref) =>
+                      ref &&
+                      typeof ref === 'object' &&
+                      typeof ref.metricKey === 'string' &&
+                      ref.area !== 'national'
+                        ? [ref.metricKey as string]
+                        : []
+                    )
+                  : [];
+              }
+            )
+          )
+        );
+        return panel.metrics.every((metric) =>
+          coveredKeys.has(metric.metricKey)
+        );
+      })}
+      {chapter.charts.length > 0 && (
+        <div className={`grid grid-cols-1 gap-4 ${chapter.charts.length > 1 ? "@md:grid-cols-2" : ""}`}>
+          {chapter.charts.map((chart) => renderChart(chart))}
+        </div>
+      )}
+      {chapter.markdown.length > 0 && (
+        <div className="space-y-4">
+          {chapter.markdown.map((chart) => renderChart(chart, 3))}
+        </div>
+      )}
+      {chapter.embedded.map((key) => (
+        <div key={key}>{embeddedSections[key]}</div>
+      ))}
+    </section>
   );
 
   return (
@@ -466,67 +547,14 @@ export function ThemeMetricsDashboard({
           </Link>
         </div>
       )}
-      {chapters.map((chapter) => (
-        <section
-          key={chapter.key}
-          id={`theme-section-${chapter.key}`}
-          aria-labelledby={`theme-heading-${chapter.key}`}
-          className="space-y-4 scroll-mt-24"
-        >
-          <div className="border-b border-border pb-3">
-            <h2
-              id={`theme-heading-${chapter.key}`}
-              className="text-lg font-semibold"
-            >
-              {chapter.title}
-            </h2>
-            {chapter.description && (
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                {chapter.description}
-              </p>
-            )}
-          </div>
-          {renderPanelRuns(chapter.panels, (panel) => {
-            const coveredKeys = new Set(
-              chapter.charts.flatMap((chart) =>
-                ['seriesRefs', 'columnSeriesRefs', 'lineSeriesRefs'].flatMap(
-                  (field) => {
-                    const refs = chart.componentProps[field];
-                    return Array.isArray(refs)
-                      ? refs.flatMap((ref) =>
-                          ref &&
-                          typeof ref === 'object' &&
-                          typeof ref.metricKey === 'string' &&
-                          ref.area !== 'national'
-                            ? [ref.metricKey as string]
-                            : []
-                        )
-                      : [];
-                  }
-                )
-              )
-            );
-            return panel.metrics.every((metric) =>
-              coveredKeys.has(metric.metricKey)
-            );
-          })}
-          {chapter.charts.length > 0 && (
-            <div className={`grid grid-cols-1 gap-4 ${chapter.charts.length > 1 ? "@md:grid-cols-2" : ""}`}>
-              {chapter.charts.map(renderChart)}
-            </div>
-          )}
-          {chapter.embedded.map((key) => (
-            <div key={key}>{embeddedSections[key]}</div>
-          ))}
-        </section>
-      ))}
+      {leadingChapters.map(renderChapter)}
       {renderPanelRuns(remainingPanels)}
       {remainingCharts.length > 0 && (
         <div
           id="theme-charts"
           className={`grid scroll-mt-24 grid-cols-1 gap-4 ${remainingCharts.length > 1 ? '@md:grid-cols-2' : ''}`}
         >
-          {remainingCharts.map(renderChart)}
+          {remainingCharts.map((chart) => renderChart(chart))}
         </div>
       )}
       {remainingEmbedded.map((key) => (
@@ -540,16 +568,10 @@ export function ThemeMetricsDashboard({
           selectedPrefectureCode={selectedPrefectureCode}
         />
       )}
-      {markdownComponents.length > 0 && (
+      {trailingChapters.map(renderChapter)}
+      {remainingMarkdown.length > 0 && (
         <div className="space-y-4">
-          {markdownComponents.map((chart) => (
-            <ThemeDbChartRenderer
-              key={chart.componentKey}
-              chart={chart}
-              prefCode={pageComponentsAreaCode}
-              prefName={areaName}
-            />
-          ))}
+          {remainingMarkdown.map((chart) => renderChart(chart))}
         </div>
       )}
     </section>
