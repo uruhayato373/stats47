@@ -19,6 +19,7 @@
 import fs from 'fs';
 import path from 'path';
 
+import { resolveContentTag } from '@stats47/data-configs/content';
 import {
   fetchFromR2AsJson,
   fetchFromR2AsString,
@@ -28,10 +29,9 @@ import {
 import dotenv from 'dotenv';
 import yaml from 'js-yaml';
 
+import { blogPublicationContract } from '../../../packages/r2-storage/src/scripts/lib/blog-publication-guard';
 import { BLOG_SLUG_REDIRECTS } from '../src/config/blog-redirects';
 import { GONE_BLOG_SLUGS } from '../src/config/gone-blog-slugs';
-import { blogPublicationContract } from '../../../packages/r2-storage/src/scripts/lib/blog-publication-guard';
-
 import { resolveArticleMetricPairs } from '../src/features/blog/services/article-metric-pairs';
 import { resolveArticleRankingRefs } from '../src/features/blog/services/article-ranking-refs';
 import {
@@ -214,7 +214,11 @@ async function main() {
     }
     const fm = parseFrontmatter(content);
     const tags = (Array.isArray(fm.tags) ? (fm.tags as string[]) : []).map(
-      (tagKey) => ({ tagKey: String(tagKey) })
+      (value) => {
+        const tag = resolveContentTag(String(value));
+        if (!tag) throw new Error(`未登録タグ: ${slug}: ${String(value)}。content.tagsのID台帳へ登録してください。`);
+        return { tagKey: tag.key, tagId: tag.id };
+      }
     );
     // sticky: frontmatter の boolean が最優先 → 配信状態 → (初回生成時のみ) publishedAt 推定
     const published =

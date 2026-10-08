@@ -1,0 +1,213 @@
+{
+  "version": 1,
+  "pages": [
+    {
+      "id": "product:data-p-01",
+      "kind": "product",
+      "key": "data-p-01",
+      "title": "47都道府県の人口・世帯データ集をお渡しします",
+      "href": "/products/data-p-01",
+      "published": true
+    },
+    {
+      "id": "product:data-p-02",
+      "kind": "product",
+      "key": "data-p-02",
+      "title": "47都道府県の所得・賃金データ集をお渡しします",
+      "href": "/products/data-p-02",
+      "published": true
+    },
+    {
+      "id": "product:data-p-03",
+      "kind": "product",
+      "key": "data-p-03",
+      "title": "47都道府県の観光・交通データ集をお渡しします",
+      "href": "/products/data-p-03",
+      "published": true
+    },
+    {
+      "id": "product:data-p-04",
+      "kind": "product",
+      "key": "data-p-04",
+      "title": "47都道府県の自治体財政データ集をお渡しします",
+      "href": "/products/data-p-04",
+      "published": true
+    },
+    {
+      "id": "product:data-p-05",
+      "kind": "product",
+      "key": "data-p-05",
+      "title": "47都道府県の医療・介護データ集をお渡しします",
+      "href": "/products/data-p-05",
+      "published": true
+    },
+    {
+      "id": "product:data-p-06",
+      "kind": "product",
+      "key": "data-p-06",
+      "title": "47都道府県の教育・文化データ集をお渡しします",
+      "href": "/products/data-p-06",
+      "published": true
+    },
+    {
+      "id": "product:data-p-07",
+      "kind": "product",
+      "key": "data-p-07",
+      "title": "47都道府県の気候・土地データ集をお渡しします",
+      "href": "/products/data-p-07",
+      "published": true
+    },
+    {
+      "id": "product:data-p-08",
+      "kind": "product",
+      "key": "data-p-08",
+      "title": "47都道府県の商業・小売データ集をお渡しします",
+      "href": "/products/data-p-08",
+      "published": true
+    },
+    {
+      "id": "product:data-p-09",
+      "kind": "product",
+      "key": "data-p-09",
+      "title": "47都道府県の農業・産業データ集をお渡しします",
+      "href": "/products/data-p-09",
+      "published": true
+    },
+    {
+      "id": "product:data-p-10",
+      "kind": "product",
+      "key": "data-p-10",
+      "title": "47都道府県の防災・インフラデータ集をお渡しします",
+      "href": "/products/data-p-10",
+      "published": true
+    },
+    {
+      "id": "product:data-p-11",
+      "kind": "product",
+      "key": "data-p-11",
+      "title": "47都道府県 汎用統計データ集をお渡しします",
+      "href": "/products/data-p-11",
+      "published": true
+    },
+    {
+      "id": "product:data-p-12",
+      "kind": "product",
+      "key": "data-p-12",
+      "title": "47都道府県の統計データ総合集をお渡しします",
+      "href": "/products/data-p-12",
+      "published": true
+    },
+    {
+      "id": "product:data-p-14",
+      "kind": "product",
+      "key": "data-p-14",
+      "title": "県庁所在市の家計消費データ集をお渡しします",
+      "href": "/products/data-p-14",
+      "published": true
+    },
+    {
+      "id": "product:kindle-k-s1-01",
+      "kind": "product",
+      "key": "kindle-k-s1-01",
+      "title": "年収が高い県は、暮らしも豊かなのか",
+      "href": "/products/kindle-k-s1-01",
+      "published": true
+    },
+    {
+      "id": "product:kindle-k-s1-02",
+      "kind": "product",
+      "key": "kindle-k-s1-02",
+      "title": "食卓の支出と購入数量 — 家計調査の地域差を読む",
+      "href": "/products/kindle-k-s1-02",
+      "published": true
+    },
+    {
+      "id": "product:kindle-k-s1-03",
+      "kind": "product",
+      "key": "kindle-k-s1-03",
+      "title": "人口減少と世帯の地図 — 未婚・単身・東京集中",
+      "href": "/products/kindle-k-s1-03",
+      "published": true
+    },
+    {
+      "id": "product:kindle-k-s1-04",
+      "kind": "product",
+      "key": "kindle-k-s1-04",
+      "title": "健康と医療の地図 — 寿命・自殺・介護2040",
+      "href": "/products/kindle-k-s1-04",
+      "published": true
+    },
+    {
+      "id": "product:kindle-k-s1-05",
+      "kind": "product",
+      "key": "kindle-k-s1-05",
+      "title": "教育と子育ての地図 — 教育費・進学率・子育て指標",
+      "href": "/products/kindle-k-s1-05",
+      "published": true
+    },
+    {
+      "id": "product:kindle-k-s1-06",
+      "kind": "product",
+      "key": "kindle-k-s1-06",
+      "title": "自治体財政の地図 — 財政力・借金・将来負担",
+      "href": "/products/kindle-k-s1-06",
+      "published": true
+    },
+    {
+      "id": "product:kindle-k-s1-07",
+      "kind": "product",
+      "key": "kindle-k-s1-07",
+      "title": "観光とインバウンドの地図 — 宿泊・国籍・回復",
+      "href": "/products/kindle-k-s1-07",
+      "published": true
+    },
+    {
+      "id": "product:kindle-k-s1-08",
+      "kind": "product",
+      "key": "kindle-k-s1-08",
+      "title": "エネルギーとインフラの地図 — 電力・再エネ・ガス",
+      "href": "/products/kindle-k-s1-08",
+      "published": true
+    },
+    {
+      "id": "product:kindle-k-s1-09",
+      "kind": "product",
+      "key": "kindle-k-s1-09",
+      "title": "産業と地域経済の地図 — 製造・中小・地価",
+      "href": "/products/kindle-k-s1-09",
+      "published": true
+    },
+    {
+      "id": "product:kindle-k-s1-10",
+      "kind": "product",
+      "key": "kindle-k-s1-10",
+      "title": "安全と環境の地図 — 犯罪・労災・公害・防災",
+      "href": "/products/kindle-k-s1-10",
+      "published": true
+    },
+    {
+      "id": "product:kindle-k-s1-11",
+      "kind": "product",
+      "key": "kindle-k-s1-11",
+      "title": "文化・スポーツ・余暇の地図",
+      "href": "/products/kindle-k-s1-11",
+      "published": true
+    },
+    {
+      "id": "product:kindle-k-s1-12",
+      "kind": "product",
+      "key": "kindle-k-s1-12",
+      "title": "デジタル生活の地図 — 通信・PC・テレワーク",
+      "href": "/products/kindle-k-s1-12",
+      "published": true
+    },
+    {
+      "id": "product:service-geo-service-01",
+      "kind": "product",
+      "key": "service-geo-service-01",
+      "title": "地価と将来人口の重なりを県別に資料化します",
+      "href": "/products/service-geo-service-01",
+      "published": true
+    }
+  ]
+}

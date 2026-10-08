@@ -1,0 +1,344 @@
+{
+  "version": 1,
+  "routes": [
+    {
+      "id": "route:products-from-note:slug:noteKey",
+      "kind": "products-from-note",
+      "pattern": "/products/[slug]/from/note/[noteKey]",
+      "parameters": [
+        "slug",
+        "noteKey"
+      ]
+    },
+    {
+      "id": "route:areas-cities:areaCode:cityCode:categoryKey",
+      "kind": "areas-cities",
+      "pattern": "/areas/[areaCode]/cities/[cityCode]/[categoryKey]",
+      "parameters": [
+        "areaCode",
+        "cityCode",
+        "categoryKey"
+      ]
+    },
+    {
+      "id": "route:city:areaCode:cityCode",
+      "kind": "city",
+      "pattern": "/areas/[areaCode]/cities/[cityCode]",
+      "parameters": [
+        "areaCode",
+        "cityCode"
+      ]
+    },
+    {
+      "id": "route:geo-data:analysisSlug:prefCode",
+      "kind": "geo-data",
+      "pattern": "/geo/data/[analysisSlug]/[prefCode]",
+      "parameters": [
+        "analysisSlug",
+        "prefCode"
+      ]
+    },
+    {
+      "id": "route:geo-population-station-access:prefCode:stage",
+      "kind": "geo-population-station-access",
+      "pattern": "/geo/population-station-access/[prefCode]/[stage]",
+      "parameters": [
+        "prefCode",
+        "stage"
+      ]
+    },
+    {
+      "id": "route:geo:analysisSlug:prefCode:stage",
+      "kind": "geo",
+      "pattern": "/geo/[analysisSlug]/[prefCode]/[stage]",
+      "parameters": [
+        "analysisSlug",
+        "prefCode",
+        "stage"
+      ]
+    },
+    {
+      "id": "page:themes-local-finance-cities",
+      "kind": "page",
+      "pattern": "/themes/local-finance/cities",
+      "parameters": [],
+      "title": "市区町村の地方財政"
+    },
+    {
+      "id": "route:category-compare:categoryKey",
+      "kind": "category-compare",
+      "pattern": "/category/[categoryKey]/compare",
+      "parameters": [
+        "categoryKey"
+      ]
+    },
+    {
+      "id": "route:geo-datasets:dataId",
+      "kind": "geo-datasets",
+      "pattern": "/geo/datasets/[dataId]",
+      "parameters": [
+        "dataId"
+      ]
+    },
+    {
+      "id": "route:geo-layer:layerSlug",
+      "kind": "geo-layer",
+      "pattern": "/geo/layers/[layerSlug]",
+      "parameters": [
+        "layerSlug"
+      ]
+    },
+    {
+      "id": "route:municipality-ranking:rankingKey",
+      "kind": "municipality-ranking",
+      "pattern": "/municipalities/ranking/[rankingKey]",
+      "parameters": [
+        "rankingKey"
+      ]
+    },
+    {
+      "id": "route:municipalities-themes:themeSlug",
+      "kind": "municipalities-themes",
+      "pattern": "/municipalities/themes/[themeSlug]",
+      "parameters": [
+        "themeSlug"
+      ]
+    },
+    {
+      "id": "route:area-theme:areaCode:themeSlug",
+      "kind": "area-theme",
+      "pattern": "/areas/[areaCode]/[themeSlug]",
+      "parameters": [
+        "areaCode",
+        "themeSlug"
+      ]
+    },
+    {
+      "id": "page:blog-tags",
+      "kind": "page",
+      "pattern": "/blog/tags",
+      "parameters": [],
+      "title": "ブログのタグ一覧"
+    },
+    {
+      "id": "page:geo-2050-population",
+      "kind": "page",
+      "pattern": "/geo/2050-population",
+      "parameters": [],
+      "title": "2050年の推計人口"
+    },
+    {
+      "id": "page:geo-compare",
+      "kind": "page",
+      "pattern": "/geo/compare",
+      "parameters": [],
+      "title": "地域分析の比較"
+    },
+    {
+      "id": "page:geo-data-catalog",
+      "kind": "page",
+      "pattern": "/geo/data-catalog",
+      "parameters": [],
+      "title": "GISデータ一覧"
+    },
+    {
+      "id": "page:geo-layers",
+      "kind": "page",
+      "pattern": "/geo/layers",
+      "parameters": [],
+      "title": "地図レイヤー"
+    },
+    {
+      "id": "page:geo-method",
+      "kind": "page",
+      "pattern": "/geo/method",
+      "parameters": [],
+      "title": "地域分析の方法"
+    },
+    {
+      "id": "theme:local-finance",
+      "kind": "theme",
+      "pattern": "/themes/local-finance",
+      "parameters": [],
+      "title": "地方財政"
+    },
+    {
+      "id": "route:area:areaCode",
+      "kind": "area",
+      "pattern": "/areas/[areaCode]",
+      "parameters": [
+        "areaCode"
+      ]
+    },
+    {
+      "id": "route:blog:slug",
+      "kind": "blog",
+      "pattern": "/blog/[slug]",
+      "parameters": [
+        "slug"
+      ]
+    },
+    {
+      "id": "route:category:categoryKey",
+      "kind": "category",
+      "pattern": "/category/[categoryKey]",
+      "parameters": [
+        "categoryKey"
+      ]
+    },
+    {
+      "id": "route:geo:analysisSlug",
+      "kind": "geo",
+      "pattern": "/geo/[analysisSlug]",
+      "parameters": [
+        "analysisSlug"
+      ]
+    },
+    {
+      "id": "route:japan-theme:themeSlug",
+      "kind": "japan-theme",
+      "pattern": "/japan/[themeSlug]",
+      "parameters": [
+        "themeSlug"
+      ]
+    },
+    {
+      "id": "route:product:slug",
+      "kind": "product",
+      "pattern": "/products/[slug]",
+      "parameters": [
+        "slug"
+      ]
+    },
+    {
+      "id": "route:ranking:rankingKey",
+      "kind": "ranking",
+      "pattern": "/ranking/[rankingKey]",
+      "parameters": [
+        "rankingKey"
+      ]
+    },
+    {
+      "id": "route:survey:surveyKey",
+      "kind": "survey",
+      "pattern": "/survey/[surveyKey]",
+      "parameters": [
+        "surveyKey"
+      ]
+    },
+    {
+      "id": "route:tag:tagKey",
+      "kind": "tag",
+      "pattern": "/tag/[tagKey]",
+      "parameters": [
+        "tagKey"
+      ]
+    },
+    {
+      "id": "route:theme:themeSlug",
+      "kind": "theme",
+      "pattern": "/themes/[themeSlug]",
+      "parameters": [
+        "themeSlug"
+      ]
+    },
+    {
+      "id": "page:home",
+      "kind": "page",
+      "pattern": "/",
+      "parameters": [],
+      "title": "統計で見る都道府県"
+    },
+    {
+      "id": "page:about",
+      "kind": "page",
+      "pattern": "/about",
+      "parameters": [],
+      "title": "運営者について"
+    },
+    {
+      "id": "page:areas",
+      "kind": "page",
+      "pattern": "/areas",
+      "parameters": [],
+      "title": "都道府県一覧"
+    },
+    {
+      "id": "page:blog",
+      "kind": "page",
+      "pattern": "/blog",
+      "parameters": [],
+      "title": "統計ブログ"
+    },
+    {
+      "id": "page:geo",
+      "kind": "page",
+      "pattern": "/geo",
+      "parameters": [],
+      "title": "地域分析"
+    },
+    {
+      "id": "page:japan",
+      "kind": "page",
+      "pattern": "/japan",
+      "parameters": [],
+      "title": "日本の統計"
+    },
+    {
+      "id": "page:municipalities",
+      "kind": "page",
+      "pattern": "/municipalities",
+      "parameters": [],
+      "title": "市区町村の統計"
+    },
+    {
+      "id": "page:privacy",
+      "kind": "page",
+      "pattern": "/privacy",
+      "parameters": [],
+      "title": "プライバシーポリシー"
+    },
+    {
+      "id": "page:products",
+      "kind": "page",
+      "pattern": "/products",
+      "parameters": [],
+      "title": "データ商品・書籍"
+    },
+    {
+      "id": "page:ranking",
+      "kind": "page",
+      "pattern": "/ranking",
+      "parameters": [],
+      "title": "ランキング一覧"
+    },
+    {
+      "id": "page:search",
+      "kind": "page",
+      "pattern": "/search",
+      "parameters": [],
+      "title": "横断検索"
+    },
+    {
+      "id": "page:survey",
+      "kind": "page",
+      "pattern": "/survey",
+      "parameters": [],
+      "title": "統計調査一覧"
+    },
+    {
+      "id": "page:terms",
+      "kind": "page",
+      "pattern": "/terms",
+      "parameters": [],
+      "title": "利用規約"
+    },
+    {
+      "id": "page:themes",
+      "kind": "page",
+      "pattern": "/themes",
+      "parameters": [],
+      "title": "テーマ一覧"
+    }
+  ]
+}

@@ -1,8 +1,5 @@
 import { Suspense } from "react";
 
-import { findGeoAnalysisByRankingKey } from "@stats47/data-configs/business-plan";
-
-import { RailLinksCard } from "@/components/rail";
 
 import {
   RailAdSlot,
@@ -14,7 +11,7 @@ import type { AffiliateDestination } from "@/features/ads/constants/affiliate-de
 import { SIDEBAR_PROMO_BANNERS } from "@/features/ads/constants/sidebar-banners";
 import { AffiliateAdSlot, RakutenItemsCard } from "@/features/ads/server";
 import type { AreaType } from "@/features/area";
-import { listRelatedThemesForRankingKeys } from "@/features/theme-dashboard/server";
+import { RelatedContentNavigation } from "@/features/content-navigation/RelatedContentNavigation";
 
 import {
   ADSENSE_DISPLAY_ENABLED,
@@ -64,11 +61,6 @@ export function RankingPageSidebarSection({
   rankingName,
   excludeAffiliateAds = [],
 }: RankingPageSidebarSectionProps) {
-  // この指標を主指標・副指標として使うテーマ。ランキング (1 指標) からテーマ (複数指標の解釈) へ深掘りする導線。
-  // テーマは 47 都道府県を主語にするので、県のランキングでだけ出す。
-  const relatedThemes = areaType === "prefecture" ? listRelatedThemesForRankingKeys([rankingKey], { limit: 3 }) : [];
-  // この指標を主指標とする Geo 分析 (標高×人口など)。ランキングの 1 指標から、地図・途中計算・検算を辿れる分析へ深掘りする導線。
-  const relatedGeoAnalysis = areaType === "prefecture" ? findGeoAnalysisByRankingKey(rankingKey) : undefined;
   // 品目が一致する家計調査だけを優先する。null（広告なし）の解決結果は覆さない。
   // 品目・R2在庫がない場合、カード自身が何も描画しない。
   const prioritizeRakutenItems = affiliateVertical !== null
@@ -95,7 +87,27 @@ export function RankingPageSidebarSection({
 
   return (
     <Suspense fallback={<RankingPageSidebarSkeleton />}>
-      {/* レール先頭は「関連ランキング」(回遊優先)。広告はその直後に置く。 */}
+      <div className="hidden lg:block">
+        <RelatedArticlesCard rankingKey={rankingKey} areaType={areaType} />
+      </div>
+      {areaType === "prefecture" && (
+        <RelatedContentNavigation
+          title="この指標を使うテーマ"
+          sourceId={`ranking:${rankingKey}`}
+          kinds={['theme']}
+          limit={3}
+          surface="ranking_theme"
+        />
+      )}
+      {areaType === "prefecture" && (
+        <RelatedContentNavigation
+          title="この指標の地域分析"
+          sourceId={`ranking:${rankingKey}`}
+          kinds={['geo']}
+          limit={1}
+          surface="ranking_geo"
+        />
+      )}
       <RankingItemsSidebar
         rankingKey={rankingKey}
         areaType={areaType}
@@ -116,23 +128,6 @@ export function RankingPageSidebarSection({
       />
       {/* ランキング名が品目 (牛肉・うどん等) のとき楽天市場の商品を出す。品目でなければ描画しない。 */}
       {!prioritizeRakutenItems && rakutenItems}
-      <RelatedArticlesCard rankingKey={rankingKey} areaType={areaType} />
-      {relatedThemes.length > 0 && (
-        <RailLinksCard
-          title="この指標を使うテーマ"
-          layout="list"
-          items={relatedThemes.map((theme) => ({ id: theme.themeKey, label: theme.title, href: theme.href }))}
-          trackingSurface="ranking_theme"
-        />
-      )}
-      {relatedGeoAnalysis && (
-        <RailLinksCard
-          title="この指標の地域分析"
-          layout="list"
-          items={[{ id: relatedGeoAnalysis.slug, label: relatedGeoAnalysis.title, href: `/geo/${relatedGeoAnalysis.slug}` }]}
-          trackingSurface="ranking_geo"
-        />
-      )}
       {/* AdSense再開時は従来位置へ戻し、同一バナーを二重描画しない。 */}
       {ADSENSE_DISPLAY_ENABLED && contextualAffiliateBanners}
       <SurveyCard

@@ -10,6 +10,7 @@ import { ADSENSE_DISPLAY_ENABLED } from "@/lib/google-adsense";
 import { shouldShowFunnelCta } from "../../funnel/funnel-cta-config";
 import { RankingFunnelCta } from "../../funnel/RankingFunnelCta";
 import { computeRankingHeaderStats } from "../../utils/compute-ranking-header-stats";
+import { RelatedArticlesCard } from '../RankingSidebar/RelatedArticlesCard';
 
 import { shouldShowRankingInContentAffiliate } from "./ranking-incontent-affiliate-policy";
 import { RankingKeyPageClient } from "./RankingKeyPageClient";
@@ -82,6 +83,7 @@ export function RankingPageClientShell({
         />
       }
       sections={{
+        relatedArticles: <RelatedArticlesCard rankingKey={rankingKey} areaType={model.areaType} />,
         sidebar: (
           <RankingPageSidebarSection
             affiliateVertical={model.affiliateVertical}

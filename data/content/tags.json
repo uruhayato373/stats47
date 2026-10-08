@@ -1,0 +1,6227 @@
+{
+  "version": 1,
+  "tags": [
+    {
+      "id": "tag:t-77f9a6d6a789",
+      "label": "1000世帯あたり",
+      "key": "1000世帯あたり",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-5e7ebd86f19a",
+      "label": "2019年",
+      "key": "2019年",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-2d154259202b",
+      "label": "2020年",
+      "key": "2020年",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-bdbebd273e45",
+      "label": "2022年",
+      "key": "2022年",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-3a424303c0c8",
+      "label": "2023年",
+      "key": "2023年",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-71e69a814d46",
+      "label": "2024年",
+      "key": "2024年",
+      "aliases": []
+    },
+    {
+      "id": "tag:2024-problem",
+      "label": "2024年問題",
+      "key": "2024年問題",
+      "aliases": [
+        "2024-problem"
+      ]
+    },
+    {
+      "id": "tag:2050",
+      "label": "2050年",
+      "key": "2050年",
+      "aliases": [
+        "2050"
+      ]
+    },
+    {
+      "id": "tag:t-bb576c9f58be",
+      "label": "2050年人口",
+      "key": "2050年人口",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-835a53b6b1d5",
+      "label": "65歳以上人口",
+      "key": "65歳以上人口",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-6717024a5410",
+      "label": "65歳以上人口割合",
+      "key": "65歳以上人口割合",
+      "aliases": []
+    },
+    {
+      "id": "tag:sixth-sector-industrialization",
+      "label": "6次産業化",
+      "key": "6次産業化",
+      "aliases": [
+        "sixth-sector-industrialization"
+      ]
+    },
+    {
+      "id": "tag:t-11fb682be0a0",
+      "label": "AI",
+      "key": "AI",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-221b238e4184",
+      "label": "AI 活用",
+      "key": "AI 活用",
+      "aliases": []
+    },
+    {
+      "id": "tag:annual-precipitation",
+      "label": "annual-precipitation",
+      "key": "annual-precipitation",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-030d2c0ef94f",
+      "label": "APIキャッシュ",
+      "key": "APIキャッシュ",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-50a412294327",
+      "label": "ChatGPT",
+      "key": "ChatGPT",
+      "aliases": []
+    },
+    {
+      "id": "tag:claude-code",
+      "label": "claude-code",
+      "key": "claude-code",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-a8cd52d0d273",
+      "label": "ClaudeCode",
+      "key": "ClaudeCode",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-2f9af583a9f5",
+      "label": "CloudflarePages",
+      "key": "CloudflarePages",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-da2754aab5e3",
+      "label": "CloudflareR2",
+      "key": "CloudflareR2",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-0ef384847cc3",
+      "label": "CPI",
+      "key": "CPI",
+      "aliases": []
+    },
+    {
+      "id": "tag:cron",
+      "label": "cron",
+      "key": "cron",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-bed7abeac56e",
+      "label": "D3",
+      "key": "D3",
+      "aliases": []
+    },
+    {
+      "id": "tag:digital-transformation",
+      "label": "DX",
+      "key": "DX",
+      "aliases": [
+        "digital-transformation"
+      ]
+    },
+    {
+      "id": "tag:e-stat",
+      "label": "e-stat",
+      "key": "e-stat",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-4619776e6993",
+      "label": "e-Stat",
+      "key": "e-Stat",
+      "aliases": []
+    },
+    {
+      "id": "tag:electric-vehicles",
+      "label": "EV",
+      "key": "EV",
+      "aliases": [
+        "electric-vehicles"
+      ]
+    },
+    {
+      "id": "tag:gdp",
+      "label": "GDP",
+      "key": "GDP",
+      "aliases": [
+        "gdp"
+      ]
+    },
+    {
+      "id": "tag:t-aeb3fd4f1716",
+      "label": "GIS",
+      "key": "GIS",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-7e5e228a3eab",
+      "label": "GitHubActions",
+      "key": "GitHubActions",
+      "aliases": []
+    },
+    {
+      "id": "tag:green-transformation",
+      "label": "GX",
+      "key": "GX",
+      "aliases": [
+        "green-transformation"
+      ]
+    },
+    {
+      "id": "tag:t-bc1ccfebaf41",
+      "label": "ICT",
+      "key": "ICT",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-f415bf7b07a9",
+      "label": "IT",
+      "key": "IT",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-ab4fa5d1227e",
+      "label": "ITコンサル",
+      "key": "ITコンサル",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-88b625e654eb",
+      "label": "IT人材",
+      "key": "IT人材",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-f9919b4bd9b3",
+      "label": "JSON設計",
+      "key": "JSON設計",
+      "aliases": []
+    },
+    {
+      "id": "tag:laborwage",
+      "label": "laborwage",
+      "key": "laborwage",
+      "aliases": []
+    },
+    {
+      "id": "tag:landweather",
+      "label": "landweather",
+      "key": "landweather",
+      "aliases": []
+    },
+    {
+      "id": "tag:lpg",
+      "label": "LPガス",
+      "key": "LPガス",
+      "aliases": [
+        "lpg"
+      ]
+    },
+    {
+      "id": "tag:t-b92faeeb4911",
+      "label": "NextJS",
+      "key": "NextJS",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-4fa06acf0d1d",
+      "label": "Remotion",
+      "key": "Remotion",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-6bc4718fbb15",
+      "label": "SEO",
+      "key": "SEO",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-6df1bb18a59a",
+      "label": "Skill",
+      "key": "Skill",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-caf664828ad3",
+      "label": "SKILLmd",
+      "key": "SKILLmd",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-def4e80cbfdc",
+      "label": "SlopeGraph",
+      "key": "SlopeGraph",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-928ebab95476",
+      "label": "SmallMultiple",
+      "key": "SmallMultiple",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-2532caa9c57a",
+      "label": "TopoJSON",
+      "key": "TopoJSON",
+      "aliases": []
+    },
+    {
+      "id": "tag:tsmc",
+      "label": "TSMC",
+      "key": "TSMC",
+      "aliases": [
+        "tsmc"
+      ]
+    },
+    {
+      "id": "tag:t-bdf750266125",
+      "label": "アーキテクチャ",
+      "key": "アーキテクチャ",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-d4591ff147ec",
+      "label": "アイスクリーム",
+      "key": "アイスクリーム",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-fc878b5f3ad1",
+      "label": "あじ",
+      "key": "あじ",
+      "aliases": []
+    },
+    {
+      "id": "tag:alcohol",
+      "label": "アルコール",
+      "key": "アルコール",
+      "aliases": [
+        "alcohol"
+      ]
+    },
+    {
+      "id": "tag:t-dd417d264697",
+      "label": "いか消費量",
+      "key": "いか消費量",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-9326e08974a3",
+      "label": "いちご",
+      "key": "いちご",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-fc4256312a8c",
+      "label": "いちご消費量",
+      "key": "いちご消費量",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-7f12b991b6d0",
+      "label": "いわし",
+      "key": "いわし",
+      "aliases": []
+    },
+    {
+      "id": "tag:sardine-fishing",
+      "label": "イワシ類",
+      "key": "イワシ類",
+      "aliases": [
+        "sardine-fishing"
+      ]
+    },
+    {
+      "id": "tag:inbound-tourism",
+      "label": "インバウンド",
+      "key": "インバウンド",
+      "aliases": [
+        "inbound-tourism"
+      ]
+    },
+    {
+      "id": "tag:infrastructure",
+      "label": "インフラ",
+      "key": "インフラ",
+      "aliases": [
+        "infrastructure"
+      ]
+    },
+    {
+      "id": "tag:infrastructure-disparity",
+      "label": "インフラ格差",
+      "key": "インフラ格差",
+      "aliases": [
+        "infrastructure-disparity"
+      ]
+    },
+    {
+      "id": "tag:t-91d9b9317edc",
+      "label": "インフレ",
+      "key": "インフレ",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-6bf630738646",
+      "label": "ウイスキー",
+      "key": "ウイスキー",
+      "aliases": []
+    },
+    {
+      "id": "tag:walking",
+      "label": "ウォーキング",
+      "key": "ウォーキング",
+      "aliases": [
+        "walking"
+      ]
+    },
+    {
+      "id": "tag:t-63e6f12b7f83",
+      "label": "うどん",
+      "key": "うどん",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-819d6e67b4bb",
+      "label": "うどん消費",
+      "key": "うどん消費",
+      "aliases": []
+    },
+    {
+      "id": "tag:energy",
+      "label": "エネルギー",
+      "key": "エネルギー",
+      "aliases": [
+        "energy"
+      ]
+    },
+    {
+      "id": "tag:energy-consumption",
+      "label": "エネルギー消費",
+      "key": "エネルギー消費",
+      "aliases": [
+        "energy-consumption"
+      ]
+    },
+    {
+      "id": "tag:t-38e4a61b098e",
+      "label": "えのきたけ",
+      "key": "えのきたけ",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-1fa1838571ec",
+      "label": "エリアチャート",
+      "key": "エリアチャート",
+      "aliases": []
+    },
+    {
+      "id": "tag:engel-coefficient",
+      "label": "エンゲル係数",
+      "key": "エンゲル係数",
+      "aliases": [
+        "engel-coefficient"
+      ]
+    },
+    {
+      "id": "tag:t-4be518531d2b",
+      "label": "エンジニア",
+      "key": "エンジニア",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-961381ed90db",
+      "label": "エンジニア年収",
+      "key": "エンジニア年収",
+      "aliases": []
+    },
+    {
+      "id": "tag:overtourism",
+      "label": "オーバーツーリズム",
+      "key": "オーバーツーリズム",
+      "aliases": [
+        "overtourism"
+      ]
+    },
+    {
+      "id": "tag:outing-disparity",
+      "label": "おでかけ格差",
+      "key": "おでかけ格差",
+      "aliases": [
+        "outing-disparity"
+      ]
+    },
+    {
+      "id": "tag:t-df7b8a376b7d",
+      "label": "お菓子",
+      "key": "お菓子",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-d56d29df4445",
+      "label": "お茶",
+      "key": "お茶",
+      "aliases": []
+    },
+    {
+      "id": "tag:carbon-neutral",
+      "label": "カーボンニュートラル",
+      "key": "カーボンニュートラル",
+      "aliases": [
+        "carbon-neutral"
+      ]
+    },
+    {
+      "id": "tag:t-49205ff850d6",
+      "label": "かき",
+      "key": "かき",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-0bad53f75af1",
+      "label": "かき消費支出額",
+      "key": "かき消費支出額",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-0f4f1d7d57b0",
+      "label": "かき消費量",
+      "key": "かき消費量",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-b7d04eb805d7",
+      "label": "カステラ",
+      "key": "カステラ",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-2bd8a4baca07",
+      "label": "ガス代",
+      "key": "ガス代",
+      "aliases": []
+    },
+    {
+      "id": "tag:gasoline",
+      "label": "ガソリン",
+      "key": "ガソリン",
+      "aliases": [
+        "gasoline"
+      ]
+    },
+    {
+      "id": "tag:t-d66da1ca10b1",
+      "label": "かつお",
+      "key": "かつお",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-adf046c3e61b",
+      "label": "カツオ",
+      "key": "カツオ",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-e77941de140b",
+      "label": "かつお節",
+      "key": "かつお節",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-4e046640cf7e",
+      "label": "カップ麺",
+      "key": "カップ麺",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-2cd2d4e15237",
+      "label": "かに",
+      "key": "かに",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-2d3ce16c8f7f",
+      "label": "かまぼこ",
+      "key": "かまぼこ",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-8845e78adeb8",
+      "label": "カレールウ",
+      "key": "カレールウ",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-5263cadd4473",
+      "label": "カレールウ消費量",
+      "key": "カレールウ消費量",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-9e6a5a5c65b9",
+      "label": "キャッシュ",
+      "key": "キャッシュ",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-6ec0ba911474",
+      "label": "キャリア",
+      "key": "キャリア",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-72772ff9bf5b",
+      "label": "キャンデー",
+      "key": "キャンデー",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-178c1e76b1b7",
+      "label": "きゅうり",
+      "key": "きゅうり",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-2f5e54ca35f4",
+      "label": "ぎょうざ",
+      "key": "ぎょうざ",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-b212ee75f385",
+      "label": "クールビズ",
+      "key": "クールビズ",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-9d01c70f1116",
+      "label": "ケアマネジャー",
+      "key": "ケアマネジャー",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-bb782cf87667",
+      "label": "コーヒー",
+      "key": "コーヒー",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-6da269dd92ef",
+      "label": "コーヒー消費支出額",
+      "key": "コーヒー消費支出額",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-473fd7d2b5ab",
+      "label": "コーヒー消費量",
+      "key": "コーヒー消費量",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-f6c37dfbd385",
+      "label": "ごみ",
+      "key": "ごみ",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-de6f89489032",
+      "label": "ごみ排出量",
+      "key": "ごみ排出量",
+      "aliases": []
+    },
+    {
+      "id": "tag:golf",
+      "label": "ゴルフ",
+      "key": "ゴルフ",
+      "aliases": [
+        "golf"
+      ]
+    },
+    {
+      "id": "tag:t-36169c6a50dc",
+      "label": "コロプレス",
+      "key": "コロプレス",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-38ac2b68089c",
+      "label": "こんにゃく",
+      "key": "こんにゃく",
+      "aliases": []
+    },
+    {
+      "id": "tag:convenience-stores",
+      "label": "コンビニ",
+      "key": "コンビニ",
+      "aliases": [
+        "convenience-stores"
+      ]
+    },
+    {
+      "id": "tag:t-266fb15bfc70",
+      "label": "こんぶ",
+      "key": "こんぶ",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-a7f72dc5ffc7",
+      "label": "ご当地グルメ",
+      "key": "ご当地グルメ",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-7454af7bbf0a",
+      "label": "ご当地菓子",
+      "key": "ご当地菓子",
+      "aliases": []
+    },
+    {
+      "id": "tag:service-industry",
+      "label": "サービス業",
+      "key": "サービス業",
+      "aliases": [
+        "service-industry"
+      ]
+    },
+    {
+      "id": "tag:salmon-farming",
+      "label": "サーモン養殖",
+      "key": "サーモン養殖",
+      "aliases": [
+        "salmon-farming"
+      ]
+    },
+    {
+      "id": "tag:t-e192582e0d2f",
+      "label": "さつまいも",
+      "key": "さつまいも",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-74f9c968aca0",
+      "label": "さば",
+      "key": "さば",
+      "aliases": []
+    },
+    {
+      "id": "tag:supply-chain",
+      "label": "サプライチェーン",
+      "key": "サプライチェーン",
+      "aliases": [
+        "supply-chain"
+      ]
+    },
+    {
+      "id": "tag:t-2596de75424b",
+      "label": "さやまめ",
+      "key": "さやまめ",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-d34a516e5d91",
+      "label": "サンキー",
+      "key": "サンキー",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-59d517a56ded",
+      "label": "さんま",
+      "key": "さんま",
+      "aliases": []
+    },
+    {
+      "id": "tag:pacific-saury",
+      "label": "サンマ",
+      "key": "サンマ",
+      "aliases": [
+        "pacific-saury"
+      ]
+    },
+    {
+      "id": "tag:t-70adaa25fbc7",
+      "label": "ジェンダー",
+      "key": "ジェンダー",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-07a7acc49f9e",
+      "label": "しじみ",
+      "key": "しじみ",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-26fdb610a6dd",
+      "label": "システムコンサルタント",
+      "key": "システムコンサルタント",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-8d0a7a65fe65",
+      "label": "しめじ",
+      "key": "しめじ",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-722cf2d6c6ae",
+      "label": "じゃがいも",
+      "key": "じゃがいも",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-83141eb53cd8",
+      "label": "しゅうまい",
+      "key": "しゅうまい",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-34dce910f3e3",
+      "label": "すいか",
+      "key": "すいか",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-fd094cd677b4",
+      "label": "スキル",
+      "key": "スキル",
+      "aliases": []
+    },
+    {
+      "id": "tag:pollock-fishing",
+      "label": "スケトウダラ",
+      "key": "スケトウダラ",
+      "aliases": [
+        "pollock-fishing"
+      ]
+    },
+    {
+      "id": "tag:t-e41391686efa",
+      "label": "すし",
+      "key": "すし",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-6b8996e71d5f",
+      "label": "ストッキング",
+      "key": "ストッキング",
+      "aliases": []
+    },
+    {
+      "id": "tag:sports",
+      "label": "スポーツ",
+      "key": "スポーツ",
+      "aliases": [
+        "sports"
+      ]
+    },
+    {
+      "id": "tag:sports-participation-rate",
+      "label": "スポーツ行動者率",
+      "key": "スポーツ行動者率",
+      "aliases": [
+        "sports-participation-rate"
+      ]
+    },
+    {
+      "id": "tag:sports-facilities",
+      "label": "スポーツ施設",
+      "key": "スポーツ施設",
+      "aliases": [
+        "sports-facilities"
+      ]
+    },
+    {
+      "id": "tag:smartphones",
+      "label": "スマートフォン",
+      "key": "スマートフォン",
+      "aliases": [
+        "smartphones"
+      ]
+    },
+    {
+      "id": "tag:t-73085d8a2c9e",
+      "label": "ゼリー",
+      "key": "ゼリー",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-0f4b46cc31fc",
+      "label": "ソース消費支出額",
+      "key": "ソース消費支出額",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-a7dbc110c61b",
+      "label": "そば",
+      "key": "そば",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-7bacf8218d1f",
+      "label": "ソフトウェア",
+      "key": "ソフトウェア",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-819bac9f6ddf",
+      "label": "たい",
+      "key": "たい",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-9030aa50ad7a",
+      "label": "タクシー運転手",
+      "key": "タクシー運転手",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-59db5a85c19e",
+      "label": "たばこ",
+      "key": "たばこ",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-248c5449d57e",
+      "label": "たらこ",
+      "key": "たらこ",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-a29a9cd1d35d",
+      "label": "チーズ",
+      "key": "チーズ",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-b37f90d909b1",
+      "label": "ちくわ",
+      "key": "ちくわ",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-10f74df28e44",
+      "label": "チューハイ",
+      "key": "チューハイ",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-9863f8fb506e",
+      "label": "チョコレート",
+      "key": "チョコレート",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-0643beb35a74",
+      "label": "つくだ煮",
+      "key": "つくだ煮",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-a08532f9623d",
+      "label": "ツリーマップ",
+      "key": "ツリーマップ",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-114d010d06e2",
+      "label": "データリテラシー",
+      "key": "データリテラシー",
+      "aliases": []
+    },
+    {
+      "id": "tag:digital-infrastructure",
+      "label": "デジタルインフラ",
+      "key": "デジタルインフラ",
+      "aliases": [
+        "digital-infrastructure"
+      ]
+    },
+    {
+      "id": "tag:t-b4f3df6d9868",
+      "label": "デジタルデバイド",
+      "key": "デジタルデバイド",
+      "aliases": []
+    },
+    {
+      "id": "tag:digital-divide",
+      "label": "デジタル格差",
+      "key": "デジタル格差",
+      "aliases": [
+        "digital-divide"
+      ]
+    },
+    {
+      "id": "tag:t-7b4667aa2da9",
+      "label": "デジタル人材",
+      "key": "デジタル人材",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-52b617d5f464",
+      "label": "デプロイ",
+      "key": "デプロイ",
+      "aliases": []
+    },
+    {
+      "id": "tag:tv-viewing",
+      "label": "テレビ視聴",
+      "key": "テレビ視聴",
+      "aliases": [
+        "tv-viewing"
+      ]
+    },
+    {
+      "id": "tag:t-cdc6b52f0341",
+      "label": "テレワーク",
+      "key": "テレワーク",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-81ddbc2a39e0",
+      "label": "トマト消費支出額",
+      "key": "トマト消費支出額",
+      "aliases": []
+    },
+    {
+      "id": "tag:truck-driver",
+      "label": "トラック運転者",
+      "key": "トラック運転者",
+      "aliases": [
+        "truck-driver"
+      ]
+    },
+    {
+      "id": "tag:t-cddc78a52be9",
+      "label": "トラック運転手",
+      "key": "トラック運転手",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-d5a293b12763",
+      "label": "なす",
+      "key": "なす",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-156bae824844",
+      "label": "ネクタイ",
+      "key": "ネクタイ",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-0ee5bbcbd761",
+      "label": "のど飴",
+      "key": "のど飴",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-61275bbf3bce",
+      "label": "バーゲン",
+      "key": "バーゲン",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-31c50ff37f85",
+      "label": "バーチャート",
+      "key": "バーチャート",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-1215dfb1159a",
+      "label": "パスタ",
+      "key": "パスタ",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-59029fc7aeea",
+      "label": "パスタ消費支出額",
+      "key": "パスタ消費支出額",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-43addbf6ef76",
+      "label": "パスポート",
+      "key": "パスポート",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-5f52ef058b01",
+      "label": "パソコン",
+      "key": "パソコン",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-0e846682b4e5",
+      "label": "バター",
+      "key": "バター",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-7bebb658a490",
+      "label": "パチンコ",
+      "key": "パチンコ",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-10c3fb1ad6c0",
+      "label": "バナナ消費量",
+      "key": "バナナ消費量",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-1c4e401aac22",
+      "label": "バブルチャート",
+      "key": "バブルチャート",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-6cdd362f919d",
+      "label": "ハム",
+      "key": "ハム",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-433c68371a3d",
+      "label": "パン",
+      "key": "パン",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-6fd659df2903",
+      "label": "パン消費",
+      "key": "パン消費",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-5f9fd605f1f7",
+      "label": "パン消費支出額",
+      "key": "パン消費支出額",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-7a5afb2c9a3f",
+      "label": "ピアノ",
+      "key": "ピアノ",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-3dd2ead3bf89",
+      "label": "ヒートマップ",
+      "key": "ヒートマップ",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-b92f795d7f0c",
+      "label": "ビール",
+      "key": "ビール",
+      "aliases": []
+    },
+    {
+      "id": "tag:single-parent-households",
+      "label": "ひとり親世帯",
+      "key": "ひとり親世帯",
+      "aliases": [
+        "single-parent-households"
+      ]
+    },
+    {
+      "id": "tag:t-ee848e5b9553",
+      "label": "ファッション",
+      "key": "ファッション",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-9867c7ad9ee7",
+      "label": "ぶどう",
+      "key": "ぶどう",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-0dc0e074c64e",
+      "label": "ぶり",
+      "key": "ぶり",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-a6f69ad07a44",
+      "label": "ふりかけ",
+      "key": "ふりかけ",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-f74f66b60829",
+      "label": "プリン",
+      "key": "プリン",
+      "aliases": []
+    },
+    {
+      "id": "tag:furusato-nozei",
+      "label": "ふるさと納税",
+      "key": "ふるさと納税",
+      "aliases": [
+        "furusato-nozei"
+      ]
+    },
+    {
+      "id": "tag:t-0498163399fe",
+      "label": "ブロッコリー",
+      "key": "ブロッコリー",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-18ac6df0a664",
+      "label": "プロパンガス",
+      "key": "プロパンガス",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-1558f37d2634",
+      "label": "ペット",
+      "key": "ペット",
+      "aliases": []
+    },
+    {
+      "id": "tag:bedroom-communities",
+      "label": "ベッドタウン",
+      "key": "ベッドタウン",
+      "aliases": [
+        "bedroom-communities"
+      ]
+    },
+    {
+      "id": "tag:healthcare",
+      "label": "ヘルスケア",
+      "key": "ヘルスケア",
+      "aliases": [
+        "healthcare"
+      ]
+    },
+    {
+      "id": "tag:t-e7036fa252e9",
+      "label": "ほうれんそう消費量",
+      "key": "ほうれんそう消費量",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-f9caedfec9e6",
+      "label": "ほたて",
+      "key": "ほたて",
+      "aliases": []
+    },
+    {
+      "id": "tag:scallop-fishing",
+      "label": "ホタテガイ",
+      "key": "ホタテガイ",
+      "aliases": [
+        "scallop-fishing"
+      ]
+    },
+    {
+      "id": "tag:t-a9145739e21c",
+      "label": "ほたて貝",
+      "key": "ほたて貝",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-3a576993ef2c",
+      "label": "ボックスプロット",
+      "key": "ボックスプロット",
+      "aliases": []
+    },
+    {
+      "id": "tag:hotels",
+      "label": "ホテル",
+      "key": "ホテル",
+      "aliases": [
+        "hotels"
+      ]
+    },
+    {
+      "id": "tag:volunteering",
+      "label": "ボランティア",
+      "key": "ボランティア",
+      "aliases": [
+        "volunteering"
+      ]
+    },
+    {
+      "id": "tag:t-b9b1818d19e9",
+      "label": "マーガリン",
+      "key": "マーガリン",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-ecd987dfa446",
+      "label": "マーケティング",
+      "key": "マーケティング",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-9f844f8e448e",
+      "label": "まぐろ",
+      "key": "まぐろ",
+      "aliases": []
+    },
+    {
+      "id": "tag:community-development",
+      "label": "まちづくり",
+      "key": "まちづくり",
+      "aliases": [
+        "community-development"
+      ]
+    },
+    {
+      "id": "tag:t-72fa17b30407",
+      "label": "マヨネーズ",
+      "key": "マヨネーズ",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-1cbe93b936a4",
+      "label": "みかん",
+      "key": "みかん",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-6821e49baeda",
+      "label": "みそ",
+      "key": "みそ",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-767ddd903e58",
+      "label": "ミネラルウォーター",
+      "key": "ミネラルウォーター",
+      "aliases": []
+    },
+    {
+      "id": "tag:media-consumption",
+      "label": "メディア消費",
+      "key": "メディア消費",
+      "aliases": [
+        "media-consumption"
+      ]
+    },
+    {
+      "id": "tag:t-56d30d0bd26e",
+      "label": "メロン",
+      "key": "メロン",
+      "aliases": []
+    },
+    {
+      "id": "tag:mental-health",
+      "label": "メンタルヘルス",
+      "key": "メンタルヘルス",
+      "aliases": [
+        "mental-health"
+      ]
+    },
+    {
+      "id": "tag:t-76fbcc59f4bf",
+      "label": "もち消費量",
+      "key": "もち消費量",
+      "aliases": []
+    },
+    {
+      "id": "tag:monozukuri",
+      "label": "ものづくり",
+      "key": "ものづくり",
+      "aliases": [
+        "monozukuri"
+      ]
+    },
+    {
+      "id": "tag:t-75f0054dc04b",
+      "label": "もも",
+      "key": "もも",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-2244c96128be",
+      "label": "ようかん",
+      "key": "ようかん",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-c49008d09651",
+      "label": "ヨーグルト",
+      "key": "ヨーグルト",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-d4c69a8b18bc",
+      "label": "ラーメン",
+      "key": "ラーメン",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-8c7e9fb86473",
+      "label": "ライン",
+      "key": "ライン",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-e7b81a331c2e",
+      "label": "ランキング",
+      "key": "ランキング",
+      "aliases": []
+    },
+    {
+      "id": "tag:recycling",
+      "label": "リサイクル",
+      "key": "リサイクル",
+      "aliases": [
+        "recycling"
+      ]
+    },
+    {
+      "id": "tag:t-81df460f951e",
+      "label": "リハビリ職",
+      "key": "リハビリ職",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-e22abecb4b95",
+      "label": "リモートワーク",
+      "key": "リモートワーク",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-4261abfc9132",
+      "label": "りんご",
+      "key": "りんご",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-9f6391fc7fcc",
+      "label": "レーダーチャート",
+      "key": "レーダーチャート",
+      "aliases": []
+    },
+    {
+      "id": "tag:leisure",
+      "label": "レジャー",
+      "key": "レジャー",
+      "aliases": [
+        "leisure"
+      ]
+    },
+    {
+      "id": "tag:t-4984231f0895",
+      "label": "れんこん",
+      "key": "れんこん",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-cde464658373",
+      "label": "ワイン",
+      "key": "ワイン",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-c96f4a9334c1",
+      "label": "わかめ",
+      "key": "わかめ",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-233c311e7a92",
+      "label": "愛知県",
+      "key": "愛知県",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-fe76b1b2147c",
+      "label": "愛媛県",
+      "key": "愛媛県",
+      "aliases": []
+    },
+    {
+      "id": "tag:occupational-safety-health",
+      "label": "安全衛生",
+      "key": "安全衛生",
+      "aliases": [
+        "occupational-safety-health"
+      ]
+    },
+    {
+      "id": "tag:t-c43b306ae4fe",
+      "label": "移住",
+      "key": "移住",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-182044beb253",
+      "label": "衣料品",
+      "key": "衣料品",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-ac2c087a473b",
+      "label": "医師",
+      "key": "医師",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-e69128cff20d",
+      "label": "医師の年収",
+      "key": "医師の年収",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-dc45e56d8a57",
+      "label": "医師偏在",
+      "key": "医師偏在",
+      "aliases": []
+    },
+    {
+      "id": "tag:pharmaceuticals",
+      "label": "医薬品",
+      "key": "医薬品",
+      "aliases": [
+        "pharmaceuticals"
+      ]
+    },
+    {
+      "id": "tag:medical-care",
+      "label": "医療",
+      "key": "医療",
+      "aliases": [
+        "medical-care"
+      ]
+    },
+    {
+      "id": "tag:t-c1f21f14d967",
+      "label": "医療機関",
+      "key": "医療機関",
+      "aliases": []
+    },
+    {
+      "id": "tag:medical-devices",
+      "label": "医療機器",
+      "key": "医療機器",
+      "aliases": [
+        "medical-devices"
+      ]
+    },
+    {
+      "id": "tag:t-8870a9678aae",
+      "label": "医療職",
+      "key": "医療職",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-3f3d2137a155",
+      "label": "医療提供体制",
+      "key": "医療提供体制",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-cdcfcf6312c7",
+      "label": "医療費",
+      "key": "医療費",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-257492384218",
+      "label": "医療逼迫",
+      "key": "医療逼迫",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-03f0550369bb",
+      "label": "育児",
+      "key": "育児",
+      "aliases": []
+    },
+    {
+      "id": "tag:training-employment-system",
+      "label": "育成就労制度",
+      "key": "育成就労制度",
+      "aliases": [
+        "training-employment-system"
+      ]
+    },
+    {
+      "id": "tag:t-1f3a6d9fddfe",
+      "label": "一戸建",
+      "key": "一戸建",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-b27b459fa39a",
+      "label": "一人暮らし",
+      "key": "一人暮らし",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-edc0d3debdc2",
+      "label": "茨城県",
+      "key": "茨城県",
+      "aliases": []
+    },
+    {
+      "id": "tag:relocation",
+      "label": "引越し",
+      "key": "引越し",
+      "aliases": [
+        "relocation"
+      ]
+    },
+    {
+      "id": "tag:t-7d782cdc5f11",
+      "label": "運動",
+      "key": "運動",
+      "aliases": []
+    },
+    {
+      "id": "tag:exercise-environment",
+      "label": "運動環境",
+      "key": "運動環境",
+      "aliases": [
+        "exercise-environment"
+      ]
+    },
+    {
+      "id": "tag:t-d626ecafe6c4",
+      "label": "映画",
+      "key": "映画",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-96e193df934f",
+      "label": "衛生行政報告例",
+      "key": "衛生行政報告例",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-518f312e686c",
+      "label": "駅アクセス",
+      "key": "駅アクセス",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-312cf5fc0b15",
+      "label": "園芸用品",
+      "key": "園芸用品",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-458731aeacd3",
+      "label": "岡山県",
+      "key": "岡山県",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-b16fa097dff0",
+      "label": "沖縄",
+      "key": "沖縄",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-8d3669cf3379",
+      "label": "沖縄県",
+      "key": "沖縄県",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-1a59a3c17013",
+      "label": "牡蠣",
+      "key": "牡蠣",
+      "aliases": []
+    },
+    {
+      "id": "tag:wholesale",
+      "label": "卸売",
+      "key": "卸売",
+      "aliases": [
+        "wholesale"
+      ]
+    },
+    {
+      "id": "tag:t-a5f9aa32bc87",
+      "label": "音楽教育",
+      "key": "音楽教育",
+      "aliases": []
+    },
+    {
+      "id": "tag:sewerage",
+      "label": "下水道",
+      "key": "下水道",
+      "aliases": [
+        "sewerage"
+      ]
+    },
+    {
+      "id": "tag:sewerage-coverage-rate",
+      "label": "下水道普及率",
+      "key": "下水道普及率",
+      "aliases": [
+        "sewerage-coverage-rate"
+      ]
+    },
+    {
+      "id": "tag:chemical-industry",
+      "label": "化学工業",
+      "key": "化学工業",
+      "aliases": [
+        "chemical-industry"
+      ]
+    },
+    {
+      "id": "tag:habitable-land-area",
+      "label": "可住地面積",
+      "key": "可住地面積",
+      "aliases": [
+        "habitable-land-area"
+      ]
+    },
+    {
+      "id": "tag:t-856a5020e004",
+      "label": "可処分所得",
+      "key": "可処分所得",
+      "aliases": []
+    },
+    {
+      "id": "tag:household-finance",
+      "label": "家計",
+      "key": "家計",
+      "aliases": [
+        "household-finance"
+      ]
+    },
+    {
+      "id": "tag:t-d8caa8b242f0",
+      "label": "家計支出",
+      "key": "家計支出",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-8af1587601e3",
+      "label": "家計資産",
+      "key": "家計資産",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-cee9d1d7fa47",
+      "label": "家計消費",
+      "key": "家計消費",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-ba8e4beb69bf",
+      "label": "家計調査",
+      "key": "家計調査",
+      "aliases": []
+    },
+    {
+      "id": "tag:rent",
+      "label": "家賃",
+      "key": "家賃",
+      "aliases": [
+        "rent"
+      ]
+    },
+    {
+      "id": "tag:t-8941f0234845",
+      "label": "家電",
+      "key": "家電",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-69363e7f12cb",
+      "label": "果物",
+      "key": "果物",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-170f06f60bbe",
+      "label": "果物消費",
+      "key": "果物消費",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-33c9ae6f3440",
+      "label": "河川",
+      "key": "河川",
+      "aliases": []
+    },
+    {
+      "id": "tag:fires",
+      "label": "火災",
+      "key": "火災",
+      "aliases": [
+        "fires"
+      ]
+    },
+    {
+      "id": "tag:occupancy-rate",
+      "label": "稼働率",
+      "key": "稼働率",
+      "aliases": [
+        "occupancy-rate"
+      ]
+    },
+    {
+      "id": "tag:t-79ed467ae71d",
+      "label": "過疎",
+      "key": "過疎",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-5708d979cde6",
+      "label": "過疎化",
+      "key": "過疎化",
+      "aliases": []
+    },
+    {
+      "id": "tag:depopulated-areas",
+      "label": "過疎地域",
+      "key": "過疎地域",
+      "aliases": [
+        "depopulated-areas"
+      ]
+    },
+    {
+      "id": "tag:long-term-care",
+      "label": "介護",
+      "key": "介護",
+      "aliases": [
+        "long-term-care"
+      ]
+    },
+    {
+      "id": "tag:t-cd8cb9c94bb4",
+      "label": "介護職",
+      "key": "介護職",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-582a899f5773",
+      "label": "介護福祉士",
+      "key": "介護福祉士",
+      "aliases": []
+    },
+    {
+      "id": "tag:clear-days",
+      "label": "快晴日数",
+      "key": "快晴日数",
+      "aliases": [
+        "clear-days"
+      ]
+    },
+    {
+      "id": "tag:overseas-travel",
+      "label": "海外旅行",
+      "key": "海外旅行",
+      "aliases": [
+        "overseas-travel"
+      ]
+    },
+    {
+      "id": "tag:t-ebec2d567e5f",
+      "label": "海岸",
+      "key": "海岸",
+      "aliases": []
+    },
+    {
+      "id": "tag:foreign-residents",
+      "label": "外国人",
+      "key": "外国人",
+      "aliases": [
+        "foreign-residents"
+      ]
+    },
+    {
+      "id": "tag:t-dae048c0d90f",
+      "label": "外国人延べ宿泊者数",
+      "key": "外国人延べ宿泊者数",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-7d5017bf8207",
+      "label": "外国人宿泊",
+      "key": "外国人宿泊",
+      "aliases": []
+    },
+    {
+      "id": "tag:foreign-tourists-accommodation",
+      "label": "外国人宿泊者",
+      "key": "外国人宿泊者",
+      "aliases": [
+        "foreign-tourists-accommodation"
+      ]
+    },
+    {
+      "id": "tag:t-74d9b51aa659",
+      "label": "外国人宿泊者数",
+      "key": "外国人宿泊者数",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-ab0adc75bd0f",
+      "label": "外国人人口",
+      "key": "外国人人口",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-a666ef05afd2",
+      "label": "外食",
+      "key": "外食",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-594ebbc6ac1f",
+      "label": "外来受療率",
+      "key": "外来受療率",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-d15463e1b3c2",
+      "label": "柿",
+      "key": "柿",
+      "aliases": []
+    },
+    {
+      "id": "tag:budget-sim",
+      "label": "格安SIM",
+      "key": "格安SIM",
+      "aliases": [
+        "budget-sim"
+      ]
+    },
+    {
+      "id": "tag:t-40e399dbee4c",
+      "label": "格差",
+      "key": "格差",
+      "aliases": []
+    },
+    {
+      "id": "tag:nuclear-families",
+      "label": "核家族",
+      "key": "核家族",
+      "aliases": [
+        "nuclear-families"
+      ]
+    },
+    {
+      "id": "tag:t-a5c26f618a44",
+      "label": "学級規模",
+      "key": "学級規模",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-dc6e2aafeb9e",
+      "label": "学校",
+      "key": "学校",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-ab4876095107",
+      "label": "学校給食",
+      "key": "学校給食",
+      "aliases": []
+    },
+    {
+      "id": "tag:school-education",
+      "label": "学校教育",
+      "key": "学校教育",
+      "aliases": [
+        "school-education"
+      ]
+    },
+    {
+      "id": "tag:school-health-statistics",
+      "label": "学校保健統計",
+      "key": "学校保健統計",
+      "aliases": [
+        "school-health-statistics"
+      ]
+    },
+    {
+      "id": "tag:t-cd17971e155b",
+      "label": "学力",
+      "key": "学力",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-55381dedf852",
+      "label": "学力テスト",
+      "key": "学力テスト",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-d303d01afa01",
+      "label": "楽器",
+      "key": "楽器",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-a853ea19a2e1",
+      "label": "寒冷地",
+      "key": "寒冷地",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-becfe2fbd7f9",
+      "label": "干ししいたけ",
+      "key": "干ししいたけ",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-dbc4e3a9ef58",
+      "label": "干しのり",
+      "key": "干しのり",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-b162c2d097a8",
+      "label": "患者調査",
+      "key": "患者調査",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-b0e43462e64e",
+      "label": "柑きつ類",
+      "key": "柑きつ類",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-b1fc570e6bcc",
+      "label": "柑橘類",
+      "key": "柑橘類",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-c6d297713595",
+      "label": "漢字",
+      "key": "漢字",
+      "aliases": []
+    },
+    {
+      "id": "tag:environment",
+      "label": "環境",
+      "key": "環境",
+      "aliases": [
+        "environment"
+      ]
+    },
+    {
+      "id": "tag:environmental-pollution",
+      "label": "環境汚染",
+      "key": "環境汚染",
+      "aliases": [
+        "environmental-pollution"
+      ]
+    },
+    {
+      "id": "tag:t-31e728acb1ae",
+      "label": "環境構築",
+      "key": "環境構築",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-bb2fda319cd8",
+      "label": "看護師",
+      "key": "看護師",
+      "aliases": []
+    },
+    {
+      "id": "tag:tourism",
+      "label": "観光",
+      "key": "観光",
+      "aliases": [
+        "tourism"
+      ]
+    },
+    {
+      "id": "tag:tourism-disparity",
+      "label": "観光格差",
+      "key": "観光格差",
+      "aliases": [
+        "tourism-disparity"
+      ]
+    },
+    {
+      "id": "tag:tourism-industry",
+      "label": "観光業",
+      "key": "観光業",
+      "aliases": [
+        "tourism-industry"
+      ]
+    },
+    {
+      "id": "tag:t-f5fe8ea46391",
+      "label": "観光統計",
+      "key": "観光統計",
+      "aliases": []
+    },
+    {
+      "id": "tag:south-korea",
+      "label": "韓国",
+      "key": "韓国",
+      "aliases": [
+        "south-korea"
+      ]
+    },
+    {
+      "id": "tag:t-8d8741ce11ff",
+      "label": "岩手県",
+      "key": "岩手県",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-0e7e1fa1df3e",
+      "label": "岐阜県",
+      "key": "岐阜県",
+      "aliases": []
+    },
+    {
+      "id": "tag:temperature",
+      "label": "気温",
+      "key": "気温",
+      "aliases": [
+        "temperature"
+      ]
+    },
+    {
+      "id": "tag:climate",
+      "label": "気候",
+      "key": "気候",
+      "aliases": [
+        "climate"
+      ]
+    },
+    {
+      "id": "tag:t-7f01fbf235c9",
+      "label": "気象",
+      "key": "気象",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-e6c44f93e1e4",
+      "label": "義務教育",
+      "key": "義務教育",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-6ac1d42ba01a",
+      "label": "議会答弁",
+      "key": "議会答弁",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-8cc62d758af6",
+      "label": "宮崎県",
+      "key": "宮崎県",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-8bd80d503fcb",
+      "label": "宮城県",
+      "key": "宮城県",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-c2f5a0730d93",
+      "label": "給食費無償化",
+      "key": "給食費無償化",
+      "aliases": []
+    },
+    {
+      "id": "tag:gas-stations",
+      "label": "給油所",
+      "key": "給油所",
+      "aliases": [
+        "gas-stations"
+      ]
+    },
+    {
+      "id": "tag:t-01515fa89e96",
+      "label": "給与",
+      "key": "給与",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-70099ea01925",
+      "label": "牛肉",
+      "key": "牛肉",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-dbae9736c59a",
+      "label": "牛肉消費量",
+      "key": "牛肉消費量",
+      "aliases": []
+    },
+    {
+      "id": "tag:fish-catch",
+      "label": "漁獲量",
+      "key": "漁獲量",
+      "aliases": [
+        "fish-catch"
+      ]
+    },
+    {
+      "id": "tag:fishery",
+      "label": "漁業",
+      "key": "漁業",
+      "aliases": [
+        "fishery"
+      ]
+    },
+    {
+      "id": "tag:t-987cb913485b",
+      "label": "漁業産出額",
+      "key": "漁業産出額",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-90206de604cf",
+      "label": "魚介類",
+      "key": "魚介類",
+      "aliases": []
+    },
+    {
+      "id": "tag:fishery-species-catch",
+      "label": "魚種別漁獲量",
+      "key": "魚種別漁獲量",
+      "aliases": [
+        "fishery-species-catch"
+      ]
+    },
+    {
+      "id": "tag:t-d92bc91d74b0",
+      "label": "魚食文化",
+      "key": "魚食文化",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-a29f6cf0520d",
+      "label": "京都府",
+      "key": "京都府",
+      "aliases": []
+    },
+    {
+      "id": "tag:dual-income-households",
+      "label": "共働き",
+      "key": "共働き",
+      "aliases": [
+        "dual-income-households"
+      ]
+    },
+    {
+      "id": "tag:education",
+      "label": "教育",
+      "key": "教育",
+      "aliases": [
+        "education"
+      ]
+    },
+    {
+      "id": "tag:t-3fad53d47b9c",
+      "label": "教育スポーツ",
+      "key": "教育スポーツ",
+      "aliases": []
+    },
+    {
+      "id": "tag:education-inequality",
+      "label": "教育格差",
+      "key": "教育格差",
+      "aliases": [
+        "education-inequality"
+      ]
+    },
+    {
+      "id": "tag:education-expenditure",
+      "label": "教育費",
+      "key": "教育費",
+      "aliases": [
+        "education-expenditure"
+      ]
+    },
+    {
+      "id": "tag:t-02b443def2f0",
+      "label": "教員",
+      "key": "教員",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-a1fc8d38d115",
+      "label": "教員 年収",
+      "key": "教員 年収",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-5c1826738617",
+      "label": "教員1人当たり児童数",
+      "key": "教員1人当たり児童数",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-a664a2914b26",
+      "label": "教科書代",
+      "key": "教科書代",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-276d3f9b6908",
+      "label": "郷土料理",
+      "key": "郷土料理",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-26018fbca0c9",
+      "label": "業務効率化",
+      "key": "業務効率化",
+      "aliases": []
+    },
+    {
+      "id": "tag:worker-households",
+      "label": "勤労者世帯",
+      "key": "勤労者世帯",
+      "aliases": [
+        "worker-households"
+      ]
+    },
+    {
+      "id": "tag:t-9503fba9c3be",
+      "label": "金融資産",
+      "key": "金融資産",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-36f41f2ddbc1",
+      "label": "銀行預金残高",
+      "key": "銀行預金残高",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-4faa1820089c",
+      "label": "九州",
+      "key": "九州",
+      "aliases": []
+    },
+    {
+      "id": "tag:kyushu-silicon-island",
+      "label": "九州シリコンアイランド",
+      "key": "九州シリコンアイランド",
+      "aliases": [
+        "kyushu-silicon-island"
+      ]
+    },
+    {
+      "id": "tag:complaints",
+      "label": "苦情",
+      "key": "苦情",
+      "aliases": [
+        "complaints"
+      ]
+    },
+    {
+      "id": "tag:vacant-houses",
+      "label": "空き家",
+      "key": "空き家",
+      "aliases": [
+        "vacant-houses"
+      ]
+    },
+    {
+      "id": "tag:t-96b7af568d8e",
+      "label": "空き家率",
+      "key": "空き家率",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-c86a39d65183",
+      "label": "熊本県",
+      "key": "熊本県",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-3a857ae9e828",
+      "label": "群馬県",
+      "key": "群馬県",
+      "aliases": []
+    },
+    {
+      "id": "tag:criminal-offenses",
+      "label": "刑法犯",
+      "key": "刑法犯",
+      "aliases": [
+        "criminal-offenses"
+      ]
+    },
+    {
+      "id": "tag:mobile-phones",
+      "label": "携帯電話",
+      "key": "携帯電話",
+      "aliases": [
+        "mobile-phones"
+      ]
+    },
+    {
+      "id": "tag:economy",
+      "label": "経済",
+      "key": "経済",
+      "aliases": [
+        "economy"
+      ]
+    },
+    {
+      "id": "tag:t-82bced158d11",
+      "label": "経済センサス",
+      "key": "経済センサス",
+      "aliases": []
+    },
+    {
+      "id": "tag:current-account-ratio",
+      "label": "経常収支比率",
+      "key": "経常収支比率",
+      "aliases": [
+        "current-account-ratio"
+      ]
+    },
+    {
+      "id": "tag:t-c05d2f22fa45",
+      "label": "警察官数",
+      "key": "警察官数",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-3f24638a4b58",
+      "label": "警察費",
+      "key": "警察費",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-3ff8f7df8c4c",
+      "label": "軽自動車",
+      "key": "軽自動車",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-75e3347309d5",
+      "label": "鶏肉",
+      "key": "鶏肉",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-69a2d84ae7bb",
+      "label": "結婚",
+      "key": "結婚",
+      "aliases": []
+    },
+    {
+      "id": "tag:marriage",
+      "label": "結婚・婚姻",
+      "key": "結婚・婚姻",
+      "aliases": [
+        "marriage"
+      ]
+    },
+    {
+      "id": "tag:monthly-income",
+      "label": "月収",
+      "key": "月収",
+      "aliases": [
+        "monthly-income"
+      ]
+    },
+    {
+      "id": "tag:health",
+      "label": "健康",
+      "key": "健康",
+      "aliases": [
+        "health"
+      ]
+    },
+    {
+      "id": "tag:t-15585721911e",
+      "label": "健康寿命",
+      "key": "健康寿命",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-e200e46ce1e5",
+      "label": "建設業",
+      "key": "建設業",
+      "aliases": []
+    },
+    {
+      "id": "tag:arrest-rate",
+      "label": "検挙率",
+      "key": "検挙率",
+      "aliases": [
+        "arrest-rate"
+      ]
+    },
+    {
+      "id": "tag:t-3a1feadddec5",
+      "label": "犬の登録頭数",
+      "key": "犬の登録頭数",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-b0cd240f0903",
+      "label": "県内総生産",
+      "key": "県内総生産",
+      "aliases": []
+    },
+    {
+      "id": "tag:prefectural-income",
+      "label": "県民所得",
+      "key": "県民所得",
+      "aliases": [
+        "prefectural-income"
+      ]
+    },
+    {
+      "id": "tag:prefectural-character",
+      "label": "県民性",
+      "key": "県民性",
+      "aliases": [
+        "prefectural-character"
+      ]
+    },
+    {
+      "id": "tag:t-599503bc7879",
+      "label": "戸建て",
+      "key": "戸建て",
+      "aliases": []
+    },
+    {
+      "id": "tag:employment",
+      "label": "雇用",
+      "key": "雇用",
+      "aliases": [
+        "employment"
+      ]
+    },
+    {
+      "id": "tag:t-f5e3bc62fa7c",
+      "label": "娯楽費",
+      "key": "娯楽費",
+      "aliases": []
+    },
+    {
+      "id": "tag:transportation",
+      "label": "交通",
+      "key": "交通",
+      "aliases": [
+        "transportation"
+      ]
+    },
+    {
+      "id": "tag:traffic-safety",
+      "label": "交通安全",
+      "key": "交通安全",
+      "aliases": [
+        "traffic-safety"
+      ]
+    },
+    {
+      "id": "tag:traffic-safety-whitepaper",
+      "label": "交通安全白書",
+      "key": "交通安全白書",
+      "aliases": [
+        "traffic-safety-whitepaper"
+      ]
+    },
+    {
+      "id": "tag:traffic-accidents",
+      "label": "交通事故",
+      "key": "交通事故",
+      "aliases": [
+        "traffic-accidents"
+      ]
+    },
+    {
+      "id": "tag:transportation-costs",
+      "label": "交通費",
+      "key": "交通費",
+      "aliases": [
+        "transportation-costs"
+      ]
+    },
+    {
+      "id": "tag:traffic-volume",
+      "label": "交通量",
+      "key": "交通量",
+      "aliases": [
+        "traffic-volume"
+      ]
+    },
+    {
+      "id": "tag:t-cc0c0182b59f",
+      "label": "光熱費",
+      "key": "光熱費",
+      "aliases": []
+    },
+    {
+      "id": "tag:parks",
+      "label": "公園",
+      "key": "公園",
+      "aliases": [
+        "parks"
+      ]
+    },
+    {
+      "id": "tag:park-area",
+      "label": "公園面積",
+      "key": "公園面積",
+      "aliases": [
+        "park-area"
+      ]
+    },
+    {
+      "id": "tag:pollution",
+      "label": "公害",
+      "key": "公害",
+      "aliases": [
+        "pollution"
+      ]
+    },
+    {
+      "id": "tag:public-services",
+      "label": "公共サービス",
+      "key": "公共サービス",
+      "aliases": [
+        "public-services"
+      ]
+    },
+    {
+      "id": "tag:t-1ab216cc0d26",
+      "label": "公共交通",
+      "key": "公共交通",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-435f9d280962",
+      "label": "公衆電話",
+      "key": "公衆電話",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-0b26e7475aee",
+      "label": "公務員",
+      "key": "公務員",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-474cebca6f1e",
+      "label": "厚労省",
+      "key": "厚労省",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-7055152b9ab6",
+      "label": "工業",
+      "key": "工業",
+      "aliases": []
+    },
+    {
+      "id": "tag:industrial-statistics",
+      "label": "工業統計",
+      "key": "工業統計",
+      "aliases": [
+        "industrial-statistics"
+      ]
+    },
+    {
+      "id": "tag:industrial-water",
+      "label": "工業用水",
+      "key": "工業用水",
+      "aliases": [
+        "industrial-water"
+      ]
+    },
+    {
+      "id": "tag:t-77df3439c224",
+      "label": "広島県",
+      "key": "広島県",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-65b61b8b720d",
+      "label": "洪水",
+      "key": "洪水",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-dbc55ac10a59",
+      "label": "紅茶",
+      "key": "紅茶",
+      "aliases": []
+    },
+    {
+      "id": "tag:abandoned-farmland",
+      "label": "耕作放棄地",
+      "key": "耕作放棄地",
+      "aliases": [
+        "abandoned-farmland"
+      ]
+    },
+    {
+      "id": "tag:t-e79890c96ee6",
+      "label": "行政",
+      "key": "行政",
+      "aliases": []
+    },
+    {
+      "id": "tag:activity-participation-rate",
+      "label": "行動者率",
+      "key": "行動者率",
+      "aliases": [
+        "activity-participation-rate"
+      ]
+    },
+    {
+      "id": "tag:precipitation",
+      "label": "降水量",
+      "key": "降水量",
+      "aliases": [
+        "precipitation"
+      ]
+    },
+    {
+      "id": "tag:snowfall",
+      "label": "降雪量",
+      "key": "降雪量",
+      "aliases": [
+        "snowfall"
+      ]
+    },
+    {
+      "id": "tag:t-db3bff9f3e29",
+      "label": "香川県",
+      "key": "香川県",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-96f0220fb00d",
+      "label": "高温",
+      "key": "高温",
+      "aliases": []
+    },
+    {
+      "id": "tag:high-schools",
+      "label": "高校",
+      "key": "高校",
+      "aliases": [
+        "high-schools"
+      ]
+    },
+    {
+      "id": "tag:t-17ece02134ec",
+      "label": "高校生",
+      "key": "高校生",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-638fb535e39e",
+      "label": "高所得",
+      "key": "高所得",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-1897f038b044",
+      "label": "高速道路",
+      "key": "高速道路",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-84f14c6ba622",
+      "label": "高卒",
+      "key": "高卒",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-3c437a9c2dcf",
+      "label": "高知",
+      "key": "高知",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-12020b73782c",
+      "label": "高知県",
+      "key": "高知県",
+      "aliases": []
+    },
+    {
+      "id": "tag:aging-population",
+      "label": "高齢化",
+      "key": "高齢化",
+      "aliases": [
+        "aging-population"
+      ]
+    },
+    {
+      "id": "tag:t-843b6ddae791",
+      "label": "高齢化率",
+      "key": "高齢化率",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-5e631b14cc84",
+      "label": "高齢者",
+      "key": "高齢者",
+      "aliases": []
+    },
+    {
+      "id": "tag:total-fertility-rate",
+      "label": "合計特殊出生率",
+      "key": "合計特殊出生率",
+      "aliases": [
+        "total-fertility-rate"
+      ]
+    },
+    {
+      "id": "tag:global-awareness",
+      "label": "国際意識",
+      "key": "国際意識",
+      "aliases": [
+        "global-awareness"
+      ]
+    },
+    {
+      "id": "tag:internationalization",
+      "label": "国際化",
+      "key": "国際化",
+      "aliases": [
+        "internationalization"
+      ]
+    },
+    {
+      "id": "tag:international-cooperation",
+      "label": "国際協力",
+      "key": "国際協力",
+      "aliases": [
+        "international-cooperation"
+      ]
+    },
+    {
+      "id": "tag:t-db192b8bb5b2",
+      "label": "国勢調査",
+      "key": "国勢調査",
+      "aliases": []
+    },
+    {
+      "id": "tag:by-nationality",
+      "label": "国籍別",
+      "key": "国籍別",
+      "aliases": [
+        "by-nationality"
+      ]
+    },
+    {
+      "id": "tag:national-territory",
+      "label": "国土",
+      "key": "国土",
+      "aliases": [
+        "national-territory"
+      ]
+    },
+    {
+      "id": "tag:national-resilience",
+      "label": "国土強靱化",
+      "key": "国土強靱化",
+      "aliases": [
+        "national-resilience"
+      ]
+    },
+    {
+      "id": "tag:t-9283cafc4ef6",
+      "label": "国土交通省",
+      "key": "国土交通省",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-24de840f5c5b",
+      "label": "国土数値情報",
+      "key": "国土数値情報",
+      "aliases": []
+    },
+    {
+      "id": "tag:domestic-travel",
+      "label": "国内旅行",
+      "key": "国内旅行",
+      "aliases": [
+        "domestic-travel"
+      ]
+    },
+    {
+      "id": "tag:t-2bb749a8f059",
+      "label": "国民健康保険",
+      "key": "国民健康保険",
+      "aliases": []
+    },
+    {
+      "id": "tag:national-parks",
+      "label": "国立公園",
+      "key": "国立公園",
+      "aliases": [
+        "national-parks"
+      ]
+    },
+    {
+      "id": "tag:t-7ed77cb84962",
+      "label": "黒潮",
+      "key": "黒潮",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-a02a9b0b6f94",
+      "label": "婚姻",
+      "key": "婚姻",
+      "aliases": []
+    },
+    {
+      "id": "tag:marriage-rate",
+      "label": "婚姻率",
+      "key": "婚姻率",
+      "aliases": [
+        "marriage-rate"
+      ]
+    },
+    {
+      "id": "tag:t-875a9325537d",
+      "label": "昆布",
+      "key": "昆布",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-a4c0f299612c",
+      "label": "佐賀県",
+      "key": "佐賀県",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-fb3cc4c83d7a",
+      "label": "砂糖",
+      "key": "砂糖",
+      "aliases": []
+    },
+    {
+      "id": "tag:renewable-energy",
+      "label": "再生可能エネルギー",
+      "key": "再生可能エネルギー",
+      "aliases": [
+        "renewable-energy"
+      ]
+    },
+    {
+      "id": "tag:waste-disposal-sites",
+      "label": "最終処分場",
+      "key": "最終処分場",
+      "aliases": [
+        "waste-disposal-sites"
+      ]
+    },
+    {
+      "id": "tag:minimum-wage",
+      "label": "最低賃金",
+      "key": "最低賃金",
+      "aliases": [
+        "minimum-wage"
+      ]
+    },
+    {
+      "id": "tag:government-expenditure",
+      "label": "歳出",
+      "key": "歳出",
+      "aliases": [
+        "government-expenditure"
+      ]
+    },
+    {
+      "id": "tag:revenue-composition",
+      "label": "歳入構成",
+      "key": "歳入構成",
+      "aliases": [
+        "revenue-composition"
+      ]
+    },
+    {
+      "id": "tag:t-c4d20d453235",
+      "label": "災害",
+      "key": "災害",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-13d5b5de6762",
+      "label": "災害対応",
+      "key": "災害対応",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-68022816e868",
+      "label": "災害被害額",
+      "key": "災害被害額",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-41e9c0243283",
+      "label": "在留外国人",
+      "key": "在留外国人",
+      "aliases": []
+    },
+    {
+      "id": "tag:public-finance",
+      "label": "財政",
+      "key": "財政",
+      "aliases": [
+        "public-finance"
+      ]
+    },
+    {
+      "id": "tag:fiscal-disparity",
+      "label": "財政格差",
+      "key": "財政格差",
+      "aliases": [
+        "fiscal-disparity"
+      ]
+    },
+    {
+      "id": "tag:t-21a5efa56c4c",
+      "label": "財政健全化",
+      "key": "財政健全化",
+      "aliases": []
+    },
+    {
+      "id": "tag:fiscal-soundness",
+      "label": "財政健全性",
+      "key": "財政健全性",
+      "aliases": [
+        "fiscal-soundness"
+      ]
+    },
+    {
+      "id": "tag:t-2472b61a93a3",
+      "label": "財政指標",
+      "key": "財政指標",
+      "aliases": []
+    },
+    {
+      "id": "tag:fiscal-capacity-index",
+      "label": "財政力指数",
+      "key": "財政力指数",
+      "aliases": [
+        "fiscal-capacity-index"
+      ]
+    },
+    {
+      "id": "tag:t-22fb21eed333",
+      "label": "埼玉県",
+      "key": "埼玉県",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-0ac94159cb69",
+      "label": "作物統計",
+      "key": "作物統計",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-68bfbec626fa",
+      "label": "鮭",
+      "key": "鮭",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-f6a1cb9bd085",
+      "label": "三重県",
+      "key": "三重県",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-c92a34278fc7",
+      "label": "山形県",
+      "key": "山形県",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-5c0f881f2bac",
+      "label": "山口県",
+      "key": "山口県",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-b7e27f0083ae",
+      "label": "山梨県",
+      "key": "山梨県",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-5af68ce20b45",
+      "label": "散布図",
+      "key": "散布図",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-55187fbde609",
+      "label": "産業",
+      "key": "産業",
+      "aliases": []
+    },
+    {
+      "id": "tag:industrial-structure",
+      "label": "産業構造",
+      "key": "産業構造",
+      "aliases": [
+        "industrial-structure"
+      ]
+    },
+    {
+      "id": "tag:industrial-structural-change",
+      "label": "産業構造変化",
+      "key": "産業構造変化",
+      "aliases": [
+        "industrial-structural-change"
+      ]
+    },
+    {
+      "id": "tag:t-866822ad8011",
+      "label": "残業",
+      "key": "残業",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-c5df6550e8af",
+      "label": "子育て",
+      "key": "子育て",
+      "aliases": []
+    },
+    {
+      "id": "tag:childcare",
+      "label": "子育て・保育",
+      "key": "子育て・保育",
+      "aliases": [
+        "childcare"
+      ]
+    },
+    {
+      "id": "tag:t-6fb0aaad480a",
+      "label": "子供",
+      "key": "子供",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-0f04bb93e80e",
+      "label": "市区町村",
+      "key": "市区町村",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-d18872bbba7c",
+      "label": "市町村",
+      "key": "市町村",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-82d3130fa582",
+      "label": "死亡",
+      "key": "死亡",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-7a5137c03bd5",
+      "label": "歯科医師",
+      "key": "歯科医師",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-d84d72f7c459",
+      "label": "歯科衛生士",
+      "key": "歯科衛生士",
+      "aliases": []
+    },
+    {
+      "id": "tag:business-establishments",
+      "label": "事業所",
+      "key": "事業所",
+      "aliases": [
+        "business-establishments"
+      ]
+    },
+    {
+      "id": "tag:t-9b813c7f7bdc",
+      "label": "事業所数",
+      "key": "事業所数",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-eeb8b6788be1",
+      "label": "児童数",
+      "key": "児童数",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-2b2d004c0977",
+      "label": "持ち家",
+      "key": "持ち家",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-8400f2b54f61",
+      "label": "持ち家率",
+      "key": "持ち家率",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-952048c45beb",
+      "label": "持家率",
+      "key": "持家率",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-a502857b256a",
+      "label": "時給",
+      "key": "時給",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-a34b3a8afb7a",
+      "label": "滋賀県",
+      "key": "滋賀県",
+      "aliases": []
+    },
+    {
+      "id": "tag:public-safety",
+      "label": "治安",
+      "key": "治安",
+      "aliases": [
+        "public-safety"
+      ]
+    },
+    {
+      "id": "tag:suicide-rate",
+      "label": "自殺率",
+      "key": "自殺率",
+      "aliases": [
+        "suicide-rate"
+      ]
+    },
+    {
+      "id": "tag:t-e07409150129",
+      "label": "自治体",
+      "key": "自治体",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-2f2eca3b6b00",
+      "label": "自主財源",
+      "key": "自主財源",
+      "aliases": []
+    },
+    {
+      "id": "tag:natural-parks",
+      "label": "自然公園",
+      "key": "自然公園",
+      "aliases": [
+        "natural-parks"
+      ]
+    },
+    {
+      "id": "tag:automation",
+      "label": "自動化",
+      "key": "自動化",
+      "aliases": [
+        "automation"
+      ]
+    },
+    {
+      "id": "tag:automobiles",
+      "label": "自動車",
+      "key": "自動車",
+      "aliases": [
+        "automobiles"
+      ]
+    },
+    {
+      "id": "tag:t-01173faf6766",
+      "label": "自動車産業",
+      "key": "自動車産業",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-8847a3f58c13",
+      "label": "自動車保有",
+      "key": "自動車保有",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-944c6f691d15",
+      "label": "自動車保有台数",
+      "key": "自動車保有台数",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-26241ee09dad",
+      "label": "鹿児島県",
+      "key": "鹿児島県",
+      "aliases": []
+    },
+    {
+      "id": "tag:unemployment-rate",
+      "label": "失業率",
+      "key": "失業率",
+      "aliases": [
+        "unemployment-rate"
+      ]
+    },
+    {
+      "id": "tag:t-434013d03b9a",
+      "label": "実質年収",
+      "key": "実質年収",
+      "aliases": []
+    },
+    {
+      "id": "tag:real-income",
+      "label": "実収入",
+      "key": "実収入",
+      "aliases": [
+        "real-income"
+      ]
+    },
+    {
+      "id": "tag:social-education",
+      "label": "社会教育",
+      "key": "社会教育",
+      "aliases": [
+        "social-education"
+      ]
+    },
+    {
+      "id": "tag:t-0d9bb64036cb",
+      "label": "社会人口統計体系",
+      "key": "社会人口統計体系",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-a2fab37f1e20",
+      "label": "社会生活基本調査",
+      "key": "社会生活基本調査",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-80a7eea0e892",
+      "label": "社会統計",
+      "key": "社会統計",
+      "aliases": []
+    },
+    {
+      "id": "tag:social-security",
+      "label": "社会保障",
+      "key": "社会保障",
+      "aliases": [
+        "social-security"
+      ]
+    },
+    {
+      "id": "tag:car-dependent-society",
+      "label": "車社会",
+      "key": "車社会",
+      "aliases": [
+        "car-dependent-society"
+      ]
+    },
+    {
+      "id": "tag:debt",
+      "label": "借金",
+      "key": "借金",
+      "aliases": [
+        "debt"
+      ]
+    },
+    {
+      "id": "tag:youth-outmigration",
+      "label": "若者流出",
+      "key": "若者流出",
+      "aliases": [
+        "youth-outmigration"
+      ]
+    },
+    {
+      "id": "tag:t-246606612df7",
+      "label": "若年雇用",
+      "key": "若年雇用",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-a6a04f3fae67",
+      "label": "手取り",
+      "key": "手取り",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-a94cc75c0b1c",
+      "label": "酒税",
+      "key": "酒税",
+      "aliases": []
+    },
+    {
+      "id": "tag:liquor-tax-reform",
+      "label": "酒税改正",
+      "key": "酒税改正",
+      "aliases": [
+        "liquor-tax-reform"
+      ]
+    },
+    {
+      "id": "tag:alcohol-consumption",
+      "label": "酒類消費",
+      "key": "酒類消費",
+      "aliases": [
+        "alcohol-consumption"
+      ]
+    },
+    {
+      "id": "tag:t-3050c10e6d16",
+      "label": "授業料",
+      "key": "授業料",
+      "aliases": []
+    },
+    {
+      "id": "tag:capacity-index",
+      "label": "収容力指数",
+      "key": "収容力指数",
+      "aliases": [
+        "capacity-index"
+      ]
+    },
+    {
+      "id": "tag:t-7da5d35d983c",
+      "label": "就業率",
+      "key": "就業率",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-1c51802697cf",
+      "label": "就職率",
+      "key": "就職率",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-c6879adf3712",
+      "label": "秋田県",
+      "key": "秋田県",
+      "aliases": []
+    },
+    {
+      "id": "tag:livability",
+      "label": "住みやすさ",
+      "key": "住みやすさ",
+      "aliases": [
+        "livability"
+      ]
+    },
+    {
+      "id": "tag:housing",
+      "label": "住宅",
+      "key": "住宅",
+      "aliases": [
+        "housing"
+      ]
+    },
+    {
+      "id": "tag:t-8288bae21e7c",
+      "label": "住宅・土地統計調査",
+      "key": "住宅・土地統計調査",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-ee8c1e9792a5",
+      "label": "住宅地価",
+      "key": "住宅地価",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-a35372ca5d54",
+      "label": "住宅着工",
+      "key": "住宅着工",
+      "aliases": []
+    },
+    {
+      "id": "tag:accommodation",
+      "label": "宿泊",
+      "key": "宿泊",
+      "aliases": [
+        "accommodation"
+      ]
+    },
+    {
+      "id": "tag:accommodation-facilities",
+      "label": "宿泊施設",
+      "key": "宿泊施設",
+      "aliases": [
+        "accommodation-facilities"
+      ]
+    },
+    {
+      "id": "tag:t-fa329f2296ab",
+      "label": "宿泊旅行統計調査",
+      "key": "宿泊旅行統計調査",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-5f7b5353da88",
+      "label": "塾代",
+      "key": "塾代",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-7e3781ea90e9",
+      "label": "出生",
+      "key": "出生",
+      "aliases": []
+    },
+    {
+      "id": "tag:birth-rate",
+      "label": "出生率",
+      "key": "出生率",
+      "aliases": [
+        "birth-rate"
+      ]
+    },
+    {
+      "id": "tag:t-029445e29c2a",
+      "label": "順位の変動",
+      "key": "順位の変動",
+      "aliases": []
+    },
+    {
+      "id": "tag:age-at-first-marriage",
+      "label": "初婚年齢",
+      "key": "初婚年齢",
+      "aliases": [
+        "age-at-first-marriage"
+      ]
+    },
+    {
+      "id": "tag:t-74dbb1335887",
+      "label": "初任給",
+      "key": "初任給",
+      "aliases": []
+    },
+    {
+      "id": "tag:income",
+      "label": "所得",
+      "key": "所得",
+      "aliases": [
+        "income"
+      ]
+    },
+    {
+      "id": "tag:income-inequality",
+      "label": "所得格差",
+      "key": "所得格差",
+      "aliases": [
+        "income-inequality"
+      ]
+    },
+    {
+      "id": "tag:t-6a7ffd13b8ff",
+      "label": "女性",
+      "key": "女性",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-7c4fd1df12ce",
+      "label": "女性学級",
+      "key": "女性学級",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-534f7beae4b3",
+      "label": "女性健康",
+      "key": "女性健康",
+      "aliases": []
+    },
+    {
+      "id": "tag:commerce",
+      "label": "商業",
+      "key": "商業",
+      "aliases": [
+        "commerce"
+      ]
+    },
+    {
+      "id": "tag:commercial-land",
+      "label": "商業地",
+      "key": "商業地",
+      "aliases": [
+        "commercial-land"
+      ]
+    },
+    {
+      "id": "tag:t-adfa6558010f",
+      "label": "商業統計",
+      "key": "商業統計",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-9edf63c521e1",
+      "label": "商業販売額",
+      "key": "商業販売額",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-74849088d8b9",
+      "label": "将来人口",
+      "key": "将来人口",
+      "aliases": []
+    },
+    {
+      "id": "tag:population-projections",
+      "label": "将来推計人口",
+      "key": "将来推計人口",
+      "aliases": [
+        "population-projections"
+      ]
+    },
+    {
+      "id": "tag:future-burden-ratio",
+      "label": "将来負担比率",
+      "key": "将来負担比率",
+      "aliases": [
+        "future-burden-ratio"
+      ]
+    },
+    {
+      "id": "tag:elementary-schools",
+      "label": "小学校",
+      "key": "小学校",
+      "aliases": [
+        "elementary-schools"
+      ]
+    },
+    {
+      "id": "tag:t-ff88e53b6354",
+      "label": "小学生",
+      "key": "小学生",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-5655c82e0182",
+      "label": "小中学校",
+      "key": "小中学校",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-c4cf9fa742c8",
+      "label": "小中学校教員",
+      "key": "小中学校教員",
+      "aliases": []
+    },
+    {
+      "id": "tag:retail",
+      "label": "小売",
+      "key": "小売",
+      "aliases": [
+        "retail"
+      ]
+    },
+    {
+      "id": "tag:t-129d7c04c002",
+      "label": "小売業",
+      "key": "小売業",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-4ba92dfc20d6",
+      "label": "小麦粉",
+      "key": "小麦粉",
+      "aliases": []
+    },
+    {
+      "id": "tag:declining-birthrate",
+      "label": "少子化",
+      "key": "少子化",
+      "aliases": [
+        "declining-birthrate"
+      ]
+    },
+    {
+      "id": "tag:t-315647d0e4b4",
+      "label": "少人数教育",
+      "key": "少人数教育",
+      "aliases": []
+    },
+    {
+      "id": "tag:consumption",
+      "label": "消費",
+      "key": "消費",
+      "aliases": [
+        "consumption"
+      ]
+    },
+    {
+      "id": "tag:t-6a709e7a0043",
+      "label": "消費行動",
+      "key": "消費行動",
+      "aliases": []
+    },
+    {
+      "id": "tag:consumption-expenditure",
+      "label": "消費支出",
+      "key": "消費支出",
+      "aliases": [
+        "consumption-expenditure"
+      ]
+    },
+    {
+      "id": "tag:t-58861926b5fd",
+      "label": "消費者物価",
+      "key": "消費者物価",
+      "aliases": []
+    },
+    {
+      "id": "tag:consumer-price-index",
+      "label": "消費者物価指数",
+      "key": "消費者物価指数",
+      "aliases": [
+        "consumer-price-index"
+      ]
+    },
+    {
+      "id": "tag:t-5f22fa112083",
+      "label": "消費量",
+      "key": "消費量",
+      "aliases": []
+    },
+    {
+      "id": "tag:fire-services",
+      "label": "消防",
+      "key": "消防",
+      "aliases": [
+        "fire-services"
+      ]
+    },
+    {
+      "id": "tag:fire-stations",
+      "label": "消防署",
+      "key": "消防署",
+      "aliases": [
+        "fire-stations"
+      ]
+    },
+    {
+      "id": "tag:volunteer-fire-brigades",
+      "label": "消防団",
+      "key": "消防団",
+      "aliases": [
+        "volunteer-fire-brigades"
+      ]
+    },
+    {
+      "id": "tag:t-1278c351fdd5",
+      "label": "消防庁",
+      "key": "消防庁",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-fba38aab24b2",
+      "label": "焼き芋",
+      "key": "焼き芋",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-f098c8eabb61",
+      "label": "焼酎",
+      "key": "焼酎",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-5cec34a35eac",
+      "label": "焼肉",
+      "key": "焼肉",
+      "aliases": []
+    },
+    {
+      "id": "tag:energy-saving",
+      "label": "省エネ",
+      "key": "省エネ",
+      "aliases": [
+        "energy-saving"
+      ]
+    },
+    {
+      "id": "tag:t-0a3ae9a49474",
+      "label": "上下水道料",
+      "key": "上下水道料",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-2f2e80a155cc",
+      "label": "上昇率",
+      "key": "上昇率",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-07405e5279a1",
+      "label": "上水道",
+      "key": "上水道",
+      "aliases": []
+    },
+    {
+      "id": "tag:information-literacy",
+      "label": "情報リテラシー",
+      "key": "情報リテラシー",
+      "aliases": [
+        "information-literacy"
+      ]
+    },
+    {
+      "id": "tag:media-exposure",
+      "label": "情報接触",
+      "key": "情報接触",
+      "aliases": [
+        "media-exposure"
+      ]
+    },
+    {
+      "id": "tag:t-4c9dad46dd56",
+      "label": "情報通信",
+      "key": "情報通信",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-32b543cda5a8",
+      "label": "情報通信費",
+      "key": "情報通信費",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-cc5eaa6f22fe",
+      "label": "職業",
+      "key": "職業",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-b0e1a63b7292",
+      "label": "職種",
+      "key": "職種",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-63632877e7ac",
+      "label": "職種別",
+      "key": "職種別",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-12c863712abd",
+      "label": "食パン",
+      "key": "食パン",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-4236b1c3bc1a",
+      "label": "食習慣",
+      "key": "食習慣",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-fba278ab9ab4",
+      "label": "食生活",
+      "key": "食生活",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-7b96c26b45e8",
+      "label": "食費",
+      "key": "食費",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-e142f2bc0d0b",
+      "label": "食品インフレ",
+      "key": "食品インフレ",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-8c39f0203b51",
+      "label": "食品消費",
+      "key": "食品消費",
+      "aliases": []
+    },
+    {
+      "id": "tag:food-culture",
+      "label": "食文化",
+      "key": "食文化",
+      "aliases": [
+        "food-culture"
+      ]
+    },
+    {
+      "id": "tag:food-security",
+      "label": "食料安全保障",
+      "key": "食料安全保障",
+      "aliases": [
+        "food-security"
+      ]
+    },
+    {
+      "id": "tag:t-50010f05b4d4",
+      "label": "食料価格",
+      "key": "食料価格",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-fdd55512927c",
+      "label": "食料格差",
+      "key": "食料格差",
+      "aliases": []
+    },
+    {
+      "id": "tag:food-self-sufficiency",
+      "label": "食料自給率",
+      "key": "食料自給率",
+      "aliases": [
+        "food-self-sufficiency"
+      ]
+    },
+    {
+      "id": "tag:food-expenditure",
+      "label": "食料費",
+      "key": "食料費",
+      "aliases": [
+        "food-expenditure"
+      ]
+    },
+    {
+      "id": "tag:food-products",
+      "label": "食料品",
+      "key": "食料品",
+      "aliases": [
+        "food-products"
+      ]
+    },
+    {
+      "id": "tag:t-8db4140d9aeb",
+      "label": "食料品価格",
+      "key": "食料品価格",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-94f2cafb8501",
+      "label": "食料品支出",
+      "key": "食料品支出",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-7ab4225df7fc",
+      "label": "新潟県",
+      "key": "新潟県",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-5d7fbecb88e5",
+      "label": "新田開発",
+      "key": "新田開発",
+      "aliases": []
+    },
+    {
+      "id": "tag:forests",
+      "label": "森林",
+      "key": "森林",
+      "aliases": [
+        "forests"
+      ]
+    },
+    {
+      "id": "tag:t-6796ef55db49",
+      "label": "森林面積",
+      "key": "森林面積",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-31e680fbad50",
+      "label": "浸水想定区域",
+      "key": "浸水想定区域",
+      "aliases": []
+    },
+    {
+      "id": "tag:mid-winter-days",
+      "label": "真冬日",
+      "key": "真冬日",
+      "aliases": [
+        "mid-winter-days"
+      ]
+    },
+    {
+      "id": "tag:t-70334ac3d1eb",
+      "label": "神奈川",
+      "key": "神奈川",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-4bc3d1523aa5",
+      "label": "神奈川県",
+      "key": "神奈川県",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-c31bc357f529",
+      "label": "親潮",
+      "key": "親潮",
+      "aliases": []
+    },
+    {
+      "id": "tag:height",
+      "label": "身長",
+      "key": "身長",
+      "aliases": [
+        "height"
+      ]
+    },
+    {
+      "id": "tag:advancement-rate",
+      "label": "進学率",
+      "key": "進学率",
+      "aliases": [
+        "advancement-rate"
+      ]
+    },
+    {
+      "id": "tag:population",
+      "label": "人口",
+      "key": "人口",
+      "aliases": [
+        "population"
+      ]
+    },
+    {
+      "id": "tag:t-9bdb41d2ecb1",
+      "label": "人口あたり",
+      "key": "人口あたり",
+      "aliases": []
+    },
+    {
+      "id": "tag:population-migration",
+      "label": "人口移動",
+      "key": "人口移動",
+      "aliases": [
+        "population-migration"
+      ]
+    },
+    {
+      "id": "tag:population-decline",
+      "label": "人口減少",
+      "key": "人口減少",
+      "aliases": [
+        "population-decline"
+      ]
+    },
+    {
+      "id": "tag:t-f137c455da5b",
+      "label": "人口構成",
+      "key": "人口構成",
+      "aliases": []
+    },
+    {
+      "id": "tag:population-structure",
+      "label": "人口構造",
+      "key": "人口構造",
+      "aliases": [
+        "population-structure"
+      ]
+    },
+    {
+      "id": "tag:densely-inhabited-districts",
+      "label": "人口集中地区",
+      "key": "人口集中地区",
+      "aliases": [
+        "densely-inhabited-districts"
+      ]
+    },
+    {
+      "id": "tag:t-2353ecbe8ecb",
+      "label": "人口性比",
+      "key": "人口性比",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-f3a85adbff54",
+      "label": "人口増減率",
+      "key": "人口増減率",
+      "aliases": []
+    },
+    {
+      "id": "tag:per-capita",
+      "label": "人口当たり",
+      "key": "人口当たり",
+      "aliases": [
+        "per-capita"
+      ]
+    },
+    {
+      "id": "tag:population-dynamics",
+      "label": "人口動態",
+      "key": "人口動態",
+      "aliases": [
+        "population-dynamics"
+      ]
+    },
+    {
+      "id": "tag:t-decf01aa9d63",
+      "label": "人口比",
+      "key": "人口比",
+      "aliases": []
+    },
+    {
+      "id": "tag:population-ratio",
+      "label": "人口比率",
+      "key": "人口比率",
+      "aliases": [
+        "population-ratio"
+      ]
+    },
+    {
+      "id": "tag:population-density",
+      "label": "人口密度",
+      "key": "人口密度",
+      "aliases": [
+        "population-density"
+      ]
+    },
+    {
+      "id": "tag:population-outflow",
+      "label": "人口流出",
+      "key": "人口流出",
+      "aliases": [
+        "population-outflow"
+      ]
+    },
+    {
+      "id": "tag:labor-shortage",
+      "label": "人手不足",
+      "key": "人手不足",
+      "aliases": [
+        "labor-shortage"
+      ]
+    },
+    {
+      "id": "tag:libraries",
+      "label": "図書館",
+      "key": "図書館",
+      "aliases": [
+        "libraries"
+      ]
+    },
+    {
+      "id": "tag:t-e765728b80f1",
+      "label": "水稲収穫量",
+      "key": "水稲収穫量",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-4cadc5a5458b",
+      "label": "水産",
+      "key": "水産",
+      "aliases": []
+    },
+    {
+      "id": "tag:fisheries-industry",
+      "label": "水産業",
+      "key": "水産業",
+      "aliases": [
+        "fisheries-industry"
+      ]
+    },
+    {
+      "id": "tag:t-27fe2319715d",
+      "label": "水産物",
+      "key": "水産物",
+      "aliases": []
+    },
+    {
+      "id": "tag:water-resources",
+      "label": "水資源",
+      "key": "水資源",
+      "aliases": [
+        "water-resources"
+      ]
+    },
+    {
+      "id": "tag:water-pollution",
+      "label": "水質汚濁",
+      "key": "水質汚濁",
+      "aliases": [
+        "water-pollution"
+      ]
+    },
+    {
+      "id": "tag:water-supply",
+      "label": "水道",
+      "key": "水道",
+      "aliases": [
+        "water-supply"
+      ]
+    },
+    {
+      "id": "tag:t-fd7a32c4ad60",
+      "label": "水道料金",
+      "key": "水道料金",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-c68027a62ade",
+      "label": "世帯",
+      "key": "世帯",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-eb9d2d103611",
+      "label": "世帯の小規模化",
+      "key": "世帯の小規模化",
+      "aliases": []
+    },
+    {
+      "id": "tag:household-structure",
+      "label": "世帯構造",
+      "key": "世帯構造",
+      "aliases": [
+        "household-structure"
+      ]
+    },
+    {
+      "id": "tag:household-head-income",
+      "label": "世帯主収入",
+      "key": "世帯主収入",
+      "aliases": [
+        "household-head-income"
+      ]
+    },
+    {
+      "id": "tag:household-income",
+      "label": "世帯収入",
+      "key": "世帯収入",
+      "aliases": [
+        "household-income"
+      ]
+    },
+    {
+      "id": "tag:t-f356795001ab",
+      "label": "世帯数",
+      "key": "世帯数",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-88f737219f1f",
+      "label": "政治参加",
+      "key": "政治参加",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-807f722cdf9a",
+      "label": "政府統計",
+      "key": "政府統計",
+      "aliases": []
+    },
+    {
+      "id": "tag:sunny-days",
+      "label": "晴れ",
+      "key": "晴れ",
+      "aliases": [
+        "sunny-days"
+      ]
+    },
+    {
+      "id": "tag:t-32a29a59a9f3",
+      "label": "正規化",
+      "key": "正規化",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-e14a955cb93a",
+      "label": "清酒",
+      "key": "清酒",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-3808ac45a1de",
+      "label": "生うどん・そば",
+      "key": "生うどん・そば",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-9be32b0546f1",
+      "label": "生涯学習",
+      "key": "生涯学習",
+      "aliases": []
+    },
+    {
+      "id": "tag:cost-of-living",
+      "label": "生活コスト",
+      "key": "生活コスト",
+      "aliases": [
+        "cost-of-living"
+      ]
+    },
+    {
+      "id": "tag:living-expenses",
+      "label": "生活費",
+      "key": "生活費",
+      "aliases": [
+        "living-expenses"
+      ]
+    },
+    {
+      "id": "tag:productivity",
+      "label": "生産性",
+      "key": "生産性",
+      "aliases": [
+        "productivity"
+      ]
+    },
+    {
+      "id": "tag:manufacturing",
+      "label": "製造業",
+      "key": "製造業",
+      "aliases": [
+        "manufacturing"
+      ]
+    },
+    {
+      "id": "tag:manufacturing-location",
+      "label": "製造業立地",
+      "key": "製造業立地",
+      "aliases": [
+        "manufacturing-location"
+      ]
+    },
+    {
+      "id": "tag:t-feb1cdb82b9b",
+      "label": "製造品出荷額",
+      "key": "製造品出荷額",
+      "aliases": []
+    },
+    {
+      "id": "tag:pharmaceutical-industry",
+      "label": "製薬",
+      "key": "製薬",
+      "aliases": [
+        "pharmaceutical-industry"
+      ]
+    },
+    {
+      "id": "tag:t-91c255548698",
+      "label": "西高東低",
+      "key": "西高東低",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-388d590ab7a4",
+      "label": "青森",
+      "key": "青森",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-8b3772aa929f",
+      "label": "青森県",
+      "key": "青森県",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-3470ac3ef47e",
+      "label": "静岡",
+      "key": "静岡",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-b527e5f5e41f",
+      "label": "静岡県",
+      "key": "静岡県",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-fa0b5f18e364",
+      "label": "税金",
+      "key": "税金",
+      "aliases": []
+    },
+    {
+      "id": "tag:tax-revenue",
+      "label": "税収",
+      "key": "税収",
+      "aliases": [
+        "tax-revenue"
+      ]
+    },
+    {
+      "id": "tag:t-cc6ebd6aa2dd",
+      "label": "石川県",
+      "key": "石川県",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-33ec8a5918c0",
+      "label": "積み上げ棒",
+      "key": "積み上げ棒",
+      "aliases": []
+    },
+    {
+      "id": "tag:snow-depth",
+      "label": "積雪",
+      "key": "積雪",
+      "aliases": [
+        "snow-depth"
+      ]
+    },
+    {
+      "id": "tag:theft",
+      "label": "窃盗犯",
+      "key": "窃盗犯",
+      "aliases": [
+        "theft"
+      ]
+    },
+    {
+      "id": "tag:snow-country",
+      "label": "雪国",
+      "key": "雪国",
+      "aliases": [
+        "snow-country"
+      ]
+    },
+    {
+      "id": "tag:t-b32ae2ecd913",
+      "label": "千葉県",
+      "key": "千葉県",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-4b26cbefa686",
+      "label": "鮮魚",
+      "key": "鮮魚",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-d43daa70581f",
+      "label": "全国学力テスト",
+      "key": "全国学力テスト",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-2c956c3650e1",
+      "label": "全国消費実態調査",
+      "key": "全国消費実態調査",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-5dd7af9d19a3",
+      "label": "相関",
+      "key": "相関",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-c66f8ee1a95e",
+      "label": "相関分析",
+      "key": "相関分析",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-e502633cbf95",
+      "label": "総合ランキング",
+      "key": "総合ランキング",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-f21f7c9f07ef",
+      "label": "総務省",
+      "key": "総務省",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-7299a9b0c2aa",
+      "label": "装置産業",
+      "key": "装置産業",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-13ac97ba5c85",
+      "label": "蔵書数",
+      "key": "蔵書数",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-f1650350e329",
+      "label": "即席麺",
+      "key": "即席麺",
+      "aliases": []
+    },
+    {
+      "id": "tag:multicultural-coexistence",
+      "label": "多文化共生",
+      "key": "多文化共生",
+      "aliases": [
+        "multicultural-coexistence"
+      ]
+    },
+    {
+      "id": "tag:solar-energy",
+      "label": "太陽光",
+      "key": "太陽光",
+      "aliases": [
+        "solar-energy"
+      ]
+    },
+    {
+      "id": "tag:solar-power",
+      "label": "太陽光発電",
+      "key": "太陽光発電",
+      "aliases": [
+        "solar-power"
+      ]
+    },
+    {
+      "id": "tag:t-eaf79e41621e",
+      "label": "体位",
+      "key": "体位",
+      "aliases": []
+    },
+    {
+      "id": "tag:gymnasiums",
+      "label": "体育館",
+      "key": "体育館",
+      "aliases": [
+        "gymnasiums"
+      ]
+    },
+    {
+      "id": "tag:physique",
+      "label": "体格",
+      "key": "体格",
+      "aliases": [
+        "physique"
+      ]
+    },
+    {
+      "id": "tag:weight",
+      "label": "体重",
+      "key": "体重",
+      "aliases": [
+        "weight"
+      ]
+    },
+    {
+      "id": "tag:t-fa05b173828a",
+      "label": "耐久財",
+      "key": "耐久財",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-2bfdf46f050b",
+      "label": "耐久消費財",
+      "key": "耐久消費財",
+      "aliases": []
+    },
+    {
+      "id": "tag:earthquake-resistance",
+      "label": "耐震",
+      "key": "耐震",
+      "aliases": [
+        "earthquake-resistance"
+      ]
+    },
+    {
+      "id": "tag:childcare-waiting-lists",
+      "label": "待機児童",
+      "key": "待機児童",
+      "aliases": [
+        "childcare-waiting-lists"
+      ]
+    },
+    {
+      "id": "tag:taiwan",
+      "label": "台湾",
+      "key": "台湾",
+      "aliases": [
+        "taiwan"
+      ]
+    },
+    {
+      "id": "tag:universities",
+      "label": "大学",
+      "key": "大学",
+      "aliases": [
+        "universities"
+      ]
+    },
+    {
+      "id": "tag:t-81a30fd702f0",
+      "label": "大学教授",
+      "key": "大学教授",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-12410b3840aa",
+      "label": "大学進学",
+      "key": "大学進学",
+      "aliases": []
+    },
+    {
+      "id": "tag:air-pollution",
+      "label": "大気汚染",
+      "key": "大気汚染",
+      "aliases": [
+        "air-pollution"
+      ]
+    },
+    {
+      "id": "tag:t-86b3c158192e",
+      "label": "大工",
+      "key": "大工",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-171a41cd4ee4",
+      "label": "大阪府",
+      "key": "大阪府",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-f651c57a680a",
+      "label": "大豆製品",
+      "key": "大豆製品",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-679359c6b9f4",
+      "label": "大分県",
+      "key": "大分県",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-c8a7e8ec3f3f",
+      "label": "第3次産業",
+      "key": "第3次産業",
+      "aliases": []
+    },
+    {
+      "id": "tag:decarbonization",
+      "label": "脱炭素",
+      "key": "脱炭素",
+      "aliases": [
+        "decarbonization"
+      ]
+    },
+    {
+      "id": "tag:single-person-households",
+      "label": "単独世帯",
+      "key": "単独世帯",
+      "aliases": [
+        "single-person-households"
+      ]
+    },
+    {
+      "id": "tag:agricultural-labor-shortage",
+      "label": "担い手不足",
+      "key": "担い手不足",
+      "aliases": [
+        "agricultural-labor-shortage"
+      ]
+    },
+    {
+      "id": "tag:t-f03e06995be3",
+      "label": "炭酸飲料",
+      "key": "炭酸飲料",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-e9d26aac7191",
+      "label": "暖房費",
+      "key": "暖房費",
+      "aliases": []
+    },
+    {
+      "id": "tag:gender-gap",
+      "label": "男女差",
+      "key": "男女差",
+      "aliases": [
+        "gender-gap"
+      ]
+    },
+    {
+      "id": "tag:t-bb26a975addd",
+      "label": "男女賃金格差",
+      "key": "男女賃金格差",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-91c34d6cd597",
+      "label": "知事選挙",
+      "key": "知事選挙",
+      "aliases": []
+    },
+    {
+      "id": "tag:local-infrastructure",
+      "label": "地域インフラ",
+      "key": "地域インフラ",
+      "aliases": [
+        "local-infrastructure"
+      ]
+    },
+    {
+      "id": "tag:t-57b49d75a2e4",
+      "label": "地域医療",
+      "key": "地域医療",
+      "aliases": []
+    },
+    {
+      "id": "tag:regional-disparity",
+      "label": "地域格差",
+      "key": "地域格差",
+      "aliases": [
+        "regional-disparity"
+      ]
+    },
+    {
+      "id": "tag:regional-economy",
+      "label": "地域経済",
+      "key": "地域経済",
+      "aliases": [
+        "regional-economy"
+      ]
+    },
+    {
+      "id": "tag:t-6f414497615e",
+      "label": "地域差",
+      "key": "地域差",
+      "aliases": []
+    },
+    {
+      "id": "tag:regional-distribution",
+      "label": "地域分布",
+      "key": "地域分布",
+      "aliases": [
+        "regional-distribution"
+      ]
+    },
+    {
+      "id": "tag:land-prices",
+      "label": "地価",
+      "key": "地価",
+      "aliases": [
+        "land-prices"
+      ]
+    },
+    {
+      "id": "tag:t-3fea8411089c",
+      "label": "地価公示",
+      "key": "地価公示",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-51695ad45a11",
+      "label": "地形",
+      "key": "地形",
+      "aliases": []
+    },
+    {
+      "id": "tag:local-production-consumption",
+      "label": "地産地消",
+      "key": "地産地消",
+      "aliases": [
+        "local-production-consumption"
+      ]
+    },
+    {
+      "id": "tag:t-9466fa8b991f",
+      "label": "地震",
+      "key": "地震",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-401cafbae2d0",
+      "label": "地図",
+      "key": "地図",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-1462a7d8531e",
+      "label": "地方",
+      "key": "地方",
+      "aliases": []
+    },
+    {
+      "id": "tag:local-internationalization",
+      "label": "地方の国際化",
+      "key": "地方の国際化",
+      "aliases": [
+        "local-internationalization"
+      ]
+    },
+    {
+      "id": "tag:t-59af12fcc549",
+      "label": "地方の暮らし",
+      "key": "地方の暮らし",
+      "aliases": []
+    },
+    {
+      "id": "tag:local-allocation-tax",
+      "label": "地方交付税",
+      "key": "地方交付税",
+      "aliases": [
+        "local-allocation-tax"
+      ]
+    },
+    {
+      "id": "tag:local-government-bonds",
+      "label": "地方債",
+      "key": "地方債",
+      "aliases": [
+        "local-government-bonds"
+      ]
+    },
+    {
+      "id": "tag:local-government-finance",
+      "label": "地方財政",
+      "key": "地方財政",
+      "aliases": [
+        "local-government-finance"
+      ]
+    },
+    {
+      "id": "tag:local-governance",
+      "label": "地方自治",
+      "key": "地方自治",
+      "aliases": [
+        "local-governance"
+      ]
+    },
+    {
+      "id": "tag:local-taxes",
+      "label": "地方税",
+      "key": "地方税",
+      "aliases": [
+        "local-taxes"
+      ]
+    },
+    {
+      "id": "tag:t-ca75d5f8ce60",
+      "label": "地方選挙",
+      "key": "地方選挙",
+      "aliases": []
+    },
+    {
+      "id": "tag:regional-revitalization",
+      "label": "地方創生",
+      "key": "地方創生",
+      "aliases": [
+        "regional-revitalization"
+      ]
+    },
+    {
+      "id": "tag:regional-decentralization",
+      "label": "地方分散",
+      "key": "地方分散",
+      "aliases": [
+        "regional-decentralization"
+      ]
+    },
+    {
+      "id": "tag:t-e47de72febe3",
+      "label": "地名",
+      "key": "地名",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-b9b861e211f0",
+      "label": "地理",
+      "key": "地理",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-9ec343b2bdd9",
+      "label": "畜産",
+      "key": "畜産",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-899c3905834e",
+      "label": "中華めん",
+      "key": "中華めん",
+      "aliases": []
+    },
+    {
+      "id": "tag:middle-schools",
+      "label": "中学校",
+      "key": "中学校",
+      "aliases": [
+        "middle-schools"
+      ]
+    },
+    {
+      "id": "tag:middle-school-students",
+      "label": "中学生",
+      "key": "中学生",
+      "aliases": [
+        "middle-school-students"
+      ]
+    },
+    {
+      "id": "tag:china",
+      "label": "中国",
+      "key": "中国",
+      "aliases": [
+        "china"
+      ]
+    },
+    {
+      "id": "tag:smes",
+      "label": "中小企業",
+      "key": "中小企業",
+      "aliases": [
+        "smes"
+      ]
+    },
+    {
+      "id": "tag:t-687da1f2301a",
+      "label": "中絶率",
+      "key": "中絶率",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-d2c12bb9b80a",
+      "label": "昼間人口",
+      "key": "昼間人口",
+      "aliases": []
+    },
+    {
+      "id": "tag:daytime-nighttime-population",
+      "label": "昼夜間人口",
+      "key": "昼夜間人口",
+      "aliases": [
+        "daytime-nighttime-population"
+      ]
+    },
+    {
+      "id": "tag:savings",
+      "label": "貯蓄",
+      "key": "貯蓄",
+      "aliases": [
+        "savings"
+      ]
+    },
+    {
+      "id": "tag:savings-rate",
+      "label": "貯蓄率",
+      "key": "貯蓄率",
+      "aliases": [
+        "savings-rate"
+      ]
+    },
+    {
+      "id": "tag:long-term-school-absence",
+      "label": "長期欠席",
+      "key": "長期欠席",
+      "aliases": [
+        "long-term-school-absence"
+      ]
+    },
+    {
+      "id": "tag:t-3d7455f6c39f",
+      "label": "長崎県",
+      "key": "長崎県",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-c56d9b7ddcb8",
+      "label": "長野県",
+      "key": "長野県",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-bfc24e2e1f4e",
+      "label": "鳥取",
+      "key": "鳥取",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-9ac700004f54",
+      "label": "鳥取県",
+      "key": "鳥取県",
+      "aliases": []
+    },
+    {
+      "id": "tag:wages",
+      "label": "賃金",
+      "key": "賃金",
+      "aliases": [
+        "wages"
+      ]
+    },
+    {
+      "id": "tag:t-c298da13d5ef",
+      "label": "賃金格差",
+      "key": "賃金格差",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-89a80a8abda1",
+      "label": "賃金構造基本統計調査",
+      "key": "賃金構造基本統計調査",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-c7f78d624a70",
+      "label": "賃上げ",
+      "key": "賃上げ",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-e2f4e57b1b26",
+      "label": "通勤",
+      "key": "通勤",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-03209e3a8a96",
+      "label": "通信インフラ",
+      "key": "通信インフラ",
+      "aliases": []
+    },
+    {
+      "id": "tag:telecom-subscriptions",
+      "label": "通信契約",
+      "key": "通信契約",
+      "aliases": [
+        "telecom-subscriptions"
+      ]
+    },
+    {
+      "id": "tag:communication-costs",
+      "label": "通信費",
+      "key": "通信費",
+      "aliases": [
+        "communication-costs"
+      ]
+    },
+    {
+      "id": "tag:t-3e5ac90194e1",
+      "label": "漬物",
+      "key": "漬物",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-8e159e2cdf38",
+      "label": "低出生体重児",
+      "key": "低出生体重児",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-90241292435f",
+      "label": "鉄道駅",
+      "key": "鉄道駅",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-a125ba1a61cc",
+      "label": "鉄道通勤",
+      "key": "鉄道通勤",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-38d8e7406ae1",
+      "label": "転職",
+      "key": "転職",
+      "aliases": []
+    },
+    {
+      "id": "tag:net-migration",
+      "label": "転入超過",
+      "key": "転入超過",
+      "aliases": [
+        "net-migration"
+      ]
+    },
+    {
+      "id": "tag:t-8612dd649600",
+      "label": "電気代",
+      "key": "電気代",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-bf3ca605a84b",
+      "label": "電気冷蔵庫",
+      "key": "電気冷蔵庫",
+      "aliases": []
+    },
+    {
+      "id": "tag:electronic-components",
+      "label": "電子部品",
+      "key": "電子部品",
+      "aliases": [
+        "electronic-components"
+      ]
+    },
+    {
+      "id": "tag:electricity",
+      "label": "電力",
+      "key": "電力",
+      "aliases": [
+        "electricity"
+      ]
+    },
+    {
+      "id": "tag:t-e84a9b861a53",
+      "label": "電力消費",
+      "key": "電力消費",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-d7eef7209e79",
+      "label": "都市",
+      "key": "都市",
+      "aliases": []
+    },
+    {
+      "id": "tag:city-gas",
+      "label": "都市ガス",
+      "key": "都市ガス",
+      "aliases": [
+        "city-gas"
+      ]
+    },
+    {
+      "id": "tag:t-510798a55f93",
+      "label": "都市と農村",
+      "key": "都市と農村",
+      "aliases": []
+    },
+    {
+      "id": "tag:urbanization",
+      "label": "都市化",
+      "key": "都市化",
+      "aliases": [
+        "urbanization"
+      ]
+    },
+    {
+      "id": "tag:t-11e09b824d33",
+      "label": "都市圏",
+      "key": "都市圏",
+      "aliases": []
+    },
+    {
+      "id": "tag:urban-parks",
+      "label": "都市公園",
+      "key": "都市公園",
+      "aliases": [
+        "urban-parks"
+      ]
+    },
+    {
+      "id": "tag:t-db83c3b2e6e6",
+      "label": "都道府県",
+      "key": "都道府県",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-3dfcbdc38d3e",
+      "label": "都道府県ランキング",
+      "key": "都道府県ランキング",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-735120cb7ebb",
+      "label": "都道府県格差",
+      "key": "都道府県格差",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-bfb61bcd9c63",
+      "label": "都道府県地図",
+      "key": "都道府県地図",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-0a0d805c8717",
+      "label": "都道府県比較",
+      "key": "都道府県比較",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-c95c0411f5ea",
+      "label": "都道府県別",
+      "key": "都道府県別",
+      "aliases": []
+    },
+    {
+      "id": "tag:land-use",
+      "label": "土地利用",
+      "key": "土地利用",
+      "aliases": [
+        "land-use"
+      ]
+    },
+    {
+      "id": "tag:civil-engineering-expenditure",
+      "label": "土木費",
+      "key": "土木費",
+      "aliases": [
+        "civil-engineering-expenditure"
+      ]
+    },
+    {
+      "id": "tag:t-3555b43ddc19",
+      "label": "島根県",
+      "key": "島根県",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-47644173a708",
+      "label": "投票率",
+      "key": "投票率",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-130016b2599b",
+      "label": "東京",
+      "key": "東京",
+      "aliases": []
+    },
+    {
+      "id": "tag:tokyo-concentration",
+      "label": "東京一極集中",
+      "key": "東京一極集中",
+      "aliases": [
+        "tokyo-concentration"
+      ]
+    },
+    {
+      "id": "tag:t-ce76fe655d41",
+      "label": "東京都",
+      "key": "東京都",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-6783a59e0136",
+      "label": "東西差",
+      "key": "東西差",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-73445f9acbcc",
+      "label": "東北",
+      "key": "東北",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-8555b2922fe3",
+      "label": "桃",
+      "key": "桃",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-beb8f56ae090",
+      "label": "統計",
+      "key": "統計",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-5af56f343572",
+      "label": "統計データ",
+      "key": "統計データ",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-4fc10d8f3977",
+      "label": "豆腐",
+      "key": "豆腐",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-c9699f088866",
+      "label": "豆腐消費量",
+      "key": "豆腐消費量",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-e219ac3ebabe",
+      "label": "働き方",
+      "key": "働き方",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-e277cf2130a3",
+      "label": "働き方改革",
+      "key": "働き方改革",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-02e75b6def98",
+      "label": "動画",
+      "key": "動画",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-f96765198b2f",
+      "label": "道の駅",
+      "key": "道の駅",
+      "aliases": []
+    },
+    {
+      "id": "tag:roads",
+      "label": "道路",
+      "key": "道路",
+      "aliases": [
+        "roads"
+      ]
+    },
+    {
+      "id": "tag:road-density",
+      "label": "道路密度",
+      "key": "道路密度",
+      "aliases": [
+        "road-density"
+      ]
+    },
+    {
+      "id": "tag:t-b48a53b75c64",
+      "label": "徳島県",
+      "key": "徳島県",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-3fea477a765b",
+      "label": "栃木",
+      "key": "栃木",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-325f33cbff00",
+      "label": "栃木県",
+      "key": "栃木県",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-8c6daedbb108",
+      "label": "豚肉",
+      "key": "豚肉",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-0d0b7ab22532",
+      "label": "奈良県",
+      "key": "奈良県",
+      "aliases": []
+    },
+    {
+      "id": "tag:polarization",
+      "label": "二極化",
+      "key": "二極化",
+      "aliases": [
+        "polarization"
+      ]
+    },
+    {
+      "id": "tag:t-d0ab1e271509",
+      "label": "日系ブラジル人",
+      "key": "日系ブラジル人",
+      "aliases": []
+    },
+    {
+      "id": "tag:sunshine-hours",
+      "label": "日照時間",
+      "key": "日照時間",
+      "aliases": [
+        "sunshine-hours"
+      ]
+    },
+    {
+      "id": "tag:t-f682ae8c1e91",
+      "label": "日本海",
+      "key": "日本海",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-97e68a64b10a",
+      "label": "日本酒",
+      "key": "日本酒",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-08a78d6992c9",
+      "label": "乳製品",
+      "key": "乳製品",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-51d8d1857630",
+      "label": "乳用牛",
+      "key": "乳用牛",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-e7ba968af9af",
+      "label": "入院受療率",
+      "key": "入院受療率",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-d260f6e6e89d",
+      "label": "入門",
+      "key": "入門",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-ac9336ff1647",
+      "label": "熱中症",
+      "key": "熱中症",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-14fd9d310d3f",
+      "label": "年収",
+      "key": "年収",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-5b5af3a9d5e1",
+      "label": "年収五分位",
+      "key": "年収五分位",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-398d632cb1eb",
+      "label": "納豆",
+      "key": "納豆",
+      "aliases": []
+    },
+    {
+      "id": "tag:farmers-income",
+      "label": "農家所得",
+      "key": "農家所得",
+      "aliases": [
+        "farmers-income"
+      ]
+    },
+    {
+      "id": "tag:t-b5d4eeb03556",
+      "label": "農外所得",
+      "key": "農外所得",
+      "aliases": []
+    },
+    {
+      "id": "tag:agriculture",
+      "label": "農業",
+      "key": "農業",
+      "aliases": [
+        "agriculture"
+      ]
+    },
+    {
+      "id": "tag:agricultural-output",
+      "label": "農業産出額",
+      "key": "農業産出額",
+      "aliases": [
+        "agricultural-output"
+      ]
+    },
+    {
+      "id": "tag:agricultural-processing",
+      "label": "農産加工",
+      "key": "農産加工",
+      "aliases": [
+        "agricultural-processing"
+      ]
+    },
+    {
+      "id": "tag:farm-product-stands",
+      "label": "農産物直売所",
+      "key": "農産物直売所",
+      "aliases": [
+        "farm-product-stands"
+      ]
+    },
+    {
+      "id": "tag:farmland",
+      "label": "農地",
+      "key": "農地",
+      "aliases": [
+        "farmland"
+      ]
+    },
+    {
+      "id": "tag:waste",
+      "label": "廃棄物",
+      "key": "廃棄物",
+      "aliases": [
+        "waste"
+      ]
+    },
+    {
+      "id": "tag:t-fcb32e0e8d4d",
+      "label": "梅雨",
+      "key": "梅雨",
+      "aliases": []
+    },
+    {
+      "id": "tag:museums",
+      "label": "博物館",
+      "key": "博物館",
+      "aliases": [
+        "museums"
+      ]
+    },
+    {
+      "id": "tag:t-4b39c756b422",
+      "label": "発酵食品",
+      "key": "発酵食品",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-446345e93bd5",
+      "label": "発泡酒",
+      "key": "発泡酒",
+      "aliases": []
+    },
+    {
+      "id": "tag:semiconductors",
+      "label": "半導体",
+      "key": "半導体",
+      "aliases": [
+        "semiconductors"
+      ]
+    },
+    {
+      "id": "tag:crime-rate",
+      "label": "犯罪率",
+      "key": "犯罪率",
+      "aliases": [
+        "crime-rate"
+      ]
+    },
+    {
+      "id": "tag:sales-volume",
+      "label": "販売額",
+      "key": "販売額",
+      "aliases": [
+        "sales-volume"
+      ]
+    },
+    {
+      "id": "tag:late-marriage",
+      "label": "晩婚化",
+      "key": "晩婚化",
+      "aliases": [
+        "late-marriage"
+      ]
+    },
+    {
+      "id": "tag:beauty-salons",
+      "label": "美容",
+      "key": "美容",
+      "aliases": [
+        "beauty-salons"
+      ]
+    },
+    {
+      "id": "tag:t-30cbf4ae7b71",
+      "label": "標準財政規模",
+      "key": "標準財政規模",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-616b0d572eed",
+      "label": "病院",
+      "key": "病院",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-c77b753eed86",
+      "label": "病院経営",
+      "key": "病院経営",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-91555febe69b",
+      "label": "病院統廃合",
+      "key": "病院統廃合",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-640f62209d37",
+      "label": "病床利用率",
+      "key": "病床利用率",
+      "aliases": []
+    },
+    {
+      "id": "tag:school-refusal",
+      "label": "不登校",
+      "key": "不登校",
+      "aliases": [
+        "school-refusal"
+      ]
+    },
+    {
+      "id": "tag:real-estate",
+      "label": "不動産",
+      "key": "不動産",
+      "aliases": [
+        "real-estate"
+      ]
+    },
+    {
+      "id": "tag:value-added",
+      "label": "付加価値",
+      "key": "付加価値",
+      "aliases": [
+        "value-added"
+      ]
+    },
+    {
+      "id": "tag:t-a267190f4f08",
+      "label": "婦人服",
+      "key": "婦人服",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-3ec14b58cc15",
+      "label": "婦人用コート",
+      "key": "婦人用コート",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-eaa951347b1b",
+      "label": "富山県",
+      "key": "富山県",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-4af22cb33c93",
+      "label": "負債",
+      "key": "負債",
+      "aliases": []
+    },
+    {
+      "id": "tag:wind-power",
+      "label": "風力発電",
+      "key": "風力発電",
+      "aliases": [
+        "wind-power"
+      ]
+    },
+    {
+      "id": "tag:t-ee9ece17e2d2",
+      "label": "副業",
+      "key": "副業",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-b35db5d6cc32",
+      "label": "福井県",
+      "key": "福井県",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-f94ad4924816",
+      "label": "福岡県",
+      "key": "福岡県",
+      "aliases": []
+    },
+    {
+      "id": "tag:welfare",
+      "label": "福祉",
+      "key": "福祉",
+      "aliases": [
+        "welfare"
+      ]
+    },
+    {
+      "id": "tag:t-a2a0c8114315",
+      "label": "福島県",
+      "key": "福島県",
+      "aliases": []
+    },
+    {
+      "id": "tag:prices",
+      "label": "物価",
+      "key": "物価",
+      "aliases": [
+        "prices"
+      ]
+    },
+    {
+      "id": "tag:t-25dc8da388f1",
+      "label": "物価高",
+      "key": "物価高",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-6967f1d2dfd7",
+      "label": "物価上昇",
+      "key": "物価上昇",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-55cfde9fef10",
+      "label": "物価上昇率",
+      "key": "物価上昇率",
+      "aliases": []
+    },
+    {
+      "id": "tag:logistics",
+      "label": "物流",
+      "key": "物流",
+      "aliases": [
+        "logistics"
+      ]
+    },
+    {
+      "id": "tag:cultural-facilities",
+      "label": "文化施設",
+      "key": "文化施設",
+      "aliases": [
+        "cultural-facilities"
+      ]
+    },
+    {
+      "id": "tag:cultural-capital",
+      "label": "文化資本",
+      "key": "文化資本",
+      "aliases": [
+        "cultural-capital"
+      ]
+    },
+    {
+      "id": "tag:t-825bcb2c2fd0",
+      "label": "兵庫県",
+      "key": "兵庫県",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-85c48c1e2c3c",
+      "label": "平均寿命",
+      "key": "平均寿命",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-7dce29035c05",
+      "label": "平均身長",
+      "key": "平均身長",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-1aac8b956f80",
+      "label": "米",
+      "key": "米",
+      "aliases": []
+    },
+    {
+      "id": "tag:united-states",
+      "label": "米国",
+      "key": "米国",
+      "aliases": [
+        "united-states"
+      ]
+    },
+    {
+      "id": "tag:t-706505db76fb",
+      "label": "米消費量",
+      "key": "米消費量",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-9e0ce6f22ad7",
+      "label": "米離れ",
+      "key": "米離れ",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-45c5f2f012b7",
+      "label": "保育",
+      "key": "保育",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-31cb06645c5a",
+      "label": "保険",
+      "key": "保険",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-ca1f5e5aba47",
+      "label": "舗装道路",
+      "key": "舗装道路",
+      "aliases": []
+    },
+    {
+      "id": "tag:road-paving-rate",
+      "label": "舗装率",
+      "key": "舗装率",
+      "aliases": [
+        "road-paving-rate"
+      ]
+    },
+    {
+      "id": "tag:t-d0038f6a48ec",
+      "label": "母子保健",
+      "key": "母子保健",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-ea3bc8296425",
+      "label": "方言",
+      "key": "方言",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-a6efcc0060ad",
+      "label": "訪日観光",
+      "key": "訪日観光",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-5960c302e68d",
+      "label": "防災",
+      "key": "防災",
+      "aliases": []
+    },
+    {
+      "id": "tag:hokkaido",
+      "label": "北海道",
+      "key": "北海道",
+      "aliases": [
+        "hokkaido"
+      ]
+    },
+    {
+      "id": "tag:t-0b42c166d9bf",
+      "label": "北前船",
+      "key": "北前船",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-a010558f69f1",
+      "label": "北陸",
+      "key": "北陸",
+      "aliases": []
+    },
+    {
+      "id": "tag:unmarried",
+      "label": "未婚",
+      "key": "未婚",
+      "aliases": [
+        "unmarried"
+      ]
+    },
+    {
+      "id": "tag:unmarried-rate",
+      "label": "未婚率",
+      "key": "未婚率",
+      "aliases": [
+        "unmarried-rate"
+      ]
+    },
+    {
+      "id": "tag:t-a9d829e3f9f3",
+      "label": "民生委員",
+      "key": "民生委員",
+      "aliases": []
+    },
+    {
+      "id": "tag:social-welfare-expenditure",
+      "label": "民生費",
+      "key": "民生費",
+      "aliases": [
+        "social-welfare-expenditure"
+      ]
+    },
+    {
+      "id": "tag:t-459041a489a2",
+      "label": "名古屋めし",
+      "key": "名古屋めし",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-adc457857c99",
+      "label": "面積",
+      "key": "面積",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-df4ca97a1669",
+      "label": "麺文化",
+      "key": "麺文化",
+      "aliases": []
+    },
+    {
+      "id": "tag:extreme-heat-days",
+      "label": "猛暑日",
+      "key": "猛暑日",
+      "aliases": [
+        "extreme-heat-days"
+      ]
+    },
+    {
+      "id": "tag:t-8699828c2e5b",
+      "label": "野菜消費",
+      "key": "野菜消費",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-27b72f36a328",
+      "label": "薬局",
+      "key": "薬局",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-ee0c16b70c18",
+      "label": "薬剤師",
+      "key": "薬剤師",
+      "aliases": []
+    },
+    {
+      "id": "tag:transport-equipment",
+      "label": "輸送用機械",
+      "key": "輸送用機械",
+      "aliases": [
+        "transport-equipment"
+      ]
+    },
+    {
+      "id": "tag:post-offices",
+      "label": "郵便局",
+      "key": "郵便局",
+      "aliases": [
+        "post-offices"
+      ]
+    },
+    {
+      "id": "tag:t-7ac5f05277e5",
+      "label": "余暇",
+      "key": "余暇",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-7e40e7bb97fb",
+      "label": "余暇活動",
+      "key": "余暇活動",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-7d7accc96fd6",
+      "label": "揚げかまぼこ",
+      "key": "揚げかまぼこ",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-008245424e90",
+      "label": "洋菓子",
+      "key": "洋菓子",
+      "aliases": []
+    },
+    {
+      "id": "tag:aquaculture",
+      "label": "養殖",
+      "key": "養殖",
+      "aliases": [
+        "aquaculture"
+      ]
+    },
+    {
+      "id": "tag:t-5bad3395ed96",
+      "label": "酪農",
+      "key": "酪農",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-a5a79a17f934",
+      "label": "梨",
+      "key": "梨",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-1899b06d5fdf",
+      "label": "理学療法士",
+      "key": "理学療法士",
+      "aliases": []
+    },
+    {
+      "id": "tag:barbershops",
+      "label": "理容",
+      "key": "理容",
+      "aliases": [
+        "barbershops"
+      ]
+    },
+    {
+      "id": "tag:divorce",
+      "label": "離婚",
+      "key": "離婚",
+      "aliases": [
+        "divorce"
+      ]
+    },
+    {
+      "id": "tag:divorce-rate",
+      "label": "離婚率",
+      "key": "離婚率",
+      "aliases": [
+        "divorce-rate"
+      ]
+    },
+    {
+      "id": "tag:t-ab920bf9bdbf",
+      "label": "流入人口",
+      "key": "流入人口",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-4154c30943f4",
+      "label": "琉球料理",
+      "key": "琉球料理",
+      "aliases": []
+    },
+    {
+      "id": "tag:ryokan",
+      "label": "旅館",
+      "key": "旅館",
+      "aliases": [
+        "ryokan"
+      ]
+    },
+    {
+      "id": "tag:t-23960ae29dfa",
+      "label": "旅券発行件数",
+      "key": "旅券発行件数",
+      "aliases": []
+    },
+    {
+      "id": "tag:travel",
+      "label": "旅行",
+      "key": "旅行",
+      "aliases": [
+        "travel"
+      ]
+    },
+    {
+      "id": "tag:travel-participation-rate",
+      "label": "旅行行動者率",
+      "key": "旅行行動者率",
+      "aliases": [
+        "travel-participation-rate"
+      ]
+    },
+    {
+      "id": "tag:green-space",
+      "label": "緑地",
+      "key": "緑地",
+      "aliases": [
+        "green-space"
+      ]
+    },
+    {
+      "id": "tag:t-6f664960af40",
+      "label": "緑茶",
+      "key": "緑茶",
+      "aliases": []
+    },
+    {
+      "id": "tag:forestry",
+      "label": "林業",
+      "key": "林業",
+      "aliases": [
+        "forestry"
+      ]
+    },
+    {
+      "id": "tag:t-79129fa9ea2e",
+      "label": "林道",
+      "key": "林道",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-55b34108c19b",
+      "label": "林野面積",
+      "key": "林野面積",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-378919d8708c",
+      "label": "令和7年国勢調査",
+      "key": "令和7年国勢調査",
+      "aliases": []
+    },
+    {
+      "id": "tag:micro-enterprises",
+      "label": "零細企業",
+      "key": "零細企業",
+      "aliases": [
+        "micro-enterprises"
+      ]
+    },
+    {
+      "id": "tag:t-c43d763cd49d",
+      "label": "歴史",
+      "key": "歴史",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-4c5567c0e4bf",
+      "label": "練り製品",
+      "key": "練り製品",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-159cf599d86e",
+      "label": "労災",
+      "key": "労災",
+      "aliases": []
+    },
+    {
+      "id": "tag:workers-compensation",
+      "label": "労災保険",
+      "key": "労災保険",
+      "aliases": [
+        "workers-compensation"
+      ]
+    },
+    {
+      "id": "tag:labor",
+      "label": "労働",
+      "key": "労働",
+      "aliases": [
+        "labor"
+      ]
+    },
+    {
+      "id": "tag:occupational-accidents",
+      "label": "労働災害",
+      "key": "労働災害",
+      "aliases": [
+        "occupational-accidents"
+      ]
+    },
+    {
+      "id": "tag:labor-market",
+      "label": "労働市場",
+      "key": "労働市場",
+      "aliases": [
+        "labor-market"
+      ]
+    },
+    {
+      "id": "tag:t-4af47908edc7",
+      "label": "労働時間",
+      "key": "労働時間",
+      "aliases": []
+    },
+    {
+      "id": "tag:labor-productivity",
+      "label": "労働生産性",
+      "key": "労働生産性",
+      "aliases": [
+        "labor-productivity"
+      ]
+    },
+    {
+      "id": "tag:aging-infrastructure",
+      "label": "老朽化",
+      "key": "老朽化",
+      "aliases": [
+        "aging-infrastructure"
+      ]
+    },
+    {
+      "id": "tag:aging-index",
+      "label": "老年化指数",
+      "key": "老年化指数",
+      "aliases": [
+        "aging-index"
+      ]
+    },
+    {
+      "id": "tag:t-180f8e2726c6",
+      "label": "老年人口指数",
+      "key": "老年人口指数",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-1966fed0dd59",
+      "label": "和歌山",
+      "key": "和歌山",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-55dfb1d62499",
+      "label": "和歌山県",
+      "key": "和歌山県",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-96ed2aaf6318",
+      "label": "和菓子",
+      "key": "和菓子",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-feed5d62300a",
+      "label": "和食",
+      "key": "和食",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-0fe429dea9a7",
+      "label": "嗜好品",
+      "key": "嗜好品",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-b6bf5750bd91",
+      "label": "贅沢品",
+      "key": "贅沢品",
+      "aliases": []
+    },
+    {
+      "id": "tag:t-ba430b74a6dc",
+      "label": "餃子",
+      "key": "餃子",
+      "aliases": []
+    }
+  ]
+}

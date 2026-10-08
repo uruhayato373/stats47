@@ -375,6 +375,9 @@ export type NavSurface =
   | 'blog_sidebar'
   | 'blog_discovery_mobile'
   | 'ranking_survey'
+  | 'ranking_blog'
+  | 'area_blog'
+  | 'geo_related'
   // ランキングの右レール「この指標を使うテーマ」(2026-10-07 値追加。登録済み dimension の値追加なので GA4 側の作業は不要)
   | 'ranking_theme'
   // ランキングの右レール「この指標の地域分析」(2026-10-08 値追加。登録済み dimension の値追加なので GA4 側の作業は不要)
