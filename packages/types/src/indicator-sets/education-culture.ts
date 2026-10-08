@@ -154,6 +154,51 @@ export const EDUCATION_CULTURE_SET: IndicatorSet = {
       "rankingKey": "buried-cultural-property-specialist-count",
       "shortLabel": "埋蔵文化財専門職員数",
       "role": "secondary"
+    },
+    {
+      "rankingKey": "study-participation-rate-english",
+      "shortLabel": "英語学習の行動者率",
+      "role": "context"
+    },
+    {
+      "rankingKey": "cram-school-establishment-count",
+      "shortLabel": "学習塾事業所数",
+      "role": "context"
+    },
+    {
+      "rankingKey": "academic-achievement-test-average-rate",
+      "shortLabel": "全国学力テスト平均正答率",
+      "role": "context"
+    },
+    {
+      "rankingKey": "national-assessment-elementary-tutoring-rate",
+      "shortLabel": "学習塾・家庭教師で教わっている小学生の割合",
+      "role": "context"
+    },
+    {
+      "rankingKey": "national-assessment-elementary-breakfast-rate",
+      "shortLabel": "朝食を毎日食べている小学生の割合",
+      "role": "context"
+    },
+    {
+      "rankingKey": "national-assessment-elementary-reading-like-rate",
+      "shortLabel": "読書が好きな小学生の割合",
+      "role": "context"
+    },
+    {
+      "rankingKey": "national-assessment-elementary-study-1h-plus-rate",
+      "shortLabel": "平日に1時間以上勉強する小学生の割合",
+      "role": "context"
+    },
+    {
+      "rankingKey": "elementary-school-long-absence-ratio-nonattendance-over-30days-per-1000",
+      "shortLabel": "小学校の不登校長期欠席児童比率",
+      "role": "context"
+    },
+    {
+      "rankingKey": "junior-high-school-long-absence-ratio-nonattendance-over-30days-per-1000",
+      "shortLabel": "中学校の不登校長期欠席生徒比率",
+      "role": "context"
     }
   ],
   "keywords": [

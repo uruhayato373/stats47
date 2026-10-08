@@ -44,6 +44,11 @@
         "surveyedAt": "2026-09-09",
         "rationale": "携帯電話所有数量（二人以上世帯千世帯当たり）を都道府県別の実値として比較する。"
       }
+    },
+    {
+      "rankingKey": "internet-usage-rate-10plus",
+      "shortLabel": "インターネットの利用行動者率",
+      "role": "context"
     }
   ],
   "charts": [],

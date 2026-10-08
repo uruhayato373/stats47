@@ -34,6 +34,11 @@ export const CHILDCARE_SERVICES_SET: IndicatorSet = {
       "rankingKey": "childcare-applicants",
       "shortLabel": "保育所等利用申込者数（4月1日時点）",
       "role": "secondary"
+    },
+    {
+      "rankingKey": "nursery-waiting-children-count",
+      "shortLabel": "保育所等利用待機児童数",
+      "role": "context"
     }
   ],
   "keywords": [

@@ -39,6 +39,11 @@ export const REGIONAL_TRANSPORT_SET: IndicatorSet = {
       "rankingKey": "household-survey-transport-communication-expenditure",
       "shortLabel": "交通・通信支出（二人以上世帯・10〜11月の月平均）",
       "role": "secondary"
+    },
+    {
+      "rankingKey": "commuters-total",
+      "shortLabel": "自宅外通勤・通学者数",
+      "role": "context"
     }
   ],
   "keywords": [
