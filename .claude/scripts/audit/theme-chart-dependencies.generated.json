@@ -73,7 +73,7 @@
     {
       "metricKey": "consumer-price-difference-index-clothing-footwear",
       "expectedUnit": "（全国=100）",
-      "expectedConfigHash": "90660d2492bda6a7",
+      "expectedConfigHash": "d9e017aadf31b365",
       "themeKey": "consumer-prices",
       "componentKey": "theme-cpi-profile",
       "componentType": "cpi-profile"
@@ -81,7 +81,7 @@
     {
       "metricKey": "consumer-price-difference-index-culture-recreation",
       "expectedUnit": "（全国=100）",
-      "expectedConfigHash": "5700c10845b3dd4b",
+      "expectedConfigHash": "50768d91880b7ec2",
       "themeKey": "consumer-prices",
       "componentKey": "theme-cpi-profile",
       "componentType": "cpi-profile"
@@ -89,7 +89,7 @@
     {
       "metricKey": "consumer-price-difference-index-education",
       "expectedUnit": "（全国=100）",
-      "expectedConfigHash": "07650d37c5658b28",
+      "expectedConfigHash": "962edb7628f7cc19",
       "themeKey": "consumer-prices",
       "componentKey": "theme-cpi-profile",
       "componentType": "cpi-profile"
@@ -97,7 +97,7 @@
     {
       "metricKey": "consumer-price-difference-index-food",
       "expectedUnit": "（全国=100）",
-      "expectedConfigHash": "e0b5be5333016bc8",
+      "expectedConfigHash": "6383b567f12f6e90",
       "themeKey": "consumer-prices",
       "componentKey": "theme-cpi-profile",
       "componentType": "cpi-profile"
@@ -105,7 +105,7 @@
     {
       "metricKey": "consumer-price-difference-index-furniture-household",
       "expectedUnit": "（全国=100）",
-      "expectedConfigHash": "d8c0606404e4a4df",
+      "expectedConfigHash": "6aa01bc7ec0a5398",
       "themeKey": "consumer-prices",
       "componentKey": "theme-cpi-profile",
       "componentType": "cpi-profile"
@@ -113,7 +113,7 @@
     {
       "metricKey": "consumer-price-difference-index-healthcare",
       "expectedUnit": "（全国=100）",
-      "expectedConfigHash": "eb1f0e35e738ea6a",
+      "expectedConfigHash": "a25b816a38bfd59d",
       "themeKey": "consumer-prices",
       "componentKey": "theme-cpi-profile",
       "componentType": "cpi-profile"
@@ -121,7 +121,7 @@
     {
       "metricKey": "consumer-price-difference-index-housing",
       "expectedUnit": "（全国=100）",
-      "expectedConfigHash": "2b662b62d6c94605",
+      "expectedConfigHash": "84480ccf50801358",
       "themeKey": "consumer-prices",
       "componentKey": "theme-cpi-profile",
       "componentType": "cpi-profile"
@@ -129,7 +129,7 @@
     {
       "metricKey": "consumer-price-difference-index-miscellaneous",
       "expectedUnit": "（全国=100）",
-      "expectedConfigHash": "335850c9080d981e",
+      "expectedConfigHash": "bbcf8fcdee10d89e",
       "themeKey": "consumer-prices",
       "componentKey": "theme-cpi-profile",
       "componentType": "cpi-profile"
@@ -137,7 +137,7 @@
     {
       "metricKey": "consumer-price-difference-index-overall",
       "expectedUnit": "（全国=100）",
-      "expectedConfigHash": "93d60411ab991b6e",
+      "expectedConfigHash": "c0dc50dcf01f3a5f",
       "themeKey": "consumer-prices",
       "componentKey": "theme-cpi-profile",
       "componentType": "cpi-profile"
@@ -145,7 +145,7 @@
     {
       "metricKey": "consumer-price-difference-index-overall-excl-rent",
       "expectedUnit": "（全国=100）",
-      "expectedConfigHash": "dd8dddb07b680abb",
+      "expectedConfigHash": "164de623c2186218",
       "themeKey": "consumer-prices",
       "componentKey": "theme-cpi-profile",
       "componentType": "cpi-profile"
@@ -153,7 +153,7 @@
     {
       "metricKey": "consumer-price-difference-index-transport-communication",
       "expectedUnit": "（全国=100）",
-      "expectedConfigHash": "2da1ab465cf5ffdd",
+      "expectedConfigHash": "a5fe462e280c2ad9",
       "themeKey": "consumer-prices",
       "componentKey": "theme-cpi-profile",
       "componentType": "cpi-profile"
@@ -161,7 +161,7 @@
     {
       "metricKey": "consumer-price-difference-index-utilities",
       "expectedUnit": "（全国=100）",
-      "expectedConfigHash": "396a1b756af4b462",
+      "expectedConfigHash": "b8d7011778907468",
       "themeKey": "consumer-prices",
       "componentKey": "theme-cpi-profile",
       "componentType": "cpi-profile"

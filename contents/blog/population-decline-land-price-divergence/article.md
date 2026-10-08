@@ -81,7 +81,7 @@ ogImage: /blog/population-decline-land-price-divergence/og.png
 
 結論の割合だけでなく、元の地点、接続先メッシュ、比較不能の内訳まで確認できることが空間分析の価値です。全国の値を一つの順位へ縮めず、必要な地域の根拠へ戻って読むための入口として利用してください。
 
-## データ出典
+## データについて
 
 国土交通省[「1kmメッシュ別将来推計人口（R6国政局推計）」](https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-mesh1000r6.html) version 24、および[「地価公示（2026年）」](https://nlftp.mlit.go.jp/ksj/gml/datalist/KsjTmplt-L01-2026.html) version 26を使用し、stats47が住宅地点の抽出、包含結合、県別集計を行いました。入力の利用条件はCC BY 4.0です。e-Stat経由のランキング値は今回の計算に使用していません。
 

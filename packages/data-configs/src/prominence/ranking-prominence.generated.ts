@@ -88,7 +88,7 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
   {
     "categoryKey": "population",
     "categoryName": "人口・世帯",
-    "count": 156,
+    "count": 157,
     "representatives": [
       {
         "rankingKey": "births",
@@ -182,24 +182,6 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
     "count": 75,
     "representatives": [
       {
-        "rankingKey": "fishery-workers",
-        "title": "漁業就業者数",
-        "readerLabel": "漁業就業者数",
-        "hook": "漁業就業者数が最も多い県は？"
-      },
-      {
-        "rankingKey": "agricultural-output",
-        "title": "農業産出額",
-        "readerLabel": "農業産出額",
-        "hook": "農業産出額が最も多い県は？"
-      },
-      {
-        "rankingKey": "aquaculture-harvest",
-        "title": "養殖収獲量",
-        "readerLabel": "養殖収獲量",
-        "hook": "養殖収獲量が最も多い県は？"
-      },
-      {
         "rankingKey": "fishery-species-catch-mackerel",
         "title": "サバ類漁獲量",
         "readerLabel": "サバ類漁獲量",
@@ -216,6 +198,24 @@ export const RANKING_PROMINENCE_CATEGORIES: ReadonlyArray<CategoryProminence> =
         "title": "イワシ類漁獲量",
         "readerLabel": "イワシ類漁獲量",
         "hook": "イワシ類漁獲量が最も多い県は？"
+      },
+      {
+        "rankingKey": "fishery-workers",
+        "title": "漁業就業者数",
+        "readerLabel": "漁業就業者数",
+        "hook": "漁業就業者数が最も多い県は？"
+      },
+      {
+        "rankingKey": "fishery-species-catch-bonito",
+        "title": "カツオ漁獲量",
+        "readerLabel": "カツオ漁獲量",
+        "hook": "カツオ漁獲量が最も多い県は？"
+      },
+      {
+        "rankingKey": "fishery-species-catch-pollock",
+        "title": "スケトウダラ漁獲量",
+        "readerLabel": "スケトウダラ漁獲量",
+        "hook": "スケトウダラ漁獲量が最も多い県は？"
       }
     ]
   },
@@ -848,10 +848,10 @@ export const HOME_FEATURED_PROMINENCE: ReadonlyArray<HomeFeaturedProminence> =
     "order": 6
   },
   {
-    "rankingKey": "fishery-workers",
-    "title": "漁業就業者数",
-    "readerLabel": "漁業就業者数",
-    "hook": "漁業就業者数が最も多い県は？",
+    "rankingKey": "fishery-species-catch-mackerel",
+    "title": "サバ類漁獲量",
+    "readerLabel": "サバ類漁獲量",
+    "hook": "サバ類漁獲量が最も多い県は？",
     "categoryKey": "agriculture",
     "order": 7
   },
@@ -893,12 +893,12 @@ export const REPRESENTATIVE_RANKING_KEYS: ReadonlyArray<string> =
   "meal-avg-time-male",
   "relaxation-avg-time-male",
   "software-engineer-annual-income",
-  "fishery-workers",
-  "agricultural-output",
-  "aquaculture-harvest",
   "fishery-species-catch-mackerel",
   "fishery-species-catch-pacific-saury",
   "fishery-species-catch-sardine",
+  "fishery-workers",
+  "fishery-species-catch-bonito",
+  "fishery-species-catch-pollock",
   "manufacturing-shipment-amount",
   "manufacturing-industry-added-value",
   "manufacturing-employees",

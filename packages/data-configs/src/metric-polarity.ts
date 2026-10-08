@@ -117,6 +117,7 @@ export const METRIC_POLARITY: Readonly<Record<string, PolarityEntry>> = {
   "design-registration-count": { polarity: "neutral", evidence: "意匠登録件数は権利取得の量で、利用実績・経済価値・地域住民への利益とは同一でない。" },
   "designated-museum-visitors": { polarity: "neutral", evidence: "指定施設の入館者延べ数は施設数・観光客・催事によって変わり、住民参加率や教育成果を表さない。" },
   "domestic-travel-consumption-by-destination": { polarity: "neutral", evidence: "訪問先別の日本人旅行消費総額は観光需要と価格を反映し、混雑・住民負担・地域への純利益を含む評価ではない。" },
+  "elderly-living-alone-rate": { polarity: "neutral", evidence: "65歳以上人口に占める一人暮らしの人の割合は、世帯構成の選び方や家族の住む場所を映すもので、孤立の度合いや支援が必要な量を直接は表さないため、値の大小を地域の優劣へ読み替えない。" },
   "elementary-school-gymnasium-count": { polarity: "neutral", evidence: "小学校体育館設置数は学校数や学校規模に左右され、児童の利用可能性や施設の状態を直接表さない。" },
   "elementary5-fitness-score-female": { polarity: "higher-is-better", evidence: "公立小学5年女子の実技8項目得点合計で、調査の採点基準上は高得点ほど測定された体力・運動能力が高い。" },
   "elementary5-fitness-score-male": { polarity: "higher-is-better", evidence: "公立小学5年男子の実技8項目得点合計で、調査の採点基準上は高得点ほど測定された体力・運動能力が高い。" },

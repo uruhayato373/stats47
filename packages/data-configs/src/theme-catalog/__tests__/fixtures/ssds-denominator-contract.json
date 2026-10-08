@@ -654,7 +654,7 @@
       "formula": "C5701",
       "sourceUrl": "https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/L",
       "normalizationOptionsRemoved": 2,
-      "recipeHash": "93d60411ab991b6e",
+      "recipeHash": "c0dc50dcf01f3a5f",
       "sourceRow": "#L04414 消費者物価地域差指数（総合） 消費者物価地域差指数（総合） C5701",
       "sourcePageSha256": "cba9da8d708f848651518032bac5933cc68a0b356856c634a0ecd5ed7aa423b4"
     },
@@ -668,7 +668,7 @@
       "formula": "C5702",
       "sourceUrl": "https://www.e-stat.go.jp/koumoku/sihyo_keisansiki/L",
       "normalizationOptionsRemoved": 2,
-      "recipeHash": "dd8dddb07b680abb",
+      "recipeHash": "164de623c2186218",
       "sourceRow": "#L04415 消費者物価地域差指数（家賃を除く総合） 消費者物価地域差指数（家賃を除く総合） C5702",
       "sourcePageSha256": "cba9da8d708f848651518032bac5933cc68a0b356856c634a0ecd5ed7aa423b4"
     },

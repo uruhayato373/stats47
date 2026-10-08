@@ -29,6 +29,7 @@ updated: 2026-10-06
 - **経緯**: 週次の `fetch-metrics-weekly` は main を checkout して計測し、`.claude/state/metrics/` 全体を develop へ上書きコピーしていた。2026-10-04 の W40 コミット e45f5a0ee は、main に未マージだった 15 ファイル (page-quality 週次監査・KSJ / e-Stat 月次記録・psi / cloudflare / URL Inspection の履歴など) を main の古い版へ戻した。`psi-audit-daily` と `cloudflare-usage-daily` も同じ形で、main が遅れている間は前日以前の行を毎日失っていた (psi は 4 月以降の 55 日分)。`deploy-workers` の improvement-log の書き戻しも同じ形だった。2026-10-05 に develop で 4 本を直し、消えた行を git 履歴から戻した。今後の再発は `workflow-commit-back.test.cjs` の `findForeignTreeRestore` が止める。
 - **マージ済み (2026-10-06 11:34 JST)**: PR #1070 (main `881505c2e`) で main へ入り、本番デプロイと post-deploy smoke は成功した。
   main の `psi-audit-daily` は `ref: develop` の新しい定義になっている。残りは下の完了条件の確認だけ (psi 日次 10-07 02:00 JST・cloudflare 日次 02:30 JST・W41 週次 10-11 20:00 JST)。
+- **2026-10-08 確認 (日次分)**: psi 日次 `d0d1bfa96` (10-06) と `bf8c1a9f3` (10-07) は `data/psi/history.csv` の削除行 0。cloudflare 日次 `f6e57c1c7` (10-06) と `40f5b3284` (10-07) の削除行は 2026-08-27〜09-05 の 10 行だけで、どれも保持 30 日を過ぎた行。残りは W41 週次 (10-11 20:00 JST) のコミットの確認だけ。
 - **完了条件**: マージ後の最初の psi 日次・cloudflare 日次・W41 週次の各コミットで、`git diff <commit>^ <commit> -- data/psi/history.csv data/cloudflare/history.csv` に削除行が無い (cloudflare は保持 30 日を超えた古い行の削除だけ許す)。週次コミットが `.claude/state/metrics/{page-quality,monthly-jobs,authenticated}` を変えていない。マージ前に行が再び消えていたら、2026-10-05 の復元コミットと同じ方法 (develop 上の全版の和集合) で戻す。
 
 ### [A8-CROSSCHECK-EXCEED-01] A8 の 9 月検算で専用案件のクリックがサイト別合計を超える原因を確定する
@@ -312,6 +313,14 @@ updated: 2026-10-06
 - **完了条件**: 次の本番デプロイで reset step と smoke が通り、post-deploy-smoke (Playwright) も通る。
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [YEAR-COV-AREA-AXIS-01] 年カバレッジ監査が、都道府県が分類軸にある表などの取得条件を再現できず、8 指標で値のある年を 0 と数える
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npx vitest run packages/ranking/src/scripts/__tests__/audit-estat-year-coverage.test.ts] [起票:2026-10-08] [領域:データ]
+
+- **事実 (2026-10-08)**: `audit-estat-year-coverage.ts` は、値のある年が 0 件のとき「空の集合は config の年に含まれる」ため `confirmed-single-year` (対応不要) と判定していた。該当は 8 指標 (dairy-cattle-count・inpatient-rate-per-100k・fishery-household-sex-age・fishery-management-orgs・fishery-workers-coastal-offshore・fishing-port-count-by-type・fishing-vessel-crew・fishing-vessel-tonnage-class)。`--metrics` で全都道府県を取っても 0 年のままだが、R2 の values.json には値がある (dairy-cattle-count 2025 年 47 県、inpatient-rate-per-100k 2023 年 47 県、fishing-vessel-crew 2003 年 39 県)。dairy と inpatient は都道府県が分類軸にある表 (`areaAxis`) で、監査の取得はこれを再現していない。漁業の 6 指標の原因は未調査。
+- **済 (2026-10-08)**: 値のある年が 0 件のときは新しい判定 `no-sample-values` (判断できない) にした。テストで固定し、修正を外すと落ちることを確かめた。8 指標の記録は `no-sample-values` に変わった。
+- **次**: 監査の取得を取り込み (`page-data-batch.ts`) と同じ条件 (`areaAxis`・軸の pin・合算) にそろえる。共通の取得関数があればそれを使い、無ければ取り込み側から切り出す。漁業の 6 指標は取得結果を見て原因を確かめる。
+- **完了条件**: 8 指標で、監査が R2 と同じ年に値を数え、`no-sample-values` が 0 件になる。
+
 ### [DATA-WAGE-TEACHER-COVERAGE-01] 賃金構造基本統計の教員年収ランキングが教員全体の約 5% しか映していないことをページに示すか、公開をやめるかを決める
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-08] [領域:サイト]
 
@@ -319,6 +328,7 @@ updated: 2026-10-06
 - **出典**: 調査範囲は厚生労働省「令和5年賃金構造基本統計調査 調査の概要」(https://www.mhlw.go.jp/toukei/itiran/roudou/chingin/kouzou/z2023/dl/gaiyo.pdf、2026-10-08 取得) で、16 大産業 (教育，学習支援業を含む) の「5人以上の民営事業所」と「10人以上の公営事業所」。なぜ 5% しか映らないかは公式資料で未確認なので、理由を断定しない。
 - **次 (決めること)**: ① 同じ表の職種別年収 40 指標 (高等学校教員 `high-school-teacher-annual-income` = cdCat02 1194 など) で、推計労働者数と実際の就業者数の比を同じ方法で出す ② 比が小さい指標は、ページに推計人数を併記する・県別ランキングとしての公開をやめる (`isActive:false` + 410/301 の判断)・note を書き直す、のどれにするかをオーナーが決める。公開をやめる場合は `ranking-publisher` の手順 (KNOWN/SITEMAP/R2) に乗せる。
 - **追加の実測 (2026-10-08、同じ表の年齢・勤続年数)**: 統計に映る教員の平均年齢が同じ県でも 1 年で大きく変わる (2022→2023 で愛媛 45.1→36.6 歳、鳥取 44.8→33.6 歳、北海道 36.0→47.4 歳。全国は 42.5→41.0 歳)。41 県で年収の変化と平均年齢の変化の相関は 0.562。県ごとの年収は、教員の待遇の違いより、年ごとに入れ替わる少人数の顔ぶれを強く反映している。
+- **追記 (2026-10-08、blog-critic が報告・e-Stat 生応答で確認)**: 2021 年の岩手は表章項目「労働者数」が 0 (十人単位) で平均年齢 86.5 歳・勤続 52.5 年なのに、年収 491.4 万円で 39 位として順位が付いている。推計 10 人未満の県年は、少なくとも順位から外すか注記する。
 - **停止条件**: 推計人数が小さいことだけを理由に、他の職種の指標を一括で非公開にしない (職種ごとに比を見てから決める)。
 - **完了条件**: 対象指標の扱いが決まり、ページの表示 (併記・note・非公開) が本番に反映されている。
 
@@ -332,6 +342,7 @@ updated: 2026-10-06
   Worker のデプロイ自体は成功しており、どちらも手動で sync-snapshots を代理起動して OGP を作った後、スモークを再実行して 26/26 で通った。
 - **次**: OGP 画像を作る時点をデプロイ前へ動かす (develop の data-refresh か PR の段階で、増えるキーの OGP を R2 に作る) か、
   `deploy-workers.yml` がスモークの前に増えたキーの OGP を作る。検査を緩めて og:image を見ないようにはしない。
+- **2026-10-08 実装 (develop)**: `ranking-ogp-new-keys.yml` を足した。develop への push で `known-ranking-keys.ts` に足されたキー (抽出はスモークと同じ規則・最大 50 件) の OGP とリンクカードを、`sync-ranking-keys` job と同じ exact publish plan で R2 に作る (`r2-write`)。抽出は今日の 2 件 (77073be42 で 13 件、PR #1104 の main マージで 31 件) を再現した。workflow policy audit 0 件。push 起動の workflow は push した commit の定義で動くので、develop に入った時点から効く。**残り**: 次に既知キーを足す develop push でこの run が成功し、その後のデプロイのスモークが手動の代理起動なしに通るのを見てカードを消す。
 - **完了条件**: 公開キーを足した次のデプロイで、手動の代理起動なしにデプロイ後スモークテストが通る。
 
 ### [CRITIC-PATTERN-TITLE-PROMISE] critic の指摘「タイトル・約束」が 3 本の記事で繰り返した。writer の規約か gate に入れる
@@ -500,39 +511,15 @@ updated: 2026-10-06
   (`DERIVED_FILES`。キーではないので件数の増減には数えない)。手順書にも同じ 1 行と、正しい出力先を書いた。既知キーを 1 件消すと
   `--check` が exit 1、job と同じ順で作り直すと exit 0 になることを確かめた。**残り**: workflow は main の定義で動くので、次の公開の後、
   キーが増える keys PR で Static Gates が通るのを見てからカードを消す。
+- **2026-10-08**: 修正前の job が作った keys PR uruhayato373/stats47#1103 は、キーが今日のリリースで main に同期済みで差が日付のコメント 1 行だけになっていたので閉じた (この PR では検証できない)。次に sync-ranking-keys がキーの増える PR を作ったときに確かめる。
 - **完了条件**: キーが増える keys PR で `generate-ranking-prominence.ts --check` が通る。
 
-### [RANKING-ACTIVE-WITHOUT-VALUES-01] ブログの関連ランキングが、非公開の指標の古い item を読んで 410 のページへリンクする
-タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-08] [領域:データ] [進行中]
+### [RANKING-ACTIVE-WITHOUT-VALUES-01] 市区町村専用 2 指標の、どこからも読まれなくなった都道府県 item.json を R2 から消す
+タグ: [コンテンツ品質] [種類:改善] [実行:ユーザー] [起票:2026-10-08] [領域:データ]
 
-- **事実 (2026-10-08)**: `foreign-population-per-100k` と `population-density-habitable` は `entities: ["city"]` の市区町村専用指標で、
-  都道府県のランキングは無い (既知キー一覧に無く `/ranking/<key>` は 410)。R2 には 2026-08-26 生成の都道府県 `item.json` が `hook` 無しで残る。
-  ブログ記事の `rankingRefs` は非公開の 7 指標を 17 記事で持ち、記事下の関連ランキング (`RelatedRankingsSection`) がそれを読んでいた。
-  `next build` の prerender で `item.hook must be a non-empty string` が 2 件記録され、`international-cooperation-volunteer-map` は
-  `/ranking/volunteer-activity-international-cooperation-15plus` (410) へのリンクを 2 本描いていた。
-- **済**: 関連ランキングを既知キー一覧 (`KNOWN_RANKING_KEYS`) にある指標だけに絞った (develop。テスト 3 件、修正前の部品では 3 件とも落ちることを確認)。
-  ブログは build 時に焼かれるので、本番に出るのは次の develop→main のデプロイ。
-- **次**: 次のデプロイの CI build ログに上の 2 件のエラーが出ないこと、本番の `/blog/international-cooperation-volunteer-map` に 410 へのリンクが無いことを確かめる。
-  R2 に残る 2 指標の古い都道府県 `item.json` は、どこからも読まれなくなるので消してよいが、R2 の削除は承認を取ってから行う。
-- **完了条件**: 本番デプロイ後の build ログに 2 指標の item のエラーが無く、上の記事の関連ランキングに 410 のリンクが無い。
-
-### [DATA-REFRESH-DERIVED-FROM-DEVELOP-01] develop への push で起動した data-refresh が、未リリースの develop から派生 snapshot を作って本番 R2 に出す
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-08] [領域:データ] [進行中]
-
-- **事実 (2026-10-08)**: `data-refresh.yml` は push 起動のとき `ref: github.ref_name` (= develop) を checkout し、手順 10 で派生 snapshot を scope all で作り直して R2 へ push する。
-  run 37693107860 の後、本番 R2 の `app/page-components/theme/{tourism,consumer-prices}.json` は develop の
-  `apps/web/scripts/data/page-components/theme/*.json` と一致した。main のコードはまだ変更前のカタログで、PR #1100 のマージ前だった。
-  `sync-snapshots.yml` は main を checkout する設計なので、同じ R2 に main 由来と develop 由来の書き手が混ざっている。
-  今回は本番の 2 テーマが 200 でエラー表示も無かったが、develop の page-components や ranking-items が壊れていれば、デプロイ前に本番が壊れる。
-- **2026-10-08 オーナー判断**: develop への push で起動したときは、git の設定だけから作る図の定義 (page-components) を作らない。
-  観測値から作るもの (ranking-items など) は、新しい指標をマージ前に R2 で確かめられるよう今までどおり作る。
-  広告 (affiliate-ads) は `publish-affiliate-ads.yml` が develop から出す設計なので除外しない。
-- **2026-10-08 実装 (develop)**: `run.sh` に `--skip <task,...>` を足し (存在しない task 名は何も作らずに失敗)、`data-refresh.yml` の手順 10 は
-  push 起動のときだけ `--skip page-components` を付ける。契約テスト 2 本に検査を足し、除外の処理と push の条件を壊すとそれぞれ落ちることを確かめた。
-  **残り**: workflow は develop の push で起動した run が develop の定義で動くので、次に develop へ data-refresh を依頼した run のログで
-  「⏭️ page-components は --skip で作らない」が出て、本番 R2 の page-components が変わらないことを確かめてからカードを消す。
-- **完了条件**: develop への push で起動した data-refresh の後、本番 R2 の page-components が main の内容のままである。
-
+- **経緯**: ブログの関連ランキングが非公開の指標の古い `item.json` を読み、410 のページへリンクしていた。関連ランキングを既知キー一覧の指標だけに絞り (develop の修正)、2026-10-08 の本番デプロイ (uruhayato373/stats47#1108) で確かめた: デプロイの build ログに `item.hook must be a non-empty string` は 0 件、本番の `/blog/international-cooperation-volunteer-map` の `/ranking/` リンクは 2 本とも 200 で、410 だった `volunteer-activity-international-cooperation-15plus` へのリンクは無い。
+- **残り**: R2 に残る `foreign-population-per-100k` と `population-density-habitable` の都道府県 `item.json` (2026-08-26 生成) は、もうどこからも読まれない。R2 の削除はオーナーの承認が要る (削除の入口は `r2-maintenance.yml` の `RETENTION_TARGETS` に対象を足す形)。
+- **完了条件**: 承認のうえで 2 つの `app/ranking/<key>/item.json` が R2 から消えている。消さないと決めた場合はこのカードを消す。
 ### [SEO-CTR-CANDIDATES-01] 取りこぼしクリックの大きい 7 ページを search-growth に渡し、食い合いの 2 組を先に確かめる
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-07] [期日:2026-10-25] [領域:サイト]
 
@@ -707,6 +694,7 @@ updated: 2026-10-06
   `ogp/generation.json` の `metadata.background.sha256` と asset 契約に一致し、`stats47-sha256` メタデータだけが無かった。
   本体を変えずに CopyObject (MetadataDirective REPLACE、Content-Type を保持) でメタデータを付け、HEAD と本体の SHA を読み直して確かめた。
   同じ日に上げたほかの背景にも同じ欠落がありうる (未調査)。挙動の是正 (1 記事で run 全体が止まる) は残る。
+- **2026-10-08 挙動の是正**: 本体の SHA が記録と一致し、R2 の HEAD メタデータ (`stats47-sha256`) だけが欠けているか古い背景は、`generate-blog-thumbnails.ts` が exit 21 (`StaleBackgroundMetadataError`) を返し、`blog-auto-publish.yml` はその記事だけを skip して後ろの記事を試す (Step Summary に「背景のメタデータが古い」)。エラーには付け直しの手順 (S3 CopyObject・MetadataDirective REPLACE) を出す。本体の SHA が記録と合わないときは従来どおり run を止める。`workflow-commit-back.test.cjs` に exit 21 を足し、workflow の分岐を外すと落ちることを確かめた。**残り**: 上の 2 (背景の選択の集約) と 3 (Gemini 経路の撤去)。
 - **停止条件**: 3 の画像生成は Codex が要る (クラウド環境では codex MCP が接続できない)。生成はオーナーのローカルで回す。
 - **完了条件**: 1 は背景の無い送り箱の記事で quality-gate が止まることをテストで固定。2 は背景の選択と案内文の実装が 1 か所。3 は `queue` の targets が 0 で、リポジトリに Gemini の生成コードが無い。
 
@@ -732,6 +720,7 @@ updated: 2026-10-06
 - **本番反映 (2026-10-08)**: uruhayato373/stats47#1108 で main へマージ (10:17 UTC)。デプロイと post-deploy smoke (run 37763482616) は成功。移動の push で `blog-auto-publish` (run 37760839708) が `contents/blog` から 20 本を候補に取り、19 本は手書き出典節、1 本は背景未生成の blocker で全件 skip した (公開 0・R2 は不変)。PR の図の検証 workflow は抽出の awk が旧パスのままで 0 件で通っていたので直し、32 本の検証が通った。push からマージまでの定期実行は Instagram の 1 本だけで、outbox に触れず記録の欠落は無い。
 - **次**: ①次に記事を公開する run で `blog-auto-publish.yml` が `contents/blog` から公開し、公開した slug を commit-back で消すこと ②`blog-remediation-daily.yml` の最初の run (2026-10-08 23:00 UTC = 10-09 08:00 JST) が `contents/blog` を掃除して書き戻すことを、run のログで確かめる。
 - **完了条件**: 上の 2 つの run が成功し、ログに `contents/blog` の slug が出ている。
+- **① 済 (2026-10-08)**: cc-estat-14 の書き直し (a1535b433) の push で `blog-auto-publish` (run 37776610241) が `contents/blog` から公開し、outbox 掃除を 938ca1fa1 で書き戻した。本番の記事は新しい表 ID (0003409159) を出している。残りは ② の日次 run だけ。
 
 ### [BLOG-TITLE-CHANGE-WATCH-01] 図の年の書き直しでタイトルを変えた公開記事の検索流入を、公開後に確かめる
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-07] [領域:サイト]
@@ -868,18 +857,6 @@ updated: 2026-10-06
 - **次**: 2 本を R2 から contents/blog へ取り、本文の表記とコード例 (`runtime = "edge"`・`wrangler pages deploy` など) を公式ドキュメントで確かめて直す。タグを替えるなら known-tag-keys の再生成を同じ変更に入れる。blog-critic を通して公開する。
 - **完了条件**: 2 本の本文に Pages 前提の記述が残っておらず、critic PASS で再公開されている。
 
-### [BLOG-STATS-TABLE-ID-FIX-01] 公開中の Claude Code 連載 cc-estat-14 の、実在する別の表を指す統計表 ID を直す
-タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:node .claude/scripts/blog/quality-gate.mjs <slug>] [起票:2026-10-07] [領域:サイト]
-
-- **事象**: 2026-10-07 に入れた統計表 ID の照合 (`stats-table-id-lint.mjs`) を公開済み 389 記事に当てたところ、2 本が当たった。
-  `cc-estat-14-energy-area-chart` は「電力需給統計」として `0003234567` を書いているが、e-Stat では木材統計調査の表である。連番風の ID で、例として作った値の可能性がある。
-- **済 (2026-10-08)**: もう 1 本の `cc-estat-09-radar-prefecture` は、6 軸を社会・人口統計体系の実在の指標に置き換え、R2 の実データとレーダーチャート
-  (svg-builder に radar 型を新設) で書き直して再公開した (5d1ad14d8、blog-critic PASS)。出典 0 件が解消し、survey taxonomy の週次・PR の検査が通る。
-- **手順**: cc-estat-14 を R2 から contents/blog へ取り (`node .claude/scripts/blog/refresh-article-data-years.mjs --slug cc-estat-14-energy-area-chart --pull`)、
-  e-Stat で実在する正しい表の ID に差し替える (取れなければ ID を書かずに統計名とデータベースへのリンクにする)。
-  コード例の取得結果と本文の数値が実データと食い違わないかも確かめ、blog-critic を通して公開する。
-- **完了条件**: quality-gate の `STATS_TABLE_*` が 0 件で再公開され、本番の記事で ID と統計名が一致している。
-
 ### [DEPS-TAILWIND4-01] apps/web を tailwindcss 4 へ移行し、braces を runtime 依存から外す
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:npm audit --omit=dev --audit-level=low] [起票:2026-10-06] [領域:管理]
 
@@ -1004,6 +981,7 @@ updated: 2026-10-06
   2. `set-effort` 4 件は 2026-10-02 に canary 済みで全件合格 (Sonnet 5.5 の xhigh → high、各 3 回)。recall はすべて 1.0 → 1.0、1 回の費用は article-writer 10%・blog-critic 15%・open-data-curator 6%・sns-renderer 5% 減。frontmatter に `effort: high` を書くかはオーナー判断待ち。課題は合成の 1 題ずつなので、書いたら 2 週の実運用で品質を見る
   3. 費用の大半はメインセッション (4 週 $1,231・Opus 5 / 5.5 の xhigh が中心)。対話の既定 effort を下げるかはオーナーの使い方次第なので、`/ops/agents` の「メインセッション」を週次で見る
 - **完了条件**: 合格した 4 体の frontmatter に effort を書き (またはオーナーが見送りを決め)、次の `npm run model-usage:report` で `set-effort` 提案が消えている。
+- **2026-10-08 適用 (オーナーの「できることは全てやって」を受けて)**: 4 体の frontmatter に `effort: high` を書き、`npm run model-usage:report` の提案は 0 件になった (`npm run model-usage:test` 15 件通過)。**残り**: 2026-10-22 まで 4 体の実運用で見落とし・差し戻しが増えないかを見る (増えたら effort を外す)。code-reviewer の sonnet 化の監視 (2026-10-30 まで) と、メインセッションの effort の見直しは上の 1・3 のとおり。
 - **2026-10-05 推奨 (W41 Could 2・オーナー判断待ち)**: 4 体 (open-data-curator / sns-renderer / article-writer / blog-critic) の frontmatter に `effort: high` を書く。根拠は canary 4 件とも recall 1.0 → 1.0、1 回の費用 5〜15% 減 (`.claude/state/metrics/model-usage/latest.json` の canary)。課題は合成 1 題ずつなので、書いたら 2 週の実運用で見落とし・差し戻しの増加を見て、増えたら外す。
 
 ### [ADMIN-MCP-STATUS-01] 管理画面で、この PC が使う MCP の一覧と接続状況を見られるようにする
@@ -2309,20 +2287,6 @@ updated: 2026-10-06
   スマホで縦に積まれる / 関連記事がサムネイル付きで、補う候補が 3 件以上あるページ (納豆で確認) では 3 件出る / ランキングページの右レールに出典調査のカードが無い /
   撮り直しでスマホのページ高さが現状 (5,284px) から減っている。
 
-### [BLOG-OUTBOX-DATA-SOURCE-01] contents/blog に滞留した公開フラグ付き原稿 19 本の理由を確かめ、手書き出典節を移行する
-
-タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npx tsx .claude/scripts/blog/migrate-data-source-sections.ts --outbox] [起票:2026-09-25] [領域:データ]
-
-- **背景**: 2026-09-25 の出典統一で `quality-gate.mjs` が本文の手書き「データ出典」節を blocker にした。`contents/blog` には
-  手書き節を持つ原稿が 27 本あり、うち 19 本は `published: true` のまま公開されずに残っている (prune は R2 と内容一致のときだけ消すので、
-  R2 と差がある)。なぜ公開されていないかは未確認。このまま公開しようとすると新しい gate で止まる。
-- **現在地 (2026-10-08 に確認)**: 19 本は改稿版ではなく、R2 より古い写しだった。R2 の本文は 2026-09-25 の移行で「## データ出典」節を消すか「## データについて」へ改めた版で、outbox 側との差はこの節だけ (19 本すべてで R2 と比べて確認)。`select-republish-slugs.mjs` は内容が違うので「revised」として毎回選び、`quality-gate.mjs` が手書き出典節の blocker で止めるので公開されない (= R2 は退行しない)。08-30 の統合 commit (`23b382309`) が掃除済みの原稿を出戻りさせたとみられる。R2 が新しいので、変換して再公開するより outbox から消すほうが筋がよい。
-- **次**: ① 19 本について、公開 workflow (`blog-auto-publish.yml`) が選ばなかった理由を `select-republish-slugs.mjs` と
-  `quality-gate.mjs` の出力で確かめる。② 公開を意図するものは `migrate-data-source-sections.ts --outbox --apply` で変換してから公開経路へ戻す。
-  意図しないものは `published: false` にするか、R2 と同じ内容なら outbox から除く。
-- **停止条件**: 公開 (R2 反映) はオーナーの確認を取ってから行う。変換は出典節だけを変え、散文は変えない。
-- **完了条件**: 検証コマンドが「contents/blog 原稿: 0 本」を返す。
-
 ### [KINDLE-DATA-SOURCE-01] Kindle の章の出典をブログ本文の手書き節から切り離し、据え置き 61 本の本文も移行する
 
 タグ: [収益化] [種類:改善] [実行:対話] [検証:npx tsx packages/ranking/src/scripts/audit-survey-taxonomy.ts --offline --check] [起票:2026-09-25] [領域:商品]
@@ -3056,6 +3020,15 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - 2026-09-07 時点 topic-queue done 81 件 (A:29/B:12/D2:23/F:7/G:10)。大半が 4 週齢未満で比較は延期。効果判定エンジン対象外 (型別コホート比較)。
 - **2026-10-04 の実測 (W40 の無人 triage が書いたが、Issue #1068 で push されず 10-05 に書き戻した)**: **2026-10-04実測**: `data/blog/topic-queue.json` (generatedAt 2026-10-04、gscWeek 2026-W40) の done は81件で、2026-09-06生成時の81件から増えていない。したがって done 81件はすべて公開から4週(28日)以上経過し、09-07時点の延期理由は解消した。ただしこのrunではGSC照会を実行していないため、型別のclicks・impressionsは未取得で、効果は判定していない。次: 2026-10-11までに done 81件のslugを型ごとに分け、`data/gsc/snapshots/2026-W40/pages.csv` のclicks・impressionsを型別に集計して比較する (型ごとの記事数が7〜29件と偏るため、合計だけでなく中央値とimp 0の記事数を併記する)。2026-10-11に比較できなければ、取得できなかった理由と再実行条件を詳細ログへ書く。**効果判定エンジン対象外**: 単一ページではなく型ポートフォリオのコホート比較のため、判定は上記の型別コホート比較で行う
 
+- **2026-10-08 集計 (期日 10-11 の型別比較)**: topic-queue の done 81 本を `data/gsc/snapshots/2026-W37〜W40/pages.csv` (4 週 = 28 日) で型ごとに合計した。
+  A 29 本: clicks 72・表示 3,564・中央値 7・表示 0 が 14 本。B 12 本: 29・885・34.5・2 本。D2 23 本: 5・36・0・**22 本**。F 7 本: 32・952・0・6 本。G 10 本: 50・1,185・16.5・5 本。
+  表示 0 の本数は W40 の 1 週だけで数えても同じで、表示が少ないのではなく出ていない。保存済みの URL Inspection (`data/gsc/url-inspection/`、10-02〜10-08) では
+  D2 の 20 本が「検出 - インデックス未登録」12・「URL が Google に認識されていません」6・「クロール済み - インデックス未登録」1・登録済み 1 (残り 3 本は未検査)。
+  したがって D2 の差は記事型の効果ではなく、索引に入っていないことによる。型の効果は、索引に入った記事どうしでしか比べられない。
+  **[仮説]** D2 は 09-01〜09-02 に 23 本を一度に出したため、Google が発見したまま巡回を後回しにしている。**検証**: `node .claude/scripts/gsc/url-inspection-daily.cjs` の日次 (500 件/日) が
+  D2 の 23 本を含む回で状態を数え直す。**期日 2026-10-25**: その時点で D2 の過半が「検出 - インデックス未登録」のままなら、sitemap の lastmod と内部リンク (ランキングページから記事への導線) を調べる。
+  索引に入った記事が型ごとに 5 本以上そろったら、型の比較をやり直す (再開条件は上のとおり)。
+
 ### [BLOG-SEO-QUEUE-01] topic queue 起点の記事が需要候補を正しく選び、公開後に検索表示を得たか確認する
 
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-05] [領域:サイト]
@@ -3063,6 +3036,11 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - 2026-10 月次計画で improvements から降格。再開条件: BLOG-SEO-TYPES-01 と同時に、公開 4 週以上経過分で `gsc-query.mjs` のコホート比較を行う時 (`[kpi: search-clicks]`)。
 - 2026-09-07 時点で queue done 81 件、BLOG-QUEUE-TRACK-01 の状態ずれは解消。効果判定エンジン対象外 (queue コホート集計)。
 - **2026-10-04 の実測 (W40 の無人 triage が書いたが、Issue #1068 で push されず 10-05 に書き戻した)**: **2026-10-04実測**: `data/blog/topic-queue.json` (generatedAt 2026-10-04、gscWeek 2026-W40) の done は81件で、2026-09-06生成時から増えておらず、81件すべてが公開から4週(28日)以上経過した。標本・期間の条件は満たしたが、このrunではGSC照会を実行していないため、検索表示を得たかは未判定。次: 2026-10-11までに done 81件それぞれについて、`data/gsc/snapshots/2026-W40/pages.csv` のimpressionsが0か1以上かを数え、1以上の記事の割合とclicks合計を出す。選定時の `evidence.gscImp` (queueに保存されている需要側の値) と公開後impressionsを並べ、需要候補の選定が当たったかを見る。2026-10-11に比較できなければ、取得できなかった理由と再実行条件を詳細ログへ書く。**効果判定エンジン対象外**: 単一ページ前後比較ではなくqueue由来コホートの集計判定のため、判定は上記のコホート集計で行う
+
+- **2026-10-08 集計 (期日 10-11 の需要候補の当たり外れ)**: done 81 本のうち 4 週 (W37〜W40) で表示が 1 以上あったのは 32 本 (40%)、clicks 合計 188・表示 6,622。
+  選定時の需要 (`evidence.gscImp`、無ければ `areaImp`) が分かる 80 本を中央値 129 で 2 つに分けると、上半分 40 本のうち表示ありは 17 本、下半分 40 本は 14 本で、
+  需要の大小と公開後の表示 (W40 の 1 週) の順位相関は 0.03 だった。ただし表示 0 の 49 本の多くは索引に入っていない (BLOG-SEO-TYPES-01 の URL Inspection の内訳) ので、
+  「選定が外れた」のか「索引に入らず結果が出ていない」のかはまだ分けられない。索引に入った記事だけで同じ比較をやり直すまで、選定の当否は判定しない。
 
 ### [TOKEN-AICONTENT-01] Claude 自動生成の API 課金 (5 件 run $79〜$90) を課金無効 project の Gemini 日次へ移行する
 
@@ -3204,6 +3182,8 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - **完了条件**: PR #1094 がマージされ、本番の R2 で客室稼働率が 2009〜2024 年の 16 年分を配信し、`LATEST.md` の 4 分類が 0 件のまま週次で保たれ、未判断の除外が 0 件になる (`years` は手で書く許可リストではなく台帳から機械で合わせる列にした)。
 - **関連**: `THEME-SINGLE-YEAR-CARDS-01` (単年カード 287 枚の多くはこの穴が原因)、`YEAR-COV-*` の自動起票 (第 2 段で台帳の差分に置き換える)。
 
+- **#1094 を取り込むときの注意 (2026-10-08)**: develop で物価地域差指数 12 指標に 2025 年の補完 (`supplementalSources`、yearFormat を calendar に変更) と、魚種別漁獲量 12 指標に 2016〜2018・2023 年の補完を入れた (c8281131a)。#1094 のブランチは物価 9 指標の `years.from` を 2013 に広げる差分を持つが、develop では既に 2013〜2025 になっている。衝突したら develop 側 (補完つき) を残す。
+
 ### [YEARS-DOWNSTREAM-FOLLOW-01] 指標の年が増えたあと、AI 解説・ブログ・計算型 metric・年固定の比較カードが古い年のまま残るのを直す
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-07] [領域:サイト]
 
@@ -3259,6 +3239,11 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
   テーマ別の提案 (`theme-proposal-format.md`) で扱う。
 - **禁止**: 確認していない年を `years` に書かない。R2 の観測値の再取得とデプロイは別の承認で行う。
 - **完了条件**: `/quality/theme-viewpoints` の `single-year-as-trend` の件数が、振り分け ① の「本当に 1 年だけ」の件数以下になっている。
+- **① の結果 (2026-10-08)**: 視点と同じ判定関数で数え直すと 44 テーマ 281 枚 (287 枚との差 6 枚は、10-07 の観光・物価の提案の実装で年固定の比較カードにした分と外した分)。270 指標を次の 3 つに分けた。根拠は年カバレッジ監査 (`data/estat/year-coverage/queue.json`、北海道 1 県の標本) と、e-Stat の実在年の台帳 (未マージのブランチ `claude/estat-availability-ledger` の `data/estat/availability/tables/`、全県の値の有無) で、両方にある 70 指標はすべて一致した。
+  - **e-Stat に複数年ある: 63 指標・69 枚**。63 指標とも、台帳に合わせて years を広げる uruhayato373/stats47#1094 (draft、#1093 の上に積んだ第 2 段) のブランチで既に複数年になっている。#1094 のマージで 69 枚が視点から外れる見込み。#1094 は本文で 11-06 のテーマ実験の観測の後のマージを勧めている。
+  - **本当に 1 年だけ: 62 指標・65 枚**。54 指標は国勢調査・経済センサス・社会生活基本調査・住宅・土地統計調査・就業構造基本調査など、調査回ごとに表が分かれる統計の 1 回分。前の回が別の表にあるかは未確認。
+  - **未確認: 145 指標・147 枚**。すべて `source.kind: external` (manual 142・ssds 2・mlit_ksj 1) で、監査も台帳も見ていない。44 指標は e-Stat のダウンロードファイルを出典にしている。
+- **次 (更新)**: ② #1094 のマージ後に件数を数え直す。③ 65 枚は前の回の表を確かめ、無ければ年固定の比較カードへの提案 (`theme-proposal-format.md`) にする。147 枚は external の出典を指標ごとに確かめる (件数が多いので、テーマのカードに出る指標から順に `YEAR-COV-*` と同じ 10 件ずつで回す)。
 - **関連**: 年の穴の根本対応は `ESTAT-YEAR-AVAILABILITY-01`。そちらの第 1 段の差分報告を ① の振り分けに使う。
 
 ### [SEO-META-FROM-VALUES-01] ランキングの seoTitle / seoDescription に観測値を直書きするのをやめ、値から生成する
@@ -3320,6 +3305,16 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
   ④ fishery-marine に「主な魚種」の章を提案する (選んだ県の魚種構成。提案 → 承認 → catalog 編集の順)。⑤ ブログ `bonito-catch-prefecture` の更新を blog 側へ渡す。
 - **禁止**: 2015 年の値を最新値として見せない。海のない県の対象外を 0 として順位に入れない。
 - **完了条件**: 12 指標の `years.to` が 2023 になり、`/ranking/fishery-species-catch-bonito` が 2023 年の値を表示する。
+- **済 (2026-10-08)**: ①② estat-researcher が解決した。2016 `0003216642`・2017 `0003322129` は地域が @area、2018 `0001803958` は cat02・2023 `0004043248` は cat01 に
+  県名で入る (全国 + 39 県 + 大海区・振興局)。全国値は 2014〜2016 年の 12 魚種すべてで累年統計と一致し、魚種名と 39 県の範囲も同じなので、同じ key でつなぐ。
+  ③ 12 指標に `supplementalSources` で 4 年を足し、`years.to` を 2023 にした。取り込み側は `areaAxis.coverage: "coastal"` (海のない 8 県ちょうどの欠けだけを許す) を足して
+  補完表でも地域の写像を使えるようにした。ローカル取り込みで 12 本とも 4 年分 39 行が入り、静岡のカツオ 2023 年 56,969 t は年次表の値と一致した。
+  description の「40都道府県」は 39 に直した (累年表の 40 は全国を含む数)。
+- **残る年**: 2019 年は魚種別の表が API に無い。2020〜2022 年は県別の 39 表に分かれ、青森 (2020・2021)・大阪 (2020)・山形 (2021・2022) の表が API に無いため載せていない。
+  県欠けの年を載せると順位がずれるので、e-Stat に表が揃うか、別の取得元を決めるまでは 2018 → 2023 の間が空く。
+- **次**: ④ fishery-marine に「主な魚種」の章を提案する (下)。⑤ ブログ `bonito-catch-prefecture` の 2023 年への更新を blog 側へ渡す。
+- **提案 (2026-10-08、オーナー承認待ち)**: fishery-marine に「主な魚種と産地」章を足す。カツオ・サバ・サンマ・スケトウダラ・ホタテの 5 指標をカード化し、
+  初期表示は 2023 年の上位県。2019〜2022 年が空くことを章の注記に書く。
 
 ### [THEME-AGING-LIVING-ALONE-METRIC-01] 65歳以上人口に占める一人暮らしの割合 (高齢者の独居率) を指標に足す
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run validate:config --workspace=@stats47/data-configs] [起票:2026-10-06] [領域:データ]
@@ -3331,6 +3326,13 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
   解決できるかを e-Stat で確かめる (statsDataId と分類コードを記録)。解決できたら metric config を作り観測値を R2 へ入れ、
   aging-society の「高齢者はどの世帯で暮らすか」章に secondary として足す (提案 → 承認 → catalog 編集の順)。
 - **禁止**: 一般世帯を分母にした既存指標を独居率と言い換えて表示しない。
+- **済 (2026-10-08)**: 新指標 `elderly-living-alone-rate` (65歳以上人口に占める一人暮らしの割合) を作った。社会・人口統計体系 `0000010101` の
+  A811105 (65歳以上の世帯員のいる単独世帯数) ÷ A1303 (65歳以上人口) を `axisRatio` で取り、1980〜2020 年の 5 年ごと 9 回分 (47 県 × 9 = 423 行)。
+  estat-researcher が 2010・2015・2020 の 141 セルで国勢調査の表 (0003038624・0003154100・0003445173 と各年の人口表) と一致することを確かめた。
+  2020 年は東京 26.11% が最高、山形 12.08% が最低 (既存の一般世帯分母の指標は高知が 1 位で、顔ぶれが変わる)。
+  2025 年は国勢調査の表 (0004065973 ÷ 0004065916) にあるが、表が 2 つに分かれ axisRatio では取れないので、社会・人口統計体系への反映を待つ。
+- **提案 (2026-10-08、オーナー承認待ち)**: aging-society の「高齢者はどの世帯で暮らすか」章に `elderly-living-alone-rate` を secondary で足し、
+  既存の一般世帯分母の指標と同じ章で並べる (カード見出しは「高齢者の一人暮らしの割合」、注記に分母の違いを書く)。
 
 ### [THEME-DUP-METRIC-CARD-01] 同じ指標のカードが 2 つの章に出ている 4 テーマを、どちらか 1 か所に整理する
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run validate:catalog --workspace=@stats47/data-configs] [起票:2026-10-06] [領域:データ]
@@ -3344,6 +3346,14 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
   の唯一のカードを外す場合は、`npm run theme:expansion:check` がその章を未配線と判定するので、判断台帳
   (`theme-feasibility-catalog.json`) の扱いも同じ変更で決める。
 - **完了条件**: 4 テーマで同じ rankingKey のカードが 1 か所だけになり、見出しに「章名｜」が残っていない。
+- **範囲の訂正 (2026-10-08)**: 同じテーマの中で同じ rankingKey が 2 枚のカードに出ているのは、上の 4 件だけではなく 6 テーマ 16 指標ある (healthcare 5・labor-mobility 3・climate・living-housing・real-income・safety 各 2。THEME-SINGLE-YEAR-CARDS-01 の振り分けの途中で見つかった)。
+- **済 (2026-10-08)**: `validate:catalog` に `[group-dup-metric]` (warning) を足し、既存 16 件を warning baseline (`.claude/config/quality-warning-baseline.json`、期限 2026-12-31) に登録した。17 件目からは develop の Quality Warning Ratchet が止める。意図して 2 章に置く例外の仕組みは、下の提案で「両方に残す」が承認されたときだけ足す。
+- **提案 (2026-10-08、オーナー承認待ち)**: 外すカードを次のとおりにする。章の唯一のカードを外すことになるのは ⑤⑦⑧ の 3 章で、その章ごと既存章へ畳み、`theme-feasibility-catalog.json` の該当候補を「既存章に統合」に変える。
+  ① climate 年間日照時間: 「暑さと熱中症の救急搬送」(candidate-104-3) から外し「日照」に残す。② climate 年間雪日数: 「雪国の暮らしと除雪」(candidate-96-1) から外し、図のある「降水と雪」に残す。
+  ③ healthcare 医師・看護師 (人口10万対): 「診療科と年齢から見る医療人材」の単独カード 2 枚 (candidate-57-1・-2) を外し、2 系列カード supply-1 に残す。④ healthcare 健康寿命 男・女: candidate-65-1・-2 を外し healthy-years に残す。救急搬送病院収容所要時間: candidate-58-7 を外し「地域の医療アクセス」(その章の唯一のカード) に残す。
+  ⑤ labor-mobility 有効求人倍率: 「人手不足と求人」(candidate-33) はこの 1 枚だけなので章ごと「求人・求職と職業紹介」へ畳む。⑥ labor-mobility テレワーク実施率・昼夜間人口比率: work-style の 2 系列カードは candidate-39-1 と candidate-84-1 の完全な重複なので、work-style のカードを外す (work-style 章は埋め込み章だけ残るので、章の扱いも同時に決める)。
+  ⑦ real-income 実収入・可処分所得: 「可処分所得と生活費」(candidate-73) の 2 枚はどちらも household-income の重複なので章ごと畳む。living-housing 単独世帯割合: candidate-44-3 を外し households に残す。一般世帯数: 「空き家の用途と住宅ストック」(candidate-8-2) から外し「世帯構成の変化」に残す。
+  ⑧ safety 交通事故死者数: candidate-88-2 を外し traffic-1 に残す。救急出動件数: candidate-110-2 を外し fire-emergency-1 に残す。
 
 ### [MANUAL-METRIC-YEARNAME-01] 手動取得の指標の年表記に「年」「年度」が付かず、e-Stat 由来の指標と表示が揃わない
 
@@ -3381,6 +3391,27 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - **次**: 件数の直書きを `THEME_CATALOGS` 由来の値に置き換える。ただし「意図せず消えたテーマ」を検出する役割があるテストは、キー一覧の固定など別の形で残す。
 - **完了条件**: テーマを 1 つ足しても、カタログ JSON・登録簿・生成物以外のテストを手で直さずに通る。
 
+### [PERF-THEME-HTML-SIZE-01] テーマページの HTML を目安 900KB に収める (新テーマ household-food-spending は 2.9MB)
+
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-08] [領域:サイト]
+
+- **観測 (2026-10-08、Googlebot UA・CDN パージ後)**: `/themes/household-food-spending` の HTML は 2,917,296 bytes、`/areas/<県>/household-food-spending` も約 2.93MB (47 ページ)。
+  既存の最大は `/themes/healthcare` 1,607,344 bytes、`sports-participation` 800,776、`consumer-prices` 477,891。基準は `.claude/skills/analytics/performance-improvement/page-quality-budgets.json` の
+  `html_bytes` 900,000 (warning)。初回 (キャッシュ無し) 応答は 10.6 秒、2 回目は 0.13 秒。
+- **[仮説]** 指標 136 件と、`comparisonYear` を持つ 30 グループの値をサーバー描画で HTML に埋め込んでいる。検証: HTML 内の RSC payload を指標キーごとに数え、グループ数を減らした版をローカルで測る。
+- **関連**: Workers CPU の増加調査 `CF-CPU-SURGE-01` の候補「テーマ拡充で 1 ページが重くなった」と同じ現象。
+- **完了条件**: 新テーマと healthcare の HTML が 900KB 以下、または目安を超える理由と新しい基準を page-quality-budgets.json に記録する。
+
+### [SEO-UNIT-DASH-01] 41 指標の SEO 文字列に、e-Stat の単位の欠け記号「‐」が「（6.1‐）」の形で入っている
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:grep -rl "‐）" packages/data-configs/src/metrics | wc -l] [起票:2026-10-08] [領域:データ]
+
+- **事象 (2026-10-08 実測)**: `grep -rl "‐）" packages/data-configs/src/metrics` が 41 ファイル。例は周産期死亡率の seoTitle「1位秋田県（6.1‐）」、
+  自殺率「1位和歌山県（21.8‐）」。社会・人口統計体系の単位が「‐」(単位なし) の指標で、SEO 文字列を作ったときに単位欄をそのまま貼っている。
+  検索結果の見出しと説明にそのまま出る。estat-researcher が魚種・物価の調査中に見つけた。
+- **次**: 41 件の値の後ろの「‐」を外す (指標の意味に合う単位語があれば「人口千人当たり」等を本文側に書く)。再発を止めるため、
+  `validate-metric-config.ts` に seoTitle / seoDescription の「数字‐）」を error にする規則を足す。
+- **完了条件**: 上の grep が 0 件で、lint が「‐」入りの SEO 文字列を弾く。
+
 ## 🟢 低 — 時期未定・条件付き (trigger は本文に)
 
 ### [DATA-SHUKUHAKU-CORRECTION-01] 宿泊旅行統計の 2026 年分を足すときに、層化基準の変更による系列の断絶を書く
@@ -3407,6 +3438,10 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - **次**: 上の検証コマンドで 2025 年が実在年に入ったら、物価地域差指数 12 指標の `years.to` を 2025 にし、`data-refresh` で取り込む。
   config の `years` は `to: 2024` で止めてあるので、出典に新しい年が入っても自動では取り込まれない。
 - **完了条件**: 12 指標の R2 の値に 2025 年があり、`/themes/consumer-prices` のヒートマップが 2025 年の列まで描く。
+- **対応 (2026-10-08、R2 反映は未確認)**: 社会・人口統計体系を待たず、同じ指数を載せた一次の表 `0003441258` (小売物価統計調査 構造編、cdTab=40) から
+  2025 年だけを `supplementalSources` で補った (c8281131a)。2013〜2024 年は 47 県 x 12 費目の 6,768 セルが社会・人口統計体系の値と一致した。
+  表の年は暦年 (「2025年」) なので yearFormat を calendar に直した。data-refresh の run で R2 の 12 指標に 2025 年が入ったら、このカードを消す。
+  社会・人口統計体系に 2025 年が入ると取り込みが `[supplement-overlap]` を警告するので、値を確かめて補完を外す。
 
 ### [SSOT-CONSOLIDATION-REST-01] 2026-10-06 の定数集約で見送った重複を、挙動の差を解消してから寄せる
 
@@ -3607,6 +3642,24 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - **内容**: ① `heatstroke-deaths` は実数のみ。人口 10 万人当たりの計算型 metric (`fetcherKey: calculated`) を足すと県の比較に使える。② `sex-ratio-age-20-39` は 2015・2020 年のみ。2025 年国勢調査の 5 歳階級別人口が公表されたら年を足す (`.claude/scripts/data/fetch-census-sex-ratio-20-39.mjs`)。
 - **trigger**: ①は熱中症を扱う記事やテーマを作るとき。②は 2025 年国勢調査の年齢別確定値の公表時。
 - **完了条件**: それぞれ指標が R2 に反映され、ランキングページで確認できる。
+
+### [METRIC-DEF-ELECTRICITY-DEMAND-01] 電力需要量 (electricity-demand) の config に定義・調査が無く、単位が全角の「Ｍｗｈ」
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npx tsx .claude/scripts/blog/build-metric-definition-sheet.ts --keys electricity-demand] [起票:2026-10-08] [領域:データ]
+
+- **事象**: 指標定義シートが「対象・分母 (config に対象の記述なし)」「調査 (surveyId 未設定)」を返し、単位は全角の「Ｍｗｈ」。
+  ブログ cc-estat-14 の再審査で blog-critic が見つけた (記事は MWh と書いている)。
+- **次**: 社会・人口統計体系 `#H05107` の元の調査 (電力調査統計) と対象を確かめ、description・surveyId を足し、単位を「MWh」に揃える
+  (表示が変わるので、ランキングページとブログの表記をあわせて確かめる)。
+- **完了条件**: 定義シートの対象・調査が埋まり、単位が半角の MWh になる。
+
+### [BLOG-CC14-STACKED-AREA-FIGURE-01] cc-estat-14 (積み上げ面の記事) に、実データの積み上げ面の図を載せる
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:node .claude/scripts/blog/quality-gate.mjs contents/blog/cc-estat-14-energy-area-chart/article.md] [起票:2026-10-08] [領域:サイト]
+
+- **背景**: 2026-10-08 の書き直しで、存在しない統計表 ID を外し、積み上げ面のサンプルを「仮の値」と明記した。記事には積み上げ面の図が 1 枚も無い。
+  svg-builder のカタログにも積み上げ面の部品が無い (blog-critic の起票候補)。
+- **次**: 実在の表 `0003409159` の電力量 (tab 160) は 2013 年 4 月〜2016 年 3 月の 36 か月で、電灯需要計 (120)・電力需要計 (200)・特定規模需要計 (310) が
+  欠損なしにそろう (critic が確認)。chart-author で svg-builder に積み上げ面の部品を足し、この 3 系列の図を記事に載せる。
+- **完了条件**: 記事に実データの積み上げ面の図があり、blog-critic が PASS。
 
 ## 🟣 判断待ち — やるかどうかの意思決定が未了
 

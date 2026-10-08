@@ -355,6 +355,7 @@ export function validateMetricGroups(
   const seenGroupKeys = new Set<string>();
   const seenTitles = new Set<string>();
   const assigned = new Set<string>();
+  const groupsByKey = new Map<string, string[]>();
   const comparisonYears = new Map<string, string>();
 
   for (const g of groups) {
@@ -394,6 +395,7 @@ export function validateMetricGroups(
         );
       }
       assigned.add(k);
+      groupsByKey.set(k, [...(groupsByKey.get(k) ?? []), g.key]);
     }
 
     // defaultCheckedKeys ⊆ rankingKeys かつ 1 件以上 (空だとカードが系列ゼロで開く)
@@ -437,6 +439,15 @@ export function validateMetricGroups(
         `[group-large] ${c.key}/${g.key}: 系列候補が ${g.rankingKeys.length} 件 — カードの分割を検討`
       );
     }
+  }
+
+  // 同じ指標を 2 枚以上のカードに置かない。後から足した章 (candidate-*) が既存の章と同じ指標を
+  // 持つと、同じ推移が 1 ページに 2 回出る (THEME-DUP-METRIC-CARD-01)。既存分は warning baseline で縮める
+  for (const [k, groupKeys] of groupsByKey) {
+    if (groupKeys.length < 2) continue;
+    warns.push(
+      `[group-dup-metric] ${c.key}: rankingKey "${k}" が ${groupKeys.length} 枚のカードに出ている (${groupKeys.join(' / ')})`
+    );
   }
 
   // 非 context 指標の未所属 (グループを定義したなら主要指標は必ずどれかのカードに出す)

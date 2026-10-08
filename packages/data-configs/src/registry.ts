@@ -580,6 +580,7 @@ import { elderlyCoupleOnlyHouseholdRatio } from "./metrics/elderly-couple-only-h
 import { elderlyGeneralWorkerOldPopulationRatioPre2019 } from "./metrics/elderly-general-worker-old-population-ratio-pre2019";
 import { elderlyGeneralWorkerOldPopulationRatio } from "./metrics/elderly-general-worker-old-population-ratio";
 import { elderlyHouseholdDetail } from "./metrics/elderly-household-detail";
+import { elderlyLivingAloneRate } from "./metrics/elderly-living-alone-rate";
 import { elderlyOnPublicAssistancePer100065plus } from "./metrics/elderly-on-public-assistance-per-1000-65plus";
 import { elderlyPopulationRatio } from "./metrics/elderly-population-ratio";
 import { elderlySinglePersonHouseholds } from "./metrics/elderly-single-person-households";
@@ -3222,6 +3223,7 @@ export const METRICS_REGISTRY: MetricRegistry = {
   "elderly-general-worker-old-population-ratio-pre2019": elderlyGeneralWorkerOldPopulationRatioPre2019,
   "elderly-general-worker-old-population-ratio": elderlyGeneralWorkerOldPopulationRatio,
   "elderly-household-detail": elderlyHouseholdDetail,
+  "elderly-living-alone-rate": elderlyLivingAloneRate,
   "elderly-on-public-assistance-per-1000-65plus": elderlyOnPublicAssistancePer100065plus,
   "elderly-population-ratio": elderlyPopulationRatio,
   "elderly-single-person-households": elderlySinglePersonHouseholds,

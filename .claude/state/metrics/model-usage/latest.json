@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-07T00:48:59.265Z",
+  "generatedAt": "2026-10-08T11:25:46.216Z",
   "window": {
     "weeks": 4,
     "subWeeks": [
@@ -63,7 +63,7 @@
       },
       "costPerRun": 43.9076,
       "declaredModel": "sonnet",
-      "declaredEffort": null,
+      "declaredEffort": "high",
       "custom": true
     },
     {
@@ -102,7 +102,7 @@
       },
       "costPerRun": 8.6147,
       "declaredModel": "sonnet",
-      "declaredEffort": null,
+      "declaredEffort": "high",
       "custom": true
     },
     {
@@ -121,7 +121,7 @@
       },
       "costPerRun": 1.9237,
       "declaredModel": "sonnet",
-      "declaredEffort": null,
+      "declaredEffort": "high",
       "custom": true
     },
     {
@@ -215,7 +215,7 @@
       },
       "costPerRun": 0.8709,
       "declaredModel": "sonnet",
-      "declaredEffort": null,
+      "declaredEffort": "high",
       "custom": true
     },
     {
@@ -458,18 +458,18 @@
   "ci": [
     {
       "workflow": "backlog-loop",
-      "runs": 18,
-      "items": 36,
-      "costUsd": 25.9459,
+      "runs": 17,
+      "items": 34,
+      "costUsd": 25.4928,
       "errors": 0,
       "models": {
-        "unknown": 18
+        "unknown": 17
       },
       "efforts": {
-        "unknown": 18
+        "unknown": 17
       },
-      "costPerRun": 1.4414,
-      "costPerItem": 0.7207
+      "costPerRun": 1.4996,
+      "costPerItem": 0.7498
     },
     {
       "workflow": "improvement-cycle",
@@ -654,56 +654,31 @@
         }
       },
       "generatedAt": "2026-10-01T20:25:41.147Z"
+    },
+    {
+      "file": "2026-10-07-theme-designer-claude-opus-5-5-high-vs-claude-opus-5-5-medium.json",
+      "agent": "theme-designer",
+      "baseline": {
+        "model": "claude-opus-5-5",
+        "effort": "high"
+      },
+      "candidate": {
+        "model": "claude-opus-5-5",
+        "effort": "medium"
+      },
+      "verdict": "pass",
+      "scores": {
+        "baseline": {
+          "recall": 0.8125,
+          "cost": 0.26958879999999996
+        },
+        "candidate": {
+          "recall": 0.8125,
+          "cost": 0.1837455
+        }
+      },
+      "generatedAt": "2026-10-07T00:53:20.054Z"
     }
   ],
-  "proposals": [
-    {
-      "id": "effort:open-data-curator",
-      "kind": "set-effort",
-      "agent": "open-data-curator",
-      "current": "未指定 (継承。直近 4 週の応答の 100% が xhigh/max)",
-      "suggested": "effort: high",
-      "costUsd": 87.8153,
-      "runs": 2,
-      "evidence": "呼び出し 2 回・応答 646 件・換算 $87.8153",
-      "canary": "pass",
-      "next": "canary 合格。frontmatter に effort: high を書いてよい"
-    },
-    {
-      "id": "effort:sns-renderer",
-      "kind": "set-effort",
-      "agent": "sns-renderer",
-      "current": "未指定 (継承。直近 4 週の応答の 100% が xhigh/max)",
-      "suggested": "effort: high",
-      "costUsd": 51.6883,
-      "runs": 6,
-      "evidence": "呼び出し 6 回・応答 744 件・換算 $51.6883",
-      "canary": "pass",
-      "next": "canary 合格。frontmatter に effort: high を書いてよい"
-    },
-    {
-      "id": "effort:article-writer",
-      "kind": "set-effort",
-      "agent": "article-writer",
-      "current": "未指定 (継承。直近 4 週の応答の 96% が xhigh/max)",
-      "suggested": "effort: high",
-      "costUsd": 17.3135,
-      "runs": 9,
-      "evidence": "呼び出し 9 回・応答 304 件・換算 $17.3135",
-      "canary": "pass",
-      "next": "canary 合格。frontmatter に effort: high を書いてよい"
-    },
-    {
-      "id": "effort:blog-critic",
-      "kind": "set-effort",
-      "agent": "blog-critic",
-      "current": "未指定 (継承。直近 4 週の応答の 89% が xhigh/max)",
-      "suggested": "effort: high",
-      "costUsd": 5.2254,
-      "runs": 6,
-      "evidence": "呼び出し 6 回・応答 70 件・換算 $5.2254",
-      "canary": "pass",
-      "next": "canary 合格。frontmatter に effort: high を書いてよい"
-    }
-  ]
+  "proposals": []
 }

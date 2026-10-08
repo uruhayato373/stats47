@@ -1,0 +1,482 @@
+{
+ "statsDataId": "0003409159",
+ "title": "3-(1)用途別電灯電力需要実績（一般電気事業者、卸電気事業者、特定電気事業者及び特定規模電気事業者合計）",
+ "statName": "電力調査統計",
+ "govOrg": "資源エネルギー庁",
+ "surveyDate": null,
+ "overallTotalNumber": 34416,
+ "dimensions": [
+  {
+   "id": "tab",
+   "name": "表章項目",
+   "valueCount": 3,
+   "sampleValues": [
+    {
+     "code": "140",
+     "name": "契約口数",
+     "unit": "口"
+    },
+    {
+     "code": "150",
+     "name": "契約kW数",
+     "unit": "kW"
+    },
+    {
+     "code": "160",
+     "name": "電力量",
+     "unit": "MWh"
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "cat01",
+   "name": "用途別",
+   "valueCount": 28,
+   "sampleValues": [
+    {
+     "code": "100",
+     "name": "合計",
+     "unit": null
+    },
+    {
+     "code": "110",
+     "name": "特定規模需要以外の需要_計",
+     "unit": null
+    },
+    {
+     "code": "120",
+     "name": "特定規模需要以外の需要_電灯需要_計",
+     "unit": null
+    },
+    {
+     "code": "130",
+     "name": "特定規模需要以外の需要_電灯需要_定額電灯",
+     "unit": null
+    },
+    {
+     "code": "140",
+     "name": "特定規模需要以外の需要_電灯需要_従量電灯_A・B",
+     "unit": null
+    },
+    {
+     "code": "150",
+     "name": "特定規模需要以外の需要_電灯需要_従量電灯_C",
+     "unit": null
+    },
+    {
+     "code": "160",
+     "name": "特定規模需要以外の需要_電灯需要_臨時電灯",
+     "unit": null
+    },
+    {
+     "code": "170",
+     "name": "特定規模需要以外の需要_電灯需要_農事用電灯",
+     "unit": null
+    },
+    {
+     "code": "180",
+     "name": "特定規模需要以外の需要_電灯需要_公衆街路灯",
+     "unit": null
+    },
+    {
+     "code": "190",
+     "name": "特定規模需要以外の需要_電灯需要_（選択約款）",
+     "unit": null
+    },
+    {
+     "code": "200",
+     "name": "特定規模需要以外の需要_電力需要_計",
+     "unit": null
+    },
+    {
+     "code": "210",
+     "name": "特定規模需要以外の需要_電力需要_低圧電力",
+     "unit": null
+    },
+    {
+     "code": "220",
+     "name": "特定規模需要以外の需要_電力需要_低圧電力（選択約款）",
+     "unit": null
+    },
+    {
+     "code": "230",
+     "name": "特定規模需要以外の需要_電力需要_その他電力_計",
+     "unit": null
+    },
+    {
+     "code": "240",
+     "name": "特定規模需要以外の需要_電力需要_その他電力_臨時電力",
+     "unit": null
+    },
+    {
+     "code": "250",
+     "name": "特定規模需要以外の需要_電力需要_その他電力_農事用電力",
+     "unit": null
+    },
+    {
+     "code": "260",
+     "name": "特定規模需要以外の需要_電力需要_その他電力_建設工事用電力",
+     "unit": null
+    },
+    {
+     "code": "270",
+     "name": "特定規模需要以外の需要_電力需要_その他電力_事業用電力",
+     "unit": null
+    },
+    {
+     "code": "280",
+     "name": "特定規模需要以外の需要_電力需要_その他電力_業務用電力",
+     "unit": null
+    },
+    {
+     "code": "290",
+     "name": "特定規模需要以外の需要_電力需要_その他電力_高圧電力A・B",
+     "unit": null
+    },
+    {
+     "code": "300",
+     "name": "特定規模需要以外の需要_電力需要_（選択約款）",
+     "unit": null
+    },
+    {
+     "code": "310",
+     "name": "特定規模需要_計",
+     "unit": null
+    },
+    {
+     "code": "320",
+     "name": "特定規模需要_特別高圧",
+     "unit": null
+    },
+    {
+     "code": "330",
+     "name": "特定規模需要_高圧",
+     "unit": null
+    },
+    {
+     "code": "340",
+     "name": "特定供給",
+     "unit": null
+    },
+    {
+     "code": "350",
+     "name": "自家消費",
+     "unit": null
+    },
+    {
+     "code": "360",
+     "name": "自家発（速報値）",
+     "unit": null
+    },
+    {
+     "code": "370",
+     "name": "総需要",
+     "unit": null
+    }
+   ],
+   "hasTotal": true
+  },
+  {
+   "id": "cat02",
+   "name": "地方事業者名",
+   "valueCount": 15,
+   "sampleValues": [
+    {
+     "code": "100",
+     "name": "合計",
+     "unit": null
+    },
+    {
+     "code": "120",
+     "name": "一般電気事業者計",
+     "unit": null
+    },
+    {
+     "code": "130",
+     "name": "北海道電力",
+     "unit": null
+    },
+    {
+     "code": "140",
+     "name": "東北電力",
+     "unit": null
+    },
+    {
+     "code": "150",
+     "name": "東京電力",
+     "unit": null
+    },
+    {
+     "code": "160",
+     "name": "中部電力",
+     "unit": null
+    },
+    {
+     "code": "170",
+     "name": "北陸電力",
+     "unit": null
+    },
+    {
+     "code": "180",
+     "name": "関西電力",
+     "unit": null
+    },
+    {
+     "code": "190",
+     "name": "中国電力",
+     "unit": null
+    },
+    {
+     "code": "200",
+     "name": "四国電力",
+     "unit": null
+    },
+    {
+     "code": "210",
+     "name": "九州電力",
+     "unit": null
+    },
+    {
+     "code": "220",
+     "name": "沖縄電力",
+     "unit": null
+    },
+    {
+     "code": "230",
+     "name": "卸電気事業者計",
+     "unit": null
+    },
+    {
+     "code": "240",
+     "name": "特定電気事業者計",
+     "unit": null
+    },
+    {
+     "code": "250",
+     "name": "特定規模電気事業者計",
+     "unit": null
+    }
+   ],
+   "hasTotal": true
+  },
+  {
+   "id": "time",
+   "name": "時間軸（年度月次）",
+   "valueCount": 42,
+   "sampleValues": [
+    {
+     "code": "2016000303",
+     "name": "2016年3月",
+     "unit": null
+    },
+    {
+     "code": "2016000202",
+     "name": "2016年2月",
+     "unit": null
+    },
+    {
+     "code": "2016000101",
+     "name": "2016年1月",
+     "unit": null
+    },
+    {
+     "code": "2015110000",
+     "name": "2015年度4～9月期",
+     "unit": null
+    },
+    {
+     "code": "2015100000",
+     "name": "2015年度",
+     "unit": null
+    },
+    {
+     "code": "2015001212",
+     "name": "2015年12月",
+     "unit": null
+    },
+    {
+     "code": "2015001111",
+     "name": "2015年11月",
+     "unit": null
+    },
+    {
+     "code": "2015001010",
+     "name": "2015年10月",
+     "unit": null
+    },
+    {
+     "code": "2015000909",
+     "name": "2015年9月",
+     "unit": null
+    },
+    {
+     "code": "2015000808",
+     "name": "2015年8月",
+     "unit": null
+    },
+    {
+     "code": "2015000707",
+     "name": "2015年7月",
+     "unit": null
+    },
+    {
+     "code": "2015000606",
+     "name": "2015年6月",
+     "unit": null
+    },
+    {
+     "code": "2015000505",
+     "name": "2015年5月",
+     "unit": null
+    },
+    {
+     "code": "2015000404",
+     "name": "2015年4月",
+     "unit": null
+    },
+    {
+     "code": "2015000303",
+     "name": "2015年3月",
+     "unit": null
+    },
+    {
+     "code": "2015000202",
+     "name": "2015年2月",
+     "unit": null
+    },
+    {
+     "code": "2015000101",
+     "name": "2015年1月",
+     "unit": null
+    },
+    {
+     "code": "2014110000",
+     "name": "2014年度4～9月期",
+     "unit": null
+    },
+    {
+     "code": "2014100000",
+     "name": "2014年度",
+     "unit": null
+    },
+    {
+     "code": "2014001212",
+     "name": "2014年12月",
+     "unit": null
+    },
+    {
+     "code": "2014001111",
+     "name": "2014年11月",
+     "unit": null
+    },
+    {
+     "code": "2014001010",
+     "name": "2014年10月",
+     "unit": null
+    },
+    {
+     "code": "2014000909",
+     "name": "2014年9月",
+     "unit": null
+    },
+    {
+     "code": "2014000808",
+     "name": "2014年8月",
+     "unit": null
+    },
+    {
+     "code": "2014000707",
+     "name": "2014年7月",
+     "unit": null
+    },
+    {
+     "code": "2014000606",
+     "name": "2014年6月",
+     "unit": null
+    },
+    {
+     "code": "2014000505",
+     "name": "2014年5月",
+     "unit": null
+    },
+    {
+     "code": "2014000404",
+     "name": "2014年4月",
+     "unit": null
+    },
+    {
+     "code": "2014000303",
+     "name": "2014年3月",
+     "unit": null
+    },
+    {
+     "code": "2014000202",
+     "name": "2014年2月",
+     "unit": null
+    },
+    {
+     "code": "2014000101",
+     "name": "2014年1月",
+     "unit": null
+    },
+    {
+     "code": "2013110000",
+     "name": "2013年度4～9月期",
+     "unit": null
+    },
+    {
+     "code": "2013100000",
+     "name": "2013年度",
+     "unit": null
+    },
+    {
+     "code": "2013001212",
+     "name": "2013年12月",
+     "unit": null
+    },
+    {
+     "code": "2013001111",
+     "name": "2013年11月",
+     "unit": null
+    },
+    {
+     "code": "2013001010",
+     "name": "2013年10月",
+     "unit": null
+    },
+    {
+     "code": "2013000909",
+     "name": "2013年9月",
+     "unit": null
+    },
+    {
+     "code": "2013000808",
+     "name": "2013年8月",
+     "unit": null
+    },
+    {
+     "code": "2013000707",
+     "name": "2013年7月",
+     "unit": null
+    },
+    {
+     "code": "2013000606",
+     "name": "2013年6月",
+     "unit": null
+    },
+    {
+     "code": "2013000505",
+     "name": "2013年5月",
+     "unit": null
+    },
+    {
+     "code": "2013000404",
+     "name": "2013年4月",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  }
+ ]
+}
