@@ -22,8 +22,13 @@ primary_agent: db-schema-manager
 ## 手順
 
 ```bash
-cd apps/web && npx tsx scripts/generate-known-ranking-keys.ts
+cd apps/web && R2_PUBLIC_FETCH_URL=https://storage.stats47.jp NODE_OPTIONS='--conditions react-server' \
+  npx tsx scripts/generate-known-ranking-keys.ts
+# KNOWN の件数から作るランキング索引も作り直す (忘れると PR の Static Gates が「生成物が SSOT とずれています」で落ちる)
+npx tsx scripts/generate-ranking-prominence.ts
 ```
+
+R2 に `app/ranking/<key>/item.json` があるキーだけが載る。sync-snapshots の sync-ranking-keys job も同じ 2 本を走らせて keys PR を作る。
 
 出力例:
 ```
@@ -57,7 +62,7 @@ cd apps/web && npx tsx scripts/generate-known-ranking-keys.ts
 ## 参照
 
 - 生成スクリプト本体: `apps/web/scripts/generate-known-ranking-keys.ts`
-- 出力先: `apps/web/src/config/known-ranking-keys.ts`
+- 出力先: `packages/ranking/src/config/known-ranking-keys.ts` (+ `packages/data-configs/src/prominence/ranking-prominence.generated.ts`)
 - middleware 参照箇所: `apps/web/src/middleware.ts` の Fix 6
 - 関連スキル: `/sync-metrics-cache`, `/page-data-batch`, `/deploy`
 - 背景・v1/v2 失敗の教訓: `data/improvement/gsc-improvement/improvement-log.md` T0-RKG-200-01-v3
