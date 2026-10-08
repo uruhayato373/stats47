@@ -1,10 +1,12 @@
-import { Children, isValidElement, type ReactElement } from "react";
+import { Children, isValidElement, type ComponentProps, type ReactElement } from "react";
 
 import { describe, expect, it, vi } from "vitest";
 
-import { RailLinksCard } from "@/components/rail";
+import { RelatedContentNavigation } from "@/features/content-navigation/RelatedContentNavigation";
 
 import { RankingPageSidebarSection } from "../RankingPageSidebarSection";
+
+import type { ContentRecommendation } from "@stats47/data-configs/content/navigation";
 
 vi.mock("@/features/ads", () => ({
   RailAdSlot: () => null,
@@ -13,13 +15,14 @@ vi.mock("@/features/ads", () => ({
 }));
 vi.mock("@/features/ads/server", () => ({ AffiliateAdSlot: () => null, RakutenItemsCard: () => null }));
 vi.mock("@/features/theme-dashboard/server", () => ({ listRelatedThemesForRankingKeys: () => [] }));
+vi.mock("@/features/blog/server", () => ({ readNavigationArticlesFromR2: async () => [] }));
 vi.mock("../../RankingSidebar", () => ({ RankingItemsSidebar: () => null }));
 vi.mock("../../RankingSidebar/PortStatisticsMapCard", () => ({ PortStatisticsMapCard: () => null }));
 vi.mock("../../RankingSidebar/RelatedArticlesCard", () => ({ RelatedArticlesCard: () => null }));
 vi.mock("../../RankingSidebar/SurveyCard", () => ({ SurveyCard: () => null }));
 
-type RailProps = { trackingSurface: string; items: { href: string }[] };
-function geoCards(rankingKey: string, areaType: "prefecture" | "city" = "prefecture") {
+type NavigationProps = ComponentProps<typeof RelatedContentNavigation>;
+async function geoLinks(rankingKey: string, areaType: "prefecture" | "city" = "prefecture"): Promise<ContentRecommendation[]> {
   const tree = RankingPageSidebarSection({
     rankingKey,
     areaType,
@@ -28,21 +31,24 @@ function geoCards(rankingKey: string, areaType: "prefecture" | "city" = "prefect
     surveys: [],
     rankingName: "テスト",
   });
-  return Children.toArray(tree.props.children).filter(
-    (child): child is ReactElement<RailProps> =>
-      isValidElement(child) && child.type === RailLinksCard && (child.props as RailProps).trackingSurface === "ranking_geo"
+  const sections = Children.toArray(tree.props.children).filter(
+    (child): child is ReactElement<NavigationProps> =>
+      isValidElement<NavigationProps>(child) && child.type === RelatedContentNavigation && child.props.surface === "ranking_geo"
   );
+  const resolved = await Promise.all(sections.map((section) => RelatedContentNavigation(section.props)));
+  return resolved.flatMap((section) => section.props.items);
 }
 
 describe("ランキングページから地域分析の着地ページへ辿れる", () => {
-  it("標高×人口の主指標のランキングは、分析のcanonical着地への導線を1つだけ出す", () => {
-    const cards = geoCards("low-elevation-population-ratio-5m");
-    expect(cards).toHaveLength(1);
-    expect(cards[0]!.props.items.map((item) => item.href)).toEqual(["/geo/population-low-elevation"]);
+  it("標高×人口の主指標のランキングは、分析のcanonical着地への導線を1つだけ出す", async () => {
+    const links = await geoLinks("low-elevation-population-ratio-5m");
+    expect(links).toHaveLength(1);
+    expect(links.map((item) => item.href)).toEqual(["/geo/population-low-elevation"]);
+    expect(links[0]!.id).toBe("geo:population-low-elevation");
   });
 
-  it("分析と結び付かないランキングや市区町村ランキングには出さない", () => {
-    expect(geoCards("natto-consumption-expenditure")).toHaveLength(0);
-    expect(geoCards("low-elevation-population-ratio-5m", "city")).toHaveLength(0);
+  it("分析と結び付かないランキングや市区町村ランキングには出さない", async () => {
+    expect(await geoLinks("natto-consumption-expenditure")).toHaveLength(0);
+    expect(await geoLinks("low-elevation-population-ratio-5m", "city")).toHaveLength(0);
   });
 });
