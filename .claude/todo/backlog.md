@@ -694,6 +694,7 @@ updated: 2026-10-06
   `ogp/generation.json` の `metadata.background.sha256` と asset 契約に一致し、`stats47-sha256` メタデータだけが無かった。
   本体を変えずに CopyObject (MetadataDirective REPLACE、Content-Type を保持) でメタデータを付け、HEAD と本体の SHA を読み直して確かめた。
   同じ日に上げたほかの背景にも同じ欠落がありうる (未調査)。挙動の是正 (1 記事で run 全体が止まる) は残る。
+- **2026-10-08 挙動の是正**: 本体の SHA が記録と一致し、R2 の HEAD メタデータ (`stats47-sha256`) だけが欠けているか古い背景は、`generate-blog-thumbnails.ts` が exit 21 (`StaleBackgroundMetadataError`) を返し、`blog-auto-publish.yml` はその記事だけを skip して後ろの記事を試す (Step Summary に「背景のメタデータが古い」)。エラーには付け直しの手順 (S3 CopyObject・MetadataDirective REPLACE) を出す。本体の SHA が記録と合わないときは従来どおり run を止める。`workflow-commit-back.test.cjs` に exit 21 を足し、workflow の分岐を外すと落ちることを確かめた。**残り**: 上の 2 (背景の選択の集約) と 3 (Gemini 経路の撤去)。
 - **停止条件**: 3 の画像生成は Codex が要る (クラウド環境では codex MCP が接続できない)。生成はオーナーのローカルで回す。
 - **完了条件**: 1 は背景の無い送り箱の記事で quality-gate が止まることをテストで固定。2 は背景の選択と案内文の実装が 1 か所。3 は `queue` の targets が 0 で、リポジトリに Gemini の生成コードが無い。
 
