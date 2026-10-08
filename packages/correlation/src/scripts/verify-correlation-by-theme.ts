@@ -15,6 +15,7 @@
 import { correlationByThemePath, parseCorrelationByThemeSnapshot, type CorrelationByThemeSnapshot } from '../types/snapshot';
 
 import { listThemeMembers } from './build-correlation-snapshot';
+import { SITE } from '@stats47/types';
 
 export interface ByThemeMismatch {
   themeKey: string;
@@ -65,7 +66,7 @@ async function fetchSnapshot(base: string, themeKey: string): Promise<Correlatio
 }
 
 async function main(): Promise<void> {
-  const base = (process.env.R2_PUBLIC_FETCH_URL ?? 'https://storage.stats47.jp').replace(/\/$/, '');
+  const base = (process.env.R2_PUBLIC_FETCH_URL ?? SITE.r2PublicBaseUrl).replace(/\/$/, '');
   const members = listThemeMembers();
   const snapshots = new Map<string, CorrelationByThemeSnapshot>();
   for (const [themeKey] of members) {
