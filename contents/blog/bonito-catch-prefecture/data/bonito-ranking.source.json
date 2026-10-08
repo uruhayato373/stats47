@@ -1,0 +1,62 @@
+{
+  "kind": "ranking",
+  "rankingKey": "fishery-species-catch-bonito",
+  "year": "2023",
+  "unit": "トン",
+  "label": "カツオ漁獲量",
+  "readerLabel": "カツオ漁獲量",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/fishery-species-catch-bonito/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug bonito-catch-prefecture --keys fishery-species-catch-bonito --data-name bonito-ranking",
+  "fetchedAt": "2026-10-08T21:13:31.079Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs",
+  "coverage": {
+    "rowsInSource": 34,
+    "valueZero": [
+      "秋田県",
+      "山形県",
+      "香川県",
+      "熊本県"
+    ],
+    "noPublishedValue": [
+      "京都府",
+      "大阪府",
+      "兵庫県",
+      "岡山県",
+      "広島県"
+    ],
+    "inlandExcluded": [
+      "栃木県",
+      "群馬県",
+      "埼玉県",
+      "山梨県",
+      "長野県",
+      "岐阜県",
+      "滋賀県",
+      "奈良県"
+    ],
+    "note": "R2 の 2023 年 partition は 34 行。行が無い県は値 0 を補わず、公表値なしとして扱う。2019〜2022年は都道府県の値が R2 に無い。"
+  },
+  "supplementary": {
+    "tunaCorrelation": {
+      "tunaRankingKey": "fishery-species-catch-tuna",
+      "year": "2023",
+      "method": "ピアソンの積率相関係数。カツオとマグロ類の両方に2023年の行がある31県の漁獲量(トン)から計算",
+      "n": 31,
+      "r": 0.839,
+      "spearmanRho": 0.846,
+      "rWithoutShizuoka": 0.797
+    },
+    "consumptionCorrelation": {
+      "consumptionRankingKey": "bonito-consumption-quantity",
+      "year": "2023",
+      "method": "ピアソンの積率相関係数。カツオ漁獲量の2023年の行がある34県の漁獲量(トン)と同年のかつお消費量(g)から計算",
+      "n": 34,
+      "r": 0.243,
+      "spearmanRho": 0.347,
+      "rWithoutShizuoka": 0.436
+    }
+  },
+  "refreshedFromYear": "2015"
+}

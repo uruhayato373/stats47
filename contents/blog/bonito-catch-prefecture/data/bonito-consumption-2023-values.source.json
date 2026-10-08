@@ -1,0 +1,10 @@
+{
+  "kind": "ranking",
+  "rankingKey": "bonito-consumption-quantity",
+  "year": "2023",
+  "unit": "g",
+  "label": "かつお消費量",
+  "transform": "本文が順位を引く補助データ。R2 の2023年 partition をそのまま写し、図には使わない",
+  "source": "r2:app/ranking/bonito-consumption-quantity/values.json",
+  "restore": "/usr/bin/curl -s https://storage.stats47.jp/app/ranking/bonito-consumption-quantity/values.json の partitions[yearCode=2023]"
+}

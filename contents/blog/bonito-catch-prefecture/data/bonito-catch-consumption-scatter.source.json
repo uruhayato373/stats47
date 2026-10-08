@@ -1,0 +1,24 @@
+{
+  "kind": "scatter",
+  "xKey": "fishery-species-catch-bonito",
+  "yKey": "bonito-consumption-quantity",
+  "year": "2023",
+  "transform": "カツオ漁獲量の2023年の行がある34都道府県と、同年のかつお消費量を県名で突合",
+  "excludedAreas": [
+    "栃木県",
+    "群馬県",
+    "埼玉県",
+    "山梨県",
+    "長野県",
+    "岐阜県",
+    "滋賀県",
+    "奈良県",
+    "京都府",
+    "大阪府",
+    "兵庫県",
+    "岡山県",
+    "広島県"
+  ],
+  "exclusionReason": "内陸8県は海面漁業統計の対象外、京都・大阪・兵庫・岡山・広島はカツオ漁獲量の2023年の行がないため、行がある34県だけを描く。",
+  "restore": "r2:app/ranking/fishery-species-catch-bonito/values.json と r2:app/ranking/bonito-consumption-quantity/values.json の 2023 年を県名で突合"
+}

@@ -1,0 +1,1568 @@
+{
+  "title": "カツオ漁獲量の0トン・行なし（5つの年の表）",
+  "label": "カツオ漁獲量",
+  "unit": "トン",
+  "note": "value が null の行は、その年の表に行がない（公表値なし）ことを表す",
+  "data": [
+    {
+      "areaName": "北海道",
+      "year": "2015",
+      "value": 3689,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "青森県",
+      "year": "2015",
+      "value": 5052,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "岩手県",
+      "year": "2015",
+      "value": null,
+      "status": "no-row",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "宮城県",
+      "year": "2015",
+      "value": 19828,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "秋田県",
+      "year": "2015",
+      "value": null,
+      "status": "no-row",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "山形県",
+      "year": "2015",
+      "value": 0,
+      "status": "zero",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "福島県",
+      "year": "2015",
+      "value": 2451,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "茨城県",
+      "year": "2015",
+      "value": null,
+      "status": "no-row",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "千葉県",
+      "year": "2015",
+      "value": 654,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "東京都",
+      "year": "2015",
+      "value": 26686,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "神奈川県",
+      "year": "2015",
+      "value": 9781,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "新潟県",
+      "year": "2015",
+      "value": 10750,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "富山県",
+      "year": "2015",
+      "value": 14,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "石川県",
+      "year": "2015",
+      "value": 0,
+      "status": "zero",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "福井県",
+      "year": "2015",
+      "value": 1,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "静岡県",
+      "year": "2015",
+      "value": 81295,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "愛知県",
+      "year": "2015",
+      "value": 3,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "三重県",
+      "year": "2015",
+      "value": 25867,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "京都府",
+      "year": "2015",
+      "value": 8,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "大阪府",
+      "year": "2015",
+      "value": null,
+      "status": "no-row",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "兵庫県",
+      "year": "2015",
+      "value": null,
+      "status": "no-row",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "和歌山県",
+      "year": "2015",
+      "value": 313,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "鳥取県",
+      "year": "2015",
+      "value": null,
+      "status": "no-row",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "島根県",
+      "year": "2015",
+      "value": 0,
+      "status": "zero",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "岡山県",
+      "year": "2015",
+      "value": null,
+      "status": "no-row",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "広島県",
+      "year": "2015",
+      "value": null,
+      "status": "no-row",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "山口県",
+      "year": "2015",
+      "value": 1,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "徳島県",
+      "year": "2015",
+      "value": 80,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "香川県",
+      "year": "2015",
+      "value": null,
+      "status": "no-row",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "愛媛県",
+      "year": "2015",
+      "value": 5235,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "高知県",
+      "year": "2015",
+      "value": 14893,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "福岡県",
+      "year": "2015",
+      "value": 9,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "佐賀県",
+      "year": "2015",
+      "value": 4,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "長崎県",
+      "year": "2015",
+      "value": 10304,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "熊本県",
+      "year": "2015",
+      "value": 0,
+      "status": "zero",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "大分県",
+      "year": "2015",
+      "value": 19,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "宮崎県",
+      "year": "2015",
+      "value": 13939,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "鹿児島県",
+      "year": "2015",
+      "value": 6936,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "沖縄県",
+      "year": "2015",
+      "value": 450,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "北海道",
+      "year": "2016",
+      "value": 4,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "青森県",
+      "year": "2016",
+      "value": 2364,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "岩手県",
+      "year": "2016",
+      "value": 24,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "宮城県",
+      "year": "2016",
+      "value": 16275,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "秋田県",
+      "year": "2016",
+      "value": null,
+      "status": "no-row",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "山形県",
+      "year": "2016",
+      "value": null,
+      "status": "no-row",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "福島県",
+      "year": "2016",
+      "value": 704,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "茨城県",
+      "year": "2016",
+      "value": 2708,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "千葉県",
+      "year": "2016",
+      "value": 434,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "東京都",
+      "year": "2016",
+      "value": 29940,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "神奈川県",
+      "year": "2016",
+      "value": 9812,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "新潟県",
+      "year": "2016",
+      "value": 9583,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "富山県",
+      "year": "2016",
+      "value": 5,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "石川県",
+      "year": "2016",
+      "value": 1,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "福井県",
+      "year": "2016",
+      "value": 1,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "静岡県",
+      "year": "2016",
+      "value": 71655,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "愛知県",
+      "year": "2016",
+      "value": 4,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "三重県",
+      "year": "2016",
+      "value": 26734,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "京都府",
+      "year": "2016",
+      "value": 0,
+      "status": "zero",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "大阪府",
+      "year": "2016",
+      "value": null,
+      "status": "no-row",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "兵庫県",
+      "year": "2016",
+      "value": null,
+      "status": "no-row",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "和歌山県",
+      "year": "2016",
+      "value": 450,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "鳥取県",
+      "year": "2016",
+      "value": 9290,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "島根県",
+      "year": "2016",
+      "value": 0,
+      "status": "zero",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "岡山県",
+      "year": "2016",
+      "value": null,
+      "status": "no-row",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "広島県",
+      "year": "2016",
+      "value": null,
+      "status": "no-row",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "山口県",
+      "year": "2016",
+      "value": 2,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "徳島県",
+      "year": "2016",
+      "value": 350,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "香川県",
+      "year": "2016",
+      "value": null,
+      "status": "no-row",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "愛媛県",
+      "year": "2016",
+      "value": 4265,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "高知県",
+      "year": "2016",
+      "value": 14104,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "福岡県",
+      "year": "2016",
+      "value": 3,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "佐賀県",
+      "year": "2016",
+      "value": 1,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "長崎県",
+      "year": "2016",
+      "value": 9726,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "熊本県",
+      "year": "2016",
+      "value": 2,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "大分県",
+      "year": "2016",
+      "value": 50,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "宮崎県",
+      "year": "2016",
+      "value": 14189,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "鹿児島県",
+      "year": "2016",
+      "value": 4730,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "沖縄県",
+      "year": "2016",
+      "value": 535,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "北海道",
+      "year": "2017",
+      "value": 1,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "青森県",
+      "year": "2017",
+      "value": 4421,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "岩手県",
+      "year": "2017",
+      "value": 22,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "宮城県",
+      "year": "2017",
+      "value": 23098,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "秋田県",
+      "year": "2017",
+      "value": null,
+      "status": "no-row",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "山形県",
+      "year": "2017",
+      "value": 0,
+      "status": "zero",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "福島県",
+      "year": "2017",
+      "value": 2247,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "茨城県",
+      "year": "2017",
+      "value": 2017,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "千葉県",
+      "year": "2017",
+      "value": 264,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "東京都",
+      "year": "2017",
+      "value": 24684,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "神奈川県",
+      "year": "2017",
+      "value": 8608,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "新潟県",
+      "year": "2017",
+      "value": 11750,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "富山県",
+      "year": "2017",
+      "value": 11,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "石川県",
+      "year": "2017",
+      "value": 2,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "福井県",
+      "year": "2017",
+      "value": 4,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "静岡県",
+      "year": "2017",
+      "value": 72269,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "愛知県",
+      "year": "2017",
+      "value": 5,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "三重県",
+      "year": "2017",
+      "value": 18159,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "京都府",
+      "year": "2017",
+      "value": 1,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "大阪府",
+      "year": "2017",
+      "value": null,
+      "status": "no-row",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "兵庫県",
+      "year": "2017",
+      "value": null,
+      "status": "no-row",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "和歌山県",
+      "year": "2017",
+      "value": 462,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "鳥取県",
+      "year": "2017",
+      "value": null,
+      "status": "no-row",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "島根県",
+      "year": "2017",
+      "value": null,
+      "status": "no-row",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "岡山県",
+      "year": "2017",
+      "value": null,
+      "status": "no-row",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "広島県",
+      "year": "2017",
+      "value": null,
+      "status": "no-row",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "山口県",
+      "year": "2017",
+      "value": 10,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "徳島県",
+      "year": "2017",
+      "value": 370,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "香川県",
+      "year": "2017",
+      "value": null,
+      "status": "no-row",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "愛媛県",
+      "year": "2017",
+      "value": 4402,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "高知県",
+      "year": "2017",
+      "value": 14548,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "福岡県",
+      "year": "2017",
+      "value": 42,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "佐賀県",
+      "year": "2017",
+      "value": null,
+      "status": "no-row",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "長崎県",
+      "year": "2017",
+      "value": 8773,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "熊本県",
+      "year": "2017",
+      "value": null,
+      "status": "no-row",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "大分県",
+      "year": "2017",
+      "value": 20,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "宮崎県",
+      "year": "2017",
+      "value": 11918,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "鹿児島県",
+      "year": "2017",
+      "value": 4602,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "沖縄県",
+      "year": "2017",
+      "value": 410,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "北海道",
+      "year": "2018",
+      "value": 2,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "青森県",
+      "year": "2018",
+      "value": 2315,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "岩手県",
+      "year": "2018",
+      "value": 16,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "宮城県",
+      "year": "2018",
+      "value": 31291,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "秋田県",
+      "year": "2018",
+      "value": 0,
+      "status": "zero",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "山形県",
+      "year": "2018",
+      "value": 0,
+      "status": "zero",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "福島県",
+      "year": "2018",
+      "value": 1007,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "茨城県",
+      "year": "2018",
+      "value": 2727,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "千葉県",
+      "year": "2018",
+      "value": 291,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "東京都",
+      "year": "2018",
+      "value": 29288,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "神奈川県",
+      "year": "2018",
+      "value": 12317,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "新潟県",
+      "year": "2018",
+      "value": 12894,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "富山県",
+      "year": "2018",
+      "value": 6,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "石川県",
+      "year": "2018",
+      "value": 4,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "福井県",
+      "year": "2018",
+      "value": 2,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "静岡県",
+      "year": "2018",
+      "value": 81042,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "愛知県",
+      "year": "2018",
+      "value": 4,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "三重県",
+      "year": "2018",
+      "value": 14042,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "京都府",
+      "year": "2018",
+      "value": 1,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "大阪府",
+      "year": "2018",
+      "value": null,
+      "status": "no-row",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "兵庫県",
+      "year": "2018",
+      "value": 0,
+      "status": "zero",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "和歌山県",
+      "year": "2018",
+      "value": 336,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "鳥取県",
+      "year": "2018",
+      "value": null,
+      "status": "no-row",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "島根県",
+      "year": "2018",
+      "value": null,
+      "status": "no-row",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "岡山県",
+      "year": "2018",
+      "value": null,
+      "status": "no-row",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "広島県",
+      "year": "2018",
+      "value": null,
+      "status": "no-row",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "山口県",
+      "year": "2018",
+      "value": 4,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "徳島県",
+      "year": "2018",
+      "value": 612,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "香川県",
+      "year": "2018",
+      "value": null,
+      "status": "no-row",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "愛媛県",
+      "year": "2018",
+      "value": 993,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "高知県",
+      "year": "2018",
+      "value": 17926,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "福岡県",
+      "year": "2018",
+      "value": 17,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "佐賀県",
+      "year": "2018",
+      "value": 2,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "長崎県",
+      "year": "2018",
+      "value": 9451,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "熊本県",
+      "year": "2018",
+      "value": 7,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "大分県",
+      "year": "2018",
+      "value": 13,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "宮崎県",
+      "year": "2018",
+      "value": 14297,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "鹿児島県",
+      "year": "2018",
+      "value": 5272,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "沖縄県",
+      "year": "2018",
+      "value": 354,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "北海道",
+      "year": "2023",
+      "value": 4,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "青森県",
+      "year": "2023",
+      "value": 1917,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "岩手県",
+      "year": "2023",
+      "value": 100,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "宮城県",
+      "year": "2023",
+      "value": 21028,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "秋田県",
+      "year": "2023",
+      "value": 0,
+      "status": "zero",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "山形県",
+      "year": "2023",
+      "value": 0,
+      "status": "zero",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "福島県",
+      "year": "2023",
+      "value": 872,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "茨城県",
+      "year": "2023",
+      "value": 1976,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "千葉県",
+      "year": "2023",
+      "value": 107,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "東京都",
+      "year": "2023",
+      "value": 16595,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "神奈川県",
+      "year": "2023",
+      "value": 9253,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "新潟県",
+      "year": "2023",
+      "value": 13072,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "富山県",
+      "year": "2023",
+      "value": 17,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "石川県",
+      "year": "2023",
+      "value": 9,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "福井県",
+      "year": "2023",
+      "value": 28,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "静岡県",
+      "year": "2023",
+      "value": 56969,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "愛知県",
+      "year": "2023",
+      "value": 6,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "三重県",
+      "year": "2023",
+      "value": 11952,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "京都府",
+      "year": "2023",
+      "value": null,
+      "status": "no-row",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "大阪府",
+      "year": "2023",
+      "value": null,
+      "status": "no-row",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "兵庫県",
+      "year": "2023",
+      "value": null,
+      "status": "no-row",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "和歌山県",
+      "year": "2023",
+      "value": 1430,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "鳥取県",
+      "year": "2023",
+      "value": 8893,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "島根県",
+      "year": "2023",
+      "value": 20,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "岡山県",
+      "year": "2023",
+      "value": null,
+      "status": "no-row",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "広島県",
+      "year": "2023",
+      "value": null,
+      "status": "no-row",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "山口県",
+      "year": "2023",
+      "value": 13,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "徳島県",
+      "year": "2023",
+      "value": 660,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "香川県",
+      "year": "2023",
+      "value": 0,
+      "status": "zero",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "愛媛県",
+      "year": "2023",
+      "value": 897,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "高知県",
+      "year": "2023",
+      "value": 16699,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "福岡県",
+      "year": "2023",
+      "value": 30,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "佐賀県",
+      "year": "2023",
+      "value": 1,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "長崎県",
+      "year": "2023",
+      "value": 9174,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "熊本県",
+      "year": "2023",
+      "value": 0,
+      "status": "zero",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "大分県",
+      "year": "2023",
+      "value": 20,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "宮崎県",
+      "year": "2023",
+      "value": 15633,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "鹿児島県",
+      "year": "2023",
+      "value": 4560,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "沖縄県",
+      "year": "2023",
+      "value": 272,
+      "status": "positive",
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    }
+  ]
+}

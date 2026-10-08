@@ -1,0 +1,105 @@
+{
+  "title": "カツオ漁獲量 2015年・2018年の比較用抜粋",
+  "label": "カツオ漁獲量",
+  "unit": "トン",
+  "data": [
+    {
+      "areaName": "静岡県",
+      "year": "2015",
+      "value": 81295,
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "東京都",
+      "year": "2015",
+      "value": 26686,
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "三重県",
+      "year": "2015",
+      "value": 25867,
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "宮城県",
+      "year": "2015",
+      "value": 19828,
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "高知県",
+      "year": "2015",
+      "value": 14893,
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "宮崎県",
+      "year": "2015",
+      "value": 13939,
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "新潟県",
+      "year": "2015",
+      "value": 10750,
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "静岡県",
+      "year": "2018",
+      "value": 81042,
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "東京都",
+      "year": "2018",
+      "value": 29288,
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "三重県",
+      "year": "2018",
+      "value": 14042,
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "宮城県",
+      "year": "2018",
+      "value": 31291,
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "高知県",
+      "year": "2018",
+      "value": 17926,
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "宮崎県",
+      "year": "2018",
+      "value": 14297,
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    },
+    {
+      "areaName": "新潟県",
+      "year": "2018",
+      "value": 12894,
+      "label": "カツオ漁獲量",
+      "unit": "トン"
+    }
+  ]
+}
