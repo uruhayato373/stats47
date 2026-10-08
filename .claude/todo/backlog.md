@@ -439,7 +439,7 @@ updated: 2026-10-06
 - **完了条件**: キーが増える keys PR で `generate-ranking-prominence.ts --check` が通る。
 
 ### [CORRELATION-THEME-CATALOG-SYNC-01] テーマのカタログを main へ出しても相関の再計算が起動せず、テーマ別の相関一覧が古いカタログのまま残る
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-08] [領域:データ]
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:npx vitest run packages/correlation/src/scripts/__tests__/verify-correlation-by-theme.test.ts] [起票:2026-10-08] [領域:データ] [進行中]
 
 - **事実 (2026-10-08)**: `correlation-refresh.yml` の起動は、data-refresh・KSJ 取り込みの完了時 (workflow_run) と毎日 18:45 UTC の定期実行だけで、
   テーマのカタログ (`data/themes/catalogs/*.json`) の main への反映では起動しない。PR #1100 のマージ前に走った run 44 が古い main のカタログで
@@ -450,6 +450,12 @@ updated: 2026-10-06
 - **次**: ① `correlation-refresh.yml` に main への push で `data/themes/catalogs/**` が変わったときの起動を足す。
   ② 本番の `app/correlation/by-theme/<key>.json` の `via.rankingKey` が、そのテーマのカタログの指標に含まれるかを確かめる検査を、
   日次の workflow-health か週次のテーマ監査に足す。
+- **2026-10-08 実装 (develop)**: ① `correlation-refresh.yml` に main への push (`data/themes/catalogs/**`) の起動を足した。② 公開中の一覧を
+  `listThemeMembers` (相関の計算と同じテーマの指標) と突き合わせる `packages/correlation/src/scripts/verify-correlation-by-theme.ts` を作り、
+  同じ workflow の最後 (計算を省いた run を含む) で走らせる。毎日の定期実行で検査され、食い違えば `correlation-alert` が開く。
+  直る前に保存した物価テーマの古い一覧では 7 件を検出し、今の本番 (run 45 の後) は 55 テーマで食い違い 0。
+  **残り**: workflow の変更は main に入ってから効く。次の develop → main の公開後、定期実行かカタログを変えたマージの run で
+  Verify の手順が通ることを確かめてカードを消す。
 - **完了条件**: カタログを変えた PR のマージ後、手作業なしで by-theme の相関一覧が新しいカタログで作り直され、外れた指標が残っていれば検査が止める。
 
 ### [DATA-REFRESH-DERIVED-FROM-DEVELOP-01] develop への push で起動した data-refresh が、未リリースの develop から派生 snapshot を作って本番 R2 に出す
@@ -3232,10 +3238,9 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - **2026-10-08 本番公開**: PR #1100 を main へマージ (b3fb1ca87、00:01 UTC)。デプロイ後の本番で、`/themes/tourism` の 6 章と
   `/themes/consumer-prices` の 5 章がカタログの順に出て、実宿泊者数のカードと費目別のヒートマップが描かれ、エラー表示が無いことを確かめた。
   `/ranking/actual-overnight-guests` は Googlebot UA で 200 (00:07 UTC から)。
-  **残り**: ① 物価テーマの「相関が高いテーマ外の指標」が、外した `average-temperature` を基準にした 7 件を出している。
-  `app/correlation/by-theme/consumer-prices.json` を作った Correlation Refresh run 44 が、マージ前の main (5ddda10b) のカタログで計算したため。
-  相関の入力の fingerprint はカタログを含むので、毎日 18:45 UTC の定期実行で直る。2026-10-09 に、この JSON の `via` に
-  `average-temperature` が無いことを確かめる。② 新しい 13 キーの OGP 画像: 代理起動した sync-snapshots (run 103) は、
+  物価テーマの「相関が高いテーマ外の指標」は、マージ前の main のカタログで計算した一覧 (外した `average-temperature` を基準にした 7 件) が
+  残っていたので、代理起動した Correlation Refresh run 45 で作り直した (00:18 UTC、55 テーマで食い違い 0。再発防止は `CORRELATION-THEME-CATALOG-SYNC-01`)。
+  **残り**: 新しい 13 キーの OGP 画像。代理起動した sync-snapshots (run 103) は、
   オーナーが手動で起動した run 104 に取り消された。run 104 に sync-ranking-keys job があればそこで作られる。無ければ ranking-items で依頼し直す。
 - **停止条件**: 承認前は `data/themes/catalogs/` と metric config を編集しない。公開 (main へのマージ・R2 反映) は別に承認を取る。
 - **完了条件**: 2 テーマの提案の status が `implemented-pending-release` 以降になり、本番で提案どおりの章・カード・図が出ている。
