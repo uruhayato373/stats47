@@ -486,7 +486,7 @@ const THEME_LINK_LIMIT = 8;
 const THEME_LINK_MIN_ABS_R = 0.5;
 
 /** ThemeCatalog のテーマ → 指標 (テーマページの「全指標」と同じ catalog.metrics)。 */
-function listThemeMembers(): Array<[string, string[]]> {
+export function listThemeMembers(): Array<[string, string[]]> {
   return Object.entries(THEME_CATALOGS)
     .map(([themeKey, catalog]): [string, string[]] => [
       themeKey,

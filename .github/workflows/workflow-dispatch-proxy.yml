@@ -136,6 +136,7 @@ jobs:
           # 実需が出たら 1 行足す。ここに無いものは typo か想定外の呼び出し。
           case "$WORKFLOW" in
             sync-snapshots.yml|\
+            correlation-refresh.yml|\
             fetch-metrics-weekly.yml|\
             purge-cdn.yml|\
             generate-ogp-images.yml|\

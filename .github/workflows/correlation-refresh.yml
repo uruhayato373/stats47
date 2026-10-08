@@ -10,6 +10,10 @@ name: 🔗 Correlation Refresh → R2
 #   この workflow が「観測値が変わったら全件再計算」を受け持つ:
 #     - workflow_run: data-refresh / KSJ 取り込みの完了直後
 #     - schedule   : 毎日 1 回 (ワークフロー外の push を拾う網)
+#     - push       : テーマのカタログ (data/themes/catalogs) が main に入ったとき。テーマ別の相関一覧は
+#                    テーマ内の指標を基準に作るので、カタログが変わると作り直しが要る (2026-10-08 に
+#                    物価テーマで外した指標を基準にした一覧が残った。CORRELATION-THEME-CATALOG-SYNC-01)
+#   最後に公開中のテーマ別の相関一覧を今のカタログと突き合わせ、食い違えば失敗にする (毎日の定期実行で検査される)。
 #   入力 (観測値・表示メタ・相関コード) の fingerprint が R2 の stats.json と同じなら何も書かない。
 #   全件計算は約 30〜50 秒 (2026-09-23 実測 2,238 指標・250 万ペア) なので差分計算は持たない。
 #
@@ -22,6 +26,10 @@ on:
   workflow_run:
     workflows: ["🔄 Data Refresh (e-Stat → R2)", "🗺️ KSJ aggregate ingest → R2"]
     types: [completed]
+  push:
+    branches: [main]
+    paths:
+      - "data/themes/catalogs/**"
   schedule:
     - cron: "45 18 * * *" # JST 03:45 daily (UTC 18:45)。他 cron と非重複
   workflow_dispatch:
@@ -112,6 +120,12 @@ jobs:
         if: steps.push.outputs.changed == 'true'
         run: npx tsx packages/r2-storage/src/scripts/purge-worker-cache.ts --all
 
+      # 計算を省いた run でも検査する。公開中の一覧が古いカタログのままなら、ここで止めて alert を出す。
+      - name: 🔎 Verify by-theme lists against ThemeCatalog
+        run: |
+          npx tsx -r ./packages/ranking/src/scripts/setup-cli.js \
+            packages/correlation/src/scripts/verify-correlation-by-theme.ts
+
       - name: 🚨 Open issue on failure (schedule / workflow_run のみ)
         if: failure() && github.event_name != 'workflow_dispatch'
         env:
@@ -129,6 +143,7 @@ jobs:
             echo ""
             echo "- Build で落ちた → heap (8 GB) 不足なら streaming 化が要る。ログの metric 数と所要を確認"
             echo "- Push で落ちた → R2 S3 認証か一時障害。workflow_dispatch で再実行"
+            echo "- Verify で落ちた → テーマ別の相関一覧が古いカタログのまま。workflow_dispatch を force=true で再実行"
           } > "$RUNNER_TEMP/correlation-issue.md"
           gh label create correlation-alert --description "相関 snapshot 再計算の失敗" --color "b60205" --force 2>/dev/null || true
           EXISTING=$(gh issue list --state open --label correlation-alert --json number --jq '.[0].number // empty')
