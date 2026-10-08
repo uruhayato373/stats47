@@ -42,6 +42,10 @@ primary_agent: ranking-publisher
 - **コードを書かない** (orchestrator)。公開ロジックは ranking-publisher agent に閉じる。
 - **デプロイ規律**: keys PR のマージ = 本番反映。ユーザー承認を得てまとめてマージする (`.claude/rules/branch-workflow.md`)。
 - **実証ベース**: 本番 200 を Googlebot UA で実測してから「公開済み」と言う (`.claude/rules/evidence-based-judgment.md`)。
+- **KNOWN を手で再生成して develop 経由で出す場合**: `sync-ranking-keys` job の画像生成段を通らないため、main マージ前に
+  `gh workflow run generate-ogp-images.yml --ref main -f type=ranking -f ranking_keys=<key,...> -f apply=true` と
+  `type=ranking-cards` を**順に** (前の run の完了後に) 起動する。省くとデプロイ後の route smoke が `og:image 404` で落ちる
+  (2026-10-08 に 31 指標で発生)。2 本を続けて起動すると、R2 書き込みの concurrency group で待機中の run が後発に置き換えられて取り消される。
 
 ## 参照
 
