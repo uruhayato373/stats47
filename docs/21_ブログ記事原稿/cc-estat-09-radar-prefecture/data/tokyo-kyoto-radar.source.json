@@ -1,0 +1,56 @@
+{
+  "kind": "calculated",
+  "chartType": "radar",
+  "inputs": [
+    {
+      "rankingKey": "total-population",
+      "year": "2024",
+      "label": "総人口",
+      "statsDataId": "0000010101",
+      "cdCat01": "A1101"
+    },
+    {
+      "rankingKey": "per-capita-prefectural-income-h27",
+      "year": "2021",
+      "label": "1人当たり県民所得（2015年基準）",
+      "statsDataId": "0000010203",
+      "cdCat01": "#C01321"
+    },
+    {
+      "rankingKey": "household-survey-education-expenditure",
+      "year": "2024",
+      "label": "教育支出（全国家計構造調査・二人以上世帯・10〜11月の月平均）",
+      "statsDataId": "0000010112",
+      "cdCat01": "L720108"
+    },
+    {
+      "rankingKey": "national-medical-expense-per-person",
+      "year": "2022",
+      "label": "1人当たりの国民医療費",
+      "statsDataId": "0000010209",
+      "cdCat01": "#I15106"
+    },
+    {
+      "rankingKey": "penal-code-offenses-recognized-per-1000",
+      "year": "2023",
+      "label": "刑法犯認知件数（人口千人当たり）",
+      "statsDataId": "0000010211",
+      "cdCat01": "#K06101"
+    },
+    {
+      "rankingKey": "total-overnight-guests",
+      "year": "2024",
+      "label": "延べ宿泊者数（従業者数10人以上の宿泊施設）",
+      "statsDataId": "0000010107",
+      "cdCat01": "G7101"
+    }
+  ],
+  "formula": "6指標それぞれを47都道府県（全国の行を除く）の min-max 正規化 (x - min) / (max - min) で0〜1にする。医療費と犯罪率は 1 から引いて反転する。観光は延べ宿泊者数（2024年度）を総人口（2024年）で割った人口1人あたりの値を正規化する。値は小数第5位で丸めて data JSON に持ち、図と本文には小数第2位で書く。破線の参照系列は、各軸の正規化値を47都道府県で並べた中央値（24番目）",
+  "transform": "東京都（13000）・京都府（26000）の正規化値と、47都道府県の中央値を描くレーダーチャート",
+  "source": "r2:app/ranking/<rankingKey>/values.json の inputs[].year の partition",
+  "restore": "各 inputs[].rankingKey の R2 app/ranking/<rankingKey>/values.json から inputs[].year の47都道府県の値を取り、formula の通り計算すると、図の各頂点と中央値の破線の値を再現できる",
+  "generatedBy": "generate-article-charts.ts (radar)",
+  "fetchedAt": "2026-10-08",
+  "dataFile": "tokyo-kyoto-radar.json",
+  "label": "東京都×京都府の6軸レーダー（47都道府県で正規化）"
+}
