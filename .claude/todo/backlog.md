@@ -3245,8 +3245,8 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - **停止条件**: 承認前は `data/themes/catalogs/` と metric config を編集しない。公開 (main へのマージ・R2 反映) は別に承認を取る。
 - **完了条件**: 2 テーマの提案の status が `implemented-pending-release` 以降になり、本番で提案どおりの章・カード・図が出ている。
 
-### [THEME-CATALOG-OPT-RELEASE-01] aging-society・fishery-marine・local-economy の改善と章順・カード見出しの横断修正を、9 月の実験の d56 観測後に本番へ出す
-タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:node .claude/scripts/themes/validate-theme-state.mjs] [起票:2026-10-06] [期日:2026-11-13] [領域:データ]
+### [THEME-CATALOG-OPT-RELEASE-01] 2026-10-07・10-08 に公開したテーマ改善の実験を、9 月の実験から引き継いで登録する
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:node .claude/scripts/themes/validate-theme-state.mjs] [起票:2026-10-06] [期日:2026-10-10] [領域:データ] [進行中]
 
 - **背景**: 2026-10-06 承認の提案 (`.claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-10-06-theme-{aging-society,fishery-marine,local-economy}.md`)
   を branch `claude/theme-catalog-optimization` (PR #1085) に実装した (3 テーマの指標・章・カード、
@@ -3262,12 +3262,21 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
   反映まではカードが登録済みの年 (県内総生産額は 2021 年の 1 点) だけを描く) → ② develop → main のデプロイ → ③ 3 テーマの実験を
   `evaluate-theme-experiments.mjs --register` で baseline 付きで登録し `--schedule <デプロイ日>`。
 - **2026-10-07 オーナー判断で前倒し**: d56 の観測を待たずに今出す (A 案)。#1084・#1085・#1090 は develop へマージ済み。①' の 2 指標の観測値は R2 に反映済み (県内総生産額 517 行・1人当たり県民所得 470 行、data-refresh run 37615385505)。手順の順番の訂正: `sync-snapshots.yml` は **main を checkout して** page-components を生成するので、① は ② (develop → main のマージ) の**後**に行う (マージから反映までの数分は、外した図がページ末尾に残って見える)。9 月の実験 (THEME-STRUCTURE-20260908-* / THEME-LAUNCH-*) の d56 には今回の変更が混ざる。効果判定の engine は同時投入を `confounded` として pending に留めるので、混ざった結果を full/none と判定しない。
-- **2026-10-07 公開済み**: ② main へのマージ (#1099・5ddda10b8)・Cloudflare デプロイ成功、① page-components の R2 反映 (sync-snapshots 成功)、①' 2 指標の観測値の再取得も済み。本番で aging-society の「年齢構造と支え手の比率」章あり・「高齢世帯の推移」なし、fishery-marine の「漁業の担い手」章あり、local-economy の先頭章「経済の規模と所得の水準」ありを確かめた。**残りは ③ の実験登録だけ**: 3 テーマに 9 月の pending 実験 (changeType structure) が残っていて、同じテーマ × changeType の pending は 1 件までなので今は登録できない。2026-11-06 の d56 判定 (今回の変更が混ざるので confounded の見込み) が入ったら、`--register` で baseline 付きで登録し `--schedule <id> 2026-10-07` を付ける。
+- **2026-10-07 公開済み**: ② main へのマージ (#1099・5ddda10b8)・Cloudflare デプロイ成功、① page-components の R2 反映 (sync-snapshots 成功)、①' 2 指標の観測値の再取得も済み。本番で aging-society の「年齢構造と支え手の比率」章あり・「高齢世帯の推移」なし、fishery-marine の「漁業の担い手」章あり、local-economy の先頭章「経済の規模と所得の水準」ありを確かめた。**残りは ③ の実験登録だけ**。
+- **2026-10-08 方針変更 (オーナー承認)**: 11-06 の d56 を待たずに、9 月の実験を d28 (2026-10-09) で打ち切り、今回の公開日から新しい実験を登録する。
+  #1099 の前と今の main のカタログを比べると、9 月 11 日に始めた判定前の実験 55 件のうち 29 テーマで中身が変わって本番に出ていた。
+  ① 章・指標・図が変わった 10 テーマ (提案の aging-society・fishery-marine・local-economy は 10-07、tourism・consumer-prices は 10-08。
+  読み方章を末尾へ移した healthcare・labor-mobility・labor-wages・living-housing・population-dynamics は 10-07) は、9 月の実験の d56 が
+  9 月の変更だけの効果を表さない。② カードの見出しの文言だけが変わった 19 テーマ (launch 10 件を含む) は実験を続け、変更を制約として残す。
+  残り 26 テーマは生成物の先頭の正本パスのコメントが変わっただけで、本番の見た目は変わっていない。29 テーマの実験の `notes` に同時変更を書いた。
+  **次 (2026-10-09 JST 以降)**: `--check` で d28 を記録 → ① の 10 件を `--verdict <id> aborted --note '<同時変更>'` →
+  `THEME-STRUCTURE-20261007-<key>` (8 件) / `THEME-STRUCTURE-20261008-<key>` (tourism・consumer-prices) を `--register` で登録する。
+  baseline は `portfolio.json` の非重複 56 日窓 (W36+W40、2026-08-07〜10-03 で変更前) から取り、`--schedule <id> <公開日>` を付ける。
 - **完了条件**: 本番 `/themes/aging-society` で「年齢構造と支え手の比率」章にカードが出て、「高齢世帯の推移」が無く、
   `/themes/fishery-marine` で図が「海面漁業産出額の長期推移」1 枚になり「漁業の担い手」章がある。
   `/themes/local-economy` の先頭章「経済の規模と所得の水準」で県内総生産額のカードが 2011〜2021 年、1人当たり県民所得が 2012〜2021 年の推移を描き、
   事業所数の章と「数値を比較するときの注意」が無い。8 テーマで読み方章が末尾にある。
-  3 テーマの実験が登録され d7/d28/d56 が入っている。
+  ① の 10 テーマの 9 月の実験が aborted になり、新しい実験 10 件が公開日 (10-07 / 10-08) で schedule されている。validate-theme-state.mjs が違反なし。
 
 ### [FISHERY-SPECIES-REFRESH-01] 魚種別漁獲量 12 指標を 2015 年から 2023 年まで延ばし、fishery-marine に「主な魚種」の章を作る
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run validate:config --workspace=@stats47/data-configs] [起票:2026-10-06] [領域:データ]
