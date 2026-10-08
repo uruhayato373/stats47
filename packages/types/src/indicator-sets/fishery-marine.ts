@@ -78,22 +78,22 @@ export const FISHERY_MARINE_SET: IndicatorSet = {
     {
       "rankingKey": "fishery-species-catch-tuna",
       "shortLabel": "マグロ類",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "fishery-species-catch-bonito",
       "shortLabel": "カツオ",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "fishery-species-catch-mackerel",
       "shortLabel": "サバ類",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "fishery-species-catch-pacific-saury",
       "shortLabel": "サンマ",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "fishery-species-catch-yellowtail",
@@ -103,7 +103,7 @@ export const FISHERY_MARINE_SET: IndicatorSet = {
     {
       "rankingKey": "fishery-species-catch-sardine",
       "shortLabel": "イワシ類",
-      "role": "context"
+      "role": "secondary"
     },
     {
       "rankingKey": "fishery-species-catch-pollock",

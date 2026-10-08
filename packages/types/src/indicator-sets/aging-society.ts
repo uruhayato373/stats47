@@ -101,6 +101,11 @@ export const AGING_SOCIETY_SET: IndicatorSet = {
       "role": "secondary"
     },
     {
+      "rankingKey": "elderly-living-alone-rate",
+      "shortLabel": "高齢者の一人暮らしの割合",
+      "role": "secondary"
+    },
+    {
       "rankingKey": "elderly-couple-only-household-ratio",
       "shortLabel": "高齢夫婦のみの世帯の割合",
       "role": "secondary"
