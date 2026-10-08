@@ -318,3 +318,6 @@
 {"key":"b37347c985c92c7b","date":"2026-10-08","slug":"fishery-species-prefecture-specialty","mode":"expert","verdict":"REVISE","severity":"MINOR","type":"reader-value","summary":"地の文は5,138字(Cの目安2,400〜3,200字の約1.6倍)。"}
 {"key":"a9a76bcf4587926b","date":"2026-10-08","slug":"fishery-species-prefecture-specialty","mode":"expert","verdict":"REVISE","severity":"MINOR","type":"style","summary":"「[仮説]」の角括弧ラベルが5回出る。"}
 {"key":"a4f80a368b8c6f89","date":"2026-10-08","slug":"fishery-species-prefecture-specialty","mode":"expert","verdict":"REVISE","severity":"MINOR","type":"chart-text","summary":"折れ線のY軸目盛が「1000000」「4000000」でカンマがなく読みにくい。"}
+{"key":"c2d349cde9f6fc2e","date":"2026-10-08","slug":"fishery-species-prefecture-specialty","mode":"expert","verdict":"PASS","severity":"MINOR","type":"causal","summary":"スケトウダラの1990年にも東京都が 115,083 トン(合計の13%)含まれる。"}
+{"key":"3c334b5c02015b39","date":"2026-10-08","slug":"fishery-species-prefecture-specialty","mode":"expert","verdict":"PASS","severity":"MINOR","type":"structure","summary":"「時期は1977年の200海里水域の設定と重なります」は、直前の比較が1990年以降になったため、1977年が比較期間の外に出て文脈から浮いている。"}
+{"key":"cd7d3d9c6e49de7d","date":"2026-10-08","slug":"fishery-species-prefecture-specialty","mode":"expert","verdict":"PASS","severity":"MINOR","type":"reader-value","summary":"地の文は4,812字で、C型の目安(2,400〜3,200字)の約1.5倍。"}

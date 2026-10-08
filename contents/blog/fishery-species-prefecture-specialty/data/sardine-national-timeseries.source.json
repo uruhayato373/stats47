@@ -1,0 +1,17 @@
+{
+  "kind": "calculated",
+  "year": "2018",
+  "yearPinnedReason": "2019〜2022年の都道府県値が公表されておらず、折れ線は1956〜2018年で止める。2018年と2023年の間を線でつなぐと連続した推移に見えるため、2023年は本文と別の図で示す",
+  "unit": "万トン",
+  "label": "イワシ類漁獲量の合計",
+  "inputs": [
+    {
+      "rankingKey": "fishery-species-catch-sardine",
+      "years": "1956-2018"
+    }
+  ],
+  "formula": "各年の都道府県別イワシ類漁獲量（R2 app/ranking/fishery-species-catch-sardine/values.json の各年）を合計し、10,000で割って万トンにする（小数第2位まで）",
+  "source": "r2:app/ranking/fishery-species-catch-sardine/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "generatedBy": "article-writer (R2 values.json の年ごとの合計)"
+}

@@ -1,0 +1,903 @@
+{
+ "description": "記事本文の12魚種の数値の控え。R2 app/ranking/fishery-species-catch-<魚種>/values.json の各年を集計した値で、合計は値が載っている都道府県の合計。2019〜2022年は表になく含まれない。",
+ "fetchedFrom": "https://storage.stats47.jp/app/ranking/<key>/values.json",
+ "fetchedOn": "2026-10-08",
+ "unitName": "トン",
+ "species": [
+  {
+   "rankingKey": "fishery-species-catch-bonito",
+   "name": "カツオ類",
+   "peakYear": 1984,
+   "peakTotal": 446318,
+   "totalByYear": {
+    "2008": 307823,
+    "2015": 238262,
+    "2018": 236533,
+    "2023": 192207
+   },
+   "leaderByYear": {
+    "2013": {
+     "pref": "静岡県",
+     "tons": 87501,
+     "sharePct": 32.1
+    },
+    "2014": {
+     "pref": "静岡県",
+     "tons": 83621,
+     "sharePct": 34.2
+    },
+    "2015": {
+     "pref": "静岡県",
+     "tons": 81295,
+     "sharePct": 34.1
+    },
+    "2016": {
+     "pref": "静岡県",
+     "tons": 71655,
+     "sharePct": 31.4
+    },
+    "2017": {
+     "pref": "静岡県",
+     "tons": 72269,
+     "sharePct": 33.9
+    },
+    "2018": {
+     "pref": "静岡県",
+     "tons": 81042,
+     "sharePct": 34.3
+    },
+    "2023": {
+     "pref": "静岡県",
+     "tons": 56969,
+     "sharePct": 29.6
+    }
+   }
+  },
+  {
+   "rankingKey": "fishery-species-catch-japanese-squid",
+   "name": "スルメイカ",
+   "peakYear": 1968,
+   "peakTotal": 668367,
+   "totalByYear": {
+    "2008": 217474,
+    "2015": 128838,
+    "2018": 47796,
+    "2023": 21199
+   },
+   "leaderByYear": {
+    "2013": {
+     "pref": "北海道",
+     "tons": 72954,
+     "sharePct": 40.5
+    },
+    "2014": {
+     "pref": "北海道",
+     "tons": 58608,
+     "sharePct": 33.9
+    },
+    "2015": {
+     "pref": "北海道",
+     "tons": 39936,
+     "sharePct": 31.0
+    },
+    "2016": {
+     "pref": "青森県",
+     "tons": 19465,
+     "sharePct": 27.7
+    },
+    "2017": {
+     "pref": "青森県",
+     "tons": 19538,
+     "sharePct": 30.5
+    },
+    "2018": {
+     "pref": "北海道",
+     "tons": 13900,
+     "sharePct": 29.1
+    },
+    "2023": {
+     "pref": "青森県",
+     "tons": 5370,
+     "sharePct": 25.3
+    }
+   }
+  },
+  {
+   "rankingKey": "fishery-species-catch-kelp",
+   "name": "コンブ類",
+   "peakYear": 1962,
+   "peakTotal": 179995,
+   "totalByYear": {
+    "2008": 73245,
+    "2015": 71621,
+    "2018": 55877,
+    "2023": 44841
+   },
+   "leaderByYear": {
+    "2013": {
+     "pref": "北海道",
+     "tons": 53761,
+     "sharePct": 94.4
+    },
+    "2014": {
+     "pref": "北海道",
+     "tons": 64301,
+     "sharePct": 96.3
+    },
+    "2015": {
+     "pref": "北海道",
+     "tons": 64575,
+     "sharePct": 90.2
+    },
+    "2016": {
+     "pref": "北海道",
+     "tons": 56454,
+     "sharePct": 97.3
+    },
+    "2017": {
+     "pref": "北海道",
+     "tons": 42907,
+     "sharePct": 94.3
+    },
+    "2018": {
+     "pref": "北海道",
+     "tons": 52824,
+     "sharePct": 94.5
+    },
+    "2023": {
+     "pref": "北海道",
+     "tons": 42536,
+     "sharePct": 94.9
+    }
+   },
+   "hokkaidoShareByYear": {
+    "1960": {
+     "tons": 124657,
+     "sharePct": 89.0
+    },
+    "1970": {
+     "tons": 87971,
+     "sharePct": 79.4
+    },
+    "1972": {
+     "tons": 137004,
+     "sharePct": 88.2
+    },
+    "1975": {
+     "tons": 145721,
+     "sharePct": 92.4
+    },
+    "1980": {
+     "tons": 114739,
+     "sharePct": 91.9
+    },
+    "1990": {
+     "tons": 123875,
+     "sharePct": 94.1
+    },
+    "2000": {
+     "tons": 90696,
+     "sharePct": 96.9
+    },
+    "2010": {
+     "tons": 70972,
+     "sharePct": 95.8
+    },
+    "2015": {
+     "tons": 64575,
+     "sharePct": 90.2
+    },
+    "2018": {
+     "tons": 52824,
+     "sharePct": 94.5
+    },
+    "2023": {
+     "tons": 42536,
+     "sharePct": 94.9
+    }
+   }
+  },
+  {
+   "rankingKey": "fishery-species-catch-mackerel",
+   "name": "サバ類",
+   "peakYear": 1978,
+   "peakTotal": 1625868,
+   "totalByYear": {
+    "2008": 520327,
+    "2015": 529921,
+    "2018": 545234,
+    "2023": 269635
+   },
+   "leaderByYear": {
+    "2013": {
+     "pref": "茨城県",
+     "tons": 68620,
+     "sharePct": 19.0
+    },
+    "2014": {
+     "pref": "茨城県",
+     "tons": 132080,
+     "sharePct": 27.4
+    },
+    "2015": {
+     "pref": "茨城県",
+     "tons": 143403,
+     "sharePct": 27.1
+    },
+    "2016": {
+     "pref": "茨城県",
+     "tons": 138657,
+     "sharePct": 27.3
+    },
+    "2017": {
+     "pref": "茨城県",
+     "tons": 126285,
+     "sharePct": 24.3
+    },
+    "2018": {
+     "pref": "茨城県",
+     "tons": 104900,
+     "sharePct": 19.2
+    },
+    "2023": {
+     "pref": "長崎県",
+     "tons": 76146,
+     "sharePct": 28.2
+    }
+   }
+  },
+  {
+   "rankingKey": "fishery-species-catch-pacific-saury",
+   "name": "サンマ",
+   "peakYear": 1958,
+   "peakTotal": 575072,
+   "totalByYear": {
+    "2008": 347309,
+    "2015": 110945,
+    "2018": 126333,
+    "2023": 24697
+   },
+   "leaderByYear": {
+    "2013": {
+     "pref": "北海道",
+     "tons": 71040,
+     "sharePct": 48.5
+    },
+    "2014": {
+     "pref": "北海道",
+     "tons": 108578,
+     "sharePct": 49.9
+    },
+    "2015": {
+     "pref": "北海道",
+     "tons": 52093,
+     "sharePct": 47.0
+    },
+    "2016": {
+     "pref": "北海道",
+     "tons": 51156,
+     "sharePct": 47.5
+    },
+    "2017": {
+     "pref": "北海道",
+     "tons": 39123,
+     "sharePct": 49.2
+    },
+    "2018": {
+     "pref": "北海道",
+     "tons": 61077,
+     "sharePct": 48.3
+    },
+    "2023": {
+     "pref": "北海道",
+     "tons": 12585,
+     "sharePct": 51.0
+    }
+   },
+   "hokkaidoShareByYear": {
+    "1960": {
+     "tons": 114313,
+     "sharePct": 39.8
+    },
+    "1970": {
+     "tons": 44067,
+     "sharePct": 47.3
+    },
+    "1972": {
+     "tons": 96108,
+     "sharePct": 48.9
+    },
+    "1975": {
+     "tons": 109009,
+     "sharePct": 49.2
+    },
+    "1980": {
+     "tons": 75296,
+     "sharePct": 40.2
+    },
+    "1990": {
+     "tons": 148237,
+     "sharePct": 48.1
+    },
+    "2000": {
+     "tons": 124465,
+     "sharePct": 57.5
+    },
+    "2010": {
+     "tons": 107788,
+     "sharePct": 52.6
+    },
+    "2015": {
+     "tons": 52093,
+     "sharePct": 47.0
+    },
+    "2018": {
+     "tons": 61077,
+     "sharePct": 48.3
+    },
+    "2023": {
+     "tons": 12585,
+     "sharePct": 51.0
+    }
+   }
+  },
+  {
+   "rankingKey": "fishery-species-catch-pollock",
+   "name": "スケトウダラ",
+   "peakYear": 1972,
+   "peakTotal": 3035285,
+   "totalByYear": {
+    "2008": 211037,
+    "2015": 179966,
+    "2018": 127496,
+    "2023": 123002
+   },
+   "leaderByYear": {
+    "2013": {
+     "pref": "北海道",
+     "tons": 207357,
+     "sharePct": 90.3
+    },
+    "2014": {
+     "pref": "北海道",
+     "tons": 175459,
+     "sharePct": 90.0
+    },
+    "2015": {
+     "pref": "北海道",
+     "tons": 167158,
+     "sharePct": 92.9
+    },
+    "2016": {
+     "pref": "北海道",
+     "tons": 121925,
+     "sharePct": 90.9
+    },
+    "2017": {
+     "pref": "北海道",
+     "tons": 121276,
+     "sharePct": 93.8
+    },
+    "2018": {
+     "pref": "北海道",
+     "tons": 123740,
+     "sharePct": 97.1
+    },
+    "2023": {
+     "pref": "北海道",
+     "tons": 113731,
+     "sharePct": 92.5
+    }
+   },
+   "hokkaidoShareByYear": {
+    "1960": {
+     "tons": 334909,
+     "sharePct": 94.6
+    },
+    "1970": {
+     "tons": 704027,
+     "sharePct": 30.0
+    },
+    "1972": {
+     "tons": 899228,
+     "sharePct": 29.6
+    },
+    "1975": {
+     "tons": 1112551,
+     "sharePct": 41.6
+    },
+    "1980": {
+     "tons": 607080,
+     "sharePct": 39.1
+    },
+    "1990": {
+     "tons": 590014,
+     "sharePct": 67.7
+    },
+    "2000": {
+     "tons": 262910,
+     "sharePct": 87.6
+    },
+    "2010": {
+     "tons": 227580,
+     "sharePct": 90.6
+    },
+    "2015": {
+     "tons": 167158,
+     "sharePct": 92.9
+    },
+    "2018": {
+     "tons": 123740,
+     "sharePct": 97.1
+    },
+    "2023": {
+     "tons": 113731,
+     "sharePct": 92.5
+    }
+   }
+  },
+  {
+   "rankingKey": "fishery-species-catch-sardine",
+   "name": "イワシ類",
+   "peakYear": 1988,
+   "peakTotal": 4814223,
+   "totalByYear": {
+    "2008": 497661,
+    "2015": 642366,
+    "2018": 741437,
+    "2023": 944844
+   },
+   "leaderByYear": {
+    "2013": {
+     "pref": "千葉県",
+     "tons": 72921,
+     "sharePct": 12.1
+    },
+    "2014": {
+     "pref": "三重県",
+     "tons": 73048,
+     "sharePct": 13.2
+    },
+    "2015": {
+     "pref": "長崎県",
+     "tons": 71391,
+     "sharePct": 11.1
+    },
+    "2016": {
+     "pref": "茨城県",
+     "tons": 92622,
+     "sharePct": 13.0
+    },
+    "2017": {
+     "pref": "茨城県",
+     "tons": 156903,
+     "sharePct": 20.4
+    },
+    "2018": {
+     "pref": "茨城県",
+     "tons": 144282,
+     "sharePct": 19.5
+    },
+    "2023": {
+     "pref": "茨城県",
+     "tons": 233727,
+     "sharePct": 24.7
+    }
+   }
+  },
+  {
+   "rankingKey": "fishery-species-catch-scallop",
+   "name": "ホタテガイ",
+   "peakYear": 2014,
+   "peakTotal": 358981,
+   "totalByYear": {
+    "2008": 310205,
+    "2015": 233885,
+    "2018": 304767,
+    "2023": 330592
+   },
+   "leaderByYear": {
+    "2013": {
+     "pref": "北海道",
+     "tons": 346424,
+     "sharePct": 99.7
+    },
+    "2014": {
+     "pref": "北海道",
+     "tons": 357718,
+     "sharePct": 99.6
+    },
+    "2015": {
+     "pref": "北海道",
+     "tons": 232080,
+     "sharePct": 99.2
+    },
+    "2016": {
+     "pref": "北海道",
+     "tons": 211871,
+     "sharePct": 99.1
+    },
+    "2017": {
+     "pref": "北海道",
+     "tons": 233993,
+     "sharePct": 99.2
+    },
+    "2018": {
+     "pref": "北海道",
+     "tons": 303573,
+     "sharePct": 99.6
+    },
+    "2023": {
+     "pref": "北海道",
+     "tons": 330176,
+     "sharePct": 99.9
+    }
+   },
+   "hokkaidoShareByYear": {
+    "1960": {
+     "tons": 9462,
+     "sharePct": 68.2
+    },
+    "1970": {
+     "tons": 7187,
+     "sharePct": 43.6
+    },
+    "1972": {
+     "tons": 8491,
+     "sharePct": 36.2
+    },
+    "1975": {
+     "tons": 11036,
+     "sharePct": 36.5
+    },
+    "1980": {
+     "tons": 68771,
+     "sharePct": 82.7
+    },
+    "1990": {
+     "tons": 213441,
+     "sharePct": 92.9
+    },
+    "2000": {
+     "tons": 301331,
+     "sharePct": 99.0
+    },
+    "2010": {
+     "tons": 326148,
+     "sharePct": 99.7
+    },
+    "2015": {
+     "tons": 232080,
+     "sharePct": 99.2
+    },
+    "2018": {
+     "tons": 303573,
+     "sharePct": 99.6
+    },
+    "2023": {
+     "tons": 330176,
+     "sharePct": 99.9
+    }
+   }
+  },
+  {
+   "rankingKey": "fishery-species-catch-sea-bream",
+   "name": "タイ類",
+   "peakYear": 1959,
+   "peakTotal": 48262,
+   "totalByYear": {
+    "2008": 26253,
+    "2015": 24873,
+    "2018": 25321,
+    "2023": 23274
+   },
+   "leaderByYear": {
+    "2013": {
+     "pref": "長崎県",
+     "tons": 3320,
+     "sharePct": 14.2
+    },
+    "2014": {
+     "pref": "長崎県",
+     "tons": 3572,
+     "sharePct": 14.1
+    },
+    "2015": {
+     "pref": "長崎県",
+     "tons": 4262,
+     "sharePct": 17.1
+    },
+    "2016": {
+     "pref": "長崎県",
+     "tons": 4340,
+     "sharePct": 17.7
+    },
+    "2017": {
+     "pref": "長崎県",
+     "tons": 4625,
+     "sharePct": 18.7
+    },
+    "2018": {
+     "pref": "長崎県",
+     "tons": 4522,
+     "sharePct": 17.9
+    },
+    "2023": {
+     "pref": "長崎県",
+     "tons": 4121,
+     "sharePct": 17.7
+    }
+   }
+  },
+  {
+   "rankingKey": "fishery-species-catch-snow-crab",
+   "name": "ズワイガニ",
+   "peakYear": 1968,
+   "peakTotal": 61679,
+   "totalByYear": {
+    "2008": 5307,
+    "2015": 4412,
+    "2018": 4072,
+    "2023": 2392
+   },
+   "leaderByYear": {
+    "2013": {
+     "pref": "兵庫県",
+     "tons": 1165,
+     "sharePct": 27.9
+    },
+    "2014": {
+     "pref": "兵庫県",
+     "tons": 1198,
+     "sharePct": 27.6
+    },
+    "2015": {
+     "pref": "兵庫県",
+     "tons": 1064,
+     "sharePct": 24.1
+    },
+    "2016": {
+     "pref": "兵庫県",
+     "tons": 1016,
+     "sharePct": 24.5
+    },
+    "2017": {
+     "pref": "北海道",
+     "tons": 972,
+     "sharePct": 24.4
+    },
+    "2018": {
+     "pref": "兵庫県",
+     "tons": 1159,
+     "sharePct": 28.5
+    },
+    "2023": {
+     "pref": "鳥取県",
+     "tons": 533,
+     "sharePct": 22.3
+    }
+   }
+  },
+  {
+   "rankingKey": "fishery-species-catch-tuna",
+   "name": "マグロ類",
+   "peakYear": 1965,
+   "peakTotal": 430293,
+   "totalByYear": {
+    "2008": 216815,
+    "2015": 189942,
+    "2018": 164868,
+    "2023": 144878
+   },
+   "leaderByYear": {
+    "2013": {
+     "pref": "静岡県",
+     "tons": 27009,
+     "sharePct": 14.5
+    },
+    "2014": {
+     "pref": "静岡県",
+     "tons": 28208,
+     "sharePct": 14.9
+    },
+    "2015": {
+     "pref": "静岡県",
+     "tons": 30660,
+     "sharePct": 16.1
+    },
+    "2016": {
+     "pref": "静岡県",
+     "tons": 26844,
+     "sharePct": 15.9
+    },
+    "2017": {
+     "pref": "静岡県",
+     "tons": 29658,
+     "sharePct": 17.6
+    },
+    "2018": {
+     "pref": "静岡県",
+     "tons": 30597,
+     "sharePct": 18.6
+    },
+    "2023": {
+     "pref": "静岡県",
+     "tons": 23704,
+     "sharePct": 16.4
+    }
+   }
+  },
+  {
+   "rankingKey": "fishery-species-catch-yellowtail",
+   "name": "ブリ類",
+   "peakYear": 2014,
+   "peakTotal": 125151,
+   "totalByYear": {
+    "2008": 75965,
+    "2015": 122637,
+    "2018": 100421,
+    "2023": 87183
+   },
+   "leaderByYear": {
+    "2013": {
+     "pref": "長崎県",
+     "tons": 16222,
+     "sharePct": 14.0
+    },
+    "2014": {
+     "pref": "島根県",
+     "tons": 20514,
+     "sharePct": 16.4
+    },
+    "2015": {
+     "pref": "長崎県",
+     "tons": 15651,
+     "sharePct": 12.8
+    },
+    "2016": {
+     "pref": "島根県",
+     "tons": 12630,
+     "sharePct": 11.7
+    },
+    "2017": {
+     "pref": "長崎県",
+     "tons": 18197,
+     "sharePct": 15.1
+    },
+    "2018": {
+     "pref": "長崎県",
+     "tons": 14113,
+     "sharePct": 14.1
+    },
+    "2023": {
+     "pref": "北海道",
+     "tons": 13659,
+     "sharePct": 15.7
+    }
+   }
+  }
+ ],
+ "scallopAomoriVsHokkaido": {
+  "1970": {
+   "aomori": 9048,
+   "hokkaido": 7187
+  },
+  "1975": {
+   "aomori": 19063,
+   "hokkaido": 11036
+  },
+  "2023": {
+   "aomori": 416,
+   "hokkaido": 330176
+  }
+ },
+ "pollock1972": {
+  "東京都": 1466890,
+  "北海道": 899228,
+  "宮城県": 280254
+ },
+ "snowCrab": {
+  "1968": {
+   "東京都": 32593,
+   "北海道": 16818,
+   "兵庫県": 4360,
+   "鳥取県": 3713,
+   "新潟県": 1296,
+   "福井県": 1027
+  },
+  "2015": {
+   "兵庫県": 1064,
+   "北海道": 977,
+   "鳥取県": 932,
+   "福井県": 461,
+   "石川県": 435,
+   "新潟県": 243
+  },
+  "2023": {
+   "鳥取県": 533,
+   "兵庫県": 524,
+   "福井県": 450,
+   "石川県": 351,
+   "新潟県": 206,
+   "島根県": 102
+  }
+ },
+ "mackerelIbarakiNagasaki": {
+  "1978": {
+   "ibaraki": 194093,
+   "nagasaki": 343347
+  },
+  "2015": {
+   "ibaraki": 143403,
+   "nagasaki": 66893
+  },
+  "2018": {
+   "ibaraki": 104900,
+   "nagasaki": 100171
+  },
+  "2023": {
+   "ibaraki": 16253,
+   "nagasaki": 76146
+  }
+ },
+ "sardineIbarakiByYear": {
+  "1988": 937379,
+  "2015": 59249,
+  "2023": 233727
+ },
+ "sardineNorthPacific4pref": {
+  "2015": 115819,
+  "2023": 387423
+ },
+ "sardineTop5Sum": {
+  "2015": 302656,
+  "2023": 519583
+ },
+ "sardineTotalByYear": {
+  "1970": 441576,
+  "1980": 2441960,
+  "1988": 4814223,
+  "1995": 1016350,
+  "2005": 474172,
+  "2015": 642366,
+  "2018": 741437,
+  "2023": 944844
+ },
+ "largestSpeciesAmongTwelve": {
+  "2015": {
+   "prefCount": 39,
+   "largestSpeciesCount": {
+    "イワシ類": 19,
+    "サバ類": 7,
+    "マグロ類": 4,
+    "カツオ類": 3,
+    "ブリ類": 2,
+    "スルメイカ": 2,
+    "ホタテガイ": 1,
+    "サンマ": 1
+   }
+  },
+  "2023": {
+   "prefCount": 39,
+   "largestSpeciesCount": {
+    "イワシ類": 25,
+    "カツオ類": 5,
+    "ブリ類": 3,
+    "タイ類": 2,
+    "マグロ類": 2,
+    "ホタテガイ": 1,
+    "サバ類": 1
+   }
+  }
+ },
+ "sauryHokkaidoShareRange1970to2023": {
+  "minPct": 37.4,
+  "minYear": 1983,
+  "maxPct": 57.5,
+  "maxYear": 2000
+ },
+ "kelpHokkaidoShareMinPct": {
+  "pct": 79.4,
+  "year": 1970
+ }
+}
