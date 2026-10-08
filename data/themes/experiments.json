@@ -266,7 +266,7 @@
           }
         }
       },
-      "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
+      "notes": "公開日 2026-09-11 で schedule 済み。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。 同時変更: 2026-10-07 (#1099) に承認済み提案の章・指標・図の見直しとカード見出し 3 件の文言。d56 は 9 月の変更だけの効果を表さないため、d28 で aborted にして 2026-10-07 公開の新実験へ引き継ぐ (2026-10-08 オーナー承認)。",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
@@ -332,7 +332,7 @@
           }
         }
       },
-      "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
+      "notes": "公開日 2026-09-11 で schedule 済み。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。 同時変更: 2026-10-07 (#1099) にカード見出し 4 件の文言を変えた (章名の重複を除いただけで、章・指標・図は不変)。d28・d56 の判定ではこの変更を制約として併記する。",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
@@ -394,7 +394,7 @@
           }
         }
       },
-      "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
+      "notes": "公開日 2026-09-11 で schedule 済み。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。 同時変更: 2026-10-07 (#1099) にカード見出し 2 件の文言、2026-10-08 (#1100) に承認済み提案の章・指標・図の見直し。d56 は 9 月の変更だけの効果を表さないため、d28 で aborted にして 2026-10-08 公開の新実験へ引き継ぐ (2026-10-08 オーナー承認)。",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
@@ -466,7 +466,7 @@
           }
         }
       },
-      "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
+      "notes": "公開日 2026-09-11 で schedule 済み。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。 同時変更: 2026-10-07 (#1099) にカード見出し 18 件の文言を変えた (章名の重複を除いただけで、章・指標・図は不変)。d28・d56 の判定ではこの変更を制約として併記する。",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
@@ -542,7 +542,7 @@
           }
         }
       },
-      "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
+      "notes": "公開日 2026-09-11 で schedule 済み。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。 同時変更: 2026-10-07 (#1099) に承認済み提案の章・指標・図の見直しとカード見出し 2 件の文言。d56 は 9 月の変更だけの効果を表さないため、d28 で aborted にして 2026-10-07 公開の新実験へ引き継ぐ (2026-10-08 オーナー承認)。",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
@@ -609,7 +609,7 @@
           }
         }
       },
-      "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
+      "notes": "公開日 2026-09-11 で schedule 済み。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。 同時変更: 2026-10-07 (#1099) に読み方章を末尾へ移し、カード見出し 33 件の文言を変えた。d56 は 9 月の変更だけの効果を表さないため、d28 で aborted にして 2026-10-07 公開の新実験へ引き継ぐ (2026-10-08 オーナー承認)。",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
@@ -677,7 +677,7 @@
           }
         }
       },
-      "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
+      "notes": "公開日 2026-09-11 で schedule 済み。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。 同時変更: 2026-10-07 (#1099) に読み方章を末尾へ移し、カード見出し 11 件の文言を変えた。d56 は 9 月の変更だけの効果を表さないため、d28 で aborted にして 2026-10-07 公開の新実験へ引き継ぐ (2026-10-08 オーナー承認)。",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
@@ -744,7 +744,7 @@
           }
         }
       },
-      "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
+      "notes": "公開日 2026-09-11 で schedule 済み。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。 同時変更: 2026-10-07 (#1099) に読み方章を末尾へ移し、カード見出し 2 件の文言を変えた。d56 は 9 月の変更だけの効果を表さないため、d28 で aborted にして 2026-10-07 公開の新実験へ引き継ぐ (2026-10-08 オーナー承認)。",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
@@ -819,7 +819,7 @@
           }
         }
       },
-      "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
+      "notes": "公開日 2026-09-11 で schedule 済み。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。 同時変更: 2026-10-07 (#1099) に読み方章を末尾へ移し、カード見出し 23 件の文言を変えた。d56 は 9 月の変更だけの効果を表さないため、d28 で aborted にして 2026-10-07 公開の新実験へ引き継ぐ (2026-10-08 オーナー承認)。",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
@@ -894,7 +894,7 @@
           }
         }
       },
-      "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
+      "notes": "公開日 2026-09-11 で schedule 済み。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。 同時変更: 2026-10-07 (#1099) に承認済み提案の章・指標・図の見直しとカード見出し 3 件の文言。d56 は 9 月の変更だけの効果を表さないため、d28 で aborted にして 2026-10-07 公開の新実験へ引き継ぐ (2026-10-08 オーナー承認)。",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
@@ -956,7 +956,7 @@
           }
         }
       },
-      "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
+      "notes": "公開日 2026-09-11 で schedule 済み。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。 同時変更: 2026-10-07 (#1099) にカード見出し 23 件の文言を変えた (章名の重複を除いただけで、章・指標・図は不変)。d28・d56 の判定ではこの変更を制約として併記する。",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
@@ -1021,7 +1021,7 @@
           }
         }
       },
-      "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
+      "notes": "公開日 2026-09-11 で schedule 済み。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。 同時変更: 2026-10-07 (#1099) にカード見出し 4 件の文言を変えた (章名の重複を除いただけで、章・指標・図は不変)。d28・d56 の判定ではこの変更を制約として併記する。",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
@@ -1083,7 +1083,7 @@
           }
         }
       },
-      "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
+      "notes": "公開日 2026-09-11 で schedule 済み。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
@@ -1150,7 +1150,7 @@
           }
         }
       },
-      "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
+      "notes": "公開日 2026-09-11 で schedule 済み。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。 同時変更: 2026-10-07 (#1099) に読み方章を末尾へ移し、カード見出し 20 件の文言を変えた。d56 は 9 月の変更だけの効果を表さないため、d28 で aborted にして 2026-10-07 公開の新実験へ引き継ぐ (2026-10-08 オーナー承認)。",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
@@ -1212,7 +1212,7 @@
           }
         }
       },
-      "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
+      "notes": "公開日 2026-09-11 で schedule 済み。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。 同時変更: 2026-10-07 (#1099) にカード見出し 1 件の文言を変えた (章名の重複を除いただけで、章・指標・図は不変)。d28・d56 の判定ではこの変更を制約として併記する。",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
@@ -1274,7 +1274,7 @@
           }
         }
       },
-      "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
+      "notes": "公開日 2026-09-11 で schedule 済み。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
@@ -1341,7 +1341,7 @@
           }
         }
       },
-      "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
+      "notes": "公開日 2026-09-11 で schedule 済み。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。 同時変更: 2026-10-07 (#1099) にカード見出し 4 件の文言を変えた (章名の重複を除いただけで、章・指標・図は不変)。d28・d56 の判定ではこの変更を制約として併記する。",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
@@ -1405,7 +1405,7 @@
           }
         }
       },
-      "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
+      "notes": "公開日 2026-09-11 で schedule 済み。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。 同時変更: 2026-10-07 (#1099) にカード見出し 6 件の文言を変えた (章名の重複を除いただけで、章・指標・図は不変)。d28・d56 の判定ではこの変更を制約として併記する。",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
@@ -1470,7 +1470,7 @@
           }
         }
       },
-      "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
+      "notes": "公開日 2026-09-11 で schedule 済み。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。 同時変更: 2026-10-07 (#1099) にカード見出し 27 件の文言を変えた (章名の重複を除いただけで、章・指標・図は不変)。d28・d56 の判定ではこの変更を制約として併記する。",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
@@ -1540,7 +1540,7 @@
           }
         }
       },
-      "notes": "未公開。実際の公開後に--scheduleする。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。",
+      "notes": "公開日 2026-09-11 で schedule 済み。d7は品質、d28は暫定、d56は公開後だけの56日窓で判定。低標本や季節性・同時変更による制約を併記し、因果効果と断定しない。 同時変更: 2026-10-07 (#1099) にカード見出し 3 件の文言、2026-10-08 (#1100) に承認済み提案の章・指標・図の見直し。d56 は 9 月の変更だけの効果を表さないため、d28 で aborted にして 2026-10-08 公開の新実験へ引き継ぐ (2026-10-08 オーナー承認)。",
       "evidenceRefs": [
         ".claude/skills/analytics/ga4-improvement/reference/snapshots/2026-W36/pages-clean.csv",
         ".claude/skills/analytics/gsc-improvement/reference/snapshots/2026-W36/pages.csv",
@@ -1606,7 +1606,7 @@
           }
         }
       },
-      "notes": null,
+      "notes": "同時変更: 2026-10-07 (#1099) にカード見出し 8 件の文言を変えた (章名の重複を除いただけで、章・指標・図は不変)。d28・d56 の判定ではこの変更を制約として併記する。",
       "evidenceRefs": [
         ".claude/state/metrics/themes/2026-09-09-first-batch.json"
       ],
@@ -1743,7 +1743,7 @@
           }
         }
       },
-      "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
+      "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。 同時変更: 2026-10-07 (#1099) にカード見出し 6 件の文言を変えた (章名の重複を除いただけで、章・指標・図は不変)。d28・d56 の判定ではこの変更を制約として併記する。",
       "evidenceRefs": [
         ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
         ".claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json"
@@ -1792,7 +1792,7 @@
           }
         }
       },
-      "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
+      "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。 同時変更: 2026-10-07 (#1099) にカード見出し 4 件の文言を変えた (章名の重複を除いただけで、章・指標・図は不変)。d28・d56 の判定ではこの変更を制約として併記する。",
       "evidenceRefs": [
         ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
         ".claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json"
@@ -1991,7 +1991,7 @@
           }
         }
       },
-      "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
+      "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。 同時変更: 2026-10-07 (#1099) にカード見出し 4 件の文言を変えた (章名の重複を除いただけで、章・指標・図は不変)。d28・d56 の判定ではこの変更を制約として併記する。",
       "evidenceRefs": [
         ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
         ".claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json"
@@ -2421,7 +2421,7 @@
           }
         }
       },
-      "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
+      "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。 同時変更: 2026-10-07 (#1099) にカード見出し 6 件の文言を変えた (章名の重複を除いただけで、章・指標・図は不変)。d28・d56 の判定ではこの変更を制約として併記する。",
       "evidenceRefs": [
         ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
         ".claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json"
@@ -2472,7 +2472,7 @@
           }
         }
       },
-      "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
+      "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。 同時変更: 2026-10-07 (#1099) にカード見出し 4 件の文言を変えた (章名の重複を除いただけで、章・指標・図は不変)。d28・d56 の判定ではこの変更を制約として併記する。",
       "evidenceRefs": [
         ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
         ".claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json"
@@ -2708,7 +2708,7 @@
           }
         }
       },
-      "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
+      "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。 同時変更: 2026-10-07 (#1099) にカード見出し 8 件の文言を変えた (章名の重複を除いただけで、章・指標・図は不変)。d28・d56 の判定ではこの変更を制約として併記する。",
       "evidenceRefs": [
         ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
         ".claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json"
@@ -2888,7 +2888,7 @@
           }
         }
       },
-      "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
+      "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。 同時変更: 2026-10-07 (#1099) にカード見出し 9 件の文言を変えた (章名の重複を除いただけで、章・指標・図は不変)。d28・d56 の判定ではこの変更を制約として併記する。",
       "evidenceRefs": [
         ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
         ".claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json"
@@ -2938,7 +2938,7 @@
           }
         }
       },
-      "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
+      "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。 同時変更: 2026-10-07 (#1099) にカード見出し 1 件の文言を変えた (章名の重複を除いただけで、章・指標・図は不変)。d28・d56 の判定ではこの変更を制約として併記する。",
       "evidenceRefs": [
         ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
         ".claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json"
@@ -3084,7 +3084,7 @@
           }
         }
       },
-      "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。",
+      "notes": "未公開。実公開と本番HTTP・表示・配信値確認が済んでから既存CLIでscheduleする。D7は品質、D28は公開後の完全な28日窓、D56は完全な56日窓を確認する。欠測を0にしない。 同時変更: 2026-10-07 (#1099) にカード見出し 8 件の文言を変えた (章名の重複を除いただけで、章・指標・図は不変)。d28・d56 の判定ではこの変更を制約として併記する。",
       "evidenceRefs": [
         ".claude/state/metrics/themes/2026-09-10-all-expansion.json",
         ".claude/skills/theme/research-theme-catalog/reference/theme-feasibility-catalog.json"
@@ -3227,7 +3227,7 @@
           }
         }
       },
-      "notes": "未公開。2026-07-12〜2026-09-05の56日を公式APIへ直接指定して取得した実カウントをbaselineとして保存する。欠落した前28日を0補完していない。PV11・impressions15は最低標本未満のため比率・効果を確定しない。実公開後にscheduleし、D7品質・D28暫定・D56観測と低標本の制約を記録する。",
+      "notes": "未公開。2026-07-12〜2026-09-05の56日を公式APIへ直接指定して取得した実カウントをbaselineとして保存する。欠落した前28日を0補完していない。PV11・impressions15は最低標本未満のため比率・効果を確定しない。実公開後にscheduleし、D7品質・D28暫定・D56観測と低標本の制約を記録する。 同時変更: 2026-10-07 (#1099) にカード見出し 2 件の文言を変えた (章名の重複を除いただけで、章・指標・図は不変)。d28・d56 の判定ではこの変更を制約として併記する。",
       "evidenceRefs": [
         ".claude/state/metrics/themes/2026-09-11-baseline-aligned.json",
         ".claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-07-13-theme-foreign-residents.md",
