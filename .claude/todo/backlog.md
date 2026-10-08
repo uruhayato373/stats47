@@ -475,25 +475,6 @@ updated: 2026-10-06
 - **停止条件**: 原因が分かるまで `--apply` の結果をコミットしない。
 - **完了条件**: カタログを変えずに再生成した結果がコミット済みのファイルと一致する。
 
-### [E2E-THEME-PR-PAGECOMPONENTS-01] PR の代表 E2E がテーマの図を本番 R2 の page-components で描くので、PR で変えた図の種類を検証できない
-タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:npm run test:e2e --workspace=apps/web -- tests/e2e/public-route-contract.spec.ts] [起票:2026-10-08] [領域:サイト] [進行中]
-
-- **事実**: `pr-quality-check.yml` の Representative E2E は PR のビルドを `R2_PUBLIC_FETCH_URL=https://storage.stats47.jp` で起動し、テーマの図の定義を
-  `loadPageComponents('theme', key)` で本番 R2 から読む (`ThemePageLayout.tsx`)。page-components を R2 へ反映する `sync-snapshots.yml` は main を checkout するので、
-  PR の時点では R2 は常に変更前の定義になる。2026-10-08 に consumer-prices の `theme-cpi-heatmap` を `line-chart` から `cpi-heatmap` に変えたが、
-  `public-route-matrix.ts` の `representativeTypes` に `cpi-heatmap` を入れると PR の E2E が落ちるため、PR では `cpi-profile` だけを見る形にした。
-- **次**: E2E のサーバーが PR で生成した `apps/web/scripts/data/page-components/theme/*.json` を読む経路 (例: 生成物を R2 の代わりに返す env) を作るか、
-  page-components を PR の preview 用の R2 prefix に置く。どちらにするかを決めてから実装する。
-- **2026-10-08 実装 (develop、オーナー承認の推奨案)**: `.github/scripts/r2-overlay-server.mjs` を作り、PR の代表 E2E の job で
-  アプリの `R2_PUBLIC_FETCH_URL` をこれに向けた。`app/page-components/<type>/<key>.json` だけを PR の生成物から返し、それ以外は本番 R2 へ取り次ぐ。
-  consumer-prices の `representativeTypes` に `cpi-heatmap` を戻した。手元で CI と同じ条件 (S3 の認証情報なし) で、代表 E2E 37 件が通り、
-  PR の定義から cpi-heatmap を外すと consumer-prices が落ちることを確かめた。
-  注意: S3 の認証情報がある環境では、アプリは公開 URL を使わず本番 R2 を直接読むので、この中継は効かない (手元の確認で踏んだ)。
-  **残り**: 次の develop → main の PR で、Representative E2E が通り、job のログ (`/tmp/pr-e2e-r2-overlay.log` は残らないので
-  step の成否) を確かめてからカードを消す。
-- **完了条件**: PR で catalog の componentType を変えたとき、その PR の E2E が新しい図の種類で `data-data-state="ready"` を確かめられ、
-  consumer-prices の `representativeTypes` に `cpi-heatmap` を戻しても PR の時点で通る。
-
 ### [KEYS-SYNC-PROMINENCE-REGEN-01] ランキングの既知キーを足しても、そこから作るランキング索引の生成物が再生成されない
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:cd apps/web && npx tsx scripts/generate-ranking-prominence.ts --check] [起票:2026-10-08] [領域:データ] [進行中]
 
@@ -510,26 +491,6 @@ updated: 2026-10-06
   `--check` が exit 1、job と同じ順で作り直すと exit 0 になることを確かめた。**残り**: workflow は main の定義で動くので、次の公開の後、
   キーが増える keys PR で Static Gates が通るのを見てからカードを消す。
 - **完了条件**: キーが増える keys PR で `generate-ranking-prominence.ts --check` が通る。
-
-### [CORRELATION-THEME-CATALOG-SYNC-01] テーマのカタログを main へ出しても相関の再計算が起動せず、テーマ別の相関一覧が古いカタログのまま残る
-タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:npx vitest run packages/correlation/src/scripts/__tests__/verify-correlation-by-theme.test.ts] [起票:2026-10-08] [領域:データ] [進行中]
-
-- **事実 (2026-10-08)**: `correlation-refresh.yml` の起動は、data-refresh・KSJ 取り込みの完了時 (workflow_run) と毎日 18:45 UTC の定期実行だけで、
-  テーマのカタログ (`data/themes/catalogs/*.json`) の main への反映では起動しない。PR #1100 のマージ前に走った run 44 が古い main のカタログで
-  `app/correlation/by-theme/consumer-prices.json` を作り、外した `average-temperature` を基準にした 7 件が本番の「相関が高いテーマ外の指標」に残った。
-  相関の fingerprint はテーマ構成を含む (`build-correlation-snapshot.ts` の `listThemeMembers`) ので、再計算さえ起きれば直る。
-  by-theme の基準指標 (`via`) がカタログの指標に含まれるかを確かめる検査は無い (`audit-r2-freshness.mjs` も相関を対象にしていない)。
-  同日、すぐ直せるように代理起動の allowlist に `correlation-refresh.yml` を足した。
-- **次**: ① `correlation-refresh.yml` に main への push で `data/themes/catalogs/**` が変わったときの起動を足す。
-  ② 本番の `app/correlation/by-theme/<key>.json` の `via.rankingKey` が、そのテーマのカタログの指標に含まれるかを確かめる検査を、
-  日次の workflow-health か週次のテーマ監査に足す。
-- **2026-10-08 実装 (develop)**: ① `correlation-refresh.yml` に main への push (`data/themes/catalogs/**`) の起動を足した。② 公開中の一覧を
-  `listThemeMembers` (相関の計算と同じテーマの指標) と突き合わせる `packages/correlation/src/scripts/verify-correlation-by-theme.ts` を作り、
-  同じ workflow の最後 (計算を省いた run を含む) で走らせる。毎日の定期実行で検査され、食い違えば `correlation-alert` が開く。
-  直る前に保存した物価テーマの古い一覧では 7 件を検出し、今の本番 (run 45 の後) は 55 テーマで食い違い 0。
-  **残り**: workflow の変更は main に入ってから効く。次の develop → main の公開後、定期実行かカタログを変えたマージの run で
-  Verify の手順が通ることを確かめてカードを消す。
-- **完了条件**: カタログを変えた PR のマージ後、手作業なしで by-theme の相関一覧が新しいカタログで作り直され、外れた指標が残っていれば検査が止める。
 
 ### [RANKING-ACTIVE-WITHOUT-VALUES-01] ブログの関連ランキングが、非公開の指標の古い item を読んで 410 のページへリンクする
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-08] [領域:データ] [進行中]
