@@ -4602,6 +4602,14 @@
       "published": true
     },
     {
+      "id": "ranking:elderly-living-alone-rate",
+      "kind": "ranking",
+      "key": "elderly-living-alone-rate",
+      "title": "65歳以上人口に占める一人暮らしの割合",
+      "href": "/ranking/elderly-living-alone-rate",
+      "published": false
+    },
+    {
       "id": "ranking:elderly-on-public-assistance-per-1000-65plus",
       "kind": "ranking",
       "key": "elderly-on-public-assistance-per-1000-65plus",
