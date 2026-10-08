@@ -266,6 +266,16 @@
           "dataQuality"
         ]
       }
+    },
+    {
+      "rankingKey": "beauty-salon-count",
+      "shortLabel": "美容所数",
+      "role": "context"
+    },
+    {
+      "rankingKey": "barber-beauty-salon-count",
+      "shortLabel": "理容・美容所数",
+      "role": "context"
     }
   ],
   "charts": [],

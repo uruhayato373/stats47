@@ -3,8 +3,8 @@
   "totalRequests": 0,
   "distinctRequests": 0,
   "requests": [],
-  "totalMetricRefs": 154,
-  "distinctMetricRefs": 139,
+  "totalMetricRefs": 162,
+  "distinctMetricRefs": 147,
   "metrics": [
     {
       "metricKey": "actual-income-worker-households-per-month",
@@ -28,6 +28,14 @@
       "expectedConfigHash": "1684e28e68ac51e9",
       "themeKey": "occupation-salary",
       "componentKey": "theme-occ-service-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "beer-consumption-expenditure",
+      "expectedUnit": "円",
+      "expectedConfigHash": "2bd4dbfedcdda4b1",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-alcohol-trend",
       "componentType": "line-chart"
     },
     {
@@ -311,6 +319,14 @@
       "componentType": "line-chart"
     },
     {
+      "metricKey": "happoshu-consumption-expenditure",
+      "expectedUnit": "円",
+      "expectedConfigHash": "276f71870b430a78",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-alcohol-trend",
+      "componentType": "line-chart"
+    },
+    {
       "metricKey": "household-survey-clothing-footwear-expenditure",
       "expectedUnit": "円",
       "expectedConfigHash": "568bd437254d1824",
@@ -575,6 +591,14 @@
       "componentType": "line-chart"
     },
     {
+      "metricKey": "other-bread-consumption-expenditure",
+      "expectedUnit": "円",
+      "expectedConfigHash": "3425ac66c4e76cfd",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-staple-trend",
+      "componentType": "line-chart"
+    },
+    {
       "metricKey": "owner-occupied-housing-ratio",
       "expectedUnit": "％",
       "expectedConfigHash": "a6ed608c5ee3d667",
@@ -623,6 +647,14 @@
       "componentType": "line-chart"
     },
     {
+      "metricKey": "rice-consumption-expenditure",
+      "expectedUnit": "円",
+      "expectedConfigHash": "9094842e2aabc0d5",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-staple-trend",
+      "componentType": "line-chart"
+    },
+    {
       "metricKey": "road-expressway-length",
       "expectedUnit": "km",
       "expectedConfigHash": "f5688f1b3a990074",
@@ -636,6 +668,14 @@
       "expectedConfigHash": "27f624a5d853d6ae",
       "themeKey": "roads",
       "componentKey": "roads-length-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "sake-consumption-expenditure",
+      "expectedUnit": "円",
+      "expectedConfigHash": "3a3ce380d8de5333",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-alcohol-trend",
       "componentType": "line-chart"
     },
     {
@@ -661,6 +701,14 @@
       "themeKey": "safety",
       "componentKey": "safety-crime-types-donut",
       "componentType": "donut-chart"
+    },
+    {
+      "metricKey": "shochu-consumption-expenditure",
+      "expectedUnit": "円",
+      "expectedConfigHash": "83d8fea3edfcbbac",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-alcohol-trend",
+      "componentType": "line-chart"
     },
     {
       "metricKey": "single-mother-households-income-100to199",
@@ -1117,6 +1165,22 @@
       "themeKey": "safety",
       "componentKey": "safety-crime-types-donut",
       "componentType": "donut-chart"
+    },
+    {
+      "metricKey": "white-bread-consumption-expenditure",
+      "expectedUnit": "円",
+      "expectedConfigHash": "5c07db8d7a4fca46",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-staple-trend",
+      "componentType": "line-chart"
+    },
+    {
+      "metricKey": "wine-consumption-expenditure",
+      "expectedUnit": "円",
+      "expectedConfigHash": "f9379ab47379871f",
+      "themeKey": "household-food-spending",
+      "componentKey": "household-food-spending-alcohol-trend",
+      "componentType": "line-chart"
     }
   ]
 }

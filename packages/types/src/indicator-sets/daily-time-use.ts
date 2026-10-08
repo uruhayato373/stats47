@@ -49,6 +49,46 @@ export const DAILY_TIME_USE_SET: IndicatorSet = {
       "rankingKey": "work-avg-time-employed-male",
       "shortLabel": "男性有業者の仕事時間",
       "role": "secondary"
+    },
+    {
+      "rankingKey": "hobby-participation-rate-karaoke",
+      "shortLabel": "カラオケの行動者率",
+      "role": "context"
+    },
+    {
+      "rankingKey": "hobby-participation-rate-video-games",
+      "shortLabel": "ゲームの行動者率",
+      "role": "context"
+    },
+    {
+      "rankingKey": "hobby-participation-rate-pachinko",
+      "shortLabel": "パチンコの行動者率",
+      "role": "context"
+    },
+    {
+      "rankingKey": "hobby-participation-rate-gardening",
+      "shortLabel": "園芸・庭いじり・ガーデニングの行動者率",
+      "role": "context"
+    },
+    {
+      "rankingKey": "broadcast-media-time-all",
+      "shortLabel": "テレビ・ラジオ・新聞・雑誌の総平均時間",
+      "role": "context"
+    },
+    {
+      "rankingKey": "meal-avg-time-female",
+      "shortLabel": "食事の平均時間（女）",
+      "role": "context"
+    },
+    {
+      "rankingKey": "meal-avg-time-male",
+      "shortLabel": "食事の平均時間（男）",
+      "role": "context"
+    },
+    {
+      "rankingKey": "primary-school-commute-time-weekday",
+      "shortLabel": "小学生の通勤・通学の総平均時間",
+      "role": "context"
     }
   ],
   "keywords": [

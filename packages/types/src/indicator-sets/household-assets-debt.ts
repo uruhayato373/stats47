@@ -44,6 +44,16 @@ export const HOUSEHOLD_ASSETS_DEBT_SET: IndicatorSet = {
       "rankingKey": "housing-land-liabilities-ratio-multi-person-households",
       "shortLabel": "住宅・土地負債が金融負債に占める割合",
       "role": "secondary"
+    },
+    {
+      "rankingKey": "financial-literacy-correct-rate",
+      "shortLabel": "金融リテラシー調査 正誤問題の正答率",
+      "role": "context"
+    },
+    {
+      "rankingKey": "securities-balance",
+      "shortLabel": "有価証券保有額",
+      "role": "context"
     }
   ],
   "keywords": [

@@ -4,6 +4,8 @@ export const whiteBreadConsumptionExpenditure: MetricConfig = {
   "key": "white-bread-consumption-expenditure",
   "title": "食パン消費支出額",
   "subtitle": "都道府県庁所在市の二人以上世帯の年間食パン消費支出額",
+  "note": "値は都道府県庁所在市（二人以上世帯）のもので、県全体の値ではない。",
+  "description": "家計調査（二人以上の世帯）の食パンへの年間支出額。",
   "unit": "円",
   "category": "economy",
   "source": {

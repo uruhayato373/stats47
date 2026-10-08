@@ -318,6 +318,7 @@ updated: 2026-10-06
 - **事象 (2026-10-08 に e-Stat API で実測)**: `school-teacher-annual-income` (表 0003445758・cdCat02=1192 小・中学校教員) の推計労働者数 (表章項目「労働者数」×10) は全国で約 3.3 万人 (2023 年 32,960 人) で、社会・人口統計体系の小・中学校教員数 (R2 `elementary-school-teachers` + `junior-high-school-teachers`、2023 年 47 都道府県合計 671,782 人) の約 4.9% しかない (2020 年 4.1%・2021〜2023 年 4.9%)。県別では 2023 年の愛媛が推計 60 人 (教員 7,435 人の 0.8%)、石川 2021 年は 40 人で賞与 0.0。県ごとの平均が数十人の推計に基づくため、1 位・最下位が毎年入れ替わる (2021 石川 245.16 万円、愛媛 2021 692.05 → 2023 315.72 万円)。ランキングページの表題「小中学校教員の平均年収」と「1 位 愛知 885.9 万円」は、読者に公立教員の給与水準と読まれるが、その読み方はできない。config の note は「公立学校教員だけに限定した統計ではない」とだけ書く。
 - **出典**: 調査範囲は厚生労働省「令和5年賃金構造基本統計調査 調査の概要」(https://www.mhlw.go.jp/toukei/itiran/roudou/chingin/kouzou/z2023/dl/gaiyo.pdf、2026-10-08 取得) で、16 大産業 (教育，学習支援業を含む) の「5人以上の民営事業所」と「10人以上の公営事業所」。なぜ 5% しか映らないかは公式資料で未確認なので、理由を断定しない。
 - **次 (決めること)**: ① 同じ表の職種別年収 40 指標 (高等学校教員 `high-school-teacher-annual-income` = cdCat02 1194 など) で、推計労働者数と実際の就業者数の比を同じ方法で出す ② 比が小さい指標は、ページに推計人数を併記する・県別ランキングとしての公開をやめる (`isActive:false` + 410/301 の判断)・note を書き直す、のどれにするかをオーナーが決める。公開をやめる場合は `ranking-publisher` の手順 (KNOWN/SITEMAP/R2) に乗せる。
+- **追加の実測 (2026-10-08、同じ表の年齢・勤続年数)**: 統計に映る教員の平均年齢が同じ県でも 1 年で大きく変わる (2022→2023 で愛媛 45.1→36.6 歳、鳥取 44.8→33.6 歳、北海道 36.0→47.4 歳。全国は 42.5→41.0 歳)。41 県で年収の変化と平均年齢の変化の相関は 0.562。県ごとの年収は、教員の待遇の違いより、年ごとに入れ替わる少人数の顔ぶれを強く反映している。
 - **停止条件**: 推計人数が小さいことだけを理由に、他の職種の指標を一括で非公開にしない (職種ごとに比を見てから決める)。
 - **完了条件**: 対象指標の扱いが決まり、ページの表示 (併記・note・非公開) が本番に反映されている。
 
@@ -605,6 +606,7 @@ updated: 2026-10-06
 - **教員年収の組は保留**: 残す `school-teacher-annual-income` は critic で REVISE (BLOCK 2)。タイトルと前半が「公立教員は国基準」を前提にしているが、指標 (賃金構造基本統計調査 0003445758) は公立に限らない小中学校教員の標本平均で前提が成り立たない。また 2022 年千葉と 2023 年愛知がともに 885.89 万円で小数第 2 位まで同じ、2021 年石川が 245.16 万円と、取り込みの誤りの疑いがある。次: e-Stat 0003445758 の元表と R2 `app/stats/school-teacher-annual-income/values.json` を照合し、誤りなら再取り込みしてから記事のタイトルごと書き直す (タイトルを変えるとサムネイル背景を Codex で作り直す必要がある)。統合元の節を移した版はローカルブランチ `wip/blog-teacher-merge` にある (未 push)。critic の指摘も同ブランチの送り箱 (school-teacher-annual-income の review.md) に入れてある。
   - **2026-10-08 照合結果 (取り込みの誤りではない)**: e-Stat API で 0003445758 (cdCat01=01・cdCat02=1192) を取り直して年収を再計算し、R2 の値がある 169 件すべてと一致した。885.89 万円は偶然の一致 (千葉 2022 = 454.6 千円 ×12 + 3,403.7、愛知 2023 = 516.1 ×12 + 2,665.7、どちらも 8,858.9 千円)。石川 2021 は推計労働者 40 人・賞与 0.0 の公表値。照合データと手順はセッションの scratchpad にだけあり、要点は `DATA-WAGE-TEACHER-COVERAGE-01` に写した。
   - **書き直し中 (2026-10-08)**: 送り箱は同日 `contents/blog/` へ移ったので、`contents/blog/school-teacher-annual-income/` (未コミット) で article-writer が書き直し、次に blog-critic を通す。タイトルが変わるので背景は Codex CLI (`npm run blog-images:codex`) で作り直す。公開・301・統合元の非公開化はオーナー承認後。
+  - **2026-10-08 進捗**: 書き直し版は blog-critic の delta 再審査で PASS (BLOCK 0・MAJOR 1・MINOR 7。MAJOR は表現を弱めて対応済み、MINOR は追加の改稿中)。新タイトル「教員年収の首位が毎年変わるのはなぜ?」。背景は既存の記事固有背景で quality-gate が通ったので作り直し不要。`blog-redirects.ts` に `school-teacher-annual-income-prefecture-gap` → `school-teacher-annual-income` を足し、`sitemap-blog-entries.ts` を再生成済み (どちらも未コミット、ローカルの 301 は確認済み)。公開 (contents/blog の develop push) と develop→main のデプロイはオーナー承認待ち。公開後に `wip/blog-teacher-merge` を削除する。
 - **他の重複候補 (2026-10-08・all.json 609 本の title と seoTitle に同じ数値が 2 つ以上ある組)**: 機械照合で 22 組。そば外食と教員年収の組は表題の数値の丸めが違い拾えなかったので、この方式は取りこぼす。本文を読んでいないので、まとめる判断は組ごとに本文を見てから行う。
   | 判断の候補 | 組 (GSC 28 日 表示/クリック) |
   |---|---|
@@ -727,7 +729,8 @@ updated: 2026-10-06
 
 - **経緯**: 2026-10-07 にオーナーが「docs/ ではなく、R2 か contents/ で管理し、ローカルは一時的に持つだけでよいのでは」と指摘し、(a) 「図の年の書き直し 22 本を公開してから移す」を選んだ。公開待ちの outbox は公開後に CI が消すもので、人が読み返す文書の置き場 (docs/) と性質が合わない。
 - **現在地 (2026-10-08)**: 22 本の公開後に、docs/21 の原稿 32 本を README と一緒に `git mv` で `contents/blog/` へ移した (未公開の 13 本も同じ diff で移したので失われていない)。台帳 `config/datasets.mjs` に `blog.outbox` と RETIRED を足し、workflow 4 本・スクリプト・skill・rule・memory の参照を書き換え、`npm run check-datasets` の旧置き場の参照は 0 件になった。PR CI の変更分類 (`plan-pr-quality.mjs`) は原稿だけの PR で重い job を起動しないよう `contents/` を docs/ と同じ扱いにした。
-- **次**: main へのマージ後、①次に記事を公開する run で `blog-auto-publish.yml` が `contents/blog` から公開し、公開した slug を commit-back で消すこと ②`blog-remediation-daily.yml` の最初の run が `contents/blog` を掃除して書き戻すことを、run のログで確かめる。
+- **本番反映 (2026-10-08)**: uruhayato373/stats47#1108 で main へマージ (10:17 UTC)。デプロイと post-deploy smoke (run 37763482616) は成功。移動の push で `blog-auto-publish` (run 37760839708) が `contents/blog` から 20 本を候補に取り、19 本は手書き出典節、1 本は背景未生成の blocker で全件 skip した (公開 0・R2 は不変)。PR の図の検証 workflow は抽出の awk が旧パスのままで 0 件で通っていたので直し、32 本の検証が通った。push からマージまでの定期実行は Instagram の 1 本だけで、outbox に触れず記録の欠落は無い。
+- **次**: ①次に記事を公開する run で `blog-auto-publish.yml` が `contents/blog` から公開し、公開した slug を commit-back で消すこと ②`blog-remediation-daily.yml` の最初の run (2026-10-08 23:00 UTC = 10-09 08:00 JST) が `contents/blog` を掃除して書き戻すことを、run のログで確かめる。
 - **完了条件**: 上の 2 つの run が成功し、ログに `contents/blog` の slug が出ている。
 
 ### [BLOG-TITLE-CHANGE-WATCH-01] 図の年の書き直しでタイトルを変えた公開記事の検索流入を、公開後に確かめる
@@ -784,6 +787,7 @@ updated: 2026-10-06
   4. 「秋田県の3位から青森県の46位まで」のように範囲を順位で書くと、`article-factual-check.mjs` が INVERSE_RANK_MISMATCH と誤検知する (physical-therapist-annual-income-prefecture-gap の writer が報告。言い回しを変えて回避した)
   5. 県名の直後に派生値 (2 県の差や目減り額など、data JSON の値から計算した数) を書くと、`article-factual-check.mjs` がその県の別の指標の値と取り違えて VALUE_MISMATCH の警告を出す (real-disposable-income-reversal の writer が「1,856円」「22,681円」で報告。文の組み立てを変えて回避した)
   6. `quality-gate.mjs` の NG_PATTERN「title 「N位」だけで終わる」の正規表現 (`/^title:\s*"[^"]*\d+位[^"]*"/m`) は、「N位」を含むタイトルをすべて止め、名前と判定がずれている (vacant-housing-vs-aging の writer が報告し、112 行目で確認)。「4位なのに空き家は37位」のように問いを作るタイトルも止まる
+  7. `article-factual-check.mjs` は「N位の県」の順位と「◯%」の割合の誤りを検出しない (2026-10-08、school-teacher-annual-income の writer が一時コピーに 42位・3.8% を注入して pass を確認。年収の値 515.72 万円の注入は VALUE_MISMATCH で検出された)。計算型の図 (kind `calculated`) の割合は data JSON にあるので、照合の対象に足せる
 - **次**: 1 はコードブロックを除いて数える (公開済み記事で誤検知・見逃しの件数を比べてから入れる)。2 は描画スクリプトの置き場 (例: 記事の data/ に置く `render-*.ts`) と restore の書き方を規約に足し、cc-estat-04 の 2 枚の描画スクリプトを保存する。3 は注入テストを再現して、照合から漏れる数値の書き方を特定する。
 - **完了条件**: 1 と 3 の修正がテストで固定され、2 が規約に書かれ cc-estat-04 の図が repo のスクリプトから作り直せる。
 
@@ -1906,6 +1910,7 @@ updated: 2026-10-06
   横軸の年ラベル (今はデータ数で 5 年ごとに間引き) が重なるので、**間引きもラベル幅と表示幅から決め直す**必要がある。
   チャート部品の設計なので `chart-component-builder` の範囲で、積み上げ面・折れ線・複合・ヒストグラムを同じ仕組みで直す。
 - **別経路のもの**: ブログの図は静的 SVG なので、直すには図の再生成と R2 反映 (承認が要る) が要る。サンキー図・物価指数の縦軸 (0 始まり) は部品ごとの修正。
+- **追記 (2026-10-08)**: ブログの折れ線は生成器側でも 0 始まりに固定される。`packages/svg-builder/src/charts/line.ts` は `yMin` (既定 0) を受け取れるが、`.claude/scripts/blog/generate-article-charts.ts` の `genLineChartSvg` が `yMin` を渡さないため、平均年齢 (30〜60 歳) のような系列も 0 から描かれる (school-teacher-annual-income の writer が報告し、コードで確認)。data JSON に `yMin` を持たせて渡す形が最小の修正。
 
 ### [MUNI-PAGE-QUALITY-01] 市区町村のページが薄く、強みの選び方・一覧・ナビに誤りがある
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-09-25] [領域:データ]
@@ -3367,6 +3372,15 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - **次**: 生成器 `packages/gis/src/geo-analysis/low-elevation-population-overlay.py` の manifest 出力を JS と同じキー順にし、Web 側の照合対象に manifest を戻す。
 - **完了条件**: manifest も SHA 照合され、キー順を崩した manifest を監査が拒否することを変異で確かめた。
 
+### [THEME-COUNT-LITERAL-TESTS-01] テーマを足すたびに手で合わせるテストの件数直書きをなくす
+
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-10-08] [領域:サイト]
+
+- **観測 (2026-10-08)**: 新テーマ `household-food-spending` を足した際、`theme-overview-coverage.test.ts`・`all-themes.test.ts` のテーマ数 (55→56)、
+  `faq-markdown.test.ts` の FAQ 数 (8→9)、`.claude/config/theme-catalog-baseline.json` を手で書き換えた。件数は `THEME_CATALOGS` から導出できる。
+- **次**: 件数の直書きを `THEME_CATALOGS` 由来の値に置き換える。ただし「意図せず消えたテーマ」を検出する役割があるテストは、キー一覧の固定など別の形で残す。
+- **完了条件**: テーマを 1 つ足しても、カタログ JSON・登録簿・生成物以外のテストを手で直さずに通る。
+
 ## 🟢 低 — 時期未定・条件付き (trigger は本文に)
 
 ### [DATA-SHUKUHAKU-CORRECTION-01] 宿泊旅行統計の 2026 年分を足すときに、層化基準の変更による系列の断絶を書く
@@ -3852,3 +3866,13 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 タグ: [収益化] [種類:意思決定] [実行:対話] [起票:2026-09-27] [領域:商品]
 
 stats47 で培ったデータ加工を、受託・販売などの形で収入にできるかを考える。（出典: 2026-09-24 の手書きメモ・vault dairy/2026-09-24）
+
+### [THEME-CHILD-WELFARE-01] 児童福祉・子どもの安全を扱うテーマを新設するか決める
+
+タグ: [コンテンツ品質] [種類:意思決定] [実行:対話] [起票:2026-10-08] [領域:サイト]
+
+- **観測 (2026-10-08)**: 参考文献由来の公開指標 `child-abuse-consultation-cases` (児童虐待相談対応件数) を既存 55 テーマのどれにも採用できなかった
+  (theme-designer の判断。保育の需給・ひとり親の主題とは別)。
+- **判断すること**: 児童相談・不登校・子どもの貧困などを束ねるテーマを作るか、指標をランキング単体のまま置くか。
+- **完了条件**: 新設なら theme-designer がカタログを作り、見送りなら参考文献のテーマ企画の表の行に理由を残す。
+

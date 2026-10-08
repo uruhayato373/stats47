@@ -31,7 +31,8 @@
         "young-population-index",
         "old-population-index",
         "nursing-home-capacity-per-1000-65plus",
-        "elderly-workers-ratio"
+        "elderly-workers-ratio",
+        "mothers-age-at-first-birth"
       ]
     },
     {
@@ -86,7 +87,8 @@
         "nursery-children-per-nursery-teacher",
         "nursery-utilization-rate",
         "certified-childcare-center-count-per-100k-0-5",
-        "childcare-applicants"
+        "childcare-applicants",
+        "nursery-waiting-children-count"
       ]
     },
     {
@@ -120,7 +122,8 @@
         "broadband-contract-count-excluding-39-4g",
         "broadband-service-contract-count",
         "mobile-phone-contract-count-per-1000",
-        "mobile-phone-ownership-multi-person-households-per-1000"
+        "mobile-phone-ownership-multi-person-households-per-1000",
+        "internet-usage-rate-10plus"
       ]
     },
     {
@@ -200,7 +203,16 @@
         "relaxation-avg-time-male",
         "relaxation-avg-time-female",
         "hobby-leisure-avg-time-employed-male",
-        "hobby-leisure-avg-time-employed-female"
+        "hobby-leisure-avg-time-employed-female",
+        "hobby-participation-rate-go",
+        "hobby-participation-rate-shogi",
+        "hobby-participation-rate-flower-arrangement",
+        "hobby-participation-rate-instrument",
+        "hobby-participation-rate-photography",
+        "hobby-participation-rate-reading",
+        "hobby-participation-rate-calligraphy",
+        "hobby-participation-rate-tea-ceremony",
+        "hobby-participation-rate-knitting"
       ]
     },
     {
@@ -218,7 +230,15 @@
         "hobby-leisure-avg-time-employed-female",
         "hobby-leisure-avg-time-employed-male",
         "work-avg-time-employed-female",
-        "work-avg-time-employed-male"
+        "work-avg-time-employed-male",
+        "hobby-participation-rate-karaoke",
+        "hobby-participation-rate-video-games",
+        "hobby-participation-rate-pachinko",
+        "hobby-participation-rate-gardening",
+        "broadcast-media-time-all",
+        "meal-avg-time-female",
+        "meal-avg-time-male",
+        "primary-school-commute-time-weekday"
       ]
     },
     {
@@ -285,7 +305,16 @@
         "art-museum-count",
         "prefecture-designated-cultural-property-count",
         "prefectural-cultural-property-protection-expenditure",
-        "buried-cultural-property-specialist-count"
+        "buried-cultural-property-specialist-count",
+        "study-participation-rate-english",
+        "cram-school-establishment-count",
+        "academic-achievement-test-average-rate",
+        "national-assessment-elementary-tutoring-rate",
+        "national-assessment-elementary-breakfast-rate",
+        "national-assessment-elementary-reading-like-rate",
+        "national-assessment-elementary-study-1h-plus-rate",
+        "elementary-school-long-absence-ratio-nonattendance-over-30days-per-1000",
+        "junior-high-school-long-absence-ratio-nonattendance-over-30days-per-1000"
       ]
     },
     {
@@ -413,7 +442,8 @@
         "housework-avg-time-male",
         "female-part-time-hourly-wage",
         "prefectural-manager-female-share",
-        "prefectural-assembly-female-share"
+        "prefectural-assembly-female-share",
+        "husband-childcare-rate"
       ]
     },
     {
@@ -447,7 +477,16 @@
         "vegetable-intake-male-age-adjusted",
         "vegetable-intake-female-age-adjusted",
         "salt-intake-male-age-adjusted",
-        "salt-intake-female-age-adjusted"
+        "salt-intake-female-age-adjusted",
+        "bmi-female-40to69-age-adjusted",
+        "bmi-male-20to69-age-adjusted",
+        "smoking-rate-male-age-adjusted",
+        "alcohol-sales-per-adult-beer",
+        "alcohol-sales-per-adult-sake",
+        "alcohol-sales-per-adult-shochu",
+        "alcohol-sales-per-adult-total",
+        "alcohol-sales-per-adult-whisky",
+        "alcohol-sales-per-adult-wine"
       ]
     },
     {
@@ -508,7 +547,15 @@
         "k6-score10plus-rate-12plus",
         "municipal-mental-health-consultation-extended-persons",
         "k6-score10plus-estimated-persons-12plus",
-        "k6-known-score-estimated-persons-12plus"
+        "k6-known-score-estimated-persons-12plus",
+        "outpatient-rate-per-100k",
+        "inpatient-rate-per-100k",
+        "treatment-rate-diabetes-outpatient",
+        "emergency-hospital-general-clinic-count-per-100k",
+        "deaths-cerebral-infarction-per-100k",
+        "breast-cancer-asr75-mortality-female",
+        "heatstroke-deaths",
+        "suicide-count"
       ]
     },
     {
@@ -525,7 +572,155 @@
         "current-deposit-balance-ratio-multi-person-households",
         "current-life-insurance-balance-ratio-multi-person-households",
         "current-securities-balance-ratio-multi-person-households",
-        "housing-land-liabilities-ratio-multi-person-households"
+        "housing-land-liabilities-ratio-multi-person-households",
+        "financial-literacy-correct-rate",
+        "securities-balance"
+      ]
+    },
+    {
+      "id": "area-theme:22000:household-food-spending",
+      "kind": "area-theme",
+      "key": "22000:household-food-spending",
+      "title": "静岡県の食卓と家計の支出",
+      "href": "/areas/22000/household-food-spending",
+      "published": true,
+      "rankingKeys": [
+        "dining-out-consumption-expenditure",
+        "food-expenditure-total",
+        "rice-consumption-expenditure",
+        "bread-consumption-quantity",
+        "confectionery-consumption-expenditure",
+        "beef-consumption-quantity",
+        "consumption-expenditure-total",
+        "fresh-seafood-consumption-quantity",
+        "fresh-vegetables-consumption-quantity",
+        "pork-consumption-quantity",
+        "apple-consumption-quantity",
+        "nhk-fee-consumption-expenditure",
+        "clam-consumption-expenditure",
+        "horse-mackerel-consumption-expenditure",
+        "squid-consumption-expenditure",
+        "strawberry-consumption-quantity",
+        "sardine-consumption-expenditure",
+        "internet-fee-consumption-expenditure",
+        "whisky-consumption-expenditure",
+        "shrimp-consumption-expenditure",
+        "curtain-consumption-expenditure",
+        "oyster-consumption-quantity",
+        "katsuobushi-consumption-expenditure",
+        "katsuobushi-consumption-quantity",
+        "crab-consumption-expenditure",
+        "flounder-consumption-expenditure",
+        "flounder-consumption-quantity",
+        "cabbage-consumption-quantity",
+        "cucumber-consumption-quantity",
+        "gyoza-frozen-consumption-expenditure",
+        "cable-tv-fee-consumption-expenditure",
+        "coffee-consumption-expenditure",
+        "coffee-consumption-quantity",
+        "golf-green-fee-consumption-expenditure",
+        "golf-equipment-consumption-expenditure",
+        "konbu-consumption-expenditure",
+        "konbu-consumption-quantity",
+        "salmon-consumption-expenditure",
+        "salmon-consumption-quantity",
+        "mackerel-consumption-quantity",
+        "green-beans-consumption-expenditure",
+        "green-beans-consumption-quantity",
+        "saury-consumption-quantity",
+        "freshwater-clam-consumption-expenditure",
+        "potato-consumption-quantity",
+        "jam-consumption-expenditure",
+        "soy-sauce-consumption-quantity",
+        "watermelon-consumption-quantity",
+        "sushi-dining-consumption-expenditure",
+        "sports-club-fee-consumption-expenditure",
+        "sports-spectating-consumption-expenditure",
+        "daikon-consumption-quantity",
+        "sea-bream-consumption-expenditure",
+        "sea-bream-consumption-quantity",
+        "octopus-consumption-expenditure",
+        "onion-consumption-quantity",
+        "tomato-consumption-quantity",
+        "carrot-consumption-quantity",
+        "necktie-consumption-expenditure",
+        "necktie-consumption-quantity",
+        "chinese-cabbage-consumption-expenditure",
+        "chinese-cabbage-consumption-quantity",
+        "butter-consumption-expenditure",
+        "banana-consumption-quantity",
+        "hamburger-consumption-expenditure",
+        "beer-consumption-expenditure",
+        "beer-consumption-quantity",
+        "spinach-consumption-expenditure",
+        "spinach-consumption-quantity",
+        "scallop-consumption-expenditure",
+        "margarine-consumption-expenditure",
+        "margarine-consumption-quantity",
+        "mandarin-consumption-quantity",
+        "miso-consumption-quantity",
+        "mineral-water-consumption-expenditure",
+        "bean-sprouts-consumption-quantity",
+        "lettuce-consumption-quantity",
+        "lotus-root-consumption-expenditure",
+        "lotus-root-consumption-quantity",
+        "wine-consumption-expenditure",
+        "drinking-out-consumption-expenditure",
+        "movie-theater-consumption-expenditure",
+        "shellfish-consumption-quantity",
+        "overseas-package-tour-consumption-expenditure",
+        "coffee-shop-consumption-expenditure",
+        "beef-consumption-expenditure",
+        "milk-consumption-quantity",
+        "seafood-consumption-expenditure",
+        "mobile-phone-bill-consumption-expenditure",
+        "landline-bill-consumption-expenditure",
+        "black-tea-consumption-expenditure",
+        "black-tea-consumption-quantity",
+        "domestic-package-tour-consumption-expenditure",
+        "domestic-student-remittance-consumption-expenditure",
+        "sugar-consumption-quantity",
+        "interior-decoration-consumption-expenditure",
+        "tuition-consumption-expenditure",
+        "accommodation-consumption-expenditure",
+        "shochu-consumption-expenditure",
+        "shochu-consumption-quantity",
+        "garden-maintenance-consumption-expenditure",
+        "white-bread-consumption-expenditure",
+        "white-bread-consumption-quantity",
+        "table-salt-consumption-quantity",
+        "sake-consumption-expenditure",
+        "fresh-fruit-consumption-quantity",
+        "fresh-vegetables-consumption-expenditure",
+        "instant-noodles-consumption-quantity",
+        "other-bread-consumption-expenditure",
+        "other-bread-consumption-quantity",
+        "other-citrus-consumption-expenditure",
+        "other-citrus-consumption-quantity",
+        "other-meat-consumption-expenditure",
+        "other-meat-consumption-quantity",
+        "other-broadcast-fee-consumption-expenditure",
+        "carbonated-drink-consumption-expenditure",
+        "ramen-dining-consumption-expenditure",
+        "chinese-food-dining-consumption-expenditure",
+        "kerosene-consumption-expenditure",
+        "pork-consumption-expenditure",
+        "soba-udon-dining-consumption-expenditure",
+        "natto-consumption-expenditure",
+        "happoshu-consumption-expenditure",
+        "happoshu-consumption-quantity",
+        "womens-stockings-consumption-expenditure",
+        "womens-stockings-consumption-quantity",
+        "cultural-facility-admission-consumption-expenditure",
+        "rice-consumption-quantity",
+        "hat-consumption-expenditure",
+        "hat-consumption-quantity",
+        "amusement-park-consumption-expenditure",
+        "western-food-dining-consumption-expenditure",
+        "green-tea-consumption-expenditure",
+        "green-tea-consumption-quantity",
+        "frozen-food-consumption-expenditure",
+        "japanese-food-dining-consumption-expenditure"
       ]
     },
     {
@@ -695,7 +890,8 @@
         "urban-planning-area",
         "urbanization-control-area-ratio",
         "urban-parks",
-        "urban-parks-area"
+        "urban-parks-area",
+        "three-generation-household-members"
       ]
     },
     {
@@ -815,7 +1011,9 @@
         "amusement-industry-establishments",
         "amusement-industry-employees",
         "amusement-industry-revenue",
-        "amusement-industry-net-value-added"
+        "amusement-industry-net-value-added",
+        "beauty-salon-count",
+        "barber-beauty-salon-count"
       ]
     },
     {
@@ -961,7 +1159,8 @@
         "five-year-residence-same-address",
         "five-year-residence-other-prefecture",
         "future-population",
-        "future-population-change-rate-2050"
+        "future-population-change-rate-2050",
+        "sex-ratio-age-20-39"
       ]
     },
     {
@@ -1055,7 +1254,8 @@
         "commute-by-bus",
         "commute-by-train",
         "bus-operators",
-        "household-survey-transport-communication-expenditure"
+        "household-survey-transport-communication-expenditure",
+        "commuters-total"
       ]
     },
     {
@@ -1169,7 +1369,28 @@
         "elementary5-fitness-score-male",
         "elementary5-fitness-score-female",
         "elementary5-weekly-exercise-420min-rate-male",
-        "elementary5-weekly-exercise-420min-rate-female"
+        "elementary5-weekly-exercise-420min-rate-female",
+        "swimming-pool-public",
+        "public-swimming-pool-count-per-million",
+        "public-gymnasium-count-per-million",
+        "baseball-field-public",
+        "athletics-stadium-count-public",
+        "sports-participation-rate-golf",
+        "sports-participation-rate-cycling",
+        "sports-participation-rate-skiing",
+        "sports-participation-rate-fishing",
+        "sports-participation-rate-hiking",
+        "high-school-club-per100-rugby-male",
+        "junior-high-club-per100-badminton",
+        "junior-high-club-per100-baseball-soft",
+        "junior-high-club-per100-basketball",
+        "junior-high-club-per100-kendo",
+        "junior-high-club-per100-soccer",
+        "junior-high-club-per100-soft-tennis",
+        "junior-high-club-per100-swimming",
+        "junior-high-club-per100-table-tennis",
+        "junior-high-club-per100-track-and-field",
+        "junior-high-club-per100-volleyball"
       ]
     },
     {

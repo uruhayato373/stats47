@@ -29,6 +29,11 @@ export const COMMUNICATION_ACCESS_SET: IndicatorSet = {
       "rankingKey": "mobile-phone-ownership-multi-person-households-per-1000",
       "shortLabel": "携帯電話所有数量（二人以上世帯千世帯当たり）",
       "role": "secondary"
+    },
+    {
+      "rankingKey": "internet-usage-rate-10plus",
+      "shortLabel": "インターネットの利用行動者率",
+      "role": "context"
     }
   ],
   "keywords": [

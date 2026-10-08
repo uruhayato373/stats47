@@ -331,6 +331,11 @@
         "readerQuestion": "65歳以上のうち働いている人の割合は、県によってどう違うか。",
         "targetReaderOrDecision": "高齢期の就労や再雇用、移住先の就業環境を検討する読者。"
       }
+    },
+    {
+      "rankingKey": "mothers-age-at-first-birth",
+      "shortLabel": "第1子出生時の母の平均年齢",
+      "role": "context"
     }
   ],
   "charts": [

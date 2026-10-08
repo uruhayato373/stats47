@@ -1,28 +1,28 @@
 {
   "$comment": "テーマカタログの件数基準。data-configs のテスト (baseline-collector / chart-dependencies / chart-description / theme-metric-content / series-ref-migration-contract) がここを読んで実測と比べる。図を外す・足すなど意図した変更のときだけ `npx tsx packages/data-configs/scripts/update-theme-catalog-baseline.ts --write` で書き直し、PR の差分で増減を見せる。chartsWithRawEstatParams・rawEstatRequests・rawColorPlaces・distinctColors は縮小専用 (テストが「以下」で比べる)。",
   "counts": {
-    "themes": 55,
-    "charts": 65,
+    "themes": 56,
+    "charts": 68,
     "chartsByType": {
-      "line-chart": 41,
+      "line-chart": 43,
       "mixed-chart": 1,
       "composition-chart": 3,
       "donut-chart": 3,
       "cpi-profile": 1,
       "cpi-heatmap": 1,
       "kpi-card": 0,
-      "markdown-section": 14,
+      "markdown-section": 15,
       "pyramid-chart": 1
     },
-    "chartsWithRelatedRankingKeys": 51,
+    "chartsWithRelatedRankingKeys": 53,
     "chartsWithRawEstatParams": 0,
     "rawEstatRequests": 0,
     "rawColorPlaces": 0,
     "distinctColors": 0,
-    "totalMetricRefs": 154,
-    "distinctMetricKeys": 139,
-    "indicatorHubKeys": 99,
-    "authoredNoteKeys": 61,
+    "totalMetricRefs": 162,
+    "distinctMetricKeys": 147,
+    "indicatorHubKeys": 107,
+    "authoredNoteKeys": 69,
     "migrationContractRows": 19
   }
 }

@@ -69,6 +69,111 @@ export const SPORTS_PARTICIPATION_SET: IndicatorSet = {
       "rankingKey": "elementary5-weekly-exercise-420min-rate-female",
       "shortLabel": "小学5年女子の週420分以上運動割合",
       "role": "secondary"
+    },
+    {
+      "rankingKey": "swimming-pool-public",
+      "shortLabel": "水泳プール数（公共・実数）",
+      "role": "context"
+    },
+    {
+      "rankingKey": "public-swimming-pool-count-per-million",
+      "shortLabel": "水泳プール数（人口100万人当たり）",
+      "role": "context"
+    },
+    {
+      "rankingKey": "public-gymnasium-count-per-million",
+      "shortLabel": "体育館数",
+      "role": "context"
+    },
+    {
+      "rankingKey": "baseball-field-public",
+      "shortLabel": "野球場・ソフトボール場数（公共）",
+      "role": "context"
+    },
+    {
+      "rankingKey": "athletics-stadium-count-public",
+      "shortLabel": "陸上競技場数",
+      "role": "context"
+    },
+    {
+      "rankingKey": "sports-participation-rate-golf",
+      "shortLabel": "ゴルフの行動者率",
+      "role": "context"
+    },
+    {
+      "rankingKey": "sports-participation-rate-cycling",
+      "shortLabel": "サイクリングの行動者率",
+      "role": "context"
+    },
+    {
+      "rankingKey": "sports-participation-rate-skiing",
+      "shortLabel": "スキー・スノーボードの行動者率",
+      "role": "context"
+    },
+    {
+      "rankingKey": "sports-participation-rate-fishing",
+      "shortLabel": "つりの行動者率",
+      "role": "context"
+    },
+    {
+      "rankingKey": "sports-participation-rate-hiking",
+      "shortLabel": "登山・ハイキングの行動者率",
+      "role": "context"
+    },
+    {
+      "rankingKey": "high-school-club-per100-rugby-male",
+      "shortLabel": "高校男子ラグビー部員数（100人当たり）",
+      "role": "context"
+    },
+    {
+      "rankingKey": "junior-high-club-per100-badminton",
+      "shortLabel": "中学部活動部員数（バドミントン・100人当たり）",
+      "role": "context"
+    },
+    {
+      "rankingKey": "junior-high-club-per100-baseball-soft",
+      "shortLabel": "中学部活動部員数（野球・ソフトボール・100人当たり）",
+      "role": "context"
+    },
+    {
+      "rankingKey": "junior-high-club-per100-basketball",
+      "shortLabel": "中学部活動部員数（バスケットボール・100人当たり）",
+      "role": "context"
+    },
+    {
+      "rankingKey": "junior-high-club-per100-kendo",
+      "shortLabel": "中学部活動部員数（剣道・100人当たり）",
+      "role": "context"
+    },
+    {
+      "rankingKey": "junior-high-club-per100-soccer",
+      "shortLabel": "中学部活動部員数（サッカー・100人当たり）",
+      "role": "context"
+    },
+    {
+      "rankingKey": "junior-high-club-per100-soft-tennis",
+      "shortLabel": "中学部活動部員数（ソフトテニス・100人当たり）",
+      "role": "context"
+    },
+    {
+      "rankingKey": "junior-high-club-per100-swimming",
+      "shortLabel": "中学部活動部員数（水泳・100人当たり）",
+      "role": "context"
+    },
+    {
+      "rankingKey": "junior-high-club-per100-table-tennis",
+      "shortLabel": "中学部活動部員数（卓球・100人当たり）",
+      "role": "context"
+    },
+    {
+      "rankingKey": "junior-high-club-per100-track-and-field",
+      "shortLabel": "中学部活動部員数（陸上競技・100人当たり）",
+      "role": "context"
+    },
+    {
+      "rankingKey": "junior-high-club-per100-volleyball",
+      "shortLabel": "中学部活動部員数（バレーボール・100人当たり）",
+      "role": "context"
     }
   ],
   "keywords": [
