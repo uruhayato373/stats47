@@ -438,6 +438,20 @@ updated: 2026-10-06
   手元で既知キーを再生成する手順 (`.claude/skills/db/generate-known-ranking-keys/SKILL.md`) にも同じ 1 行を足す。
 - **完了条件**: キーが増える keys PR で `generate-ranking-prominence.ts --check` が通る。
 
+### [CORRELATION-THEME-CATALOG-SYNC-01] テーマのカタログを main へ出しても相関の再計算が起動せず、テーマ別の相関一覧が古いカタログのまま残る
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-08] [領域:データ]
+
+- **事実 (2026-10-08)**: `correlation-refresh.yml` の起動は、data-refresh・KSJ 取り込みの完了時 (workflow_run) と毎日 18:45 UTC の定期実行だけで、
+  テーマのカタログ (`data/themes/catalogs/*.json`) の main への反映では起動しない。PR #1100 のマージ前に走った run 44 が古い main のカタログで
+  `app/correlation/by-theme/consumer-prices.json` を作り、外した `average-temperature` を基準にした 7 件が本番の「相関が高いテーマ外の指標」に残った。
+  相関の fingerprint はテーマ構成を含む (`build-correlation-snapshot.ts` の `listThemeMembers`) ので、再計算さえ起きれば直る。
+  by-theme の基準指標 (`via`) がカタログの指標に含まれるかを確かめる検査は無い (`audit-r2-freshness.mjs` も相関を対象にしていない)。
+  同日、すぐ直せるように代理起動の allowlist に `correlation-refresh.yml` を足した。
+- **次**: ① `correlation-refresh.yml` に main への push で `data/themes/catalogs/**` が変わったときの起動を足す。
+  ② 本番の `app/correlation/by-theme/<key>.json` の `via.rankingKey` が、そのテーマのカタログの指標に含まれるかを確かめる検査を、
+  日次の workflow-health か週次のテーマ監査に足す。
+- **完了条件**: カタログを変えた PR のマージ後、手作業なしで by-theme の相関一覧が新しいカタログで作り直され、外れた指標が残っていれば検査が止める。
+
 ### [DATA-REFRESH-DERIVED-FROM-DEVELOP-01] develop への push で起動した data-refresh が、未リリースの develop から派生 snapshot を作って本番 R2 に出す
 タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-08] [領域:データ]
 
