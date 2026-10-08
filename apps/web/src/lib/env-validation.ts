@@ -55,16 +55,6 @@ export function validateRequiredEnvVars(): void {
     }
   }
 
-  // AdSense設定の検証
-  if (process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_ENABLED === "true") {
-    const adSenseClientId = process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT_ID;
-    if (!adSenseClientId) {
-      missingVars.push("NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT_ID");
-    } else if (adSenseClientId.trim() === "") {
-      emptyVars.push("NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT_ID");
-    }
-  }
-
   // 不足している環境変数がある場合
   if (missingVars.length > 0 || emptyVars.length > 0) {
     const errorDetails: string[] = [];

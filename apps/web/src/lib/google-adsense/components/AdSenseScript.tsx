@@ -12,13 +12,15 @@
 
 import { useEffect } from "react";
 
+import { SITE } from "@stats47/types";
+
 import { ADSENSE_DISPLAY_ENABLED } from "../constants";
 
 /**
  * AdSenseスクリプトコンポーネント
  */
 export function AdSenseScript() {
-  const clientId = process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT_ID;
+  const clientId = SITE.adsenseClientId;
   const isEnabled =
     ADSENSE_DISPLAY_ENABLED &&
     process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_ENABLED === "true";
