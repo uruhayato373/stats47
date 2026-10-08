@@ -1,0 +1,8 @@
+{
+  "metric": "consumer-price-difference-index-clothing-footwear,consumer-price-difference-index-culture-recreation,consumer-price-difference-index-education,consumer-price-difference-index-food,consumer-price-difference-index-furniture-household,consumer-price-difference-index-healthcare,consumer-price-difference-index-housing,consumer-price-difference-index-miscellaneous,consumer-price-difference-index-overall-excl-rent,consumer-price-difference-index-overall,consumer-price-difference-index-transport-communication,consumer-price-difference-index-utilities,fishery-species-catch-bonito,fishery-species-catch-japanese-squid,fishery-species-catch-kelp,fishery-species-catch-mackerel,fishery-species-catch-pacific-saury,fishery-species-catch-pollock,fishery-species-catch-sardine,fishery-species-catch-scallop,fishery-species-catch-sea-bream,fishery-species-catch-snow-crab,fishery-species-catch-tuna,fishery-species-catch-yellowtail,elderly-living-alone-rate",
+  "since": "",
+  "dryRun": false,
+  "snapshotScope": "ranking",
+  "requestedAt": "2026-10-08T12:30:00Z",
+  "reason": "魚種別漁獲量 12 指標に 2016〜2018・2023 年、物価地域差指数 12 指標に 2025 年を補完で足し、新指標 elderly-living-alone-rate を作った (c8281131a)。ローカル取り込みで魚種 12 本は 4 年分 39 行、物価は 47 県 x 13 年、独居率は 47 県 x 9 回を確かめた。R2 に反映する (FISHERY-SPECIES-REFRESH-01 / DATA-CPI-REGIONAL-2025-01 / THEME-AGING-LIVING-ALONE-METRIC-01)"
+}
