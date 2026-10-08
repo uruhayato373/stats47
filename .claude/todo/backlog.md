@@ -3200,7 +3200,8 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 
 - **観測 (2026-10-09)**: `fetch-ranking-data-r2.mjs` を年度対応にした (`81c0e4af9`)。直す前に作られた data JSON 858 件のうち 296 件 (193 記事) が、年度の指標なのに見出しが「YYYY年」。
   同じ固定が `.claude/scripts/blog/regenerate-tile-maps.ts:213` と `:248` (`${best.year}年`) にも残る。
-- **次**: ① regenerate-tile-maps の見出しを `ranking-year-label.mjs` で決める。② 296 件の data JSON と図を作り直し、ブログの公開経路 (contents/blog → CI → R2) で出す。
+- **2026-10-09 済**: ① regenerate-tile-maps の見出しを `ranking-year-label.mjs` の `yearLabelOf` で決めるようにした。
+- **次**: ② 296 件の data JSON と図を作り直し、ブログの公開経路 (contents/blog → CI → R2) で出す。
 - **完了条件**: 年度の指標を使う公開記事で、図の見出しが「YYYY年度」になっている (件数を再集計して 0 件)。
 
 ### [KAKEI-CLASSIFICATION-INCOME-SHEET-01] 家計調査の収支項目分類で「1収入」シートの品目を 11 件しか拾えていない

@@ -28,6 +28,8 @@
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+
+import { yearLabelOf } from "./lib/ranking-year-label.mjs";
 import { generateChoroplethSvg } from "../../../packages/svg-builder/src/charts/index.ts";
 import { toShortColorScheme } from "../../../packages/types/src/color-scheme.ts";
 import { matchRate, parseMapDisplay } from "../lib/map-value-match.mjs";
@@ -105,6 +107,9 @@ async function ssotPartitions(key: string) {
     title?: string;
     rankingName?: string;
     visualization?: { colorScheme?: string; isReversed?: boolean };
+    yearFormat?: string;
+    availableYears?: Array<{ yearName?: string }> | null;
+    latestYear?: { yearName?: string } | null;
   } = {};
   try {
     const it = await fj(`${RANK}/${key}/item.json`);
@@ -121,6 +126,8 @@ async function ssotPartitions(key: string) {
   const isReversed = item.visualization?.isReversed === true;
   return (v.partitions || []).map((p: { yearCode: string; values: unknown[] }) => ({
     year: p.yearCode,
+    // 年度の指標は「2021年度」と書く (BLOG-FISCAL-YEAR-LABEL-REGEN-01。判定は fetch-ranking-data-r2 と共有)
+    yearLabel: yearLabelOf(p.yearCode, item),
     values: p.values as Array<{ areaName: string; value: number; areaCode: string }>,
     unit,
     title: item.title || item.rankingName || key,
@@ -169,6 +176,7 @@ async function main() {
       let best: {
         key: string;
         year: string;
+        yearLabel: string;
         values: Array<{ areaName: string; value: number; areaCode: string }>;
         unit: string;
         title: string;
@@ -210,7 +218,7 @@ async function main() {
       fs.mkdirSync(dir, { recursive: true });
       const json = {
         title: best.title,
-        subtitle: `${best.year}年`,
+        subtitle: best.yearLabel,
         unit: best.unit,
         year: best.year,
         rankingKey: best.key,
@@ -245,7 +253,7 @@ async function main() {
       );
       const newSvg = generateChoroplethSvg(items, {
         title: best.title,
-        subtitle: `${best.year}年`,
+        subtitle: best.yearLabel,
         unit: best.unit,
         ...(best.colorScheme ? { scheme: best.colorScheme } : {}),
         ...(best.isReversed ? { reverse: true } : {}),
