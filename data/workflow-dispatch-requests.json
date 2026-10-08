@@ -1,0 +1,9 @@
+{
+  "workflow": "correlation-refresh.yml",
+  "inputs": {
+    "force": "false"
+  },
+  "ref": "main",
+  "reason": "PR #1100 のマージで consumer-prices から average-temperature を外したが、app/correlation/by-theme/consumer-prices.json はマージ前の main のカタログで計算したまま。相関の fingerprint はテーマ構成を含むので force なしで再計算される (THEME-REVIEW-TOURISM-CPI-01)",
+  "requestedAt": "2026-10-08T00:14:17Z"
+}
