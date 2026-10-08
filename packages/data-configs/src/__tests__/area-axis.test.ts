@@ -1,6 +1,8 @@
 import { describe, expect, it } from "vitest";
 
 import {
+  hasExpectedCoverage,
+  INLAND_PREFECTURES,
   isAggregateAreaName,
   lookupPrefectureCode,
   normalizeAreaName,
@@ -163,6 +165,39 @@ describe("resolveAreaAxis — name (畜産統計)", () => {
     const r = resolveAreaAxis(all, "name");
     expect(r.byCode.size).toBe(47);
     expect(r.missingPrefectures).toEqual([]);
+  });
+});
+
+describe("hasExpectedCoverage — 表が対象とする県の範囲", () => {
+  it("未宣言なら 1 県でも欠ければ false (従来どおり 47 県を要求する)", () => {
+    expect(hasExpectedCoverage([])).toBe(true);
+    expect(hasExpectedCoverage(["奈良県"])).toBe(false);
+  });
+
+  it("coastal は海のない 8 県ちょうどの欠けだけを許す", () => {
+    expect(hasExpectedCoverage([...INLAND_PREFECTURES], "coastal")).toBe(true);
+  });
+
+  it("★coastal でも沿岸県の欠け・8 県の一部だけの欠け・欠けなしは false (写像の誤りを宣言で黙らせない)", () => {
+    expect(hasExpectedCoverage([...INLAND_PREFECTURES, "青森県"], "coastal")).toBe(false);
+    expect(hasExpectedCoverage(INLAND_PREFECTURES.slice(1), "coastal")).toBe(false);
+    expect(hasExpectedCoverage([...INLAND_PREFECTURES.slice(1), "青森県"], "coastal")).toBe(false);
+    expect(hasExpectedCoverage([], "coastal")).toBe(false);
+  });
+
+  it("海面漁業の年次表の地域軸 (全国 + 39 県 + 大海区・振興局) を名前で写すと、欠けは海のない 8 県になる", () => {
+    const coastal = PREFECTURES.filter((p) => !INLAND_PREFECTURES.includes(p.name));
+    const members: AreaAxisMember[] = [
+      { code: "1001", name: "全国" },
+      ...coastal.map((p, i) => ({ code: String(1002 + i), name: p.short })),
+      { code: "1041", name: "北海道太平洋北区" },
+      { code: "1050", name: "宗谷" },
+      { code: "1063", name: "(日北)" },
+    ];
+    const mapping = resolveAreaAxis(members, "name");
+    expect(mapping.byCode.size).toBe(39);
+    expect(hasExpectedCoverage(mapping.missingPrefectures, "coastal")).toBe(true);
+    expect(hasExpectedCoverage(mapping.missingPrefectures)).toBe(false);
   });
 });
 

@@ -88,6 +88,33 @@ export function isAggregateAreaName(raw: string): boolean {
   return /全国|地域|農政局|ブロック|都府県|計$/.test(raw);
 }
 
+/**
+ * 海のない 8 県。海面漁業など海に関わる統計の表は、この 8 県の行を最初から持たない。
+ * 照合はこの完全名で行う (`resolveAreaAxis` の `missingPrefectures` と同じ形)。
+ */
+export const INLAND_PREFECTURES: readonly string[] = [
+  "栃木県", "群馬県", "埼玉県", "山梨県", "長野県", "岐阜県", "滋賀県", "奈良県",
+];
+
+/**
+ * 写像で解決できなかった県が、表の対象範囲から見て想定どおりかを判定する。
+ *
+ * - `coverage` 未指定: 47 県すべてが解決できていなければならない (従来どおり)
+ * - `coastal`: 欠けてよいのは海のない 8 県**ちょうど**。1 県でも多い・少ない・違えば false
+ *   (沿岸県が欠けたら写像の誤りなので、宣言で黙らせない)
+ */
+export function hasExpectedCoverage(
+  missingPrefectures: readonly string[],
+  coverage?: "coastal",
+): boolean {
+  if (!coverage) return missingPrefectures.length === 0;
+  const inland = new Set(INLAND_PREFECTURES);
+  return (
+    missingPrefectures.length === inland.size &&
+    missingPrefectures.every((name) => inland.has(name))
+  );
+}
+
 export interface AreaAxisMember {
   code: string;
   name: string;
