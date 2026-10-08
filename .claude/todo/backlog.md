@@ -2638,23 +2638,20 @@ updated: 2026-10-06
 - **完了条件**: `combined-analysis`25件全てがreuse-existing-metric/new-metricいずれかで既存SSOTへ接続され、
   管理画面`/content/references`で実在証跡が確認できる。
 
-### [REFERENCE-KINDLE7-S5-01] Kindle スキャン 7 冊由来の指標の残作業 (Geo 着地・調査紐付け・欠け県・取得の定期化)
+### [REFERENCE-KINDLE7-S5-01] 参考文献由来の新規 31 指標と低標高人口の Geo 分析を本番に出し、実測で確かめる
 
 タグ: [コンテンツ品質] [種類:制作] [実行:対話] [検証:npm run source-vault:test] [起票:2026-10-08] [領域:データ]
 
-- **owner**: Geo は`geo-analysis-curator`、調査の紐付けは`survey-curator`、投入は`data-ingester`、県データブックは`area-databook-designer`。
-- **済み (2026-10-08)**: 7 冊の新規指標 27 本を作り、権利確認待ち 6 件をオーナー判断で解除し、県データブックに 13 指標を採用した。
-  e-Stat 8 本は data-refresh run 37710319585、e-Stat 以外 17 本は取得スクリプト → diff-push-r2 で R2 へ反映済み。
-  台帳は全 925 ページで `new-metric`・`rights-hold` が 0 (`npm run source-vault:inventory:check` exit 0)。
-- **残り**:
-  - Geo: `low-elevation-population-ratio-5m` は `isActive:false`。`GEO_ANALYSES` 登録・`/geo/population-low-elevation` 着地ページ・標高 (G04-a) の承認番号付き原典表示を作ってから公開する (geo-analysis-standards)。0m・10m 版を別 metric にするかもここで決める。生成は `packages/gis/src/geo-analysis/low-elevation-population-overlay.py`。
-  - 調査の紐付け: 金融リテラシー調査に対応する survey が `surveys.json` に無い。provenance 辞書が社会生活基本調査 0003457337 を未カバー。
-  - 欠け県: 国税庁の成人 1 人当たり酒類 6 本は沖縄が一次資料の表に無く 46 県。国税庁統計年報書で補えるか確認する。
-  - 県データブック: `beef-cattle-count`・`pig-count`・`layer-hen-count` は R2 の値に順位が無く不採用にした。順位付きで再投入すれば採用を再判断できる。
-  - 追加の論点候補: SSDS 0000010107 の G7000 (インターネット利用行動者率) を消費編 a24 の代替にする、全国学力調査の (17) 学校外の勉強時間、麻雀・ゲームセンターの県別許可数 (各県警の公表)。
-  - 取得の定期化: `.claude/scripts/data/fetch-*.mjs` の新規 8 本は手動実行のみで、npm script・skill・定期更新に配線していない。単位 `kg/m²` が単位語彙に無い (validate:config の unit-vocab warn)。
-- **停止条件**: 書籍の数値・順位・本文・図表を公開物へ流さない。Geo は着地ページと原典表示が無いまま公開しない。
-- **完了条件**: 低標高人口割合が `/geo` 着地ページ付きで公開され、上の残りがそれぞれ接続済みか「やらない」理由付きで確定する。
+- **owner**: 公開は`ranking-publisher`、Geo は`geo-analysis-curator`。
+- **済み (2026-10-08)**: Kindle スキャン 7 冊と『47都道府県の偏差値』の論点から新規 31 指標を作り、R2 に値・ランキング項目・配信用の値を反映、
+  KNOWN / SITEMAP に載せて develop へ push した。`/geo/population-low-elevation` 着地ページ (原典表示・保存則 47/47) を作り R2 へ反映した。
+  調査の紐付け (金融リテラシー調査・0003457337)、畜産 3 指標の順位付きの再反映と県データブック採用、G7000・学校外の勉強時間の指標化、
+  単位 kg/m2 と手動取得スクリプトの手順書は完了。沖縄の酒類 (国税庁が全国比較から除外) と麻雀・ゲームセンターの県別許可数
+  (47 県同一年の公表なし) はやらないと決めて台帳に理由を書いた。
+- **次**: develop→main の PR をマージしてデプロイし、CDN をパージする。新規 31 指標の `/ranking/<key>` と `/geo/population-low-elevation` を
+  Googlebot UA で実測して 200 と実データの表示を確かめる。
+- **停止条件**: 書籍の数値・順位・本文・図表を公開物へ流さない。
+- **完了条件**: 新規 31 指標と `/geo/population-low-elevation` が本番で 200 を返し、ランキングページに値が表示される。
 
 ### [REFERENCE-CONTENT-DRAFTS-01] 参考文献由来のテーマ企画と横断ブログ下書きを制作する
 
