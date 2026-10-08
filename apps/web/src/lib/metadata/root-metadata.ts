@@ -25,6 +25,9 @@ import type { Metadata } from "next";
  */
 export function generateRootMetadata(): Metadata {
   const baseUrl = getRequiredBaseUrl();
+  // AdSense のサイト所有権確認用 meta。広告コードではないため ADSENSE_DISPLAY_ENABLED と独立に出す
+  // (審査中は広告を出さずに所有権だけ確認する。backlog ADSENSE-RESTART-01)
+  const adsenseClientId = process.env.NEXT_PUBLIC_GOOGLE_ADSENSE_CLIENT_ID;
 
   return {
     metadataBase: new URL(baseUrl),
@@ -74,5 +77,6 @@ export function generateRootMetadata(): Metadata {
         "max-snippet": -1,
       },
     },
+    ...(adsenseClientId ? { other: { "google-adsense-account": adsenseClientId } } : {}),
   };
 }
