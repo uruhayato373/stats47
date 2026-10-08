@@ -593,7 +593,7 @@ updated: 2026-10-06
 - **教員年収の組は保留**: 残す `school-teacher-annual-income` は critic で REVISE (BLOCK 2)。タイトルと前半が「公立教員は国基準」を前提にしているが、指標 (賃金構造基本統計調査 0003445758) は公立に限らない小中学校教員の標本平均で前提が成り立たない。また 2022 年千葉と 2023 年愛知がともに 885.89 万円で小数第 2 位まで同じ、2021 年石川が 245.16 万円と、取り込みの誤りの疑いがある。次: e-Stat 0003445758 の元表と R2 `app/stats/school-teacher-annual-income/values.json` を照合し、誤りなら再取り込みしてから記事のタイトルごと書き直す (タイトルを変えるとサムネイル背景を Codex で作り直す必要がある)。統合元の節を移した版はローカルブランチ `wip/blog-teacher-merge` にある (未 push)。critic の指摘も同ブランチの送り箱 (school-teacher-annual-income の review.md) に入れてある。
   - **2026-10-08 照合結果 (取り込みの誤りではない)**: e-Stat API で 0003445758 (cdCat01=01・cdCat02=1192) を取り直して年収を再計算し、R2 の値がある 169 件すべてと一致した。885.89 万円は偶然の一致 (千葉 2022 = 454.6 千円 ×12 + 3,403.7、愛知 2023 = 516.1 ×12 + 2,665.7、どちらも 8,858.9 千円)。石川 2021 は推計労働者 40 人・賞与 0.0 の公表値。照合データと手順はセッションの scratchpad にだけあり、要点は `DATA-WAGE-TEACHER-COVERAGE-01` に写した。
   - **書き直し中 (2026-10-08)**: 送り箱は同日 `contents/blog/` へ移ったので、`contents/blog/school-teacher-annual-income/` (未コミット) で article-writer が書き直し、次に blog-critic を通す。タイトルが変わるので背景は Codex CLI (`npm run blog-images:codex`) で作り直す。公開・301・統合元の非公開化はオーナー承認後。
-  - **2026-10-08 進捗**: 書き直し版は blog-critic の delta 再審査で PASS (BLOCK 0・MAJOR 1・MINOR 7。MAJOR は表現を弱めて対応済み、MINOR は追加の改稿中)。新タイトル「教員年収の首位が毎年変わるのはなぜ?」。背景は既存の記事固有背景で quality-gate が通ったので作り直し不要。`blog-redirects.ts` に `school-teacher-annual-income-prefecture-gap` → `school-teacher-annual-income` を足し、`sitemap-blog-entries.ts` を再生成済み (どちらも未コミット、ローカルの 301 は確認済み)。公開 (contents/blog の develop push) と develop→main のデプロイはオーナー承認待ち。公開後に `wip/blog-teacher-merge` を削除する。
+  - **2026-10-08 進捗**: 書き直し版は blog-critic の delta 再審査で PASS (BLOCK 0・MAJOR 1・MINOR 7。MAJOR は表現を弱めて対応済み、MINOR は追加の改稿中)。新タイトル「教員年収の首位が毎年変わるのはなぜ?」。背景は既存の記事固有背景で quality-gate が通ったので作り直し不要。`blog-redirects.ts` に `school-teacher-annual-income-prefecture-gap` → `school-teacher-annual-income` を足し、`sitemap-blog-entries.ts` を再生成済み (どちらも未コミット、ローカルの 301 は確認済み)。2026-10-09 オーナー承認で公開: develop `90c2f8858` → blog-auto-publish run 37833570933 success (R2 の article.md と all.json に新タイトル、統合元は all.json から除外を確認)。残り = develop→main のデプロイ (本文差し替えと 301 の有効化) と本番確認、`wip/blog-teacher-merge` の削除。
 - **他の重複候補 (2026-10-08・all.json 609 本の title と seoTitle に同じ数値が 2 つ以上ある組)**: 機械照合で 22 組。そば外食と教員年収の組は表題の数値の丸めが違い拾えなかったので、この方式は取りこぼす。本文を読んでいないので、まとめる判断は組ごとに本文を見てから行う。
   | 判断の候補 | 組 (GSC 28 日 表示/クリック) |
   |---|---|
@@ -3257,39 +3257,9 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
   検索結果の文言が変わる件数を事前に出してオーナーの承認を取る (タイトルの変更は検索順位に影響しうる)。
 - **禁止**: 承認前に R2 の item.json を一括で書き換えない。
 - **完了条件**: config の `seoTitle` / `seoDescription` に観測値を含むものが 0 件になり、item.json の文言が最新の値と一致する。
-
-### [THEME-CATALOG-OPT-RELEASE-01] 2026-10-07・10-08 に公開したテーマ改善の実験を、9 月の実験から引き継いで登録する
-タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:node .claude/scripts/themes/validate-theme-state.mjs] [起票:2026-10-06] [期日:2026-10-10] [領域:データ] [進行中]
-
-- **背景**: 2026-10-06 承認の提案 (`.claude/skills/theme/manage-theme-portfolio/reference/reviews/2026-10-06-theme-{aging-society,fishery-marine,local-economy}.md`)
-  を branch `claude/theme-catalog-optimization` (PR #1085) に実装した (3 テーマの指標・章・カード、
-  読み方章の末尾移動 8 テーマ、カード見出しの章名除去 258 件)。local-economy は県内総生産額と 1人当たり県民所得の
-  metric config の `years` も広げた (2011〜2021 年・2012〜2021 年)。変更した 29 テーマはすべて `data/themes/experiments.json` に
-  `THEME-STRUCTURE-20260908-*` / `THEME-LAUNCH-*` の pending 実験 (d28 = 2026-10-09、d56 = 2026-11-06) を持つ。
-  先に出すと d56 の観測にこの変更が混ざる。同じテーマ × changeType の pending は 1 件までなので、3 テーマの新しい実験も今は登録できない。
-- **次**: 2026-11-06 の d56 観測が `experiments.json` に記録されたのを確かめてから、オーナーの承認を取って
-  ① R2 の page-components 反映 (`sync-snapshots.yml` を `only=page-components` で実行。3 テーマの
-  `page-components/theme/<key>.json` が変わる。反映せずにアプリだけ出すと、外した図 (高齢世帯の推移・漁業の 4 図・地域経済の 3 図) が R2 から読まれ、
-  ページ末尾に章外の図として残る) → ①' 年を広げた 2 指標の観測値の再取得 (`data-refresh.yml` を
-  `metric=total-production-in-the-prefecture,per-capita-prefectural-income-h27` で、まず `dryRun: true` で件数を見てから実 push。
-  反映まではカードが登録済みの年 (県内総生産額は 2021 年の 1 点) だけを描く) → ② develop → main のデプロイ → ③ 3 テーマの実験を
-  `evaluate-theme-experiments.mjs --register` で baseline 付きで登録し `--schedule <デプロイ日>`。
-- **2026-10-07 オーナー判断で前倒し**: d56 の観測を待たずに今出す (A 案)。#1084・#1085・#1090 は develop へマージ済み。①' の 2 指標の観測値は R2 に反映済み (県内総生産額 517 行・1人当たり県民所得 470 行、data-refresh run 37615385505)。手順の順番の訂正: `sync-snapshots.yml` は **main を checkout して** page-components を生成するので、① は ② (develop → main のマージ) の**後**に行う (マージから反映までの数分は、外した図がページ末尾に残って見える)。9 月の実験 (THEME-STRUCTURE-20260908-* / THEME-LAUNCH-*) の d56 には今回の変更が混ざる。効果判定の engine は同時投入を `confounded` として pending に留めるので、混ざった結果を full/none と判定しない。
-- **2026-10-07 公開済み**: ② main へのマージ (#1099・5ddda10b8)・Cloudflare デプロイ成功、① page-components の R2 反映 (sync-snapshots 成功)、①' 2 指標の観測値の再取得も済み。本番で aging-society の「年齢構造と支え手の比率」章あり・「高齢世帯の推移」なし、fishery-marine の「漁業の担い手」章あり、local-economy の先頭章「経済の規模と所得の水準」ありを確かめた。**残りは ③ の実験登録だけ**。
-- **2026-10-08 方針変更 (オーナー承認)**: 11-06 の d56 を待たずに、9 月の実験を d28 (2026-10-09) で打ち切り、今回の公開日から新しい実験を登録する。
-  #1099 の前と今の main のカタログを比べると、9 月 11 日に始めた判定前の実験 55 件のうち 29 テーマで中身が変わって本番に出ていた。
-  ① 章・指標・図が変わった 10 テーマ (提案の aging-society・fishery-marine・local-economy は 10-07、tourism・consumer-prices は 10-08。
-  読み方章を末尾へ移した healthcare・labor-mobility・labor-wages・living-housing・population-dynamics は 10-07) は、9 月の実験の d56 が
-  9 月の変更だけの効果を表さない。② カードの見出しの文言だけが変わった 19 テーマ (launch 10 件を含む) は実験を続け、変更を制約として残す。
-  残り 26 テーマは生成物の先頭の正本パスのコメントが変わっただけで、本番の見た目は変わっていない。29 テーマの実験の `notes` に同時変更を書いた。
-  **次 (2026-10-09 JST 以降)**: `--check` で d28 を記録 → ① の 10 件を `--verdict <id> aborted --note '<同時変更>'` →
-  `THEME-STRUCTURE-20261007-<key>` (8 件) / `THEME-STRUCTURE-20261008-<key>` (tourism・consumer-prices) を `--register` で登録する。
-  baseline は `portfolio.json` の非重複 56 日窓 (W36+W40、2026-08-07〜10-03 で変更前) から取り、`--schedule <id> <公開日>` を付ける。
-- **完了条件**: 本番 `/themes/aging-society` で「年齢構造と支え手の比率」章にカードが出て、「高齢世帯の推移」が無く、
-  `/themes/fishery-marine` で図が「海面漁業産出額の長期推移」1 枚になり「漁業の担い手」章がある。
-  `/themes/local-economy` の先頭章「経済の規模と所得の水準」で県内総生産額のカードが 2011〜2021 年、1人当たり県民所得が 2012〜2021 年の推移を描き、
-  事業所数の章と「数値を比較するときの注意」が無い。8 テーマで読み方章が末尾にある。
-  ① の 10 テーマの 9 月の実験が aborted になり、新しい実験 10 件が公開日 (10-07 / 10-08) で schedule されている。validate-theme-state.mjs が違反なし。
+- **実例 (2026-10-08)**: 物価地域差指数 12 指標に 2025 年を補ったあとも、本番の `/ranking/consumer-price-difference-index-overall` のタイトルは
+  「【2024年】｜1位東京」のまま (2024 年の値としては正しいので `audit-seo-meta-facts.ts` は通る)。魚種 12 指標は今回手で 2023 年に書き直した。
+  値から生成すれば、年を広げるたびにこの手作業は要らなくなる。
 
 ### [FISHERY-SPECIES-REFRESH-01] 魚種別漁獲量 12 指標を 2015 年から 2023 年まで延ばし、fishery-marine に「主な魚種」の章を作る
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run validate:config --workspace=@stats47/data-configs] [起票:2026-10-06] [領域:データ]
@@ -3312,9 +3282,11 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
   description の「40都道府県」は 39 に直した (累年表の 40 は全国を含む数)。
 - **残る年**: 2019 年は魚種別の表が API に無い。2020〜2022 年は県別の 39 表に分かれ、青森 (2020・2021)・大阪 (2020)・山形 (2021・2022) の表が API に無いため載せていない。
   県欠けの年を載せると順位がずれるので、e-Stat に表が揃うか、別の取得元を決めるまでは 2018 → 2023 の間が空く。
-- **次**: ④ fishery-marine に「主な魚種」の章を提案する (下)。⑤ ブログ `bonito-catch-prefecture` の 2023 年への更新を blog 側へ渡す。
-- **提案 (2026-10-08、オーナー承認待ち)**: fishery-marine に「主な魚種と産地」章を足す。カツオ・サバ・サンマ・スケトウダラ・ホタテの 5 指標をカード化し、
-  初期表示は 2023 年の上位県。2019〜2022 年が空くことを章の注記に書く。
+- **完了条件の達成 (2026-10-08)**: uruhayato373/stats47#1111 のデプロイ後、本番 `/ranking/fishery-species-catch-bonito` は 200 で、タイトルと本文が 2023 年 (1 位静岡県 56,969 t) を出している。
+- **次**: ④ fishery-marine に「主な魚種」の章を提案する (下)。⑤ ブログ `bonito-catch-prefecture` の 2023 年への更新を blog 側へ渡す。④⑤ が済んだらこのカードを消す。
+- **④ 承認・実装 (2026-10-08)**: オーナーが修正案 (検索表示順のサンマ・イワシ・サバ・カツオ・マグロ) で承認。cf0335d56 で「主な魚種と産地」章を作った。
+  uruhayato373/stats47#1112 のマージ後に本番の `/themes/fishery-marine` で章を確かめる。残りは ⑤ (ブログ `bonito-catch-prefecture` は 2015 年の図。
+  魚種の最新年が 2023 年になったので、日次の `build-stale-data-years.mjs` が是正キューの data-refresh レーンに入れるかを確かめる)。
 
 ### [THEME-AGING-LIVING-ALONE-METRIC-01] 65歳以上人口に占める一人暮らしの割合 (高齢者の独居率) を指標に足す
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run validate:config --workspace=@stats47/data-configs] [起票:2026-10-06] [領域:データ]
@@ -3331,8 +3303,10 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
   estat-researcher が 2010・2015・2020 の 141 セルで国勢調査の表 (0003038624・0003154100・0003445173 と各年の人口表) と一致することを確かめた。
   2020 年は東京 26.11% が最高、山形 12.08% が最低 (既存の一般世帯分母の指標は高知が 1 位で、顔ぶれが変わる)。
   2025 年は国勢調査の表 (0004065973 ÷ 0004065916) にあるが、表が 2 つに分かれ axisRatio では取れないので、社会・人口統計体系への反映を待つ。
+- **本番 (2026-10-08)**: uruhayato373/stats47#1111 のデプロイ後、`/ranking/elderly-living-alone-rate` は Googlebot UA で 200、OGP 画像も 200。残りは下の章の提案だけ。
 - **提案 (2026-10-08、オーナー承認待ち)**: aging-society の「高齢者はどの世帯で暮らすか」章に `elderly-living-alone-rate` を secondary で足し、
   既存の一般世帯分母の指標と同じ章で並べる (カード見出しは「高齢者の一人暮らしの割合」、注記に分母の違いを書く)。
+- **承認・実装 (2026-10-08)**: オーナー承認。cf0335d56 でカードに足し、章の説明に分母の違いを書いた。uruhayato373/stats47#1112 のマージ後に本番の `/themes/aging-society` でタイルを確かめたらカードを消す。
 
 ### [THEME-DUP-METRIC-CARD-01] 同じ指標のカードが 2 つの章に出ている 4 テーマを、どちらか 1 か所に整理する
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run validate:catalog --workspace=@stats47/data-configs] [起票:2026-10-06] [領域:データ]
@@ -3348,7 +3322,8 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - **完了条件**: 4 テーマで同じ rankingKey のカードが 1 か所だけになり、見出しに「章名｜」が残っていない。
 - **範囲の訂正 (2026-10-08)**: 同じテーマの中で同じ rankingKey が 2 枚のカードに出ているのは、上の 4 件だけではなく 6 テーマ 16 指標ある (healthcare 5・labor-mobility 3・climate・living-housing・real-income・safety 各 2。THEME-SINGLE-YEAR-CARDS-01 の振り分けの途中で見つかった)。
 - **済 (2026-10-08)**: `validate:catalog` に `[group-dup-metric]` (warning) を足し、既存 16 件を warning baseline (`.claude/config/quality-warning-baseline.json`、期限 2026-12-31) に登録した。17 件目からは develop の Quality Warning Ratchet が止める。意図して 2 章に置く例外の仕組みは、下の提案で「両方に残す」が承認されたときだけ足す。
-- **提案 (2026-10-08、オーナー承認待ち)**: 外すカードを次のとおりにする。章の唯一のカードを外すことになるのは ⑤⑦⑧ の 3 章で、その章ごと既存章へ畳み、`theme-feasibility-catalog.json` の該当候補を「既存章に統合」に変える。
+- **承認・実装 (2026-10-08)**: オーナー承認 (「就業の状態と働き方」の章は埋め込み図だけで残す)。b942a5926 で 16 件を整理し、warning baseline を 0 にした。uruhayato373/stats47#1112 のマージ後に本番で確かめたらカードを消す。
+- **提案 (2026-10-08)**: 外すカードを次のとおりにする。章の唯一のカードを外すことになるのは ⑤⑦⑧ の 3 章で、その章ごと既存章へ畳み、`theme-feasibility-catalog.json` の該当候補を「既存章に統合」に変える。
   ① climate 年間日照時間: 「暑さと熱中症の救急搬送」(candidate-104-3) から外し「日照」に残す。② climate 年間雪日数: 「雪国の暮らしと除雪」(candidate-96-1) から外し、図のある「降水と雪」に残す。
   ③ healthcare 医師・看護師 (人口10万対): 「診療科と年齢から見る医療人材」の単独カード 2 枚 (candidate-57-1・-2) を外し、2 系列カード supply-1 に残す。④ healthcare 健康寿命 男・女: candidate-65-1・-2 を外し healthy-years に残す。救急搬送病院収容所要時間: candidate-58-7 を外し「地域の医療アクセス」(その章の唯一のカード) に残す。
   ⑤ labor-mobility 有効求人倍率: 「人手不足と求人」(candidate-33) はこの 1 枚だけなので章ごと「求人・求職と職業紹介」へ畳む。⑥ labor-mobility テレワーク実施率・昼夜間人口比率: work-style の 2 系列カードは candidate-39-1 と candidate-84-1 の完全な重複なので、work-style のカードを外す (work-style 章は埋め込み章だけ残るので、章の扱いも同時に決める)。
@@ -3428,20 +3403,6 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
   10人以上の系列への訂正は公表されていないので R2 の値をそのまま使う。照合の途中で、4 指標の説明が範囲を書いていないことと、
   観光テーマの章の説明の誤りを見つけて直した (develop、`fix(data): 宿泊旅行統計の 4 指標が…`)。
 - **完了条件**: 2026 年の値を取り込んだ 4 指標に、系列の断絶が note と章の説明に書かれている。
-
-### [DATA-CPI-REGIONAL-2025-01] 社会・人口統計体系に消費者物価地域差指数の 2025 年が入ったら、12 指標の years を 2025 年まで広げる
-タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npx tsx packages/ranking/src/scripts/audit-estat-year-coverage.ts --metrics consumer-price-difference-index-overall] [起票:2026-10-08] [領域:データ]
-
-- **trigger**: 社会・人口統計体系の `0000010212` に 2025 年の値が載ったとき。総務省統計局は小売物価統計調査（構造編）の 2025 年結果を
-  2026-09-18 に公表した (theme-researcher が `https://www.stat.go.jp/data/kouri/kouzou/gaiyou.html` で確認) が、
-  2026-10-08 の `getStatsData` では `0000010212` は 2013〜2024 年だけだった (`data/estat/year-coverage/queue.json` に記録)。
-- **次**: 上の検証コマンドで 2025 年が実在年に入ったら、物価地域差指数 12 指標の `years.to` を 2025 にし、`data-refresh` で取り込む。
-  config の `years` は `to: 2024` で止めてあるので、出典に新しい年が入っても自動では取り込まれない。
-- **完了条件**: 12 指標の R2 の値に 2025 年があり、`/themes/consumer-prices` のヒートマップが 2025 年の列まで描く。
-- **対応 (2026-10-08、R2 反映は未確認)**: 社会・人口統計体系を待たず、同じ指数を載せた一次の表 `0003441258` (小売物価統計調査 構造編、cdTab=40) から
-  2025 年だけを `supplementalSources` で補った (c8281131a)。2013〜2024 年は 47 県 x 12 費目の 6,768 セルが社会・人口統計体系の値と一致した。
-  表の年は暦年 (「2025年」) なので yearFormat を calendar に直した。data-refresh の run で R2 の 12 指標に 2025 年が入ったら、このカードを消す。
-  社会・人口統計体系に 2025 年が入ると取り込みが `[supplement-overlap]` を警告するので、値を確かめて補完を外す。
 
 ### [SSOT-CONSOLIDATION-REST-01] 2026-10-06 の定数集約で見送った重複を、挙動の差を解消してから寄せる
 

@@ -44,9 +44,9 @@
     {
       "source": "theme-catalog",
       "code": "group-dup-metric",
-      "count": 16,
+      "count": 0,
       "owner": "theme-designer",
-      "reason": "同じテーマの中で同じ指標が 2 枚のカードに出ている既存分 (6 テーマ 16 指標)。どちらの章に残すかはオーナー承認の提案で決めて減らす (THEME-DUP-METRIC-CARD-01)",
+      "reason": "同じテーマの中で同じ指標が 2 枚のカードに出ている状態を 0 件に保つ。2026-10-08 にオーナー承認の整理で 16 件を解消した (THEME-DUP-METRIC-CARD-01)",
       "expiresAt": "2026-12-31"
     },
     {

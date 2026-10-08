@@ -983,7 +983,6 @@
       "description": "交通事故件数・死亡率に加え、65歳以上の死傷者数を比較します。高齢者の被害を捉える年齢区分であり、高齢運転者が起こした事故件数や事故原因を表すものではありません。",
       "metricGroupKeys": [
         "candidate-88-1",
-        "candidate-88-2",
         "candidate-88-3"
       ]
     },
@@ -1016,7 +1015,6 @@
       "description": "消防吏員・消防ポンプ自動車等は2022年、救急自動車は2024年の人口10万人当たりの値です。車両や人員の実数ではなく、各県の人口規模をそろえた供給量として読みます。異なる年の値を同年の構成比にはしません。",
       "metricGroupKeys": [
         "candidate-110-1",
-        "candidate-110-2",
         "candidate-110-3",
         "candidate-110-4",
         "candidate-110-5"
@@ -1122,16 +1120,6 @@
       ],
       "defaultCheckedKeys": [
         "traffic-accident-count"
-      ]
-    },
-    {
-      "key": "candidate-88-2",
-      "title": "交通事故死者数（人口10万人当たり）",
-      "rankingKeys": [
-        "traffic-accident-deaths-per-100k"
-      ],
-      "defaultCheckedKeys": [
-        "traffic-accident-deaths-per-100k"
       ]
     },
     {
@@ -1252,16 +1240,6 @@
       ],
       "defaultCheckedKeys": [
         "fire-department-water-count-per-100-thousand-people"
-      ]
-    },
-    {
-      "key": "candidate-110-2",
-      "title": "救急出動件数（人口千人当たり）",
-      "rankingKeys": [
-        "annual-emergency-dispatches-per-1000"
-      ],
-      "defaultCheckedKeys": [
-        "annual-emergency-dispatches-per-1000"
       ]
     },
     {
