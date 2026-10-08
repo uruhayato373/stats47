@@ -1,0 +1,141 @@
+{
+  "version": 1,
+  "pages": [
+    {
+      "id": "category:administrativefinancial",
+      "kind": "category",
+      "key": "administrativefinancial",
+      "title": "行財政",
+      "href": "/category/administrativefinancial",
+      "published": true
+    },
+    {
+      "id": "category:agriculture",
+      "kind": "category",
+      "key": "agriculture",
+      "title": "農林水産業",
+      "href": "/category/agriculture",
+      "published": true
+    },
+    {
+      "id": "category:commercial",
+      "kind": "category",
+      "key": "commercial",
+      "title": "商業・サービス業",
+      "href": "/category/commercial",
+      "published": true
+    },
+    {
+      "id": "category:construction",
+      "kind": "category",
+      "key": "construction",
+      "title": "住宅・土地・建設",
+      "href": "/category/construction",
+      "published": true
+    },
+    {
+      "id": "category:economy",
+      "kind": "category",
+      "key": "economy",
+      "title": "企業・家計・経済",
+      "href": "/category/economy",
+      "published": true
+    },
+    {
+      "id": "category:educationsports",
+      "kind": "category",
+      "key": "educationsports",
+      "title": "教育・文化・スポーツ",
+      "href": "/category/educationsports",
+      "published": true
+    },
+    {
+      "id": "category:energy",
+      "kind": "category",
+      "key": "energy",
+      "title": "エネルギー・水",
+      "href": "/category/energy",
+      "published": true
+    },
+    {
+      "id": "category:ict",
+      "kind": "category",
+      "key": "ict",
+      "title": "情報通信・科学技術",
+      "href": "/category/ict",
+      "published": true
+    },
+    {
+      "id": "category:infrastructure",
+      "kind": "category",
+      "key": "infrastructure",
+      "title": "社会基盤施設",
+      "href": "/category/infrastructure",
+      "published": true
+    },
+    {
+      "id": "category:international",
+      "kind": "category",
+      "key": "international",
+      "title": "国際",
+      "href": "/category/international",
+      "published": true
+    },
+    {
+      "id": "category:laborwage",
+      "kind": "category",
+      "key": "laborwage",
+      "title": "労働・賃金",
+      "href": "/category/laborwage",
+      "published": true
+    },
+    {
+      "id": "category:landweather",
+      "kind": "category",
+      "key": "landweather",
+      "title": "国土・気象",
+      "href": "/category/landweather",
+      "published": true
+    },
+    {
+      "id": "category:miningindustry",
+      "kind": "category",
+      "key": "miningindustry",
+      "title": "鉱工業",
+      "href": "/category/miningindustry",
+      "published": true
+    },
+    {
+      "id": "category:population",
+      "kind": "category",
+      "key": "population",
+      "title": "人口・世帯",
+      "href": "/category/population",
+      "published": true
+    },
+    {
+      "id": "category:safetyenvironment",
+      "kind": "category",
+      "key": "safetyenvironment",
+      "title": "司法・安全・環境",
+      "href": "/category/safetyenvironment",
+      "published": true
+    },
+    {
+      "id": "category:socialsecurity",
+      "kind": "category",
+      "key": "socialsecurity",
+      "title": "社会保障・衛生",
+      "href": "/category/socialsecurity",
+      "published": true
+    },
+    {
+      "id": "category:tourism",
+      "kind": "category",
+      "key": "tourism",
+      "title": "運輸・観光",
+      "href": "/category/tourism",
+      "published": true
+    }
+  ]
+}

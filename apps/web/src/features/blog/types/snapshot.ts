@@ -6,6 +6,8 @@ export const BLOG_SNAPSHOT_KEY = 'app/blog/all.json';
 
 export interface SnapshotArticleTag {
   tagKey: string;
+  /** data/content/tags.json の不変ID。旧snapshotはtagKeyから同じIDへ解決する。 */
+  tagId?: string;
 }
 
 /** 記事が使う指標 1 件。year は図に描いた年 (図の source.json の `year`)。本文のリンクだけの指標は年を持たない。 */

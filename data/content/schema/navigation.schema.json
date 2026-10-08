@@ -1,0 +1,210 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "required": [
+    "version",
+    "limit",
+    "relations",
+    "categoryTags",
+    "excludedArticleTagIdsByKind",
+    "links"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "excludedArticleTagIdsByKind": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "uniqueItems": true,
+        "items": { "type": "string", "pattern": "^tag:" }
+      }
+    },
+    "version": {
+      "const": 1
+    },
+    "limit": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 6
+    },
+    "relations": {
+      "type": "object",
+      "required": [
+        "explains",
+        "contains",
+        "uses",
+        "geo",
+        "sharedMetric",
+        "tag",
+        "themeContext"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "explains": {
+          "type": "object",
+          "required": [
+            "priority",
+            "label"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "priority": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "label": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "contains": {
+          "type": "object",
+          "required": [
+            "priority",
+            "label"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "priority": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "label": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "uses": {
+          "type": "object",
+          "required": [
+            "priority",
+            "label"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "priority": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "label": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "geo": {
+          "type": "object",
+          "required": [
+            "priority",
+            "label"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "priority": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "label": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "sharedMetric": {
+          "type": "object",
+          "required": [
+            "priority",
+            "label"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "priority": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "label": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "tag": {
+          "type": "object",
+          "required": [
+            "priority",
+            "label"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "priority": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "label": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "themeContext": {
+          "type": "object",
+          "required": [
+            "priority",
+            "label"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "priority": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "label": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        }
+      }
+    },
+    "categoryTags": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^tag:"
+      }
+    },
+    "links": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "from",
+          "to",
+          "relation"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "from": {
+            "type": "string"
+          },
+          "to": {
+            "type": "string"
+          },
+          "relation": {
+            "enum": [
+              "explains",
+              "contains",
+              "uses",
+              "geo",
+              "sharedMetric",
+              "tag",
+              "themeContext"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

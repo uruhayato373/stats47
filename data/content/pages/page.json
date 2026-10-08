@@ -1,0 +1,173 @@
+{
+  "version": 1,
+  "pages": [
+    {
+      "id": "page:about",
+      "kind": "page",
+      "key": "/about",
+      "href": "/about",
+      "title": "運営者について",
+      "published": true
+    },
+    {
+      "id": "page:areas",
+      "kind": "page",
+      "key": "/areas",
+      "href": "/areas",
+      "title": "都道府県一覧",
+      "published": true
+    },
+    {
+      "id": "page:blog",
+      "kind": "page",
+      "key": "/blog",
+      "href": "/blog",
+      "title": "統計ブログ",
+      "published": true
+    },
+    {
+      "id": "page:blog-tags",
+      "kind": "page",
+      "key": "/blog/tags",
+      "href": "/blog/tags",
+      "title": "ブログのタグ一覧",
+      "published": true
+    },
+    {
+      "id": "page:geo",
+      "kind": "page",
+      "key": "/geo",
+      "href": "/geo",
+      "title": "地域分析",
+      "published": true
+    },
+    {
+      "id": "page:geo-2050-population",
+      "kind": "page",
+      "key": "/geo/2050-population",
+      "href": "/geo/2050-population",
+      "title": "2050年の推計人口",
+      "published": true
+    },
+    {
+      "id": "page:geo-compare",
+      "kind": "page",
+      "key": "/geo/compare",
+      "href": "/geo/compare",
+      "title": "地域分析の比較",
+      "published": true
+    },
+    {
+      "id": "page:geo-data-catalog",
+      "kind": "page",
+      "key": "/geo/data-catalog",
+      "href": "/geo/data-catalog",
+      "title": "GISデータ一覧",
+      "published": true
+    },
+    {
+      "id": "page:geo-layers",
+      "kind": "page",
+      "key": "/geo/layers",
+      "href": "/geo/layers",
+      "title": "地図レイヤー",
+      "published": true
+    },
+    {
+      "id": "page:geo-method",
+      "kind": "page",
+      "key": "/geo/method",
+      "href": "/geo/method",
+      "title": "地域分析の方法",
+      "published": true
+    },
+    {
+      "id": "page:home",
+      "kind": "page",
+      "key": "/",
+      "href": "/",
+      "title": "統計で見る都道府県",
+      "published": true
+    },
+    {
+      "id": "page:japan",
+      "kind": "page",
+      "key": "/japan",
+      "href": "/japan",
+      "title": "日本の統計",
+      "published": true
+    },
+    {
+      "id": "page:municipalities",
+      "kind": "page",
+      "key": "/municipalities",
+      "href": "/municipalities",
+      "title": "市区町村の統計",
+      "published": true
+    },
+    {
+      "id": "page:privacy",
+      "kind": "page",
+      "key": "/privacy",
+      "href": "/privacy",
+      "title": "プライバシーポリシー",
+      "published": true
+    },
+    {
+      "id": "page:products",
+      "kind": "page",
+      "key": "/products",
+      "href": "/products",
+      "title": "データ商品・書籍",
+      "published": true
+    },
+    {
+      "id": "page:ranking",
+      "kind": "page",
+      "key": "/ranking",
+      "href": "/ranking",
+      "title": "ランキング一覧",
+      "published": true
+    },
+    {
+      "id": "page:search",
+      "kind": "page",
+      "key": "/search",
+      "href": "/search",
+      "title": "横断検索",
+      "published": true
+    },
+    {
+      "id": "page:survey",
+      "kind": "page",
+      "key": "/survey",
+      "href": "/survey",
+      "title": "統計調査一覧",
+      "published": true
+    },
+    {
+      "id": "page:terms",
+      "kind": "page",
+      "key": "/terms",
+      "href": "/terms",
+      "title": "利用規約",
+      "published": true
+    },
+    {
+      "id": "page:themes",
+      "kind": "page",
+      "key": "/themes",
+      "href": "/themes",
+      "title": "テーマ一覧",
+      "published": true
+    },
+    {
+      "id": "page:themes-local-finance-cities",
+      "kind": "page",
+      "key": "/themes/local-finance/cities",
+      "href": "/themes/local-finance/cities",
+      "title": "市区町村の地方財政",
+      "published": true
+    }
+  ]
+}

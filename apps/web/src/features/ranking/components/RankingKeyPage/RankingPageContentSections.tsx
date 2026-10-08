@@ -35,6 +35,8 @@ export interface RankingPageSections {
     relatedRankings?: ReactNode;
     /** 右サイドバーに表示するコンテンツ（Server Component を注入） */
     sidebar?: ReactNode;
+    /** 狭幅では可視化直後に出す関連記事。右レールとはCSSで排他的に表示する。 */
+    relatedArticles?: ReactNode;
 }
 
 interface RankingPageDisplayInfo {

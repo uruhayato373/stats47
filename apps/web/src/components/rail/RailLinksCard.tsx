@@ -19,6 +19,8 @@ export interface RailLinksCardItem {
   count?: number;
   ariaLabel?: string;
   trackingLabel?: string;
+  contentId?: string;
+  description?: string;
   thumbnail?: {
     lightSrc: string;
     darkSrc: string;
@@ -48,6 +50,9 @@ interface RailLinksCardProps {
   collapsible?: boolean;
   /** chips を横スクロール 1 行にする (狭幅の本文上部など) */
   horizontalOnMobile?: boolean;
+  /** 本文の関連記事は透明な行を横に並べられる。枠を入れ子にしないinlineも同じリンクを使う。 */
+  columns?: 1 | 3;
+  frame?: 'card' | 'inline';
 }
 
 function trackLink(
@@ -74,17 +79,28 @@ function RailLinks({
   layout,
   trackingSurface,
   horizontalOnMobile,
+  columns = 1,
 }: Pick<
   RailLinksCardProps,
-  'items' | 'layout' | 'trackingSurface' | 'horizontalOnMobile'
+  'items' | 'layout' | 'trackingSurface' | 'horizontalOnMobile' | 'columns'
 >) {
   if (layout === 'media') {
     return (
-      <nav className="space-y-0.5" aria-label="カード内リンク">
+      <nav
+        className={
+          columns === 3
+            ? 'grid grid-cols-1 gap-x-6 sm:grid-cols-2 xl:grid-cols-3'
+            : 'space-y-0.5'
+        }
+        aria-label="カード内リンク"
+      >
         {items.map((item) => (
           <Link
             key={item.id}
             href={item.href}
+            data-content-id={item.contentId}
+            data-nav-label={item.contentId}
+            data-nav-surface={item.contentId ? trackingSurface : undefined}
             aria-label={item.ariaLabel}
             className="group flex min-h-14 items-center gap-3 border-b border-border py-2.5 text-sm leading-snug text-foreground transition-colors last:border-b-0 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             onClick={() => trackLink(item, trackingSurface)}
@@ -101,7 +117,14 @@ function RailLinks({
                 />
               </span>
             )}
-            <span className="line-clamp-2 min-w-0 flex-1">{item.label}</span>
+            <span className="min-w-0 flex-1">
+              {item.description && (
+                <span className="mb-1 block text-xs text-muted-foreground">
+                  {item.description}
+                </span>
+              )}
+              <span className="line-clamp-2">{item.label}</span>
+            </span>
             <ChevronRight
               aria-hidden="true"
               className="h-3.5 w-3.5 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5"
@@ -215,14 +238,17 @@ export function RailLinksCard({
   trackingSurface,
   collapsible = false,
   horizontalOnMobile = false,
+  columns = 1,
+  frame = 'card',
 }: RailLinksCardProps) {
-  return (
-    <RailCard title={title} aria-label={title} collapsible={collapsible}>
+  const content = (
+    <>
       <RailLinks
         items={items}
         layout={layout}
         trackingSurface={trackingSurface}
         horizontalOnMobile={horizontalOnMobile}
+        columns={columns}
       />
       {moreLink && (
         <Link
@@ -242,6 +268,18 @@ export function RailLinksCard({
           {moreLink.label}
         </Link>
       )}
+    </>
+  );
+  if (frame === 'inline')
+    return (
+      <section aria-label={title} className="border-y border-border py-4">
+        <h2 className="mb-2 text-sm font-medium">{title}</h2>
+        {content}
+      </section>
+    );
+  return (
+    <RailCard title={title} aria-label={title} collapsible={collapsible}>
+      {content}
     </RailCard>
   );
 }

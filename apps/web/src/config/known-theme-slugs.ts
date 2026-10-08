@@ -1,4 +1,4 @@
-import { ALL_THEMES } from "@/features/theme-dashboard/config/all-themes";
+import { ALL_THEMES } from "../features/theme-dashboard/config/all-themes";
 
 /**
  * `/themes/<slug>` で有効な slug 一覧
