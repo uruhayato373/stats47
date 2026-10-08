@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-10-08T12:15:44.630Z",
+  "generatedAt": "2026-10-08T19:59:03.178Z",
   "masterSurveyCount": 151,
   "ranking": {
     "metrics": 2599,
@@ -261,11 +261,11 @@
   "theme": {
     "themes": 56,
     "metricGroups": {
-      "total": 554,
+      "total": 540,
       "byStatus": {
-        "resolved": 468,
+        "resolved": 457,
         "unresolved": 0,
-        "not-applicable": 86,
+        "not-applicable": 83,
         "missing-lineage": 0
       },
       "coveragePct": 100,
@@ -753,13 +753,13 @@
     }
   },
   "blog": {
-    "articles": 607,
+    "articles": 606,
     "charts": 1607,
-    "applicableCharts": 1483,
+    "applicableCharts": 1481,
     "byStatus": {
-      "resolved": 1483,
+      "resolved": 1481,
       "unresolved": 0,
-      "not-applicable": 124,
+      "not-applicable": 126,
       "missing-lineage": 0
     },
     "coveragePct": 100,
@@ -1923,6 +1923,7 @@
         "municipalities-without-schools",
         "psychiatric-bed-count-vs-elementary-school-count",
         "school-nonattendance-pattern",
+        "school-teacher-annual-income",
         "students-per-teacher-class-size-gap",
         "tutoring-cost-university-advancement-gap",
         "university-advancement-capacity",
@@ -2044,7 +2045,6 @@
         "prefecture-salary-gap-career",
         "professor-income-prefecture-gap",
         "school-teacher-annual-income",
-        "school-teacher-annual-income-prefecture-gap",
         "software-engineer-income-gap",
         "software-engineer-salary-prefecture-gap",
         "starting-salary-university-prefecture-gap",
@@ -4116,6 +4116,7 @@
         "municipalities-without-schools",
         "psychiatric-bed-count-vs-elementary-school-count",
         "school-nonattendance-pattern",
+        "school-teacher-annual-income",
         "students-per-teacher-class-size-gap",
         "tutoring-cost-university-advancement-gap",
         "university-advancement-capacity",
@@ -4396,7 +4397,6 @@
         "prefecture-salary-gap-career",
         "professor-income-prefecture-gap",
         "school-teacher-annual-income",
-        "school-teacher-annual-income-prefecture-gap",
         "software-engineer-income-gap",
         "software-engineer-salary-prefecture-gap",
         "starting-salary-university-prefecture-gap",

@@ -1044,6 +1044,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:elderly-living-alone-rate",
+      "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:elderly-workers-ratio",
       "to": "theme:aging-society",
       "relation": "contains"
@@ -1230,6 +1235,31 @@
     },
     {
       "from": "ranking:fish-catch",
+      "to": "theme:fishery-marine",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:fishery-species-catch-bonito",
+      "to": "theme:fishery-marine",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:fishery-species-catch-mackerel",
+      "to": "theme:fishery-marine",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:fishery-species-catch-pacific-saury",
+      "to": "theme:fishery-marine",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:fishery-species-catch-sardine",
+      "to": "theme:fishery-marine",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:fishery-species-catch-tuna",
       "to": "theme:fishery-marine",
       "relation": "contains"
     },

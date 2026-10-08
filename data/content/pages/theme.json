@@ -14,6 +14,7 @@
         "household-ratio-with-65plus",
         "marriages-per-total-population",
         "single-person-household-old-population-ratio",
+        "elderly-living-alone-rate",
         "elderly-couple-only-household-ratio",
         "young-population-index",
         "old-population-index",
@@ -292,7 +293,12 @@
         "marine-aquaculture-harvest",
         "inland-aquaculture-harvest",
         "marine-fishery-aquaculture-output-value",
-        "fishery-workers"
+        "fishery-workers",
+        "fishery-species-catch-tuna",
+        "fishery-species-catch-bonito",
+        "fishery-species-catch-mackerel",
+        "fishery-species-catch-pacific-saury",
+        "fishery-species-catch-sardine"
       ]
     },
     {

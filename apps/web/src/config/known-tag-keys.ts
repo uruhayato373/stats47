@@ -10,7 +10,7 @@
  * 更新タイミング: ブログ公開で R2 blog snapshot が変わった後。commit + デプロイで反映。
  *
  * 最終生成日: 2026-10-08
- * 件数: 910
+ * 件数: 907
  */
 export const KNOWN_TAG_KEYS: ReadonlySet<string> = new Set([
   "1000世帯あたり",
@@ -479,7 +479,6 @@ export const KNOWN_TAG_KEYS: ReadonlySet<string> = new Set([
   "将来推計人口",
   "将来負担比率",
   "小中学校",
-  "小中学校教員",
   "小売",
   "小売業",
   "小学校",
@@ -536,7 +535,6 @@ export const KNOWN_TAG_KEYS: ReadonlySet<string> = new Set([
   "政府統計",
   "政治参加",
   "教員",
-  "教員 年収",
   "教員1人当たり児童数",
   "教科書代",
   "教育",
@@ -880,7 +878,6 @@ export const KNOWN_TAG_KEYS: ReadonlySet<string> = new Set([
   "面積",
   "韓国",
   "音楽教育",
-  "順位の変動",
   "風力発電",
   "食パン",
   "食品インフレ",
