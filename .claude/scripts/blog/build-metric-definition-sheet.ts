@@ -27,20 +27,22 @@ import { fileURLToPath } from "node:url";
 
 import { METRICS_REGISTRY } from "../../../packages/data-configs/src/registry.ts";
 import type { MetricConfig } from "../../../packages/data-configs/src/types.ts";
-import surveysMaster from "../../../packages/ranking/src/data/surveys.json" with { type: "json" };
+import { resolveSurveyLinkage } from "../../../packages/ranking/src/builders/build-ranking-item-from-metric.ts";
 import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
 const R2_BASE = process.env.R2_PUBLIC_FETCH_URL ?? R2_PUBLIC_BASE_URL;
 
-interface SurveyRow {
-  id: string;
-  name: string;
-  organization?: string | null;
+/**
+ * 調査名は ranking item と同じ解決 (config.surveyId > statsDataId / cdCat01 の辞書導出) で引く。
+ * config.surveyId だけを見ると、辞書で解決済みの指標 (例: 賃金構造基本統計調査の職種別年収 39 指標)
+ * まで「未設定」と出ていた (METRIC-WAGE-SURVEY-01)。
+ */
+function surveyLabel(c: MetricConfig): string {
+  const { originalSurveys } = resolveSurveyLinkage(c, METRICS_REGISTRY);
+  if (originalSurveys.length) return originalSurveys.map((s) => s.name).join(" / ");
+  return c.surveyScope === "not-applicable" ? "調査対象外 (台帳等)" : "(調査を解決できない)";
 }
-const SURVEYS = new Map<string, SurveyRow>(
-  ((surveysMaster as { surveys?: SurveyRow[] }).surveys ?? (surveysMaster as unknown as SurveyRow[])).map((s) => [s.id, s]),
-);
 
 function argAll(name: string): string[] {
   const out: string[] = [];
@@ -94,7 +96,7 @@ function yearType(c: MetricConfig): string {
 function scope(c: MetricConfig): string {
   const text = `${c.subtitle ?? ""} ${c.description ?? ""} ${c.note ?? ""}`;
   const hits = new Set<string>();
-  for (const w of ["二人以上の世帯", "二人以上世帯", "勤労者世帯", "単身世帯", "総世帯", "都道府県庁所在市", "県庁所在市", "事業所", "企業", "人口10万人当たり", "人口千人当たり", "1世帯当たり", "1人当たり", "全国=100", "指数", "構成比", "割合"]) {
+  for (const w of ["二人以上の世帯", "二人以上世帯", "勤労者世帯", "単身世帯", "総世帯", "都道府県庁所在市", "県庁所在市", "事業所", "企業", "一般労働者", "男女計", "人口10万人当たり", "人口千人当たり", "1世帯当たり", "1人当たり", "全国=100", "指数", "構成比", "割合"]) {
     if (text.includes(w)) hits.add(w);
   }
   const calc = c.calculation;
@@ -119,7 +121,7 @@ export function buildSheet(keys: string[]): string {
   const rows = keys.map((k) => {
     const c = METRICS_REGISTRY[k];
     if (!c) return `| \`${k}\` | (config 無し) | | | | | 実在しないキー。本文を確認 |`;
-    const survey = c.surveyId ? (SURVEYS.get(c.surveyId)?.name ?? c.surveyId) : c.surveyScope === "not-applicable" ? "調査対象外 (台帳等)" : "(surveyId 未設定)";
+    const survey = surveyLabel(c);
     const cell = (s: string) => s.replace(/\|/g, "／").replace(/\n/g, " ");
     return `| \`${k}\` | ${cell(c.title)}${c.subtitle ? `（${cell(c.subtitle)}）` : ""} | ${cell(c.unit)} | ${cell(scope(c))} | ${yearType(c)} | ${cell(survey)} | ${cell(cautions(c))} |`;
   });
