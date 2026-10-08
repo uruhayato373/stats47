@@ -24,7 +24,7 @@ export const internetUsageRate10plus: MetricConfig = {
   ],
   "years": {
     "from": 2001,
-    "to": 2021,
+    "to": 2006,
   },
   "yearFormat": "fiscal",
   "visualization": {

@@ -901,6 +901,7 @@ updated: 2026-10-06
 - **手順**: ①`npx @tailwindcss/upgrade` を作業ブランチで実行して差分を確認する ②移行前後で代表 URL のスクリーンショットを比較する (`.claude/rules/page-quality-standards.md` の代表 URL) ③`npm run build --workspace=web`・`npm run type-check`・`npm audit --omit=dev --audit-level=low` を通す。
 - **停止条件**: 見た目の差分が意図せず出た状態で本番デプロイしない。デプロイはオーナー確認後にまとめて 1 回だけ行う。
 - **完了条件**: `npm audit --omit=dev --audit-level=low` が exit 0 になり、代表 URL の表示差分が無いか意図どおりである。dev 側に残る経路は [DEPS-BRACES-GATE-01] が扱う。
+- **観測 (2026-10-08)**: develop→main の PR #1104 でも Security Scan が同じ braces で失敗した。必須チェック (`Code Quality Check` のみ) ではないためデプロイは止めていない。
 
 ### [GSC-COVERAGE-DEPLOY-01] カバレッジ是正と入力鮮度ガードを本番反映する
 
@@ -1051,7 +1052,8 @@ updated: 2026-10-06
   5. (Claude) 承認後、手動の広告枠の配置を設計し、`docs/00_プロジェクト管理/02_収益化戦略.md` §3.1 と memory `project_monetization_contract` の
      「恒久停止」を改訂する。配置はアフィリエイトの実験窓 (`AFF-IMPRESSION-ROUTING-01` 等) と交絡しないよう区切り日を記録する。
 - **停止条件**: 旧アカウントと並行して新規アカウントを作らない (重複アカウント扱い)。組織タイプを選ばない。承認前に広告コードを入れない。
-- **現在地 (2026-10-08)**: 手順 2 済み (新 ID `pub-9055416085403520`)。手順 3 済み: ads.txt・本番 build env・`google-adsense-account` meta を新 ID へ替え (`ADSENSE_DISPLAY_ENABLED` は false のまま)、hotfix PR #1105 で本番反映 (2026-10-08 15:01 JST、main `56d28e9`、Deploy run 37735390296 success)。本番で `curl -s https://stats47.jp/ads.txt` が新 ID、トップに meta あり、`adsbygoogle` 0 件を確認。次 = 手順 4: オーナーが AdSense 画面で「ads.txt スニペット」→確認→審査をリクエスト。未確認: ローカルでは ranking / blog ページに meta が出なかった (子ページ metadata の上書きの可能性。ads.txt 方式なら審査は阻害しない)。ローカルの `apps/web/.env.development` は旧 ID のまま (Claude は .env を編集できない)。
+- **現在地 (2026-10-08)**: 手順 2 済み (新 ID `pub-9055416085403520`)。手順 3 済み: ads.txt・本番 build env・`google-adsense-account` meta を新 ID へ替え (`ADSENSE_DISPLAY_ENABLED` は false のまま)、hotfix PR #1105 で本番反映 (2026-10-08 15:01 JST、main `56d28e9`、Deploy run 37735390296 success)。本番で `curl -s https://stats47.jp/ads.txt` が新 ID、`adsbygoogle` 0 件を確認。meta はトップ・ranking (`article:modified_time` 付きを含む)・blog・themes・areas の全種別で出ている (Next.js が `other` を結合する。ローカルで見えなかったのは確認方法の誤り)。同日、AdSense 画面の ads.txt 方式で**所有権確認が通った** (「AdSense コード スニペット」方式は広告スクリプトを探すので失敗する)。次 = 手順 4: 審査の結果待ち。ローカルの `apps/web/.env.development` は旧 ID のまま (Claude は .env を編集できない。オーナーが書き換える)。
+- **手順 5 の配置設計の方針案 (2026-10-08 会話での提案。承認時に確定する)**: 1 枠 1 担当で、同じ枠に AdSense・アフィリエイト・物販を混ぜない。アフィリエイト (A8 等) は意図が解決するページの本文中・記事末尾 (09-12〜10-03 の CTR: ブログ本文 0.26%・記事末尾 0.25%)。物販 (楽天・Amazon) は食の雑学・書籍の文脈の商品カード (0.40〜0.46%、計 4 クリックで未判定)。AdSense はアフィリエイトが取れていない枠 (デスクトップ右レール 0.04%) と意図が解決しないページ (home・category・themes・意図なし記事)。モバイルの手動枠は W31 の撤去理由 (視認率 29%・LCP 余裕 24ms) があるので戻さない。審査中は新しい枠を増やさない。
 - **追記 (2026-10-07)**: オーナーは回収経路の一つを「アクセス集客で AdSense」と整理した (収益化戦略 §3.5)。同日、§3.1 の冒頭とメモリ `project_monetization_contract` に 9/28 の再開決定 (審査待ち) を書き足した。全面改訂は引き続き承認後に行う。見込みの注意: 再開後は手動枠だけなので、2026-W31 の実測 (手動枠は 1,000 表示あたり ¥8〜13、自動広告は ¥107〜114) から、停止前のページ RPM ¥37 を下回る可能性がある。**ページ RPM ¥37 は AdSense 自身が数えた PV (GA4 の 54〜78%) が分母**なので、GA4 の PV に換算すると停止前 W30〜W33 は 1,000 PV あたり ¥22 (AdSense 収益 ¥523 ÷ GA4 Japan PV 23,787)。今の閲覧 (月約 4.7 万 PV) では自動広告ありでも月約 ¥1,000、手動枠だけ (W31 の手動枠分 ¥6.7/1,000 PV) なら月約 ¥300 で、どちらも Cloudflare の請求 (月 ¥1,556〜1,846) に届かない。月 ¥1 万には月約 45 万 PV (手動枠だけなら約 150 万 PV) が要る (2026-10-07 訂正。前日までの「月 27 万 PV」は分母の違う ¥37 で計算していた)。承認後は AdSense 収益の週次取得を再開し、計測サイクルの KPI `ad-yield` (`.claude/scripts/metrics/lib/measurement-cycle.mjs`) に接続して、4 週の効率と月額を Cloudflare の請求と並べて判定する。自動広告を使うかどうかは効率を約 3 倍動かすので、書き換え事故の原因 (自動広告そのものか、広告インテントだけか) を AdSense の公式ヘルプで確かめてから決める。 承認後の改訂では、`.claude/rules/analytics-event-standards.md` と `.claude/rules/affiliate-ads-standards.md` に残る「2026-09-20 に恒久停止」の記述も合わせて直す。
 - **完了条件**: 新アカウントの審査が承認され、stats47.jp に手動枠の広告が表示され、収益化戦略とメモリの記述が「維持費の相殺として再開」に改訂されている。
 
@@ -3365,6 +3367,33 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
   (`theme-feasibility-catalog.json`) の扱いも同じ変更で決める。
 - **完了条件**: 4 テーマで同じ rankingKey のカードが 1 か所だけになり、見出しに「章名｜」が残っていない。
 
+### [MANUAL-METRIC-YEARNAME-01] 手動取得の指標の年表記に「年」「年度」が付かず、e-Stat 由来の指標と表示が揃わない
+
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npm run -s validate:config --workspace=@stats47/data-configs] [起票:2026-10-08] [領域:データ]
+
+- **事象 (2026-10-08 実測)**: e-Stat 経由の指標は `app/stats/<key>/values.json` の `yearName` が「2024年」だが、手動取得 (`fetcherKey: manual`) の指標は「2022」のように年だけになっている。今回の新規 20 本に加え、既存の中体連 10 本・遊技店密度も同じ。国民健康・栄養調査の 3 本は「2024年10〜11月」で、これも形が違う。data-refresh の検査は ranking 配信値の `yearName` を `yearCode + 年/年度` と照合しているので、手動取得の指標をその経路に載せると失敗する。
+- **原因**: 共通部品 `.claude/scripts/data/lib/stats-values-writer.mjs` の `writeStatsValues` が `yearName` の既定を `(y) => y` にしている。指標定義の `yearFormat` (calendar / fiscal) を見ていない。
+- **次**: writer が `yearFormat` から「年」「年度」を付けるようにし、手動取得の全スクリプトを再実行して R2 を更新する。調査期間を示したい表記 (10〜11月) は `note` に移す。
+- **停止条件**: 値そのものを変えない (再実行前後で value の一致を確かめる)。
+- **完了条件**: 手動取得の全指標で `yearName` が `yearCode + 年/年度` に揃い、ランキングページの年表示が e-Stat 由来の指標と同じ形になる。
+
+### [WEB-TSC-INCREMENTAL-01] apps/web の型検査が incremental 設定のため union 型の変更を見落とす疑い
+
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [検証:npx tsc --noEmit --incremental false -p apps/web/tsconfig.json] [起票:2026-10-08] [領域:管理]
+
+- **[仮説]** `apps/web/tsconfig.json` の `incremental` と `assumeChangesOnlyAffectDirectDependencies` のため、素の `tsc --noEmit -p apps/web/tsconfig.json` は、別パッケージで union 型にメンバーを足したときの不整合を検出しない。2026-10-08 に Geo 担当の subagent が `GeoAnalysisDefinition` 系の union 変更で観測したと報告した (呼び元は未再現)。
+- **検証コマンド**: 型の union に未対応のメンバーを 1 つ足した状態で、`npx tsc --noEmit -p apps/web/tsconfig.json` と `npx tsc --noEmit --incremental false -p apps/web/tsconfig.json` の結果を比べる。pre-commit と CI の type-check が前者を使っているかも確かめる。
+- **検証期日**: 2026-10-22。前者だけが通るなら仮説を支持し、CI と pre-commit の型検査を `--incremental false` か `tsBuildInfo` の無効化に変える。両方とも検出するなら仮説を棄却してカードを消す。
+- **完了条件**: 仮説の採否が決まり、支持の場合は CI と pre-commit が union の不整合で失敗することを変異で確かめた。
+
+### [GEO-LOW-ELEV-MANIFEST-SHA-01] 標高の低い土地の Geo 分析の manifest が SHA 照合の対象外になっている
+
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:npm run -s geo:audit-low-elevation] [起票:2026-10-08] [領域:データ]
+
+- **事象**: `population-low-elevation` の `manifest.json` は、Python 生成器の整数風キーの並び順が JS の `JSON.stringify` と違うため、Web 側の再直列化 SHA 照合から外されている (2026-10-08 に Geo 担当の subagent が報告。item と pref は照合対象)。
+- **次**: 生成器 `packages/gis/src/geo-analysis/low-elevation-population-overlay.py` の manifest 出力を JS と同じキー順にし、Web 側の照合対象に manifest を戻す。
+- **完了条件**: manifest も SHA 照合され、キー順を崩した manifest を監査が拒否することを変異で確かめた。
+
 ## 🟢 低 — 時期未定・条件付き (trigger は本文に)
 
 ### [DATA-SHUKUHAKU-CORRECTION-01] 宿泊旅行統計の 2026 年分を足すときに、層化基準の変更による系列の断絶を書く
@@ -3576,7 +3605,31 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - **trigger**: GSC、記事企画、テーマ欠測のいずれかで具体的な検索需要が確認できたとき。
 - **制約**: 約4,000件の未使用項目や約17万metric相当を一括投入しない。1バッチ最大20件、公開後4週の実測を次バッチのgateにする。
 
+### [GEO-DEV-LOCAL-R2-01] Mac の dev-server で公開前の Geo 生成物 (.local/r2) をローカル確認できるようにする
+
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-08] [領域:管理]
+
+- **事象**: `scripts/dev-server.ts` は R2 を `.local/r2` で上書きする仕組みが Windows の gateway にしか無く、Mac では公開前の Geo bundle を dev server で確認できない。2026-10-08 の `/geo/population-low-elevation` は、Geo 担当が一時的な中継を組んで確認した。
+- **trigger**: 次に新しい Geo 分析を公開前に確認するとき。
+- **完了条件**: Mac でも `.local/r2` を優先して読む dev server の起動方法が手順書にあり、公開前の Geo ページを表示できる。
+
+### [REFERENCE-METRIC-FOLLOWUP-01] 参考文献由来の指標の追補 (熱中症の人口当たり・男女比の 2025 年国勢調査)
+
+タグ: [コンテンツ品質] [種類:制作] [実行:対話] [起票:2026-10-08] [領域:データ]
+
+- **内容**: ① `heatstroke-deaths` は実数のみ。人口 10 万人当たりの計算型 metric (`fetcherKey: calculated`) を足すと県の比較に使える。② `sex-ratio-age-20-39` は 2015・2020 年のみ。2025 年国勢調査の 5 歳階級別人口が公表されたら年を足す (`.claude/scripts/data/fetch-census-sex-ratio-20-39.mjs`)。
+- **trigger**: ①は熱中症を扱う記事やテーマを作るとき。②は 2025 年国勢調査の年齢別確定値の公表時。
+- **完了条件**: それぞれ指標が R2 に反映され、ランキングページで確認できる。
+
 ## 🟣 判断待ち — やるかどうかの意思決定が未了
+
+### [METRIC-INTERNET-USAGE-STALE-01] 2006 年で止まったインターネット利用率の指標を公開し続けるか決める
+
+タグ: [コンテンツ品質] [種類:意思決定] [実行:ユーザー] [起票:2026-10-08] [領域:データ]
+
+- **事実 (2026-10-08 実測)**: `internet-usage-rate-10plus` (社会生活基本調査 SSDS G7000) は 2001・2006 年の 2 回分しか無く、この項目は 2006 年で終わっている。『統計から読み解く47都道府県ランキング 消費編』a24 (SNS・インターネット利用率) の代替として作った。より新しい通信利用動向調査には都道府県別の表が e-Stat に無い。
+- **選択肢**: そのまま公開する (古い年であることは年表示で分かる) / 非公開にして a24 を一次資料なしに戻す / 総務省の通信利用動向調査の公表資料から都道府県別の値を手動取得で作る。
+- **完了条件**: 方針が決まり、台帳 `prefecture-ranking-consumption/analyses.json` の a24 と指標の公開状態がそれに揃う。
 
 ### [DEPS-BRACES-GATE-01] 修正版が無い braces 脆弱性で落ち続ける Security Scan の high ゲートをどう扱うか決める
 タグ: [インフラ・計測] [種類:意思決定] [実行:ユーザー] [検証:npm audit --audit-level=high] [起票:2026-10-06] [領域:管理]
