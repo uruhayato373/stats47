@@ -1004,6 +1004,7 @@ updated: 2026-10-06
   2. `set-effort` 4 件は 2026-10-02 に canary 済みで全件合格 (Sonnet 5.5 の xhigh → high、各 3 回)。recall はすべて 1.0 → 1.0、1 回の費用は article-writer 10%・blog-critic 15%・open-data-curator 6%・sns-renderer 5% 減。frontmatter に `effort: high` を書くかはオーナー判断待ち。課題は合成の 1 題ずつなので、書いたら 2 週の実運用で品質を見る
   3. 費用の大半はメインセッション (4 週 $1,231・Opus 5 / 5.5 の xhigh が中心)。対話の既定 effort を下げるかはオーナーの使い方次第なので、`/ops/agents` の「メインセッション」を週次で見る
 - **完了条件**: 合格した 4 体の frontmatter に effort を書き (またはオーナーが見送りを決め)、次の `npm run model-usage:report` で `set-effort` 提案が消えている。
+- **2026-10-08 適用 (オーナーの「できることは全てやって」を受けて)**: 4 体の frontmatter に `effort: high` を書き、`npm run model-usage:report` の提案は 0 件になった (`npm run model-usage:test` 15 件通過)。**残り**: 2026-10-22 まで 4 体の実運用で見落とし・差し戻しが増えないかを見る (増えたら effort を外す)。code-reviewer の sonnet 化の監視 (2026-10-30 まで) と、メインセッションの effort の見直しは上の 1・3 のとおり。
 - **2026-10-05 推奨 (W41 Could 2・オーナー判断待ち)**: 4 体 (open-data-curator / sns-renderer / article-writer / blog-critic) の frontmatter に `effort: high` を書く。根拠は canary 4 件とも recall 1.0 → 1.0、1 回の費用 5〜15% 減 (`.claude/state/metrics/model-usage/latest.json` の canary)。課題は合成 1 題ずつなので、書いたら 2 週の実運用で見落とし・差し戻しの増加を見て、増えたら外す。
 
 ### [ADMIN-MCP-STATUS-01] 管理画面で、この PC が使う MCP の一覧と接続状況を見られるようにする
