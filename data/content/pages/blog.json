@@ -874,7 +874,7 @@
       "id": "blog:bonito-catch-zero-prefectures-gap",
       "kind": "blog",
       "key": "bonito-catch-zero-prefectures-gap",
-      "title": "カツオ漁獲ゼロの県はなぜ13もあるのか",
+      "title": "カツオ漁獲「ゼロの県」は年ごとに顔ぶれが変わる",
       "href": "/blog/bonito-catch-zero-prefectures-gap",
       "published": true,
       "rankingKeys": [
@@ -3174,12 +3174,17 @@
       "id": "blog:fishery-species-prefecture-specialty",
       "kind": "blog",
       "key": "fishery-species-prefecture-specialty",
-      "title": "特産魚種は地理が決める──親潮×黒潮の境界線で分かれる47都道府県の漁獲構造",
+      "title": "特産魚種は地理で決まる?",
       "href": "/blog/fishery-species-prefecture-specialty",
       "published": true,
       "rankingKeys": [
+        "fishery-species-catch-bonito",
+        "fishery-species-catch-japanese-squid",
+        "fishery-species-catch-kelp",
+        "fishery-species-catch-mackerel",
         "fishery-species-catch-pacific-saury",
         "fishery-species-catch-pollock",
+        "fishery-species-catch-sardine",
         "fishery-species-catch-scallop",
         "fishery-species-catch-snow-crab"
       ],
@@ -9048,10 +9053,12 @@
       "id": "blog:school-teacher-annual-income",
       "kind": "blog",
       "key": "school-teacher-annual-income",
-      "title": "教員給与は国基準なのに愛知と愛媛で差｜大都市が上位とは限らない逆説 (2023)",
+      "title": "教員年収の首位が毎年変わるのはなぜ?",
       "href": "/blog/school-teacher-annual-income",
       "published": true,
       "rankingKeys": [
+        "elementary-school-teachers",
+        "junior-high-school-teachers",
         "school-teacher-annual-income"
       ],
       "tagIds": [
@@ -9060,24 +9067,6 @@
         "tag:t-01515fa89e96",
         "tag:regional-disparity",
         "tag:t-dc6e2aafeb9e"
-      ]
-    },
-    {
-      "id": "blog:school-teacher-annual-income-prefecture-gap",
-      "kind": "blog",
-      "key": "school-teacher-annual-income-prefecture-gap",
-      "title": "教員の年収、首位はなぜ毎年変わる?",
-      "href": "/blog/school-teacher-annual-income-prefecture-gap",
-      "published": true,
-      "rankingKeys": [
-        "school-teacher-annual-income"
-      ],
-      "tagIds": [
-        "tag:t-a1fc8d38d115",
-        "tag:t-c4cf9fa742c8",
-        "tag:t-89a80a8abda1",
-        "tag:t-3dfcbdc38d3e",
-        "tag:t-029445e29c2a"
       ]
     },
     {
