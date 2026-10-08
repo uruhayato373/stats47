@@ -90,6 +90,22 @@ test("blog単独更新では無関係な県画像stagingをpushしない", () =>
   assert.equal(finalPushIndex(calls), -1);
 });
 
+test("--skip で指定した task は作らず、残りの task と末尾の push は今までどおり走る", () => {
+  const { status, calls } = runRunSh({ args: ["--skip", "page-components"] });
+  assert.equal(status, 0);
+  assert.equal(calls.some((c) => c.includes("export-page-components-snapshot.ts")), false);
+  assert.equal(calls.some((c) => c.includes("generate-ranking-items.ts")), true);
+  assert.equal(calls.some((c) => c.includes("export-affiliate-ads-snapshot.ts")), true);
+  assert.ok(finalPushIndex(calls) >= 0, "除外したあとも末尾の全体 push は走る");
+});
+
+test("--skip の task 名の typo は何も作らずに失敗する (除外が黙って効かないのを防ぐ)", () => {
+  const { status, stdout, calls } = runRunSh({ args: ["--skip", "page-component"] });
+  assert.equal(status, 1);
+  assert.match(stdout, /--skip 'page-component' に一致する task がありません/);
+  assert.equal(calls.length, 0);
+});
+
 test("ranking-items を master より先に生成し metadata refresh を master 直前に保つ", () => {
   const source = fs.readFileSync(RUN_SH, "utf8");
   const taskBlock = source.match(/declare -a TASKS=\(\n([\s\S]*?)\n\)/)?.[1] ?? "";
