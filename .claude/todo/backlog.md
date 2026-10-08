@@ -3207,44 +3207,6 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - **禁止**: 承認前に R2 の item.json を一括で書き換えない。
 - **完了条件**: config の `seoTitle` / `seoDescription` に観測値を含むものが 0 件になり、item.json の文言が最新の値と一致する。
 
-### [THEME-REVIEW-TOURISM-CPI-01] 観光・物価テーマの見直し提案を承認してもらい、実装して公開する
-タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run validate:catalog --workspace=@stats47/data-configs] [起票:2026-10-07] [領域:データ] [進行中]
-
-- **経緯 (2026-10-07)**: 3 テーマの見直しの公開後、管理画面 `/quality/theme-viewpoints` の次の候補 (GSC 2026-W40 の表示回数順) の観光 (147 回) と物価 (140 回) の提案を、
-  `reference/reviews/2026-10-07-theme-{tourism,consumer-prices}.md` に `proposal-ready` で書いている (theme-designer、effort medium)。
-- **次**: 提案の判断点をオーナーに示して承認を取る → `theme-proposal-format.md` の手順で実装・検証 → 公開の時期を決める
-  (2 テーマとも 9 月の実験 THEME-STRUCTURE-20260908-* の d56 = 2026-11-06 が pending)。
-- **2026-10-07 承認**: オーナーが両提案の推奨案すべて (「おすすめで」) と、実装・検査が済みしだい d56 を待たずに公開することを承認した。
-- **2026-10-08 途中経過 (develop)**: metric config を先に入れた。客室稼働率を 2009〜2024 年、ホテル営業施設数を 1997〜2017 年、
-  物価地域差指数 9 指標を 2013〜2024 年へ広げ、新規の実宿泊者数 (`actual-overnight-guests`、`0000010107` / `G7103`) を registry・極性・
-  調査の対応表 (`data/surveys/taxonomy.json`) に登録した。12 指標の e-Stat の実在年は、年の確認記録の正本
-  `data/estat/year-coverage/queue.json` に全都道府県で記録した (`audit-estat-year-coverage.ts --metrics`。同日、この記録を正本にする改修も入れた)。
-  **次**: 2 テーマの `data/themes/catalogs/*.json` を提案どおりに編集 → generate / validate / baseline / ratchet → 選定根拠の backfill →
-  `data-refresh.yml` で 12 指標の観測値を取得 (まず dryRun) → develop → main → page-components と ranking-items を R2 へ反映 → 本番確認。
-  新規指標は `/ranking/actual-overnight-guests` を出すまで、ranking-items とキー一覧 (KNOWN / SITEMAP) の同期も要る。
-- **2026-10-08 カタログ実装済み (develop、PR #1100)**: 2 テーマのカタログ・生成物・件数基準・調査紐付けの下限・E2E を提案どおりに変え、
-  選定根拠 15 件を gate に通して書いた (提案文書は `implemented-pending-release`)。`data-refresh` の dryRun を依頼済み。
-  **残り**: dryRun の件数を見て実 push を依頼 → PR #1100 の CI を green にしてマージ → page-components と ranking-items を R2 へ反映・キー一覧を同期 →
-  本番で 2 テーマと `/ranking/actual-overnight-guests` を確かめる。
-- **2026-10-08 観測値は R2 に反映済み**: dryRun (run 37692245201) は ok 12 / fail 0。実 push (run 37693107860) の観測値は公開 URL で確かめた
-  (物価 9 指標 564 行 = 47 県 × 2013〜2024、客室稼働率・実宿泊者数 752 行 = 47 × 2009〜2024、ホテル営業施設数 987 行 = 47 × 1997〜2017)。
-  PR #1100 の pr-quality-check はコード変更の最後の commit (4e21dd945) で全 job 成功。localhost の 5 幅確認は崩れなし
-  (実宿泊者数のカードは ranking-items、物価のヒートマップは page-components の R2 反映後に出る)。
-- **2026-10-08 派生 snapshot も R2 に反映済み**: run 37693107860 の手順 10 が develop から page-components と ranking-items を作って push していた
-  (本番 R2 の 2 テーマの page-components は develop の生成物と一致、`app/ranking/actual-overnight-guests/item.json` は 200)。
-  手順 10 の `municipality-ranking` だけが一時的な通信エラーで落ちた (今回の変更とは無関係。`DATA-REFRESH-MUNI-FETCH-RETRY-01`)。
-  develop から派生物が出る経路は `DATA-REFRESH-DERIVED-FROM-DEVELOP-01` に起票した。キー一覧 (KNOWN / SITEMAP) は sync-ranking-keys の keys PR を待たず
-  develop で再生成した (追加 13 件・削除 0)。
-- **2026-10-08 本番公開**: PR #1100 を main へマージ (b3fb1ca87、00:01 UTC)。デプロイ後の本番で、`/themes/tourism` の 6 章と
-  `/themes/consumer-prices` の 5 章がカタログの順に出て、実宿泊者数のカードと費目別のヒートマップが描かれ、エラー表示が無いことを確かめた。
-  `/ranking/actual-overnight-guests` は Googlebot UA で 200 (00:07 UTC から)。
-  物価テーマの「相関が高いテーマ外の指標」は、マージ前の main のカタログで計算した一覧 (外した `average-temperature` を基準にした 7 件) が
-  残っていたので、代理起動した Correlation Refresh run 45 で作り直した (00:18 UTC、55 テーマで食い違い 0。再発防止は `CORRELATION-THEME-CATALOG-SYNC-01`)。
-  **残り**: 新しい 13 キーの OGP 画像。代理起動した sync-snapshots (run 103) は、
-  オーナーが手動で起動した run 104 に取り消された。run 104 に sync-ranking-keys job があればそこで作られる。無ければ ranking-items で依頼し直す。
-- **停止条件**: 承認前は `data/themes/catalogs/` と metric config を編集しない。公開 (main へのマージ・R2 反映) は別に承認を取る。
-- **完了条件**: 2 テーマの提案の status が `implemented-pending-release` 以降になり、本番で提案どおりの章・カード・図が出ている。
-
 ### [THEME-CATALOG-OPT-RELEASE-01] 2026-10-07・10-08 に公開したテーマ改善の実験を、9 月の実験から引き継いで登録する
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:node .claude/scripts/themes/validate-theme-state.mjs] [起票:2026-10-06] [期日:2026-10-10] [領域:データ] [進行中]
 
