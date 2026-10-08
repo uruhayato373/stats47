@@ -3215,6 +3215,30 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
   あわせて、分類番号を持たない見出し (「鮮魚」「食事代」など) は番号を作らず、品目範囲 (例「170～189」) を code にし `codeKind: "range"` で区別した (`66e39568e`)。この方式でよいかを確認する。
 - **完了条件**: 「1収入」シートの品目を公式 Excel の行数どおりに拾い、テストで固定している。
 
+### [CI-R2-WRITE-PENDING-REPLACED-01] R2 書き込みの workflow を続けて起動すると、待機中の run がジョブ 0 件のまま取り消される
+
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-09] [領域:管理]
+
+- **事象 (2026-10-08〜09 に 2 回)**: `concurrency: group: r2-write` (`cancel-in-progress: false`) の workflow は、実行中 1 本のほかに待機を 1 本しか持てず、
+  後から来た run が待機中の run を取り消す。手動で起動した run がジョブ 0 件で cancelled になった: generate-ogp-images の ranking-cards
+  (run 37738579394、後発は他セッションの sync-snapshots)、sync-snapshots ranking-items (run 37770625093、後発は blog-auto-publish)。
+  起動した側には失敗に見えず、結果を確かめないと反映漏れが残る。
+- **次**: 消費型の依頼ファイル経由の起動に寄せるか、起動側の手順書・スクリプトに「conclusion が cancelled かつジョブ 0 件なら再起動する」を入れるかを決める。
+- **完了条件**: R2 書き込みの run を続けて起動しても、取り消された run が自動で再実行されるか、起動側が必ず気づく。
+
+### [CI-SKIPCI-HEAD-BLOCKS-PR-01] 自動コミットが develop の先頭に積まれるたびに develop→main の PR の必須検査が外れる
+
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [起票:2026-10-09] [領域:管理]
+
+- **事象 (2026-10-09)**: PR #1113 で、検査中に blog-auto-publish の outbox 掃除と、cloudflare・psi の日次計測の commit-back (いずれも skip-ci 指定) が
+  develop の先頭になり、必須の Code Quality Check が head に付かず BLOCKED になった。マージまでに実コミットを 3 回 push し直した。
+  仕組みは `.claude/rules/branch-workflow.md` に書かれているが、対策は手作業のまま。
+- **次**: ① commit-back が先頭になったら同じ head で必須検査を起動し直す workflow ② 必須検査を直前の非 skip-ci コミットの結果で満たす判定
+  ③ commit-back を別ブランチへ集める、のどれを採るかを決める。
+- **完了条件**: commit-back が先頭に積まれても、手で push し直さずに develop→main の PR をマージできる。
+
+## 🟢 低 — 時期未定・条件付き (trigger は本文に)
+
 ### [DATA-SHUKUHAKU-CORRECTION-01] 宿泊旅行統計の 2026 年分を足すときに、層化基準の変更による系列の断絶を書く
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-08] [領域:データ]
 
