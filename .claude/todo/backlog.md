@@ -378,7 +378,7 @@ updated: 2026-10-06
 - **完了条件**: カタログを変えずに再生成した結果がコミット済みのファイルと一致する。
 
 ### [E2E-THEME-PR-PAGECOMPONENTS-01] PR の代表 E2E がテーマの図を本番 R2 の page-components で描くので、PR で変えた図の種類を検証できない
-タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:npm run test:e2e --workspace=apps/web -- tests/e2e/public-route-contract.spec.ts] [起票:2026-10-08] [領域:サイト]
+タグ: [インフラ・計測] [種類:改善] [実行:対話] [検証:npm run test:e2e --workspace=apps/web -- tests/e2e/public-route-contract.spec.ts] [起票:2026-10-08] [領域:サイト] [進行中]
 
 - **事実**: `pr-quality-check.yml` の Representative E2E は PR のビルドを `R2_PUBLIC_FETCH_URL=https://storage.stats47.jp` で起動し、テーマの図の定義を
   `loadPageComponents('theme', key)` で本番 R2 から読む (`ThemePageLayout.tsx`)。page-components を R2 へ反映する `sync-snapshots.yml` は main を checkout するので、
@@ -386,6 +386,13 @@ updated: 2026-10-06
   `public-route-matrix.ts` の `representativeTypes` に `cpi-heatmap` を入れると PR の E2E が落ちるため、PR では `cpi-profile` だけを見る形にした。
 - **次**: E2E のサーバーが PR で生成した `apps/web/scripts/data/page-components/theme/*.json` を読む経路 (例: 生成物を R2 の代わりに返す env) を作るか、
   page-components を PR の preview 用の R2 prefix に置く。どちらにするかを決めてから実装する。
+- **2026-10-08 実装 (develop、オーナー承認の推奨案)**: `.github/scripts/r2-overlay-server.mjs` を作り、PR の代表 E2E の job で
+  アプリの `R2_PUBLIC_FETCH_URL` をこれに向けた。`app/page-components/<type>/<key>.json` だけを PR の生成物から返し、それ以外は本番 R2 へ取り次ぐ。
+  consumer-prices の `representativeTypes` に `cpi-heatmap` を戻した。手元で CI と同じ条件 (S3 の認証情報なし) で、代表 E2E 37 件が通り、
+  PR の定義から cpi-heatmap を外すと consumer-prices が落ちることを確かめた。
+  注意: S3 の認証情報がある環境では、アプリは公開 URL を使わず本番 R2 を直接読むので、この中継は効かない (手元の確認で踏んだ)。
+  **残り**: 次の develop → main の PR で、Representative E2E が通り、job のログ (`/tmp/pr-e2e-r2-overlay.log` は残らないので
+  step の成否) を確かめてからカードを消す。
 - **完了条件**: PR で catalog の componentType を変えたとき、その PR の E2E が新しい図の種類で `data-data-state="ready"` を確かめられ、
   consumer-prices の `representativeTypes` に `cpi-heatmap` を戻しても PR の時点で通る。
 
