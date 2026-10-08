@@ -3162,6 +3162,8 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - **完了条件**: 4 本が `stale-data-years.json` から消え、本番の記事が 2023 年の値を出す。
 - **進捗 (2026-10-08)**: 4 本とも 2023 年で書き直した。カツオ漁獲量の記事は critic の BLOCK (タイトルが理由を断定) で「カツオ日本一が静岡と宮城で割れる理由」に改題したため、
   公開済みの AI 背景 (しかも主題と無関係な書類かばんの絵) が stale になり、quality-gate が背景で止める。自動公開はこの 1 本だけを skip し、送り箱に残る。
+  **公開 (2026-10-08)**: 残りの 3 本 (fish-catch-vs-consumption-prefecture・bonito-catch-zero-prefectures-gap・fishery-species-prefecture-specialty) は
+  blog-auto-publish run 263・264 で 2023 年版が公開され、本番で 200 を返す。outbox に残るのは bonito-catch-prefecture だけ。
   **残り**: Codex が使えるセッションで `npm run blog-images:codex -- request-article --slug bonito-catch-prefecture --article contents/blog/bonito-catch-prefecture/article.md`
   (/generate-blog-images の Mode A) で記事固有背景を作り、quality-gate の pass を確かめて develop へ push する。姉妹記事の背景は使い回さない (同 skill の規約)。
 
