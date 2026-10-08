@@ -20,7 +20,7 @@ $ARGUMENTS — [--mode <expert|proofread>] <記事パスまたは slug>
 
 1. URL が渡された場合: `/blog/{slug}` から slug を抽出
 2. slug のみの場合: 以下の優先順で探索
-   - `docs/21_ブログ記事原稿/{slug}/article.md` (下書き)
+   - `contents/blog/{slug}/article.md` (下書き)
    - `.local/r2/blog/{slug}/article.md` (公開済み)
 3. フルパスの場合: そのまま使用
 
@@ -73,7 +73,7 @@ $ARGUMENTS — [--mode <expert|proofread>] <記事パスまたは slug>
 4. 上記の構造・観点に従いレビューを作成する
 5. レビュー全文はセッション内で提示し、別ファイルには保存しない。横断的な未完了施策だけを
    `.claude/todo/improvements.md` へID付きで統合する。
-5b. **★公開ゲート用 `review.md` は必ず書き出す**: `docs/21_ブログ記事原稿/{slug}/review.md` に下記を Write。
+5b. **★公開ゲート用 `review.md` は必ず書き出す**: `contents/blog/{slug}/review.md` に下記を Write。
    `quality-gate.mjs` は `published:true` の記事でこの `review.md` (verdict: PASS・実体200字以上) が
    無いと公開を blocker で止める (自己採点公開の防止)。**記事本文 (article.md) は編集しない**。
    ```markdown
@@ -96,7 +96,7 @@ $ARGUMENTS — [--mode <expert|proofread>] <記事パスまたは slug>
 
 ### 保存先 (expert モード)
 
-公開ゲート用 `docs/21_ブログ記事原稿/{slug}/review.md` のみ。レビュー全文はセッション出力に留める。
+公開ゲート用 `contents/blog/{slug}/review.md` のみ。レビュー全文はセッション出力に留める。
 
 ---
 
@@ -225,7 +225,7 @@ curl -s "https://storage.stats47.jp/app/blog/all.json" \
 curl -s "https://storage.stats47.jp/app/blog/all.json" \
   | jq -r '.articles | map(select(.proofreadAt != null and .proofreadAt < .updatedAt)) | sort_by(.updatedAt) | reverse | .[] | [.slug, .proofreadAt, .updatedAt] | @tsv'
 
-# 作業中ドラフト (docs/21 outbox) は frontmatter を直接見る: grep -L "proofreadAt:" docs/21_ブログ記事原稿/*/article.md
+# 作業中ドラフト (contents/blog outbox) は frontmatter を直接見る: grep -L "proofreadAt:" contents/blog/*/article.md
 ```
 
 ### 出力フォーマット (proofread モード)

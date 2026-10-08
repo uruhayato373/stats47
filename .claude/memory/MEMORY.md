@@ -44,7 +44,7 @@
 - [feedback_no_deploy_per_iteration.md](feedback_no_deploy_per_iteration.md) — 変更のたびに本番デプロイしない。UI/ロジック反復はlocalhostで確認、まとまりで1回。デプロイは明示指示or本番固有問題のみ+実行前確認。2026-06-20に7回で指摘
 - [feedback_cloudflare_workers_env_r2_skip.md](feedback_cloudflare_workers_env_r2_skip.md) — 本番でテーマ空/home featured空→wrangler.toml CLOUDFLARE_WORKERS="true"を疑う。shouldSkipRemoteR2Readが空ok([])返し黙って失敗。テーマはR2 values.jsonのみ読む+force-dynamic必須(2026-06-20根治)
 - [feedback_dev_server_web_only.md](feedback_dev_server_web_only.md) — devは`npm run dev:web`(=turbo --filter=web)。root`npm run dev`は23pkgで遅い。常駐はbackground+Ready polling。Turbo devのR2 URL/空S3変数継承と公開前指標の実HTMLを確認してから画面監査。正典local-environment.md
-- [project_blog_auto_publish_reconcile_limits.md](project_blog_auto_publish_reconcile_limits.md) — blog公開の背景未生成skipは本文staging前に実行。通信・SHA・生成失敗は停止。reconcileは未公開+改稿、上限撤廃済み。docs/21=ephemeral outbox
+- [project_blog_auto_publish_reconcile_limits.md](project_blog_auto_publish_reconcile_limits.md) — blog公開の背景未生成skipは本文staging前に実行。通信・SHA・生成失敗は停止。reconcileは未公開+改稿、上限撤廃済み。contents/blog=ephemeral outbox
 - [feedback_fetch_origin_before_implementing.md](feedback_fetch_origin_before_implementing.md) — 実装前にgit fetch+origin/main vs ローカルHEAD diff。並行セッション同日pushでstale→重複実装事故(2026-06-14 PR#479)。施策IDを既存検索
 - [feedback_home_pure_ssg_r2_empty.md](feedback_home_pure_ssg_r2_empty.md) — トップ/は純SSGでビルド時R2読めず空焼き込み→修正はforce-dynamic(#478)。revalidateは本OpenNext構成で無効。build envにR2 URL足すとgenerateStaticParams爆発で不採用
 - [project_blog_remediation_loop.md](project_blog_remediation_loop.md) — ブログ品質を順次是正。次に直す記事=remediation-queue.json(統合スコア/must-fix)。週次Mustで消化、critic PASS必須。記事アーキタイプA-E+図あたり字数gate
@@ -55,7 +55,7 @@
 - [project_ranking_publish_pipeline_gap.md](project_ranking_publish_pipeline_gap.md) — ranking公開はisActive:trueだけ不足。KNOWN/SITEMAP/R2 values/OGPが必要。画像のbounded batchは新規manifest欠落を旧manifest移行より優先（2026-08-26のOGP 404再発防止）
 - [project_estat_backfill_lessons.md](project_estat_backfill_lessons.md) — e-Stat backfillはUPSERT必須。DELETE+INSERTは他ソース年度喪失(2026-05-27事故)。year_code正規化+全年度取得
 - [project_blog_brushup_risk_2026_05_25.md](project_blog_brushup_risk_2026_05_25.md) — AI auto-brushupは13%FAIL+27%WARN。quality-gate.mjsは形式のみでfactual不足。data/*.jsonと本文数値の突合step必須
-- [project_blog_publish_cloud_first.md](project_blog_publish_cloud_first.md) — ブログ公開はpublish-blog.yml(docs/21→CI→R2)。新規workflowは--ref develop、直列ディスパッチ必須
+- [project_blog_publish_cloud_first.md](project_blog_publish_cloud_first.md) — ブログ公開はpublish-blog.yml(contents/blog→CI→R2)。新規workflowは--ref develop、直列ディスパッチ必須
 - [project_sns_10k_roadmap.md](project_sns_10k_roadmap.md) — SNS 10K戦略(2026-05-24)。IG 10Kを9ヶ月、Xは1-2K維持。数字対比・意外性で引く/IG Reels集中
 - [feedback_weekly_plan_content_over_sns.md](feedback_weekly_plan_content_over_sns.md) — 週次計画のMustは記事公開・SEOに集約。SNS/noteはShould以下に降格
 - [feedback_weekly_review_article_status_from_db.md](feedback_weekly_review_article_status_from_db.md) — 週次レビューの記事公開判定はarticlesテーブルが真実源。git/backlogだけだと誤判定

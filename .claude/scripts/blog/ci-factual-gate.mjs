@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * CI 用 factual gate。docs/21_ブログ記事原稿/<slug> のドラフトに対し
+ * CI 用 factual gate。contents/blog/<slug> のドラフトに対し
  * article-factual-check.mjs (library) を実行し、blockers があれば exit 1。
  *
  * 公開パイプライン (publish-blog.yml) が prod R2 へ push する前のゲート。
@@ -22,7 +22,7 @@ if (!slug) {
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, "..", "..", "..");
-const dir = path.join(ROOT, "docs/21_ブログ記事原稿", slug);
+const dir = path.join(ROOT, "contents/blog", slug);
 const articlePath = path.join(dir, "article.md");
 
 if (!fs.existsSync(articlePath)) {

@@ -43,7 +43,7 @@ const getArg = (flag) => {
   return i >= 0 ? args[i + 1] : null;
 };
 const SLUG = getArg("--slug");
-const BASE = getArg("--base") || "docs/21_ブログ記事原稿";
+const BASE = getArg("--base") || "contents/blog";
 const KEYS_OVERRIDE = getArg("--keys");
 const YEAR = getArg("--year");
 const DRY_RUN = args.includes("--dry-run");

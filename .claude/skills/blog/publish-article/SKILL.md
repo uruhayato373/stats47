@@ -6,7 +6,7 @@ disable-model-invocation: true
 primary_agent: blog-editor
 ---
 
-下書き記事（`docs/21_ブログ記事原稿/<slug>/`）を公開staging（`.local/r2/app/blog/<slug>/`）にコピーし、公開用フロントマターと画像bundleを整える。
+下書き記事（`contents/blog/<slug>/`）を公開staging（`.local/r2/app/blog/<slug>/`）にコピーし、公開用フロントマターと画像bundleを整える。
 
 ## 引数
 
@@ -19,7 +19,7 @@ $ARGUMENTS — 公開する記事のスラッグ（ディレクトリ名）
 
 - 事前に `/proofread-article` で校正チェックを済ませておくこと
 - **★ blog-critic の意味レビューを通していること**: `published:true` 記事は
-  `docs/21_ブログ記事原稿/<slug>/review.md` (別 agent `blog-critic` 生成、`verdict: PASS`・実体200字以上) が必須。
+  `contents/blog/<slug>/review.md` (別 agent `blog-critic` 生成、`verdict: PASS`・実体200字以上) が必須。
   無い / REVISE のままだと `quality-gate.mjs` が blocker で公開を止める (自己採点公開の構造的防止)。
   書いた本人が採点せず、別コンテキストの blog-critic に review してもらうこと。
 - 公開前に `node .claude/scripts/blog/quality-gate.mjs <slug>` が exit 0 (critic PASS 含む) であること
@@ -29,16 +29,16 @@ $ARGUMENTS — 公開する記事のスラッグ（ディレクトリ名）
 
 ### 1. スラッグを確認する
 
-引数が空の場合は `docs/21_ブログ記事原稿/` 配下のディレクトリ一覧を表示してユーザーに選択を求める:
+引数が空の場合は `contents/blog/` 配下のディレクトリ一覧を表示してユーザーに選択を求める:
 
 ```bash
-ls docs/21_ブログ記事原稿/
+ls contents/blog/
 ```
 
 ### 2. ソースの存在確認
 
 ```bash
-ls "docs/21_ブログ記事原稿/<slug>/"
+ls "contents/blog/<slug>/"
 ```
 
 `article.md` が存在しない場合はエラーを出して終了する。
@@ -54,13 +54,13 @@ ls ".local/r2/app/blog/<slug>/" 2>/dev/null && echo "--- 既存ファイルあ�
 ソースのファイル一覧を表示:
 
 ```bash
-ls -la "docs/21_ブログ記事原稿/<slug>/"
+ls -la "contents/blog/<slug>/"
 ```
 
 ソースの article.md フロントマターを確認:
 
 ```bash
-head -20 "docs/21_ブログ記事原稿/<slug>/article.md"
+head -20 "contents/blog/<slug>/article.md"
 ```
 
 確認結果を表示してユーザーに続行の確認を求める。
@@ -69,7 +69,7 @@ head -20 "docs/21_ブログ記事原稿/<slug>/article.md"
 
 ```bash
 mkdir -p ".local/r2/app/blog/<slug>"
-cp -r "docs/21_ブログ記事原稿/<slug>/." ".local/r2/app/blog/<slug>/"
+cp -r "contents/blog/<slug>/." ".local/r2/app/blog/<slug>/"
 ```
 
 コピー結果を確認:
@@ -144,23 +144,23 @@ npx tsx packages/r2-storage/src/scripts/push-generated-image-set.ts \
 
 ### 6. 下書きフォルダを削除する
 
-公開が完了したため、下書きフォルダは不要になる（docs/21 は「公開したら消す」ephemeral な下書き staging。記事の正典 SSOT は R2 app/blog）。ユーザーに確認してから削除する:
+公開が完了したため、下書きフォルダは不要になる（contents/blog は「公開したら消す」ephemeral な下書き staging。記事の正典 SSOT は R2 app/blog）。ユーザーに確認してから削除する:
 
 ```bash
-rm -rf "docs/21_ブログ記事原稿/<slug>"
+rm -rf "contents/blog/<slug>"
 
 # 取り残し検証 (公開済みなのに下書きが残っていれば exit 1)。/deploy Step 2 でも自動実行される。
 node .claude/scripts/lib/check-published-drafts.cjs
 ```
 
-> ⚠️ このステップを飛ばすと、公開済みの古い下書きが docs/21 に残り R2(live) と drift して退行リスクになる（2026-05-30 に 6 件の取り残しを検出・削除した事故由来）。`check-published-drafts.cjs` が再発を機械検出する。
+> ⚠️ このステップを飛ばすと、公開済みの古い下書きが contents/blog に残り R2(live) と drift して退行リスクになる（2026-05-30 に 6 件の取り残しを検出・削除した事故由来）。`check-published-drafts.cjs` が再発を機械検出する。
 
 ### 7. 完了メッセージ
 
 ```
 ✅ 公開フォルダへのコピーが完了しました
 
-  コピー元: docs/21_ブログ記事原稿/<slug>/  （削除済み）
+  コピー元: contents/blog/<slug>/  （削除済み）
   コピー先: .local/r2/app/blog/<slug>/
   publishedAt: <設定した日付>
 

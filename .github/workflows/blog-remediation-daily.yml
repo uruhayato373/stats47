@@ -3,7 +3,7 @@ name: 📝 Blog remediation daily (今日のリライト10記事)
 # 是正ループの日次運用入口 (Claude Pro セッションで agent がリライトする運用)。
 # CI で Claude は動かさない (決定的・APIコストゼロ)。
 #   1. remediation-queue を最新化 (公開R2 audit + 最新GSC) → develop へ commit-back
-#   2. docs/21 (ephemeral outbox) を自動掃除: 公開済み (R2 と内容一致) ドラフトを git rm。
+#   2. contents/blog (ephemeral outbox) を自動掃除: 公開済み (R2 と内容一致) ドラフトを git rm。
 #      広い git add で出戻りした残骸も翌日には自動で消える (2026-06-21 追加・残骸再発防止)
 #      内容一致を要求=brushup 改稿中 (R2 旧版と差分) を誤削除しない安全装置
 #   3. pending 上位 10 件を「今日のリライト」Issue に upsert 通知
@@ -94,7 +94,7 @@ jobs:
           NEXT_PUBLIC_ESTAT_APP_ID: ${{ vars.NEXT_PUBLIC_ESTAT_APP_ID }}
         run: node .claude/scripts/blog/audit-chart-provenance.mjs
 
-      # docs/21 (ephemeral outbox) の自動掃除: 「published:true かつ R2 (正典) の article.md と
+      # contents/blog (ephemeral outbox) の自動掃除: 「published:true かつ R2 (正典) の article.md と
       # 内容が完全一致」するドラフトを git rm する。広い git add で出戻りした残骸も翌日には自動で消える。
       # published:false の作業中ドラフト / R2 と差分のある改稿中 (brushup) は保持。R2 が SSOT なので削除は可逆。
       #
@@ -104,13 +104,13 @@ jobs:
       # 掃除の前に、critic の指摘を台帳に残して繰り返す型を backlog に起票する (正典: blog-quality-standards.md
       # 「critic の指摘の型と格上げ」)。outbox の掃除で review.md が消える前に記録する。同じ指摘は二重に書かない。
       # 記録・起票と掃除は互いの失敗で止めない (continue-on-error を増やさないよう 1 step にまとめる)。
-      - name: 🧹 Record critic findings + prune published drafts from docs/21 outbox
+      - name: 🧹 Record critic findings + prune published drafts from contents/blog outbox
         continue-on-error: true # 掃除・記録の失敗で Issue 通知本体を止めない
         env:
           R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
         run: |
           shopt -s nullglob
-          reviews=(docs/21_ブログ記事原稿/*/review.md)
+          reviews=(contents/blog/*/review.md)
           if [ ${#reviews[@]} -gt 0 ]; then
             node .claude/scripts/blog/record-critic-findings.mjs "${reviews[@]}" || echo "::warning::critic の指摘の記録に失敗"
           fi
@@ -158,7 +158,7 @@ jobs:
           OLD=$(node -e "$COUNT" /tmp/lineage-prev.json) || { echo "前回 queue のスキーマが古い → 比較をスキップ"; exit 0; }
           echo "元データ消失 (neither): 前回 $OLD → 今回 $NEW"
           if [ "$NEW" -gt "$OLD" ]; then
-            echo "::error::SVG の元データ消失が $OLD → $NEW に増えました。公開時ゲート (quality-gate の svgLineageMissing) と docs/21 prune の安全装置を通らない経路があります。正典: .claude/rules/blog-data-schema.md §1.7"
+            echo "::error::SVG の元データ消失が $OLD → $NEW に増えました。公開時ゲート (quality-gate の svgLineageMissing) と contents/blog prune の安全装置を通らない経路があります。正典: .claude/rules/blog-data-schema.md §1.7"
             exit 1
           fi
           echo "✓ 増えていません (縮小専用ラチェット OK)"
@@ -239,7 +239,7 @@ jobs:
           }
 
           # prune-published-outbox の git rm 結果。ラチェットの baseline ではないので常に反映する。
-          git add -A "docs/21_ブログ記事原稿/"
+          git add -A "contents/blog/"
           # 図の年が古い記事の一覧もラチェットではないので常に反映する (取得に失敗した日はファイルが無いか変わらない)
           for f in data/blog/stale-data-years.json data/blog/stale-data-years.md; do
             if [ -f "$f" ]; then git add "$f"; fi
@@ -282,7 +282,7 @@ jobs:
           [ "$VALUE_OUTCOME" = "failure" ] && failed="$failed value"
           [ "$PROVENANCE_OUTCOME" = "failure" ] && failed="$failed provenance"
           if [ -n "$failed" ]; then
-            echo "::error::ラチェット失敗:$failed — 該当 queue の baseline だけを据え置きました。他の queue と docs/21 outbox は反映済みなので日次ループは回っています。詳細は data/blog/*-LATEST.md"
+            echo "::error::ラチェット失敗:$failed — 該当 queue の baseline だけを据え置きました。他の queue と contents/blog outbox は反映済みなので日次ループは回っています。詳細は data/blog/*-LATEST.md"
             exit 1
           fi
           echo "✓ ラチェット 3 種すべて OK"

@@ -32,7 +32,7 @@ for (const thumbnailExit of [20, 1]) {
       const doc = yaml.load(fs.readFileSync(path.join(WORKFLOW_DIR, 'blog-auto-publish.yml'), 'utf8'));
       const step = doc.jobs['auto-publish'].steps.find((s) => s.name.includes('Gate + Stage'));
       for (const slug of ['missing', 'ready']) {
-        const draft = path.join(dir, 'docs/21_ブログ記事原稿', slug);
+        const draft = path.join(dir, 'contents/blog', slug);
         fs.mkdirSync(draft, { recursive: true });
         fs.writeFileSync(path.join(draft, 'article.md'), '---\npublished: true\npublishedAt: 2026-09-07\n---\n本文\n');
       }

@@ -12,7 +12,7 @@ describe('恒久終了ブログの公開前ゲート', () => {
     'dam-count-prefecture-gap',
     'dam-count-vs-road-expressway-length',
   ])('%s はslug指定でも旧原稿path指定でも再公開を拒否する', (slug) => {
-    for (const arg of [slug, path.join(root, 'docs/21_ブログ記事原稿', slug, 'article.md')]) {
+    for (const arg of [slug, path.join(root, 'contents/blog', slug, 'article.md')]) {
       const result = spawnSync(process.execPath, [gate, arg], { cwd: root, encoding: 'utf8' });
       expect(result.status, result.stderr).toBe(1);
       const report = JSON.parse(result.stdout);

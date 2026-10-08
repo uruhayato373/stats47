@@ -52,8 +52,8 @@ function fixPrompt(slug) {
 OUTPUT は StructuredOutput tool で返す (人間向けテキスト不要)。
 
 あなたは article-writer。**既に rewrite 済みだが blog-critic が REVISE 判定**した記事を、指摘点に絞って修正する。
-記事: docs/21_ブログ記事原稿/${slug}/article.md
-critic レビュー: docs/21_ブログ記事原稿/${slug}/review.md ← **まずこれを読み、blocker/MAJOR 指摘を把握する**
+記事: contents/blog/${slug}/article.md
+critic レビュー: contents/blog/${slug}/review.md ← **まずこれを読み、blocker/MAJOR 指摘を把握する**
 
 ## 手順
 1. review.md を読み、verdict:REVISE の理由 (blocker/MAJOR の具体指摘) を特定する。
@@ -64,7 +64,7 @@ critic レビュー: docs/21_ブログ記事原稿/${slug}/review.md ← **ま�
    - **SVG の誤り/系譜欠落/欠落図**: fetch-ranking-data-r2.mjs で正データ取得 → generate-article-charts.ts で再生成
      (.claude/rules/blog-data-schema.md §1.5/1.6・blog-svg-chart-standards.md に準拠。3点セット + columns/portrait)。
    - 数値・出典・順位は data/*.json と必ず突合 (捏造禁止)。frontmatter published は触らない。
-3. 検証: node .claude/scripts/blog/quality-gate.mjs docs/21_ブログ記事原稿/${slug}/article.md
+3. 検証: node .claude/scripts/blog/quality-gate.mjs contents/blog/${slug}/article.md
    blocker 0 を目指して反復 (最大3回)。
 4. StructuredOutput で gatePassed / remainingBlockers / fixedIssues / notes を返す。
 
@@ -77,13 +77,13 @@ function criticPrompt(slug) {
 OUTPUT は StructuredOutput tool で返す。
 
 あなたは blog-critic。**REVISE 後に修正された**記事を **mode: delta** で再レビューする (トークン節約)。
-記事: docs/21_ブログ記事原稿/${slug}/article.md / 前回レビュー: docs/21_ブログ記事原稿/${slug}/review.md
+記事: contents/blog/${slug}/article.md / 前回レビュー: contents/blog/${slug}/review.md
 
 ## delta モードの手順 (正典 465行と記事全文の再読はしない)
 1. **前回 review.md を読み、blocker/MAJOR 指摘を抽出する。これがあなたのチェックリスト**
    (blog-quality-standards.md の全観点を再評価しない。決定的な床は quality-gate.mjs が公開前に毎回フル実行するため
    delta では省いてよい。あなたが見るのは「前回の意味的指摘が直ったか」と「変更が新たな意味破綻を生んでいないか」)。
-2. **変更箇所を特定**: git diff docs/21_ブログ記事原稿/${slug}/article.md を試す。diff が取れなければ
+2. **変更箇所を特定**: git diff contents/blog/${slug}/article.md を試す。diff が取れなければ
    前回指摘が指す該当セクションだけを読む (記事全文は読まない)。
 3. **検証**: 前回の各 blocker/MAJOR が解消されたか + 変更 hunk が別の BLOCK を生んでいないか (数値・順位が
    data/*.json と一致するか、欠落図が追加されたか、SVG 系譜が揃ったか) をスポットチェック。

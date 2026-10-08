@@ -19,7 +19,7 @@
  *   図だけが古い食い違い (固定せず取り直す)。判断の手順は /brushup-blog の focus 最新データ更新
  * - SVG は取り直した図だけを一時ディレクトリで generate-article-charts.ts に描かせて戻す (ほかの図は再生成しない)
  *
- * オプション: --base <dir> (既定 docs/21_ブログ記事原稿) / --pull (無いファイルを R2 公開 URL から取る) /
+ * オプション: --base <dir> (既定 contents/blog) / --pull (無いファイルを R2 公開 URL から取る) /
  *            --apply (書き込む) / --json <path> (結果を JSON で書く)
  * exit: 0 = 完了 / 1 = 引数不正・記事なし / 3 = R2 の取得に失敗
  */
@@ -47,7 +47,7 @@ const getArg = (flag) => {
   return i >= 0 ? args[i + 1] : null;
 };
 const SLUG = getArg("--slug");
-const BASE = getArg("--base") || "docs/21_ブログ記事原稿";
+const BASE = getArg("--base") || "contents/blog";
 const PULL = args.includes("--pull");
 const APPLY = args.includes("--apply");
 const JSON_OUT = getArg("--json");

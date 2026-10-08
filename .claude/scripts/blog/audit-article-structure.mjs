@@ -13,7 +13,7 @@
  *   node .claude/scripts/blog/audit-article-structure.mjs [--base <dir>] [--json] [--out <path>]
  *
  *   --base <dir>  記事ルート。デフォルト: .local/r2/app/blog (R2 pull 後)
- *                 ドラフト監査なら --base docs/21_ブログ記事原稿
+ *                 ドラフト監査なら --base contents/blog
  *   --json        機械可読 JSON を stdout
  *   --out <path>  保存先。デフォルト: data/blog/structure-audit.json
  *
@@ -49,7 +49,7 @@ const log = (m) => !JSON_OUT && console.log(m);
 
 if (!fs.existsSync(BASE)) {
   console.error(`[error] base dir not found: ${BASE}`);
-  console.error(`先に R2 を pull (/pull-r2 --prefix blog) するか、--base docs/21_ブログ記事原稿 を指定。`);
+  console.error(`先に R2 を pull (/pull-r2 --prefix blog) するか、--base contents/blog を指定。`);
   process.exit(1);
 }
 

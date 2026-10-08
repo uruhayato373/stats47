@@ -14,6 +14,16 @@ test('docsだけのPRは重いjobを起動しない', () => {
   assert.deepEqual(Object.values(result), Array(Object.keys(result).length).fill(false));
 });
 
+test('ブログ原稿だけのPRは図のJSONを含んでも重いjobを起動しない', () => {
+  // contents/blog は docs/ から移した公開待ちの原稿。data/*.json は図のデータでコードではない
+  const result = classifyPrQualityPaths([
+    'contents/blog/example/article.md',
+    'contents/blog/example/data/example-ranking.json',
+  ]);
+  assert.deepEqual(Object.values(result), Array(Object.keys(result).length).fill(false));
+  assert.equal(classifyPrQualityPaths(['contents/blog/example/images/a.png']).remote_assets, true);
+});
+
 test('webチャート変更はweb・unit・visualizationを選ぶ', () => {
   const result = classifyPrQualityPaths([
     'apps/web/src/components/stat-charts/Chart.tsx',

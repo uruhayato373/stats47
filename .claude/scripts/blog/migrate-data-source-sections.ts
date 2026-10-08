@@ -21,7 +21,7 @@
  *   npx tsx .claude/scripts/blog/migrate-data-source-sections.ts                     # 集計のみ (dry-run)
  *   npx tsx .claude/scripts/blog/migrate-data-source-sections.ts --apply             # out/ へ書き出し
  *   npx tsx .claude/scripts/blog/migrate-data-source-sections.ts --snapshot <path>   # 既定は R2 の all.json
- *   npx tsx .claude/scripts/blog/migrate-data-source-sections.ts --outbox --apply    # docs/21 の原稿を in-place 変換
+ *   npx tsx .claude/scripts/blog/migrate-data-source-sections.ts --outbox --apply    # contents/blog の原稿を in-place 変換
  * R2 反映:
  *   npx tsx .claude/scripts/blog/push-article-md-r2.ts --src .local/blog-datasource-fix/out [--apply]
  * ロールバック:
@@ -42,7 +42,7 @@ const KINDLE_PINNED_SLUGS = new Set(
 const ROOT = path.resolve(__dirname, "..", "..", "..");
 const R2_BASE = (process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL).replace(/\/+$/, "");
 const WORK_DIR = path.join(ROOT, ".local/blog-datasource-fix");
-const OUTBOX_DIR = path.join(ROOT, "docs/21_ブログ記事原稿");
+const OUTBOX_DIR = path.join(ROOT, "contents/blog");
 const CONCURRENCY = 8;
 
 const argv = process.argv.slice(2);
@@ -149,7 +149,7 @@ function migrateOutbox(): void {
     changed.push(`${slug} (${action})`);
     if (APPLY) fs.writeFileSync(file, content);
   }
-  console.log(`docs/21 原稿: ${changed.length} 本${APPLY ? "を変換" : " が対象 (dry-run)"}${changed.length ? `: ${changed.join(", ")}` : ""}`);
+  console.log(`contents/blog 原稿: ${changed.length} 本${APPLY ? "を変換" : " が対象 (dry-run)"}${changed.length ? `: ${changed.join(", ")}` : ""}`);
 }
 
 async function main(): Promise<void> {

@@ -66,7 +66,7 @@ const YEARS = (getArg("--years") || "").split(",").filter(Boolean);
 const INDEX_BASE = getArg("--index-base");
 const TITLE = getArg("--title");
 const UNIT = getArg("--unit", "");
-const BASE_DIR = getArg("--base-dir", "docs/21_ブログ記事原稿");
+const BASE_DIR = getArg("--base-dir", "contents/blog");
 if (!SLUG || !NAME || !SOURCES[SOURCE] || !ITEMS.length || !TITLE) {
   console.error("usage: --slug <slug> --name <base> --source kakei-expenditure|kakei-quantity|kakei-unit-price|cpi --items code:label,... --layout monthly|annual|months-by-year [--from YYYY-MM] [--to YYYY-MM] [--years YYYY,...] [--index-base YYYY] --title <title> [--unit <unit>]");
   process.exit(1);

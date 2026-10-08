@@ -65,21 +65,21 @@ developer_instructions = '''
 
 ## 出力先
 
-- `docs/21_ブログ記事原稿/<slug>/` — **下書き記事**（article.md + data/）
+- `contents/blog/<slug>/` — **下書き記事**（article.md + data/）
 - `.local/r2/app/blog/<slug>/` — 公開staging（`/publish-article` でコピー）
 - `docs/10_ブログ企画/` — 企画ファイル
 
 ## 記事ライフサイクル
 
 ```
-docs/21_ブログ記事原稿/<slug>/  ← 下書き作成・チャート生成・レビューはここで行う
+contents/blog/<slug>/  ← 下書き作成・チャート生成・レビューはここで行う
         ↓ /publish-article
 .local/r2/app/blog/<slug>/      ← 公開staging（publishedAt 設定）
         ↓ publish-blog.yml (CI) / /sync-snapshots --only blog
 R2 app/blog/<slug>/ + all.json  ← サイトに反映 (all.json は export-blog-snapshot.ts が frontmatter から生成)
 ```
 
-**重要**: 記事の新規作成・編集は必ず `docs/21_ブログ記事原稿/` で行うこと。`.local/r2/app/blog/` に直接書かない。
+**重要**: 記事の新規作成・編集は必ず `contents/blog/` で行うこと。`.local/r2/app/blog/` に直接書かない。
 
 ## 公開済み記事の出典表示 (2026-09-25〜)
 
@@ -99,7 +99,7 @@ gh workflow run blog-data-source-migration.yml --ref main -f mode=migrate-bodies
 ```
 
 ローカルで試すときは `backfill-display-sources.ts` / `migrate-data-source-sections.ts` を dry-run で実行する。
-`docs/21` の原稿は `migrate-data-source-sections.ts --outbox --apply` で変換する (push すると公開が走るので、その原稿を公開する作業の一部として行う)。
+`contents/blog` の原稿は `migrate-data-source-sections.ts --outbox --apply` で変換する (push すると公開が走るので、その原稿を公開する作業の一部として行う)。
 
 Kindle 書籍の章に使う記事は本文を変えない (書籍の校正指示が本文の文字列に固定されているため)。
 Web の表示は描画時の同じ変換でそろう。正典: `docs/01_技術設計/04_デザインシステム.md`「データ出典」。

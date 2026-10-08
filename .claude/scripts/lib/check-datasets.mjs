@@ -127,7 +127,8 @@ export const RETIRED_SCAN_HISTORY_EXCLUDES = [
   ":(exclude,glob)**/reference/archive/**",
   ":(exclude,glob)**/reference/snapshots/**",
   ":(exclude,glob)**/reference/inventory/**",
-  ":(exclude,glob)docs/21_*/**",
+  ":(exclude,glob)contents/blog/**",
+  ":(exclude,glob)**/trends-snapshots/**",
   ":(exclude,glob)docs/31_*/**",
 ];
 const DOC_FILE = /\.(?:md|toml)$/;

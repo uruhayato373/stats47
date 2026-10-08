@@ -99,7 +99,7 @@ export function referenceExpansionPlans(root: string): ReferenceExpansionPlan[] 
     plans.push(...parseReferenceThemePlans(fs.readFileSync(backlog, "utf8")));
   }
 
-  const outboxRel = "docs/21_ブログ記事原稿";
+  const outboxRel = "contents/blog";
   const outbox = path.join(root, outboxRel);
   if (!fs.existsSync(outbox)) return plans;
   for (const entry of fs.readdirSync(outbox, { withFileTypes: true })) {

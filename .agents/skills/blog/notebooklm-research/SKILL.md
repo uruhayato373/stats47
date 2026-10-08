@@ -106,7 +106,7 @@ stats47 ではまだ専用ノートブックが未作成。**初回利用時に�
 ### Step 1: 記事読み込みとクエリ設計
 
 1. `.local/r2/app/blog/<slug>/article.md` を Read (公開済記事の場合)
-   または `docs/21_ブログ記事原稿/<slug>/article.md` (下書き段階の場合)
+   または `contents/blog/<slug>/article.md` (下書き段階の場合)
 2. `title` / `description` / 現在の H2 構成から「何が不足しているか」を判断
 3. 補強の観点を以下から選ぶ:
 

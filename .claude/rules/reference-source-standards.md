@@ -171,7 +171,7 @@ Drive への保全だけでは stats47 への採用を意味しない。OCR、in
   `reuse-existing-metric`、`new-metric`、`combined-analysis`だけを制作単位にする。
 - 制作状況は各チャネルSSOTの実在証跡で判定する。サイトはactive metricまたはarea editorial、ブログは公開記事内の
   `/ranking/<key>`接続、noteはcatalogの`stats47Targets`、Kindleはbook catalogの`rankingKeys`または`blogSlug`を使う。
-  制作中はブログ`docs/21_ブログ記事原稿/`、note`docs/31_note記事原稿/`、Kindle catalogのstatusを読む。
+  制作中はブログ`contents/blog/`、note`docs/31_note記事原稿/`、Kindle catalogのstatusを読む。
   推測による「制作中」「制作済み」判定は禁止する。
 
 ## 6. 関連

@@ -1,7 +1,8 @@
 ---
 paths:
   - ".claude/agents/*-critic.md"
-  - "docs/{21_ブログ記事原稿,31_note記事原稿}/**/review.md"
+  - "contents/blog/**/review.md"
+  - "docs/31_note記事原稿/**/review.md"
   - ".claude/workflows/**"
   - ".claude/skills/blog/{blog-review,panel-review}/**"
 ---

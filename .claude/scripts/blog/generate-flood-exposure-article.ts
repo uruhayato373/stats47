@@ -9,7 +9,7 @@ import { svgThemeStyle } from '../../../packages/svg-builder/src/shared/theme.ts
 import { R2_PUBLIC_BASE_URL } from '../lib/site-config.cjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');
-const dir = path.join(root, 'docs/21_ブログ記事原稿/2050-population-flood-exposure/data');
+const dir = path.join(root, 'contents/blog/2050-population-flood-exposure/data');
 const inputRoot = process.argv[2];
 assert(inputRoot && path.isAbsolute(inputRoot), 'Pass an absolute local R2 root');
 const prefix = 'app/geo/population-flood-risk';

@@ -3,8 +3,8 @@ name: 📊 Generate Article Charts (validate on PR)
 on:
   pull_request:
     paths:
-      - 'docs/21_ブログ記事原稿/**/article.md'
-      - 'docs/21_ブログ記事原稿/**/data/*.json'
+      - 'contents/blog/**/article.md'
+      - 'contents/blog/**/data/*.json'
 
 permissions:
   contents: read
@@ -39,7 +39,7 @@ jobs:
           # quotepath=false でないと非 ASCII パスが引用符付きで出て /^docs\/21_/ に一致しない。
           # 公開後の outbox 掃除で消えた原稿は検証対象外 (--diff-filter=d)。
           git fetch origin "${{ github.base_ref }}"
-          SLUGS=$(git -c core.quotepath=false diff --name-only --diff-filter=d "origin/${{ github.base_ref }}...HEAD" -- 'docs/21_ブログ記事原稿/' | \
+          SLUGS=$(git -c core.quotepath=false diff --name-only --diff-filter=d "origin/${{ github.base_ref }}...HEAD" -- 'contents/blog/' | \
                   awk -F/ '/^docs\/21_/ {print $3}' | sort -u)
           {
             echo "list<<EOF"

@@ -17,7 +17,7 @@ apply: true) をコードの直しと同じ commit で push した。オーナ�
 **正典**: 記事固有背景は Codex imagegen で作り `assets/blog/article-backgrounds/<slug>.jpg` に置く
 (`.claude/skills/blog/generate-blog-images/SKILL.md` Mode A、`.claude/rules/ogp-image-standards.md`)。
 公開時の検査は、この画像があれば今の記事から prompt を計算するので、タイトルを変えても止まらない。
-送り箱の記事は `npm run blog-images:codex -- request-article --slug <slug> --article docs/21_ブログ記事原稿/<slug>/article.md`
+送り箱の記事は `npm run blog-images:codex -- request-article --slug <slug> --article contents/blog/<slug>/article.md`
 → Codex の `$imagegen` → `ingest-article` (同じ `--article`) の順。公開済み Gemini 背景は再利用だけ。
 
 **教訓**:

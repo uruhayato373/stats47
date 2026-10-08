@@ -14,7 +14,7 @@
  *   # スキャン（全品目の V/I 比を一括算出 → /tmp/quintile-scan.json）
  *   npx tsx .claude/scripts/blog/fetch-quintile-data.ts --mode scan [--year 2024]
  *
- * 出力: docs/21_ブログ記事原稿/<slug>/data/<name>-quintile[.-timeseries].{json,source.json,svg}
+ * 出力: contents/blog/<slug>/data/<name>-quintile[.-timeseries].{json,source.json,svg}
  */
 
 import * as fs from "node:fs";
@@ -64,7 +64,7 @@ async function estat(params: Record<string, string>): Promise<any> {
 }
 
 function writeTriple(slug: string, base: string, json: unknown, source: unknown, svg: string) {
-  const dir = path.join(PROJECT_ROOT, "docs/21_ブログ記事原稿", slug, "data");
+  const dir = path.join(PROJECT_ROOT, "contents/blog", slug, "data");
   fs.mkdirSync(dir, { recursive: true });
   fs.writeFileSync(path.join(dir, `${base}.json`), JSON.stringify(json, null, 1));
   fs.writeFileSync(path.join(dir, `${base}.source.json`), JSON.stringify(source, null, 2));
