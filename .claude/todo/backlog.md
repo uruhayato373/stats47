@@ -3214,8 +3214,15 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
   (本番 R2 の 2 テーマの page-components は develop の生成物と一致、`app/ranking/actual-overnight-guests/item.json` は 200)。
   手順 10 の `municipality-ranking` だけが一時的な通信エラーで落ちた (今回の変更とは無関係。`DATA-REFRESH-MUNI-FETCH-RETRY-01`)。
   develop から派生物が出る経路は `DATA-REFRESH-DERIVED-FROM-DEVELOP-01` に起票した。キー一覧 (KNOWN / SITEMAP) は sync-ranking-keys の keys PR を待たず
-  develop で再生成した (追加 13 件・削除 0)。**残り**: PR #1100 をマージ → 本番で 2 テーマと `/ranking/actual-overnight-guests` を確かめる →
-  ranking-items の sync-snapshots を 1 回走らせ、新キーの OGP 画像の生成と keys PR が差分なしになることを確かめる。
+  develop で再生成した (追加 13 件・削除 0)。
+- **2026-10-08 本番公開**: PR #1100 を main へマージ (b3fb1ca87、00:01 UTC)。デプロイ後の本番で、`/themes/tourism` の 6 章と
+  `/themes/consumer-prices` の 5 章がカタログの順に出て、実宿泊者数のカードと費目別のヒートマップが描かれ、エラー表示が無いことを確かめた。
+  `/ranking/actual-overnight-guests` は Googlebot UA で 200 (00:07 UTC から)。
+  **残り**: ① 物価テーマの「相関が高いテーマ外の指標」が、外した `average-temperature` を基準にした 7 件を出している。
+  `app/correlation/by-theme/consumer-prices.json` を作った Correlation Refresh run 44 が、マージ前の main (5ddda10b) のカタログで計算したため。
+  相関の入力の fingerprint はカタログを含むので、毎日 18:45 UTC の定期実行で直る。2026-10-09 に、この JSON の `via` に
+  `average-temperature` が無いことを確かめる。② 新しい 13 キーの OGP 画像: 代理起動した sync-snapshots (run 103) は、
+  オーナーが手動で起動した run 104 に取り消された。run 104 に sync-ranking-keys job があればそこで作られる。無ければ ranking-items で依頼し直す。
 - **停止条件**: 承認前は `data/themes/catalogs/` と metric config を編集しない。公開 (main へのマージ・R2 反映) は別に承認を取る。
 - **完了条件**: 2 テーマの提案の status が `implemented-pending-release` 以降になり、本番で提案どおりの章・カード・図が出ている。
 
