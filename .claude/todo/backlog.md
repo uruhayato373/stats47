@@ -476,6 +476,7 @@ updated: 2026-10-06
 - **事実 (2026-10-08、bonito-catch-prefecture に購入数量の段落を足したとき)**: 「福島県…3位」(購入数量の順位) が漁獲量の data と照合され RANK_MISMATCH になった。書き手が言い回しを変えて回避した。
 - **次**: `.claude/scripts/lib/article-factual-check.mjs` の県名と順位の紐づけで、同じ文に別指標名 (data の label と違う指標名) があるときは照合を見送るか、その指標の data と照合する。誤検知のテストと、従来の検出が残るテストを両方足す。
 - **同じ根の値の誤照合 (2026-10-08、blog-critic が報告)**: `frozen-gyoza-spending-prefecture-gap` の「宮崎市の3,517円、宇都宮市の2,801円」で、宮崎と 2,801 円を組にした VALUE_MISMATCH (warning) が出た。値は直前の地名と組にする。
+- **同じ根の 3 例目 (2026-10-08、fishery-species-prefecture-specialty)**: 主指標がイワシ類 1 つの記事で、別魚種・別年の順位 (「北海道のスケトウダラ 1972 年は 2 位」) がイワシ類の data と照合され RANK_MISMATCH になった。書き手は「N位」を使わない書き方で回避した。
 - **完了条件**: 上の 2 つの文で RANK_MISMATCH・VALUE_MISMATCH が出ず、主指標の順位と値の誤りは従来どおり検出する。
 
 ### [GYOZA-FROZEN-KEY-01] ぎょうざの指標キーと記事 slug の「frozen」が品目の定義と合わない
