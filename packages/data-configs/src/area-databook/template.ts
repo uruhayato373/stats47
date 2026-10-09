@@ -27,6 +27,17 @@ const LIVESTOCK_SELECTION = (rationale: string) => ({
   rationale,
 });
 
+const BATCH_PROPOSED_BY = "参考文献由来の公開中指標 (県ページ採用判断)";
+const BATCH_SURVEYED = "2026-10-09";
+const BATCH_SELECTION = (sourceUrl: string, rationale: string) => ({
+  proposedBy: BATCH_PROPOSED_BY,
+  sourceUrl,
+  surveyedAt: BATCH_SURVEYED,
+  rationale,
+});
+const SSDS_URL = "https://www.stat.go.jp/data/ssds/index.htm";
+const VITAL_URL = "https://www.mhlw.go.jp/toukei/list/81-1.html";
+
 export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
   sections: [
     /* ① 県シンボル ---------------------------------------------------- */
@@ -153,6 +164,21 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
             {
               rankingKey: "foreign-resident-count-per-100k",
               shortLabel: "外国人(10万人比)",
+            },
+            {
+              rankingKey: "total-fertility-rate",
+              shortLabel: "合計特殊出生率",
+              selection: BATCH_SELECTION(VITAL_URL, "一人の女性が生涯に産む子どもの数の県差。出生率と別に少子化の水準を読む"),
+            },
+            {
+              rankingKey: "natural-increase-rate",
+              shortLabel: "自然増減率",
+              selection: BATCH_SELECTION(VITAL_URL, "出生と死亡の差し引きによる人口の増減の勢い。社会増減を除いた県の自然な人口動態を読む"),
+            },
+            {
+              rankingKey: "infant-mortality-rate-per-1000-births",
+              shortLabel: "乳児死亡率",
+              selection: BATCH_SELECTION(VITAL_URL, "出生千人当たりの率で県規模に左右されず、周産期・小児医療の県差を読む"),
             },
             {
               rankingKey: "suicide-rate-per-100k",
@@ -286,6 +312,28 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
             { rankingKey: "post-office-count-per-100km2", shortLabel: "郵便局数(100km²当たり)" },
             { rankingKey: "gas-station-count-per-100km", shortLabel: "給油所数(道路100km当たり)" },
             { rankingKey: "water-supply-population-ratio-2012on", shortLabel: "上水道給水人口比率" },
+            {
+              rankingKey: "annual-income-per-household",
+              shortLabel: "世帯の年間収入",
+              selection: BATCH_SELECTION(SSDS_URL, "1世帯当たりの収入水準。県民所得 (1人当たり) と別に家計の収入の県差を読む"),
+            },
+            {
+              rankingKey: "private-rental-housing-rent-per-3-3m2",
+              shortLabel: "民営家賃(3.3m²月額)",
+              selection: BATCH_SELECTION(SSDS_URL, "住まいの費用の県差。持ち家比率・延べ床面積と合わせて住居事情を読む"),
+            },
+            {
+              rankingKey: "consumer-price-difference-index-overall",
+              shortLabel: "物価地域差指数(総合)",
+              compareNationalAvg: true,
+              selection: BATCH_SELECTION(SSDS_URL, "全国=100とした物価水準。暮らしの費用が全国より高いか低いかを読む"),
+            },
+            {
+              rankingKey: "consumer-price-difference-index-housing",
+              shortLabel: "物価地域差指数(住居)",
+              compareNationalAvg: true,
+              selection: BATCH_SELECTION(SSDS_URL, "総合物価の差を最も大きく動かす住居費の水準を全国=100で読む"),
+            },
           ],
         },
       ],
@@ -327,6 +375,11 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
               },
             },
             { rankingKey: "unemployment-rate", shortLabel: "失業率" },
+            {
+              rankingKey: "minimum-wage-by-region",
+              shortLabel: "地域別最低賃金",
+              selection: BATCH_SELECTION(SSDS_URL, "働く人の賃金の下限の県差。給与水準・求人倍率と合わせて雇用環境を読む"),
+            },
             { rankingKey: "self-financing-ratio", shortLabel: "自主財源の割合" },
             { rankingKey: "taxpayer-ratio-per-pref-resident", shortLabel: "納税義務者割合" },
           ],
@@ -544,6 +597,33 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
               maleKey: "average-weight-high-school-second-grade-male",
               femaleKey: "average-weight-high-school-second-grade-female",
             },
+            {
+              label: "健康寿命",
+              maleKey: "healthy-life-expectancy-male",
+              femaleKey: "healthy-life-expectancy-female",
+            },
+            {
+              label: "食塩摂取量(年齢調整)",
+              maleKey: "salt-intake-male-age-adjusted",
+              femaleKey: "salt-intake-female-age-adjusted",
+            },
+            {
+              label: "野菜摂取量(年齢調整)",
+              maleKey: "vegetable-intake-male-age-adjusted",
+              femaleKey: "vegetable-intake-female-age-adjusted",
+            },
+          ],
+        },
+        {
+          blockType: "ranked-kpi-grid",
+          blockKey: "gender-kpi",
+          columns: 2,
+          metrics: [
+            {
+              rankingKey: "sex-ratio-total",
+              shortLabel: "人口性比(女=100)",
+              selection: BATCH_SELECTION(SSDS_URL, "女性100人に対する男性の数。男女の人口構成の県差を読む"),
+            },
           ],
         },
       ],
@@ -593,6 +673,11 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
                 rationale: "延べ宿泊者数のうち外国人の規模。訪日客の行き先の県差を読む",
               },
             },
+            {
+              rankingKey: "room-utilization-rate",
+              shortLabel: "客室稼働率",
+              selection: BATCH_SELECTION(SSDS_URL, "宿泊者数の規模ではなく客室の埋まり具合。観光の需給の混み方を読む"),
+            },
           ],
         },
       ],
@@ -602,7 +687,7 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
       sectionKey: "education-facility",
       kind: "education-facility",
       title: "学校・施設",
-      description: "人口当たりの医師数と施設数",
+      description: "人口当たりの医師数・病床数・施設数と救急搬送の所要時間",
       sortOrder: 70,
       blocks: [
         {
@@ -635,6 +720,16 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
               shortLabel: "認定こども園数(0-5歳10万人比)",
             },
             { rankingKey: "kindergarten-count-per-100k-3-5", shortLabel: "幼稚園数(3〜5歳10万人当たり)" },
+            {
+              rankingKey: "general-hospital-bed-count-per-100k",
+              shortLabel: "一般病院病床数(10万人比)",
+              selection: BATCH_SELECTION(SSDS_URL, "医師数・病院数に並ぶ入院医療の受け皿。病院の数でなく規模の県差を読む"),
+            },
+            {
+              rankingKey: "ambulance-hospital-arrival-time",
+              shortLabel: "救急搬送の病院収容所要時間",
+              selection: BATCH_SELECTION("https://www.fdma.go.jp/publication/rescue/post-7.html", "119番から病院に収容されるまでの時間。施設数では見えない救急医療へのアクセスの県差を読む"),
+            },
           ],
         },
       ],
