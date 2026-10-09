@@ -15,7 +15,7 @@ Remotion は Webpack bundle に組み込まれ、render 時に network / DB acce
 
 ## 前提
 
-- 必要 metric が TS-config (`packages/data-configs/src/metrics/<key>.ts`) に定義済
+- 必要 metric が TS-config (`data/metrics/<key>.ts`) に定義済
 - 必要 metric が D1 `metrics` cache に同期済 (`/sync-metrics-cache --apply` で同期)
 - 必要 metric の観測値が R2 (`app/stats/<key>/*.json`) に投入済 (`/page-data-batch --metric <key>` 等)
 - ローカル D1 の prefectures master が揃っていること (`loadPrefectures()` で参照)

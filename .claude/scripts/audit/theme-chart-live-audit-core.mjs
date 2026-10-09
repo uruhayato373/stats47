@@ -29,52 +29,7 @@ export function requestKey(statsDataId, filters = {}) {
 }
 
 export function parseDependencyMirror(value) {
-  if (!isPlainObject(value) || !Array.isArray(value.requests)) {
-    throw new Error("dependency mirror must contain requests[]");
-  }
-  if (!Number.isSafeInteger(value.distinctRequests) || value.distinctRequests < 0) {
-    throw new Error("dependency mirror distinctRequests must be a non-negative integer");
-  }
-
-  const seen = new Set();
-  const requests = value.requests.map((candidate, index) => {
-    if (!isPlainObject(candidate)) throw new Error(`requests[${index}] must be an object`);
-    const statsDataId = requireNonEmptyString(candidate.statsDataId, `requests[${index}].statsDataId`);
-    const theme = requireNonEmptyString(candidate.themeKey, `requests[${index}].themeKey`);
-    const componentKey = requireNonEmptyString(
-      candidate.componentKey,
-      `requests[${index}].componentKey`,
-    );
-    const componentType = requireNonEmptyString(
-      candidate.componentType,
-      `requests[${index}].componentType`,
-    );
-    const filters = candidate.filters ?? {};
-    if (!isPlainObject(filters)) throw new Error(`requests[${index}].filters must be an object`);
-    for (const [key, filter] of Object.entries(filters)) {
-      if (!FILTER_AXIS.test(key) || typeof filter !== "string" || filter === "") {
-        throw new Error(`requests[${index}].filters.${key} is invalid`);
-      }
-    }
-    const key = requestKey(statsDataId, filters);
-    if (candidate.key !== key) throw new Error(`requests[${index}].key does not match its request`);
-    if (seen.has(key)) throw new Error(`duplicate request key: ${key}`);
-    seen.add(key);
-    return {
-      key,
-      theme,
-      componentKey,
-      componentType,
-      params: { statsDataId, ...filters },
-    };
-  });
-
-  if (seen.size !== value.distinctRequests) {
-    throw new Error(
-      `dependency mirror count mismatch: declared ${value.distinctRequests} / actual ${seen.size}`,
-    );
-  }
-
+  if (!isPlainObject(value) || !Array.isArray(value.metrics) || 'requests' in value) throw new Error('dependency mirror must contain metrics[] only');
   const rawMetrics = value.metrics ?? [];
   if (!Array.isArray(rawMetrics)) throw new Error("dependency mirror metrics must be an array");
   const seenMetrics = new Set();
@@ -110,7 +65,7 @@ export function parseDependencyMirror(value) {
       ),
     };
   });
-  const declaredMetricCount = value.distinctMetricRefs ?? metrics.length;
+  const declaredMetricCount = value.distinctMetricRefs;
   if (!Number.isSafeInteger(declaredMetricCount) || declaredMetricCount < 0) {
     throw new Error("dependency mirror distinctMetricRefs must be a non-negative integer");
   }
@@ -119,7 +74,7 @@ export function parseDependencyMirror(value) {
       `dependency mirror metric count mismatch: declared ${declaredMetricCount} / actual ${seenMetrics.size}`,
     );
   }
-  return { requests, metrics, distinctExpected: seen.size + seenMetrics.size };
+  return { metrics, distinctExpected: seenMetrics.size };
 }
 
 /** R2 `app/stats/<metric>/values.json` の表示契約を検査する。 */

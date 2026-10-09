@@ -147,8 +147,8 @@ rankingKey が実在する候補 (`jr-passenger-transport` の主担当 railway�
 ## 想定実装差分と検証
 
 - 編集: `data/themes/catalogs/tourism.json` と、年を広げる 2 指標の metric config
-  (`packages/data-configs/src/metrics/{room-utilization-rate,number-of-hotel-facilities}.ts` の `years`)。
-  `actual-overnight-guests` を採用する場合は `packages/data-configs/src/metrics/actual-overnight-guests.ts` を新規に作る
+  (`data/metrics/{room-utilization-rate,number-of-hotel-facilities}.ts` の `years`)。
+  `actual-overnight-guests` を採用する場合は `data/metrics/actual-overnight-guests.ts` を新規に作る
   (`statsDataId: "0000010107"`・`cdCat01: "G7103"`・単位「人」・category `tourism`・`years` 2009〜2024)。
 - metric config の年を広げても、R2 の観測値は自動では増えない。新規指標の投入と既存 2 指標の再取得 (`data-refresh.yml` または `/page-data-batch`) は
   本番反映と同じ承認で行う。反映まではカードが登録済みの年だけ (稼働率は 7 点) を描く。

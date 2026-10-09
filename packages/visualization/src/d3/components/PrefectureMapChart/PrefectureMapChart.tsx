@@ -19,7 +19,8 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { logger } from "@stats47/logger";
 
 
-import { createChoroplethColorMapper } from "../../utils/color-scale/create-choropleth-color-mapper";
+import { resolveChoroplethScale } from "../../utils/color-scale/resolve-choropleth-scale";
+import { ChoroplethLegend, type ResolvedChoroplethScale } from "../ChoroplethLegend";
 import { getThemeColors } from "../../utils/get-theme-colors";
 import { preparePrefectureFeatures } from "../../utils/geojson/prepare-prefecture-features";
 import type { D3Module, TopojsonModule } from "../../types/d3";
@@ -46,9 +47,6 @@ const HOKKAIDO_SHIFT = { x: -300, y: 100 };
 const OKINAWA_SHIFT = { x: 500, y: -250 };
 
 /** カラーレジェンドの設定 */
-const LEGEND_HEIGHT = 12;
-const LEGEND_WIDTH = 200;
-const LEGEND_MARGIN_TOP = 16;
 
 /**
  * カラーマッパー関数の型
@@ -78,6 +76,7 @@ export function PrefectureMapChart({
   const [d3Module, setD3Module] = useState<D3Module | null>(null);
   const [topojsonModule, setTopojsonModule] = useState<TopojsonModule | null>(null);
   const [colorMapper, setColorMapper] = useState<ColorMapper>(null);
+  const [colorScale, setColorScale] = useState<ResolvedChoroplethScale | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isShifted, setIsShifted] = useState(false);
@@ -130,9 +129,12 @@ export function PrefectureMapChart({
     let isMounted = true;
 
     const generateColorMapper = async () => {
-      const mapper = await createChoroplethColorMapper(colorConfig, data);
+      const resolved = await resolveChoroplethScale(colorConfig, data);
+      const valueByCode = new Map(data.map(point => [point.areaCode, point.value]));
+      const mapper = (code: string) => {const value = valueByCode.get(code); return value === undefined ? resolved.noDataColor : resolved.colorAtValue(value);};
       if (isMounted) {
         setColorMapper(() => mapper);
+        setColorScale(resolved);
       }
     };
 
@@ -275,8 +277,6 @@ export function PrefectureMapChart({
         onPrefectureClick?.(d.properties.prefCode);
       });
 
-    // カラーレジェンド描画
-    drawColorLegend(svg, d3Module, data, colorMapper, width, height);
   }, [
     d3Module,
     geojson,
@@ -351,101 +351,7 @@ export function PrefectureMapChart({
         role="img"
         aria-label={`都道府県別コロプレス地図。データ数: ${data.length}。単位: ${unit || "未設定"}`}
       />
-
+      <ChoroplethLegend scale={colorScale} unit={unit}/>
     </div>
   );
-}
-
-/**
- * カラーレジェンド（凡例）を SVG 内に描画する
- */
-function drawColorLegend(
-  svg: any,
-  d3: D3Module,
-  data: MapDataPoint[],
-  colorMapper: (areaCode: string) => string,
-  svgWidth: number,
-  svgHeight: number
-) {
-  const values = data.map((d) => d.value).filter((v) => v != null);
-  if (values.length === 0) return;
-
-  const minVal = Math.min(...values);
-  const maxVal = Math.max(...values);
-  if (minVal === maxVal) return;
-
-  const legendX = (svgWidth - LEGEND_WIDTH) / 2;
-  const legendY = svgHeight - LEGEND_HEIGHT - LEGEND_MARGIN_TOP;
-
-  const legendGroup = svg.append("g").attr("class", "legend-group");
-
-  // グラデーション定義
-  const defs = svg.append("defs");
-  const gradient = defs
-    .append("linearGradient")
-    .attr("id", "legend-gradient")
-    .attr("x1", "0%")
-    .attr("x2", "100%");
-
-  // 10 段階のカラーストップを生成
-  const steps = 10;
-  for (let i = 0; i <= steps; i++) {
-    const t = i / steps;
-    const value = minVal + t * (maxVal - minVal);
-    // 仮の areaCode を生成して colorMapper から色を取得
-    const closestData = data.reduce((prev, curr) =>
-      Math.abs(curr.value - value) < Math.abs(prev.value - value) ? curr : prev
-    );
-    const color = colorMapper(closestData.areaCode);
-    gradient
-      .append("stop")
-      .attr("offset", `${t * 100}%`)
-      .attr("stop-color", color);
-  }
-
-  // レジェンドバー
-  legendGroup
-    .append("rect")
-    .attr("x", legendX)
-    .attr("y", legendY)
-    .attr("width", LEGEND_WIDTH)
-    .attr("height", LEGEND_HEIGHT)
-    .attr("rx", 3)
-    .style("fill", "url(#legend-gradient)")
-    .attr("opacity", 1);
-
-  // レジェンドラベル（最小値）
-  legendGroup
-    .append("text")
-    .attr("x", legendX)
-    .attr("y", legendY + LEGEND_HEIGHT + 14)
-    .attr("text-anchor", "start")
-    .attr("font-size", "10px")
-    .attr("fill", "hsl(var(--muted-foreground))")
-    .text(formatLegendValue(minVal))
-    .attr("opacity", 1);
-
-  // レジェンドラベル（最大値）
-  legendGroup
-    .append("text")
-    .attr("x", legendX + LEGEND_WIDTH)
-    .attr("y", legendY + LEGEND_HEIGHT + 14)
-    .attr("text-anchor", "end")
-    .attr("font-size", "10px")
-    .attr("fill", "hsl(var(--muted-foreground))")
-    .text(formatLegendValue(maxVal))
-    .attr("opacity", 1);
-}
-
-/**
- * レジェンド値のフォーマット
- */
-function formatLegendValue(value: number): string {
-  if (Math.abs(value) >= 1_000_000) {
-    return `${(value / 1_000_000).toFixed(1)}M`;
-  }
-  if (Math.abs(value) >= 1_000) {
-    return `${(value / 1_000).toFixed(1)}K`;
-  }
-  return value.toLocaleString();
 }

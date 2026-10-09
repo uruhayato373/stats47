@@ -18,12 +18,13 @@
  * R2 の公開済みデータを読むので `R2_PUBLIC_FETCH_URL` (既定 https://storage.stats47.jp) が要る。
  * CI では data-refresh.yml の R2 push 後に走らせる (再生成の結果を即反映するため)。
  */
+import { datasetDir } from "../../../config/datasets.mjs";
 import { execFileSync } from "node:child_process";
 import { readFileSync, writeFileSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { EXPECTED_SHAPE_ANOMALY } from "../src/expected-shape-anomaly.js";
+import { EXPECTED_SHAPE_ANOMALY } from "../../../data/metrics/quality/shape-exceptions";
 import {
   VALUE_CHECKS,
   type ExpectedShapeAnomalyEntry,
@@ -31,7 +32,7 @@ import {
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(__dirname, "../../..");
-const TARGET = resolve(REPO_ROOT, "packages/data-configs/src/expected-shape-anomaly.ts");
+const TARGET = resolve(REPO_ROOT, datasetDir("metrics.quality"), "shape-exceptions.ts");
 const SCANNER = resolve(__dirname, "scan-stats-shape.ts");
 
 function entryId(e: { key: string; check: string }): string {

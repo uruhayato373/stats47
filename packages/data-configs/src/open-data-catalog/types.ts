@@ -7,7 +7,7 @@
  *
  * 責務境界:
  *  - KSJ の稼働メタは packages/gis/src/mlit-ksj/datasets.ts が SSOT。ここは発見・評価層で、複製しない。
- *  - metric の SSOT は packages/data-configs/src/metrics/。existingMetricKeys は参照のみ。
+ *  - metric の SSOT は data/metrics/。existingMetricKeys は参照のみ。
  *  - 不明値を空文字で埋めない。事実と推測は VerificationStatus / "unknown" で区別する。
  */
 

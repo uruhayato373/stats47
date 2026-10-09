@@ -108,7 +108,7 @@ CLI 内にインライン生成ロジックを書かない（重複・ドリフ�
 | --------------------------------------------- | ----------------------------------------------------------------------------- |
 | 配色の語彙（46 種・短縮名 ⇄ 正式名・d3 実名） | `packages/types/src/color-scheme.ts`（`COLOR_SCHEME_CATALOG`）                |
 | どの配色を選ぶか（決定規則）                  | `packages/data-configs/src/color-scheme-policy.ts`（`resolveColorScheme`）    |
-| 指標の極性（高いほど良い/悪い）               | `packages/data-configs/src/metric-polarity.ts`（`METRIC_POLARITY`）           |
+| 指標の極性（高いほど良い/悪い）               | `data/metrics/policy/polarity.ts`（`METRIC_POLARITY`）           |
 | 配信への焼き込み                              | `build-ranking-item-from-metric.ts` → R2 `app/ranking/<key>/item.json`        |
 | ブログ地図への伝搬                            | `regenerate-tile-maps.ts` が item.json から読み、地図 JSON に `scheme` を焼く |
 

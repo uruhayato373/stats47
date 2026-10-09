@@ -108,12 +108,8 @@ function resolveLegacyCalculated(
   if (!registry || depth > 4) return [];
   const calculation = metric.calculation;
   const operandKeys = [
-    calculation?.numeratorKey ??
-      calculation?.numeratorRankingKey ??
-      calculation?.numerator,
-    calculation?.denominatorKey ??
-      calculation?.denominatorRankingKey ??
-      calculation?.denominator,
+    calculation?.numeratorKey,
+    calculation?.denominatorKey,
   ].filter((key): key is string => Boolean(key));
   const out: ProvenanceSurvey[] = [];
   for (const key of operandKeys) {

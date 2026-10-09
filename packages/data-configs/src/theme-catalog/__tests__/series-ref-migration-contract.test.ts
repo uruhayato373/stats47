@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import { getMetricConfig } from "../../registry";
-import { requestKey } from "../chart-dependencies";
+import { requestKey } from "../../source-coordinate";
 import { THEME_CATALOGS } from "../index";
 import { parseStatSeriesRefs } from "../stat-series-ref";
 

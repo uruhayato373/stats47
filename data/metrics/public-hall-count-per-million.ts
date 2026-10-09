@@ -1,0 +1,66 @@
+import { DEFAULT_METRIC_PRESENTATION } from "./defaults/presentation";
+import type { MetricConfig } from "../../packages/data-configs/src/types";
+
+export const publicHallCountPerMillion: MetricConfig = {
+  "key": "public-hall-count-per-million",
+  "title": "公民館数",
+  "subtitle": "人口100万人当たり",
+  "unit": "館",
+  "category": "educationsports",
+  "source": {
+    "kind": "estat",
+    "statsDataId": "0000010207",
+    "cdCat01": "#G01101",
+    "displayName": "社会・人口統計体系",
+    "url": "https://www.stat.go.jp/data/ssds/index.htm"
+  },
+  "entities": [
+    "prefecture",
+    "city"
+  ],
+  "years": {
+    "years": [
+      1981,
+      1982,
+      1983,
+      1984,
+      1985,
+      1986,
+      1987,
+      1988,
+      1989,
+      1990,
+      1991,
+      1992,
+      1993,
+      1994,
+      1995,
+      1996,
+      1997,
+      1999,
+      2002,
+      2005,
+      2008,
+      2011,
+      2015,
+      2018,
+      2021
+    ]
+  },
+  "yearFormat": "fiscal",
+  "visualization": {
+    ...DEFAULT_METRIC_PRESENTATION,
+    "colorScheme": "interpolateBlues",
+    "colorSchemeType": "sequential",
+  },
+  "display": {
+    "conversionFactor": 1,
+    "decimalPlaces": 1
+  },
+  "calculation": {
+    "isCalculated": false
+  },
+  "seoTitle": "公民館数ランキング都道府県【2021年】｜1位長野県（880館）",
+  "seoDescription": "2021年の公民館数の都道府県別ランキング。1位長野県（880館）、最下位東京都（5.7館）で154.4倍の格差。地図やグラフで47都道府県を比較。",
+  "isActive": true
+};

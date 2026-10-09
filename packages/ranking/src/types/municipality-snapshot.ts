@@ -1,3 +1,5 @@
+import type { MetricPresentation } from '@stats47/types';
+
 export interface MunicipalityRankingValue {
   areaCode: string;
   areaName: string;
@@ -17,6 +19,7 @@ export interface MunicipalityRankingItemSnapshot {
    * 「総数」等のノイズを付けないため。ページはこれが在るとき title/h1 に併記する。
    */
   subtitle?: string;
+  visualization: MetricPresentation;
   description: string;
   unit: string;
   latestYear: { yearCode: string; yearName: string };

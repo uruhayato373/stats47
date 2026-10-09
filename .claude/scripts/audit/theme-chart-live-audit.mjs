@@ -44,7 +44,7 @@ import {
   summarizeAudit,
 } from "./theme-chart-live-audit-core.mjs";
 import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
-import { ESTAT_STATS_DATA_URL } from "../lib/estat-catalog/endpoints.cjs";
+
 
 export { classifyNational, isFiniteEstatValue } from "./theme-chart-live-audit-core.mjs";
 
@@ -85,20 +85,6 @@ function parseArgs() {
     if (argv[i] === "--staged") staged = true;
   }
   return { json, limit: parseAuditLimit(rawLimit), staged };
-}
-
-function resolveAppId() {
-  if (process.env.NEXT_PUBLIC_ESTAT_APP_ID) return process.env.NEXT_PUBLIC_ESTAT_APP_ID;
-  // CI/ローカルとも .env.development (公開 ID・git tracked) を最後の拠り所にする
-  try {
-    const env = readFileSync(
-      path.join(PROJECT_ROOT, "apps/web/.env.development"),
-      "utf8",
-    );
-    return env.match(/^NEXT_PUBLIC_ESTAT_APP_ID=(.+)$/m)?.[1]?.trim().replace(/^["']|["']$/g, "");
-  } catch {
-    return undefined;
-  }
 }
 
 /**
@@ -161,20 +147,6 @@ async function fetchWithRetry(url, dispatcher, attempts = 3) {
  * e-Stat の値が実データか判定する。「該当なし」「秘匿」は `-` / `‐` / `***` / `X` 等の
  * プレースホルダ文字列で返るため、数値としてパースできるかで見分ける。
  */
-async function inspect(appId, params, dispatcher) {
-  const query = new URLSearchParams({ appId, limit: "200", ...params });
-  const { res, error } = await fetchWithRetry(`${ESTAT_ENDPOINT}?${query}`, dispatcher);
-  if (error) return error;
-
-  let payload;
-  try {
-    payload = await res.json();
-  } catch {
-    return { status: "malformed-json", detail: "JSON parse failed" };
-  }
-  return inspectEstatPayload(payload, params);
-}
-
 async function inspectR2(metric, dispatcher, publicBase, staged) {
   if (staged) {
     const localPath = path.join(
@@ -208,23 +180,15 @@ async function inspectR2(metric, dispatcher, publicBase, staged) {
 async function main() {
   const { json, limit, staged } = parseArgs();
   const dispatcher = resolveDispatcher();
-  const { requests: allRequests, metrics: allMetrics, distinctExpected } =
+  const { metrics: allMetrics, distinctExpected } =
     loadExpectedDependencies();
-  const allDependencies = [
-    ...allRequests.map((request) => ({ kind: "estat", ...request })),
-    ...allMetrics.map((metric) => ({ kind: "r2", ...metric })),
-  ];
+  const allDependencies = allMetrics.map((metric) => ({ kind: 'r2', ...metric }));
   const partial = limit !== null && limit < allDependencies.length;
   const dependencies = limit === null ? allDependencies : allDependencies.slice(0, limit);
-  const appId = allRequests.length > 0 ? resolveAppId() : undefined;
-  if (allRequests.length > 0 && !appId) {
-    console.error("legacy e-Stat request が残っていますが NEXT_PUBLIC_ESTAT_APP_ID を解決できません");
-    process.exit(1);
-  }
   const publicBase = resolveR2PublicBase();
   console.log(`## テーマチャート live 監査`);
   console.log(
-    `期待集合 (依存ミラー): ${allMetrics.length} R2 metric / ${allRequests.length} legacy e-Stat request`,
+    `期待集合 (依存ミラー): ${allMetrics.length} R2 metric`,
   );
   console.log(`対象依存: ${dependencies.length} 件${partial ? " (--limit で一部のみ)" : ""}\n`);
   if (staged) console.log("読み取り: .local/r2 staged優先、未生成keyは公開R2へfallback\n");
@@ -236,15 +200,9 @@ async function main() {
   const areaCoverageWarns = [];
 
   for (const dependency of dependencies) {
-    const outcome =
-      dependency.kind === "estat"
-        ? await inspect(appId, dependency.params, dispatcher)
-        : await inspectR2(dependency, dispatcher, publicBase, staged);
+    const outcome = await inspectR2(dependency, dispatcher, publicBase, staged);
     const where = `${dependency.theme}/${dependency.componentKey}`;
-    const label =
-      dependency.kind === "estat"
-        ? `${where} (${dependency.params.statsDataId}${dependency.params.cdCat01 ? ` cdCat01=${dependency.params.cdCat01}` : ""})`
-        : `${where} (R2 ${dependency.metricKey})`;
+    const label = `${where} (R2 ${dependency.metricKey})`;
     results.push({ ...dependency, ...outcome });
 
     if (outcome.status !== "ok") {

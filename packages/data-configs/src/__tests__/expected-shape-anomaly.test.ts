@@ -4,7 +4,7 @@ import {
   EXPECTED_SHAPE_ANOMALY,
   MAX_KNOWN_BROKEN,
   MAX_KNOWN_BROKEN_VALUE,
-} from "../expected-shape-anomaly";
+} from "../../../../data/metrics/quality/shape-exceptions";
 import { METRICS_REGISTRY } from "../registry";
 import { VALUE_CHECKS } from "../shape-gate";
 

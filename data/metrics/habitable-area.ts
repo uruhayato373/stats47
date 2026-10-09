@@ -1,0 +1,74 @@
+import { DEFAULT_METRIC_PRESENTATION } from "./defaults/presentation";
+import type { MetricConfig } from "../../packages/data-configs/src/types";
+
+export const habitableArea: MetricConfig = {
+  "key": "habitable-area",
+  "title": "可住地面積",
+  "unit": "ｈａ",
+  "category": "landweather",
+  "source": {
+    "kind": "estat",
+    "statsDataId": "0000010102",
+    "cdCat01": "B1103",
+    "displayName": "社会・人口統計体系",
+    "url": "https://www.stat.go.jp/data/ssds/index.htm",
+  },
+  "entities": [
+    "prefecture",
+    "city",
+  ],
+  "years": {
+    "years": [
+      1994,
+      1995,
+      1996,
+      1997,
+      1998,
+      1999,
+      2000,
+      2001,
+      2002,
+      2003,
+      2004,
+      2005,
+      2006,
+      2007,
+      2008,
+      2009,
+      2010,
+      2011,
+      2012,
+      2013,
+      2014,
+      2015,
+      2016,
+      2023,
+      2024,
+    ],
+  },
+  "yearFormat": "fiscal",
+  "visualization": {
+    ...DEFAULT_METRIC_PRESENTATION,
+    "colorScheme": "interpolateOranges",
+    "colorSchemeType": "sequential",
+  },
+  "display": {
+    "conversionFactor": 1,
+    "decimalPlaces": 0,
+  },
+  "calculation": {
+    "isCalculated": false,
+    "normalizationOptions": [
+      {
+        "type": "per_population",
+        "label": "人口10万人あたり",
+        "unit": "ｈａ/10万人",
+        "scaleFactor": 100000,
+        "decimalPlaces": 1,
+      },
+    ],
+  },
+  "seoTitle": "可住地面積ランキング都道府県【2024年】｜1位北海道（2,269,076ｈａ）",
+  "seoDescription": "2024年の可住地面積の都道府県別ランキング。1位北海道（2,269,076ｈａ）、最下位奈良県（85,389ｈａ）で26.6倍の格差。地図やグラフで47都道府県を比較。",
+  "isActive": true,
+};

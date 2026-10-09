@@ -6,9 +6,9 @@
  * 本番 R2 に向けて起動すると、図の定義は本番 (= main の内容) になり、PR で変えた図の種類を検査できない
  * (2026-10-08、consumer-prices の cpi-heatmap。E2E-THEME-PR-PAGECOMPONENTS-01)。
  *
- * この中継は `app/page-components/<type>/<key>.json` だけを PR で生成した
- * `apps/web/scripts/data/page-components/<type>/<key>.json` (R2 へは verbatim に export される) から返し、
- * それ以外の key はすべて本番 R2 の公開 URL へそのまま取り次ぐ。アプリ側は `R2_PUBLIC_FETCH_URL` を
+ * page-components は PR の生成物 apps/web/scripts/data/page-components/ から返す。
+ * 指標metadataは同じPRで再生成・検証した .local/r2/ から返す。
+ * 観測値など、それ以外の key はすべて本番 R2 の公開 URL へそのまま取り次ぐ。アプリ側は `R2_PUBLIC_FETCH_URL` を
  * この中継に向けるだけで、本番のコードと読み取り経路は変えない。
  *
  *   node .github/scripts/r2-overlay-server.mjs [port]   # 既定 4790
@@ -23,6 +23,7 @@ import { R2_PUBLIC_BASE_URL } from "../../.claude/scripts/lib/site-config.cjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
 const LOCAL_DIR = path.join(ROOT, "apps/web/scripts/data/page-components");
+const LOCAL_SNAPSHOT_DIR = path.join(ROOT, ".local/r2");
 const PREFIX = "/app/page-components/";
 
 /** URL の path が PR の page-components の生成物に当たれば、そのファイルの絶対 path を返す。 */
@@ -43,14 +44,22 @@ export function localPageComponentsFile(urlPath, localDir = LOCAL_DIR) {
   return fs.existsSync(target) ? target : null;
 }
 
+/** Only generated metric metadata is overlaid; observation data still comes from R2. */
+export function localMetricSnapshotFile(urlPath, snapshotDir = LOCAL_SNAPSHOT_DIR) {
+  if (!/^\/app\/(?:ranking\/[a-z0-9-]+\/item\.json|ranking-items\/all\.json|home\/featured\.json|municipalities\/ranking\/[a-z0-9-]+\/(?:item|values)\.json)$/.test(urlPath)) return null;
+  const target = path.resolve(snapshotDir, ...urlPath.slice(1).split('/'));
+  if (!target.startsWith(path.resolve(snapshotDir) + path.sep)) return null;
+  return fs.existsSync(target) ? target : null;
+}
+
 /** 本番に取り次ぐときに返すヘッダー。fetch が展開した本文を返すので content-encoding / length は返さない。 */
 const PASS_HEADERS = ["content-type", "etag", "last-modified", "cache-control"];
 
-export function createOverlayServer({ upstream, localDir = LOCAL_DIR, log = () => {} }) {
+export function createOverlayServer({ upstream, localDir = LOCAL_DIR, snapshotDir = LOCAL_SNAPSHOT_DIR, log = () => {} }) {
   const base = upstream.replace(/\/+$/, "");
   return http.createServer(async (req, res) => {
     const urlPath = new URL(req.url ?? "/", "http://overlay").pathname;
-    const local = req.method === "GET" || req.method === "HEAD" ? localPageComponentsFile(urlPath, localDir) : null;
+    const local = req.method === "GET" || req.method === "HEAD" ? (localPageComponentsFile(urlPath, localDir) ?? localMetricSnapshotFile(urlPath, snapshotDir)) : null;
     if (local) {
       log(`local ${urlPath}`);
       res.writeHead(200, { "content-type": "application/json; charset=utf-8" });

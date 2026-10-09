@@ -48,6 +48,7 @@ const nextConfig: NextConfig = {
   distDir: process.env.NEXT_DIST_DIR || ".next",
   // OpenNextの要件: standalone出力を有効化
   output: "standalone",
+  outputFileTracingRoot: path.resolve(__dirname, "../.."),
   // trailing slash を統一（/ranking/ → /ranking にリダイレクト）
   trailingSlash: false,
   typescript: {
@@ -317,6 +318,10 @@ const nextConfig: NextConfig = {
   // NFT (Node File Tracing) から開発用パッケージを除外（約52-55MBの削減）
   outputFileTracingExcludes: {
     "*": [
+      // An alternate local build must not capture the changing dev output.
+      ...(process.env.NEXT_DIST_DIR && process.env.NEXT_DIST_DIR !== ".next"
+        ? ["./.next/**/*"]
+        : []),
       // Runtime output must not capture development caches through monorepo tracing.
       "./.next/cache/**/*",
       "./.next/standalone/**/*",

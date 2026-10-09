@@ -1,0 +1,43 @@
+import { DEFAULT_METRIC_PRESENTATION } from "./defaults/presentation";
+import type { MetricConfig } from "../../packages/data-configs/src/types";
+
+export const sexProductionAgePopulationRatio: MetricConfig = {
+  "key": "sex-production-age-population-ratio",
+  "title": "人口性比",
+  "subtitle": "生産年齢人口",
+  "unit": "（女=100）",
+  "category": "population",
+  "source": {
+    "kind": "estat",
+    "statsDataId": "0000010201",
+    "cdCat01": "#A02103",
+    "displayName": "社会・人口統計体系",
+    "url": "https://www.stat.go.jp/data/ssds/index.htm",
+  },
+  "entities": [
+    "prefecture",
+  ],
+  "years": {
+    "from": 2023,
+    "to": 2023,
+  },
+  "yearFormat": "calendar",
+  "visualization": {
+    ...DEFAULT_METRIC_PRESENTATION,
+    "colorScheme": "interpolatePiYG",
+    "colorSchemeType": "diverging",
+    "divergingMidpoint": "custom",
+    "divergingMidpointValue": 100,
+    "isReversed": false,
+    "isSymmetrized": false,
+  },
+  "display": {
+    "conversionFactor": 1,
+    "decimalPlaces": 1,
+  },
+  "calculation": {
+    "isCalculated": false,
+  },
+  "seoTitle": "人口性比（15～64歳人口）(A130201/A130202)",
+  "isActive": true,
+};

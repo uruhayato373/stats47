@@ -8,7 +8,7 @@
  * このファイルを統合し、重複を解消して state JSON (data/sns/buzz-map-catalog.json) を生成する。
  * state JSON を直接編集しない。ここだけを編集する。
  *
- * 各エントリの metricKeys は「実在確認済みの key のみ」を持つ (packages/data-configs/src/metrics/<key>.ts
+ * 各エントリの metricKeys は「実在確認済みの key のみ」を持つ (data/metrics/<key>.ts
  * または machine catalog の metricKey で照合)。実在確認できない場合は [] + feasibility:"needs-data"。
  * ダミーデータ・存在しない metricKey の捏造はしない。
  */

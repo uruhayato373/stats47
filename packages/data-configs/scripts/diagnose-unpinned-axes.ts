@@ -62,7 +62,7 @@ import {
   tabProvidesRate,
   type AxisCode,
 } from "../src/axis-match.js";
-import { EXPECTED_SHAPE_ANOMALY } from "../src/expected-shape-anomaly.js";
+import { EXPECTED_SHAPE_ANOMALY } from "../../../data/metrics/quality/shape-exceptions";
 import { getMetricConfig } from "../src/registry.js";
 import type { MetricConfig, SourceConfig } from "../src/types.js";
 import { datasetDir } from "../../../config/datasets.mjs";

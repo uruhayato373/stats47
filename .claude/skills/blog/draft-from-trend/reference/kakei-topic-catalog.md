@@ -225,7 +225,7 @@ tags: [kakei-chousa, blog, ranking, d2]
 # e-Stat cat01 カタログ取得 (APP_ID は apps/web/.env.development の NEXT_PUBLIC_ESTAT_APP_ID)
 # 数量: statsDataId=0003348235 / 支出額: 0003348239
 curl "https://api.e-stat.go.jp/rest/3.0/app/json/getMetaInfo?appId=<APP_ID>&statsDataId=0003348239"
-# 既存 config の cdCat01 抽出: packages/data-configs/src/metrics/*.ts の "kakei-chousa" を grep し
+# 既存 config の cdCat01 抽出: data/metrics/*.ts の "kakei-chousa" を grep し
 # statsDataId × cdCat01 を突合（本カタログ §B の表が結果）
 ```
 

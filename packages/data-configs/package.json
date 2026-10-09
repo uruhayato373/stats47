@@ -104,7 +104,7 @@
   "scripts": {
     "build:registry": "tsx scripts/build-registry.ts",
     "validate:years": "tsx scripts/validate-metric-years.ts",
-    "validate:config": "tsx scripts/validate-metric-config.ts",
+    "validate:config": "tsx scripts/check-metric-contract.ts && tsx scripts/validate-metric-config.ts",
     "generate:catalog": "tsx scripts/generate-theme-catalog.ts",
     "validate:catalog": "tsx scripts/validate-theme-catalog.ts",
     "validate:topics": "tsx scripts/validate-topic-catalog.ts",
@@ -133,7 +133,10 @@
     "evidence:validate": "tsx scripts/evidence/japan-zue.ts validate",
     "evidence:coverage": "tsx scripts/evidence/japan-zue.ts coverage",
     "evidence:expression-audit": "tsx scripts/evidence/japan-zue.ts expression-audit",
-    "evidence:diff": "tsx scripts/evidence/japan-zue.ts diff"
+    "evidence:diff": "tsx scripts/evidence/japan-zue.ts diff",
+    "metrics:generate-schema": "tsx scripts/generate-metric-schema.ts",
+    "metrics:build-index": "tsx scripts/check-metric-contract.ts --write-index",
+    "metrics:check": "tsx scripts/check-metric-contract.ts"
   },
   "dependencies": {
     "@stats47/area": "*",

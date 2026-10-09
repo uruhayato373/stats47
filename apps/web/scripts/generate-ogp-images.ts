@@ -1,4 +1,5 @@
 #!/usr/bin/env tsx
+import { METRIC_DEFINITIONS_DIR } from '../../../config/paths.mjs';
 /**
  * 静的画像 (OGP / リンクカード / note カバー) を Satori (Node) でレンダリングして
  * `.local/image-staging/<type>/<key>` に書き出す。R2 反映は生成された exact
@@ -966,7 +967,7 @@ async function main() {
           source: {
             item: `app/ranking/${id}/item.json`,
             values: `app/ranking/${id}/values.json`,
-            config: `packages/data-configs/src/metrics/${id}.ts`,
+            config: `${METRIC_DEFINITIONS_DIR}/${id}.ts`,
             topology: 'packages/gis/data/geoshape/prefecture.topojson',
           },
           assets: {

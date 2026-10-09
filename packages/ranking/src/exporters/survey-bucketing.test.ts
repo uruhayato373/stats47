@@ -1,3 +1,4 @@
+import { buildRecipe, METRICS_REGISTRY } from "@stats47/data-configs";
 import { describe, expect, it } from "vitest";
 
 import type { RankingItem } from "../types/ranking-item";
@@ -10,6 +11,7 @@ import {
 // 0000010103 = SSDS 都道府県テーブル / 0003445758 = 非SSDS (賃金構造基本統計調査)
 const SSDS_TABLE = "0000010103";
 const NON_SSDS = "0003445758";
+const sourceConfig = (statsDataId: string, cdCat01?: string) => ({recipe: buildRecipe({...METRICS_REGISTRY["total-population"], source:{kind:"estat",statsDataId,...(cdCat01 ? {cdCat01} : {})}})});
 
 function item(partial: Partial<RankingItem>): RankingItem {
   return {
@@ -29,7 +31,7 @@ describe("survey-bucketing (param 統一)", () => {
     const it1 = item({
       surveyId: "census", // 旧 baked (誤り) が残っていても
       surveyIds: ["kakei-chousa"], // 焼き込みが正
-      sourceConfig: { statsDataId: NON_SSDS } as never,
+      sourceConfig: sourceConfig(NON_SSDS),
     });
     expect(surveyBucketsForItem(it1)).toEqual(["kakei-chousa"]);
   });
@@ -38,7 +40,7 @@ describe("survey-bucketing (param 統一)", () => {
     const it1 = item({
       surveyId: "ssds",
       surveyIds: [],
-      sourceConfig: { statsDataId: SSDS_TABLE, cdCat01: "ZZZ9999" } as never,
+      sourceConfig: sourceConfig(SSDS_TABLE, "ZZZ9999"),
     });
     expect(surveyBucketsForItem(it1)).toEqual([]);
   });
@@ -54,7 +56,7 @@ describe("survey-bucketing (param 統一)", () => {
   it("非SSDS estat は surveyIds 未焼き込みなら statsDataId 辞書で解決 (stale 安全網)", () => {
     const it1 = item({
       surveyId: null, // 2026-06-07 再生成で null 化した stale item を想定
-      sourceConfig: { statsDataId: NON_SSDS } as never,
+      sourceConfig: sourceConfig(NON_SSDS),
     });
     expect(isSsdsItem(it1)).toBe(false);
     expect(surveyBucketsForItem(it1)).toEqual(["wage-structure-survey"]);
@@ -65,7 +67,7 @@ describe("survey-bucketing (param 統一)", () => {
     // C2101 事業所数 が census(国勢調査) バケットに誤入 → 事業所企業統計へ
     const it1 = item({
       surveyId: "census",
-      sourceConfig: { statsDataId: SSDS_TABLE, cdCat01: "C2101" } as never,
+      sourceConfig: sourceConfig(SSDS_TABLE, "C2101"),
     });
     expect(isSsdsItem(it1)).toBe(true);
     expect(surveyBucketsForItem(it1)).toEqual(["establishment-enterprise-census"]);
@@ -76,7 +78,7 @@ describe("survey-bucketing (param 統一)", () => {
     // A1101 総人口 → census + population-estimates
     const it1 = item({
       surveyId: "ssds",
-      sourceConfig: { statsDataId: SSDS_TABLE, cdCat01: "A1101" } as never,
+      sourceConfig: sourceConfig(SSDS_TABLE, "A1101"),
     });
     expect(surveyBucketsForItem(it1).sort()).toEqual(["census", "population-estimates"]);
   });
@@ -84,7 +86,7 @@ describe("survey-bucketing (param 統一)", () => {
   it("SSDS だが cdCat01 が無い → baked surveyId にフォールバック (無regression)", () => {
     const it1 = item({
       surveyId: "ssds",
-      sourceConfig: { statsDataId: SSDS_TABLE } as never,
+      sourceConfig: sourceConfig(SSDS_TABLE),
     });
     expect(surveyBucketsForItem(it1)).toEqual(["ssds"]);
   });
@@ -92,7 +94,7 @@ describe("survey-bucketing (param 統一)", () => {
   it("SSDS だが原典解決不能 → baked surveyId にフォールバック", () => {
     const it1 = item({
       surveyId: "ssds",
-      sourceConfig: { statsDataId: SSDS_TABLE, cdCat01: "ZZZ9999" } as never,
+      sourceConfig: sourceConfig(SSDS_TABLE, "ZZZ9999"),
     });
     expect(surveyBucketsForItem(it1)).toEqual(["ssds"]);
   });
@@ -101,7 +103,7 @@ describe("survey-bucketing (param 統一)", () => {
     // K5112 災害被害額 → 消防白書を fire-annual-report へ正規化
     const it1 = item({
       surveyId: "ssds",
-      sourceConfig: { statsDataId: SSDS_TABLE, cdCat01: "K5112" } as never,
+      sourceConfig: sourceConfig(SSDS_TABLE, "K5112"),
     });
     expect(surveyBucketsForItem(it1)).toEqual(["fire-annual-report"]);
   });

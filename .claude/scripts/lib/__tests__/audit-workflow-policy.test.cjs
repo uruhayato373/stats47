@@ -11,7 +11,7 @@ const AUDITOR = path.join(
   '.claude/scripts/lib/audit-workflow-policy.cjs'
 );
 
-function run(source, args = []) {
+function run(source, args = [], files = {}) {
   const root = fs.mkdtempSync(
     path.join(os.tmpdir(), 'stats47-workflow-policy-')
   );
@@ -24,6 +24,9 @@ function run(source, args = []) {
   fs.mkdirSync(path.dirname(workflow), { recursive: true });
   fs.copyFileSync(AUDITOR, auditor);
   fs.writeFileSync(workflow, source);
+  for (const [relative, content] of Object.entries(files)) {
+    const target = path.join(root, relative);fs.mkdirSync(path.dirname(target), {recursive:true});fs.writeFileSync(target, content);
+  }
   const result = spawnSync(process.execPath, [auditor, '--json', ...args], {
     cwd: root,
     encoding: 'utf8',
@@ -357,4 +360,16 @@ jobs:
 `);
   assert.equal(exact.status, 0, exact.stderr);
   assert.equal(exact.output.findings, 0);
+});
+
+test('metric local staging needs no production push, while normal writers still do', () => {
+  const writer = 'packages/ranking/src/scripts/generate-ranking-items.ts';
+  const files = {[writer]: 'import {saveToR2} from "@stats47/r2-storage/server"; async function main(){ await saveToR2("x", "y"); }'};
+  const workflow = (command) => 'name: test\non: { pull_request: {} }\npermissions: { contents: read }\njobs:\n  test:\n    runs-on: ubuntu-latest\n    timeout-minutes: 5\n    steps:\n      - run: '+command+'\n';
+  const local = run(workflow('npx tsx '+writer+' --stage-dir .local/r2'), [], files);
+  assert.ok(!local.output.details.some(f=>f.code === 'R2_WRITE_WITHOUT_PUSH'));
+  const publishing = run(workflow('npx tsx '+writer), [], files);
+  assert.ok(publishing.output.details.some(f=>f.code === 'R2_WRITE_WITHOUT_PUSH'));
+  const mixed = run(workflow('npx tsx '+writer+' --stage-dir .local/r2; npx tsx '+writer), [], files);
+  assert.ok(mixed.output.details.some(f=>f.code === 'R2_WRITE_WITHOUT_PUSH'));
 });

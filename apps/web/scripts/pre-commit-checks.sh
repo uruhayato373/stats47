@@ -98,6 +98,14 @@ if [ -n "$STAGED_DOCS" ]; then
   fi
 fi
 
+# Canonical metric and content contracts: reject schema, ID and generated-index drift.
+if printf '%s\n' "$PRECOMMIT_PATHS_2" | grep -qE '^(data/(metrics|metric-sources|themes|content)/|packages/(data-configs|types)/|apps/web/scripts/(sync-content-catalog|validate-content-catalog)\.ts$|package\.json$)'; then
+  if ! (cd "$GUARD_ROOT" && npm run metrics:check && npm run content:check); then
+    echo "Metric/content identity contract failed"
+    ERROR_COUNT=$((ERROR_COUNT + 1))
+  fi
+fi
+
 # 2.1c file:// URL の文字列連結ガード
 # `file://${process.argv[1]}` は Windows で必ず不一致になり、ESM のエントリポイント
 # 判定なら main() が呼ばれないまま exit 0 で終わる (失敗ではなく無言の no-op)。
@@ -483,7 +491,7 @@ fi
 #     - develop 着地: develop-quality-gate.yml の catalog-gates job (同じ preflight:pr)
 #     - main PR: pr-quality-check.yml の Catalog Gates job
 #   が走らせるので、commit ごとに直列で払わない。commit 前に手元で確かめたいときは preflight:pr。
-STAGED_CATALOG_HINT=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | grep -E "^packages/data-configs/src/(metrics|topics|theme-catalog|area-databook|unit)/|^data/themes/|^packages/types/src/indicator-sets/|^apps/web/scripts/data/page-components/(theme|area)/" || true)
+STAGED_CATALOG_HINT=$(printf '%s\n' "$PRECOMMIT_PATHS_0" | grep -E "^packages/data-configs/src/(topics|theme-catalog|area-databook|unit)/|^data/(metrics|themes)/|^packages/types/src/indicator-sets/|^apps/web/scripts/data/page-components/(theme|area)/" || true)
 if [ -n "$STAGED_CATALOG_HINT" ]; then
   echo -e "${GREEN}📚 catalog / metric config の整合チェックは commit では走らせない${NC}"
   echo -e "${YELLOW}💡 push 前に: npm run preflight:pr (develop 着地時と main PR の CI でも同じ検査が走る)${NC}"

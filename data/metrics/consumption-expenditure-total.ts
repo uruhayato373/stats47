@@ -1,0 +1,47 @@
+import { DEFAULT_METRIC_PRESENTATION } from "./defaults/presentation";
+import type { MetricConfig } from "../../packages/data-configs/src/types";
+
+export const consumptionExpenditureTotal: MetricConfig = {
+  "key": "consumption-expenditure-total",
+  "title": "消費支出総額",
+  "subtitle": "都道府県庁所在市の二人以上世帯の1世帯当たり年間消費支出総額",
+  "description": "家計調査（二人以上世帯）における年間の消費支出総額。食料・住居・光熱水道・被服・教育・教養娯楽などすべての生活費の合計で、都市ごとの生活費水準を示す。",
+  "unit": "円",
+  "category": "economy",
+  "source": {
+    "kind": "kakei-chousa",
+    "filter": {
+      "source": {
+        "name": "家計調査",
+        "url": "https://www.e-stat.go.jp/stat-search/files?page=1&layout=datalist&toukei=00200561",
+      },
+      "statsDataId": "0003348239",
+      "cdCat01": "001100000",
+      "cdCat02": "03",
+    },
+    "displayName": "家計調査",
+    "url": "https://www.e-stat.go.jp/stat-search/files?page=1&layout=datalist&toukei=00200561",
+  },
+  "entities": [
+    "prefecture",
+  ],
+  "years": {
+    "from": 2007,
+    "to": 2024,
+  },
+  "yearFormat": "calendar",
+  "visualization": {
+    ...DEFAULT_METRIC_PRESENTATION,
+    "colorScheme": "interpolateBlues",
+    "colorSchemeType": "sequential",
+    domain: { mode: "zero" },
+  },
+  "display": {
+    "conversionFactor": 1,
+    "decimalPlaces": 0,
+  },
+  "calculation": {
+    "isCalculated": false,
+  },
+  "isActive": true,
+};

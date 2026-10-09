@@ -7,6 +7,7 @@
       "key": "population-flood-risk",
       "title": "2050年、洪水浸水想定区域に暮らす人口はどれくらいか",
       "href": "/geo/population-flood-risk",
+      "rankingKeys": [],
       "published": true
     },
     {
@@ -15,6 +16,7 @@
       "key": "population-land-price",
       "title": "地価が上がる住宅地でも、周囲の人口は減るのか",
       "href": "/geo/population-land-price",
+      "rankingKeys": [],
       "published": true
     },
     {
@@ -23,6 +25,7 @@
       "key": "population-landslide-exposure",
       "title": "土砂災害の指定区域と人口・公共施設",
       "href": "/geo/population-landslide-exposure",
+      "rankingKeys": [],
       "published": true
     },
     {
@@ -31,6 +34,9 @@
       "key": "population-low-elevation",
       "title": "標高の低い土地に、どれだけの人が住んでいるか",
       "href": "/geo/population-low-elevation",
+      "rankingKeys": [
+        "low-elevation-population-ratio-5m"
+      ],
       "published": true
     },
     {
@@ -39,6 +45,7 @@
       "key": "population-public-facility-access",
       "title": "行政施設・公的集会施設までの距離と地域人口",
       "href": "/geo/population-public-facility-access",
+      "rankingKeys": [],
       "published": true
     },
     {
@@ -47,6 +54,7 @@
       "key": "population-snow-designation",
       "title": "2016年度の豪雪指定区域と2020年人口",
       "href": "/geo/population-snow-designation",
+      "rankingKeys": [],
       "published": true
     },
     {
@@ -55,6 +63,7 @@
       "key": "population-station-access",
       "title": "2050年、駅の近くに住む人口はどれくらい残るのか",
       "href": "/geo/population-station-access",
+      "rankingKeys": [],
       "published": true
     }
   ]

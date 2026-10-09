@@ -152,7 +152,7 @@ Phase 6 (2026-05-27) で観測値・相関結果を R2 へ移行、Phase F (2026
 git TS 化し永続 D1 を全廃した。アプリが読む各データの真実源:
 
 ### Authored / 設定 (git TS が SSOT → 生成スクリプトで R2)
-- metric メタ — **SSOT は `packages/data-configs/src/metrics/<key>.ts`**
+- metric メタ — **SSOT は `data/metrics/<key>.ts`**
 - 各種カタログ定義 — git TS → R2 反映 (冪等スクリプト)。テーマの指標・チャート定義だけは上の例外で `data/themes/catalogs/` の JSON
 
 ### Authored / 運用 (git TS 定義が SSOT → 生成スクリプトで R2 JSON)

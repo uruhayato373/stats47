@@ -21,10 +21,11 @@ const baseConfig: MetricConfig = {
   entities: ["prefecture"],
   years: { from: 2009, to: 2024 },
   yearFormat: "fiscal",
-  visualization: {
+  visualization: { domain: { mode: 'extent' },
+    classification: { method: 'equal-interval', classes: 5 }, trendDomain: { mode: 'extent', padding: 0.08 }, comparisonDomain: { mode: 'extent', padding: 0.05 },
     colorScheme: "interpolateBlues",
     colorSchemeType: "sequential",
-    minValueType: "data-min",
+
   },
   display: { conversionFactor: 1, decimalPlaces: 0 },
   calculation: { isCalculated: false },
@@ -57,7 +58,6 @@ describe("buildRankingItemFromMetric", () => {
     expect(config.unit).toBe("円");
     expect(config.subtitle).toContain("1世帯当たり");
     expect(config.calculation?.normalizationOptions).toBeUndefined();
-    expect(config.display?.normalizationOptions).toBeUndefined();
     const item = buildRankingItemFromMetric(config, { values: { yearCodes: ["2024"] }, now: NOW });
     expect(item.calculation?.normalizationOptions).toBeUndefined();
     expect(item.latestYear?.yearCode).toBe("2024");
@@ -85,24 +85,22 @@ describe("buildRankingItemFromMetric", () => {
     expect(item.dataSourceId).toBe("estat");
     expect(item.tags).toEqual([{ tagKey: "人口" }, { tagKey: "人口動態" }]);
     expect(item.valueDisplay).toEqual({ conversionFactor: 1, decimalPlaces: 0 });
-    expect(item.visualization).toMatchObject({
+    expect(item.visualization).toMatchObject({ domain: { mode: 'extent' },
+    classification: { method: 'equal-interval', classes: 5 }, trendDomain: { mode: 'extent', padding: 0.08 }, comparisonDomain: { mode: 'extent', padding: 0.05 },
       colorScheme: "interpolateBlues",
       colorSchemeType: "sequential",
-      minValueType: "data-min",
+
     });
     // 新形: 実行可能な estatParams と宣言部 recipe を分離する。
     // 旧形は statsDataId/cdCat01/cdCat02 を手選びして flat に置くだけで、
     // オンデマンド経路が丸ごと spread して cdCat03 以降を落としていた。
     expect(item.sourceConfig).toEqual({
-      estatParams: { statsDataId: "0000010101", cdCat01: "A1101" },
       recipe: buildRecipe(baseConfig),
       // survey-bucketing の SSDS 判定が参照する後方互換キー
-      statsDataId: "0000010101",
-      cdCat01: "A1101",
       source: { name: "社会・人口統計体系", url: "https://www.stat.go.jp/data/ssds/index.htm" },
     });
     // 単発クエリで再現できる metric なので derived は立たない
-    expect(item.sourceConfig?.derived).toBeUndefined();
+    expect(item.sourceConfig?.recipe.derived).toBe(false);
     expect(item.sourceConfig?.recipe?.configHash).toMatch(/^[0-9a-f]{16}$/);
     // createdAt は既存を保持、updatedAt は now
     expect(item.createdAt).toBe("2025-11-09 04:27:32");

@@ -43,7 +43,7 @@ export async function createSequentialColorScale(
   const dataMinValue = d3.min(values) ?? 0;
   const maxValue = d3.max(values) ?? 0;
   const minValue = minValueType === 'zero' ? 0 : dataMinValue;
-  const scale = d3.scaleSequential(interpolator).domain([minValue, maxValue]);
+  const scale = d3.scaleSequential(interpolator).domain(options.resolvedDomain ?? [minValue, maxValue]).clamp(true);
 
   return (value: number) => scale(value);
 }

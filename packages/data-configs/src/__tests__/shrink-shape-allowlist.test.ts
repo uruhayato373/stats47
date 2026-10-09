@@ -13,7 +13,7 @@ import {
 import type { ExpectedShapeAnomalyEntry } from "../shape-gate";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
-const TARGET = resolve(HERE, "../expected-shape-anomaly.ts");
+const TARGET = resolve(HERE, "../../../../data/metrics/quality/shape-exceptions");
 
 /** scanner の `--emit-allowlist` が実際に出す形 (エントリのリテラルだけ) */
 const EMITTED = `// 生成日時: 2026-07-30T00:00:00.000Z / エントリ数: 2

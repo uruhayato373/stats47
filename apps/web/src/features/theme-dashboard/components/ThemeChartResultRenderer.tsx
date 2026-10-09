@@ -2,6 +2,9 @@
 
 import dynamic from 'next/dynamic';
 
+import {metricSeriesDomain} from '@/lib/metric-presentation';
+
+
 import { ChartEmptyState, ChartLoading } from './ChartState';
 import {
   partitionObservedSeries,
@@ -135,6 +138,8 @@ function LineResultChart({ result }: { result: LineResult }) {
       {history.length > 0 && (
         <LineChartClient
           chartData={{ ...data, lines: history }}
+          yDomain={metricSeriesDomain(data.data, history.filter(line=>line.yAxis !== 'right').map(line=>line.dataKey), result.axisPolicies.left)}
+          rightYDomain={metricSeriesDomain(data.data, history.filter(line=>line.yAxis === 'right').map(line=>line.dataKey), result.axisPolicies.right)}
           showLatestValues={result.showLatestValues === true}
         />
       )}
@@ -178,6 +183,8 @@ function MixedResultChart({ result }: { result: MixedResult }) {
         <D3MixedChart
           data={data.data as Array<Record<string, string | number | undefined>>}
           categoryKey={data.xAxisKey}
+          leftYDomain={metricSeriesDomain(data.data, history.filter(item=>item.kind==='column').map(item=>item.dataKey), result.axisPolicies.left, true)}
+          rightYDomain={metricSeriesDomain(data.data, history.filter(item=>item.kind==='line').map(item=>item.dataKey), result.axisPolicies.right)}
           columns={history.filter((item) => item.kind === 'column')}
           lines={history.filter((item) => item.kind === 'line')}
           leftUnit={data.leftUnit ?? ''}

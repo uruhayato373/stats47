@@ -1,12 +1,10 @@
-import "server-only";
+import 'server-only';
 
-import { logger } from "@stats47/logger/server";
-import { saveToR2 } from "@stats47/r2-storage/server";
-import {
-  generateRankingThumbnailMapSvg,
-} from "@stats47/visualization/server";
+import { logger } from '@stats47/logger/server';
+import { saveToR2 } from '@stats47/r2-storage/server';
+import { generateRankingThumbnailMapSvg } from '@stats47/visualization/server';
 
-import { METRICS_REGISTRY } from "@stats47/data-configs/registry";
+import { METRICS_REGISTRY } from '@stats47/data-configs/registry';
 import {
   CATEGORY_TOPIC_CATALOGS,
   OTHER_TOPIC_KEY,
@@ -14,34 +12,37 @@ import {
   resolveTopicKey,
   toTopicResolutionInput,
   type CategoryTopicCatalog,
-} from "@stats47/data-configs/topics";
+} from '@stats47/data-configs/topics';
 
-import surveysMaster from "../data/surveys.json";
-import { buildSurveyItemsSnapshot } from "./survey-items-snapshot";
+import surveysMaster from '../data/surveys.json';
+import { buildSurveyItemsSnapshot } from './survey-items-snapshot';
 
 /** categoryKey は string なので、レジストリ側の Partial<Record<CategoryKey, …>> を安全に引く */
 function lookupTopicCatalog(categoryKey: string) {
-  return (CATEGORY_TOPIC_CATALOGS as Record<string, CategoryTopicCatalog | undefined>)[
-    categoryKey
-  ];
+  return (
+    CATEGORY_TOPIC_CATALOGS as Record<string, CategoryTopicCatalog | undefined>
+  )[categoryKey];
 }
-import { KNOWN_RANKING_KEYS } from "../config/known-ranking-keys";
-import { compareByRepresentativeThenRecency } from "../lib/ranking-order";
-import { bakeHomeFeaturedItem, resolveHomeFeaturedItems } from "./home-featured";
-import { listRankingItemsWithTagsFromR2 } from "../repositories/ranking-item";
-import { readRankingValuesFromR2 } from "../repositories/ranking-value";
-import type { CategoryRankingItem } from "../types/ranking-item";
-import type { FeaturedRankingItem, RankingItem } from "../types/ranking-item";
+import { KNOWN_RANKING_KEYS } from '../config/known-ranking-keys';
+import { compareByRepresentativeThenRecency } from '../lib/ranking-order';
+import {
+  bakeHomeFeaturedItem,
+  resolveHomeFeaturedItems,
+} from './home-featured';
+import { listRankingItemsWithTagsFromR2 } from '../repositories/ranking-item';
+import { readRankingValuesFromR2 } from '../repositories/ranking-value';
+import type { CategoryRankingItem } from '../types/ranking-item';
+import type { FeaturedRankingItem, RankingItem } from '../types/ranking-item';
 import {
   categoryItemsKeyPath,
   homeFeaturedKeyPath,
   rankingItemKeyPath,
   surveyItemsKeyPath,
-} from "../types/snapshot";
+} from '../types/snapshot';
 import {
   resolveItemAttribution,
   surveyBucketsForItem,
-} from "./survey-bucketing";
+} from './survey-bucketing';
 
 /** CategoryRankingItem に areaType を追加したローカル型 */
 interface CategoryRankingItemWithAreaType extends CategoryRankingItem {
@@ -88,17 +89,27 @@ export function checkRankingItemsCompleteness(input: {
   const errors: string[] = [];
   if (input.missingFeaturedKeys.length > 0) {
     errors.push(
-      `home featured: item.json に解決できない定義があります (${input.missingFeaturedKeys.join(", ")})`,
+      `home featured: item.json に解決できない定義があります (${input.missingFeaturedKeys.join(', ')})`
     );
   }
   if (input.itemCount < input.expectedMinCount) {
     errors.push(
       `item.json 読み込み件数が異常に少ない (items=${input.itemCount}, expected>=${input.expectedMinCount})。` +
         `R2 の部分列挙 (item-metadata-refresh staging 等) を全件と誤認している可能性があります ` +
-        `(NODE_ENV=production で S3 API 経由の一覧を使っているか確認してください)`,
+        `(NODE_ENV=production で S3 API 経由の一覧を使っているか確認してください)`
     );
   }
   return errors;
+}
+
+/** Preserve the published population when exporting from staged metadata. */
+export function publishedStagedRankingItems(
+  items: readonly RankingItem[]
+): RankingItem[] {
+  return items.filter(
+    (item) =>
+      item.areaType === 'prefecture' && KNOWN_RANKING_KEYS.has(item.rankingKey)
+  );
 }
 
 /**
@@ -121,13 +132,19 @@ export function checkRankingItemsCompleteness(input: {
  *   ranking/{rankingKey}/item.json
  *   survey/{surveyId}/items.json
  */
-export async function exportRankingItemsPerUrl(): Promise<ExportRankingItemsPerUrlResult> {
+export async function exportRankingItemsPerUrl(
+  stagedItems?: readonly RankingItem[]
+): Promise<ExportRankingItemsPerUrlResult> {
   const startedAt = Date.now();
 
   // 1. 全 ranking item を R2 item.json から取得
-  const itemsResult = await listRankingItemsWithTagsFromR2();
+  const itemsResult = stagedItems
+    ? { success: true as const, data: publishedStagedRankingItems(stagedItems) }
+    : await listRankingItemsWithTagsFromR2();
   if (!itemsResult.success) {
-    throw itemsResult.error ?? new Error("listRankingItemsWithTagsFromR2 failed");
+    throw (
+      itemsResult.error ?? new Error('listRankingItemsWithTagsFromR2 failed')
+    );
   }
   const items: RankingItem[] = itemsResult.data;
 
@@ -163,7 +180,8 @@ export async function exportRankingItemsPerUrl(): Promise<ExportRankingItemsPerU
   // ホームの選定・順番・hookは掲載価値スコアの生成物 `HOME_FEATURED_PROMINENCE` が決める
   // (2026-07-29 に手動キュレーション HOME_FEATURED_RANKINGS から自動選定へ移行)。
   // 生成物は isActive な metric からしか選ばないので、旧 config validation は不要。
-  const { resolved: featuredResolved, missingKeys } = resolveHomeFeaturedItems(items);
+  const { resolved: featuredResolved, missingKeys } =
+    resolveHomeFeaturedItems(items);
   const completenessErrors = checkRankingItemsCompleteness({
     itemCount: items.length,
     expectedMinCount: Math.floor(KNOWN_RANKING_KEYS.size * 0.9),
@@ -171,7 +189,7 @@ export async function exportRankingItemsPerUrl(): Promise<ExportRankingItemsPerU
   });
   if (completenessErrors.length > 0) {
     throw new Error(
-      `exportRankingItemsPerUrl completeness check failed: ${completenessErrors.join(" / ")}`,
+      `exportRankingItemsPerUrl completeness check failed: ${completenessErrors.join(' / ')}`
     );
   }
 
@@ -182,36 +200,40 @@ export async function exportRankingItemsPerUrl(): Promise<ExportRankingItemsPerU
   //  コンポーネント側でカードを非表示にする)。派生ロジックはpure helper
   //  (home-featured.ts) にあり fixture で unit test される。
   const featuredBaked: FeaturedRankingItem[] = await Promise.all(
-    featuredResolved.map(async ({ item, definition }): Promise<FeaturedRankingItem> => {
-      const yearCode =
-        item.availableYears?.[0]?.yearCode || item.latestYear?.yearCode || "2024";
-      const valuesResult = await readRankingValuesFromR2(
-        item.rankingKey,
-        "prefecture",
-        yearCode,
-      );
-      if (!valuesResult.success || valuesResult.data.length === 0) {
-        // 値が読めない場合もhomeFeatured (hook) は焼く
-        return {
-          ...item,
-          homeFeatured: {
-            order: definition.order,
-            hook: definition.hook,
-          },
-        };
+    featuredResolved.map(
+      async ({ item, definition }): Promise<FeaturedRankingItem> => {
+        const yearCode =
+          item.availableYears?.[0]?.yearCode ||
+          item.latestYear?.yearCode ||
+          '2024';
+        const valuesResult = await readRankingValuesFromR2(
+          item.rankingKey,
+          'prefecture',
+          yearCode
+        );
+        if (!valuesResult.success || valuesResult.data.length === 0) {
+          // 値が読めない場合もhomeFeatured (hook) は焼く
+          return {
+            ...item,
+            homeFeatured: {
+              order: definition.order,
+              hook: definition.hook,
+            },
+          };
+        }
+        return bakeHomeFeaturedItem({
+          item,
+          definition,
+          values: valuesResult.data,
+          generateSvg: (rows) =>
+            generateRankingThumbnailMapSvg(rows, {
+              colorScheme: item.visualization?.colorScheme,
+              isReversed: item.visualization?.isReversed,
+              idSuffix: item.rankingKey,
+            }),
+        });
       }
-      return bakeHomeFeaturedItem({
-        item,
-        definition,
-        values: valuesResult.data,
-        generateSvg: (rows) =>
-          generateRankingThumbnailMapSvg(rows, {
-            colorScheme: item.visualization?.colorScheme,
-            isReversed: item.visualization?.isReversed,
-            idSuffix: item.rankingKey,
-          }),
-      });
-    }),
+    )
   );
 
   const featuredBody = JSON.stringify({
@@ -221,8 +243,8 @@ export async function exportRankingItemsPerUrl(): Promise<ExportRankingItemsPerU
   });
   uploads.push(
     saveToR2(homeFeaturedKeyPath(), featuredBody, {
-      contentType: "application/json; charset=utf-8",
-    }),
+      contentType: 'application/json; charset=utf-8',
+    })
   );
 
   // ── category/{categoryKey}/items.json ────────────────────────────────────────
@@ -231,7 +253,10 @@ export async function exportRankingItemsPerUrl(): Promise<ExportRankingItemsPerU
   // 旧実装はページ側が全調査リスト (app/survey/all.json) を表示しており、無関係な調査が
   // 並んでいた (2026-07-14 是正。正典: survey-linkage-standards.md §2)。
   const surveyNameById = new Map(
-    (surveysMaster as Array<{ id: string; name: string }>).map((s) => [s.id, s.name]),
+    (surveysMaster as Array<{ id: string; name: string }>).map((s) => [
+      s.id,
+      s.name,
+    ])
   );
   for (const categoryKey of categoryKeySet) {
     const matched = items
@@ -256,29 +281,36 @@ export async function exportRankingItemsPerUrl(): Promise<ExportRankingItemsPerU
       for (const r of matched) {
         const config = METRICS_REGISTRY[r.rankingKey];
         if (!config) continue; // registry に無い (退役直後等) は分類しない
-        const topicKey = resolveTopicKey(toTopicResolutionInput(config), topicCatalog);
+        const topicKey = resolveTopicKey(
+          toTopicResolutionInput(config),
+          topicCatalog
+        );
         topicKeyByRankingKey.set(r.rankingKey, topicKey);
         usedTopicKeys.add(topicKey);
       }
     }
 
-    const categoryItems: CategoryRankingItemWithAreaType[] = matched.map((r) => ({
-      rankingKey: r.rankingKey,
-      areaType: r.areaType,
-      title: r.title,
-      readerLabel: r.readerLabel ?? r.title,
-      subtitle: r.subtitle ?? null,
-      unit: r.unit,
-      latestYear: r.latestYear ?? null,
-      availableYears: r.availableYears ?? null,
-      description: r.description ?? null,
-      demographicAttr: r.demographicAttr ?? null,
-      normalizationBasis: r.normalizationBasis ?? null,
-      groupKey: r.groupKey ?? null,
-      hook: r.hook ?? null,
-      top1: r.latestTop ?? null,
-      ...(topicCatalog ? { topicKey: topicKeyByRankingKey.get(r.rankingKey) ?? null } : {}),
-    }));
+    const categoryItems: CategoryRankingItemWithAreaType[] = matched.map(
+      (r) => ({
+        rankingKey: r.rankingKey,
+        areaType: r.areaType,
+        title: r.title,
+        readerLabel: r.readerLabel ?? r.title,
+        subtitle: r.subtitle ?? null,
+        unit: r.unit,
+        latestYear: r.latestYear ?? null,
+        availableYears: r.availableYears ?? null,
+        description: r.description ?? null,
+        demographicAttr: r.demographicAttr ?? null,
+        normalizationBasis: r.normalizationBasis ?? null,
+        groupKey: r.groupKey ?? null,
+        hook: r.hook ?? null,
+        top1: r.latestTop ?? null,
+        ...(topicCatalog
+          ? { topicKey: topicKeyByRankingKey.get(r.rankingKey) ?? null }
+          : {}),
+      })
+    );
 
     // 表示順マニフェスト。1 件以上該当した topic だけをカタログ順に並べ、
     // 受け皿 (other) は該当があれば末尾に付ける。
@@ -297,12 +329,19 @@ export async function exportRankingItemsPerUrl(): Promise<ExportRankingItemsPerU
     for (const it of matched) {
       for (const surveyId of surveyBucketsForItem(it)) {
         if (!surveyNameById.has(surveyId)) continue; // マスタ非実在 (合成 id 等) はリンクを出さない
-        sourceSurveyCounts.set(surveyId, (sourceSurveyCounts.get(surveyId) ?? 0) + 1);
+        sourceSurveyCounts.set(
+          surveyId,
+          (sourceSurveyCounts.get(surveyId) ?? 0) + 1
+        );
       }
     }
     const sourceSurveys = [...sourceSurveyCounts.entries()]
       .sort((a, b) => b[1] - a[1])
-      .map(([id, itemCount]) => ({ id, name: surveyNameById.get(id)!, itemCount }));
+      .map(([id, itemCount]) => ({
+        id,
+        name: surveyNameById.get(id)!,
+        itemCount,
+      }));
 
     const body = JSON.stringify({
       generatedAt,
@@ -314,8 +353,8 @@ export async function exportRankingItemsPerUrl(): Promise<ExportRankingItemsPerU
     });
     uploads.push(
       saveToR2(categoryItemsKeyPath(categoryKey), body, {
-        contentType: "application/json; charset=utf-8",
-      }),
+        contentType: 'application/json; charset=utf-8',
+      })
     );
   }
 
@@ -345,18 +384,24 @@ export async function exportRankingItemsPerUrl(): Promise<ExportRankingItemsPerU
     });
     uploads.push(
       saveToR2(rankingItemKeyPath(rankingKey), body, {
-        contentType: "application/json; charset=utf-8",
-      }),
+        contentType: 'application/json; charset=utf-8',
+      })
     );
   }
 
   // ── survey/{surveyId}/items.json ─────────────────────────────────────────────
   for (const surveyId of surveyIdSet) {
-    const body = JSON.stringify(buildSurveyItemsSnapshot(surveyId, itemsBySurvey.get(surveyId) ?? [], generatedAt));
+    const body = JSON.stringify(
+      buildSurveyItemsSnapshot(
+        surveyId,
+        itemsBySurvey.get(surveyId) ?? [],
+        generatedAt
+      )
+    );
     uploads.push(
       saveToR2(surveyItemsKeyPath(surveyId), body, {
-        contentType: "application/json; charset=utf-8",
-      }),
+        contentType: 'application/json; charset=utf-8',
+      })
     );
   }
 
@@ -370,7 +415,9 @@ export async function exportRankingItemsPerUrl(): Promise<ExportRankingItemsPerU
   const surveysFiles = surveyIdSet.size;
 
   // category アイテム数合計（全カテゴリの matched 合計は重複あるため items.length を代替とする）
-  const categoriesCount = items.filter((it) => it.isActive && it.categoryKey).length;
+  const categoriesCount = items.filter(
+    (it) => it.isActive && it.categoryKey
+  ).length;
   const surveysCount = items.filter((it) => it.isActive && it.surveyId).length;
 
   logger.info(
@@ -382,7 +429,7 @@ export async function exportRankingItemsPerUrl(): Promise<ExportRankingItemsPerU
       totalSizeBytes,
       durationMs,
     },
-    "ranking_items per-URL snapshots を R2 に保存しました",
+    'ranking_items per-URL snapshots を R2 に保存しました'
   );
 
   return {
@@ -392,7 +439,7 @@ export async function exportRankingItemsPerUrl(): Promise<ExportRankingItemsPerU
     surveys: { count: surveysCount, files: surveysFiles },
     surveyIds: [...surveyIdSet],
     surveyItemCounts: Object.fromEntries(
-      [...itemsBySurvey.entries()].map(([id, arr]) => [id, arr.length]),
+      [...itemsBySurvey.entries()].map(([id, arr]) => [id, arr.length])
     ),
     totalSizeBytes,
     durationMs,

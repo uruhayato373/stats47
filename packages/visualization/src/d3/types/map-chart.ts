@@ -9,6 +9,7 @@ import type {
     MinValueType,
     VisualizationDataPoint,
 } from "./color-scale";
+import type { ColorClassification, NumericDomainPolicy } from '@stats47/types';
 
 // ============================================================
 // カラースキーム設定
@@ -18,6 +19,8 @@ import type {
  * 地図可視化設定（ベース）
  */
 interface BaseMapVisualizationConfig {
+  domain?: NumericDomainPolicy;
+  classification?: ColorClassification;
   /** カラースキーム名 */
   colorScheme?: string;
   /** カラースキームを反転 */

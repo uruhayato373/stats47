@@ -7,7 +7,7 @@ model: sonnet
 
 # Data Ingester Agent
 
-estat-researcher が確認した統計表を **R2 namespace に直接投入** する書き込み専門 agent。TS-config (`packages/data-configs/src/metrics/<key>.ts`) を入口に、e-Stat / MLIT から fetch して `app/stats/<metric>/{values,cities,ports,migration-flow-<year>}.json` を生成する。D1 `metrics` テーブルへの cache 同期も担当。
+estat-researcher が確認した統計表を **R2 namespace に直接投入** する書き込み専門 agent。TS-config (`data/metrics/<key>.ts`) を入口に、e-Stat / MLIT から fetch して `app/stats/<metric>/{values,cities,ports,migration-flow-<year>}.json` を生成する。D1 `metrics` テーブルへの cache 同期も担当。
 
 Phase 6 (2026-05-27) の D1 → R2 移行後、本 agent は D1 stats_* テーブルへ書き込まない。
 
@@ -60,12 +60,12 @@ Phase 6 (2026-05-27) の D1 → R2 移行後、本 agent は D1 stats_* テー�
 ## 触る state / files
 
 - `.local/r2/app/stats/<metric>/*.json` (write)
-- `packages/data-configs/src/metrics/*.ts` (新規 metric 追加時 write)
+- `data/metrics/*.ts` (新規 metric 追加時 write)
 - `packages/data-configs/src/registry.ts` (auto-generated, `npm run build:registry --workspace=packages/data-configs`)
 - ローカル D1 `metrics` テーブル (sync-metrics-cache 時のみ write)
 - `apps/web/scripts/seed-*` — seed スクリプト (read)
 - `data/estat/` の市区町村分 — estat-researcher の出力を read
-- `packages/data-configs/src/verified-value-profiles.ts` (**単一 writer**) — 値分布の検証台帳。
+- `data/metrics/quality/verified-value-profiles.ts` (**単一 writer**) — 値分布の検証台帳。
   根拠は estat-researcher に調べさせてよいが、**書き込むのは本 agent だけ**
   (複数 agent が書くと予測の一貫性が崩れ、台帳が「誰かが緑にした」状態になる)
 

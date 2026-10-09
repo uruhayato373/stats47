@@ -6,7 +6,7 @@
 > クロスソースヒット（3ソース以上）: 1件（クマ被害 ※データ未整備）
 > 白書エンリッチ: 未実行（`--whitepaper` 指定なし）
 
-DBレス対応: マッチングは D1 ではなく git TS metric config（`packages/data-configs/src/metrics/*.ts` 2,211件）+ R2 `app/ranking/<key>/` の実在チェック、重複は R2 `app/blog/all.json`（290記事）で判定。
+DBレス対応: マッチングは D1 ではなく git TS metric config（`data/metrics/*.ts` 2,211件）+ R2 `app/ranking/<key>/` の実在チェック、重複は R2 `app/blog/all.json`（290記事）で判定。
 
 ---
 

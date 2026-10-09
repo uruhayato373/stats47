@@ -123,8 +123,8 @@ grep -r "<img\|<Image" apps/web/src --include="*.tsx" -l | head -10
 # 完全DBレス: R2 snapshot / git TS から集計。旧 D1/miniflare は廃止
 R2="https://storage.stats47.jp"
 echo "公開記事:            $(curl -s "$R2/app/blog/all.json" | jq '.articles | length')"
-echo "下書き記事:          $(ls contents/blog/*/article.md 2>/dev/null | wc -l | tr -d ' ') (contents/blog outbox。公開分のみ R2)"
-echo "メトリクス(全定義):   $(ls packages/data-configs/src/metrics/*.ts 2>/dev/null | wc -l | tr -d ' ') (git TS)"
+echo "下書き記事:          $(ls contents/blog/*/article.md 2>/dev/null | wc -l | tr -d ' ') (docs/21 outbox。公開分のみ R2)"
+echo "メトリクス(全定義):   $(ls data/metrics/*.ts 2>/dev/null | wc -l | tr -d ' ') (git TS)"
 echo "メトリクス(公開active): $(curl -s "$R2/app/ranking-items/all.json" | jq '.count')"
 echo "カテゴリ:            $(curl -s "$R2/app/categories/all.json" | jq '.count')"
 echo -n "テーマ:              "; npx tsx -e 'import {ALL_THEMES} from "./apps/web/src/features/theme-dashboard/config/all-themes.ts";console.log(ALL_THEMES.length)'

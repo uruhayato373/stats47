@@ -59,7 +59,8 @@ export async function createDivergingColorScale(
     domainMax = midpoint + maxAbs;
   }
 
-  const scale = d3.scaleDiverging(interpolator).domain([domainMin, midpoint, domainMax]);
+  const domain = options.resolvedDomain ?? [domainMin, domainMax];
+  const scale = d3.scaleDiverging(interpolator).domain([domain[0], midpoint, domain[1]]).clamp(true);
 
   return (value: number) => scale(value);
 }

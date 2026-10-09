@@ -31,6 +31,8 @@ import {
     RANKING_PAGE_TABLE_SIDE,
 } from "@/lib/google-adsense";
 
+import { resolveRankingPresentation } from '../../utils/resolve-ranking-presentation';
+
 import { RankingBasisSwitcher, type RankingBasisMember } from "./RankingBasisSwitcher";
 import { RankingPageContentSections, type RankingPageSections } from "./RankingPageContentSections";
 import { RankingVisualizationDetails } from "./RankingVisualizationDetails";
@@ -101,24 +103,8 @@ export function RankingKeyPageClient({
     // responsive classes to eliminate post-hydration CLS (desktop 0.264).
     // The hook file is kept because other non-layout consumers may still use it.
 
-    const displayInfo = useMemo(() => {
-        const baseInfo = buildRankingDisplayInfo(rankingItem);
-
-        if (normalizationType) {
-            const option = rankingItem.calculation?.normalizationOptions?.find(
-                (opt) => opt.type === normalizationType
-            );
-            if (option) {
-                return {
-                    ...baseInfo,
-                    title: `${baseInfo.title}（${option.label}）`,
-                    unit: option.unit,
-                    normalizationBasis: option.label,
-                };
-            }
-        }
-        return baseInfo;
-    }, [rankingItem, normalizationType]);
+    const presentedItem = useMemo(() => resolveRankingPresentation(activeRankingItem, normalizationType ?? null), [activeRankingItem, normalizationType]);
+    const displayInfo = buildRankingDisplayInfo(presentedItem);
 
     const shareText = useMemo(() => {
         const top = rankingValues.find((v) => v.rank === 1);
@@ -129,7 +115,7 @@ export function RankingKeyPageClient({
     // カードタイトル・サブタイトル・出典を構築
     // attribution (2 階層: 編成統計 + 原典調査) が焼き込まれていれば統一表示。
     // 未再生成の item.json には無いため、その場合は従来の sourceConfig.source / surveyId 表示にフォールバック。
-    const sourceObj = (rankingItem?.sourceConfig as Record<string, unknown>)?.source as { name?: string; url?: string } | undefined;
+    const sourceObj = rankingItem.sourceConfig?.source;
     const cardFooter = rankingItem?.attribution ? (
         <SourceAttribution attribution={rankingItem.attribution} />
     ) : (sourceObj?.name || surveyName) ? (
@@ -238,24 +224,7 @@ export function RankingKeyPageClient({
                     <RankingHeaderPanel title={displayInfo.title} />
                 </div>
 
-                <div className="order-2 min-w-0 lg:order-4">
-                    <RankingVisualizationSection
-                        rankingItem={rankingItem}
-                        activeRankingItem={activeRankingItem}
-                        rankingValues={rankingValues}
-                        areaType={currentAreaType}
-                        headerActions={headerActions}
-                        cardFooter={cardFooter}
-                        isPending={isPending}
-                    />
-                    <RankingVisualizationDetails
-                        description={definitionDetail}
-                        updatedAt={formattedUpdated}
-                    />
-                </div>
-
-                <div className="order-3 lg:hidden">{sections.relatedArticles}</div>
-                <div className="order-3 flex flex-col gap-3 lg:order-2">
+                <div className="order-2 flex flex-col gap-3">
                     <RankingHeaderControls
                         normalizationOptions={rankingItem.calculation?.normalizationOptions}
                         normalizationValue={normalizationType ?? "original"}
@@ -269,7 +238,8 @@ export function RankingKeyPageClient({
                 </div>
 
                 <RankingHeaderStats
-                    className="order-4 lg:order-3"
+                    presentation={presentedItem.visualization}
+                    className="order-3"
                     rankingValues={rankingValues}
                     unit={displayInfo.unit}
                     nationalAverageSeries={nationalAverageSeries}
@@ -277,7 +247,24 @@ export function RankingKeyPageClient({
                     yearName={latestYearName}
                 />
 
-                <div className="order-5 flex flex-col gap-4">
+                <div className="order-4 min-w-0">
+                    <RankingVisualizationSection
+                        rankingItem={presentedItem}
+                        activeRankingItem={presentedItem}
+                        rankingValues={rankingValues}
+                        areaType={currentAreaType}
+                        headerActions={headerActions}
+                        cardFooter={cardFooter}
+                        isPending={isPending}
+                    />
+                    <RankingVisualizationDetails
+                        description={definitionDetail}
+                        updatedAt={formattedUpdated}
+                    />
+                </div>
+
+                <div className="order-5 lg:hidden">{sections.relatedArticles}</div>
+                <div className="order-6 flex flex-col gap-4">
                     <RankingPageContentSections
                         rankingKey={rankingKey}
                         rankingItem={rankingItem}

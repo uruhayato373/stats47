@@ -12,6 +12,8 @@ import { ChartFooter } from '@/components/charts/ChartFooter';
 import { ChartPanel } from '@/components/charts/ChartPanel';
 import { RankingBarList } from '@/components/charts/RankingBarList';
 
+import { rankingItemToMapConfig } from '@/features/map-visualization/client';
+
 
 import { ChartEmptyState } from './ChartState';
 import { ScrollableRow } from './ScrollableRow';
@@ -21,7 +23,6 @@ import type { ThemeIndicatorData } from '../types';
 import type { MetricKpi } from './metric-kpi';
 
 const TileGridMap = dynamic(() => import('@stats47/visualization/d3/TileGridMapChart').then((module) => module.TileGridMap), { ssr: false });
-const MAP_COLORS = { colorScheme: 'interpolateBlues', colorSchemeType: 'sequential' as const, minValueType: 'data-min' as const };
 
 /** Compare observed prefecture values in an explicitly selected survey year. */
 export function FixedYearComparisonPanel({
@@ -108,7 +109,7 @@ export function FixedYearComparisonPanel({
       {values.length > 0 ? (
         view === 'map' && showMap ? (
           <div role="img" aria-label={`${comparisonYear}年の${metric.title}・47都道府県のタイル地図`}>
-            <TileGridMap data={cohort.map((row) => ({ areaCode: row.areaCode, value: row.value as number }))} colorConfig={MAP_COLORS} width={600} height={720} unit={formatUnitForDisplay(metric.unit)} selectedPrefectureCode={selectedPrefectureCode ?? undefined} />
+            <TileGridMap data={cohort.map((row) => ({ areaCode: row.areaCode, value: row.value as number }))} colorConfig={rankingItemToMapConfig(indicatorDataMap[metric.metricKey].rankingItem)} width={600} height={720} unit={formatUnitForDisplay(metric.unit)} selectedPrefectureCode={selectedPrefectureCode ?? undefined} />
             <p className="text-xs text-muted-foreground">{cohort[0]?.yearName ?? `${comparisonYear}年`}。淡い色から濃い色へ：{Math.min(...cohort.map((row) => row.value as number))}〜{Math.max(...cohort.map((row) => row.value as number))} {formatUnitForDisplay(metric.unit)}。位置は模式的に示しています。</p>
           </div>
         ) : view === 'bar' ? (

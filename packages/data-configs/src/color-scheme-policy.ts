@@ -4,22 +4,9 @@ import {
   normalizeColorScheme,
 } from "@stats47/types";
 
-import { findMetricPolarity } from "./metric-polarity";
+import { findMetricPolarity } from "../../../data/metrics/policy/polarity";
 
-/**
- * コロプレス配色の決定規則 (2026-07-31 新設)。
- *
- * `.claude/rules/blog-svg-chart-standards.md` §3 が言葉で書いている選択基準
- * (高い=悪い→red / 高い=良い→blue / 中立→orange / 自然環境→green) を、
- * **この関数が実装する**。規約側からはこの関数を正典として参照する。
- *
- * ## なぜ「明示指定を無条件で最優先」にしないか
- *
- * `interpolateBlues` は 2,295 metric 中 1,960 件 (85%) に書かれている。これは
- * **選択ではなく全 config に焼かれた既定値**で、「明示指定だから尊重する」と扱うと
- * 極性を入れてもどの色も変わらず、カタログが飾りになる。
- * したがって Blues 以外の明示指定だけを deliberate として扱う (既存 255 件を壊さない)。
- */
+/** Explicit per-metric colors are authoritative, including blue. */
 
 export type ColorSchemeReason =
   | "explicit"
@@ -69,7 +56,7 @@ const POLARITY_SCHEME = {
  * 配色を決める。
  *
  * 決定順序:
- *   1. 明示指定が **Blues 以外**なら採用 (deliberate)
+ *   1. 明示指定があれば採用
  *   2. colorSchemeType が diverging なら発散配色
  *   3. polarity があれば worse→Reds / better→Blues (neutral は次へ)
  *   4. category の topical 色
@@ -77,7 +64,7 @@ const POLARITY_SCHEME = {
  */
 export function resolveColorScheme(input: ColorSchemeInput): ColorSchemeDecision {
   const explicit = normalizeColorScheme(input.explicit ?? null);
-  if (explicit && explicit !== DEFAULT_SEQUENTIAL_SCHEME) {
+  if (explicit) {
     return { scheme: explicit, reason: "explicit" };
   }
 

@@ -243,6 +243,8 @@ Derived (area_profiles/相関)          : R2 観測値をエフェメラル計�
 
 ### R2 反映は `main` のコードで動く — 生成ロジックを変えたら**デプロイが先**
 
+指標の表示契約を変更する場合は `deploy-workers.yml` が同じ main の指標・市区町村・home/master・page-componentsを生成して検証し、SHAを固定したexact manifestでR2へ反映してからアプリをbuild/deployする。旧形式を新しいreaderへ渡さないための順序であり、別のsyncを後追いで起動する必要はない。観測値取得の通信エラー・生成・検証・反映の失敗はアプリ公開を止める。生の観測値・記事・画像はこの反映に含めない。
+
 `sync-snapshots.yml` の sync job は **`ref: main` を checkout する**。`workflow_dispatch` の
 `ref` にも proxy の `ref` にも従わない (`ref: develop` を指定しても main で動く)。
 

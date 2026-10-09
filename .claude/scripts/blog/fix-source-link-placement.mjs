@@ -33,7 +33,7 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 
 const PROJECT_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../..");
-const METRICS_DIR = path.join(PROJECT_ROOT, "packages/data-configs/src/metrics");
+const METRICS_DIR = path.join(PROJECT_ROOT, "data/metrics");
 const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
 const DEFAULT_SRC = path.join(PROJECT_ROOT, ".local/blog-srclink-fix/_src");
 const DEFAULT_OUT = path.join(PROJECT_ROOT, ".local/blog-srclink-fix/out");

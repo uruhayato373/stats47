@@ -25,6 +25,7 @@ describe('createSequentialColorScale', () => {
       // scale.domain をモックする際に、vi.fn() の戻り値として scale 自身を返すようにする
       // これにより、scale.domain().range() のようなチェインが可能になる
       (scale as any).domain = vi.fn().mockImplementation(function(this: any) { return this; }); // this を返すように修正
+      (scale as any).clamp = vi.fn().mockReturnValue(scale);
       (scale as any).range = vi.fn().mockImplementation(function(this: any) { return this; }); // range もチェイン可能にするため追加
       return scale;
     });

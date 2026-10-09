@@ -19,13 +19,13 @@ import { spawnSync } from "node:child_process";
 import prefectures from "../../area/src/data/prefectures.json";
 import { parseStatsValuesPayload } from "../../stats-r2/src/schemas";
 import type { SingleEntityRow, StatsValuesPayload } from "../../stats-r2/src/types";
-import { agriculturalOutput } from "../src/metrics/agricultural-output";
-import { healthyLifeExpectancyMale } from "../src/metrics/healthy-life-expectancy-male";
-import { healthyLifeExpectancyFemale } from "../src/metrics/healthy-life-expectancy-female";
+import { agriculturalOutput } from "../../../data/metrics/agricultural-output";
+import { healthyLifeExpectancyMale } from "../../../data/metrics/healthy-life-expectancy-male";
+import { healthyLifeExpectancyFemale } from "../../../data/metrics/healthy-life-expectancy-female";
 import { applyValueScale, checkMoneyUnitScale } from "../src/money-unit";
 import { buildRecipe, parseRecipe } from "../src/recipe";
 import { mergeOfficialRows, parseAgriculturalHistory } from "../src/provenance/official-release-staging";
-import { AGRICULTURAL_OUTPUT_RELEASE, HEALTHY_LIFE_RELEASE } from "../src/provenance/official-theme-releases";
+import { AGRICULTURAL_OUTPUT_RELEASE, HEALTHY_LIFE_RELEASE } from "../../../data/metric-sources/official-theme-releases";
 import type { YearSpec } from "../src/types";
 import { SITE } from "@stats47/types";
 

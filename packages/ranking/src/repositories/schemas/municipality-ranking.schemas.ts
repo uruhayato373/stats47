@@ -1,39 +1,57 @@
 import { z } from 'zod';
+import { assertMetricPresentation } from '@stats47/types';
 
 import type {
   MunicipalityRankingItemSnapshot,
   MunicipalityRankingValuesSnapshot,
 } from '../../types/municipality-snapshot';
 
-export const MunicipalityRankingItemSnapshotSchema = z.object({
-  schemaVersion: z.literal(1),
-  generatedAt: z.string().min(1),
-  rankingKey: z.string().min(1),
-  title: z.string().min(1),
-  subtitle: z.string().min(1).optional(),
-  distribution: z
-    .array(
-      z.object({
-        x0: z.number(),
-        x1: z.number(),
-        count: z.number().int().nonnegative(),
-        isOverflow: z.boolean(),
-        isUnderflow: z.boolean(),
-      })
-    )
-    .optional(),
-  description: z.string(),
-  unit: z.string(),
-  latestYear: z.object({
-    yearCode: z.string().min(1),
-    yearName: z.string().min(1),
-  }),
-  entityPolicyKey: z.string().min(1),
-  entityCount: z.number().int().positive(),
-  valueCount: z.number().int().nonnegative(),
-  excludedEntityCount: z.number().int().nonnegative(),
-  source: z.object({ name: z.string().min(1), url: z.string().url() }),
-});
+export const MunicipalityRankingItemSnapshotSchema = z
+  .object({
+    schemaVersion: z.literal(1),
+    generatedAt: z.string().min(1),
+    rankingKey: z.string().min(1),
+    title: z.string().min(1),
+    subtitle: z.string().min(1).optional(),
+    distribution: z
+      .array(
+        z.object({
+          x0: z.number(),
+          x1: z.number(),
+          count: z.number().int().nonnegative(),
+          isOverflow: z.boolean(),
+          isUnderflow: z.boolean(),
+        })
+      )
+      .optional(),
+    visualization: z.unknown().transform((value, ctx) => {
+      try {
+        assertMetricPresentation(value);
+        return value;
+      } catch (error) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message:
+            error instanceof Error
+              ? error.message
+              : 'Invalid metric presentation',
+        });
+        return z.NEVER;
+      }
+    }),
+    description: z.string(),
+    unit: z.string(),
+    latestYear: z.object({
+      yearCode: z.string().min(1),
+      yearName: z.string().min(1),
+    }),
+    entityPolicyKey: z.string().min(1),
+    entityCount: z.number().int().positive(),
+    valueCount: z.number().int().nonnegative(),
+    excludedEntityCount: z.number().int().nonnegative(),
+    source: z.object({ name: z.string().min(1), url: z.string().url() }),
+  })
+  .strict();
 
 export const MunicipalityRankingValuesSnapshotSchema = z.object({
   schemaVersion: z.literal(1),

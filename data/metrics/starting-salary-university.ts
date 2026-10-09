@@ -1,0 +1,42 @@
+import { DEFAULT_METRIC_PRESENTATION } from "./defaults/presentation";
+import type { MetricConfig } from "../../packages/data-configs/src/types";
+
+export const startingSalaryUniversity: MetricConfig = {
+  "key": "starting-salary-university",
+  "title": "大卒初任給",
+  "subtitle": "新規学卒者の所定内給与額（大学卒）",
+  "unit": "千円",
+  "category": "laborwage",
+  "source": {
+    "kind": "estat",
+    "statsDataId": "0003445959",
+    "cdCat03": "01",
+    "cdCat01": "01",
+    "cdCat02": "06",
+    "displayName": "賃金構造基本統計調査",
+    "url": "https://www.mhlw.go.jp/toukei/list/chinginkouzou.html"
+  },
+  "entities": [
+    "prefecture"
+  ],
+  "years": {
+    "from": 2023,
+    "to": 2023
+  },
+  "yearFormat": "calendar",
+  "visualization": {
+    ...DEFAULT_METRIC_PRESENTATION,
+    "colorScheme": "interpolateBlues",
+    "colorSchemeType": "sequential",
+  },
+  "display": {
+    "conversionFactor": 1,
+    "decimalPlaces": 1
+  },
+  "calculation": {
+    "isCalculated": false
+  },
+  "seoTitle": "大卒初任給ランキング都道府県【2023年】｜1位秋田県（267.7千円）",
+  "seoDescription": "2023年の大卒初任給の都道府県別ランキング。1位秋田県（267.7千円）、最下位鳥取県（202.4千円）で1.3倍の格差。地図やグラフで47都道府県を比較。",
+  "isActive": true
+};
