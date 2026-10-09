@@ -112,7 +112,9 @@ export interface ReferenceContentInput {
     reason: string;
     target?: string;
   }>;
-  /** SNS の投稿台帳で投稿済みの行が扱った指標 (展開先 → 指標 → 投稿 ID) */
+  /** ID 台帳の公開済み note が扱った指標 (指標 → note 記事 key) */
+  notePublishedMetrics?: Record<string, string[]>;
+  /** ID 台帳の公開済み SNS の投稿が扱った指標 (展開先 → 指標 → 投稿 ID)。台帳は data/sns/posts.json から作る */
   snsPostedMetrics?: Partial<Record<'x' | 'instagram' | 'youtube', Record<string, number[]>>>;
   /** ブログの候補キューの未着手の候補 (data/blog/topic-queue.json) */
   blogTopicQueue?: Array<{ topicKey: string; metricKeys: string[] }>;
@@ -214,10 +216,16 @@ function finalizeChannels(
   decisionOf: (channel: ReferenceProductionChannelDTO, key: string) => ReturnType<NonNullable<ReferenceContentInput['placementDecisions']>['find']>
 ): ReferenceChannelCoverageDTO[] {
   return channels.map((channel) => {
+    if (channel.channel === 'note') {
+      const noteKeys = input.notePublishedMetrics?.[key] ?? [];
+      if (noteKeys.length > 0 && channel.stage !== 'integrated') {
+        return coverage('note', 'integrated', noteKeys.map((noteKey) => `note:${noteKey}`), 'ID 台帳に公開済みの note 記事あり');
+      }
+    }
     if (channel.channel === 'x' || channel.channel === 'instagram' || channel.channel === 'youtube') {
       const postIds = input.snsPostedMetrics?.[channel.channel]?.[key] ?? [];
       if (postIds.length > 0) {
-        return coverage(channel.channel, 'integrated', postIds.map((id) => `sns:${id}`), '投稿台帳に投稿済みの投稿あり');
+        return coverage(channel.channel, 'integrated', postIds.map((id) => `sns:${id}`), 'ID 台帳に公開済みの投稿あり');
       }
     }
     if (channel.stage !== 'integrated') {

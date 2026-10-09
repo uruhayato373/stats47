@@ -142,6 +142,7 @@ export const DATASETS = [
   d("content.routes", "data/content/routes.json", "config", "data", "data", "全公開ページ種別のIDとURLパラメータ契約"),
   d("content.navigation", "data/content/navigation.json", "config", "data", "data", "回遊関係の意味・優先度・件数と明示的な紐付け"),
   d("content.entities", "data/content/entities.json", "state", "data", "data", "各正本から再生成するページID索引。観測値・記事本文は含まない"),
+  d("content.external", "data/content/external.json", "state", "data", "data", "stats47 の外の公開物 (note 記事・SNS の投稿) の ID と指標・記事への関係。note のカタログと data/sns/posts.json から再生成"),
   d("content.pages", "data/content/pages/{name}.json", "state", "data", "data", "ID索引の種別・県別分割。必要なページ種別だけアプリへ読み込む"),
   d("content.schema", "data/content/schema/{name}.schema.json", "config", "data", "data", "ページ・タグ・回遊台帳の形状契約"),
   d("themes.catalog-schema", "data/themes/schema/theme-catalog.schema.json", "config", "data", "data", "上の定義の JSON Schema"),

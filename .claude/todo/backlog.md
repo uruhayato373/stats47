@@ -1748,17 +1748,10 @@ updated: 2026-10-06
 ### [RANKING-FIRST-VIEW-RELEASE-01] ランキングページを「最初の画面で答えを出す」形に改修し、既存 3 件とまとめて 1 回のリリースで測る
 タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-09-25] [領域:サイト]
 
-- **指標SSOT・サマリUI実装 (2026-10-09、ローカル実装済み・本番未反映)**:
-  - 2,638指標の定義・取得元・単位・計算・表示方針を data/metrics/ へ移行。旧metricsディレクトリと生e-Statパラメータのテーマ互換読取を削除。指標IDをランキング・55テーマ・area・全国・市区町村・原典逆引きへ接続。
-  - 平均・中央値・最小・最大・分位・有効件数は観測値から計算し、設定に手入力しない。共通表示方針と指標別の例外でコロプレスの配色・階級・基準値・数値domain、推移・比較のY軸を管理。総人口は5分位、男女賃金格差は100基準。
-  - 型からJSON Schemaを生成。全指標・テーマのスキーマ、分類条件、ID参照、依存循環、利用ページ逆引きと生成鮮度を npm run metrics:check で検査。配信metadataでも同じpresentation契約を必須にし、都道府県・市区町村とも旧形式を受理しない。
-  - 地図と凡例は共通resolverのdomain・境界値・色を使用。市区町村地図とD3都道府県地図も同じ解決結果で描画。正規化時は対象単位に応じた方針を使い、未対応の正規化URLは受理しない。
-  - 上位3件と最下位を、共通の実値目盛りと単純平均の線を持つドット図へ変更。1位と2位の差と同順位を明示。平均推移にY軸・暦年のX軸・選択年の目印を追加。単年時の空枠を縮め、値と単位の折返しを防止。全幅でタイトル→計算方法→要約→地図の順に統一。
-  - 検証: 2,638指標/55テーマの契約、content 9,116ページ/44route/928tag、移行前後の単位/取得条件、都道府県2,589個別item/2,499集約itemと市区町村171 item/valuesの整合がPASS。旧minValueType/presetは拒否し、生成処理も共通表示方針を参照する。全25package+8script型検査、web本番相当build(1,627ページ生成)、変更web 46file lint(エラー/警告0)、直近17file/158test、CI中継13test/政策15test、生成定義2件のschema検証がPASS。変更sourceのsecret検査は2,787file/検出0。390/768/1440px・負値・単年・年切替・正規化・100基準・5分位・darkのランキング11ケースと市区町村/全国の計13画面をlocalhostで確認し、200・JSエラー0・横overflow0。撮影と観測結果はCodex visualizations内 ranking-summary-review-20261009/ の final-observations.json / extended-observations.json とPNG。ローカルのみ、本番未反映。
-  - 保存時ゲートの是正: 原典/利用ページ逆引きを100指標ずつ27 shardへ分割（最大363,336byte、全2,638IDの欠落/重複0）。旧単一indexは削除。凡例・推移軸・複数系列の最新値を共通数値整形へ揃え、追加対象15test、ファイルサイズ/数値整形/保守負債の新規違反0、修正後25package+8script型検査を確認。検証用buildは一時領域へ保全し、設定の検査対象から除く。
-  - 実画面で分位配色の偏りを検出・是正: 区間の実値中点ではなく階級順から配色し、発散色の基準を維持。偏った分布でも同じ階級色になる性質を含む13test、visualization型検査、人口密度390pxの再撮影(200/JSエラー0/横overflow0)、最終本番相当build(1,627ページ生成)PASSを確認。
-  - **本番反映条件**: 同じコードから都道府県の全itemと集約索引、市区町村の全item/valuesを再生成・検査してR2へ先に反映し、その後アプリをまとめて1回デプロイする。ローカルmetadataは .local/r2/。旧形式の補完はしない。
-  - **残る本カードの範囲**: 下記の地図/表統合・出典整理等の既存リリース範囲と本番計測は、この実装だけでは完了扱いにしない。アクセス改善の効果は未計測。
+- **現在地 (2026-10-10)**: 指標SSOT・表示契約と要約UIは本番確認済み。2,639指標/56テーマをdata/の定義・原典と指標IDで接続し、平均・分位・軸範囲は観測値から解決する。旧形式の互換読取は削除。上位3件/最下位は実値軸・単純平均線・順位差を示し、推移は数値Y軸・暦年X軸と選択年を示す。実装・検査の証拠は [PR #1116](https://github.com/uruhayato373/stats47/pull/1116)、必須CI [37908326854](https://github.com/uruhayato373/stats47/actions/runs/37908326854)。
+- **配信検証**: [Deploy 37924050596](https://github.com/uruhayato373/stats47/actions/runs/37924050596) (main 8bff690216、[PR #1118](https://github.com/uruhayato373/stats47/pull/1118)) で、都道府県2,590個別item/2,500集約item・市区町村171 item/values組・home/master/page-componentsの計3,219 JSONを同じコードから再生成・契約検査・SHA固定manifestで反映してからアプリを公開。全件反映・build・キャッシュ更新・スモーク・sitemap検査が成功。公開R2でも全2,500集約itemと代表指標/市区町村の表示契約を検証済み。途中停止の再実行判定と53分の反映時間の対策は DEPLOY-METRIC-RELEASE-TIMEOUT-01 が所有する。
+- **本番画面の受入**: 390/768/1440px、2020年切替、人口密度、100基準、市区町村、home/theme/area/geo/blog/全国と追加3タグの計17ケースが200・JSエラー0・横overflow0。日照時間2024年の平均2,034.6時間/首位差23.6時間、2020年の平均1,969.1時間、人口密度の人/100km²と5分位色を確認。スクショと observations.json は Codex visualizations の ranking-summary-review-20261009/production/。年・単位の切替は取得完了後を確認する。
+- **本カードで残る範囲**: 以下の地図/表統合・出典整理等と公開後の回遊/アクセス計測。今回のSSOT・要約UI反映だけで親カードを完了扱いにしない。アクセス改善の効果は未計測。依存関係のSecurity Scanは既存のDEPS-BRACES-GATE-01の対象で、今回も未解消 (必須品質検査は成功)。
 - **結論 (2026-09-25 壁打ち・オーナー合意)**: UI はランキングページを最優先にする。ランキングは PV 19,040 (国内 28 日、全体の約半分)・
   検索クリック 3,861 (GSC W38) の最大の面で、1 人あたり PV は 2.00。
 - **問題 (2026-09-25 localhost 778px で確認)**: `/ranking/national-pension-full-exemption-rate` の最初の画面はタイトルと地図だけで、
@@ -2553,7 +2546,7 @@ updated: 2026-10-06
 - **次**: blocked 3件はactiveな公開metricが出た時点で再判定する。ブログは各指標の年度・母集団を揃え、相関snapshot、チャート、本文、独立criticの順で品質ゲートへ進める。
 - **停止条件**: inactive metric、年度・母集団の不一致、相関snapshot不在、一次資料未確認、権利保留のいずれかがあれば公開へ進めない。
 - **2026-10-09 ワークフロー (wf_d880dc8a-bab) の結果**: `agriculture-output-employment-productivity-gap` と `household-structure-daytime-population-gap` は データ接地・SVG・quality-gate・独立 critic PASS まで完了 (published:false のまま)。公開に残るのは記事固有の背景画像 (Codex の担当、`npm run blog-images:codex -- request-article --slug <slug>`)。世帯構成の記事は指標を核家族世帯割合 × 昼夜間人口比率 (2020 年国勢調査) に組み直した。`electricity-generation-manufacturing-establishments-gap` は 2 指標の相関 snapshot が無く停止 (2023 年の 47 県結合で r≈0.30。snapshot 外の散布図を例外として許すか、snapshot に実在する工業用水・港湾貨物の組へ企画を替えるかはオーナー判断)。`household-spending-debt-propensity-gap` は 3 指標に共通する年が無く停止 (負債現在高は 2019 年のみ、消費支出は 2019 年が無い)。
-- **2026-10-09 公開**: 2 本 (`agriculture-output-employment-productivity-gap` / `household-structure-daytime-population-gap`) は記事固有背景 (2c1c49dba) を得て blog-auto-publish (run 37903460052) で R2 に公開した。本番ページは公開記事一覧 (sitemap-blog-entries.ts) が main に入るまで 410 のため、PR #1116 のデプロイで表示される。タグ 3 つ (農業就業人口・昼夜間人口比率・核家族世帯) を data/content/tags.json に登録した。
+- **2026-10-09 公開**: 2 本 (`agriculture-output-employment-productivity-gap` / `household-structure-daytime-population-gap`) は記事固有背景 (2c1c49dba) を得て blog-auto-publish (run 37903460052) で R2 に公開した。PR #1116/#1118 と Deploy 37924050596で公開一覧を本番へ反映し、2026-10-10に2記事とも実ページ200・JSエラー0・横overflow0を確認した。タグ 3 つ (農業就業人口・昼夜間人口比率・核家族世帯) を data/content/tags.json に登録した。
 - **完了条件**: blocked 3件はmetric公開可否が確定する。ブログ4本は一次資料・R2接地、SVG、quality gate、critic PASSを満たしてから`published:true`へ移す。
 
 ### [SNAPSHOT-EDGE-PURGE-GAP-01] snapshot 同期後にエッジが旧 HTML を配信し続ける

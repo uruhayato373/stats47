@@ -10,6 +10,8 @@ import {
 import { JAPAN_ZUE_MANUAL_OVERRIDES } from '../../../../packages/data-configs/src/evidence-inventory/japan-zue/policy';
 import { REFERENCE_SOURCE_POLICIES } from '../../../../packages/data-configs/src/evidence-inventory/reference-sources';
 import { AREA_DATABOOK_TEMPLATE } from '../../../../packages/data-configs/src/area-databook/template';
+import { buildExternalContentPages, type ExternalSnsSource } from '../../../../packages/data-configs/src/content/external';
+import { contentIdFromHref } from '../../../../packages/data-configs/src/content/index';
 import { REFERENCE_PLACEMENT_DECISIONS } from '../../../../packages/data-configs/src/evidence-inventory/placement-decisions';
 import { KINDLE_BOOKS } from '../../../../packages/product-factory/src/channels/kindle/book-catalog';
 import {
@@ -200,29 +202,55 @@ function loadJapanTargets(root: string, metricKeys: string[]) {
   });
 }
 
+const SNS_HOST_CHANNEL: Record<string, 'x' | 'instagram' | 'youtube'> = {
+  'x.com': 'x',
+  'twitter.com': 'x',
+  'www.instagram.com': 'instagram',
+  'instagram.com': 'instagram',
+  'www.youtube.com': 'youtube',
+  'youtube.com': 'youtube',
+  'youtu.be': 'youtube',
+};
+
+type RegistryPage = { id: string; key: string; href: string; published: boolean; rankingKeys?: string[] };
+
 /**
- * SNS の投稿台帳 (data/sns/posts.json) の投稿済みの行から、展開先ごとに「その指標を扱った投稿 ID」を集める。
- * 指標は metric_keys と、ランキングの投稿 (domain=ranking) の content_key から取る。
+ * 外部公開物 (note・SNS) のページを、ID 台帳の生成と同じ関数で正本の最新の中身から作る。
+ * 台帳ファイル (data/content/external.json) は content:sync の時点の写しで、SNS は CI が随時書き足すため、
+ * 集計は正本 (note のカタログ・data/sns/posts.json) から都度作って遅れないようにする (2026-10-10)。
  */
-function snsPostedMetrics(posts: ReadonlyArray<Record<string, unknown>>) {
-  const byChannel: Record<'x' | 'instagram' | 'youtube', Record<string, number[]>> = {
-    x: {},
-    instagram: {},
-    youtube: {},
-  };
-  for (const post of posts) {
-    const platform = post.platform as string;
-    if (post.status !== 'posted' || !(platform in byChannel)) continue;
-    const keys = new Set<string>(
-      Array.isArray(post.metric_keys) ? (post.metric_keys as string[]) : []
-    );
-    if (post.domain === 'ranking' && typeof post.content_key === 'string') keys.add(post.content_key);
-    for (const key of keys) {
-      const ids = (byChannel[platform as keyof typeof byChannel][key] ??= []);
-      if (typeof post.id === 'number') ids.push(post.id);
-    }
+function externalPages(posts: readonly ExternalSnsSource[]): RegistryPage[] {
+  return buildExternalContentPages({
+    notes: NOTE_ARTICLES,
+    posts,
+    isKnownMetric: () => true,
+    idFromHref: contentIdFromHref,
+  }).pages;
+}
+
+/**
+ * ID 台帳の SNS (sns:<投稿ID>) の公開済みのページから、展開先ごとに「その指標を扱った投稿 ID」を集める。
+ * 展開先は投稿 URL のドメインで決める。
+ */
+function snsPostedMetrics(pages: readonly RegistryPage[]) {
+  const byChannel: Record<'x' | 'instagram' | 'youtube', Record<string, number[]>> = { x: {}, instagram: {}, youtube: {} };
+  for (const page of pages) {
+    if (!page.published || !page.id.startsWith('sns:')) continue;
+    const channel = SNS_HOST_CHANNEL[new URL(page.href).hostname];
+    if (!channel) continue;
+    for (const key of page.rankingKeys ?? []) (byChannel[channel][key] ??= []).push(Number(page.key));
   }
   return byChannel;
+}
+
+/** ID 台帳の note (note:<key>) の公開済みのページから、指標ごとの note 記事 key を集める */
+function notePublishedMetrics(pages: readonly RegistryPage[]) {
+  const byMetric: Record<string, string[]> = {};
+  for (const page of pages) {
+    if (!page.published || !page.id.startsWith('note:')) continue;
+    for (const key of page.rankingKeys ?? []) (byMetric[key] ??= []).push(page.key);
+  }
+  return byMetric;
 }
 
 /** ブログの候補キュー (data/blog/topic-queue.json) の未着手の候補 */
@@ -241,7 +269,7 @@ function loadBlogs(root: string): ReferenceBlogSource[] {
   // (.local/r2/app/blog) に依存すると、写しが無い環境で公開記事を 0 本と数えた (ADMIN-REFERENCE-BLOG-MIRROR-01)。
   // 台帳は git 管理なので実リポジトリでは必ずある。無いのはテスト用の最小 fixture だけ
   const index = (readOptionalJson(root, `${datasetDir('content.pages')}/blog.json`) ?? { pages: [] }) as {
-    pages: Array<{ key: string; title: string; published: boolean; rankingKeys?: string[] }>;
+    pages: Array<RegistryPage & { title: string }>;
   };
   const published = index.pages
     .filter((page) => page.published)
@@ -380,6 +408,7 @@ export function loadContentOperations(
   const social = ContentSocialPostsState.parse(
     readJson(root, datasetPath("sns.posts"))
   );
+  const external = externalPages(social.posts as unknown as ExternalSnsSource[]);
   const kdp = ContentKdpListingsState.parse(
     readJson(root, KDP_LISTINGS)
   );
@@ -470,7 +499,8 @@ export function loadContentOperations(
     ].filter((file) => fs.existsSync(path.join(root, file))),
     areaDatabookMetricKeys: areaDatabookMetricKeys(),
     placementDecisions: REFERENCE_PLACEMENT_DECISIONS.map((decision) => ({ ...decision })),
-    snsPostedMetrics: snsPostedMetrics(social.posts as ReadonlyArray<Record<string, unknown>>),
+    snsPostedMetrics: snsPostedMetrics(external),
+    notePublishedMetrics: notePublishedMetrics(external),
     blogTopicQueue: loadBlogTopicQueue(root),
     areas: prefectures.map((prefecture) => {
       const editorialPath = `packages/data-configs/src/area-databook/editorial/${prefecture.prefCode}.ts`;
