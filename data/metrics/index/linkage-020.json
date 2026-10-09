@@ -3700,6 +3700,10 @@
         {
           "pageId": "ranking:retirement-allowance-admin-prefecture",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:242",
+          "kind": "sns"
         }
       ],
       "themes": []
@@ -3956,6 +3960,10 @@
         {
           "pageId": "blog:yamaguchi-food-culture",
           "kind": "blog"
+        },
+        {
+          "pageId": "note:b-kakei-bread-giffen",
+          "kind": "note"
         },
         {
           "pageId": "ranking:rice-consumption-expenditure",
@@ -4530,6 +4538,14 @@
         {
           "pageId": "ranking:rice-harvest-volume",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:40",
+          "kind": "sns"
+        },
+        {
+          "pageId": "sns:905",
+          "kind": "sns"
         }
       ],
       "themes": []
@@ -4569,6 +4585,10 @@
         {
           "pageId": "ranking:rice-yield-per-10a",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:909",
+          "kind": "sns"
         }
       ],
       "themes": []
@@ -4609,6 +4629,14 @@
         {
           "pageId": "ranking:ritual-goods-tombstone-consumption-expenditure",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:584",
+          "kind": "sns"
+        },
+        {
+          "pageId": "sns:738",
+          "kind": "sns"
         }
       ],
       "themes": []
@@ -5023,6 +5051,10 @@
           "kind": "ranking"
         },
         {
+          "pageId": "sns:918",
+          "kind": "sns"
+        },
+        {
           "pageId": "theme:roads",
           "kind": "theme"
         }
@@ -5066,6 +5098,10 @@
         {
           "pageId": "japan-theme:roads",
           "kind": "japan-theme"
+        },
+        {
+          "pageId": "note:a-road-total-length",
+          "kind": "note"
         },
         {
           "pageId": "ranking:road-total-length",
@@ -5752,8 +5788,16 @@
           "kind": "japan-theme"
         },
         {
+          "pageId": "note:a-room-utilization-rate",
+          "kind": "note"
+        },
+        {
           "pageId": "ranking:room-utilization-rate",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:981",
+          "kind": "sns"
         },
         {
           "pageId": "theme:tourism",
@@ -10792,8 +10836,16 @@
           "kind": "blog"
         },
         {
+          "pageId": "note:b-kakei-quantity-price",
+          "kind": "note"
+        },
+        {
           "pageId": "ranking:scallop-consumption-quantity",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:771",
+          "kind": "sns"
         }
       ],
       "themes": []

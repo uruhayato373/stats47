@@ -668,6 +668,14 @@
           "kind": "ranking"
         },
         {
+          "pageId": "sns:159",
+          "kind": "sns"
+        },
+        {
+          "pageId": "sns:162",
+          "kind": "sns"
+        },
+        {
           "pageId": "theme:gender-participation",
           "kind": "theme"
         },
@@ -2303,6 +2311,10 @@
           "kind": "ranking"
         },
         {
+          "pageId": "sns:33",
+          "kind": "sns"
+        },
+        {
           "pageId": "theme:local-finance",
           "kind": "theme"
         }
@@ -2531,6 +2543,10 @@
         {
           "pageId": "japan-theme:aging-society",
           "kind": "japan-theme"
+        },
+        {
+          "pageId": "note:a-late-elderly-medical-expense-per-insured",
+          "kind": "note"
         },
         {
           "pageId": "ranking:late-elderly-medical-expense-per-insured",
@@ -6720,6 +6736,14 @@
         {
           "pageId": "ranking:lipstick-consumption-expenditure",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:653",
+          "kind": "sns"
+        },
+        {
+          "pageId": "sns:816",
+          "kind": "sns"
         }
       ],
       "themes": []
@@ -7279,6 +7303,10 @@
         {
           "pageId": "ranking:local-debt-current-ratio",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:166",
+          "kind": "sns"
         }
       ],
       "themes": []
@@ -7653,6 +7681,10 @@
         {
           "pageId": "ranking:local-tax-ratio-pref-finance",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:170",
+          "kind": "sns"
         },
         {
           "pageId": "theme:local-finance",
@@ -8768,6 +8800,10 @@
         {
           "pageId": "ranking:lowest-temperature",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:590",
+          "kind": "sns"
         },
         {
           "pageId": "theme:climate",
@@ -14304,6 +14340,14 @@
           "kind": "ranking"
         },
         {
+          "pageId": "sns:598",
+          "kind": "sns"
+        },
+        {
+          "pageId": "sns:755",
+          "kind": "sns"
+        },
+        {
           "pageId": "theme:fishery-marine",
           "kind": "theme"
         }
@@ -14567,6 +14611,10 @@
         {
           "pageId": "ranking:marine-fishery-aquaculture-output-value",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:764",
+          "kind": "sns"
         },
         {
           "pageId": "theme:fishery-marine",
@@ -14990,6 +15038,14 @@
           "kind": "ranking"
         },
         {
+          "pageId": "sns:600",
+          "kind": "sns"
+        },
+        {
+          "pageId": "sns:758",
+          "kind": "sns"
+        },
+        {
           "pageId": "theme:fishery-marine",
           "kind": "theme"
         }
@@ -15223,6 +15279,10 @@
           "kind": "ranking"
         },
         {
+          "pageId": "sns:596",
+          "kind": "sns"
+        },
+        {
           "pageId": "theme:fishery-marine",
           "kind": "theme"
         }
@@ -15266,6 +15326,14 @@
         {
           "pageId": "ranking:maritime-import-export-cargo",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:588",
+          "kind": "sns"
+        },
+        {
+          "pageId": "sns:744",
+          "kind": "sns"
         },
         {
           "pageId": "theme:ports",

@@ -125,6 +125,10 @@
         {
           "pageId": "ranking:gross-prefectural-income-growth-rate-real-h17",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:669",
+          "kind": "sns"
         }
       ],
       "themes": []
@@ -1425,8 +1429,24 @@
           "kind": "blog"
         },
         {
+          "pageId": "note:b-kakei-gyoza-counting",
+          "kind": "note"
+        },
+        {
           "pageId": "ranking:gyoza-frozen-consumption-expenditure",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:141",
+          "kind": "sns"
+        },
+        {
+          "pageId": "sns:142",
+          "kind": "sns"
+        },
+        {
+          "pageId": "sns:464",
+          "kind": "sns"
         },
         {
           "pageId": "theme:household-food-spending",
@@ -2621,6 +2641,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "note:b-kakei-beer-peak-month",
+          "kind": "note"
+        },
+        {
           "pageId": "ranking:happoshu-consumption-expenditure",
           "kind": "ranking"
         },
@@ -3103,6 +3127,10 @@
         {
           "pageId": "area-theme:47000:household-food-spending",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "note:b-kakei-necktie-decline",
+          "kind": "note"
         },
         {
           "pageId": "ranking:hat-consumption-expenditure",
@@ -4335,6 +4363,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "note:a-kakei-niigata",
+          "kind": "note"
+        },
         {
           "pageId": "ranking:healthcare-expenditure-ratio-multi-person-households",
           "kind": "ranking"
@@ -6122,8 +6154,92 @@
           "kind": "blog"
         },
         {
+          "pageId": "note:a-kakei-akita",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-aomori",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-chiba",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-hiroshima",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-kanagawa",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-kumamoto",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-kyoto",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-miyazaki",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-nagano",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-nagasaki",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-nara",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-saitama",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-shiga",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-shimane",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-tokushima",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-tokyo",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-toyama",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-wakayama",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-yamaguchi",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:b-kakei-advancement-employment",
+          "kind": "note"
+        },
+        {
           "pageId": "ranking:high-school-advancement-rate",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:145",
+          "kind": "sns"
         },
         {
           "pageId": "theme:education-culture",
@@ -6973,6 +7089,10 @@
         {
           "pageId": "blog:advancement-plus-employment-rate-prefecture",
           "kind": "blog"
+        },
+        {
+          "pageId": "note:b-kakei-advancement-employment",
+          "kind": "note"
         },
         {
           "pageId": "ranking:high-school-graduates-job-ratio",
@@ -8876,6 +8996,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "note:recovered-nabd65a1c893d",
+          "kind": "note"
+        },
+        {
           "pageId": "ranking:hobby-participation-rate-art-appreciation",
           "kind": "ranking"
         },
@@ -9106,6 +9230,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "note:recovered-n5ddcfb6bf233",
+          "kind": "note"
+        },
+        {
           "pageId": "ranking:hobby-participation-rate-calligraphy",
           "kind": "ranking"
         },
@@ -9148,8 +9276,16 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "note:recovered-na2720854b1d9",
+          "kind": "note"
+        },
+        {
           "pageId": "ranking:hobby-participation-rate-camping",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:711",
+          "kind": "sns"
         }
       ],
       "themes": []
@@ -9183,6 +9319,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "note:recovered-n08eb33492a93",
+          "kind": "note"
+        },
         {
           "pageId": "ranking:hobby-participation-rate-chorus",
           "kind": "ranking"
@@ -9220,8 +9360,16 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "note:recovered-nb90f2342ebd8",
+          "kind": "note"
+        },
+        {
           "pageId": "ranking:hobby-participation-rate-cinema",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:713",
+          "kind": "sns"
         }
       ],
       "themes": []
@@ -9444,6 +9592,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "note:recovered-nf0c533293f5b",
+          "kind": "note"
+        },
+        {
           "pageId": "ranking:hobby-participation-rate-classical-music",
           "kind": "ranking"
         },
@@ -9486,8 +9638,16 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "note:recovered-ncf6086199c7d",
+          "kind": "note"
+        },
+        {
           "pageId": "ranking:hobby-participation-rate-cooking",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:714",
+          "kind": "sns"
         }
       ],
       "themes": []
@@ -9522,8 +9682,16 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "note:recovered-n48dff1df249f",
+          "kind": "note"
+        },
+        {
           "pageId": "ranking:hobby-participation-rate-diy",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:151",
+          "kind": "sns"
         }
       ],
       "themes": []
@@ -9744,6 +9912,10 @@
         {
           "pageId": "area-theme:47000:cultural-participation",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "note:recovered-n583a06d171e1",
+          "kind": "note"
         },
         {
           "pageId": "ranking:hobby-participation-rate-flower-arrangement",
@@ -9976,8 +10148,16 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "note:recovered-n3e67c2f80ec1",
+          "kind": "note"
+        },
+        {
           "pageId": "ranking:hobby-participation-rate-gardening",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:715",
+          "kind": "sns"
         },
         {
           "pageId": "theme:daily-time-use",
@@ -10206,6 +10386,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "note:recovered-ne5b9d2b01255",
+          "kind": "note"
+        },
+        {
           "pageId": "ranking:hobby-participation-rate-go",
           "kind": "ranking"
         },
@@ -10247,6 +10431,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "note:recovered-nfbdfd99fee1b",
+          "kind": "note"
+        },
         {
           "pageId": "ranking:hobby-participation-rate-home-movie",
           "kind": "ranking"
@@ -10470,6 +10658,10 @@
         {
           "pageId": "area-theme:47000:cultural-participation",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "note:recovered-n1649910097fb",
+          "kind": "note"
         },
         {
           "pageId": "ranking:hobby-participation-rate-instrument",

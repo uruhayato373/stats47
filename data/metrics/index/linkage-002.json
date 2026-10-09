@@ -1497,6 +1497,10 @@
           "kind": "ranking"
         },
         {
+          "pageId": "sns:921",
+          "kind": "sns"
+        },
+        {
           "pageId": "theme:safety",
           "kind": "theme"
         }
@@ -4813,6 +4817,10 @@
         {
           "pageId": "ranking:campsite-public",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:1001",
+          "kind": "sns"
         }
       ],
       "themes": []
@@ -5242,8 +5250,44 @@
           "kind": "blog"
         },
         {
+          "pageId": "note:a-kakei-fukuoka",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-hyogo",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-ibaraki",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-ishikawa",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-oita",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-osaka",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-tochigi",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-yamanashi",
+          "kind": "note"
+        },
+        {
           "pageId": "ranking:car-ownership-multi-person-households-per-1000",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:92",
+          "kind": "sns"
         },
         {
           "pageId": "theme:regional-transport",

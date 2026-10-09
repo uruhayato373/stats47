@@ -497,6 +497,10 @@
         {
           "pageId": "ranking:special-law-criminal-arrest-count-per-population",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:913",
+          "kind": "sns"
         }
       ],
       "themes": []
@@ -1581,6 +1585,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "note:b-kakei-academic-food",
+          "kind": "note"
+        },
+        {
           "pageId": "ranking:spinach-consumption-quantity",
           "kind": "ranking"
         },
@@ -1823,8 +1831,16 @@
           "kind": "blog"
         },
         {
+          "pageId": "note:recovered-nefd814b49c5d",
+          "kind": "note"
+        },
+        {
           "pageId": "ranking:sports-annual-participation-rate-10plus",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:920",
+          "kind": "sns"
         },
         {
           "pageId": "theme:sports-participation",
@@ -2480,6 +2496,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "note:recovered-n67729e8be7c4",
+          "kind": "note"
+        },
+        {
           "pageId": "ranking:sports-participation-rate-badminton",
           "kind": "ranking"
         }
@@ -2515,6 +2535,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "note:recovered-n523b6fbeabdf",
+          "kind": "note"
+        },
         {
           "pageId": "ranking:sports-participation-rate-baseball",
           "kind": "ranking"
@@ -2552,6 +2576,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "note:recovered-n3e69a23bb946",
+          "kind": "note"
+        },
+        {
           "pageId": "ranking:sports-participation-rate-basketball",
           "kind": "ranking"
         }
@@ -2587,6 +2615,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "note:recovered-n97bd102186c6",
+          "kind": "note"
+        },
         {
           "pageId": "ranking:sports-participation-rate-bowling",
           "kind": "ranking"
@@ -2812,8 +2844,16 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "note:recovered-n279776fbbbb1",
+          "kind": "note"
+        },
+        {
           "pageId": "ranking:sports-participation-rate-cycling",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:767",
+          "kind": "sns"
         },
         {
           "pageId": "theme:sports-participation",
@@ -3040,6 +3080,10 @@
         {
           "pageId": "area-theme:47000:sports-participation",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "note:recovered-naa474d085c7b",
+          "kind": "note"
         },
         {
           "pageId": "ranking:sports-participation-rate-fishing",
@@ -3284,6 +3328,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "note:recovered-n5ced125edb74",
+          "kind": "note"
+        },
+        {
           "pageId": "ranking:sports-participation-rate-golf",
           "kind": "ranking"
         },
@@ -3330,6 +3378,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "note:recovered-n3a94353f31aa",
+          "kind": "note"
+        },
+        {
           "pageId": "ranking:sports-participation-rate-ground-golf",
           "kind": "ranking"
         }
@@ -3365,6 +3417,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "note:recovered-n4e1e67f70686",
+          "kind": "note"
+        },
         {
           "pageId": "ranking:sports-participation-rate-gym-training",
           "kind": "ranking"
@@ -3594,6 +3650,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "note:recovered-nc0e7474b34e1",
+          "kind": "note"
+        },
+        {
           "pageId": "ranking:sports-participation-rate-hiking",
           "kind": "ranking"
         },
@@ -3636,6 +3696,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "note:recovered-n7ff099157abd",
+          "kind": "note"
+        },
+        {
           "pageId": "ranking:sports-participation-rate-jogging",
           "kind": "ranking"
         }
@@ -3672,6 +3736,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "note:recovered-n88d2a55a9e36",
+          "kind": "note"
+        },
+        {
           "pageId": "ranking:sports-participation-rate-judo",
           "kind": "ranking"
         }
@@ -3707,6 +3775,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "note:recovered-na21015ac366d",
+          "kind": "note"
+        },
         {
           "pageId": "ranking:sports-participation-rate-kendo",
           "kind": "ranking"
@@ -3932,6 +4004,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "note:recovered-n250b7aab145f",
+          "kind": "note"
+        },
+        {
           "pageId": "ranking:sports-participation-rate-skiing",
           "kind": "ranking"
         },
@@ -3974,6 +4050,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "note:recovered-n0b7373c9648a",
+          "kind": "note"
+        },
+        {
           "pageId": "ranking:sports-participation-rate-soccer",
           "kind": "ranking"
         }
@@ -4009,6 +4089,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "note:recovered-n8df3cf170cf4",
+          "kind": "note"
+        },
         {
           "pageId": "ranking:sports-participation-rate-softball",
           "kind": "ranking"
@@ -4050,6 +4134,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "note:recovered-n14f716fcd76d",
+          "kind": "note"
+        },
+        {
           "pageId": "ranking:sports-participation-rate-swimming",
           "kind": "ranking"
         }
@@ -4085,6 +4173,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "note:recovered-ncaddeaf3e2ff",
+          "kind": "note"
+        },
         {
           "pageId": "ranking:sports-participation-rate-table-tennis",
           "kind": "ranking"
@@ -4122,6 +4214,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "note:recovered-n55cd6de6a733",
+          "kind": "note"
+        },
+        {
           "pageId": "ranking:sports-participation-rate-tennis",
           "kind": "ranking"
         }
@@ -4157,6 +4253,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "note:recovered-n026bb22ad4eb",
+          "kind": "note"
+        },
         {
           "pageId": "ranking:sports-participation-rate-volleyball",
           "kind": "ranking"
@@ -4198,6 +4298,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "note:recovered-nb16c0b751d01",
+          "kind": "note"
+        },
+        {
           "pageId": "ranking:sports-participation-rate-walking",
           "kind": "ranking"
         }
@@ -4233,6 +4337,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "note:recovered-n04c2737daf2c",
+          "kind": "note"
+        },
         {
           "pageId": "ranking:sports-participation-rate-yoga",
           "kind": "ranking"
@@ -4549,6 +4657,10 @@
         {
           "pageId": "ranking:spouse-income",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:991",
+          "kind": "sns"
         }
       ],
       "themes": []
@@ -5734,6 +5846,14 @@
           "kind": "ranking"
         },
         {
+          "pageId": "sns:479",
+          "kind": "sns"
+        },
+        {
+          "pageId": "sns:655",
+          "kind": "sns"
+        },
+        {
           "pageId": "theme:labor-wages",
           "kind": "theme"
         }
@@ -6871,6 +6991,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "note:recovered-n724eab276711",
+          "kind": "note"
+        },
+        {
           "pageId": "ranking:study-participation-rate-academic",
           "kind": "ranking"
         }
@@ -6906,6 +7030,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "note:recovered-n765fc88c67ef",
+          "kind": "note"
+        },
         {
           "pageId": "ranking:study-participation-rate-arts-culture",
           "kind": "ranking"
@@ -7131,6 +7259,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "note:recovered-n578b6e871067",
+          "kind": "note"
+        },
+        {
           "pageId": "ranking:study-participation-rate-business",
           "kind": "ranking"
         },
@@ -7208,6 +7340,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "note:recovered-nbf1373427ca3",
+          "kind": "note"
+        },
         {
           "pageId": "ranking:study-participation-rate-computer",
           "kind": "ranking"
@@ -7510,6 +7646,10 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
+        {
+          "pageId": "note:recovered-nf0fc2a7eb326",
+          "kind": "note"
+        },
         {
           "pageId": "ranking:study-participation-rate-home-economics",
           "kind": "ranking"
@@ -8825,6 +8965,14 @@
           "kind": "ranking"
         },
         {
+          "pageId": "sns:284",
+          "kind": "sns"
+        },
+        {
+          "pageId": "sns:726",
+          "kind": "sns"
+        },
+        {
           "pageId": "theme:safety",
           "kind": "theme"
         }
@@ -9465,6 +9613,10 @@
         {
           "pageId": "ranking:sweet-potato-consumption-expenditure",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:1003",
+          "kind": "sns"
         }
       ],
       "themes": []

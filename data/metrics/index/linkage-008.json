@@ -152,6 +152,14 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "note:a-kakei-kagoshima",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-okayama",
+          "kind": "note"
+        },
+        {
           "pageId": "ranking:furniture-household-goods-expenditure-ratio-multi-person-households",
           "kind": "ranking"
         }
@@ -2038,6 +2046,10 @@
           "kind": "ranking"
         },
         {
+          "pageId": "sns:135",
+          "kind": "sns"
+        },
+        {
           "pageId": "theme:local-finance",
           "kind": "theme"
         }
@@ -3686,6 +3698,14 @@
         {
           "pageId": "ranking:garden-plants-consumption-expenditure",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:616",
+          "kind": "sns"
+        },
+        {
+          "pageId": "sns:780",
+          "kind": "sns"
         }
       ],
       "themes": []
@@ -4180,6 +4200,14 @@
         {
           "pageId": "ranking:gasoline-sales-volume",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:615",
+          "kind": "sns"
+        },
+        {
+          "pageId": "sns:779",
+          "kind": "sns"
         }
       ],
       "themes": []
@@ -4701,6 +4729,10 @@
         {
           "pageId": "ranking:gender-wage-gap",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:1",
+          "kind": "sns"
         },
         {
           "pageId": "theme:gender-participation",
@@ -6694,6 +6726,10 @@
           "kind": "japan-theme"
         },
         {
+          "pageId": "note:a-general-households",
+          "kind": "note"
+        },
+        {
           "pageId": "ranking:general-households",
           "kind": "ranking"
         }
@@ -7874,6 +7910,10 @@
         {
           "pageId": "ranking:gloves-consumption-expenditure",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:789",
+          "kind": "sns"
         }
       ],
       "themes": []
@@ -8521,6 +8561,10 @@
         {
           "pageId": "ranking:governor-salary-prefecture",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:8",
+          "kind": "sns"
         }
       ],
       "themes": []
@@ -8804,6 +8848,10 @@
         {
           "pageId": "ranking:grade-separated-pedestrian-crossings-per-1000-km",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:788",
+          "kind": "sns"
         }
       ],
       "themes": []
@@ -8916,6 +8964,10 @@
         {
           "pageId": "ranking:grape-consumption-quantity",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:977",
+          "kind": "sns"
         }
       ],
       "themes": []

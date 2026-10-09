@@ -388,6 +388,14 @@
         {
           "pageId": "ranking:clam-consumption-quantity",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:651",
+          "kind": "sns"
+        },
+        {
+          "pageId": "sns:814",
+          "kind": "sns"
         }
       ],
       "themes": []
@@ -3564,6 +3572,38 @@
         {
           "pageId": "municipality-theme:commuting",
           "kind": "municipality-theme"
+        },
+        {
+          "pageId": "note:a-kakei-fukuoka",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-hyogo",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-ibaraki",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-ishikawa",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-oita",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-osaka",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-tochigi",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-yamanashi",
+          "kind": "note"
         },
         {
           "pageId": "ranking:commute-by-car",
@@ -7572,6 +7612,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "note:a-kakei-ehime",
+          "kind": "note"
+        },
+        {
           "pageId": "ranking:consumer-price-difference-index-culture-recreation",
           "kind": "ranking"
         },
@@ -8532,6 +8576,14 @@
         {
           "pageId": "blog:consumer-price-regional-gap",
           "kind": "blog"
+        },
+        {
+          "pageId": "note:a-kakei-kagoshima",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-okayama",
+          "kind": "note"
         },
         {
           "pageId": "ranking:consumer-price-difference-index-furniture-household",
@@ -10335,6 +10387,18 @@
           "kind": "ranking"
         },
         {
+          "pageId": "sns:4",
+          "kind": "sns"
+        },
+        {
+          "pageId": "sns:97",
+          "kind": "sns"
+        },
+        {
+          "pageId": "sns:98",
+          "kind": "sns"
+        },
+        {
           "pageId": "theme:consumer-prices",
           "kind": "theme"
         },
@@ -11563,6 +11627,10 @@
           "kind": "japan-theme"
         },
         {
+          "pageId": "note:a-consumption-expenditure-multi-person-households-per-month",
+          "kind": "note"
+        },
+        {
           "pageId": "ranking:consumption-expenditure-multi-person-households-per-month",
           "kind": "ranking"
         }
@@ -11968,6 +12036,10 @@
         {
           "pageId": "ranking:convenience-store-count-per-100k",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:31",
+          "kind": "sns"
         }
       ],
       "themes": []
@@ -12004,6 +12076,10 @@
         "total-population"
       ],
       "consumers": [
+        {
+          "pageId": "note:a-convenience-store-sales",
+          "kind": "note"
+        },
         {
           "pageId": "ranking:convenience-store-sales",
           "kind": "ranking"

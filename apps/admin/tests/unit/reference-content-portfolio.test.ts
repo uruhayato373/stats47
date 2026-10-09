@@ -229,6 +229,10 @@ describe('reference content portfolio', () => {
     expect(stage(posted, 'x')).toMatchObject({ stage: 'integrated', itemIds: ['sns:42'] });
     expect(stage(posted, 'instagram').stage).not.toBe('integrated');
 
+    // note: ID 台帳に公開済みの note があれば済み (note 記事 key を itemIds に)
+    const noted = withRoles({ notePublishedMetrics: { 'sample-metric': ['note-x'] } });
+    expect(stage(noted, 'note')).toMatchObject({ stage: 'integrated', itemIds: ['note:note-x'] });
+
     // ブログ: 着手できる指標が候補キューにあれば、候補を示す (段階は変えない)
     const queued = withRoles({ blogTopicQueue: [{ topicKey: 'topic-a', metricKeys: ['sample-metric', 'other'] }] });
     expect(stage(queued, 'blog').stage).toBe('ready');

@@ -1,0 +1,4910 @@
+{
+  "version": 1,
+  "pages": [
+    {
+      "id": "sns:1",
+      "kind": "sns",
+      "key": "1",
+      "title": "ちなみに男女間の賃金格差を都道府県別で見ると、格差が最も小さいのは愛媛県（女性/男性=89.7%）、最も大きいのは宮城県",
+      "href": "https://x.com/stats47jp373/status/2036727050304909532",
+      "published": true,
+      "rankingKeys": [
+        "gender-wage-gap"
+      ]
+    },
+    {
+      "id": "sns:10",
+      "kind": "sns",
+      "key": "10",
+      "title": "https://stats47.jp/ranking/total-fertility-rate…",
+      "href": "https://x.com/stats47jp373/status/2035606942417375449",
+      "published": true,
+      "rankingKeys": [
+        "total-fertility-rate"
+      ]
+    },
+    {
+      "id": "sns:1000",
+      "kind": "sns",
+      "key": "1000",
+      "title": "東京を1位・47位だけで語らない。",
+      "href": "https://www.threads.com/@stats47jp/post/DeJYr_lke_Q",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:1001",
+      "kind": "sns",
+      "key": "1001",
+      "title": "秋キャンプの県選びに使えるデータ。",
+      "href": "https://www.threads.com/@stats47jp/post/DeLM4mFkX0X",
+      "published": true,
+      "rankingKeys": [
+        "campsite-public"
+      ]
+    },
+    {
+      "id": "sns:1002",
+      "kind": "sns",
+      "key": "1002",
+      "title": "神奈川の「らしさ」をデータでたどる。",
+      "href": "https://www.threads.com/@stats47jp/post/DeL6qWfgkft",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:1003",
+      "kind": "sns",
+      "key": "1003",
+      "title": "さつまいもに最もお金を使う県は？",
+      "href": "https://www.threads.com/@stats47jp/post/DeNyxTyiTFK",
+      "published": true,
+      "rankingKeys": [
+        "sweet-potato-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "sns:1004",
+      "kind": "sns",
+      "key": "1004",
+      "title": "あなたの知る新潟は、データでも同じ姿ですか？",
+      "href": "https://www.threads.com/@stats47jp/post/DeOhrFWDs5M",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:1005",
+      "kind": "sns",
+      "key": "1005",
+      "title": "2,309時間・2,285時間・2,278時間。",
+      "href": "https://www.threads.com/@stats47jp/post/DeQVTBMjF6G",
+      "published": true,
+      "rankingKeys": [
+        "annual-sunshine-duration"
+      ]
+    },
+    {
+      "id": "sns:1006",
+      "kind": "sns",
+      "key": "1006",
+      "title": "富山を数字と地域文化の両方から見る。",
+      "href": "https://www.threads.com/@stats47jp/post/DeRDEEPjntQ",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:102",
+      "kind": "sns",
+      "key": "102",
+      "title": "経常収支比率100%超え、大阪府だけ。財政の自由度がほぼゼロ。  1位 大阪府 102.2％ 2位 兵庫県 98.7％ ",
+      "href": "https://x.com/stats47jp373/status/2039651555872215338",
+      "published": true,
+      "rankingKeys": [
+        "current-balance-ratio"
+      ]
+    },
+    {
+      "id": "sns:104",
+      "kind": "sns",
+      "key": "104",
+      "title": "貯蓄額ランキング、3位が福井県って知ってた？  二人以上世帯の貯蓄現在高（2014年） 1位 東京都 約1,967万円 ",
+      "href": "https://x.com/stats47jp373/status/2031852670365937680",
+      "published": true,
+      "rankingKeys": [
+        "current-savings-balance-multi-person-households"
+      ]
+    },
+    {
+      "id": "sns:1054",
+      "kind": "sns",
+      "key": "1054",
+      "title": "instagram 13000-vs-27000",
+      "href": "https://www.instagram.com/p/Ddtv7fKm3XY/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:1055",
+      "kind": "sns",
+      "key": "1055",
+      "title": "instagram 01000",
+      "href": "https://www.instagram.com/p/DdwPSPbm50A/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:1056",
+      "kind": "sns",
+      "key": "1056",
+      "title": "instagram miso-consumption-quantity",
+      "href": "https://www.instagram.com/p/Ddy5JqmIE_t/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:1057",
+      "kind": "sns",
+      "key": "1057",
+      "title": "instagram side-job-rate",
+      "href": "https://www.instagram.com/p/Dd1yg5lmEk3/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:1058",
+      "kind": "sns",
+      "key": "1058",
+      "title": "instagram 47000",
+      "href": "https://www.instagram.com/p/Dd4MHf-Fe7i/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:106",
+      "kind": "sns",
+      "key": "106",
+      "title": "貯蓄現在高ランキング 3位は意外な福井県｜共働き北陸の貯蓄力【2014年】 #都道府県ランキング #統計データ #ran",
+      "href": "https://www.youtube.com/watch?v=U3IjXsB8P_w",
+      "published": true,
+      "rankingKeys": [
+        "current-savings-balance-multi-person-households"
+      ]
+    },
+    {
+      "id": "sns:1065",
+      "kind": "sns",
+      "key": "1065",
+      "title": "instagram squid-consumption-expenditure",
+      "href": "https://www.instagram.com/reel/Dd6AASLFICC/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:1066",
+      "kind": "sns",
+      "key": "1066",
+      "title": "instagram dual-income-household-ratio--floor-area-per-dwelling-owner",
+      "href": "https://www.instagram.com/p/Dd6wPczFILm/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:1067",
+      "kind": "sns",
+      "key": "1067",
+      "title": "instagram sake-consumption-expenditure",
+      "href": "https://www.instagram.com/p/Dd9ZXGRGjvL/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:1068",
+      "kind": "sns",
+      "key": "1068",
+      "title": "instagram 11000-vs-12000",
+      "href": "https://www.instagram.com/p/DeA7D-ZFZsp/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:1069",
+      "kind": "sns",
+      "key": "1069",
+      "title": "instagram 13000",
+      "href": "https://www.instagram.com/p/DeCTBEBG519/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:1070",
+      "kind": "sns",
+      "key": "1070",
+      "title": "instagram natto-consumption-expenditure",
+      "href": "https://www.instagram.com/p/DeE7_A3FvHO/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:1071",
+      "kind": "sns",
+      "key": "1071",
+      "title": "instagram hamburger-consumption-expenditure",
+      "href": "https://www.instagram.com/p/DeG8ypxmz-j/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:1072",
+      "kind": "sns",
+      "key": "1072",
+      "title": "instagram 39000",
+      "href": "https://www.instagram.com/p/DeKPMIvIDIO/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:1073",
+      "kind": "sns",
+      "key": "1073",
+      "title": "instagram marriages",
+      "href": "https://www.instagram.com/reel/DeMFNCvANLS/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:1074",
+      "kind": "sns",
+      "key": "1074",
+      "title": "instagram average-temperature--kerosene-consumption-quantity",
+      "href": "https://www.instagram.com/p/DeM4zvokTTA/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:1075",
+      "kind": "sns",
+      "key": "1075",
+      "title": "instagram curry-roux-consumption-quantity",
+      "href": "https://www.instagram.com/p/DeOrTTqFnCN/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:1076",
+      "kind": "sns",
+      "key": "1076",
+      "title": "instagram 23000-vs-40000",
+      "href": "https://www.instagram.com/p/DeRQY84G5tI/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:109",
+      "kind": "sns",
+      "key": "109",
+      "title": "手取り月収、東京と愛媛で21万円の差。  1位 東京都 637,958円 2位 埼玉県 620,576円 3位 千葉県 ",
+      "href": "https://x.com/stats47jp373/status/2037658421462491554",
+      "published": true,
+      "rankingKeys": [
+        "disposable-income-worker-households"
+      ]
+    },
+    {
+      "id": "sns:11",
+      "kind": "sns",
+      "key": "11",
+      "title": "世帯年収1位は東京じゃなくて神奈川県。  1位 神奈川県 6,220千円 2位 東京都 6,211千円 3位 富山県 6",
+      "href": "https://x.com/stats47jp373/status/2036752452393861161",
+      "published": true,
+      "rankingKeys": [
+        "annual-income-per-household"
+      ]
+    },
+    {
+      "id": "sns:113",
+      "kind": "sns",
+      "key": "113",
+      "title": "離婚率の最下位4県が全部「北陸」って知ってた？  離婚率（2022年・人口千人あたり） 1位 沖縄県 2.10 2位 宮",
+      "href": "https://x.com/stats47jp373/status/2031565787249652196",
+      "published": true,
+      "rankingKeys": [
+        "divorces-per-total-population"
+      ]
+    },
+    {
+      "id": "sns:114",
+      "kind": "sns",
+      "key": "114",
+      "title": "【都道府県ランキング】離婚率（2022年度）",
+      "href": "https://www.instagram.com/reel/DXp_REfkenF/",
+      "published": true,
+      "rankingKeys": [
+        "divorces-per-total-population"
+      ]
+    },
+    {
+      "id": "sns:116",
+      "kind": "sns",
+      "key": "116",
+      "title": "tiktok divorces-per-total-population",
+      "href": "https://www.tiktok.com/@stats47jp/video/7614677646416530708",
+      "published": true,
+      "rankingKeys": [
+        "divorces-per-total-population"
+      ]
+    },
+    {
+      "id": "sns:118",
+      "kind": "sns",
+      "key": "118",
+      "title": "火災で最も死傷者が出る県は青森県。  1位 青森県 10.64人 2位 秋田県 9.19人 3位 岩手県 8.51人  ",
+      "href": "https://x.com/stats47jp373/status/2038745588016013562",
+      "published": true,
+      "rankingKeys": [
+        "fire-damage-casualties-per-population"
+      ]
+    },
+    {
+      "id": "sns:122",
+      "kind": "sns",
+      "key": "122",
+      "title": "東京が圧倒的すぎる。  都道府県別 財政力指数の40年間をバーチャートレースで可視化。  1982年度→2022年度、東",
+      "href": "https://x.com/stats47jp373/status/2037758155653071055",
+      "published": true,
+      "rankingKeys": [
+        "fiscal-strength-index-prefecture"
+      ]
+    },
+    {
+      "id": "sns:126",
+      "kind": "sns",
+      "key": "126",
+      "title": "家計に占める食費の割合、1位は愛媛県で31.8％。大阪府31.4％、兵庫県30.7％と続く。全国平均27.3％なのに愛媛",
+      "href": "https://x.com/stats47jp373/status/2031490288489828608",
+      "published": true,
+      "rankingKeys": [
+        "food-expenditure-ratio-multi-person-households"
+      ]
+    },
+    {
+      "id": "sns:129",
+      "kind": "sns",
+      "key": "129",
+      "title": "tiktok food-expenditure-ratio-multi-person-households",
+      "href": "https://www.tiktok.com/@stats47jp/video/7614677390173785364",
+      "published": true,
+      "rankingKeys": [
+        "food-expenditure-ratio-multi-person-households"
+      ]
+    },
+    {
+      "id": "sns:131",
+      "kind": "sns",
+      "key": "131",
+      "title": "外国人が最も多い都道府県、東京都48万人。2位愛知の2倍以上。  1位 東京都 483,372人 2位 愛知県 231,",
+      "href": "https://x.com/stats47jp373/status/2038088766070325588",
+      "published": true,
+      "rankingKeys": [
+        "foreign-resident-count"
+      ]
+    },
+    {
+      "id": "sns:135",
+      "kind": "sns",
+      "key": "135",
+      "title": "将来負担比率、兵庫県が全国ワースト。330%は年収の3倍超の借金。  1位 兵庫県 330.8％ 2位 北海道 311.",
+      "href": "https://x.com/stats47jp373/status/2039832748727365999",
+      "published": true,
+      "rankingKeys": [
+        "future-burden-ratio"
+      ]
+    },
+    {
+      "id": "sns:141",
+      "kind": "sns",
+      "key": "141",
+      "title": "餃子消費額1位は宮崎県。宇都宮じゃない。  1位 宮崎県 3,517円 2位 栃木県 2,801円 3位 埼玉県 2,3",
+      "href": "https://x.com/stats47jp373/status/2036933647207387399",
+      "published": true,
+      "rankingKeys": [
+        "gyoza-frozen-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "sns:142",
+      "kind": "sns",
+      "key": "142",
+      "title": "【都道府県ランキング】冷凍餃子の消費額（2024年度）",
+      "href": "https://www.instagram.com/p/DYBKe8KFbFI/",
+      "published": true,
+      "rankingKeys": [
+        "gyoza-frozen-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "sns:145",
+      "kind": "sns",
+      "key": "145",
+      "title": "高校卒業後の進学率、1位は京都府で73.0％。東京都72.7％、神奈川県68.0％と続く。最下位の沖縄県は46.2％で、",
+      "href": "https://x.com/stats47jp373/status/2031203397114736654",
+      "published": true,
+      "rankingKeys": [
+        "high-school-advancement-rate"
+      ]
+    },
+    {
+      "id": "sns:151",
+      "kind": "sns",
+      "key": "151",
+      "title": "【都道府県ランキング】日曜大工の行動者率（2021年）",
+      "href": "https://www.instagram.com/stats47jp/p/DVVt4_KE4vi/",
+      "published": true,
+      "rankingKeys": [
+        "hobby-participation-rate-diy"
+      ]
+    },
+    {
+      "id": "sns:153",
+      "kind": "sns",
+      "key": "153",
+      "title": "アイス消費額1位は山形県。暑い沖縄じゃない。  1位 山形県 14,747円 2位 静岡県 14,400円 3位 埼玉県",
+      "href": "https://x.com/stats47jp373/status/2037296033604976686",
+      "published": true,
+      "rankingKeys": [
+        "icecream-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "sns:154",
+      "kind": "sns",
+      "key": "154",
+      "title": "【都道府県ランキング】アイス消費支出額（2024年度）",
+      "href": "https://www.instagram.com/p/DYDvTlZFDk9/",
+      "published": true,
+      "rankingKeys": [
+        "icecream-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "sns:159",
+      "kind": "sns",
+      "key": "159",
+      "title": "女性の労働力人口比率、1位は福井県で54.5％。富山県53.0％、佐賀県53.0％と続く。最下位は大阪府の43.9％で、",
+      "href": "https://x.com/stats47jp373/status/2031127894466900094",
+      "published": true,
+      "rankingKeys": [
+        "labor-force-population-ratio-woman"
+      ]
+    },
+    {
+      "id": "sns:162",
+      "kind": "sns",
+      "key": "162",
+      "title": "tiktok labor-force-population-ratio-woman",
+      "href": "https://www.tiktok.com/@stats47jp/video/7614676893219949844",
+      "published": true,
+      "rankingKeys": [
+        "labor-force-population-ratio-woman"
+      ]
+    },
+    {
+      "id": "sns:166",
+      "kind": "sns",
+      "key": "166",
+      "title": "地方債の割合、静岡県が全国ワースト。収入の2倍超の借金。  1位 静岡県 208.5％ 2位 新潟県 205.1％ 3位",
+      "href": "https://x.com/stats47jp373/status/2040195137754816611",
+      "published": true,
+      "rankingKeys": [
+        "local-debt-current-ratio"
+      ]
+    },
+    {
+      "id": "sns:170",
+      "kind": "sns",
+      "key": "170",
+      "title": "自力で稼ぐ県は？  都道府県別 地方税割合の約50年間をバーチャートレースで可視化。  1976年度→2022年度、東京",
+      "href": "https://x.com/stats47jp373/status/2037759027439165453",
+      "published": true,
+      "rankingKeys": [
+        "local-tax-ratio-pref-finance"
+      ]
+    },
+    {
+      "id": "sns:174",
+      "kind": "sns",
+      "key": "174",
+      "title": "2024年最も暑かったのは熊本県。36.2℃。北海道との差は7.8℃。  1位 熊本県 36.2℃ 2位 山口県 35.",
+      "href": "https://x.com/stats47jp373/status/2042747162669519152",
+      "published": true,
+      "rankingKeys": [
+        "maximum-temperature"
+      ]
+    },
+    {
+      "id": "sns:178",
+      "kind": "sns",
+      "key": "178",
+      "title": "男性の月間平均労働時間、1位は埼玉県で186時間。栃木県185時間、香川県185時間と続く。最下位は高知県の176時間。",
+      "href": "https://x.com/stats47jp373/status/2030841000244269482",
+      "published": true,
+      "rankingKeys": [
+        "monthly-average-actual-working-hours-male"
+      ]
+    },
+    {
+      "id": "sns:183",
+      "kind": "sns",
+      "key": "183",
+      "title": "新築住宅を一番建ててる都道府県、東京じゃなくて熊本県なの知ってた？  1位 熊本県 1.9％ 2位 愛知県 1.8％ 3",
+      "href": "https://x.com/stats47jp373/status/2030765509520625997",
+      "published": true,
+      "rankingKeys": [
+        "new-housing-construction-ratio"
+      ]
+    },
+    {
+      "id": "sns:185",
+      "kind": "sns",
+      "key": "185",
+      "title": "着工新設住宅比率ランキング 都道府県別【2023年度】1位は熊本県 #都道府県ランキング #統計データ #ranking",
+      "href": "https://www.youtube.com/watch?v=hPsFqYiJ-4k",
+      "published": true,
+      "rankingKeys": [
+        "new-housing-construction-ratio"
+      ]
+    },
+    {
+      "id": "sns:193",
+      "kind": "sns",
+      "key": "193",
+      "title": "持ち家比率、秋田県は77.1％で1位なのに東京都は44.7％で46位。都民の半数以上が賃貸暮らしって知ってた？  1位 ",
+      "href": "https://x.com/stats47jp373/status/2030478626878034328",
+      "published": true,
+      "rankingKeys": [
+        "owner-occupied-housing-ratio"
+      ]
+    },
+    {
+      "id": "sns:195",
+      "kind": "sns",
+      "key": "195",
+      "title": "持ち家比率ランキング 45年の変遷｜都道府県別 #都道府県ランキング #統計データ #ranking",
+      "href": "https://www.youtube.com/watch?v=GkuaX0OmmIA",
+      "published": true,
+      "rankingKeys": [
+        "owner-occupied-housing-ratio"
+      ]
+    },
+    {
+      "id": "sns:196",
+      "kind": "sns",
+      "key": "196",
+      "title": "tiktok owner-occupied-housing-ratio",
+      "href": "https://www.tiktok.com/@stats47jp/video/7614675599440825621",
+      "published": true,
+      "rankingKeys": [
+        "owner-occupied-housing-ratio"
+      ]
+    },
+    {
+      "id": "sns:198",
+      "kind": "sns",
+      "key": "198",
+      "title": "教育費ランキング2023！あなたの県は何位？  2023年の「教育」に関する物価ランキングを発表！1位は和歌山県で122",
+      "href": "https://x.com/stats47jp373/status/2010900552797008362",
+      "published": true,
+      "rankingKeys": [
+        "per-capita-education-expenditure-pref-municipal"
+      ]
+    },
+    {
+      "id": "sns:2",
+      "kind": "sns",
+      "key": "2",
+      "title": "都道府県別の看護師の給与データ。1位は東京都（35.9万円）、47位は鹿児島県（25.3万円）。同じ看護師でも地域で10",
+      "href": "https://x.com/stats47jp373/status/2036727635032846571",
+      "published": true,
+      "rankingKeys": [
+        "nurse-salary"
+      ]
+    },
+    {
+      "id": "sns:207",
+      "kind": "sns",
+      "key": "207",
+      "title": "住民1人あたり民生費、沖縄県37万円。静岡県の1.7倍。  1位 沖縄県 371.4千円 2位 高知県 347.0千円 ",
+      "href": "https://x.com/stats47jp373/status/2042747476558647374",
+      "published": true,
+      "rankingKeys": [
+        "per-capita-welfare-expenditure-pref-municipal"
+      ]
+    },
+    {
+      "id": "sns:213",
+      "kind": "sns",
+      "key": "213",
+      "title": "生活保護率（人口千人あたり）  1位 大阪府 30.46人 2位 北海道 29.49人 3位 沖縄県 26.69人 … ",
+      "href": "https://x.com/stats47jp373/status/2031183506634846248",
+      "published": true,
+      "rankingKeys": [
+        "persons-on-public-assistance-per-1000"
+      ]
+    },
+    {
+      "id": "sns:224",
+      "kind": "sns",
+      "key": "224",
+      "title": "東京の家賃は和歌山の2.8倍。1畳あたり9,736円。  1位 東京都 9,736円 2位 神奈川県 6,670円 3位",
+      "href": "https://x.com/stats47jp373/status/2042747706255511624",
+      "published": true,
+      "rankingKeys": [
+        "private-rental-housing-rent-per-3-3m2"
+      ]
+    },
+    {
+      "id": "sns:228",
+      "kind": "sns",
+      "key": "228",
+      "title": "ラーメン消費1位は山形県。 年間22,389円で2位の5.7倍。  二人以上世帯の年間中華そば消費支出額（2024年・県",
+      "href": "https://www.instagram.com/p/DYGUC_QmsJb/",
+      "published": true,
+      "rankingKeys": [
+        "ramen-dining-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "sns:231",
+      "kind": "sns",
+      "key": "231",
+      "title": "65歳以上人口割合、1位は秋田県39.0％、最下位は東京都22.8％。差は1.7倍。  秋田は約4割が高齢者。東北・山陰",
+      "href": "https://x.com/stats47jp373/status/2031137956556071178",
+      "published": true,
+      "rankingKeys": [
+        "ratio-65-plus"
+      ]
+    },
+    {
+      "id": "sns:242",
+      "kind": "sns",
+      "key": "242",
+      "title": "公務員の退職金、県で1,000万円以上の差がつくって本当。",
+      "href": "https://x.com/stats47jp373/status/2033709908336488843",
+      "published": true,
+      "rankingKeys": [
+        "retirement-allowance-admin-prefecture"
+      ]
+    },
+    {
+      "id": "sns:250",
+      "kind": "sns",
+      "key": "250",
+      "title": "【社会増減率ランキング】47都道府県中、32県で人口流出  転入と転出の差を人口比で見る「社会増減率」（2019年度） ",
+      "href": "https://x.com/stats47jp373/status/2032777835715375452",
+      "published": true,
+      "rankingKeys": [
+        "social-increase-rate"
+      ]
+    },
+    {
+      "id": "sns:251",
+      "kind": "sns",
+      "key": "251",
+      "title": "47都道府県中、32県で人口が流出している。",
+      "href": "https://www.instagram.com/stats47jp/reel/DV3NtaGDREa/",
+      "published": true,
+      "rankingKeys": [
+        "social-increase-rate"
+      ]
+    },
+    {
+      "id": "sns:252",
+      "kind": "sns",
+      "key": "252",
+      "title": "32県で人口流出！社会増減率TOP5 #Shorts #都道府県ランキング #お金 #統計データ #都道府県ランキング ",
+      "href": "https://www.youtube.com/watch?v=jC0ixKJU0zk",
+      "published": true,
+      "rankingKeys": [
+        "social-increase-rate"
+      ]
+    },
+    {
+      "id": "sns:253",
+      "kind": "sns",
+      "key": "253",
+      "title": "tiktok social-increase-rate",
+      "href": "https://www.tiktok.com/@stats47jp/video/7616996944866446612",
+      "published": true,
+      "rankingKeys": [
+        "social-increase-rate"
+      ]
+    },
+    {
+      "id": "sns:254",
+      "kind": "sns",
+      "key": "254",
+      "title": "まぐろの年間支出額、1位は静岡県で10,654円。47位の長崎県は1,224円で、格差8.7倍。  上位5県は静岡・山梨",
+      "href": "https://x.com/stats47jp373/status/2030548824603632089",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:259",
+      "kind": "sns",
+      "key": "259",
+      "title": "りんごの年間支出額（二人以上世帯）、1位は青森県で8,800円。47位の大分県は3,390円で、格差2.6倍。  上位5",
+      "href": "https://x.com/stats47jp373/status/2030186185125990458",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:264",
+      "kind": "sns",
+      "key": "264",
+      "title": "ぎょうざ支出額1位は宮崎県で3,689円。「餃子の街」宇都宮の栃木県は2位。  浜松餃子の静岡県は…まさかの17位。  ",
+      "href": "https://x.com/stats47jp373/status/2031650836057829482",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:269",
+      "kind": "sns",
+      "key": "269",
+      "title": "緑茶の年間支出額、1位は静岡県で8,749円。47位の沖縄県は1,321円で、格差6.6倍。  2位以下は長崎・宮崎・佐",
+      "href": "https://x.com/stats47jp373/status/2031241639805727052",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:274",
+      "kind": "sns",
+      "key": "274",
+      "title": "日本そば・うどん支出額1位は「うどん県」香川で16,371円。47位沖縄は2,277円で格差7.2倍。  2位静岡との差",
+      "href": "https://x.com/stats47jp373/status/2030594878187638903",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:279",
+      "kind": "sns",
+      "key": "279",
+      "title": "過去1年で日曜大工をした人の割合、1位は滋賀県（13.6%）。  東京は45位（9.6%）。持ち家率が低いから「壁に釘す",
+      "href": "https://x.com/stats47jp373/status/2030816588924924404",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:284",
+      "kind": "sns",
+      "key": "284",
+      "title": "自殺率、和歌山県が全国ワースト。人口10万人あたり21.8人。  1位 和歌山県 21.8 2位 宮崎県 21.5 3位",
+      "href": "https://x.com/stats47jp373/status/2038451147690709076",
+      "published": true,
+      "rankingKeys": [
+        "suicide-rate-per-100k"
+      ]
+    },
+    {
+      "id": "sns:288",
+      "kind": "sns",
+      "key": "288",
+      "title": "【都道府県ランキング】合計特殊出生率（2023年度）",
+      "href": "https://www.instagram.com/stats47jp/reel/DVszvDHjQN8/",
+      "published": true,
+      "rankingKeys": [
+        "total-fertility-rate"
+      ]
+    },
+    {
+      "id": "sns:289",
+      "kind": "sns",
+      "key": "289",
+      "title": "【合計特殊出生率】47都道府県すべてが2.0割れ｜1位沖縄1.70 47位東京1.04 #都道府県ランキング #統計デー",
+      "href": "https://www.youtube.com/watch?v=0113mrnGw2U",
+      "published": true,
+      "rankingKeys": [
+        "total-fertility-rate"
+      ]
+    },
+    {
+      "id": "sns:29",
+      "kind": "sns",
+      "key": "29",
+      "title": "警察官の給料、東京と長野で月15万円の差。  1位 東京都 520,847円 2位 大阪府 507,042円 3位 神奈",
+      "href": "https://x.com/stats47jp373/status/2037114843262534136",
+      "published": true,
+      "rankingKeys": [
+        "avg-salary-police-prefecture"
+      ]
+    },
+    {
+      "id": "sns:290",
+      "kind": "sns",
+      "key": "290",
+      "title": "tiktok total-fertility-rate",
+      "href": "https://www.tiktok.com/@stats47jp/video/7613742025862548756",
+      "published": true,
+      "rankingKeys": [
+        "total-fertility-rate"
+      ]
+    },
+    {
+      "id": "sns:292",
+      "kind": "sns",
+      "key": "292",
+      "title": "交通事故が一番多い県、東京じゃないって知ってた？  人口10万人当たり交通事故件数（2023年） 1位 群馬県 527.",
+      "href": "https://x.com/stats47jp373/status/2029391463457382488",
+      "published": true,
+      "rankingKeys": [
+        "traffic-accident-count-per-population"
+      ]
+    },
+    {
+      "id": "sns:3",
+      "kind": "sns",
+      "key": "3",
+      "title": "最低賃金の都道府県別ランキング、1位の東京（1,163円）と47位の岩手（893円）で時給270円の差。地図で見ると東西",
+      "href": "https://x.com/stats47jp373/status/2036728214043955625",
+      "published": true,
+      "rankingKeys": [
+        "minimum-wage-by-region"
+      ]
+    },
+    {
+      "id": "sns:30",
+      "kind": "sns",
+      "key": "30",
+      "title": "公務員ボーナス、東京と高知で42万円の差。  1位 東京都 1,863,900円 2位 大阪府 1,714,800円 3",
+      "href": "https://x.com/stats47jp373/status/2037477231035838640",
+      "published": true,
+      "rankingKeys": [
+        "bonus-admin-prefecture"
+      ]
+    },
+    {
+      "id": "sns:308",
+      "kind": "sns",
+      "key": "308",
+      "title": "完全失業率 都道府県ランキング【2020年度】東京は30位。仕事があるのは意外な地方だった #都道府県ランキング #統計",
+      "href": "https://www.youtube.com/watch?v=G4NLnVFbfxk",
+      "published": true,
+      "rankingKeys": [
+        "unemployment-rate"
+      ]
+    },
+    {
+      "id": "sns:309",
+      "kind": "sns",
+      "key": "309",
+      "title": "tiktok unemployment-rate",
+      "href": "https://www.tiktok.com/@stats47jp/video/7612998598891965717",
+      "published": true,
+      "rankingKeys": [
+        "unemployment-rate"
+      ]
+    },
+    {
+      "id": "sns:31",
+      "kind": "sns",
+      "key": "31",
+      "title": "人口あたりコンビニ数、北海道が圧倒的1位。  1位 北海道 40.6所 2位 宮城県 33.3所 3位 山梨県 33.3",
+      "href": "https://x.com/stats47jp373/status/2037839616007684527",
+      "published": true,
+      "rankingKeys": [
+        "convenience-store-count-per-100k"
+      ]
+    },
+    {
+      "id": "sns:311",
+      "kind": "sns",
+      "key": "311",
+      "title": "大学が最も集まる都道府県、実は東京じゃない。  1位 京都府 238.1 2位 東京都 227.7 3位 大阪府 135",
+      "href": "https://x.com/stats47jp373/status/2029137188848582907",
+      "published": true,
+      "rankingKeys": [
+        "university-capacity-index"
+      ]
+    },
+    {
+      "id": "sns:313",
+      "kind": "sns",
+      "key": "313",
+      "title": "【大学収容力指数】1位京都238.1 47位三重45.3｜若者流出の構造が見える #都道府県ランキング #japan #",
+      "href": "https://www.youtube.com/watch?v=rL3ttFCx95k",
+      "published": true,
+      "rankingKeys": [
+        "university-capacity-index"
+      ]
+    },
+    {
+      "id": "sns:319",
+      "kind": "sns",
+      "key": "319",
+      "title": "空き家比率1位は徳島県で21.3%。5軒に1軒以上が空き家。  最も低い埼玉県でも9.3%。格差2.3倍。  上位は地方",
+      "href": "https://x.com/stats47jp373/status/2029127087395680602",
+      "published": true,
+      "rankingKeys": [
+        "vacant-housing-ratio"
+      ]
+    },
+    {
+      "id": "sns:32",
+      "kind": "sns",
+      "key": "32",
+      "title": "東京都の流入人口比率19.7%。昼間に人口が2割増える異常な都市。  1位 東京都 19.67％ 2位 京都府 7.36",
+      "href": "https://x.com/stats47jp373/status/2038564394473595308",
+      "published": true,
+      "rankingKeys": [
+        "inflow-population-ratio"
+      ]
+    },
+    {
+      "id": "sns:320",
+      "kind": "sns",
+      "key": "320",
+      "title": "空き家比率、1位は徳島県で21.3%。",
+      "href": "https://www.instagram.com/stats47jp/reel/DVdRkrhDep4/",
+      "published": true,
+      "rankingKeys": [
+        "vacant-housing-ratio"
+      ]
+    },
+    {
+      "id": "sns:321",
+      "kind": "sns",
+      "key": "321",
+      "title": "【空き家比率ランキング】1位徳島県21.3% 47位埼玉県9.3%｜5軒に1軒が空き家 #都道府県ランキング #統計デー",
+      "href": "https://www.youtube.com/watch?v=64VvE-PHvws",
+      "published": true,
+      "rankingKeys": [
+        "vacant-housing-ratio"
+      ]
+    },
+    {
+      "id": "sns:322",
+      "kind": "sns",
+      "key": "322",
+      "title": "tiktok vacant-housing-ratio",
+      "href": "https://www.tiktok.com/@stats47jp/video/7613328829075000597",
+      "published": true,
+      "rankingKeys": [
+        "vacant-housing-ratio"
+      ]
+    },
+    {
+      "id": "sns:328",
+      "kind": "sns",
+      "key": "328",
+      "title": "📊有効求人倍率ランキング2022！あなたの県は何位？",
+      "href": "https://www.instagram.com/stats47jp/reel/DSRToj7jFx0/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:33",
+      "kind": "sns",
+      "key": "33",
+      "title": "ラスパイレス指数、国家公務員より高い県がある。  1位 静岡県 101.8 2位 愛知県 101.0 3位 三重県 10",
+      "href": "https://x.com/stats47jp373/status/2040013944757338576",
+      "published": true,
+      "rankingKeys": [
+        "laspeyres-index-prefecture"
+      ]
+    },
+    {
+      "id": "sns:330",
+      "kind": "sns",
+      "key": "330",
+      "title": "tiktok active-job-opening-ratio",
+      "href": "https://www.tiktok.com/@stats47jp/video/7615756480121146645",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:34",
+      "kind": "sns",
+      "key": "34",
+      "title": "し尿処理人口比率、岩手県が19.6%。令和の時代に5人に1人が汲み取り式。  1位 岩手県 19.6％ 2位 長崎県 1",
+      "href": "https://x.com/stats47jp373/status/2039289169566924956",
+      "published": true,
+      "rankingKeys": [
+        "night-soil-treatment-population-ratio"
+      ]
+    },
+    {
+      "id": "sns:35",
+      "kind": "sns",
+      "key": "35",
+      "title": "ホテル客室数、東京は11万室で2位大阪の1.6倍。  1位 東京都 110,641室 2位 大阪府 71,193室 3位",
+      "href": "https://x.com/stats47jp373/status/2038383199907110914",
+      "published": true,
+      "rankingKeys": [
+        "number-of-hotel-rooms"
+      ]
+    },
+    {
+      "id": "sns:36",
+      "kind": "sns",
+      "key": "36",
+      "title": "人件費割合、三重県25.5%。東京都は17%。財政支出の4分の1が人件費の県がある。  1位 三重県 25.5％ 2位 ",
+      "href": "https://x.com/stats47jp373/status/2042747553079513175",
+      "published": true,
+      "rankingKeys": [
+        "personnel-expenditure-ratio-pref-finance"
+      ]
+    },
+    {
+      "id": "sns:37",
+      "kind": "sns",
+      "key": "37",
+      "title": "人口あたり薬局数、佐賀県が全国1位。  1位 佐賀県 64.5所 2位 高知県 60.4所 3位 山形県 60.0所  ",
+      "href": "https://x.com/stats47jp373/status/2038813533367124005",
+      "published": true,
+      "rankingKeys": [
+        "pharmacy-count-per-100k"
+      ]
+    },
+    {
+      "id": "sns:373",
+      "kind": "sns",
+      "key": "373",
+      "title": "【世帯主収入】青森5位→45位 50年で変わった収入格差の地図 #都道府県ランキング #統計データ #ranking",
+      "href": "https://www.youtube.com/watch?v=uHUBvmu-vyk",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:379",
+      "kind": "sns",
+      "key": "379",
+      "title": "2024年の最高気温、1位は熊本県36.2℃。  1位 熊本県 36.2℃ 2位 山口県 35.9℃ 3位 愛知県 35",
+      "href": "https://x.com/stats47jp373/status/2037001599071986066",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:38",
+      "kind": "sns",
+      "key": "38",
+      "title": "実質収支比率、島根県7.5%で全国1位。黒字幅が最も大きい県。  1位 島根県 7.5％ 2位 東京都 7.1％ 3位 ",
+      "href": "https://x.com/stats47jp373/status/2042747783732744666",
+      "published": true,
+      "rankingKeys": [
+        "real-balance-ratio"
+      ]
+    },
+    {
+      "id": "sns:385",
+      "kind": "sns",
+      "key": "385",
+      "title": "【転入超過率】47位→1位 東京の大逆転を50年分のデータで見る #都道府県ランキング #統計データ #ranking",
+      "href": "https://www.youtube.com/watch?v=ZH9Nd9JaTr8",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:389",
+      "kind": "sns",
+      "key": "389",
+      "title": "持ち家比率 都道府県別ランキング【2023年度】東京は半数以上が賃貸 #都道府県ランキング #統計データ #rankin",
+      "href": "https://www.youtube.com/watch?v=MTdIGh22a7s",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:39",
+      "kind": "sns",
+      "key": "39",
+      "title": "実質公債費比率、北海道18.9%。借金返済で財政を圧迫。  1位 北海道 18.9％ 2位 新潟県 18.2％ 3位 京",
+      "href": "https://x.com/stats47jp373/status/2039900704975049133",
+      "published": true,
+      "rankingKeys": [
+        "real-public-debt-service-ratio"
+      ]
+    },
+    {
+      "id": "sns:399",
+      "kind": "sns",
+      "key": "399",
+      "title": "家賃、東京は和歌山の2.8倍。1畳あたり9,736円。  1位 東京都 9,736円 2位 神奈川県 6,670円 3位",
+      "href": "https://x.com/stats47jp373/status/2037363986891444330",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:4",
+      "kind": "sns",
+      "key": "4",
+      "title": "これ、データで見ると面白くて。東京は給与が高い分、物価指数も全国1位（104.0）。可処分所得で比べると地方との差はかな",
+      "href": "https://x.com/stats47jp373/status/2036728570505232743",
+      "published": true,
+      "rankingKeys": [
+        "consumer-price-difference-index-overall"
+      ]
+    },
+    {
+      "id": "sns:40",
+      "kind": "sns",
+      "key": "40",
+      "title": "米の収穫量、新潟県がダントツ1位。64万トン。  1位 新潟県 646,100t 2位 北海道 588,100t 3位 ",
+      "href": "https://x.com/stats47jp373/status/2038202003416096943",
+      "published": true,
+      "rankingKeys": [
+        "rice-harvest-volume"
+      ]
+    },
+    {
+      "id": "sns:407",
+      "kind": "sns",
+      "key": "407",
+      "title": "自殺率が高いの、東京じゃなくて秋田県って知ってた？  人口10万人あたり自殺率（2022年） 1位 秋田県 22.6 2",
+      "href": "https://x.com/stats47jp373/status/2029729518139933092",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:41",
+      "kind": "sns",
+      "key": "41",
+      "title": "がん外来受療率、和歌山県は沖縄県の3.4倍。  1位 和歌山県 247人 2位 鳥取県 208人 3位 山形県 203人",
+      "href": "https://x.com/stats47jp373/status/2039175922029658356",
+      "published": true,
+      "rankingKeys": [
+        "treatment-rate-cancer-outpatient"
+      ]
+    },
+    {
+      "id": "sns:415",
+      "kind": "sns",
+      "key": "415",
+      "title": "49年間の都道府県別総人口ランキング。東京都は不動の1位で約250万人増加。神奈川県が大阪府を逆転して2位に。沖縄県は3",
+      "href": "https://x.com/stats47jp373/status/2031458112620867882",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:416",
+      "kind": "sns",
+      "key": "416",
+      "title": "大阪府が2位陥落。",
+      "href": "https://www.instagram.com/stats47jp/reel/DVqNj_1jTlE/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:418",
+      "kind": "sns",
+      "key": "418",
+      "title": "tiktok total-population",
+      "href": "https://www.tiktok.com/@stats47jp/video/7617274817565379861",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:42",
+      "kind": "sns",
+      "key": "42",
+      "title": "糖尿病の外来受療率、山口県が全国1位。沖縄の2.5倍。  1位 山口県 246人 2位 香川県 237人 3位 大分県 ",
+      "href": "https://x.com/stats47jp373/status/2038926781277995389",
+      "published": true,
+      "rankingKeys": [
+        "treatment-rate-diabetes-outpatient"
+      ]
+    },
+    {
+      "id": "sns:43",
+      "kind": "sns",
+      "key": "43",
+      "title": "高血圧の受療率、長崎県は石川県の2.4倍。  1位 長崎県 777人 2位 山形県 745人 3位 島根県 688人  ",
+      "href": "https://x.com/stats47jp373/status/2039107973973221832",
+      "published": true,
+      "rankingKeys": [
+        "treatment-rate-hypertension-outpatient"
+      ]
+    },
+    {
+      "id": "sns:44",
+      "kind": "sns",
+      "key": "44",
+      "title": "人口あたり大学数、京都府が全国1位。学生の街。  1位 京都府 1.35校 2位 石川県 1.28校 3位 新潟県 1.",
+      "href": "https://x.com/stats47jp373/status/2038020811714412568",
+      "published": true,
+      "rankingKeys": [
+        "university-count-per-100k"
+      ]
+    },
+    {
+      "id": "sns:45",
+      "kind": "sns",
+      "key": "45",
+      "title": "衆院選投票率、山形県64%。山口県は50%を切る。  1位 山形県 64.34％ 2位 新潟県 63.16％ 3位 島根",
+      "href": "https://x.com/stats47jp373/status/2037726380813959255",
+      "published": true,
+      "rankingKeys": [
+        "voter-turnout-house-single"
+      ]
+    },
+    {
+      "id": "sns:451",
+      "kind": "sns",
+      "key": "451",
+      "title": "データで見ると、都道府県別の1人当たり課税対象所得（2024年度）は 1位 東京都 542万円 → 47位 秋田県 30",
+      "href": "https://x.com/stats47jp373/status/2038584994340487399",
+      "published": true,
+      "rankingKeys": [
+        "per-taxpayer-taxable-income"
+      ]
+    },
+    {
+      "id": "sns:452",
+      "kind": "sns",
+      "key": "452",
+      "title": "沖縄の離婚率は富山の2倍。ずっと全国1位。  1位 沖縄県 2.10 2位 宮崎県 1.67 3位 大阪府 1.65  ",
+      "href": "https://x.com/stats47jp373/status/2042528033429688534",
+      "published": true,
+      "rankingKeys": [
+        "divorces-per-total-population"
+      ]
+    },
+    {
+      "id": "sns:461",
+      "kind": "sns",
+      "key": "461",
+      "title": "データで見ると、都道府県別の合計特殊出生率(2023年)は1位 沖縄県1.60、47位 東京都0.99。1位と47位で1",
+      "href": "https://x.com/stats47jp373/status/2043796543929758163",
+      "published": true,
+      "rankingKeys": [
+        "total-fertility-rate"
+      ]
+    },
+    {
+      "id": "sns:462",
+      "kind": "sns",
+      "key": "462",
+      "title": "データで見ると、勤労者世帯の実収入(2024年、二人以上世帯)は1位 東京都79.4万円/月、47位 沖縄県49.4万円",
+      "href": "https://x.com/stats47jp373/status/2043797804553019739",
+      "published": true,
+      "rankingKeys": [
+        "actual-income-worker-households-per-month"
+      ]
+    },
+    {
+      "id": "sns:463",
+      "kind": "sns",
+      "key": "463",
+      "title": "データで見ると、民営賃貸住宅の家賃(2024年、3.3m²あたり)は1位 東京都9,736円、47位 和歌山県3,442",
+      "href": "https://x.com/stats47jp373/status/2043798193461465429",
+      "published": true,
+      "rankingKeys": [
+        "private-rental-housing-rent-per-3-3m2"
+      ]
+    },
+    {
+      "id": "sns:464",
+      "kind": "sns",
+      "key": "464",
+      "title": "【都道府県ランキング】冷凍餃子の消費額（2024年度）",
+      "href": "https://www.instagram.com/p/DXiF5oKkj3b/",
+      "published": true,
+      "rankingKeys": [
+        "gyoza-frozen-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "sns:465",
+      "kind": "sns",
+      "key": "465",
+      "title": "東京が圧倒的すぎる。",
+      "href": "https://www.instagram.com/reel/DXlEpKwDNhW/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:466",
+      "kind": "sns",
+      "key": "466",
+      "title": "救急出動49年の変遷 大阪が3.7倍に激増 #Shorts #都道府県",
+      "href": "https://www.youtube.com/watch?v=08no2ZRhTyo",
+      "published": true,
+      "rankingKeys": [
+        "annual-emergency-dispatches-per-1000"
+      ]
+    },
+    {
+      "id": "sns:467",
+      "kind": "sns",
+      "key": "467",
+      "title": "【都道府県ランキング】最高気温（2024年度）",
+      "href": "https://www.instagram.com/p/DYI7ozUkue0/",
+      "published": true,
+      "rankingKeys": [
+        "maximum-temperature"
+      ]
+    },
+    {
+      "id": "sns:479",
+      "kind": "sns",
+      "key": "479",
+      "title": "大卒初任給 県別ランキング 2023年最新版📊",
+      "href": "https://www.instagram.com/p/DYbFaRvE6ht/",
+      "published": true,
+      "rankingKeys": [
+        "starting-salary-university"
+      ]
+    },
+    {
+      "id": "sns:480",
+      "kind": "sns",
+      "key": "480",
+      "title": "兵庫県は2025年、引っ越しの収支で2,102人を失った。",
+      "href": "https://x.com/stats47jp373/status/2057416096224096350",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:484",
+      "kind": "sns",
+      "key": "484",
+      "title": "都道府県別 鉄道駅ランキング｜全国8565駅 日本一忙しい駅は？",
+      "href": "https://www.youtube.com/watch?v=wjLQCiuEeNI",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:5",
+      "kind": "sns",
+      "key": "5",
+      "title": "人口密度、東京6,445人に対し北海道64人。100倍の差。",
+      "href": "https://x.com/stats47jp373/status/2036276831578366428",
+      "published": true,
+      "rankingKeys": [
+        "population-density-per-km2-total-area"
+      ]
+    },
+    {
+      "id": "sns:510",
+      "kind": "sns",
+      "key": "510",
+      "title": "日本の高速道路は58年で何キロまで広がったのか？",
+      "href": "https://www.instagram.com/reel/DYuApUviuyQ/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:511",
+      "kind": "sns",
+      "key": "511",
+      "title": "日本の港湾、14年で何が起きたのか🚢",
+      "href": "https://www.instagram.com/reel/DYwuJ_2EsBT/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:512",
+      "kind": "sns",
+      "key": "512",
+      "title": "都道府県別「泥棒が多い県」ランキング 1位は大阪でも2位は意外すぎる県だった【2023年最新】",
+      "href": "https://www.youtube.com/watch?v=gzdSq-COcHM",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:513",
+      "kind": "sns",
+      "key": "513",
+      "title": "アイス消費ランキング 沖縄46位で山形1位の逆転 #Shorts #アイスクリーム #都道府県ランキング #アイス #S",
+      "href": "https://www.youtube.com/watch?v=ukgfKYCHLT0",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:514",
+      "kind": "sns",
+      "key": "514",
+      "title": "ぎょうざ消費ランキング 1位は宇都宮じゃなかった｜2024年 #Shorts #餃子 #都道府県ランキング #ぎょうざ ",
+      "href": "https://www.youtube.com/watch?v=GApPs4yHKJs",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:515",
+      "kind": "sns",
+      "key": "515",
+      "title": "知事給料ランキング 東京都知事が最下位の理由 #Shorts #知事給料 #都道府県ランキング #公務員給与 #Shor",
+      "href": "https://www.youtube.com/watch?v=zy1_p9OpPNc",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:516",
+      "kind": "sns",
+      "key": "516",
+      "title": "外国人人口ランキング 群馬が11位の意外｜都道府県別 #Shorts #外国人人口 #都道府県ランキング #多文化共生 ",
+      "href": "https://www.youtube.com/watch?v=3hzLSJ_O17k",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:517",
+      "kind": "sns",
+      "key": "517",
+      "title": "火災死傷者ランキング TOP5が全て東北｜人口あたり都道府県別 #Shorts #火災 #都道府県ランキング #防災 #",
+      "href": "https://www.youtube.com/watch?v=D-l6ZKmduAY",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:518",
+      "kind": "sns",
+      "key": "518",
+      "title": "可処分所得ランキング 大阪32位の衝撃｜勤労者世帯の手取り収入 #Shorts #可処分所得 #都道府県ランキング #手",
+      "href": "https://www.youtube.com/watch?v=v2GT_J_1iME",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:519",
+      "kind": "sns",
+      "key": "519",
+      "title": "経常収支比率ランキング 大阪だけ100%超えの危険水域！東京は余裕の79%【2022年度】#経常収支比率 #都道府県ラン",
+      "href": "https://www.youtube.com/watch?v=5LbX4KGCGiM",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:520",
+      "kind": "sns",
+      "key": "520",
+      "title": "コンビニ数ランキング 1位は東京じゃなく北海道！大阪は45位の衝撃【人口あたり】#コンビニ #都道府県ランキング #Sh",
+      "href": "https://www.youtube.com/watch?v=s2EQynyzxKA",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:521",
+      "kind": "sns",
+      "key": "521",
+      "title": "公務員ボーナスランキング 東京186万vs高知144万 42万円差の実態【2024年】#公務員ボーナス #都道府県ランキ",
+      "href": "https://www.youtube.com/watch?v=_-bkHCLA97s",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:522",
+      "kind": "sns",
+      "key": "522",
+      "title": "ビール年間消費額ランキング 東北がTOP3独占！秋田が1位の理由は？【2024年】#ビール #都道府県ランキング #Sh",
+      "href": "https://www.youtube.com/watch?v=nTPl87Oa4sA",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:523",
+      "kind": "sns",
+      "key": "523",
+      "title": "警察官の給料ランキング 東京と長野で月15万円差！最下位が意外すぎる【2024年】#警察官給与 #都道府県ランキング #",
+      "href": "https://www.youtube.com/watch?v=pla2YPWD3lA",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:524",
+      "kind": "sns",
+      "key": "524",
+      "title": "公務員の給料ランキング 東京と青森で月8万円差！地域手当の闇【2024年】#公務員給与 #都道府県ランキング #Shor",
+      "href": "https://www.youtube.com/watch?v=mhDgeIsykBU",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:525",
+      "kind": "sns",
+      "key": "525",
+      "title": "世帯年収ランキング 年収1位は東京じゃない！意外な県が200万円差で独走【2019年】#世帯年収 #都道府県ランキング ",
+      "href": "https://www.youtube.com/watch?v=z89IRgdOLkU",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:526",
+      "kind": "sns",
+      "key": "526",
+      "title": "大阪vs愛知 人口・社会7番勝負 寿命に1年の差がつく #Shorts #都道府県ランキング",
+      "href": "https://www.youtube.com/watch?v=KhuhIBB4nI8",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:527",
+      "kind": "sns",
+      "key": "527",
+      "title": "大阪vs愛知 暮らし7番勝負 月収9万円の差がつく #Shorts #お金 #統計データ",
+      "href": "https://www.youtube.com/watch?v=yikEShprAYA",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:528",
+      "kind": "sns",
+      "key": "528",
+      "title": "大阪vs愛知 経済力7番勝負 稼ぐ力はどっちが上？ #Shorts #お金 #統計データ",
+      "href": "https://www.youtube.com/watch?v=Ak1DAjYbsqA",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:529",
+      "kind": "sns",
+      "key": "529",
+      "title": "都道府県の一般行政職員（定年退職者）の平均退職手当ランキング（2024年）",
+      "href": "https://www.youtube.com/watch?v=3NWBwhHh7Ds",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:530",
+      "kind": "sns",
+      "key": "530",
+      "title": "1人当たり預金残高ランキング 50年の変遷【都道府県別】",
+      "href": "https://www.youtube.com/watch?v=utXKp1v1tGU",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:531",
+      "kind": "sns",
+      "key": "531",
+      "title": "教員1人当たり児童数ランキング 50年の変遷【都道府県別】",
+      "href": "https://www.youtube.com/watch?v=6sPMgLOA_yY",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:532",
+      "kind": "sns",
+      "key": "532",
+      "title": "高校進学率ランキング 23年の変遷【都道府県別】",
+      "href": "https://www.youtube.com/watch?v=iLIp7aeyPzY",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:533",
+      "kind": "sns",
+      "key": "533",
+      "title": "【社会増減率ランキング】32県で人口流出…東京一極集中が再加速 都道府県別データで見る人口移動の実態",
+      "href": "https://www.youtube.com/watch?v=pri1FGbxrpc",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:534",
+      "kind": "sns",
+      "key": "534",
+      "title": "【女性労働力比率】最下位は東京じゃない 大阪が47位の理由 #都道府県ランキング #統計データ #ranking",
+      "href": "https://www.youtube.com/watch?v=vkNNHTJEOvg",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:535",
+      "kind": "sns",
+      "key": "535",
+      "title": "最高気温ランキング 50年の変遷【都道府県別】猛暑の変化 #都道府県ランキング #統計データ #ranking",
+      "href": "https://www.youtube.com/watch?v=dOmHgWB0Orw",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:536",
+      "kind": "sns",
+      "key": "536",
+      "title": "生活保護受給率ランキング 48年の変遷｜都道府県別 #都道府県ランキング #統計データ #ranking",
+      "href": "https://www.youtube.com/watch?v=HhEW7X9s-O0",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:537",
+      "kind": "sns",
+      "key": "537",
+      "title": "人口密度ランキング 49年の変遷｜都道府県別 #都道府県ランキング #統計データ #ranking",
+      "href": "https://www.youtube.com/watch?v=kwSC6cCCG-o",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:538",
+      "kind": "sns",
+      "key": "538",
+      "title": "家賃ランキング 49年の変遷｜都道府県別",
+      "href": "https://www.youtube.com/watch?v=LSxrK_gFLbI",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:539",
+      "kind": "sns",
+      "key": "539",
+      "title": "高齢化率ランキング 19年の変遷｜都道府県別",
+      "href": "https://www.youtube.com/watch?v=Kgr2gdqNpKc",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:540",
+      "kind": "sns",
+      "key": "540",
+      "title": "高校卒業後の進学率ランキング 京都73％vs沖縄46％【都道府県別2022】 #都道府県ランキング #統計データ #ra",
+      "href": "https://www.youtube.com/watch?v=j1UWXqAb71M",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:541",
+      "kind": "sns",
+      "key": "541",
+      "title": "自殺率ランキング 14年の変遷｜都道府県別",
+      "href": "https://www.youtube.com/watch?v=jl-FGm59Ssw",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:542",
+      "kind": "sns",
+      "key": "542",
+      "title": "合計特殊出生率ランキング 43年の変遷【都道府県別】",
+      "href": "https://www.youtube.com/watch?v=PgxyBPb8rx4",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:543",
+      "kind": "sns",
+      "key": "543",
+      "title": "【まぐろ消費額ランキング】1位静岡県10,654円 47位長崎県1,224円 格差8.7倍 #都道府県ランキング #統計",
+      "href": "https://www.youtube.com/watch?v=ov3fA2cJJ_w",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:544",
+      "kind": "sns",
+      "key": "544",
+      "title": "1人当たり県民所得 都道府県別ランキング【2020年度】東京と沖縄で2.4倍差 #都道府県ランキング #統計データ #r",
+      "href": "https://www.youtube.com/watch?v=oT5Expu918I",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:545",
+      "kind": "sns",
+      "key": "545",
+      "title": "【ぎょうざ消費額ランキング】1位宮崎県3,689円 宇都宮の栃木は2位 静岡17位",
+      "href": "https://www.youtube.com/watch?v=ojZZ3IuD90s",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:546",
+      "kind": "sns",
+      "key": "546",
+      "title": "【うどん】香川16,371円でぶっちぎり1位！そば・うどん消費が多い県・少ない県【2023年】 #都道府県ランキング #",
+      "href": "https://www.youtube.com/watch?v=PLlI3_oPWhQ",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:547",
+      "kind": "sns",
+      "key": "547",
+      "title": "【緑茶消費額ランキング】1位静岡県8,749円 47位沖縄県1,321円 格差6.6倍",
+      "href": "https://www.youtube.com/watch?v=BM-oA5s0jWg",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:548",
+      "kind": "sns",
+      "key": "548",
+      "title": "【高齢化率】秋田県39％が1位 東京都22.8％で最下位【2023年度】 #都道府県ランキング #統計データ #rank",
+      "href": "https://www.youtube.com/watch?v=F4f1MLyWl0o",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:549",
+      "kind": "sns",
+      "key": "549",
+      "title": "【交通事故】群馬527件で全国ワースト！事故が多い県・少ない県【2023年】",
+      "href": "https://www.youtube.com/watch?v=fHlM28N42fE",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:550",
+      "kind": "sns",
+      "key": "550",
+      "title": "【りんご消費額ランキング】1位青森県8,800円 47位大分県3,390円 格差2.6倍 #都道府県ランキング #統計デ",
+      "href": "https://www.youtube.com/watch?v=QCnxPMPWAn8",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:551",
+      "kind": "sns",
+      "key": "551",
+      "title": "日曜大工する人が多い都道府県ランキング【2021年】 #都道府県ランキング #統計データ #ranking　#日曜大工 ",
+      "href": "https://www.youtube.com/watch?v=Uc1tcPxSPZk",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:552",
+      "kind": "sns",
+      "key": "552",
+      "title": "📊テレビ・ラジオ・新聞・雑誌の平均時間（無業者・男）ランキング2021！あなたの県は何位？",
+      "href": "https://www.youtube.com/watch?v=ph6Wf5SL6VU",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:553",
+      "kind": "sns",
+      "key": "553",
+      "title": "📊一般粉じん発生施設数ランキング2022！あなたの県は何位？",
+      "href": "https://www.youtube.com/watch?v=A0KF64AnVjU",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:554",
+      "kind": "sns",
+      "key": "554",
+      "title": "💰平均貯蓄率ランキング2023！あなたの県は何位？",
+      "href": "https://www.youtube.com/watch?v=SMamINouurU",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:555",
+      "kind": "sns",
+      "key": "555",
+      "title": "🤰妊産婦保健指導数ランキング2022！あなたの県は何位？",
+      "href": "https://www.youtube.com/watch?v=h6Ti20fy55U",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:556",
+      "kind": "sns",
+      "key": "556",
+      "title": "👩‍🦳無業女性の趣味時間ランキング2021！あなたの地域は？",
+      "href": "https://www.youtube.com/watch?v=6v2I_zFOUJY",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:557",
+      "kind": "sns",
+      "key": "557",
+      "title": "👴無業男性の趣味時間ランキング2021！あなたの地域は？",
+      "href": "https://www.youtube.com/watch?v=v1pSyCU7juA",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:558",
+      "kind": "sns",
+      "key": "558",
+      "title": "📊趣味・娯楽の時間ランキング2021！あなたの県は何位？",
+      "href": "https://www.youtube.com/watch?v=E8-B3gK_g4E",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:559",
+      "kind": "sns",
+      "key": "559",
+      "title": "💰みんなの借金額は？世帯の負債額ランキング2019！",
+      "href": "https://www.youtube.com/watch?v=bhQR02P3M_Y",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:560",
+      "kind": "sns",
+      "key": "560",
+      "title": "🚗自動車の保有台数ランキング2014！あなたの県は何位？",
+      "href": "https://www.youtube.com/watch?v=hZWARs1FfXw",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:561",
+      "kind": "sns",
+      "key": "561",
+      "title": "🦷歯科健診・保健指導者数ランキング2020！あなたの県は何位？",
+      "href": "https://www.youtube.com/watch?v=bGFJgWKzLLs",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:562",
+      "kind": "sns",
+      "key": "562",
+      "title": "🏥脳血管疾患による死亡者数ランキング2022！あなたの県は何位？",
+      "href": "https://www.youtube.com/watch?v=p8zNjyv0yhI",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:563",
+      "kind": "sns",
+      "key": "563",
+      "title": "📊趣味・遊び代ランキング2023！あなたの県は何位？ #ranking #投資 #統計データ",
+      "href": "https://www.youtube.com/watch?v=8qnL63zJ0jM",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:564",
+      "kind": "sns",
+      "key": "564",
+      "title": "👗服の値段、地域差ありすぎ！被服・履物物価指数2023",
+      "href": "https://www.youtube.com/watch?v=Cxvv4Rvpdl8",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:565",
+      "kind": "sns",
+      "key": "565",
+      "title": "⚖️小学5年生女子の平均体重ランキング2022！一番重いのはどこ？",
+      "href": "https://www.youtube.com/watch?v=pYsQO0wVOnM",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:566",
+      "kind": "sns",
+      "key": "566",
+      "title": "勤労者世帯の月収ランキング2023！あなたの地域はいくら？",
+      "href": "https://www.youtube.com/watch?v=prxc6p5Ktmk",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:567",
+      "kind": "sns",
+      "key": "567",
+      "title": "都道府県一般行政部門職員数ランキング2023！あなたの県は何位？",
+      "href": "https://www.youtube.com/watch?v=L1QqphMMIZE",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:568",
+      "kind": "sns",
+      "key": "568",
+      "title": "農業産出額ランキング2022！あなたの県は何位？",
+      "href": "https://www.youtube.com/watch?v=tAyxhTp5qrI",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:569",
+      "kind": "sns",
+      "key": "569",
+      "title": "日本の未来を映す鏡？老年化指数ランキング2022！あなたの県は何位？",
+      "href": "https://www.youtube.com/watch?v=xy_9K8LrarM",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:570",
+      "kind": "sns",
+      "key": "570",
+      "title": "火災死傷者数（建物火災100件当たり）ランキング2022！あなたの県は何位？",
+      "href": "https://www.youtube.com/watch?v=ATBffBAXfOM",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:571",
+      "kind": "sns",
+      "key": "571",
+      "title": "高校2年男子の体重ランキング2022！あなたの県は何位？",
+      "href": "https://www.youtube.com/watch?v=CyCy5ikVJ44",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:573",
+      "kind": "sns",
+      "key": "573",
+      "title": "東京一極集中はいつ始まった？｜47都道府県 人口前年度比1976-2024",
+      "href": "https://www.youtube.com/watch?v=3O4v9iVgntE",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:575",
+      "kind": "sns",
+      "key": "575",
+      "title": "静岡に住んだら、年間3,754mmの雨と共に生きることになる。",
+      "href": "https://www.instagram.com/p/DZR6feSHJP0/",
+      "published": true,
+      "rankingKeys": [
+        "annual-precipitation"
+      ]
+    },
+    {
+      "id": "sns:576",
+      "kind": "sns",
+      "key": "576",
+      "title": "静岡の年間降水量、3,754mm。",
+      "href": "https://www.instagram.com/p/DZR6ytvlela/",
+      "published": true,
+      "rankingKeys": [
+        "annual-precipitation"
+      ]
+    },
+    {
+      "id": "sns:577",
+      "kind": "sns",
+      "key": "577",
+      "title": "なぜ静岡が年間降水量1位（3,754mm）なのか。",
+      "href": "https://www.instagram.com/p/DZR6zYgFOgn/",
+      "published": true,
+      "rankingKeys": [
+        "annual-precipitation"
+      ]
+    },
+    {
+      "id": "sns:578",
+      "kind": "sns",
+      "key": "578",
+      "title": "「沖縄が一番雨が多い」と思っていませんか？",
+      "href": "https://www.instagram.com/p/DZR6zmJFNT9/",
+      "published": true,
+      "rankingKeys": [
+        "annual-precipitation"
+      ]
+    },
+    {
+      "id": "sns:579",
+      "kind": "sns",
+      "key": "579",
+      "title": "年間降水量の格差（3.7倍）の答えは、「気候帯×地形」。",
+      "href": "https://www.instagram.com/p/DZR6z41lPOX/",
+      "published": true,
+      "rankingKeys": [
+        "annual-precipitation"
+      ]
+    },
+    {
+      "id": "sns:580",
+      "kind": "sns",
+      "key": "580",
+      "title": "出生数はこの29年で4割減｜47都道府県ランキングの推移 1995→2023",
+      "href": "https://www.youtube.com/watch?v=3TWSWlKDPbs",
+      "published": true,
+      "rankingKeys": [
+        "births"
+      ]
+    },
+    {
+      "id": "sns:581",
+      "kind": "sns",
+      "key": "581",
+      "title": "延べ宿泊者数、東京都は約9163万人泊。",
+      "href": "https://x.com/stats47jp373/status/2076079090155856185",
+      "published": true,
+      "rankingKeys": [
+        "total-overnight-guests"
+      ]
+    },
+    {
+      "id": "sns:582",
+      "kind": "sns",
+      "key": "582",
+      "title": "乾物・海藻類への支出、1位山形県4,249円 vs 47位高知県2,315円。",
+      "href": "https://x.com/stats47jp373/status/2076139488594513947",
+      "published": true,
+      "rankingKeys": [
+        "other-dried-vegetables-seaweed-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "sns:583",
+      "kind": "sns",
+      "key": "583",
+      "title": "なぜ東京都の電力需要は7552万Ｍｗｈと突出しているのか。",
+      "href": "https://x.com/stats47jp373/status/2076245188654076243",
+      "published": true,
+      "rankingKeys": [
+        "electricity-demand"
+      ]
+    },
+    {
+      "id": "sns:584",
+      "kind": "sns",
+      "key": "584",
+      "title": "都会は墓石消費が少ないと思われがちですが、データは違います。",
+      "href": "https://x.com/stats47jp373/status/2101612337996431554",
+      "published": true,
+      "rankingKeys": [
+        "ritual-goods-tombstone-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "sns:585",
+      "kind": "sns",
+      "key": "585",
+      "title": "もし静岡県に住んでいたら。",
+      "href": "https://x.com/stats47jp373/status/2101869026343555259",
+      "published": true,
+      "rankingKeys": [
+        "flood-affected-rivers"
+      ]
+    },
+    {
+      "id": "sns:586",
+      "kind": "sns",
+      "key": "586",
+      "title": "海外旅行の行動者率、京都府0.7％、茨城県0.6％、滋賀県0.6％。",
+      "href": "https://x.com/stats47jp373/status/2101446238680080823",
+      "published": true,
+      "rankingKeys": [
+        "travel-participation-rate-overseas"
+      ]
+    },
+    {
+      "id": "sns:587",
+      "kind": "sns",
+      "key": "587",
+      "title": "外国人延べ宿泊者数、東京都は約4743万人泊。",
+      "href": "https://x.com/stats47jp373/status/2101974730979053983",
+      "published": true,
+      "rankingKeys": [
+        "total-overnight-guests-foreign"
+      ]
+    },
+    {
+      "id": "sns:588",
+      "kind": "sns",
+      "key": "588",
+      "title": "海上出入貨物、1位愛知県2億トン vs 2位千葉県1.87億トン。",
+      "href": "https://x.com/stats47jp373/status/2102337120564076865",
+      "published": true,
+      "rankingKeys": [
+        "maritime-import-export-cargo"
+      ]
+    },
+    {
+      "id": "sns:589",
+      "kind": "sns",
+      "key": "589",
+      "title": "港湾統計データの使い方、3ステップで紹介します。",
+      "href": "https://x.com/stats47jp373/status/2102171016537813377",
+      "published": true,
+      "rankingKeys": [
+        "port-cargo-total"
+      ]
+    },
+    {
+      "id": "sns:590",
+      "kind": "sns",
+      "key": "590",
+      "title": "なぜ沖縄県の最低気温は15.3℃と際立って高いのか。",
+      "href": "https://x.com/stats47jp373/status/2102593807414100093",
+      "published": true,
+      "rankingKeys": [
+        "lowest-temperature"
+      ]
+    },
+    {
+      "id": "sns:591",
+      "kind": "sns",
+      "key": "591",
+      "title": "つくだ煮は西日本の食文化と思われがちですが、データは逆です。",
+      "href": "https://x.com/stats47jp373/status/2102533404957016484",
+      "published": true,
+      "rankingKeys": [
+        "vegetable-seaweed-tsukudani-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "sns:592",
+      "kind": "sns",
+      "key": "592",
+      "title": "もし福岡県に住んでいたら。",
+      "href": "https://x.com/stats47jp373/status/2077362549981331845",
+      "published": false,
+      "rankingKeys": [
+        "tourism-resource-count"
+      ]
+    },
+    {
+      "id": "sns:593",
+      "kind": "sns",
+      "key": "593",
+      "title": "海外旅行の年間行動者率、東京都18.2％、神奈川県16.4％、奈良県14.8％。",
+      "href": "https://x.com/stats47jp373/status/2077528640456393057",
+      "published": true,
+      "rankingKeys": [
+        "overseas-travel-annual-participation-rate-15plus"
+      ]
+    },
+    {
+      "id": "sns:594",
+      "kind": "sns",
+      "key": "594",
+      "title": "なぜ沖縄県の年平均気温は24.4℃と突出しているのか。",
+      "href": "https://x.com/stats47jp373/status/2077694735930765722",
+      "published": true,
+      "rankingKeys": [
+        "average-temperature"
+      ]
+    },
+    {
+      "id": "sns:595",
+      "kind": "sns",
+      "key": "595",
+      "title": "発電電力量データの使い方、3ステップで紹介します。",
+      "href": "https://x.com/stats47jp373/status/2077558835661942888",
+      "published": true,
+      "rankingKeys": [
+        "electricity-generation-capacity"
+      ]
+    },
+    {
+      "id": "sns:596",
+      "kind": "sns",
+      "key": "596",
+      "title": "もし北海道に住んでいたら。",
+      "href": "https://x.com/stats47jp373/status/2078087332805181810",
+      "published": true,
+      "rankingKeys": [
+        "marine-fishery-output-value"
+      ]
+    },
+    {
+      "id": "sns:597",
+      "kind": "sns",
+      "key": "597",
+      "title": "海外旅行の行動者率、京都府は0.7％で全国1位。",
+      "href": "https://x.com/stats47jp373/status/2077891029517173109",
+      "published": true,
+      "rankingKeys": [
+        "overseas-travel-annual-participation-rate-10plus"
+      ]
+    },
+    {
+      "id": "sns:598",
+      "kind": "sns",
+      "key": "598",
+      "title": "養殖業は瀬戸内海が中心と思われがちですが、データは違います。",
+      "href": "https://x.com/stats47jp373/status/2077936322753253808",
+      "published": true,
+      "rankingKeys": [
+        "marine-aquaculture-harvest"
+      ]
+    },
+    {
+      "id": "sns:599",
+      "kind": "sns",
+      "key": "599",
+      "title": "信仰・祭祀費、1位滋賀県29,264円 vs 47位岩手県4,999円。",
+      "href": "https://x.com/stats47jp373/status/2078313811988140433",
+      "published": true,
+      "rankingKeys": [
+        "religious-expense-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "sns:6",
+      "kind": "sns",
+      "key": "6",
+      "title": "県庁職員の給料、最大で月8.6万円の差がある。",
+      "href": "https://x.com/stats47jp373/status/2036390064159113302",
+      "published": true,
+      "rankingKeys": [
+        "avg-salary-admin-prefecture"
+      ]
+    },
+    {
+      "id": "sns:600",
+      "kind": "sns",
+      "key": "600",
+      "title": "海面漁業漁獲量、1位北海道842,704トン、2位長崎県292,890トン、3位茨城県259,496トン。",
+      "href": "https://x.com/stats47jp373/status/2078253412504809629",
+      "published": true,
+      "rankingKeys": [
+        "marine-fishery-catch"
+      ]
+    },
+    {
+      "id": "sns:601",
+      "kind": "sns",
+      "key": "601",
+      "title": "野菜・海藻加工品の支出データ、3ステップで使いこなす方法。",
+      "href": "https://x.com/stats47jp373/status/2078283617877229809",
+      "published": true,
+      "rankingKeys": [
+        "other-vegetable-seaweed-processed-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "sns:602",
+      "kind": "sns",
+      "key": "602",
+      "title": "国内観光旅行の行動者率、東京都は34.2％で全国1位。",
+      "href": "https://x.com/stats47jp373/status/2078615800060231766",
+      "published": true,
+      "rankingKeys": [
+        "travel-participation-rate-domestic-tourism"
+      ]
+    },
+    {
+      "id": "sns:611",
+      "kind": "sns",
+      "key": "611",
+      "title": "なぜ熊本県の災害復旧事業費が全国トップなのか?",
+      "href": "https://x.com/stats47jp373/status/2079869058485481776",
+      "published": true,
+      "rankingKeys": [
+        "disaster-recovery-project-expenses-prefecture"
+      ]
+    },
+    {
+      "id": "sns:612",
+      "kind": "sns",
+      "key": "612",
+      "title": "もし都市公園の少ない県に住んでいたら、休日の散歩コースにも困りそうです。",
+      "href": "https://x.com/stats47jp373/status/2079899260766560708",
+      "published": true,
+      "rankingKeys": [
+        "urban-parks-area"
+      ]
+    },
+    {
+      "id": "sns:613",
+      "kind": "sns",
+      "key": "613",
+      "title": "1位熊本県489億円、2位広島県273億円、3位宮城県222億円。",
+      "href": "https://x.com/stats47jp373/status/2079702966320386248",
+      "published": true,
+      "rankingKeys": [
+        "disaster-recovery-expenses-prefecture"
+      ]
+    },
+    {
+      "id": "sns:614",
+      "kind": "sns",
+      "key": "614",
+      "title": "国保加入率は都市部より地方が高い、というイメージがありませんか?",
+      "href": "https://x.com/stats47jp373/status/2080110651272544494",
+      "published": true,
+      "rankingKeys": [
+        "national-health-insurance-enrollees-per-1000"
+      ]
+    },
+    {
+      "id": "sns:615",
+      "kind": "sns",
+      "key": "615",
+      "title": "このランキングを使う3つのステップ。",
+      "href": "https://x.com/stats47jp373/status/2080095554340622527",
+      "published": true,
+      "rankingKeys": [
+        "gasoline-sales-volume"
+      ]
+    },
+    {
+      "id": "sns:616",
+      "kind": "sns",
+      "key": "616",
+      "title": "園芸用植物への支出、1位三重県は5,635円、47位沖縄県は1,384円。",
+      "href": "https://x.com/stats47jp373/status/2080065355838288354",
+      "published": true,
+      "rankingKeys": [
+        "garden-plants-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "sns:617",
+      "kind": "sns",
+      "key": "617",
+      "title": "なぜ広島県の水害被害額が338億円と突出しているのか?",
+      "href": "https://x.com/stats47jp373/status/2080593837907472660",
+      "published": true,
+      "rankingKeys": [
+        "flood-damage-general-assets"
+      ]
+    },
+    {
+      "id": "sns:618",
+      "kind": "sns",
+      "key": "618",
+      "title": "東京都の物件費は6,320億円、47位和歌山県は213億円。",
+      "href": "https://x.com/stats47jp373/status/2080488137327833560",
+      "published": true,
+      "rankingKeys": [
+        "property-expenses-prefecture"
+      ]
+    },
+    {
+      "id": "sns:619",
+      "kind": "sns",
+      "key": "619",
+      "title": "もし精神科病床利用率94.1%の富山県で暮らしていたら、医療体制の逼迫を肌で感じそうです。",
+      "href": "https://x.com/stats47jp373/status/2080624035118055627",
+      "published": true,
+      "rankingKeys": [
+        "psychiatric-hospital-bed-occupancy-rate"
+      ]
+    },
+    {
+      "id": "sns:621",
+      "kind": "sns",
+      "key": "621",
+      "title": "1位神奈川県363万円、2位東京都352万円、3位愛知県338万円。",
+      "href": "https://x.com/stats47jp373/status/2080790132517466244",
+      "published": true,
+      "rankingKeys": [
+        "household-head-annual-income-per-household"
+      ]
+    },
+    {
+      "id": "sns:622",
+      "kind": "sns",
+      "key": "622",
+      "title": "このデータを使う3ステップ。",
+      "href": "https://x.com/stats47jp373/status/2080820335956357613",
+      "published": true,
+      "rankingKeys": [
+        "port-vehicle-ferry"
+      ]
+    },
+    {
+      "id": "sns:629",
+      "kind": "sns",
+      "key": "629",
+      "title": "このデータを使う3ステップ。",
+      "href": "https://x.com/stats47jp373/status/2081907490141409327",
+      "published": true,
+      "rankingKeys": [
+        "nursery-teacher-annual-income"
+      ]
+    },
+    {
+      "id": "sns:631",
+      "kind": "sns",
+      "key": "631",
+      "title": "なぜ東京都の身体障害者更生援護取扱実人員が41万人超と突出しているのか?",
+      "href": "https://x.com/stats47jp373/status/2082043391786008912",
+      "published": true,
+      "rankingKeys": [
+        "physical-disability-rehabilitation-cases"
+      ]
+    },
+    {
+      "id": "sns:632",
+      "kind": "sns",
+      "key": "632",
+      "title": "「風力発電は西日本が盛ん」と思われがちですが、実際は北海道50か所、青森県30か所と北日本が上位を独占。",
+      "href": "https://x.com/stats47jp373/status/2082284982047760819",
+      "published": false,
+      "rankingKeys": [
+        "wind-power-plant-count-facility"
+      ]
+    },
+    {
+      "id": "sns:633",
+      "kind": "sns",
+      "key": "633",
+      "title": "エアコン消費量、1位香川県0.2台 vs 47位大分県0.022台。",
+      "href": "https://x.com/stats47jp373/status/2082300082095820912",
+      "published": true,
+      "rankingKeys": [
+        "air-conditioner-consumption-quantity"
+      ]
+    },
+    {
+      "id": "sns:634",
+      "kind": "sns",
+      "key": "634",
+      "title": "もし未婚率51.8%の秋田県で30代前半を過ごしていたら、周囲も独身の人が多いはずです。",
+      "href": "https://x.com/stats47jp373/status/2082435984461812118",
+      "published": true,
+      "rankingKeys": [
+        "unmarried-ratio-male-30-34"
+      ]
+    },
+    {
+      "id": "sns:635",
+      "kind": "sns",
+      "key": "635",
+      "title": "1位東京都6,295億円、2位大阪府2,657億円、3位神奈川県1,967億円。",
+      "href": "https://x.com/stats47jp373/status/2082602074676900203",
+      "published": true,
+      "rankingKeys": [
+        "police-expenses-prefecture"
+      ]
+    },
+    {
+      "id": "sns:636",
+      "kind": "sns",
+      "key": "636",
+      "title": "このデータを使う3ステップ。",
+      "href": "https://x.com/stats47jp373/status/2082632267172638960",
+      "published": false,
+      "rankingKeys": [
+        "nuclear-power-plant-count"
+      ]
+    },
+    {
+      "id": "sns:637",
+      "kind": "sns",
+      "key": "637",
+      "title": "なぜ東京都の外国人人口比率がこれほど高いのか?",
+      "href": "https://x.com/stats47jp373/status/2082768166065705405",
+      "published": true,
+      "rankingKeys": [
+        "foreign-resident-count-china-per-100k"
+      ]
+    },
+    {
+      "id": "sns:638",
+      "kind": "sns",
+      "key": "638",
+      "title": "衝撃の事実、県民所得の伸び率1位は佐賀県で5.1%。",
+      "href": "https://x.com/stats47jp373/status/2082964456435495045",
+      "published": true,
+      "rankingKeys": [
+        "prefectural-income-growth-rate-h23"
+      ]
+    },
+    {
+      "id": "sns:639",
+      "kind": "sns",
+      "key": "639",
+      "title": "もし社会増減数1位の東京都に転入したら、あなたも14万人超の一人になります。",
+      "href": "https://x.com/stats47jp373/status/2083160762990928002",
+      "published": true,
+      "rankingKeys": [
+        "social-increase"
+      ]
+    },
+    {
+      "id": "sns:640",
+      "kind": "sns",
+      "key": "640",
+      "title": "1位秋田県19.17人、2位青森県17.6人、3位高知県17.17人。",
+      "href": "https://x.com/stats47jp373/status/2082994660201369676",
+      "published": true,
+      "rankingKeys": [
+        "crude-death-rate"
+      ]
+    },
+    {
+      "id": "sns:649",
+      "kind": "sns",
+      "key": "649",
+      "title": "もし手芸・工芸材料の消費額が全国トップの長野県に住んでいたら、身の回りに手作りの温もりがあふれる暮らしです。",
+      "href": "https://x.com/stats47jp373/status/2084247923928313864",
+      "published": true,
+      "rankingKeys": [
+        "craft-materials-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "sns:650",
+      "kind": "sns",
+      "key": "650",
+      "title": "このデータを使う3ステップ📈",
+      "href": "https://x.com/stats47jp373/status/2084444210426777897",
+      "published": true,
+      "rankingKeys": [
+        "female-part-time-hourly-wage"
+      ]
+    },
+    {
+      "id": "sns:651",
+      "kind": "sns",
+      "key": "651",
+      "title": "あさりの消費量トップは山梨県。海に面していない県が1位というのは意外な結果です。",
+      "href": "https://x.com/stats47jp373/status/2097822363421479423",
+      "published": true,
+      "rankingKeys": [
+        "clam-consumption-quantity"
+      ]
+    },
+    {
+      "id": "sns:652",
+      "kind": "sns",
+      "key": "652",
+      "title": "なぜ群馬県が新規学卒者の給与で全国トップなのでしょうか?",
+      "href": "https://x.com/stats47jp373/status/2084580106920706453",
+      "published": true,
+      "rankingKeys": [
+        "new-graduate-scheduled-salary-university-male"
+      ]
+    },
+    {
+      "id": "sns:653",
+      "kind": "sns",
+      "key": "653",
+      "title": "口紅への支出、愛知県 vs 青森県で3倍の差。",
+      "href": "https://x.com/stats47jp373/status/2084836798644306198",
+      "published": true,
+      "rankingKeys": [
+        "lipstick-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "sns:654",
+      "kind": "sns",
+      "key": "654",
+      "title": "「職員数が多いのは人口の多い都市部だけ」と思われがちですが、地方でも規模の差は歴然です。",
+      "href": "https://x.com/stats47jp373/status/2084821692866580733",
+      "published": true,
+      "rankingKeys": [
+        "municipal-general-administration-staff"
+      ]
+    },
+    {
+      "id": "sns:655",
+      "kind": "sns",
+      "key": "655",
+      "title": "大卒初任給、1位267.7千円・2位258千円・3位249.8千円。",
+      "href": "https://x.com/stats47jp373/status/2084776401622938026",
+      "published": true,
+      "rankingKeys": [
+        "starting-salary-university"
+      ]
+    },
+    {
+      "id": "sns:656",
+      "kind": "sns",
+      "key": "656",
+      "title": "もし平均体重が全国トップの青森県に住んでいたら、健康的な食生活が身近にある環境です。",
+      "href": "https://x.com/stats47jp373/status/2085335078457200995",
+      "published": true,
+      "rankingKeys": [
+        "average-weight-primary-school-fifth-grade-female"
+      ]
+    },
+    {
+      "id": "sns:657",
+      "kind": "sns",
+      "key": "657",
+      "title": "航空運賃への支出、なんと最大90.3倍の格差があります。",
+      "href": "https://x.com/stats47jp373/status/2085168988431253570",
+      "published": true,
+      "rankingKeys": [
+        "air-fare-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "sns:658",
+      "kind": "sns",
+      "key": "658",
+      "title": "なぜ高知県が身体障害者更生援護施設の在所者数で全国トップなのでしょうか?",
+      "href": "https://x.com/stats47jp373/status/2085304883301712289",
+      "published": true,
+      "rankingKeys": [
+        "physical-disability-rehabilitation-facility-residents-per-100k"
+      ]
+    },
+    {
+      "id": "sns:659",
+      "kind": "sns",
+      "key": "659",
+      "title": "きまって支給する現金給与月額、東京都は最下位の1.5倍。",
+      "href": "https://x.com/stats47jp373/status/2085501169577709765",
+      "published": true,
+      "rankingKeys": [
+        "regular-cash-salary-female-pre2019"
+      ]
+    },
+    {
+      "id": "sns:66",
+      "kind": "sns",
+      "key": "66",
+      "title": "福島県の耕地放棄面積25,226ha、東京都の26.4倍。  2014年度ランキング、上位3県は福島・茨城・千葉。すべて",
+      "href": "https://x.com/stats47jp373/status/2027651744671609316",
+      "published": true,
+      "rankingKeys": [
+        "abandoned-cultivated-land-area"
+      ]
+    },
+    {
+      "id": "sns:660",
+      "kind": "sns",
+      "key": "660",
+      "title": "敷布への支出、神奈川県 vs 島根県。",
+      "href": "https://x.com/stats47jp373/status/2085561577508405420",
+      "published": true,
+      "rankingKeys": [
+        "sheets-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "sns:669",
+      "kind": "sns",
+      "key": "669",
+      "title": "県民総所得の対前年増加率、石川県 vs 山口県で見比べてみましょう。",
+      "href": "https://x.com/stats47jp373/status/2086648740350161174",
+      "published": true,
+      "rankingKeys": [
+        "gross-prefectural-income-growth-rate-real-h17"
+      ]
+    },
+    {
+      "id": "sns:67",
+      "kind": "sns",
+      "key": "67",
+      "title": "福島県の耕地放棄面積は東京都の26倍。",
+      "href": "https://www.instagram.com/stats47jp/reel/DVSxVonjYBb/",
+      "published": true,
+      "rankingKeys": [
+        "abandoned-cultivated-land-area"
+      ]
+    },
+    {
+      "id": "sns:671",
+      "kind": "sns",
+      "key": "671",
+      "title": "日本人人口、東京一極はいつ加速した？｜47都道府県の推移 1980→2024",
+      "href": "https://www.youtube.com/watch?v=MSU41S1UAHQ",
+      "published": false,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:672",
+      "kind": "sns",
+      "key": "672",
+      "title": "転出者数が最も多い県はどこ？｜47都道府県の推移 1975→2024",
+      "href": "https://www.youtube.com/watch?v=gYtUnpWSUUE",
+      "published": false,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:673",
+      "kind": "sns",
+      "key": "673",
+      "title": "離婚件数は1.5倍に増えた｜47都道府県ランキングの推移 1975→2023",
+      "href": "https://www.youtube.com/watch?v=d1jkCQtMLnQ",
+      "published": false,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:674",
+      "kind": "sns",
+      "key": "674",
+      "title": "外国人登録人口は2.4倍に増えた｜47都道府県の推移 1986→2011",
+      "href": "https://www.youtube.com/watch?v=IBrPqK_mvFk",
+      "published": false,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:675",
+      "kind": "sns",
+      "key": "675",
+      "title": "建物火災は半分近くまで減った｜47都道府県ランキングの推移 1975→2023",
+      "href": "https://www.youtube.com/watch?v=dvJWLb-FJtY",
+      "published": false,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:676",
+      "kind": "sns",
+      "key": "676",
+      "title": "転入者数は全国で4割減った｜47都道府県ランキングの推移 1977→2024",
+      "href": "https://www.youtube.com/watch?v=SRCZ6-FV0lM",
+      "published": false,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:677",
+      "kind": "sns",
+      "key": "677",
+      "title": "婚姻件数はこの49年で半減した｜47都道府県ランキングの推移 1975→2023",
+      "href": "https://www.youtube.com/watch?v=7956Rdr02Jk",
+      "published": false,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:678",
+      "kind": "sns",
+      "key": "678",
+      "title": "水洗トイレはこうして全国に広がった｜水洗化率の推移 1975→2021",
+      "href": "https://www.youtube.com/watch?v=XCStHbTLBIY",
+      "published": false,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:679",
+      "kind": "sns",
+      "key": "679",
+      "title": "交通事故はこの50年で4割減った｜47都道府県ランキングの推移 1975→2024",
+      "href": "https://www.youtube.com/watch?v=070DGL0jDPA",
+      "published": false,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:68",
+      "kind": "sns",
+      "key": "68",
+      "title": "耕地放棄面積ランキング｜1位は東京の26倍のあの県【2014年度】#Shorts #都道府県ランキング #耕作放棄地 #",
+      "href": "https://www.youtube.com/watch?v=m69_eP12q8Q",
+      "published": true,
+      "rankingKeys": [
+        "abandoned-cultivated-land-area"
+      ]
+    },
+    {
+      "id": "sns:680",
+      "kind": "sns",
+      "key": "680",
+      "title": "固定電話の栄枯盛衰｜住宅用電話加入数の推移 1975→2024",
+      "href": "https://www.youtube.com/watch?v=0kV0FVDEpEM",
+      "published": false,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:681",
+      "kind": "sns",
+      "key": "681",
+      "title": "大学の数はこの50年で倍増した｜47都道府県ランキングの推移 1975→2024",
+      "href": "https://www.youtube.com/watch?v=_nT7v0R5vmU",
+      "published": false,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:682",
+      "kind": "sns",
+      "key": "682",
+      "title": "短大は4割が消えた｜短期大学数の推移 1975→2024",
+      "href": "https://www.youtube.com/watch?v=5_luemJcHbs",
+      "published": false,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:683",
+      "kind": "sns",
+      "key": "683",
+      "title": "大卒初任給はどれだけ上がった？｜47都道府県の推移 1981→2019",
+      "href": "https://www.youtube.com/watch?v=5MEqovFFATk",
+      "published": false,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:684",
+      "kind": "sns",
+      "key": "684",
+      "title": "高卒初任給、昭和から平成の40年｜47都道府県の推移 1980→2019",
+      "href": "https://www.youtube.com/watch?v=XZmoVc7BPAI",
+      "published": false,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:685",
+      "kind": "sns",
+      "key": "685",
+      "title": "医師数は2.6倍に増えた｜47都道府県ランキングの推移 1975→2022",
+      "href": "https://www.youtube.com/watch?v=weZeiJeSFOs",
+      "published": false,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:686",
+      "kind": "sns",
+      "key": "686",
+      "title": "一般病院のベッド数はどう変わった？｜47都道府県の推移 1975→2023",
+      "href": "https://www.youtube.com/watch?v=BZP2JL5WKRs",
+      "published": false,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:687",
+      "kind": "sns",
+      "key": "687",
+      "title": "薬局は人口比で倍増した｜47都道府県ランキングの推移 1981→2023",
+      "href": "https://www.youtube.com/watch?v=ysSl8pBb-CM",
+      "published": false,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:688",
+      "kind": "sns",
+      "key": "688",
+      "title": "新築持ち家は1割狭くなった｜床面積の推移 1981→2024",
+      "href": "https://www.youtube.com/watch?v=w1RvQ--1ihQ",
+      "published": false,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:689",
+      "kind": "sns",
+      "key": "689",
+      "title": "持ち家離れは本当か？｜着工新設持ち家比率の推移 1977→2024",
+      "href": "https://www.youtube.com/watch?v=J4dX82kGx20",
+      "published": false,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:69",
+      "kind": "sns",
+      "key": "69",
+      "title": "tiktok abandoned-cultivated-land-area",
+      "href": "https://www.tiktok.com/@stats47jp/video/7611818830901398804",
+      "published": true,
+      "rankingKeys": [
+        "abandoned-cultivated-land-area"
+      ]
+    },
+    {
+      "id": "sns:690",
+      "kind": "sns",
+      "key": "690",
+      "title": "課税対象所得、東京の独走はいつから？｜47都道府県の推移 1985→2024",
+      "href": "https://www.youtube.com/watch?v=41UzSRWnXlQ",
+      "published": false,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:691",
+      "kind": "sns",
+      "key": "691",
+      "title": "世帯主の月収は2.2倍になった｜47都道府県の推移 1975→2024",
+      "href": "https://www.youtube.com/watch?v=RbooASxiGzk",
+      "published": false,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:692",
+      "kind": "sns",
+      "key": "692",
+      "title": "最も冷え込む県はどこ？｜最低気温ランキングの推移 1984→2024",
+      "href": "https://www.youtube.com/watch?v=DWqkVvkvxhQ",
+      "published": false,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:693",
+      "kind": "sns",
+      "key": "693",
+      "title": "コーヒー消費量1位は意外なあの県｜47都道府県の推移 2007→2024",
+      "href": "https://www.youtube.com/watch?v=DQKqUHjj0YQ",
+      "published": false,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:694",
+      "kind": "sns",
+      "key": "694",
+      "title": "ビール離れは地方から？｜消費量ランキングの推移 2007→2024",
+      "href": "https://www.youtube.com/watch?v=XIxshD4KwCA",
+      "published": false,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:695",
+      "kind": "sns",
+      "key": "695",
+      "title": "日本酒をいちばん飲む県はどこ？｜消費量の推移 2007→2024",
+      "href": "https://www.youtube.com/watch?v=c_VY4X6mDWY",
+      "published": false,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:696",
+      "kind": "sns",
+      "key": "696",
+      "title": "牛肉を最も食べるのは西日本？｜消費量ランキングの推移 2007→2024",
+      "href": "https://www.youtube.com/watch?v=CuZ2oYqYjOk",
+      "published": false,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:697",
+      "kind": "sns",
+      "key": "697",
+      "title": "鶏肉消費は1.5倍に伸びた｜47都道府県ランキングの推移 2007→2024",
+      "href": "https://www.youtube.com/watch?v=1CFazxhXqYo",
+      "published": false,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:698",
+      "kind": "sns",
+      "key": "698",
+      "title": "食パン王国は入れ替わった｜消費量ランキングの推移 2007→2024",
+      "href": "https://www.youtube.com/watch?v=xBRKo4_GKUo",
+      "published": false,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:699",
+      "kind": "sns",
+      "key": "699",
+      "title": "電車にお金をかける県はどこ？｜鉄道運賃支出の推移 2007→2024",
+      "href": "https://www.youtube.com/watch?v=pDOZ91OGFD4",
+      "published": false,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:7",
+      "kind": "sns",
+      "key": "7",
+      "title": "ビールに最も金を使う県は秋田県。",
+      "href": "https://x.com/stats47jp373/status/2036571259258245131",
+      "published": true,
+      "rankingKeys": [
+        "beer-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "sns:700",
+      "kind": "sns",
+      "key": "700",
+      "title": "ペットの医療費は倍増した｜動物病院代支出の推移 2007→2024",
+      "href": "https://www.youtube.com/watch?v=6mqISJP8bmg",
+      "published": false,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:707",
+      "kind": "sns",
+      "key": "707",
+      "title": "instagram annual-precipitation-days",
+      "href": "https://www.instagram.com/p/DYdgBkpETsI/",
+      "published": true,
+      "rankingKeys": [
+        "annual-precipitation-days"
+      ]
+    },
+    {
+      "id": "sns:708",
+      "kind": "sns",
+      "key": "708",
+      "title": "instagram annual-sunshine-duration",
+      "href": "https://www.instagram.com/p/DYgE4KhAHQK/",
+      "published": true,
+      "rankingKeys": [
+        "annual-sunshine-duration"
+      ]
+    },
+    {
+      "id": "sns:709",
+      "kind": "sns",
+      "key": "709",
+      "title": "instagram disposable-income-worker-households",
+      "href": "https://www.instagram.com/p/DYip2SWmut7/",
+      "published": true,
+      "rankingKeys": [
+        "disposable-income-worker-households"
+      ]
+    },
+    {
+      "id": "sns:71",
+      "kind": "sns",
+      "key": "71",
+      "title": "有効求人倍率、1位は東京じゃなくて福井県（1.94倍）って知ってた？  2位 島根県 1.91倍 3位 新潟県 1.75",
+      "href": "https://x.com/stats47jp373/status/2032652953862156744",
+      "published": true,
+      "rankingKeys": [
+        "active-job-opening-ratio"
+      ]
+    },
+    {
+      "id": "sns:710",
+      "kind": "sns",
+      "key": "710",
+      "title": "instagram real-disposable-income",
+      "href": "https://www.instagram.com/p/DYlOrAMkZ7N/",
+      "published": true,
+      "rankingKeys": [
+        "real-disposable-income"
+      ]
+    },
+    {
+      "id": "sns:711",
+      "kind": "sns",
+      "key": "711",
+      "title": "instagram hobby-participation-rate-camping",
+      "href": "https://www.instagram.com/p/DYnzRqojCCO/",
+      "published": true,
+      "rankingKeys": [
+        "hobby-participation-rate-camping"
+      ]
+    },
+    {
+      "id": "sns:712",
+      "kind": "sns",
+      "key": "712",
+      "title": "instagram criminal-arrest-rate",
+      "href": "https://www.instagram.com/reel/DYqXswLDqo8/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:713",
+      "kind": "sns",
+      "key": "713",
+      "title": "instagram hobby-participation-rate-cinema",
+      "href": "https://www.instagram.com/p/DYs9AGtleJV/",
+      "published": true,
+      "rankingKeys": [
+        "hobby-participation-rate-cinema"
+      ]
+    },
+    {
+      "id": "sns:714",
+      "kind": "sns",
+      "key": "714",
+      "title": "instagram hobby-participation-rate-cooking",
+      "href": "https://www.instagram.com/p/DYvh88xmrwP/",
+      "published": true,
+      "rankingKeys": [
+        "hobby-participation-rate-cooking"
+      ]
+    },
+    {
+      "id": "sns:715",
+      "kind": "sns",
+      "key": "715",
+      "title": "instagram hobby-participation-rate-gardening",
+      "href": "https://www.instagram.com/p/DYyGMkAiRXO/",
+      "published": true,
+      "rankingKeys": [
+        "hobby-participation-rate-gardening"
+      ]
+    },
+    {
+      "id": "sns:716",
+      "kind": "sns",
+      "key": "716",
+      "title": "instagram hobby-participation-rate-karaoke",
+      "href": "https://www.instagram.com/p/DY0rdIrDoyP/",
+      "published": true,
+      "rankingKeys": [
+        "hobby-participation-rate-karaoke"
+      ]
+    },
+    {
+      "id": "sns:717",
+      "kind": "sns",
+      "key": "717",
+      "title": "instagram local-tax-ratio-pref-finance",
+      "href": "https://www.instagram.com/reel/DY3PcV5CDmZ/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:718",
+      "kind": "sns",
+      "key": "718",
+      "title": "instagram hobby-participation-rate-manga",
+      "href": "https://www.instagram.com/p/DY51RmCgDqW/",
+      "published": true,
+      "rankingKeys": [
+        "hobby-participation-rate-manga"
+      ]
+    },
+    {
+      "id": "sns:719",
+      "kind": "sns",
+      "key": "719",
+      "title": "instagram hobby-participation-rate-photography",
+      "href": "https://www.instagram.com/p/DY8ZdbykarB/",
+      "published": true,
+      "rankingKeys": [
+        "hobby-participation-rate-photography"
+      ]
+    },
+    {
+      "id": "sns:72",
+      "kind": "sns",
+      "key": "72",
+      "title": "都会ほど仕事がない？",
+      "href": "https://www.instagram.com/stats47jp/reel/DVaRJf4jXn1/",
+      "published": true,
+      "rankingKeys": [
+        "active-job-opening-ratio"
+      ]
+    },
+    {
+      "id": "sns:720",
+      "kind": "sns",
+      "key": "720",
+      "title": "instagram hobby-participation-rate-reading",
+      "href": "https://www.instagram.com/p/DY-_Et2lBrr/",
+      "published": true,
+      "rankingKeys": [
+        "hobby-participation-rate-reading"
+      ]
+    },
+    {
+      "id": "sns:721",
+      "kind": "sns",
+      "key": "721",
+      "title": "instagram hobby-participation-rate-video-games",
+      "href": "https://www.instagram.com/p/DZBkOWZETXI/",
+      "published": true,
+      "rankingKeys": [
+        "hobby-participation-rate-video-games"
+      ]
+    },
+    {
+      "id": "sns:722",
+      "kind": "sns",
+      "key": "722",
+      "title": "instagram traffic-accident-deaths-per-100k",
+      "href": "https://www.instagram.com/reel/DZEI6AJGEgM/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:723",
+      "kind": "sns",
+      "key": "723",
+      "title": "instagram per-capita-kenmin-shotoku-h27",
+      "href": "https://www.instagram.com/p/DZGuYt3Fa8K/",
+      "published": true,
+      "rankingKeys": [
+        "per-capita-kenmin-shotoku-h27"
+      ]
+    },
+    {
+      "id": "sns:724",
+      "kind": "sns",
+      "key": "724",
+      "title": "instagram annual-income-per-household",
+      "href": "https://www.instagram.com/p/DZJTLkgifHd/",
+      "published": true,
+      "rankingKeys": [
+        "annual-income-per-household"
+      ]
+    },
+    {
+      "id": "sns:725",
+      "kind": "sns",
+      "key": "725",
+      "title": "instagram night-soil-treatment-population-ratio",
+      "href": "https://www.instagram.com/p/DZL26PJAAtB/",
+      "published": true,
+      "rankingKeys": [
+        "night-soil-treatment-population-ratio"
+      ]
+    },
+    {
+      "id": "sns:726",
+      "kind": "sns",
+      "key": "726",
+      "title": "instagram suicide-rate-per-100k",
+      "href": "https://www.instagram.com/p/DZObL26FCe2/",
+      "published": true,
+      "rankingKeys": [
+        "suicide-rate-per-100k"
+      ]
+    },
+    {
+      "id": "sns:727",
+      "kind": "sns",
+      "key": "727",
+      "title": "instagram number-of-hotel-rooms",
+      "href": "https://www.instagram.com/p/DZRA2yJDOlQ/",
+      "published": true,
+      "rankingKeys": [
+        "number-of-hotel-rooms"
+      ]
+    },
+    {
+      "id": "sns:728",
+      "kind": "sns",
+      "key": "728",
+      "title": "instagram barber-beauty-salon-count",
+      "href": "https://www.instagram.com/reel/DaebzXWFXmh/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:729",
+      "kind": "sns",
+      "key": "729",
+      "title": "instagram net-increase-rate-deposits-worker-households",
+      "href": "https://www.instagram.com/reel/Dag997LjDJh/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:73",
+      "kind": "sns",
+      "key": "73",
+      "title": "有効求人倍率 都道府県別｜1位は東京じゃなかった【2022年度】 #都道府県ランキング #統計データ #ranking",
+      "href": "https://www.youtube.com/watch?v=1OOUGg54jNQ",
+      "published": true,
+      "rankingKeys": [
+        "active-job-opening-ratio"
+      ]
+    },
+    {
+      "id": "sns:730",
+      "kind": "sns",
+      "key": "730",
+      "title": "instagram pharmacy-count",
+      "href": "https://www.instagram.com/reel/DajkmxXoDUC/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:731",
+      "kind": "sns",
+      "key": "731",
+      "title": "instagram theft-offenses-recognized",
+      "href": "https://www.instagram.com/reel/DamJrJeAZIx/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:732",
+      "kind": "sns",
+      "key": "732",
+      "title": "instagram monthly-average-actual-working-hours-male-pre2019",
+      "href": "https://www.instagram.com/reel/DaosHypDNVu/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:733",
+      "kind": "sns",
+      "key": "733",
+      "title": "instagram public-bath-count",
+      "href": "https://www.instagram.com/reel/DarA0tQlLSm/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:734",
+      "kind": "sns",
+      "key": "734",
+      "title": "instagram total-overnight-guests",
+      "href": "https://www.instagram.com/p/DarpLOuEbav/",
+      "published": true,
+      "rankingKeys": [
+        "total-overnight-guests"
+      ]
+    },
+    {
+      "id": "sns:735",
+      "kind": "sns",
+      "key": "735",
+      "title": "instagram other-dried-vegetables-seaweed-consumption-expenditure",
+      "href": "https://www.instagram.com/p/DasOAwbFFeU/",
+      "published": true,
+      "rankingKeys": [
+        "other-dried-vegetables-seaweed-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "sns:736",
+      "kind": "sns",
+      "key": "736",
+      "title": "instagram cpi-change-rate-total",
+      "href": "https://www.instagram.com/reel/DatlnMxFVOv/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:737",
+      "kind": "sns",
+      "key": "737",
+      "title": "instagram electricity-demand",
+      "href": "https://www.instagram.com/p/DauQRDFlm0x/",
+      "published": true,
+      "rankingKeys": [
+        "electricity-demand"
+      ]
+    },
+    {
+      "id": "sns:738",
+      "kind": "sns",
+      "key": "738",
+      "title": "instagram ritual-goods-tombstone-consumption-expenditure",
+      "href": "https://www.instagram.com/p/Dau70GSlue-/",
+      "published": true,
+      "rankingKeys": [
+        "ritual-goods-tombstone-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "sns:739",
+      "kind": "sns",
+      "key": "739",
+      "title": "instagram total-outpatients",
+      "href": "https://www.instagram.com/reel/DawJ5ZTgJQG/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:74",
+      "kind": "sns",
+      "key": "74",
+      "title": "tiktok active-job-opening-ratio",
+      "href": "https://www.tiktok.com/@stats47jp/video/7614679199470603541",
+      "published": true,
+      "rankingKeys": [
+        "active-job-opening-ratio"
+      ]
+    },
+    {
+      "id": "sns:740",
+      "kind": "sns",
+      "key": "740",
+      "title": "instagram flood-affected-rivers",
+      "href": "https://www.instagram.com/p/Dawvjw3G6B2/",
+      "published": true,
+      "rankingKeys": [
+        "flood-affected-rivers"
+      ]
+    },
+    {
+      "id": "sns:741",
+      "kind": "sns",
+      "key": "741",
+      "title": "instagram travel-participation-rate-overseas",
+      "href": "https://www.instagram.com/p/DaxZ6WPoG_e/",
+      "published": true,
+      "rankingKeys": [
+        "travel-participation-rate-overseas"
+      ]
+    },
+    {
+      "id": "sns:742",
+      "kind": "sns",
+      "key": "742",
+      "title": "instagram serious-crime-per-100k",
+      "href": "https://www.instagram.com/reel/DayurtyCTDN/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:743",
+      "kind": "sns",
+      "key": "743",
+      "title": "instagram total-overnight-guests-foreign",
+      "href": "https://www.instagram.com/p/DazUc2hG6Bo/",
+      "published": true,
+      "rankingKeys": [
+        "total-overnight-guests-foreign"
+      ]
+    },
+    {
+      "id": "sns:744",
+      "kind": "sns",
+      "key": "744",
+      "title": "instagram maritime-import-export-cargo",
+      "href": "https://www.instagram.com/p/Daz_HUxGUkv/",
+      "published": true,
+      "rankingKeys": [
+        "maritime-import-export-cargo"
+      ]
+    },
+    {
+      "id": "sns:745",
+      "kind": "sns",
+      "key": "745",
+      "title": "instagram habitable-area-ratio",
+      "href": "https://www.instagram.com/reel/Da1UJnwgc1V/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:746",
+      "kind": "sns",
+      "key": "746",
+      "title": "instagram port-cargo-total",
+      "href": "https://www.instagram.com/p/Da16VCoEfMV/",
+      "published": true,
+      "rankingKeys": [
+        "port-cargo-total"
+      ]
+    },
+    {
+      "id": "sns:747",
+      "kind": "sns",
+      "key": "747",
+      "title": "instagram vegetable-seaweed-tsukudani-consumption-expenditure",
+      "href": "https://www.instagram.com/p/Da2kfLCICWB/",
+      "published": true,
+      "rankingKeys": [
+        "vegetable-seaweed-tsukudani-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "sns:748",
+      "kind": "sns",
+      "key": "748",
+      "title": "instagram japanese-entries",
+      "href": "https://www.instagram.com/reel/Da35Hvwkl8b/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:749",
+      "kind": "sns",
+      "key": "749",
+      "title": "instagram tourism-resource-count",
+      "href": "https://www.instagram.com/p/Da4fXEvFWYc/",
+      "published": false,
+      "rankingKeys": [
+        "tourism-resource-count"
+      ]
+    },
+    {
+      "id": "sns:750",
+      "kind": "sns",
+      "key": "750",
+      "title": "instagram overseas-travel-annual-participation-rate-15plus",
+      "href": "https://www.instagram.com/p/Da5H1FGlX4n/",
+      "published": true,
+      "rankingKeys": [
+        "overseas-travel-annual-participation-rate-15plus"
+      ]
+    },
+    {
+      "id": "sns:751",
+      "kind": "sns",
+      "key": "751",
+      "title": "instagram postal-savings-balance-per-capita",
+      "href": "https://www.instagram.com/reel/Da6dMikD5oQ/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:752",
+      "kind": "sns",
+      "key": "752",
+      "title": "instagram electricity-generation-capacity",
+      "href": "https://www.instagram.com/p/Da7COOjIMZt/",
+      "published": true,
+      "rankingKeys": [
+        "electricity-generation-capacity"
+      ]
+    },
+    {
+      "id": "sns:753",
+      "kind": "sns",
+      "key": "753",
+      "title": "instagram overseas-travel-annual-participation-rate-10plus",
+      "href": "https://www.instagram.com/p/Da7qHiLG9L9/",
+      "published": true,
+      "rankingKeys": [
+        "overseas-travel-annual-participation-rate-10plus"
+      ]
+    },
+    {
+      "id": "sns:754",
+      "kind": "sns",
+      "key": "754",
+      "title": "instagram paid-nursing-home-residents-per-1000-65plus",
+      "href": "https://www.instagram.com/reel/Da9CC_wAe0f/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:755",
+      "kind": "sns",
+      "key": "755",
+      "title": "instagram marine-aquaculture-harvest",
+      "href": "https://www.instagram.com/p/Da9qHm5mx9e/",
+      "published": true,
+      "rankingKeys": [
+        "marine-aquaculture-harvest"
+      ]
+    },
+    {
+      "id": "sns:756",
+      "kind": "sns",
+      "key": "756",
+      "title": "instagram religious-expense-consumption-expenditure",
+      "href": "https://www.instagram.com/p/Da-PVRgFAkM/",
+      "published": true,
+      "rankingKeys": [
+        "religious-expense-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "sns:757",
+      "kind": "sns",
+      "key": "757",
+      "title": "instagram building-fire-count",
+      "href": "https://www.instagram.com/reel/Da_nSUJElVv/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:758",
+      "kind": "sns",
+      "key": "758",
+      "title": "instagram marine-fishery-catch",
+      "href": "https://www.instagram.com/p/DbAR1kwFtu7/",
+      "published": true,
+      "rankingKeys": [
+        "marine-fishery-catch"
+      ]
+    },
+    {
+      "id": "sns:759",
+      "kind": "sns",
+      "key": "759",
+      "title": "instagram other-vegetable-seaweed-processed-consumption-expenditure",
+      "href": "https://www.instagram.com/p/DbA7s1iG3On/",
+      "published": true,
+      "rankingKeys": [
+        "other-vegetable-seaweed-processed-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "sns:76",
+      "kind": "sns",
+      "key": "76",
+      "title": "勤労世帯の月収、東京79.4万vs沖縄49.4万で月30万円の差。",
+      "href": "https://x.com/stats47jp373/status/2032577442209251347",
+      "published": true,
+      "rankingKeys": [
+        "actual-income-worker-households-per-month"
+      ]
+    },
+    {
+      "id": "sns:760",
+      "kind": "sns",
+      "key": "760",
+      "title": "instagram lowest-temperature",
+      "href": "https://www.instagram.com/reel/DbCL_IzDzf8/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:761",
+      "kind": "sns",
+      "key": "761",
+      "title": "instagram travel-participation-rate-domestic-tourism",
+      "href": "https://www.instagram.com/p/DbCzdWNks2r/",
+      "published": true,
+      "rankingKeys": [
+        "travel-participation-rate-domestic-tourism"
+      ]
+    },
+    {
+      "id": "sns:762",
+      "kind": "sns",
+      "key": "762",
+      "title": "instagram other-ceremony-expense-consumption-expenditure",
+      "href": "https://www.instagram.com/p/DbDdQ1Vm-Px/",
+      "published": true,
+      "rankingKeys": [
+        "other-ceremony-expense-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "sns:763",
+      "kind": "sns",
+      "key": "763",
+      "title": "instagram number-of-simple-lodging-facilities",
+      "href": "https://www.instagram.com/reel/DbEwUK2nc3u/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:764",
+      "kind": "sns",
+      "key": "764",
+      "title": "instagram marine-fishery-aquaculture-output-value",
+      "href": "https://www.instagram.com/p/DbFYNTGm1m1/",
+      "published": true,
+      "rankingKeys": [
+        "marine-fishery-aquaculture-output-value"
+      ]
+    },
+    {
+      "id": "sns:765",
+      "kind": "sns",
+      "key": "765",
+      "title": "instagram boys-school-uniform-consumption-quantity",
+      "href": "https://www.instagram.com/p/DbGCV1wG_BZ/",
+      "published": true,
+      "rankingKeys": [
+        "boys-school-uniform-consumption-quantity"
+      ]
+    },
+    {
+      "id": "sns:766",
+      "kind": "sns",
+      "key": "766",
+      "title": "instagram private-life-insurance-contracts-per-1000",
+      "href": "https://www.instagram.com/reel/DbHWKMBFQYn/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:767",
+      "kind": "sns",
+      "key": "767",
+      "title": "instagram sports-participation-rate-cycling",
+      "href": "https://www.instagram.com/p/DbH9abvIADk/",
+      "published": true,
+      "rankingKeys": [
+        "sports-participation-rate-cycling"
+      ]
+    },
+    {
+      "id": "sns:768",
+      "kind": "sns",
+      "key": "768",
+      "title": "instagram disaster-damage-amount-per-person",
+      "href": "https://www.instagram.com/p/DbInJX-kdMy/",
+      "published": true,
+      "rankingKeys": [
+        "disaster-damage-amount-per-person"
+      ]
+    },
+    {
+      "id": "sns:769",
+      "kind": "sns",
+      "key": "769",
+      "title": "instagram junior-college-count",
+      "href": "https://www.instagram.com/reel/DbJ6jQAlJ9z/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:77",
+      "kind": "sns",
+      "key": "77",
+      "title": "💰勤労者世帯の月収ランキング2023！あなたの地域はいくら？",
+      "href": "https://www.instagram.com/reel/DTPcSycDlm-/",
+      "published": true,
+      "rankingKeys": [
+        "actual-income-worker-households-per-month"
+      ]
+    },
+    {
+      "id": "sns:770",
+      "kind": "sns",
+      "key": "770",
+      "title": "instagram other-mens-shirt-consumption-quantity",
+      "href": "https://www.instagram.com/p/DbKhy7_lHZ2/",
+      "published": true,
+      "rankingKeys": [
+        "other-mens-shirt-consumption-quantity"
+      ]
+    },
+    {
+      "id": "sns:771",
+      "kind": "sns",
+      "key": "771",
+      "title": "instagram scallop-consumption-quantity",
+      "href": "https://www.instagram.com/p/DbLLFa8FDO8/",
+      "published": true,
+      "rankingKeys": [
+        "scallop-consumption-quantity"
+      ]
+    },
+    {
+      "id": "sns:772",
+      "kind": "sns",
+      "key": "772",
+      "title": "instagram local-allocation-tax-ratio-pref-finance",
+      "href": "https://www.instagram.com/reel/DbMf8xPkfm0/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:773",
+      "kind": "sns",
+      "key": "773",
+      "title": "instagram disaster-recovery-project-expenses-prefecture",
+      "href": "https://www.instagram.com/p/DbNFwBVoM3U/",
+      "published": true,
+      "rankingKeys": [
+        "disaster-recovery-project-expenses-prefecture"
+      ]
+    },
+    {
+      "id": "sns:774",
+      "kind": "sns",
+      "key": "774",
+      "title": "instagram urban-parks-area",
+      "href": "https://www.instagram.com/p/DbNsfyNEQ4f/",
+      "published": true,
+      "rankingKeys": [
+        "urban-parks-area"
+      ]
+    },
+    {
+      "id": "sns:775",
+      "kind": "sns",
+      "key": "775",
+      "title": "instagram urban-park-area-per-person",
+      "href": "https://www.instagram.com/reel/DbPEPaJDZbJ/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:776",
+      "kind": "sns",
+      "key": "776",
+      "title": "instagram disaster-recovery-expenses-prefecture",
+      "href": "https://www.instagram.com/p/DbPtK4HnEnV/",
+      "published": true,
+      "rankingKeys": [
+        "disaster-recovery-expenses-prefecture"
+      ]
+    },
+    {
+      "id": "sns:777",
+      "kind": "sns",
+      "key": "777",
+      "title": "instagram national-health-insurance-enrollees-per-1000",
+      "href": "https://www.instagram.com/p/DbQSpnzlT01/",
+      "published": true,
+      "rankingKeys": [
+        "national-health-insurance-enrollees-per-1000"
+      ]
+    },
+    {
+      "id": "sns:778",
+      "kind": "sns",
+      "key": "778",
+      "title": "instagram municipal-road-paving-rate",
+      "href": "https://www.instagram.com/reel/DbRpJJsAUse/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:779",
+      "kind": "sns",
+      "key": "779",
+      "title": "instagram gasoline-sales-volume",
+      "href": "https://www.instagram.com/p/DbSUyBdm6zx/",
+      "published": true,
+      "rankingKeys": [
+        "gasoline-sales-volume"
+      ]
+    },
+    {
+      "id": "sns:78",
+      "kind": "sns",
+      "key": "78",
+      "title": "勤労世帯の実収入 都道府県別｜東京79万vs沖縄49万【2024年度】 #都道府県ランキング #統計データ #ranki",
+      "href": "https://www.youtube.com/watch?v=vmz9RdxSDyQ",
+      "published": true,
+      "rankingKeys": [
+        "actual-income-worker-households-per-month"
+      ]
+    },
+    {
+      "id": "sns:780",
+      "kind": "sns",
+      "key": "780",
+      "title": "instagram garden-plants-consumption-expenditure",
+      "href": "https://www.instagram.com/p/DbTDZKZluOJ/",
+      "published": true,
+      "rankingKeys": [
+        "garden-plants-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "sns:781",
+      "kind": "sns",
+      "key": "781",
+      "title": "instagram flood-damage-general-assets",
+      "href": "https://www.instagram.com/p/DbUN6g8oDjD/",
+      "published": true,
+      "rankingKeys": [
+        "flood-damage-general-assets"
+      ]
+    },
+    {
+      "id": "sns:782",
+      "kind": "sns",
+      "key": "782",
+      "title": "instagram property-expenses-prefecture",
+      "href": "https://www.instagram.com/p/DbU0iFoGwX6/",
+      "published": true,
+      "rankingKeys": [
+        "property-expenses-prefecture"
+      ]
+    },
+    {
+      "id": "sns:783",
+      "kind": "sns",
+      "key": "783",
+      "title": "instagram psychiatric-hospital-bed-occupancy-rate",
+      "href": "https://www.instagram.com/p/DbVf8ltmpdj/",
+      "published": true,
+      "rankingKeys": [
+        "psychiatric-hospital-bed-occupancy-rate"
+      ]
+    },
+    {
+      "id": "sns:784",
+      "kind": "sns",
+      "key": "784",
+      "title": "instagram public-rent-consumption-expenditure",
+      "href": "https://www.instagram.com/p/DbWya3Qlh-7/",
+      "published": true,
+      "rankingKeys": [
+        "public-rent-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "sns:785",
+      "kind": "sns",
+      "key": "785",
+      "title": "instagram household-head-annual-income-per-household",
+      "href": "https://www.instagram.com/p/DbXaBOqG-sk/",
+      "published": true,
+      "rankingKeys": [
+        "household-head-annual-income-per-household"
+      ]
+    },
+    {
+      "id": "sns:786",
+      "kind": "sns",
+      "key": "786",
+      "title": "instagram port-vehicle-ferry",
+      "href": "https://www.instagram.com/p/DbYFUQmFnqQ/",
+      "published": true,
+      "rankingKeys": [
+        "port-vehicle-ferry"
+      ]
+    },
+    {
+      "id": "sns:787",
+      "kind": "sns",
+      "key": "787",
+      "title": "instagram wooden-housing-ratio",
+      "href": "https://www.instagram.com/p/DbZXQL3EegH/",
+      "published": true,
+      "rankingKeys": [
+        "wooden-housing-ratio"
+      ]
+    },
+    {
+      "id": "sns:788",
+      "kind": "sns",
+      "key": "788",
+      "title": "instagram grade-separated-pedestrian-crossings-per-1000-km",
+      "href": "https://www.instagram.com/p/DbZ9iyUEbpk/",
+      "published": true,
+      "rankingKeys": [
+        "grade-separated-pedestrian-crossings-per-1000-km"
+      ]
+    },
+    {
+      "id": "sns:789",
+      "kind": "sns",
+      "key": "789",
+      "title": "instagram gloves-consumption-expenditure",
+      "href": "https://www.instagram.com/p/Dbao1QekVn7/",
+      "published": true,
+      "rankingKeys": [
+        "gloves-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "sns:790",
+      "kind": "sns",
+      "key": "790",
+      "title": "instagram agricultural-land-conversion-area",
+      "href": "https://www.instagram.com/p/Dbb8s2GGqzT/",
+      "published": true,
+      "rankingKeys": [
+        "agricultural-land-conversion-area"
+      ]
+    },
+    {
+      "id": "sns:791",
+      "kind": "sns",
+      "key": "791",
+      "title": "instagram other-prepared-food-consumption-expenditure",
+      "href": "https://www.instagram.com/p/DbcmAKZlkOA/",
+      "published": true,
+      "rankingKeys": [
+        "other-prepared-food-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "sns:792",
+      "kind": "sns",
+      "key": "792",
+      "title": "instagram cpi-change-rate-miscellaneous",
+      "href": "https://www.instagram.com/p/DbdOr6KILHJ/",
+      "published": true,
+      "rankingKeys": [
+        "cpi-change-rate-miscellaneous"
+      ]
+    },
+    {
+      "id": "sns:793",
+      "kind": "sns",
+      "key": "793",
+      "title": "instagram nursery-teacher-annual-income",
+      "href": "https://www.instagram.com/p/DbehJyKEWzk/",
+      "published": true,
+      "rankingKeys": [
+        "nursery-teacher-annual-income"
+      ]
+    },
+    {
+      "id": "sns:794",
+      "kind": "sns",
+      "key": "794",
+      "title": "instagram other-grains-consumption-quantity",
+      "href": "https://www.instagram.com/p/DbfIpzHoEFw/",
+      "published": true,
+      "rankingKeys": [
+        "other-grains-consumption-quantity"
+      ]
+    },
+    {
+      "id": "sns:795",
+      "kind": "sns",
+      "key": "795",
+      "title": "instagram physical-disability-rehabilitation-cases",
+      "href": "https://www.instagram.com/p/DbfuhnsICZ8/",
+      "published": true,
+      "rankingKeys": [
+        "physical-disability-rehabilitation-cases"
+      ]
+    },
+    {
+      "id": "sns:796",
+      "kind": "sns",
+      "key": "796",
+      "title": "instagram wind-power-plant-count-facility",
+      "href": "https://www.instagram.com/p/DbhFlCdIJWI/",
+      "published": false,
+      "rankingKeys": [
+        "wind-power-plant-count-facility"
+      ]
+    },
+    {
+      "id": "sns:797",
+      "kind": "sns",
+      "key": "797",
+      "title": "instagram air-conditioner-consumption-quantity",
+      "href": "https://www.instagram.com/p/Dbhtzl9FQFq/",
+      "published": true,
+      "rankingKeys": [
+        "air-conditioner-consumption-quantity"
+      ]
+    },
+    {
+      "id": "sns:798",
+      "kind": "sns",
+      "key": "798",
+      "title": "instagram unmarried-ratio-male-30-34",
+      "href": "https://www.instagram.com/p/DbiTNiHG5cJ/",
+      "published": true,
+      "rankingKeys": [
+        "unmarried-ratio-male-30-34"
+      ]
+    },
+    {
+      "id": "sns:799",
+      "kind": "sns",
+      "key": "799",
+      "title": "instagram police-expenses-prefecture",
+      "href": "https://www.instagram.com/p/DbjqhrCGqL8/",
+      "published": true,
+      "rankingKeys": [
+        "police-expenses-prefecture"
+      ]
+    },
+    {
+      "id": "sns:8",
+      "kind": "sns",
+      "key": "8",
+      "title": "東京都知事の月給は全国最下位の73万円。1位神奈川の半分。  1位 神奈川県 145万円 2位 埼玉県 142万円 3位",
+      "href": "https://x.com/stats47jp373/status/2036639208568398206",
+      "published": true,
+      "rankingKeys": [
+        "governor-salary-prefecture"
+      ]
+    },
+    {
+      "id": "sns:800",
+      "kind": "sns",
+      "key": "800",
+      "title": "instagram nuclear-power-plant-count",
+      "href": "https://www.instagram.com/p/DbkVhEEm2Bn/",
+      "published": false,
+      "rankingKeys": [
+        "nuclear-power-plant-count"
+      ]
+    },
+    {
+      "id": "sns:801",
+      "kind": "sns",
+      "key": "801",
+      "title": "instagram foreign-resident-count-china-per-100k",
+      "href": "https://www.instagram.com/p/DblE1f8HKvm/",
+      "published": true,
+      "rankingKeys": [
+        "foreign-resident-count-china-per-100k"
+      ]
+    },
+    {
+      "id": "sns:802",
+      "kind": "sns",
+      "key": "802",
+      "title": "instagram prefectural-income-growth-rate-h23",
+      "href": "https://www.instagram.com/p/DbmQKr1mEU6/",
+      "published": true,
+      "rankingKeys": [
+        "prefectural-income-growth-rate-h23"
+      ]
+    },
+    {
+      "id": "sns:803",
+      "kind": "sns",
+      "key": "803",
+      "title": "instagram social-increase",
+      "href": "https://www.instagram.com/p/Dbm2GGnG1Jg/",
+      "published": true,
+      "rankingKeys": [
+        "social-increase"
+      ]
+    },
+    {
+      "id": "sns:804",
+      "kind": "sns",
+      "key": "804",
+      "title": "instagram department-supermarket-count-per-100k",
+      "href": "https://www.instagram.com/p/Dbnh-8ymyjX/",
+      "published": true,
+      "rankingKeys": [
+        "department-supermarket-count-per-100k"
+      ]
+    },
+    {
+      "id": "sns:805",
+      "kind": "sns",
+      "key": "805",
+      "title": "instagram fruit-vegetable-juice-consumption-expenditure",
+      "href": "https://www.instagram.com/p/Dbo0tLVjO1K/",
+      "published": true,
+      "rankingKeys": [
+        "fruit-vegetable-juice-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "sns:806",
+      "kind": "sns",
+      "key": "806",
+      "title": "instagram other-household-durables-consumption-expenditure",
+      "href": "https://www.instagram.com/p/Dbpa0zRlSe1/",
+      "published": true,
+      "rankingKeys": [
+        "other-household-durables-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "sns:807",
+      "kind": "sns",
+      "key": "807",
+      "title": "instagram earthquake-retrofit-housing",
+      "href": "https://www.instagram.com/p/DbqGi4tkfE8/",
+      "published": true,
+      "rankingKeys": [
+        "earthquake-retrofit-housing"
+      ]
+    },
+    {
+      "id": "sns:808",
+      "kind": "sns",
+      "key": "808",
+      "title": "instagram recorded-media-consumption-expenditure",
+      "href": "https://www.instagram.com/p/DbrY8Q9n75M/",
+      "published": true,
+      "rankingKeys": [
+        "recorded-media-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "sns:809",
+      "kind": "sns",
+      "key": "809",
+      "title": "instagram wakame-consumption-quantity",
+      "href": "https://www.instagram.com/p/Dbr_8JLnJKo/",
+      "published": true,
+      "rankingKeys": [
+        "wakame-consumption-quantity"
+      ]
+    },
+    {
+      "id": "sns:810",
+      "kind": "sns",
+      "key": "810",
+      "title": "instagram total-assessed-land-area-ratio-field",
+      "href": "https://www.instagram.com/p/Dbsrp0xmyY7/",
+      "published": true,
+      "rankingKeys": [
+        "total-assessed-land-area-ratio-field"
+      ]
+    },
+    {
+      "id": "sns:811",
+      "kind": "sns",
+      "key": "811",
+      "title": "instagram shochu-consumption-expenditure",
+      "href": "https://www.instagram.com/p/DbuIrKUkQHo/",
+      "published": true,
+      "rankingKeys": [
+        "shochu-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "sns:812",
+      "kind": "sns",
+      "key": "812",
+      "title": "instagram craft-materials-consumption-expenditure",
+      "href": "https://www.instagram.com/p/DbueiyCljni/",
+      "published": true,
+      "rankingKeys": [
+        "craft-materials-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "sns:813",
+      "kind": "sns",
+      "key": "813",
+      "title": "instagram female-part-time-hourly-wage",
+      "href": "https://www.instagram.com/p/DbvIqXDFCjv/",
+      "published": true,
+      "rankingKeys": [
+        "female-part-time-hourly-wage"
+      ]
+    },
+    {
+      "id": "sns:814",
+      "kind": "sns",
+      "key": "814",
+      "title": "instagram clam-consumption-quantity",
+      "href": "https://www.instagram.com/p/DbwfnGrEWgZ/",
+      "published": true,
+      "rankingKeys": [
+        "clam-consumption-quantity"
+      ]
+    },
+    {
+      "id": "sns:815",
+      "kind": "sns",
+      "key": "815",
+      "title": "instagram new-graduate-scheduled-salary-university-male",
+      "href": "https://www.instagram.com/p/Dbw-Wr6li7c/",
+      "published": true,
+      "rankingKeys": [
+        "new-graduate-scheduled-salary-university-male"
+      ]
+    },
+    {
+      "id": "sns:816",
+      "kind": "sns",
+      "key": "816",
+      "title": "instagram lipstick-consumption-expenditure",
+      "href": "https://www.instagram.com/p/DbxraEHoDTm/",
+      "published": true,
+      "rankingKeys": [
+        "lipstick-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "sns:817",
+      "kind": "sns",
+      "key": "817",
+      "title": "instagram municipal-general-administration-staff",
+      "href": "https://www.instagram.com/p/DbzD8KlICRK/",
+      "published": true,
+      "rankingKeys": [
+        "municipal-general-administration-staff"
+      ]
+    },
+    {
+      "id": "sns:818",
+      "kind": "sns",
+      "key": "818",
+      "title": "instagram average-weight-primary-school-fifth-grade-female",
+      "href": "https://www.instagram.com/p/Dbzj5_pDsce/",
+      "published": true,
+      "rankingKeys": [
+        "average-weight-primary-school-fifth-grade-female"
+      ]
+    },
+    {
+      "id": "sns:819",
+      "kind": "sns",
+      "key": "819",
+      "title": "instagram air-fare-consumption-expenditure",
+      "href": "https://www.instagram.com/p/Db0QZqLFuzc/",
+      "published": true,
+      "rankingKeys": [
+        "air-fare-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "sns:820",
+      "kind": "sns",
+      "key": "820",
+      "title": "instagram physical-disability-rehabilitation-facility-residents-per-100k",
+      "href": "https://www.instagram.com/p/Db1pDRJmnk6/",
+      "published": true,
+      "rankingKeys": [
+        "physical-disability-rehabilitation-facility-residents-per-100k"
+      ]
+    },
+    {
+      "id": "sns:821",
+      "kind": "sns",
+      "key": "821",
+      "title": "instagram regular-cash-salary-female-pre2019",
+      "href": "https://www.instagram.com/p/Db2LAa_oF-T/",
+      "published": true,
+      "rankingKeys": [
+        "regular-cash-salary-female-pre2019"
+      ]
+    },
+    {
+      "id": "sns:822",
+      "kind": "sns",
+      "key": "822",
+      "title": "instagram sheets-consumption-expenditure",
+      "href": "https://www.instagram.com/p/Db24rrIoBMw/",
+      "published": true,
+      "rankingKeys": [
+        "sheets-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "sns:823",
+      "kind": "sns",
+      "key": "823",
+      "title": "2050年の推計人口を2020年と比べると、増加は東京都の+2.50%だけ。46道府県は減少見込みです。これはGeo分析",
+      "href": "https://x.com/stats47jp373/status/2094560866867769577",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:824",
+      "kind": "sns",
+      "key": "824",
+      "title": "東京都+2.50%、秋田県-41.59%。同じ2050年推計でも44.09ポイントの幅があります。高低を知るだけで終わら",
+      "href": "https://x.com/stats47jp373/status/2095348556827951334",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:825",
+      "kind": "sns",
+      "key": "825",
+      "title": "人口の色分け地図だけでは、住みやすさも安全性も分かりません。①人口変化を確認 ②別データを重ねる ③方法と限界を読む。こ",
+      "href": "https://x.com/stats47jp373/status/2096030550272418254",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:826",
+      "kind": "sns",
+      "key": "826",
+      "title": "地価が上がる住宅地でも、周囲の人口は減るのか。沖縄県では比較可能119地点中78地点（65.5%）で、2025→2026",
+      "href": "https://x.com/stats47jp373/status/2096903804331471076",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:827",
+      "kind": "sns",
+      "key": "827",
+      "title": "沖縄県では人口メッシュに接続した住宅地122地点のうち、比較可能119地点が分母です。地価上昇と将来人口減少が重なるのは",
+      "href": "https://x.com/stats47jp373/status/2097497719526814166",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:828",
+      "kind": "sns",
+      "key": "828",
+      "title": "大阪府では比較可能な住宅地1,181地点中869地点（73.6%）で、現在の地価上昇と周囲1kmメッシュの将来人口減少が",
+      "href": "https://x.com/stats47jp373/status/2098250176376737858",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:829",
+      "kind": "sns",
+      "key": "829",
+      "title": "想定最大規模の洪水区域に中心点が入る1kmメッシュの2050年人口を合計すると、新潟県は62.1%。メッシュ人口全体を中",
+      "href": "https://x.com/stats47jp373/status/2098912037183291460",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:830",
+      "kind": "sns",
+      "key": "830",
+      "title": "東京都では、洪水浸水想定区域に中心点が入る1kmメッシュの2050年人口合計は6,603,525人、都人口比45.9%。",
+      "href": "https://x.com/stats47jp373/status/2099639329471787286",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:831",
+      "kind": "sns",
+      "key": "831",
+      "title": "北海道では、洪水区域に中心点が入る1kmメッシュの人口比率が2020年49.2%から2050年52.6%へ。表示値の差は",
+      "href": "https://x.com/stats47jp373/status/2100557882517590075",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:832",
+      "kind": "sns",
+      "key": "832",
+      "title": "駅代表点から直線800m以内に中心点がある1km人口メッシュを集計すると、東京都は2050年人口の70.8%。大阪府65",
+      "href": "https://x.com/stats47jp373/status/2101106497019417006",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:833",
+      "kind": "sns",
+      "key": "833",
+      "title": "東京都では、駅代表点から直線800m以内に中心点があるメッシュの2050年人口合計は10,196,427人、都人口比70",
+      "href": "https://x.com/stats47jp373/status/2101843855595229331",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:86",
+      "kind": "sns",
+      "key": "86",
+      "title": "貯蓄率1位は福井県（44.7%）。収入の半分近くを貯金してる。",
+      "href": "https://x.com/stats47jp373/status/2032290562100117713",
+      "published": true,
+      "rankingKeys": [
+        "avg-savings-rate-worker-households"
+      ]
+    },
+    {
+      "id": "sns:87",
+      "kind": "sns",
+      "key": "87",
+      "title": "💰平均貯蓄率ランキング2023！あなたの県は何位？",
+      "href": "https://www.instagram.com/reel/DTw_bekjf-z/",
+      "published": true,
+      "rankingKeys": [
+        "avg-savings-rate-worker-households"
+      ]
+    },
+    {
+      "id": "sns:88",
+      "kind": "sns",
+      "key": "88",
+      "title": "平均貯蓄率ランキング推移 47都道府県【1975-2024】 #都道府県ランキング #統計データ #ranking",
+      "href": "https://www.youtube.com/watch?v=NH3buCgFcSs",
+      "published": true,
+      "rankingKeys": [
+        "avg-savings-rate-worker-households"
+      ]
+    },
+    {
+      "id": "sns:9",
+      "kind": "sns",
+      "key": "9",
+      "title": "ラーメンに最も金を使う県は山形県。年間22,389円。",
+      "href": "https://x.com/stats47jp373/status/2036208870226354357",
+      "published": true,
+      "rankingKeys": [
+        "ramen-dining-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "sns:905",
+      "kind": "sns",
+      "key": "905",
+      "title": "なぜ水稲収穫量は新潟が1位なのか？",
+      "href": "https://x.com/stats47jp373/status/2097988464155500954",
+      "published": true,
+      "rankingKeys": [
+        "rice-harvest-volume"
+      ]
+    },
+    {
+      "id": "sns:906",
+      "kind": "sns",
+      "key": "906",
+      "title": "東京都の高齢者交通事故死傷者数は6,346人、鳥取は140人。",
+      "href": "https://x.com/stats47jp373/status/2098184753363189891",
+      "published": true,
+      "rankingKeys": [
+        "traffic-accident-casualties-elderly-65plus"
+      ]
+    },
+    {
+      "id": "sns:907",
+      "kind": "sns",
+      "key": "907",
+      "title": "北海道1,304.2万円、鹿児島840.2万円、宮崎762万円。",
+      "href": "https://x.com/stats47jp373/status/2098350843678359637",
+      "published": true,
+      "rankingKeys": [
+        "agricultural-output-per-employed-person"
+      ]
+    },
+    {
+      "id": "sns:908",
+      "kind": "sns",
+      "key": "908",
+      "title": "農業所得割合を読む3ステップ。",
+      "href": "https://x.com/stats47jp373/status/2098547139509162047",
+      "published": true,
+      "rankingKeys": [
+        "agricultural-income-ratio"
+      ]
+    },
+    {
+      "id": "sns:909",
+      "kind": "sns",
+      "key": "909",
+      "title": "水稲10a当たり収量は青森と山形が627kgで同率首位。",
+      "href": "https://x.com/stats47jp373/status/2098713235625271647",
+      "published": true,
+      "rankingKeys": [
+        "rice-yield-per-10a"
+      ]
+    },
+    {
+      "id": "sns:910",
+      "kind": "sns",
+      "key": "910",
+      "title": "バリアフリー化住宅率、島根63.3% vs 沖縄36.5%。",
+      "href": "https://x.com/stats47jp373/status/2098939720277602533",
+      "published": true,
+      "rankingKeys": [
+        "barrier-free-housing-rate"
+      ]
+    },
+    {
+      "id": "sns:911",
+      "kind": "sns",
+      "key": "911",
+      "title": "なぜ高齢夫婦のみ世帯の割合は奈良が15.94%で1位なのか？",
+      "href": "https://x.com/stats47jp373/status/2099075623247573220",
+      "published": true,
+      "rankingKeys": [
+        "elderly-couple-only-household-ratio"
+      ]
+    },
+    {
+      "id": "sns:912",
+      "kind": "sns",
+      "key": "912",
+      "title": "北海道の農業就業人口は96,557人。茨城89,594人、長野82,922人が続きます。",
+      "href": "https://x.com/stats47jp373/status/2099271909401866734",
+      "published": true,
+      "rankingKeys": [
+        "agricultural-employment-population"
+      ]
+    },
+    {
+      "id": "sns:913",
+      "kind": "sns",
+      "key": "913",
+      "title": "人口当たり特別法犯検挙件数は東京93.1件、富山77.2件、京都72.4件。",
+      "href": "https://x.com/stats47jp373/status/2099438016850780434",
+      "published": true,
+      "rankingKeys": [
+        "special-law-criminal-arrest-count-per-population"
+      ]
+    },
+    {
+      "id": "sns:914",
+      "kind": "sns",
+      "key": "914",
+      "title": "警察部門職員数を読む3手順。",
+      "href": "https://x.com/stats47jp373/status/2099694702559678592",
+      "published": true,
+      "rankingKeys": [
+        "police-department-staff"
+      ]
+    },
+    {
+      "id": "sns:915",
+      "kind": "sns",
+      "key": "915",
+      "title": "汚水処理人口普及率は東京99.9%、徳島68.5%。",
+      "href": "https://x.com/stats47jp373/status/2099800399012102238",
+      "published": true,
+      "rankingKeys": [
+        "sewage-treatment-coverage-rate"
+      ]
+    },
+    {
+      "id": "sns:916",
+      "kind": "sns",
+      "key": "916",
+      "title": "刑法犯認知件数に占める粗暴犯割合、山形16.31% vs 栃木5.03%。",
+      "href": "https://x.com/stats47jp373/status/2099996686961557677",
+      "published": true,
+      "rankingKeys": [
+        "criminal-recognition-count-of-violent-crime-rate"
+      ]
+    },
+    {
+      "id": "sns:917",
+      "kind": "sns",
+      "key": "917",
+      "title": "なぜ災害復旧費割合は熊本が5%なのか？",
+      "href": "https://x.com/stats47jp373/status/2100162790858297534",
+      "published": true,
+      "rankingKeys": [
+        "disaster-recovery-expenditure-ratio-pref-finance"
+      ]
+    },
+    {
+      "id": "sns:918",
+      "kind": "sns",
+      "key": "918",
+      "title": "北海道の主要地方道実延長は4,561.5km。",
+      "href": "https://x.com/stats47jp373/status/2100359073757908994",
+      "published": true,
+      "rankingKeys": [
+        "road-prefectural-route-length"
+      ]
+    },
+    {
+      "id": "sns:919",
+      "kind": "sns",
+      "key": "919",
+      "title": "ごみのリサイクル率は岡山29%、鳥取28.2%、東京24.9%。",
+      "href": "https://x.com/stats47jp373/status/2100419485190529475",
+      "published": true,
+      "rankingKeys": [
+        "waste-recycling-rate"
+      ]
+    },
+    {
+      "id": "sns:92",
+      "kind": "sns",
+      "key": "92",
+      "title": "世帯あたりの車の台数、山形県は2.1台で東京都は0.7台。3.2倍の差。  1位 山形県 2,111台 2位 福井県 2",
+      "href": "https://x.com/stats47jp373/status/2031928172694954264",
+      "published": true,
+      "rankingKeys": [
+        "car-ownership-multi-person-households-per-1000"
+      ]
+    },
+    {
+      "id": "sns:920",
+      "kind": "sns",
+      "key": "920",
+      "title": "スポーツ年間行動者率を読む3ステップ。",
+      "href": "https://x.com/stats47jp373/status/2100721465259692189",
+      "published": true,
+      "rankingKeys": [
+        "sports-annual-participation-rate-10plus"
+      ]
+    },
+    {
+      "id": "sns:921",
+      "kind": "sns",
+      "key": "921",
+      "title": "人口10万人当たり出火件数は茨城49件、富山17.7件。",
+      "href": "https://x.com/stats47jp373/status/2100887564333068326",
+      "published": true,
+      "rankingKeys": [
+        "building-fire-count-per-100-thousand-people"
+      ]
+    },
+    {
+      "id": "sns:922",
+      "kind": "sns",
+      "key": "922",
+      "title": "総面積、北海道7,841,921ha vs 香川187,686ha。",
+      "href": "https://x.com/stats47jp373/status/2101249957218910222",
+      "published": true,
+      "rankingKeys": [
+        "total-area-excluding-northern-territories-and-takeshima"
+      ]
+    },
+    {
+      "id": "sns:923",
+      "kind": "sns",
+      "key": "923",
+      "title": "【都道府県クイズ】焼酎にいちばんお金を使う県は？",
+      "href": "https://www.instagram.com/p/DdrJkFFFtPC/",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:97",
+      "kind": "sns",
+      "key": "97",
+      "title": "物価が高い都道府県、3位が北海道って知ってた？",
+      "href": "https://x.com/stats47jp373/status/2032215058982318334",
+      "published": true,
+      "rankingKeys": [
+        "consumer-price-difference-index-overall"
+      ]
+    },
+    {
+      "id": "sns:975",
+      "kind": "sns",
+      "key": "975",
+      "title": "梨にいちばんお金を使う県は鳥取。",
+      "href": "https://www.threads.com/@stats47jp/post/DdptWkqEwPS",
+      "published": true,
+      "rankingKeys": [
+        "pear-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "sns:976",
+      "kind": "sns",
+      "key": "976",
+      "title": "北海道を1位・47位だけで語らない。",
+      "href": "https://www.threads.com/@stats47jp/post/DdqbKCNCDsH",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:977",
+      "kind": "sns",
+      "key": "977",
+      "title": "3,937g・2,926g・2,913g。",
+      "href": "https://www.threads.com/@stats47jp/post/DdsT6HWkbFV",
+      "published": true,
+      "rankingKeys": [
+        "grape-consumption-quantity"
+      ]
+    },
+    {
+      "id": "sns:978",
+      "kind": "sns",
+      "key": "978",
+      "title": "青森の「らしさ」をデータでたどる。",
+      "href": "https://www.threads.com/@stats47jp/post/DdtCSEAjvDz",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:979",
+      "kind": "sns",
+      "key": "979",
+      "title": "一戸建てに住む割合、秋田と東京で3倍差。",
+      "href": "https://www.threads.com/@stats47jp/post/Ddu6WmlEXh7",
+      "published": true,
+      "rankingKeys": [
+        "detached-house-ratio"
+      ]
+    },
+    {
+      "id": "sns:98",
+      "kind": "sns",
+      "key": "98",
+      "title": "👗服の値段、地域差ありすぎ！被服・履物物価指数2023",
+      "href": "https://www.instagram.com/reel/DTWyAI3DW5I/",
+      "published": true,
+      "rankingKeys": [
+        "consumer-price-difference-index-overall"
+      ]
+    },
+    {
+      "id": "sns:980",
+      "kind": "sns",
+      "key": "980",
+      "title": "あなたの知る岩手は、データでも同じ姿ですか？",
+      "href": "https://www.threads.com/@stats47jp/post/DdvouO7AEJz",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:981",
+      "kind": "sns",
+      "key": "981",
+      "title": "ホテルの客室が最も埋まっている県は？",
+      "href": "https://www.threads.com/@stats47jp/post/Ddxc53MDqN6",
+      "published": true,
+      "rankingKeys": [
+        "room-utilization-rate"
+      ]
+    },
+    {
+      "id": "sns:982",
+      "kind": "sns",
+      "key": "982",
+      "title": "宮城を数字と地域文化の両方から見る。",
+      "href": "https://www.threads.com/@stats47jp/post/DdyKtCaET_x",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:983",
+      "kind": "sns",
+      "key": "983",
+      "title": "昼になると人が増える県、減る県。",
+      "href": "https://www.threads.com/@stats47jp/post/Dd0C45nkllM",
+      "published": true,
+      "rankingKeys": [
+        "daytime-population-ratio"
+      ]
+    },
+    {
+      "id": "sns:984",
+      "kind": "sns",
+      "key": "984",
+      "title": "旅先では見えにくい秋田の輪郭。",
+      "href": "https://www.threads.com/@stats47jp/post/Dd0xuCIDknQ",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:985",
+      "kind": "sns",
+      "key": "985",
+      "title": "なぜ秋田県の木造住宅率は88.8%とこれほど高いのか?",
+      "href": "https://www.threads.com/@stats47jp/post/Dd2lVBxkiLb",
+      "published": true,
+      "rankingKeys": [
+        "wooden-housing-ratio"
+      ]
+    },
+    {
+      "id": "sns:986",
+      "kind": "sns",
+      "key": "986",
+      "title": "山形のデータブックを公開中。",
+      "href": "https://www.threads.com/@stats47jp/post/Dd3TIFHkasu",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:987",
+      "kind": "sns",
+      "key": "987",
+      "title": "芋煮の季節。さといもにいちばんお金を使うのは山形です。",
+      "href": "https://www.threads.com/@stats47jp/post/Dd5L4-7CrCc",
+      "published": true,
+      "rankingKeys": [
+        "taro-consumption-expenditure"
+      ]
+    },
+    {
+      "id": "sns:988",
+      "kind": "sns",
+      "key": "988",
+      "title": "福島を1位・47位だけで語らない。",
+      "href": "https://www.threads.com/@stats47jp/post/Dd56QkxDD0i",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:989",
+      "kind": "sns",
+      "key": "989",
+      "title": "下水道の普及率、徳島は19.5％。",
+      "href": "https://www.threads.com/@stats47jp/post/Dd7yVYYgu9n",
+      "published": true,
+      "rankingKeys": [
+        "sewerage-coverage-rate"
+      ]
+    },
+    {
+      "id": "sns:990",
+      "kind": "sns",
+      "key": "990",
+      "title": "茨城の「らしさ」をデータでたどる。",
+      "href": "https://www.threads.com/@stats47jp/post/Dd8gtEDj_KR",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:991",
+      "kind": "sns",
+      "key": "991",
+      "title": "勤労者世帯の「配偶者の収入」が最も多い県は？",
+      "href": "https://www.threads.com/@stats47jp/post/Dd-U4sKgSJm",
+      "published": true,
+      "rankingKeys": [
+        "spouse-income"
+      ]
+    },
+    {
+      "id": "sns:992",
+      "kind": "sns",
+      "key": "992",
+      "title": "あなたの知る栃木は、データでも同じ姿ですか？",
+      "href": "https://www.threads.com/@stats47jp/post/Dd_CsQeCAmr",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:993",
+      "kind": "sns",
+      "key": "993",
+      "title": "百貨店・総合スーパー数、人口10万人あたりで見ると景色が変わります。",
+      "href": "https://www.threads.com/@stats47jp/post/DeA632nDEv6",
+      "published": true,
+      "rankingKeys": [
+        "department-supermarket-count-per-100k"
+      ]
+    },
+    {
+      "id": "sns:994",
+      "kind": "sns",
+      "key": "994",
+      "title": "群馬を数字と地域文化の両方から見る。",
+      "href": "https://www.threads.com/@stats47jp/post/DeBptQSEXl5",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:995",
+      "kind": "sns",
+      "key": "995",
+      "title": "きのこの秋。しいたけ以外の「他のきのこ」を最も多く買うのは山形です。",
+      "href": "https://www.threads.com/@stats47jp/post/DeDdUOREi-L",
+      "published": true,
+      "rankingKeys": [
+        "other-mushroom-consumption-quantity"
+      ]
+    },
+    {
+      "id": "sns:996",
+      "kind": "sns",
+      "key": "996",
+      "title": "旅先では見えにくい埼玉の輪郭。",
+      "href": "https://www.threads.com/@stats47jp/post/DeELHKuiRO4",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:997",
+      "kind": "sns",
+      "key": "997",
+      "title": "マンションのオートロック率、1位は東京ではなく福岡。",
+      "href": "https://www.threads.com/@stats47jp/post/DeGD4xgiJFv",
+      "published": true,
+      "rankingKeys": [
+        "autolock-apartment-rate"
+      ]
+    },
+    {
+      "id": "sns:998",
+      "kind": "sns",
+      "key": "998",
+      "title": "千葉のデータブックを公開中。",
+      "href": "https://www.threads.com/@stats47jp/post/DeGyI5Mktx1",
+      "published": true,
+      "rankingKeys": []
+    },
+    {
+      "id": "sns:999",
+      "kind": "sns",
+      "key": "999",
+      "title": "プロパンガス代、高知と兵庫で129倍差。",
+      "href": "https://www.threads.com/@stats47jp/post/DeIqVKliDsU",
+      "published": true,
+      "rankingKeys": [
+        "propane-gas-consumption-expenditure"
+      ]
+    }
+  ]
+}

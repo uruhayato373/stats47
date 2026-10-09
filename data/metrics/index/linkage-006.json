@@ -6484,6 +6484,14 @@
           "kind": "ranking"
         },
         {
+          "pageId": "sns:650",
+          "kind": "sns"
+        },
+        {
+          "pageId": "sns:813",
+          "kind": "sns"
+        },
+        {
           "pageId": "theme:gender-participation",
           "kind": "theme"
         },
@@ -8037,6 +8045,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "note:a-final-energy-consumption-per-capita",
+          "kind": "note"
+        },
+        {
           "pageId": "ranking:final-energy-consumption-per-capita",
           "kind": "ranking"
         },
@@ -9253,6 +9265,10 @@
         {
           "pageId": "ranking:fire-damage-casualties-per-population",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:118",
+          "kind": "sns"
         },
         {
           "pageId": "theme:safety",
@@ -11463,6 +11479,10 @@
         {
           "pageId": "ranking:fiscal-strength-index-prefecture",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:122",
+          "kind": "sns"
         },
         {
           "pageId": "theme:local-finance",

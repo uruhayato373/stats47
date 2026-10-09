@@ -7,6 +7,7 @@ import {
   CONTENT_TAGS,
   CONTENT_NAVIGATION,
   contentIdFromHref,
+  isExternalContentKind,
   type ContentPage,
 } from '@stats47/data-configs/content';
 import Ajv from 'ajv';
@@ -103,7 +104,13 @@ for (const page of catalog.pages) {
   if (page.id.split(':')[0] !== page.kind) {
     throw new Error(`IDとページ種別の不一致: ${page.id} ${page.kind}`);
   }
-  if (contentIdFromHref(page.href) !== page.id)
+  if (isExternalContentKind(page.kind)) {
+    // note・SNS は外部の公開物。サイトのルートを持たないので、外部 URL であることだけを確かめる
+    if (!page.href.startsWith('https://'))
+      throw new Error(`外部の公開物は https の URL を持つ: ${page.id} ${page.href}`);
+  } else if (page.href.startsWith('https://')) {
+    throw new Error(`サイトのページに外部 URL: ${page.id} ${page.href}`);
+  } else if (contentIdFromHref(page.href) !== page.id)
     throw new Error(
       `URLとIDの不一致: ${page.id} ${page.href} (${contentIdFromHref(page.href)})`
     );

@@ -822,6 +822,10 @@
         {
           "pageId": "ranking:other-mens-shirt-consumption-quantity",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:770",
+          "kind": "sns"
         }
       ],
       "themes": []
@@ -942,6 +946,10 @@
         {
           "pageId": "ranking:other-mushroom-consumption-quantity",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:995",
+          "kind": "sns"
         }
       ],
       "themes": []
@@ -1266,6 +1274,10 @@
         {
           "pageId": "ranking:other-prepared-food-consumption-expenditure",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:791",
+          "kind": "sns"
         }
       ],
       "themes": []
@@ -2474,6 +2486,14 @@
         {
           "pageId": "ranking:other-vegetable-seaweed-processed-consumption-expenditure",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:601",
+          "kind": "sns"
+        },
+        {
+          "pageId": "sns:759",
+          "kind": "sns"
         }
       ],
       "themes": []
@@ -3447,8 +3467,20 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "note:recovered-n827191af8c1c",
+          "kind": "note"
+        },
+        {
           "pageId": "ranking:overseas-travel-annual-participation-rate-10plus",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:597",
+          "kind": "sns"
+        },
+        {
+          "pageId": "sns:753",
+          "kind": "sns"
         }
       ],
       "themes": []
@@ -3489,6 +3521,14 @@
         {
           "pageId": "ranking:overseas-travel-annual-participation-rate-15plus",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:593",
+          "kind": "sns"
+        },
+        {
+          "pageId": "sns:750",
+          "kind": "sns"
         }
       ],
       "themes": []
@@ -3947,8 +3987,80 @@
           "kind": "municipality-theme"
         },
         {
+          "pageId": "note:a-kakei-aichi",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-fukui",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-fukushima",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-gifu",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-gunma",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-hokkaido",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-iwate",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-kagawa",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-kochi",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-mie",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-miyagi",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-okinawa",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-saga",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-shizuoka",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-tottori",
+          "kind": "note"
+        },
+        {
           "pageId": "ranking:owner-occupied-housing-ratio",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:193",
+          "kind": "sns"
+        },
+        {
+          "pageId": "sns:195",
+          "kind": "sns"
+        },
+        {
+          "pageId": "sns:196",
+          "kind": "sns"
         },
         {
           "pageId": "theme:living-housing",
@@ -5840,6 +5952,10 @@
         {
           "pageId": "ranking:pear-consumption-expenditure",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:975",
+          "kind": "sns"
         }
       ],
       "themes": []
@@ -6484,6 +6600,10 @@
         {
           "pageId": "ranking:per-capita-education-expenditure-pref-municipal",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:198",
+          "kind": "sns"
         }
       ],
       "themes": []

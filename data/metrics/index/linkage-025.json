@@ -193,6 +193,14 @@
         {
           "pageId": "ranking:unmarried-ratio-male-30-34",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:634",
+          "kind": "sns"
+        },
+        {
+          "pageId": "sns:798",
+          "kind": "sns"
         }
       ],
       "themes": []
@@ -837,6 +845,14 @@
           "kind": "ranking"
         },
         {
+          "pageId": "sns:612",
+          "kind": "sns"
+        },
+        {
+          "pageId": "sns:774",
+          "kind": "sns"
+        },
+        {
           "pageId": "theme:living-housing",
           "kind": "theme"
         }
@@ -1410,6 +1426,10 @@
         {
           "pageId": "blog:electricity-bill-hike-impact",
           "kind": "blog"
+        },
+        {
+          "pageId": "note:a-kakei-yamagata",
+          "kind": "note"
         },
         {
           "pageId": "ranking:utilities-expenditure-ratio-multi-person-households",
@@ -2403,6 +2423,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "note:a-vacant-housing-rate",
+          "kind": "note"
+        },
+        {
           "pageId": "ranking:vacant-housing-rate",
           "kind": "ranking"
         },
@@ -2655,6 +2679,22 @@
         {
           "pageId": "ranking:vacant-housing-ratio",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:319",
+          "kind": "sns"
+        },
+        {
+          "pageId": "sns:320",
+          "kind": "sns"
+        },
+        {
+          "pageId": "sns:321",
+          "kind": "sns"
+        },
+        {
+          "pageId": "sns:322",
+          "kind": "sns"
         },
         {
           "pageId": "theme:living-housing",
@@ -3901,6 +3941,14 @@
         {
           "pageId": "ranking:vegetable-seaweed-tsukudani-consumption-expenditure",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:591",
+          "kind": "sns"
+        },
+        {
+          "pageId": "sns:747",
+          "kind": "sns"
         }
       ],
       "themes": []
@@ -4844,6 +4892,10 @@
       "normalizationDependencies": [],
       "consumers": [
         {
+          "pageId": "note:recovered-nf5b4ced7a736",
+          "kind": "note"
+        },
+        {
           "pageId": "ranking:volunteer-activity-annual-participation-rate-15plus",
           "kind": "ranking"
         }
@@ -5311,6 +5363,10 @@
         {
           "pageId": "ranking:voter-turnout-house-single",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:45",
+          "kind": "sns"
         }
       ],
       "themes": []
@@ -5551,6 +5607,10 @@
         {
           "pageId": "ranking:wakame-consumption-quantity",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:809",
+          "kind": "sns"
         }
       ],
       "themes": []
@@ -5859,6 +5919,10 @@
         {
           "pageId": "ranking:waste-recycling-rate",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:919",
+          "kind": "sns"
         },
         {
           "pageId": "theme:waste-recycling",
@@ -9112,6 +9176,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "note:b-kakei-bread-giffen",
+          "kind": "note"
+        },
+        {
           "pageId": "ranking:white-bread-consumption-quantity",
           "kind": "ranking"
         },
@@ -9457,6 +9525,14 @@
         {
           "pageId": "ranking:wind-power-plant-count-facility",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:632",
+          "kind": "sns"
+        },
+        {
+          "pageId": "sns:796",
+          "kind": "sns"
         }
       ],
       "themes": []

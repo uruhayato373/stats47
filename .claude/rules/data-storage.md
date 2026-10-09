@@ -32,7 +32,8 @@ paths:
 
 ページ・タグIDと回遊契約も例外として `data/content/{routes,tags,navigation}.json` + JSON Schemaを正本にする
 （2026-10-08 オーナー指示）。`entities.json` と `pages/*.json` は既存の定義とR2記事からの分割生成物で、手編集しない。
-全ルートのID網羅と参照整合は `npm run content:check`。観測値・本文・Geo途中artifactは従来の正本に残す。
+全ルートのID網羅と参照整合は `npm run content:check`。stats47 の外の公開物 (note 記事 `note:<key>`・SNS の投稿 `sns:<投稿ID>`) も
+外部 URL のまま同じ台帳に載せ、指標・記事への関係 (`uses`) を張る (2026-10-10)。下書き・予約は各正本 (note のカタログ・`data/sns/posts.json`) に残す。観測値・本文・Geo途中artifactは従来の正本に残す。
 
 `.claude/` はエージェント運用の置き場で、事業の台帳・記録・素材を置かない。git で管理するファイルは次の 6 つに分ける
 (`config/`・`data/` は doboku-note と同じ区分)。アプリが読む配信データは従来どおり git TS → R2 で、これとは別である。

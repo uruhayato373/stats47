@@ -2590,6 +2590,10 @@
         {
           "pageId": "ranking:public-rent-consumption-expenditure",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:784",
+          "kind": "sns"
         }
       ],
       "themes": []
@@ -5049,6 +5053,10 @@
           "kind": "japan-theme"
         },
         {
+          "pageId": "note:a-railway-station-count",
+          "kind": "note"
+        },
+        {
           "pageId": "ranking:railway-station-count",
           "kind": "ranking"
         },
@@ -5306,6 +5314,14 @@
         {
           "pageId": "ranking:ramen-dining-consumption-expenditure",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:228",
+          "kind": "sns"
+        },
+        {
+          "pageId": "sns:9",
+          "kind": "sns"
         },
         {
           "pageId": "theme:household-food-spending",
@@ -5991,8 +6007,16 @@
           "kind": "municipality-ranking"
         },
         {
+          "pageId": "note:a-kakei-niigata",
+          "kind": "note"
+        },
+        {
           "pageId": "ranking:ratio-65-plus",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:231",
+          "kind": "sns"
         },
         {
           "pageId": "theme:aging-society",
@@ -6758,6 +6782,10 @@
           "kind": "ranking"
         },
         {
+          "pageId": "sns:38",
+          "kind": "sns"
+        },
+        {
           "pageId": "theme:local-finance",
           "kind": "theme"
         }
@@ -7085,6 +7113,10 @@
           "kind": "ranking"
         },
         {
+          "pageId": "sns:710",
+          "kind": "sns"
+        },
+        {
           "pageId": "theme:real-income",
           "kind": "theme"
         }
@@ -7319,8 +7351,16 @@
           "kind": "japan-theme"
         },
         {
+          "pageId": "note:recovered-n04d95ae14bc1",
+          "kind": "note"
+        },
+        {
           "pageId": "ranking:real-public-debt-service-ratio",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:39",
+          "kind": "sns"
         },
         {
           "pageId": "theme:local-finance",
@@ -7407,6 +7447,10 @@
         {
           "pageId": "ranking:recorded-media-consumption-expenditure",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:808",
+          "kind": "sns"
         }
       ],
       "themes": []
@@ -10432,6 +10476,14 @@
         {
           "pageId": "ranking:regular-cash-salary-female-pre2019",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:659",
+          "kind": "sns"
+        },
+        {
+          "pageId": "sns:821",
+          "kind": "sns"
         }
       ],
       "themes": []
@@ -11186,6 +11238,14 @@
         {
           "pageId": "ranking:religious-expense-consumption-expenditure",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:599",
+          "kind": "sns"
+        },
+        {
+          "pageId": "sns:756",
+          "kind": "sns"
         }
       ],
       "themes": []

@@ -1701,8 +1701,20 @@
           "kind": "blog"
         },
         {
+          "pageId": "note:a-average-temperature",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-yamagata",
+          "kind": "note"
+        },
+        {
           "pageId": "ranking:average-temperature",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:594",
+          "kind": "sns"
         },
         {
           "pageId": "theme:climate",
@@ -2260,6 +2272,14 @@
         {
           "pageId": "ranking:average-weight-primary-school-fifth-grade-female",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:656",
+          "kind": "sns"
+        },
+        {
+          "pageId": "sns:818",
+          "kind": "sns"
         }
       ],
       "themes": []
@@ -3134,6 +3154,10 @@
           "kind": "japan-theme"
         },
         {
+          "pageId": "note:a-avg-propensity-to-consume-worker-households",
+          "kind": "note"
+        },
+        {
           "pageId": "ranking:avg-propensity-to-consume-worker-households",
           "kind": "ranking"
         },
@@ -3358,6 +3382,10 @@
         {
           "pageId": "ranking:avg-salary-admin-prefecture",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:6",
+          "kind": "sns"
         },
         {
           "pageId": "theme:local-finance",
@@ -3836,6 +3864,10 @@
           "kind": "ranking"
         },
         {
+          "pageId": "sns:29",
+          "kind": "sns"
+        },
+        {
           "pageId": "theme:local-finance",
           "kind": "theme"
         }
@@ -4072,6 +4104,18 @@
         {
           "pageId": "ranking:avg-savings-rate-worker-households",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:86",
+          "kind": "sns"
+        },
+        {
+          "pageId": "sns:87",
+          "kind": "sns"
+        },
+        {
+          "pageId": "sns:88",
+          "kind": "sns"
         },
         {
           "pageId": "theme:household-assets-debt",
@@ -5648,6 +5692,10 @@
         {
           "pageId": "ranking:barrier-free-housing-rate",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:910",
+          "kind": "sns"
         }
       ],
       "themes": []
@@ -8150,8 +8198,16 @@
           "kind": "blog"
         },
         {
+          "pageId": "note:b-kakei-beer-peak-month",
+          "kind": "note"
+        },
+        {
           "pageId": "ranking:beer-consumption-expenditure",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:7",
+          "kind": "sns"
         },
         {
           "pageId": "theme:household-food-spending",
@@ -8390,6 +8446,10 @@
         {
           "pageId": "blog:shochu-consumption-prefecture-gap",
           "kind": "blog"
+        },
+        {
+          "pageId": "note:b-kakei-beer-peak-month",
+          "kind": "note"
         },
         {
           "pageId": "ranking:beer-consumption-quantity",
@@ -8891,6 +8951,10 @@
         {
           "pageId": "ranking:births",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:580",
+          "kind": "sns"
         },
         {
           "pageId": "theme:aging-society",
@@ -12460,6 +12524,10 @@
         {
           "pageId": "ranking:bonus-admin-prefecture",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:30",
+          "kind": "sns"
         }
       ],
       "themes": []
@@ -12725,6 +12793,10 @@
         {
           "pageId": "ranking:boys-school-uniform-consumption-quantity",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:765",
+          "kind": "sns"
         }
       ],
       "themes": []

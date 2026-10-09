@@ -201,6 +201,14 @@
         {
           "pageId": "ranking:department-supermarket-count-per-100k",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:804",
+          "kind": "sns"
+        },
+        {
+          "pageId": "sns:993",
+          "kind": "sns"
         }
       ],
       "themes": []
@@ -1536,6 +1544,10 @@
         {
           "pageId": "ranking:detached-house-ratio",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:979",
+          "kind": "sns"
         }
       ],
       "themes": []
@@ -2744,6 +2756,10 @@
           "kind": "ranking"
         },
         {
+          "pageId": "sns:768",
+          "kind": "sns"
+        },
+        {
           "pageId": "theme:safety",
           "kind": "theme"
         }
@@ -2780,6 +2796,10 @@
         {
           "pageId": "ranking:disaster-recovery-expenditure-ratio-pref-finance",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:917",
+          "kind": "sns"
         }
       ],
       "themes": []
@@ -3002,6 +3022,14 @@
           "kind": "ranking"
         },
         {
+          "pageId": "sns:613",
+          "kind": "sns"
+        },
+        {
+          "pageId": "sns:776",
+          "kind": "sns"
+        },
+        {
           "pageId": "theme:safety",
           "kind": "theme"
         }
@@ -3041,6 +3069,14 @@
         {
           "pageId": "ranking:disaster-recovery-project-expenses-prefecture",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:611",
+          "kind": "sns"
+        },
+        {
+          "pageId": "sns:773",
+          "kind": "sns"
         }
       ],
       "themes": []
@@ -3774,6 +3810,14 @@
           "kind": "ranking"
         },
         {
+          "pageId": "sns:109",
+          "kind": "sns"
+        },
+        {
+          "pageId": "sns:709",
+          "kind": "sns"
+        },
+        {
           "pageId": "theme:real-income",
           "kind": "theme"
         }
@@ -4247,6 +4291,22 @@
         {
           "pageId": "ranking:divorces-per-total-population",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:113",
+          "kind": "sns"
+        },
+        {
+          "pageId": "sns:114",
+          "kind": "sns"
+        },
+        {
+          "pageId": "sns:116",
+          "kind": "sns"
+        },
+        {
+          "pageId": "sns:452",
+          "kind": "sns"
         },
         {
           "pageId": "theme:aging-society",
@@ -7432,6 +7492,10 @@
           "kind": "ranking"
         },
         {
+          "pageId": "sns:807",
+          "kind": "sns"
+        },
+        {
           "pageId": "theme:earthquake-exposure",
           "kind": "theme"
         }
@@ -7727,6 +7791,82 @@
         {
           "pageId": "area:47000",
           "kind": "area"
+        },
+        {
+          "pageId": "note:a-kakei-akita",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-aomori",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-chiba",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-hiroshima",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-kanagawa",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-kumamoto",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-kyoto",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-miyazaki",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-nagano",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-nagasaki",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-nara",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-saitama",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-shiga",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-shimane",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-tokushima",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-tokyo",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-toyama",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-wakayama",
+          "kind": "note"
+        },
+        {
+          "pageId": "note:a-kakei-yamaguchi",
+          "kind": "note"
         },
         {
           "pageId": "ranking:education-expenditure-ratio-multi-person-households",
@@ -8901,6 +9041,10 @@
         {
           "pageId": "ranking:elderly-couple-only-household-ratio",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:911",
+          "kind": "sns"
         },
         {
           "pageId": "theme:aging-society",
@@ -10223,8 +10367,20 @@
           "kind": "blog"
         },
         {
+          "pageId": "note:a-electricity-demand",
+          "kind": "note"
+        },
+        {
           "pageId": "ranking:electricity-demand",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:583",
+          "kind": "sns"
+        },
+        {
+          "pageId": "sns:737",
+          "kind": "sns"
         },
         {
           "pageId": "theme:regional-energy",
@@ -10460,8 +10616,20 @@
           "kind": "blog"
         },
         {
+          "pageId": "note:a-electricity-generation-capacity",
+          "kind": "note"
+        },
+        {
           "pageId": "ranking:electricity-generation-capacity",
           "kind": "ranking"
+        },
+        {
+          "pageId": "sns:595",
+          "kind": "sns"
+        },
+        {
+          "pageId": "sns:752",
+          "kind": "sns"
         },
         {
           "pageId": "theme:local-economy",
