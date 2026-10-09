@@ -362,14 +362,6 @@
         {
           "pageId": "ranking:port-vehicle-ferry",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:622",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:786",
-          "kind": "sns"
         }
       ],
       "themes": []
@@ -4002,14 +3994,6 @@
         {
           "pageId": "ranking:prefectural-income-growth-rate-h23",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:638",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:802",
-          "kind": "sns"
         }
       ],
       "themes": []
@@ -7009,80 +6993,8 @@
           "kind": "blog"
         },
         {
-          "pageId": "note:a-kakei-aichi",
-          "kind": "note"
-        },
-        {
-          "pageId": "note:a-kakei-fukui",
-          "kind": "note"
-        },
-        {
-          "pageId": "note:a-kakei-fukushima",
-          "kind": "note"
-        },
-        {
-          "pageId": "note:a-kakei-gifu",
-          "kind": "note"
-        },
-        {
-          "pageId": "note:a-kakei-gunma",
-          "kind": "note"
-        },
-        {
-          "pageId": "note:a-kakei-hokkaido",
-          "kind": "note"
-        },
-        {
-          "pageId": "note:a-kakei-iwate",
-          "kind": "note"
-        },
-        {
-          "pageId": "note:a-kakei-kagawa",
-          "kind": "note"
-        },
-        {
-          "pageId": "note:a-kakei-kochi",
-          "kind": "note"
-        },
-        {
-          "pageId": "note:a-kakei-mie",
-          "kind": "note"
-        },
-        {
-          "pageId": "note:a-kakei-miyagi",
-          "kind": "note"
-        },
-        {
-          "pageId": "note:a-kakei-okinawa",
-          "kind": "note"
-        },
-        {
-          "pageId": "note:a-kakei-saga",
-          "kind": "note"
-        },
-        {
-          "pageId": "note:a-kakei-shizuoka",
-          "kind": "note"
-        },
-        {
-          "pageId": "note:a-kakei-tottori",
-          "kind": "note"
-        },
-        {
-          "pageId": "note:a-private-rental-housing-rent-per-3-3m2",
-          "kind": "note"
-        },
-        {
           "pageId": "ranking:private-rental-housing-rent-per-3-3m2",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:224",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:463",
-          "kind": "sns"
         },
         {
           "pageId": "theme:real-income",
@@ -7225,82 +7137,6 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
-        {
-          "pageId": "note:a-kakei-akita",
-          "kind": "note"
-        },
-        {
-          "pageId": "note:a-kakei-aomori",
-          "kind": "note"
-        },
-        {
-          "pageId": "note:a-kakei-chiba",
-          "kind": "note"
-        },
-        {
-          "pageId": "note:a-kakei-hiroshima",
-          "kind": "note"
-        },
-        {
-          "pageId": "note:a-kakei-kanagawa",
-          "kind": "note"
-        },
-        {
-          "pageId": "note:a-kakei-kumamoto",
-          "kind": "note"
-        },
-        {
-          "pageId": "note:a-kakei-kyoto",
-          "kind": "note"
-        },
-        {
-          "pageId": "note:a-kakei-miyazaki",
-          "kind": "note"
-        },
-        {
-          "pageId": "note:a-kakei-nagano",
-          "kind": "note"
-        },
-        {
-          "pageId": "note:a-kakei-nagasaki",
-          "kind": "note"
-        },
-        {
-          "pageId": "note:a-kakei-nara",
-          "kind": "note"
-        },
-        {
-          "pageId": "note:a-kakei-saitama",
-          "kind": "note"
-        },
-        {
-          "pageId": "note:a-kakei-shiga",
-          "kind": "note"
-        },
-        {
-          "pageId": "note:a-kakei-shimane",
-          "kind": "note"
-        },
-        {
-          "pageId": "note:a-kakei-tokushima",
-          "kind": "note"
-        },
-        {
-          "pageId": "note:a-kakei-tokyo",
-          "kind": "note"
-        },
-        {
-          "pageId": "note:a-kakei-toyama",
-          "kind": "note"
-        },
-        {
-          "pageId": "note:a-kakei-wakayama",
-          "kind": "note"
-        },
-        {
-          "pageId": "note:a-kakei-yamaguchi",
-          "kind": "note"
-        },
         {
           "pageId": "ranking:private-university-student-ratio",
           "kind": "ranking"
@@ -7713,10 +7549,6 @@
         {
           "pageId": "ranking:propane-gas-consumption-expenditure",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:999",
-          "kind": "sns"
         }
       ],
       "themes": []
@@ -7792,14 +7624,6 @@
         {
           "pageId": "ranking:property-expenses-prefecture",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:618",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:782",
-          "kind": "sns"
         }
       ],
       "themes": []
@@ -8016,14 +7840,6 @@
         {
           "pageId": "ranking:psychiatric-hospital-bed-occupancy-rate",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:619",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:783",
-          "kind": "sns"
         }
       ],
       "themes": []

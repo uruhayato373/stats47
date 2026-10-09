@@ -451,10 +451,6 @@
         {
           "pageId": "ranking:per-capita-kenmin-shotoku-h27",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:723",
-          "kind": "sns"
         }
       ],
       "themes": []
@@ -1167,10 +1163,6 @@
           "kind": "japan-theme"
         },
         {
-          "pageId": "note:recovered-n80e58a01f660",
-          "kind": "note"
-        },
-        {
           "pageId": "ranking:per-capita-prefectural-income-h27",
           "kind": "ranking"
         },
@@ -1623,10 +1615,6 @@
         {
           "pageId": "ranking:per-capita-welfare-expenditure-pref-municipal",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:207",
-          "kind": "sns"
         }
       ],
       "themes": []
@@ -2293,10 +2281,6 @@
         {
           "pageId": "ranking:per-taxpayer-taxable-income",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:451",
-          "kind": "sns"
         },
         {
           "pageId": "theme:local-economy",
@@ -3076,10 +3060,6 @@
           "kind": "ranking"
         },
         {
-          "pageId": "sns:36",
-          "kind": "sns"
-        },
-        {
           "pageId": "theme:local-finance",
           "kind": "theme"
         }
@@ -3377,10 +3357,6 @@
         {
           "pageId": "ranking:persons-on-public-assistance-per-1000",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:213",
-          "kind": "sns"
         },
         {
           "pageId": "theme:public-assistance",
@@ -4168,10 +4144,6 @@
           "kind": "ranking"
         },
         {
-          "pageId": "sns:37",
-          "kind": "sns"
-        },
-        {
           "pageId": "theme:healthcare",
           "kind": "theme"
         }
@@ -4550,14 +4522,6 @@
         {
           "pageId": "ranking:physical-disability-rehabilitation-cases",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:631",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:795",
-          "kind": "sns"
         }
       ],
       "themes": []
@@ -4858,14 +4822,6 @@
         {
           "pageId": "ranking:physical-disability-rehabilitation-facility-residents-per-100k",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:658",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:820",
-          "kind": "sns"
         }
       ],
       "themes": []
@@ -5620,10 +5576,6 @@
         {
           "pageId": "japan-theme:healthcare",
           "kind": "japan-theme"
-        },
-        {
-          "pageId": "note:a-kakei-niigata",
-          "kind": "note"
         },
         {
           "pageId": "ranking:physicians-in-medical-facilities-per-100k",
@@ -7969,10 +7921,6 @@
           "kind": "ranking"
         },
         {
-          "pageId": "sns:914",
-          "kind": "sns"
-        },
-        {
           "pageId": "theme:local-finance",
           "kind": "theme"
         }
@@ -8044,14 +7992,6 @@
         {
           "pageId": "ranking:police-expenses-prefecture",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:635",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:799",
-          "kind": "sns"
         }
       ],
       "themes": []
@@ -9268,10 +9208,6 @@
         {
           "pageId": "ranking:population-density-per-km2-total-area",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:5",
-          "kind": "sns"
         }
       ],
       "themes": []
@@ -10521,14 +10457,6 @@
         {
           "pageId": "ranking:port-cargo-total",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:589",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:746",
-          "kind": "sns"
         },
         {
           "pageId": "theme:ports",

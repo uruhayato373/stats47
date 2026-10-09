@@ -83,10 +83,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "note:b-kakei-winter-bargain",
-          "kind": "note"
-        },
-        {
           "pageId": "ranking:womens-coat-consumption-expenditure",
           "kind": "ranking"
         }
@@ -129,10 +125,6 @@
         {
           "pageId": "blog:winter-coat-bargain-purchase-price",
           "kind": "blog"
-        },
-        {
-          "pageId": "note:b-kakei-winter-bargain",
-          "kind": "note"
         },
         {
           "pageId": "ranking:womens-coat-consumption-quantity",
@@ -847,10 +839,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "note:b-kakei-necktie-decline",
-          "kind": "note"
-        },
-        {
           "pageId": "ranking:womens-stockings-consumption-expenditure",
           "kind": "ranking"
         },
@@ -1218,14 +1206,6 @@
         {
           "pageId": "ranking:wooden-housing-ratio",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:787",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:985",
-          "kind": "sns"
         }
       ],
       "themes": []

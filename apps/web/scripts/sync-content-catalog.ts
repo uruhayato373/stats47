@@ -30,6 +30,7 @@ import { listThemeCatalogs } from '@stats47/data-configs/theme-catalog';
 import { KNOWN_RANKING_KEYS } from '@stats47/ranking/config';
 
 import { NOTE_ARTICLES } from '../../../.claude/scripts/note/catalog';
+import { buildExternalContentPages, type ExternalSnsSource } from '@stats47/data-configs/content/external';
 import { datasetPath, datasetDir } from '../../../config/datasets.mjs';
 import cities from '../../../packages/area/src/data/cities.json';
 import prefectures from '../../../packages/area/src/data/prefectures.json';
@@ -264,46 +265,6 @@ async function run() {
       }
     }
   }
-  // ── stats47 の外の公開物 (note・SNS)。外部 URL を持つものだけを載せ、指標・記事への関係を張る (2026-10-10)。
-  //    下書き・予約は正本 (note のカタログ / data/sns/posts.json) のまま。ここは「外に出たもの」の索引。
-  const knownMetric = (key: string) => Boolean(METRICS_REGISTRY[key]);
-  for (const article of NOTE_ARTICLES) {
-    if (!article.noteUrl?.startsWith('https://')) continue;
-    const id = `note:${article.key}`;
-    const targetIds = [...new Set((article.stats47Targets ?? []).map((target) => contentIdFromHref(target)).filter((x): x is string => Boolean(x)))];
-    add({
-      id,
-      kind: 'note',
-      key: article.key,
-      title: article.title,
-      href: article.noteUrl,
-      published: article.status === 'published',
-      rankingKeys: targetIds.filter((target) => target.startsWith('ranking:')).map((target) => target.slice('ranking:'.length)).filter(knownMetric),
-    });
-    for (const target of targetIds) link(id, target, 'uses');
-  }
-  type SnsPost = { id: number; platform: string; status: string; post_url?: string | null; caption?: string | null; domain?: string | null; content_key?: string | null; metric_keys?: string[] | null };
-  const snsPosts = (JSON.parse(fs.readFileSync(path.join(root, datasetPath('sns.posts')), 'utf8')) as { posts: SnsPost[] }).posts;
-  const snsHrefs = new Set<string>();
-  for (const post of snsPosts) {
-    // note への投稿の記録は note の記事として上で載せているので、SNS からは外す (同じ URL を二重に持たない)
-    if (post.platform === 'note') continue;
-    if (!post.post_url?.startsWith('https://') || snsHrefs.has(post.post_url)) continue;
-    snsHrefs.add(post.post_url);
-    const id = `sns:${post.id}`;
-    const metricKeys = [...new Set([...(post.metric_keys ?? []), ...(post.domain === 'ranking' && post.content_key ? [post.content_key] : [])])].filter(knownMetric);
-    const caption = (post.caption ?? '').split('\n').find((line) => line.trim())?.trim().slice(0, 60);
-    add({
-      id,
-      kind: 'sns',
-      key: String(post.id),
-      title: caption || `${post.platform} ${post.content_key ?? post.id}`,
-      href: post.post_url,
-      published: post.status === 'posted',
-      rankingKeys: metricKeys,
-    });
-    for (const key of metricKeys) link(id, `ranking:${key}`, 'uses');
-  }
   if (blogEntries) {
     for (const article of blogEntries) {
       const unknown = article.tags.filter(
@@ -384,8 +345,28 @@ async function run() {
         'ページID索引が古い状態です。npm run content:sync を実行してください。'
       );
   } else fs.writeFileSync(catalogPath, serialized);
+  // stats47 の外の公開物 (note・SNS) は別ファイルに置く。SNS の投稿台帳は CI が投稿のたびに書き換えるので、
+  // サイトの台帳 (entities.json / pages/) と鮮度の検査に混ぜない。--check では書かず、形と参照の整合は
+  // validate-content-catalog.ts が見る (2026-10-10)。
+  const externalPath = path.join(root, datasetPath('content.external'));
+  const snsPosts = (JSON.parse(fs.readFileSync(path.join(root, datasetPath('sns.posts')), 'utf8')) as { posts: ExternalSnsSource[] }).posts;
+  const external = buildExternalContentPages({
+    notes: NOTE_ARTICLES,
+    posts: snsPosts,
+    isKnownMetric: (key) => Boolean(METRICS_REGISTRY[key]),
+    idFromHref: contentIdFromHref,
+  });
+  const externalLinks = external.links
+    .filter((edge) => allIds.has(edge.to))
+    .sort((a, b) => `${a.from}:${a.to}`.localeCompare(`${b.from}:${b.to}`));
+  if (!check)
+    fs.writeFileSync(
+      externalPath,
+      JSON.stringify({ version: 1, pages: external.pages.sort((a, b) => a.id.localeCompare(b.id)), links: externalLinks }, null, 2) + '\n'
+    );
   console.log(
-    `content catalog: ${pages.length} pages, ${CONTENT_ROUTES.length} routes, ${CONTENT_TAGS.length} tags, ${generatedLinks.length} relations (${check ? 'checked' : 'generated'})`
+    `content catalog: ${pages.length} pages, ${CONTENT_ROUTES.length} routes, ${CONTENT_TAGS.length} tags, ${generatedLinks.length} relations (${check ? 'checked' : 'generated'})` +
+      `; external: ${external.pages.length} (note・SNS)${check ? ' (鮮度は見ない)' : ''}`
   );
 }
 void run().catch((error) => {

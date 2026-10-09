@@ -491,10 +491,6 @@
           "kind": "municipality-theme"
         },
         {
-          "pageId": "note:a-number-of-establishments-manufacturing",
-          "kind": "note"
-        },
-        {
           "pageId": "ranking:number-of-establishments-manufacturing",
           "kind": "ranking"
         }
@@ -1761,14 +1757,6 @@
           "kind": "ranking"
         },
         {
-          "pageId": "sns:35",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:727",
-          "kind": "sns"
-        },
-        {
           "pageId": "theme:local-services",
           "kind": "theme"
         },
@@ -2564,10 +2552,6 @@
           "kind": "ranking"
         },
         {
-          "pageId": "sns:2",
-          "kind": "sns"
-        },
-        {
           "pageId": "theme:labor-wages",
           "kind": "theme"
         }
@@ -3297,14 +3281,6 @@
         {
           "pageId": "ranking:nursery-teacher-annual-income",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:629",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:793",
-          "kind": "sns"
         },
         {
           "pageId": "theme:occupation-salary",
@@ -8051,10 +8027,6 @@
         {
           "pageId": "ranking:other-ceremony-expense-consumption-expenditure",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:762",
-          "kind": "sns"
         }
       ],
       "themes": []
@@ -8927,14 +8899,6 @@
         {
           "pageId": "ranking:other-dried-vegetables-seaweed-consumption-expenditure",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:582",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:735",
-          "kind": "sns"
         }
       ],
       "themes": []
@@ -9543,10 +9507,6 @@
         {
           "pageId": "ranking:other-grains-consumption-quantity",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:794",
-          "kind": "sns"
         }
       ],
       "themes": []
@@ -9787,10 +9747,6 @@
         {
           "pageId": "ranking:other-household-durables-consumption-expenditure",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:806",
-          "kind": "sns"
         }
       ],
       "themes": []

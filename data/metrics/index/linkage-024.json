@@ -29,10 +29,6 @@
         {
           "pageId": "ranking:total-assessed-land-area-ratio-field",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:810",
-          "kind": "sns"
         }
       ],
       "themes": []
@@ -817,32 +813,8 @@
           "kind": "blog"
         },
         {
-          "pageId": "note:a-total-fertility-rate",
-          "kind": "note"
-        },
-        {
           "pageId": "ranking:total-fertility-rate",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:10",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:288",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:289",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:290",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:461",
-          "kind": "sns"
         },
         {
           "pageId": "theme:aging-society",
@@ -1832,20 +1804,8 @@
           "kind": "japan-theme"
         },
         {
-          "pageId": "note:a-total-overnight-guests",
-          "kind": "note"
-        },
-        {
           "pageId": "ranking:total-overnight-guests",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:581",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:734",
-          "kind": "sns"
         },
         {
           "pageId": "theme:tourism",
@@ -2479,14 +2439,6 @@
         {
           "pageId": "ranking:total-overnight-guests-foreign",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:587",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:743",
-          "kind": "sns"
         },
         {
           "pageId": "theme:foreign-residents",
@@ -3795,14 +3747,6 @@
         {
           "pageId": "ranking:tourism-resource-count",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:592",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:749",
-          "kind": "sns"
         }
       ],
       "themes": []
@@ -4524,10 +4468,6 @@
         {
           "pageId": "ranking:traffic-accident-casualties-elderly-65plus",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:906",
-          "kind": "sns"
         },
         {
           "pageId": "theme:safety",
@@ -5304,10 +5244,6 @@
         {
           "pageId": "ranking:traffic-accident-count-per-population",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:292",
-          "kind": "sns"
         },
         {
           "pageId": "theme:safety",
@@ -6741,38 +6677,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "note:a-kakei-fukuoka",
-          "kind": "note"
-        },
-        {
-          "pageId": "note:a-kakei-hyogo",
-          "kind": "note"
-        },
-        {
-          "pageId": "note:a-kakei-ibaraki",
-          "kind": "note"
-        },
-        {
-          "pageId": "note:a-kakei-ishikawa",
-          "kind": "note"
-        },
-        {
-          "pageId": "note:a-kakei-oita",
-          "kind": "note"
-        },
-        {
-          "pageId": "note:a-kakei-osaka",
-          "kind": "note"
-        },
-        {
-          "pageId": "note:a-kakei-tochigi",
-          "kind": "note"
-        },
-        {
-          "pageId": "note:a-kakei-yamanashi",
-          "kind": "note"
-        },
-        {
           "pageId": "ranking:transport-communication-expenditure-ratio-multi-person-households",
           "kind": "ranking"
         }
@@ -6922,10 +6826,6 @@
       "normalizationDependencies": [],
       "consumers": [
         {
-          "pageId": "note:recovered-ne62fa955bcff",
-          "kind": "note"
-        },
-        {
           "pageId": "ranking:travel-leisure-annual-participation-rate-10plus",
           "kind": "ranking"
         }
@@ -6957,10 +6857,6 @@
       "dependencies": [],
       "normalizationDependencies": [],
       "consumers": [
-        {
-          "pageId": "note:recovered-n7ea3a816d39b",
-          "kind": "note"
-        },
         {
           "pageId": "ranking:travel-leisure-annual-participation-rate-15plus",
           "kind": "ranking"
@@ -7190,10 +7086,6 @@
           "kind": "japan-theme"
         },
         {
-          "pageId": "note:recovered-nda04ec118c93",
-          "kind": "note"
-        },
-        {
           "pageId": "ranking:travel-participation-rate-day-trip",
           "kind": "ranking"
         },
@@ -7242,10 +7134,6 @@
         {
           "pageId": "blog:travel-behavior-gender-gap",
           "kind": "blog"
-        },
-        {
-          "pageId": "note:recovered-nc60f702445f8",
-          "kind": "note"
         },
         {
           "pageId": "ranking:travel-participation-rate-domestic",
@@ -7476,20 +7364,8 @@
           "kind": "japan-theme"
         },
         {
-          "pageId": "note:recovered-ne3cdb7819c41",
-          "kind": "note"
-        },
-        {
           "pageId": "ranking:travel-participation-rate-domestic-tourism",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:602",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:761",
-          "kind": "sns"
         },
         {
           "pageId": "theme:tourism",
@@ -7762,10 +7638,6 @@
           "kind": "japan-theme"
         },
         {
-          "pageId": "note:a-kakei-ehime",
-          "kind": "note"
-        },
-        {
           "pageId": "ranking:travel-participation-rate-overnight",
           "kind": "ranking"
         },
@@ -8002,14 +7874,6 @@
         {
           "pageId": "ranking:travel-participation-rate-overseas",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:586",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:741",
-          "kind": "sns"
         },
         {
           "pageId": "theme:tourism",
@@ -8274,10 +8138,6 @@
         {
           "pageId": "ranking:treatment-rate-cancer-outpatient",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:41",
-          "kind": "sns"
         }
       ],
       "themes": []
@@ -8726,10 +8586,6 @@
           "kind": "ranking"
         },
         {
-          "pageId": "sns:42",
-          "kind": "sns"
-        },
-        {
           "pageId": "theme:healthcare",
           "kind": "theme"
         }
@@ -8824,10 +8680,6 @@
         {
           "pageId": "ranking:treatment-rate-hypertension-outpatient",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:43",
-          "kind": "sns"
         }
       ],
       "themes": []
@@ -12540,14 +12392,6 @@
           "kind": "ranking"
         },
         {
-          "pageId": "sns:308",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:309",
-          "kind": "sns"
-        },
-        {
           "pageId": "theme:labor-mobility",
           "kind": "theme"
         },
@@ -12661,14 +12505,6 @@
         {
           "pageId": "ranking:university-capacity-index",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:311",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:313",
-          "kind": "sns"
         }
       ],
       "themes": []
@@ -13121,10 +12957,6 @@
         {
           "pageId": "ranking:university-count-per-100k",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:44",
-          "kind": "sns"
         },
         {
           "pageId": "theme:education-culture",

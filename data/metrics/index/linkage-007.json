@@ -6366,14 +6366,6 @@
         {
           "pageId": "ranking:flood-affected-rivers",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:585",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:740",
-          "kind": "sns"
         }
       ],
       "themes": []
@@ -6667,14 +6659,6 @@
         {
           "pageId": "ranking:flood-damage-general-assets",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:617",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:781",
-          "kind": "sns"
         },
         {
           "pageId": "theme:safety",
@@ -7311,14 +7295,6 @@
         {
           "pageId": "blog:housing-cost-livability-trend",
           "kind": "blog"
-        },
-        {
-          "pageId": "note:a-kakei-kagoshima",
-          "kind": "note"
-        },
-        {
-          "pageId": "note:a-kakei-okayama",
-          "kind": "note"
         },
         {
           "pageId": "ranking:floor-area-per-dwelling-owner",
@@ -8565,14 +8541,6 @@
         {
           "pageId": "ranking:food-expenditure-ratio-multi-person-households",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:126",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:129",
-          "kind": "sns"
         }
       ],
       "themes": []
@@ -10290,10 +10258,6 @@
           "kind": "ranking"
         },
         {
-          "pageId": "sns:131",
-          "kind": "sns"
-        },
-        {
           "pageId": "theme:foreign-residents",
           "kind": "theme"
         }
@@ -10759,14 +10723,6 @@
         {
           "pageId": "ranking:foreign-resident-count-china-per-100k",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:637",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:801",
-          "kind": "sns"
         },
         {
           "pageId": "theme:foreign-residents",
@@ -16796,10 +16752,6 @@
         {
           "pageId": "ranking:fruit-vegetable-juice-consumption-expenditure",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:805",
-          "kind": "sns"
         }
       ],
       "themes": []

@@ -3150,10 +3150,6 @@
         {
           "pageId": "ranking:sewage-treatment-coverage-rate",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:915",
-          "kind": "sns"
         }
       ],
       "themes": []
@@ -3378,10 +3374,6 @@
         {
           "pageId": "ranking:sewerage-coverage-rate",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:989",
-          "kind": "sns"
         },
         {
           "pageId": "theme:water-services",
@@ -4354,14 +4346,6 @@
         {
           "pageId": "ranking:sheets-consumption-expenditure",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:660",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:822",
-          "kind": "sns"
         }
       ],
       "themes": []
@@ -5012,10 +4996,6 @@
         {
           "pageId": "ranking:shochu-consumption-expenditure",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:811",
-          "kind": "sns"
         },
         {
           "pageId": "theme:household-food-spending",
@@ -11911,14 +11891,6 @@
         {
           "pageId": "ranking:social-increase",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:639",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:803",
-          "kind": "sns"
         }
       ],
       "themes": []
@@ -12339,22 +12311,6 @@
         {
           "pageId": "ranking:social-increase-rate",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:250",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:251",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:252",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:253",
-          "kind": "sns"
         },
         {
           "pageId": "theme:aging-society",

@@ -2004,14 +2004,6 @@
         {
           "pageId": "ranking:national-health-insurance-enrollees-per-1000",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:614",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:777",
-          "kind": "sns"
         }
       ],
       "themes": []
@@ -6121,10 +6113,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "note:b-kakei-necktie-decline",
-          "kind": "note"
-        },
-        {
           "pageId": "ranking:necktie-consumption-expenditure",
           "kind": "ranking"
         },
@@ -7305,14 +7293,6 @@
         {
           "pageId": "ranking:new-graduate-scheduled-salary-university-male",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:652",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:815",
-          "kind": "sns"
         }
       ],
       "themes": []
@@ -7596,14 +7576,6 @@
         {
           "pageId": "ranking:new-housing-construction-ratio",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:183",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:185",
-          "kind": "sns"
         }
       ],
       "themes": []
@@ -8775,14 +8747,6 @@
         {
           "pageId": "ranking:night-soil-treatment-population-ratio",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:34",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:725",
-          "kind": "sns"
         }
       ],
       "themes": []
@@ -11254,14 +11218,6 @@
         {
           "pageId": "ranking:nuclear-power-plant-count",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:636",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:800",
-          "kind": "sns"
         }
       ],
       "themes": []
