@@ -102,6 +102,16 @@ export function checkRankingItemsCompleteness(input: {
   return errors;
 }
 
+/** Preserve the published population when exporting from staged metadata. */
+export function publishedStagedRankingItems(
+  items: readonly RankingItem[]
+): RankingItem[] {
+  return items.filter(
+    (item) =>
+      item.areaType === 'prefecture' && KNOWN_RANKING_KEYS.has(item.rankingKey)
+  );
+}
+
 /**
  * URL 単位の小さい JSON を R2 に生成・保存する (完全DBレス: docs/01_技術設計/19)。
  *
@@ -129,7 +139,7 @@ export async function exportRankingItemsPerUrl(
 
   // 1. 全 ranking item を R2 item.json から取得
   const itemsResult = stagedItems
-    ? { success: true as const, data: [...stagedItems] }
+    ? { success: true as const, data: publishedStagedRankingItems(stagedItems) }
     : await listRankingItemsWithTagsFromR2();
   if (!itemsResult.success) {
     throw (
