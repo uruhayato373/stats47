@@ -3,10 +3,13 @@
 投稿済み全件。`posted_at` 降順。
 スクリプトで自動生成 — 手編集しない (`sns-posts-store.cjs` が `insert()`/`updateById()` のたびに再生成)。
 
-**608 件** (最終更新: 2026-10-08)
+**611 件** (最終更新: 2026-10-09)
 
 | 日付 | 媒体 | コンテンツ | キャプション | URL |
 |---|---|---|---|---|
+| 2026-10-09 | 📸 Instagram | compare-carousel/23000-vs-40000 |  | [🔗](https://www.instagram.com/p/DeRQY84G5tI/) |
+| 2026-10-09 | 🧵 Threads | area/area-16000-profile | 富山を数字と地域文化の両方から見る。 県鳥ライチョウ、特産ホタルイカ、全国順位をまとめた県別ページです。 続きは👇 h… | [🔗](https://www.threads.com/@stats47jp/post/DeRDEEPjntQ) |
+| 2026-10-09 | 🧵 Threads | ranking/annual-sunshine-duration | 2,309時間・2,285時間・2,278時間。  年間日照時間の上位3県は高知・群馬・埼玉。 最も短い山形（1,626… | [🔗](https://www.threads.com/@stats47jp/post/DeQVTBMjF6G) |
 | 2026-10-08 | 📸 Instagram | ranking-quiz/curry-roux-consumption-quantity |  | [🔗](https://www.instagram.com/p/DeOrTTqFnCN/) |
 | 2026-10-08 | 🧵 Threads | area/area-15000-profile | あなたの知る新潟は、データでも同じ姿ですか？ ユキツバキや塩引き鮭から、人口・経済・暮らしまで横断できます。 続きは👇… | [🔗](https://www.threads.com/@stats47jp/post/DeOhrFWDs5M) |
 | 2026-10-08 | 🧵 Threads | ranking/sweet-potato-consumption-expenditure | さつまいもに最もお金を使う県は？  1位は徳島で2,466円。2位鹿児島2,210円、3位滋賀1,872円。 産地として… | [🔗](https://www.threads.com/@stats47jp/post/DeNyxTyiTFK) |
