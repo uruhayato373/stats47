@@ -1,21 +1,16 @@
 {
-  "generatedAt": "2026-10-08T02:24:53.452Z",
-  "published": 607,
+  "generatedAt": "2026-10-09T02:42:27.980Z",
+  "published": 606,
   "withRankingRefs": 568,
   "stale": [
     {
-      "slug": "fish-catch-vs-consumption-prefecture",
-      "title": "獲れる県と食べる県は違う？",
+      "slug": "bonito-catch-prefecture",
+      "title": "静岡と宮城でカツオの「棲み分け」が起きている理由──冷凍と生鮮で別の港が日本を二分する",
       "stale": [
         {
-          "rankingKey": "tuna-consumption-expenditure",
+          "rankingKey": "fishery-species-catch-bonito",
           "articleYear": "2015",
-          "latestYear": "2024"
-        },
-        {
-          "rankingKey": "yellowtail-consumption-expenditure",
-          "articleYear": "2015",
-          "latestYear": "2024"
+          "latestYear": "2023"
         }
       ]
     },
@@ -171,11 +166,83 @@
       ]
     },
     {
-      "slug": "cc-estat-20-publish",
-      "title": "Claude Code で作った47都道府県チャートを公開｜Next.js × Cloudflare Pages 連載最終回",
+      "slug": "consumer-price-difference-index-utilities-prefecture-gap",
+      "title": "光熱・水道費はなぜ北海道が突出して高いのか",
       "stale": [
         {
-          "rankingKey": "total-population",
+          "rankingKey": "consumer-price-difference-index-utilities",
+          "articleYear": "2024",
+          "latestYear": "2025"
+        }
+      ]
+    },
+    {
+      "slug": "consumer-price-regional-gap",
+      "title": "移住すれば生活コストは本当に下がる?",
+      "stale": [
+        {
+          "rankingKey": "consumer-price-difference-index-clothing-footwear",
+          "articleYear": "2024",
+          "latestYear": "2025"
+        },
+        {
+          "rankingKey": "consumer-price-difference-index-culture-recreation",
+          "articleYear": "2024",
+          "latestYear": "2025"
+        },
+        {
+          "rankingKey": "consumer-price-difference-index-education",
+          "articleYear": "2024",
+          "latestYear": "2025"
+        },
+        {
+          "rankingKey": "consumer-price-difference-index-food",
+          "articleYear": "2024",
+          "latestYear": "2025"
+        },
+        {
+          "rankingKey": "consumer-price-difference-index-furniture-household",
+          "articleYear": "2024",
+          "latestYear": "2025"
+        },
+        {
+          "rankingKey": "consumer-price-difference-index-healthcare",
+          "articleYear": "2024",
+          "latestYear": "2025"
+        },
+        {
+          "rankingKey": "consumer-price-difference-index-housing",
+          "articleYear": "2024",
+          "latestYear": "2025"
+        },
+        {
+          "rankingKey": "consumer-price-difference-index-miscellaneous",
+          "articleYear": "2024",
+          "latestYear": "2025"
+        },
+        {
+          "rankingKey": "consumer-price-difference-index-overall",
+          "articleYear": "2024",
+          "latestYear": "2025"
+        },
+        {
+          "rankingKey": "consumer-price-difference-index-transport-communication",
+          "articleYear": "2024",
+          "latestYear": "2025"
+        },
+        {
+          "rankingKey": "consumer-price-difference-index-utilities",
+          "articleYear": "2024",
+          "latestYear": "2025"
+        }
+      ]
+    },
+    {
+      "slug": "electricity-bill-hike-impact",
+      "title": "電気代値上げで最も打撃を受ける県はどこか",
+      "stale": [
+        {
+          "rankingKey": "consumer-price-difference-index-utilities",
           "articleYear": "2024",
           "latestYear": "2025"
         }
@@ -193,11 +260,87 @@
       ]
     },
     {
+      "slug": "fish-catch-vs-consumption-prefecture",
+      "title": "獲れる県と食べる県は違う？",
+      "stale": [
+        {
+          "rankingKey": "tuna-consumption-expenditure",
+          "articleYear": "2023",
+          "latestYear": "2024"
+        },
+        {
+          "rankingKey": "yellowtail-consumption-expenditure",
+          "articleYear": "2023",
+          "latestYear": "2024"
+        }
+      ]
+    },
+    {
+      "slug": "food-price-regional-2026",
+      "title": "食品インフレで家計が割れる県、割れない県はなぜ分かれる",
+      "stale": [
+        {
+          "rankingKey": "consumer-price-difference-index-food",
+          "articleYear": "2024",
+          "latestYear": "2025"
+        }
+      ]
+    },
+    {
+      "slug": "low-cost-low-income-prefectures",
+      "title": "物価が安い県は暮らしが楽なのか",
+      "stale": [
+        {
+          "rankingKey": "consumer-price-difference-index-overall",
+          "articleYear": "2024",
+          "latestYear": "2025"
+        }
+      ]
+    },
+    {
       "slug": "nurse-income-prefecture-gap",
       "title": "看護師年収は大阪568万・宮崎416万で1.4倍差｜なぜ給与水準トップの東京が中位に沈むのか",
       "stale": [
         {
           "rankingKey": "avg-salary-all-prefecture",
+          "articleYear": "2023",
+          "latestYear": "2024"
+        }
+      ]
+    },
+    {
+      "slug": "price-index-high-low-prefecture",
+      "title": "物価格差の真因は食費ではなく家賃",
+      "stale": [
+        {
+          "rankingKey": "consumer-price-difference-index-overall",
+          "articleYear": "2024",
+          "latestYear": "2025"
+        }
+      ]
+    },
+    {
+      "slug": "real-disposable-income-reversal",
+      "title": "物価補正で東京が首位を落とすのはなぜ",
+      "stale": [
+        {
+          "rankingKey": "consumer-price-difference-index-overall",
+          "articleYear": "2024",
+          "latestYear": "2025"
+        }
+      ]
+    },
+    {
+      "slug": "school-teacher-annual-income",
+      "title": "教員年収の首位が毎年変わるのはなぜ?",
+      "stale": [
+        {
+          "rankingKey": "elementary-school-teachers",
+          "articleYear": "2023",
+          "latestYear": "2024"
+        },
+        {
+          "rankingKey": "junior-high-school-teachers",
           "articleYear": "2023",
           "latestYear": "2024"
         }
