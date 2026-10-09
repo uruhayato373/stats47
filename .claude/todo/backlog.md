@@ -3249,6 +3249,44 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
   ③ commit-back を別ブランチへ集める、のどれを採るかを決める。
 - **完了条件**: commit-back が先頭に積まれても、手で push し直さずに develop→main の PR をマージできる。
 
+### [JAPAN-SERIES-KAKEI-01] /japan の全国時系列の生成器を家計調査に対応させ、止めている 55 指標を載せる
+
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-09] [領域:データ]
+
+- **観測 (2026-10-09)**: 参考文献由来の /japan 候補 66 件のうち 55 件は家計調査の品目で、全国値はあるが
+  `packages/stats-r2/src/scripts/generate-japan-series.ts` の official モードが `source.kind=kakei-chousa` に未対応 (`verify-japan-candidates.ts` で verified-unsupported)。
+  `packages/data-configs/src/evidence-inventory/placement-decisions.ts` に blocked として記録してある (外部取得の農業産出額・計算型のエンゲル係数の 2 件も同じ理由)。
+- **次**: 生成器に家計調査のレシピ (全国の行) を足し、値レベルで検証してから japan-catalog.ts へ載せ、placement-decisions.ts の該当行を消す。
+- **完了条件**: 55 件が /japan に載るか、載せないと判断して placement-decisions.ts に rejected と理由が残る。
+
+### [JAPAN-CANDIDATE-CLASSIFY-CRASH-01] classify-japan-candidates.ts が今の live-audit の形式で TypeError で止まる
+
+タグ: [エージェント・SSOT] [種類:不具合] [実行:対話] [起票:2026-10-09] [領域:データ]
+
+- **観測 (2026-10-09)**: `npx tsx packages/data-configs/scripts/classify-japan-candidates.ts` が `r.params` で TypeError。
+  `data/themes/charts/live-audit.json` (2026-10-05 監査) が kind/metricKey だけの R2 監査の形になり、params / hasNational を持たないため。
+  今回は全国行の存在確認を `verify-japan-candidates.ts` の e-Stat 応答で代用した。
+- **完了条件**: 分類スクリプトが今の形式で動き、全国行の有無を判定できる (テストで固定)。
+
+### [AREA-NATIONAL-AVG-SIMPLE-MEAN-01] 県データブックの「全国平均」が 47 県の単純平均で、全国=100 の指数や率の指標では誤った値になる
+
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-09] [領域:サイト]
+
+- **観測 (2026-10-09・反証レビュー)**: `packages/area-profile/src/exporters/area-databook-snapshot.ts` 80-82 行は nationalAvg を 47 県の単純平均で出す。
+  物価地域差指数 (全国=100) に compareNationalAvg を付けると「全国平均 99.0」(住居は 93.1) と出る。今回の採用分では外したが、
+  既存の compareNationalAvg 付き指標にも、全国値が県の平均と違う率の指標が含まれていないかは未確認。
+- **次**: 全国値 (00000) がある指標はそれを使い、無い指標は表示しないか「47 県の平均」と書く。既存の compareNationalAvg 付き指標を棚卸しする。
+- **完了条件**: 全国平均として出る値が全国値と一致するか、47 県の平均であることが画面に書かれている。
+
+### [JAPAN-METRIC-UNIT-AND-RATIO-01] /japan で意味を持たない昼夜間人口比率と、合計特殊出生率の単位「人」を直す
+
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-09] [領域:データ]
+
+- **観測 (2026-10-09・ワークフローの検証)**: /japan に載っている `day-time-population-ratio` は全国では常に 100 (`app/japan/day-time-population-ratio/series.json`)。
+  `packages/data-configs/src/metrics/total-fertility-rate.ts` の unit が「人」だが e-Stat の単位は「‐」で、/japan の生成器が単位不一致で拒否する。
+- **次**: 昼夜間人口比率を /japan から外すか判断する。合計特殊出生率の unit を出典の定義に合わせて直し、/japan に載せ直す (placement-decisions.ts の blocked 行を消す)。
+- **完了条件**: 上の 2 件が直り、/japan に意味のない系列が残っていない。
+
 ## 🟢 低 — 時期未定・条件付き (trigger は本文に)
 
 ### [DATA-SHUKUHAKU-CORRECTION-01] 宿泊旅行統計の 2026 年分を足すときに、層化基準の変更による系列の断絶を書く
