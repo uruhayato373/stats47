@@ -18,7 +18,9 @@ jobs:
     runs-on: ubuntu-latest
     name: Deploy
     # Metric contract migrations publish the matching snapshots before building.
-    timeout-minutes: 40
+    # 全指標のスナップショット反映が 40 分を超えて 2 回 cancelled になった (2026-10-09・run 37909376740)。
+    # 反映の並列化までの暫定で 90 分にする (DEPLOY-METRIC-RELEASE-TIMEOUT-01)。r2-write を握る時間も延びる点に注意。
+    timeout-minutes: 90
     concurrency:
       group: r2-write
       cancel-in-progress: false
