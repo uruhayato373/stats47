@@ -2549,6 +2549,7 @@ updated: 2026-10-06
 - **次**: blocked 3件はactiveな公開metricが出た時点で再判定する。ブログは各指標の年度・母集団を揃え、相関snapshot、チャート、本文、独立criticの順で品質ゲートへ進める。
 - **停止条件**: inactive metric、年度・母集団の不一致、相関snapshot不在、一次資料未確認、権利保留のいずれかがあれば公開へ進めない。
 - **2026-10-09 ワークフロー (wf_d880dc8a-bab) の結果**: `agriculture-output-employment-productivity-gap` と `household-structure-daytime-population-gap` は データ接地・SVG・quality-gate・独立 critic PASS まで完了 (published:false のまま)。公開に残るのは記事固有の背景画像 (Codex の担当、`npm run blog-images:codex -- request-article --slug <slug>`)。世帯構成の記事は指標を核家族世帯割合 × 昼夜間人口比率 (2020 年国勢調査) に組み直した。`electricity-generation-manufacturing-establishments-gap` は 2 指標の相関 snapshot が無く停止 (2023 年の 47 県結合で r≈0.30。snapshot 外の散布図を例外として許すか、snapshot に実在する工業用水・港湾貨物の組へ企画を替えるかはオーナー判断)。`household-spending-debt-propensity-gap` は 3 指標に共通する年が無く停止 (負債現在高は 2019 年のみ、消費支出は 2019 年が無い)。
+- **2026-10-09 公開**: 2 本 (`agriculture-output-employment-productivity-gap` / `household-structure-daytime-population-gap`) は記事固有背景 (2c1c49dba) を得て blog-auto-publish (run 37903460052) で R2 に公開した。本番ページは公開記事一覧 (sitemap-blog-entries.ts) が main に入るまで 410 のため、PR #1116 のデプロイで表示される。タグ 3 つ (農業就業人口・昼夜間人口比率・核家族世帯) を data/content/tags.json に登録した。
 - **完了条件**: blocked 3件はmetric公開可否が確定する。ブログ4本は一次資料・R2接地、SVG、quality gate、critic PASSを満たしてから`published:true`へ移す。
 
 ### [SNAPSHOT-EDGE-PURGE-GAP-01] snapshot 同期後にエッジが旧 HTML を配信し続ける
