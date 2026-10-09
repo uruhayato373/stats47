@@ -114,17 +114,21 @@ export async function resolveChoroplethScale(
     .filter((value) => value > domain[0] && value < domain[1])
     .sort((a, b) => a - b);
   const boundaries = [domain[0], ...thresholds, domain[1]];
-  const colors = boundaries
-    .slice(0, -1)
-    .map((value, i) =>
-      scale(
-        midpoint !== undefined &&
-          value < midpoint &&
-          boundaries[i + 1] > midpoint
-          ? midpoint
-          : (value + boundaries[i + 1]) / 2
-      )
-    );
+  const lowerBins = midpoint === undefined ? 0 : boundaries.slice(1).filter(value => value <= midpoint).length;
+  const upperBins = midpoint === undefined ? 0 : boundaries.slice(0, -1).filter(value => value >= midpoint).length;
+  const binCount = boundaries.length - 1;
+  const colors = boundaries.slice(0, -1).map((value, index) => {
+    const upper = boundaries[index + 1];
+    if (midpoint !== undefined && value < midpoint && upper > midpoint)
+      return scale(midpoint);
+    if (classification.method !== 'quantile') return scale((value + upper) / 2);
+    // Quantile colors express class order: a long upper tail must not wash out lower classes.
+    if (midpoint === undefined)
+      return scale(domain[0] + (domain[1] - domain[0]) * (index + 0.5) / binCount);
+    if (upper <= midpoint)
+      return scale(domain[0] + (midpoint - domain[0]) * (index + 0.5) / lowerBins);
+    return scale(midpoint + (domain[1] - midpoint) * (index - (binCount - upperBins) + 0.5) / upperBins);
+  });
   const colorAtValue = (value: number) => {
     if (!Number.isFinite(value)) return noDataColor;
     if (classification.method === 'continuous') return scale(value);

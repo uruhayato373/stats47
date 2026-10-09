@@ -11,3 +11,13 @@ type: feedback
 **対策**: 観測値・系列・年・地域・計算方法を一つの表示stateとして、取得成功後にまとめて確定する。失敗時は旧表示とURLを保持し、要求番号で遅い旧応答を無視する。地図と要約のpresentationは確定した計算方法から解決する。画面撮影は対象単位と数値が到着してから行う。
 
 **証拠**: `apps/web/src/features/ranking/components/RankingKeyPage/useRankingPageState.ts` と同ディレクトリの `__tests__/useRankingPageState.test.tsx`。2026-10-09に未完了取得・取得失敗・旧応答の3ケースがPASS。
+
+## 分位区分の色は階級順で決める
+
+**問題**: 人口密度の分位地図で下位4階級の色がほぼ同じになった。
+
+**原因**: 分位境界を正しく計算しても、各区間の実値の中点を連続色スケールへ渡すと、右裾の大きな値が下位区間の色を押しつぶす。
+
+**対策**: 分位区分は階級順に色の幅を使う。発散色は宣言した基準を中立色に保ち、両側の階級順から色を解決する。地図と凡例に同じ色配列を渡す。分布を均等から偏った形へ変えても同じ階級の色が変わらないテストで検査する。
+
+**証拠**: packages/visualization の quantile-palette.test.ts と共通 resolve-choropleth-scale.ts。2026-10-09、関連13testと当該package型検査、人口密度390pxの地図・凡例の実画面で確認。
