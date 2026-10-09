@@ -480,7 +480,7 @@ export default async function ReferenceContentPage({
           />
         </div>
         <p className="mb-3 text-xs text-console-muted">
-          テーマ企画は実行待ちの作業台帳、ブログは非公開の原稿ファイルが管理元です。
+          テーマ企画は展開判断の記録 (placement-decisions.ts) 、ブログは非公開の原稿ファイルが管理元です。
           参考文献は論点の発見に使い、一次資料と保存済み統計データを確認するまで公開へ進めません。
         </p>
         <DataTable
