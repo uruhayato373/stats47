@@ -1,4 +1,3 @@
-import { METRIC_LINKAGE } from '../../../config/paths.mjs';
 #!/usr/bin/env node
 /**
  * e-Stat メタデータ完全カタログ CLI。
@@ -14,6 +13,7 @@ import { METRIC_LINKAGE } from '../../../config/paths.mjs';
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { METRIC_LINKAGE_DIR } from '../../../config/paths.mjs';
 
 import { fetchMetaInfo, getAppId, listAllTables, sleep } from "../lib/estat-catalog/api.mjs";
 import { classRows, normalizeTableRow, summarizeMeta } from "../lib/estat-catalog/normalize.mjs";
@@ -25,7 +25,7 @@ import {
   recordFetchSuccess,
   upsertTableRow,
 } from "../lib/estat-catalog/index.mjs";
-import { loadPulled } from "../lib/estat-catalog/pulled.mjs";
+import { loadMetricLinkage, loadPulled } from "../lib/estat-catalog/pulled.mjs";
 import { getObjectJson } from "../lib/estat-catalog/s3.mjs";
 import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 
@@ -323,8 +323,7 @@ async function cmdPull() {
 }
 
 async function cmdSearch(args) {
-  const linkagePath = path.join(PROJECT_ROOT, METRIC_LINKAGE);
-  const linkage = JSON.parse(fs.readFileSync(linkagePath, 'utf8')).entries;
+  const linkage = loadMetricLinkage(path.join(PROJECT_ROOT, METRIC_LINKAGE_DIR));
   const registeredMetrics = (statsDataId) => linkage.filter((metric) => metric.sources.some((source) => source.statsDataId === statsDataId)).map((metric) => ({ metricKey: metric.metricKey, title: metric.title, pageId: metric.pageId, themes: metric.themes, sources: metric.sources.filter((source) => source.statsDataId === statsDataId), recipe: metric.recipe }));
   const { tables } = loadPulled(PULL_DIR);
   const terms = args._.filter(Boolean);

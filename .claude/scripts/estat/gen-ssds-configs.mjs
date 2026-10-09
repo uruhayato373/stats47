@@ -10,9 +10,10 @@
  * 実行後: npm run build:registry --workspace=@stats47/data-configs で registry 再生成。
  */
 import fs from "node:fs";
+import { datasetDir } from "../../../config/datasets.mjs";
 import path from "node:path";
 
-const DIR = "data/metrics";
+const DIR = datasetDir("metrics.definitions");
 
 // 既存 key / title (衝突回避)
 const existKeys = new Set(), existTitles = new Set();

@@ -21,6 +21,7 @@
  *   node .claude/scripts/blog/build-kakei-quantity-price.mjs --list   # 対象ペアと共通年だけ表示
  */
 import fs from "node:fs";
+import { datasetDir } from "../../../config/datasets.mjs";
 import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -29,7 +30,7 @@ import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
 const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
-const METRICS_DIR = path.join(PROJECT_ROOT, "data/metrics");
+const METRICS_DIR = path.join(PROJECT_ROOT, datasetDir("metrics.definitions"));
 const PREFECTURES_JSON = path.join(PROJECT_ROOT, "packages/area/src/data/prefectures.json");
 const CACHE_DIR = path.join(os.tmpdir(), "stats47-kakei-quantity-price-cache");
 

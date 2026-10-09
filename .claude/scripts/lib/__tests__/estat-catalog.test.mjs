@@ -1,5 +1,20 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
+import { loadMetricLinkage, loadPulled } from '../estat-catalog/pulled.mjs';
+
+test('metric linkage reads every shard and rejects missing or duplicate metric IDs', () => {
+  const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'stats47-metric-linkage-'));
+  assert.throws(() => loadMetricLinkage(directory), /索引が無い/);
+  const shard = (name, metricKey) => fs.writeFileSync(path.join(directory, name), JSON.stringify({version: 1, entries: [{metricKey, sources: [{statsDataId: 'TABLE'}]}]}));
+  shard('linkage-001.json', 'beta');
+  shard('linkage-000.json', 'alpha');
+  assert.deepEqual(loadMetricLinkage(directory).map((entry) => entry.metricKey), ['alpha', 'beta']);
+  shard('linkage-001.json', 'alpha');
+  assert.throws(() => loadMetricLinkage(directory), /重複または不正/);
+});
 import {
   classifyTimeKind,
   classRows,
@@ -341,10 +356,6 @@ test("computeSurveysSummary: statCode 単位に集計し removedAt は除外す�
 
 // --- pulled.mjs: pull 済み索引の読み取り ---
 
-import fs from "node:fs";
-import os from "node:os";
-import path from "node:path";
-import { loadPulled } from "../estat-catalog/pulled.mjs";
 
 function makePullDir() {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "estat-catalog-pull-"));

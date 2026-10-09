@@ -13,7 +13,7 @@ import {
 import type { ExpectedShapeAnomalyEntry } from "../shape-gate";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
-const TARGET = resolve(HERE, "../../../../data/metrics/quality/shape-exceptions");
+const TARGET = resolve(HERE, "../../../../data/metrics/quality/shape-exceptions.ts");
 
 /** scanner の `--emit-allowlist` が実際に出す形 (エントリのリテラルだけ) */
 const EMITTED = `// 生成日時: 2026-07-30T00:00:00.000Z / エントリ数: 2
@@ -42,7 +42,7 @@ describe("spliceEntries — ★ファイルを壊さないこと", () => {
   const next = spliceEntries(current, EMITTED, 2);
 
   it("import と型参照が残る (これを失うとビルドが通らない)", () => {
-    expect(next).toContain('import type { ExpectedShapeAnomalyEntry } from "./shape-gate";');
+    expect(next).toContain('import type { ExpectedShapeAnomalyEntry } from "../../../packages/data-configs/src/shape-gate";');
     expect(next).toContain(
       "export const EXPECTED_SHAPE_ANOMALY: readonly ExpectedShapeAnomalyEntry[] = [",
     );

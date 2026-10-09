@@ -21,7 +21,9 @@ const SKIP_LINE = /^\s*(?:\/\/|\/?\*|#|import\b|export\b.*\bfrom\b)/;
 
 const escape = (s: string) => s.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 // "config/coconala/assets" → "coconala/assets"。ディレクトリ付きで現れたら直書きとみなす (置き場は問わない)
-const tails = Object.values(CONFIG_PATHS).map((p) => String(p).replace(/^(?:\.claude\/)?config\//, ""));
+// data/ paths are governed by check-datasets, which permits static imports and
+// test fixtures. This contract owns literal paths into config/ only.
+const tails = Object.values(CONFIG_PATHS).filter((p) => /^(?:\.claude\/)?config\//.test(String(p))).map((p) => String(p).replace(/^(?:\.claude\/)?config\//, ""));
 const NAMES = tails.map(escape).join("|");
 const PATH_LITERAL = new RegExp(`/(?:${NAMES})(?![\\w-])`);
 // path.join(ROOT, ".claude", "config", "x.json") のように部品へ分けた形も拾う

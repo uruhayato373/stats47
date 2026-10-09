@@ -59,7 +59,7 @@ function readCsv(path) {
 
 /** metrics の git TS から rankingKey → category / title を作る (isActive:false は除く)。 */
 function loadMetricMaps() {
-  const dir = join(ROOT, "data/metrics");
+  const dir = join(ROOT, datasetDir("metrics.definitions"));
   const keyToCategory = {};
   const keyTitles = {};
   for (const f of readdirSync(dir)) {

@@ -1,4 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
+import { DEFAULT_METRIC_PRESENTATION } from '../../../../../../data/metrics/defaults/presentation';
 
 /**
  * 「退役キーは一覧に出さない」を配線ごと固定する。
@@ -56,6 +57,7 @@ function item(rankingKey: string) {
     title: rankingKey,
     subtitle: null,
     unit: "件",
+    visualization: { ...DEFAULT_METRIC_PRESENTATION, colorScheme: 'interpolateBlues', colorSchemeType: 'sequential' },
     areaType: "prefecture",
     isActive: true,
     categoryKey: "population",

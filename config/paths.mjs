@@ -37,4 +37,4 @@ export const THEME_SELECTION_VIEWPOINTS = "config/theme-selection-viewpoints.jso
 export const METRIC_DEFINITIONS_DIR = "data/metrics";
 export const METRIC_SOURCES_DIR = "data/metric-sources";
 export const METRIC_SCHEMA = `${METRIC_DEFINITIONS_DIR}/schema/metric.schema.json`;
-export const METRIC_LINKAGE = `${METRIC_DEFINITIONS_DIR}/index/linkage.json`;
+export const METRIC_LINKAGE_DIR = `${METRIC_DEFINITIONS_DIR}/index`;

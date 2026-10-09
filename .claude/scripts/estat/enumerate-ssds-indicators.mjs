@@ -56,7 +56,7 @@ const asArray = (x) => (!x ? [] : Array.isArray(x) ? x : [x]);
 
 /** 既存 config の (statsDataId, cdCat01) ペア集合 */
 function existingPairs() {
-  const dir = path.join(PROJECT_ROOT, "data/metrics");
+  const dir = path.join(PROJECT_ROOT, datasetDir("metrics.definitions"));
   const set = new Set();
   for (const f of fs.readdirSync(dir)) {
     if (!f.endsWith(".ts") || f === "index.ts") continue;
