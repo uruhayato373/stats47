@@ -23,6 +23,12 @@ export const retailEmployees: MetricConfig = {
     "colorSchemeType": "sequential",
   },
   years: { from: 2021, to: 2021 },
+  yearExclusions: [
+    {
+      years: [1976, 1979, 1982, 1985, 1988, 1991, 1994, 1997, 1999, 2002, 2004, 2007, 2011, 2014, 2016],
+      reason: "過去年は調査対象が違い 2021 年度と同じ系列として比べられないため、この系列は 2021 年度だけを掲載する (note のとおり)",
+    },
+  ],
   yearFormat: 'fiscal',
   display: { conversionFactor: 1, decimalPlaces: 0 },
   isActive: true,
