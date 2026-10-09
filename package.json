@@ -200,7 +200,7 @@
     "evidence:diff": "tsx packages/data-configs/scripts/evidence/japan-zue.ts diff",
     "evidence:pilot:data": "node .claude/scripts/data/fetch-japanese-instruction-students.mjs",
     "evidence:pilot:data:write-local": "node .claude/scripts/data/fetch-japanese-instruction-students.mjs --write-local",
-    "evidence:test": "vitest run packages/data-configs/src/evidence-inventory/japan-zue/__tests__/*.test.ts && node --test .claude/scripts/data/__tests__/fetch-japanese-instruction-students.test.mjs",
+    "evidence:test": "vitest run packages/data-configs/src/evidence-inventory/japan-zue/__tests__/ && node --test .claude/scripts/data/__tests__/fetch-japanese-instruction-students.test.mjs",
     "theme:quality:check": "node --import tsx .claude/scripts/themes/audit-theme-quality.ts",
     "theme:quality:test": "node --import tsx --test .claude/scripts/themes/__tests__/",
     "theme:py:test": "python3 .claude/scripts/themes/cultural-heritage-source.test.py && python3 .claude/scripts/themes/test_extract_bridge_inspection_age.py && python3 .claude/scripts/themes/property-prices/test_aggregate.py",
