@@ -18,7 +18,7 @@ import { sha256 } from './image-generation-manifest';
 
 export const BLOG_ARTICLE_BACKGROUND_MODEL = 'gpt-image-2';
 export const BLOG_ARTICLE_BACKGROUND_PROMPT_VERSION =
-  'blog-article-context-v2';
+  'blog-article-context-v3';
 export const BLOG_ARTICLE_BACKGROUND_ASSET_DIR =
   'assets/blog/article-backgrounds';
 
@@ -160,10 +160,10 @@ export function buildArticleBackgroundPrompt(
       ? `Article introduction: ${context.introduction}`
       : '',
     PROMPT_SUBJECT_OVERRIDES[context.slug] ??
-      'Subject: choose one compact, isolated editorial still life. When the article compares two indicators, combine two unmistakable concrete objects into a single small group. Convey the relationship with the objects themselves, never with a graph, diagram, scale of values, or surrounding landscape. Any miniature building, field, tree, person, or supporting object must belong entirely to this same right-side group.',
+      'Subject: choose one compact, isolated editorial still life with at most two main physical subjects. When the article compares two indicators, select just two unmistakable concrete subjects and combine them into one small group. If a person is needed, use only one anonymous person. Do not illustrate every example mentioned in the article: no crowd, assortment of products, or extra supporting props. Convey the relationship with the subjects themselves, never with a graph, diagram, scale of values, or surrounding landscape.',
     'Scene/backdrop: one uniform warm off-white fill across the entire canvas, with no horizon, scenery, landscape bands, ground line, distant buildings, mountains, clouds, texture, or decorative pattern. No background details may extend behind the empty title area.',
     'Style/medium: refined minimal flat-vector editorial illustration, calm, factual, and suitable for a statistics publication',
-    'Composition/framing: 1200 by 630 canvas; keep the left 55 percent completely empty, from x=0 through x=660 at every height, using only the uniform background fill. Place every part of the motif, including supporting objects, outlines, and shadows, within x=696 through x=1164 and y=63 through y=567, inside the rightmost 42 percent. Leave a clear gap between the empty area and the motif. Make this isolated group readable in a small card crop; do not enlarge it into the left area.',
+    'Composition/framing: 1200 by 630 canvas; keep the left 55 percent completely empty, from x=0 through x=660 at every height, using only the uniform background fill. Place every part of the motif, including supporting objects, outlines, and shadows, within x=696 through x=1164 and y=63 through y=567, inside the rightmost 42 percent. To leave a generous safety margin, aim for a smaller inset box at x=780 through x=1140 and y=100 through y=530: center the whole group at x=960, y=315, with total width at most 360 pixels and total height at most 430 pixels. Leave everything to the left of x=780 empty. Scale the complete group down together to fit; do not fill the available space, center it on the canvas, or enlarge it into the left area. The motif is a small right-aligned vignette occupying at most 30 percent of the canvas width, with a broad uninterrupted blank area to its left.',
     'Color palette: muted indigo, slate blue, pale blue-gray, warm off-white, plus restrained natural accent colors appropriate to the subject',
     'Constraints: no text, letters, numbers, logos, labels, watermark, maps unless geography itself is the article subject, charts, decorative patterns, photorealism, sensationalism, stereotypes, or identifiable real people',
     'Device and document constraints: all screens and paper surfaces must be blank and unmarked; no charts, graphs, plots, bars, pies, grids, tables, dashboards, code-like strokes, interface icons, menus, or logos, including inside a computer screen. A device may have a plain dark screen or be closed. Do not depict the article title, statistics, or a screenshot of its output.',
