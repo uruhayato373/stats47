@@ -313,6 +313,22 @@ updated: 2026-10-06
 - **完了条件**: 次の本番デプロイで reset step と smoke が通り、post-deploy-smoke (Playwright) も通る。
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [UNPUSHED-COMMIT-STOP-01] セッションが develop にコミットしたまま push せずに終わるのを Stop hook で差し戻す
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-10-10] [領域:管理]
+
+- **事象**: 2026-10-10、別のセッションが checker-wiring の修正 c4d0bc03a を本体の作業ツリーの develop にコミットしたまま push せずに離れた。その間 origin/develop の Develop Quality Gate は落ち続け (run 37998239267 ほか)、別のセッションが気づいて pull と push をするまで残った。いまの Stop hook 5 本 (`check-consistency-on-stop.js` / `check-docs-on-stop.js` / `check-findings-on-stop.js` / `check-weekly-cadence-on-stop.js` / `session-guard.js`) は、ローカルの develop が origin より先にある状態を見ていない。
+- **次**: Stop hook で、`git log origin/develop..develop` にそのセッションが作ったコミットがあれば 1 回だけ差し戻し、push するか、push しない理由を返答に書くよう促す。他のセッションのコミットで誤って止めないよう、セッションの開始時刻以降の自分の author のコミットに限る。fetch はしない (hook を遅くしない)。
+- **優先度の根拠**: 起きると develop の検査が赤のまま残り、後の作業者が原因の切り分けに時間を使う。ただし CI 自体は検出しているので、🔴 ではなく 🟡 とする。
+- **完了条件**: 未 push のコミットがある状態で Stop すると 1 回差し戻され、push 後は差し戻されないことをテストで固定した。
+
+### [CHECKER-WIRING-PRECOMMIT-01] 配線されていない検査スクリプトを push 前に止めるため、pre-commit でも check-checker-wiring を走らせる
+タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [検証:node .claude/scripts/lib/check-checker-wiring.cjs --baseline] [起票:2026-10-10] [領域:管理]
+
+- **事象**: 2026-10-10、`.claude/scripts/sns/check-post-trace.mjs` が CI に blocking でつながれないまま develop に push され (5c08d6c0a)、Develop Quality Gate が `[NON_BLOCKING_GATE]` / `[MISSING_GATE_TRIGGER]` で落ちた。`check-checker-wiring.cjs --baseline` は `pr-quality-check.yml` / `backlog-loop-daily.yml` / `agent-consistency-weekly.yml` と develop の Quality Gate でしか動かず、pre-commit (`apps/web/scripts/pre-commit-checks.sh`) では動かない。
+- **次**: staged に検査スクリプト (`check-*` / `audit-*`) か `.github/workflows/*.yml` が含まれるときだけ、pre-commit で `check-checker-wiring.cjs --baseline` を走らせる。所要時間を測り、遅ければ対象を staged ファイルに絞る。
+- **優先度の根拠**: CI では検出できているので被害は「push 後に赤になる」までに限られる。🟡 とする。
+- **完了条件**: 未配線の検査スクリプトを staged にすると commit が止まり、配線済みなら通ることを確認した。
+
 ### [SNS-TRACE-YT-LEGACY-01] YouTube の URL の無い投稿 42 行と content_key 不明の 2 本を Studio で確定する
 タグ: [SNS・マーケ] [種類:改善] [実行:対話] [検証:npm run sns:trace:check] [起票:2026-10-09] [領域:SNS]
 
