@@ -3340,6 +3340,18 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 - **判断すること**: data/ に置くのは JSON の中間結果だけにするか、実行コードも許すか。許すなら置き方 (名前・R2 へ上げるか) を決める。
 - **完了条件**: `blog-data-schema.md` に置き方が書かれている。
 
+### [DEPLOY-METRIC-RELEASE-TIMEOUT-01] デプロイの「指標スナップショットを R2 へ反映」段が 40 分の時間制限で止まり、R2 が途中まで新しい状態になる
+
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-09] [領域:管理]
+
+- **観測 (2026-10-09)**: PR #1116 のデプロイ (run 37909376740) が `deploy-workers.yml` の `Publish verified metric snapshots before app build`
+  (`push-exact-r2-assets.ts --manifest .local/metric-release-plan.json`) の途中で job の `timeout-minutes: 40` に達して cancelled になった。
+  アプリは旧版のまま、R2 は `app/home/featured.json` だけ更新され `app/ranking-items/all.json` は旧版、という途中の状態になった。
+  本番の主要ページは 200 で壊れていないことを確認した。差分のある分だけ送る作りなので、同じ run を再実行した。
+- **次**: 1 回の反映件数と所要時間を run のログ (`exact publish: candidates=… uploaded=… skipped=…`) で測り、並列化・job の時間制限・
+  反映を別 job に分ける、のどれで時間内に収めるかを決める。途中で止まったときに旧アプリと新データが混ざらない順序かも確かめる。
+- **完了条件**: 全件の反映が必要なリリースでも、デプロイが時間制限内に終わる (実測で余裕を持って)。
+
 ## 🟢 低 — 時期未定・条件付き (trigger は本文に)
 
 ### [DATA-SHUKUHAKU-CORRECTION-01] 宿泊旅行統計の 2026 年分を足すときに、層化基準の変更による系列の断絶を書く
