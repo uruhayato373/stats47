@@ -33,6 +33,7 @@ const makeValue = (areaCode: string, value: number): RankingValue => ({
 });
 
 const baseItem: RankingItem = {
+    visualization: { domain: { mode: 'extent' }, colorScheme: 'interpolateBlues', colorSchemeType: 'sequential',  classification: { method: 'equal-interval', classes: 5 }, trendDomain: { mode: 'extent', padding: 0.08 }, comparisonDomain: { mode: 'extent', padding: 0.05 } },
   rankingKey: "crime-count",
   areaType: "prefecture",
   rankingName: "犯罪件数",

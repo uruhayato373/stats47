@@ -1,3 +1,4 @@
+import { METRIC_DEFINITIONS_DIR } from '../../../config/paths.mjs';
 /**
  * 指標定義シート — 記事・書籍が使う指標の「単位・対象と分母・期間の型・調査・注意」を
  * data-configs (git TS SSOT) から決定的に引き、執筆 (article-writer) と審査 (blog-critic) の
@@ -145,7 +146,7 @@ async function main(): Promise<void> {
     process.exit(2);
   }
   const header = slugs.length ? `# 指標定義シート — ${slugs.join(", ")}\n\n` : "# 指標定義シート\n\n";
-  const md = `${header}${buildSheet(keys)}\n\n出典: packages/data-configs/src/metrics/<key>.ts (git TS SSOT)。表に無い前提を本文に書かない。「未宣言」は config 側の欠落なので、本文で年の型を書く前に出典 (e-Stat 表) で確かめて config へ反映する。\n`;
+  const md = `${header}${buildSheet(keys)}\n\n出典: ${METRIC_DEFINITIONS_DIR}/<key>.ts (git TS SSOT)。表に無い前提を本文に書かない。「未宣言」は config 側の欠落なので、本文で年の型を書く前に出典 (e-Stat 表) で確かめて config へ反映する。\n`;
   if (out) fs.writeFileSync(out, md);
   else process.stdout.write(md);
 }

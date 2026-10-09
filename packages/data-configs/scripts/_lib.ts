@@ -1,10 +1,11 @@
+import { METRIC_DEFINITIONS_DIR } from '../../../config/paths.mjs';
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 export const REPO_ROOT = resolve(__dirname, "../../..");
 export const PACKAGE_ROOT = resolve(__dirname, "..");
-export const METRICS_DIR = resolve(PACKAGE_ROOT, "src/metrics");
+export const METRICS_DIR = resolve(REPO_ROOT, METRIC_DEFINITIONS_DIR);
 export const REGISTRY_FILE = resolve(PACKAGE_ROOT, "src/registry.ts");
 export const D1_PATH = resolve(
   REPO_ROOT,

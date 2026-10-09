@@ -1,0 +1,6609 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "metricKey": "swimming-pool-public",
+      "pageId": "ranking:swimming-pool-public",
+      "title": "水泳プール数（公共）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010107",
+          "filters": {
+            "cdCat01": "G310204"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010107",
+          "cdCat01": "G310204"
+        },
+        "derived": false,
+        "configHash": "5d8a2db3e575cf88"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:swimming-pool-public-vs-post-office-count",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:swimming-pool-public-vs-smoke-emission-facility-count",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:swimming-pool-public-vs-total-administrative-investment",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:swimming-pool-public-vs-total-general-project-investment",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:swimming-pool-public",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:sports-participation",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "sports-participation"
+      ]
+    },
+    {
+      "metricKey": "system-consultant-annual-income",
+      "pageId": "ranking:system-consultant-annual-income",
+      "title": "システムコンサルタントの平均年収",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003445758",
+          "filters": {
+            "cdCat01": "01",
+            "cdCat02": "1101"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003445758",
+          "cdCat01": "01",
+          "cdCat02": "1101"
+        },
+        "ops": {
+          "tabCombination": [
+            {
+              "cdTab": "08,40",
+              "factor": 12
+            },
+            {
+              "cdTab": "12,44",
+              "factor": 1
+            }
+          ],
+          "valueScale": 0.1
+        },
+        "derived": true,
+        "configHash": "a96fb1fc940918e7"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:engineer-vs-professions-income",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:prefecture-salary-gap-career",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:software-engineer-income-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:system-consultant-income-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:system-consultant-income-ranking",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:system-consultant-annual-income",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:occupation-salary",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "occupation-salary"
+      ]
+    },
+    {
+      "metricKey": "table-salt-consumption-expenditure",
+      "pageId": "ranking:table-salt-consumption-expenditure",
+      "title": "食塩消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "010720010",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "010720010",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "32f9115f9361cb3c"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:gunma-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:ishikawa-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:okayama-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:okinawa-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:saitama-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:table-salt-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "table-salt-consumption-quantity",
+      "pageId": "ranking:table-salt-consumption-quantity",
+      "title": "食塩消費量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348235",
+          "filters": {
+            "cdCat01": "010720010",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348235",
+          "cdCat01": "010720010",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "87b243cb0de2bb78"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:gunma-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:ishikawa-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:okayama-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:okinawa-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:saitama-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:table-salt-consumption-quantity-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:table-salt-consumption-quantity",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:household-food-spending",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "household-food-spending"
+      ]
+    },
+    {
+      "metricKey": "table-sofa-consumption-expenditure",
+      "pageId": "ranking:table-sofa-consumption-expenditure",
+      "title": "テーブル・ソファー消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "040130030",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "040130030",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "520668414b77aa3e"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:table-sofa-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "tablet-ownership-multi-person-households-per-1000",
+      "pageId": "ranking:tablet-ownership-multi-person-households-per-1000",
+      "title": "タブレット端末所有数量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010212",
+          "filters": {
+            "cdCat01": "#L03614"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010212",
+          "cdCat01": "#L03614"
+        },
+        "derived": false,
+        "configHash": "36d29f720104fab1"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:tablet-ownership-multi-person-households-per-1000",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "tableware-consumption-expenditure",
+      "pageId": "ranking:tableware-consumption-expenditure",
+      "title": "茶わん・皿・鉢消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "040400010",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "040400010",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "0f4bb8abe5be1bfc"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:tableware-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "tableware-consumption-quantity",
+      "pageId": "ranking:tableware-consumption-quantity",
+      "title": "茶わん・皿・鉢消費量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348235",
+          "filters": {
+            "cdCat01": "040400010",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348235",
+          "cdCat01": "040400010",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "0077df3fb7e59a50"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:tableware-consumption-quantity",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "taro-consumption-expenditure",
+      "pageId": "ranking:taro-consumption-expenditure",
+      "title": "さといも消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "010512030",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "010512030",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "a92f09606a76780b"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:aichi-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:fukui-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:miyazaki-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:shizuoka-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:toyama-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamagata-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:taro-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "taro-consumption-quantity",
+      "pageId": "ranking:taro-consumption-quantity",
+      "title": "さといも消費量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348235",
+          "filters": {
+            "cdCat01": "010512030",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348235",
+          "cdCat01": "010512030",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "1b10da2c5b13f567"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:aichi-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:fukui-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:miyazaki-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:shizuoka-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:taro-consumption-quantity-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:toyama-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamagata-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:taro-consumption-quantity",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "tatami-per-dwelling-owner",
+      "pageId": "ranking:tatami-per-dwelling-owner",
+      "title": "持ち家住宅の居住室の畳数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010208",
+          "filters": {
+            "cdCat01": "#H0210201"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010208",
+          "cdCat01": "#H0210201"
+        },
+        "derived": false,
+        "configHash": "aed32101664b4812"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:dual-income-household-ratio-vs-tatami-per-dwelling-owner",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:tatami-per-dwelling-owner",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "tatami-per-dwelling-rented",
+      "pageId": "ranking:tatami-per-dwelling-rented",
+      "title": "借家住宅の居住室の畳数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010208",
+          "filters": {
+            "cdCat01": "#H0210202"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010208",
+          "cdCat01": "#H0210202"
+        },
+        "derived": false,
+        "configHash": "bdf28f96ad292bd5"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:tatami-per-dwelling-rented",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "tatami-per-person-owner",
+      "pageId": "ranking:tatami-per-person-owner",
+      "title": "持ち家住宅の畳数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010208",
+          "filters": {
+            "cdCat01": "#H0220301"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010208",
+          "cdCat01": "#H0220301"
+        },
+        "derived": false,
+        "configHash": "6fa9cf7bc87891d8"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:tatami-per-person-owner",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "tatami-per-person-rented",
+      "pageId": "ranking:tatami-per-person-rented",
+      "title": "借家住宅の畳数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010208",
+          "filters": {
+            "cdCat01": "#H0220302"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010208",
+          "cdCat01": "#H0220302"
+        },
+        "derived": false,
+        "configHash": "e3e2fa14d104fc77"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:tatami-per-person-rented",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "tatami-replacement-consumption-expenditure",
+      "pageId": "ranking:tatami-replacement-consumption-expenditure",
+      "title": "畳替え消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "020220010",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "020220010",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "459f772528257dae"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:tatami-replacement-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "tatami-replacement-consumption-quantity",
+      "pageId": "ranking:tatami-replacement-consumption-quantity",
+      "title": "畳替え消費量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348235",
+          "filters": {
+            "cdCat01": "020220010",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348235",
+          "cdCat01": "020220010",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "c27dfcf9c676e512"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:tatami-replacement-consumption-quantity",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "taxi-driver-annual-income",
+      "pageId": "ranking:taxi-driver-annual-income",
+      "title": "タクシー運転者の平均年収",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003445758",
+          "filters": {
+            "cdCat01": "01",
+            "cdCat02": "1612"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003445758",
+          "cdCat01": "01",
+          "cdCat02": "1612"
+        },
+        "ops": {
+          "tabCombination": [
+            {
+              "cdTab": "08,40",
+              "factor": 12
+            },
+            {
+              "cdTab": "12,44",
+              "factor": 1
+            }
+          ],
+          "valueScale": 0.1
+        },
+        "derived": true,
+        "configHash": "1e0920b525c46dda"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:occupation-salary",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:prefecture-salary-gap-career",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:taxi-driver-income-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:truck-driver-2024-crisis",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:taxi-driver-annual-income",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:occupation-salary",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "occupation-salary"
+      ]
+    },
+    {
+      "metricKey": "taxi-fare-consumption-expenditure",
+      "pageId": "ranking:taxi-fare-consumption-expenditure",
+      "title": "タクシー代消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "070100070",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "070100070",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "616893d390edc3d4"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:taxi-fare-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "taxpayer-count-equal",
+      "pageId": "ranking:taxpayer-count-equal",
+      "title": "納税義務者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010103",
+          "filters": {
+            "cdCat01": "C120130"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010103",
+          "cdCat01": "C120130"
+        },
+        "derived": false,
+        "configHash": "71f20c20cde316a3"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:taxpayer-count-equal",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:local-finance",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:taxpayer-count-equal",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "taxpayer-count-income",
+      "pageId": "ranking:taxpayer-count-income",
+      "title": "納税義務者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010103",
+          "filters": {
+            "cdCat01": "C120120"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010103",
+          "cdCat01": "C120120"
+        },
+        "derived": false,
+        "configHash": "718975ab05896e28"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:taxpayer-count-income",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:local-finance",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:taxpayer-count-income",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "taxpayer-ratio-per-pref-resident",
+      "pageId": "ranking:taxpayer-ratio-per-pref-resident",
+      "title": "納税義務者割合",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010204",
+          "filters": {
+            "cdCat01": "#D02207"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010204",
+          "cdCat01": "#D02207"
+        },
+        "derived": false,
+        "configHash": "97284392c8501609"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:local-finance",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area:01000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:02000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:03000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:04000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:05000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:06000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:07000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:08000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:09000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:10000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:11000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:12000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:13000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:14000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:15000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:16000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:17000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:18000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:19000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:20000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:21000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:22000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:23000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:24000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:25000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:26000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:27000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:28000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:29000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:30000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:31000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:32000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:33000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:34000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:35000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:36000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:37000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:38000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:39000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:40000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:41000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:42000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:43000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:44000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:45000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:46000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:47000",
+          "kind": "area"
+        },
+        {
+          "pageId": "blog:household-income-tokyo-okinawa",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:local-tax-revenue-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:real-disposable-income-vs-taxpayer-ratio-per-pref-resident",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:real-income-taxpayer",
+          "kind": "blog"
+        },
+        {
+          "pageId": "japan-theme:local-finance",
+          "kind": "japan-theme"
+        },
+        {
+          "pageId": "ranking:taxpayer-ratio-per-pref-resident",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:local-finance",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "local-finance"
+      ]
+    },
+    {
+      "metricKey": "tea-drink-consumption-expenditure",
+      "pageId": "ranking:tea-drink-consumption-expenditure",
+      "title": "茶飲料消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "011010040",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "011010040",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "6733a24fc32cf048"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:tea-drink-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "telephone-subscription-count",
+      "pageId": "ranking:telephone-subscription-count",
+      "title": "電話加入数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010108",
+          "filters": {
+            "cdCat01": "H7601"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010108",
+          "cdCat01": "H7601"
+        },
+        "derived": false,
+        "configHash": "828825c9a2957ee6"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:telephone-subscription-count",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "telephone-subscription-count-per-1000",
+      "pageId": "ranking:telephone-subscription-count-per-1000",
+      "title": "電話加入数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010208",
+          "filters": {
+            "cdCat01": "#H06305"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010208",
+          "cdCat01": "#H06305"
+        },
+        "derived": false,
+        "configHash": "beaea5c9e1b39d52"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:telephone-subscription-count-per-1000",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "television-consumption-expenditure",
+      "pageId": "ranking:television-consumption-expenditure",
+      "title": "テレビ消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "090100010",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "090100010",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "a3d0384be350b74c"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:television-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "television-consumption-quantity",
+      "pageId": "ranking:television-consumption-quantity",
+      "title": "テレビ消費量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348235",
+          "filters": {
+            "cdCat01": "090100010",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348235",
+          "cdCat01": "090100010",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "4f1705dfa0004610"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:television-consumption-quantity",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "telework-rate",
+      "pageId": "ranking:telework-rate",
+      "title": "テレワーク実施率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004008436",
+          "filters": {
+            "cdCat01": "0",
+            "cdCat02": "00",
+            "cdCat04": "0",
+            "cdCat05": "0"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0004008436",
+          "cdCat01": "0",
+          "cdCat02": "00",
+          "cdCat04": "0",
+          "cdCat05": "0"
+        },
+        "ops": {
+          "axisRatio": {
+            "axis": "cat03",
+            "numeratorCodes": [
+              "1"
+            ],
+            "denominatorCodes": [
+              "0"
+            ]
+          }
+        },
+        "derived": true,
+        "configHash": "e19e10d179a6d288"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:01000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:labor-mobility",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:engineer-telework-prefecture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:it-establishments-prefecture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:it-industry-concentration",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:long-commute-telework-potential",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:prefecture-salary-remote-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:telework-gap-tokyo-6x",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:telework-rate-tokyo-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:telework-rate",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:labor-mobility",
+          "kind": "theme"
+        },
+        {
+          "pageId": "theme:labor-wages",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "labor-mobility",
+        "labor-wages"
+      ]
+    },
+    {
+      "metricKey": "tempura-fry-consumption-expenditure",
+      "pageId": "ranking:tempura-fry-consumption-expenditure",
+      "title": "天ぷら・フライ消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "010920050",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "010920050",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "28f6fd797e5e58da"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:tempura-fry-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:tempura-fry-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "tennis-court-public",
+      "pageId": "ranking:tennis-court-public",
+      "title": "テニスコート数（公共）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010107",
+          "filters": {
+            "cdCat01": "G310208"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010107",
+          "cdCat01": "G310208"
+        },
+        "derived": false,
+        "configHash": "3e3461e7eb801b3c"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:tennis-court-public",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "tertiary-activity-avg-time-employed-female",
+      "pageId": "ranking:tertiary-activity-avg-time-employed-female",
+      "title": "3次活動の平均時間",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010213",
+          "filters": {
+            "cdCat01": "#M0130206"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010213",
+          "cdCat01": "#M0130206"
+        },
+        "derived": false,
+        "configHash": "e74b0ac6be0d4a51"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:tertiary-activity-avg-time-employed-female",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "tertiary-activity-avg-time-employed-male",
+      "pageId": "ranking:tertiary-activity-avg-time-employed-male",
+      "title": "3次活動の平均時間",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010213",
+          "filters": {
+            "cdCat01": "#M0130106"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010213",
+          "cdCat01": "#M0130106"
+        },
+        "derived": false,
+        "configHash": "6844e9e574a561aa"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:tertiary-activity-avg-time-employed-male",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "tertiary-activity-avg-time-unemployed-female",
+      "pageId": "ranking:tertiary-activity-avg-time-unemployed-female",
+      "title": "3次活動の平均時間",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010213",
+          "filters": {
+            "cdCat01": "#M0130207"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010213",
+          "cdCat01": "#M0130207"
+        },
+        "derived": false,
+        "configHash": "8af27f8377a5fa00"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:tertiary-activity-avg-time-unemployed-female",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "tertiary-activity-avg-time-unemployed-male",
+      "pageId": "ranking:tertiary-activity-avg-time-unemployed-male",
+      "title": "3次活動の平均時間",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010213",
+          "filters": {
+            "cdCat01": "#M0130107"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010213",
+          "cdCat01": "#M0130107"
+        },
+        "derived": false,
+        "configHash": "eb2466089e90e503"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:tertiary-activity-avg-time-unemployed-male",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "tertiary-industry-employees-per-establishment",
+      "pageId": "ranking:tertiary-industry-employees-per-establishment",
+      "title": "第3次産業従業者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010203",
+          "filters": {
+            "cdCat01": "#C03306"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010203",
+          "cdCat01": "#C03306"
+        },
+        "derived": false,
+        "configHash": "06c4c10dd6255f22"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:tertiary-industry-employees-per-establishment",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "tertiary-industry-employees-per-establishment-census",
+      "pageId": "ranking:tertiary-industry-employees-per-establishment-census",
+      "title": "第3次産業従業者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010203",
+          "filters": {
+            "cdCat01": "#C03304"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010203",
+          "cdCat01": "#C03304"
+        },
+        "derived": false,
+        "configHash": "ebf4f35bd1bb9ca8"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:tertiary-industry-employees-per-establishment-census",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "tertiary-industry-establishment-ratio",
+      "pageId": "ranking:tertiary-industry-establishment-ratio",
+      "title": "第3次産業事業所数構成比",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010203",
+          "filters": {
+            "cdCat01": "#C02105"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010203",
+          "cdCat01": "#C02105"
+        },
+        "derived": false,
+        "configHash": "a0e9f53309cb4b08"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:small-business-dominance-map",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:tertiary-industry-establishment-ratio",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "tertiary-industry-establishment-ratio-census",
+      "pageId": "ranking:tertiary-industry-establishment-ratio-census",
+      "title": "第3次産業事業所数構成比",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010203",
+          "filters": {
+            "cdCat01": "#C02103"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010203",
+          "cdCat01": "#C02103"
+        },
+        "derived": false,
+        "configHash": "6f8edff99ca20ce2"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:tertiary-industry-establishment-ratio-census",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "textbook-consumption-expenditure",
+      "pageId": "ranking:textbook-consumption-expenditure",
+      "title": "教科書・学習参考教材消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "080200000",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "080200000",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "8ab08a708c1716eb"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:textbook-expenditure-ranking",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:textbook-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "textbooks-consumption-expenditure",
+      "pageId": "ranking:textbooks-consumption-expenditure",
+      "title": "教科書消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "080200010",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "080200010",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "b01a57d55f945692"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:textbooks-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "theater-music-hall",
+      "pageId": "ranking:theater-music-hall",
+      "title": "劇場・音楽堂等数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010107",
+          "filters": {
+            "cdCat01": "G1604"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010107",
+          "cdCat01": "G1604"
+        },
+        "derived": false,
+        "configHash": "873a82145703f56f"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:library-museum-cultural-capital",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:theater-music-hall",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "theft-criminal-arrest-rate",
+      "pageId": "ranking:theft-criminal-arrest-rate",
+      "title": "窃盗犯検挙率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010211",
+          "filters": {
+            "cdCat01": "#K06204"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010211",
+          "cdCat01": "#K06204"
+        },
+        "derived": false,
+        "configHash": "76d3b1d21e39e6d1"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "japan-theme:safety",
+          "kind": "japan-theme"
+        },
+        {
+          "pageId": "ranking:theft-criminal-arrest-rate",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:safety",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "safety"
+      ]
+    },
+    {
+      "metricKey": "theft-offenses-recognized",
+      "pageId": "ranking:theft-offenses-recognized",
+      "title": "窃盗犯認知件数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010111",
+          "filters": {
+            "cdCat01": "K420103"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010111",
+          "cdCat01": "K420103"
+        },
+        "derived": false,
+        "configHash": "89fd89dea0cace2d"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:theft-offenses-recognized",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:safety",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "safety"
+      ]
+    },
+    {
+      "metricKey": "theft-offenses-recognized-per-1000",
+      "pageId": "ranking:theft-offenses-recognized-per-1000",
+      "title": "窃盗犯認知件数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010211",
+          "filters": {
+            "cdCat01": "#K06104"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010211",
+          "cdCat01": "#K06104"
+        },
+        "derived": false,
+        "configHash": "f04b1155d20f06ba"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:crime-rate-regional-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "japan-theme:safety",
+          "kind": "japan-theme"
+        },
+        {
+          "pageId": "ranking:theft-offenses-recognized-per-1000",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:safety",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "safety"
+      ]
+    },
+    {
+      "metricKey": "theme-age-composition-elderly-population",
+      "pageId": null,
+      "title": "年齢3区分人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A1303"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A1303"
+        },
+        "derived": false,
+        "configHash": "baa3543adfba7c85"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-age-composition-elderly-population",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
+      "metricKey": "theme-age-composition-production-age-population",
+      "pageId": null,
+      "title": "年齢3区分人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A1302"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A1302"
+        },
+        "derived": false,
+        "configHash": "ad8849c3c5210e98"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-age-composition-production-age-population",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
+      "metricKey": "theme-age-composition-young-population",
+      "pageId": null,
+      "title": "年齢3区分人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A1301"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A1301"
+        },
+        "derived": false,
+        "configHash": "3b9e6ca0f5ce1d8b"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-age-composition-young-population",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
+      "metricKey": "theme-fire-injured-count",
+      "pageId": null,
+      "title": "火災負傷者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010111",
+          "filters": {
+            "cdCat01": "K2111"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010111",
+          "cdCat01": "K2111"
+        },
+        "derived": false,
+        "configHash": "268e951b9b0606dc"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-fire-injured-count",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:safety",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "safety"
+      ]
+    },
+    {
+      "metricKey": "theme-population-pyramid-0-4-female",
+      "pageId": null,
+      "title": "5歳階級別人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A120102"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A120102"
+        },
+        "derived": false,
+        "configHash": "78afaea3f440aa00"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-population-pyramid-0-4-female",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
+      "metricKey": "theme-population-pyramid-0-4-male",
+      "pageId": null,
+      "title": "5歳階級別人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A120101"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A120101"
+        },
+        "derived": false,
+        "configHash": "5cf7bf80f6e4950b"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-population-pyramid-0-4-male",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
+      "metricKey": "theme-population-pyramid-10-14-female",
+      "pageId": null,
+      "title": "5歳階級別人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A120302"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A120302"
+        },
+        "derived": false,
+        "configHash": "5d7cd9a90ff21376"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-population-pyramid-10-14-female",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
+      "metricKey": "theme-population-pyramid-10-14-male",
+      "pageId": null,
+      "title": "5歳階級別人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A120301"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A120301"
+        },
+        "derived": false,
+        "configHash": "c5e2690a50623e65"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-population-pyramid-10-14-male",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
+      "metricKey": "theme-population-pyramid-15-19-female",
+      "pageId": null,
+      "title": "5歳階級別人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A120402"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A120402"
+        },
+        "derived": false,
+        "configHash": "2849d5b6a2819401"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-population-pyramid-15-19-female",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
+      "metricKey": "theme-population-pyramid-15-19-male",
+      "pageId": null,
+      "title": "5歳階級別人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A120401"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A120401"
+        },
+        "derived": false,
+        "configHash": "1e445a85267aead2"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-population-pyramid-15-19-male",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
+      "metricKey": "theme-population-pyramid-20-24-female",
+      "pageId": null,
+      "title": "5歳階級別人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A120502"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A120502"
+        },
+        "derived": false,
+        "configHash": "321402c77daa4584"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-population-pyramid-20-24-female",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
+      "metricKey": "theme-population-pyramid-20-24-male",
+      "pageId": null,
+      "title": "5歳階級別人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A120501"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A120501"
+        },
+        "derived": false,
+        "configHash": "649969c409b3b63f"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-population-pyramid-20-24-male",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
+      "metricKey": "theme-population-pyramid-25-29-female",
+      "pageId": null,
+      "title": "5歳階級別人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A120602"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A120602"
+        },
+        "derived": false,
+        "configHash": "d4d0392c3020c937"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-population-pyramid-25-29-female",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
+      "metricKey": "theme-population-pyramid-25-29-male",
+      "pageId": null,
+      "title": "5歳階級別人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A120601"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A120601"
+        },
+        "derived": false,
+        "configHash": "71c88e6fcc350b0c"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-population-pyramid-25-29-male",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
+      "metricKey": "theme-population-pyramid-30-34-female",
+      "pageId": null,
+      "title": "5歳階級別人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A120702"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A120702"
+        },
+        "derived": false,
+        "configHash": "8096d43d3b2b4aea"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-population-pyramid-30-34-female",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
+      "metricKey": "theme-population-pyramid-30-34-male",
+      "pageId": null,
+      "title": "5歳階級別人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A120701"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A120701"
+        },
+        "derived": false,
+        "configHash": "60e8146ed317bc89"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-population-pyramid-30-34-male",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
+      "metricKey": "theme-population-pyramid-35-39-female",
+      "pageId": null,
+      "title": "5歳階級別人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A120802"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A120802"
+        },
+        "derived": false,
+        "configHash": "aeb10c7adf4a8665"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-population-pyramid-35-39-female",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
+      "metricKey": "theme-population-pyramid-35-39-male",
+      "pageId": null,
+      "title": "5歳階級別人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A120801"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A120801"
+        },
+        "derived": false,
+        "configHash": "c95132d98109cb76"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-population-pyramid-35-39-male",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
+      "metricKey": "theme-population-pyramid-40-44-female",
+      "pageId": null,
+      "title": "5歳階級別人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A120902"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A120902"
+        },
+        "derived": false,
+        "configHash": "6a6fdfcbc9008368"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-population-pyramid-40-44-female",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
+      "metricKey": "theme-population-pyramid-40-44-male",
+      "pageId": null,
+      "title": "5歳階級別人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A120901"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A120901"
+        },
+        "derived": false,
+        "configHash": "d225bc88b5e85c83"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-population-pyramid-40-44-male",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
+      "metricKey": "theme-population-pyramid-45-49-female",
+      "pageId": null,
+      "title": "5歳階級別人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A121002"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A121002"
+        },
+        "derived": false,
+        "configHash": "c662de99d3fd0c0a"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-population-pyramid-45-49-female",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
+      "metricKey": "theme-population-pyramid-45-49-male",
+      "pageId": null,
+      "title": "5歳階級別人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A121001"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A121001"
+        },
+        "derived": false,
+        "configHash": "4c23793ad9005f61"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-population-pyramid-45-49-male",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
+      "metricKey": "theme-population-pyramid-5-9-female",
+      "pageId": null,
+      "title": "5歳階級別人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A120202"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A120202"
+        },
+        "derived": false,
+        "configHash": "9569822844d0a483"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-population-pyramid-5-9-female",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
+      "metricKey": "theme-population-pyramid-5-9-male",
+      "pageId": null,
+      "title": "5歳階級別人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A120201"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A120201"
+        },
+        "derived": false,
+        "configHash": "5c6eaa6b3a183b68"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-population-pyramid-5-9-male",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
+      "metricKey": "theme-population-pyramid-50-54-female",
+      "pageId": null,
+      "title": "5歳階級別人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A121102"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A121102"
+        },
+        "derived": false,
+        "configHash": "c408d618c0e8fe7b"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-population-pyramid-50-54-female",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
+      "metricKey": "theme-population-pyramid-50-54-male",
+      "pageId": null,
+      "title": "5歳階級別人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A121101"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A121101"
+        },
+        "derived": false,
+        "configHash": "f42a335b49700510"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-population-pyramid-50-54-male",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
+      "metricKey": "theme-population-pyramid-55-59-female",
+      "pageId": null,
+      "title": "5歳階級別人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A121202"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A121202"
+        },
+        "derived": false,
+        "configHash": "e1636a935edcc308"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-population-pyramid-55-59-female",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
+      "metricKey": "theme-population-pyramid-55-59-male",
+      "pageId": null,
+      "title": "5歳階級別人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A121201"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A121201"
+        },
+        "derived": false,
+        "configHash": "8de49f307aee3763"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-population-pyramid-55-59-male",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
+      "metricKey": "theme-population-pyramid-60-64-female",
+      "pageId": null,
+      "title": "5歳階級別人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A121302"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A121302"
+        },
+        "derived": false,
+        "configHash": "1cd43ae20bcdb739"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-population-pyramid-60-64-female",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
+      "metricKey": "theme-population-pyramid-60-64-male",
+      "pageId": null,
+      "title": "5歳階級別人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A121301"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A121301"
+        },
+        "derived": false,
+        "configHash": "6bbb7a61c63944f2"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-population-pyramid-60-64-male",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
+      "metricKey": "theme-population-pyramid-65-69-female",
+      "pageId": null,
+      "title": "5歳階級別人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A121402"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A121402"
+        },
+        "derived": false,
+        "configHash": "3cd3e4edfad116de"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-population-pyramid-65-69-female",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
+      "metricKey": "theme-population-pyramid-65-69-male",
+      "pageId": null,
+      "title": "5歳階級別人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A121401"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A121401"
+        },
+        "derived": false,
+        "configHash": "be8d275e22d06945"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-population-pyramid-65-69-male",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
+      "metricKey": "theme-population-pyramid-70-74-female",
+      "pageId": null,
+      "title": "5歳階級別人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A121502"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A121502"
+        },
+        "derived": false,
+        "configHash": "9ee4761c27b48e2f"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-population-pyramid-70-74-female",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
+      "metricKey": "theme-population-pyramid-70-74-male",
+      "pageId": null,
+      "title": "5歳階級別人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A121501"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A121501"
+        },
+        "derived": false,
+        "configHash": "6023bc1fb2b1f8d4"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-population-pyramid-70-74-male",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
+      "metricKey": "theme-population-pyramid-75-79-female",
+      "pageId": null,
+      "title": "5歳階級別人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A121602"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A121602"
+        },
+        "derived": false,
+        "configHash": "9d61767769727b2c"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-population-pyramid-75-79-female",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
+      "metricKey": "theme-population-pyramid-75-79-male",
+      "pageId": null,
+      "title": "5歳階級別人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A121601"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A121601"
+        },
+        "derived": false,
+        "configHash": "7636b1b44e3a5717"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-population-pyramid-75-79-male",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
+      "metricKey": "theme-population-pyramid-80-plus-female",
+      "pageId": null,
+      "title": "5歳階級別人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A141802"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A141802"
+        },
+        "derived": false,
+        "configHash": "c6051b0342365458"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-population-pyramid-80-plus-female",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
+      "metricKey": "theme-population-pyramid-80-plus-male",
+      "pageId": null,
+      "title": "5歳階級別人口",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A141801"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A141801"
+        },
+        "derived": false,
+        "configHash": "9c2592e0cfc92f8b"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-population-pyramid-80-plus-male",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:aging-society",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "aging-society"
+      ]
+    },
+    {
+      "metricKey": "theme-prostitution-crime-recognition-count",
+      "pageId": null,
+      "title": "風俗犯認知件数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010111",
+          "filters": {
+            "cdCat01": "K420105"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010111",
+          "cdCat01": "K420105"
+        },
+        "derived": false,
+        "configHash": "c3df864847c5623b"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:theme-prostitution-crime-recognition-count",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:safety",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "safety"
+      ]
+    },
+    {
+      "metricKey": "thermal-power-plant-count",
+      "pageId": null,
+      "title": "火力発電所数",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "ksjDataId": "P03",
+          "ksjVersion": "13"
+        },
+        "fetcherKey": "mlit_ksj",
+        "configHash": "4ea62d6c9c854fc7"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:thermal-power-plant-count",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "three-generation-household-members",
+      "pageId": "ranking:three-generation-household-members",
+      "title": "3世代世帯人員",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003445285",
+          "filters": {
+            "cdCat01": "R1"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003445285",
+          "cdCat01": "R1"
+        },
+        "derived": false,
+        "configHash": "4d5f77b1c42c34b0"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:three-generation-household-members",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:living-housing",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "living-housing"
+      ]
+    },
+    {
+      "metricKey": "tissue-paper-consumption-expenditure",
+      "pageId": "ranking:tissue-paper-consumption-expenditure",
+      "title": "ティッシュペーパー消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "040501010",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "040501010",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "4146f0234f61d8a4"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:tissue-paper-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:tissue-paper-consumption-expenditure-vs-average-weight",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:tissue-paper-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "tobacco-consumption-expenditure",
+      "pageId": "ranking:tobacco-consumption-expenditure",
+      "title": "たばこ消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "100140001",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "100140001",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "315bb153b626a814"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:tobacco-expenditure-ranking",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:tobacco-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "tofu-consumption-expenditure",
+      "pageId": "ranking:tofu-consumption-expenditure",
+      "title": "豆腐消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "010530010",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "010530010",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "72bd1b0275d2327d"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:iwate-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:okinawa-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:tofu-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "tofu-consumption-quantity",
+      "pageId": "ranking:tofu-consumption-quantity",
+      "title": "豆腐消費量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348235",
+          "filters": {
+            "cdCat01": "010530010",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348235",
+          "cdCat01": "010530010",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "36bc719eb984f409"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:food-trio-prefecture-map",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:iwate-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:okinawa-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:tofu-consumption-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:tofu-consumption-quantity",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "toilet-paper-consumption-expenditure",
+      "pageId": "ranking:toilet-paper-consumption-expenditure",
+      "title": "トイレットペーパー消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "040501020",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "040501020",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "f7aad5001e2b00bb"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:toilet-paper-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:toilet-paper-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "toll-road-fee-consumption-expenditure",
+      "pageId": "ranking:toll-road-fee-consumption-expenditure",
+      "title": "有料道路料消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "070100090",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "070100090",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "c5b7b2619ff16d76"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:toll-road-fee-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "tomato-consumption-expenditure",
+      "pageId": "ranking:tomato-consumption-expenditure",
+      "title": "トマト消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "010513050",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "010513050",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "585ea06ff53dfa18"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:fukuoka-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:saitama-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:tokyo-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:toyama-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:tomato-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "tomato-consumption-quantity",
+      "pageId": "ranking:tomato-consumption-quantity",
+      "title": "トマト消費量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348235",
+          "filters": {
+            "cdCat01": "010513050",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348235",
+          "cdCat01": "010513050",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "8f46bb9b4ca7530c"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:fukuoka-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:saitama-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:toyama-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:tomato-consumption-quantity",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:household-food-spending",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "household-food-spending"
+      ]
+    },
+    {
+      "metricKey": "toothbrush-consumption-expenditure",
+      "pageId": "ranking:toothbrush-consumption-expenditure",
+      "title": "歯ブラシ消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "100120020",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "100120020",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "12e898ecf4fef8e7"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:toothbrush-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "toothpaste-consumption-expenditure",
+      "pageId": "ranking:toothpaste-consumption-expenditure",
+      "title": "歯磨き消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "100121080",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "100121080",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "feee333faca204f4"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:toothpaste-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "total-administrative-investment",
+      "pageId": "ranking:total-administrative-investment",
+      "title": "行政総投資額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010104",
+          "filters": {
+            "cdCat01": "D5100"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010104",
+          "cdCat01": "D5100"
+        },
+        "derived": false,
+        "configHash": "65613745a7013006"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:swimming-pool-public-vs-total-administrative-investment",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:total-administrative-investment",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "total-area-excluding-northern-territories-and-takeshima",
+      "pageId": "ranking:total-area-excluding-northern-territories-and-takeshima",
+      "title": "総面積",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010102",
+          "filters": {
+            "cdCat01": "B1101"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010102",
+          "cdCat01": "B1101"
+        },
+        "derived": false,
+        "configHash": "aa32302c303b850f"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "area:01000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:02000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:03000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:04000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:05000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:06000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:07000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:08000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:09000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:10000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:11000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:12000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:13000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:14000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:15000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:16000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:17000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:18000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:19000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:20000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:21000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:22000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:23000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:24000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:25000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:26000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:27000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:28000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:29000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:30000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:31000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:32000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:33000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:34000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:35000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:36000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:37000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:38000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:39000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:40000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:41000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:42000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:43000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:44000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:45000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:46000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:47000",
+          "kind": "area"
+        },
+        {
+          "pageId": "blog:allocation-tax-area",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:local-allocation-tax-prefecture-vs-total-area-excluding",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:roadside-station-count-vs-forest-road-length",
+          "kind": "blog"
+        },
+        {
+          "pageId": "municipality-ranking:total-area-excluding-northern-territories-and-takeshima",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:land-area",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:total-area-excluding-northern-territories-and-takeshima",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "total-area-including-northern-territories-and-takeshima",
+      "pageId": "ranking:total-area-including-northern-territories-and-takeshima",
+      "title": "総面積",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010202",
+          "filters": {
+            "cdCat01": "#B011001"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010202",
+          "cdCat01": "#B011001"
+        },
+        "derived": false,
+        "configHash": "0d15ddd09f28152b"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:roadside-station-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:total-area-including-northern-territories-and-takeshima",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "total-area-prefecture-ratio",
+      "pageId": null,
+      "title": "総面積（都道府県面積に占める割合）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020302",
+          "filters": {
+            "cdCat01": "#B01101"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020302",
+          "cdCat01": "#B01101"
+        },
+        "derived": false,
+        "configHash": "c7ff4b48790c20e3"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:total-area-prefecture-ratio",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:land-area",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:total-area-prefecture-ratio",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "total-assessed-land-area",
+      "pageId": "ranking:total-assessed-land-area",
+      "title": "評価総地積",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010102",
+          "filters": {
+            "cdCat01": "B1201"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010102",
+          "cdCat01": "B1201"
+        },
+        "derived": false,
+        "configHash": "eafc8c43103ec3d4"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:total-assessed-land-area",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:land-area",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:total-assessed-land-area",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "total-assessed-land-area-ratio",
+      "pageId": "ranking:total-assessed-land-area-ratio",
+      "title": "評価総地積割合",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010202",
+          "filters": {
+            "cdCat01": "#B01401"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010202",
+          "cdCat01": "#B01401"
+        },
+        "derived": false,
+        "configHash": "5c88b9470f3d9810"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:total-assessed-land-area-ratio",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    }
+  ]
+}

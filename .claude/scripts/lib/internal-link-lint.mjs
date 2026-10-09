@@ -59,7 +59,7 @@ const SOURCES = {
   goneBlogSlugs: "apps/web/src/config/gone-blog-slugs.ts",
   blogRedirects: "apps/web/src/config/blog-redirects.ts",
   categoryKeys: "packages/data-configs/src/types.ts",
-  metricsDir: "packages/data-configs/src/metrics",
+  metricsDir: datasetDir("metrics.definitions"),
   themeSets: "packages/types/src/indicator-sets",
   geoAnalyses: "packages/data-configs/src/business-plan/m1.ts",
 };

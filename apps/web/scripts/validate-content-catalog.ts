@@ -10,6 +10,7 @@ import {
   type ContentPage,
 } from '@stats47/data-configs/content';
 import Ajv from 'ajv';
+import { METRICS_REGISTRY } from '@stats47/data-configs';
 
 import { datasetPath, datasetDir } from '../../../config/datasets.mjs';
 
@@ -96,6 +97,9 @@ for (const tag of CONTENT_TAGS)
   }
 const ids = new Set(catalog.pages.map((page) => page.id));
 for (const page of catalog.pages) {
+  for (const key of [...(page.rankingKeys ?? []), ...(['ranking', 'municipality-ranking'].includes(page.kind) ? [page.key] : [])]) {
+    if (!METRICS_REGISTRY[key]) throw new Error(`未登録指標ID: ${page.id} → ${key}`);
+  }
   if (page.id.split(':')[0] !== page.kind) {
     throw new Error(`IDとページ種別の不一致: ${page.id} ${page.kind}`);
   }

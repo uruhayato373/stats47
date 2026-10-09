@@ -70,7 +70,7 @@ describe('ranking header density contract', () => {
     const trendRenderers = findRankingComponentFiles(RANKING_COMPONENT_ROOT)
       .filter((file) => {
         const src = readFileSync(file, 'utf8');
-        return src.includes('<MiniLineChart') && src.includes('NationalFigure');
+        return src.includes('<NumericTrendChart') && src.includes('NationalFigure');
       })
       .map((file) => path.relative(RANKING_COMPONENT_ROOT, file));
 
@@ -79,11 +79,9 @@ describe('ranking header density contract', () => {
     ]);
   });
 
-  it('480〜767pxで全国平均を横型に圧縮し、768px以上で縦型に戻す', () => {
-    expect(NATIONAL_AVERAGE_STAT).toContain(
-      '@sm:grid-cols-[minmax(0,1fr)_260px]'
-    );
-    expect(NATIONAL_AVERAGE_STAT).toContain('@md:block');
+  it('基準値と単位は折り返さず、期間と数値軸を表示する', () => {
+    expect(NATIONAL_AVERAGE_STAT).toContain('whitespace-nowrap');
+    expect(NATIONAL_AVERAGE_STAT).toContain('selectedYear=');
     expect(NATIONAL_AVERAGE_STAT).toContain('<SurfaceCard');
     expect(NATIONAL_AVERAGE_STAT).not.toContain('<ChartCard');
   });

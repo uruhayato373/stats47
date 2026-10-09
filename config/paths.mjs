@@ -32,3 +32,9 @@ export const YOY_BATCH = "config/yoy-batch.json";
 
 // テーマページの指標を選ぶ視点 (採用基準・判断規則。管理画面と提案文書が読む)
 export const THEME_SELECTION_VIEWPOINTS = "config/theme-selection-viewpoints.json";
+
+// 指標正本と、その型から生成する契約・逆引き索引
+export const METRIC_DEFINITIONS_DIR = "data/metrics";
+export const METRIC_SOURCES_DIR = "data/metric-sources";
+export const METRIC_SCHEMA = `${METRIC_DEFINITIONS_DIR}/schema/metric.schema.json`;
+export const METRIC_LINKAGE_DIR = `${METRIC_DEFINITIONS_DIR}/index`;

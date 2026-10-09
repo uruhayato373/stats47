@@ -38,6 +38,7 @@ const fs = require("fs");
 const path = require("path");
 const crypto = require("crypto");
 const { execFileSync } = require("child_process");
+const { datasetDir } = require("../../../config/datasets.mjs");
 
 const ROOT = process.env.CLAUDE_PROJECT_DIR || path.resolve(__dirname, "..", "..", "..");
 const AUDIT_MARKER = path.join(ROOT, ".claude/state/consistency/audited.json");
@@ -652,7 +653,7 @@ function checkOrphanScripts(findings) {
     ".",
     // metric config の provenance.restore に「このデータの再取得コマンド」が書かれている
     // (data-provenance-standards.md §2)。手動投入データの取得スクリプトはここからしか参照されない。
-    "packages/data-configs/src/metrics",
+    datasetDir("metrics.definitions"),
     // テーマ専用データ (水質・豪雪地帯・橋梁点検・貨物/空港 など) は metric ではなく theme-catalog の
     // *-source.ts が出典を持ち、同じ restore 欄に再取得コマンドを書く (2026-10-02)
     "packages/data-configs/src/theme-catalog",

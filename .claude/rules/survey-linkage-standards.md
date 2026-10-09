@@ -27,7 +27,7 @@ chart source.json) を共通 resolver が surveys.json へ解決する。
 | **調査マスタ** (id/name/organization/url) | `packages/ranking/src/data/surveys.json` | git JSON (件数は横断監査で照合) | 低頻度更新の reference。追加/削除はここだけ編集 |
 | **導出辞書 (SSDS)** cdCat01 → 原典調査 | `packages/data-configs/src/ssds/ssds-provenance.generated.json` | 生成物 (~5,372キー) | `build-ssds-provenance` 系 script で再生成 |
 | **導出辞書 (非SSDS)** statsDataId → 調査 | `packages/data-configs/src/ssds/estat-provenance.generated.json` | 生成物 (件数は生成時に報告) | **未カバー statsDataId の追記 = 未分類 item の回収手段** |
-| **手動オーバーライド** | `MetricConfig.surveyId` (`packages/data-configs/src/metrics/<key>.ts`) | git TS | 導出不能/誤導出の例外だけ書く。実在 lint (`validate:config` の `survey-id`) が守る |
+| **手動オーバーライド** | `MetricConfig.surveyId` (`data/metrics/<key>.ts`) | git TS | 導出不能/誤導出の例外だけ書く。実在 lint (`validate:config` の `survey-id`) が守る |
 | **配信 (item→survey)** | R2 `app/ranking/<key>/item.json` の `surveyIds[]` + `originalSurveys[]` | 焼き込み | `generate-ranking-items.ts` (builder) が生成 |
 | **配信 (survey→items)** | R2 `app/survey/<id>/items.json` + `app/survey/all.json` (itemCount 付き) | 焼き込み | master exporter (`export-master-snapshots.ts`) が生成 |
 | **テーマ chart lineage** | `data/themes/catalogs/<key>.json` の `relatedRankingKeys` / `rankingLink` / `estatParams` | git JSON | `resolveThemeSurveyTaxonomy` が直接解決。surveyId を重複記録しない |

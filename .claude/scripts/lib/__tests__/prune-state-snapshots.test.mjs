@@ -5,6 +5,8 @@ import { tmpdir } from "node:os";
 import { join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import test from "node:test";
+import { DATASETS } from "../../../../config/datasets.mjs";
+import { patternToRegExp } from "../check-datasets.mjs";
 
 import {
   RETENTION_POLICIES,
@@ -107,7 +109,10 @@ test("追跡中の日付名 state は必ず寿命 (policy / 恒久宣言 / basel
     .split("\0")
     .filter(Boolean)
     .map((f) => f.split("\\").join("/"));
-  const dated = tracked.filter((f) => /\d{4}-(\d{2}-\d{2}|W\d{2})/.test(f.split("/").at(-1)) || /\/\d{4}-W\d{2}\//.test(f));
+  // Authored configuration is permanent SSOT. Numeric cohorts such as
+  // per-1000-14-19 in metric IDs must not be treated as dated operational state.
+  const configPatterns = DATASETS.filter((dataset) => dataset.kind === "config").map((dataset) => patternToRegExp(dataset.path));
+  const dated = tracked.filter((f) => !configPatterns.some((pattern) => pattern.test(f)) && (/\d{4}-(\d{2}-\d{2}|W\d{2})/.test(f.split("/").at(-1)) || /\/\d{4}-W\d{2}\//.test(f)));
   const inPolicy = (f) =>
     Object.values(RETENTION_POLICIES).some((p) => {
       const rel = relative(p.directory, f).split("\\").join("/");

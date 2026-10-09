@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { processOne } from '../../scripts/page-data-batch';
-import { agriculturalOutput } from '../metrics/agricultural-output';
+import { agriculturalOutput } from '../../../../data/metrics/agricultural-output';
 import { resolveMetricSource } from '../source-for-entity';
 
 afterEach(() => vi.unstubAllGlobals());

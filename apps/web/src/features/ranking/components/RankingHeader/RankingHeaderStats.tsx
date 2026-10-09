@@ -1,5 +1,6 @@
 "use client";
 
+
 import { useMemo } from "react";
 
 import { cn } from "@stats47/components";
@@ -16,10 +17,12 @@ import { RankingNationalAverageStat } from "./RankingNationalAverageStat";
 import { RankingTopThreeList } from "./RankingTopThreeList";
 
 import type { NationalAveragePoint } from "../../lib/build-national-average-series";
+import type { MetricPresentation } from "@stats47/types";
 
 interface RankingHeaderStatsProps {
   rankingValues: RankingValue[];
   unit: string;
+  presentation: MetricPresentation;
   nationalAverageSeries: NationalAveragePoint[];
   areaType: AreaType;
   yearName?: string | null;
@@ -35,6 +38,7 @@ interface RankingHeaderStatsProps {
 export function RankingHeaderStats({
   rankingValues,
   unit,
+  presentation,
   nationalAverageSeries,
   areaType,
   yearName,
@@ -74,9 +78,10 @@ export function RankingHeaderStats({
           showNationalAverage && "@md:grid-cols-2",
         )}
       >
-        <RankingTopThreeList stats={stats} unit={unit} precision={precision} />
+        <RankingTopThreeList stats={stats} unit={unit} precision={precision} domainPolicy={presentation.comparisonDomain} />
         {showNationalAverage && (
           <RankingNationalAverageStat
+            domainPolicy={presentation.trendDomain}
             figure={nationalFigure}
             unit={unit}
             series={nationalAverageSeries}

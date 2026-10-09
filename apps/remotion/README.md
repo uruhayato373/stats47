@@ -151,7 +151,7 @@ Remotion 動画で使う統計データは **R2 `app/stats/<metric>/*.json` が 
 
 ```
 e-Stat / MLIT
-  -> metric TS config (`packages/data-configs/src/metrics/<key>.ts`)
+  -> metric TS config (`data/metrics/<key>.ts`)
   -> R2 `app/stats/<metric>/*.json`
   -> apps/remotion/scripts/exporters/*
   -> apps/remotion/public/<feature>/*.json

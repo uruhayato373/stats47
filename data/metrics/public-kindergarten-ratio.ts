@@ -1,0 +1,62 @@
+import { DEFAULT_METRIC_PRESENTATION } from "./defaults/presentation";
+import type { MetricConfig } from "../../packages/data-configs/src/types";
+
+export const publicKindergartenRatio: MetricConfig = {
+  "key": "public-kindergarten-ratio",
+  "title": "公立幼稚園割合",
+  "unit": "％",
+  "category": "educationsports",
+  "source": {
+    "kind": "estat",
+    "statsDataId": "0000010205",
+    "cdCat01": "#E01304",
+    "displayName": "社会・人口統計体系",
+    "url": "https://www.stat.go.jp/data/ssds/index.htm",
+  },
+  "entities": [
+    "prefecture",
+  ],
+  "years": {
+    "years": [
+      1994,
+      1995,
+      1996,
+      1997,
+      1998,
+      1999,
+      2000,
+      2001,
+      2002,
+      2003,
+      2004,
+      2005,
+      2006,
+      2007,
+      2008,
+      2009,
+      2010,
+      2011,
+      2012,
+      2013,
+      2014,
+      2015,
+      2024,
+    ],
+  },
+  "yearFormat": "fiscal",
+  "visualization": {
+    ...DEFAULT_METRIC_PRESENTATION,
+    "colorScheme": "interpolateBlues",
+    "colorSchemeType": "sequential",
+  },
+  "display": {
+    "conversionFactor": 1,
+    "decimalPlaces": 1,
+  },
+  "calculation": {
+    "isCalculated": false,
+  },
+  "seoTitle": "公立幼稚園割合ランキング都道府県【2024年】｜1位徳島県（88.1％）",
+  "seoDescription": "2024年の公立幼稚園割合の都道府県別ランキング。1位徳島県（88.1％）、最下位石川県（0％）で地図やグラフで47都道府県を比較。",
+  "isActive": true,
+};

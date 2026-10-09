@@ -1,3 +1,4 @@
+import { KDP_LISTINGS, METRIC_DEFINITIONS_DIR } from '../../../../config/paths.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -18,7 +19,6 @@ import {
   KINDLE_SERIES_LABELS,
 } from '../../../../packages/product-factory/src/channels/kindle/cover-design';
 import { KDP_PORTFOLIO_POLICY } from '../../../../packages/product-factory/src/channels/kindle/kdp-publishing-policy';
-import { KDP_LISTINGS } from '../../../../config/paths.mjs';
 import surveysMaster from '../../../../packages/ranking/src/data/surveys.json';
 
 import {
@@ -121,7 +121,7 @@ function loadMetrics(
   root: string,
   metricKeys: string[]
 ): ReferenceMetricSource[] {
-  const relDir = 'packages/data-configs/src/metrics';
+  const relDir = METRIC_DEFINITIONS_DIR;
   const absDir = path.join(root, relDir);
   if (!fs.existsSync(absDir)) return [];
   const metrics: ReferenceMetricSource[] = [];

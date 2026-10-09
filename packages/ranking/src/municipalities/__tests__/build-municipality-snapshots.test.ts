@@ -1,4 +1,6 @@
 import { describe, expect, it } from 'vitest';
+import { getMetricConfig } from '@stats47/data-configs';
+import { parseMunicipalityRankingItemSnapshot } from '../../repositories/schemas/municipality-ranking.schemas';
 
 import { buildMunicipalityRankingSnapshots } from '../build-municipality-snapshots';
 import {
@@ -46,6 +48,7 @@ const policy: MunicipalityEntityPolicy = {
 };
 
 const metric = {
+  visualization: getMetricConfig('total-population')!.visualization,
   key: 'metric',
   title: 'テスト指標',
   unit: '％',
@@ -93,6 +96,11 @@ describe('buildMunicipalityRankingSnapshots', () => {
       excludedEntityCount: 1,
       latestYear: { yearCode: '2020' },
     });
+    expect(result.item.visualization).toEqual(metric.visualization);
+    expect(parseMunicipalityRankingItemSnapshot(result.item).visualization.classification).toEqual({method:'quantile', classes:5});
+    const {visualization, ...withoutPresentation} = result.item;
+    expect(() => parseMunicipalityRankingItemSnapshot(withoutPresentation)).toThrow();
+    expect(() => parseMunicipalityRankingItemSnapshot({...result.item, visualization:{...visualization, classification:{method:'quantile',classes:0}}})).toThrow();
     expect(result.values.values).toEqual([
       expect.objectContaining({ areaCode: '01100', rank: 1, value: 30 }),
       expect.objectContaining({ areaCode: '01202', rank: 1, value: 30 }),

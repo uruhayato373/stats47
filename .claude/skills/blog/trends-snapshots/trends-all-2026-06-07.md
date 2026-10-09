@@ -13,7 +13,7 @@ tags: [trend, blog-planning]
 > クロスソースヒット（2ソース以上で出現）: 5件
 > 白書エンリッチ: skip（`--whitepaper` 未指定）
 >
-> ⚠ データ基盤は完全DBレス。マッチングは `packages/data-configs/src/metrics/*.ts`（2,209 metric key）と
+> ⚠ データ基盤は完全DBレス。マッチングは `data/metrics/*.ts`（2,209 metric key）と
 > 既存169記事タイトル（`docs/21_ブログ記事原稿/`）に対して実施（SKILL.md の D1 SQL は読み替え）。
 
 ## クロスソースヒット（複数ソースで出現）

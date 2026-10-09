@@ -110,7 +110,20 @@ planSummary: "2指標の関係を検証する"
     expect(themePlans.filter((plan) => plan.status === 'blocked')).toHaveLength(
       3
     );
-    expect(blogPlans).toHaveLength(4);
+    // 下書きは公開されると送り箱 (contents/blog) から CI が消すので、件数は直書きせず
+    // 送り箱に残る「参考文献の企画」印付きの記事と一致することを確かめる (2026-10-09 に 4 → 2 本で落ちた)
+    const outbox = path.join(root, 'contents/blog');
+    const markedDrafts = fs.existsSync(outbox)
+      ? fs
+          .readdirSync(outbox, { withFileTypes: true })
+          .filter((entry) => entry.isDirectory())
+          .map((entry) => `contents/blog/${entry.name}/article.md`)
+          .filter((rel) => {
+            const file = path.join(root, rel);
+            return fs.existsSync(file) && /^referenceSourcePlan:\s*true\s*$/m.test(fs.readFileSync(file, 'utf8'));
+          })
+      : [];
+    expect(blogPlans.map((plan) => plan.sourcePath).sort()).toEqual(markedDrafts.sort());
     for (const plan of blogPlans) {
       expect(
         plan.metricKeys.every((key) => referenceThemeKeys.includes(key))

@@ -16,6 +16,14 @@ function metric(source: MetricConfig['source']): MetricConfig {
     source,
     entities: ['prefecture'],
     years: 'all',
+    visualization: {
+      domain: { mode: 'extent' },
+      colorScheme: 'interpolateBlues',
+      colorSchemeType: 'sequential',
+      classification: { method: 'equal-interval', classes: 5 },
+      trendDomain: { mode: 'extent', padding: 0.08 },
+      comparisonDomain: { mode: 'extent', padding: 0.05 },
+    },
   };
 }
 

@@ -114,7 +114,7 @@ export function deriveCalculatedRows({
   denominatorRows,
 }: DeriveInput): SingleEntityRow[] {
   const calc = calculationOf(config);
-  const type = calc.type ?? calc.calculationType;
+  const type = calc.type;
   if (type !== "ratio" && type !== "per_capita" && type !== "subtraction") {
     throw new CalculatedStatsError(`${config.key}: 実行できる calculation.type がない (${String(type)})`);
   }

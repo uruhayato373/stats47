@@ -2,6 +2,13 @@ import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 
+import type { PageComponent } from '@/components/stat-charts';
+
+import { DEFAULT_METRIC_PRESENTATION } from '../../../../../../../data/metrics/defaults/presentation';
+import { ThemeMetricsDashboard } from '../ThemeMetricsDashboard';
+
+import type { ThemeConfig, ThemeIndicatorData } from '../../types';
+
 /**
  * ThemeMetricsDashboard が KPI をどう描くかの契約。
  *
@@ -53,11 +60,8 @@ vi.mock('../../actions', () => ({
   fetchMetricTimeseriesAction: (...args: unknown[]) => fetchMock(...args),
 }));
 
-import type { PageComponent } from '@/components/stat-charts';
 
-import { ThemeMetricsDashboard } from '../ThemeMetricsDashboard';
 
-import type { ThemeConfig, ThemeIndicatorData } from '../../types';
 
 const METRIC_KEY = 'wage';
 
@@ -69,7 +73,7 @@ function indicatorData(
   readerLabel?: string
 ): ThemeIndicatorData {
   return {
-    rankingItem: { title, readerLabel, unit },
+    rankingItem: { title, readerLabel, unit, visualization: { ...DEFAULT_METRIC_PRESENTATION, colorScheme: 'interpolateBlues', colorSchemeType: 'sequential' } },
     rankingValues: Array.from({ length: valueCount }, (_, i) => ({
       areaCode: String(i + 1).padStart(5, '0'),
       value: 100 + i,

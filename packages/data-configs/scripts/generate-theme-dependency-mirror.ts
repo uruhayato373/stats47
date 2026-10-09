@@ -67,8 +67,7 @@ function main(): void {
   const parsed = JSON.parse(next);
   console.log(
       `✅ 依存ミラーを生成: ${OUT}\n` +
-      `   R2 metric ${parsed.totalMetricRefs} refs / ${parsed.distinctMetricRefs} distinct\n` +
-      `   legacy e-Stat ${parsed.totalRequests} refs / ${parsed.distinctRequests} distinct`,
+      `   R2 metric ${parsed.totalMetricRefs} refs / ${parsed.distinctMetricRefs} distinct\n`
   );
 }
 

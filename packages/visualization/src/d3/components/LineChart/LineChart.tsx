@@ -50,6 +50,7 @@ export function LineChart({
   yAxisFormatter = compactAxisFormat,
   tooltipFormatter = defaultFormat,
   yDomain: yDomainProp,
+  rightYDomain,
   rightUnit,
 }: D3LineChartProps) {
   const svgRef = useRef<SVGSVGElement>(null);
@@ -143,16 +144,16 @@ export function LineChart({
 
     const y = scaleLinear()
       .domain(yDomainProp ?? domainOf(leftSeries.map((s) => s.dataKey)))
-      .nice()
       .range([height - marginBottom, marginTop]);
+    if (!yDomainProp) y.nice();
 
     // yDomainProp は左軸専用 (右軸は常に自動スケール)
     const yRight = hasRightAxis
       ? scaleLinear()
-          .domain(domainOf(rightSeries.map((s) => s.dataKey)))
-          .nice()
+          .domain(rightYDomain ?? domainOf(rightSeries.map((s) => s.dataKey)))
           .range([height - marginBottom, marginTop])
       : null;
+    if (yRight && !rightYDomain) yRight.nice();
 
     // 縦軸のラベルが左端で切れないよう、目盛りの実際の文字列から左余白を決める
     // (StackedAreaChart と同じ。2026-09-25 CHART-AXIS-READABILITY-01)
@@ -416,6 +417,7 @@ export function LineChart({
     showStackedTooltip,
     hideTooltip,
     yDomainProp,
+    rightYDomain,
     hasRightAxis,
   ]);
 

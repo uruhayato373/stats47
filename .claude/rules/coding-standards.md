@@ -1,5 +1,6 @@
 ---
 paths:
+  - "data/{metrics,metric-sources}/**/*.ts"
   - "apps/**/*.{ts,tsx}"
   - "packages/**/*.{ts,tsx}"
   - ".claude/scripts/**/*.{ts,mjs,cjs}"

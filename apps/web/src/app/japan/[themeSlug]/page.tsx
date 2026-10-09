@@ -4,7 +4,6 @@ import { getMetricConfig } from '@stats47/data-configs';
 import { buildEstatTableUrl } from '@stats47/data-configs/data-source';
 import {
   getJapanCatalogTheme,
-  listJapanCatalogThemes,
 } from '@stats47/data-configs/geo-scope';
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { readJapanSeries } from '@stats47/stats-r2/readers';
@@ -24,6 +23,7 @@ import { DEFAULT_OGP_IMAGE_PATH } from '@/config/site';
 
 import { JapanMetricChart } from './JapanMetricChart';
 
+import type { NumericDomainPolicy } from '@stats47/types';
 import type { Metadata } from 'next';
 
 interface Params {
@@ -34,8 +34,9 @@ interface Params {
 //   (nextjs-ssg-preservation.md §generateStaticParams 固着。ranking/areas と同じ理由)。
 export const revalidate = 86400;
 
-export function generateMetadata({ params }: { params: Params }): Metadata {
-  const theme = getJapanCatalogTheme(params.themeSlug);
+export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
+  const {themeSlug} = await params;
+  const theme = getJapanCatalogTheme(themeSlug);
   if (!theme) return {};
   const title = `${theme.title} | 日本の統計`;
   return {
@@ -57,6 +58,7 @@ interface MetricSeriesView {
   description: string;
   unit: string;
   sourceId: string;
+  trendDomain: NumericDomainPolicy;
   points: { yearName: string; value: number }[];
   latest: { yearName: string; value: number } | null;
 }
@@ -87,6 +89,7 @@ async function loadMetricSeries(
         `${config.title}の公式全国値を時系列で示します。線の傾きから長期的な増減を確認できます。`,
       unit: series.rows[0].unit,
       sourceId: series.meta.sourceId,
+      trendDomain: config.visualization.trendDomain,
       points,
       latest: points[points.length - 1] ?? null,
     });
@@ -94,8 +97,9 @@ async function loadMetricSeries(
   return views;
 }
 
-export default async function JapanThemePage({ params }: { params: Params }) {
-  const theme = getJapanCatalogTheme(params.themeSlug);
+export default async function JapanThemePage({ params }: { params: Promise<Params> }) {
+  const {themeSlug} = await params;
+  const theme = getJapanCatalogTheme(themeSlug);
   if (!theme) notFound();
 
   // 全国テーマは都道府県テーマと同じ slug を使うので、同じ意図軸の広告を出す
@@ -160,6 +164,7 @@ export default async function JapanThemePage({ params }: { params: Params }) {
                 title={m.title}
                 unit={m.unit}
                 points={m.points}
+                trendDomain={m.trendDomain}
               />
             </ChartPanel>
           ))}
@@ -179,9 +184,4 @@ export default async function JapanThemePage({ params }: { params: Params }) {
       )}
     </PageShell>
   );
-}
-
-/** WP6 で全テーマへ展開する際、静的候補一覧が必要になったらここから導出する。 */
-export function listAllJapanThemeSlugs(): string[] {
-  return listJapanCatalogThemes().map((t) => t.themeSlug);
 }

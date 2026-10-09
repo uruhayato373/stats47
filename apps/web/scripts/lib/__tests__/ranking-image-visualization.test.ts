@@ -5,9 +5,9 @@ import { buildRankingItemFromMetric } from '../../../../../packages/ranking/src/
 import { resolveRankingImageVisualization } from '../ranking-image-visualization';
 
 describe('ranking image colors', () => {
-  it('keeps a high-is-worse card red when raw metric config has no palette', () => {
+  it('keeps the canonical high-is-worse red palette through item and image generation', () => {
     const config = getMetricConfig('ambulance-transported-deaths')!;
-    expect(config.visualization?.colorScheme).toBeUndefined();
+    expect(config.visualization.colorScheme).toBe('interpolateReds');
     const item = buildRankingItemFromMetric(config, {
       values: { yearCodes: ['2024'] },
       now: '2026-09-11T00:00:00.000Z',

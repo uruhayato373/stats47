@@ -17,7 +17,8 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { logger } from "@stats47/logger";
 
-import { createChoroplethColorMapper } from "../../utils/color-scale/create-choropleth-color-mapper";
+import { resolveChoroplethScale } from "../../utils/color-scale/resolve-choropleth-scale";
+import { ChoroplethLegend, type ResolvedChoroplethScale } from "../ChoroplethLegend";
 import type { D3Module, TopojsonModule } from "../../types/d3";
 import type { MapDataPoint } from "../../types/map-chart";
 import type { MapVisualizationConfig } from "../../types/map-chart";
@@ -32,9 +33,6 @@ const VIEWBOX_HEIGHT = 480;
 const PADDING = 20;
 
 /** カラーレジェンドの設定 */
-const LEGEND_HEIGHT = 12;
-const LEGEND_WIDTH = 200;
-const LEGEND_MARGIN_TOP = 16;
 
 /** 市区町村 Feature 型 */
 interface CityFeature extends Feature {
@@ -87,6 +85,7 @@ export function CityMapChart({
   const [d3Module, setD3Module] = useState<D3Module | null>(null);
   const [topojsonModule, setTopojsonModule] = useState<TopojsonModule | null>(null);
   const [colorMapper, setColorMapper] = useState<ColorMapper>(null);
+  const [colorScale, setColorScale] = useState<ResolvedChoroplethScale | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -137,9 +136,12 @@ export function CityMapChart({
     let isMounted = true;
 
     const generateColorMapper = async () => {
-      const mapper = await createChoroplethColorMapper(colorConfig, data);
+      const resolved = await resolveChoroplethScale(colorConfig, data);
+      const valueByCode = new Map(data.map(point => [point.areaCode, point.value]));
+      const mapper = (code: string) => {const value = valueByCode.get(code); return value === undefined ? resolved.noDataColor : resolved.colorAtValue(value);};
       if (isMounted) {
         setColorMapper(() => mapper);
+        setColorScale(resolved);
       }
     };
 
@@ -285,8 +287,6 @@ export function CityMapChart({
         onCityClick?.(d.properties.cityCode);
       });
 
-    // カラーレジェンド描画
-    drawColorLegend(svg, d3Module, data, colorMapper);
   }, [
     d3Module,
     geojson,
@@ -347,91 +347,7 @@ export function CityMapChart({
         role="img"
         aria-label={`市区町村別コロプレス地図。データ数: ${data.length}。単位: ${unit || "未設定"}`}
       />
+      <ChoroplethLegend scale={colorScale} unit={unit}/>
     </div>
   );
-}
-
-/**
- * カラーレジェンド（凡例）を SVG 内に描画する
- */
-function drawColorLegend(
-  svg: any,
-  d3: D3Module,
-  data: MapDataPoint[],
-  colorMapper: (areaCode: string) => string
-) {
-  const values = data.map((d) => d.value).filter((v) => v != null);
-  if (values.length === 0) return;
-
-  const minVal = Math.min(...values);
-  const maxVal = Math.max(...values);
-  if (minVal === maxVal) return;
-
-  const legendX = (VIEWBOX_WIDTH - LEGEND_WIDTH) / 2;
-  const legendY = VIEWBOX_HEIGHT - LEGEND_HEIGHT - LEGEND_MARGIN_TOP;
-
-  const legendGroup = svg.append("g").attr("class", "legend-group");
-
-  // グラデーション定義
-  const defs = svg.append("defs");
-  const gradient = defs
-    .append("linearGradient")
-    .attr("id", "city-legend-gradient")
-    .attr("x1", "0%")
-    .attr("x2", "100%");
-
-  // 10 段階のカラーストップを生成
-  const steps = 10;
-  for (let i = 0; i <= steps; i++) {
-    const t = i / steps;
-    const value = minVal + t * (maxVal - minVal);
-    const closestData = data.reduce((prev, curr) =>
-      Math.abs(curr.value - value) < Math.abs(prev.value - value) ? curr : prev
-    );
-    const color = colorMapper(closestData.areaCode);
-    gradient
-      .append("stop")
-      .attr("offset", `${t * 100}%`)
-      .attr("stop-color", color);
-  }
-
-  // レジェンドバー
-  legendGroup
-    .append("rect")
-    .attr("x", legendX)
-    .attr("y", legendY)
-    .attr("width", LEGEND_WIDTH)
-    .attr("height", LEGEND_HEIGHT)
-    .attr("rx", 3)
-    .style("fill", "url(#city-legend-gradient)");
-
-  // レジェンドラベル（最小値）
-  legendGroup
-    .append("text")
-    .attr("x", legendX)
-    .attr("y", legendY + LEGEND_HEIGHT + 14)
-    .attr("text-anchor", "start")
-    .attr("font-size", "10px")
-    .attr("fill", "hsl(var(--muted-foreground))")
-    .text(formatLegendValue(minVal));
-
-  // レジェンドラベル（最大値）
-  legendGroup
-    .append("text")
-    .attr("x", legendX + LEGEND_WIDTH)
-    .attr("y", legendY + LEGEND_HEIGHT + 14)
-    .attr("text-anchor", "end")
-    .attr("font-size", "10px")
-    .attr("fill", "hsl(var(--muted-foreground))")
-    .text(formatLegendValue(maxVal));
-}
-
-function formatLegendValue(value: number): string {
-  if (Math.abs(value) >= 1_000_000) {
-    return `${(value / 1_000_000).toFixed(1)}M`;
-  }
-  if (Math.abs(value) >= 1_000) {
-    return `${(value / 1_000).toFixed(1)}K`;
-  }
-  return value.toLocaleString();
 }

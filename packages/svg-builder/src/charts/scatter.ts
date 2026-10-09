@@ -37,6 +37,26 @@ export interface ScatterOptions {
   subtitle?: string;
   /** aria-label */
   ariaLabel?: string;
+  /**
+   * 点の横に県名を直接書く対象（`ScatterPoint.name` と完全一致）。
+   * 本文が名指しする点を読者が図上で識別できるようにするための指定で、未指定なら何も描かない。
+   * ラベル同士・他の点・プロット枠と重ならない位置（右・左・上・下の順）を決定的に選ぶ。
+   */
+  labelNames?: string[];
+}
+
+interface LabelBox {
+  x0: number;
+  x1: number;
+  y0: number;
+  y1: number;
+}
+
+const LABEL_FONT_SIZE = 10;
+const DOT_R = 4;
+
+function overlaps(a: LabelBox, b: LabelBox): boolean {
+  return a.x0 < b.x1 && a.x1 > b.x0 && a.y0 < b.y1 && a.y1 > b.y0;
 }
 
 /**
@@ -46,7 +66,14 @@ export function generateScatterSvg(
   points: ScatterPoint[],
   options: ScatterOptions
 ): string {
-  const { xLabel, yLabel, title, subtitle, ariaLabel = title } = options;
+  const {
+    xLabel,
+    yLabel,
+    title,
+    subtitle,
+    ariaLabel = title,
+    labelNames = [],
+  } = options;
 
   const W = 720;
   const H = 720;
@@ -101,6 +128,81 @@ export function generateScatterSvg(
     return `  <circle cx="${cx}" cy="${cy}" r="4" fill="${defaultFill}" fill-opacity="0.85" stroke="${defaultStroke}" stroke-width="1"><title>${p.name}：X=${formatTick(p.x)} Y=${formatTick(p.y)}</title></circle>`;
   });
 
+  // 県名ラベル（labelNames 指定の点のみ）。全点の円を障害物として、置ける位置を決定的に選ぶ
+  const dotBoxes: LabelBox[] = points.map((p) => {
+    const cx = toSvgX(p.x);
+    const cy = toSvgY(p.y);
+    return {
+      x0: cx - DOT_R,
+      x1: cx + DOT_R,
+      y0: cy - DOT_R,
+      y1: cy + DOT_R,
+    };
+  });
+  const placed: LabelBox[] = [];
+  const labelTexts: string[] = [];
+  for (const name of labelNames) {
+    const idx = points.findIndex((p) => p.name === name);
+    if (idx < 0) continue;
+    const cx = toSvgX(points[idx].x);
+    const cy = toSvgY(points[idx].y);
+    const w = name.length * LABEL_FONT_SIZE;
+    const h = LABEL_FONT_SIZE;
+    const gap = DOT_R + 3;
+    const candidates = [
+      {
+        anchor: 'start',
+        tx: cx + gap,
+        ty: cy + 3.5,
+        x0: cx + gap,
+        y0: cy - h / 2,
+      },
+      {
+        anchor: 'end',
+        tx: cx - gap,
+        ty: cy + 3.5,
+        x0: cx - gap - w,
+        y0: cy - h / 2,
+      },
+      {
+        anchor: 'middle',
+        tx: cx,
+        ty: cy - gap - 1,
+        x0: cx - w / 2,
+        y0: cy - gap - h,
+      },
+      {
+        anchor: 'middle',
+        tx: cx,
+        ty: cy + gap + h - 1,
+        x0: cx - w / 2,
+        y0: cy + gap,
+      },
+    ].map((c) => ({
+      ...c,
+      box: { x0: c.x0, x1: c.x0 + w, y0: c.y0, y1: c.y0 + h },
+    }));
+    const inPlot = (b: LabelBox) =>
+      b.x0 >= plot.left &&
+      b.x1 <= plot.right &&
+      b.y0 >= plot.top &&
+      b.y1 <= plot.bottom;
+    const free = (b: LabelBox) =>
+      inPlot(b) &&
+      !placed.some((o) => overlaps(b, o)) &&
+      !dotBoxes.some((o, i) => i !== idx && overlaps(b, o));
+    const chosen =
+      candidates.find((c) => free(c.box)) ??
+      candidates.find(
+        (c) => inPlot(c.box) && !placed.some((o) => overlaps(c.box, o))
+      ) ??
+      candidates[0];
+    placed.push(chosen.box);
+    labelTexts.push(
+      `  <text x="${px(chosen.tx)}" y="${px(chosen.ty)}" text-anchor="${chosen.anchor}" font-size="${LABEL_FONT_SIZE}" font-weight="bold" class="svg-axis">${name}</text>`
+    );
+  }
+
   const titleLines = [
     `  <text x="${W / 2}" y="22" text-anchor="middle" font-size="14" font-weight="bold" class="svg-title">${title}</text>`,
   ];
@@ -122,6 +224,6 @@ ${yGridLines.join('\n')}
   <!-- 回帰直線 -->
 ${regLine}
   <!-- ドット -->
-${dots.join('\n')}
+${dots.join('\n')}${labelTexts.length ? `\n  <!-- 県名ラベル -->\n${labelTexts.join('\n')}` : ''}
 </svg>`;
 }

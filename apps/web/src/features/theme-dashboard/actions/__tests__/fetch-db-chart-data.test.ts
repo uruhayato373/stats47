@@ -21,6 +21,7 @@ vi.mock("@stats47/stats-r2/readers", () => ({
   readStatsValues: (...args: unknown[]) => readStatsValues(...args),
 }));
 
+vi.mock('@stats47/ranking/server',()=>({readRankingItemFromR2:vi.fn(async()=>({success:true,data:{visualization:{trendDomain:{mode:'extent',padding:.08}}}}))}));
 const mockFetchEstatData = vi.mocked(fetchEstatData);
 
 function row(areaCode: string, yearCode: string, value: number): StatsSchema {

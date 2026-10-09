@@ -27,7 +27,7 @@
  */
 import { writeFileSync } from "node:fs";
 
-import { EXPECTED_SHAPE_ANOMALY } from "../src/expected-shape-anomaly.js";
+import { EXPECTED_SHAPE_ANOMALY } from "../../../data/metrics/quality/shape-exceptions";
 import { listAllMetrics } from "../src/registry.js";
 import {
   classifyShape,
@@ -40,7 +40,7 @@ import {
   classifyValueSuspicion,
   type ValueVerificationResult,
 } from "../src/value-verification.js";
-import { VERIFIED_VALUE_PROFILES } from "../src/verified-value-profiles.js";
+import { VERIFIED_VALUE_PROFILES } from "../../../data/metrics/quality/verified-value-profiles";
 import { SITE } from "@stats47/types";
 
 const R2_BASE = process.env.R2_PUBLIC_FETCH_URL || SITE.r2PublicBaseUrl;

@@ -1,0 +1,52 @@
+import { DEFAULT_METRIC_PRESENTATION } from "./defaults/presentation";
+import type { MetricConfig } from "../../packages/data-configs/src/types";
+
+export const floorAreaPerDwellingRented: MetricConfig = {
+  "key": "floor-area-per-dwelling-rented",
+  "title": "借家住宅の延べ面積",
+  "description": "借家として居住する住宅について、1住宅当たりの延べ面積を都道府県別に示す。居住室のほか、玄関、台所、浴室、廊下、押入れなど住宅内の床面積を含む。",
+  "note": "借家だけを集計した値で、持ち家を含む住宅全体の平均ではない。共同住宅の共用廊下・階段や、別棟の物置・車庫は延べ面積に含まれない。",
+  "unit": "ｍ2",
+  "category": "construction",
+  "source": {
+    "kind": "estat",
+    "statsDataId": "0000010208",
+    "cdCat01": "#H0210302",
+    "displayName": "社会・人口統計体系",
+    "url": "https://www.stat.go.jp/data/ssds/index.htm"
+  },
+  "entities": [
+    "prefecture"
+  ],
+  "years": {
+    "years": [
+      1978,
+      1983,
+      1988,
+      1993,
+      1998,
+      2003,
+      2008,
+      2013,
+      2018,
+      2023
+    ]
+  },
+  "yearFormat": "calendar",
+  "visualization": {
+    ...DEFAULT_METRIC_PRESENTATION,
+    "colorScheme": "interpolateBlues",
+    "colorSchemeType": "sequential",
+  },
+  "display": {
+    "conversionFactor": 1,
+    "decimalPlaces": 1
+  },
+  "calculation": {
+    "isCalculated": false
+  },
+  "seoTitle": "借家住宅の延べ面積ランキング都道府県【2023年】｜1位佐賀県（53.7ｍ2）",
+  "seoDescription": "2023年の借家住宅の延べ面積の都道府県別ランキング。1位佐賀県（53.7ｍ2）、最下位東京都（39.8ｍ2）で1.3倍の格差。地図やグラフで47都道府県を比較。",
+  "isActive": true,
+  "subtitle": "1住宅当たり"
+};

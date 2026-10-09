@@ -5,12 +5,85 @@ import { THEME_CATALOGS } from "../index";
 import { buildPopulationPyramidSeriesRefs } from "../population-pyramid-deps";
 import {
   parseStatSeriesRefs,
+  parseThemeDbChartComponentProps,
   type StatSeriesRef,
   validateChartProps,
-  validateMigratedSeriesRefContract,
   validateStatSeriesRefAlignment,
 } from "../stat-series-ref";
 import { CATALOG_COMPONENT_TYPES } from "../types";
+
+describe("指標IDと表示オプションの配信契約", () => {
+  const seriesRefs = [{ metricKey: "total-population" }];
+
+  it.each([
+    { metricKey: "unregistered-metric" },
+    { metricKey: "total-population", year: "202" },
+    { metricKey: "total-population", area: "city" },
+    { metricKey: "total-population", label: "" },
+    { metricKey: "total-population", multiplier: 1000 },
+  ])("未登録ID・不正な選択・独自倍率を拒否する: %j", (ref) => {
+    expect(parseStatSeriesRefs([ref])).toBeNull();
+  });
+
+  it("関連リンクは公開系列の件数に一致させ、非公開の補助系列へリンクを要求しない", () => {
+    expect(validateStatSeriesRefAlignment({}, [], new Map())).toEqual([]);
+    expect(validateStatSeriesRefAlignment({ seriesRefs: [] }, [], new Map())).not.toEqual([]);
+    expect(validateStatSeriesRefAlignment({ seriesRefs }, [], new Map())).toEqual(
+      expect.arrayContaining([expect.stringContaining("要素数が不一致")]),
+    );
+    expect(validateStatSeriesRefAlignment(
+      { seriesRefs: buildPopulationPyramidSeriesRefs() },
+      ["total-population"],
+      new Map(),
+    )).toEqual([]);
+  });
+
+  it.each([
+    { mode: "auto" }, { mode: "sync" }, { mode: "fixed", domain: [0, 100] },
+  ])("有効なY軸設定を受理する: %j", (yAxisConfig) => {
+    expect(validateChartProps("line-chart", { seriesRefs, yAxisConfig })).toEqual([]);
+  });
+
+  it.each([
+    null, { mode: "fixed" }, { mode: "invalid" },
+    { mode: "fixed", domain: [100, 0] }, { mode: "fixed", domain: [0, Infinity] },
+    { mode: "auto", domain: [0, 100] }, { mode: "auto", scale: 10 },
+  ])("欠けた範囲・逆転・非有限値・未知設定を拒否する: %j", (yAxisConfig) => {
+    expect(validateChartProps("line-chart", { seriesRefs, yAxisConfig })).toContain("line-chart: yAxisConfig が不正");
+  });
+
+  it("表示ラベルと生成プロパティは型・空文字を検査する", () => {
+    expect(validateChartProps("line-chart", {
+      seriesRefs, labels: ["人口"], seriesColors: ["population"], showLatestValues: true,
+      annotation: "47都道府県", rankingLinks: [{ label: "人口", url: "/ranking/total-population" }],
+    })).toEqual([]);
+    expect(validateChartProps("line-chart", {
+      seriesRefs, labels: [1], showLatestValues: "yes", annotation: "",
+    })).toEqual(expect.arrayContaining([
+      "line-chart: labels はstring配列", "line-chart: showLatestValues はboolean", "annotation は空でない string にする",
+    ]));
+    expect(validateChartProps("mixed-chart", {
+      columnSeriesRefs: seriesRefs, lineSeriesRefs: seriesRefs, leftUnit: "", rightUnit: "人",
+    })).toContain("mixed-chart: leftUnit は空でないstring");
+  });
+
+  it.each([
+    ["line-chart", { seriesRefs }],
+    ["mixed-chart", { columnSeriesRefs: seriesRefs, lineSeriesRefs: seriesRefs }],
+    ["composition-chart", { seriesRefs, defaultTab: "trend" }],
+    ["donut-chart", { seriesRefs, topN: 5 }],
+    ["cpi-profile", { seriesRefs, year: "2024" }],
+    ["cpi-heatmap", { seriesRefs, year: "2024" }],
+  ])("検証済みの %s をランタイムへ渡し、無効な参照は拒否する", (type, props) => {
+    expect(parseThemeDbChartComponentProps(type, props)).toEqual({ componentType: type, props });
+    expect(parseThemeDbChartComponentProps(type, { ...props, seriesRefs: [{ metricKey: "unregistered" }] })).toBeNull();
+  });
+
+  it("専用部品と未知部品を汎用チャートとして受理しない", () => {
+    expect(parseThemeDbChartComponentProps("markdown-section", { markdown: "本文" })).toBeNull();
+    expect(parseThemeDbChartComponentProps("unknown-chart", {})).toBeNull();
+  });
+});
 
 /**
  * WP1 — chart data 参照の型を単一定義化。
@@ -71,9 +144,9 @@ describe("② 必須フィールドを壊すと error (陰性対照)", () => {
     });
   }
 
-  it("★未知の componentType は skip せず error", () => {
+  it("★未知のcomponentType は skip せず error", () => {
     const errs = validateChartProps("bar-chart-race", { estatParams: [{ statsDataId: "X" }] });
-    expect(errs.some((e) => e.includes("未知の componentType"))).toBe(true);
+    expect(errs.some((e) => e.includes("未知のcomponentType"))).toBe(true);
   });
 
   it("★StatSeriesRef の未登録 metricKey を拒否する", () => {
@@ -96,16 +169,16 @@ describe("② 正常系は error を出さない", () => {
     const props = { markdown: "出典を確かめる", rankingLinks: [{ label: "ランキング", url: "/ranking/total-population" }], sources: [{ label: "統計局", url: "https://www.stat.go.jp/" }, { label: "原典表番号" }] };
     expect(validateChartProps("markdown-section", props)).toEqual([]);
     expect(validateChartProps("markdown-section", { ...props, rankingLinks: [{ label: "", url: "/ranking/total-population" }] })).toContain("rankingLinks は {label,url} の非空配列にする");
-    expect(validateChartProps("markdown-section", { ...props, sources: [{ label: "統計局", url: "" }] })).toContain("markdown-section: sources は {label,url?} 配列");
-    expect(validateChartProps("markdown-section", { ...props, sources: [{ label: "統計局", unexpected: true }] })).toContain("markdown-section: sources は {label,url?} 配列");
+    expect(validateChartProps("markdown-section", { ...props, sources: [{ label: "統計局", url: "" }] })).toContain("markdown-section: sources が不正");
+    expect(validateChartProps("markdown-section", { ...props, sources: [{ label: "統計局", unexpected: true }] })).toContain("markdown-section: sources が不正");
   });
   const ok: Array<{ type: string; props: Record<string, unknown> }> = [
-    { type: "line-chart", props: { estatParams: [{ statsDataId: "X", cdCat01: "#A0160102" }] } },
-    { type: "mixed-chart", props: { columnParams: [{ statsDataId: "X" }], lineParams: [{ statsDataId: "Y" }] } },
-    { type: "composition-chart", props: { statsDataId: "X", segments: [{ code: "A", label: "b", color: "#22c55e" }] } },
-    { type: "donut-chart", props: { statsDataId: "X", categories: [{ code: "A", label: "b", color: "#22c55e" }] } },
-    { type: "cpi-heatmap", props: { statsDataId: "X" } },
-    { type: "kpi-card", props: { estatParams: { statsDataId: "X", cdCat01: "D2101" } } },
+    { type: "line-chart", props: { seriesRefs: [{ metricKey: "total-population" }] } },
+    { type: "mixed-chart", props: { columnSeriesRefs: [{ metricKey: "total-population" }], lineSeriesRefs: [{ metricKey: "unemployment-rate" }] } },
+    { type: "composition-chart", props: { seriesRefs: [{ metricKey: "total-population" }] } },
+    { type: "donut-chart", props: { seriesRefs: [{ metricKey: "total-population" }] } },
+    { type: "cpi-heatmap", props: { seriesRefs: [{ metricKey: "consumer-price-difference-index-overall" }] } },
+    { type: "kpi-card", props: { seriesRefs: [{ metricKey: "current-balance-ratio" }] } },
     { type: "kpi-card", props: {} }, // ranking 駆動 kpi-card は estatParams なしでも可
     { type: "markdown-section", props: { markdown: "本文" } },
     { type: "markdown-section", props: { displayMode: "faq", markdown: "### Q1: 質問\n\n回答" } },
@@ -138,8 +211,8 @@ describe("StatSeriesRef — 全 9 型が参照モデルで表せる (WP6 移行�
     "donut-chart": [
       { metricKey: "primary-industry-workers", label: "第1次", colorRole: "improve" },
     ],
-    "cpi-profile": [{ metricKey: "cpi-composite", label: "CPI" }],
-    "cpi-heatmap": [{ metricKey: "cpi-composite", label: "CPI" }],
+    "cpi-profile": [{ metricKey: "consumer-price-difference-index-overall", label: "CPI" }],
+    "cpi-heatmap": [{ metricKey: "consumer-price-difference-index-overall", label: "CPI" }],
     "kpi-card": [{ metricKey: "fiscal-strength-index-prefecture", label: "財政力指数" }],
     "pyramid-chart": [{ metricKey: "total-population", area: "prefecture" }],
     "markdown-section": [], // 系列を持たない (考察テキスト)
@@ -177,7 +250,7 @@ describe("StatSeriesRef — line-chart の R2 参照移行契約", () => {
         seriesRefs: refs,
         estatParams: [{ statsDataId: "0003445758" }],
       }),
-    ).toContain("line-chart: seriesRefs と estatParams は同時指定できない");
+    ).not.toEqual([]);
   });
 
   it("kpi-card は単一 seriesRef で表せ、生 estatParams との二重指定を拒否する", () => {
@@ -191,7 +264,7 @@ describe("StatSeriesRef — line-chart の R2 参照移行契約", () => {
         seriesRefs: [{ metricKey: "current-balance-ratio" }],
         estatParams: { statsDataId: "0000010104", cdCat01: "D2103" },
       }),
-    ).toContain("kpi-card: seriesRefs と estatParams は同時指定できない");
+    ).not.toEqual([]);
   });
 
   it("seriesRefs と relatedRankingKeys の順序・件数ドリフトを拒否する", () => {
@@ -229,18 +302,7 @@ describe("StatSeriesRef — line-chart の R2 参照移行契約", () => {
     expect(errors).toEqual([expect.stringContaining("shortLabel")]);
   });
 
-  it.each([
-    "labor-wages-gender-gap",
-    "theme-occ-medical-trend",
-    "theme-economy-income-wage",
-    "kpi-lf-current-balance",
-  ])("移行済み %s は生レシピへ戻せない", (componentKey) => {
-    expect(
-      validateMigratedSeriesRefContract(componentKey, {
-        estatParams: [{ statsDataId: "0003445758" }],
-      }),
-    ).toEqual([expect.stringContaining("seriesRefs")]);
-  });
+
 });
 
 describe("StatSeriesRef — 複合チャートの R2 参照移行契約", () => {

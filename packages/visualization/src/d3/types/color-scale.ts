@@ -70,6 +70,8 @@ export interface ColorScheme {
  * カラースケール生成オプション（共通）
  */
 interface BaseColorScaleOptions {
+  /** Already resolved by the shared choropleth domain policy. */
+  resolvedDomain?: [number, number];
   /** データ配列 */
   data: VisualizationDataPoint[];
   /** カラースケール名（デフォルト: "interpolateBlues"） */

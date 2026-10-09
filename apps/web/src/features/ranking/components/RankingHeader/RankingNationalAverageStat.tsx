@@ -2,8 +2,7 @@
 
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 
-import { ChartEmptyState } from "@/components/charts/ChartState";
-import { MiniLineChart } from "@/components/charts/MiniCharts";
+import { NumericTrendChart } from "@/components/charts/NumericTrendChart";
 import { SurfaceCard } from "@/components/surface";
 
 import {
@@ -13,6 +12,7 @@ import {
 import { formatRankingValue } from "../../utils/compute-ranking-header-stats";
 
 import type { NationalFigure } from "@stats47/ranking";
+import type { NumericDomainPolicy } from "@stats47/types";
 
 interface RankingNationalAverageStatProps {
   /** 選択年の全国の基準値 (resolveNationalFigure で解決済み) */
@@ -27,9 +27,9 @@ interface RankingNationalAverageStatProps {
    * 平均だけ別の桁数で出すと表と食い違うため、ここで独自に決めない。
    */
   precision: number;
+  domainPolicy: NumericDomainPolicy;
 }
 
-const CHART_HEIGHT = 84;
 
 /**
  * 全国の基準値と、その推移。
@@ -44,6 +44,7 @@ export function RankingNationalAverageStat({
   series,
   yearName,
   precision,
+  domainPolicy,
 }: RankingNationalAverageStatProps) {
   if (figure === null) return null;
   const label = figure.label;
@@ -52,47 +53,13 @@ export function RankingNationalAverageStat({
   const periodChange = computeNationalAveragePeriodChange(series, unit);
 
   return (
-    <SurfaceCard className="@container">
-      <div className="@sm:grid @sm:grid-cols-[minmax(0,1fr)_260px] @sm:grid-rows-[auto_1fr] @sm:gap-x-4 @md:block">
-        <div className="flex items-baseline justify-between gap-2 @sm:col-start-1 @sm:row-start-1">
-          <span className="text-sm font-medium text-muted-foreground">
-            {yearName ? `${label} ${yearName}` : label}
-          </span>
-          <span className="text-xl font-bold text-foreground">
-            {formatRankingValue(figure.value, precision)}
-            {formatUnitForDisplay(unit)}
-          </span>
-        </div>
-
-        <div className="mt-1 @sm:col-start-2 @sm:row-span-2 @sm:row-start-1 @sm:mt-0 @sm:flex @sm:items-center @md:mt-1 @md:block">
-          {hasTrend ? (
-            <MiniLineChart
-              points={series.map((p) => ({ year: p.year, value: p.value }))}
-              seriesName={label}
-              unit={unit}
-              height={CHART_HEIGHT}
-            />
-          ) : (
-            <ChartEmptyState message="推移データなし" height={CHART_HEIGHT} />
-          )}
-        </div>
-
-        <div className="mt-0.5 flex items-center justify-end gap-1 text-[10px] text-muted-foreground @sm:col-start-1 @sm:row-start-2 @sm:mt-0 @sm:self-end @sm:justify-start @md:mt-0.5 @md:justify-end">
-          {hasTrend ? (
-            <span>
-              {label}
-              {periodChange && (
-                <>
-                  {" ・ "}
-                  {periodChange.fromYear}→{periodChange.toYear} {periodChange.text}
-                </>
-              )}
-            </span>
-          ) : (
-            <span>{label}</span>
-          )}
-        </div>
+    <SurfaceCard className="flex flex-col gap-1">
+      <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+        <div><p className="text-sm font-medium text-muted-foreground">{label}</p>{yearName && <p className="text-xs text-muted-foreground">{yearName}</p>}</div>
+        <p className="whitespace-nowrap text-xl font-bold tabular-nums text-foreground">{formatRankingValue(figure.value, precision)}<span className="ml-1 text-sm font-medium">{formatUnitForDisplay(unit)}</span></p>
       </div>
+      {hasTrend ? <NumericTrendChart points={series} policy={domainPolicy} selectedYear={yearName ? Number(yearName.slice(0, 4)) : undefined} label={label} unit={unit} formatValue={(value) => formatRankingValue(value, precision)} /> : <p className="mt-2 text-xs text-muted-foreground">{series.length === 1 ? "この指標は単年データです。" : "推移データはありません。"}</p>}
+      {periodChange && <p className="text-xs text-muted-foreground">{periodChange.fromYear}→{periodChange.toYear} <span className="font-medium text-foreground">{periodChange.text}</span></p>}
     </SurfaceCard>
   );
 }

@@ -7,6 +7,9 @@
       "key": "aging-society",
       "title": "市区町村の高齢化",
       "href": "/municipalities/themes/aging-society",
+      "rankingKeys": [
+        "elderly-population-ratio"
+      ],
       "published": true
     },
     {
@@ -15,6 +18,14 @@
       "key": "agriculture-forestry",
       "title": "市区町村の農林業",
       "href": "/municipalities/themes/agriculture-forestry",
+      "rankingKeys": [
+        "agricultural-output",
+        "cultivated-area",
+        "abandoned-cultivated-land-area",
+        "woodland-area",
+        "forest-area",
+        "workers-agriculture-forestry-fishery"
+      ],
       "published": true
     },
     {
@@ -23,6 +34,22 @@
       "key": "commerce",
       "title": "市区町村の商業",
       "href": "/municipalities/themes/commerce",
+      "rankingKeys": [
+        "annual-sales-amount",
+        "annual-sales-amount-per-employee",
+        "annual-sales-amount-per-establishment",
+        "wholesale-annual-sales-amount",
+        "sales-amount-private",
+        "retail-store-count",
+        "retail-store-count-per-1000",
+        "retail-stores-per",
+        "department-supermarket-count",
+        "department-supermarket-count-per-100k",
+        "department-store-count-per-100k",
+        "large-retail-store-count-per-100k",
+        "number-of-commercial-employees-wholesale-retail",
+        "restaurant-count-per-1000"
+      ],
       "published": true
     },
     {
@@ -31,6 +58,18 @@
       "key": "commuting",
       "title": "市区町村の通勤・通学と乗り物",
       "href": "/municipalities/themes/commuting",
+      "rankingKeys": [
+        "commuters-total",
+        "commute-by-train",
+        "commute-by-bus",
+        "commute-by-car",
+        "commute-by-motorcycle",
+        "commute-by-bicycle",
+        "commute-on-foot",
+        "kei-car-count",
+        "motorcycle-count",
+        "moped-count"
+      ],
       "published": true
     },
     {
@@ -39,6 +78,21 @@
       "key": "education",
       "title": "市区町村の教育・文化施設",
       "href": "/municipalities/themes/education",
+      "rankingKeys": [
+        "elementary-school-count",
+        "elementary-school-count-per-100km2-habitable",
+        "elementary-school-children-count",
+        "elementary-school-teachers",
+        "junior-high-school-count",
+        "junior-high-school-count-per-100km2-habitable",
+        "junior-high-school-students-count",
+        "junior-high-school-teachers",
+        "high-school-count",
+        "high-school-count-per-100km2-habitable",
+        "integrated-kindergarten-enrollment",
+        "library-count-per-million",
+        "public-hall-count-per-million"
+      ],
       "published": true
     },
     {
@@ -47,6 +101,23 @@
       "key": "establishments",
       "title": "市区町村の事業所",
       "href": "/municipalities/themes/establishments",
+      "rankingKeys": [
+        "number-of-establishments-economic-census-basic-survey",
+        "number-of-establishments-establishment-corporate-statistics",
+        "number-of-establishments-agriculture-forestry",
+        "number-of-establishments-agriculture-forestry-fisheries",
+        "number-of-establishments-fisheries",
+        "number-of-establishments-mining-quarrying-gravel-extraction",
+        "number-of-establishments-construction",
+        "number-of-establishments-manufacturing",
+        "number-of-establishments-information-communication",
+        "number-of-establishments-transport-post",
+        "number-of-establishments-wholesale-retail",
+        "number-of-establishments-finance-insurance",
+        "number-of-establishments-real-estate-leasing",
+        "number-of-establishments-education-learning-support",
+        "number-of-establishments-medical-welfare"
+      ],
       "published": true
     },
     {
@@ -55,6 +126,11 @@
       "key": "foreign-residents",
       "title": "市区町村の外国人住民",
       "href": "/municipalities/themes/foreign-residents",
+      "rankingKeys": [
+        "foreign-resident-count",
+        "foreign-resident-population",
+        "foreign-population-per-100k"
+      ],
       "published": true
     },
     {
@@ -63,6 +139,16 @@
       "key": "households",
       "title": "市区町村の世帯構成",
       "href": "/municipalities/themes/households",
+      "rankingKeys": [
+        "households",
+        "single-person-households",
+        "nuclear-family-household-count",
+        "nuclear-family-households-ratio",
+        "single-mother-households",
+        "single-father-households",
+        "elderly-couple-only-household-ratio",
+        "single-person-household-old-population-ratio"
+      ],
       "published": true
     },
     {
@@ -71,6 +157,18 @@
       "key": "housing",
       "title": "市区町村の住宅・建設",
       "href": "/municipalities/themes/housing",
+      "rankingKeys": [
+        "vacant-housing-ratio",
+        "owner-occupied-housing-ratio",
+        "housing-floor-area",
+        "new-housing-starts",
+        "new-housing-floor-area",
+        "new-owner-occupied-starts",
+        "new-rental-starts",
+        "new-condo-starts",
+        "earthquake-retrofit-housing",
+        "solar-power-housing"
+      ],
       "published": true
     },
     {
@@ -79,6 +177,17 @@
       "key": "labor",
       "title": "市区町村の労働・就業",
       "href": "/municipalities/themes/labor",
+      "rankingKeys": [
+        "employed-people-ratio",
+        "employed-people-ratio-primary",
+        "employed-people-ratio-secondary",
+        "employed-people-ratio-tertiary",
+        "secondary-employed-people-ratio-tertiary",
+        "unemployment-rate",
+        "elderly-workers-ratio",
+        "commuter-ratio-to-other-municipalities",
+        "commuter-ratio-from-other-municipalities"
+      ],
       "published": true
     },
     {
@@ -87,6 +196,13 @@
       "key": "land-area",
       "title": "市区町村の土地・面積",
       "href": "/municipalities/themes/land-area",
+      "rankingKeys": [
+        "total-area-excluding-northern-territories-and-takeshima",
+        "total-area-prefecture-ratio",
+        "habitable-area",
+        "habitable-area-ratio",
+        "total-assessed-land-area"
+      ],
       "published": true
     },
     {
@@ -95,6 +211,27 @@
       "key": "local-finance",
       "title": "市区町村の地方財政",
       "href": "/municipalities/themes/local-finance",
+      "rankingKeys": [
+        "fiscal-strength-index",
+        "current-balance-ratio-city",
+        "real-public-debt-service-ratio-city",
+        "future-burden-ratio-city",
+        "real-balance-ratio-city",
+        "municipal-bonds-outstanding",
+        "municipal-resident-tax",
+        "standard-fiscal-demand-municipality",
+        "standard-fiscal-revenue-municipality",
+        "per-taxpayer-taxable-income",
+        "per-taxpayer-income",
+        "taxpayer-count-equal",
+        "taxpayer-count-income",
+        "municipal-general-administration-staff",
+        "civil-engineering-expense-municipal",
+        "education-expense-municipal",
+        "public-assistance-expense-municipal",
+        "sanitation-expense-municipal",
+        "welfare-expense-municipal"
+      ],
       "published": true
     },
     {
@@ -103,6 +240,14 @@
       "key": "manufacturing",
       "title": "市区町村の製造業",
       "href": "/municipalities/themes/manufacturing",
+      "rankingKeys": [
+        "manufacturing-shipment-amount",
+        "manufacturing-shipment",
+        "manufacturing-establishments",
+        "manufacturing-employees",
+        "manufacturing-sales-private",
+        "manufacturing-net-value-added-private"
+      ],
       "published": true
     },
     {
@@ -111,6 +256,25 @@
       "key": "medical-welfare",
       "title": "市区町村の医療・福祉",
       "href": "/municipalities/themes/medical-welfare",
+      "rankingKeys": [
+        "general-hospital-count",
+        "general-hospital-per-100k",
+        "general-hospital-count-per-100km2",
+        "general-clinic-count",
+        "general-clinic-count-per-100k",
+        "general-clinic-count-per-100km2",
+        "dental-clinic-count",
+        "psychiatric-hospital-count",
+        "physicians-in-medical-facilities",
+        "dentists-in-medical-facilities",
+        "pharmacist-count",
+        "nursing-welfare-facility-count-per-100k-65plus",
+        "intellectual-disability-support-facility-capacity",
+        "intellectual-disability-support-facility-residents",
+        "physical-disability-rehabilitation-facility-capacity",
+        "physical-disability-rehabilitation-facility-residents",
+        "national-health-insurance-benefits"
+      ],
       "published": true
     },
     {
@@ -119,6 +283,19 @@
       "key": "migration",
       "title": "市区町村の人口移動",
       "href": "/municipalities/themes/migration",
+      "rankingKeys": [
+        "moving-in-excess-rate",
+        "moving-in-excess-rate-japanese",
+        "movers-in",
+        "movers-out",
+        "japanese-movers-in",
+        "japanese-movers-out",
+        "moving-in-rate",
+        "moving-in-rate-japanese",
+        "moving-out-rate",
+        "moving-out-rate-japanese",
+        "outflow-commuter-student-population"
+      ],
       "published": true
     },
     {
@@ -127,6 +304,19 @@
       "key": "population",
       "title": "市区町村の人口",
       "href": "/municipalities/themes/population",
+      "rankingKeys": [
+        "total-population",
+        "japanese-population",
+        "population-density-per-km2-inhabitable-area",
+        "young-population-ratio",
+        "production-age-population-ratio",
+        "elderly-population-ratio",
+        "day-time-population",
+        "day-time-population-ratio",
+        "ratio-never-married-15-plus",
+        "households",
+        "moving-in-excess-rate"
+      ],
       "published": true
     },
     {
@@ -135,6 +325,15 @@
       "key": "safety-environment",
       "title": "市区町村の安全・環境",
       "href": "/municipalities/themes/safety-environment",
+      "rankingKeys": [
+        "criminal-recognition-count",
+        "crime-rate-per-1k",
+        "traffic-accident-count",
+        "traffic-accident-per-100k",
+        "garbage-total-output",
+        "garbage-final-disposal",
+        "garbage-collection-population"
+      ],
       "published": true
     },
     {
@@ -143,6 +342,13 @@
       "key": "urban-structure",
       "title": "市区町村の人口集中・都市構造",
       "href": "/municipalities/themes/urban-structure",
+      "rankingKeys": [
+        "densely-inhabited-district-population",
+        "densely-inhabited-district-population-density",
+        "densely-populated-area",
+        "densely-populated-area-change-rate",
+        "urban-planning-area"
+      ],
       "published": true
     },
     {
@@ -151,6 +357,12 @@
       "key": "vital-statistics",
       "title": "市区町村の出生・婚姻・死亡",
       "href": "/municipalities/themes/vital-statistics",
+      "rankingKeys": [
+        "births",
+        "death-count",
+        "marriages",
+        "divorces"
+      ],
       "published": true
     }
   ]

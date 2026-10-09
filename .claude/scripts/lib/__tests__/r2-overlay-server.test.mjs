@@ -8,11 +8,11 @@ import http from "node:http";
 import os from "node:os";
 import path from "node:path";
 import test from "node:test";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../../../..");
-const { createOverlayServer, localPageComponentsFile } = await import(
-  path.join(ROOT, ".github/scripts/r2-overlay-server.mjs")
+const { createOverlayServer, localPageComponentsFile, localMetricSnapshotFile } = await import(
+  pathToFileURL(path.join(ROOT, ".github/scripts/r2-overlay-server.mjs")).href
 );
 
 function listen(server) {
@@ -59,4 +59,31 @@ test("page-components の外や上位ディレクトリを指す path はロー�
   assert.equal(localPageComponentsFile("/app/page-components/../theme/consumer-prices.json", dir), null);
   assert.equal(localPageComponentsFile("/app/stats/theme/consumer-prices.json", dir), null);
   assert.equal(localPageComponentsFile("/app/page-components/theme/consumer-prices.txt", dir), null);
+});
+
+test("generated metric metadata overrides remote metadata while observations remain upstream", async () => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "metric-overlay-"));
+  const itemDir = path.join(dir, "app/ranking/total-population");
+  fs.mkdirSync(itemDir, {recursive:true});
+  fs.writeFileSync(path.join(itemDir, "item.json"), '{"presentation":"current"}');
+  fs.mkdirSync(path.join(dir, 'app/home'), {recursive:true});
+  fs.writeFileSync(path.join(dir, 'app/home/featured.json'), '{"presentation":"home-current"}');
+  fs.mkdirSync(path.join(dir, "app/stats/total-population"), {recursive:true});
+  fs.writeFileSync(path.join(dir, "app/stats/total-population/values.json"), '{"not":"authoritative"}');
+  const upstream = http.createServer((_req,res) => {res.writeHead(200);res.end('{"from":"upstream"}');});
+  const upstreamPort = await listen(upstream);
+  const overlay = createOverlayServer({upstream: 'http://127.0.0.1:'+upstreamPort, snapshotDir:dir});
+  const port = await listen(overlay);
+  try {
+    const local = await fetch('http://127.0.0.1:'+port+'/app/ranking/total-population/item.json');
+    assert.equal(await local.text(), '{"presentation":"current"}');
+    const home = await fetch('http://127.0.0.1:'+port+'/app/home/featured.json');
+    assert.equal(await home.text(), '{"presentation":"home-current"}');
+    const head = await fetch('http://127.0.0.1:'+port+'/app/ranking/total-population/item.json', {method:'HEAD'});
+    assert.equal(head.status, 200);assert.equal(await head.text(), '');
+    const data = await fetch('http://127.0.0.1:'+port+'/app/stats/total-population/values.json');
+    assert.equal(await data.text(), '{"from":"upstream"}');
+    assert.equal(localMetricSnapshotFile('/app/ranking/..%2Fsecret/item.json',dir),null);
+    assert.equal(localMetricSnapshotFile('/app/stats/total-population/values.json',dir),null);
+  } finally {overlay.close();upstream.close();fs.rmSync(dir,{recursive:true,force:true});}
 });

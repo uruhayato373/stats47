@@ -5,6 +5,8 @@ import type {
 } from "../../types/ranking-item";
 import type { RankingItemWithTags } from "../../types/ranking-item-with-tags";
 import type { RankingItemsSnapshot } from "../../types/snapshot";
+import { assertMetricPresentation } from '@stats47/types';
+import { parseRecipe } from '@stats47/data-configs';
 
 export interface HomeFeaturedSnapshot {
   generatedAt: string;
@@ -87,6 +89,12 @@ export function parseRankingItem(value: unknown): RankingItem {
   }
   if (typeof value.isActive !== "boolean") throw new Error("item.isActive must be boolean");
   assertTags(value.tags);
+  assertMetricPresentation(value.visualization);
+ if (value.sourceConfig !== undefined && value.sourceConfig !== null) {
+  const source = value.sourceConfig;
+  if (!isRecord(source) || Object.keys(source).some(key => !['recipe', 'source'].includes(key)) || !parseRecipe(source.recipe)) throw new Error('item.sourceConfig must contain the canonical recipe');
+  if (source.source !== undefined && (!isRecord(source.source) || Object.entries(source.source).some(([key, val]) => !['name', 'url'].includes(key) || typeof val !== 'string'))) throw new Error('item.sourceConfig.source is invalid');
+ }
   return value as unknown as RankingItem;
 }
 

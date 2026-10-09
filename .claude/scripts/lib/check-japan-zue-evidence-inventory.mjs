@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import { spawnSync } from "node:child_process";
+import path from 'node:path';
 
 const commands = [
   ["npm", ["run", "evidence:resolve", "--", "--check"]],
@@ -10,7 +11,8 @@ const commands = [
 ];
 
 for (const [command, args] of commands) {
-  const result = spawnSync(command, args, {
+  const result = spawnSync(process.platform === 'win32' ? process.execPath : command,
+    [...(process.platform === 'win32' ? [process.env.npm_execpath || path.join(path.dirname(process.execPath), 'node_modules/npm/bin/npm-cli.js')] : []), ...args], {
     cwd: process.cwd(),
     env: { ...process.env, FORCE_COLOR: "0" },
     stdio: "inherit",

@@ -147,7 +147,7 @@ rankingKey が実在する `average-temperature` は、実装時に catalog の 
 ## 想定実装差分と検証
 
 - 編集: `data/themes/catalogs/consumer-prices.json` と、`years` を `{from: 2013, to: 2024}` に広げる 9 つの metric config
-  (`packages/data-configs/src/metrics/consumer-price-difference-index-{overall-excl-rent,utilities,education,culture-recreation,transport-communication,healthcare,clothing-footwear,furniture-household,miscellaneous}.ts`)。
+  (`data/metrics/consumer-price-difference-index-{overall-excl-rent,utilities,education,culture-recreation,transport-communication,healthcare,clothing-footwear,furniture-household,miscellaneous}.ts`)。
   `yearFormat` はこの変更では触らない (判断 3)。
 - R2 に影響するもの: ① `page-components/theme/consumer-prices.json` (図 `theme-cpi-heatmap` の型変更・`md-cpi-discussion` の削除)。
   ② 9 指標の観測値は、metric config の年を広げても自動では増えない。再取得 (`data-refresh.yml`) と R2 反映が要る。

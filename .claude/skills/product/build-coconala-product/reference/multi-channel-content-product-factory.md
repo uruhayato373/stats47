@@ -31,7 +31,7 @@ Office・データ商品の生成基盤は `.claude/rules/coconala-product-stand
 
 | 資産 | 現在のSSOT | 本仕様での役割 |
 |---|---|---|
-| metricメタ | `packages/data-configs/src/metrics/` | 商品の定義・単位・調査根拠 |
+| metricメタ | `data/metrics/` | 商品の定義・単位・調査根拠 |
 | 観測値 | R2 `app/stats/` 等 | 図表・分析の原料 |
 | blog | R2 + article outbox | 無料需要、章素材、landing |
 | note | note catalog git TS + R2 | 無料・有料記事、マガジン候補 |

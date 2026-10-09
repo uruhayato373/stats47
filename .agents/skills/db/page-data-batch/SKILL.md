@@ -8,7 +8,7 @@ primary_agent: data-ingester
 co_agents: [theme-designer]
 ---
 
-`packages/data-configs/src/metrics/*.ts` registry を入力に、e-Stat から data を fetch して R2 (`.local/r2/app/stats/<metric>/values.json`) へ直接書き込む。
+`data/metrics/*.ts` registry を入力に、e-Stat から data を fetch して R2 (`.local/r2/app/stats/<metric>/values.json`) へ直接書き込む。
 
 Phase 6 で D1 → R2 移行が完了した後、本 skill が新規 metric / 年度更新の主たる手段となる (旧 `populate-all-rankings` skill を置換、2026-05-28 削除済み)。
 
@@ -97,7 +97,7 @@ provenance の規約は [`data-provenance-standards.md`](../../../rules/data-pro
 
 ## 新規 metric 追加フロー
 
-1. `packages/data-configs/src/metrics/<new-key>.ts` を新規作成 (既存ファイルをコピーして編集)
+1. `data/metrics/<new-key>.ts` を新規作成 (既存ファイルをコピーして編集)
 2. `npx tsx packages/data-configs/scripts/build-registry.ts` で registry 再生成
 3. `/page-data-batch --metric <new-key>` で data fetch + R2 書込
 4. `/publish-ranking <new-key>` で ranking-items / values / KNOWN / sitemap を同期し、承認後に本番反映

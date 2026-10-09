@@ -36,23 +36,48 @@ export const GEO_CROSS_ANALYSIS_CONFIGS: Readonly<
   Record<GeoCrossAnalysisSlug, GeoCrossAnalysisConfig>
 > = {
   'population-landslide-exposure': {
-    slug: 'population-landslide-exposure', eyebrow: '土砂災害指定区域 × 人口・公共施設', shortTitle: '土砂災害指定区域と人口・公共施設',
-    description: '2025年度版の指定区域面に2020年の250m人口メッシュと2022年の公共施設を重ねます。対象は京都府を除く46県です。',
-    spatialReading: '人口分布、公共施設、指定区域との重なり、元の分母へ戻るかの検算を確認します。',
-    overlapLabel: '指定区域との重なり', overlapLegend: '青＝警戒区域のみ、紫＝特別警戒区域、灰＝今回の入力面外。特別警戒面が警戒面に包含されるとは仮定しません。',
-    mapLimit: '人口は250m格子の中心包含による近似です。区域の更新日は県により異なります。個別住宅や現在の避難先の安全判定には使えません。',
-    mapTitle: '指定区域内に中心がある人口の割合', mapSubtitle: '2020年基準人口を分母に計算。京都府は利用制限により対象外です。',
-    takeaways: ['人口と2つの施設群は、それぞれ別の分母で読みます。', '現象別の区域には重複があるため合算しません。', '県境を越える区域との包含も調べ、人口と施設の元の市区町村帰属を保ちます。'],
+    slug: 'population-landslide-exposure',
+    eyebrow: '土砂災害指定区域 × 人口・公共施設',
+    shortTitle: '土砂災害指定区域と人口・公共施設',
+    description:
+      '2025年度版の指定区域面に2020年の250m人口メッシュと2022年の公共施設を重ねます。対象は京都府を除く46県です。',
+    spatialReading:
+      '人口分布、公共施設、指定区域との重なり、元の分母へ戻るかの検算を確認します。',
+    overlapLabel: '指定区域との重なり',
+    overlapLegend:
+      '青＝警戒区域のみ、紫＝特別警戒区域、灰＝今回の入力面外。特別警戒面が警戒面に包含されるとは仮定しません。',
+    mapLimit:
+      '人口は250m格子の中心包含による近似です。区域の更新日は県により異なります。個別住宅や現在の避難先の安全判定には使えません。',
+    mapTitle: '指定区域内に中心がある人口の割合',
+    mapSubtitle:
+      '2020年基準人口を分母に計算。京都府は利用制限により対象外です。',
+    takeaways: [
+      '人口と2つの施設群は、それぞれ別の分母で読みます。',
+      '現象別の区域には重複があるため合算しません。',
+      '県境を越える区域との包含も調べ、人口と施設の元の市区町村帰属を保ちます。',
+    ],
     hazardMapUrl: 'https://disaportal.gsi.go.jp/',
   },
   'population-snow-designation': {
-    slug: 'population-snow-designation', eyebrow: '豪雪指定区域 × 人口', shortTitle: '豪雪指定区域と人口',
-    description: '2016年度の豪雪指定区域に2020年基準人口の250mメッシュ中心を重ね、区域内と判定した人口と面積を確認します。',
-    spatialReading: '2020年人口の分布、通常・特別豪雪区域との中心包含、境界にかかる格子と合計の検算を確認します。',
-    overlapLabel: '豪雪指定区域との重なり', overlapLegend: '青＝通常の豪雪指定区域、紫＝特別豪雪区域、灰＝中心が今回の入力区域外。輪郭は表示用に20m簡略化した指定区域で、判定には未簡略化の原典を使用しています。',
-    mapLimit: '2016年度指定境界と2020年の調整済み基準人口を使用しています。現在の法指定人口、個別住宅の指定や安全を判定するものではありません。',
-    mapTitle: '豪雪指定区域に中心があるメッシュの人口割合', mapSubtitle: '2020年基準人口を分母とし、特別豪雪を内数として示します。',
-    takeaways: ['人口の3区分は同じ分母を排他的に分けています。', '250m格子の中心包含と全体包含・一部交差の差を確認できます。', '指定の版と人口年が異なるため、現在の公式指定人口とは一致しません。'],
+    slug: 'population-snow-designation',
+    eyebrow: '豪雪指定区域 × 人口',
+    shortTitle: '豪雪指定区域と人口',
+    description:
+      '2016年度の豪雪指定区域に2020年基準人口の250mメッシュ中心を重ね、区域内と判定した人口と面積を確認します。',
+    spatialReading:
+      '2020年人口の分布、通常・特別豪雪区域との中心包含、境界にかかる格子と合計の検算を確認します。',
+    overlapLabel: '豪雪指定区域との重なり',
+    overlapLegend:
+      '青＝通常の豪雪指定区域、紫＝特別豪雪区域、灰＝中心が今回の入力区域外。輪郭は表示用に20m簡略化した指定区域で、判定には未簡略化の原典を使用しています。',
+    mapLimit:
+      '2016年度指定境界と2020年の調整済み基準人口を使用しています。現在の法指定人口、個別住宅の指定や安全を判定するものではありません。',
+    mapTitle: '豪雪指定区域に中心があるメッシュの人口割合',
+    mapSubtitle: '2020年基準人口を分母とし、特別豪雪を内数として示します。',
+    takeaways: [
+      '人口の3区分は同じ分母を排他的に分けています。',
+      '250m格子の中心包含と全体包含・一部交差の差を確認できます。',
+      '指定の版と人口年が異なるため、現在の公式指定人口とは一致しません。',
+    ],
   },
   'population-public-facility-access': {
     slug: 'population-public-facility-access',
@@ -223,9 +248,12 @@ export function buildGeoMapModel(snapshot: GeoAnalysisSnapshot): {
         displayUnit: metric.unit,
       },
       visualization: {
+        domain: { mode: 'zero' },
+        classification: { method: 'equal-interval', classes: 5 },
+        trendDomain: { mode: 'extent', padding: 0.08 },
+        comparisonDomain: { mode: 'extent', padding: 0.05 },
         colorScheme: colorSchemeFor(snapshot.slug),
         colorSchemeType: 'sequential',
-        minValueType: 'zero',
       },
       createdAt: snapshot.generatedAt,
       updatedAt: snapshot.generatedAt,
@@ -253,5 +281,7 @@ export type { GeoAnalysisSnapshot, GeoAnalysisValueFormat };
  * 生成物は検算の記録として元の語のまま残す。
  */
 export function toGeoReaderTerms(text: string): string {
-  return text.replace(/保存則/g, '合計の検算').replace(/lineage/gi, '処理の流れ');
+  return text
+    .replace(/保存則/g, '合計の検算')
+    .replace(/lineage/gi, '処理の流れ');
 }
