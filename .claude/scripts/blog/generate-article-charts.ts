@@ -430,6 +430,8 @@ function genScatterChartSvg(data) {
     title,
     xLabel: data.xUnit ? `${xLabel}（${data.xUnit}）` : xLabel,
     yLabel: data.yUnit ? `${yLabel}（${data.yUnit}）` : yLabel,
+    // 本文が名指しする点に県名を直接書く (任意。data JSON の labelPoints: ["東京都", ...])
+    labelNames: Array.isArray(data.labelPoints) ? data.labelPoints : undefined,
   });
 }
 

@@ -5,6 +5,12 @@ import {
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 
+import { DEFAULT_METRIC_PRESENTATION } from '../../../../../../../data/metrics/defaults/presentation';
+import { ALL_THEMES } from '../../config/all-themes';
+import { ThemeMetricsDashboard } from '../ThemeMetricsDashboard';
+
+import type { ThemeConfig, ThemeIndicatorData } from '../../types';
+
 /**
  * ThemeMetricsDashboard の件数契約 (2026-09-17) を、実カタログ (THEME_CATALOGS) 全件で固定する。
  *
@@ -51,15 +57,12 @@ vi.mock('../ThemeComparisonSection', () => ({
   ThemeComparisonSection: () => null,
 }));
 
-import { ALL_THEMES } from '../../config/all-themes';
-import { ThemeMetricsDashboard } from '../ThemeMetricsDashboard';
 
-import type { ThemeConfig, ThemeIndicatorData } from '../../types';
 
 /** KPI に採用されるには MIN_VALUES_FOR_KPI (=10) 以上の観測が要る */
 function indicatorData(key: string, valueCount = 12): ThemeIndicatorData {
   return {
-    rankingItem: { title: key, unit: '単位' },
+    rankingItem: { title: key, unit: '単位', visualization: { ...DEFAULT_METRIC_PRESENTATION, colorScheme: 'interpolateBlues', colorSchemeType: 'sequential' } },
     rankingValues: Array.from({ length: valueCount }, (_, i) => ({
       areaCode: String(i + 1).padStart(5, '0'),
       value: 100 + i,

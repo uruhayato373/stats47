@@ -58,6 +58,8 @@ describe('article background composition contract', () => {
       expect(prompt).toMatch(/left 55 percent completely empty/i);
       expect(prompt).toMatch(/x=0 through x=660/i);
       expect(prompt).toMatch(/x=696 through x=1164/i);
+      expect(prompt).toMatch(/inset box at x=780 through x=1140/i);
+      expect(prompt).toMatch(/scale the complete group down together/i);
       expect(prompt).toMatch(/no horizon/i);
       expect(prompt).toMatch(/screens.*blank.*no.*charts/i);
       expect(prompt).toMatch(/article context.*never overrides/i);
@@ -79,7 +81,7 @@ describe('article background composition contract', () => {
     expect(revised.promptHash).not.toBe(request.promptHash);
   });
 
-  it('旧prompt versionのrequestを拒否し、既存画像を書き換えない', async () => {
+  it('修正前のv2 requestを拒否し、既存画像を書き換えない', async () => {
     const projectRoot = mkdtempSync(join(tmpdir(), 'blog-article-background-'));
     temporaryDirectories.push(projectRoot);
     const inputPath = join(projectRoot, 'existing.jpg');
@@ -94,7 +96,7 @@ describe('article background composition contract', () => {
       .update(
         JSON.stringify({
           model: request.model,
-          promptVersion: 'blog-article-context-v1',
+          promptVersion: 'blog-article-context-v2',
           prompt: request.prompt,
         })
       )

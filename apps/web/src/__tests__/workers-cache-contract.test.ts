@@ -128,7 +128,9 @@ describe("Workers Cache invalidation wiring", () => {
       "CLOUDFLARE_R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}",
     );
     expect(generator).toContain("configureSearchIndexR2Environment(process.env)");
-    expect(workflow).not.toMatch(/^\s+R2_ACCESS_KEY_ID:/m);
+    const buildStep = workflow.match(/^\s+- name: Build\r?\n([\s\S]*?)(?=^\s+- name: )/m)?.[1];
+    expect(buildStep).toBeDefined();
+    expect(buildStep).not.toMatch(/^\s+R2_ACCESS_KEY_ID:/m);
   });
 });
 

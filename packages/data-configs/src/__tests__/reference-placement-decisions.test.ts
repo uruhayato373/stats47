@@ -4,6 +4,7 @@ import { AREA_DATABOOK_TEMPLATE } from "../area-databook/template";
 import { REFERENCE_PLACEMENT_DECISIONS } from "../evidence-inventory/placement-decisions";
 import { JAPAN_CATALOGS } from "../geo-scope/japan-catalog";
 import { METRICS_REGISTRY } from "../registry";
+import { THEME_CATALOGS } from "../theme-catalog/catalogs";
 
 // 「載せない」と決めた記録が、採用済みの正本 (テンプレート・カタログ) と食い違うと、
 // 管理画面の集計が採用済みの指標を見送り扱いにしたり、判断の根拠が実在しない指標を指したりする。
@@ -20,9 +21,14 @@ describe("参考文献の展開先の見送り記録", () => {
     }
   });
 
-  it("採用済みの指標を見送りとして記録していない", () => {
+  it("採用済みの指標を見送り・企画中として記録していない (テンプレート・カタログが正本)", () => {
+    const themeKeys = new Set(
+      Object.values(THEME_CATALOGS).flatMap((catalog) => catalog.metrics.map((metric) => metric.rankingKey))
+    );
+    const adoptedBy: Partial<Record<string, Set<string>>> = { area: areaKeys, japan: japanKeys, theme: themeKeys };
     for (const decision of REFERENCE_PLACEMENT_DECISIONS) {
-      const adopted = decision.channel === "area" ? areaKeys : japanKeys;
+      const adopted = adoptedBy[decision.channel];
+      if (!adopted) continue;
       expect(adopted.has(decision.metricKey), `${decision.channel}:${decision.metricKey}`).toBe(false);
     }
   });

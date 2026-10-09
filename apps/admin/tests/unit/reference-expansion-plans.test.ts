@@ -5,29 +5,25 @@ import { describe, expect, it } from 'vitest';
 
 import {
   parseReferenceBlogDraft,
-  parseReferenceThemePlans,
+  referenceThemePlans,
   referenceExpansionPlans,
 } from '@/lib/server/reference-expansion-plans';
+import { REFERENCE_PLACEMENT_DECISIONS } from '../../../../packages/data-configs/src/evidence-inventory/placement-decisions';
 import { JAPAN_ZUE_PILOT_ITEMS } from '../../../../packages/data-configs/src/evidence-inventory/japan-zue/pilot';
 import { JAPAN_ZUE_MANUAL_OVERRIDES } from '../../../../packages/data-configs/src/evidence-inventory/japan-zue/policy';
 
 describe('reference expansion plans', () => {
-  it('backlogのmarker内だけをテーマ企画として読む', () => {
-    const plans = parseReferenceThemePlans(`
-<!-- reference-theme-plans:start -->
-| metricKey | title | targetTheme | status | hypothesis |
-| --- | --- | --- | --- | --- |
-| sample-metric | サンプル | local-economy | draft | 仮説 |
-| blocked-metric | 停止中 | population-dynamics | blocked | 再開待ち |
-<!-- reference-theme-plans:end -->
-`);
+  it('見送りの記録の theme の planned / blocked だけをテーマ企画にし、rejected は出さない', () => {
+    const plans = referenceThemePlans([
+      { channel: 'theme', metricKey: 'sample-metric', status: 'planned', target: 'local-economy', title: 'サンプル', reason: '仮説', decidedAt: '2026-10-10', decidedBy: 'test' },
+      { channel: 'theme', metricKey: 'blocked-metric', status: 'blocked', target: 'population-dynamics', reason: '再開待ち', decidedAt: '2026-10-10', decidedBy: 'test' },
+      { channel: 'theme', metricKey: 'rejected-metric', status: 'rejected', reason: '合わない', decidedAt: '2026-10-10', decidedBy: 'test' },
+      { channel: 'area', metricKey: 'area-metric', status: 'blocked', reason: '別の展開先', decidedAt: '2026-10-10', decidedBy: 'test' },
+    ]);
 
     expect(plans).toEqual([
-      expect.objectContaining({ id: 'theme:sample-metric', status: 'draft' }),
-      expect.objectContaining({
-        id: 'theme:blocked-metric',
-        status: 'blocked',
-      }),
+      expect.objectContaining({ id: 'theme:sample-metric', status: 'draft', target: '/themes/local-economy', title: 'サンプル' }),
+      expect.objectContaining({ id: 'theme:blocked-metric', status: 'blocked' }),
     ]);
   });
 
@@ -103,14 +99,27 @@ planSummary: "2指標の関係を検証する"
     const themePlans = plans.filter((plan) => plan.kind === 'theme');
     const blogPlans = plans.filter((plan) => plan.kind === 'blog');
 
-    expect(themePlans.map((plan) => plan.metricKeys[0]).sort()).toEqual(
-      expectedMissing.sort()
-    );
-    expect(themePlans).toHaveLength(7);
-    expect(themePlans.filter((plan) => plan.status === 'blocked')).toHaveLength(
-      3
-    );
-    expect(blogPlans).toHaveLength(4);
+    // 未統合の指標は、企画 (planned/blocked) か見送り (rejected) のどちらかとして必ず記録されている
+    const themeDecisionKeys = REFERENCE_PLACEMENT_DECISIONS.filter(
+      (decision) => decision.channel === 'theme'
+    ).map((decision) => decision.metricKey);
+    for (const key of expectedMissing) expect(themeDecisionKeys, key).toContain(key);
+    // 企画中・停止中の指標が、すでにテーマへ統合されていたら記録が古い
+    for (const plan of themePlans) expect(integratedText.includes(`"${plan.metricKeys[0]}"`), plan.id).toBe(false);
+    // 下書きは公開されると送り箱 (contents/blog) から CI が消すので、件数は直書きせず
+    // 送り箱に残る「参考文献の企画」印付きの記事と一致することを確かめる (2026-10-09 に 4 → 2 本で落ちた)
+    const outbox = path.join(root, 'contents/blog');
+    const markedDrafts = fs.existsSync(outbox)
+      ? fs
+          .readdirSync(outbox, { withFileTypes: true })
+          .filter((entry) => entry.isDirectory())
+          .map((entry) => `contents/blog/${entry.name}/article.md`)
+          .filter((rel) => {
+            const file = path.join(root, rel);
+            return fs.existsSync(file) && /^referenceSourcePlan:\s*true\s*$/m.test(fs.readFileSync(file, 'utf8'));
+          })
+      : [];
+    expect(blogPlans.map((plan) => plan.sourcePath).sort()).toEqual(markedDrafts.sort());
     for (const plan of blogPlans) {
       expect(
         plan.metricKeys.every((key) => referenceThemeKeys.includes(key))

@@ -1,0 +1,100 @@
+{
+  "date": "2026-10-08",
+  "fetched_at": "2026-10-09T21:52:12.314Z",
+  "account_tag": "cc10e4d021f2b259238dc98dfeebe907",
+  "d1": {
+    "readQueries": 0,
+    "writeQueries": 0,
+    "rowsRead": 0,
+    "rowsWritten": 0,
+    "databases": []
+  },
+  "workers": {
+    "totalRequests": 120617,
+    "totalErrors": 166,
+    "totalSubrequests": 122,
+    "byScript": {
+      "stats47": {
+        "requests": 117120,
+        "errors": 166,
+        "subrequests": 122,
+        "cpu_p50_us": 15176,
+        "cpu_p99_us": 3373815,
+        "wall_p50_us": 928423,
+        "wall_p99_us": 8063774
+      },
+      "__unknown__": {
+        "requests": 3497,
+        "errors": 0,
+        "subrequests": 0,
+        "cpu_p50_us": 649,
+        "cpu_p99_us": 1734,
+        "wall_p50_us": 839299,
+        "wall_p99_us": 1782401
+      }
+    }
+  },
+  "r2_operations": {
+    "classA": 99666,
+    "classB": 1330642,
+    "otherOps": 1062,
+    "totalEgressBytes": 188895429437,
+    "byBucket": {
+      "doboku-note": {
+        "classA": 21216,
+        "classB": 331292,
+        "other": 29,
+        "egressBytes": 2813973851
+      },
+      "doboku-note-archive": {
+        "classA": 27,
+        "classB": 389,
+        "other": 0,
+        "egressBytes": 6192769
+      },
+      "stats47": {
+        "classA": 78365,
+        "classB": 998861,
+        "other": 1033,
+        "egressBytes": 186036067368
+      },
+      "stats47-private": {
+        "classA": 58,
+        "classB": 100,
+        "other": 0,
+        "egressBytes": 39195449
+      }
+    }
+  },
+  "r2_storage": {
+    "totalBytes": 33723963686,
+    "totalObjects": 118576,
+    "byBucket": {
+      "stats47-private": {
+        "bytes": 189948635,
+        "objects": 1701,
+        "uploads": 0
+      },
+      "stats47": {
+        "bytes": 25904960454,
+        "objects": 101817,
+        "uploads": 0
+      },
+      "doboku-note": {
+        "bytes": 934319551,
+        "objects": 12028,
+        "uploads": 0
+      },
+      "stats47-cache": {
+        "bytes": 0,
+        "objects": 0,
+        "uploads": 0
+      },
+      "doboku-note-archive": {
+        "bytes": 6694735046,
+        "objects": 3030,
+        "uploads": 0
+      }
+    }
+  }
+}

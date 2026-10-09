@@ -87,7 +87,6 @@
     "UNTRACKED_DEBT:.github/workflows/migration-flow-annual.yml:# TODO Phase 2: X 投稿 (Playwright session を CI で管理する設計が必要)": 1,
     "UNTRACKED_DEBT:.github/workflows/migration-flow-weekly.yml:# TODO Phase 4: 既投稿チェック (週単位 idempotency)": 1,
     "UNTRACKED_DEBT:apps/web/src/components/organisms/README.md:// TODO: Fetch from API/DB": 1,
-    "UNTRACKED_DEBT:packages/data-configs/src/metrics/population-migration-net-municipality.ts:* TODO (Phase 7): source.statsDataId の確定とデータ投入。": 1,
     "UNTRACKED_DEBT:packages/estat-api/src/stats-list/index.ts:// TODO: components ディレクトリが存在しない": 1
   }
 }

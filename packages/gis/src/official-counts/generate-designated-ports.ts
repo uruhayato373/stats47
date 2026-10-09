@@ -6,7 +6,7 @@ import path from 'node:path';
 
 import { JSDOM } from 'jsdom';
 
-import { portCount } from '../../../data-configs/src/metrics/port-count';
+import { portCount } from '../../../../data/metrics/port-count';
 import { buildRecipe } from '../../../data-configs/src/recipe';
 import { buildStatsPayload } from '../mlit-ksj/ksj-stats-core';
 import {

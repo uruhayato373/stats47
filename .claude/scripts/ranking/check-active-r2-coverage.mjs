@@ -16,6 +16,7 @@
  * 配線: .github/workflows/agent-consistency-weekly.yml
  */
 import fs from "node:fs";
+import { datasetDir } from "../../../config/datasets.mjs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
@@ -43,7 +44,7 @@ const gone = extractQuotedKeys(
 );
 
 // metric config の isActive:true キー
-const metricsDir = path.join(PROJECT_ROOT, "packages/data-configs/src/metrics");
+const metricsDir = path.join(PROJECT_ROOT, datasetDir("metrics.definitions"));
 const active = new Set();
 for (const f of fs.readdirSync(metricsDir)) {
   if (!f.endsWith(".ts")) continue;

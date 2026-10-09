@@ -4,9 +4,9 @@ import { useEffect, useRef } from "react";
 import { useMap } from "react-leaflet";
 import L from "leaflet";
 
-import { createChoroplethColorMapper } from "../../d3/utils/color-scale/create-choropleth-color-mapper";
+import { resolveChoroplethScale } from "../../d3/utils/color-scale/resolve-choropleth-scale";
 import type { MapVisualizationConfig, MapDataPoint } from "../../d3/types/map-chart";
-import { DEFAULT_PREFECTURE_MAP_PROPS } from "../../d3/constants/map-constants";
+import { createLegendFormatter } from "../../d3/utils/color-scale/legend-format";
 
 interface MapColorLegendProps {
   colorConfig: MapVisualizationConfig;
@@ -26,7 +26,7 @@ interface MapColorLegendProps {
 /**
  * Leaflet コントロールとして表示する色凡例
  *
- * 10段階のグラデーションバーと min/max ラベルを描画。
+ * 指標定義で指定した階級と境界値、または連続グラデーションを描画。
  */
 export function MapColorLegend({
   colorConfig,
@@ -42,15 +42,11 @@ export function MapColorLegend({
   useEffect(() => {
     if (data.length === 0) return;
 
-    const values = data.map((d) => d.value).filter((v) => v != null) as number[];
-    if (values.length === 0) return;
-
-    const min = Math.min(...values);
-    const max = Math.max(...values);
-
     let cancelled = false;
 
-    createChoroplethColorMapper(colorConfig, data).then((colorMapper) => {
+    resolveChoroplethScale(colorConfig, data).then((resolved) => {
+      if (!resolved.domain) return;
+      const [min, max] = resolved.domain;
       if (cancelled) return;
 
       // 既存コントロールを削除
@@ -63,33 +59,50 @@ export function MapColorLegend({
       legend.onAdd = () => {
         const div = L.DomUtil.create("div", "leaflet-legend");
         div.style.cssText =
-          "background:rgba(255,255,255,0.92);padding:6px 10px;border-radius:6px;font-size:11px;line-height:1.4;box-shadow:0 1px 4px rgba(0,0,0,0.15);backdrop-filter:blur(4px);min-width:180px;";
-
-        // 10段階グラデーション。左端のラベルが最小値なので、色も値の小さい順に取る。
-        // data はランキング順 (1 位 = 最大値が先頭) で渡るため、配列順のまま取ると
-        // 左端に最大値の色が来て、地図と凡例の向きが逆になっていた (2026-09-25)。
-        const ascending = sortByValueAscending(data);
-        const steps = 10;
-        const gradientParts: string[] = [];
-        for (let i = 0; i < steps; i++) {
-          const ratio = i / (steps - 1);
-          const idx = Math.round(ratio * (ascending.length - 1));
-          gradientParts.push(colorMapper(ascending[idx].areaCode));
-        }
+          "background:hsl(var(--card));color:hsl(var(--foreground));padding:6px 10px;border-radius:6px;font-size:11px;line-height:1.4;box-shadow:0 1px 4px rgba(0,0,0,0.15);backdrop-filter:blur(4px);min-width:180px;";
 
         const factor = valueDisplay?.conversionFactor ?? 1;
         const dp = valueDisplay?.decimalPlaces;
         const displayUnit = valueDisplay?.displayUnit ?? unit;
-        const fmtMin = formatValue(min * factor, dp);
-        const fmtMax = formatValue(max * factor, dp);
-
-        const gradientBar = `<div style="height:10px;border-radius:3px;background:linear-gradient(to right,${gradientParts.join(",")});margin:2px 0;"></div>`;
-        const labels = `<div style="display:flex;justify-content:space-between;color:#64748b;"><span>${fmtMin}</span><span>${fmtMax}${displayUnit ? ` ${displayUnit}` : ""}</span></div>`;
-        const noDataEntry = showNoDataLabel
-          ? `<div style="display:flex;align-items:center;gap:4px;margin-top:4px;color:#64748b;"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:${DEFAULT_PREFECTURE_MAP_PROPS.noDataFillColor};"></span><span>データなし</span></div>`
-          : "";
-
-        div.innerHTML = gradientBar + labels + noDataEntry;
+        const fmt = createLegendFormatter([...resolved.boundaries, ...(resolved.midpoint !== undefined ? [resolved.midpoint] : [])], factor, resolved.method === 'threshold' ? undefined : dp);
+        const heading = L.DomUtil.create("div", "", div);
+        heading.textContent = resolved.method === "continuous" ? "値の大きさ" : resolved.method === "quantile" ? "分位区分" : resolved.method === "threshold" ? "指定した境界値" : "等間隔区分";
+        const bar = L.DomUtil.create("div", "", div);
+        bar.style.cssText = "height:12px;display:flex;margin:4px 0;";
+        if (resolved.method === "continuous") {
+          const stops = Array.from({ length: 21 }, (_, i) => resolved.colorAtValue(min + (max - min) * i / 20));
+          bar.style.background = 'linear-gradient(to right,' + stops.join(',') + ')';
+        } else for (let i = 0; i < resolved.colors.length; i++) {
+          const segment = L.DomUtil.create("span", "", bar);
+          segment.style.cssText = 'flex:1;background:' + resolved.colors[i] + ';';
+          segment.title = fmt(resolved.boundaries[i]) + '〜' + fmt(resolved.boundaries[i + 1]) + (displayUnit ? ' ' + displayUnit : '');
+        }
+        const labels = L.DomUtil.create("div", "", div);
+        labels.style.cssText = "display:flex;justify-content:space-between;gap:12px;";
+        const low = L.DomUtil.create("span", "", labels);
+        const high = L.DomUtil.create("span", "", labels);
+        low.textContent = fmt(min); high.textContent = fmt(max) + (displayUnit ? ' ' + displayUnit : '');
+        if (resolved.method !== 'continuous' && resolved.boundaries.length > 2) {
+          const thresholds = L.DomUtil.create('div', '', div);
+          thresholds.style.cssText = 'max-width:250px;margin-top:3px;white-space:normal;';
+          thresholds.textContent = '境界: ' + resolved.boundaries.slice(1, -1).map(fmt).join(' / ') + (displayUnit ? ' ' + displayUnit : '');
+        }
+        if (resolved.midpoint !== undefined) {
+          const reference = L.DomUtil.create("div", "", div);
+          reference.style.cssText = 'display:flex;align-items:center;gap:4px;margin-top:3px;';
+          const swatch = L.DomUtil.create('span', '', reference);
+          swatch.style.cssText = 'width:10px;height:10px;background:' + resolved.colorAtValue(resolved.midpoint) + ';';
+          const referenceLabel = L.DomUtil.create('span', '', reference);
+          referenceLabel.textContent = '基準: ' + fmt(resolved.midpoint) + (displayUnit ? ' ' + displayUnit : '');
+        }
+        if (showNoDataLabel) {
+          const missing = L.DomUtil.create("div", "", div);
+          missing.style.cssText = "display:flex;align-items:center;gap:4px;margin-top:4px;";
+          const swatch = L.DomUtil.create("span", "", missing);
+          swatch.style.cssText = 'display:inline-block;width:10px;height:10px;background:' + resolved.noDataColor + ';';
+          const text = L.DomUtil.create("span", "", missing);text.textContent = "データなし";
+        }
+        L.DomEvent.disableClickPropagation(div);
         return div;
       };
 
@@ -104,25 +117,7 @@ export function MapColorLegend({
         controlRef.current = null;
       }
     };
-  }, [colorConfig, data, unit, position, map]);
+  }, [colorConfig, data, unit, position, map, valueDisplay, showNoDataLabel]);
 
   return null;
-}
-
-function formatValue(value: number, decimalPlaces?: number): string {
-  if (decimalPlaces !== undefined) {
-    return value.toLocaleString(undefined, { minimumFractionDigits: decimalPlaces, maximumFractionDigits: decimalPlaces });
-  }
-  if (Math.abs(value) >= 10000) {
-    return (value / 10000).toFixed(1) + "万";
-  }
-  if (Number.isInteger(value)) return value.toLocaleString();
-  return value.toFixed(1);
-}
-
-/** 値のある県だけを値の小さい順に並べる (凡例の色を左 = 最小値から取るため) */
-export function sortByValueAscending(data: MapDataPoint[]): MapDataPoint[] {
-  return data
-    .filter((d) => d.value != null && Number.isFinite(d.value))
-    .sort((a, b) => a.value - b.value);
 }

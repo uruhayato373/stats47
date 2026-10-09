@@ -19,11 +19,7 @@
 import { isKnownColorScheme } from "@stats47/types";
 
 import { resolveColorScheme } from "../src/color-scheme-policy";
-import {
-  EXCLUDED_FROM_SEED,
-  METRIC_POLARITY,
-  MIN_POLARITY_COVERAGE,
-} from "../src/metric-polarity";
+import { EXCLUDED_FROM_SEED, METRIC_POLARITY, MIN_POLARITY_COVERAGE } from "../../../data/metrics/policy/polarity";
 import { listAllMetrics } from "../src/registry";
 
 const strict = process.argv.includes("--strict");

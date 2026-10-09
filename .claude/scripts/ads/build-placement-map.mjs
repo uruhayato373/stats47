@@ -11,7 +11,7 @@
  *
  * 入力 (ローカル設定 + 配信snapshot。欠けたら理由を記録して続行する):
  *   - GSC pages.csv  data/gsc/snapshots/<最新週>/pages.csv
- *   - metric config   packages/data-configs/src/metrics/*.ts       (rankingKey → category)
+ *   - metric config   data/metrics/*.ts       (rankingKey → category)
  *   - 意図ハブ        apps/web/src/features/ads/constants/affiliate-category.ts (共有resolver/maps)
  *   - 在庫            apps/web/scripts/affiliate-ads-data.ts        (vertical × adType)
  *   - A8 カタログ     data/affiliate/a8-catalog.json             (確定EPC)
@@ -59,7 +59,7 @@ function readCsv(path) {
 
 /** metrics の git TS から rankingKey → category / title を作る (isActive:false は除く)。 */
 function loadMetricMaps() {
-  const dir = join(ROOT, "packages/data-configs/src/metrics");
+  const dir = join(ROOT, datasetDir("metrics.definitions"));
   const keyToCategory = {};
   const keyTitles = {};
   for (const f of readdirSync(dir)) {

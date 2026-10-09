@@ -136,6 +136,8 @@ e-Stat連携・データ変換・ローディング状態を内包したフル�
 | コンポーネント | インポートパス | 用途 |
 |---|---|---|
 | `ChartCard` | `@/components/charts/ChartCard` | label / value / chart / footer スロット付きカード |
+| `ValueDotPlot` | `@/components/charts/ValueDotPlot` | 数値の共通軸上の位置・基準線で上位と下位の差を示す。軸範囲を明記し、切った軸を棒長として描かない |
+| `NumericTrendChart` | `@/components/charts/NumericTrendChart` | 数値Y軸・暦年X軸・選択年マーカー付きの推移。共通NumericDomainPolicyを受け、固定範囲外は印で明示 |
 | `MiniLineChart` | `@/components/charts/MiniCharts` | カード内折れ線（実線 + 比較破線）。D3インタラクティブ |
 | `MiniBarChart` | `@/components/charts/MiniCharts` | カード内棒グラフ（正負値対応） |
 | `MiniStackedBarChart` | `@/components/charts/MiniCharts` | カード内積み上げ棒グラフ |

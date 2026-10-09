@@ -10,7 +10,7 @@ import type { RankingItem } from "../types/ranking-item";
  *
  * 背景: ranking ページが描画する seoTitle/seoDescription は R2
  * `app/ranking/<key>/item.json` の値だが、git TS config
- * (`packages/data-configs/src/metrics/<key>.ts`) の編集はこれに伝播しない。
+ * (`data/metrics/<key>.ts`) の編集はこれに伝播しない。
  * 旧 config→item.json monolith exporter は Phase F (2026-05-30) で削除され、
  * 現行 `exportRankingItemsPerUrl` は既存 item.json を再グループ化するのみ
  * (同ファイル冒頭コメントが "config→item.json の field refresh は follow-up" と予告)。

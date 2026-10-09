@@ -1,3 +1,4 @@
+import { METRIC_DEFINITIONS_DIR } from '../../../config/paths.mjs';
 /**
  * validate-metric-years — metric config の years が 4 桁年に正規化されているか検証する lint。
  *
@@ -17,7 +18,9 @@ import { dirname, resolve, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const METRICS_DIR = resolve(__dirname, "../src/metrics");
+const METRICS_DIR = resolve(__dirname, "../../..", METRIC_DEFINITIONS_DIR);
+
+import { METRICS_REGISTRY } from "../src/registry";
 
 const MIN_YEAR = 1900;
 const MAX_YEAR = 2100;
@@ -43,13 +46,11 @@ function main() {
 
   for (const f of files) {
     const text = readFileSync(join(METRICS_DIR, f), "utf8");
-    // 1) "years": { ... } ブロック (statsDataId 等を誤検出しない)
-    const m = text.match(/"years":\s*\{([^}]*)\}/s);
-    const bad = m
-      ? (m[1].match(/\d+/g) ?? [])
-          .map(Number)
-          .filter((n) => n < MIN_YEAR || n > MAX_YEAR)
-      : [];
+    const spec = METRICS_REGISTRY[f.slice(0, -3)]?.years;
+    if (!spec) throw new Error('Missing metric years: ' + f);
+    const declared = spec === 'all' ? [] : 'years' in spec ? spec.years : [spec.from, spec.to];
+    const bad = declared.filter((year) => !Number.isInteger(year) || year < MIN_YEAR || year > MAX_YEAR);
+    if (spec !== 'all' && 'from' in spec && spec.from > spec.to) bad.push(spec.from, spec.to);
     // 2) seoTitle/seoDescription 等の表示テキストへのタイムコード混入 (SERP に "【2023100000年】" が出る)
     const textCodes = findTextTimeCodes(text);
     if (bad.length > 0 || textCodes.length > 0) {

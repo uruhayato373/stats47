@@ -1,3 +1,4 @@
+import { datasetDir } from "../../../config/datasets.mjs";
 /**
  * page-data-batch — TS-config 駆動の e-Stat → R2 直行バッチ
  *
@@ -53,7 +54,7 @@ import {
   toEstatValue,
 } from "../src/estat-transform.js";
 // 既知破損 allowlist。★書いてよいかの判定には使わず、run を fail させるかだけに使う
-import { EXPECTED_SHAPE_ANOMALY } from "../src/expected-shape-anomaly.js";
+import { EXPECTED_SHAPE_ANOMALY } from "../../../data/metrics/quality/shape-exceptions";
 import {
   PREFECTURE_COUNT,
   classifyShape,
@@ -1440,7 +1441,7 @@ async function main() {
       `[fatal] 形状が壊れた metric が ${shape} 件あります: ${shapeKeys.join(", ")}\n` +
         `        原因の大半は分類軸 (cdCat01-05 / cdTab) か timeScope の絞り忘れです。` +
         `未指定軸は diagnose-unpinned-axes.ts で列挙できます。\n` +
-        `        既知の是正待ちなら packages/data-configs/src/expected-shape-anomaly.ts に` +
+        `        既知の是正待ちなら ${datasetDir("metrics.quality")}/shape-exceptions.ts に` +
         ` 理由・追跡先・期限を添えて登録してください (一回きりの検証は --allow-shape <keys>)`,
     );
     process.exit(1);

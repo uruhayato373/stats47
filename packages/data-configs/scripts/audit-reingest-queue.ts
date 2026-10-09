@@ -1,3 +1,4 @@
+import { METRIC_DEFINITIONS_DIR } from '../../../config/paths.mjs';
 /**
  * audit-reingest-queue — 「config は直っているのに配信データが古いまま」の metric を列挙する。
  *
@@ -45,7 +46,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { EXPECTED_SHAPE_ANOMALY } from "../src/expected-shape-anomaly";
+import { EXPECTED_SHAPE_ANOMALY } from "../../../data/metrics/quality/shape-exceptions";
 import {
   assessReingestNeed,
   summarizeReingest,
@@ -82,7 +83,7 @@ function collectConfigModifiedAt(): Map<string, string> {
   try {
     log = execFileSync(
       "git",
-      ["log", "--format=%aI", "--name-only", "--", "packages/data-configs/src/metrics"],
+      ["log", "--format=%aI", "--name-only", "--", METRIC_DEFINITIONS_DIR],
       { cwd: PROJECT_ROOT, encoding: "utf8", maxBuffer: 256 * 1024 * 1024 },
     );
   } catch {

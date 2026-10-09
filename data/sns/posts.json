@@ -29509,9 +29509,9 @@
     },
     {
       "id": 1005,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:18.077Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-09T19:54:20.336Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "ranking",
@@ -29538,13 +29538,15 @@
           "height": 1616,
           "source": ".local/r2/sns/ranking/annual-sunshine-duration/x/stills/annual-sunshine-duration.png"
         }
-      ]
+      ],
+      "post_url": "https://www.threads.com/@stats47jp/post/DeQVTBMjF6G",
+      "posted_at": "2026-10-09T01:30:28.000Z"
     },
     {
       "id": 1006,
-      "status": "scheduled",
+      "status": "posted",
       "created_at": "2026-09-23T08:51:18.082Z",
-      "updated_at": "2026-10-09T02:41:54.455Z",
+      "updated_at": "2026-10-09T19:54:20.357Z",
       "platform": "threads",
       "post_type": "original",
       "domain": "area",
@@ -29571,7 +29573,9 @@
           "height": 630,
           "source": ".local/r2/sns/area/16000/x/stills/16000.png"
         }
-      ]
+      ],
+      "post_url": "https://www.threads.com/@stats47jp/post/DeRDEEPjntQ",
+      "posted_at": "2026-10-09T08:10:23.000Z"
     },
     {
       "id": 1007,
@@ -32378,22 +32382,21 @@
     },
     {
       "id": 1083,
-      "status": "draft",
+      "status": "posted",
       "approval": {
-        "state": "approved",
-        "by": "owner",
-        "at": "2026-10-09T12:21:34.045Z",
-        "via": "approve-posts",
-        "note": "2026-10-09 オーナーがチャットで全件承認を指示"
+        "state": "unrecorded",
+        "note": "承認の記録より前に IG cron が投稿 (2026-10-09)"
       },
       "created_at": "2026-10-09T03:56:52.465Z",
-      "updated_at": "2026-10-09T12:21:34.076Z",
+      "updated_at": "2026-10-09T10:07:02.946Z",
       "platform": "instagram",
       "post_type": "carousel",
       "domain": "compare-carousel",
       "content_key": "23000-vs-40000",
       "caption": "【県どうしの比較】愛知県 vs 福岡県\n\n製造品出荷額等（総額）: 愛知県が大きい（2023年・出典: 社会・人口統計体系）\n製造業事業所数: 愛知県が大きい（2024年・出典: 社会・人口統計体系）\n乳用牛飼養頭数（乳用牛・めすの飼養頭数合計）: 愛知県が大きい（2025年・出典: 畜産統計調査）\n男性所定内給与額: 愛知県が大きい（2022年・出典: 賃金構造基本統計調査）\n粗出生率: 福岡県が大きい（2023年・出典: 人口動態統計）\n平均余命（男性 0歳時点・平均寿命）: 愛知県が大きい（2020年・出典: 人口動態統計）\n\n数値が大きかったのは 愛知県 5項目 / 福岡県 1項目\n\n保存して後で見返してね📌\nプロフィールのリンクから全47都道府県が見られます\n\n#都道府県比較 #愛知県 #福岡県 #都道府県ランキング #統計 #暮らし #地域比較 #雑学 #stats47",
-      "scheduled_at": "2026-10-09T10:00:00.000Z"
+      "scheduled_at": "2026-10-09T10:00:00.000Z",
+      "post_url": "https://www.instagram.com/p/DeRQY84G5tI/",
+      "posted_at": "2026-10-09T10:07:02Z"
     },
     {
       "id": 1084,

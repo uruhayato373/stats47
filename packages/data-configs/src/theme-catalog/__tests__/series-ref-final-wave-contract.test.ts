@@ -9,8 +9,8 @@ describe("CROSS-PAGE-DATA-SSOT-01 final typed-reference contract", () => {
   const dependencies = collectThemeDataDependencies(Object.values(THEME_CATALOGS));
 
   it("ThemeCatalogの生e-Stat requestを0件にする", () => {
-    expect(dependencies.totalRequests).toBe(0);
-    expect(dependencies.distinctRequests).toEqual([]);
+    expect(dependencies).not.toHaveProperty("totalRequests");
+    expect(dependencies.distinctMetricKeys.length).toBeGreaterThan(0);
   });
 
   it("人口ピラミッドは34系列すべてを登録済みMetricConfigで列挙する", () => {
@@ -21,7 +21,7 @@ describe("CROSS-PAGE-DATA-SSOT-01 final typed-reference contract", () => {
 
     expect(pyramids).toHaveLength(1);
     for (const pyramid of pyramids) {
-      expect(pyramid.requests).toEqual([]);
+      expect(pyramid).not.toHaveProperty("requests");
       expect(pyramid.metricRefs).toHaveLength(expectedCodes.size);
       const actualCodes = new Set(
         pyramid.metricRefs.map((ref) => {

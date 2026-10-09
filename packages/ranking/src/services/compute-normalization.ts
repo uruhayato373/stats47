@@ -6,13 +6,10 @@ import type { RankingItem, RankingValue } from "../types";
 
 import { applyNormalization, resolveDenominator } from "./normalize-core";
 
-// 計算コア・分母宣言は normalize-core.ts が単一ソース (writer と共有)。
-// ここから re-export して既存 import 元 (テスト等) の互換を保つ。
+// 計算コアは writer と共通。分母宣言は data/metrics/defaults/normalization.ts。
 export {
-  WELL_KNOWN_DENOMINATORS,
   resolveDenominator,
   applyNormalization,
-  type WellKnownDenominator,
 } from "./normalize-core";
 
 /**
@@ -32,7 +29,7 @@ export async function computeNormalization(
   }
 
   // 分母キー + 単位換算係数の解決 (writer と共通の normalize-core が決める)
-  const denominator = resolveDenominator(option.type, areaType, option.denominatorKey);
+  const denominator = resolveDenominator(option.type, areaType);
 
   if (!denominator) {
     logger.warn({ rankingKey, type: option.type, areaType }, "computeNormalization: 分母キーを特定できません");

@@ -111,7 +111,9 @@ jobs:
       - name: 🛡️ GitHub Actions Policy Audit
         # permissions / timeout / schedule concurrency / action SHA pin を必須化。
         # actionは `@40桁commit SHA # vN`で固定し、サプライチェーン回帰を止める。
-        run: node .claude/scripts/lib/audit-workflow-policy.cjs --strict
+        run: |
+          node .claude/scripts/lib/audit-workflow-policy.cjs --strict
+          node --test .claude/scripts/lib/__tests__/metric-release-order.test.mjs .claude/scripts/lib/__tests__/r2-overlay-server.test.mjs
         continue-on-error: false
 
       - name: 🧯 Quality Gate Ratchet Contracts
@@ -132,6 +134,12 @@ jobs:
           node .claude/scripts/lib/check-quality-exceptions.cjs --base origin/main
           node .claude/scripts/lib/check-quality-warning-ratchet.cjs --base origin/main
           node .claude/scripts/lib/check-render-ci-contract.cjs --base origin/main
+        continue-on-error: false
+
+      - name: Metric and Content Identity Contracts
+        run: |
+          npx tsx packages/data-configs/scripts/check-metric-contract.ts
+          npm run content:check
         continue-on-error: false
 
       - name: 🔁 Sync-Snapshots Task Drift
@@ -440,6 +448,10 @@ jobs:
       - name: 🚨 Alert lifecycle contract
         # domain alert は1障害=1Issue。日付違いの量産と、復旧後もopenのまま残る退行を止める。
         run: npm run test:alert-lifecycle
+        continue-on-error: false
+
+      - name: Metric source catalog linkage contract
+        run: npm run estat:catalog:test
         continue-on-error: false
 
       - name: 🔄 GSC operations cycle contract
@@ -1134,9 +1146,30 @@ jobs:
         if: steps.node-modules-cache.outputs.cache-hit != 'true'
         run: npm ci
 
+      - name: Generate metric metadata for this PR
+        env:
+          R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
+        run: |
+          npx tsx -r ./packages/ranking/src/scripts/setup-cli.js packages/ranking/src/scripts/generate-ranking-items.ts --stage-dir .local/r2
+          npx tsx packages/ranking/src/scripts/generate-municipality-ranking.ts --all-published --source-base https://storage.stats47.jp --output-root .local/r2
+          npx tsx -r ./packages/ranking/src/scripts/setup-cli.js packages/ranking/src/scripts/export-master-snapshots.ts --staged-metrics
+          npm run metrics:verify-snapshots
+
+      - name: Start generated metadata overlay for build
+        run: |
+          node .github/scripts/r2-overlay-server.mjs 4790 > /tmp/pr-build-r2-overlay.log 2>&1 &
+          echo $! > /tmp/pr-build-r2-overlay.pid
+          for _ in $(seq 1 30); do
+            curl -sf http://127.0.0.1:4790/app/ranking-items/all.json > /dev/null && exit 0
+            sleep 1
+          done
+          cat /tmp/pr-build-r2-overlay.log
+          exit 1
+
       - name: 🏗️ Build Check
         run: npm run build -w apps/web
         env:
+          R2_PUBLIC_FETCH_URL: http://127.0.0.1:4790
           NODE_ENV: production
           NEXT_PUBLIC_ENV: production
           NEXT_PUBLIC_BASE_URL: https://stats47.jp
@@ -1158,6 +1191,22 @@ jobs:
             !apps/web/.next/cache/**
           include-hidden-files: true
           retention-days: 1
+
+      - name: Share verified metric metadata
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: pr-metric-metadata
+          path: |
+            .local/r2/app/ranking/
+            .local/r2/app/ranking-items/
+            .local/r2/app/home/
+            .local/r2/app/municipalities/ranking/
+          include-hidden-files: true
+          retention-days: 1
+
+      - name: Stop build metadata overlay
+        if: always()
+        run: kill "$(cat /tmp/pr-build-r2-overlay.pid)" 2>/dev/null || true
 
   remote-asset-audit:
     name: Blog Thumbnail Gate
@@ -1245,6 +1294,12 @@ jobs:
         with:
           name: pr-web-next-build
           path: apps/web/.next
+
+      - name: Reuse verified metric metadata
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: pr-metric-metadata
+          path: .local/r2/app
 
       # テーマ・地域の図の定義 (page-components) は実行時に R2 から読む。本番 R2 は main の内容なので、
       # このままでは PR で変えた図の種類を検査できない。page-components だけを PR の生成物から返し、

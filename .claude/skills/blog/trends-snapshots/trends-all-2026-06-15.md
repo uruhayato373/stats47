@@ -12,7 +12,7 @@ tags: [trend-discovery, blog-planning]
 > トレンド総数: ~80件 / 採用: 11件 / 除外: 多数（W杯・芸能・個別事件・海外政治）
 > クロスソースヒット: 2件（新幹線駅モール廃墟化 ×3 / 天候・梅雨 ×2）
 > 白書エンリッチ: 未実行（`--whitepaper` 未指定）
-> マッチング方式: 完全DBレス。`packages/data-configs/src/metrics/*.ts`（2,209 metric / live ranking 2,121）+ R2 公開ブログ 279 本でマッチ・重複判定
+> マッチング方式: 完全DBレス。`data/metrics/*.ts`（2,209 metric / live ranking 2,121）+ R2 公開ブログ 279 本でマッチ・重複判定
 
 ---
 

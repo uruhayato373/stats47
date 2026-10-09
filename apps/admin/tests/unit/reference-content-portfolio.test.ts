@@ -64,7 +64,7 @@ function fixture(
         key: 'sample-metric',
         title: 'サンプル指標',
         active: true,
-        sourcePath: 'packages/data-configs/src/metrics/sample-metric.ts',
+        sourcePath: 'data/metrics/sample-metric.ts',
       },
     ],
     blogs: [
@@ -197,6 +197,62 @@ describe('reference content portfolio', () => {
     expect(withAreaRole([], ['ranking'])).toBe('not-applicable');
   });
 
+  it('SNS は投稿台帳で投稿済みなら済み、ブログの着手できるは候補キューの候補を示し、見送りの記録は全展開先に効く', () => {
+    const withRoles = (overrides: Partial<ReferenceContentInput>) =>
+      buildReferenceContentPortfolio(
+        fixture({
+          inventories: [
+            {
+              sourceKey: 'book-a',
+              edition: '2026',
+              sourcePath: 'data/source-inventory/book-a/2026/inventory.json',
+              items: [
+                {
+                  id: 'metric-evidence',
+                  resolution: 'reuse-existing-metric',
+                  primarySource: { url: 'https://example.go.jp/stat' },
+                  mapping: { metricKeys: ['sample-metric'], contentRoles: ['ranking', 'blog', 'note', 'x', 'instagram'] },
+                },
+              ],
+            },
+          ],
+          expectedSourceKeys: ['book-a'],
+          blogs: [],
+          ...overrides,
+        })
+      ).units.find((unit) => unit.id === 'metric:sample-metric')!;
+    const stage = (unit: ReturnType<typeof withRoles>, channel: string) =>
+      unit.channels.find((c) => c.channel === channel)!;
+
+    // SNS: 投稿済みの行がある展開先だけ済み。投稿 ID が itemIds に入る
+    const posted = withRoles({ snsPostedMetrics: { x: { 'sample-metric': [42] } } });
+    expect(stage(posted, 'x')).toMatchObject({ stage: 'integrated', itemIds: ['sns:42'] });
+    expect(stage(posted, 'instagram').stage).not.toBe('integrated');
+
+    // ブログ: 着手できる指標が候補キューにあれば、候補を示す (段階は変えない)
+    const queued = withRoles({ blogTopicQueue: [{ topicKey: 'topic-a', metricKeys: ['sample-metric', 'other'] }] });
+    expect(stage(queued, 'blog').stage).toBe('ready');
+    expect(stage(queued, 'blog').itemIds).toContain('topic:topic-a');
+    expect(stage(withRoles({}), 'blog').itemIds.some((id) => id.startsWith('topic:'))).toBe(false);
+
+    // 見送りの記録はブログ・note にも効き、企画中は下書きとして数える
+    const decided = withRoles({
+      placementDecisions: [
+        { channel: 'blog', metricKey: 'sample-metric', status: 'rejected', reason: '記事にしない' },
+        { channel: 'note', metricKey: 'sample-metric', status: 'planned', reason: 'note 企画', target: 'note-a' },
+      ],
+    });
+    expect(stage(decided, 'blog')).toMatchObject({ stage: 'not-applicable' });
+    expect(stage(decided, 'note')).toMatchObject({ stage: 'draft', itemIds: ['note-a'] });
+
+    // 済みは記録より強い: 公開記事があれば、見送りの記録があっても済み
+    const published = withRoles({
+      blogs: [{ slug: 'post-a', title: 'A', published: true, rankingKeys: ['sample-metric'] }],
+      placementDecisions: [{ channel: 'blog', metricKey: 'sample-metric', status: 'rejected', reason: 'x' }],
+    });
+    expect(stage(published, 'blog').stage).toBe('integrated');
+  });
+
   it('展開先に載せないと決めた記録は、県ページを対象外・日本全体を停止中として数え、採用済みを上書きしない', () => {
     const stageOf = (
       channel: 'area' | 'japan',
@@ -248,7 +304,7 @@ describe('reference content portfolio', () => {
           key: 'sample-metric',
           title: 'サンプル指標',
           active: false,
-          sourcePath: 'packages/data-configs/src/metrics/sample-metric.ts',
+          sourcePath: 'data/metrics/sample-metric.ts',
         },
       ],
       blogs: [],

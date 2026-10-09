@@ -7,6 +7,15 @@
       "key": "aging-society",
       "title": "日本の少子高齢化",
       "href": "/japan/aging-society",
+      "rankingKeys": [
+        "ratio-65-plus",
+        "household-ratio-with-65plus",
+        "average-age-of-first-marriage-wife",
+        "population-growth-rate",
+        "natural-increase-rate",
+        "social-increase-rate",
+        "late-elderly-medical-expense-per-insured"
+      ],
       "published": true
     },
     {
@@ -15,6 +24,15 @@
       "key": "education-culture",
       "title": "日本の教育・文化",
       "href": "/japan/education-culture",
+      "rankingKeys": [
+        "library-count-per-million",
+        "elementary-school-count-per-100km2-habitable",
+        "junior-high-school-count-per-100km2-habitable",
+        "high-school-count-per-100km2-habitable",
+        "public-hall-count-per-million",
+        "final-education-university-graduate-school-ratio",
+        "education-cost-all-households"
+      ],
       "published": true
     },
     {
@@ -23,6 +41,19 @@
       "key": "fishery-marine",
       "title": "日本の漁業（水産業）",
       "href": "/japan/fishery-marine",
+      "rankingKeys": [
+        "fish-catch",
+        "marine-fishery-catch",
+        "marine-aquaculture-harvest",
+        "inland-aquaculture-harvest",
+        "marine-fishery-aquaculture-output-value",
+        "marine-fishery-output-value",
+        "fishery-workers",
+        "inland-fishery-catch",
+        "aquaculture-harvest",
+        "fishery-output-value",
+        "fishing-port-count-ksj"
+      ],
       "published": true
     },
     {
@@ -31,6 +62,18 @@
       "key": "foreign-residents",
       "title": "日本の外国人",
       "href": "/japan/foreign-residents",
+      "rankingKeys": [
+        "foreign-resident-count-per-100k",
+        "foreign-resident-count",
+        "foreign-resident-count-china-per-100k",
+        "foreign-resident-count-korea-per-100k",
+        "total-overnight-guests-foreign",
+        "resident-foreigner-population",
+        "foreign-resident-count-china",
+        "foreign-resident-count-korea",
+        "foreign-resident-count-usa-per-100k",
+        "foreign-resident-count-usa"
+      ],
       "published": true
     },
     {
@@ -39,6 +82,19 @@
       "key": "healthcare",
       "title": "日本の医療・健康",
       "href": "/japan/healthcare",
+      "rankingKeys": [
+        "physicians-in-medical-facilities-per-100k",
+        "general-hospital-count-per-100k",
+        "national-medical-expense-per-person",
+        "deaths-lifestyle-diseases-per-100k",
+        "deaths-diabetes-per-100k",
+        "nurses-in-medical-facilities-per-100k",
+        "general-hospital-bed-count-per-100k",
+        "pharmacy-count-per-100k",
+        "general-hospital-avg-length-of-stay",
+        "general-hospital-bed-occupancy-rate",
+        "psychiatric-hospital-count-per-100k"
+      ],
       "published": true
     },
     {
@@ -47,6 +103,14 @@
       "key": "labor-mobility",
       "title": "日本の人材流動性・雇用環境",
       "href": "/japan/labor-mobility",
+      "rankingKeys": [
+        "turnover-rate",
+        "job-change-rate",
+        "active-job-opening-ratio",
+        "unemployment-rate",
+        "employment-rate",
+        "monthly-average-actual-working-hours-male"
+      ],
       "published": true
     },
     {
@@ -55,6 +119,21 @@
       "key": "labor-wages",
       "title": "日本の労働・賃金",
       "href": "/japan/labor-wages",
+      "rankingKeys": [
+        "minimum-wage-by-region",
+        "active-job-opening-ratio",
+        "unemployment-rate",
+        "employment-rate",
+        "turnover-rate",
+        "starting-salary-university",
+        "starting-salary-highschool",
+        "scheduled-salary-male",
+        "male-part-time-hourly-wage",
+        "female-part-time-hourly-wage",
+        "employed-people-ratio",
+        "monthly-average-actual-working-hours-male",
+        "nurse-salary"
+      ],
       "published": true
     },
     {
@@ -63,6 +142,21 @@
       "key": "living-housing",
       "title": "日本の暮らし・住まい",
       "href": "/japan/living-housing",
+      "rankingKeys": [
+        "vacant-housing-ratio",
+        "owner-occupied-housing-ratio",
+        "nuclear-family-households-ratio",
+        "elderly-couple-only-household-ratio",
+        "single-person-household-old-population-ratio",
+        "ratio-never-married-15-plus",
+        "marriages",
+        "divorces",
+        "households",
+        "general-households",
+        "population-density-per-km2-inhabitable-area",
+        "habitable-area-ratio",
+        "densely-inhabited-district-population-density"
+      ],
       "published": true
     },
     {
@@ -71,6 +165,13 @@
       "key": "local-economy",
       "title": "日本の地域経済",
       "href": "/japan/local-economy",
+      "rankingKeys": [
+        "per-taxpayer-taxable-income",
+        "minimum-wage-by-region",
+        "active-job-opening-ratio",
+        "unemployment-rate",
+        "per-capita-prefectural-income-h27"
+      ],
       "published": true
     },
     {
@@ -79,6 +180,24 @@
       "key": "local-finance",
       "title": "日本の地方財政",
       "href": "/japan/local-finance",
+      "rankingKeys": [
+        "current-balance-ratio",
+        "real-public-debt-service-ratio",
+        "future-burden-ratio",
+        "local-tax-ratio-pref-finance",
+        "local-allocation-tax-ratio-pref-finance",
+        "national-treasury-disbursement-ratio-pref-finance",
+        "per-capita-total-expenditure-pref-municipal",
+        "personnel-expenditure-ratio-pref-finance",
+        "welfare-expenditure-ratio-pref-finance",
+        "education-expenditure-ratio-pref-finance",
+        "public-works-expenditure-ratio-pref-finance",
+        "per-capita-inhabitant-tax-pref-municipal",
+        "per-taxpayer-taxable-income",
+        "taxpayer-ratio-per-pref-resident",
+        "real-balance-ratio",
+        "self-financing-ratio"
+      ],
       "published": true
     },
     {
@@ -87,6 +206,17 @@
       "key": "manufacturing",
       "title": "日本の製造業",
       "href": "/japan/manufacturing",
+      "rankingKeys": [
+        "manufacturing-shipment-amount",
+        "manufacturing-industry-added-value",
+        "manufacturing-establishments",
+        "manufacturing-employees",
+        "manufacturing-shipment-amount-per-employee",
+        "manufacturing-shipment-amount-per-establishment",
+        "manufacturing-establishment-site-area",
+        "industrial-land-price-change-rate",
+        "industrial-water-usage"
+      ],
       "published": true
     },
     {
@@ -95,6 +225,16 @@
       "key": "population-dynamics",
       "title": "日本の人口動態",
       "href": "/japan/population-dynamics",
+      "rankingKeys": [
+        "total-population",
+        "ratio-65-plus",
+        "young-population-ratio",
+        "population-growth-rate",
+        "natural-increase-rate",
+        "social-increase-rate",
+        "population-density-per-km2-inhabitable-area",
+        "day-time-population-ratio"
+      ],
       "published": true
     },
     {
@@ -103,6 +243,11 @@
       "key": "ports",
       "title": "日本の港湾",
       "href": "/japan/ports",
+      "rankingKeys": [
+        "port-count",
+        "maritime-import-export-cargo",
+        "passenger-ship-transport"
+      ],
       "published": true
     },
     {
@@ -111,6 +256,13 @@
       "key": "railway",
       "title": "日本の鉄道",
       "href": "/japan/railway",
+      "rankingKeys": [
+        "jr-passenger-transport",
+        "private-railway-passenger-transport",
+        "jr-freight-shipment",
+        "railway-passengers",
+        "railway-station-count"
+      ],
       "published": true
     },
     {
@@ -119,6 +271,15 @@
       "key": "real-income",
       "title": "日本の実質収入・購買力",
       "href": "/japan/real-income",
+      "rankingKeys": [
+        "disposable-income-worker-households",
+        "actual-income-worker-households-per-month",
+        "per-capita-prefectural-income-h27",
+        "annual-income-per-household",
+        "consumption-expenditure-multi-person-households-per-month",
+        "avg-propensity-to-consume-worker-households",
+        "current-liabilities-balance-multi-person-households-per-household"
+      ],
       "published": true
     },
     {
@@ -127,6 +288,18 @@
       "key": "roads",
       "title": "日本の道路",
       "href": "/japan/roads",
+      "rankingKeys": [
+        "road-total-length-with-expressway",
+        "road-expressway-length",
+        "road-total-length",
+        "road-national-route-length",
+        "road-prefectural-route-length",
+        "road-municipal-length",
+        "road-length-per-km2",
+        "main-road-paving-rate",
+        "average-road-traffic-volume",
+        "roadside-station-count"
+      ],
       "published": true
     },
     {
@@ -135,6 +308,32 @@
       "key": "safety",
       "title": "日本の安全",
       "href": "/japan/safety",
+      "rankingKeys": [
+        "penal-code-offenses-recognized-per-1000",
+        "serious-crime-per-100k",
+        "violent-crime-per-100k",
+        "criminal-arrest-rate",
+        "intellectual-crime-per-100k",
+        "traffic-accident-count",
+        "building-fire-count-per-100-thousand-people",
+        "fire-deaths-per-100k",
+        "annual-emergency-dispatches-per-1000",
+        "suicides-per-100k",
+        "accidental-deaths-per-100k",
+        "criminal-recognition-count",
+        "theft-offenses-recognized-per-1000",
+        "theft-criminal-arrest-rate",
+        "juvenile-criminal-arrest-person-per-population",
+        "drug-enforcement-arrest-count-per-population",
+        "traffic-accident-deaths-per-100k",
+        "traffic-accident-count-per-population",
+        "traffic-accident-deaths-per-100-accidents",
+        "traffic-accident-injuries-per-100k",
+        "traffic-accident-casualties-elderly-65plus",
+        "fire-damage-casualties-per-population",
+        "disaster-damage-amount-per-person",
+        "police-officer-count-per-population"
+      ],
       "published": true
     },
     {
@@ -143,6 +342,18 @@
       "key": "tourism",
       "title": "日本の観光",
       "href": "/japan/tourism",
+      "rankingKeys": [
+        "total-overnight-guests",
+        "total-overnight-guests-foreign",
+        "air-passenger-transport",
+        "jr-passenger-transport",
+        "room-utilization-rate",
+        "travel-participation-rate-domestic-tourism",
+        "travel-participation-rate-overseas",
+        "travel-participation-rate-overnight",
+        "travel-participation-rate-day-trip",
+        "number-of-simple-lodging-facilities"
+      ],
       "published": true
     }
   ]

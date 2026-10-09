@@ -1,5 +1,6 @@
 import {
   parseStatSeriesRefs,
+  validateChartProps,
   type StatSeriesRef,
 } from "@stats47/data-configs/theme-catalog";
 import { logger } from "@stats47/logger";
@@ -8,17 +9,16 @@ import { resolveValuePrecision } from "@stats47/utils";
 
 import { toKpiCardData } from "../adapters";
 
-import { fetchEstatDataAllAreas } from "./fetchEstatData";
+
 
 import type { KpiCardClientProps } from "../components";
 import type { PageComponent } from "./load-page-components";
-import type { GetStatsDataParams } from "@stats47/estat-api/server";
 import type { StatsSchema } from "@stats47/types";
 
 /**
  * テーマページ用: KPI カードの観測値を全都道府県分プリフェッチ
  *
- * 移行済み card は StatSeriesRef → QG2 parser 付き R2 reader、未移行 card は estatParams を読む。
+ * 登録済み指標IDから、検証付き R2 reader で観測値を読む。
  * どちらも areaCode ごとの KpiCardClientProps に変換する。
  *
  * @returns Record<chartKey, Record<areaCode, KpiCardClientProps>>
@@ -87,36 +87,24 @@ export async function prefetchThemeKpiData(
 function parseKpiCardProps(
   props: Record<string, unknown>,
 ):
-  | { source: "r2"; seriesRef: StatSeriesRef; unit?: string }
-  | { source: "estat"; estatParams: GetStatsDataParams; unit?: string }
+  | { seriesRef: StatSeriesRef; unit?: string }
   | null {
+  if (validateChartProps("kpi-card", props).length) return null;
   const refs = parseStatSeriesRefs(props.seriesRefs);
   if (refs?.length === 1) {
     return {
-      source: "r2",
       seriesRef: refs[0],
       unit: typeof props.unit === "string" ? props.unit : undefined,
     };
   }
-  if (!isRecord(props.estatParams)) return null;
-  if (typeof props.estatParams.statsDataId !== "string") return null;
-
-  return {
-    source: "estat",
-    estatParams: props.estatParams as unknown as GetStatsDataParams,
-    unit: typeof props.unit === "string" ? props.unit : undefined,
-  };
+  return null;
 }
 
 async function loadKpiRows(
   props:
-    | { source: "r2"; seriesRef: StatSeriesRef }
-    | { source: "estat"; estatParams: GetStatsDataParams },
+    | { seriesRef: StatSeriesRef }
+,
 ): Promise<StatsSchema[] | null> {
-  if (props.source === "estat") {
-    const response = await fetchEstatDataAllAreas(props.estatParams);
-    return "error" in response ? null : response.data;
-  }
 
   const { metricKey, year } = props.seriesRef;
   const [prefecturePayload, japanPayload] = await Promise.all([
@@ -149,8 +137,4 @@ async function loadKpiRows(
     );
 
   return [...prefectureRows, ...nationalRows];
-}
-
-function isRecord(value: unknown): value is Record<string, unknown> {
-  return typeof value === "object" && value !== null && !Array.isArray(value);
 }

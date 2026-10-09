@@ -1,5 +1,12 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { execFile } from "node:child_process";
+import { mkdtempSync, readFileSync, rmSync } from "node:fs";
+import { createServer } from "node:http";
+import { tmpdir } from "node:os";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { promisify } from "node:util";
 
 import {
   classifyNational,
@@ -25,6 +32,56 @@ import {
  */
 
 const row = (area, value) => ({ "@area": area, $: value });
+
+test("CLIはR2指標の部分監査をJSONへ出力し、未検査の指標を成功扱いにしない", async () => {
+  const mirror = JSON.parse(readFileSync(new URL("../theme-chart-dependencies.generated.json", import.meta.url), "utf8"));
+  const metric = mirror.metrics[0];
+  const payload = {
+    metricKey: metric.metricKey,
+    entityKind: "prefecture",
+    rows: Array.from({ length: 47 }, (_, index) => ({
+      areaCode: String(index + 1).padStart(2, "0") + "000",
+      yearCode: "2024",
+      value: index + 1,
+      unit: metric.expectedUnit,
+    })),
+    meta: { areaCount: 47, recipe: { configHash: metric.expectedConfigHash } },
+  };
+  const server = createServer((request, response) => {
+    assert.equal(request.url, `/app/stats/${metric.metricKey}/values.json`);
+    response.setHeader("Content-Type", "application/json");
+    response.end(JSON.stringify(payload));
+  });
+  await new Promise((resolve) => server.listen(0, "127.0.0.1", resolve));
+  const directory = mkdtempSync(path.join(tmpdir(), "stats47-theme-audit-"));
+  const output = path.join(directory, "audit.json");
+  try {
+    await assert.rejects(promisify(execFile)(process.execPath, [
+      fileURLToPath(new URL("../theme-chart-live-audit.mjs", import.meta.url)),
+      "--limit", "1", "--json", output,
+    ], {
+      env: {
+        ...process.env,
+        R2_PUBLIC_FETCH_URL: `http://127.0.0.1:${server.address().port}`,
+        HTTPS_PROXY: "", https_proxy: "", HTTP_PROXY: "", http_proxy: "",
+      },
+      timeout: 15000,
+    }), (error) => error.code === 1 && /期待集合と実集合が一致しません/.test(error.stderr));
+    const report = JSON.parse(readFileSync(output, "utf8"));
+    assert.equal(report.r2MetricExpected, mirror.metrics.length);
+    assert.equal(report.status, "partial");
+    assert.equal(report.coverageOk, false);
+    assert.equal(report.errorCount, 0);
+    assert.equal(report.audited, 1);
+    assert.equal(report.results[0].metricKey, metric.metricKey);
+    assert.equal(report.results[0].status, "ok");
+    assert.equal("legacyEstatExpected" in report, false);
+  } finally {
+    await new Promise((resolve) => server.close(resolve));
+    if (path.dirname(directory) !== path.resolve(tmpdir())) throw new Error("Unexpected temporary directory");
+    rmSync(directory, { recursive: true, force: true });
+  }
+});
 
 test("実データの値は有限数として受け入れる", () => {
   for (const v of ["1234", "0", "12.5", "1,234,567", "-3.2", 42]) {
@@ -97,65 +154,14 @@ test("--limit は正の整数だけを受理し、0・負数・NaN・小数を�
   }
 });
 
-test("依存mirrorのe-Stat/R2 schema・key・件数を検証する", () => {
-  assert.deepEqual(
-    parseDependencyMirror({
-      distinctRequests: 1,
-      requests: [mirrorRequest],
-      distinctMetricRefs: 1,
-      metrics: [mirrorMetric],
-    }),
-    {
-      distinctExpected: 2,
-      requests: [
-        {
-          key: mirrorRequest.key,
-          theme: "population",
-          componentKey: "trend",
-          componentType: "line-chart",
-          params: { statsDataId: "0000000001", cdCat01: "A" },
-        },
-      ],
-      metrics: [
-        {
-          key: "r2:total-population",
-          metricKey: "total-population",
-          expectedUnit: "人",
-          expectedConfigHash: "0123456789abcdef",
-          theme: "population",
-          componentKey: "trend",
-          componentType: "line-chart",
-        },
-      ],
-    },
-  );
-  assert.throws(
-    () => parseDependencyMirror({ distinctRequests: 2, requests: [mirrorRequest] }),
-    /count mismatch/,
-  );
-  assert.throws(
-    () =>
-      parseDependencyMirror({
-        distinctRequests: 2,
-        requests: [mirrorRequest, { ...mirrorRequest, themeKey: "other" }],
-      }),
-    /duplicate request key/,
-  );
-  assert.throws(
-    () => parseDependencyMirror({ distinctRequests: 1, requests: [{ ...mirrorRequest, key: "wrong" }] }),
-    /key does not match/,
-  );
-  assert.throws(
-    () =>
-      parseDependencyMirror({
-        distinctRequests: 0,
-        requests: [],
-        distinctMetricRefs: 2,
-        metrics: [mirrorMetric],
-      }),
-    /metric count mismatch/,
-  );
-  assert.equal(requestKey("2", { cdCat02: "B", cdCat01: "A" }), "2?cdCat01=A&cdCat02=B");
+test("依存mirrorは登録metric参照だけを受理する", () => {
+ const parsed=parseDependencyMirror({distinctMetricRefs:1,metrics:[mirrorMetric]});
+ assert.equal(parsed.distinctExpected,1);assert.equal(parsed.metrics[0].key,"r2:total-population");
+ assert.throws(()=>parseDependencyMirror({distinctMetricRefs:1,metrics:[mirrorMetric],requests:[mirrorRequest]}),/metrics\[\] only/);
+ assert.throws(()=>parseDependencyMirror({distinctMetricRefs:2,metrics:[mirrorMetric]}),/metric count mismatch/);
+ assert.throws(()=>parseDependencyMirror({distinctMetricRefs:2,metrics:[mirrorMetric,mirrorMetric]}),/duplicate metric key/);
+ assert.throws(()=>parseDependencyMirror({distinctMetricRefs:1,metrics:[{...mirrorMetric,expectedConfigHash:"broken"}]}),/expectedConfigHash is invalid/);
+ assert.equal(requestKey("2",{cdCat02:"B",cdCat01:"A"}),"2?cdCat01=A&cdCat02=B");
 });
 
 test("R2 stats payloadはunit・area meta・recipe hashを同時に検証する", () => {

@@ -89,8 +89,8 @@ function auditBaselineGrowth(current, previous) {
 
 function runValidator(script) {
   return childProcess.execFileSync(
-    'npm',
-    ['run', script, '--workspace=@stats47/data-configs'],
+    process.platform === 'win32' ? process.execPath : 'npm',
+    [...(process.platform === 'win32' ? [process.env.npm_execpath || path.join(path.dirname(process.execPath), 'node_modules/npm/bin/npm-cli.js')] : []), 'run', script, '--workspace=@stats47/data-configs'],
     { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] },
   );
 }

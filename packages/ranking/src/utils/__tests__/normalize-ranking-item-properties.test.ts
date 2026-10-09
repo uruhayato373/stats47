@@ -7,6 +7,7 @@ import {
 } from "../normalize-ranking-item-properties";
 
 const baseItem: RankingItem = {
+    visualization: { domain: { mode: 'extent' }, colorScheme: 'interpolateBlues', colorSchemeType: 'sequential',  classification: { method: 'equal-interval', classes: 5 }, trendDomain: { mode: 'extent', padding: 0.08 }, comparisonDomain: { mode: 'extent', padding: 0.05 } },
   rankingKey: "test",
   areaType: "prefecture",
   rankingName: "正式名称",
@@ -76,10 +77,11 @@ describe("toRankingItemForDisplay", () => {
       demographicAttr: "総数",
       normalizationBasis: "人口",
       unit: "件",
-      visualization: {
+      visualization: { domain: { mode: 'extent' },
+    classification: { method: 'equal-interval', classes: 5 }, trendDomain: { mode: 'extent', padding: 0.08 }, comparisonDomain: { mode: 'extent', padding: 0.05 },
         colorScheme: "interpolateReds",
         colorSchemeType: "sequential",
-        minValueType: "zero",
+
       },
     };
     const result = toRankingItemForDisplay(item);
@@ -97,7 +99,7 @@ describe("toRankingItemForDisplay", () => {
     expect(result.subtitle).toBeUndefined();
     expect(result.demographicAttr).toBeUndefined();
     expect(result.normalizationBasis).toBeUndefined();
-    expect(result.visualization).toBeUndefined();
+    expect(result.visualization).toEqual(baseItem.visualization);
   });
 
   it("valueDisplay.displayUnit が unit として使われること", () => {

@@ -1,0 +1,56 @@
+import { DEFAULT_METRIC_PRESENTATION } from "./defaults/presentation";
+import type { MetricConfig } from "../../packages/data-configs/src/types";
+
+export const averageWeightMiddleSchoolSecondGradeFemale: MetricConfig = {
+  "key": "average-weight-middle-school-second-grade-female",
+  "title": "平均体重",
+  "subtitle": "中学2年・女子",
+  "unit": "kg",
+  "category": "educationsports",
+  "source": {
+    "kind": "estat",
+    "statsDataId": "0000010209",
+    "cdCat01": "#I0210204",
+    "displayName": "社会・人口統計体系",
+    "url": "https://www.stat.go.jp/data/ssds/index.htm",
+  },
+  "entities": [
+    "prefecture",
+  ],
+  "years": {
+    "from": 2023,
+    "to": 2023,
+  },
+  "yearFormat": "fiscal",
+  "visualization": {
+    ...DEFAULT_METRIC_PRESENTATION,
+    "colorScheme": "interpolateBlues",
+    "colorSchemeType": "sequential",
+  },
+  "display": {
+    "conversionFactor": 1,
+    "decimalPlaces": 1,
+  },
+  "calculation": {
+    "isCalculated": false,
+    "normalizationOptions": [
+      {
+        "type": "per_population",
+        "label": "人口10万人あたり",
+        "unit": "kg/10万人",
+        "scaleFactor": 100000,
+        "decimalPlaces": 1,
+      },
+      {
+        "type": "per_area",
+        "label": "面積100km²あたり",
+        "unit": "kg/100km²",
+        "scaleFactor": 100,
+        "decimalPlaces": 2,
+      },
+    ],
+  },
+  "seoTitle": "平均体重 都道府県ランキング【2023年】｜1位青森県（48.9kg）",
+  "seoDescription": "2023年の平均体重を都道府県別に比較。1位は青森県（48.9kg）、最下位は三重県（46.8kg）、最大と最小の差は1.0倍です。地図やグラフで47都道府県の違いを確認できます。",
+  "isActive": true,
+};

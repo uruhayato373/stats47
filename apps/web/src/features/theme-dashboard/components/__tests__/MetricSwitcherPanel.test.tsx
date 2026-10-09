@@ -42,6 +42,7 @@ import type { MetricKpi, MultiMetricGroup } from "../metric-kpi";
 
 const kpi = (metricKey: string, over: Partial<MetricKpi> = {}): MetricKpi => ({
   metricKey,
+  trendDomain: {mode: "extent", padding: 0.08},
   title: `${metricKey} タイトル`,
   unit: "円",
   value: 100,

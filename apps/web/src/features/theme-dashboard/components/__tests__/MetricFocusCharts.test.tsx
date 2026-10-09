@@ -1,6 +1,11 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
+import { DEFAULT_METRIC_PRESENTATION } from '../../../../../../../data/metrics/defaults/presentation';
+import { MetricFocusCharts } from "../MetricFocusCharts";
+
+import type { RankingItem, RankingValue } from "@stats47/ranking";
+
 /**
  * MetricFocusCharts の契約 (GEO-SCOPE-SEPARATION-01 WP2)。
  *
@@ -27,11 +32,9 @@ vi.mock(
   }),
 );
 
-import { MetricFocusCharts } from "../MetricFocusCharts";
 
-import type { RankingItem, RankingValue } from "@stats47/ranking";
 
-const rankingItem = { title: "賃金", unit: "円" } as unknown as RankingItem;
+const rankingItem = { title: "賃金", unit: "円", visualization: { ...DEFAULT_METRIC_PRESENTATION, colorScheme: 'interpolateBlues', colorSchemeType: 'sequential' } } as unknown as RankingItem;
 
 const currentValues: RankingValue[] = Array.from({ length: 47 }, (_, i) => ({
   areaCode: String(i + 1).padStart(5, "0"),

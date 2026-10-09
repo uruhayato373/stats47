@@ -1,0 +1,65 @@
+import { DEFAULT_METRIC_PRESENTATION } from "./defaults/presentation";
+import type { MetricConfig } from "../../packages/data-configs/src/types";
+
+export const disasterDamageAmountPerPerson: MetricConfig = {
+  "key": "disaster-damage-amount-per-person",
+  "title": "災害被害額",
+  "subtitle": "人口1人当たり",
+  "unit": "円",
+  "category": "safetyenvironment",
+  "description": "災害被害額を総人口で除した、人口1人当たりの被害額。",
+  "source": {
+    "kind": "estat",
+    "statsDataId": "0000010211",
+    "cdCat01": "#K07105",
+    "displayName": "社会・人口統計体系",
+    "url": "https://www.stat.go.jp/data/ssds/index.htm",
+  },
+  "entities": [
+    "prefecture",
+  ],
+  "years": {
+    "years": [
+      1995,
+      1996,
+      1997,
+      1998,
+      1999,
+      2000,
+      2001,
+      2002,
+      2003,
+      2004,
+      2005,
+      2006,
+      2007,
+      2008,
+      2009,
+      2010,
+      2011,
+      2012,
+      2013,
+      2014,
+      2015,
+      2016,
+      2023,
+    ],
+  },
+  "yearFormat": "fiscal",
+  "visualization": {
+    ...DEFAULT_METRIC_PRESENTATION,
+    "colorScheme": "interpolateBlues",
+    "colorSchemeType": "sequential",
+  },
+  "display": {
+    "conversionFactor": 1,
+    "decimalPlaces": 0,
+  },
+  "calculation": {
+    "isCalculated": false,
+  },
+  "groupKey": "disaster-damage-amount",
+  "seoTitle": "災害被害額（人口1人当たり）ランキング都道府県",
+  "seoDescription": "人口1人当たりの災害被害額を都道府県別に比較。総数とは区別して、同じ分母の指標で地域差と経年変化を確認できます。",
+  "isActive": true,
+};

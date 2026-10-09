@@ -1,6 +1,13 @@
 import { render } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 
+import type { PageComponent } from '@/components/stat-charts';
+
+import { DEFAULT_METRIC_PRESENTATION } from '../../../../../../../data/metrics/defaults/presentation';
+import { ThemeMetricsDashboard } from '../ThemeMetricsDashboard';
+
+import type { ThemeConfig, ThemeIndicatorData } from '../../types';
+
 /**
  * 考察・FAQ (markdown-section) の置き場所の契約 (THEME-REVIEW では 8 テーマの「読み方」章)。
  *
@@ -37,15 +44,12 @@ vi.mock('../../actions', () => ({
   fetchMetricTimeseriesAction: vi.fn(),
 }));
 
-import type { PageComponent } from '@/components/stat-charts';
 
-import { ThemeMetricsDashboard } from '../ThemeMetricsDashboard';
 
-import type { ThemeConfig, ThemeIndicatorData } from '../../types';
 
 function indicatorData(title: string): ThemeIndicatorData {
   return {
-    rankingItem: { title, unit: '円' },
+    rankingItem: { title, unit: '円', visualization: { ...DEFAULT_METRIC_PRESENTATION, colorScheme: 'interpolateBlues', colorSchemeType: 'sequential' } },
     rankingValues: Array.from({ length: 12 }, (_, i) => ({
       areaCode: String(i + 1).padStart(5, '0'),
       value: 100 + i,

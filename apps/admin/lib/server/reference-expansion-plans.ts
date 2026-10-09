@@ -3,6 +3,13 @@
 import fs from "node:fs";
 import path from "node:path";
 
+import {
+  REFERENCE_PLACEMENT_DECISIONS,
+  type ReferencePlacementDecision,
+} from "../../../../packages/data-configs/src/evidence-inventory/placement-decisions";
+
+const PLACEMENT_DECISIONS_PATH = "packages/data-configs/src/evidence-inventory/placement-decisions.ts";
+
 export type ReferenceExpansionPlanStatus = "draft" | "blocked";
 
 export interface ReferenceExpansionPlan {
@@ -16,50 +23,31 @@ export interface ReferenceExpansionPlan {
   sourcePath: string;
 }
 
-const THEME_START = "<!-- reference-theme-plans:start -->";
-const THEME_END = "<!-- reference-theme-plans:end -->";
-
-function cells(line: string): string[] {
-  return line
-    .split("|")
-    .slice(1, -1)
-    .map((cell) => cell.trim());
-}
-
 function frontmatterValue(body: string, key: string): string | null {
   const value = body.match(new RegExp(`^${key}:\\s*(.+?)\\s*$`, "m"))?.[1]?.trim();
   if (!value) return null;
   return value.replace(/^(["'])(.*)\1$/, "$2");
 }
 
-export function parseReferenceThemePlans(markdown: string): ReferenceExpansionPlan[] {
-  const start = markdown.indexOf(THEME_START);
-  const end = markdown.indexOf(THEME_END);
-  if (start < 0 || end <= start) return [];
-
-  const plans: ReferenceExpansionPlan[] = [];
-  for (const line of markdown.slice(start + THEME_START.length, end).split(/\r?\n/)) {
-    if (!line.trim().startsWith("|")) continue;
-    const [metricKey, title, targetTheme, status, summary] = cells(line);
-    if (!metricKey || metricKey === "metricKey" || /^-+$/.test(metricKey)) continue;
-    if (!/^[a-z0-9-]+$/.test(metricKey)) {
-      throw new Error(`参考文献テーマ企画のmetricKeyが不正です: ${metricKey}`);
-    }
-    if (status !== "draft" && status !== "blocked") {
-      throw new Error(`参考文献テーマ企画のstatusが不正です: ${metricKey}/${status}`);
-    }
-    plans.push({
-      id: `theme:${metricKey}`,
-      kind: "theme",
-      title,
-      target: `/themes/${targetTheme}`,
-      status,
-      metricKeys: [metricKey],
-      summary,
-      sourcePath: ".claude/todo/backlog.md",
-    });
-  }
-  return plans;
+/**
+ * テーマ企画は見送りの記録 (packages/data-configs/src/evidence-inventory/placement-decisions.ts) の
+ * channel=theme の planned / blocked から作る (2026-10-10 に backlog の表から移した)。rejected は企画ではないので出さない。
+ */
+export function referenceThemePlans(
+  decisions: readonly ReferencePlacementDecision[] = REFERENCE_PLACEMENT_DECISIONS,
+): ReferenceExpansionPlan[] {
+  return decisions
+    .filter((decision) => decision.channel === "theme" && decision.status !== "rejected")
+    .map((decision) => ({
+      id: `theme:${decision.metricKey}`,
+      kind: "theme" as const,
+      title: decision.title ?? decision.metricKey,
+      target: decision.target ? `/themes/${decision.target}` : "/themes",
+      status: decision.status === "planned" ? ("draft" as const) : ("blocked" as const),
+      metricKeys: [decision.metricKey],
+      summary: decision.reason,
+      sourcePath: PLACEMENT_DECISIONS_PATH,
+    }));
 }
 
 export function parseReferenceBlogDraft(
@@ -92,12 +80,7 @@ export function parseReferenceBlogDraft(
 }
 
 export function referenceExpansionPlans(root: string): ReferenceExpansionPlan[] {
-  const plans: ReferenceExpansionPlan[] = [];
-  const backlogRel = ".claude/todo/backlog.md";
-  const backlog = path.join(root, backlogRel);
-  if (fs.existsSync(backlog)) {
-    plans.push(...parseReferenceThemePlans(fs.readFileSync(backlog, "utf8")));
-  }
+  const plans: ReferenceExpansionPlan[] = [...referenceThemePlans()];
 
   const outboxRel = "contents/blog";
   const outbox = path.join(root, outboxRel);

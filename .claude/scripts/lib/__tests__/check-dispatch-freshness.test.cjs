@@ -29,8 +29,8 @@ const INCIDENT_REQUEST = {
 
 /** そのとき develop にあって main に無かったもの */
 const INCIDENT_DIVERGED = [
-  'packages/data-configs/src/metrics/divorces-per-total-population.ts',
-  'packages/data-configs/src/metrics/marriages-per-total-population.ts',
+  'data/metrics/divorces-per-total-population.ts',
+  'data/metrics/marriages-per-total-population.ts',
   'packages/ranking/src/config/gone-ranking-keys.ts',
 ];
 
@@ -124,7 +124,7 @@ test('テスト・README の変更では鳴らない (生成結果に影響し�
     mainPinned: true,
     divergedPaths: [
       'packages/ranking/src/__tests__/foo.test.ts',
-      'packages/data-configs/src/metrics/__tests__/bar.test.ts',
+      'data/metrics/__tests__/bar.test.ts',
       'packages/ranking/README.md',
     ],
   });
@@ -153,7 +153,7 @@ test('acknowledgedMainLag で明示的に上書きできる (理由が要る)', 
 
 test('isRelevantPath: 生成入力とそれ以外を分ける', () => {
   for (const p of [
-    'packages/data-configs/src/metrics/x.ts',
+    'data/metrics/x.ts',
     'packages/ranking/src/scripts/generate-ranking-items.ts',
     'apps/web/scripts/export-blog-snapshot.ts',
     '.claude/skills/db/sync-snapshots/run.sh',

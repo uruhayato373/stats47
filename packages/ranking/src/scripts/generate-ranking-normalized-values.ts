@@ -126,7 +126,7 @@ async function withRetry<T>(fn: () => Promise<T>, attempts = 3): Promise<T> {
 /** config から有効な正規化 option を取り出す (自己正規化は除外) */
 export function activeNormalizationOptions(config: MetricConfig): NormalizationOption[] {
   const options =
-    config.calculation?.normalizationOptions ?? config.display?.normalizationOptions ?? [];
+    config.calculation?.normalizationOptions ?? [];
   const invalidType = invalidNormTypeForKey(config.key);
   return options.filter(
     (o): o is NormalizationOption =>
@@ -134,15 +134,6 @@ export function activeNormalizationOptions(config: MetricConfig): NormalizationO
   );
 }
 
-/**
- * config 側の NormalizationOption 型には denominatorKey が無い (registry 実績 0 件) が、
- * ranking-item 側の型は持つ。将来 config に足された場合も runtime と同じ扱いになるよう
- * 実行時に読む (存在すれば単位換算せず係数 1 = normalize-core の規約)。
- */
-function denominatorKeyOf(option: NormalizationOption): string | undefined {
-  const v = (option as { denominatorKey?: unknown }).denominatorKey;
-  return typeof v === "string" && v.length > 0 ? v : undefined;
-}
 
 interface Outcome {
   key: string;
@@ -200,7 +191,7 @@ async function generateOne(
 
     for (const option of options) {
       const normType = option.type as NormType;
-      const denominatorSpec = resolveDenominator(normType, AREA_TYPE, denominatorKeyOf(option));
+      const denominatorSpec = resolveDenominator(normType, AREA_TYPE);
       if (!denominatorSpec) continue;
 
       const table = denominators.get(denominatorSpec.key);
@@ -319,7 +310,7 @@ function requiredDenominatorKeys(configs: MetricConfig[]): string[] {
   const keys = new Set<string>();
   for (const config of configs) {
     for (const option of activeNormalizationOptions(config)) {
-      const spec = resolveDenominator(option.type, AREA_TYPE, denominatorKeyOf(option));
+      const spec = resolveDenominator(option.type, AREA_TYPE);
       if (spec) keys.add(spec.key);
     }
   }

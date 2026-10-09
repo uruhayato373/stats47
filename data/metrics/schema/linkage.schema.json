@@ -1,0 +1,465 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MetricLinkageIndex (generated from TypeScript)",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "number",
+      "const": 1
+    },
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "metricKey": {
+            "type": "string"
+          },
+          "pageId": {
+            "anyOf": [
+              {
+                "type": "null"
+              },
+              {
+                "type": "string"
+              }
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "role": {
+                  "enum": [
+                    "primary",
+                    "city",
+                    "supplemental",
+                    "history"
+                  ]
+                },
+                "statsDataId": {
+                  "type": "string"
+                },
+                "filters": {
+                  "type": "object",
+                  "properties": {},
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
+                "years": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                }
+              },
+              "required": [
+                "role",
+                "statsDataId",
+                "filters"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "recipe": {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "enum": [
+                  "estat",
+                  "kakei-chousa",
+                  "mlit",
+                  "external",
+                  "calculated"
+                ]
+              },
+              "estatParams": {
+                "type": "object",
+                "properties": {
+                  "statsDataId": {
+                    "type": "string"
+                  },
+                  "cdCat01": {
+                    "type": "string"
+                  },
+                  "cdCat02": {
+                    "type": "string"
+                  },
+                  "cdCat03": {
+                    "type": "string"
+                  },
+                  "cdCat04": {
+                    "type": "string"
+                  },
+                  "cdCat05": {
+                    "type": "string"
+                  },
+                  "cdTab": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "statsDataId"
+                ],
+                "additionalProperties": false
+              },
+              "ops": {
+                "type": "object",
+                "properties": {
+                  "tabCombination": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "cdTab": {
+                          "type": "string"
+                        },
+                        "factor": {
+                          "type": "number"
+                        }
+                      },
+                      "required": [
+                        "cdTab",
+                        "factor"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "axisSum": {
+                    "type": "object",
+                    "properties": {
+                      "axis": {
+                        "enum": [
+                          "cat01",
+                          "cat02",
+                          "cat03",
+                          "cat04",
+                          "cat05"
+                        ]
+                      },
+                      "codes": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "required": [
+                      "axis",
+                      "codes"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "axisRatio": {
+                    "type": "object",
+                    "properties": {
+                      "axis": {
+                        "enum": [
+                          "cat01",
+                          "cat02",
+                          "cat03",
+                          "cat04",
+                          "cat05"
+                        ]
+                      },
+                      "numeratorCodes": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      },
+                      "denominatorCodes": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "required": [
+                      "axis",
+                      "numeratorCodes",
+                      "denominatorCodes"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "timeScope": {
+                    "type": "string",
+                    "const": "annual"
+                  },
+                  "valueScale": {
+                    "type": "number"
+                  },
+                  "areaAxis": {
+                    "type": "object",
+                    "properties": {
+                      "axis": {
+                        "enum": [
+                          "cat01",
+                          "cat02",
+                          "cat03",
+                          "cat04",
+                          "cat05"
+                        ]
+                      },
+                      "scheme": {
+                        "enum": [
+                          "seq-pref",
+                          "name"
+                        ]
+                      },
+                      "coverage": {
+                        "type": "string",
+                        "const": "coastal"
+                      }
+                    },
+                    "required": [
+                      "axis",
+                      "scheme"
+                    ],
+                    "additionalProperties": false
+                  },
+                  "areaRemap": {
+                    "type": "string",
+                    "const": "kakei-capital-city"
+                  },
+                  "supplements": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "years": {
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          }
+                        },
+                        "estatParams": {
+                          "type": "object",
+                          "properties": {
+                            "statsDataId": {
+                              "type": "string"
+                            },
+                            "cdCat01": {
+                              "type": "string"
+                            },
+                            "cdCat02": {
+                              "type": "string"
+                            },
+                            "cdCat03": {
+                              "type": "string"
+                            },
+                            "cdCat04": {
+                              "type": "string"
+                            },
+                            "cdCat05": {
+                              "type": "string"
+                            },
+                            "cdTab": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "statsDataId"
+                          ],
+                          "additionalProperties": false
+                        },
+                        "areaAxis": {
+                          "type": "object",
+                          "properties": {
+                            "axis": {
+                              "enum": [
+                                "cat01",
+                                "cat02",
+                                "cat03",
+                                "cat04",
+                                "cat05"
+                              ]
+                            },
+                            "scheme": {
+                              "enum": [
+                                "seq-pref",
+                                "name"
+                              ]
+                            },
+                            "coverage": {
+                              "type": "string",
+                              "const": "coastal"
+                            }
+                          },
+                          "required": [
+                            "axis",
+                            "scheme"
+                          ],
+                          "additionalProperties": false
+                        }
+                      },
+                      "required": [
+                        "years",
+                        "estatParams"
+                      ],
+                      "additionalProperties": false
+                    }
+                  },
+                  "calc": {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "enum": [
+                          "ratio",
+                          "per_capita",
+                          "subtraction"
+                        ]
+                      },
+                      "numeratorKey": {
+                        "type": "string"
+                      },
+                      "denominatorKey": {
+                        "type": "string"
+                      },
+                      "periodAlign": {
+                        "type": "object",
+                        "properties": {
+                          "numerator": {
+                            "type": "string"
+                          },
+                          "denominator": {
+                            "type": "string"
+                          },
+                          "result": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "numerator",
+                          "denominator",
+                          "result"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "scaleFactor": {
+                        "type": "number"
+                      },
+                      "decimalPlaces": {
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "numeratorKey"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "additionalProperties": false
+              },
+              "derived": {
+                "enum": [
+                  false,
+                  true
+                ]
+              },
+              "refetch": {
+                "type": "object",
+                "properties": {
+                  "statsDataId": {
+                    "type": "string"
+                  },
+                  "cdCat01": {
+                    "type": "string"
+                  },
+                  "ksjDataId": {
+                    "type": "string"
+                  },
+                  "ksjVersion": {
+                    "type": "string"
+                  },
+                  "resourceId": {
+                    "type": "string"
+                  },
+                  "sourceUrl": {
+                    "type": "string"
+                  },
+                  "extractionHash": {
+                    "type": "string"
+                  }
+                },
+                "additionalProperties": false
+              },
+              "fetcherKey": {
+                "type": "string"
+              },
+              "configHash": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "kind",
+              "derived",
+              "configHash"
+            ],
+            "additionalProperties": false
+          },
+          "dependencies": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "normalizationDependencies": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "consumers": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "pageId": {
+                  "type": "string"
+                },
+                "kind": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "pageId",
+                "kind"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "themes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "metricKey",
+          "pageId",
+          "title",
+          "sources",
+          "recipe",
+          "dependencies",
+          "normalizationDependencies",
+          "consumers",
+          "themes"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "version",
+    "entries"
+  ],
+  "additionalProperties": false
+}

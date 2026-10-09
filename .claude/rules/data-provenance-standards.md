@@ -1,6 +1,8 @@
 ---
 paths:
-  - "packages/data-configs/src/{metrics,provenance}/**"
+  - "data/metrics/**"
+  - "data/metric-sources/**"
+  - "packages/data-configs/src/provenance/**"
   - ".claude/{scripts/provenance,skills/db/audit-provenance}/**"
   - "data/provenance/**"
   - ".github/workflows/provenance-audit-weekly.yml"
@@ -48,7 +50,7 @@ stats47 の全データ (metric / blog / theme / area / open-data) について�
 | `verification` | 検算 (公表全国値との一致等) | **必須** |
 | `restore` | 復元コマンド (誰でも一次資料から再取得・突合できる) | **必須** |
 
-手本: `packages/data-configs/src/metrics/ambulance-hospital-arrival-time.ts` の `source.config.provenance`。
+手本: `data/metrics/ambulance-hospital-arrival-time.ts` の `source.config.provenance`。
 
 ---
 

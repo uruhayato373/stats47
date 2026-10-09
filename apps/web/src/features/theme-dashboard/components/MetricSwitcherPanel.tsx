@@ -17,6 +17,7 @@ import { ChartPanel } from '@/components/charts/ChartPanel';
 import type { LineChartData } from '@/components/stat-charts/types/visualization';
 
 import { trackNavClick } from '@/lib/analytics/events';
+import {selectMetricDomainPolicy,metricSeriesDomain} from '@/lib/metric-presentation';
 
 import { type MetricTimeseriesResult } from '../actions';
 import { fetchMetricTimeseriesBatched } from '../lib/batched-metric-timeseries';
@@ -77,7 +78,7 @@ const cacheKey = (metricKey: string, areaCode: string) =>
  * (GEO-SCOPE-SEPARATION-01 WP2)。
  */
 type ChartState =
-  | { kind: 'chart'; data: LineChartData; hasComparison: boolean }
+  | { kind: 'chart'; data: LineChartData; leftDomain?: [number,number]; rightDomain?: [number,number]; hasComparison: boolean }
   | { kind: 'single-year'; yearName: string }
   | { kind: 'none' }
   | { kind: 'select-prefecture' };
@@ -443,6 +444,8 @@ export function MetricSwitcherPanel({
     if (data.length === 0) return { kind: 'none' };
     return {
       kind: 'chart',
+      leftDomain: metricSeriesDomain(data, lines.filter(line=>line.yAxis !== 'right').map(line=>line.dataKey), selectMetricDomainPolicy(checkedMetrics.filter(metric=>axisOf.get(metric.metricKey)!=='right').map(metric=>metric.trendDomain))),
+      rightDomain: metricSeriesDomain(data, lines.filter(line=>line.yAxis === 'right').map(line=>line.dataKey), selectMetricDomainPolicy(checkedMetrics.filter(metric=>axisOf.get(metric.metricKey)==='right').map(metric=>metric.trendDomain))),
       hasComparison,
       data: {
         xAxisKey: 'year',
@@ -667,7 +670,7 @@ export function MetricSwitcherPanel({
             {isLoadingSeries ? (
               <ChartLoading height={CHART_HEIGHT} />
             ) : chartState.kind === 'chart' ? (
-              <LineChartClient chartData={chartState.data} />
+              <LineChartClient chartData={chartState.data} yDomain={chartState.leftDomain} rightYDomain={chartState.rightDomain} />
             ) : chartState.kind === 'select-prefecture' ? (
               <ChartEmptyState
                 message={emptyMessage(chartState)}

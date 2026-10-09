@@ -106,9 +106,12 @@ test('PRは差分分類、週次は全数、ローカルcommitは全体型検査
     'PR内のweb buildは1回だけにする',
   );
   assert.match(pr, /name: pr-web-next-build/);
-  assert.equal(
-    (pr.match(/actions\/download-artifact@/g) ?? []).length,
-    1,
+  // 代表E2Eは build job が上げた成果物 (Next.js build と指標メタデータ) だけを再利用する。
+  // page-quality は 2026-09-18 に PR 必須から外したので、それ以外の download を増やさない。
+  const downloaded = [...pr.matchAll(/actions\/download-artifact@[^\n]*\n\s+with:\n\s+name: ([\w-]+)/g)].map((m) => m[1]);
+  assert.deepEqual(
+    downloaded.sort(),
+    ['pr-metric-metadata', 'pr-web-next-build'],
     '代表E2Eはbuild artifactを再利用する (page-quality は 2026-09-18 に PR 必須から外した)',
   );
   assert.doesNotMatch(pr, /^  page-quality:$/m, 'page-quality は PR 必須 gate に戻さない (CI-SPEED-PAGE-QUALITY-DETERMINISTIC-01)');

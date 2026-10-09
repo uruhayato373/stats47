@@ -1,56 +1,49 @@
-import type { RankingItem } from "@stats47/ranking";
-import type { MapDataPoint, MapVisualizationConfig } from "@stats47/visualization/d3";
+import type { RankingItem } from '@stats47/ranking';
+import type {
+  MapDataPoint,
+  MapVisualizationConfig,
+} from '@stats47/visualization/d3';
 
-export { getLeafletBorderColor } from "./map-palette";
+export { getLeafletBorderColor } from './map-palette';
 
 type NullableMapValue = {
   areaCode: string;
   value: number | null;
 };
 
-export function rankingItemToMapConfig(rankingItem: Pick<RankingItem, "visualization">): MapVisualizationConfig {
+export function rankingItemToMapConfig(
+  rankingItem: Pick<RankingItem, 'visualization'>
+): MapVisualizationConfig {
   const vis = rankingItem.visualization;
 
-  if (!vis) {
-    return {
-      colorScheme: "interpolateBlues",
-      colorSchemeType: "sequential",
-      isReversed: false,
-      minValueType: "data-min",
-    };
-  }
-
   const baseConfig = {
+    classification: vis.classification,
+    domain: vis.domain,
     colorScheme: vis.colorScheme,
     isReversed: vis.isReversed,
   };
 
-  if (vis.colorSchemeType === "diverging") {
+  if (vis.colorSchemeType === 'diverging') {
     return {
       ...baseConfig,
-      colorSchemeType: "diverging",
+      colorSchemeType: 'diverging',
       divergingMidpoint: vis.divergingMidpoint,
       divergingMidpointValue: vis.divergingMidpointValue ?? undefined,
       isSymmetrized: vis.isSymmetrized,
     };
   }
 
-  if (vis.colorSchemeType === "categorical") {
-    return {
-      ...baseConfig,
-      colorSchemeType: "categorical",
-    };
-  }
-
   return {
     ...baseConfig,
-    colorSchemeType: "sequential",
-    minValueType: vis.minValueType ?? "data-min",
+    colorSchemeType: 'sequential',
   };
 }
 
-export function filterMapDataPoints<T extends NullableMapValue>(values: T[]): MapDataPoint[] {
+export function filterMapDataPoints<T extends NullableMapValue>(
+  values: T[]
+): MapDataPoint[] {
   return values.filter(
-    (item): item is T & { value: number } => item.areaCode !== "00000" && item.value !== null
+    (item): item is T & { value: number } =>
+      item.areaCode !== '00000' && item.value !== null
   );
 }

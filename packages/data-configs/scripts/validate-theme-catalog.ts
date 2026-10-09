@@ -52,7 +52,6 @@ import {
 } from '../src/theme-catalog/evidence-lenses';
 import {
   validateChartProps,
-  validateMigratedSeriesRefContract,
   validateStatSeriesRefAlignment,
 } from '../src/theme-catalog/stat-series-ref';
 import { collectColorFieldViolations } from '../src/theme-catalog/chart-color-role';
@@ -216,126 +215,7 @@ export function validateIndicatorHubContentCompleteness(
  *   系列数とラベル数の不一致は「チャートが空になる / 系列が無名になる」形で
  *   本番に出るので、ビルド前に決定的に弾く。
  */
-function validatePageComponentEstatParams(errors: string[]): number {
-  const dir = path.resolve(
-    __dirname,
-    '../../../apps/web/scripts/data/page-components/theme'
-  );
-  let checked = 0;
-  let files: string[];
-  try {
-    files = readdirSync(dir).filter((f) => f.endsWith('.json'));
-  } catch {
-    return 0; // 生成物が無い環境ではスキップ (カタログ検証自体は続行)
-  }
 
-  const isStatsDataId = (v: unknown) =>
-    typeof v === 'string' && /^\d{10}$/.test(v);
-
-  for (const file of files) {
-    const theme = file.replace(/\.json$/, '');
-    const components = JSON.parse(
-      readFileSync(path.join(dir, file), 'utf8')
-    ) as Array<Record<string, unknown>>;
-
-    for (const comp of components) {
-      const key = String(comp.componentKey ?? comp.component_key ?? '(no-key)');
-      const type = String(comp.componentType ?? comp.component_type ?? '');
-      const description = comp.description;
-      const props = (comp.componentProps ??
-        comp.component_props ??
-        {}) as Record<string, unknown>;
-      const where = `${theme}/${key}`;
-
-      if (description !== null) {
-        if (
-          typeof description === 'string' &&
-          isGenericChartDescription(description)
-        ) {
-          errors.push(
-            `[chart-description-boilerplate] ${where}: componentType 由来の定型説明を表示しない`
-          );
-        } else {
-          errors.push(
-            `[chart-description] ${where}: 生成物 description は互換用 null に固定する`
-          );
-        }
-      }
-
-      if (
-        Object.prototype.hasOwnProperty.call(props, 'annotation') &&
-        (typeof props.annotation !== 'string' ||
-          props.annotation.trim().length === 0)
-      ) {
-        errors.push(
-          `[chart-annotation] ${where}: annotation は空でない文字列にする`
-        );
-      }
-
-      const paramGroups: Array<{ label: string; params: unknown }> = [
-        { label: 'estatParams', params: props.estatParams },
-        { label: 'columnParams', params: props.columnParams },
-        { label: 'lineParams', params: props.lineParams },
-      ];
-
-      for (const { label, params } of paramGroups) {
-        if (params == null) continue;
-        const list = Array.isArray(params) ? params : [params];
-        for (const p of list) {
-          checked++;
-          const id = (p as Record<string, unknown>)?.statsDataId;
-          if (!isStatsDataId(id)) {
-            errors.push(
-              `[estat-params] ${where}: ${label} の statsDataId "${String(id)}" が 10 桁の数字でない`
-            );
-          }
-        }
-      }
-
-      // statsDataId をトップレベルに持つ型 (composition / donut / cpi 等)
-      if (props.statsDataId != null && !isStatsDataId(props.statsDataId)) {
-        checked++;
-        errors.push(
-          `[estat-params] ${where}: statsDataId "${String(props.statsDataId)}" が 10 桁の数字でない`
-        );
-      }
-
-      // 系列数とラベル数・色数の一致 (ずれると凡例が無名・色が既定へ落ちる)
-      const lengthPairs: Array<[string, unknown, string, unknown]> =
-        type === 'mixed-chart'
-          ? [
-              [
-                'columnParams',
-                props.columnParams,
-                'columnLabels',
-                props.columnLabels,
-              ],
-              ['lineParams', props.lineParams, 'lineLabels', props.lineLabels],
-            ]
-          : [['estatParams', props.estatParams, 'labels', props.labels]];
-
-      for (const [paramsName, params, labelsName, labels] of lengthPairs) {
-        if (!Array.isArray(params) || !Array.isArray(labels)) continue;
-        if (params.length !== labels.length) {
-          errors.push(
-            `[estat-params] ${where}: ${paramsName} (${params.length}) と ${labelsName} (${labels.length}) の要素数が不一致`
-          );
-        }
-      }
-    }
-  }
-
-  return checked;
-}
-
-/**
- * metricGroups (指標カードの編成) の整合を検査する。
- *
- * ★単位 2 種までを error にする理由: カードのチャートは Y 軸が左右 2 本しかない
- *   (LineChart の yAxis: "left" | "right")。3 種目の単位が来ると軸が足りず、
- *   どれかの系列が桁違いのスケールに潰れる。単位文字列の正規化 (「円」と「千円」を
- *   同一視する等) は**しない** — 誤って結合する方が、定義時に弾かれるより危険。
- */
 function embeddedMetricKeys(c: ThemeCatalog): Set<string> {
   const hasFinanceRatios = c.key === 'local-finance' && c.sections?.some(
     (section) => section.embeddedSectionKeys?.includes('finance-sustainability')
@@ -763,7 +643,6 @@ export interface CatalogValidationResult {
   catalogs: ThemeCatalog[];
   errors: string[];
   warns: string[];
-  estatParamsChecked: number;
 }
 
 /**
@@ -833,12 +712,7 @@ export function runCatalogValidation(): CatalogValidationResult {
       )) {
         errors.push(`[chart-props] ${c.key}/${ch.componentKey}: ${msg}`);
       }
-      for (const msg of validateMigratedSeriesRefContract(
-        ch.componentKey,
-        (ch.componentProps ?? {}) as Record<string, unknown>
-      )) {
-        errors.push(`[series-ref-migration] ${c.key}/${ch.componentKey}: ${msg}`);
-      }
+
       for (const msg of validateStatSeriesRefAlignment(
         (ch.componentProps ?? {}) as Record<string, unknown>,
         ch.relatedRankingKeys ?? [],
@@ -932,16 +806,14 @@ export function runCatalogValidation(): CatalogValidationResult {
 
   validateIndicatorHubContentCompleteness(catalogs, errors, warns);
 
-  const estatParamsChecked = validatePageComponentEstatParams(errors);
-
-  return { catalogs, errors, warns, estatParamsChecked };
+  return { catalogs, errors, warns };
 }
 
 function main() {
-  const { catalogs, errors, warns, estatParamsChecked } = runCatalogValidation();
+  const { catalogs, errors, warns } = runCatalogValidation();
 
   console.log(
-    `theme-catalog 検証: ${catalogs.length} themes / estatParams ${estatParamsChecked} 件 / ` +
+    `theme-catalog 検証: ${catalogs.length} themes / 指標ID参照 / ` +
       `error ${errors.length} / warn ${warns.length}`
   );
   if (warns.length > 0) {

@@ -3,10 +3,13 @@
 投稿済み全件。`posted_at` 降順。
 スクリプトで自動生成 — 手編集しない (`sns-posts-store.cjs` が `insert()`/`updateById()` のたびに再生成)。
 
-**692 件** (最終更新: 2026-10-08)
+**695 件** (最終更新: 2026-10-09)
 
 | 日付 | 媒体 | コンテンツ | キャプション | URL |
 |---|---|---|---|---|
+| 2026-10-09 | 📸 Instagram | compare-carousel/23000-vs-40000 | 【県どうしの比較】愛知県 vs 福岡県  製造品出荷額等（総額）: 愛知県が大きい（2023年・出典: 社会・人口統計体… | [🔗](https://www.instagram.com/p/DeRQY84G5tI/) |
+| 2026-10-09 | 🧵 Threads | area/area-16000-profile | 富山を数字と地域文化の両方から見る。 県鳥ライチョウ、特産ホタルイカ、全国順位をまとめた県別ページです。 続きは👇 h… | [🔗](https://www.threads.com/@stats47jp/post/DeRDEEPjntQ) |
+| 2026-10-09 | 🧵 Threads | ranking/annual-sunshine-duration | 2,309時間・2,285時間・2,278時間。  年間日照時間の上位3県は高知・群馬・埼玉。 最も短い山形（1,626… | [🔗](https://www.threads.com/@stats47jp/post/DeQVTBMjF6G) |
 | 2026-10-08 | 𝕏 X | ranking/annual-sunshine-duration | 2,309時間・2,285時間・2,278時間。  年間日照時間の上位3県は高知・群馬・埼玉。 最も短い山形（1,626… | [🔗](https://x.com/stats47jp373/status/2108326571992097150) |
 | 2026-10-08 | 𝕏 X | theme/theme-labor-mobility-overview | 人材流動性・雇用環境、1つの順位だけで説明できますか？ 離職率と転職率など全9指標を横断。結果と背景を分けて読めます。 … | [🔗](https://x.com/stats47jp373/status/2108152927982653617) |
 | 2026-10-08 | 📸 Instagram | ranking-quiz/curry-roux-consumption-quantity |  | [🔗](https://www.instagram.com/p/DeOrTTqFnCN/) |

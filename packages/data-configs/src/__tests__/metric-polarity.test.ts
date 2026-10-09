@@ -11,7 +11,7 @@ import {
   METRIC_POLARITY,
   MIN_POLARITY_COVERAGE,
   findMetricPolarity,
-} from "../metric-polarity";
+} from "../../../../data/metrics/policy/polarity";
 import { listAllMetrics } from "../registry";
 
 const keys = new Set(listAllMetrics().map((m) => m.key));

@@ -12,7 +12,7 @@ const require = createRequire(import.meta.url);
 const prefectures = require('../../../../packages/area/src/data/prefectures.json');
 const {
   retailEmployees,
-} = require('../../../../packages/data-configs/src/metrics/retail-employees.ts');
+} = require('../../../../data/metrics/retail-employees.ts');
 const time = '2021100000';
 function fixture() {
   const areas = [{ prefCode: '00000', prefName: '全国' }, ...prefectures];

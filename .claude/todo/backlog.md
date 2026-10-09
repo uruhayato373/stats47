@@ -495,7 +495,7 @@ updated: 2026-10-06
 ### [FISHERY-BONITO-CONFIG-01] カツオ漁獲量の指標の注記と実データの件数・集計基準が合わない
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-08] [領域:データ]
 
-- **事実 (2026-10-08、article-writer と blog-critic が報告)**: `packages/data-configs/src/metrics/fishery-species-catch-bonito.ts` は「内陸 8 県のみ対象外・40 都道府県」と書くが、R2 の 2015 年は 30 行で、岩手・秋田・茨城・大阪・兵庫・鳥取・岡山・広島・香川の 9 県に行が無い (茨城は 2014 年 2,756 トン、鳥取は 2012 年 9,336 トン)。集計が漁業経営体の所在地 (属人統計) であることも config に無い。
+- **事実 (2026-10-08、article-writer と blog-critic が報告)**: `data/metrics/fishery-species-catch-bonito.ts` は「内陸 8 県のみ対象外・40 都道府県」と書くが、R2 の 2015 年は 30 行で、岩手・秋田・茨城・大阪・兵庫・鳥取・岡山・広島・香川の 9 県に行が無い (茨城は 2014 年 2,756 トン、鳥取は 2012 年 9,336 トン)。集計が漁業経営体の所在地 (属人統計) であることも config に無い。
 - **次**: e-Stat 表 0003238633 で 9 県の 2015 年の記号 (秘匿・該当なし) を確かめ、config の note を実データと集計基準に合わせる。秘匿なら note に書き、取り込みの欠落なら再取り込みする。
 - **完了条件**: note の対象県数と集計基準が e-Stat と一致し、9 県の扱いが記録されている。
 
@@ -561,7 +561,7 @@ updated: 2026-10-06
 - **入力**: `GSC-CTR-DECOMPOSE-01` の 2026-10-07 の表 (健康寿命・道の駅・公衆電話 ranking/blog・国勢調査ハブ・出生率・食料自給率・高校2年男子の身長)。PV 計画 (`PV-PLAN-REVIEW-2026Q4-01`) のうち CTR を上げる打ち手。
 - **次 (実行順)**: ① 公衆電話 (`/ranking/public-phone-count` と `/blog/public-phone-count`)、出生率 (`/blog/fertility-rate-prefecture-gap` と `/ranking/total-fertility-rate`) の 2 組で、同じ検索語に両方が出ていないかを GSC (page × query) で確かめ、食い合いなら役割を分ける (canonical・内部リンク・title の切り口) ② 残り 5 ページを `/search-growth` の候補にし、title・description を 1 ページずつ変える (一括変更はしない) ③ 変えた日を記録し、4 週後に同じ 28 日窓で CTR を比べる。
 - **2026-10-07 の確認 (本番の title・canonical を curl で取得)**: 2 組とも canonical はそれぞれ自分自身で、title がほぼ同じ書き方 (同じ年・同じ 1 位と最下位の値) だった。公衆電話は ranking「公衆電話設置台数 都道府県ランキング【2024年】｜1位東京都（10,717.00個）」と blog「公衆電話設置台数1位東京10,717個・最下位徳島509個｜…」。出生率は ranking「…なぜ沖縄1.60が1位で東京0.99が最下位?」と blog「…沖縄1.60・東京0.99、早婚の県ほど高い…」。出生率の ranking から blog へのリンクは 0 本。**[仮説]** 同じ検索語に 2 ページが出て、互いの順位とクリックを下げている。検証: GSC で page × query を取り、同じクエリに両 URL が表示されているか (Mac か CI)。期日: 10-25。判定: 同じクエリの表示が両方にあれば、ranking を「一覧・推移・地図」、blog を「なぜ・相関」の切り口に分けて title を変える。
-- **2026-10-07 修正**: 公衆電話の ranking の title・description に出ていた「10,717.00個」は、設定 `packages/data-configs/src/metrics/public-phone-count.ts` の `display.decimalPlaces: 2` (台数なのに小数 2 桁) と、その値で書かれた seoTitle・seoDescription が原因だった。小数 0 桁に直し、文言を「10,717個」「509個」にした (同じ「.00」のある seoTitle は全 metric でこの 1 件だけ)。本番に出すにはランキングの生成物の作り直しと R2 反映 (オーナー承認) が要る。
+- **2026-10-07 修正**: 公衆電話の ranking の title・description に出ていた「10,717.00個」は、設定 `data/metrics/public-phone-count.ts` の `display.decimalPlaces: 2` (台数なのに小数 2 桁) と、その値で書かれた seoTitle・seoDescription が原因だった。小数 0 桁に直し、文言を「10,717個」「509個」にした (同じ「.00」のある seoTitle は全 metric でこの 1 件だけ)。本番に出すにはランキングの生成物の作り直しと R2 反映 (オーナー承認) が要る。
 - **2026-10-08 確認 (段6)**: R2 の `app/ranking/public-phone-count/item.json` は 2026-10-07T22:01Z に作り直されて seoTitle が「10,717個」になり、本番 `/ranking/public-phone-count` の HTML も「10,717個」(24 か所・「.00」0 件) を返した。ただし `origin/main` の config は「10,717.00個」のまま (修正 `52da45b35` は develop のみ)。main のコードで動く `sync-snapshots` が次に ranking-items を作ると戻るので、**develop→main のマージ (オーナー承認) で定着させる**。マージ後に `curl -s https://stats47.jp/ranking/public-phone-count | grep -c '10,717.00'` が 0 であることを確かめる。
 - **① の結果 (2026-10-08・Mac で GSC page × query、28 日 09-08〜10-05)**:
   - **公衆電話は食い合いがある。** 両方に表示されたクエリが 29 件あり、その表示は ranking 4,011・blog 1,566。主な検索語は「全国の公衆電話の数」(ranking 1,788 表示・順位 6.6 / blog 32 表示・8.3) のような**全国の総数**を問うもので、どちらの title にも全国の数が無い。ページ全体では ranking 6,670 表示・22 クリック (0.33%)、blog 4,792 表示・14 クリック (0.29%)。2024 年の 47 都道府県の合計は 96,126 個 (R2 `app/stats/public-phone-count/values.json` の合計。blog 本文の「9.6 万台」と一致)。
@@ -569,7 +569,7 @@ updated: 2026-10-06
   - **役割分けの案 (未適用・オーナー確認待ち)**:
     | ページ | 切り口 | title 案 | 変える場所 |
     |---|---|---|---|
-    | `/ranking/public-phone-count` | 一覧・推移・地図 | 公衆電話の数 都道府県ランキング【2024年】全国96,126個・1位東京都10,717個｜推移と地図 | `packages/data-configs/src/metrics/public-phone-count.ts` の seoTitle・seoDescription (description は「全国の公衆電話は 2024 年に 96,126 個。都道府県別の一覧、1975 年からの推移、地図で比較」) |
+    | `/ranking/public-phone-count` | 一覧・推移・地図 | 公衆電話の数 都道府県ランキング【2024年】全国96,126個・1位東京都10,717個｜推移と地図 | `data/metrics/public-phone-count.ts` の seoTitle・seoDescription (description は「全国の公衆電話は 2024 年に 96,126 個。都道府県別の一覧、1975 年からの推移、地図で比較」) |
     | `/blog/public-phone-count` | なぜ・相関 | 公衆電話はなぜ減った? ピーク93.5万台→9.6万台、都市に残り地方で消える理由｜47都道府県2024 | 記事 frontmatter (R2 の記事を contents/blog の送り箱経由で更新)。本文冒頭から ranking へ「都道府県別の一覧と推移」のリンクを置く |
     | `/ranking/total-fertility-rate` | 一覧・推移・地図 | 合計特殊出生率 都道府県ランキング【2023年】1位沖縄1.60・最下位東京0.99｜推移と地図 | metric の seoTitle。ranking→blog のリンク (0 本) を足す。blog の title は順位 1 の検索語を受けているので変えない |
   - 判断: 公衆電話は案どおり 2 ページを分ける。出生率は ranking の title と相互リンクだけ直す。
@@ -737,7 +737,7 @@ updated: 2026-10-06
 タグ: [エージェント・SSOT] [種類:改善] [実行:対話] [起票:2026-10-07] [領域:サイト]
 
 - **経緯**: 2026-10-07 にオーナーが「docs/ ではなく、R2 か contents/ で管理し、ローカルは一時的に持つだけでよいのでは」と指摘し、(a) 「図の年の書き直し 22 本を公開してから移す」を選んだ。公開待ちの outbox は公開後に CI が消すもので、人が読み返す文書の置き場 (docs/) と性質が合わない。
-- **現在地 (2026-10-08)**: 22 本の公開後に、docs/21 の原稿 32 本を README と一緒に `git mv` で `contents/blog/` へ移した (未公開の 13 本も同じ diff で移したので失われていない)。台帳 `config/datasets.mjs` に `blog.outbox` と RETIRED を足し、workflow 4 本・スクリプト・skill・rule・memory の参照を書き換え、`npm run check-datasets` の旧置き場の参照は 0 件になった。PR CI の変更分類 (`plan-pr-quality.mjs`) は原稿だけの PR で重い job を起動しないよう `contents/` を docs/ と同じ扱いにした。
+- **現在地 (2026-10-08)**: 22 本の公開後に、contents/blog の原稿 32 本を README と一緒に `git mv` で `contents/blog/` へ移した (未公開の 13 本も同じ diff で移したので失われていない)。台帳 `config/datasets.mjs` に `blog.outbox` と RETIRED を足し、workflow 4 本・スクリプト・skill・rule・memory の参照を書き換え、`npm run check-datasets` の旧置き場の参照は 0 件になった。PR CI の変更分類 (`plan-pr-quality.mjs`) は原稿だけの PR で重い job を起動しないよう `contents/` を docs/ と同じ扱いにした。
 - **本番反映 (2026-10-08)**: uruhayato373/stats47#1108 で main へマージ (10:17 UTC)。デプロイと post-deploy smoke (run 37763482616) は成功。移動の push で `blog-auto-publish` (run 37760839708) が `contents/blog` から 20 本を候補に取り、19 本は手書き出典節、1 本は背景未生成の blocker で全件 skip した (公開 0・R2 は不変)。PR の図の検証 workflow は抽出の awk が旧パスのままで 0 件で通っていたので直し、32 本の検証が通った。push からマージまでの定期実行は Instagram の 1 本だけで、outbox に触れず記録の欠落は無い。
 - **次**: ①次に記事を公開する run で `blog-auto-publish.yml` が `contents/blog` から公開し、公開した slug を commit-back で消すこと ②`blog-remediation-daily.yml` の最初の run (2026-10-08 23:00 UTC = 10-09 08:00 JST) が `contents/blog` を掃除して書き戻すことを、run のログで確かめる。
 - **完了条件**: 上の 2 つの run が成功し、ログに `contents/blog` の slug が出ている。
@@ -774,14 +774,14 @@ updated: 2026-10-06
 ### [METRIC-SUPPLEMENTAL-SOURCE-DISPLAY-01] 補助の出典から取った年の値でも、指標の出典表示が主の出典のままになる
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-07] [領域:データ]
 
-- **事象 (2026-10-07、vacant-housing-vs-aging の critic が報告)**: `packages/data-configs/src/metrics/ratio-65-plus.ts` は 2025 年の値を `supplementalSources` (国勢調査、統計表 0004065933) から取るが、指標の出典表示は主の source (社会・人口統計体系) のままで、ブログの記事が 2025 年の値の出典を誤って書きやすい。ランキングページの出典表示が年ごとに切り替わるかは未確認。
+- **事象 (2026-10-07、vacant-housing-vs-aging の critic が報告)**: `data/metrics/ratio-65-plus.ts` は 2025 年の値を `supplementalSources` (国勢調査、統計表 0004065933) から取るが、指標の出典表示は主の source (社会・人口統計体系) のままで、ブログの記事が 2025 年の値の出典を誤って書きやすい。ランキングページの出典表示が年ごとに切り替わるかは未確認。
 - **次**: `supplementalSources` を持つ指標を数え、ランキングページと指標の定義シートが、表示中の年の出典を出しているかを確かめる。出していなければ、年に応じて出典を選ぶ。
 - **完了条件**: 補助の出典から取った年を表示すると、その年の出典 (調査名と統計表 ID) が出ることをテストで固定している。
 
 ### [METRIC-FARM-INCOME-DEFS-01] 農家総所得の指標で、対象・分母・調査が定義に出ず、意味の無い正規化が選べる
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [検証:npm run validate:config --workspace=@stats47/data-configs] [起票:2026-10-07] [領域:データ]
 
-- **事象 (2026-10-07、sixth-industry-direct-sales の writer が報告し config で確認)**: `packages/data-configs/src/metrics/total-farm-household-income.ts` に description・note・surveyId が無く、指標の定義シートで対象 (農家 1 戸あたりか)・分母・調査が空欄になる。「総所得」が農外所得や年金を含むかも読者向けの定義に出ない。1 戸あたりの所得なのに normalizationOptions に「人口10万人あたり」「面積100km²あたり」があり、意味の無い換算が選べる。yearFormat は fiscal なのに seoTitle が「【2003年】」と暦年で書いている。系列は 1995〜2003 年度で止まっている。
+- **事象 (2026-10-07、sixth-industry-direct-sales の writer が報告し config で確認)**: `data/metrics/total-farm-household-income.ts` に description・note・surveyId が無く、指標の定義シートで対象 (農家 1 戸あたりか)・分母・調査が空欄になる。「総所得」が農外所得や年金を含むかも読者向けの定義に出ない。1 戸あたりの所得なのに normalizationOptions に「人口10万人あたり」「面積100km²あたり」があり、意味の無い換算が選べる。yearFormat は fiscal なのに seoTitle が「【2003年】」と暦年で書いている。系列は 1995〜2003 年度で止まっている。
 - **追記 (2026-10-07)**: 同じ表 0000010212 の農業所得割合 (#L0110101)・農外所得割合 (#L0110102) の config も対象・分母・調査が定義シートに出ない (sixth-industry-direct-sales の fix writer が報告)。e-Stat の控え `data/estat/meta/0000010212.json` の項目名は「#L01100_農家総所得」で、1 戸あたりかどうかの表記が無い。記事は「分母は未確認」と書いて公開する。3 指標をまとめて直す。
 - **追記 (2026-10-07)**: 再審の critic によると、北海道の 2003 年度は農業所得割合 46% と農外所得割合 15.1% を足して 61.1% で、2 つの割合の分母が農家総所得とは限らない (残りは年金などの可能性)。分母を確かめるときに合わせて見る。
 - **次**: 社会・人口統計体系の指標定義 (#L01100) で対象と構成を確かめ、description と note に書く。surveyId を `data/surveys/taxonomy.json` で探して紐付ける。正規化の選択肢を外す。seoTitle を再生成して「年度」にする。
@@ -825,6 +825,21 @@ updated: 2026-10-06
 - **追記 (2026-10-07)**: school-teacher-annual-income-prefecture-gap の critic も 3 件目として同じ報告をした (本文で名指しする愛媛県・長崎県の点が図で特定できない)。
 - **次**: data JSON に名指しする県 (例: `labelAreas: ["26000", "24000"]`) を書けるようにし、その点だけに県名を添える。点の重なりで読めなくならない配置を `lintScatterQuality` の検査と合わせて決める (散布図は 720×720・単色の規格がある)。
 - **完了条件**: 指定した県だけに名前が出ることと、指定が無い図の出力が変わらないことを svg-builder のテストで固定している。
+
+### [BLOG-AUDIT-PROVENANCE-HELP-01] audit-chart-provenance.mjs が --help でも全件監査を実行して是正キューを書き換える
+タグ: [コンテンツ品質] [種類:不具合] [実行:sweep] [検証:node .claude/scripts/blog/audit-chart-provenance.mjs --help] [起票:2026-10-07] [領域:サイト]
+
+- **事象**: 2026-10-07、it-industry-concentration の writer が使い方を確かめようと `--help` を付けて実行したところ、全件の監査が走って `data/blog/chart-provenance-queue.json` が書き換わった (writer が git checkout で戻した)。このキューは blog-remediation-daily の provenance ラチェットの基準なので、誤って書き換えると日次のラチェットの判定がずれる。
+- **次**: `--help` / `-h` で使い方を出して終了する。知らない引数は書き込まずにエラーにする。
+- **完了条件**: `--help` で何も書き換えずに exit 0 になる。
+
+### [METRIC-WAGE-SURVEY-01] 賃金構造基本統計調査の職種別年収 39 指標に surveyId と調査の注記を足す
+タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run validate:config --workspace=@stats47/data-configs] [起票:2026-10-07] [領域:データ]
+
+- **事象**: `data/metrics/*-annual-income.ts` の 39 指標はどれも `surveyId` を持たず (2026-10-07 に数えた)、指標の定義シートで「調査」が空欄になる。physical-therapist-annual-income-prefecture-gap の writer が報告した。職種別の県の値は標本が少なく年ごとに順位が大きく動くので、その注意も読者向けの定義に出したい。
+- **次**: 賃金構造基本統計調査の surveyId を `data/surveys` の台帳で確かめ、39 指標にまとめて足す。標本の少なさによる年ごとの変動の注意を note に足すかを、指標ごとの標本数を見て決める。 定義シートに対象 (一般労働者か・男女計か) も出るよう、description に書く (physical-therapist-annual-income の critic が報告)。
+- **追記 (2026-10-07)**: `school-teacher-annual-income` も同じで、critic が定義シートの対象欄「対象の記述なし」と「surveyId 未設定」を確認した。
+- **完了条件**: 39 指標の定義シートで調査名が出る。
 
 ### [BLOG-REFRESH-DERIVED-SCATTER-01] 図の年の取り直しスクリプトが、計算で作った散布図を取り直せない
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:node --test .claude/scripts/blog/lib/__tests__/refresh-chart-year.test.mjs] [起票:2026-10-07] [領域:サイト]
@@ -1733,6 +1748,17 @@ updated: 2026-10-06
 ### [RANKING-FIRST-VIEW-RELEASE-01] ランキングページを「最初の画面で答えを出す」形に改修し、既存 3 件とまとめて 1 回のリリースで測る
 タグ: [UI・UX] [種類:改善] [実行:対話] [起票:2026-09-25] [領域:サイト]
 
+- **指標SSOT・サマリUI実装 (2026-10-09、ローカル実装済み・本番未反映)**:
+  - 2,638指標の定義・取得元・単位・計算・表示方針を data/metrics/ へ移行。旧metricsディレクトリと生e-Statパラメータのテーマ互換読取を削除。指標IDをランキング・55テーマ・area・全国・市区町村・原典逆引きへ接続。
+  - 平均・中央値・最小・最大・分位・有効件数は観測値から計算し、設定に手入力しない。共通表示方針と指標別の例外でコロプレスの配色・階級・基準値・数値domain、推移・比較のY軸を管理。総人口は5分位、男女賃金格差は100基準。
+  - 型からJSON Schemaを生成。全指標・テーマのスキーマ、分類条件、ID参照、依存循環、利用ページ逆引きと生成鮮度を npm run metrics:check で検査。配信metadataでも同じpresentation契約を必須にし、都道府県・市区町村とも旧形式を受理しない。
+  - 地図と凡例は共通resolverのdomain・境界値・色を使用。市区町村地図とD3都道府県地図も同じ解決結果で描画。正規化時は対象単位に応じた方針を使い、未対応の正規化URLは受理しない。
+  - 上位3件と最下位を、共通の実値目盛りと単純平均の線を持つドット図へ変更。1位と2位の差と同順位を明示。平均推移にY軸・暦年のX軸・選択年の目印を追加。単年時の空枠を縮め、値と単位の折返しを防止。全幅でタイトル→計算方法→要約→地図の順に統一。
+  - 検証: 2,638指標/55テーマの契約、content 9,116ページ/44route/928tag、移行前後の単位/取得条件、都道府県2,589個別item/2,499集約itemと市区町村171 item/valuesの整合がPASS。旧minValueType/presetは拒否し、生成処理も共通表示方針を参照する。全25package+8script型検査、web本番相当build(1,627ページ生成)、変更web 46file lint(エラー/警告0)、直近17file/158test、CI中継13test/政策15test、生成定義2件のschema検証がPASS。変更sourceのsecret検査は2,787file/検出0。390/768/1440px・負値・単年・年切替・正規化・100基準・5分位・darkのランキング11ケースと市区町村/全国の計13画面をlocalhostで確認し、200・JSエラー0・横overflow0。撮影と観測結果はCodex visualizations内 ranking-summary-review-20261009/ の final-observations.json / extended-observations.json とPNG。ローカルのみ、本番未反映。
+  - 保存時ゲートの是正: 原典/利用ページ逆引きを100指標ずつ27 shardへ分割（最大363,336byte、全2,638IDの欠落/重複0）。旧単一indexは削除。凡例・推移軸・複数系列の最新値を共通数値整形へ揃え、追加対象15test、ファイルサイズ/数値整形/保守負債の新規違反0、修正後25package+8script型検査を確認。検証用buildは一時領域へ保全し、設定の検査対象から除く。
+  - 実画面で分位配色の偏りを検出・是正: 区間の実値中点ではなく階級順から配色し、発散色の基準を維持。偏った分布でも同じ階級色になる性質を含む13test、visualization型検査、人口密度390pxの再撮影(200/JSエラー0/横overflow0)、最終本番相当build(1,627ページ生成)PASSを確認。
+  - **本番反映条件**: 同じコードから都道府県の全itemと集約索引、市区町村の全item/valuesを再生成・検査してR2へ先に反映し、その後アプリをまとめて1回デプロイする。ローカルmetadataは .local/r2/。旧形式の補完はしない。
+  - **残る本カードの範囲**: 下記の地図/表統合・出典整理等の既存リリース範囲と本番計測は、この実装だけでは完了扱いにしない。アクセス改善の効果は未計測。
 - **結論 (2026-09-25 壁打ち・オーナー合意)**: UI はランキングページを最優先にする。ランキングは PV 19,040 (国内 28 日、全体の約半分)・
   検索クリック 3,861 (GSC W38) の最大の面で、1 人あたり PV は 2.00。
 - **問題 (2026-09-25 localhost 778px で確認)**: `/ranking/national-pension-full-exemption-rate` の最初の画面はタイトルと地図だけで、
@@ -2259,7 +2285,7 @@ updated: 2026-10-06
 - **owner**: survey-curator (surveyId) / data-ingester (yearFormat)
 - **実測 (2026-09-19)**: 同じ家計調査 (SSDS 経由) 由来なのに `disposable-income-worker-households` / `disposable-income-after-rent` / `real-disposable-income` は `yearFormat: 'fiscal'`、`black-tea-consumption-expenditure` / `private-rent-consumption-expenditure` / `engel-coefficient` は `'calendar'`。サイトの yearName が同じ調査で「2024年度」と「2024年」に分かれ、ブログ (real-disposable-income-reversal 等) が「2024年度」を書く原因になった。家計調査の年次結果は暦年平均 (統計局「2024年（令和6年）平均」)。上記 4 key と `per-capita-prefectural-income-h27` は `surveyId` 未設定で指標定義シートが「(surveyId 未設定)」を返す。 `per-capita-prefectural-income-h27` は description と note も無く、定義シートの対象欄が「config に対象の記述なし」になる (2026-10-07、engel-coefficient-vs-prefectural-income の writer が報告。県民所得の構成・分母・名目か実質かが読者向けの定義に出ない)。
 - **追記 (2026-10-07)**: real-disposable-income-reversal の critic が、`consumer-price-difference-index-overall` (消費者物価地域差指数) と家計の 3 指標の yearFormat が fiscal のままで、記事の年の書き方が揃わないことを再度報告した。
-- **次**: ①家計調査由来 metric を列挙し (`grep -l 家計調査 packages/data-configs/src/metrics/*.ts`)、yearFormat を出典で確定して揃える (SSDS の表ラベルは「年度」でも家計調査項目は暦年)。②surveyId を `kakei-chousa` 等へ紐付け `/audit-survey-linkage` を通す。③ranking-prominence / seoTitle の再生成が要るか確認。
+- **次**: ①家計調査由来 metric を列挙し (`grep -l 家計調査 data/metrics/*.ts`)、yearFormat を出典で確定して揃える (SSDS の表ラベルは「年度」でも家計調査項目は暦年)。②surveyId を `kakei-chousa` 等へ紐付け `/audit-survey-linkage` を通す。③ranking-prominence / seoTitle の再生成が要るか確認。
 - **範囲の拡張 (2026-09-19 追記)**: S1 12 冊の図 120 枚を `.local/kindle-audit/fig-years.ts` (図の年表記 × source.json の rankingKey × config yearFormat) で実測すると、国勢調査 (未婚率・単独世帯 2020)、社会生活基本調査 (行動者率 2021)、住宅・土地統計、宿泊旅行統計 (2024) まで一律 `fiscal` だった。家計調査に限らず「調査の集計期間が暦年・時点のもの」を一次資料で確定して直す。書籍側は `figure-corrections.ts` で本文に合わせて図の年表記を当てているが、config が直ればその校訂は不要になる。
 - **停止条件**: yearFormat を一括置換しない (SSDS には年度が正しい項目もある)。出典で確認できない key は `未宣言` のまま残し、指標定義シートに出す。
 - **完了条件**: 家計調査由来 metric の yearFormat が出典と一致し、S1-01 の 9 slug で定義シートの「期間の型」が本文と一致する。
@@ -2520,22 +2546,14 @@ updated: 2026-10-06
 - **前提**: `japan-zue`の解決済みinventoryは論点発見だけに使う。記事・テーマへ載せる定義、年度、単位、値は、各metricの一次資料とR2観測値で再検証する。原文、OCR、書籍値、内部cropは公開しない。
 - **テーマ企画**: 参考文献で`theme`対象になり、既存ThemeCatalogまたはIndicatorSetへ未統合の制作単位だけを保持する。`draft`は採択・チャート設計待ち、`blocked`はactiveな公開metricが無いため停止中。
 
-<!-- reference-theme-plans:start -->
-| metricKey | title | targetTheme | status | hypothesis |
-| --- | --- | --- | --- | --- |
-| projected-population-2020 | 将来推計人口 | population-dynamics | blocked | 将来人口と現在の人口動態を同じ時間軸で比較する |
-| gross-prefectural-product-expenditure-nominal-h27 | 県内総生産 | local-economy | blocked | 地域経済の規模と産業・雇用構造を同じ画面で比較する |
-| students-requiring-japanese-instruction | 日本語指導が必要な児童生徒数 | education-culture | blocked | 国籍と支援ニーズを分け、人数・児童生徒比・学校側の受入体制を重ねて読む |
-| general-households | 一般世帯数 | population-dynamics | draft | [却下 2026-09-14] 人口動態=増減メカニズムと無関係、世帯構造は別テーマ向き |
-| area-ratio-of-total | 面積割合 | climate | draft | [却下 2026-09-14] 面積割合は気候(気象)と直接関係せず地理指標 |
-| number-of-establishments-manufacturing | 製造業事業所数 | manufacturing | draft | [却下 2026-09-14] 登録済みmanufacturing-establishmentsと同一statsDataId重複、年度が古い |
-| average-life-expectancy-male | 男性の平均余命 | healthcare | draft | [却下 2026-09-14] subtitle年齢欠落・値63年が0歳時点と矛盾、metric要修正が先 |
-<!-- reference-theme-plans:end -->
+(2026-10-10 に `packages/data-configs/src/evidence-inventory/placement-decisions.ts` の channel=theme へ移した。企画中・停止・見送りはそこが正本で、管理画面 `/content/references` が読む)
 
 - **2026-09-14 テーマ企画14件を判定 (theme-designer)**: 採択11件をcontext roleでThemeCatalogへ追加 (`sex-ratio-total`→population-dynamics、`day-time-population`→labor-mobility、`electricity-generation-capacity`/`agricultural-employment-population`→local-economy、`avg-propensity-to-consume-worker-households`→real-income、`municipality-count`/`households-on-public-assistance`→local-finance、`infant-deaths`/`infant-mortality-rate-per-1000-births`/`average-life-expectancy-female-20`/`average-life-expectancy-female-65`→healthcare)。却下3件: `general-households`(人口動態=増減メカニズムと無関係、世帯構造テーマ向き)、`area-ratio-of-total`(気候テーマと面積は無関係、landweatherカテゴリのまま)、`number-of-establishments-manufacturing`(登録済み`manufacturing-establishments`と同一statsDataId・年度が古い重複)、`average-life-expectancy-male`(subtitleに年齢欠落・値63年が0歳時点と矛盾し要metric修正)。`generate:catalog`→`validate:catalog`(0 error/0 warn)→`tsc --noEmit -p apps/web/tsconfig.json`(0 error)まで確認済み。
 - **ブログ下書き**: `contents/blog/{household-structure-daytime-population-gap,agriculture-output-employment-productivity-gap,electricity-generation-manufacturing-establishments-gap,household-spending-debt-propensity-gap}/article.md`。4本とも`published:false`で、一次資料・R2接地前の数値主張を置かない。`general-households`/`number-of-establishments-manufacturing`は却下済みのため、該当2本のペア構成をarticle-writerが着手前に見直す。
 - **次**: blocked 3件はactiveな公開metricが出た時点で再判定する。ブログは各指標の年度・母集団を揃え、相関snapshot、チャート、本文、独立criticの順で品質ゲートへ進める。
 - **停止条件**: inactive metric、年度・母集団の不一致、相関snapshot不在、一次資料未確認、権利保留のいずれかがあれば公開へ進めない。
+- **2026-10-09 ワークフロー (wf_d880dc8a-bab) の結果**: `agriculture-output-employment-productivity-gap` と `household-structure-daytime-population-gap` は データ接地・SVG・quality-gate・独立 critic PASS まで完了 (published:false のまま)。公開に残るのは記事固有の背景画像 (Codex の担当、`npm run blog-images:codex -- request-article --slug <slug>`)。世帯構成の記事は指標を核家族世帯割合 × 昼夜間人口比率 (2020 年国勢調査) に組み直した。`electricity-generation-manufacturing-establishments-gap` は 2 指標の相関 snapshot が無く停止 (2023 年の 47 県結合で r≈0.30。snapshot 外の散布図を例外として許すか、snapshot に実在する工業用水・港湾貨物の組へ企画を替えるかはオーナー判断)。`household-spending-debt-propensity-gap` は 3 指標に共通する年が無く停止 (負債現在高は 2019 年のみ、消費支出は 2019 年が無い)。
+- **2026-10-09 公開**: 2 本 (`agriculture-output-employment-productivity-gap` / `household-structure-daytime-population-gap`) は記事固有背景 (2c1c49dba) を得て blog-auto-publish (run 37903460052) で R2 に公開した。本番ページは公開記事一覧 (sitemap-blog-entries.ts) が main に入るまで 410 のため、PR #1116 のデプロイで表示される。タグ 3 つ (農業就業人口・昼夜間人口比率・核家族世帯) を data/content/tags.json に登録した。
 - **完了条件**: blocked 3件はmetric公開可否が確定する。ブログ4本は一次資料・R2接地、SVG、quality gate、critic PASSを満たしてから`published:true`へ移す。
 
 ### [SNAPSHOT-EDGE-PURGE-GAP-01] snapshot 同期後にエッジが旧 HTML を配信し続ける
@@ -2829,7 +2847,7 @@ updated: 2026-10-06
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [検証:npm run validate:config --workspace=@stats47/data-configs] [起票:2026-09-16] [領域:サイト]
 
 - **owner**: data-ingester (config 一括是正) / ranking-ui-manager (表示面の確認)
-- 実測 (2026-09-16): `packages/data-configs/src/metrics/` の `kind: "kakei-chousa"` 706 件すべてが
+- 実測 (2026-09-16): `data/metrics/` の `kind: "kakei-chousa"` 706 件すべてが
   `subtitle: "都道府県庁所在市の二人以上世帯の年間{品目}消費支出額"` の形。`metric-config-standards.md` の役割表では
   subtitle は「同名指標を区別する短い定義補足」で、調査方法は `note` / `description` の責務。lint `subtitle-redundant`
   (`validate-metric-config.ts:250`) は「subtitle が title を包含」を真の識別子 (乳用牛(めす)) のために許容しているので、この定型文はすり抜ける。
@@ -3297,9 +3315,48 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
 タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-09] [領域:データ]
 
 - **観測 (2026-10-09・ワークフローの検証)**: /japan に載っている `day-time-population-ratio` は全国では常に 100 (`app/japan/day-time-population-ratio/series.json`)。
-  `packages/data-configs/src/metrics/total-fertility-rate.ts` の unit が「人」だが e-Stat の単位は「‐」で、/japan の生成器が単位不一致で拒否する。
+  `data/metrics/total-fertility-rate.ts` の unit が「人」だが e-Stat の単位は「‐」で、/japan の生成器が単位不一致で拒否する。
 - **次**: 昼夜間人口比率を /japan から外すか判断する。合計特殊出生率の unit を出典の定義に合わせて直し、/japan に載せ直す (placement-decisions.ts の blocked 行を消す)。
 - **完了条件**: 上の 2 件が直り、/japan に意味のない系列が残っていない。
+
+### [CORRELATION-SNAPSHOT-YEAR-ALIGN-01] 相関 snapshot が年の違う値どうしを組み、統制変数も別の年を使っている
+
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-09] [領域:データ]
+
+- **観測 (2026-10-09・ブログ執筆のワークフロー)**: 農業産出額 (2024 年) と農業就業人口 (2014 年) の組で r=0.762 をランキングページの「相関が高い指標」に出している (同じ年の 2014 年でそろえると 0.758)。
+  核家族世帯割合 × 昼夜間人口比率 (2020 年国勢調査) の偏相関は、統制変数に 2025 年の総人口を使っている (`build-correlation-snapshot.ts` の `loadMetric` が統制変数だけ最新年を使う設計に見える)。
+- **次**: ペアを作るときに年をそろえるか、年が違うことを画面と snapshot に書く。統制変数の年をペアの年に合わせる。
+- **完了条件**: 相関 snapshot の各ペアと統制変数の年が一致するか、食い違いが表示されている。
+
+### [METRIC-DAYTIME-RATIO-DUP-01] 昼夜間人口比率の指標キーが 2 つ並存している (day-time-population-ratio / daytime-population-ratio)
+
+タグ: [コンテンツ品質] [種類:不具合] [実行:対話] [起票:2026-10-09] [領域:データ]
+
+- **観測 (2026-10-09)**: 両方が相関 snapshot に別行で出る。ブログでは day-time-population-ratio を使った。どちらを正とし、もう一方を統合 (301) するかを決める。
+- **完了条件**: 片方に統合され、相関・テーマ・ブログの参照が 1 つのキーにそろっている。
+
+### [BLOG-DATA-EXEC-CODE-RULE-01] ブログの data/ に再現用の実行コードを置いてよいかを決めて規約に書く
+
+タグ: [コンテンツ品質] [種類:意思決定] [実行:対話] [起票:2026-10-09] [領域:サイト]
+
+- **観測 (2026-10-09)**: `household-structure-daytime-population-gap/data/sensitivity-calc.mjs` が、本文の追加計算 (除外ごとの相関・偏相関・乱数の種) を再現するために置かれた。
+  `blog-data-schema.md` は禁止も許可もしておらず、先例はこの 1 件。critic は規約違反ではないと判断した。
+- **判断すること**: data/ に置くのは JSON の中間結果だけにするか、実行コードも許すか。許すなら置き方 (名前・R2 へ上げるか) を決める。
+- **完了条件**: `blog-data-schema.md` に置き方が書かれている。
+
+### [DEPLOY-METRIC-RELEASE-TIMEOUT-01] デプロイの「指標スナップショットを R2 へ反映」段が 40 分の時間制限で止まり、R2 が途中まで新しい状態になる
+
+タグ: [インフラ・計測] [種類:不具合] [実行:対話] [起票:2026-10-09] [領域:管理]
+
+- **観測 (2026-10-09)**: PR #1116 のデプロイ (run 37909376740) が `deploy-workers.yml` の `Publish verified metric snapshots before app build`
+  (`push-exact-r2-assets.ts --manifest .local/metric-release-plan.json`) の途中で job の `timeout-minutes: 40` に達して cancelled になった。
+  アプリは旧版のまま、R2 は `app/home/featured.json` だけ更新され `app/ranking-items/all.json` は旧版、という途中の状態になった。
+  本番の主要ページは 200 で壊れていないことを確認した。差分のある分だけ送る作りなので、同じ run を再実行した。
+- **2026-10-09 暫定対処 (オーナー判断)**: 再実行 (attempt 2) も同じ段で 37 分走って cancelled。差分だけ送る作りでも時間内に終わらなかった。`deploy-workers.yml` の deploy job を `timeout-minutes: 90` にした。この job は concurrency `r2-write` を握るため、その間は他の R2 書き込み workflow が待つ。
+- **2026-10-09 実測と判定の抜け**: 90 分にした後、PR #1118 のデプロイ (run 37922790127) は `Detect metric snapshot changes` が直前の push との差分だけを見るため反映段を skip した (前回の反映が途中で止まっていても補わない)。workflow_dispatch (run 37924050596) で全件反映し、反映 53 分 (11:32-12:25)・全体成功・スモーク成功。40 分では原理的に収まらない量。次の対策では、途中で止まった反映を次のデプロイが検知して再実行する判定 (前回成功した release の記録との比較など) も足す。
+- **次**: 1 回の反映件数と所要時間を run のログ (`exact publish: candidates=… uploaded=… skipped=…`) で測り、並列化・job の時間制限・
+  反映を別 job に分ける、のどれで時間内に収めるかを決める。途中で止まったときに旧アプリと新データが混ざらない順序かも確かめる。
+- **完了条件**: 全件の反映が必要なリリースでも、デプロイが時間制限内に終わる (実測で余裕を持って)。
 
 ## 🟢 低 — 時期未定・条件付き (trigger は本文に)
 
@@ -3785,5 +3842,14 @@ stats47 で培ったデータ加工を、受託・販売などの形で収入に
 - **観測 (2026-10-08)**: 参考文献由来の公開指標 `child-abuse-consultation-cases` (児童虐待相談対応件数) を既存 55 テーマのどれにも採用できなかった
   (theme-designer の判断。保育の需給・ひとり親の主題とは別)。
 - **判断すること**: 児童相談・不登校・子どもの貧困などを束ねるテーマを作るか、指標をランキング単体のまま置くか。
-- **完了条件**: 新設なら theme-designer がカタログを作り、見送りなら参考文献のテーマ企画の表の行に理由を残す。
+- **完了条件**: 新設なら theme-designer がカタログを作り、見送りなら `placement-decisions.ts` の child-abuse-consultation-cases (channel=theme) を rejected と理由に書き換える。
 
+### [KOUMUIN-AI-ENV-SERIES-01] 公務員AIノートに「職場のAI環境別」（庁内AIあり／なし）の記事を足すか決める
+タグ: [収益化] [種類:意思決定] [実行:対話] [起票:2026-10-09] [領域:商品]
+
+- **起点**: 2026-10-09 の vault の議論で、業務効率化の解像度を上げる案が出た。総務省の調査（2024-12-31 時点）では、生成AIを導入済みの団体は都道府県 87.2%・指定都市 90.0%・その他の市区町村 29.9%（https://www.soumu.go.jp/main_content/001070295.pdf ほか）。読者の職場は「庁内AIがある（県・政令市）」と「無い（市町村の約7割）」に割れる。
+- **既存との差**: `koumuin-claude-code` の 33 本は Claude Code を使える前提で書いていて、職場の環境による分岐を正面から扱っていない。近いのは `02-internal-network-workarounds`・`10-ai-without-personal-info`・`13-ollama-offline-local-llm`。
+- **案**: (1) 庁内AIに何を任せ、何を任せないか（判断の型。ツールの操作説明は古くなるので書かない）。(2) AIが無い職場で Excel（Power Query）と Power Automate Desktop（Windows 11 に付属）でできること。
+- **決める前に見ること**: vault のコンテンツ戦略SSOT §5 は 2026-09-25 に、公務員AIノートの読者を「業務で困る現役」から「退職・転職を考える公務員」へ寄せた。業務向けの記事を足すのはこの決定の見直しにあたる。商品領域の今の狙い（`ADMIN-STAT-PILOT-01`・家計シリーズの判定 10-13）を先に終える。
+- **境界**: 土木職向けの業務の型は doboku-note の DN-0595。QGIS は `GEO-QGIS-DEMAND-01`。
+- **完了条件**: 足すか足さないかと、その理由を記録する。足すなら 1 本目の起票をしてから、このカードを削除する。（出典: 2026-10-09 の vault セッション）

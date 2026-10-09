@@ -34,7 +34,7 @@ model: sonnet
 
 ### 2. estatParams は metric の git TS source から取得
 
-`packages/data-configs/src/metrics/<key>.ts` の `source`（statsDataId / cdCat01 等）を componentProps に転記する。手入力の推測値は禁止。
+`data/metrics/<key>.ts` の `source`（statsDataId / cdCat01 等）を componentProps に転記する。手入力の推測値は禁止。
 
 ### 3. section はテーマ renderer で未使用 (グループ化しない)
 
@@ -101,7 +101,7 @@ sortOrder 順**で並べる。配置は「どのチャートを載せるか + so
 ### パターン C: 指標未登録の場合
 
 1. `/audit-theme-components` が未登録指標を検出
-2. data-ingester に新 TS-config 作成 (`packages/data-configs/src/metrics/<key>.ts`) + `/page-data-batch --metric <key>` を委譲
+2. data-ingester に新 TS-config 作成 (`data/metrics/<key>.ts`) + `/page-data-batch --metric <key>` を委譲
 3. 登録完了後にパターン B の Step 2 から再開
 
 ## 担当外

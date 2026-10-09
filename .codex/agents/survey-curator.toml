@@ -112,7 +112,7 @@ ranking と統計調査の**紐付けメタデータ + survey ハブの編集コ
 ## File Boundary
 
 - **書いてよい**: `packages/ranking/src/data/surveys.json` / `packages/data-configs/src/ssds/estat-provenance.generated.json` /
-  `packages/data-configs/src/metrics/<key>.ts` の `surveyId` フィールドのみ /
+  `data/metrics/<key>.ts` の `surveyId` フィールドのみ /
   `apps/web/src/features/survey/survey-editorial.ts` (survey 編集情報 git TS SSOT) /
   `data/surveys/*` (builder スクリプト経由) /
   `.claude/skills/survey/manage-survey-portfolio/reference/**` (運用設計・reviews・audits) / 自分の監査レポート出力

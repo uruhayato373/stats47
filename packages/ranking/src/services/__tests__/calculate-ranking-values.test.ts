@@ -15,6 +15,7 @@ import { listRankingValues } from "../../repositories/ranking-value";
 
 describe("calculateRankingValues", () => {
   const baseItem: RankingItem = {
+    visualization: { domain: { mode: 'extent' }, colorScheme: 'interpolateBlues', colorSchemeType: 'sequential',  classification: { method: 'equal-interval', classes: 5 }, trendDomain: { mode: 'extent', padding: 0.08 }, comparisonDomain: { mode: 'extent', padding: 0.05 } },
     rankingKey: "test-calculated",
     areaType: "prefecture",
     rankingName: "Calculated Ranking",

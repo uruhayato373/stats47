@@ -165,7 +165,7 @@ node -e 'const s=require("./.claude/scripts/lib/sns-posts-store.cjs");
   console.log(JSON.stringify(recent))'
 ```
 
-各 `content_key`（= ranking_key）の `category_key` は metric config（`packages/data-configs/src/metrics/<key>.ts` の `category`）または R2 `app/ranking/<key>/item.json` から解決する。
+各 `content_key`（= ranking_key）の `category_key` は metric config（`data/metrics/<key>.ts` の `category`）または R2 `app/ranking/<key>/item.json` から解決する。
 
 候補マッチング(4c)で決まった `ranking_key` の `category_key` がこの直近2件に**含まれる場合は除外**する。ただしスコア上位が全て該当する場合は、多様性制約を緩めて最上位を採用する（鮮度優先）。
 
@@ -222,7 +222,7 @@ DB にピッタリの ranking_items が無いときのみ実行。e-Stat API で
 curl -s "https://api.e-stat.go.jp/rest/3.0/app/json/getStatsList?appId=$ESTAT_KEY&searchWord=職種+賃金&limit=5"
 ```
 
-e-Stat で良いデータが見つかった場合は TS-config (`packages/data-configs/src/metrics/<key>.ts`) を追加 + `/sync-metrics-cache --apply` + `/page-data-batch --metric <key>` で登録することを提案する。
+e-Stat で良いデータが見つかった場合は TS-config (`data/metrics/<key>.ts`) を追加 + `/sync-metrics-cache --apply` + `/page-data-batch --metric <key>` で登録することを提案する。
 
 ### Phase 5: 候補リスト提示
 
