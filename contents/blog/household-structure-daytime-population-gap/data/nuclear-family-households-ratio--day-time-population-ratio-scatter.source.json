@@ -1,0 +1,13 @@
+{
+  "kind": "correlation",
+  "base": "nuclear-family-households-ratio",
+  "pair": "day-time-population-ratio",
+  "xKey": "nuclear-family-households-ratio",
+  "yKey": "day-time-population-ratio",
+  "pearsonR": -0.7100413640221352,
+  "partialRPopulation": -0.6963074382950566,
+  "unit": "％ × ％",
+  "label": "核家族世帯割合 と 昼夜間人口比率 の関係",
+  "source": "r2:app/correlation/by-ranking-key/nuclear-family-households-ratio.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug household-structure-daytime-population-gap --base nuclear-family-households-ratio --pair day-time-population-ratio --data-name nuclear-family-households-ratio--day-time-population-ratio"
+}
