@@ -7,7 +7,7 @@
  * 詳細な背景は生成スクリプトの docstring を参照。
  *
  * 最終生成日: 2026-10-09
- * 件数: blog 605 / tag 67 / survey 147
+ * 件数: blog 607 / tag 69 / survey 147
  */
 
 export interface SitemapBlogEntry {
@@ -33,6 +33,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "aging-rate-akita-vs-okinawa", lastModified: "2026-03-09" },
   { slug: "aging-solo-living-crisis", lastModified: "2026-03-05" },
   { slug: "agriculture-hokkaido-dominance", lastModified: "2026-06-13" },
+  { slug: "agriculture-output-employment-productivity-gap", lastModified: "2026-10-09" },
   { slug: "ai-claude-code-pref-analysis", lastModified: "2026-06-13" },
   { slug: "aichi-food-culture", lastModified: "2026-07-10" },
   { slug: "air-conditioner-consumption-quantity-prefecture-gap", lastModified: "2026-08-30" },
@@ -264,6 +265,7 @@ export const SITEMAP_BLOG_ENTRIES: readonly SitemapBlogEntry[] = [
   { slug: "household-solo-vs-dualincome", lastModified: "2026-03-09" },
   { slug: "household-spending-before-after-inflation", lastModified: "2026-03-16" },
   { slug: "household-spending-prefecture-gap", lastModified: "2026-06-07" },
+  { slug: "household-structure-daytime-population-gap", lastModified: "2026-10-09" },
   { slug: "household-structure-transformation", lastModified: "2026-03-05" },
   { slug: "households-on-public-assistance-per-1000-prefecture-gap", lastModified: "2026-08-30" },
   { slug: "housing-cost-livability-trend", lastModified: "2026-03-06" },
@@ -649,7 +651,7 @@ export const SITEMAP_TAG_ENTRIES: readonly SitemapTagEntry[] = [
   { tagKey: "共働き", lastModified: "2026-08-28" },
   { tagKey: "出生率", lastModified: "2026-06-08" },
   { tagKey: "労働", lastModified: "2026-06-15" },
-  { tagKey: "北海道", lastModified: "2026-07-10" },
+  { tagKey: "北海道", lastModified: "2026-10-09" },
   { tagKey: "医療", lastModified: "2026-08-29" },
   { tagKey: "医療費", lastModified: "2026-09-05" },
   { tagKey: "国勢調査", lastModified: "2026-09-30" },
@@ -680,6 +682,7 @@ export const SITEMAP_TAG_ENTRIES: readonly SitemapTagEntry[] = [
   { tagKey: "生活コスト", lastModified: "2026-09-05" },
   { tagKey: "生活費", lastModified: "2026-07-11" },
   { tagKey: "産業構造", lastModified: "2026-06-02" },
+  { tagKey: "相関", lastModified: "2026-10-09" },
   { tagKey: "社会保障", lastModified: "2026-08-11" },
   { tagKey: "納豆", lastModified: "2026-07-19" },
   { tagKey: "経済", lastModified: "2026-06-21" },
@@ -689,7 +692,8 @@ export const SITEMAP_TAG_ENTRIES: readonly SitemapTagEntry[] = [
   { tagKey: "賃金", lastModified: "2026-06-15" },
   { tagKey: "賃金構造基本統計調査", lastModified: "2026-06-13" },
   { tagKey: "転職", lastModified: "2026-06-15" },
-  { tagKey: "農業", lastModified: "2026-07-16" },
+  { tagKey: "農業", lastModified: "2026-10-09" },
+  { tagKey: "通勤", lastModified: "2026-10-09" },
   { tagKey: "都道府県", lastModified: "2026-09-05" },
   { tagKey: "都道府県ランキング", lastModified: "2026-09-05" },
   { tagKey: "都道府県別", lastModified: "2026-08-30" },
