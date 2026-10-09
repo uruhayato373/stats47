@@ -288,6 +288,7 @@ npx tsx .claude/skills/sns/publish-x/publish-x.ts <content_key> \
 - `<content_key>` はマッチした ranking_key（または migration-flow の場合は県スラッグ等の識別子）。`--domain` は遷移先に合わせる（ranking / gis-cross）
 - 日時を渡さなければ即時投稿（引用RT は鮮度ファースト）。予約したい場合は `<content_key>` の直後に `YYYY-MM-DDTHH:MM` を渡す
 - **初回 / セレクタ更新後は `--dry-run` を先に通すこと**（publish-x の fail-safe 規約。誤即時投稿事故の再発防止）
+- 本番はオーナーが投稿を指示したときだけ `--approve` を付けて実行する (台帳に承認として記録される。§3-1)
 - DB への `post_type='quote_rt'` INSERT は publish-x が成功時に自動実行する（このスキルでは SQL を書かない）
 
 ## 運用ルール

@@ -313,6 +313,20 @@ updated: 2026-10-06
 - **完了条件**: 次の本番デプロイで reset step と smoke が通り、post-deploy-smoke (Playwright) も通る。
 ## 🟡 中 — 2〜3ヶ月以内
 
+### [SNS-TRACE-YT-LEGACY-01] YouTube の URL の無い投稿 42 行と content_key 不明の 2 本を Studio で確定する
+タグ: [SNS・マーケ] [種類:改善] [実行:対話] [検証:npm run sns:trace:check] [起票:2026-10-09] [領域:SNS]
+
+- **事象**: 投稿台帳を「1 id から全部たどれる」形へ補完した (2026-10-09・`backfill-post-trace.mjs`) が、YouTube の posted 行 42 件 (id 83〜429、2026-03 投稿) は URL も本文も無く、外部 ID をたどれない。指標の時系列に残る未知の動画 ID 94 本のうち公開中は 7 本だけで、残り 87 本は削除済みか非公開 (oEmbed が返らない)。追加した公開動画 7 本のうち `bi2UqZu_vOQ`・`z0cfD_rCgEI` は説明欄にランキング URL が無く content_key が空。
+- **次**: オーナーが YouTube Studio の動画一覧 (非公開・削除済みを含む) と照合し、42 行に `post_url` を入れるか、存在しない投稿なら `deleted_at` を記録する。2 本の content_key をタイトルから決める。書き込みは store 経由 (`sns-posts-store.cjs`)。
+- **完了条件**: `npm run sns:trace:check` の「外部 ID をたどれない posted 行」から YouTube が消える。
+
+### [SNS-YT-STALE-RECORDS-01] YouTube 保留判断に EXP-006 と古い memory を合わせ、未追跡の古い state を消す
+タグ: [SNS・マーケ] [種類:改善] [実行:sweep] [起票:2026-10-09] [領域:SNS]
+
+- **事象**: YouTube は 2026-09-23 から保留 (`sns-content-standards.md` §0) だが、`data/business/experiments.json` の EXP-006 は `status: "running"` のまま。memory `project_youtube_mass_experiment_2026_07.md` は撤去済みの CI 投稿経路 (2026-07-27 `437b81d83` / `794ce84d4` で削除) を現役として書き、`reference_publish_youtube_47_summary.md` は作業ツリーにも履歴にも無いスキルを指す。`data/sns/metric-discovery-index.json` の古いコピーが旧置き場に未追跡のまま残っている (2026-10-06 の data/ への移動前の残り)。
+- **次**: EXP-006 を保留状態と次の確認日に更新、2 つの memory を事実に合わせて直すか削除、未追跡の古いコピーを削除する。
+
+
 ### [CRITIC-PATTERN-CHART-TEXT] critic の指摘「図と本文」が 4 本の記事で繰り返した。writer の規約か gate に入れる
 タグ: [コンテンツ品質] [種類:改善] [実行:対話] [起票:2026-10-09] [領域:サイト]
 

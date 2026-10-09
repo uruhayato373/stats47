@@ -275,6 +275,11 @@
     },
     {
       "code": "LARGE_FILE",
+      "file": "data/sns/posts.json",
+      "message": "1297674 bytes exceeds 1048576 bytes"
+    },
+    {
+      "code": "LARGE_FILE",
       "file": "packages/estat-api/src/stats-data/__tests__/fixtures/0000010101.json",
       "message": "20616523 bytes exceeds 1048576 bytes"
     },

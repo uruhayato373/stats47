@@ -3,60 +3,107 @@
 投稿済み全件。`posted_at` 降順。
 スクリプトで自動生成 — 手編集しない (`sns-posts-store.cjs` が `insert()`/`updateById()` のたびに再生成)。
 
-**611 件** (最終更新: 2026-10-09)
+**695 件** (最終更新: 2026-10-09)
 
 | 日付 | 媒体 | コンテンツ | キャプション | URL |
 |---|---|---|---|---|
-| 2026-10-09 | 📸 Instagram | compare-carousel/23000-vs-40000 |  | [🔗](https://www.instagram.com/p/DeRQY84G5tI/) |
+| 2026-10-09 | 📸 Instagram | compare-carousel/23000-vs-40000 | 【県どうしの比較】愛知県 vs 福岡県  製造品出荷額等（総額）: 愛知県が大きい（2023年・出典: 社会・人口統計体… | [🔗](https://www.instagram.com/p/DeRQY84G5tI/) |
 | 2026-10-09 | 🧵 Threads | area/area-16000-profile | 富山を数字と地域文化の両方から見る。 県鳥ライチョウ、特産ホタルイカ、全国順位をまとめた県別ページです。 続きは👇 h… | [🔗](https://www.threads.com/@stats47jp/post/DeRDEEPjntQ) |
 | 2026-10-09 | 🧵 Threads | ranking/annual-sunshine-duration | 2,309時間・2,285時間・2,278時間。  年間日照時間の上位3県は高知・群馬・埼玉。 最も短い山形（1,626… | [🔗](https://www.threads.com/@stats47jp/post/DeQVTBMjF6G) |
+| 2026-10-08 | 𝕏 X | ranking/annual-sunshine-duration | 2,309時間・2,285時間・2,278時間。  年間日照時間の上位3県は高知・群馬・埼玉。 最も短い山形（1,626… | [🔗](https://x.com/stats47jp373/status/2108326571992097150) |
+| 2026-10-08 | 𝕏 X | theme/theme-labor-mobility-overview | 人材流動性・雇用環境、1つの順位だけで説明できますか？ 離職率と転職率など全9指標を横断。結果と背景を分けて読めます。 … | [🔗](https://x.com/stats47jp373/status/2108152927982653617) |
 | 2026-10-08 | 📸 Instagram | ranking-quiz/curry-roux-consumption-quantity |  | [🔗](https://www.instagram.com/p/DeOrTTqFnCN/) |
 | 2026-10-08 | 🧵 Threads | area/area-15000-profile | あなたの知る新潟は、データでも同じ姿ですか？ ユキツバキや塩引き鮭から、人口・経済・暮らしまで横断できます。 続きは👇… | [🔗](https://www.threads.com/@stats47jp/post/DeOhrFWDs5M) |
+| 2026-10-08 | 𝕏 X | area/area-15000-profile | あなたの知る新潟は、データでも同じ姿ですか？ ユキツバキや塩引き鮭から、人口・経済・暮らしまで横断できます。 続きは👇… | [🔗](https://x.com/stats47jp373/status/2108045973293539598) |
 | 2026-10-08 | 🧵 Threads | ranking/sweet-potato-consumption-expenditure | さつまいもに最もお金を使う県は？  1位は徳島で2,466円。2位鹿児島2,210円、3位滋賀1,872円。 産地として… | [🔗](https://www.threads.com/@stats47jp/post/DeNyxTyiTFK) |
+| 2026-10-07 | 𝕏 X | ranking/sweet-potato-consumption-expenditure | さつまいもに最もお金を使う県は？  1位は徳島で2,466円。2位鹿児島2,210円、3位滋賀1,872円。 産地として… | [🔗](https://x.com/stats47jp373/status/2107955376851231022) |
 | 2026-10-07 | 📸 Instagram | correlation-carousel/average-temperature--kerosene-consumption-quantity |  | [🔗](https://www.instagram.com/p/DeM4zvokTTA/) |
+| 2026-10-07 | 𝕏 X | ranking/non-regular-employment-rate | 非正規雇用率が高いのは東京…ではありません。上位3府県はすべて関西。  1位京都40.7％、2位奈良40.6％、3位滋賀… | [🔗](https://x.com/stats47jp373/status/2107784249092739569) |
 | 2026-10-07 | 📸 Instagram | bar-chart-race/marriages |  | [🔗](https://www.instagram.com/reel/DeMFNCvANLS/) |
 | 2026-10-07 | 🧵 Threads | area/area-14000-profile | 神奈川の「らしさ」をデータでたどる。 県花ヤマユリ、曽我の梅とワカサギ、統計ランキングを1ページに整理しました。 続きは… | [🔗](https://www.threads.com/@stats47jp/post/DeL6qWfgkft) |
+| 2026-10-07 | 𝕏 X | area/area-14000-profile | 神奈川の「らしさ」をデータでたどる。 県花ヤマユリ、曽我の梅とワカサギ、統計ランキングを1ページに整理しました。 続きは… | [🔗](https://x.com/stats47jp373/status/2107673518796337522) |
 | 2026-10-07 | 🧵 Threads | ranking/campsite-public | 秋キャンプの県選びに使えるデータ。  ①公共キャンプ場の数を見る（1位北海道134、2位新潟76、3位福島74） ②地図… | [🔗](https://www.threads.com/@stats47jp/post/DeLM4mFkX0X) |
+| 2026-10-06 | 𝕏 X | ranking/campsite-public | 秋キャンプの県選びに使えるデータ。  ①公共キャンプ場の数を見る（1位北海道134、2位新潟76、3位福島74） ②地図… | [🔗](https://x.com/stats47jp373/status/2107608088089960644) |
 | 2026-10-06 | 📸 Instagram | area-carousel/39000 |  | [🔗](https://www.instagram.com/p/DeKPMIvIDIO/) |
+| 2026-10-06 | 𝕏 X | theme/theme-healthcare-overview | 47都道府県の医療・健康を多面的に比較。 医師数と看護師数を同じテーマで読み解く入口を整理しました。 詳しくは👇 ht… | [🔗](https://x.com/stats47jp373/status/2107441993773408506) |
 | 2026-10-06 | 🧵 Threads | area/area-13000-profile | 東京を1位・47位だけで語らない。 県木はイチョウ、県鳥はユリカモメ。人口・産業・暮らしの県データブックへ。 続きは👇… | [🔗](https://www.threads.com/@stats47jp/post/DeJYr_lke_Q) |
+| 2026-10-06 | 𝕏 X | area/area-13000-profile | 東京を1位・47位だけで語らない。 県木はイチョウ、県鳥はユリカモメ。人口・産業・暮らしの県データブックへ。 続きは👇… | [🔗](https://x.com/stats47jp373/status/2107316164028154097) |
 | 2026-10-06 | 🧵 Threads | ranking/propane-gas-consumption-expenditure | プロパンガス代、高知と兵庫で129倍差。  高知 4万6,453円 兵庫 360円  2位岩手、3位島根も3万9千円台。… | [🔗](https://www.threads.com/@stats47jp/post/DeIqVKliDsU) |
+| 2026-10-05 | 𝕏 X | ranking/propane-gas-consumption-expenditure | プロパンガス代、高知と兵庫で129倍差。  高知 4万6,453円 兵庫 360円  2位岩手、3位島根も3万9千円台。… | [🔗](https://x.com/stats47jp373/status/2107241924906410440) |
 | 2026-10-05 | 📸 Instagram | ranking-quiz/hamburger-consumption-expenditure |  | [🔗](https://www.instagram.com/p/DeG8ypxmz-j/) |
+| 2026-10-05 | 𝕏 X | ranking/marriages-per-total-population | 5.36・4.60・4.46。  人口千人あたりの婚姻率、上位3都府県は東京・大阪・愛知。 最も低い秋田は2.63で、東… | [🔗](https://x.com/stats47jp373/status/2107045631571394755) |
 | 2026-10-05 | 🧵 Threads | area/area-12000-profile | 千葉のデータブックを公開中。 ホオジロと落花生、房州ビワを入口に、人口・産業・消費の数字を県別に深掘り。 続きは👇 h… | [🔗](https://www.threads.com/@stats47jp/post/DeGyI5Mktx1) |
+| 2026-10-05 | 𝕏 X | area/area-12000-profile | 千葉のデータブックを公開中。 ホオジロと落花生、房州ビワを入口に、人口・産業・消費の数字を県別に深掘り。 続きは👇 h… | [🔗](https://x.com/stats47jp373/status/2106944968258728401) |
 | 2026-10-05 | 🧵 Threads | ranking/autolock-apartment-rate | マンションのオートロック率、1位は東京ではなく福岡。  福岡55.5％、東京54.5％、京都51.8％。 最も低い鳥取は… | [🔗](https://www.threads.com/@stats47jp/post/DeGD4xgiJFv) |
+| 2026-10-04 | 𝕏 X | ranking/autolock-apartment-rate | マンションのオートロック率、1位は東京ではなく福岡。  福岡55.5％、東京54.5％、京都51.8％。 最も低い鳥取は… | [🔗](https://x.com/stats47jp373/status/2106890861917200698) |
 | 2026-10-04 | 📸 Instagram | map-carousel/natto-consumption-expenditure |  | [🔗](https://www.instagram.com/p/DeE7_A3FvHO/) |
+| 2026-10-04 | 𝕏 X | theme/theme-foreign-residents-overview | データを点ではなく線で読む「外国人」。 都道府県別の在留外国人数・外国人比率・国籍別人口をランキングとチャートで比較。4… | [🔗](https://x.com/stats47jp373/status/2106708410825925033) |
 | 2026-10-04 | 🧵 Threads | area/area-11000-profile | 旅先では見えにくい埼玉の輪郭。 県木ケヤキと特産狭山茶、暮らしの統計を同じページで確認できます。 続きは👇 https… | [🔗](https://www.threads.com/@stats47jp/post/DeELHKuiRO4) |
+| 2026-10-04 | 𝕏 X | area/area-11000-profile | 旅先では見えにくい埼玉の輪郭。 県木ケヤキと特産狭山茶、暮らしの統計を同じページで確認できます。 続きは👇 https… | [🔗](https://x.com/stats47jp373/status/2106593904845836622) |
 | 2026-10-04 | 🧵 Threads | ranking/other-mushroom-consumption-quantity | きのこの秋。しいたけ以外の「他のきのこ」を最も多く買うのは山形です。  1世帯あたり4,367g。2位秋田、3位富山。 … | [🔗](https://www.threads.com/@stats47jp/post/DeDdUOREi-L) |
+| 2026-10-03 | 𝕏 X | ranking/ratio-65-plus | 65歳以上の割合、秋田県は40.1%で4割を超えた唯一の県に。 最も低い東京都は22.8%。 2025年国勢調査で47都… | [🔗](https://x.com/stats47jp373/status/2106509599490629948) |
 | 2026-10-03 | 📸 Instagram | area-carousel/13000 |  | [🔗](https://www.instagram.com/p/DeCTBEBG519/) |
+| 2026-10-03 | 𝕏 X | theme/theme-fishery-marine-overview | 漁獲量だけでは見落とす「漁業（水産業）」の全体像。 海面漁獲量など複数指標を重ね、地域差の背景までたどれます。 詳しくは… | [🔗](https://x.com/stats47jp373/status/2106325889005002841) |
 | 2026-10-03 | 🧵 Threads | area/area-10000-profile | 群馬を数字と地域文化の両方から見る。 県鳥ヤマドリ、特産ギンヒカリ、全国順位をまとめた県別ページです。 続きは👇 ht… | [🔗](https://www.threads.com/@stats47jp/post/DeBptQSEXl5) |
+| 2026-10-03 | 𝕏 X | area/area-10000-profile | 群馬を数字と地域文化の両方から見る。 県鳥ヤマドリ、特産ギンヒカリ、全国順位をまとめた県別ページです。 続きは👇 ht… | [🔗](https://x.com/stats47jp373/status/2106221451447517297) |
 | 2026-10-03 | 📸 Instagram | compare-carousel/11000-vs-12000 |  | [🔗](https://www.instagram.com/p/DeA7D-ZFZsp/) |
 | 2026-10-03 | 🧵 Threads | ranking/department-supermarket-count-per-100k | 百貨店・総合スーパー数、人口10万人あたりで見ると景色が変わります。  沖縄県 1.7店 vs 山形県 0.28店 その… | [🔗](https://www.threads.com/@stats47jp/post/DeA632nDEv6) |
+| 2026-10-02 | 𝕏 X | ranking/department-supermarket-count-per-100k | 百貨店・総合スーパー数、人口10万人あたりで見ると景色が変わります。  沖縄県 1.7店 vs 山形県 0.28店 その… | [🔗](https://x.com/stats47jp373/status/2106157282031731087) |
+| 2026-10-02 | 𝕏 X | ranking/census-household-change-rate-5y | 人口が増えたのは東京都だけなのに、世帯数は33都道府県で増えた。 山形県は人口-7.09%でも世帯は+0.26%。1世帯… | [🔗](https://x.com/stats47jp373/status/2105997475136061775) |
 | 2026-10-02 | 🧵 Threads | area/area-09000-profile | あなたの知る栃木は、データでも同じ姿ですか？ トチノキやイチゴから、人口・経済・暮らしまで横断できます。 続きは👇 h… | [🔗](https://www.threads.com/@stats47jp/post/Dd_CsQeCAmr) |
+| 2026-10-02 | 𝕏 X | area/area-09000-profile | あなたの知る栃木は、データでも同じ姿ですか？ トチノキやイチゴから、人口・経済・暮らしまで横断できます。 続きは👇 h… | [🔗](https://x.com/stats47jp373/status/2105864096541507991) |
 | 2026-10-02 | 🧵 Threads | ranking/spouse-income | 勤労者世帯の「配偶者の収入」が最も多い県は？  1位山形15万9,360円、2位新潟15万6,286円、3位茨城15万6… | [🔗](https://www.threads.com/@stats47jp/post/Dd-U4sKgSJm) |
+| 2026-10-01 | 𝕏 X | ranking/census-population-change-rate-5y | 2020→2025年の5年で人口が増えたのは東京都だけ（+1.35%）。 46道府県が減り、最も減ったのは秋田県（-8.… | [🔗](https://x.com/stats47jp373/status/2105789857297739853) |
 | 2026-10-01 | 📸 Instagram | ranking-quiz/sake-consumption-expenditure |  | [🔗](https://www.instagram.com/p/Dd9ZXGRGjvL/) |
+| 2026-10-01 | 𝕏 X | theme/theme-education-culture-overview | 教育・文化の地域差を、順位の寄せ集めで終わらせない。 図書館から小学校まで、関連する全12指標をまとめて確認できます。 … | [🔗](https://x.com/stats47jp373/status/2105616212852088868) |
 | 2026-10-01 | 🧵 Threads | area/area-08000-profile | 茨城の「らしさ」をデータでたどる。 県花バラ、べにはるか・ふくむらさき・シルクス…と常陸大黒、統計ランキングを1ページに… | [🔗](https://www.threads.com/@stats47jp/post/Dd8gtEDj_KR) |
+| 2026-10-01 | 𝕏 X | area/area-08000-profile | 茨城の「らしさ」をデータでたどる。 県花バラ、べにはるか・ふくむらさき・シルクス…と常陸大黒、統計ランキングを1ページに… | [🔗](https://x.com/stats47jp373/status/2105509258142122458) |
 | 2026-10-01 | 🧵 Threads | ranking/sewerage-coverage-rate | 下水道の普及率、徳島は19.5％。  1位の東京は99.7％で、約5倍の差があります。 2位神奈川97.1％、3位大阪9… | [🔗](https://www.threads.com/@stats47jp/post/Dd7yVYYgu9n) |
+| 2026-09-30 | 𝕏 X | ranking/sewerage-coverage-rate | 下水道の普及率、徳島は19.5％。  1位の東京は99.7％で、約5倍の差があります。 2位神奈川97.1％、3位大阪9… | [🔗](https://x.com/stats47jp373/status/2105418661863268744) |
 | 2026-09-30 | 📸 Instagram | correlation-carousel/dual-income-household-ratio--floor-area-per-dwelling-owner |  | [🔗](https://www.instagram.com/p/Dd6wPczFILm/) |
+| 2026-09-30 | 𝕏 X | ranking/cpi-change-rate-miscellaneous | 「物価上昇は都市部が激しい」と思われがちですが、データは逆です。  1位高知県2.2%、2位岩手県1.7%と地方が上位に… | [🔗](https://x.com/stats47jp373/status/2105236221102362908) |
 | 2026-09-30 | 📸 Instagram | ranking-quiz-reel/squid-consumption-expenditure |  | [🔗](https://www.instagram.com/reel/Dd6AASLFICC/) |
 | 2026-09-30 | 🧵 Threads | area/area-07000-profile | 福島を1位・47位だけで語らない。 県木はケヤキ、県鳥はキビタキ。人口・産業・暮らしの県データブックへ。 続きは👇 h… | [🔗](https://www.threads.com/@stats47jp/post/Dd56QkxDD0i) |
+| 2026-09-30 | 𝕏 X | area/area-07000-profile | 福島を1位・47位だけで語らない。 県木はケヤキ、県鳥はキビタキ。人口・産業・暮らしの県データブックへ。 続きは👇 h… | [🔗](https://x.com/stats47jp373/status/2105136803783315842) |
 | 2026-09-30 | 🧵 Threads | ranking/taro-consumption-expenditure | 芋煮の季節。さといもにいちばんお金を使うのは山形です。  1世帯あたり2,104円で、最下位の北海道（252円）の8.3… | [🔗](https://www.threads.com/@stats47jp/post/Dd5L4-7CrCc) |
+| 2026-09-29 | 𝕏 X | ranking/taro-consumption-expenditure | 芋煮の季節。さといもにいちばんお金を使うのは山形です。  1世帯あたり2,104円で、最下位の北海道（252円）の8.3… | [🔗](https://x.com/stats47jp373/status/2105071373148434505) |
 | 2026-09-29 | 📸 Instagram | area-carousel/47000 |  | [🔗](https://www.instagram.com/p/Dd4MHf-Fe7i/) |
+| 2026-09-29 | 𝕏 X | geo/geo-001-x-15 | あなたの県は2050年に何人残るか。住宅地価格はどう動くか。洪水区域内に何人暮らすか。駅800m圏に何人残るか。ランキン… | [🔗](https://x.com/stats47jp373/status/2104881373555171345) |
 | 2026-09-29 | 🧵 Threads | area/area-06000-profile | 山形のデータブックを公開中。 オシドリと小野川豆もやし、ウコギを入口に、人口・産業・消費の数字を県別に深掘り。 続きは�… | [🔗](https://www.threads.com/@stats47jp/post/Dd3TIFHkasu) |
+| 2026-09-29 | 𝕏 X | area/area-06000-profile | 山形のデータブックを公開中。 オシドリと小野川豆もやし、ウコギを入口に、人口・産業・消費の数字を県別に深掘り。 続きは�… | [🔗](https://x.com/stats47jp373/status/2104779449438704074) |
 | 2026-09-29 | 🧵 Threads | ranking/wooden-housing-ratio | なぜ秋田県の木造住宅率は88.8%とこれほど高いのか?  2位青森県88.1%、3位山形県83.3%と東北勢が上位を占め… | [🔗](https://www.threads.com/@stats47jp/post/Dd2lVBxkiLb) |
+| 2026-09-28 | 𝕏 X | ranking/wooden-housing-ratio | なぜ秋田県の木造住宅率は88.8%とこれほど高いのか?  2位青森県88.1%、3位山形県83.3%と東北勢が上位を占め… | [🔗](https://x.com/stats47jp373/status/2104707730443268552) |
 | 2026-09-28 | 📸 Instagram | ranking-quiz/side-job-rate |  | [🔗](https://www.instagram.com/p/Dd1yg5lmEk3/) |
+| 2026-09-28 | 𝕏 X | ranking/public-hall-count-per-million | 公民館の数、長野は東京の154倍。  人口100万人あたり長野880館、東京5.7館。 2位徳島446.6館、3位山形4… | [🔗](https://x.com/stats47jp373/status/2104508916520382591) |
 | 2026-09-28 | 🧵 Threads | area/area-05000-profile | 旅先では見えにくい秋田の輪郭。 県木秋田杉と特産とんぶり、暮らしの統計を同じページで確認できます。 続きは👇 http… | [🔗](https://www.threads.com/@stats47jp/post/Dd0xuCIDknQ) |
+| 2026-09-28 | 𝕏 X | area/area-05000-profile | 旅先では見えにくい秋田の輪郭。 県木秋田杉と特産とんぶり、暮らしの統計を同じページで確認できます。 続きは👇 http… | [🔗](https://x.com/stats47jp373/status/2104408253476020331) |
 | 2026-09-28 | 🧵 Threads | ranking/daytime-population-ratio | 昼になると人が増える県、減る県。  昼夜間人口比率の1位は東京116.1％。 最下位の埼玉は89.6％で、昼の人口が約1… | [🔗](https://www.threads.com/@stats47jp/post/Dd0C45nkllM) |
+| 2026-09-27 | 𝕏 X | ranking/daytime-population-ratio | 昼になると人が増える県、減る県。  昼夜間人口比率の1位は東京116.1％。 最下位の埼玉は89.6％で、昼の人口が約1… | [🔗](https://x.com/stats47jp373/status/2104354146916687963) |
 | 2026-09-27 | 📸 Instagram | map-carousel/miso-consumption-quantity |  | [🔗](https://www.instagram.com/p/Ddy5JqmIE_t/) |
+| 2026-09-27 | 𝕏 X | theme/theme-consumer-prices-overview | 「物価・消費」を見る物差しは1本では足りない。 総合、家賃除く総合などを同じ画面で47都道府県比較しました。 詳しくは�… | [🔗](https://x.com/stats47jp373/status/2104171695049490906) |
 | 2026-09-27 | 🧵 Threads | area/area-04000-profile | 宮城を数字と地域文化の両方から見る。 県鳥ガン、特産サンマ、全国順位をまとめた県別ページです。 続きは👇 https:… | [🔗](https://www.threads.com/@stats47jp/post/DdyKtCaET_x) |
+| 2026-09-27 | 𝕏 X | area/area-04000-profile | 宮城を数字と地域文化の両方から見る。 県鳥ガン、特産サンマ、全国順位をまとめた県別ページです。 続きは👇 https:… | [🔗](https://x.com/stats47jp373/status/2104057189769887943) |
 | 2026-09-27 | 🧵 Threads | ranking/room-utilization-rate | ホテルの客室が最も埋まっている県は？  1位東京80.4％、2位大阪77.9％、3位福岡75％。 最も低いのは長野の57… | [🔗](https://www.threads.com/@stats47jp/post/Ddxc53MDqN6) |
+| 2026-09-26 | 𝕏 X | ranking/room-utilization-rate | ホテルの客室が最も埋まっている県は？  1位東京80.4％、2位大阪77.9％、3位福岡75％。 最も低いのは長野の57… | [🔗](https://x.com/stats47jp373/status/2103972884381073498) |
 | 2026-09-26 | 📸 Instagram | area-carousel/01000 |  | [🔗](https://www.instagram.com/p/DdwPSPbm50A/) |
+| 2026-09-26 | 𝕏 X | ranking/saury-consumption-quantity | さんまといえば北海道…ですが、1位は秋田。  秋田746g、北海道733gの僅差で、3位は山形695g。 最下位の長崎（… | [🔗](https://x.com/stats47jp373/status/2103789174126162197) |
 | 2026-09-26 | 🧵 Threads | area/area-03000-profile | あなたの知る岩手は、データでも同じ姿ですか？ ナンブアカマツやワラビから、人口・経済・暮らしまで横断できます。 続きは�… | [🔗](https://www.threads.com/@stats47jp/post/DdvouO7AEJz) |
+| 2026-09-26 | 𝕏 X | area/area-03000-profile | あなたの知る岩手は、データでも同じ姿ですか？ ナンブアカマツやワラビから、人口・経済・暮らしまで横断できます。 続きは�… | [🔗](https://x.com/stats47jp373/status/2103684736002798061) |
 | 2026-09-26 | 🧵 Threads | ranking/detached-house-ratio | 一戸建てに住む割合、秋田と東京で3倍差。  秋田 79.4％ 東京 26.3％  2位山形76.1％、3位青森75.3％… | [🔗](https://www.threads.com/@stats47jp/post/Ddu6WmlEXh7) |
+| 2026-09-25 | 𝕏 X | ranking/detached-house-ratio | 一戸建てに住む割合、秋田と東京で3倍差。  秋田 79.4％ 東京 26.3％  2位山形76.1％、3位青森75.3％… | [🔗](https://x.com/stats47jp373/status/2103624337849024687) |
 | 2026-09-25 | 📸 Instagram | compare-carousel/13000-vs-27000 |  | [🔗](https://www.instagram.com/p/Ddtv7fKm3XY/) |
+| 2026-09-25 | 𝕏 X | theme/theme-aging-society-overview | 少子高齢化、1つの順位だけで説明できますか？ 高齢化率と老年化指数など全23指標を横断。結果と背景を分けて読めます。 詳… | [🔗](https://x.com/stats47jp373/status/2103460760361779203) |
 | 2026-09-25 | 🧵 Threads | area/area-02000-profile | 青森の「らしさ」をデータでたどる。 県花リンゴの花、ふじりんごと初雪たけ、統計ランキングを1ページに整理しました。 続き… | [🔗](https://www.threads.com/@stats47jp/post/DdtCSEAjvDz) |
+| 2026-09-25 | 𝕏 X | area/area-02000-profile | 青森の「らしさ」をデータでたどる。 県花リンゴの花、ふじりんごと初雪たけ、統計ランキングを1ページに整理しました。 続き… | [🔗](https://x.com/stats47jp373/status/2103327381226152429) |
 | 2026-09-25 | 🧵 Threads | ranking/grape-consumption-quantity | 3,937g・2,926g・2,913g。  ぶどうを最も多く買う上位3県は山梨・長野・山形。 最下位の沖縄（658g）… | [🔗](https://www.threads.com/@stats47jp/post/DdsT6HWkbFV) |
+| 2026-09-24 | 𝕏 X | ranking/grape-consumption-quantity | 3,937g・2,926g・2,913g。  ぶどうを最も多く買う上位3県は山梨・長野・山形。 最下位の沖縄（658g）… | [🔗](https://x.com/stats47jp373/status/2103253141752091101) |
 | 2026-09-24 | 📸 Instagram | ranking-quiz/shochu-consumption-expenditure | 【都道府県クイズ】焼酎にいちばんお金を使う県は？  A 鹿児島県 B 宮崎県 C 熊本県  ヒントは2枚目、答えは3枚目… | [🔗](https://www.instagram.com/p/DdrJkFFFtPC/) |
+| 2026-09-24 | 𝕏 X | ranking/telework-rate | テレワーク、東京と秋田でこんなに違う。  東京 39.8％ 秋田 6.4％  2位神奈川30％、3位千葉23.9％と首都… | [🔗](https://x.com/stats47jp373/status/2103079497776177613) |
 | 2026-09-24 | 🧵 Threads | area/area-01000-profile | 北海道を1位・47位だけで語らない。 県木はエゾマツ、県鳥はタンチョウ。人口・産業・暮らしの県データブックへ。 続きは�… | [🔗](https://www.threads.com/@stats47jp/post/DdqbKCNCDsH) |
+| 2026-09-24 | 𝕏 X | area/area-01000-profile | 北海道を1位・47位だけで語らない。 県木はエゾマツ、県鳥はタンチョウ。人口・産業・暮らしの県データブックへ。 続きは�… | [🔗](https://x.com/stats47jp373/status/2102972543078637653) |
 | 2026-09-24 | 🧵 Threads | ranking/pear-consumption-expenditure | 梨にいちばんお金を使う県は鳥取。  1世帯あたり8,846円で、最下位の山梨（625円）の14.2倍。 2位の新潟（4,… | [🔗](https://www.threads.com/@stats47jp/post/DdptWkqEwPS) |
+| 2026-09-23 | 𝕏 X | ranking/pear-consumption-expenditure | 梨にいちばんお金を使う県は鳥取。  1世帯あたり8,846円で、最下位の山梨（625円）の14.2倍。 2位の新潟（4,… | [🔗](https://x.com/stats47jp373/status/2102881946674381033) |
+| 2026-09-23 | 𝕏 X | geo/geo-001-x-12 | 2020年から2050年に駅800m圏人口の比率が上がる推計は38都道府県。ただし、比率上昇は駅圏人口そのものの増加を意… | [🔗](https://x.com/stats47jp373/status/2102704526881116649) |
 | 2026-09-23 | 𝕏 X | ranking/lowest-temperature | なぜ沖縄県の最低気温は15.3℃と際立って高いのか。  黒潮の影響で冬も温暖な海洋性気候が理由です。 2位鹿児島県との差… | [🔗](https://x.com/stats47jp373/status/2102593807414100093) |
 | 2026-09-23 | 𝕏 X | ranking/vegetable-seaweed-tsukudani-consumption-expenditure | つくだ煮は西日本の食文化と思われがちですが、データは逆です。  1位山口県747円、2位秋田県739円。 47位沖縄県は… | [🔗](https://x.com/stats47jp373/status/2102533404957016484) |
 | 2026-09-22 | 𝕏 X | ranking/maritime-import-export-cargo | 海上出入貨物、1位愛知県2億トン vs 2位千葉県1.87億トン。  海に面さない山梨・長野・岐阜・滋賀・奈良は0トン。… | [🔗](https://x.com/stats47jp373/status/2102337120564076865) |
@@ -96,135 +143,165 @@
 | 2026-09-03 | 𝕏 X | geo/geo-001-x-02 | 東京都+2.50%、秋田県-41.59%。同じ2050年推計でも44.09ポイントの幅があります。高低を知るだけで終わら… | [🔗](https://x.com/stats47jp373/status/2095348556827951334) |
 | 2026-09-01 | 𝕏 X | geo/geo-001-x-01 | 2050年の推計人口を2020年と比べると、増加は東京都の+2.50%だけ。46道府県は減少見込みです。これはGeo分析… | [🔗](https://x.com/stats47jp373/status/2094560866867769577) |
 | 2026-08-10 | 📸 Instagram | ranking/sheets-consumption-expenditure |  | [🔗](https://www.instagram.com/p/Db24rrIoBMw/) |
+| 2026-08-10 | ▶️ YouTube | ranking/bcr-vet-fee-consumption-expenditure-2007-2024 | ペットの医療費は倍増した｜動物病院代支出の推移 2007→2024 | [🔗](https://www.youtube.com/watch?v=6mqISJP8bmg) |
 | 2026-08-10 | 📸 Instagram | ranking/regular-cash-salary-female-pre2019 |  | [🔗](https://www.instagram.com/p/Db2LAa_oF-T/) |
 | 2026-08-10 | 𝕏 X | ranking/gross-prefectural-income-growth-rate-real-h17 | 県民総所得の対前年増加率、石川県 vs 山口県で見比べてみましょう。  石川県 +2.8％ 山口県 +0.8％  同じプ… | [🔗](https://x.com/stats47jp373/status/2086648740350161174) |
 | 2026-08-09 | 📸 Instagram | ranking/physical-disability-rehabilitation-facility-residents-per-100k |  | [🔗](https://www.instagram.com/p/Db1pDRJmnk6/) |
 | 2026-08-09 | 📸 Instagram | ranking/air-fare-consumption-expenditure |  | [🔗](https://www.instagram.com/p/Db0QZqLFuzc/) |
+| 2026-08-09 | ▶️ YouTube | ranking/bcr-train-fare-consumption-expenditure-2007-2024 | 電車にお金をかける県はどこ？｜鉄道運賃支出の推移 2007→2024 | [🔗](https://www.youtube.com/watch?v=pDOZ91OGFD4) |
 | 2026-08-09 | 📸 Instagram | ranking/average-weight-primary-school-fifth-grade-female |  | [🔗](https://www.instagram.com/p/Dbzj5_pDsce/) |
 | 2026-08-08 | 📸 Instagram | ranking/municipal-general-administration-staff |  | [🔗](https://www.instagram.com/p/DbzD8KlICRK/) |
 | 2026-08-08 | 📸 Instagram | ranking/lipstick-consumption-expenditure |  | [🔗](https://www.instagram.com/p/DbxraEHoDTm/) |
+| 2026-08-08 | ▶️ YouTube | ranking/bcr-white-bread-consumption-quantity-2007-2024 | 食パン王国は入れ替わった｜消費量ランキングの推移 2007→2024 | [🔗](https://www.youtube.com/watch?v=xBRKo4_GKUo) |
 | 2026-08-08 | 📸 Instagram | ranking/new-graduate-scheduled-salary-university-male |  | [🔗](https://www.instagram.com/p/Dbw-Wr6li7c/) |
 | 2026-08-07 | 📸 Instagram | ranking/clam-consumption-quantity |  | [🔗](https://www.instagram.com/p/DbwfnGrEWgZ/) |
 | 2026-08-07 | 📸 Instagram | ranking/female-part-time-hourly-wage |  | [🔗](https://www.instagram.com/p/DbvIqXDFCjv/) |
+| 2026-08-07 | ▶️ YouTube | ranking/bcr-chicken-consumption-quantity-2007-2024 | 鶏肉消費は1.5倍に伸びた｜47都道府県ランキングの推移 2007→2024 | [🔗](https://www.youtube.com/watch?v=1CFazxhXqYo) |
 | 2026-08-07 | 📸 Instagram | ranking/craft-materials-consumption-expenditure |  | [🔗](https://www.instagram.com/p/DbueiyCljni/) |
 | 2026-08-07 | 📸 Instagram | ranking/shochu-consumption-expenditure |  | [🔗](https://www.instagram.com/p/DbuIrKUkQHo/) |
 | 2026-08-07 | 𝕏 X | ranking/regular-cash-salary-female-pre2019 | きまって支給する現金給与月額、東京都は最下位の1.5倍。  1位 東京都 328.2千円 47位 青森県 214.4千円… | [🔗](https://x.com/stats47jp373/status/2085501169577709765) |
 | 2026-08-07 | 𝕏 X | ranking/sheets-consumption-expenditure | 敷布への支出、神奈川県 vs 島根県。  神奈川県 1,214円 島根県 157円  その差7.7倍。寝具にかける金額は… | [🔗](https://x.com/stats47jp373/status/2085561577508405420) |
 | 2026-08-06 | 📸 Instagram | ranking/total-assessed-land-area-ratio-field |  | [🔗](https://www.instagram.com/p/Dbsrp0xmyY7/) |
+| 2026-08-06 | ▶️ YouTube | ranking/bcr-beef-consumption-quantity-2007-2024 | 牛肉を最も食べるのは西日本？｜消費量ランキングの推移 2007→2024 | [🔗](https://www.youtube.com/watch?v=CuZ2oYqYjOk) |
 | 2026-08-06 | 📸 Instagram | ranking/wakame-consumption-quantity |  | [🔗](https://www.instagram.com/p/Dbr_8JLnJKo/) |
 | 2026-08-06 | 📸 Instagram | ranking/recorded-media-consumption-expenditure |  | [🔗](https://www.instagram.com/p/DbrY8Q9n75M/) |
 | 2026-08-06 | 𝕏 X | ranking/average-weight-primary-school-fifth-grade-female | もし平均体重が全国トップの青森県に住んでいたら、健康的な食生活が身近にある環境です。  1位 青森県 37.5kg 47… | [🔗](https://x.com/stats47jp373/status/2085335078457200995) |
 | 2026-08-06 | 𝕏 X | ranking/air-fare-consumption-expenditure | 航空運賃への支出、なんと最大90.3倍の格差があります。  1位 埼玉県 19,769円 47位 福井県 219円  空… | [🔗](https://x.com/stats47jp373/status/2085168988431253570) |
 | 2026-08-06 | 𝕏 X | ranking/physical-disability-rehabilitation-facility-residents-per-100k | なぜ高知県が身体障害者更生援護施設の在所者数で全国トップなのでしょうか?  1位 高知県 82.5人 2位 鹿児島県 5… | [🔗](https://x.com/stats47jp373/status/2085304883301712289) |
 | 2026-08-05 | 📸 Instagram | ranking/earthquake-retrofit-housing |  | [🔗](https://www.instagram.com/p/DbqGi4tkfE8/) |
+| 2026-08-05 | ▶️ YouTube | ranking/bcr-sake-consumption-quantity-2007-2024 | 日本酒をいちばん飲む県はどこ？｜消費量の推移 2007→2024 | [🔗](https://www.youtube.com/watch?v=c_VY4X6mDWY) |
 | 2026-08-05 | 📸 Instagram | ranking/other-household-durables-consumption-expenditure |  | [🔗](https://www.instagram.com/p/Dbpa0zRlSe1/) |
 | 2026-08-05 | 📸 Instagram | ranking/fruit-vegetable-juice-consumption-expenditure |  | [🔗](https://www.instagram.com/p/Dbo0tLVjO1K/) |
 | 2026-08-05 | 𝕏 X | ranking/lipstick-consumption-expenditure | 口紅への支出、愛知県 vs 青森県で3倍の差。  愛知県 1,716円 青森県 572円  美容にかける金額は地域でこん… | [🔗](https://x.com/stats47jp373/status/2084836798644306198) |
 | 2026-08-05 | 𝕏 X | ranking/municipal-general-administration-staff | 「職員数が多いのは人口の多い都市部だけ」と思われがちですが、地方でも規模の差は歴然です。  1位 東京都 76,799人… | [🔗](https://x.com/stats47jp373/status/2084821692866580733) |
 | 2026-08-05 | 𝕏 X | ranking/starting-salary-university | 大卒初任給、1位267.7千円・2位258千円・3位249.8千円。  最大格差は1.3倍と意外に僅差ですが、1位は秋田… | [🔗](https://x.com/stats47jp373/status/2084776401622938026) |
 | 2026-08-04 | 📸 Instagram | ranking/department-supermarket-count-per-100k |  | [🔗](https://www.instagram.com/p/Dbnh-8ymyjX/) |
+| 2026-08-04 | ▶️ YouTube | ranking/bcr-beer-consumption-quantity-2007-2024 | ビール離れは地方から？｜消費量ランキングの推移 2007→2024 | [🔗](https://www.youtube.com/watch?v=XIxshD4KwCA) |
 | 2026-08-04 | 📸 Instagram | ranking/social-increase |  | [🔗](https://www.instagram.com/p/Dbm2GGnG1Jg/) |
 | 2026-08-04 | 📸 Instagram | ranking/prefectural-income-growth-rate-h23 |  | [🔗](https://www.instagram.com/p/DbmQKr1mEU6/) |
 | 2026-08-04 | 𝕏 X | ranking/female-part-time-hourly-wage | このデータを使う3ステップ📈  ①女性パートの時給ランキングを確認 ②1位東京都1,534円と自分の地域を比較 ③転職… | [🔗](https://x.com/stats47jp373/status/2084444210426777897) |
 | 2026-08-04 | 𝕏 X | ranking/new-graduate-scheduled-salary-university-male | なぜ群馬県が新規学卒者の給与で全国トップなのでしょうか?  1位 群馬県 317.9千円 2位 長崎県 266.4千円 … | [🔗](https://x.com/stats47jp373/status/2084580106920706453) |
 | 2026-08-03 | 📸 Instagram | ranking/foreign-resident-count-china-per-100k |  | [🔗](https://www.instagram.com/p/DblE1f8HKvm/) |
+| 2026-08-03 | ▶️ YouTube | ranking/bcr-coffee-consumption-quantity-2007-2024 | コーヒー消費量1位は意外なあの県｜47都道府県の推移 2007→2024 | [🔗](https://www.youtube.com/watch?v=DQKqUHjj0YQ) |
 | 2026-08-03 | 📸 Instagram | ranking/nuclear-power-plant-count |  | [🔗](https://www.instagram.com/p/DbkVhEEm2Bn/) |
 | 2026-08-03 | 📸 Instagram | ranking/police-expenses-prefecture |  | [🔗](https://www.instagram.com/p/DbjqhrCGqL8/) |
 | 2026-08-03 | 𝕏 X | ranking/craft-materials-consumption-expenditure | もし手芸・工芸材料の消費額が全国トップの長野県に住んでいたら、身の回りに手作りの温もりがあふれる暮らしです。  1位 長… | [🔗](https://x.com/stats47jp373/status/2084247923928313864) |
 | 2026-08-02 | 📸 Instagram | ranking/unmarried-ratio-male-30-34 |  | [🔗](https://www.instagram.com/p/DbiTNiHG5cJ/) |
+| 2026-08-02 | ▶️ YouTube | ranking/bcr-lowest-temperature-1984-2024 | 最も冷え込む県はどこ？｜最低気温ランキングの推移 1984→2024 | [🔗](https://www.youtube.com/watch?v=DWqkVvkvxhQ) |
 | 2026-08-02 | 📸 Instagram | ranking/air-conditioner-consumption-quantity |  | [🔗](https://www.instagram.com/p/Dbhtzl9FQFq/) |
 | 2026-08-02 | 📸 Instagram | ranking/wind-power-plant-count-facility |  | [🔗](https://www.instagram.com/p/DbhFlCdIJWI/) |
 | 2026-08-01 | 📸 Instagram | ranking/physical-disability-rehabilitation-cases |  | [🔗](https://www.instagram.com/p/DbfuhnsICZ8/) |
+| 2026-08-01 | ▶️ YouTube | ranking/bcr-household-head-income-worker-households-per-month-1975-2024 | 世帯主の月収は2.2倍になった｜47都道府県の推移 1975→2024 | [🔗](https://www.youtube.com/watch?v=RbooASxiGzk) |
 | 2026-08-01 | 📸 Instagram | ranking/other-grains-consumption-quantity |  | [🔗](https://www.instagram.com/p/DbfIpzHoEFw/) |
 | 2026-08-01 | 📸 Instagram | ranking/nursery-teacher-annual-income |  | [🔗](https://www.instagram.com/p/DbehJyKEWzk/) |
 | 2026-07-31 | 📸 Instagram | ranking/cpi-change-rate-miscellaneous |  | [🔗](https://www.instagram.com/p/DbdOr6KILHJ/) |
+| 2026-07-31 | ▶️ YouTube | ranking/bcr-per-taxpayer-taxable-income-1985-2024 | 課税対象所得、東京の独走はいつから？｜47都道府県の推移 1985→2024 | [🔗](https://www.youtube.com/watch?v=41UzSRWnXlQ) |
 | 2026-07-31 | 📸 Instagram | ranking/other-prepared-food-consumption-expenditure |  | [🔗](https://www.instagram.com/p/DbcmAKZlkOA/) |
 | 2026-07-31 | 📸 Instagram | ranking/agricultural-land-conversion-area |  | [🔗](https://www.instagram.com/p/Dbb8s2GGqzT/) |
 | 2026-07-31 | 𝕏 X | ranking/prefectural-income-growth-rate-h23 | 衝撃の事実、県民所得の伸び率1位は佐賀県で5.1%。  2位富山県3.9%、3位山梨県3.1%と続きます。  全国の増減… | [🔗](https://x.com/stats47jp373/status/2082964456435495045) |
 | 2026-07-31 | 𝕏 X | ranking/social-increase | もし社会増減数1位の東京都に転入したら、あなたも14万人超の一人になります。  2位大阪府47,578人、3位埼玉県43… | [🔗](https://x.com/stats47jp373/status/2083160762990928002) |
 | 2026-07-31 | 𝕏 X | ranking/crude-death-rate | 1位秋田県19.17人、2位青森県17.6人、3位高知県17.17人。  最も低い47位東京都は9.74人で、その差は2… | [🔗](https://x.com/stats47jp373/status/2082994660201369676) |
 | 2026-07-30 | 📸 Instagram | ranking/gloves-consumption-expenditure |  | [🔗](https://www.instagram.com/p/Dbao1QekVn7/) |
+| 2026-07-30 | ▶️ YouTube | ranking/bcr-new-owner-occupied-housing-ratio-1977-2024 | 持ち家離れは本当か？｜着工新設持ち家比率の推移 1977→2024 | [🔗](https://www.youtube.com/watch?v=J4dX82kGx20) |
 | 2026-07-30 | 📸 Instagram | ranking/grade-separated-pedestrian-crossings-per-1000-km |  | [🔗](https://www.instagram.com/p/DbZ9iyUEbpk/) |
 | 2026-07-30 | 📸 Instagram | ranking/wooden-housing-ratio |  | [🔗](https://www.instagram.com/p/DbZXQL3EegH/) |
 | 2026-07-30 | 𝕏 X | ranking/police-expenses-prefecture | 1位東京都6,295億円、2位大阪府2,657億円、3位神奈川県1,967億円。  47位鳥取県はわずか161億円で、最… | [🔗](https://x.com/stats47jp373/status/2082602074676900203) |
 | 2026-07-30 | 𝕏 X | ranking/foreign-resident-count-china-per-100k | なぜ東京都の外国人人口比率がこれほど高いのか?  1位東京都1,393.4人、2位埼玉県783.9人、3位千葉県780.… | [🔗](https://x.com/stats47jp373/status/2082768166065705405) |
 | 2026-07-29 | 📸 Instagram | ranking/port-vehicle-ferry |  | [🔗](https://www.instagram.com/p/DbYFUQmFnqQ/) |
+| 2026-07-29 | ▶️ YouTube | ranking/bcr-floor-area-new-owner-dwelling-1981-2024 | 新築持ち家は1割狭くなった｜床面積の推移 1981→2024 | [🔗](https://www.youtube.com/watch?v=w1RvQ--1ihQ) |
 | 2026-07-29 | 📸 Instagram | ranking/household-head-annual-income-per-household |  | [🔗](https://www.instagram.com/p/DbXaBOqG-sk/) |
 | 2026-07-29 | 📸 Instagram | ranking/public-rent-consumption-expenditure |  | [🔗](https://www.instagram.com/p/DbWya3Qlh-7/) |
 | 2026-07-29 | 𝕏 X | ranking/air-conditioner-consumption-quantity | エアコン消費量、1位香川県0.2台 vs 47位大分県0.022台。  差は9.1倍。  意外にも猛暑イメージの強い九州… | [🔗](https://x.com/stats47jp373/status/2082300082095820912) |
 | 2026-07-29 | 𝕏 X | ranking/unmarried-ratio-male-30-34 | もし未婚率51.8%の秋田県で30代前半を過ごしていたら、周囲も独身の人が多いはずです。  47位大阪府は39.3%で差… | [🔗](https://x.com/stats47jp373/status/2082435984461812118) |
 | 2026-07-28 | 📸 Instagram | ranking/psychiatric-hospital-bed-occupancy-rate |  | [🔗](https://www.instagram.com/p/DbVf8ltmpdj/) |
+| 2026-07-28 | ▶️ YouTube | ranking/bcr-pharmacy-count-per-100k-1981-2023 | 薬局は人口比で倍増した｜47都道府県ランキングの推移 1981→2023 | [🔗](https://www.youtube.com/watch?v=ysSl8pBb-CM) |
 | 2026-07-28 | 📸 Instagram | ranking/property-expenses-prefecture |  | [🔗](https://www.instagram.com/p/DbU0iFoGwX6/) |
 | 2026-07-28 | 📸 Instagram | ranking/flood-damage-general-assets |  | [🔗](https://www.instagram.com/p/DbUN6g8oDjD/) |
 | 2026-07-28 | 𝕏 X | ranking/nursery-teacher-annual-income | このデータを使う3ステップ。 ①1位東京都453.5万円と2位京都府452.8万円を比較 ②保育士不足が深刻な県を47位… | [🔗](https://x.com/stats47jp373/status/2081907490141409327) |
 | 2026-07-28 | 𝕏 X | ranking/physical-disability-rehabilitation-cases | なぜ東京都の身体障害者更生援護取扱実人員が41万人超と突出しているのか?  2位兵庫県21.9万人、3位大阪府13.9万… | [🔗](https://x.com/stats47jp373/status/2082043391786008912) |
 | 2026-07-27 | 📸 Instagram | ranking/garden-plants-consumption-expenditure |  | [🔗](https://www.instagram.com/p/DbTDZKZluOJ/) |
+| 2026-07-27 | ▶️ YouTube | ranking/bcr-general-hospital-bed-count-1975-2023 | 一般病院のベッド数はどう変わった？｜47都道府県の推移 1975→2023 | [🔗](https://www.youtube.com/watch?v=BZP2JL5WKRs) |
 | 2026-07-27 | 📸 Instagram | ranking/gasoline-sales-volume |  | [🔗](https://www.instagram.com/p/DbSUyBdm6zx/) |
 | 2026-07-27 | 📸 Instagram | bar-chart-race/municipal-road-paving-rate |  | [🔗](https://www.instagram.com/reel/DbRpJJsAUse/) |
 | 2026-07-26 | 📸 Instagram | ranking/national-health-insurance-enrollees-per-1000 |  | [🔗](https://www.instagram.com/p/DbQSpnzlT01/) |
+| 2026-07-26 | ▶️ YouTube | ranking/bcr-physicians-in-medical-facilities-1975-2022 | 医師数は2.6倍に増えた｜47都道府県ランキングの推移 1975→2022 | [🔗](https://www.youtube.com/watch?v=weZeiJeSFOs) |
 | 2026-07-26 | 📸 Instagram | ranking/disaster-recovery-expenses-prefecture |  | [🔗](https://www.instagram.com/p/DbPtK4HnEnV/) |
 | 2026-07-26 | 📸 Instagram | bar-chart-race/urban-park-area-per-person |  | [🔗](https://www.instagram.com/reel/DbPEPaJDZbJ/) |
 | 2026-07-25 | 📸 Instagram | ranking/urban-parks-area |  | [🔗](https://www.instagram.com/p/DbNsfyNEQ4f/) |
+| 2026-07-25 | ▶️ YouTube | ranking/bcr-new-graduate-starting-salary-highschool-male-1980-2019 | 高卒初任給、昭和から平成の40年｜47都道府県の推移 1980→2019 | [🔗](https://www.youtube.com/watch?v=XZmoVc7BPAI) |
 | 2026-07-25 | 📸 Instagram | ranking/disaster-recovery-project-expenses-prefecture |  | [🔗](https://www.instagram.com/p/DbNFwBVoM3U/) |
 | 2026-07-25 | 📸 Instagram | bar-chart-race/local-allocation-tax-ratio-pref-finance |  | [🔗](https://www.instagram.com/reel/DbMf8xPkfm0/) |
 | 2026-07-25 | 𝕏 X | ranking/household-head-annual-income-per-household | 1位神奈川県363万円、2位東京都352万円、3位愛知県338万円。  47位高知県は189万円で、最大格差は1.9倍。… | [🔗](https://x.com/stats47jp373/status/2080790132517466244) |
 | 2026-07-25 | 𝕏 X | ranking/port-vehicle-ferry | このデータを使う3ステップ。 ①1位鹿児島県358万台の理由を離島航路の多さで確認 ②2位愛媛県・3位北海道と比較 ③3… | [🔗](https://x.com/stats47jp373/status/2080820335956357613) |
 | 2026-07-24 | 📸 Instagram | ranking/scallop-consumption-quantity |  | [🔗](https://www.instagram.com/p/DbLLFa8FDO8/) |
+| 2026-07-24 | ▶️ YouTube | ranking/bcr-new-graduate-starting-salary-university-male-1981-2019 | 大卒初任給はどれだけ上がった？｜47都道府県の推移 1981→2019 | [🔗](https://www.youtube.com/watch?v=5MEqovFFATk) |
 | 2026-07-24 | 📸 Instagram | ranking/other-mens-shirt-consumption-quantity |  | [🔗](https://www.instagram.com/p/DbKhy7_lHZ2/) |
 | 2026-07-24 | 📸 Instagram | bar-chart-race/junior-college-count |  | [🔗](https://www.instagram.com/reel/DbJ6jQAlJ9z/) |
 | 2026-07-24 | 𝕏 X | ranking/flood-damage-general-assets | なぜ広島県の水害被害額が338億円と突出しているのか?  2位京都府173億円、3位山形県105億円と続きますが、47位… | [🔗](https://x.com/stats47jp373/status/2080593837907472660) |
 | 2026-07-24 | 𝕏 X | ranking/property-expenses-prefecture | 東京都の物件費は6,320億円、47位和歌山県は213億円。  29.6倍の差ですが、あなたはこの差を「規模の違い」派?… | [🔗](https://x.com/stats47jp373/status/2080488137327833560) |
 | 2026-07-24 | 𝕏 X | ranking/psychiatric-hospital-bed-occupancy-rate | もし精神科病床利用率94.1%の富山県で暮らしていたら、医療体制の逼迫を肌で感じそうです。  47位福島県は69.3%と… | [🔗](https://x.com/stats47jp373/status/2080624035118055627) |
 | 2026-07-23 | 📸 Instagram | ranking/disaster-damage-amount-per-person |  | [🔗](https://www.instagram.com/p/DbInJX-kdMy/) |
+| 2026-07-23 | ▶️ YouTube | ranking/bcr-junior-college-count-1975-2024 | 短大は4割が消えた｜短期大学数の推移 1975→2024 | [🔗](https://www.youtube.com/watch?v=5_luemJcHbs) |
 | 2026-07-23 | 📸 Instagram | ranking/sports-participation-rate-cycling |  | [🔗](https://www.instagram.com/p/DbH9abvIADk/) |
 | 2026-07-23 | 📸 Instagram | bar-chart-race/private-life-insurance-contracts-per-1000 |  | [🔗](https://www.instagram.com/reel/DbHWKMBFQYn/) |
 | 2026-07-23 | 𝕏 X | ranking/national-health-insurance-enrollees-per-1000 | 国保加入率は都市部より地方が高い、というイメージがありませんか?  データを見ると1位沖縄県250.1人、47位富山県1… | [🔗](https://x.com/stats47jp373/status/2080110651272544494) |
 | 2026-07-23 | 𝕏 X | ranking/gasoline-sales-volume | このランキングを使う3つのステップ。 ①上位5県(東京・愛知・大阪・埼玉・北海道)は人口や物流の多さを確認 ②下位5県は… | [🔗](https://x.com/stats47jp373/status/2080095554340622527) |
 | 2026-07-23 | 𝕏 X | ranking/garden-plants-consumption-expenditure | 園芸用植物への支出、1位三重県は5,635円、47位沖縄県は1,384円。  その差は4.1倍にもなります。  庭のある… | [🔗](https://x.com/stats47jp373/status/2080065355838288354) |
 | 2026-07-22 | 📸 Instagram | ranking/boys-school-uniform-consumption-quantity |  | [🔗](https://www.instagram.com/p/DbGCV1wG_BZ/) |
+| 2026-07-22 | ▶️ YouTube | ranking/bcr-university-count-1975-2024 | 大学の数はこの50年で倍増した｜47都道府県ランキングの推移 1975→2024 | [🔗](https://www.youtube.com/watch?v=_nT7v0R5vmU) |
 | 2026-07-22 | 📸 Instagram | ranking/marine-fishery-aquaculture-output-value |  | [🔗](https://www.instagram.com/p/DbFYNTGm1m1/) |
 | 2026-07-22 | 📸 Instagram | bar-chart-race/number-of-simple-lodging-facilities |  | [🔗](https://www.instagram.com/reel/DbEwUK2nc3u/) |
 | 2026-07-22 | 𝕏 X | ranking/disaster-recovery-project-expenses-prefecture | なぜ熊本県の災害復旧事業費が全国トップなのか?  1位熊本県489億円、2位広島県273億円。 最下位47位大阪府はわず… | [🔗](https://x.com/stats47jp373/status/2079869058485481776) |
 | 2026-07-22 | 𝕏 X | ranking/urban-parks-area | もし都市公園の少ない県に住んでいたら、休日の散歩コースにも困りそうです。  1位北海道14,176ha、47位徳島県55… | [🔗](https://x.com/stats47jp373/status/2079899260766560708) |
 | 2026-07-22 | 𝕏 X | ranking/disaster-recovery-expenses-prefecture | 1位熊本県489億円、2位広島県273億円、3位宮城県222億円。  最下位47位大阪府との差はなんと249.9倍。 災… | [🔗](https://x.com/stats47jp373/status/2079702966320386248) |
 | 2026-07-21 | 📸 Instagram | ranking/other-ceremony-expense-consumption-expenditure |  | [🔗](https://www.instagram.com/p/DbDdQ1Vm-Px/) |
+| 2026-07-21 | ▶️ YouTube | ranking/bcr-residential-telephone-subscription-count-per-1000-1975-2024 | 固定電話の栄枯盛衰｜住宅用電話加入数の推移 1975→2024 | [🔗](https://www.youtube.com/watch?v=0kV0FVDEpEM) |
 | 2026-07-21 | 📸 Instagram | ranking/travel-participation-rate-domestic-tourism |  | [🔗](https://www.instagram.com/p/DbCzdWNks2r/) |
 | 2026-07-21 | 📸 Instagram | bar-chart-race/lowest-temperature |  | [🔗](https://www.instagram.com/reel/DbCL_IzDzf8/) |
 | 2026-07-20 | 📸 Instagram | ranking/other-vegetable-seaweed-processed-consumption-expenditure |  | [🔗](https://www.instagram.com/p/DbA7s1iG3On/) |
+| 2026-07-20 | ▶️ YouTube | ranking/bcr-building-fire-count-1975-2023 | 建物火災は半分近くまで減った｜47都道府県ランキングの推移 1975→2023 | [🔗](https://www.youtube.com/watch?v=dvJWLb-FJtY) |
 | 2026-07-20 | 📸 Instagram | ranking/marine-fishery-catch |  | [🔗](https://www.instagram.com/p/DbAR1kwFtu7/) |
 | 2026-07-20 | 📸 Instagram | bar-chart-race/building-fire-count |  | [🔗](https://www.instagram.com/reel/Da_nSUJElVv/) |
 | 2026-07-19 | 📸 Instagram | ranking/religious-expense-consumption-expenditure |  | [🔗](https://www.instagram.com/p/Da-PVRgFAkM/) |
+| 2026-07-19 | ▶️ YouTube | ranking/bcr-traffic-accident-count-1975-2024 | 交通事故はこの50年で4割減った｜47都道府県ランキングの推移 1975→2024 | [🔗](https://www.youtube.com/watch?v=070DGL0jDPA) |
 | 2026-07-19 | 📸 Instagram | ranking/marine-aquaculture-harvest |  | [🔗](https://www.instagram.com/p/Da9qHm5mx9e/) |
 | 2026-07-19 | 📸 Instagram | bar-chart-race/paid-nursing-home-residents-per-1000-65plus |  | [🔗](https://www.instagram.com/reel/Da9CC_wAe0f/) |
 | 2026-07-19 | 𝕏 X | ranking/travel-participation-rate-domestic-tourism | 国内観光旅行の行動者率、東京都は34.2％で全国1位。 47位徳島県は11.4％。  その差、3.0倍。  旅行に出かけ… | [🔗](https://x.com/stats47jp373/status/2078615800060231766) |
 | 2026-07-18 | 📸 Instagram | ranking/overseas-travel-annual-participation-rate-10plus |  | [🔗](https://www.instagram.com/p/Da7qHiLG9L9/) |
+| 2026-07-18 | ▶️ YouTube | ranking/bcr-registered-foreigner-population-1986-2011 | 外国人登録人口は2.4倍に増えた｜47都道府県の推移 1986→2011 | [🔗](https://www.youtube.com/watch?v=IBrPqK_mvFk) |
 | 2026-07-18 | 📸 Instagram | ranking/electricity-generation-capacity |  | [🔗](https://www.instagram.com/p/Da7COOjIMZt/) |
 | 2026-07-18 | 📸 Instagram | bar-chart-race/postal-savings-balance-per-capita |  | [🔗](https://www.instagram.com/reel/Da6dMikD5oQ/) |
 | 2026-07-18 | 𝕏 X | ranking/religious-expense-consumption-expenditure | 信仰・祭祀費、1位滋賀県29,264円 vs 47位岩手県4,999円。  滋賀は寺社文化が根強い地域、岩手は支出が控え… | [🔗](https://x.com/stats47jp373/status/2078313811988140433) |
 | 2026-07-18 | 𝕏 X | ranking/marine-fishery-catch | 海面漁業漁獲量、1位北海道842,704トン、2位長崎県292,890トン、3位茨城県259,496トン。  最大格差は… | [🔗](https://x.com/stats47jp373/status/2078253412504809629) |
 | 2026-07-18 | 𝕏 X | ranking/other-vegetable-seaweed-processed-consumption-expenditure | 野菜・海藻加工品の支出データ、3ステップで使いこなす方法。  ①上位5県で消費傾向を把握(静岡県3,197円) ②下位県… | [🔗](https://x.com/stats47jp373/status/2078283617877229809) |
 | 2026-07-17 | 📸 Instagram | ranking/overseas-travel-annual-participation-rate-15plus |  | [🔗](https://www.instagram.com/p/Da5H1FGlX4n/) |
+| 2026-07-17 | ▶️ YouTube | ranking/bcr-flush-toilet-population-ratio-1975-2021 | 水洗トイレはこうして全国に広がった｜水洗化率の推移 1975→2021 | [🔗](https://www.youtube.com/watch?v=XCStHbTLBIY) |
 | 2026-07-17 | 📸 Instagram | ranking/tourism-resource-count |  | [🔗](https://www.instagram.com/p/Da4fXEvFWYc/) |
 | 2026-07-17 | 📸 Instagram | bar-chart-race/japanese-entries |  | [🔗](https://www.instagram.com/reel/Da35Hvwkl8b/) |
 | 2026-07-17 | 𝕏 X | ranking/marine-fishery-output-value | もし北海道に住んでいたら。  海面漁業産出額は全国最多の2396億円。 2位長崎県709億円、3位宮城県585億円と続き… | [🔗](https://x.com/stats47jp373/status/2078087332805181810) |
 | 2026-07-17 | 𝕏 X | ranking/overseas-travel-annual-participation-rate-10plus | 海外旅行の行動者率、京都府は0.7％で全国1位。 47位高知県は0.1％。  その差、実に7.0倍。  地域差の実態はこ… | [🔗](https://x.com/stats47jp373/status/2077891029517173109) |
 | 2026-07-17 | 𝕏 X | ranking/marine-aquaculture-harvest | 養殖業は瀬戸内海が中心と思われがちですが、データは違います。  1位北海道114,359トン、2位広島県92,134トン… | [🔗](https://x.com/stats47jp373/status/2077936322753253808) |
 | 2026-07-16 | 📸 Instagram | ranking/vegetable-seaweed-tsukudani-consumption-expenditure |  | [🔗](https://www.instagram.com/p/Da2kfLCICWB/) |
+| 2026-07-16 | ▶️ YouTube | ranking/bcr-divorces-1975-2023 | 離婚件数は1.5倍に増えた｜47都道府県ランキングの推移 1975→2023 | [🔗](https://www.youtube.com/watch?v=d1jkCQtMLnQ) |
 | 2026-07-16 | 📸 Instagram | ranking/port-cargo-total |  | [🔗](https://www.instagram.com/p/Da16VCoEfMV/) |
 | 2026-07-16 | 📸 Instagram | bar-chart-race/habitable-area-ratio |  | [🔗](https://www.instagram.com/reel/Da1UJnwgc1V/) |
 | 2026-07-16 | 𝕏 X | ranking/overseas-travel-annual-participation-rate-15plus | 海外旅行の年間行動者率、東京都18.2％、神奈川県16.4％、奈良県14.8％。  最大格差は3.6倍。1位東京都と47… | [🔗](https://x.com/stats47jp373/status/2077528640456393057) |
 | 2026-07-16 | 𝕏 X | ranking/average-temperature | なぜ沖縄県の年平均気温は24.4℃と突出しているのか。  亜熱帯性気候と黒潮の影響が主な理由です。 47位北海道との差は… | [🔗](https://x.com/stats47jp373/status/2077694735930765722) |
 | 2026-07-16 | 𝕏 X | ranking/electricity-generation-capacity | 発電電力量データの使い方、3ステップで紹介します。  ①上位5県でエネルギー拠点を把握(千葉県8064万Ｍｗｈ) ②下位… | [🔗](https://x.com/stats47jp373/status/2077558835661942888) |
 | 2026-07-15 | 📸 Instagram | ranking/maritime-import-export-cargo |  | [🔗](https://www.instagram.com/p/Daz_HUxGUkv/) |
+| 2026-07-15 | ▶️ YouTube | ranking/bcr-marriages-1975-2023 | 婚姻件数はこの49年で半減した｜47都道府県ランキングの推移 1975→2023 | [🔗](https://www.youtube.com/watch?v=7956Rdr02Jk) |
 | 2026-07-15 | 📸 Instagram | ranking/total-overnight-guests-foreign |  | [🔗](https://www.instagram.com/p/DazUc2hG6Bo/) |
 | 2026-07-15 | 📸 Instagram | bar-chart-race/serious-crime-per-100k |  | [🔗](https://www.instagram.com/reel/DayurtyCTDN/) |
 | 2026-07-14 | 📸 Instagram | ranking/travel-participation-rate-overseas |  | [🔗](https://www.instagram.com/p/DaxZ6WPoG_e/) |
+| 2026-07-14 | ▶️ YouTube | ranking/bcr-japanese-movers-out-1975-2024 | 転出者数が最も多い県はどこ？｜47都道府県の推移 1975→2024 | [🔗](https://www.youtube.com/watch?v=gYtUnpWSUUE) |
 | 2026-07-14 | 📸 Instagram | ranking/flood-affected-rivers |  | [🔗](https://www.instagram.com/p/Dawvjw3G6B2/) |
 | 2026-07-14 | 📸 Instagram | bar-chart-race/total-outpatients |  | [🔗](https://www.instagram.com/reel/DawJ5ZTgJQG/) |
 | 2026-07-13 | 📸 Instagram | ranking/ritual-goods-tombstone-consumption-expenditure |  | [🔗](https://www.instagram.com/p/Dau70GSlue-/) |
+| 2026-07-13 | ▶️ YouTube | ranking/bcr-japanese-movers-in-1977-2024 | 転入者数は全国で4割減った｜47都道府県ランキングの推移 1977→2024 | [🔗](https://www.youtube.com/watch?v=SRCZ6-FV0lM) |
 | 2026-07-13 | 📸 Instagram | ranking/electricity-demand |  | [🔗](https://www.instagram.com/p/DauQRDFlm0x/) |
 | 2026-07-13 | 📸 Instagram | bar-chart-race/cpi-change-rate-total |  | [🔗](https://www.instagram.com/reel/DatlnMxFVOv/) |
 | 2026-07-12 | 📸 Instagram | ranking/other-dried-vegetables-seaweed-consumption-expenditure |  | [🔗](https://www.instagram.com/p/DasOAwbFFeU/) |
+| 2026-07-12 | ▶️ YouTube | ranking/bcr-japanese-population-1980-2024 | 日本人人口、東京一極はいつ加速した？｜47都道府県の推移 1980→2024 | [🔗](https://www.youtube.com/watch?v=MSU41S1UAHQ) |
 | 2026-07-12 | 📸 Instagram | ranking/total-overnight-guests |  | [🔗](https://www.instagram.com/p/DarpLOuEbav/) |
 | 2026-07-12 | 📸 Instagram | bar-chart-race/public-bath-count |  | [🔗](https://www.instagram.com/reel/DarA0tQlLSm/) |
 | 2026-07-12 | 𝕏 X | ranking/total-overnight-guests | 延べ宿泊者数、東京都は約9163万人泊。 47位徳島県は約170万人泊で、その差は53.9倍。  宿泊が最も集中する都道… | [🔗](https://x.com/stats47jp373/status/2076079090155856185) |
@@ -256,6 +333,7 @@
 | 2026-05-26 | ▶️ YouTube | ranking/yoy-landscape-v2 | 東京一極集中はいつ始まった？｜47都道府県 人口前年度比1976-2024 | [🔗](https://www.youtube.com/watch?v=3O4v9iVgntE) |
 | 2026-05-26 | 📸 Instagram | ranking/hobby-participation-rate-gardening |  | [🔗](https://www.instagram.com/p/DYyGMkAiRXO/) |
 | 2026-05-25 | 📸 Instagram | port/cargo-total | 日本の港湾、14年で何が起きたのか🚢  ▼海上出入貨物量 トップは14年ずっと #名古屋港 だが貨物量は -15%（2… | [🔗](https://www.instagram.com/reel/DYwuJ_2EsBT/) |
+| 2026-05-25 | ▶️ YouTube | migration-flow/migration-flow-47 | 都道府県別 人口移動ランキング2025｜転出超過ワースト〜東京一極集中まで | [🔗](https://www.youtube.com/watch?v=XsXqyy9GGwk) |
 | 2026-05-25 | 📸 Instagram | ranking/hobby-participation-rate-cooking |  | [🔗](https://www.instagram.com/p/DYvh88xmrwP/) |
 | 2026-05-24 | 📸 Instagram | highway-history/japan-58years | 日本の高速道路は58年で何キロまで広がったのか？  1962年の名神部分開通から2020年まで、毎年の新規開通区間を地図… | [🔗](https://www.instagram.com/reel/DYuApUviuyQ/) |
 | 2026-05-24 | 📸 Instagram | ranking/hobby-participation-rate-cinema |  | [🔗](https://www.instagram.com/p/DYs9AGtleJV/) |
@@ -323,7 +401,9 @@
 | 2026-03-25 | ▶️ YouTube | ranking/ | 知事給料ランキング 東京都知事が最下位の理由 #Shorts #知事給料 #都道府県ランキング #公務員給与 #Shor… | [🔗](https://www.youtube.com/watch?v=zy1_p9OpPNc) |
 | 2026-03-25 | 𝕏 X | ranking/nurse-salary | 都道府県別の看護師の給与データ。1位は東京都（35.9万円）、47位は鹿児島県（25.3万円）。同じ看護師でも地域で10… | [🔗](https://x.com/stats47jp373/status/2036727635032846571) |
 | 2026-03-25 | 𝕏 X | ranking/consumer-price-difference-index-overall | これ、データで見ると面白くて。東京は給与が高い分、物価指数も全国1位（104.0）。可処分所得で比べると地方との差はかな… | [🔗](https://x.com/stats47jp373/status/2036728570505232743) |
+| 2026-03-24 | ▶️ YouTube | ranking/future-burden-ratio | 将来負担比率ランキング 兵庫330%で全国ワースト｜震災の借金 #Shorts #将来負担比率 #都道府県ランキング #… | [🔗](https://www.youtube.com/watch?v=mBSGLBnRxe0) |
 | 2026-03-24 | ▶️ YouTube | ranking/ | 外国人人口ランキング 群馬が11位の意外｜都道府県別 #Shorts #外国人人口 #都道府県ランキング #多文化共生 … | [🔗](https://www.youtube.com/watch?v=3hzLSJ_O17k) |
+| 2026-03-24 | ▶️ YouTube | ranking/fiscal-strength-index-prefecture | 財政力指数ランキング 1.0超えは東京だけ｜都道府県財政 #Shorts #財政力指数 #都道府県ランキング #地方財政… | [🔗](https://www.youtube.com/watch?v=qlrmzvRgcqU) |
 | 2026-03-24 | ▶️ YouTube | ranking/ | 火災死傷者ランキング TOP5が全て東北｜人口あたり都道府県別 #Shorts #火災 #都道府県ランキング #防災 #… | [🔗](https://www.youtube.com/watch?v=D-l6ZKmduAY) |
 | 2026-03-24 | 𝕏 X | ranking/population-density-per-km2-total-area | 人口密度、東京6,445人に対し北海道64人。100倍の差。 | [🔗](https://x.com/stats47jp373/status/2036276831578366428) |
 | 2026-03-24 | 𝕏 X | ranking/avg-salary-admin-prefecture | 県庁職員の給料、最大で月8.6万円の差がある。 | [🔗](https://x.com/stats47jp373/status/2036390064159113302) |
@@ -339,7 +419,9 @@
 | 2026-03-22 | ▶️ YouTube | ranking/ | 公務員の給料ランキング 東京と青森で月8万円差！地域手当の闇【2024年】#公務員給与 #都道府県ランキング #Shor… | [🔗](https://www.youtube.com/watch?v=mhDgeIsykBU) |
 | 2026-03-22 | ▶️ YouTube | ranking/ | 世帯年収ランキング 年収1位は東京じゃない！意外な県が200万円差で独走【2019年】#世帯年収 #都道府県ランキング … | [🔗](https://www.youtube.com/watch?v=z89IRgdOLkU) |
 | 2026-03-20 | ▶️ YouTube | ranking/ | 大阪vs愛知 人口・社会7番勝負 寿命に1年の差がつく #Shorts #都道府県ランキング | [🔗](https://www.youtube.com/watch?v=KhuhIBB4nI8) |
+| 2026-03-19 | ▶️ YouTube | ranking/welfare-expenditure-ratio-pref-finance | 都道府県別 民生費割合ランキング 40年の変遷 #Shorts #都道府県ランキング #お金 #統計データ #統計データ… | [🔗](https://www.youtube.com/watch?v=Bq8yFlRCIk8) |
 | 2026-03-19 | ▶️ YouTube | ranking/ | 大阪vs愛知 暮らし7番勝負 月収9万円の差がつく #Shorts #お金 #統計データ | [🔗](https://www.youtube.com/watch?v=yikEShprAYA) |
+| 2026-03-18 | ▶️ YouTube | ranking/local-tax-ratio-pref-finance | 都道府県別 地方税割合ランキング 約50年の変遷 #Shorts #都道府県ランキング #お金 #統計データ | [🔗](https://www.youtube.com/watch?v=Vu77wXUYeLY) |
 | 2026-03-18 | ▶️ YouTube | ranking/ | 大阪vs愛知 経済力7番勝負 稼ぐ力はどっちが上？ #Shorts #お金 #統計データ | [🔗](https://www.youtube.com/watch?v=Ak1DAjYbsqA) |
 | 2026-03-17 | 𝕏 X | ranking/retirement-allowance-admin-prefecture | 公務員の退職金、県で1,000万円以上の差がつくって本当。  1位 東京都 約2,483万円 2位 大阪府 約2,419… | [🔗](https://x.com/stats47jp373/status/2033709908336488843) |
 | 2026-03-16 | ▶️ YouTube | ranking/ | 都道府県の一般行政職員（定年退職者）の平均退職手当ランキング（2024年） | [🔗](https://www.youtube.com/watch?v=3NWBwhHh7Ds) |
@@ -609,10 +691,12 @@
 | 2026-01-15 | ▶️ YouTube | ranking/ | 🚗自動車の保有台数ランキング2014！あなたの県は何位？ | [🔗](https://www.youtube.com/watch?v=hZWARs1FfXw) |
 | 2026-01-15 | ▶️ YouTube | ranking/ | 🦷歯科健診・保健指導者数ランキング2020！あなたの県は何位？ | [🔗](https://www.youtube.com/watch?v=bGFJgWKzLLs) |
 | 2026-01-14 | ▶️ YouTube | ranking/ | 🏥脳血管疾患による死亡者数ランキング2022！あなたの県は何位？ | [🔗](https://www.youtube.com/watch?v=p8zNjyv0yhI) |
+| 2026-01-13 | ▶️ YouTube | ranking/ | 📊教育費ランキング2023！あなたの県は何位？ | [🔗](https://www.youtube.com/watch?v=bi2UqZu_vOQ) |
 | 2026-01-13 | ▶️ YouTube | ranking/ | 📊趣味・遊び代ランキング2023！あなたの県は何位？ #ranking #投資 #統計データ | [🔗](https://www.youtube.com/watch?v=8qnL63zJ0jM) |
 | 2026-01-11 | ▶️ YouTube | ranking/ | 👗服の値段、地域差ありすぎ！被服・履物物価指数2023 | [🔗](https://www.youtube.com/watch?v=Cxvv4Rvpdl8) |
 | 2026-01-10 | ▶️ YouTube | ranking/ | ⚖️小学5年生女子の平均体重ランキング2022！一番重いのはどこ？ | [🔗](https://www.youtube.com/watch?v=pYsQO0wVOnM) |
 | 2026-01-08 | ▶️ YouTube | ranking/ | 勤労者世帯の月収ランキング2023！あなたの地域はいくら？ | [🔗](https://www.youtube.com/watch?v=prxc6p5Ktmk) |
+| 2025-12-19 | ▶️ YouTube | ranking/ | 実質収支比率ランキング2021！あなたの県は何位？ | [🔗](https://www.youtube.com/watch?v=z0cfD_rCgEI) |
 | 2025-12-19 | ▶️ YouTube | ranking/ | 都道府県一般行政部門職員数ランキング2023！あなたの県は何位？ | [🔗](https://www.youtube.com/watch?v=L1QqphMMIZE) |
 | 2025-12-18 | ▶️ YouTube | ranking/ | 農業産出額ランキング2022！あなたの県は何位？ | [🔗](https://www.youtube.com/watch?v=tAyxhTp5qrI) |
 | 2025-12-17 | ▶️ YouTube | ranking/ | 日本の未来を映す鏡？老年化指数ランキング2022！あなたの県は何位？ | [🔗](https://www.youtube.com/watch?v=xy_9K8LrarM) |

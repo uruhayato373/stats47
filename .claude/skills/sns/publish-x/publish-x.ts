@@ -16,6 +16,12 @@
  *                media 不在なら quick-still --require-png で決定的に再生成 (クラウド生成→ローカル
  *                publish の受け渡しを posts.json のみに限定する設計)。予約成功で status=scheduled
  *                (posted 昇格は投稿時刻経過後に mark-sns-posted)。
+ *                承認済み (approval.state=approved) の下書きだけを予約する (approve-posts.cjs で承認)。
+ *   --approve    直接指定・引用RT の投稿で、この実行をオーナーの承認として台帳に記録する
+ *                (2026-10-09 オーナー決定: 新規投稿は承認必須。--from-queue では使わない)
+ *
+ * 予約・投稿に成功した行は、最後に archive-sns-assets.mjs で素材を Google Drive へ保全する
+ * (.local/r2 は 7 日で消えるため。失敗は警告に留め、check-post-trace.mjs が未保全を件数で知らせる)。
  *
  * 事故履歴（2026-04-18）:
  *   Sprint 1 Day 2-5 を予約投稿したつもりが 4 件全て即時投稿された。
@@ -45,6 +51,10 @@ const PROFILE_DIR = path.join(PROFILE_ROOT, ".local/playwright-x-profile");
 const DEBUG_DIR = path.join(PROJECT_ROOT, ".local/playwright-x-debug");
 
 let IS_DRY_RUN = false;
+// --approve: 直接指定・引用RT の投稿をオーナーの承認として記録する
+let APPROVE = false;
+// 台帳を書いた行。最後に素材を Drive へ保全する
+const ARCHIVE_IDS: number[] = [];
 // 投稿先アカウントの取り違え防止ガード。設定時、ログイン中の @handle がこれと一致するまで
 // 投稿しない（一致するまで最大5分待機、タイムアウトで中止）。@ は付けても付けなくても可。
 let EXPECT_ACCOUNT: string | null = null;
@@ -113,6 +123,8 @@ function parseArgs(): { posts: PostConfig[]; immediate: boolean; fromQueue?: boo
       immediate = true;
     } else if (args[i] === "--dry-run") {
       IS_DRY_RUN = true;
+    } else if (args[i] === "--approve") {
+      APPROVE = true;
       console.log("🧪 DRY RUN モード: 実投稿はせず、セレクタ検出まで確認");
     } else if (args[i] === "--from-queue") {
       fromQueue = true;
@@ -146,7 +158,7 @@ function parseArgs(): { posts: PostConfig[]; immediate: boolean; fromQueue?: boo
   // 生成 (クラウド) と投稿 (ローカル) の受け渡しを posts.json だけに限定する設計。
   // caption は store から一時ファイルに書き出し、media は無ければ後段 (main) で quick-still 再生成。
   if (fromQueue) {
-    const drafts = store
+    const queued = store
       .loadAll()
       .filter(
         (p: Record<string, unknown>) =>
@@ -160,11 +172,20 @@ function parseArgs(): { posts: PostConfig[]; immediate: boolean; fromQueue?: boo
       )
       .sort((a: Record<string, unknown>, b: Record<string, unknown>) =>
         String(a.scheduled_at).localeCompare(String(b.scheduled_at)),
-      )
+      );
+    // 承認済みの下書きだけを予約する。承認待ちは件数を出して残す
+    const pending = queued.filter((p: Record<string, unknown>) => !store.isApproved(p));
+    if (pending.length) {
+      console.log(
+        `⏸  承認待ちの下書き ${pending.length} 件は予約しません (承認: node .claude/scripts/sns/approve-posts.cjs --ids ${pending.map((p: Record<string, unknown>) => p.id).join(",")})`,
+      );
+    }
+    const drafts = queued
+      .filter((p: Record<string, unknown>) => store.isApproved(p))
       .slice(0, Number.isFinite(limit) ? limit : undefined);
 
     if (drafts.length === 0) {
-      console.error("キュー (status=draft, scheduled_at 付きの X 投稿) が空です。");
+      console.error("キュー (status=draft, scheduled_at 付き、承認済みの X 投稿) が空です。");
       process.exit(1);
     }
 
@@ -834,6 +855,24 @@ async function publishPost(
 }
 
 // ─── DB 更新 ───────────────────────────────────────
+/** --approve の実行をオーナーの承認として台帳に残す形 */
+function approvalRecord() {
+  return { state: "approved", by: "owner", at: new Date().toISOString(), via: "publish-x --approve", note: null };
+}
+
+/** 予約・投稿した行の素材を Drive へ保全する。失敗しても投稿は取り消さず警告だけ出す */
+function archiveAssets(): void {
+  for (const id of ARCHIVE_IDS) {
+    try {
+      execFileSync(process.execPath, [path.join(PROJECT_ROOT, ".claude/scripts/sns/archive-sns-assets.mjs"), "--id", String(id)], {
+        stdio: "inherit",
+      });
+    } catch (e) {
+      console.warn(`⚠ 素材の Drive 保全に失敗 (id=${id})。あとで archive-sns-assets.mjs --id ${id} を実行してください: ${e}`);
+    }
+  }
+}
+
 function updateDb(
   post: PostConfig,
   success: boolean
@@ -862,6 +901,7 @@ function updateDb(
     // --from-queue: 元 draft レコードだけを id 指定で更新する (content_key で一括更新しない。
     // 同一 key で複数テンプレの draft が並ぶため、他の draft を巻き込まない)。
     if (post.recordId != null) {
+      ARCHIVE_IDS.push(post.recordId);
       store.updateById(post.recordId, {
         status, // 予約成功で 'scheduled'
         scheduled_at: post.scheduledDate
@@ -873,7 +913,8 @@ function updateDb(
     }
     if (post.postType === "quote_rt") {
       // 引用RT: 事前行が無いため新規 INSERT で記録する（旧 INSERT INTO sns_posts 相当）。
-      store.insert({
+      const inserted = store.insert({
+        approval: approvalRecord(),
         platform: "x",
         post_type: "quote_rt",
         domain: post.domain,
@@ -887,6 +928,7 @@ function updateDb(
         scheduled_at: post.scheduledDate?.toISOString() ?? null,
         posted_at: status === "posted" ? postedAt : null,
       });
+      ARCHIVE_IDS.push(inserted.id);
       console.log(`📝 DB INSERT: ${post.contentKey} → ${status}`);
     } else {
       // 同じキーの下書き 1 件だけを更新し、無ければ新しい行を足す (予約・即時投稿とも)。
@@ -895,14 +937,17 @@ function updateDb(
       const plan = planDirectLedgerWrite(allPosts, { domain: post.domain, contentKey: post.contentKey });
       const utmUrl = caption.match(/https:\/\/stats47\.jp\S+/)?.[0] ?? null;
       if (plan.action === "update") {
+        ARCHIVE_IDS.push(plan.id);
         store.updateById(plan.id, {
+          approval: approvalRecord(),
           status,
           scheduled_at: post.scheduledDate?.toISOString() ?? null,
           posted_at: status === "posted" ? postedAt : null,
           ...(postUrl ? { post_url: postUrl } : {}),
         });
       } else {
-        store.insert({
+        const inserted = store.insert({
+          approval: approvalRecord(),
           platform: "x",
           post_type: "original",
           domain: post.domain,
@@ -917,6 +962,7 @@ function updateDb(
           posted_at: status === "posted" ? postedAt : null,
           metric_keys: post.domain === "ranking" ? post.contentKey : null,
         });
+        ARCHIVE_IDS.push(inserted.id);
       }
 
       // UPDATE 2: caption（caption が空/未設定の original 行。status 条件なし）
@@ -978,6 +1024,12 @@ async function ensureQueueMedia(post: PostConfig): Promise<void> {
 // ─── メイン ────────────────────────────────────────
 async function main() {
   const { posts, immediate, fromQueue } = parseArgs();
+  if (!fromQueue && !IS_DRY_RUN && !APPROVE) {
+    console.error(
+      "直接指定・引用RT の投稿は承認が必要です。オーナーの指示で実行する場合は --approve を付けてください (台帳に承認として記録します)。",
+    );
+    process.exit(1);
+  }
 
   console.log(`🚀 X ${immediate ? "即時" : fromQueue ? "キュー予約" : "予約"}投稿スクリプトを開始します`);
   console.log(`   対象: ${posts.length} 件\n`);
@@ -1025,6 +1077,8 @@ async function main() {
       if (success) updateDb(post, true);
       if (i < posts.length - 1) await page.waitForTimeout(2000);
     }
+
+    archiveAssets();
 
     console.log("\n━━━ 結果サマリー ━━━");
     for (const r of results) {

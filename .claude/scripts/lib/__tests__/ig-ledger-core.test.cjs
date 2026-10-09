@@ -124,3 +124,48 @@ test("post_type が無い・空の旧ログ行は従来どおり original で記
   ];
   assert.equal("post_type" in decideLedgerAction({ ...base, postType: "", existing }).patch, false);
 });
+
+// ---- Graph API の media 一覧と台帳行の結び付け (投稿 id から外部 ID・指標をたどるため) ----
+const { matchIgMediaToLedger } = require("../ig-ledger-core.cjs");
+
+const ig = (id, extra) => ({ id, platform: "instagram", status: "posted", ...extra });
+
+test("permalink の shortcode が一致する media の id を external_id にする (/p/ と /reel/ と ユーザー名入りを同一視)", () => {
+  const posts = [
+    ig(1, { post_url: "https://www.instagram.com/p/AAA111/" }),
+    ig(2, { post_url: "https://www.instagram.com/stats47jp/reel/BBB222/" }),
+  ];
+  const media = [
+    { id: "1801", permalink: "https://www.instagram.com/p/AAA111/" },
+    { id: "1802", permalink: "https://www.instagram.com/reel/BBB222/" },
+  ];
+  const r = matchIgMediaToLedger(posts, media);
+  assert.deepEqual(r.patches, [{ id: 1, patch: { external_id: "1801" } }, { id: 2, patch: { external_id: "1802" } }]);
+  assert.equal(r.mediaToId.get("1802"), 2);
+});
+
+test("post_url の無い posted 行は本文が双方で 1 件だけ一致するときに限り URL も入れる", () => {
+  const posts = [ig(5, { caption: "焼酎の支出\n#都道府県" }), ig(6, { caption: "同じ本文" }), ig(7, { caption: "同じ本文" })];
+  const media = [
+    { id: "1905", permalink: "https://www.instagram.com/p/C5/", caption: "焼酎の支出\r\n#都道府県 " },
+    { id: "1906", permalink: "https://www.instagram.com/p/C6/", caption: "同じ本文" },
+  ];
+  const r = matchIgMediaToLedger(posts, media);
+  assert.deepEqual(r.patches, [{ id: 5, patch: { external_id: "1905", post_url: "https://www.instagram.com/p/C5/" } }]);
+  assert.deepEqual(r.unmatchedRows, [6, 7], "同じ本文が台帳に 2 行あると取り違えるので推定しない");
+});
+
+test("既に別の external_id を持つ行は上書きせず conflicts に出す", () => {
+  const posts = [ig(9, { post_url: "https://www.instagram.com/p/ZZZ/", external_id: "1700" })];
+  const r = matchIgMediaToLedger(posts, [{ id: "1999", permalink: "https://www.instagram.com/p/ZZZ/" }]);
+  assert.deepEqual(r.patches, []);
+  assert.deepEqual(r.conflicts, [{ id: 9, external_id: "1700", media_id: "1999" }]);
+  assert.equal(r.mediaToId.has("1999"), false);
+});
+
+test("同じ external_id を既に持つ行は書き換えないが、指標の結び付けには使う", () => {
+  const posts = [ig(3, { post_url: "https://www.instagram.com/p/Q/", external_id: "1500" })];
+  const r = matchIgMediaToLedger(posts, [{ id: "1500", permalink: "https://www.instagram.com/p/Q/" }]);
+  assert.deepEqual(r.patches, []);
+  assert.equal(r.mediaToId.get("1500"), 3);
+});

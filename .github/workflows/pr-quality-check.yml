@@ -246,6 +246,14 @@ jobs:
           node .claude/scripts/admin-ui/check-admin-ui-debt.mjs
         continue-on-error: false
 
+      - name: 🧾 SNS Post Trace Contract
+        # 投稿台帳 data/sns/posts.json の 1 id から台本・状態・承認・外部 ID・素材・観測値をたどれること。
+        # カットオーバー以降の投稿は承認必須。契約: .claude/rules/sns-content-standards.md §3
+        run: |
+          npm run sns:trace:test
+          npm run sns:trace:check
+        continue-on-error: false
+
       - name: 🗒️ note Image Asset Contract Guard
         # docs/31 の派生 PNG を追跡しない・ランキング記事が chart-data.json だけでデータを復元できる・
         # 追跡 PNG の総量が予算 (縮小専用) を超えない。契約: .claude/rules/note-image-assets.md

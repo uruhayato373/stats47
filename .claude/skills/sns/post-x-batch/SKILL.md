@@ -130,6 +130,7 @@ node .claude/skills/sns/post-x-batch/scripts/register-drafts.cjs --in .local/r2/
 
 ```bash
 node .claude/scripts/sns/check-x-post-budget.cjs          # 週次の残枠を確認
+node .claude/scripts/sns/approve-posts.cjs --list --platform x   # 承認待ち一覧 → オーナーの指示で --ids を承認 (承認済みだけが予約される)
 npx tsx .claude/skills/sns/publish-x/publish-x.ts --from-queue --dry-run   # 初回必須 (予約モード確認)
 npx tsx .claude/skills/sns/publish-x/publish-x.ts --from-queue             # 予約投稿 → status=scheduled
 ```
