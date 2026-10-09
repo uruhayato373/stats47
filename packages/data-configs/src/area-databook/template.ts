@@ -171,16 +171,6 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
               selection: BATCH_SELECTION(VITAL_URL, "一人の女性が生涯に産む子どもの数の県差。出生率と別に少子化の水準を読む"),
             },
             {
-              rankingKey: "natural-increase-rate",
-              shortLabel: "自然増減率",
-              selection: BATCH_SELECTION(VITAL_URL, "出生と死亡の差し引きによる人口の増減の勢い。社会増減を除いた県の自然な人口動態を読む"),
-            },
-            {
-              rankingKey: "infant-mortality-rate-per-1000-births",
-              shortLabel: "乳児死亡率",
-              selection: BATCH_SELECTION(VITAL_URL, "出生千人当たりの率で県規模に左右されず、周産期・小児医療の県差を読む"),
-            },
-            {
               rankingKey: "suicide-rate-per-100k",
               shortLabel: "自殺者数(10万人比)",
             },
@@ -318,20 +308,13 @@ export const AREA_DATABOOK_TEMPLATE: AreaDatabookTemplate = {
               selection: BATCH_SELECTION(SSDS_URL, "1世帯当たりの収入水準。県民所得 (1人当たり) と別に家計の収入の県差を読む"),
             },
             {
-              rankingKey: "private-rental-housing-rent-per-3-3m2",
-              shortLabel: "民営家賃(3.3m²月額)",
-              selection: BATCH_SELECTION(SSDS_URL, "住まいの費用の県差。持ち家比率・延べ床面積と合わせて住居事情を読む"),
-            },
-            {
               rankingKey: "consumer-price-difference-index-overall",
               shortLabel: "物価地域差指数(総合)",
-              compareNationalAvg: true,
               selection: BATCH_SELECTION(SSDS_URL, "全国=100とした物価水準。暮らしの費用が全国より高いか低いかを読む"),
             },
             {
               rankingKey: "consumer-price-difference-index-housing",
               shortLabel: "物価地域差指数(住居)",
-              compareNationalAvg: true,
               selection: BATCH_SELECTION(SSDS_URL, "総合物価の差を最も大きく動かす住居費の水準を全国=100で読む"),
             },
           ],

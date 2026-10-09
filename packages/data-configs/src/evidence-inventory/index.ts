@@ -1,3 +1,5 @@
+export { REFERENCE_PLACEMENT_DECISIONS } from "./placement-decisions";
+export type { ReferencePlacementChannel, ReferencePlacementDecision } from "./placement-decisions";
 export {
   CLAUDE_SKILLS_GUIDE_ADOPTIONS,
   REFERENCE_SOURCE_POLICIES,

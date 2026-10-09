@@ -463,10 +463,6 @@ export const JAPAN_CATALOGS: Record<string, JapanCatalogTheme> = {
         metricKey: "day-time-population-ratio",
         shortLabel: "昼夜間人口比率",
       },
-      {
-        metricKey: "day-time-population",
-        shortLabel: "昼間人口",
-      },
     ],
   },
   railway: {
