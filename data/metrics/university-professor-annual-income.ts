@@ -27,7 +27,7 @@ export const universityProfessorAnnualIncome: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2010,
+    "from": 2020,
     "to": 2023,
   },
   "yearFormat": "calendar",

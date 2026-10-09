@@ -19,8 +19,13 @@ export const overseasTravelAnnualParticipationRate15plus: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2001,
-    "to": 2001,
+    "years": [
+      1981,
+      1986,
+      1991,
+      1996,
+      2001,
+    ],
   },
   "yearFormat": "calendar",
   "visualization": {

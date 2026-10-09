@@ -1,0 +1,27 @@
+{
+  "statsDataId": "0004021599",
+  "statName": "住宅・土地統計調査",
+  "title": "住宅の設備 住宅の種類(2区分)、住宅の所有の関係(2区分)、建て方(4区分)、高齢者等のための設備状況(14区分)別住宅数(高齢者対応型共同住宅数―特掲) －全国、都道府県、市区",
+  "updatedDate": "2025-03-27",
+  "queries": [
+    {
+      "query": {
+        "cdCat01": "0",
+        "cdCat02": "0",
+        "cdCat03": "0",
+        "axisRatio": {
+          "axis": "cat04",
+          "numeratorCodes": [
+            "1"
+          ],
+          "denominatorCodes": [
+            "0"
+          ]
+        }
+      },
+      "fetchedAt": "2026-10-07T01:57:18.259Z",
+      "years": { "2023": 47 },
+      "rawRows": 2078
+    }
+  ]
+}

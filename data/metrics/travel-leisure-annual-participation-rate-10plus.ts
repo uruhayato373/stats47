@@ -19,8 +19,14 @@ export const travelLeisureAnnualParticipationRate10plus: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2021,
-    "to": 2021,
+    "years": [
+      1996,
+      2001,
+      2006,
+      2011,
+      2016,
+      2021,
+    ],
   },
   "yearFormat": "calendar",
   "visualization": {

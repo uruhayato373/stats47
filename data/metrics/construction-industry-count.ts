@@ -17,7 +17,7 @@ export const constructionIndustryCount: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2023,
+    "from": 2000,
     "to": 2023,
   },
   "yearFormat": "fiscal",

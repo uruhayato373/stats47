@@ -19,8 +19,6 @@ export const mealAvgTimeMale: MetricConfig = {
   ],
   "years": {
     "years": [
-      1976,
-      1981,
       1986,
       1991,
       1996,

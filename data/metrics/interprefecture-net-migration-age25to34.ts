@@ -22,7 +22,7 @@ export const interprefectureNetMigrationAge25to34: MetricConfig = {
     "colorSchemeType": "sequential",
   },
   years: {
-    from: 2025,
+    from: 2020,
     to: 2025,
   },
   source: {

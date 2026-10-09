@@ -44,9 +44,18 @@ export const publicHallCountPerMillion: MetricConfig = {
       2011,
       2015,
       2018,
-      2021
-    ]
+      2021,
+    ],
   },
+  "yearExclusions": [
+    {
+      "years": [
+        1975,
+        1978,
+      ],
+      "reason": "2026-10 の移行時に当時の years から引き継いだ除外 (まだ判断していない。根拠が無ければ外して年を戻す)",
+    },
+  ],
   "yearFormat": "fiscal",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,

@@ -19,7 +19,7 @@ export const pensionBenefitTotal: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2022,
+    "from": 1997,
     "to": 2022,
   },
   "yearFormat": "fiscal",

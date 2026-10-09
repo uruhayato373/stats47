@@ -17,8 +17,11 @@ export const fulltimePhysiciansGeneralHospitalPer100beds: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2023,
-    "to": 2023,
+    "years": [
+      2017,
+      2020,
+      2023,
+    ],
   },
   "yearFormat": "fiscal",
   "visualization": {

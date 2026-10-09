@@ -18,7 +18,7 @@ export const elderlyGeneralWorkerOldPopulationRatio: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2024,
+    "from": 2020,
     "to": 2024,
   },
   "yearFormat": "fiscal",

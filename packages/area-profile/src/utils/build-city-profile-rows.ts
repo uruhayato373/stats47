@@ -15,6 +15,24 @@ export interface CityRankingData {
   areaName: string;
 }
 
+/**
+ * 市区町村プロフィールに使う年 = cities.json に値がある年のうち `years` に入る最新の年。無ければ null。
+ *
+ * metric config の最新年をそのまま使わない。`years` は県の値で決める (e-Stat の実在年の台帳から同期する) ので、
+ * 県だけ新しい年が出ている指標では市区町村の行が 0 件になり、指標ごとプロフィールから落ちる。
+ */
+export function pickCityLatestYear(
+  rows: ReadonlyArray<{ yearCode: string; value: number | null | undefined }>,
+  inYears: (yearCode: string) => boolean,
+): string | null {
+  let latest: string | null = null;
+  for (const row of rows) {
+    if (row.value == null || !inYears(row.yearCode)) continue;
+    if (latest === null || row.yearCode > latest) latest = row.yearCode;
+  }
+  return latest;
+}
+
 /** DB INSERT 用の行データ */
 export interface CityProfileRow {
   areaCode: string;

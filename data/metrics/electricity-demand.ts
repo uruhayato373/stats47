@@ -17,7 +17,7 @@ export const electricityDemand: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2023,
+    "from": 2016,
     "to": 2023,
   },
   "yearFormat": "fiscal",

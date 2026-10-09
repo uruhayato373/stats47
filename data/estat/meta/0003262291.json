@@ -1,0 +1,394 @@
+{
+ "statsDataId": "0003262291",
+ "title": "海面漁業に関する都道府県・大海区別統計 漁港　漁港種類別漁港数",
+ "statName": "漁業センサス",
+ "govOrg": "農林水産省",
+ "surveyDate": "200301-200312",
+ "overallTotalNumber": 388,
+ "dimensions": [
+  {
+   "id": "tab",
+   "name": "表章項目",
+   "valueCount": 1,
+   "sampleValues": [
+    {
+     "code": "590",
+     "name": "漁港数",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "cat01",
+   "name": "営んだ漁港種類",
+   "valueCount": 6,
+   "sampleValues": [
+    {
+     "code": "100",
+     "name": "計実数",
+     "unit": null
+    },
+    {
+     "code": "110",
+     "name": "漁港種類別漁港数_第１種",
+     "unit": null
+    },
+    {
+     "code": "120",
+     "name": "漁港種類別漁港数_第2種",
+     "unit": null
+    },
+    {
+     "code": "130",
+     "name": "漁港種類別漁港数_第3種",
+     "unit": null
+    },
+    {
+     "code": "140",
+     "name": "漁港種類別漁港数_第4種",
+     "unit": null
+    },
+    {
+     "code": "150",
+     "name": "漁港種類別漁港数_港湾",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  },
+  {
+   "id": "area",
+   "name": "地域事項(全国・都道府県・大海区)",
+   "valueCount": 65,
+   "sampleValues": [
+    {
+     "code": "00000",
+     "name": "全国",
+     "unit": null
+    },
+    {
+     "code": "01000",
+     "name": "北海道",
+     "unit": null
+    },
+    {
+     "code": "02000",
+     "name": "青森県",
+     "unit": null
+    },
+    {
+     "code": "03000",
+     "name": "岩手県",
+     "unit": null
+    },
+    {
+     "code": "04000",
+     "name": "宮城県",
+     "unit": null
+    },
+    {
+     "code": "05000",
+     "name": "秋田県",
+     "unit": null
+    },
+    {
+     "code": "06000",
+     "name": "山形県",
+     "unit": null
+    },
+    {
+     "code": "07000",
+     "name": "福島県",
+     "unit": null
+    },
+    {
+     "code": "08000",
+     "name": "茨城県",
+     "unit": null
+    },
+    {
+     "code": "12000",
+     "name": "千葉県",
+     "unit": null
+    },
+    {
+     "code": "13000",
+     "name": "東京都",
+     "unit": null
+    },
+    {
+     "code": "14000",
+     "name": "神奈川県",
+     "unit": null
+    },
+    {
+     "code": "15000",
+     "name": "新潟県",
+     "unit": null
+    },
+    {
+     "code": "16000",
+     "name": "富山県",
+     "unit": null
+    },
+    {
+     "code": "17000",
+     "name": "石川県",
+     "unit": null
+    },
+    {
+     "code": "18000",
+     "name": "福井県",
+     "unit": null
+    },
+    {
+     "code": "22000",
+     "name": "静岡県",
+     "unit": null
+    },
+    {
+     "code": "23000",
+     "name": "愛知県",
+     "unit": null
+    },
+    {
+     "code": "24000",
+     "name": "三重県",
+     "unit": null
+    },
+    {
+     "code": "26000",
+     "name": "京都府",
+     "unit": null
+    },
+    {
+     "code": "27000",
+     "name": "大阪府",
+     "unit": null
+    },
+    {
+     "code": "28000",
+     "name": "兵庫県",
+     "unit": null
+    },
+    {
+     "code": "30000",
+     "name": "和歌山県",
+     "unit": null
+    },
+    {
+     "code": "31000",
+     "name": "鳥取県",
+     "unit": null
+    },
+    {
+     "code": "32000",
+     "name": "島根県",
+     "unit": null
+    },
+    {
+     "code": "33000",
+     "name": "岡山県",
+     "unit": null
+    },
+    {
+     "code": "34000",
+     "name": "広島県",
+     "unit": null
+    },
+    {
+     "code": "35000",
+     "name": "山口県",
+     "unit": null
+    },
+    {
+     "code": "36000",
+     "name": "徳島県",
+     "unit": null
+    },
+    {
+     "code": "37000",
+     "name": "香川県",
+     "unit": null
+    },
+    {
+     "code": "38000",
+     "name": "愛媛県",
+     "unit": null
+    },
+    {
+     "code": "39000",
+     "name": "高知県",
+     "unit": null
+    },
+    {
+     "code": "40000",
+     "name": "福岡県",
+     "unit": null
+    },
+    {
+     "code": "41000",
+     "name": "佐賀県",
+     "unit": null
+    },
+    {
+     "code": "42000",
+     "name": "長崎県",
+     "unit": null
+    },
+    {
+     "code": "43000",
+     "name": "熊本県",
+     "unit": null
+    },
+    {
+     "code": "44000",
+     "name": "大分県",
+     "unit": null
+    },
+    {
+     "code": "45000",
+     "name": "宮崎県",
+     "unit": null
+    },
+    {
+     "code": "46000",
+     "name": "鹿児島県",
+     "unit": null
+    },
+    {
+     "code": "47000",
+     "name": "沖縄県",
+     "unit": null
+    },
+    {
+     "code": "48000",
+     "name": "北海道太平洋北区",
+     "unit": null
+    },
+    {
+     "code": "49000",
+     "name": "太平洋北区",
+     "unit": null
+    },
+    {
+     "code": "51000",
+     "name": "太平洋中区",
+     "unit": null
+    },
+    {
+     "code": "52000",
+     "name": "太平洋南区",
+     "unit": null
+    },
+    {
+     "code": "53000",
+     "name": "北海道日本海北区",
+     "unit": null
+    },
+    {
+     "code": "54000",
+     "name": "日本海北区",
+     "unit": null
+    },
+    {
+     "code": "55000",
+     "name": "日本海西区",
+     "unit": null
+    },
+    {
+     "code": "56000",
+     "name": "東シナ海区",
+     "unit": null
+    },
+    {
+     "code": "57000",
+     "name": "瀬戸内海区",
+     "unit": null
+    },
+    {
+     "code": "59000",
+     "name": "青森県(太平洋北区)",
+     "unit": null
+    },
+    {
+     "code": "60000",
+     "name": "青森県(日本海北区)",
+     "unit": null
+    },
+    {
+     "code": "61000",
+     "name": "兵庫県(日本海西区)",
+     "unit": null
+    },
+    {
+     "code": "62000",
+     "name": "兵庫県(瀬戸内海区)",
+     "unit": null
+    },
+    {
+     "code": "63000",
+     "name": "和歌山県(太平洋南区)",
+     "unit": null
+    },
+    {
+     "code": "64000",
+     "name": "和歌山県(瀬戸内海区)",
+     "unit": null
+    },
+    {
+     "code": "65000",
+     "name": "山口県(東ｼﾅ海区)",
+     "unit": null
+    },
+    {
+     "code": "66000",
+     "name": "山口県(瀬戸内海区)",
+     "unit": null
+    },
+    {
+     "code": "67000",
+     "name": "徳島県(太平洋南区)",
+     "unit": null
+    },
+    {
+     "code": "68000",
+     "name": "徳島県(瀬戸内海区)",
+     "unit": null
+    },
+    {
+     "code": "69000",
+     "name": "愛媛県(太平洋南区)",
+     "unit": null
+    },
+    {
+     "code": "70000",
+     "name": "愛媛県(瀬戸内海区)",
+     "unit": null
+    },
+    {
+     "code": "71000",
+     "name": "福岡県(東ｼﾅ海区)",
+     "unit": null
+    },
+    {
+     "code": "72000",
+     "name": "福岡県(瀬戸内海区)",
+     "unit": null
+    },
+    {
+     "code": "73000",
+     "name": "大分県(太平洋南区)",
+     "unit": null
+    },
+    {
+     "code": "74000",
+     "name": "大分県(瀬戸内海区)",
+     "unit": null
+    }
+   ],
+   "hasTotal": false
+  }
+ ]
+}

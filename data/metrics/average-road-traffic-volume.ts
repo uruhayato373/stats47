@@ -17,8 +17,12 @@ export const averageRoadTrafficVolume: MetricConfig = {
     "prefecture"
   ],
   "years": {
-    "from": 2020,
-    "to": 2020
+    "years": [
+      2005,
+      2010,
+      2015,
+      2020,
+    ],
   },
   "yearFormat": "fiscal",
   "visualization": {

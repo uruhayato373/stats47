@@ -17,8 +17,12 @@ export const mobilePhoneOwnershipMultiPersonHouseholdsPer1000: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2014,
-    "to": 2014,
+    "years": [
+      1999,
+      2004,
+      2009,
+      2014,
+    ],
   },
   "yearFormat": "fiscal",
   "visualization": {

@@ -17,11 +17,8 @@ export const physicalDisabilityRehabilitationFacilityStaffPer100k: MetricConfig 
     "prefecture",
   ],
   "years": {
-    "years": [
-      2002,
-      2003,
-      2011,
-    ],
+    "from": 2002,
+    "to": 2011,
   },
   "yearFormat": "fiscal",
   "visualization": {

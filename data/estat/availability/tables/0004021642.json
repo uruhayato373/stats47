@@ -1,0 +1,29 @@
+{
+  "statsDataId": "0004021642",
+  "statName": "住宅・土地統計調査",
+  "title": "住宅の設備 住宅の種類(2区分)、住宅の所有の関係(5区分)、建て方(4区分)、構造(3区分)、省エネルギー設備等(7区分)別住宅数－全国、都道府県、21大都市",
+  "updatedDate": "2025-03-27",
+  "queries": [
+    {
+      "query": {
+        "cdCat01": "0",
+        "cdCat02": "0",
+        "cdCat03": "0",
+        "cdCat04": "0",
+        "axisRatio": {
+          "axis": "cat05",
+          "numeratorCodes": [
+            "21"
+          ],
+          "denominatorCodes": [
+            "21",
+            "22"
+          ]
+        }
+      },
+      "fetchedAt": "2026-10-07T01:57:23.102Z",
+      "years": { "2023": 47 },
+      "rawRows": 207
+    }
+  ]
+}

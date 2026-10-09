@@ -18,8 +18,17 @@ export const householdRatioMainEarnerEmployeeCommute90min: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2018,
-    "to": 2018,
+    "years": [
+      1978,
+      1983,
+      1988,
+      1993,
+      1998,
+      2003,
+      2008,
+      2013,
+      2018,
+    ],
   },
   "yearFormat": "calendar",
   "visualization": {

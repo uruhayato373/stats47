@@ -152,6 +152,33 @@ ThemeCatalog の `annotation` は系列断絶・母集団差など、その char
   (`cdArea` なしで全都道府県を取り、年ごとの都道府県数 `prefectureCountsByYear` と `scope: "all-prefectures"` を残す)。
   記録は年を広げても消えず、週次の巡回が今の config と照らして判定 (`extend-candidate` / `config-covers` 等) を付け直す。
 
+## `years` は台帳から合わせる (2026-10〜)
+
+D1 時代に欠けた年が移行で `years` に固定され、取り込みが設定にない年を捨て続けていた
+(有効な e-Stat 指標 2,221 件中 438 件に穴、26 件で新しい年を捨てていた。`.claude/todo/backlog.md`
+ESTAT-YEAR-AVAILABILITY-01)。原因は `years` 1 つに「e-Stat にある年 (事実)」と「見せないと決めた年 (判断)」が
+混ざっていたことなので、事実は台帳、判断は `yearExclusions` に分けた。
+
+- **台帳**: `npm run build:estat-availability --workspace=@stats47/data-configs` が e-Stat の表・取り出し条件ごとに
+  「年ごとの値のある県の数」を `data/estat/availability/tables/<statsDataId>.json` に残す。取得と県の判定は
+  取り込み (`page-data-batch.ts`) と同じ経路。差分は `data/estat/availability/LATEST.md`。
+- **同期**: `npm run sync:estat-years --workspace=@stats47/data-configs` が規則 `resolveLedgerYears`
+  (`src/estat-availability.ts`) で `years` を合わせる。全県の値がある年は `yearExclusions` に無ければ足す。
+  一部の県だけの年は足しも外しもしない (人が決める)。1 県も値が無い年は `--remove-missing` のときだけ外す。
+- **外したい年は `years` から消さず `yearExclusions` に理由付きで書く** (消しても次の同期で戻る)。
+  理由は読み手が年を戻すかを判断できる文にする (例: 「2015 年基準への切り替え前の旧系列。別 key で配信」)。
+- **未判断の除外**: reason が `YEAR_EXCLUSION_INHERITED` の除外 (422 件) は移行時に当時の `years` から
+  引き継いだだけ。根拠があれば reason を書き換え、無ければ除外を消して同期で年を戻す。一覧は LATEST.md。
+- **検査**: PR CI (`Metric Years Gate`) が `sync:estat-years -- --check` で、台帳にある全県の年の入れ忘れと、
+  除外した年の残りを止める。週次 `estat-year-coverage-audit-weekly.yml` が台帳を取り直して新しい年を足し、
+  R2 の値は毎月の `data-refresh.yml` で増える。
+- 台帳が無い・取得に失敗した・行が切れた・重複行がある条件の metric と `years: "all"` は同期の対象外。
+- **市区町村の値も台帳に載る** (行に `level: "city"`、現行の市区町村マスタにあるコードだけを数える)。
+  ただし years は県の値で決め、市区町村は LATEST.md の「市区町村」節で報告だけする (合併でコードが変わり、
+  古い年ほど数が減るので「全市区町村の年」が定まらない)。
+- 台帳を取り直すと、控えの無い表と更新日が変わった表のメタ情報 (`data/estat/meta/<statsDataId>.json`、
+  分類コードの全項目) も `fetch-estat-meta.mjs --full` で取り直す。
+
 ## 量産時の必須手順 (agent / skill)
 
 新規 metric を作成・編集したら **必ず実行**:
@@ -159,6 +186,9 @@ ThemeCatalog の `annotation` は系列断絶・母集団差など、その char
 ```bash
 npm run validate:years  --workspace=@stats47/data-configs   # 年の 4 桁正規化
 npm run validate:config --workspace=@stats47/data-configs   # 構造規約 (category 等)
+# e-Stat の metric は、表を台帳に載せて years を実在年に合わせる (やらなければ週次の同期が足す)
+npm run build:estat-availability --workspace=@stats47/data-configs -- --table <statsDataId>
+npm run sync:estat-years --workspace=@stats47/data-configs
 ```
 
 警告 (warn) を新たに増やさない。注釈は `note` に、年は `years` に、区別は `subtitle` に置く。

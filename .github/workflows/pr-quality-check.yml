@@ -722,6 +722,11 @@ jobs:
           # 「2009100000 問題」(年フィルタ 0件・年セレクタ崩れ) の再発防止。
           # 規約: .claude/rules/estat-api.md「年の正規化」
           npm run validate:years --workspace=@stats47/data-configs
+          # e-Stat の実在年の台帳 (data/estat/availability/) に全県の値がある年が、years にも
+          # yearExclusions にも無い metric と、除外した年が years に残っている metric を止める。
+          # 年を手で消すと次の同期で戻るので、外す年は yearExclusions に理由付きで書く。
+          # 規約: .claude/rules/metric-config-standards.md「years は台帳から合わせる」
+          npm run sync:estat-years --workspace=@stats47/data-configs -- --check
         continue-on-error: false
 
       - name: 🧱 Metric Config Gate

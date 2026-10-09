@@ -17,7 +17,7 @@ export const cityGasSalesVolume: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2016,
+    "from": 1999,
     "to": 2016,
   },
   "yearFormat": "fiscal",

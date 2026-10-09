@@ -19,7 +19,6 @@ export const generalDustEmissionFacilityCount: MetricConfig = {
   "years": {
     "years": [
       1985,
-      1986,
       1987,
       1988,
       1989,
@@ -51,6 +50,11 @@ export const generalDustEmissionFacilityCount: MetricConfig = {
       2015,
       2016,
       2017,
+      2018,
+      2019,
+      2020,
+      2021,
+      2022,
       2023,
     ],
   },

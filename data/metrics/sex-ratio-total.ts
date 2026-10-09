@@ -18,7 +18,7 @@ export const sexRatioTotal: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2024,
+    "from": 2021,
     "to": 2024,
   },
   "yearFormat": "calendar",

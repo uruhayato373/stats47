@@ -21,8 +21,16 @@ export const floorAreaPerDwellingOwner: MetricConfig = {
   "years": {
     "years": [
       1978,
-      2023
-    ]
+      1983,
+      1988,
+      1993,
+      1998,
+      2003,
+      2008,
+      2013,
+      2018,
+      2023,
+    ],
   },
   "yearFormat": "calendar",
   "visualization": {

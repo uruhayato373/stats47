@@ -19,8 +19,16 @@ export const departmentStoreCountPer100k: MetricConfig = {
     "city",
   ],
   "years": {
-    "from": 2006,
-    "to": 2006,
+    "years": [
+      1975,
+      1978,
+      1981,
+      1986,
+      1991,
+      1996,
+      2001,
+      2006,
+    ],
   },
   "yearFormat": "fiscal",
   "visualization": {

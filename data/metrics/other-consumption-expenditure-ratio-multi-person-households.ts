@@ -17,21 +17,19 @@ export const otherConsumptionExpenditureRatioMultiPersonHouseholds: MetricConfig
     "prefecture",
   ],
   "years": {
-    "years": [
-      2003,
-      2004,
-      2005,
-      2006,
-      2007,
-      2008,
-      2009,
-      2010,
-      2011,
-      2012,
-      2013,
-      2024,
-    ],
+    "from": 2003,
+    "to": 2024,
   },
+  "yearExclusions": [
+    {
+      "years": [
+        2000,
+        2001,
+        2002,
+      ],
+      "reason": "2026-10 の移行時に当時の years から引き継いだ除外 (まだ判断していない。根拠が無ければ外して年を戻す)",
+    },
+  ],
   "yearFormat": "fiscal",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,

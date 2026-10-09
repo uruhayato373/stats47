@@ -17,18 +17,8 @@ export const nightSoilTreatmentPopulationRatio: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "years": [
-      2012,
-      2013,
-      2014,
-      2015,
-      2016,
-      2017,
-      2018,
-      2019,
-      2020,
-      2023,
-    ],
+    "from": 2012,
+    "to": 2023,
   },
   "yearFormat": "fiscal",
   "visualization": {

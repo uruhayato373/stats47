@@ -1,0 +1,16 @@
+{
+  "statsDataId": "0004026870",
+  "statName": "衛生行政報告例",
+  "title": "薬事 薬局数，都道府県別",
+  "updatedDate": "2026-09-28",
+  "queries": [
+    {
+      "query": {
+        "cdCat01": "100"
+      },
+      "fetchedAt": "2026-10-07T01:57:46.471Z",
+      "years": { "2020": 47 },
+      "rawRows": 48
+    }
+  ]
+}

@@ -20,8 +20,8 @@ export const realPublicDebtServiceRatio: MetricConfig = {
     "prefecture"
   ],
   "years": {
-    "from": 2022,
-    "to": 2022
+    "from": 2008,
+    "to": 2022,
   },
   "yearFormat": "fiscal",
   "visualization": {

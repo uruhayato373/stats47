@@ -1,0 +1,36 @@
+{
+  "statsDataId": "0004026104",
+  "statName": "患者調査",
+  "title": "第３６表　受療率（人口10万対），入院－外来・施設の種類 × 性・年齢階級（10歳） × 都道府県別",
+  "updatedDate": "2025-03-21",
+  "queries": [
+    {
+      "query": {
+        "cdCat01": "1",
+        "cdCat02": "1",
+        "cdCat04": "1",
+        "areaAxis": {
+          "axis": "cat03",
+          "scheme": "seq-pref"
+        }
+      },
+      "fetchedAt": "2026-10-07T01:57:32.702Z",
+      "years": { "2023": 47 },
+      "rawRows": 48
+    },
+    {
+      "query": {
+        "cdCat01": "1",
+        "cdCat02": "1",
+        "cdCat04": "4",
+        "areaAxis": {
+          "axis": "cat03",
+          "scheme": "seq-pref"
+        }
+      },
+      "fetchedAt": "2026-10-07T01:57:32.703Z",
+      "years": { "2023": 47 },
+      "rawRows": 48
+    }
+  ]
+}

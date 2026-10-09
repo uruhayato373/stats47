@@ -260,6 +260,7 @@ export const DATASETS = [
   d("estat.meta", "data/estat/meta/{**}", "evidence", "data", "data", "e-Stat 統計表のメタ情報の控え"),
   d("estat.kakei-classification", "data/estat/kakei-classification/{**}", "evidence", "data", "data", "総務省 家計調査の収支項目分類と内容例示 (品目に何が含まれ何が含まれないか) の控え"),
   d("estat.year-coverage", "data/estat/year-coverage/{**}", "state", "data", "data", "指標ごとの e-Stat 実在年の確認記録 (正本) と、単年設定の年カバレッジ監査キュー"),
+  d("estat.availability", "data/estat/availability/{**}", "state", "data", "data", "e-Stat の表・取り出し条件ごとの実在年 (年ごとの値のある県の数) と、metric config の years との差分"),
   d("geo.sources", "data/geo/{name}", "state", "data", "data", "Geo 分析の出典ページとサムネイルの監査・公開"),
   d("geo.scope", "data/geo/scope/{name}", "evidence", "data", "data", "Geo の対象範囲の棚卸しと拡充の検証"),
   d("business.goals", "data/goals/{**}", "state", "strategy", "data", "/goal の目標とサイクル"),

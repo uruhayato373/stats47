@@ -19,6 +19,7 @@ export const nursesGeneralHospitalPer100beds: MetricConfig = {
   "years": {
     "years": [
       2017,
+      2020,
       2023,
     ],
   },

@@ -18,7 +18,7 @@ export const prefecturalIncomeGrowthRateH23: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2018,
+    "from": 2007,
     "to": 2018,
   },
   "yearFormat": "fiscal",

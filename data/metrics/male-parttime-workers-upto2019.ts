@@ -18,7 +18,7 @@ export const maleParttimeWorkersUpto2019: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2019,
+    "from": 2010,
     "to": 2019,
   },
   "yearFormat": "fiscal",

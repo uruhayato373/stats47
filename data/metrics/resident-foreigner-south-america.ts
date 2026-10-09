@@ -18,7 +18,7 @@ export const residentForeignerSouthAmerica: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2024,
+    "from": 2012,
     "to": 2024,
   },
   "yearFormat": "fiscal",

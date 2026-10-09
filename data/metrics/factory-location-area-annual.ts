@@ -16,8 +16,18 @@ export const factoryLocationAreaAnnual: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "from": 2020,
-    "to": 2020,
+    "years": [
+      1995,
+      1997,
+      1998,
+      2000,
+      2003,
+      2004,
+      2005,
+      2015,
+      2017,
+      2020,
+    ],
   },
   "yearFormat": "fiscal",
   "visualization": {

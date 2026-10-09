@@ -25,6 +25,17 @@ export const portCargoTotal: MetricConfig = {
     "from": 2009,
     "to": 2023,
   },
+  "yearExclusions": [
+    {
+      "years": [
+        2005,
+        2006,
+        2007,
+        2008,
+      ],
+      "reason": "2026-10 の移行時に当時の years から引き継いだ除外 (まだ判断していない。根拠が無ければ外して年を戻す)",
+    },
+  ],
   "yearFormat": "fiscal",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,

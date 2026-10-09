@@ -17,13 +17,8 @@ export const disabledEmploymentRate: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "years": [
-      2019,
-      2020,
-      2021,
-      2022,
-      2024,
-    ],
+    "from": 2019,
+    "to": 2024,
   },
   "yearFormat": "fiscal",
   "visualization": {

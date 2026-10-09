@@ -19,7 +19,6 @@ export const elderlyClassLectureCountPerMillion: MetricConfig = {
   "years": {
     "years": [
       1975,
-      1976,
       1977,
       1978,
       1979,
@@ -35,6 +34,15 @@ export const elderlyClassLectureCountPerMillion: MetricConfig = {
       1989,
       1990,
       1991,
+      1992,
+      1995,
+      1998,
+      2001,
+      2004,
+      2007,
+      2010,
+      2014,
+      2017,
       2020,
     ],
   },

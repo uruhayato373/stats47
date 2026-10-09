@@ -45,6 +45,8 @@ export const publicJuniorHighSchoolGymInstallationRate: MetricConfig = {
       1999,
       2000,
       2001,
+      2002,
+      2003,
       2006,
     ],
   },

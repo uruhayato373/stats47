@@ -18,21 +18,21 @@ export const investmentContributionsPrefecture: MetricConfig = {
     "prefecture",
   ],
   "years": {
-    "years": [
-      2002,
-      2003,
-      2004,
-      2005,
-      2006,
-      2007,
-      2008,
-      2009,
-      2010,
-      2011,
-      2012,
-      2022,
-    ],
+    "from": 2002,
+    "to": 2022,
   },
+  "yearExclusions": [
+    {
+      "years": [
+        1997,
+        1998,
+        1999,
+        2000,
+        2001,
+      ],
+      "reason": "2026-10 の移行時に当時の years から引き継いだ除外 (まだ判断していない。根拠が無ければ外して年を戻す)",
+    },
+  ],
   "yearFormat": "fiscal",
   "visualization": {
     ...DEFAULT_METRIC_PRESENTATION,

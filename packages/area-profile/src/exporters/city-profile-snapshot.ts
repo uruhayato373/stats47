@@ -1,12 +1,12 @@
 import "server-only";
 
-import { getMetricConfig, getMetricMeta, listMetricKeysByEntity } from "@stats47/data-configs";
+import { getMetricConfig, getMetricMeta, listMetricKeysByEntity, yearInSpec } from "@stats47/data-configs";
 import { logger } from "@stats47/logger/server";
 import { saveToR2 } from "@stats47/r2-storage/server";
 import { readStatsValues } from "@stats47/stats-r2/readers";
 import type { SingleEntityRow } from "@stats47/stats-r2/types";
 
-import { buildCityProfileRows, type CityRankingData } from "../utils/build-city-profile-rows";
+import { buildCityProfileRows, pickCityLatestYear, type CityRankingData } from "../utils/build-city-profile-rows";
 import type { AreaProfileData, StrengthWeaknessItem } from "../types";
 import { cityProfileKeyPath } from "../types/city-profile";
 
@@ -52,14 +52,12 @@ export async function exportCityProfileSnapshot(): Promise<ExportCityProfileSnap
     const rows = payload?.rows;
     if (!rows || rows.length === 0) continue;
 
-    // 最新年を決定 (git TS の latestYear を優先、無ければ cities.json の最大 yearCode)
-    const meta = getMetricMeta(key);
-    let latestYearCode = meta?.latestYear?.yearCode;
-    let yearName = meta?.latestYear?.yearName;
-    if (!latestYearCode) {
-      latestYearCode = rows.reduce((m, r) => (r.yearCode > m ? r.yearCode : m), "");
-      yearName = `${latestYearCode}年度`;
-    }
+    // 最新年は cities.json に値がある年のうち years に入る最新の年 (config の最新年は県の値で決まるので使わない)
+    const spec = getMetricConfig(key)?.years ?? "all";
+    const latestYearCode = pickCityLatestYear(rows, (yearCode) => yearInSpec(yearCode, spec));
+    if (!latestYearCode) continue;
+    const yearName =
+      getMetricMeta(key)?.availableYears.find((y) => y.yearCode === latestYearCode)?.yearName ?? `${latestYearCode}年度`;
 
     // 県内順位の再構築に必要な行のみ: 最新年・値あり・全国 rank あり・prefectureCode あり
     const yearRows = rows.filter(

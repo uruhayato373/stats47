@@ -1,0 +1,16 @@
+{
+  "statsDataId": "0004026840",
+  "statName": "衛生行政報告例",
+  "title": "調理師 就業調理師数，就業場所・都道府県別",
+  "updatedDate": "2025-03-27",
+  "queries": [
+    {
+      "query": {
+        "cdCat01": "100"
+      },
+      "fetchedAt": "2026-10-07T01:57:43.386Z",
+      "years": { "2020": 41 },
+      "rawRows": 49
+    }
+  ]
+}

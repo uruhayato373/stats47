@@ -13,7 +13,10 @@
  *   node .claude/scripts/estat/fetch-estat-meta.mjs --ids 0003355476,0003355295
  *
  * 出力: data/estat/meta/<statsDataId>.json (次元構造の要約)
- *       data/estat/meta-summary.json        (全テーブルの次元サマリ)
+ *       data/estat/meta-summary.json        (今回取ったテーブルの次元サマリ。--no-summary で書かない)
+ *
+ * e-Stat の実在年の台帳 (packages/data-configs/scripts/build-estat-availability.ts) が、控えの無い表と
+ * 更新日が変わった表について `--full --no-summary` で呼ぶ。
  */
 
 import { config } from "dotenv";
@@ -41,6 +44,8 @@ function argVal(flag) {
 }
 /** --full: 各次元の全項目を sampleValues に格納 (cdCat コード確定用。既定は先頭12件) */
 const FULL = args.includes("--full");
+/** --no-summary: meta-summary.json を書かない (今回取った表だけの要約で既存の要約を上書きしないため) */
+const NO_SUMMARY = args.includes("--no-summary");
 
 let statsDataIds = [];
 const listPath = argVal("--list");
@@ -144,6 +149,8 @@ async function main() {
     }
     await new Promise((r) => setTimeout(r, DELAY_MS));
   }
+  console.log(`\n  → ${datasetDir("estat.meta")}/*.json (${statsDataIds.length} 件)`);
+  if (NO_SUMMARY) return;
   // 一部の表だけ取り直しても、ほかの表のサマリを消さない (表 ID ごとに差し替える)
   const summaryPath = path.join(PROJECT_ROOT, `${datasetDir("estat.candidates")}/meta-summary.json`);
   const fetched = new Set(summaries.map((s) => s.statsDataId));
@@ -151,7 +158,6 @@ async function main() {
     ? JSON.parse(fs.readFileSync(summaryPath, "utf8")).filter((s) => !fetched.has(s.statsDataId))
     : [];
   fs.writeFileSync(summaryPath, JSON.stringify([...kept, ...summaries], null, 2));
-  console.log(`\n  → ${datasetDir("estat.meta")}/*.json (${statsDataIds.length} 件)`);
   console.log(`  → ${datasetDir("estat.candidates")}/meta-summary.json`);
 }
 
