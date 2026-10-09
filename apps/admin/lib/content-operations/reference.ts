@@ -104,6 +104,13 @@ export interface ReferenceContentInput {
   areas: ReferenceAreaSource[];
   /** 47 県共通の県データブック・テンプレートに載っている指標 (県ページへの統合の実在証跡) */
   areaDatabookMetricKeys?: string[];
+  /** 展開先に「載せない」と決めた記録 (packages/data-configs/src/evidence-inventory/placement-decisions.ts) */
+  placementDecisions?: Array<{
+    channel: 'area' | 'japan';
+    metricKey: string;
+    status: 'rejected' | 'blocked';
+    reason: string;
+  }>;
   surveys?: Array<{ id: string }>;
   themes?: ReferenceThemeSource[];
   japanThemes?: ReferenceThemeSource[];
@@ -174,6 +181,16 @@ function coverage(
   detail: string
 ): ReferenceChannelCoverageDTO {
   return { channel, stage, itemIds: unique(itemIds), detail };
+}
+
+/** 展開先に載せないと決めた記録を段階に変換する。rejected は対象外、blocked は停止中として数える */
+function decidedCoverage(
+  channel: 'area' | 'japan',
+  decision: { status: 'rejected' | 'blocked'; reason: string }
+): ReferenceChannelCoverageDTO {
+  return decision.status === 'rejected'
+    ? coverage(channel, 'not-applicable', [], `採用を見送った: ${decision.reason}`)
+    : coverage(channel, 'blocked', [], `停止中: ${decision.reason}`);
 }
 
 function sourceSummary(inventory: SourceEvidenceInventory) {
@@ -371,6 +388,10 @@ export function buildReferenceContentPortfolio(
   }
 
   const areaDatabookKeys = new Set(input.areaDatabookMetricKeys ?? []);
+  const placementDecisionOf = (channel: 'area' | 'japan', key: string) =>
+    (input.placementDecisions ?? []).find(
+      (decision) => decision.channel === channel && decision.metricKey === key
+    );
   const metricByKey = new Map(
     input.metrics.map((metric) => [metric.key, metric])
   );
@@ -546,6 +567,8 @@ export function buildReferenceContentPortfolio(
       // (台帳の area 役割はエントリ単位で、採用・不採用の指標が同じエントリに混ざるため)
       siteReady && areaDatabookKeys.has(key)
         ? coverage('area', 'integrated', [key], '県データブックの共通テンプレートへ採用済み')
+        : roles.includes('area') && placementDecisionOf('area', key)
+          ? decidedCoverage('area', placementDecisionOf('area', key)!)
         : roles.includes('area')
           ? coverage(
               'area',
@@ -556,7 +579,9 @@ export function buildReferenceContentPortfolio(
                 : '公開中の指標が無いため停止'
             )
           : coverage('area', 'not-applicable', [], '地域別解説対象外'),
-      roles.includes('japan')
+      roles.includes('japan') && japanHits.length === 0 && placementDecisionOf('japan', key)
+        ? decidedCoverage('japan', placementDecisionOf('japan', key)!)
+        : roles.includes('japan')
         ? coverage(
             'japan',
             japanHits.length > 0

@@ -9,6 +9,7 @@ import {
 import { JAPAN_ZUE_MANUAL_OVERRIDES } from '../../../../packages/data-configs/src/evidence-inventory/japan-zue/policy';
 import { REFERENCE_SOURCE_POLICIES } from '../../../../packages/data-configs/src/evidence-inventory/reference-sources';
 import { AREA_DATABOOK_TEMPLATE } from '../../../../packages/data-configs/src/area-databook/template';
+import { REFERENCE_PLACEMENT_DECISIONS } from '../../../../packages/data-configs/src/evidence-inventory/placement-decisions';
 import { KINDLE_BOOKS } from '../../../../packages/product-factory/src/channels/kindle/book-catalog';
 import {
   KINDLE_COVER_BACKGROUND_BY_ID,
@@ -436,6 +437,7 @@ export function loadContentOperations(
       ),
     ].filter((file) => fs.existsSync(path.join(root, file))),
     areaDatabookMetricKeys: areaDatabookMetricKeys(),
+    placementDecisions: REFERENCE_PLACEMENT_DECISIONS.map((decision) => ({ ...decision })),
     areas: prefectures.map((prefecture) => {
       const editorialPath = `packages/data-configs/src/area-databook/editorial/${prefecture.prefCode}.ts`;
       return {
