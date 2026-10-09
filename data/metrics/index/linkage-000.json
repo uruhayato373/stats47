@@ -44,22 +44,6 @@
         {
           "pageId": "ranking:abandoned-cultivated-land-area",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:66",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:67",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:68",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:69",
-          "kind": "sns"
         }
       ],
       "themes": []
@@ -317,10 +301,6 @@
         {
           "pageId": "blog:spinach-consumption-ranking",
           "kind": "blog"
-        },
-        {
-          "pageId": "note:b-kakei-academic-food",
-          "kind": "note"
         },
         {
           "pageId": "ranking:academic-achievement-test-average-rate",
@@ -1743,22 +1723,6 @@
           "kind": "ranking"
         },
         {
-          "pageId": "sns:71",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:72",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:73",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:74",
-          "kind": "sns"
-        },
-        {
           "pageId": "theme:labor-mobility",
           "kind": "theme"
         },
@@ -2000,22 +1964,6 @@
         {
           "pageId": "ranking:actual-income-worker-households-per-month",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:462",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:76",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:77",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:78",
-          "kind": "sns"
         },
         {
           "pageId": "theme:real-income",
@@ -3160,16 +3108,8 @@
           "kind": "blog"
         },
         {
-          "pageId": "note:a-agricultural-employment-population",
-          "kind": "note"
-        },
-        {
           "pageId": "ranking:agricultural-employment-population",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:912",
-          "kind": "sns"
         },
         {
           "pageId": "theme:local-economy",
@@ -3437,10 +3377,6 @@
         {
           "pageId": "ranking:agricultural-income-ratio",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:908",
-          "kind": "sns"
         }
       ],
       "themes": []
@@ -3476,10 +3412,6 @@
         {
           "pageId": "ranking:agricultural-land-conversion-area",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:790",
-          "kind": "sns"
         }
       ],
       "themes": []
@@ -4109,10 +4041,6 @@
           "kind": "municipality-theme"
         },
         {
-          "pageId": "note:a-agricultural-output",
-          "kind": "note"
-        },
-        {
           "pageId": "ranking:agricultural-output",
           "kind": "ranking"
         },
@@ -4354,10 +4282,6 @@
         {
           "pageId": "ranking:agricultural-output-per-employed-person",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:907",
-          "kind": "sns"
         },
         {
           "pageId": "theme:agriculture-production",
@@ -4780,14 +4704,6 @@
         {
           "pageId": "ranking:air-conditioner-consumption-quantity",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:633",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:797",
-          "kind": "sns"
         }
       ],
       "themes": []
@@ -4828,14 +4744,6 @@
         {
           "pageId": "ranking:air-fare-consumption-expenditure",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:657",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:819",
-          "kind": "sns"
         }
       ],
       "themes": []
@@ -10209,10 +10117,6 @@
           "kind": "ranking"
         },
         {
-          "pageId": "sns:466",
-          "kind": "sns"
-        },
-        {
           "pageId": "theme:healthcare",
           "kind": "theme"
         },
@@ -10638,14 +10542,6 @@
         {
           "pageId": "ranking:annual-income-per-household",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:11",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:724",
-          "kind": "sns"
         },
         {
           "pageId": "theme:real-income",
@@ -11180,26 +11076,6 @@
           "kind": "ranking"
         },
         {
-          "pageId": "sns:575",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:576",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:577",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:578",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:579",
-          "kind": "sns"
-        },
-        {
           "pageId": "theme:climate",
           "kind": "theme"
         }
@@ -11439,10 +11315,6 @@
         {
           "pageId": "ranking:annual-precipitation-days",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:707",
-          "kind": "sns"
         },
         {
           "pageId": "theme:climate",
@@ -12242,20 +12114,8 @@
           "kind": "blog"
         },
         {
-          "pageId": "note:recovered-nf962c6702b93",
-          "kind": "note"
-        },
-        {
           "pageId": "ranking:annual-sunshine-duration",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:1005",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:708",
-          "kind": "sns"
         },
         {
           "pageId": "theme:climate",
@@ -15227,10 +15087,6 @@
         {
           "pageId": "ranking:autolock-apartment-rate",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:997",
-          "kind": "sns"
         }
       ],
       "themes": []

@@ -105,9 +105,8 @@ for (const page of catalog.pages) {
     throw new Error(`IDとページ種別の不一致: ${page.id} ${page.kind}`);
   }
   if (isExternalContentKind(page.kind)) {
-    // note・SNS は外部の公開物。サイトのルートを持たないので、外部 URL であることだけを確かめる
-    if (!page.href.startsWith('https://'))
-      throw new Error(`外部の公開物は https の URL を持つ: ${page.id} ${page.href}`);
+    // note・SNS は data/content/external.json に置く。サイトの台帳には入れない
+    throw new Error(`外部の公開物がサイトの台帳にある: ${page.id}`);
   } else if (page.href.startsWith('https://')) {
     throw new Error(`サイトのページに外部 URL: ${page.id} ${page.href}`);
   } else if (contentIdFromHref(page.href) !== page.id)
@@ -141,6 +140,29 @@ function pagesIn(dir: string): string[] {
           : []
     );
 }
+// ── stats47 の外の公開物 (note・SNS)。鮮度は問わず (投稿台帳は CI が随時書き換える)、形と参照の整合だけを見る
+const external = JSON.parse(
+  fs.readFileSync(path.join(root, datasetPath('content.external')), 'utf8')
+) as { version: number; pages: ContentPage[]; links: { from: string; to: string; relation: string }[] };
+if (external.version !== 1) throw new Error('external.json: version');
+unique(external.pages.map((page) => page.id), 'external id');
+unique(external.pages.map((page) => page.href), 'external href');
+const externalIds = new Set(external.pages.map((page) => page.id));
+for (const page of external.pages) {
+  if (!isExternalContentKind(page.kind) || page.id !== `${page.kind}:${page.key}`)
+    throw new Error(`外部の公開物の ID と種別の不一致: ${page.id} ${page.kind}`);
+  if (!page.href.startsWith('https://'))
+    throw new Error(`外部の公開物は https の URL を持つ: ${page.id} ${page.href}`);
+  if (ids.has(page.id)) throw new Error(`サイトの台帳と ID が重複: ${page.id}`);
+  for (const key of page.rankingKeys ?? [])
+    if (!METRICS_REGISTRY[key]) throw new Error(`未登録指標ID: ${page.id} → ${key}`);
+}
+const relations = new Set(Object.keys(CONTENT_NAVIGATION.relations));
+for (const edge of external.links) {
+  if (!externalIds.has(edge.from) || !ids.has(edge.to) || !relations.has(edge.relation))
+    throw new Error(`外部の公開物の未登録関係: ${JSON.stringify(edge)}`);
+}
+
 const appRoot = path.join(root, 'apps/web/src/app');
 const patterns = pagesIn(appRoot)
   .map((dir) => '/' + path.relative(appRoot, dir).replaceAll('\\', '/'))
@@ -151,5 +173,5 @@ if (
 )
   throw new Error('全page.tsxとIDルート台帳が一致しません');
 console.log(
-  `content validation: ${catalog.pages.length} IDs, ${patterns.length} route families: PASS`
+  `content validation: ${catalog.pages.length} IDs, ${patterns.length} route families, external ${external.pages.length}: PASS`
 );

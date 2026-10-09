@@ -29,10 +29,6 @@
         {
           "pageId": "ranking:cpi-change-rate-miscellaneous",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:792",
-          "kind": "sns"
         }
       ],
       "themes": []
@@ -699,14 +695,6 @@
         {
           "pageId": "ranking:craft-materials-consumption-expenditure",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:649",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:812",
-          "kind": "sns"
         }
       ],
       "themes": []
@@ -1771,10 +1759,6 @@
         {
           "pageId": "ranking:criminal-recognition-count-of-violent-crime-rate",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:916",
-          "kind": "sns"
         }
       ],
       "themes": []
@@ -3030,10 +3014,6 @@
         {
           "pageId": "ranking:crude-death-rate",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:640",
-          "kind": "sns"
         },
         {
           "pageId": "theme:aging-society",
@@ -4343,10 +4323,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "note:a-kakei-ehime",
-          "kind": "note"
-        },
-        {
           "pageId": "ranking:culture-recreation-expenditure-ratio-multi-person-households",
           "kind": "ranking"
         }
@@ -4810,10 +4786,6 @@
         {
           "pageId": "ranking:current-balance-ratio",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:102",
-          "kind": "sns"
         },
         {
           "pageId": "theme:local-finance",
@@ -5319,10 +5291,6 @@
           "kind": "japan-theme"
         },
         {
-          "pageId": "note:a-current-liabilities-balance-multi-person-households-per-household",
-          "kind": "note"
-        },
-        {
           "pageId": "ranking:current-liabilities-balance-multi-person-households-per-household",
           "kind": "ranking"
         },
@@ -5792,14 +5760,6 @@
         {
           "pageId": "ranking:current-savings-balance-multi-person-households",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:104",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:106",
-          "kind": "sns"
         }
       ],
       "themes": []
@@ -8068,10 +8028,6 @@
           "kind": "municipality-theme"
         },
         {
-          "pageId": "note:a-day-time-population",
-          "kind": "note"
-        },
-        {
           "pageId": "ranking:day-time-population",
           "kind": "ranking"
         },
@@ -8557,10 +8513,6 @@
         {
           "pageId": "ranking:daytime-population-ratio",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:983",
-          "kind": "sns"
         }
       ],
       "themes": []

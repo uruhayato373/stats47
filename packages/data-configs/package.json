@@ -99,6 +99,11 @@
       "types": "./src/content/pages.ts",
       "import": "./src/content/pages.ts",
       "require": "./src/content/pages.ts"
+    },
+    "./content/external": {
+      "types": "./src/content/external.ts",
+      "import": "./src/content/external.ts",
+      "require": "./src/content/external.ts"
     }
   },
   "scripts": {

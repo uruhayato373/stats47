@@ -1043,10 +1043,6 @@
         {
           "pageId": "ranking:taro-consumption-expenditure",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:987",
-          "kind": "sns"
         }
       ],
       "themes": []
@@ -6454,10 +6450,6 @@
         {
           "pageId": "ranking:total-area-excluding-northern-territories-and-takeshima",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:922",
-          "kind": "sns"
         }
       ],
       "themes": []

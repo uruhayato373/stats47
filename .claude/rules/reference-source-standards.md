@@ -172,7 +172,8 @@ Drive への保全だけでは stats47 への採用を意味しない。OCR、in
 - 制作状況は各チャネルSSOTの実在証跡で判定する。サイトはactive metricまたはarea editorial、ブログはページID台帳
   `data/content/pages/blog.json` の公開記事の`rankingKeys` (手元のR2の写しは読まない)、noteはcatalogの`stats47Targets`、
   Kindleはbook catalogの`rankingKeys`または`blogSlug`、note と X / Instagram / YouTube はページID台帳の外部公開物
-  (`data/content/pages/{note,sns}.json`。note のカタログと投稿台帳`data/sns/posts.json`から`content:sync`が作り、URL のある公開物だけを載せる) を使う。ブログの「着手できる」には
+  (`data/content/external.json`。note のカタログと投稿台帳`data/sns/posts.json`から`content:sync`が作り、URL のある公開物だけを載せる)。
+  集計は同じ関数 (`packages/data-configs/src/content/external.ts`) で正本の最新の中身から作り、台帳ファイルの更新待ちで遅れない。ブログの「着手できる」には
   候補キュー`data/blog/topic-queue.json`の未着手の候補を添える (2026-10-10)。
 - 展開先に「載せない・企画中・停止」と決めた判断は、全展開先とも
   `packages/data-configs/src/evidence-inventory/placement-decisions.ts` (planned / rejected / blocked と理由) を正本にし、

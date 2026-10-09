@@ -935,10 +935,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "note:a-kakei-yamagata",
-          "kind": "note"
-        },
-        {
           "pageId": "ranking:maximum-snow-depth",
           "kind": "ranking"
         },
@@ -1175,14 +1171,6 @@
         {
           "pageId": "ranking:maximum-temperature",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:174",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:467",
-          "kind": "sns"
         },
         {
           "pageId": "theme:climate",
@@ -6775,16 +6763,8 @@
           "kind": "japan-theme"
         },
         {
-          "pageId": "note:a-minimum-wage-by-region",
-          "kind": "note"
-        },
-        {
           "pageId": "ranking:minimum-wage-by-region",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:3",
-          "kind": "sns"
         },
         {
           "pageId": "theme:labor-wages",
@@ -8834,10 +8814,6 @@
           "kind": "ranking"
         },
         {
-          "pageId": "sns:178",
-          "kind": "sns"
-        },
-        {
           "pageId": "theme:labor-mobility",
           "kind": "theme"
         },
@@ -10487,14 +10463,6 @@
         {
           "pageId": "ranking:municipal-general-administration-staff",
           "kind": "ranking"
-        },
-        {
-          "pageId": "sns:654",
-          "kind": "sns"
-        },
-        {
-          "pageId": "sns:817",
-          "kind": "sns"
         }
       ],
       "themes": []
