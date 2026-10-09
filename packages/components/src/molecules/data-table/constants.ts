@@ -5,7 +5,7 @@ export const DATA_TABLE_STYLES = {
   /** フィルター用セレクトトリガーのクラス名 */
   selectTrigger: "h-7 w-[150px] text-xs",
   /** フィルター用セレクトコンテンツのクラス名 */
-  selectContent: "[&_*]:text-xs",
+  selectContent: "**:text-xs",
   /** フィルター用ラベルのクラス名 */
   selectLabel: "text-[10px] font-medium text-muted-foreground",
   /** テキストフィルター用Inputのクラス名 */

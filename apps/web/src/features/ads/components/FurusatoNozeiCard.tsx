@@ -86,7 +86,7 @@ export async function FurusatoNozeiCard({
                 adId={furusatoAdId}
                 label={item.name}
                 position={position}
-                className="flex flex-col overflow-hidden bg-card transition-colors hover:bg-accent/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="flex flex-col overflow-hidden bg-card transition-colors hover:bg-accent/40 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
               >
                 {item.image && (
                   <div className="aspect-square bg-muted flex items-center justify-center overflow-hidden">
@@ -140,7 +140,7 @@ export async function FurusatoNozeiCard({
         adId={furusatoAdId}
         label={`${link.prefName}のふるさと納税`}
         position={position}
-        className="flex items-center justify-between gap-3 border-t border-border px-4 py-3 text-foreground transition-colors hover:bg-accent/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        className="flex items-center justify-between gap-3 border-t border-border px-4 py-3 text-foreground transition-colors hover:bg-accent/40 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
       >
         <div>
           <p className="text-sm font-semibold text-foreground">

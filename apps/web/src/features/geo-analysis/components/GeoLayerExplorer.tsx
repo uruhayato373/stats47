@@ -267,7 +267,7 @@ export function GeoLayerExplorer({
             属性を文字で確認（先頭20件）
           </Button>
           {showRows && (
-            <ul className="mt-3 space-y-2 break-words text-sm">
+            <ul className="mt-3 space-y-2 wrap-break-word text-sm">
               {rows.map((row, i) => (
                 <li key={i}>{row}</li>
               ))}

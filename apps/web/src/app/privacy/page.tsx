@@ -56,7 +56,7 @@ function LegalSection({ number, title, children }: LegalSectionProps) {
   return (
     <SurfaceCard className="h-full">
       <div className="p-4 md:p-6 flex flex-row items-center gap-2 space-y-0 border-b border-border">
-        <h2 className="text-base font-semibold leading-none text-lg md:text-xl">{displayTitle}</h2>
+        <h2 className="text-base font-semibold leading-none text-lg md:text-xl md:leading-7">{displayTitle}</h2>
       </div>
       <div className="p-4 md:p-6 pt-3">{children}</div>
     </SurfaceCard>
@@ -76,8 +76,8 @@ const EXTERNAL_LINKS = {
 } as const;
 
 // 共通テキストスタイルクラス
-const TEXT_STYLE = "text-xs leading-relaxed md:text-sm";
-const TEXT_STYLE_WITH_MARGIN = "text-xs leading-relaxed mb-4 md:text-sm";
+const TEXT_STYLE = "text-xs leading-relaxed md:text-sm md:leading-5";
+const TEXT_STYLE_WITH_MARGIN = "text-xs leading-relaxed mb-4 md:text-sm md:leading-5";
 
 /**
  * ページメタデータ
@@ -125,7 +125,7 @@ export default function PrivacyPage() {
               alt={OPERATOR_PROFILE.avatarAlt}
               width={48}
               height={48}
-              className="w-12 h-12 rounded-full object-cover flex-shrink-0"
+              className="w-12 h-12 rounded-full object-cover shrink-0"
             />
             <div>
               <p className="font-semibold text-sm md:text-base">
@@ -143,13 +143,13 @@ export default function PrivacyPage() {
           {/* サービス情報 */}
           <div className="mb-4 space-y-2">
             <div className="flex items-center gap-2">
-              <span className="text-xs text-muted-foreground w-20 flex-shrink-0">サービス</span>
+              <span className="text-xs text-muted-foreground w-20 shrink-0">サービス</span>
               <Badge variant="secondary" className="text-xs font-normal">
                 統計で見る都道府県（stats47）
               </Badge>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-xs text-muted-foreground w-20 flex-shrink-0">活動拠点</span>
+              <span className="text-xs text-muted-foreground w-20 shrink-0">活動拠点</span>
               <Badge variant="outline" className="text-xs font-normal">
                 東京都
               </Badge>

@@ -48,7 +48,7 @@ export interface ChartFooterProps {
 type FooterActionKind = 'source' | 'ranking';
 
 const ACTION_CLASS_NAME =
-  'inline-flex min-h-8 max-w-full items-center gap-1.5 px-1 text-xs font-medium underline-offset-2 transition-colors hover:text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50';
+  'inline-flex min-h-8 max-w-full items-center gap-1.5 px-1 text-xs font-medium underline-offset-2 transition-colors hover:text-primary hover:underline focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/50';
 
 function isExternalUrl(url: string): boolean {
   return /^https?:\/\//.test(url);

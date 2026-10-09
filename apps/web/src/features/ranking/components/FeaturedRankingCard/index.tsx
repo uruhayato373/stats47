@@ -41,7 +41,7 @@ export function FeaturedRankingCard({
             右下に移すと構図が釣り合い、はみ出しはカードの overflow-hidden がクリップする。 */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 [transform-origin:center] [transform:scale(1.3)_translate(6%,14%)] [&>svg]:h-full [&>svg]:w-full"
+          className="pointer-events-none absolute inset-0 origin-center transform-[scale(1.3)_translate(6%,14%)] [&>svg]:h-full [&>svg]:w-full"
           dangerouslySetInnerHTML={{ __html: model.mapSvg }}
         />
         <div className="absolute left-0 top-1 z-10 bg-background/90 pr-2">

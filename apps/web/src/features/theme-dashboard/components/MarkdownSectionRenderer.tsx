@@ -27,7 +27,7 @@ const proseClasses =
   "prose-strong:text-foreground " +
   "prose-code:text-foreground prose-code:bg-muted prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none " +
   "prose-blockquote:border-l-2 prose-blockquote:border-border prose-blockquote:text-muted-foreground prose-blockquote:not-italic " +
-  "prose-a:text-primary prose-a:underline-offset-2 hover:prose-a:underline";
+  "prose-a:text-primary prose-a:underline-offset-2 prose-a:hover:underline";
 
 /**
  * Markdown セクションレンダラー

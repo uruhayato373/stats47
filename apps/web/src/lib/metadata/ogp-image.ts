@@ -18,7 +18,7 @@ const R2_PUBLIC_URL =
   process.env.NEXT_PUBLIC_R2_PUBLIC_URL || R2_PUBLIC_BASE_URL;
 
 /** サイト内ブログサムネイルの表示比率。生成契約は640×336（40:21）。 */
-export const BLOG_THUMBNAIL_ASPECT_CLASS = "aspect-[40/21]";
+export const BLOG_THUMBNAIL_ASPECT_CLASS = "aspect-40/21";
 
 /** stable R2 keyの旧bytesを掴まないためのblog card表示版。 */
 export const BLOG_THUMBNAIL_CACHE_VERSION = "20260822-v3";

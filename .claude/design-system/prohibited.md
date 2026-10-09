@@ -67,7 +67,7 @@
 | --------------------------------------------------- | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
 | カードへの個別角丸（`rounded-xl`/`rounded-2xl` 等） | フラット採用（`--radius:0`）。手動角丸は統一感を崩す | `rounded-card`（= 0）。本文内の部品は `rounded-content`。円形のみ `rounded-full`                              |
 | callout・注記の左の色バー（`border-l-4`）           | 4px アクセントバーは禁止。種類は色だけに頼らない     | 地の色 + アイコン + 日本語ラベル（`Callout.tsx`）。Markdown の引用の左バーだけ typography として残す          |
-| `shadow-lg` / `shadow-2xl`                          | 影が強すぎてノイズになる                             | `shadow-sm` 〜 `shadow-md`（オーバーレイ: `shadow-xl`）                                                       |
+| `shadow-lg` / `shadow-2xl`                          | 影が強すぎてノイズになる                             | `shadow-xs` 〜 `shadow-md`（オーバーレイ: `shadow-xl`。`shadow-xs` は v3 の `shadow-sm`）                                                       |
 | `py-0.5` for buttons                                | タップターゲットが小さすぎる                         | `h-8` 以上（S: `h-8` / M: `h-10` / L: `h-12`）                                                                |
 | `p-0` on cards                                      | コンテンツが窮屈になる                               | `RailCard` 既定 padding（`px-4 pb-4 pt-3`）。正典 `docs/01_技術設計/04_デザインシステム.md`「レール UI 契約」          |
 | `gap-0` between sections                            | セクションの区切りが不明瞭                           | `gap-6` 以上                                                                                                  |

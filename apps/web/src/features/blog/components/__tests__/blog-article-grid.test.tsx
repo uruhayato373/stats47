@@ -33,7 +33,7 @@ describe('BlogArticleGrid', () => {
     );
     expect(container.querySelector('img')).toHaveAttribute('alt', '');
     expect(container.querySelector('img')?.parentElement).toHaveClass(
-      'aspect-[40/21]'
+      'aspect-40/21'
     );
   });
 

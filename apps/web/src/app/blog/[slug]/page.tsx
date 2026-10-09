@@ -330,7 +330,7 @@ export default async function BlogPostPage({ params }: PageProps) {
                                 <p className="mb-4 text-[12px] leading-6 text-muted-foreground">PRを含む場合があります</p>
                                 <h1 className="article-title mb-4 text-[1.45rem] font-bold text-foreground sm:text-[28px]">{article.title}</h1>
                                 {article.frontmatter.subtitle && (
-                                    <p className="mb-5 text-[15px] leading-8 text-muted-foreground sm:text-base">{article.frontmatter.subtitle}</p>
+                                    <p className="mb-5 text-[15px] leading-8 text-muted-foreground sm:text-base sm:leading-6">{article.frontmatter.subtitle}</p>
                                 )}
                                 <div className="flex flex-wrap items-center gap-3">
                                     <div className="flex flex-wrap items-center gap-2">

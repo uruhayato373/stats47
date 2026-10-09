@@ -43,7 +43,7 @@ export function TileSwitcher({
 
   return (
     <div
-      className={`absolute ${positionClass} z-[500] flex gap-1 bg-background/90 backdrop-blur-sm rounded-md p-1 shadow-sm border border-border`}
+      className={`absolute ${positionClass} z-500 flex gap-1 bg-background/90 backdrop-blur-xs rounded-md p-1 shadow-xs border border-border`}
     >
       {options.map((tile, i) => (
         <button

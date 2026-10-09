@@ -8,7 +8,7 @@ export function SankeyFallback({ message }: { message: string }) {
   return (
     <ChartEmptyState
       message={message}
-      className="aspect-[100/73] w-full border bg-muted"
+      className="aspect-100/73 w-full border bg-muted"
     />
   );
 }

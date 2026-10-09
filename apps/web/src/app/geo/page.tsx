@@ -54,7 +54,7 @@ function CompareLink({ compact = false }: { compact?: boolean }) {
   return (
     <SurfaceLinkCard
       href="/geo/compare"
-      className="flex items-center gap-3 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+      className="flex items-center gap-3 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
     >
       <MapPin className="h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
       <div className="min-w-0 flex-1">
@@ -173,19 +173,19 @@ export default function GeoPage() {
         >
           <Link
             href={POPULATION_BASELINE_RANKING_PATH}
-            className="inline-flex min-h-11 items-center text-sm font-medium text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            className="inline-flex min-h-11 items-center text-sm font-medium text-primary hover:underline focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
           >
             2050年の人口増減率ランキング
           </Link>
           <Link
             href="/areas"
-            className="inline-flex min-h-11 items-center text-sm font-medium text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            className="inline-flex min-h-11 items-center text-sm font-medium text-primary hover:underline focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
           >
             都道府県データブック
           </Link>
           <Link
             href="/blog"
-            className="inline-flex min-h-11 items-center text-sm font-medium text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+            className="inline-flex min-h-11 items-center text-sm font-medium text-primary hover:underline focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
           >
             統計を読み解くブログ
           </Link>

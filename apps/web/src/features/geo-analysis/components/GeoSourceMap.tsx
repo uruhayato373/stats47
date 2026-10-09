@@ -195,7 +195,7 @@ export function GeoSourceMap({
   return (
     <div className="space-y-2">
       <div className="flex items-center justify-between gap-2">
-        <p className="min-w-0 text-sm font-medium [overflow-wrap:anywhere]">
+        <p className="min-w-0 text-sm font-medium wrap-anywhere">
           表示中：{label}
         </p>
         <Button
@@ -218,7 +218,7 @@ export function GeoSourceMap({
           minZoom={0}
           scrollWheelZoom={false}
           preferCanvas
-          className="h-[420px] w-full sm:h-[560px] [&_.leaflet-control-zoom_a]:!h-11 [&_.leaflet-control-zoom_a]:!w-11 [&_.leaflet-control-zoom_a]:!leading-[44px]"
+          className="h-[420px] w-full sm:h-[560px] [&_.leaflet-control-zoom_a]:h-11! [&_.leaflet-control-zoom_a]:w-11! [&_.leaflet-control-zoom_a]:leading-[44px]!"
         >
           <TileLayer
             url={GEO_BASEMAP.url}

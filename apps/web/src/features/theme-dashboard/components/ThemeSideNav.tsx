@@ -180,7 +180,7 @@ function ThemeGroupNavigation({
               open={isCurrentGroup}
               className="group border-b border-border last:border-b-0"
             >
-              <summary className="flex min-h-10 cursor-pointer list-none items-center gap-2 px-2 text-sm font-semibold text-foreground hover:bg-accent/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50">
+              <summary className="flex min-h-10 cursor-pointer list-none items-center gap-2 px-2 text-sm font-semibold text-foreground hover:bg-accent/50 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/50">
                 {group.label}
                 <ChevronDown
                   className="ml-auto size-4 text-muted-foreground transition-transform group-open:rotate-180"
@@ -246,7 +246,7 @@ function PrefectureControl({ hasScope }: { hasScope: boolean }) {
         <button
           type="button"
           onClick={() => setSelected(null)}
-          className="mt-2 min-h-10 text-sm text-muted-foreground underline-offset-2 hover:text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+          className="mt-2 min-h-10 text-sm text-muted-foreground underline-offset-2 hover:text-primary hover:underline focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-primary/50"
         >
           {PREFECTURE_SET_LABEL}に戻す
         </button>

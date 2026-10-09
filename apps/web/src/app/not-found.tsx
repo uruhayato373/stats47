@@ -24,7 +24,7 @@ export default function NotFound() {
         <p className="text-[11px] font-bold uppercase tracking-widest text-muted-foreground">
           404 — Not Found
         </p>
-        <h1 className="mt-3 text-3xl font-extrabold leading-tight text-foreground sm:text-4xl">
+        <h1 className="mt-3 text-3xl font-extrabold leading-tight text-foreground sm:text-4xl sm:leading-10">
           ページが見つかりません
         </h1>
         <p className="mt-3 max-w-md text-sm leading-relaxed text-muted-foreground">

@@ -92,7 +92,7 @@ export function ShareButtons({
                 variant={isProminent ? "default" : "ghost"}
                 size={isProminent ? "default" : "icon"}
                 className={`rounded-full transition-all ${isProminent
-                  ? `h-10 w-10 p-0 shadow-sm ${link.prominentClass}`
+                  ? `h-10 w-10 p-0 shadow-xs ${link.prominentClass}`
                   : `h-8 w-8 ${link.color}`
                   }`}
                 onClick={() => {

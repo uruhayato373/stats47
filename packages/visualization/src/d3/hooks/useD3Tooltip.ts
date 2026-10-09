@@ -68,7 +68,7 @@ export const TOOLTIP_STYLES = {
  * React要素のclassNameプロップに使用
  */
 export const TOOLTIP_CLASSNAMES =
-  "absolute bg-popover text-popover-foreground px-2.5 py-1.5 rounded-lg border border-border text-xs opacity-0 transition-opacity z-50 backdrop-blur-sm pointer-events-none shadow-md";
+  "absolute bg-popover text-popover-foreground px-2.5 py-1.5 rounded-lg border border-border text-xs opacity-0 transition-opacity z-50 backdrop-blur-xs pointer-events-none shadow-md";
 
 /**
  * ツールチップのHTML生成関数

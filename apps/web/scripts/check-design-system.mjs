@@ -84,7 +84,8 @@ const rules = [
     pattern:
       // rounded-md/sm は操作部品 (ボタン・ドロップダウン) の角丸なので対象外。カード外枠の角丸は
       // rounded-card (= CARD_SURFACE_CLASS) で、それを手書きした行を捕まえる。
-      /rounded-(?:none|card)\s+border\s+(?:border-\S+\s+)?bg-card\s+p-4\s+shadow-sm|bg-card\s+border\s+rounded|rounded-(?:lg|card)\s+border\s+border-border\s+bg-card|border\s+border-border\s+bg-card.*shadow-sm/,
+      // 影は Tailwind v4 で v3 の shadow-sm が shadow-xs に改名されたので両方を捕まえる。
+      /rounded-(?:none|card)\s+border\s+(?:border-\S+\s+)?bg-card\s+p-4\s+shadow-(?:xs|sm)|bg-card\s+border\s+rounded|rounded-(?:lg|card)\s+border\s+border-border\s+bg-card|border\s+border-border\s+bg-card.*shadow-(?:xs|sm)/,
     // SurfaceCard 実装本体は許可。また rounded-full 要素はカードでなくピル/トグル/アバターなので除外
     // (コンテンツカードは rounded-full にしない)。
     allow: (relativePath, line) =>
@@ -133,7 +134,7 @@ const rules = [
   {
     id: 'no-large-card-shadow',
     message:
-      'Avoid large shadows on normal cards. Use no shadow, shadow-sm, or shadow-md.',
+      'Avoid large shadows on normal cards. Use no shadow, shadow-xs, shadow-sm, or shadow-md.',
     pattern: /\bshadow-(?:lg|2xl)\b/,
   },
   {

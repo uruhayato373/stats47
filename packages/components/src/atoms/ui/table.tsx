@@ -21,7 +21,7 @@ const Table = React.forwardRef<
     className={cn(
       "relative w-full overflow-auto",
       scrollRegion &&
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
+        "focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring",
       containerClassName
     )}
     {...(scrollRegion
@@ -68,7 +68,7 @@ const TableFooter = React.forwardRef<
   <tfoot
     ref={ref}
     className={cn(
-      "border-t border-border bg-muted/50 font-medium [&>tr]:last:border-b-0",
+      "border-t border-border bg-muted/50 font-medium last:[&>tr]:border-b-0",
       className
     )}
     {...props}
@@ -98,7 +98,7 @@ const TableHead = React.forwardRef<
   <th
     ref={ref}
     className={cn(
-      "h-9 px-2 py-1.5 text-left text-xs font-medium leading-4 text-muted-foreground align-middle [&:has([role=checkbox])]:pr-0",
+      "h-9 px-2 py-1.5 text-left text-xs font-medium leading-4 text-muted-foreground align-middle has-[[role=checkbox]]:pr-0",
       className
     )}
     {...props}
@@ -113,7 +113,7 @@ const TableCell = React.forwardRef<
   <td
     ref={ref}
     className={cn(
-      "h-9 px-2 py-1.5 text-[13px] leading-5 align-middle [&:has([role=checkbox])]:pr-0",
+      "h-9 px-2 py-1.5 text-[13px] leading-5 align-middle has-[[role=checkbox]]:pr-0",
       className
     )}
     {...props}

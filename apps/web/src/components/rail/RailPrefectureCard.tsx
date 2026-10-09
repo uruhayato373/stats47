@@ -80,7 +80,7 @@ function PrefectureCardBody({
       {moreHref && moreLabel && (
         <Link
           href={moreHref}
-          className="mt-3 inline-flex min-h-11 items-center text-xs font-medium text-primary hover:underline sm:min-h-6 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          className="mt-3 inline-flex min-h-11 items-center text-xs font-medium text-primary hover:underline sm:min-h-6 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring"
           onClick={() => safeTrack('area:all', moreHref, trackingSurface)}
         >
           {moreLabel}

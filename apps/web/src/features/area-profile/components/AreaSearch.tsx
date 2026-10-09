@@ -14,7 +14,7 @@ import { matchPrefectures } from "../utils";
 import type { Prefecture } from "@stats47/area";
 
 const FOCUS_RING =
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2";
+  "focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2";
 
 interface AreaSearchProps {
   prefectures: readonly Prefecture[];

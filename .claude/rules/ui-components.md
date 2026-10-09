@@ -25,7 +25,7 @@ paths:
   - 形として四角であるべきもの（凡例の色見本・タイル地図のマス・下線タブ・一覧行）だけ `rounded-none`。**円形のみ `rounded-full`**（アイコン背景・ピル・アバター）
   - **本文の中に置く部品**（callout・本文内のランキングカード・コードブロック）→ `rounded-content`（`--content-radius` = 6px）。レイアウトのカード外枠とは役割が別なので別トークン。使えるファイルは `check-design-system.mjs` の `ARTICLE_BODY_COMPONENT_FILES` に限り、そのファイルでは `rounded-card` / `rounded-lg` を使わない（`content-radius-only-in-article-body` / `article-body-parts-use-content-radius`）。callout の種類の定義は `callout-config.ts`、表示は `Callout.tsx`（左の色バーなし）
   - `rounded-xl`/`2xl`/任意値の手動付与は禁止。角丸を採用するときは `globals.css` のトークンと `check-design-system.mjs` の `no-nonzero-radius-token` 許容値を同じ差分で変える
-- **カード外枠の線と地**: ライトモードのページ地は記事ゾーンを含めサイト全体で薄グレー（`--background`）1 値（dark の記事ゾーンは `.dark .reading-zone` の別値）。カード外枠の線色は `--card-outline`（Web は `transparent`、管理画面は `--border`）で、白カードとの明暗で区切る。影は `shadow-sm`。
+- **カード外枠の線と地**: ライトモードのページ地は記事ゾーンを含めサイト全体で薄グレー（`--background`）1 値（dark の記事ゾーンは `.dark .reading-zone` の別値）。カード外枠の線色は `--card-outline`（Web は `transparent`、管理画面は `--border`）で、白カードとの明暗で区切る。影は `shadow-xs`（Tailwind v4 の名前。v3 の `shadow-sm` と同じ影）。
 - **本文フォントは system スタック**（游ゴシック/Hiragino、Web フォント非依存）。Inter/Noto Sans JP は読み込まない（コードのみ Geist Mono）。
 
 ## Sticky aside の max-h 必須ルール（削除禁止）
@@ -99,7 +99,7 @@ CSS Grid (`lg:grid` + `items-start`) 内の `sticky` aside には **必ず `max-
 詳細は `.claude/design-system/prohibited.md` を参照。以下は特に重要な禁止項目:
 
 - `text-black` 禁止 → `text-foreground`
-- `shadow-lg` / `shadow-2xl` 禁止 → `shadow-sm`（デフォルト）/ `shadow-md`（hover）
+- `shadow-lg` / `shadow-2xl` 禁止 → `shadow-xs`（デフォルト。v4 の名前で、v3 の `shadow-sm` に当たる）/ `shadow-md`（hover）
 - `tracking-tight` 禁止 → 日本語の可読性低下のため削除
 - カラーバー（`border-t-4`, `border-l-4` + 色付き）禁止 → 全周 `border` で統一
 - `text-gray-400` を本文に使用禁止 → `text-muted-foreground`
@@ -116,7 +116,13 @@ CSS Grid (`lg:grid` + `items-start`) 内の `sticky` aside には **必ず `max-
 | テキスト・ボタンのサイズ調整                      | `sm:` / `md:` (ビューポート)              | デバイスサイズで決まる                                       |
 | ダッシュボードカードグリッド                      | `@sm:` / `@md:` / `@lg:` (コンテナクエリ) | 親コンテナ幅が可変（右レール有無で本文カラム幅が変動）のため |
 
-コンテナクエリのブレイクポイントは `tailwind.config.ts` でカスタム定義（`@sm: 480px`, `@md: 768px`, `@lg: 1024px`）。プラグインのデフォルト値とは異なるので注意。ビューポートブレイクポイントとコンテナクエリの混在は意図的な設計。カードグリッドをビューポートの `md:` に変えると右レールあり画面で幅不足になるため、必ずコンテナクエリを使うこと。
+コンテナクエリのブレイクポイントは `apps/web/src/app/globals.css` の `@custom-variant` でカスタム定義（`@sm: 480px`, `@md: 768px`, `@lg: 1024px`）。Tailwind v4 の既定値（24 / 28 / 32rem）とは異なるので注意。テーマ値（`--container-*`）を変えると `max-w-sm/md/lg` まで変わるため、variant だけを上書きしている。ビューポートブレイクポイントとコンテナクエリの混在は意図的な設計。カードグリッドをビューポートの `md:` に変えると右レールあり画面で幅不足になるため、必ずコンテナクエリを使うこと。
+
+### Tailwind v4 で v3 と挙動が変わる書き方（2026-10-06 移行時の実測）
+
+- **`space-y-*` / `divide-y` は「最後以外の子の下」に付く**（v3 は「最初以外の子の上」）。先頭の子が絶対配置（`sr-only` の見出し等）だと、その余白はレイアウトに効かない。先頭に `sr-only` を置く場合は親に `pt-*` を明示する（例: `ThemeMetricsDashboard`）。
+- **`leading-*` は画面幅別の `text-*` に負けない**。v3 では `md:text-xl` の行の高さが基本の `leading-none` に勝っていた。画面幅別に文字サイズを変えるなら、同じ幅の `leading-*` も書く（例: `md:text-xl md:leading-7`）。
+- **クラス文字列を置く場所は `tailwind.config.ts` の `content`（`src/**` と packages の components・visualization）に入れる**。走査外のファイルにしか無いクラスは CSS が生成されない。
 
 選択 UI と集合（grid）の 0/1/2+ 件数規則は `docs/01_技術設計/04_デザインシステム.md`「選択 UI と集合レイアウトの件数規則」が正典。テーマ実装は `SingleMetricCard`（1 件）/ `MetricSwitcherPanel`（2 件以上）を使い分ける。
 

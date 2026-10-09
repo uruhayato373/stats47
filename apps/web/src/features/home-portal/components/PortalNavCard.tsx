@@ -61,7 +61,7 @@ export function PortalNavCard({
           alt=""
           fill
           sizes="(min-width: 1280px) 110px, (min-width: 1024px) 120px, (min-width: 640px) 160px, 40vw"
-          className="object-contain object-right-bottom"
+          className="object-contain object-bottom-right"
         />
       </span>
     </SurfaceLinkCard>
