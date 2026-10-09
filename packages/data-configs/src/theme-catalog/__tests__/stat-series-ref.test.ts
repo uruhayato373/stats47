@@ -5,11 +5,85 @@ import { THEME_CATALOGS } from "../index";
 import { buildPopulationPyramidSeriesRefs } from "../population-pyramid-deps";
 import {
   parseStatSeriesRefs,
+  parseThemeDbChartComponentProps,
   type StatSeriesRef,
   validateChartProps,
   validateStatSeriesRefAlignment,
 } from "../stat-series-ref";
 import { CATALOG_COMPONENT_TYPES } from "../types";
+
+describe("指標IDと表示オプションの配信契約", () => {
+  const seriesRefs = [{ metricKey: "total-population" }];
+
+  it.each([
+    { metricKey: "unregistered-metric" },
+    { metricKey: "total-population", year: "202" },
+    { metricKey: "total-population", area: "city" },
+    { metricKey: "total-population", label: "" },
+    { metricKey: "total-population", multiplier: 1000 },
+  ])("未登録ID・不正な選択・独自倍率を拒否する: %j", (ref) => {
+    expect(parseStatSeriesRefs([ref])).toBeNull();
+  });
+
+  it("関連リンクは公開系列の件数に一致させ、非公開の補助系列へリンクを要求しない", () => {
+    expect(validateStatSeriesRefAlignment({}, [], new Map())).toEqual([]);
+    expect(validateStatSeriesRefAlignment({ seriesRefs: [] }, [], new Map())).not.toEqual([]);
+    expect(validateStatSeriesRefAlignment({ seriesRefs }, [], new Map())).toEqual(
+      expect.arrayContaining([expect.stringContaining("要素数が不一致")]),
+    );
+    expect(validateStatSeriesRefAlignment(
+      { seriesRefs: buildPopulationPyramidSeriesRefs() },
+      ["total-population"],
+      new Map(),
+    )).toEqual([]);
+  });
+
+  it.each([
+    { mode: "auto" }, { mode: "sync" }, { mode: "fixed", domain: [0, 100] },
+  ])("有効なY軸設定を受理する: %j", (yAxisConfig) => {
+    expect(validateChartProps("line-chart", { seriesRefs, yAxisConfig })).toEqual([]);
+  });
+
+  it.each([
+    null, { mode: "fixed" }, { mode: "invalid" },
+    { mode: "fixed", domain: [100, 0] }, { mode: "fixed", domain: [0, Infinity] },
+    { mode: "auto", domain: [0, 100] }, { mode: "auto", scale: 10 },
+  ])("欠けた範囲・逆転・非有限値・未知設定を拒否する: %j", (yAxisConfig) => {
+    expect(validateChartProps("line-chart", { seriesRefs, yAxisConfig })).toContain("line-chart: yAxisConfig が不正");
+  });
+
+  it("表示ラベルと生成プロパティは型・空文字を検査する", () => {
+    expect(validateChartProps("line-chart", {
+      seriesRefs, labels: ["人口"], seriesColors: ["population"], showLatestValues: true,
+      annotation: "47都道府県", rankingLinks: [{ label: "人口", url: "/ranking/total-population" }],
+    })).toEqual([]);
+    expect(validateChartProps("line-chart", {
+      seriesRefs, labels: [1], showLatestValues: "yes", annotation: "",
+    })).toEqual(expect.arrayContaining([
+      "line-chart: labels はstring配列", "line-chart: showLatestValues はboolean", "annotation は空でない string にする",
+    ]));
+    expect(validateChartProps("mixed-chart", {
+      columnSeriesRefs: seriesRefs, lineSeriesRefs: seriesRefs, leftUnit: "", rightUnit: "人",
+    })).toContain("mixed-chart: leftUnit は空でないstring");
+  });
+
+  it.each([
+    ["line-chart", { seriesRefs }],
+    ["mixed-chart", { columnSeriesRefs: seriesRefs, lineSeriesRefs: seriesRefs }],
+    ["composition-chart", { seriesRefs, defaultTab: "trend" }],
+    ["donut-chart", { seriesRefs, topN: 5 }],
+    ["cpi-profile", { seriesRefs, year: "2024" }],
+    ["cpi-heatmap", { seriesRefs, year: "2024" }],
+  ])("検証済みの %s をランタイムへ渡し、無効な参照は拒否する", (type, props) => {
+    expect(parseThemeDbChartComponentProps(type, props)).toEqual({ componentType: type, props });
+    expect(parseThemeDbChartComponentProps(type, { ...props, seriesRefs: [{ metricKey: "unregistered" }] })).toBeNull();
+  });
+
+  it("専用部品と未知部品を汎用チャートとして受理しない", () => {
+    expect(parseThemeDbChartComponentProps("markdown-section", { markdown: "本文" })).toBeNull();
+    expect(parseThemeDbChartComponentProps("unknown-chart", {})).toBeNull();
+  });
+});
 
 /**
  * WP1 — chart data 参照の型を単一定義化。

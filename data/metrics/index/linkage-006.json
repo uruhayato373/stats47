@@ -30,6 +30,10 @@
       ],
       "consumers": [
         {
+          "pageId": "blog:school-teacher-annual-income",
+          "kind": "blog"
+        },
+        {
           "pageId": "municipality-ranking:elementary-school-teachers",
           "kind": "municipality-ranking"
         },

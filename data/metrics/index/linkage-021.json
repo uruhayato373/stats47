@@ -282,10 +282,6 @@
           "kind": "blog"
         },
         {
-          "pageId": "blog:school-teacher-annual-income-prefecture-gap",
-          "kind": "blog"
-        },
-        {
           "pageId": "ranking:school-teacher-annual-income",
           "kind": "ranking"
         },
@@ -10213,6 +10209,10 @@
         },
         {
           "pageId": "blog:household-solo-vs-dualincome",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:household-structure-daytime-population-gap",
           "kind": "blog"
         },
         {

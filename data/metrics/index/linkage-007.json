@@ -747,6 +747,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:fishery-species-prefecture-specialty",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:fishery-species-catch-bonito",
           "kind": "ranking"
         },
@@ -1064,6 +1068,10 @@
         {
           "pageId": "area-theme:47000:fishery-marine",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:fishery-species-prefecture-specialty",
+          "kind": "blog"
         },
         {
           "pageId": "ranking:fishery-species-catch-japanese-squid",
@@ -1385,6 +1393,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:fishery-species-prefecture-specialty",
+          "kind": "blog"
+        },
+        {
           "pageId": "ranking:fishery-species-catch-kelp",
           "kind": "ranking"
         },
@@ -1702,6 +1714,10 @@
         {
           "pageId": "area-theme:47000:fishery-marine",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:fishery-species-prefecture-specialty",
+          "kind": "blog"
         },
         {
           "pageId": "ranking:fishery-species-catch-mackerel",
@@ -2667,6 +2683,10 @@
         {
           "pageId": "area-theme:47000:fishery-marine",
           "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:fishery-species-prefecture-specialty",
+          "kind": "blog"
         },
         {
           "pageId": "ranking:fishery-species-catch-sardine",

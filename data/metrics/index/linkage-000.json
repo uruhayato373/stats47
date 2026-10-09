@@ -3100,6 +3100,10 @@
           "kind": "area-theme"
         },
         {
+          "pageId": "blog:agriculture-output-employment-productivity-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:farmland-crisis-abandoned-land",
           "kind": "blog"
         },
@@ -4017,6 +4021,10 @@
           "kind": "blog"
         },
         {
+          "pageId": "blog:agriculture-output-employment-productivity-gap",
+          "kind": "blog"
+        },
+        {
           "pageId": "blog:cc-estat-13-agri-sankey",
           "kind": "blog"
         },
@@ -4265,6 +4273,10 @@
         },
         {
           "pageId": "blog:agriculture-hokkaido-dominance",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:agriculture-output-employment-productivity-gap",
           "kind": "blog"
         },
         {

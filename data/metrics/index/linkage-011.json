@@ -8259,6 +8259,10 @@
       ],
       "consumers": [
         {
+          "pageId": "blog:school-teacher-annual-income",
+          "kind": "blog"
+        },
+        {
           "pageId": "municipality-ranking:junior-high-school-teachers",
           "kind": "municipality-ranking"
         },

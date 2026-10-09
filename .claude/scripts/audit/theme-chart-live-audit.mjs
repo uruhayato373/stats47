@@ -19,15 +19,13 @@
  *   - MetricConfig と配信値の unit・recipe configHash 一致
  *   - meta.areaCount と実際の行の地域数一致
  *   - 47県未満は shape-gate SSOT と同じ warn-only (港湾・漁業・職種の正当な部分集計を許容)
- * 移行前互換e-Stat requestが残る期間だけ、従来のAPI実測も同じ母集団で行う。
  * 成功条件: 期待集合と実集合が一致し (limit 無し時)、その全件が成功すること。
  *
- * read-only。公開R2/e-Statを読むだけで R2 にも git にも書かない (指定時のJSON出力のみ)。
+ * read-only。公開R2を読むだけで R2 にも git にも書かない (指定時のJSON出力のみ)。
  *
  * Usage:
  *   node .claude/scripts/audit/theme-chart-live-audit.mjs [--json <path>] [--limit N]
  *
- * 要 env: NEXT_PUBLIC_ESTAT_APP_ID (apps/web/.env.development に公開 ID あり)
  */
 import { existsSync, readFileSync, mkdirSync, writeFileSync } from "node:fs";
 import { createRequire } from "node:module";
@@ -36,7 +34,6 @@ import { pathToFileURL } from "node:url";
 
 import {
   classifyNational,
-  inspectEstatPayload,
   inspectStatsPayload,
   isFiniteEstatValue,
   parseAuditLimit,
@@ -53,7 +50,6 @@ const DEPENDENCY_MIRROR = path.join(
   import.meta.dirname,
   "theme-chart-dependencies.generated.json",
 );
-const ESTAT_ENDPOINT = ESTAT_STATS_DATA_URL;
 
 /**
  * 会社ネットワーク等、直接の外向き通信が遮断され明示 CONNECT だけが通る環境向け。
@@ -88,9 +84,7 @@ function parseArgs() {
 }
 
 /**
- * 依存ミラー (正典 collector の機械生成物) を読み、期待 request 集合を返す。
- * ミラーの各 request は `{ statsDataId, filters, themeKey, componentKey, componentType }`。
- * e-Stat に送る params は `{ statsDataId, ...filters }` に平坦化する。
+ * 依存ミラー (正典 collector の機械生成物) を読み、指標ID・単位・設定hashを検査する。
  */
 function loadExpectedDependencies() {
   let raw;
@@ -195,8 +189,6 @@ async function main() {
 
   const results = [];
   const errors = [];
-  const warns = [];
-  const emptyNationalWarns = [];
   const areaCoverageWarns = [];
 
   for (const dependency of dependencies) {
@@ -207,27 +199,15 @@ async function main() {
 
     if (outcome.status !== "ok") {
       errors.push(`[${outcome.status}] ${label}: ${outcome.detail}`);
-    } else if (dependency.kind === "r2" && outcome.areaCoverageWarning) {
+    } else if (outcome.areaCoverageWarning) {
       areaCoverageWarns.push(`[area-coverage] ${label}: ${outcome.areaCoverageWarning}`);
-    } else if (dependency.kind === "estat" && !outcome.hasNational) {
-      // 行が無いのか、行はあるが値がプレースホルダなのかを分けて報告する。
-      // 前者は統計表の設計、後者は「該当なし」で、是正の打ち手が違う。
-      if (outcome.hasNationalRow) {
-        emptyNationalWarns.push(
-          `[national-row-empty] ${label}: 全国行はあるが値がプレースホルダ (実データ無し)`,
-        );
-      } else {
-        warns.push(`[no-national] ${label}: 全国行なし → 全国表示は 47 県平均になる`);
-      }
     }
-    // e-Stat のレート制限を避ける
+    // 公開ストレージへの連続読み取りを間隔を置いて行う。
     await new Promise((r) => setTimeout(r, 250));
   }
 
   for (const [title, list] of [
     ["47都道府県未満 (shape-gate SSOTによりwarn-only)", areaCoverageWarns],
-    ["全国行なし", warns],
-    ["全国行はあるが値が無い", emptyNationalWarns],
   ]) {
     if (list.length === 0) continue;
     console.log(`⚠️  warn ${list.length} 件 (${title})`);
@@ -253,16 +233,13 @@ async function main() {
           distinctExpected,
           audited: results.length,
           r2MetricExpected: allMetrics.length,
-          legacyEstatExpected: allRequests.length,
           staged,
           partial,
           status: summary.status,
           coverageOk: summary.coverageOk,
           errorCount: errors.length,
-          warnCount: areaCoverageWarns.length + warns.length + emptyNationalWarns.length,
+          warnCount: areaCoverageWarns.length,
           areaCoverageWarningCount: areaCoverageWarns.length,
-          noNationalCount: warns.length,
-          nationalRowEmptyCount: emptyNationalWarns.length,
           results,
         },
         null,
