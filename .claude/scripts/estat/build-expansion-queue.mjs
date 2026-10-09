@@ -35,7 +35,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..", "..", "..");
 const CAND_FILE = path.join(ROOT, `${datasetDir("estat.candidates")}/ssds-candidates.json`);
 const QUEUE_FILE = path.join(ROOT, `${datasetDir("estat.candidates")}/expansion-queue.json`);
-const METRICS_DIR = path.join(ROOT, "data/metrics");
+const METRICS_DIR = path.join(ROOT, datasetDir("metrics.definitions"));
 const KNOWN_FILE = path.join(ROOT, "packages/ranking/src/config/known-ranking-keys.ts");
 
 const CAT = { A: "population", B: "landweather", C: "economy", D: "administrativefinancial",

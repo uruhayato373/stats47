@@ -242,7 +242,7 @@ export const PR_GATES = [
     name: "Colorscheme Polarity",
     why: "新 metric に極性が無いと未割当ラチェットが増える",
     run: () => tryRun("npm", ["run", "validate:polarity", "--workspace=@stats47/data-configs"]),
-    hint: "data/metrics/policy/polarity.ts に根拠つきで収載し MIN_POLARITY_COVERAGE を上げる",
+    hint: `${datasetDir("metrics.definitions")}/policy/polarity.ts に根拠つきで収載し MIN_POLARITY_COVERAGE を上げる`,
   },
   {
     name: "Theme Catalog",

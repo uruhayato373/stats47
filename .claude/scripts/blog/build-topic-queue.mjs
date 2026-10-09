@@ -50,7 +50,7 @@ const getArg = (flag, fallback) => {
 
 const QUEUE_PATH = path.join(PROJECT_ROOT, `${datasetDir("blog.operations")}/topic-queue.json`);
 const SEASONALITY_PATH = path.join(__dirname, "data", "seasonality-table.json");
-const METRICS_DIR = path.join(PROJECT_ROOT, "data/metrics");
+const METRICS_DIR = path.join(PROJECT_ROOT, datasetDir("metrics.definitions"));
 const PREFS_PATH = path.join(PROJECT_ROOT, "packages/area/src/data/prefectures.json");
 const GEO_CONTENT_PIPELINE_PATH = path.join(
   PROJECT_ROOT,

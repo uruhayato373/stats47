@@ -584,7 +584,7 @@ const loadLiveRankingKeys = () => {
     path.join(PROJECT_ROOT, "packages/ranking/src/config/known-ranking-keys.ts"),
   );
   // metric config の isActive:true キー (ファイル走査・~2200件で <1s)
-  const metricsDir = path.join(PROJECT_ROOT, "data/metrics");
+  const metricsDir = path.join(PROJECT_ROOT, datasetDir("metrics.definitions"));
   const active = new Set();
   try {
     for (const f of fs.readdirSync(metricsDir)) {

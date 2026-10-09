@@ -19,6 +19,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT_ROOT = path.resolve(__dirname, "..", "..", "..");
@@ -43,7 +44,7 @@ const gone = extractQuotedKeys(
 );
 
 // metric config の isActive:true キー
-const metricsDir = path.join(PROJECT_ROOT, "data/metrics");
+const metricsDir = path.join(PROJECT_ROOT, datasetDir("metrics.definitions"));
 const active = new Set();
 for (const f of fs.readdirSync(metricsDir)) {
   if (!f.endsWith(".ts")) continue;

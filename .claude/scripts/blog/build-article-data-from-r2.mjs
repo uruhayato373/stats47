@@ -18,12 +18,13 @@
 import fs from "fs";
 import path from "path";
 import { R2_PUBLIC_BASE_URL } from "../lib/site-config.cjs";
+import { datasetDir } from "../../../config/datasets.mjs";
 
 const PROJECT_ROOT = path.resolve(import.meta.dirname, "../../..");
 const R2_PUBLIC_BASE = process.env.R2_PUBLIC_FETCH_URL || R2_PUBLIC_BASE_URL;
 
 function metricTitle(metricKey) {
-  const f = path.join(PROJECT_ROOT, "data/metrics", `${metricKey}.ts`);
+  const f = path.join(PROJECT_ROOT, datasetDir("metrics.definitions"), `${metricKey}.ts`);
   if (!fs.existsSync(f)) return metricKey;
   const txt = fs.readFileSync(f, "utf8");
   const m = txt.match(/"title":\s*"([^"]+)"/);

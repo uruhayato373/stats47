@@ -11,8 +11,9 @@
  */
 import fs from "node:fs";
 import path from "node:path";
+import { datasetDir } from "../../../config/datasets.mjs";
 
-const DIR = "data/metrics";
+const DIR = datasetDir("metrics.definitions");
 
 // 既存 key / title (衝突回避)
 const existKeys = new Set(), existTitles = new Set();

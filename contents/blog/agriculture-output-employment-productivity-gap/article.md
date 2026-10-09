@@ -4,7 +4,7 @@ seoTitle: "農業産出額と農業就業人口を47都道府県で比較｜1人
 subtitle: "人数の並びは揃うのに、1人あたりの参考値は5.6倍違う"
 description: "農業就業人口が多い県ほど農業産出額も大きいのでしょうか。2014年の47都道府県で比べると順位相関は0.92と高い一方、産出額を就業人口で割った参考値は北海道1,150.6万円から奈良207.0万円まで5.6倍に開きます。ただし分子と分母の範囲がそろわないため、差の理由は切り分けられません。"
 slug: agriculture-output-employment-productivity-gap
-published: false
+published: true
 archetype: B
 category: agriculture
 tags:
