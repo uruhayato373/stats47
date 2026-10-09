@@ -7,7 +7,7 @@
  * 詳細な背景は生成スクリプトの docstring を参照。
  *
  * 最終生成日: 2026-10-09
- * 件数: blog 607 / tag 69 / survey 147
+ * 件数: blog 607 / tag 69 / survey 149
  */
 
 export interface SitemapBlogEntry {
@@ -714,6 +714,7 @@ export const SITEMAP_SURVEY_IDS: readonly string[] = [
   "academic-achievement-survey",
   "accommodation-survey",
   "administrative-investment-report",
+  "age-adjusted-mortality-statistics",
   "agricultural-income-statistics",
   "agriculture-forestry-census",
   "agriculture-management-survey",
@@ -743,6 +744,7 @@ export const SITEMAP_SURVEY_IDS: readonly string[] = [
   "establishment-enterprise-census",
   "factory-location-survey",
   "farmland-transfer-conversion-report",
+  "financial-literacy-survey",
   "fire-annual-report",
   "fishery-aquaculture-production",
   "fishery-census",

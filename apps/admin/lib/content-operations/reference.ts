@@ -106,11 +106,16 @@ export interface ReferenceContentInput {
   areaDatabookMetricKeys?: string[];
   /** 展開先に「載せない」と決めた記録 (packages/data-configs/src/evidence-inventory/placement-decisions.ts) */
   placementDecisions?: Array<{
-    channel: 'area' | 'japan';
+    channel: ReferenceProductionChannelDTO;
     metricKey: string;
-    status: 'rejected' | 'blocked';
+    status: 'planned' | 'rejected' | 'blocked';
     reason: string;
+    target?: string;
   }>;
+  /** SNS の投稿台帳で投稿済みの行が扱った指標 (展開先 → 指標 → 投稿 ID) */
+  snsPostedMetrics?: Partial<Record<'x' | 'instagram' | 'youtube', Record<string, number[]>>>;
+  /** ブログの候補キューの未着手の候補 (data/blog/topic-queue.json) */
+  blogTopicQueue?: Array<{ topicKey: string; metricKeys: string[] }>;
   surveys?: Array<{ id: string }>;
   themes?: ReferenceThemeSource[];
   japanThemes?: ReferenceThemeSource[];
@@ -185,12 +190,53 @@ function coverage(
 
 /** 展開先に載せないと決めた記録を段階に変換する。rejected は対象外、blocked は停止中として数える */
 function decidedCoverage(
-  channel: 'area' | 'japan',
-  decision: { status: 'rejected' | 'blocked'; reason: string }
+  channel: ReferenceProductionChannelDTO,
+  decision: { status: 'planned' | 'rejected' | 'blocked'; reason: string; target?: string }
 ): ReferenceChannelCoverageDTO {
+  if (decision.status === 'planned') {
+    return coverage(channel, 'draft', decision.target ? [decision.target] : [], `企画中: ${decision.reason}`);
+  }
   return decision.status === 'rejected'
     ? coverage(channel, 'not-applicable', [], `採用を見送った: ${decision.reason}`)
-    : coverage(channel, 'blocked', [], `停止中: ${decision.reason}`);
+    : coverage(channel, 'blocked', decision.target ? [decision.target] : [], `停止中: ${decision.reason}`);
+}
+
+/**
+ * 正本ごとの判定のあとに、全展開先へ共通で当てる仕上げ:
+ * - SNS は投稿台帳の投稿済みの行が扱った指標なら済み (投稿 ID を itemIds に)
+ * - 済みでない展開先に「載せない・企画中・停止」の記録があれば、それを優先する
+ * - ブログの「着手できる」が候補キューに載っていれば、その候補を示す
+ */
+function finalizeChannels(
+  channels: ReferenceChannelCoverageDTO[],
+  key: string,
+  input: ReferenceContentInput,
+  decisionOf: (channel: ReferenceProductionChannelDTO, key: string) => ReturnType<NonNullable<ReferenceContentInput['placementDecisions']>['find']>
+): ReferenceChannelCoverageDTO[] {
+  return channels.map((channel) => {
+    if (channel.channel === 'x' || channel.channel === 'instagram' || channel.channel === 'youtube') {
+      const postIds = input.snsPostedMetrics?.[channel.channel]?.[key] ?? [];
+      if (postIds.length > 0) {
+        return coverage(channel.channel, 'integrated', postIds.map((id) => `sns:${id}`), '投稿台帳に投稿済みの投稿あり');
+      }
+    }
+    if (channel.stage !== 'integrated') {
+      const decision = decisionOf(channel.channel, key);
+      if (decision) return decidedCoverage(channel.channel, decision);
+    }
+    if (channel.channel === 'blog' && channel.stage === 'ready') {
+      const topics = (input.blogTopicQueue ?? []).filter((topic) => topic.metricKeys.includes(key));
+      if (topics.length > 0) {
+        return coverage(
+          'blog',
+          'ready',
+          [...channel.itemIds, ...topics.map((topic) => `topic:${topic.topicKey}`)],
+          `ブログの候補キューにあり (${topics.length} 件): ${channel.detail}`
+        );
+      }
+    }
+    return channel;
+  });
 }
 
 function sourceSummary(inventory: SourceEvidenceInventory) {
@@ -388,7 +434,7 @@ export function buildReferenceContentPortfolio(
   }
 
   const areaDatabookKeys = new Set(input.areaDatabookMetricKeys ?? []);
-  const placementDecisionOf = (channel: 'area' | 'japan', key: string) =>
+  const placementDecisionOf = (channel: ReferenceProductionChannelDTO, key: string) =>
     (input.placementDecisions ?? []).find(
       (decision) => decision.channel === channel && decision.metricKey === key
     );
@@ -567,8 +613,6 @@ export function buildReferenceContentPortfolio(
       // (台帳の area 役割はエントリ単位で、採用・不採用の指標が同じエントリに混ざるため)
       siteReady && areaDatabookKeys.has(key)
         ? coverage('area', 'integrated', [key], '県データブックの共通テンプレートへ採用済み')
-        : roles.includes('area') && placementDecisionOf('area', key)
-          ? decidedCoverage('area', placementDecisionOf('area', key)!)
         : roles.includes('area')
           ? coverage(
               'area',
@@ -579,9 +623,7 @@ export function buildReferenceContentPortfolio(
                 : '公開中の指標が無いため停止'
             )
           : coverage('area', 'not-applicable', [], '地域別解説対象外'),
-      roles.includes('japan') && japanHits.length === 0 && placementDecisionOf('japan', key)
-        ? decidedCoverage('japan', placementDecisionOf('japan', key)!)
-        : roles.includes('japan')
+      roles.includes('japan')
         ? coverage(
             'japan',
             japanHits.length > 0
@@ -710,6 +752,7 @@ export function buildReferenceContentPortfolio(
             )
           : coverage('x', 'not-applicable', [], '基礎コンテンツが未採択')),
     ];
+    const finalChannels = finalizeChannels(channels, key, input, placementDecisionOf);
 
     units.push({
       id: `metric:${key}`,
@@ -725,8 +768,8 @@ export function buildReferenceContentPortfolio(
       roles,
       geoScopes,
       surveyIds,
-      channels,
-      nextAction: nextAction(channels),
+      channels: finalChannels,
+      nextAction: nextAction(finalChannels),
       sourcePaths: unique([
         ...evidence.map(({ inventory }) => inventory.sourcePath),
         ...(metric ? [metric.sourcePath] : []),

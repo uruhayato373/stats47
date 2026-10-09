@@ -2532,17 +2532,7 @@ updated: 2026-10-06
 - **前提**: `japan-zue`の解決済みinventoryは論点発見だけに使う。記事・テーマへ載せる定義、年度、単位、値は、各metricの一次資料とR2観測値で再検証する。原文、OCR、書籍値、内部cropは公開しない。
 - **テーマ企画**: 参考文献で`theme`対象になり、既存ThemeCatalogまたはIndicatorSetへ未統合の制作単位だけを保持する。`draft`は採択・チャート設計待ち、`blocked`はactiveな公開metricが無いため停止中。
 
-<!-- reference-theme-plans:start -->
-| metricKey | title | targetTheme | status | hypothesis |
-| --- | --- | --- | --- | --- |
-| projected-population-2020 | 将来推計人口 | population-dynamics | blocked | 将来人口と現在の人口動態を同じ時間軸で比較する |
-| gross-prefectural-product-expenditure-nominal-h27 | 県内総生産 | local-economy | blocked | 地域経済の規模と産業・雇用構造を同じ画面で比較する |
-| students-requiring-japanese-instruction | 日本語指導が必要な児童生徒数 | education-culture | blocked | 国籍と支援ニーズを分け、人数・児童生徒比・学校側の受入体制を重ねて読む |
-| general-households | 一般世帯数 | population-dynamics | draft | [却下 2026-09-14] 人口動態=増減メカニズムと無関係、世帯構造は別テーマ向き |
-| area-ratio-of-total | 面積割合 | climate | draft | [却下 2026-09-14] 面積割合は気候(気象)と直接関係せず地理指標 |
-| number-of-establishments-manufacturing | 製造業事業所数 | manufacturing | draft | [却下 2026-09-14] 登録済みmanufacturing-establishmentsと同一statsDataId重複、年度が古い |
-| average-life-expectancy-male | 男性の平均余命 | healthcare | draft | [却下 2026-09-14] subtitle年齢欠落・値63年が0歳時点と矛盾、metric要修正が先 |
-<!-- reference-theme-plans:end -->
+(2026-10-10 に `packages/data-configs/src/evidence-inventory/placement-decisions.ts` の channel=theme へ移した。企画中・停止・見送りはそこが正本で、管理画面 `/content/references` が読む)
 
 - **2026-09-14 テーマ企画14件を判定 (theme-designer)**: 採択11件をcontext roleでThemeCatalogへ追加 (`sex-ratio-total`→population-dynamics、`day-time-population`→labor-mobility、`electricity-generation-capacity`/`agricultural-employment-population`→local-economy、`avg-propensity-to-consume-worker-households`→real-income、`municipality-count`/`households-on-public-assistance`→local-finance、`infant-deaths`/`infant-mortality-rate-per-1000-births`/`average-life-expectancy-female-20`/`average-life-expectancy-female-65`→healthcare)。却下3件: `general-households`(人口動態=増減メカニズムと無関係、世帯構造テーマ向き)、`area-ratio-of-total`(気候テーマと面積は無関係、landweatherカテゴリのまま)、`number-of-establishments-manufacturing`(登録済み`manufacturing-establishments`と同一statsDataId・年度が古い重複)、`average-life-expectancy-male`(subtitleに年齢欠落・値63年が0歳時点と矛盾し要metric修正)。`generate:catalog`→`validate:catalog`(0 error/0 warn)→`tsc --noEmit -p apps/web/tsconfig.json`(0 error)まで確認済み。
 - **ブログ下書き**: `contents/blog/{household-structure-daytime-population-gap,agriculture-output-employment-productivity-gap,electricity-generation-manufacturing-establishments-gap,household-spending-debt-propensity-gap}/article.md`。4本とも`published:false`で、一次資料・R2接地前の数値主張を置かない。`general-households`/`number-of-establishments-manufacturing`は却下済みのため、該当2本のペア構成をarticle-writerが着手前に見直す。
@@ -3354,16 +3344,6 @@ doboku-note と同じ検討（両サイト共通の論点）。（出典: 2026-0
   反映を別 job に分ける、のどれで時間内に収めるかを決める。途中で止まったときに旧アプリと新データが混ざらない順序かも確かめる。
 - **完了条件**: 全件の反映が必要なリリースでも、デプロイが時間制限内に終わる (実測で余裕を持って)。
 
-### [ADMIN-REFERENCE-BLOG-MIRROR-01] 参考文献の展開状況が、ブログの公開状況を手元の R2 の写しから数え、写しが無いと黙って 0 本と表示する
-
-タグ: [エージェント・SSOT] [種類:不具合] [実行:対話] [起票:2026-10-10] [領域:管理]
-
-- **観測 (2026-10-10)**: `apps/admin/lib/content-operations/load.ts` の `loadBlogs` は `.local/r2/app/blog/all.json` と各 `article.md` (手元の写し) を読む。
-  写しが無い・古い環境では公開記事を 0 本として数え、ブログの「済み」が 0 になる。2026-10-08〜09 はこの状態で「教材由来のブログ公開 0 本」と報告していた。
-  R2 から全 618 本を取って数え直すと、ブログの「済み」は 239 件 (着手できる 186 件・下書き 4 件)。
-- **次**: 写しが無い・一定より古いときは集計を「不明」にして画面と監査 (`audit:content-operations`) に出すか、R2 の公開 URL から読む。
-- **完了条件**: 写しが無い環境で、ブログの済みが 0 と表示されず、不明であることが画面に出る (テストで固定)。
-
 ## 🟢 低 — 時期未定・条件付き (trigger は本文に)
 
 ### [DATA-SHUKUHAKU-CORRECTION-01] 宿泊旅行統計の 2026 年分を足すときに、層化基準の変更による系列の断絶を書く
@@ -3848,7 +3828,7 @@ stats47 で培ったデータ加工を、受託・販売などの形で収入に
 - **観測 (2026-10-08)**: 参考文献由来の公開指標 `child-abuse-consultation-cases` (児童虐待相談対応件数) を既存 55 テーマのどれにも採用できなかった
   (theme-designer の判断。保育の需給・ひとり親の主題とは別)。
 - **判断すること**: 児童相談・不登校・子どもの貧困などを束ねるテーマを作るか、指標をランキング単体のまま置くか。
-- **完了条件**: 新設なら theme-designer がカタログを作り、見送りなら参考文献のテーマ企画の表の行に理由を残す。
+- **完了条件**: 新設なら theme-designer がカタログを作り、見送りなら `placement-decisions.ts` の child-abuse-consultation-cases (channel=theme) を rejected と理由に書き換える。
 
 ### [KOUMUIN-AI-ENV-SERIES-01] 公務員AIノートに「職場のAI環境別」（庁内AIあり／なし）の記事を足すか決める
 タグ: [収益化] [種類:意思決定] [実行:対話] [起票:2026-10-09] [領域:商品]

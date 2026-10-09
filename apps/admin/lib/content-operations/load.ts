@@ -22,7 +22,6 @@ import { KDP_PORTFOLIO_POLICY } from '../../../../packages/product-factory/src/c
 import surveysMaster from '../../../../packages/ranking/src/data/surveys.json';
 
 import {
-  ContentBlogIndex,
   ContentKdpListingsState,
   ContentKindleBuildState,
   ContentKindleArchiveState,
@@ -201,24 +200,57 @@ function loadJapanTargets(root: string, metricKeys: string[]) {
   });
 }
 
-function loadBlogs(root: string): ReferenceBlogSource[] {
-  const raw = readOptionalJson(root, '.local/r2/app/blog/all.json');
-  const index = raw ? ContentBlogIndex.parse(raw) : { articles: [] };
-  const published = index.articles.map((article) => {
-    const articlePath = path.join(root, '.local/r2/app', article.filePath);
-    const body = fs.existsSync(articlePath)
-      ? fs.readFileSync(articlePath, 'utf8')
-      : '';
-    const rankingKeys = [...body.matchAll(/\/ranking\/([a-z0-9-]+)/g)].map(
-      (match) => match[1]
+/**
+ * SNS の投稿台帳 (data/sns/posts.json) の投稿済みの行から、展開先ごとに「その指標を扱った投稿 ID」を集める。
+ * 指標は metric_keys と、ランキングの投稿 (domain=ranking) の content_key から取る。
+ */
+function snsPostedMetrics(posts: ReadonlyArray<Record<string, unknown>>) {
+  const byChannel: Record<'x' | 'instagram' | 'youtube', Record<string, number[]>> = {
+    x: {},
+    instagram: {},
+    youtube: {},
+  };
+  for (const post of posts) {
+    const platform = post.platform as string;
+    if (post.status !== 'posted' || !(platform in byChannel)) continue;
+    const keys = new Set<string>(
+      Array.isArray(post.metric_keys) ? (post.metric_keys as string[]) : []
     );
-    return {
-      slug: article.slug,
-      title: article.title,
-      published: article.published,
-      rankingKeys: [...new Set(rankingKeys)],
-    };
-  });
+    if (post.domain === 'ranking' && typeof post.content_key === 'string') keys.add(post.content_key);
+    for (const key of keys) {
+      const ids = (byChannel[platform as keyof typeof byChannel][key] ??= []);
+      if (typeof post.id === 'number') ids.push(post.id);
+    }
+  }
+  return byChannel;
+}
+
+/** ブログの候補キュー (data/blog/topic-queue.json) の未着手の候補 */
+function loadBlogTopicQueue(root: string) {
+  const raw = readOptionalJson(root, `${datasetDir('blog.operations')}/topic-queue.json`) as {
+    queue?: Array<{ topicKey: string; metricKeys: string[]; status: string }>;
+  } | null;
+  return (raw?.queue ?? [])
+    .filter((item) => item.status === 'pending')
+    .map((item) => ({ topicKey: item.topicKey, metricKeys: item.metricKeys }));
+}
+
+function loadBlogs(root: string): ReferenceBlogSource[] {
+  // 公開記事はページID台帳 (data/content/pages/blog.json) を正本にする。記事が使う指標 (rankingKeys) は
+  // 台帳の生成時に図の source.json と本文の /ranking/ リンクから焼き込まれている。手元の R2 の写し
+  // (.local/r2/app/blog) に依存すると、写しが無い環境で公開記事を 0 本と数えた (ADMIN-REFERENCE-BLOG-MIRROR-01)。
+  // 台帳は git 管理なので実リポジトリでは必ずある。無いのはテスト用の最小 fixture だけ
+  const index = (readOptionalJson(root, `${datasetDir('content.pages')}/blog.json`) ?? { pages: [] }) as {
+    pages: Array<{ key: string; title: string; published: boolean; rankingKeys?: string[] }>;
+  };
+  const published = index.pages
+    .filter((page) => page.published)
+    .map((page) => ({
+      slug: page.key,
+      title: page.title,
+      published: true,
+      rankingKeys: [...new Set(page.rankingKeys ?? [])],
+    }));
   const outbox = path.join(root, 'contents/blog');
   const drafts: ReferenceBlogSource[] = [];
   if (fs.existsSync(outbox)) {
@@ -438,6 +470,8 @@ export function loadContentOperations(
     ].filter((file) => fs.existsSync(path.join(root, file))),
     areaDatabookMetricKeys: areaDatabookMetricKeys(),
     placementDecisions: REFERENCE_PLACEMENT_DECISIONS.map((decision) => ({ ...decision })),
+    snsPostedMetrics: snsPostedMetrics(social.posts as ReadonlyArray<Record<string, unknown>>),
+    blogTopicQueue: loadBlogTopicQueue(root),
     areas: prefectures.map((prefecture) => {
       const editorialPath = `packages/data-configs/src/area-databook/editorial/${prefecture.prefCode}.ts`;
       return {

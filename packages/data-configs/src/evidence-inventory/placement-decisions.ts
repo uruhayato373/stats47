@@ -5,29 +5,51 @@
  * rejected は「対象外 (採用を見送った)」、blocked は「停止中」として数える。記録が無いと、
  * 判断済みの指標がいつまでも「着手できる」に残り、未着手の件数が実態とずれる。
  *
+ * - planned: 載せる企画を立てた (target に展開先の slug。テーマの企画表は 2026-10-10 に backlog の表からここへ移した)
  * - rejected: 展開先の読み手にとって載せる価値が無いと判断した (理由を必ず書く)
- * - blocked: 載せたいが、生成器や設定の不備で今は載せられない (解消したら行を消して載せる)
+ * - blocked: 載せたいが、生成器や設定の不備・判断待ちで今は載せられない (解消したら行を消して載せる)
  *
  * 判断は展開先の担当 (県データブック = area-databook-designer、/japan = japan-catalog.ts の採用条件) が行い、
  * 判断の出どころは decidedBy に書く。採用したものはここに書かない (テンプレート・カタログ側が正本)。
  */
-export type ReferencePlacementChannel = "area" | "japan";
+export type ReferencePlacementChannel =
+  | "theme"
+  | "area"
+  | "japan"
+  | "blog"
+  | "note"
+  | "youtube"
+  | "instagram"
+  | "x";
 
 export interface ReferencePlacementDecision {
   channel: ReferencePlacementChannel;
   metricKey: string;
-  status: "rejected" | "blocked";
+  status: "planned" | "rejected" | "blocked";
   reason: string;
+  /** planned / blocked の企画で、載せる先 (テーマなら themeSlug) */
+  target?: string;
+  /** 管理画面の企画一覧に出す見出し (省略時は指標の key) */
+  title?: string;
   decidedAt: string;
   decidedBy: string;
 }
 
+const THEME_BY = "theme-designer (2026-09-14 判定) と参考文献の展開判断";
 const AREA_BY = "area-databook-designer + 反証レビュー (workflow wf_d6395a0b-9e0)";
 const JAPAN_BY = "verify-japan-candidates.ts の値レベル検証 + 反証レビュー (workflow wf_d6395a0b-9e0)";
 const KAKEI_BLOCKED =
   "家計調査の品目で全国値はあるが、全国時系列の生成器 (generate-japan-series.ts の official モード) が kakei-chousa に未対応";
 
 export const REFERENCE_PLACEMENT_DECISIONS: readonly ReferencePlacementDecision[] = [
+  { channel: "theme", metricKey: "projected-population-2020", status: "blocked", target: "population-dynamics", title: "将来推計人口", reason: "将来人口と現在の人口動態を同じ時間軸で比較する企画。公開中の指標が無いため停止", decidedAt: "2026-09-14", decidedBy: THEME_BY },
+  { channel: "theme", metricKey: "gross-prefectural-product-expenditure-nominal-h27", status: "blocked", target: "local-economy", title: "県内総生産", reason: "地域経済の規模と産業・雇用構造を同じ画面で比較する企画。公開中の指標が無いため停止", decidedAt: "2026-09-14", decidedBy: THEME_BY },
+  { channel: "theme", metricKey: "students-requiring-japanese-instruction", status: "blocked", target: "education-culture", title: "日本語指導が必要な児童生徒数", reason: "国籍と支援ニーズを分け、人数・児童生徒比・学校側の受入体制を重ねて読む企画。公開中の指標が無いため停止", decidedAt: "2026-09-14", decidedBy: THEME_BY },
+  { channel: "theme", metricKey: "general-households", status: "rejected", reason: "人口動態は増減の仕組みを扱うテーマで無関係。世帯構造は別テーマ向き", decidedAt: "2026-09-14", decidedBy: THEME_BY },
+  { channel: "theme", metricKey: "area-ratio-of-total", status: "rejected", reason: "面積割合は気候 (気象) と直接関係しない地理指標", decidedAt: "2026-09-14", decidedBy: THEME_BY },
+  { channel: "theme", metricKey: "number-of-establishments-manufacturing", status: "rejected", reason: "登録済みの manufacturing-establishments と同じ統計表の重複で、年度が古い", decidedAt: "2026-09-14", decidedBy: THEME_BY },
+  { channel: "theme", metricKey: "average-life-expectancy-male", status: "rejected", reason: "subtitle に年齢が無く、値 63 年が 0 歳時点と矛盾する。指標の修正が先", decidedAt: "2026-09-14", decidedBy: THEME_BY },
+  { channel: "theme", metricKey: "child-abuse-consultation-cases", status: "blocked", title: "児童虐待相談対応件数", reason: "既存 55 テーマに合うものが無い。児童福祉・子どもの安全のテーマを新設するかの判断待ち (THEME-CHILD-WELFARE-01)", decidedAt: "2026-10-08", decidedBy: THEME_BY },
   { channel: "area", metricKey: "average-life-expectancy-male", status: "rejected", reason: "平均寿命の男女対と重複し、基準は2020年の年齢別余命で古い", decidedAt: "2026-10-09", decidedBy: AREA_BY },
   { channel: "area", metricKey: "average-life-expectancy-female-20", status: "rejected", reason: "平均寿命の男女対と重複し、2020年の年齢別余命で古い", decidedAt: "2026-10-09", decidedBy: AREA_BY },
   { channel: "area", metricKey: "average-life-expectancy-female-65", status: "rejected", reason: "平均寿命の男女対と重複し、2020年の年齢別余命で古い", decidedAt: "2026-10-09", decidedBy: AREA_BY },

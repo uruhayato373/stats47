@@ -169,8 +169,14 @@ Drive への保全だけでは stats47 への採用を意味しない。OCR、in
 - `context-only`は既存記事の分析文脈にだけ使い、単独の制作単位へ昇格しない。`rights-hold`、
   `primary-source-unavailable`、`not-applicable`は制作キューへ入れない。metricまたはareaへの公開可能な接続を持つ
   `reuse-existing-metric`、`new-metric`、`combined-analysis`だけを制作単位にする。
-- 制作状況は各チャネルSSOTの実在証跡で判定する。サイトはactive metricまたはarea editorial、ブログは公開記事内の
-  `/ranking/<key>`接続、noteはcatalogの`stats47Targets`、Kindleはbook catalogの`rankingKeys`または`blogSlug`を使う。
+- 制作状況は各チャネルSSOTの実在証跡で判定する。サイトはactive metricまたはarea editorial、ブログはページID台帳
+  `data/content/pages/blog.json` の公開記事の`rankingKeys` (手元のR2の写しは読まない)、noteはcatalogの`stats47Targets`、
+  Kindleはbook catalogの`rankingKeys`または`blogSlug`、X / Instagram / YouTubeは投稿台帳`data/sns/posts.json`の
+  投稿済みの行 (`metric_keys`とランキング投稿の`content_key`) を使う。ブログの「着手できる」には
+  候補キュー`data/blog/topic-queue.json`の未着手の候補を添える (2026-10-10)。
+- 展開先に「載せない・企画中・停止」と決めた判断は、全展開先とも
+  `packages/data-configs/src/evidence-inventory/placement-decisions.ts` (planned / rejected / blocked と理由) を正本にし、
+  集計は済みでない展開先にだけ当てる。backlog の表や作業カードの本文に判断を置かない (テーマの企画表は 2026-10-10 に移した)。
   制作中はブログ`contents/blog/`、note`docs/31_note記事原稿/`、Kindle catalogのstatusを読む。
   推測による「制作中」「制作済み」判定は禁止する。
 
