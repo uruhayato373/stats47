@@ -18,14 +18,17 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "assumeChangesOnlyAffectDirectDependencies": true,
     "tsBuildInfoFile": ".next/cache/tsconfig.tsbuildinfo",
     "plugins": [
       {
         "name": "next"
       }
     ],
-    "types": ["node", "react", "react-dom"],
+    "types": [
+      "node",
+      "react",
+      "react-dom"
+    ],
     "typeRoots": [
       "../../node_modules/@types",
       "./node_modules/@types"
@@ -107,15 +110,15 @@
     }
   },
   "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
+    "../../index.ts",
+    "./.next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     ".next/types/**/*.ts",
     "next-env.d.ts",
-    "src/types/vitest.d.ts",
+    "src/**/*.ts",
+    "src/**/*.tsx",
     "src/types/jsdom.d.ts",
-    "./.next/types/**/*.ts",
-    "../../index.ts"
+    "src/types/vitest.d.ts"
   ],
   "exclude": [
     "node_modules",
@@ -129,12 +132,11 @@
     "sample",
     "**/__debug__",
     "**/__mocks__",
-
     ".local",
     "local-r2",
     "../../docs/docs",
     "playwright.config.ts",
     "tests/visual",
-    "database",
+    "database"
   ]
 }

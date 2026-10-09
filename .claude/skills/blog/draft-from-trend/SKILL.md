@@ -28,7 +28,7 @@ primary_agent: article-writer
 /draft-from-trend --from queue        # topic-queue の pending 先頭を 1 本
 ```
 
-- `metricKey`: `packages/data-configs/src/metrics/<key>.ts` に実在し `isActive:true` の key (例 `public-phone-count`)。**実在チェック必須** (`feedback_backlog_ranking_key_audit`: AI が実在しない key を捏造しがち)。
+- `metricKey`: `data/metrics/<key>.ts` に実在し `isActive:true` の key (例 `public-phone-count`)。**実在チェック必須** (`feedback_backlog_ranking_key_audit`: AI が実在しない key を捏造しがち)。
 - `trend-snapshot-path` / 自然文: そこから metric を 1 つ選定して slug を確定する
 - `--from queue`: **記事ネタ選定キュー起点**。`node .claude/scripts/blog/build-topic-queue.mjs --next 1` で
   次の pending 候補を取得し、その `archetype` / `metricKeys` / `suggestedTitle` を Step 1 の入力に使う。
@@ -41,7 +41,7 @@ primary_agent: article-writer
 
 1. 入力 (metric key / topic-queue / トレンド / GSC ギャップ / ユーザー指示) から **記事 1 本ぶんの metric を 1〜2 個**選ぶ。
    - archetype B (相関・真因) を狙うなら相関させる 2 metric (例 空き家率 × 高齢化率)。`--from queue` なら候補が metricKeys を持つ。
-2. **metric key の実在を確認**: `ls packages/data-configs/src/metrics/<key>.ts` と R2 `curl -sI https://storage.stats47.jp/app/stats/<key>/values.json` が 200 か。無ければ別 key に。
+2. **metric key の実在を確認**: `ls data/metrics/<key>.ts` と R2 `curl -sI https://storage.stats47.jp/app/stats/<key>/values.json` が 200 か。無ければ別 key に。
 3. `slug` を curiosity-gap を意識して確定 (英小文字 kebab)。既存公開記事と重複しないか `curl -s https://storage.stats47.jp/app/blog/all.json` で確認 (カニバリ防止)。
 4. **archetype を決める** (`.claude/rules/blog-quality-standards.md` の A/B/C/D/D2/E/F/G)。決めた型の必須分析視点・章構成に沿って書く。
 

@@ -13,3 +13,7 @@ export declare const LOCAL_RESOURCES: string;
 export declare const SOURCE_VAULT: string;
 export declare const YOY_BATCH: string;
 export declare const THEME_SELECTION_VIEWPOINTS: string;
+export declare const METRIC_DEFINITIONS_DIR: "data/metrics";
+export declare const METRIC_SOURCES_DIR: "data/metric-sources";
+export declare const METRIC_SCHEMA: string;
+export declare const METRIC_LINKAGE: string;

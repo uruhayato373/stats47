@@ -1,0 +1,63 @@
+import { DEFAULT_METRIC_PRESENTATION } from "./defaults/presentation";
+import type { MetricConfig } from "../../packages/data-configs/src/types";
+
+export const publicUniversityStudentRatio: MetricConfig = {
+  "key": "public-university-student-ratio",
+  "title": "公立大学学生数割合",
+  "unit": "％",
+  "category": "educationsports",
+  "source": {
+    "kind": "estat",
+    "statsDataId": "0000010205",
+    "cdCat01": "#E0620402",
+    "displayName": "社会・人口統計体系",
+    "url": "https://www.stat.go.jp/data/ssds/index.htm",
+  },
+  "entities": [
+    "prefecture",
+  ],
+  "years": {
+    "years": [
+      1983,
+      1984,
+      1985,
+      1986,
+      1987,
+      1988,
+      1989,
+      1990,
+      1991,
+      1992,
+      1993,
+      1994,
+      1995,
+      1996,
+      1997,
+      1998,
+      1999,
+      2000,
+      2001,
+      2002,
+      2003,
+      2004,
+      2005,
+      2024,
+    ],
+  },
+  "yearFormat": "fiscal",
+  "visualization": {
+    ...DEFAULT_METRIC_PRESENTATION,
+    "colorScheme": "interpolateBlues",
+    "colorSchemeType": "sequential",
+  },
+  "display": {
+    "conversionFactor": 1,
+    "decimalPlaces": 1,
+  },
+  "calculation": {
+    "isCalculated": false,
+  },
+  "seoTitle": "公立大学学生数割合ランキング都道府県【2024年】｜1位高知県（39.8％）",
+  "seoDescription": "2024年の公立大学学生数割合の都道府県別ランキング。1位高知県（39.8％）、最下位鹿児島県（0％）で地図やグラフで47都道府県を比較。",
+  "isActive": true,
+};

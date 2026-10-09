@@ -66,6 +66,7 @@ export interface D3LineChartProps extends BaseD3ChartProps, MarginProps {
   tooltipFormatter?: (value: number) => string;
   /** 左Y軸の固定ドメイン（指定時は自動スケーリングを上書き）。右軸には適用しない */
   yDomain?: [number, number];
+  rightYDomain?: [number, number];
   /**
    * 右Y軸の単位ラベル。`series[].yAxis === "right"` の系列がある場合に軸頭へ表示する。
    * 左軸の単位は既存の `unit` が担う。

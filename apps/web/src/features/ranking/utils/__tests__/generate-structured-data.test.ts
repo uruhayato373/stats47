@@ -29,7 +29,7 @@ const mockItem: Partial<RankingItem> = {
     ],
     // 本番 item.json と同じ形 (builder は top-level の `source` を出力しない)
     sourceConfig: {
-        statsDataId: "0000010103",
+        recipe: {kind:"estat", estatParams: {statsDataId:"0000010103"}, derived:false, configHash:"fixture"},
         source: { name: "社会・人口統計体系", url: "https://www.stat.go.jp/data/ssds/index.htm" },
     },
     updatedAt: "2026-05-17T01:23:45.000Z",
@@ -132,7 +132,7 @@ describe("generateRankingPageStructuredData", () => {
         const result = generateRankingPageStructuredData({
             rankingItem: {
                 ...mockItem,
-                sourceConfig: { source: { name: "国土数値情報", url: "https://nlftp.mlit.go.jp/ksj/" } },
+                sourceConfig: { recipe: {kind: "external", derived: false, configHash: "fixture"}, source: { name: "国土数値情報", url: "https://nlftp.mlit.go.jp/ksj/" } },
             } as RankingItem,
             rankingValues: mockValues as RankingValue[],
             selectedYear: "2021",

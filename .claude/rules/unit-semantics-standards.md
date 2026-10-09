@@ -1,6 +1,7 @@
 ---
 paths:
-  - "packages/data-configs/src/{unit,metrics}/**"
+  - "data/metrics/**"
+  - "packages/data-configs/src/unit/**"
   - "packages/data-configs/src/money-unit.ts"
   - ".claude/scripts/lib/{unit-semantics,article-factual-check}.mjs"
   - ".claude/skills/db/audit-units/**"
@@ -87,7 +88,7 @@ config の文字列を貼るだけなので、**宣言が無いと config が「
 2026-08-05 に職業別平均年収 39 件がこの状態で 10 倍過大だった (東京の調理従事者が 4,153.9「万円」)。
 
 ```ts
-// packages/data-configs/src/metrics/cook-annual-income.ts
+// data/metrics/cook-annual-income.ts
 source: { kind: "estat", statsDataId: "0003445758", valueScale: 0.1, /* 千円 → 万円 */ … }
 ```
 

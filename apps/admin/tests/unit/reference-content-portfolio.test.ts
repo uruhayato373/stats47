@@ -64,7 +64,7 @@ function fixture(
         key: 'sample-metric',
         title: 'サンプル指標',
         active: true,
-        sourcePath: 'packages/data-configs/src/metrics/sample-metric.ts',
+        sourcePath: 'data/metrics/sample-metric.ts',
       },
     ],
     blogs: [
@@ -204,7 +204,7 @@ describe('reference content portfolio', () => {
           key: 'sample-metric',
           title: 'サンプル指標',
           active: false,
-          sourcePath: 'packages/data-configs/src/metrics/sample-metric.ts',
+          sourcePath: 'data/metrics/sample-metric.ts',
         },
       ],
       blogs: [],

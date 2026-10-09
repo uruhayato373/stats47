@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { METRICS_REGISTRY, mergeDataSourceEntries } from '@stats47/data-configs';
+import { METRICS_REGISTRY, buildRecipe, mergeDataSourceEntries } from '@stats47/data-configs';
 
 import {
   extractGeoAnalysisSlugs,
@@ -107,7 +107,7 @@ describe('resolveMetricDataSources', () => {
 describe('resolveRankingItemDataSources', () => {
   it('統計表 ID が無い item は焼き込み済みの source と原典調査から作る', () => {
     const entries = resolveRankingItemDataSources({
-      sourceConfig: { source: { name: '国土数値情報', url: 'https://nlftp.mlit.go.jp/ksj/' } },
+      sourceConfig: { recipe: buildRecipe(METRICS_REGISTRY['fishing-port-count-ksj']), source: { name: '国土数値情報', url: 'https://nlftp.mlit.go.jp/ksj/' } },
       attribution: { compilation: null, originalSurveys: [{ id: 'mlit-ksj', name: '国土数値情報' }] },
     });
     expect(entries).toEqual([
@@ -120,7 +120,7 @@ describe('resolveRankingItemDataSources', () => {
 
   it('統計表 ID がある item は e-Stat の統計表を指す', () => {
     const entries = resolveRankingItemDataSources({
-      sourceConfig: { statsDataId: '0000010101', cdCat01: 'A1101' },
+      sourceConfig: { recipe: buildRecipe(METRICS_REGISTRY['total-population']) },
     });
     expect(entries[0].tables).toEqual([{ label: '統計表', url: `${ESTAT}0000010101` }]);
   });

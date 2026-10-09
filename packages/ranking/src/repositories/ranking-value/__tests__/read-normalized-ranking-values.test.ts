@@ -27,6 +27,7 @@ const values: RankingValue[] = ["2023", "2024"].map((yearCode) => ({
 }));
 const original = [{ ...values[1], value: 240000, unit: "円" }];
 const item: RankingItem = {
+    visualization: { domain: { mode: 'extent' }, colorScheme: 'interpolateBlues', colorSchemeType: 'sequential',  classification: { method: 'equal-interval', classes: 5 }, trendDomain: { mode: 'extent', padding: 0.08 }, comparisonDomain: { mode: 'extent', padding: 0.05 } },
   rankingKey: key, rankingName: "支出", title: "支出", areaType: "prefecture",
   unit: "円", dataSourceId: "estat", isActive: true, hook: "支出を比較する",
   createdAt: "", updatedAt: "",

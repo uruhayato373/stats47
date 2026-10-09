@@ -125,8 +125,8 @@ function calculatedOperandKeys(metric: MetricConfig): string[] {
   if (source.kind === 'external' && source.fetcherKey === 'calculated') {
     const c = metric.calculation;
     return [
-      c?.numeratorKey ?? c?.numeratorRankingKey ?? c?.numerator,
-      c?.denominatorKey ?? c?.denominatorRankingKey ?? c?.denominator,
+      c?.numeratorKey,
+      c?.denominatorKey,
     ].filter((key): key is string => Boolean(key));
   }
   return [];
@@ -184,12 +184,12 @@ export function resolveRankingItemDataSources(input: {
   attribution?: SourceAttribution | null;
 }): DataSourceEntry[] {
   const config = input.sourceConfig;
-  const statsDataId = config?.statsDataId;
+  const statsDataId = config?.recipe.estatParams?.statsDataId;
   if (statsDataId) {
     const cdCat01 =
-      nonEmpty(config?.cdCat01) ?? nonEmpty(config?.estatParams?.cdCat01);
+      nonEmpty(config?.recipe.estatParams?.cdCat01);
     return mergeDataSourceEntries(
-      estatEntries(statsDataId, cdCat01, config?.survey?.name)
+      estatEntries(statsDataId, cdCat01, config?.source?.name)
     );
   }
   const source = isRecord(config?.source)

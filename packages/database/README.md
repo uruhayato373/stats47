@@ -74,7 +74,7 @@ Phase 6 (2026-05-27) で観測値を R2 JSON に全面移行。2026-05-29 にオ
 ### データ取り込みフロー (新規 metric 追加)
 
 ```
-1. packages/data-configs/src/metrics/<new-key>.ts 新規作成   # git TS が SSOT
+1. data/metrics/<new-key>.ts 新規作成   # git TS が SSOT
 2. /page-data-batch --metric <new-key>                       # e-Stat → R2 直行
 3. /push-r2 --prefix app/stats                               # 本番 R2 反映
 4. /sync-snapshots                                           # 派生 snapshot 更新 (エフェメラル計算 → R2)
@@ -286,7 +286,7 @@ packages/database/
 
 > ⚠️ **Phase 6 (2026-05-27) で観測値ストアを D1 から R2 へ全面移行済**
 >
-> 旧 D1 テーブル `stats_prefecture` / `stats_city` / `stats_port` / `stats_migration_flow` / `correlations` は **全 DROP 済** (Phase 7, 2026-05-28 で schema ファイルも削除)。観測値の SSOT は R2 (`app/stats/<metric>/{values,cities,ports,migration-flow-<year>}.json`)、metric メタの SSOT は TS-config (`packages/data-configs/src/metrics/<key>.ts`)、D1 `metrics` テーブルは TS-config の cache。
+> 旧 D1 テーブル `stats_prefecture` / `stats_city` / `stats_port` / `stats_migration_flow` / `correlations` は **全 DROP 済** (Phase 7, 2026-05-28 で schema ファイルも削除)。観測値の SSOT は R2 (`app/stats/<metric>/{values,cities,ports,migration-flow-<year>}.json`)、metric メタの SSOT は TS-config (`data/metrics/<key>.ts`)、D1 `metrics` テーブルは TS-config の cache。
 >
 > 詳細: `docs/01_技術設計/02_データアーキテクチャ.md` / `.claude/rules/r2-storage-design.md`
 

@@ -210,7 +210,10 @@
     "note:paid-landing:patch": "node .claude/scripts/note/patch-note-paid-landing.mjs",
     "note:paid-landing:test": "node --test .claude/scripts/note/__tests__/paid-landing-patch.test.mjs",
     "content:sync": "tsx apps/web/scripts/sync-content-catalog.ts",
-    "content:check": "tsx apps/web/scripts/sync-content-catalog.ts --check && tsx apps/web/scripts/validate-content-catalog.ts"
+    "content:check": "tsx apps/web/scripts/sync-content-catalog.ts --check && tsx apps/web/scripts/validate-content-catalog.ts",
+    "metrics:verify-snapshots": "tsx packages/ranking/src/scripts/verify-metric-presentation-snapshots.ts",
+    "metrics:check": "npm run metrics:check --workspace packages/data-configs",
+    "metrics:build-index": "npm run metrics:build-index --workspace packages/data-configs"
   },
   "devDependencies": {
     "@types/shapefile": "^0.6.4",

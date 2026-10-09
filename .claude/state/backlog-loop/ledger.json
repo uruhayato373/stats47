@@ -2934,7 +2934,7 @@
           "costUsd": null,
           "gate": {
             "commands": [
-              "$s=Get-Content -Raw -LiteralPath packages/data-configs/src/metrics/prime-contractor-completed-construction.ts; if($s -notmatch 0000010103 -or $s -notmatch isActive){exit 1}; Write-Output verified"
+              "$s=Get-Content -Raw -LiteralPath data/metrics/prime-contractor-completed-construction.ts; if($s -notmatch 0000010103 -or $s -notmatch isActive){exit 1}; Write-Output verified"
             ],
             "pass": true
           },
@@ -2952,7 +2952,7 @@
           "costUsd": null,
           "gate": {
             "commands": [
-              "Select-String -Quiet -Path packages/data-configs/src/metrics/prime-contractor-completed-construction.ts -Pattern 0000010103"
+              "Select-String -Quiet -Path data/metrics/prime-contractor-completed-construction.ts -Pattern 0000010103"
             ],
             "pass": true
           },

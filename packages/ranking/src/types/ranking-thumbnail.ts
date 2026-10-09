@@ -1,3 +1,4 @@
+import type { METRIC_DEFINITIONS_DIR } from '../../../../config/paths.mjs';
 import type { ImageGenerationManifest } from '@stats47/types';
 
 export const RANKING_THUMBNAIL_VERSION = 4;
@@ -24,7 +25,7 @@ export interface RankingThumbnailMetadata {
   source: {
     item: `app/ranking/${string}/item.json`;
     values: `app/ranking/${string}/values.json`;
-    config: `packages/data-configs/src/metrics/${string}.ts`;
+    config: `${typeof METRIC_DEFINITIONS_DIR}/${string}.ts`;
     topology: 'packages/gis/data/geoshape/prefecture.topojson';
   };
   assets: {

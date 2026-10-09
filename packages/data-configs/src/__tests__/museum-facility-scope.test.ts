@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
 
-import { aquariumCount } from "../metrics/aquarium-count";
-import { botanicalGardenCount } from "../metrics/botanical-garden-count";
-import { zooCount } from "../metrics/zoo-count";
+import { aquariumCount } from "../../../../data/metrics/aquarium-count";
+import { botanicalGardenCount } from "../../../../data/metrics/botanical-garden-count";
+import { zooCount } from "../../../../data/metrics/zoo-count";
 
 describe("博物館系指標の対象範囲", () => {
   it.each([botanicalGardenCount, zooCount, aquariumCount])(

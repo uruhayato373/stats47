@@ -21,7 +21,7 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { requestKey } from "../src/theme-catalog/chart-dependencies";
+import { requestKey } from "../src/source-coordinate";
 import { THEME_CATALOGS } from "../src/theme-catalog/index";
 import { getMetricConfig } from "../src/registry";
 

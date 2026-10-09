@@ -1,3 +1,4 @@
+import { METRIC_DEFINITIONS_DIR } from '../../../../config/paths.mjs';
 /**
  * audit-estat-year-coverage — 単年設定 (`years.from === years.to` 等) の metric config が、
  * e-Stat に本当はもっと多くの年の実データを持っていないかを機械的に検査する。
@@ -46,7 +47,7 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 import { METRICS_REGISTRY } from "@stats47/data-configs/registry";
 import type { MetricConfig } from "@stats47/data-configs";
 
-import { resolveEstatParams } from "../utils/source-config";
+import { buildRecipe } from "@stats47/data-configs";
 import { datasetDir } from "../../../../config/datasets.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -278,7 +279,7 @@ async function fetchValues(
   cdArea: string | null
 ): Promise<Array<Record<string, unknown>> | null> {
   if (config.source?.kind !== "estat") return null;
-  const estatParams = resolveEstatParams(config.source as unknown as Record<string, unknown>);
+  const estatParams = buildRecipe(config).estatParams;
   if (!estatParams) return null;
   const appId = readAppId();
   if (!appId) return null;
@@ -470,7 +471,7 @@ async function main() {
     "",
     "## 直し方",
     "",
-    "- `extend-candidate`: `packages/data-configs/src/metrics/<key>.ts` の `years` を",
+    "- `extend-candidate`: `" + METRIC_DEFINITIONS_DIR + "/<key>.ts` の `years` を",
     "  `availableYearCodes` の範囲へ拡張し (5年おき等は `{years:[...]}` 形式)、",
     "  `validate:years`/`validate:config` 後、`data/data-refresh-requests.json` を push して",
     "  `data-refresh.yml` に再取り込みさせる。正典: `.claude/rules/metric-config-standards.md`",

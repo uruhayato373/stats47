@@ -1,0 +1,74 @@
+import { DEFAULT_METRIC_PRESENTATION } from "./defaults/presentation";
+import type { MetricConfig } from "../../packages/data-configs/src/types";
+
+export const generalHospitalBedCountPer100k: MetricConfig = {
+  "key": "general-hospital-bed-count-per-100k",
+  "title": "一般病院病床数",
+  "subtitle": "人口10万人当たり",
+  "unit": "床",
+  "category": "socialsecurity",
+  "source": {
+    "kind": "estat",
+    "statsDataId": "0000010209",
+    "cdCat01": "#I0910203",
+    "displayName": "社会・人口統計体系",
+    "url": "https://www.stat.go.jp/data/ssds/index.htm"
+  },
+  "entities": [
+    "prefecture"
+  ],
+  "years": {
+    "years": [
+      1980,
+      1981,
+      1982,
+      1983,
+      1984,
+      1985,
+      1986,
+      1987,
+      1988,
+      1989,
+      1990,
+      1991,
+      1992,
+      1993,
+      1994,
+      1995,
+      1996,
+      1997,
+      1998,
+      1999,
+      2000,
+      2001,
+      2002,
+      2003,
+      2004,
+      2005,
+      2006,
+      2007,
+      2008,
+      2009,
+      2010,
+      2011,
+      2023
+    ]
+  },
+  "yearFormat": "fiscal",
+  "visualization": {
+    ...DEFAULT_METRIC_PRESENTATION,
+    "colorScheme": "interpolateBlues",
+    "colorSchemeType": "sequential",
+  },
+  "display": {
+    "conversionFactor": 1,
+    "decimalPlaces": 1
+  },
+  "calculation": {
+    "isCalculated": false
+  },
+  "groupKey": "general-hospital-bed-count",
+  "seoTitle": "一般病院病床数ランキング都道府県【2023年】｜1位高知県（2,056.3床）",
+  "seoDescription": "2023年の一般病院病床数の都道府県別ランキング。1位高知県（2,056.3床）、最下位神奈川県（675.2床）で3.0倍の格差。地図やグラフで47都道府県を比較。",
+  "isActive": true
+};

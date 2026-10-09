@@ -2,8 +2,8 @@ import { createHash } from 'node:crypto';
 
 import { describe, expect, it } from 'vitest';
 
-import { roadsideStationCount } from '../../../../data-configs/src/metrics/roadside-station-count';
-import { fishingPortCountKsj } from '../../../../data-configs/src/metrics/fishing-port-count-ksj';
+import { roadsideStationCount } from '../../../../../data/metrics/roadside-station-count';
+import { fishingPortCountKsj } from '../../../../../data/metrics/fishing-port-count-ksj';
 import { GIS_DATASETS } from '../../mlit-ksj/datasets';
 import {
   PREF_CODES,

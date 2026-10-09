@@ -650,7 +650,7 @@ function checkOrphanScripts(findings) {
     ".",
     // metric config の provenance.restore に「このデータの再取得コマンド」が書かれている
     // (data-provenance-standards.md §2)。手動投入データの取得スクリプトはここからしか参照されない。
-    "packages/data-configs/src/metrics",
+    "data/metrics",
     // テーマ専用データ (水質・豪雪地帯・橋梁点検・貨物/空港 など) は metric ではなく theme-catalog の
     // *-source.ts が出典を持ち、同じ restore 欄に再取得コマンドを書く (2026-10-02)
     "packages/data-configs/src/theme-catalog",

@@ -1,3 +1,4 @@
+import { METRIC_DEFINITIONS_DIR } from '../../../config/paths.mjs';
 /**
  * validate-metric-config — metric config の構造規約を検証する lint。
  *
@@ -37,35 +38,10 @@ import {
 import { parseUnit } from '../src/unit/unit-semantics';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const METRICS_DIR = resolve(__dirname, '../src/metrics');
+const METRICS_DIR = resolve(__dirname, "../../..", METRIC_DEFINITIONS_DIR);
 const STRICT = process.argv.includes('--strict');
 
 const VALID_CATEGORIES = new Set<string>(CATEGORY_KEYS);
-
-function strField(text: string, key: string): string | null {
-  // config は JSON 風 / TypeScript object の両形式があり、Prettier 後は single quote になる。
-  // key/value とも quote の有無・種類に依存せず拾う。
-  const m = text.match(
-    new RegExp(
-      `(?:"${key}"|'${key}'|\\b${key})\\s*:\\s*(?:"((?:[^"\\\\]|\\\\.)*)"|'((?:[^'\\\\]|\\\\.)*)')`
-    )
-  );
-  return m ? (m[1] ?? m[2]) : null;
-}
-
-function boolField(text: string, key: string): boolean | null {
-  const m = text.match(new RegExp(`\\b${key}\\s*:\\s*(true|false)`));
-  return m ? m[1] === 'true' : null;
-}
-
-function numField(text: string, key: string): number | null {
-  const m = text.match(
-    new RegExp(`(?:"${key}"|\\b${key})\\s*:\\s*(-?[0-9.eE+]+)`)
-  );
-  if (!m) return null;
-  const n = Number(m[1]);
-  return Number.isFinite(n) ? n : null;
-}
 
 /** データ注釈 (※系) かどうかを文面から判定する (UI の isCaveatNote と同基準)。 */
 function looksLikeNote(s: string): boolean {
@@ -137,22 +113,15 @@ function main() {
 
   const rows: Row[] = [];
   for (const f of files) {
-    const text = readFileSync(join(METRICS_DIR, f), 'utf8');
-    rows.push({
-      file: f.replace('.ts', ''),
-      key: strField(text, 'key'),
-      title: strField(text, 'title') ?? '',
-      subtitle: strField(text, 'subtitle'),
-      unit: strField(text, 'unit'),
-      category: strField(text, 'category'),
-      surveyId: strField(text, 'surveyId'),
-      surveyScope: strField(text, 'surveyScope'),
-      surveyScopeReason: strField(text, 'surveyScopeReason'),
-      resourceId: strField(text, 'resourceId'),
-      statsDataId: strField(text, 'statsDataId'),
-      isActive: boolField(text, 'isActive'),
-      colorScheme: strField(text, 'colorScheme'),
-      valueScale: numField(text, 'valueScale'),
+    const metric = METRICS_REGISTRY[f.slice(0, -3)];
+    if (!metric) throw new Error('Metric registry missing: ' + f);
+    const source = metric.source;
+    rows.push({ file: f, key: metric.key, title: metric.title, subtitle: metric.subtitle ?? null, unit: metric.unit, category: metric.category, surveyId: metric.surveyId ?? null, surveyScope: metric.surveyScope ?? null, surveyScopeReason: metric.surveyScopeReason ?? null,
+      resourceId: source.kind === 'mlit' ? source.resourceId : null,
+      statsDataId: source.kind === 'estat' ? source.statsDataId : null,
+      isActive: metric.isActive ?? false,
+      colorScheme: metric.visualization.colorScheme,
+      valueScale: source.kind === 'estat' ? source.valueScale ?? null : null,
     });
   }
 
@@ -409,8 +378,6 @@ function main() {
       for (const f of [
         'numeratorKey',
         'denominatorKey',
-        'numeratorRankingKey',
-        'denominatorRankingKey',
       ]) {
         refs.push(calc[f] as string | undefined);
       }
@@ -440,7 +407,7 @@ function main() {
       src?.kind === 'external' &&
       (src as { fetcherKey?: string }).fetcherKey === 'calculated';
     if (isCalculatedFetcher) {
-      const calcType = (calc?.type ?? calc?.calculationType) as
+      const calcType = (calc?.type) as
         string | undefined;
       if (calcType === 'subtraction' && !calc?.periodAlign) {
         errors.push(

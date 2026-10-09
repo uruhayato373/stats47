@@ -6,7 +6,7 @@ import {
   ZERO_SUSPICION_THRESHOLD,
   classifyValueSuspicion,
 } from "../value-verification";
-import type { VerifiedValueProfile } from "../verified-value-profiles";
+import type { VerifiedValueProfile } from "../../../../data/metrics/quality/verified-value-profiles";
 
 /**
  * 「広く疑い、検証済みだけ通す」方式の判定テスト。

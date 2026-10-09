@@ -1,3 +1,4 @@
+import type {NumericDomainPolicy} from "@stats47/types";
 /**
  * テーマページの KPI 1 件。
  *
@@ -12,6 +13,7 @@
  */
 export interface MetricKpi {
   metricKey: string;
+  trendDomain: NumericDomainPolicy;
   title: string;
   unit: string;
   /** 実際に表示する観測値の年次。 */

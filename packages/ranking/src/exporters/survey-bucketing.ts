@@ -27,14 +27,14 @@ import type { RankingItem } from "../types/ranking-item";
 /** item の sourceConfig (statsDataId/cdCat01) から出典表記 (2 階層) を解決する。 */
 export function resolveItemAttribution(item: RankingItem): SourceAttribution {
   return resolveAttribution(
-    item.sourceConfig?.statsDataId,
-    item.sourceConfig?.cdCat01,
+    (item.sourceConfig?.recipe.estatParams ?? item.sourceConfig?.recipe.refetch)?.statsDataId,
+    (item.sourceConfig?.recipe.estatParams ?? item.sourceConfig?.recipe.refetch)?.cdCat01,
   );
 }
 
 /** item が SSDS (二次統計) 由来か = statsDataId が SSDS テーブル (param 統一ルールと整合)。 */
 export function isSsdsItem(item: RankingItem): boolean {
-  return isSsdsStatsDataId(item.sourceConfig?.statsDataId);
+  return isSsdsStatsDataId((item.sourceConfig?.recipe.estatParams ?? item.sourceConfig?.recipe.refetch)?.statsDataId);
 }
 
 /**
@@ -44,8 +44,8 @@ export function isSsdsItem(item: RankingItem): boolean {
 export function resolveItemOriginalSurveys(item: RankingItem): ProvenanceSurvey[] {
   if (!isSsdsItem(item)) return [];
   return resolveProvenanceByParams(
-    item.sourceConfig?.statsDataId,
-    item.sourceConfig?.cdCat01,
+    (item.sourceConfig?.recipe.estatParams ?? item.sourceConfig?.recipe.refetch)?.statsDataId,
+    (item.sourceConfig?.recipe.estatParams ?? item.sourceConfig?.recipe.refetch)?.cdCat01,
   );
 }
 
@@ -78,8 +78,8 @@ export function surveyBucketsForItem(item: RankingItem): string[] {
   const baked = item.surveyId ? [item.surveyId] : [];
   if (item.dataSourceId === "kakei-chousa") return ["kakei-chousa"];
   const resolved = resolveProvenanceByParams(
-    item.sourceConfig?.statsDataId,
-    item.sourceConfig?.cdCat01,
+    (item.sourceConfig?.recipe.estatParams ?? item.sourceConfig?.recipe.refetch)?.statsDataId,
+    (item.sourceConfig?.recipe.estatParams ?? item.sourceConfig?.recipe.refetch)?.cdCat01,
   )
     .map((s) => s.id)
     .filter((id) => !isSyntheticSurveyId(id));

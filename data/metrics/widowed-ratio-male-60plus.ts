@@ -1,0 +1,48 @@
+import { DEFAULT_METRIC_PRESENTATION } from "./defaults/presentation";
+import type { MetricConfig } from "../../packages/data-configs/src/types";
+
+export const widowedRatioMale60plus: MetricConfig = {
+  "key": "widowed-ratio-male-60plus",
+  "title": "死別者割合",
+  "subtitle": "男性 60歳以上",
+  "unit": "％",
+  "category": "population",
+  "source": {
+    "kind": "estat",
+    "statsDataId": "0000010201",
+    "cdCat01": "#A0430701",
+    "displayName": "社会・人口統計体系",
+    "url": "https://www.stat.go.jp/data/ssds/index.htm",
+  },
+  "entities": [
+    "prefecture",
+  ],
+  "years": {
+    "years": [
+      1990,
+      1995,
+      2000,
+      2005,
+      2010,
+      2015,
+      2020,
+    ],
+  },
+  "yearFormat": "calendar",
+  "visualization": {
+    ...DEFAULT_METRIC_PRESENTATION,
+    "colorScheme": "interpolateBlues",
+    "colorSchemeType": "sequential",
+    "isReversed": false,
+  },
+  "display": {
+    "conversionFactor": 1,
+    "decimalPlaces": 1,
+  },
+  "calculation": {
+    "isCalculated": false,
+  },
+  "seoTitle": "死別者割合ランキング都道府県【2020年】｜1位岩手県（9.1％）",
+  "seoDescription": "2020年の死別者割合の都道府県別ランキング。1位岩手県（9.1％）、最下位東京都（6.4％）で1.4倍の格差。地図やグラフで47都道府県を比較。",
+  "isActive": true,
+};

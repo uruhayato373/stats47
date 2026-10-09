@@ -27,7 +27,7 @@ primary_agent: ranking-publisher
 ## 手順
 
 1. **公開対象 key の確定**: 引数の key、または「今月 config 化した metric」を列挙。実在チェック
-   (`ls packages/data-configs/src/metrics/<key>.ts` + `isActive:true`)。
+   (`ls data/metrics/<key>.ts` + `isActive:true`)。
 2. **ranking-publisher agent を起動** (`mode: "bypassPermissions"`)。agent が下記を一括管理:
    - 観測値投入が未済なら data-ingester に `/page-data-batch --metric <key>` を委譲
    - `gh workflow run sync-snapshots.yml -f only=ranking-items` で R2 item.json 生成 (完了待ち)

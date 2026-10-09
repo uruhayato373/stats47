@@ -2,7 +2,6 @@ export * from "./types";
 // サイト識別子 SSOT の再 export (@stats47/types を直接依存に持たない product-factory 等向け)
 export { SITE } from "@stats47/types";
 export { resolveMetricSource } from "./source-for-entity";
-export { createMetric, type CreateMetricInput } from "./create-metric";
 export { METRICS_REGISTRY, getMetricConfig, listAllMetrics } from "./registry";
 export {
   EXPECTED_EMPTY,
@@ -34,11 +33,11 @@ export {
   EXPECTED_SHAPE_ANOMALY,
   MAX_KNOWN_BROKEN,
   MAX_KNOWN_BROKEN_VALUE,
-} from "./expected-shape-anomaly";
+} from "../../../data/metrics/quality/shape-exceptions";
 export {
   VERIFIED_VALUE_PROFILES,
   type VerifiedValueProfile,
-} from "./verified-value-profiles";
+} from "../../../data/metrics/quality/verified-value-profiles";
 export {
   THIN_SUSPICION_THRESHOLD,
   ZERO_SUSPICION_THRESHOLD,
@@ -180,7 +179,7 @@ export {
   findMetricPolarity,
   type MetricPolarity,
   type PolarityEntry,
-} from "./metric-polarity";
+} from "../../../data/metrics/policy/polarity";
 export { fillMissingTimeFromSurveyDate } from "./estat-time";
 export {
   BUSINESS_PLAN_2026,
@@ -208,3 +207,5 @@ export {
   type BusinessPlanSource,
   type BusinessPlanWorkStatus,
 } from "./business-plan";
+
+export { WELL_KNOWN_DENOMINATORS, type WellKnownDenominator } from "../../../data/metrics/defaults/normalization";

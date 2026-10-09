@@ -389,8 +389,23 @@
       "relation": "themeContext"
     },
     {
+      "from": "ranking:accidental-deaths-per-100k",
+      "to": "theme:safety",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:accountant-annual-income",
+      "to": "theme:occupation-salary",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:active-job-opening-ratio",
       "to": "theme:labor-mobility",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:active-job-opening-ratio",
+      "to": "theme:labor-wages",
       "relation": "contains"
     },
     {
@@ -401,6 +416,16 @@
     {
       "from": "ranking:actual-overnight-guests",
       "to": "theme:tourism",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:aging-index",
+      "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:agricultural-employment-population",
+      "to": "theme:local-economy",
       "relation": "contains"
     },
     {
@@ -430,6 +455,11 @@
     },
     {
       "from": "ranking:air-passenger-transport",
+      "to": "theme:tourism",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:airport-count",
       "to": "theme:tourism",
       "relation": "contains"
     },
@@ -489,6 +519,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:annual-clear-days",
+      "to": "theme:climate",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:annual-emergency-dispatches-per-1000",
       "to": "theme:healthcare",
       "relation": "contains"
@@ -496,6 +531,16 @@
     {
       "from": "ranking:annual-emergency-dispatches-per-1000",
       "to": "theme:safety",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:annual-income-per-household",
+      "to": "theme:real-income",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:annual-precipitation-days",
+      "to": "theme:climate",
       "relation": "contains"
     },
     {
@@ -524,6 +569,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:architect-annual-income",
+      "to": "theme:occupation-salary",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:art-museum-count",
       "to": "theme:education-culture",
       "relation": "contains"
@@ -541,6 +591,31 @@
     {
       "from": "ranking:assistance-expenditure-ratio-pref-finance",
       "to": "theme:local-finance",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:associate-professor-annual-income",
+      "to": "theme:occupation-salary",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:auto-mechanic-annual-income",
+      "to": "theme:occupation-salary",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:average-age-of-first-marriage-wife",
+      "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:average-life-expectancy-female-20",
+      "to": "theme:healthcare",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:average-life-expectancy-female-65",
+      "to": "theme:healthcare",
       "relation": "contains"
     },
     {
@@ -564,6 +639,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:avg-propensity-to-consume-worker-households",
+      "to": "theme:real-income",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:avg-salary-admin-prefecture",
       "to": "theme:local-finance",
       "relation": "contains"
@@ -581,6 +661,11 @@
     {
       "from": "ranking:avg-savings-rate-worker-households",
       "to": "theme:household-assets-debt",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:barber-beautician-annual-income",
+      "to": "theme:occupation-salary",
       "relation": "contains"
     },
     {
@@ -630,6 +715,11 @@
     },
     {
       "from": "ranking:births",
+      "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:births",
       "to": "theme:population-dynamics",
       "relation": "contains"
     },
@@ -656,6 +746,11 @@
     {
       "from": "ranking:buried-cultural-property-specialist-count",
       "to": "theme:education-culture",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:bus-driver-annual-income",
+      "to": "theme:occupation-salary",
       "relation": "contains"
     },
     {
@@ -699,7 +794,17 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:care-manager-annual-income",
+      "to": "theme:occupation-salary",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:care-worker-annual-income",
+      "to": "theme:occupation-salary",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:carpenter-annual-income",
       "to": "theme:occupation-salary",
       "relation": "contains"
     },
@@ -731,6 +836,11 @@
     {
       "from": "ranking:childcare-applicants",
       "to": "theme:childcare-services",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:cleaning-worker-annual-income",
+      "to": "theme:occupation-salary",
       "relation": "contains"
     },
     {
@@ -814,7 +924,37 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:consumer-price-difference-index-clothing-footwear",
+      "to": "theme:consumer-prices",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:consumer-price-difference-index-culture-recreation",
+      "to": "theme:consumer-prices",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:consumer-price-difference-index-education",
+      "to": "theme:consumer-prices",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:consumer-price-difference-index-food",
+      "to": "theme:consumer-prices",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:consumer-price-difference-index-food",
+      "to": "theme:real-income",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:consumer-price-difference-index-furniture-household",
+      "to": "theme:consumer-prices",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:consumer-price-difference-index-healthcare",
       "to": "theme:consumer-prices",
       "relation": "contains"
     },
@@ -824,8 +964,23 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:consumer-price-difference-index-housing",
+      "to": "theme:real-income",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:consumer-price-difference-index-miscellaneous",
+      "to": "theme:consumer-prices",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:consumer-price-difference-index-overall-excl-rent",
       "to": "theme:consumer-prices",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:consumer-price-difference-index-overall-excl-rent",
+      "to": "theme:real-income",
       "relation": "contains"
     },
     {
@@ -834,8 +989,23 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:consumer-price-difference-index-overall",
+      "to": "theme:real-income",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:consumer-price-difference-index-transport-communication",
+      "to": "theme:consumer-prices",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:consumer-price-difference-index-utilities",
       "to": "theme:consumer-prices",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:cook-annual-income",
+      "to": "theme:occupation-salary",
       "relation": "contains"
     },
     {
@@ -851,6 +1021,26 @@
     {
       "from": "ranking:criminal-recognition-count",
       "to": "theme:safety",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:crude-birth-rate",
+      "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:crude-birth-rate",
+      "to": "theme:population-dynamics",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:crude-death-rate",
+      "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:crude-death-rate",
+      "to": "theme:population-dynamics",
       "relation": "contains"
     },
     {
@@ -909,7 +1099,52 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:day-time-population-ratio",
+      "to": "theme:population-dynamics",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:day-time-population",
+      "to": "theme:labor-mobility",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:death-count",
+      "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:death-count",
+      "to": "theme:population-dynamics",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:deaths-cerebrovascular-disease-per-100k",
+      "to": "theme:healthcare",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:deaths-diabetes-per-100k",
+      "to": "theme:healthcare",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:deaths-heart-disease-excl-hypertensive-per-100k",
+      "to": "theme:healthcare",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:deaths-hypertensive-diseases-per-100k",
+      "to": "theme:healthcare",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:deaths-lifestyle-diseases-per-100k",
+      "to": "theme:healthcare",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:deaths-malignant-neoplasms-per-100k",
       "to": "theme:healthcare",
       "relation": "contains"
     },
@@ -944,6 +1179,21 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:dental-hygienist-annual-income",
+      "to": "theme:occupation-salary",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:dentist-annual-income",
+      "to": "theme:occupation-salary",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:dependent-population-index",
+      "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:design-application-count",
       "to": "theme:innovation-patents",
       "relation": "contains"
@@ -956,6 +1206,16 @@
     {
       "from": "ranking:designated-museum-visitors",
       "to": "theme:education-culture",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:designer-annual-income",
+      "to": "theme:occupation-salary",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:dietitian-annual-income",
+      "to": "theme:occupation-salary",
       "relation": "contains"
     },
     {
@@ -989,6 +1249,16 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:divorces-per-total-population",
+      "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:divorces",
+      "to": "theme:living-housing",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:doctor-annual-income",
       "to": "theme:occupation-salary",
       "relation": "contains"
@@ -996,6 +1266,11 @@
     {
       "from": "ranking:domestic-travel-consumption-by-destination",
       "to": "theme:tourism",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:drug-enforcement-arrest-count-per-population",
+      "to": "theme:safety",
       "relation": "contains"
     },
     {
@@ -1014,8 +1289,18 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:education-expenditure-ratio-pref-finance",
+      "to": "theme:local-finance",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:elderly-couple-only-household-ratio",
       "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:elderly-couple-only-household-ratio",
+      "to": "theme:living-housing",
       "relation": "contains"
     },
     {
@@ -1024,8 +1309,18 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:electrician-annual-income",
+      "to": "theme:occupation-salary",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:electricity-demand",
       "to": "theme:regional-energy",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:electricity-generation-capacity",
+      "to": "theme:local-economy",
       "relation": "contains"
     },
     {
@@ -1089,6 +1384,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:employed-people-ratio",
+      "to": "theme:labor-wages",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:employees-weekly-hours-60plus-count",
       "to": "theme:labor-mobility",
       "relation": "contains"
@@ -1124,6 +1424,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:employment-rate",
+      "to": "theme:labor-wages",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:enterprise-net-value-added-all-industries",
       "to": "theme:local-economy",
       "relation": "contains"
@@ -1149,6 +1454,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:final-education-university-graduate-school-ratio",
+      "to": "theme:education-culture",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:final-energy-consumption-per-capita",
       "to": "theme:regional-energy",
       "relation": "contains"
@@ -1166,6 +1476,11 @@
     {
       "from": "ranking:financial-debt-balance",
       "to": "theme:household-assets-debt",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:fire-damage-casualties-per-population",
+      "to": "theme:safety",
       "relation": "contains"
     },
     {
@@ -1209,7 +1524,77 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:fishery-output-value",
+      "to": "theme:fishery-marine",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:fishery-species-catch-bonito",
+      "to": "theme:fishery-marine",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:fishery-species-catch-japanese-squid",
+      "to": "theme:fishery-marine",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:fishery-species-catch-kelp",
+      "to": "theme:fishery-marine",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:fishery-species-catch-mackerel",
+      "to": "theme:fishery-marine",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:fishery-species-catch-pacific-saury",
+      "to": "theme:fishery-marine",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:fishery-species-catch-pollock",
+      "to": "theme:fishery-marine",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:fishery-species-catch-sardine",
+      "to": "theme:fishery-marine",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:fishery-species-catch-scallop",
+      "to": "theme:fishery-marine",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:fishery-species-catch-sea-bream",
+      "to": "theme:fishery-marine",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:fishery-species-catch-snow-crab",
+      "to": "theme:fishery-marine",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:fishery-species-catch-tuna",
+      "to": "theme:fishery-marine",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:fishery-species-catch-yellowtail",
+      "to": "theme:fishery-marine",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:fishery-workers",
+      "to": "theme:fishery-marine",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:fishing-port-count-ksj",
       "to": "theme:fishery-marine",
       "relation": "contains"
     },
@@ -1284,12 +1669,37 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:foreign-resident-count-china",
+      "to": "theme:foreign-residents",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:foreign-resident-count-korea-per-100k",
       "to": "theme:foreign-residents",
       "relation": "contains"
     },
     {
+      "from": "ranking:foreign-resident-count-korea",
+      "to": "theme:foreign-residents",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:foreign-resident-count-per-100k",
+      "to": "theme:foreign-residents",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:foreign-resident-count-usa-per-100k",
+      "to": "theme:foreign-residents",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:foreign-resident-count-usa",
+      "to": "theme:foreign-residents",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:foreign-resident-count",
       "to": "theme:foreign-residents",
       "relation": "contains"
     },
@@ -1454,6 +1864,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:habitable-area-ratio",
+      "to": "theme:living-housing",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:health-checkup-breakfast-skipping-rate",
       "to": "theme:health-checkups",
       "relation": "contains"
@@ -1499,8 +1914,18 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:high-school-count",
+      "to": "theme:education-culture",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:high-school-graduates-out-of-prefecture-job-ratio",
       "to": "theme:population-dynamics",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:high-school-teacher-annual-income",
+      "to": "theme:occupation-salary",
       "relation": "contains"
     },
     {
@@ -1559,6 +1984,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:home-care-worker-annual-income",
+      "to": "theme:occupation-salary",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:home-helper-users-per-office",
       "to": "theme:healthcare",
       "relation": "contains"
@@ -1584,13 +2014,58 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:household-survey-clothing-footwear-expenditure",
+      "to": "theme:real-income",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:household-survey-consumption-expenditure",
+      "to": "theme:real-income",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:household-survey-culture-recreation-expenditure",
+      "to": "theme:real-income",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:household-survey-education-expenditure",
       "to": "theme:real-income",
       "relation": "contains"
     },
     {
       "from": "ranking:household-survey-food-expenditure",
       "to": "theme:consumer-prices",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:household-survey-food-expenditure",
+      "to": "theme:real-income",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:household-survey-furniture-household-goods-expenditure",
+      "to": "theme:real-income",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:household-survey-healthcare-expenditure",
+      "to": "theme:real-income",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:household-survey-housing-expenditure",
+      "to": "theme:real-income",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:household-survey-other-expenditure",
+      "to": "theme:real-income",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:household-survey-transport-communication-expenditure",
+      "to": "theme:real-income",
       "relation": "contains"
     },
     {
@@ -1604,8 +2079,18 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:household-survey-utilities-expenditure",
+      "to": "theme:real-income",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:households-on-public-assistance-per-1000",
       "to": "theme:public-assistance",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:households-on-public-assistance",
+      "to": "theme:local-finance",
       "relation": "contains"
     },
     {
@@ -1654,6 +2139,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:inbound-visit-sample-by-destination",
+      "to": "theme:tourism",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:inbound-visitors-by-destination",
       "to": "theme:tourism",
       "relation": "contains"
@@ -1679,6 +2169,26 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:industrial-land-price-change-rate",
+      "to": "theme:manufacturing",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:industrial-water-usage",
+      "to": "theme:manufacturing",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:infant-deaths",
+      "to": "theme:healthcare",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:infant-mortality-rate-per-1000-births",
+      "to": "theme:healthcare",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:information-private-employees",
       "to": "theme:information-industry",
       "relation": "contains"
@@ -1696,6 +2206,11 @@
     {
       "from": "ranking:inland-fishery-catch",
       "to": "theme:fishery-marine",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:intellectual-crime-per-100k",
+      "to": "theme:safety",
       "relation": "contains"
     },
     {
@@ -1739,8 +2254,18 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:jr-freight-shipment",
+      "to": "theme:railway",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:jr-passenger-transport",
       "to": "theme:railway",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:junior-college-count",
+      "to": "theme:education-culture",
       "relation": "contains"
     },
     {
@@ -1759,8 +2284,28 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:juvenile-criminal-arrest-person-per-population",
+      "to": "theme:safety",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:k6-known-score-estimated-persons-12plus",
+      "to": "theme:healthcare",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:k6-score10plus-estimated-persons-12plus",
+      "to": "theme:healthcare",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:k6-score10plus-rate-12plus",
       "to": "theme:healthcare",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:kindergarten-teacher-annual-income",
+      "to": "theme:occupation-salary",
       "relation": "contains"
     },
     {
@@ -1796,6 +2341,16 @@
     {
       "from": "ranking:landslip-warning-zone-count",
       "to": "theme:landslide-exposure",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:laspeyres-index-prefecture",
+      "to": "theme:local-finance",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:late-elderly-medical-expense-per-insured",
+      "to": "theme:aging-society",
       "relation": "contains"
     },
     {
@@ -1859,6 +2414,16 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:local-allocation-tax-ratio-pref-finance",
+      "to": "theme:local-finance",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:local-tax-ratio-pref-finance",
+      "to": "theme:local-finance",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:long-term-care-certified-persons",
       "to": "theme:long-term-care",
       "relation": "contains"
@@ -1867,6 +2432,11 @@
       "from": "ranking:low-elevation-population-ratio-5m",
       "to": "geo:population-low-elevation",
       "relation": "geo"
+    },
+    {
+      "from": "ranking:lowest-temperature",
+      "to": "theme:climate",
+      "relation": "contains"
     },
     {
       "from": "ranking:main-road-paving-rate",
@@ -1884,7 +2454,17 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:manager-annual-income",
+      "to": "theme:occupation-salary",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:manufacturing-employees",
+      "to": "theme:manufacturing",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:manufacturing-establishment-site-area",
       "to": "theme:manufacturing",
       "relation": "contains"
     },
@@ -1900,6 +2480,11 @@
     },
     {
       "from": "ranking:manufacturing-shipment-amount-per-employee",
+      "to": "theme:manufacturing",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:manufacturing-shipment-amount-per-establishment",
       "to": "theme:manufacturing",
       "relation": "contains"
     },
@@ -1924,6 +2509,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:marine-fishery-output-value",
+      "to": "theme:fishery-marine",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:maritime-import-export-cargo",
       "to": "theme:ports",
       "relation": "contains"
@@ -1931,6 +2521,11 @@
     {
       "from": "ranking:marriages-per-total-population",
       "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:marriages",
+      "to": "theme:living-housing",
       "relation": "contains"
     },
     {
@@ -1999,6 +2594,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:midwife-annual-income",
+      "to": "theme:occupation-salary",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:minimum-wage-by-region",
       "to": "theme:labor-wages",
       "relation": "contains"
@@ -2024,6 +2624,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:monthly-average-actual-working-hours-male",
+      "to": "theme:labor-wages",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:movers-in",
       "to": "theme:population-dynamics",
       "relation": "contains"
@@ -2034,8 +2639,18 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:moving-in-excess-rate",
+      "to": "theme:population-dynamics",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:municipal-mental-health-consultation-extended-persons",
       "to": "theme:healthcare",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:municipality-count",
+      "to": "theme:local-finance",
       "relation": "contains"
     },
     {
@@ -2051,6 +2666,11 @@
     {
       "from": "ranking:national-quasi-national-park-visits",
       "to": "theme:natural-environment",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:national-treasury-disbursement-ratio-pref-finance",
+      "to": "theme:local-finance",
       "relation": "contains"
     },
     {
@@ -2086,6 +2706,11 @@
     {
       "from": "ranking:natural-environment-conservation-area",
       "to": "theme:natural-environment",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:natural-increase-rate",
+      "to": "theme:aging-society",
       "relation": "contains"
     },
     {
@@ -2169,6 +2794,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:number-of-establishments-economic-census-basic-survey",
+      "to": "theme:local-economy",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:number-of-freight-cars",
       "to": "theme:freight-logistics",
       "relation": "contains"
@@ -2179,13 +2809,33 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:number-of-hotel-facilities",
+      "to": "theme:tourism",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:number-of-hotel-rooms",
       "to": "theme:local-services",
       "relation": "contains"
     },
     {
+      "from": "ranking:number-of-hotel-rooms",
+      "to": "theme:tourism",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:number-of-simple-lodging-facilities",
+      "to": "theme:tourism",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:nurse-annual-income",
       "to": "theme:occupation-salary",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:nurse-salary",
+      "to": "theme:labor-wages",
       "relation": "contains"
     },
     {
@@ -2211,6 +2861,11 @@
     {
       "from": "ranking:nurses-in-medical-facilities-per-100k",
       "to": "theme:healthcare",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:nursing-assistant-annual-income",
+      "to": "theme:occupation-salary",
       "relation": "contains"
     },
     {
@@ -2254,6 +2909,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:passenger-ship-transport",
+      "to": "theme:ports",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:patent-application-count",
       "to": "theme:innovation-patents",
       "relation": "contains"
@@ -2274,8 +2934,18 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:per-capita-inhabitant-tax-pref-municipal",
+      "to": "theme:local-finance",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:per-capita-prefectural-income-h27",
       "to": "theme:local-economy",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:per-capita-prefectural-income-h27",
+      "to": "theme:real-income",
       "relation": "contains"
     },
     {
@@ -2289,6 +2959,16 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:per-taxpayer-taxable-income",
+      "to": "theme:local-finance",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:personal-items-service-consumption-expenditure",
+      "to": "theme:local-services",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:personnel-expenditure-ratio-pref-finance",
       "to": "theme:local-finance",
       "relation": "contains"
@@ -2299,8 +2979,23 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:pharmacist-annual-income",
+      "to": "theme:occupation-salary",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:pharmacy-count-per-100k",
+      "to": "theme:healthcare",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:physical-disability-certificates-issued-per-1000",
       "to": "theme:disability-support",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:physical-therapist-annual-income",
+      "to": "theme:occupation-salary",
       "relation": "contains"
     },
     {
@@ -2311,6 +3006,11 @@
     {
       "from": "ranking:pig-count",
       "to": "theme:agriculture-production",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:pilot-annual-income",
+      "to": "theme:occupation-salary",
       "relation": "contains"
     },
     {
@@ -2344,6 +3044,21 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:population-density-per-km2-inhabitable-area",
+      "to": "theme:living-housing",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:population-density-per-km2-inhabitable-area",
+      "to": "theme:population-dynamics",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:population-growth-rate",
+      "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:population-growth-rate",
       "to": "theme:population-dynamics",
       "relation": "contains"
@@ -2374,8 +3089,18 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:port-ships-tonnage",
+      "to": "theme:ports",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:poverty-support-new-consultation-cases",
       "to": "theme:public-assistance",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:practical-nurse-annual-income",
+      "to": "theme:occupation-salary",
       "relation": "contains"
     },
     {
@@ -2469,6 +3194,21 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:private-rent-consumption-expenditure",
+      "to": "theme:real-income",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:private-rental-housing-rent-per-3-3m2",
+      "to": "theme:real-income",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:psychiatric-hospital-count-per-100k",
+      "to": "theme:healthcare",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:public-assistance-expenses-prefecture",
       "to": "theme:public-assistance",
       "relation": "contains"
@@ -2491,6 +3231,11 @@
     {
       "from": "ranking:public-hall-count-per-million",
       "to": "theme:education-culture",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:public-health-nurse-annual-income",
+      "to": "theme:occupation-salary",
       "relation": "contains"
     },
     {
@@ -2524,6 +3269,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:public-works-expenditure-ratio-pref-finance",
+      "to": "theme:local-finance",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:railway-passengers",
       "to": "theme:railway",
       "relation": "contains"
@@ -2544,8 +3294,23 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:ratio-65-plus",
+      "to": "theme:population-dynamics",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:ratio-never-married-15-plus",
+      "to": "theme:living-housing",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:raw-milk-production",
       "to": "theme:agriculture-production",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:real-balance-ratio",
+      "to": "theme:local-finance",
       "relation": "contains"
     },
     {
@@ -2644,6 +3409,16 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:researcher-annual-income",
+      "to": "theme:occupation-salary",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:resident-foreigner-population",
+      "to": "theme:foreign-residents",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:residential-land-price-change-rate",
       "to": "theme:land-property-market",
       "relation": "contains"
@@ -2719,7 +3494,27 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:road-municipal-length",
+      "to": "theme:roads",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:road-national-route-length",
+      "to": "theme:roads",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:road-prefectural-route-length",
+      "to": "theme:roads",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:road-total-length-with-expressway",
+      "to": "theme:roads",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:road-total-length",
       "to": "theme:roads",
       "relation": "contains"
     },
@@ -2735,6 +3530,11 @@
     },
     {
       "from": "ranking:road-tunnel-diagnosed-count",
+      "to": "theme:roads",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:roadside-station-count",
       "to": "theme:roads",
       "relation": "contains"
     },
@@ -2759,6 +3559,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:sales-clerk-annual-income",
+      "to": "theme:occupation-salary",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:salt-intake-female-age-adjusted",
       "to": "theme:health-checkups",
       "relation": "contains"
@@ -2779,13 +3584,48 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:scheduled-salary-male",
+      "to": "theme:labor-wages",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:school-teacher-annual-income",
       "to": "theme:occupation-salary",
       "relation": "contains"
     },
     {
+      "from": "ranking:security-guard-annual-income",
+      "to": "theme:occupation-salary",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:self-financing-ratio",
+      "to": "theme:local-finance",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:serious-crime-per-100k",
+      "to": "theme:safety",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:sewerage-coverage-rate",
       "to": "theme:water-services",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:sex-ratio-total",
+      "to": "theme:population-dynamics",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:side-job-rate",
+      "to": "theme:labor-mobility",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:side-job-rate",
+      "to": "theme:labor-wages",
       "relation": "contains"
     },
     {
@@ -2814,6 +3654,36 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:single-mother-households-income-100to199",
+      "to": "theme:single-parent-households",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:single-mother-households-income-200to299",
+      "to": "theme:single-parent-households",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:single-mother-households-income-300to399",
+      "to": "theme:single-parent-households",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:single-mother-households-income-400to499",
+      "to": "theme:single-parent-households",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:single-mother-households-income-500plus",
+      "to": "theme:single-parent-households",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:single-mother-households-income-under100",
+      "to": "theme:single-parent-households",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:single-mother-households",
       "to": "theme:single-parent-households",
       "relation": "contains"
@@ -2829,6 +3699,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:single-person-household-old-population-ratio",
+      "to": "theme:living-housing",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:single-person-household-ratio",
       "to": "theme:living-housing",
       "relation": "contains"
@@ -2841,6 +3716,16 @@
     {
       "from": "ranking:sleep-avg-time-male",
       "to": "theme:daily-time-use",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:social-increase-rate",
+      "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:social-increase-rate",
+      "to": "theme:population-dynamics",
       "relation": "contains"
     },
     {
@@ -2899,13 +3784,253 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:subcontractor-completed-construction",
+      "to": "theme:construction-industry",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:suicide-rate-per-100k",
+      "to": "theme:safety",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:suicides-per-100k",
+      "to": "theme:safety",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:system-consultant-annual-income",
+      "to": "theme:occupation-salary",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:taxi-driver-annual-income",
       "to": "theme:occupation-salary",
       "relation": "contains"
     },
     {
+      "from": "ranking:taxpayer-ratio-per-pref-resident",
+      "to": "theme:local-finance",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:telework-rate",
       "to": "theme:labor-mobility",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:telework-rate",
+      "to": "theme:labor-wages",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:theft-criminal-arrest-rate",
+      "to": "theme:safety",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:theft-offenses-recognized-per-1000",
+      "to": "theme:safety",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:theft-offenses-recognized",
+      "to": "theme:safety",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:theme-age-composition-elderly-population",
+      "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:theme-age-composition-production-age-population",
+      "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:theme-age-composition-young-population",
+      "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:theme-fire-injured-count",
+      "to": "theme:safety",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:theme-population-pyramid-0-4-female",
+      "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:theme-population-pyramid-0-4-male",
+      "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:theme-population-pyramid-10-14-female",
+      "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:theme-population-pyramid-10-14-male",
+      "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:theme-population-pyramid-15-19-female",
+      "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:theme-population-pyramid-15-19-male",
+      "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:theme-population-pyramid-20-24-female",
+      "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:theme-population-pyramid-20-24-male",
+      "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:theme-population-pyramid-25-29-female",
+      "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:theme-population-pyramid-25-29-male",
+      "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:theme-population-pyramid-30-34-female",
+      "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:theme-population-pyramid-30-34-male",
+      "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:theme-population-pyramid-35-39-female",
+      "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:theme-population-pyramid-35-39-male",
+      "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:theme-population-pyramid-40-44-female",
+      "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:theme-population-pyramid-40-44-male",
+      "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:theme-population-pyramid-45-49-female",
+      "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:theme-population-pyramid-45-49-male",
+      "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:theme-population-pyramid-5-9-female",
+      "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:theme-population-pyramid-5-9-male",
+      "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:theme-population-pyramid-50-54-female",
+      "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:theme-population-pyramid-50-54-male",
+      "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:theme-population-pyramid-55-59-female",
+      "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:theme-population-pyramid-55-59-male",
+      "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:theme-population-pyramid-60-64-female",
+      "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:theme-population-pyramid-60-64-male",
+      "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:theme-population-pyramid-65-69-female",
+      "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:theme-population-pyramid-65-69-male",
+      "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:theme-population-pyramid-70-74-female",
+      "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:theme-population-pyramid-70-74-male",
+      "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:theme-population-pyramid-75-79-female",
+      "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:theme-population-pyramid-75-79-male",
+      "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:theme-population-pyramid-80-plus-female",
+      "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:theme-population-pyramid-80-plus-male",
+      "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:theme-prostitution-crime-recognition-count",
+      "to": "theme:safety",
       "relation": "contains"
     },
     {
@@ -2930,12 +4055,22 @@
     },
     {
       "from": "ranking:total-overnight-guests-foreign",
+      "to": "theme:foreign-residents",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:total-overnight-guests-foreign",
       "to": "theme:tourism",
       "relation": "contains"
     },
     {
       "from": "ranking:total-overnight-guests",
       "to": "theme:tourism",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:total-population",
+      "to": "theme:aging-society",
       "relation": "contains"
     },
     {
@@ -2974,6 +4109,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:traffic-accident-deaths-per-100-accidents",
+      "to": "theme:safety",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:traffic-accident-deaths-per-100k",
       "to": "theme:safety",
       "relation": "contains"
@@ -2981,6 +4121,31 @@
     {
       "from": "ranking:traffic-accident-injuries-per-100k",
       "to": "theme:safety",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:traffic-accident-injuries",
+      "to": "theme:safety",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:travel-participation-rate-day-trip",
+      "to": "theme:tourism",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:travel-participation-rate-domestic-tourism",
+      "to": "theme:tourism",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:travel-participation-rate-overnight",
+      "to": "theme:tourism",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:travel-participation-rate-overseas",
+      "to": "theme:tourism",
       "relation": "contains"
     },
     {
@@ -3024,8 +4189,18 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:turnover-rate",
+      "to": "theme:labor-wages",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:unemployment-rate",
       "to": "theme:labor-mobility",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:unemployment-rate",
+      "to": "theme:labor-wages",
       "relation": "contains"
     },
     {
@@ -3036,6 +4211,11 @@
     {
       "from": "ranking:university-count",
       "to": "theme:education-culture",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:university-professor-annual-income",
+      "to": "theme:occupation-salary",
       "relation": "contains"
     },
     {
@@ -3099,6 +4279,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:violent-crime-per-100k",
+      "to": "theme:safety",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:volunteer-activity-annual-participation-rate-10plus",
       "to": "theme:community-participation",
       "relation": "contains"
@@ -3129,6 +4314,11 @@
       "relation": "contains"
     },
     {
+      "from": "ranking:welfare-expenditure-ratio-pref-finance",
+      "to": "theme:local-finance",
+      "relation": "contains"
+    },
+    {
       "from": "ranking:woodland-area",
       "to": "theme:forestry-timber",
       "relation": "contains"
@@ -3151,6 +4341,11 @@
     {
       "from": "ranking:young-population-index",
       "to": "theme:aging-society",
+      "relation": "contains"
+    },
+    {
+      "from": "ranking:young-population-ratio",
+      "to": "theme:population-dynamics",
       "relation": "contains"
     },
     {

@@ -219,15 +219,9 @@ export function resolveThemeSurveyTaxonomy(
       };
     }
 
-    const metricKeys = chartMetricKeys(chart);
-    const estatReferences = collectChartDependencies(chart).requests.map(
-      (request) => ({
-        statsDataId: request.statsDataId,
-        ...(request.filters.cdCat01
-          ? { cdCat01: request.filters.cdCat01 }
-          : {}),
-      })
-    );
+    const metricKeys = unique([...chartMetricKeys(chart), ...collectChartDependencies(chart).metricRefs.map(ref => ref.metricKey)]);
+    // Source surveys are resolved through each metric recipe, never chart-local API coordinates.
+    const estatReferences: SurveyEstatReference[] = [];
     const resolution = resolveSurveyTaxonomy(
       { metricKeys, estatReferences },
       registry

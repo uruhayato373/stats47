@@ -1,3 +1,4 @@
+import { METRIC_DEFINITIONS_DIR } from '../../../config/paths.mjs';
 /**
  * src/metrics/*.ts を walk して src/registry.ts の autogen 部分を再生成する。
  *
@@ -21,14 +22,13 @@ function main() {
     .sort();
 
   if (files.length === 0) {
-    console.warn("[registry] no metric files found in", METRICS_DIR);
-    return;
+    throw new Error("No metric definitions in " + METRICS_DIR);
   }
 
   const entries = files.map((f) => {
     const key = f.replace(/\.ts$/, "");
     const ident = keyToIdentifier(key);
-    return { key, ident, file: `./metrics/${key}` };
+    return { key, ident, file: `../../../${METRIC_DEFINITIONS_DIR}/${key}` };
   });
 
   const importLines = entries

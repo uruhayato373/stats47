@@ -2,7 +2,7 @@
  * AUTO-GENERATED — 手編集禁止
  *
  * 生成コマンド: npm run generate:runtime-summaries --workspace apps/web
- * 真実源: packages/data-configs/src/metrics/*.ts (git TS)
+ * 真実源: data/metrics/*.ts (git TS)
  *
  * 楽天商品カードが METRICS_REGISTRY を runtime import せずに済むよう、
  * 品目語の導出結果だけを焼いたもの。

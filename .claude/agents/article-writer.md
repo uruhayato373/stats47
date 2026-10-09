@@ -94,7 +94,7 @@ node .claude/scripts/lib/article-factual-check.mjs \
 1. ランキング値を**公開 R2 URL**から取得: `/usr/bin/curl -s https://storage.stats47.jp/app/ranking/<metric_key>/values.json`
 2. `partitions[partitions.length - 1]` (最新年) を使う
 3. TOP 10 と BOTTOM 5、最大値/最小値、倍率を計算
-4. metric メタ (title・unit・category・subtitle) は **git TS が SSOT**: `packages/data-configs/src/metrics/<key>.ts` を Read、
+4. metric メタ (title・unit・category・subtitle) は **git TS が SSOT**: `data/metrics/<key>.ts` を Read、
    もしくは `/usr/bin/curl -s https://storage.stats47.jp/app/ranking/<key>/item.json`。**D1/sqlite3 は使わない**
 5. `related_metrics` 指定があれば同様に公開 URL / git TS で取得
 6. **未公開確認**: `/usr/bin/curl -s https://storage.stats47.jp/app/blog/all.json` に対象 slug が無いこと（既公開なら別ネタへ）

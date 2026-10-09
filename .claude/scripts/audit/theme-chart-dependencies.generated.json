@@ -1,1122 +1,1119 @@
 {
   "generatedFrom": "collectThemeDataDependenciesWithProvenance(THEME_CATALOGS)",
-  "totalRequests": 0,
-  "distinctRequests": 0,
-  "requests": [],
   "totalMetricRefs": 154,
   "distinctMetricRefs": 139,
   "metrics": [
     {
       "metricKey": "actual-income-worker-households-per-month",
-      "expectedUnit": "千円",
-      "expectedConfigHash": "4592c1fe7b4b6461",
       "themeKey": "real-income",
       "componentKey": "theme-real-income-actual-vs-disposable",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "千円",
+      "expectedConfigHash": "4592c1fe7b4b6461"
     },
     {
       "metricKey": "annual-emergency-dispatches-per-1000",
-      "expectedUnit": "件",
-      "expectedConfigHash": "65631d0c40520e37",
       "themeKey": "safety",
       "componentKey": "fire-emergency-trend",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "件",
+      "expectedConfigHash": "65631d0c40520e37"
     },
     {
       "metricKey": "barber-beautician-annual-income",
-      "expectedUnit": "万円",
-      "expectedConfigHash": "1684e28e68ac51e9",
       "themeKey": "occupation-salary",
       "componentKey": "theme-occ-service-trend",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "万円",
+      "expectedConfigHash": "1684e28e68ac51e9"
     },
     {
       "metricKey": "births",
-      "expectedUnit": "人",
-      "expectedConfigHash": "131aed39051698ea",
       "themeKey": "population-dynamics",
       "componentKey": "birth-death-count-trend",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "131aed39051698ea"
     },
     {
       "metricKey": "building-fire-count-per-100-thousand-people",
-      "expectedUnit": "件",
-      "expectedConfigHash": "629e4dc4be80a657",
       "themeKey": "safety",
       "componentKey": "fire-emergency-trend-fire",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "件",
+      "expectedConfigHash": "629e4dc4be80a657"
     },
     {
       "metricKey": "care-worker-annual-income",
-      "expectedUnit": "万円",
-      "expectedConfigHash": "bce0f0808dd7357b",
       "themeKey": "occupation-salary",
       "componentKey": "theme-occ-medical-trend",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "万円",
+      "expectedConfigHash": "bce0f0808dd7357b"
     },
     {
       "metricKey": "carpenter-annual-income",
-      "expectedUnit": "万円",
-      "expectedConfigHash": "a9acb4835081e684",
       "themeKey": "occupation-salary",
       "componentKey": "theme-occ-transport-trend",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "万円",
+      "expectedConfigHash": "a9acb4835081e684"
     },
     {
       "metricKey": "consumer-price-difference-index-clothing-footwear",
-      "expectedUnit": "（全国=100）",
-      "expectedConfigHash": "90660d2492bda6a7",
       "themeKey": "consumer-prices",
       "componentKey": "theme-cpi-profile",
-      "componentType": "cpi-profile"
+      "componentType": "cpi-profile",
+      "expectedUnit": "（全国=100）",
+      "expectedConfigHash": "90660d2492bda6a7"
     },
     {
       "metricKey": "consumer-price-difference-index-culture-recreation",
-      "expectedUnit": "（全国=100）",
-      "expectedConfigHash": "5700c10845b3dd4b",
       "themeKey": "consumer-prices",
       "componentKey": "theme-cpi-profile",
-      "componentType": "cpi-profile"
+      "componentType": "cpi-profile",
+      "expectedUnit": "（全国=100）",
+      "expectedConfigHash": "5700c10845b3dd4b"
     },
     {
       "metricKey": "consumer-price-difference-index-education",
-      "expectedUnit": "（全国=100）",
-      "expectedConfigHash": "07650d37c5658b28",
       "themeKey": "consumer-prices",
       "componentKey": "theme-cpi-profile",
-      "componentType": "cpi-profile"
+      "componentType": "cpi-profile",
+      "expectedUnit": "（全国=100）",
+      "expectedConfigHash": "07650d37c5658b28"
     },
     {
       "metricKey": "consumer-price-difference-index-food",
-      "expectedUnit": "（全国=100）",
-      "expectedConfigHash": "e0b5be5333016bc8",
       "themeKey": "consumer-prices",
       "componentKey": "theme-cpi-profile",
-      "componentType": "cpi-profile"
+      "componentType": "cpi-profile",
+      "expectedUnit": "（全国=100）",
+      "expectedConfigHash": "e0b5be5333016bc8"
     },
     {
       "metricKey": "consumer-price-difference-index-furniture-household",
-      "expectedUnit": "（全国=100）",
-      "expectedConfigHash": "d8c0606404e4a4df",
       "themeKey": "consumer-prices",
       "componentKey": "theme-cpi-profile",
-      "componentType": "cpi-profile"
+      "componentType": "cpi-profile",
+      "expectedUnit": "（全国=100）",
+      "expectedConfigHash": "d8c0606404e4a4df"
     },
     {
       "metricKey": "consumer-price-difference-index-healthcare",
-      "expectedUnit": "（全国=100）",
-      "expectedConfigHash": "eb1f0e35e738ea6a",
       "themeKey": "consumer-prices",
       "componentKey": "theme-cpi-profile",
-      "componentType": "cpi-profile"
+      "componentType": "cpi-profile",
+      "expectedUnit": "（全国=100）",
+      "expectedConfigHash": "eb1f0e35e738ea6a"
     },
     {
       "metricKey": "consumer-price-difference-index-housing",
-      "expectedUnit": "（全国=100）",
-      "expectedConfigHash": "2b662b62d6c94605",
       "themeKey": "consumer-prices",
       "componentKey": "theme-cpi-profile",
-      "componentType": "cpi-profile"
+      "componentType": "cpi-profile",
+      "expectedUnit": "（全国=100）",
+      "expectedConfigHash": "2b662b62d6c94605"
     },
     {
       "metricKey": "consumer-price-difference-index-miscellaneous",
-      "expectedUnit": "（全国=100）",
-      "expectedConfigHash": "335850c9080d981e",
       "themeKey": "consumer-prices",
       "componentKey": "theme-cpi-profile",
-      "componentType": "cpi-profile"
+      "componentType": "cpi-profile",
+      "expectedUnit": "（全国=100）",
+      "expectedConfigHash": "335850c9080d981e"
     },
     {
       "metricKey": "consumer-price-difference-index-overall",
-      "expectedUnit": "（全国=100）",
-      "expectedConfigHash": "93d60411ab991b6e",
       "themeKey": "consumer-prices",
       "componentKey": "theme-cpi-profile",
-      "componentType": "cpi-profile"
+      "componentType": "cpi-profile",
+      "expectedUnit": "（全国=100）",
+      "expectedConfigHash": "93d60411ab991b6e"
     },
     {
       "metricKey": "consumer-price-difference-index-overall-excl-rent",
-      "expectedUnit": "（全国=100）",
-      "expectedConfigHash": "dd8dddb07b680abb",
       "themeKey": "consumer-prices",
       "componentKey": "theme-cpi-profile",
-      "componentType": "cpi-profile"
+      "componentType": "cpi-profile",
+      "expectedUnit": "（全国=100）",
+      "expectedConfigHash": "dd8dddb07b680abb"
     },
     {
       "metricKey": "consumer-price-difference-index-transport-communication",
-      "expectedUnit": "（全国=100）",
-      "expectedConfigHash": "2da1ab465cf5ffdd",
       "themeKey": "consumer-prices",
       "componentKey": "theme-cpi-profile",
-      "componentType": "cpi-profile"
+      "componentType": "cpi-profile",
+      "expectedUnit": "（全国=100）",
+      "expectedConfigHash": "2da1ab465cf5ffdd"
     },
     {
       "metricKey": "consumer-price-difference-index-utilities",
-      "expectedUnit": "（全国=100）",
-      "expectedConfigHash": "396a1b756af4b462",
       "themeKey": "consumer-prices",
       "componentKey": "theme-cpi-profile",
-      "componentType": "cpi-profile"
+      "componentType": "cpi-profile",
+      "expectedUnit": "（全国=100）",
+      "expectedConfigHash": "396a1b756af4b462"
     },
     {
       "metricKey": "cook-annual-income",
-      "expectedUnit": "万円",
-      "expectedConfigHash": "c3c7a6b30d94262c",
       "themeKey": "occupation-salary",
       "componentKey": "theme-occ-service-trend",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "万円",
+      "expectedConfigHash": "c3c7a6b30d94262c"
     },
     {
       "metricKey": "criminal-arrest-rate",
-      "expectedUnit": "％",
-      "expectedConfigHash": "3620097ff1719348",
       "themeKey": "safety",
       "componentKey": "crime-count-arrest-rate-trend",
-      "componentType": "mixed-chart"
+      "componentType": "mixed-chart",
+      "expectedUnit": "％",
+      "expectedConfigHash": "3620097ff1719348"
     },
     {
       "metricKey": "death-count",
-      "expectedUnit": "人",
-      "expectedConfigHash": "d8fb20bbf1b59cc0",
       "themeKey": "population-dynamics",
       "componentKey": "birth-death-count-trend",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "d8fb20bbf1b59cc0"
     },
     {
       "metricKey": "deaths-cerebrovascular-disease-per-100k",
-      "expectedUnit": "人",
-      "expectedConfigHash": "9d7710341b224247",
       "themeKey": "healthcare",
       "componentKey": "theme-health-death-causes-donut",
-      "componentType": "donut-chart"
+      "componentType": "donut-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "9d7710341b224247"
     },
     {
       "metricKey": "deaths-diabetes-per-100k",
-      "expectedUnit": "人",
-      "expectedConfigHash": "3f559c5961ca65ea",
       "themeKey": "healthcare",
       "componentKey": "theme-health-death-causes-donut",
-      "componentType": "donut-chart"
+      "componentType": "donut-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "3f559c5961ca65ea"
     },
     {
       "metricKey": "deaths-heart-disease-excl-hypertensive-per-100k",
-      "expectedUnit": "人",
-      "expectedConfigHash": "55710113042f0130",
       "themeKey": "healthcare",
       "componentKey": "theme-health-death-causes-donut",
-      "componentType": "donut-chart"
+      "componentType": "donut-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "55710113042f0130"
     },
     {
       "metricKey": "deaths-hypertensive-diseases-per-100k",
-      "expectedUnit": "人",
-      "expectedConfigHash": "9cda157accb8b039",
       "themeKey": "healthcare",
       "componentKey": "theme-health-death-causes-donut",
-      "componentType": "donut-chart"
+      "componentType": "donut-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "9cda157accb8b039"
     },
     {
       "metricKey": "deaths-malignant-neoplasms-per-100k",
-      "expectedUnit": "人",
-      "expectedConfigHash": "101bf6282998c893",
       "themeKey": "healthcare",
       "componentKey": "theme-health-death-causes-donut",
-      "componentType": "donut-chart"
+      "componentType": "donut-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "101bf6282998c893"
     },
     {
       "metricKey": "doctor-annual-income",
-      "expectedUnit": "万円",
-      "expectedConfigHash": "32ba461e0bd6e029",
       "themeKey": "occupation-salary",
       "componentKey": "theme-occ-medical-trend",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "万円",
+      "expectedConfigHash": "32ba461e0bd6e029"
     },
     {
       "metricKey": "employment-mobility-rate",
-      "expectedUnit": "％",
-      "expectedConfigHash": "df9c6ab40bd32317",
       "themeKey": "labor-mobility",
       "componentKey": "theme-lm-employment-mobility-trend",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "％",
+      "expectedConfigHash": "df9c6ab40bd32317"
     },
     {
       "metricKey": "final-education-university-graduate-school-ratio",
-      "expectedUnit": "％",
-      "expectedConfigHash": "fc83c0f732281c98",
       "themeKey": "education-culture",
       "componentKey": "theme-edu-higher-education-trend-attainment",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "％",
+      "expectedConfigHash": "fc83c0f732281c98"
     },
     {
       "metricKey": "fire-deaths-per-100k",
-      "expectedUnit": "人",
-      "expectedConfigHash": "fbd70cea74a41f25",
       "themeKey": "safety",
       "componentKey": "safety-fire-casualties-donut",
-      "componentType": "donut-chart"
+      "componentType": "donut-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "fbd70cea74a41f25"
     },
     {
       "metricKey": "floor-area-per-dwelling-owner",
-      "expectedUnit": "ｍ2",
-      "expectedConfigHash": "9dbea6949a6615f7",
       "themeKey": "living-housing",
       "componentKey": "lh-dwelling-floor-area-trend",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "ｍ2",
+      "expectedConfigHash": "9dbea6949a6615f7"
     },
     {
       "metricKey": "floor-area-per-dwelling-rented",
-      "expectedUnit": "ｍ2",
-      "expectedConfigHash": "29857bfbff177858",
       "themeKey": "living-housing",
       "componentKey": "lh-dwelling-floor-area-trend",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "ｍ2",
+      "expectedConfigHash": "29857bfbff177858"
     },
     {
       "metricKey": "foreign-resident-count-china-per-100k",
-      "expectedUnit": "人",
-      "expectedConfigHash": "31a5ae0b3163bedc",
       "themeKey": "foreign-residents",
       "componentKey": "theme-foreign-nationality-trend",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "31a5ae0b3163bedc"
     },
     {
       "metricKey": "foreign-resident-count-korea-per-100k",
-      "expectedUnit": "人",
-      "expectedConfigHash": "9366e6dc718a0a47",
       "themeKey": "foreign-residents",
       "componentKey": "theme-foreign-nationality-trend",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "9366e6dc718a0a47"
     },
     {
       "metricKey": "foreign-resident-count-per-100k",
-      "expectedUnit": "人",
-      "expectedConfigHash": "ec0e45ad9938975e",
       "themeKey": "foreign-residents",
       "componentKey": "theme-foreign-total-trend",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "ec0e45ad9938975e"
     },
     {
       "metricKey": "gender-wage-gap",
-      "expectedUnit": "%",
-      "expectedConfigHash": "bedadbaa823d86cd",
       "themeKey": "labor-wages",
       "componentKey": "labor-wages-gender-gap",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "%",
+      "expectedConfigHash": "bedadbaa823d86cd"
     },
     {
       "metricKey": "general-hospital-count-per-100k",
-      "expectedUnit": "施設",
-      "expectedConfigHash": "d7f892596eeb8a82",
       "themeKey": "healthcare",
       "componentKey": "theme-health-supply-trend-hospitals",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "施設",
+      "expectedConfigHash": "d7f892596eeb8a82"
     },
     {
       "metricKey": "household-survey-clothing-footwear-expenditure",
-      "expectedUnit": "円",
-      "expectedConfigHash": "568bd437254d1824",
       "themeKey": "real-income",
       "componentKey": "real-income-household-composition",
-      "componentType": "composition-chart"
+      "componentType": "composition-chart",
+      "expectedUnit": "円",
+      "expectedConfigHash": "568bd437254d1824"
     },
     {
       "metricKey": "household-survey-culture-recreation-expenditure",
-      "expectedUnit": "円",
-      "expectedConfigHash": "bdad36832158f488",
       "themeKey": "real-income",
       "componentKey": "real-income-household-composition",
-      "componentType": "composition-chart"
+      "componentType": "composition-chart",
+      "expectedUnit": "円",
+      "expectedConfigHash": "bdad36832158f488"
     },
     {
       "metricKey": "household-survey-education-expenditure",
-      "expectedUnit": "円",
-      "expectedConfigHash": "c5967602f4b832f1",
       "themeKey": "real-income",
       "componentKey": "real-income-household-composition",
-      "componentType": "composition-chart"
+      "componentType": "composition-chart",
+      "expectedUnit": "円",
+      "expectedConfigHash": "c5967602f4b832f1"
     },
     {
       "metricKey": "household-survey-food-expenditure",
-      "expectedUnit": "円",
-      "expectedConfigHash": "d5a5b2abd2c762a0",
       "themeKey": "real-income",
       "componentKey": "real-income-household-composition",
-      "componentType": "composition-chart"
+      "componentType": "composition-chart",
+      "expectedUnit": "円",
+      "expectedConfigHash": "d5a5b2abd2c762a0"
     },
     {
       "metricKey": "household-survey-furniture-household-goods-expenditure",
-      "expectedUnit": "円",
-      "expectedConfigHash": "7f6a4df6ae3ec0bd",
       "themeKey": "real-income",
       "componentKey": "real-income-household-composition",
-      "componentType": "composition-chart"
+      "componentType": "composition-chart",
+      "expectedUnit": "円",
+      "expectedConfigHash": "7f6a4df6ae3ec0bd"
     },
     {
       "metricKey": "household-survey-healthcare-expenditure",
-      "expectedUnit": "円",
-      "expectedConfigHash": "06d464705edb2a6b",
       "themeKey": "real-income",
       "componentKey": "real-income-household-composition",
-      "componentType": "composition-chart"
+      "componentType": "composition-chart",
+      "expectedUnit": "円",
+      "expectedConfigHash": "06d464705edb2a6b"
     },
     {
       "metricKey": "household-survey-housing-expenditure",
-      "expectedUnit": "円",
-      "expectedConfigHash": "ba759e94ab81eec7",
       "themeKey": "real-income",
       "componentKey": "real-income-household-composition",
-      "componentType": "composition-chart"
+      "componentType": "composition-chart",
+      "expectedUnit": "円",
+      "expectedConfigHash": "ba759e94ab81eec7"
     },
     {
       "metricKey": "household-survey-other-expenditure",
-      "expectedUnit": "円",
-      "expectedConfigHash": "d594e86139b6f556",
       "themeKey": "real-income",
       "componentKey": "real-income-household-composition",
-      "componentType": "composition-chart"
+      "componentType": "composition-chart",
+      "expectedUnit": "円",
+      "expectedConfigHash": "d594e86139b6f556"
     },
     {
       "metricKey": "household-survey-transport-communication-expenditure",
-      "expectedUnit": "円",
-      "expectedConfigHash": "c390e349cde93482",
       "themeKey": "real-income",
       "componentKey": "real-income-household-composition",
-      "componentType": "composition-chart"
+      "componentType": "composition-chart",
+      "expectedUnit": "円",
+      "expectedConfigHash": "c390e349cde93482"
     },
     {
       "metricKey": "household-survey-utilities-expenditure",
-      "expectedUnit": "円",
-      "expectedConfigHash": "0632e01d098405fe",
       "themeKey": "real-income",
       "componentKey": "real-income-household-composition",
-      "componentType": "composition-chart"
+      "componentType": "composition-chart",
+      "expectedUnit": "円",
+      "expectedConfigHash": "0632e01d098405fe"
     },
     {
       "metricKey": "in-pref-university-entrance-ratio-by-highschool-origin",
-      "expectedUnit": "％",
-      "expectedConfigHash": "ac7bdadbb9ae9a84",
       "themeKey": "education-culture",
       "componentKey": "theme-edu-higher-education-trend",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "％",
+      "expectedConfigHash": "ac7bdadbb9ae9a84"
     },
     {
       "metricKey": "intellectual-crime-per-100k",
-      "expectedUnit": "件",
-      "expectedConfigHash": "434c56d9679fd2fa",
       "themeKey": "safety",
       "componentKey": "safety-crime-types-donut",
-      "componentType": "donut-chart"
+      "componentType": "donut-chart",
+      "expectedUnit": "件",
+      "expectedConfigHash": "434c56d9679fd2fa"
     },
     {
       "metricKey": "job-change-rate",
-      "expectedUnit": "％",
-      "expectedConfigHash": "09c62e2143299426",
       "themeKey": "labor-mobility",
       "componentKey": "labor-mobility-turnover-vs-jobchange",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "％",
+      "expectedConfigHash": "09c62e2143299426"
     },
     {
       "metricKey": "jr-freight-shipment",
-      "expectedUnit": "トン",
-      "expectedConfigHash": "54702f8900e3b116",
       "themeKey": "railway",
       "componentKey": "railway-freight-trend",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "トン",
+      "expectedConfigHash": "54702f8900e3b116"
     },
     {
       "metricKey": "jr-passenger-transport",
-      "expectedUnit": "千人",
-      "expectedConfigHash": "f5db56c7cae2e704",
       "themeKey": "railway",
       "componentKey": "railway-passenger-trend-jr",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "千人",
+      "expectedConfigHash": "f5db56c7cae2e704"
     },
     {
       "metricKey": "late-elderly-medical-expense-per-insured",
-      "expectedUnit": "円",
-      "expectedConfigHash": "d1e3c98f535171a4",
       "themeKey": "aging-society",
       "componentKey": "theme-late-elderly-medical-expense-trend",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "円",
+      "expectedConfigHash": "d1e3c98f535171a4"
     },
     {
       "metricKey": "lowest-temperature",
-      "expectedUnit": "℃",
-      "expectedConfigHash": "1b623cbdde770f3e",
       "themeKey": "climate",
       "componentKey": "theme-climate-temperature-extremes",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "℃",
+      "expectedConfigHash": "1b623cbdde770f3e"
     },
     {
       "metricKey": "manufacturing-employees",
-      "expectedUnit": "人",
-      "expectedConfigHash": "ddd03e98dfef2353",
       "themeKey": "manufacturing",
       "componentKey": "manufacturing-establishments-employees-trend-employees",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "ddd03e98dfef2353"
     },
     {
       "metricKey": "manufacturing-establishments",
-      "expectedUnit": "事業所",
-      "expectedConfigHash": "f921d6b35c801470",
       "themeKey": "manufacturing",
       "componentKey": "manufacturing-establishments-employees-trend",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "事業所",
+      "expectedConfigHash": "f921d6b35c801470"
     },
     {
       "metricKey": "manufacturing-industry-added-value",
-      "expectedUnit": "百万円",
-      "expectedConfigHash": "673878a62cab0381",
       "themeKey": "manufacturing",
       "componentKey": "manufacturing-shipment-value-trend",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "百万円",
+      "expectedConfigHash": "673878a62cab0381"
     },
     {
       "metricKey": "manufacturing-shipment-amount",
-      "expectedUnit": "百万円",
-      "expectedConfigHash": "d55da211ff9771fe",
       "themeKey": "manufacturing",
       "componentKey": "manufacturing-shipment-value-trend",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "百万円",
+      "expectedConfigHash": "d55da211ff9771fe"
     },
     {
       "metricKey": "manufacturing-shipment-amount-per-employee",
-      "expectedUnit": "万円",
-      "expectedConfigHash": "fc1132d0ac2887b3",
       "themeKey": "manufacturing",
       "componentKey": "theme-manufacturing-labor-productivity",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "万円",
+      "expectedConfigHash": "fc1132d0ac2887b3"
     },
     {
       "metricKey": "manufacturing-shipment-amount-per-establishment",
-      "expectedUnit": "百万円",
-      "expectedConfigHash": "8d6d6e1903f8b88e",
       "themeKey": "manufacturing",
       "componentKey": "theme-manufacturing-labor-productivity-establishment",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "百万円",
+      "expectedConfigHash": "8d6d6e1903f8b88e"
     },
     {
       "metricKey": "marine-fishery-output-value",
-      "expectedUnit": "百万円",
-      "expectedConfigHash": "ad6585da6dd634e5",
       "themeKey": "fishery-marine",
       "componentKey": "theme-fishery-output-trend-marine",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "百万円",
+      "expectedConfigHash": "ad6585da6dd634e5"
     },
     {
       "metricKey": "maximum-temperature",
-      "expectedUnit": "℃",
-      "expectedConfigHash": "7192e85c2d860d07",
       "themeKey": "climate",
       "componentKey": "theme-climate-temperature-extremes",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "℃",
+      "expectedConfigHash": "7192e85c2d860d07"
     },
     {
       "metricKey": "movers-in",
-      "expectedUnit": "人",
-      "expectedConfigHash": "1f31d4c42c85f67f",
       "themeKey": "population-dynamics",
       "componentKey": "theme-pop-migration-trend",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "1f31d4c42c85f67f"
     },
     {
       "metricKey": "movers-out",
-      "expectedUnit": "人",
-      "expectedConfigHash": "eb9ce6c3641db260",
       "themeKey": "population-dynamics",
       "componentKey": "theme-pop-migration-trend",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "eb9ce6c3641db260"
     },
     {
       "metricKey": "national-medical-expense-per-person",
-      "expectedUnit": "千円",
-      "expectedConfigHash": "87c34ae4c4af8dbf",
       "themeKey": "healthcare",
       "componentKey": "theme-health-expense-trend",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "千円",
+      "expectedConfigHash": "87c34ae4c4af8dbf"
     },
     {
       "metricKey": "nuclear-family-households-ratio",
-      "expectedUnit": "％",
-      "expectedConfigHash": "3160916f2a09ea34",
       "themeKey": "living-housing",
       "componentKey": "lh-household-structure-trend",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "％",
+      "expectedConfigHash": "3160916f2a09ea34"
     },
     {
       "metricKey": "number-of-hotel-facilities",
-      "expectedUnit": "施設",
-      "expectedConfigHash": "58d11a271347d0b4",
       "themeKey": "tourism",
       "componentKey": "theme-tourism-hotel-supply-trend",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "施設",
+      "expectedConfigHash": "58d11a271347d0b4"
     },
     {
       "metricKey": "number-of-hotel-rooms",
-      "expectedUnit": "室",
-      "expectedConfigHash": "651cbbb4315d7fdf",
       "themeKey": "tourism",
       "componentKey": "theme-tourism-hotel-supply-trend",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "室",
+      "expectedConfigHash": "651cbbb4315d7fdf"
     },
     {
       "metricKey": "nurse-annual-income",
-      "expectedUnit": "万円",
-      "expectedConfigHash": "44bfc11557830ac6",
       "themeKey": "occupation-salary",
       "componentKey": "theme-occ-medical-trend",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "万円",
+      "expectedConfigHash": "44bfc11557830ac6"
     },
     {
       "metricKey": "nursery-teacher-annual-income",
-      "expectedUnit": "万円",
-      "expectedConfigHash": "7b0539006210bcdb",
       "themeKey": "occupation-salary",
       "componentKey": "theme-occ-edu-trend",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "万円",
+      "expectedConfigHash": "7b0539006210bcdb"
     },
     {
       "metricKey": "owner-occupied-housing-ratio",
-      "expectedUnit": "％",
-      "expectedConfigHash": "a6ed608c5ee3d667",
       "themeKey": "living-housing",
       "componentKey": "vacancy-ownership-rate-trend",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "％",
+      "expectedConfigHash": "a6ed608c5ee3d667"
     },
     {
       "metricKey": "penal-code-offenses-recognized-per-1000",
-      "expectedUnit": "件",
-      "expectedConfigHash": "ed9ae5b81200b973",
       "themeKey": "safety",
       "componentKey": "crime-count-arrest-rate-trend",
-      "componentType": "mixed-chart"
+      "componentType": "mixed-chart",
+      "expectedUnit": "件",
+      "expectedConfigHash": "ed9ae5b81200b973"
     },
     {
       "metricKey": "physicians-in-medical-facilities-per-100k",
-      "expectedUnit": "人",
-      "expectedConfigHash": "7d739ec8527b8d03",
       "themeKey": "healthcare",
       "componentKey": "theme-health-supply-trend",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "7d739ec8527b8d03"
     },
     {
       "metricKey": "port-cargo-export",
-      "expectedUnit": "トン",
-      "expectedConfigHash": "d4dbaab6fb240de1",
       "themeKey": "ports",
       "componentKey": "ports-cargo-trend",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "トン",
+      "expectedConfigHash": "d4dbaab6fb240de1"
     },
     {
       "metricKey": "port-cargo-import",
-      "expectedUnit": "トン",
-      "expectedConfigHash": "3095f0c5fff81d16",
       "themeKey": "ports",
       "componentKey": "ports-cargo-trend",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "トン",
+      "expectedConfigHash": "3095f0c5fff81d16"
     },
     {
       "metricKey": "private-railway-passenger-transport",
-      "expectedUnit": "千人",
-      "expectedConfigHash": "17c063fa3045cce5",
       "themeKey": "railway",
       "componentKey": "railway-passenger-trend",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "千人",
+      "expectedConfigHash": "17c063fa3045cce5"
     },
     {
       "metricKey": "road-expressway-length",
-      "expectedUnit": "km",
-      "expectedConfigHash": "f5688f1b3a990074",
       "themeKey": "roads",
       "componentKey": "roads-length-trend",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "km",
+      "expectedConfigHash": "f5688f1b3a990074"
     },
     {
       "metricKey": "road-total-length-with-expressway",
-      "expectedUnit": "km",
-      "expectedConfigHash": "27f624a5d853d6ae",
       "themeKey": "roads",
       "componentKey": "roads-length-trend",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "km",
+      "expectedConfigHash": "27f624a5d853d6ae"
     },
     {
       "metricKey": "school-teacher-annual-income",
-      "expectedUnit": "万円",
-      "expectedConfigHash": "031c0244cf12f5f7",
       "themeKey": "occupation-salary",
       "componentKey": "theme-occ-edu-trend",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "万円",
+      "expectedConfigHash": "031c0244cf12f5f7"
     },
     {
       "metricKey": "security-guard-annual-income",
-      "expectedUnit": "万円",
-      "expectedConfigHash": "c45db1200eee616b",
       "themeKey": "occupation-salary",
       "componentKey": "theme-occ-service-trend",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "万円",
+      "expectedConfigHash": "c45db1200eee616b"
     },
     {
       "metricKey": "serious-crime-per-100k",
-      "expectedUnit": "件",
-      "expectedConfigHash": "92902c64386c13f7",
       "themeKey": "safety",
       "componentKey": "safety-crime-types-donut",
-      "componentType": "donut-chart"
+      "componentType": "donut-chart",
+      "expectedUnit": "件",
+      "expectedConfigHash": "92902c64386c13f7"
     },
     {
       "metricKey": "single-mother-households-income-100to199",
-      "expectedUnit": "世帯",
-      "expectedConfigHash": "2064f9ef598a4c32",
       "themeKey": "single-parent-households",
       "componentKey": "single-parent-income-composition",
-      "componentType": "composition-chart"
+      "componentType": "composition-chart",
+      "expectedUnit": "世帯",
+      "expectedConfigHash": "2064f9ef598a4c32"
     },
     {
       "metricKey": "single-mother-households-income-200to299",
-      "expectedUnit": "世帯",
-      "expectedConfigHash": "f3b306f0289673c3",
       "themeKey": "single-parent-households",
       "componentKey": "single-parent-income-composition",
-      "componentType": "composition-chart"
+      "componentType": "composition-chart",
+      "expectedUnit": "世帯",
+      "expectedConfigHash": "f3b306f0289673c3"
     },
     {
       "metricKey": "single-mother-households-income-300to399",
-      "expectedUnit": "世帯",
-      "expectedConfigHash": "9c1709618094a064",
       "themeKey": "single-parent-households",
       "componentKey": "single-parent-income-composition",
-      "componentType": "composition-chart"
+      "componentType": "composition-chart",
+      "expectedUnit": "世帯",
+      "expectedConfigHash": "9c1709618094a064"
     },
     {
       "metricKey": "single-mother-households-income-400to499",
-      "expectedUnit": "世帯",
-      "expectedConfigHash": "5c4c081a3f2babb5",
       "themeKey": "single-parent-households",
       "componentKey": "single-parent-income-composition",
-      "componentType": "composition-chart"
+      "componentType": "composition-chart",
+      "expectedUnit": "世帯",
+      "expectedConfigHash": "5c4c081a3f2babb5"
     },
     {
       "metricKey": "single-mother-households-income-500plus",
-      "expectedUnit": "世帯",
-      "expectedConfigHash": "a3364e5b812691de",
       "themeKey": "single-parent-households",
       "componentKey": "single-parent-income-composition",
-      "componentType": "composition-chart"
+      "componentType": "composition-chart",
+      "expectedUnit": "世帯",
+      "expectedConfigHash": "a3364e5b812691de"
     },
     {
       "metricKey": "single-mother-households-income-under100",
-      "expectedUnit": "世帯",
-      "expectedConfigHash": "5cc577ae8f12da39",
       "themeKey": "single-parent-households",
       "componentKey": "single-parent-income-composition",
-      "componentType": "composition-chart"
+      "componentType": "composition-chart",
+      "expectedUnit": "世帯",
+      "expectedConfigHash": "5cc577ae8f12da39"
     },
     {
       "metricKey": "single-person-household-ratio",
-      "expectedUnit": "％",
-      "expectedConfigHash": "77e44f7cb409af9f",
       "themeKey": "living-housing",
       "componentKey": "lh-household-structure-trend-single",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "％",
+      "expectedConfigHash": "77e44f7cb409af9f"
     },
     {
       "metricKey": "software-engineer-annual-income",
-      "expectedUnit": "万円",
-      "expectedConfigHash": "f00643aba840e510",
       "themeKey": "occupation-salary",
       "componentKey": "theme-occ-it-trend",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "万円",
+      "expectedConfigHash": "f00643aba840e510"
     },
     {
       "metricKey": "system-consultant-annual-income",
-      "expectedUnit": "万円",
-      "expectedConfigHash": "a96fb1fc940918e7",
       "themeKey": "occupation-salary",
       "componentKey": "theme-occ-it-trend",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "万円",
+      "expectedConfigHash": "a96fb1fc940918e7"
     },
     {
       "metricKey": "taxi-driver-annual-income",
-      "expectedUnit": "万円",
-      "expectedConfigHash": "1e0920b525c46dda",
       "themeKey": "occupation-salary",
       "componentKey": "theme-occ-transport-trend",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "万円",
+      "expectedConfigHash": "1e0920b525c46dda"
     },
     {
       "metricKey": "theft-offenses-recognized",
-      "expectedUnit": "件",
-      "expectedConfigHash": "89fd89dea0cace2d",
       "themeKey": "safety",
       "componentKey": "safety-crime-types-donut",
-      "componentType": "donut-chart"
+      "componentType": "donut-chart",
+      "expectedUnit": "件",
+      "expectedConfigHash": "89fd89dea0cace2d"
     },
     {
       "metricKey": "theme-age-composition-elderly-population",
-      "expectedUnit": "人",
-      "expectedConfigHash": "baa3543adfba7c85",
       "themeKey": "aging-society",
       "componentKey": "theme-age-composition",
-      "componentType": "composition-chart"
+      "componentType": "composition-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "baa3543adfba7c85"
     },
     {
       "metricKey": "theme-age-composition-production-age-population",
-      "expectedUnit": "人",
-      "expectedConfigHash": "ad8849c3c5210e98",
       "themeKey": "aging-society",
       "componentKey": "theme-age-composition",
-      "componentType": "composition-chart"
+      "componentType": "composition-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "ad8849c3c5210e98"
     },
     {
       "metricKey": "theme-age-composition-young-population",
-      "expectedUnit": "人",
-      "expectedConfigHash": "3b9e6ca0f5ce1d8b",
       "themeKey": "aging-society",
       "componentKey": "theme-age-composition",
-      "componentType": "composition-chart"
+      "componentType": "composition-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "3b9e6ca0f5ce1d8b"
     },
     {
       "metricKey": "theme-fire-injured-count",
-      "expectedUnit": "人",
-      "expectedConfigHash": "268e951b9b0606dc",
       "themeKey": "safety",
       "componentKey": "safety-fire-casualties-donut",
-      "componentType": "donut-chart"
+      "componentType": "donut-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "268e951b9b0606dc"
     },
     {
       "metricKey": "theme-population-pyramid-0-4-female",
-      "expectedUnit": "人",
-      "expectedConfigHash": "78afaea3f440aa00",
       "themeKey": "aging-society",
       "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
+      "componentType": "pyramid-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "78afaea3f440aa00"
     },
     {
       "metricKey": "theme-population-pyramid-0-4-male",
-      "expectedUnit": "人",
-      "expectedConfigHash": "5cf7bf80f6e4950b",
       "themeKey": "aging-society",
       "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
+      "componentType": "pyramid-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "5cf7bf80f6e4950b"
     },
     {
       "metricKey": "theme-population-pyramid-10-14-female",
-      "expectedUnit": "人",
-      "expectedConfigHash": "5d7cd9a90ff21376",
       "themeKey": "aging-society",
       "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
+      "componentType": "pyramid-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "5d7cd9a90ff21376"
     },
     {
       "metricKey": "theme-population-pyramid-10-14-male",
-      "expectedUnit": "人",
-      "expectedConfigHash": "c5e2690a50623e65",
       "themeKey": "aging-society",
       "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
+      "componentType": "pyramid-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "c5e2690a50623e65"
     },
     {
       "metricKey": "theme-population-pyramid-15-19-female",
-      "expectedUnit": "人",
-      "expectedConfigHash": "2849d5b6a2819401",
       "themeKey": "aging-society",
       "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
+      "componentType": "pyramid-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "2849d5b6a2819401"
     },
     {
       "metricKey": "theme-population-pyramid-15-19-male",
-      "expectedUnit": "人",
-      "expectedConfigHash": "1e445a85267aead2",
       "themeKey": "aging-society",
       "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
+      "componentType": "pyramid-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "1e445a85267aead2"
     },
     {
       "metricKey": "theme-population-pyramid-20-24-female",
-      "expectedUnit": "人",
-      "expectedConfigHash": "321402c77daa4584",
       "themeKey": "aging-society",
       "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
+      "componentType": "pyramid-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "321402c77daa4584"
     },
     {
       "metricKey": "theme-population-pyramid-20-24-male",
-      "expectedUnit": "人",
-      "expectedConfigHash": "649969c409b3b63f",
       "themeKey": "aging-society",
       "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
+      "componentType": "pyramid-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "649969c409b3b63f"
     },
     {
       "metricKey": "theme-population-pyramid-25-29-female",
-      "expectedUnit": "人",
-      "expectedConfigHash": "d4d0392c3020c937",
       "themeKey": "aging-society",
       "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
+      "componentType": "pyramid-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "d4d0392c3020c937"
     },
     {
       "metricKey": "theme-population-pyramid-25-29-male",
-      "expectedUnit": "人",
-      "expectedConfigHash": "71c88e6fcc350b0c",
       "themeKey": "aging-society",
       "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
+      "componentType": "pyramid-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "71c88e6fcc350b0c"
     },
     {
       "metricKey": "theme-population-pyramid-30-34-female",
-      "expectedUnit": "人",
-      "expectedConfigHash": "8096d43d3b2b4aea",
       "themeKey": "aging-society",
       "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
+      "componentType": "pyramid-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "8096d43d3b2b4aea"
     },
     {
       "metricKey": "theme-population-pyramid-30-34-male",
-      "expectedUnit": "人",
-      "expectedConfigHash": "60e8146ed317bc89",
       "themeKey": "aging-society",
       "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
+      "componentType": "pyramid-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "60e8146ed317bc89"
     },
     {
       "metricKey": "theme-population-pyramid-35-39-female",
-      "expectedUnit": "人",
-      "expectedConfigHash": "aeb10c7adf4a8665",
       "themeKey": "aging-society",
       "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
+      "componentType": "pyramid-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "aeb10c7adf4a8665"
     },
     {
       "metricKey": "theme-population-pyramid-35-39-male",
-      "expectedUnit": "人",
-      "expectedConfigHash": "c95132d98109cb76",
       "themeKey": "aging-society",
       "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
+      "componentType": "pyramid-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "c95132d98109cb76"
     },
     {
       "metricKey": "theme-population-pyramid-40-44-female",
-      "expectedUnit": "人",
-      "expectedConfigHash": "6a6fdfcbc9008368",
       "themeKey": "aging-society",
       "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
+      "componentType": "pyramid-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "6a6fdfcbc9008368"
     },
     {
       "metricKey": "theme-population-pyramid-40-44-male",
-      "expectedUnit": "人",
-      "expectedConfigHash": "d225bc88b5e85c83",
       "themeKey": "aging-society",
       "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
+      "componentType": "pyramid-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "d225bc88b5e85c83"
     },
     {
       "metricKey": "theme-population-pyramid-45-49-female",
-      "expectedUnit": "人",
-      "expectedConfigHash": "c662de99d3fd0c0a",
       "themeKey": "aging-society",
       "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
+      "componentType": "pyramid-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "c662de99d3fd0c0a"
     },
     {
       "metricKey": "theme-population-pyramid-45-49-male",
-      "expectedUnit": "人",
-      "expectedConfigHash": "4c23793ad9005f61",
       "themeKey": "aging-society",
       "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
+      "componentType": "pyramid-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "4c23793ad9005f61"
     },
     {
       "metricKey": "theme-population-pyramid-5-9-female",
-      "expectedUnit": "人",
-      "expectedConfigHash": "9569822844d0a483",
       "themeKey": "aging-society",
       "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
+      "componentType": "pyramid-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "9569822844d0a483"
     },
     {
       "metricKey": "theme-population-pyramid-5-9-male",
-      "expectedUnit": "人",
-      "expectedConfigHash": "5c6eaa6b3a183b68",
       "themeKey": "aging-society",
       "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
+      "componentType": "pyramid-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "5c6eaa6b3a183b68"
     },
     {
       "metricKey": "theme-population-pyramid-50-54-female",
-      "expectedUnit": "人",
-      "expectedConfigHash": "c408d618c0e8fe7b",
       "themeKey": "aging-society",
       "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
+      "componentType": "pyramid-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "c408d618c0e8fe7b"
     },
     {
       "metricKey": "theme-population-pyramid-50-54-male",
-      "expectedUnit": "人",
-      "expectedConfigHash": "f42a335b49700510",
       "themeKey": "aging-society",
       "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
+      "componentType": "pyramid-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "f42a335b49700510"
     },
     {
       "metricKey": "theme-population-pyramid-55-59-female",
-      "expectedUnit": "人",
-      "expectedConfigHash": "e1636a935edcc308",
       "themeKey": "aging-society",
       "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
+      "componentType": "pyramid-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "e1636a935edcc308"
     },
     {
       "metricKey": "theme-population-pyramid-55-59-male",
-      "expectedUnit": "人",
-      "expectedConfigHash": "8de49f307aee3763",
       "themeKey": "aging-society",
       "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
+      "componentType": "pyramid-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "8de49f307aee3763"
     },
     {
       "metricKey": "theme-population-pyramid-60-64-female",
-      "expectedUnit": "人",
-      "expectedConfigHash": "1cd43ae20bcdb739",
       "themeKey": "aging-society",
       "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
+      "componentType": "pyramid-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "1cd43ae20bcdb739"
     },
     {
       "metricKey": "theme-population-pyramid-60-64-male",
-      "expectedUnit": "人",
-      "expectedConfigHash": "6bbb7a61c63944f2",
       "themeKey": "aging-society",
       "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
+      "componentType": "pyramid-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "6bbb7a61c63944f2"
     },
     {
       "metricKey": "theme-population-pyramid-65-69-female",
-      "expectedUnit": "人",
-      "expectedConfigHash": "3cd3e4edfad116de",
       "themeKey": "aging-society",
       "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
+      "componentType": "pyramid-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "3cd3e4edfad116de"
     },
     {
       "metricKey": "theme-population-pyramid-65-69-male",
-      "expectedUnit": "人",
-      "expectedConfigHash": "be8d275e22d06945",
       "themeKey": "aging-society",
       "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
+      "componentType": "pyramid-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "be8d275e22d06945"
     },
     {
       "metricKey": "theme-population-pyramid-70-74-female",
-      "expectedUnit": "人",
-      "expectedConfigHash": "9ee4761c27b48e2f",
       "themeKey": "aging-society",
       "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
+      "componentType": "pyramid-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "9ee4761c27b48e2f"
     },
     {
       "metricKey": "theme-population-pyramid-70-74-male",
-      "expectedUnit": "人",
-      "expectedConfigHash": "6023bc1fb2b1f8d4",
       "themeKey": "aging-society",
       "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
+      "componentType": "pyramid-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "6023bc1fb2b1f8d4"
     },
     {
       "metricKey": "theme-population-pyramid-75-79-female",
-      "expectedUnit": "人",
-      "expectedConfigHash": "9d61767769727b2c",
       "themeKey": "aging-society",
       "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
+      "componentType": "pyramid-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "9d61767769727b2c"
     },
     {
       "metricKey": "theme-population-pyramid-75-79-male",
-      "expectedUnit": "人",
-      "expectedConfigHash": "7636b1b44e3a5717",
       "themeKey": "aging-society",
       "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
+      "componentType": "pyramid-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "7636b1b44e3a5717"
     },
     {
       "metricKey": "theme-population-pyramid-80-plus-female",
-      "expectedUnit": "人",
-      "expectedConfigHash": "c6051b0342365458",
       "themeKey": "aging-society",
       "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
+      "componentType": "pyramid-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "c6051b0342365458"
     },
     {
       "metricKey": "theme-population-pyramid-80-plus-male",
-      "expectedUnit": "人",
-      "expectedConfigHash": "9c2592e0cfc92f8b",
       "themeKey": "aging-society",
       "componentKey": "theme-population-pyramid",
-      "componentType": "pyramid-chart"
+      "componentType": "pyramid-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "9c2592e0cfc92f8b"
     },
     {
       "metricKey": "theme-prostitution-crime-recognition-count",
-      "expectedUnit": "件",
-      "expectedConfigHash": "c3df864847c5623b",
       "themeKey": "safety",
       "componentKey": "safety-crime-types-donut",
-      "componentType": "donut-chart"
+      "componentType": "donut-chart",
+      "expectedUnit": "件",
+      "expectedConfigHash": "c3df864847c5623b"
     },
     {
       "metricKey": "traffic-accident-count",
-      "expectedUnit": "件",
-      "expectedConfigHash": "a23412ffe6b434b8",
       "themeKey": "safety",
       "componentKey": "traffic-accident-deaths-trend",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "件",
+      "expectedConfigHash": "a23412ffe6b434b8"
     },
     {
       "metricKey": "traffic-accident-injuries",
-      "expectedUnit": "人",
-      "expectedConfigHash": "16905be2fda40655",
       "themeKey": "safety",
       "componentKey": "traffic-accident-deaths-trend",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "人",
+      "expectedConfigHash": "16905be2fda40655"
     },
     {
       "metricKey": "truck-driver-annual-income",
-      "expectedUnit": "万円",
-      "expectedConfigHash": "8b54916f2f34d7a0",
       "themeKey": "occupation-salary",
       "componentKey": "theme-occ-transport-trend",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "万円",
+      "expectedConfigHash": "8b54916f2f34d7a0"
     },
     {
       "metricKey": "turnover-rate",
-      "expectedUnit": "％",
-      "expectedConfigHash": "fa3d6b6af8b4d5a1",
       "themeKey": "labor-mobility",
       "componentKey": "labor-mobility-turnover-vs-jobchange",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "％",
+      "expectedConfigHash": "fa3d6b6af8b4d5a1"
     },
     {
       "metricKey": "university-professor-annual-income",
-      "expectedUnit": "万円",
-      "expectedConfigHash": "b65036a86a06863b",
       "themeKey": "occupation-salary",
       "componentKey": "theme-occ-edu-trend",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "万円",
+      "expectedConfigHash": "b65036a86a06863b"
     },
     {
       "metricKey": "vacant-housing-ratio",
-      "expectedUnit": "％",
-      "expectedConfigHash": "bf75e5eb28c6223c",
       "themeKey": "living-housing",
       "componentKey": "vacancy-ownership-rate-trend",
-      "componentType": "line-chart"
+      "componentType": "line-chart",
+      "expectedUnit": "％",
+      "expectedConfigHash": "bf75e5eb28c6223c"
     },
     {
       "metricKey": "violent-crime-per-100k",
-      "expectedUnit": "件",
-      "expectedConfigHash": "cc2edd2f61d737f4",
       "themeKey": "safety",
       "componentKey": "safety-crime-types-donut",
-      "componentType": "donut-chart"
+      "componentType": "donut-chart",
+      "expectedUnit": "件",
+      "expectedConfigHash": "cc2edd2f61d737f4"
     }
   ]
 }

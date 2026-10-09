@@ -43,10 +43,13 @@ import { RANKING_ITEMS_SNAPSHOT_KEY, rankingItemKeyPath } from "../types/snapsho
 import { deriveRanks } from "./generate-ranking-values";
 
 import type { RankingItem } from "../types/ranking-item";
+import { mkdirSync, writeFileSync } from 'node:fs';
+import { dirname, resolve, sep } from 'node:path';
 
 const CONCURRENCY = 20;
 
 interface Args {
+  stageDir: string | null;
   dryRun: boolean;
   only: Set<string> | null;
 }
@@ -58,7 +61,11 @@ function parseArgs(argv: string[]): Args {
     onlyIdx >= 0 && argv[onlyIdx + 1]
       ? new Set(argv[onlyIdx + 1].split(",").map((s) => s.trim()).filter(Boolean))
       : null;
-  return { dryRun, only };
+  const stageIndex = argv.indexOf('--stage-dir');
+  if (stageIndex >= 0 && !argv[stageIndex + 1]) throw new Error('--stage-dir requires a directory');
+  const stageDir = stageIndex >= 0 ? resolve(argv[stageIndex + 1]) : null;
+  if (stageDir && dryRun) throw new Error('--stage-dir and --dry-run are mutually exclusive');
+  return { dryRun, only, stageDir };
 }
 
 /**
@@ -127,12 +134,13 @@ async function main() {
   // 都道府県を持つ全 metric (active/inactive 問わず item.json を生成。
   // isActive の絞り込みは all.json reader / known-keys 側で行う)
   const allMetrics = listAllMetrics();
-  const metrics = allMetrics.filter((c) => c.entities?.includes("prefecture"));
+  for (const key of args.only ?? []) if (!allMetrics.some(m => m.key === key && m.entities.includes("prefecture"))) throw new Error(`Unknown prefecture metric: ${key}`);
+  const metrics = allMetrics.filter((c) => c.entities?.includes("prefecture") && (!args.stageDir || !args.only || args.only.has(c.key)));
   // calculated metric の分子/分母から survey を辿るための registry (survey 紐付け導出用)
   const registry: MetricRegistry = Object.fromEntries(allMetrics.map((m) => [m.key, m]));
   console.log(`prefecture metrics: ${metrics.length} (only=${args.only ? [...args.only].join(",") : "all"}, dryRun=${args.dryRun})`);
 
-  if (!args.dryRun) {
+  if (!args.dryRun && !args.stageDir) {
     assertR2WriteAllowed({ op: "generate ranking item.json" });
   }
 
@@ -176,14 +184,23 @@ async function main() {
   let written = 0;
   await mapWithConcurrency(targets, CONCURRENCY, async (item) => {
     const body = JSON.stringify({ generatedAt: now, item });
-    if (!args.dryRun) {
+    if (args.stageDir) {
+      const target = resolve(args.stageDir, rankingItemKeyPath(item.rankingKey));
+      if (!target.startsWith(args.stageDir + sep)) throw new Error('Snapshot path escaped staging directory');
+      mkdirSync(dirname(target), { recursive: true });
+      writeFileSync(target, body);
+    } else if (!args.dryRun) {
       await saveToR2(rankingItemKeyPath(item.rankingKey), body, {
         contentType: "application/json; charset=utf-8",
       });
     }
     written++;
   });
-  console.log(`✅ item.json: ${written} 件 ${args.dryRun ? "(dry-run)" : "push"}`);
+  console.log(`✅ item.json: ${written} 件 ${args.dryRun ? "(dry-run)" : args.stageDir ? "local stage" : "push"}`);
+  if (args.stageDir && args.only) {
+    console.log(`Local staging: ${written} per-metric snapshots. A partial all.json is never produced.`);
+    return;
+  }
 
   // all.json (集約) は --only 指定時も常に全件で書く。ただし退役 (410) キーは載せない。
   //
@@ -216,14 +233,19 @@ async function main() {
     count: inventory.length,
     items: inventory,
   });
-  if (!args.dryRun) {
+  if (args.stageDir) {
+    const target = resolve(args.stageDir, RANKING_ITEMS_SNAPSHOT_KEY);
+    if (!target.startsWith(args.stageDir + sep)) throw new Error('Snapshot path escaped staging directory');
+    mkdirSync(dirname(target), { recursive: true });
+    writeFileSync(target, allBody);
+  } else if (!args.dryRun) {
     await saveToR2(RANKING_ITEMS_SNAPSHOT_KEY, allBody, {
       contentType: "application/json; charset=utf-8",
     });
   }
   const active = inventory.filter((it) => it.isActive).length;
   console.log(
-    `✅ all.json: items=${inventory.length} active=${active} gone除外=${goneInInventory.length} bytes=${allBody.length} ${args.dryRun ? "(dry-run)" : "push"}`,
+    `✅ all.json: items=${inventory.length} active=${active} gone除外=${goneInInventory.length} bytes=${allBody.length} ${args.dryRun ? "(dry-run)" : args.stageDir ? "local stage" : "push"}`,
   );
 }
 

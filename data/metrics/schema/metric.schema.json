@@ -1,0 +1,1450 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://stats47.jp/schemas/metric.schema.json",
+  "title": "MetricConfig (generated from TypeScript; do not edit)",
+  "type": "object",
+  "properties": {
+    "key": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "subtitle": {
+      "type": "string"
+    },
+    "note": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "unit": {
+      "type": "string"
+    },
+    "category": {
+      "enum": [
+        "landweather",
+        "population",
+        "laborwage",
+        "agriculture",
+        "miningindustry",
+        "commercial",
+        "economy",
+        "construction",
+        "energy",
+        "tourism",
+        "educationsports",
+        "administrativefinancial",
+        "safetyenvironment",
+        "socialsecurity",
+        "international",
+        "infrastructure",
+        "ict"
+      ]
+    },
+    "source": {
+      "anyOf": [
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "estat"
+            },
+            "statsDataId": {
+              "type": "string"
+            },
+            "cdCat01": {
+              "type": "string"
+            },
+            "cdCat02": {
+              "type": "string"
+            },
+            "cdCat03": {
+              "type": "string"
+            },
+            "cdCat04": {
+              "type": "string"
+            },
+            "cdCat05": {
+              "type": "string"
+            },
+            "cdTab": {
+              "type": "string"
+            },
+            "tabCombination": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "cdTab": {
+                    "type": "string"
+                  },
+                  "factor": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "cdTab",
+                  "factor"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "axisSum": {
+              "type": "object",
+              "properties": {
+                "axis": {
+                  "enum": [
+                    "cat01",
+                    "cat02",
+                    "cat03",
+                    "cat04",
+                    "cat05"
+                  ]
+                },
+                "codes": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "axis",
+                "codes"
+              ],
+              "additionalProperties": false
+            },
+            "axisRatio": {
+              "type": "object",
+              "properties": {
+                "axis": {
+                  "enum": [
+                    "cat01",
+                    "cat02",
+                    "cat03",
+                    "cat04",
+                    "cat05"
+                  ]
+                },
+                "numeratorCodes": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "denominatorCodes": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "axis",
+                "numeratorCodes",
+                "denominatorCodes"
+              ],
+              "additionalProperties": false
+            },
+            "areaAxis": {
+              "type": "object",
+              "properties": {
+                "axis": {
+                  "enum": [
+                    "cat01",
+                    "cat02",
+                    "cat03",
+                    "cat04",
+                    "cat05"
+                  ]
+                },
+                "scheme": {
+                  "enum": [
+                    "seq-pref",
+                    "name"
+                  ]
+                }
+              },
+              "required": [
+                "axis",
+                "scheme"
+              ],
+              "additionalProperties": false
+            },
+            "timeScope": {
+              "type": "string",
+              "const": "annual"
+            },
+            "valueScale": {
+              "type": "number"
+            },
+            "displayName": {
+              "type": "string"
+            },
+            "url": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind",
+            "statsDataId"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "kakei-chousa"
+            },
+            "filter": {
+              "type": "object",
+              "properties": {},
+              "additionalProperties": {}
+            },
+            "displayName": {
+              "type": "string"
+            },
+            "url": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "mlit"
+            },
+            "resourceId": {
+              "type": "string"
+            },
+            "displayName": {
+              "type": "string"
+            },
+            "url": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind",
+            "resourceId"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "external"
+            },
+            "fetcherKey": {
+              "type": "string"
+            },
+            "config": {
+              "type": "object",
+              "properties": {},
+              "additionalProperties": {}
+            },
+            "displayName": {
+              "type": "string"
+            },
+            "url": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "kind",
+            "fetcherKey",
+            "config"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "const": "calculated"
+            },
+            "formula": {
+              "anyOf": [
+                {
+                  "type": "object",
+                  "properties": {
+                    "op": {
+                      "type": "string",
+                      "const": "divide"
+                    },
+                    "numerator": {
+                      "type": "string"
+                    },
+                    "denominator": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "op",
+                    "numerator",
+                    "denominator"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "op": {
+                      "type": "string",
+                      "const": "multiply"
+                    },
+                    "left": {
+                      "type": "string"
+                    },
+                    "right": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "op",
+                    "left",
+                    "right"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "op": {
+                      "type": "string",
+                      "const": "subtract"
+                    },
+                    "left": {
+                      "type": "string"
+                    },
+                    "right": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "op",
+                    "left",
+                    "right"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "object",
+                  "properties": {
+                    "op": {
+                      "type": "string",
+                      "const": "per_population"
+                    },
+                    "numerator": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "op",
+                    "numerator"
+                  ],
+                  "additionalProperties": false
+                }
+              ]
+            }
+          },
+          "required": [
+            "kind",
+            "formula"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "citySource": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "const": "estat"
+        },
+        "statsDataId": {
+          "type": "string"
+        },
+        "cdCat01": {
+          "type": "string"
+        },
+        "cdCat02": {
+          "type": "string"
+        },
+        "cdCat03": {
+          "type": "string"
+        },
+        "cdCat04": {
+          "type": "string"
+        },
+        "cdCat05": {
+          "type": "string"
+        },
+        "cdTab": {
+          "type": "string"
+        },
+        "tabCombination": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "cdTab": {
+                "type": "string"
+              },
+              "factor": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "cdTab",
+              "factor"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "axisSum": {
+          "type": "object",
+          "properties": {
+            "axis": {
+              "enum": [
+                "cat01",
+                "cat02",
+                "cat03",
+                "cat04",
+                "cat05"
+              ]
+            },
+            "codes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "axis",
+            "codes"
+          ],
+          "additionalProperties": false
+        },
+        "axisRatio": {
+          "type": "object",
+          "properties": {
+            "axis": {
+              "enum": [
+                "cat01",
+                "cat02",
+                "cat03",
+                "cat04",
+                "cat05"
+              ]
+            },
+            "numeratorCodes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "denominatorCodes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "axis",
+            "numeratorCodes",
+            "denominatorCodes"
+          ],
+          "additionalProperties": false
+        },
+        "areaAxis": {
+          "type": "object",
+          "properties": {
+            "axis": {
+              "enum": [
+                "cat01",
+                "cat02",
+                "cat03",
+                "cat04",
+                "cat05"
+              ]
+            },
+            "scheme": {
+              "enum": [
+                "seq-pref",
+                "name"
+              ]
+            }
+          },
+          "required": [
+            "axis",
+            "scheme"
+          ],
+          "additionalProperties": false
+        },
+        "timeScope": {
+          "type": "string",
+          "const": "annual"
+        },
+        "valueScale": {
+          "type": "number"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "statsDataId"
+      ],
+      "additionalProperties": false
+    },
+    "supplementalSources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "years": {
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          },
+          "source": {
+            "type": "object",
+            "properties": {
+              "kind": {
+                "type": "string",
+                "const": "estat"
+              },
+              "statsDataId": {
+                "type": "string"
+              },
+              "cdCat01": {
+                "type": "string"
+              },
+              "cdCat02": {
+                "type": "string"
+              },
+              "cdCat03": {
+                "type": "string"
+              },
+              "cdCat04": {
+                "type": "string"
+              },
+              "cdCat05": {
+                "type": "string"
+              },
+              "cdTab": {
+                "type": "string"
+              },
+              "displayName": {
+                "type": "string"
+              },
+              "url": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "kind",
+              "statsDataId"
+            ],
+            "additionalProperties": false
+          },
+          "reason": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "years",
+          "source",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "entities": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "prefecture",
+          "city",
+          "port",
+          "migration-flow"
+        ]
+      }
+    },
+    "years": {
+      "anyOf": [
+        {
+          "type": "string",
+          "const": "all"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "from": {
+              "type": "number"
+            },
+            "to": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "from",
+            "to"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "years": {
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
+            }
+          },
+          "required": [
+            "years"
+          ],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "yearFormat": {
+      "enum": [
+        "fiscal",
+        "calendar",
+        "plain"
+      ]
+    },
+    "visualization": {
+      "type": "object",
+      "properties": {
+        "colorScheme": {
+          "enum": [
+            "interpolateBlues",
+            "interpolateGreens",
+            "interpolateGreys",
+            "interpolateOranges",
+            "interpolatePurples",
+            "interpolateReds",
+            "interpolateBuGn",
+            "interpolateBuPu",
+            "interpolateGnBu",
+            "interpolateOrRd",
+            "interpolatePuBuGn",
+            "interpolatePuBu",
+            "interpolatePuRd",
+            "interpolateRdPu",
+            "interpolateYlGnBu",
+            "interpolateYlGn",
+            "interpolateYlOrBr",
+            "interpolateYlOrRd",
+            "interpolateViridis",
+            "interpolatePlasma",
+            "interpolateInferno",
+            "interpolateMagma",
+            "interpolateTurbo",
+            "interpolateCool",
+            "interpolateWarm",
+            "interpolateCividis",
+            "interpolateCubehelix",
+            "interpolateBrBG",
+            "interpolatePRGn",
+            "interpolatePiYG",
+            "interpolatePuOr",
+            "interpolateRdBu",
+            "interpolateRdGy",
+            "interpolateRdYlBu",
+            "interpolateRdYlGn",
+            "interpolateSpectral",
+            "schemeCategory10",
+            "schemeAccent",
+            "schemeDark2",
+            "schemePaired",
+            "schemePastel1",
+            "schemePastel2",
+            "schemeSet1",
+            "schemeSet2",
+            "schemeSet3",
+            "schemeTableau10"
+          ]
+        },
+        "colorSchemeType": {
+          "enum": [
+            "sequential",
+            "diverging"
+          ]
+        },
+        "domain": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "mode": {
+                  "type": "string",
+                  "const": "extent"
+                },
+                "padding": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "mode"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "mode": {
+                  "type": "string",
+                  "const": "zero"
+                },
+                "padding": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "mode"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "mode": {
+                  "type": "string",
+                  "const": "fixed"
+                },
+                "min": {
+                  "type": "number"
+                },
+                "max": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "mode",
+                "min",
+                "max"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "classification": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "method": {
+                  "type": "string",
+                  "const": "continuous"
+                }
+              },
+              "required": [
+                "method"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "method": {
+                  "enum": [
+                    "equal-interval",
+                    "quantile"
+                  ]
+                },
+                "classes": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "method",
+                "classes"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "method": {
+                  "type": "string",
+                  "const": "threshold"
+                },
+                "thresholds": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  }
+                }
+              },
+              "required": [
+                "method",
+                "thresholds"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "trendDomain": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "mode": {
+                  "type": "string",
+                  "const": "extent"
+                },
+                "padding": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "mode"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "mode": {
+                  "type": "string",
+                  "const": "zero"
+                },
+                "padding": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "mode"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "mode": {
+                  "type": "string",
+                  "const": "fixed"
+                },
+                "min": {
+                  "type": "number"
+                },
+                "max": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "mode",
+                "min",
+                "max"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "comparisonDomain": {
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "mode": {
+                  "type": "string",
+                  "const": "extent"
+                },
+                "padding": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "mode"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "mode": {
+                  "type": "string",
+                  "const": "zero"
+                },
+                "padding": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "mode"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "object",
+              "properties": {
+                "mode": {
+                  "type": "string",
+                  "const": "fixed"
+                },
+                "min": {
+                  "type": "number"
+                },
+                "max": {
+                  "type": "number"
+                }
+              },
+              "required": [
+                "mode",
+                "min",
+                "max"
+              ],
+              "additionalProperties": false
+            }
+          ]
+        },
+        "divergingMidpoint": {
+          "enum": [
+            "zero",
+            "mean",
+            "median",
+            "custom"
+          ]
+        },
+        "divergingMidpointValue": {
+          "type": "number"
+        },
+        "isReversed": {
+          "enum": [
+            false,
+            true
+          ]
+        },
+        "isSymmetrized": {
+          "enum": [
+            false,
+            true
+          ]
+        }
+      },
+      "required": [
+        "colorScheme",
+        "colorSchemeType",
+        "domain",
+        "classification",
+        "trendDomain",
+        "comparisonDomain"
+      ],
+      "additionalProperties": false
+    },
+    "display": {
+      "type": "object",
+      "properties": {
+        "conversionFactor": {
+          "type": "number"
+        },
+        "decimalPlaces": {
+          "type": "number"
+        },
+        "displayUnit": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "calculation": {
+      "type": "object",
+      "properties": {
+        "isCalculated": {
+          "enum": [
+            false,
+            true
+          ]
+        },
+        "isPairRelationship": {
+          "enum": [
+            false,
+            true
+          ]
+        },
+        "normalizationOptions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "enum": [
+                  "per_population",
+                  "per_area"
+                ]
+              },
+              "label": {
+                "type": "string"
+              },
+              "unit": {
+                "type": "string"
+              },
+              "scaleFactor": {
+                "type": "number"
+              },
+              "decimalPlaces": {
+                "type": "number"
+              },
+              "visualization": {
+                "type": "object",
+                "properties": {
+                  "colorScheme": {
+                    "enum": [
+                      "interpolateBlues",
+                      "interpolateGreens",
+                      "interpolateGreys",
+                      "interpolateOranges",
+                      "interpolatePurples",
+                      "interpolateReds",
+                      "interpolateBuGn",
+                      "interpolateBuPu",
+                      "interpolateGnBu",
+                      "interpolateOrRd",
+                      "interpolatePuBuGn",
+                      "interpolatePuBu",
+                      "interpolatePuRd",
+                      "interpolateRdPu",
+                      "interpolateYlGnBu",
+                      "interpolateYlGn",
+                      "interpolateYlOrBr",
+                      "interpolateYlOrRd",
+                      "interpolateViridis",
+                      "interpolatePlasma",
+                      "interpolateInferno",
+                      "interpolateMagma",
+                      "interpolateTurbo",
+                      "interpolateCool",
+                      "interpolateWarm",
+                      "interpolateCividis",
+                      "interpolateCubehelix",
+                      "interpolateBrBG",
+                      "interpolatePRGn",
+                      "interpolatePiYG",
+                      "interpolatePuOr",
+                      "interpolateRdBu",
+                      "interpolateRdGy",
+                      "interpolateRdYlBu",
+                      "interpolateRdYlGn",
+                      "interpolateSpectral",
+                      "schemeCategory10",
+                      "schemeAccent",
+                      "schemeDark2",
+                      "schemePaired",
+                      "schemePastel1",
+                      "schemePastel2",
+                      "schemeSet1",
+                      "schemeSet2",
+                      "schemeSet3",
+                      "schemeTableau10"
+                    ]
+                  },
+                  "colorSchemeType": {
+                    "enum": [
+                      "sequential",
+                      "diverging"
+                    ]
+                  },
+                  "domain": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "mode": {
+                            "type": "string",
+                            "const": "extent"
+                          },
+                          "padding": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "mode"
+                        ],
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "mode": {
+                            "type": "string",
+                            "const": "zero"
+                          },
+                          "padding": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "mode"
+                        ],
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "mode": {
+                            "type": "string",
+                            "const": "fixed"
+                          },
+                          "min": {
+                            "type": "number"
+                          },
+                          "max": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "mode",
+                          "min",
+                          "max"
+                        ],
+                        "additionalProperties": false
+                      }
+                    ]
+                  },
+                  "classification": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "method": {
+                            "type": "string",
+                            "const": "continuous"
+                          }
+                        },
+                        "required": [
+                          "method"
+                        ],
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "method": {
+                            "enum": [
+                              "equal-interval",
+                              "quantile"
+                            ]
+                          },
+                          "classes": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "method",
+                          "classes"
+                        ],
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "method": {
+                            "type": "string",
+                            "const": "threshold"
+                          },
+                          "thresholds": {
+                            "type": "array",
+                            "items": {
+                              "type": "number"
+                            }
+                          }
+                        },
+                        "required": [
+                          "method",
+                          "thresholds"
+                        ],
+                        "additionalProperties": false
+                      }
+                    ]
+                  },
+                  "trendDomain": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "mode": {
+                            "type": "string",
+                            "const": "extent"
+                          },
+                          "padding": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "mode"
+                        ],
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "mode": {
+                            "type": "string",
+                            "const": "zero"
+                          },
+                          "padding": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "mode"
+                        ],
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "mode": {
+                            "type": "string",
+                            "const": "fixed"
+                          },
+                          "min": {
+                            "type": "number"
+                          },
+                          "max": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "mode",
+                          "min",
+                          "max"
+                        ],
+                        "additionalProperties": false
+                      }
+                    ]
+                  },
+                  "comparisonDomain": {
+                    "anyOf": [
+                      {
+                        "type": "object",
+                        "properties": {
+                          "mode": {
+                            "type": "string",
+                            "const": "extent"
+                          },
+                          "padding": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "mode"
+                        ],
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "mode": {
+                            "type": "string",
+                            "const": "zero"
+                          },
+                          "padding": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "mode"
+                        ],
+                        "additionalProperties": false
+                      },
+                      {
+                        "type": "object",
+                        "properties": {
+                          "mode": {
+                            "type": "string",
+                            "const": "fixed"
+                          },
+                          "min": {
+                            "type": "number"
+                          },
+                          "max": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "mode",
+                          "min",
+                          "max"
+                        ],
+                        "additionalProperties": false
+                      }
+                    ]
+                  },
+                  "divergingMidpoint": {
+                    "enum": [
+                      "zero",
+                      "mean",
+                      "median",
+                      "custom"
+                    ]
+                  },
+                  "divergingMidpointValue": {
+                    "type": "number"
+                  },
+                  "isReversed": {
+                    "enum": [
+                      false,
+                      true
+                    ]
+                  },
+                  "isSymmetrized": {
+                    "enum": [
+                      false,
+                      true
+                    ]
+                  }
+                },
+                "required": [
+                  "colorScheme",
+                  "colorSchemeType",
+                  "domain",
+                  "classification",
+                  "trendDomain",
+                  "comparisonDomain"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "type",
+              "label",
+              "unit",
+              "scaleFactor",
+              "decimalPlaces"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "description": {
+          "type": "string"
+        },
+        "periodAlign": {
+          "type": "object",
+          "properties": {
+            "numerator": {
+              "enum": [
+                "annual",
+                "monthly"
+              ]
+            },
+            "denominator": {
+              "enum": [
+                "annual",
+                "monthly"
+              ]
+            },
+            "result": {
+              "enum": [
+                "annual",
+                "monthly"
+              ]
+            }
+          },
+          "required": [
+            "numerator",
+            "denominator",
+            "result"
+          ],
+          "additionalProperties": false
+        },
+        "scaleFactor": {
+          "type": "number"
+        },
+        "type": {
+          "enum": [
+            "ratio",
+            "per_capita",
+            "subtraction"
+          ]
+        },
+        "numeratorKey": {
+          "type": "string"
+        },
+        "denominatorKey": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "isCalculated"
+      ],
+      "additionalProperties": false
+    },
+    "additionalCategories": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "groupKey": {
+      "type": "string"
+    },
+    "surveyId": {
+      "type": "string"
+    },
+    "surveyScope": {
+      "type": "string",
+      "const": "not-applicable"
+    },
+    "surveyScopeReason": {
+      "type": "string"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "seoTitle": {
+      "type": "string"
+    },
+    "seoDescription": {
+      "type": "string"
+    },
+    "isActive": {
+      "enum": [
+        false,
+        true
+      ]
+    }
+  },
+  "required": [
+    "key",
+    "title",
+    "unit",
+    "category",
+    "source",
+    "entities",
+    "years",
+    "visualization"
+  ],
+  "additionalProperties": false
+}

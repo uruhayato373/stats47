@@ -115,7 +115,7 @@ rankingKey が実在する候補は、実装時に catalog の `rejectedCandidat
 ## 想定実装差分と検証
 
 - 編集: `data/themes/catalogs/local-economy.json` と、年を広げる 2 指標の metric config
-  (`packages/data-configs/src/metrics/{total-production-in-the-prefecture,per-capita-prefectural-income-h27}.ts` の `years`)。
+  (`data/metrics/{total-production-in-the-prefecture,per-capita-prefectural-income-h27}.ts` の `years`)。
 - metric config の年を広げても、R2 の観測値は自動では増えない。値の再取得と R2 反映 (data-refresh) が要り、これは本番反映と同じ承認で行う。
   反映まではカードが登録済みの年だけ (県内総生産は 2021 年の 1 点) を描く。
 - 図を 2 つ外すので、件数を固定した検査 (baseline・依存ミラー・調査の紐付け ratchet) を同じ変更で合わせる。ratchet は `themeBaselineFollowUps` に記録する。

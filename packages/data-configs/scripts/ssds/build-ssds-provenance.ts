@@ -1,3 +1,4 @@
+import { METRIC_DEFINITIONS_DIR } from '../../../../config/paths.mjs';
 /**
  * SSDS 出典マッピング生成器。
  *
@@ -17,7 +18,7 @@
  */
 
 import { readFileSync, writeFileSync, readdirSync } from "node:fs";
-import { dirname, join } from "node:path";
+import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import {
@@ -28,7 +29,7 @@ import {
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const SSDS_DIR = join(__dirname, "../../src/ssds");
-const METRICS_DIR = join(__dirname, "../../src/metrics");
+const METRICS_DIR = resolve(__dirname, "../../../..", METRIC_DEFINITIONS_DIR);
 
 type RawEntry = { kind: "base" | "indicator"; sources: string[]; formula?: string };
 type Survey = { id: string; name: string };

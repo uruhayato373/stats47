@@ -34,7 +34,7 @@
  * 正典: `.claude/rules/metric-config-standards.md` §検証済みプロファイル方式
  */
 import type { ShapeSummary } from "./shape-gate";
-import type { VerifiedValueProfile } from "./verified-value-profiles";
+import type { VerifiedValueProfile } from "../../../data/metrics/quality/verified-value-profiles";
 
 /** 疑いの種類 */
 export type ValueSuspicion =

@@ -23,6 +23,8 @@ import {
   JAPAN_CATALOGS,
   MUNICIPALITY_THEME_CATALOGS,
 } from '@stats47/data-configs/geo-scope';
+import { AREA_DATABOOK_TEMPLATE, collectTemplateMetricKeys, listTemplateCharts } from '../../../packages/data-configs/src/area-databook';
+import { collectChartDependencies } from '../../../packages/data-configs/src/theme-catalog/chart-dependencies';
 import { listThemeCatalogs } from '@stats47/data-configs/theme-catalog';
 import { KNOWN_RANKING_KEYS } from '@stats47/ranking/config';
 
@@ -117,9 +119,7 @@ async function run() {
   for (const theme of listThemeCatalogs()) {
     const rankingKeys = [
       ...new Set(
-        theme.metrics
-          .filter((metric) => metric.role !== 'context')
-          .map((metric) => metric.rankingKey)
+        [...theme.metrics.map(metric => metric.rankingKey), ...theme.charts.flatMap(chart => collectChartDependencies(chart).metricRefs.map(ref => ref.metricKey)), ...(theme.metricGroups ?? []).flatMap(group => group.rankingKeys)]
       ),
     ];
     add({
@@ -141,6 +141,7 @@ async function run() {
       key: pref.prefCode,
       title: pref.prefName,
       href: `/areas/${pref.prefCode}`,
+      rankingKeys: [...new Set([...collectTemplateMetricKeys(AREA_DATABOOK_TEMPLATE), ...listTemplateCharts(AREA_DATABOOK_TEMPLATE).flatMap(({chart}) => chart.relatedRankingKeys ?? [])])].sort(),
       published: true,
     });
     for (const theme of AREA_THEMES)
@@ -172,6 +173,7 @@ async function run() {
       key: theme.themeSlug,
       title: `日本の${theme.title}`,
       href: `/japan/${theme.themeSlug}`,
+      rankingKeys: theme.metrics.map(metric => metric.metricKey),
       published: true,
     });
   for (const theme of Object.values(MUNICIPALITY_THEME_CATALOGS))
@@ -181,6 +183,7 @@ async function run() {
       key: theme.slug,
       title: theme.title,
       href: `/municipalities/themes/${theme.slug}`,
+      rankingKeys: [...theme.metricKeys],
       published: true,
     });
   for (const product of STOREFRONT_PRODUCTS)
@@ -236,6 +239,7 @@ async function run() {
       key: analysis.slug,
       title: analysis.title,
       href: `/geo/${analysis.slug}`,
+      rankingKeys: 'relatedRankingKey' in analysis && analysis.relatedRankingKey ? [analysis.relatedRankingKey] : [],
       published:
         analysis.status === 'ready' &&
         GEO_CROSS_ANALYSIS_SLUGS.includes(

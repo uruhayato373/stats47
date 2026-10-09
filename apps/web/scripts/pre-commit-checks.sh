@@ -98,6 +98,14 @@ if [ -n "$STAGED_DOCS" ]; then
   fi
 fi
 
+# Canonical metric and content contracts: reject schema, ID and generated-index drift.
+if printf '%s\n' "$PRECOMMIT_PATHS_2" | grep -qE '^(data/(metrics|metric-sources|themes|content)/|packages/(data-configs|types)/|apps/web/scripts/(sync-content-catalog|validate-content-catalog)\.ts$|package\.json$)'; then
+  if ! (cd "$GUARD_ROOT" && npm run metrics:check && npm run content:check); then
+    echo "Metric/content identity contract failed"
+    ERROR_COUNT=$((ERROR_COUNT + 1))
+  fi
+fi
+
 # 2.1c file:// URL の文字列連結ガード
 # `file://${process.argv[1]}` は Windows で必ず不一致になり、ESM のエントリポイント
 # 判定なら main() が呼ばれないまま exit 0 で終わる (失敗ではなく無言の no-op)。

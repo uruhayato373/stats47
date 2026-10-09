@@ -63,7 +63,7 @@ node -e 'const s=require("./.claude/scripts/lib/sns-posts-store.cjs");
   console.log(JSON.stringify(recent))'
 ```
 
-各 `content_key`（= ranking_key）の category_key は metric config（`packages/data-configs/src/metrics/<key>.ts` の `category`）から解決する。
+各 `content_key`（= ranking_key）の category_key は metric config（`data/metrics/<key>.ts` の `category`）から解決する。
 
 - **避ける条件**: 候補の `content_key` の category_key が直近2件に含まれる
 - **緩和条件**: スコア上位3件が全て該当する場合は最上位を採用（鮮度優先）

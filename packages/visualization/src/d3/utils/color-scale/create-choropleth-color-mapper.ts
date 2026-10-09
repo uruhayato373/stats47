@@ -5,12 +5,10 @@
  * を色に変換するマッパー関数を生成します。
  */
 
-import { createColorScale } from './create-color-scale';
-import { mapConfigToColorOptions } from '../convert-map-config';
+import { resolveChoroplethScale } from './resolve-choropleth-scale';
 
-import type { ColorScaleOptions, VisualizationDataPoint } from "../../types";
+import type { VisualizationDataPoint } from "../../types";
 import type { MapVisualizationConfig } from '../../types/map-chart';
-import { DEFAULT_PREFECTURE_MAP_PROPS } from '../../constants/map-constants';
 
 /**
  * 地域コードから色を取得する関数を生成
@@ -23,17 +21,14 @@ export async function createChoroplethColorMapper(
   config: MapVisualizationConfig,
   data: VisualizationDataPoint[]
 ) {
-  const colorOptions = mapConfigToColorOptions(config, data);
-  const { noDataColor = DEFAULT_PREFECTURE_MAP_PROPS.noDataFillColor } = colorOptions;
-
-  const dataMap = new Map((data as VisualizationDataPoint[]).map((d) => [d.areaCode, d.value]));
-  const colorScale = await createColorScale(colorOptions);
+  const resolved = await resolveChoroplethScale(config, data.map((point) => ({ areaCode: String(point.areaCode), value: point.value })));
+  const dataMap = new Map(data.map((d) => [d.areaCode, d.value]));
 
   return (areaCode: string): string => {
     const value = dataMap.get(areaCode);
     if (value === undefined) {
-      return noDataColor;
+      return resolved.noDataColor;
     }
-    return colorScale(value as number);
+    return resolved.colorAtValue(value);
   };
 }

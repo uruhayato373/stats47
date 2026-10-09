@@ -3,7 +3,7 @@ import { describe, expect, it } from "vitest";
 import {
   aggregateMetricTimeseries,
   type TimeseriesSourceRow,
-} from "../aggregate-metric-timeseries";
+} from "@/lib/aggregate-metric-timeseries";
 
 function row(
   areaCode: string,

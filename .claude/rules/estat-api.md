@@ -1,7 +1,7 @@
 ---
 paths:
   - "packages/estat-api/**"
-  - "packages/data-configs/src/metrics/**"
+  - "data/metrics/**"
   - ".claude/{skills/estat,scripts/estat}/**"
   - "data/estat/**"
   - ".claude/agents/{estat-researcher,data-ingester,ranking-expander,theme-researcher,gis-curator}.md"

@@ -7,7 +7,7 @@
 import { describe, expect, it } from "vitest";
 
 import { resolveColorScheme } from "../color-scheme-policy";
-import { METRIC_POLARITY } from "../metric-polarity";
+import { METRIC_POLARITY } from "../../../../data/metrics/policy/polarity";
 
 // 挿入順ではなく「higher-is-worse であること」で選ぶ (先頭に別の極性が入っても壊れない)
 const worseKey = Object.keys(METRIC_POLARITY).find(
@@ -24,16 +24,16 @@ describe("resolveColorScheme の決定順序", () => {
     expect(resolveColorScheme({ key: "x", explicit: "Greens" }).scheme).toBe("interpolateGreens");
   });
 
-  it("★明示 Blues は「選択」として扱わない (全 config に焼かれた既定値だから)", () => {
+  it("明示 Blues は指標の選択として極性より優先される", () => {
     // Blues を deliberate 扱いすると極性を入れても何も変わらず、カタログが飾りになる
     const d = resolveColorScheme({ key: worseKey, explicit: "interpolateBlues" });
-    expect(d.scheme).toBe("interpolateReds");
-    expect(d.reason).toBe("polarity");
+    expect(d.scheme).toBe("interpolateBlues");
+    expect(d.reason).toBe("explicit");
   });
 
-  it("2. diverging は明示 Blues より優先される", () => {
+  it("2. 明示色がなければ diverging を採用する", () => {
     expect(
-      resolveColorScheme({ key: "x", explicit: "interpolateBlues", colorSchemeType: "diverging" }),
+      resolveColorScheme({ key: "x", colorSchemeType: "diverging" }),
     ).toEqual({ scheme: "interpolateRdBu", reason: "diverging" });
   });
 

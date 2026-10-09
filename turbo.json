@@ -21,18 +21,48 @@
   ],
   "tasks": {
     "build": {
-      "dependsOn": ["^build"],
+      "dependsOn": [
+        "^build"
+      ],
       "outputs": [
         ".next/**",
         "!.next/cache/**",
         "!.next/standalone/**/.next/cache/**",
         "dist/**"
+      ],
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        "$TURBO_ROOT$/data/metrics/**/*.ts",
+        "$TURBO_ROOT$/data/metric-sources/**/*.ts",
+        "$TURBO_ROOT$/data/themes/catalogs/*.json"
       ]
     },
-    "lint": {},
-    "type-check": {},
+    "lint": {
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        "$TURBO_ROOT$/data/metrics/**/*.ts",
+        "$TURBO_ROOT$/data/metric-sources/**/*.ts",
+        "$TURBO_ROOT$/data/themes/catalogs/*.json"
+      ]
+    },
+    "type-check": {
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        "$TURBO_ROOT$/data/metrics/**/*.ts",
+        "$TURBO_ROOT$/data/metric-sources/**/*.ts",
+        "$TURBO_ROOT$/data/themes/catalogs/*.json"
+      ]
+    },
     "test": {
-      "dependsOn": ["^build"]
+      "dependsOn": [
+        "^build"
+      ],
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        "$TURBO_ROOT$/data/metrics/**/*.ts",
+        "$TURBO_ROOT$/data/metric-sources/**/*.ts",
+        "$TURBO_ROOT$/data/themes/catalogs/*.json"
+      ]
     },
     "dev": {
       "cache": false,
@@ -46,27 +76,49 @@
       ]
     },
     "pipeline:images": {
-      "dependsOn": ["^build"],
-      "inputs": [".local/r2/ranking/**/*.json"],
+      "dependsOn": [
+        "^build"
+      ],
+      "inputs": [
+        ".local/r2/ranking/**/*.json"
+      ],
       "outputs": [
         ".local/r2/ranking/**/images/**",
         ".local/r2/ranking/**/reels/**"
       ]
     },
     "pipeline:captions": {
-      "dependsOn": ["pipeline:images"],
-      "inputs": [".local/r2/ranking/**/*.json"],
-      "outputs": [".local/r2/ranking/**/reels/*.md"]
+      "dependsOn": [
+        "pipeline:images"
+      ],
+      "inputs": [
+        ".local/r2/ranking/**/*.json"
+      ],
+      "outputs": [
+        ".local/r2/ranking/**/reels/*.md"
+      ]
     },
     "pipeline:refine": {
-      "dependsOn": ["pipeline:captions"],
-      "inputs": [".local/r2/ranking/**/reels/*.md"],
-      "outputs": [".local/r2/ranking/**/reels/*.png"]
+      "dependsOn": [
+        "pipeline:captions"
+      ],
+      "inputs": [
+        ".local/r2/ranking/**/reels/*.md"
+      ],
+      "outputs": [
+        ".local/r2/ranking/**/reels/*.png"
+      ]
     },
     "pipeline:render": {
-      "dependsOn": ["pipeline:refine"],
-      "inputs": [".local/r2/ranking/**/reels/*.png"],
-      "outputs": [".local/r2/ranking/**/video/*.mp4"]
+      "dependsOn": [
+        "pipeline:refine"
+      ],
+      "inputs": [
+        ".local/r2/ranking/**/reels/*.png"
+      ],
+      "outputs": [
+        ".local/r2/ranking/**/video/*.mp4"
+      ]
     }
   }
 }

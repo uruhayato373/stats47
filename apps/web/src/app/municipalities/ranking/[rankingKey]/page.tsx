@@ -262,7 +262,7 @@ export default async function MunicipalityRankingPage({
           }
         >
           <MunicipalityRankingMapSection
-            rankingKey={item.rankingKey}
+            visualization={item.visualization}
             unit={snapshot.unit}
             prefectureCode={prefectureCode}
             values={snapshot.values}

@@ -1,0 +1,6444 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "metricKey": "sole-proprietor-sales",
+      "pageId": "ranking:sole-proprietor-sales",
+      "title": "個人企業の売上高",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003421679",
+          "filters": {
+            "cdTab": "100",
+            "cdCat01": "0"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003421679",
+          "cdCat01": "0",
+          "cdTab": "100"
+        },
+        "ops": {
+          "valueScale": 0.1
+        },
+        "derived": true,
+        "configHash": "bef3b9fb05bfab14"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:sole-proprietor-sales",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "sole-proprietor-sales-per-worker",
+      "pageId": "ranking:sole-proprietor-sales-per-worker",
+      "title": "個人企業の従業者1人当たり売上高",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003421679",
+          "filters": {
+            "cdTab": "460",
+            "cdCat01": "0"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003421679",
+          "cdCat01": "0",
+          "cdTab": "460"
+        },
+        "ops": {
+          "valueScale": 0.1
+        },
+        "derived": true,
+        "configHash": "170ecbbec3ede639"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:sole-proprietor-sales-per-worker",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "soy-sauce-consumption-expenditure",
+      "pageId": "ranking:soy-sauce-consumption-expenditure",
+      "title": "しょう油消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "010720020",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "010720020",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "3970860c5223a07f"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:furikake-expenditure-ranking",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:hiroshima-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:shimane-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:soy-sauce-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamagata-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:soy-sauce-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "soy-sauce-consumption-quantity",
+      "pageId": "ranking:soy-sauce-consumption-quantity",
+      "title": "しょう油消費量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348235",
+          "filters": {
+            "cdCat01": "010720020",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348235",
+          "cdCat01": "010720020",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "caa9b640451f92db"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:hiroshima-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:miso-consumption-quantity-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:shimane-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamagata-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:soy-sauce-consumption-quantity",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "special-law-criminal-arrest-count",
+      "pageId": "ranking:special-law-criminal-arrest-count",
+      "title": "特別法犯検挙件数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010111",
+          "filters": {
+            "cdCat01": "K4301"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010111",
+          "cdCat01": "K4301"
+        },
+        "derived": false,
+        "configHash": "37b21a1cdba9958f"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:special-law-criminal-arrest-count",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "special-law-criminal-arrest-count-per-population",
+      "pageId": "ranking:special-law-criminal-arrest-count-per-population",
+      "title": "特別法犯検挙件数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010211",
+          "filters": {
+            "cdCat01": "#K06501"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010211",
+          "cdCat01": "#K06501"
+        },
+        "derived": false,
+        "configHash": "77b14b5c5496935f"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:special-law-criminal-arrest-count-per-population",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "special-support-school-expenses-prefecture",
+      "pageId": "ranking:special-support-school-expenses-prefecture",
+      "title": "特別支援学校費",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010104",
+          "filters": {
+            "cdCat01": "D3103115"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010104",
+          "cdCat01": "D3103115"
+        },
+        "derived": false,
+        "configHash": "acf825cd3bf84e78"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:special-support-school-expenses-prefecture",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "specialized-school-count",
+      "pageId": "ranking:specialized-school-count",
+      "title": "専修学校数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010105",
+          "filters": {
+            "cdCat01": "E7101"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010105",
+          "cdCat01": "E7101"
+        },
+        "derived": false,
+        "configHash": "070020001b030493"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:specialized-school-count",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "specialized-school-count-per-100k",
+      "pageId": "ranking:specialized-school-count-per-100k",
+      "title": "専修学校数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010205",
+          "filters": {
+            "cdCat01": "#E08101"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010205",
+          "cdCat01": "#E08101"
+        },
+        "derived": false,
+        "configHash": "1d1bbbf1242a3c66"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:specialized-school-count-per-100k",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "specialized-school-students",
+      "pageId": "ranking:specialized-school-students",
+      "title": "専修学校生徒数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010105",
+          "filters": {
+            "cdCat01": "E7201"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010105",
+          "cdCat01": "E7201"
+        },
+        "derived": false,
+        "configHash": "05b2c12b2dcd4c1c"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:specialized-school-students",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "specialized-school-students-per-1000",
+      "pageId": "ranking:specialized-school-students-per-1000",
+      "title": "専修学校生徒数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010205",
+          "filters": {
+            "cdCat01": "#E08201"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010205",
+          "cdCat01": "#E08201"
+        },
+        "derived": false,
+        "configHash": "50b320ae1de195dd"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:specialized-school-students-per-1000",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "specific-health-checkup-participation-rate",
+      "pageId": "ranking:specific-health-checkup-participation-rate",
+      "title": "特定健診受診率",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "sourceUrl": "https://www.mhlw.go.jp/content/12400000/001718882.pdf"
+        },
+        "fetcherKey": "manual",
+        "configHash": "48d72b2bee489b88"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:specific-health-checkup-participation-rate",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:health-checkups",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "health-checkups"
+      ]
+    },
+    {
+      "metricKey": "specific-health-guidance-completion-rate",
+      "pageId": "ranking:specific-health-guidance-completion-rate",
+      "title": "特定保健指導実施率",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "sourceUrl": "https://www.mhlw.go.jp/content/12400000/001718882.pdf"
+        },
+        "fetcherKey": "manual",
+        "configHash": "48d72b2bee489b88"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:health-checkups",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:specific-health-guidance-completion-rate",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:health-checkups",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "health-checkups"
+      ]
+    },
+    {
+      "metricKey": "spinach-consumption-expenditure",
+      "pageId": "ranking:spinach-consumption-expenditure",
+      "title": "ほうれんそう消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "010511020",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "010511020",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "da6332d6ae39e149"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:spinach-consumption-ranking",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamanashi-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:spinach-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "spinach-consumption-quantity",
+      "pageId": "ranking:spinach-consumption-quantity",
+      "title": "ほうれんそう消費量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348235",
+          "filters": {
+            "cdCat01": "010511020",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348235",
+          "cdCat01": "010511020",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "3e3a79aa203cac95"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:spinach-consumption-ranking",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamanashi-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:spinach-consumption-quantity",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "sports-annual-participation-rate-10plus",
+      "pageId": "ranking:sports-annual-participation-rate-10plus",
+      "title": "スポーツの年間行動者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010207",
+          "filters": {
+            "cdCat01": "#G042111"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010207",
+          "cdCat01": "#G042111"
+        },
+        "derived": false,
+        "configHash": "51811b20c9dfd8db"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:cup-noodles-consumption-expenditure-vs-sports-annual",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:sports-facility-regional-divide",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:sports-urban-paradox",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:travel-behavior-gender-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:sports-annual-participation-rate-10plus",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:sports-participation",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "sports-participation"
+      ]
+    },
+    {
+      "metricKey": "sports-club-fee-consumption-expenditure",
+      "pageId": "ranking:sports-club-fee-consumption-expenditure",
+      "title": "スポーツクラブ使用料消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "090442040",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "090442040",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "068872392d9292fe"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:sports-club-fee-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "sports-drink-consumption-expenditure",
+      "pageId": "ranking:sports-drink-consumption-expenditure",
+      "title": "スポーツドリンク消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "011030060",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "011030060",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "81d3cd831482a1e0"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:sports-drink-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "sports-facility-count",
+      "pageId": "ranking:sports-facility-count",
+      "title": "社会体育施設数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348896",
+          "filters": {
+            "cdCat01": "010",
+            "cdCat02": "001"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003348896",
+          "cdCat01": "010",
+          "cdCat02": "001"
+        },
+        "derived": false,
+        "configHash": "6fa4c273c7d77528"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:sports-facility-count",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "sports-lesson-consumption-expenditure",
+      "pageId": "ranking:sports-lesson-consumption-expenditure",
+      "title": "スポーツ月謝消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "090430050",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "090430050",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "12516d9b930e8d28"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:sports-lesson-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "sports-park-count",
+      "pageId": "ranking:sports-park-count",
+      "title": "運動公園数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010108",
+          "filters": {
+            "cdCat01": "H9104"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010108",
+          "cdCat01": "H9104"
+        },
+        "derived": false,
+        "configHash": "ad43b6b5bbbfc5b6"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:sports-participation",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:sports-park-count",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:sports-participation",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "sports-participation"
+      ]
+    },
+    {
+      "metricKey": "sports-park-count-per-100km2",
+      "pageId": "ranking:sports-park-count-per-100km2",
+      "title": "運動公園数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010208",
+          "filters": {
+            "cdCat01": "#H08304"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010208",
+          "cdCat01": "#H08304"
+        },
+        "derived": false,
+        "configHash": "47413922aa05d429"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:sports-park-count-per-100km2",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "sports-participation-rate-badminton",
+      "pageId": "ranking:sports-participation-rate-badminton",
+      "title": "バドミントンの行動者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003456409",
+          "filters": {
+            "cdCat01": "0",
+            "cdCat02": "99000",
+            "cdCat03": "08"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003456409",
+          "cdCat01": "0",
+          "cdCat02": "99000",
+          "cdCat03": "08"
+        },
+        "derived": false,
+        "configHash": "3f60eeb5eb573030"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:sports-participation-rate-badminton",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "sports-participation-rate-baseball",
+      "pageId": "ranking:sports-participation-rate-baseball",
+      "title": "野球の行動者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003456409",
+          "filters": {
+            "cdCat01": "0",
+            "cdCat02": "99000",
+            "cdCat03": "01"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003456409",
+          "cdCat01": "0",
+          "cdCat02": "99000",
+          "cdCat03": "01"
+        },
+        "derived": false,
+        "configHash": "b943ae40ff359eeb"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:sports-participation-rate-baseball",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "sports-participation-rate-basketball",
+      "pageId": "ranking:sports-participation-rate-basketball",
+      "title": "バスケットボールの行動者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003456409",
+          "filters": {
+            "cdCat01": "0",
+            "cdCat02": "99000",
+            "cdCat03": "04"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003456409",
+          "cdCat01": "0",
+          "cdCat02": "99000",
+          "cdCat03": "04"
+        },
+        "derived": false,
+        "configHash": "e78013294d21bbfc"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:sports-participation-rate-basketball",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "sports-participation-rate-bowling",
+      "pageId": "ranking:sports-participation-rate-bowling",
+      "title": "ボウリングの行動者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003456409",
+          "filters": {
+            "cdCat01": "0",
+            "cdCat02": "99000",
+            "cdCat03": "13"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003456409",
+          "cdCat01": "0",
+          "cdCat02": "99000",
+          "cdCat03": "13"
+        },
+        "derived": false,
+        "configHash": "8d31a179b8d3aed0"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:sports-participation-rate-bowling",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "sports-participation-rate-cycling",
+      "pageId": "ranking:sports-participation-rate-cycling",
+      "title": "サイクリングの行動者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003456409",
+          "filters": {
+            "cdCat01": "0",
+            "cdCat02": "99000",
+            "cdCat03": "18"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003456409",
+          "cdCat01": "0",
+          "cdCat02": "99000",
+          "cdCat03": "18"
+        },
+        "derived": false,
+        "configHash": "0c7b726ef37ee755"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:sports-participation-rate-cycling",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "sports-participation-rate-fishing",
+      "pageId": "ranking:sports-participation-rate-fishing",
+      "title": "つりの行動者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003456409",
+          "filters": {
+            "cdCat01": "0",
+            "cdCat02": "99000",
+            "cdCat03": "14"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003456409",
+          "cdCat01": "0",
+          "cdCat02": "99000",
+          "cdCat03": "14"
+        },
+        "derived": false,
+        "configHash": "be761c9a5b64bb21"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:sports-participation-rate-fishing",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "sports-participation-rate-golf",
+      "pageId": "ranking:sports-participation-rate-golf",
+      "title": "ゴルフの行動者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003456409",
+          "filters": {
+            "cdCat01": "0",
+            "cdCat02": "99000",
+            "cdCat03": "09"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003456409",
+          "cdCat01": "0",
+          "cdCat02": "99000",
+          "cdCat03": "09"
+        },
+        "derived": false,
+        "configHash": "82500968cf465033"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:golf-green-fee-consumption-ranking",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:golf-participation-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:sports-urban-paradox",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:sports-participation-rate-golf",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "sports-participation-rate-ground-golf",
+      "pageId": "ranking:sports-participation-rate-ground-golf",
+      "title": "グラウンドゴルフの行動者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003456409",
+          "filters": {
+            "cdCat01": "0",
+            "cdCat02": "99000",
+            "cdCat03": "10"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003456409",
+          "cdCat01": "0",
+          "cdCat02": "99000",
+          "cdCat03": "10"
+        },
+        "derived": false,
+        "configHash": "3db7f2e6b94f86cd"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:golf-participation-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:sports-participation-rate-ground-golf",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "sports-participation-rate-gym-training",
+      "pageId": "ranking:sports-participation-rate-gym-training",
+      "title": "器具を使ったトレーニングの行動者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003456409",
+          "filters": {
+            "cdCat01": "0",
+            "cdCat02": "99000",
+            "cdCat03": "22"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003456409",
+          "cdCat01": "0",
+          "cdCat02": "99000",
+          "cdCat03": "22"
+        },
+        "derived": false,
+        "configHash": "07df1195859f2224"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:sports-participation-rate-gym-training",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "sports-participation-rate-hiking",
+      "pageId": "ranking:sports-participation-rate-hiking",
+      "title": "登山・ハイキングの行動者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003456409",
+          "filters": {
+            "cdCat01": "0",
+            "cdCat02": "99000",
+            "cdCat03": "17"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003456409",
+          "cdCat01": "0",
+          "cdCat02": "99000",
+          "cdCat03": "17"
+        },
+        "derived": false,
+        "configHash": "a4eb877df3299904"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:sports-participation-rate-hiking-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:sports-participation-rate-hiking",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "sports-participation-rate-jogging",
+      "pageId": "ranking:sports-participation-rate-jogging",
+      "title": "ジョギング・マラソンの行動者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003456409",
+          "filters": {
+            "cdCat01": "0",
+            "cdCat02": "99000",
+            "cdCat03": "19"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003456409",
+          "cdCat01": "0",
+          "cdCat02": "99000",
+          "cdCat03": "19"
+        },
+        "derived": false,
+        "configHash": "a7337413d16f172e"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:sports-participation-rate-jogging",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "sports-participation-rate-judo",
+      "pageId": "ranking:sports-participation-rate-judo",
+      "title": "柔道の行動者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003456409",
+          "filters": {
+            "cdCat01": "0",
+            "cdCat02": "99000",
+            "cdCat03": "11"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003456409",
+          "cdCat01": "0",
+          "cdCat02": "99000",
+          "cdCat03": "11"
+        },
+        "derived": false,
+        "configHash": "9d9594ab8b4c6666"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:sports-participation-rate-judo",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "sports-participation-rate-kendo",
+      "pageId": "ranking:sports-participation-rate-kendo",
+      "title": "剣道の行動者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003456409",
+          "filters": {
+            "cdCat01": "0",
+            "cdCat02": "99000",
+            "cdCat03": "12"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003456409",
+          "cdCat01": "0",
+          "cdCat02": "99000",
+          "cdCat03": "12"
+        },
+        "derived": false,
+        "configHash": "bb3e078c995a5287"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:sports-participation-rate-kendo",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "sports-participation-rate-skiing",
+      "pageId": "ranking:sports-participation-rate-skiing",
+      "title": "スキー・スノーボードの行動者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003456409",
+          "filters": {
+            "cdCat01": "0",
+            "cdCat02": "99000",
+            "cdCat03": "16"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003456409",
+          "cdCat01": "0",
+          "cdCat02": "99000",
+          "cdCat03": "16"
+        },
+        "derived": false,
+        "configHash": "fff6285050948c4b"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:sports-participation-rate-skiing",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "sports-participation-rate-soccer",
+      "pageId": "ranking:sports-participation-rate-soccer",
+      "title": "サッカーの行動者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003456409",
+          "filters": {
+            "cdCat01": "0",
+            "cdCat02": "99000",
+            "cdCat03": "05"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003456409",
+          "cdCat01": "0",
+          "cdCat02": "99000",
+          "cdCat03": "05"
+        },
+        "derived": false,
+        "configHash": "f75961fc09ca6caf"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:sports-participation-rate-soccer",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "sports-participation-rate-softball",
+      "pageId": "ranking:sports-participation-rate-softball",
+      "title": "ソフトボールの行動者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003456409",
+          "filters": {
+            "cdCat01": "0",
+            "cdCat02": "99000",
+            "cdCat03": "02"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003456409",
+          "cdCat01": "0",
+          "cdCat02": "99000",
+          "cdCat03": "02"
+        },
+        "derived": false,
+        "configHash": "d37caf4f67ff1fb2"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:sports-participation-rate-softball",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "sports-participation-rate-swimming",
+      "pageId": "ranking:sports-participation-rate-swimming",
+      "title": "水泳の行動者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003456409",
+          "filters": {
+            "cdCat01": "0",
+            "cdCat02": "99000",
+            "cdCat03": "15"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003456409",
+          "cdCat01": "0",
+          "cdCat02": "99000",
+          "cdCat03": "15"
+        },
+        "derived": false,
+        "configHash": "9931295feb84199a"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:sports-participation-rate-swimming-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:sports-participation-rate-swimming",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "sports-participation-rate-table-tennis",
+      "pageId": "ranking:sports-participation-rate-table-tennis",
+      "title": "卓球の行動者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003456409",
+          "filters": {
+            "cdCat01": "0",
+            "cdCat02": "99000",
+            "cdCat03": "06"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003456409",
+          "cdCat01": "0",
+          "cdCat02": "99000",
+          "cdCat03": "06"
+        },
+        "derived": false,
+        "configHash": "e7b6601bb3ffbcc6"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:sports-participation-rate-table-tennis",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "sports-participation-rate-tennis",
+      "pageId": "ranking:sports-participation-rate-tennis",
+      "title": "テニスの行動者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003456409",
+          "filters": {
+            "cdCat01": "0",
+            "cdCat02": "99000",
+            "cdCat03": "07"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003456409",
+          "cdCat01": "0",
+          "cdCat02": "99000",
+          "cdCat03": "07"
+        },
+        "derived": false,
+        "configHash": "291073d662e99a49"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:sports-participation-rate-tennis",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "sports-participation-rate-volleyball",
+      "pageId": "ranking:sports-participation-rate-volleyball",
+      "title": "バレーボールの行動者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003456409",
+          "filters": {
+            "cdCat01": "0",
+            "cdCat02": "99000",
+            "cdCat03": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003456409",
+          "cdCat01": "0",
+          "cdCat02": "99000",
+          "cdCat03": "03"
+        },
+        "derived": false,
+        "configHash": "591265cabb7c0375"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:sports-participation-rate-volleyball",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "sports-participation-rate-walking",
+      "pageId": "ranking:sports-participation-rate-walking",
+      "title": "ウォーキング・軽い体操の行動者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003456409",
+          "filters": {
+            "cdCat01": "0",
+            "cdCat02": "99000",
+            "cdCat03": "20"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003456409",
+          "cdCat01": "0",
+          "cdCat02": "99000",
+          "cdCat03": "20"
+        },
+        "derived": false,
+        "configHash": "61f2a8b711470256"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:sports-urban-paradox",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:sports-participation-rate-walking",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "sports-participation-rate-yoga",
+      "pageId": "ranking:sports-participation-rate-yoga",
+      "title": "ヨガの行動者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003456409",
+          "filters": {
+            "cdCat01": "0",
+            "cdCat02": "99000",
+            "cdCat03": "21"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003456409",
+          "cdCat01": "0",
+          "cdCat02": "99000",
+          "cdCat03": "21"
+        },
+        "derived": false,
+        "configHash": "a43381f20728b01d"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:sports-participation-rate-yoga",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "sports-spectating-consumption-expenditure",
+      "pageId": "ranking:sports-spectating-consumption-expenditure",
+      "title": "スポーツ観覧料消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "090442020",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "090442020",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "4260da333320eda4"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:sports-spectating-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:sports-spectating-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "sportswear-consumption-expenditure",
+      "pageId": "ranking:sportswear-consumption-expenditure",
+      "title": "スポーツウェア消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "090202030",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "090202030",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "23964068ee1984f3"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:sportswear-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "spouse-income",
+      "pageId": "ranking:spouse-income",
+      "title": "配偶者の収入（勤労者世帯）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010112",
+          "filters": {
+            "cdCat01": "L3111012"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010112",
+          "cdCat01": "L3111012"
+        },
+        "derived": false,
+        "configHash": "dc11fedf37a5c62a"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:spouse-income",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "squid-consumption-expenditure",
+      "pageId": "ranking:squid-consumption-expenditure",
+      "title": "いか消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "010211110",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "010211110",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "d1592d51620a189e"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:okinawa-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:tokushima-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:toyama-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:squid-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "squid-consumption-quantity",
+      "pageId": "ranking:squid-consumption-quantity",
+      "title": "いか消費量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348235",
+          "filters": {
+            "cdCat01": "010211110",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348235",
+          "cdCat01": "010211110",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "88bb462d9e48c0e2"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:squid-consumption-quantity",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:tokushima-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:toyama-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:tuna-consumption-quantity",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:squid-consumption-quantity",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "ss-pollution-load",
+      "pageId": "ranking:ss-pollution-load",
+      "title": "SS汚濁負荷量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003225562",
+          "filters": {
+            "cdTab": "1500",
+            "cdCat01": "120",
+            "cdCat02": "120"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003225562",
+          "cdCat01": "120",
+          "cdCat02": "120",
+          "cdTab": "1500"
+        },
+        "derived": false,
+        "configHash": "9cbbd2a7c088d5ae"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:ss-pollution-load",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "standard-financial-scale-municipal",
+      "pageId": null,
+      "title": "標準財政規模（市町村財政）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000020304",
+          "filters": {
+            "cdCat01": "#D02213"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000020304",
+          "cdCat01": "#D02213"
+        },
+        "derived": false,
+        "configHash": "62c7349ff1676738"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:standard-financial-scale-municipal",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "ranking:standard-financial-scale-municipal",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "standard-fiscal-demand-municipality",
+      "pageId": "ranking:standard-fiscal-demand-municipality",
+      "title": "基準財政需要額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010104",
+          "filters": {
+            "cdCat01": "D2206"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010104",
+          "cdCat01": "D2206"
+        },
+        "derived": false,
+        "configHash": "44a7b8b142abb542"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:psychiatric-bed-count-vs-standard-fiscal-demand-municipality",
+          "kind": "blog"
+        },
+        {
+          "pageId": "municipality-ranking:standard-fiscal-demand-municipality",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:local-finance",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:standard-fiscal-demand-municipality",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "standard-fiscal-expenditure",
+      "pageId": "ranking:standard-fiscal-expenditure",
+      "title": "基準財政需要額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010104",
+          "filters": {
+            "cdCat01": "D2106"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010104",
+          "cdCat01": "D2106"
+        },
+        "derived": false,
+        "configHash": "e4d48b7afaf99bdd"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:standard-fiscal-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "standard-fiscal-revenue",
+      "pageId": "ranking:standard-fiscal-revenue",
+      "title": "基準財政収入額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010104",
+          "filters": {
+            "cdCat01": "D2105"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010104",
+          "cdCat01": "D2105"
+        },
+        "derived": false,
+        "configHash": "f13c9ae94ce68b5a"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:standard-fiscal-revenue",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "standard-fiscal-revenue-municipality",
+      "pageId": "ranking:standard-fiscal-revenue-municipality",
+      "title": "基準財政収入額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010104",
+          "filters": {
+            "cdCat01": "D2205"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010104",
+          "cdCat01": "D2205"
+        },
+        "derived": false,
+        "configHash": "81509062e721f1f5"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:standard-fiscal-revenue-municipality",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:local-finance",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:standard-fiscal-revenue-municipality",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "standard-price-change-rate-commercial",
+      "pageId": "ranking:standard-price-change-rate-commercial",
+      "title": "標準価格対前年平均変動率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010212",
+          "filters": {
+            "cdCat01": "#L04304"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010212",
+          "cdCat01": "#L04304"
+        },
+        "derived": false,
+        "configHash": "442aa895511d41be"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:commercial-land-price-trend",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:vacant-housing-rate-vs-standard-price-change-rate-commercial",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:vacant-housing-vs-land-price",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:standard-price-change-rate-commercial",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "standard-price-change-rate-industrial",
+      "pageId": "ranking:standard-price-change-rate-industrial",
+      "title": "標準価格対前年平均変動率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010212",
+          "filters": {
+            "cdCat01": "#L04306"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010212",
+          "cdCat01": "#L04306"
+        },
+        "derived": false,
+        "configHash": "2e6c221757d53de4"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:standard-price-change-rate-industrial",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "standard-price-change-rate-residential",
+      "pageId": "ranking:standard-price-change-rate-residential",
+      "title": "標準価格対前年平均変動率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010212",
+          "filters": {
+            "cdCat01": "#L04302"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010212",
+          "cdCat01": "#L04302"
+        },
+        "derived": false,
+        "configHash": "137c00cba1ddef58"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:standard-price-change-rate-residential",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "standardized-mortality-japanese",
+      "pageId": "ranking:standardized-mortality-japanese",
+      "title": "標準化死亡率〔日本人〕",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A4301"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A4301"
+        },
+        "derived": false,
+        "configHash": "a1564b53593f0598"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:standardized-mortality-japanese",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "standardized-mortality-rate-per-1000",
+      "pageId": "ranking:standardized-mortality-rate-per-1000",
+      "title": "標準化死亡率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010209",
+          "filters": {
+            "cdCat01": "#I05101"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010209",
+          "cdCat01": "#I05101"
+        },
+        "derived": false,
+        "configHash": "af090e92bf9af31d"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:standardized-mortality-rate-per-1000",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "starting-salary-highschool",
+      "pageId": "ranking:starting-salary-highschool",
+      "title": "高卒初任給",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003445959",
+          "filters": {
+            "cdCat01": "01",
+            "cdCat02": "03",
+            "cdCat03": "01"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003445959",
+          "cdCat01": "01",
+          "cdCat02": "03",
+          "cdCat03": "01"
+        },
+        "derived": false,
+        "configHash": "e3b34e3e27bf778d"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:highschool-starting-salary-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "japan-theme:labor-wages",
+          "kind": "japan-theme"
+        },
+        {
+          "pageId": "ranking:starting-salary-highschool",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:labor-wages",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "labor-wages"
+      ]
+    },
+    {
+      "metricKey": "starting-salary-university",
+      "pageId": "ranking:starting-salary-university",
+      "title": "大卒初任給",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003445959",
+          "filters": {
+            "cdCat01": "01",
+            "cdCat02": "06",
+            "cdCat03": "01"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003445959",
+          "cdCat01": "01",
+          "cdCat02": "06",
+          "cdCat03": "01"
+        },
+        "derived": false,
+        "configHash": "5c4de0cd2e7cc894"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:labor-wages",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:highschool-starting-salary-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:starting-salary-university-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "japan-theme:labor-wages",
+          "kind": "japan-theme"
+        },
+        {
+          "pageId": "ranking:starting-salary-university",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:labor-wages",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "labor-wages"
+      ]
+    },
+    {
+      "metricKey": "station-passengers-annual-total",
+      "pageId": null,
+      "title": "都道府県別 年間総乗降客数",
+      "sources": [],
+      "recipe": {
+        "kind": "mlit",
+        "derived": false,
+        "refetch": {
+          "resourceId": "S12"
+        },
+        "configHash": "bab7621f8ca13b22"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:station-passengers-annual-total",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "statistical-discrepancy-nominal-h27",
+      "pageId": null,
+      "title": "統計上の不突合",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010103",
+          "filters": {
+            "cdCat01": "C1325"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010103",
+          "cdCat01": "C1325"
+        },
+        "derived": false,
+        "configHash": "848e7ccae238ec75"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:statistical-discrepancy-nominal-h27",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "steep-slope-special-warning-zone-count",
+      "pageId": "ranking:steep-slope-special-warning-zone-count",
+      "title": "急傾斜地崩壊の特別警戒区域数",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "sourceUrl": "https://www.mlit.go.jp/mizukokudo/sabo/content/001982570.pdf"
+        },
+        "fetcherKey": "manual",
+        "configHash": "c70ba9d36e19c3e6"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:steep-slope-special-warning-zone-count",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:landslide-exposure",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "landslide-exposure"
+      ]
+    },
+    {
+      "metricKey": "steep-slope-warning-zone-count",
+      "pageId": "ranking:steep-slope-warning-zone-count",
+      "title": "急傾斜地崩壊の警戒区域数",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "sourceUrl": "https://www.mlit.go.jp/mizukokudo/sabo/content/001982570.pdf"
+        },
+        "fetcherKey": "manual",
+        "configHash": "c70ba9d36e19c3e6"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:landslide-exposure",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:steep-slope-warning-zone-count",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:landslide-exposure",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "landslide-exposure"
+      ]
+    },
+    {
+      "metricKey": "stereo-cd-md-radio-ownership-multi-person-households-per-1000",
+      "pageId": null,
+      "title": "ステレオ・CDラジカセ所有数量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010212",
+          "filters": {
+            "cdCat01": "#L03609"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010212",
+          "cdCat01": "#L03609"
+        },
+        "derived": false,
+        "configHash": "9d941f84729d07bf"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:stereo-cd-md-radio-ownership-multi-person-households-per-1000",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "stillbirth-rate",
+      "pageId": "ranking:stillbirth-rate",
+      "title": "死産率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010209",
+          "filters": {
+            "cdCat01": "#I07101"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010209",
+          "cdCat01": "#I07101"
+        },
+        "derived": false,
+        "configHash": "19379c54e32e722f"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:stillbirth-rate",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "stillbirths",
+      "pageId": "ranking:stillbirths",
+      "title": "死産数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A4270"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A4270"
+        },
+        "derived": false,
+        "configHash": "c27575d291dc025d"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:stillbirths",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "stillbirths-after-22-weeks",
+      "pageId": "ranking:stillbirths-after-22-weeks",
+      "title": "死産数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A4271"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A4271"
+        },
+        "derived": false,
+        "configHash": "e1817d9b8f0deb74"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:stillbirths-after-22-weeks",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "stomach-medicine-consumption-expenditure",
+      "pageId": "ranking:stomach-medicine-consumption-expenditure",
+      "title": "胃腸薬消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "060100020",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "060100020",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "9daeff2fe9fbf068"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:stomach-medicine-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "strawberry-consumption-expenditure",
+      "pageId": "ranking:strawberry-consumption-expenditure",
+      "title": "いちご消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "010610120",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "010610120",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "d2792e0fc3cda508"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:chiba-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:gunma-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:nara-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:saitama-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:tochigi-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:tottori-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:strawberry-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "strawberry-consumption-quantity",
+      "pageId": "ranking:strawberry-consumption-quantity",
+      "title": "いちご消費量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348235",
+          "filters": {
+            "cdCat01": "010610120",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348235",
+          "cdCat01": "010610120",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "fa2d223b03b88ca4"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:chiba-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:gunma-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:nara-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:saitama-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:strawberry-consumption-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:tochigi-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:tottori-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:strawberry-consumption-quantity",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "students-requiring-japanese-instruction",
+      "pageId": null,
+      "title": "日本語指導が必要な児童生徒数",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "sourceUrl": "https://www.mext.go.jp/content/20260525-mxt_kyokoku-000049811_03.pdf"
+        },
+        "fetcherKey": "manual",
+        "configHash": "912f925ae2258ed9"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:students-requiring-japanese-instruction",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "study-desk-chair-consumption-expenditure",
+      "pageId": "ranking:study-desk-chair-consumption-expenditure",
+      "title": "書斎・学習用机・椅子消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "090100090",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "090100090",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "2a37054316d19594"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:study-desk-chair-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "study-materials-consumption-expenditure",
+      "pageId": "ranking:study-materials-consumption-expenditure",
+      "title": "学習参考教材消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "080200020",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "080200020",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "6a3f35ee75dbedb5"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:study-materials-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "study-participation-rate-academic",
+      "pageId": "ranking:study-participation-rate-academic",
+      "title": "人文・社会・自然科学の行動者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003456245",
+          "filters": {
+            "cdCat01": "0",
+            "cdCat02": "99000",
+            "cdCat03": "5"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003456245",
+          "cdCat01": "0",
+          "cdCat02": "99000",
+          "cdCat03": "5"
+        },
+        "derived": false,
+        "configHash": "a0567160c019323b"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:tutoring-cost-university-advancement-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:study-participation-rate-academic",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "study-participation-rate-arts-culture",
+      "pageId": "ranking:study-participation-rate-arts-culture",
+      "title": "芸術・文化の行動者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003456245",
+          "filters": {
+            "cdCat01": "0",
+            "cdCat02": "99000",
+            "cdCat03": "6"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003456245",
+          "cdCat01": "0",
+          "cdCat02": "99000",
+          "cdCat03": "6"
+        },
+        "derived": false,
+        "configHash": "b11d484bbaf25388"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:study-participation-rate-arts-culture",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "study-participation-rate-business",
+      "pageId": "ranking:study-participation-rate-business",
+      "title": "商業実務・ビジネス関係の行動者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003456245",
+          "filters": {
+            "cdCat01": "0",
+            "cdCat02": "99000",
+            "cdCat03": "2"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003456245",
+          "cdCat01": "0",
+          "cdCat02": "99000",
+          "cdCat03": "2"
+        },
+        "derived": false,
+        "configHash": "12f099a7a8d2d2e4"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:education-culture",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:study-participation-rate-business",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:education-culture",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "education-culture"
+      ]
+    },
+    {
+      "metricKey": "study-participation-rate-business-skills",
+      "pageId": "ranking:study-participation-rate-business-skills",
+      "title": "商業実務・ビジネス関係（情報処理除く）の行動者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003456245",
+          "filters": {
+            "cdCat01": "0",
+            "cdCat02": "99000",
+            "cdCat03": "22"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003456245",
+          "cdCat01": "0",
+          "cdCat02": "99000",
+          "cdCat03": "22"
+        },
+        "derived": false,
+        "configHash": "13687bffb7e528fa"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:study-participation-rate-business-skills",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "study-participation-rate-computer",
+      "pageId": "ranking:study-participation-rate-computer",
+      "title": "パソコンなどの情報処理の行動者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003456245",
+          "filters": {
+            "cdCat01": "0",
+            "cdCat02": "99000",
+            "cdCat03": "21"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003456245",
+          "cdCat01": "0",
+          "cdCat02": "99000",
+          "cdCat03": "21"
+        },
+        "derived": false,
+        "configHash": "2f5846b4fafaea57"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:study-participation-rate-computer",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "study-participation-rate-english",
+      "pageId": "ranking:study-participation-rate-english",
+      "title": "英語学習の行動者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003456245",
+          "filters": {
+            "cdCat01": "0",
+            "cdCat02": "99000",
+            "cdCat03": "11"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003456245",
+          "cdCat01": "0",
+          "cdCat02": "99000",
+          "cdCat03": "11"
+        },
+        "derived": false,
+        "configHash": "b8be993901db5374"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:study-participation-rate-english",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "study-participation-rate-foreign-language",
+      "pageId": "ranking:study-participation-rate-foreign-language",
+      "title": "外国語学習の行動者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003456245",
+          "filters": {
+            "cdCat01": "0",
+            "cdCat02": "99000",
+            "cdCat03": "1"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003456245",
+          "cdCat01": "0",
+          "cdCat02": "99000",
+          "cdCat03": "1"
+        },
+        "derived": false,
+        "configHash": "7bb7a81c55678f47"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:study-participation-rate-foreign-language",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "study-participation-rate-home-economics",
+      "pageId": "ranking:study-participation-rate-home-economics",
+      "title": "家政・家事の行動者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003456245",
+          "filters": {
+            "cdCat01": "0",
+            "cdCat02": "99000",
+            "cdCat03": "4"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003456245",
+          "cdCat01": "0",
+          "cdCat02": "99000",
+          "cdCat03": "4"
+        },
+        "derived": false,
+        "configHash": "f990f409371838b6"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:study-participation-rate-home-economics",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "study-participation-rate-nursing-care",
+      "pageId": "ranking:study-participation-rate-nursing-care",
+      "title": "介護関係の行動者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003456245",
+          "filters": {
+            "cdCat01": "0",
+            "cdCat02": "99000",
+            "cdCat03": "3"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003456245",
+          "cdCat01": "0",
+          "cdCat02": "99000",
+          "cdCat03": "3"
+        },
+        "derived": false,
+        "configHash": "552015ee9ae025a9"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:study-participation-rate-nursing-care",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "study-participation-rate-other-language",
+      "pageId": "ranking:study-participation-rate-other-language",
+      "title": "英語以外の外国語学習の行動者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003456245",
+          "filters": {
+            "cdCat01": "0",
+            "cdCat02": "99000",
+            "cdCat03": "12"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003456245",
+          "cdCat01": "0",
+          "cdCat02": "99000",
+          "cdCat03": "12"
+        },
+        "derived": false,
+        "configHash": "b455a4422c5d1c91"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:study-participation-rate-other-language",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "subcontractor-completed-construction",
+      "pageId": "ranking:subcontractor-completed-construction",
+      "title": "下請完成工事高",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010103",
+          "filters": {
+            "cdCat01": "C3305"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010103",
+          "cdCat01": "C3305"
+        },
+        "derived": false,
+        "configHash": "e6e9959ed0258569"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:construction-industry",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:subcontractor-completed-construction",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:construction-industry",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "construction-industry"
+      ]
+    },
+    {
+      "metricKey": "subsidy-expenses-prefecture",
+      "pageId": "ranking:subsidy-expenses-prefecture",
+      "title": "補助費等",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010104",
+          "filters": {
+            "cdCat01": "D310405"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010104",
+          "cdCat01": "D310405"
+        },
+        "derived": false,
+        "configHash": "fb28185aab4a8489"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:subsidy-expenses-prefecture",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "sugar-consumption-expenditure",
+      "pageId": "ranking:sugar-consumption-expenditure",
+      "title": "砂糖消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "010720040",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "010720040",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "a987fad6e9f8880d"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:yamaguchi-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:sugar-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "sugar-consumption-quantity",
+      "pageId": "ranking:sugar-consumption-quantity",
+      "title": "砂糖消費量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348235",
+          "filters": {
+            "cdCat01": "010720040",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348235",
+          "cdCat01": "010720040",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "0d5f41aa0bc70f51"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:chicken-consumption-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:icecream-consumption-expenditure",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:sugar-consumption-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamaguchi-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:sugar-consumption-quantity",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "suicide-count",
+      "pageId": "ranking:suicide-count",
+      "title": "自殺者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010109",
+          "filters": {
+            "cdCat01": "I9108"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010109",
+          "cdCat01": "I9108"
+        },
+        "derived": false,
+        "configHash": "2c5cf2331b8af758"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:suicide-rate-aging-nexus",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:suicide-count",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "suicide-count-65plus",
+      "pageId": "ranking:suicide-count-65plus",
+      "title": "65歳以上の自殺者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010109",
+          "filters": {
+            "cdCat01": "I9109"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010109",
+          "cdCat01": "I9109"
+        },
+        "derived": false,
+        "configHash": "1fec024a95aba775"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:suicide-rate-aging-nexus",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:suicide-count-65plus",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "suicide-rate-per-100k",
+      "pageId": "ranking:suicide-rate-per-100k",
+      "title": "自殺率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010109",
+          "filters": {
+            "cdCat01": "I910803"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010109",
+          "cdCat01": "I910803"
+        },
+        "derived": false,
+        "configHash": "db0284685cc42b53"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area:01000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:02000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:03000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:04000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:05000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:06000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:07000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:08000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:09000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:10000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:11000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:12000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:13000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:14000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:15000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:16000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:17000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:18000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:19000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:20000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:21000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:22000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:23000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:24000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:25000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:26000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:27000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:28000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:29000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:30000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:31000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:32000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:33000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:34000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:35000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:36000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:37000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:38000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:39000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:40000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:41000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:42000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:43000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:44000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:45000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:46000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:47000",
+          "kind": "area"
+        },
+        {
+          "pageId": "ranking:suicide-rate-per-100k",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:safety",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "safety"
+      ]
+    },
+    {
+      "metricKey": "suicides-per-100k",
+      "pageId": "ranking:suicides-per-100k",
+      "title": "自殺者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010209",
+          "filters": {
+            "cdCat01": "#I06201"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010209",
+          "cdCat01": "#I06201"
+        },
+        "derived": false,
+        "configHash": "321ab6e07456a2db"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:suicide-rate-aging-nexus",
+          "kind": "blog"
+        },
+        {
+          "pageId": "japan-theme:safety",
+          "kind": "japan-theme"
+        },
+        {
+          "pageId": "ranking:suicides-per-100k",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:safety",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "safety"
+      ]
+    },
+    {
+      "metricKey": "supplement-consumption-expenditure",
+      "pageId": "ranking:supplement-consumption-expenditure",
+      "title": "栄養剤消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "060100030",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "060100030",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "7478cf8aceb94b29"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:supplement-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "sushi-dining-consumption-expenditure",
+      "pageId": "ranking:sushi-dining-consumption-expenditure",
+      "title": "すし(外食)消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "011211040",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "011211040",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "2956a410d0ed0df3"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:food-consumption-prefecture-battle",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:ishikawa-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:sushi-dining-consumption-expenditure",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:sushi-dining-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "sushi-takeout-consumption-expenditure",
+      "pageId": "ranking:sushi-takeout-consumption-expenditure",
+      "title": "すし(弁当)消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "010910020",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "010910020",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "26350f0716e17c90"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:nara-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:sushi-takeout-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "sweet-potato-consumption-expenditure",
+      "pageId": "ranking:sweet-potato-consumption-expenditure",
+      "title": "さつまいも消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "010512010",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "010512010",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "0ad077de1da24331"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:ibaraki-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:kagoshima-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:kyoto-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:nara-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:shiga-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:sweet-potato-expenditure-ranking",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:tokushima-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:toyama-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:sweet-potato-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "sweet-potato-consumption-quantity",
+      "pageId": "ranking:sweet-potato-consumption-quantity",
+      "title": "さつまいも消費量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348235",
+          "filters": {
+            "cdCat01": "010512010",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348235",
+          "cdCat01": "010512010",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "db90a84280c6575d"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:kagoshima-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:kyoto-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:nara-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:shiga-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:tokushima-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:toyama-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:sweet-potato-consumption-quantity",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "swimming-pool-public",
+      "pageId": "ranking:swimming-pool-public",
+      "title": "水泳プール数（公共）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010107",
+          "filters": {
+            "cdCat01": "G310204"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010107",
+          "cdCat01": "G310204"
+        },
+        "derived": false,
+        "configHash": "5d8a2db3e575cf88"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:swimming-pool-public-vs-post-office-count",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:swimming-pool-public-vs-smoke-emission-facility-count",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:swimming-pool-public-vs-total-administrative-investment",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:swimming-pool-public-vs-total-general-project-investment",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:swimming-pool-public",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    }
+  ]
+}

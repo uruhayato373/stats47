@@ -24,6 +24,7 @@ describe('createDivergingColorScale', () => {
     d3Mock.scaleDiverging = vi.fn().mockImplementation((interpolator: (t: number) => string) => {
       const scale = vi.fn((value: number) => interpolator(value / 100 + 0.5)); // 簡単なマッピング
       (scale as any).domain = vi.fn().mockImplementation(function(this: any) { return this; }); // domain メソッドをチェイン可能にする
+      (scale as any).clamp = vi.fn().mockReturnValue(scale);
       (scale as any).range = vi.fn().mockImplementation(function(this: any) { return this; }); // range もチェイン可能にするため追加
       return scale;
     });

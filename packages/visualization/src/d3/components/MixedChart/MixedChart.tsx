@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@stats47/components";
-import { schemeTableau10, select, scaleBand, scaleLinear, max, line, axisBottom, axisLeft, axisRight } from "d3";
+import { schemeTableau10, select, scaleBand, scaleLinear, line, axisBottom, axisLeft, axisRight } from "d3";
 import { useEffect, useRef } from "react";
 import {
   computeChartLayout,
@@ -20,6 +20,8 @@ import { fitSvgViewBox } from "../../utils/fit-svg-viewbox";
  */
 export function MixedChart({
   data,
+  leftYDomain,
+  rightYDomain,
   categoryKey = "category",
   columns,
   lines,
@@ -109,8 +111,7 @@ export function MixedChart({
       colKeys.map((k) => d[k]).filter((v): v is number => typeof v === "number")
     );
     const yLeft = scaleLinear()
-      .domain([0, max(colValues) ?? 0])
-      .nice()
+      .domain(leftYDomain ?? [Math.min(0, ...colValues), Math.max(0, ...colValues)])
       .range([height - marginBottom, marginTop]);
 
     // 右Y軸: 折れ線用
@@ -119,9 +120,11 @@ export function MixedChart({
       lineKeys.map((k) => d[k]).filter((v): v is number => typeof v === "number")
     );
     const yRight = scaleLinear()
-      .domain([0, max(lineValues) ?? 0])
-      .nice()
+      .domain(rightYDomain ?? [Math.min(0, ...lineValues), Math.max(0, ...lineValues)])
       .range([height - marginBottom, marginTop]);
+
+    if (!leftYDomain) yLeft.nice();
+    if (!rightYDomain) yRight.nice();
 
     // 左軸のラベルが左端で切れないよう、目盛りの実際の文字列から左余白を決める
     // (StackedAreaChart / LineChart と同じ。2026-09-25 CHART-AXIS-READABILITY-01)
@@ -147,9 +150,9 @@ export function MixedChart({
         .data(data.filter((d) => d[col.dataKey] != null))
         .join("rect")
         .attr("x", (d) => (x(String(d[categoryKey])) ?? 0) + barWidth * colIdx)
-        .attr("y", (d) => yLeft(Number(d[col.dataKey])))
+        .attr("y", (d) => Math.min(yLeft(0), yLeft(Number(d[col.dataKey]))))
         .attr("width", barWidth)
-        .attr("height", (d) => yLeft(0) - yLeft(Number(d[col.dataKey])))
+        .attr("height", (d) => Math.abs(yLeft(0) - yLeft(Number(d[col.dataKey]))))
         .attr("fill", col.color)
         .attr("opacity", 0.8)
         .style("cursor", "pointer")
@@ -265,7 +268,7 @@ export function MixedChart({
 
     fitSvgViewBox(svgRef.current, width, height);
   }, [
-    data, categoryKey, columns, lines, width, height,
+    data, leftYDomain, rightYDomain, categoryKey, columns, lines, width, height,
     marginTop, marginRight, marginBottom, marginLeft,
     baseFontSize, innerHeight, innerWidth, leftUnit, rightUnit, unit,
     leftAxisFormatter, rightAxisFormatter, colors,
