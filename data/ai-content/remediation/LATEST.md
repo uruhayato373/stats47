@@ -1,21 +1,21 @@
 # ranking ai-content 是正キュー (LATEST)
 
-- 生成: 2026-10-08T01:59:14.686Z
+- 生成: 2026-10-09T02:11:43.704Z
 - GSC snapshot: 2026-W40 / スコープ: R2 の active ranking 全件 (量産フェーズ用・GSC流入なしは impressions 0)
 - done 判定: R2 の ai-content が auditRow を通り (blocker 0)、解説の年が values.json の最新年と同じ
 - スコープ境界: このキューは**都道府県ランキング (app/ranking) 専用**。市区町村 (公開 171 key・app/municipalities) と全国 (/japan) は対象外 — 別契約 (backlog MUNI-AI-CONTENT-01 / JAPAN-COMMENTARY-01、正典 ranking-content-standards.md §スコープ境界)
 
-## サマリ (active ranking 全件 2424 件)
+## サマリ (active ranking 全件 2456 件)
 
-- ✅ done: 2116 件 (87.3% / impressions 計 107953)
-- ⏳ needs-regen: 308 件 (impressions 計 9506)
-  - 内訳: stale-year 49 / missing 257 / incomplete 1 / fetch-error:TypeError: fetch failed 1
+- ✅ done: 2093 件 (85.2% / impressions 計 105462)
+- ⏳ needs-regen: 363 件 (impressions 計 11998)
+  - 内訳: stale-year 73 / missing 289 / incomplete 1
 - 🚫 not-eligible: 0 件 — 観測値が順位として成立しないので生成しない
 
 ## 進捗 (progress-history.csv より)
 
-- 消化ペース: **27.4 件/日** (2026-07-30 からの平均)
-- 残り 308 件 → **完了見込み 約 12 日**
+- 消化ペース: **26.7 件/日** (2026-07-30 からの平均)
+- 残り 363 件 → **完了見込み 約 14 日**
 
 ## いつ修正したか (done を R2 last-modified 降順・上位15)
 
@@ -42,25 +42,25 @@
 | impressions | key | reason | review | blockers |
 |---|---|---|---|---|
 | 2988 | convenience-store-count-commercial | stale-year | 🟠手動是正候補 | - |
+| 612 | fishery-species-catch-pacific-saury | stale-year | 🟠手動是正候補 | - |
+| 530 | fishery-species-catch-sardine | stale-year | 🟠手動是正候補 | - |
+| 426 | fishery-species-catch-mackerel | stale-year | 🟠手動是正候補 | - |
 | 425 | high-school-teacher-annual-income | stale-year | 🟠手動是正候補 | - |
 | 249 | specific-health-checkup-participation-rate | missing | 🟠手動是正候補 | - |
 | 235 | pig-count | missing | 🟠手動是正候補 | - |
+| 214 | fishery-species-catch-bonito | stale-year | 🟠手動是正候補 | - |
+| 202 | fishery-species-catch-tuna | stale-year | 🟠手動是正候補 | - |
 | 200 | beef-cattle-count | missing | 🟠手動是正候補 | - |
 | 182 | inbound-visitors-by-destination | missing | 🟠手動是正候補 | - |
 | 165 | foreign-worker-count | missing | 🟠手動是正候補 | - |
 | 158 | public-school-closures-cumulative | missing | 🟠手動是正候補 | - |
+| 149 | fishery-species-catch-pollock | stale-year | 🟠手動是正候補 | - |
 | 131 | food-manufacturing-establishments | missing | 🟠手動是正候補 | - |
 | 128 | physical-therapist-annual-income | stale-year | 🟠手動是正候補 | - |
 | 127 | forestry-mushroom-output-value | missing | 🟠手動是正候補 | - |
 | 123 | regional-co2-emissions-estimate | missing | 🟠手動是正候補 | - |
 | 118 | furusato-fundraising-cost-prefecture | missing | 🟠手動是正候補 | - |
 | 118 | medical-physicians-obstetrics-gynecology | missing | 🟠手動是正候補 | - |
-| 108 | dairy-cattle-count | stale-year | 🟠手動是正候補 | - |
-| 106 | food-manufacturing-shipment-amount | missing | 🟠手動是正候補 | - |
-| 105 | domestic-travel-consumption-by-destination | missing | 🟠手動是正候補 | - |
-| 101 | fishing-port-count-by-type | stale-year | 🟠手動是正候補 | - |
-| 99 | architect-annual-income | stale-year | 🟠手動是正候補 | - |
-| 99 | medical-physicians-pediatrics | missing | 🟠手動是正候補 | - |
 
 > 日次は **Gemini API** が author 生成 → 決定的監査 → 別リクエストの Gemini critic を通し、
 > 既定 3件を outbox 経由で R2 へ公開する。個別の独自考察改善はローカルの headless author+critic、
