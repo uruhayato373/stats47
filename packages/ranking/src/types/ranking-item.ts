@@ -1,20 +1,14 @@
+import type { MetricPresentation } from "@stats47/types";
 /**
  * ランキング項目の型定義
  * 2026-01 設計見直しにより構造を階層化
  */
 import type {
-  EstatQueryParams,
   MetricRecipe,
   ProvenanceSurvey,
   SourceAttribution,
 } from "@stats47/data-configs";
 import type { AreaType } from "@stats47/types";
-import type {
-    ColorSchemeType,
-    D3ColorScheme,
-    DivergingMidpoint,
-    MinValueType
-} from "@stats47/visualization/d3";
 
 /**
  * ランキング項目のタグ情報
@@ -53,51 +47,13 @@ export interface ValueDisplayConfig {
  * 可視化設定
  * DBカラム: visualization_config (JSON)
  */
-export interface VisualizationConfig {
-  /**
-   * 地図の色スキーム
-   * D3.jsで使用するカラースケール名（例: "interpolateBlues"）
-   */
-  colorScheme: D3ColorScheme;
-  /**
-   * スキームタイプ
-   * - sequential: 順序（単色グラデーション）
-   * - diverging: 発散（二色グラデーション、正負など）
-   * - categorical: カテゴリ（離散値）
-   */
-  colorSchemeType: ColorSchemeType;
-  /**
-   * 最小値の扱い (Sequential用)
-   * - zero: 0を最小値（薄い色）とする
-   * - data-min: データの最小値を最小値とする
-   */
-  minValueType?: MinValueType;
-  /**
-   * 分岐点設定 (Diverging用)
-   * 中央値（白くなる部分）の基準
-   */
-  divergingMidpoint?: DivergingMidpoint;
-  /**
-   * カスタム分岐点値
-   * divergingMidpointが'custom'の場合の値
-   */
-  divergingMidpointValue?: number;
-  /**
-   * 対称化フラグ
-   * 発散スケールで正負の最大絶対値に合わせて対称にするか
-   */
-  isSymmetrized?: boolean;
-  /**
-   * 反転フラグ
-   * カラースケールの色順を反転するか
-   */
-  isReversed?: boolean;
-}
+export type VisualizationConfig = MetricPresentation;
 
 /**
  * 正規化表示オプション
  */
 export interface NormalizationOption {
+  visualization?: VisualizationConfig;
   /**
    * 正規化の種類
    * - per_population: 総人口あたり
@@ -129,11 +85,6 @@ export interface NormalizationOption {
    */
   decimalPlaces?: number;
 
-  /**
-   * 分母となるランキングキーを明示的に指定する場合
-   * 省略時は type に応じて Well-Known Key を自動選択する
-   */
-  denominatorKey?: string;
 }
 
 /**
@@ -181,51 +132,8 @@ export interface CalculationConfig {
  * `{ kind: "estat" | ... }`）とは**別概念**。名前衝突を避けるため本型は SourceProvenance とする。
  */
 export interface SourceProvenance {
-  /**
-   * 取得レシピ (config から機械生成)。**新形の主フィールド**。
-   * 軸 pin・tab 選択・線形結合・軸合算・率・時間粒度・地域軸を過不足なく持つ。
-   * 正典: `packages/data-configs/src/recipe.ts`
-   */
-  recipe?: MetricRecipe;
-  /**
-   * e-Stat API へ **そのまま spread してよい** クエリ部。
-   * ★オンデマンド取得は `sourceConfig` 全体ではなくこれだけを spread する
-   * (`resolveEstatParams` 経由)。全体を spread すると非クエリキーが混ざる。
-   */
-  estatParams?: EstatQueryParams;
-  /**
-   * 単発クエリで再現できない値か (線形結合・軸合算・率・県庁所在市写像)。
-   * true のとき e-Stat を叩かず正典 `app/stats/<key>/values.json` を読む。
-   */
-  derived?: boolean;
-
-  /** e-Stat 固有: データベース・系列名 (例: "社会・人口統計体系") */
-  collection?: {
-    name: string;
-    url?: string;
-  };
-
-  /** データの元となった統計調査 */
-  survey?: {
-    name: string;
-    url?: string;
-  };
-
-  /** e-Stat 統計表ID (互換性・API用) */
-  statsDataId?: string;
-  /** e-Stat 項目コード (互換性・API用) */
-  itemCode?: string;
-  /** e-Stat カテゴリコード (cat01) (互換性・API用) */
-  cdCat01?: string;
-  /** e-Stat カテゴリコード (cat02) (互換性・API用) */
-  cdCat02?: string;
-  /** e-Stat カテゴリコード (cat03) (互換性・API用) */
-  cdCat03?: string;
-  /** e-Stat 表章項目コード (tab) (互換性・API用) */
-  cdTab?: string;
-  
-  /** その他のパラメータ (任意) */
-  [key: string]: unknown;
+  recipe: MetricRecipe;
+  source?: { name?: string; url?: string };
 }
 
 // ============================================================================
@@ -287,7 +195,7 @@ export interface RankingItem {
   /** 数値表示設定 */
   valueDisplay?: ValueDisplayConfig | null;
   /** 地図・グラフの可視化設定 */
-  visualization?: VisualizationConfig | null;
+  visualization: VisualizationConfig;
   /** 動的計算ロジック設定 */
   calculation?: CalculationConfig | null;
 

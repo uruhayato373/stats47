@@ -1,0 +1,37 @@
+import { DEFAULT_METRIC_PRESENTATION } from "./defaults/presentation";
+import type { MetricConfig } from "../../packages/data-configs/src/types";
+
+export const cultureRecreationCostAllHouseholds: MetricConfig = {
+  "key": "culture-recreation-cost-all-households",
+  "title": "教養娯楽費（全世帯）",
+  "subtitle": "社会・人口統計体系による全世帯（単身世帯を含む）1世帯当たり年間の教養娯楽費",
+  "unit": "円",
+  "category": "economy",
+  "source": {
+    "kind": "estat",
+    "statsDataId": "0000010112",
+    "cdCat01": "L320109",
+    "displayName": "社会・人口統計体系",
+    "url": "https://www.stat.go.jp/data/ssds/index.htm"
+  },
+  "entities": [
+    "prefecture",
+    "city"
+  ],
+  "years": "all",
+  "yearFormat": "fiscal",
+  "visualization": {
+    ...DEFAULT_METRIC_PRESENTATION,
+    "colorScheme": "interpolatePurples",
+    "colorSchemeType": "sequential",
+  },
+  "display": {
+    "conversionFactor": 1,
+    "decimalPlaces": 0
+  },
+  "calculation": {
+    "isCalculated": false,
+    "normalizationOptions": []
+  },
+  "isActive": true,
+};

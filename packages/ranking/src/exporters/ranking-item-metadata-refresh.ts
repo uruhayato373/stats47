@@ -10,7 +10,7 @@ import type { RankingItem } from "../types/ranking-item";
  *
  * 背景: ランキング詳細・カテゴリページが描画する title / subtitle / annotation /
  * categoryKey は R2 `app/ranking/<key>/item.json` の値だが、git TS config
- * (`packages/data-configs/src/metrics/<key>.ts`) の編集はこれに伝播しない
+ * (`data/metrics/<key>.ts`) の編集はこれに伝播しない
  * (per-url exporter "master" は item.json を再グループ化するのみ)。
  *
  * 本 exporter が follow-up (`ranking-item-seo-refresh` の姉妹)。**git TS config が

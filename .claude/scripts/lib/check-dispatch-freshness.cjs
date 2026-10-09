@@ -1,3 +1,4 @@
+const { METRIC_DEFINITIONS_DIR, METRIC_SOURCES_DIR } = require('../../../config/paths.mjs');
 'use strict';
 
 /**
@@ -41,6 +42,8 @@ const { execFileSync } = require('node:child_process');
 
 /** 生成の入力になりうるソース木 */
 const RELEVANT_PREFIXES = [
+  `${METRIC_DEFINITIONS_DIR}/`,
+  `${METRIC_SOURCES_DIR}/`,
   'packages/',
   'apps/web/scripts/',
   'apps/remotion/scripts/',
@@ -124,7 +127,7 @@ function relevantPrefixesForWorkflow(workflowSource) {
 
   const prefixes = extracted.paths.map(packagePrefixForScript);
   if (prefixes.some((prefix) => prefix === null)) return RELEVANT_PREFIXES;
-  return [...new Set(prefixes)];
+  return [...new Set([...prefixes, `${METRIC_DEFINITIONS_DIR}/`, `${METRIC_SOURCES_DIR}/`])];
 }
 
 /**

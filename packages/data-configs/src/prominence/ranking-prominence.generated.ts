@@ -2,7 +2,7 @@
  * AUTO-GENERATED — 手編集禁止
  *
  * 生成コマンド: npm run generate:ranking-prominence --workspace apps/web
- * 真実源: packages/data-configs/src/metrics/*.ts (git TS) + GSC snapshot (git 管理下)
+ * 真実源: data/metrics/*.ts (git TS) + GSC snapshot (git 管理下)
  *
  * 索引面 (/ranking・ヘッダー・カテゴリ・関連ランキング) とホーム注目が
  * 共通で引く掲載価値スコアの確定結果。スコア式は

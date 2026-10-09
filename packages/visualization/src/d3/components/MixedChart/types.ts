@@ -4,6 +4,8 @@ import type { TimeSeriesDataNode, LineSeriesConfig } from "../LineChart/types";
 /** 棒+折れ線ミックスチャートの Props */
 export interface MixedChartProps extends BaseD3ChartProps, MarginProps {
   data: TimeSeriesDataNode[];
+  leftYDomain?: [number, number];
+  rightYDomain?: [number, number];
   /** X軸に使うキー @default "category" */
   categoryKey?: string;
   /** 棒グラフ系列（左Y軸） */

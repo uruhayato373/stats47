@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import { METRICS_REGISTRY } from "../registry";
-import { VERIFIED_VALUE_PROFILES } from "../verified-value-profiles";
+import { VERIFIED_VALUE_PROFILES } from "../../../../data/metrics/quality/verified-value-profiles";
 
 /**
  * 検証台帳が「見たふり」で埋まるのを防ぐ lint。
@@ -25,7 +25,7 @@ describe("VERIFIED_VALUE_PROFILES の健全性", () => {
   it("★根拠と出典と検証日を持つこと", () => {
     for (const p of VERIFIED_VALUE_PROFILES) {
       expect(p.evidence.length, `${p.key} の evidence が短すぎる`).toBeGreaterThanOrEqual(20);
-      expect(p.sourceUrl, `${p.key} の sourceUrl`).toMatch(/^(https?:\/\/|packages\/|apps\/|docs\/)/);
+      expect(p.sourceUrl, `${p.key} の sourceUrl`).toMatch(/^(https?:\/\/|data\/|packages\/|apps\/|docs\/)/);
       expect(p.verifiedAt, `${p.key} の verifiedAt`).toMatch(/^\d{4}-\d{2}-\d{2}$/);
     }
   });

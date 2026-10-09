@@ -1,9 +1,4 @@
-/**
- * Compatibility seam for theme-dashboard callers.
- *
- * Schema and parser live in data-configs so catalog validation and runtime
- * cannot interpret componentProps differently.
- */
+/** Shared chart props and parsers from the metric-ID contract. */
 export {
   parseThemeDbChartComponentProps,
   type CompositionChartComponentProps,

@@ -524,7 +524,15 @@ function auditFile(file) {
         .map((s) => (typeof s?.run === 'string' ? stripShellComments(s.run) : ''))
         .join('\n');
       if (!runs) continue;
-      const writesViaSaveToR2 = R2_WRITER_SCRIPTS.some((rel) => runs.includes(rel));
+      const writesViaSaveToR2 = R2_WRITER_SCRIPTS.some((rel) =>
+        runs.split(/[\n;&|]/).some((line) => {
+          if (!line.includes(rel)) return false;
+          // This generator's explicit staging mode never calls saveToR2 and is used for PR artifacts.
+          const localMetricStage = rel === 'packages/ranking/src/scripts/generate-ranking-items.ts' &&
+            /\s--stage-dir\s+\.local\/r2(?:\s|$)/.test(line);
+          return !localMetricStage;
+        })
+      );
       if (!writesViaSaveToR2) continue;
       const hasPush =
         runs.includes('diff-push-r2') ||

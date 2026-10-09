@@ -14,6 +14,7 @@ import { RankingBarList } from "@/components/charts/RankingBarList";
 import type { LineChartData } from "@/components/stat-charts/types/visualization";
 
 import { trackNavClick } from "@/lib/analytics/events";
+import {metricSeriesDomain} from '@/lib/metric-presentation';
 
 import { type MetricTimeseriesPoint } from "../actions";
 import { fetchMetricTimeseriesBatched } from "../lib/batched-metric-timeseries";
@@ -164,7 +165,7 @@ export function MetricFocusCharts({
         ) : isPending ? (
           <ChartLoading height={250} />
         ) : lineChartData ? (
-          <LineChartClient chartData={lineChartData} />
+          <LineChartClient chartData={lineChartData} yDomain={metricSeriesDomain(lineChartData.data, lineChartData.lines.map(line=>line.dataKey), rankingItem.visualization.trendDomain)} />
         ) : (
           <ChartEmptyState message="時系列データがありません" height={120} />
         )}

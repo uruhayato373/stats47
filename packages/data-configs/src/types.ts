@@ -1,7 +1,8 @@
+import type { MetricPresentation } from "@stats47/types";
 /**
  * MetricConfig 型定義 — page ごとの統計データ要件の真実源 (SSOT)
  *
- * 配置: packages/data-configs/src/metrics/<metric-key>.ts
+ * 配置: data/metrics/<metric-key>.ts
  * registry: packages/data-configs/src/registry.ts (codegen)
  * D1 metrics テーブル: 上記から build-time export される cache (編集禁止)
  */
@@ -212,7 +213,7 @@ export type KnownFetcherKey = (typeof KNOWN_FETCHER_KEYS)[number];
 /**
  * 手動抽出データ (PDF/xlsx/HTML 由来) の再現性メタ (provenance)。
  * statsDataId 等で機械再取得できない source は、これが無いと復元不能になる。
- * 手本: `packages/data-configs/src/metrics/ambulance-hospital-arrival-time.ts`。
+ * 手本: `data/metrics/ambulance-hospital-arrival-time.ts`。
  * lint は fetcherKey:"manual" に対し {url|pdfUrl, accessedAt, extraction, verification, restore} を必須化する。
  */
 export interface SourceProvenance {
@@ -272,32 +273,13 @@ export type YearSpec =
   'all' | { from: number; to: number } | { years: number[] };
 
 /** 可視化 */
-export interface VisualizationConfig {
-  /** D3 color interpolator name */
-  colorScheme?: string;
-  colorSchemeType?: 'sequential' | 'diverging';
-  minValueType?: 'zero' | 'data-min';
-  /** 動画演出用プリセット */
-  preset?: string;
-  /** diverging のときの中央値定義 ("zero" | "median" | "custom" 等) */
-  divergingMidpoint?: string;
-  /** divergingMidpoint = "custom" のときの値 */
-  divergingMidpointValue?: number;
-  /** カラースケール反転 */
-  isReversed?: boolean;
-  /** diverging で対称化 */
-  isSymmetrized?: boolean;
-}
+export type VisualizationConfig = MetricPresentation;
 
 /** 表示 */
 export interface DisplayConfig {
   conversionFactor?: number;
   decimalPlaces?: number;
   displayUnit?: string;
-  /** legacy: display にも normalizationOptions が入っている metric あり */
-  normalizationOptions?: NormalizationOption[];
-  /** legacy: railway-passengers 等で display 内に isCalculated が入っているケース */
-  isCalculated?: boolean;
 }
 
 /** 計算オプション (per_population, per_area などの派生 metric 生成定義) */
@@ -307,6 +289,8 @@ export interface NormalizationOption {
   unit: string;
   scaleFactor: number;
   decimalPlaces: number;
+  /** Overrides use the normalized observation units. Raw fixed limits are never inherited. */
+  visualization?: VisualizationConfig;
 }
 
 /**
@@ -331,8 +315,6 @@ export interface CalculationOptions {
   isCalculated: boolean;
   isPairRelationship?: boolean;
   normalizationOptions?: NormalizationOption[];
-  /** legacy: 計算式 (旧フォーマット) */
-  formula?: string;
   description?: string;
   /**
    * 分子・分母の期間基準。`type:"subtraction"` は宣言必須
@@ -344,15 +326,9 @@ export interface CalculationOptions {
    * 期間換算 (`periodAlign`) とは独立に適用する。
    */
   scaleFactor?: number;
-  /** legacy: 分子/分母 (複数 naming convention あり) */
-  type?: string;
-  calculationType?: string;
-  numerator?: string;
-  denominator?: string;
+  type?: "ratio" | "per_capita" | "subtraction";
   numeratorKey?: string;
   denominatorKey?: string;
-  numeratorRankingKey?: string;
-  denominatorRankingKey?: string;
 }
 
 /**
@@ -432,7 +408,7 @@ export interface MetricConfig {
   /** 取得年範囲 */
   years: YearSpec;
   yearFormat?: 'fiscal' | 'calendar' | 'plain';
-  visualization?: VisualizationConfig;
+  visualization: VisualizationConfig;
   display?: DisplayConfig;
   calculation?: CalculationOptions;
   /** sub-property tags (旧 additional_categories) */

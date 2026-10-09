@@ -251,7 +251,7 @@ function governmentOpenData(url) {
 }
 
 async function loadMetrics() {
-  const metricsDir = path.join(PROJECT_ROOT, 'packages/data-configs/src/metrics');
+  const metricsDir = path.join(PROJECT_ROOT, 'data/metrics');
   const metrics = [];
   for (const file of (await readdir(metricsDir)).filter((name) => name.endsWith('.ts'))) {
     const text = await readFile(path.join(metricsDir, file), 'utf8');

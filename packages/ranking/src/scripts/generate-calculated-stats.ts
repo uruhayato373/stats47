@@ -80,8 +80,8 @@ interface Outcome {
 
 async function generateOne(config: MetricConfig, dryRun: boolean): Promise<Outcome> {
   const c = config.calculation;
-  const numeratorKey = c?.numeratorKey ?? c?.numeratorRankingKey ?? c?.numerator;
-  const denominatorKey = c?.denominatorKey ?? c?.denominatorRankingKey ?? c?.denominator;
+  const numeratorKey = c?.numeratorKey;
+  const denominatorKey = c?.denominatorKey;
   if (!numeratorKey || !denominatorKey) {
     return { key: config.key, status: "failed", error: "分子または分母キーが未設定" };
   }

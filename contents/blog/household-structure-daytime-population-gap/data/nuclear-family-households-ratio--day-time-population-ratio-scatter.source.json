@@ -1,0 +1,118 @@
+{
+  "kind": "correlation",
+  "base": "nuclear-family-households-ratio",
+  "pair": "day-time-population-ratio",
+  "xKey": "nuclear-family-households-ratio",
+  "yKey": "day-time-population-ratio",
+  "pearsonR": -0.7100413640221352,
+  "partialRPopulation": -0.6963074382950566,
+  "unit": "％ × ％",
+  "label": "核家族世帯割合 と 昼夜間人口比率 の関係",
+  "source": "r2:app/correlation/by-ranking-key/nuclear-family-households-ratio.json",
+  "restore": "node .claude/scripts/blog/fetch-correlation-scatter.mjs --slug household-structure-daytime-population-gap --base nuclear-family-households-ratio --pair day-time-population-ratio --data-name nuclear-family-households-ratio--day-time-population-ratio",
+  "partialRPopulationControl": {
+    "key": "total-population",
+    "note": "サイトの相関スナップショットが統制に使う総人口。値は散布図と同じ47点に対し R2 app/ranking/total-population/values.json の2025年(partition 最大年)で再計算して一致を確認(2025年: -0.6963、2020年を使うと -0.6972)"
+  },
+  "extraCalculations": {
+    "script": "data/sensitivity-calc.mjs",
+    "restore": "node contents/blog/household-structure-daytime-population-gap/data/sensitivity-calc.mjs",
+    "inputs": [
+      "散布図 JSON (47点)",
+      "single-person-household-ratio-prefecture-rankings.json (2020年)",
+      "r2:app/ranking/total-population/values.json (2025年)"
+    ],
+    "results": {
+      "n": 47,
+      "pearsonAll": -0.71,
+      "pearsonWithoutTokyo": -0.58,
+      "spearman": -0.59,
+      "withoutTokyoArea4": {
+        "excluded": [
+          "東京都",
+          "埼玉県",
+          "千葉県",
+          "神奈川県"
+        ],
+        "n": 43,
+        "r": -0.66
+      },
+      "without8Prefectures": {
+        "excluded": [
+          "東京都",
+          "埼玉県",
+          "千葉県",
+          "神奈川県",
+          "大阪府",
+          "京都府",
+          "兵庫県",
+          "奈良県"
+        ],
+        "n": 39,
+        "r": -0.46
+      },
+      "withoutKinki6Only": {
+        "excluded": [
+          "大阪府",
+          "京都府",
+          "兵庫県",
+          "奈良県",
+          "滋賀県",
+          "和歌山県"
+        ],
+        "n": 41,
+        "r": -0.67
+      },
+      "withoutTokyoArea4AndKinki6": {
+        "excluded": [
+          "東京都",
+          "埼玉県",
+          "千葉県",
+          "神奈川県",
+          "大阪府",
+          "京都府",
+          "兵庫県",
+          "奈良県",
+          "滋賀県",
+          "和歌山県"
+        ],
+        "n": 37,
+        "r": -0.33
+      },
+      "withoutFarthestFrom100": {
+        "excluded": [
+          "東京都",
+          "埼玉県",
+          "千葉県",
+          "奈良県",
+          "神奈川県",
+          "大阪府",
+          "兵庫県",
+          "岐阜県"
+        ],
+        "n": 39,
+        "r": -0.47
+      },
+      "randomExclusion": {
+        "seed": 47,
+        "prng": "mulberry32",
+        "trials": 10000,
+        "excludedPerTrial": 8,
+        "medianR": -0.73,
+        "shareAtOrAbove_minus0_46": "0.7%"
+      },
+      "singlePerson": {
+        "sourceKey": "single-person-household-ratio",
+        "year": "2020",
+        "pearsonWithDaytimeRatio": 0.47,
+        "pearsonWithDaytimeRatioWithoutTokyo": 0.16,
+        "partialNuclearVsDaytimeControllingSinglePerson": -0.64
+      },
+      "partialPopulationRecomputed": {
+        "controlKey": "total-population",
+        "year": "2025",
+        "r": -0.7
+      }
+    }
+  }
+}

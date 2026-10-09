@@ -20,7 +20,7 @@ const KNOWN_RANKING_KEYS_SRC = readFileSync(
   join(ROOT, "packages/ranking/src/config/known-ranking-keys.ts"),
   "utf8",
 );
-const METRICS_DIR = join(ROOT, "packages/data-configs/src/metrics");
+const METRICS_DIR = join(ROOT, "data/metrics");
 
 const CHART_DATA_CAT_NAMES = [
   "食料",

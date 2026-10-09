@@ -1,3 +1,4 @@
+import { assertMetricPresentation, type MetricPresentation } from '@stats47/types';
 import type { MunicipalityEntityPolicy } from '@stats47/area';
 
 import { binMunicipalityValues } from './bin-municipality-values';
@@ -32,6 +33,7 @@ export interface MunicipalityMetricSnapshotConfig {
   subtitle?: string | null;
   description?: string | null;
   unit: string;
+  visualization: MetricPresentation;
   source: { displayName: string; url: string };
   valuePolicy?: {
     minExclusive?: number;
@@ -70,6 +72,7 @@ export function buildMunicipalityRankingSnapshots({
   item: MunicipalityRankingItemSnapshot;
   values: MunicipalityRankingValuesSnapshot;
 } {
+  assertMetricPresentation(metric.visualization);
   const publishable = new Map(
     entityPolicy.entities
       .filter((entity) => entity.disposition === 'publishable')
@@ -155,6 +158,7 @@ export function buildMunicipalityRankingSnapshots({
       description:
         metric.description ?? `${metric.title}を市区町村別に比較します。`,
       unit,
+      visualization: metric.visualization,
       latestYear: { yearCode: latestYearCode, yearName },
       entityPolicyKey: entityPolicy.key,
       entityCount: publishable.size,

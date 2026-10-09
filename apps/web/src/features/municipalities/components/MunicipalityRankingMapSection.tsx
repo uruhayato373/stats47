@@ -1,5 +1,4 @@
 import { lookupArea, to2DigitPrefCode } from '@stats47/area';
-import { getMetricConfig, resolveColorScheme } from '@stats47/data-configs';
 import { formatUnitForDisplay } from "@stats47/data-configs/unit";
 import { fetchMunicipalityTopology } from '@stats47/gis/server';
 
@@ -13,19 +12,18 @@ import { municipalityLeafName } from '../lib/filter-municipality-ranking';
 import { MunicipalityCityMapClient } from './MunicipalityCityMapClient';
 
 import type { MunicipalityRankingValue } from '@stats47/ranking/types';
-import type { TopoJSONTopology } from '@stats47/types';
+import type { MetricPresentation, TopoJSONTopology } from '@stats47/types';
 
 import { TOKYO_ISLAND_EXCLUDE_CODES } from '@/constants/tokyo-islands';
 
 interface Props {
-  rankingKey: string;
+  visualization: MetricPresentation;
   unit: string;
   /** 5 桁の都道府県コード (?pref=) */
   prefectureCode: string;
   values: readonly MunicipalityRankingValue[];
 }
 
-const MIDPOINT_VALUES = ['zero', 'mean', 'median'] as const;
 
 // 東京島嶼部 (伊豆・小笠原諸島)。小笠原が 1,000km 南にあるため fit に含めると本土が
 // 極小になる。fit 計算からだけ外し、描画とランキング表からは外さない
@@ -35,24 +33,13 @@ const FIT_EXCLUDE_BY_PREF: Readonly<Record<string, readonly string[]>> = {
   '13000': TOKYO_ISLAND_EXCLUDE_CODES,
 };
 
-function resolveDivergingMidpoint(
-  raw: string | undefined,
-  customValue: number | undefined
-): 'zero' | 'mean' | 'median' | number {
-  if (raw === 'custom' && typeof customValue === 'number') return customValue;
-  if ((MIDPOINT_VALUES as readonly string[]).includes(raw ?? '')) {
-    return raw as (typeof MIDPOINT_VALUES)[number];
-  }
-  return 'zero';
-}
-
 /**
  * ?pref=XX で絞り込んだときだけ描く県内コロプレス。
  * topology (県別 R2 topojson) はこの Server Component が取得するので、
  * pref 未指定時は一切読み込まれない。取得失敗は地図なしへ degrade する。
  */
 export async function MunicipalityRankingMapSection({
-  rankingKey,
+  visualization,
   unit,
   prefectureCode,
   values,
@@ -67,14 +54,6 @@ export async function MunicipalityRankingMapSection({
   if (!topology) return null;
 
   const prefName = lookupArea(prefectureCode)?.areaName ?? '';
-  const metric = getMetricConfig(rankingKey);
-  const decision = resolveColorScheme({
-    key: rankingKey,
-    explicit: metric?.visualization?.colorScheme ?? null,
-    colorSchemeType: metric?.visualization?.colorSchemeType ?? null,
-    category: metric?.category ?? null,
-  });
-  const isDiverging = metric?.visualization?.colorSchemeType === 'diverging';
 
   const hrefByCode: Record<string, string> = {};
   for (const row of rows) {
@@ -97,16 +76,7 @@ export async function MunicipalityRankingMapSection({
             rank: row.rank,
           }))}
           unit={formatUnitForDisplay(unit)}
-          colorScheme={decision.scheme}
-          colorSchemeType={isDiverging ? 'diverging' : 'sequential'}
-          divergingMidpoint={
-            isDiverging
-              ? resolveDivergingMidpoint(
-                  metric?.visualization?.divergingMidpoint,
-                  metric?.visualization?.divergingMidpointValue
-                )
-              : undefined
-          }
+          visualization={visualization}
           hrefByCode={hrefByCode}
           fitExcludeCodes={
             FIT_EXCLUDE_BY_PREF[prefectureCode]

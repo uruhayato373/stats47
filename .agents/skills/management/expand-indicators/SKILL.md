@@ -12,7 +12,7 @@ primary_agent: data-ingester
 # expand-indicators — 検証済み指標の追加
 
 `.claude/todo/backlog.md` の表から候補を選び、一次統計を再確認してから
-`packages/data-configs/src/metrics/*.ts` に追加する。観測値の経路は
+`data/metrics/*.ts` に追加する。観測値の経路は
 **git TS config → e-Stat → R2**。永続・リモート D1 は使わない。
 
 大量展開は `/expand-rankings` の計測ゲート付きキューに任せ、本スキルは人が検証した
@@ -63,7 +63,7 @@ node .claude/scripts/management/parse-backlog.cjs \
 ### 3. TS config を作る
 
 近い既存configを読み、同じ構造で
-`packages/data-configs/src/metrics/<candidate_slug>.ts` を作る。
+`data/metrics/<candidate_slug>.ts` を作る。
 
 - `years` は4桁年だけを使う
 - `category` は既存の17軸から選ぶ

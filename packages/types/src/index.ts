@@ -136,3 +136,5 @@ export {
 } from './indicator-sets/registry';
 
 export { EXPANDED_THEME_SETS } from './indicator-sets/expanded';
+
+export * from "./metric-presentation";

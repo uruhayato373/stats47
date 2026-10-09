@@ -1,13 +1,14 @@
 ---
 paths:
-  - "packages/data-configs/{src/metrics/**,src/*.ts,scripts/**}"
+  - "data/metrics/**"
+  - "packages/data-configs/{src/*.ts,scripts/**}"
   - ".claude/skills/{db/publish-ranking,db/verify-value-distribution,management/expand-rankings,management/expand-indicators}/**"
   - "data/ranking/**"
   - ".claude/agents/{data-ingester,ranking-expander,ranking-publisher,open-data-curator,snapshot-exporter}.md"
 ---
 # metric config 標準 (ランキングデータの正典)
 
-`packages/data-configs/src/metrics/<key>.ts` (`MetricConfig`) のフィールド役割と禁止事項の**単一ソース**。
+`data/metrics/<key>.ts` (`MetricConfig`) のフィールド役割と禁止事項の**単一ソース**。
 新規 metric 量産・編集する agent / skill / 人間はこれに従う。検査は決定的 lint
 `packages/data-configs/scripts/validate-metric-config.ts` (`npm run validate:config`) が担う
 (pre-commit / CI `pr-quality-check.yml` に組込済)。
@@ -29,6 +30,17 @@ paths:
 | `seoTitle?` / `seoDescription?` | SEO 専用                                      | 検索向け文                                 | フルタイムコード (2009100000)                                 |
 
 **年は `years` / `latestYear` が持つ。title に焼かない。** UI はデータ年度を別途表示する。
+
+## 指標の表示方針と配線
+
+`data/metrics/<key>.ts` の `visualization` は必須。正準色名・色方式・区分方式・時系列と比較の軸方針を持つ。
+正本型は `MetricPresentation`。地図と凡例は共有resolver、RankingItemは必須の型付きsnapshot契約で接続する。
+色は明示指定を優先し、Bluesも例外にしない。共通既定値は `data/metrics/defaults/presentation.ts`。
+観測値の平均・最小・最大を手入力の固定設定へ複製しない。固定域は明示的に指定した場合だけ使う。
+正規化optionは元単位の固定域を引き継がず、必要なら `visualization` を基準別に上書きする。
+正規化分母と単位倍率は `data/metrics/defaults/normalization.ts` のみで定義する。
+`metrics:generate-schema` → `content:sync` → `metrics:build-index` → `metrics:check` で生成・整合性を確認する。
+利用ページ・統計表分類条件の逆引きは `data/metrics/index/linkage-*.json`。生のクエリをtheme chartへ残さない。
 
 ## category キー (17 軸固定)
 
@@ -240,8 +252,8 @@ agent 検証なしで壊れだけ取れる」を試して失敗した — 壊れ
 
 | SSOT                         | 意味                     | 形                          | ラチェット               |
 | ---------------------------- | ------------------------ | --------------------------- | ------------------------ |
-| `expected-shape-anomaly.ts`  | **壊れ**を期限つきで許可 | 生成物 (`--emit-allowlist`) | 件数の**縮小**専用       |
-| `verified-value-profiles.ts` | **正当**と検証済み       | agent が根拠つきで手書き    | 未検証件数の**縮小**専用 |
+| `data/metrics/quality/shape-exceptions.ts`  | **壊れ**を期限つきで許可 | 生成物 (`--emit-allowlist`) | 件数の**縮小**専用       |
+| `data/metrics/quality/verified-value-profiles.ts` | **正当**と検証済み       | agent が根拠つきで手書き    | 未検証件数の**縮小**専用 |
 
 疑い (`value-verification.ts`・監査層専用・取り込みは止めない):
 
@@ -311,7 +323,7 @@ git の更新日では「クエリが変わった」と「ただ触った (整�
 
 ### 既知の壊れは期限つきで登録する
 
-`packages/data-configs/src/expected-shape-anomaly.ts` は
+`data/metrics/quality/shape-exceptions.ts` は
 `scan-stats-shape.ts --emit-allowlist` の**生成物**。手で書かない。腐敗防止は 3 点:
 `until` 必須 / `observedSeverity` より悪化したら降格しない / `MAX_KNOWN_BROKEN` ラチェット
 (是正のたびに定数を下げる。上げる変更は原則しない)。

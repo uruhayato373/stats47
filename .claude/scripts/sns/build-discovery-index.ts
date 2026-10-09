@@ -2,7 +2,7 @@
  * ニュースのトピック(自由文キーワード) → 該当統計指標キー を高速発見するための
  * ローカル索引 JSON を生成する。
  *
- * DB は使わない。metric config SSOT (packages/data-configs/src/metrics/*.ts) を
+ * DB は使わない。metric config SSOT (data/metrics/*.ts) を
  * registry 経由で読み、索引に使えるフィールドだけを抽出して R2 から再生成できる
  * ローカルキャッシュ (data/sns/metric-discovery-index.json) に書き出す。
  *

@@ -1,0 +1,71 @@
+import { DEFAULT_METRIC_PRESENTATION } from "./defaults/presentation";
+import type { MetricConfig } from "../../packages/data-configs/src/types";
+
+export const physiciansInMedicalFacilitiesPer100k: MetricConfig = {
+  "key": "physicians-in-medical-facilities-per-100k",
+  "title": "医師数",
+  "subtitle": "医療施設従事者（人口10万人当たり）",
+  "description": "医師・歯科医師・薬剤師統計で医療施設に従事すると分類された医師数を、人口10万人当たりに換算した値です。",
+  "note": "日本の医師免許を持つ外国籍の医師を含み、12月31日現在の届出を基に集計します。",
+  "unit": "人",
+  "category": "socialsecurity",
+  "source": {
+    "kind": "estat",
+    "statsDataId": "0000010209",
+    "cdCat01": "#I0920101",
+    "displayName": "社会・人口統計体系",
+    "url": "https://www.stat.go.jp/data/ssds/index.htm"
+  },
+  "entities": [
+    "prefecture"
+  ],
+  "years": {
+    "years": [
+      1975,
+      1976,
+      1977,
+      1978,
+      1979,
+      1980,
+      1981,
+      1982,
+      1984,
+      1986,
+      1988,
+      1990,
+      1992,
+      1994,
+      1996,
+      1998,
+      2000,
+      2002,
+      2004,
+      2006,
+      2008,
+      2010,
+      2012,
+      2014,
+      2016,
+      2018,
+      2020,
+      2022
+    ]
+  },
+  "yearFormat": "fiscal",
+  "visualization": {
+    ...DEFAULT_METRIC_PRESENTATION,
+    "colorScheme": "interpolateBlues",
+    "colorSchemeType": "sequential",
+  },
+  "display": {
+    "conversionFactor": 1,
+    "decimalPlaces": 1
+  },
+  "calculation": {
+    "isCalculated": false
+  },
+  "groupKey": "physicians-in-medical-facilities",
+  "seoTitle": "医師数ランキング都道府県【2022年】｜1位徳島県（335.7人）",
+  "seoDescription": "2022年の医師数の都道府県別ランキング。1位徳島県（335.7人）、最下位埼玉県（180.2人）で1.9倍の格差。地図やグラフで47都道府県を比較。",
+  "isActive": true
+};

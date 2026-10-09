@@ -283,7 +283,7 @@
 
 ### 次のアクション
 
-- [ ] 財政力指数メトリクスを確認（`ls packages/data-configs/src/metrics/ | grep fiscal`）
+- [ ] 財政力指数メトリクスを確認（`ls data/metrics/ | grep fiscal`）
 - [ ] `/fetch-article-data fiscal-capacity-index` でデータ取得
 
 ---

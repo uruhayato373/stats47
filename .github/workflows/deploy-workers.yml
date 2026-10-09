@@ -17,7 +17,11 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     name: Deploy
-    timeout-minutes: 20
+    # Metric contract migrations publish the matching snapshots before building.
+    timeout-minutes: 40
+    concurrency:
+      group: r2-write
+      cancel-in-progress: false
 
     steps:
       - name: Checkout
@@ -34,6 +38,59 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+
+      - name: Detect metric snapshot changes
+        id: metric-snapshots
+        env:
+          BEFORE_SHA: ${{ github.event.before }}
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          if [ "$EVENT_NAME" = "workflow_dispatch" ] || [ -z "$BEFORE_SHA" ] || ! git cat-file -e "$BEFORE_SHA^{commit}"; then
+            echo 'changed=true' >> "$GITHUB_OUTPUT"
+          else
+            git diff --name-only "$BEFORE_SHA" HEAD > /tmp/metric-release-changed-files.txt
+            if grep -Eq '^(data/metrics/|data/metric-sources/|packages/types/src/metric-presentation|packages/data-configs/src/|packages/ranking/src/(builders/|exporters/|scripts/|repositories/schemas/)|apps/web/scripts/(data/page-components/|export-page-components-snapshot))' /tmp/metric-release-changed-files.txt; then
+              echo 'changed=true' >> "$GITHUB_OUTPUT"
+            fi
+          fi
+
+      - name: Generate and verify metric release snapshots
+        if: steps.metric-snapshots.outputs.changed == 'true'
+        env:
+          R2_PUBLIC_FETCH_URL: https://storage.stats47.jp
+        run: |
+          npx tsx -r ./packages/ranking/src/scripts/setup-cli.js packages/ranking/src/scripts/generate-ranking-items.ts --stage-dir .local/r2
+          npx tsx packages/ranking/src/scripts/generate-municipality-ranking.ts --all-published --source-base https://storage.stats47.jp --output-root .local/r2
+          npx tsx -r ./packages/ranking/src/scripts/setup-cli.js packages/ranking/src/scripts/export-master-snapshots.ts --staged-metrics
+          npx tsx -r ./packages/ranking/src/scripts/setup-cli.js apps/web/scripts/export-page-components-snapshot.ts
+          npm run metrics:verify-snapshots
+          node --input-type=module -e '
+            import fs from "node:fs";
+            import path from "node:path";
+            import {createHash} from "node:crypto";
+            const root = ".local/r2";
+            const allowed = /^app\/(?:ranking\/[a-z0-9-]+\/item\.json|ranking-items\/all\.json|home\/featured\.json|municipalities\/ranking\/[a-z0-9-]+\/(?:item|values)\.json|categories\/(?:all\.json|[a-z0-9-]+\/items\.json)|survey\/(?:all\.json|[a-z0-9-]+\/items\.json)|page-components\/[a-z0-9/-]+\.json)$/;
+            const files = fs.readdirSync(root, {recursive:true}).map(key => String(key).split(path.sep).join("/")).filter(key => allowed.test(key)).sort().map(key => {
+              const body = fs.readFileSync(path.join(root, key));
+              JSON.parse(body.toString("utf8"));
+              return {key, bytes:body.length, sha256:createHash("sha256").update(body).digest("hex")};
+            });
+            if (!files.some(file => file.key === "app/home/featured.json") || !files.some(file => file.key === "app/ranking-items/all.json")) throw new Error("Missing release metadata");
+            const body = JSON.stringify({schemaVersion:1,status:"staged-unpublished",files});
+            fs.writeFileSync(".local/metric-release-plan.json", body);
+            fs.writeFileSync(".local/metric-release-plan.sha256", createHash("sha256").update(body).digest("hex"));
+            console.log("Verified exact release scope: " + files.length + " JSON files");
+          '
+
+      - name: Publish verified metric snapshots before app build
+        if: steps.metric-snapshots.outputs.changed == 'true'
+        env:
+          R2_S3_ENDPOINT: https://${{ vars.CLOUDFLARE_ACCOUNT_ID }}.r2.cloudflarestorage.com
+          R2_ACCESS_KEY_ID: ${{ secrets.CLOUDFLARE_R2_ACCESS_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ secrets.CLOUDFLARE_R2_SECRET_ACCESS_KEY }}
+          CLOUDFLARE_R2_BUCKET_NAME: stats47
+        run: |
+          npx tsx packages/r2-storage/src/scripts/push-exact-r2-assets.ts --manifest .local/metric-release-plan.json --manifest-sha256 "$(cat .local/metric-release-plan.sha256)"
 
       - name: 🔐 Verify Cloudflare authentication
         env:

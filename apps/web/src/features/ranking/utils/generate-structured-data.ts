@@ -276,7 +276,8 @@ function resolvePrimarySource(
   const source = readSourceConfigRef(config);
   const name = source.name ?? rankingItem.attribution?.compilation?.name;
   if (!name) return null;
-  if (config?.statsDataId) return { name, url: buildEstatTableUrl(config.statsDataId) };
+  const tableId = config?.recipe.estatParams?.statsDataId;
+  if (tableId) return { name, url: buildEstatTableUrl(tableId) };
   const url = source.url ?? rankingItem.attribution?.compilation?.url;
   return url ? { name, url } : null;
 }

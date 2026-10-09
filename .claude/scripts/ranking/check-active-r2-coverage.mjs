@@ -43,7 +43,7 @@ const gone = extractQuotedKeys(
 );
 
 // metric config の isActive:true キー
-const metricsDir = path.join(PROJECT_ROOT, "packages/data-configs/src/metrics");
+const metricsDir = path.join(PROJECT_ROOT, "data/metrics");
 const active = new Set();
 for (const f of fs.readdirSync(metricsDir)) {
   if (!f.endsWith(".ts")) continue;

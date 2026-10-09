@@ -163,7 +163,7 @@ describe('resolveThemeSurveyTaxonomy', () => {
         componentType: 'line-chart',
         title: '人口',
         componentProps: {
-          estatParams: { statsDataId: '0000010103', cdCat01: '#A03506' },
+          seriesRefs: [{ metricKey: 'total-population', area: 'national' }],
         },
         sortOrder: 1,
       },
@@ -177,7 +177,7 @@ describe('resolveThemeSurveyTaxonomy', () => {
     ],
   };
 
-  it('raw e-Stat chart も survey へ接続し、解説は対象外にする', () => {
+  it('指標IDによる chart も survey へ接続し、解説は対象外にする', () => {
     const result = resolveThemeSurveyTaxonomy(catalog, METRICS_REGISTRY);
     expect(result.charts[0].status).toBe('resolved');
     expect(result.charts[0].surveys.map((survey) => survey.id)).toContain(
@@ -351,6 +351,7 @@ describe('blog chart taxonomy', () => {
   it('metric 自体が理由付き対象外なら chart も not-applicable にする', () => {
     const registry = {
       'administrative-report': {
+    visualization: { domain: { mode: 'extent' }, colorScheme: 'interpolateBlues', colorSchemeType: 'sequential',  classification: { method: 'equal-interval', classes: 5 }, trendDomain: { mode: 'extent', padding: 0.08 }, comparisonDomain: { mode: 'extent', padding: 0.05 } },
         key: 'administrative-report',
         title: '行政業務報告',
         unit: '件',

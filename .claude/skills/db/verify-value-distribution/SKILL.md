@@ -54,7 +54,7 @@ cat data/ranking/integrity-audit.json | jq '.valueVerification'
 
 ### 3. プロファイルに「予測」を書く
 
-`packages/data-configs/src/verified-value-profiles.ts` に追記する。
+`data/metrics/quality/verified-value-profiles.ts` に追記する。
 **boolean ではなく観測できる上限・下限を書く**のがこの方式の要。
 
 ```ts
@@ -112,7 +112,7 @@ npx tsx packages/data-configs/scripts/scan-stats-shape.ts --verification-queue |
 ## 関連
 
 - 判定ロジック: `packages/data-configs/src/value-verification.ts` (純関数・テスト付き)
-- 台帳: `packages/data-configs/src/verified-value-profiles.ts`
+- 台帳: `data/metrics/quality/verified-value-profiles.ts`
 - 監査 check (l): `packages/ranking/src/scripts/audit-ranking-data-integrity.ts`
-- 壊れの allowlist (別 SSOT): `packages/data-configs/src/expected-shape-anomaly.ts`
+- 壊れの allowlist (別 SSOT): `data/metrics/quality/shape-exceptions.ts`
 - 形状ゲート: `.claude/rules/metric-config-standards.md` §機械的な検査

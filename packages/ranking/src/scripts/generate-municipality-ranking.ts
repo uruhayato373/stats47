@@ -157,6 +157,7 @@ async function generateForKey(
       subtitle: subtitleByKey.get(rankingKey) ?? null,
       description: metric.description,
       unit: metric.unit,
+      visualization: metric.visualization,
       source: {
         displayName: source.displayName,
         url: source.url,

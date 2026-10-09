@@ -334,13 +334,13 @@ function buildOps(config: MetricConfig): RecipeOps | undefined {
   //   全 metric に広げると 2,000 件超の configHash が一斉に動き、drift の意味が消える。
   if (s.kind === "external" && s.fetcherKey === "calculated") {
     const c = config.calculation;
-    const type = asCalcType(c?.type ?? c?.calculationType);
-    const numeratorKey = c?.numeratorKey ?? c?.numeratorRankingKey ?? c?.numerator;
+    const type = asCalcType(c?.type);
+    const numeratorKey = c?.numeratorKey;
     if (c && type && numeratorKey) {
       ops.calc = stripUndefined({
         type,
         numeratorKey,
-        denominatorKey: c.denominatorKey ?? c.denominatorRankingKey ?? c.denominator,
+        denominatorKey: c.denominatorKey,
         periodAlign: c.periodAlign
           ? {
               numerator: c.periodAlign.numerator,

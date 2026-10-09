@@ -1,7 +1,7 @@
 import prefectures from "../../../area/src/data/prefectures.json";
 import type { SingleEntityRow } from "../../../stats-r2/src/types";
 import { classifyShape, summarizeShape } from "../shape-gate";
-import { AGRICULTURAL_OUTPUT_RELEASE } from "./official-theme-releases";
+import { AGRICULTURAL_OUTPUT_RELEASE } from "../../../../data/metric-sources/official-theme-releases";
 
 const prefectureByCode = new Map(prefectures.map((pref) => [pref.prefCode, pref.prefName]));
 const rowKey = (row: SingleEntityRow) => `${row.yearCode}/${row.areaCode}`;

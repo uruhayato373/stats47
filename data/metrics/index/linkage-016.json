@@ -1,0 +1,6492 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "metricKey": "other-leafy-vegetables-consumption-expenditure",
+      "pageId": "ranking:other-leafy-vegetables-consumption-expenditure",
+      "title": "他の葉茎菜消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "010511080",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "010511080",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "d9bb2610fb3de89b"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-leafy-vegetables-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-leafy-vegetables-consumption-quantity",
+      "pageId": "ranking:other-leafy-vegetables-consumption-quantity",
+      "title": "他の葉茎菜消費量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348235",
+          "filters": {
+            "cdCat01": "010511080",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348235",
+          "cdCat01": "010511080",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "c3420adc6d0ff007"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-leafy-vegetables-consumption-quantity",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-lesson-fees-consumption-expenditure",
+      "pageId": "ranking:other-lesson-fees-consumption-expenditure",
+      "title": "他の月謝類消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "090430080",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "090430080",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "c46fe85205ab0475"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-lesson-fees-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-liquor-consumption-expenditure",
+      "pageId": "ranking:other-liquor-consumption-expenditure",
+      "title": "他の酒消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "011100080",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "011100080",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "c1af656d944b91ee"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-liquor-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-living-expenditure-total",
+      "pageId": "ranking:other-living-expenditure-total",
+      "title": "その他の消費支出",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "100000000",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "100000000",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "f3cc3d392d6305aa"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:other-living-expenditure-total",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-meat-consumption-expenditure",
+      "pageId": "ranking:other-meat-consumption-expenditure",
+      "title": "他の生鮮肉消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "010310050",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "010310050",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "edf1ce5a65fd44cd"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:other-meat-consumption-expenditure",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:household-food-spending",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "household-food-spending"
+      ]
+    },
+    {
+      "metricKey": "other-meat-consumption-quantity",
+      "pageId": "ranking:other-meat-consumption-quantity",
+      "title": "他の生鮮肉消費量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348235",
+          "filters": {
+            "cdCat01": "010310050",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348235",
+          "cdCat01": "010310050",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "f8f12f064eaffda9"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:other-meat-consumption-quantity",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:household-food-spending",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "household-food-spending"
+      ]
+    },
+    {
+      "metricKey": "other-medicine-consumption-expenditure",
+      "pageId": "ranking:other-medicine-consumption-expenditure",
+      "title": "他の医薬品消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "060100060",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "060100060",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "f7afb04b26fb77dc"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-medicine-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-mens-clothing-consumption-expenditure",
+      "pageId": "ranking:other-mens-clothing-consumption-expenditure",
+      "title": "他の男子用洋服消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "050210060",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "050210060",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "e6c6a6ec8af72417"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-mens-clothing-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-mens-shirt-consumption-expenditure",
+      "pageId": "ranking:other-mens-shirt-consumption-expenditure",
+      "title": "他の男子用シャツ消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "050310020",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "050310020",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "2ab81901ac0b1e9a"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-mens-shirt-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-mens-shirt-consumption-quantity",
+      "pageId": "ranking:other-mens-shirt-consumption-quantity",
+      "title": "他の男子用シャツ消費量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348235",
+          "filters": {
+            "cdCat01": "050310020",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348235",
+          "cdCat01": "050310020",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "bd4aecddafee7d36"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-mens-shirt-consumption-quantity",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-misc-expense-consumption-expenditure",
+      "pageId": "ranking:other-misc-expense-consumption-expenditure",
+      "title": "他の諸雑費のその他消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "100150110",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "100150110",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "533dbc158b955e4e"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-misc-expense-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-mushroom-consumption-expenditure",
+      "pageId": "ranking:other-mushroom-consumption-expenditure",
+      "title": "他のきのこ消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "010513100",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "010513100",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "41dde241df7a4f7e"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-mushroom-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-mushroom-consumption-quantity",
+      "pageId": "ranking:other-mushroom-consumption-quantity",
+      "title": "他のきのこ消費量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348235",
+          "filters": {
+            "cdCat01": "010513100",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348235",
+          "cdCat01": "010513100",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "00278b1dad4c933a"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-mushroom-consumption-quantity",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-non-savings-insurance-consumption-expenditure",
+      "pageId": "ranking:other-non-savings-insurance-consumption-expenditure",
+      "title": "他の非貯蓄型保険料消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "100150070",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "100150070",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "d5fe7bd48630f727"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-non-savings-insurance-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-noodle-dining-consumption-expenditure",
+      "pageId": "ranking:other-noodle-dining-consumption-expenditure",
+      "title": "他の麺類外食消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "011211030",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "011211030",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "89e3b6d7cc4bdc58"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-noodle-dining-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-noodles-consumption-expenditure",
+      "pageId": "ranking:other-noodles-consumption-expenditure",
+      "title": "他の麺類消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "010130070",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "010130070",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "ea365a14c56f508f"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:kagawa-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:other-noodles-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-noodles-consumption-quantity",
+      "pageId": "ranking:other-noodles-consumption-quantity",
+      "title": "他の麺類消費量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348235",
+          "filters": {
+            "cdCat01": "010130070",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348235",
+          "cdCat01": "010130070",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "641df498b6f7a00b"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-noodles-consumption-quantity",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-parking-fee-consumption-expenditure",
+      "pageId": "ranking:other-parking-fee-consumption-expenditure",
+      "title": "他の駐車場借料消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "070230070",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "070230070",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "9efba5c56a318f0a"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-parking-fee-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-personal-items-consumption-expenditure",
+      "pageId": "ranking:other-personal-items-consumption-expenditure",
+      "title": "他の身の回り用品消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "100133030",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "100133030",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "160cf96597d7108e"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-personal-items-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-pet-service-consumption-expenditure",
+      "pageId": "ranking:other-pet-service-consumption-expenditure",
+      "title": "他のペット関連サービス消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "090205020",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "090205020",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "a68af3022f266a21"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-pet-service-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-prepared-food-consumption-expenditure",
+      "pageId": "ranking:other-prepared-food-consumption-expenditure",
+      "title": "他の調理食品のその他消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "010920120",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "010920120",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "c11b8ee5956a6f7a"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-prepared-food-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-processed-fish-ext-consumption-expenditure",
+      "pageId": "ranking:other-processed-fish-ext-consumption-expenditure",
+      "title": "他の魚介加工品のその他消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "010240050",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "010240050",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "1b65700074b5bcbb"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-processed-fish-ext-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-processed-meat-consumption-expenditure",
+      "pageId": "ranking:other-processed-meat-consumption-expenditure",
+      "title": "他の加工肉消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "010320040",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "010320040",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "1eb0f71ac49f6609"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-processed-meat-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-publications-consumption-expenditure",
+      "pageId": "ranking:other-publications-consumption-expenditure",
+      "title": "他の印刷物消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "090300040",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "090300040",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "091daf1c66d87fbf"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-publications-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-remittance-consumption-expenditure",
+      "pageId": "ranking:other-remittance-consumption-expenditure",
+      "title": "他の仕送り金消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "100400020",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "100400020",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "5f57d1b329112d8c"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-remittance-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-rent-land-consumption-expenditure",
+      "pageId": "ranking:other-rent-land-consumption-expenditure",
+      "title": "他の家賃地代消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "020100050",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "020100050",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "7110989c07d8bb8f"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-rent-land-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-root-vegetables-consumption-expenditure",
+      "pageId": "ranking:other-root-vegetables-consumption-expenditure",
+      "title": "他の根菜消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "010512100",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "010512100",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "e0285570c3e86cf3"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-root-vegetables-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-root-vegetables-consumption-quantity",
+      "pageId": "ranking:other-root-vegetables-consumption-quantity",
+      "title": "他の根菜消費量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348235",
+          "filters": {
+            "cdCat01": "010512100",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348235",
+          "cdCat01": "010512100",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "8ace363c91d497cf"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-root-vegetables-consumption-quantity",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-salted-dried-fish-consumption-expenditure",
+      "pageId": "ranking:other-salted-dried-fish-consumption-expenditure",
+      "title": "他の塩干魚介消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "010220060",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "010220060",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "ad890b6577595196"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-salted-dried-fish-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-salted-dried-fish-consumption-quantity",
+      "pageId": "ranking:other-salted-dried-fish-consumption-quantity",
+      "title": "他の塩干魚介消費量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348235",
+          "filters": {
+            "cdCat01": "010220060",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348235",
+          "cdCat01": "010220060",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "c734a939752dbd32"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-salted-dried-fish-consumption-quantity",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-school-stationery-consumption-expenditure",
+      "pageId": "ranking:other-school-stationery-consumption-expenditure",
+      "title": "他の学習用文房具消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "090201050",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "090201050",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "1f5fd129a83b04ae"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-school-stationery-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-school-supplies-consumption-expenditure",
+      "pageId": "ranking:other-school-supplies-consumption-expenditure",
+      "title": "他の学習用消耗品消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "090201040",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "090201040",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "8d3b44f4cfe905c7"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-school-supplies-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-seasoning-consumption-expenditure",
+      "pageId": "ranking:other-seasoning-consumption-expenditure",
+      "title": "他の調味料消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "010720160",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "010720160",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "22495c0783cd87e4"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-seasoning-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-shellfish-consumption-expenditure",
+      "pageId": "ranking:other-shellfish-consumption-expenditure",
+      "title": "他の貝消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "010212050",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "010212050",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "7d0ccab5011041ae"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-shellfish-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-shellfish-consumption-quantity",
+      "pageId": "ranking:other-shellfish-consumption-quantity",
+      "title": "他の貝消費量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348235",
+          "filters": {
+            "cdCat01": "010212050",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348235",
+          "cdCat01": "010212050",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "73782d896ad98d0a"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-shellfish-consumption-quantity",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-soy-products-consumption-expenditure",
+      "pageId": "ranking:other-soy-products-consumption-expenditure",
+      "title": "他の大豆製品消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "010530040",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "010530040",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "332defc318fd2d78"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:shiga-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:other-soy-products-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-sports-equipment-consumption-expenditure",
+      "pageId": "ranking:other-sports-equipment-consumption-expenditure",
+      "title": "他の運動用具消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "090202020",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "090202020",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "827e850d5fad12aa"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-sports-equipment-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-sports-facility-consumption-expenditure",
+      "pageId": "ranking:other-sports-facility-consumption-expenditure",
+      "title": "他のスポーツ施設使用料消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "090442050",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "090442050",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "e68d4e049d57b547"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-sports-facility-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-staple-dining-consumption-expenditure",
+      "pageId": "ranking:other-staple-dining-consumption-expenditure",
+      "title": "他の主食的外食消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "011211100",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "011211100",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "a2c01207485eefc0"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-staple-dining-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-staple-prepared-consumption-expenditure",
+      "pageId": "ranking:other-staple-prepared-consumption-expenditure",
+      "title": "他の主食的調理食品消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "010910050",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "010910050",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "39028100e057dc2b"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-staple-prepared-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-stationery-consumption-expenditure",
+      "pageId": "ranking:other-stationery-consumption-expenditure",
+      "title": "他の文房具消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "090201060",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "090201060",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "733ba622ffed0e61"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-stationery-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-sweets-consumption-expenditure",
+      "pageId": "ranking:other-sweets-consumption-expenditure",
+      "title": "他の菓子消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "010800160",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "010800160",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "d41cb08a912edde5"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-sweets-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-tableware-consumption-expenditure",
+      "pageId": "ranking:other-tableware-consumption-expenditure",
+      "title": "他の食卓用品消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "040400020",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "040400020",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "a8f563c8d201d0c3"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-tableware-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-tea-leaves-consumption-expenditure",
+      "pageId": "ranking:other-tea-leaves-consumption-expenditure",
+      "title": "他の茶葉消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "011010030",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "011010030",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "922954888ea15f83"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-tea-leaves-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-tea-leaves-consumption-quantity",
+      "pageId": "ranking:other-tea-leaves-consumption-quantity",
+      "title": "他の茶葉消費量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348235",
+          "filters": {
+            "cdCat01": "011010030",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348235",
+          "cdCat01": "011010030",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "073e17042919e937"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-tea-leaves-consumption-quantity",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-topical-medicine-consumption-expenditure",
+      "pageId": "ranking:other-topical-medicine-consumption-expenditure",
+      "title": "他の外用薬消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "060100050",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "060100050",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "149bede821b747c3"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-topical-medicine-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-toys-consumption-expenditure",
+      "pageId": "ranking:other-toys-consumption-expenditure",
+      "title": "他の玩具消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "090203020",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "090203020",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "85e91eb085da14cb"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-toys-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-transport-consumption-expenditure",
+      "pageId": "ranking:other-transport-consumption-expenditure",
+      "title": "他の交通消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "070100100",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "070100100",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "356572e7f03befa8"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-transport-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-utilities-consumption-expenditure",
+      "pageId": "ranking:other-utilities-consumption-expenditure",
+      "title": "他の光熱のその他消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "030300020",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "030300020",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "5a8080d09ebbb6ab"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-utilities-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-vegetable-pickles-consumption-expenditure",
+      "pageId": "ranking:other-vegetable-pickles-consumption-expenditure",
+      "title": "他の野菜の漬物消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "010540050",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "010540050",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "380eb24f5a67ce80"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:kyoto-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:other-vegetable-pickles-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-vegetable-seaweed-processed-consumption-expenditure",
+      "pageId": "ranking:other-vegetable-seaweed-processed-consumption-expenditure",
+      "title": "他の野菜・海藻加工品のその他消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "010540080",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "010540080",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "a86eea3e0e711ea5"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-vegetable-seaweed-processed-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-vegetables-consumption-expenditure",
+      "pageId": "ranking:other-vegetables-consumption-expenditure",
+      "title": "他の野菜のその他消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "010513110",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "010513110",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "85dc054c196d4cff"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-vegetables-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-vegetables-consumption-quantity",
+      "pageId": "ranking:other-vegetables-consumption-quantity",
+      "title": "他の野菜のその他消費量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348235",
+          "filters": {
+            "cdCat01": "010513110",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348235",
+          "cdCat01": "010513110",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "5ed9e2800a60ff1b"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-vegetables-consumption-quantity",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-western-sweets-consumption-expenditure",
+      "pageId": "ranking:other-western-sweets-consumption-expenditure",
+      "title": "他の洋生菓子消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "010800080",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "010800080",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "cf1a6df3cd3684b4"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:osaka-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:other-western-sweets-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-womens-clothing-consumption-expenditure",
+      "pageId": "ranking:other-womens-clothing-consumption-expenditure",
+      "title": "他の婦人用洋服消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "050220070",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "050220070",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "e0b9662c060f4aff"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-womens-clothing-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-womens-shirt-consumption-expenditure",
+      "pageId": "ranking:other-womens-shirt-consumption-expenditure",
+      "title": "他の婦人用シャツ消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "050320020",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "050320020",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "d714016c63a6a55f"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-womens-shirt-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-womens-shirt-consumption-quantity",
+      "pageId": "ranking:other-womens-shirt-consumption-quantity",
+      "title": "他の婦人用シャツ消費量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348235",
+          "filters": {
+            "cdCat01": "050320020",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348235",
+          "cdCat01": "050320020",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "71806da08a17a31b"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-womens-shirt-consumption-quantity",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "other-womens-underwear-consumption-expenditure",
+      "pageId": "ranking:other-womens-underwear-consumption-expenditure",
+      "title": "他の婦人用下着消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "050420020",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "050420020",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "83ed6cefd0d676ec"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:other-womens-underwear-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "outflow-commuter-student-population",
+      "pageId": "ranking:outflow-commuter-student-population",
+      "title": "流出人口（他県で従業・通学している人口）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010101",
+          "filters": {
+            "cdCat01": "A6104"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010101",
+          "cdCat01": "A6104"
+        },
+        "derived": false,
+        "configHash": "114a35c608698885"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "municipality-ranking:outflow-commuter-student-population",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:migration",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:outflow-commuter-student-population",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "outflow-population-ratio",
+      "pageId": "ranking:outflow-population-ratio",
+      "title": "流出人口比率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010201",
+          "filters": {
+            "cdCat01": "#A05305"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010201",
+          "cdCat01": "#A05305"
+        },
+        "derived": false,
+        "configHash": "4274b5b04fc84c6b"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:outflow-population-ratio",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "outpatient-count",
+      "pageId": "ranking:outpatient-count",
+      "title": "通院者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010109",
+          "filters": {
+            "cdCat01": "I8104"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010109",
+          "cdCat01": "I8104"
+        },
+        "derived": false,
+        "configHash": "1dace0603203503b"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:outpatient-count",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "outpatient-rate-per-1000",
+      "pageId": "ranking:outpatient-rate-per-1000",
+      "title": "通院者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010209",
+          "filters": {
+            "cdCat01": "#I04104"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010209",
+          "cdCat01": "#I04104"
+        },
+        "derived": false,
+        "configHash": "f541b0d8ca62cafb"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:outpatient-rate-per-1000",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "outpatient-rate-per-100k",
+      "pageId": "ranking:outpatient-rate-per-100k",
+      "title": "外来受療率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004026104",
+          "filters": {
+            "cdCat01": "1",
+            "cdCat02": "1",
+            "cdCat04": "4"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0004026104",
+          "cdCat01": "1",
+          "cdCat02": "1",
+          "cdCat04": "4"
+        },
+        "ops": {
+          "areaAxis": {
+            "axis": "cat03",
+            "scheme": "seq-pref"
+          }
+        },
+        "derived": true,
+        "configHash": "a2c5f6e169269458"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:healthcare",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:inpatient-rate-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:outpatient-rate-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:outpatient-rate-per-100k",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:healthcare",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "healthcare"
+      ]
+    },
+    {
+      "metricKey": "outpatients-per-fulltime-physician-per-day",
+      "pageId": "ranking:outpatients-per-fulltime-physician-per-day",
+      "title": "一般病院外来患者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010209",
+          "filters": {
+            "cdCat01": "#I10106"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010209",
+          "cdCat01": "#I10106"
+        },
+        "derived": false,
+        "configHash": "ced57f1bd38bf80c"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:outpatients-per-fulltime-physician-per-day",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "overseas-package-tour-consumption-expenditure",
+      "pageId": "ranking:overseas-package-tour-consumption-expenditure",
+      "title": "外国パック旅行費消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "090420020",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "090420020",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "ff2bc52b6c78fd90"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:accommodation-expenditure-ranking",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:overseas-package-tour-consumption-expenditure",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:household-food-spending",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "household-food-spending"
+      ]
+    },
+    {
+      "metricKey": "overseas-travel-annual-participation-rate-10plus",
+      "pageId": "ranking:overseas-travel-annual-participation-rate-10plus",
+      "title": "海外旅行の年間行動者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010207",
+          "filters": {
+            "cdCat01": "#G043071"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010207",
+          "cdCat01": "#G043071"
+        },
+        "derived": false,
+        "configHash": "c5b12c1c2764cc8f"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:overseas-travel-annual-participation-rate-10plus",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "overseas-travel-annual-participation-rate-15plus",
+      "pageId": "ranking:overseas-travel-annual-participation-rate-15plus",
+      "title": "海外旅行の年間行動者率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010207",
+          "filters": {
+            "cdCat01": "#G04307"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010207",
+          "cdCat01": "#G04307"
+        },
+        "derived": false,
+        "configHash": "8c4bbf6d9813a20a"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:international-cooperation-volunteer-map",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:overseas-travel-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:overseas-travel-annual-participation-rate-15plus",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "overtime-pay-admin-prefecture",
+      "pageId": "ranking:overtime-pay-admin-prefecture",
+      "title": "一般行政職 時間外勤務手当",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "fetcherKey": "local-public-employee-salary",
+        "configHash": "eb96632751df9750"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:overtime-pay-admin-prefecture",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "owner-occupied-housing-ratio",
+      "pageId": "ranking:owner-occupied-housing-ratio",
+      "title": "持ち家比率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010208",
+          "filters": {
+            "cdCat01": "#H01301"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010208",
+          "cdCat01": "#H01301"
+        },
+        "derived": false,
+        "configHash": "a6ed608c5ee3d667"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:living-housing",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area:01000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:02000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:03000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:04000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:05000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:06000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:07000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:08000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:09000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:10000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:11000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:12000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:13000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:14000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:15000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:16000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:17000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:18000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:19000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:20000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:21000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:22000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:23000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:24000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:25000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:26000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:27000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:28000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:29000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:30000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:31000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:32000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:33000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:34000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:35000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:36000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:37000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:38000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:39000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:40000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:41000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:42000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:43000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:44000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:45000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:46000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:47000",
+          "kind": "area"
+        },
+        {
+          "pageId": "blog:homeownership-vacancy-four-types",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:housing-cost-livability-trend",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:livable-prefecture-composite-ranking",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:solar-panel-housing-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "japan-theme:living-housing",
+          "kind": "japan-theme"
+        },
+        {
+          "pageId": "municipality-ranking:owner-occupied-housing-ratio",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "municipality-theme:housing",
+          "kind": "municipality-theme"
+        },
+        {
+          "pageId": "ranking:owner-occupied-housing-ratio",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:living-housing",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "living-housing"
+      ]
+    },
+    {
+      "metricKey": "oyster-consumption-expenditure",
+      "pageId": "ranking:oyster-consumption-expenditure",
+      "title": "かき(貝)消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "010212030",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "010212030",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "9279149719af5f10"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:bonito-vs-oyster-fish-map",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:fukushima-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:hiroshima-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:hyogo-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:kagawa-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:mie-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:miyagi-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:okayama-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:tottori-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:wakayama-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:oyster-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "oyster-consumption-quantity",
+      "pageId": "ranking:oyster-consumption-quantity",
+      "title": "かき(貝)消費量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348235",
+          "filters": {
+            "cdCat01": "010212030",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348235",
+          "cdCat01": "010212030",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "a21f40b38849b6b4"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:household-food-spending",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "blog:fukushima-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:hiroshima-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:hyogo-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:kagawa-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:mie-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:miyagi-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:okayama-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:oyster-consumption-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:tottori-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:wakayama-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:oyster-consumption-quantity",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:household-food-spending",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "household-food-spending"
+      ]
+    },
+    {
+      "metricKey": "pachinko-shop-density-per-10k",
+      "pageId": "ranking:pachinko-shop-density-per-10k",
+      "title": "パチンコ店舗数",
+      "sources": [],
+      "recipe": {
+        "kind": "external",
+        "derived": false,
+        "refetch": {
+          "sourceUrl": "https://www.zennichiyuren.or.jp/material/report/8.html"
+        },
+        "fetcherKey": "manual",
+        "configHash": "08d564c29a093561"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:pachinko-education-cost",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:pachinko-shop-density-per-10k-vs-dependent-population-index",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:pachinko-shop-density-per-10k-vs-high-school-education-cost",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:pachinko-shop-density-per-10k",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "paid-nursing-home-capacity-per-1000-65plus",
+      "pageId": "ranking:paid-nursing-home-capacity-per-1000-65plus",
+      "title": "有料老人ホーム定員数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010210",
+          "filters": {
+            "cdCat01": "#J04203"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010210",
+          "cdCat01": "#J04203"
+        },
+        "derived": false,
+        "configHash": "bc283e63307b8c20"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:paid-nursing-home-capacity-per-1000-65plus",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "paid-nursing-home-count-per-100k-65plus",
+      "pageId": "ranking:paid-nursing-home-count-per-100k-65plus",
+      "title": "有料老人ホーム数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010210",
+          "filters": {
+            "cdCat01": "#J02204"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010210",
+          "cdCat01": "#J02204"
+        },
+        "derived": false,
+        "configHash": "9b6d97bef6c269f5"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:paid-nursing-home-count-per-100k-65plus",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "paid-nursing-home-residents-per-1000-65plus",
+      "pageId": "ranking:paid-nursing-home-residents-per-1000-65plus",
+      "title": "有料老人ホーム在所者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010210",
+          "filters": {
+            "cdCat01": "#J04204"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010210",
+          "cdCat01": "#J04204"
+        },
+        "derived": false,
+        "configHash": "02aacee05822e6e3"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:paid-nursing-home-residents-per-1000-65plus",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "paper-diapers-consumption-expenditure",
+      "pageId": "ranking:paper-diapers-consumption-expenditure",
+      "title": "紙おむつ消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "060300010",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "060300010",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "f87b196a35140149"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:paper-diapers-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "part-time-employment-rate-regular",
+      "pageId": "ranking:part-time-employment-rate-regular",
+      "title": "パートタイム就職率",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010206",
+          "filters": {
+            "cdCat01": "#F0320101"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010206",
+          "cdCat01": "#F0320101"
+        },
+        "derived": false,
+        "configHash": "c368d456ea0c8391"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:part-time-employment-rate-regular",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "passenger-ship-transport",
+      "pageId": "ranking:passenger-ship-transport",
+      "title": "旅客船輸送人員",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010103",
+          "filters": {
+            "cdCat01": "C3707"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010103",
+          "cdCat01": "C3707"
+        },
+        "derived": false,
+        "configHash": "75b1baf03af04c5b"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "japan-theme:ports",
+          "kind": "japan-theme"
+        },
+        {
+          "pageId": "ranking:passenger-ship-transport",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:ports",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "ports"
+      ]
+    },
+    {
+      "metricKey": "passport-issuance-count-per-thousand",
+      "pageId": "ranking:passport-issuance-count-per-thousand",
+      "title": "一般旅券発行件数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010207",
+          "filters": {
+            "cdCat01": "#G0430501"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010207",
+          "cdCat01": "#G0430501"
+        },
+        "derived": false,
+        "configHash": "5461dcaee18c0e95"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:passport-issuance-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:travel-behavior-gender-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:passport-issuance-count-per-thousand",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "pasta-consumption-expenditure",
+      "pageId": "ranking:pasta-consumption-expenditure",
+      "title": "パスタ消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "010130030",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "010130030",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "556f4fe0fb9b4723"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:tokyo-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:pasta-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "pasta-consumption-quantity",
+      "pageId": "ranking:pasta-consumption-quantity",
+      "title": "パスタ消費量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348235",
+          "filters": {
+            "cdCat01": "010130030",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348235",
+          "cdCat01": "010130030",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "c75120acbbc1a4b7"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:other-bread-consumption-quantity",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:pasta-consumption-quantity",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:pasta-consumption-quantity",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "patent-application-count",
+      "pageId": "ranking:patent-application-count",
+      "title": "特許出願件数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003398336",
+          "filters": {
+            "cdCat01": "100",
+            "cdCat02": "100"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003398336",
+          "cdCat01": "100",
+          "cdCat02": "100"
+        },
+        "derived": false,
+        "configHash": "98c9b779d2190922"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:patent-application-count",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:innovation-patents",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "innovation-patents"
+      ]
+    },
+    {
+      "metricKey": "patent-inventor-count",
+      "pageId": "ranking:patent-inventor-count",
+      "title": "特許出願の延べ発明者数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003398338",
+          "filters": {
+            "cdCat01": "100"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003398338",
+          "cdCat01": "100"
+        },
+        "derived": false,
+        "configHash": "3abd9db92bdab7fa"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:patent-inventor-count",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:innovation-patents",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "innovation-patents"
+      ]
+    },
+    {
+      "metricKey": "patent-registration-count",
+      "pageId": "ranking:patent-registration-count",
+      "title": "特許登録件数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003398337",
+          "filters": {
+            "cdCat01": "100"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0003398337",
+          "cdCat01": "100"
+        },
+        "derived": false,
+        "configHash": "99c624e87fd8c31b"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:innovation-patents",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "ranking:patent-registration-count",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:innovation-patents",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "innovation-patents"
+      ]
+    },
+    {
+      "metricKey": "patient-receiving-rate-by-age",
+      "pageId": null,
+      "title": "受療率（性年齢別総数・入院総数）（患者調査）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004026104",
+          "filters": {
+            "cdCat01": "1",
+            "cdCat02": "1",
+            "cdCat04": "1"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0004026104",
+          "cdCat01": "1",
+          "cdCat02": "1",
+          "cdCat04": "1"
+        },
+        "ops": {
+          "areaAxis": {
+            "axis": "cat03",
+            "scheme": "seq-pref"
+          }
+        },
+        "derived": true,
+        "configHash": "1779d53ce4fd235f"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:patient-receiving-rate-by-age",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "patient-receiving-rate-by-disease",
+      "pageId": null,
+      "title": "受療率（総数・入院総数）（患者調査）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0004026105",
+          "filters": {
+            "cdCat01": "1",
+            "cdCat03": "1"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0004026105",
+          "cdCat01": "1",
+          "cdCat03": "1"
+        },
+        "ops": {
+          "areaAxis": {
+            "axis": "cat02",
+            "scheme": "seq-pref"
+          }
+        },
+        "derived": true,
+        "configHash": "a139010d0c024168"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:patient-receiving-rate-by-disease",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "paved-road-main-length",
+      "pageId": "ranking:paved-road-main-length",
+      "title": "舗装道路実延長（主要道路）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010108",
+          "filters": {
+            "cdCat01": "H7121"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010108",
+          "cdCat01": "H7121"
+        },
+        "derived": false,
+        "configHash": "eae79f0c3250796f"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:campsite-public-vs-paved-road-main-length",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:paved-road-main-length",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "paved-road-municipal-length",
+      "pageId": "ranking:paved-road-municipal-length",
+      "title": "舗装道路実延長（市町村道）",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010108",
+          "filters": {
+            "cdCat01": "H7122"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010108",
+          "cdCat01": "H7122"
+        },
+        "derived": false,
+        "configHash": "965fc94f3d77d364"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:paved-road-municipal-length",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "paved-road-total-length",
+      "pageId": "ranking:paved-road-total-length",
+      "title": "舗装道路実延長",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010108",
+          "filters": {
+            "cdCat01": "H7120"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010108",
+          "cdCat01": "H7120"
+        },
+        "derived": false,
+        "configHash": "53b3ddc1532b6d1a"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:paved-road-total-length",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:paved-road-total-length",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "pc-ownership-multi-person-households-per-1000",
+      "pageId": "ranking:pc-ownership-multi-person-households-per-1000",
+      "title": "パソコン所有数量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010212",
+          "filters": {
+            "cdCat01": "#L03613"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010212",
+          "cdCat01": "#L03613"
+        },
+        "derived": false,
+        "configHash": "52f2108dd8313e32"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:ict-digital-divide-composite-analysis",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:pc-ownership-multi-person-households-per-1000",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "peach-consumption-expenditure",
+      "pageId": "ranking:peach-consumption-expenditure",
+      "title": "桃消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "010610090",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "010610090",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "bcbad77322319c0c"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:fukushima-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:kagawa-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:mie-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:nagano-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:okayama-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:peach-expenditure-ranking",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:wakayama-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamanashi-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:peach-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "peach-consumption-quantity",
+      "pageId": "ranking:peach-consumption-quantity",
+      "title": "桃消費量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348235",
+          "filters": {
+            "cdCat01": "010610090",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348235",
+          "cdCat01": "010610090",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "4870f85729fe5178"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:fukushima-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:kagawa-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:mie-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:nagano-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:okayama-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:peach-consumption-quantity-vs-disaster-relief-expenses",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:wakayama-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamanashi-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:peach-consumption-quantity",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "pear-consumption-expenditure",
+      "pageId": "ranking:pear-consumption-expenditure",
+      "title": "梨消費支出額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348239",
+          "filters": {
+            "cdCat01": "010610060",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348239",
+          "cdCat01": "010610060",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "22341e8c3ccba8d7"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:gunma-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:kagawa-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:niigata-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:pear-consumption-expenditure-prefecture-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:shimane-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:tochigi-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:tottori-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamagata-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamaguchi-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamanashi-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:pear-consumption-expenditure",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "pear-consumption-quantity",
+      "pageId": "ranking:pear-consumption-quantity",
+      "title": "梨消費量",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0003348235",
+          "filters": {
+            "cdCat01": "010610060",
+            "cdCat02": "03"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "kakei-chousa",
+        "estatParams": {
+          "statsDataId": "0003348235",
+          "cdCat01": "010610060",
+          "cdCat02": "03"
+        },
+        "ops": {
+          "areaRemap": "kakei-capital-city"
+        },
+        "derived": true,
+        "configHash": "b36d4ec049d8a32b"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "blog:gunma-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:kagawa-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:niigata-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:shimane-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:tochigi-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:tottori-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamagata-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:yamaguchi-food-culture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:pear-consumption-quantity",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "penal-code-offenses-recognized-per-1000",
+      "pageId": "ranking:penal-code-offenses-recognized-per-1000",
+      "title": "刑法犯認知件数",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010211",
+          "filters": {
+            "cdCat01": "#K06101"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010211",
+          "cdCat01": "#K06101"
+        },
+        "derived": false,
+        "configHash": "ed9ae5b81200b973"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "area-theme:01000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:02000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:03000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:04000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:05000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:06000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:07000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:08000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:09000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:10000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:11000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:12000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:13000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:14000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:15000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:16000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:17000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:18000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:19000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:20000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:21000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:22000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:23000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:24000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:25000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:26000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:27000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:28000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:29000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:30000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:31000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:32000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:33000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:34000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:35000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:36000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:37000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:38000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:39000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:40000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:41000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:42000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:43000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:44000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:45000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:46000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area-theme:47000:safety",
+          "kind": "area-theme"
+        },
+        {
+          "pageId": "area:01000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:02000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:03000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:04000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:05000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:06000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:07000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:08000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:09000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:10000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:11000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:12000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:13000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:14000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:15000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:16000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:17000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:18000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:19000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:20000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:21000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:22000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:23000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:24000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:25000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:26000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:27000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:28000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:29000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:30000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:31000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:32000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:33000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:34000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:35000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:36000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:37000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:38000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:39000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:40000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:41000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:42000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:43000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:44000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:45000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:46000",
+          "kind": "area"
+        },
+        {
+          "pageId": "area:47000",
+          "kind": "area"
+        },
+        {
+          "pageId": "blog:cc-estat-09-radar-prefecture",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:cc-estat-15-crime-small-multiple",
+          "kind": "blog"
+        },
+        {
+          "pageId": "blog:police-officer-density-vs-crime-gap",
+          "kind": "blog"
+        },
+        {
+          "pageId": "japan-theme:safety",
+          "kind": "japan-theme"
+        },
+        {
+          "pageId": "municipality-ranking:penal-code-offenses-recognized-per-1000",
+          "kind": "municipality-ranking"
+        },
+        {
+          "pageId": "ranking:penal-code-offenses-recognized-per-1000",
+          "kind": "ranking"
+        },
+        {
+          "pageId": "theme:safety",
+          "kind": "theme"
+        }
+      ],
+      "themes": [
+        "safety"
+      ]
+    },
+    {
+      "metricKey": "pension-benefit-total",
+      "pageId": "ranking:pension-benefit-total",
+      "title": "厚生年金受給権者年金総額",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010110",
+          "filters": {
+            "cdCat01": "J5104"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010110",
+          "cdCat01": "J5104"
+        },
+        "derived": false,
+        "configHash": "0a1d2fbae26e3ae1"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:pension-benefit-total",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "per-capita-child-welfare-expenditure-under17-pref-municipal",
+      "pageId": "ranking:per-capita-child-welfare-expenditure-under17-pref-municipal",
+      "title": "児童福祉費",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010204",
+          "filters": {
+            "cdCat01": "#D0330503"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010204",
+          "cdCat01": "#D0330503"
+        },
+        "derived": false,
+        "configHash": "94f64329fddb1e9e"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "blog:childcare-friendly-prefecture-ranking",
+          "kind": "blog"
+        },
+        {
+          "pageId": "ranking:per-capita-child-welfare-expenditure-under17-pref-municipal",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "per-capita-disaster-recovery-expenditure-pref-municipal",
+      "pageId": "ranking:per-capita-disaster-recovery-expenditure-pref-municipal",
+      "title": "災害復旧費",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010204",
+          "filters": {
+            "cdCat01": "#D0332103"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010204",
+          "cdCat01": "#D0332103"
+        },
+        "derived": false,
+        "configHash": "37cb1037e8d04490"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [],
+      "consumers": [
+        {
+          "pageId": "ranking:per-capita-disaster-recovery-expenditure-pref-municipal",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    },
+    {
+      "metricKey": "per-capita-education-expenditure-pref-municipal",
+      "pageId": "ranking:per-capita-education-expenditure-pref-municipal",
+      "title": "教育費",
+      "sources": [
+        {
+          "role": "primary",
+          "statsDataId": "0000010204",
+          "filters": {
+            "cdCat01": "#D0331403"
+          }
+        }
+      ],
+      "recipe": {
+        "kind": "estat",
+        "estatParams": {
+          "statsDataId": "0000010204",
+          "cdCat01": "#D0331403"
+        },
+        "derived": false,
+        "configHash": "a617b3cff5122c04"
+      },
+      "dependencies": [],
+      "normalizationDependencies": [
+        "total-area-including-northern-territories-and-takeshima",
+        "total-population"
+      ],
+      "consumers": [
+        {
+          "pageId": "ranking:per-capita-education-expenditure-pref-municipal",
+          "kind": "ranking"
+        }
+      ],
+      "themes": []
+    }
+  ]
+}

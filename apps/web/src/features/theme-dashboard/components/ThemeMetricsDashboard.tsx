@@ -146,6 +146,7 @@ export function ThemeMetricsDashboard({
       const total = d.rankingValues.length;
       const configSource = readSourceConfigRef(d.rankingItem.sourceConfig);
       const source = {
+        trendDomain: d.rankingItem.visualization.trendDomain,
         sourceName:
           d.rankingItem.attribution?.compilation?.name ?? configSource.name,
         sourceLink:

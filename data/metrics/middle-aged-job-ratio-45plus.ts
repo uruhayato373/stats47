@@ -1,0 +1,67 @@
+import { DEFAULT_METRIC_PRESENTATION } from "./defaults/presentation";
+import type { MetricConfig } from "../../packages/data-configs/src/types";
+
+export const middleAgedJobRatio45plus: MetricConfig = {
+  "key": "middle-aged-job-ratio-45plus",
+  "title": "就職者に占める中高年齢者の比率",
+  "unit": "％",
+  "category": "laborwage",
+  "source": {
+    "kind": "estat",
+    "statsDataId": "0000010206",
+    "cdCat01": "#F0350201",
+    "displayName": "社会・人口統計体系",
+    "url": "https://www.stat.go.jp/data/ssds/index.htm",
+  },
+  "entities": [
+    "prefecture",
+  ],
+  "years": {
+    "years": [
+      1982,
+      1983,
+      1984,
+      1985,
+      1986,
+      1987,
+      1988,
+      1989,
+      1990,
+      1991,
+      1992,
+      2003,
+      2004,
+      2005,
+      2006,
+      2007,
+      2008,
+      2009,
+      2010,
+      2011,
+      2012,
+      2013,
+      2014,
+      2015,
+      2016,
+      2017,
+      2018,
+    ],
+  },
+  "yearFormat": "fiscal",
+  "visualization": {
+    ...DEFAULT_METRIC_PRESENTATION,
+    "colorScheme": "interpolateBlues",
+    "colorSchemeType": "sequential",
+    "isReversed": false,
+  },
+  "display": {
+    "conversionFactor": 1,
+    "decimalPlaces": 1,
+  },
+  "calculation": {
+    "isCalculated": false,
+  },
+  "seoTitle": "就職者に占める中高年齢者の比率ランキング都道府県【2018年】｜1位神奈川県（48％）",
+  "seoDescription": "2018年の就職者に占める中高年齢者の比率の都道府県別ランキング。1位神奈川県（48％）、最下位新潟県（33.8％）で1.4倍の格差。地図やグラフで47都道府県を比較。",
+  "isActive": true,
+};

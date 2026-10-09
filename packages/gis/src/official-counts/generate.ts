@@ -7,8 +7,8 @@ import path from 'node:path';
 
 import { JSDOM } from 'jsdom';
 
-import { roadsideStationCount } from '../../../data-configs/src/metrics/roadside-station-count';
-import { fishingPortCountKsj } from '../../../data-configs/src/metrics/fishing-port-count-ksj';
+import { roadsideStationCount } from '../../../../data/metrics/roadside-station-count';
+import { fishingPortCountKsj } from '../../../../data/metrics/fishing-port-count-ksj';
 import { buildRecipe } from '../../../data-configs/src/recipe';
 import { buildStatsPayload } from '../mlit-ksj/ksj-stats-core';
 import {

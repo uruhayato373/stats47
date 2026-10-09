@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "agricultural-output",
+  "year": "2014",
+  "unit": "百万円",
+  "label": "農業産出額",
+  "readerLabel": "農業産出額",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/agricultural-output/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug agriculture-output-employment-productivity-gap --keys agricultural-output --year 2014 --data-name agricultural-output-2014-ranking",
+  "fetchedAt": "2026-10-09T06:11:50.929Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

@@ -8,7 +8,8 @@ import type { ThemeIndicatorData } from '../../types';
 import type { MetricKpi } from '../metric-kpi';
 
 const metric = (key: string): MetricKpi => ({
-  metricKey: key, title: key === 'first' ? '元請完成工事高' : '下請完成工事高',
+  metricKey: key,
+  trendDomain: {mode: "extent", padding: 0.08}, title: key === 'first' ? '元請完成工事高' : '下請完成工事高',
   unit: '百万円', value: null, rank: null, total: 47, series: [], topRanked: null, isLoading: false,
 });
 const values = (year: string, multiplier = 1) => Array.from({ length: 47 }, (_, index) => ({

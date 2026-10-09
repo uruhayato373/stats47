@@ -19,7 +19,8 @@ import type {
   MixedChartData,
 } from '@/components/stat-charts/types/visualization';
 
-import { aggregateMetricTimeseries } from '../lib/aggregate-metric-timeseries';
+import { aggregateMetricTimeseries } from '@/lib/aggregate-metric-timeseries';
+import {resolveMetricAxisPolicy} from '@/lib/metric-axis-policy';
 
 import {
   parseThemeDbChartComponentProps,
@@ -30,7 +31,7 @@ import {
   type MixedChartComponentProps,
 } from './theme-chart-props';
 
-import type { StatsSchema } from '@stats47/types';
+import type { NumericDomainPolicy, StatsSchema } from '@stats47/types';
 
 /** ドーナツチャート用データ */
 export interface DonutChartItem {
@@ -56,11 +57,12 @@ export interface CpiHeatmapItem {
 type ChartResult =
   | {
       type: 'line';
+      axisPolicies: {left: NumericDomainPolicy; right: NumericDomainPolicy};
       data: LineChartData;
       contract: ThemeChartDataContract;
       showLatestValues?: boolean;
     }
-  | { type: 'mixed'; data: MixedChartData; contract: ThemeChartDataContract }
+  | { type: 'mixed'; axisPolicies: {left: NumericDomainPolicy; right: NumericDomainPolicy}; data: MixedChartData; contract: ThemeChartDataContract }
   | {
       type: 'composition';
       data: CompositionChartData;
@@ -236,6 +238,7 @@ async function fetchR2LineData(
     }));
     return {
       type: 'line',
+      axisPolicies: {left: await resolveMetricAxisPolicy(refs.filter((_,index)=>chartData.lines[index].yAxis !== 'right'), props.yAxisConfig), right: await resolveMetricAxisPolicy(refs.filter((_,index)=>chartData.lines[index].yAxis === 'right'))},
       data: chartData,
       contract: lineContract(chartData, rawDataList as StatsSchema[][]),
       showLatestValues: props.showLatestValues,
@@ -320,6 +323,7 @@ async function fetchR2MixedData(
   const last = chartData.data.at(-1);
   return {
     type: 'mixed',
+    axisPolicies: {left: await resolveMetricAxisPolicy(columnRefs), right: await resolveMetricAxisPolicy(lineRefs)},
     data: chartData,
     contract: {
       unit: [chartData.leftUnit, chartData.rightUnit]
@@ -352,14 +356,11 @@ async function fetchCompositionData(
         .size !== 1
     )
       return null;
-    const labels = props.seriesRefs.map(
-      (ref, index) =>
-        ref.label ?? props.segments?.[index]?.label ?? ref.metricKey
-    );
-    const colors = props.seriesRefs.map((ref, index) =>
+    const labels = props.seriesRefs.map(ref => ref.label ?? ref.metricKey);
+    const colors = props.seriesRefs.map((ref) =>
       ref.colorRole
         ? resolveChartColorHex(ref.colorRole)
-        : (props.segments?.[index]?.color ?? resolveChartColorHex('series-1'))
+        : resolveChartColorHex('series-1')
     );
     const chartData = toCompositionChartData(rows, labels, colors);
     return chartData.trendData.length > 0
@@ -418,12 +419,11 @@ async function fetchDonutData(
         {
           item: {
             name:
-              ref.label ?? props.categories?.[index]?.label ?? ref.metricKey,
+              ref.label ?? ref.metricKey,
             value: latest.value,
             color: ref.colorRole
               ? resolveChartColorHex(ref.colorRole)
-              : (props.categories?.[index]?.color ??
-                resolveChartColorHex('series-1')),
+              : resolveChartColorHex('series-1'),
           },
           year: latest.yearName || latest.yearCode,
           unit: latest.unit ?? '',

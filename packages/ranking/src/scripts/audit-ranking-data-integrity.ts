@@ -1,3 +1,4 @@
+import { datasetDir } from "../../../../config/datasets.mjs";
 /**
  * audit-ranking-data-integrity — ranking 配信 (R2) の実データ整合性を live 実測で監査する。
  *
@@ -814,8 +815,8 @@ async function main() {
     (c) => c.source.kind === "external" && c.source.fetcherKey === "calculated" && c.isActive,
   )) {
     const calc = config.calculation;
-    const numeratorKey = calc?.numeratorKey ?? calc?.numeratorRankingKey ?? calc?.numerator;
-    const denominatorKey = calc?.denominatorKey ?? calc?.denominatorRankingKey ?? calc?.denominator;
+    const numeratorKey = calc?.numeratorKey;
+    const denominatorKey = calc?.denominatorKey;
     if (!numeratorKey || !denominatorKey) {
       calculated.depsMissing.push({ key: config.key, dep: "(分子/分母キー未設定)" });
       continue;
@@ -1037,7 +1038,7 @@ async function main() {
   if (shape.violations.length > 0) {
     console.log(
       `  → 是正: 未指定の分類軸を diagnose-unpinned-axes.ts で列挙して config に pin する。` +
-        `既知の是正待ちなら packages/data-configs/src/expected-shape-anomaly.ts に登録`,
+        `既知の是正待ちなら ${datasetDir("metrics.quality")}/shape-exceptions.ts に登録`,
     );
   }
 

@@ -97,65 +97,14 @@ test("--limit は正の整数だけを受理し、0・負数・NaN・小数を�
   }
 });
 
-test("依存mirrorのe-Stat/R2 schema・key・件数を検証する", () => {
-  assert.deepEqual(
-    parseDependencyMirror({
-      distinctRequests: 1,
-      requests: [mirrorRequest],
-      distinctMetricRefs: 1,
-      metrics: [mirrorMetric],
-    }),
-    {
-      distinctExpected: 2,
-      requests: [
-        {
-          key: mirrorRequest.key,
-          theme: "population",
-          componentKey: "trend",
-          componentType: "line-chart",
-          params: { statsDataId: "0000000001", cdCat01: "A" },
-        },
-      ],
-      metrics: [
-        {
-          key: "r2:total-population",
-          metricKey: "total-population",
-          expectedUnit: "人",
-          expectedConfigHash: "0123456789abcdef",
-          theme: "population",
-          componentKey: "trend",
-          componentType: "line-chart",
-        },
-      ],
-    },
-  );
-  assert.throws(
-    () => parseDependencyMirror({ distinctRequests: 2, requests: [mirrorRequest] }),
-    /count mismatch/,
-  );
-  assert.throws(
-    () =>
-      parseDependencyMirror({
-        distinctRequests: 2,
-        requests: [mirrorRequest, { ...mirrorRequest, themeKey: "other" }],
-      }),
-    /duplicate request key/,
-  );
-  assert.throws(
-    () => parseDependencyMirror({ distinctRequests: 1, requests: [{ ...mirrorRequest, key: "wrong" }] }),
-    /key does not match/,
-  );
-  assert.throws(
-    () =>
-      parseDependencyMirror({
-        distinctRequests: 0,
-        requests: [],
-        distinctMetricRefs: 2,
-        metrics: [mirrorMetric],
-      }),
-    /metric count mismatch/,
-  );
-  assert.equal(requestKey("2", { cdCat02: "B", cdCat01: "A" }), "2?cdCat01=A&cdCat02=B");
+test("依存mirrorは登録metric参照だけを受理する", () => {
+ const parsed=parseDependencyMirror({distinctMetricRefs:1,metrics:[mirrorMetric]});
+ assert.equal(parsed.distinctExpected,1);assert.equal(parsed.metrics[0].key,"r2:total-population");
+ assert.throws(()=>parseDependencyMirror({distinctMetricRefs:1,metrics:[mirrorMetric],requests:[mirrorRequest]}),/metrics\[\] only/);
+ assert.throws(()=>parseDependencyMirror({distinctMetricRefs:2,metrics:[mirrorMetric]}),/metric count mismatch/);
+ assert.throws(()=>parseDependencyMirror({distinctMetricRefs:2,metrics:[mirrorMetric,mirrorMetric]}),/duplicate metric key/);
+ assert.throws(()=>parseDependencyMirror({distinctMetricRefs:1,metrics:[{...mirrorMetric,expectedConfigHash:"broken"}]}),/expectedConfigHash is invalid/);
+ assert.equal(requestKey("2",{cdCat02:"B",cdCat01:"A"}),"2?cdCat01=A&cdCat02=B");
 });
 
 test("R2 stats payloadはunit・area meta・recipe hashを同時に検証する", () => {

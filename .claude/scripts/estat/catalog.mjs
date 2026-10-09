@@ -1,3 +1,4 @@
+import { METRIC_LINKAGE } from '../../../config/paths.mjs';
 #!/usr/bin/env node
 /**
  * e-Stat メタデータ完全カタログ CLI。
@@ -322,6 +323,9 @@ async function cmdPull() {
 }
 
 async function cmdSearch(args) {
+  const linkagePath = path.join(PROJECT_ROOT, METRIC_LINKAGE);
+  const linkage = JSON.parse(fs.readFileSync(linkagePath, 'utf8')).entries;
+  const registeredMetrics = (statsDataId) => linkage.filter((metric) => metric.sources.some((source) => source.statsDataId === statsDataId)).map((metric) => ({ metricKey: metric.metricKey, title: metric.title, pageId: metric.pageId, themes: metric.themes, sources: metric.sources.filter((source) => source.statsDataId === statsDataId), recipe: metric.recipe }));
   const { tables } = loadPulled(PULL_DIR);
   const terms = args._.filter(Boolean);
   const id = args.id;
@@ -335,7 +339,7 @@ async function cmdSearch(args) {
     const classes = fs.existsSync(classesPath)
       ? JSON.parse(fs.readFileSync(classesPath, "utf8")).filter((c) => c.statsDataId === id)
       : [];
-    console.log(JSON.stringify({ table: t, classes }, null, 2));
+    console.log(JSON.stringify({ table: t, classes, registeredMetrics: registeredMetrics(id) }, null, 2));
     return;
   }
   if (terms.length === 0) {
@@ -359,7 +363,7 @@ async function cmdSearch(args) {
     const metaStr = t.meta
       ? `years=${t.meta.years.join("/")} areaKind=${t.meta.areaKind} has47Pref=${t.meta.has47Pref}`
       : "meta未取得";
-    console.log(`${t.statsDataId} [${t.collectArea}] ${t.statName} / ${t.title} (${metaStr})`);
+    console.log(`${t.statsDataId} [${t.collectArea}] ${t.statName} / ${t.title} (${metaStr}) metrics=${registeredMetrics(t.statsDataId).map((metric) => metric.metricKey).join(",") || "未登録"}`);
   }
   if (hits.length > 50) console.log(`... 他 ${hits.length - 50} 件`);
 }

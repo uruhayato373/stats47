@@ -10,7 +10,8 @@ import {
   EMPTY_TIMESERIES as EMPTY_RESULT,
   type MetricTimeseriesResult,
   type TimeseriesSourceRow,
-} from '../lib/aggregate-metric-timeseries';
+} from '@/lib/aggregate-metric-timeseries';
+
 import { themeYearLabel } from '../lib/theme-year-label';
 
 
@@ -18,7 +19,7 @@ export type {
   MetricTimeseriesPoint,
   MetricTimeseriesResult,
   MetricTimeseriesSource,
-} from '../lib/aggregate-metric-timeseries';
+} from '@/lib/aggregate-metric-timeseries';
 
 /**
  * 指標の時系列データを取得する Server Action

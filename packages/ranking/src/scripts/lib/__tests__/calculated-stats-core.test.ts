@@ -13,6 +13,7 @@ import {
 
 function config(overrides: Partial<MetricConfig> = {}): MetricConfig {
   return {
+    visualization: { domain: { mode: 'extent' }, colorScheme: 'interpolateBlues', colorSchemeType: 'sequential',  classification: { method: 'equal-interval', classes: 5 }, trendDomain: { mode: 'extent', padding: 0.08 }, comparisonDomain: { mode: 'extent', padding: 0.05 } },
     key: "test-calc",
     title: "テスト計算指標",
     unit: "円",
@@ -312,7 +313,7 @@ describe("deriveCalculatedRows — fail-closed (書かせない条件)", () => {
     ).toThrow(CalculatedStatsError);
     expect(() =>
       deriveCalculatedRows({
-        config: config({ calculation: { isCalculated: true, type: "nope", numeratorKey: "a" } }),
+        config: config({ calculation: { isCalculated: true, type: "nope" as never, numeratorKey: "a" } }),
         numeratorRows: [row("01000", "2024", 1)],
         denominatorRows: [row("01000", "2024", 1)],
       }),

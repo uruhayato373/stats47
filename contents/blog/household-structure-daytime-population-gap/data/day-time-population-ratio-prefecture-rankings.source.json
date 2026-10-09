@@ -1,0 +1,14 @@
+{
+  "kind": "ranking",
+  "rankingKey": "day-time-population-ratio",
+  "year": "2020",
+  "unit": "％",
+  "label": "昼夜間人口比率",
+  "readerLabel": "昼夜間人口比率",
+  "transform": "all47 (svg-builder が上位5+下位5を抽出)",
+  "source": "r2:app/ranking/day-time-population-ratio/values.json",
+  "upstream": "metric config (packages/data-configs) → e-Stat → R2 app/ranking",
+  "restore": "node .claude/scripts/blog/fetch-ranking-data-r2.mjs --slug household-structure-daytime-population-gap --keys day-time-population-ratio --data-name day-time-population-ratio-prefecture-rankings",
+  "fetchedAt": "2026-10-09T06:10:01.251Z",
+  "generatedBy": "fetch-ranking-data-r2.mjs"
+}

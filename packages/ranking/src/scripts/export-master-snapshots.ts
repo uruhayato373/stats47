@@ -14,36 +14,53 @@
  *     npx tsx packages/ranking/src/scripts/export-master-snapshots.ts
  */
 
-import { exportCategoriesSnapshot } from "@stats47/category/server";
+import { exportCategoriesSnapshot } from '@stats47/category/server';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+import { parseRankingItemsSnapshot } from '../repositories/schemas/ranking-item.schemas';
 
-import { exportRankingItemsPerUrl } from "../exporters/ranking-items-per-url-snapshot";
-import { exportSurveysSnapshot } from "../exporters/surveys-snapshot";
+import { exportRankingItemsPerUrl } from '../exporters/ranking-items-per-url-snapshot';
+import { exportSurveysSnapshot } from '../exporters/surveys-snapshot';
 
 async function main() {
-  console.log("master snapshots を R2 に書き出します…");
+  console.log('master snapshots を R2 に書き出します…');
 
   // surveys snapshot (app/survey/all.json) は、items exporter が
   // app/survey/{id}/items.json を生成した survey だけに絞る (関連ランキング 0 件の
   // orphan survey を一覧・サイドバー・generateStaticParams から排除)。そのため
   // items を先に実行し、その surveyIds を surveys snapshot に渡す。categories は独立。
   const [itemsPerUrl, categories] = await Promise.all([
-    exportRankingItemsPerUrl(),
+    exportRankingItemsPerUrl(
+      process.argv.includes('--staged-metrics')
+        ? parseRankingItemsSnapshot(
+            JSON.parse(
+              readFileSync(
+                resolve('.local/r2/app/ranking-items/all.json'),
+                'utf8'
+              )
+            )
+          ).items
+        : undefined
+    ),
     exportCategoriesSnapshot(),
   ]);
-  const surveys = await exportSurveysSnapshot(itemsPerUrl.surveyIds, itemsPerUrl.surveyItemCounts);
+  const surveys = await exportSurveysSnapshot(
+    itemsPerUrl.surveyIds,
+    itemsPerUrl.surveyItemCounts
+  );
 
   console.log(
-    `✅ ranking_items_per_url: home=${itemsPerUrl.home.count} / categories=${itemsPerUrl.categories.files} files / items=${itemsPerUrl.items.files} files / surveys=${itemsPerUrl.surveys.files} files / ${itemsPerUrl.totalSizeBytes} bytes / ${itemsPerUrl.durationMs}ms`,
+    `✅ ranking_items_per_url: home=${itemsPerUrl.home.count} / categories=${itemsPerUrl.categories.files} files / items=${itemsPerUrl.items.files} files / surveys=${itemsPerUrl.surveys.files} files / ${itemsPerUrl.totalSizeBytes} bytes / ${itemsPerUrl.durationMs}ms`
   );
   console.log(
-    `✅ surveys: ${surveys.count} 件 (関連ランキングあり / items 生成 ${itemsPerUrl.surveyIds.length} 調査に絞り込み) / ${surveys.sizeBytes} bytes / ${surveys.durationMs}ms`,
+    `✅ surveys: ${surveys.count} 件 (関連ランキングあり / items 生成 ${itemsPerUrl.surveyIds.length} 調査に絞り込み) / ${surveys.sizeBytes} bytes / ${surveys.durationMs}ms`
   );
   console.log(
-    `✅ categories: ${categories.count} 件 / ${categories.sizeBytes} bytes / ${categories.durationMs}ms`,
+    `✅ categories: ${categories.count} 件 / ${categories.sizeBytes} bytes / ${categories.durationMs}ms`
   );
 }
 
 main().catch((err) => {
-  console.error("Fatal:", err);
+  console.error('Fatal:', err);
   process.exit(1);
 });

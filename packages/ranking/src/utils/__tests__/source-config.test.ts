@@ -4,6 +4,7 @@ import { describe, expect, it } from "vitest";
 import { isDerivedSource, readRecipe, resolveEstatParams } from "../source-config";
 
 const recipe = buildRecipe({
+    visualization: { domain: { mode: 'extent' }, colorScheme: 'interpolateBlues', colorSchemeType: 'sequential',  classification: { method: 'equal-interval', classes: 5 }, trendDomain: { mode: 'extent', padding: 0.08 }, comparisonDomain: { mode: 'extent', padding: 0.05 } },
   key: "k",
   title: "t",
   unit: "人",
@@ -21,6 +22,7 @@ const recipe = buildRecipe({
 });
 
 const derivedRecipe = buildRecipe({
+    visualization: { domain: { mode: 'extent' }, colorScheme: 'interpolateBlues', colorSchemeType: 'sequential',  classification: { method: 'equal-interval', classes: 5 }, trendDomain: { mode: 'extent', padding: 0.08 }, comparisonDomain: { mode: 'extent', padding: 0.05 } },
   key: "k2",
   title: "t2",
   unit: "千円",
@@ -40,13 +42,6 @@ const derivedRecipe = buildRecipe({
 describe("resolveEstatParams — 新形", () => {
   it("estatParams だけを返す (recipe / source は混ぜない)", () => {
     const params = resolveEstatParams({
-      estatParams: {
-        statsDataId: "0003456573",
-        cdCat01: "A",
-        cdCat03: "02",
-        cdCat05: "05",
-        cdTab: "01",
-      },
       recipe,
       source: { name: "社会生活基本調査", url: "https://example.invalid" },
     } as never);
@@ -61,30 +56,11 @@ describe("resolveEstatParams — 新形", () => {
   });
 });
 
-describe("resolveEstatParams — 旧 flat 形 (再生成前の item.json)", () => {
-  it("クエリキーだけ拾い、非クエリキーは落とす", () => {
-    const params = resolveEstatParams({
-      statsDataId: "0003456573",
-      cdCat01: "A",
-      cdCat02: "B",
-      // ↓ 旧形にはこれらが同じ階層に混ざっていた。spread すると e-Stat に渡ってしまう
-      source: { name: "x", url: "y" },
-      note: "メモ",
-      itemCode: "IC",
-      collection: { name: "社会・人口統計体系" },
-    } as never);
-
-    expect(params).toEqual({ statsDataId: "0003456573", cdCat01: "A", cdCat02: "B" });
-  });
-
-  it("★旧形は cdCat03 以降を持たないので、その分の欠落はここでは補えない", () => {
-    // 是正済み config は cdCat03 を持つが、旧 item.json には焼かれていない。
-    // これが「config を直しただけではオンデマンド経路に届かない」の正体で、
-    // 解消には R2 の再生成が要る (Phase 6)。
-    const params = resolveEstatParams({ statsDataId: "0003456573", cdCat01: "A" } as never);
-    expect(params).toEqual({ statsDataId: "0003456573", cdCat01: "A" });
-    expect(params?.cdCat03).toBeUndefined();
-  });
+describe("raw query aliases are rejected", () => {
+ it("does not accept flat or duplicate query metadata", () => {
+  expect(resolveEstatParams({statsDataId:"0003456573",cdCat01:"A"} as never)).toBeNull();
+  expect(resolveEstatParams({estatParams:{statsDataId:"0003456573"}} as never)).toBeNull();
+ });
 });
 
 describe("resolveEstatParams — 取得不能", () => {

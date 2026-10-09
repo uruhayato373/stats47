@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest";
 import prefectures from "../../../area/src/data/prefectures.json";
 import type { SingleEntityRow } from "../../../stats-r2/src/types";
 import { mergeOfficialRows, parseAgriculturalHistory } from "./official-release-staging";
-import { healthyLifeSource, agriculturalOutputSource } from "./official-theme-releases";
+import { healthyLifeSource, agriculturalOutputSource } from "../../../../data/metric-sources/official-theme-releases";
 
 // Synthetic values exercise preservation/coverage; no source observations are stored in git.
 const rows = (year: number): SingleEntityRow[] => prefectures.map((pref, index) => ({

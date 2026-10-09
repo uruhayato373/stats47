@@ -1,3 +1,4 @@
+import { METRIC_DEFINITIONS_DIR } from '../../../../config/paths.mjs';
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -121,7 +122,7 @@ function loadMetrics(
   root: string,
   metricKeys: string[]
 ): ReferenceMetricSource[] {
-  const relDir = 'packages/data-configs/src/metrics';
+  const relDir = METRIC_DEFINITIONS_DIR;
   const absDir = path.join(root, relDir);
   if (!fs.existsSync(absDir)) return [];
   const metrics: ReferenceMetricSource[] = [];

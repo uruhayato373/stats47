@@ -93,6 +93,7 @@ describe("meta.recipe の round-trip (★ホワイトリスト落ちの再発防
     source: { kind: "estat", statsDataId: "0003448237", cdCat01: "A1101", cdCat03: "02" },
     entities: ["prefecture"],
     years: "all",
+    visualization: { domain: { mode: 'extent' }, colorScheme: 'interpolateBlues', colorSchemeType: 'sequential', classification: { method: 'equal-interval', classes: 5 }, trendDomain: { mode: 'extent', padding: 0.08 }, comparisonDomain: { mode: 'extent', padding: 0.05 } },
   });
 
   it("書いたレシピがそのまま読める", () => {

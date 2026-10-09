@@ -12,7 +12,7 @@
 import fs from "node:fs";
 import path from "node:path";
 
-const DIR = "packages/data-configs/src/metrics";
+const DIR = "data/metrics";
 
 // 既存 key / title (衝突回避)
 const existKeys = new Set(), existTitles = new Set();
@@ -69,18 +69,19 @@ function emit(s, title, subtitle) {
   const ident = camel(s.key);
   const norm = normOptions(s.norm, s.unit);
   const cfg = {
+    isActive: true,
     key: s.key, title, ...(subtitle ? { subtitle } : {}), unit: s.unit, category: s.category,
     source: { kind: "estat", statsDataId: s.statsDataId, cdCat01: s.cdCat01,
       displayName: "社会・人口統計体系", url: "https://www.stat.go.jp/data/ssds/index.htm" },
     entities: ["prefecture", "city"],
     years: "all",
     yearFormat: "fiscal",
-    visualization: { colorScheme: COLOR[s.category] || "interpolateBlues", colorSchemeType: "sequential", minValueType: "data-min" },
+    visualization: { colorScheme: COLOR[s.category] || "interpolateBlues", colorSchemeType: "sequential",  },
     display: { conversionFactor: 1, decimalPlaces: s.decimals ?? 0 },
     calculation: { isCalculated: false, normalizationOptions: norm },
-    isActive: true, isFeatured: false, featuredOrder: 0,
   };
-  const bodyStr = `import type { MetricConfig } from "../types";\n\nexport const ${ident}: MetricConfig = ${JSON.stringify(cfg, null, 2)};\n`;
+  const cfgText = JSON.stringify(cfg, null, 2).replace('"visualization": {', '"visualization": {\n    ...DEFAULT_METRIC_PRESENTATION,');
+  const bodyStr = `import { DEFAULT_METRIC_PRESENTATION } from "./defaults/presentation";\nimport type { MetricConfig } from "../../packages/data-configs/src/types";\n\nexport const ${ident}: MetricConfig = ${cfgText};\n`;
   fs.writeFileSync(path.join(DIR, `${s.key}.ts`), bodyStr);
 }
 

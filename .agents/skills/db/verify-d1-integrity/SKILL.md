@@ -15,7 +15,7 @@ Phase 6 (2026-05-27) で観測値ストア (`stats_prefecture` / `stats_city` / 
 
 1. **メタ整合性**
    - `metrics.source_id` が `sources.id` に存在
-   - `metrics.key` が TS-config registry (`packages/data-configs/src/metrics/<key>.ts`) と一致
+   - `metrics.key` が TS-config registry (`data/metrics/<key>.ts`) と一致
      (差分があれば `/sync-metrics-cache --apply` で同期)
 
 2. **R2 observation 存在 (entities フィールドとの一致)**

@@ -35,7 +35,7 @@ import { fileURLToPath } from "node:url";
 
 const METRICS_DIR = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),
-  "../../../packages/data-configs/src/metrics",
+  "../../../data/metrics",
 );
 
 /** frontmatter (先頭の --- ... ---) を除いた本文を返す */

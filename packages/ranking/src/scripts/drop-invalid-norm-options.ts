@@ -1,3 +1,4 @@
+import { METRIC_DEFINITIONS_DIR } from '../../../../config/paths.mjs';
 /**
  * drop-invalid-norm-options.ts — denominator 系 metric config から不適切な
  * normalizationOptions (自 family の分母 type) を削除する (T3-RANKING-NORM-DATA-CLEAN-01)。
@@ -22,7 +23,7 @@ import {
 } from "../utils/drop-invalid-norm-options-core";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const METRICS_DIR = path.resolve(__dirname, "../../../data-configs/src/metrics");
+const METRICS_DIR = path.resolve(__dirname, "../../../..", METRIC_DEFINITIONS_DIR);
 const apply = process.argv.includes("--apply");
 
 let changedFiles = 0;

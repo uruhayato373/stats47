@@ -136,7 +136,7 @@ curl -s "https://storage.stats47.jp/app/ranking-items/all.json" \
 
 - まず git-tracked `.claude/skills/estat/references/*.md` を検索: `grep -rniE "{keyword}" .claude/skills/estat/references/*.md`
 - 見つからなければ `/search-estat`（e-Stat API 検索）。有用な統計表は `/inspect-estat-meta` で references に追記する（DBレスの恒久カタログ）
-- 新規ランキング候補は `/fetch-estat-data <statsDataId>` → TS-config (`packages/data-configs/src/metrics/<key>.ts`) 追加 + `/page-data-batch --metric <key>` で登録
+- 新規ランキング候補は `/fetch-estat-data <statsDataId>` → TS-config (`data/metrics/<key>.ts`) 追加 + `/page-data-batch --metric <key>` で登録
 - （旧 D1 `estat_metainfo` の 8,399 件自動カタログは retired D1 由来で廃止）
 
 5. マッチ結果をもとに、各トレンドのマッチ度を判定:
